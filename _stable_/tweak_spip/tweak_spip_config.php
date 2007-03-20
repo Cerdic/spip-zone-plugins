@@ -120,8 +120,7 @@ add_tweak( array(
 	'id'	=> 'suivi_forums',
 	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:sf_defaut'), _T('tweak:sf_amont') et _T('tweak:sf_tous')
 	'code' 	=> '$GLOBALS["radio_suivi_forums"]=$foo=%%radio_suivi_forums/s/"(=tweak:sf_defaut|_SUIVI_FORUMS_REPONSES=tweak:sf_amont|_SUIVI_FORUM_THREAD=tweak:sf_tous)"%%;
-if (strlen($suivi=tweak_choix($foo))) define($suivi, true);
-',
+if (strlen($suivi=tweak_choix($foo))) define($suivi, true);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 	'version-min'	=> 1.92,

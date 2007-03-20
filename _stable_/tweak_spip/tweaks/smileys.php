@@ -1,6 +1,6 @@
 <?php
 
-// Tweak SMILEYS - 25 dcembre 2006
+// Tweak SMILEYS - 25 decembre 2006
 // serieuse refonte 2006 : Patrice Vanneufville
 // Toutes les infos sur : http://www.spip-contrib.net/?article1561
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
@@ -61,13 +61,14 @@ tweak_log(" -- abs. path = $path2");
 		$espace = strlen($smy)==2?' ':'';
 		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
-		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"format_png\" src=\"".$path2."/$val\" $size/>";
+		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"format_png\" src=\"$path2/$val\" $size/>";
 	}
 	ecrire_meta('tweaks_smileys', serialize($smileys2));
 	ecrire_metas();
 }
 
-// cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
+// fonction de remplacement
+// les balises suivantes sont protegees : html|code|cadre|frame|script|acronym|cite
 function tweak_rempl_smileys($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	$smileys_rempl = unserialize($GLOBALS['meta']['tweaks_smileys']);
@@ -82,11 +83,13 @@ function tweak_rempl_smileys($texte) {
 	return $texte;
 }
 
+// fonction principale (pipeline pre_typo)
 function tweak_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	if (!isset($GLOBALS['meta']['tweaks_smileys']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
 		smileys_installe();
 //tweak_log('smileys trouvés !');
+	// appeler tweak_rempl_smileys() une fois que certaines balises ont ete protegees
 	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
 }
 ?>
