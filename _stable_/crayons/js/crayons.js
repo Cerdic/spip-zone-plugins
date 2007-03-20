@@ -57,7 +57,9 @@ function uniConfirm(txt)
   return confirm(entity2unicode(txt));
 }
 
-var crayon_has= new Array();
+// une liste globale des crayons ouverts (pour ameliorer les perfs)
+var crayon_has = jQuery([]);
+
 // ouvre un crayon
 jQuery.fn.opencrayon = function(evt, percent) {
   if (evt.stopPropagation) {
@@ -71,7 +73,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
 
     // voir si je dispose deja du crayon comme voisin
     if (jQuery(this).is('.crayon-has')) {
-    	crayon_has.unshift(this);
+      crayon_has.add(this);
       jQuery(this)
       .hide()
       .next()
@@ -102,7 +104,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
             uniAlert(c.$erreur);
             return false;
           }
-          crayon_has.unshift(me);
+          crayon_has.add(me);
           jQuery(me)
           .hide()
           .addClass('crayon-has')
@@ -359,15 +361,14 @@ jQuery(document).ready(function() {
 
   /* on limite l'init auto aux 1000 premiers crayons. les autres doivent etre init par un appel de initcrayons sur un onmouseover d'un parent */
   if ((typeof crayons_init_dynamique == 'undefined') || (crayons_init_dynamique==false))
-		jQuery(".crayon:lt(1000)")
-		.filter(configCrayons.droits)
-		.initcrayon();
+    jQuery(".crayon:lt(1000)")
+    .filter(configCrayons.droits)
+    .initcrayon();
 
   // fermer tous les crayons ouverts
   jQuery("html")
   .click(function() {
-  	while (crayon_has.length)
-	  	jQuery(crayon_has.pop())
-	    .hidecrayon();
+    crayon_has
+    .hidecrayon();
   });
 });
