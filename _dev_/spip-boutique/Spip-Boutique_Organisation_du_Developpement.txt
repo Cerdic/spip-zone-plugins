@@ -1,0 +1,49 @@
+------------------
+- Spip-Boutique  -
+------------------
+!! : ce document n'est pas une version finale
+
+1)Objectifs à atteindre
+***********************
+Voici ce que nous devrions pouvoir faire à la sortie de Spip-Boutique 1.0:
+Coté visiteur :
+	Création de cadi par n'importe quel visiteur,
+	N'importe quel visiteur peut s'enregistrer en tant que client,
+	Enregistrement du cadis en cours (nécessaire de s'enregistrer sur le système),
+	Valider un/plusieurs cadis,
+	suivre l'état de notre cadis (en préparation, en attente du paiement, en attente de l'envoi du colis, envoyé),
+	supprimer un/plusieurs cadis.
+	Poster un commentaire dans le forum d'un produit (cfg: moderation : non, a posteriori, a priori; permission : visiteur, clients)
+
+Coté Rédacteur :
+	Voir la liste des catégories,
+	Voir la liste des produits des catégories,
+	Proposer un produit dans une catégorie (cfg : oui, non),
+	lier un mot clé aux produits dont il est auteur (cfg : oui, non),
+	lier un article à un produit et inversement si il est auteur du produit ET de l'article (cfg : oui, non),
+	créer un produit dérivé d'un autre.
+
+Coté Administrateur restreint :
+	Voir la liste des catégories,
+	Voir la liste des produits des catégories,
+	Proposer une nouvelle catégorie,
+	Proposer une nouvelle sous-catégorie
+	Proposer un produit dans une catégorie,
+	valider un produit si il est admin de la catégorie
+	lier un mot clé aux produits dont il est auteur (cfg : oui, non),
+	lier un article à un produit et inversement si il est auteur du produit ET de l'article (cfg : oui, non),
+	lier un mot clé aux catégories dont il est administrateur (cfg : oui, non),
+	Lier une catégorie à un article et inversement si il est auteur de l'article et administrateur de la catégorie. 
+	lier une catégorie à une rubrique et inversement si il est administrateur de la catégories ET de la rubrique (cfg : oui, non), --> intérêt à estimer ...
+...
+2)Time line
+3)Méthode de travaille
+4)Règles de commit ?
+
+
+----------------------------
+pour client
+----------------------------
+- paypal / ogone
+- mail avec de paiement
+- type edition (3 sol) et par dureé (1/2 ans)
