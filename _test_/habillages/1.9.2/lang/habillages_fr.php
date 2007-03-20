@@ -53,7 +53,7 @@ Si vous ne voulez pas donner la possibilit&eacute; de personnaliser s&eacute;par
 
 // C
 'config_base' => 'configuration',
-'config_base_acc' => 'Configuration (utilitrices et utilisateurs avanc&eacute;(e)s)',
+'config_base_acc' => 'Configuration (utilisatrices et utilisateurs avanc&eacute;(e)s)',
 
 // E
 'extras_base' => 'extras                                                                 ',

@@ -77,6 +77,16 @@ function exec_config_habillages() {
 			ecrire_meta('habillages_icones_on', 'non');
 			ecrire_metas;
 		}
+		
+		if (_request($gestion_config) != "") {
+			ecrire_meta('habillages_config_on', 'oui');
+			ecrire_metas;
+		}
+		else {
+			ecrire_meta('habillages_config_on', 'non');
+			ecrire_metas;
+		}
+
 	}
 
 	if (isset($_GET['surligne']))
@@ -178,35 +188,46 @@ EOF;
 	$able_themes = " disabled";
 	$able_extras = " disabled";
 	$classe = "used";
-	
 	}
 	else {
 	$checked_skel = " checked='checked'";
 	}
+	
 	if ($GLOBALS['meta']['habillages_themes_on'] == "non") {
 	$checked_themes = "";
 	}
 	else {
 	$checked_themes = " checked='checked'";
 	}
+	
 	if ($GLOBALS['meta']['habillages_extras_on'] == "non") {
 	$checked_extras = "";
 	}
 	else {
 	$checked_extras = " checked='checked'";
 	}
+	
 	if ($GLOBALS['meta']['habillages_logos_on'] == "non") {
 	$checked_logos = "";
 	}
 	else {
 	$checked_logos = " checked='checked'";
 	}
+	
 	if ($GLOBALS['meta']['habillages_icones_on'] == "non") {
 	$checked_icones = "";
 	}
 	else {
 	$checked_icones = " checked='checked'";
 	}
+	
+	if ($GLOBALS['meta']['habillages_config_on'] == "non") {
+	$checked_config = "";
+	}
+	else {
+	$checked_config = " checked='checked'";
+	}
+
 	
 	if ($GLOBALS['meta']['habillages_squelettes_on'] == "oui") {
 	$checked_themes = " checked='checked'";
@@ -231,8 +252,7 @@ EOF;
 	echo "<div class='used'>";
 	echo "<input type='checkbox' name='".$gestion_logos."' value='".$gestion_logos."'$checked_logos disabled> "._T('habillages:logos_base_acc')."</div>";
 	echo "<input type='checkbox' name='".$gestion_icones."' value='".$gestion_icones."'$checked_icones> "._T('habillages:icones_base_acc')."<br />";
-	# Remonter le codage a partir de checked_skel...
-	echo "<input type='checkbox' name='".$gestion_config."' value='".$gestion_config."'$checked_skel> "._T('habillages:config_base_acc')."<br />";
+	echo "<input type='checkbox' name='".$gestion_config."' value='".$gestion_config."'$checked_config> "._T('habillages:config_base_acc')."<br />";
 
 	fin_boite_info();
 	
