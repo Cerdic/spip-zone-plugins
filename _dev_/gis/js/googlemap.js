@@ -9,6 +9,24 @@ function getNodeText(node){
 	return node.text || node.firstChild ? node.firstChild.nodeValue : "";
 }
 
+//GL recoller a id da URL do artigo
+//ENG get id from the article'URL
+//FR ???
+function extraerID(url){
+	var posicion = url.indexOf("article");
+	if (posicion != -1) {
+		url = url.substring(posicion + 7);
+		posicion = url.indexOf ("&");
+		if (posicion != -1) {
+			url = url.substring(0,posicion);
+		}
+	//se non e un artigo de spip que lle dean
+	} else {
+		url = url.substring(url.length - 4);
+	}
+	return url;
+}
+
 function creaMarcador(point, html, icon, son) {
 	//creamos un obxecto GMarker e o gradamos nunha variable
 	var marcador = new GMarker(point, icon);
@@ -29,7 +47,7 @@ function creaMarcador(point, html, icon, son) {
 
 function agregarMarcador (xmlItem, minZoom,  maxZoom) {
 	//almacenamos en distintas variables la informacion contenida nen los chilNodes de cada item-marcador do xml
-	var id = getNodeText(xmlItem.childNodes[2]);
+	var id = extraerID(getNodeText(xmlItem.childNodes[2]));
 	var lat = parseFloat(getNodeText(xmlItem.childNodes[6]));
 	var lng = parseFloat(getNodeText(xmlItem.childNodes[7]));
 	var son = xmlItem.childNodes[8].getAttribute("url");
