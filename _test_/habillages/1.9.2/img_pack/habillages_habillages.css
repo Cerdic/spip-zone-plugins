@@ -5,7 +5,6 @@ IMG {
 DIV {
 	behavior: url("win_png.htc");
 }
-
 .commentaires { 
 	color: #626262;
 }
@@ -49,4 +48,23 @@ DIV {
 
 #plaintab {
 	width: 100%;
+}
+
+.titre_un {
+	height: 25px;
+	padding-left: 5px;
+	background-image:url(menu.png);
+	background-repeat: repeat-x;
+	font-weight: bold;
+}
+
+.cadre-padding{
+	background-image:url(fond.png);
+	background-repeat: repeat;
+}
+
+.hab_gros_titre{
+	margin: 0px;
+	padding: 0px;
+	color: #fff;
 }

@@ -174,11 +174,11 @@ EOF;
 
 	debut_droite();
 
-	debut_cadre_relief();
+	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icone-22.png");	
 
 	global $couleur_foncee;
 	
- 	echo gros_titre(_T('habillages:tdb_titre'));
+ 	echo "<H1 class='hab_gros_titre'>"._T('habillages:tdb_titre')."</h1>";
 	echo _T('habillages:accueil_general')."<br /><br />";
 	
 	# Etablir les cases qui sont checkees.
@@ -255,7 +255,7 @@ EOF;
 	echo "<input type='checkbox' name='".$gestion_config."' value='".$gestion_config."'$checked_config> "._T('habillages:config_base_acc')."<br />";
 
 	fin_boite_info();
-	
+	fin_cadre_couleur();
 	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
 	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
 	echo "\n<input type='hidden' name='changer_gestion' value='oui'>";
@@ -267,6 +267,8 @@ EOF;
 	echo "</div>";
 	echo "</form>";
 	
+	//echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a><br /><br />";
+		
 	fin_page();
 
 }
