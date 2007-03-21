@@ -15,8 +15,9 @@ $link1= generer_url_ecrire('ajout_adherent');
 $link2= generer_url_ecrire('dons');
 $link3= generer_url_ecrire('edit_relances');
 $link4= generer_url_ecrire('ventes');
-$link5= generer_url_ecrire('comptes');
-$link6= generer_url_ecrire('activites');
+$link5= generer_url_ecrire('activites');
+$link6= generer_url_ecrire('comptes');
+
 //$link7= generer_url_ecrire('prets');
 
 $query = spip_query("SELECT * FROM spip_asso_profil where id_profil=1");
@@ -45,14 +46,15 @@ if ($ventes=='oui'){
 echo '<td>';
 icone_horizontale(_T('asso:Ventes_associatives'), $link4, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/journaux.png','rien.gif' ); 
 echo '</td>';}
-if ($comptes=='oui'){
-echo '<td>';
-icone_horizontale(_T('asso:Livres_de_comptes'), $link5, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
-echo '</td>';}
 if ($activites=='oui'){
 echo '<td>';
-icone_horizontale(_T('asso:Gestion des activit&eacute;s'), $link6, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
+icone_horizontale(_T('asso:Gestion des activit&eacute;s'), $link5, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
 echo '</td>';}
+if ($comptes=='oui'){
+echo '<td>';
+icone_horizontale(_T('asso:Livres_de_comptes'), $link6, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
+echo '</td>';}
+
 /*
 if ($comptes=='oui'){
 echo '<td>';
