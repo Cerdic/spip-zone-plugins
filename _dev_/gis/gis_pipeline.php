@@ -62,7 +62,7 @@ function gis_insertar_head($flux){
 		$row = spip_fetch_array($result);
 		
 		if ((_request('exec')=='articles')){
-			$flux.='<script src="http://maps.google.com/maps?file=api&v=2&key='.$row['value'].'"></script>
+			$flux.='<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$row['value'].'"></script>
 			<script language="javascript">
 			$(document).ready(function() {
 				$(\'#cadroFormulario\').hide()
@@ -96,7 +96,7 @@ function gis_insertarp_head($flux){
 		
 		$flux.='
 <!-- scripts head plugin gis _______________________.-->
-<script src="http://maps.google.com/maps?file=api&v=2&key='.$row['value'].'"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$row['value'].'"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
 		
