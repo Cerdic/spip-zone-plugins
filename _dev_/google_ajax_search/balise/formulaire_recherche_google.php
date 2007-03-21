@@ -2,13 +2,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-function calcul_FORMULAIRE_RECHERCHE_GOOGLE() {
-   return "<div id='searchcontrol' />";
+// il y a surement plus simple ...
+function balise_FORMULAIRE_RECHERCHE_GOOGLE($p) {
+	return calculer_balise_dynamique($p,'FORMULAIRE_RECHERCHE_GOOGLE', array());
 }
 
-function balise_FORMULAIRE_RECHERCHE_GOOGLE($p) {
-   $p->code = "calcul_FORMULAIRE_RECHERCHE_GOOGLE()";
-   $p->statut = 'html';
-   return $p;
+function balise_FORMULAIRE_RECHERCHE_GOOGLE_stat($args, $filtres) {
+	return $args;
 }
+
+function balise_FORMULAIRE_RECHERCHE_GOOGLE_dyn() {
+	return array('formulaires/formulaire_recherche_google', $GLOBALS['delais'],array()); 
+}
+
 ?>
