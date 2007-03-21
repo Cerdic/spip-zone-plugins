@@ -156,7 +156,7 @@
 		<div id="documents">
 			<h3 class="titre"><:documents:></h3>
 			<dl>
-				<BOUCLE_documents(DOCUMENTS){id_rubrique}{par num titre}>
+				<BOUCLE_documents(DOCUMENTS){id_rubrique}{par num titre}{doublons}>
 				<dt [class="(#EDIT{titre})"]><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT)][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)][, (#TYPE_DOCUMENT)][ (#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]</em></dt>
 				<dd [class="(#EDIT{descriptif})"]>[(#DESCRIPTIF)]
 				<br class="clear" /></dd>
