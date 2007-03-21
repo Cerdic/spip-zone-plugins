@@ -160,15 +160,13 @@ if (empty($debut))
 {$debut=0;}
 
 if (empty($lettre))
-{$query = "SELECT * FROM spip_asso_adherents WHERE $critere ORDER BY nom, id_adherent LIMIT $debut,$max_par_page";}
+{$query = spip_query ( "SELECT * FROM spip_asso_adherents WHERE $critere ORDER BY nom, id_adherent LIMIT $debut,$max_par_page" );}
 else
-{$query = "SELECT * FROM spip_asso_adherents WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom, id_adherent LIMIT $debut,$max_par_page";}
+{$query = spip_query ( "SELECT * FROM spip_asso_adherents WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom, id_adherent LIMIT $debut,$max_par_page" );}
 
-$val = spip_query ($query) ;
 $i=0;
 
-
-while ($data = mysql_fetch_assoc($val))
+while ($data = mysql_fetch_assoc($query))
     {	
     	$i++;
 	$id_adherent=$data['id_adherent'];
@@ -195,9 +193,16 @@ while ($data = mysql_fetch_assoc($val))
 echo '<tr> ';
 echo '<td class ='.$class.' style="text-align:right;">'.$data["id_adherent"].'</td>';
 echo '<td class ="'.$class.'">';
+if (empty ($data['id_auteur']))
+{echo'';}
+else {
+echo'<img src="/IMG/auton'.$data['id_auteur'].'.jpg" width="60" eight= "60" title="'.$data["nom"].' '.$data["prenom"].'">';
+}
+/*
 if (empty ($data['vignette']))
 {echo'';}
 else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "60" title="'.$data["nom"].' '.$data["prenom"].'">';}
+*/
 echo '</td>';
 echo '<td class ='.$class.'>';
 if (empty($data["email"])) 

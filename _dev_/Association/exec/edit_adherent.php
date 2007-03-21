@@ -179,7 +179,7 @@ echo '</form>';
 echo '</table>';
 echo '</fieldset>';
 
-
+/*
 //---------------------------- 
 //  DEFINITION DES VARIABLES  
 //---------------------------- 
@@ -274,7 +274,7 @@ echo'<input type="submit" value="Envoyer" class="fondo"></legend>';
 echo'</div>';
 echo'</fieldset>';
 echo'</form> ';
-
+*/
 
 // ON FERME TOUT
 fin_boite_info();
