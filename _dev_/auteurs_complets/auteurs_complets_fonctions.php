@@ -12,5 +12,5 @@ function get_auteur_infos($id='', $nom='') {
 }
 
 //permet de voir les champs ajoutés en 1.9.2+
-include_spip('base/auteurs_complets');
+ 
 ?>
