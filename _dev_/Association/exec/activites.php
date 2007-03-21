@@ -18,8 +18,8 @@ debut_page(_T('Gestion pour  Association'), "", "");
 
 $url_articles = generer_url_ecrire('articles');
 $url_activites = generer_url_ecrire('activites');
-$url_ajout_inscription = generer_url_ecrire('ajout_inscription');
-$url_voir_inscriptions = generer_url_ecrire('voir_inscriptions');
+$url_ajout_activite = generer_url_ecrire('ajout_activite');
+$url_voir_activites = generer_url_ecrire('voir_activites');
 
 include_spip ('inc/navigation');
 
@@ -78,6 +78,7 @@ echo '<td><strong>Date</strong></td>';
 echo '<td><strong>Heure</strong></td>';
 echo '<td><strong>Intitul&eacute;</strong></td>';
 echo '<td><strong>Lieu</strong></td>';
+echo '<td><strong>Inscrits</strong></td>';
 echo '<td colspan="3" style="text-align:center;"><strong>Action</strong></td>';
 echo '</tr>';
 
@@ -101,9 +102,10 @@ echo '<td class ='.$class.' style="text-align:right;">'.association_datefr($date
 echo '<td class ='.$class.' style="text-align:right;">'.$heure.'</td>';
 echo '<td class ='.$class.'>'.$data['intitule'].'</td>';
 echo '<td class ='.$class.'>'.$data['lieu'].'</td>';
+echo '<td class ='.$class.'>&nbsp</td>';
 echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier l\'article"></a></td>';
-echo '<td class ='.$class.'><a href="'.$url_ajout_inscription.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="Ajouter une inscription"></a>';
-echo '<td class ='.$class.' style="text-align:center;"><a href="'.$url_voir_inscriptions.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="Voir la liste des inscriptions"></a></td>';
+echo '<td class ='.$class.'><a href="'.$url_ajout_activite.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="Ajouter une inscription"></a>';
+echo '<td class ='.$class.' style="text-align:center;"><a href="'.$url_voir_activites.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="Voir la liste des inscriptions"></a></td>';
 echo '</tr>';
 }
 echo '</table>';
