@@ -122,7 +122,7 @@ if ($data['activites']=="oui") {echo 'checked';}
 echo '>oui';
 echo '<input name="activites" type="radio" value="non"';
 if ($data['activites']=="non") {echo 'checked';}
-echo '>non (n&eacute;c&eacute;ssite le plugin agenda)</td>';
+echo '>non (n&eacute;cessite le plugin agenda)</td>';
 echo '</tr>';
 }
 echo '<tr>';
