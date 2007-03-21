@@ -1,5 +1,5 @@
 #CACHE{24*3600}
-<BOUCLE_principale(MOTS) {id_mot}>
+<BOUCLE_principale(MOTS) {id_mot}{id_groupe!=1}>
 <?php $actuel = "#ID_BREVE"; ?>
 <INCLURE{fond=entete_meta}>
 	<!--affichage du titre de la page -->
@@ -87,7 +87,6 @@
 					<dl>
 					<BOUCLE_breves(BREVES){id_mot}>
 						<dt><a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
-						[<dd>(#DESCRIPTIF)</dd>]
 					</BOUCLE_breves>
 					</dl>
 				</div>

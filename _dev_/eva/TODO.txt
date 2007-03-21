@@ -3,5 +3,5 @@
 À faire :
 -- se débarrasser de la nécessité d'avoir une rubrique 00 contenant
 les boutons du menu et autres ;
--- masquer les mots-clefs propres à l'affichage et tout gérer par mots-clefs ;
+-- masquer les mots-clefs de l'id_group 1 et tout gérer par mots-clefs ;
 -- régler le problème des listes sous IE 6 : <http://devedge-temp.mozilla.org/viewsource/2002/list-indent/>

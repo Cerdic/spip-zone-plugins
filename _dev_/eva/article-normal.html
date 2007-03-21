@@ -6,7 +6,7 @@
 	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
 	<!-- description et mots-clés de la page -->
 	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
-	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_article}{", "}>#TITRE</BOUCLE_keywords>" />
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_article}{id_groupe!=1}{", "}>#TITRE</BOUCLE_keywords>" />
 
 </head>
 <body>
@@ -57,7 +57,7 @@
 		<div id="groupesmots">
 			<h4 class="center"><:mots_clefs:></h4>
 			<ul>
-				<BOUCLE_mots(MOTS){id_article}{id_mot!=4}>
+				<BOUCLE_mots(MOTS){id_article}{id_groupe!=1}>
 				<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
 				</BOUCLE_mots>
 			</ul>

@@ -6,7 +6,7 @@
 	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
 	<!-- description et mots-clés de la page -->
 	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
-	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_rubrique}{", "}>#TITRE</BOUCLE_keywords>" />
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_groupe!=1}{id_rubrique}{", "}>#TITRE</BOUCLE_keywords>" />
 	<!-- Lien vers le backend pour navigateurs eclaires -->
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="spip.php?page=backend&id_rubrique=#ID_RUBRIQUE" />
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves_rubrique:>" href="spip.php?page=backend-breves&id_rubrique=#ID_RUBRIQUE" />
@@ -44,16 +44,12 @@
  				</BOUCLE_les_breves>
 			</dl>		</div>
 		</B_les_breves>
-			
-			
-		<BOUCLE_mots_exclure(MOTS){id_rubrique}{titre=bouton}{doublons}>
-		</BOUCLE_mots_exclure>
 		<B_mots>
 		<!--affichage des mots-clés -->
 		<div id="groupesmots">
 			<h4 class="center"><:mots_clefs:></h4>
 			<ul>
-				<BOUCLE_mots(MOTS){id_rubrique}{doublons}>
+				<BOUCLE_mots(MOTS){id_rubrique}{id_groupe!=1}{doublons}>
 				<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
 				</BOUCLE_mots>
 			</ul>
