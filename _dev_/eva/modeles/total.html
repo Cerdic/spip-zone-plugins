@@ -1,0 +1,32 @@
+<BOUCLE_TOTAL_ARTICLES(ARTICLES){id_secteur != 1}{doublons}>
+</BOUCLE_TOTAL_ARTICLES>
+[(#ENV{type}|=={"articles"}|?{#TOTAL_BOUCLE, ''})]
+</B_TOTAL_ARTICLES>
+
+<BOUCLE_TOTAL_RUBRIQUES(RUBRIQUES){id_secteur != 1}{doublons}>
+</BOUCLE_TOTAL_RUBRIQUES>
+[(#ENV{type}|=={"rubriques"}|?{#TOTAL_BOUCLE, ''})]
+</B_TOTAL_RUBRIQUES>
+
+<BOUCLE_TOTAL_BREVES(BREVES){id_secteur != 1}{doublons}>
+</BOUCLE_TOTAL_BREVES>
+[(#ENV{type}|=={"breves"}|?{#TOTAL_BOUCLE, ''})]
+</B_TOTAL_BREVES>
+
+<BOUCLE_TOTAL_DOCUMENTS(DOCUMENTS){doublons}>
+</BOUCLE_TOTAL_DOCUMENTS>
+[(#ENV{type}|=={"documents"}|?{#TOTAL_BOUCLE, ''})]
+</B_TOTAL_DOCUMENTS>
+
+<BOUCLE_TOTAL_SITES(SITES){id_secteur != 1}{doublons}>
+</BOUCLE_TOTAL_SITES>
+[(#ENV{type}|=={"sites"}|?{#TOTAL_BOUCLE, ''})]
+</B_TOTAL_SITES>
+
+<B_TOTAL_ARTICLES_POPULAIRES>
+[(#ENV{type}|=={"popularite"}|?{<ul style="list-style-type:square;">,''})]
+<BOUCLE_TOTAL_ARTICLES_POPULAIRES(ARTICLES){id_secteur != 1}{par popularite}{inverse}{0,10}>
+[(#ENV{type}|=={"popularite"}|?{<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>, ''})]
+</BOUCLE_TOTAL_ARTICLES_POPULAIRES>
+[(#ENV{type}|=={"popularite"}|?{</ul>,''})]
+</B_TOTAL_ARTICLES_POPULAIRES>
