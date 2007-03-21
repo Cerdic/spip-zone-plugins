@@ -25,32 +25,7 @@ function googleajaxsearch_insert_head($flux){
 		$flux.='
     <!-- google ajax api search -->
     <link href="http://www.google.com/uds/css/gsearch.css" type="text/css" rel="stylesheet"/>
-    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&key='.$google_key.'" type="text/javascript"></script>
-    <script language="Javascript" type="text/javascript">
-    //<![CDATA[
-
-    function OnLoad() {
-      // Create a search control
-      var searchControl = new GSearchControl();
-      
-      // web search with options
-      var siteSearch = new GwebSearch(); 
-      siteSearch.setSiteRestriction("'.$adresse_site.'");
-      var options = new GsearcherOptions();
-      options.setExpandMode(GSearchControl.EXPAND_MODE_OPEN);
-      
-      // add websearch
-      searchControl.addSearcher(siteSearch, options);
-      
-      // tell the searcher to draw itself and tell it where to attach
-      searchControl.draw(document.getElementById("searchcontrol"));
-
-    }
-    GSearch.setOnLoadCallback(OnLoad);
-
-    //]]>
-    </script>';
-		
+    <script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&key='.$google_key.'" type="text/javascript"></script>';
 	
 	return $flux;
 }

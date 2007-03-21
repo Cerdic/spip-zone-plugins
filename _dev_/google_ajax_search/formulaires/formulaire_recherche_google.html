@@ -1,1 +1,11 @@
-<div id='searchcontrol' />
+<div id='searchcontrol'></div>
+<script type="text/javascript">
+      var searchControl = new GSearchControl();
+      var siteSearch = new GwebSearch(); 
+      siteSearch.setSiteRestriction("'.#URL_SITE_SPIP.'");
+      var options = new GsearcherOptions();
+      options.setExpandMode(GSearchControl.EXPAND_MODE_OPEN);
+      searchControl.addSearcher(siteSearch, options);
+      searchControl.draw(document.getElementById("searchcontrol"));
+      [searchControl.execute("(#ENV{recherche})");]  
+</script>
