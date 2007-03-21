@@ -50,12 +50,34 @@ DIV {
 	width: 100%;
 }
 
-.titre_un {
+.hab_titre {
 	height: 25px;
 	padding-left: 5px;
 	background-image:url(menu.png);
 	background-repeat: repeat-x;
 	font-weight: bold;
+	vertical-align: middle;
+}
+
+.hab_stitre {
+	height: 25px;
+	padding-left: 5px;
+	background-image:url(smenu.png);
+	background-repeat: repeat-x;
+	vertical-align: middle;
+}
+
+#hab_inputxt {
+	width: 96%;
+}
+
+#hab_input {
+	width: 2%;
+}
+
+#hab_inpuico {
+	width: 2%;
+	text-align: right;
 }
 
 .cadre-padding{
@@ -67,4 +89,15 @@ DIV {
 	margin: 0px;
 	padding: 0px;
 	color: #fff;
+}
+
+.hab_intro {
+	text-align: justify;
+}
+
+.fondo {
+	background-image:url(smenu.png);
+	background-repeat: repeat;
+	border: 1px outset;
+	height: 20px;
 }

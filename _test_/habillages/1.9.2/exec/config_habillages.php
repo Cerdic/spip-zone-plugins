@@ -174,12 +174,12 @@ EOF;
 
 	debut_droite();
 
-	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icone-22.png");	
+	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_accueil-22.png");	
 
 	global $couleur_foncee;
 	
  	echo "<H1 class='hab_gros_titre'>"._T('habillages:tdb_titre')."</h1>";
-	echo _T('habillages:accueil_general')."<br /><br />";
+	echo "<div class='hab_intro'>"._T('habillages:accueil_general')."</div><br /><br />";
 	
 	# Etablir les cases qui sont checkees.
 	lire_metas();
@@ -237,25 +237,50 @@ EOF;
 	echo generer_url_post_ecrire("config_habillages");
 	debut_boite_info();
 	echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
-	echo "<tr><td style='background-color:$couleur_claire' class='titre_un'>";
+	
+	echo "<tr><td colspan='2' style='background-color:$couleur_foncee' class='hab_titre'>";
 	echo _T('habillages:manager_plugin');
 	echo "</td></tr>";
-	echo "</table>";
+	
+	echo "<tr><td colspan='2' class=''>";
 	echo _T('habillages:intro_select_gestionnaire')."<br /><br />";
-	echo "<input type='checkbox' name='".$gestion_squelettes."' value='".$gestion_squelettes."'$checked_skel> "._T('habillages:squelettes_base_acc')."<br />";
-	echo "<ul>";
-	echo "<div class='".$classe."'>";
-	echo "<input type='checkbox' name='".$gestion_themes."' value='".$gestion_themes."'$checked_themes$able_themes> "._T('habillages:themes_base_acc')."</div>";
-	echo "<div class='".$classe."'>";
-	echo "<input type='checkbox' name='".$gestion_extras."' value='".$gestion_extras."'$checked_extras$able_extras> "._T('habillages:extras_base_acc')."</div>";
-	echo "</ul>";
-	echo "<div class='used'>";
-	echo "<input type='checkbox' name='".$gestion_logos."' value='".$gestion_logos."'$checked_logos disabled> "._T('habillages:logos_base_acc')."</div>";
-	echo "<input type='checkbox' name='".$gestion_icones."' value='".$gestion_icones."'$checked_icones> "._T('habillages:icones_base_acc')."<br />";
-	echo "<input type='checkbox' name='".$gestion_config."' value='".$gestion_config."'$checked_config> "._T('habillages:config_base_acc')."<br />";
+	echo "</td></tr>";
+	
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_input' class='hab_stitre'>";
+	echo "<input type='checkbox' name='".$gestion_squelettes."' value='".$gestion_squelettes."'$checked_skel></td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo _T('habillages:squelettes_base_acc');
+	echo "</td></tr>";
+	
+	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
+	
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_input' class='hab_stitre'>";
+	echo "<input type='checkbox' name='".$gestion_icones."' value='".$gestion_icones."'$checked_icones></td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo _T('habillages:icones_base_acc');
+	echo "</td></tr>";
+	
+	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
+
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_input' class='hab_stitre'>";
+	echo "<input type='checkbox' name='".$gestion_config."' value='".$gestion_config."'$checked_config></td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo _T('habillages:config_base_acc');
+	echo "</td></tr>";
+
+	echo "</table>";
+	# Avant d'enterrer le code mort ci-dessous, tuer ses potes plus haut...
+	//echo "<ul>";
+	//echo "<div class='".$classe."'>";
+	//echo "<input type='checkbox' name='".$gestion_themes."' value='".$gestion_themes."'$checked_themes$able_themes> "._T('habillages:themes_base_acc')."</div>";
+	//echo "<div class='".$classe."'>";
+	//echo "<input type='checkbox' name='".$gestion_extras."' value='".$gestion_extras."'$checked_extras$able_extras> "._T('habillages:extras_base_acc')."</div>";
+	//echo "</ul>";
+	//echo "<div class='used'>";
+	//echo "<input type='checkbox' name='".$gestion_logos."' value='".$gestion_logos."'$checked_logos disabled> "._T('habillages:logos_base_acc')."</div>";
 
 	fin_boite_info();
-	fin_cadre_couleur();
+	
 	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
 	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
 	echo "\n<input type='hidden' name='changer_gestion' value='oui'>";
@@ -266,7 +291,7 @@ EOF;
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 	echo "</div>";
 	echo "</form>";
-	
+	fin_cadre_couleur();
 	//echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a><br /><br />";
 		
 	fin_page();

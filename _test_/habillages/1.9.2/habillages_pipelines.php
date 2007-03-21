@@ -35,7 +35,7 @@ function habillages_ajouter_onglets($flux) {
 	
 	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes') {
 		$flux['data']['accueil']= new Bouton(
-	_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_icone-22.png', 'Accueil', generer_url_ecrire("config_habillages"));
+	_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_accueil-22.png', 'Accueil', generer_url_ecrire("config_habillages"));
 	
 	# Si l'utilisateur/trice a choisi le gestionnaire de squelette, on affiche ce dernier.
 	if ($squelettes_is_gestionnaire == "oui" || $squelettes_is_gestionnaire == "") {
