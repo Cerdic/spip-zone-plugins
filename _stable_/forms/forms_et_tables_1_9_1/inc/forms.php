@@ -548,6 +548,7 @@
 			global $auteur_session;
 			$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 			$url = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?parametre_url(self(),'id_form',''):_DIR_RESTREINT_ABS;
+			if ($id_donnee<0) $url = parametre_url($url,'id_donnee','');
 			$ok = true;
 			$confirme = false;
 			if ($GLOBALS['spip_version_code']<1.92)
