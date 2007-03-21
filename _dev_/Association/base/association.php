@@ -219,6 +219,7 @@ $spip_asso_activites = array(
 					"nom"				=> "text NOT NULL",
 					"id_adherent"		=> "bigint(20) NOT NULL",
 					"accompagne"	=> "text NOT NULL",
+					"inscrits"			=> "int(11) NOT NULL default '0'",
 					"date"				=> "date NOT NULL default '0000-00-00'",
 					"telephone"		=> "text NOT NULL",
 					"adresse"			=> "text NOT NULL",
