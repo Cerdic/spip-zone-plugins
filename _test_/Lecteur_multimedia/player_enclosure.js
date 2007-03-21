@@ -20,7 +20,7 @@ $(document).ready(function(){
 //$("#aflax_obj_0").appendTo("body");
 
 
-var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
+var aff= $("a[@rel='enclosure'][@href$=mp3],a[@rel='enclosure'][@href$=mp3]").size();
 
 	//$("body").css({background:"#FF0000"});
 	playa  =  '<div id="musicplayer" style="">' +

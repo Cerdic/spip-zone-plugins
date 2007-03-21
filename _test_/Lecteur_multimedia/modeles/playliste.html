@@ -10,23 +10,25 @@
 
 
 <B_doc>
+#ANCRE_PAGINATION
 <div class="radiobox">
-<ul class="controles">
+<div class="controles">
 <!--
 <li onClick="player_prev()"><</li>
 //-->
-<li onClick="player_play(0)">Play</li>
-<li onClick="player_stop()">Stop</li>
+<span onClick="player_play(0)"><img src="#CHEMIN{play.jpg}" alt="play"/></span>
+<span onClick="player_stop()"><img src="#CHEMIN{stop.jpg}" alt="stop"/></span>
 <!--
 <li onClick="player_next()">></li>
 //-->
-</ul>
+</div>
 
 <ul class="playliste">
-<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3}{!par date}{0,15}>
+<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3}{!par date}{pagination 15}{0,100}>
 <li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
 </BOUCLE_doc>
 </ul>
+[<div class="playliste_pagination">(#PAGINATION)</div>]
 </div>
 </B_doc>
 
