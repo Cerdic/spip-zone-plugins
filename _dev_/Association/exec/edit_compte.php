@@ -55,9 +55,8 @@ echo '</tr>';
 echo '<tr>';
 echo '<td>Mode de paiement :</td>';
 echo '<td><select name="journal" type="text">';
-$sql = "SELECT * FROM spip_asso_banques ORDER BY id_banque";
-$req = spip_query ($sql) ;
-while ($banque = mysql_fetch_assoc($req)) {
+$sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
+while ($banque = mysql_fetch_assoc($sql)) {
 echo '<option value="'.$banque['code'].'" ';
 	if ($data['journal']==$banque['code']) { echo 'selected'; }
 echo '>'.$banque['intitule'].'</option>';

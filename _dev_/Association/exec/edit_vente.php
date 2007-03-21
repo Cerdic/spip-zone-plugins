@@ -67,10 +67,11 @@ echo '</tr>';
 echo '<tr>';
 echo '<td>Mode de paiement :</td>';
 echo '<td><select name="journal" type="text">';
-$query = "SELECT * FROM spip_asso_banques ORDER BY id_banque";
-$val = spip_query ($query) ;
-while ($data = mysql_fetch_assoc($val)) {
-echo '<option value="'.$data['code'].'"> '.$data['intitule'].' </option>';
+$sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
+while ($banque = mysql_fetch_assoc($sql)) {
+echo '<option value="'.$banque['code'].'" ';
+	if ($data['journal']==$banque['code']) { echo 'selected'; }
+echo '>'.$banque['intitule'].'</option>';
 }
 echo '<option value="don"';
 	if ($data["journal"]=="don") { echo 'selected'; }
@@ -107,7 +108,8 @@ echo '<td>&nbsp;</td>';
 echo '</tr>';
 echo '<tr>'; 
 echo '<td>&nbsp;</td>';
-echo '<td><input name="action" type="hidden" value="modifie"><input name="submit" type="submit" value="Envoyer" class="fondo"></td>';
+echo '<td><input name="action" type="hidden" value="modifie">';
+echo '<input name="submit" type="submit" value="Envoyer" class="fondo"></td>';
 echo '</tr>';
 	 }
 echo '</table>';
