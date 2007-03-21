@@ -67,15 +67,15 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		tester_variable('fin_intertitre_5', '</strong>');
 	} else {
 		tester_variable('debut_intertitre', lire_config('bte/titraille1open','<h3 class="spip">'));
-		tester_variable('debut_intertitre', lire_config('bte/titraille1close','</h3>'));
+		tester_variable('fin_intertitre', lire_config('bte/titraille1close','</h3>'));
 		tester_variable('debut_intertitre_2', lire_config('bte/titraille2open','<h4 class="spip">'));
-		tester_variable('debut_intertitre_2', lire_config('bte/titraille2close','</h4>'));
+		tester_variable('fin_intertitre_2', lire_config('bte/titraille2close','</h4>'));
 		tester_variable('debut_intertitre_3', lire_config('bte/titraille3open','<h5 class="spip">'));
-		tester_variable('debut_intertitre_3', lire_config('bte/titraille3close','</h5>'));
+		tester_variable('fin_intertitre_3', lire_config('bte/titraille3close','</h5>'));
 		tester_variable('debut_intertitre_4', lire_config('bte/titraille4open','<h6 class="spip">'));
-		tester_variable('debut_intertitre_4', lire_config('bte/titraille4close','</h6>'));
+		tester_variable('fin_intertitre_4', lire_config('bte/titraille4close','</h6>'));
 		tester_variable('debut_intertitre_5', lire_config('bte/titraille5open','<strong class="spip titraille5">'));
-		tester_variable('debut_intertitre_5', lire_config('bte/titraille5close','</strong>'));
+		tester_variable('fin_intertitre_5', lire_config('bte/titraille5close','</strong>'));
 	}
 
 	global $debut_intertitre, $fin_intertitre;
