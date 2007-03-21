@@ -10,6 +10,7 @@
 *  
 **/
 include_spip('inc/presentation');
+
 function exec_action_comptes(){
 global $connect_statut, $connect_toutes_rubriques;
 
@@ -19,11 +20,15 @@ $url_action_comptes=generer_url_ecrire('action_comptes');
 
 include_spip ('inc/navigation');
 
-debut_cadre_relief(  "", false, "", $titre = _T('OP&eacute;rations comptables'));
+debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'));
 	debut_boite_info();
 
 print('<p>Nous sommes le '.date('d-m-Y').'</p>');
 
+if ( isset ($_POST['action'] )) 
+	{$action = $_POST['action']; }
+	else{$action =  $_GET['action']; }
+		
 $id_compte=$_POST['id_compte'];
 $date=$_POST['date'];
 $imputation=$_POST['imputation'];
@@ -35,7 +40,6 @@ $url_retour=$_POST['url_retour'];
 
 $justification =addslashes($justification);
 
-$action=$_POST['action'];
 
 //---------------------------- 
 //AJOUT OPERATION
@@ -43,8 +47,7 @@ $action=$_POST['action'];
 	
 if ($action=="ajoute"){
 
-$sql = "INSERT INTO spip_asso_comptes (date, imputation, recette, depense, journal, justification) VALUES ('$date', '$imputation' ,'$recette', '$depense', '$journal', '$justification')";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "INSERT INTO spip_asso_comptes (date, imputation, recette, depense, journal, justification) VALUES ('$date', '$imputation' ,'$recette', '$depense', '$journal', '$justification')");
 
 echo '<p><strong>L\'op&eacute;ration a &eacute;t&eacute; enregistr&eacute;e pour un montant de ';
 if (empty($depense)) {echo $recette;} else {echo $depense;}
@@ -56,8 +59,7 @@ echo ' &euro;</strong></p>';
 //---------------------------- 
 
 if ($action =="modifie") { 
-$sql = "UPDATE spip_asso_comptes SET date='$date', recette='$recette', depense='$depense', justification='$justification', journal='$journal' WHERE id_compte='$id_compte'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	
+spip_query( " UPDATE spip_asso_comptes SET date='$date', recette='$recette', depense='$depense', justification='$justification', journal='$journal' WHERE id_compte='$id_compte' " );
 
 echo '<div align="center">';
 echo '<br><strong>L\'op&eacute;ration a &eacute;t&eacute; mise &agrave; jour</strong>';
@@ -73,12 +75,13 @@ echo '</div>';
 //---------------------------- 		
 if ($action == "supprime") {
 
+$id=$_GET['id'];
 $url_retour = $_SERVER['HTTP_REFERER'];
 
-echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer une op&eacute;ration  !</strong></p>';
+echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte n&deg; '.$id.' !</strong></p>';
 echo '<form action="'.$url_action_comptes.'"  method="post">';
 echo '<input type=hidden name="action" value="drop">';
-echo '<input type=hidden name="id" value="'.$id_compte.'">';
+echo '<input type=hidden name="id" value="'.$id.'">';
 echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
 echo '<p><input name="submit" type="submit" value="Confirmer" class="fondo"></p>';
 echo '<p>';
@@ -91,10 +94,10 @@ echo '</p>';
 //---------------------------- 		
 if ($action == "drop") {
 
-$url_retour=$_POSTE['url_retour'];
+$id=$_POST['id'];
+$url_retour=$_POST['url_retour'];
 
-$sql = "DELETE FROM spip_asso_comptes WHERE id_compte='$id'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+spip_query( "DELETE FROM spip_asso_comptes WHERE id_compte='$id' " );
 
 echo '<p><strong>Suppression effectu&eacute;e !</strong></p>';
 echo '<p>';

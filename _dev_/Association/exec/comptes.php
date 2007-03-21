@@ -76,7 +76,9 @@ echo '<option value = "cotisation" ';
 	echo ' > Cotisations</option>';
 echo '<option value = "vente" ';
 	if ($imputation=="vente") {echo 'selected';}
-	echo ' > Ventes</option>';
+echo '<option value = "activite" ';
+	if ($imputation=="activite") {echo 'selected';}
+	echo ' > Activit&eacute;s</option>';
 echo '<option value = "achat" ';
 	if ($imputation=="achat") {echo 'selected';}
 	echo ' > Achats</option>';
@@ -123,7 +125,6 @@ $somme_depenses += $data['depense'];
 
 echo '<tr> ';
 echo '<td class ='.$class.' style="text-align:right;">'.$data['id_compte'].'</td>';
-//echo '<td class ='.$class.'>'.$jour.'-'.$mois. '-'.$annee.'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.association_datefr($data['date']).'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.number_format($data['recette'], 2, ',', ' ').'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.number_format($data['depense'], 2, ',', ' ').'</td>';
