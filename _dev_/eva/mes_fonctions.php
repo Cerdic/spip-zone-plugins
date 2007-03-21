@@ -53,10 +53,4 @@ La fin du code est inspiree de
 return $texte;
 }
 
-// Cette fonction de filtre pour vider le contenu d'une balise SPIP
-function dummy($texte){
-return "";
-}
-
-
 ?>
