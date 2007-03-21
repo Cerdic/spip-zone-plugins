@@ -105,7 +105,7 @@
 
 		<!-- début du contenu -->
 		<div id="Contenu">
-		[(#REM) Ce qui suit est nécessaire pour empêcher le recalcul des notes demandé par l'existence de deux balises #TEXTE][(#TEXTE|dummy)][(#NOTES|dummy)]
+		[(#REM) Ce qui suit est nécessaire pour empêcher le recalcul des notes demandé par l'existence de deux balises #TEXTE][(#TEXTE|?)][(#NOTES|?)]
 			<!-- chapeau, texte, post-scriptum de l'article -->
 			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
 			[<div class="#EDIT{texte} texte">(#TEXTE*|ancrer|propre)</div>]
