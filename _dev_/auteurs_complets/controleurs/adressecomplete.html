@@ -1,0 +1,23 @@
+[(#REM)
+
+	Controleur pour le crayon 'adressecomplete', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
+<fieldset>
+<label><:auteurscomplets:entree_adresse:></label> <input class="crayon-active" name="#ENV{name_adresse}"
+ style="width:#ENV{largeur}px;" value="[(#ADRESSE**|entites_html)]" />
+<br />
+<label><:auteurscomplets:entree_codepostal:></label> <input class="crayon-active" name="#ENV{name_codepostal}"
+ style="width:#ENV{largeur}px;" value="[(#CODEPOSTAL**|entites_html)]" />
+<br />
+<label><:auteurscomplets:entree_ville:></label> <input class="crayon-active" name="#ENV{name_ville}"
+ style="width:#ENV{largeur}px;" value="[(#VILLE**|entites_html)]" />
+ <br />
+ <label><:auteurscomplets:entree_pays:></label> <input class="crayon-active" name="#ENV{name_pays}"
+ style="width:#ENV{largeur}px;" value="[(#PAYS**|entites_html)]" />
+</fieldset>
+</BOUCLE_a>
+<//B_a>
