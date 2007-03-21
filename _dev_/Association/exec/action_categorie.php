@@ -10,6 +10,7 @@
 *  
 **/
 include_spip('inc/presentation');
+
 function exec_action_categorie(){
 global $connect_statut, $connect_toutes_rubriques;
 
@@ -34,11 +35,9 @@ $action=$_GET['action'];
 $id=$_GET['id'];
 
 if ($action == "supprime") {
-$sql = "DELETE FROM spip_asso_categories WHERE id_categorie='$id'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-echo '<div align="center">';
-echo '<br><strong>La cat&eacute;gorie a &eacute;t&eacute; supprim&eacute;e</strong>';
-echo '</div>';
+spip_query( "DELETE FROM spip_asso_categories WHERE id_categorie='$id' " );
+
+echo '<p><strong>La cat&eacute;gorie a &eacute;t&eacute; supprim&eacute;e</strong></p>';
 }
 
 $action=$_POST['action'];
@@ -53,19 +52,16 @@ $libelle=addslashes($libelle);
 $commentaires=addslashes($commentaires);
 
 if ($action =="modifie") { 
-$sql = "UPDATE spip_asso_categories SET libelle='$libelle', valeur='$valeur', duree='$duree', cotisation='$montant', commentaires='$commentaires' WHERE id_categorie='$id'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	
-echo '<div align="center">';
-echo '<br><strong>La cat&eacute;gorie a &eacute;t&eacute; mise &agrave; jour</strong>';
-echo '</div>';
+spip_query( "UPDATE spip_asso_categories SET libelle='$libelle', valeur='$valeur', duree='$duree', cotisation='$montant', commentaires='$commentaires' WHERE id_categorie='$id' " );
+
+echo '<p><strong>La cat&eacute;gorie a &eacute;t&eacute; mise &agrave; jour</strong></p>';
 }
 
 if ($action == "ajoute") {
-$sql = "INSERT INTO spip_asso_categories (libelle, valeur, duree, cotisation, commentaires) VALUES ('$libelle', '$valeur', '$duree', '$montant', '$commentaires' )";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	
-echo '<div align="center">';
-echo '<br><strong>La cat&eacute;gorie a &eacute;t&eacute; ins&eacute;r&eacute;e</strong>';
-echo '</div>';
+spip_query( "INSERT INTO spip_asso_categories (libelle, valeur, duree, cotisation, commentaires) VALUES ('$libelle', '$valeur', '$duree', '$montant', '$commentaires' )" );
+
+echo '<p><strong>La cat&eacute;gorie a &eacute;t&eacute; ins&eacute;r&eacute;e</strong></p>';
+
 }
 
 
