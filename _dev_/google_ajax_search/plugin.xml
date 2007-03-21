@@ -1,0 +1,29 @@
+<plugin>
+ <nom>Google Ajax Search</nom>
+ <icon></icon>
+ <version>0.1.0</version>
+ <version_base>0.1.0</version_base>
+ <etat>dev</etat>
+ <auteur>[erational->http://www.erational.org] 
+_ &copy; 2007 - Licence GPL</auteur>
+ <description>
+    <multi>[fr]Permet d'ajouter un formulaire de recherche google dans votre squelette.
+   Ce formulaire utilise l'[API de recherche AJAX de Google->http://code.google.com/apis/ajaxsearch/]<br />
+_ Pour ajouter le formulaire de recherche dans vos squelettes: utiliser la balise: #FORMULAIRE_RECHERCHE_GOOGLE
+_ <br />
+_ {{Requis :}} Utiliser #INSERT_HEAD dans votre squelette et indiquer votre Google Key (configuration du plugin)
+_ {{Compatibilit&eacute; :}} Si vous utilisez le plugin GIS, le plugin automatiquement r&eacute;cup&egrave;re votre Google key. 
+_ {{R&eacute;f&eacute;rence :}} [API Google Search.->http://code.google.com/apis/ajaxsearch/documentation/reference.html]</multi></description> 
+ <lien></lien>
+ <prefix>googleajaxsearch</prefix>
+ 	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>googleajaxsearch_pipeline.php</inclure>
+	</pipeline>
+ <pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>googleajaxsearch_pipeline.php</inclure>
+	</pipeline>	
+</plugin>
