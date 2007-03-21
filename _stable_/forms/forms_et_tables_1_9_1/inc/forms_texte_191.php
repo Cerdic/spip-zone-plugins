@@ -3,15 +3,13 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2006                                                *
+ *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
@@ -159,6 +157,12 @@ function traiter_echap_frame_dist($regs) {
 
 // http://doc.spip.org/@traiter_echap_script_dist
 function traiter_echap_script_dist($regs) {
+	// rendre joli (et inactif) si c'est un script language=php
+	if (preg_match(',<script\b[^>]+php,ims',
+	$regs[0]))
+		return highlight_string($regs[0],true);
+
+	// Cas normal : le script passe tel quel
 	return $regs[0];
 }
 
@@ -170,32 +174,18 @@ function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
 	if (!strlen($letexte)) return '';
 
-	if (!$preg)
-		$preg = ',<(html|code|cadre|frame|script)'
+	if (!$preg) $preg = ',<(html|code|cadre|frame|script)'
 			.'(\s[^>]*)?'
 			.'>(.*)</\1>,UimsS';
-	while (preg_match_all(
+	if (preg_match_all(
 	$preg,
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
-
-		// Bloc gerant les imbrications complexes
-		// balise d'ouverture == imbrication non finie
-		if (strpos($regs[$endr = count($regs) - 1], '<' . $regs[1]) !== false
-		 && (!isset($lastreg) || $lastreg != $regs[$endr])) {
-			if (isset($pmid) || (($posmid = strpos($preg, '(.*)'))
-						&& ($pmid = '.') && ($psav = $preg))) {
-				$pmid = '(?:<\1[^>]*>(' . $pmid . '*)</\1>|.)';
-				$preg = substr_replace($psav, $pmid, $posmid + 1, 1);
-				$lastreg = $regs[$endr];
-				continue 2; # reprendre preg_match_all avec un $preg augmente
-			}
-		}
-
 		// echappements tels quels ?
 		if ($no_transform) {
 			$echap = $regs[0];
 		}
+
 		// sinon les traiter selon le cas
 		else if (function_exists($f = 'traiter_echap_'.strtolower($regs[1])))
 			$echap = $f($regs);
@@ -225,7 +215,6 @@ $preg='') {
 
 	return $letexte;
 }
-
 
 //
 // Traitement final des echappements
@@ -404,11 +393,14 @@ function interdire_scripts($t) {
 	// rien ?
 	if (!$t OR !strstr($t, '<')) return $t;
 
-	// echapper les tags asp
+	// echapper les tags asp/php
 	$t = str_replace('<'.'%', '&lt;%', $t);
 
 	// echapper le php
 	$t = str_replace('<'.'?', '&lt;?', $t);
+
+	// echapper le < script language=php >
+	$t = preg_replace(',<(script\b[^>]+\bphp\b),UimsS', '&lt;\1', $t);
 
 	// Pour le js, trois modes : parano (-1), prive (0), ok (1)
 	switch($GLOBALS['filtrer_javascript']) {
@@ -436,7 +428,7 @@ function safehtml($t) {
 	if (strpos($t,'<')===false)
 		return str_replace("\x00", '', $t);
 
-	$t = interdire_scripts($t);
+	$t = interdire_scripts($t); // jolifier le php
 	$t = echappe_js($t);
 
 	if (!isset($safehtml))
@@ -444,7 +436,7 @@ function safehtml($t) {
 	if ($safehtml)
 		$t = $safehtml($t);
 
-	return interdire_scripts($t); # gere le < ?php > en plus
+	return interdire_scripts($t); // interdire le php (2 precautions)
 }
 
 // Correction typographique francaise
@@ -624,18 +616,30 @@ function typo($letexte, $echapper=true) {
 	return $letexte;
 }
 
-// obsolete, utiliser calculer_url
+// traitement des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
 
-// http://doc.spip.org/@extraire_lien
-function extraire_lien ($regs) {
-	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1],'tout');
-	// Preparer le texte du lien ; attention s'il contient un <div>
-	// (ex: [<docXX|right>->lien]), il faut etre smart
-	$ref = "<a href=\"$lien\" class=\"$class\">$texte</a>";
-	return array($ref, $lien, $texte);
+define('_RACCOURCI_URL', ',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S');
+
+// http://doc.spip.org/@typer_raccourci
+function typer_raccourci ($lien) {
+
+	if (!preg_match(_RACCOURCI_URL, trim($lien), $match)) return false;
+	$f = $match[1];
+	// valeur par defaut et alias historiques
+	if (!$f) $f = 'article';
+	else if ($f == 'art') $f = 'article';
+	else if ($f == 'br') $f = 'breve';
+	else if ($f == 'rub') $f = 'rubrique';
+	else if ($f == 'aut') $f = 'auteur';
+	else if ($f == 'doc' OR $f == 'im' OR $f == 'img' OR $f == 'image' OR $f == 'emb')
+		$f = 'document';
+	else if (preg_match(',^br..?ve$,S', $f)) $f = 'breve'; # accents :(
+	$match[0] = $f;
+	return $match;
 }
 
-// traitement des raccourcis issus de [TITRE->RACCOURCInnn] et connexes
+// Cherche un lien du type [->raccourci 123]
+// associe a une fonction generer_url_raccourci()
 //
 // Valeur retournee selon le parametre $pour:
 // 'tout' : <a href="L">T</a>
@@ -646,23 +650,8 @@ function extraire_lien ($regs) {
 function calculer_url ($lien, $texte='', $pour='url') {
 	$lien = vider_url($lien); # supprimer 'http://' ou 'mailto:'
 
-	// Cherche un lien du type [->raccourci 123]
-	// associe a une fonction generer_url_raccourci()
-	if (preg_match(',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S', trim($lien), $match)) {
-		list(,$objet,$id,$params,$ancre) = $match;
-
-		// valeur par defaut
-		if (!$f = $objet) $f = 'article';
-
-		// aliases (historique)
-		if ($f == 'art') $f = 'article';
-		else if ($f == 'br') $f = 'breve';
-		else if ($f == 'rub') $f = 'rubrique';
-		else if ($f == 'aut') $f = 'auteur';
-		else if ($f == 'doc' OR $f == 'im' OR $f == 'img' OR $f == 'image' OR $f == 'emb')
-			$f = 'document';
-		else if (preg_match(',^br..?ve$,S', $f)) $f = 'breve'; # accents :(
-
+	if ($match = typer_raccourci ($lien)) {
+		list($f,$objet,$id,$params,$ancre) = $match;
 		// chercher la fonction nommee generer_url_$raccourci
 		// ou calculer_url_raccourci si on n'a besoin que du lien
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
@@ -718,13 +707,14 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	if (substr($lien,0,1) == '#')
 		$class = 'spip_ancre';
 
-	return ($pour == 'url') ? $lien : array($lien, $class, $texte, $lang);
+	return ($pour == 'url') ? $lien : array($lien, $class, $texte, '');
 }
 
 // http://doc.spip.org/@calculer_url_article
 function calculer_url_article($id, $texte='') {
 	$lien = generer_url_article($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id"));
+	$s = spip_query("SELECT titre,lang FROM spip_articles WHERE id_article=$id");
+	$row = spip_fetch_array($s);
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
 	return array($lien, 'spip_in', $texte, $row['lang']);
@@ -734,7 +724,8 @@ function calculer_url_article($id, $texte='') {
 function calculer_url_rubrique($id, $texte='')
 {
 	$lien = generer_url_rubrique($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id"));
+	$s = spip_query("SELECT titre,lang FROM spip_rubriques WHERE id_rubrique=$id");
+	$row = spip_fetch_array($s);
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
 	return array($lien, 'spip_in', $texte, $row['lang']);
@@ -744,7 +735,8 @@ function calculer_url_rubrique($id, $texte='')
 function calculer_url_mot($id, $texte='')
 {
 	$lien = generer_url_mot($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id"));
+	$s = spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id");
+	$row = spip_fetch_array($s);
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
 	return array($lien, 'spip_in', $texte);
@@ -754,7 +746,8 @@ function calculer_url_mot($id, $texte='')
 function calculer_url_breve($id, $texte='')
 {
 	$lien = generer_url_breve($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id"));
+	$s = spip_query("SELECT titre,lang FROM spip_breves WHERE id_breve=$id");
+	$row = spip_fetch_array($s);
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
 	return array($lien, 'spip_in', $texte, $row['lang']);
@@ -765,7 +758,8 @@ function calculer_url_auteur($id, $texte='')
 {
 	$lien = generer_url_auteur($id);
 	if ($texte=='') {
-		$row = @spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id"));
+		$s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id");
+	$row = spip_fetch_array($s);
 		$texte = $row['nom'];
 	}
 	return array($lien, 'spip_in', $texte); # pas de hreflang
@@ -776,7 +770,8 @@ function calculer_url_document($id, $texte='')
 {
 	$lien = generer_url_document($id);
 	if ($texte=='') {
-		$row = @spip_fetch_array(spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id"));
+		$s = spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id");
+		$row = spip_fetch_array($s);
 		$texte = $row['titre'];
 		if ($texte=='')
 			$texte = preg_replace(",^.*/,","",$row['fichier']);
@@ -789,7 +784,8 @@ function calculer_url_site($id, $texte='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
-	$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site,lang FROM spip_syndic WHERE id_syndic=$id"));
+	$s = spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id");
+	$row = spip_fetch_array($s);
 	if ($row) {
 		$lien = $row['url_site'];
 		if ($texte=='')
@@ -803,7 +799,8 @@ function calculer_url_forum($id, $texte='')
 {
 	$lien = generer_url_forum($id);
 	if ($texte=='') {
-		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'"));
+		$s = spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'");
+		$row = spip_fetch_array($s);
 		if ($texte=='')
 			$texte = $row['titre'];
 	}
@@ -1014,7 +1011,7 @@ function traiter_listes ($texte) {
 // http://doc.spip.org/@supprime_img
 function supprime_img($letexte) {
 	$message = _T('img_indisponible');
-	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,iS',
+	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i',
 		"($message)", $letexte);
 }
 
@@ -1025,6 +1022,18 @@ function supprime_img($letexte) {
 // Si $doublons==true, on repere les documents sans calculer les modeles
 // mais on renvoie les params (pour l'indexation par le moteur de recherche)
 // http://doc.spip.org/@traiter_modeles
+
+define('_RACCOURCI_MODELE', 
+	 '(<([a-z_-]{3,})' # <modele
+	.'\s*([0-9]*)\s*' # id
+	.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
+	.'>)' # fin du modele >
+	.'\s*(<\/a>)?' # eventuel </a>
+       );
+
+define('_RACCOURCI_MODELE_DEBUT', '/^' . _RACCOURCI_MODELE .'/is');
+
+// http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte, $doublons=false, $echap='') {
 	// detecter les modeles (rapide)
 	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
@@ -1034,15 +1043,7 @@ function traiter_modeles($texte, $doublons=false, $echap='') {
 			// Recuperer l'appel complet (y compris un eventuel lien)
 			// $regs : 1 => modele, 2 => type, 3 => id, 4 => params, 5 => a
 			$a = strpos($texte,$match[0]);
-			preg_match(
-			'/^' #debut
-			.'(<([a-z_-]{3,})' # <modele
-			.'\s*([0-9]*)\s*' # id
-			.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
-			.'>)' # fin du modele >
-			.'\s*(<\/a>)?' # eventuel </a>
-			.'/isS',
-			substr($texte, $a), $regs);
+			preg_match(_RACCOURCI_MODELE_DEBUT, substr($texte, $a), $regs);
 
 			if ($regs[5] AND preg_match(
 			',<a\s[^<>]*>\s*$,i', substr($texte, 0, $a), $r)) {
@@ -1146,6 +1147,7 @@ function paragrapher($letexte, $forcer=true) {
 // http://doc.spip.org/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs) {
 
+	$bulle = $hlang = '';
 	// title et hreflang donnes par le raccourci ?
 	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
 		// |infobulle ?
@@ -1160,7 +1162,7 @@ function traiter_raccourci_lien($regs) {
 			}
 			// sinon c'est un italique
 			else {
-				$m[1] .= '{'.$m[3].'}';
+				$m[1] .= $m[4];
 			}
 		}
 		// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
@@ -1188,6 +1190,26 @@ function traiter_raccourci_lien($regs) {
 		. "</a>");
 }
 
+// Fonction pour les champs chapo commencant par =,  redirection qui peut etre:
+// 1. un raccourci Spip habituel (premier If) [texte->TYPEnnn]
+// 2. un ultra raccourci TYPEnnn voire nnn (article) (deuxieme If)
+// 3. une URL std
+// renvoie une tableau structure comme ci-dessus mais sans calcul d'URL
+// (cf fusion de sauvegardes)
+
+define('_RACCOURCI_CHAPO', ',^(\W*)(\W*)(\w*\d+([?#].*)?)$,');
+
+// http://doc.spip.org/@chapo_redirige
+function chapo_redirige($chapo)
+{
+	if (!preg_match(_RACCOURCI_LIEN, $chapo, $m))
+		if (!preg_match(_RACCOURCI_CHAPO, $chapo, $m))
+			$m = array('','','',$chapo);
+	return $m;
+}
+
+// Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
+define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 // http://doc.spip.org/@traiter_raccourcis
@@ -1352,9 +1374,9 @@ function traiter_raccourcis($letexte) {
 	// Note : complique car c'est ici qu'on applique typo(),
 	// et en plus on veut pouvoir les passer en pipeline
 	//
-	$regexp = ",\[([^][]*)->(>?)([^]]*)\],msS";
+
 	$inserts = array();
-	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER)) {
+	if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
 		foreach ($matches as $regs) {
 			$inserts[++$i] = traiter_raccourci_lien($regs);
@@ -1429,10 +1451,11 @@ function traiter_raccourcis($letexte) {
 		/* 8 */ 	"/[}][}]/S",
 		/* 9 */ 	"/[{]/S",
 		/* 10 */	"/[}]/S",
-		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/S",
-		/* 12 */	"/<p>([\n]*(<br[[:space:]]*\/?".">)*)*/S",
+		/* 11 */	"/(?:<br\b[^>]*?".">){2,}/S",
+		/* 12 */	"/<p>\n*(?:<br\b[^>]*?".">\n*)*/S",
 		/* 13 */	"/<quote>/S",
-		/* 14 */	"/<\/quote>/S"
+		/* 14 */	"/<\/quote>/S",
+		/* 15 */	"/<\/?intro>/S"
 	);
 	$remplace1 = array(
 		/* 0 */ 	"\n\n$ligne_horizontale\n\n",
@@ -1449,7 +1472,8 @@ function traiter_raccourcis($letexte) {
 		/* 11 */	"<p>",
 		/* 12 */	"<p>",
 		/* 13 */	"<blockquote class=\"spip\"><p>",
-		/* 14 */	"</blockquote><p>"
+		/* 14 */	"</blockquote><p>",
+		/* 15 */	""
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@S", "", $letexte);
