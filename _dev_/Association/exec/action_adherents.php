@@ -10,8 +10,6 @@
 *  
 **/
 include_spip('inc/presentation');
-include_spip('inc/acces');
-include_spip('association_mes_options');
 
 function exec_action_adherents(){
 global $connect_statut, $connect_toutes_rubriques;
@@ -74,12 +72,12 @@ if ($action=="ajoute"){
 		echo '<p><strong>'.$prenom.' '.$nom.' a &eacute;t&eacute; ajout&eacute; dans le fichier';
 		
 //Validation email 	si il existe	
-		if( validation_email($email) ){
+		if( association_validation_email($email) ){
 		
 // Inscription visiteur
 		$pass = creer_pass_aleatoire(8, $email);
-    		$nom_inscription =  cree_login($email);                                  
-		$login = cree_login($email);
+    		$nom_inscription =  association_cree_login($email);                                  
+		$login = association_cree_login($email);
 		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
 		$statut = '6forum' ;
@@ -105,9 +103,9 @@ if ($action=="ajoute"){
 
 if ($action=="modifie"){
 
-	spip_query("UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', categorie='$categorie', fonction='$fonction', email='$email', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable', remarques='$remarques', id_asso='$id_asso', naissance='$naissance', profession='$profession',societe='$societe', secteur='$secteur', publication='$publication', utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', statut='$statut'  WHERE id_adherent='$id_adherent'");
+spip_query("UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', categorie='$categorie', fonction='$fonction', email='$email', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable', remarques='$remarques', id_asso='$id_asso', naissance='$naissance', profession='$profession',societe='$societe', secteur='$secteur', publication='$publication', utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', statut='$statut'  WHERE id_adherent='$id_adherent'");
 	//on met a jour  les id_auteur pour tous les adherents	
-	spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");	
+spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");	
 	echo '<p><strong>Les donn&eacute;es de '.$prenom.' '.$nom.' ont &eacute;t&eacute; mises &agrave; jour !</strong></p>';
 	echo '<p>';
 	icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );

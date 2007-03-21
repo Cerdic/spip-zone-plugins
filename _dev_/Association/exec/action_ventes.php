@@ -10,6 +10,7 @@
 *  
 **/
 include_spip('inc/presentation');
+
 function exec_action_ventes(){
 global $connect_statut, $connect_toutes_rubriques;
 
@@ -49,23 +50,18 @@ $action=$_POST['action'];
 	
 if ($action=="ajoute"){
 
-$sql="INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ('$date_vente', '$article', '$code', '$acheteur', '$quantite', '$date_envoi', '$frais_envoi', '$don', '$prix_vente', '$commentaire' )";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ('$date_vente', '$article', '$code', '$acheteur', '$quantite', '$date_envoi', '$frais_envoi', '$don', '$prix_vente', '$commentaire' )");
 
-$sql="SELECT MAX(id_vente) AS id_vente FROM spip_asso_ventes";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
+$query=spip_query( "SELECT MAX(id_vente) AS id_vente FROM spip_asso_ventes");
+while ($data = mysql_fetch_assoc($query))
 {
 $id_vente=$data['id_vente'];
 $justification='vente n&deg; '.$id_vente.' - '.$article;
 }
 
-$sql = "INSERT INTO spip_asso_comptes (date, journal,recette,depense,justification,imputation,id_journal) VALUES ('$date_vente','$journal','$recette','$frais_envoi','$justification','vente','$id_vente')";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "INSERT INTO spip_asso_comptes (date, journal,recette,depense,justification,imputation,id_journal) VALUES ('$date_vente','$journal','$recette','$frais_envoi','$justification','vente','$id_vente')" );
 
-echo '<div align="center">';
-echo '<br><strong>La vente a &eacute;t&eacute; enregistr&eacute;e pour un montant de '.$recette.' &euro;, hors frais d\'envoi</strong>';
-echo '</div>';
+echo '<p><strong>La vente a &eacute;t&eacute; enregistr&eacute;e pour un montant de '.$recette.' &euro;, hors frais d\'envoi</strong></p>';
 }
 
 //---------------------------- 
@@ -74,15 +70,11 @@ echo '</div>';
 
 if ($action=="modifie"){
 
-$sql = "UPDATE spip_asso_ventes SET date_vente='$date_vente', article='$article', code='$code', acheteur='$acheteur', quantite='$quantite', date_envoi='$date_envoi', frais_envoi='$frais_envoi', don='$don', prix_vente='$prix_vente', commentaire='$commentaire' WHERE id_vente='$id_vente'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "UPDATE spip_asso_ventes SET date_vente='$date_vente', article='$article', code='$code', acheteur='$acheteur', quantite='$quantite', date_envoi='$date_envoi', frais_envoi='$frais_envoi', don='$don', prix_vente='$prix_vente', commentaire='$commentaire' WHERE id_vente='$id_vente' " );
 
-$sql = "UPDATE spip_asso_comptes SET date='$date_vente', journal='$journal',recette='$recette', depense='$frais_envoi', justification='$justification' WHERE id_journal=$id_vente AND imputation='vente' ";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "UPDATE spip_asso_comptes SET date='$date_vente', journal='$journal',recette='$recette', depense='$frais_envoi', justification='$justification' WHERE id_journal=$id_vente AND imputation='vente' " );
 	
-echo '<div align="center">';
-echo "<br><strong>Les informations ont &eacute;t&eacute; mises &agrave; jour</strong>";
-echo '</div>';
+echo '<p><strong>Les informations ont &eacute;t&eacute; mises &agrave; jour</strong></p>';
 }
 //---------------------------- 
 //SUPPRESSION PROVISOIRE ADHERENT
@@ -94,7 +86,7 @@ $count=count ($delete_tab);
 
 echo '<div align="center">';
 echo '<br><strong>Vous vous appr&ecirc;tez &agrave; effacer '.$count;
-if ($count=1)
+if ($count==1)
 {echo ' vente !';} else {echo ' ventes !';}
 echo '</strong><br>';
 echo '<table>';

@@ -11,7 +11,6 @@
 **/
 
 include_spip('inc/presentation');
-include_spip('association_mes_options');
 
 function exec_action_dons(){
 global $connect_statut, $connect_toutes_rubriques;
@@ -49,23 +48,18 @@ $action=$_POST['action'];
 //---------------------------- 
 
 if ($action=="ajoute"){
-$sql="INSERT INTO spip_asso_dons (date_don, bienfaiteur, argent, colis, valeur, contrepartie, commentaire ) VALUES ( '$date_don', '$bienfaiteur', '$argent', '$colis', '$valeur', '$contrepartie', '$commentaire' )";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "INSERT INTO spip_asso_dons (date_don, bienfaiteur, argent, colis, valeur, contrepartie, commentaire ) VALUES ( '$date_don', '$bienfaiteur', '$argent', '$colis', '$valeur', '$contrepartie', '$commentaire' )");
 
-$sql="SELECT MAX(id_don) AS id_don FROM spip_asso_dons";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while ($data = mysql_fetch_assoc($req))
+$query=spip_query( "SELECT MAX(id_don) AS id_don FROM spip_asso_dons");
+while ($data = mysql_fetch_assoc($query))
 {
 $id_don=$data['id_don'];
 $justification='don n&deg; '.$id_don.' - '.$bienfaiteur;
 }
 
-$sql = "INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ('$date_don', '$journal', '$argent', '$justification', 'don', '$id_don')";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ('$date_don', '$journal', '$argent', '$justification', 'don', '$id_don')" );
 
-echo '<div align="center">';
-echo '<br><strong>Le don a &eacute;t&eacute; enregistr&eacute;</strong>';
-echo '</div>';
+echo '<p><strong>Le don a &eacute;t&eacute; enregistr&eacute;</strong></p>';
 }
 
 //---------------------------- 
@@ -74,11 +68,9 @@ echo '</div>';
 
 if ($action=="modifie"){
 
-$sql = "UPDATE spip_asso_dons SET date_don='$date_don', bienfaiteur='$bienfaiteur', argent='$argent', colis='$colis', valeur='$valeur', contrepartie='$contrepartie', commentaire='$commentaire' WHERE id_don='$id_don'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "UPDATE spip_asso_dons SET date_don='$date_don', bienfaiteur='$bienfaiteur', argent='$argent', colis='$colis', valeur='$valeur', contrepartie='$contrepartie', commentaire='$commentaire' WHERE id_don='$id_don'");
 
-$sql = "UPDATE spip_asso_comptes SET date='$date_don', journal='$journal',recette='$argent', justification='$justification'  WHERE id_journal=$id_don AND imputation='don' ";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "UPDATE spip_asso_comptes SET date='$date_don', journal='$journal',recette='$argent', justification='$justification'  WHERE id_journal=$id_don AND imputation='don' ");
 	
 echo '<p><strong>Le don a &eacute;t&eacute; mis &agrave; jour</strong></p>';
 echo '<p>';
@@ -121,15 +113,10 @@ $count=count ($drop_tab);
 
 for ( $i=0 ; $i < $count ; $i++ )
 {	$id = $drop_tab[$i];
-	$sql = "DELETE FROM spip_asso_dons WHERE id_don='$id'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
-	
-	$sql = "DELETE FROM spip_asso_comptes WHERE id_journal='$id' AND imputation='don'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+	spip_query( "DELETE FROM spip_asso_dons WHERE id_don='$id' ");
+	spip_query( "DELETE FROM spip_asso_comptes WHERE id_journal='$id' AND imputation='don' ");  
 }
-echo '<div align="center">';
-echo '<br><strong>Suppression effectu&eacute;e !</strong><br>';	
-echo '</div>';
+echo '<p><strong>Suppression effectu&eacute;e !</strong></p>';	
 }
 
 fin_boite_info();

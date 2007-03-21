@@ -10,6 +10,7 @@
 *  
 **/
 include_spip('inc/presentation');
+
 function exec_action_banques(){
 global $connect_statut, $connect_toutes_rubriques;
 
@@ -34,8 +35,8 @@ $action=$_GET['action'];
 $id=$_GET['id'];
 
 if ($action == "supprime") {
-$sql = "DELETE FROM spip_asso_banques WHERE id_banque='$id'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query( "DELETE FROM spip_asso_banques WHERE id_banque='$id' ");
+
 echo '<p><strong>Le compte financier a &eacute;t&eacute; supprim&eacute;e</strong></p>';
 echo '<p>';
 icone(_T('asso:Retour'), 'javascript:history.go(-2)', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ecole.gif','rien.gif' );
@@ -56,8 +57,8 @@ $commentaire= addslashes($commentaire);
 $commentaire=nl2br($commentaire); 
 
 if ($action =="modifie") { 
-$sql = "UPDATE spip_asso_banques SET code='$code', intitule='$intitule', reference='$reference', solde='$solde', date='$date', commentaire='$commentaire' WHERE id_banque='$id'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	
+spip_query( "UPDATE spip_asso_banques SET code='$code', intitule='$intitule', reference='$reference', solde='$solde', date='$date', commentaire='$commentaire' WHERE id_banque='$id' ");
+
 echo '<p><strong>Le compte "'.$code.'" a &eacute;t&eacute; mis &agrave; jour</strong></p>';
 echo '<p>';
 icone(_T('asso:Retour'), 'javascript:history.go(-2)', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ecole.gif','rien.gif' );
@@ -65,8 +66,7 @@ echo '</p>';
 }
 
 if ($action == "ajoute") {
-$sql = "INSERT INTO spip_asso_banques (code, intitule, reference, solde, date, commentaire) VALUES ('$code', '$intitule', '$reference', '$solde', '$date', '$commentaire' )";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	
+spip_query( "INSERT INTO spip_asso_banques (code, intitule, reference, solde, date, commentaire) VALUES ('$code', '$intitule', '$reference', '$solde', '$date', '$commentaire' )");
 echo '<p><strong>Le nouveau compte financier a &eacute;t&eacute; ajout&eacute;</strong></p>';
 echo '<p>';
 icone(_T('asso:Retour'), 'javascript:history.go(-2)', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ecole.gif','rien.gif' );
