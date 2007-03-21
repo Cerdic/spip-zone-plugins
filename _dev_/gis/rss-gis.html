@@ -19,12 +19,12 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 	<itunes:explicit>no</itunes:explicit>
 	<language>#LANG</language>
 	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{par date}{inverse}><item>
-	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>[<guid isPermaLink="true">(#ID_ARTICLE)</guid>][<link>(#URL_ARTICLE|url_absolue)</link>]<description>&lt;div style='width:200px'&gt;
+	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>[<guid isPermaLink="false">(#ID_ARTICLE)</guid>][<link>(#URL_ARTICLE|url_absolue)</link>]<description>&lt;div style='width:200px'&gt;
 			&lt;div id='player'&gt;&lt;/div&gt;
 			&lt;div style='font-size:11px; font-weight:bold'&gt;#TITRE&lt;/div&gt;
 			&lt;div style='font-size:10px; text-align:left'&gt; #CHAPO &lt;/div&gt;
-			<BOUCLE_imaxe(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='#URL_DOCUMENT' title='ad' class='thickbox'&gt;&lt;img src='[(#URL_DOCUMENT|url_absolue)]' border='0' height='60' alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe>
-			&lt;div style='font-size:10px; margin-bottom:10px'&gt;[(#DATE|affdate_jourcourt)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='#URL_AUTEUR'&gt;(#NOM)&lt;/a&gt;]</BOUCLE_autores>&lt;/div&gt;
+			<BOUCLE_imaxe(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' title='ad' class='thickbox'&gt;&lt;img src='[(#URL_DOCUMENT|url_absolue)]' border='0' height='60' alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe>
+			&lt;div style='font-size:10px; margin-bottom:10px'&gt;[(#DATE|affdate_jourcourt)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='[(#URL_AUTEUR|url_absolue)]'&gt;(#NOM)&lt;/a&gt;]</BOUCLE_autores>&lt;/div&gt;
 			&lt;/div&gt;</description>[<pubDate>(#DATE|date_iso)</pubDate>]<BOUCLE_gis(GIS){id_article}><geo:lat>#LAT</geo:lat><geo:long>#LONX</geo:long></BOUCLE_gis><BOUCLE_mp3(DOCUMENTS){id_article}{mode=document}{extension=mp3}{0,1}><enclosure url="[(#URL_DOCUMENT|url_absolue)]" type="audio/mpeg" /></BOUCLE_mp3><B_tags1><geo:icon><BOUCLE_tags1(MOTS){id_article}{id_groupe=4}>[#URL_SITE_SPIP/IMG/(#LOGO_MOT|fichier)]</BOUCLE_tags1></geo:icon></B_tags1><B_tags><dc:subject><BOUCLE_tags(MOTS){id_article}>#TITRE</BOUCLE_tags></dc:subject></B_tags>[<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>][<itunes:summary>(#DESCRIPTIF|couper{80})</itunes:summary>]<itunes:duration>00:00:00</itunes:duration><BOUCLE_img(DOCUMENTS){id_article}{mode=document}{extension==jpg|png|gif}{0,1}>[<itunes:image href="(#URL_DOCUMENT|url_absolue)" />]</BOUCLE_img>[<dc:language>(#LANG)</dc:language>][<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]</item></BOUCLE_un_article>
 </channel>
 </rss>
