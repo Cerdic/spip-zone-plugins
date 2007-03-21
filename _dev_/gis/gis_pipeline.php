@@ -62,7 +62,7 @@ function gis_insertar_head($flux){
 		$row = spip_fetch_array($result);
 		
 		if ((_request('exec')=='articles')){
-			$flux.='<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$row['value'].'"></script>
+			$flux.='<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$row['value'].'"></script>
 			<script language="javascript">
 			$(document).ready(function() {
 				$(\'#cadroFormulario\').hide()
