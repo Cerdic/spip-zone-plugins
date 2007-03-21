@@ -62,7 +62,7 @@ a{
 	color:#2673bf;
 	}
 a:hover{
-	color:#d37324;
+	color:#d37324 !important;
 	}
 a:visited{
 	color:/*liens_visite*/ #3e78b3;
@@ -113,14 +113,14 @@ div#TitreSite{
 div#EntetePage h1{
 	margin:3px;
 	padding:0;
-	color:#2164a6;
+	color:#5C6166;
 	font-size:36px;
 	font-weight:bold;
 	}
 div#EntetePage h2{
 	margin:5px;
 	padding:0;
-	color:#2164a6;
+	color:#5C6166;
 	font-size:24px;
 	font-weight:bold;
 	vertical-align:middle;
@@ -1122,7 +1122,7 @@ a.spip_blank{
 	display:none;
 	border:1px solid #666;
 	overflow:auto;
-	background-color:#FFCCCC;
+	/* background-color:#FFCCCC; */
 }
 
 /* sup{
