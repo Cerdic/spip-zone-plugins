@@ -315,7 +315,7 @@ div.sommaire{
 	margin-bottom:20px;
 	}
 div.sommaire a{
-	color:#5c6166;
+	color:#5c6166 !important;
 	text-decoration:none;
 	}
 div.sommaire a:hover{
@@ -1164,4 +1164,21 @@ padding: 0;
 }
 
 #bloc_navigation{
+}
+
+.populaires{
+	display:list-item;
+	list-style-type:square;
+	list-style-position:inside;
+	font-weight:normal;
+}
+
+.populaires_menu{
+	display:none;
+}
+
+.en_cours{
+font-size:12px;
+font-style:italic;
+color:#c0c0c0;
 }
