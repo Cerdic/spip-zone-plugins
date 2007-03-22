@@ -98,6 +98,9 @@ $spip_forms_donnees = array(
 	"statut"	=> "VARCHAR(10) NOT NULL",
 	"cookie"	=> "VARCHAR(255) NOT NULL",
 	"rang" => "bigint(21) NOT NULL",
+	"bgch" => "bigint(21) NOT NULL", // arborescence
+	"bdte" => "bigint(21) NOT NULL", // arborescence
+	"niveau" => "bigint(21) DEFAULT '0' NOT NULL", // arborescence
 	"maj" 		=> "TIMESTAMP");
 
 $spip_forms_donnees_key = array(
@@ -155,6 +158,20 @@ $spip_forms_donnees_articles_key = array(
 $tables_auxiliaires['spip_forms_donnees_articles'] = array(
 	'field' => &$spip_forms_donnees_articles,
 	'key' => &$spip_forms_donnees_articles_key);
+
+
+$spip_forms_donnees_rubriques = array(
+	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"id_rubrique" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_forms_donnees_rubriques_key = array(
+	"KEY id_donnee" 	=> "id_donnee",
+	"KEY id_rubrique" => "id_rubrique");
+
+$tables_auxiliaires['spip_forms_donnees_rubriques'] = array(
+	'field' => &$spip_forms_donnees_rubriques,
+	'key' => &$spip_forms_donnees_rubriques_key);
+
 
 $spip_forms_donnees_donnees = array(
 	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",

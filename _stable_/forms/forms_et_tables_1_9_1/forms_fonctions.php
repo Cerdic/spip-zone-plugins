@@ -74,6 +74,8 @@
 	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form, $etoile=false){
 		static $type_champ=array();
 		static $wrap_champ=array();
+		static $choix_s=array();
+		static $mots_s=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
 		$ok = $id_donnee && $champ;
 		$ok = $ok && in_array($type, array('forms_donnees_champs','forms_champs'));
@@ -99,16 +101,20 @@
 		if ($ok) {
 			$t = $type_champ[$id_form][$champ];
 			if ($t == 'select' OR $t == 'multiple'){
-				$res = spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($valeur));
-				if ($row = spip_fetch_array($res)){
-					$valeur = $row['titre'];
+				if (!isset($choix_s[$id_form][$champ][$valeur])){
+					$res = spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($valeur));
+					if ($row = spip_fetch_array($res)) $choix_s[$id_form][$champ][$valeur] = $row['titre'];
+					else $choix_s[$id_form][$champ][$valeur] = $valeur;
 				}
+				$valeur = $choix_s[$id_form][$champ][$valeur];
 			}
 			elseif ($t == 'mot'){
-				$res = spip_query("SELECT titre FROM spip_mots WHERE id_mot="._q($valeur));
-				if ($row = spip_fetch_array($res)){
-					$valeur = $row['titre'];
+				if (!isset($mots_s[$valeur])){
+					$res = spip_query("SELECT titre FROM spip_mots WHERE id_mot="._q($valeur));
+					if ($row = spip_fetch_array($res)) $mots_s[$valeur] = $row['titre'];
+					else $mots_s[$valeur] = $valeur;
 				}
+				$valeur = $mots_s[$valeur];
 			}
 			elseif ($t == 'password'){
 				$rendu = "";

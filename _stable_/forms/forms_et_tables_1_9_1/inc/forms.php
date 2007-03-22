@@ -524,7 +524,7 @@
 		return $row['rang'];
 	}
 	
-	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL) {
+	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL, $rang=NULL) {
 		$r = '';
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
@@ -591,9 +591,12 @@
 						"WHERE id_donnee="._q($id_donnee));
 					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
-					$rang = Forms_rang_prochain($id_form);
-					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, rang) ".
-					"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).","._q($rang).")");
+					if ($rang==NULL) $rang = array('rang'=>Forms_rang_prochain($id_form));
+					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
+					  . implode(',',array_keys($rang)).") " 
+					  .	"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","
+					  . _q($url).", '$confirmation', '$statut',"._q($cookie).","
+					  . implode(',',array_map('_q',$rang)) .")");
 					$id_donnee = spip_insert_id();
 					# cf. GROS HACK exec/template/tables_affichage
 					# rattrapper les documents associes a cette nouvelle donnee

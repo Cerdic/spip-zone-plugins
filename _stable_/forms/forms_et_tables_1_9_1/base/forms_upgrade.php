@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.26;
+	$GLOBALS['forms_base_version'] = 0.28;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -227,8 +227,17 @@
 		if ($current_version<0.27){
 			spip_query("ALTER TABLE spip_forms_donnees_article ADD article_ref ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER id_article");
 			spip_query("ALTER TABLE spip_forms_donnees_donnees ADD donnee_ref ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER id_donnee");
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
 			echo "forms update @ 0.27<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.27,'non');
+		}
+		if ($current_version<0.28){
+			spip_query("ALTER TABLE spip_forms_donnees ADD bgch bigint(21) NOT NULL AFTER rang");
+			spip_query("ALTER TABLE spip_forms_donnees ADD bdte bigint(21) NOT NULL AFTER bdte");
+			spip_query("ALTER TABLE spip_forms_donnees ADD niveau bigint(21) DEFAULT '0' NOT NULL AFTER bdte");
+			ecrire_meta('forms_base_version',$current_version=0.28,'non');
 		}
 		ecrire_metas();
 	}
