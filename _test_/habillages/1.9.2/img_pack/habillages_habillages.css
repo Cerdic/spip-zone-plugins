@@ -50,6 +50,10 @@ DIV {
 	width: 100%;
 }
 
+#subtab {
+	width: 90%;
+}
+
 .hab_titre {
 	height: 25px;
 	padding-left: 5px;
@@ -57,6 +61,8 @@ DIV {
 	background-repeat: repeat-x;
 	font-weight: bold;
 	vertical-align: middle;
+	color: #2A2A2A;
+	text-transform: uppercase;
 }
 
 .hab_stitre {

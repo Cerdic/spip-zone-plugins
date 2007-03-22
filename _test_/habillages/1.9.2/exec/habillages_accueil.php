@@ -178,8 +178,11 @@ EOF;
 
 	global $couleur_foncee;
 	
- 	echo "<H1 class='hab_gros_titre'>"._T('habillages:tdb_titre')."</h1>";
-	echo "<div class='hab_intro'>"._T('habillages:accueil_general')."</div><br /><br />";
+	debut_boite_info();
+	echo gros_titre(_T('habillages:tdb_titre'));
+	echo _T('habillages:accueil_general');
+	fin_boite_info();
+	echo "<br />";
 	
 	# Etablir les cases qui sont checkees.
 	lire_metas();
@@ -246,6 +249,10 @@ EOF;
 	echo _T('habillages:intro_select_gestionnaire')."<br /><br />";
 	echo "</td></tr>";
 	
+	echo "</table>";
+	
+	echo "<table border='0' cellpadding='0' cellspacing='0' id='subtab' align='center'>";
+		
 	echo "<tr><td style='background-color:$couleur_claire' id='hab_input' class='hab_stitre'>";
 	echo "<input type='checkbox' name='".$gestion_squelettes."' value='".$gestion_squelettes."'$checked_skel></td>";
 	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
