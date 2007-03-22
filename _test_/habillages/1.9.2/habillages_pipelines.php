@@ -33,7 +33,7 @@ function habillages_ajouter_onglets($flux) {
 	$config_is_gestionnaire = $GLOBALS['meta']['habillages_config_on'];
 
 	
-	if (_request('exec')=='habillages_accueil' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes') {
+	if (_request('exec')=='habillages_accueil' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes' || _request('exec')=='habillages_config') {
 		$flux['data']['accueil']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_accueil-22.png', 'Accueil', generer_url_ecrire("habillages_accueil"));
 	
