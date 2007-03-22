@@ -10,8 +10,8 @@ img.crayon-img-changed {
 img.crayon-edit, img.crayon-crayon {
     visibility: hidden;
 }
-.crayon-autorise:hover img.crayon-edit, .crayon-hover img.crayon-edit,
-.crayon-autorise:hover img.crayon-crayon, .crayon-hover img.crayon-crayon {
+.crayon-autorise:hover > span > span > img.crayon-edit, .crayon-hover img.crayon-edit,
+.crayon-autorise:hover > span > span > img.crayon-crayon, .crayon-hover img.crayon-crayon {
     visibility: visible;
 }
 .crayon-autorise:hover, .crayon-hover {
