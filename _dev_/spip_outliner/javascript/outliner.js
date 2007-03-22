@@ -94,9 +94,9 @@ jQuery.fn.toggleLine = function() {
 function filtre_niveau(niveau){
 	l=$('#');
 	for (i=0;i<niveau;i++)
-		l = l.add('tr.row[@name='+i+']:hidden');
-	l.show().find('img.noeud').attr('src',img_noeud_moins);
-	$('tr.row[@name='+niveau+']').show().find('img.noeud').attr('src',img_noeud_plus);
+		l = l.add('tr.row[@name='+i+']');
+	l.show().find('div.toggle').removeClass('ferme').addClass('ouvert');
+	$('tr.row[@name='+niveau+']').find('div.toggle').removeClass('ouvert').addClass('ferme');
 	l=$('#');
 	niveau++;
 	for (i=niveau;i<10;i++)

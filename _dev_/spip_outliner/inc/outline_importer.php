@@ -57,10 +57,7 @@ function opml2tree($id_form,$id_parent,&$arbre,&$trans){
 					$trans[$col]=Forms_creer_champ($id_form,'texte',$col,array('public'=>'oui'));
 				$c[$trans[$col]] = $v;
 			}
-			var_dump($c);
 			list($id_enfant,$erreur) = $id_parent?Forms_arbre_inserer_donnee($id_form,$id_parent,'fils_cadet',$c):Forms_arbre_inserer_donnee($id_form,$id_enfant,'petit_frere',$c);
-			var_dump($erreur);
-			echo "<br/>";
 			if ($id_enfant)
 				foreach($sousarbre as $opmls)
 					opml2tree($id_form,$id_enfant,$opmls,$trans);
@@ -88,7 +85,6 @@ function inc_outline_importer($opml_arbre,$nom_fichier){
 				//opml2table(1,$body,$table,$colonnes);
 			}
 	}
-	die();
 	/*$trans=array('text'=>'ligne_1','_status'=>'_status');
 	foreach(array_keys($colonnes) as $col){
 		if(!isset($trans[$col])){
