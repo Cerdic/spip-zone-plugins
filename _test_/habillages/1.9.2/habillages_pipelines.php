@@ -5,14 +5,14 @@ define('_DIR_PLUGIN_HABILLAGES',(_DIR_PLUGINS.end($p)));
 function habillages_ajouter_boutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-		  if (_request('exec')=='config_habillages'){
-			  $boutons_admin['configuration']->sousmenu['config_habillages']= new Bouton(
+		  if (_request('exec')=='habillages_accueil'){
+			  $boutons_admin['configuration']->sousmenu['habillages_accueil']= new Bouton(
 			"../"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icone-22.png",  // icone
 			_L('Habillages')	// titre
 			);
 	  		}
 	  		else {
-		  $boutons_admin['configuration']->sousmenu['config_habillages']= new Bouton(
+		  $boutons_admin['configuration']->sousmenu['habillages_accueil']= new Bouton(
 			"../"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icone-22.png",  // icone
 			_L('Habillages')	// titre
 			);
@@ -33,9 +33,9 @@ function habillages_ajouter_onglets($flux) {
 	$config_is_gestionnaire = $GLOBALS['meta']['habillages_config_on'];
 
 	
-	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes') {
+	if (_request('exec')=='habillages_accueil' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes') {
 		$flux['data']['accueil']= new Bouton(
-	_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_accueil-22.png', 'Accueil', generer_url_ecrire("config_habillages"));
+	_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_accueil-22.png', 'Accueil', generer_url_ecrire("habillages_accueil"));
 	
 	# Si l'utilisateur/trice a choisi le gestionnaire de squelette, on affiche ce dernier.
 	if ($squelettes_is_gestionnaire == "oui" || $squelettes_is_gestionnaire == "") {
@@ -72,7 +72,7 @@ return $flux;
 }
 
 function habillages_header_prive($flux) {
-	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_themes' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_aide') {
+	if (_request('exec')=='habillages_accueil' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_themes' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_aide') {
 		$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_HABILLAGES.'img_pack/habillages_habillages.css" type="text/css" >'."\n";
 		}
 		

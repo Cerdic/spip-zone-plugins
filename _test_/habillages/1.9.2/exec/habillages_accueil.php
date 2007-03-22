@@ -11,7 +11,7 @@ include_spip('inc/layer');
 include_spip('inc/actions');
 
 // http://doc.spip.org/@exec_admin_plugin
-function exec_config_habillages() {
+function exec_habillages_accueil() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
@@ -92,7 +92,7 @@ function exec_config_habillages() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	debut_page(_T('habillages:icone_config_habillages'), "configuration", "habillages");
+	debut_page(_T('habillages:icone_habillages_accueil'), "configuration", "habillages");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -153,7 +153,7 @@ EOF;
 	echo "<br/><br/>";
 	
 	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_icone-48.png">';
-	gros_titre(_T('habillages:icone_config_habillages'));
+	gros_titre(_T('habillages:icone_habillages_accueil'));
 
 	echo barre_onglets("habillages", "");
 	
@@ -234,7 +234,7 @@ EOF;
 	$checked_extras = " checked='checked'";
 	}
 	
-	echo generer_url_post_ecrire("config_habillages");
+	echo generer_url_post_ecrire("habillages_accueil");
 	debut_boite_info();
 	echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
 	

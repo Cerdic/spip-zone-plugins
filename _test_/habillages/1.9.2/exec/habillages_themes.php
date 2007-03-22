@@ -45,7 +45,7 @@ function exec_habillages_themes() {
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
 	global $couleur_foncee;
-	debut_page(_T('habillages:icone_config_habillages'), "configuration", "habillages");
+	debut_page(_T('habillages:icone_habillages_accueil'), "configuration", "habillages");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
