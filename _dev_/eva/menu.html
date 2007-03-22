@@ -14,9 +14,17 @@ $hierarchie = array();
 </script>
 
 <div class="sommaire">
-<ul>
+<ul id="en_cours">
+		<li>
+			<img src='/dist/images/searching.gif' align="absmiddle" alt='Chargement en cours...'/>&nbsp;
+			<span class='en_cours'>
+				Chargement du menu...
+			</span>
+		</li>
+</ul>
+<ul style="display:none" id="liste_complete">
 	<li[ class="(#ENV{accueil}|=={'1'}|?{'on','off'})"]>
-		<img src="plugins/eva/images/[(#ENV{accueil}|=={'1'}|?{'ledlightblue.png','ledblue.png'})]" onclick="location.href('/')" style="cursor:pointer" align="absmiddle" alt="Retour à l’accueil" />
+		<img src="plugins/eva/images/[(#ENV{accueil}|=={'1'}|?{'ledlightblue.png','ledblue.png'})]" align="absmiddle" alt="O" title="Retour à l’accueil" />
 		<a href="#URL_SITE_SPIP" class="[(#ENV{accueil}|=={'1'}|?{'on','off'})]">
 			<:accueil_site:>
 		</a>
@@ -25,9 +33,13 @@ $hierarchie = array();
 <?php /* Boucles */ ?>
 <BOUCLE_secteurs(RUBRIQUES){id_parent=0}{id_secteur!=1}{par num titre}>
 	<li class="liste_secteurs[ (#EXPOSE)]" id="#ID_RUBRIQUE">
-			<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/[(#EXPOSE{folder_blue_open.png,folder_blue.png})]"  name="puce_#ID_RUBRIQUE" alt="Déplier/Refermer la rubrique"  align="absmiddle" />
+<script language="JavaScript" type="text/javascript">
+	var position_initiale = document.getElementById(#ID_RUBRIQUE).style.position.left;
+</script>
+			<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/[(#EXPOSE{folder_blue_open.png,folder_blue.png})]" name="puce_#ID_RUBRIQUE" alt="Déplier/Refermer la rubrique" align="absmiddle" />
 		<script type="text/javascript">
 			liste_cache.push("#ID_RUBRIQUE");
+			liste_cache_secteurs.push("#ID_RUBRIQUE");
 		</script>
 			<a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|supprimer_tags)"] class="liens_secteur[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]">
 				[(#TITRE|supprimer_numero)] <?php /* Titres des secteurs */ ?>
@@ -47,8 +59,8 @@ $hierarchie = array();
 	<B_rubriques>
 		<ul classe="liste_rubriques_ul">
 		<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre}>
-    			<li class="liste_rubriques_li [ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" id="#ID_RUBRIQUE"> <?php /* B : ouvre A */ ?>
-					<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/[(#EXPOSE{folder_blue_open.png,folder_blue.png})]"  alt="Déplier/Refermer la rubrique" name="puce_#ID_RUBRIQUE" align="absmiddle" />
+  			<li class="liste_rubriques_li [ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" id="#ID_RUBRIQUE"> <?php /* B : ouvre A */ ?>
+					<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/[(#EXPOSE{folder_blue_open.png,folder_blue.png})]" alt="Déplier/Refermer la rubrique" name="puce_#ID_RUBRIQUE" align="absmiddle" />
 					<a class="liens_rubriques[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|supprimer_tags)"]>
 						<strong>[(#TITRE|supprimer_numero)]</strong>
 					</a> <?php /* Titres des rubriques */ ?>
@@ -90,17 +102,25 @@ echo "
 </div>
 <div class="sommaire[ (#ENV{tout}|=={'oui'}|?{'invisible',''})]" id="bloc_navigation">
 	<ul>
-		<li><img src="plugins/eva/images/[(#ENV{plan_mots}|=={'oui'}|?{'ledlightblue.png','ledblue.png'})]" onclick="location.href('/')" style="cursor:pointer" align="absmiddle" alt="Retour à l’accueil" />
+		<li><img src="plugins/eva/images/[(#ENV{plan_mots}|=={'oui'}|?{'ledlightblue.png','ledblue.png'})]" align="absmiddle" alt="O" title="Navigation par mots-clés" />
 			<a class="navigation[ (#ENV{plan_mots}|=={'oui'}|?{'on', ''})]" href="?page=plan-mots" title="Navigation par mots-clés">
 				<:mots_clefs:>
 			</a>
 		</li>
 	</ul>
 	<ul>
-		<li><img src="plugins/eva/images/[(#ENV{tout}|=={'oui'}|?{'ledlightblue.png','ledblue.png'})]" onclick="location.href('/')" style="cursor:pointer" align="absmiddle" alt="Retour à l’accueil" />
+		<li><img src="plugins/eva/images/[(#ENV{tout}|=={'oui'}|?{'ledlightblue.png','ledblue.png'})]" align="absmiddle" alt="O" title="Plan du site" />
 			<a class="navigation[ (#ENV{tout}|=={'oui'}|?{'on', ''})]" href="?page=plan" title="Plan du site">
 				<:plan_site:>
 			</a>
+		</li>
+	</ul>
+	<ul>
+		<li><img src="plugins/eva/images/ledblue.png" title="Afficher les articles les plus consultés" alt="O" align="absmiddle" />
+			<a class="navigation" href="javascript:afficher_populaires()" title="Afficher les articles les plus consultés">
+				Articles populaires
+			</a>
+				<div class="populaires_menu" id="populaires_menu">[(#MODELE{total}{type=popularite}{accueil=1})]</div>
 		</li>
 	</ul>
 </div>
@@ -109,3 +129,11 @@ echo "
 	<div class="center">#FORMULAIRE_RECHERCHE</div>
 </div>
 <div class="clear"></div>
+
+<script language="JavaScript" type="text/javascript">
+//setTimeout("troo()", "10000")
+//function troo(){
+		document.getElementById("liste_complete").style.display="block";
+		document.getElementById("en_cours").style.display="none";
+//}
+</script>
