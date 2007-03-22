@@ -13,6 +13,7 @@ ___
 id_categorie
 titre
 descriptif
+texte
 logo
 id_parent
 id_secteur
@@ -22,6 +23,7 @@ lang_choisie
 etat
 date
 date_modif
+date_redac
 
 * boutique_produits *
 *********************
@@ -31,7 +33,9 @@ id_produit
 token => si vide à la création, en mettre un aléatoire
 titre
 soustitre
+descriptif
 texte
+logo
 url_site
 nom_site
 id_categorie
