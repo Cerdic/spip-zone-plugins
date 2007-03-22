@@ -1,0 +1,141 @@
+-------------------------------------------
+- Organisation des table de Spip-Boutique -
+-------------------------------------------
+C'est dorénavant ici que tout ce fera au point de vue des organisations des tables.
+
+Une gamme de produit est un ensemble de produit qui se resemble. 
+ex: Pentium4 2.5Ghz, Pentium4 2.6Ghz, Pentium4 2.7Ghz etc...
+
+* boutique_categories *
+***********************
+Table qui contient toute les catégories de produit.
+___
+id_categorie
+titre
+descriptif
+logo
+id_parent
+id_secteur
+id_mot
+lang
+lang_choisie
+etat
+date
+date_modif
+
+* boutique_produits *
+*********************
+Table qui contient tous les produits
+___
+id_produit
+token
+titre
+soustitre
+texte
+url_site
+nom_site
+id_categorie
+id_mot
+id_parent
+id_secteur
+prix_achat
+prix_vente
+tva
+lang
+lang_choisie
+etat
+date
+date_modif
+
+* boutique_ristourne *
+**********************
+Table qui contient toutes les ristourne, promotion, remises etc... de la plateforme.
+___
+id_ristourne
+cible => enum client, catégorie, gamme, produit
+type => pourcent,brut
+id_cible => id_client ou id_categorie ou id_produit du profuit "père" d'une gamme ou id_produit.
+cummulable => oui, non
+priorite => en %
+
+
+* boutique_cadis *
+******************
+Table qui contient les cadis
+___
+id_cadi
+etat
+date
+date_modif
+id_client
+id_cookie
+id_produit
+quantitee
+token
+token_client
+
+* boutique_clients *
+********************
+Table qui contient les infos des clients. Il faut s'attendre à gérer différement cela
+car les auteurs spip de base vont bientot pouvoir être extensible.
+___
+id_client
+id_auteur => si éagle zero, le client n'est pas lier à un auteur spip.
+nom
+prenom
+adresse
+email => si lier à un auteur spip, mise à vide.
+telephone
+gsm
+num_tva
+date_modif
+date
+token
+
+* boutique_votes_produits *
+***************************
+Table qui stoque les votes des utilisateurs.
+___
+id_vote
+id_produit 
+votes_1
+votes_2
+votes_3
+votes_4
+votes_5
+votes_6
+votes_7
+votes_8
+votes_9
+votes_0
+
+* boutique_forums *
+*******************
+Table qui stoque les messages par rapport à un produit.
+___
+id_forum
+id_produit
+titre
+message
+nom
+email
+etat
+date
+date_modif
+nom
+email
+
+* boutique_auteurs_produits *
+*****************************
+Table qui relie les produits à leur(s) auteur(s)
+___
+id_produit
+id_auteur
+
+* boutique_admins_categories *
+******************************
+Table qui relie les catégories à leur(s) auteur(s).
+Un redacteur pourrait donc administrer une catégorie. A discuter ...
+___
+id_categorie
+id_auteur
