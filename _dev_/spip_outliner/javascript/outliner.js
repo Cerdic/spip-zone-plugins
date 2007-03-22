@@ -9,7 +9,7 @@ function init_events(){
 	/*$('tr.row').click(function(){	$(this).selectRow();	});*/
 	/*$('td').click(function(){	$(this).selectRow();	});*/
 	$('th').click(function(){	$(this).selectCol();	});
-	$('img.noeud').click(function(){	$(this).toggleLine();	});
+	$('div.toggle').click(function(){	$(this).toggleLine();	});
 	update_toolbar_icones();
 }
 function update_toolbar_icones(){
@@ -68,20 +68,20 @@ jQuery.fn.toggleLine = function() {
 	cur = l = this.parents('tr.row');
 	niveau = l.attr('name'); //getLevel(this.parent().attr('class'));
 	expand=false;
-	if (this.attr('src')==img_noeud_plus) {	
+	if (this.is('.ferme')) {	
 		expand=true;
 	}
 	else {
-		this.attr('src',img_noeud_plus);
+		this.removeClass('ouvert').addClass('ferme');
 	}
 	next = l.next('tr.row');
 	if (expand){ 
 		while (next.size() && (n=next.attr('name')>niveau)){
-			cur.find('img.noeud').attr('src',img_noeud_moins);
+			cur.find('div.toggle').removeClass('ferme').addClass('ouvert');
 			cur = next.show();
 			next = next.next('tr.row');
 		}
-		cur.find('img.noeud').attr('src',img_noeud_plus);
+		cur.find('div.toggle').removeClass('ferme').addClass('ouvert');
 	}
 	else{
 		while (next.size() && (n=next.attr('name')>niveau)){
@@ -93,7 +93,7 @@ jQuery.fn.toggleLine = function() {
 }
 function filtre_niveau(niveau){
 	l=$('#');
-	for (i=1;i<niveau;i++)
+	for (i=0;i<niveau;i++)
 		l = l.add('tr.row[@name='+i+']:hidden');
 	l.show().find('img.noeud').attr('src',img_noeud_moins);
 	$('tr.row[@name='+niveau+']').show().find('img.noeud').attr('src',img_noeud_plus);
@@ -124,7 +124,7 @@ jQuery.fn.changeLevel = function(increment) {
 
 // fonctions de la toolbar
 function CollapseAll(){
-	filtre_niveau(1);
+	filtre_niveau(0);
 }
 function ExpandAll(){
 	filtre_niveau(10);
@@ -237,7 +237,7 @@ $.addGridControl = function(t,p) {
 
 
 			},
-			addXmlData: function(xml) {
+			addXmlData: function(xml) {/*
 				var tbody = $("tbody",this.table);
 				$("rows row",xml).each(
 					function() {
@@ -255,10 +255,10 @@ $.addGridControl = function(t,p) {
 					}
 				);
 				this.loading = false;
-				$("div.loading",this.hDiv).fadeOut("fast");
+				$("div.loading",this.hDiv).fadeOut("fast");*/
 			},
 			addJSONData: function(JSON) {
-				eval("var data = " + JSON);
+				/*eval("var data = " + JSON);
 				var tbody = $("tbody",this.table);
 				var row = ""
 				var cur = ""
@@ -272,16 +272,16 @@ $.addGridControl = function(t,p) {
 				}
 				tbody = null;
 				this.loading = false;
-				$("div.loading",this.hDiv).fadeOut("fast");
+				$("div.loading",this.hDiv).fadeOut("fast");*/
 			},
-			populate: function() {
+			populate: function() {/*
 				if (!this.loading) {
 					this.loading = true;
 					this.page++
 					$("div.loading",this.hDiv).fadeIn("fast");
 					//$.get("dyndata.php/page/"+this.page,function(xml) { grid.addXmlData(xml) });
 					$.get("dyndata.php/page/"+this.page+"/JSON",function(xml) { grid.addJSONData(xml) });
-				}
+				}*/
 			}
 		}
 		
@@ -305,7 +305,7 @@ $.addGridControl = function(t,p) {
 		}
 	)
 	count = 0;
-	$("tbody tr:first > td",t).each(
+	$("tbody:first tr:first > td",t).each(
 		function() {
 			var w = p.width[count]
 			$(this).css("width",w+"px");
@@ -325,19 +325,20 @@ $.addGridControl = function(t,p) {
 		.append(grid.hTable)
 	/*	.prepend('<div class="loading">loading</div>')			*/
 		.bind("selectstart", function () { return false; });
-	
-	$(t).mouseover(
+
+	$(t)
+	  /*.mouseover(
 			function(e) {
 				var td = (e.target || e.srcElement);
-				$(td).addClass("ghover").parents('tr').addClass("ghover");
+				$(td).addClass("ghover").parents('tr.row').addClass("ghover");
 			}
 		)
 		.mouseout(
 			function(e) {
 				var td = (e.target || e.srcElement);
-				$(td).removeClass("ghover").parents('tr').removeClass("ghover");
+				$(td).removeClass("ghover").parents('tr.row').removeClass("ghover");
 			}
-		)
+		)*/
 		.before(grid.hDiv)
 	
 	$(t).wrap("<div></div>");	
@@ -347,7 +348,8 @@ $.addGridControl = function(t,p) {
 	h = h - $(grid.bDiv).offset().top;
 	$(grid.bDiv)
 		.scroll(function (e) {grid.scroll()})
-		.css({ height: h+"px", padding: "0px", margin: "0px", overflow: "auto", width: (grid.width+16)+"px"})
+		.css({ height: h+"px",width: (grid.width+16)+"px"})
+		.addClass('outline_container');
 		//.append(t)
 	$(grid.hDiv).mousemove(function (e) {grid.dragMove(e.clientX);}).after(grid.bDiv)
 	
@@ -374,5 +376,5 @@ $.fn.grid = function(p) {
 
 $(document).ready(function(){
 	init_events();
-	$("table.outline").grid({width: [20,150,150,150]});
+	$("table.outline").grid({width: [30,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150]});
 });

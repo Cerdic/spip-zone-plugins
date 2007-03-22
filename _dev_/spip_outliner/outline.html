@@ -1,4 +1,4 @@
-#CACHE{0}
+#CACHE{3600}
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -14,6 +14,10 @@ var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
 var crayons_init_dynamique = true;
 //-->
 </script>
+<style type='text/css'><!--
+div.ouvert{background:url(#EVAL{_DIR_IMG_PACK}noeud_moins.gif) no-repeat top left;padding-left:15px;}
+div.ferme{background:url(#EVAL{_DIR_IMG_PACK}noeud_plus.gif) no-repeat top left;padding-left:15px;}
+//--></style>
 </head>
 
 <body class="outliner">
@@ -32,37 +36,24 @@ var crayons_init_dynamique = true;
 	<span class='#EDIT{titre}'>#TITRE</span>
 	</BOUCLE_titreh>
 	</th>
-	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ !IN (select_1,ligne_1)}{type !IN (separateur,textestatique)}{par rang}>
+	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ !IN (ligne_1)}{type !IN (separateur,textestatique)}{par rang}>
 	<th class='#CHAMP'><span class='#EDIT{titre}'>#TITRE</span></th>
 	</BOUCLE_head>
 </tr></thead>
 <tbody>
 #SET{prev,0}
-<BOUCLE_donnees(FORMS_DONNEES){id_form=#ENV{id_table}}{id_mot?}{par rang}{statut!=poubelle}>
+<BOUCLE_donnees(FORMS_DONNEES){id_form=#ENV{id_table}}{id_mot?}{par bgch}{statut!=poubelle}>
 #SET{lien_addrow,#URL_ACTION_AUTEUR{outline_add_row,#ID_FORM|concat{:#ID_DONNEE,:#GET{prev}},(#SELF|urlencode)}}
 #SET{lien_supprow,#URL_ACTION_AUTEUR{outline_supp_row,#ID_FORM:#ID_DONNEE,(#SELF|urlencode)}}
-#SET{prev,#ID_DONNEE}#SET{niveau,1}
-	<BOUCLE_niveau(FORMS_CHAMPS){id_form}{champ=select_1}>#SET{niveau,#LESVALEURS}</BOUCLE_niveau>
-	<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]' onclick='$(this).selectRow();' onmouseover='$(this).activeCrayons();' name='#GET{niveau}'>
-		<td>#ID_DONNEE</td>
-		<td class='ligne_1'>
-		<table><tr >
-		<td class='niveau'><div class='niveau niveau-#GET{niveau}'><img src='#EVAL{_DIR_IMG_PACK}noeud_moins.gif' width='16' height='16' class='noeud'/></div></td>
-		<BOUCLE_titre(FORMS_CHAMPS){id_form}{champ=ligne_1}>
-		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{','} </span></td>
-		</BOUCLE_titre>
-		</tr></table>
-		</td>
-		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{champ !IN (select_1,ligne_1)}>
-		<td class='#CHAMP'><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
-		</BOUCLE_body>
-	</tr>
-</BOUCLE_donnees>
-</tbody>
-</table>
+#SET{prev,#ID_DONNEE}
+<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]' onclick='$(this).selectRow();' onmouseover='$(this).activeCrayons();' name='#NIVEAU'>
+<td>#ID_DONNEE</td><td class='ligne_1'><div class='niveau niveau-#NIVEAU'><div class='toggle ouvert'>
+<BOUCLE_titre(FORMS_CHAMPS){id_form}{champ=ligne_1}><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{','}</span></BOUCLE_titre></div></div></td>
+<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{champ !IN (ligne_1)}><td class='#CHAMP'><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td></BOUCLE_body>
+</tr></BOUCLE_donnees>
+</tbody></table>
 </B_titreh>
 #MODELE{donnee,id_donnee=#EVAL{$_GET['id_donnee']} }
-
 #FORMULAIRE_ADMIN
 </div>
 </body>

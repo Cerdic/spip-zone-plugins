@@ -46,6 +46,12 @@
 <a href='[(#URL_PAGE{'','action=outline_add_row'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return AddItem(this);' title='<:outliner:ajouter_ligne:>' class='AddItem'>
 <img src='#CHEMIN{img_pack/AddItem.png}' width='64' height='64' alt='<:outliner:ajouter_ligne:>' />
 </a>
+<a href='[(#URL_PAGE{'','action=outline_add_child'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return AddItem(this);' title='<:outliner:ajouter_ligne:>' class='AddItem'>
+<img src='#CHEMIN{img_pack/AddChild.png}' width='64' height='64' alt='<:outliner:ajouter_enfant:>' />
+</a>
+<a href='[(#URL_PAGE{'','action=outline_add_aunt'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return AddItem(this);' title='<:outliner:ajouter_ligne:>' class='AddItem'>
+<img src='#CHEMIN{img_pack/AddAunt.png}' width='64' height='64' alt='<:outliner:ajouter_parent:>' />
+</a>
 <a href='[(#URL_PAGE{'','action=outline_supp_row'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return RemoveItem(this);' title='<:outliner:supprimer_ligne:>' class='RemoveItem inactif'>
 <img src='#CHEMIN{img_pack/RemoveItem.png}' width='64' height='64' alt='<:outliner:supprimer_ligne:>' />
 </a>

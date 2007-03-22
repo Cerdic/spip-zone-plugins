@@ -46,6 +46,27 @@ function opml2table($niveau,&$arbre,&$table,&$colonnes){
 		}
 }
 
+function opml2tree($id_form,$id_parent,&$arbre,&$trans){
+	$id_enfant = 0;
+	if(is_array($arbre) && count($arbre))
+		foreach($arbre as $tag=>$sousarbre){
+			list($tagname,$attributs) = spip_xml_decompose_tag($tag);
+			$c=array();
+			foreach($attributs as $col=>$v){
+				if (!isset($trans[$col]))
+					$trans[$col]=Forms_creer_champ($id_form,'texte',$col,array('public'=>'oui'));
+				$c[$trans[$col]] = $v;
+			}
+			var_dump($c);
+			list($id_enfant,$erreur) = $id_parent?Forms_arbre_inserer_donnee($id_form,$id_parent,'fils_cadet',$c):Forms_arbre_inserer_donnee($id_form,$id_enfant,'petit_frere',$c);
+			var_dump($erreur);
+			echo "<br/>";
+			if ($id_enfant)
+				foreach($sousarbre as $opmls)
+					opml2tree($id_form,$id_enfant,$opmls,$trans);
+		}
+}
+
 function inc_outline_importer($opml_arbre,$nom_fichier){
 	$titre = _L("Sans titre");
 	$descriptif = $nom_fichier;
@@ -55,18 +76,20 @@ function inc_outline_importer($opml_arbre,$nom_fichier){
 	}
 	$colonnes = array();
 	$table = array();
+	$trans=array('text'=>'ligne_1','_status'=>'_status');
 	if (spip_xml_match_nodes(",^body,i",$opml_arbre,$body_matched)){
+		include_spip('base/forms_api');
+		$f = find_in_path('base/Outliner.xml');
+		$id_form = Forms_creer_table($f,'outline',false,array('titre'=>$titre,'descriptif'=>$descriptif));
+		
 		foreach($body_matched as $bodys)
 			foreach($bodys as $body){
-				opml2table(1,$body,$table,$colonnes);
+				opml2tree($id_form,0,&$body,&$trans);
+				//opml2table(1,$body,$table,$colonnes);
 			}
 	}
-	
-	include_spip('base/forms_api');
-	$f = find_in_path('base/Outliner.xml');
-	$id_form = Forms_creer_table($f,'outline',false,array('titre'=>$titre,'descriptif'=>$descriptif));
-
-	$trans=array('text'=>'ligne_1','_status'=>'_status');
+	die();
+	/*$trans=array('text'=>'ligne_1','_status'=>'_status');
 	foreach(array_keys($colonnes) as $col){
 		if(!isset($trans[$col])){
 			$trans[$col]=Forms_creer_champ($id_form,'texte',$col,array('public'=>'oui'));
@@ -79,7 +102,7 @@ function inc_outline_importer($opml_arbre,$nom_fichier){
 		foreach($values as $col=>$v)
 			$c[$trans[$col]] = $v;
 		Forms_creer_donnee($id_form,$c);
-	}
+	}*/
 }
 
 ?>

@@ -115,17 +115,18 @@ border : none;
 }
 td.niveau{width:1px};
 
-div.niveau{text-align:right;width:15px};
-div.niveau-1{padding-left:5px;}
-div.niveau-2{padding-left:15px;}
-div.niveau-3{padding-left:25px;}
-div.niveau-4{padding-left:35px;}
-div.niveau-5{padding-left:45px;}
-div.niveau-6{padding-left:55px;}
-div.niveau-7{padding-left:65px;}
-div.niveau-8{padding-left:75px;}
-div.niveau-9{padding-left:85px;}
-
+div.niveau{width:100%;padding-left:05px;}
+div.niveau-0{padding-left:5px;}
+div.niveau-1{padding-left:15px;}
+div.niveau-2{padding-left:25px;}
+div.niveau-3{padding-left:35px;}
+div.niveau-4{padding-left:45px;}
+div.niveau-5{padding-left:55px;}
+div.niveau-6{padding-left:65px;}
+div.niveau-7{padding-left:75px;}
+div.niveau-8{padding-left:85px;}
+div.niveau-9{padding-left:95px;}
+div.niveau-10{padding-left:105px;}
 
 div.spip_form_champ textarea {width:100%}
 
@@ -159,4 +160,10 @@ table.outline th span.resize {
 	margin: -2px -1px -2px 0px;
 	height: 18px;
 	
+}
+div.outline_container {
+ padding: 0px;
+ margin: 0px;
+ overflow-x: hidden;
+ overflow-y: scroll;
 }
