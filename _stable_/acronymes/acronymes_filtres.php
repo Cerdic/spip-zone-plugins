@@ -123,7 +123,7 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 				$pattern="{([^\w@\.])(";
 				for ($i=0;$i<strlen($accro);$i++)
 					$pattern.=$accro{$i}."[\.]?";
-				$pattern.=")(?![\w@])}";
+				$pattern.=")(?=[\s.-])}";
 				$acro_patterns[$key] = $pattern;
 				$balise = $acro_balise[$key];
 				$acro_replacements[$key] = "\\1<$balise title='@A@C@R@O@$key@@'>\\2@</$balise>";
