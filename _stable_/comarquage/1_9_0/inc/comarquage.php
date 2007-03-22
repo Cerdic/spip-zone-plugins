@@ -10,9 +10,10 @@
  *
  */
 
-
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_COMARQUAGE',(_DIR_PLUGINS.end($p)).'/');
+if (!defined('_DIR_PLUGIN_COMARQUAGE')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+	define('_DIR_PLUGIN_COMARQUAGE',(_DIR_PLUGINS.end($p)).'/');
+}
 
 define('_DIR_PLUGIN_COMARQUAGE_IMAGES',_DIR_PLUGIN_COMARQUAGE."images");
 // atention, ces 2 constantes ne sont pas utilisees partout

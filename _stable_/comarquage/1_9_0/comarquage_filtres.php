@@ -62,8 +62,8 @@ function & comarquage_parametres($defaut,&$urlbase) {
 
 
 function comarquage_post_propre($texte){
-	
-	$pattern="<[\s]*comarquage[\s]*([^>]*)>";
+	if (strpos($texte,'<comarquage')===FALSE) return $texte;
+	$pattern="<comarquage[\s]*([^>]*)>";
 	if ( 	(preg_match_all("{" . $pattern . "}is", $texte, $matches,PREG_SET_ORDER))
 			&& comarquage_processeur_disponible()) {
 		foreach($matches as $occurence){
