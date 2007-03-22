@@ -103,7 +103,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
           jQuery(me)
           .hide()
           .addClass('crayon-has')
-          .after('<div>'+c.$html+'</div>')
+          .after('<div class="crayon-html">'+c.$html+'</div>')
           .next()
             .activatecrayon(percent);
         }
