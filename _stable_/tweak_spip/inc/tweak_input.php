@@ -17,7 +17,7 @@ include_spip('inc/message_select');
 // affiche un petit input
 function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_self) {
 	$len=0;
-	if (preg_match(',^"(.*)"$,', trim($valeur), $matches2)) $valeur = str_replace('"','&quot;',$matches2[1]);
+	if (preg_match(',^"(.*)"$,', trim($valeur), $matches2)) $valeur = str_replace('\"','"',$matches2[1]);
 		else $len=strlen(strval($valeur));
 	
 	// est-ce des boutons radio ? forme : choixX(choixY=traductionY|choixX=traductionX|etc)
@@ -35,7 +35,7 @@ function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_s
 	} 
 	// eh non, donc juste une case input
 	else {
-		$ok_input = "$label<input name='HIDDENTWEAKVAR__$variable' value='$valeur' type='text' size='$len' />";
+		$ok_input = "$label<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' />";
 		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;-');
 	}
 

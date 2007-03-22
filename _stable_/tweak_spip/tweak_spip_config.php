@@ -30,7 +30,7 @@ add_tweak( array(
 	'id'	=> 'quota_cache',
 	// ici on demande a Tweak Spip une case input. La variable est : quota_cache
 	// par defaut, la valeur sera $GLOBALS["quota_cache"]
-	// le /s demande a Tweak Spip de traiter la variable comme un nombre.
+	// le /d demande a Tweak Spip de traiter la variable comme un nombre.
 	'code' 	=> '$GLOBALS["quota_cache"]=%%quota_cache/d/$GLOBALS["quota_cache"]%%;',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
@@ -45,6 +45,7 @@ add_tweak( array(
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 ));
+
 add_tweak( array(
 	'id'	=> 'cookie_prefix',
 	// ici on demande a Tweak Spip une case input. La variable est : dossier_squelettes
@@ -54,6 +55,7 @@ add_tweak( array(
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 ));
+
 add_tweak( array(
 	'id'	=> 'supprimer_numero',
 	'code' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";
@@ -85,6 +87,17 @@ add_tweak( array(
 ));
 
 add_tweak( array(
+	'id'	=> 'suite_introduction',
+	// ici on demande a Tweak Spip une case input. La variable est : suite_introduction
+	// par defaut, la valeur sera "nbsp;(...)"
+	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
+	'code' 	=> 'define(\'_INTRODUCTION_SUITE\', %%suite_introduction/s/"&nbsp;(...)"%%);',
+	'categorie'	=> 'squel',
+	'options'	=> 1,
+	'version-min'	=> 1.93,
+));
+
+add_tweak( array(
 	'id'	=> 'set_options',
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
@@ -111,6 +124,17 @@ add_tweak( array(
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
 	'code' 	=> '$GLOBALS["radio_filtrer_javascript2"]=$foo=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;
 $GLOBALS["filtrer_javascript"]=tweak_choix($foo);',
+	'categorie'	=> 'admin',
+	'options'	=> 1,
+	'version-min'	=> 1.92,
+));
+
+add_tweak( array(
+	'id'	=> 'forum_lgrmaxi',
+	// ici on demande a Tweak Spip une case input. La variable est : forum_lgrmaxi
+	// par defaut, la valeur sera 0 (aucune limite)
+	// le /d demande a Tweak Spip de traiter la variable comme un nombre.
+	'code' 	=> 'if($foo=intval(%%forum_lgrmaxi/d/0%%)) define(\'_FORUM_LONGUEUR_MAXI\', $foo);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 	'version-min'	=> 1.92,
@@ -249,6 +273,7 @@ add_tweak( array(
 ));
 
 // Idées d'ajouts :
+// http://archives.rezo.net/spip-core.mbox/
 // http://www.spip-contrib.net/Citations
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
 // http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles

@@ -158,7 +158,9 @@ function tweak_parse_code($code) {
 					elseif($cmd=='s') $rempl = 'strval('.$rempl.')';
 				eval('$rempl='.$rempl.';');
 			}
+		// si on ne veut pas de nombre, on met des guillemets !
 		if($cmd!='d' && $rempl[0]!='"') $rempl = '"'.str_replace('"','\"',$rempl).'"';
+		// placement de la variable
 		$code = str_replace($matches[0], $rempl, $code);
 		// on conserve le resultat dans $metas_vars
 		$metas_vars[$matches[1]] = $rempl;
@@ -191,13 +193,14 @@ function tweak_parse_description($tweak, $tweak_input) {
 	$tweaks[$tweak]['description'] = "<div id='tweak_input-$index'>$descrip</div>";
 }
 
-// decommenter pour debug...
+// si le tweak 'log_tweaks' est activé, on logue pour Tweak-Spip
 function tweak_log($s) { 
  if($GLOBALS["log_tweaks"] && strlen($s)) spip_log('TWEAKS. '.$s);
 }
 
 // obtenir la valeur d'un choix radio
-// forme : choixX(choixY=traductionY|choixX=traductionX|etc)
+// forme de $s : choixX(choixY=traductionY|choixX=traductionX|etc)
+// resultat : choixX
 function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
 
 // lance la fonction d'installation de chaque tweak actif, si elle existe.
@@ -261,8 +264,8 @@ tweak_log(" -- foreach(\$tweaks) : tweak_parse_code, tweak_parse_description... 
 		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
 		// Si Spip est trop ancien ou trop recent...
-		if ((isset($tweak['version-min']) && $GLOBALS['spip_version_code']<$tweak['version-min']) 
-			|| (isset($tweak['version-max']) && $GLOBALS['spip_version_code']>$tweak['version-max']))
+		if ((isset($tweak['version-min']) && $GLOBALS['spip_version']<$tweak['version-min']) 
+			|| (isset($tweak['version-max']) && $GLOBALS['spip_version']>$tweak['version-max']))
 				$tweaks[$i]['actif'] = 0;
 		// au cas ou des variables sont presentes dans le code
 		$tweaks[$i]['basic'] = $i*10; $tweaks[$i]['nb_variables'] = 0;

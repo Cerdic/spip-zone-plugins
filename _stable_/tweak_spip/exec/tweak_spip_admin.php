@@ -245,8 +245,8 @@ function ligne_tweak($tweak, &$js){
 	static $id_input=0;
 	$inc = $tweak_id = $tweak['id'];
 	$actif = $tweak['actif'];
-	$erreur_version = (isset($tweak['version-min']) && $GLOBALS['spip_version_code']<$tweak['version-min'])
-		|| (isset($tweak['version-max']) && $GLOBALS['spip_version_code']>$tweak['version-max']);
+	$erreur_version = (isset($tweak['version-min']) && $GLOBALS['spip_version']<$tweak['version-min'])
+		|| (isset($tweak['version-max']) && $GLOBALS['spip_version']>$tweak['version-max']);
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('tweak:'.($actif?'':'in').'actif');
 	$nb_var = intval($tweak['nb_variables']);
