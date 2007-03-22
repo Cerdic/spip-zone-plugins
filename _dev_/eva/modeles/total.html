@@ -24,9 +24,7 @@
 </B_TOTAL_SITES>
 
 <B_TOTAL_ARTICLES_POPULAIRES>
-[(#ENV{type}|=={"popularite"}|?{<ul style="list-style-type:square;">,''})]
 <BOUCLE_TOTAL_ARTICLES_POPULAIRES(ARTICLES){id_secteur != 1}{par popularite}{inverse}{0,10}>
-[(#ENV{type}|=={"popularite"}|?{<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>, ''})]
+[(#ENV{type}|=={"popularite"}|?{<a title=["(#VISITES) visites, #POPULARITE_ABSOLUE fois par jour en moyenne (indice de popularité&nbsp;#POPULARITE%)"] class="populaires" href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a>, ''})]
 </BOUCLE_TOTAL_ARTICLES_POPULAIRES>
-[(#ENV{type}|=={"popularite"}|?{</ul>,''})]
 </B_TOTAL_ARTICLES_POPULAIRES>
