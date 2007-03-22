@@ -23,19 +23,20 @@ A. Observer le planning de travail. Pour le modifier, proposez-nous vos idées !
           
 B. Obligation de commenter les commits
 
-		Si vous envoyez des modifications, il faut toujours les commenter
-		de façon "descriptive" et "complète" avec l'option -m ou -F du
-		commit SVN.
+	Si vous envoyez des modifications, il faut toujours les commenter
+	de façon "descriptive" et "complète" avec l'option -m ou -F du
+	commit SVN.
 		
 C.  Modification du code
 
     Cette version peut évoluer. Si vous avez envie de vous
     retrousser les manches, n'hésitez pas. 
-	Chaque jeu doit être codé dans un fichier séparé du genre inc/monjeu.php 
-	et une signature doit permettre de le retrouver.
-	Voir la fonction jeux($chaine) dans jeux_pipelines.php.
-	La syntaxe entre les balises <jeux> et </jeux> doit rester unifiée et
-	respecter une certaine cohérence.
+
+    Chaque jeu doit être codé dans un fichier séparé du genre inc/monjeu.php 
+    et une signature doit permettre de le retrouver.
+    Voir la fonction jeux($chaine) dans jeux_pipelines.php.
+    La syntaxe entre les balises <jeux> et </jeux> doit rester unifiée et
+    respecter une certaine cohérence.
 
     Tout le monde à le droit de faire des modifications.
 	
@@ -56,12 +57,11 @@ C.  Modification du code
   
 D. Clarté du code.
 
-		Il n'y a actuellement pas de règles précises d'écriture correct du
-		code. Il faut juste garder du code indenter (i.e. indenter chaque
-		fermeture sur une nouvelle ligne pour les gros blocs), en général,
-		suivre la façon dont c'est fait dans les fichiers de bases.
-		
-		Il faut toujours mettre une chaîne de documentation quand c'est
-		possible et quand on le peut documenter le processus/l'algorithme que
-		l'on implémente.
+	Il n'y a actuellement pas de règles précises d'écriture correct du
+	code. Il faut juste garder du code indenté (i.e. indenter chaque
+	fermeture sur une nouvelle ligne pour les gros blocs), en général,
+	suivre la façon dont c'est fait dans les fichiers de bases.
 
+	Il faut toujours mettre une chaîne de documentation quand c'est
+	possible et quand on le peut documenter le processus/l'algorithme que
+	l'on implémente.
