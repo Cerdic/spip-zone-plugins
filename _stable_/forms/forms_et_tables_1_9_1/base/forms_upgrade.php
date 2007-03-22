@@ -235,8 +235,9 @@
 		}
 		if ($current_version<0.28){
 			spip_query("ALTER TABLE spip_forms_donnees ADD bgch bigint(21) NOT NULL AFTER rang");
-			spip_query("ALTER TABLE spip_forms_donnees ADD bdte bigint(21) NOT NULL AFTER bdte");
+			spip_query("ALTER TABLE spip_forms_donnees ADD bdte bigint(21) NOT NULL AFTER bgch");
 			spip_query("ALTER TABLE spip_forms_donnees ADD niveau bigint(21) DEFAULT '0' NOT NULL AFTER bdte");
+			echo "forms update @ 0.28<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.28,'non');
 		}
 		ecrire_metas();

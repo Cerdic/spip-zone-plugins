@@ -126,28 +126,33 @@ function Forms_supprimer_donnee($id_form,$id_donnee){
  * position : la reltion avec le parent
  *   FA
  */
-function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_aine",$c=NULL){
+function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$c=NULL){
 	if (!$id_parent>0){
-		if ($res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." LIMIT 0,1")
+		if ($res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut!='poubelle' LIMIT 0,1")
 		  AND spip_num_rows($res)==0){
-		  // pas d'elements existants, on ne peut inserer un frere
-			if ($position=='fils_aine' OR $position=='fils_cadet')
+		  // pas d'elements existants, c'est la racine, on l'insere toujours
+			if ($position=='fils_aine' OR $position=='fils_cadet'){
+				spip_log("Insertion impossible dans un arbre pour un fils sans pere dans table $id_form");
 				return array(0,_L("Insertion impossible dans un arbre pour un fils sans pere dans table $id_form"));
+			}
 			// premire insertion
 				return Forms_creer_donnee($id_form,$c,array('niveau'=>0,'bgch'=>1,'bdte'=>2));
 		}
 		else {
 			// Insertion d'un collatŽral : il faut preciser le 'parent' !
+			spip_log("Insertion impossible dans un arbre pour un collatŽral sans precision du parent dans table $id_form");
 			return array(0,_L("Insertion impossible dans un arbre pour un collatŽral sans precision du parent dans table $id_form"));
 		}
 	}
 	// Le parent existe toujours ?
-	$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND id_donnee="._q($id_parent));
-	if (!($rowp = spip_fetch_array($res)))
+	$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND id_donnee="._q($id_parent)." AND statut!='poubelle'");
+	if (!($rowp = spip_fetch_array($res))){
+		spip_log("Insertion impossible, le parent $id_parent n'existe plus dans table $id_form");
 		return array(0,_L("Insertion impossible, le parent $id_parent n'existe plus dans table $id_form"));
+	}
 	
 	// insertion d'un pere
-	if ($position = 'pere'){
+	if ($position == 'pere'){
 		if (
 		  // Decalage de l'ensemble colateral droit
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bdte'])." AND bgch<="._q($rowp['bdte']))
@@ -156,10 +161,10 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_aine",$c
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+1,bdte=bdte+1,niveau=niveau+1 WHERE id_form="._q($id_form)." AND bgch>="._q($rowp['bgch'])." AND bdte<="._q($rowp['bdte']))
 		)
 			// Insertion du nouveau pere
-			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bdte']));
+			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bdte']+2));
 	}
 	// Insertion d'un grand frere
-	elseif ($position = 'grand_frere'){
+	elseif ($position == 'grand_frere'){
 		if (
 		  // Decalage de l'ensemble colateral droit
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bgch'])." AND bgch<"._q($rowp['bgch']))
@@ -168,7 +173,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_aine",$c
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bgch'],'bdte'=>$rowp['bgch']+1));
 	}
 	// Insertion d'un petit frere
-	elseif ($position = 'petit_frere'){
+	elseif ($position == 'petit_frere'){
 		if (
 		  // Decalage de l'ensemble colateral droit
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bdte'])." AND bgch<"._q($rowp['bdte']))
@@ -177,7 +182,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_aine",$c
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau'],'bgch'=>$rowp['bdte']+1,'bdte'=>$rowp['bdte']+2));
 	}
 	// Insertion d'un fils aine
-	elseif ($position = 'fils_aine'){
+	elseif ($position == 'fils_aine'){
 		if (
 		  // Decalage de l'ensemble colateral droit
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bgch'])." AND bgch<="._q($rowp['bgch']))
@@ -186,7 +191,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_aine",$c
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau']+1,'bgch'=>$rowp['bgch']+1,'bdte'=>$rowp['bgch']+2));
 	}
 	// Insertion d'un fils aine
-	elseif ($position = 'fils_cadet'){
+	elseif ($position == 'fils_cadet'){
 		if (
 		  // Decalage de l'ensemble colateral droit
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>="._q($rowp['bdte'])." AND bgch<="._q($rowp['bdte']))
@@ -194,6 +199,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_aine",$c
 		  )
 			return Forms_creer_donnee($id_form,$c,array('niveau'=>$rowp['niveau']+1,'bgch'=>$rowp['bdte'],'bdte'=>$rowp['bdte']+1));
 	}
+	spip_log("Operation inconnue insertion en position $position dans table $id_form");
 	return array(0,_L("Operation inconnue insertion en position $position dans table $id_form"));
 }
 function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
