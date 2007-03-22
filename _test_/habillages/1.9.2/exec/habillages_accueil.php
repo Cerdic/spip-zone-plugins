@@ -239,17 +239,6 @@ EOF;
 	
 	echo generer_url_post_ecrire("habillages_accueil");
 	debut_boite_info();
-	echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
-	
-	echo "<tr><td colspan='2' style='background-color:$couleur_foncee' class='hab_titre'>";
-	echo _T('habillages:manager_plugin');
-	echo "</td></tr>";
-	
-	echo "<tr><td colspan='2' class=''>";
-	echo _T('habillages:intro_select_gestionnaire')."<br /><br />";
-	echo "</td></tr>";
-	
-	echo "</table>";
 	
 	echo "<table border='0' cellpadding='0' cellspacing='0' id='subtab' align='center'>";
 		
@@ -261,9 +250,9 @@ EOF;
 	
 	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
 	
-	echo "<tr><td style='background-color:$couleur_claire' id='hab_input' class='hab_stitre'>";
+	echo "<tr><td style='background-color:$couleur_foncee' id='hab_input' class='hab_titre'>";
 	echo "<input type='checkbox' name='".$gestion_icones."' value='".$gestion_icones."'$checked_icones></td>";
-	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo "<td style='background-color:$couleur_foncee' id='hab_inputxt' class='hab_titre'>";
 	echo _T('habillages:icones_base_acc');
 	echo "</td></tr>";
 	
