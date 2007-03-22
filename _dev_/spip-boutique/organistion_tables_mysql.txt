@@ -28,7 +28,7 @@ date_modif
 Table qui contient tous les produits
 ___
 id_produit
-token
+token => si vide à la création, en mettre un aléatoire
 titre
 soustitre
 texte
@@ -50,18 +50,22 @@ date_modif
 * boutique_ristourne *
 **********************
 Table qui contient toutes les ristourne, promotion, remises etc... de la plateforme.
+Si on veut faire une ristourne sur plusieur objet (gamme et catégorie par ex.),
+création de plusieurs entrées dans la table avec les même id_parent égale à la première entrée.
 ___
 id_ristourne
+id_parent
 cible => enum client, catégorie, gamme, produit
 type => pourcent,brut
 id_cible => id_client ou id_categorie ou id_produit du profuit "père" d'une gamme ou id_produit.
 cummulable => oui, non
-priorite => en %
+priorite => en % (une ristourne de priorité de 70 est prise en compte et celle de 50 est ignorée lors de "chevauchement" de ristourne non cumulable.)
 
 
 * boutique_cadis *
 ******************
 Table qui contient les cadis
+!!! => organisation à revoir ...
 ___
 id_cadi
 etat
