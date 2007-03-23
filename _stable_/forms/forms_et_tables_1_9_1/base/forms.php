@@ -202,8 +202,11 @@ global $tables_jointures;
 $tables_jointures['spip_articles'][] = 'forms_articles';
 $tables_jointures['spip_forms'][] = 'forms_articles';
 $tables_jointures['spip_articles'][] = 'forms_donnees_articles';
+$tables_jointures['spip_rubriques'][] = 'forms_donnees_rubriques';
 $tables_jointures['spip_forms_donnees'][] = 'forms_donnees_articles';
+$tables_jointures['spip_forms_donnees'][] = 'forms_donnees_rubriques';
 $tables_jointures['spip_forms_donnees'][] = 'documents_donnees';
+$tables_jointures['spip_forms_donnees'][] = 'forms';
 $tables_jointures['spip_documents'][] = 'documents_donnees';
 
 global $table_des_tables;
@@ -214,6 +217,10 @@ $table_des_tables['forms_donnees']='forms_donnees';
 $table_des_tables['forms_donnees_champs']='forms_donnees_champs';
 $table_des_tables['forms_articles']='forms_articles';
 $table_des_tables['forms_donnees_articles']='forms_donnees_articles';
+$table_des_tables['forms_donnees_rubriques']='forms_donnees_rubriques';
 $table_des_tables['documents_donnees']='documents_donnees';
+
+global  $exceptions_des_jointures;
+$exceptions_des_jointures['type_form'] = array('spip_forms', 'type_form');
 
 ?>
