@@ -9,8 +9,6 @@
 <script type='text/javascript' src='#CHEMIN{javascript/dimensions.js}'></script>
 <script type='text/javascript' src='#CHEMIN{javascript/outliner.js}'></script>
 <script type='text/javascript'><!--
-var img_noeud_plus='#EVAL{_DIR_IMG_PACK}noeud_plus.gif';
-var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
 var crayons_init_dynamique = true;
 //-->
 </script>
@@ -22,39 +20,7 @@ div.ferme{background:url(#EVAL{_DIR_IMG_PACK}noeud_plus.gif) no-repeat top left;
 
 <body class="outliner">
 [(#INCLUDE{fond=outline_toolbar}{id_table=#ENV{id_table}})]
-<div id="outline">
-<B_titreh>
-<table class="outline donnees" id='donnees-#ENV{id_table}'>
-<BOUCLE_caption(FORMS){id_form=#ENV{id_table}}>
-<caption onmouseover='$(this).activeCrayons();'><div class='#EDIT{titre} titre'>#TITRE</div>
-<div class='#EDIT{descriptif} descrptif'>#DESCRIPTIF</div>
-</caption></BOUCLE_caption>
-<thead><tr class='row_first'>
-	<th>id</th>
-	<th class='ligne_1'>
-	<BOUCLE_titreh(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ=ligne_1}>
-	<span class='#EDIT{titre}'>#TITRE</span>
-	</BOUCLE_titreh>
-	</th>
-	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ !IN (ligne_1)}{type !IN (separateur,textestatique)}{par rang}>
-	<th class='#CHAMP'><span class='#EDIT{titre}'>#TITRE</span></th>
-	</BOUCLE_head>
-</tr></thead>
-<tbody>
-#SET{prev,0}
-<BOUCLE_donnees(FORMS_DONNEES){id_form=#ENV{id_table}}{id_mot?}{par bgch}{statut!=poubelle}>
-#SET{lien_addrow,#URL_ACTION_AUTEUR{outline_add_row,#ID_FORM|concat{:#ID_DONNEE,:#GET{prev}},(#SELF|urlencode)}}
-#SET{lien_supprow,#URL_ACTION_AUTEUR{outline_supp_row,#ID_FORM:#ID_DONNEE,(#SELF|urlencode)}}
-#SET{prev,#ID_DONNEE}
-<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]' onclick='$(this).selectRow();' onmouseover='$(this).activeCrayons();' name='#NIVEAU'>
-<td>#ID_DONNEE</td><td class='ligne_1'><div class='niveau niveau-#NIVEAU'><div class='toggle ouvert'>
-<BOUCLE_titre(FORMS_CHAMPS){id_form}{champ=ligne_1}><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{','}</span></BOUCLE_titre></div></div></td>
-<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{champ !IN (ligne_1)}><td class='#CHAMP'><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td></BOUCLE_body>
-</tr></BOUCLE_donnees>
-</tbody></table>
-</B_titreh>
-#MODELE{donnee,id_donnee=#EVAL{$_GET['id_donnee']} }
+<INCLURE{fond=outline_table}{id_table}>
 #FORMULAIRE_ADMIN
-</div>
 </body>
 </html>

@@ -1,0 +1,25 @@
+<div id="outline">
+<B_titreh>
+<table class="outline donnees" id='donnees-#ENV{id_table}'>
+[(#ENV{caption,oui}|=={non}|?{'',' '})[(#INCLURE{outline_caption}{id_table})]]
+<thead><tr class='row_first'>
+	<th>id</th>
+	<th class='ligne_1'>
+	<BOUCLE_titreh(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ=ligne_1}>
+	<span class='#EDIT{titre}'>#TITRE</span>
+	</BOUCLE_titreh>
+	</th>
+	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ !IN (ligne_1)}{type !IN (separateur,textestatique)}{par rang}>
+	<th class='#CHAMP'><span class='#EDIT{titre}'>#TITRE</span></th>
+	</BOUCLE_head>
+</tr></thead>
+<tbody>
+<BOUCLE_donnees(FORMS_DONNEES){id_form=#ENV{id_table}}{id_donnee?}{par bgch}{statut!=poubelle}>
+<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]' onclick='$(this).selectRow();' onmouseover='$(this).activeCrayons();' name='#NIVEAU'>
+<td>#ID_DONNEE</td><td class='ligne_1'><div class='niveau niveau-#NIVEAU'><div class='toggle ouvert'>
+<BOUCLE_titre(FORMS_CHAMPS){id_form}{champ=ligne_1}><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{','}</span></BOUCLE_titre></div></div></td>
+<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{champ !IN (ligne_1)}><td class='#CHAMP'><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td></BOUCLE_body>
+</tr></BOUCLE_donnees>
+</tbody></table>
+</B_titreh>
+</div>

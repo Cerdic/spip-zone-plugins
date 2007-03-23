@@ -34,18 +34,6 @@ function spip_xml_match_nodes($regexp,&$arbre,&$matches){
 	return (count($matches));
 }
 
-
-function opml2table($niveau,&$arbre,&$table,&$colonnes){
-	if(is_array($arbre) && count($arbre))
-		foreach($arbre as $tag=>$sousarbre){
-			list($tagname,$attributs) = spip_xml_decompose_tag($tag);
-			$colonnes = array_merge($colonnes,$attributs);
-			$table[] = array($niveau,$attributs);
-			foreach($sousarbre as $opmls)
-				opml2table($niveau+1,$opmls,$table,$colonnes);
-		}
-}
-
 function opml2tree($id_form,$id_parent,&$arbre,&$trans){
 	$id_enfant = 0;
 	if(is_array($arbre) && count($arbre))
@@ -82,23 +70,8 @@ function inc_outline_importer($opml_arbre,$nom_fichier){
 		foreach($body_matched as $bodys)
 			foreach($bodys as $body){
 				opml2tree($id_form,0,&$body,&$trans);
-				//opml2table(1,$body,$table,$colonnes);
 			}
 	}
-	/*$trans=array('text'=>'ligne_1','_status'=>'_status');
-	foreach(array_keys($colonnes) as $col){
-		if(!isset($trans[$col])){
-			$trans[$col]=Forms_creer_champ($id_form,'texte',$col,array('public'=>'oui'));
-		}
-	}
-
-	foreach($table as $ligne){
-		list($niveau,$values) = $ligne;
-		$c=array('select_1'=>"select_1_$niveau");
-		foreach($values as $col=>$v)
-			$c[$trans[$col]] = $v;
-		Forms_creer_donnee($id_form,$c);
-	}*/
 }
 
 ?>

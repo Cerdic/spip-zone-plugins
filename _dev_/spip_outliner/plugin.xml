@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Spip-Outliner</nom>
-	<icon></icon>
+	<icon>img_pack/outliner.png</icon>
 	<auteur>Cedric Morin [notre-ville.net->http://www.notre-ville.net]
 _ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
