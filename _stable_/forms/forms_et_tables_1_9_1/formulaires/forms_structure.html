@@ -22,7 +22,7 @@
 						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>]
 					[(#TITRE|strlen|?{':'})]
 				</span>
-				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" name="" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
+				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
 				[(#TYPE|=={date}|?{' ',''}) #SET{afficher,0} #SET{date-picker,1}
 					<input type='text' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
 						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli] date-picker'
