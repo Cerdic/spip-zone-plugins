@@ -46,7 +46,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		  ."', $champhelp)\"")
 		."><img src='"
 		.$img
-		."' style=\"height: 16px; width: 16px; background-position: center center;\" alt=\"$a\"/></a>";
+		."' style=\"height: 16px; width: 16px; background-position: center center;\" alt=\"$a\" /></a>";
 }
 
 // sert a construire les sousbarre
