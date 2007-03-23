@@ -113,36 +113,69 @@ EOF;
 
 	echo "<table border='0' cellpadding='0' cellspacing='3' id='subtab' align='center'>";
 	
-	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
-	echo "Squelettes déjà présents";
-	echo "</td></tr>";
+	# Si il existe au moins un des deux dossiers "dist" ou "squelettes", on affiche un rappel
+	# que la dist et/ou squelettes sont la et contiennent des donnees.
+	$presence_dist = find_in_path('dist');
+	$presence_squelettes = find_in_path('squelettes');
 	
-	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-	echo "Squelettes natifs SPIP (la Dist)</td>";
-	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-	echo "dist/";
-	echo "</td></tr>";
-	
-	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-	echo "Squelettes personnalises</td>";
-	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-	echo "squelettes/";
-	echo "</td></tr>";
+	if ($presence_dist || $presence_squelettes) {
+    	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+    	echo "Squelettes déjà présents";
+    	echo "</td></tr>";
+    	
+    	if ($presence_dist) {
+        	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+        	echo "Squelettes natifs SPIP (la Dist)</td>";
+        	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+        	echo $presence_dist;
+        	echo "</td></tr>";
+	    }
+	    
+	    if ($presence_squelettes) {
+        	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+        	echo "Squelettes personnalises</td>";
+        	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+        	echo $presence_squelettes;
+        	echo "</td></tr>";
+	    }
+	    
+    	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
+    }
 
-	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
+   	# Si il existe au moins un fichier theme.xml dans le repertoire plugin, on affiche la liste des
+   	# squelettes disponibles et on donne la possibilite de definir un repertoire personnalise pour 
+   	# chaque jeu de squelettes. On garde ainsi le squelette original intact fourni par le plugin mais 
+   	# on donne la possibilite de personnaliser ces squelettes.
+   	$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 
-	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
-	echo "Squelettes fournis avec habillages (indiquer le chemin du dossier)";
-	echo "</td></tr>";
-	
-	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-	echo "Lister squelettes</td>";
-	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-	echo "Champ pour entrer le chemin des squelettes persos";
-	echo "</td></tr>";
-
-	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
-
+        if ($fichier_theme) {
+        	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+        	echo "Squelettes fournis avec habillages (indiquer le chemin du dossier)";
+        	echo "</td></tr>";
+        	
+        	foreach ($fichier_theme as $fichier){
+    			lire_fichier($fichier, $texte);
+    			$arbre = parse_plugin_xml($texte);
+    			$arbre = $arbre['theme'][0];
+    			$nom_theme = applatit_arbre($arbre['nom']);
+    			$type_theme = trim(applatit_arbre($arbre['type']));
+    			$prefixe_theme = trim(applatit_arbre($arbre['prefixe']));
+    			
+    			$nom_dossier_theme = dirname ($fichier);
+    			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
+    			$chemin_plugin_complet = dirname($fichier_plugin_xml);
+    			$chemin_plugin_court = substr($chemin_plugin_complet, strlen(_DIR_PLUGINS));
+    			
+            	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+            	echo $nom_theme."</td>";
+            	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+            	echo "Champ pour entrer le chemin des squelettes persos";
+            	echo "</td></tr>";
+    	    }
+        
+        	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
+    }
+    
 	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
 	echo "Squelettes personnelles (indiquer le chemin du dossier)";
 	echo "</td></tr>";
