@@ -22,7 +22,28 @@ function exec_habillages_config() {
 		fin_page();
 		exit;
 	}
-
+	
+    if (_request('changer_gestion')=='oui'){
+	$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
+        foreach ($fichier_theme as $fichier){
+			lire_fichier($fichier, $texte);
+			$arbre = parse_plugin_xml($texte);
+			$arbre = $arbre['theme'][0];
+			$type_theme = trim(applatit_arbre($arbre['type']));
+			$prefixe_theme = trim(applatit_arbre($arbre['prefixe']));
+			
+			if ($type_theme == "squelettes") {
+		    $nom_input = "habillages_".$prefixe_theme."_reperso";
+		    $request_name = $prefixe_theme."_reperso";
+		    $chemin = _request($request_name);
+		    if ($chemin != "") {
+			ecrire_meta($nom_input, $chemin);
+			ecrire_metas;
+		    }
+		    }
+		}
+    }
+    
 	if (isset($_GET['surligne']))
 	$surligne = $_GET['surligne'];
 	global $couleur_claire;
@@ -157,8 +178,14 @@ EOF;
             	    echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_stitre'>";
                     echo $nom_theme."</td>";
                     echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_stitre'>";
-                    echo "<input type='text'>";
+                    echo "<input type='text' name='".$prefixe_theme."_reperso'>";
                     echo "</td></tr>";
+                    // Verifier l'existence du repertoire donne (et normalement ecrit) dans
+                    // habillages_nomsquel_reperso, et mettre mention de l'erreur a la place
+                    // du chemin du repertoire perso. Quelque chose comme :
+                    // find_in_path('$GLOBALS['meta']['habillages_nomskel_reperso']')
+                    // Si le code ci-dessus ne donne rien, avertir qu'une erreur a ete faite dans
+                    // la saisie du chemin de repertoire.
                     echo "<tr><td colspan='2' style='background-color:$couleur_claire' class='hab_fondclair'><u>Repertoire original</u> :<br />".$chemin_plugin_complet."<br /><u>Repertoire personnalise</u> :<br />Variable chemin repertoire</td></tr>";
     	        }
     	    }
