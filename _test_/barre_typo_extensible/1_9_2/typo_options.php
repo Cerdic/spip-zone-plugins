@@ -4,5 +4,6 @@ $GLOBALS['spip_pipeline']['BarreTypoEnrichie_toolbox']='';
 $GLOBALS['spip_pipeline']['BarreTypoEnrichie_tous']='';
 $GLOBALS['spip_pipeline']['BarreTypoEnrichie_avancees']='';
 $GLOBALS['spip_pipeline']['BarreTypoEnrichie_ecrire']='';
+$GLOBALS['spip_pipeline']['BarreTypoEnrichie_forum']='';
 $GLOBALS['barre_typo_pas_de_fausses_puces']=true;
 ?>
