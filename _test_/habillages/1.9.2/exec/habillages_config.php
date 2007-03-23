@@ -119,7 +119,7 @@ EOF;
 	$presence_squelettes = find_in_path('squelettes');
 	
 	if ($presence_dist || $presence_squelettes) {
-    	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+    	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_titre'>";
     	echo "Squelettes déjà présents";
     	echo "</td></tr>";
     	
@@ -147,13 +147,7 @@ EOF;
    	# chaque jeu de squelettes. On garde ainsi le squelette original intact fourni par le plugin mais 
    	# on donne la possibilite de personnaliser ces squelettes.
    	$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
-
-        if ($fichier_theme) {
-        	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
-        	echo "Squelettes fournis avec habillages (indiquer le chemin du dossier)";
-        	echo "</td></tr>";
-        	
-        	foreach ($fichier_theme as $fichier){
+            foreach ($fichier_theme as $fichier){
     			lire_fichier($fichier, $texte);
     			$arbre = parse_plugin_xml($texte);
     			$arbre = $arbre['theme'][0];
@@ -165,26 +159,23 @@ EOF;
     			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
     			$chemin_plugin_complet = dirname($fichier_plugin_xml);
     			$chemin_plugin_court = substr($chemin_plugin_complet, strlen(_DIR_PLUGINS));
-    			
-            	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-            	echo $nom_theme."</td>";
-            	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-            	echo "Champ pour entrer le chemin des squelettes persos";
-            	echo "</td></tr>";
+    		
+    			if ($type_theme == "squelettes"){
+            	    echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_stitre'>";
+                    echo $nom_theme."</td>";
+                    echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_stitre'>";
+                    echo "<input type='text'>";
+                    echo "</td></tr>";
+                    echo "<tr><td colspan='2' style='background-color:$couleur_claire' class='hab_fondclair'><u>Repertoire original</u> :<br />".$chemin_plugin_complet."<br /><u>Repertoire personnalise</u> :<br />Variable chemin repertoire</td></tr>";
+    	        }
     	    }
-        
+    	    
+        	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+        	echo "Squelettes fournis avec habillages (indiquer le chemin du dossier)";
+        	echo "</td></tr>";
+        	        
         	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
-    }
     
-	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
-	echo "Squelettes personnelles (indiquer le chemin du dossier)";
-	echo "</td></tr>";
-	
-	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-	echo "Lister squelettes</td>";
-	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-	echo "Champ pour entrer le chemin des squelettes persos";
-	echo "</td></tr>";
 
 	echo "</table>";
 	
