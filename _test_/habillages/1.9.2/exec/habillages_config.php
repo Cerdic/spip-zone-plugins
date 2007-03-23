@@ -96,19 +96,67 @@ EOF;
 	fin_boite_info();
 
 	debut_droite();
-
-	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_accueil-22.png");	
+    
+	echo generer_url_post_ecrire("habillages_config");
+	
+	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_config-22.png");	
 
 	global $couleur_foncee;
 	
- 	echo "<H1 class='hab_gros_titre'>"._T('habillages:tdb_titre')."</h1>";
-	echo "<div class='hab_intro'>"._T('habillages:accueil_general')."</div><br /><br />";
-	
-	
-	echo generer_url_post_ecrire("habillages_accueil");
+	debut_boite_info();
+	echo gros_titre(_T('habillages:tdb_titre'));
+	echo _T('habillages:accueil_general');
+	fin_boite_info();
+	echo "<br />";
+
 	debut_boite_info();
 
+	echo "<table border='0' cellpadding='0' cellspacing='3' id='subtab' align='center'>";
+	
+	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo "Squelettes déjà présents";
+	echo "</td></tr>";
+	
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+	echo "Squelettes natifs SPIP (la Dist)</td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+	echo "dist/";
+	echo "</td></tr>";
+	
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+	echo "Squelettes personnalises</td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+	echo "squelettes/";
+	echo "</td></tr>";
+
+	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
+
+	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo "Squelettes fournis avec habillages (indiquer le chemin du dossier)";
+	echo "</td></tr>";
+	
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+	echo "Lister squelettes</td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+	echo "Champ pour entrer le chemin des squelettes persos";
+	echo "</td></tr>";
+
+	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
+
+	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo "Squelettes personnelles (indiquer le chemin du dossier)";
+	echo "</td></tr>";
+	
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+	echo "Lister squelettes</td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
+	echo "Champ pour entrer le chemin des squelettes persos";
+	echo "</td></tr>";
+
+	echo "</table>";
+	
 	fin_boite_info();
+	echo "<br />";
 	
 	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
 	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";

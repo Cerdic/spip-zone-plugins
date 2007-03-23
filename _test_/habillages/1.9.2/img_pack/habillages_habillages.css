@@ -83,6 +83,10 @@ DIV {
 	text-align: right;
 }
 
+#hab_moitie {
+    width: 50%;
+}
+
 .cadre-padding{
 	background-image:url(fond.png);
 	background-repeat: repeat;
@@ -103,4 +107,10 @@ DIV {
 	background-repeat: repeat;
 	border: 1px outset;
 	height: 20px;
+}
+
+.hab_fondclair{
+   	background-image:url(clair.png);
+	background-repeat: repeat;
+
 }
