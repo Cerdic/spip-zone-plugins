@@ -152,7 +152,7 @@ if ($message_pile > 0){
 	// on prépare la version texte
 	if ($GLOBALS['spiplistes_charset_envoi'] <> 'utf-8') {
 		$page_ = charset2unicode($page_);
-		$nomsite = charset2unicode($texte);
+		$nomsite = charset2unicode($nomsite);
 		$texte = charset2unicode($texte);
 		$texte = str_replace("&"."#8217;", "'", $texte);
 		$texte = str_replace("&"."#8220;", "\"", $texte);
