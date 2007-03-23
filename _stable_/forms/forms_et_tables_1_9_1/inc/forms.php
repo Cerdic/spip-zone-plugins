@@ -154,7 +154,7 @@
 						  		$c[$champ][] = $choix;
 					}
 		 		}
-		 		$err = Forms_valide_champs_reponse_post($id_auteur, $c , $structure);
+		 		$err = Forms_valide_champs_reponse_post($id_auteur, $id_donnee, $c , $structure);
 		 		if (is_array($err) && count($err)) $erreur[$count_lignes] = $err;
 		 		else if (!$simu) {
 					if ($cle) {
@@ -414,6 +414,10 @@
 					$inserts[] = "("._q($id_donnee).","._q($champ).","._q($dest).")";
 				}
 			}
+			// Cas de la mise à jour pour laquelle on dispose déjà d'un fichier uploadé !
+			elseif ( ($val=Forms_valeurs($id_donnee,$id_form,$champ)) != NULL ) {
+				$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val[$champ]).")";
+			}
 		}
 		else if ($val) {
 			// Choix multiples : enregistrer chaque valeur separement
@@ -453,7 +457,7 @@
 		$structure = Forms_structure($id_form);
 		include_spip("inc/forms_type_champs");
 		
-		$erreur = Forms_valide_conformite_champs_reponse_post($id_form, $c, $structure);
+		$erreur = Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure);
 		if (!$erreur) {
 			$champs_mod = array();
 			foreach($structure as $champ=>$infos){
@@ -541,7 +545,7 @@
 		$mailconfirm = '';
 
 		include_spip("inc/forms_type_champs");
-		$erreur = Forms_valide_champs_reponse_post($id_form, $c);
+		$erreur = Forms_valide_champs_reponse_post($id_form, $id_donnee, $c);
 
 		// Si tout est bon, enregistrer la reponse
 		if (!$erreur) {
@@ -589,7 +593,8 @@
 				if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
 					spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
-					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
+					// Pourquoi ce Delete alors qu'il est effectué avant l'insertion des données ? => redondant + risque de perte de données
+					//spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
 					if ($rang==NULL) $rang = array('rang'=>Forms_rang_prochain($id_form));
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "

@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * � 2005,2006 - Distribue sous licence GNU/GPL
+ *  2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -81,7 +81,7 @@
 		return ($s = $noms[$type]) ? $s : $type;
 	}
 
-	function Forms_valide_champs_reponse_post($id_form, $c = NULL, $structure = NULL){
+	function Forms_valide_champs_reponse_post($id_form, $id_donnee, $c = NULL, $structure = NULL){
 		$erreur = array();
 		if (!$structure){
 			include_spip("inc/forms");
@@ -94,19 +94,21 @@
 			else
 				$val = _request($champ, $c);
 			if ($type == 'fichier') $val = $_FILES[$champ]['tmp_name'];
-			// verifier la presence des champs obligatoires
+			// verifier la presence des champs obligatoires	
 			if (($val===NULL || !strlen($val)) && ($infos['obligatoire'] == 'oui'))
-					$erreur[$champ] = _T("forms:champ_necessaire");
+				// Cas particulier de l'upload de fichier : on ne force pas à uploader à nouveau un fichier si celui-ci est existant
+				if (( ($type == 'fichier') && ($val==NULL) && (Forms_valeurs($id_donnee,$id_form,$champ)!=NULL) ));
+					else $erreur[$champ] = _T("forms:champ_necessaire");
 		}
 
 		$erreur = array_merge($erreur,
-			Forms_valide_conformite_champs_reponse_post($id_form, $c, $structure));
+			Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure));
 
 		return $erreur;
 	}
 
 
-	function Forms_valide_conformite_champs_reponse_post($id_form, $c = NULL, $structure = NULL){
+	function Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c = NULL, $structure = NULL){
 		$erreur = array();
 		if (!$structure){
 			include_spip("inc/forms");
@@ -144,7 +146,7 @@
 						}
 					}
 				}
-				if ($type == 'fichier') {
+				if ($type == 'fichier') {var_dump($_FILES[$champ]); exit;
 					if (!$taille = $_FILES[$champ]['size']) {
 						$erreur[$champ] = _T("forms:echec_upload");
 					}
