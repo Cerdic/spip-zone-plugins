@@ -1,7 +1,13 @@
-<BOUCLE_art(FORMS_DONNEES){type_form=outliner}{id_article}>
-[(#INCLURE{fond=outline_table}{id_table=id_form}{id_donnee})]
+<BOUCLE_art(FORMS_DONNEES){type_form=outline}{id_article}>
+<style><!--
+[(#INCLURE{outliner.css})]
+--></style>
+[(#INCLURE{fond=outline_table}{id_table=#ID_FORM}{id_donnee=#ID_DONNEE})]
 </BOUCLE_art>
-	<BOUCLE_rub(FORMS_DONNEES){type_form=outliner}{id_rubrique}>
-	[(#INCLURE{fond=outline_table}{id_table=id_form}{id_donnee})]
+	<BOUCLE_rub(FORMS_DONNEES){type_form=outline}{id_rubrique}>
+	<style><!--
+	[(#INCLURE{outliner.css})]
+	--></style>
+	[(#INCLURE{fond=outline_table}{id_table=#ID_FORM}{id_donnee=#ID_DONNEE})]
 	</BOUCLE_rub>
 <//B_art>
