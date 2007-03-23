@@ -119,27 +119,20 @@ EOF;
 	$presence_squelettes = find_in_path('squelettes');
 	
 	if ($presence_dist || $presence_squelettes) {
-    	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_titre'>";
-    	echo "Squelettes déjà présents";
+    	echo "<tr><td colspan='2' style='background-color:$couleur_foncee' id='hab_inputxt' class='hab_titre'>";
+    	echo "Squelettes deja presents";
     	echo "</td></tr>";
-    	
-    	if ($presence_dist) {
-        	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-        	echo "Squelettes natifs SPIP (la Dist)</td>";
-        	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-        	echo $presence_dist;
-        	echo "</td></tr>";
-	    }
-	    
-	    if ($presence_squelettes) {
-        	echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-        	echo "Squelettes personnalises</td>";
-        	echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_fondclair'>";
-        	echo $presence_squelettes;
-        	echo "</td></tr>";
-	    }
-	    
     	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
+
+	    echo "<tr><td style='background-color:$couleur_claire' id='hab_moitie' class='hab_stitre'>";
+        echo "Squelettes originaux (Dist)</td>";
+        echo "<td style='background-color:$couleur_claire' id='hab_moitie' class='hab_stitre'>";
+        echo "<input type='text'>";
+        echo "</td></tr>";
+        echo "<tr><td colspan='2' style='background-color:$couleur_claire' class='hab_fondclair'><u>Repertoire original</u> :<br />".$presence_dist;
+        if ($presence_squelettes){
+        "<br /><u>Repertoire personnalise</u> :<br />".$presence_squelettes."</td></tr>";
+        }
     }
 
    	# Si il existe au moins un fichier theme.xml dans le repertoire plugin, on affiche la liste des
@@ -170,13 +163,6 @@ EOF;
     	        }
     	    }
     	    
-        	echo "<tr><td colspan='2' style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
-        	echo "Squelettes fournis avec habillages (indiquer le chemin du dossier)";
-        	echo "</td></tr>";
-        	        
-        	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
-    
-
 	echo "</table>";
 	
 	fin_boite_info();
