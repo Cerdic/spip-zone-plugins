@@ -31,6 +31,7 @@ function controleurs_forms_donnee_dist($regs) {
 		'id_donnee' => $id,
 		'valeurs' => serialize($valeurs));
 	$html = $n->formulaire($contexte);
+	$html = liens_absolus($html);
 	$status = NULL;
 
 	return array($html, $status);
