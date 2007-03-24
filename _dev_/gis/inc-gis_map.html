@@ -9,7 +9,7 @@
     			map = new GMap2(document.getElementById("map"));
     			map.addControl(new GLargeMapControl());
     			map.addControl(new GMapTypeControl());
-    			map.setCenter(new GLatLng([(#ENV{lonxit,42.94})], [(#ENV{latit,-8.228})]), [(#ENV{zoom,7})], G_SATELLITE_MAP);
+    			map.setCenter(new GLatLng([(#ENV{latit,42.94})], [(#ENV{lonxit,-8.228})]), [(#ENV{zoom,7})], G_SATELLITE_MAP);
     			map.enableDoubleClickZoom();
     			map.enableContinuousZoom();
     			markerManager = new GMarkerManager(map);

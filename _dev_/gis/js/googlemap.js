@@ -54,7 +54,7 @@ function agregarMarcador (xmlItem, minZoom,  maxZoom) {
 	var html = getNodeText(xmlItem.childNodes[4]);
    	
 	//creamos un Gpoint para situar nel o marcador
-	var point = new GPoint(lat,lng);
+	var point = new GPoint(lng,lat);
 		
 	//creamos un icono para o marcador
 	var icono_categoria = new GIcon();

@@ -73,7 +73,6 @@ function gis_insertar_head($flux){
 					url: "../spip.php?page=cambiar_coordenadas",
 					data: "id_article="+articulo+"&lat="+document.forms.formulaire_coordenadas.lat.value+"&lonx="+document.forms.formulaire_coordenadas.lonx.value,
 					success: function() {
-						alert("ok");
 					}
 				});
 			}

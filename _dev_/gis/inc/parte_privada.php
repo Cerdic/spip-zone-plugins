@@ -25,7 +25,7 @@ function gis_cambiar_coord($id_article) {
 		if(isset($_POST['actualizar'])){
 			$glat = $_POST['lat'];
 			$glonx = $_POST['lonx'];
-			spip_query("UPDATE spip_gis SET lonx='".$glonx."', lat='".$glat."'  WHERE id_article = '" . $id_article."'");
+			spip_query("UPDATE spip_gis SET lat='".$glat."', lonx='".$glonx."'  WHERE id_article = '" . $id_article."'");
 		}
 		$mapa = "<div id='map' name='map' style='width: 470px; height: 100px; border:1px solid #000'></div>
 		<script type='text/javascript'>
@@ -33,7 +33,7 @@ function gis_cambiar_coord($id_article) {
 		if (GBrowserIsCompatible()) {
 		/* create the map*/
 			var map = new GMap2(document.getElementById('map'));
-			map.setCenter(new GLatLng(".$glonx.",".$glat."), 8, G_MAP_TYPE);
+			map.setCenter(new GLatLng(".$glat.",".$glonx."), 8, G_MAP_TYPE);
 			icono = new GIcon();
 			icono.image = \""._DIR_PLUGIN_GIS."img_pack/correxir.png\";
 			icono.shadow = \"http://www.escoitar.org/loudblog/custom/templates/berio/shadow.png\";
@@ -41,7 +41,7 @@ function gis_cambiar_coord($id_article) {
 			icono.shadowSize = new GSize(22, 20);
 			icono.iconAnchor = new GPoint(10, 34);
 			icono.infoWindowAnchor = new GPoint(5,1);
-			point = new GPoint(".$glat.",".$glonx.");
+			point = new GPoint(".$glonx.",".$glat.");
 			marker = new GMarker(point, icono);
 			map.addOverlay(marker);
 		} else {
@@ -50,8 +50,8 @@ function gis_cambiar_coord($id_article) {
 		/*]]>*/
 	</script>";
 	} else {
-		$glat = '-7.9321';
-		$glonx = '42.7631';
+		$glat = '42.7631';
+		$glonx = '-7.9321';
 		$mapa = "";
 		if(isset($_POST['actualizar'])){
 			$glat = $_POST['lat'];
@@ -63,7 +63,7 @@ function gis_cambiar_coord($id_article) {
 		if (GBrowserIsCompatible()) {
 		/* create the map*/
 			var map = new GMap2(document.getElementById('map'));
-			map.setCenter(new GLatLng(".$glonx.",".$glat."), 8, G_MAP_TYPE);
+			map.setCenter(new GLatLng(".$glat.",".$glonx."), 8, G_MAP_TYPE);
 			icono = new GIcon();
 			icono.image = \""._DIR_PLUGIN_GIS."img_pack/correxir.png\";
 			icono.shadow = \"http://www.escoitar.org/loudblog/custom/templates/berio/shadow.png\";
@@ -105,15 +105,15 @@ function gis_cambiar_coord($id_article) {
 			var formMap = new GMap2(document.getElementById('formMap'));
 			formMap.addControl(new GLargeMapControl());
 			formMap.addControl(new GMapTypeControl());
-			formMap.setCenter(new GLatLng(".$glonx.",".$glat."), 8, G_MAP_TYPE);
+			formMap.setCenter(new GLatLng(".$glat.",".$glonx."), 8, G_MAP_TYPE);
 			/* creamos el evento para crear nuevos marcadores*/
 			GEvent.addListener(formMap, 'click', function(overlay, point){
 				formMap.clearOverlays();
 				if (point) {
 					formMap.addOverlay(new GMarker(point));
 					formMap.panTo(point);
-					document.forms.formulaire_coordenadas.lat.value = point.x;
-					document.forms.formulaire_coordenadas.lonx.value = point.y;
+					document.forms.formulaire_coordenadas.lat.value = point.y;
+					document.forms.formulaire_coordenadas.lonx.value = point.x;
 				}
 			});
 		} else {
