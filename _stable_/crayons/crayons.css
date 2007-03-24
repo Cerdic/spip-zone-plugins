@@ -60,3 +60,7 @@ img.crayon-edit, img.crayon-crayon {
     top:-16px;
     /* fin hack */
 }
+
+/* Les crayons dans un tableau !*/
+td .crayon-icones span {margin-left:-20px;}
+td div.crayon-html {padding-bottom:10px;}
