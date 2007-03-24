@@ -164,6 +164,7 @@ table.outline th span.resize {
 div.outline_container {
  padding: 0px;
  margin: 0px;
+ overflow: scroll;
  overflow-x: hidden;
  overflow-y: scroll;
 }
