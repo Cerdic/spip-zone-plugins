@@ -16,7 +16,7 @@ define('_JEUX_DEBUT', '<jeux>');
 define('_JEUX_FIN', '</jeux>');
 define('_JEUX_POST', '@@JEUX_POST@@');
 define('_JEUX_HEAD1', "\n<!-- CSS & JS JEUX -->\n");
-define('_JEUX_HEAD2', "<!-- CSS & JS JEUX (AUTO) -->\n");
+define('_JEUX_HEAD2', "\n<!-- CSS & JS JEUX (AUTO) -->\n");
 
 
 // separateurs utilisables a l'interieur des balises ci-dessus

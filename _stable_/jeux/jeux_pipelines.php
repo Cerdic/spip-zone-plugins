@@ -94,7 +94,9 @@ function jeux_header_prive($flux){
 
 // pipeline insert_head
 function jeux_insert_head($flux){
-	return $flux . _JEUX_HEAD1 . jeux_stylesheet('jeux') . jeux_javascript('layer') . _JEUX_HEAD2;
+	return $flux 
+		//. _JEUX_HEAD1 . jeux_stylesheet('jeux') . jeux_javascript('layer') 
+		. _JEUX_HEAD2;
 }
 
 // pipeline affiche_gauche
@@ -107,14 +109,18 @@ document.getElementById('haut-page').childNodes[2].align='center';
 }
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
+// Recherche tous les <!-- JEUX-HEAD (...) --> et incorporation à la place de _JEUX_HEAD2
+// dans <head> des fichiers js et css necessaires.
 function jeux_affichage_final($flux) {
 	preg_match_all(",<!-- JEUX-HEAD-#[0-9]+ '([^>]*)' -->,", $flux, $matches, PREG_SET_ORDER);
+	if(!count($matches)) return $flux;
 	$liste = array();
 	foreach ($matches as $val) $liste = array_merge($liste, explode('||', $val[1]));
 	$liste = array_unique($liste);
-	$header = html_entity_decode(join("\n",$liste));
-	$flux = str_replace(_JEUX_HEAD2, _JEUX_HEAD2 . $header, $flux);
-	return $flux;
+	$header = _JEUX_HEAD2
+		. jeux_stylesheet('jeux') . jeux_javascript('layer')
+		. html_entity_decode(join("\n",$liste));
+	return str_replace(_JEUX_HEAD2, $header, $flux);
 }
 
 
