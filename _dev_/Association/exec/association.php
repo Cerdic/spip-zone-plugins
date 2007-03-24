@@ -15,14 +15,16 @@
 function exec_association() {
 global $connect_statut, $connect_toutes_rubriques;
 
-if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
-			echo _T('avis_non_acces_page');
-			fin_page();
-			exit;
-		}
-		
+if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) 
+	{
+		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+		echo _T('avis_non_acces_page');
+		fin_page();
+		exit;
+	}
+	
 asso_verifier_base();		
-			
+
 debut_page(_T('asso:association'), "naviguer", "association");
 
 $url_edit_adherent = generer_url_ecrire('edit_adherent');

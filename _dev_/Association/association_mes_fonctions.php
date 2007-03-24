@@ -93,14 +93,15 @@ $tables_principales['spip_asso_ventes']= array(
 
 $tables_principales['spip_asso_comptes']= array(
 'field' => array(
-						"id_compte" => "bigint(21) NOT NULL auto_increment",
-						"date" => "date default NULL",
-						"recette" => "float NOT NULL default '0'",
-						"depense" => "float NOT NULL default '0'",
+						"id_compte" 	=> "bigint(21) NOT NULL auto_increment",
+						"date" 		=> "date default NULL",
+						"recette" 		=> "float NOT NULL default '0'",
+						"depense"	=> "float NOT NULL default '0'",
 						"justification" => "text",
-						"imputation" => "text",
-						"journal" => "tinytext",
-						"id_journal" => "int(11) NOT NULL default '0'",
+						"imputation" 	=> "text",
+						"journal" 		=> "tinytext",
+						"id_journal" 	=> "int(11) NOT NULL default '0'",
+						"valide"		=> "text NOT NULL", 
 						),
 					
 'key' => array("PRIMARY KEY" => "id_compte")

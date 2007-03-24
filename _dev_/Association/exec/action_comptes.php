@@ -105,6 +105,62 @@ icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/l
 echo '</p>';
 }
 
+//---------------------------- 
+//VALIDATION PROVISOIRE COMPTE
+//---------------------------- 		
+if (isset($_POST['valide'])) {
+
+$url_retour = $_SERVER['HTTP_REFERER'];
+
+$valide_tab=(isset($_POST["valide"])) ? $_POST["valide"]:array();
+$count=count ($valide_tab);
+
+echo '<p>Vous vous appr&ecirc;tez &agrave; valider les op&eacute;rations  : <br>';
+echo '<table>';
+echo '<form action="'.$url_action_comptes.'"  method="post">';
+for ( $i=0 ; $i < $count ; $i++ )
+{	$id = $valide_tab[$i];
+	$query = spip_query("SELECT * FROM spip_asso_comptes where id_compte='$id'");
+	while($data = mysql_fetch_assoc($query)) 
+	{
+echo '<tr>';
+echo '<td><strong>'.association_datefr($data['date']).'</strong>';
+echo '<td><strong>'.$data['justification'].'</strong>';
+echo '<td>';
+echo '<input type=checkbox name="definitif[]" value="'.$id.'" checked>';
+	}	
+}
+echo '</table>';
+echo '<p>Apr&egrave;s confirmation vous ne pourrez plus modifier ces op&eacute;rations !</p>';
+echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
+echo '<p><input name="submit" type="submit" value="Confirmer" class="fondo"></p>';	
+
+echo '<p>';
+icone(_T('asso:Retour'),$url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' );
+echo '</p>';
+}
+
+//---------------------------- 
+//  VALIDATION DEFINITIVE COMPTES
+//---------------------------- 		
+if (isset($_POST['definitif'])) {
+
+$url_retour=$_POST['url_retour'];
+
+$definitif_tab=(isset($_POST["definitif"])) ? $_POST["definitif"]:array();
+$count=count ($definitif_tab);
+
+for ( $i=0 ; $i < $count ; $i++ )
+{	$id = $definitif_tab[$i];
+	spip_query( "UPDATE spip_asso_comptes SET valide='oui' WHERE id_compte='$id' " );
+}
+echo '<p><strong>Validation effectu&eacute;e !</strong></p>';	
+
+echo '<p>';
+icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' );
+echo '</p>';
+}
+
 fin_boite_info();
 	  
   fin_cadre_relief();  

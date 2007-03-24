@@ -24,7 +24,7 @@ function asso_install(){
 //	include_spip('base/abstract_sql');
 //}
 function asso_verifier_base(){
-	$version_base = 0.30; //version actuelle
+	$version_base = 0.50; //version actuelle
 	$current_version = 0.0;
 	
 	if (   (!isset($GLOBALS['meta']['asso_base_version']) )
@@ -58,6 +58,10 @@ function asso_verifier_base(){
 			spip_query("UPDATE spip_asso_profil SET dons='oui', ventes='oui' ,comptes='oui' WHERE id_profil=1");
 			ecrire_meta('asso_base_version',$current_version=0.30);
 		}	
+		
+		if ($current_version<0.50){
+		spip_query("ALTER TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` "};
+		}
 		ecrire_metas();
 	}
 /*

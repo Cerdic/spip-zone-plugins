@@ -104,7 +104,7 @@ echo '<td style="text-align:right;"><strong>D&eacute;pense</strong></td>';
 echo '<td><strong>Livre</strong></td>';
 echo '<td><strong>Justification</strong></td>';
 echo '<td><strong>Journal</strong></td>';
-echo '<td colspan="2" style="text-align:center;"><strong>Action</strong></td>';
+echo '<td colspan="3" style="text-align:center;"><strong>Action</strong></td>';
 echo '</tr>';
 
 $max_par_page=30;
@@ -132,8 +132,13 @@ echo '<td class ='.$class.' style="text-align:right;">'.number_format($data['dep
 echo '<td class ='.$class.'>'.$data['imputation'].'</td>';
 echo '<td class ='.$class.'>'.$data['justification'].'</td>';
 echo '<td class ='.$class.'>'.$data['journal'].'</td>';
+if($data['valide']=='oui')
+{echo '<td class ='.$class.' colspan=3>&nbsp;</td>';}
+else{
 echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_compte.'&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour"></a></td>';
 echo '<td class ='.$class.' style="text-align:center;"><a href="'.$url_action_comptes.'&action=supprime&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
+echo '<td class ='.$class.'><input name="valide[]" type="checkbox" value='.$data['id_compte'].'></td>';
+}
 echo '</tr>';
 }
 echo '</table>';
@@ -161,6 +166,9 @@ else {
 	}	
 }
 echo '</td>';
+echo '<td  style="text-align:right;">';
+echo '<input type="submit" name="Submit" value="Valider" class="fondo">';
+echo '</td>';
 echo '</table>';
 
 echo '</form>';
@@ -176,7 +184,7 @@ $val = spip_query($query) ;
 while ($data = mysql_fetch_assoc($val)) {
 $somme_recettes = $data['somme_recettes'];
 $somme_depenses = $data['somme_depenses'];
-$solde= $somme_recettes + $somme_depenses;
+$solde= $somme_recettes - $somme_depenses;
 
 echo '<table border="0">';
 echo '<tr>';
