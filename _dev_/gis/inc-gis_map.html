@@ -14,7 +14,7 @@
     			map.enableContinuousZoom();
     			markerManager = new GMarkerManager(map);
   				//leemo-lo documento dos marcadores
-       			$.get('[(#URL_PAGE{rss-gis})[&id_rubrique=(#ID_RUBRIQUE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&recherche=(#RECHERCHE)][&id_article=(#ID_ARTICLE)]]', function(xml){
+       			$.get('[(#URL_PAGE{rss-gis})]', {[id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml){
     				//xml almacena en un objeto xml los datos recogidos del documento leido
     				$("item", xml).each(function(item){
     					/*primero buscamos dentro del objeto xml almacenado en xml todos los nodos "item", el contenido de cada nodo "item" del documento xml
