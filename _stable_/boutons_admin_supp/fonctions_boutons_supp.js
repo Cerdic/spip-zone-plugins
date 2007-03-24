@@ -55,6 +55,9 @@ function masquer_boutons(valeur){
 }
 
 var etat = readCookie("etat_des_boutons");
+if(!etat){
+	etat = "visible";
+}
 masquer_boutons(etat);
 
 // =============================================
