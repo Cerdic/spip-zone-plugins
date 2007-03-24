@@ -106,7 +106,9 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	list(,,,$size) = @getimagesize($fichier_dest);
 	$image = "<img class=\"no_image_filtrer \" src=\"$fichier_dest\" alt=\"$position\" title=\"$position\" border=\"0\" $size/><br>\n";
 	// pas de recalcul de l'image pendant 12 heures si le fichier existe déjà
-	if (file_exists($fichier_dest) AND ($GLOBALS['var_mode'] != 'recalcul') AND (time()-@filemtime($fichier_dest) < 12*3600))
+	if (file_exists($fichier_dest) 
+			AND ($GLOBALS['var_mode'] != 'recalcul') AND ($GLOBALS['var_mode'] != 'calcul') 
+			AND (time()-@filemtime($fichier_dest) < 12*3600))
 		 return $image;
 
 	$chessboard = image_echiquier();
