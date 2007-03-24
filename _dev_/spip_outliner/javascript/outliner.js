@@ -318,6 +318,7 @@ $.addGridControl = function(t,p) {
 	grid.hTable.cellSpacing="0"; 
 	grid.hTable.className = "outline";
 	grid.hTable.appendChild(thead);
+	$(grid.hTable).activeCrayons();
 	thead = null;
 	grid.hDiv = document.createElement("div")
 	$(grid.hDiv)

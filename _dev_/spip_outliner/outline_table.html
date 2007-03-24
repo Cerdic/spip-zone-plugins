@@ -1,7 +1,7 @@
 <div id="outline">
 <B_titreh>
 <table class="outline donnees" id='donnees-#ENV{id_table}'>
-[(#ENV{caption,oui}|=={non}|?{'',' '})[(#INCLURE{outline_caption}{id_table})]]
+[(#ENV{caption,oui}|=={non}|?{'',' '})[(#INCLURE{fond=outline_caption}{id_table})]]
 <thead><tr class='row_first'>
 	<th>id</th>
 	<th class='ligne_1'>
