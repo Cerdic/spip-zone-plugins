@@ -56,8 +56,8 @@ $query = spip_query ("SELECT date_format( date, '%Y' )  AS annee FROM ".$table_p
 while ($data = mysql_fetch_assoc($query))
    {
  	if ($data['annee']==$annee)
-	{echo ' <strong>'.$data['annee'].'</strong>';}
-	else {echo '<a href="'.$url_comptes.'&annee='.$data['annee'].'&imputation='.$imputation.'">'.$data['annee'].'</a>';}
+	{echo ' <strong>'.$data['annee'].' </strong>';}
+	else {echo '<a href="'.$url_comptes.'&annee='.$data['annee'].'&imputation='.$imputation.'">'.$data['annee'].'</a> ';}
 	}
 echo '</td>';
 
@@ -69,25 +69,26 @@ echo '<td style="text-align:right;">';
 echo '<form method="post" action="'.$url_comptes.'">';
 echo '<select name ="imputation" class="fondl" onchange="form.submit()">';
 echo '<option value = "%" ';
-	if ($imputation=="%") {echo 'selected';}
-	echo '  > Tous</option>';
+if ($imputation=="%") {echo 'selected';}
+echo '  > Tous</option>';
 echo '<option value = "cotisation" ';
-	if ($imputation=="cotisation") {echo 'selected';}
-	echo ' > Cotisations</option>';
+if ($imputation=="cotisation") {echo 'selected';}
+echo ' > Cotisations</option>';
 echo '<option value = "vente" ';
-	if ($imputation=="vente") {echo 'selected';}
+if ($imputation=="vente") {echo 'selected';}
+echo ' > Ventes</option>';
 echo '<option value = "activite" ';
-	if ($imputation=="activite") {echo 'selected';}
-	echo ' > Activit&eacute;s</option>';
+if ($imputation=="activite") {echo 'selected';}
+echo ' > Activit&eacute;s</option>';
 echo '<option value = "achat" ';
-	if ($imputation=="achat") {echo 'selected';}
-	echo ' > Achats</option>';
+if ($imputation=="achat") {echo 'selected';}
+echo ' > Achats</option>';
 echo '<option value = "don" ';
-	if ($imputation=="don") {echo 'selected';}
-	echo ' > Dons</option>';
+if ($imputation=="don") {echo 'selected';}
+echo ' > Dons</option>';
 echo '<option value = "divers" ';
-	if ($imputation=="divers") {echo 'selected';}
-	echo ' > Divers</option>';
+if ($imputation=="divers") {echo 'selected';}
+echo ' > Divers</option>';
 echo '</select>';
 echo '</form>';
 echo '</table>';
