@@ -170,7 +170,7 @@ function jeux_block_init() {
 }
 function jeux_block_invisible($id, $texte, $block) {
  if (!strlen($texte)) return '';
- return $GLOBALS['spip_version_code']<1.92?									// compatibilite avec 1.9.1
+ return $GLOBALS['spip_version_code']<1.92?							// compatibilite avec 1.9.1
 	bouton_block_visible($id).$texte.debut_block_visible($id).$block.fin_block()
 	:bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block();
 }
@@ -180,7 +180,7 @@ function jeux_form_debut($name, $indexJeux, $class="", $method="post", $action="
 	if (strlen($name)) $name=" name=\"$name$indexJeux\"";
 	if (strlen($class)) $class=" class=\"$class\"";
 	if (strlen($method)) $method=" method=\"$method\"";
-	if (strlen($action)) $action=" action=\"$action\"";
+	/*if (strlen($action))*/ $action=" action=\"$action#JEU$indexJeux\"";
 	return "\n<form".$name.$class.$method.$action." >\n"
 		."<input type=\"hidden\" name=\"debut_index_jeux\" value=\"{$GLOBALS['debut_index_jeux']}\">\n"
 		."<input type=\"hidden\" name=\"index_jeux\" value=$indexJeux>\n"

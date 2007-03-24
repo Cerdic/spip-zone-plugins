@@ -26,7 +26,9 @@ function jeux_pre($chaine, $indexJeux){
 	$liste = jeux_inclure_et_decoder($chaine, $indexJeux);
 	$jeux_liste = array_merge($jeux_liste, $liste);
 
-	return $texteAvant.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste)).$chaine
+	return $texteAvant
+		.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste))
+		."<a name=\"JEU$indexJeux\"></a>$chaine"
 		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre($texteApres, ++$indexJeux);
 }
 

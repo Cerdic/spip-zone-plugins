@@ -183,7 +183,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 
   // Sinon on affiche la correction
   else {
-  	 $reponse = $_POST[$nomVarSelect];
+  	 $reponse = trim($_POST[$nomVarSelect]);
 	 $bonneReponse = false;
  	 if ($reponse) {
 		// les points de la reponse donnee...
@@ -197,7 +197,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 			 .'</div>';
 
 		// bonne reponse
-		$bonneReponse = ($trou && in_array($reponse, $qcms[$indexQCM]['propositions']))
+		$bonneReponse = ($trou && in_array(strtolower($reponse), $qcms[$indexQCM]['propositions']))
 			|| ($qcms[$indexQCM]['bonnesreponses'][$reponse]==1);
 
 		// si ce n'est pas un trou, on donne les points de la reponse quoiqu'il arrive
