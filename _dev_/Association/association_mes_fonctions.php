@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 /**
 * Plugin Association
 *
 * Copyright (c) 2007
-* Bernard Blazin & Fran�ois de Montlivault
+* Bernard Blazin & François de Montlivault
 * http://www.plugandspip.com 
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 * Pour plus de details voir le fichier COPYING.txt.
@@ -130,9 +130,30 @@ $tables_principales['spip_asso_banques']= array(
 						"commentaire" 	=> "text NOT NULL",
 						),
 					
-	'key' => array("PRIMARY KEY" => "id_banque")
-	);	
-	
+'key' => array("PRIMARY KEY" => "id_banque")
+);	
+
+$tables_principales['spip_asso_activites']= array(
+ 'field' => array(
+					"id_activite"		=> "bigint(20) NOT NULL auto_increment",
+					"id_evenement"	=> "bigint(20) NOT NULL",
+					"nom"				=> "text NOT NULL",
+					"id_adherent"		=> "bigint(20) NOT NULL",
+					"accompagne"		=> "text NOT NULL",
+					"inscrits"			=> "int(11) NOT NULL default '0'",
+					"date"				=> "date NOT NULL default '0000-00-00'",
+					"telephone"		=> "text NOT NULL",
+					"adresse"			=> "text NOT NULL",
+					"email"				=> "text NOT NULL",
+					"commentaire"		=> "text NOT NULL",
+					"montant"			=> "float NOT NULL default '0'",
+					"date_paiement"	=> "date NOT NULL default '0000-00-00'",
+					"statut"			=> "text NOT NULL",
+					),
+					
+'key' => array("PRIMARY KEY" => "id_activite")
+);	
+
 //
 // JOINTURES
 //
@@ -177,7 +198,7 @@ function boucle_ASSO_COMPTES($id_boucle, &$boucles) {
         return calculer_boucle($id_boucle, $boucles);
 }
 //
-// <BOUCLE(banqueS)>
+// <BOUCLE(BANQUES)>
 //
 function boucle_ASSO_banqueS($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
@@ -193,6 +214,16 @@ function boucle_ASSO_CATEGORIES($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
         $boucle->from[$id_table] =  "spip_asso_categories";  
+        return calculer_boucle($id_boucle, $boucles);
+}
+
+//
+// <BOUCLE(ACTIVITES)>
+//
+function boucle_ASSO_ACTIVITES($id_boucle, &$boucles) {
+        $boucle = &$boucles[$id_boucle];
+        $id_table = $boucle->id_table;
+        $boucle->from[$id_table] =  "spip_asso_activites";  
         return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -216,4 +247,35 @@ function association_datefr($date) {
 return $jour.'-'.$mois.'-'.$annee; 
 } 
 
+//Validation d'adresse email
+function association_validation_email($email) {
+	$atom   = '[-a-z0-9!#$%&\'*+\\/=?^_`{|}~]';   	// caracteres autorise s avant l'arobase
+	$domain = '([a-z0-9]([-a-z0-9]*[a-z0-9]+)?)'; 	// caract鳥s autorises apres l'arobase (nom de domaine)
+	$regex = '/^' . $atom . '+' .   					// Une ou plusieurs fois les caracteres autorises avant l'arobase
+	'(\.' . $atom . '+)*' .        							// Suivis par zero point ou plus
+														// separes par des caracteres autoris고avant l'arobase
+	'@' .                           							// Suivis d'un arobase
+	'(' . $domain . '{1,63}\.)+' .  						// Suivis par 1 a 63 caraceres autoris고pour le nom de domaine
+														// s걡r고par des points
+	$domain . '{2,63}$/i';          						// Suivi de 2 a 63 caracteres autorises pour le nom de domaine
+// test de l'adresse e-mail
+if (preg_match($regex, $email)) 
+{return true;}
+else {return false;}
+}
+
+//Creation d'un login
+function association_cree_login($email) {
+     $login = substr($email, 0, strpos($email, "@"));
+     $login = strtolower($login);
+     $login = ereg_replace("[^a-zA-Z0-9]", "", $login);     
+		
+     for ($i = 0; ; $i++) {
+     	if ($i) $login = $login.$i;
+     	else $login = $login;
+     	$query = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login'");
+     	if (!spip_num_rows($query)) break;
+	     }		
+	return $login;
+  }
 ?>
