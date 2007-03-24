@@ -89,28 +89,28 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 		echo("
 		<span".$cacher_le_bouton["editer_rubrique"].">
 			[<a href='ecrire/?exec=rubriques_edit&id_rubrique=#ENV{id_rubrique}' class='spip-admin-boutons'>
-				&Eacute;diter ((#ENV{id_rubrique}))
+				<:basupp:editer:> ((#ENV{id_rubrique}))
 			</a>]
 		</span>");
 	// Editer l'article en cours
 		echo("
 		<span".$cacher_le_bouton["editer_article"].">
 			[<a href='ecrire/?exec=articles_edit&id_article=#ENV{id_article}' class='spip-admin-boutons'>
-				&Eacute;diter ((#ENV{id_article}))
+				<:basupp:editer:> ((#ENV{id_article}))
 			</a>]
 		</span>");
 	// Editer la breve en cours
 		echo("
 		<span".$cacher_le_bouton["editer_breve"].">
 			[<a href='ecrire/?exec=breves_edit&id_breve=#ENV{id_breve}' class='spip-admin-boutons'>
-				&Eacute;diter ((#ENV{id_breve}))
+				<:basupp:editer:> ((#ENV{id_breve}))
 			</a>]
 		</span>");
 	// Editer l'auteur en cours
 		echo("
 		<span".$cacher_le_bouton["editer_auteur"].">
 			[<a href='". parametre_url('[(#ENV{voir_auteur})]', 'edit', 'oui') . "' class='spip-admin-boutons'>
-				&Eacute;diter ((#ENV{id_auteur}))
+				<:basupp:editer:> ((#ENV{id_auteur}))
 			</a>]
 		</span>");
 	// Modifier la breve en cours
