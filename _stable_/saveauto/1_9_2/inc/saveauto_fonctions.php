@@ -96,17 +96,20 @@ function saveauto_mysql_version() {
 function saveauto_sauvegarde() {
 // désérialiser $meta['prefix_plugin'] en un array $prefix_plugin à partir des données de spip_meta
       	$prefix = 'saveauto';
-      	include_spip('inc/meta');
-      	lire_metas();
+//      	include_spip('inc/meta');
+// récupérer les $prefix_meta['nom_variable' => 'valeur_variable', ...] 
+// sous la forme : $nom_variable = 'valeur_variable'				
+				foreach (lire_config('saveauto') as $cle => $valeur) {
+								$$cle = $valeur;
+				}
+/*      	lire_metas();
       	global $meta;
       	$meta_prefix = 'meta'.'_'.$prefix;
       	$$meta_prefix = unserialize($meta[$prefix]);
-// récupérer les $prefix_meta['nom_variable' => 'valeur_variable', ...] 
-// sous la forme : $nom_variable = 'valeur_variable'				
       	foreach ($$meta_prefix as $cle => $valeur) {
       	 			  $$cle = $valeur;
        }
-//echo '$$cle = $'.$cle.' $valeur = '.$valeur;
+*/			 
    // options complexes des sauvegardes déportées depuis saveauto_conf.php :
          // true = clause INSERT avec nom des champs
          $insertComplet = true;
@@ -118,14 +121,15 @@ function saveauto_sauvegarde() {
 				  // test support Zlib activé
 					 if ($gz_capable = zlib_get_coding_type()) {
 				 		  $flag_gz = TRUE;
-				   }				 
-					 $gz = zlib_get_coding_type();
-           //si la compression est impossible (support de Zlib pas activé dans php.ini), au cas où le webmaster l'aurait activé : on désactive
-					 if (!$flag_gz) {
-					 		$gz = false;
+				   }				 			 
+         //si la compression est impossible (support de Zlib pas activé dans php.ini), au cas où le webmaster l'aurait activé : on désactive
+					 if ($flag_gz == TRUE AND $gz == 'true') { 
+					 		$format_sauve = 'gz';
 					 }
+					 else {
+					 			$format_sauve = 'sql';
+					 }					 
            $temps = time();
-
            
            //1-FAUT IL SAUVER (le soldat ryan ?)
            // Lister des fichiers contenus dans le répertoire de sauvegardes
@@ -138,7 +142,7 @@ function saveauto_sauvegarde() {
            }
            if ($myDirectory) {
               while($entryName = readdir($myDirectory)) {
-                 //filtre uniquement les fichiers du type : save_nom_de_la_base
+                 //filtre uniquement les fichiers dont le nom commence par prefixe_save
                  if (substr($entryName, 0, strlen($prefixe_save . $base)) == $prefixe_save . $base) {
                     $date_fichier = filemtime($rep_bases . $entryName);
                     if ($jours_obso > 0 && $temps > ($date_fichier + $jours_obso*3600*24)) {
@@ -172,11 +176,9 @@ function saveauto_sauvegarde() {
                  $minutes = date("i", $temps);
                  
                  //choix du nom
-                 if ($gz) $suffixe = ".gz";
-                 else $suffixe = ".sql";
+								 $suffixe = '.'.$format_sauve;
                  $nom_fichier = $prefixe_save . $base . "_" . $annee. "_" . $mois. "_" . $jour . $suffixe;
                  $chemin_fichier = $rep_bases . $nom_fichier;
-                 
                  //récupère et sépare tous les noms de tables dont on doit éviter de récupérer les données
                  if (! empty($eviter)) $tab_eviter = explode(";", $eviter);
                  if (! empty($accepter)) $tab_accepter = explode(";", $accepter);
@@ -192,7 +194,7 @@ function saveauto_sauvegarde() {
                     $i = 0;
                     
                     //création du fichier
-                    if ($gz) {
+                    if ($format_sauve == 'gz') {
 											 $fp = @gzopen($chemin_fichier, "wb");
 										}
                     else {
@@ -203,7 +205,7 @@ function saveauto_sauvegarde() {
                     }
                     if ($fp) {
                        //sélection du type d'écriture
-                        $gz ? $_fputs = gzputs : $_fputs = fwrite;
+                        $format_sauve == 'gz' ? $_fputs = gzputs : $_fputs = fwrite;
                        
                        //ecriture entete du fichier : infos serveurs php/sql/http
                        saveauto_ecrire("# "._T('saveauto:fichier_genere'), $fp, $_fputs);
@@ -285,7 +287,7 @@ function saveauto_sauvegarde() {
                        saveauto_ecrire("# -------"._T('saveauto:fin_fichier')."------------", $fp, $_fputs);
                        
                        //on ferme !
-                       if ($gz) gzclose($fp);
+                       if ($format_sauve == 'gz') gzclose($fp);
                        else fclose($fp);
                        
                        //envoi par mail
