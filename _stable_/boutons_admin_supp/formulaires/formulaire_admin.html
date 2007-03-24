@@ -36,7 +36,7 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 
 [(#REM) Div globale de la barre de boutons ]
 
-<div id="boutons_admin_supp" [class="(#ENV{divclass,spip-admin-bloc})" ]dir='#LANG_DIR' style="<?php echo($afficher_boutons);?>">
+<div id="boutons_admin_supp" [class="(#ENV{divclass,spip-admin-bloc})" ]dir='#LANG_DIR' style="<?php echo($afficher_boutons);?>visibility:hidden">
 
 	[(#REM) Bouton pour fixer ou non la barre de boutons ]
 	<a href="javascript:swap_fixer_barre()"<?php echo $cacher_le_bouton['garder_au_premier_plan'];?>>
