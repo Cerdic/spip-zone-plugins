@@ -61,24 +61,24 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 	<?php
 	if($GLOBALS['auteur_session']['statut'] == '0minirezo'){
 	echo("
-	<a href='ecrire/?exec=rubriques_edit&new=oui[&id_parent=(#ENV{id_rubrique})]' class='spip-admin-boutons'".$cacher_le_bouton['creer_rubrique'].">
+	<a href='ecrire/?exec=rubriques_edit&amp;new=oui[&amp;id_parent=(#ENV{id_rubrique})]' class='spip-admin-boutons'".$cacher_le_bouton['creer_rubrique'].">
 		<:icone_creer_rubrique:>
 	</a>");
 	}
 	?>
 
 	[(#REM) Ecrire un nouvel article dans la rubrique en cours ]
-	<a href='ecrire/?exec=articles_edit&new=oui[&id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton['nouvel_article'];?>>
+	<a href='ecrire/?exec=articles_edit&amp;new=oui[&amp;id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton['nouvel_article'];?>>
 		<:icone_ecrire_article:>
 	</a>
 
 	[(#REM) Referencer un site ]
-	<a href='ecrire/?exec=sites_edit&new=oui[&id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton["referencer_site"];?>>
+	<a href='ecrire/?exec=sites_edit&amp;new=oui[&amp;id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton["referencer_site"];?>>
 		<:info_sites_referencer:>
 	</a>
 
 	[(#REM) Ecrire une nouvelle breve ]
-	<a href='ecrire/?exec=breves_edit&new=oui[&id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton["nouvelle_breve"];?>>
+	<a href='ecrire/?exec=breves_edit&amp;new=oui[&amp;id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton["nouvelle_breve"];?>>
 		<:icone_nouvelle_breve:>
 	</a>
 
@@ -88,28 +88,28 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 	// Editer la rubrique en cours
 		echo("
 		<span".$cacher_le_bouton["editer_rubrique"].">
-			[<a href='ecrire/?exec=rubriques_edit&id_rubrique=#ENV{id_rubrique}' class='spip-admin-boutons'>
+			[<a href='ecrire/?exec=rubriques_edit&amp;id_rubrique=#ENV{id_rubrique}' class='spip-admin-boutons'>
 				<:basupp:editer:> ((#ENV{id_rubrique}))
 			</a>]
 		</span>");
 	// Editer l'article en cours
 		echo("
 		<span".$cacher_le_bouton["editer_article"].">
-			[<a href='ecrire/?exec=articles_edit&id_article=#ENV{id_article}' class='spip-admin-boutons'>
+			[<a href='ecrire/?exec=articles_edit&amp;id_article=#ENV{id_article}' class='spip-admin-boutons'>
 				<:basupp:editer:> ((#ENV{id_article}))
 			</a>]
 		</span>");
 	// Editer la breve en cours
 		echo("
 		<span".$cacher_le_bouton["editer_breve"].">
-			[<a href='ecrire/?exec=breves_edit&id_breve=#ENV{id_breve}' class='spip-admin-boutons'>
+			[<a href='ecrire/?exec=breves_edit&amp;id_breve=#ENV{id_breve}' class='spip-admin-boutons'>
 				<:basupp:editer:> ((#ENV{id_breve}))
 			</a>]
 		</span>");
 	// Editer l'auteur en cours
 		echo("
 		<span".$cacher_le_bouton["editer_auteur"].">
-			[<a href='ecrire/?exec=auteur_infos&id_auteur=#ENV{id_auteur}' class='spip-admin-boutons'>
+			[<a href='ecrire/?exec=auteur_infos&amp;id_auteur=#ENV{id_auteur}' class='spip-admin-boutons'>
 				<:basupp:editer:> ((#ENV{id_auteur}))
 			</a>]
 		</span>");
