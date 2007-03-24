@@ -10,7 +10,6 @@
 *  
 **/
 include_spip('inc/presentation');
-include_spip('association_mes_options');
 
 function exec_bilan(){
 global $connect_statut, $connect_toutes_rubriques;
@@ -74,22 +73,20 @@ echo '<td style="text-align:right;" colspan="2"><strong>Avoir initial</strong></
 echo '<td style="text-align:right;"><strong>Avoir actuel</strong></td>';
 echo '</tr>';
 
-$query = "SELECT * FROM spip_asso_banques ORDER BY id_banque";
-$val = spip_query ($query) ;
+$query = spip_query ( "SELECT * FROM spip_asso_banques ORDER BY id_banque" );
 
-while ($banque = mysql_fetch_assoc($val)) {
+while ($banque = mysql_fetch_assoc($query)) {
 $date_solde=$banque['date'];
 $journal=$banque['code'];
 $solde=$banque['solde'];
 echo '<tr>';
 echo '<td class ='.$class.'>'.$banque['intitule']; 
-echo '<td class ='.$class.' style="text-align:right;">'.datefr($date_solde).'</td>'; 
+echo '<td class ='.$class.' style="text-align:right;">'.association_datefr($date_solde).'</td>'; 
 echo '<td class ='.$class.' style="text-align:right;">'.number_format($solde, 2, ',', ' ').'</td>'; 
 
-$sql = "SELECT sum( recette ) AS recettes, sum( depense ) AS depenses, date FROM spip_asso_comptes WHERE date > '$date_solde' AND journal = '$journal' GROUP BY '$journal' ";
-$req = spip_query ($sql) ;
+$sql = spip_query ( "SELECT sum( recette ) AS recettes, sum( depense ) AS depenses, date FROM spip_asso_comptes WHERE date > '$date_solde' AND journal = '$journal' GROUP BY '$journal' " );
 
-if ($compte = mysql_fetch_assoc($req)) {
+if ($compte = mysql_fetch_assoc($sql)) {
 	$recettes=$compte['recettes'];
 	$depenses=$compte['depenses'];
 } else {
