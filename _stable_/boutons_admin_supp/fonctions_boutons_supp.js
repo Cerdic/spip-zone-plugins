@@ -80,7 +80,7 @@ if(stop_la != "oui"){
 	barre_boutons=document.getElementById("boutons_admin_supp");
 	if (statut_fixe=="pas_fixe" && !document.all){
 		barre_boutons.style.position="fixed";
-		document.images['montrer'].style.position="fixed";
+		document.images['montrer1'].style.position="fixed";
 		document.images['statut_fixation'].src="plugins/boutons_admin_supp/fixe.png";
 		document.images['statut_fixation'].title="Ne pas garder au premier plan";
 	}
@@ -98,7 +98,7 @@ function fixer_barre(valeur){
 	barre_boutons=document.getElementById("boutons_admin_supp");
 	if(valeur=="fixe" && !document.all){
 		barre_boutons.style.position="fixed";
-		document.images['montrer'].style.position="fixed";
+		document.images['montrer1'].style.position="fixed";
 		document.images['statut_fixation'].src="plugins/boutons_admin_supp/fixe.png";
 		document.images['statut_fixation'].title="Ne pas garder au premier plan";
 		createCookie("statut_fixe","pas_fixe",7);
@@ -107,7 +107,7 @@ function fixer_barre(valeur){
 		barre_boutons.style.position="absolute";
 		document.images['statut_fixation'].src="plugins/boutons_admin_supp/pas_fixe.png";
 		document.images['statut_fixation'].title="Garder au premier plan";
-		document.images['montrer'].style.position="absolute";
+		document.images['montrer1'].style.position="absolute";
 		createCookie("statut_fixe","fixe",7);
 	}
 	else {
