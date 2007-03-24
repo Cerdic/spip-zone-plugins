@@ -69,7 +69,7 @@ function inc_outline_importer($opml_arbre,$nom_fichier){
 		
 		foreach($body_matched as $bodys)
 			foreach($bodys as $body){
-				opml2tree($id_form,0,&$body,&$trans);
+				opml2tree($id_form,0,$body,$trans);
 			}
 	}
 }
