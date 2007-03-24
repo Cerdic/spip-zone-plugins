@@ -63,12 +63,6 @@ body.outline_tous #toolbar a {padding:0 8px 0 8px; }
 .crayon-icones span {
 margin-left:-20px;
 }
-.crayon-boutons div {
-margin-top:-20px;
-}
-div.spip_form_champ {
-padding-bottom:20px;
-}
 
 /* Le selecteur de niveau */
 #selecteur_niveau{
