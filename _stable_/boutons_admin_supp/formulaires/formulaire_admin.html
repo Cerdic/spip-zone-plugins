@@ -27,36 +27,37 @@ include(find_in_path("boutons_supp_options.php"));
 $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 ?>
 
-<?php /* Bouton lorsque la barre de boutons est masquee */ ?>
+[(#REM) Bouton lorsque la barre de boutons est masquee ]
 <div id="bouton_montrer" dir='#LANG_DIR' style="visibility:hidden; top:5px; right:35px; position: absolute; background-color: transparent; z-index: 100;">
 	<a href="javascript:masquer_boutons('visible')" title="Montrer la barre de boutons">
 		<?php echo($img_montrer); ?>
 	</a>
 </div>
 
-<?php /* Div globale de la barre de boutons */ ?>
+[(#REM) Div globale de la barre de boutons ]
 
 <div id="boutons_admin_supp" [class="(#ENV{divclass,spip-admin-bloc})" ]dir='#LANG_DIR' style="<?php echo($afficher_boutons);?>">
 
-	<?php /* Bouton pour fixer ou non la barre de boutons */ ?>
+	[(#REM) Bouton pour fixer ou non la barre de boutons ]
 	<a href="javascript:swap_fixer_barre()"<?php echo $cacher_le_bouton['garder_au_premier_plan'];?>>
 		<img name="statut_fixation" alt="." />
 	</a>
 
-	<?php /* Bouton avec le nom de l'auteur connecte et un lien vers sa page*/ ?>
+	[(#REM) Bouton avec le nom de l'auteur connecte et un lien vers sa page ]
 	<?php
 	echo("
 	<span style='font-variant:small-caps'>
-		<a href='?auteur".$GLOBALS['auteur_session']['id_auteur']."' class='spip-admin-boutons'".$cacher_le_bouton['auteur'].">".
-			$GLOBALS['auteur_session']['nom']."
+		<a href='".generer_url_public('auteur','id_auteur='.$GLOBALS['auteur_session']['id_auteur'])
+			. "' class='spip-admin-boutons'".$cacher_le_bouton['auteur'].">"
+			. $GLOBALS['auteur_session']['nom']."
 		</a>
 	</span>");
 	?>
 
-	<?php /* Analyse XML*/ ?>
+	[(#REM) Analyse XML]
 	[<a href='(#ENV{analyser})' class='spip-admin-boutons'><:analyse_xml:>[(#ENV{xhtml_error}|?{' *',''})]</a>]
 
-	<?php /* Creer une rubrique si l'on est administrateur */ ?>
+	[(#REM) Creer une rubrique si l'on est administrateur ]
 	<?php
 	if($GLOBALS['auteur_session']['statut'] == '0minirezo'){
 	echo("
@@ -66,22 +67,22 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 	}
 	?>
 
-	<?php /* Ecrire un nouvel article dans la rubrique en cours */ ?>
+	[(#REM) Ecrire un nouvel article dans la rubrique en cours ]
 	<a href='ecrire/?exec=articles_edit&new=oui[&id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton['nouvel_article'];?>>
 		<:icone_ecrire_article:>
 	</a>
 
-	<?php /* Referencer un site */ ?>
+	[(#REM) Referencer un site ]
 	<a href='ecrire/?exec=sites_edit&new=oui[&id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton["referencer_site"];?>>
 		<:info_sites_referencer:>
 	</a>
 
-	<?php /* Ecrire une nouvelle breve */ ?>
+	[(#REM) Ecrire une nouvelle breve ]
 	<a href='ecrire/?exec=breves_edit&new=oui[&id_rubrique=(#ENV{id_rubrique})]' class='spip-admin-boutons'<?php echo $cacher_le_bouton["nouvelle_breve"];?>>
 		<:icone_nouvelle_breve:>
 	</a>
 
-	<?php /* Les boutons suivants ne s'affichent pas pour les redacteurs */ ?>
+	[(#REM) Les boutons suivants ne s'affichent pas pour les redacteurs ]
 	<?php
  	if($GLOBALS['auteur_session']['statut'] == '0minirezo'){
 	// Editer la rubrique en cours
@@ -156,41 +157,41 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 	}
 	?>
 
-	<?php /* Bouton de previsualisation */ ?>
+	[(#REM) Bouton de previsualisation ]
 	<span<?php echo $cacher_le_bouton["previsualisation"]?>>
 		[<a href="(#ENV{preview})" class="spip-admin-boutons">
 			<:previsualisation:>
 		</a>]
 	</span>
 
-	<?php /* Acces aux statistiques */ ?>
+	[(#REM) Acces aux statistiques ]
 	<span<?php echo $cacher_le_bouton["statistiques"]?>>
 		[<a href='(#ENV{statistiques})' class='spip-admin-boutons'>
 			[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]
 		</a>]
 	</span>
 
-	<?php /* Acces a l'espace prive */ ?>
+	[(#REM) Acces a l'espace prive ]
 	<a href='./ecrire' class='spip-admin-boutons'<?php echo $cacher_le_bouton['espace_prive'];?>>
 		<:espace_prive:>
 	</a>
 
-	<?php /* Calcul et recalcul de la page en cours */ ?>
+	[(#REM) Calcul et recalcul de la page en cours ]
 	<a href='[(#SELF|parametre_url{var_mode,#ENV{calcul}})]'<?php echo $cacher_le_bouton['calculer'];?> title="<:admin_recalculer:>">
 		&nbsp;<img align="absmiddle" src="<?php echo($img_reload); ?>" alt="<:admin_recalculer:>[(#ENV{use_cache})]" />
 	</a>
 
-	<?php /* Debogueur de squelettes */ ?>
+	[(#REM) Debogueur de squelettes ]
 	[<a href='(#ENV{debug})' class='spip-admin-boutons'>
 		<:admin_debug:>
 	</a>]
 
-	<?php /* Deconnexion */ ?>
+	[(#REM) Deconnexion ]
 	<a href="javascript:quitter('#URL_LOGOUT')"<?php echo $cacher_le_bouton['deconnexion'];?> title="<:icone_deconnecter:>">
 		<img align="absmiddle" src="<?php echo($img_logout); ?>" alt="<:icone_deconnecter:>" />
 	</a>
 
-	<?php /* Bouton pour masquer/afficher la barre de boutons */ ?>
+	[(#REM) Bouton pour masquer/afficher la barre de boutons ]
 	<a href="javascript:masquer_boutons('hidden')"<?php echo $cacher_le_bouton['masquer'];?> title="Masquer la barre de boutons" style="font-style:italic;">
 		<?php echo($img_cacher);?>
 	</a>
