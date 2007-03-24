@@ -1,7 +1,7 @@
 <?php
 // Fichier pour SPIP 1.9.2 surchargeant administration.html pour
 // le plugin boutons_admin_supp, par Vincent Ramos
-// <spip_dev AD kailaasa PVNCTCM net>, publie sous licence
+// <spip_dev AD kailaasa PVNCTVM net>, publie sous licence
 // GNU/GPL <http://www.gnu.org/copyleft/gpl.html>.
 
 // Les images sont tirees du jeu d'icones Nuvola <http://icon-king.com/?p=15>
@@ -10,10 +10,10 @@
 // Quelques definitions de variables
 $img_montrer =	'<img name="montrer" src="'.
 		find_in_path('montrer.png').
-		'" align="absmiddle" alt="Montrer la barre de boutons" />';
+		'" align="absmiddle" alt="<:basupp:montrer_barre:>" />';
 $img_cacher = '<img name="montrer" src="'.
 		find_in_path('cacher.png').
-		'" align="absmiddle" alt="Cacher la barre de boutons" />';
+		'" align="absmiddle" alt="<:basupp:cacher_barre:>" />';
 $img_reload = find_in_path('reload_page.png');
 $img_logout = find_in_path('exit.png');
 
@@ -29,7 +29,7 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 
 [(#REM) Bouton lorsque la barre de boutons est masquee ]
 <div id="bouton_montrer" dir='#LANG_DIR' style="visibility:hidden; top:5px; right:35px; position: absolute; background-color: transparent; z-index: 100;">
-	<a href="javascript:masquer_boutons('visible')" title="Montrer la barre de boutons">
+	<a href="javascript:masquer_boutons('visible')" title="<:basupp:montrer_barre:>">
 		<?php echo($img_montrer); ?>
 	</a>
 </div>
@@ -192,7 +192,7 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 	</a>
 
 	[(#REM) Bouton pour masquer/afficher la barre de boutons ]
-	<a href="javascript:masquer_boutons('hidden')"<?php echo $cacher_le_bouton['masquer'];?> title="Masquer la barre de boutons" style="font-style:italic;">
+	<a href="javascript:masquer_boutons('hidden')"<?php echo $cacher_le_bouton['masquer'];?> title="<:basupp:cacher_barre:>" style="font-style:italic;">
 		<?php echo($img_cacher);?>
 	</a>
 </div>
