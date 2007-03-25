@@ -46,14 +46,14 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n".
 		"body { background: #FFF; color: #000; }\n".
 		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n".
-		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n".
+		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; }\n".
 		"a { color: #E86519; text-decoration: none; }\n".
 		"a:visited { color: #6E003A; }\n".
 		"a:active { color: #FF9900; }\n".
 		"img { border: 0; }\n".
 		"p { text-align: justify; }\n".
 		"ul { text-align: justify; list-style-type: none; }\n".
-		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n".
+		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; padding: 10px; margin-top: 1em; }\n".
 		"legend { font-weight: bold; }\n".
 		"label {}\n".
 		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n".
@@ -99,14 +99,14 @@ function info_etape($titre, $complement = ''){
 function fieldset($legend, $champs = array(), $horchamps='') {
 	$fieldset = "<fieldset>\n" .
 	($legend ? "<legend>".$legend."</legend>\n" : '');
-	foreach($champs as $nom => $contenu) {
+	foreach ($champs as $nom => $contenu) {
 		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
 		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
 		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
 		if(is_array($contenu['alternatives'])) {
 			foreach($contenu['alternatives'] as $valeur => $label) {
 				$fieldset .= "<input type='radio' name='".$nom .
-				"'\nvalue='".$valeur."' ".($valeur==$contenu['valeur']?"checked='checked'":'')."/>\n";
+				"'\nvalue='".$valeur."' ".(($valeur==$contenu['valeur'])?"checked='checked'":'')."/>\n";
 				$fieldset .= "<label for='".$valeur."'>".$label."</label>\n";
 			}
 			$fieldset .= "<br />\n";
@@ -163,6 +163,11 @@ function aide($aide='') {
 function version_svn_courante($dir) {
 	if (!$dir) $dir = '.';
 
+	// version installee par paquet ZIP
+	if (lire_fichier($dir.'/svn.revision', $c)
+	AND preg_match(',Revision: (\d+),', $c, $d))
+		return intval($d[1]);
+
 	// version installee par SVN
 	if (lire_fichier($dir . '/.svn/entries', $c)
 	AND (
@@ -175,11 +180,6 @@ function version_svn_courante($dir) {
 	AND $v = $r1[1]
 	)))
 		return -$v;
-
-	// version installee par paquet ZIP de SPIP-Zone
-	if (lire_fichier($dir.'/svn.revision', $c)
-	AND preg_match(',Revision: (\d+),', $c, $d))
-		return intval($d[1]);
 
 	// Bug ou paquet fait main
 	return 0;
@@ -242,14 +242,13 @@ function exec_test_ajax_dist() {
 // http://doc.spip.org/@afficher_bouton_preview
 function afficher_bouton_preview() {
 		$x = _T('previsualisation');
-		return '<div style="
+		return '<div class="spip_large" style="
 		display: block;
 		color: #eeeeee;
 		background-color: #111111;
 		padding-right: 5px;
 		padding-top: 2px;
 		padding-bottom: 5px;
-		font-size: 20px;
 		top: 0px;
 		left: 0px;
 		position: absolute;
@@ -285,12 +284,13 @@ function http_wrapper($img){
 	static $wrapper_table = array();
 	
 	if (strpos($img,'/')===FALSE) // on ne prefixe par _DIR_IMG_PACK que si c'est un nom de fichier sans chemin
-		{	
-		if (isset($GLOBALS['meta']['habillages_icones']) AND (($c=$GLOBALS['meta']['habillages_icones'])!=""))
+## --> hack iconesprive
+		if (isset($GLOBALS['meta']['habillages_img_pack']) AND (($c=$GLOBALS['meta']['habillages_img_pack'])!=''))
 			$f = $c . $img;
 		else
-			$f = _DIR_IMG_PACK . $img;
-	}
+## <--
+
+		$f = _DIR_IMG_PACK . $img;
 	else { // sinon, le path a ete fourni
 		$f = $img;
 		// gerer quand meme le cas des hacks pre 1.9.2 ou l'on faisait un path relatif depuis img_pack

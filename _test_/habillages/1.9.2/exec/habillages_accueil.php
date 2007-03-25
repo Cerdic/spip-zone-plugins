@@ -92,7 +92,7 @@ function exec_habillages_accueil() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	debut_page(_T('habillages:icone_habillages_accueil'), "configuration", "habillages");
+	debut_page(_T('commun:titre_plug'), "configuration", "habillages");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -153,7 +153,7 @@ EOF;
 	echo "<br/><br/>";
 	
 	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_icone-48.png">';
-	gros_titre(_T('habillages:icone_habillages_accueil'));
+	gros_titre(_T('commun:titre_plug'));
 
 	echo barre_onglets("habillages", "");
 	
@@ -290,7 +290,7 @@ EOF;
 	fin_cadre_couleur();
 	echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a><br /><br />";
 		
-	fin_page();
+	echo fin_gauche(), fin_page();
 
 }
 

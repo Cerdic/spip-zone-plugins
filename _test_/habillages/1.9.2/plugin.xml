@@ -4,6 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	Franck Ducas [Site personnel->http://franck.ducas.free.fr] pour la r&#233;alisation et l'id&#233;e originale.
+ 	Scoty [Koakidi->http://www.koakidi.com/] pour la r&#233;alisation de code du gestionnaire d'icones.
 _ Margot pour les textes et la relecture.
 _ Cedric MORIN [notre-ville.net->http://www.notre-ville.net] pour l'aide technique et la rationalisation d'une partie du code.
 _ Pierre Andrews pour toutes les id&#233;es.
@@ -27,6 +28,7 @@ _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	habillages_options.php
 	</options>
 	<description>
+	VERSION INSTABLE - Ne pas utiliser.
 Gestionnaire d'habillages SPIP.
 _ Pour la version compl&#232;te (avec les jeux de squelettes, les th&#232;mes, les extras, et les icones).
 _ Ce plugin est compatible seulement avec la version SPIP 1.9.2.
