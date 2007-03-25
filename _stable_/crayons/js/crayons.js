@@ -282,7 +282,7 @@ jQuery.fn.activatecrayon = function(percent) {
         }
         // Si c'est textarea, on essaie de le caler verticalement
         // et on lui ajoute un resizehandle
-        jQuery("textarea.crayon-active", this)
+        jQuery("textarea", this)
         .each(function(){
           if (percent && this.scrollHeight > hauteur) {
             this.scrollTop = this.scrollHeight * percent - hauteur;

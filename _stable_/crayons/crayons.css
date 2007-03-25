@@ -42,8 +42,12 @@ img.crayon-edit, img.crayon-crayon {
 	padding: 1px;
 	border: 1px inset;
 }
-.crayon-has + * .formulaire_spip {
+.crayon-html .formulaire_spip {
 	max-width: 703px;
+}
+.crayon-html textarea {
+	overflow: scroll;
+	overflow-x: hidden;
 }
 
 /* resizer */
@@ -62,5 +66,9 @@ img.crayon-edit, img.crayon-crayon {
 }
 
 /* Les crayons dans un tableau !*/
-td .crayon-icones span {margin-left:-20px;}
-td div.crayon-html {padding-bottom:10px;}
+td .crayon-icones span {
+	margin-left:-20px;
+}
+td .crayon-html {
+	padding-bottom:10px;
+}
