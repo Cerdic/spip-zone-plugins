@@ -19,7 +19,7 @@
       dev
    </etat>
    <icon>
-      login-bg.gif
+      login_auth_openid.gif
    </icon>
    <description>
       <multi>
@@ -32,6 +32,7 @@
        </multi>
    </description>
    <lien>
+	[Documentation sur spip-contrib->http://www.spip-contrib.net/Plugin-d-authentification-OpenID]
    </lien> <!-- URI de documentation -->
    <prefix>
         AuthOpenID
