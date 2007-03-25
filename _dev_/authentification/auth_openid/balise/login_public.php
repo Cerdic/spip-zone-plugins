@@ -112,9 +112,9 @@ function login_pour_tous($login, $cible, $action) {
 		}
 
 		$openid = $login;
-		$process_url = sprintf("$scheme://%s:%s%sspip.php?action=cookie_openid",
+		$process_url = sprintf("$scheme://%s:%s%sspip.php?action=cookie_openid&url=%s",
 	                       $_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'],
-	                       dirname($_SERVER['PHP_SELF']));
+	                       dirname($_SERVER['PHP_SELF']),$cible);
 
 		$trust_root = sprintf("$scheme://%s:%s%s",
 	                      $_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'],
@@ -125,7 +125,7 @@ function login_pour_tous($login, $cible, $action) {
 
 		// Handle failure status return values.
 		if (!$auth_request) {
-// TODO: Translation
+		    // TODO: Translation
 		    $erreur = "Erreur d'authentification OpenID: avez-vous bien entr&eacute; un OpenID valide?";
 		  $row = array();
 		  $login = '';

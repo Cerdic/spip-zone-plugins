@@ -1,7 +1,5 @@
-- Lien relatif pour le login-bg.gif
+Todo auth_openid (20070325)
+
 - Nettoyer le(s) formulaires de login
-- Tester ce qui se passe si 2 utilisateurs indiquent le même OpenID ?
 - Autoenregistrement de visiteurs en option ?
 - Traduction, multilinguisme
-- Gestion public/privé (redirige vers public à chaque fois)
-- Clean up de l'utilisation du répertoire temporaire OpenID

@@ -1,0 +1,5 @@
+0.2: 20070325
+ - Utilise "#CHEMIN" pour la stylesheet du formulaire (icone OpenID)
+ - utilise la fonction "sous-repertoire" pour créer le répertoire auth_openid
+ - Passage du parametre url pour le login
+0.1: Version Initiale
