@@ -462,7 +462,6 @@ function extra_homonyme($extra, $type, $action='select',$id=0) {
                                 extra ='".$extra_temp."'
                                 WHERE $id_table=".$id;
 								$result = spip_query($query);
-								debug($result);
 								
 								
 				}		
@@ -476,9 +475,7 @@ function extra_homonyme($extra, $type, $action='select',$id=0) {
                                 $query = "UPDATE spip_$type SET 
                                 $champ='".addslashes($extra[$champ])."'
                                 WHERE $id_table=".$id;
-                                $trace .= spip_query($query) OR die($query);
 								$result = spip_query($query);
-								debug($result);
 								
                         }
                  }

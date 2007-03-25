@@ -64,8 +64,6 @@ function extra_homonyme_maj($id, $type, $action='') {
                                 WHERE $id_table=".$id;
 								//echo $query;
 								$result = spip_query($query);
-								debug($result);
-                               //$trace .= spip_query($query) OR die($query);
 				}
 				/******************************************************/
 		}else if($action=='eversch'){
