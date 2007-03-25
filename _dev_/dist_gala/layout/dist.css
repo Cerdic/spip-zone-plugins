@@ -1,0 +1,36 @@
+/*  ------------------------------------------
+/*  Disposition a l'ecran des blocs principaux
+/*  ------------------------------------------ */
+#page {
+	width: 48em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#conteneur { width: 100%; }
+
+#conteneur #contenu {
+	float: left;
+	width: 33em;
+}
+
+#navigation {
+	float: right;
+	width: 12em;
+	text-align: center;
+}
+#extra {
+	clear:right;
+	float:right;
+	width:12em;
+	text-align:center;
+}
+/* Entete */
+#top {
+	width: 100%;
+}
+/* Pied de page */
+#pied {
+	clear: both;
+	width: 100%;
+}

@@ -1,0 +1,35 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Dist en tenue de Gala !
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	collectif 
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	experimental
+	</etat>
+	<description>
+	La dist en [tenue de Gala->http://blog.html.it/layoutgala/], configurable sur la page [?exec=layout->index.php?exec=layout]
+_ #container devient #page
+_ #header devient #top
+_ #wrapper devient #conteneur
+_ #content devient #contenu
+_ #footer devient #pied
+	</description>
+	<prefix> 
+	layout
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
+	ex : template_affichage_final()
+	Le parametre inclure est egalement facultatif, si la fonction est deja chargee en memoire (car presente dans le fichier options par exemple)	-->
+	<pipeline>
+		<nom>insert_head</nom> 
+		<action>insert_head</action>
+		<inclure>layout_pipelines_public.php</inclure>
+	</pipeline>
+</plugin>

@@ -1,0 +1,7 @@
+div#header {height:80px;line-height:80px;margin:0;
+  padding-left:10px;}
+div#conteneur{float:left;width:100%}
+div#contenu{margin: 0 200px}
+div#navigation{float:left;width:200px;margin-left:-100%}
+div#extra{float:left;width:200px;margin-left:-200px}
+div#pied{clear:left;width:100%}
