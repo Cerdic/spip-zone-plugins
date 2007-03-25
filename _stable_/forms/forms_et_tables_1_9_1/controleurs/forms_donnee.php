@@ -29,7 +29,8 @@ function controleurs_forms_donnee_dist($regs) {
 		'erreur'=>serialize(array()),
 		'id_form' => $id_form,
 		'id_donnee' => $id,
-		'valeurs' => serialize($valeurs));
+		'valeurs' => serialize($valeurs),
+		'crayon_active' => 'crayon-active');
 	$html = $n->formulaire($contexte);
 	$html = liens_absolus($html);
 	$status = NULL;
