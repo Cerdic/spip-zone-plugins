@@ -1,22 +1,57 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Champs homonymes 1.9.2
+	Champs homonymes
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	francois.vachon@iago.ca
-_ &copy; 2006 - Distribue sous licence GNU/GPL
+_ &copy; 2006 - 2007 - Distribue sous licence GNU/GPL
  	[iago.ca->http://www.iago.ca]
 	</auteur>
 	<version>
-	0.1
+	0.3
 	</version>
 	<etat>
 	test
 	</etat>
 	<description>
-	Rendre possible la visualisation et la mise à jours de nouveaux champs ajoutés dans plusieurs tables de SPIP grâce aux champs EXTRA.
-	</description> 
+	Rendre possible la visualisation et la mise &agrave; jour de nouveaux champs ajout&eacute;s dans plusieurs tables de SPIP gr&acirc;ce aux champs EXTRA.
+<hr>
+Ce plugin...
+<ul>
+<li>-surcharge le fichier extra.php<br /></li>
+<li>-permet d'utiliser le multilinguime avec les balises &lt;multi&gt; dans les champs EXTRA <br /></li>
+<li>-ne modifie pas la base de donn&eacute;es de SPIP (la modification des tables est &agrave; votre discression)<br /></li>
+<li>-synchronise les mises &agrave; jour des champs EXTRA avec leur champ homonyme<br /></li>
+</ul>
+<hr>
+Une fois activ&eacute;, ce plugin offre en option des [pages de test autodocument&#233;es->../spip.php?page=homonymes_plus2] qui permettent
+<ul>
+<li>-de cr&eacute;er temporairement certains champs extra<br /></li>
+<li>-d'ajouter temporairement des nouveaux champs homonymes dans certaines tables de SPIP<br /></li>
+<li>-de choisir entre synchroniser les nouveaux champs homonymes avec les valeurs pr&eacute;sentes dans les champs EXTRA ou synchroniser les champs EXTRA  avec les valeurs pr&eacute;sentes dans les nouveaux champs homonymes<br /> </li>
+<li>-de visualiser le r&eacute;sultat de la syncronisation de l'ensemble des champs homonymes</li>
+<li>-de supprimer ces nouveaux champs temporaires pour revenir &agrave; la version originale des tables de SPIP </li>
+</ul>
+<em>Seul un administrateur non restreint peut faire ces tests.</em>
+<hr>
+Pour SPIP 1.9.2a [8878]
+<hr>
+Pour plus d'informations ou pour nous laisser vos commentaires: <a href="http://monsitespip.com/spip.php?article7" target="_blank">www.monsitespip.com/spip.php?article7</a>
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
 	<prefix> 
 	homonymes
 	</prefix>
-	</plugin>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<fonctions>
+	mes_fonctions_homonymes.php
+	</fonctions>
+	<options>
+	mes_options_homonymes.php
+	</options>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>

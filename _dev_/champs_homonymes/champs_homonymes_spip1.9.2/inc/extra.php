@@ -98,7 +98,7 @@ function extra_saisie($extra, $type, $ensemble='') {
 
 // http://doc.spip.org/@extra_form
 function extra_form($extra, $type, $ensemble='') {
-	$extra = extra_homonyme($extra, $type, $id=''); //ajouté le 25/09/2006 par francois.vachon@iago.ca Utilise une fonction déclarée dans mes_options_homonymes.php
+	$extra = extra_homonyme($extra, $type); //ajouté le 25/09/2006 par francois.vachon@iago.ca Utilise une fonction déclarée dans mes_options_homonymes.php
 	$extra = unserialize($extra);
 
 	// quels sont les extras de ce type d'objet
@@ -135,7 +135,8 @@ function extra_form($extra, $type, $ensemble='') {
 	// et pour les champs proposes
 	reset($champs_proposes);
 	while (list(, $champ) = each($champs_proposes)) {
-		$desc = $champs[$champ];
+		//$desc = $champs[$champ];
+		$desc = extraire_multi($champs[$champ]);// modifié le 30/08/2006 par francois.vachon@iago.ca pour permettre d'utiliser les blocs multi dans la déclaration des champs extras
 		list($form, $filtre, $prettyname, $choix, $valeurs) = explode("|", $desc);
 
 		if (!$prettyname) $prettyname = ucfirst($champ);
@@ -146,7 +147,7 @@ function extra_form($extra, $type, $ensemble='') {
 			// complique car la valeur n'esst pas envoyee ar le nav si unchecked
 			case "case":
 			case "checkbox":
-				$affiche = preg_replace("@<br />$@", "&nbsp;", $affiche);
+				$affiche = ereg_replace("<br />$", "&nbsp;", $affiche);
 				$affiche .= "<input type='hidden' name='suppl_$champ' value='1' /><input type='checkbox' name='suppl_{$champ}_check'";
 				if ($extra[$champ] == 'true')
 					$affiche .= " checked";
@@ -246,14 +247,12 @@ function extra_form($extra, $type, $ensemble='') {
 
 		$affiche .= "<br />\n";
 	}
-
 	return $affiche;
 }
 
 // recupere les valeurs postees pour reconstituer l'extra
 // http://doc.spip.org/@extra_recup_saisie
-function extra_recup_saisie($type, $id, $c=false) {
- 
+function extra_recup_saisie($type, $c=false) {
 	$champs = $GLOBALS['champs_extra'][$type];
 	if (is_array($champs)) {
 		$extra = Array();
@@ -291,7 +290,7 @@ function extra_recup_saisie($type, $id, $c=false) {
 				break;
 			}
 		}
-		extra_homonyme(serialize($extra), $type, $id, 'update');// modifié le 30/08/2006 par francois.vachon@iago.ca pour permettre la mise à jours des champs homonymes avec les valeurs extra poster
+		//extra_homonyme(serialize($extra), $type, 'update');// modifié le 30/08/2006 par francois.vachon@iago.ca pour permettre la mise à jours des champs homonymes avec les valeurs extra poster
 		return serialize($extra);
 	} else
 		return false;
@@ -330,12 +329,13 @@ function extra_champ_valide($type, $nom_champ) {
 // a partir de la liste des champs, generer l'affichage
 // http://doc.spip.org/@extra_affichage
 function extra_affichage($extra, $type) {
-	$extra = extra_homonyme($extra, $type, $id=''); //ajouté le 30/08/2006 par francois.vachon@iago.ca Utilise une fonction déclarée dans mes_options_homonymes.php
+	$extra = extra_homonyme($extra, $type); //ajouté le 30/08/2006 par francois.vachon@iago.ca Utilise une fonction déclarée dans mes_options_homonymes.php
 	$extra = unserialize ($extra);
 	if (!is_array($extra)) return;
 	$champs = $GLOBALS['champs_extra'][$type];
 
 	while (list($nom,$contenu) = each($extra)) {
+		$champs[$nom] = extraire_multi($champs[$nom]);// modifié le 30/08/2006 par francois.vachon@iago.ca pour permettre d'utiliser les blocs multi dans la déclaration des champs extras
 		list ($style, $filtre, $prettyname, $choix, $valeurs) =
 			explode("|", $champs[$nom]);
 		list($filtre, ) = explode(",", $filtre);
@@ -357,7 +357,7 @@ function extra_affichage($extra, $type) {
 						else if ($contenu[$i] <> '')
 							$contenu_ = "Choix incoh&eacute;rents, "
 							."v&eacute;rifiez la configuration... ";
-				$contenu = preg_replace("/, $/", "", $contenu_);
+				$contenu = ereg_replace(", $", "", $contenu_);
 				break;
 		}
 		if ($filtre != 'brut' AND function_exists($filtre))
@@ -378,9 +378,8 @@ function extra_affichage($extra, $type) {
 // s'il y a mise a jour des extras, mixer les champs modifies
 // avec les champs existants (car la mise a jour peut etre partielle)
 // http://doc.spip.org/@extra_update
-function extra_update($type, $id, $c = false) { 
-	$extra = @unserialize(extra_recup_saisie($type, $id, $c)); 
-
+function extra_update($type, $id, $c = false) {
+	$extra = @unserialize(extra_recup_saisie($type, $c));
 	// pas de mise a jour, ou erreur
 	if (!is_array($extra) OR !count($extra))
 		return false;
@@ -395,72 +394,139 @@ function extra_update($type, $id, $c = false) {
 	AND is_array($orig = @unserialize($orig['extra']))) {
 		$extra = array_merge($orig, $extra);
 	}
-
+	extra_homonyme(serialize($extra), $type, 'update',$id);// modifié le 30/08/2006 par francois.vachon@iago.ca pour permettre la mise à jours des champs homonymes avec les valeurs extra poster
 	return serialize($extra);
 }
-
-
 // Fonction de gestion des champs extra
 // auteur: francois.vachon@iago.ca 
-function extra_homonyme($extra, $type, $id, $action='select') {
-//echo "extra $extra et type $type et action $action";
-        $extra = unserialize ($extra);
+function extra_homonyme($extra, $type, $action='select',$id=0) {
+
+       $extra = unserialize ($extra);
 		$extra_ori = $extra;
         if (!is_array($extra)) return;
-		
-		$typemoins = substr($type, 0, -1); //articles passe à article
-		$id_table = "id_".$typemoins; 
-		if($id=='')$id=$GLOBALS["$id_table"];
-	    //echo "table $id_table  type $type id $id extra $extra et id  $id<br>";
-      
+        
+        switch ($type) {
+                case 'articles':
+                        $id_table = 'id_article';
+                        if (!$id) $id=$GLOBALS['id_article'];
+						//echo  '<br /><br />(extra 389) id ='. $id;
+                        break;
+                case 'breves':
+                        $id_table = 'id_breve';
+                        if (!$id) $id=$GLOBALS['id_breve'];
+                        break;
+                case 'rubriques':
+                        $id_table = 'id_rubrique';
+                        if (!$id) $id=$GLOBALS['id_rubrique'];
+                        break;
+                case 'auteurs':
+                        $id_table = 'id_auteur';
+                        if (!$id) $id=$GLOBALS['id_auteur'];
+                        break;
+				case 'syndic':
+                case 'sites':
+                        $id_table = 'id_syndic';
+                        if (!$id) $id=$GLOBALS['id_syndic'];
+                        $type='syndic';
+                        break;
+                case 'mots':
+                        $id_table = 'id_mot';
+                        if (!$id) $id=$GLOBALS['id_mot'];
+                        break;
+                        
+                default:
+                        $id_table ='';
+           break;
+       }
 
         $table = spip_fetch_array(spip_query("SELECT * FROM spip_$type WHERE $id_table=$id"));
-        if ($action=='select'){
+        if ($action=='select'){ 
                 while (list($champ,$contenu) = each($extra)) {
                         // Pour chaque nom de champs extra 
                         // vérifier si la table comporte un champs du même nom (homonyme)
-						 //echo "<br>table champ=" .$table[$champ] ." autre ".$extra[$champ];
-                        if (isset($table[$champ])){ 
+						//if (isset($table[$champ])){
+						if (array_key_exists($champ,$table)){
 								if ($extra[$champ]!=$table[$champ]){
-								//echo "<br />pas egal! champ=$champ contenu=$contenu table=$table[$champ] extra=".$extra[$champ];
                                 //Si oui, changer la valeur dans le champs extra par celle du champs de la table
-                                $extra[$champ]=$table[$champ];
-								$modification=1;  
+                               $extra[$champ]=$table[$champ];
+								$modification=1;
 								}
                         }
+						
                 }
-				/******************************************************/
+				
 				if ($modification){// si la valeur d'un champ homonyme dans la table diffère de celui dans le champs extra, mettre à jour le champ extra
 								$extra_temp = serialize($extra);
-								//echo"$extra_temp";
-                                $query = "UPDATE spip_$type SET 
+								
+                               $query = "UPDATE spip_$type SET 
                                 extra ='".$extra_temp."'
                                 WHERE $id_table=".$id;
-								//echo "<br>queryri $query";
 								$result = spip_query($query);
-								//debug($result);
+								debug($result);
 								
-				}
-				/******************************************************/
+								
+				}		
+				
         }else if($action=='update'){
-				//echo"update!!";
                 while (list($champ,$contenu) = each($extra)) {
-					
                         // Pour chaque nom de champs extra 
                         // vérifier si la table comporte un champs du même nom (homonyme)
-                        //if (isset($table[$champ])){
-						if (array_key_exists($champ,$table)){
+                        if (isset($table[$champ])){
                                 //Si oui, mettre à jour la valeur des champs de la table par la valeur du champs extra du même nom
                                 $query = "UPDATE spip_$type SET 
                                 $champ='".addslashes($extra[$champ])."'
                                 WHERE $id_table=".$id;
                                 $trace .= spip_query($query) OR die($query);
-								//echo "<br>queryrote $query";
+								$result = spip_query($query);
+								debug($result);
+								
                         }
                  }
 				//exit;  
+				
         }
-		 
+
  return serialize($extra);
+
+ return $extra;
+}
+
+// #EXTRA
+// [(#EXTRA|extra{isbn})]
+// ou [(#EXTRA|isbn)] (ce dernier applique les filtres definis dans mes_options)
+// Champs extra
+// Non documentes, en voie d'obsolescence, cf. ecrire/inc/extra
+// http://doc.spip.org/@balise_EXTRA_dist
+function balise_EXTRA ($p) {
+	$_extra = champ_sql('extra', $p);
+
+	$p->code = $_extra;
+
+	// Gerer la notation [(#EXTRA|isbn)]
+	if ($p->fonctions) {
+		list($champ,) = $p->fonctions[0];
+		include_spip('inc/extra');
+		$type_extra = $p->type_requete;
+		// ci-dessus est sans doute un peu buggue : si on invoque #EXTRA
+		// depuis un sous-objet sans champ extra d'un objet a champ extra,
+		// on aura le type_extra du sous-objet (!)
+		if (extra_champ_valide($type_extra, $champ)) {
+			array_shift($p->fonctions);
+			array_shift($p->param);
+			// Appliquer les filtres definis par le webmestre
+			$p->code = 'extra('.$p->code.', "'.$champ.'")';
+			$filtres = extra_filtres($type_extra, $champ);
+			if ($filtres) foreach ($filtres as $f)
+				$p->code = "$f($p->code)";
+		} else {
+			if (!function_exists($champ)) {
+				spip_log("erreur champ extra |$champ");
+				array_shift($p->fonctions);
+				array_shift($p->param);
+			}
+		}
+	}
+	#$p->interdire_scripts = true;
+	return $p;
 }
 ?>
