@@ -186,7 +186,18 @@ EOF;
                     // find_in_path('$GLOBALS['meta']['habillages_nomskel_reperso']')
                     // Si le code ci-dessus ne donne rien, avertir qu'une erreur a ete faite dans
                     // la saisie du chemin de repertoire.
-                    echo "<tr><td colspan='2' style='background-color:$couleur_claire' class='hab_fondclair'><u>Repertoire original</u> :<br />".$chemin_plugin_complet."<br /><u>Repertoire personnalise</u> :<br />Variable chemin repertoire</td></tr>";
+                    $reperso_ok = $GLOBALS['meta']['habillages_'.$prefixe_theme.'_reperso'];
+                    echo "<tr><td colspan='2' style='background-color:$couleur_claire' class='hab_fondclair'><u>Repertoire original</u> :<br />".$chemin_plugin_complet;
+                    if (is_dir($reperso_ok) AND $reperso_ok != "") {
+                    	echo "<br /><u>Repertoire personnalise</u> :<br />".$reperso_ok;
+                	}
+                	elseif ($reperso_ok == "") {
+                    	echo "<br /><u>Pas de repertoire personnalise</u>";
+                	}
+                	else {
+	                	echo "<br /><u>Repertoire personnalise</u> : Le champs indique n'existe pas !<br />".$reperso_ok;
+                	}
+                	echo "</td></tr>";
     	        }
     	    }
     	    
