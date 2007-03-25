@@ -1,0 +1,237 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>Champs homonymes</title>
+	<INCLURE{fond=inc-head}>
+</head>
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Champs homonymes</div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal]
+		<div id="contenu">
+
+			<div class="cartouche">
+				<p class="#EDIT{surtitre} surtitre">Gestion des nouveaux champs dans les tables SPIP par les champs EXTRA : champs homonymes</p>
+				<h1 class="titre">Plugin Champs homonymes: visualiser le r&eacute;sultat</h1>
+				<p class="#EDIT{soustitre} soustitre">Afficher le r&eacute;sultat de la synchronisation</p>
+			</div>
+			
+			#DEBUT_SURLIGNE
+			<div class="chapo">
+			  <p>Cette page vous permet de visualiser le r&eacute;sultat de la synchronisation des champs EXTRA avec leurs homonymes </p>
+			</div>
+			
+			<br class="nettoyeur" />
+			
+			<div class="texte">
+				<h3 class="spip">Ce qui a &eacute;t&eacute; fait </h3>
+				<ul class="spip">
+					<li class="spip">L'&eacute;tape pr&eacute;c&eacute;dente a permis d'ajouter &agrave; plusieurs table de SPIP un nouveau champs nomm&eacute; &quot;plus&quot;.</li>
+					<li class="spip">Dans le fichier &quot;mes_options_homonymes.php&quot; contenu dans le dossier du plugin nous avons d&eacute;fini des champs EXTRA nomm&eacute; &quot;plus&quot;. </li>
+					<li class="spip">Dans le fichier &quot;mes_fonctions_homonymes.php&quot; contenu dans le dossier du plugin nous avons d&eacute;fini une fonction  nomm&eacute;e &quot;extra_homonyme_maj&quot; qui nous permettra de synchroniser nous champs. </li>
+				</ul>
+				<h3 class="spip">Principe</h3>
+				<p class="spip">
+				Dans cette page, pour chaque table, nous allons commenc&eacute; par la synchronisation:
+				<code><br />
+				&lsaquo;BOUCLE_articles1(ARTICLES)><br />
+				[(&#35;ID_ARTICLE|extra_homonyme_maj{'articles',&#35;ENV{homonyme}})]<br />
+				&lsaquo;/BOUCLE_articles1>
+				</code>
+				</p>
+				<p>Selon le choix que vous ferez dans cette page, la valeur de &#35;ENV{homonyme} demandera &agrave; la fonction de synchroniser le nouveau champs "plus" avec la valeur contenue
+				dans le champ EXTRA "plus" ou vise-versa. </p>
+				<p>Dans la boucle suivante, nous afficherons cette valeur par la balise <code>[(&#35;EXTRA|extra{plus})]</code> pour la valeur contenue dans le champ EXTRA &quot;plus&quot; et par la balise <code>[(&#35;PLUS)]</code> pour la valeur contenue dans le nouveau champ homonyme. </strong></code></p>
+				
+				<code>
+					&lsaquo;BOUCLE_articles(ARTICLES)>	<br />	
+					[&lsaquo;li class="spip"><br />
+					&lsaquo;a href="ecrire/?exec=articles&id_article=&#35;ID_ARTICLE" target="_blank" class="spip_out">TITRE de l'ARTICLE: &#35;TITRE&lsaquo;/a><br />
+					&lsaquo;div style='text-align: left;' class='spip_code' dir='ltr'><br />
+					&lsaquo;ul><br />
+					&lsaquo;li>EXTRA plus = (&#35;EXTRA|extra{plus})&lsaquo;/li><br />
+					[&lsaquo;li>Plus = (&#35;PLUS)&lsaquo;/li>]<br />
+					&lsaquo;/ul><br />
+					&lsaquo;/div><br />
+					&lsaquo;/li>]<br />
+					&lsaquo;/BOUCLE_articles><br />
+				</code>
+				
+				<h3 class="spip">Entrer des valeurs par l'interface priv&eacute;e</h3>
+				Dans l'interface priv&eacute;e, 
+				<ul class="spip">
+					<li class="spip">modifiez une <a href="ecrire/?exec=naviguer&id_rubrique=0" target="_blank" class="spip_out">rubrique</a>, un <a href="ecrire/?exec=articles_page" target="_blank" class="spip_out">article</a>, une <a href="ecrire/?exec=breves" target="_blank" class="spip_out">br&egrave;ve</a>, un <a href="ecrire/?exec=mots_tous" target="_blank" class="spip_out">mot cl&eacute;</a> ou un <a href="ecrire/?exec=sites_tous" target="_blank" class="spip_out">site&nbsp;r&eacute;f&eacute;renc&eacute;</a> pour donner une valeur au champ EXTRA plus.</li>
+					<li class="spip">rafraich&icirc;ssez cette page pour voir le r&eacute;sultat s'afficher</li>
+				</ul>			
+
+				<h3 class="spip">R&eacute;sultat</h3>
+				<ul class="spip">
+				<BOUCLE_auteurs1(AUTEURS)>
+					[(#ID_AUTEUR|extra_homonyme_maj{'auteurs',#ENV{homonyme}})]
+				</BOUCLE_auteurs1>
+				
+				<B_auteurs>
+				<BOUCLE_auteurs(AUTEURS)>
+					[<li class="spip">
+						<a href="ecrire/?exec=auteurs_edit&id_auteur=#ID_AUTEUR" target="_blank" class="spip_out">Nom de l'AUTEUR: #NOM</a>
+						<div style='text-align: left;' class='spip_code' dir='ltr'>
+							<ul>
+								<code>
+									<li>EXTRA plus = <strong>(#EXTRA|extra{plus})</strong></li>
+									[<li>Plus = <strong>(#PLUS)</strong></li>]
+								</code>
+							</ul>
+							</div>
+						<br class="nettoyeur" />
+					</li><br />]
+				</BOUCLE_auteurs>
+				</B_auteurs>
+
+
+				<BOUCLE_articles1(ARTICLES)>
+					[(#ID_ARTICLE|extra_homonyme_maj{'articles',#ENV{homonyme}})]
+				</BOUCLE_articles1>
+				
+				<B_articles>
+				<BOUCLE_articles(ARTICLES)>		
+					[<li class="spip">
+						<a href="ecrire/?exec=articles&id_article=#ID_ARTICLE" target="_blank" class="spip_out">TITRE de l'ARTICLE: #TITRE</a>
+						<div style='text-align: left;' class='spip_code' dir='ltr'>
+							<ul>
+								<code>
+									<li>EXTRA plus = <strong>(#EXTRA|extra{plus})</strong></li>
+									[<li>Plus = <strong>(#PLUS)</strong></li>]
+								</code>
+							</ul>
+							</div>
+						<br class="nettoyeur" />
+					</li><br />]
+				</BOUCLE_articles>
+				</B_articles>
+
+				<BOUCLE_rubriques1(RUBRIQUES)>
+					[(#ID_RUBRIQUE|extra_homonyme_maj{'rubriques',#ENV{homonyme}})]
+				</BOUCLE_rubriques1>
+
+				<B_rubriques>
+				<BOUCLE_rubriques(RUBRIQUES)>	
+					[<li class="spip">
+						<a href="ecrire/?exec=naviguer&id_rubrique=#ID_RUBRIQUE" target="_blank" class="spip_out">TITRE de la RUBRIQUE: #TITRE</a>
+						<div style='text-align: left;' class='spip_code' dir='ltr'>
+							<ul>
+								<code>
+									<li>EXTRA plus = <strong>(#EXTRA|extra{plus})</strong></li>
+									[<li>Plus = <strong>(#PLUS)</strong></li>]
+								</code>
+							</ul>
+							</div>
+						<br class="nettoyeur" />
+					</li><br />]	
+				</BOUCLE_rubriques>
+				</B_rubriques>
+
+				<BOUCLE_breves1(BREVES)>
+					[(#ID_BREVE|extra_homonyme_maj{'breves',#ENV{homonyme}})]
+				</BOUCLE_breves1>
+				
+				<BOUCLE_breves(BREVES)>
+					[<li class="spip">
+						<a href="ecrire/?exec=breves_voir&id_breve=#ID_BREVE" target="_blank" class="spip_out">TITRE de la BRÈVE: #TITRE</a>
+						<div style='text-align: left;' class='spip_code' dir='ltr'>
+							<ul>
+								<code>
+									<li>EXTRA plus = <strong>(#EXTRA|extra{plus})</strong></li>
+									[<li>Plus = <strong>(#PLUS)</strong></li>]
+								</code>
+							</ul>
+							</div>
+						<br class="nettoyeur" />
+					</li><br />]	
+				</BOUCLE_breves>
+
+				<BOUCLE_mots1(MOTS)>
+					[(#ID_MOT|extra_homonyme_maj{'mots',#ENV{homonyme}})]
+				</BOUCLE_mots1>
+				
+				<BOUCLE_mots(MOTS)>
+					[<li class="spip">
+						<a href="ecrire/?exec=mots_edit&id_mot=#ID_MOT" target="_blank" class="spip_out">MOT CLÉ: #TITRE</a>
+						<div style='text-align: left;' class='spip_code' dir='ltr'>
+							<ul>
+								<code>
+									<li>EXTRA plus = <strong>(#EXTRA|extra{plus})</strong></li>
+									[<li>Plus = <strong>(#PLUS)</strong></li>]
+								</code>
+							</ul>
+							</div>
+						<br class="nettoyeur" />
+					</li><br />]	
+				</BOUCLE_mots>
+
+				<BOUCLE_sites1(SITES)>
+					[(#ID_SYNDIC|extra_homonyme_maj{'sites',#ENV{homonyme}})]
+				</BOUCLE_sites1>
+				
+				<BOUCLE_sites(SITES)>
+					[<li class="spip">
+						<a href="ecrire/?exec=sites&id_syndic=#ID_SYNDIC" target="_blank" class="spip_out">SITE: #NOM_SITE</a>
+						<div style='text-align: left;' class='spip_code' dir='ltr'>
+							<ul>
+								<code>
+									<li>EXTRA plus = <strong>(#EXTRA|extra{plus})</strong></li>
+									[<li>Plus = <strong>(#PLUS)</strong></li>]
+								</code>
+							</ul>
+							</div>
+						<br class="nettoyeur" />
+					</li><br />]	
+				</BOUCLE_sites>
+			</ul>
+			
+			<h3 class="spip">Supprimer les nouveaux champs</h3>
+			Maintenant que vous avez pu tester le bon fonctionnement du plugin, vous pouvez supprimer les champs "plus" que nous avons cr&eacute;&eacute;s pour le test.<br />
+			<ul class="spip">
+			<li class="spip"><a href="spip.php?page=homonymes_plus2">Aller &agrave; la page de supression des nouveaux champs</a></li>
+			</ul>
+			</div>
+			
+
+			
+
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+
+	
+		</div><!-- fin contenu -->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<div class="breves">
+				<h2 class="menu-titre">Pour plus d'informations</h2>
+				<ul>
+					<li>Auteur&nbsp;:  <a href="http://monsitespip.com/spip.php?auteur1" target="_blank" class="spip_out">François Vachon</a></li>
+					<li>Licence&nbsp;: GNU/GPL (code &amp; doc)</li>
+					<li>Information en linge &nbsp;: <a href="http://monsitespip.com/spip.php?article7" target="_blank" class="spip_out">www.monsitespip.com</a></li>
+				</ul>
+			</div>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

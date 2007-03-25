@@ -1,0 +1,282 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>Champs homonymes</title>
+	<INCLURE{fond=inc-head}>
+</head>
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Champs homonymes</div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal]
+		<div id="contenu">
+
+			<div class="cartouche">
+				<p class="#EDIT{surtitre} surtitre">Gestion des nouveaux champs dans les tables SPIP par les champs EXTRA : champs homonymes</p>
+				<h1 class="titre">Plugin Champs homonymes: visualiser le r&eacute;sultat</h1>
+				<p class="#EDIT{soustitre} soustitre">Afficher le r&eacute;sultat de la synchronisation</p>
+			</div>
+			
+			#DEBUT_SURLIGNE
+			<div class="chapo">
+			  <p>Cette page vous permet de visualiser le r&eacute;sultat de la synchronisation des champs EXTRA; avec leurs homonymes </p>
+			</div>
+			
+			<br class="nettoyeur" />
+			
+			<div class="texte">
+				<h3 class="spip">Ce que fait ce test...</h3>
+			  Les diff&eacute;rentes &eacute;tapes de ce test vous permettront:  
+				<ul class="spip">
+					<li class="spip"> de cr&eacute;er dans plusieurs tables, un nouveau champs nomm&eacute; “plus” </li>
+					<li class="spip"> de choisir de synchroniser les champs EXTRA avec les champs homonymes ou de synchroniser les champs homonymes avec les champs EXTRA</li>
+					<li class="spip"> de voir la mise &agrave; jour synchronis&eacute;e de vos champs EXTRA et homonymes</li>
+					<li class="spip"> de supprimer les nouveaux champs pour retrouver votre &eacute;tat premier</li>
+				</ul>
+			  
+			
+				<h3 class="spip">Cr&eacute;ation et suppression de nouveaux champs</h3>
+<?php
+
+/***************************************************************************\
+ * Ce fichier ne peut être exécuté que par une personne s`étant identifier 
+ * comme administrateur du site.
+ *
+ * Il permet de créer pour les tables spip_articles, spip_rubriques, 
+ * spip_breves, spip_syndic et spip_mots 
+ * un nouveaux champs appellé « plus » .
+ *
+\***************************************************************************/
+$iago='message';
+/*
+	Vérifier si la personne connectée a le statut d`administrateur du site
+*/
+
+if ($auteur_session['statut']=='0minirezo'){
+	// Liste des tables à modifier
+	$tables= array('auteurs','articles','rubriques','breves','syndic','mots');
+
+	foreach ($tables as $value) {
+		$table = $value;
+		$query = "SELECT spip_$table.plus FROM spip_$table";
+		$existe = spip_query_db($query);
+		
+			if ($existe){
+			$existe =1;
+			break;
+			}
+	}
+	
+	echo '<div align="left">';
+	if ((isset($HTTP_POST_VARS["iago1"])) && ($HTTP_POST_VARS["iago1"] == "suppression")) {
+	
+		$iago='suppression';
+		$HTTP_POST_VARS["iago1"]='';
+		
+	}else if ((isset($HTTP_POST_VARS["iago1"])) && ($HTTP_POST_VARS["iago1"] == "creation")) {
+	
+		$iago='creation';
+		$HTTP_POST_VARS["iago1"]='';
+	
+	}
+	else{
+		$iago='message';
+	}
+	
+	$tables= array('auteurs','articles','rubriques','breves','syndic','mots');
+
+	foreach ($tables as $value) {
+		$table = $value;
+		if ($iago1=='creation'){
+			$query = "SELECT spip_$table.plus FROM spip_$table";
+			$existe = spip_query_db($query);
+				if (!$existe){
+					$query = " ALTER TABLE spip_$table
+						ADD plus text NOT NULL DEFAULT ''
+					";
+					$creation = spip_query_db($query);
+					//$creation = $query;
+					//echo $creation."<br>";
+					if ($creation){
+					echo "<br>La <strong>cr&eacute;ation</strong> du champs <strong>'plus'</strong> de la table <strong>spip_$table</strong> a r&eacute;ussi.<br>";
+					$existe =1;
+					}
+					else{
+					echo "<br>La <strong>cr&eacute;ation</strong> du champs <strong>'plus'</strong> de la table <strong>spip_$table</strong> a &eacute;chou&eacute;.<br>";
+					$echec=1;
+					}
+					
+				}else{
+					echo "<br>Le champs <strong>'plus'</strong> de la table <strong>spip_$table</strong> existe d&eacute;j&agrave;.<br>";
+				}
+		}else if ($iago1=='suppression'){
+		
+			$query = "SELECT spip_$table.plus FROM spip_$table";
+			$existe = spip_query_db($query);
+				if ($existe){
+					$query = "ALTER TABLE spip_$table DROP plus ";
+					$suppression = spip_query_db($query);
+					//$suppression = $query;
+					//echo $suppression."<br>";
+					echo '<ul class="spip">';
+					if ($suppression){
+					echo "<li class='spip'>La <strong>suppression</strong> du champs <strong>'plus'</strong> de la table <strong>spip_$table</strong> a r&eacute;ussi.</li>";
+					$existe =0;
+					}
+					else{
+					echo "<li class='spip'>La <strong>suppression</strong> du champs <strong>'plus'</strong> de la table <strong>spip_$table</strong> a &eacute;chou&eacute;.</li>";
+					}
+					}else{
+					echo "<li class='spip'>Le champs <strong>'plus'</strong> de la table <strong>spip_$table</strong> n'existe pas.</li>";
+					}
+					echo '</ul>'; 
+		}
+	}
+if ($iago=='message'){
+	if ($existe){
+	echo '<br /><strong>'.$auteur_session['nom']. "</strong> est autoris&eacute; en tant qu'<strong>administrateur</strong> du site<br>&agrave; <strong>supprimer</strong> les champs <strong>'plus'</strong> pour les tables: <ul class='spip'><li class='spip'>spip_auteurs</li><li class='spip'>spip_articles</li><li class='spip'>spip_rubriques</li><li class='spip'>spip_breves</li><li class='spip'>spip_syndic</li><li class='spip'>spip_mots</li></ul>";
+	}else{
+	echo '<br /><strong>'.$auteur_session['nom']. "</strong> est autoris&eacute; en tant qu'<strong>administrateur</strong> du site<br>&agrave; <strong>cr&eacute;er</strong> les champs <strong>'plus'</strong> pour les tables: <ul class='spip'><li class='spip'>spip_auteurs</li><li class='spip'>spip_articles</li><li class='spip'>spip_rubriques</li><li class='spip'>spip_breves</li><li class='spip'>spip_syndic</li><li class='spip'>spip_mots</li></ul>";
+	}
+}
+
+$iago=[(#ENV{iago}|?{#ENV{iago},'form'})];
+//echo 'iago = '.$iago;
+//echo 'self = #SELF';
+switch ($iago) {
+   case 'form':
+		?>
+		<form action="#SELF" method="get">
+			<input name="page" type="hidden" value="homonymes_plus2">
+			<?
+			if ($existe){
+			?>
+				<input name="iago1" type="radio" value="suppression">
+				<strong>Supprimer</strong> les nouveaux champs <strong>'plus'</strong><br>
+			<?
+			}else{
+			?>
+				<input name="iago" type="hidden" value="maj">
+				<input name="iago1" type="radio" value="creation">
+				<strong>Cr&eacute;er</strong> les nouveaux champs <strong>'plus'</strong><br>
+			<?
+			}
+			?>
+				<input name="valider" type="submit" value="Valider">
+		</form>
+		<?
+		break;
+		
+	case 'maj':
+		?>
+		
+		<form action="spip.php" method="get">
+		<input name="iago" type="hidden" value="form">
+		<input name="page" type="hidden" value="homonymes_maj2">
+		<input name="homonyme" type="hidden" value="eversch">
+		<h3 class='spip'>Mettre &agrave; jours les champs homonymes avec les champs EXTRA </h3>
+		<h4>Situation</h4>
+		<ul class='spip'>
+		<li class='spip'>Vous avez d&eacute;j&agrave; entr&eacute; certaines valeurs dans les champs EXTRA ayant un nouveau champ homonyme</li>
+		<li class='spip'>Vous n'avez pas encore entr&eacute; de valeur dans les nouveaux champs homonymes</li>
+		</ul>
+
+		Si les tables spip_auteurs, spip_articles, spip_rubriques, spip_breves, spip_syndic ou spip_mots
+		ont un champ homonyme dans leur champ EXTRA, la valeur dans le champ EXTRA sera plac&eacute;e dans son champs homonyme.
+		<br />
+		<h4>Attention, cette op&eacute;ration est irr&eacute;versible.</h4>
+		<input name="valider" type="submit" value="Valider">
+		</form>
+		<br /><hr><br />
+		<form action="spip.php" method="get">
+		<input name="iago" type="hidden" value="form">
+		<input name="page" type="hidden" value="homonymes_maj2">
+		<input name="homonyme" type="hidden" value="chverse">
+		<h3 class='spip'>Mettre &agrave; jours les champs EXTRA avec les champs homonymes</h3>
+		<h4>Situation</h4>
+		<ul class='spip'>
+		<li class='spip'>Vous n'avez entr&eacute; aucune valeur dans les champs EXTRA ayant un nouveau champ homonyme</li>
+		<li class='spip'>Vous avez d&eacute;j&agrave; entr&eacute; des valeurs dans les nouveaux champs homonymes</li>
+		</ul>
+		
+		Si les tables spip_auteurs, spip_articles, spip_rubriques, spip_breves, spip_syndic ou spip_mots
+		ont un champ homonyme dans leur champ EXTRA, la valeur du champs homonyme sera plac&eacute;e dans le champ EXTRA du même nom.
+		<br />
+		<h4>Attention, cette op&eacute;ration est irr&eacute;versible.</h4>
+		<input name="valider" type="submit" value="Valider">
+		</form>
+
+		<? 
+		break;
+		
+	case 'test'
+		?>
+		<form action="spip.php" method="post">
+		<input name="iago" type="hidden" value="form">
+		<input name="page" type="hidden" value="homonymes_maj2">
+		<h2>Visualiser les nouveau champs ayant un homonyme dans le champ EXTRA</h2>
+		<input name="valider" type="submit" value="Visualiser">
+		</form>
+		<?
+		break;
+}
+?>
+
+
+<?
+if (!$existe){
+}
+?>
+</div>
+<?
+}else{
+?>
+<div align="center">
+<h3 class="spip">Seuls les administrateurs peuvent acc&eacute;der &agrave; cette page</h3>
+<h3 class="spip">#NOM_SITE_SPIP</h3>
+</div>
+
+#LOGIN_PUBLIC
+
+<?
+}
+?>
+			
+			</div><!-- fin class texte -->
+
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+
+	
+		</div><!-- fin contenu -->
+
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<div class="breves">
+				<h2 class="menu-titre">Pour plus d'informations</h2>
+				<ul>
+					<li>Auteur&nbsp;:  <a href="http://monsitespip.com/spip.php?auteur1" target="_blank" class="spip_out">François Vachon</a></li>
+					<li>Licence&nbsp;: GNU/GPL (code &amp; doc)</li>
+					<li>Information en linge &nbsp;: <a href="http://monsitespip.com/spip.php?article7" target="_blank" class="spip_out">www.monsitespip.com</a></li>
+				</ul>
+			</div>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
