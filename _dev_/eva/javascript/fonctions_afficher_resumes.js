@@ -35,49 +35,37 @@ function afficher_resume(clic, bloc){
 		}
 	if(valeur=="block"){
 		valeur2 = "block";
-		valeur_message_resumes = "Masquer";
+		valeur_message_resumes = "Masquer les r&eacute;sum&eacute;s";
 	}
 	else {
 		valeur2 = "none";
-		valeur_message_resumes = "Afficher"
+		valeur_message_resumes = "Afficher les r&eacute;sum&eacute;s"
 	}
 
 	if (clic == "clic"){
 		if(valeur=="block"){
 			valeur="none";
 			valeur2="none";
-			valeur_message_resumes="Afficher"
+			valeur_message_resumes="Afficher les r&eacute;sum&eacute;s"
 		}
 		else if(valeur=="none") {
 			valeur="block";
 			valeur2="block";
-			valeur_message_resumes="Masquer";
+			valeur_message_resumes="Masquer les r&eacute;sum&eacute;s";
 		}
 		
 	}
-if(document.all){
-// Pour Internet Explorer
-	//alert(valeur);
-	for (var k=0; k<document.all["introduction_opt_"+bloc].length; k++) {
-	document.all["introduction_opt_"+bloc][k].style.display = valeur;
+	var compteur_introduction = 1;
+	while(document.getElementById("introduction_opt_"+bloc+"_"+compteur_introduction)){
+		document.getElementById("introduction_opt_"+bloc+"_"+compteur_introduction).style.display = valeur;
+		compteur_introduction++;
 	}
-// Ce qui suit ne peut pas, pour IE6, etre fait n'importe quand :
-// la page doit etre entierement chargee pour qu'innerHtml opere
-// sur son parent cf. <http://support.microsoft.com/?scid=kb%3Ben-us%3B276228&x=8&y=8>
-  	//for (var l=0; l<document.all["message_resumes_"+bloc].length; l++){
-  	document.all["message_resumes_"+bloc].innerHTML = valeur_message_resumes;
-  	//}
-}
 
-else {
-
-// Autres navigateurs, en esperant qu'ils respectent mieux les normes
-	for (var j=0; j<document.getElementsByName("introduction_opt_"+bloc).length; j++) {
-		document.getElementsByName("introduction_opt_"+bloc)[j].style.display = valeur;
+	var compteur_introduction_logo = 1;
+	while(document.getElementById("introduction_opt_logo_"+bloc+"_"+compteur_introduction_logo)){
+		document.getElementById("introduction_opt_logo_"+bloc+"_"+compteur_introduction_logo).style.display = valeur;
+		compteur_introduction_logo ++;
 	}
-	for (var j=0; j<document.getElementsByName("message_resumes_"+bloc).length; j++) {
-	document.getElementsByName("message_resumes_"+bloc)[j].innerHTML = valeur_message_resumes;
-	}
-}
+	document.getElementById("message_resumes_"+bloc).innerHTML = valeur_message_resumes;
 createCookie("affichage_resumes_"+bloc,valeur2,7);
 }

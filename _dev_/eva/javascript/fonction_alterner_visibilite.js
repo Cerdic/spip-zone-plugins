@@ -2,7 +2,7 @@ var liste_cache = new Array(0);
 var liste_cache_secteurs = new Array (0);
 
 function alterner_visibilite(liste, onload){
-	var el  = document.getElementById(liste).getElementsByTagName("LI");
+	var el  = document.getElementById("item_"+liste).getElementsByTagName("LI");
 	if(onload == "non"){
 
 		if(document.images['puce_'+liste].src.match("folder_blue.png")){
@@ -44,5 +44,16 @@ function afficher_populaires(){
 	else{
 		document.getElementById('populaires_menu').style.display='none';
 		valeur_pop="";
+	}
+}
+
+function cacher_en_cours(){
+	document.getElementById("liste_complete").style.display="block";
+	document.getElementById("en_cours").style.display="none";
+}
+
+function deplier(liste_cache){
+	for(j=0; j<liste_cache.length; j++){
+		alterner_visibilite(liste_cache[j]);
 	}
 }

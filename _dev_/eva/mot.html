@@ -39,6 +39,18 @@
 				
 			</div>
 			</B_mots_groupe>
+		<B_les_breves>
+		<!--affichage des brèves -->
+		<div id="breves">
+			<h4 class="center"><:breves:></h4>
+			<dl>
+				<BOUCLE_les_breves(BREVES){id_mot}{par date}{inverse}{pagination 5}{doublons}>
+				<dt[ class="(#EDIT{titre})"]>
+					[<strong><a href="#URL_BREVE">(#TITRE|supprimer_numero)</a></strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
+				</dt>
+ 				</BOUCLE_les_breves>
+			</dl>		</div>
+		</B_les_breves>
 </div>
 		<!-- début du menu -->
 		<div id="Menu">
@@ -79,18 +91,6 @@
 					</dl>
 				</div>
 			</B_articles>
-			
-			<B_breves>
-			<!-- Brèves -->
-				<div id="breves">
-					<h3 class="titre"><:breves:></h3>
-					<dl>
-					<BOUCLE_breves(BREVES){id_mot}>
-						<dt><a href="#URL_BREVE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
-					</BOUCLE_breves>
-					</dl>
-				</div>
-			</B_breves>
 
 			<B_sites_web>
 			<!-- Sites référencés -->

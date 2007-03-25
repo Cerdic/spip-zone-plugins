@@ -3,7 +3,7 @@
 <?php $actuel = "#ID_ARTICLE"; ?>
 <INCLURE{fond=entete_meta}>
 	<!--affichage du titre de la page -->
-	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
+	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero|supprimer_tags)]</title>
 	<!-- description et mots-clés de la page -->
 	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
 	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_article}{id_groupe!=1}{", "}>#TITRE</BOUCLE_keywords>" />

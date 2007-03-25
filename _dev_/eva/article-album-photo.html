@@ -27,15 +27,15 @@
 			}
 		?>
 		<!-- affichage de la première photo de la liste (par défaut), avec lien vers la suivante dessus -->
-		<a href="?page=article-album-photo&id_article=<?php echo $actuel ; ?>&debut_image=<?php echo $im_suiv ?>" title="<:image_suivante:>">
-<img src="#URL_DOCUMENT"[ alt="(#TITRE|supprimer_numero|sinon{"Photo"})"] class="spip_logos">
+		<a href="?page=article-album-photo&amp;id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $im_suiv ?>" title="<:image_suivante:>">
+<img src="#URL_DOCUMENT"[ alt="(#TITRE|supprimer_numero|sinon{"Photo"})"] class="spip_logos" />
 		</a> 
 		<!-- affichage de la légende (titre et descriptif) de la photo -->
 		<dl>
 			<dt[ class="(#EDIT{titre})"]>[<strong>(#TITRE|supprimer_numero)</strong>]</dt>
 			[<dd class="#EDIT{descriptif}">(#DESCRIPTIF)</dd>]
 		</dl>
-		<div class="spip_bouton" style="width:100px; margin:4px 4px 4px auto;" onClick="javascript:self.close();"><a href="javascript:self.close();"><strong><:fermer:></strong></a></div>
+		<div class="spip_bouton" style="width:100px; margin:4px 4px 4px auto;" onclick="javascript:self.close();"><a href="javascript:self.close();"><strong><:fermer:></strong></a></div>
 		
 	</div>
 </body>

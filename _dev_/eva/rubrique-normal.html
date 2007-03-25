@@ -8,8 +8,8 @@
 	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
 	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_groupe!=1}{id_rubrique}{", "}>#TITRE</BOUCLE_keywords>" />
 	<!-- Lien vers le backend pour navigateurs eclaires -->
-	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="spip.php?page=backend&id_rubrique=#ID_RUBRIQUE" />
-	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves_rubrique:>" href="spip.php?page=backend-breves&id_rubrique=#ID_RUBRIQUE" />
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="spip.php?page=backend&amp;id_rubrique=#ID_RUBRIQUE" />
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves_rubrique:>" href="spip.php?page=backend-breves&amp;id_rubrique=#ID_RUBRIQUE" />
 </head>
 <body>
 	
@@ -32,12 +32,14 @@
 		<br class="clear" />
 	</div>
 	<div id="barre_droite">
+		[(#MODELE*{sommaire}{id_article})]
+
 		<B_les_breves>
 		<!--affichage des brèves -->
 		<div id="breves">
 			<h4 class="center"><:breves:></h4>
 			<dl>
-				<BOUCLE_les_breves(BREVES){id_secteur}{par date}{inverse}{0,5}{doublons}>
+				<BOUCLE_les_breves(BREVES){id_secteur}{par date}{inverse}{pagination 5}{doublons}>
 				<dt[ class="(#EDIT{titre})"]>
 					[<strong><a href="#URL_BREVE">(#TITRE|supprimer_numero)</a></strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
 				</dt>
@@ -72,9 +74,9 @@
 		
 	<!-- début du contenu-->
 	<div id="Contenu">
-			
-		[<!-- texte de la rubrique -->
-		<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+		[(#REM) Ce qui suit est nécessaire pour empêcher le recalcul des notes demandé par l'existence de deux balises #TEXTE][(#TEXTE|?)][(#NOTES|?)]
+		<!-- texte de la rubrique -->
+		[<div class="#EDIT{texte} texte">(#TEXTE*|ancrer|propre)</div>]
 		
 		<BOUCLE_si_diaporama(MOTS){id_rubrique}{titre = diaporama}>
 			<BOUCLE_lien_premier_article(ARTICLES){id_rubrique}{par num titre}{0,1}>

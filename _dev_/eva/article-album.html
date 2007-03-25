@@ -68,7 +68,7 @@
 			<div id="vignettes">
 				<?php $url_image = 0; ?>
 				<BOUCLE_vignettes(DOCUMENTS){id_article}{par num titre}{extension==jpg|png|gif}{mode=document}>
-					<a href="spip.php?page=article-album&id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $url_image ?>" title="[(#TITRE|supprimer_numero)]">#LOGO_DOCUMENT</a>
+					<a href="spip.php?page=article-album&amp;id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $url_image ?>" title="[(#TITRE|supprimer_numero)]">#LOGO_DOCUMENT</a>
 				<?php $url_image = $url_image + 1; ?>
 				</BOUCLE_vignettes>
 			</div>
@@ -116,7 +116,7 @@
 
 		<!-- début du contenu -->
 		<div id="Contenu">
-<a href="#photo" class="spip_bouton" style="display:block; text-align:center" onClick="window.open ('spip.php?page=article-album-photo&id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $debut_image ?>', 'Photo', config='height=600, width=710, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no')" title="Les photos dans un popup"><:plein_ecran:></a><p>
+<a href="#photo" class="spip_bouton" style="display:block; text-align:center" onclick="window.open ('spip.php?page=article-album-photo&amp;id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $debut_image ?>', 'Photo', config='height=600, width=710, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no')" title="Les photos dans un popup"><:plein_ecran:></a>
 			<B_photo>
 			<!-- affichage de la photo -->
 			<div id="photo">
@@ -135,7 +135,7 @@
 					}
 				?>
 				<!-- affichage de la première photo de la liste (par défaut), avec lien vers la suivante dessus -->
-				<a href="spip.php?page=article-album&id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $im_suiv ?>" title="<:image_suivante:>">
+				<a href="spip.php?page=article-album&amp;id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $im_suiv ?>" title="<:image_suivante:>">
 
 <img src="#URL_DOCUMENT" [alt="(#TITRE|supprimer_numero|sinon{"photo"})"]
 <?php
@@ -149,7 +149,7 @@ if ($largeur > "500") {
 } 
 //  
 ?>
-class="spip_logos">
+class="spip_logos" />
 				</a> 
 				<!-- affichage de la légende (titre et descriptif) de la photo -->
 				<dl>
@@ -188,7 +188,7 @@ class="spip_logos">
 			<!-- début du forum -->
 			<div id="forum">
 			[<!-- Bouton laisser un commentaire -->
-			<a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_article:></a>]
+			<a href="spip.php?page=forum&amp;(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_article:></a>]
 			
 			<B_forums_decompte>
 			<h4 class="titre-forum">
@@ -207,7 +207,7 @@ class="spip_logos">
 					<dd>
 						[(#TEXTE)]
 						[<div class="lien"><:voir_en_ligne:> <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
-						[<div class="bouton"><a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_message:></a></div>]
+						[<div class="bouton"><a href="spip.php?page=forum&amp;(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_message:></a></div>]
 					</dd>
 					<!-- Affichage des réponses aux messages -->
 					<BOUCLE_forums_fils(FORUMS){id_parent}{par date}{inverse}>
@@ -217,7 +217,7 @@ class="spip_logos">
 							<dd>
 								[(#TEXTE)]
 								[<div class="lien"><:voir_en_ligne:> <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
-							 	[<div class="bouton"><a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_message:></a></div>]
+							 	[<div class="bouton"><a href="spip.php?page=forum&amp;(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_message:></a></div>]
 							</dd>
 							<BOUCLE_Forums_Boucle(boucle_forums_fils)>
 							</BOUCLE_Forums_Boucle>
