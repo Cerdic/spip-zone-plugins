@@ -18,7 +18,7 @@ $img_reload = find_in_path('reload_page.png');
 $img_logout = find_in_path('exit.png');
 
 // Masquer entierement les boutons quand on s'est deconnecte sans avoir detruit le cookie.
-if(!isset($GLOBALS['auteur_session']['id_auteur'])){$afficher_boutons="display:none";}
+if(!isset($GLOBALS['auteur_session']['id_auteur'])){$afficher_boutons="display:none; ";}
 else{$afficher_boutons="display:inherit; ";}
 
 // Appel du fichier de configuration boutons_supp_options.php, dans lequel on peut choisir
