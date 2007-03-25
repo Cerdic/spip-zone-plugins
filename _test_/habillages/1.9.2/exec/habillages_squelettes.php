@@ -13,13 +13,14 @@ include_spip('inc/habillages_presentation');
 # Changer les fonctions xml (cf. inc/xml).
 include_spip('inc/vieilles_defs');
 
+# Attention : subordonner l'execution des codes concernant les squelettes et les themes
+# seulement si le choix est coche dans le gestionnaire d'accueil !
 function exec_habillages_squelettes() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
 	
 	$surligne = "";
-
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');
@@ -48,7 +49,7 @@ function exec_habillages_squelettes() {
 		if (_request('statusplug') == "defaut") {
 			ecrire_meta('habillages_is_themes', 'non');
 			ecrire_meta('habillages_is_extras', 'non');
-			ecrire_meta('habillages_prefixe_squel', '');
+			ecrire_meta('habillages_prefixe_squel', 'defaut');
 			ecrire_meta('habillages_liste_themes', '');
 			ecrire_metas;
 		}
@@ -70,6 +71,13 @@ function exec_habillages_squelettes() {
 		$arbre_xml = $arbre_xml['theme'][0];
 		$nom_theme = trim(applatit_arbre($arbre_xml['prefixe']));
 
+		# Ecrire le prefixe du squelette choisit afin de pouvoir reconstruire (dans 
+		# habillages_options.php)le nom du champ dans lequel est insere le chemin vers 
+		# le repertoire personnalise de squelettes (repertoire fixe dans 
+		# habillages_config.php).
+		ecrire_meta('habillages_prefixe_squel', $nom_theme);
+		ecrire_metas;
+		
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		
 		foreach ($fichier_theme as $fichier){
@@ -106,13 +114,11 @@ function exec_habillages_squelettes() {
 			if ($nom_theme == $squelettes_theme) {
 				ecrire_meta('habillages_is_themes', 'oui');
 				ecrire_meta('habillages_is_extras', 'oui');
-				ecrire_meta('habillages_prefixe_squel', $prefixe_theme);
 				ecrire_metas;
 			}
 			else {
 				ecrire_meta('habillages_is_themes', 'non');
 				ecrire_meta('habillages_is_extras', 'non');
-				ecrire_meta('habillages_prefixe_squel', '');
 				ecrire_metas;
 			}
 		}
