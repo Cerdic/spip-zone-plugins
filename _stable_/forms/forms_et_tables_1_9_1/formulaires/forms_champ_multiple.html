@@ -1,8 +1,9 @@
 <BOUCLE_f(FORMS){id_form}>
 <BOUCLE_champs(FORMS_CHAMPS){id_form}{tout}{champ}> 
 <B_choix>
+	<input type='hidden' name='#ENV{name,#CHAMP}[]' id='input-#ID_FORM-#CHAMP' value='' />
 	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
-	<span class='spip_form_choix_multiple'>
+	<span class='spip_form_choix_multiple[ (#ENV{crayon_active,''})]'>
 	&nbsp; <input type='checkbox' name='#ENV{name,#CHAMP}[]' id='input-#ID_FORM-#CHOIX' value='#CHOIX'
 	[(#CHOIX|in_any{[(#ENV**{valeur}|forms_valeur{#CHAMP})], ''}|?{'checked="checked"',''})] />
 	<label for='input-#ID_FORM-#CHOIX'>[(#TITRE|supprimer_numero)]</label>
