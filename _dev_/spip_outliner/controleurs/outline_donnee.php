@@ -23,7 +23,8 @@ function controleurs_outline_donnee_dist($regs) {
 		'erreur'=>serialize(array()),
 		'id_form' => $id_form,
 		'id_donnee' => $id,
-		'valeurs' => serialize($valeurs));
+		'valeurs' => serialize($valeurs),
+		'crayon_active' => 'crayon-active');
 	$html = $n->formulaire($contexte);
 	
 	// retirer le fieldset et sa legend
