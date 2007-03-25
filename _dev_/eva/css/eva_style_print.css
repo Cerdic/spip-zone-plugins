@@ -1,6 +1,6 @@
 /******************************************
-	PAGE : éléments d'habillage de la page
-	et éléments communs sur toute la page
+	PAGE : ï¿½ï¿½ents d'habillage de la page
+	et ï¿½ï¿½ents communs sur toute la page
 ******************************************/
 body {
 	background-color:#ffffff;	
@@ -10,7 +10,7 @@ body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	}
 
-/* force le retour à la ligne, le plus souvent appliqué à <br> */
+/* force le retour ï¿½la ligne, le plus souvent appliquï¿½ï¿½<br> */
 .clear {
 	clear: both;
 	font-size:0;
@@ -23,8 +23,7 @@ a, a:visited {
 	
 /* images & logos */
 img.spip_logos {
-	border:none;
-	padding:2px;
+	display:none;
 	}
 img.smiley {
 	vertical-align:middle;
@@ -41,7 +40,7 @@ a img {
 
 
 /******************************************
-	LOGIN : éléments spécifique au 
+	LOGIN : ï¿½ï¿½ents spï¿½ifique au 
 	squelette login.html
 ******************************************/
 div#Login {
@@ -61,7 +60,7 @@ div#Login div.spip_encadrer {
 	}
 
 /******************************************
-	ENTETE : éléments des entêtes (titres, logos, ...)
+	ENTETE : ï¿½ï¿½ents des entï¿½es (titres, logos, ...)
 	des pages (accueil, rubriques, plan, ...) 
 ******************************************/	
 div#EntetePage {
@@ -110,8 +109,8 @@ div#EntetePage .rechercher {
 
 
 /******************************************
-	ENTETE DES ARTICLES : éléments des 
-	entêtes (titres, logos, ...) des pages
+	ENTETE DES ARTICLES : ï¿½ï¿½ents des 
+	entï¿½es (titres, logos, ...) des pages
 	articles
 ******************************************/
 
@@ -139,7 +138,7 @@ div#EnteteArticle div.surtitre, div#EnteteArticle div.soustitre {
 	font-size: 14px;
 	}
 	
-/* Message auquel on répond (forum.html) */
+/* Message auquel on rï¿½ond (forum.html) */
 div#EnteteArticle dl {
 	margin: 4px;
 	padding:4px;	
@@ -158,7 +157,7 @@ div#EnteteArticle ul.auteur li {
 	margin: 0;
 	}
 
-/* Boutons suivants et précédents du diaporama */
+/* Boutons suivants et prï¿½ï¿½ents du diaporama */
 div.BoutonsPrecedents, div.BoutonsSuivants {
 	display:none;
 	}
@@ -171,7 +170,7 @@ div.arborescence {
 /******************************************
 	CONTENU : affichage du texte des pages ;
 	affichages des articles, sites 
-	référencés pour les rubriques ; etc ...
+	rï¿½ï¿½encï¿½ pour les rubriques ; etc ...
 ******************************************/
 
 div#Contenu {
@@ -209,7 +208,7 @@ div#edito img.spip_logos {
 	margin: 1px;
 	}
 
-/* affichages des listes de définitions, utilisées pour
+/* affichages des listes de dï¿½initions, utilisï¿½s pour
  lister les articles, documents, etc ... */
 div#Contenu dl {
 	margin: 0 0 5px 0;
@@ -244,7 +243,7 @@ div#Contenu dd {
 div#Contenu dl.premier {
 	border-bottom:1px solid #000000 ;
 	}
-/* liste des signatures de la pétition */
+/* liste des signatures de la pï¿½ition */
 div#Contenu div#petition dd {
 	border-bottom: 1px solid #000000 ;
 	padding-bottom: 2px;
@@ -307,8 +306,8 @@ div#Contenu p.spip, p.spip_note {
 
 
 /******************************************
-	MENU : éléments affiché dans le bloc
-	"menu" (sommaire, brèves, derniers 
+	MENU : ï¿½ï¿½ents affichï¿½dans le bloc
+	"menu" (sommaire, brï¿½es, derniers 
 	messages des forums)
 ******************************************/
 
@@ -320,7 +319,7 @@ div#Menu {
 
 /******************************************
 	AGENDA (calendrier) : affichages 
-	spécifiques à l'agenda (rubrique-agenda.html)
+	spï¿½ifiques ï¿½l'agenda (rubrique-agenda.html)
 ******************************************/
 table.agenda {
 	width:100%;
@@ -370,7 +369,7 @@ table.agenda select, table.agenda input {
 
 
 /******************************************
-	PLAN DU SITE : affichages spécifiques
+	PLAN DU SITE : affichages spï¿½ifiques
 	au plan du site (plan.html)
 ******************************************/
 
@@ -406,7 +405,7 @@ ul.plan li.rubriques strong a {
 	text-decoration:none;
 	}
 
-/* affichage des brèves du secteur dans le plan du site */
+/* affichage des brï¿½es du secteur dans le plan du site */
 div.secteur div.breves {
 	border: 2px solid #000000 ;
 	position:relative;
@@ -454,7 +453,7 @@ div#PiedPage {
  
 /******************************************
 	FORUMS : affichage des forums des 
-	articles et brèves
+	articles et brï¿½es
 ******************************************/
 div#forum {
 	margin: 20px 0;
@@ -476,7 +475,7 @@ div#forum div.lien {
 	font-size: 12px;
 	}
 
-/* boutons (liens) "répondre à ..." */
+/* boutons (liens) "rï¿½ondre ï¿½..." */
 div#forum dl div.bouton {
 	display:none;
 	}
@@ -519,7 +518,7 @@ div#forum dl.reponse dd {
 	
 	
 /******************************************
-	SPIP : éléménets générés par SPIP 
+	SPIP : ï¿½ï¿½ï¿½ets gï¿½ï¿½ï¿½ par SPIP 
 ******************************************/
 
 h3.spip {
@@ -582,14 +581,22 @@ table.spip td {
 	
 	
 /******************************************
-	BOUTONS ADMIN : boutons affichés pour
+	BOUTONS ADMIN : boutons affichï¿½ pour
 	les administrateurs
 	(recalculer cette page , ...) 
 ******************************************/
-.spip-admin {
-	text-align:left;
-	left:2px;
+.spip-admin-float {
+	display:none !important;
 	}
-.spip-admin form{
-	margin:2px;
-	}
+
+#sommaire_article, #groupesmots{
+	font-size:75%;
+}
+a.sommaire_article {
+	color:black !important;
+}
+
+.spip_doc_titre{
+	font-size:75%;
+	text-align:center;
+}

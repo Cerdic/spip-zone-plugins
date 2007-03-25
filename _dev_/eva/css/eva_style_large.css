@@ -253,7 +253,7 @@ div#Contenu div.arborescence{
 	}
 div.arborescence span{
 	padding:2px 4px;
-	background-image:url("/plugins/eva/images/deplierhaut.gif");
+	background-image:url("/plugins/eva/images/1rightarrow.png");
 	background-repeat:no-repeat;
 	background-position:center center;
 	}
@@ -292,6 +292,7 @@ div#barre_droite ul{
 	color:#5C6166;
 	list-style-position:inside;
 	list-style-type:square;
+	margin-left:0;
 }
 
 div#barre_droite ul ul{
@@ -323,12 +324,12 @@ div.sommaire a:hover{
 	text-decoration:none;
 	}		
 div.sommaire a.on{
-	color:#d37324;
-	font-weight:bold;
+	color:#d37324 !important;
+	font-weight:bold !important;
 	}
 div.sommaire .articles_menu a.on{
-	color:#d37324;
-	font-weight:normal;
+	color:#d37324 !important;
+	font-weight:normal !important;
 	}
 
 div.sommaire ul{
@@ -529,6 +530,11 @@ a.haut{
 	padding:3px;
 }
 
+.spip_documents > .spip_documents{
+	border:none;
+}
+	
+
 /*div.spip_documents > div > a > img{
 	padding:5px;
 }*/
@@ -561,7 +567,7 @@ TD > DIV.spip_documents{
 
 }
 
-div.suite{
+.suite{
 	text-align:right;
 	font-style:italic;
 	font-size:10px;
@@ -1058,7 +1064,7 @@ table.spip tr.row_even{
 	}
 table.spip td{
 	padding:2px;
-	vertical-align:center;
+	vertical-align:middle;
 	border:1px solid #adc4d9;
 	-moz-border-radius:5px;
 
@@ -1181,4 +1187,8 @@ padding: 0;
 font-size:12px;
 font-style:italic;
 color:#c0c0c0;
+}
+
+.absmiddle{
+	vertical-align:middle;
 }
