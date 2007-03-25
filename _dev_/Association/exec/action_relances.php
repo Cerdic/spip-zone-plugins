@@ -10,6 +10,8 @@
 *  
 **/
 include_spip('inc/presentation');
+include_spip('inc/mail');
+include_spip('inc/charsets');
 
 function exec_action_relances(){
 global $connect_statut, $connect_toutes_rubriques;
@@ -29,7 +31,6 @@ print('<p>Nous sommes le '.date('d-m-Y').'</p>');
 //On récupère les données globales
 $sujet=$_POST['sujet'];
 $message=$_POST['message'] ;
-$message=utf8_decode($message) ;
 //$message=utf8_decode($_POST['message']) ;
 $statut=$_POST['statut'];
 $email_tab=(isset($_POST["email"])) ? $_POST["email"]:array();
@@ -44,6 +45,9 @@ while ($data = mysql_fetch_assoc($query)){
 $expediteur = $data['nom']." <".$data['mail'].">";       //expéditeur Association
 $entetes .= "Reply-To: ".$data['mail']."\n";      // réponse automatique à Association
 $entetes .= "X-Mailer: PHP/" . phpversion();         // mailer
+$entete .= "MIME-Version: 1.0\n";
+$entete .= "Content-Type: text/plain; charset=$charset\n";	// Type Mime pour un message au format HTML
+$entete .= "Content-Transfer-Encoding: 8bit\n";
 $entetes .= "X-Sender: < ".$data['mail'].">\n";   } 
 $entetes .= "X-Priority: 1\n";                // Message urgent ! 
 $entetes .= "X-MSMail-Priority: High\n";         // définition de la priorité
@@ -51,7 +55,6 @@ $entetes .= "X-MSMail-Priority: High\n";         // définition de la priorité
 //$entetes .= "Errors-To: < webmaster@ >\n";    // En cas d' erreurs 
 //$entetes .= "cc:  \n"; // envoi en copie à …
 //$entetes .= "bcc: \n";          // envoi en copie cachée à …
-//$entetes .= "Content-Type: text/html; charset=iso-8859-1\n"; // Type Mime pour un message au format HTML
 
 //On envoit le mail aux destinataires sélectionnés, on affiche le membre relancé et on change le statut de relance
 
