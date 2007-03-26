@@ -38,8 +38,6 @@ $spip_forms = array(
 $spip_forms_key = array(
 	"PRIMARY KEY" => "id_form");
 
-
-
 $tables_principales['spip_forms'] = array(
 	'field' => &$spip_forms,
 	'key' => &$spip_forms_key);
@@ -110,10 +108,15 @@ $spip_forms_donnees_key = array(
 	"KEY cookie" 	=> "cookie",
 	"KEY id_auteur" => "id_auteur",
 	"KEY statut" 	=> "statut, id_form");
+$spip_forms_donnees_join = array(
+	"id_donnee" 	=> "id_donnee",
+	"id_form" 	=> "id_form",
+	"id_auteur" => "id_auteur");
 
 $tables_principales['spip_forms_donnees'] = array(
 	'field' => &$spip_forms_donnees,
-	'key' => &$spip_forms_donnees_key);
+	'key' => &$spip_forms_donnees_key,
+	'join'=>&$spip_forms_donnees_join);
 
 $spip_forms_donnees_champs = array(
 	"id_donnee" 	=> "bigint(21) NOT NULL",
