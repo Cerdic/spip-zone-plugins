@@ -41,7 +41,7 @@ include_spip('inc/cookie');
 // Idéalement, il suffirait de coder une méthode d'authent supplémentaire
 // dans le noyeau de Spip...
 //
-// Malheureusement, les poitns d'entrée Spip manquent donc on est obilgé
+// Malheureusement, les points d'entrée Spip manquent donc on est obilgé
 // de recopier pas mal du code de action_cookie_dist pour faire marcher le truc
 
 function action_cookie_openid() {
@@ -69,7 +69,6 @@ function action_cookie_openid() {
 	// Recupération session (à comprendre ??)
 	session_start();
 	$redirect = ($url ? $url : _DIR_RESTREINT_ABS);
-	spip_log("[auth_openid] Got url: " . $url . " and redirect:" . $redirect);
 	// Complete the authentication process using the server's response.
 	include_spip('inc/openid');
 	$consumer = init_auth_openid();

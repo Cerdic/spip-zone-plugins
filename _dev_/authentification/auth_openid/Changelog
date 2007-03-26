@@ -1,3 +1,8 @@
+0.4: 20070326
+ - clean up de Fil@rezo.net
+ - Inclusion des librairies OpenID en natif
+ - include de ces librairies uniquement en cas d'authent (moins de
+ pénalisation)
 0.3: 20070326
  - Utilise les fonctions utilitaires spip dans inc/utils.php pour generer
    les urls de retour pour OpenID.
