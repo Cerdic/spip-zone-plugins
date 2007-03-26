@@ -37,7 +37,4 @@
    <prefix>
         AuthOpenID
    </prefix>
-   <options>
-        auth_openid.php
-   </options>
 </plugin>

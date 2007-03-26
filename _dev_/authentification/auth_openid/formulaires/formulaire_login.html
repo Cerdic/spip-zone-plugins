@@ -1,23 +1,7 @@
 #HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
 #HTTP_HEADER{"Pragma: no-cache"}
 
-[(#ENV{echec_cookie})
-<fieldset class="reponse_formulaire">
-<legend><:avis_erreur_cookie:></legend>
-<p><:login_cookie_oblige:></p>
-<p><:login_cookie_accepte:></p>
-</fieldset>]
-
-	<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}md5.js"> </script>
-	<form id="login[_(#ENV{login})]"
-		action="[(#ENV{action2})]"
-		method="post"[(#ENV{source}|=={spip}|?{' ',''})
-		onsubmit='if (this.session_password.value) {
-			this.session_password_md5.value = calcMD5("[(#ENV{alea_actuel})]" + this.session_password.value);
-			this.next_session_password_md5.value = calcMD5("[(#ENV{alea_futur})]" + this.session_password.value);
-			this.session_password.value = "";
-			}']>
-<style>
+<style type="text/css">
 input.openid_login {
    background: url(#CHEMIN{login_auth_openid.gif}) no-repeat;
    background-color: #fff;
@@ -27,6 +11,24 @@ input.openid_login {
 }
 </style>
 
+
+[(#ENV{echec_cookie})
+<fieldset class="reponse_formulaire">
+<legend><:avis_erreur_cookie:></legend>
+<p><:login_cookie_oblige:></p>
+<p><:login_cookie_accepte:></p>
+</fieldset>]
+
+	<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}md5.js"> </script>
+
+	<form id="login[_(#ENV{login})]"
+		action="[(#ENV{action2})]"
+		method="post"[(#ENV{source}|=={spip}|?{' ',''})
+		onsubmit='if (this.session_password.value) {
+			this.session_password_md5.value = calcMD5("[(#ENV{alea_actuel})]" + this.session_password.value);
+			this.next_session_password_md5.value = calcMD5("[(#ENV{alea_futur})]" + this.session_password.value);
+			this.session_password.value = "";
+			}']>
 	<fieldset>
 	<legend><:form_forum_identifiants:></legend>
 		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]

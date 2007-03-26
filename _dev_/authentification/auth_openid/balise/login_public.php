@@ -119,6 +119,8 @@ function login_pour_tous($login, $cible, $action) {
 		spip_log("[auth_openid] process_url =".$process_url);
 
 		// Begin the OpenID authentication process.
+		include_spip('inc/openid');
+		$consumer = init_auth_openid();
 		$auth_request = $consumer->begin($login);
 
 		// Handle failure status return values.

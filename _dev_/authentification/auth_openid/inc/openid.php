@@ -24,10 +24,6 @@ function init_auth_openid() {
 	return new Auth_OpenID_Consumer($store);
 }
 
-global $consumer;
-
-$consumer = init_auth_openid();
-
 
 
 ?>
