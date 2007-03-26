@@ -73,11 +73,11 @@ function FpipR_affiche_gauche($flux) {
 	  $id = intval(_request('id_article'));
 	  $row = spip_abstract_fetsel(array('statut','id_rubrique'),array('spip_articles'),array("id_article=$id"));
 	  $cnt = spip_abstract_fetsel(array('count(*) as cnt'),array('spip_auteurs_articles'),array("id_article=$id",'id_auteur='.$connect_id_auteur));
-	  $acces = acces_rubrique($row['id_rubrique']) || acces_restreint_rubrique($row['id_rubrique']) || (($row['statut'] == 'prepa' || $row['statut'] == 'prop' || $row['statut'] == 'poubelle') && $cnt['cnt'] > 0);
+	  $acces = autoriser('publierdans','rubrique',$row['id_rubrique']) || acces_restreint_rubrique($row['id_rubrique']) || (($row['statut'] == 'prepa' || $row['statut'] == 'prop' || $row['statut'] == 'poubelle') && $cnt['cnt'] > 0);
 	} else if($flux['args']['exec'] == 'naviguer') {
 	  $type = 'rubrique';
 	  $id = intval(_request('id_rubrique'));
-	  $acces = acces_rubrique($id_rubrique);
+	  $acces = autoriser('publierdans','rubrique',$id_rubrique);
 	} /*else if($flux['args']['exec'] == 'breves_edit') {
 	  $type = 'breve';
 	  $id = _request('id_breve');
