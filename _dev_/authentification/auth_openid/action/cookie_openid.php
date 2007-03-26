@@ -78,10 +78,10 @@ function action_cookie_openid() {
 	if ($response->status == Auth_OpenID_CANCEL) {
 	    // This means the authentication was cancelled.
 	    spip_log('[auth_openid] Verification cancelled.');
-	    $redirect = "/?var_erreur=openid&openid_error=" . _T('authopenid:verif_refusee');
+	    $redirect = generer_url_public("login","var_erreur=openid&openid_error=" . _T('authopenid:verif_refusee'),'&');
 	} else if ($response->status == Auth_OpenID_FAILURE) {
 	    spip_log( "[auth_openid] OpenID authentication failed: " . $response->message);
-	    $redirect = "/?var_erreur=openid&openid_error=" . htmlspecialchars($response->message);;
+	    $redirect = generer_url_public("login","var_erreur=openid&openid_error=" . rawurlencode($response->message), '&');
 	} else if ($response->status == Auth_OpenID_SUCCESS) {
 	    // This means the authentication succeeded.
 	    $openid = $response->identity_url;
@@ -93,7 +93,7 @@ function action_cookie_openid() {
             $row = spip_fetch_array($result);
 	    if (!$row) {
 		spip_log("[auth_openid] No user here has this OpenID");
-		$redirect = "/?var_erreur=openid&openid_error=" . _T('authopenid:utilisateur_inconnu');
+		$redirect = generer_url_public("login","var_erreur=openid&openid_error=" . _T('authopenid:utilisateur_inconnu'),'&');
 	    } else {
 		// On récupère les données de l'utilisateur dans $row_auteur:
          	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($row['login']) . " AND statut<>'5poubelle'"); 

@@ -176,7 +176,7 @@ function login_pour_tous($login, $cible, $action) {
 		$erreur = _T('login_erreur_pass');
 
 	// afficher le code de retour d'erreur OpenID si var_erreur=openid
-	if (_request('var_erreur') == 'openid')
+	if (_request('openid_error'))
 		$erreur = "Erreur OpenID: " . _request('openid_error');
 
 	// le formulaire utilise le filtre |chercher_logo si un id_auteur est la...
