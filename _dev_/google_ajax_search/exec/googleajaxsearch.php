@@ -35,7 +35,7 @@ function exec_googleajaxsearch_dist(){
 		echo '<a href="http://www.google.com/apis/maps" target="_blank" ><img src="'._DIR_PLUGIN_GOOGLEAJAXSEARCH.'img_pack/google_code.png" border="0" align="left" hspace="10" ></a>';
 		echo '<form name="googlemapkey" method="post" action="'.generer_url_ecrire('googleajaxsearch').'">';
 		echo '<br/>';
-		echo '<label>Google Map API Key <a href="http://www.google.com/apis/maps/signup.html" target="_blank" >'._T('googleajaxsearch:getkey').'</a></label> <input type="text" name="key" value="'.$google_key.'" size="30" />';
+		echo '<label>Google AJAX Search API <a href="http://code.google.com/apis/ajaxsearch/signup.html" target="_blank" >'._T('googleajaxsearch:getkey').'</a></label> <input type="text" name="key" value="'.$google_key.'" size="30" />';
 		echo '<input type="submit" name="ok" value="ok" />';
 		echo '</form>';
 		

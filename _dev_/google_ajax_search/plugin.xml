@@ -14,7 +14,7 @@ _ <br />
 _ {{Requis :}} Utiliser #INSERT_HEAD dans votre squelette et indiquer votre Google Key (configuration du plugin)
 _ {{Compatibilit&eacute; :}} Si vous utilisez le plugin GIS, le plugin automatiquement r&eacute;cup&egrave;re votre Google key. 
 _ {{R&eacute;f&eacute;rence :}} [API Google Search.->http://code.google.com/apis/ajaxsearch/documentation/reference.html]</multi></description> 
- <lien>http://trac.rezo.net/trac/spip-zone/wiki/GoogleAjaxSearch</lien>
+ <lien>http://www.spip-contrib.net/Plugin-Google-Ajax-Search</lien>
  <prefix>googleajaxsearch</prefix>
  	<pipeline>
 		<nom>ajouter_boutons</nom>
