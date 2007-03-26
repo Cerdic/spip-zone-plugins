@@ -6,7 +6,7 @@
  * Dans l'espace prive, souligne en grise les espaces insecables
  *
  * Auteur : fil@rezo.net
- * © 2005-2006 - Distribue sous licence GNU/GPL
+ * © 2005-2007 - Distribue sous licence GNU/GPL
  *
  * l'icone <edit-find-replace.png> est tiree de Tango Desktop Project
  * http://tango.freedesktop.org/Tango_Desktop_Project -- sous licence
@@ -25,6 +25,7 @@
 	}
 
 	function RevisionNbsp_ajoute_bouton_corriger_les_notes($x) {
+		global $nb_notes;
 		if ($GLOBALS['auteur_session']['statut'] == '0minirezo')
 		if ($x['args']['exec'] == 'articles') {
 			$id_article = intval($x['args']['id_article']);
@@ -33,7 +34,7 @@
 				$x['data'] .= "<br />\n"
 				.debut_boite_info(true)
 				.icone_horizontale(
-					'Transformer les notes de cet article.',
+					'Transformer les ' . $nb_notes . ' notes de cet article.',
 					generer_url_action('corriger_notes', 'id_article='.$id_article),
 						_DIR_PLUGIN_REVISIONNBSP."edit-find-replace.png",  # grml!!
 						"rien.gif", false)
@@ -46,6 +47,7 @@
 
 
 	function notes_automatiques($texte) {
+		global $nb_notes; // sale
 
 		// Attrapper les notes
 		$regexp = ', *\[\[(.*?)\]\],msS';
@@ -75,6 +77,8 @@
 					. $lanote
 					. substr($letexte,$b+strlen('('.$num.')'));
 			}
+
+			$nb_notes = $num-1;
 
 			if (strlen($suite = trim($lesnotes)))
 				$letexte.= '[[<> '.$suite.' ]]';
