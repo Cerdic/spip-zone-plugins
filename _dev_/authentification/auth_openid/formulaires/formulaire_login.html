@@ -30,7 +30,7 @@ input.openid_login {
 	<fieldset>
 	<legend><:form_forum_identifiants:></legend>
 		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
-		[<p><label for="var_login"><:openid:login_login2:></label>(#ENV{login}|?{'',' '})<br />
+		[<p><label for="var_login"><:authopenid:login_login2:></label>(#ENV{login}|?{'',' '})<br />
 		<input type="text" class="openid_login" id="var_login" name="var_login" value="" size="40" /></p>]
 		
 [
@@ -44,7 +44,7 @@ document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong
 //--></script>
 <noscript>
 	<p class="reponse_formulaire"><:login_non_securise:> <a href="[(#ENV{action})]"><:login_recharger:></a>.</p>
-	<p><label for="session_login"><:login_login2:></label><br />
+	<p><label for="session_login"><:authopenid:login_login2:></label><br />
 	<input type="text" class="forml" name="session_login" id="session_login"[ value="(#ENV{login})"] size="20" /></p>
 </noscript>
 

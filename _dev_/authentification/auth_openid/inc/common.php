@@ -3,6 +3,10 @@
  * Initialisation de l'authent OpenID
  ****/
 
+/****
+ * TODO: changer le require_one en include_one et traiter les erreurs
+ ****/
+
 require_once "Auth/OpenID/Consumer.php";
 require_once "Auth/OpenID/FileStore.php";
 

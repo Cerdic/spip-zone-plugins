@@ -111,14 +111,11 @@ function login_pour_tous($login, $cible, $action) {
 		    $scheme .= 's';
 		}
 
-		$openid = $login;
-		$process_url = sprintf("$scheme://%s:%s%sspip.php?action=cookie_openid&url=%s",
-	                       $_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'],
-	                       dirname($_SERVER['PHP_SELF']),$cible);
-
-		$trust_root = sprintf("$scheme://%s:%s%s",
-	                      $_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'],
-	                      dirname($_SERVER['PHP_SELF']));
+		// url_de_base et generer_url_action sont des fonctions spip dans inc/utils.php
+		// comme cela, le code est plus solide vis à vis des évolutions de spip.
+		$trust_root = url_de_base();
+		$process_url = generer_url_action("cookie_openid","url=".$cible,true);
+		spip_log("[auth_openid] process_url =".$process_url);
 
 		// Begin the OpenID authentication process.
 		$auth_request = $consumer->begin($login);
@@ -126,7 +123,7 @@ function login_pour_tous($login, $cible, $action) {
 		// Handle failure status return values.
 		if (!$auth_request) {
 		    // TODO: Translation
-		    $erreur = "Erreur d'authentification OpenID: avez-vous bien entr&eacute; un OpenID valide?";
+		    $erreur = _T('authopenid:erreur_openid');
 		  $row = array();
 		  $login = '';
                   include_spip('inc/cookie');

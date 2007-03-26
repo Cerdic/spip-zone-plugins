@@ -74,12 +74,14 @@ function action_cookie_openid() {
 	// Recupération session (à comprendre ??)
 	session_start();
 	$redirect = ($url ? $url : _DIR_RESTREINT_ABS);
+	spip_log("[auth_openid] Got url: " . $url . " and redirect:" . $redirect);
 	// Complete the authentication process using the server's response.
 	$response = $consumer->complete($_GET);
 
 	if ($response->status == Auth_OpenID_CANCEL) {
 	    // This means the authentication was cancelled.
 	    spip_log('[auth_openid] Verification cancelled.');
+	    $redirect = "/?var_erreur=openid&openid_error=" . _T('authopenid:verif_refusee');
 	} else if ($response->status == Auth_OpenID_FAILURE) {
 	    spip_log( "[auth_openid] OpenID authentication failed: " . $response->message);
 	    $redirect = "/?var_erreur=openid&openid_error=" . htmlspecialchars($response->message);;
@@ -94,7 +96,7 @@ function action_cookie_openid() {
             $row = spip_fetch_array($result);
 	    if (!$row) {
 		spip_log("[auth_openid] No user here has this OpenID");
-		$redirect = "/?var_erreur=openid&openid_error=Utilisateur%20inconnu%20sur%20ce%20site.";
+		$redirect = "/?var_erreur=openid&openid_error=" . _T('authopenid:utilisateur_inconnu');
 	    } else {
 		// On récupère les données de l'utilisateur dans $row_auteur:
          	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($row['login']) . " AND statut<>'5poubelle'"); 

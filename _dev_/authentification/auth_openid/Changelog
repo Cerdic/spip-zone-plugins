@@ -1,3 +1,7 @@
+0.3: 20070326
+ - Utilise les fonctions utilitaires spip dans inc/utils.php pour generer
+   les urls de retour pour OpenID.
+ - Plus de chaines dans le fichier langue en vue de traduction du plugin
 0.2: 20070325
  - Utilise "#CHEMIN" pour la stylesheet du formulaire (icone OpenID)
  - utilise la fonction "sous-repertoire" pour créer le répertoire auth_openid
