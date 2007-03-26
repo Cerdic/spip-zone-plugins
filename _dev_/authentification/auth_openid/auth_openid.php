@@ -32,7 +32,6 @@
 // Inclusion des require d'OpenID PHP
 require_once(dirname(__FILE__).'/inc/common.php');
 
-
 include_spip('inc/actions');
 include_spip('inc/cookie');
 

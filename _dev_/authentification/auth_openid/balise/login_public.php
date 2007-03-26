@@ -52,9 +52,10 @@ function login_explicite($login, $cible) {
 	($auteur_session['statut']=='0minirezo'
 	OR $auteur_session['statut']=='1comite')) {
 		if ($cible != $action) {
-			if (!headers_sent() AND !$_GET['var_mode'])
+			if (!headers_sent() AND !$_GET['var_mode']) {
+				include_spip('inc/headers');
 				redirige_par_entete($cible);
-			else {
+			} else {
 				include_spip('inc/minipres');
 				return http_href($cible, _T('login_par_ici'));
 			}
