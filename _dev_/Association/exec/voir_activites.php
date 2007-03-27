@@ -88,7 +88,11 @@ else
 echo '<tr> ';
 echo '<td class ='.$class.' style="text-align:right">'.$data['id_activite'].'</td>';
 echo '<td class ='.$class.' style="text-align:right">'.association_datefr($data['date']).'</td>';
-echo '<td class ='.$class.'>'.$data['nom'].'</td>';
+echo '<td class ='.$class.'>';
+if(empty($data['email']))
+{echo $data['nom'];}
+else {echo '<a href="mailto:'.$data['email'].'">'.$data['nom'].'</a>';}
+echo '</td>';
 echo '<td class ='.$class.'>'.$data['accompagne'].'</td>';
 echo '<td class ='.$class.' style="text-align:right">'.$data['inscrits'].'</td>';
 echo '<td class ='.$class.' style="text-align:right">'.number_format($data['montant'], 2, ',', ' ').'</td>';

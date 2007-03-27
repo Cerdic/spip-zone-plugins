@@ -57,7 +57,7 @@ $query=spip_query( "SELECT MAX(id_activite) AS id_activite FROM spip_asso_activi
 while ($data = mysql_fetch_assoc($query))
 {
 $id_activite=$data['id_activite'];
-$justification='Inscription_activit&eacute; n&deg; '.$id_activite.' - '.$nom;
+$justification='Inscription n&deg; '.$id_activite.' - '.$nom;
 }
 
 spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ('$date_paiement','$journal','$montant','$justification','activite','$id_activite')");

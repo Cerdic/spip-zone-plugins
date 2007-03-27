@@ -20,6 +20,7 @@ debut_page(_T('Gestion pour  Association'), "", "");
 // LES URL'S
 $url_asso = generer_url_ecrire('association');
 $url_edit_compte = generer_url_ecrire('edit_compte');
+$url_edit_activite = generer_url_ecrire('edit_activite');
 
 include_spip ('inc/navigation');
 
@@ -41,8 +42,14 @@ echo '<table width="70%">';
 echo '<tr> ';
 echo '<td>'._T('asso:reference_interne').' :</td>';
 echo '<td><strong>'.$data['id_asso'].'</strong></td>';
-echo '<td rowspan=5><img src="/IMG/auton'.$data['id_auteur'].'.jpg"></td>';
-echo '<td>&nbsp;</td></tr>';
+echo '<td rowspan=6><img src="/IMG/auton'.$data['id_auteur'].'.jpg"></td>';
+echo '<td rowspan=6>';
+$link=generer_url_ecrire('edit_adherent',"id=$id_adherent");
+icone(_T('asso:Modifier_le_membre'), $link, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','edit.gif' );
+echo '</td></tr>';
+echo '<tr> ';
+echo '<td>Fonction :</td>';
+echo '<td><strong>'.$data['fonction'].'</strong></td></tr>';
 echo '<tr> ';
 echo '<td>Nom :</td>';
 echo '<td><strong>'.$data['nom'].'</strong></td>';
@@ -69,9 +76,6 @@ if ($data['statut']=="relance") {echo 'Relanc&eacute;';}
 if ($data['statut']=="sorti") {echo 'D&eacute;sactiv&eacute;';}
 if ($data['statut']=="prospect") {echo 'Prospect';}
 echo '</strong></td>';
-echo '<tr> ';
-echo '<td>Fonction :</td>';
-echo '<td><strong>'.$data['fonction'].'</strong></td>';
 echo '<tr> ';	
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
@@ -138,12 +142,6 @@ echo '<td>Remarques :</td>';
 echo '<td colspan="3"><strong>'.$data["remarques"].'</strong></td></tr>';
 }
 echo '</table>';
-
-echo '<p>';
-$link=generer_url_ecrire('edit_adherent',"id=$id_adherent");
-icone(_T('asso:Modifier_le_membre'), $link, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','edit.gif' );
-echo '</p>';
-
 echo '</fieldset>';
 
 // FICHE HISTORIQUE 	
@@ -174,7 +172,7 @@ echo '<td class ='.$class.'>'.$data['imputation'].'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.$data['recette'].' &euro;</td>';
 echo '<td class ='.$class.'>'.$data['justification'].'</td>';
 echo '<td class ='.$class.'>'.$data['journal'].'</td>';
-echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_compte.'&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour l\'op&eacuteration"></a></td>';
+echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_compte.'&id='.$data['id_compte'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour l\'op&eacute;ration"></a></td>';
 //echo '<td class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_compte'].'></td>';
 echo '</tr>';
 }
@@ -188,19 +186,33 @@ echo '<tr bgcolor="silver">';
 echo '<td style="text-align:right;"><strong>ID</strong></td>';
 echo '<td><strong>Date</strong></td>';
 echo '<td><strong>Activit&eacute;</strong></td>';
+echo '<td><strong>Lieu</strong></td>';
 echo '<td style="text-align:right;"><strong>Inscrits</strong></td>';
 echo '<td><strong>Statut</strong></td>';
 echo '<td><strong>&nbsp;</strong></td>';
 echo '</tr>';
+echo '<tr>';
 $query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=$id_adherent ORDER BY date DESC" );
 //$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
 
 while ($data = mysql_fetch_assoc($query)) {
 
 $class= "pair";
+$id_evenement=$data['id_evenement'];
+
 echo '<td class ='.$class.' style="text-align:right;">'.$data['id_activite'].'</td>';
-echo '<td class ='.$class.'>'.$data['inscrits'].'</td>';
+
+$sql = spip_query ("SELECT * FROM spip_evenements WHERE id_evenement=$id_evenement" );
+while ($evenement = mysql_fetch_assoc($sql)) {
+$date = substr($evenement['date_debut'],0,10);
+echo '<td class ='.$class.'>'.association_datefr($date).'</td>';
+echo '<td class ='.$class.'>'.$evenement['titre'].'</td>';
+echo '<td class ='.$class.'>'.$evenement['lieu'].'</td>';
+}
+echo '<td class ='.$class.' style="text-align:right;">'.$data['inscrits'].'</td>';
 echo '<td class ='.$class.'>'.$data['statut'].'</td>';
+echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour l\'inscription"></a></td>';
+echo '</tr>';
 }
 echo '</table>';
 echo '</fieldset>';
