@@ -389,7 +389,7 @@ function afficher_liste_groupes_mots($choses, $nb_aff=20) {
   $rez = spip_abstract_select(
 							  array('id_groupe','titre','descriptif'),
 							  array('spip_groupes_mots'),
-							  array('id_groupe IN ('.calcul_in($choses).')')
+							  array('id_groupe IN ('.calcul_in($choses).')'),'',array('titre')
 							  );
 
   echo afficher_liste_debut_tableau();

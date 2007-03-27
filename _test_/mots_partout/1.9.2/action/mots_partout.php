@@ -140,8 +140,8 @@ function action_mots_partout() {
 		  if($unseul) {
 			$from = array("spip_mots_$nom_chose",'spip_mots');
 			$select = array("count('id_mot') as cnt");
-			$where = array("id_groupe = $id_groupe","spip_mots_$nom_chose.id_mot = spip_mots.id_mot","$id_chose = $d");
-			$group = $id_chose;
+			$where = array("spip_mots.id_groupe = $id_groupe","spip_mots_$nom_chose.id_mot = spip_mots.id_mot","spip_mots_$nom_chose.$id_chose = $d");
+			$group = "spip_mots_$nom_chose.$id_chose";
 			$res = spip_abstract_select($select,$from,$where,$group);
 			if($row = spip_abstract_fetch($res)) {	
 			  if($row['cnt'] > 0) {
