@@ -19,6 +19,9 @@ _ &copy; 2007 - Distribu&eacute; sous licence GPL
 	<fonctions><!--  fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
 	decouper_fonctions.php
 	</fonctions>
+	<options>
+	decouper_options.php
+	</options>
 	<prefix> 
 	decouper
 	</prefix>
