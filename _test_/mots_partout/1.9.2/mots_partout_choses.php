@@ -147,6 +147,17 @@ $choses_possibles['messages'] = array(
 															   )
 									  );
 
+$choses_possibles['evenements'] = array(
+									  'titre_chose' => 'Evenements',
+									  'id_chose' => 'id_evenement',
+									  'table_principale' => 'spip_evenements',
+									  'tables_limite' => array(
+															   'article' => array(
+																				   'table' => 'spip_articles',
+																				   'nom_id' => 'id_article')
+									  							)
+									  );
+
 
 $choses_possibles['auteurs'] = array(
 									  'titre_chose' => 'auteurs',
