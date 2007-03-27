@@ -15,6 +15,11 @@ function exec_adherents(){
 
 global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 
+if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
+			echo _T('avis_non_acces_page');
+			fin_page();
+			exit;
+		}
 debut_page(_T('Gestion pour  Association'), "", "");
 
 $url_adherents = generer_url_ecrire('adherents');
@@ -89,12 +94,12 @@ echo '<td style="text-align:right;">';
 	// ID
 if ( isset ($_POST['id'])) {
 $id=$_POST['id'];
-//$critere="id_adherent='$id'";}
-$critere="id_asso='$id'";}
+$critere="id_adherent='$id'";}
+//$critere="id_asso='$id'";}
 
 echo '<form method="post" action="'.$url_adherent.'">';
-//echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" value="ID" onchange="form.submit()">';
-echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" value="'._T('asso:ref_int').'" onchange="form.submit()">';
+echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" value="ID" onchange="form.submit()">';
+//echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" value="'._T('asso:ref_int').'" onchange="form.submit()">';
 echo '</form>';
 
 echo '<td style="text-align:right;">';
@@ -218,7 +223,7 @@ echo '<td class ='.$class.'>'.$data["ville"].'</td>';
 //echo '<td class ='.$class.'>'.$data["portable"].'</td>';
 //echo '<td class ='.$class.'>'.$data["telephone"].'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.$data["id_asso"].'</td>'; //référence interne
-echo '<td class ='.$class.'>'.$data["libelle_categorie"].'</td>';
+echo '<td class ='.$class.'>'.$data["categorie"].'</td>';
 echo '<td class ='.$class.'>'.association_datefr($data['validite']).'</td>';
 //echo '<td class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
 //echo '<td class ='.$class.'>'.$data["remarques"].'</td>';
