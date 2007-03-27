@@ -60,7 +60,7 @@ function asso_verifier_base(){
 		}	
 		
 		if ($current_version<0.50){
-		spip_query("ALTER TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` "};
+		spip_query("ALTER TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` ");
 		}
 		ecrire_metas();
 	}
