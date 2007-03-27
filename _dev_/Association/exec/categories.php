@@ -29,7 +29,8 @@ print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 echo '<table width="70%" border="0">';
 echo '<tr bgcolor="#D9D7AA">';
 echo '<td><strong>ID</strong></td>';
-echo '<td><strong>Libell&eacute;</strong></td>';
+echo '<td><strong>Cat&eacute;gorie</strong></td>';
+echo '<td><strong>Libell&eacute; complet</strong></td>';
 echo '<td><strong>Dur&eacute;e (mois)</strong></td>';
 echo '<td><strong>Montant</strong></td>';
 echo '<td><strong>Commentaires</strong></td>';
@@ -43,6 +44,7 @@ while ($data = mysql_fetch_assoc($val))
 {
 echo '<tr> ';
 echo '<td class ='.$class.'>'.$data['id_categorie'].'</td>';
+echo '<td class ='.$class.'>'.$data['valeur'].'</td>';
 echo '<td class ='.$class.'>'.$data['libelle'].'</td>';
 echo '<td class ='.$class.'>'.$data['duree'].'</td>';
 echo '<td class ='.$class.'>'.$data['cotisation'].'</td>';
