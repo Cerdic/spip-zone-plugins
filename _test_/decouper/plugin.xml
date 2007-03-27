@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	D&eacute;couper un article en plusieurs pages
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	collectif 
+_ &copy; 2007 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin - identique a la version avec laquelle il est compatible -->
+	1.9.2
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	test
+	</etat>
+	<description>
+	Un filtre pour d&eacute;couper l'affichage public d'un article en plusieurs pages. R&eacute;digez vos articles en utilisant cinq traits d'union cons&eacute;cutifs a l'endroit qui doit recevoir la coupure.
+	</description>
+	<lien>http://www.spip-contrib.net/Decouper-un-article-en-plusieurs</lien> <!-- URI de documentation -->
+	<fonctions><!--  fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
+	decouper_fonctions.php
+	</fonctions>
+	<prefix> 
+	decouper
+	</prefix>
+</plugin>
