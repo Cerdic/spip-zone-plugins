@@ -27,7 +27,7 @@ debut_cadre_relief(  "", false, "", $titre = _T('Fiche signalétique Membre'));
 	debut_boite_info();
 	
 //LE MENU
-print ('Nous sommes le '.date('d-m-Y').'');
+print ('Nous sommes le '.date('d/m/Y').'');
 
 
 // FICHE SIGNALETIQUE 	

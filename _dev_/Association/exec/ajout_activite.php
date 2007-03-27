@@ -24,7 +24,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Ajouter des inscriptions'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d-m-Y').'</p>');
+print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 
 $id_evenement=$_GET['id'];
 

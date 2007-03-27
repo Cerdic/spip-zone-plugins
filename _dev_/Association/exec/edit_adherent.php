@@ -32,7 +32,7 @@ debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres actifs'));
 	debut_boite_info();
 	
 //LE MENU
-print ('Nous sommes le '.date('d-m-Y').'');
+print ('Nous sommes le '.date('d/m/Y').'');
 
 //---------------------------- 
 //  ICI ON MODIFIE UN MEMBRE 
@@ -62,10 +62,10 @@ echo '<td><input name="prenom" type="text" size="40" value="'.$data['prenom'].'"
 echo '<tr> ';
 echo '<td>Sexe:</td>';
 echo '<td><input name="sexe" type="radio" value="H" ';
-if ($data['sexe']=="H") {echo 'checked';}
+if ($data['sexe']=="H") {echo ' checked="checked"';}
 echo '> H ';
 echo '<input name="sexe" type="radio" value="F" ';
-if ($data['sexe']=="F") {echo 'checked';}
+if ($data['sexe']=="F") {echo ' checked="checked"';}
 echo '> F ';
 echo '<tr> ';
 echo '<td>Date de naissance:</td>';
@@ -77,9 +77,9 @@ $sql = "SELECT * FROM spip_asso_categories";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($categorie = mysql_fetch_assoc($req)) 
 {
-echo '<option value = "'.$categorie["valeur"].'"';
-	if ($data["categorie"]==$categorie["valeur"]) { echo 'selected'; }
-	echo ' > '.$categorie["libelle"].'</option>';
+echo '<option value="'.$categorie["id_categorie"].'"';
+	if ($data["categorie"]==$categorie["id_categorie"]) { echo ' selected="selected"'; }
+	echo '> '.$categorie["libelle"].'</option>';
 }
 echo '</select>';
 echo '<tr> ';
@@ -128,11 +128,11 @@ echo '<tr> ';
 echo '<td>'._T('asso:secteur').' :</td>';
 echo '<td><input name="secteur" type="text" value="'.$data["secteur"].'"></td>';
 echo '<td>Accord de publication :</td>';
-echo '<td><input name="publication" type="radio" value="oui" ';
-if ($data['publication']=="oui") {echo 'checked';}
+echo '<td><input name="publication" type="radio" value="oui"';
+if ($data['publication']=="oui") {echo ' checked="checked"';}
 echo '>oui';
-echo '<input name="publication" type="radio" value="non" ';
-if ($data['publication']=="non") {echo 'checked';}
+echo '<input name="publication" type="radio" value="non"';
+if ($data['publication']=="non") {echo ' checked="checked"';}
 echo '>non</td></tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:utilisateur1').' :</td>';
@@ -151,20 +151,20 @@ echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td></tr>';
 echo '<tr> ';	
 echo '<td>Statut de cotisation :</td>';
-echo '<td colspan="3"><input name="statut" type="radio" name="statut" value="ok" ';
-if ($data['statut']=="ok") {echo 'checked';}
+echo '<td colspan="3"><input name="statut" type="radio" name="statut" value="ok"';
+if ($data['statut']=="ok") {echo ' checked="checked"';}
 echo '> A jour ';
-echo '<input name="statut" type="radio" name="statut" value="echu" ';
-if ($data['statut']=="echu") {echo 'checked';}
+echo '<input name="statut" type="radio" name="statut" value="echu"';
+if ($data['statut']=="echu") {echo ' checked="checked"';}
 echo '> A &eacute;ch&eacute;ance ';
-echo '<input name="statut" type="radio" name="statut" value="relance" ';
-if ($data['statut']=="relance") {echo 'checked';}
+echo '<input name="statut" type="radio" name="statut" value="relance"';
+if ($data['statut']=="relance") {echo ' checked="checked"';}
 echo '> Relanc&eacute; ';
-echo '<input name="statut" type="radio" name="statut" value="sorti" ';
-if ($data['statut']=="sorti") {echo 'checked';}
+echo '<input name="statut" type="radio" name="statut" value="sorti"';
+if ($data['statut']=="sorti") {echo ' checked="checked"';}
 echo '> D&eacute;sactiv&eacute; ';
-echo '<input name="statut" type="radio" name="statut" value="prospect" ';
-if ($data['statut']=="prospect") {echo 'checked';}
+echo '<input name="statut" type="radio" name="statut" value="prospect"';
+if ($data['statut']=="prospect") {echo ' checked="checked"';}
 echo '> Prospect </td> ';
 echo '<tr> ';      
 echo '<td>Remarques :</td>';

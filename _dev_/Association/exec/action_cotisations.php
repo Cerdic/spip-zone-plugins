@@ -21,7 +21,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Action sur les cotisations'));
 	debut_boite_info();
 
-	print('Nous sommes le '.date('d-m-Y').'');
+	print('Nous sommes le '.date('d/m/Y').'');
 
 $action=$_POST['action'];
 $id_adherent= $_POST['id_adherent'];

@@ -25,7 +25,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Action sur les dons'));
 	debut_boite_info();
 
-print('Nous sommes le '.date('d-m-Y').'');
+print('Nous sommes le '.date('d/m/Y').'');
 
 $id_don = $_POST['id_don'];
 $date_don = $_POST['date_don'];

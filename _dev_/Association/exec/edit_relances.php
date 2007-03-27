@@ -27,7 +27,7 @@ debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres &agrave; relan
 debut_boite_info();
 
 
-	print('Nous sommes le '.date('d-m-Y').'');
+	print('Nous sommes le '.date('d/m/Y').'');
 
 //Bricolage?
 if ( isset ($_POST['statut'] )) {
@@ -43,18 +43,18 @@ echo '<td style="text-align:right;">';
 echo '<form method="post" action="#">';
 echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 echo '<select name ="statut" class="fondl" onchange="form.submit()">';
-echo '<option value = "ok" ';
-	if ($statut=="ok") {echo 'selected';}
-	echo ' > A jour';
-echo '<option value = "echu" ';
-	if ($statut=="echu") {echo 'selected';}
-	echo ' > A relancer';
-echo '<option value = "relance" ';
-	if ($statut=="relance") {echo 'selected';}
-	echo ' > Relanc&eacute;';
-echo '<option value = "prospect" ';
-	if ($statut=="prospect") {echo 'selected';}
-	echo ' > Prospect';
+echo '<option value="ok"';
+	if ($statut=="ok") {echo ' selected="selected"';}
+	echo '> A jour';
+echo '<option value="echu"';
+	if ($statut=="echu") {echo ' selected="selected"';}
+	echo '> A relancer';
+echo '<option value="relance"';
+	if ($statut=="relance") {echo ' selected="selected"';}
+	echo '> Relanc&eacute;';
+echo '<option value="prospect"';
+	if ($statut=="prospect") {echo ' selected="selected"';}
+	echo '> Prospect';
 echo '</select>';
 echo '</form>';
 echo '</td></tr>';

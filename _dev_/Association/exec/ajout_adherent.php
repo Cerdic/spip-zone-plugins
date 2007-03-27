@@ -24,7 +24,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Ajouter des  membres actifs'));
 	debut_boite_info();
 
-print ('Nous sommes le '.date('d-m-Y').'');
+print ('Nous sommes le '.date('d/m/Y').'');
 
 echo' <p align="center"><form action="'.$url_action_adherents.'" method="POST">';
 
@@ -55,7 +55,7 @@ $sql = "SELECT * FROM spip_asso_categories";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($categorie = mysql_fetch_assoc($req)) 
 {
-echo '<option value = "'.$categorie["valeur"].'"> '.$categorie["libelle"].'</option>';
+echo '<option value = "'.$categorie["id_categorie"].'"> '.$categorie["libelle"].'</option>';
 }
 echo '</select>';
 echo '<tr> ';	
@@ -66,6 +66,9 @@ echo '<td>&nbsp;</td></tr>';
 echo '<tr> ';
 echo '<td>Email:</td>';
 echo '<td colspan="3"><input name="email" type="text" size="40"></td></tr>';
+echo '<tr> ';
+echo '<td>Fonction :</td>';
+echo '<td><input name="fonction" type="text" size="40" value=""></td>';
 echo '<tr> ';
 echo '<td>Rue :</td>';
 echo '<td><textarea name="rue" cols="30"></textarea>';

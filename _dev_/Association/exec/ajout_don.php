@@ -26,7 +26,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Ajout de don'));
 	debut_boite_info();
 	
-print('<p>Nous sommes le '.date('d-m-Y').'</p>');
+print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 
 echo '<p><form action="'.$url_action_dons.'" method="POST">';
 echo '<fieldset>';

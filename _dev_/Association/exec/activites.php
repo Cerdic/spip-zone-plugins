@@ -26,7 +26,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Toutes les activit&eacute;s'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d-m-Y').'</p>');
+print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 
 // FILTRES
 
@@ -56,15 +56,15 @@ echo '</td>';
 echo '<td style="text-align:right;">';
 echo '<form method="post" action="'.$url_activites.'">';
 echo '<select name ="mot" class="fondl" onchange="form.submit()">';
-echo '<option value = "%" ';
-	if ($mot=="%") {echo 'selected';}
-	echo '  > Toutes</option>';
+echo '<option value="%"';
+	if ($mot=="%") {echo ' selected="selected"';}
+	echo '> Toutes</option>';
 $query = spip_query("SELECT * FROM spip_mots WHERE type='Evènements'");
 while($data = mysql_fetch_assoc($query)) 
 {
-echo '<option value = "'.$data["titre"].'"';
-	if ($mot==$data["titre"]) { echo 'selected'; }
-	echo ' > '.$data["titre"].'</option>';
+echo '<option value="'.$data["titre"].'"';
+	if ($mot==$data["titre"]) { echo ' selected="selected"'; }
+	echo '> '.$data["titre"].'</option>';
 }
 echo '</select>';
 echo '</form>';

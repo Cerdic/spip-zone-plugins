@@ -28,7 +28,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Toutes les cat&eacute;gories de cotisation'));
 	debut_boite_info();
 
-print('Nous sommes le '.date('d-m-Y').'</br>');
+print('Nous sommes le '.date('d/m/Y').'</br>');
 
 $action=$_GET['action'];
 $id=$_GET['id'];

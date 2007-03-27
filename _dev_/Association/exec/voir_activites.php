@@ -26,7 +26,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Inscriptions aux activit&eacute;s'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d-m-Y').'</p>');
+print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 
 if ( isset ($_POST['id'] )) 
 {$id_evenement=$_POST['id'];}
@@ -51,12 +51,12 @@ echo '<td style="text-align:right;">';
 echo '<form method="post" action="'.$url_voir_activites.'">';
 echo '<input type="hidden" name="id" value="'.$id_evenement.'">';
 echo '<select name ="statut" class="fondl" onchange="form.submit()">';
-echo '<option value = "%" ';
-	if ($statut=="%") {echo 'selected';}
-	echo '  > Toutes</option>';
-echo '<option value = "ok"';
-	if ($statut=="ok") { echo 'selected'; }
-	echo ' > Valid&eacute;es</option>';
+echo '<option value="%"';
+	if ($statut=="%") {echo ' selected="selected"';}
+	echo '> Toutes</option>';
+echo '<option value="ok"';
+	if ($statut=="ok") { echo ' selected="selected"'; }
+	echo '> Valid&eacute;es</option>';
 echo '</select>';
 echo '</form>';
 echo '</table>';

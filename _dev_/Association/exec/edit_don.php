@@ -24,7 +24,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des dons'));
 	debut_boite_info();
 
-	print('Nous sommes le '.date('d-m-Y').'');
+	print('Nous sommes le '.date('d/m/Y').'');
 	
 $id_don= $_GET['id'];
 
@@ -59,11 +59,11 @@ echo '<td><select name="journal" type="text">';
 $sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
 while ($banque = mysql_fetch_assoc($sql)) {
 echo '<option value="'.$banque['code'].'" ';
-	if ($data['journal']==$banque['code']) { echo 'selected'; }
+	if ($data['journal']==$banque['code']) { echo ' selected="selected"'; }
 echo '>'.$banque['intitule'].'</option>';
 }
 echo '<option value="don"';
-	if ($data["journal"]=="don") { echo 'selected'; }
+	if ($data["journal"]=="don") { echo ' selected="selected"'; }
 echo '> Don </option>';
 echo '</select></td>';
 echo '</tr>';

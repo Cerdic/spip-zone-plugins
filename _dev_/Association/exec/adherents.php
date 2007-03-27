@@ -28,7 +28,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres actifs'));
 debut_boite_info();
 
-print('Nous sommes le '.date('d-m-Y').'');
+print('Nous sommes le '.date('d/m/Y').'');
 
 //Bricolage?
 if ( isset ($_POST['filtre'] )) {
@@ -102,27 +102,27 @@ echo '<td style="text-align:right;">';
 echo '<form method="post" action="'.$url_adherent.'">';
 echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-echo '<option value = "defaut" ';
-	if ($filtre=="defaut") {echo 'selected';}
-	echo '  > Actifs';
-echo '<option value = "ok" ';
-	if ( $filtre=="ok" ) {echo 'selected';}
-	echo ' > A jour';
-echo '<option value = "echu" ';
-	if ( $filtre=="echu" ) {echo 'selected';}
-	echo ' > A relancer';
-echo '<option value = "relance" ';
-	if ( $filtre=="relance" ) {echo 'selected';}
-	echo ' > Relanc&eacute;s';
-echo '<option value = "sorti" ';
-	if ( $filtre=="sorti" ) {echo 'selected';}
-	echo ' > DÃ©sactiv&eacute;s';
-echo '<option value = "prospect" ';
-	if ( $filtre=="prospect" ) {echo 'selected';}
-	echo ' > Prospects';
-echo '<option value = "tous" ';
-	if ( $filtre=="tous" ) {echo 'selected';}
-	echo '  > Tous';
+echo '<option value="defaut"';
+	if ($filtre=="defaut") {echo ' selected="selected"';}
+	echo '> Actifs';
+echo '<option value="ok"';
+	if ( $filtre=="ok" ) {echo ' selected="selected"';}
+	echo '> A jour';
+echo '<option value="echu"';
+	if ( $filtre=="echu" ) {echo ' selected="selected"';}
+	echo '> A relancer';
+echo '<option value="relance"';
+	if ( $filtre=="relance" ) {echo ' selected="selected"';}
+	echo '> Relanc&eacute;s';
+echo '<option value="sorti"';
+	if ( $filtre=="sorti" ) {echo ' selected="selected"';}
+	echo '> DÃ©sactiv&eacute;s';
+echo '<option value="prospect"';
+	if ( $filtre=="prospect" ) {echo ' selected="selected"';}
+	echo '> Prospects';
+echo '<option value="tous"';
+	if ( $filtre=="tous" ) {echo ' selected="selected"';}
+	echo '> Tous';
 echo '</select>';
 echo '</form>';
 echo '</table>';
@@ -160,9 +160,9 @@ if (empty($debut))
 {$debut=0;}
 
 if (empty($lettre))
-{$query = spip_query ( "SELECT * FROM spip_asso_adherents WHERE $critere ORDER BY nom, id_adherent LIMIT $debut,$max_par_page" );}
+{$query = spip_query ( "SELECT spip_asso_adherents.*, spip_asso_categories.libelle AS libelle_categorie FROM spip_asso_adherents LEFT JOIN spip_asso_categories ON (spip_asso_categories.id_categorie=spip_asso_adherents.categorie) WHERE $critere ORDER BY nom LIMIT $debut,$max_par_page" );}
 else
-{$query = spip_query ( "SELECT * FROM spip_asso_adherents WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom, id_adherent LIMIT $debut,$max_par_page" );}
+{$query = spip_query ( "SELECT spip_asso_adherents.*, spip_asso_categories.libelle AS libelle_categorie FROM spip_asso_adherents LEFT JOIN spip_asso_categories ON (spip_asso_categories.id_categorie=spip_asso_adherents.categorie) WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom LIMIT $debut,$max_par_page" );}
 
 $i=0;
 
@@ -218,7 +218,7 @@ echo '<td class ='.$class.'>'.$data["ville"].'</td>';
 //echo '<td class ='.$class.'>'.$data["portable"].'</td>';
 //echo '<td class ='.$class.'>'.$data["telephone"].'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.$data["id_asso"].'</td>'; //référence interne
-echo '<td class ='.$class.'>'.$data["categorie"].'</td>';
+echo '<td class ='.$class.'>'.$data["libelle_categorie"].'</td>';
 echo '<td class ='.$class.'>'.association_datefr($data['validite']).'</td>';
 //echo '<td class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
 //echo '<td class ='.$class.'>'.$data["remarques"].'</td>';

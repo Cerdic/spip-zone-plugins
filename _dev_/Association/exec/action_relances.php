@@ -26,7 +26,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Relance de cotisations'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d-m-Y').'</p>');
+print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 
 //On récupère les données globales
 $sujet=$_POST['sujet'];

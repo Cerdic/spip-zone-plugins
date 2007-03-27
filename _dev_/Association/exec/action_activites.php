@@ -23,7 +23,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Action sur les inscriptions'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d-m-Y').'</p>');
+print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 
 $id_activite=$_POST['id_activite'];
 $id_evenement=$_POST['id_evenement'];

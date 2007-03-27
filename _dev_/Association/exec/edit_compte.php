@@ -22,7 +22,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Modification des comptes'));
 
 debut_boite_info();
-print('<p>Nous sommes le '.date('d-m-Y').'</p>');
+print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 
 $id_compte=$_GET['id'];
 
@@ -58,11 +58,11 @@ echo '<td><select name="journal" type="text">';
 $sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
 while ($banque = mysql_fetch_assoc($sql)) {
 echo '<option value="'.$banque['code'].'" ';
-	if ($data['journal']==$banque['code']) { echo 'selected'; }
+	if ($data['journal']==$banque['code']) { echo ' selected="selected"'; }
 echo '>'.$banque['intitule'].'</option>';
 }
 echo '<option value="don"';
-	if ($data["journal"]=="don") { echo 'selected'; }
+	if ($data["journal"]=="don") { echo ' selected="selected"'; }
 echo '> Don </option>';
 echo '</select></td>';
 echo '</tr>';

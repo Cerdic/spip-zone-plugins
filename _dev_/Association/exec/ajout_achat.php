@@ -31,7 +31,7 @@ $url_ajout_achat=generer_url_ecrire('ajout_achat');
 debut_cadre_relief(  "", false, "", $titre = _T('Ajouter des acheteurs'));
 	debut_boite_info();
 
-	print('Nous sommes le '.date('d-m-Y').'');
+	print('Nous sommes le '.date('d/m/Y').'');
 echo '<p><strong>.:: Ajout d\'Acheteurs ::.</strong></p>';
 echo '<p><a href="'.$url_asso.'">Gestion des adh&eacute;rents</a> | <a href="'.$url_ajouter.'">Ajout d\'un membre</a>
  | <a href="'.$url_relance.'">Relance de cotisations</a> | <a href="'.$url_bienfaiteur.'">Gestion des bienfaiteurs</a>

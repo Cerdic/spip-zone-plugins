@@ -24,7 +24,7 @@ echo "<br /><br />";
 gros_titre(_T('Cr&eacute;ation des tables'));
 
 debut_cadre_relief();
- $date = date("d-m-Y");
+ $date = date("d/m/Y");
 $heure = date("H:i");
 Print("Nous sommes le $date et il est $heure");      
 echo"<br>";

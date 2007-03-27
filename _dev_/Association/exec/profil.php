@@ -92,36 +92,36 @@ echo '<td>&nbsp;</td>';
 echo '</tr>';
 echo '<tr>';
 echo '<td>Gestion des ventes associatives</td>';
-echo '<td><input name="ventes" type="radio" value="oui" ';
-if ($data['ventes']=="oui") {echo 'checked';}
+echo '<td><input name="ventes" type="radio" value="oui"';
+if ($data['ventes']=="oui") {echo ' checked="checked"';}
 echo '>oui';
-echo '<input name="ventes" type="radio" value="non" ';
-if ($data['ventes']=="non") {echo 'checked';}
+echo '<input name="ventes" type="radio" value="non"';
+if ($data['ventes']=="non") {echo ' checked="checked"';}
 echo '>non</td>';
 echo '</tr>';
 echo '<tr>';
 echo '<td>Gestion des dons et colis</td>';
 echo '<td><input name="dons" type="radio" value="oui"';
-if ($data['dons']=="oui") {echo 'checked';}
+if ($data['dons']=="oui") {echo ' checked="checked"';}
 echo '>oui';
 echo '<input name="dons" type="radio" value="non"';
-if ($data['dons']=="non") {echo 'checked';}
+if ($data['dons']=="non") {echo ' checked="checked"';}
 echo '>non</td>';
 echo '</tr>';
 echo '<td>Gestion comptable</td>';
 echo '<td><input name="comptes" type="radio" value="oui"';
-if ($data['comptes']=="oui") {echo 'checked';}
+if ($data['comptes']=="oui") {echo ' checked="checked"';}
 echo '>oui';
 echo '<input name="comptes" type="radio" value="non"';
-if ($data['comptes']=="non") {echo 'checked';}
+if ($data['comptes']=="non") {echo ' checked="checked"';}
 echo '>non</td>';
 echo '</tr>';
 echo '<td>Gestion des inscriptions aux activit&eacute;s</td>';
 echo '<td><input name="activites" type="radio" value="oui"';
-if ($data['activites']=="oui") {echo 'checked';}
+if ($data['activites']=="oui") {echo ' checked="checked"';}
 echo '>oui';
 echo '<input name="activites" type="radio" value="non"';
-if ($data['activites']=="non") {echo 'checked';}
+if ($data['activites']=="non") {echo ' checked="checked"';}
 echo '>non (n&eacute;cessite le plugin agenda)</td>';
 echo '</tr>';
 }
