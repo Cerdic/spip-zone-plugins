@@ -77,8 +77,8 @@ $sql = "SELECT * FROM spip_asso_categories";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($categorie = mysql_fetch_assoc($req)) 
 {
-echo '<option value="'.$categorie["id_categorie"].'"';
-	if ($data["categorie"]==$categorie["id_categorie"]) { echo ' selected="selected"'; }
+echo '<option value="'.$categorie["valeur"].'"';
+	if ($data["categorie"]==$categorie["valeur"]) { echo ' selected="selected"'; }
 	echo '> '.$categorie["libelle"].'</option>';
 }
 echo '</select>';

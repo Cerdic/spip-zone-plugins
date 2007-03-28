@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /**
 * Plugin Association
 *
 * Copyright (c) 2007
-* Bernard Blazin & François de Montlivault
+* Bernard Blazin & Fran�ois de Montlivault
 * http://www.plugandspip.com 
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 * Pour plus de details voir le fichier COPYING.txt.
@@ -55,7 +55,7 @@ $sql = "SELECT * FROM spip_asso_categories";
 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($categorie = mysql_fetch_assoc($req)) 
 {
-echo '<option value = "'.$categorie["id_categorie"].'"> '.$categorie["libelle"].'</option>';
+echo '<option value = "'.$categorie["valeur"].'"> '.$categorie["libelle"].'</option>';
 }
 echo '</select>';
 echo '<tr> ';	
