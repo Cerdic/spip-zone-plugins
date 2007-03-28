@@ -1,7 +1,7 @@
-------------------
-- Spip-Boutique  -
-------------------
-!! : ce document n'est pas une version finale
+-----------------------------------
+- Spip-Boutique : Carnet de bord  -
+-----------------------------------
+!! : ce document n'est pas une version finale (et ne le sera sans doute jamais ...)
 
 1)Objectifs à atteindre
 ***********************
@@ -37,6 +37,16 @@ Coté Administrateur restreint :
 	lier une catégorie à une rubrique et inversement si il est administrateur de la catégories ET de la rubrique (cfg : oui, non), --> intérêt à estimer ...
 ...
 2)Time line
+        V0.1.x création des tables utilisée par le plugin (fait à 45%)
+        V0.2.x Création du système d'ajout / suppression / édition de catégories (fait à 0%)
+        V0.3.x Création du système d'ajout / suppression / édition de produits (fait à 0%)
+        V0.4.x Sécurisation des droits d'édition par rapport aut user spip
+        V0.5.x Création du système de visualisation des cadis et client
+        V0.6.x Création de la balise #CADI
+        V0.7.x Création de la balise #PROMOTION
+	
+	
+
 3)Méthode de travaille
 4)Règles de commit ?
 

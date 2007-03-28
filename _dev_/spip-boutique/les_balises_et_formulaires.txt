@@ -1,0 +1,19 @@
+---------------------------------------------
+- Spip-Boutique : Les balise et formulaire  -
+---------------------------------------------
+________________________________________________________
+| Ce fichier se remplira au fur et à mesure du dev !!! |
+--------------------------------------------------------
+
+
+#CADI
+- Formulaire qui affiche en gros 
+<div>
+<span>Vous avez #ENV{nombre_produits} produits dans votre cadi
+pour une somme de #ENV{prix_total}</span>
+<span> dernier ajout : #ENV{dernier_ajout} </span>
+</div>
+Il faut encore voir ce qu'il est intéraissant de mettre dans cette partie sur le site
+
+#PROMOTION
+Pas d'idées pour l'instant :p
