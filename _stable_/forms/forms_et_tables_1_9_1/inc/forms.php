@@ -422,9 +422,11 @@
 		else if ($val) {
 			// Choix multiples : enregistrer chaque valeur separement
 			if (is_array($val))
-				foreach ($val as $v)
-					$inserts[] = "("._q($id_donnee).","._q($champ).","._q($v).")";
-			else
+				foreach ($val as $v){
+					if (strlen($v))
+						$inserts[] = "("._q($id_donnee).","._q($champ).","._q($v).")";
+				}
+			elseif (strlen($val))
 				$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val).")";
 		}
 		return $inserts;

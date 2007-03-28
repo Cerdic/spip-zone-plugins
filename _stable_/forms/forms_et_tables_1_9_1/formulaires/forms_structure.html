@@ -61,10 +61,10 @@
 					<INCLURE{fond=formulaires/forms_champ_multiple}{id_form}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
 				]
 				[(#TYPE|=={mot}|?{' ',''}) #SET{afficher,0}
-					<INCLURE{fond=formulaires/forms_select_mot}{id_groupe=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+					<INCLURE{fond=formulaires/forms_select_mot}{id_form}{id_groupe=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
 				]
 				[(#TYPE|=={articles_mot}|?{' ',''}) #SET{afficher,0}
-					<INCLURE{fond=formulaires/forms_select_article_mot}{id_mot=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+					<INCLURE{fond=formulaires/forms_select_article_mot}{id_form}{id_mot=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
 				]
 				[(#REM) tous les autres types sont affiches ici]
 				[(#GET{afficher}|?{' ',''})

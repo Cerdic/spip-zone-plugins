@@ -163,7 +163,7 @@
 				if ($type=='multiple' or $type=='select' or $type=='mot'){
 					if (!is_array($val)) $val = array($val);
 					foreach($val as $v)
-						if (!isset($infos['choix'][$v]))
+						if (strlen($v) && !isset($infos['choix'][$v])) // le formulaire renvoie toujours au moins une reponse vide sur les multiple
 							$erreur[$champ] = _T("forms:donnee_inattendue");
 				}
 				if (isset($GLOBALS['forms_types_champs_etendus'][$type])){
