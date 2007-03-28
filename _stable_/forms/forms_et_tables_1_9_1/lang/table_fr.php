@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'toutes_tables' => "Toutes les tables",
 
 // page donnees_tous
-'icone_ajouter_donnee' => "Ajouter des donn&eacute;es",
+'icone_ajouter_donnees' => "Ajouter des donn&eacute;es",
 'telecharger_reponses' => "T&eacute;l&eacute;chargez les donn&eacute;es",
 'importer_donnees_csv' => "Importer des donn&eacute;es",
 
