@@ -11,12 +11,14 @@ _ Le code initial de Courcy a a &eacute;t&eacute; en grande partie r&eacute;-&ea
 -** g&eacute;n&eacute;rer une syntaxe de tableau SPIP et non HTML (l'&eacute;diteur de couleur de cellules disparait donc aussi)
 -** pour permettre de cr&eacute;er mais aussi de modifier un tableau existant
 -** pour int&eacute;grer les &eacute;l&eacute;ments HTML titre et r&eacute;sum&eacute; de tableau 
+-* Galerie de documents : [SCRIPT ORIGINAL POUR SPIP 1.7.2->http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html]
+_ ADAPTATION POUR SPIP 1.9.2 par [Coyote->http://www.spip-contrib.net/_Coyote_] (28 mars 2007)
 
 &copy; 2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
 	<version>
-	1.6.4
+	1.7.0
 	</version>
 	<etat>
 	stable
