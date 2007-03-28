@@ -156,24 +156,7 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 	echo "</div>";
 	fin_boite_info();
 
-
-	debut_droite();
-    
-	echo generer_url_post_ecrire("habillages_icones");
-	
-	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icones-22.png");	
-	
-	debut_boite_info();
-	echo gros_titre(_T('icones:gros_titre_selecteur'));
-	echo _T('icones:def_page_selecteur');
-	fin_boite_info();
-	echo "<br />";
-
-	debut_boite_info();
-###################################################################
-#
-# lister les repertoires d'icones
-#
+	# lister les repertoires d'icones
 	$meta_pack = $GLOBALS['meta']['habillages_img_pack'];
 	$derrep = strtok($meta_pack,'/');
 	while($derrep = strtok('/')) { $pack_actif=$derrep; }
@@ -184,7 +167,7 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 	}
 
 	
-	// on force spip en premier !
+	# on force spip en premier !
 	$packs=array();
 	$packs[]='spip';
 	
@@ -196,13 +179,25 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 	}
 	$d->close();
 
-#
-# affichage
-#
-	debut_cadre_relief('');
-	gros_titre(_T('icones:pack_actif', array('pack' => majuscules($pack_actif))));
-	fin_cadre_relief();
+
+	debut_droite();
+    
+	echo generer_url_post_ecrire("habillages_icones");
 	
+	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icones-22.png");	
+	
+	debut_boite_info();
+	echo gros_titre(_T('icones:gros_titre_selecteur'));
+	echo _T('icones:def_page_selecteur');
+	echo "<p><strong>";
+	echo (_T('icones:pack_actif', array('pack' => majuscules($pack_actif))));
+	echo "</strong></p>";
+	fin_boite_info();
+	echo "<br />";
+
+# affichage
+
+	debut_boite_info();
 	echo '<form action="'.generer_url_ecrire('habillages_icones').'" method="post">';
 	echo "<div align='right'><input type='submit' value='"._T('valider')."' class='fondo' /></div>";
 	
@@ -227,75 +222,41 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 			#$value = $repert;
 		}
 		$pack_select = "<img src='".$repert."puce-verte.gif' />";
-		
-
-		
-		debut_cadre_trait_couleur('rien.gif');
-		echo "<table width='100%' border='0' cellpadding='2' cellspacing='0'>";
-		echo "<tr>
-		<td rowspan='3' width='4%' valign='top'>
-			<input type='radio' name='change_pack' value='$repert' ".(($meta_pack==$repert)? $check : '')." />
-		</td>
-		<td colspan='7'>".
-			(($meta_pack==$repert)? debut_cadre_couleur('',true) : debut_cadre_relief('', true)).
-			(($meta_pack==$repert)? $pack_select."&nbsp;" : '')."<span class='verdana3'><b>".$nom_theme."</b></span>
-			&nbsp;&middot;&middot;&nbsp;<span class='verdana2'>".$version_theme."</span>".
-			(($meta_pack==$repert)? fin_cadre_couleur() : fin_cadre_relief('', true))."
-		</td>
-		<td>
-			<div class='icone36'>
-			<a href='".generer_url_ecrire('icop_listing','pack='.$pack)."' title='"._T('icop:voir_toutes_icones')."'>
-			<img src='".$repert."cal-suivi.png' />
-			</a>
-			</div>
-		</tr>
-		<tr>
-			<td colspan='8'>".propre($description_theme)."<br />".propre($auteur_theme)."</td>
-		</tr>
-		<tr>
-		<td width='12%' class='cellule48' onmouseover='changestyle('bandeauaccueil');'>
-			<div align='center'><a href='#'><img src='".$repert."asuivre-48.png' title='' alt='ico' /></a></div>
-		</td>
-		<td width='12%' class='cellule48' onmouseover='changestyle('bandeauaccueil');'>
-			<div align='center'><a href='#'><img src='".$repert."documents-48.png' title='' alt='ico' /></a></div>
-		</td>
-		<td width='12%' class='cellule48' onmouseover='changestyle('bandeauaccueil');'>
-			<div align='center'><a href='#'><img src='".$repert."messagerie-48.png' title='' alt='ico' /></a></div>
-		</td>
-		<td width='12%' class='cellule48' onmouseover='changestyle('bandeauaccueil');'>
-			<div align='center'><a href='#'><img src='".$repert."redacteurs-48.png' title='' alt='ico' /></a></div>
-		</td>
-		<td width='12%' class='cellule48' onmouseover='changestyle('bandeauaccueil');'>
-			<div align='center'><a href='#'><img src='".$repert."statistiques-48.png' title='' alt='ico' /></a></div>
-		</td>
-		<td width='12%' class='cellule48' onmouseover='changestyle('bandeauaccueil');'>
-			<div align='center'><a href='#'><img src='".$repert."administration-48.png' title='' alt='ico' /></a></div>
-		</td>
-		<td width='12%' class='cellule48' onmouseover='changestyle('bandeauaccueil');'>
-			<div align='center'><a href='#'><img src='".$repert."aide-48.png' title='' alt='ico' /></a></div>
-		</td>
-		<td width='12%' class='cellule48' onmouseover='changestyle('bandeauaccueil');'>
-			<div align='center'><a href='#'><img src='".$repert."visiter-48.png' title='' alt='ico' /></a></div>
-		</td>
-		</tr></table><br />";
 	
+	echo "<p></p>";
+    echo "<table border='0' cellpadding='0' cellspacing='0' id='subtab' align='center'>";
 
-		fin_cadre_trait_couleur();
+	echo "<tr><td style='background-color:$couleur_foncee' id='hab_input' class='hab_stitre'>";
+	echo "<input type='radio' name='change_pack' value='$repert' ".(($meta_pack==$repert)? $check : '')." /></td>";
+	echo "<td style='background-color:$couleur_foncee' id='hab_inputxt' class='hab_stitre'>";
+	echo (($meta_pack==$repert)? $pack_select."&nbsp;" : '')."<span class='verdana3'><b>".$nom_theme."</b></span>
+			&nbsp;&middot;&middot;&nbsp;<span class='verdana2'>".$version_theme."</span>";
+
+	echo "</td>";
+	echo "<td style='background-color:$couleur_foncee' id='hab_inpuico' class='hab_stitre'>";
+
+    echo "<a href='".generer_url_ecrire('icop_listing','pack='.$pack)."' title='"._T('icones:voir_toutes_icones')."'>";
+    echo "<img src='".$repert."cal-suivi.png' /></a>";
+    
+	echo "</td></tr>";
+	echo "<tr>";
+	echo "<td colspan='3' style='background-color:$couleur_claire' class='hab_fondclair cellule48' onmouseover='changestyle('bandeauaccueil');>";
+	echo "<a href='#'></a>";
+	echo "</td></tr>";
+		echo "<tr>";
+	echo "<td colspan='3' style='background-color:$couleur_claire' class='hab_fondclair cellule48' onmouseover='changestyle('bandeauaccueil');>";
+	echo "<a href='#'>";
+	echo "<img src='".$repert."asuivre-48.png' title='' alt='ico' />";
+	echo "<img src='".$repert."documents-48.png' title='' alt='ico' />";
+	echo "<img src='".$repert."messagerie-48.png' title='' alt='ico' />";
+	echo "<img src='".$repert."redacteurs-48.png' title='' alt='ico' />";
+	echo "<img src='".$repert."statistiques-48.png' title='' alt='ico' />";
+	echo "<img src='".$repert."administration-48.png' title='' alt='ico' /></a>";
+	echo "</td></tr>";
+	echo "</table>";
 		
 	}
-################################################################################
-	echo "<table border='0' cellpadding='0' cellspacing='3' id='subtab' align='center'>";
 
-	echo "<tr><td style='background-color:$couleur_foncee' id='hab_input' class='hab_titre'>";
-	echo "<input type='radio' name='change_pack' value='$repert' ".(($meta_pack==$repert)? $check : '')." /></td>";
-	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
-	echo _T('habillages:squelettes_base_acc')."</td>";
-	echo "<td style='background-color:$couleur_foncee' id='hab_inpuico' class='hab_stitre'>";
-	echo _T('habillages:squelettes_base_acc');
-	echo "</td></tr>";
-	
-    	    
-	echo "</table>";
 	
 	fin_boite_info();
 	

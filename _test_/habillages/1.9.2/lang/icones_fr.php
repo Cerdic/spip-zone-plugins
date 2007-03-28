@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'def_couleurs' => 'Les jeux de couleurs s&eacute;lectionn&eacute;s seront disponbiles dans 
+'def_couleurs' => 'Les jeux de couleurs s&eacute;lectionn&eacute;s seront disponibles dans 
 					le bandeau secondaire de SPIP.&lt;br /&gt;
 					Les couleurs cr&eacute;&eacute;es par vos soins dans le fichier :&lt;br /&gt;
 					mes_couleurs.php&lt;br /&gt;
