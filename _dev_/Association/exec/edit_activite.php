@@ -50,8 +50,15 @@ echo '<td>Nom complet :</td>';
 echo '<td><input name="nom"  type="text" size="40" value="'.$data['nom'].'"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Num&eacute;ro d\'adh&eacute;rent :</td>';
-echo '<td><input name="id_adherent"  type="text" size="40" value="'.$data['id_adherent'].'"> </td>';
+echo '<td>Adh&eacute;rent :</td>';
+echo '<td><select name="id_adherent">';
+echo '<option value="0"> -- Invitation ext&eacute;rieure -- </option>';
+$query_adh = spip_query ("SELECT id_adherent, CONCAT(nom,' ',prenom,IF((SELECT count(*) FROM spip_asso_activites where spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent AND spip_asso_activites.id_evenement=".$data['id_evenement']."),' (d&eacute;j&agrave; inscrit)','')) as usuel FROM spip_asso_adherents ORDER BY nom,prenom") ;
+while ($data_adh = mysql_fetch_assoc($query_adh)) {
+print_r($data_adh);
+echo '<option value="'.$data_adh['id_adherent'].'"'.($data_adh['id_adherent'] == $data['id_adherent'] ? ' selected="selected"' : '').'>'.$data_adh['usuel'].'</option>';
+}
+echo '</select></td>';
 echo '</tr>';
 echo '<tr> ';
 echo '<td>Accompagn&eacute; de :</td>';

@@ -26,7 +26,7 @@ debut_cadre_relief(  "", false, "", $titre = _T('Ajouter des inscriptions'));
 
 print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 
-$id_evenement=$_GET['id'];
+$id_evenement=preg_replace("/[^0-9]/","",$_GET['id']);
 
 echo '<p align="center"><form action="'.$url_action_activites.'" method="POST">';
 echo '<fieldset><legend>Ajouter une inscription </legend>';
@@ -40,8 +40,14 @@ echo '<td>Nom complet :</td>';
 echo '<td><input name="nom"  type="text" size="40"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Num&eacute;ro d\'adh&eacute;rent :</td>';
-echo '<td><input name="id_adherent"  type="text" size="40"> </td>';
+echo '<td>Adh&eacute;rent :</td>';
+echo '<td><select name="id_adherent">';
+echo '<option value="0"> -- Invitation ext&eacute;rieure -- </option>';
+$query = spip_query ("SELECT id_adherent, CONCAT(nom,' ',prenom,IF((SELECT count(*) FROM spip_asso_activites where spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent AND spip_asso_activites.id_evenement=$id_evenement),' (d&eacute;j&agrave; inscrit)','')) as usuel FROM spip_asso_adherents ORDER BY nom,prenom") ;
+while ($data = mysql_fetch_assoc($query)) {
+echo '<option value="'.$data['id_adherent'].'"> '.$data['usuel'].' </option>';
+}
+echo '</select></td>';
 echo '</tr>';
 echo '<tr> ';
 echo '<td>Accompagn&eacute; de :</td>';

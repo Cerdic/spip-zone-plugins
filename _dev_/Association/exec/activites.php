@@ -19,6 +19,7 @@ debut_page(_T('Gestion pour  Association'), "", "");
 $url_articles = generer_url_ecrire('articles');
 $url_activites = generer_url_ecrire('activites');
 $url_ajout_activite = generer_url_ecrire('ajout_activite');
+$url_edit_activites = generer_url_ecrire('edit_activite');
 $url_voir_activites = generer_url_ecrire('voir_activites');
 
 include_spip ('inc/navigation');
@@ -31,11 +32,10 @@ print('<p>Nous sommes le '.date('d/m/Y').'</p>');
 // FILTRES
 
 //Bricolage?
-if ( isset ($_POST['mot'] )) {
-	$mot = $_POST['mot']; }
-	elseif ( isset ($_GET['mot'] )) {
-		$mot =  $_GET['mot']; }
-		else { $mot= "%"; }
+if ( isset($_REQUEST['mot']) ) {
+	$mot = $_REQUEST['mot']; 
+} 
+else { $mot= "%"; }
 		
 echo '<table width="70%">';
 echo '<tr>';
@@ -88,7 +88,7 @@ $debut=$_GET['debut'];
 if (empty($debut))
 {$debut=0;}
 
-$query = spip_query ("SELECT *, spip_evenements.titre AS intitule, spip_mots.titre AS motact  FROM ".$table_prefix."_evenements INNER JOIN spip_mots_evenements ON  spip_mots_evenements.id_evenement=spip_evenements.id_evenement INNER JOIN spip_mots ON spip_mots_evenements.id_mot=spip_mots.id_mot WHERE date_format( date_debut, '%Y' ) = $annee AND spip_mots.titre like '$mot' ORDER BY date_debut DESC LIMIT $debut,$max_par_page");
+$query = spip_query ("SELECT *, spip_evenements.id_evenement, spip_evenements.titre AS intitule, spip_mots.titre AS motact  FROM ".$table_prefix."_evenements LEFT JOIN spip_mots_evenements ON  spip_mots_evenements.id_evenement=spip_evenements.id_evenement LEFT JOIN spip_mots ON spip_mots_evenements.id_mot=spip_mots.id_mot WHERE date_format( date_debut, '%Y' ) = $annee AND (spip_mots.titre like '$mot' OR spip_mots.titre IS NULL) ORDER BY date_debut DESC LIMIT $debut,$max_par_page");
 
 while ($data = mysql_fetch_assoc($query)) {
 
@@ -102,7 +102,12 @@ echo '<td class ='.$class.' style="text-align:right;">'.association_datefr($date
 echo '<td class ='.$class.' style="text-align:right;">'.$heure.'</td>';
 echo '<td class ='.$class.'>'.$data['intitule'].'</td>';
 echo '<td class ='.$class.'>'.$data['lieu'].'</td>';
-echo '<td class ='.$class.'>&nbsp</td>';
+$query_inscrit = spip_query("SELECT spip_asso_activites.id_activite, spip_asso_activites.nom AS nom_complet, spip_asso_activites.id_adherent, spip_asso_adherents.nom, spip_asso_adherents.prenom FROM spip_asso_activites LEFT JOIN spip_asso_adherents ON (spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent) WHERE spip_asso_activites.id_evenement=".$data['id_evenement']." ORDER BY spip_asso_adherents.nom, spip_asso_adherents.prenom");
+echo '<td class ='.$class.'>';
+while ($data_inscrit = mysql_fetch_assoc($query_inscrit)) {
+ echo '<a href="'.$url_edit_activites.'&id='.$data_inscrit['id_activite'].'">'.($data_inscrit['id_adherent'] > 0 ? $data_inscrit['nom'].' '.$data_inscrit['prenom'] : $data_inscrit['nom_complet'])."</a><br />";
+}
+echo '</td>';
 echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier l\'article"></a></td>';
 echo '<td class ='.$class.'><a href="'.$url_ajout_activite.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="Ajouter une inscription"></a>';
 echo '<td class ='.$class.' style="text-align:center;"><a href="'.$url_voir_activites.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="Voir la liste des inscriptions"></a></td>';

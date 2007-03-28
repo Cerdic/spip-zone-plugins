@@ -62,6 +62,13 @@ $justification='Inscription n&deg; '.$id_activite.' - '.$nom;
 
 spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ('$date_paiement','$journal','$montant','$justification','activite','$id_activite')");
 
+if ($id_adherent) {
+ $query_adh = spip_query("SELECT nom, prenom FROM spip_asso_adherents WHERE id_adherent=$id_adherent");
+ while ($data_adh = mysql_fetch_assoc($query_adh)) {
+	 $nom = $data_adh['nom'].' '.$data_adh['prenom'];
+	}
+}
+
 echo '<p><strong>L\'inscription de '.$nom.' a &eacute;t&eacute; enregistr&eacute;e pour un montant de '.$montant.' &euro;</strong></p>';
 echo '<p>';
 icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
@@ -78,6 +85,12 @@ spip_query("UPDATE spip_asso_activites SET date='$date', id_evenement='$id_evene
 
 spip_query("UPDATE spip_asso_comptes SET date='$date_paiement', journal='$journal', recette='$montant' WHERE id_journal=$id_activite AND imputation='activite' ");
 	
+if ($id_adherent) {
+ $query_adh = spip_query("SELECT nom, prenom FROM spip_asso_adherents WHERE id_adherent=$id_adherent");
+ while ($data_adh = mysql_fetch_assoc($query_adh)) {
+	 $nom = $data_adh['nom'].' '.$data_adh['prenom'];
+	}
+}
 echo '<p><strong>L\'inscription de '.$nom.' a &eacute;t&eacute; mise &agrave; jour</strong></p>';
 echo '<p>';
 icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );

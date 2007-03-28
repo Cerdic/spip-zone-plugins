@@ -50,6 +50,7 @@ $commentaires=$_POST['commentaires'];
 
 $libelle=addslashes($libelle);
 $commentaires=addslashes($commentaires);
+$valeur=addslashes($valeur);
 
 if ($action =="modifie") { 
 spip_query( "UPDATE spip_asso_categories SET libelle='$libelle', valeur='$valeur', duree='$duree', cotisation='$montant', commentaires='$commentaires' WHERE id_categorie='$id' " );
@@ -63,6 +64,11 @@ spip_query( "INSERT INTO spip_asso_categories (libelle, valeur, duree, cotisatio
 echo '<p><strong>La cat&eacute;gorie a &eacute;t&eacute; ins&eacute;r&eacute;e</strong></p>';
 
 }
+$url_retour = generer_url_ecrire('categories');
+echo '</strong></p>';
+echo '<p>';
+icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/calculatrice.gif','rien.gif' );
+echo '</p>';
 
 
 fin_boite_info();

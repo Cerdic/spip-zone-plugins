@@ -61,6 +61,7 @@ function asso_verifier_base(){
 		
 		if ($current_version<0.50){
 		spip_query("ALTER TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` ");
+		ecrire_meta('asso_base_version',$current_version=0.50);
 		}
 		ecrire_metas();
 	}
