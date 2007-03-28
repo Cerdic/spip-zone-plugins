@@ -3,7 +3,8 @@
 	Thickbox v2
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Thickbox (version 2) par [Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all], mis en plugin par Fil, Izo, BoOz
+	Thickbox (version 2) par [Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all]
+_ Mis en plugin par Fil, Izo, BoOz
 	</auteur>
 	<version>
 	0.3
@@ -13,11 +14,12 @@
 	test
 	</etat>
 	<description>
-	ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] <br />voir surtout [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] sur les liens de type image(<code><a href="#URL_DOCUMENT" type="#MIME_TYPE" ...</code>) ou de class="thickbox"
+	Ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] sur les liens de type image (<code><a href="#URL_DOCUMENT" type="#MIME_TYPE" ...</code>) ou de class="thickbox"
 
-_ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>, ainsi que dans l'espace priv&#233;.
-_ il n&#233;cessite {{jQuery}}.
+_ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
+_ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
 	</description>
+	<lien>http://spip-zone.info/spip.php?article31</lien>
 	<prefix>
 	ThickBox1
 	</prefix>
