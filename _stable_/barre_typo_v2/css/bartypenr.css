@@ -1,0 +1,53 @@
+.texteencadre-spip {
+	color: #000033;
+	background: #EEF;
+	border-bottom: 2px solid #0066CC;
+	border-left: 1px solid #3399FF;
+	border-right: 2px solid #0066CC;
+	border-top: 1px solid #3399FF;
+	margin: 1em 0;	
+	padding: .25em;	
+	position: relative;
+}
+
+.caractencadre-spip {
+	color: #F60;
+	font-weight: bold;
+}
+
+.caractencadre2-spip {
+	color: #009;
+	font-weight: bold;
+}
+
+acronym.spip_acronym {
+	cursor: help;
+	border-bottom: 1px dotted;
+}
+
+/* ne marche pas sur MSIE, a refaire en jQuery */
+a[hreflang]:after {
+content: "\0000a0[" attr(hreflang) "]";
+color: #999;
+background: transparent;
+font-size:x-small;
+}
+
+a.spip_blank {
+	color: #F00;
+}
+
+sup {
+	vertical-align:20%;
+	font-variant: small-caps;
+	font-size: .5em;
+}
+
+/* Pour le mode preview dans l'admin */
+#article_preview {
+	display:none;
+	border:1px solid #F00;
+	overflow: auto;
+	background-color: #FFF;
+	padding: 0 1em;
+}

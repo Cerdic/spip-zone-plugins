@@ -1,0 +1,33 @@
+body{
+	padding: 1em 2em 1em 1em;
+	text-align:center;
+	font: 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+a img{border:none}
+#enregistrer{
+	display:block;
+	width:10em;
+	margin:1em auto;
+	padding:0.5em;
+	font-size:14px;
+	text-align:center;
+	text-decoration:none;
+	background:#eee;
+	border:1px outset #aaa;
+}
+div{text-align:left;margin-bottom:0.5em;}
+div span{float:left;width:10em}
+input{width:60%}
+#ihm{
+	border-collapse:collapse;
+	border:3px ridge gray;
+	width:85%;
+}
+#ihm td{border:3px ridge gray;text-align:center}
+#ihm td td{border:none}
+#ihm img{margin:4px}
+textarea{ width:100%}
+.first_c a img {display:block}
+.last_l, .last_c {background:#eee}
+.first_l, .first_c {background: #F0E68C}
+.first_c, .last_c {width:24px;}
