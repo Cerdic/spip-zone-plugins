@@ -164,15 +164,6 @@ function afficher_un_document($id_document){
 		$type_titre = $type['titre'];
 	}
 
-	if ($id_vignette) {
-		$vignette = fetch_document($id_vignette);
-	}
-	if ($vignette) {
-		$fichier_vignette = generer_url_document($id_vignette);
-		$largeur_vignette = $vignette->get('largeur');
-		$hauteur_vignette = $vignette->get('hauteur');
-	}
-
 	$retour = '';
 	$bouton = bouton_block_invisible('doc'.$id_document);
 	if (test_layer()) {
@@ -184,14 +175,7 @@ function afficher_un_document($id_document){
 	$retour .= debut_block_invisible('doc'.$id_document);
 	$retour .= '<div style="border: 1px dashed #666666; padding: 5px; background-color: #f0f0f0;">';
 	$retour .= '<table border="0" cellspacing="3" cellpadding="3"><tr><td rowspan="'.(_GALERIE_MODE ? 5 : 4).'" valign="top">';
-	if ($fichier_vignette) {
-		$retour .= texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier);
-	} else {
-		list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
-		if ($icone) {
-			$retour .= '<a href="'.$fichier.'" target="_blank"><img src="'.$icone.'" border=0 width="'.$largeur_icone.'" height="'.$hauteur_icone.'" align="top" /></a>';
-		}
-	}
+	$retour .= '<a href="'.$fichier.'" target="_blank">'.document_et_vignette($document, $url, true).'</a>';
 	$retour .= '</td>';
 
 	$retour .= '<th align="right" valign="top">Fichier&nbsp;:</th>';
