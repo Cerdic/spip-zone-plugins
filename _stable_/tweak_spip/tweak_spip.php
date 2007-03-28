@@ -83,8 +83,18 @@ function tweak_insert_header($type) {
 
 // est-ce que $pipe est un pipeline ?
 function is_tweak_pipeline($pipe, &$set_pipe) {
-	if ($ok=preg_match(',^\s*pipeline\s*:(.*?)$,',$pipe,$t)) $set_pipe = trim($t[1]);
+	if ($ok=preg_match(',^pipeline:(.*?)$,',$pipe,$t)) $set_pipe = trim($t[1]);
 	return $ok;
+}
+
+// lire un fichier php et retirer si possible les balises <?php
+function tweak_lire_fichier_php($file) {
+	$file=find_in_path($file);
+	if ($file && lire_fichier($file, $php)) {
+		if (preg_match(',^<\?php(.*)?\?>$,msi', trim($php), $regs)) return trim($regs[1]);
+		return "\n?>\n".trim($php)."\n<?php\n";
+	}
+	return false;
 }
 
 // cree un tableau $tweaks_pipelines et initialise $tweaks_metas_pipes
@@ -111,10 +121,11 @@ function tweak_initialise_includes() {
 			if (find_in_path('tweaks/'.$inc.'.css')) $tweaks_metas_pipes['css'][] = $inc.'.css';
 			if (find_in_path('tweaks/'.$inc.'.js')) $tweaks_metas_pipes['js'][] = $inc.'.js';
 			// recherche d'un code inline eventuellement propose
-			if (isset($tweak['code'])) { $inc = $tweak['code']; $prefixe = 'code_'; }
-				else $prefixe = 'inc_';
-			if ($tweak['options']) $tweaks_pipelines[$prefixe.'options'][] = $inc;
-			if ($tweak['fonctions']) $tweaks_pipelines[$prefixe.'fonctions'][] = $inc;
+			if (isset($tweak['code:options'])) $tweaks_pipelines['code_options'][] = $tweak['code:options'];
+			if (isset($tweak['code:fonctions'])) $tweaks_pipelines['code_fonctions'][] = $tweak['code:fonctions'];
+			// recherche d'un fichier montweak_options.php ou montweak_fonctions.php pour l'inserer dans le code
+			if ($temp=tweak_lire_fichier_php('tweaks/'.$inc.'_options.php')) $tweaks_pipelines['code_options'][] = $temp;
+			if ($temp=tweak_lire_fichier_php('tweaks/'.$inc.'_fonctions.php')) $tweaks_pipelines['code_fonctions'][] = $temp;
 		}
 	}
 	// effacement du repertoir temporaire de controle

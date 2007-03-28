@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Tweak SPIP</nom>
 	<icon>img/tweak-24.gif</icon>
-	<version>0.13</version>
+	<version>1.0.0 pour Spip 1.9 minimum.</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
 _ &copy; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	test
+	stable
 	</etat>
 	<description>
 R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP. Chacun de ces tweaks peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin : cliquer sur {{Configuration}}, puis choisir l'onglet {{Tweak SPIP}}.

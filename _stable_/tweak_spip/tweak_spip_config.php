@@ -13,17 +13,15 @@
 /*
 add_tweak( array(
 	'id'	=> 'revision_nbsp',
-	'code' 	=> '$GLOBALS["activer_revision_nbsp"] = true; $GLOBALS["test_i18n"] = true ;',
+	'code:options' 	=> '$GLOBALS["activer_revision_nbsp"] = true; $GLOBALS["test_i18n"] = true ;',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 ));
 */
 add_tweak( array(
 	'id'	=> 'desactive_cache',
-	'code' 	=> '$_SERVER["REQUEST_METHOD"]="POST";',
+	'code:options' 	=> '$_SERVER["REQUEST_METHOD"]="POST";',
 	'auteur'	=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 ));
 
 add_tweak( array(
@@ -31,9 +29,8 @@ add_tweak( array(
 	// ici on demande a Tweak Spip une case input. La variable est : quota_cache
 	// par defaut, la valeur sera $GLOBALS["quota_cache"]
 	// le /d demande a Tweak Spip de traiter la variable comme un nombre.
-	'code' 	=> '$GLOBALS["quota_cache"]=%%quota_cache/d/$GLOBALS["quota_cache"]%%;',
+	'code:options' 	=> '$GLOBALS["quota_cache"]=%%quota_cache/d/$GLOBALS["quota_cache"]%%;',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 ));
 
 add_tweak( array(
@@ -41,9 +38,8 @@ add_tweak( array(
 	// ici on demande a Tweak Spip une case input. La variable est : dossier_squelettes
 	// par defaut, la valeur sera $GLOBALS["dossier_squelettes"]
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["dossier_squelettes"]=%%dossier_squelettes/s/$GLOBALS["dossier_squelettes"]%%;',
+	'code:options' 	=> '$GLOBALS["dossier_squelettes"]=%%dossier_squelettes/s/$GLOBALS["dossier_squelettes"]%%;',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 ));
 
 add_tweak( array(
@@ -51,38 +47,33 @@ add_tweak( array(
 	// ici on demande a Tweak Spip une case input. La variable est : dossier_squelettes
 	// par defaut, la valeur sera $GLOBALS["cookie_prefix"]
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["cookie_prefix"]=%%cookie_prefix/s/$GLOBALS["cookie_prefix"]%%;',
+	'code:options' 	=> '$GLOBALS["cookie_prefix"]=%%cookie_prefix/s/$GLOBALS["cookie_prefix"]%%;',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 ));
 
 add_tweak( array(
 	'id'	=> 'supprimer_numero',
-	'code' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";
+	'code:options' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";
 $GLOBALS["table_des_traitements"]["NOM"][]="typo(supprimer_numero(%s))";',
 	'categorie'	=> 'squel',
-	'options'	=> 1
 ));
 
 add_tweak( array(
 	'id'	=> 'paragrapher',
-	'code'	=> '$GLOBALS["toujours_paragrapher"]=true;',
+	'code:options'	=> '$GLOBALS["toujours_paragrapher"]=true;',
 	'categorie'	=> 'admin',
-	'options'	=> 1
 ));
 
 add_tweak( array(
 	'id'	=> 'forcer_langue',
-	'code'	=> '$GLOBALS["forcer_lang"]=true;', 
+	'code:options'	=> '$GLOBALS["forcer_lang"]=true;', 
 	'categorie'	=> 'squel',
-	'options'	=> 1
 ));
 
 add_tweak( array(
 	'id'	=> 'insert_head',
-	'code'	=> '$spip_pipeline["affichage_final"] .= "|f_insert_head";', 
+	'code:options'	=> '$spip_pipeline["affichage_final"] .= "|f_insert_head";', 
 	'categorie'	=> 'squel',
-	'options'	=> 1,
 	'version-min'	=> 1.92,
 ));
 
@@ -91,9 +82,8 @@ add_tweak( array(
 	// ici on demande a Tweak Spip une case input. La variable est : suite_introduction
 	// par defaut, la valeur sera "nbsp;(...)"
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> 'define(\'_INTRODUCTION_SUITE\', %%suite_introduction/s/"&nbsp;(...)"%%);',
+	'code:options' 	=> 'define(\'_INTRODUCTION_SUITE\', %%suite_introduction/s/"&nbsp;(...)"%%);',
 	'categorie'	=> 'squel',
-	'options'	=> 1,
 	'version-min'	=> 1.93,
 ));
 
@@ -105,10 +95,9 @@ add_tweak( array(
 	// la variable Spip est : set_options
 	// le avancees( signifie que avancees (traduit par : _T('icone_interface_complet')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["radio_set_options"]=$foo=%%radio_set_options/s/"avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)"%%;
+	'code:options' 	=> '$GLOBALS["radio_set_options"]=$foo=%%radio_set_options/s/"avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)"%%;
 $_GET["set_options"] = $GLOBALS["set_options"] = tweak_choix($foo);',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 	// pipeline pour retirer en javascript le bouton de controle de l'interface
 	'pipeline:header_prive' => 'set_options_header_prive',
 	// non supporte a partir de la version 1.9.3
@@ -122,10 +111,9 @@ add_tweak( array(
 	// la variable Spip est : filtrer_javascript
 	// le 0( signifie que 'par defaut' (traduit par : _T('tweak:js_defaut')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["radio_filtrer_javascript2"]=$foo=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;
+	'code:options' 	=> '$GLOBALS["radio_filtrer_javascript2"]=$foo=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;
 $GLOBALS["filtrer_javascript"]=tweak_choix($foo);',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 	'version-min'	=> 1.92,
 ));
 
@@ -134,45 +122,39 @@ add_tweak( array(
 	// ici on demande a Tweak Spip une case input. La variable est : forum_lgrmaxi
 	// par defaut, la valeur sera 0 (aucune limite)
 	// le /d demande a Tweak Spip de traiter la variable comme un nombre.
-	'code' 	=> 'if($foo=intval(%%forum_lgrmaxi/d/0%%)) define(\'_FORUM_LONGUEUR_MAXI\', $foo);',
+	'code:options' 	=> 'if($foo=intval(%%forum_lgrmaxi/d/0%%)) define(\'_FORUM_LONGUEUR_MAXI\', $foo);',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 	'version-min'	=> 1.92,
 ));
 
 add_tweak( array(
 	'id'	=> 'suivi_forums',
 	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:sf_defaut'), _T('tweak:sf_amont') et _T('tweak:sf_tous')
-	'code' 	=> '$GLOBALS["radio_suivi_forums"]=$foo=%%radio_suivi_forums/s/"(=tweak:sf_defaut|_SUIVI_FORUMS_REPONSES=tweak:sf_amont|_SUIVI_FORUM_THREAD=tweak:sf_tous)"%%;
+	'code:options' 	=> '$GLOBALS["radio_suivi_forums"]=$foo=%%radio_suivi_forums/s/"(=tweak:sf_defaut|_SUIVI_FORUMS_REPONSES=tweak:sf_amont|_SUIVI_FORUM_THREAD=tweak:sf_tous)"%%;
 if (strlen($suivi=tweak_choix($foo))) define($suivi, true);',
 	'categorie'	=> 'admin',
-	'options'	=> 1,
 	'version-min'	=> 1.92,
 ));
 
 add_tweak( array(
 	'id'	=> 'log_tweaks',
-	'code' 	=> '$GLOBALS["log_tweaks"]=true;',
-//	'categorie'	=> 'admin',
-	'options'	=> 1,
+	'code:options' 	=> '$GLOBALS["log_tweaks"]=true;',
 ));
 
 add_tweak( array (
 	'id' => 'xml',
-	'code' => '$xhtml = "sax";',
+	'code:options' => '$xhtml = "sax";',
 	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
 	'categorie' =>'squel',
 	'version-min' => '1.92',
-	'options' => 1
 ));
 
 add_tweak( array (
 	'id' => 'f_jQuery',
-	'code' => '$spip_pipeline["insert_head"] = str_replace("|f_jQuery", "", $spip_pipeline["insert_head"]);',
+	'code:options' => '$spip_pipeline["insert_head"] = str_replace("|f_jQuery", "", $spip_pipeline["insert_head"]);',
 	'auteur' => 'Fil',
 	'categorie' =>'squel',
 	'version-min' => '1.92',
-	'options' => 1
 ));
 
 //-----------------------------------------------------------------------------//
@@ -183,14 +165,12 @@ add_tweak( array(
 	'id'	=> 'verstexte',
 	'auteur' 	=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'categorie'	=> 'squel',
-	'fonctions'	=> 1,
 ));
 
 add_tweak( array(
 	'id'	=> 'orientation',
 	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
 	'categorie'	=> 'squel',
-	'fonctions'		=> 1,
 ));
 
 

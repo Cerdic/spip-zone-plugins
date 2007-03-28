@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forcer_langue:description'	=> "Force le contexte de langue pour les jeux de squelettes multilingues disposant d'un formulaire ou d'un menu de langues sachant g&eacute;rer le cookie de langues.",
 
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
-	'insert_head:description'	=> "Active #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).",
+	'insert_head:description'	=> "Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).",
 
 	'verstexte:nom' => 'Version texte',
 	'verstexte:description'	=> "2 filtres pour vos squelettes. 
@@ -134,7 +134,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'sf_defaut' => 'Par d&eacute;faut',
 	'sf_amont' => 'En amont',
 
-	'xml:nom'	=>'Activer le validateur xml',
+	'xml:nom'	=>'Validateur XML',
 	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html].",
 
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
