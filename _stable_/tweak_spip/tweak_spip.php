@@ -44,6 +44,8 @@ function set_tweaks_metas_pipes_fichier($tweaks_pipelines, $type) {
 		foreach ($tweaks_pipelines['inc_'.$type] as $inc) $code .= "include_spip('tweaks/$inc');\n";
 	if (isset($tweaks_pipelines['code_'.$type]))
 		foreach ($tweaks_pipelines['code_'.$type] as $inline) $code .= $inline."\n";
+	// on optimise avant...
+	$code = str_replace('intval("")', '0', $code);
 	$tweaks_metas_pipes[$type] = $code;
 tweak_log("set_tweaks_metas_pipes_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "mes_$type.php";
@@ -280,8 +282,9 @@ tweak_log(" -- foreach(\$tweaks) : tweak_parse_code, tweak_parse_description... 
 				$tweaks[$i]['actif'] = 0;
 		// au cas ou des variables sont presentes dans le code
 		$tweaks[$i]['basic'] = $i*10; $tweaks[$i]['nb_variables'] = 0;
-		// cette ligne peut initialiser des variables dans $metas_vars
-		if (isset($tweak['code'])) $tweaks[$i]['code'] = tweak_parse_code($tweaks[$i]['code']);
+		// ces 2 lignes peuvent initialiser des variables dans $metas_vars
+		if (isset($tweak['code:options'])) $tweaks[$i]['code:options'] = tweak_parse_code($tweak['code:options']);
+		if (isset($tweak['code:fonctions'])) $tweaks[$i]['code:fonctions'] = tweak_parse_code($tweak['code:fonctions']);
 		// cette ligne peut utiliser des variables dans $metas_vars
 		tweak_parse_description($i, $tweak_input);
 	}

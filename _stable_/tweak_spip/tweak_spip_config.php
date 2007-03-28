@@ -157,6 +157,16 @@ add_tweak( array (
 	'version-min' => '1.92',
 ));
 
+add_tweak( array(
+	'id'	=> 'style_p',
+	// ici on demande a Tweak Spip une case input. La variable est : style_p
+	// par defaut, la valeur sera "spip"
+	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
+	'code:options' 	=> '$GLOBALS["class_spip"]=strlen($foo=%%style_p/s/"spip"%%)?" class=\" $foo\"":"";',
+	'categorie'	=> 'squel',
+	'version-min'	=> 1.93,
+));
+
 //-----------------------------------------------------------------------------//
 //                               fonctions                                     //
 //-----------------------------------------------------------------------------//

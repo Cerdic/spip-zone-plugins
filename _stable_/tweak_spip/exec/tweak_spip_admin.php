@@ -283,10 +283,16 @@ function ligne_tweak($tweak, &$js){
 	$s .= '<hr/>' . _T('tweak:tweak').' ';
 	if ($erreur_version) $s .= _T('tweak:erreur:version');
 	else {
-		$s .= (isset($tweak['code'])?"code":"$inc.php");
-		if ($tweak['options']) $s .= ' | options';
-		if ($tweak['fonctions']) $s .= ' | fonctions';
-		foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) $s .= ' | '.$pipe2;
+		$a = array();
+		if(isset($tweak['code:options'])) $a[] = "code options";
+		if(isset($tweak['code:fonction'])) $a[] = "code fonctions";
+		if (find_in_path('tweaks/'.($temp=$tweak_id.'.php'))) $a[] = $temp;
+		if (find_in_path('tweaks/'.($temp=$tweak_id.'_options.php'))) $a[] = $temp;
+		if (find_in_path('tweaks/'.($temp=$tweak_id.'_fonctions.php'))) $a[] = $temp;
+		foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) $a[] = $pipe2;
+		if (find_in_path('tweaks/'.($temp=$tweak_id.'.js'))) $a[] = $temp;
+		if (find_in_path('tweaks/'.($temp=$tweak_id.'.css'))) $a[] = $temp;
+		$s .= join(' | ', $a);
 	}
 	$s .= "</div>";
 
