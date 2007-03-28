@@ -1,4 +1,14 @@
 <?php
+/**/
+include ('ecrire/base/serial.php');
+global $tables_principales;
+$tables_principales['spip_auteurs']['field']['plus']= "text NOT NULL DEFAULT ''";
+$tables_principales['spip_articles']['field']['plus']= "text NOT NULL DEFAULT ''";
+$tables_principales['spip_rubriques']['field']['plus']= "text NOT NULL DEFAULT ''";
+$tables_principales['spip_breves']['field']['plus']= "text NOT NULL DEFAULT ''";
+$tables_principales['spip_syndic']['field']['plus']= "text NOT NULL DEFAULT ''";
+$tables_principales['spip_mots']['field']['plus']= "text NOT NULL DEFAULT ''";
+
 
 function extra_homonyme_maj($id, $type, $action='') {
 
@@ -64,6 +74,7 @@ function extra_homonyme_maj($id, $type, $action='') {
                                 WHERE $id_table=".$id;
 								//echo $query;
 								$result = spip_query($query);
+								
 				}
 				/******************************************************/
 		}else if($action=='eversch'){
