@@ -283,3 +283,11 @@ function mozWrap(txtarea, open, close)
  		propriete='scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur;
 		w=window.open(cheminediteur+'?exec=tableau_edit', '',propriete);
  	}
+
+// DEB Galerie JPK 
+// idée originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
+  function barre_galerie(champs_de_texte, cheminediteur) {
+	zone_selection = champs_de_texte;
+    window.open(cheminediteur+'?exec=galerie', 'galerie',
+'width=550,height=400,menubar=no,scrollbars=yes,statusbar=yes')
+  }
