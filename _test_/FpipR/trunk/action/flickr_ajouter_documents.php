@@ -65,8 +65,8 @@ function action_flickr_ajouter_documents() {
 				$title = _T('fpipr:par',array('title'=>$title,'user'=>(($photo_details->owner_username)?$photo_details->owner_username:$photo_details->owner_nsid),'url'=>'http://www.flickr.com/people/'.$photo_details->owner_nsid));
 			  }
 			  include_spip('inc/filtres');
-			  $q = "UPDATE ".$table_prefix."_documents SET titre = '<html>"._q($title)."</html>', descriptif = '<html>"._q(filtrer_entites($photo_details->description))."</html>'";
-			  if($photo_details->date_taken) $q .=", date= '"._q($photo_details->date_taken)."'";
+			  $q = "UPDATE ".$table_prefix."_documents SET titre = "._q("<html>$title</html>").", descriptif = "._q('<html>'.filtrer_entites($photo_details->description).'</html>');
+			  if($photo_details->date_taken) $q .=", date= "._q($photo_details->date_taken);
 			  $q .=" WHERE id_document=".$doc_row['id_document'];
 			  spip_query($q);
 			  include_spip('inc/plugin');
