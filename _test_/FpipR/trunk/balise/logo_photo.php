@@ -4,6 +4,7 @@ function balise_LOGO_PHOTO_dist($p) {
   $id_photo = champ_sql('id_photo',$p);
   $secret = champ_sql('secret',$p);
   $originalformat = champ_sql('originalformat',$p);
+  $originalsecret = champ_sql('originalsecret',$p);
   $taille =  calculer_liste($p->param[0][1],
 									$p->descr,
 									$p->boucles,

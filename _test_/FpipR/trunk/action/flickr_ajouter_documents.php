@@ -45,7 +45,10 @@ function action_flickr_ajouter_documents() {
 		$photo_details = flickr_photos_getInfo($id_photo,$secret,$row['auth_token']);
 		if($photo_details->id) {
 		  $empty = array();
-		  $url = $photo_details->source('o');
+		  if($photo_details->originalsecret)
+			$url = $photo_details->source('o');
+		  else
+			$url = $photo_details->source();
 		  $cnt =spip_abstract_fetsel(array('id_document'),array('spip_documents'),array("fichier='$url'","distant='oui'"));
 		  if(!$cnt) {
 			$date = date('Y-m-d H:i:s');

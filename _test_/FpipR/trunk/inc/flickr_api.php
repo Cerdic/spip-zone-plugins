@@ -135,6 +135,7 @@ class FlickrPhotoDetails {
   var $license;
   var $rotation;
   var $originalformat;
+  var $originalsecret;
   var $owner_nsid;
   var $owner_username;
   var $owner_realname;
@@ -181,6 +182,7 @@ class FlickrPhoto {
   var $isfriend;
   var $isfamily;
   var $originalformat;
+  var $originalsecret;
   var $license='';
   var $dateupload='';
   var $datetaken='';
