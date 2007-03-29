@@ -6,12 +6,15 @@
  	collectif 
 _ &copy; 2007 - Distribu&eacute; sous licence GPL
 	</auteur>
-	<version> <!-- Version du plugin - identique a la version avec laquelle il est compatible -->
+	<version> <!-- Version du plugin - identique a la version SPIP avec laquelle il est compatible -->
 	1.9.2
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
 	</etat>
+	<icon>
+    decoupenpage.png
+	</icon>
 	<description>
 	Un plugin pour d&eacute;couper l'affichage public d'un article en plusieurs pages. R&eacute;digez vos articles en utilisant trois signes plus cons&eacute;cutifs (+++) a l'endroit qui doit recevoir la coupure.
 	</description>
