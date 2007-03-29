@@ -39,22 +39,25 @@
 		$enclosure = $data['descriptif'] ;
 			if (($enc_regs_url = extraire_attribut($enclosure,'src'))) {
 				$url  = substr(urldecode($enc_regs_url), 0,255);
+				$ext = substr($url, -3);
+				if($ext == (jpg|png|gif)){
 				$data['enc_image']['url'] = addslashes(abs_url($url, $le_lien));
-				$data['enc_image']['type'] = substr($url, -3);
+				$data['enc_image']['type'] = $ext ;
+				}
 			}
 			
 		
-		//trouver un flv chez  dailymotion
+		//trouver un flv chez  dailymotion ou une image chez flickr
 		# <media:content url="http://www.dailymotion.com/swf/3ndb67rMbTuLh8E2i" type="application/x-shockwave-flash" duration="520" width="320" height="240"/>
 		//echo $item ;
-		if (preg_match(',(<media:content[^>]*type="video/x-flv".*>),i',
+		if (preg_match(',(<media:content[^>]*>),i',
 		$data['item'], $match)) {
 			$go=str_replace('media:content','mediacontent',$match[1]);
-			$data['enc_flash']['url'] = extraire_attribut($go, 'url');
-			$data['enc_flash']['duration'] = extraire_attribut($go, 'duration');
-			$data['enc_flash']['width'] = extraire_attribut($go, 'width');
-			$data['enc_flash']['height'] = extraire_attribut($go, 'height');
-			$data['enc_flash']['type'] = trim(extraire_attribut($go,'type'));
+			$data['enc_media']['url'] = extraire_attribut($go, 'url');
+			$data['enc_media']['duration'] = extraire_attribut($go, 'duration');
+			$data['enc_media']['width'] = extraire_attribut($go, 'width');
+			$data['enc_media']['height'] = extraire_attribut($go, 'height');
+			$data['enc_media']['type'] = trim(extraire_attribut($go,'type'));
 		}
 		
 		
@@ -63,14 +66,21 @@
 		if (preg_match(',(<media:thumbnail[^>]+\/>),i',
 		$data['item'], $match)) {
 			$go=str_replace('media:thumbnail','mediathumbnail',$match[1]);
-			$data['enc_image']['url'] = extraire_attribut($go, 'url');
-			$data['enc_image']['type'] = 'jpg';
+			$data['enc_thumbnail']['url'] = extraire_attribut($go, 'url');
+			$data['enc_thumbnail']['type'] = 'jpg';
 		
 		}
 		
 		$data['enclosures_all'][] = $data['enc_enclosure'] ;
-		$data['enclosures_all'][] = $data['enc_flash'] ;
-		$data['enclosures_all'][] = $data['enc_image'] ;
+		$data['enclosures_all'][] = $data['enc_media'] ;
+		
+		//on ne prend pas l'image si le media est déjà une image (doublons)
+		if($data['enc_media']['type'] != 'image/jpeg'){
+			$data['enclosures_all'][] = $data['enc_image'] ;
+			$data['enclosures_all'][] = $data['enc_thumbnail'] ;
+		}
+		
+		//var_dump($data['item']);var_dump($data['enclosures_all']);die("coucou");
 		
 		/**/
 		
