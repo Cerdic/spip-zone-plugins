@@ -357,7 +357,7 @@ function FpipR_make_table($nom) {
 	spip_query("DROP TABLE $nom");
   }
   if(!$created[$nom]) {
-	spip_create_table($nom, $champs, $cles, false, false);
+	spip_abstract_create($nom, $champs, $cles, false, false);
   }
   $created[$nom] = true;
   ecrire_meta("FpipR_$nom",$GLOBALS['FpipR_versions'][$nom]);
