@@ -3,7 +3,7 @@
 function FpipR_affiche_milieu($flux) {
   if(!isset($GLOBALS['FLICKR_API_KEY']) && !isset($GLOBALS['FLICKR_SECRET'])) return $flux;
 
-  if($flux['args']['exec'] == 'auteur_infos' && _request('initial') < 0) {
+  if($flux['args']['exec'] == 'auteur_infos') { 
 		global $table_prefix, $connect_id_auteur;
 	
 		include_spip('base/abstract_sql');
@@ -35,7 +35,7 @@ function FpipR_affiche_milieu($flux) {
 			if($check) {
 			  $html .= _T('fpipr:identifie_ok',array('user_id'=>'<a href="http://www.flickr.com/photos/'.$row['flickr_nsid'].'">'.$row['flickr_nsid'].'</a>'));
 			  $html .= _T('fpipr:revoke_info');
-			  $html .= generer_action_auteur('flickr_revoke_auth',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur,true),'<button type="submit">'._T('fpipr:revoke').'</button>');
+			  $html .= generer_action_auteur('flickr_revoke_auth',$infos['frob'], generer_url_ecrire('auteur_infos','id_auteur='.$connect_id_auteur,true),'<button type="submit">'._T('fpipr:revoke').'</button>');
 			  $html .= flickr_bookmarklet_info();
 			} else {
 			  include_spip('base/abstract_sql');
