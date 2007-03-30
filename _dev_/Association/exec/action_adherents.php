@@ -53,6 +53,7 @@ $utilisateur1=$_POST['utilisateur1'];
 $utilisateur2=$_POST['utilisateur2'];
 $utilisateur3=$_POST['utilisateur3'];
 $utilisateur4=$_POST['utilisateur4'];
+$validite=$_POST['validite'];
 $statut=$_POST['statut'];
 
 $rue=nl2br($rue); 
@@ -103,7 +104,7 @@ if ($action=="ajoute"){
 
 if ($action=="modifie"){
 
-spip_query("UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', categorie='$categorie', fonction='$fonction', email='$email', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable', remarques='$remarques', id_asso='$id_asso', naissance='$naissance', profession='$profession',societe='$societe', secteur='$secteur', publication='$publication', utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', statut='$statut'  WHERE id_adherent='$id_adherent'");
+spip_query("UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', categorie='$categorie', fonction='$fonction', email='$email', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable', remarques='$remarques', id_asso='$id_asso', naissance='$naissance', profession='$profession',societe='$societe', secteur='$secteur', publication='$publication', utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', statut='$statut', validite='$validite' WHERE id_adherent='$id_adherent'");
 	//on met a jour  les id_auteur pour tous les adherents	
 spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");	
 	echo '<p><strong>Les donn&eacute;es de '.$prenom.' '.$nom.' ont &eacute;t&eacute; mises &agrave; jour !</strong></p>';

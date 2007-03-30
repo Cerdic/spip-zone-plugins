@@ -168,7 +168,7 @@ echo '<input name="statut" type="radio" name="statut" value="prospect"';
 if ($data['statut']=="prospect") {echo ' checked="checked"';}
 echo '> Prospect </td> ';
 echo '<td>Validit&eacute; :</td>';
-echo '<td><input name="utilisateur4" type="text" value="'.$data["validite"].'"></td>';
+echo '<td><input name="validite" type="text" value="'.$data["validite"].'"></td>';
 echo '</tr>';
 echo '<tr> ';      
 echo '<td>Remarques :</td>';
