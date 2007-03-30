@@ -21,20 +21,23 @@ if (_request('exec') == 'articles') {
 		. <<<EOS
 
 var appliquer_selecteur_cherche_auteur = function() {
-	jQuery('input[@name=cherche_auteur]')
-	.Autocomplete({
+	var inp = jQuery('input[@name=cherche_auteur]');
+	inp.Autocomplete({
 		'source': '$ac',
 		'delay': 300,
 		'autofill': false,
 		'helperClass': 'autocompleter',
 		'selectClass': 'selectAutocompleter',
-		'minchars': 2
+		'minchars': 2,
+		'onSelect': function(li) {alert(inp.parents("form").attr("action"));
+			inp.attr("name", "nouv_auteur").val(li.id_auteur).parents("form").ajaxSubmit();
+		}
 	});
 }
 
 
 jQuery(document).ready(appliquer_selecteur_cherche_auteur);
-onAjaxLoad(appliquer_selecteur_cherche_auteur);
+//onAjaxLoad(appliquer_selecteur_cherche_auteur);
 
 
 EOS
