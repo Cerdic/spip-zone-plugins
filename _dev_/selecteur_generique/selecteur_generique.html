@@ -1,0 +1,34 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}
+<?xml version="1.0"?>
+[(#REM)
+
+	Menu de selection d'un auteur a partir d'une valeur passee en parametre
+
+	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
+
+]
+<ajaxresponse>
+
+[(#REM) Eliminer d'abord les auteurs deja lies a l'article ]
+<BOUCLE_e(AUTEURS){tout}{id_article}{doublons}></BOUCLE_s>
+
+<BOUCLE_s(AUTEURS){tout}{nom LIKE (#ENV{value})%}{0,20}{par nom}{doublons}>
+<item>
+	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
+	<value><![CDATA[#NOM]]></value>
+	<id_auteur><![CDATA[#ID_AUTEUR]]></id_auteur>
+
+</item>
+</BOUCLE_s>
+
+	<BOUCLE_s2(AUTEURS){tout}{recherche #ENV{value}}{0,20}{par nom}{doublons}>
+	<item>
+	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
+	<value><![CDATA[#NOM]]></value>
+	<id_auteur><![CDATA[#ID_AUTEUR]]></id_auteur>
+	</item>
+	</BOUCLE_s2>
+
+<//B_s>
+
+</ajaxresponse>

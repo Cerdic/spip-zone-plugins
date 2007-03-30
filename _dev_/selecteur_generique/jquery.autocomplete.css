@@ -1,0 +1,16 @@
+.autocompleter
+{
+	border: 1px solid #6FBEFF;
+	min-width: 250px;
+	background-color: #EFF8FF;
+}
+.autocompleter ul li
+{
+	padding: 2px 10px;
+	white-space: nowrap;
+	font-size: 11px;
+}
+.selectAutocompleter
+{
+	background-color: #d2fb8f;
+}

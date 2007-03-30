@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	s&#233;lecteur g&#233;n&#233;rique
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Fil
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<icon></icon>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Remplace les sélecteurs (auteurs, mots, rubriques) par quelque chose de plus léger & rapide, capable de traiter autant de données que possible
+	</description>
+
+	<lien></lien>
+	<prefix>
+	SelecteurGenerique
+	</prefix>
+	<pipeline>
+		<nom>body_prive</nom>
+		<action>inserer_javascript</action>
+		<inclure>inserer_javascript.php</inclure>
+	</pipeline>
+</plugin>
