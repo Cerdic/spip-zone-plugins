@@ -148,10 +148,11 @@ echo '<tr> ';
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
-echo '<td>&nbsp;</td></tr>';
+echo '<td>&nbsp;</td>';
+echo '</tr>';
 echo '<tr> ';	
 echo '<td>Statut de cotisation :</td>';
-echo '<td colspan="3"><input name="statut" type="radio" name="statut" value="ok"';
+echo '<td><input name="statut" type="radio" name="statut" value="ok"';
 if ($data['statut']=="ok") {echo ' checked="checked"';}
 echo '> A jour ';
 echo '<input name="statut" type="radio" name="statut" value="echu"';
@@ -166,6 +167,9 @@ echo '> D&eacute;sactiv&eacute; ';
 echo '<input name="statut" type="radio" name="statut" value="prospect"';
 if ($data['statut']=="prospect") {echo ' checked="checked"';}
 echo '> Prospect </td> ';
+echo '<td>Validit&eacute; :</td>';
+echo '<td><input name="utilisateur4" type="text" value="'.$data["validite"].'"></td>';
+echo '</tr>';
 echo '<tr> ';      
 echo '<td>Remarques :</td>';
 echo '<td colspan="3"><textarea name="remarques" cols="65" rows="3">'.$data["remarques"].'</textarea>';
