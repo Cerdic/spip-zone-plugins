@@ -2,10 +2,12 @@
 Il serait plus propre d'homogeneiser l'indentation du code.
 Utiliser l'indentation de SPIP serait le mieux selon moi.
 
-== Templates ==
-Il pourrait etre utile et agreable d'utiliser une sorte de template, ou tout du
-moins de sortir le HTML du PHP quand celui-ci est un peu le seul traitement de
-la page.
+== Templates==
+- Renommer en FORMULAIRE_ASSOC en FORMULAIRE_ADHESION
+- Ajouter des fonctions de controle (email_valide, champs obligatoires)
+- Prevoir un ecran de confirmation avant enregistrement
+Il faudra prevoir un formulaire en modification
+Idem pour les inscriptions aux activites et les dons
 
 == Internationalisation ==
 En cours.
@@ -17,7 +19,7 @@ et que les anglais puissent saisir une date en anglais
 
 == Devises ==
 Il serait pratique aussi que l'on puisse utiliser la devise de chaque pays
-dans l'internationalisation. (euro, doller, livre, etc).
+dans l'internationalisation. (euro, dollar, livre, etc).
 
 == Prefixes de tables ==
 Il serait bon de verifier que le plugin gere les prefix de table spip.
@@ -25,3 +27,25 @@ Notamment via l'utilisation de spip_query au lieu de mysql_query.
 Peut-etre faudrait-il egalement utiliser spip_fetch_array eu lieu de
 mysql_fetch_array.
 
+==Requetes SQL==
+Utiliser la fonction _q($variable) plutot que les addslashes
+
+== Comptes ==
+- Ajouter une fonction de transfert de compte à compte
+- Actions combinees (ventes, dons, activites + compte): prevoir l'operation inverse en suppression
+- Tendre vers une gestion normalisée de la compta (compta a double ecriture) ?
+
+== ID membres ==
+Dans la config, faire le choix entre une gestion par l'ID ou par l'id_asso (codification structuree): c'est utile pour la recherche et les enregistrements comptables
+
+== Creer_login == 
+Fabrication du login a discuter
+
+== Spip_listes 1.9.2 ==
+Ajouter l'inscription aux listes de diffusion
+
+== Logo activites==
+A changer
+
+== Gestion des droits==
+Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
