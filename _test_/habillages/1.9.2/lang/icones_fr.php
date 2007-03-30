@@ -12,13 +12,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'def_couleurs' => 'Les jeux de couleurs s&eacute;lectionn&eacute;s seront disponibles dans 
-					le bandeau secondaire de SPIP.&lt;br /&gt;
-					Les couleurs cr&eacute;&eacute;es par vos soins dans le fichier :&lt;br /&gt;
-					mes_couleurs.php&lt;br /&gt;
+					le bandeau secondaire de SPIP.
+					Les couleurs cr&eacute;&eacute;es par vos soins dans le fichier : 
+					mes_couleurs.php
 					s\'affichent &agrave; la suite des jeux ci-dessus. ',
-'def_page_selecteur' => 'Cette page recense tous les jeux d\'ic&ocirc;nes disponibles par ce plugin.&lt;br /&gt;
+'def_page_selecteur' => 'Cette page recense tous les jeux d\'ic&ocirc;nes disponibles par ce plugin.
 					Le bouton [Voir] &agrave; la suite du nom, 
-					donne acc&egrave;s &agrave; l\'affichage de toutes les ic&ocirc;nes du \'pack\' !&lt;br /&gt;&lt;br /&gt;
+					donne acc&egrave;s &agrave; l\'affichage de toutes les ic&ocirc;nes du \'pack\' !
 					Le changement de jeu d\'ic&ocirc;nes est imm&eacute;diat ! ',
 
 
