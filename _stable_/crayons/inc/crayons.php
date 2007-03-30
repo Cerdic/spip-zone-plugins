@@ -179,9 +179,14 @@ function wdgcfg() {
 	global $meta;
 	$metacrayons = empty($meta['crayons']) ? array() : unserialize($meta['crayons']);
 	$wdgcfg = array();
-	foreach (array('msgNoChange' => false, 'msgAbandon' => true,
-					'filet' => false, 'yellow_fade' => false)
-			as $cfgi => $def) {
+	foreach (array(
+		'msgNoChange' => false,
+		'msgAbandon' => false,  /* etait: true */
+		'filet' => false,
+		'yellow_fade' => false,
+		'clickhide' => false /* etait: true */
+	)
+	as $cfgi => $def) {
 		$wdgcfg[$cfgi] = isset($php[$cfgi]) ? $php[$cfgi] :
 			isset($metacrayons[$cfgi]) ? $metacrayons[$cfgi] : $def;
 	}

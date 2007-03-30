@@ -82,11 +82,10 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array(), $mode='page') 
 	include_spip('inc/filtres'); // rien que pour direction_css() :(
 	$cssFile = direction_css(find_in_path('crayons.css'));
 
-    $config = var2js(array(
+	$config = var2js(array(
 		'imgPath' => dirname(find_in_path('images/crayon.png')),
-        'droits' => $droits,
-    'dir_racine' => _DIR_RACINE,
-
+		'droits' => $droits,
+		'dir_racine' => _DIR_RACINE,
 		'txt' => array(
 			'error' => _U('crayons:svp_copier_coller'),
 			'sauvegarder' => $wdgcfg['msgAbandon'] ? _U('crayons:sauvegarder') : ''
@@ -111,10 +110,9 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array(), $mode='page') 
 		),
 		'cfg' => $wdgcfg
 	));
-//    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
-//        'crayons:erreur_ou_interdit'))));
 
-    $incHead = <<<EOH
+
+	$incHead = <<<EOH
 
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>

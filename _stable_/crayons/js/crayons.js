@@ -354,13 +354,17 @@ jQuery(document).ready(function() {
     });
   }
 
-  /* on limite l'init auto aux 1000 premiers crayons. les autres doivent etre init par un appel de initcrayons sur un onmouseover d'un parent */
+  // on limite l'init auto aux 1000 premiers crayons
+  // setTimeout sert a passer en execution asynchrone pour confort d'affichage
   if ((typeof crayons_init_dynamique == 'undefined') || (crayons_init_dynamique==false))
-    jQuery(".crayon:lt(1000)")
-    .filter(configCrayons.droits)
-    .initcrayon();
+    setTimeout(function(){
+      jQuery(".crayon:lt(1000)")
+      .filter(configCrayons.droits)
+      .initcrayon();
+    }, 300);
 
-  // un clic en dehors ferme tous les crayons ouverts
+  // un clic en dehors ferme tous les crayons ouverts ?
+  if (configCrayons.cfg.clickhide)
   jQuery("html")
   .click(function() {
     jQuery('form')

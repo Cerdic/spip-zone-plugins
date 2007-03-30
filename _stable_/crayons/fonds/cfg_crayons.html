@@ -1,7 +1,7 @@
 [(#REM) descriptif=
 <h4>Exp&eacute;rimental</h4>
 Ici vous pouvez configurer le plugin Crayons.<br />
-<br /><a href="http://www.spip-contrib.net/?article1475" class="spip_out">Documentation sur contrib</a>
+<br /><a href="http://www.spip-contrib.net/Les-Crayons" class="spip_out">Documentation sur contrib</a>
 
 ]
 [(#REM) titre=Configuration du plugin crayons]
@@ -11,19 +11,26 @@ Ici vous pouvez configurer le plugin Crayons.<br />
 
 <fieldset><legend><:crayons:messages:></legend>
 <p>
-<label>Si pas de changement</label>
-<input type="checkbox" name="msgNoChange" [checked="(#ENV{msgNoChange})"] />
-<label>Sur abandon</label>
-<input type="checkbox" name="msgAbandon" [checked="(#ENV{msgAbandon})"] />
+<label><input type="checkbox" name="msgNoChange" [checked="(#ENV{msgNoChange})"] />
+Si pas de changement</label>
+<br />
+<label><input type="checkbox" name="msgAbandon" [checked="(#ENV{msgAbandon})"] />
+Sur abandon</label>
 </p>
 </fieldset>
 
 <fieldset><legend><:crayons:effets:></legend>
 <p>
-<label>Filet</label>
-<input type="checkbox" name="filet" [checked="(#ENV{filet})"] />
-<label>Fade</label>
-<input type="checkbox" name="yellow_fade" [checked="(#ENV{yellow_fade})"] />
+<label><input type="checkbox" name="filet" [checked="(#ENV{filet})"] /> Filet</label>
+<br />
+<label><input type="checkbox" name="yellow_fade" [checked="(#ENV{yellow_fade})"] />
+Fade</label>
+
+<br />
+<label>
+<input type="checkbox" name="clickhide" [checked="(#ENV{clickhide}|?{checked})"] />
+Un clic en-dehors masque les crayons
+</label>
 </p>
 </fieldset>
 
