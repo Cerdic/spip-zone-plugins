@@ -253,23 +253,6 @@ function association_date_du_jour($heure=false) {
 	return '<p>'.($heure ? _T('asso:date_du_jour_heure') : _T('asso:date_du_jour')).'</p>';
 }
 
-//Validation d'adresse email
-function association_validation_email($email) {
-	$atom   = '[-a-z0-9!#$%&\'*+\\/=?^_`{|}~]';   	// caracteres autorise s avant l'arobase
-	$domain = '([a-z0-9]([-a-z0-9]*[a-z0-9]+)?)'; 	// caract鳥s autorises apres l'arobase (nom de domaine)
-	$regex = '/^' . $atom . '+' .   					// Une ou plusieurs fois les caracteres autorises avant l'arobase
-	'(\.' . $atom . '+)*' .        							// Suivis par zero point ou plus
-														// separes par des caracteres autoris고avant l'arobase
-	'@' .                           							// Suivis d'un arobase
-	'(' . $domain . '{1,63}\.)+' .  						// Suivis par 1 a 63 caraceres autoris고pour le nom de domaine
-														// s걡r고par des points
-	$domain . '{2,63}$/i';          						// Suivi de 2 a 63 caracteres autorises pour le nom de domaine
-// test de l'adresse e-mail
-if (preg_match($regex, $email)) 
-{return true;}
-else {return false;}
-}
-
 //Creation d'un login
 function association_cree_login($email) {
      $login = substr($email, 0, strpos($email, "@"));

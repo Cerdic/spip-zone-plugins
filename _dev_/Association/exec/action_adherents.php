@@ -10,6 +10,7 @@
 *  
 **/
 include_spip('inc/presentation');
+include_spip('inc/filtres');
 
 function exec_action_adherents(){
 global $connect_statut, $connect_toutes_rubriques;
@@ -70,11 +71,12 @@ if ($action=="ajoute"){
 
 // Inscription adherent
 		spip_query("INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, numero, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation) VALUES ('$nom', '$prenom', '$sexe', '$email', '$numero', '$rue', '$cp', '$ville', '$telephone', '$portable', ".spip_abstract_quote($remarques).", '$id_asso', '$naissance', '$profession', '$societe', '$secteur', '$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', '$categorie', 'prospect', CURRENT_DATE() )");
-		echo '<p><strong>'.$prenom.' '.$nom.' a &eacute;t&eacute; ajout&eacute; dans le fichier';
-		
+
 //Validation email 	si il existe	
-		if( association_validation_email($email) ){
+		if( $email=email_valide($email) || empty($email) ){
 		
+echo '<p><strong>'.$prenom.' '.$nom.' a &eacute;t&eacute; ajout&eacute; dans le fichier</strong>';	
+			
 // Inscription visiteur
 		$pass = creer_pass_aleatoire(8, $email);
     		$nom_inscription =  association_cree_login($email);                                  
@@ -91,11 +93,16 @@ if ($action=="ajoute"){
 			//on met a jour  les id_auteur pour tous les adherents
 			spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");	   			
 			
-}
-		echo '</strong></p>';
+		echo '</p>';
 		echo '<p>';
 		icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
 		echo '</p>';
+		}
+		else{		
+		echo '<p><strong>L\'email n\'est pas valide !</strong></p>';
+		echo '<p>';
+		icone(_T('asso:Retour'), 'javascript:history.go(-1)', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
+		echo '</p>';}
 }
 
 //---------------------------- 
