@@ -31,7 +31,7 @@ $montant= $_POST['montant'];
 $statut= $_POST['statut'];
 
 $sql = "UPDATE spip_asso_adherents SET date='$date', validite='$validite', categorie='$categorie', montant='$montant', statut='$statut'  WHERE id_adherent='$id_adherent'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+	$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 	echo "<br>Les cotisations ont &eacute;t&eacute; enregistr&eacute;es";
 		
 // ON FERME TOUT

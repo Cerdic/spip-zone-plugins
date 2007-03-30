@@ -1,0 +1,27 @@
+== Indenter le code ==
+Il serait plus propre d'homogeneiser l'indentation du code.
+Utiliser l'indentation de SPIP serait le mieux selon moi.
+
+== Templates ==
+Il pourrait etre utile et agreable d'utiliser une sorte de template, ou tout du
+moins de sortir le HTML du PHP quand celui-ci est un peu le seul traitement de
+la page.
+
+== Internationalisation ==
+En cours.
+
+== Format des dates ==
+Il serait vraiment excellent que les francais puissent saisir une date en francais
+et que les anglais puissent saisir une date en anglais
+(avec widget calendar ?)
+
+== Devises ==
+Il serait pratique aussi que l'on puisse utiliser la devise de chaque pays
+dans l'internationalisation. (euro, doller, livre, etc).
+
+== Prefixes de tables ==
+Il serait bon de verifier que le plugin gere les prefix de table spip.
+Notamment via l'utilisation de spip_query au lieu de mysql_query.
+Peut-etre faudrait-il egalement utiliser spip_fetch_array eu lieu de
+mysql_fetch_array.
+

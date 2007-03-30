@@ -39,10 +39,10 @@ $justification =addslashes($justification);
 if($action=="ajoute") {
 
 $sql = "INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ('$date','$journal','$montant','$justification','cotisation','$id_adherent')";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
 $sql = "UPDATE spip_asso_adherents SET statut='ok', validite='$validite' WHERE id_adherent='$id_adherent'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 }
 
 echo '<p><strong>La cotisation de '.$prenom.' '.$nom.' a bien &eacute;t&eacute; enregistr&eacute;e</strong></p>';

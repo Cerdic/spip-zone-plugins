@@ -29,7 +29,7 @@ print association_date_du_jour();
 $id_adherent=$_GET['id'];
 
 $sql = "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
     	
 echo'   <fieldset><legend>Ajouter une cotisation </legend>';
 echo'   <table width="70%" class="noclass">';
@@ -63,7 +63,7 @@ echo '<tr> ';
 echo '<td>Montant pay&eacute; (en euros):</td>';
 
 $sql = "SELECT * FROM spip_asso_categories WHERE valeur='$categorie'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
 
 while($data = mysql_fetch_assoc($req)) {
 $duree=$data['duree'];

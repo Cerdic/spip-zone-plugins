@@ -36,7 +36,7 @@ $action =$_POST['action'];
 if ( $action != "modifie" ){
 
 $sql = "SELECT * FROM spip_asso_profil where id_profil=1";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
 
 echo '<br>';
 echo '<form action="" method="POST">';

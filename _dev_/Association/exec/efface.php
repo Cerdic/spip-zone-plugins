@@ -41,16 +41,16 @@ include_spip('ecrire/inc_connect');
 
 
 echo $output;
-mysql_query("DROP TABLE spip_asso_adherents"); 
- mysql_query("DROP TABLE spip_asso_bienfaiteurs"); 
- mysql_query("DROP TABLE spip_asso_ventes"); 
- mysql_query("DROP TABLE spip_asso_comptes"); 
-  mysql_query("DROP TABLE spip_asso_profil"); 
-   mysql_query("DROP TABLE spip_asso_categories"); 
-    mysql_query("DROP TABLE spip_asso_financiers"); 
-	 mysql_query("DROP TABLE spip_asso_dons"); 
-	  mysql_query("DROP TABLE spip_asso_livres"); 
-		 mysql_query("DELETE FROM spip_meta WHERE nom='asso_base_version'");
+spip_query("DROP TABLE spip_asso_adherents"); 
+ spip_query("DROP TABLE spip_asso_bienfaiteurs"); 
+ spip_query("DROP TABLE spip_asso_ventes"); 
+ spip_query("DROP TABLE spip_asso_comptes"); 
+  spip_query("DROP TABLE spip_asso_profil"); 
+   spip_query("DROP TABLE spip_asso_categories"); 
+    spip_query("DROP TABLE spip_asso_financiers"); 
+	 spip_query("DROP TABLE spip_asso_dons"); 
+	  spip_query("DROP TABLE spip_asso_livres"); 
+		 spip_query("DELETE FROM spip_meta WHERE nom='asso_base_version'");
 
 //fin fonction
 echo"Toutes les  tables sont d&eacute;truites";}

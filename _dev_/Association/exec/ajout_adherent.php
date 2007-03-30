@@ -52,7 +52,7 @@ echo '<td>Cat&eacute;gorie :</td>';
 echo '<td><select name="categorie" type="text">';
 echo '<option value = ""> Choisissez une cat&eacute;gorie de cotisation</option>';
 $sql = "SELECT * FROM spip_asso_categories";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($categorie = mysql_fetch_assoc($req)) 
 {
 echo '<option value = "'.$categorie["valeur"].'"> '.$categorie["libelle"].'</option>';

@@ -4,6 +4,15 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+# Navigation
+ 'menu2_titre_gestion_membres' => 'Manage members',
+ 'menu2_titre_ajouter_membre' => 'Add a membre',
+ 'menu2_titre_relances_cotisations' => 'Recall for cotisations',
+ 'menu2_titre_gestion_dons' => 'Manage donations',
+ 'menu2_titre_ventes_asso' => 'Associative selling',
+ 'menu2_titre_gestion_activites' => 'Manage activities',
+ 'menu2_titre_livres_comptes' => 'Financial boards',
+
 # Boutons globaux
 	'bouton_retour' => 'Back',
 

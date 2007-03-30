@@ -40,7 +40,7 @@ print  association_date_du_jour();
 $id_adherent = $_GET['id'];
 
 $sql = "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
 	
 echo '<fieldset><legend>Modifier un membre actif </legend>';
 echo '<table width="70%">';	
@@ -74,7 +74,7 @@ echo '<tr> ';
 echo '<td>Cat&eacute;gorie :</td>';
 echo '<td><select name="categorie" type="text" >';
 $sql = "SELECT * FROM spip_asso_categories";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 while($categorie = mysql_fetch_assoc($req)) 
 {
 echo '<option value="'.$categorie["valeur"].'"';
@@ -245,7 +245,7 @@ if(!empty($_POST['posted'])) {
 					$vignette="<img src=\"$destination\" heigth='$infos_img[0]' width='$infos_img[0]'/>";
 					$vignette1='<img src="/IMG/assologo'.$id_adherent.'">';
 					$sql="UPDATE spip_asso_adherents SET vignette='$vignette1' WHERE id_adherent=$id_adherent";
-					$req = mysql_query($sql) ;
+					$req = spip_query($sql) ;
 
 					echo $vignette;
                }

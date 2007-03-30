@@ -113,10 +113,10 @@ $count=count ($drop_tab);
 for ( $i=0 ; $i < $count ; $i++ )
 {	$id = $drop_tab[$i];
 	$sql = "DELETE FROM spip_asso_ventes WHERE id_vente='$id'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+	$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
 	
 	$sql = "DELETE FROM spip_asso_comptes WHERE id_journal='$id' AND imputation='vente'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+	$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
 }
 echo '<div align="center">';
 echo '<br><strong>Suppression effectu&eacute;e !</strong><br>';	

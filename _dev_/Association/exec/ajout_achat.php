@@ -95,7 +95,7 @@ $sql="INSERT INTO spip_ventes (nom_livre, nom_acheteur,  q_achete, date_achat, d
 
 
 
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
 
 

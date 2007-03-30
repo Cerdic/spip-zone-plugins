@@ -4,6 +4,15 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+# Navigation
+ 'menu2_titre_gestion_membres' => 'Gestion des membres',
+ 'menu2_titre_ajouter_membre' => 'Ajouter un membre',
+ 'menu2_titre_relances_cotisations' => 'Relances des cotisations',
+ 'menu2_titre_gestion_dons' => 'Gestion des dons',
+ 'menu2_titre_ventes_asso' => 'Ventes associatives',
+ 'menu2_titre_gestion_activites' => 'Gestion des activit&eacute;s',
+ 'menu2_titre_livres_comptes' => 'Livres de comptes',
+
 # Boutons globaux
 	'bouton_retour' => 'Retour',
 
@@ -63,7 +72,6 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_entete_heure' => 'Heure',
 	'activite_entete_intitule' => 'Intitul&eacute;',
 	'activite_entete_lieu' => 'Lieu',
-	'activite_entete_inscrits' => 'Inscrits',
 	'activite_entete_action' => 'Action',
 	'activite_entete_toutes' => 'Toutes',
 	'activite_entete_validees' => 'Valid&eacute;es',

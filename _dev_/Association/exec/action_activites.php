@@ -131,8 +131,8 @@ function exec_action_activites(){
 
 		for ( $i=0 ; $i < $count ; $i++ ) {
 			$id = $drop_tab[$i];
-			mysql_query("DELETE FROM spip_asso_activites WHERE id_activite='$id'");
-			mysql_query("DELETE FROM spip_asso_comptes WHERE id_journal='$id' AND imputation='activite' ");
+			spip_query("DELETE FROM spip_asso_activites WHERE id_activite='$id'");
+			spip_query("DELETE FROM spip_asso_comptes WHERE id_journal='$id' AND imputation='activite' ");
 		}
 
 		echo '<p><strong>'._T('asso:activite_message_suppression').'</strong></p>';

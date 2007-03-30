@@ -23,37 +23,41 @@ $link6= generer_url_ecrire('comptes');
 $query = spip_query("SELECT * FROM spip_asso_profil where id_profil=1");
 
 while ($data = mysql_fetch_assoc($query)) {
-$dons=$data['dons'];
-$ventes=$data['ventes'];
-$comptes=$data['comptes'];
-$activites=$data['activites'];
-echo '<table width="70%" border="0">';
-echo '<tr>';
-echo '<td>';
-icone_horizontale(_T('asso:Gestion_des_membres'), $link, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' ); 
-echo '</td>';
-echo '<td>';
-icone_horizontale(_T('asso:Ajouter_un_membre'),$link1, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','creer.gif');
-echo '</td>';
-echo '<td>';
-icone_horizontale(_T('asso:Relances_des_cotisations'),$link3,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
-echo '</td>';
-if ($dons=='oui'){
-echo '<td>';
-icone_horizontale(_T('asso:Gestion_des_dons'), $link2, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/bienfaiteur.png','rien.gif' ); 
-echo '</td>';}
-if ($ventes=='oui'){
-echo '<td>';
-icone_horizontale(_T('asso:Ventes_associatives'), $link4, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/journaux.png','rien.gif' ); 
-echo '</td>';}
-if ($activites=='oui'){
-echo '<td>';
-icone_horizontale(_T('asso:Gestion des activit&eacute;s'), $link5, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
-echo '</td>';}
-if ($comptes=='oui'){
-echo '<td>';
-icone_horizontale(_T('asso:Livres_de_comptes'), $link6, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
-echo '</td>';}
+	$dons=$data['dons'];
+	$ventes=$data['ventes'];
+	$comptes=$data['comptes'];
+	$activites=$data['activites'];
+	echo '<table width="70%" border="0">';
+	echo '<tr>';
+	echo '<td>';
+	icone_horizontale(_T('asso:menu2_titre_gestion_membres'), $link, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' ); 
+	echo '</td>';
+	echo '<td>';
+	icone_horizontale(_T('asso:menu2_titre_ajouter_membre'),$link1, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','creer.gif');
+	echo '</td>';
+	echo '<td>';
+	icone_horizontale(_T('asso:menu2_titre_relances_cotisations'),$link3,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
+	echo '</td>';
+	if ($dons=='oui') {
+		echo '<td>';
+		icone_horizontale(_T('asso:menu2_titre_gestion_dons'), $link2, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/bienfaiteur.png','rien.gif' ); 
+		echo '</td>';
+	}
+	if ($ventes=='oui') {
+		echo '<td>';
+		icone_horizontale(_T('asso:menu2_titre_ventes_asso'), $link4, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/journaux.png','rien.gif' ); 
+		echo '</td>';
+	}
+	if ($activites=='oui') {
+		echo '<td>';
+		icone_horizontale(_T('asso:menu2_titre_gestion_activites'), $link5, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
+		echo '</td>';
+	}
+	if ($comptes=='oui') {
+		echo '<td>';
+		icone_horizontale(_T('asso:menu2_titre_livres_comptes'), $link6, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
+		echo '</td>';
+	}
 
 /*
 if ($comptes=='oui'){
@@ -61,8 +65,8 @@ echo '<td>';
 icone_horizontale(_T('asso:Gestion des prêts'), $link7, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
 echo '</td>';}
 */
-echo '</tr>';
-echo '</table>';
+	echo '</tr>';
+	echo '</table>';
 }
 fin_cadre_formulaire();
 

@@ -33,7 +33,7 @@ print association_date_du_jour();
 $action=$_GET['action'];
 $id=$_GET['id'];
 $sql = "SELECT * FROM spip_asso_categories WHERE id_categorie='$id'";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
 	
 echo '<fieldset><legend>Modifier une cat&eacute;gorie de cotisation</legend>';
 echo '<table width="70%">';	
