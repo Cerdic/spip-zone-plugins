@@ -16,7 +16,7 @@
 <item>
 	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
 	<value><![CDATA[#NOM]]></value>
-	<id_auteur><![CDATA[#ID_AUTEUR]]></id_auteur>
+	<id_auteur>#ID_AUTEUR</id_auteur>
 
 </item>
 </BOUCLE_s>
@@ -25,9 +25,17 @@
 	<item>
 	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
 	<value><![CDATA[#NOM]]></value>
-	<id_auteur><![CDATA[#ID_AUTEUR]]></id_auteur>
+	<id_auteur>#ID_AUTEUR</id_auteur>
 	</item>
 	</BOUCLE_s2>
+
+	<item>
+	<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
+	<value><![CDATA[#ENV*{value}]]></value>
+	<id_auteur></id_auteur>
+	</item>
+
+	<//B_s2>
 
 <//B_s>
 

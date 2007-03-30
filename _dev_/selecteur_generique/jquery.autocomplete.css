@@ -1,8 +1,8 @@
 .autocompleter
 {
-	border: 1px solid #6FBEFF;
+	border: 1px solid #444;
 	min-width: 250px;
-	background-color: #EFF8FF;
+	background-color: #ccc;
 }
 .autocompleter ul li
 {
@@ -12,5 +12,9 @@
 }
 .selectAutocompleter
 {
-	background-color: #d2fb8f;
+	background-color: #eee;
+}
+
+.autocomplete-message {
+	color: orange;
 }
