@@ -36,7 +36,7 @@ function decouper_en_pages_rempl($texte) {
 	$artsuite = intval($_GET['artsuite']);
 	$pages = explode('++++', $texte);
 	$num_pages = count($pages);
-	
+
 	// si une seule page, alors retourner le texte d'origine.
 	// si numero illegal ou si var_recherche existe, alors renvoyer toutes les pages, separees par une ligne <hr/>.
 	// la surbrillance pourra alors fonctionner correctement.
@@ -46,7 +46,7 @@ function decouper_en_pages_rempl($texte) {
 
 	// images calculees par decoupe_installe()
 	$images = unserialize($GLOBALS['meta']['tweaks_decoupe']);
-	
+
 	// images et liens pour la navigation sous forme : << < ... > >>
 	$precedent = '<a href="' . parametre_url(self(),'artsuite', $artsuite - 1) . '">'; 
 	$suivant = '<a href="' . parametre_url(self(),'artsuite', $artsuite + 1) . '">'; 
