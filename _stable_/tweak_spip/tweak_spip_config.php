@@ -183,6 +183,11 @@ add_tweak( array(
 	'categorie'	=> 'squel',
 ));
 
+add_tweak( array(
+	'id'	=> 'decoupe',
+	'code:options' 	=> '$table_des_traitements["TEXTE"][]= "decouper_en_pages(propre(%s))";',
+	'categorie'	=> 'squel',
+));
 
 //-----------------------------------------------------------------------------//
 //                               PUBLIC                                        //

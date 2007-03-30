@@ -153,6 +153,13 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'style_p:nom' => 'Style des paragraphes',
 	'style_p:description'	=> "Jusqu'&agrave; la version 1.92 de Spip, les paragraphes html (marqu&eacute;s par la balise &lt;p&gt;) &eacute;taient syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Ce tweak vous permet de d&eacute;finir le style de vos paragraphes en fonction de vos feuilles de style.  Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.<br />Valeur : %style_p%",
 
+	'decoupe:nom' => 'D&eacute;coupe un article en pages',
+	'decoupe:description'	=> "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.",
+	'page_suivante' => 'Page suivante',
+	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
+	'page_debut' => 'Premi&egrave;re page',
+	'page_fin' => 'Derni&egrave;re page',
+
 /*
 	':nom' => '',
 	':description'	=> '',
