@@ -22,10 +22,10 @@ $url_action_adherents=generer_url_ecrire('action_adherents');
 include_spip ('inc/navigation');
 
 debut_cadre_relief(  "", false, "", $titre = _T('Action sur les membres actifs'));
-	debut_boite_info();
+debut_boite_info();
 
-	print('Nous sommes le '.date('d/m/Y').'');
-	
+print association_date_du_jour();
+
 $id_adherent=$_POST['id_adherent'];
 $nom=addslashes($_POST['nom']);
 $prenom=$_POST['prenom'];

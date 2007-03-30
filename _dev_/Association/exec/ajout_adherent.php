@@ -24,7 +24,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Ajouter des  membres actifs'));
 	debut_boite_info();
 
-print ('Nous sommes le '.date('d/m/Y').'');
+print  association_date_du_jour();
 
 echo' <p align="center"><form action="'.$url_action_adherents.'" method="POST">';
 

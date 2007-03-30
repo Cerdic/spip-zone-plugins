@@ -33,7 +33,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres actifs'));
 debut_boite_info();
 
-print('Nous sommes le '.date('d/m/Y').'');
+print association_date_du_jour();
 
 //Bricolage?
 if ( isset ($_POST['filtre'] )) {

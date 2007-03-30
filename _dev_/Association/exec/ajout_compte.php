@@ -24,7 +24,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Livre de comptes'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d/m/Y').'</p>');
+print association_date_du_jour();
 
 echo '<p align="center"><form action="'.$url_action_comptes.'" method="POST">';
 echo '<fieldset><legend>Ajouter une op&eacute;ration </legend>';

@@ -24,7 +24,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Mise &agrave; jour des dons'));
 	debut_boite_info();
 
-	print('Nous sommes le '.date('d/m/Y').'');
+print association_date_du_jour();
 	
 $id_don= $_GET['id'];
 

@@ -32,7 +32,7 @@ debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres actifs'));
 	debut_boite_info();
 	
 //LE MENU
-print ('Nous sommes le '.date('d/m/Y').'');
+print  association_date_du_jour();
 
 //---------------------------- 
 //  ICI ON MODIFIE UN MEMBRE 

@@ -21,7 +21,7 @@ function association_ajouterBoutons($boutons_admin) {
 	  // on voit le bouton dans la barre "naviguer"
 	  $boutons_admin['naviguer']->sousmenu['association']= new Bouton(
 		"../"._DIR_PLUGIN_ASSOCIATION."/img_pack/annonce.gif",  // icone
-		'Gestion Association'	// titre
+		_T('asso:titre_menu_gestion_association') //titre
 		);
 	}
 	return $boutons_admin;

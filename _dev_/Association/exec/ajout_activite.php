@@ -14,35 +14,35 @@ include_spip('inc/presentation');
 function exec_ajout_activite(){
 global $connect_statut, $connect_toutes_rubriques;
 
-debut_page(_T('Gestion pour Association'), "", "");
+debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 
 $url_action_activites=generer_url_ecrire('action_activites');
 $url_retour = $_SERVER["HTTP_REFERER"];
 
 include_spip ('inc/navigation');
 
-debut_cadre_relief(  "", false, "", $titre = _T('Ajouter des inscriptions'));
-	debut_boite_info();
+debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_ajouter_inscriptions'));
+debut_boite_info();
 
-print('<p>Nous sommes le '.date('d/m/Y').'</p>');
+print association_date_du_jour();
 
 $id_evenement=preg_replace("/[^0-9]/","",$_GET['id']);
 
 echo '<p align="center"><form action="'.$url_action_activites.'" method="POST">';
-echo '<fieldset><legend>Ajouter une inscription </legend>';
+echo '<fieldset><legend>'._T('asso:activite_ajouter_inscription').'</legend>';
 echo '<table width="70%" class="noclass">';
 echo '<tr> ';
-echo '<td>Date (AAAA-MM-JJ) :</td>';
+echo '<td>'._T('asso:activite_libelle_date').' (AAAA-MM-JJ) :</td>';
 echo '<td><input name="date" type="text" value="'.date('Y-m-d').'"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Nom complet :</td>';
+echo '<td>'._T('asso:activite_libelle_nomcomplet').' :</td>';
 echo '<td><input name="nom"  type="text" size="40"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Adh&eacute;rent :</td>';
+echo '<td>'._T('asso:activite_libelle_adherent').' :</td>';
 echo '<td><select name="id_adherent">';
-echo '<option value="0"> -- Invitation ext&eacute;rieure -- </option>';
+echo '<option value="0">'._T('asso:activite_libelle_invitation').'</option>';
 $query = spip_query ("SELECT id_adherent, CONCAT(nom,' ',prenom,IF((SELECT count(*) FROM spip_asso_activites where spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent AND spip_asso_activites.id_evenement=$id_evenement),' (d&eacute;j&agrave; inscrit)','')) as usuel FROM spip_asso_adherents ORDER BY nom,prenom") ;
 while ($data = mysql_fetch_assoc($query)) {
 echo '<option value="'.$data['id_adherent'].'"> '.$data['usuel'].' </option>';
@@ -50,23 +50,23 @@ echo '<option value="'.$data['id_adherent'].'"> '.$data['usuel'].' </option>';
 echo '</select></td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Accompagn&eacute; de :</td>';
+echo '<td>'._T('asso:activite_libelle_accompagne_de').'Accompagn&eacute; de :</td>';
 echo '<td><input name="accompagne"  type="text" size="40"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Nombre d\'inscrits :</td>';
+echo '<td>'._T('asso:activite_libelle_nombre_inscrit').' :</td>';
 echo '<td><input name="inscrits"  type="text"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Email:</td>';
+echo '<td>'._T('asso:activite_libelle_email').' :</td>';
 echo '<td><input name="email"  type="text" size="40"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>T&eacute;l&eacute;phone:</td>';
+echo '<td>'._T('asso:activite_libelle_telephone').' :</td>';
 echo '<td><input name="telephone" type="text"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Adresse compl&egrave;te :</td>';
+echo '<td>'._T('asso:activite_libelle_adresse_complete').' :</td>';
 echo '<td><textarea name="adresse" cols="30" rows="3"></textarea></td>';
 echo '</tr>';
 echo '<tr>'; 
@@ -74,15 +74,15 @@ echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>Montant de l\'inscription (en &euro;) :</td>';
+echo '<td>'._T('asso:activite_libelle_montant_inscription').' :</td>';
 echo '<td><input name="montant"  type="text"> </td>';
 echo '</tr>';
 echo '<tr>';
-echo '<td>Date de paiement (AAAA-MM-JJ) :</td>';
+echo '<td>'._T('asso:activite_libelle_date_paiement').' :</td>';
 echo '<td><input name="date_paiement" value="'.date('Y-m-d').'" type="text"> </td>';
 echo '</tr>';
 echo '<tr>';
-echo '<td>Mode de paiement :</td>';
+echo '<td>'._T('asso:activite_libelle_mode_paiement').' :</td>';
 echo '<td><select name="journal" type="text">';
 $query = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque") ;
 while ($data = mysql_fetch_assoc($query)) {
@@ -91,11 +91,11 @@ echo '<option value="'.$data['code'].'"> '.$data['intitule'].' </option>';
 echo '</select></td>';
 echo '</tr>';
 echo '<tr>';
-echo '<td>Statut :</td>';
+echo '<td>'._T('asso:activite_libelle_statut').' :</td>';
 echo '<td><input name="statut"  type="checkbox" value="ok" unchecked>ok</td>';
 echo '</tr>';
 echo '<tr>'; 
-echo '<td>Commentaires :</td>';
+echo '<td>'._T('asso:activite_libelle_commentaires').' :</td>';
 echo '<td><textarea name="commentaire" cols="30" rows="3"></textarea></td>';
 echo '</tr>';
 echo '<tr>'; 
@@ -108,7 +108,7 @@ echo '<td>';
 echo '<input name="action" type="hidden" value="ajoute">';
 echo '<input name="id_evenement" type="hidden" value="'.$id_evenement.'">';
 echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-echo '<input name="" type="submit" value="Ajouter" class="fondo">';
+echo '<input name="" type="submit" value="'._T('asso:activite_bouton_ajouter').'" class="fondo">';
 echo '</td>';
 echo '</tr>';
 

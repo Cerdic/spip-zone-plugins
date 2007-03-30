@@ -24,7 +24,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Comptes financiers'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d/m/Y').'</p>');
+print association_date_du_jour();
 
 $action=$_GET['action'];
 $id=$_GET['id'];

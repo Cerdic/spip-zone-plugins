@@ -18,10 +18,8 @@ echo "<br /><br />";
 gros_titre(_T('Destruction  des tables'));
 
 debut_cadre_relief();
- $date = date("d/m/Y");
-$heure = date("H:i");
-Print("Nous sommes le $date et il est $heure");      
-echo"<br>";
+print association_date_du_jour(true);
+
 icone_horizontale(_T('retour'), generer_url_ecrire("association"), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/annonce.gif');
 echo "La suppression des tables supprimera toutes les donn&eacute;es de votre gestion d'association<br>";
 echo"Confirmez !";

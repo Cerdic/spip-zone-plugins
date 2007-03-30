@@ -245,8 +245,13 @@ function association_datefr($date) {
 	$annee = $split[0]; 
 	$mois = $split[1]; 
 	$jour = $split[2]; 
-return $jour.'-'.$mois.'-'.$annee; 
+return $jour.'/'.$mois.'/'.$annee; 
 } 
+
+//Affichage du message indiquant la date 
+function association_date_du_jour($heure=false) {
+	return '<p>'.($heure ? _T('asso:date_du_jour_heure') : _T('asso:date_du_jour')).'</p>';
+}
 
 //Validation d'adresse email
 function association_validation_email($email) {

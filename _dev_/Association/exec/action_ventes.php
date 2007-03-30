@@ -23,7 +23,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Action sur les ventes associatives'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d/m/Y').'</p>');
+print association_date_du_jour();
 	
 $id_vente=$_POST['id_vente'];
 $date_vente=$_POST['date_vente'];

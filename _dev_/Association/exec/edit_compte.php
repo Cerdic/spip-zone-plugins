@@ -22,7 +22,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Modification des comptes'));
 
 debut_boite_info();
-print('<p>Nous sommes le '.date('d/m/Y').'</p>');
+print association_date_du_jour();
 
 $id_compte=$_GET['id'];
 

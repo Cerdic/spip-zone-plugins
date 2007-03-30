@@ -20,7 +20,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Enregistrement des cotisations'));
 	debut_boite_info();
 
-print('Nous sommes le '.date('d/m/Y').'');	
+print association_date_du_jour();	
 
 echo'<div align="center">';
 $id_adherent= $_POST['id_adherent'];

@@ -22,7 +22,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Toutes les cat&eacute;gories de cotisation'));
 	debut_boite_info();
 
-print('Nous sommes le '.date('d/m/Y').'</br>');
+print association_date_du_jour();
 
 echo '<fieldset><legend>Ajouter une cat&eacute;gorie de cotisation</legend>';
 echo '<table width="70%">';	

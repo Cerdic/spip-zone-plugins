@@ -27,7 +27,7 @@ include_spip ('inc/navigation');
 debut_cadre_relief(  "", false, "", $titre = _T('Toutes les ventes'));
 	debut_boite_info();
 
-print('<p>Nous sommes le '.date('d/m/Y').'</p>');
+print association_date_du_jour();
 	
 // PAGINATION ET FILTRES
 echo '<table width="70%">';
