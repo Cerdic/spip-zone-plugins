@@ -20,8 +20,8 @@ if (_request('exec') == 'articles') {
 	$flux .= '<script type="text/javascript"><!--'
 		. <<<EOS
 
-var appliquer_selecteur_cherche_auteur = function() {
-	var inp = jQuery('input[@name=cherche_auteur]');
+var appliquer_selecteur_cherche_auteur = function(doc) {
+	var inp = jQuery('input[@name=cherche_auteur]', doc);
 	inp.Autocomplete({
 		'source': '$ac',
 		'delay': 300,
@@ -29,15 +29,24 @@ var appliquer_selecteur_cherche_auteur = function() {
 		'helperClass': 'autocompleter',
 		'selectClass': 'selectAutocompleter',
 		'minchars': 2,
-		'onSelect': function(li) {alert(inp.parents("form").attr("action"));
-			inp.attr("name", "nouv_auteur").val(li.id_auteur).parents("form").ajaxSubmit();
+		'onSelect': function(li) {
+			inp.attr("name", "nouv_auteur")
+			.val(li.id_auteur)
+			.parents("form")
+			.trigger('submit');
 		}
 	});
 }
-
+var appliquer_selecteur_cherche_auteur_ajax = function(doc) {
+	console.log(doc);
+	if (typeof doc == 'undefined')
+		return;
+	else
+		return appliquer_selecteur_cherche_auteur(doc);
+}
 
 jQuery(document).ready(appliquer_selecteur_cherche_auteur);
-//onAjaxLoad(appliquer_selecteur_cherche_auteur);
+onAjaxLoad(appliquer_selecteur_cherche_auteur_ajax);
 
 
 EOS
