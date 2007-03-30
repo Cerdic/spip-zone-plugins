@@ -21,7 +21,7 @@ function decouper_en_page($texte) {
         
         if (empty($artsuite)) $artsuite = 0;
         
-        $page = split('\+\+\+', $texte);
+        $page = split('\+\+\+\+', $texte);
         
         $num_pages = count($page);
 
