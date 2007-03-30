@@ -30,10 +30,12 @@ var appliquer_selecteur_cherche_auteur = function(doc) {
 		'selectClass': 'selectAutocompleter',
 		'minchars': 2,
 		'onSelect': function(li) {
-			inp.attr("name", "nouv_auteur")
-			.val(li.id_auteur)
+			var hid = jQuery(
+			  "<input type='hidden' name='nouv_auteur' value='"+li.id_auteur+"' />");
+			inp.attr("name", "xxx")
 			.parents("form")
-			.trigger('submit');
+			.append(hid)
+			.ajaxSubmit();
 		}
 	});
 }
