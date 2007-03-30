@@ -12,7 +12,8 @@
 [(#REM) Eliminer d'abord les auteurs deja lies a l'article ]
 <BOUCLE_e(AUTEURS){tout}{id_article}{doublons}></BOUCLE_s>
 
-<BOUCLE_s(AUTEURS){tout}{nom LIKE (#ENV{value})%}{0,20}{par nom}{doublons}>
+[(#REM) Chercher les auteurs correspondant a la requete ]
+<BOUCLE_s(AUTEURS){tout}{contenu_auteur_select strict}{0,20}{par nom}{doublons}>
 <item>
 	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
 	<value><![CDATA[#NOM]]></value>
@@ -21,21 +22,23 @@
 </item>
 </BOUCLE_s>
 
-	<BOUCLE_s2(AUTEURS){tout}{recherche #ENV{value}}{0,20}{par nom}{doublons}>
+	[(#REM) Si aucun, on recherche dans l'ensemble du texte ]
+	<BOUCLE_s1(AUTEURS){tout}{contenu_auteur_select}{0,20}{par nom}{doublons}>
 	<item>
 	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
 	<value><![CDATA[#NOM]]></value>
 	<id_auteur>#ID_AUTEUR</id_auteur>
 	</item>
-	</BOUCLE_s2>
+	</BOUCLE_s1>
 
+	[(#REM) Vraiment on n'a rien trouve ]
 	<item>
 	<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
 	<value><![CDATA[#ENV*{value}]]></value>
 	<id_auteur></id_auteur>
 	</item>
 
-	<//B_s2>
+	<//B_s1>
 
 <//B_s>
 
