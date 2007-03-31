@@ -1,16 +1,11 @@
 <?php
 
-function SelecteurGenerique_inserer_javascript($flux) {
-
-$js = '';
-
-if (_request('exec') == 'articles') {
+function SelecteurGenerique_inserer_auteur() {
 
 	$ac = parametre_url(generer_url_public('selecteur_generique_auteur'),
 		'id_article', _request('id_article'), '\\x26');
 
-	$js .= <<<EOS
-<script type="text/javascript"><!--
+	return <<<EOS
 
 var appliquer_selecteur_cherche_auteur = function() {
 
@@ -52,21 +47,26 @@ jQuery(document).ready(appliquer_selecteur_cherche_auteur);
 // pre-update quand on clique sur une suppression d'auteur !!
 onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_auteur, 200);});
 
-// --></script>
 
 EOS;
 
 }
 
-
-if (_request('exec') == 'articles' /* ou breves etc */) {
+function SelecteurGenerique_inserer_mot() {
+	if ($id = _request('id_article')) {
+		$type = 'id_article';
+	} elseif ($id = _request('id_syndic')) {
+		$type = 'id_syndic';
+	} else {
+		$id = _request('id_breve');
+		$type = 'id_breve';
+	}
 
 	$ac = parametre_url(generer_url_public('selecteur_generique_mot'),
-		'id_article', _request('id_article'), '\\x26');
+		$type, $id, '\\x26');
 
 
-	$js .= <<<EOS
-<script type="text/javascript"><!--
+	return <<<EOS
 
 var appliquer_selecteur_cherche_mot = function() {
 
@@ -113,22 +113,18 @@ jQuery(document).ready(appliquer_selecteur_cherche_mot);
 // Chargements ajax suivants
 onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_mot, 200);});
 
-// --></script>
 
 EOS;
 
-
-
-
 }
 
-if (_request('exec') == 'articles_edit') {
+
+function SelecteurGenerique_inserer_rubrique() {
 
 	$ac = parametre_url(generer_url_public('selecteur_generique_rubrique'),
 		'id_article', _request('id_article'), '\\x26');
 
-	$js .= <<<EOS
-<script type="text/javascript"><!--
+	return <<<EOS
 
 var appliquer_selecteur_cherche_rubrique = function() {
 
@@ -166,16 +162,31 @@ jQuery(document).ready(appliquer_selecteur_cherche_rubrique);
 // Chargements ajax suivants (pas pertinent pour le selecteur de rubriques dans articles_edit)
 //onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_rubrique, 200);});
 
-// --></script>
 
 EOS;
-
 }
 
+// Calcule et insere le javascript necessaire pour la page
+function SelecteurGenerique_inserer_javascript($flux) {
 
-	$base = !$js
-		? ''
-		: (
+	$js = '';
+
+	if (_request('exec') == 'articles') {
+		$js .= SelecteurGenerique_inserer_auteur();
+	}
+
+	if (_request('exec') == 'articles'
+	OR _request('exec') == 'breves_voir'
+	OR _request('exec') == 'sites') {
+		$js .= SelecteurGenerique_inserer_mot();
+	}
+
+	if (_request('exec') == 'articles_edit') {
+		$js .= SelecteurGenerique_inserer_rubrique();
+	}
+
+	if ($js)
+		$js =
 
 		'<script type="text/javascript" src="'
 		. find_in_path('javascript/iautocompleter.js')
@@ -191,9 +202,15 @@ EOS;
 		. 'href="'.find_in_path('jquery.autocomplete.css').'" />'
 		. "\n"
 
-		);
+		. '<script type="text/javascript"><!--'
+		. "\n"
+		. $js
+		. "\n"
+		. '// --></script>'
+		. "\n";
 
-	return $flux.$base.$js;
+	return $flux.$js;
+
 }
 
 ?>
