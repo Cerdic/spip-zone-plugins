@@ -1,0 +1,34 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}
+<?xml version="1.0"?>
+[(#REM)
+
+	Menu de selection d'un mot a partir d'une valeur passee en parametre
+
+	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
+
+]
+<ajaxresponse>
+
+[(#REM) Eliminer d'abord les mots deja lies a l'article ]
+<BOUCLE_e(MOTS){tout}{id_article}{doublons}></BOUCLE_s>
+
+[(#REM) Chercher les mots correspondant a la requete ]
+<BOUCLE_s(MOTS){titre LIKE (#ENV{value})%}{id_groupe?}{0,20}{par titre}{doublons}>
+<item>
+	<text><![CDATA[<b>#TITRE</b>[ - (#DESCRIPTIF|textebrut|couper{20})]]]></text>
+	<value><![CDATA[#TITRE]]></value>
+	<id>#ID_MOT</id>
+
+</item>
+</BOUCLE_s>
+
+	[(#REM) Vraiment on n'a rien trouve ]
+	<item>
+	<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
+	<value><![CDATA[#ENV*{value}]]></value>
+	<id>0</id>
+	</item>
+
+<//B_s>
+
+</ajaxresponse>
