@@ -1,0 +1,44 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}
+<?xml version="1.0"?>
+[(#REM)
+
+	Menu de selection d'une rubrique pour un article
+	La reponse doit etre en xml, elle sera exploitee par iautocompleter.js
+
+]
+
+<ajaxresponse>
+
+[(#REM) Chercher les rubriques correspondant a la requete ]
+<BOUCLE_s(RUBRIQUES){statut==.}{titre LIKE (#ENV{value})%}{0,20}{par titre}>
+<item>
+	<text><![CDATA[<b>#TITRE</b>[ - (#DESCRIPTIF|textebrut|couper{20})]]]></text>
+	<value><![CDATA[#TITRE]]></value>
+	<id>#ID_RUBRIQUE</id>
+
+</item>
+</BOUCLE_s>
+
+
+<BOUCLE_s1(RUBRIQUES){statut==.}{titre LIKE %(#ENV{value})%}{0,20}{par titre}>
+<item>
+	<text><![CDATA[<b>#TITRE</b>[ - (#DESCRIPTIF|textebrut|couper{20})]]]></text>
+	<value><![CDATA[#TITRE]]></value>
+	<id>#ID_RUBRIQUE</id>
+
+</item>
+</BOUCLE_s1>
+
+
+
+	[(#REM) Vraiment on n'a rien trouve ]
+	<item>
+	<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
+	<value><![CDATA[#ENV*{value}]]></value>
+	<id>0</id>
+	</item>
+
+<//B_s1>
+<//B_s>
+
+</ajaxresponse>
