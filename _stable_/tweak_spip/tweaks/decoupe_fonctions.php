@@ -68,6 +68,7 @@ function decouper_en_pages_rempl($texte) {
 		if ($i == $artsuite) {
 			$milieu[] = '<span style="color: lightgrey; font-weight: bold; text-decoration: underline;">' . ($i+1) . '</span>';
 		} else {
+			// isoler la premiere ligne non vide de chaque page pour les attributs alt et title
 			$alt = preg_split("/[\r\n]+/", trim($pages[$i]), 2);
 			$alt = attribut_html(propre(couper($alt[0], 60)));//.' (...)';
 			$milieu[] = '<a href="' . parametre_url(self(),'artsuite', $i) . "\" alt=\"$alt\" title=\"$alt\">" . ($i+1) . '</a>';

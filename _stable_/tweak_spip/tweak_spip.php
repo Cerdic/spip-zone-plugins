@@ -203,6 +203,7 @@ function tweak_parse_description($tweak, $tweak_input) {
 					'tweak_spip_admin');
 			else $descrip .= $t[$i]."[$var?]";
 	} else $descrip .= $t[$i];
+	if (count($t)==1) $descrip = "<p>$descrip</p>";
 	$tweaks[$tweak]['description'] = "<div id='tweak_input-$index'>$descrip</div>";
 }
 
@@ -271,8 +272,7 @@ tweak_log($forcer?"\$forcer = true":"tweak_initialisation($forcer) : Sortie car 
 tweak_log(" -- foreach(\$tweaks) : tweak_parse_code, tweak_parse_description... - \$rand = $rand");
 	foreach($temp = $tweaks as $i=>$tweak) {
 		if (!isset($tweak['id'])) { $tweaks[$i]['id']='erreur'; $tweaks[$i]['nom'] = _T('tweak:erreur_id');	}
-		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = 'divers';//_T('tweak:divers');
-//			else $tweaks[$i]['categorie'] = _T('tweak:'.$tweaks[$i]['categorie']);
+		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = 'divers';
 		if (!isset($tweak['nom'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':nom');
 		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;

@@ -58,12 +58,13 @@ div.cadre-padding div.droite label {
 	display:block;
 	width:10.1em;
 }
-div.cadre-padding input {
+input.checkbox {
+	margin:0;
 	cursor:pointer;
 }
 div.detailtweak {
 	border-top:1px solid #B5BECF;
-	padding:.6em;
+	padding:0 .5em .5em .5em;
 	background:#F5F5F5;
 }
 div.detailtweak hr {
@@ -72,6 +73,12 @@ div.detailtweak hr {
 	border-left:0;
 	border-right:0;
 	}
+
+div.detailtweak p {
+	margin:.5em 0 .5em 0;
+	padding:0;
+}
+
 EOF;
 	echo "</style>";
 	echo "<script type=\"text/javascript\"><!--
@@ -197,23 +204,27 @@ tweak_log("Début : exec_tweak_spip_admin()");
 
 	debut_cadre_trait_couleur('administration-24.gif','','',_T('tweak:tweaks_liste'));
 
+	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
+		. "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' >",
 		"<tr><td class='serif'>",
-		'<p>'._T('tweak:presente_tweaks').'</p>';
+		_T('tweak:presente_tweaks'), $valider;
 	foreach($temp = $tweaks as $tweak) $categ[_T('tweak:'.$tweak['categorie'])] = $tweak['categorie']; ksort($categ);
-	$js = ''; 
+		
+	$js = ''; $marge = '0';
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
 		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$i) {
 			$s .= ligne_tweak($tweak, $js) . "\n";
 			$basics[] = $tweak['basic'];
 		}
-		$ss = "<input type='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
+		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
 //		$ss .= $actif?" checked='checked'":"";
 		$ss .= " onclick='tweakcateg.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
 		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 		preg_match(',([0-9]+)\.?\s*(.*),', _T('tweak:'.$c), $reg);
-		echo "<form style='margin:1em 0 0 0;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
+		echo "<form style='margin:$marge;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
+		$marge = '.8em 0 0 0';
 	}
 	echo "</td></tr></table>\n";
 	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
@@ -221,8 +232,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	echo generer_url_post_ecrire('tweak_spip_admin');
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 	foreach($temp = $tweaks as $tweak) echo "<input type='hidden' id='tweak_".$tweak['id']."' name='tweak_".$tweak['id']."' value='".($tweak['actif']?"1":"0")."' />";
-	echo "\n<div style='text-align:$spip_lang_right'>",
-		"<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>";
+	echo $valider;
 
 # ce bouton est trop laid :-)
 # a refaire en javascript, qui ne fasse que "decocher" les cases
@@ -262,25 +272,25 @@ function ligne_tweak($tweak, &$js){
 		$s .=  "</div>";
 	}
 */
-	$s .= "<img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
+	$p = '<p style="margin:0;">';
+	$p .= "<img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 
-	$s .= "<input type='checkbox' name='foo_$inc' value='O' id='label_$id_input'";
-	$s .= $actif?" checked='checked'":"";
-	$s .= $erreur_version?" disabled='disabled'":"";
-	$s .= " onclick='tweakchange.apply(this,[$index])'";
-	$s .= "/> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
+	$p .= "<input type='checkbox' class='checkbox' name='foo_$inc' value='O' id='label_$id_input'";
+	$p .= $actif?" checked='checked'":"";
+	$p .= $erreur_version?" disabled='disabled'":"";
+	$p .= " onclick='tweakchange.apply(this,[$index])'";
+	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 	$js .= "Tweaks[$index] = new Array(\"$inc\", $nb_var);\n";
+	$p .= bouton_block_invisible($tweak_id) . $tweak['nom'] . '</p>';
 
-	$s .= bouton_block_invisible($tweak_id) . propre($tweak['nom']);
+	$s .= propre($p) . "</div></form>";
 
-	$s .= "</div></form>";
+	$p = debut_block_invisible($tweak_id);
 
-	$s .= debut_block_invisible($tweak_id);
-
-	$s .= "\n<div class='detailtweak'>";
-	$s .= propre($tweak['description']);
-	if ($tweak['auteur']!='') $s .= "<p>" . _T('auteur') .' '. propre($tweak['auteur']) . "</p>";
-	$s .= '<hr/>' . _T('tweak:tweak').' ';
+	$p .= "\n<div class='detailtweak'>";
+	$p .= $tweak['description'];
+	if ($tweak['auteur']!='') $p .= "<p>" . _T('auteur') .' '. ($tweak['auteur']) . "</p>";
+	$s .= propre($p) . '<hr style="margin:0"/>' . _T('tweak:tweak').' ';
 	if ($erreur_version) $s .= _T('tweak:erreur:version');
 	else {
 		$a = array();

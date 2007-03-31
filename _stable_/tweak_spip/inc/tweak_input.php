@@ -46,9 +46,9 @@ function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_s
 	$ok_visible = $actif?str_replace("HIDDENTWEAKVAR__","",$ok_input):$ok_valeur;
 
 	$res = "\n<input type='hidden' value='$variable' name='variable'>"
-		. "\n<div id='tweak_$index-input' style='position:absolute; visibility:hidden;' >$ok_input</div>"
-		. "\n<div id='tweak_$index-valeur' style='position:absolute; visibility:hidden;' >$ok_valeur</div>\n"
-		. "\n<div id='tweak_$index-visible' >$ok_visible</div>";
+		. "\n<div id='tweak_$index-input' style='position:absolute; visibility:hidden;' ><p>$ok_input</p></div>"
+		. "\n<div id='tweak_$index-valeur' style='position:absolute; visibility:hidden;' ><p>$ok_valeur</p></div>\n"
+		. "\n<div id='tweak_$index-visible' ><p>$ok_visible</p></div>";
 
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 	$res = ajax_action_auteur('tweak_input', $index, $url_self, "index=$index&variable=$variable&valeur=$valeur&actif=".intval($actif)."&label=".urlencode($label), $res);
