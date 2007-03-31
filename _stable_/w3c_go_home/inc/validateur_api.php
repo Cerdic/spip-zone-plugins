@@ -24,14 +24,14 @@ function validateur_test_valide($nom,$url,$last_modif_time){
 }
 
 function validateur_test_resultat($nom,$url,$last_modif_time){
-	// regarder si le resultat est en cache meta
-	$compliance = isset($GLOBALS['meta']["w3cgh_$nom"])?unserialize($GLOBALS['meta']["w3cgh_$nom"]):false;
-	if (!$compliance)
-		$compliance = array();
-	if (isset($compliance[$url])
-	  &&($compliance[$url]['res'][0])
-	  &&($compliance[$url]['time']>$last_modif_time) )
-	  	return $compliance[$url];
+	static $compliance = array();
+	if (!isset($compliance[$nom]))
+		// regarder si le resultat est en cache meta
+		$compliance[$nom] = isset($GLOBALS['meta']["w3cgh_$nom"])?unserialize($GLOBALS['meta']["w3cgh_$nom"]):array();
+	if (isset($compliance[$nom][$url])
+	  &&($compliance[$nom][$url]['res'][0])
+	  &&($compliance[$nom][$url]['time']>$last_modif_time) )
+	  	return $compliance[$nom][$url];
 	 else 
 	 	return false;
 }

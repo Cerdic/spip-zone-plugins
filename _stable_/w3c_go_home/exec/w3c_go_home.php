@@ -130,8 +130,12 @@ function exec_w3c_go_home(){
 		$vals[] = validateur_infos($nom)."<br /><a href='$action'>"._T("w3cgh:reset")."</a>";
 		$largeurs[] = '';
 		$styles[] = 'arial11';
+		$url_test[$nom] = generer_url_ecrire('w3cgh_test',"nom=$nom&url=");
+		$url_affiche[$nom] = generer_url_ecrire('w3cgh_affiche',"nom=$nom&url=",true);
+		$url_voir[$nom] = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=");
 	}
 	$table[] = $vals;
+	$noscript = _request('noscript');
 
 	if (is_array($sitemap) && count($sitemap)){
 		$cpt_ok = 0;
@@ -152,7 +156,7 @@ function exec_w3c_go_home(){
 			$vals = '';
 			$vals[] = ++$cpt;
 	
-			if ($ok){
+/*			if ($ok){
 				$cpt_ok++;
 				$puce = 'puce-verte-breve.gif';
 				$alt = "OK";
@@ -161,27 +165,31 @@ function exec_w3c_go_home(){
 				$puce = 'puce-orange-breve.gif';
 				$alt = "";
 			}
-	
-			$s = "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' style='border:0' alt='$alt' />&nbsp;&nbsp;";
+*/	
+			$s = "";
+			//$s = "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' style='border:0' alt='$alt' />&nbsp;&nbsp;";
 			$s .= "<a href='$loc'>".lignes_longues($loc,50)."</a>";
 			$vals[] = $s;
 			
 			foreach($validateurs as $nom){
 				$s = "";
-				$url_affiche = generer_url_ecrire('w3cgh_affiche',"nom=$nom&url=".urlencode($loc),true);
-				$url_voir = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($loc));
+				$loce = urlencode($loc);
+				$url_affiche = $url_affiche[$nom].$loce;
+				$url_voir = $url_voir[$nom].$loce;
 				$id_test++;
 				if ($etat[$nom]){
 					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")'>";
 					$s .= "OK (".date('d-m-Y H:i',$etat[$nom]).")</a>";
 				}
 				else {
-					$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($loc));
+					$url_test = $url_test[$nom].$loce;
 					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")' rel='$url_test' class='test'></a>";
 					// la methode img en noscript
-					$url_test = parametre_url($url_test,'var_mode','image');
-					$url_test = parametre_url($url_test,'time',$time_mark); // eviter de taper dans le cache navigateur
-					$s .= "<noscript><a href='$url_voir' ><img src='$url_test' alt='test'/></a></noscript>";
+					if ($noscript){
+						$url_test = parametre_url($url_test,'var_mode','image');
+						$url_test = parametre_url($url_test,'time',$time_mark); // eviter de taper dans le cache navigateur
+						$s .= "<noscript><a href='$url_voir' ><img src='$url_test' alt='test'/></a></noscript>";
+					}
 				}
 				$vals[] = $s;
 			}
