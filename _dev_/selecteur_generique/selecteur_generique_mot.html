@@ -9,10 +9,11 @@
 ]
 <ajaxresponse>
 
-[(#REM) Eliminer d'abord les mots deja lies a l'article/breve etc ]
-<BOUCLE_e1(MOTS){tout}{id_article}{doublons}></BOUCLE_e1>
-<BOUCLE_e2(MOTS){tout}{id_breve}{doublons}></BOUCLE_e2>
-<BOUCLE_e3(MOTS){tout}{id_syndic}{doublons}></BOUCLE_e3>
+[(#REM)
+	Eliminer d'abord les mots deja lies a l'article/breve etc.
+	Attention il FAUT passer un de ces 3 id_xxx en parametre
+]
+<BOUCLE_e(MOTS){tout}{id_article?}{id_breve?}{id_syndic?}{doublons}></BOUCLE_e>
 
 [(#REM) Chercher les mots correspondant a la requete ]
 <BOUCLE_s(MOTS){titre LIKE (#ENV{value})%}{id_groupe?}{0,20}{par titre}{doublons}>
