@@ -1,9 +1,8 @@
 #CACHE{0}
 <?php include_spip('inc/autoriser');
 if (!autoriser('voir','article','#ID_ARTICLE')){ header("Location:#URL_PAGE{'bachibouzouk'}"); }
-?>
+?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <BOUCLE_article_principal(ARTICLES) {id_article}{statut==.*}{tout_voir}{tout}>
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>

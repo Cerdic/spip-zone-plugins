@@ -6,9 +6,8 @@
  	C&#233;dric MORIN [notre-ville.net->http://www.notre-ville.net]
 &copy; 2006 - Licence GPL
 	</auteur>
-	<version>
-	0.1
-	</version>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
 	<etat>
 	stable
 	</etat>
@@ -19,6 +18,7 @@
 	<prefix> 
 	w3cgh
 	</prefix>
+	<install>w3cgh_upgrade.php</install>
 	<options>w3cgh_options.php</options>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
