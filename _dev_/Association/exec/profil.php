@@ -35,13 +35,12 @@ $action =$_POST['action'];
 
 if ( $action != "modifie" ){
 
-$sql = "SELECT * FROM spip_asso_profil where id_profil=1";
-$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$query = spip_query("SELECT * FROM spip_asso_profil where id_profil=1");
 
 echo '<br>';
 echo '<form action="" method="POST">';
 echo '<table width="100%" border="0">';
-while ($data = mysql_fetch_assoc($req)) {
+while ($data = spip_fetch_array($query)) {
 echo '<tr>';
 echo '<td>Nom de l\'association</td>';
 echo '<td><input name="nom" type="text" size="40" value="'.$data['nom'].'"></td>';
@@ -158,9 +157,7 @@ if($nom == ''){
 else {
 spip_query("UPDATE spip_asso_profil SET nom='$nom', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone= '$telephone',mail='$mail', siret='$siret', declaration='$declaration', prefet='$prefet', president='$president', dons='$dons', ventes='$ventes', comptes='$comptes', activites='$activites' WHERE id_profil=1");
 
-echo '<div align="center">';
-echo '<br><strong>Le profil de l\'association a &eacute;t&eacute; mis &agrave; jour</strong>';
-echo '</div>';
+echo '<p><strong>Le profil de l\'association a &eacute;t&eacute; mis &agrave; jour</strong></p>';
 }	
 }
 

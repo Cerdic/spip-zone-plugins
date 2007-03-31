@@ -30,10 +30,9 @@ echo '<form action="'.$url_action_comptes.'" method="POST">';
 echo '<fieldset><legend>Mettre &agrave; jour l\'op&eacute;ration #'.$id_compte.'</legend>';
 echo '<table width="70%" class="noclass">';
 	
-$query = "SELECT * FROM spip_asso_comptes  WHERE id_compte=$id_compte" ;
-$val = spip_query (${query}) ;
+$query = spip_query ("SELECT * FROM spip_asso_comptes  WHERE id_compte=$id_compte") ;
  $i=0;
-while ($data = mysql_fetch_assoc($val))
+while ($data = spip_fetch_array($query))
     {
 echo '<input name="id_compte"  value="'.$data['id_compte'].'" type="hidden">';
 echo '<tr> ';
@@ -56,7 +55,7 @@ echo '<tr>';
 echo '<td>Mode de paiement :</td>';
 echo '<td><select name="journal" type="text">';
 $sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
-while ($banque = mysql_fetch_assoc($sql)) {
+while ($banque = spip_fetch_array($sql)) {
 echo '<option value="'.$banque['code'].'" ';
 	if ($data['journal']==$banque['code']) { echo ' selected="selected"'; }
 echo '>'.$banque['intitule'].'</option>';

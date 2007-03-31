@@ -28,14 +28,13 @@ print association_date_du_jour();
 
 $id_adherent=$_GET['id'];
 
-$sql = "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent'";
-$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$query = spip_query( "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent' " );
     	
-echo'   <fieldset><legend>Ajouter une cotisation </legend>';
-echo'   <table width="70%" class="noclass">';
-echo' <p align="center"><form action="'.$url_action_cotisations.'" method="POST">';
+echo '<fieldset><legend>Ajouter une cotisation </legend>';
+echo '<table width="70%" class="noclass">';
+echo '<p align="center"><form action="'.$url_action_cotisations.'" method="POST">';
 
-while($data = mysql_fetch_assoc($req)) {
+while($data = spip_fetch_array($query)) {
 $nom=$data['nom'];
 $prenom=$data['prenom'];
 $categorie=$data['categorie'];
@@ -62,11 +61,9 @@ echo '<td><input name="date" type="text" value="'.date('Y-m-d').'">';
 echo '<tr> ';
 echo '<td>Montant pay&eacute; (en euros):</td>';
 
-$sql = "SELECT * FROM spip_asso_categories WHERE valeur='$categorie'";
-$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
-
-while($data = mysql_fetch_assoc($req)) {
-$duree=$data['duree'];
+$sql = spip_query( "SELECT * FROM spip_asso_categories WHERE valeur='$categorie' ");
+while($categorie = spip_fetch_array($sql)) {
+$duree=$categorie['duree'];
 $mois=$mois+$duree;
 $validite=date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
 
@@ -75,10 +72,9 @@ echo '<td><input name="montant" type="text" value="'.$data['cotisation'].'"></td
 echo '<tr>';
 echo '<td>Mode de paiement :</td>';
 echo '<td><select name="journal" type="text">';
-$query = "SELECT * FROM spip_asso_banques ORDER BY id_banque";
-$val = spip_query ($query) ;
-while ($data = mysql_fetch_assoc($val)) {
-echo '<option value="'.$data['code'].'"> '.$data['intitule'].' </option>';
+$sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque" );
+while ($banque = spip_fetch_array($sql)) {
+echo '<option value="'.$banque['code'].'"> '.$banque['intitule'].' </option>';
 }
 echo '<option value="don"> Don </option>';
 echo '</select></td>';

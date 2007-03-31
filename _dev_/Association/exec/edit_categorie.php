@@ -32,18 +32,17 @@ print association_date_du_jour();
 
 $action=$_GET['action'];
 $id=$_GET['id'];
-$sql = "SELECT * FROM spip_asso_categories WHERE id_categorie='$id'";
-$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$query = spip_query( "SELECT * FROM spip_asso_categories WHERE id_categorie='$id' ");
 	
 echo '<fieldset><legend>Modifier une cat&eacute;gorie de cotisation</legend>';
 echo '<table width="70%">';	
 echo '<form action="'.$url_action_categorie.'" method="post">';	
 
-	while($data = mysql_fetch_assoc($req)) 
+	while($data = spip_fetch_array($query)) 
 {
 echo '<tr> ';
 echo '<td>Num&eacute;ro :</td>';
-echo '<td><input name="id_categorie" type="text" size="3" readonly="true" value="'.$data['id_categorie'].'"></td></tr>';
+echo '<td><input name="id" type="text" size="3" readonly="true" value="'.$data['id_categorie'].'"></td></tr>';
 echo '<tr> ';
 echo '<td>Cat&eacute;gorie :</td>';
 echo '<td><input name="valeur" type="text" value="'.$data['valeur'].'"></td></tr>';

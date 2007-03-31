@@ -37,10 +37,9 @@ echo '<td>';
 $annee=$_GET['annee'];
 if(empty($annee)){$annee = date('Y');}
 
-$query = "SELECT date_format( date_don, '%Y' )  AS annee FROM spip_asso_dons GROUP BY annee ORDER BY annee";
-$val = spip_query ($query) ;
+$query = spip_query "SELECT date_format( date_don, '%Y' )  AS annee FROM spip_asso_dons GROUP BY annee ORDER BY annee");
 
-while ($data = mysql_fetch_assoc($val))
+while ($data = spip_fetch_array($query))
    {
  	if ($data['annee']==$annee)
 	{echo ' <strong>'.$data['annee'].'</strong>';}
@@ -66,10 +65,9 @@ echo '<td><strong>Contrepartie</strong></td>';
 echo '<td colspan=2><strong>Action</strong></td>';
 echo '</tr>';
 
-$query = "SELECT * FROM spip_asso_dons WHERE date_format( date_don, '%Y' ) = '$annee'  ORDER by id_don" ;
-$val = spip_query ($query) or die ('La table est vide !<br>');
+$query = spip_query ("SELECT * FROM spip_asso_dons WHERE date_format( date_don, '%Y' ) = '$annee'  ORDER by id_don" ) ;
 
-while ($data = mysql_fetch_assoc($val))
+while ($data = spip_fetch_array($query))
    {
 $class="pair";
 echo '<tr>';

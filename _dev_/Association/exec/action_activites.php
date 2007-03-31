@@ -17,7 +17,6 @@ function exec_action_activites(){
 	debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 
 	$url_action_activites=generer_url_ecrire('action_activites');
-	$url_retour=$_POST['url_retour'];
 
 	include_spip ('inc/navigation');
 
@@ -45,7 +44,7 @@ function exec_action_activites(){
 	$commentaire=nl2br($commentaire);
 
 	$action=$_POST['action'];
-
+	$url_retour=$_POST['url_retour'];
 //----------------------------
 //AJOUT INSCRIPTION
 //----------------------------
@@ -55,7 +54,7 @@ function exec_action_activites(){
 		spip_query( "INSERT INTO spip_asso_activites (date, id_evenement, nom, id_adherent, accompagne, inscrits, email, telephone, adresse, montant, date_paiement, statut, commentaire) VALUES ('$date', '$id_evenement', '$nom', '$id_adherent', '$accompagne', '$inscrits', '$email', '$telephone', '$adresse', '$montant', '$date_paiement', '$statut', '$commentaire' )" );
 
 		$query=spip_query( "SELECT MAX(id_activite) AS id_activite FROM spip_asso_activites" );
-		while ($data = mysql_fetch_assoc($query)) {
+		while ($data = spip_fetch_array($query)) {
 			$id_activite=$data['id_activite'];
 			$justification=_T('asso:activite_justification_compte_inscription',array('id_activite' => $id_activite, 'nom' => $nom));
 		}
@@ -63,9 +62,9 @@ function exec_action_activites(){
 		spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ('$date_paiement','$journal','$montant','$justification','activite','$id_activite')");
 
 		if ($id_adherent) {
-		 $query_adh = spip_query("SELECT nom, prenom FROM spip_asso_adherents WHERE id_adherent=$id_adherent");
-		 while ($data_adh = mysql_fetch_assoc($query_adh)) {
-			 $nom = $data_adh['nom'].' '.$data_adh['prenom'];
+		 $query = spip_query("SELECT nom, prenom FROM spip_asso_adherents WHERE id_adherent=$id_adherent");
+		 while ($data = spip_fetch_array($query)) {
+			 $nom = $data['nom'].' '.$data['prenom'];
 			}
 		}
 
@@ -86,9 +85,9 @@ function exec_action_activites(){
 		spip_query("UPDATE spip_asso_comptes SET date='$date_paiement', journal='$journal', recette='$montant' WHERE id_journal=$id_activite AND imputation='activite' ");
 
 		if ($id_adherent) {
-			$query_adh = spip_query("SELECT nom, prenom FROM spip_asso_adherents WHERE id_adherent=$id_adherent");
-			while ($data_adh = mysql_fetch_assoc($query_adh)) {
-				$nom = $data_adh['nom'].' '.$data_adh['prenom'];
+			$query = spip_query( "SELECT nom, prenom FROM spip_asso_adherents WHERE id_adherent=$id_adherent" );
+			while ($data = spip_fetch_array($query)) {
+				$nom = $data['nom'].' '.$data['prenom'];
 			}
 		}
 			echo '<p><strong>'._T('asso:activite_message_maj_inscription',array('nom' => $nom).'</strong></p>';

@@ -29,22 +29,14 @@ debut_cadre_relief(  "", false, "", $titre = _T('Informations comptables'));
 
 print association_date_du_jour();
 
-if ( isset ($_POST['imputation'] )) {
-	$imputation = $_POST['imputation']; }
-			else { $imputation= "%"; }
+echo '<table width="70%">';
 
 // FILTRES
-
-echo '<table width="70%">';
 echo '<tr>';
-
 echo '<td>';
 
-//Bricolage?
-if ( isset ($_POST['imputation'] )) {
-	$imputation = $_POST['imputation']; }
-	elseif ( isset ($_GET['imputation'] )) {
-		$imputation =  $_GET['imputation']; }
+if ( isset ($_REQUEST['imputation'] )) {
+	$imputation = $_REQUEST['imputation']; }
 		else { $imputation= "%"; }
 
 $annee=$_GET['annee'];
@@ -53,7 +45,7 @@ if(empty($annee)){$annee = date('Y');}
 global $table_prefix;
 $query = spip_query ("SELECT date_format( date, '%Y' )  AS annee FROM ".$table_prefix."_asso_comptes WHERE imputation like '$imputation' GROUP BY annee ORDER by annee");
 
-while ($data = mysql_fetch_assoc($query))
+while ($data = spip_fetch_array($query))
    {
  	if ($data['annee']==$annee)
 	{echo ' <strong>'.$data['annee'].' </strong>';}
@@ -115,7 +107,7 @@ if (empty($debut))
 
 $query = spip_query ("SELECT * FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ORDER BY date DESC LIMIT $debut,$max_par_page");
 
-while ($data = mysql_fetch_assoc($query)) {
+while ($data = spip_fetch_array($query)) {
 
 	if ($data['recette'] >0)
     { $class= "pair";}
@@ -148,9 +140,8 @@ echo '<tr>';
 
 //SOUS-PAGINATION
 echo '<td>';
-$query = "SELECT * FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ";
-$val= spip_query($query);
-$nombre_selection=spip_num_rows($val);
+$query = spip_query( "SELECT * FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
+$nombre_selection=spip_num_rows($query);
 $pages=intval($nombre_selection/$max_par_page) + 1;
 
 if ($pages == 1)	
@@ -179,9 +170,8 @@ icone(_T('Ajouter une op&eacute;ration'), $url_ajout_compte, '../'._DIR_PLUGIN_A
 echo '</p>';
 
 // TOTAUX
-$query = "SELECT sum(recette) AS somme_recettes, sum(depense) AS somme_depenses FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ";
-$val = spip_query($query) ;
-while ($data = mysql_fetch_assoc($val)) {
+$query = spip_query( "SELECT sum(recette) AS somme_recettes, sum(depense) AS somme_depenses FROM ".$table_prefix."_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
+while ($data = spip_fetch_array($query)) {
 $somme_recettes = $data['somme_recettes'];
 $somme_depenses = $data['somme_depenses'];
 $solde= $somme_recettes - $somme_depenses;

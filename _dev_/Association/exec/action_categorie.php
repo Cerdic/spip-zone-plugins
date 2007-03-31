@@ -31,17 +31,10 @@ debut_cadre_relief(  "", false, "", $titre = _T('Toutes les cat&eacute;gories de
 
 print association_date_du_jour();
 
-$action=$_GET['action'];
-$id=$_GET['id'];
-
-if ($action == "supprime") {
-spip_query( "DELETE FROM spip_asso_categories WHERE id_categorie='$id' " );
-
-echo '<p><strong>La cat&eacute;gorie a &eacute;t&eacute; supprim&eacute;e</strong></p>';
-}
+$action=$_REQUEST['action'];
+$id_categorie=$_REQUEST['id'];
 
 $action=$_POST['action'];
-$id=$_POST['id_categorie'];
 $libelle=$_POST['libelle'];
 $valeur=$_POST['valeur'];
 $duree=$_POST['duree'];
@@ -52,12 +45,47 @@ $libelle=addslashes($libelle);
 $commentaires=addslashes($commentaires);
 $valeur=addslashes($valeur);
 
+//---------------------------- 
+//SUPPRESSION PROVISOIRE CATEGORIE
+//---------------------------- 		
+if ($action == "supprime") {
+
+$url_retour = $_SERVER['HTTP_REFERER'];
+
+echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer le cat&eacute;gorie n&deg; '.$id.' !</strong></p>';
+echo '<form action="'.$url_action_categories.'"  method="post">';
+echo '<input type=hidden name="action" value="drop">';
+echo '<input type=hidden name="id" value="'.$id_categorie.'">';
+echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
+echo '<p><input name="submit" type="submit" value="Confirmer" class="fondo"></p>';
+echo '<p>';
+icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/calculatrice.gif','rien.gif' );
+echo '</p>';
+}
+
+//---------------------------- 
+//  SUPPRESSION DEFINITIVE CATEGORIE
+//---------------------------- 		
+if ($action == "drop") {
+
+spip_query( "DELETE FROM spip_asso_categories WHERE id_categorie='$id_categorie' " );
+
+echo '<p><strong>Suppression effectu&eacute;e !</strong></p>';
+echo '<p>';
+icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/calculatrice.gif','rien.gif' );
+echo '</p>';
+}
+//---------------------------- 
+//  MODIFICATION CATEGORIE
+//---------------------------- 	
 if ($action =="modifie") { 
-spip_query( "UPDATE spip_asso_categories SET libelle='$libelle', valeur='$valeur', duree='$duree', cotisation='$montant', commentaires='$commentaires' WHERE id_categorie='$id' " );
+spip_query( "UPDATE spip_asso_categories SET libelle='$libelle', valeur='$valeur', duree='$duree', cotisation='$montant', commentaires='$commentaires' WHERE id_categorie='$id_categorie' " );
 
 echo '<p><strong>La cat&eacute;gorie a &eacute;t&eacute; mise &agrave; jour</strong></p>';
 }
-
+//---------------------------- 
+//  AJOUT CATEGORIE
+//---------------------------- 	
 if ($action == "ajoute") {
 spip_query( "INSERT INTO spip_asso_categories (libelle, valeur, duree, cotisation, commentaires) VALUES ('$libelle', '$valeur', '$duree', '$montant', '$commentaires' )" );
 

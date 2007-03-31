@@ -37,7 +37,7 @@ $query=spip_query( "SELECT * FROM spip_asso_adherents where id_adherent='$id_adh
 	
 echo '<fieldset><legend>Fiche signalétique # '.$id_adherent.'</legend>';
 echo '<table width="70%">';	
-	while($data = mysql_fetch_assoc($query)) 
+	while($data = spip_fetch_array($query)) 
 {
 echo '<tr> ';
 echo '<td>'._T('asso:reference_interne').' :</td>';
@@ -126,7 +126,7 @@ echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td></tr>';
 $id_auteur = $data['id_auteur'];
 $sql = spip_query("SELECT * FROM spip_auteurs where id_auteur='$id_auteur'");
-if ($auteur = mysql_fetch_assoc($sql)) 
+if ($auteur = spip_fetch_array($sql)) 
 echo '<tr> ';	
 echo '<td>Visiteur SPIP :</td>';
 echo '<td><strong>'.$auteur['nom'].'</strong></td>';
@@ -160,7 +160,7 @@ echo '</tr>';
 $query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_adherent ORDER BY date DESC" );
 //$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
 
-while ($data = mysql_fetch_assoc($query)) {
+while ($data = spip_fetch_array($query)) {
 
 $class= "pair";
 
@@ -195,7 +195,7 @@ echo '<tr>';
 $query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=$id_adherent ORDER BY date DESC" );
 //$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
 
-while ($data = mysql_fetch_assoc($query)) {
+while ($data = spip_fetch_array($query)) {
 
 $class= "pair";
 $id_evenement=$data['id_evenement'];
@@ -203,7 +203,7 @@ $id_evenement=$data['id_evenement'];
 echo '<td class ='.$class.' style="text-align:right;">'.$data['id_activite'].'</td>';
 
 $sql = spip_query ("SELECT * FROM spip_evenements WHERE id_evenement=$id_evenement" );
-while ($evenement = mysql_fetch_assoc($sql)) {
+while ($evenement = spip_fetch_array($sql)) {
 $date = substr($evenement['date_debut'],0,10);
 echo '<td class ='.$class.'>'.association_datefr($date).'</td>';
 echo '<td class ='.$class.'>'.$evenement['titre'].'</td>';

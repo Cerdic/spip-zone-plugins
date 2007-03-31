@@ -39,10 +39,9 @@ echo '<td style="text-align:right;"><strong>D&eacute;penses</strong></td>';
 echo '<td style="text-align:right;"><strong>Solde</strong></td>';
 echo '</tr>';
 
-$query = "SELECT libelle, valeur, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee FROM spip_asso_comptes RIGHT JOIN spip_asso_livres ON valeur=imputation GROUP BY valeur, annee HAVING annee = $annee ORDER BY annee DESC";
-$val = spip_query ($query) ;
+$query = spip_query ("SELECT libelle, valeur, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee FROM spip_asso_comptes RIGHT JOIN spip_asso_livres ON valeur=imputation GROUP BY valeur, annee HAVING annee = $annee ORDER BY annee DESC");
 
-while ($data = mysql_fetch_assoc ($val)) {
+while ($data = spip_fetch_array ($query)) {
 $recettes=$data['recettes'];
 $depenses=$data['depenses'];
 $soldes=$recettes - $depenses;
@@ -75,7 +74,7 @@ echo '</tr>';
 
 $query = spip_query ( "SELECT * FROM spip_asso_banques ORDER BY id_banque" );
 
-while ($banque = mysql_fetch_assoc($query)) {
+while ($banque = spip_fetch_array($query)) {
 $date_solde=$banque['date'];
 $journal=$banque['code'];
 $solde=$banque['solde'];
@@ -86,7 +85,7 @@ echo '<td class ='.$class.' style="text-align:right;">'.number_format($solde, 2,
 
 $sql = spip_query ( "SELECT sum( recette ) AS recettes, sum( depense ) AS depenses, date FROM spip_asso_comptes WHERE date > '$date_solde' AND journal = '$journal' GROUP BY '$journal' " );
 
-if ($compte = mysql_fetch_assoc($sql)) {
+if ($compte = spip_fetch_array($sql)) {
 	$recettes=$compte['recettes'];
 	$depenses=$compte['depenses'];
 } else {

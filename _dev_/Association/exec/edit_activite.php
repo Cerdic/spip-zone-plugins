@@ -35,7 +35,7 @@ echo '<form method="post" action="'.$url_action_activites.'">';
 echo '<fieldset><legend>'._T('asso:activite_mise_a_jour_inscription').'</legend>';
 echo '<table width="70%" class="noclass">'; 
 
-while ($data = mysql_fetch_assoc($query))
+while ($data = spip_fetch_array($query))
 {
 echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_inscription').' :</td>';
@@ -53,9 +53,9 @@ echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_adherent').' :</td>';
 echo '<td><select name="id_adherent">';
 echo '<option value="0">'._T('asso:activite_libelle_invitation').'</option>';
-$query_adh = spip_query ("SELECT id_adherent, CONCAT(nom,' ',prenom,IF((SELECT count(*) FROM spip_asso_activites where spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent AND spip_asso_activites.id_evenement=".$data['id_evenement']."),' (d&eacute;j&agrave; inscrit)','')) as usuel FROM spip_asso_adherents ORDER BY nom,prenom") ;
-while ($data_adh = mysql_fetch_assoc($query_adh)) {
-echo '<option value="'.$data_adh['id_adherent'].'"'.($data_adh['id_adherent'] == $data['id_adherent'] ? ' selected="selected"' : '').'>'.$data_adh['usuel'].'</option>';
+$sql = spip_query ("SELECT id_adherent, CONCAT(nom,' ',prenom,IF((SELECT count(*) FROM spip_asso_activites where spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent AND spip_asso_activites.id_evenement=".$data['id_evenement']."),' (d&eacute;j&agrave; inscrit)','')) as usuel FROM spip_asso_adherents ORDER BY nom,prenom") ;
+while ($adherent = spip_fetch_array($sql)) {
+echo '<option value="'.$adherent['id_adherent'].'"'.($adherent['id_adherent'] == $data['id_adherent'] ? ' selected="selected"' : '').'>'.$adherent['usuel'].'</option>';
 }
 echo '</select></td>';
 echo '</tr>';
@@ -94,8 +94,8 @@ echo '</tr>';
 echo '<tr>';
 echo '<td>'._T('asso:activite_libelle_mode_paiement').' :</td>';
 echo '<td><select name="journal" type="text">';
-$sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
-while ($banque = mysql_fetch_assoc($sql)) {
+$sql = spip_query ( "SELECT * FROM spip_asso_banques ORDER BY id_banque" );
+while ($banque = spip_fetch_array($sql)) {
 echo '<option value="'.$banque['code'].'" ';
 	if ($data['journal']==$banque['code']) { echo ' selected="selected"'; }
 echo '>'.$banque['intitule'].'</option>';

@@ -51,7 +51,7 @@ if ($action=="ajoute"){
 spip_query( "INSERT INTO spip_asso_dons (date_don, bienfaiteur, argent, colis, valeur, contrepartie, commentaire ) VALUES ( '$date_don', '$bienfaiteur', '$argent', '$colis', '$valeur', '$contrepartie', '$commentaire' )");
 
 $query=spip_query( "SELECT MAX(id_don) AS id_don FROM spip_asso_dons");
-while ($data = mysql_fetch_assoc($query))
+while ($data = spip_fetch_array($query))
 {
 $id_don=$data['id_don'];
 $justification='don n&deg; '.$id_don.' - '.$bienfaiteur;

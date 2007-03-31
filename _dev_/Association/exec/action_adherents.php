@@ -19,7 +19,6 @@ debut_page(_T('Gestion pour  Association'), "", "");
 
 $url_action_adherents=generer_url_ecrire('action_adherents');
 
-
 include_spip ('inc/navigation');
 
 debut_cadre_relief(  "", false, "", $titre = _T('Action sur les membres actifs'));
@@ -134,8 +133,8 @@ echo '<table>';
 echo '<form action="'.$url_action_adherents.'"  method="post">';
 for ( $i=0 ; $i < $count ; $i++ )
 {	$id = $delete_tab[$i];
-	$query = spip_query("SELECT * FROM spip_asso_adherents where id_adherent='$id'");
-	while($data = mysql_fetch_assoc($query)) 
+	$query = spip_query( "SELECT * FROM spip_asso_adherents where id_adherent='$id' " );
+	while($data = spip_fetch_array($query)) 
 	{
 echo '<tr>';
 echo '<td><strong>'.$data['nom'].' '.$data['prenom'].'</strong>';

@@ -29,7 +29,6 @@ debut_boite_info();
 
 print association_date_du_jour();
 
-//Bricolage?
 if ( isset ($_POST['statut'] )) {
 	$statut = $_POST['statut']; }
 	else { $statut= "echu"; }
@@ -75,7 +74,7 @@ echo '<td><strong>Env</strong></td>';
 echo '</tr>';
 $query = spip_query ("SELECT * FROM spip_asso_adherents WHERE email <> ''  AND statut like '$statut' AND statut <> 'sorti' ORDER by nom" );
  $i=0;
-while ($data = mysql_fetch_assoc($query))
+while ($data = spip_fetch_array($query))
    {
 	$i++;
 $id_adherent=$data['id_adherent'];

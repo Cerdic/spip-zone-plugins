@@ -27,15 +27,12 @@ print association_date_du_jour();
 	
 $id_vente= $_GET['id'];
 
-$query = "SELECT * FROM spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal WHERE id_vente=$id_vente AND imputation='vente' ";
-$val = spip_query ($query) ; 
-$i=0;
-
+$query = spip_query ("SELECT * FROM spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal WHERE id_vente=$id_vente AND imputation='vente' " );
 echo '<form method="post" action="'.$url_action_ventes.'">';
 echo '<fieldset><legend>Mettre &agrave; jour une vente </legend>';
 echo '<table width="70%" class="noclass">'; 
 
-while ($data = mysql_fetch_assoc($val))
+while ($data = spip_fetch_array($query))
 {
 echo '<tr> ';
 echo '<td>Vente n&deg; :</td>';
@@ -68,7 +65,7 @@ echo '<tr>';
 echo '<td>Mode de paiement :</td>';
 echo '<td><select name="journal" type="text">';
 $sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
-while ($banque = mysql_fetch_assoc($sql)) {
+while ($banque = spip_fetch_array($sql)) {
 echo '<option value="'.$banque['code'].'" ';
 	if ($data['journal']==$banque['code']) { echo ' selected="selected"'; }
 echo '>'.$banque['intitule'].'</option>';

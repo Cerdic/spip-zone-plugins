@@ -28,17 +28,16 @@ function exec_voir_activites(){
 
 	print association_date_du_jour();
 
-	if ( isset ($_POST['id'] )) { $id_evenement=$_POST['id']; }
-	else {$id_evenement=$_GET['id'];}
-
-	if ( isset ($_POST['statut'] )) { $statut =  $_POST['statut']; }
+	$id_evenement=$_REQUEST['id'];
+if ( isset ($_POST['statut'] )) 
+	{ $statut =  $_POST['statut']; }
 	else { $statut= "%"; }
 
 // PAGINATION ET FILTRES
 	echo '<table width="70%">';
 	echo '<tr>';
 	$query = spip_query (" SELECT * FROM spip_evenements WHERE id_evenement='$id_evenement' ") ;
-	while ($data = mysql_fetch_assoc($query)) {
+	while ($data = spip_fetch_array($query)) {
 		$date = substr($data['date_debut'],0,10);
 		$date = association_datefr($date);
 		$titre = $data['titre'];
@@ -74,7 +73,7 @@ function exec_voir_activites(){
 
 	$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_evenement='$id_evenement' AND statut like '$statut'  ORDER by id_activite") ;
  
-	while ($data = mysql_fetch_assoc($query)) {
+	while ($data = spip_fetch_array($query)) {
 
 		if($data['statut']=="ok") { $class= "valide"; }
 		else { $class="pair"; }

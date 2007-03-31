@@ -35,14 +35,11 @@ debut_boite_info();
 
 print association_date_du_jour();
 
-//Bricolage?
-if ( isset ($_POST['filtre'] )) {
-	$filtre = $_POST['filtre'];}
-	elseif ( isset ($_GET['filtre'] )) {
-		$filtre =  $_GET['filtre'];}
-		else { $filtre = 'defaut';}
+if ( isset ($_REQUEST['filtre'] )) {
+	$filtre = $_REQUEST['filtre'];}
+	else { $filtre = 'defaut';}
 		
-			switch($filtre)
+	switch($filtre)
     {
 	case "defaut": 
         $critere= "statut <> 'sorti'";
@@ -76,10 +73,9 @@ echo '<td>';
 $lettre=$_GET['lettre'];
 if ( empty ( $lettre ) ) { $lettre = "%"; }
 
-$query = "SELECT upper( substring( nom, 1, 1 ) )  AS init FROM spip_asso_adherents WHERE $critere GROUP BY init ORDER by nom, id_adherent ";
-$val = spip_query ($query) ;
+$query = spip_query ( "SELECT upper( substring( nom, 1, 1 ) )  AS init FROM spip_asso_adherents WHERE $critere GROUP BY init ORDER by nom, id_adherent ");
 
-while ($data = mysql_fetch_assoc($val))
+while ($data = spip_fetch_array($query))
    {
  	if($data['init']==$lettre)
 	{echo ' <strong>'.$data['init'].'</strong>';}
@@ -171,7 +167,7 @@ else
 
 $i=0;
 
-while ($data = mysql_fetch_assoc($query))
+while ($data = spip_fetch_array($query))
     {	
     	$i++;
 	$id_adherent=$data['id_adherent'];
@@ -231,9 +227,8 @@ echo '<td class ='.$class.'>';
 
 if (isset($data["id_auteur"])) {
 $id_auteur= $data["id_auteur"];
-$sql = "SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur' ";
-$req = spip_query ($sql) ;
-while ($auteur = mysql_fetch_assoc($req))
+$sql = spip_query ( "SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur' ");
+while ($auteur = spip_fetch_array($sql))
     {
 	switch($auteur['statut'])
     {
@@ -273,11 +268,10 @@ echo '<tr>';
 //SOUS-PAGINATION
 echo '<td>';
 if (empty($lettre))
-{$query = "SELECT * FROM spip_asso_adherents WHERE $critere";}
+{$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE $critere" );}
 else
-{$query = "SELECT * FROM spip_asso_adherents WHERE upper( substring( nom, 1, 1 ) ) like '$lettre'  AND $critere";}
-$val= spip_query($query);
-$nombre_selection=spip_num_rows($val);
+{$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE upper( substring( nom, 1, 1 ) ) like '$lettre'  AND $critere" );}
+$nombre_selection=spip_num_rows($query);
 $pages=intval($nombre_selection/$max_par_page) + 1;
 
 if ($pages == 1)	
@@ -302,12 +296,10 @@ echo '</form>';
 echo '<p>En bleu : Relanc&eacute; | En rose : A &eacute;ch&eacute;ance | En vert : A jour<br> En brun : D&eacute;sactiv&eacute; | En jaune paille : Prospect</p>'; 
 
 // TOTAUX
-$query = "SELECT montant FROM spip_asso_adherents WHERE statut ='ok'";
-$val = spip_query ($query) ;
-$nombre_membres=spip_num_rows($val);
-$query = "SELECT sum(montant) AS somme FROM spip_asso_adherents WHERE statut ='ok'";
-$val = spip_query($query) ;
-$caisse = mysql_fetch_assoc($val);
+$query = spip_query ( "SELECT montant FROM spip_asso_adherents WHERE statut ='ok' " );
+$nombre_membres=spip_num_rows($query);
+$query = spip_query ( "SELECT sum(montant) AS somme FROM spip_asso_adherents WHERE statut ='ok' " );
+$caisse = spip_fetch_array($query);
 
 echo '<p><font color="#9F1C30"><strong>Total des cotisations : ', $caisse['somme'], ' &euro;<br /> </strong></font><br/>';
 echo '<font color="blue"><strong>Nombre d\'adh&eacute;rents : ',$nombre_membres,'</strong></font></p>';

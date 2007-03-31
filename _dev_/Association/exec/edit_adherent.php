@@ -39,14 +39,13 @@ print  association_date_du_jour();
 //---------------------------- 	
 $id_adherent = $_GET['id'];
 
-$sql = "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent'";
-$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+$query = spip_query( "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent' " );
 	
 echo '<fieldset><legend>Modifier un membre actif </legend>';
 echo '<table width="70%">';	
 echo '<form action="'.$url_action_adherents.'" method="post">';	
 
-	while($data = mysql_fetch_assoc($req)) 
+	while($data = spip_fetch_array($query)) 
 {
 echo '<tr> ';
 echo '<td>'._T('asso:reference_interne').' :</td>';
@@ -73,9 +72,8 @@ echo '<td><input name="naissance" type="text" value="'.$data['naissance'].'"></t
 echo '<tr> ';
 echo '<td>Cat&eacute;gorie :</td>';
 echo '<td><select name="categorie" type="text" >';
-$sql = "SELECT * FROM spip_asso_categories";
-$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($categorie = mysql_fetch_assoc($req)) 
+$sql = spip_query( "SELECT * FROM spip_asso_categories" );
+while($categorie = spip_fetch_array($sql)) 
 {
 echo '<option value="'.$categorie["valeur"].'"';
 	if ($data["categorie"]==$categorie["valeur"]) { echo ' selected="selected"'; }

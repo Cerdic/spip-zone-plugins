@@ -16,6 +16,7 @@ global $connect_statut, $connect_toutes_rubriques;
 debut_page(_T('Cat&eacute;gories de cotisation'), "", "");
 $url_ajout_banque=generer_url_ecrire('ajout_banque');
 $url_action_banques=generer_url_ecrire('action_banques');
+$url_retour = $_SERVER['HTTP_REFERER'];
 
 include_spip ('inc/navigation');
 
@@ -47,7 +48,9 @@ echo '<td colspan="3"><textarea name="commentaire" cols="40"></textarea>';
 echo '<input type="hidden" name="action" value="ajoute"></td></tr>';
 echo '<tr>';
 echo '<td></td>';
-echo '<td><input name="submit" type="submit" value="Ajouter" class="fondo"></td></tr>';
+echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
+echo '<td><input name="submit" type="submit" value="Ajouter" class="fondo">';
+echo '</td></tr>';
 echo '</form>';
 echo '</table>';
 echo '</fieldset>';

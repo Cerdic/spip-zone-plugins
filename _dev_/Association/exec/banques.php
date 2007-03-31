@@ -38,10 +38,9 @@ echo '<td style="text-align:right;"><strong>Solde initial</strong></td>';
 echo '<td><strong>Date</strong></td>';
 echo '<td colspan=2 style="text-align:center;"><strong>Action</strong></td>';
 echo'  </tr>';
-$query = "SELECT * FROM spip_asso_banques ORDER by id_banque" ;
-$val = spip_query ($query) ;
+$query = spip_query ( "SELECT * FROM spip_asso_banques ORDER by id_banque" );
 $class="pair";
-while ($data = mysql_fetch_assoc($val))
+while ($data = spip_fetch_array($query))
 
 {
 echo '<tr> ';

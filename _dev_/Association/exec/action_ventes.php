@@ -53,7 +53,7 @@ if ($action=="ajoute"){
 spip_query( "INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ('$date_vente', '$article', '$code', '$acheteur', '$quantite', '$date_envoi', '$frais_envoi', '$don', '$prix_vente', '$commentaire' )");
 
 $query=spip_query( "SELECT MAX(id_vente) AS id_vente FROM spip_asso_ventes");
-while ($data = mysql_fetch_assoc($query))
+while ($data = spip_fetch_array($query))
 {
 $id_vente=$data['id_vente'];
 $justification='vente n&deg; '.$id_vente.' - '.$article;
@@ -84,11 +84,10 @@ if (isset($_POST['delete'])) {
 $delete_tab=(isset($_POST["delete"])) ? $_POST["delete"]:array();
 $count=count ($delete_tab);
 
-echo '<div align="center">';
-echo '<br><strong>Vous vous appr&ecirc;tez &agrave; effacer '.$count;
+echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer '.$count;
 if ($count==1)
 {echo ' vente !';} else {echo ' ventes !';}
-echo '</strong><br>';
+echo '</strong></p>';
 echo '<table>';
 echo '<form action="'.$url_action_ventes.'"  method="post">';
 for ( $i=0 ; $i < $count ; $i++ )
@@ -112,15 +111,10 @@ $count=count ($drop_tab);
 
 for ( $i=0 ; $i < $count ; $i++ )
 {	$id = $drop_tab[$i];
-	$sql = "DELETE FROM spip_asso_ventes WHERE id_vente='$id'";
-	$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
-	
-	$sql = "DELETE FROM spip_asso_comptes WHERE id_journal='$id' AND imputation='vente'";
-	$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+	spip_query("DELETE FROM spip_asso_ventes WHERE id_vente='$id' " );
+	spip_query("DELETE FROM spip_asso_comptes WHERE id_journal='$id' AND imputation='vente' ");
 }
-echo '<div align="center">';
-echo '<br><strong>Suppression effectu&eacute;e !</strong><br>';	
-echo '</div>';
+echo '<p><strong>Suppression effectu&eacute;e !</strong></p>';	
 }
 
 fin_boite_info();

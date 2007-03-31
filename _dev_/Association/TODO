@@ -1,3 +1,6 @@
+==Compatibilite XHTML==
+A faire
+
 == Indenter le code ==
 Il serait plus propre d'homogeneiser l'indentation du code.
 Utiliser l'indentation de SPIP serait le mieux selon moi.
@@ -25,7 +28,7 @@ dans l'internationalisation. (euro, dollar, livre, etc).
 Il serait bon de verifier que le plugin gere les prefix de table spip.
 Notamment via l'utilisation de spip_query au lieu de mysql_query.
 Peut-etre faudrait-il egalement utiliser spip_fetch_array eu lieu de
-mysql_fetch_array.
+mysql_fetch_array. (Fait)
 
 ==Requetes SQL==
 Utiliser la fonction _q($variable) plutot que les addslashes
@@ -49,3 +52,4 @@ A changer
 
 == Gestion des droits==
 Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
+

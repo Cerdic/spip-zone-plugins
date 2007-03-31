@@ -4,7 +4,7 @@
 	Bernard Blazin - François de Montlivault - [plugandspip->http://www.plugandspip.com]<br>
 	[Voir la notice en ligne->http://www.plugandspip.com/spip.php?page=explications]
 	</auteur>
-	<version>0.3</version>
+	<version>0.5</version>
 	<etat>dev</etat>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	

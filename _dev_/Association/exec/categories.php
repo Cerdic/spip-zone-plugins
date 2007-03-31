@@ -36,10 +36,9 @@ echo '<td><strong>Montant</strong></td>';
 echo '<td><strong>Commentaires</strong></td>';
 echo '<td colspan=2 style="text-align:center;"><strong>Action</strong></td>';
 echo'  </tr>';
-$query = "SELECT * FROM spip_asso_categories ORDER by id_categorie" ;
-$val = spip_query (${query}) ;
+$query = spip_query ( "SELECT * FROM spip_asso_categories ORDER by id_categorie" ) ;
 $class="pair";
-while ($data = mysql_fetch_assoc($val))
+while ($data = spip_fetch_array($query))
 
 {
 echo '<tr> ';

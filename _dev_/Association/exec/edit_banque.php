@@ -18,6 +18,7 @@ debut_page(_T('Cat&eacute;gories de cotisation'), "", "");
 $url_asso = generer_url_ecrire('association');
 $url_banques = generer_url_ecrire('banques');
 $url_action_banques=generer_url_ecrire('action_banques');
+$url_retour = $_SERVER['HTTP_REFERER'];
 
 include_spip ('inc/navigation');
 
@@ -28,18 +29,18 @@ print association_date_du_jour();
 
 $action=$_GET['action'];
 $id=$_GET['id'];
-$sql = "SELECT * FROM spip_asso_banques WHERE id_banque='$id'";
-$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+
+$query = spip_query( "SELECT * FROM spip_asso_banques WHERE id_banque='$id' ");
 	
 echo '<fieldset><legend>Modifier un compte financier</legend>';
 echo '<table width="70%">';	
 echo '<form action="'.$url_action_banques.'" method="post">';	
 
-	while($data = mysql_fetch_assoc($req)) 
+	while($data = spip_fetch_array($query)) 
 {
 echo '<tr>';
 echo '<td>Num&eacute;ro :</td>';
-echo '<td><input name="id_banque" type="text" size="3" readonly="true" value="'.$data['id_banque'].'"></td></tr>';
+echo '<td><input name="id" type="text" size="3" readonly="true" value="'.$data['id_banque'].'"></td></tr>';
 echo '<tr>';
 echo '<td>Code :</td>';
 echo '<td><input name="code" type="text" value="'.$data['code'].'"></td></tr>';
@@ -62,7 +63,8 @@ echo '<input type="hidden" name="action" value="modifie"></td></tr>';
 }
 echo '<tr>';
 echo '<td></td>';
-echo '<td><input name="submit" type="submit" value="Modifier" class="fondo"></td></tr>';
+echo '<td><input name="url_retour" type="hidden" value="'.$url_retour.'">';
+echo '<input name="submit" type="submit" value="Modifier" class="fondo"></td></tr>';
 echo '</form>';
 echo '</table>';
 echo '</fieldset>';

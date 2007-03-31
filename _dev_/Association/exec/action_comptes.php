@@ -24,11 +24,7 @@ debut_cadre_relief(  "", false, "", $titre = _T('Op&eacute;rations comptables'))
 	debut_boite_info();
 
 print association_date_du_jour();
-
-if ( isset ($_POST['action'] )) 
-	{$action = $_POST['action']; }
-	else{$action =  $_GET['action']; }
-		
+	
 $id_compte=$_POST['id_compte'];
 $date=$_POST['date'];
 $imputation=$_POST['imputation'];
@@ -36,10 +32,10 @@ $recette=$_POST['recette'];
 $depense=$_POST['depense'];
 $justification=$_POST['justification'];
 $journal=$_POST['journal'];
-$url_retour=$_POST['url_retour'];
-
 $justification =addslashes($justification);
 
+$action = $_REQUEST['action'];
+$url_retour=$_POST['url_retour'];
 
 //---------------------------- 
 //AJOUT OPERATION
@@ -121,7 +117,7 @@ echo '<form action="'.$url_action_comptes.'"  method="post">';
 for ( $i=0 ; $i < $count ; $i++ )
 {	$id = $valide_tab[$i];
 	$query = spip_query("SELECT * FROM spip_asso_comptes where id_compte='$id'");
-	while($data = mysql_fetch_assoc($query)) 
+	while($data = spip_fetch_array($query)) 
 	{
 echo '<tr>';
 echo '<td><strong>'.association_datefr($data['date']).'</strong>';

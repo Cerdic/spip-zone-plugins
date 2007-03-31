@@ -10,6 +10,7 @@
 *  
 **/
 include_spip('inc/presentation');
+
 function exec_ajout_adherent() {
 global $connect_statut, $connect_toutes_rubriques;
 
@@ -51,9 +52,8 @@ echo '<tr> ';
 echo '<td>Cat&eacute;gorie :</td>';
 echo '<td><select name="categorie" type="text">';
 echo '<option value = ""> Choisissez une cat&eacute;gorie de cotisation</option>';
-$sql = "SELECT * FROM spip_asso_categories";
-$req = spip_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-while($categorie = mysql_fetch_assoc($req)) 
+$query = spip_query( "SELECT * FROM spip_asso_categories");
+while($categorie = spip_fetch_array($query)) 
 {
 echo '<option value = "'.$categorie["valeur"].'"> '.$categorie["libelle"].'</option>';
 }

@@ -28,15 +28,14 @@ print association_date_du_jour();
 	
 $id_don= $_GET['id'];
 
-$query = "SELECT * FROM spip_asso_dons INNER JOIN spip_asso_comptes ON id_don=id_journal WHERE id_don=$id_don AND imputation='don' ";
-$val = spip_query ($query) ; 
+$query = spip_query ("SELECT * FROM spip_asso_dons INNER JOIN spip_asso_comptes ON id_don=id_journal WHERE id_don=$id_don AND imputation='don' ");
 $i=0;
 
 echo '<form method="post" action="'.$url_action_dons.'">';
 echo '<fieldset><legend>Mettre &agrave; jour un don </legend>';
 echo '<table width="70%" class="noclass">'; 
 
-while ($data = mysql_fetch_assoc($val))
+while ($data = spip_fetch_array($query))
 {
 echo '<tr> ';
 echo '<td>Don n&deg; :</td>';
@@ -57,7 +56,7 @@ echo '<tr>';
 echo '<td>Mode de paiement :</td>';
 echo '<td><select name="journal" type="text">';
 $sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
-while ($banque = mysql_fetch_assoc($sql)) {
+while ($banque = spip_fetch_array($sql)) {
 echo '<option value="'.$banque['code'].'" ';
 	if ($data['journal']==$banque['code']) { echo ' selected="selected"'; }
 echo '>'.$banque['intitule'].'</option>';

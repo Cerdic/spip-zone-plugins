@@ -31,7 +31,6 @@ function exec_activites(){
 
 // FILTRES
 
-//Bricolage?
 	if ( isset($_REQUEST['mot']) ) {
 		$mot = $_REQUEST['mot']; 
 	} 
@@ -46,7 +45,7 @@ function exec_activites(){
 	global $table_prefix;
 	$query = spip_query ("SELECT date_format( date_debut, '%Y' )  AS annee FROM spip_evenements GROUP BY annee ORDER by annee");
 
-	while ($data = mysql_fetch_assoc($query)) {
+	while ($data = spip_fetch_array($query)) {
 		if ($data['annee']==$annee) {
 			echo ' <strong>'.$data['annee'].'</strong>';
 		}
@@ -62,7 +61,7 @@ function exec_activites(){
 	if ($mot=="%") { echo ' selected="selected"'; }
 	echo '> Toutes</option>';
 	$query = spip_query("SELECT * FROM spip_mots WHERE type='Evènements'");
-	while($data = mysql_fetch_assoc($query)) {
+	while($data = spip_fetch_array($query)) {
 		echo '<option value="'.$data["titre"].'"';
 		if ($mot==$data["titre"]) { echo ' selected="selected"'; }
 		echo '> '.$data["titre"].'</option>';
@@ -90,7 +89,7 @@ function exec_activites(){
 
 	$query = spip_query ("SELECT *, spip_evenements.id_evenement, spip_evenements.titre AS intitule, spip_mots.titre AS motact  FROM ".$table_prefix."_evenements LEFT JOIN spip_mots_evenements ON  spip_mots_evenements.id_evenement=spip_evenements.id_evenement LEFT JOIN spip_mots ON spip_mots_evenements.id_mot=spip_mots.id_mot WHERE date_format( date_debut, '%Y' ) = $annee AND (spip_mots.titre like '$mot' OR spip_mots.titre IS NULL) ORDER BY date_debut DESC LIMIT $debut,$max_par_page");
 
-	while ($data = mysql_fetch_assoc($query)) {
+	while ($data = spip_fetch_array($query)) {
 
 		$class= "pair";
 		$date = substr($data['date_debut'],0,10);
@@ -102,10 +101,10 @@ function exec_activites(){
 		echo '<td class ='.$class.' style="text-align:right;">'.$heure.'</td>';
 		echo '<td class ='.$class.'>'.$data['intitule'].'</td>';
 		echo '<td class ='.$class.'>'.$data['lieu'].'</td>';
-		$query_inscrit = spip_query("SELECT spip_asso_activites.id_activite, spip_asso_activites.nom AS nom_complet, spip_asso_activites.id_adherent, spip_asso_adherents.nom, spip_asso_adherents.prenom FROM spip_asso_activites LEFT JOIN spip_asso_adherents ON (spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent) WHERE spip_asso_activites.id_evenement=".$data['id_evenement']." ORDER BY spip_asso_adherents.nom, spip_asso_adherents.prenom");
+		$sql = spip_query("SELECT spip_asso_activites.id_activite, spip_asso_activites.nom AS nom_complet, spip_asso_activites.id_adherent, spip_asso_adherents.nom, spip_asso_adherents.prenom FROM spip_asso_activites LEFT JOIN spip_asso_adherents ON (spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent) WHERE spip_asso_activites.id_evenement=".$data['id_evenement']." ORDER BY spip_asso_adherents.nom, spip_asso_adherents.prenom");
 		echo '<td class ='.$class.'>';
-		while ($data_inscrit = mysql_fetch_assoc($query_inscrit)) {
-			echo '<a href="'.$url_edit_activites.'&id='.$data_inscrit['id_activite'].'">'.($data_inscrit['id_adherent'] > 0 ? $data_inscrit['nom'].' '.$data_inscrit['prenom'] : $data_inscrit['nom_complet'])."</a><br />";
+		while ($inscrits = spip_fetch_array($sql)) {
+			echo '<a href="'.$url_edit_activites.'&id='.$inscrits['id_activite'].'">'.($inscrits['id_adherent'] > 0 ? $inscrits['nom'].' '.$inscrits['prenom'] : $inscrits['nom_complet'])."</a><br />";
 		}
 		echo '</td>';
 		echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:activite_bouton_modifier_article').'"></a></td>';
