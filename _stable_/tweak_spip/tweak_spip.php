@@ -191,6 +191,7 @@ function tweak_parse_description($tweak, $tweak_input) {
 	$tweaks[$tweak]['description'] = $tweaks[$tweak]['description'];
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $tweaks[$tweak]['description'], -1, PREG_SPLIT_DELIM_CAPTURE);
 	$descrip = '';
+	$index = $tweaks[$tweak]['basic'];
 	for($i=0;$i<count($t);$i+=2) if (($var=trim($t[$i+1]))!='') {
 		// si le meta est present on remplace
 		if (isset($metas_vars[$var]))

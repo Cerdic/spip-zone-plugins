@@ -20,6 +20,10 @@ function tweak_styles_et_js() {
 	global $couleur_claire;
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
+div.cadre-padding *{
+/*	padding:0;
+	margin:0;*/
+}
 div.cadre-padding ul li {
 	list-style:none ;
 }
@@ -204,11 +208,10 @@ tweak_log("Début : exec_tweak_spip_admin()");
 
 	debut_cadre_trait_couleur('administration-24.gif','','',_T('tweak:tweaks_liste'));
 
-	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
-		. "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>";
-	echo "\n<table border='0' cellspacing='0' cellpadding='5' >",
-		"<tr><td class='serif'>",
-		_T('tweak:presente_tweaks'), $valider;
+	$valider = "\n<div style='text-align:$spip_lang_right'>"
+		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
+	echo _T('tweak:presente_tweaks'), $valider;
+	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='serif'>";
 	foreach($temp = $tweaks as $tweak) $categ[_T('tweak:'.$tweak['categorie'])] = $tweak['categorie']; ksort($categ);
 		
 	$js = ''; $marge = '0';
@@ -229,9 +232,11 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	echo "</td></tr></table>\n";
 	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
 
-	echo generer_url_post_ecrire('tweak_spip_admin');
+	echo generer_url_post_ecrire('tweak_spip_admin', '', 'submitform');
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 	foreach($temp = $tweaks as $tweak) echo "<input type='hidden' id='tweak_".$tweak['id']."' name='tweak_".$tweak['id']."' value='".($tweak['actif']?"1":"0")."' />";
+	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
+		. "<input type='submit' name='Valider2' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	echo $valider;
 
 # ce bouton est trop laid :-)

@@ -8,7 +8,8 @@ $temp_jQuery = $GLOBALS['spip_version_code']<1.92?
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tweak SPIP',
 	'help'	=> "{{Cette page est uniquement accessible aux responsables du site.}}"
-		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>",
+		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>"
+		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p>",
 	'titre_tests' => 'Tweak SPIP - Page de tests',
 	'actif' => 'Tweak actif',
 	'inactif' => 'Tweak inactif',
