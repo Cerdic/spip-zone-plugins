@@ -2,22 +2,24 @@
 
 function SelecteurGenerique_inserer_javascript($flux) {
 
+$js = '';
+
 if (_request('exec') == 'articles') {
 
-	$flux .= '<script type="text/javascript" src="'
+	$js .= '<script type="text/javascript" src="'
 		. find_in_path('javascript/iautocompleter.js')
 		. '"></script>'
 		. "\n";
 
-	$flux .= '<script type="text/javascript" src="'
+	$js .= '<script type="text/javascript" src="'
 		. find_in_path('javascript/interface.js')
 		. '"></script>'
 		. "\n";
 
 	$ac = parametre_url(generer_url_public('selecteur_generique'),
-		'id_article', _request('id_article'), '&');
+		'id_article', _request('id_article'), '\\x26');
 
-	$flux .= '<script type="text/javascript"><!--'
+	$js .= '<script type="text/javascript"><!--'
 		. <<<EOS
 
 var appliquer_selecteur_cherche_auteur = function() {
@@ -26,7 +28,7 @@ var appliquer_selecteur_cherche_auteur = function() {
 	var inp = jQuery('input[@name=cherche_auteur]', this);
 
 	// ne pas reappliquer si on vient seulement de charger les suggestions
-	if (inp[0].autoCFG) return;
+	if (!inp[0] || inp[0].autoCFG) return;
 
 	// attacher l'autocompleter
 	inp.Autocomplete({
@@ -38,15 +40,14 @@ var appliquer_selecteur_cherche_auteur = function() {
 		'minchars': 2,
 		'onSelect': function(li) {
 			if (li.id_auteur > 0) {
-				inp.attr("name", "xxx")
-				.parents("form")
+				inp.attr('name', 'nom_nouv_auteur')
+				.parents('form')
 				.append(
-					jQuery("<input type='hidden' "
-						+ "name='nouv_auteur' value='"+li.id_auteur+"' />"
+					jQuery("<input type='hidden' name='nouv_auteur' value='"+li.id_auteur+"' />"
 					)
 				)
-				.ajaxSubmit()
-				.trigger('submit'); // FF 1.5 demande ajaxSubmit() ??
+				.ajaxSubmit() // FF 1.5 exige ajaxSubmit(), mais FF 2 et Safari font un POST sans retour
+				.trigger('submit'); // celui-ci fait un POST avec retour sous FF2 et Safari :(
 			}
 		}
 	});
@@ -66,13 +67,13 @@ EOS
 		. "\n";
 
 
-	$flux .= '
+	$js .= '
 <link rel="stylesheet" type="text/css" href="'.find_in_path('jquery.autocomplete.css').'" />
 ';
 
 }
 
-	return $flux;
+	return $flux.$js;
 }
 
 ?>

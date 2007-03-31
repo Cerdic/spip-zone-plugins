@@ -21,7 +21,7 @@
 	SelecteurGenerique
 	</prefix>
 	<pipeline>
-		<nom>body_prive</nom>
+		<nom>header_prive</nom>
 		<action>inserer_javascript</action>
 		<inclure>inserer_javascript.php</inclure>
 	</pipeline>
