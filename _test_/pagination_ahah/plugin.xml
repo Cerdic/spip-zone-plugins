@@ -15,11 +15,14 @@
   Activer l'effet ahah aux boucles pagin&#233;es ou qui utilisent le crit&#232;re {fragment}
   </description>
 	<lien></lien> <!-- URI de documentation -->
-  <prefix>
-  fragahah
-  </prefix>
+  <prefix>fragahah</prefix>
+  <fonctions>fragahah_pipelines.php</fonctions>
   <pipeline>
   	<nom>insert_head</nom>
+  	<inclure>fragahah_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>affichage_final</nom>
   	<inclure>fragahah_pipelines.php</inclure>
   </pipeline>
 </plugin>
