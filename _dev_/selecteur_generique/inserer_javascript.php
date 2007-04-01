@@ -2,7 +2,8 @@
 
 function SelecteurGenerique_inserer_auteur() {
 
-	$ac = parametre_url(generer_url_public('selecteur_generique_auteur'),
+	$ac = parametre_url(generer_url_ecrire('selecteur_generique',
+		'quoi=auteur'),
 		'id_article', _request('id_article'), '\\x26');
 
 	return <<<EOS
@@ -62,7 +63,8 @@ function SelecteurGenerique_inserer_mot() {
 		$type = 'id_breve';
 	}
 
-	$ac = parametre_url(generer_url_public('selecteur_generique_mot'),
+	$ac = parametre_url(generer_url_ecrire('selecteur_generique',
+		'quoi=mot'),
 		$type, $id, '\\x26');
 
 
@@ -121,7 +123,8 @@ EOS;
 
 function SelecteurGenerique_inserer_rubrique() {
 
-	$ac = parametre_url(generer_url_public('selecteur_generique_rubrique'),
+	$ac = parametre_url(generer_url_ecrire('selecteur_generique',
+		'quoi=rubrique'),
 		'id_article', _request('id_article'), '\\x26');
 
 	return <<<EOS

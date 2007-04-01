@@ -10,9 +10,12 @@
 <ajaxresponse>
 
 [(#REM) Chercher les rubriques correspondant a la requete ]
-<BOUCLE_s(RUBRIQUES){statut==.}{titre LIKE (#ENV{value})%}{0,20}{par titre}>
+<BOUCLE_s(RUBRIQUES){statut==.}{titre LIKE (#ENV{value})%}{0,20}{!par date}>
 <item>
-	<text><![CDATA[<b>#TITRE</b>[ - (#DESCRIPTIF|textebrut|couper{20})]]]></text>
+	<text><![CDATA[
+		<BOUCLE_h(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})]
+		&gt; </BOUCLE_h>
+		<b>#TITRE</b>]]></text>
 	<value><![CDATA[#TITRE]]></value>
 	<id>#ID_RUBRIQUE</id>
 
@@ -20,9 +23,12 @@
 </BOUCLE_s>
 
 
-<BOUCLE_s1(RUBRIQUES){statut==.}{titre LIKE %(#ENV{value})%}{0,20}{par titre}>
+<BOUCLE_s1(RUBRIQUES){statut==.}{titre LIKE %(#ENV{value})%}{0,20}{!par date}>
 <item>
-	<text><![CDATA[<b>#TITRE</b>[ - (#DESCRIPTIF|textebrut|couper{20})]]]></text>
+	<text><![CDATA[
+		<BOUCLE_h1(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})]
+		&gt; </BOUCLE_h1>
+		<b>#TITRE</b>]]></text>
 	<value><![CDATA[#TITRE]]></value>
 	<id>#ID_RUBRIQUE</id>
 

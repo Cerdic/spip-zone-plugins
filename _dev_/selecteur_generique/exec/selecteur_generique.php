@@ -1,12 +1,29 @@
 <?php
 
-$f = _request('field');
-$q = _request('value');
 
-// tester la securite
-include_spip('inc/autoriser');
-if (! autoriser('modifier', 'article', _request('id_article')) )
-	die ('rien a faire la mon ami');
+function exec_selecteur_generique_dist() {
+
+#	$field = _request('field');
+#	$value = _request('value');
+#	$quoi = _request('quoi');
+
+	// tester la securite
+	include_spip('inc/autoriser');
+	# TODO....
+	# pour les rubriques penser aussi au fait qu'on n'a pas forcement le droit
+	# de deplacer vers n'importe quelle rubrique destination !
+
+	include_spip('public/assembler');
+	$xml = recuperer_fond('',
+		array(
+			'fond' => 'selecteurs/'._request('quoi'),
+			'value' => _request('value')
+		)
+	);
+
+	header('Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
+	echo $xml;
+}
 
 
 // critere {contenu_auteur_select} , cf. sedna
