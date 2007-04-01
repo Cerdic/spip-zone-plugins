@@ -1,0 +1,41 @@
+<fieldset>
+<legend>Confirmer votre inscription</legend>
+<table border="0" cellpadding="3" cellspacing="0">
+	<tr>
+          <td align="right"><strong>Nom :</strong></td>
+		<td><input name="nom" type="text" class="choix" size="30" maxlength="30" value="[(#ENV{nom})]" /></td>
+	</tr>
+	<tr>
+		<td align="right"><strong>Pr&eacute;nom :</strong></td>
+		<td><input name="prenom" type="text" class="choix" size="30" maxlength="30" value="[(#ENV{prenom})]"  /></td>
+	</tr>
+	<tr>
+          <td align="right"><strong>Email :</strong></td>
+		<td><input name="mail" type="text" class="choix" size="30" maxlength="40" value="[(#ENV{mail})]" /></td>
+	</tr>
+	<tr>
+          <td align="right"><strong>N&deg; et rue :</strong></td>
+		<td><input name="adresse" type="text" class="choix" size="70" maxlength="40" value="[(#ENV{adresse})]" /></td>
+	</tr>
+	<tr>
+          <td align="right"><strong>Code postal :</strong></td>
+		<td><input name="cp" type="text" class="choix" size="10" maxlength="40" value="[(#ENV{cp})]" /></td>
+	</tr>
+	<tr>
+          <td align="right"><strong>Ville :</strong></td>
+		<td><input name="ville" type="text" class="choix" size="40" maxlength="40" value="[(#ENV{ville})]" /></td>
+	</tr>
+	<tr>
+          <td align="right">N&deg; de t&eacute;l&eacute;phone:</td>
+		<td><input name="telephone" type="text" class="choix" size="30" maxlength="40" value="[(#ENV{telephone})]" /></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top">Commentaire:</td>
+		<td><textarea name="commentaire" class="choix" rows="10" cols="50">[(#ENV{message})]</textarea></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top">&nbsp;</td>
+		<td><input type="submit" name="valide" class="Bouton" value="Confirmer" /></td>
+	</tr>
+</table>
+</fieldset>
