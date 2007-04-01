@@ -24,6 +24,8 @@ var appliquer_selecteur_cherche_auteur = function() {
 		'helperClass': 'autocompleter',
 		'selectClass': 'selectAutocompleter',
 		'minchars': 2,
+		'mustMatch': true,
+		'cacheLength': 20,
 		'onSelect': function(li) {
 			if (li.id > 0) {
 				inp.attr('name', 'old_value')
@@ -91,6 +93,8 @@ var appliquer_selecteur_cherche_mot = function() {
 			'helperClass': 'autocompleter',
 			'selectClass': 'selectAutocompleter',
 			'minchars': 2,
+			'mustMatch': true,
+			'cacheLength': 20,
 			'onSelect': function(li) {
 				if (li.id > 0) {
 					jQuery(me)
@@ -146,6 +150,8 @@ var appliquer_selecteur_cherche_rubrique = function() {
 		'helperClass': 'autocompleter',
 		'selectClass': 'selectAutocompleter',
 		'minchars': 2,
+		'mustMatch': true,
+		'cacheLength': 20,
 		'onSelect': function(li) {
 			if (li.id > 0) {
 				inp
