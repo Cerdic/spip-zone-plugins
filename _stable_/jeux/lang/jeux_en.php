@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reponseFausse' => "You were incorrect!",
 'reponseNulle' => "You didn't answer this question!",
 'bonneReponse' => "The correct answer is:",
+'Correction' => "Correction:",
 
 'erreur_taille_grille'	=> "Error: invalid size",
 'erreur_syntaxe'	=> "Syntax error",

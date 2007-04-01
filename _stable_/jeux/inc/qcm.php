@@ -198,7 +198,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 //print_r($_POST);
   	 $reponse = $_POST[$nomVarSelect];
 	 if (!is_array($reponse)) $reponse=trim($reponse);
-	 $bonneReponse = false;
+	 $bonneReponse = false; $qrm_score = 0;
  	 if ($reponse) {
 		// les points de la reponse donnee...
 		$pointsR = 0;
@@ -226,9 +226,8 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 			$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
 			if (strlen($prec)) $codeHTML.="<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>";
 	
-			if ($bonneReponse)
-				$codeHTML .= '<div class="qcm_correction_juste">'._T('jeux:reponseJuste').'</div>';
-			 else $codeHTML .= '<div class="qcm_correction_faux">'._T('jeux:reponseFausse').'</div>';
+			$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
+				._T('jeux:reponse'.($bonneReponse?'Juste':'Fausse')).'</span></div>';
 
 		// question a reponses multiples
 		} else foreach($reponse as $r) {
@@ -243,10 +242,10 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 	
 			// on donne les points de la reponse quoiqu'il arrive
 			$qcm_score += $qcms[$indexQCM]['points'][$r];
+			$qrm_score += $qcms[$indexQCM]['points'][$r];
 				
-			if ($bonneReponse)
-				$codeHTML .= '<div class="qcm_correction_juste">'._T('jeux:reponseJuste').'</div>';
-			 else $codeHTML .= '<div class="qcm_correction_faux">'._T('jeux:reponseFausse').'</div>';
+			$codeHTML .= '<div class="qcm_reponse"><span class="qcm_correction_'.($bonneReponse?'juste':'faux').'">'
+				._T('jeux:reponse'.($bonneReponse?'Juste':'Fausse')).'</span></div>';
 
 			// les precisions eventuelles
 			$prec = $qcms[$indexQCM]['precisions'][$r];
@@ -256,22 +255,36 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 	// pas de reponse postee...
 	} else $codeHTML.='<div class="qcm_correction_null">'._T('jeux:reponseNulle').'</div>';
 
-	// on affiche la bonne reponse si la configuration l'autorise
-	// restriction : aucun effet sur les qrm
-	if (!$qrm && !$bonneReponse && jeux_config('solution')) {
-		$codeHTML.='<div class="qcm_reponse">'._T('jeux:bonneReponse').'&nbsp;';
-		if ($trou) $codeHTML.="'".join("' "._T('info_ou')."' ", $qcms[$indexQCM]['propositions'])."'";
-		else {
-			$temp=array();
-			foreach($qcms[$indexQCM]['bonnesreponses'] as $i=>$val) if ($qcms[$indexQCM]['bonnesreponses'][$i]==1) {
-				$prec = $qcms[$indexQCM]['precisions'][$i];
-				$temp[]=$qcms[$indexQCM]['propositions'][$i]
-					. (strlen($prec)?"<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>":'<br />');
+	// on affiche les bonnes reponses si la configuration l'autorise
+	if (jeux_config('solution')) {
+		if (!$qrm && !$bonneReponse) {
+		// on s'occupe d'abord des qcm et des trous
+			$codeHTML.='<div class="qcm_reponse">'._T('jeux:bonneReponse').'&nbsp;';
+			if ($trou) $codeHTML.="'".join("' "._T('info_ou')."' ", $qcms[$indexQCM]['propositions'])."'";
+			else {
+				$temp=array();
+				foreach($qcms[$indexQCM]['bonnesreponses'] as $i=>$val) if ($qcms[$indexQCM]['bonnesreponses'][$i]==1) {
+					$prec = $qcms[$indexQCM]['precisions'][$i];
+					$temp[] = $qcms[$indexQCM]['propositions'][$i]
+						. (strlen($prec)?"<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>":'<br />');
+				}
+				$codeHTML.=join(''._T('info_ou').' ', $temp);
 			}
-			$codeHTML.=join(''._T('info_ou').' ', $temp);
+			$codeHTML.='</div>';
+		} elseif($qrm && $qrm_score<>$qcms[$indexQCM]['maxscore']) {
+		// on s'occupe ensuite des qrm
+			$temp=array();
+			foreach($qcms[$indexQCM]['bonnesreponses'] as $i=>$val) {
+				if (!is_array($reponse) || !in_array($i, $reponse)) {
+					$prec = $qcms[$indexQCM]['precisions'][$i];
+					$temp[] = '<div class="qcm_reponse">&nbsp;&#8226;&nbsp;'
+						. qcm_les_points($qcms[$indexQCM]['propositions'][$i], $qcms[$indexQCM]['points'][$i]).'</div>'
+						. (strlen($prec)?"<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>":'<br />');
+				}
+			}
+			if (count($temp)) $codeHTML.='<div class="qcm_reponse"><span class="qcm_correction_juste">'._T('jeux:Correction').'</span></div>'.join('', $temp).'</div>';
 		}
-		$codeHTML.='</div>';
-	}
+	} // jeux_config('solution')
 
 	$codeHTML.='<br />';
      

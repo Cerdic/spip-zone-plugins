@@ -47,29 +47,25 @@
 }
 
 .qcm_correction_faux{ 
- font-size: 10;
- text-align:center;
  background-color: red;
  color: #FFEADE;
  font-weight: bold; 
- padding-right: 1px;
- padding-left: 1px;
- width:12em;
+ padding-right: 0.5em;
+ padding-left: 0.5em;
+ font-weight:normal;
 }
 
 .qcm_correction_juste{ 
- font-size: 10;
- text-align:center;
  background-color: green;
  color: #FFEADE;
  font-weight: bold;
- padding-right: 1px;
- padding-left: 1px;
- width: 11em;
+ padding-right: 0.5em;
+ padding-left: 0.5em;
+ font-weight:normal;
 }
 
 .qcm_correction_null{ 
- font-size: 10; 
+ font-size: 90%; 
  font-weight: bold;
 }
 
