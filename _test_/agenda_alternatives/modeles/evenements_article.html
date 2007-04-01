@@ -17,7 +17,7 @@
 		<B_agenda_passes>
 			<h3><em><:minicalalter:evenements_passes_article:></em></h3>
 			<ul>
-			<BOUCLE_agenda_passes(EVENEMENTS){age>=0}{par date}{id_article}{inverse}>
+			<BOUCLE_agenda_passes(EVENEMENTS){age_fin>=0}{par date}{id_article}{inverse}>
 			<li>[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF)]
 			[<div class="detail">(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})[ - (#LIEU)]</div>]
 			</li>

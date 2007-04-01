@@ -5,7 +5,7 @@
  	[Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net]
 _ &copy; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
-	<version>0.4</version>
+	<version>0.5</version>
 	<etat>test</etat>
 	<description>Permet l'utilisation des plugins Agenda & Widget Calendar dans le squelettes Alternatives, et donc la gestion des &eacute;v&egrave;nements.
 
@@ -17,7 +17,7 @@ _ 4. Une page 'evenements' qui liste les &eacute;v&egrave;nements (du jour/du mo
 _ 5. La liste des &eacute;v&egrave;nements associ&eacute;s au bas de chaque article</quote>
 
 Pour en savoir plus, lire le fichier {{lisezmoi.txt}}.
-_ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.1, v1.9.2 et Alternatives v1.9.1.2.
+_ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.1, v1.9.2, v1.9.3svn et Alternatives v1.9.1.1 ou  v1.9.1.2.
 </description>
 	<lien>bient&ocirc;t ?</lien> <!-- URI de documentation -->
 	<fonctions>minicalalter_fonctions.php</fonctions>

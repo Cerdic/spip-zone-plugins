@@ -5,6 +5,7 @@
 	Gestion des evenements pour Alternatives
 	Patrice Vanneufville
 	patrice!.!vanneufville!@!laposte!.!net
+	TODO : retirer le php de cette page !
 -->
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
@@ -115,7 +116,7 @@ if ($y && $m) if ($j){ ?>
 			<h3><:minicalalter:evenements_passes:></h3>
 			#ANCRE_PAGINATION
 			<table border="0" cellpadding="0" summary="<:icone_calendrier:>">
-				<BOUCLE_agenda_passes(EVENEMENTS){age>=0}{par date}{statut=publie}{inverse}{pagination}>
+				<BOUCLE_agenda_passes(EVENEMENTS){age_fin>=0}{par date}{statut=publie}{inverse}{pagination}>
 				<tr valign="middle">[<td>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|image_reduire{50,50})</td>]
 				<td>[<p class="surtitre">(#SURTITRE)</p>]
 				<h3><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></h3>

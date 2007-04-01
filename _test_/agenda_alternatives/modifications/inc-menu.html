@@ -1,11 +1,11 @@
-<!-- menu permanent de navigation - permanent navigation -->
+#CACHE{7200}
 <div id="navigation">
     <h2 class="structure"><:navigation:></h2>
 [(#REM) *********************************************************
 	Menu de navigation principal - liens statiques
 	Main navigation - static links 
     ************************************************************* ]
-<INCLURE{fond=inc/inc-menu-principal}>
+<INCLURE{fond=inc/inc-menu-principal}{lang}>
 
 [(#REM) *********************************************************
 	Menu rubriques DEPLIANT dynamique
@@ -16,6 +16,8 @@
 <!-- Debut Patrice -->
 	[(#MODELE{rubrique_calendrier}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}}{lang}{id_rubrique})]
 <!-- Fin Patrice -->
+<BOUCLE_RubExclues_sect(RUBRIQUES){titre_mot=exclu_menu_rub}{doublons}></BOUCLE_RubExclues_sect>
+<BOUCLE_ArtExclus(ARTICLES){titre_mot=exclu_menu_rub}{doublons}></BOUCLE_ArtExclus>
 <BOUCLE_rub_menu(RUBRIQUES){id_rubrique}>
 <BOUCLE_filles(RUBRIQUES){id_parent}{doublons filles}></BOUCLE_filles>
 [(#REM) les rubriques filles de la rubrique en cours sont mémorisées dans {doublons filles} ]
@@ -23,26 +25,24 @@
    <BOUCLE_hierarchie_courante(HIERARCHIE){id_rubrique} {tout}>
         <BOUCLE_parents(RUBRIQUES){meme_parent} {doublons parents} ></BOUCLE_parents>
    </BOUCLE_hierarchie_courante>
-[(#REM) L'ensemble des rubriques contenues dans {doublons filles} et {doublons parents} représente
-l'ensembles des rubriques à afficher  
 
-		 Toutes les rubriques qui ne doivent pas être affichées sont exclues dans la  boucle suivante
- qui liste toutes les rubriques du site - {doublons filles} et {doublons parents} le resultat est stocké dans {doublons exclus} ]
+[(#REM) L'ensemble des rubriques contenues dans {doublons filles} et {doublons parents} représente l'ensembles des rubriques à afficher.
+Toutes les rubriques qui ne doivent pas être affichées sont exclues dans la  boucle suivante qui liste toutes les rubriques du site - {doublons filles} et {doublons parents} le resultat est stocké dans {doublons exclus} ]
+
 <BOUCLE_tout(RUBRIQUES){tout}{doublons parents}{doublons filles}{doublons exclus}></BOUCLE_tout>
+
 
 [(#REM) boucle principale d'affichage pour squelettes rubriques, articles, brèves...
 On limite l'affichage du plan aux seules rubriques utiles, les autres sont exclues par {doublons exclus} ]
 	<h3 class="structure"><:rubriques:></h3>
 	<ul>
-	<BOUCLE_RubExclues_sect(RUBRIQUES){titre_mot=agenda}{doublons}></BOUCLE_RubExclues_sect>
-
-	<BOUCLE_secteurs2(RUBRIQUES){racine}{lang}{par num titre}{doublons} >
+		<BOUCLE_secteurs2(RUBRIQUES){racine}{lang}{par num titre} {par titre}{doublons} >
 		<li>
 				<a class="lien[(#EXPOSER)]" href="#URL_RUBRIQUE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
 		<B_art_secteur>
 		[(#REM) debut BOUCLE art_secteur pour afficher dans les articles des rubriques racine (secteur) ]
 			<ul>
-		<BOUCLE_art_secteur(ARTICLES){id_rubrique}{par num titre}{lang}>
+		<BOUCLE_art_secteur(ARTICLES){id_rubrique}{par num titre} {par titre}{lang}{doublons}>
 				<li>
 					<a class="lien[(#EXPOSER)] article" href="#URL_ARTICLE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
 				</li>
@@ -51,7 +51,7 @@ On limite l'affichage du plan aux seules rubriques utiles, les autres sont exclu
 		</B_art_secteur>[(#REM) fin BOUCLE art_secteur  ]
 		<B_sousrub2>
 			<ul>
-		<BOUCLE_sousrub2(RUBRIQUES){id_parent}{lang}{par num titre}{doublons exclus}>
+		<BOUCLE_sousrub2(RUBRIQUES){id_parent}{lang}{par num titre} {par titre}{doublons exclus}{doublons}>
 				<li>
 					<a class="lien[(#EXPOSER)]" href="#URL_RUBRIQUE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
 		<BOUCLE_sousousrub2(boucle_sousrub2)></BOUCLE_sousousrub2>
@@ -71,16 +71,16 @@ Ici, on affiche 2 niveaux de rubriques a partir de la racine pour la langue du c
 Pour les sites multilingues, on n'affiche pas les autres langues; 
 si on veut afficher uniquement le premier niveau (secteur) des autres langues, on efface lang dans BOUCLE_sommaire). ]
 
-<BOUCLE_RubExclues_som(RUBRIQUES){titre_mot=agenda}{doublons}></BOUCLE_RubExclues_som>
+
 <B_sommaire>
 	<h3 class="structure"><:rubriques:></h3>
 	<ul>
-<BOUCLE_sommaire(RUBRIQUES){racine}{lang}{par num titre} {doublons}>
+<BOUCLE_sommaire(RUBRIQUES){racine}{lang}{par num titre} {par titre} {doublons}>
 		<li>
 			<a class="lien[(#EXPOSER)]" href="#URL_RUBRIQUE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
 <B_art_sommaire><!-- debut BOUCLE art_somm pour afficher des articles dans les rubriques racine (secteur) -->
 			<ul>
-		<BOUCLE_art_sommaire(ARTICLES){id_rubrique}{par num titre}{lang}>
+		<BOUCLE_art_sommaire(ARTICLES){id_rubrique}{par num titre} {par titre}{lang}{doublons}>
 				<li>
 					<a class="lien[(#EXPOSER)] article" href="#URL_ARTICLE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
 				</li>
@@ -89,7 +89,7 @@ si on veut afficher uniquement le premier niveau (secteur) des autres langues, o
 </B_art_sommaire>
 		<B_sousrub_sommaire>[(#REM) pour afficher dans le menu 2 niveaux de rubriques ]
 			<ul>
-		<BOUCLE_sousrub_sommaire(RUBRIQUES){id_parent}{par num titre}{lang}>
+		<BOUCLE_sousrub_sommaire(RUBRIQUES){id_parent}{par num titre} {par titre}{lang}{doublons}>
 				<li>
 					<a class="lien[(#EXPOSER)]" href="#URL_RUBRIQUE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
 				</li>
@@ -104,21 +104,21 @@ si on veut afficher uniquement le premier niveau (secteur) des autres langues, o
 </B_sommaire>
 
 <//B_rub_menu>
-</div>[(#REM) fin menu ]
 
 [(#REM) boucle d'affichage d'un agenda ou calendrier d'evenements. 
 Pour s'afficher dans ce menu, une rubrique doit se voir attribuer le mot-cle "agenda". Pour s'afficher dans l'agenda, les articles doivent, en plus d'une date de publication, se voir attribuer une "Date de publication anterieure" qui constituera la date de l'evenement. ]
-<BOUCLE_agenda(RUBRIQUES){racine}{lang}{titre_mot=agenda}{par num titre}>
+[(#REM) boucle d'affichage d'un agenda ou calendrier d'evenements. 
+Pour s'afficher dans ce menu, un article doit se voir attribuer le mot-cle "Agenda". Pour s'afficher dans l'agenda, les articles doivent, en plus du mot-cle, se voir attribuer une "Date de publication anterieure" qui constituera la date de l'evenement. ]
+
 <B_art_agenda>
 <div class="menu" id="menu-agenda">
 	<h3 class="structure"><:icone_agenda:></h3>
-
 	<ul>
 		<li>
-			<a class="lien[(#EXPOSER)]" href="#URL_PAGE{agenda,id_rubrique=#ID_RUBRIQUE}" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+			<a class="lien" href="#URL_PAGE{agenda}" title="<:icone_agenda:>"><:icone_agenda:></a>
 			<ul>
-		<BOUCLE_art_agenda(ARTICLES){branche}{par date_redac}{age_redac < 1}{0,5}{lang}>
-				<li>[<span>(#DATE_REDAC|affdate)</span>]
+		<BOUCLE_art_agenda(ARTICLES){titre_mot=Agenda}{par date_redac}{age_redac < 1}{0,5}{lang}>
+				<li>[<span>(#DATE_REDAC|affdate) [- (#DATE_REDAC|heures|!={0}|?{[(#DATE_REDAC|heures):][(#DATE_REDAC|minutes)],''})]</span>]
 					<a class="lien[(#EXPOSER)] article" href="#URL_ARTICLE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
 
 				</li>
@@ -130,7 +130,7 @@ Pour s'afficher dans ce menu, une rubrique doit se voir attribuer le mot-cle "ag
 	</ul>
 </div>
 </B_art_agenda>
-</BOUCLE_agenda>
 
+</div>[(#REM) fin menu ]
 
 </div>[(#REM) navigation ]

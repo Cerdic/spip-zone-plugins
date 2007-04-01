@@ -1,18 +1,32 @@
 	<div class="menu" id="menu-principal">
 		<ul>
 			<li id="menu-principal-accueil"><a href="#URL_SITE_SPIP" title="<:accueil_site:> : #NOM_SITE_SPIP"><:accueil_site:></a></li>
+
+			<BOUCLE_article(ARTICLES){titre_mot=inclu_menu_principal}>
+			[<li class="menu-principal-rubriques"><a href="[(#URL_SITE_SPIP)/][(#URL_ARTICLE)]">(#TITRE|supprimer_numero)</a></li>]
+			</BOUCLE_article>
+			<BOUCLE_rubrique(RUBRIQUES){titre_mot=inclu_menu_principal}>
+			[<li class="menu-principal-rubriques"><a href="[(#URL_SITE_SPIP)/][(#URL_RUBRIQUE)]">(#TITRE|supprimer_numero)</a></li>]
+			</BOUCLE_rubrique>
+
+			<B_contact><li id="menu-principal-contact"><a href="<BOUCLE_contact(AUTEURS) {tout}{0,1}>[(#URL_SITE_SPIP)/][(#URL_AUTEUR)]</BOUCLE_contact>" title="<:info_contact:>"><:info_contact:></a></li></B_contact>
+
 <!-- Debut Patrice -->
 			<B_agenda><li id="menu-principal-agenda"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda>
 <!-- Fin Patrice -->
-			<B_contact><li id="menu-principal-contact"><a href="<BOUCLE_contact(AUTEURS) {id_auteur=1}>[(#URL_SITE_SPIP)/][(#URL_AUTEUR)]</BOUCLE_contact>" title="<:info_contact:>"><:info_contact:></a></li></B_contact>
+
 			<li id="menu-principal-plan"><a href="#URL_PAGE{plan}" title="<:plan_site:>"><:plan_site:></a></li>
-			<BOUCLE_site(SITES) {0,1}><li id="menu-principal-sites"><a href="#URL_PAGE{site}" title="<:nouveautes_web:>"><:sites_web:></a></li></BOUCLE_site>
+			<BOUCLE_site(SITES) {0,1}>
+
+			<li id="menu-principal-sites"><a href="#URL_PAGE{site}" title="<:nouveautes_web:>"><:sites_web:></a></li></BOUCLE_site>
+
 			<li id="menu-principal-resume"><a href="#URL_PAGE{resume}" title="<:en_resume:>"><:en_resume:></a></li>
-			[<li id="menu-principal-recherche">
+			
 	[(#REM) *********************************************************
 	Formulaire de recherche
 	Search form 
     ************************************************************* ]
+			[<li id="menu-principal-recherche">
 			<div class="menu" id="menu-recherche">
 				<h3 class="structure"><:info_rechercher:></h3>
 					<ul>
