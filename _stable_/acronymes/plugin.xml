@@ -49,4 +49,5 @@ _ &copy; 2006 - Licence GPL
 		<action>config</action>
 		<inclure>acronymes_config.php</inclure>
 	</pipeline>
+	<necessite id="forms" version="[0.301;]" />
 </plugin>
