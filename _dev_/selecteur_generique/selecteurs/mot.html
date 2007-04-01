@@ -25,12 +25,24 @@
 </item>
 </BOUCLE_s>
 
-	[(#REM) Vraiment on n'a rien trouve ]
+
+	<BOUCLE_s1(MOTS){titre LIKE %(#ENV{value})%}{id_groupe?}{0,20}{par titre}{doublons}>
 	<item>
-	<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
-	<value><![CDATA[#ENV*{value}]]></value>
-	<id>0</id>
+		<text><![CDATA[<b>#TITRE</b>[ - (#DESCRIPTIF|textebrut|couper{20})]]]></text>
+		<value><![CDATA[#TITRE]]></value>
+		<id>#ID_MOT</id>
 	</item>
+	</BOUCLE_s1>
+
+
+		[(#REM) Vraiment on n'a rien trouve ]
+		<item>
+		<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
+		<value><![CDATA[#ENV*{value}]]></value>
+		<id>0</id>
+		</item>
+
+	<//B_s1>
 
 <//B_s>
 
