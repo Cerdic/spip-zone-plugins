@@ -4,7 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-	<title>[(#TITRE|textebrut)] - [[(#NOM_SITE_SPIP|textebrut)]]</title>
+	<title>[(#TITRE|supprimer_numero|textebrut)] - [[(#NOM_SITE_SPIP|textebrut)]]</title>
 		<INCLURE{fond=inc/inc-meta}{lang}{id_article}>
 		<INCLURE{fond=styles}{lang}>
 	
@@ -26,8 +26,11 @@
 
     <div id="bloc-contenu">
       <div class="article-info-rubrique">
-        <h5><B_rubriques_chemin>
-            <BOUCLE_rubriques_chemin(HIERARCHIE){id_article}{" <b class='separateur'>&gt;</b> "}>
+        <h5>
+        <a href="#URL_SITE_SPIP" title="<:accueil_site:> : #NOM_SITE_SPIP"><:accueil_site:></a>
+        <B_rubriques_chemin>
+            <BOUCLE_rubriques_chemin(HIERARCHIE){id_article}>
+              <b class='separateur'>&gt;</b> 
               <a href="#URL_SITE_SPIP/#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{60})]</a>
             </BOUCLE_rubriques_chemin>
         </h5>
@@ -107,7 +110,7 @@
 <!-- Debut Patrice -->
 	[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})]
 <!-- Fin Patrice -->
-				
+
 		<!-- Derniers articles des auteurs de l'article -->
 		<B_auteurs>
 			<div class="ps">
