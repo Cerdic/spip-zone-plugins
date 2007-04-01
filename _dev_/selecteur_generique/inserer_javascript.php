@@ -146,14 +146,18 @@ var appliquer_selecteur_cherche_rubrique = function() {
 		'onSelect': function(li) {
 			if (li.id > 0) {
 				inp
+				.attr('original', inp.attr('value'))
 				.parents('form')
 				.find('input[@name=id_parent]')
 					. attr('value', li.id)
 				.end();
+			} else {
+				inp.attr('value', inp.attr('original'));
 			}
 		}
 	})
 	.attr('disabled', false)
+	.attr('original', inp.attr('value'))
 	.bind('focus', function() {
 		this.select();
 	});
