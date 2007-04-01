@@ -15,6 +15,11 @@ $img_cacher = '<img name="montrer2" src="'.
 		find_in_path('cacher.png').
 		'" style="vertical-align:middle" alt="<:basupp:cacher_barre:>" />';
 $img_reload = find_in_path('reload_page.png');
+$img_reload_new = find_in_path('reload_page_new.png');
+$page_modifie = "#ENV{use_cache}";
+if($page_modifie){
+$img_reload = $img_reload_new;
+}
 $img_logout = find_in_path('exit.png');
 
 // Masquer entierement les boutons quand on s'est deconnecte sans avoir detruit le cookie.
@@ -177,8 +182,8 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 	</a>
 
 	[(#REM) Calcul et recalcul de la page en cours ]
-	<a href='[(#SELF|parametre_url{var_mode,#ENV{calcul}})]'<?php echo $cacher_le_bouton['calculer'];?> title="<:admin_recalculer:>">
-		&nbsp;<img style="vertical-align:middle" src="<?php echo($img_reload); ?>" alt="<:admin_recalculer:>[(#ENV{use_cache})]" />
+	<a href='[(#SELF|parametre_url{var_mode,#ENV{calcul}})]'<?php echo $cacher_le_bouton['calculer'];?> title="<:admin_recalculer:> [(#ENV{use_cache}|?{(<:basupp:calcul_necessaire:>),''})]">
+		&nbsp;<img style="vertical-align:middle" src="<?php echo($img_reload); ?>" alt="<:admin_recalculer:>" />
 	</a>
 
 	[(#REM) Debogueur de squelettes ]

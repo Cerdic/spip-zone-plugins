@@ -13,8 +13,8 @@ Pour que la barre soit translucide, décommenter les deux lignes suivantes
 et choisir le taux de translucidite (de 0 a 1).
 */
 
-//$GLOBALS['style_barre'] = "translucide";
-//$GLOBALS['translucidite'] = "0.6";
+$GLOBALS['style_barre'] = "translucide";
+$GLOBALS['translucidite'] = "0.6";
 
 
 /*
@@ -26,12 +26,12 @@ afficher ou non un bouton. Par exemple, si l'on veut que les boutons pour
 editer et modifier une rubrique n'apparaissent pas dans une rubrique
 particuliere (par exemple, la rubrique 100), il suffit d'utiliser la syntaxe
 suivante :
-
+*/
 if($GLOBALS['id_rubrique']=='100'){
 	$cacher_le_bouton["editer_rubrique"]=" style='display:none !important'";
 	$cacher_le_bouton["modifier_rubrique"]=" style='display:none !important'";
 }
-
+/*
 Par defaut, tous les boutons sont affiches.
 */
 
