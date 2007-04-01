@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Des jeux dans vos articles</nom>
 	<etat>test</etat>
-	<version>0.4 pour Spip 1.9 minimum.</version>
+	<version>0.5 pour Spip 1.9 minimum.</version>
 	<icon>img/jeux-48.png</icon>
 	<auteur>
 [Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net], novembre 2006
@@ -28,7 +28,7 @@ Un exemple :
         Un e-responsable
 </jeux></code></quote>
 
-Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}} et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
+Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
 
 _ Si vous avez une version de Spip inf&#233;rieure ou &#233;gale &#224; {{1.9.1}}, certains jeux n&#233;cessiteront l'activation du plugin [jQuery->http://files.spip.org/spip-zone/jqueryplugin.zip].
 _ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&#233;es sur votre server.
