@@ -10,32 +10,32 @@ Dans le squelette, quatre fichiers à modifier :
 	themes/alternatives/inc/inc-menu-principal.html
 
 ----------------------------------------------------------------------
-Pour sommaire.html, placer le code : 
+1. Pour sommaire.html, placer le code : 
 	[(#MODELE{encart_agenda}{lang}{self=#SELF})] 
 
 	après la ligne : 
 	<INCLURE{fond=inc/inc-annonces}{lang}>
 
-Pour inc/inc-menu-principal.html, placer le code : 
+2. Pour inc/inc-menu-principal.html, placer le code : 
 	<B_agenda><li id="menu-principal-agenda"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda>
 	
 	après la ligne qui se termine par : 
 	<:accueil_site:></a></li>
 
-Pour inc/inc-menu.html, placer le code : 
+3. Pour inc/inc-menu.html, placer le code : 
 	[(#MODELE{rubrique_calendrier}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}}{lang}{id_rubrique})]
 	
 	après la ligne : 
 	<div class="menu" id="menu-rubriques">
 
-Pour article.html, placer le code : 
+4. Pour article.html, placer le code : 
 	[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})] 
 	
 	après la ligne  : 
 	<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
 	
 ----------------------------------------------------------------------
-Pour vous simplifer la vie, les fichiers modifiés ainsi modifiés ont été placés dans : 
+Pour vous simplifer la vie, les fichiers originaux ainsi modifiés ont été placés dans : 
 	plugins/agenda_alternatives/modifications
 
 Il suffit donc pour vous de remplacer les 4 fichiers originaux dans :
