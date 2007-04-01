@@ -16,7 +16,7 @@ _ 3. Un bouton 'Agenda' suppl&eacute;mentaire en haut, menant &agrave; :
 _ 4. Une page 'evenements' qui liste les &eacute;v&egrave;nements (du jour/du mois, prochains, pass&eacute;s)
 _ 5. La liste des &eacute;v&egrave;nements associ&eacute;s au bas de chaque article</quote>
 
-Pour en savoir plus, lire le fichier {{lisezmoi.txt}}.
+Pour en savoir plus, lire le fichier {{plugins/agenda_alternatives/lisezmoi.txt}}.
 _ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.1, v1.9.2, v1.9.3svn et Alternatives v1.9.1.1 ou  v1.9.1.2.
 </description>
 	<lien>bient&ocirc;t ?</lien> <!-- URI de documentation -->
