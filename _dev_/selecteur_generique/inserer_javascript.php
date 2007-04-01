@@ -188,7 +188,8 @@ function SelecteurGenerique_inserer_javascript($flux) {
 		$js .= SelecteurGenerique_inserer_mot();
 	}
 
-	if (_request('exec') == 'articles_edit') {
+	if (_request('exec') == 'articles_edit'
+	OR _request('exec') == 'sites_edit') {
 		$js .= SelecteurGenerique_inserer_rubrique();
 	}
 
