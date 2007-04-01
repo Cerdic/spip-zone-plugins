@@ -136,7 +136,6 @@ var appliquer_selecteur_cherche_rubrique = function() {
 
 	// attacher l'autocompleter
 	inp
-	.attr('disabled', false)
 	.Autocomplete({
 		'source': '$ac',
 		'delay': 300,
@@ -153,6 +152,10 @@ var appliquer_selecteur_cherche_rubrique = function() {
 				.end();
 			}
 		}
+	})
+	.attr('disabled', false)
+	.bind('focus', function() {
+		this.select();
 	});
 }
 
