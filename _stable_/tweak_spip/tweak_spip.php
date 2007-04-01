@@ -220,8 +220,10 @@ function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); r
 
 // lance la fonction d'installation de chaque tweak actif, si elle existe.
 function tweak_installe_tweaks() {
-	global $tweaks; 
+	global $tweaks;
 	foreach($temp = $tweaks as $tweak) if ($tweak['actif']) {
+		include_spip($temp='tweaks/'.$tweak['id']);
+		include_spip($temp.'_fonctions');
 		if (function_exists($f = $tweak['id'].'_installe')) {
 			$f();
 tweak_log(" -- $f() : installé !");
