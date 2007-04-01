@@ -1,4 +1,4 @@
-div#header {height:80px;line-height:80px;margin:0;padding-left:10px;}
+div#top {height:80px;line-height:80px;margin:0;padding-left:10px;}
 div#conteneur{float:right;width: 100%;margin-left: -400px}
 div#contenu{margin-left: 400px}
 div#navigation{float:right;width:200px}
