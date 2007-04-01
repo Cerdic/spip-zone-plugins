@@ -6,7 +6,7 @@ ________________________________________________________
 --------------------------------------------------------
 
 
-#CADI
+#PANIER
 - Formulaire qui affiche en gros 
 <div>
 <span>Vous avez #ENV{nombre_produits} produits dans votre cadi

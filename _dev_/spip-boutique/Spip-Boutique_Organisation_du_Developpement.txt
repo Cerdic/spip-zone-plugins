@@ -7,12 +7,12 @@
 ***********************
 Voici ce que nous devrions pouvoir faire à la sortie de Spip-Boutique 1.0:
 Coté visiteur :
-	Création de cadi par n'importe quel visiteur,
+	Création de panier par n'importe quel visiteur,
 	N'importe quel visiteur peut s'enregistrer en tant que client,
-	Enregistrement du cadis en cours (nécessaire de s'enregistrer sur le système),
-	Valider un/plusieurs cadis,
-	suivre l'état de notre cadis (en préparation, en attente du paiement, en attente de l'envoi du colis, envoyé),
-	supprimer un/plusieurs cadis.
+	Enregistrement du paniers en cours (nécessaire de s'enregistrer sur le système),
+	Valider un/plusieurs paniers,
+	suivre l'état de notre paniers (en préparation, en attente du paiement, en attente de l'envoi du colis, envoyé),
+	supprimer un/plusieurs paniers.
 	Poster un commentaire dans le forum d'un produit (cfg: moderation : non, a posteriori, a priori; permission : visiteur, clients)
 
 Coté Rédacteur :
@@ -37,15 +37,13 @@ Coté Administrateur restreint :
 	lier une catégorie à une rubrique et inversement si il est administrateur de la catégories ET de la rubrique (cfg : oui, non), --> intérêt à estimer ...
 ...
 2)Time line
-        V0.1.x création des tables utilisée par le plugin (fait à 45%)
+	V0.1.x création des tables utilisée par le plugin (fait à 75%)
         V0.2.x Création du système d'ajout / suppression / édition de catégories (fait à 0%)
         V0.3.x Création du système d'ajout / suppression / édition de produits (fait à 0%)
-        V0.4.x Sécurisation des droits d'édition par rapport aut user spip
-        V0.5.x Création du système de visualisation des cadis et client
-        V0.6.x Création de la balise #CADI
-        V0.7.x Création de la balise #PROMOTION
-	
-	
+        V0.4.x Sécurisation des droits d'édition par rapport aux users spip
+        V0.5.x Création du système de visualisation des paniers et clients
+        V0.6.x Création de la balise #PANIER. Critères dans 4.4.2
+        V0.7.x Création de la balise #PROMOTION. Critères dans 4.4.2
 
 3)Méthode de travaille
 4)Règles de commit ?
