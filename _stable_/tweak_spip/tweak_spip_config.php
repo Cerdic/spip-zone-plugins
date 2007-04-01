@@ -58,7 +58,7 @@ add_tweak( array(
 	'id'	=> 'supprimer_numero',
 	'code:options' 	=> "\$GLOBALS['table_des_traitements']['TITRE'][]= 'typo(supprimer_numero(%s))';
 \$GLOBALS['table_des_traitements']['NOM'][]='typo(supprimer_numero(%s))';",
-	'categorie'	=> 'squel',
+	'categorie'	=> 'public',
 ));
 
 add_tweak( array(
@@ -70,13 +70,13 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'forcer_langue',
 	'code:options'	=> "\$GLOBALS['forcer_lang']=true;", 
-	'categorie'	=> 'squel',
+	'categorie'	=> 'public',
 ));
 
 add_tweak( array(
 	'id'	=> 'insert_head',
 	'code:options'	=> "\$spip_pipeline['affichage_final'] .= '|f_insert_head';", 
-	'categorie'	=> 'squel',
+	'categorie'	=> 'spip',
 	'version-min'	=> 1.92,
 ));
 
@@ -87,7 +87,7 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'suite_introduction',
 	'code:options' 	=> "define('_INTRODUCTION_SUITE', $var);",
-	'categorie'	=> 'squel',
+	'categorie'	=> 'spip',
 	'version-min'	=> 1.93,
 ));
 
@@ -152,7 +152,7 @@ add_tweak( array (
 	'id' => 'xml',
 	'code:options' => "\$xhtml = 'sax';",
 	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
-	'categorie' =>'squel',
+	'categorie' =>'public',
 	'version-min' => '1.92',
 ));
 
@@ -160,7 +160,7 @@ add_tweak( array (
 	'id' => 'f_jQuery',
 	'code:options' => "\$spip_pipeline['insert_head'] = str_replace('|f_jQuery', '', \$spip_pipeline['insert_head']);",
 	'auteur' => 'Fil',
-	'categorie' =>'squel',
+	'categorie' =>'public',
 	'version-min' => '1.92',
 ));
 
@@ -171,7 +171,7 @@ add_tweak( array (
 add_tweak( array(
 	'id'	=> 'style_p',
 	'code:options' 	=> "\$GLOBALS['class_spip']=strlen(\$foo=$var)?' class=\"'.\$foo.'\"':'';",
-	'categorie'	=> 'squel',
+	'categorie'	=> 'public',
 	'version-min'	=> 1.93,
 ));
 
@@ -182,19 +182,19 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'verstexte',
 	'auteur' 	=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
-	'categorie'	=> 'squel',
+	'categorie'	=> 'spip',
 ));
 
 add_tweak( array(
 	'id'	=> 'orientation',
 	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
-	'categorie'	=> 'squel',
+	'categorie'	=> 'spip',
 ));
 
 add_tweak( array(
 	'id'	=> 'decoupe',
 	'code:options' 	=> '$table_des_traitements["TEXTE"][]= "decouper_en_pages(propre(%s))";',
-	'categorie'	=> 'squel',
+	'categorie'	=> 'typo-racc',
 ));
 
 //-----------------------------------------------------------------------------//
@@ -205,13 +205,13 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'desactiver_flash',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
-	'categorie'		=> 'squel',
+	'categorie'		=> 'public',
 	'pipeline:affichage_final' => 'InhibeFlash_affichage_final',
 ));
 
 add_tweak( array (
 	'id' => 'target_blank',
-	'categorie' =>'squel',
+	'categorie' =>'public',
 	// le fichier target_blank.js est automatiquement insere si le tweak est actif
 ));
 
@@ -221,28 +221,28 @@ add_tweak( array (
 
 add_tweak( array(
 	'id'	=> 'toutmulti',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-racc',
 	'pipeline:pre_typo'	=> 'ToutMulti_pre_typo',
 ));
 
 add_tweak( array(
 	'id'	=> 'pucesli',
 	'auteur' 		=> '[J&eacute;r&ocirc;me Combaz->http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz]',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-corr',
 	'pipeline:pre_typo' => 'pucesli_pre_typo',
 ));	
 
 add_tweak( array(
 	'id'	=> 'decoration',
 	'auteur' 		=> '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-racc',
 	'pipeline:pre_typo' => 'decoration_pre_typo',
 ));
 
 add_tweak( array(
 	'id'	=> 'couleurs',
 	'auteur' 		=> '[Aur&eacute;lien PIERARD->mailto:aurelien.pierard(a)dsaf.pm.gouv.fr]',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-racc',
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
 ));
 
@@ -250,35 +250,35 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'typo_exposants',
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-corr',
 	'pipeline:post_typo'	=> 'typo_exposants',
 ));
 
 add_tweak( array(
 	'id'	=> 'guillemets',
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-corr',
 	'pipeline:post_typo'	=> 'typo_guillemets',
 ));
 
 add_tweak( array(
 	'id'	=> 'filets_sep',
 	'auteur' 		=> 'FredoMkb',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-racc',
 	'pipeline:pre_typo'	=> 'filets_sep',
 ));
 
 add_tweak( array(
 	'id'	=> 'smileys',
 	'auteur' 		=> 'Sylvain',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-corr',
 	'pipeline:pre_typo'	=> 'tweak_smileys_pre_typo',
 ));
 
 add_tweak( array(
 	'id'	=> 'chatons',
 	'auteur' 		=> 'BoOz (booz.bloog@laposte.net)',
-	'categorie'		=> 'typo',
+	'categorie'		=> 'typo-racc',
 	'pipeline:pre_typo'	=> 'chatons_pre_typo',
 ));
 

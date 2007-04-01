@@ -211,7 +211,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
 	echo _T('tweak:presente_tweaks'), $valider;
-	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='serif'>";
+	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
 	foreach($temp = $tweaks as $tweak) $categ[_T('tweak:'.$tweak['categorie'])] = $tweak['categorie']; ksort($categ);
 		
 	$js = ''; $marge = '0';
@@ -226,8 +226,8 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		$ss .= " onclick='tweakcateg.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
 		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 		preg_match(',([0-9]+)\.?\s*(.*),', _T('tweak:'.$c), $reg);
-		echo "<form style='margin:$marge;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
-		$marge = '.8em 0 0 0';
+		echo "<form style='margin-top:$marge; margin-left:2em;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
+		$marge = '.8em';
 	}
 	echo "</td></tr></table>\n";
 	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
@@ -277,7 +277,7 @@ function ligne_tweak($tweak, &$js){
 		$s .=  "</div>";
 	}
 */
-	$p = '<p style="margin:0;">';
+	$p = '<p style="margin:0 0 0 2em;">';
 	$p .= "<img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 
 	$p .= "<input type='checkbox' class='checkbox' name='foo_$inc' value='O' id='label_$id_input'";

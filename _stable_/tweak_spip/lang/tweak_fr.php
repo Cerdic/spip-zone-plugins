@@ -27,9 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // --------------------
 
 	'admin' => "1. Administration",
-	'typo' => "2. Raccourcis typographiques",
-	'squel' => "3. Squelettes",
-	'divers' => "4. Divers",
+	'typo-corr' => "2. Corrections typographiques",
+	'typo-racc' => "3. Raccourcis typographiques",
+	'public' => "4. Affichage public",
+	'spip' => "5. Balises, filtres, crit&egrave;res",
+	'divers' => "6. Divers",
 	
 // Chaines de langue concernant tous les tweaks configures dans tweak_spip_config.php
 // ----------------------------------------------------------------------------------
