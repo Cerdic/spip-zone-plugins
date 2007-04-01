@@ -14,11 +14,10 @@ function exec_selecteur_generique_dist() {
 	# de deplacer vers n'importe quelle rubrique destination !
 
 	include_spip('public/assembler');
-	$xml = recuperer_fond('',
-		array(
-			'fond' => 'selecteurs/'._request('quoi'),
-			'value' => _request('value')
-		)
+	include_spip('public/parametrer');
+	$xml = recuperer_fond(
+		'selecteurs/'._request('quoi'),
+		calculer_contexte()
 	);
 
 	header('Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
