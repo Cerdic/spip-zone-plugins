@@ -24,4 +24,5 @@ _ opml->arbo spip pour construire son arbo d'un clic a partir de sont outline ex
 		<nom>ajouter_boutons</nom>
 		<inclure>outliner_pipeline.php</inclure>
 	</pipeline>
+	<necessite id="forms" version="[0.301;]" />
 </plugin>
