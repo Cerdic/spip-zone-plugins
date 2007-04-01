@@ -4,6 +4,7 @@
 
 $temp_jQuery = $GLOBALS['spip_version_code']<1.92?
 	"\n\n{{Attention}} : ce tweak n&eacute;cessite le plugin {jQuery} pour fonctionner ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.":"";
+$temp_couleurs = '<span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert olive</span>, <span style="background-color:navy;">navy/bleu marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu violet</span>, <span style="background-color:chocolate;">chocolate/brun clair</span>, <span style="background-color:cornsilk;">cornsilk/rose clair</span>, <span style="background-color:darkgreen;">darkgreen/vert fonce</span>, <span style="background-color:darkorange;">darkorange/orange fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune paille</span>, <span style="background-color:yellow;">yellow/jaune</span>';
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tweak SPIP',
@@ -80,6 +81,14 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 -* {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}
 
 Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
+
+	'couleurs:nom' => 'Tout en couleurs',
+	'couleurs:description'	=> "Permet d'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, ...) en utilisant des balises en raccourcis.
+_ Deux  exemples identiques : 
+-* <code>Lorem ipsum [rouge]dolor[/rouge] sit amet</code>
+-* <code>Lorem ipsum [red]dolor[/red] sit amet</code>.
+
+34 couleurs sont disponibles (en fran&ccedil;ais ou en anglais) : " . $temp_couleurs,
 
 	'typo_exposants:nom' => 'Exposants typographiques',
 	'typo_exposants:description'	=> "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).

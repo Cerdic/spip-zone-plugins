@@ -239,6 +239,13 @@ add_tweak( array(
 	'pipeline:pre_typo' => 'decoration_pre_typo',
 ));
 
+add_tweak( array(
+	'id'	=> 'couleurs',
+	'auteur' 		=> '[Aur&eacute;lien PIERARD->mailto:aurelien.pierard(a)dsaf.pm.gouv.fr]',
+	'categorie'		=> 'typo',
+	'pipeline:pre_typo' => 'couleurs_pre_typo',
+));
+
 // tweak specifiquement français. D'autres langues peuvent etre ajoutees dans tweaks/typo_exposants.php
 add_tweak( array(
 	'id'	=> 'typo_exposants',
