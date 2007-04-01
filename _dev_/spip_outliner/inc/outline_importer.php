@@ -1,37 +1,39 @@
 <?php
-function tagname($tag){
-	if (preg_match(',^([a-z][\w:]*),i',$tag,$reg))
-		return $reg[1];
-	return "";
-}
-function spip_xml_decompose_tag($tag){
-	$tagname = tagname($tag);
-	$liste = array();
-	$p=strpos($tag,' ');
-	$tag = substr($tag,$p);
-	$p=strpos($tag,'=');
-	while($p!==false){
-		$attr = trim(substr($tag,0,$p));
-		$tag = ltrim(substr($tag,$p+1));
-		$quote = $tag{0};
-		$p=strpos($tag,$quote,1);
-		$cont = substr($tag,1,$p-1);
-		$liste[$attr] = $cont;
-		$tag = substr($tag,$p+1);
-		$p=strpos($tag,'=');
+if ($GLOBALS['spip_version_code']<1.9250){
+	function tagname($tag){
+		if (preg_match(',^([a-z][\w:]*),i',$tag,$reg))
+			return $reg[1];
+		return "";
 	}
-	return array($tagname,$liste);
-}
-
-function spip_xml_match_nodes($regexp,&$arbre,&$matches){
-	if(is_array($arbre) && count($arbre))
-		foreach(array_keys($arbre) as $tag){
-			if (preg_match($regexp,$tag))
-				$matches[$tag] = &$arbre[$tag];
-			foreach(array_keys($arbre[$tag]) as $occurences)
-				spip_xml_match_nodes($regexp,$arbre[$tag][$occurences],$matches);
+	function spip_xml_decompose_tag($tag){
+		$tagname = tagname($tag);
+		$liste = array();
+		$p=strpos($tag,' ');
+		$tag = substr($tag,$p);
+		$p=strpos($tag,'=');
+		while($p!==false){
+			$attr = trim(substr($tag,0,$p));
+			$tag = ltrim(substr($tag,$p+1));
+			$quote = $tag{0};
+			$p=strpos($tag,$quote,1);
+			$cont = substr($tag,1,$p-1);
+			$liste[$attr] = $cont;
+			$tag = substr($tag,$p+1);
+			$p=strpos($tag,'=');
 		}
-	return (count($matches));
+		return array($tagname,$liste);
+	}
+	
+	function spip_xml_match_nodes($regexp,&$arbre,&$matches){
+		if(is_array($arbre) && count($arbre))
+			foreach(array_keys($arbre) as $tag){
+				if (preg_match($regexp,$tag))
+					$matches[$tag] = &$arbre[$tag];
+				foreach(array_keys($arbre[$tag]) as $occurences)
+					spip_xml_match_nodes($regexp,$arbre[$tag][$occurences],$matches);
+			}
+		return (count($matches));
+	}
 }
 
 function opml2tree($id_form,$id_parent,&$arbre,&$trans){
