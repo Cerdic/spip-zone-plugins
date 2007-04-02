@@ -1,0 +1,5 @@
+-implémenter le post traitement sans lequel tout cela ne sert à rien
+-styler un peu plus beau tout cela
+-dupliquer le mécanisme pour la documenthèque et la spipothèque
+-mettre tout cela en thickbox plutôt qu'en pop up
+

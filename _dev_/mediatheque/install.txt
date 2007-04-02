@@ -1,0 +1,6 @@
+-dans phpmyadmin copier le contenu du fichier data/xtra_table.sql
+-ouvrir exec > image_add.php et renseigner correctement ligne 53 la variable $ikono_site_path
+$ikono_site_path 	= "$site_root/votresite/$dir_img"; // real version for use
+-activer le plugin dans l'admin
+-aller dans config > mediatheque, cliquer sur initialiser le rubriquage
+-pour gérer/modifier le rubriquage de la photothèque aller dans edition > photothèque

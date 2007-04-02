@@ -1,0 +1,44 @@
+<plugin>
+	<nom>Mediath&egrave;que</nom>
+	
+	<version>0.6</version>
+	
+	<etat>dev</etat>
+	
+	<auteur>
+	Alain Simeray 
+	[contact->mailto:simeray@tektonika.com] 
+	[site->http://www.tektonika.com]
+	</auteur>
+	
+	<description>
+	Plug in pour la gestion d'une mediath&egrave;que (images et documents multimedia) 
+	selon un rubriquage th&eacute;matique de son choix, puis pour placer simplement 
+	ces &eacute;l&eacute;ments dans les articles.<br/> 
+	Ce plugin est en developpement. <br/>
+	Il est distribu&eacute; sous licence GNU/GPL
+	</description>
+	
+	<!-- classe d'implementation : 
+		espace de nommage qui prefixera les appels de fonction-->
+	<prefix>mediatheque</prefix>
+	
+	<options> <!-- fichier charge a chaque hit -->
+		mediatheque_mes_options.php
+	</options>
+	
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+		mediatheque_mes_fonctions.php
+	</fonctions>
+	
+<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>mediatheque_interface.php</inclure>
+	</pipeline>
+	
+	<!-- Le parametre action est facultatif : 
+	en son absence la methode de la classe portant le nom du pipeline est appelee. 
+	Le parametre inclure est facultatif.	-->
+</plugin>
