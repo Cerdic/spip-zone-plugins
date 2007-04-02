@@ -1,5 +1,5 @@
 = Bugs =
-Aucun ? \o/
+Sortie du formulaire d'adhésion
 
 
 = Mise en forme =
@@ -54,11 +54,9 @@ En cours.
 		commentaires)
 
 == Templates==
-- Renommer en FORMULAIRE_ASSOC en FORMULAIRE_ADHESION
-- Ajouter des fonctions de controle (email_valide, champs obligatoires)
-- Prevoir un ecran de confirmation avant enregistrement
+- #FORMULAIRE_ADHERENT: Ajouter des fonctions de controle (email_valide, champs obligatoires)
 Il faudra prevoir un formulaire en modification
-Idem pour les inscriptions aux activites et les dons
+Idem pour les inscriptions aux activites et les dons (ça roulera tout seul quand on aura fait le premier)
 
 
 = Architecture =
