@@ -43,15 +43,17 @@ Il suffit donc pour vous de remplacer les 4 fichiers originaux dans :
 
 Mais attention : il se peut que le squelette alternatives que vous avez entre les mains soit légèrement différent que celui qui est proposé ici.
 Si vous le pouvez donc, il vaut mieux que vous fassiez les changements vous-même.
+
+Les quatres modifs ci-dessus sont indépendantes, vous n'êtes pas obligé de les faire toutes ou de respecter un ordre précis. L'emplacement du code proposé ci-dessus dans les fichiers html est également modifiable : avec un peu d'astuce, vous saurez placer les différents modules là où bon vous semble...
 	
 ----------------------------------------------------------------------
 Vous obtiendrez donc :
 
-	- Un mini calendrier dans le cadre de gauche
-	- Un encart 'Agenda' dans le cadre de droite avec les prochains évènements
-	- Un bouton 'Agenda' supplémentaire en haut, menant à :
+	- Un mini calendrier dans le cadre de gauche (modif 3)
+	- Un encart 'Agenda' dans le cadre de droite avec les prochains évènements (modif 1)
+	- Un bouton 'Agenda' supplémentaire en haut (modif 2), menant à :
 	- Une page 'evenements' qui liste les évènements (du jour/du mois, prochains, passés)
-	- La liste des évènements associés au bas de chaque article
+	- La liste des évènements associés au bas de chaque article (modif 4)
 
 Note : certains des éléments précédents n'aparaissent pas si aucun évènement n'est programmé dans le site.
 
