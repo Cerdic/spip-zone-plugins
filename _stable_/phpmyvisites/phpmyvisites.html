@@ -1,4 +1,5 @@
 #CACHE{0*24*3600*35}
+[(#HTTP_HEADER{Content-Type: image/gif})]
 <?php
 	if (!isset($GLOBALS['meta']['PHPMyVisites_no_admin_stat'])
 			|| $GLOBALS['meta']['PHPMyVisites_no_admin_stat']!='oui'
@@ -12,4 +13,14 @@
 		include "phpmyvisites.php";
 		chdir($d);
 	}
+	$image = "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b";
+	$image = pack("H*", $image);
+	$size = strlen($image);
+
+	//Header("Content-Type: image/gif");
+	Header("Content-Length: ".$size);
+	Header("Cache-Control: no-cache,no-store");
+	Header("Pragma: no-cache");
+	Header("Connection: close");
+	echo $image;
 ?>
