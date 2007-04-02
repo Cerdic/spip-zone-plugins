@@ -26,6 +26,8 @@
 
 			$id_article = $flux['args']['id_article'];
 			$url = generer_url_public('w3cgh_article',"id_article=$id_article");
+			if (defined('_DIR_PLUGIN_PHPMV'))
+				$url = parametre_url($url,'var_nophpmv',1);
 			$nom = 'spip_xhtml_validator';
 
 			$last_mod = time();
