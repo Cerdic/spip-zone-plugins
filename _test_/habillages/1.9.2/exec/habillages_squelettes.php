@@ -197,44 +197,6 @@ EOF;
 	debut_gauche();
 	debut_boite_info();
 	
-	echo "<div class='intro_grotitre'>";
-	echo gros_titre(_T('habillages:squelettes_titre_boitinfo'))."</div><br />";
-	
-	echo "<div class='intro'>";
-	
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' />";
-	echo _T('habillages:squelettes_stable')."<br />";
-	
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/test.png' />";
-	echo _T('habillages:squelettes_test')."<br />";
-	
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/dev.png' />";
-	echo _T('habillages:squelettes_dev')."<br /><br />";
-	
-	
-	echo "<div class='intro_titre'>";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' />";
-	echo _T('habillages:squelettes_avance_titre')."</div>";
-	echo _T('habillages:squelettes_avance')."<br /><br />";
-	
-	echo "<div class='intro_titre'>";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
-	echo _T('habillages:squelettes_themes_titre')."</div>";
-	echo _T('habillages:squelettes_themes')."<br /><br />";
-	
-	echo "<div class='intro_titre'>";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
-	echo _T('habillages:squelettes_extras_titre')."</div>";
-	echo _T('habillages:squelettes_extras')."<br />";
-	echo "</div>";
-	
-	fin_boite_info();
-
-	debut_droite();
-
-	debut_cadre_relief();
-
-	global $couleur_foncee;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
 	echo "<tr><td colspan='4' style='background-color:$couleur_foncee' class='bandeau_titre'><b>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
@@ -403,7 +365,13 @@ EOF;
 					echo "</ul>";
 				}
 				
-		}
+		}	
+	fin_boite_info();
+
+	debut_droite();
+
+	
+
 	
 	echo "</td></tr></table></div>\n";
 

@@ -15,6 +15,8 @@ else if ($lire_habillages_squelettes == "dist" && $lire_habillages_themes != "de
 	$habillages_dossiers_squelettes = 'plugins/'.$lire_habillages_themes.'/:dist';
  	$GLOBALS['dossier_squelettes'] = $habillages_dossiers_squelettes;
 }
+else if ($lire_habillages_squelettes == "defaut") {
+}
 else {
 	$GLOBALS['dossier_squelettes'] = $squelette_reperso.':plugins/'.$lire_habillages_squelettes.'/';
 }
