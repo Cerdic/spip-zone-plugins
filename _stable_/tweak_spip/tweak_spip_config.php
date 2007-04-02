@@ -109,6 +109,18 @@ add_tweak( array(
 	'version-max'	=> 1.93,
 ));
 
+	// ici on demande a Tweak Spip six boutons radio : _T('page'), _T('html'), _T('propres'), _T('propres2'), _T('standard'),  et _T('qs')
+	// la variable Spip est : type_urls
+	// pour les boutons radio, il faut utiliser une deuxieme variable avec le prefixe radio_ : radio_type_urls2
+	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
+	// le page( signifie que page (traduit par : _T('page')) sera coche par defaut
+	$var = '%%radio_type_urls2/s/"page(page=page|html=html|propres=propres|propres2=propres2|standard=standard|propres-qs=propres-qs)"%%';
+add_tweak( array(
+	'id'	=> 'type_urls',
+	'code:options' 	=> "\$GLOBALS['radio_type_urls2']=\$foo=$var; \$GLOBALS['type_urls'] = tweak_choix(\$foo);",
+	'categorie'	=> 'admin',
+));
+
 add_tweak( array(
 	'id'	=> 'filtrer_javascript',
 	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:js_jamais'), _T('tweak:js_defaut') et _T('tweak:js_toujours')

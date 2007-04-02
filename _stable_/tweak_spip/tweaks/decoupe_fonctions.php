@@ -1,34 +1,4 @@
 <?php
-/*
- *   +----------------------------------+
- *    Nom du Filtre : decouper_en_pages
- *   +----------------------------------+
- *    Date : mardi 28 janvier 2003
- *    Auteur :  "gpl"
- *    Serieuse refonte et integration en mars 2007 : Patrice Vanneufville
- *   +-------------------------------------+
- *    Fonctions de ce filtre :
- *     Presenter un article sur plusieurs pages
- *   +-------------------------------------+ 
- *
-*/
-
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
-// et calcule a l'avance les images trouvees dans le repertoire img/decoupe/
-function decoupe_installe() {
-tweak_log('decoupe_installe()');
-	$path = dirname(find_in_path('img/decoupe/test'));
-	$images = array();
-	$dossier=opendir($path);
-	while ($image = readdir($dossier)) {
-		if (preg_match(',^([a-z][a-z0-9_-]*)\.(png|gif|jpg),', $image, $reg)) { 
-			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
-			$images[$reg[1]] = "<img class=\"no_image_filtrer\" src=\"".tweak_htmlpath($path)."/$reg[1].$reg[2]\" $size";
-		}
-	}
-	ecrire_meta('tweaks_decoupe', serialize($images));
-	ecrire_metas();
-}
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
@@ -36,11 +6,10 @@ function decouper_en_pages_rempl($texte) {
 	$artsuite = intval($_GET['artsuite']);
 	$pages = explode('++++', $texte);
 	$num_pages = count($pages);
+	if ($num_pages == 1) return $texte;
 
-	// si une seule page, alors retourner le texte d'origine.
 	// si numero illegal ou si var_recherche existe, alors renvoyer toutes les pages, separees par une ligne <hr/>.
 	// la surbrillance pourra alors fonctionner correctement.
-	if ($num_pages == 1) return $texte;
 	if (strlen($_GET['var_recherche']) || $artsuite < 0 || $artsuite >= $num_pages)
 		return join("<hr/>", $pages);
 
@@ -85,8 +54,10 @@ function decouper_en_pages_rempl($texte) {
 
 function decouper_en_pages($texte){
 	if (strpos($texte, '++++')===false) return $texte;
-	if (!isset($GLOBALS['meta']['tweaks_decoupe']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
+	if (!isset($GLOBALS['meta']['tweaks_decoupe']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul') {
+		include_spip('tweaks/decoupe');
 		decoupe_installe();
+	}
 	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
 }
 

@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'validez_page' => 'Validez cette page pour modifier cette valeur',
 	'tweak'	=> 'Tweak :',
 	'tweaks_liste' => 'Liste des tweaks',
-	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante.",
+	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante puis en validant la page.",
 	'erreur:nom' => 'Erreur !',
 	'erreur:description'	=> 'id manquant dans la d&eacute;finition du tweak !',
 	'erreur:version'	=> 'indisponible dans cette version de Spip.',
@@ -122,6 +122,19 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 
 	'set_options:nom' => "Type d'interface priv&eacute;e",
 	'set_options:description'	=> "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options%",
+
+	'type_urls:nom' => "Format des URLs",
+	'type_urls:description'	=> "Spip poss&egrave;de plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :
+- {page} : la valeur par d&eacute;faut pour Spip v1.9 : <code>/spip.php?article123</code>.
+- {html} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
+- {propre} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
+- {propres2} : l'extension '.html' est ajout&eacute;e aux adresses g&eacute;n&eacute;r&eacute;es : <code>/Mon-titre-d-article.html</code>.
+- {standard} : URLs utilis&eacute;es par Spip v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
+- {propres-qs} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.
+
+Pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site Spip sous
+  le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier.
+  Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de Spip.<br />Votre choix : %radio_type_urls2%",
 
 	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak Spip',
 	'log_tweaks:description'	=> "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak Spip' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
