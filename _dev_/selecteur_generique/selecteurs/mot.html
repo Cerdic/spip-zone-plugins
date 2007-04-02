@@ -19,7 +19,7 @@
 <BOUCLE_s(MOTS){titre LIKE (#ENV{value})%}{id_groupe?}{0,20}{par titre}{doublons}>
 <item>
 	<text><![CDATA[<b>#TITRE</b>[ - (#DESCRIPTIF|textebrut|couper{20})]]]></text>
-	<value><![CDATA[#TITRE]]></value>
+	<value><![CDATA[[(#TITRE|textebrut)]]]></value>
 	<id>#ID_MOT</id>
 
 </item>
@@ -29,7 +29,7 @@
 	<BOUCLE_s1(MOTS){titre LIKE %(#ENV{value})%}{id_groupe?}{0,20}{par titre}{doublons}>
 	<item>
 		<text><![CDATA[<b>#TITRE</b>[ - (#DESCRIPTIF|textebrut|couper{20})]]]></text>
-		<value><![CDATA[#TITRE]]></value>
+		<value><![CDATA[[(#TITRE|textebrut)]]]></value>
 		<id>#ID_MOT</id>
 	</item>
 	</BOUCLE_s1>
@@ -38,7 +38,7 @@
 		[(#REM) Vraiment on n'a rien trouve ]
 		<item>
 		<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
-		<value><![CDATA[#ENV*{value}]]></value>
+		<value><![CDATA[[(#ENV*{value}|textebrut)]]]></value>
 		<id>0</id>
 		</item>
 

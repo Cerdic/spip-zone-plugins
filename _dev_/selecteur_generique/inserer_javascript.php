@@ -23,7 +23,7 @@ var appliquer_selecteur_cherche_auteur = function() {
 		'autofill': false,
 		'helperClass': 'autocompleter',
 		'selectClass': 'selectAutocompleter',
-		'minchars': 2,
+		'minchars': 1,
 		'mustMatch': true,
 		'cacheLength': 20,
 		'onSelect': function(li) {
@@ -92,7 +92,7 @@ var appliquer_selecteur_cherche_mot = function() {
 			'autofill': false,
 			'helperClass': 'autocompleter',
 			'selectClass': 'selectAutocompleter',
-			'minchars': 2,
+			'minchars': 1,
 			'mustMatch': true,
 			'cacheLength': 20,
 			'onSelect': function(li) {
@@ -149,7 +149,7 @@ var appliquer_selecteur_cherche_rubrique = function() {
 		'autofill': false,
 		'helperClass': 'autocompleter',
 		'selectClass': 'selectAutocompleter',
-		'minchars': 2,
+		'minchars': 1,
 		'mustMatch': true,
 		'cacheLength': 20,
 		'onSelect': function(li) {

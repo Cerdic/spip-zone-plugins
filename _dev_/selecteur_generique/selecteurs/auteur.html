@@ -16,7 +16,7 @@
 <BOUCLE_s(AUTEURS){tout}{contenu_auteur_select strict}{0,20}{par nom}{doublons}>
 <item>
 	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
-	<value><![CDATA[#NOM]]></value>
+	<value><![CDATA[[(#NOM|textebrut)]]]></value>
 	<id>#ID_AUTEUR</id>
 
 </item>
@@ -26,7 +26,7 @@
 	<BOUCLE_s1(AUTEURS){tout}{contenu_auteur_select}{0,20}{par nom}{doublons}>
 	<item>
 	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
-	<value><![CDATA[#NOM]]></value>
+	<value><![CDATA[[(#NOM|textebrut)]]]></value>
 	<id>#ID_AUTEUR</id>
 	</item>
 	</BOUCLE_s1>
@@ -34,7 +34,7 @@
 	[(#REM) Vraiment on n'a rien trouve ]
 	<item>
 	<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
-	<value><![CDATA[#ENV*{value}]]></value>
+	<value><![CDATA[[(#ENV*{value}|textebrut)]]]></value>
 	<id>0</id>
 	</item>
 

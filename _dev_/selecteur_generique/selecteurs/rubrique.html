@@ -10,26 +10,26 @@
 <ajaxresponse>
 
 [(#REM) Chercher les rubriques correspondant a la requete ]
-<BOUCLE_s(RUBRIQUES){statut==.}{titre LIKE (#ENV{value})%}{0,20}{!par date}>
+<BOUCLE_s(RUBRIQUES){statut==.}{titre LIKE (#ENV{value})%}{0,20}{par multi titre}>
 <item>
 	<text><![CDATA[
 		<BOUCLE_h(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})]
 		&gt; </BOUCLE_h>
 		<b>#TITRE</b>]]></text>
-	<value><![CDATA[#TITRE]]></value>
+	<value><![CDATA[[(#TITRE|textebrut)]]]></value>
 	<id>#ID_RUBRIQUE</id>
 
 </item>
 </BOUCLE_s>
 
 
-<BOUCLE_s1(RUBRIQUES){statut==.}{titre LIKE %(#ENV{value})%}{0,20}{!par date}>
+<BOUCLE_s1(RUBRIQUES){statut==.}{titre LIKE %(#ENV{value})%}{0,20}{par multi titre}>
 <item>
 	<text><![CDATA[
 		<BOUCLE_h1(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})]
 		&gt; </BOUCLE_h1>
 		<b>#TITRE</b>]]></text>
-	<value><![CDATA[#TITRE]]></value>
+	<value><![CDATA[[(#TITRE|textebrut)]]]></value>
 	<id>#ID_RUBRIQUE</id>
 
 </item>
@@ -40,7 +40,7 @@
 	[(#REM) Vraiment on n'a rien trouve ]
 	<item>
 	<text><![CDATA[<small class='autocomplete-message'>pas de suggestion</small>]]></text>
-	<value><![CDATA[#ENV*{value}]]></value>
+	<value><![CDATA[[(#ENV*{value}|textebrut)]]]></value>
 	<id>0</id>
 	</item>
 
