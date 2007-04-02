@@ -5,7 +5,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-
+'squelettes_titre' => 'Choix d\'un jeu de squelettes',
 
 );
 

@@ -197,15 +197,7 @@ EOF;
 	debut_gauche();
 	debut_boite_info();
 	
-	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
-	echo "<tr><td colspan='4' style='background-color:$couleur_foncee' class='bandeau_titre'><b>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
-	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
-	echo "<tr><td class='serif' colspan=4>";	
-	echo generer_url_post_ecrire("habillages_squelettes");
-	echo _T('habillages:squelettes_intro')."<br /><br />";
-		
-		lire_metas();
+	    lire_metas();
 		$squelettes = $GLOBALS['meta']['habillages_squelettes'];
 		# Squelettes par defaut choisi ou si le plugin vient d'etre active. 
 		if ($squelettes == "" || $squelettes == "defaut") {
@@ -215,43 +207,28 @@ EOF;
 		else if ($squelettes == "dist") {
 			$checked_dist = " checked='checked'";
 		}
-		
-		echo "<ul>";
-		# Encadre du squelette par defaut.
-		debut_boite_info();
-		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
-		echo "<tr><td width=1% style='background-color:$couleur_claire' class='bandeau_stitre'>";
-		echo "<input type='radio' name='statusplug' value='defaut'$checked_defaut>";
-		echo "</td><td width=99% style='background-color:$couleur_claire' class='bandeau_stitre'>";
-		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
-		echo "</td></tr>";
-		echo "</table>";
-		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
-		fin_boite_info();
-		echo "<br />";
-		# Encadre de la dist.
-		debut_boite_info();
-		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
-		echo "<tr><td style='background-color:$couleur_claire class='bandeau_stitre'>";
-		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' alt='Stable' />";
-		echo "</td><td style='background-color:$couleur_claire' class='bandeau_stitre'>";
-		echo "<input type='radio' name='statusplug' value='dist'$checked_dist>";
-		echo "</td><td style='background-color:$couleur_claire' class='bandeau_stitre'>";
-		echo _T('habillages:squelettes_dist_titre');
-		echo "</td><td style='background-color:$couleur_claire' class='bandeau_stitre'>";
-		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
-		echo "<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
-		echo "</td><td style='background-color:$couleur_claire' class='bandeau_stitre'>";
-		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
-		echo "</td></tr>";
-		echo "</table>";
-		echo '<div style="float:right";><img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/capture_dist_bw.png" alt="" class="preview" /></div>';
-		echo "<small><strong><font COLOR='#149E06'>Cet habillage est stable.</font></strong></small><br /><hr><br />";
-		echo "<small>"._T('habillages:squelettes_dist_description')."</small><br /><br /><hr>";
-		echo "<div class='auteur'>Collectif.<br />&copy; 2001 - 2006 - Distribue sous licence GNU/GPL</div><hr>";
-		fin_boite_info();
-		echo "</ul>";
 	
+	echo "<div class='intro_grotitre'>";
+	echo gros_titre(_T('accueil:squelettes_titre'))."</div><br />";
+	
+	echo generer_url_post_ecrire("habillages_squelettes");
+	
+	echo "<table border='0' cellpadding='0' cellspacing='0' id='subtab' align='center'>";
+
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_input' class='hab_stitre'>";
+	echo "<input type='radio' name='statusplug' value='defaut'$checked_defaut></td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+	echo "</td></tr>";
+	
+	echo "<tr><td style='background-color:$couleur_claire' id='hab_input' class='hab_stitre'>";
+	echo "<input type='radio' name='statusplug' value='dist'$checked_dist></td>";
+	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo "<strong>"._T('habillages:squelettes_dist_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+	echo "</td></tr>";
+
+	echo "</table>";
+			
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		
@@ -332,6 +309,7 @@ EOF;
 					}
 					
 					debut_boite_info();
+						
 					echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
 					echo "<tr><td width=1% style='background-color:$couleur_claire' class='bandeau_stitre'>";
 					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
