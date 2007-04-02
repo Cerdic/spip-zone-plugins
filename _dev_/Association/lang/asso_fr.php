@@ -4,6 +4,11 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+# Titres globaux
+	'titre_gestion_pour_association' => 'Gestion pour Association',
+	'titre_relance' => 'Renouvellement de votre cotisation',
+	'titre_menu_gestion_association' => 'Gestion Association',
+
 # Navigation
  'menu2_titre_gestion_membres' => 'Gestion des membres',
  'menu2_titre_ajouter_membre' => 'Ajouter un membre',
@@ -33,9 +38,118 @@ Le bureau de l\'association.
 
 Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique 
 	',
-	'ref_int' => 'R&eacute;f. int.',
-	'reference_interne' => 'R&eacute;f&eacute;rence interne',
-	'secteur' => 'Secteur',
+
+# Adherents
+ # Titres
+	'adherent_titre_action_membres_actifs' => 'Action sur les membres actifs',
+ 'adherent_titre_modifier_membre' => 'Modifier un membre actif',
+ 'adherent_titre_ajout_adherent' => 'Ajout d\'adh&eacute;rent',
+	'adherent_titre_ajouter_membre_actif' => 'Ajouter des membres actifs',
+	'adherent_titre_ajouter_membre' => 'Ajouter un membre',
+	'adherent_titre_fiche_signaletique' => 'Fiche signal&eacute;tique membre',
+	'adherent_titre_fiche_signaletique_id' => 'Fiche signal&eacute;tique #@id@',
+	'adherent_titre_historique_cotisations' => 'Historique des cotisations',
+	'adherent_titre_historique_activites' => 'Historique des activit&eacute;s',
+	'adherent_titre_liste_actifs' => 'Tous les membres actifs',
+
+	# Libelle
+	'adherent_libelle_reference_interne_abrev' => 'R&eacute;f. int.',
+	'adherent_libelle_reference_interne' => 'R&eacute;f&eacute;rence interne',
+	'adherent_libelle_numero' => 'Num&eacute;ro',
+	'adherent_libelle_id' => 'ID',
+	'adherent_libelle_photo' => 'Photo',
+	'adherent_libelle_nom' => 'Nom',
+	'adherent_libelle_prenom' => 'Pr&eacute;nom',
+	'adherent_libelle_sexe' => 'Sexe',
+	'adherent_libelle_date_naissance' => 'Date de naissance',
+	'adherent_libelle_categorie' => 'Cat&eacute;gorie',
+	'adherent_libelle_fonction' => 'Fonction',
+	'adherent_libelle_email' => 'Email',
+	'adherent_libelle_adresse' => 'Adresse',
+	'adherent_libelle_rue' => 'Rue',
+	'adherent_libelle_num_rue' => 'N&deg;',
+	'adherent_libelle_ville' => 'Ville',
+	'adherent_libelle_codepostal' => 'Code Postal',
+	'adherent_libelle_portable' => 'Portable',
+	'adherent_libelle_telephone' => 'T&eacute;l&eacute;phone',
+	'adherent_libelle_profession' => 'Profession',
+	'adherent_libelle_societe' => 'Soci&eacute;t&eacute;',
+	'adherent_libelle_secteur' => 'Secteur',
+	'adherent_libelle_accord' => 'Accord de publication',
+	'adherent_libelle_utilisateur1' => 'Utilisateur 1',
+	'adherent_libelle_utilisateur2' => 'Utilisateur 2',
+	'adherent_libelle_utilisateur3' => 'Utilisateur 3',
+	'adherent_libelle_utilisateur4' => 'Utilisateur 4',
+	'adherent_libelle_validite' => 'Validit&eacute;',
+	'adherent_libelle_remarques' => 'Remarques',
+	'adherent_libelle_identifiant' => 'Identifiant',
+	'adherent_libelle_visiteur_spip' => 'Visiteur SPIP',
+	'adherent_libelle_statut' => 'Statut de cotisation',
+	'adherent_libelle_categorie_choix' => 'Choisissez une ca&eacute;gorie de cotisation',
+
+	'adherent_libelle_statut_ok' => '&Agrave; jour',
+	'adherent_libelle_statut_echu' => '&Agrave &eacute;ch&eacute;ance',
+	'adherent_libelle_statut_relance' => 'Relanc&eacute;',
+	'adherent_libelle_statut_sorti' => 'D&eacute;sactiv&eacute;',
+	'adherent_libelle_statut_prospect' => 'Prospect',
+
+	'adherent_libelle_oui' => 'oui',
+	'adherent_libelle_non' => 'non',
+	'adherent_libelle_homme' => 'H',
+	'adherent_libelle_femme' => 'F',
+	'adherent_libelle_masculin' => 'Masculin',
+	'adherent_libelle_feminin' => 'F&eacute;minin',
+
+	# En-tetes
+	'adherent_entete_date' => 'Date',
+	'adherent_entete_id' => 'ID',
+	'adherent_entete_livre' => 'Livre',
+	'adherent_entete_paiement' => 'Paiement',
+	'adherent_entete_justification' => 'Justification',
+	'adherent_entete_journal' => 'Journal',
+	'adherent_entete_activite' => 'Activit&eacute;',
+	'adherent_entete_lieu' => 'Lieu',
+	'adherent_entete_inscrits' => 'Inscrits',
+	'adherent_entete_action' => 'Action',
+	'adherent_entete_notes' => 'Notes',
+	'adherent_entete_tous' => 'Tous',
+	'adherent_entete_supprimer_abrev' => 'Sup.',
+
+	'adherent_entete_statut' => 'Statut',
+	'adherent_entete_statut_defaut' => 'Actifs',
+	'adherent_entete_statut_ok' => '&Agrave; jour',
+	'adherent_entete_statut_echu' => '&Agrave relancer',
+	'adherent_entete_statut_relance' => 'Relanc&eacute;s',
+	'adherent_entete_statut_sorti' => 'D&eacute;sactiv&eacute;s',
+	'adherent_entete_statut_prospect' => 'Prospects',
+	'adherent_entete_statut_tous' => 'Tous',
+
+	# Bouton
+	'adherent_bouton_confirmer' => 'Confirmer',
+	'adherent_bouton_modifier' => 'Modifier',
+	'adherent_bouton_envoyer' => 'Envoyer',
+	'adherent_bouton_modifier_membre' => 'Modifier le membre',
+ 'adherent_bouton_maj_operation' => 'Mettre &agrave; jour l\'op&eacute;ration',
+ 'adherent_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
+
+	# Label
+ 'adherent_label_modifier_visiteur' => 'Modifier le visiteur',
+ 'adherent_label_envoyer_courrier' => 'Envoyer un courrier',
+ 'adherent_label_ajouter_cotisation' => 'Ajouter une cotisation',
+ 'adherent_label_modifier_membre' => 'Modifier membre',
+ 'adherent_label_voir_membre' => 'Voir le membre',
+
+	# Message
+	'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
+ 'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
+ 'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
+ 'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
+ 'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
+	'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
+	# Liste
+	'adherent_liste_legende' => 'En bleu : Relanc&eacute; | En rose : A &eacute;ch&eacute;ance | En vert : A jour<br> En brun : D&eacute;sactiv&eacute; | En jaune paille : Prospect',
+	'adherent_liste_nombre_adherents' => 'Nombre d\'adh&eacute;rents : @total@',
+	'adherent_liste_total_cotisations' => 'Total des cotisations : @total@ &euro;',
 
 # Activites
  # Titres
@@ -44,7 +158,6 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_titre_ajouter_inscriptions' => 'Ajouter des inscriptions',
 	'activite_titre_toutes_activites' => 'Toutes les activit&eacute;s',
 	'activite_titre_inscriptions_activites' => 'Inscriptions aux activit&eacute;s',
-
 
  # Sous-titres
 	'activite_mise_a_jour_inscription' => 'Mettre &agrave; jour une inscription',
@@ -104,18 +217,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_message_confirmation_supprimer' => 'Vous vous appr&ecirc;tez &agrave; effacer @nombre@ inscription@pluriel@ !',
 	'activite_message_suppression' => 'Suppression effectu&eacute;e !',
 
-# Titres globaux
-	'titre_gestion_pour_association' => 'Gestion pour Association',
-	'titre_relance' => 'Renouvellement de votre cotisation',
-	'titre_menu_gestion_association' => 'Gestion Association',
-
 	'date_du_jour' => 'Nous sommes le '.date('d/m/Y'),
 	'date_du_jour_heure' => 'Nous sommes le '.date('d/m/Y').' et il est '.date('H:i'),
 
-# Donnees adherents 
-	'utilisateur1' => 'Utilisateur 1',
-	'utilisateur2' => 'Utilisateur 2',
-	'utilisateur3' => 'Utilisateur 3',
-	'utilisateur4' => 'Utilisateur 4'
 );
 ?>

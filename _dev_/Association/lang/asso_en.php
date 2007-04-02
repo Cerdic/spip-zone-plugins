@@ -4,6 +4,11 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+# Titres globaux
+	'titre_gestion_pour_association' => 'Management for Association',
+	'titre_relance' => 'Renew your cotisation',
+	'titre_menu_gestion_association' => 'Manage Association',
+
 # Navigation
  'menu2_titre_gestion_membres' => 'Manage members',
  'menu2_titre_ajouter_membre' => 'Add a membre',
@@ -33,9 +38,118 @@ The president
 
 PS: Please do not reply directly to this is an automated message.
 	',
-	'ref_int' => 'Int. ref.',
-	'reference_interne' => 'Internal reference',
-	'secteur' => 'Sector',
+
+# Adherents
+ # Titres
+	'adherent_titre_action_membres_actifs' => 'Actions on actives members',
+ 'adherent_titre_modifier_membre' => 'Modify a member',
+ 'adherent_titre_ajout_adherent' => 'Add a member',
+	'adherent_titre_ajouter_membre_actif' => 'Add actives members',
+	'adherent_titre_ajouter_membre' => 'Add a member',
+	'adherent_titre_fiche_signaletique' => 'Member\'s file',
+	'adherent_titre_fiche_signaletique_id' => 'Member\'s file #@id@',
+	'adherent_titre_historique_cotisations' => 'Cotisations history',
+	'adherent_titre_historique_activites' => 'Activities history',
+	'adherent_titre_liste_actifs' => 'All actives members',
+
+	# Libelle
+	'adherent_libelle_reference_interne_abrev' => 'Int. ref',
+	'adherent_libelle_reference_interne' => 'Internal reference',
+	'adherent_libelle_numero' => 'Number',
+	'adherent_libelle_id' => 'ID',
+	'adherent_libelle_photo' => 'Photo',
+	'adherent_libelle_nom' => 'Last name',
+	'adherent_libelle_prenom' => 'First name',
+	'adherent_libelle_sexe' => 'Sex',
+	'adherent_libelle_date_naissance' => 'Date of birth',
+	'adherent_libelle_categorie' => 'Category',
+	'adherent_libelle_fonction' => 'Fonction',
+	'adherent_libelle_email' => 'Email',
+	'adherent_libelle_adresse' => 'Address',
+	'adherent_libelle_rue' => 'Street',
+	'adherent_libelle_num_rue' => 'N&deg;',
+	'adherent_libelle_ville' => 'City',
+	'adherent_libelle_codepostal' => 'Zip Code',
+	'adherent_libelle_portable' => 'Cellphone number',
+	'adherent_libelle_telephone' => 'Phone number',
+	'adherent_libelle_profession' => 'Job',
+	'adherent_libelle_societe' => 'Enterprise',
+	'adherent_libelle_secteur' => 'Sector',
+	'adherent_libelle_accord' => 'Publishing agreement',
+	'adherent_libelle_utilisateur1' => 'User 1',
+	'adherent_libelle_utilisateur2' => 'User 2',
+	'adherent_libelle_utilisateur3' => 'User 3',
+	'adherent_libelle_utilisateur4' => 'User 4',
+	'adherent_libelle_validite' => 'Validity',
+	'adherent_libelle_remarques' => 'Comments',
+	'adherent_libelle_identifiant' => 'Login',
+	'adherent_libelle_visiteur_spip' => 'SPIP Visitor',
+	'adherent_libelle_statut' => 'Cotisation status',
+	'adherent_libelle_categorie_choix' => 'Pick a cotisation category',
+
+	'adherent_libelle_statut_ok' => 'OK',
+	'adherent_libelle_statut_echu' => 'Not anymore',
+	'adherent_libelle_statut_relance' => 'Recalled',
+	'adherent_libelle_statut_sorti' => 'Deactivated',
+	'adherent_libelle_statut_prospect' => 'Prospect',
+
+	'adherent_libelle_oui' => 'yes',
+	'adherent_libelle_non' => 'no',
+	'adherent_libelle_homme' => 'M',
+	'adherent_libelle_femme' => 'W',
+	'adherent_libelle_masculin' => 'Man',
+	'adherent_libelle_feminin' => 'Woman',
+
+	# En-tetes
+	'adherent_entete_date' => 'Date',
+	'adherent_entete_id' => 'ID',
+	'adherent_entete_livre' => 'Book',
+	'adherent_entete_paiement' => 'Payment',
+	'adherent_entete_justification' => 'Justification',
+	'adherent_entete_journal' => 'Journal',
+	'adherent_entete_activite' => 'Activity',
+	'adherent_entete_lieu' => 'Place',
+	'adherent_entete_inscrits' => 'Subscribers',
+	'adherent_entete_action' => 'Action',
+	'adherent_entete_notes' => 'Notes',
+	'adherent_entete_tous' => 'All',
+	'adherent_entete_supprimer_abrev' => 'Del.',
+
+	'adherent_entete_statut' => 'Status',
+	'adherent_entete_statut_defaut' => 'Actives',
+	'adherent_entete_statut_ok' => 'OK',
+	'adherent_entete_statut_echu' => 'Need to be recalled',
+	'adherent_entete_statut_relance' => 'Recalled',
+	'adherent_entete_statut_sorti' => 'Deactivated',
+	'adherent_entete_statut_prospect' => 'Prospects',
+	'adherent_entete_statut_tous' => 'All',
+
+	# Bouton
+	'adherent_bouton_confirmer' => 'Confirm',
+	'adherent_bouton_modifier' => 'Modify',
+	'adherent_bouton_envoyer' => 'Send',
+	'adherent_bouton_modifier_membre' => 'Modify a member',
+ 'adherent_bouton_maj_operation' => 'Update operation',
+ 'adherent_bouton_maj_inscription' => 'Update subscription',
+
+	# Label
+ 'adherent_label_modifier_visiteur' => 'Update the visitor',
+ 'adherent_label_envoyer_courrier' => 'Send a email',
+ 'adherent_label_ajouter_cotisation' => 'Add a cotisation',
+ 'adherent_label_modifier_membre' => 'Modify member',
+ 'adherent_label_voir_membre' => 'View member',
+
+	# Message
+	'adherent_message_ajout_adherent' => '@nom@, @prenom@ has been added to the file',
+ 'adherent_message_ajout_adherent_suite' => 'and recorded as visitor',
+ 'adherent_message_email_invalide' => 'The email address is invalid',
+ 'adherent_message_maj_adherent' => 'Datas for @nom@, @prenom@ have been updated !',
+ 'adherent_message_confirmer_suppression' => 'You are about to delete the following members',
+	'adherent_message_suppression_faite' => 'Deleted !',
+	# Liste
+	'adherent_liste_legende' => 'In blue : Recalled | In pink : Not member | In green : OK | In brown : Deactivated | In yellow : Prospect',
+	'adherent_liste_nombre_adherents' => 'Total members : @total@',
+	'adherent_liste_total_cotisations' => 'Amount of cotisations : @total@ &euro;',
 
 # Activites
  # Titres
@@ -103,18 +217,8 @@ PS: Please do not reply directly to this is an automated message.
 	'activite_message_confirmation_supprimer' => 'You are about to erase @nombre@ subscription@pluriel@ !',
 	'activite_message_suppression' => 'Delete done !',
 
-# Titres globaux
-	'titre_gestion_pour_association' => 'Management for Association',
-	'titre_relance' => 'Renew your cotisation',
-	'titre_menu_gestion_association' => 'Manage Association',
-
 	'date_du_jour' => 'We are '.date('F, jS Y'),
 	'date_du_jour_heure' => 'We are '.date('F, jS Y').' and it is '.date('h:ia'),
 
-# Donnees adherents 
-	'utilisateur1' => 'User 1',
-	'utilisateur2' => 'User 2',
-	'utilisateur3' => 'User 3',
-	'utilisateur4' => 'User 4'
 );
 ?>

@@ -16,23 +16,23 @@
 include_spip('inc/presentation');
 
 function exec_edit_adherent(){
-global $connect_statut, $connect_toutes_rubriques;
+	global $connect_statut, $connect_toutes_rubriques;
 
-debut_page(_T('Gestion pour  Association'), "", "");
+	debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 
 // LES URL'S
-$url_upload=generer_url_ecrire('upload');
-$url_asso = generer_url_ecrire('association');
-$url_action_adherents=generer_url_ecrire('action_adherents');
-$url_retour = $_SERVER['HTTP_REFERER'];
+	$url_upload=generer_url_ecrire('upload');
+	$url_asso = generer_url_ecrire('association');
+	$url_action_adherents=generer_url_ecrire('action_adherents');
+	$url_retour = $_SERVER['HTTP_REFERER'];
 
-include_spip ('inc/navigation');
+	include_spip ('inc/navigation');
 
-debut_cadre_relief(  "", false, "", $titre = _T('Tous les membres actifs'));
+	debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_liste_actifs'));
 	debut_boite_info();
 	
 //LE MENU
-print  association_date_du_jour();
+	print  association_date_du_jour();
 
 //---------------------------- 
 //  ICI ON MODIFIE UN MEMBRE 
@@ -41,36 +41,36 @@ $id_adherent = $_GET['id'];
 
 $query = spip_query( "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent' " );
 	
-echo '<fieldset><legend>Modifier un membre actif </legend>';
+echo '<fieldset><legend>'._T('asso:adherent_titre_modifier_membre').'</legend>';
 echo '<table width="70%">';	
 echo '<form action="'.$url_action_adherents.'" method="post">';	
 
-	while($data = spip_fetch_array($query)) 
+while($data = spip_fetch_array($query)) 
 {
 echo '<tr> ';
-echo '<td>'._T('asso:reference_interne').' :</td>';
+echo '<td>'._T('asso:adherent_libelle_reference_interne').' :</td>';
 echo '<td><input name="id_asso" type="text" value="'.$data['id_asso'].'"></td>';
-echo '<td>Num&eacute;ro :</td>';
+echo '<td>'._T('asso:adherent_libelle_numero').' :</td>';
 echo '<td><input name="id_adherent" type="text" size="3" readonly="true" value="'.$data['id_adherent'].'"></td></tr>';
 echo '<tr> ';
-echo '<td>Nom :</td>';
+echo '<td>'._T('asso:adherent_libelle_nom').' :</td>';
 echo '<td><input name="nom" type="text" size="40" value="'.$data['nom'].'"></td>';
 echo '<tr> ';
-echo '<td>Pr&eacute;nom :</td>';
+echo '<td>'._T('asso:adherent_libelle_prenom').' :</td>';
 echo '<td><input name="prenom" type="text" size="40" value="'.$data['prenom'].'"></td></tr>';
 echo '<tr> ';
-echo '<td>Sexe:</td>';
+echo '<td>'._T('asso:adherent_libelle_sexe').' :</td>';
 echo '<td><input name="sexe" type="radio" value="H" ';
 if ($data['sexe']=="H") {echo ' checked="checked"';}
-echo '> H ';
+echo '> '._T('asso:adherent_libelle_homme').' ';
 echo '<input name="sexe" type="radio" value="F" ';
 if ($data['sexe']=="F") {echo ' checked="checked"';}
-echo '> F ';
+echo '> '._T('asso:adherent_libelle_femme').' ';
 echo '<tr> ';
-echo '<td>Date de naissance:</td>';
+echo '<td>'._T('asso:adherent_libelle_date_naissance').' :</td>';
 echo '<td><input name="naissance" type="text" value="'.$data['naissance'].'"></td></tr>';
 echo '<tr> ';
-echo '<td>Cat&eacute;gorie :</td>';
+echo '<td>'._T('asso:adherent_libelle_categorie').' :</td>';
 echo '<td><select name="categorie" type="text" >';
 $sql = spip_query( "SELECT * FROM spip_asso_categories" );
 while($categorie = spip_fetch_array($sql)) 
@@ -81,7 +81,7 @@ echo '<option value="'.$categorie["valeur"].'"';
 }
 echo '</select>';
 echo '<tr> ';
-echo '<td>Fonction :</td>';
+echo '<td>'._T('asso:adherent_libelle_fonction').' :</td>';
 echo '<td><input name="fonction" type="text" size="40" value="'.$data['fonction'].'"></td>';
 echo '<tr> ';	
 echo '<td>&nbsp;</td>';
@@ -89,22 +89,22 @@ echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td></tr>';
 echo '<tr> ';
-echo '<td>Email:</td>';
+echo '<td>'._T('asso:adherent_libelle_email').' :</td>';
 echo '<td colspan="3"><input name="email" type="text" size="40" value="'.$data['email'].'"></td></tr>';
 echo '<tr> ';
-echo '<td>Rue :</td>';
+echo '<td>'._T('asso:adherent_libelle_rue').' :</td>';
 echo '<td><textarea  name="rue" cols="30">'.$data['rue'].'</textarea></td>';
-//echo '<td>N&deg; :</td>';
+//echo '<td>'._T('asso:adherent_libelle_num_rue').' :</td>';
 //echo '<td><input name="numero" type="text" size="10" value="'.$data['numero'].'"></td></tr>';
 echo '<tr> ';
-echo '<td>Ville:</td>';
+echo '<td>'._T('asso:adherent_libelle_ville').' :</td>';
 echo '<td><input name="ville" type="text" size="40" value="'.$data['ville'].'"></td>';
-echo '<td>Code Postal:</td>';
+echo '<td>'._T('asso:adherent_libelle_codepostal').' :</td>';
 echo '<td><input name="cp" type="text" value="'.$data['cp'].'"></td></tr>';
 echo '<tr> ';
-echo '<td>Portable :</td>';
+echo '<td>'._T('asso:adherent_libelle_portable').' :</td>';
 echo '<td><input name="portable" type="text" value="'.$data["portable"].'"></td>';
-echo '<td>T&eacute;l&eacute;phone :</td>';
+echo '<td>'._T('asso:adherent_libelle_telephone').' :</td>';
 echo '<td><input name="telephone" type="text" value="'.$data["telephone"].'"></td></tr>';
 echo '<tr> ';
 echo '<td>&nbsp;</td>';
@@ -112,10 +112,10 @@ echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td></tr>';
 echo '<tr> ';
-echo '<td>Profession :</td>';
+echo '<td>'._T('asso:adherent_libelle_profession').' :</td>';
 echo '<td><input name="profession" type="text"  size= "40" value="'.$data["profession"].'"></td>';
 echo '<tr> ';	
-echo '<td>Soci&eacute;t&eacute; :</td>';
+echo '<td>'._T('asso:adherent_libelle_societe').' :</td>';
 echo '<td><input name="societe" type="text" size= "40" value="'.$data["societe"].'"></td></tr>';
 echo '<tr> ';	
 echo '<td>&nbsp;</td>';
@@ -123,24 +123,24 @@ echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td></tr>';
 echo '<tr> ';	
-echo '<td>'._T('asso:secteur').' :</td>';
+echo '<td>'._T('asso:adherent_libelle_secteur').' :</td>';
 echo '<td><input name="secteur" type="text" value="'.$data["secteur"].'"></td>';
-echo '<td>Accord de publication :</td>';
+echo '<td>'._T('asso:adherent_libelle_accord').' :</td>';
 echo '<td><input name="publication" type="radio" value="oui"';
 if ($data['publication']=="oui") {echo ' checked="checked"';}
-echo '>oui';
+echo '>'._T('asso:adherent_libelle_oui');
 echo '<input name="publication" type="radio" value="non"';
 if ($data['publication']=="non") {echo ' checked="checked"';}
-echo '>non</td></tr>';
+echo '>'._T('asso:adherent_libelle_non').'</td></tr>';
 echo '<tr> ';
-echo '<td>'._T('asso:utilisateur1').' :</td>';
+echo '<td>'._T('asso:adherent_libelle_utilisateur1').' :</td>';
 echo '<td><input name="utilisateur1" type="text" value="'.$data["utilisateur1"].'"></td>';
-echo '<td>'._T('asso:utilisateur2').' :</td>';
+echo '<td>'._T('asso:adherent_libelle_utilisateur2').' :</td>';
 echo '<td><input name="utilisateur2" type="text" value="'.$data["utilisateur2"].'"></td></tr>';
 echo '<tr> ';
-echo '<td>'._T('asso:utilisateur3').' :</td>';
+echo '<td>'._T('asso:adherent_libelle_utilisateur3').' :</td>';
 echo '<td><input name="utilisateur3" type="text" value="'.$data["utilisateur3"].'"></td>';
-echo '<td>'._T('asso:utilisateur4').' :</td>';
+echo '<td>'._T('asso:adherent_libelle_utilisateur4').' :</td>';
 echo '<td><input name="utilisateur4" type="text" value="'.$data["utilisateur4"].'"></td></tr>';
 echo '<tr> ';	
 echo '<td>&nbsp;</td>';
@@ -149,34 +149,34 @@ echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '</tr>';
 echo '<tr> ';	
-echo '<td>Statut de cotisation :</td>';
+echo '<td>'._T('asso:adherent_libelle_statut').' :</td>';
 echo '<td><input name="statut" type="radio" name="statut" value="ok"';
 if ($data['statut']=="ok") {echo ' checked="checked"';}
-echo '> A jour ';
+echo '> '._T('asso:adherent_libelle_statut_ok');
 echo '<input name="statut" type="radio" name="statut" value="echu"';
 if ($data['statut']=="echu") {echo ' checked="checked"';}
-echo '> A &eacute;ch&eacute;ance ';
+echo '> '._T('asso:adherent_libelle_statut_echu');
 echo '<input name="statut" type="radio" name="statut" value="relance"';
 if ($data['statut']=="relance") {echo ' checked="checked"';}
-echo '> Relanc&eacute; ';
+echo '> '._T('asso:adherent_libelle_statut_relance');
 echo '<input name="statut" type="radio" name="statut" value="sorti"';
 if ($data['statut']=="sorti") {echo ' checked="checked"';}
-echo '> D&eacute;sactiv&eacute; ';
+echo '> '._T('asso:adherent_libelle_statut_sorti');
 echo '<input name="statut" type="radio" name="statut" value="prospect"';
 if ($data['statut']=="prospect") {echo ' checked="checked"';}
-echo '> Prospect </td> ';
-echo '<td>Validit&eacute; :</td>';
+echo '> '._T('asso:adherent_libelle_statut_prospect'). '</td>';
+echo '<td>'._T('asso:adherent_libelle_validite').' :</td>';
 echo '<td><input name="validite" type="text" value="'.$data["validite"].'"></td>';
 echo '</tr>';
 echo '<tr> ';      
-echo '<td>Remarques :</td>';
+echo '<td>'._T('asso:adherent_libelle_remarques').' :</td>';
 echo '<td colspan="3"><textarea name="remarques" cols="65" rows="3">'.$data["remarques"].'</textarea>';
 echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 echo '<input type="hidden" name="action" value="modifie"></td></tr>';
 }
 echo '<tr>';
 echo '<td></td>';
-echo '<td><input name="submit" type="submit" value="Modifier" class="fondo"></td></tr>';
+echo '<td><input name="submit" type="submit" value="'._T('asso:adherent_bouton_modifier').'" class="fondo"></td></tr>';
 echo '</form>';
 echo '</table>';
 echo '</fieldset>';
@@ -209,6 +209,7 @@ $logo= "assologo";
 
 
 //
+// TODO FIXME : Si ce script est rÃ©activÃ©, il faudra le passer en multilingue.
 if(!empty($_POST['posted'])) { 
     // On vérifie si le champ est rempli 
     if(!empty($_FILES['fichier']['name'])) { 
@@ -279,10 +280,11 @@ echo'</form> ';
 */
 
 // ON FERME TOUT
-fin_boite_info();
-	  
-  fin_cadre_relief();  
+	fin_boite_info();
 
-fin_page();} 
+	fin_cadre_relief();
+
+	fin_page();
+}
 ?>
 

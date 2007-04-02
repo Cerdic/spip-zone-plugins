@@ -1,9 +1,57 @@
+= Bugs =
+Aucun ? \o/
+
+
+= Mise en forme =
+
 ==Compatibilite XHTML==
 A faire
+- supprimer les tableaux de presentation ?
+- mettre les libelles des TD en white-space:nowrap en attendant
+
+== Charset ==
+Passer tout le code en UTF-8 plutot qu'en entites HTML ?
 
 == Indenter le code ==
 Il serait plus propre d'homogeneiser l'indentation du code.
 Utiliser l'indentation de SPIP serait le mieux selon moi.
+
+== Visualisation de source ==
+Mettre des \n en fin de ligne dans les echo, ou sortir le code HTML du code
+source PHP, afin d'avoir un code lisible en sortie.
+
+
+= Gestion comptable  =
+
+== Gestion des droits==
+Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
+
+== Comptes ==
+- Ajouter une fonction de transfert de compte à compte
+- Actions combinees (ventes, dons, activites + compte): prevoir l'operation inverse en suppression
+- Tendre vers une gestion normalisée de la compta (compta a double ecriture) ?
+
+== ID membres ==
+Dans la config, faire le choix entre une gestion par l'ID ou par l'id_asso (codification structuree): c'est utile pour la recherche et les enregistrements comptables
+
+
+= Gros Travaux =
+
+== Internationalisation ==
+En cours.
+- Activites OK
+- Adherents OK
+
+==Requetes SQL==
+- Utiliser la fonction _q($variable) plutot que les addslashes
+		$var = "toto";
+		echo _q($var); // prints 'toto'
+		echo addslashes($var); // prints toto
+
+- Il faudrait egalement faire un _q sur tous les elements recuperes de $_POST
+		ou _$GET ou $_REQUEST, afin d'eviter les erreurs SQL generes avec les
+		apostrophes dans les noms, prenoms, etc (et pas seulement dans les
+		commentaires)
 
 == Templates==
 - Renommer en FORMULAIRE_ASSOC en FORMULAIRE_ADHESION
@@ -12,8 +60,23 @@ Utiliser l'indentation de SPIP serait le mieux selon moi.
 Il faudra prevoir un formulaire en modification
 Idem pour les inscriptions aux activites et les dons
 
-== Internationalisation ==
-En cours.
+
+= Architecture =
+
+== Spip_listes 1.9.2 ==
+Ajouter l'inscription aux listes de diffusion
+
+== Prefixes de tables ==
+Il serait bon de verifier que le plugin gere les prefix de table spip.
+Notamment via l'utilisation de spip_query au lieu de mysql_query.
+Peut-etre faudrait-il egalement utiliser spip_fetch_array eu lieu de
+mysql_fetch_array. (Fait)
+
+
+= Suggestions =
+
+== Logo activites==
+A changer
 
 == Format des dates ==
 Il serait vraiment excellent que les francais puissent saisir une date en francais
@@ -24,32 +87,6 @@ et que les anglais puissent saisir une date en anglais
 Il serait pratique aussi que l'on puisse utiliser la devise de chaque pays
 dans l'internationalisation. (euro, dollar, livre, etc).
 
-== Prefixes de tables ==
-Il serait bon de verifier que le plugin gere les prefix de table spip.
-Notamment via l'utilisation de spip_query au lieu de mysql_query.
-Peut-etre faudrait-il egalement utiliser spip_fetch_array eu lieu de
-mysql_fetch_array. (Fait)
-
-==Requetes SQL==
-Utiliser la fonction _q($variable) plutot que les addslashes
-
-== Comptes ==
-- Ajouter une fonction de transfert de compte à compte
-- Actions combinees (ventes, dons, activites + compte): prevoir l'operation inverse en suppression
-- Tendre vers une gestion normalisée de la compta (compta a double ecriture) ?
-
-== ID membres ==
-Dans la config, faire le choix entre une gestion par l'ID ou par l'id_asso (codification structuree): c'est utile pour la recherche et les enregistrements comptables
-
 == Creer_login == 
 Fabrication du login a discuter
-
-== Spip_listes 1.9.2 ==
-Ajouter l'inscription aux listes de diffusion
-
-== Logo activites==
-A changer
-
-== Gestion des droits==
-Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
 
