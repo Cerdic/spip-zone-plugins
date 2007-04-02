@@ -185,6 +185,10 @@ EOS;
 // Calcule et insere le javascript necessaire pour la page
 function SelecteurGenerique_inserer_javascript($flux) {
 
+	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
+	AND DESACTIVER_SELECTEUR_GENERIQUE)
+		return $flux;
+
 	$js = '';
 
 	if (_request('exec') == 'articles') {
