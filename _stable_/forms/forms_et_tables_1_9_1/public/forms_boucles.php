@@ -59,21 +59,16 @@
 		$t = "'donnees_champs.valeur'";
 		return $t;
 	}
-	//
-	// <BOUCLE(FORMS)>
-	//
-	/*function boucle_FORMS_dist($id_boucle, &$boucles) {
-		$boucle = &$boucles[$id_boucle];
-		$id_table = $boucle->id_table;
-		$boucle->from[$id_table] =  "spip_forms";
-	
-		if (!isset($boucle->modificateur['tout'])){
-			$boucle->where[]= array("'='", "'$id_table.public'", "'oui'");
-			$boucle->group[] = $boucle->id_table . '.champ'; // ?  
-		}
-		return calculer_boucle($id_boucle, $boucles); 
-	}*/
-	
+
+	// {filtre}
+	function critere_filtre_dist($idb, &$boucles, $crit) {
+		$not = $crit->not;
+		$boucle = &$boucles[$idb];
+		if ($not)
+			erreur_squelette(_T('zbug_info_erreur_squelette'), $crit->op);
+		$boucle->modificateur['crit_filtre'] = 1;
+		//$boucle->where[]= array("'='", "'$boucle->id_table." . "id_parent'", 0);
+	}
 	//
 	// <BOUCLE(FORMS_DONNEES)>
 	//
@@ -87,8 +82,45 @@
 		if (!$boucle->statut && !isset($boucle->modificateur['tout']) && !$boucle->tout)
 			$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
 			
+		if (isset($boucle->modificateur['crit_filtre'])){
+			// construire la requete pour construire une condtion sur les champs passes en $_GET
+			$filtre = new Boucle;
+			$filtre->id_table = 'forms_champs';
+			$filtre->sql_serveur = $boucle->sql_serveur;
+			$filtre->from['forms_champs']='spip_forms_champs';
+			$filtre->select[]='champ';
+			foreach($boucle->where as $cond){
+				if ($cond[1] == "'$id_table.id_form'"){
+					$cond[1] = "'forms_champs.id_form'";
+					$filtre->where[] = $cond;
+				}
+			}
+			//$filtre->where[] = array("'='","'forms_champs.type'","'\"mot\"'");
+			$reqfiltre = calculer_requete_sql($filtre);
+			
+			$boucle->hash .= <<<code
+	$reqfiltre
+	\$filtre = "";
+	while (\$row = @spip_abstract_fetch(\$result,"")){
+		if ((\$r = _request(\$row['champ']))!==NULL){
+			if (is_array(\$r)) 
+				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
+			else
+				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r)."))";
+		}
+	}
+	if (strlen(\$filtre)) \$filtre = substr(\$filtre,4);
+	else \$filtre="1=1";
+code;
+			$boucle->where[] = '$filtre';
+			$boucle->from["dc"] =  "spip_forms_donnees_champs";
+			$boucle->where[] =  array("'='", "'dc.id_donnee'", "'$id_table.id_donnee'");
+		}
+		
 		if (isset($boucle->modificateur['crit_id_mot'])){
       $init = ($init = $boucles[$id_boucle]->doublons) ? ("\n\t$init = array();") : '';
+      $hash = $boucle->hash;
+      $boucle->hash = "";
       $boucles[$id_boucle]->doublons = false;
 			// calculer la requete sans prise en compte du critere id_mot
 			// car il n'est pas certain que la table possede un champ mot cle
@@ -111,7 +143,7 @@
 			}
 			$verif->where[] = array("'='","'forms_champs.type'","'\"mot\"'");
 			$reqverif = calculer_requete_sql($verif);
-			$boucle->hash="$reqverif $init
+			$boucle->hash = "$hash $reqverif \n$init
 
 	if (spip_abstract_count(\$result,'".$verif->sql_serveur."')==0){
 	$req

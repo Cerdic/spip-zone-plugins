@@ -1,10 +1,12 @@
-#SET{valeurs,#EVAL{$_GET}|serialize}
+#SET{valeurs,#EVAL{$_GET}|serialize}#SET{url,#SELF}
 <B_filtre>
 <form action='#SELF' method='get'>
 <div class='recherche spip_forms'>
-[(#SELF|form_hidden)]
+[(#GET{url}|parametre_url{submit,''}|form_hidden)]
 <BOUCLE_filtre(FORMS_CHAMPS){id_form}{par rang}{specifiant=oui}{type IN (select,multiple,mot)}>
 [(#INCLURE{fond=formulaires/forms_structure}{id_form}{champ}{valeurs=#GET{valeurs}})]
+#SET{url,#GET{url}|parametre_url{#CHAMP,''}}
+#SET{url,#GET{url}|parametre_url{(#CHAMP|concat{ #EVAL{chr(91)},#EVAL{chr(93)}}),''}}
 </BOUCLE_filtre>
 <div style='text-align:#LANG_RIGHT' class='spip_bouton'><input type="submit" name='submit' value="<:info_rechercher:>" /></div>
 </div>
