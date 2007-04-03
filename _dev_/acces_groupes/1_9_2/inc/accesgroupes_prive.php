@@ -13,7 +13,7 @@ function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
 	return $id AND true;
 }
 
-function autoriser_rubrique_voir0($faire, $type, $id, $qui, $opt) {
+function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
 	static $rub_exclues=NULL;
 	if ($rub_exclues===NULL){
 		$rub_exclues = accesgroupes_liste_rubriques_restreintes();
