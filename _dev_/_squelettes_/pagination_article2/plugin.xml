@@ -12,7 +12,7 @@
 	dev
 	</etat>
 	<description>
-	Exercice de jQuery ; le plugin transforme les articles contenant des intertitres en une suite de blocs qui s'affichent quand on clique sur leur titre (fonctionne sur les squelettes disposant de la balise <code>#SPIP_HEAD</code>).
+	Exercice de jQuery ; le plugin transforme les articles contenant des intertitres en une suite de blocs qui s'affichent quand on clique sur leur titre (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>).
 	Voir aussi le plugin <code>pagination_article</code>.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
