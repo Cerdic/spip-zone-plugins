@@ -17,20 +17,30 @@ function exec_produits_page(){
 				echo bloc_des_raccourcis(icone_horizontale(_T('boutique:icone_creer_produit'), generer_url_ecrire("produits_edit","new=oui"), "produit-24.gif", "creer.gif", false));
 				} else {
 					if ($connect_statut == '0minirezo') {
-						echo _T('boutique:creer_categorie');
-						echo	bloc_des_raccourcis(icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categories_edit","new=oui&retour=nav"), "categorie-24.gif", "creer.gif",false));
+						echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categories_edit","new=oui&retour=nav"), "categorie-24.gif", "creer.gif",false);
+					}
 				}
 			echo fin_raccourcis();
 		echo debut_droite();
 		
 		if (spip_num_rows($result) > 0 ){
-			$res_liste_produits_publie = spip_query("SELECT id_produit, titre FROM spip_boutique_categories WHERE id_auteur = '".$connect_id_auteur."' AND etat='publie';");
+			$res_liste_produits_publie = spip_query("SELECT id_produit, titre FROM spip_boutique_categories WHERE id_auteur = '".$connect_id_auteur."' AND statut='publie';");
 			if (spip_num_rows($res_liste_produits_publie) > 0 ){
-				
+				$res_liste_produits_prepa = spip_query("SELECT id_produit, titre FROM spip_boutique_categories WHERE id_auteur = '".$connect_id_auteur."' AND statut='prepa';");
+				$res_liste_produits_refuse = spip_query("SELECT id_produit, titre FROM spip_boutique_categories WHERE id_auteur = '".$connect_id_auteur."' AND statut='refuse';");
+			}else{
+				//echo _T('boutique:pas_d_article_a_cette_adresse');
+				if ($connect_statut == '0minirezo') {
+					echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categories_edit","new=oui&retour=nav"), _DIR_PLUGIN_SPIPDIGG."folder.png", "creer.gif",false);
+				}
 			}
-			$res_liste_produits_prepa = spip_query("SELECT id_produit, titre FROM spip_boutique_categories WHERE id_auteur = '".$connect_id_auteur."' AND etat='prepa';");
-			$res_liste_produits_refuse = spip_query("SELECT id_produit, titre FROM spip_boutique_categories WHERE id_auteur = '".$connect_id_auteur."' AND etat='refuse';");
 			
+		}else{
+			echo debut_cadre_trait_couleur();
+				if ($connect_statut == '0minirezo') {
+					echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categories_edit","new=oui&retour=nav"), _DIR_PLUGIN_SPIPDIGG."folder.png", "creer.gif",false);
+				}
+			echo fin_cadre_trait_couleur();
 		}
 		
 		if ($GLOBALS['spip_version_code']>=1.92) { echo fin_gauche(); }
