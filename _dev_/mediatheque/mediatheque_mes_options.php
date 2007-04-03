@@ -4,11 +4,6 @@
 //	last modification: 04/03/2007
 // ---------------------------------------------
 
-/*
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_AGENDA_EVENEMENTS',(_DIR_PLUGINS.end($p)));
-*/
-
 function mediatheque_texte_parser($texte, $id_article) {
 	$doc_in_texte			= array();
 	$doc_in_texte_mult		= array();
