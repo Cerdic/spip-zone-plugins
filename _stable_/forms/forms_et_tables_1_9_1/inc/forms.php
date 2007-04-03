@@ -414,7 +414,7 @@
 					$inserts[] = "("._q($id_donnee).","._q($champ).","._q($dest).")";
 				}
 			}
-			// Cas de la mise à jour pour laquelle on dispose déjà d'un fichier uploadé !
+			// Cas de la mise a jour pour laquelle on dispose deja� d'un fichier uploade !
 			elseif ( ($val=Forms_valeurs($id_donnee,$id_form,$champ)) != NULL ) {
 				$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val[$champ]).")";
 			}
@@ -595,8 +595,9 @@
 				if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
 					spip_query("UPDATE spip_forms_donnees SET ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
-					// Pourquoi ce Delete alors qu'il est effectué avant l'insertion des données ? => redondant + risque de perte de données
-					//spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
+					// il faut faire un delete ici car les champs sont mis en insert et pas update (on peut avoir plusieurs donnees par champs)
+					// a ameliorer car risque de perte de donnees
+					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
 					if ($rang==NULL) $rang = array('rang'=>Forms_rang_prochain($id_form));
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
