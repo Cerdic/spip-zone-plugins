@@ -42,13 +42,15 @@ id_categorie
 id_mot
 id_parent
 id_secteur
+id_gamme
 prix_achat
 prix_vente
 tva
 lang
 lang_choisie
-etat
+statut
 date
+date_redac
 date_modif
 
 * boutique_ristourne *

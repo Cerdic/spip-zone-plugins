@@ -17,12 +17,6 @@ _ Avec le soutient de [Media-Animation->http://www.media-animation.be]
 	Gestion de vente de produits en ligne.
 	</description>
 	<lien>http://www.spip.net/fr_article3448.html</lien> <!-- URI de documentation -->
-	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
-	boutique_options.php
-	</options>
-	<fonctions> <!-- fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
-	boutique_fonctions.php
-	</fonctions>
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
 		C'est par ailleurs conseille pour les noms de fichier

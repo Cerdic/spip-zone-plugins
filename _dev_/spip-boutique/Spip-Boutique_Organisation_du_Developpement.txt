@@ -46,8 +46,13 @@ Coté Administrateur restreint :
         V0.7.x Création de la balise #PROMOTION. Critères dans 4.4.2
 
 3)Méthode de travaille
-4)Règles de commit ?
+	On commit !
 
+4)Règles de commit ?
+	On commit !
+
+5) Ne pas oublier !!!
+Remercier les projets Gion, Tango et somatic pour les icones
 
 ----------------------------
 pour client
