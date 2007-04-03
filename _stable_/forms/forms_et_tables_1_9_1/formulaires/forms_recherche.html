@@ -1,0 +1,12 @@
+#SET{valeurs,#EVAL{$_GET}|serialize}
+<B_filtre>
+<form action='#SELF' method='get'>
+<div class='recherche spip_forms'>
+[(#SELF|form_hidden)]
+<BOUCLE_filtre(FORMS_CHAMPS){id_form}{par rang}{specifiant=oui}{type IN (select,multiple,mot)}>
+[(#INCLURE{fond=formulaires/forms_structure}{id_form}{champ}{valeurs=#GET{valeurs}})]
+</BOUCLE_filtre>
+<div style='text-align:#LANG_RIGHT' class='spip_bouton'><input type="submit" name='submit' value="<:info_rechercher:>" /></div>
+</div>
+</form>
+</B_filtre>
