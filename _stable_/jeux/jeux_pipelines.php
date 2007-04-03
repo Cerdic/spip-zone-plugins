@@ -73,11 +73,14 @@ function jeux_pre_propre($texte) {
 	$GLOBALS['debut_index_jeux'] = isset($_POST['debut_index_jeux'])?$_POST['debut_index_jeux']:rand(1, 65000);
 	$texte = jeux_pre($texte, $GLOBALS['debut_index_jeux']);
 	$jeux_liste = array_unique($jeux_liste);
-	$header='';
+	if(!$nb_jeux=count($jeux_liste)) return $texte;
+	// on oblige qd meme jeux.css et layer.js si un jeu est detecte
+	$header = jeux_stylesheet('jeux') ."\n". jeux_javascript('layer') . "\n";
+	// css et js des jeux detectes
 	foreach($jeux_liste as $jeu) $header .= jeux_stylesheet($jeu) . "\n";
 	foreach($jeux_liste as $jeu) $header .= jeux_javascript($jeu) . "\n";
 	$header = htmlentities(preg_replace(",\n+,", "||", trim($header)));
-	return (count($jeux_liste)?jeux_rem('JEUX-HEAD', count($jeux_liste), $header):'') . $texte;
+	return jeux_rem('JEUX-HEAD', count($jeux_liste), $header) . $texte;
 }
 
 // pipeline pre_propre
@@ -96,9 +99,7 @@ function jeux_header_prive($flux){
 
 // pipeline insert_head
 function jeux_insert_head($flux){
-	return $flux 
-		//. _JEUX_HEAD1 . jeux_stylesheet('jeux') . jeux_javascript('layer') 
-		. _JEUX_HEAD2;
+	return $flux . _JEUX_HEAD2;
 }
 
 // pipeline affiche_gauche
@@ -120,7 +121,6 @@ function jeux_affichage_final($flux) {
 	foreach ($matches as $val) $liste = array_merge($liste, explode('||', $val[1]));
 	$liste = array_unique($liste);
 	$header = _JEUX_HEAD2
-		. jeux_stylesheet('jeux') . jeux_javascript('layer')
 		. html_entity_decode(join("\n",$liste));
 	return str_replace(_JEUX_HEAD2, $header, $flux);
 }
