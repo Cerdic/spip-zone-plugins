@@ -146,7 +146,7 @@
 						}
 					}
 				}
-				if ($type == 'fichier') {var_dump($_FILES[$champ]); exit;
+				if ($type == 'fichier') {
 					if (!$taille = $_FILES[$champ]['size']) {
 						$erreur[$champ] = _T("forms:echec_upload");
 					}
