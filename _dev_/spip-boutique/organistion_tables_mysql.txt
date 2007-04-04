@@ -17,13 +17,9 @@ texte
 logo
 id_parent
 id_secteur
-id_mot
 lang
-lang_choisie
-etat
 date
 date_modif
-date_redac
 
 * boutique_produits *
 *********************
