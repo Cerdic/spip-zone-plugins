@@ -1,5 +1,5 @@
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
-#SET{fieldset,#ENV{champ,''}|?{1,0} #SET{need_fieldset,1} #SET{date-picker,0}
+#SET{fieldset,#ENV{champ,''}|?{0,1}} #SET{need_fieldset,1} #SET{date-picker,0}
 <BOUCLE_champs(FORMS_CHAMPS){id_form}{champ?}{tout}{type!=joint}{par rang}>
 [(#ENV{affiche_sondage})
 <fieldset><legend>#_form:TITRE</legend>
@@ -8,7 +8,7 @@
 </fieldset>
 ]
 [(#ENV{affiche_sondage}|?{'',' '})
-	[(#GET{fieldset}|?{' '}
+	[(#GET{fieldset}|?{' '})
 		[[(#GET{need_fieldset}|?{'','</fieldset>'})]<fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
 		[(#GET{need_fieldset}|?{' '})<fieldset><legend>#_form:TITRE</legend> #SET{need_fieldset,0}]
 	]
@@ -81,7 +81,7 @@
 	]
 ]
 </BOUCLE_champs>
-[(#GET{fieldset}|?{' '}
+[(#GET{fieldset}|?{' '})
 	[(#GET{need_fieldset}|?{'','</fieldset>'})]
 ]
 [(#ENV{champ,''}|?{'',' '})
