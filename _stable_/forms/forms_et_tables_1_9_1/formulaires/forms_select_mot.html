@@ -10,7 +10,7 @@
 	</ul>
 	</B_mots>
 	<B_mots_suite>
-	<ul class="choix_mots">
+	<ul class="choix_mots[ (#ENV{crayon_active,''})]">
 		<BOUCLE_mots_suite(MOTS){id_groupe} {par titre} {2/2}><li>
 			<input type="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" name="#ENV{name,#ENV{champ}}[]" id="mot-#ID_FORM-#ID_MOT" value="#ID_MOT" 
 			[(#ID_MOT|in_any{[(#ENV**{valeur}|forms_valeur{#ENV{champ}})], ''}|?{'checked="checked"',''})] />
