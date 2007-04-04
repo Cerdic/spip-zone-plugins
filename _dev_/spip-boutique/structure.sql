@@ -21,6 +21,21 @@ CREATE TABLE `spip_boutique_produits` (
   `statut` varchar(10) NOT NULL,
   `date` datetime NOT NULL,
   `date_redac` datetime NOT NULL,
-  `date_modif` datetime NOT NULL,
+  `date_modif` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id_produit`)
+) TYPE=MyISAM ;
+
+
+CREATE TABLE `spip_boutique_categories` (
+  `id_categorie` bigint(20) NOT NULL auto_increment,
+  `titre` text NOT NULL,
+  `descriptif` text NOT NULL,
+  `texte` longblob NOT NULL,
+  `logo` text NOT NULL,
+  `lang` varchar(10) NOT NULL,
+  `id_parent` bigint(20) NOT NULL,
+  `id_secteur` bigint(20) NOT NULL,
+  `date` datetime NOT NULL,
+  `date_modif` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id_categorie`)
 ) TYPE=MyISAM ;
