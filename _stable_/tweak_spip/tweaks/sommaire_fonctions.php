@@ -14,6 +14,8 @@
 define('_sommaire_NB_CARACTERES', 30);
 define('_sommaire_REM', code_echappement("<!-- SOMMAIRE -->\n"), 'TWEAK');
 
+// TODO : ajouter un fichier css pour le sommaire
+
 // renvoie le sommaire d'une page d'article
 function sommaire_d_une_page(&$texte, $page=0) {
 	static $index; if(!$index) $index=0;

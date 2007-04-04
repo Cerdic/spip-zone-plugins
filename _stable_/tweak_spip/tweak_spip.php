@@ -89,6 +89,7 @@ function is_tweak_pipeline($pipe, &$set_pipe) {
 	return $ok;
 }
 
+// est-ce que $traitement est un traitement ? 
 function is_tweak_traitements($traitement, $fonction, &$set_traitements_utilises) {
 	if ($ok = preg_match(',^traitement:([A-Z]+):(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t)) 
 		$set_traitements_utilises[$t[1]][$t[3]][$t[2]][] = $fonction;
@@ -143,7 +144,7 @@ function tweak_initialise_includes() {
 					// liste des pipelines utilises
 					if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
 				} elseif (is_tweak_traitements($pipe, $fonc, $traitements_utilises)) {
-//					tweak_set_traitements($traitements_utilises, $balise, $avantapres)
+					// bah rien a faire du coup... $traitements_utilises est deja rempli
 				}
 			}
 			// recherche d'un fichier .css et/ou .js eventuellement present dans tweaks/

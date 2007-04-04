@@ -3,8 +3,6 @@
 define('_decoupe_SEPARATEUR', '++++');
 define('_decoupe_NB_CARACTERES', 60);
 
-// TODO : ajouter un fichier css pour le sommaire
-
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;

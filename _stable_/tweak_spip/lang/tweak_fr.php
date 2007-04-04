@@ -122,7 +122,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 
 	'chatons:nom' => 'Chatons',
 	'chatons:description'	=> 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <acronym>:nom</acronym>.
-_ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire img/chatons.',
+_ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire plugins/tweak_spip/img/chatons.',
 	'chatons:aide'	=> 'Chatons : @liste@',
 
 	'guillemets:nom' => 'Guillemets typographiques',
