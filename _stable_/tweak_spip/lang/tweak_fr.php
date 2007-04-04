@@ -5,12 +5,13 @@
 $temp_jQuery = $GLOBALS['spip_version_code']<1.92?
 	"\n\n{{Attention}} : ce tweak n&eacute;cessite le plugin {jQuery} pour fonctionner ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.":"";
 $temp_couleurs = '<span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert olive</span>, <span style="background-color:navy;">navy/bleu marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu violet</span>, <span style="background-color:chocolate;">chocolate/brun clair</span>, <span style="background-color:cornsilk;">cornsilk/rose clair</span>, <span style="background-color:darkgreen;">darkgreen/vert fonce</span>, <span style="background-color:darkorange;">darkorange/orange fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune paille</span>, <span style="background-color:yellow;">yellow/jaune</span>';
+$temp_reset = parametre_url(self(),'reset','oui');
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tweak SPIP',
 	'help'	=> "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>"
-		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p>",
+		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p><p>[R&eacute;initialisation totale du plugin->$temp_reset]</p>",
 	'titre_tests' => 'Tweak SPIP - Page de tests',
 	'actif' => 'Tweak actif',
 	'inactif' => 'Tweak inactif',
@@ -18,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'validez_page' => 'Validez cette page pour modifier cette valeur',
 	'tweak'	=> 'Tweak :',
 	'tweaks_liste' => 'Liste des tweaks',
-	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante puis en validant la page.",
+	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les tweaks un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette ou avec d'autres plugin.",
 	'erreur:nom' => 'Erreur !',
 	'erreur:description'	=> 'id manquant dans la d&eacute;finition du tweak !',
 	'erreur:version'	=> 'indisponible dans cette version de Spip.',
@@ -166,7 +167,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'f_jQuery:description'	=> "Emp&ecirc;che l'installation de jQuery dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. Spip l'utilise dans sa partie priv&eacute;e.",
 
 	'target_blank:nom' => 'Liens externes',
-	'target_blank:description'	=> "Permet aux liens externes au site de s'ouvrir dans une nouvelle fen&ecirc;tre ext&eacute;rieure.\n\nActiver ce tweak revient &agrave; ajouter {target=&quot;blanc&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out} et/ou {spip_url}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
+	'target_blank:description'	=> "Permet aux liens externes au site de s'ouvrir dans une nouvelle fen&ecirc;tre ext&eacute;rieure.\n\nActiver ce tweak revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out} et/ou {spip_url}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
 		. $temp_jQuery,
 
 	'forum_lgrmaxi:nom' => 'Taille des forums',
@@ -179,12 +180,15 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'style_p:description'	=> "Jusqu'&agrave; la version 1.92 de Spip, les paragraphes html (marqu&eacute;s par la balise &lt;p&gt;) &eacute;taient syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Ce tweak vous permet de d&eacute;finir le style de vos paragraphes en fonction de vos feuilles de style.  Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.<br />Valeur : %style_p%",
 
 	'decoupe:nom' => 'D&eacute;coupe un article en pages',
-	'decoupe:description'	=> "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.<br />Attention, cette pagination ne sera pas prise en compte si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>",
+	'decoupe:description'	=> "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.<br />Attention, cette pagination ne sera pas prise en compte si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}",
 	'page_suivante' => 'Page suivante',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 	'page_debut' => 'Premi&egrave;re page',
 	'page_fin' => 'Derni&egrave;re page',
 
+	'sommaire:nom' => 'Sommaire en d&eacute;but d\'article',
+	'sommaire:description'	=> "Construit un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourcis SPIP <code>{{{Un autre titre}}}</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {D&eacute;coupe un article en pages}",
+	'sommaire' => 'Sommaire',
 /*
 	':nom' => '',
 	':description'	=> '',
@@ -192,4 +196,6 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 );
 
 unset($temp_jQuery);
+unset($temp_couleurs);
+unset($temp_reset);
 ?>

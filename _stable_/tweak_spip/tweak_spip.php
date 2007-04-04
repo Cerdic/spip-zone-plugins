@@ -85,7 +85,13 @@ function tweak_insert_header($type) {
 
 // est-ce que $pipe est un pipeline ?
 function is_tweak_pipeline($pipe, &$set_pipe) {
-	if ($ok=preg_match(',^pipeline:(.*?)$,',$pipe,$t)) $set_pipe = trim($t[1]);
+	if ($ok = preg_match(',^pipeline:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
+	return $ok;
+}
+
+function is_tweak_traitements($traitement, $fonction, &$set_traitements_utilises) {
+	if ($ok = preg_match(',^traitement:([A-Z]+):(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t)) 
+		$set_traitements_utilises[$t[1]][$t[3]][$t[2]][] = $fonction;
 	return $ok;
 }
 
@@ -106,18 +112,24 @@ function tweak_initialise_includes() {
 	$tweaks_pipelines = array();
 	// liste des pipelines utilises
 	$pipelines_utilises = array();
+	// liste des pipelines utilises
+	$traitements_utilises = array();
 	// parcours de tous les tweaks
 	foreach ($tweaks as $i=>$tweak) {
 		// stockage de la liste des fonctions par pipeline, si le tweak est actif...
 		if ($tweak['actif']) {
 			$inc = $tweak['id']; $pipe2 = '';
-			foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) {
-				// module a inclure
-				$tweaks_pipelines[$pipe2]['inclure'][] = $inc;
-				// fonction a appeler
-				$tweaks_pipelines[$pipe2]['fonction'][] = $fonc;
-				// liste des pipelines utilises
-				if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
+			foreach ($tweak as $pipe=>$fonc) {
+				if (is_tweak_pipeline($pipe, $pipe2)) {
+					// module a inclure
+					$tweaks_pipelines[$pipe2]['inclure'][] = $inc;
+					// fonction a appeler
+					$tweaks_pipelines[$pipe2]['fonction'][] = $fonc;
+					// liste des pipelines utilises
+					if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
+				} elseif (is_tweak_traitements($pipe, $fonc, $traitements_utilises)) {
+//					tweak_set_traitements($traitements_utilises, $balise, $avantapres)
+				}
 			}
 			// recherche d'un fichier .css et/ou .js eventuellement present dans tweaks/
 			if (find_in_path('tweaks/'.$inc.'.css')) $tweaks_metas_pipes['css'][] = $inc.'.css';
@@ -130,7 +142,18 @@ function tweak_initialise_includes() {
 			if ($temp=tweak_lire_fichier_php('tweaks/'.$inc.'_fonctions.php')) $tweaks_pipelines['code_fonctions'][] = $temp;
 		}
 	}
-	// effacement du repertoir temporaire de controle
+	// mise en code des traitements trouves
+	foreach($traitements_utilises as $b=>$balise){
+		foreach($balise as $f=>$fonction) {
+			$pre = isset($fonction['pre'])?join('(', $fonction['pre']).'(':'';
+			$post = isset($fonction['post'])?join('(', $fonction['post']).'(':'';
+			$traitements_utilises[$b][$f] = $post.$f.'('.$pre;
+		}
+		$temp = "\$GLOBALS['table_des_traitements']['$b'][]='" . join('(', $traitements_utilises[$b]).'%s';
+		$traitements_utilises[$b] = $temp . str_repeat(')', substr_count($temp, '(')) . "';";
+	}
+	$tweaks_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
+	// effacement du repertoire temporaire de controle
 	include_spip('inc/getdocument');
 	effacer_repertoire_temporaire(_DIR_TMP."tweak-spip");
 	// installation de $tweaks_metas_pipes

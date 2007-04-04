@@ -56,8 +56,10 @@ add_tweak( array(
 
 add_tweak( array(
 	'id'	=> 'supprimer_numero',
-	'code:options' 	=> "\$GLOBALS['table_des_traitements']['TITRE'][]= 'typo(supprimer_numero(%s))';
-\$GLOBALS['table_des_traitements']['NOM'][]='typo(supprimer_numero(%s))';",
+	// inserer : $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';
+	'traitement:TITRE:pre_typo' => 'supprimer_numero',
+	// inserer : $table_des_traitements['NOM'][]= 'typo(supprimer_numero(%s))';
+	'traitement:NOM:pre_typo' => 'supprimer_numero',
 	'categorie'	=> 'public',
 ));
 
@@ -117,7 +119,7 @@ add_tweak( array(
 	$var = '%%radio_type_urls2/s/"page(page=page|html=html|propres=propres|propres2=propres2|standard=standard|propres-qs=propres-qs)"%%';
 add_tweak( array(
 	'id'	=> 'type_urls',
-	'code:options' 	=> "\$GLOBALS['radio_type_urls2']=\$foo=$var; \$GLOBALS['type_urls'] = tweak_choix(\$foo);",
+	'code:options' 	=> "\$GLOBALS['radio_type_urls2']=\$foo=$var;\n\$GLOBALS['type_urls'] = tweak_choix(\$foo);",
 	'categorie'	=> 'admin',
 ));
 
@@ -128,8 +130,7 @@ add_tweak( array(
 	// pour les boutons radio, il faut utiliser une deuxieme variable avec le prefixe radio_ : radio_filtrer_javascript2
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
 	// le 0( signifie que 'par defaut' (traduit par : _T('tweak:js_defaut')) sera coche par defaut
-	'code:options' 	=> '$GLOBALS["radio_filtrer_javascript2"]=$foo=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;
-$GLOBALS["filtrer_javascript"]=tweak_choix($foo);',
+	'code:options' 	=> '$GLOBALS["radio_filtrer_javascript2"]=$foo=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;\n$GLOBALS["filtrer_javascript"]=tweak_choix($foo);',
 	'categorie'	=> 'admin',
 	'version-min'	=> 1.92,
 ));
@@ -205,8 +206,18 @@ add_tweak( array(
 
 add_tweak( array(
 	'id'	=> 'decoupe',
-	'code:options' 	=> '$table_des_traitements["TEXTE"][]= "decouper_en_pages(propre(%s))";',
+	// inserer : $table_des_traitements['TEXTE'][]= 'decouper_en_pages(propre(%s))';
+	'traitement:TEXTE:post_propre' => 'decouper_en_pages',
 	'categorie'	=> 'typo-racc',
+));
+
+// couplage avec le tweak precedent, donc 'sommaire' doit etre place apres 'decoupe' :
+// il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
+add_tweak( array(
+	'id'	=> 'sommaire',
+	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
+	'traitement:TEXTE:post_propre' => 'sommaire_d_article',
+	'categorie'	=> 'typo-corr',
 ));
 
 //-----------------------------------------------------------------------------//

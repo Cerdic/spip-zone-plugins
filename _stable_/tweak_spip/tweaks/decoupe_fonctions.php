@@ -1,46 +1,53 @@
 <?php
 
+define('_decoupe_SEPARATEUR', '++++');
+define('_decoupe_NB_CARACTERES', 60);
+
+// TODO : placer le sommaire sur toutes les pages
+// TODO : placer le sommaire avant la navigation
+// TODO : activer les #sommaire (retour en haut) sur chaque ancre
+// TODO : ajouter un fichier css pour le sommaire
+
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
-	if (strpos($texte, '++++')===false) return $texte;
-	$artsuite = intval($_GET['artsuite']);
-	$pages = explode('++++', $texte);
+	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
+	$artpage = max(intval($_GET['artpage']), 1);
+	$pages = explode(_decoupe_SEPARATEUR, $texte);
 	$num_pages = count($pages);
 	if ($num_pages == 1) return $texte;
-
 	// si numero illegal ou si var_recherche existe, alors renvoyer toutes les pages, separees par une ligne <hr/>.
 	// la surbrillance pourra alors fonctionner correctement.
-	if (strlen($_GET['var_recherche']) || $artsuite < 0 || $artsuite >= $num_pages)
+	if (strlen($_GET['var_recherche']) || $artpage < 1 || $artpage > $num_pages)
 		return join("<hr/>", $pages);
 
 	// images calculees par decoupe_installe()
 	$images = unserialize($GLOBALS['meta']['tweaks_decoupe']);
 
 	// images et liens pour la navigation sous forme : << < ... > >>
-	$precedent = '<a href="' . parametre_url(self(),'artsuite', $artsuite - 1) . '">'; 
-	$suivant = '<a href="' . parametre_url(self(),'artsuite', $artsuite + 1) . '">'; 
-	$debut = '<a href="' . parametre_url(self(),'artsuite', 0) . '">'; 
-	$fin = '<a href="' . parametre_url(self(),'artsuite', $num_pages-1) . '">';
+	$precedent = '<a href="' . parametre_url(self(),'artpage', $artpage - 1) . '">'; 
+	$suivant = '<a href="' . parametre_url(self(),'artpage', $artpage + 1) . '">'; 
+	$debut = '<a href="' . parametre_url(self(),'artpage', 0) . '">'; 
+	$fin = '<a href="' . parametre_url(self(),'artpage', $num_pages-1) . '">';
 	$alt = 'alt="'._T('tweak:page_precedente').'"';
-	$precedent = $artsuite == 0?$images['precedent_off'].'/>'
+	$precedent = $artpage == 0?$images['precedent_off'].'/>'
 		:$precedent.$images['precedent'].' alt="'._T('tweak:page_precedente').'"/></a>';
-	$suivant = $artsuite == ($num_pages-1)?$images['suivant_off'].'/>'
+	$suivant = $artpage == ($num_pages-1)?$images['suivant_off'].'/>'
 		:$suivant.$images['suivant'].' alt="'._T('tweak:page_suivante').'"/></a>';
-	$debut = $artsuite == 0?($temp=$images['precedent_off'].'/>').$temp
+	$debut = $artpage == 0?($temp=$images['precedent_off'].'/>').$temp
 		:$debut.($temp=$images['precedent'].' alt="'._T('tweak:page_debut').'"/>').$temp.'</a>';
-	$fin = $artsuite == $num_pages-1?($temp=$images['suivant_off'].'/>').$temp
+	$fin = $artpage == $num_pages-1?($temp=$images['suivant_off'].'/>').$temp
 		:$fin.($temp=$images['suivant'].' alt="'._T('tweak:page_fin').'"/>').$temp.'</a>';
 
 	// liens des differentes pages sous forme : 1 2 3 4
 	$milieu = array();
-	for ($i = 0; $i < $num_pages; $i++) {
-		if ($i == $artsuite) {
-			$milieu[] = '<span style="color: lightgrey; font-weight: bold; text-decoration: underline;">' . ($i+1) . '</span>';
+	for ($i = 1; $i <= $num_pages; $i++) {
+		if ($i == $artpage) {
+			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
 		} else {
 			// isoler la premiere ligne non vide de chaque page pour les attributs alt et title
 			$alt = preg_split("/[\r\n]+/", trim($pages[$i]), 2);
-			$alt = attribut_html(propre(couper($alt[0], 60)));//.' (...)';
-			$milieu[] = '<a href="' . parametre_url(self(),'artsuite', $i) . "\" alt=\"$alt\" title=\"$alt\">" . ($i+1) . '</a>';
+			$alt = attribut_html(propre(couper($alt[0], _decoupe_NB_CARACTERES)));//.' (...)';
+			$milieu[] = '<a href="' . parametre_url(self(),'artpage', $i) . "\" alt=\"$alt\" title=\"$alt\">$i</a>";
 		}
 	}
 	$milieu = join(' ', $milieu);
@@ -49,11 +56,12 @@ function decouper_en_pages_rempl($texte) {
 	// sinon une forme simplifiee : < 1 2 3 >
 	$pagination = $num_pages>3?"$debut $precedent $milieu $suivant $fin":"$precedent $milieu $suivant";
 	$pagination = "<p align='center'><span class='pagination'>$pagination</span></p>";
-	return $pagination.$pages[$artsuite].$pagination;
+	return $pagination.$pages[$artpage-1].$pagination;
 }
 
 function decouper_en_pages($texte){
-	if (strpos($texte, '++++')===false) return $texte;
+	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
+	// verification des metas qui stockent les liens d'image
 	if (!isset($GLOBALS['meta']['tweaks_decoupe']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul') {
 		include_spip('tweaks/decoupe');
 		decoupe_installe();
