@@ -17,18 +17,24 @@ define('_sommaire_REM', code_echappement("<!-- SOMMAIRE -->\n"), 'TWEAK');
 // renvoie le sommaire d'une page d'article
 function sommaire_d_une_page(&$texte, $page=0) {
 	static $index; if(!$index) $index=0;
-	preg_match_all(',<h3[^>]*>(.*)</h3>,Umsi',$texte, $regs);
+	// image de retour au sommaire
+	$titre = _T('tweak:sommaire');
+	$img = 'spip_out.gif';
+	$path = dirname(find_in_path("images/$img"));
+	list(,,,$size) = @getimagesize("$path/$img");
+	$haut = "<img class=\"no_image_filtrer\" alt=\"$titre\" title=\"$titre\" src=\"".tweak_htmlpath($path)."/$img\" $size/>";
+	$haut = "<a title=\"$titre\" href=\"".self()."#sommaire\">$haut</a>&nbsp;";
+	// traitement des titres <h3>
+	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
 	$pos = 0; $sommaire = '';
 	$p = $page?",&nbsp;p$page":'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
-		$haut = 'style="background:transparent url(dist/images/spip_out.gif) no-repeat scroll left center;"';
-		$haut = "<a href=\"#sommaire\" $haut>&nbsp; &nbsp;</a>";
 		$ancre = "<a id=\"sommaire_$index\" name=id=\"sommaire_$index\"></a>";
 		if (($pos2=strpos($texte, $regs[0][$i], $pos))!==false) {
-			$texte=substr($texte, 0, $pos2) . $ancre . substr($texte, $pos2);
+			$texte=substr($texte, 0, $pos2) . $ancre . $regs[1][$i] . $haut . $ancre . substr($texte, $pos2+strlen($regs[1][$i]));
 			$pos=$pos2+strlen($ancre)+strlen($regs[0][$i]);
-			$lien = couper($regs[1][$i], _sommaire_NB_CARACTERES);
-			$titre = htmlentities(textebrut(couper($regs[1][$i], 100)));
+			$lien = couper($regs[2][$i], _sommaire_NB_CARACTERES);
+			$titre = htmlentities(textebrut(couper($regs[2][$i], 100)));
 			$sommaire .= "<li><a $st title=\"$titre\" href=\"".parametre_url(self(),'artpage', $page)."#sommaire_$index\">$lien</a>$p</li>";
 		}
 	}
@@ -50,7 +56,7 @@ function sommaire_d_article_rempl($texte) {
 	} else $sommaire = sommaire_d_une_page($texte);
 //print_r($regs);
 
-$sommaire='<div id="tweak_sommaire" style="background-color:white;
+$sommaire='<a name="sommaire" id="sommaire"></a><div id="tweak_sommaire" style="background-color:white;
 border:1px solid gray;
 display:block;
 float:right;

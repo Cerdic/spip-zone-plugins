@@ -3,7 +3,6 @@
 define('_decoupe_SEPARATEUR', '++++');
 define('_decoupe_NB_CARACTERES', 60);
 
-// TODO : activer les #sommaire (retour en haut) sur chaque ancre
 // TODO : ajouter un fichier css pour le sommaire
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
