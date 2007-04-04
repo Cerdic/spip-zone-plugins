@@ -108,7 +108,7 @@
 					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
 			}
 			elseif (strlen(\$r))
-				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r)."))";
+				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r).")";
 		}
 	}
 	if (strlen(\$filtre)) \$filtre = substr(\$filtre,4);
