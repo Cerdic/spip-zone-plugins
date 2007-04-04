@@ -29,7 +29,6 @@ function controleurs_outline_donnee_dist($regs) {
 	
 	// retirer le fieldset et sa legend
 	$html = preg_replace(",<fieldset>\s*<legend>.*</legend>(.*)</fieldset>,Uims","\\1",$html);
-	$html = liens_absolus($html);
 	$status = NULL;
 
 	return array($html, $status);
