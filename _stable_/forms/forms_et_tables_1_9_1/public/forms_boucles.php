@@ -103,8 +103,10 @@
 	\$filtre = "";
 	while (\$row = @spip_abstract_fetch(\$result,"")){
 		if ((\$r = _request(\$row['champ']))!==NULL){
-			if (is_array(\$r) AND strlen(implode("",\$r)) 
-				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
+			if (is_array(\$r)){
+				if (strlen(implode("",\$r))) 
+					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
+			}
 			elseif (strlen(\$r))
 				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r)."))";
 		}
