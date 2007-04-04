@@ -8,40 +8,55 @@
 *	Toutes les infos sur : http://www.spip-contrib.net/?article1564
 */
 
+// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+function filets_sep_installe() {
+//tweak_log('chatons_installe()');
+	$path = dirname(find_in_path('img/filets/test'));
+	$liste = $filets = array();
+	$dossier = opendir($path);
+	while ($image = readdir($dossier)) {
+		if (preg_match(',^(([a-z0-9_-]+)\.(png|gif|jpg)),', $image, $reg)) { 
+			$liste[] = '<strong>__'.$reg[1].'__</strong>';	
+			$filets[0][] = '__'.$reg[1].'__';	
+			list(,$haut) = @getimagesize("$path/$reg[1]");
+			if ($haut) $haut="height:{$haut}px;";
+			$f = tweak_htmlpath($path).'/'.$reg[1];
+			$filets[1][] = "<html><p class=\"spip filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\">&nbsp; &nbsp; &nbsp;</p></html>";
+		}
+	}
+	ecrire_meta('tweaks_filets_sep_racc', join(', ', $liste));
+	ecrire_meta('tweaks_filets_sep', serialize($filets));
+	ecrire_metas();
+}
+
+// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
+// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+function filets_sep_raccourcis() {
+	return _T('tweak:filets_sep:aide', array('liste' => $GLOBALS['meta']['tweaks_filets_sep_racc']));
+}
+
 // Fonction pour generer des filets de separation selon les balises presentes dans le texte fourni.
 // Cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function filets_sep_rempl($texte) {
+	if (strpos($texte, '__')===false) return $texte;
 	
-	// On memorise les modeles d'expression rationnelle a utiliser pour chercher les balises.
-	$base_nombre = '\d+';
-	$base_fichier = '[\w+\.-]+\.(jpg|png|gif)';
-	$base_total = $base_nombre.'|'.$base_fichier;
-	$modele_nombre = "#[\n\r]\s*__({$base_nombre})__\s*[\n\r]#iU";
-	$modele_fichier = "#[\n\r]\s*__({$base_fichier})__\s*[\n\r]#iU";
-	$modele_total = "#[\n\r]\s*__({$base_total})__\s*[\n\r]#iU";
-	
-	// On verifie si des balises filets existent dans le texte fourni.
-	$test= preg_match($modele_total, $texte);
+	// On memorise les modeles d'expression rationnelle a utiliser pour chercher les balises numeriques.
+	$modele_nombre = "#[\n\r]\s*__(\d+)__\s*[\n\r]#iU";
 
-	if ($test) {
-		// On remplace les balises filets numeriques dans le texte par le code Html correspondant.
+	// On remplace les balises filets numeriques dans le texte par le code HTML correspondant.
+	if (preg_match($modele_nombre, $texte))
 		$texte = preg_replace($modele_nombre,'<html><p class="spip filet_sep filet_sep_$1">&nbsp; &nbsp; &nbsp;</p></html>',$texte); 
+	if (strpos($texte, '__')===false) return $texte;
 
-		// On remplace les balises filets numeriques dans le texte par le code Html correspondant.
-		$t=preg_split($modele_fichier, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);
-		$texte = $t[0];
-		for ($i=1; $i<count($t); $i+=3) {
-			$f=find_in_path('img/filets/'.$t[$i]);
-			if (file_exists($f)) list(,$haut) = @getimagesize($f);
-			if ($haut) $haut='height:'.$haut.'px; ';
-			$texte .= '<html><p class="spip filet_sep filet_sep_image" style="'.$haut.'background-image: url('.$f.');">&nbsp; &nbsp; &nbsp;</p></html>'.$t[$i+2];
-		}
-	};
-
-	return $texte;
+	// On remplace les balises filets images dans le texte par le code HTML correspondant.
+	$filets_rempl = unserialize($GLOBALS['meta']['tweaks_filets_sep']);
+	return str_replace($filets_rempl[0], $filets_rempl[1], $texte);
 }
 
+// fonction pipeline
 function filets_sep($texte) {
+	if (strpos($texte, '__')===false) return $texte;
 	return tweak_exclure_balises('', 'filets_sep_rempl', $texte);
 }
 ?>

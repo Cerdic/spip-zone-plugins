@@ -29,6 +29,9 @@ tweak_log("couleurs_installe()");
 
 //foreach ($couleurs[0] as $c=>$val) echo "<span style=\"background-color:$val;\">$val/{$couleurs[1][$c]}</span>, ";
 
+	// liste d'aide
+	$liste = array_merge($couleurs[1], $couleurs[0]);
+	foreach ($liste as $c=>$val) { $liste[$c] = "<strong>$val</strong>"; }
 	// raccourcis francais
 	foreach ($couleurs[1] as $c=>$val) { $couleurs[1][$c] = "[$val]"; $couleurs[2][$c] = "[/$val]"; }
 	// raccourcis anglais
@@ -36,8 +39,16 @@ tweak_log("couleurs_installe()");
 	// html a substituer aux racourcis
 	foreach ($couleurs[0] as $c=>$val) $couleurs[0][$c] = "<span style=\"color:$val;\">";
 	// sauvegarde en meta	
+	ecrire_meta('tweaks_couleurs_racc', join(', ', $liste));
 	ecrire_meta('tweaks_couleurs', serialize($couleurs));
 	ecrire_metas();
+}
+
+// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
+// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+function couleurs_raccourcis() {
+	return _T('tweak:couleurs:aide', array('liste' => $GLOBALS['meta']['tweaks_couleurs_racc']));
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script

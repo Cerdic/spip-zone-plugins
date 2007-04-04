@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help'	=> "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>"
 		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p><p>[R&eacute;initialisation totale du plugin->$temp_reset]</p>",
+	'raccourcis' => "Raccourcis actifs :",
 	'titre_tests' => 'Tweak SPIP - Page de tests',
 	'actif' => 'Tweak actif',
 	'inactif' => 'Tweak inactif',
@@ -69,6 +70,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 	'toutmulti:description'	=> "Introduit le raccourci &lt;:un_texte:&gt; pour introduire librement des blocs multi-langues dans un article.
 _ La fonction SPIP utilis&eacute;e est : _T('un_texte', \$flux).
 _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans les fichiers de langue.",
+	'toutmulti:aide' => 'Blocs multilingues : <strong><:trad:></strong>',
 
 	'pucesli:nom' => 'Belles puces',
 	'pucesli:description'	=> 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>&lt;ul>...&lt;/li>&lt;/ul>)',
@@ -84,7 +86,8 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 -* {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}
 
 Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
-
+	'decoration:aide' => 'D&eacute;coration : <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
+	
 	'couleurs:nom' => 'Tout en couleurs',
 	'couleurs:description'	=> "Permet d'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, ...) en utilisant des balises en raccourcis.
 _ Deux  exemples identiques : 
@@ -92,6 +95,7 @@ _ Deux  exemples identiques :
 -* <code>Lorem ipsum [red]dolor[/red] sit amet</code>.
 
 34 couleurs sont disponibles (en fran&ccedil;ais ou en anglais) : " . $temp_couleurs,
+	'couleurs:aide' => 'Couleurs : <strong>[couleur]texte[/couleur]</strong>, avec <strong>couleur</strong> = @liste@',
 
 	'typo_exposants:nom' => 'Exposants typographiques',
 	'typo_exposants:description'	=> "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
@@ -102,11 +106,13 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article1564]",
 	'filets_sep:description'	=>  "Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de Spip.
 _ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d'une image plac&eacute;e dans le dossier img/filets.
 _ Plus d'infos : [->http://www.spip-contrib.net/?article1563]",
+	'filets_sep:aide' => 'Filets de S&eacute;paration : <strong>__i__</strong> o&ugrave; <strong>i</strong> est un nombre. Images disponibles : @liste@',
 
 	'smileys:nom' => 'Smileys',
 	'smileys:description'	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
 _ Plus d'infos : [->http://www.spip-contrib.net/?article1561]
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
+	'smileys:aide'	=> 'Smileys : @liste@',
 
 	'quota_cache:nom' => 'Quota du cache',
 	'quota_cache:description'	=> "Modifie le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br />Valeur (en Mo) : %quota_cache%",
@@ -117,6 +123,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 	'chatons:nom' => 'Chatons',
 	'chatons:description'	=> 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <acronym>:nom</acronym>.
 _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire img/chatons.',
+	'chatons:aide'	=> 'Chatons : @liste@',
 
 	'guillemets:nom' => 'Guillemets typographiques',
 	'guillemets:description'	=> 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte mais seulement l\'affichage final.',
@@ -181,6 +188,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 
 	'decoupe:nom' => 'D&eacute;coupe un article en pages',
 	'decoupe:description'	=> "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.<br />Attention, cette pagination ne sera pas prise en compte si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}",
+	'decoupe:aide'	=> 'S&eacute;parateur de page : @sep@',
 	'page_suivante' => 'Page suivante',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 	'page_debut' => 'Premi&egrave;re page',

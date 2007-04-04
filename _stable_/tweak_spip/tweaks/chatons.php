@@ -22,16 +22,26 @@ function chatons_pre_typo($texte) {
 function chatons_installe() {
 //tweak_log('chatons_installe()');
 	$path = dirname(find_in_path('img/chatons/test'));
-	$chatons = array();
+	$liste = $chatons = array();
 	$dossier=opendir($path);
 	while ($image = readdir($dossier)) {
 		if (preg_match(',^([a-z][a-z0-9_-]*)\.(png|gif|jpg),', $image, $reg)) { 
 			$chatons[0][] = ':'.$reg[1];
+			$liste[] = '<strong>:'.$reg[1].'</strong>';	
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
 			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"".tweak_htmlpath($path)."/$reg[1].$reg[2]\" $size/>";
 		}
 	}
+	ecrire_meta('tweaks_chatons_racc', join(', ', $liste));
 	ecrire_meta('tweaks_chatons', serialize($chatons));
 	ecrire_metas();
 }
+
+// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
+// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+function chatons_raccourcis() {
+	return _T('tweak:chatons:aide', array('liste' => $GLOBALS['meta']['tweaks_chatons_racc']));
+}
+
 ?>

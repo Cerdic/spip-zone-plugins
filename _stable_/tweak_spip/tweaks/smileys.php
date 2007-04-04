@@ -55,16 +55,28 @@ tweak_log(" -- abs. path = $path2");
 	 ':('	=> 'pas_content.png',
 	);
 
-	// accessibilite : protection de alt et title
+	$liste = array();
 	foreach ($smileys as $smy=>$val) {
+		// accessibilite : protection de alt et title
 		$alt = '@@64@@'.base64_encode($smy).'@@65@@';
 		$espace = strlen($smy)==2?' ':'';
 		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
-		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>";
+		$smileys2[1][] = $img = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>";
+		// liste des raccourcis disponibles
+		//$img = "<img alt=\"$smy\" title=\"$smy\" class=\"format_png\" src=\"$path2/$val\" $size/>";
+		$liste[] = '<strong>'.$smy.'</strong>';//.'&nbsp;:&nbsp;'.$img;
 	}
+	ecrire_meta('tweaks_smileys_racc', join(', ', $liste));
 	ecrire_meta('tweaks_smileys', serialize($smileys2));
 	ecrire_metas();
+}
+
+// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
+// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+function smileys_raccourcis() {
+	return _T('tweak:smileys:aide', array('liste' => $GLOBALS['meta']['tweaks_smileys_racc']));
 }
 
 // fonction de remplacement

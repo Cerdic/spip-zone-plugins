@@ -199,6 +199,10 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	debut_boite_info();
 	echo propre(_T('tweak:help'));
 	fin_boite_info();
+	echo '<br />';
+	debut_boite_info();
+	echo tweak_aide_raccourcis();
+	fin_boite_info();
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
 	creer_colonne_droite();

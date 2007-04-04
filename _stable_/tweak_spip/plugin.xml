@@ -12,7 +12,7 @@ _ &copy; 2007 - Distribu&#233; sous licence GPL
 	<description>
 R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP. Chacun de ces tweaks peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin : cliquer sur {{Configuration}}, puis choisir l'onglet {{Tweak SPIP}}.
 
-Les cat&#233;gories disponibles sont : Administration, Raccourcis typographiques, Squelettes, etc.
+Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typographiques, Corrections typographiques, Affichage public, Balises, filtres, crit&#232;res, etc.
 	</description>
 	<lien>[->http://www.spip-contrib.net/Tweak-SPIP]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->

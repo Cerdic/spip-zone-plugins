@@ -30,4 +30,11 @@ tweak_log('decoupe_installe()');
 	ecrire_metas();
 }
 
+// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
+// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+function decoupe_raccourcis() {
+	include_spip('tweaks/decoupe_fonctions');
+	return _T('tweak:decoupe:aide', array('sep' => '<strong>'._decoupe_SEPARATEUR.'</strong>'));
+}
 ?>

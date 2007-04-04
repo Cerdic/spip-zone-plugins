@@ -105,6 +105,21 @@ function tweak_lire_fichier_php($file) {
 	return false;
 }
 
+// retourne une aide concernant les raccourcis ajoutes par le tweak
+function tweak_aide_raccourcis() {
+	global $tweaks;
+	$aire = array();
+	foreach ($tweaks as $tweak) {
+		// stockage de la liste des fonctions par pipeline, si le tweak est actif...
+		if ($tweak['actif']) {
+			if (function_exists($f=$tweak['id']._raccourcis)) $aide[] = '<li style="margin-top: 0.7em;">' . $f() . '</li>';
+			elseif (!preg_match(',:aide$,', _T("tweak:{$tweak['id']}:aide") )) 
+				$aide[] = '<li style="margin-top: 0.7em;">' .  _T("tweak:{$tweak['id']}:aide") . '</li>';
+		}
+	}
+	return '<p><strong>' . _T('tweak:raccourcis') . '</strong></p><ul style="margin: 0.1em 0.5em 0.1em 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
+}
+
 // cree un tableau $tweaks_pipelines et initialise $tweaks_metas_pipes
 function tweak_initialise_includes() {
 	global $tweaks, $tweaks_metas_pipes;

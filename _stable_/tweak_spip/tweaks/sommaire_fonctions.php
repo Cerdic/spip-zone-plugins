@@ -16,7 +16,6 @@ define('_sommaire_NB_CARACTERES', 30);
 // renvoie le sommaire d'une page d'article
 function sommaire_d_une_page(&$texte, $page=0) {
 	static $index; if(!$index) $index=0;
-	$titre = _T('Tweaks:sommaire');
 	preg_match_all(',<h3[^>]*>(.*)</h3>,Umsi',$texte, $regs);
 	$pos = 0; $sommaire = '';
 	$p = $page?",&nbsp;p$page":'';
@@ -61,7 +60,7 @@ overflow:hidden;
 <div style="border-bottom:1px dotted silver;
 line-height:1em;
 font-weight:bold;
-text-align:center;">&nbsp;'._T('Tweaks:sommaire').'&nbsp;</div>
+text-align:center;">&nbsp;'._T('tweak:sommaire').'&nbsp;</div>
 <ul style="font-size:84%;
 list-style-image:none;
 list-style-position:outside;

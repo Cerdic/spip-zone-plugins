@@ -7,6 +7,7 @@
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function decoration_rempl($texte) {
+	if (strpos($texte, '<')===false) return $texte;
 	// debut de balises
 	$texte = str_replace("<sc>", "<span style=\"font-variant: small-caps\">", $texte);
 	$texte = str_replace("<souligne>", "<span style=\"text-decoration: underline;\">", $texte);
@@ -22,8 +23,18 @@ function decoration_rempl($texte) {
 	return $texte;  
 }
 
+// fonction pipeline
 function decoration_pre_typo($texte) {
+	if (strpos($texte, '<')===false) return $texte;
 	return tweak_exclure_balises('', 'decoration_rempl', $texte);
+}
+
+// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
+// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+function decoration_raccourcis() {
+	$liste = '<strong>sc</strong>, <strong>souligne</strong>, <strong>barre</strong>, <strong>dessus</strong>, <strong>clignote</strong>, <strong>surfluo</strong>, <strong>surgris</strong>';
+	return _T('tweak:decoration:aide', array('liste' => $liste));
 }
 
 ?>
