@@ -1,6 +1,7 @@
 <?php
 
 define('_sommaire_NB_CARACTERES', 30);
+define('_sommaire_NB_TITRES_MINI', 2);
 
 // TODO : ajouter un fichier css pour le sommaire
 
@@ -16,6 +17,7 @@ function sommaire_d_une_page(&$texte, $page=0) {
 	$haut = "<a title=\"$titre\" href=\"".self()."#sommaire\">$haut</a>&nbsp;";
 	// traitement des titres <h3>
 	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
+	if (count($regs[0])<_sommaire_NB_TITRES_MINI) return '';
 	$pos = 0; $sommaire = '';
 	$p = $page?",&nbsp;p$page":'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
@@ -46,7 +48,7 @@ function sommaire_d_article_rempl($texte) {
 		}
 	} else $sommaire = sommaire_d_une_page($texte);
 //print_r($regs);
-
+if(!strlen($sommaire)) return $texte;
 $sommaire='<a name="sommaire" id="sommaire"></a><div id="tweak_sommaire" style="background-color:white;
 border:1px solid gray;
 display:block;
