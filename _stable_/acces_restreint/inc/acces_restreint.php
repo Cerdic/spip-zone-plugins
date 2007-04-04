@@ -288,7 +288,7 @@ include_spip('inc/rubriques');
 			// rattaches aux articles
 			$liste_art = AccesRestreint_liste_articles_exclus($publique);
 			$where = calcul_mysql_in('id_article', join(",",$liste_art));
-			$s = spip_query("SELECT id_document FROM spip_documents_articles WHERE $where");
+			$s = spip_query($q = "SELECT id_document FROM spip_documents_articles WHERE $where");
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$publique][$row['id_document']]=1;
 			}
@@ -313,7 +313,7 @@ include_spip('inc/rubriques');
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$publique][$row['id_document']]=1;
 			}*/
-			$liste_documents_exclus[$publique] = array_keys($liste_documents_exclus);
+			$liste_documents_exclus[$publique] = array_keys($liste_documents_exclus[$publique]);
 		}
 		return $liste_documents_exclus[$publique];
 	}
