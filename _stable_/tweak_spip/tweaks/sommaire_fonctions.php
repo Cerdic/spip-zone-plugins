@@ -12,6 +12,7 @@
  *
 */
 define('_sommaire_NB_CARACTERES', 30);
+define('_sommaire_REM', code_echappement("<!-- SOMMAIRE -->\n"), 'TWEAK');
 
 // renvoie le sommaire d'une page d'article
 function sommaire_d_une_page(&$texte, $page=0) {
@@ -69,7 +70,7 @@ list-style-type:none;
 margin:0.1em 0.5em 0.1em 0.7em;
 padding:0pt;">'.$sommaire.'</ul></div>';
 
-	return $sommaire.$texte;
+	return _sommaire_REM.$sommaire._sommaire_REM.$texte;
 }
 
 function sommaire_d_article($texte){

@@ -3,14 +3,20 @@
 define('_decoupe_SEPARATEUR', '++++');
 define('_decoupe_NB_CARACTERES', 60);
 
-// TODO : placer le sommaire sur toutes les pages
-// TODO : placer le sommaire avant la navigation
 // TODO : activer les #sommaire (retour en haut) sur chaque ancre
 // TODO : ajouter un fichier css pour le sommaire
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
+	// recherche du sommaire s'il existe
+	if (defined('_sommaire_REM') && (substr_count($texte, _sommaire_REM)==2)) {
+		$pages = explode(_sommaire_REM, $texte);
+		$sommaire = $pages[0].$pages[1];
+		$texte = $pages[2];
+	} else $sommaire = ''; 
+
+	// traitement des pages
 	$artpage = max(intval($_GET['artpage']), 1);
 	$pages = explode(_decoupe_SEPARATEUR, $texte);
 	$num_pages = count($pages);
@@ -56,7 +62,7 @@ function decouper_en_pages_rempl($texte) {
 	// sinon une forme simplifiee : < 1 2 3 >
 	$pagination = $num_pages>3?"$debut $precedent $milieu $suivant $fin":"$precedent $milieu $suivant";
 	$pagination = "<p align='center'><span class='pagination'>$pagination</span></p>";
-	return $pagination.$pages[$artpage-1].$pagination;
+	return $sommaire.$pagination.$pages[$artpage-1].$pagination;
 }
 
 function decouper_en_pages($texte){
