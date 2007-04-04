@@ -1,6 +1,5 @@
 <?php
 
-define('_decoupe_SEPARATEUR', '++++');
 define('_decoupe_NB_CARACTERES', 60);
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite

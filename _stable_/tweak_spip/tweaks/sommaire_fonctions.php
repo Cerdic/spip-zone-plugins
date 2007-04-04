@@ -1,18 +1,6 @@
-<?php /*
- *   +----------------------------------+
- *    Nom du Filtre : sommaire_article
- *   +----------------------------------+
- *    Date : mardi 03 avril 2007
- *    Auteur :  Patrice Vanneufville
- *   +-------------------------------------+
- *    Fonctions de ce filtre :
- *     Presenter un petit sommaire en haut
- *     de l'article base sur les balises <h3>
- *   +-------------------------------------+ 
- *
-*/
+<?php
+
 define('_sommaire_NB_CARACTERES', 30);
-define('_sommaire_REM', code_echappement("<!-- SOMMAIRE -->\n"), 'TWEAK');
 
 // TODO : ajouter un fichier css pour le sommaire
 
@@ -46,6 +34,7 @@ function sommaire_d_une_page(&$texte, $page=0) {
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function sommaire_d_article_rempl($texte) {
 	if (strpos($texte, '<h3')===false) return $texte;
+	if (strpos($texte, _sommaire_SANS_SOMMAIRE)!==false) return str_replace(_sommaire_SANS_SOMMAIRE, '', $texte);
 	$sommaire = ''; $i = 1;
 	// couplage avec le tweak 'decoupe_article'
 	if(defined('_decoupe_SEPARATEUR')) {

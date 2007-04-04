@@ -1,9 +1,13 @@
 <?php
 // fichier charge a chaque recalcul
-	include_spip('tweak_spip');
 	global $tweaks_metas_pipes;
+
+	// fonctions indispensables
+	include_spip('tweak_spip');
 tweak_log("appel de mes_fonctions : strlen=".strlen($tweaks_metas_pipes['fonctions']));
-	eval($tweaks_metas_pipes['fonctions']);
-tweak_log(" -- achevé...");
-//	include_spip(_DIR_TMP.'tweak-spip/mes_fonctions.php');
+
+	// inclusion des fonctions pre-compilees
+//	eval($tweaks_metas_pipes['fonctions']);
+	include_once(_DIR_TMP.'tweak-spip/mes_fonctions.php');
+tweak_log(" -- appel mes_fonctions achevé...");
 ?>

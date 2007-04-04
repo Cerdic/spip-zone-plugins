@@ -141,7 +141,15 @@ tweak_log("Début : enregistre_modif_tweaks()");
 	spip_log("Changement des tweaks actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
 	ecrire_meta('tweaks_actifs', serialize($liste));
 	ecrire_metas();
+		include_spip('inc/invalideur');
+@unlink(_DIR_TMP."charger_pipelines.php");
+@unlink(_DIR_TMP."charger_plugins_fonctions.php");
+@unlink(_DIR_TMP."charger_plugins_options.php");
+		supprime_invalideurs();
+		purger_repertoire(_DIR_CACHE);
+		purger_repertoire(_DIR_SKELS);
 	tweak_initialisation_totale();
+	
 tweak_log("Fin   : enregistre_modif_tweaks()");
 }
 
@@ -199,10 +207,13 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	debut_boite_info();
 	echo propre(_T('tweak:help'));
 	fin_boite_info();
-	echo '<br />';
-	debut_boite_info();
-	echo tweak_aide_raccourcis();
-	fin_boite_info();
+	$aide_racc = tweak_aide_raccourcis();
+	if(strlen($aide_racc)) {
+		echo '<br />';
+		debut_boite_info();
+		echo $aide_racc;
+		fin_boite_info();
+	}
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
 	creer_colonne_droite();

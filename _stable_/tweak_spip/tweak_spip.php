@@ -109,7 +109,7 @@ function tweak_lire_fichier_php($file) {
 // retourne une aide concernant les raccourcis ajoutes par le tweak
 function tweak_aide_raccourcis() {
 	global $tweaks;
-	$aire = array();
+	$aide = array();
 	foreach ($tweaks as $tweak) {
 		// stockage de la liste des fonctions par pipeline, si le tweak est actif...
 		if ($tweak['actif']) {
@@ -118,6 +118,7 @@ function tweak_aide_raccourcis() {
 				$aide[] = '<li style="margin-top: 0.7em;">' .  _T("tweak:{$tweak['id']}:aide") . '</li>';
 		}
 	}
+	if(!count($aide)) return '';
 	return '<p><strong>' . _T('tweak:raccourcis') . '</strong></p><ul style="margin: 0.1em 0.5em 0.1em 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
 }
 
@@ -249,7 +250,7 @@ function tweak_parse_description($tweak, $tweak_input) {
 
 // si le tweak 'log_tweaks' est activé, on logue pour Tweak-Spip
 function tweak_log($s) { 
- if($GLOBALS["log_tweaks"] && strlen($s)) spip_log('TWEAKS. '.$s);
+ if($GLOBALS['log_tweaks'] && strlen($s)) spip_log('TWEAKS. '.$s);
 }
 
 // obtenir la valeur d'un choix radio
@@ -275,7 +276,7 @@ function tweak_initialisation_totale() {
 	// on force la reinstallation complete des tweaks
 	tweak_initialisation(true);
 	// reinitialisation des pipelines, par precaution
-	if (file_exists($f = _DIR_TMP."charger_pipelines.php")) @unlink($f);
+	// if (file_exists($f = _DIR_TMP."charger_pipelines.php")) @unlink($f);
 }
 
 // lit ecrit les metas et initialise $tweaks_metas_pipes

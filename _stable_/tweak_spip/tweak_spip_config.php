@@ -206,15 +206,19 @@ add_tweak( array(
 
 add_tweak( array(
 	'id'	=> 'decoupe',
+	'code:options' => "define('_decoupe_SEPARATEUR', '++++');",
 	// inserer : $table_des_traitements['TEXTE'][]= 'decouper_en_pages(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'decouper_en_pages',
 	'categorie'	=> 'typo-racc',
 ));
 
-// couplage avec le tweak precedent, donc 'sommaire' doit etre place apres 'decoupe' :
+// couplage avec le tweak 'decoupe', donc 'sommaire' doit etre place juste apres :
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
+include_spip('inc/texte');
+$code = str_replace("'", "\'", code_echappement("<!-- SOMMAIRE -->\n", 'TWEAK'));
 add_tweak( array(
 	'id'	=> 'sommaire',
+	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",
 	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'sommaire_d_article',
 	'categorie'	=> 'typo-corr',
