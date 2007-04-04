@@ -14,7 +14,7 @@
   </B_objets>
   <BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
   <a href="[(#URL_OBJET)]" title='[(#TEXTE|texte_script)]'>
-	<img <BOUCLE_MOT1(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOut="this.src='IMG/(#LOGO_MOT_NORMAL|fichier)'" ]</BOUCLE_MOT1>style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLZONE,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;"[ alt='(#TEXTE|texte_script)'] src="<BOUCLE_MOT2(MOTS){id_carto_objet}{par titre}{0,1}>[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="motobj#ID_MOT</BOUCLE_MOT2>ecrire/img_pack/croix-rouge.gif<//B_MOT2>"/>
+	<img <BOUCLE_MOT1(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOut="this.src='IMG/(#LOGO_MOT_NORMAL|fichier)'" ]</BOUCLE_MOT1>style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLZONE,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;"[ alt='(#TEXTE|texte_script)'] src="<BOUCLE_MOT2(MOTS){id_carto_objet}{par titre}{0,1}>[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="motobj#ID_MOT</BOUCLE_MOT2>dist/images/croix-rouge.gif<//B_MOT2>"/>
   </a>
   </BOUCLE_objets2>
  </BOUCLE_carte>
