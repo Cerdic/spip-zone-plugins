@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Pour le formulaire profil
 'error_bad_user' => 'Vous ne correspondez pas &agrave; cet auteur, vous ne pouvez donc pas le modifier ...',
+'votre_profil' => 'Votre profil',
 
 // Pour le formulaire des listes
 'pass_recevoir_mail'=>'L\'adresse mail utilis&eacute;e est d&eacute;j&agrave; dans la base.<br /><br /> Vous allez recevoir un email vous indiquant comment modifier votre abonnement. ',

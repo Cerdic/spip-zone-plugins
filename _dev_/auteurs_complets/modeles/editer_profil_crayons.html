@@ -1,0 +1,33 @@
+#CACHE{0}
+<BOUCLE_auteur_principal(AUTEURS){id_auteur}{tout}>
+<h1 class="titre"><:auteurscomplets:votre_profil:></h1>
+
+<div style="padding:10px">
+	<div class="#EDIT{logo} Buddy" style="float:right;margin:20px;">
+		#LOGO_AUTEUR
+	</div>
+
+	<strong><span class="#EDIT{nomcomplet} fn"><span class="given-name">#PRENOM</span> <span class="family-name">#NOM_FAMILLE</span></span></strong>
+	[<p><span class="#EDIT{adressecomplete} adr">
+		[<span class="street-address">(#ADRESSE|?{#ADRESSE,<:auteurscomplets:non_renseigne:>})</span><br />]
+		[<span class="postal-code">(#CODEPOSTAL|?{#CODEPOSTAL,<:auteurscomplets:non_renseigne:>})</span>]
+		[<span class="locality">(#VILLE|?{#VILLE,<:auteurscomplets:non_renseigne:>})</span><br />]
+		<span class="country-name">(#PAYS|?{#PAYS,<:auteurscomplets:non_renseigne:>})</span>
+	</span></p>]
+
+	<p><span class="#EDIT{geo} geo">
+		<:auteurscomplets:entree_latitude:> : 
+		[<abbr class="latitude" title="#LATITUDE">(#LATITUDE|?{#LATITUDE,<:auteurscomplets:non_renseigne:>})</abbr>]
+		<br /><:auteurscomplets:entree_longitude:> : 
+		[<abbr class="longitude" title="#LONGITUDE">(#LONGITUDE|?{#LONGITUDE,<:auteurscomplets:non_renseigne:>})</abbr>]
+	</span></p>
+</div>
+
+<div style="padding:10px">
+	<p><strong><:auteurscomplets:contacts:></strong></p>
+	[<span class="#EDIT{organisationlink}"><:auteurscomplets:organisation:> [<a class="org spip_out" href="(#URL_ORGANISATION)">](#ORGANISATION|?{#ORGANISATION,<:auteurscomplets:non_renseigne:>})</a></span>]<br />
+	[<span class="#EDIT{auteur_email}"><:auteurscomplets:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL|?{#EMAIL,<:auteurscomplets:non_renseigne:>})</a></span><br />]
+	[<span class="#EDIT{telfax}"><:auteurscomplets:tel:> <span class="tel">(#TELEPHONE|?{#TELEPHONE,<:auteurscomplets:non_renseigne:>})</span><br />][<:auteurscomplets:fax:> <span class="fax">(#FAX|?{#FAX,<:auteurscomplets:non_renseigne:>})</span></span><br />]
+	[<:auteurscomplets:website:> <a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>]
+</div>
+</BOUCLE_auteur_principal>

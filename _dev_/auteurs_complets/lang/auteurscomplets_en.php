@@ -53,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Pour le formulaire profil
 'error_bad_user' => 'You are not logged as this author, so you can\'t modify him ...',
+'votre_profil' => 'Your profile',
 
 // Pour le formulaire des listes
 'pass_recevoir_mail'=>'The e-mail address you are using is already in the database.<br /><br /> You will receive a confirmation e-mail specifying how to change your subscription.',
