@@ -102,10 +102,10 @@
 	$reqfiltre
 	\$filtre = "";
 	while (\$row = @spip_abstract_fetch(\$result,"")){
-		if ((\$r = _request(\$row['champ']))!==NULL AND strlen(\$r)){
-			if (is_array(\$r)) 
+		if ((\$r = _request(\$row['champ']))!==NULL){
+			if (is_array(\$r) AND strlen(implode("",\$r)) 
 				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
-			else
+			elseif (strlen(\$r))
 				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r)."))";
 		}
 	}
