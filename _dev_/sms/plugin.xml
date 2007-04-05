@@ -22,4 +22,5 @@ _ Il est bas&eacute; sur Net_SMS de Horde/PEAR
 	<prefix>
 	SMS
 	</prefix>
+	<chemin dir='' type='prive' />
 </plugin>
