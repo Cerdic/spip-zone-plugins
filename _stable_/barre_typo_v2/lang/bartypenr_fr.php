@@ -54,7 +54,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_boutonsavances' => 'Mises en sens suppl&eacute;mentaires, &agrave; utiliser avec mod&eacute;ration et discernement&nbsp;!',
 'cfg_puces' => 'Traitement des puces',
 'cfg_titraille' => 'Titraille',
-'cfg_insertcss' => 'Insertion CSS'
+'cfg_insertcss' => 'Insertion CSS',
+
+'galerie' => 'Galerie de documents'
 
 );
 ?>

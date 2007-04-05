@@ -6,6 +6,7 @@ http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images
 
 remplacer test_layer()	par  ???
 */
+include_spip('inc/minipres');
 include_spip('inc/presentation');
 include_spip('inc/documents');
 
@@ -14,22 +15,12 @@ function exec_galerie() {
 	global $spip_dir_lang, $spip_lang, $browser_layer,$spip_lang_right,$spip_lang_left;
 	
 	$GLOBALS['blocks'] = array();
-	$GLOBALS['blocksDocks'] = array();
+	$GLOBALS['blocksDocs'] = array();
 	$GLOBALS['blocksPleins'] = array();
 
-	//debut_html('Galerie');
-	//echo "<html><head><title>Galerie</title></head><body>";
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('galerie'), "galerie", "");
+	echo install_debut_html(_T('bartypenr:galerie'));
 
-	echo "<style type=\"text/css\">
-.bandeau-icones{display:none;}
-.bandeau_couleur{display:none;}
-#bandeau-gadgets{display:none;}
-</style>";
-	echo '<table width="100%" border="0" cellpadding="5" cellspacing="0"><tr><td>';
-	debut_cadre_enfonce();
-	gros_titre('Galerie de documents');
+	echo '<script type="text/javascript" src="../dist/javascript/layer.js"></script><table width="100%" border="0" cellpadding="5" cellspacing="0" style="text-align:left;"><tr><td>';
 	list($data, $nbDocsTotal) = sous_arborescence(0);
 	?>
 	<script type="text/javascript" language="JavaScript" >
@@ -116,7 +107,7 @@ function exec_galerie() {
 		-->
 		</script>
 		<p>
-		Déplier : 
+		D&eacute;plier : 
 		<a href="javascript:showAll();">tout</a> -
 		<a href="javascript:showNice();">les docs</a>
 		<br />
@@ -127,11 +118,9 @@ function exec_galerie() {
 		<?php
 	}
 
-	debut_cadre_relief('doc-24.gif');
 	echo $data;
-	fin_cadre_relief();
-	fin_cadre_enfonce();
-	echo '</td></tr></table></body></html>';
+	echo '</td></tr></table>';
+	echo install_fin_html();
 }
 
 function afficher_un_document_nx($id_document){
@@ -248,9 +237,9 @@ function sous_arborescence($id_rubrique) {
 				$retour .= $bouton;
 			} else {
 
-				$retour .= '<img src="'._DIR_IMG_PACK.'rien.gif" width="16" height="14" />';
+				$retour .= '<img src="'._DIR_IMG_PACK.'rien.gif" width="16" height="14" alt="" />';
 			}
-			$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'rubrique-24.gif" align="absbottom" /> ';
+			$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'rubrique-24.gif" style="vertical-align:bottom;" alt="" /> ';
 			$retour .= $row['titre'].' ('.$nbDocs.' document'.($nbDocs > 1 ? 's' : '').')';
 			if ($content != '') {
 				$retour .= '<br />';
