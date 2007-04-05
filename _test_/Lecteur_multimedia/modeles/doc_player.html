@@ -6,12 +6,10 @@ http://spip-zone.info/spip.php?article18
 Si le document est de format mp3, afficher la vignette si elle est personnalisée
 Afficher le TITRE, le DESCRIPTIF suivi du lecteur flash permettant de faire jouer ce fichier.
 
-Sinon, utiliser le comportemant normal.
+Sinon, utiliser le comportement normal.
 
 
 ]
-
-
 <BOUCLE_doc (DOCUMENTS) {id_document}>
 #SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
 
@@ -31,15 +29,14 @@ Sinon, utiliser le comportemant normal.
 [(#GET{player}|=={pixplayer}|?{' ',''})
 <object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf' id='audioplayer#ID_DOCUMENT' height='24' width='290'>
 <param name="wmode" value="opaque" />
-<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf'>
-<param name='FlashVars' value='playerID=#ID_DOCUMENT&amp;bg=0xf8f8f8&amp;leftbg=0xeeeeee&amp;lefticon=0x666666&amp;rightbg=0xcccccc&amp;rightbghover=0x999999&amp;righticon=0x666666&amp;righticonhover=0xFFFFFF&amp;text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0x9FFFB8&amp;soundFile=#URL_DOCUMENT'>
-<param name='quality' value='high'>
-<param name='menu' value='false'>
-<param name='bgcolor' value='#FFFFFF'>
+<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf' />
+<param name='FlashVars' value='playerID=#ID_DOCUMENT&amp;bg=0xf8f8f8&amp;leftbg=0xeeeeee&amp;lefticon=0x666666&amp;rightbg=0xcccccc&amp;rightbghover=0x999999&amp;righticon=0x666666&amp;righticonhover=0xFFFFFF&amp;text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0x9FFFB8&amp;soundFile=#URL_DOCUMENT' />
+<param name='quality' value='high' />
+<param name='menu' value='false' />
+<param name='bgcolor' value='#FFFFFF' />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
-]
-[(#GET{player}|=={neoplayer}|?{' ',''})
+][(#GET{player}|=={neoplayer}|?{' ',''})
 <object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_maxi.swf" width="200" height="20">
 <param name="wmode" value="opaque" />
 <param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_maxi.swf" />
@@ -55,18 +52,14 @@ Sinon, utiliser le comportemant normal.
 <param name="FlashVars" value="mp3=#URL_DOCUMENT|#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=1" />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
-]
-
-[(#GET{player}|=={dewplayer}|?{' ',''})
+][(#GET{player}|=={dewplayer}|?{' ',''})
 <object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf' width='200' height='20'>
 <param name="wmode" value="opaque" />
-<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf'/>
-<param name="FlashVars" value='son=[(#URL_DOCUMENT|url_absolue)]'>
+<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf' />
+<param name="FlashVars" value='son=[(#URL_DOCUMENT|url_absolue)]' />
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
-]
-
-[(#GET{player}|=={eraplayer}|?{' ',''})
+][(#GET{player}|=={eraplayer}|?{' ',''})
 <object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}eraplayer.swf" width="20" height="20">
 	<param name="wmode" value="transparent" />
 	<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}eraplayer.swf" />
