@@ -11,11 +11,13 @@
 
 (function($){
   jQuery.fn.SEhighlight = function(options) {
-    SEhighlight.options = $.extend({exact:true,style_name:'hilite',style_name_suffix:true,debug_referrer:''},options);
+    SEhighlight.options = $.extend({exact:true,style_name:'hilite',style_name_suffix:true},options);
     
+    if(options.engines) SEhighlight.engines.unshift(options.engines);  
     var ref = options.debug_referrer ? options.debug_referrer : document.referrer;
-    var q = SEhighlight.decodeURL(location,SEhighlight.siteSearch);
-    if(!q) q = SEhighlight.decodeURL(ref,SEhighlight.engines);
+    //var q = SEhighlight.decodeURL(location,SEhighlight.siteSearch);
+    //if(!q) q = SEhighlight.decodeURL(ref,SEhighlight.engines);
+    var q = SEhighlight.decodeURL(ref,SEhighlight.engines);
     if(q) {
       SEhighlight.buildReplaceTools(q);
       return this.each(function(){
@@ -27,20 +29,20 @@
   var SEhighlight = {
     options: {},
     regex: [],
-    siteSearch: [
-    [/.*/,/var_rech=([^&]+)/i]                                       // SPIP
-    ],
+    //siteSearch: [
+    //[/.*/,/var_rech=([^&]+)/i]                                       // SPIP
+    //],
     engines: [
     [/^http:\/\/(www\.)?google\./i, /q=([^&]+)/i],                   // Google
-    [/^http:\/\/(www\.)?search\.yahoo\./i, 'p'],                     // Yahoo
-    [/^http:\/\/(www\.)?search\.msn\./i, 'q'],                       // MSN
-    [/^http:\/\/(www\.)?search\.live\./i, 'query'],                  // MSN Live
-    [/^http:\/\/(www\.)?search\.aol\./i, 'userQuery'],               // AOL
-    [/^http:\/\/(www\.)?ask\.com/i, 'q'],                            // Ask.com
-    [/^http:\/\/(www\.)?altavista\./i, 'q'],                         // AltaVista
-    [/^http:\/\/(www\.)?feedster\./i, 'q'],                          // Feedster
-    [/^http:\/\/(www\.)?search\.lycos\./i, 'q'],                     // Lycos
-    [/^http:\/\/(www\.)?alltheweb\./i, 'q'],                         // AllTheWeb
+    [/^http:\/\/(www\.)?search\.yahoo\./i, /p=([^&]+)/i],                     // Yahoo
+    [/^http:\/\/(www\.)?search\.msn\./i, /q=([^&]+)/i],                       // MSN
+    [/^http:\/\/(www\.)?search\.live\./i, /query=([^&]+)/i],                  // MSN Live
+    [/^http:\/\/(www\.)?search\.aol\./i, /userQuery=([^&]+)/i],               // AOL
+    [/^http:\/\/(www\.)?ask\.com/i, /q=([^&]+)/i],                            // Ask.com
+    [/^http:\/\/(www\.)?altavista\./i, /q=([^&]+)/i],                         // AltaVista
+    [/^http:\/\/(www\.)?feedster\./i, /q=([^&]+)/i],                          // Feedster
+    [/^http:\/\/(www\.)?search\.lycos\./i, /q=([^&]+)/i],                     // Lycos
+    [/^http:\/\/(www\.)?alltheweb\./i, /q=([^&]+)/i],                         // AllTheWeb
     [/^http:\/\/(www\.)?technorati\.com\/search\/([^\?\/]+)/i, 1],   // Technorati
     ],
     subs: {},
