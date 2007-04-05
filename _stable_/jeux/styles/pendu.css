@@ -40,5 +40,6 @@ img.pendu_image{
 
 /* ensemble des images du pendu */
 div.pendu_images{ 
+ line-height:0pt;
 /* border:2px solid; */
 }

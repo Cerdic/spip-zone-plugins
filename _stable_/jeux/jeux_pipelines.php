@@ -11,11 +11,10 @@ include_spip('jeux_config');
 include_spip('jeux_utils');
 
 // tableau de parametres exploitables par les plugins
-global $jeux_config, $jeux_liste;
+global $jeux_config;
 
 // fonction pre-traitement
 function jeux_pre($chaine, $indexJeux){ 
-	global $jeux_liste;
 	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $chaine;
 	
 	// isoler le jeu...
@@ -24,9 +23,18 @@ function jeux_pre($chaine, $indexJeux){
 	
 	// ...et decoder le texte obtenu en fonction des signatures
 	$liste = jeux_inclure_et_decoder($chaine, $indexJeux);
-	$jeux_liste = array_merge($jeux_liste, $liste);
-
-	return $texteAvant
+	// calcul des fichiers necessaires pour le header
+	if(count($liste)) {
+		// on oblige qd meme jeux.css et layer.js si un jeu est detecte
+		$header = jeux_stylesheet('jeux') ."\n". jeux_javascript('layer') . "\n";
+		// css et js des jeux detectes
+		foreach($liste as $jeu) $header .= jeux_stylesheet($jeu) . "\n";
+		foreach($liste as $jeu) $header .= jeux_javascript($jeu) . "\n";
+		$header = htmlentities(preg_replace(",\n+,", "||", trim($header)));
+		$header = jeux_rem('JEUX-HEAD', count($liste), $header);
+	} else $header = '';
+//
+	return $texteAvant . $header
 		.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste))
 		."<a name=\"JEU$indexJeux\"></a>$chaine"
 		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre($texteApres, ++$indexJeux);
@@ -63,24 +71,12 @@ function jeux2($chaine, $indexJeux){
 
 // pipeline pre_propre
 function jeux_pre_propre($texte) { 
-	// liste des jeux trouves
-	global $jeux_liste;
-	$jeux_liste = array();
 	// s'il n'est pas present dans un formulaire envoye,
 	// l'identifiant du jeu est choisi au hasard...
 	// ca peut servir en cas d'affichage de plusieurs articles par page.
 	// en passant tous les jeux en ajax, ce ne sera plus la peine.
 	$GLOBALS['debut_index_jeux'] = isset($_POST['debut_index_jeux'])?$_POST['debut_index_jeux']:rand(1, 65000);
-	$texte = jeux_pre($texte, $GLOBALS['debut_index_jeux']);
-	$jeux_liste = array_unique($jeux_liste);
-	if(!$nb_jeux=count($jeux_liste)) return $texte;
-	// on oblige qd meme jeux.css et layer.js si un jeu est detecte
-	$header = jeux_stylesheet('jeux') ."\n". jeux_javascript('layer') . "\n";
-	// css et js des jeux detectes
-	foreach($jeux_liste as $jeu) $header .= jeux_stylesheet($jeu) . "\n";
-	foreach($jeux_liste as $jeu) $header .= jeux_javascript($jeu) . "\n";
-	$header = htmlentities(preg_replace(",\n+,", "||", trim($header)));
-	return jeux_rem('JEUX-HEAD', count($jeux_liste), $header) . $texte;
+	return jeux_pre($texte, $GLOBALS['debut_index_jeux']);
 }
 
 // pipeline pre_propre

@@ -140,7 +140,7 @@ function jeux_inclure_et_decoder(&$texte, $indexJeux) {
 		 $liste[]=$jeu;
 		}
 	}
-	return $liste;
+	return array_unique($liste);
 }
 
 // pour placer des commentaires
