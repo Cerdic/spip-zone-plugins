@@ -40,4 +40,5 @@ _ &copy; 2006 - GPL
 		<nom>insert_head</nom>
 		<inclure>phpmv_fonctions.php</inclure>
 	</pipeline>
+	<chemin dir='' />
 </plugin>

@@ -37,5 +37,5 @@
 		<action>ajouterBoutons</action>
 		<inclure>gestion_documents.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<chemin dir='' type='prive' />
 </plugin>

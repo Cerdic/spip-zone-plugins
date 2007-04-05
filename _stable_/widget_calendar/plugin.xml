@@ -41,6 +41,5 @@ _ 2006 - Distribu&#233; sous licence GPL
 		<nom>body_prive</nom>
 		<inclure>inc/calendar_init.php</inclure>
 	</pipeline>
-
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<chemin dir='' type='prive' />
 </plugin>

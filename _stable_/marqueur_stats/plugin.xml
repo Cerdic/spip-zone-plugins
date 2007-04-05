@@ -31,4 +31,5 @@ _ &copy; 2006 - GPL
 	<pipeline>
 		<nom>affichage_final</nom>
 	</pipeline>
+	<chemin dir='' type='prive' />	
 </plugin>

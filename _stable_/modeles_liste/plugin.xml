@@ -23,4 +23,5 @@
 		<nom>affiche_droite</nom>
 		<inclure>modlist_filtres.php</inclure>
 	</pipeline>
+	<chemin dir='' type='prive' />
 </plugin>

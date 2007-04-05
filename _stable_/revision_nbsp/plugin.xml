@@ -33,4 +33,5 @@ _ Compatibilit&#233; : SPIP versions 1.9.2 et sup&#233;rieures
 		<action>ajoute_bouton_corriger_les_notes</action>
 		<inclure>revision_nbsp.php</inclure>
 	</pipeline>
+	<chemin dir='' type='prive' />	
 </plugin>

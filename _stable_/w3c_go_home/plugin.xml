@@ -28,4 +28,5 @@
 		<nom>affiche_droite</nom>
 		<inclure>w3cgh_pipeline.php</inclure>
 	</pipeline>
+	<chemin dir='' />
 </plugin>

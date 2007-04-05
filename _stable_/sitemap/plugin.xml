@@ -33,4 +33,5 @@ Modali&#224; di utilizzo: dichiarare l'[URL della SiteMap->../spip.php?page=site
 	<prefix> 
 	siteMap
 	</prefix>
+	<chemin dir='' type='public' />	
 </plugin>

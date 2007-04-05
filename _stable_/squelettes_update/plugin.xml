@@ -26,4 +26,5 @@ le droit d'updater le dossier avec subversion
 	<options>
 	squelup_options.php
 	</options>
+	<chemin dir='' />
 </plugin>
