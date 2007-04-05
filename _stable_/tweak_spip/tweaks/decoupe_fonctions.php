@@ -47,7 +47,7 @@ function decouper_en_pages_rempl($texte) {
 			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
 		} else {
 			// isoler la premiere ligne non vide de chaque page pour les attributs alt et title
-			$alt = preg_split("/[\r\n]+/", trim($pages[$i]), 2);
+			$alt = preg_split("/[\r\n]+/", trim($pages[$i-1]), 2);
 			$alt = attribut_html(propre(couper($alt[0], _decoupe_NB_CARACTERES)));//.' (...)';
 			$milieu[] = '<a href="' . parametre_url(self(),'artpage', $i) . "\" alt=\"$alt\" title=\"$alt\">$i</a>";
 		}
