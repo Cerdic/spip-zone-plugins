@@ -23,4 +23,5 @@ _ {{Necessite les plugin forms&amp;tables et sms}}
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
+	<chemin dir='' />
 </plugin>
