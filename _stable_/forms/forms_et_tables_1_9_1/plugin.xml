@@ -83,5 +83,5 @@
 		<nom>affiche_milieu</nom>
 		<inclure>forms_pipeline.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<chemin dir='' />
 </plugin>
