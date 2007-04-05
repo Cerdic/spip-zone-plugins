@@ -45,6 +45,7 @@ Aide : [->http://www.spip-contrib.net/Des-jeux-dans-vos-articles]
 	<fonctions>jeux_fonctions.php</fonctions>
 	<options>jeux_options.php</options>
 	<prefix>jeux</prefix>
+	<chemin dir='' />
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>jeux_pipelines.php</inclure>
