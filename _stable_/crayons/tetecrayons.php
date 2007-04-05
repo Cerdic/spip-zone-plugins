@@ -38,7 +38,7 @@ function Crayons_insert_head($head) {
 }
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
-function Crayons_affichage_final($page) {
+function &Crayons_affichage_final(&$page) {
 
     // ne pas se fatiguer si le visiteur n'a aucun droit
     if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist()))
@@ -65,7 +65,6 @@ function Crayons_affichage_final($page) {
             $droits_accordes ++;
         }
     }
-
     // et les signaler dans la page
     if ($droits_accordes == count($regs)) // tous les droits
         $page = Crayons_preparer_page($page, '*', $wdgcfg);
@@ -75,7 +74,7 @@ function Crayons_affichage_final($page) {
     return $page;
 }
 
-function Crayons_preparer_page($page, $droits, $wdgcfg = array(), $mode='page') {
+function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page') {
 	lang_select($GLOBALS['auteur_session']['lang']);
 
 	$jsFile = generer_url_public('crayons.js');
@@ -116,11 +115,11 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array(), $mode='page') 
 
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
-<script type="text/javascript">
+<script type="text/javascript"><!--
     var configCrayons = new cfgCrayons({$config});
+//-->
 </script>
 EOH;
-
 
 	if ($mode == 'head')
 		return $page . $incHead;
@@ -129,7 +128,7 @@ EOH;
 	if ($pos_head === false)
 		return $page;
 
-    return substr_replace($page, $incHead, $pos_head, 0);
+	return substr_replace($page, $incHead, $pos_head, 0);
 
 }
 

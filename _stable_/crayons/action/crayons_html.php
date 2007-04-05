@@ -155,12 +155,13 @@ class Crayon {
 
 	// formulaire standard
     function formulaire($contexte = array(), $inputAttrs = array()) {
-        return '<form class="formulaire_spip" method="post" action="' .
+    		include_spip('inc/filtres');
+        return liens_absolus('<form class="formulaire_spip" method="post" action="' .
         	str_replace('crayons_html', 'crayons_store', self(true)) . '">' .
         	$this->code() .
 	        $this->input($contexte, $inputAttrs) .
         	$this->boutons() . // array('edit'=>'')
-			'</form>';
+			'</form>');
     }
 
 	// balises input type hidden d'identification du crayon

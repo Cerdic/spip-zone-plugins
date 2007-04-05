@@ -54,5 +54,5 @@ _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultado
 		<nom>affiche_milieu</nom>
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<chemin dir='' />
 </plugin>

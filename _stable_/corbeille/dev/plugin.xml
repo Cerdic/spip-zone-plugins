@@ -42,5 +42,5 @@ _ &copy; 2005-2006 - Distribuido bajo licencia GPL
 		<action>ajouterBoutons</action>
 		<inclure>inc_corbeille.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<chemin dir='' type='prive' />
 </plugin>

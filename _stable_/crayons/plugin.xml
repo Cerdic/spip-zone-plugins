@@ -53,5 +53,5 @@ _ <code><h1 class="#EDIT{titre} &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#157
 		<action>insert_head</action>
 		<inclure>tetecrayons.php</inclure>
 	</pipeline>
-
+	<chemin dir='' />
 </plugin>

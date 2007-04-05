@@ -57,6 +57,5 @@ _ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
-
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<chemin dir='' />
 </plugin>
