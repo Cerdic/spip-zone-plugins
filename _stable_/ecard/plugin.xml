@@ -21,7 +21,5 @@ _ Ce plugin illustre le mecanisme de personalisation des squelettes de formulair
 	<prefix> 
 	ecard
 	</prefix>
-
-
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<chemin dir='' />
 </plugin>
