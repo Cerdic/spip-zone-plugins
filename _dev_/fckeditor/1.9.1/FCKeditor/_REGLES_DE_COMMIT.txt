@@ -1,0 +1,76 @@
+
+Projet : Plugin FCKEditor
+Auteur : Frank SAURET - 
+Contact : http://electropol.free.fr
+
+Voici les régles à suivre avant de commiter des modifications sur
+cette branche.
+
+A. Obligation de n'intervenir que dans le planning de travail. Pour le modifier
+contactez moi à vincevg@free.fr.
+
+          Planning de modification :
+          
+          1. Faire le pluggin  à partir de la dernière version de FCKEditor (Terminé Frank SAURET),
+          2. Intégrer l'aide (Terminé Frank SAURET),
+          3. Faire une page de personnalisation dans la partie configuration,
+          (le style de la barre d'outils, choisir les boutons  …),
+          4. Permettre le basculement entre l'éditeur spip et fckeditor,
+          5. Intégrer les liens vers d'autres articles (Terminé Valérian),
+          6. Prévoir un loader,
+          7. Ajouter la fonctionnalité note de bas de page,
+          8. Redim auto selon la taille d'écran,
+          9. Mettre un bouton wysiwyg sur chapo, brève et autre,
+          10. Changer la langue selon celle de spip,
+          11. Possibilité de lien auto sur wikipédia,
+          12. Texte de survol,
+          13. Intégrer les raccourcis Typo spip,
+          14. Faire du vrai wywiwyg en attribuant à la fenêtre fck la feuille du squelette.
+          15. Intégrer l'insertion de fichiers uploadés par SPIP (liens et intégration) (Terminé Valérian)
+          
+B. Obligation de commenter les commits
+
+   Si vous envoyez des modifications, il faut toujours les commenter
+   de façon "descriptive" et "complète" avec l'option -m ou -F du
+   commit SVN.
+   
+C.  Modification du code
+
+    Cette version n'a pas vocation à évoluer. Si vous avez envie de vous
+    retrousser les manches allez plutôt voir la version dev. 
+    
+    Vous pouvez néanmoins apporter des modifications mineures. Incrémentez à 
+    chaque fois le N° de version mineure. Ex : passer de la 1.9 à 1.10. 
+  
+      Aucune modification profonde du code n'est attendu pour cette version.
+      Seules les corrections de bug sont autorisées.
+	
+      Tout le monde à le droit de faire des modifications.
+	
+      Toutefois, dans un premier temps, il est souhaitable d'avertir  
+      l'auteur principal du projet. Il faut alors, dans le mail, 
+      envoyer un patch au format "diff -pu", donner une description 
+      défendable du bug corrigé et la manière choisit pour le corriger.
+		
+       En particulier, il faut bien penser à:
+      - décrire le bug que l'on corrige, 
+        comment on a choisit de le  corriger,
+      - décrire la modification que l'on a faite et pourquoi le
+        nouveau code est meilleur que l'ancien (qui n'est certainement pas
+        un code parfait de toute façon)
+      - décrire la nouvelle fonction, ce quelle apporte à
+        l'utilisateur, les dépendances qu'elle apporte.
+	
+  
+  
+A. Clarté du code.
+
+Il n'y a actuellement pas de règles précises d'écriture correct du
+code. Il faut juste garder du code indenter (i.e indenter chaque
+fermeture sur une nouvelle ligne pour les gros blocs), en général,
+suivre la façon dont c'est fait dans les fichiers de bases.
+
+Il faut toujours mettre une chaîne de documentation quand c'est
+possible et quand on le peut documenter le processus/l'algorithme que
+l'on implémente.
+
