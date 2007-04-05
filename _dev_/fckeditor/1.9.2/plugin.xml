@@ -1,0 +1,35 @@
+<plugin>
+	<nom>Edition WYSIWYG avec FCKeditor</nom>
+	<auteur>[Frank SAURET->http://electropol.free.fr], Val&eacute;rian &copy; 2006 - Distribu&eacute; sous licence GNU/GPL</auteur>
+	<version>1.1 (pour spip 1.9.1)</version>
+	<etat>dev</etat>
+	<description>
+{{Edition WYSIWYG avec FCKeditor}}
+Cette version semble stable, n&eacute;anmoins, il se peut que certains firewalls bloquent les scripts.
+<br /><br />
+<u>Caract&eacute;ristiques :</u>
+-* - Edition des articles et des br&egrave;ves,
+-* - Seule la zone &laquo;texte&raquo; est &eacute;ditable,
+-* - Se substitue &agrave; la barre SPIP mais propose une option pour la r&eacute;&eacute;dition d'article initalement &eacute;cris avec l'&eacute;diteur SPIP,
+-* - G&eacute;n&egrave;re du HTML,
+-* - Bas&eacute; sur FCKeditor 2.32 modifi&eacute;,
+-* - Ajout d'une aide &agrave; l'utilisation en fran&ccedil;ais,
+-* - Possibilit&eacute; de li&eacute; et d'ins&eacute;rer des fichiers et images envoy&eacute;s par SPIP,
+-* - Possibilit&eacute; de supprimer et renommer les fichiers envoy&eacute;s par FCKeditor.
+
+<u>Limitations</u>
+-* - Ne pas mixer pour un m&ecirc;me article l'&eacute;dition WYSIWYG et le code SPIP,
+-* - Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs. 
+-* - Il est possible de d&eacute;sactiver ces fonctionnalit&eacute;s &agrave; l'aide des fichiers de configuration,
+-* - Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP.
+	</description>
+	<lien>[http://electropol.free.fr]</lien> <!-- URL de documentation -->
+	<prefix>fckeditor</prefix>
+
+	<pipeline>
+		<nom>header_prive</nom> 
+		<action>header_prive</action>
+		<inclure>fckeditor_pipelines.php</inclure>
+	</pipeline>
+
+</plugin>

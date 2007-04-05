@@ -1,0 +1,5 @@
+
+
+	-> gestion des raccourcis SPIP (voir FCKConfig.ProtectedSource.Add)
+	-> passer la galerie, la config et autre en squelettes ?????
+	-> voir pb de largeur
