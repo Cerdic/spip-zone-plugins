@@ -23,6 +23,7 @@ _ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.1, v1.9.2, v1.9.3svn
 	<fonctions>minicalalter_fonctions.php</fonctions>
 	<options>minicalalter_options.php</options>
 	<prefix>CalAlter</prefix>
+	<chemin dir='' type='public' />
 	<pipeline>
 		<nom>insert_head</nom> 
 		<inclure>minicalalter_pipelines.php</inclure>
