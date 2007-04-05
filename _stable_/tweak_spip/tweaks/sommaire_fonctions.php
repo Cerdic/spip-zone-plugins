@@ -6,8 +6,9 @@ define('_sommaire_NB_TITRES_MINI', 2);
 // TODO : ajouter un fichier css pour le sommaire
 
 // renvoie le sommaire d'une page d'article
-function sommaire_d_une_page(&$texte, $page=0) {
+function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index) $index=0;
+//echo $texte;
 	// image de retour au sommaire
 	$titre = _T('tweak:sommaire');
 	$img = 'spip_out.gif';
@@ -17,7 +18,7 @@ function sommaire_d_une_page(&$texte, $page=0) {
 	$haut = "<a title=\"$titre\" href=\"".self()."#tweak_sommaire\">$haut</a>&nbsp;";
 	// traitement des titres <h3>
 	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
-	if (count($regs[0])<_sommaire_NB_TITRES_MINI) return '';
+	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	$p = $page?",&nbsp;p$page":'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
@@ -37,18 +38,17 @@ function sommaire_d_une_page(&$texte, $page=0) {
 function sommaire_d_article_rempl($texte) {
 	if (strpos($texte, '<h3')===false) return $texte;
 	if (strpos($texte, _sommaire_SANS_SOMMAIRE)!==false) return str_replace(_sommaire_SANS_SOMMAIRE, '', $texte);
-	$sommaire = ''; $i = 1;
+	$sommaire = ''; $i = 1; $nbh3 = 0;
 	// couplage avec le tweak 'decoupe_article'
 	if(defined('_decoupe_SEPARATEUR')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
-		if (count($pages) == 1) $sommaire = sommaire_d_une_page($texte);
+		if (count($pages) == 1) $sommaire = sommaire_d_une_page($texte, $nbh3);
 		else {
-			foreach($pages as $p=>$page) { $sommaire .= sommaire_d_une_page($page, $i++); $pages[$p] = $page; }
+			foreach($pages as $p=>$page) { $sommaire .= sommaire_d_une_page($page, $nbh3, $i++); $pages[$p] = $page; }
 			$texte = join(_decoupe_SEPARATEUR, $pages);
 		}
-	} else $sommaire = sommaire_d_une_page($texte);
-//print_r($regs);
-if(!strlen($sommaire)) return $texte;
+	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
+	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) return $texte;
 $sommaire='<a name="tweak_sommaire" id="tweak_sommaire"></a><div id="tweak_sommaire" style="background-color:white;
 border:1px solid gray;
 display:block;
