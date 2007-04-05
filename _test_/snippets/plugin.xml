@@ -22,4 +22,5 @@
 		<nom>affiche_droite</nom>
 		<inclure>snippets_pipeline.php</inclure>
 	</pipeline>
+	<chemin dir='' />	
 </plugin>
