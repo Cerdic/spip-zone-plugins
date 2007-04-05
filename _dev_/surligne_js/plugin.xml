@@ -1,0 +1,34 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>
+  [it] evidenzia ricerche in js
+  [fr] surligne en js
+  </multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[Renato Formato->mailto:renatoformato@virgilio.it]
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<icon></icon>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>[it] Evidenziare le parole cercate in javascript
+  [fr] Surligner le mot cherche en javascript
+  </multi>
+	</description>
+  <options>
+  surlignejs_options.php
+  </options>
+	<lien></lien>
+	<prefix>
+	Surlignejs
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>surlignejs_pipeline.php</inclure>
+	</pipeline>
+</plugin>
