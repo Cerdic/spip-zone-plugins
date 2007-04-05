@@ -160,7 +160,7 @@ function afficher_un_document($id_document){
 		$GLOBALS['blocksDocs'][] = $idBlock;
 	}
 	$retour .= '<tr><td valign="top">'.$bouton.'</td>';
-	$retour .= '<td><img src="'._DIR_IMG_PACK.'doc-24.gif" align="absbottom" /> '.$titre;
+	$retour .= '<td><img src="'._DIR_IMG_PACK.'doc-24.gif" style="vertical-align:bottom;" alt="" /> '.$titre;
 	$retour .= debut_block_invisible('doc'.$id_document);
 	$retour .= '<div style="border: 1px dashed #666666; padding: 5px; background-color: #f0f0f0;">';
 	$retour .= '<table border="0" cellspacing="3" cellpadding="3"><tr><td rowspan="'.(_GALERIE_MODE ? 5 : 4).'" valign="top">';
@@ -274,7 +274,7 @@ $article['id'] = $listeArticles[$i]['id'];
 					$GLOBALS['blocksPleins'][] = $idBlock;
 				}
 				$retour .= $bouton;
-				$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'article-24.gif" align="absbottom" /> ';
+				$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'article-24.gif" style="vertical-align:bottom;" alt="" /> ';
 				$retour .= $article['titre'].' ('.$article['nb'].' document'.($article['nb'] > 1 ? 's' : '').')';
 				//$retour .= $listeArticles[$i]['titre'].' ('.$listeArticles[$i]['nb'].' document'.($listeArticles[$i]['nb'] > 1 ? 's' : '').')';
 				$retour .= '<br />';
