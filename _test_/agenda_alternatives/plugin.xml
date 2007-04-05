@@ -24,7 +24,7 @@ _ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.1, v1.9.2, v1.9.3svn
 	<options>minicalalter_options.php</options>
 	<prefix>CalAlter</prefix>
 	<chemin dir='' type='public' />
-	<necessite id="Agenda" version="[0.13;]" />
+	<necessite id="Agenda" version="[0.1;]" />
 	<necessite id="WCalendar" version="[0.11;]" />
 	<pipeline>
 		<nom>insert_head</nom> 
