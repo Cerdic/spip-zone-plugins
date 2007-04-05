@@ -119,7 +119,21 @@ function tweak_aide_raccourcis() {
 		}
 	}
 	if(!count($aide)) return '';
-	return '<p><strong>' . _T('tweak:raccourcis') . '</strong></p><ul style="margin: 0.1em 0.5em 0.1em 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
+	return '<p><strong>' . _T('tweak:raccourcis') . '</strong></p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
+}
+
+// retourne une aide concernant les pipelines utilises par le tweak
+function tweak_aide_pipelines() {
+	global $tweaks_metas_pipes, $tweaks;
+	$aide = array();
+	foreach (array_keys($tweaks_metas_pipes) as $pipe) {
+		// stockage de la liste des pipelines et du nombre de tweaks actifs concernes
+		$nb=0; foreach($tweaks as $tweak) if($tweak['actif'] && isset($tweak['pipeline:'.$pipe])) $nb++;
+		if ($nb) $aide[] = '<li style="margin-top: 0.7em;">' .  _T('tweak:nbtweak'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb)) . '</li>';
+	}
+	$nb = count(unserialize($GLOBALS['meta']['tweaks_actifs']));
+	return '<p><strong>' . _T('tweak:pipelines') . '</strong> '.count($aide).'</p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>'
+		. '<p><strong>' . _T('tweak:actifs') . "</strong> $nb</p>";
 }
 
 // cree un tableau $tweaks_pipelines et initialise $tweaks_metas_pipes
@@ -287,6 +301,7 @@ function tweak_initialisation($forcer=false) {
 	static $deja_passe_ici;
 	if (!intval($deja_passe_ici)) {
 tweak_log("#### 1er PASSAGE ####################################### - \$rand = $rand - \$forcer = ".intval($forcer));
+tweak_log("Version PHP courante : " . phpversion() . " - Versions SPIP (base/code) : " . $GLOBALS['spip_version'] . '/' . $GLOBALS['spip_version_code']);
 		$forcer |= ($GLOBALS['var_mode'] == 'recalcul') || ($GLOBALS['var_mode']=='calcul');
 	}
 	$deja_passe_ici++;

@@ -163,6 +163,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	// reset general
 	if (_request('reset')=='oui'){
 		spip_log("Reset de tous les tweaks par l'auteur id=$connect_id_auteur");
+		echo 'toto';
 		foreach(array_keys($GLOBALS['meta']) as $meta) 
 			if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
 		ecrire_metas();
@@ -212,6 +213,13 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		echo '<br />';
 		debut_boite_info();
 		echo $aide_racc;
+		fin_boite_info();
+	}
+	$aide_pipes = tweak_aide_pipelines();
+	if(strlen($aide_pipes)) {
+		echo '<br />';
+		debut_boite_info();
+		echo $aide_pipes;
 		fin_boite_info();
 	}
 

@@ -12,10 +12,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help'	=> "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>"
 		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p><p>[R&eacute;initialisation totale du plugin->$temp_reset]</p>",
-	'raccourcis' => "Raccourcis actifs&nbsp;:",
+	'raccourcis' => "Raccourcis typographiques actifs&nbsp;:",
+	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
+	'nbtweak' => '@pipe@ : @nb@ tweak',
+	'nbtweaks' => '@pipe@ : @nb@ tweaks',
 	'titre_tests' => 'Tweak SPIP - Page de tests',
 	'actif' => 'Tweak actif',
 	'inactif' => 'Tweak inactif',
+	'actifs' => 'Tweaks actifs :',
 	'activer_tweak' => 'Activer le tweak',
 	'validez_page' => 'Validez cette page pour modifier cette valeur',
 	'tweak'	=> 'Tweak :',
@@ -195,8 +199,8 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'page_fin' => 'Derni&egrave;re page',
 
 	'sommaire:nom' => 'Sommaire en d&eacute;but d\'article',
-	'sommaire:description'	=> "Construit un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourcis SPIP <code>{{{Un autre titre}}}</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {D&eacute;coupe un article en pages}",
-	'sommaire:aide'	=> 'Article sans sommaire&nbsp;: @interdit@',
+	'sommaire:description'	=> "Construit systématiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourcis SPIP <code>{{{Un autre titre}}}</code>. Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).<br />Attention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {D&eacute;coupe un article en pages}",
+	'sommaire:aide'	=> 'Un article sans sommaire&nbsp;: @interdit@',
 	'sommaire' => 'Sommaire',
 /*
 	':nom' => '',

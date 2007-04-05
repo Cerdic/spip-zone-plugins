@@ -123,14 +123,15 @@ add_tweak( array(
 	'categorie'	=> 'admin',
 ));
 
-add_tweak( array(
-	'id'	=> 'filtrer_javascript',
 	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:js_jamais'), _T('tweak:js_defaut') et _T('tweak:js_toujours')
 	// la variable Spip est : filtrer_javascript
 	// pour les boutons radio, il faut utiliser une deuxieme variable avec le prefixe radio_ : radio_filtrer_javascript2
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
 	// le 0( signifie que 'par defaut' (traduit par : _T('tweak:js_defaut')) sera coche par defaut
-	'code:options' 	=> '$GLOBALS["radio_filtrer_javascript2"]=$foo=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;\n$GLOBALS["filtrer_javascript"]=tweak_choix($foo);',
+	$var = '%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%';
+add_tweak( array(
+	'id'	=> 'filtrer_javascript',
+	'code:options' 	=> "\$GLOBALS['radio_filtrer_javascript2']=\$foo=$var;\n\$GLOBALS['filtrer_javascript']=tweak_choix(\$foo);",
 	'categorie'	=> 'admin',
 	'version-min'	=> 1.92,
 ));
