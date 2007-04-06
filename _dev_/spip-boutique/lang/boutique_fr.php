@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'creer_categorie'=>'Cr&eacute;er une cat&eacute;gorie',
 'creer_un_produit'=>'Cr&eacute;er un produit',
 
+// d
+'descriptif_de_la_categorie'=>'Descriptif de la cat&eacute;gorie',
+
 // e
 'editer_une_categorie'=>'Edition d\'une cat&eacute;gorie',
 

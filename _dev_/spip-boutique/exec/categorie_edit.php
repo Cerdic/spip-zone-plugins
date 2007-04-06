@@ -12,7 +12,7 @@ function exec_categorie_edit(){
 			echo fin_boite_info();
 			echo debut_raccourcis();
 				if (_request('id_categorie') != "new"){
-					echo '<a href="?exec=membre_view&amp;id_membre='._request('id_membre').'"><b><img src="'._DIR_PLUGIN_INTRADIC.'img_pack/back.png" alt="retour" align="absmiddle"> Retour</b></a>';
+					echo '<a href="?exec=produits_page"><b><img src="'._DIR_PLUGIN_INTRADIC.'img_pack/back.png" alt="retour" align="absmiddle"> Retour</b></a>';
 				}
 			echo fin_raccourcis();
 		echo debut_droite();
@@ -23,6 +23,8 @@ function exec_categorie_edit(){
 			echo debut_cadre_formulaire();
 			echo '<b>'._T('boutique:titre_de_la_categorie').'</b>';
 			echo '<input style="width: 480px;" class="formo" name="titre" value="'.$categorie['titre'].'" size="40" type="text"><br />';
+			echo '<b>'._T('boutique:descriptif_de_la_categorie').'</b>';
+			echo '<textarea name="descriptif" rows="5" class="forml" cols=""></textarea><br />';
 			echo barre_textarea ( $contenu['descriptif'], '10', $cols, $lang='' );
 			echo fin_cadre_formulaire();
 			
