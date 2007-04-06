@@ -14,8 +14,9 @@ Si cette langue n'est utilis&eacute;e par aucun secteur (!!!), le premier secteu
 Il est possible de laisser l'internaute choisir sa langue pr&eacute;f&eacute;r&eacute;e, différente de celle configur&eacute;e dans son navigateur, en la pr&eacute;cisant en param&egrave;tre d'appel du sommaire, avec <code>/?lang=fr</code> par exemple pour le fran&ccedil;ais.
 Ce choix est alors stock&eacute; dans un cookie pour utilisation ultérieure prioritaire sur la configuration du navigateur.
 La balise <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> permet de proposer un lien de suppression de ce cookie.
-<code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{mon message personnalis&eacute;}</code> permet de remplacer le message propos&eacute; par d&eacute;faut.
+<code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{mon message personnalise}</code> permet de remplacer le message propos&eacute; par d&eacute;faut.
     </description>
+    <chemin dir='' />
 	<prefix>languepreferee</prefix>
 	<options>languepreferee_options.php</options>
 </plugin>
