@@ -11,12 +11,12 @@
 
 (function($){
   jQuery.fn.SEhighlight = function(options) {
+    var ref = options.debug_referrer ? options.debug_referrer : document.referrer;
+    if(!ref) return this;
+    
     SEhighlight.options = $.extend({exact:true,style_name:'hilite',style_name_suffix:true},options);
     
     if(options.engines) SEhighlight.engines.unshift(options.engines);  
-    var ref = options.debug_referrer ? options.debug_referrer : document.referrer;
-    //var q = SEhighlight.decodeURL(location,SEhighlight.siteSearch);
-    //if(!q) q = SEhighlight.decodeURL(ref,SEhighlight.engines);
     var q = SEhighlight.decodeURL(ref,SEhighlight.engines);
     if(q) {
       SEhighlight.buildReplaceTools(q);
@@ -29,9 +29,6 @@
   var SEhighlight = {
     options: {},
     regex: [],
-    //siteSearch: [
-    //[/.*/,/var_rech=([^&]+)/i]                                       // SPIP
-    //],
     engines: [
     [/^http:\/\/(www\.)?google\./i, /q=([^&]+)/i],                   // Google
     [/^http:\/\/(www\.)?search\.yahoo\./i, /p=([^&]+)/i],                     // Yahoo
@@ -74,7 +71,7 @@
             re.push(SEhighlight.options.exact?'\\b'+q+'\\b':q);
         }
     
-        SEhighlight.regex = new RegExp('('+re.join("|")+')', "gi");
+        SEhighlight.regex = new RegExp(re.join("|"), "gi");
         
         for (var i = 0, l = query.length; i < l; i ++) {
             SEhighlight.subs[query[i]] = SEhighlight.options.style_name+
