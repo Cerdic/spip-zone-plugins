@@ -14,6 +14,7 @@ Reste &agrave; faire :
 -* Initialisation progressive en cron pour les gros sites
 -* R&eacute;f&eacute;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&eacute;dric ?)
 	</description>
+    <chemin dir='' />
 	<prefix>lienscontenus</prefix>
 	<options>lienscontenus_mes_options.php</options>
 	<fonctions>lienscontenus_mes_fonctions.php</fonctions>

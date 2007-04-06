@@ -173,7 +173,10 @@ function lienscontenus_verification()
     $data = '<script language="javascript" type="text/javascript">' .
                 'var messageConfirmationChangementStatut="'._T('lienscontenus:confirmation_depublication').'";' .
                 'var messageConfirmationSuppression="'._T('lienscontenus:confirmation_suppression').'";' .
+                'var messageInformationElementContenu="'._T('lienscontenus:information_element_contenu').'";' .
+                'var baseUrlPlugin="../'._DIR_PLUGIN_LIENSCONTENUS.'";' .
                 '</script>';
+    $data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
     return $data;
 }
 
@@ -181,7 +184,6 @@ function lienscontenus_verification_articles()
 {
     $data = lienscontenus_verification();
     $script = <<<EOS
-        <style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // ETAPE 1 : Gestion des changements de statut de l'article
@@ -268,7 +270,6 @@ function lienscontenus_verification_articles_edit()
     // TODO : Y a t'il parfois de l'AjaxSqueeze pour la suppression de doc ? 
     $data = lienscontenus_verification();
     $script = <<<EOS
-        <style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on ajoute une classe specifique aux liens de suppression des docs
@@ -424,7 +425,6 @@ function lienscontenus_verification_mots_tous()
     // TODO : A finir...
     $data = lienscontenus_verification();
     $script = <<<EOS
-        <style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             function gestionDesSuppressionsDeMots() {
@@ -482,5 +482,68 @@ function lienscontenus_verification_mots_tous()
 EOS;
     $data .= $script;
     return $data;
+}
+
+function lienscontenus_verification_articles_page()
+{
+    // TODO : A finir...
+    $data = lienscontenus_verification();
+    $script = <<<EOS
+        <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            // on ajoute une classe specifique
+            $('span[@id^=puce_statut_article]').each(function() {
+                var idArticle = $(this).attr('id').replace(/^puce_statut_article([0-9]+)$/g, '$1');
+                // on ne s'interesse qu'aux articles publies
+                $(this).find('img[@src$=/puce-verte.gif]').each(function() {
+                    // on recupere "oui" si un autre contenu pointe vers le mot, "non" sinon 
+                    var articleContenu = $.ajax({
+                        url: '?exec=lienscontenus_ajax_article_contenu',
+                        data: 'id_article='+idArticle+'&var_ajaxcharset=utf-8',
+                        async: false,
+                        dataType: 'xml'
+                        }).responseText;
+                    articleContenu = $(articleContenu).text();
+                    if (articleContenu == 'oui') {
+                        $(this).parent().parent().next().prepend('<img src="' + baseUrlPlugin + '/images/alerte.png" style="float: left; padding: 0; margin: 0 3px;" title="' + messageInformationElementContenu + '" />');
+                    }
+                })
+            });
+            // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
+            /*
+            $('tr.tr_liste > td > div > a.lienscontenus_oui').each(function() {
+                if (this.onclick) {
+                    originalOnClick = this.onclick;
+                    this.onclick = null;
+                } else {
+                    originalOnClick = null;
+                }
+                $(this).bind('click', {origclick: originalOnClick}, handleClick);
+                function handleClick(event)
+                {
+                    if (confirm(messageConfirmationSuppression)) {
+                        if(event.data.origclick) {
+                            event.data.origclick.apply(this);
+                            return false;
+                        } else {
+                            // Si on n'a pas de onclick a l'origine, c'est que le href doit etre suivi
+                            return true;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            });
+            */
+        });
+        </script>
+EOS;
+    $data .= $script;
+    return $data;
+}
+
+function lienscontenus_verification_naviguer()
+{
+    lienscontenus_verification_articles_page();	
 }
 ?>
