@@ -67,7 +67,7 @@
     buildReplaceTools : function(query) {
         re = new Array();
         for (var i = 0, l=query.length; i < l; i ++) {
-            var q = query[i].toLowerCase();
+            var q = query[i] = query[i].toLowerCase();
             re.push(SEhighlight.options.exact?'\\b'+q+'\\b':q);
         }
     
@@ -78,7 +78,7 @@
               (SEhighlight.options.style_name_suffix?i+1:''); 
         }        
     },
-    
+    nosearch: /s(?:cript|tyle)|textarea/,
     hiliteElement: function(el, query) {
         if(el==document) el = $("body")[0];
         for(var i=0,l=el.childNodes.length;i<l;i++) {
@@ -103,7 +103,7 @@
                 $(item).before(repl).remove();
               }                
             } else {
-              if(item.nodeType==1 && item.nodeName.toLowerCase().search(/script|style|textarea/)==-1)
+              if(item.nodeType==1 && item.nodeName.toLowerCase().search(SEhighlight.nosearch)==-1)
                 SEhighlight.hiliteElement(item,query);
             }	
           }
