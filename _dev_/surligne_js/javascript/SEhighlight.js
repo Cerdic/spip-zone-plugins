@@ -60,7 +60,7 @@
       })
       
       if (query) {
-      query = query.replace(/\'|"/, '');
+      query = query.replace(/(\'|")/, '\$1');
       query = query.split(/[\s,\+\.]+/);
       }
       
@@ -94,7 +94,7 @@
               RegExp.lastIndex = 0;
               while(match = SEhighlight.regex.exec(text)) {
                 newtext += text.substr(index,match.index-index)+'<span class="'+
-                SEhighlight.subs[match[0]]+'">'+match[0]+"</span>";
+                SEhighlight.subs[match[0].toLowerCase()]+'">'+match[0]+"</span>";
                 index = match.index+match[0].length;
               }
               if(newtext) {
