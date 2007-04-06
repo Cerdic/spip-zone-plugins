@@ -6,7 +6,7 @@
  *    
  * @author Renato Formato <renatoformato@virgilio.it> 
  *  
- * @version 0.1
+ * @version 0.2
  */
 
 (function($){
@@ -63,11 +63,29 @@
       
       return query;
     },
-    
+		regexAccent : [
+      [/[\xC0-\xC5]/ig,'a'],
+      [/[\xD2-\xD6\xD8]/ig,'o'],
+      [/[\xC8-\xCB]/ig,'e'],
+      [/\xC7/ig,'c'],
+      [/[\xCC-\xCF]/ig,'i'],
+      [/[\xD9-\xDC]/ig,'u'],
+      [/\xFF/ig,'y'],
+      [/\xD1/ig,'n']
+    ],
+    matchAccent : /[\xC0-\xC5\xC7-\xCF\xD1-\xD6\xD8-\xDC\xFF]/ig,  
+		replaceAccent: function(q) {
+      if(SEhighlight.matchAccent.test(q)) {
+        $.each(SEhighlight.regexAccent,function(i,n){
+          q = q.replace(n[0],n[1]);
+        });
+      }
+      return q;
+    },
     buildReplaceTools : function(query) {
         re = new Array();
         for (var i = 0, l=query.length; i < l; i ++) {
-            var q = query[i] = query[i].toLowerCase();
+            var q = query[i] = SEhighlight.replaceAccent(query[i].toLowerCase());
             re.push(SEhighlight.options.exact?'\\b'+q+'\\b':q);
         }
     
@@ -89,9 +107,9 @@
               var text = item.data;
               var newtext="",match,index=0;
               RegExp.lastIndex = 0;
-              while(match = SEhighlight.regex.exec(text)) {
+              while(match = SEhighlight.regex.exec(SEhighlight.replaceAccent(item.data))) {
                 newtext += text.substr(index,match.index-index)+'<span class="'+
-                SEhighlight.subs[match[0].toLowerCase()]+'">'+match[0]+"</span>";
+                SEhighlight.subs[match[0]]+'">'+text.substr(match.index,match[0].length)+"</span>";
                 index = match.index+match[0].length;
               }
               if(newtext) {
