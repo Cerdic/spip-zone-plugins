@@ -17,6 +17,8 @@ include_spip('inc/accesgroupes_boucles');
 // 		 pour remplir le tableau des rubriques restreintes en utilisant le principe d'héritage des restrictions
 function accesgroupes_liste_rubriques_restreintes($id_parent = 0){
 	//echo '<br>debut accesgroupes_liste_rubriques_restreintes';
+	// Coyote - 20070406 - Vérif origine de l'accès
+	$accesprive =((strpos($_SERVER['PHP_SELF'],"/ecrire/")===false)?"public":"prive");
 	$id_parent = intval($id_parent); // securite
 	static $Trub_restreintes; // nécessaire pour que la suite ne soit éxécutée qu'une fois par hit (même si on à n BOUCLES)
 	if (!is_array($Trub_restreintes)) {
@@ -35,7 +37,7 @@ function accesgroupes_liste_rubriques_restreintes($id_parent = 0){
 				}
 				// sinon c'est plus couteux : il faut faire le test complet de la restriction de la rubrique pour espace public
 				else {  */
-			if (accesgroupes_verif_acces($rub_ec, 'public') == 1 OR accesgroupes_verif_acces($rub_ec, 'public') == 2) {
+			if (accesgroupes_verif_acces($rub_ec, $accesprive) == 1 OR accesgroupes_verif_acces($rub_ec, $accesprive) == 2) {
 				$Trub_restreintes[] = $rub_ec;
 			}
 			//	 }
