@@ -2,6 +2,7 @@
 
 define('_sommaire_NB_CARACTERES', 30);
 define('_sommaire_NB_TITRES_MINI', 2);
+define('_sommaire_SANS_FOND', '[!fond]');
 
 // TODO : ajouter un fichier css pour le sommaire
 
@@ -49,25 +50,41 @@ function sommaire_d_article_rempl($texte) {
 		}
 	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
 	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) return $texte;
-$sommaire='<a name="tweak_sommaire" id="tweak_sommaire"></a><div id="tweak_sommaire" style="background-color:white;
-border:1px solid gray;
+
+	$img = find_in_path('img/sommaire/coin.gif');
+	$sansfond = !$img || strpos($texte, _sommaire_SANS_FOND)!==false;
+	if ($sansfond) {
+		$texte = str_replace(_sommaire_SANS_FOND, '', $texte);
+		$fond = 'background-color:white; border:1px solid gray;';
+	} else {
+		$img = tweak_htmlpath($img);
+		$fond = "background:transparent url($img) no-repeat scroll left top; border-bottom:1px solid #999999; border-right:1px solid #999999;";
+	}
+
+
+$sommaire='<a name="tweak_sommaire" id="tweak_sommaire"></a><div id="tweak_sommaire" style="
+'.$fond.'
 display:block;
 float:right;
-margin:0pt 0pt 0pt 1em;
-overflow:hidden;
+/*position:relative;*/
+margin-left:1em;
+overflow:auto;
+z-index:100;
 /*width:160px;*/
-">
-<div style="border-bottom:1px dotted silver;
-line-height:1.2em;
-font-weight:bold;
-text-align:center;">&nbsp;'._T('tweak:sommaire').'&nbsp;</div>
+max-height:350px;
+"><div style="margin:3pt;"><div style="
+border-bottom:1px dotted silver;
+line-height:1;
+position:inherit;
+font-weight:bold;'.($sansfond?'':'margin-left:15px;').'
+text-align:center;">'._T('tweak:sommaire').'</div>
 <ul style="font-size:84%;
 list-style-image:none;
 list-style-position:outside;
 list-style-type:none;
 /*list-style-type:square;*/
-margin:0.1em 0.5em 0.1em 0.7em;
-padding:0pt;">'.$sommaire.'</ul></div>';
+margin:0.3em 0.5em 0.1em 0.7em;
+padding:0pt;">'.$sommaire.'</ul></div></div>';
 
 	return _sommaire_REM.$sommaire._sommaire_REM.$texte;
 }

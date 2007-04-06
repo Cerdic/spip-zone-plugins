@@ -7,7 +7,7 @@
 tweak_log("appel de mes_fonctions : strlen=".strlen($tweaks_metas_pipes['fonctions']));
 
 	// inclusion des fonctions pre-compilees
-//	eval($tweaks_metas_pipes['fonctions']);
-	include_once(_DIR_TMP.'tweak-spip/mes_fonctions.php');
-tweak_log(" -- appel mes_fonctions achevé...");
+	if (!$GLOBALS['tweak_fonctions']) include_once(sous_repertoire(_DIR_TMP, "tweak-spip").'mes_fonctions.php');
+	if (!$GLOBALS['tweak_fonctions']) eval($tweaks_metas_pipes['fonctions']);
+tweak_log(' -- appel mes_fonctions achevé... tweak_fonctions = '.intval($GLOBALS['tweak_fonctions']));
 ?>

@@ -10,6 +10,7 @@
 /* COMPATIBILITE */
 /*****************/
 
+
 if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
@@ -49,7 +50,8 @@ function set_tweaks_metas_pipes_fichier($tweaks_pipelines, $type) {
 	$tweaks_metas_pipes[$type] = $code;
 tweak_log("set_tweaks_metas_pipes_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "mes_$type.php";
-	ecrire_fichier($fichier_dest, "<?php\n// Code de controle pour le plugin Tweak-SPIP\n$code?".'>');
+tweak_log(" -- fichier_dest = $fichier_dest");
+	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin Tweak-SPIP\n++\$GLOBALS['tweak_$type'];\n$code?".'>');
 }
 
 // installation de $tweaks_metas_pipes
@@ -61,9 +63,10 @@ function set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipeline) {
 		foreach ($tweaks_pipelines[$pipeline]['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
 	}
 	$tweaks_metas_pipes[$pipeline] = $code;
-	tweak_log("set_tweaks_metas_pipes_pipeline($pipeline) : strlen=".strlen($code));
+tweak_log("set_tweaks_metas_pipes_pipeline($pipeline) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "$pipeline.php";
-	ecrire_fichier($fichier_dest, "<?php\n// Code de contrôle pour le plugin Tweak-SPIP\n$code?".'>');
+tweak_log(" -- fichier_dest = $fichier_dest");
+	ecrire_fichier($fichier_dest, '<'."?php\n// Code de contrôle pour le plugin Tweak-SPIP\n$code?".'>');
 }
 
 // retourne les css ou js utilises (en vue d'un insertion en head)
@@ -96,12 +99,12 @@ function is_tweak_traitements($traitement, $fonction, &$set_traitements_utilises
 	return $ok;
 }
 
-// lire un fichier php et retirer si possible les balises <?php
+// lire un fichier php et retirer si possible les balises ?php
 function tweak_lire_fichier_php($file) {
 	$file=find_in_path($file);
 	if ($file && lire_fichier($file, $php)) {
 		if (preg_match(',^<\?php(.*)?\?>$,msi', trim($php), $regs)) return trim($regs[1]);
-		return "\n?>\n".trim($php)."\n<?php\n";
+		return "\n"."?>\n".trim($php)."\n<"."?php\n";
 	}
 	return false;
 }
@@ -276,8 +279,7 @@ function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); r
 function tweak_installe_tweaks() {
 	global $tweaks;
 	foreach($temp = $tweaks as $tweak) if ($tweak['actif']) {
-		include_spip($temp2='tweaks/'.$tweak['id']);
-//		include_spip($temp2.'_fonctions');
+		include_spip('tweaks/'.$tweak['id']);
 		if (function_exists($f = $tweak['id'].'_installe')) {
 			$f();
 tweak_log(" -- $f() : installé !");

@@ -148,6 +148,7 @@ tweak_log("Début : enregistre_modif_tweaks()");
 		supprime_invalideurs();
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_SKELS);
+		@unlink(_DIR_TMP."tweak-spip.plat");
 	tweak_initialisation_totale();
 	
 tweak_log("Fin   : enregistre_modif_tweaks()");
@@ -163,7 +164,6 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	// reset general
 	if (_request('reset')=='oui'){
 		spip_log("Reset de tous les tweaks par l'auteur id=$connect_id_auteur");
-		echo 'toto';
 		foreach(array_keys($GLOBALS['meta']) as $meta) 
 			if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
 		ecrire_metas();

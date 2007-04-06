@@ -47,13 +47,13 @@ function decouper_en_pages_rempl($texte) {
 			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
 		} else {
 			// isoler la premiere ligne non vide de chaque page pour les attributs alt et title
-			$alt = preg_split("/[\r\n]+/", trim($pages[$i-1]), 2);
+			$alt = preg_split("/[\r\n]+/", trim(safehtml($pages[$i-1])), 2);
 			$alt = attribut_html(propre(couper($alt[0], _decoupe_NB_CARACTERES)));//.' (...)';
 			$milieu[] = '<a href="' . parametre_url(self(),'artpage', $i) . "\" alt=\"$alt\" title=\"$alt\">$i</a>";
 		}
 	}
 	$milieu = join(' ', $milieu);
-	
+
 	// s'il existe plus de trois pages on retourne la pagination << < 1 2 3 4 > >>
 	// sinon une forme simplifiee : < 1 2 3 >
 	$pagination = $num_pages>3?"$debut $precedent $milieu $suivant $fin":"$precedent $milieu $suivant";
