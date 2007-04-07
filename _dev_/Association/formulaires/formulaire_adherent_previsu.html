@@ -1,30 +1,30 @@
 <fieldset>
-<legend>Confirmer votre inscription</legend>
+<legend>Confirmation de demande</legend>
 <form action="#" method="POST">
 <table border="0" cellpadding="3" cellspacing="0">
 	<tr>
           <td align="right"><strong>Nom :</strong></td>
-		<td><input name="nom" type="text" class="choix" size="30" maxlength="30" value="[(#ENV{nom})]" /></td>
+		<td><input name="nom" type="text" class="choix" size="30" maxlength="30" value="[(#ENV{nom})]" /> [(#ENV{erreur_nom})]</td>
 	</tr>
 	<tr>
 		<td align="right"><strong>Pr&eacute;nom :</strong></td>
-		<td><input name="prenom" type="text" class="choix" size="30" maxlength="30" value="[(#ENV{prenom})]"  /></td>
+		<td><input name="prenom" type="text" class="choix" size="30" maxlength="30" value="[(#ENV{prenom})]"  /> [(#ENV{erreur_prenom})]</td>
 	</tr>
 	<tr>
           <td align="right"><strong>Email :</strong></td>
-		<td><input name="mail" type="text" class="choix" size="30" maxlength="40" value="[(#ENV{mail})]" /></td>
+		<td><input name="mail" type="text" class="choix" size="30" maxlength="40" value="[(#ENV{mail})]" /> [(#ENV{erreur_email})]</td>
 	</tr>
 	<tr>
           <td align="right"><strong>N&deg; et rue :</strong></td>
-		<td><input name="adresse" type="text" class="choix" size="70" maxlength="40" value="[(#ENV{adresse})]" /></td>
+		<td><input name="adresse" type="text" class="choix" size="70" maxlength="40" value="[(#ENV{adresse})]" /> [(#ENV{erreur_rue})]</td>
 	</tr>
 	<tr>
           <td align="right"><strong>Code postal :</strong></td>
-		<td><input name="cp" type="text" class="choix" size="10" maxlength="40" value="[(#ENV{cp})]" /></td>
+		<td><input name="cp" type="text" class="choix" size="10" maxlength="40" value="[(#ENV{cp})]" /> [(#ENV{erreur_cp})]</td>
 	</tr>
 	<tr>
           <td align="right"><strong>Ville :</strong></td>
-		<td><input name="ville" type="text" class="choix" size="40" maxlength="40" value="[(#ENV{ville})]" /></td>
+		<td><input name="ville" type="text" class="choix" size="40" maxlength="40" value="[(#ENV{ville})]" /> [(#ENV{erreur_ville})]</td>
 	</tr>
 	<tr>
           <td align="right">N&deg; de t&eacute;l&eacute;phone:</td>
@@ -36,7 +36,8 @@
 	</tr>
 	<tr>
 		<td align="right" valign="top">&nbsp;</td>
-		<td><input type="submit" name="valide" class="Bouton" value="Confirmer" /></td>
+		<td><input type="submit" name="bouton" class="Bouton" value="[(#ENV{bouton})]" /></td>
+		
 	</tr>
 </table>
 </form>

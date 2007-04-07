@@ -46,10 +46,10 @@ $jour = $split[2];
 
 echo '<tr>';
 echo '<td>Adh&eacute;rent :</td>'; 
-echo '<td><strong>'.$data['nom'].' '.$data['prenom'].'</strong></td>';
+echo '<td><strong>'.$nom.' '.$prenom.'</strong></td>';
 echo '<tr>';
 echo '<td>Cat&eacute;gorie :</td>'; 
-echo '<td>'.$data['categorie'].'</td>';
+echo '<td>'.$categorie.'</td>';
 
 echo '<tr> ';	
 echo '<td>&nbsp;</td>';
@@ -67,7 +67,7 @@ $duree=$categorie['duree'];
 $mois=$mois+$duree;
 $validite=date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
 
-echo '<td><input name="montant" type="text" value="'.$data['cotisation'].'"></td>';
+echo '<td><input name="montant" type="text" value=" '.$categorie['cotisation'].' "></td>';
 }
 echo '<tr>';
 echo '<td>Mode de paiement :</td>';

@@ -36,10 +36,9 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	$ville=_request('ville');
 	$telephone=_request('telephone');
 	$commentaire=_request('commentaire');
-	$previsu=_request('previsu');
-	$valide=_request('valide');
+	$bouton=_request('bouton');
 	
-	if ($valide){	
+	if ($bouton=='Confirmer'){	
 		//on envoit des emails
 		
 		$query = spip_query( " SELECT * FROM spip_asso_profil " );
@@ -64,29 +63,52 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$sujet='Demande d\'adh&eacute;sion';
 		
 		//au webmaster
-		$message = "Un nouveau membre vient de s'inscrire: ".$prenom." ".$nom."\nSon email :".$mail."\nIl sera membre:".$case_radio."\nSon adresse: ".$mail." ".$cp." ".$ville."\nSon num&eacute;ro de t&eacute;l&eacute;phone: ".$telephone."\nSon message: ".$text;
-		//mail("$adresse","$sujet","$message", "$headers");
+		$message = "Un nouveau membre vient de demander son adh&eacute;sion :\n\nNOM : ".$nom."\nPr&eacute;nom : ".$prenom."\nEmail :<a href='mailto:'".$mail."'>".$mail."</a>\nAdresse: ".$rue." ".$cp." ".$ville."\nT&eacute;l&eacute;phone: ".$telephone."\n\nCommentaire: ".$text;
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
 		//au demandeur
 		$adresse= $mail;
 		$message= "Bonjour ".$prenom."\n\n\nVous venez de demander votre inscription &agrave; l'association ".$nomasso."\nNous allons prendre contact avec vous tr&egrave;s rapidement.\n\nAvec nos remerciements. \n\n\nLe bureau de ".$nomasso."\r\n";
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
-		//mail("$adresse1","$sujet","$message1","$headers");
 		
 		//enregistrement dans la table
 		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, commentaire, creation) VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '_$ville', '$telephone','prospect', '$commentaire', CURRENT_DATE() ) ");	
 		
 	}
 	else {
-		if ($previsu){
+		if ($bouton=='Soumettre'){
 			
-			//On contrôle les données du formulaire
+			//On contrôle les données du formulaire			
+			$bouton='Confirmer';	 // si pas d'erreur
 			
+			//email invalide
+			if ( $email != email_valide($email) || empty($email) ){
+				$erreur_email='Adresse courriel invalide !';
+				$bouton='Soumettre';
+			}
+			//donnees manquantes
+			if ( empty($nom) ){
+				$erreur_nom='Nom manquant !';
+				$bouton='Soumettre';
+			}
+			if ( empty($prenom) ){
+				$erreur_prenom='Pr&eacute;nom manquant !';
+				$bouton='Soumettre';
+			}
+			if ( empty($rue) ){
+				$erreur_rue='Rue manquante !';
+				$bouton='Soumettre';
+			}
+			if ( empty($cp)  ){
+				$erreur_cp='Code postal manquant !';
+				$bouton='Soumettre';
+			}
+			if ( empty($ville) ){
+				$erreur_ville='Ville manquante !';
+				$bouton='Soumettre';
+			}	
 			
-			
-			//on retourne les infos à un formulaire de previsualisation
-			
+			//on retourne les infos à un formulaire de previsualisation		
 			return inclure_balise_dynamique(
 				array(
 					'formulaires/formulaire_adherent_previsu',0,
@@ -98,7 +120,14 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 						'cp'		=> $cp,
 						'ville'		=> $ville,
 						'telephone'=> $telephone,
-						'commentaire'=> $commentaire
+						'commentaire'=> $commentaire,
+						'bouton'	=> $bouton,
+						'erreur_email' => $erreur_email,
+						'erreur_nom' => $erreur_nom,
+						'erreur_prenom' => $erreur_prenom,
+						'erreur_rue' => $erreur_rue,
+						'erreur_cp' => $erreur_cp,
+						'erreur_ville' => $erreur_ville,
 					)
 				),
 				false
