@@ -22,8 +22,21 @@ de la forme &ldquo;mot&rdquo;, sauf si la barre d'insertion de SPIP proposait
 deja une autre forme.
 */
 
+function typo_guillemets_callback($matches) {
+ // en utilisant 'TWEAKS', on permet a la fonction tweak_exclure_balises() 
+ // de retablir a la fin le code original
+ return str_replace('"', "'", code_echappement($matches[1], 'TWEAKS'));
+}
+
+function typo_guillemets_echappe_balises($texte) {
+ return preg_replace_callback('/(<[^>]+"[^>]*>)/Ums', 'typo_guillemets_callback', $texte);
+}
+
 function typo_guillemets_rempl($texte){
 	if (strpos($texte, '"')===false) return $texte;
+	// prudence : on protege TOUTES les balises contenant des guillemets
+	if (strpos($texte, '<')!==false) $texte = typo_guillemets_echappe_balises($texte);
+
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
 	switch ($lang) {
 //	switch ($GLOBALS['spip_lang']){
@@ -150,19 +163,8 @@ function typo_guillemets_rempl($texte){
 		default:
 			$guilles="&ldquo;$1&rdquo;";
 	}
-	$trouve = array(
-		'/\s*=\s*"(.*?)"/', // 1. Echappement des guillemets a l'interieur de balises
-		'/"\s*(.*?)\s*"/', // 2. Remplacement des autres paires de guillemets (et suppression des espaces apres/avant)
-		'/@@GUILLEMETS_ECHAPPES@@/' // 3. Restitution des guillemets a l'interieur de balises
-	
-				);
-	$remplace = array
-				(
-		'=@@GUILLEMETS_ECHAPPES@@$1@@GUILLEMETS_ECHAPPES@@', // 1
-		$guilles, // 2
-		'"' // 3
-				);
-	return preg_replace($trouve, $remplace, $texte);
+	// Remplacement des autres paires de guillemets (et suppression des espaces apres/avant)
+	return preg_replace('/"\s*(.*?)\s*"/', $guilles, $texte);
 }
 
 function typo_guillemets($texte){
