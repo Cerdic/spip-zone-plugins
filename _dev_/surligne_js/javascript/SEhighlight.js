@@ -104,12 +104,12 @@
           if ( item.nodeType != 8 ) {//comment node
   				  //text node
             if(item.nodeType==3) {
-              var text = item.data;
+              var text = item.data, textNoAcc = SEhighlight.replaceAccent(item.data);
               var newtext="",match,index=0;
               RegExp.lastIndex = 0;
-              while(match = SEhighlight.regex.exec(SEhighlight.replaceAccent(item.data))) {
+              while(match = SEhighlight.regex.exec(textNoAcc)) {
                 newtext += text.substr(index,match.index-index)+'<span class="'+
-                SEhighlight.subs[match[0]]+'">'+text.substr(match.index,match[0].length)+"</span>";
+                SEhighlight.subs[match[0].toLowerCase()]+'">'+text.substr(match.index,match[0].length)+"</span>";
                 index = match.index+match[0].length;
               }
               if(newtext) {
