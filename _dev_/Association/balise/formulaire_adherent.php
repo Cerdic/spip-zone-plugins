@@ -92,7 +92,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 				$bouton='Soumettre';
 			}
 			if ( empty($prenom) ){
-				$erreur_prenom='Pr&eacute;nom manquant !';
+				$erreur_prenom='Prenom manquant !';
 				$bouton='Soumettre';
 			}
 			if ( empty($rue) ){

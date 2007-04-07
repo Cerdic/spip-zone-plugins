@@ -1,46 +1,65 @@
+<div class="spip_forms">
 <fieldset>
 <legend>Formulaire de demande d'adh&eacute;sion</legend>
 <form action="#" method="POST">
-<table border="0" cellpadding="3" cellspacing="0">
-	<tr>
-          <td align="right"><strong>Nom <font color="#EB0118">* </font>:</strong></td>
-		<td><input name="nom" type="text" class="choix" size="30" maxlength="30" /></td>
-	</tr>
-	<tr>
-		<td align="right"><strong>Pr&eacute;nom <font color="#EB0118">* </font>:</strong></td>
-		<td><input name="prenom" type="text" class="choix" size="30" maxlength="30" /></td>
-	</tr>
-	<tr>
-          <td align="right"><strong>Email <font color="#EB0118">* </font>:</strong></td>
-		<td><input name="mail" type="text" class="choix" size="30" maxlength="40" /></td>
-	</tr>
-	<tr>
-          <td align="right"><strong>N&deg; et rue<font color="#EB0118">* </font>:</strong></td>
-		<td><input name="adresse" type="text" class="choix" size="70" maxlength="40" /></td>
-	</tr>
-	<tr>
-          <td align="right"><strong>Code postal<font color="#EB0118">* </font>:</strong></td>
-		<td><input name="cp" type="text" class="choix" size="10" maxlength="40" /></td>
-	</tr>
-	<tr>
-          <td align="right"><strong>Ville<font color="#EB0118">* </font>:</strong></td>
-		<td><input name="ville" type="text" class="choix" size="40" maxlength="40" /></td>
-	</tr>
-	<tr>
-          <td align="right">N&deg; de t&eacute;l&eacute;phone:</td>
-		<td><input name="telephone" type="text" class="choix" size="30" maxlength="40" /></td>
-	</tr>
-	<tr>
-		<td align="right" valign="top">Commentaire:</td>
-		<td><textarea name="commentaire" class="choix" rows="10" cols="50"></textarea></td>
-	</tr>
-	<tr>
-          <td align="right"><font color="#EB0118"><strong>* Champs obligatoires</strong></font></td>
-		<td>
-			<input type="submit" name="bouton" class="Bouton" value="Soumettre" />
-			<input type="reset" class="Bouton" value="Interrompre" />
-		</td>
-	</tr>
-</table>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="nom">Nom :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="nom" type="text" id="nom" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="prenom">Pr&eacute;nom :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="prenom" type="text" id="prenom" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="mail">Email :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="mail" type="text" id="mail" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="adresse">N&deg; et rue :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<textarea name="adresse" type="text" id="adresse" rows="2" cols="30" /></textarea>
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="cp">Code postal :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="cp" type="text" id="cp" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="ville">Ville :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="ville" type="text" id="ville" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="telephone">T&eacute;l&eacute;phone:</label>
+		</span>
+		<input name="telephone" type="text" id="telephone" size="40" />
+	</div>
+	<div class="spip_form_champs">
+		<span class='spip_form_label'>
+			<label for="commentaire">Commentaire:</label>
+		</span>
+		<textarea name="commentaire" id="commentaire" rows="10" cols="30" /></textarea>
+	</div>
+	<div>
+		<input type="submit" name="bouton" class="spip_bouton" value="Soumettre" />
+		<input type="reset" class="spip_bouton" value="Effacer" />
+	</div>
 </form>
 </fieldset>
+</div>
