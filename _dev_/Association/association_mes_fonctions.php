@@ -156,13 +156,6 @@ $tables_principales['spip_asso_activites']= array(
 );	
 
 //
-// JOINTURES
-//
-global $tables_jointures;
-$tables_jointures['spip_adherents'][]= 'auteurs';
-$tables_jointures['spip_auteurs'][]= 'adherents';
-
-//
 // <BOUCLE(ADHERENTS)>
 //
 function boucle_ASSO_ADHERENTS($id_boucle, &$boucles) {
