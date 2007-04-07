@@ -6,7 +6,34 @@
  *    
  * @author Renato Formato <renatoformato@virgilio.it> 
  *  
- * @version 0.2
+ * @version 0.3
+ *
+ *  Options
+ *  - exact (boolean, default:true) 
+ *    Find the exact words or partial matches.
+ *     
+ *  - style_name (string, default:'hilite')
+ *    The class given to the span wrapping the matched words.
+ *     
+ *  - style_name_suffix (boolean, default:'true')
+ *    If true a different number is added to style_name for every different matched word.
+ *     
+ *  - debug_referrer (string, default:null)
+ *    Set a referrer for debugging purpose.
+ *     
+ *  - engines (array of regex, default:null)
+ *    Add a new search engine regex to highlight searches coming from new search engines.
+ *    The first element is the regex to match the domain.
+ *    The second element is the regex to match the query string. 
+ *    Ex: [/^http:\/\/my\.site\.net/i,/search=([^&]+)/i]        
+ *            
+ *  - startHighlightComment (string, default:null)
+ *    The text of a comment that starts a block enabled for highlight.
+ *    If null all the document is enabled for highlight.
+ *        
+ *  - stopHighlightComment (string, default:null)  
+ *    The text of a comment that ends a block enabled for highlight.
+ *    If null all the document is enabled for highlight. 
  */
 
 (function($){
@@ -21,7 +48,9 @@
     if(q) {
       SEhighlight.buildReplaceTools(q);
       return this.each(function(){
-        SEhighlight.hiliteElement(this, q); 
+        var el = this;
+        if(el==document) el = $("body")[0];
+        SEhighlight.hiliteElement(el, q); 
       })
     } else return this;
   }    
@@ -75,10 +104,10 @@
     ],
     matchAccent : /[\xC0-\xC5\xC7-\xCF\xD1-\xD6\xD8-\xDC\xFF]/ig,  
 		replaceAccent: function(q) {
+		  SEhighlight.matchAccent.lastIndex = 0;
       if(SEhighlight.matchAccent.test(q)) {
-        $.each(SEhighlight.regexAccent,function(i,n){
-          q = q.replace(n[0],n[1]);
-        });
+        for(var i=0,l=SEhighlight.regexAccent.length;i<l;i++)
+          q = q.replace(SEhighlight.regexAccent[i][0],SEhighlight.regexAccent[i][1]);
       }
       return q;
     },
@@ -96,17 +125,67 @@
               (SEhighlight.options.style_name_suffix?i+1:''); 
         }        
     },
-    nosearch: /s(?:cript|tyle)|textarea/,
+    nosearch: /s(?:cript|tyle)|textarea/i,
     hiliteElement: function(el, query) {
-        if(el==document) el = $("body")[0];
-        for(var i=0,l=el.childNodes.length;i<l;i++) {
-          var item = el.childNodes[i];
+        var startIndex, endIndex, startComment = false, comment = false, parents = [], back, child, opt = SEhighlight.options;
+        if(!opt.startHighlightComment || !opt.stopHighlightComment)
+          return SEhighlight.hiliteTree(0,el.childNodes.length,el,query);
+        if($.browser.msie) {
+          var item = el.firstChild;
+          var i=0;
+          while(item) {
+            if(item.nodeType==8) {
+              if($.trim(item.data)==opt.startHighlightComment) {
+                comment = startComment = true;
+                startIndex= i+1;
+              } else if($.trim(item.data)==opt.stopHighlightComment) {
+                endIndex = i;
+                SEhighlight.hiliteTree(startIndex,endIndex,item.parentNode,query);
+                startComment = false;
+              }
+            }
+            var next = item.nextSibling;
+            if(!startComment && (child = item.firstChild)) {
+              if(next)
+                parents.push([next,i+1]);
+              item = child;
+              i = 0;
+            } else {
+              if(!(item = next)) {
+                if(back = parents.pop()) {
+                  item = back[0];
+                  i =  back[1];
+                }
+              } else i++;
+            }
+          }
+        } else {
+          var walker = document.createTreeWalker(el,NodeFilter.SHOW_COMMENT,null,false), currComment;
+          while(currComment = walker.nextNode()) {
+            if($.trim(currComment.data)==opt.startHighlightComment) {
+              comment = true;
+              el = currComment.parentNode;
+              startIndex = 0;
+              endIndex = el.childNodes.length;
+              while(el.childNodes[startIndex]!=currComment) startIndex++;
+              startIndex++;
+            } else if($.trim(currComment.data)==opt.stopHighlightComment) {
+              while(el.childNodes[endIndex-1]!=currComment) endIndex--;
+              SEhighlight.hiliteTree(startIndex,endIndex,el,query);
+            }
+          }
+        }
+        if(!comment) SEhighlight.hiliteTree(0,el.childNodes.length,el,query);
+    },
+    hiliteTree : function(startIndex,endIndex,el,query) {
+        for(;startIndex<endIndex;startIndex++) {
+          var item = el.childNodes[startIndex];
           if ( item.nodeType != 8 ) {//comment node
   				  //text node
             if(item.nodeType==3) {
-              var text = item.data, textNoAcc = SEhighlight.replaceAccent(item.data);
+              var text = item.data, textNoAcc = SEhighlight.replaceAccent(text);
               var newtext="",match,index=0;
-              RegExp.lastIndex = 0;
+              SEhighlight.regex.lastIndex = 0;
               while(match = SEhighlight.regex.exec(textNoAcc)) {
                 newtext += text.substr(index,match.index-index)+'<span class="'+
                 SEhighlight.subs[match[0].toLowerCase()]+'">'+text.substr(match.index,match[0].length)+"</span>";
@@ -116,18 +195,16 @@
                 //add ther last part of the text
                 newtext += text.substring(index);
                 var repl = $.merge([],$("<span>"+newtext+"</span>")[0].childNodes);
-                l += repl.length-1;
-                i += repl.length-1;
+                endIndex += repl.length-1;
+                startIndex += repl.length-1;
                 $(item).before(repl).remove();
               }                
             } else {
-              if(item.nodeType==1 && item.nodeName.toLowerCase().search(SEhighlight.nosearch)==-1)
-                SEhighlight.hiliteElement(item,query);
+              if(item.nodeType==1 && item.nodeName.search(SEhighlight.nosearch)==-1)
+                SEhighlight.hiliteTree(0,item.childNodes.length,item,query);
             }	
           }
-        }
-        
-        return;
+        }    
     }
     
   };
