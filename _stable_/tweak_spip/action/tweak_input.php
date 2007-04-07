@@ -48,6 +48,7 @@ tweak_log(" -- donc, metas_vars = ".$serialized);
 tweak_log(" -- donc, réinitialisation forcée !");
 
 	// on reinitialise tout, au cas ou ...
+	include_spip('tweak_spip');
 	tweak_initialisation_totale();
 tweak_log("Fin   : action_tweak_input_post(Array($r[1], $r[2], ...)) - Réinitialisation forcée terminée.");
 }

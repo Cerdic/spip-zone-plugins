@@ -1,5 +1,5 @@
 <?php
-include_spip('tweak_spip');
+include_spip('tweak_spip_init');
 /*
 function tweak_spip_affiche_droite($flux){
 	return tweak_pipeline('affiche_droite', $flux);

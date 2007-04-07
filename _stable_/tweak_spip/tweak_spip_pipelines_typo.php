@@ -1,5 +1,5 @@
 <?php
-include_spip('tweak_spip');
+include_spip('tweak_spip_init');
 
 function tweak_spip_nettoyer_raccourcis_typo($flux){
 	global $tweaks_metas_pipes;

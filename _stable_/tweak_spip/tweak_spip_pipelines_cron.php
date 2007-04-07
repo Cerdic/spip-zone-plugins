@@ -1,5 +1,5 @@
 <?php
-include_spip('tweak_spip');
+include_spip('tweak_spip_init');
 
 function tweak_spip_pre_indexation($flux){
 	global $tweaks_metas_pipes;

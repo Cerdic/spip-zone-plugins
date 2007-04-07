@@ -9,12 +9,12 @@ if($GLOBALS['log_tweaks']) {
 	spip_log('TWEAKS. '.str_repeat('-', 80));
 	spip_log('TWEAKS. appel de mes_options (début) : strlen='.strlen($tweaks_metas_pipes['options']));
 }
-	// fonctions indispensables
-	include_spip('tweak_spip');
+	// fonctions indispensables a l'execution
+	include_spip('tweak_spip_init');
 tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
 
 	// inclusion des options pre-compilees
 	if (!$GLOBALS['tweak_options']) include_once(sous_repertoire(_DIR_TMP, "tweak-spip").'mes_options.php');
-	if (!$GLOBALS['tweak_options']) eval($tweaks_metas_pipes['options']);
+	if (!$GLOBALS['tweak_options'] && isset($tweaks_metas_pipes['options'])) eval($tweaks_metas_pipes['options']);
 tweak_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']));
 ?>
