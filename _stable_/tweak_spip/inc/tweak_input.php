@@ -14,8 +14,9 @@ include_spip('inc/presentation');
 include_spip('inc/message_select');
 
 
-// affiche un petit input
+// affiche un input (case de texte ou boutons radio) précédé de son label $label
 function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_self) {
+tweak_log("Début : inc_tweak_input_dist($index, ...) - Insère un input à la place de : [label]'%$variable%'");
 	$len=0;
 	if (preg_match(',^"(.*)"$,', trim($valeur), $matches2)) $valeur = str_replace('\"','"',$matches2[1]);
 		else $len=strlen(strval($valeur));
@@ -53,7 +54,7 @@ function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_s
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 	$res = ajax_action_auteur('tweak_input', $index, $url_self, "index=$index&variable=$variable&valeur=$valeur&actif=".intval($actif)."&label=".urlencode($label), $res);
 
-tweak_log("inc_tweak_input_dist($index, $variable, $valeur, [label], $actif, $url_self)");
+tweak_log("Fin   : inc_tweak_input_dist($index, ...)");
 return $res;
 
 }
