@@ -4,4 +4,4 @@ div#conteneur{float:left;width:100%}
 div#contenu{margin: 1% 26%;padding:0.5%}
 div#navigation{float:left;width:24%;margin:1% 0 1% -99%}
 div#extra{float:left;width:24%;margin: 1% 1% 1% -25%}
-div#pied{clear:left;width:100%}
+div#pied{clear:left;width:100%;margin:0}
