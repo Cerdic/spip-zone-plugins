@@ -20,6 +20,7 @@ debut_page(_T('Gestion pour Association'), "", "");
 $url_asso = generer_url_ecrire('association');
 $url_action_relances = generer_url_ecrire('action_relances');
 $url_edit_relances = generer_url_ecrire('edit_relances');
+$url_edit_labels = generer_url_ecrire('edit_labels');
 
 include_spip ('inc/navigation');
 
@@ -37,6 +38,7 @@ if ( isset ($_POST['statut'] )) {
 echo '<table width="70%" border="0">';
 
 echo '<tr>';
+echo '<td><a href=" '.$url_edit_labels.'">Etiquettes</a></td>';
 // Menu de sélection
 echo '<td style="text-align:right;">';
 echo '<form method="post" action="#">';
@@ -103,7 +105,7 @@ echo '<td class ='.$class.'>'.$data['prenom'].'</td>';
 echo '<td class ='.$class.'>'.$data['telephone'].'</td>';
 echo '<td class ='.$class.'>'.$data['portable'].'</td>';
 //echo '<td class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
-echo '<td class ='.$class.'>'.datefr($data['validite']).'</td>';
+echo '<td class ='.$class.'>'.association_datefr($data['validite']).'</td>';
 //echo '<td class ='.$class.'>'.$data['rappel'].'</td>';
 echo '<td class ='.$class.' style="text-align:center;">';
 echo '<input name="relance[]" type="checkbox" value="'.$data['id_adherent'].'" checked >';
