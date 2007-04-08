@@ -36,4 +36,6 @@
         		<nom>ajouter_boutons</nom>
             <inclure>aa_pipelines.php</inclure>
         </pipeline>	
+				<necessite id="cfg" version="[1.0.0;]" />
+				<chemin dir='' />
 </plugin>
