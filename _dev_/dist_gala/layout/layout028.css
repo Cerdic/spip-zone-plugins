@@ -1,4 +1,5 @@
 div#top{height:80px;line-height:80px;margin:0;padding-left:10px;}
+div#contenu{margin: 0}
 div#navigation{float:right;width:50%}
 div#extra{float:right;width:49.9%}
 div#pied{clear:right;width:100%}

@@ -1,4 +1,5 @@
-div#top{height:80px;line-height:80px;margin:0;  padding-left:10px;}
+div#top{height:80px;line-height:80px;margin:0;padding-left:10px;}
+div#contenu{margin: 0}
 div#conteneur{float:right;width:70%}
 div#navigation{float:left;width:29.9%}
 div#extra{clear:both;width:100%}
