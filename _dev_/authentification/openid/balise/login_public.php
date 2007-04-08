@@ -1,12 +1,21 @@
 <?php
 
-// Balise LOGIN_PUBLIC qui supporte l'OpenID
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2007                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('base/abstract_sql');
 spip_connect();
 
+// http://doc.spip.org/@balise_LOGIN_PUBLIC
 function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 	return calculer_balise_dynamique($p, $nom, array('url'));
 }
@@ -17,10 +26,12 @@ function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 #    calculer_balise_dynamique, en l'occurence le #LOGIN courant si l'on
 #    programme une <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#LOGIN})]
 
+// http://doc.spip.org/@balise_LOGIN_PUBLIC_stat
 function balise_LOGIN_PUBLIC_stat ($args, $filtres) {
 	return array($filtres[0] ? $filtres[0] : $args[0], $args[1], $args[2]);
 }
 
+// http://doc.spip.org/@balise_LOGIN_PUBLIC_dyn
 function balise_LOGIN_PUBLIC_dyn($url, $login) {
 
 	if (!$url 		# pas d'url passee en filtre ou dans le contexte
@@ -30,6 +41,7 @@ function balise_LOGIN_PUBLIC_dyn($url, $login) {
 	return login_explicite($login, $url);
 }
 
+// http://doc.spip.org/@login_explicite
 function login_explicite($login, $cible) {
 	global $auteur_session;
 
@@ -51,23 +63,28 @@ function login_explicite($login, $cible) {
 	if ($auteur_session AND
 	($auteur_session['statut']=='0minirezo'
 	OR $auteur_session['statut']=='1comite')) {
-		if ($cible != $action) {
-			if (!headers_sent() AND !$_GET['var_mode']) {
-				include_spip('inc/headers');
-				redirige_par_entete($cible);
-			} else {
-				include_spip('inc/minipres');
-				return http_href($cible, _T('login_par_ici'));
-			}
-		} else
-			return ''; # on est arrive on bon endroit, et logue'...
+		$auth = charger_fonction('auth','inc');
+		$auth = $auth();
+		if ($auth==="") {
+			if ($cible != $action) {
+				if (!headers_sent() AND !$_GET['var_mode']) {
+					include_spip('inc/headers');
+					redirige_par_entete($cible);
+				} else {
+					include_spip('inc/minipres');
+					return http_href($cible, _T('login_par_ici'));
+				}
+			} else
+				return ''; # on est arrive on bon endroit, et logue'...
+		}
 	}
+	
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
 }
 
+// http://doc.spip.org/@login_pour_tous
 function login_pour_tous($login, $cible, $action) {
 	global $ignore_auth_http, $_SERVER, $_COOKIE;
-	global $consumer;
 
 	// en cas d'echec de cookie, inc_auth a renvoye vers le script de
 	// pose de cookie ; s'il n'est pas la, c'est echec cookie
@@ -77,11 +94,17 @@ function login_pour_tous($login, $cible, $action) {
 		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
 	else $echec_cookie = '';
 
+	// hack grossier pour changer le message en cas d'echec d'un visiteur(6forum) sur ecrire/
+	$echec_visiteur = _request('var_echec_visiteur')?' ':'';
+
+
 	$pose_cookie = generer_url_public('spip_cookie');
 	$auth_http = '';	
 	if ($echec_cookie AND !$ignore_auth_http) {
-		include_spip('inc/headers');
-		if (php_module()) $auth_http = $pose_cookie;
+		if (($GLOBALS['flag_sapi_name']
+		     AND eregi("apache", @php_sapi_name()))
+		OR ereg("^Apache.* PHP", $_SERVER['SERVER_SOFTWARE']))
+			$auth_http = $pose_cookie;
 	}
 	// Attention dans le cas 'intranet' la proposition de se loger
 	// par auth_http peut conduire a l'echec.
@@ -97,57 +120,52 @@ function login_pour_tous($login, $cible, $action) {
 
 	$erreur = '';
 	if ($login) {
-	// Detection si il s'agit d'un URL à traiter comme un openID
-	// RFC3986 Regular expression for matching URIs
-	preg_match('_^(?:([^:/?#]+):)?(?://([^/?#]*))?'.
+        // Detection s'il s'agit d'un URL à traiter comme un openID
+        // RFC3986 Regular expression for matching URIs
+        preg_match('_^(?:([^:/?#]+):)?(?://([^/?#]*))?'.
                    '([^?#]*)(?:\?([^#]*))?(?:#(.*))?$_',
                    $login, $uri_parts);
-	if ($uri_parts[1] == "http" OR $uri_parts[1] == "https") {
+        if ($uri_parts[1] == "http" OR $uri_parts[1] == "https") {
 
- 		spip_log("Traitement login OpenID");
-		session_start();
+                spip_log("[auth_openid] Traitement login OpenID");
+                session_start();
 
-		$scheme = 'http';
-		if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] == 'on') {
-		    $scheme .= 's';
-		}
+                $scheme = 'http';
+                if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] == 'on') {
+                    $scheme .= 's';
+                }
 
-		// url_de_base et generer_url_action sont des fonctions spip dans inc/utils.php
-		// comme cela, le code est plus solide vis à vis des évolutions de spip.
-		$trust_root = url_de_base();
-		$process_url = generer_url_action("cookie_openid","url=".$cible,true);
-		spip_log("[auth_openid] process_url =".$process_url);
+                // url_de_base et generer_url_action sont des fonctions spip dans inc/utils.php
+                // comme cela, le code est plus solide vis à vis des évolutions de spip.
+                $trust_root = url_de_base();
+                $process_url = generer_url_action("cookie_openid","url=".$cible,true);
+                spip_log("[auth_openid] process_url =".$process_url);
 
-		// Begin the OpenID authentication process.
-		include_spip('inc/openid');
-		$consumer = init_auth_openid();
-		$auth_request = $consumer->begin($login);
+                // Begin the OpenID authentication process.
+                include_spip('inc/openid');
+                $consumer = init_auth_openid();
+                $auth_request = $consumer->begin($login);
 
-		// Handle failure status return values.
-		if (!$auth_request) {
-		    // TODO: Translation
-		    $erreur = _T('authopenid:erreur_openid');
-		  $row = array();
-		  $login = '';
+                // Handle failure status return values.
+                if (!$auth_request) {
+                    $erreur = _T('authopenid:erreur_openid');
+                  $row = array();
+                  $login = '';
                   include_spip('inc/cookie');
                   spip_setcookie("spip_admin", "", time() - 3600);
                 } else {
-		// Redirect the user to the OpenID server for authentication.  Store
-		// the token for this authentication so we can verify the response.
-
-		$redirect_url = $auth_request->redirectURL($trust_root,
+                // Redirect the user to the OpenID server for authentication.  Store
+                // the token for this authentication so we can verify the response.
+                $redirect_url = $auth_request->redirectURL($trust_root,
                                            $process_url);
+                header("Location: ".$redirect_url);
+                }
+                } else {
 
-		header("Location: ".$redirect_url);
-//		return Array();
-
-		} 
-		} else {
-
-		$row =  spip_abstract_fetsel('*', 'spip_auteurs', "login=" . spip_abstract_quote($login));
+		$row =  spip_abstract_fetsel('*', 'spip_auteurs', "login=" . _q($login));
 		// Retrouver ceux qui signent de leur nom ou email
 		if (!$row AND !$GLOBALS['ldap_present']) {
-			$row = spip_abstract_fetsel('*', 'spip_auteurs', "(nom = " . spip_abstract_quote($login) . " OR email = " . spip_abstract_quote($login) . ") AND login<>'' AND statut<>'5poubelle'");
+			$row = spip_abstract_fetsel('*', 'spip_auteurs', "(nom = " . _q($login) . " OR email = " . _q($login) . ") AND login<>'' AND statut<>'5poubelle'");
 			if ($row) {
 				$login_alt = $login; # afficher ce qu'on a tape
 				$login = $row['login'];
@@ -167,7 +185,7 @@ function login_pour_tous($login, $cible, $action) {
 			// on laisse le menu decider de la langue
 			unset($row['lang']);
 		}
-	   }
+	}
 	}
 	if (!$row)
 		$row = array();
@@ -175,15 +193,8 @@ function login_pour_tous($login, $cible, $action) {
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
 
-	// afficher le code de retour d'erreur OpenID si var_erreur=openid
-	if (_request('openid_error'))
-		$erreur = "Erreur OpenID: " . _request('openid_error');
-
-	// le formulaire utilise le filtre |chercher_logo si un id_auteur est la...
-	include_spip('inc/logos');
-
 	// Appeler le squelette formulaire_login
-	return array('formulaires/formulaire_login', $GLOBALS['delais'],
+	return array('formulaires/login', $GLOBALS['delais'],
 		array_merge(
 				array_map('texte_script', $row),
 				array(
@@ -193,6 +204,7 @@ function login_pour_tous($login, $cible, $action) {
 					'url' => $cible,
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
+					'echec_visiteur' => $echec_visiteur,
 					'login' => $login,
 					'login_alt' => (isset($login_alt) ? $login_alt : $login),
 					'self' => str_replace('&amp;', '&', self())
@@ -204,6 +216,7 @@ function login_pour_tous($login, $cible, $action) {
 
 // Bouton duree de connexion
 
+// http://doc.spip.org/@filtre_rester_connecte
 function filtre_rester_connecte($prefs) {
 	$prefs = unserialize(stripslashes($prefs));
 	return $prefs['cnx'] == 'perma' ? ' ' : '';
