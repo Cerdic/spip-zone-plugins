@@ -74,11 +74,11 @@ function exec_adherents() {
 	$query = spip_query ( "SELECT upper( substring( nom, 1, 1 ) )  AS init FROM spip_asso_adherents WHERE $critere GROUP BY init ORDER by nom, id_adherent ");
 
 	while ($data = spip_fetch_array($query)) {
-		if($data['init']==$lettre)	{
-		 echo ' <strong>'.$data['init'].'</strong>';
+		if($data['init']==$lettre) {
+			echo ' <strong>'.$data['init'].'</strong>';
 		}
 		else {
-		 echo ' <a href="'.$url_adherents.'&lettre='.$data['init'].'&filtre='.$filtre.'">'.$data['init'].'</a>';
+			echo ' <a href="'.$url_adherents.'&lettre='.$data['init'].'&filtre='.$filtre.'">'.$data['init'].'</a>';
 		}
 	}
 	if ($lettre == "%") { echo ' <strong>'._T('asso:adherent_entete_tous').'</strong>'; }
@@ -97,7 +97,7 @@ function exec_adherents() {
 	echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" value="ID" onchange="form.submit()">';
 //echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" value="'._T('asso:ref_int').'" onchange="form.submit()">';
 	echo '</form>';
-
+	echo '</td>';
 	echo '<td style="text-align:right;">';
 //STATUT
 	echo '<form method="post" action="'.$url_adherent.'">';
@@ -110,6 +110,8 @@ function exec_adherents() {
 	}
 	echo '</select>';
 	echo '</form>';
+	echo '</td>';
+	echo '</tr>';
 	echo '</table>';
 
 //Affichage de la liste
@@ -205,7 +207,7 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 //echo '<td class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
 //echo '<td class ='.$class.'>'.$data["remarques"].'</td>';
 		echo '<td class ='.$class.'>';
-
+		
 		if (isset($data["id_auteur"])) {
 			$id_auteur= $data["id_auteur"];
 			$sql = spip_query ( "SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur' ");
@@ -220,7 +222,7 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 					case "6forum":
 						$logo="visit-12.gif";	      
 				}
-				echo '<a href="/ecrire/?exec=auteurs_edit&id_auteur='.$data["id_auteur"].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a>';
+				echo '<a href="/ecrire/?exec=auteurs_edit&id_auteur='.$data["id_auteur"].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
 			}
 		}
 		else { echo '&nbsp;</td>'; }
@@ -230,9 +232,9 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 //else
 //echo '<a href="mailto:'.$data["email"].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/mail-12.png" title="'._T('asso:adherent_label_envoyer_courrier').'"></a>';
 //echo '<td class ='.$class.'><input name="cotisation[]" type="checkbox" value='.$id_adherent.'></td>';
-		echo '<td class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a>';
-		echo '<td class ='.$class.'><a href="'.$url_edit_adherent.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a>';
-		echo '<td class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a>';
+		echo '<td class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
+		echo '<td class ='.$class.'><a href="'.$url_edit_adherent.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
+		echo '<td class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
 		echo '<td class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_adherent'].'></td>';
 
 		echo '</tr>';
@@ -267,9 +269,8 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 	}
 	echo '<td  style="text-align:right;">';
 	echo '<input type="submit" name="Submit" value="'._T('asso:adherent_bouton_envoyer').'" class="fondo">';
+	echo '</td>';
 	echo '</table>';
-
-
 	echo '</form>';
 
 	echo '<p>'._T('asso:adherent_liste_legende').'</p>'; 
