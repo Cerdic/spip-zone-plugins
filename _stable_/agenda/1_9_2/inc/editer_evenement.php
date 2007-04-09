@@ -26,12 +26,12 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$repetitions_updated[] = $date;
 				$update_date_debut = date('Y-m-d',$date)." ".date('H:i:s',$date_debut);
 				$update_date_fin = date('Y-m-d H:i:s',strtotime($update_date_debut)+$duree);
-				
+
 				// TODO : prendre en charge la mise a jour uniquement si conforme a l'original
 				$update_titre = $titre;
 				$update_descriptif = $descriptif;
 				$update_lieu = $lieu;
-				
+
 				// mettre a jour l'evenement
 				$res=spip_query("UPDATE spip_evenements SET `titre`="._q($update_titre)
 				. ",`descriptif`="._q($update_descriptif)
@@ -48,7 +48,7 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement=".$row['id_evenement']);
 				spip_query("DELETE FROM spip_evenements WHERE id_evenement=".$row['id_evenement']);
 			}
-			
+
 		}
 		// regarder les repetitions a ajouter
 		foreach($repetitions as $date){
@@ -74,7 +74,7 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 					. ",`date_fin`="._q($update_date_fin)
 					. ",`id_article`="._q($id_article)
 					. " WHERE `id_evenement` ="._q($id_evenement_new));
-					
+
 					Agenda_action_update_liste_mots($id_evenement_new,$liste_mots);
 				}
 			}
@@ -110,7 +110,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 	$insert = _request('evenement_insert',$c);
 	$modif = _request('evenement_modif',$c);
 	if (($insert || $modif)){
-	
+
 		if ( ($insert) && (!$id_evenement) ){
 			$id_evenement = spip_abstract_insert("spip_evenements",
 				"(id_evenement_source,maj)",
@@ -129,7 +129,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 		$lieu = _request('evenement_lieu',$c);
 		$horaire = _request('evenement_horaire',$c);
 		if ($horaire!='oui') $horaire='non';
-	
+
 		// pour les cas ou l'utilisateur a saisi 29-30-31 un mois ou ca n'existait pas
 		$maxiter=4;
 		$st_date_deb=FALSE;
@@ -139,9 +139,10 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 			$date_deb=_request('annee_evenement_debut',$c).'-'._request('mois_evenement_debut',$c).'-'.($jour_debut--)
 				.' '._request('heure_evenement_debut',$c).':'._request('minute_evenement_debut',$c);
 			$st_date_deb=strtotime($date_deb);
+spip_log("$titre - $date_deb = $st_date_deb");
 		}
 		$date_deb=format_mysql_date(date("Y",$st_date_deb),date("m",$st_date_deb),date("d",$st_date_deb),date("H",$st_date_deb),date("i",$st_date_deb), $s=0);
-	
+
 		// pour les cas ou l'utilisateur a saisi 29-30-31 un mois ou ca n'existait pas
 		$maxiter=4;
 		$st_date_fin=FALSE;
@@ -154,7 +155,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 		}
 		$st_date_fin = max($st_date_deb,$st_date_fin);
 		$date_fin=format_mysql_date(date("Y",$st_date_fin),date("m",$st_date_fin),date("d",$st_date_fin),date("H",$st_date_fin),date("i",$st_date_fin), $s=0);
-	
+
 		// mettre a jour l'evenement
 		$res=spip_query("UPDATE spip_evenements SET `titre`="._q($titre)
 		. ",`descriptif`="._q($descriptif)
@@ -173,14 +174,14 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 			if (is_array($id_mot_a) && count($id_mot_a)){
 				if ($row['unseul']=='oui')
 					$liste_mots[] = intval(reset($id_mot_a));
-				else 
+				else
 					foreach($id_mot_a as $id_mot)
 						$liste_mots[] = intval($id_mot);
-			}				
+			}
 		}
 
 		Agenda_action_update_liste_mots($id_evenement,$liste_mots);
-				
+
 		// gestion des repetitions
 		if (($repetitions = _request('selected_date_repetitions',$c))!=NULL){
 			$repetitions = explode(',',$repetitions);
@@ -201,7 +202,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 			}
 			$repetitions = $rep;
 		}
-		else 
+		else
 			$repetitions = array();
 		Agenda_action_update_repetitions($id_evenement, $repetitions, $liste_mots);
 	}

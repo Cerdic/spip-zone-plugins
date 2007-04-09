@@ -9,13 +9,13 @@ function action_editer_evenement_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
-	
+
 	$arg = explode('-',_request('arg'));
 	$id_article = $arg[0];
 	$action = $arg[1];
 	$id_evenement = $arg[2];
 	$redirect = urldecode(_request('redirect'));
-	
+
 	if ($action=='modifier')
 		//if (autoriser())
 		$id_evenement = Agenda_action_formulaire_article($id_article,$id_evenement);
@@ -30,7 +30,7 @@ function action_editer_evenement_dist()
 		include_spip('inc/agenda_saisie_rapide');
 		$evenements_saisie_rapide = _request('evenements_saisie_rapide');
 		$t = Agenda_compile_texte_saisie_rapide($evenements_saisie_rapide);
-		foreach($t as $e){
+		foreach($t as $e) if(count($e)) {
 			$e['evenement_insert']=1;
 			Agenda_action_formulaire_article($id_article,$id_evenement,$e);
 		}

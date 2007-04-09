@@ -9,7 +9,7 @@ _ patrice.vanneufville@laposte.net pour la saisie rapide
 _ &copy; 2006 - Licence GPL
 	</auteur>
 	<version>
-	0.13
+	0.14
 	</version>
 	<etat>stable</etat>
 	<description>
@@ -28,10 +28,10 @@ _ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<prefix> 
+	<prefix>
 	Agenda
 	</prefix>
-	<install>base/agenda_upgrade.php</install>	
+	<install>base/agenda_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_onglets</nom>

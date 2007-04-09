@@ -52,7 +52,7 @@ function Agenda_afficher_date_evenement($date_debut, $date_fin, $horaire){
 		if ($horaire=='oui')
 			$s .= " ".date("(H:i)",$date_fin);
 	}
-	return $s;	
+	return $s;
 }
 
 function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable, $script)
@@ -81,7 +81,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			$date_fin = strtotime($row['date_fin']);
 			$id_evenement_source = $row['id_evenement_source'];
 			$repetition = ($id_evenement_source!=0);
-			
+
 			$les_evenements[] = $id_evenement;
 
 			$s = "<a href='".generer_url_ecrire('calendrier',"id_evenement=$id_evenement&ajouter_id_article=$id_article")."'>";
@@ -107,7 +107,6 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 
 			$vals[] = $s;
 
-			
 			if ($flag_editable) {
 				$s = ajax_action_auteur('editer_evenement', "$id_article-editer-$id_evenement", $script, "id_article=$id_article&id_evenement=$id_evenement&edit=oui", array($titre ? $titre : '<em>('._T('info_sans_titre').')</em>',''),'','wc_init');
 				$vals[] = $s;
@@ -116,22 +115,22 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 				$vals[] = $titre;
 			}
 			$vals[] = propre($descriptif);
-		
+
 			if ($flag_editable) {
 				$vals[] = ajax_action_auteur('editer_evenement', "$id_article-supprimer-$id_evenement", $script, "id_article=$id_article", array(_T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'"),''),"&id_article=$id_article&supp_evenement=$id_evenement",'wc_init');
 			} else {
 				$vals[] = "";
 			}
-			
+
 			$table[] = $vals;
 		}
-	
+
 		$largeurs = array('', '', '', '', '');
 		$styles = array('arial11', 'arial11', 'arial2', 'arial11', 'arial11');
-		$out .= afficher_liste($largeurs, $table, $styles, false);
-	
+		$out .= afficher_liste($largeurs, $table, $styles);
+
 		$out .= "</table></div>\n";
-	
+
 		$les_evenements = join(',', $les_evenements);
 	}
 	return array($out,$les_evenements) ;
@@ -157,12 +156,12 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 			$out .=  debut_block_visible("evenementsarticle");
 		else
 			$out .=  debut_block_invisible("evenementsarticle");
-		
+
 		$out .=  "<div style='width:100%;'>";
 		$out .=  "<table width='100%'>";
 		$out .=  "<tr>";
 		$out .=  "<td>";
-	
+
 		if ($edit){
 		} else {
 		}
@@ -196,14 +195,14 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 				$res = spip_query("SELECT titre FROM spip_articles where id_article="._q($id_article));
 				if ($row = spip_fetch_array($res))
 					$titre_defaut = $row['titre'];
-				
+
 				$form = "<input type='hidden' name='id_article' value='$id_article' />";
 				$form .= Agenda_formulaire_edition_evenement(NULL, true, '', $titre_defaut);
 				$id_evenement = 0;
 				$out .= ajax_action_auteur('editer_evenement',"$id_article-modifier-$id_evenement", $script, "id_article=$id_article&edit=1", $form,'','wc_init');
 			}
 		}
-			
+
 		$out .= "</div>";
 		$out .=  "</td></tr></table>";
 		$out .= "<div style='clear: both;'></div>";
@@ -224,7 +223,7 @@ function Agenda_formulaire_article($id_article, $flag_editable, $script){
 
   global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
-	
+
 	$out = "<div id='editer_evenement-$id_article'>";
 	$out .= "<a name='agenda'></a>";
 	if ($flag_editable) {
@@ -309,7 +308,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 			$out .= "</div>\n";
 		}
 	}
-	
+
 	$out .= "<div class='agenda-visu-evenement-bouton-fermer'>";
 	$out .= "<a href='$url' onclick=\"$('#voir_evenement-0').html('');return false;\">";
 	$out .= "<img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
@@ -322,7 +321,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	else {
 	  $out .=  "<input type='hidden' name='evenement_insert' value='1' />\n";
 	}
-	
+
 	// TITRE
 	$out .=  "<div class='titre-titre'>"._T('agenda:evenement_titre')."</div>\n";
 	$out .=  "<div class='titre-visu'>";
@@ -362,7 +361,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .= Agenda_heure_selector($d,"_fin");
 	$out .=	"</span>";
 	$out .=  "</div>\n";
-	
+
 	// DESCRIPTIF
 	$out .=  "<div class='descriptif-titre'>"._T('agenda:evenement_descriptif')."</div>";
 	$out .=  "<div class='descriptif-visu'>";
@@ -378,18 +377,18 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	while ($row = spip_fetch_array($res,SPIP_ASSOC)){
 		$id_groupe = $row['id_groupe'];
 		$multiple = ($row['unseul']=='oui')?"size='4'":"multiple='multiple' size='4'";
-		
+
 		$id_mot_select = array();
 		if ($id_evenement){
 			$res2 = spip_query("SELECT mots_evenements.id_mot FROM spip_mots_evenements AS mots_evenements
-								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
+								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot
 								WHERE mots.id_groupe="._q($id_groupe)." AND mots_evenements.id_evenement="._q($id_evenement));
 			while ($row2 = spip_fetch_array($res2))
 				$id_mot_select[] = $row2['id_mot'];
 		}
 
 		$nb_mots = 0;
-		$select = "";	
+		$select = "";
 		$select .= "<select name='evenement_groupe_mot_select_{$id_groupe}[]' class='fondl verdana1 agenda_mot_cle_select' $multiple>\n";
 		$select .= "\n<option value='x' style='font-variant: small-caps;' >".supprimer_numero($row['titre'])."</option>";
 
@@ -405,7 +404,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 			$out .= $select;
 	}
 	$out .=  "</div>";
-	
+
 	$dates = "";
 	if ($id_evenement!=NULL){
 		$dates = array();
@@ -418,7 +417,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .= "<div class='repetitions-calendrier'>";
 	$out .= WCalendar_statique_point_entree('_repetitions',$dates);
 	$out .= "</div>";
-	
+
   $out .=  "<div class='edition-bouton'>";
   #echo "<input type='submit' name='submit' value='Annuler' />";
 	if ($neweven==1){
