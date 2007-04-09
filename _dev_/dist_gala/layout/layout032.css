@@ -1,5 +1,6 @@
 div#top{height:80px;line-height:80px;margin:0;padding-left:10px;}
 div#conteneur{float:left;width:100%}
-div#contenu{margin: 0 200px 0 0}
-div#navigation{float:left;width:200px;margin-left:-200px}
-div#extra{clear:left;width:100%}
+div#contenu{margin: 10px 210px 10px 0;padding:0.5em}
+div#navigation{float:left;width:200px;margin:10px 0 10px -200px}
+div#extra{clear:left;width:100%;margin:0}
+div#pied{clear:right;width:100%;margin:0}
