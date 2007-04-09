@@ -1,0 +1,44 @@
+<plugin>
+	<nom>
+	KitSpip
+	</nom>
+	<auteur>bertrand Gugger [->http://toggg.com/]
+	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>
+	0.1.0
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+_ Ce plugin assure la post-installation d'un spip pr&#233;configur&#233; incluant:
+- le chargement et l'activation d'une liste de plugins,
+- squelettes, donn&#233; et documents issus du plugin mes_fichiers,
+- la restauration de ces données dans la base
+- le nettoyage des fichiers temporaires nécessaires &agrave; cette post-installation.
+Il fait normalement suite à kit_loader ou spip_loader qui assurent l'installation du spip. &quot;nu&quot;. Sa seule v&eacute;ritable action est lors de l'installation
+
+N&eacute;anmoins, il fournit l'action charger_decompresser qui charge un zip, le d&eacute;compresse et si plugin, l'active:
+- charger un zip et le décompresser: ?action=charger_decompresser&amp;charger=oui&amp;paquet=[nom paquet sans .zip]
+- charger un plugin, le décompresser et l'activer: ?action=charger_decompresser&amp;charger=oui&amp;plugin=[prefixe plugin]
+
+Si le nom du paquet differe du plugin, rajouter: &paquet=[nom paquet sans .zip]
+
+Options supplementaires:
+- &amp;url_retour=[url retour], défaut ecrire/
+- &amp;depot=[url du depot des zip] defaut http://files.spip.org/spip-zone/
+
+On peut aussi simplement activer un plugin deja present par:
+- ?action=charger_decompresser&amp;activer_plugin=[prefixe plugin]
+	</description>
+	<lien>
+	[Documentation temporaire->http://toggg.lune-rouge.net/]
+	</lien>
+	<prefix>
+	kitspip
+	</prefix>
+	<install>
+	kitspip_install.php
+	</install>
+</plugin>
