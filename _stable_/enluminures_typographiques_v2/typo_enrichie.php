@@ -78,6 +78,8 @@ function TypoEnluminee_pre_propre($texte) {
 		tester_variable('fin_intertitre_5', lire_config('bte/titraille5close','</strong>'));
 	}
 
+	tester_variable('toujours_paragrapher', false);
+
 	global $debut_intertitre, $fin_intertitre;
 	global $debut_intertitre_2, $fin_intertitre_2;
 	global $debut_intertitre_3, $fin_intertitre_3;
