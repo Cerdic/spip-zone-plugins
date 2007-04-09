@@ -46,10 +46,10 @@ var appliquer_selecteur_cherche_auteur = function() {
 jQuery(document).ready(appliquer_selecteur_cherche_auteur);
 
 // Chargements ajax suivants
-// setTimeout obligatoire sinon on s'applique au vieux DOM 
+// onAjaxLoad(appliquer_selecteur_cherche_auteur); // OK avec SPIP [8957]
+// mais pour < 8957, setTimeout obligatoire sinon on s'applique au vieux DOM 
 // pre-update quand on clique sur une suppression d'auteur !!
 onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_auteur, 200);});
-
 
 EOS;
 
