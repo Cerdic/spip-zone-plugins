@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_saisie_rapide' => "Schnelleingabe einer Liste",
 'titre_cadre_ajouter_liste_evenement' => "Hinzuf&uuml;gen einer Liste von Ereignissen",
 'votre_liste_infos' => "Ein einzelnes Ereignis (und eventuelle Wiederholungen) pro Zeile eingeben:",
-'saisie_rapide_reset' => "Reset",
+'reset' => "Reset",
 'explications' => "
 	{{Syntax}}:
 {Date} {Ereignissen} [{Wiederholungen}] [{Schlagworte}]

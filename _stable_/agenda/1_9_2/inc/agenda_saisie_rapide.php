@@ -57,7 +57,6 @@ function Agenda_compile_texte_saisie_rapide($texte) {
 			$mots_compiles = Agenda_verifie_les_mots_clefs($mots);
 			// mettre les repetitions au format du textarea du formulaire normal
 			$selected_rep = array();
-spip_log($rep);
 			foreach($rep as $k=>$r){
 				$r =explode("/",$r);
 				// annee omise
@@ -140,7 +139,6 @@ function Agenda_formulaire_saisie_rapide_previsu() {
 			'<strong>'._T('agenda:evenement_titre').'</strong>',
 			'<strong>'. _T('agenda:evenement_lieu').'</strong>',
 			'<strong>'._T('agenda:evenement_descriptif').'</strong>');
-//spip_log($t);'<strong>'.
 		foreach($t as $id_eve=>$eve) if (count($eve)) {
 			$vals = array();
 			$titre = typo($eve['evenement_titre']);
@@ -199,17 +197,17 @@ function Agenda_formulaire_saisie_rapide_previsu() {
 }
 
 function Agenda_formulaire_saisie_rapide() {
-	global $spip_lang_right;
+	global $spip_lang_right, $id_article;
 	$out = "";
 	//$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png",true, "", _T('saisierapide:saisie_rapide_votre_liste'));
 	$out .= _T('saisierapide:votre_liste_infos');
 	$out .= "<input type='hidden' name='saisie_rapide' value='1' />";
-  $out .= "<textarea name='evenements_saisie_rapide' rows='10' class='forml' >";
-  $out .= _request('evenements_saisie_rapide');
-  $out .= "</textarea>";
-  $out .= "<a href='".generer_url_ecrire("saisie_rapide", "id_article=$id_article")."'>"._T('saisierapide:saisie_rapide_reset')."</a>";
-  $out .= "<div style='text-align:$spip_lang_right;'><input class='fondo' type='submit' value='"._T('previsualiser')."'></div>";
-  $out .= "<p>";
+	$out .= "<textarea name='evenements_saisie_rapide' rows='10' class='forml' >";
+	$out .= _request('evenements_saisie_rapide');
+	$out .= "</textarea>";
+	$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&saisie_rapide=1", array(_T("saisierapide:reset"),''));
+	$out .= "<div style='text-align:$spip_lang_right;'><input class='fondo' type='submit' value='"._T('previsualiser')."'></div>";
+	$out .= "<p>";
   //$out .= fin_cadre_enfonce(true);
 
   $out .= debut_cadre_formulaire('',true);

@@ -139,7 +139,6 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 			$date_deb=_request('annee_evenement_debut',$c).'-'._request('mois_evenement_debut',$c).'-'.($jour_debut--)
 				.' '._request('heure_evenement_debut',$c).':'._request('minute_evenement_debut',$c);
 			$st_date_deb=strtotime($date_deb);
-spip_log("$titre - $date_deb = $st_date_deb");
 		}
 		$date_deb=format_mysql_date(date("Y",$st_date_deb),date("m",$st_date_deb),date("d",$st_date_deb),date("H",$st_date_deb),date("i",$st_date_deb), $s=0);
 
