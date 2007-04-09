@@ -19,7 +19,7 @@ if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
 	define('_DIR_PLUGIN_TWEAK_SPIP', $p);
 }
-if ($GLOBALS['spip_version_code']<1.92) { 
+if ($GLOBALS['spip_version_code']<1.92) {
 	if (!function_exists('stripos')) {
 		function stripos($botte, $aiguille) {
 			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs)) return strlen($regs[1]);
@@ -86,9 +86,9 @@ function is_tweak_pipeline($pipe, &$set_pipe) {
 	return $ok;
 }
 
-// est-ce que $traitement est un traitement ? 
+// est-ce que $traitement est un traitement ?
 function is_tweak_traitements($traitement, $fonction, &$set_traitements_utilises) {
-	if ($ok = preg_match(',^traitement:([A-Z]+):(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t)) 
+	if ($ok = preg_match(',^traitement:([A-Z]+):(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t))
 		$set_traitements_utilises[$t[1]][$t[3]][$t[2]][] = $fonction;
 	return $ok;
 }
@@ -111,7 +111,7 @@ function tweak_aide_raccourcis() {
 		// stockage de la liste des fonctions par pipeline, si le tweak est actif...
 		if ($tweak['actif']) {
 			if (function_exists($f=$tweak['id'].'_raccourcis')) $aide[] = '<li style="margin-top: 0.7em;">' . $f() . '</li>';
-			elseif (!preg_match(',:aide$,', _T("tweak:{$tweak['id']}:aide") )) 
+			elseif (!preg_match(',:aide$,', _T("tweak:{$tweak['id']}:aide") ))
 				$aide[] = '<li style="margin-top: 0.7em;">' .  _T("tweak:{$tweak['id']}:aide") . '</li>';
 		}
 	}
@@ -194,23 +194,23 @@ function tweak_initialise_includes() {
 }
 
 // remplace les valeurs marquees comme %%toto%% par la valeur reelle de $metas_vars['toto']
-// attention : la description du tweak (trouvee dans lang/tweak_xx.php) doit 
+// attention : la description du tweak (trouvee dans lang/tweak_xx.php) doit
 // obligatoirement conporter la demande de valeur : %toto%
 // %%toto/d%% oblige un nombre et %%toto/s%% oblige une chaine
 // %%toto/valeurpardefaut%% renvoie valeurpardefaut si le meta n'existe pas encore
-// syntaxe generale : %%toto/d/valeurpardefaut%% ou %%toto/s/valeurpardefaut%% 
+// syntaxe generale : %%toto/d/valeurpardefaut%% ou %%toto/s/valeurpardefaut%%
 // /s est une chaine, /d est un nombre
 // pour les boutons radio, il faut utiliser deux variables. Par ex : set_options.
 // $code est le code inline livre par tweak_spip_config
 function tweak_parse_code($code) {
 	global $metas_vars;
 	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)(/[ds]|/r\(.*?\))?(/[^%]+)?%%,', $code, $matches)) {
-		$rempl = '""';	
+		$rempl = '""';
 		// si le meta est present on garde la valeur du meta, sinon la valeur par defaut si elle existe
 		if (isset($metas_vars[$matches[1]])) {
 			$rempl = $metas_vars[$matches[1]];
 			if (preg_match(',^"(.*?)"$,', trim($rempl), $matches2)) $rempl = str_replace('\"','"',$matches2[1]);
-		} else { 
+		} else {
 			$cmd = substr($matches[2], 1, 1);
 			// une valeur par defaut est-elle specifiee ?
 			$rempl = strlen($matches[3])>1?substr($matches[3],1):'""';
@@ -233,7 +233,7 @@ function tweak_parse_code($code) {
 
 // parse la description et renseigne le nombre de variables
 function tweak_parse_description($tweak, $tweak_input) {
-	global $tweaks, $tweak_variables, $metas_vars; 
+	global $tweaks, $tweak_variables, $metas_vars;
 //tweak_log(" -- tweak_parse_description({$tweaks[$tweak]['id']})");
 	$tweaks[$tweak]['nb_variables'] = 0;
 //	$tweaks[$tweak]['description'] = $tweaks[$tweak]['description'];
@@ -244,11 +244,11 @@ function tweak_parse_description($tweak, $tweak_input) {
 		// si le meta est present on remplace
 		if (isset($metas_vars[$var]))
 				$descrip .= $tweak_input(
-					$index = $tweaks[$tweak]['basic']+(++$tweaks[$tweak]['nb_variables']), 
-					$var, 
+					$index = $tweaks[$tweak]['basic']+(++$tweaks[$tweak]['nb_variables']),
+					$var,
 					$metas_vars[$var],
 					$t[$i],
-					$tweaks[$tweak]['actif'], 
+					$tweaks[$tweak]['actif'],
 					'tweak_spip_admin');
 			else $descrip .= $t[$i]."[$var?]";
 	} else $descrip .= $t[$i];

@@ -102,7 +102,7 @@ function tweakcheck(ischecked, index) {
  }
  document.getElementById(tweak).className = classe;
  document.getElementById('tweak_'+tweak).value = test;
- 
+
  for(ti=1;ti<=Tweaks[index][1];ti++) {
   tj = index+ti;
   var chaine=document.getElementById('tweak_'+tj+html).innerHTML;
@@ -150,7 +150,7 @@ tweak_log("Début : enregistre_modif_tweaks()");
 		purger_repertoire(_DIR_SKELS);
 		@unlink(_DIR_TMP."tweak-spip.plat");
 	tweak_initialisation_totale();
-	
+
 tweak_log("Fin   : enregistre_modif_tweaks()");
 }
 
@@ -160,11 +160,11 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	global $spip_lang_right;
 	global $couleur_claire;
 	global $tweaks;
-	
+
 	// reset general
 	if (_request('reset')=='oui'){
 		spip_log("Reset de tous les tweaks par l'auteur id=$connect_id_auteur");
-		foreach(array_keys($GLOBALS['meta']) as $meta) 
+		foreach(array_keys($GLOBALS['meta']) as $meta)
 			if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
 		ecrire_metas();
 	}
@@ -175,7 +175,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		fin_page();
 		exit;
 	}
-	
+
 	// definitions manuelles de tous les tweaks : remplissage de $tweaks
 //	include_spip('tweak_spip_config');
 	// initialisation generale forcee : recuperation de $tweaks;
@@ -184,7 +184,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	// sinon fait une passe de verif sur les tweaks
 	if (_request('changer_tweaks')=='oui'){
 		enregistre_modif_tweaks();
-		// pour la peine, un redirige, 
+		// pour la peine, un redirige,
 		// que les tweaks charges soient coherent avec la liste
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
@@ -192,13 +192,13 @@ tweak_log("Début : exec_tweak_spip_admin()");
 //	else
 //		verif_tweaks();
 
-	if ($GLOBALS['spip_version_code']<1.92) 
+	if ($GLOBALS['spip_version_code']<1.92)
   		debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('tweak:titre'), "configuration", "tweak_spip");
 	}
-	
+
 	tweak_styles_et_js();
 	echo "<br /><br /><br />";
 	gros_titre(_T('tweak:titre'));
@@ -236,7 +236,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	echo _T('tweak:presente_tweaks'), $valider;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
 	foreach($temp = $tweaks as $tweak) $categ[_T('tweak:'.$tweak['categorie'])] = $tweak['categorie']; ksort($categ);
-		
+
 	$js = ''; $marge = '0';
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
@@ -289,7 +289,7 @@ function ligne_tweak($tweak, &$js){
 	$titre_etat = _T('tweak:'.($actif?'':'in').'actif');
 	$nb_var = intval($tweak['nb_variables']);
 	$index = intval($tweak['basic']);
-	
+
 	$s = "<form  style='margin:0 0 0 1em;'><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
 	if (isset($info['erreur'])){

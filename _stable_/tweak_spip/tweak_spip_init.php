@@ -14,20 +14,20 @@ function tweak_insert_header($type) {
 	include_spip('inc/filtres');
 	global $tweaks_metas_pipes;
 	$head = '';
-	if (isset($tweaks_metas_pipes[$type])) 
+	if (isset($tweaks_metas_pipes[$type]))
 	  foreach	($tweaks_metas_pipes[$type] as $inc) {
 	  	$f = find_in_path('tweaks/'.$inc);
-	  	if ($type=='css') 
+	  	if ($type=='css')
 			$head .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />'."\n";
-	  	elseif ($type=='js') 
+	  	elseif ($type=='js')
 			$head .= "<script type=\"text/javascript\" src=\"$f\"></script>\n";
-			
+
 	  }
 	return $head."\n";
 }
 
 // si le tweak 'log_tweaks' est activé, on logue pour Tweak-Spip
-function tweak_log($s) { 
+function tweak_log($s) {
  if($GLOBALS['log_tweaks'] && strlen($s)) spip_log('TWEAKS. '.$s);
 }
 
@@ -70,7 +70,7 @@ tweak_log("[#$rand] ".($forcer?"\$forcer = true":"tweak_initialisation($forcer) 
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
 	}
-	
+
 	// ici on commence l'initialisation de tous les tweaks
 	global $tweaks, $metas_vars;
 	include_spip('tweak_spip');
@@ -88,7 +88,7 @@ tweak_log("[#$rand]  -- foreach(\$tweaks) : tweak_parse_code, tweak_parse_descri
 		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
 		// Si Spip est trop ancien ou trop recent...
-		if ((isset($tweak['version-min']) && $GLOBALS['spip_version']<$tweak['version-min']) 
+		if ((isset($tweak['version-min']) && $GLOBALS['spip_version']<$tweak['version-min'])
 			|| (isset($tweak['version-max']) && $GLOBALS['spip_version']>$tweak['version-max']))
 				$tweaks[$i]['actif'] = 0;
 		// au cas ou des variables sont presentes dans le code
@@ -137,10 +137,10 @@ function tweak_exclure_balises($balises, $fonction, $texte){
 function tweak_htmlpath($relative_path) {
 	$realpath = str_replace("\\", "/", realpath($relative_path));
 	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
-	if (strlen($root) && strpos($realpath, $root)===0) 
+	if (strlen($root) && strpos($realpath, $root)===0)
 		return substr($realpath, strlen($root));
 	$dir = dirname(!empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] :
-			(!empty($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : 
+			(!empty($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] :
 			(!empty($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : str_replace('\\','/',__FILE__)
 		)));
 	return tweak_canonicalize($dir.'/'.$relative_path);
@@ -161,8 +161,8 @@ function tweak_canonicalize($address) {
 /*****************/
 
 // $tweaks_metas_pipes ne sert ici qu'a l'execution et ne comporte que :
-//	- les fichiers .js 
-//	- les fichiers .css 
+//	- les fichiers .js
+//	- les fichiers .css
 //	- le code pour les options.php
 //	- le code pour les fonction.php
 //	- le code pour les pipelines utilises

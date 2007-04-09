@@ -71,13 +71,13 @@ add_tweak( array(
 
 add_tweak( array(
 	'id' => 'forcer_langue',
-	'code:options' => "\$GLOBALS['forcer_lang']=true;", 
+	'code:options' => "\$GLOBALS['forcer_lang']=true;",
 	'categorie' => 'public',
 ));
 
 add_tweak( array(
 	'id' => 'insert_head',
-	'code:options' => "\$spip_pipeline['affichage_final'] .= '|f_insert_head';", 
+	'code:options' => "\$spip_pipeline['affichage_final'] .= '|f_insert_head';",
 	'categorie' => 'spip',
 	'version-min' => 1.92,
 ));
@@ -293,7 +293,7 @@ add_tweak( array(
 	'auteur' 	 => '[J&eacute;r&ocirc;me Combaz->http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz]',
 	'categorie'	 => 'typo-corr',
 	'pipeline:pre_typo' => 'pucesli_pre_typo',
-));	
+));
 
 add_tweak( array(
 	'id' => 'decoration',
@@ -350,7 +350,7 @@ add_tweak( array(
 // http://www.spip-contrib.net/Citations
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
 // http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
-// Un Sommaire. voir :     
+// Un Sommaire. voir :
 //		$GLOBALS['debut_intertitre'] = "<h3 class='mon_style_h3'>";
 //		$GLOBALS['fin_intertitre'] = "</h3>";
 // http://www.spip-contrib.net/Generation-automatique-de

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Tweak SPIP</nom>
 	<icon>img/tweak-24.gif</icon>
-	<version>1.6.7.2 pour Spip 1.9 minimum.</version>
+	<version>1.6.7.3 pour Spip 1.9 minimum.</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
 _ &copy; 2007 - Distribu&#233; sous licence GPL
@@ -21,89 +21,89 @@ Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typog
 	<fonctions> <!-- fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
 	tweak_spip_fonctions.php
 	</fonctions>
-	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin :
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : tweak_spip_ma_fonction() par exemple)
 		C'est par ailleurs conseille pour les noms de fichier
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
 	<prefix>tweak_spip</prefix>
-	<install>tweak_spip_pipelines_admin.php</install>	
+	<install>tweak_spip_pipelines_admin.php</install>
 	<chemin dir='' />
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<!-- pipeline qui permet de modifier les pages publiques html issues du cache ou du calcul avant leur envoi au navigateur 
+		<!-- pipeline qui permet de modifier les pages publiques html issues du cache ou du calcul avant leur envoi au navigateur
 		il permet de modifier n'importe quoi, mais est execute a chaque fois et ne profite pas du cache
 		il est donc a reserver pour des plugins qui ne sont pas utilises en production de preference
 		-->
-		<nom>affichage_final</nom> 
+		<nom>affichage_final</nom>
 		<action>affichage_final</action>
 		<inclure>tweak_spip_pipelines_public.php</inclure>
-	</pipeline>	
+	</pipeline>
 	<pipeline>
-		<nom>insert_head</nom> 
+		<nom>insert_head</nom>
 		<action>insert_head</action>
 		<inclure>tweak_spip_pipelines_public.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>ajouter_onglets</nom> 
+		<nom>ajouter_onglets</nom>
 		<action>ajouter_onglets</action>
 		<inclure>tweak_spip_pipelines_admin.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>header_prive</nom> 
+		<nom>header_prive</nom>
 		<action>header_prive</action>
 		<inclure>tweak_spip_pipelines_admin.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>nettoyer_raccourcis_typo</nom> 
+		<nom>nettoyer_raccourcis_typo</nom>
 		<action>nettoyer_raccourcis_typo</action>
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>pre_propre</nom> 
+		<nom>pre_propre</nom>
 		<action>pre_propre</action>
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>pre_typo</nom> 
+		<nom>pre_typo</nom>
 		<action>pre_typo</action>
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>post_propre</nom> 
+		<nom>post_propre</nom>
 		<action>post_propre</action>
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>post_typo</nom> 
+		<nom>post_typo</nom>
 		<action>post_typo</action>
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
 	</pipeline>
 <!--
 	<pipeline>
-		<nom>rendu_evenement</nom> 
+		<nom>rendu_evenement</nom>
 		<action>rendu_evenement</action>
 		<inclure>tweak_spip_pipelines_public.php</inclure>
 	</pipeline>
 -->
-<!--	
+<!--
 	<pipeline>
-		<nom>pre_indexation</nom> 
+		<nom>pre_indexation</nom>
 		<action>pre_indexation</action>
 		<inclure>tweak_spip_pipelines_cron.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>pre_syndication</nom> 
+		<nom>pre_syndication</nom>
 		<action>pre_syndication</action>
 		<inclure>tweak_spip_pipelines_cron.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>post_syndication</nom> 
+		<nom>post_syndication</nom>
 		<action>post_syndication</action>
 		<inclure>tweak_spip_pipelines_cron.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>taches_generales_cron</nom> 
+		<nom>taches_generales_cron</nom>
 		<action>taches_generales_cron</action>
 		<inclure>tweak_spip_pipelines_cron.php</inclure>
 	</pipeline>

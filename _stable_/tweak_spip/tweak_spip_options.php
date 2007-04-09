@@ -5,7 +5,7 @@
 	// on active tout de suite les logs, si le tweak est actif.
 	$GLOBALS['log_tweaks'] = (strpos($GLOBALS['meta']['tweaks_actifs'], 'log_tweaks') !== false);
 
-if($GLOBALS['log_tweaks']) { 
+if($GLOBALS['log_tweaks']) {
 	spip_log('TWEAKS. '.str_repeat('-', 80));
 	spip_log('TWEAKS. appel de mes_options (début) : strlen='.strlen($tweaks_metas_pipes['options']));
 }
