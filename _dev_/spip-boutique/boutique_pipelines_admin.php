@@ -3,7 +3,7 @@
 //	Spip-boutique
 //
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_SPIPDIGG',(_DIR_PLUGINS.end($p)));
+define('_DIR_PLUGIN_BOUTIQUE',(_DIR_PLUGINS.end($p)));
 
 function boutique_ajouter_boutons($flux){
 	$flux['naviguer']->sousmenu['produits_page']= new Bouton("../"._DIR_PLUGIN_BOUTIQUE."/img_pack/petite_caisse.png",_T('boutique:les_produits'));

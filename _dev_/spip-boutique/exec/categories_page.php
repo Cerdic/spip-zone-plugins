@@ -32,7 +32,7 @@ function exec_categories_page(){
 				//echo _T('boutique:pas_d_article_a_cette_adresse');
 				echo debut_cadre_trait_couleur();
 				if ($connect_statut == '0minirezo') {
-					echo	icone_horizontale (_T('boutique:creer_produit'), generer_url_ecrire("categorie_edit","new=oui&retour=nav"), _DIR_PLUGIN_SPIPDIGG."folder.png", "creer.gif",false);
+					echo	icone_horizontale (_T('boutique:creer_produit'), generer_url_ecrire("categorie_edit","new=oui&retour=nav"), _DIR_PLUGIN_BOUTIQUE."folder.png", "creer.gif",false);
 				}
 				echo fin_cadre_trait_couleur();
 			}
@@ -40,7 +40,7 @@ function exec_categories_page(){
 		}else{
 			echo debut_cadre_trait_couleur();
 			if ($connect_statut == '0minirezo') {
-				echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categorie_edit","new=oui&retour=nav"), _DIR_PLUGIN_SPIPDIGG."folder.png", "creer.gif",false);
+				echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categorie_edit","new=oui&retour=nav"), _DIR_PLUGIN_BOUTIQUE."folder.png", "creer.gif",false);
 			}
 			echo fin_cadre_trait_couleur();
 		}

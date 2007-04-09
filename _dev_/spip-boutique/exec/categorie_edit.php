@@ -12,7 +12,7 @@ function exec_categorie_edit(){
 			echo fin_boite_info();
 			echo debut_raccourcis();
 				if (_request('id_categorie') != "new"){
-					echo '<a href="?exec=produits_page"><b><img src="'._DIR_PLUGIN_INTRADIC.'img_pack/back.png" alt="retour" align="absmiddle"> Retour</b></a>';
+					echo '<a href="?exec=produits_page"><b><img src="'._DIR_PLUGIN_BOUTIQUE.'img_pack/back.png" alt="retour" align="absmiddle"> Retour</b></a>';
 				}
 			echo fin_raccourcis();
 		echo debut_droite();
