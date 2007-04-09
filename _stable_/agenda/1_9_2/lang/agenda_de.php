@@ -4,11 +4,11 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_annuler' => 'Storno',
-'activite_editoriale' => 'Activité Éditoriale',  'editoriale Aktivität',
-'ajouter_un_evenement' => 'ajouter un événement à cet article', 'diesem Artikel ein event hinzufügen',
+'activite_editoriale' =>   'editoriale Aktivit&auml;t',
+'ajouter_un_evenement' => 'diesem Artikel ein event hinzuf&uuml;gen',
 'texte_agenda' => 'AGENDA',
-'titre_cadre_ajouter_evenement' => 'Event hinzufügen',
-'titre_cadre_modifier_evenement' => 'Event umändern',
+'titre_cadre_ajouter_evenement' => 'Event hinzuf&uuml;gen',
+'titre_cadre_modifier_evenement' => 'Event um&auml;ndern',
 'item_mots_cles_association_evenements' => 'zu den events',
 'info_un_evenement' => 'ein event',
 'info_nombre_evenements' => '@nb_evenements@ event',
@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'evenement_date_a_immediat' => 'zu',
 'evenement_date_debut' => 'Anfangsdatum',
 'evenement_date_fin' => 'Enddatum',
-'lien_retirer_evenement' => 'Löschen',
+'lien_retirer_evenement' => 'L&ouml;schen',
 'evenement_horaire' => 'Zeitplan',
 'titre_sur_l_agenda' => 'Im Agenda',
 'icone_creer_evenement' => 'Neue Veranstaltung anlegen',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  'repetition_de' => 'Wiederholung von',
 'sans_titre' => 'ohne Titel',
 'evenement_autres_occurences' => 'Autres occurences :',
-'bouton_supprimer' => 'Löschen',
+'bouton_supprimer' => 'L&ouml;schen',
 );
 
 

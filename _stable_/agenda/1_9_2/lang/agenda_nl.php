@@ -28,11 +28,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_retirer_evenement' => 'Afschaffen',
 'evenement_horaire' => 'Dienstregeling',
 'titre_sur_l_agenda' => "Op de agenda",
-'icone_creer_evenement' => 'Een nieuwe gebeurtenis creëren',
+'icone_creer_evenement' => 'Een nieuwe gebeurtenis cre&euml;ren',
 'evenement_repetitions' => 'Herhalingen',
 'repetition_de' => "Herhaling van",
 'sans_titre' => "(zonder titel)",
-'evenement_autres_occurences' => "Andere omstandigheden :",
+'evenement_autres_occurences' => "Andere omstandigheden:",
 'bouton_supprimer' => "Afschaffen",
 );
 
