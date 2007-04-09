@@ -13,7 +13,7 @@ function tweak_rempl_chatons($texte) {
 
 function chatons_pre_typo($texte) {
 	if (strpos($texte, ':')===false) return $texte;
-	if (!isset($GLOBALS['meta']['tweaks_chatons']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
+	if (!isset($GLOBALS['meta']['tweaks_chatons']) || isset($GLOBALS['var_mode']))
 		chatons_installe();
 	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_chatons', $texte);
 }

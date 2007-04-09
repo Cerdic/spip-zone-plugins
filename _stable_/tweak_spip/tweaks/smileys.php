@@ -98,7 +98,7 @@ function tweak_rempl_smileys($texte) {
 // fonction principale (pipeline pre_typo)
 function tweak_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
-	if (!isset($GLOBALS['meta']['tweaks_smileys']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
+	if (!isset($GLOBALS['meta']['tweaks_smileys']) || isset($GLOBALS['var_mode']))
 		smileys_installe();
 //tweak_log('smileys trouvés !');
 	// appeler tweak_rempl_smileys() une fois que certaines balises ont ete protegees

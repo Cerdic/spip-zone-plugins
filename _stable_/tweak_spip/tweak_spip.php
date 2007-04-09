@@ -110,7 +110,7 @@ function tweak_aide_raccourcis() {
 	foreach ($tweaks as $tweak) {
 		// stockage de la liste des fonctions par pipeline, si le tweak est actif...
 		if ($tweak['actif']) {
-			if (function_exists($f=$tweak['id']._raccourcis)) $aide[] = '<li style="margin-top: 0.7em;">' . $f() . '</li>';
+			if (function_exists($f=$tweak['id'].'_raccourcis')) $aide[] = '<li style="margin-top: 0.7em;">' . $f() . '</li>';
 			elseif (!preg_match(',:aide$,', _T("tweak:{$tweak['id']}:aide") )) 
 				$aide[] = '<li style="margin-top: 0.7em;">' .  _T("tweak:{$tweak['id']}:aide") . '</li>';
 		}
@@ -183,8 +183,10 @@ function tweak_initialise_includes() {
 	}
 	$tweaks_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
-	include_spip('inc/getdocument');
-	effacer_repertoire_temporaire(_DIR_TMP."tweak-spip");
+	if (@file_exists($f=sous_repertoire(_DIR_TMP, "tweak-spip"))) {
+		include_spip('inc/getdocument');
+		effacer_repertoire_temporaire($f);
+	} else spip_log("Erreur - tweak_initialise_includes() : $f introuvable !");
 	// installation de $tweaks_metas_pipes
 	set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'options');
 	set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'fonctions');

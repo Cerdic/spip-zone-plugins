@@ -317,7 +317,7 @@ function ligne_tweak($tweak, &$js){
 
 	$p .= "\n<div class='detailtweak'>";
 	$p .= $tweak['description'];
-	if ($tweak['auteur']!='') $p .= "<p>" . _T('auteur') .' '. ($tweak['auteur']) . "</p>";
+	if (isset($tweak['auteur']) && strlen($tweak['auteur'])) $p .= "<p>" . _T('auteur') .' '. ($tweak['auteur']) . "</p>";
 	$s .= propre($p) . '<hr style="margin:0"/>' . _T('tweak:tweak').' ';
 	if ($erreur_version) $s .= _T('tweak:erreur:version');
 	else {

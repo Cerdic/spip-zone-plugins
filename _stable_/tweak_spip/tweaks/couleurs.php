@@ -63,7 +63,7 @@ function couleurs_rempl($texte) {
 
 function couleurs_pre_typo($texte) {
 	if (strpos($texte, '[')===false || strpos($texte, '/')===false) return $texte;
-	if (!isset($GLOBALS['meta']['tweaks_couleurs']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
+	if (!isset($GLOBALS['meta']['tweaks_couleurs']) || isset($GLOBALS['var_mode']))
 		couleurs_installe();
 	// appeler couleurs_rempl() une fois que certaines balises ont ete protegees
 	return tweak_exclure_balises('', 'couleurs_rempl', $texte);

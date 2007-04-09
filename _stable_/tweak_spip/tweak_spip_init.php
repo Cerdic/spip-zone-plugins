@@ -46,12 +46,12 @@ function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); r
 function tweak_initialisation($forcer=false) {
 	global $tweaks_metas_pipes;
 	$rand = rand();
-	// au premier passage, on force l'installation si le calcul ou le recalcul est demande
+	// au premier passage, on force l'installation si var_mode est defini
 	static $deja_passe_ici;
 	if (!intval($deja_passe_ici)) {
 tweak_log("#### 1er PASSAGE [#$rand] ###################################### - \$forcer = ".intval($forcer));
 tweak_log("[#$rand] Version PHP courante : ".phpversion()." - Versions SPIP (base/code) : {$GLOBALS['spip_version']}/{$GLOBALS['spip_version_code']}");
-		$forcer |= ($GLOBALS['var_mode'] == 'recalcul') || ($GLOBALS['var_mode']=='calcul');
+		$forcer |= isset($GLOBALS['var_mode']);
 	}
 	$deja_passe_ici++;
 	// si les metas ne sont pas lus, on les lit

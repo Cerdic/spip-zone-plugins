@@ -10,7 +10,8 @@ if($GLOBALS['log_tweaks']) {
 	spip_log('TWEAKS. appel de mes_options (début) : strlen='.strlen($tweaks_metas_pipes['options']));
 }
 	// fonctions indispensables a l'execution
-	include_spip('tweak_spip_init');
+	//include_spip('tweak_spip_init');
+	include_once _DIR_PLUGINS.'tweak_spip/tweak_spip_init.php';
 tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
 
 	// inclusion des options pre-compilees

@@ -3,7 +3,7 @@
 	global $tweaks_metas_pipes;
 
 	// fonctions indispensables a l'execution
-	include_spip('tweak_spip_init');
+	include_once _DIR_PLUGINS.'tweak_spip/tweak_spip_init.php';
 tweak_log("appel de mes_fonctions : strlen=".strlen($tweaks_metas_pipes['fonctions']));
 
 	// inclusion des fonctions pre-compilees
