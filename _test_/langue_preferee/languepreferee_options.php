@@ -6,7 +6,6 @@ function chemin_cookie()
         include_spip('inc/meta');
     	$chemin = preg_replace("/^https?:\/\/([^\/]+)(\/.*)$/", "$2", lire_meta('adresse_site').'/');
     }
-    echo $chemin;exit;
     return $chemin;
 }
 ?>
