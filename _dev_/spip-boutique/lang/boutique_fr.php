@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'creer_un_produit'=>'Cr&eacute;er un produit',
 
 // d
+'dans_la_categorie'=>'Dans la cat&eacute;gorie :',
 'descriptif_de_la_categorie'=>'Descriptif de la cat&eacute;gorie',
 
 // e
@@ -33,7 +34,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'les_forum_de_boutique'=>'Discussion sur les produits',
 'les_produits'=>'Les produits',
 
+// r
+'racine_de_la_boutique'=>'Racine de la boutique',
+'retour'=>'Retour',
+
 // t
+'texte_de_la_categorie'=>'Texte&nbsp;:',
 'titre_de_la_categorie'=>'Titre de la cat&eacute;gorie :'
 
 );
