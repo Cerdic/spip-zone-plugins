@@ -72,7 +72,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
 		//enregistrement dans la table
-		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, commentaire, creation) VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '_$ville', '$telephone','prospect', '$commentaire', CURRENT_DATE() ) ");	
+		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, commentaire, creation) VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', CURRENT_DATE() ) ");	
 		
 	}
 	else {
