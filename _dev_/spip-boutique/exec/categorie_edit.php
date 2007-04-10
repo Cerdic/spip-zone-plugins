@@ -22,6 +22,9 @@ function exec_categorie_edit(){
 			$categorie = spip_fetch_array($res_categorie);
 			
 			echo debut_cadre_formulaire();
+			echo '<form action="'.lire_meta('url_site_spip').'/spip.php" method="post" />';
+			echo '<input type="hidden" name="id_categorie" value="new" />';
+			echo '<input type="hidden" name="redirect" value="?exec=categories" />';
 			echo '<b>'._T('boutique:titre_de_la_categorie').'</b>';
 			echo '<input style="width: 480px;" class="formo" name="titre" value="'.$categorie['titre'].'" size="40" type="text"><br />';
 			
@@ -44,6 +47,7 @@ function exec_categorie_edit(){
 			echo '<br /><b>'._T('boutique:texte_de_la_categorie').'</b>';
 			echo barre_textarea ( $contenu['descriptif'], '20', $cols, $lang='' );
 			echo '<br /><div align="right"><input type="submit" class="fondo" value="'._T('boutique:enregistrer').'" /></div><br />';
+			echo '</form>';
 			echo fin_cadre_formulaire();
 			
 		if ($GLOBALS['spip_version_code']>=1.92) { echo fin_gauche(); }
