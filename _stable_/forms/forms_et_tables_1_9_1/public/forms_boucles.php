@@ -117,6 +117,7 @@ code;
 			$boucle->where[] = '$filtre';
 			$boucle->from["dc"] =  "spip_forms_donnees_champs";
 			$boucle->where[] =  array("'='", "'dc.id_donnee'", "'$id_table.id_donnee'");
+			$boucle->group[] = $boucle->id_table . '.id_donnee'; 
 		}
 		
 		if (isset($boucle->modificateur['crit_id_mot'])){
