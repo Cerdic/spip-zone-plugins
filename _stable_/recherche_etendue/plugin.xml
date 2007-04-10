@@ -67,5 +67,9 @@ _ Filtro google_like
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>recherche_etendue_pipeline.php</inclure>
+	</pipeline>
 	<chemin dir='' />
 </plugin>

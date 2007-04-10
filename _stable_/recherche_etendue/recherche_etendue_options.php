@@ -13,8 +13,10 @@
  * � 2005 - Distribue sous licence GNU/GPL
  *
  */
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_RECHERCHEETENDUE',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_RECHERCHEETENDUE')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_RECHERCHEETENDUE',(_DIR_PLUGINS.end($p)));
+}
 
 if (_request('recherche')&&_DIR_RACINE=="")
 	RechercheEtendue_stats();
