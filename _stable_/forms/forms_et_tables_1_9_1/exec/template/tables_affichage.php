@@ -40,6 +40,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 	
 	debut_droite();
 
+	$bouton_defaut = true;
 	if ( _request('exec')=='tables_tous'
 		&& (_request('var_mode')=='dev' OR (defined('_OUTILS_DEVELOPPEURS') && _OUTILS_DEVELOPPEURS))) {
 		$res = spip_query("SELECT type_form FROM spip_forms GROUP BY type_form ORDER BY type_form");
@@ -56,10 +57,11 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 				$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
 				icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
 				echo "</div>";
+				if ($row['type_form']==$type_form) $bouton_defaut = false;
 			}
 		}
 	}
-	else {
+	if ($bouton_defaut) {
 		$prefix = forms_prefixi18n($type_form);
 		$contexte = array('type_form'=>$type_form,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 		echo recuperer_fond("exec/template/tables_tous",$contexte);
