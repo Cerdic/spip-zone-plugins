@@ -1,7 +1,7 @@
 div#top {height:80px;line-height:80px;margin:0;padding-left:10px;}
 div#page{width:700px;margin:0 auto}
 div#conteneur{float:left;width:100%}
-div#contenu{margin: 10px 10px 10px 310px;padding:0.5em}
-div#navigation{float:left;width:140px;margin:10px 0 10px -540px}
-div#extra{float:left;width:140px;margin:10px 0 10px -690px}
-div#pied{clear:left;width:100%;margin:0}
+div#contenu{margin-left: 300px}
+div#navigation{float:left;width:150px;margin-left:-550px}
+div#extra{float:left;width:150px;margin-left:-700px}
+div#pied{clear:left;width:100%}
