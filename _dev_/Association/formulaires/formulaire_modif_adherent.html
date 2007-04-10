@@ -1,0 +1,56 @@
+<div class="spip_forms">
+<fieldset>
+<legend>Modifier vos données</legend>
+<BOUCLE_adherent(SPIP_ASSO_ADHERENTS){id_auteur=#SESSION{id_auteur}}>
+<form action="#" method="POST">
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="nom">Nom :</label>
+		</span>
+		<input name="nom" type="text" class="choix" size="40" value="[(#NOM)]" /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="prenom">Pr&eacute;nom :</label>
+		</span>
+		<input name="prenom" type="text" class="choix" size="40" value="[(#PRENOM)]"  /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="mail">Email :</label>
+		</span>
+		<input name="mail" type="text" class="choix" size="40" value="[(#EMAIL)]" /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="adresse">N&deg; et rue :</label> 
+		</span>
+		<textarea name="adresse" type="text" class="choix" rows="2" cols="30" />[(#RUE)]</textarea>
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="cp">Code postal :</label>
+		</span>	
+		<input name="cp" type="text" class="choix" size="40" value="[(#CP)]" /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="ville">Ville :</label> 
+		</span>
+		<input name="ville" type="text" class="choix" size="40" value="[(#VILLE)]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="telephone">T&eacute;l&eacute;phone:</label>
+		</span>
+		<input name="telephone" type="text" id="telephone" size="40" value="[(#TELEPHONE)]" />
+	</div>
+	<div>
+		<input type="submit" name="bouton" class="spip_bouton" value="Soumettre" />
+	</div>
+</form>
+</BOUCLE_adherent>
+<div> Vous n'êtes pas autorisé à éditer ce profil</div>
+<//B_adherent>
+</fieldset>
+</div>
