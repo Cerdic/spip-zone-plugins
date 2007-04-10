@@ -20,7 +20,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 # Boutons globaux
 	'bouton_retour' => 'Retour',
-
+	'bouton_confirmer' => 'Confirmer',
+	'bouton_modifier' => 'Modifier',
+	'bouton_envoyer' => 'Envoyer',
+	'bouton_soumettre' => 'Soumettre',
+	'bouton_supprimer' => 'Supprimer',
+	
 	'configuration' => 'Configuration',
 	'effacer_les_tables' => 'Effacer les tables',
 	'gestion_association' => 'Gestion d\'une Association',
