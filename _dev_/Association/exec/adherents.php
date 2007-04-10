@@ -27,7 +27,8 @@ function exec_adherents() {
 	$url_edit_adherent = generer_url_ecrire('edit_adherent');
 	$url_voir_adherent = generer_url_ecrire('voir_adherent');
 	$url_action_adherents = generer_url_ecrire('action_adherents');
-
+	$url_pdf_adherents = generer_url_ecrire('pdf_adherents');
+	
 	include_spip ('inc/navigation');
 
 	debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_liste_actifs'));
@@ -84,6 +85,10 @@ function exec_adherents() {
 	if ($lettre == "%") { echo ' <strong>'._T('asso:adherent_entete_tous').'</strong>'; }
 	else { echo ' <a href="'.$url_adherents.'&filtre='.$filtre.'">'._T('asso:adherent_entete_tous').'</a>'; }
 
+	echo '<td>';
+	echo '<a href="'.$url_pdf_adherents.'&'.$critere.'">Imprimer</a>';
+	echo '</td>';
+	
 // FILTRES
 	echo '<td style="text-align:right;">';
 // ID
@@ -267,8 +272,9 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 			}
 		}	
 	}
+	
 	echo '<td  style="text-align:right;">';
-	echo '<input type="submit" name="Submit" value="'._T('asso:adherent_bouton_envoyer').'" class="fondo">';
+	echo '<input type="submit" name="Submit" value="'._T('asso:bouton_supprimer').'" class="fondo">';
 	echo '</td>';
 	echo '</table>';
 	echo '</form>';

@@ -1,7 +1,8 @@
-= Bugs =
-Double envoi du mail d'adhésion
+*** Bugs ***
+- Double envoi du mail d'adhésion
+- Charset dans le pdf Adhérents
 
-= Mise en forme =
+*** Mise en forme ***
 
 ==Compatibilite XHTML==
 A faire
@@ -19,8 +20,7 @@ Utiliser l'indentation de SPIP serait le mieux selon moi.
 Mettre des \n en fin de ligne dans les echo, ou sortir le code HTML du code
 source PHP, afin d'avoir un code lisible en sortie.
 
-
-= Gestion comptable  =
+*** Gestion comptable  ***
 
 == Gestion des droits==
 Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
@@ -34,7 +34,7 @@ Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
 Dans la config, faire le choix entre une gestion par l'ID ou par l'id_asso (codification structuree): c'est utile pour la recherche et les enregistrements comptables
 
 
-= Gros Travaux =
+*** Gros Travaux ***
 
 == Internationalisation ==
 En cours.
@@ -53,24 +53,15 @@ En cours.
 		commentaires)
 
 == Templates==
-- #FORMULAIRE_ADHERENT: Ajouter des fonctions de controle (email_valide, champs obligatoires)
-Il faudra prevoir un formulaire en modification
-Idem pour les inscriptions aux activites et les dons (ça roulera tout seul quand on aura fait le premier)
+- #FORMULAIRE_MODIFICATION_ADHERENT (v0.4)
 
 
-= Architecture =
+*** Architecture ***
 
 == Spip_listes 1.9.2 ==
 Ajouter l'inscription aux listes de diffusion
 
-== Prefixes de tables ==
-Il serait bon de verifier que le plugin gere les prefix de table spip.
-Notamment via l'utilisation de spip_query au lieu de mysql_query.
-Peut-etre faudrait-il egalement utiliser spip_fetch_array eu lieu de
-mysql_fetch_array. (Fait)
-
-
-= Suggestions =
+*** Suggestions ***
 
 == Logo activites==
 A changer
