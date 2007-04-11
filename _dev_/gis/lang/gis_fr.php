@@ -9,9 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'clave_engadida' => 'Clef ajout&eacute;e: ',
 'clic_mapa' => 'Cliquer sur la carte pour changer les coordonn&eacute;es',
 'clic_desplegar' => 'd&eacute;plier',
-'configurar_gis' => 'Configurer Plugin Gis',
+'configurar_gis' => 'Configurer le Plugin Gis',
 'conseguir' => '(obtenir)',
-'cambiar' => 'changer coordonn&eacute;es',
+'cambiar' => 'changer les coordonn&eacute;es',
 'boton_actualizar' => 'actualiser'
 );
 
