@@ -30,7 +30,7 @@ function action_charger()
 	include_spip('inc/chargeur');
 	$url_retour = charge_request('url_retour', 'ecrire/');
 	if ($actplug = charge_request('activer')) {
-		kit_activer_plugin($actplug);
+		charge_activer_plugin($actplug);
 		redirige_par_entete($url_retour);
 	}
 	$plugin = charge_request('plugin');
@@ -39,7 +39,7 @@ function action_charger()
 	$remove = charge_request('remove_path', 'spip' . ($plugin ? '/plugins' : ''));
 	$dest = charge_request('dest_path', _DIR_RACINE . ($plugin ? 'plugins/' : ''));
 
-	$status = kit_charger_zip($depot, $zip, $remove, $dest, $plugin);
+	$status = charge_charger_zip($depot, $zip, $remove, $dest, $plugin);
 
 	redirige_par_entete($url_retour);
 }

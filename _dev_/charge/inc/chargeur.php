@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin kitspip : inc/loader.php: charger comme spip_loader en interne
+ * Plugin charge : inc/chargeur.php: charger comme spip_loader en interne
  *
  * Auteur : bertrand@toggg.com
  * © 2007 - Distribue sous licence LGPL
@@ -11,12 +11,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function kit_charger_zip($depot, $nom, $remove = 'spip', $dest = _DIR_RACINE, $plugin = null)
+function charge_charger_zip($depot, $nom, $remove = 'spip', $dest = _DIR_RACINE, $plugin = null)
 {
    	include_spip('inc/distant');
 	$contenu = recuperer_page($paquet = $depot . $nom . '.zip');
 
-	if (!$contenu || !($fichier = kit_ecrire_fichier_zip($nom, $contenu))) {
+	if (!$contenu || !($fichier = charge_ecrire_fichier_zip($nom, $contenu))) {
 		spip_log('charger_decompresser impossible de charger ' . $paquet);
 		return 0;
 	}
@@ -69,7 +69,7 @@ function kit_charger_zip($depot, $nom, $remove = 'spip', $dest = _DIR_RACINE, $p
 	@unlink($fichier);
 
 	if ($plugin) {
-		kit_activer_plugin($plugin);
+		charge_activer_plugin($plugin);
 	}
 
 	spip_log('charger_decompresser OK pour paquet: ' . $paquet);
@@ -78,7 +78,7 @@ function kit_charger_zip($depot, $nom, $remove = 'spip', $dest = _DIR_RACINE, $p
 }
 
 // juste activer le plugin du repertoire $plugin
-function kit_activer_plugin($plugin)
+function charge_activer_plugin($plugin)
 {
 	spip_log('charger_decompresser activer plugin: ' . $plugin);
 	include_spip('inc/plugin');
@@ -89,7 +89,7 @@ function kit_activer_plugin($plugin)
 //
 // Ecrire un fichier de maniere un peu sure
 //
-function kit_ecrire_fichier_zip ($nom, $contenu) {
+function charge_ecrire_fichier_zip ($nom, $contenu) {
 
 	$fp = @fopen($fichier = _DIR_TMP . $nom . '.zip', 'wb');
 	$s = @fputs($fp, $contenu, $a = strlen($contenu));
