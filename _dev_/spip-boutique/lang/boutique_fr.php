@@ -34,13 +34,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'les_forum_de_boutique'=>'Discussion sur les produits',
 'les_produits'=>'Les produits',
 
+// m
+'modifier_la_categorie'=>'Modifier la cat&eacute;gorie',
+
 // r
 'racine_de_la_boutique'=>'Racine de la boutique',
 'retour'=>'Retour',
 
 // t
 'texte_de_la_categorie'=>'Texte&nbsp;:',
-'titre_de_la_categorie'=>'Titre de la cat&eacute;gorie :'
+'titre_de_la_categorie'=>'Titre de la cat&eacute;gorie :',
+'tva'=>'Tva'
 
 );
 ?>

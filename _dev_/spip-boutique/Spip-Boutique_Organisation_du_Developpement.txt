@@ -37,9 +37,9 @@ Coté Administrateur restreint :
 	lier une catégorie à une rubrique et inversement si il est administrateur de la catégories ET de la rubrique (cfg : oui, non), --> intérêt à estimer ...
 ...
 2)Time line
-	V0.1.x création des tables utilisée par le plugin (fait à 75%)
-        V0.2.x Création du système d'ajout / suppression / édition de catégories (fait à 0%)
-        V0.3.x Création du système d'ajout / suppression / édition de produits (fait à 0%)
+	V0.1.x création des tables utilisée par le plugin (fait à 60%)
+        V0.2.x Création du système d'ajout / suppression / édition de catégories (fait à 50%)
+        V0.3.x Création du système d'ajout / suppression / édition de produits (fait à 20%)
         V0.4.x Sécurisation des droits d'édition par rapport aux users spip
         V0.5.x Création du système de visualisation des paniers et clients
         V0.6.x Création de la balise #PANIER. Critères dans 4.4.2

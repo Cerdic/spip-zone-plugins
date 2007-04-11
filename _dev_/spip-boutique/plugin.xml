@@ -8,7 +8,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 _ Avec le soutient de [Media-Animation->http://www.media-animation.be] 
 	</auteur>
 	<version> <!-- Version du plugin -->
-	0.0.1
+	0.0.2ALPHA
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	dev
