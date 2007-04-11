@@ -97,10 +97,7 @@ function colonne_table($table, $col)
 }
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
-function valeur_colonne_table($table, $col, $id) {
-	if (function_exists($f = $table.'_valeur_colonne_table_dist')
-	OR function_exists($f = $table.'_valeur_colonne_table'))
-		return $f($table, $col, $id);
+function valeur_colonne_table_dist($table, $col, $id) {
 	if (is_scalar($id)) {
 		$where = id_table_objet($table) . '=' . $id;
 	} else {
@@ -118,6 +115,12 @@ function valeur_colonne_table($table, $col, $id) {
         return is_array($col) ? $t : $t[$col];
     }
     return false;
+}
+function valeur_colonne_table($table, $col, $id) {
+	if (function_exists($f = $table.'_valeur_colonne_table_dist')
+	OR function_exists($f = $table.'_valeur_colonne_table'))
+		return $f($table, $col, $id);
+	return valeur_colonne_table_dist($table, $col, $id);
 }
 
 /**
