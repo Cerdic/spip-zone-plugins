@@ -73,15 +73,15 @@ function RechercheEtendue_affiche_droite($flux){
 				$out .= generer_url_post_ecrire('naviguer', "id_rubrique=$id_rubrique");
 				$out .= "<input type='hidden' name='recherche_etendue_rubrique_on' value='$id_rubrique' />\n";
 				$out .= "<div><em>"._L("Cette rubrique n'est pas prise en compte par le moteur de recherche")."</em></div>\n";
-				$out .= "<div>"._L("Re-activer l'indexation de cette rubrique par le moteur de recherche")."\n";
-				$out .= "<div align='$spip_lang_right'><input type='submit' name='Choisir' value='"._L('Valider')."' class='fondo'></div>\n";
+				$out .= "<div><strong>"._L("Re-activer l'indexation de cette rubrique par le moteur de recherche")."</strong>\n";
+				$out .= "<div align='$spip_lang_right'><input type='submit' name='Choisir' value='"._L('Activer')."' class='fondo'></div>\n";
 				$out .= "</div></form>";
 			}
 			else{
 				$out .= generer_url_post_ecrire('naviguer', "id_rubrique=$id_rubrique");
 				$out .= "<input type='hidden' name='recherche_etendue_rubrique_off' value='$id_rubrique' />\n";
 				$out .= "<div>"._L("Desactiver l'indexation de cette rubrique par le moteur de recherche")."<br/>\n";
-				$out .= "<div align='$spip_lang_right'><input type='submit' name='Annuler' value='"._L('Valider')."' class='fondo'></div>\n";
+				$out .= "<div align='$spip_lang_right'><input type='submit' name='Annuler' value='"._L('Desactiver')."' class='fondo'></div>\n";
 				$out .= "</div></form>";
 			}
 			$out .= fin_cadre_relief(true);
