@@ -1,4 +1,4 @@
-<div id="recherche">
+<div id="recherche-style">
 	<form action="spip.php?page=recherche" name="re" id="re" method="get">
 		<img src="plugins/jolirecherche/formulaires/rere.gif" onclick="javascript:document.re.recherche.focus();" alt="loupe" width="18" height="18" border="0" align="middle" class="refond" /><input name="recherche"  type="text" id="recherche" value="[(#RECHERCHE|sinon{recherche})]" class="rech" onkeypress="javascript:tac_ok()" onchange="javascript:tac_ok();" onfocus="if (document.re.recherche.value == 'recherche') document.re.recherche.value='';" onblur="if (document.re.recherche.value=='') document.re.recherche.value='recherche';" /><img src="plugins/jolirecherche/formulaires/rerien.gif" onclick="javascript:tac_fo();" alt="rerien" width="18" height="18" id="rerien" border="0" align="middle" class="refond" title="non" />			
 		<input value='recherche' name='page' type='hidden' />

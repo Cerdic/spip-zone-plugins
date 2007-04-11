@@ -4,9 +4,9 @@
 	Copyleft - all rights reversed.
 */
 
-#recherche { margin-bottom: 15px; }
-#recherche form input { vertical-align: bottom; }
-#recherche input.rech { color: #7c7c7c; height: 12px; padding: 3px; margin: 0; width: 110px; border: 0; font-size: 10px; background-color: white; background-image: url(formulaires/refond.gif); background-repeat: repeat-x; background-position: left top; }
+#recherche-style { margin-bottom: 15px; }
+#recherche-style form input { vertical-align: bottom; }
+#recherche-style input.rech { color: #7c7c7c; height: 12px; padding: 3px; margin: 0; width: 110px; border: 0; font-size: 10px; background-color: white; background-image: url(formulaires/refond.gif); background-repeat: repeat-x; background-position: left top; }
 
 .refond {
     margin-bottom: 0px;
