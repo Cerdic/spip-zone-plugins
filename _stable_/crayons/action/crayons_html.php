@@ -7,6 +7,7 @@ function affiche_controleur($class) {
 
   if (preg_match(_PREG_CRAYON, $class, $regs)) {
     list(,$nomcrayon,$type,$champ,$id) = $regs;
+    $regs[] = $class;
     include_spip('inc/autoriser');
     if (!autoriser('modifier',$type, $id, NULL, array('champ'=>$champ))) {
         $return['$erreur'] = "$type $id: " . _U('crayons:non_autorise');
@@ -29,8 +30,8 @@ function affiche_controleur($class) {
 }
 
 function controleur_dist($regs) {
-    list(,$nomcrayon,$type,$champ,$id) = $regs;
-    $options = array();
+    list( , $nomcrayon, $type, $champ, $id, $class) = $regs;
+    $options = array('class' => $class);
 	// Si le controleur est un squelette html, on va chercher
 	// les champs qu'il lui faut dans la table demandee
 	// Attention, un controleur multi-tables ne fonctionnera
@@ -171,6 +172,8 @@ class Crayon {
         .' value="'.$this->key.'" />'."\n"
         . '<input type="hidden" name="name_'.$this->key
         .'" value="'.$this->name.'" />'."\n"
+        . '<input type="hidden" name="class_' . $this->key
+        . '" value="' . $this->class . '" />' . "\n"
         . '<input type="hidden" name="md5_'.$this->key
         .'" value="'.$this->md5.'" />'."\n"
         . '<input type="hidden" name="fields_'.$this->key
