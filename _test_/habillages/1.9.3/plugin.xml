@@ -12,8 +12,8 @@ _ Tou(te)s les autres qui ont mis leur grain de sel dans ce projet sur la liste 
 _ Et tous les concepteurs et les conceptrices de squelettes, themes, et images (voir auteurs de chaque habillages).
 _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
-	<version> <!-- Version du plugin -->
-	1.9.2
+	<version> <!-- Version du plugin (les trois premiers chiffres correspondent a la version SPIP avec laquelle il est compatible -->
+	1.9.3.1
 	</version>
 	<icon>
 	img_pack/habillages_icone-48.png
@@ -22,7 +22,7 @@ _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	[->http://spip.graphismes.free.fr]
 	</lien>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	test
+	dev
 	</etat>
 	<options>
 	habillages_options.php
@@ -30,8 +30,6 @@ _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	<description>
 	VERSION INSTABLE - Ne pas utiliser.
 Gestionnaire d'habillages SPIP.
-_ Pour la version compl&#232;te (avec les jeux de squelettes, les th&#232;mes, les extras, et les icones).
-_ Ce plugin est compatible seulement avec la version SPIP 1.9.2.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
