@@ -16,11 +16,13 @@ _ &copy; 2007 - Distribu&eacute; sous licence GPL
 	Permettre l'ajout de documents aux auteurs...
 	</description>
 	<lien>http://kent1.sklunk.net</lien> <!-- URI de documentation -->
-
+	<install>base/documents_auteurs_upgrade.php</install>
+	<options>
+	documents_auteurs_options.php
+	</options>
 	<prefix>
 	documents_auteurs
 	</prefix>
-	<install>base/documents_auteurs_upgrade.php</install>
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>documents_auteurs.php</inclure>
