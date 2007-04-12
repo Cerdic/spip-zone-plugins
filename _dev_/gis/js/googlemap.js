@@ -47,38 +47,46 @@ function creaMarcador(point, html, icon, son) {
 
 function agregarMarcador (xmlItem, minZoom,  maxZoom) {
 	//almacenamos en distintas variables la informacion contenida nen los chilNodes de cada item-marcador do xml
-	var id = extraerID(getNodeText(xmlItem.childNodes[2]));
-	var lat = parseFloat(getNodeText(xmlItem.childNodes[6]));
-	var lng = parseFloat(getNodeText(xmlItem.childNodes[7]));
-	var son = xmlItem.childNodes[8].getAttribute("url");
-	var html = getNodeText(xmlItem.childNodes[4]);
+	var xmlLat = xmlItem.getElementsByTagName("geo_lat");
+	var xmlLng = xmlItem.getElementsByTagName("geo_long");
+	var xmlSon = xmlItem.getElementsByTagName("enclosure");
+
+	if ((xmlLat.length == 0) || (xmlLng.length == 0)) return;
+	else {
+		var lat = parseFloat(getNodeText(xmlLat.item(0)));
+		var lng = parseFloat(getNodeText(xmlLng.item(0)));
+		var id = extraerID(getNodeText(xmlItem.getElementsByTagName("link").item(0)));
+		var html = getNodeText(xmlItem.getElementsByTagName("description").item(0));
+		var son;
+		if (xmlSon.length != 0) son = xmlSon.item(0).getAttribute("url");
    	
-	//creamos un Gpoint para situar nel o marcador
-	var point = new GPoint(lng,lat);
+		//creamos un Gpoint para situar nel o marcador
+		var point = new GPoint(lng,lat);
 		
-	//creamos un icono para o marcador
-	var icono_categoria = new GIcon();
-	icono_categoria.image = URLbase + "/plugins/gis/img_pack/correxir.png";
-	icono_categoria.shadow = URLbase + "/plugins/gis/img_pack/shadow.png";
-	icono_categoria.iconSize = new GSize(20, 34);
-	icono_categoria.shadowSize = new GSize(22, 20);	
-	icono_categoria.iconAnchor = new GPoint(10, 34);
-	icono_categoria.infoWindowAnchor = new GPoint(5, 1);
+		//creamos un icono para o marcador
+		var icono_categoria = new GIcon();
+		icono_categoria.image = URLbase + "/plugins/gis/img_pack/correxir.png";
+		icono_categoria.shadow = URLbase + "/plugins/gis/img_pack/shadow.png";
+		icono_categoria.iconSize = new GSize(20, 34);
+		icono_categoria.shadowSize = new GSize(22, 20);	
+		icono_categoria.iconAnchor = new GPoint(10, 34);
+		icono_categoria.infoWindowAnchor = new GPoint(5, 1);
 			
-	// creamos el marcador con los datos almacenados en las variables
-	var marcador = creaMarcador(point, html, icono_categoria, son);
+		// creamos el marcador con los datos almacenados en las variables
+		var marcador = creaMarcador(point, html, icono_categoria, son);
 		
-	// recollemos a informacion que sexa necesaria en distintos arrays, usando como identificador a id do artigo
-	marcadores[id] = marcador;
-	contidosHTML[id] = html;
-	URLsons[id] = son;
+		// recollemos a informacion que sexa necesaria en distintos arrays, usando como identificador a id do artigo
+		marcadores[id] = marcador;
+		contidosHTML[id] = html;
+		URLsons[id] = son;
     		
-	//engadimos o marcador ao markerManager antes "map.addOverlay(marker);"
-	if (maxZoom) {
-		markerManager.addMarker(marcador, minZoom,  maxZoom);
-	} else {
-		markerManager.addMarker(marcador, minZoom);
-	}
+		//engadimos o marcador ao markerManager antes "map.addOverlay(marker);"
+		if (maxZoom) {
+			markerManager.addMarker(marcador, minZoom,  maxZoom);
+		} else {
+			markerManager.addMarker(marcador, minZoom);
+		}
+	}	
 }
 
 function abrirVentana(identificador) {

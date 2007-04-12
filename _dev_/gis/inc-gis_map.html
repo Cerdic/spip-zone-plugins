@@ -2,6 +2,9 @@
 	<script type="text/javascript">
 	//<![CDATA[
 	URLbase = "#URL_SITE_SPIP/";
+	var map;
+	var markerManager;
+
 	$(document).ready(
 		function() {
     		if (GBrowserIsCompatible()) {
@@ -20,7 +23,7 @@
     					/*primero buscamos dentro del objeto xml almacenado en xml todos los nodos "item", el contenido de cada nodo "item" del documento xml
     					se almacena en la variable xmlItem (*en la variable item se almacena la posicion del "item" actual en el array de items y asi podemos
     					recorrerlos con facilidad)*/
-    					xmlItem = xml.documentElement.getElementsByTagName("item")[item];
+    					var xmlItem = xml.documentElement.getElementsByTagName("item")[item];
    						agregarMarcador(xmlItem, 0);
 					});
 					markerManager.refresh();
