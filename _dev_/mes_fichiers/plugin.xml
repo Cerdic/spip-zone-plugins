@@ -3,6 +3,12 @@
 	<nom>mes_fichiers.zip</nom>
 	<prefix>mes_fichiers</prefix>
 	<description>
-	[Cr&#233;er, Mettre &#224; Jour ou Restaurer->./?exec=admin_tech]
+Pour cr&eacute;er ou restaurer une copie compl&egrave;te de votre spip dans/depuis mes_fichiers.zip &agrave; la racine.
+	
+[Sauvegarder->../?action=mes_fichiers]
+
+Restituer: la m&egrave;me avec ?action=decompresser_mes_fichiers
+
+[Cr&#233;er, Mettre &#224; Jour ou Restaurer->./?exec=admin_tech]
 	</description>
 </plugin>
