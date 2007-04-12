@@ -123,7 +123,7 @@
         var regex = re.join("|");
         switch(SEhighlight.options.exact) {
           case "exact":
-            regex = '\\b'+regex+'\\b';
+            regex = '\\b(?:'+regex+')\\b';
             break;
           case "whole":
             regex = '\\b\\w*('+regex+')\\w*\\b';
