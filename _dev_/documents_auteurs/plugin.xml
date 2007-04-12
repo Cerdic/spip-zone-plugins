@@ -1,0 +1,28 @@
+<plugin>
+	<nom>
+	Documents Auteurs
+	</nom>
+	<auteur>
+	Quentin Drouet
+_ &copy; 2007 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	Permettre l'ajout de documents aux auteurs...
+	</description>
+	<lien>http://kent1.sklunk.net</lien> <!-- URI de documentation -->
+
+	<prefix>
+	documents_auteurs
+	</prefix>
+	<install>base/documents_auteurs_upgrade.php</install>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>documents_auteurs.php</inclure>
+	</pipeline>
+</plugin>
