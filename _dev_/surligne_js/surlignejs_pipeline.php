@@ -5,7 +5,7 @@ function Surlignejs_insert_head($flux) {
     $flux .= "<script type='text/javascript'>
     jQuery(function(){jQuery(document).SEhighlight({
     style_name:'spip_surligne',
-    exact:false,
+    exact:'whole',
     style_name_suffix:false,
     engines:[/^".str_replace(array("/","."),array("\/","\."),$GLOBALS['meta']['adresse_site'])."/i,/recherche=([^&]+)/i],
     startHighlightComment:'debut_surligneconditionnel',

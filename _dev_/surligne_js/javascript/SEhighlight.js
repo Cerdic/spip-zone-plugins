@@ -9,13 +9,15 @@
  * @version 0.3
  *
  *  Options
- *  - exact (boolean, default:true) 
- *    Find the exact words or partial matches.
+ *  - exact (string, default:"exact") 
+ *    "exact" : find and highlight the exact words.
+ *    "whole" : find partial matches but highlight whole words
+ *    "partial": find and highlight partial matches
  *     
  *  - style_name (string, default:'hilite')
  *    The class given to the span wrapping the matched words.
  *     
- *  - style_name_suffix (boolean, default:'true')
+ *  - style_name_suffix (boolean, default:true)
  *    If true a different number is added to style_name for every different matched word.
  *     
  *  - debug_referrer (string, default:null)
@@ -41,7 +43,7 @@
     var ref = options.debug_referrer ? options.debug_referrer : document.referrer;
     if(!ref) return this;
     
-    SEhighlight.options = $.extend({exact:true,style_name:'hilite',style_name_suffix:true},options);
+    SEhighlight.options = $.extend({exact:"exact",style_name:'hilite',style_name_suffix:true},options);
     
     if(options.engines) SEhighlight.engines.unshift(options.engines);  
     var q = SEhighlight.decodeURL(ref,SEhighlight.engines);
@@ -114,11 +116,20 @@
     buildReplaceTools : function(query) {
         re = new Array();
         for (var i = 0, l=query.length; i < l; i ++) {
-            var q = query[i] = SEhighlight.replaceAccent(query[i].toLowerCase());
-            re.push(SEhighlight.options.exact?'\\b'+q+'\\b':q);
+            query[i] = SEhighlight.replaceAccent(query[i].toLowerCase());
+            re.push(query[i]);
         }
-    
-        SEhighlight.regex = new RegExp(re.join("|"), "gi");
+        
+        var regex = re.join("|");
+        switch(SEhighlight.options.exact) {
+          case "exact":
+            regex = '\\b'+regex+'\\b';
+            break;
+          case "whole":
+            regex = '\\b\\w*('+regex+')\\w*\\b';
+            break;
+        }    
+        SEhighlight.regex = new RegExp(regex, "gi");
         
         for (var i = 0, l = query.length; i < l; i ++) {
             SEhighlight.subs[query[i]] = SEhighlight.options.style_name+
@@ -127,12 +138,11 @@
     },
     nosearch: /s(?:cript|tyle)|textarea/i,
     hiliteElement: function(el, query) {
-        var startIndex, endIndex, startComment = false, comment = false, parents = [], back, child, opt = SEhighlight.options;
+        var startIndex, endIndex, comment = false, opt = SEhighlight.options;
         if(!opt.startHighlightComment || !opt.stopHighlightComment)
           return SEhighlight.hiliteTree(0,el.childNodes.length,el,query);
         if($.browser.msie) {
-          var item = el.firstChild;
-          var i=0;
+          var item = el.firstChild, i = 0, parents = [], startComment = false;
           while(item) {
             if(item.nodeType==8) {
               if($.trim(item.data)==opt.startHighlightComment) {
@@ -144,7 +154,7 @@
                 startComment = false;
               }
             }
-            var next = item.nextSibling;
+            var next = item.nextSibling, back, child;
             if(!startComment && (child = item.firstChild)) {
               if(next)
                 parents.push([next,i+1]);
@@ -178,6 +188,7 @@
         if(!comment) SEhighlight.hiliteTree(0,el.childNodes.length,el,query);
     },
     hiliteTree : function(startIndex,endIndex,el,query) {
+        var matchIndex = SEhighlight.options.exact=="whole"?1:0;
         for(;startIndex<endIndex;startIndex++) {
           var item = el.childNodes[startIndex];
           if ( item.nodeType != 8 ) {//comment node
@@ -188,7 +199,7 @@
               SEhighlight.regex.lastIndex = 0;
               while(match = SEhighlight.regex.exec(textNoAcc)) {
                 newtext += text.substr(index,match.index-index)+'<span class="'+
-                SEhighlight.subs[match[0].toLowerCase()]+'">'+text.substr(match.index,match[0].length)+"</span>";
+                SEhighlight.subs[match[matchIndex].toLowerCase()]+'">'+text.substr(match.index,match[0].length)+"</span>";
                 index = match.index+match[0].length;
               }
               if(newtext) {
