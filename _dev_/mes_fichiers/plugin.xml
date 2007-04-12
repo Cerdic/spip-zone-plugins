@@ -3,7 +3,7 @@
 	<nom>mes_fichiers.zip</nom>
 	<prefix>mes_fichiers</prefix>
 	<description>
-Pour cr&eacute;er ou restaurer une copie compl&egrave;te de votre spip dans/depuis mes_fichiers.zip &agrave; la racine.
+Pour cr&eacute;er ou restaurer une copie compl&egrave;te de votre spip dans [tmp/mes_fichiers.zip->../tmp/mes_fichiers.zip] dans tmp/
 	
 [Sauvegarder->../?action=mes_fichiers]
 

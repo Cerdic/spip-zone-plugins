@@ -44,7 +44,7 @@ function action_mes_fichiers()
 	}
 	spip_log('*** mes_fichiers ***');
 	spip_log($liste);
-	$mes_fichiers = new PclZip('mes_fichiers.zip');
+	$mes_fichiers = new PclZip(_DIR_TMP . 'mes_fichiers.zip');
 	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_ADD_PATH, "spip");
 	if ($erreur == 0) {
 		die("Erreur : ".$mes_fichiers->errorInfo(true));
