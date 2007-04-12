@@ -11,7 +11,7 @@ function getNodeText(node){
 
 //GL recoller a id da URL do artigo
 //ENG get id from the article'URL
-//FR ???
+//FR récupérer l'id de l'article dans l'URL
 function extraerID(url){
 	var posicion = url.indexOf("article");
 	if (posicion != -1) {
