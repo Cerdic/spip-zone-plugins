@@ -92,7 +92,7 @@ padding:0pt;">'.$sommaire.'</ul></div></div>';
 
 function sommaire_d_article($texte){
 	if (strpos($texte, '<h3')===false) return $texte;
-	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte);
+	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte);
 }
 
 ?>

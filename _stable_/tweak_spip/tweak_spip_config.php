@@ -216,7 +216,7 @@ add_tweak( array(
 // couplage avec le tweak 'decoupe', donc 'sommaire' doit etre place juste apres :
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
 include_spip('inc/texte');
-$code = str_replace("'", "\'", code_echappement("<!-- SOMMAIRE -->\n", 'TWEAK'));
+$code = str_replace("'", "\'", code_echappement("<!--  -->\n", 'SOMMAIRE'));
 add_tweak( array(
 	'id' => 'sommaire',
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",

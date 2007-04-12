@@ -102,6 +102,6 @@ function tweak_smileys_pre_typo($texte) {
 		smileys_installe();
 //tweak_log('smileys trouvés !');
 	// appeler tweak_rempl_smileys() une fois que certaines balises ont ete protegees
-	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
+	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
 }
 ?>

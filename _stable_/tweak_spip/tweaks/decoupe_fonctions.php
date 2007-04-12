@@ -68,7 +68,7 @@ function decouper_en_pages($texte){
 		include_spip('tweaks/decoupe');
 		decoupe_installe();
 	}
-	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
+	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
 }
 
 ?>

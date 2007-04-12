@@ -15,7 +15,7 @@ function chatons_pre_typo($texte) {
 	if (strpos($texte, ':')===false) return $texte;
 	if (!isset($GLOBALS['meta']['tweaks_chatons']) || isset($GLOBALS['var_mode']))
 		chatons_installe();
-	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_chatons', $texte);
+	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_chatons', $texte);
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP

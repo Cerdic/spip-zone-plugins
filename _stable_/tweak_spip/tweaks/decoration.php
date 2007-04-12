@@ -26,7 +26,7 @@ function decoration_rempl($texte) {
 // fonction pipeline
 function decoration_pre_typo($texte) {
 	if (strpos($texte, '<')===false) return $texte;
-	return tweak_exclure_balises('', 'decoration_rempl', $texte);
+	return tweak_echappe_balises('', 'decoration_rempl', $texte);
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP

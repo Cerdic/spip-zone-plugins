@@ -121,14 +121,15 @@ tweak_log("[#$rand] tweak_initialisation($forcer) : Sortie");
 // $fonction est la fonction prevue pour transformer $texte
 // $texte est le texte d'origine
 // si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
-function tweak_exclure_balises($balises, $fonction, $texte){
+function tweak_echappe_balises($balises, $fonction, $texte){
 	if(!strlen($texte)) return '';
 	if (!function_exists($fonction)) {
-		spip_log("Erreur - tweak_exclure_balises() : $fonction() non definie !");
+		spip_log("Erreur - tweak_echappe_balises() : $fonction() non definie !");
 		return $texte;
 	}
 	if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
 	$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
+	include_spip('inc/texte');
 	$texte = echappe_retour($fonction(echappe_html($texte, 'TWEAKS', true, $balises)), 'TWEAKS');
 	return $texte;
 }
@@ -161,8 +162,7 @@ function tweak_canonicalize($address) {
 /*****************/
 
 // $tweaks_metas_pipes ne sert ici qu'a l'execution et ne comporte que :
-//	- les fichiers .js
-//	- les fichiers .css
+//	- le code pour <head></head>
 //	- le code pour les options.php
 //	- le code pour les fonction.php
 //	- le code pour les pipelines utilises

@@ -6,7 +6,7 @@ function pucesli_rempl($texte) {
 }
 
 function pucesli_pre_typo($texte) {
-	return tweak_exclure_balises('', 'pucesli_rempl', $texte);
+	return tweak_echappe_balises('', 'pucesli_rempl', $texte);
 }
 
 

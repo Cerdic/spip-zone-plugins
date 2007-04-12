@@ -27,8 +27,11 @@ function typo_guillemets_echappe_balises_callback($matches) {
 }
 
 function typo_guillemets_rempl($texte){
+	// bug/tip de spip qui echappe les blocs html en ajoutant \n\n... donc on protege les echappements anterieurs
+	$texte = str_replace('"base64"', "'base64'", $texte);
+	// on s'en va si pas de guillemets...
 	if (strpos($texte, '"')===false) return $texte;
-	// prudence : on protege TOUTES les balises contenant des guillemets
+	// prudence : on protege TOUTES les balises contenant des doubles guillemets droits
 	if (strpos($texte, '<')!==false) 
 		$texte = preg_replace_callback('/(<[^>]+"[^>]*>)/Ums', 'typo_guillemets_echappe_balises_callback', $texte);
 
@@ -159,13 +162,13 @@ function typo_guillemets_rempl($texte){
 			$guilles="&ldquo;$1&rdquo;";
 	}
 	// Remplacement des autres paires de guillemets (et suppression des espaces apres/avant)
-	// Et
+	// Et retour des balises contenant des doubles guillemets droits
 	return echappe_retour(preg_replace('/"\s*(.*?)\s*"/', $guilles, $texte), 'GUILL');
 }
 
 function typo_guillemets($texte){
 	if (strpos($texte, '"')===false) return $texte;
-	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'typo_guillemets_rempl', $texte);
+	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_guillemets_rempl', $texte);
 }
 
 ?>

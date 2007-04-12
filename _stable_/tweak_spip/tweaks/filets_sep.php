@@ -57,6 +57,6 @@ function filets_sep_rempl($texte) {
 // fonction pipeline
 function filets_sep($texte) {
 	if (strpos($texte, '__')===false) return $texte;
-	return tweak_exclure_balises('', 'filets_sep_rempl', $texte);
+	return tweak_echappe_balises('', 'filets_sep_rempl', $texte);
 }
 ?>
