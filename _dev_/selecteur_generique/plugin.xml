@@ -25,4 +25,5 @@
 		<action>inserer_javascript</action>
 		<inclure>inserer_javascript.php</inclure>
 	</pipeline>
+	<chemin dir='' type='prive' />
 </plugin>
