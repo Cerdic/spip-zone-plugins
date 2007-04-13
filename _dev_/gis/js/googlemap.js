@@ -57,6 +57,7 @@ function agregarMarcador (xmlItem, minZoom,  maxZoom) {
 		var lng = parseFloat(getNodeText(xmlLng.item(0)));
 		var id = extraerID(getNodeText(xmlItem.getElementsByTagName("link").item(0)));
 		var html = getNodeText(xmlItem.getElementsByTagName("description").item(0));
+		var icon = getNodeText(xmlItem.getElementsByTagName("geo_icon").item(0));
 		var son;
 		if (xmlSon.length != 0) son = xmlSon.item(0).getAttribute("url");
    	
@@ -65,7 +66,7 @@ function agregarMarcador (xmlItem, minZoom,  maxZoom) {
 		
 		//creamos un icono para o marcador
 		var icono_categoria = new GIcon();
-		icono_categoria.image = URLbase + "/plugins/gis/img_pack/correxir.png";
+		icono_categoria.image = (icon != "" ? icon : URLbase + "/plugins/gis/img_pack/correxir.png");
 		icono_categoria.shadow = URLbase + "/plugins/gis/img_pack/shadow.png";
 		icono_categoria.iconSize = new GSize(20, 34);
 		icono_categoria.shadowSize = new GSize(22, 20);	
