@@ -10,8 +10,9 @@ function ThickBox1_insert_head($flux){
 $flux .=
 
 '
-<script src=\''.url_absolue(find_in_path('thickbox.js')).'\' type=\'text/javascript\'></script>
-<link rel="stylesheet" href="'.url_absolue(find_in_path('thickbox.css')).'" type="text/css" media="projection, screen" />
+<script src="'.url_absolue(find_in_path('thickbox.js')).'" type="text/javascript"></script>'
+.
+'<link rel="stylesheet" href="'.url_absolue(find_in_path('thickbox.css')).'" type="text/css" media="projection, screen" />
 
 <script type="text/javascript"><!--
 // Inside the function "this" will be "document" when called by ready() 

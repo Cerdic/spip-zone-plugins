@@ -29,4 +29,5 @@ _ il n&#233;cessite l'activation du plugin {{jQuery}}.
 		<nom>header_prive</nom>
 		<action>insert_head</action>
 	</pipeline>
+	<chemin dir='' />
 </plugin>
