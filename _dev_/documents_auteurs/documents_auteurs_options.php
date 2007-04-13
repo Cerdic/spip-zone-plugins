@@ -1,6 +1,17 @@
 <?php
 
-// http://doc.spip.org/@exec_documents_colonne_dist
+function affichage_galerie_auteur($id_auteur) {
+	include_spip('inc/presentation');
+	include_spip('inc/layer'); # pour le js des fleches
+
+	$html =
+		http_script("\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" alt=\"\" /></div>';")
+		. http_script('', _DIR_JAVASCRIPT . 'layer.js','')
+		. http_script('', _DIR_JAVASCRIPT . 'spip_barre.js','')
+		. http_script('', _DIR_JAVASCRIPT . 'presentation.js','')
+		. afficher_documents_colonne($id_auteur, 'auteur', url_absolue(self()));
+	return $html;
+}
 function exec_documents_colonne()
 {
 	global $id, $type, $show_docs;
@@ -23,14 +34,14 @@ function exec_documents_colonne()
 		$script = $type."_infos";
 	}
 	else{
-	$script = $type."s_edit";
+		$script = $type."s_edit";
 	}
 	$res = "";
 	foreach($documents as $doc) {
-    $res .= afficher_case_document($doc, $id, $script, $type, $deplier = false);
-  }
-  
-  ajax_retour("<div class='upload_answer upload_document_added'>".
+		$res .= afficher_case_document($doc, $id, $script, $type, $deplier = false);
+	}
+
+	ajax_retour("<div class='upload_answer upload_document_added'>".
 	$res.
 	"</div>",false);
 }
@@ -116,23 +127,9 @@ function inc_legender($id_document, $document, $script, $type, $id, $ancre, $dep
 	. ($flag == 'ajax' ? ';display:block' : "")
 	. "'";
 
-	if (!_DIR_RESTREINT)
+
 		$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att_bouton, $att_span, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
 		  . "<br class='nettoyeur' />";
-	else {
-		$corps = "<div>"
-		       . $corps 
-		       . "<span"
-		       . $att
-		       . "><input type='submit' class='fondo' value='"
-		       . _T('bouton_enregistrer')
-		       ."' /></span><br class='nettoyeur' /></div>";
-		$redirect = parametre_url($script,'show_docs',$id_document,'&');
-		$redirect = parametre_url($redirect,"id_$type",$id,'&');
-		$redirect = parametre_url($redirect,"id_$type",$id,'&');
-		$redirect = ancre_url($redirect,"legender-$id_document");
-		$corps = generer_action_auteur("legender", $id_document, $redirect, $corps, "\nmethod='post'");
-	}
 	
 	$corps .=  $vignette . "\n\n";
 
@@ -145,6 +142,12 @@ function inc_legender($id_document, $document, $script, $type, $id, $ancre, $dep
 			$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
 	}
 	else if (preg_match('/_infos$/', $script)){
+		if ($id==0)
+			$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
+		else
+			$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
+	}
+	else if (preg_match('/ADD-an-event$/', $script)){
 		if ($id==0)
 			$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
 		else
