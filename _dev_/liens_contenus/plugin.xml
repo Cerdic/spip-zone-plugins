@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Liens inter-contenus</nom>
 	<auteur>Nicolas Hoizey &copy; 2007 - Licence GNU/GPL</auteur>
-	<version>0.14</version>
+	<version>0.16</version>
 	<version_base>0.2</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>dev</etat>
@@ -16,8 +16,8 @@ Reste &agrave; faire :
 	</description>
     <chemin dir='' />
 	<prefix>lienscontenus</prefix>
-	<options>lienscontenus_mes_options.php</options>
-	<fonctions>lienscontenus_mes_fonctions.php</fonctions>
+	<options>lienscontenus_options.php</options>
+	<fonctions>lienscontenus_fonctions.php</fonctions>
 	<pipeline>
 		<nom>post_edition</nom>
 		<action>post_edition</action>

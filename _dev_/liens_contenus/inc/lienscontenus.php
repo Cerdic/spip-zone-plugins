@@ -496,7 +496,7 @@ function lienscontenus_verification_articles_page()
                 var idArticle = $(this).attr('id').replace(/^puce_statut_article([0-9]+)$/g, '$1');
                 // on ne s'interesse qu'aux articles publies
                 $(this).find('img[@src$=/puce-verte.gif]').each(function() {
-                    // on recupere "oui" si un autre contenu pointe vers le mot, "non" sinon 
+                    // on recupere "oui" si un autre contenu pointe vers l'article, "non" sinon 
                     var articleContenu = $.ajax({
                         url: '?exec=lienscontenus_ajax_article_contenu',
                         data: 'id_article='+idArticle+'&var_ajaxcharset=utf-8',
@@ -504,37 +504,12 @@ function lienscontenus_verification_articles_page()
                         dataType: 'xml'
                         }).responseText;
                     articleContenu = $(articleContenu).text();
+                    // On ajoute un panneau d'alerte
                     if (articleContenu == 'oui') {
                         $(this).parent().parent().next().prepend('<img src="' + baseUrlPlugin + '/images/alerte.png" style="float: left; padding: 0; margin: 0 3px;" title="' + messageInformationElementContenu + '" />');
                     }
                 })
             });
-            // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
-            /*
-            $('tr.tr_liste > td > div > a.lienscontenus_oui').each(function() {
-                if (this.onclick) {
-                    originalOnClick = this.onclick;
-                    this.onclick = null;
-                } else {
-                    originalOnClick = null;
-                }
-                $(this).bind('click', {origclick: originalOnClick}, handleClick);
-                function handleClick(event)
-                {
-                    if (confirm(messageConfirmationSuppression)) {
-                        if(event.data.origclick) {
-                            event.data.origclick.apply(this);
-                            return false;
-                        } else {
-                            // Si on n'a pas de onclick a l'origine, c'est que le href doit etre suivi
-                            return true;
-                        }
-                    } else {
-                        return false;
-                    }
-                }
-            });
-            */
         });
         </script>
 EOS;
