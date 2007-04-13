@@ -27,4 +27,5 @@ _ &copy; 2007 - Distribu&eacute; sous licence GPL
 		<nom>affiche_gauche</nom>
 		<inclure>documents_auteurs.php</inclure>
 	</pipeline>
+	<chemin dir='' />
 </plugin>
