@@ -170,7 +170,6 @@ function message_inscription($mail, $nom, $mode, $id=0, $nom_famille, $prenom, $
 // http://doc.spip.org/@inscription_nouveau
 function inscription_nouveau($declaration)
 {
-	echo $declaration['nom_famille'];
 	if (!isset($declaration['login']))
 		$declaration['login'] = test_login($declaration['nom'], $declaration['email']);
 
