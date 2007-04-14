@@ -14,4 +14,5 @@
 		<nom>insert_head</nom> 
 		<inclure>nuage_pipelines_public.php</inclure>
 	</pipeline>
+	<chemin dir='' />
 </plugin>

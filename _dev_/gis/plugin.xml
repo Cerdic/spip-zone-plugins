@@ -13,11 +13,11 @@
  <multi>Plugin para insertar un google map na parte privada e na parte publica de SPIP. 
  Permite introducir un punto de google map &oacute; editar un artigo dende a parte privada.
 _ Este plugin engade duas taboas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_config}}
-_ A p‡xina de probas do plugin Ž [www.spip.escoitar.org->http://www.spip.escoitar.org]
+_ A pï¿½xina de probas do plugin ï¿½ [www.spip.escoitar.org->http://www.spip.escoitar.org]
  [es]Plugin para insertar un Googlemaps en un sitio SPIP.
 _ Permite introducir un punto de google maps en la edici&oacute;n de un art&iacute;culo desde la parte privada.
 _ Este plugin a&tilde;ade dos nuevas tablas en la base de datos. Una llamada {{spip_gis}} y otra llamada {{spip_gis_config}}
-_ La p‡gina de pruebas del plugin es [www.spip.escoitar.org->http://www.spip.escoitar.org]
+_ La pï¿½gina de pruebas del plugin es [www.spip.escoitar.org->http://www.spip.escoitar.org]
  [fr]Plugin pour ins&eacute;rer Googlemaps dans la partie priv&eacute;e et publique de votre site SPIP.
 _ Permet de placer des points Googlemaps en &eacute;ditant un article dans la partie priv&eacute;e.
 _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eacute;e {{spip_gis}} et l'autre {{spip_gis_config}}
@@ -76,4 +76,5 @@ _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eac
 		<action>affiche_droite</action>
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
+	<chemin dir='' />
 </plugin>

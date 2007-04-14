@@ -10,4 +10,5 @@
 	<lien>[->http://spip-zone.info/spip.php?article37]</lien>
 	<fonctions>fonctions_session.php</fonctions>
 	<prefix>BaliseSession</prefix>
+	<chemin dir='' />
 </plugin>

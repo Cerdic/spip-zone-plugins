@@ -24,7 +24,7 @@ _ {{Attention}} : le plugin BALISE_SESSION est obligatoire pour cela.
 	<options>
 	auteurs_complets_options.php
 	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul -->
+	<fonctions>
 	auteurs_complets_fonctions.php
 	</fonctions>
 	<prefix>
@@ -35,4 +35,5 @@ _ {{Attention}} : le plugin BALISE_SESSION est obligatoire pour cela.
 		<nom>affiche_milieu</nom>
 		<inclure>auteurs_complets.php</inclure>
 	</pipeline>
+	<chemin dir='' />
 </plugin>
