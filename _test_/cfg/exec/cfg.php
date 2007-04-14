@@ -7,9 +7,14 @@
  *
  */
 // la fonction appelee par le core, une simple "factory" de la classe cfg
-function exec_cfg_dist()
+function exec_cfg_dist($class = null)
 {
-	$config = new cfg(
+	// classe standard ?
+	if (!$class && ($class = 'cfg') && !class_exists($class)) {
+	    class cfg extends cfg_dist { }
+	} 
+
+	$config = new $class(
 		($nom = _request('cfg'))? $nom : 'cfg',
 		($vue = _request('vue'))? $vue : $nom,
 		($cfg_id = _request('cfg_id'))? $cfg_id : ''
@@ -19,8 +24,9 @@ function exec_cfg_dist()
 	echo $config->sortie();
 	return;
 }
+
 // la classe cfg represente une page de configuration
-class cfg
+class cfg_dist
 {
 // le nom du meta (ou autre) ou va etre stocke la config concernee
 	var $nom = '';
@@ -44,7 +50,7 @@ class cfg
 // leurs valeurs
 	var $val = array();
 	
-	function cfg($nom, $vue = '', $cfg_id = '', $opt = array())
+	function cfg_dist($nom, $vue = '', $cfg_id = '', $opt = array())
 	{
 		$this->nom = $nom;
 		$this->titre = _L('Configuration') . ' ' . $this->nom;
