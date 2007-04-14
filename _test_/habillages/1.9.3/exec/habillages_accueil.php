@@ -242,17 +242,17 @@ EOF;
 	
 	echo "<table border='0' cellpadding='0' cellspacing='0' id='subtab' align='center'>";
 		
-	echo "<tr><td style='background-color:$couleur_claire' id='hab_input' class='hab_stitre'>";
+	echo "<tr><td id='hab_input' class='toile_foncee hab_stitre'>";
 	echo "<input type='checkbox' name='".$gestion_squelettes."' value='".$gestion_squelettes."'$checked_skel></td>";
-	echo "<td style='background-color:$couleur_claire' id='hab_inputxt' class='hab_stitre'>";
+	echo "<td id='hab_inputxt' class='toile_claire hab_stitre'>";
 	echo _T('habillages:squelettes_base_acc');
 	echo "</td></tr>";
 	
 	echo "<tr><td colspan='2'>&nbsp;</td></tr>";
 	
-	echo "<tr><td style='background-color:$couleur_foncee' id='hab_input' class='hab_titre'>";
+	echo "<tr><td id='hab_input' class='toile_noires hab_titre'>";
 	echo "<input type='checkbox' name='".$gestion_icones."' value='".$gestion_icones."'$checked_icones></td>";
-	echo "<td style='background-color:$couleur_foncee' id='hab_inputxt' class='hab_titre'>";
+	echo "<td id='hab_inputxt' class='bordure_foncee hab_titre'>";
 	echo _T('habillages:icones_base_acc');
 	echo "</td></tr>";
 	
