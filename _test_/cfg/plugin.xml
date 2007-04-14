@@ -23,7 +23,7 @@ _ Il fournit une balise #CONFIG &#233;tendue comme #CONFIG&#123;xxx/nom_valeur&#
 	<prefix>
 	cfg
 	</prefix>
-	<chemin dir='' type='prive' />
+	<chemin dir='' />
 	<options>
 	cfg_options.php
 	</options>
