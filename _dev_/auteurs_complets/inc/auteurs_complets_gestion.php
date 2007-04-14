@@ -9,7 +9,14 @@ function auteurs_complets_ajouts()
 // On récupère les globales nécessaires
 	global $id_auteur, $redirect, $echec, $initial,
 	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
-	
+
+	if (_request('new') == 'oui') {
+		$new = true;
+	} 
+	if ($new) {
+		return '';
+	} else {
+
 	$id_auteur = intval($id_auteur);
 
 // On crée un array des données associées à un auteur...
@@ -25,5 +32,6 @@ function auteurs_complets_ajouts()
 
 // On balance ce dont on a besoin
 	return $legender_auteur_supp_total;
+	}
 }
 ?>
