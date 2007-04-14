@@ -10,7 +10,7 @@
 function exec_cfg_dist($class = null)
 {
 	// classe standard ?
-	if (!$class && ($class = 'cfg') && !class_exists($class)) {
+	if (((!$class && ($class = 'cfg')) || $class == 'cfg') && !class_exists($class)) {
 	    class cfg extends cfg_dist { }
 	} 
 
