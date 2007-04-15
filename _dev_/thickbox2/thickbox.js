@@ -108,11 +108,11 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 				if (TB_FoundURL) {
 					TB_NextCaption = TB_TempArray[TB_Counter][1];
 					TB_NextURL = TB_TempArray[TB_Counter][0];
-					TB_NextHTML = "<span id='TB_next'>&nbsp;&nbsp;<a href='#' title='Next Image'><strong> &gt;</strong></a></span>";
+					TB_NextHTML = "<span id='TB_next'>&nbsp;&nbsp;<a href='#' title='Image suivante'><strong> &gt;</strong></a></span>";
 				} else {
 					TB_PrevCaption = TB_TempArray[TB_Counter][1];
 					TB_PrevURL = TB_TempArray[TB_Counter][0];
-					TB_PrevHTML = "<span id='TB_prev'>&nbsp;&nbsp;<a href='#' title='Previous Image'><strong>&lt; </strong></a></span>";
+					TB_PrevHTML = "<span id='TB_prev'>&nbsp;&nbsp;<a href='#' title='Image precedente'><strong>&lt; </strong></a></span>";
 				}
 			} else {
 				TB_FoundURL = true;
@@ -162,16 +162,16 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 	}
 	// End Resizing
 	if(!DIAPO){
-		TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Slideshow]</strong></a></span>";
+		TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Diaporama]</strong></a></span>";
 	}else{
-		TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#' title='Stop the slideshow'><strong>[Stop]</strong></a></span>";
+		TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#' title='Stop'><strong>[Stop]</strong></a></span>";
 	}
 	if (TB_Big_Image)
 		TB_Full_Size = "<span id='TB_Full'>&nbsp;&nbsp;<a href='#'><strong>[Zoom]</strong></a></span>";
 		TB_WIDTH = imageWidth + 20;
 		TB_HEIGHT = imageHeight + 20;
 
-		$("#TB_window").append("<a href='#' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+" - next picture'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' alt='Close this picture' /></a></div></div>"); 
+		$("#TB_window").append("<a href='#' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+" - next picture'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' alt='Fermer' /></a></div></div>"); 
 
 		$("#TB_closeWindowButton").click(TB_remove);
 		$("#TB_load").remove();
