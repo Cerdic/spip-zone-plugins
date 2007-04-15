@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Edition WYSIWYG avec FCKeditor</nom>
-	<auteur>[Frank SAURET->http://electropol.free.fr], Val&#233;rian &copy; 2006 - Distribu&#233; sous licence GNU/GPL</auteur>
+	<auteur>[Frank SAURET->http://electropol.free.fr], Val&#233;rian &copy; 2007 - Distribu&#233; sous licence GNU/GPL</auteur>
 	<version>1.1 (pour spip 1.9.1)</version>
 	<etat>dev</etat>
 	<description>
@@ -22,6 +22,9 @@ Cette version semble stable, n&#233;anmoins, il se peut que certains firewalls b
 -* - Les fichiers envoy&#233;s sur le serveur par l'interm&#233;diaire de FCKeditor sont partag&#233;s entre tous les utilisateurs. 
 -* - Il est possible de d&#233;sactiver ces fonctionnalit&#233;s &#224; l'aide des fichiers de configuration,
 -* - Les fichiers envoy&#233;s par l'interm&#233;diaire de FCKeditor ne sont pas utilisables par SPIP.
+
+<u>Bugs</u>
+-* - Il y a un probl&#232;me pour la r&#233;&#233;dition des articles long.
 	</description>
 	<lien>[http://electropol.free.fr]</lien> <!-- URL de documentation -->
 	<prefix>fckeditor2</prefix>
