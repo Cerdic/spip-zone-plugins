@@ -49,11 +49,13 @@ $spip_asso_profil = array(
 						"declaration" 	=> "TINYTEXT",
 						"prefet" 		=> "TINYTEXT",
 						"president" 	=> "TINYTEXT",
-						"maj" 				=> "timestamp(14) NOT NULL",
-						"mail"	=> "TINYTEXT NOT NULL",
-						"dons" 	=> "TINYTEXT",
-						"ventes" 	=> "TINYTEXT",
-						"comptes" 	=> "TINYTEXT"
+						"maj" 			=> "timestamp(14) NOT NULL",
+						"mail"			=> "TINYTEXT NOT NULL",
+						"dons" 		=> "TINYTEXT",
+						"ventes" 		=> "TINYTEXT",
+						"comptes" 	=> "TINYTEXT",
+						"activites"		=>"TINYTEXT",
+						"indexation"	=>"TINYTEXT"
 						);
 
 $spip_asso_profil_key = array(
