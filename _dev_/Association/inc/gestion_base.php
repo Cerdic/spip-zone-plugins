@@ -24,14 +24,14 @@ function asso_install(){
 //	include_spip('base/abstract_sql');
 //}
 function asso_verifier_base(){
-	$version_base = 0.50; //version actuelle
+	$version_base = 0.40; //version actuelle
 	$current_version = 0.0;
 	
 	if (   (!isset($GLOBALS['meta']['asso_base_version']) )
 			|| (($current_version = $GLOBALS['meta']['asso_base_version'])!=$version_base)){
 			
 		include_spip('base/association');
-
+		
 		if ($current_version==0.0){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
@@ -39,7 +39,7 @@ function asso_verifier_base(){
 			spip_query("INSERT INTO spip_asso_profil (nom) VALUES ('')");
 			ecrire_meta('asso_base_version',$current_version=$version_base);
 		}
-	
+		
 		if ($current_version<0.21){
 			spip_query("ALTER TABLE spip_asso_adherents ADD publication text NOT NULL AFTER secteur");
 			ecrire_meta('asso_base_version',$current_version=0.21);
@@ -59,10 +59,15 @@ function asso_verifier_base(){
 			ecrire_meta('asso_base_version',$current_version=0.30);
 		}	
 		
-		if ($current_version<0.50){
+		if ($current_version<0.40){
 		spip_query("ALTER TABLE `spip_asso_comptes` ADD `valide` TEXT NOT NULL AFTER `id_journal` ");
-		ecrire_meta('asso_base_version',$current_version=0.50);
+		ecrire_meta('asso_base_version',$current_version=0.40);
 		}
+		
+		//if ($current_version<0.50){
+		//spip_query("ALTER TABLE `spip_asso_profil` ADD `indexation` TEXT NOT NULL AFTER `mail` ");
+		//ecrire_meta('asso_base_version',$current_version=0.50);
+		//}
 		ecrire_metas();
 	}
 /*
