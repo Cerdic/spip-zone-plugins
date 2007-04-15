@@ -7,7 +7,6 @@ function get_auteur_infos($id='', $nom='') {
 	if ($row = spip_fetch_array($result)) {
 		$row=serialize($row);
 	}
-
 	return $row;
 }
 ?>

@@ -59,4 +59,13 @@ $spip_auteurs_key = array(
 
 $tables_principales['spip_auteurs']  =
 	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key);
+
+global  $table_des_traitements;
+
+$table_des_traitements['ADRESSE'][] = 'propre(%s)';
+$table_des_traitements['VILLE'][] = 'propre(%s)';
+$table_des_traitements['PAYS'][] = 'propre(%s)';
+$table_des_traitements['ORGANISATION'][] = 'propre(%s)';
+$table_des_traitements['CODEPOSTAL'][] = 'propre(%s)';
+
 ?>
