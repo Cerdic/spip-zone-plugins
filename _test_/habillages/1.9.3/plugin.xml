@@ -24,6 +24,7 @@ _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	dev
 	</etat>
+	<chemin dir='' />
 	<options>
 	habillages_options.php
 	</options>
