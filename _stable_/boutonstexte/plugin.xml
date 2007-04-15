@@ -30,4 +30,5 @@ et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=boutonstexte]
 	  <nom>insert_head</nom>
 	  <inclure>teteboutonstexte.php</inclure>
   </pipeline>
+  <chemin dir='' />
 </plugin>
