@@ -26,4 +26,6 @@ $tables_auxiliaires['spip_documents_auteurs'] = array(
 	'field' => &$spip_documents_auteurs,
 	'key' => &$spip_documents_auteurs_key);
 
+global $tables_jointures;
+$tables_jointures['spip_documents'][] = 'documents_auteurs';
 ?>

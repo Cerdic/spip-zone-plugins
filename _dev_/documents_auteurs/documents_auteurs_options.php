@@ -1,5 +1,7 @@
 <?php
 
+include_spip('base/documents_auteurs');
+
 function affichage_galerie_auteur($id_auteur) {
 	include_spip('inc/presentation');
 	include_spip('inc/layer'); # pour le js des fleches
