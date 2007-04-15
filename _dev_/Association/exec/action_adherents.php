@@ -11,6 +11,7 @@
 **/
 include_spip('inc/presentation');
 include_spip('inc/filtres');
+include_spip('inc/acces');
 
 function exec_action_adherents() {
 	global $connect_statut, $connect_toutes_rubriques;
@@ -69,14 +70,13 @@ function exec_action_adherents() {
 	if ($action=="ajoute"){
 
 // Inscription adherent
-		spip_query("INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, numero, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation) VALUES ('$nom', '$prenom', '$sexe', '$email', '$numero', '$rue', '$cp', '$ville', '$telephone', '$portable', ".spip_abstract_quote($remarques).", '$id_asso', '$naissance', '$profession', '$societe', '$secteur', '$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', '$categorie', 'prospect', CURRENT_DATE() )");
-
-//Validation email si il existe
-		if( $email=email_valide($email) || empty($email) ){
-
-			echo '<p><strong>'._T('asso:adherent_message_ajout_adherent',array('prenom' => $prenom, 'nom' => $nom)).'</strong>';
-
+		$query=spip_query("INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, numero, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation) VALUES ('$nom', '$prenom', '$sexe', '$email', '$numero', '$rue', '$cp', '$ville', '$telephone', '$portable', ".spip_abstract_quote($remarques).", '$id_asso', '$naissance', '$profession', '$societe', '$secteur', '$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', '$categorie', 'prospect', CURRENT_DATE() )");
+		if ($query) { 
+			echo '<p><strong>'._T('asso:adherent_message_ajout_adherent',array('prenom' => $prenom, 'nom' => $nom)).'</strong></p>';
+		}
+		
 // Inscription visiteur
+		if( email_valide($email) || empty($email) ){
 			$pass = creer_pass_aleatoire(8, $email);
 			$nom_inscription =  association_cree_login($email);                                  
 			$login = association_cree_login($email);
@@ -86,18 +86,21 @@ function exec_action_adherents() {
 			$cookie = creer_uniqid();
 			$query = spip_query("SELECT * FROM spip_auteurs WHERE email='$email'");          
 			if (!spip_fetch_array($query))  {   
-				$query = spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) VALUES ('$nom_inscription', '$email', '$login', '$mdpass', '$statut', '$htpass', '$cookie') ");
-				if ($query) { echo _T('asso:adherent_message_ajout_adherent_suite'); }
+				$sql=spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) VALUES ('$nom_inscription', '$email', '$login', '$mdpass', '$statut', '$htpass', '$cookie') ");
+				if ($sql) { echo '<p><strong>'._T('asso:adherent_message_ajout_adherent_suite').'</strong></p>'; }
+			}			
+			//on enregistre l'id_auteur
+			$query=spip_query("SELECT * FROM spip_auteurs WHERE email='$email' ");
+			while ($data=spip_fetch_array($query)) {
+				$id_auteur=$data['id_auteur'];
+				$email=$data['email'];
+				spip_query("UPDATE spip_asso_adherents SET id_auteur=$id_auteur  WHERE email='$email' AND email <>'' ");
 			}
-			//on met a jour  les id_auteur pour tous les adherents
-			spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");
-
-			echo '</p>';
 			echo '<p>';
 			icone(_T('asso:bouton_retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
 			echo '</p>';
 		}
-		else{
+		else {
 			echo '<p><strong>'._T('asso:adherent_message_email_invalide').'</strong></p>';
 			echo '<p>';
 			icone(_T('asso:bouton_retour'), 'javascript:history.go(-1)', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
@@ -110,10 +113,15 @@ function exec_action_adherents() {
 //---------------------------- 
 
 	if ($action=="modifie") {
-
+		
 		spip_query("UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', categorie='$categorie', fonction='$fonction', email='$email', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable', remarques='$remarques', id_asso='$id_asso', naissance='$naissance', profession='$profession',societe='$societe', secteur='$secteur', publication='$publication', utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', statut='$statut', validite='$validite' WHERE id_adherent='$id_adherent'");
-		//on met a jour  les id_auteur pour tous les adherents
-		spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");
+		//on enregistre l'id_auteur
+		$query=spip_query("SELECT * FROM spip_auteurs WHERE email='$email' ");
+		while ($data=spip_fetch_array($query)) {
+			$id_auteur=$data['id_auteur'];
+			$email=$data['email'];
+			spip_query("UPDATE spip_asso_adherents SET id_auteur=$id_auteur  WHERE email='$email' AND email <>'' ");
+		}
 
 		echo '<p><strong>'._T('asso:adherent_message_maj_adherent',array('prenom' => $prenom, 'nom' => $nom)).'</strong></p>';
 		echo '<p>';

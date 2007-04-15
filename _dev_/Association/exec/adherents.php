@@ -35,6 +35,10 @@ function exec_adherents() {
 	debut_boite_info();
 
 	print association_date_du_jour();
+	
+	$query=spip_query( "SELECT * FROM spip_asso_profil WHERE id_profil=1");
+	$data=spip_fetch_array($query);
+	$indexation=$data['indexation'];
 
 	if ( isset ($_REQUEST['filtre'] )) { $filtre = $_REQUEST['filtre']; }
 	else { $filtre = 'defaut'; }
@@ -91,16 +95,19 @@ function exec_adherents() {
 	
 // FILTRES
 	echo '<td style="text-align:right;">';
+	
 // ID
 	if ( isset ($_POST['id'])) {
 		$id=$_POST['id'];
-		$critere="id_adherent='$id'";
+		if ($indexation=="ref") { $critere="id_asso='$id'"; }
+		else { $critere="id_adherent='$id'"; }
 	}
-//$critere="id_asso='$id'";}
 
 	echo '<form method="post" action="'.$url_adherent.'">';
-	echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" value="ID" onchange="form.submit()">';
-//echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" value="'._T('asso:ref_int').'" onchange="form.submit()">';
+	echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10" ';
+	if ($indexation=='ref') { echo ' value="'._T('asso:adherent_libelle_reference_interne_abrev').'" '; }
+	else { echo ' value="ID" ';}
+	echo ' onchange="form.submit()">';
 	echo '</form>';
 	echo '</td>';
 	echo '<td style="text-align:right;">';
@@ -143,7 +150,6 @@ function exec_adherents() {
 	echo '<td colspan="4" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
 	echo '<td><strong>'._T('asso:adherent_entete_supprimer_abrev').'</strong></td>';
 	echo '</tr>';
-
 
 	$max_par_page=30;
 	$debut=$_GET['debut'];
@@ -224,8 +230,10 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 					case "1comite":
 						$logo="redac-12.gif";
 						break;
+					case "5poubelle":
+						$logo="poubelle-12.gif";	 
 					case "6forum":
-						$logo="visit-12.gif";	      
+						$logo="visit-12.gif";							
 				}
 				echo '<a href="/ecrire/?exec=auteurs_edit&id_auteur='.$data["id_auteur"].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
 			}

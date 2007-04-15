@@ -95,12 +95,17 @@ echo '</table>';
 	fin_cadre_relief();	
 		fin_page();
 		
-//Petite routine pour mettre à jour les statuts de cotisation "échu"
-$sql = spip_query("UPDATE spip_asso_adherents SET statut='echu' WHERE statut = 'ok' AND validite < CURRENT_DATE() ");
+	//Petite routine pour mettre à jour les statuts de cotisation "échu"
+	spip_query("UPDATE spip_asso_adherents SET statut='echu' WHERE statut = 'ok' AND validite < CURRENT_DATE() ");
 
-//ROUTINE ID_AUTEUR
-//Enregistrement de l'id_auteur d'emails correspondants
-$sql = spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");
+	//ROUTINE ID_AUTEUR
+	//Enregistrement de l'id_auteur d'emails correspondants
+	$query=spip_query("SELECT * FROM spip_auteurs");
+	while ($data=spip_fetch_array($query)) {
+	$id_auteur=$data['id_auteur'];
+	$email=$data['email'];
+	spip_query("UPDATE spip_asso_adherents SET id_auteur=$id_auteur  WHERE email='$email' AND email <>'' ");
+	}
 
 }
 ?>
