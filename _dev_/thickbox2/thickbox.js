@@ -64,7 +64,7 @@ function TB_init(root) {
 function TB_show(caption, url) {//function called when the user clicks on a thickbox link
 	try {
 		if (document.getElementById("TB_HideSelect") == null) {
-		$("body").append("<iframe id='TB_HideSelect'></iframe><div id='TB_overlay' title='Close the picture'></div><div id='TB_window'></div>");
+		$("body").append("<iframe id='TB_HideSelect'></iframe><div id='TB_overlay' title='Fermer'></div><div id='TB_window'></div>");
 		$("#TB_overlay").click(TB_remove);
 	}
 	$(".TB_hide").hide();
