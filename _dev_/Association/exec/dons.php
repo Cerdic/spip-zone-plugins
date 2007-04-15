@@ -37,7 +37,7 @@ echo '<td>';
 $annee=$_GET['annee'];
 if(empty($annee)){$annee = date('Y');}
 
-$query = spip_query "SELECT date_format( date_don, '%Y' )  AS annee FROM spip_asso_dons GROUP BY annee ORDER BY annee");
+$query = spip_query ( "SELECT date_format( date_don, '%Y' )  AS annee FROM spip_asso_dons GROUP BY annee ORDER BY annee" );
 
 while ($data = spip_fetch_array($query))
    {
