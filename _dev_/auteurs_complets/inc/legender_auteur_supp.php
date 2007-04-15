@@ -98,7 +98,8 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$id_auteur=$auteur['id_auteur'];
 
 //Debut de l'affichage des données...
-	$res = "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
+	$res = debut_cadre_relief("redacteurs-24.gif", true)
+	. "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
 	. "<tr>"
 	. "<td valign='top' width='100%'>"
 	. gros_titre(_T('auteurscomplets:coordonnees_sup'),'',false)
