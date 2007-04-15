@@ -345,7 +345,7 @@ function diaporama(){
 	if(!DIAPO){
 		DIAPO = true ;
 		//console.log("deb"); 
-		setTimeout('diapo();',DELAI);
+		diapo();
 		//$("TB_secondLine").html(TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + "[Stop]");
 	} else {
 		DIAPO = false ;
