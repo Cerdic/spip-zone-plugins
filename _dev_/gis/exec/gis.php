@@ -18,7 +18,7 @@ function exec_gis_dist(){
 	debut_page(_T('gis:configurar_gis'));
 
 // Google map KEY	
-	echo '<div align="center" style="width:700px;margin:20px">';
+	echo '<div align="center" style="width:700px;margin:20px auto">';
 	if ($connect_statut == "0minirezo") {
 		echo debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
 		if($_POST['ok']){					
@@ -45,7 +45,7 @@ function exec_gis_dist(){
 		echo '</form>';
 		
 		if($_POST['ok']){
-			echo '<div align="center" style="margin:20px">';
+			echo '<div align="center" style="margin:20px auto">';
 			echo ''._T('gis:clave_engadida').'<code>'.$_POST['key'].'</code>';
 			echo '</div>';
 		}
