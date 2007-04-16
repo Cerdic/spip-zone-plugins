@@ -29,8 +29,8 @@ function spixplorer_install($action)
 
    	include_spip('inc/chargeur');
 	$statut = charge_charger_zip(
-		'http://files.spip.org/externe/',
-		'quixplorer_2_3_1',
+		'http://files.spip.org/externe/quixplorer_2_3_1',
+		'',
 		'quixplorer_2_3_1',
 		$cible
 	);
