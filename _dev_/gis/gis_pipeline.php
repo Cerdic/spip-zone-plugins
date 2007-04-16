@@ -56,26 +56,16 @@ function gis_insertar_maparticle($flux){
 // inserta no head da parte PRIVADA
 // --------------------------------
 function gis_insertar_head($flux){
-	if ((_request('exec')=='articles')){
-		$key = isset($GLOBALS['meta']['gis_googlemapkey'])?$GLOBALS['meta']['gis_googlemapkey']:"";
-		$flux.='<script type="text/javascript" src="'.generer_url_public('googlemap.js').'"></script>
-		<script language="javascript">
+	if (($r=_request('exec'))=='articles' OR $r=='gis'){
+		$flux .= '<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>';
+		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
+		if ((_request('exec')=='articles'))
+			$flux .= '<script language="javascript">
 		$(document).ready(function() {
 			$(\'#cadroFormulario\').hide()
 		});
-		function coordenadas (articulo){
-			$.ajax({
-				type: "POST",
-				url: "../spip.php?page=cambiar_coordenadas",
-				data: "id_article="+articulo+"&lat="+document.forms.formulaire_coordenadas.lat.value+"&lonx="+document.forms.formulaire_coordenadas.lonx.value,
-				success: function() {
-				}
-			});
-		}
-		</script>
-		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
+		</script>';
 	}
-
 	return $flux;
 }
 
@@ -83,12 +73,10 @@ function gis_insertar_head($flux){
 // inserta no head da parte PUBLICA
 // --------------------------------
 function gis_insertarp_head($flux){
-	$key = isset($GLOBALS['meta']['gis_googlemapkey'])?$GLOBALS['meta']['gis_googlemapkey']:"";
 	$flux.='
-<!-- scripts head plugin gis _______________________.-->
-<script type="text/javascript" src="'.generer_url_public('googlemap.js').'"></script>
+<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
+<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
 	return $flux;
 }
 

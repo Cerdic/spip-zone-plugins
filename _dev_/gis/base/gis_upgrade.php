@@ -31,7 +31,7 @@
 				$res = spip_query("SELECT * FROM spip_gis_config WHERE name='googlemapkey'");
 				if ($row = spip_fetch_array($res))
 					$key = $row['value'];
-				ecrire_meta('gis_googlemapkey',$key);
+				ecrire_meta('geomap_googlemapkey',$key);
 				spip_query("DROP TABLE spip_gis_config");
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.2");
 			}

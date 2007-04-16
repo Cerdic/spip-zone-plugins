@@ -12,7 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configurar_gis' => 'Configurer le Plugin Gis',
 'conseguir' => '(obtenir)',
 'cambiar' => 'changer les coordonn&eacute;es',
-'boton_actualizar' => 'actualiser'
+'boton_actualizar' => 'actualiser',
+'default_geoloc' => 'Position par defaut des cartes :'
 );
 
 ?>

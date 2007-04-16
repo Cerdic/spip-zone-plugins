@@ -1,5 +1,19 @@
 <?php
-function inc_gis_append_view_map_dist($target_id,$view_lat,$view_long,$Markers = NULL){
+/*
+ * Spip Gis plugin
+ * Insetar google maps en SPIP
+ *
+ * Autores :
+ * Horacio Gonz‡lez, Berio Molina
+ * (c) 2007 - Distribu’do baixo licencia GNU/GPL
+ *
+ */
+
+function inc_geomap_append_view_map_dist($target_id,$view_lat,$view_long,$view_zoom=NULL,$Markers = NULL){
+	if (!strlen($view_zoom) OR !is_numeric($view_zoom)){
+		$view_zoom = isset($GLOBALS['meta']['geomap_default_zoom'])?$GLOBALS['meta']['geomap_default_zoom']:'8'; 
+		if (!strlen($view_zoom) OR !is_numeric($view_zoom)) $view_zoom='8';
+	}
 	$out = "";
 	$out .=
 		"<script type='text/javascript'>
@@ -7,7 +21,7 @@ function inc_gis_append_view_map_dist($target_id,$view_lat,$view_long,$Markers =
 		if (GBrowserIsCompatible()) {
 		/* create the map*/
 			var map = new GMap2(document.getElementById('map'));
-			map.setCenter(new GLatLng(".$view_lat.",".$view_long."), 8, G_MAP_TYPE);
+			map.setCenter(new GLatLng(".$view_lat.",".$view_long."), ".$view_zoom.", G_MAP_TYPE);
 			icono = new GIcon();";
 	if (is_array($Markers) AND count($Markers)){
 		foreach($Markers as $point){
