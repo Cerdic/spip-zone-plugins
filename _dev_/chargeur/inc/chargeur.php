@@ -117,14 +117,13 @@ function chargeur_montre_tout($quoi)
 function chargeur_rename($quoi)
 {
 /*
- preg_files() est deficiante, ca aurait pu etre bien pourtant ...
-
-	spip_log($quoi);
-	foreach (array($quoi['rename']) as $motif=>$replace) {
-		$found = preg_files($quoi['dest'], $motif);
-		spip_log($found);
-	}
+ preg_files() est deficiante pour les fichiers caches, ca aurait pu etre bien pourtant ...
 */
+	spip_log($quoi);
+	foreach ($quoi['rename'] as $old => $new) {
+		!is_writable($file = $quoi['dest'] . '/' . $old) ||
+			rename($file, $quoi['dest'] . '/'. $new);
+	}
 }
 
 // juste activer le plugin du repertoire $plugin
