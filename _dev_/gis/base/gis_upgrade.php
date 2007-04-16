@@ -22,7 +22,10 @@
 				creer_base();
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 			}
-
+			if (version_compare($current_version,"0.1.1","<")){
+				spip_query("ALTER TABLE spip_gis ADD INDEX ( id_article )");
+				ecrire_meta($nom_meta_base_version,$current_version="0.1.1");
+			}
 			ecrire_metas();
 		}
 	}

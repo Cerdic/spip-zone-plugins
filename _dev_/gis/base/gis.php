@@ -21,12 +21,17 @@ $spip_gis = array(
 	);
 	
 $spip_gis_key = array(
-	"PRIMARY KEY" => "id_gis"
+	"PRIMARY KEY" => "id_gis",
+	"KEY id_article" => "id_article"
+	);
+$spip_gis_join = array(
+	"id_article"=>"id_article"
 	);
 
 $tables_principales['spip_gis'] = array(
 	'field' => &$spip_gis,
-	'key' => &$spip_gis_key
+	'key' => &$spip_gis_key,
+	'joint' => &$spip_gis_join
 	);
 
 //taboa gis_config	
@@ -49,5 +54,9 @@ $tables_principales['spip_gis_config'] = array(
 global $table_des_tables;
 $table_des_tables['gis']='gis';
 $table_des_tables['gis_config']='gis_config';
+//-- Jointures ----------------------------------------------------
+global $tables_jointures;
+$tables_jointures['spip_articles'][]= 'gis';
+$tables_jointures['spip_gis'][] = 'articles';
 
 ?>

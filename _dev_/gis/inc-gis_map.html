@@ -4,7 +4,13 @@
 	URLbase = "#URL_SITE_SPIP/";
 	var map;
 	var markerManager;
-
+	<BOUCLE_centrado(GIS){id_article?}{id_rubrique ?}{0,1}>
+	#SET{latitude,#ENV{latit,#LAT}}
+	#SET{lonxitude,#ENV{lonxit,#LONX}}
+	</BOUCLE_centrado>
+	#SET{latitude,#ENV{latit,42.94}}
+	#SET{lonxitude,#ENV{lonxit,-8.228}}
+	<//B_centrado>
 	$(document).ready(
 		function() {
     		if (GBrowserIsCompatible()) {
@@ -12,7 +18,7 @@
     			map = new GMap2(document.getElementById("map"));
     			map.addControl(new GLargeMapControl());
     			map.addControl(new GMapTypeControl());
-    			map.setCenter(new GLatLng([(#ENV{latit,42.94})], [(#ENV{lonxit,-8.228})]), [(#ENV{zoom,7})], G_SATELLITE_MAP);
+    			map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,7}, G_SATELLITE_MAP);
     			map.enableDoubleClickZoom();
     			map.enableContinuousZoom();
     			markerManager = new GMarkerManager(map);
