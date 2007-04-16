@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
-'titre_plug' => 'Plugin Habillages 1.9.2 '
+'titre_plug' => 'Plugin Habillages 1.9.3.1 '
 
 
 );

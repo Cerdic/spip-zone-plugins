@@ -19,7 +19,7 @@ _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	img_pack/habillages_icone-48.png
 	</icon>
 	<lien>
-	[->http://spip.graphismes.free.fr]
+	[->http://spip.graphismes.free.fr/spip.php?article14]
 	</lien>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	dev
@@ -32,7 +32,6 @@ _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	VERSION INSTABLE - Ne pas utiliser.
 Gestionnaire d'habillages SPIP.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	habillages
 	</prefix>

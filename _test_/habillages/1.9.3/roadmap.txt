@@ -1,47 +1,34 @@
 "roadmap.txt", ca permet d'eviter de nommer ce fichier "feuille_de_route.txt"...
 
-Plusieurs pistes a developper pour le plugin "habillages" :
+-+- Pour la prochaine version -+-
+- Voir pour virer minipres : trop lourd à maintenir. Jouer avec le repertoire des thèmes (réfléchir à une
+arborescence) et habillages_options.
+- Ajouter les premiers thèmes de l'espace privé.
+- Insérer dist-gala avec des thèmes qui s'adaptent au mieux à tous les layouts, au pire à une grande majorité.
+- Généraliser la personnalisation des chemins de thèmes en plus des squelettes pour tous les aspects des 
+habillages : espace privé, thèmes de squelettes, et icones de l'espace privé. (tester avec des personnalisation 
+partout)
+- Donner la possibilité de retirer l'aide des onglets sur la page d'accueil.
 
--1) Modifier _plugins_\_test_\habillages\1.9.2\inc\minipres.php et integration integrale du plugin 
-"icop" de Scoty (gestion de l'apparence de l'espace prive) en remplacement de l'interface actuelle 
-de gestion des icones. Modifier les mentions d'auteur...
+--> Le plugin se dirige vers des personnalisation des structures (squelettes, notamment dist_gala), des couleurs 
+et styles appliqués à ces structures, des icônes pour l'espace privé, des couleurs pour l'espace privé, et des 
+styles pour ce même espace.
 
-0) Ajouter la personnalisation des chemins de themes dans l'interface de gestion. La personnalisation 
-des chemins d'icones aura deja ete faite avec l'insertion du plugin de Scoty. Pousser les test en temps 
-avec des vrais squelettes (test pas effectues) notament pour voir si habillages_options.php se comporte
-bien avec tous les cas de figure (squelettes persos de partout, etc.).
 
-1) Integration du plugin "coloriage dist" (= definir le plugin "habillages" comme 
-etant dependant du plugin "coloriage dist")
--> Inserer (si l'auteur original est d'accord) le plugin "coloriage" a la gestion 
-des squelettes et themes en ajoutant un fichier theme.xml a la racine du plugin.
--> Voir pour permettre au plugin "coloriage" de donner une sorte de capture écran de la dist 
-avec une mise en relief des parties concernees par le changement de couleur quand on passe 
-la souris sur le champs couleur d'une partie de la dist.
+-+- Après la prochaine version -+-
+Ecrire des petits howto pour personnaliser des thèmes dans un premier temps pour dist_gala et l'espace privé.
 
-2) Integration du plugin "cfg" (= definir le plugin "habillages" comme 
-étant dependant du plugin "cfg")
--> voir comment generaliser l'utilisation du plugin "cfg" pour tout ce qui est gestion
-des variables de personnalisation. Long travail : il faut passer toutes les interfaces
-actuelles du plugin "habillages" en usage "cfg", mais l'avantage est une legerete 
-accrue et une simplication du codage. De plus, l'avantage majeur reste la possibilite 
-de gerer grace a "cfg" des squelettes qui demandent une gestion des mots cles, le principal
-obstacle a une souplesse dans le passage d'un squelette a un autre sur un site etant la 
-personnalisation des squelettes par mots cles qui serait ainsi automatisee (qui s'adapterait 
-a chaque squelette sans intervention humaine autre qu'assigner a des rubriques/articles des 
-mots cles de facon predefinie).
---> Problematique des mots cles : action de lobbying aupres des developpeurs de spip pour 
-que SPIP puisse dans l'avenir integrer en natif des mots cles predefinis, courament utilises,
-et dont l'usage fait l'objet d'un consensus admis implicitement des bidouilleuses et bidouilleurs
-par l'usage qu'ils en font. Il semble en effet patent que beaucoup de developpeurs utilisent les 
-mots cles pour faire apparaitre certaines parties d'un site ici ou la (tels que "une", "menu", 
-etc.). Generaliser en natif au moins cinq mots cles permettrait de generaliser certains squelettes
-qui fonctionnent avec des mots cles au moins de base. Ceci permettrait egalement tout un tas de 
-traitements automatiques (sur la base de ces mots cles) dans les squelettes qui seraient benefiques 
-a plus d'un titre. Dans le plugin "habillages", ceci permettrait de passer d'un jeu de squelettes
-a un autre sans demander a l'utilisateur ou l'utilisatrice de creer a chaque fois des mots cles
-propres a tel ou tel jeu de squelettes. Dans tous les cas, cette problematique de mots-cles reste
-bloquante pour appliquer des "habillages" tout-prêt à un site...
+
+-+- A voir sur la faisabilité technique et pour une version ultérieure. -+-
+
+1) Integration du plugin "coloriage dist" : à revoir en fonction de la complexité graphique que cela 
+peut donner aux utilisateurs qui vont risquer de faire des sites très laids. La première étape reste donc des 
+thèmes pré-définis qu'on aime ou qu'on aime pas mais qui évitent les fautes de goût.
+
+2) Integration du plugin "cfg" : a revoir de plus près, ne voyant plus l'intérêt de gérer le plugin
+"habillages" avec cfg pour l'instant.
+--> Problematique des mots cles : elle est fortement atténuée par "dist_gala", qu'il faut plutôt 
+développer avec des thèmes graphiques appropriés au sein du plugin "habillages".
 
 f r a n c k . d u c a s at f r e e . f r
 
