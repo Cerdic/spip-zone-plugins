@@ -6,16 +6,18 @@
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
-	$sup='<small style="display:inline;"><sup>';
-	$fin='</sup></small>';
+	$sup='<sup>';
+	$fin='</sup>';
 	$trouve = array(
 		'/(\\bM)e?(lles?)\\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
 		'/(\\bM)(mes?)\\b/',
 
-		'/\b(D|P)(rs?)([\s\.-])/',	// Dr(s), Pr(s), St(e)(s) suivis d'un espace d'un point ou d'un tiret
-		'/\b(S)(te?s?)([\s\.-])/',
+		'/\b(D|P)(rs?)([\s\.-])/',	// Dr(s), Pr(s) suivis d'un espace d'un point ou d'un tiret
+		'/\b(S)(te?s?)([\s\.-])/',  // St(e)(s) suivis d'un espace d'un point ou d'un tiret
+		'/\b(B)(x|se|ses)([\s\.-])/',  // Bx, Bse(s) suivis d'un espace d'un point ou d'un tiret
 
-		'/(\\bm)(2|3)\\b/',			// m2, m3
+		'/(\\bm)(2|3)\\b/',	 // m2, m3, m²
+		'/\bm²\b/',
 
 		'/(\\b[1I])i?(ers?)\\b/',	// Erreurs ier, iers
 		'/(\\b[1I])(iè|è|i&egrave;|&egrave;)(res?)\\b/',	// Erreurs ère, ière, ères, ières
@@ -28,10 +30,12 @@ function typo_exposants_fr($texte){
 		"M$sup\\2$fin",		// Mlle(s), Mme(s)
 		"M$sup\\2$fin",
 
-		"\\1$sup\\2$fin\\3",	// Dr(s), Pr(s), St(e)(s)
+		"\\1$sup\\2$fin\\3",	// Dr(s), Pr(s), St(e)(s), Bx, Bse(s)
+		"\\1$sup\\2$fin\\3",
 		"\\1$sup\\2$fin\\3",
 
-		"m$sup\\2$fin",	// m2, m3
+		"m$sup\\2$fin",	// m2, m3, m²
+		"m{$sup}2$fin",
 
 		"\\1$sup\\2$fin", // Corrige 1er(s), 1re(s)
 		"\\1$sup\\3$fin",

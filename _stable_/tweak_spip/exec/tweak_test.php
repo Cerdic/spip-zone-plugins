@@ -1,4 +1,4 @@
-<?php
+ <?php
 #-----------------------------------------------------#
 #  Plugin  : Tweak SPIP - Licence : GPL               #
 #  Auteur  : Patrice Vanneufville, 2006               #
@@ -48,6 +48,7 @@ tweak_log("Début : exec_tweak_test()");
 			'PHP_SELF'=>getenv('PHP_SELF'),
 		);
 	tweak_array($a, 'getenv()');
+
 	// test de tweak_htmlpath()
 	$relative_path = dirname(find_in_path('img/smileys/test'));
 	$realpath = str_replace("\\", "/", realpath($relative_path));
@@ -71,7 +72,6 @@ tweak_log("Début : exec_tweak_test()");
 			"tweak_htmlpath('$relative_path')"=>tweak_htmlpath($relative_path),
 			'$dir'=>$dir,
 			"tweak_canonicalize('$dir'.'/'.'$relative_path')"=>tweak_red(tweak_canonicalize($dir.'/'.$relative_path)),
-			
 		);
 	tweak_array($a, 'tweak_htmlpath()');
 
@@ -88,9 +88,46 @@ tweak_log("Début : exec_tweak_test()");
 			'array_keys($dessus, "..")'=>$keys,
 			'array_spliced()'=>$address2, 
 			'$resultat'=>tweak_red($address3), 
-			
 		);
 	tweak_array($a, 'tweak_canonicalize()');
+
+	// test de typo_exposants()
+	$textes = array(
+		"Pr Paul, Dr Jules, Prs Pierre &amp; Paul, Drs Pierre &amp; Paul, Pr&eacute;-St-Gervais ou Dr&eacute;",
+		"Ste Lucie, St-Lucien, St.Patrick, St Patrick, st-jules, Sts Pierre &amp; Paul, STe Lucie",
+		"Bse Lucie, Bx-Lucien, Bx.Patrick, Bx Patrick, bx-jules, Bses Jeanne &amp; Julie",
+		"Iier, Iiers, Ière, 1ière, 1ères, 1ières",
+		"Ie IIème IIIe IVe Ve VIe VIIe VIIIe IXe Xe XIe XVe XXe XLe Lème LIe",
+		"Erreurs 2me, 3ème, 4ième, 5mes, 6èmes, 7ièmes",
+		"1er 1ers, 2e 2es, IIIe IIIes, ",
+		"3 ou 4 m², 3 ou 4 m2 et 2 m3.",
+		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
+	);
+	tweak_array(tweak_test_fun($textes, 'typo_exposants'), 'typo_exposants()');
+
+	// test de typo_guillemets()
+	$textes = array(
+		'avant <i class="style">le</i> "test"!',
+		'avant <code class="code">toto</code>. apres le "test"!',
+		'avant '.echappe_html('<script>toto</script>', 'TEST', truem).'apres le "test"!',
+		'avant '.echappe_html('<code class="code">toto</code>', 'TEST', true).'apres le "test"!',
+	);
+	tweak_array(tweak_test_fun($textes, 'typo_guillemets'), 'typo_guillemets()');
+	
+	// test des smileys
+	$textes = array(
+		"Doubles : :-(( :-)) :)) :'-)) :’-))",
+		"Simples : :-> :-&gt; :-( :-D :-) |-) :'-) :’-) :'-D :’-D :'-( :’-( :-( :o) B-) ;-) :-p :-P' :-| :-/ :-o :-O",
+		"les courts (reconnus s'il y a un espace avant) : :) :( ;) :| |) :/ :(",
+	);
+	tweak_array(tweak_test_fun($textes, 'tweak_smileys_pre_typo'), 'tweak_smileys_pre_typo()');
+
+	// test des filets
+	$textes = array(
+		"__degrade.png__\n__ornement.png__",
+		"\n__6__\n__5__\n__4__\n__3__\n__2__\n__1__\n__0__\n",
+	);
+	tweak_array(tweak_test_fun($textes, 'filets_sep'), 'filets_sep()');
 
 	echo '</div>';
 
@@ -98,6 +135,18 @@ tweak_log("Début : exec_tweak_test()");
 tweak_log("Fin   : exec_tweak_test()");
 }
 
+function tweak_test_fun(&$textes, $fonction) {
+	$a = array();
+	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, tweak non activé !");
+	foreach ($textes as $i=>$t) {
+		$b = $fonction($t);
+		$a["\$texte[$i]"] = htmlentities($t);
+//		$a["\$resultat[$i]"] = htmlentities($b);
+		$a["\$previsu[$i]"] = str_replace("\n",'\n', $b);
+	}
+	return $a;
+}
+ 
 function tweak_array($a, $name) {
 	static $i;
 	debut_cadre_trait_couleur('administration-24.gif','','',++$i.". $name");
