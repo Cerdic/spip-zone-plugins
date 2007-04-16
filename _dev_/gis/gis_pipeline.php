@@ -58,7 +58,7 @@ function gis_insertar_maparticle($flux){
 function gis_insertar_head($flux){
 	if ((_request('exec')=='articles')){
 		$key = isset($GLOBALS['meta']['gis_googlemapkey'])?$GLOBALS['meta']['gis_googlemapkey']:"";
-		$flux.='<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$key.'"></script>
+		$flux.='<script type="text/javascript" src="'.generer_url_public('googlemap.js').'"></script>
 		<script language="javascript">
 		$(document).ready(function() {
 			$(\'#cadroFormulario\').hide()
@@ -86,7 +86,7 @@ function gis_insertarp_head($flux){
 	$key = isset($GLOBALS['meta']['gis_googlemapkey'])?$GLOBALS['meta']['gis_googlemapkey']:"";
 	$flux.='
 <!-- scripts head plugin gis _______________________.-->
-<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$key.'"></script>
+<script type="text/javascript" src="'.generer_url_public('googlemap.js').'"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
 	return $flux;
