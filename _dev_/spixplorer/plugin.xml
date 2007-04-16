@@ -12,4 +12,5 @@ D&eacute;ja un essai pour le plugin charge, ne pas poser tout dans la zone comme
 	<install>
 	spixplorer_install.php
 	</install>
+	<necessite id='charge' version='[0.1.0;]' />
 </plugin>
