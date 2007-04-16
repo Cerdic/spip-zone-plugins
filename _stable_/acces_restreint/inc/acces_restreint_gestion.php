@@ -287,7 +287,7 @@
 		
 				$url = "href='" . generer_url_ecrire('acces_restreint_edit', "id_zone=$id_zone&retour=".rawurlencode(generer_url_ecrire($url_base, "$id_table=$id_objet#zones"))) . "'";
 	
-				$vals[] = "<a $url>" . http_img_pack("../"._DIR_PLUGIN_ACCESRESTREINT.'/img_pack/restreint-16.gif', "", "width='16' height='16' border='0'") ."</a>";
+				$vals[] = "<a $url>" . http_img_pack("../"._DIR_PLUGIN_ACCESRESTREINT.'/img_pack/restreint-16.png', "", "width='16' height='16' border='0'") ."</a>";
 
 				$s = "<a $url>".typo($titre_zone)."</a>";
 				$vals[] = $s;
