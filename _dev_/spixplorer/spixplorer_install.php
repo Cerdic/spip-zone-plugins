@@ -47,9 +47,15 @@ function spixplorer_install($action)
 		'zip' => 'http://files.spip.org/externe/quixplorer_2_3_1.zip',
 		'remove' => 'quixplorer_2_3_1',
 		'dest' => $cible,
-		'rename' => array('^\.(.)+' => '$1')
+		'rename' => array(
+			'index.php' => 'quixplorer_index.php'
+		),
+		'edit' => array(
+			'#\./\.#' => $cible . '/',
+			'#\./#' => $cible . '/'
+		)
 	));
-	echo $status . '<br />';
+	echo $statut . '<br />';
 
 	if (!is_dir($cible)) {
 		spip_log('spixplorer install: impossible de charger quixplorer');
