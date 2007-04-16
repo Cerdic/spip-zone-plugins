@@ -8,7 +8,7 @@
 	// Squelettes par défaut : squelettes courant + dist
 	$squelettes_alternatifs = array();
 	if (defined('SWITCHER_DOSSIERS_SQUELETTES')) {
-		foreach(explode(':',SWITCHER_DOSSIERS_SQUELETTES) as $skel)
+		foreach(explode(',',SWITCHER_DOSSIERS_SQUELETTES) as $skel)
 			$squelettes_alternatifs[$skel] = $skel;
 	// Squelettes supplémentaires : tous les répertoires contenus dans 	$repertoire_squelettes_alternatifs
 	} else if (is_dir($repertoire_squelettes_alternatifs)) {
