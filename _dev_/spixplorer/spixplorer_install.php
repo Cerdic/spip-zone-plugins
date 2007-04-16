@@ -11,19 +11,22 @@
 // Ca va finir par une serie et notamment le mes_fichiers.zip du plugin mes_fichiers
 function spixplorer_install($action)
 {
-	spip_log('spixplorer: ' . $action);
+	$cible = dirname(__FILE__) . '/quixplorer';
+//	spip_log('spixplorer: ' . $action . ' (' . $cible . ')');
+
 	if ($action == 'test') {
-		return is_dir($cible = dirname(__FILE__) . '/quixplorer');
+		return is_dir($cible);
 	}
 
 	if ($action != 'install') {
 		return;
 	}
-echo 'install<br />';
 
+	echo 'install spixplorer<br />';
 	spip_log(
 	 'installer spixplorer depuis http://files.spip.org/externe/quixplorer.zip'
 	);
+
    	include_spip('inc/chargeur');
 	$statut = charge_charger_zip(
 		'http://files.spip.org/externe/',
