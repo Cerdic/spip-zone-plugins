@@ -20,19 +20,20 @@ function spixplorer_install($action)
 		return;
 	}
 echo 'install<br />';
-return;
+
 	spip_log(
 	 'installer spixplorer depuis http://files.spip.org/externe/quixplorer.zip'
 	);
-	include_spip('inc/chargeur');
+   	include_spip('inc/chargeur');
 	$statut = charge_charger_zip(
 		'http://files.spip.org/externe/',
 		'quixplorer_2_3_1',
 		'quixplorer_2_3_1',
-		$cible);
+		$cible;
+	);
 	echo $status . '<br />';
 
-	if (!is_dir($cible)){
+	if (!is_dir($cible)) {
 		spip_log('spixplorer install: impossible de charger quixplorer');
 		return 0;
 	}
