@@ -116,11 +116,15 @@ function chargeur_montre_tout($quoi)
 // renommer des morceaux
 function chargeur_rename($quoi)
 {
+/*
+ preg_files() est deficiante, ca aurait pu etre bien pourtant ...
+
 	spip_log($quoi);
 	foreach (array($quoi['rename']) as $motif=>$replace) {
 		$found = preg_files($quoi['dest'], $motif);
 		spip_log($found);
 	}
+*/
 }
 
 // juste activer le plugin du repertoire $plugin
