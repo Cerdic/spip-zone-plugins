@@ -29,7 +29,7 @@ echo 'install<br />';
 		'http://files.spip.org/externe/',
 		'quixplorer_2_3_1',
 		'quixplorer_2_3_1',
-		$cible;
+		$cible
 	);
 	echo $status . '<br />';
 
