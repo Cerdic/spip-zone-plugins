@@ -1,20 +1,13 @@
 <?php
 function switcher_affichage_final($texte){
-	
+
 	global 	$html;
 	global $squelettes_alternatifs;
 	global $styleListeSwitcher;
-	global $afficherSeulementPourLesAdmins;
 
 	if ($html) {
 	
-	  
-		
-		// Doit-on afficher le selecteur de squelette ? (Fonctionnalite restreinte aux seuls administrateurs ?)
-		$afficherSelecteur=TRUE;
-		if (($afficherSeulementPourLesAdmins) AND (!isset($_COOKIE['spip_admin']))) $afficherSelecteur=FALSE;
-		
-		if ($afficherSelecteur) {
+		if (SWITCHER_AFFICHER) {
 			
 			// Insertion du Javascript de rechargement de page
 			$code='<script type="text/javascript">

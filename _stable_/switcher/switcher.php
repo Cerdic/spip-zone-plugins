@@ -6,19 +6,25 @@
 	include_spip('inc/switcher_config');
 	
 	// Squelettes par défaut : squelettes courant + dist
-	$squelettes_alternatifs = array(
-		'defaut' => '',
-		'dist' => 'dist');
-		
+	$squelettes_alternatifs = array();
+	if (defined('SWITCHER_DOSSIERS_SQUELETTES')) {
+		foreach(explode(':',SWITCHER_DOSSIERS_SQUELETTES) as $skel)
+			$squelettes_alternatifs[$skel] = $skel;
 	// Squelettes supplémentaires : tous les répertoires contenus dans 	$repertoire_squelettes_alternatifs
-	if (is_dir($repertoire_squelettes_alternatifs)) {
+	} else if (is_dir($repertoire_squelettes_alternatifs)) {
 	   if ($dh = opendir($repertoire_squelettes_alternatifs)) {
 	       while (($file = readdir($dh)) !== false) {
 	       		if ( (is_dir($repertoire_squelettes_alternatifs."/".$file)) AND ($file[0]!=".") ) $squelettes_alternatifs[$file]=$repertoire_squelettes_alternatifs."/".$file;
 	       }
 	   closedir($dh);
 	   }
-	}	
+	}
+	else {
+		$squelettes_alternatifs = array(
+		'defaut' => '',
+		'dist' => 'dist');
+	}
+
 
 // Contrib de Fil : voir http://trac.rezo.net/trac/spip-zone/browser/_contribs_/switcher/switcher.php
 // --------------------------------------------------------------------------------------------------
