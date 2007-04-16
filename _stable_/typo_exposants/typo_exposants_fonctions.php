@@ -23,7 +23,9 @@ function typo_exposants_fr($texte){
 		'/(\\b[02-9IVX]+)(ièmes|èmes|i&egrave;mes|&egrave;mes|mes)\\b/',
 		'/(\\b[1I])(res?)\\b/', // 1re(s)
 //		'/(\\b[0-9IVX]+)(er?s?)\\b/' // 1er(s), 2e(s), IIIe(s)...
-		'/(\\b[0-9IVX]+)e\\b/' // 1e, 2e, IIIe...
+		'/(\\b[0-9IVX]+)e\\b/', // 1e, 2e, IIIe...
+		'/(\\bS)t(|e|es|s)\\b/',  // St, Sts, Ste, Stes
+		'/(\\bB)(x|se|ses)\\b/'  // Bx, Bse, Bses
 	);
 	$remplace = array(
 		'M<small><sup>lle</sup></small>', // Mlle(s), Mme(s)
@@ -41,8 +43,9 @@ function typo_exposants_fr($texte){
 		'\\1<small><sup>es</sup></small>',
 		'\\1<small><sup>\\2</sup></small>', // 1re(s)
 //		'\\1<small><sup>\\2</sup></small>' // 1er(s), 2e(s), IIIe(s)...
-		'\\1<small><sup>e</sup></small>' // 1e, 2e, IIIe...
-
+		'\\1<small><sup>e</sup></small>', // 1e, 2e, IIIe...
+		'S<sup>t$2</sup>',     // St, Sts, Ste, Stes
+		'B<sup>$2</sup>'     // Bx, Bse, Bses
 	);
 
 	return preg_replace($trouve, $remplace, $texte);
