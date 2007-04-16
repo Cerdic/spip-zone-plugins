@@ -39,7 +39,12 @@ function action_charger()
 	$remove = chargeur_request('remove_path', 'spip' . ($plugin ? '/plugins' : ''));
 	$dest = chargeur_request('dest_path', _DIR_RACINE . ($plugin ? 'plugins/' : ''));
 
-	$status = chargeur_charger_zip($depot, $zip, $remove, $dest, $plugin);
+	$status = chargeur_charger_zip(array(
+		'depot' => $depot,
+		'nom' => $zip,
+		'remove' => $remove,
+		'dest' => $dest,
+		'plugin' => $plugin);
 
 	redirige_par_entete($url_retour);
 }

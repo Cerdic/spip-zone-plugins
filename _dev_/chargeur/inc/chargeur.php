@@ -11,13 +11,28 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function chargeur_charger_zip($depot, $nom, $remove = 'spip', $dest = _DIR_RACINE, $plugin = null)
+function chargeur_charger_zip($quoi = array())
 {
-   	include_spip('inc/distant');
-	$contenu = recuperer_page($paquet = $depot . $nom . '.zip');
+	if (!$quoi) {
+		return true;
+	}
+	if (is_scalar($quoi)) {
+		$quoi = array('zip' => $quoi);
+	}
+	if (isset($quoi['depot']) || isset($quoi['nom'])) {
+		$quoi['zip'] = $quoi['depot'] . $quoi['nom'] . '.zip';
+	}
+	foreach (array(	'remove' => 'spip',
+					'dest' => _DIR_RACINE,
+					'plugin' => null)
+				as $opt=>$def) {
+		isset($quoi[$opt]) || ($quoi[$opt] = $def);
+	}
+	include_spip('inc/distant');
+	$contenu = recuperer_page($quoi['zip']);
 
-	if (!$contenu || !($fichier = chargeur_ecrire_fichier_zip($nom, $contenu))) {
-		spip_log('charger_decompresser impossible de charger ' . $paquet);
+	if (!$contenu || !($fichier = chargeur_ecrire_fichier_zip($quoi['zip'], $contenu))) {
+		spip_log('charger_decompresser impossible de charger ' . $quoi['zip']);
 		return 0;
 	}
 
@@ -37,7 +52,7 @@ function chargeur_charger_zip($depot, $nom, $remove = 'spip', $dest = _DIR_RACIN
 			unset($path[$j]);
 		}
 	}
-	$aremove = explode('/', $remove);
+	$aremove = explode('/', $quoi['remove']);
 	$jmax = count($path);
 	for ($j = 0; $j < $jmax; ++$j) {
 		if ($j >= count($aremove) || $path[$j] != $aremove[$j]) {
@@ -45,7 +60,7 @@ function chargeur_charger_zip($depot, $nom, $remove = 'spip', $dest = _DIR_RACIN
 		}
 		unset($path[$j]);
 	}
-	$adest = explode('/', $dest);
+	$adest = explode('/', $quoi['dest']);
 	$kmax = count($adest);
 	for ($k = 0 ; $k < $kmax && $j < $jmax; ++$j, ++$k) {
 		if ($path[$j] != $adest[$k]) {
@@ -53,26 +68,26 @@ function chargeur_charger_zip($depot, $nom, $remove = 'spip', $dest = _DIR_RACIN
 		}
 		unset($adest[$k]);
 	}
-	$dest = implode('/', $adest);
+	$quoi['dest'] = implode('/', $adest);
 
 	$ok = $zip->extract(
-		PCLZIP_OPT_PATH, $dest,
+		PCLZIP_OPT_PATH, $quoi['dest'],
 		PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
 		PCLZIP_OPT_REPLACE_NEWER,
-		PCLZIP_OPT_REMOVE_PATH, $remove . "/");
+		PCLZIP_OPT_REMOVE_PATH, $quoi['remove'] . "/");
 	if ($zip->error_code < 0) {
 		spip_log('charger_decompresser erreur zip ' . $zip->error_code .
-					' pour paquet: ' . $paquet);
+					' pour paquet: ' . $quoi['zip']);
 		return $zip->error_code;
 	}
 
 	@unlink($fichier);
 
-	if ($plugin) {
-		chargeur_activer_plugin($plugin);
+	if ($quoi['plugin']) {
+		chargeur_activer_plugin($quoi['plugin']);
 	}
 
-	spip_log('charger_decompresser OK pour paquet: ' . $paquet);
+	spip_log('charger_decompresser OK pour paquet: ' . $quoi['zip']);
 
 	return 1;
 }
@@ -89,9 +104,9 @@ function chargeur_activer_plugin($plugin)
 //
 // Ecrire un fichier de maniere un peu sure
 //
-function chargeur_ecrire_fichier_zip ($nom, $contenu) {
+function chargeur_ecrire_fichier_zip ($zip, $contenu) {
 
-	$fp = @fopen($fichier = _DIR_TMP . $nom . '.zip', 'wb');
+	$fp = @fopen($fichier = _DIR_TMP . basename($zip), 'wb');
 	$s = @fputs($fp, $contenu, $a = strlen($contenu));
 
 	$ok = ($s == $a);
