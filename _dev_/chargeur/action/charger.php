@@ -28,23 +28,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_charger()
 {
 	include_spip('inc/chargeur');
-	$url_retour = charge_request('url_retour', 'ecrire/');
-	if ($actplug = charge_request('activer')) {
-		charge_activer_plugin($actplug);
+	$url_retour = chargeur_request('url_retour', 'ecrire/');
+	if ($actplug = chargeur_request('activer')) {
+		chargeur_activer_plugin($actplug);
 		redirige_par_entete($url_retour);
 	}
-	$plugin = charge_request('plugin');
-	$zip = charge_request('zip', $plugin);
-	$depot =  charge_request('depot', 'http://files.spip.org/spip-zone/');
-	$remove = charge_request('remove_path', 'spip' . ($plugin ? '/plugins' : ''));
-	$dest = charge_request('dest_path', _DIR_RACINE . ($plugin ? 'plugins/' : ''));
+	$plugin = chargeur_request('plugin');
+	$zip = chargeur_request('zip', $plugin);
+	$depot =  chargeur_request('depot', 'http://files.spip.org/spip-zone/');
+	$remove = chargeur_request('remove_path', 'spip' . ($plugin ? '/plugins' : ''));
+	$dest = chargeur_request('dest_path', _DIR_RACINE . ($plugin ? 'plugins/' : ''));
 
-	$status = charge_charger_zip($depot, $zip, $remove, $dest, $plugin);
+	$status = chargeur_charger_zip($depot, $zip, $remove, $dest, $plugin);
 
 	redirige_par_entete($url_retour);
 }
 
-function charge_request($var, $def = null)
+function chargeur_request($var, $def = null)
 {
 	($ret = _request($var)) || ($ret = $def);
 	return $ret;
