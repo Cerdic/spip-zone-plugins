@@ -1,16 +1,16 @@
 <plugin>
 	<nom> <!-- Coloration code , geshi -->
 	  <multi>
-		[fr]Coloration Code pour 1.9.1
-		[en]Code higlighting for 1.9.1
-		[it]Colorazione del codice per 1.9.1
+		[fr]Coloration Code pour 1.9.1 et 1.9.2
+		[en]Code higlighting for 1.9.1 and 1.9.2
+		[it]Colorazione del codice per 1.9.1 i 1.9.2
 		</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer) &amp; ARNO*
 	</auteur>
 	<version>
-	  0.2
+	  0.3
 	</version>
 	<etat>
 	  stable
@@ -58,9 +58,9 @@ Quest'ultima pu&#242; anche essere modificata localmente aggiugendo la classe "s
 _ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in questo modo: #TEXTE**|coloration_code_color&#123;spip,code&#125;: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro), vedi l'esempio lecode.html. L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà: &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV&#123;id_article&#125;" title="vedi il codice dell'articolo" class="spip_in"&gt;Vedi il codice dell'articolo&lt;/a&gt;
 	  </multi>
 	</description>
-    <fonctions> <!-- charge a chaque recalul de page , donc filtre -->
-        coloration_code.php
-    </fonctions>
+    <options> <!-- charge a chaque hit -->
+        mes_options.php
+    </options>
 	<prefix> 
 	  coloration_code
 	</prefix>
