@@ -24,10 +24,12 @@ function chargeur_charger_zip($quoi = array())
 	}
 	foreach (array(	'remove' => 'spip',
 					'dest' => _DIR_RACINE,
-					'plugin' => null)
+					'plugin' => null,
+					'rename' => array())
 				as $opt=>$def) {
 		isset($quoi[$opt]) || ($quoi[$opt] = $def);
 	}
+
 	include_spip('inc/distant');
 	$contenu = recuperer_page($quoi['zip']);
 
@@ -83,6 +85,11 @@ function chargeur_charger_zip($quoi = array())
 
 	@unlink($fichier);
 
+	chargeur_montre_tout($quoi);
+	if ($quoi['rename']) {
+		chargeur_rename($quoi);
+	}
+
 	if ($quoi['plugin']) {
 		chargeur_activer_plugin($quoi['plugin']);
 	}
@@ -90,6 +97,30 @@ function chargeur_charger_zip($quoi = array())
 	spip_log('charger_decompresser OK pour paquet: ' . $quoi['zip']);
 
 	return 1;
+}
+
+// pas de fichiers caches et preg_files() les ignore (*sigh*)
+function chargeur_montre_tout($quoi)
+{echo($quoi['dest']);
+	if (!($d = @opendir($quoi['dest']))) {
+		return;
+	}
+	while (($f = readdir($d)) !== false) {
+		if ($f == '.' || $f == '..' || $f[0] != '.') {
+			continue;
+		}
+		rename($quoi['dest'] . '/' . $f, $quoi['dest'] . '/'. substr($f, 1));
+	}
+}
+
+// renommer des morceaux
+function chargeur_rename($quoi)
+{
+	spip_log($quoi);
+	foreach (array($quoi['rename']) as $motif=>$replace) {
+		$found = preg_files($quoi['dest'], $motif);
+		spip_log($found);
+	}
 }
 
 // juste activer le plugin du repertoire $plugin
