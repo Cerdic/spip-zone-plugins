@@ -13,7 +13,7 @@ include_spip('exec/gis');
 
 function gis_ajouterBoutons($boutons_admin) {
 	// si eres administrador
-	if ($GLOBALS['connect_statut'] == "0minirezo") {
+	if (autoriser('administrer','gis')) {
     // vese o bot—n na barra de "configuraci—n"
 	    $boutons_admin['configuration']->sousmenu['gis']= new Bouton(
 		    _DIR_PLUGIN_GIS.'img_pack/correxir.png', _T('gis:configurar_gis'));
@@ -56,31 +56,26 @@ function gis_insertar_maparticle($flux){
 // inserta no head da parte PRIVADA
 // --------------------------------
 function gis_insertar_head($flux){
-
-		$query = "SELECT * FROM spip_gis_config WHERE name='googlemapkey'";
-		$result = spip_query($query);
-		$row = spip_fetch_array($result);
-		
-		if ((_request('exec')=='articles')){
-			$flux.='<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$row['value'].'"></script>
-			<script language="javascript">
-			$(document).ready(function() {
-				$(\'#cadroFormulario\').hide()
+	if ((_request('exec')=='articles')){
+		$key = isset($GLOBALS['meta']['gis_googlemapkey'])?$GLOBALS['meta']['gis_googlemapkey']:"";
+		$flux.='<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$key.'"></script>
+		<script language="javascript">
+		$(document).ready(function() {
+			$(\'#cadroFormulario\').hide()
+		});
+		function coordenadas (articulo){
+			$.ajax({
+				type: "POST",
+				url: "../spip.php?page=cambiar_coordenadas",
+				data: "id_article="+articulo+"&lat="+document.forms.formulaire_coordenadas.lat.value+"&lonx="+document.forms.formulaire_coordenadas.lonx.value,
+				success: function() {
+				}
 			});
-			function coordenadas (articulo){
-				$.ajax({
-					type: "POST",
-					url: "../spip.php?page=cambiar_coordenadas",
-					data: "id_article="+articulo+"&lat="+document.forms.formulaire_coordenadas.lat.value+"&lonx="+document.forms.formulaire_coordenadas.lonx.value,
-					success: function() {
-					}
-				});
-			}
-			</script>
-			<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
 		}
+		</script>
+		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
+	}
 
-	
 	return $flux;
 }
 
@@ -88,19 +83,13 @@ function gis_insertar_head($flux){
 // inserta no head da parte PUBLICA
 // --------------------------------
 function gis_insertarp_head($flux){
-
-		$query = "SELECT * FROM spip_gis_config WHERE name='googlemapkey'";
-		$result = spip_query($query);
-		$row = spip_fetch_array($result);
-		
-		$flux.='
+	$key = isset($GLOBALS['meta']['gis_googlemapkey'])?$GLOBALS['meta']['gis_googlemapkey']:"";
+	$flux.='
 <!-- scripts head plugin gis _______________________.-->
-<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$row['value'].'"></script>
+<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$key.'"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
-		
-	
 	return $flux;
 }
-	
+
 ?>

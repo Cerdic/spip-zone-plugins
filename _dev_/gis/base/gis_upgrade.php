@@ -26,13 +26,21 @@
 				spip_query("ALTER TABLE spip_gis ADD INDEX ( id_article )");
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.1");
 			}
+			if (version_compare($current_version,"0.1.2","<")){
+				$key = "";
+				$res = spip_query("SELECT * FROM spip_gis_config WHERE name='googlemapkey'");
+				if ($row = spip_fetch_array($res))
+					$key = $row['value'];
+				ecrire_meta('gis_googlemapkey',$key);
+				spip_query("DROP TABLE spip_gis_config");
+				ecrire_meta($nom_meta_base_version,$current_version="0.1.2");
+			}
 			ecrire_metas();
 		}
 	}
 	
 	function gis_vider_tables($nom_meta_base_version) {
 		spip_query("DROP TABLE spip_gis");
-		spip_query("DROP TABLE spip_gis_config");
 		effacer_meta($nom_meta_base_version);
 		ecrire_metas();
 	}

@@ -3,7 +3,7 @@
  <nom>Escoitar Gis Plugin</nom>
  <icon></icon>
  <version>0.1.0</version>
- <version_base>0.1.1</version_base>
+ <version_base>0.1.2</version_base>
  <etat>dev</etat>
 
  <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>

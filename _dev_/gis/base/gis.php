@@ -34,22 +34,6 @@ $tables_principales['spip_gis'] = array(
 	'joint' => &$spip_gis_join
 	);
 
-//taboa gis_config	
-$spip_gis_config = array(
-	"id" 	=> "bigint(21) NOT NULL",
-	"name" => "varchar(32) NULL NULL",
-	"value" => "varchar(255) NULL NULL"
-	);
-	
-$spip_gis_config_key = array(
-	"PRIMARY KEY" => "id"
-	);
-
-$tables_principales['spip_gis_config'] = array(
-	'field' => &$spip_gis_config,
-	'key' => &$spip_gis_config_key
-	);
-
 //-- Relaci—ns ----------------------------------------------------
 global $table_des_tables;
 $table_des_tables['gis']='gis';
