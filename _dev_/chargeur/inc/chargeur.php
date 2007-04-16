@@ -25,7 +25,9 @@ function chargeur_charger_zip($quoi = array())
 	foreach (array(	'remove' => 'spip',
 					'dest' => _DIR_RACINE,
 					'plugin' => null,
-					'rename' => array())
+					'cache_cache' => null,
+					'rename' => array(),
+					'edit' => array())
 				as $opt=>$def) {
 		isset($quoi[$opt]) || ($quoi[$opt] = $def);
 	}
@@ -85,9 +87,14 @@ function chargeur_charger_zip($quoi = array())
 
 	@unlink($fichier);
 
-	chargeur_montre_tout($quoi);
+	if (!$quoi['cache_cache']) {
+		chargeur_montre_tout($quoi);
+	}
 	if ($quoi['rename']) {
 		chargeur_rename($quoi);
+	}
+	if ($quoi['edit']) {
+		chargeur_edit($quoi['dest'], $quoi['edit']);
 	}
 
 	if ($quoi['plugin']) {
@@ -110,6 +117,30 @@ function chargeur_montre_tout($quoi)
 			continue;
 		}
 		rename($quoi['dest'] . '/' . $f, $quoi['dest'] . '/'. substr($f, 1));
+	}
+}
+
+// renommer des morceaux
+function chargeur_edit($dir, $edit)
+{
+	if (!($d = @opendir($dir))) {
+		return;
+	}
+	while (($f = readdir($d)) !== false) {
+		if ($f == '.' || $f == '..') {
+			continue;
+		}
+		if (is_dir($f = $dir . '/' . $f)) {
+			chargeur_edit($f, $edit);
+		}
+		$contenu = 	file_get_contents($f);
+		if (($change = preg_replace(
+				array_keys($edit), array_values($edit), $contenu)) == $contenu) {
+			continue;
+		}
+		$fw = fopen($f, 'w');
+		fwrite($fw, $change);
+		fclose($fw);
 	}
 }
 
