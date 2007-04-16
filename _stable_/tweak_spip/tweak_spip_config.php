@@ -77,7 +77,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'id' => 'insert_head',
-	'code:options' => "\$spip_pipeline['affichage_final'] .= '|f_insert_head';",
+	'code:options' => "\$GLOBALS['spip_pipeline']['affichage_final'] .= '|f_insert_head';", 
 	'categorie' => 'spip',
 	'version-min' => 1.92,
 ));
@@ -164,7 +164,7 @@ add_tweak( array(
 
 add_tweak( array (
 	'id' => 'xml',
-	'code:options' => "\$xhtml = 'sax';",
+	'code:options' => "\$GLOBALS['xhtml'] = 'sax';",
 	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
 	'categorie' =>'public',
 	'version-min' => '1.92',
@@ -172,7 +172,7 @@ add_tweak( array (
 
 add_tweak( array (
 	'id' => 'f_jQuery',
-	'code:options' => "\$spip_pipeline['insert_head'] = str_replace('|f_jQuery', '', \$spip_pipeline['insert_head']);",
+	'code:options' => "\$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery', '', \$GLOBALS['spip_pipeline']['insert_head']);",
 	'auteur' => 'Fil',
 	'categorie' =>'public',
 	'version-min' => '1.92',
