@@ -27,8 +27,6 @@ function typo_guillemets_echappe_balises_callback($matches) {
 }
 
 function typo_guillemets_rempl($texte){
-	// bug/tip de spip qui echappe les blocs html en ajoutant \n\n... donc on protege les echappements anterieurs
-	$texte = str_replace('"base64"', "'base64'", $texte);
 	// on s'en va si pas de guillemets...
 	if (strpos($texte, '"')===false) return $texte;
 	// prudence : on protege TOUTES les balises contenant des doubles guillemets droits
@@ -168,6 +166,8 @@ function typo_guillemets_rempl($texte){
 
 function typo_guillemets($texte){
 	if (strpos($texte, '"')===false) return $texte;
+	// bug/tip de spip qui echappe les blocs html en ajoutant \n\n... donc on protege les echappements anterieurs
+	$texte = preg_replace(',"base64([^"]*)",', "'base64$1'", $texte);
 	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_guillemets_rempl', $texte);
 }
 

@@ -42,11 +42,11 @@ function filets_sep_rempl($texte) {
 	if (strpos($texte, '__')===false) return $texte;
 	
 	// On memorise les modeles d'expression rationnelle a utiliser pour chercher les balises numeriques.
-	$modele_nombre = "#[\n\r]\s*__(\d+)__\s*[\n\r]#iU";
+	$modele_nombre = "#([\n\r]\s*)__(\d+)__(\s*[\n\r])#iU";
 
 	// On remplace les balises filets numeriques dans le texte par le code HTML correspondant.
 	if (preg_match($modele_nombre, $texte))
-		$texte = preg_replace($modele_nombre,'<html><p class="spip filet_sep filet_sep_$1">&nbsp; &nbsp; &nbsp;</p></html>',$texte); 
+		$texte = preg_replace($modele_nombre,'$1<html><p class="spip filet_sep filet_sep_$2">&nbsp; &nbsp; &nbsp;</p></html>$3',$texte); 
 	if (strpos($texte, '__')===false) return $texte;
 
 	// On remplace les balises filets images dans le texte par le code HTML correspondant.
