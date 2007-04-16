@@ -11,77 +11,35 @@
 include_spip('base/abstract_sql');
  
 function gis_cambiar_coord($id_article) {
-	global $connect_id_auteur, $connect_statut;
-	global $couleur_foncee, $couleur_claire, $options;
 	global $spip_lang_left, $spip_lang_right;
 	global $id_article;
 	
+	$glat = NULL;
+	$glonx = NULL;
+	$mapa = "";
 	$result= spip_query("SELECT * FROM spip_gis WHERE id_article = " . intval($id_article));
-
 	if ($row = spip_fetch_array($result)){
 		$glat = $row['lat'];
 		$glonx = $row['lonx'];
-		
-		if(isset($_POST['actualizar'])){
-			$glat = $_POST['lat'];
-			$glonx = $_POST['lonx'];
-			spip_query("UPDATE spip_gis SET lat='".$glat."', lonx='".$glonx."'  WHERE id_article = '" . $id_article."'");
-		}
-		$mapa = "<div id='map' name='map' style='width: 470px; height: 100px; border:1px solid #000'></div>
-		<script type='text/javascript'>
-		/*<![CDATA[*/\n
-		if (GBrowserIsCompatible()) {
-		/* create the map*/
-			var map = new GMap2(document.getElementById('map'));
-			map.setCenter(new GLatLng(".$glat.",".$glonx."), 8, G_MAP_TYPE);
-			icono = new GIcon();
-			icono.image = \""._DIR_PLUGIN_GIS."img_pack/correxir.png\";
-			icono.shadow = \"http://www.escoitar.org/loudblog/custom/templates/berio/shadow.png\";
-			icono.iconSize = new GSize(20, 34);
-			icono.shadowSize = new GSize(22, 20);
-			icono.iconAnchor = new GPoint(10, 34);
-			icono.infoWindowAnchor = new GPoint(5,1);
-			point = new GPoint(".$glonx.",".$glat.");
-			marker = new GMarker(point, icono);
-			map.addOverlay(marker);
-		} else {
-			alert('Sorry, the Google Maps API is not compatible with this browser');
-		}
-		/*]]>*/
-	</script>";
-	} else {
+	}
+	if(_request('actualizar')){
+		$glat = _request('lat');
+		$glonx = _request('lonx');
+		if (!$row)
+			spip_abstract_insert("spip_gis", "(id_article, lat, lonx)", "(" . _q($id_article) .","._q($glat)." ,"._q($glonx).")");
+		else
+			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx)."  WHERE id_article = " . _q($id_article));
+	}
+	if ($glat!==NULL){
+		$gis_append_view_map = charger_fonction('gis_append_view_map','inc');
+		$mapa = "<div id='map' name='map' style='width: 470px; height: 100px; border:1px solid #000'></div>"
+		  .$gis_append_view_map('map',$glat,$glonx,array(array('lon'=>$glonx,'lat'=>$glat)));
+	} 
+	else {
 		$glat = '42.7631';
 		$glonx = '-7.9321';
-		$mapa = "";
-		if(isset($_POST['actualizar'])){
-			$glat = $_POST['lat'];
-			$glonx = $_POST['lonx'];
-			spip_abstract_insert("spip_gis", "(id_article, lat, lonx)", "(" . $id_article .",".$glat." ,".$glonx.")");
-			$mapa = "<div id='map' name='map' style='width: 470px; height: 100px; border:1px solid #000'></div>
-		<script type='text/javascript'>
-		/*<![CDATA[*/\n
-		if (GBrowserIsCompatible()) {
-		/* create the map*/
-			var map = new GMap2(document.getElementById('map'));
-			map.setCenter(new GLatLng(".$glat.",".$glonx."), 8, G_MAP_TYPE);
-			icono = new GIcon();
-			icono.image = \""._DIR_PLUGIN_GIS."img_pack/correxir.png\";
-			icono.shadow = \"http://www.escoitar.org/loudblog/custom/templates/berio/shadow.png\";
-			icono.iconSize = new GSize(20, 34);
-			icono.shadowSize = new GSize(22, 20);
-			icono.iconAnchor = new GPoint(10, 34);
-			icono.infoWindowAnchor = new GPoint(5,1);
-			point = new GPoint(".$glat.",".$glonx.");
-			marker = new GMarker(point, icono);
-			map.addOverlay(marker);
-		} else {
-			alert('Sorry, the Google Maps API is not compatible with this browser');
-		}
-		/*]]>*/
-	</script>";
-		}
 	}
-	
+
 	$s .= "";
 	// Ajouter un formulaire
 	$s .= "\n<p>";
@@ -96,36 +54,17 @@ function gis_cambiar_coord($id_article) {
 	$s .= "</div>";
 	
 	$s .= debut_block_visible("ajouter_form");
+	
+	$gis_append_clicable_map = charger_fonction('gis_append_clicable_map','inc');
+	
 	$s .= "<div id='cadroFormulario' style='border:1px solid #000'>
-	<div id='formMap' name='formMap' style='width: 470px; height: 350px'></div>
-	<script type='text/javascript'>
-		/*<![CDATA[*/\n
-		if (GBrowserIsCompatible()) {
-		/* create the map*/
-			var formMap = new GMap2(document.getElementById('formMap'));
-			formMap.addControl(new GLargeMapControl());
-			formMap.addControl(new GMapTypeControl());
-			formMap.setCenter(new GLatLng(".$glat.",".$glonx."), 8, G_MAP_TYPE);
-			/* creamos el evento para crear nuevos marcadores*/
-			GEvent.addListener(formMap, 'click', function(overlay, point){
-				formMap.clearOverlays();
-				if (point) {
-					formMap.addOverlay(new GMarker(point));
-					formMap.panTo(point);
-					document.forms.formulaire_coordenadas.lat.value = point.y;
-					document.forms.formulaire_coordenadas.lonx.value = point.x;
-				}
-			});
-		} else {
-			alert('Sorry, the Google Maps API is not compatible with this browser');
-		}
-		/*]]>*/
-	</script>";          
+	<div id='formMap' name='formMap' style='width: 470px; height: 350px'></div>"
+	. $gis_append_clicable_map('formMap','form_lat','form_long',$glat,$glonx,$row?true:false);
 	
 	// Formulario para actualizar as coordenadas do mapa______________________.
 	$s .= '<form id="formulaire_coordenadas" name="formulaire_coordenadas" action="'.generer_url_ecrire(articles."&id_article=".$id_article).'" method="post">
-		<input type="text" name="lat" value="" />
-		<input type="text" name="lonx" value="" />
+		<input type="text" name="lat" id="form_lat" value="'.$glat.'" />
+		<input type="text" name="lonx" id="form_long" value="'.$glonx.'" />
 		<input type="submit" name="actualizar" value="'._T("gis:boton_actualizar").'" />
 		</form>
 		</div>';
@@ -138,16 +77,12 @@ function gis_cambiar_coord($id_article) {
 }
  
 function gis_mot_groupe($id_groupe){
-	global $connect_id_auteur, $connect_statut;
-	global $couleur_foncee, $couleur_claire, $options;
 	global $spip_lang_left, $spip_lang_right;
 	global $id_groupe;
 	$s .= "hola";
 	return $s;
 } 
 function gis_grupo_mots($id_groupe) {
-	global $connect_id_auteur, $connect_statut;
-	global $couleur_foncee, $couleur_claire, $options;
 	global $spip_lang_left, $spip_lang_right;
 	global $id_groupe;
 	
