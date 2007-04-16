@@ -46,7 +46,8 @@ function spixplorer_install($action)
 // si ca marchait ce serait $match[1], ...
 		'zip' => 'http://files.spip.org/externe/quixplorer_2_3_1.zip',
 		'remove' => 'quixplorer_2_3_1',
-		'dest' => $cible
+		'dest' => $cible,
+		'rename' => array('^\.(.)+' => '$1')
 	));
 	echo $status . '<br />';
 
