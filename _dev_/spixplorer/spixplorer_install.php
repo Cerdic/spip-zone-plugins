@@ -27,8 +27,23 @@ function spixplorer_install($action)
 	 'installer spixplorer depuis http://files.spip.org/externe/quixplorer.zip'
 	);
 
+/* manque un chouille
+   	include_spip('inc/distant');
+	$contenu = recuperer_page(
+	 'http://prdownloads.sourceforge.net/quixplorer/quixplorer_2_3_1.zip?download=1');
+
+	if (!preg_match('#<a href="([^"]+)\.zip">#', $contenu, $match)) {
+		spip_log('Pas de zip pour quixplorer');
+		return 0;
+	}
+	spip_log(
+	 'installer spixplorer depuis ' . $match[1]
+	);
+*/
+
    	include_spip('inc/chargeur');
 	$statut = charge_charger_zip(
+// si ca marchait ce serait $match[1], ...
 		'http://files.spip.org/externe/quixplorer_2_3_1',
 		'',
 		'quixplorer_2_3_1',
