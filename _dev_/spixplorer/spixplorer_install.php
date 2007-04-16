@@ -42,13 +42,12 @@ function spixplorer_install($action)
 */
 
    	include_spip('inc/chargeur');
-	$statut = charge_charger_zip(
+	$statut = chargeur_charger_zip(array(
 // si ca marchait ce serait $match[1], ...
-		'http://files.spip.org/externe/quixplorer_2_3_1',
-		'',
-		'quixplorer_2_3_1',
-		$cible
-	);
+		'zip' => 'http://files.spip.org/externe/quixplorer_2_3_1.zip',
+		'remove' => 'quixplorer_2_3_1',
+		'dest' => $cible
+	));
 	echo $status . '<br />';
 
 	if (!is_dir($cible)) {
