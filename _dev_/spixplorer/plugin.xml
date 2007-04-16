@@ -1,0 +1,15 @@
+<plugin>
+	<version>0.0.1</version>
+	<nom>spixplorer, quixplorer pour spip</nom>
+	<prefix>spixplorer</prefix>
+	<description>
+G&eacute;rer ses fichiers comme le serveur et plus.
+
+Un fork de [quixplorer->http://quixplorer.sourceforge.net/]
+
+D&eacute;ja un essai pour le plugin charge, ne pas poser tout dans la zone comme Fck.
+	</description>
+	<install>
+	spixplorer_install.php
+	</install>
+</plugin>
