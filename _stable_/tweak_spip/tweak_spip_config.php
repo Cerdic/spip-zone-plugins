@@ -84,9 +84,9 @@ add_tweak( array(
 add_tweak( array(
 	'id' => 'supprimer_numero',
 	// inserer : $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';
-	'traitement:TITRE:post_typo' => 'supprimer_numero',
+	'traitement:TITRE:pre_typo' => 'supprimer_numero',
 	// inserer : $table_des_traitements['NOM'][]= 'typo(supprimer_numero(%s))';
-	'traitement:NOM:post_typo' => 'supprimer_numero',
+	'traitement:NOM:pre_typo' => 'supprimer_numero',
 	'categorie' => 'public',
 ));
 
@@ -164,7 +164,7 @@ add_variable( array(
 	'radio' => array(-1 => 'tweak:js_jamais', 0 => 'tweak:js_defaut', 1 => 'tweak:js_toujours'),
 	'defaut' => 0,
 	// si la variable est non nulle, on code...
-	'code:%s!=0' => "\$GLOBALS['filtrer_javascript']=%s;",
+	'code:%s' => "\$GLOBALS['filtrer_javascript']=%s;",
 ));
 add_tweak( array(
 	'id' => 'filtrer_javascript',
