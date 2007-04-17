@@ -49,12 +49,12 @@ function inc_geomap_config(){
 			$glonx = isset($GLOBALS['meta']['geomap_default_lonx'])?$GLOBALS['meta']['geomap_default_lonx']:'-7.9321';
 			$gzoom = isset($GLOBALS['meta']['geomap_default_zoom'])?$GLOBALS['meta']['geomap_default_zoom']:'7';
 
-			$geomap_append_clicable_map = charger_fonction('geomap_append_clicable_map','inc');
+			$geomap_append_moveend_map = charger_fonction('geomap_append_moveend_map','inc');
 			$out .= 
 			"<div id='cadroFormulario' style='border:1px solid #000;margin-top:30px;padding:10px;tex-align:center;'>\n"
 			. "<p>"._T('geomap:default_geoloc')."</p>"
 			. "<div id='formMap' name='formMap' style='width: 470px; height: 350px;margin:10px auto;'></div>"
-			. $geomap_append_clicable_map('formMap','form_lat','form_lonx',$glat,$glonx,'form_zoom',$gzoom,false);
+			. $geomap_append_moveend_map('formMap','form_lat','form_lonx',$glat,$glonx,'form_zoom',$gzoom,false);
 		
 			$out .= '<input type="text" name="form_lat" id="form_lat" value="'.$glat.'" />
 			<input type="text" name="form_lonx" id="form_lonx" value="'.$glonx.'" />
@@ -63,8 +63,13 @@ function inc_geomap_config(){
 		$out .= "<div style='text-align:$spip_lang_right'>";
 		$out .= '<input type="submit" name="choisir" value="'._T('bouton_choisir').'" />';
 		$out .= "</div>";
+		$out .= '</form><form action="#" onsubmit="showAddress($(\'#address\').attr(\'value\')); return false">
 
-		$out .= '</form>';
+      <p>
+        <input size="60" name="address" id="address" value="" type="text">
+        <input value="Go!" type="submit">
+      </p>
+      </form>';
 		$out .= fin_cadre('r');
 		return $out;
 }
