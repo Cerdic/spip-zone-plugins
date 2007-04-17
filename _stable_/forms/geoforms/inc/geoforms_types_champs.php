@@ -55,20 +55,29 @@ function geoforms_forms_bloc_edition_champ($flux){
 function geoforms_forms_input_champs($flux){
 	static $vu=array();
 	$type = $flux['args']['type'];
-	if (in_array($type,array('geox','geoy','geoz'))){
+	if (in_array($type,array('geox','geoy','geoz'))
+	  AND (_DIR_RESTREINT OR _request('exec')!=='forms_edit')
+	  ) {
 		$id_form = $flux['args']['id_form'];
 		$champ = $flux['args']['champ'];
 		$extra_info = $flux['args']['extra_info'];
 		$vu[$id_form][$type]=array('id'=>extraire_attribut($flux['data'],'id'),'value'=>extraire_attribut($flux['data'],'value'));
 		if (isset($vu[$id_form]['geox']) AND isset($vu[$id_form]['geoy'])){
-			if ($geomap_append_clicable_map = charger_fonction('geomap_append_clicable_map','inc',true)){
+			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
 				$id = $vu[$id_form]['geox']['id']."-".$vu[$id_form]['geoy']['id'];
-				$flux['data'].="<div id='map-$id_form-$id'> </div>";
-				$flux['data'].=$geomap_append_clicable_map("map-$id_form-$id",$vu[$id_form]['geox']['id'],$vu[$id_form]['geoy']['id'],$vu[$id_form]['geox']['value'],$vu[$id_form]['geoy']['value'], NULL,NULL,true);
+				$flux['data'].="<div class='geomap' id='map-$id_form-$id'> </div>";
+				$flux['data'].=$geomap_append_moveend_map("map-$id_form-$id",$vu[$id_form]['geox']['id'],$vu[$id_form]['geoy']['id'],$vu[$id_form]['geox']['value'],$vu[$id_form]['geoy']['value'], NULL,NULL,true);
 				unset($vu[$id_form]);
 			}
 		}
 	}
 	return $flux;
+}
+function geoforms_forms_ajoute_styles($texte){
+	if ($f=find_in_path('geoforms.css')){
+		lire_fichier($f,$css);
+		$texte = $texte.$css;
+	}
+	return $texte;
 }
 ?>

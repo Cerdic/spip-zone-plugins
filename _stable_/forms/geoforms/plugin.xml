@@ -22,4 +22,12 @@
 		<nom>forms_input_champs</nom>
 		<inclure>inc/geoforms_types_champs.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>forms_ajoute_styles</nom>
+		<inclure>inc/geoforms_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>geoforms_pipeline.php</inclure>
+	</pipeline>
 </plugin>
