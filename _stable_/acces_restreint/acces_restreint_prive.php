@@ -4,11 +4,11 @@ function AccesRestreint_body_prive($flux) {
 	$exec = _request('exec');
 
 	// arreter tout si on a pas acces
-	if (in_array($exec,array('naviguer','rubriques_edit','articles','articles_edit','breves_voir','breves_edit')	)){
+	if (in_array($exec,array('naviguer','rubriques_edit','articles','articles_edit','breves_voir','breves_edit','articles_versions')	)){
 		include_spip('inc/acces_restreint');
 		$liste_acces_interdit = AccesRestreint_liste_rubriques_exclues();
 		global $id_rubrique;
-		if ($exec == 'articles' || $exec=='articles_edit' ){
+		if ($exec == 'articles' || $exec=='articles_edit' || $exec=='articles_versions'){
 			global $id_article;
  			$row = spip_fetch_array(spip_query("SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
  			if ($row) {
