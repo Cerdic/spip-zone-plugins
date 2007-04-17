@@ -14,14 +14,14 @@ define('_DIR_PLUGIN_HABILLAGES',(_DIR_PLUGINS.end($p)));
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100,cache-client}
+#CACHE{0}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 body { 
 	font-family: Verdana,Arial,Sans,sans-serif; 
 	color: #000000;
 	background-color: ##ENV{couleur_claire,edf3fe};
-	background-image:url(#EVAL{_DIR_PLUGIN_HABILLAGES}b75.png);
+	background-image:url(#EVAL{_DIR_PLUGIN_HABILLAGES}themes_natifs/styles_prives/spipZ/b75.png);
 	background-repeat: repeat;
 	border: none;
 	margin: 0px;
@@ -36,7 +36,7 @@ body {
 
 .toile_claire {
 	background-color: ##ENV{couleur_claire,edf3fe};
-	background-image:url(#EVAL{_DIR_PLUGIN_HABILLAGES}menu.png);
+	background-image:url(#EVAL{_DIR_PLUGIN_HABILLAGES}themes_natifs/styles_prives/spipZ/menu.png);
 	background-repeat: repeat-x;
 }
 
@@ -208,7 +208,7 @@ select.fondl {
 	position:relative;
 	z-index:90;
 	background-color: ##ENV{couleur_foncee,3874b0};
-	background-image:url(#EVAL{_DIR_PLUGIN_HABILLAGES}n75.png);
+	background-image:url(#EVAL{_DIR_PLUGIN_HABILLAGES}themes_natifs/styles_prives/spipZ/n75.png);
 	background-repeat: repeat;
 }
 

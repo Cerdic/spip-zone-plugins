@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['dossier_squelettes'] = 'dist';
+$GLOBALS['dossier_squelettes'] = 'plugins/habillages/themes_natifs/styles_prives/spipZ';
 
 /*
 include_spip('inc/meta');
