@@ -218,7 +218,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 	}
 	if ($type == 'mot') {
 		$out .= "<label for='groupe_$champ'>"._T("forms:champ_nom_groupe")."</label> :";
-		$out .= " &nbsp;<select name='groupe_champ' value='0' id='groupe_$champ' class='fondo verdana2'>\n";
+		$out .= " &nbsp;<select name='groupe_$champ' value='0' id='groupe_$champ' class='fondo verdana2'>\n";
 		$res2 = spip_query("SELECT * FROM spip_groupes_mots ORDER BY titre");
 		while ($row2 = spip_fetch_array($res2)) {
 			$id_groupe = $row2['id_groupe'];
@@ -251,7 +251,11 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<br />\n";
 	}
 
-	return $out;
+	return pipeline('forms_bloc_edition_champ',
+		array(
+		'args'=>array('row'=>$row,'action_link'=>$action_link, 'redirect'=>$redirect, 'idbloc'=>$idbloc),
+		'data'=>$out
+		));
 }
 
 function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $redirect,$ajax=false){

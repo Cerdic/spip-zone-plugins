@@ -43,7 +43,7 @@ function Forms_update_edition_champ($id_form,$champ) {
 		if ($type == 'url')
 			if ($champ_verif=_request('champ_verif')) $extra_info = $champ_verif;
 		if ($type == 'mot') {
-			if ($id_groupe = intval(_request('groupe_champ')))
+			if ($id_groupe = intval(_request("groupe_$champ")))
 				$extra_info = $id_groupe;
 		}
 		if ($type == 'joint') {

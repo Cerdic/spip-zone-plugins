@@ -25,23 +25,11 @@
 					[(#TITRE|strlen|?{':'})]
 				</span>
 				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
-				[(#TYPE|=={date}|?{' ',''}) #SET{afficher,0} #SET{date-picker,1}
-					<input type='text' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli] date-picker'
-						size='40' />
-				]
-				[(#TYPE|=={email}|?{' ',''}) #SET{afficher,0}
-					<span class='spip_form_label_details'><:forms:champ_email_details:></span>
-					<input type='text' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
-						size='40' />
-				]
-				[(#TYPE|=={url}|?{' ',''}) #SET{afficher,0}
-					<span class='spip_form_label_details'><:forms:champ_url_details:></span>
-					<input type='text' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
-						size='40' />
-				]
+				[<span class='spip_form_label_details'>(#TYPE|forms_label_details)</span>]
+				#SET{type,texte}
+				#SET{class,''}
+				[(#TYPE|=={date}|?{' ',''}) #SET{class,date-picker} #SET{date-picker,1}]
+				[(#TYPE|=={password}|?{' ',''}) #SET{type,password}]
 				[(#TYPE|=={texte}|?{' ',''}) #SET{afficher,0}
 					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},input-#ID_FORM-#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{' ',#ENV{crayon_active,''},' ',#ENV**{erreur}|forms_valeur{#CHAMP}|?{champ_obli_oubli}})] })]
 				]
@@ -50,11 +38,6 @@
 						class='[(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
 					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''})]
-				]
-				[(#TYPE|=={password}|?{' ',''}) #SET{afficher,0}
-					<input type='password' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
-						size='40' />
 				]
 				[(#TYPE|=={select}|?{' ',''}) #SET{afficher,0}
 					<INCLURE{fond=formulaires/forms_champ_select}{id_form}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
@@ -70,9 +53,12 @@
 				]
 				[(#REM) tous les autres types sont affiches ici]
 				[(#GET{afficher}|?{' ',''})
-					<input type='text' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+				[(#SET{input,
+					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+						class='[(#GET{class})] [(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
+				}|forms_input_champs{#ID_FORM,#TYPE,#CHAMP})]
+				#GET{input}
 				]
 				[<span class='erreur'>(#ENV**{erreur}|forms_valeur{#CHAMP})</span>]
 				<span class='nettoyeur'> </span>

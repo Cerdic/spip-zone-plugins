@@ -47,17 +47,17 @@
 
 
 	function Forms_liste_types_champs(){
-		$types_etendus = array_keys($GLOBALS['forms_types_champs_etendus']);
-		return array_merge(array('ligne', 'texte', 'date', 'email', 'url', 'select', 'multiple', 'fichier','password', 'mot','joint','separateur','textestatique'),$types_etendus);
+		$liste = array_diff(array_keys(Forms_nom_type_champ()),array(''));
+		return $liste;
 	}
 	function Forms_type_champ_autorise($type) {
 		static $t;
 		if (!$t) {
-			$t = array_flip(Forms_liste_types_champs());
+			$t = Forms_nom_type_champ();
 		}
-		return isset($t[$type]);
+		return (strlen($type)&&isset($t[$type]));
 	}
-	function Forms_nom_type_champ($type) {
+	function Forms_nom_type_champ($type='') {
 		static $noms;
 		if (!$noms) {
 			$noms = array(
@@ -77,8 +77,11 @@
 			);
 			foreach($GLOBALS['forms_types_champs_etendus'] as $t=>$champ)
 				$noms[$t] = $champ['label'];
+			$noms = pipeline('forms_types_champs',$noms);
 		}
-		return ($s = $noms[$type]) ? $s : $type;
+		if (!strlen($type))
+			return $noms;
+		else return ($s = $noms[$type]) ? $s : $type;
 	}
 
 	function Forms_valide_champs_reponse_post($id_form, $id_donnee, $c = NULL, $structure = NULL){
