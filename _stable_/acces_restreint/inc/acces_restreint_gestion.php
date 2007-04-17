@@ -34,10 +34,16 @@
 			spip_query("UPDATE spip_zones SET titre='$titre', descriptif='$descriptif', privee='$privee', publique='$publique' WHERE id_zone=$id_zone");
 			// suppression de tous les liens zone-rubriques
 			spip_query("DELETE FROM spip_zones_rubriques WHERE id_zone='$id_zone'");
-			if (is_array($_POST['restrict'])){
-				foreach(array_keys($_POST['restrict']) as $id){
+			if (is_array($_POST['restrict_pub'])){
+				foreach(array_keys($_POST['restrict_pub']) as $id){
 					$id = intval($id);
-					spip_abstract_insert('spip_zones_rubriques', "(id_zone,id_rubrique)", "('$id_zone','$id')");
+					spip_abstract_insert('spip_zones_rubriques', "(id_zone,id_rubrique,publique,privee)", "('$id_zone','$id','oui','non')");
+				}
+			}
+			if (is_array($_POST['restrict_priv'])){
+				foreach(array_keys($_POST['restrict_priv']) as $id){
+					$id = intval($id);
+					spip_abstract_insert('spip_zones_rubriques', "(id_zone,id_rubrique,publique,privee)", "('$id_zone','$id','non','oui')");
 				}
 			}
 		}
@@ -60,23 +66,12 @@
 		echo "</textarea>";
 		echo "</p>";
 		
-		echo "<p>";
-		$checked = ($publique == 'oui') ? " checked='checked'" : "";
-		echo "&nbsp; &nbsp; <input type='checkbox' name='publique' value='oui' id='zone_publique'$checked> ";
-		echo "<label for='zone_publique'>"._T("accesrestreint:zone_restreinte_publique")."</label>";
-		echo "<br />\n";
-		if ($GLOBALS['spip_version_code']>=1.9206){
-			$checked = ($privee == 'oui') ? " checked='checked'" : "";
-			echo "&nbsp; &nbsp; <input type='checkbox' name='privee' value='oui' id='zone_privee'$checked> ";
-			echo "<label for='zone_privee'>"._T("accesrestreint:zone_restreinte_espace_prive")."</label>";
-		}
-		echo "</p>";
 		echo "</div>";
 		return;
 	}
 
 	// Fonction de presentation
-	function AccesRestreint_sous_menu_rubriques($id_zone, $root, $niv, &$data, &$enfants, &$liste_rub_dir, &$liste_rub, $type) {
+	function AccesRestreint_sous_menu_rubriques($id_zone, $root, $niv, &$data, &$enfants, &$liste_rub_dir, &$liste_rub, $type, $publique=TRUE) {
 		global $browser_name, $browser_version;
 		static $decalage_secteur;
 		global $couleur_claire;
@@ -90,20 +85,27 @@
 		
 		$class = "";
 		if ($restric = in_array($root,$liste_rub_dir))	$class = " class='selec_rub'";
-	
+		
 		// le style en fonction de la profondeur
 		list($style,$espace) = style_menu_rubriques($niv);
 		$style = "style='padding-left:".($niv*1)."em;";
 		if ($restrictherit = in_array($root,$liste_rub))
 			$style .= "background-color: $couleur_claire;";
+		else if (in_array($root,AccesRestreint_liste_rubriques_acces_proteges($publique))) $style .= "background-color:#AAA;";
 		$style.= "'";
 
 		// creer l'<option> pour la rubrique $root
 		if (isset($data[$root])) # pas de racine sauf pour les rubriques
 		{
-			$r .= "<input type='checkbox' name='restrict[$root]' value='O' id='label_$root'";
-			$r .= ($restric!==FALSE)?" checked='checked'":"";
-			$r .= " />\n <label for='label_$root' >$espace".$data[$root]."</label>";
+			if($publique) {
+				$r .= "<input type='checkbox' name='restrict_pub[$root]' value='O' id='label_pub_$root'";
+				$r .= ($restric!==FALSE)?" checked='checked'":"";
+				$r .= " />\n <label for='label_pub_$root' >$espace".$data[$root]."</label>";
+			} else {
+				$r .= "<input type='checkbox' name='restrict_priv[$root]' value='O' id='label_priv_$root'";
+				$r .= ($restric!==FALSE)?" checked='checked'":"";
+				$r .= " />\n <label for='label_priv_$root' >$espace".$data[$root]."</label>";
+			}
 		}
 			
 		// et le sous-menu pour ses enfants
@@ -111,23 +113,39 @@
 		if ($enfants[$root])
 			foreach ($enfants[$root] as $sousrub)
 				$sous .= AccesRestreint_sous_menu_rubriques($id_rubrique, $sousrub,
-					$niv+1, $data, $enfants, $liste_rub_dir, $liste_rub, $type);
+					$niv+1, $data, $enfants, $liste_rub_dir, $liste_rub, $type, $publique);
 
 		if (strlen($sous)>0){
 			$visible = (($restrictherit) OR (strpos($sous,"checked='checked'")!==FALSE));
-			if ($visible)
-				$r = bouton_block_visible("rub$root") . $r;
-			else
-				$r = bouton_block_invisible("rub$root") . $r;
-			$r = "<div $class$style>" . $r;
-			$r .= "</div>\n";
+			if($publique) {
+				if ($visible)
+					$r = bouton_block_visible("rub_pub$root") . $r;
+				else
+					$r = bouton_block_invisible("rub_pub$root") . $r;
+				$r = "<div $class$style>" . $r;
+				$r .= "</div>\n";
 
-			if ($visible)
-				$r .= debut_block_visible("rub$root");
-			else
-				$r .= debut_block_invisible("rub$root");
-			$r .= $sous;
-			$r .= fin_block();
+				if ($visible)
+					$r .= debut_block_visible("rub_pub$root");
+				else
+					$r .= debut_block_invisible("rub_pub$root");
+				$r .= $sous;
+				$r .= fin_block();
+			} else {
+				if ($visible)
+					$r = bouton_block_visible("rub_priv$root") . $r;
+				else
+					$r = bouton_block_invisible("rub_priv$root") . $r;
+				$r = "<div $class$style>" . $r;
+				$r .= "</div>\n";
+
+				if ($visible)
+					$r .= debut_block_visible("rub_priv$root");
+				else
+					$r .= debut_block_invisible("rub_priv$root");
+				$r .= $sous;
+				$r .= fin_block();
+			}
 		}
 		else{
 			$r = "<div $class$style>" . $r;
@@ -139,7 +157,7 @@
 	}
 
 	// Le selecteur de rubriques en mode classique (menu)
-	function AccesRestreint_selecteur_rubrique_html($id_zone) {
+	function AccesRestreint_selecteur_rubrique_html($id_zone, $publique=TRUE) {
 		$type = 'rubrique';
 		$data = array();
 		if ($type == 'rubrique')
@@ -172,14 +190,14 @@
 			if ($id_rubrique == $r['id_rubrique']) $id_parent = $r['id_parent'];
 		}
 
-		$liste_rub_dir = AccesRestreint_liste_contenu_zone_rub_direct($id_zone);
-		$liste_rub = AccesRestreint_liste_contenu_zone_rub($id_zone);
+		$liste_rub_dir = AccesRestreint_liste_contenu_zone_rub_direct($id_zone, $publique);
+		$liste_rub = AccesRestreint_liste_contenu_zone_rub($id_zone, $publique);
 	
 		$r = "<div style='font-size: 90%; width: 99%;"
 		."font-face: verdana,arial,helvetica,sans-serif;'>\n";
 	
 		$r .= AccesRestreint_sous_menu_rubriques($id_zone,0,
-			0,$data,$enfants,$liste_rub_dir, $liste_rub, $type);
+			0,$data,$enfants,$liste_rub_dir, $liste_rub, $type, $publique);
 	
 		$r .= "</div>\n";
 	
@@ -192,8 +210,8 @@
 	 */
 	
 	function AccesRestreint_formulaire_zones($table, $id_objet, $nouv_zone, $supp_zone, $flag_editable, $retour) {
-	  global $connect_statut, $connect_toutes_rubriques, $options;
-		global $spip_lang_rtl, $spip_lang_right;
+		global $connect_statut, $connect_toutes_rubriques, $options;
+		global $spip_lang_rtl, $spip_lang_right, $connect_id_auteur, $connect_toutes_rubriques;
 		$out = "";
 	
 		$retour = urlencode($retour);
@@ -209,7 +227,15 @@
 			$objet = 'auteur';
 			$url_base = ($GLOBALS['spip_version_code']>1.92)?"auteur_infos":"auteurs_edit";
 		}
-	
+		//Vérification qu'on n'est pas un admin restreint sur la page d'un admin.
+		if ($table == 'auteurs') {
+			$query = "SELECT * FROM spip_auteurs AS aut WHERE aut.id_auteur=$id_objet";
+			$result = spip_query($query);
+			$row = spip_fetch_array($result);
+			$statut = $row['statut'];
+			if (!$connect_toutes_rubriques && $statut == '0minirezo') $flag_editable = FALSE;
+		}
+
 		list($nombre_zones) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_zones AS zones, spip_zones_$table AS lien WHERE lien.$id_table=$id_objet AND zones.id_zone=lien.id_zone"),SPIP_NUM);
 	
 		$out .= "<a name='zones'></a>";
@@ -294,7 +320,8 @@
 		
 				$vals[] = "";
 		
-				if ($flag_editable){
+				// Un admin restreint ne peut agir que sur les zones auxquelles il appartient
+				if($flag_editable && ($connect_toutes_rubriques || AccesRestreint_test_appartenance_zone_auteur($id_zone, $connect_id_auteur))){
 				  $s = "<a href='" . generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=$id_zone#zones") . "'>"._T('accesrestreint:info_retirer_zone')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</a>";
 					$vals[] = $s;
 				}
@@ -352,10 +379,12 @@
 	
 			$out .= "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 	
-					
-			$query = "SELECT * FROM spip_zones ";
-			if ($les_zones) $query .= "WHERE id_zone NOT IN ($les_zones) ";
-			$query .= "ORDER BY titre";
+			// Un admin restreint ne peut ajouter à un auteur que les zones auxquelles il appartient
+			if($connect_toutes_rubriques ){
+				$query = "SELECT * FROM spip_zones AS z WHERE z.id_zone NOT IN ($les_zones) ORDER BY z.titre";
+			} else {
+				$query = "SELECT * FROM spip_zones AS z JOIN spip_zones_auteurs AS za ON z.id_zone=za.id_zone WHERE za.id_auteur=$connect_id_auteur AND z.id_zone NOT IN ($les_zones) ORDER BY titre";
+			}
 
 			$result = spip_query($query);
 

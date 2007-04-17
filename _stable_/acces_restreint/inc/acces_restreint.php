@@ -58,21 +58,38 @@ include_spip('inc/rubriques');
 	// liste des rubriques contenues dans une zone, directement
 	// pour savoir quelles rubriques on peut decocher
 	// si id_zone = 0 : toutes les rub en acces restreint
-	function AccesRestreint_liste_contenu_zone_rub_direct($id_zone){
-	  $liste_rubriques=array();
-	  // liste des rubriques directement liees a la zone
-	  $query = "SELECT zr.id_rubrique FROM spip_zones_rubriques AS zr INNER JOIN spip_zones AS z ON zr.id_zone=z.id_zone";
-	  if (is_numeric($id_zone)) $query.=" WHERE zr.id_zone=".intval($id_zone);
-	  else $query .= " WHERE $id_zone";
-  	$s = spip_query($query);
-  	while ($row=spip_fetch_array($s))
-  		$liste_rubriques[$row['id_rubrique']]=1;
+	function AccesRestreint_liste_contenu_zone_rub_direct($id_zone, $publique=TRUE){
+		$liste_rubriques=array();
+		// liste des rubriques directement liees a la zone
+		$query = "SELECT zr.id_rubrique FROM spip_zones_rubriques AS zr INNER JOIN spip_zones AS z ON zr.id_zone=z.id_zone";
+		// si pas de id_zone valide on met juste le WHERE
+		if (is_numeric($id_zone)) $query.=" WHERE zr.id_zone=".intval($id_zone)." AND ";
+		else $query .= " WHERE ";
+		// la sélection dépend de $publique
+		if($publique) $query.= " zr.publique='oui' ";
+		else $query .= " zr.privee='oui' ";
+		$s = spip_query($query);
+		while ($row=spip_fetch_array($s))
+			$liste_rubriques[$row['id_rubrique']]=1;
 		return array_keys($liste_rubriques);
 	}
+
+
+	// Vérifie si une rubrique a une définition dans la table spip_zones_rubriques
+	function AccesRestreint_rubrique_definition_directe($id_rubrique, $publique=TRUE){
+		$query = "SELECT id_rubrique FROM spip_zones_rubriques WHERE id_rubrique=$id_rubrique ";
+		if($publique) $query.= " AND publique='oui' ";
+		else $query .= " AND privee='oui' ";
+		$s = spip_query($query);
+		if ($row=spip_fetch_array($s)) return TRUE;
+		else return FALSE;
+	}
+
+
 	// liste des rubriques contenues dans une zone, directement ou par heritage
-	function AccesRestreint_liste_contenu_zone_rub($id_zone){
+	function AccesRestreint_liste_contenu_zone_rub($id_zone, $publique=TRUE){
 		$liste_rubriques=array();
-		$liste_recherche=AccesRestreint_liste_contenu_zone_rub_direct($id_zone);
+		$liste_recherche=AccesRestreint_liste_contenu_zone_rub_direct($id_zone, $publique);
 		// pour chaque rubrique de la zone, on cherche les sous rubriques qui heritent de la propriete
 		while (count($liste_recherche)){
 			// elle est fouillee donc on la passe un rubrique listee
@@ -82,7 +99,8 @@ include_spip('inc/rubriques');
 			$s = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_rubrique");
 			$liste = array();
 			while ($row=spip_fetch_array($s))
-				if (!in_array($row['id_rubrique'],$liste_rubriques))
+				// on ne prend en compte la sous-rubrique qu'à condition qu'elle ne dispose pas d'une déclaration par une autre zone
+				if (!in_array($row['id_rubrique'],$liste_rubriques) && !AccesRestreint_rubrique_definition_directe($row['id_rubrique'],$publique))
 					$liste[] = $row['id_rubrique'];
 			$liste_recherche = array_merge($liste_recherche, $liste);
 		}
@@ -123,9 +141,7 @@ include_spip('inc/rubriques');
 	function AccesRestreint_liste_rubriques_acces_proteges($publique=true){
 		static $liste_acces_protege=array(); // la calculer une seule fois par hit
 		if (!isset($liste_acces_protege[$publique]) || !is_array($liste_acces_protege[$publique])){
-			if ($publique) $cond = "publique='oui'";
-			else $cond = "privee='oui'";
-			$liste_acces_protege[$publique] = AccesRestreint_liste_contenu_zone_rub($cond);
+			$liste_acces_protege[$publique] = AccesRestreint_liste_contenu_zone_rub('tout', $publique);
 		}
 		return $liste_acces_protege[$publique];
 	}
@@ -149,12 +165,10 @@ include_spip('inc/rubriques');
 		global $auteur_session;
 		$liste = AccesRestreint_liste_rubriques_acces_libre($publique);
 		if ($auteur_session['id_auteur']){
-			if ($publique) $cond = "z.publique='oui'";
-			else $cond = "z.privee='oui'";
 			$id_auteur = intval($auteur_session['id_auteur']);
-			$s = spip_query("SELECT za.id_zone FROM spip_zones_auteurs AS za INNER JOIN spip_zones AS z ON za.id_zone=z.id_zone WHERE za.id_auteur=$id_auteur AND $cond");
+			$s = spip_query("SELECT za.id_zone FROM spip_zones_auteurs AS za JOIN spip_zones AS z ON za.id_zone=z.id_zone WHERE za.id_auteur=$id_auteur");
 			while ($row = spip_fetch_array($s)){
-				$liste = array_merge($liste,AccesRestreint_liste_contenu_zone_rub($row['id_zone']));
+				$liste = array_merge($liste,AccesRestreint_liste_contenu_zone_rub($row['id_zone'],$publique));
 			}
 		}
 		return $liste;
@@ -169,12 +183,10 @@ include_spip('inc/rubriques');
 			global $auteur_session;
 			$liste_rub_exclues[$publique] = AccesRestreint_liste_rubriques_acces_proteges($publique);
 			if (isset($auteur_session['id_auteur'])){
-				if ($publique) $cond = "z.publique='oui'";
-				else $cond = "z.privee='oui'";
 				$id_auteur = intval($auteur_session['id_auteur']);
-				$s = spip_query("SELECT za.id_zone FROM spip_zones_auteurs AS za INNER JOIN spip_zones AS z ON za.id_zone=z.id_zone WHERE za.id_auteur=$id_auteur AND $cond");
+				$s = spip_query("SELECT za.id_zone FROM spip_zones_auteurs AS za JOIN spip_zones AS z ON za.id_zone=z.id_zone WHERE za.id_auteur=$id_auteur");
 				while ($row = spip_fetch_array($s)){
-					$liste_rub_exclues[$publique] = array_diff($liste_rub_exclues[$publique],AccesRestreint_liste_contenu_zone_rub($row['id_zone']));
+					$liste_rub_exclues[$publique] = array_diff($liste_rub_exclues[$publique],AccesRestreint_liste_contenu_zone_rub($row['id_zone'],$publique));
 				}
 			}
 		}
@@ -363,6 +375,31 @@ include_spip('inc/rubriques');
 		$liste = AccesRestreint_liste_syndic_articles_exclus(_DIR_RESTREINT!="");
 		return calcul_mysql_in($primary, join(",",$liste),"NOT");
 	}
+
+
+	// fonctions de filtrage evenements
+	// plus performant a priori : liste des rubriques exclues uniquement
+	// -> condition NOT IN
+	function AccesRestreint_evenements_exclus($publique=true){
+		static $liste_evenements_exclus=array();
+		if (!isset($liste_evenements_exclus[$publique]) || !is_array($liste_evenements_exclus[$publique])){
+			$liste_evenements_exclus[$publique] = array();
+			// rattaches aux articles
+			$liste_art = AccesRestreint_liste_articles_exclus($publique);
+			$where = calcul_mysql_in('id_article', join(",",$liste_art));
+			
+			$s = spip_query("SELECT id_evenement FROM spip_evenements WHERE $where");
+			while ($row = spip_fetch_array($s)){
+				$liste_evenements_exclus[$publique][] = $row['id_evenement'];
+			}
+		}
+		return $liste_evenements_exclus[$publique];
+	}
+	function AccesRestreint_evenements_accessibles_where($primary){
+		$liste = AccesRestreint_evenements_exclus(_DIR_RESTREINT!="");
+		return calcul_mysql_in($primary, join(",",$liste),"NOT");
+	}
+
 
 	// filtre de securisation des squelettes
 	// utilise avec [(#REM|AccesRestreint_securise_squelette)]

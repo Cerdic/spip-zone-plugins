@@ -53,13 +53,27 @@ function exec_acces_restreint_edit(){
 	AccesRestreint_formulaire_zone($id_zone, $titre, $descriptif, $publique, $privee);
 
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
+	// on fait un double appel à la liste des rubriques, une fois pour le privé, une fois pour le public
 	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 	echo _T('accesrestreint:rubriques_zones_acces');
+	echo " - ";
+	echo _T('accesrestreint:restreindre_publique');
 	echo "</div>";
 	echo "<div>\n";
-	echo AccesRestreint_selecteur_rubrique_html($id_zone);
+	echo AccesRestreint_selecteur_rubrique_html($id_zone, $publique=TRUE);
 	echo "</div>\n";
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
+	
+	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
+	echo _T('accesrestreint:rubriques_zones_acces');
+	echo " - ";
+	echo _T('accesrestreint:restreindre_espace_prive');
+	echo "</div>";
+	echo "<div>\n";
+	echo AccesRestreint_selecteur_rubrique_html($id_zone, $publique=FALSE);
+	echo "</div>\n";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
+	
 	echo "</form>\n";
 
 	fin_cadre_relief();

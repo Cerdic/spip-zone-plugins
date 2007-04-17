@@ -11,8 +11,6 @@ $spip_zones = array(
 	"id_zone" 	=> "bigint(21) NOT NULL",
 	"titre" 	=> "varchar(255) NOT NULL",
 	"descriptif" 	=> "text NOT NULL",
-	"publique" 	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
-	"privee" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_zones_key = array(
@@ -36,7 +34,9 @@ $tables_auxiliaires['spip_zones_auteurs'] = array(
 
 $spip_zones_rubriques = array(
 	"id_zone" 	=> "bigint(21) NOT NULL",
-	"id_rubrique" 	=> "bigint(21) NOT NULL");
+	"id_rubrique" 	=> "bigint(21) NOT NULL",
+	"publique" 	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
+	"privee" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_zones_rubriques_key = array(
 	"KEY id_zone" 	=> "id_zone",
