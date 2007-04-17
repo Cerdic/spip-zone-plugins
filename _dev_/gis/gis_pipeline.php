@@ -57,7 +57,8 @@ function gis_insertar_maparticle($flux){
 // --------------------------------
 function gis_insertar_head($flux){
 	if (($r=_request('exec'))=='articles' OR $r=='gis'){
-		$flux .= '<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>';
+		$geomap_script_init = charger_fonction('geomap_script_init','inc');
+		$flux .= $geomap_script_init();
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
 		if ((_request('exec')=='articles'))
 			$flux .= '<script language="javascript">
@@ -73,8 +74,9 @@ function gis_insertar_head($flux){
 // inserta no head da parte PUBLICA
 // --------------------------------
 function gis_insertarp_head($flux){
+	$geomap_script_init = charger_fonction('geomap_script_init','inc');
+	$flux .= $geomap_script_init();
 	$flux.='
-<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
 	return $flux;
