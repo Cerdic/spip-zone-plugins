@@ -48,11 +48,43 @@ function spixplorer_install($action)
 		'remove' => 'quixplorer_2_3_1',
 		'dest' => $cible,
 		'rename' => array(
-			'index.php' => 'quixplorer_index.php'
+			'index.php' => 'quixplorer_index.php',
+			'_lib/lib_zip.php' => 'include/lib_zip.php',
+			'_lib' => 'action',
+//			'action/init.php' => 'inc/init.php'
+			'include/fun_admin.php' => 'action/spx_admin.php',
+			'include/fun_archive.php' => 'action/spx_archive.php',
+			'include/fun_chmod.php' => 'action/spx_chmod.php',
+			'include/fun_copy_move.php' => 'action/spx_copy_move.php',
+			'include/fun_del.php' => 'action/spx_del.php',
+			'include/fun_down.php' => 'action/spx_down.php',
+			'include/fun_edit.php' => 'action/spx_edit.php',
+			'include/fun_extra.php' => 'include/extra.php',
+			'include/fun_list.php' => 'action/spx_list.php',
+			'include/fun_mkitem.php' => 'action/spx_mkitem.php',
+			'include/fun_search.php' => 'action/spx_search.php',
+			'include/fun_up.php' => 'action/spx_up.php',
+			'include/fun_users.php' => 'action/spx_users.php',
+			'include' => 'inc',
+			'_lang' => 'lang'
 		),
 		'edit' => array(
-			'#\./\.#' => $cible . '/',
-			'#\./#' => $cible . '/'
+			'#(?:require|include)[ (]+"\./\.include/fun_extra\.php"\)?#' => 'include_spip("quixplorer/inc/extra")',
+			'#(?:require|include)[ (]+"\./\.include/fun_(.*)\.php"\)?#' => 'include_spip("action/spx_$1")',
+			'#(?:require|include)[ (]+"\./\.include/(.*)\.php"\)?#' => 'include_spip("quixplorer/inc/$1")',
+			'#(?:require|include)[ (]+"\./_lib/(.*)\.php"\)?#' => 'include_spip("quixplorer/inc/$1")',
+			'#(?:require|include)[ (]+"\./_lang/(.*)\.php"\)?#' => 'include_spip("quixplorer/lang/$1")',
+			'#(?:require|include)[ (]+"\./\.config/(.*)\.php"\)?#' => 'include_spip("quixplorer/config/$1")',
+			"#isset\(\\\$GLOBALS\['__POST'\]\[([^\]]+)\]\)(.+?)\\\$GLOBALS\['__POST'\]\[\\1\]#"
+				=> '_request($1)',
+			'#\$GLOBALS#' => "\$GLOBALS['spx']",
+			'#_img/#' => "plugins/spixplorer/quixplorer/_img/",
+			'#.*have fun.*#i' => '$0
+
+	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
+',
+//			'#\./\.#' => $cible . '/',
+//			'#\./#' => $cible . '/'
 		)
 	));
 	echo $statut . '<br />';
