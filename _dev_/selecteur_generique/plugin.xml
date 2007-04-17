@@ -13,7 +13,7 @@
 	dev
 	</etat>
 	<description>
-	Remplace les slecteurs (auteurs, mots, rubriques) par quelque chose de plus lger & rapide, capable de traiter autant de donnes que possible
+	Remplace les sï¿½lecteurs (auteurs, mots, rubriques) par quelque chose de plus lï¿½ger & rapide, capable de traiter autant de donnï¿½es que possible
 	</description>
 
 	<lien></lien>
@@ -25,5 +25,5 @@
 		<action>inserer_javascript</action>
 		<inclure>inserer_javascript.php</inclure>
 	</pipeline>
-	<chemin dir='' type='prive' />
+	<chemin dir='' />
 </plugin>
