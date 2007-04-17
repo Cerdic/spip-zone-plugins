@@ -66,7 +66,7 @@
 		$boucle = &$boucles[$idb];
 		if ($not)
 			erreur_squelette(_T('zbug_info_erreur_squelette'), $crit->op);
-		$boucle->modificateur['crit_filtre'] = 1;
+		$boucle->modificateur['crit_filtre'] = !isset($crit->param[0]) ? "'ET'" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 		//$boucle->where[]= array("'='", "'$boucle->id_table." . "id_parent'", 0);
 	}
 	
@@ -106,22 +106,29 @@
 			$boucle->hash .= <<<code
 	$reqfiltre
 	\$filtre = "";
+	\$res = 0;
 	while (\$row = @spip_abstract_fetch(\$result,"")){
 		if ((\$r = _request(\$row['champ']))!==NULL){
 			if (is_array(\$r)){
+				\$r = array_diff(\$r,array('')); // enlever les valeurs vides
+				\$res += count(\$r);
 				if (strlen(implode("",\$r))) 
-					\$filtre .= " AND (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
+					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
 			}
-			elseif (strlen(\$r))
-				\$filtre .= " AND (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r).")";
+			elseif (strlen(\$r)){
+				\$res++;
+				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r).")";
+			}
 		}
 	}
-	if (strlen(\$filtre)) \$filtre = substr(\$filtre,5);
+	if (strlen(\$filtre)) \$filtre = '('.substr(\$filtre,4).')';
 	else \$filtre="1=1";
 code;
+			$boucle->select[] = 'COUNT('.$boucle->id_table . '.id_donnee) AS res';
 			$boucle->where[] = '$filtre';
 			$boucle->from["dc"] =  "spip_forms_donnees_champs";
 			$boucle->where[] =  array("'='", "'dc.id_donnee'", "'$id_table.id_donnee'");
+			$boucle->having[] =  '('.$boucle->modificateur['crit_filtre'].'!="OU")?"res=$res":"1=1"';
 			$boucle->group[] = $boucle->id_table . '.id_donnee'; 
 		}
 		
