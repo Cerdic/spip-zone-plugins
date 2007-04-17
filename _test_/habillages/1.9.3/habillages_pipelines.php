@@ -85,19 +85,12 @@ function habillages_header_prive($flux) {
   	$flux .= '<link rel="stylesheet" href="'.$theme_link.'style.css" type="text/css" />'."\n";
 	}
 
-	$flux .= '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('yo_prive', _SENS_ET_COULEURS) .'" />' . "\n"
-  . "<!--[if lt IE 8]>\n"
-  . '<link rel="stylesheet" type="text/css" href="'
-  . generer_url_public('yo_prive_ie', _SENS_ET_COULEURS) .'" />' . "\n"
-  . "<![endif]-->\n";
-
 	return $flux;
 }
 
-function habillages_body_prive($texte) {
-		$texte = str_replace('dist', 'Oups', $texte);
-		return $texte;
-}
+//function habillages_body_prive($texte) {
+//		$texte = str_replace('dist', 'Oups', $texte);
+//		return $texte;
+//}
 	
 ?>
