@@ -15,7 +15,7 @@ define('_DIR_PLUGIN_PHPMV',$GLOBALS['meta']['_DIR_PLUGIN_PHPMV']);
 function phpmv_get_code(){
 	return '<!-- phpmyvisites -->
 			<noscript>
-			<img src="'.generer_url_public('phpmyvisites','var_nophpmv=1',false).'" alt="phpMyVisites" class="phpmyvisitestag" />
+			<p><img src="'.generer_url_public('phpmyvisites','var_nophpmv=1',false).'" alt="phpMyVisites" class="phpmyvisitestag" /></p>
 			</noscript>
 			<!-- /phpmyvisites -->';	
 }
