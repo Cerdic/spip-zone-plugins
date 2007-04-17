@@ -166,7 +166,7 @@ include_spip('inc/rubriques');
 		$liste = AccesRestreint_liste_rubriques_acces_libre($publique);
 		if ($auteur_session['id_auteur']){
 			$id_auteur = intval($auteur_session['id_auteur']);
-			$s = spip_query("SELECT za.id_zone FROM spip_zones_auteurs AS za JOIN spip_zones AS z ON za.id_zone=z.id_zone WHERE za.id_auteur=$id_auteur");
+			$s = spip_query("SELECT za.id_zone FROM spip_zones_auteurs AS za INNER JOIN spip_zones AS z ON za.id_zone=z.id_zone WHERE za.id_auteur=$id_auteur");
 			while ($row = spip_fetch_array($s)){
 				$liste = array_merge($liste,AccesRestreint_liste_contenu_zone_rub($row['id_zone'],$publique));
 			}
@@ -184,7 +184,7 @@ include_spip('inc/rubriques');
 			$liste_rub_exclues[$publique] = AccesRestreint_liste_rubriques_acces_proteges($publique);
 			if (isset($auteur_session['id_auteur'])){
 				$id_auteur = intval($auteur_session['id_auteur']);
-				$s = spip_query("SELECT za.id_zone FROM spip_zones_auteurs AS za JOIN spip_zones AS z ON za.id_zone=z.id_zone WHERE za.id_auteur=$id_auteur");
+				$s = spip_query("SELECT za.id_zone FROM spip_zones_auteurs AS za INNER JOIN spip_zones AS z ON za.id_zone=z.id_zone WHERE za.id_auteur=$id_auteur");
 				while ($row = spip_fetch_array($s)){
 					$liste_rub_exclues[$publique] = array_diff($liste_rub_exclues[$publique],AccesRestreint_liste_contenu_zone_rub($row['id_zone'],$publique));
 				}
