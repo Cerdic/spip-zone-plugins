@@ -13,9 +13,14 @@ Author : Cody Lindley , modif Fil, BoOz pour spip
  min-height: 100%;
  height: auto !important;
  height: 100%;
- padding: 0; margin: 0;
+ margin: 0;
  }
-
+html {
+padding:0
+}
+/* body{
+padding:0
+} */
 
 #TB_window  { 
 /*font-size: 1.2em */ 
