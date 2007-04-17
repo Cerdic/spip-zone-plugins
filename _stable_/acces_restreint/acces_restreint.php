@@ -221,6 +221,30 @@ function boucle_SYNDIC_ARTICLES($id_boucle, &$boucles) {
 		$boucle->where[] = '$acces_where';
 	}
 	return boucle_SYNDIC_ARTICLES_dist($id_boucle, $boucles);
+
+//
+// <BOUCLE(EVENEMENTS)>
+//
+function boucle_EVENEMENTS($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+
+	if (!isset($boucle->modificateur['tout_voir'])){
+		$t = $boucle->id_table . '.' . $boucle->primary;
+		if (!in_array($t, $boucles[$id_boucle]->select))
+		  $boucle->select[]= $t; # pour postgres, neuneu ici
+	
+		$boucle->hash = '
+		// ACCES RESTREINT
+		$acces_where = AccesRestreint_evenements_accessibles_where("'.$t.'");
+		' . $boucle->hash ;
+	
+		// et le filtrage d'acces filtre !
+		$boucle->where[] = '$acces_where';
+	}
+	
+	return boucle_EVENEMENTS_dist($id_boucle, $boucles);
+}
 }
 
 ?>
