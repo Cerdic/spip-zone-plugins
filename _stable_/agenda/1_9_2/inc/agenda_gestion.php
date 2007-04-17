@@ -13,43 +13,36 @@ function article_editable($id_article){
 }
 
 function Agenda_afficher_date_evenement($date_debut, $date_fin, $horaire){
-	$s = "";
-	if (($d=date("Y-m-d",$date_debut))==date("Y-m-d",$date_fin))
+	$d = date("Y-m-d", $date_debut);
+	$f = date("Y-m-d", $date_fin);
+	$h = $horaire=='oui';
+	$hd = $h?date("H:i", $date_debut):"";
+	$hf = $h?date("H:i", $date_fin):"";
+	$s = affdate_jourcourt($d) . " $hd";
+	if ($d==$f)
 	{ // meme jour
-		$s = affdate_jourcourt($d);
-		if ($horaire=='oui'){
-			$s .= " ".($hd=date("H:i",$date_debut));
-			if ($hd!=($hf=date("H:i",$date_fin)))
-				$s .= "-$hf";
-		}
+			if ($hd!=$hf) $s .= "-$hf";
 	}
 	else if ((date("Y-m",$date_debut))==date("Y-m",$date_fin))
 	{ // meme annee et mois, jours differents
-		$d=date("Y-m-d",$date_debut);
-		$s = affdate_jourcourt($d);
-		if ($horaire=='oui')
-			$s .= " ".($hd=date("H:i",$date_debut));
-		$s .= "<br/>"._T('agenda:evenement_date_au').date(($horaire=='oui')?"d  H:i ":"d ",$date_fin);
+		$s = ($h?$s."<br/>"._T('agenda:evenement_date_au'):jour($d)." ".strtolower(_T('agenda:evenement_date_au')))
+			. affdate_jourcourt($f)." $hf";
 	}
 	else if ((date("Y",$date_debut))==date("Y",$date_fin))
 	{ // meme annee, mois et jours differents
-		$d=date("Y-m-d",$date_debut);
-		$s = affdate_jourcourt($d);
-		if ($horaire=='oui')
+		if ($h)
 			$s .= " ".date("H:i",$date_debut);
-		$d = date("Y-m-d",$date_fin);
-		$s .= "<br/>"._T('agenda:evenement_date_au').affdate_jourcourt($d);
-		if ($horaire=='oui')
+		$s .= "<br/>"._T('agenda:evenement_date_au').affdate_jourcourt($f);
+		if ($h)
 			$s .= " ".date("H:i",$date_fin);
 	}
 	else
 	{ // tout different
 		$s = affdate($d);
-		if ($horaire=='oui')
+		if ($h)
 			$s .= " ".date("(H:i)",$date_debut);
-		$d = date("Y-m-d",$date_fin);
-		$s .= "<br/>"._T('agenda:evenement_date_au').affdate($d);
-		if ($horaire=='oui')
+		$s .= "<br/>"._T('agenda:evenement_date_au').affdate($f);
+		if ($h)
 			$s .= " ".date("(H:i)",$date_fin);
 	}
 	return $s;
@@ -99,7 +92,8 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			}
 			if (strlen($s_rep)){
 				$s .= "<br/>".bouton_block_invisible("repetitions_evenement_$id_evenement");
-				$s .= "$count_rep ". _T('agenda:evenement_repetitions');
+				if ($count_rep>1) $s .= _T('agenda:nb_repetitions', array('nb' => $count_rep));
+					else $s .= _T('agenda:une_repetition');
 				$s .= debut_block_invisible("repetitions_evenement_$id_evenement");
 				$s .= $s_rep;
 				$s .= fin_block();

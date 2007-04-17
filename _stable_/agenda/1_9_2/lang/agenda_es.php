@@ -30,11 +30,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_sur_l_agenda' => "Sobre la agenda",
 'icone_creer_evenement' => 'Creaci&oacute;n de un nuevo evento',
 'evenement_repetitions' => 'Repeticiones',
+'nb_repetitions' => '@nb@&nbsp;repeticiones',
+'une_repetition' => '1&nbsp;repetici&oacute;n',
 'repetition_de' => "Repetici&oacute;n de",
+'nb_mots_clefs' => '@nb@&nbsp;palabras&nbsp;clave',
+'un_mot_clef' => '1&nbsp;palabra&nbsp;clave',
 'sans_titre' => "(con t&iacute;tulo)",
 'evenement_autres_occurences' => "Otras ocurrencias:",
 'bouton_supprimer' => "Suprimir",
 );
-
 
 ?>
