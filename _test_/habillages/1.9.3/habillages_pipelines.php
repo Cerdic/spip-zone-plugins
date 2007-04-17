@@ -84,9 +84,7 @@ function habillages_header_prive($flux) {
 	if (isset($GLOBALS['meta']['habillages_icones']) AND ($c=$GLOBALS['meta']['habillages_icones'])!="") {
   	$flux .= '<link rel="stylesheet" href="'.$theme_link.'style.css" type="text/css" />'."\n";
 	}
-	$flux .= '<link rel="stylesheet" type="text/css" href="http://spip.design.free.fr/spip-1.9.3/spip.php?page=spipz_prive&amp;couleur_claire=FFDDAA&amp;couleur_foncee=CDA261&amp;ltr=left" />';
-	
-	
+
 	return $flux;
 }
 
