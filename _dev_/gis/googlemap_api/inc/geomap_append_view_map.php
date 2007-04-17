@@ -14,7 +14,9 @@ function inc_geomap_append_view_map_dist($target_id,$view_lat,$view_long,$view_z
 		$view_zoom = isset($GLOBALS['meta']['geomap_default_zoom'])?$GLOBALS['meta']['geomap_default_zoom']:'8'; 
 		if (!strlen($view_zoom) OR !is_numeric($view_zoom)) $view_zoom='8';
 	}
-	$out = "";
+	$geomap_script_init = charger_fonction('geomap_script_init','inc');
+	return 
+	$out = $geomap_script_init();
 	$out .=
 		"<script type='text/javascript'>
 		/*<![CDATA[*/\n

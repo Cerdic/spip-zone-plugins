@@ -24,7 +24,7 @@ function inc_geomap_config(){
 		$out .= '<form name="googlemapkey" method="post" action="'.self().'">';
 		$out .= '<br/>';
 		$out .= '<label>Google Map API Key <a href="http://www.google.com/apis/maps/signup.html" target="_blank" >'._T('geomap:conseguir').'</a></label> <input type="text" name="key" value="'.$apikey.'" size="30" />';
-		$out .= '<input type="submit" name="ok" value="ok" />';
+		$out .= '<input type="submit" name="ok" value="'._T('bouton_enregistrer').'" />';
 		
 		if(_request('ok')){
 			$out .= '<div align="center" style="margin:20px auto">';
@@ -59,10 +59,10 @@ function inc_geomap_config(){
 			$out .= '<input type="text" name="form_lat" id="form_lat" value="'.$glat.'" />
 			<input type="text" name="form_lonx" id="form_lonx" value="'.$glonx.'" />
 			<input type="text" name="form_zoom" id="form_zoom" value="'.$gzoom.'" />';
+			$out .= "<div style='text-align:$spip_lang_right'>";
+			$out .= '<input type="submit" name="choisir" value="'._T('bouton_choisir').'" />';
+			$out .= "</div>";
 		}
-		$out .= "<div style='text-align:$spip_lang_right'>";
-		$out .= '<input type="submit" name="choisir" value="'._T('bouton_choisir').'" />';
-		$out .= "</div>";
 		$out .= '</form><form action="#" onsubmit="showAddress($(\'#address\').attr(\'value\')); return false">
 
       <p>

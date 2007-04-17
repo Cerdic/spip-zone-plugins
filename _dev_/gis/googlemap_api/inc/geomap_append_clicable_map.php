@@ -22,8 +22,10 @@ function inc_geomap_append_clicable_map_dist($target_id,$target_lat_id,$target_l
 		$view_zoom = isset($GLOBALS['meta']['geomap_default_zoom'])?$GLOBALS['meta']['geomap_default_zoom']:'8'; 
 		if (!strlen($view_zoom) OR !is_numeric($view_zoom)) $view_zoom='8';
 	}
+	$geomap_script_init = charger_fonction('geomap_script_init','inc');
 	return 
-	"<script type='text/javascript'>
+	$geomap_script_init()
+	. "<script type='text/javascript'>
 		/*<![CDATA[*/\n
 			if (GBrowserIsCompatible()) {
 			/* create the map*/
