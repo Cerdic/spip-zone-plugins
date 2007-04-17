@@ -55,7 +55,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 				echo "<div style='float:right'>";
 				$link=generer_url_ecrire('forms_edit', "new=oui&type_form=".$row['type_form']);
 				$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-				icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
+				echo icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
 				echo "</div>";
 				if ($row['type_form']==$type_form) $bouton_defaut = false;
 			}
@@ -73,7 +73,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 			echo "<div align='right'>";
 			$link=generer_url_ecrire('forms_edit', "new=oui&type_form=$type_form");
 			$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-			icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
+			echo icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
 			echo "</div>";
 		}
 	}
@@ -109,7 +109,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
   $icone = find_in_path("img_pack/$type_form-24.png");
   if (!$icone)
   	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
-	$out .=  "<table><tr><td>";
+	$out .=  "<table style='margin:0 auto;'><tr><td>";
 	if ($retour){
 		$out .=  "<div style='float:$spip_lang_left;'>";
 		$out .=  icone(_T('icone_retour'), urldecode($retour), $icone, "rien.gif","",false);

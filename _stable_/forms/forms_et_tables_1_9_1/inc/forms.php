@@ -505,7 +505,7 @@
 		}
 	
 		// verifier si des donnees sont pas sans rang et les ramasser
-		$res = spip_query("SELECT id_donnee, rang FROM spip_forms_donnees WHERE (rang=NULL OR rang=0) AND id_form="._q($id_form));
+		$res = spip_query("SELECT id_donnee, rang FROM spip_forms_donnees WHERE (rang=NULL OR rang=0) AND id_form="._q($id_form)." ORDER BY id_donnee");
 		while ($row = spip_fetch_array($res)){
 			$rang_max++;
 			spip_query("UPDATE spip_forms_donnees SET rang=$rang_max WHERE id_donnee="._q($row['id_donnee']));

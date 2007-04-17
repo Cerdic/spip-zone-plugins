@@ -57,8 +57,8 @@
 					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
 						class='[(#GET{class})] [(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
-				}|forms_input_champs{#ID_FORM,#TYPE,#CHAMP,#EXTRA_INFO,#OBLIGATOIRE,#ENV**})]
-				#GET{input}
+				})]
+				[(#GET{input}|forms_input_champs{#ID_FORM,#TYPE,#CHAMP,#EXTRA_INFO,#OBLIGATOIRE,#ENV**})]
 				]
 				[<span class='erreur'>(#ENV**{erreur}|forms_valeur{#CHAMP})</span>]
 				<span class='nettoyeur'> </span>

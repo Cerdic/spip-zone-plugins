@@ -260,10 +260,14 @@
 					'id_form'=>$id_form,
 					'champ'=>$champ,
 					'extra_info'=>$extra_info,
-					'obligatoire'=>$obligatoire
+					'obligatoire'=>$obligatoire,
+					'env'=>$env
 					),
 				'data'=>$texte
 			)
 		);
+	}
+	function forms_ajoute_styles($texte){
+		return pipeline('forms_ajoute_styles',$texte);
 	}
 ?>

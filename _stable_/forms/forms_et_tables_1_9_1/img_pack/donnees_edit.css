@@ -1,5 +1,4 @@
-ul.sortable
-{
+ul.sortable {
 	width: 160px;
 	background-color: #444;
 	border: 1px solid #555;
@@ -8,7 +7,7 @@ ul.sortable
 	padding: 2px;
 	float: right;
 }
-li
+ul.sortable li
 {
 	margin: 2px;
 	padding: 4px;
@@ -16,7 +15,7 @@ li
 	border: 1px solid #666;
 	color: #ccc;
 }
-li.selected{background: #ccc;	color: #666;border-color:#ccc;}
+ul.sortable li.selected{background: #ccc;	color: #666;border-color:#ccc;}
 ul.sortableactive
 {
 	border: 1px dashed #006600;
