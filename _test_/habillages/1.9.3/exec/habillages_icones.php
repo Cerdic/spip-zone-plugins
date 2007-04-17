@@ -155,6 +155,13 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 	echo _T('icones:def_couleurs');
 	echo "</div>";
 	fin_boite_info();
+	
+	debut_boite_info();
+	ecrire_meta('habillages_theme_prive','plugins/habillages/themes_natifs/styles_prives/spipZ/');
+	ecrire_metas();
+	echo $GLOBALS['meta']['habillages_theme_prive'];
+	fin_boite_info();
+	
 
 	# lister les repertoires d'icones
 	$meta_pack = $GLOBALS['meta']['habillages_img_pack'];
@@ -171,7 +178,7 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 	$packs=array();
 	$packs[]='spip';
 	
-	$d = dir(_DIR_PLUGIN_HABILLAGES.'/packs/');
+	$d = dir(_DIR_PLUGIN_HABILLAGES.'/themes_natifs/icones_prives/');
     while (false !== ($entry = $d->read()) ) {
 		if($entry!= "." && $entry != "..") {
 			$packs[]=$entry;
@@ -209,7 +216,7 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 			#$value='spip';
 		}
 		else {
-			$repert = _DIR_PLUGIN_HABILLAGES.'/packs/'.$pack."/";
+			$repert = _DIR_PLUGIN_HABILLAGES.'/themes_natifs/icones_prives/'.$pack."/";
 			$theme = $repert."/theme.xml";
 			lire_fichier($theme, $texte);
 				$arbre = parse_plugin_xml($texte);
@@ -226,25 +233,25 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 	echo "<p></p>";
     echo "<table border='0' cellpadding='0' cellspacing='0' id='subtab' align='center'>";
 
-	echo "<tr><td style='background-color:$couleur_foncee' id='hab_input' class='hab_stitre'>";
+	echo "<tr><td id='hab_input' class='toile_foncee hab_stitre'>";
 	echo "<input type='radio' name='change_pack' value='$repert' ".(($meta_pack==$repert)? $check : '')." /></td>";
-	echo "<td style='background-color:$couleur_foncee' id='hab_inputxt' class='hab_stitre'>";
+	echo "<td id='hab_inputxt' class='toile_foncee hab_stitre'>";
 	echo (($meta_pack==$repert)? $pack_select."&nbsp;" : '')."<span class='verdana3'><b>".$nom_theme."</b></span>
 			&nbsp;&middot;&middot;&nbsp;<span class='verdana2'>".$version_theme."</span>";
 
 	echo "</td>";
-	echo "<td style='background-color:$couleur_foncee' id='hab_inpuico' class='hab_stitre'>";
+	echo "<td id='hab_inpuico' class='toile_foncee hab_stitre'>";
 
     echo "<a href='".generer_url_ecrire('icop_listing','pack='.$pack)."' title='"._T('icones:voir_toutes_icones')."'>";
     echo "<img src='".$repert."cal-suivi.png' /></a>";
     
 	echo "</td></tr>";
 	echo "<tr>";
-	echo "<td colspan='3' style='background-color:$couleur_claire' class='hab_fondclair cellule48' onmouseover='changestyle('bandeauaccueil');>";
+	echo "<td colspan='3' class='toile_claire hab_fondclair cellule48' onmouseover='changestyle('bandeauaccueil');>";
 	echo "<a href='#'></a>";
 	echo "</td></tr>";
 		echo "<tr>";
-	echo "<td colspan='3' style='background-color:$couleur_claire' class='hab_fondclair cellule48' onmouseover='changestyle('bandeauaccueil');>";
+	echo "<td colspan='3' class='toile_claire hab_fondclair cellule48' onmouseover='changestyle('bandeauaccueil');>";
 	echo "<a href='#'>";
 	echo "<img src='".$repert."asuivre-48.png' title='' alt='ico' />";
 	echo "<img src='".$repert."documents-48.png' title='' alt='ico' />";

@@ -80,14 +80,18 @@ function habillages_header_prive($flux) {
 	include_spip('inc/meta');
 	lire_metas();
 	$theme_link = $GLOBALS['meta']['habillages_icones'];
+	
 	if (isset($GLOBALS['meta']['habillages_icones']) AND ($c=$GLOBALS['meta']['habillages_icones'])!="") {
   	$flux .= '<link rel="stylesheet" href="'.$theme_link.'style.css" type="text/css" />'."\n";
 	}
+	$flux .= '<link rel="stylesheet" type="text/css" href="http://spip.design.free.fr/spip-1.9.3/spip.php?page=spipz_prive&amp;couleur_claire=FFDDAA&amp;couleur_foncee=CDA261&amp;ltr=left" />';
+	
+	
 	return $flux;
 }
 
 function habillages_body_prive($texte) {
-		$texte = str_replace('border-bottom', 'Oups', $texte);
+		$texte = str_replace('dist', 'Oups', $texte);
 		return $texte;
 }
 	

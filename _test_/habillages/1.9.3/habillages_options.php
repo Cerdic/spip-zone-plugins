@@ -1,6 +1,8 @@
 <?php
 include_spip('inc/meta');
 
+$GLOBALS['dossier_squelettes'] = 'pladou';
+/*
 lire_metas();
 $lire_habillages_squelettes = $GLOBALS['meta']['habillages_squelettes'];
 $lire_habillages_prefixe_squel = $GLOBALS['meta']['habillages_prefixe_squel'];
@@ -20,7 +22,7 @@ else if ($lire_habillages_squelettes == "defaut") {
 else {
 	$GLOBALS['dossier_squelettes'] = $squelette_reperso.':plugins/'.$lire_habillages_squelettes.'/';
 }
-
+*/
 /*
 +--------------------------------------------+
 | ICOP 1.0 (03/2007) - SPIP 1.9.2

@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Habillages
+	Gestionnaire d'habillages SPIP.
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	Franck Ducas [Site personnel->http://franck.ducas.free.fr] pour la r&#233;alisation et l'id&#233;e originale.
@@ -13,7 +13,7 @@ _ Et tous les concepteurs et les conceptrices de squelettes, themes, et images (
 _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version> <!-- Version du plugin (les trois premiers chiffres correspondent a la version SPIP avec laquelle il est compatible -->
-	1.9.3.1
+	1.9.3.2
 	</version>
 	<icon>
 	img_pack/habillages_icone-48.png
@@ -30,7 +30,8 @@ _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</options>
 	<description>
 	VERSION INSTABLE - Ne pas utiliser.
-Gestionnaire d'habillages SPIP.
+_ version 1.9.3.1 : remise a plat du plugin
+_ version 1.9.3.2 : insertion des icones et des styles de l'espace prive et amelioration de l'interface.
 	</description>
 	<prefix> 
 	habillages
