@@ -252,7 +252,18 @@
 		if ($type=='url') $out = _T("forms:champ_url_details");
 		return pipeline('forms_label_details',array('args'=>array('type'=>$type),'data'=>$out));
 	}
-	function forms_input_champs($texte,$id_form,$type,$champ){
-		return pipeline('forms_input_champs',array('args'=>array('type'=>$type,'id_form'=>$id_form,'champ'=>$champ),'data'=>$texte));
+	function forms_input_champs($texte,$id_form,$type,$champ,$extra_info,$obligatoire,$env){
+		return pipeline('forms_input_champs',
+			array(
+				'args'=>array(
+					'type'=>$type,
+					'id_form'=>$id_form,
+					'champ'=>$champ,
+					'extra_info'=>$extra_info,
+					'obligatoire'=>$obligatoire
+					),
+				'data'=>$texte
+			)
+		);
 	}
 ?>
