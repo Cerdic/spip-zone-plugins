@@ -189,7 +189,7 @@ if($GLOBALS['meta']['habillages_couleurs']!='') {
 
 	debut_droite();
     
-	echo generer_url_post_ecrire("habillages_icones");
+	echo generer_post_ecrire("habillages_icones");
 	
 	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icones-22.png");	
 	

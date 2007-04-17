@@ -25,9 +25,6 @@ _ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	dev
 	</etat>
 	<chemin dir='' />
-	<options>
-	habillages_options.php
-	</options>
 	<description>
 	VERSION INSTABLE - Ne pas utiliser.
 _ version 1.9.3.1 : remise a plat du plugin
@@ -36,6 +33,9 @@ _ version 1.9.3.2 : insertion des icones et des styles de l'espace prive et amel
 	<prefix> 
 	habillages
 	</prefix>
+	<options>
+	habillages_options.php
+	</options>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouter_boutons</action>

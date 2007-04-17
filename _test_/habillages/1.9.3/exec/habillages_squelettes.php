@@ -211,7 +211,7 @@ EOF;
 	echo "<div class='intro_grotitre'>";
 	echo gros_titre(_T('accueil:squelettes_titre'))."</div><br />";
 	
-	echo generer_url_post_ecrire("habillages_squelettes");
+	echo generer_post_ecrire("habillages_squelettes");
 	
 	echo "<table border='0' cellpadding='0' cellspacing='0' id='subtab' align='center'>";
 

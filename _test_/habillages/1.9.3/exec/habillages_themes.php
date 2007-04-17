@@ -150,7 +150,7 @@ EOF;
 	# Message d'introduction.
 	echo _T('habillages:themes_intro')."<br /><br />";
 	
-	echo generer_url_post_ecrire("habillages_themes");
+	echo generer_post_ecrire("habillages_themes");
 		
 		# Squelettes par defaut. On laisse la dist ou le squelette personnalise
 		# de l'auteur du site prendre le dessus. Mettre une interface bateau, mais

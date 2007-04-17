@@ -118,7 +118,7 @@ EOF;
 
 	debut_droite();
     
-	echo generer_url_post_ecrire("habillages_config");
+	echo generer_post_ecrire("habillages_config");
 	
 	debut_cadre_couleur(_DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_config-22.png");	
 

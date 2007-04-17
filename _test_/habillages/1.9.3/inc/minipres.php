@@ -21,7 +21,7 @@ include_spip('inc/texte');
 
 // http://doc.spip.org/@install_debut_html
 function install_debut_html($titre = 'AUTO', $onLoad = '') {
-	global $spip_lang_right;
+	global $spip_lang_right,$spip_lang_left;
 	
 	include_spip('inc/filtres');
 	include_spip('inc/headers');
@@ -36,46 +36,99 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	# lors de l'installation
 	if (!headers_sent())
 		header('Content-Type: text/html; charset=utf-8');
-
+	$dir_img_pack = _DIR_IMG_PACK;
+	
 	return  _DOCTYPE_ECRIRE.
 		html_lang_attributes().
 		"<head>\n".
 		"<title>".
 		textebrut($titre).
-		"</title>
-		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n".
-		"body { background: #FFF; color: #000; }\n".
-		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n".
-		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; }\n".
-		"a { color: #E86519; text-decoration: none; }\n".
-		"a:visited { color: #6E003A; }\n".
-		"a:active { color: #FF9900; }\n".
-		"img { border: 0; }\n".
-		"p { text-align: justify; }\n".
-		"ul { text-align: justify; list-style-type: none; }\n".
-		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; padding: 10px; margin-top: 1em; }\n".
-		"legend { font-weight: bold; }\n".
-		"label {}\n".
-		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n".
-		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n".
-		".petit-centre p { text-align: center; }\n".
-		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n".
-		".fondl { padding: 3px; background-color: #eee; border: 1px solid #333; 
+		"</title>".<<<styles
+<style type='text/css'><!--
+/*<![CDATA[*/
+body { 
+	background: #FFF; 
+	color: #000; 
+	font-family: Verdana,Arial,Sans,sans-serif;
+	font-size:0.9em;
+}
+h1 { 
+	color: #970038; 
+	margin:1em 0 1em 0;
+	font-family: Verdana; 
+	font-weigth: bold; 
+	font-size: 1.3em;
+}
+h2 { 
+	font-weigth: normal; 
+	font-size: 1.2em;
+	margin:0.8em 0 0.8em 0;
+}
+a { color: #E86519; text-decoration: none; }
+a:visited { color: #6E003A; }
+a:active { color: #FF9900; }
+img { border: 0; }
+p { text-align: justify; }
+ul { text-align: justify; list-style-type: none; }
+fieldset, .fieldset {
+	text-align:$spip_lang_left;
+	border: none; 
+	padding: 0px; 
+	margin-top: 1em; 
+	font-size:0.9em;
+}
+legend { font-weight: bold; font-size:1.1em;color:#0033cc;}
+label {}
+#minipres {
+	border:2px solid #888888;
+	width: 30em; 
+	text-align: center; 
+	margin: 1em auto 1em auto;
+	padding:1em;
+	background:#ffffcc;
+}
+.petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 1em; }
+.petit-centre p { text-align: center; }
+.suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }
+.toile_foncee { background: #777; }
+.fondl { 
+	padding: 3px; background-color: #eee; border: 1px solid #333; 
 	background-position: center bottom; 
-	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n".
-		".formo { width: 100%; display: block; padding: 3px;
-	margin-top: 1em;
+	font-size: 0.9em;
+	font-family: Verdana,Arial,Sans,sans-serif; 
+}
+.formo { 
+	width: 100%; display: block; padding: 3px;
+	margin-bottom: 1em;
 	background-color: #FFF; 
 	border: 1px solid #333; 
 	background-position: center bottom; 
 	behavior: url(../dist/win_width.htc);
-	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n".
-	  "\n\n]]>\n--></style>\n\n
-	<script type='text/javascript' src='"
-	  . _DIR_JAVASCRIPT . "spip_barre.js'></script>
-</head>
+	font-size: 1em;
+	font-family: Verdana,Arial,Sans,sans-serif; 
+}
+#etapes { display:block;}
+#etapes span { 
+	display:block;
+	float:$spip_lang_left;
+	width:48px;
+	height:42px;
+	margin-right:5px;
+	font-size:26px;
+	font-weight:bold;
+	padding-top:6px;
+}
+#etapes span.ok {background:url($dir_img_pack/etape-ok.gif)}
+#etapes span.encours {background:url($dir_img_pack/etape-encours.gif)}
+#etapes span.todo {background:url($dir_img_pack/etape-todo.gif)}
+.nettoyeur {clear:both;height:0px;line-height:0px;font-size:0px;padding:0;margin:0;}
+
+]]>
+--></style>
+styles
+	. "<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "spip_barre.js'></script>\n". // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
+#	"<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "jquery.js'></script>".
+"</head>
 <body".$onLoad.">
 	<div id='minipres'>
 	<h1>".
@@ -91,8 +144,28 @@ function install_fin_html() {
 
 // http://doc.spip.org/@info_etape
 function info_etape($titre, $complement = ''){
-	return "\n<h2>".$titre."</h2>\n" .
-	($complement ? "<p>".$complement."</p>\n":'');
+	$en_cours = _request('etape')?_request('etape'):"";
+	$liste = find_all_in_path('install/','etape_([0-9])+[.]php');
+	$debut = 1; $etat = "ok";
+	$last = count($liste);
+	
+	$aff_etapes = "<span id='etapes'>";
+	foreach($liste as $etape=>$fichier){
+		if ($etape=="etape_{$en_cours}.php"){
+			if ($debut<$last)
+				$etat = "encours";
+			else
+				$etat = "ok";
+		}
+		$aff_etapes .= "<span class='$etat'>".(($debut<$last)?$debut:"go")."</span>";
+		if ($etat == "encours")
+			$etat = 'todo';
+		$debut++;
+	}
+	$aff_etapes .= "<br class='nettoyeur' />&nbsp;</span>\n";
+	
+	return $aff_etapes."\n<h2>".$titre."</h2>\n" .
+	($complement ? "<br />".$complement."\n":'');
 }
 
 // http://doc.spip.org/@fieldset
@@ -102,17 +175,19 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 	foreach ($champs as $nom => $contenu) {
 		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
 		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
-		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
 		if(is_array($contenu['alternatives'])) {
+			$fieldset .= $contenu['label'] ."\n";
 			foreach($contenu['alternatives'] as $valeur => $label) {
 				$fieldset .= "<input type='radio' name='".$nom .
-				"'\nvalue='".$valeur."' ".(($valeur==$contenu['valeur'])?"checked='checked'":'')."/>\n";
-				$fieldset .= "<label for='".$valeur."'>".$label."</label>\n";
+				"' id='$nom-$valeur' value='$valeur'"
+				  .(($valeur==$contenu['valeur'])?"\nchecked='checked'":'')."/>\n";
+				$fieldset .= "<label for='$nom-$valeur'>".$label."</label>\n";
 			}
 			$fieldset .= "<br />\n";
 		}
 		else {
-			$fieldset .= "<input ".$class."type='".$type."' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
+			$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
+			$fieldset .= "<input ".$class."type='".$type."' id='" . $nom . "' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
 		}
 	}
 	$fieldset .= "$horchamps</fieldset>\n";
@@ -284,11 +359,11 @@ function http_wrapper($img){
 	static $wrapper_table = array();
 	
 	if (strpos($img,'/')===FALSE) // on ne prefixe par _DIR_IMG_PACK que si c'est un nom de fichier sans chemin
-## --> hack iconesprive
+	## --> hack iconesprive
 		if (isset($GLOBALS['meta']['habillages_img_pack']) AND (($c=$GLOBALS['meta']['habillages_img_pack'])!=''))
 			$f = $c . $img;
 		else
-## <--
+    ## <--
 
 		$f = _DIR_IMG_PACK . $img;
 	else { // sinon, le path a ete fourni
@@ -339,21 +414,4 @@ function http_style_background($img, $att='')
   return " style='background: url(\"".http_wrapper($img)."\")" .
 	    ($att ? (' ' . $att) : '') . ";'";
 }
-
-// Pour les formulaires en methode POST,
-// mettre les arguments a la fois en input-hidden et dans le champ action:
-// 1) on peut ainsi memoriser le signet comme si c'etait un GET
-// 2) ca suit http://en.wikipedia.org/wiki/Representational_State_Transfer
-
-// Attention: generer_url_ecrire peut rajouter des args
-
-// http://doc.spip.org/@generer_url_post_ecrire
-function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchange='') {
-	include_spip('inc/filtres');
-	$action = generer_url_ecrire($script, $args);
-	if ($name) $name = " name='$name'";
-	return "\n<form action='$action$ancre'$name method='post'$onchange>"
-	.form_hidden($action);
-}
-
 ?>

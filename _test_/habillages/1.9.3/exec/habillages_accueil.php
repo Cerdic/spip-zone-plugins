@@ -237,7 +237,9 @@ EOF;
 	$checked_extras = " checked='checked'";
 	}
 	
-	echo generer_url_post_ecrire("habillages_accueil");
+	// Compliquee cette fonction generer_post_ecrire. Le beau code a des limites.
+	// echo generer_post_ecrire('habillages_accueil','');
+	echo '<form exec="'.generer_url_action('habillages_accueil').'" method="post">';
 	debut_boite_info();
 	
 	echo "<table border='0' cellpadding='0' cellspacing='0' id='subtab' align='center'>";
@@ -265,15 +267,6 @@ EOF;
 	echo "</td></tr>";
 
 	echo "</table>";
-	# Avant d'enterrer le code mort ci-dessous, tuer ses potes plus haut...
-	//echo "<ul>";
-	//echo "<div class='".$classe."'>";
-	//echo "<input type='checkbox' name='".$gestion_themes."' value='".$gestion_themes."'$checked_themes$able_themes> "._T('habillages:themes_base_acc')."</div>";
-	//echo "<div class='".$classe."'>";
-	//echo "<input type='checkbox' name='".$gestion_extras."' value='".$gestion_extras."'$checked_extras$able_extras> "._T('habillages:extras_base_acc')."</div>";
-	//echo "</ul>";
-	//echo "<div class='used'>";
-	//echo "<input type='checkbox' name='".$gestion_logos."' value='".$gestion_logos."'$checked_logos disabled> "._T('habillages:logos_base_acc')."</div>";
 
 	fin_boite_info();
 	

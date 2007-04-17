@@ -105,7 +105,7 @@ EOF;
 
 	debut_cadre_relief();
 
-	echo generer_url_post_ecrire("habillages_images");
+	echo generer_post_ecrire("habillages_images");
 	global $couleur_foncee;
 	
 // 	$type_logos = array(

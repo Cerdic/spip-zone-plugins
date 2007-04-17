@@ -128,7 +128,7 @@ EOF;
 	# Message d'introduction.
 	echo _T('habillages:extras_intro')."<br /><br />";
 	
-	echo generer_url_post_ecrire("habillages_extras");
+	echo generer_post_ecrire("habillages_extras");
 	
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
