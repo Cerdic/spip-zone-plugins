@@ -19,31 +19,39 @@ if(!function_exists(ajax_retour)) {
 }
 
 function exec_tweak_input_dist() {
-tweak_log("Début : exec_tweak_input_dist() - Préparation du retour par Ajax");
-
-	lire_metas();
-	global $metas_vars;
-	$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
+tweak_log("Début : exec_tweak_input_dist() - Préparation du retour par Ajax (données transmises par GET)");
 
 	$script = _request('script');
 tweak_log(" -- script = $script");
 	if (!preg_match('/^\w+$/', $script)) { include_spip('minipres'); echo minipres(); exit;	}
+	$tweak = _request('tweak');
+tweak_log(" -- tweak = $tweak");
+/*
+tweak_log($_POST, '$_POST = ');
+tweak_log($_GET, '$_GET = ');
+lire_metas(); global $metas_vars; $metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
+tweak_log($metas_vars, '$metas_vars = ');
+*/
+	// ici on commence l'initialisation de tous les tweaks
+	global $tweaks, $metas_vars, $metas_tweaks;
+	include_spip('tweak_spip');
+	// remplir $tweaks (et aussi $tweak_variables qu'on n'utilise pas ici);
+	include_spip('tweak_spip_config');
+tweak_log(" -- exec_tweak_input_dist() - Appel de tweak_spip_config.php : nbtweaks = ".count($tweaks));
+	// charger les metas
+	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
+	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
-	$index = intval(_request('index'));
-	$variable = _request('variable');
-	$valeur = _request('valeur');
-	$label = urldecode(_request('label'));
-	$actif = _request('actif');
-	$final = $metas_vars[$variable];	
-tweak_log(" -- index = $index; $variable est devenu $final");
-tweak_log(" -- metas_vars = ".$GLOBALS['meta']['tweaks_variables']);
-	
-
-tweak_log(" -- appel de : charger_fonction('tweak_input', 'inc')");
+tweak_log(" -- appel de charger_fonction('tweak_input', 'inc') et de tweak_input($tweak, $script) :");
 	$tweak_input = charger_fonction('tweak_input', 'inc');
-	$description_tweak = $tweak_input($index, $variable, $final, $label, $actif, $script);
+	tweak_initialisation_d_un_tweak($tweak, $tweak_input);
+//tweak_log($tweaks, '$tweaks = ');
+//tweak_log(" -- appel de charger_fonction('tweak_input', 'inc') et de tweak_input($tweak, $script) :");
+//	$description_tweak = $tweak_input($tweak, $script);
 tweak_log("Fin   : exec_tweak_input_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration du tweak");	
+
 	include_spip('inc/texte');
-	ajax_retour(propre($description_tweak));
+//	ajax_retour('toto');
+	ajax_retour(propre($tweaks[$tweak]['description']));
 }
 ?>

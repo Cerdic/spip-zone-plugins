@@ -103,11 +103,10 @@ function tweakcheck(ischecked, index) {
  document.getElementById(tweak).className = classe;
  document.getElementById('tweak_'+tweak).value = test;
 
- for(ti=1;ti<=Tweaks[index][1];ti++) {
-  tj = index+ti;
-  var chaine=document.getElementById('tweak_'+tj+html).innerHTML;
-  if(html=='-input') chaine=chaine.replace(/HIDDENTWEAKVAR__/,'');
-  document.getElementById('tweak_'+tj+'-visible').innerHTML = chaine;
+ if (Tweaks[index][1]>0) {
+  var chaine=document.getElementById('tweak'+index+html).innerHTML;
+  if(html=='-input') chaine=chaine.replace(/HIDDENTWEAKVAR__/g,'');
+  document.getElementById('tweak'+index+'-visible').innerHTML = chaine;
  }
 }
 
@@ -242,7 +241,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		$basics = array(); $s = '';
 		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$i) {
 			$s .= ligne_tweak($tweak, $js) . "\n";
-			$basics[] = $tweak['basic'];
+			$basics[] = $tweak['index'];
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
 //		$ss .= $actif?" checked='checked'":"";
@@ -288,7 +287,7 @@ function ligne_tweak($tweak, &$js){
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('tweak:'.($actif?'':'in').'actif');
 	$nb_var = intval($tweak['nb_variables']);
-	$index = intval($tweak['basic']);
+	$index = intval($tweak['index']);
 
 	$s = "<form  style='margin:0 0 0 1em;'><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
@@ -308,7 +307,7 @@ function ligne_tweak($tweak, &$js){
 	$p .= $erreur_version?" disabled='disabled'":"";
 	$p .= " onclick='tweakchange.apply(this,[$index])'";
 	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
-	$js .= "Tweaks[$index] = new Array(\"$inc\", $nb_var);\n";
+	$js .= "Tweaks[$index] = Array(\"$inc\", $nb_var);\n";
 	$p .= bouton_block_invisible($tweak_id) . $tweak['nom'] . '</p>';
 
 	$s .= propre($p) . "</div></form>";
@@ -316,6 +315,7 @@ function ligne_tweak($tweak, &$js){
 	$p = debut_block_invisible($tweak_id);
 
 	$p .= "\n<div class='detailtweak'>";
+//	$p .= ajax_action_auteur('tweak_input', $index, 'tweak_spip_admin', "tweak={$tweak['id']}", "<div id='tweak_input-$index'>{$tweak['description']}</div>");
 	$p .= $tweak['description'];
 	if (isset($tweak['auteur']) && strlen($tweak['auteur'])) $p .= "<p>" . _T('auteur') .' '. ($tweak['auteur']) . "</p>";
 	$s .= propre($p) . '<hr style="margin:0"/>' . _T('tweak:tweak').' ';
@@ -324,6 +324,8 @@ function ligne_tweak($tweak, &$js){
 		$a = array();
 		if(isset($tweak['code:options'])) $a[] = "code options";
 		if(isset($tweak['code:fonction'])) $a[] = "code fonctions";
+		if(isset($tweak['code:js'])) $a[] = "code javascript";
+		if(isset($tweak['code:css'])) $a[] = "code styles";
 		if (find_in_path('tweaks/'.($temp=$tweak_id.'.php'))) $a[] = $temp;
 		if (find_in_path('tweaks/'.($temp=$tweak_id.'_options.php'))) $a[] = $temp;
 		if (find_in_path('tweaks/'.($temp=$tweak_id.'_fonctions.php'))) $a[] = $temp;

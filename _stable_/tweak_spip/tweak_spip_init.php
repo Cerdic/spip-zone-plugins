@@ -7,40 +7,36 @@
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions utilisees pendant  #
 #  l'execution du plugin                              #
+#  Seulement s'il y a lieu, tweak_spip_init.php       #
+#  va inclure tweak_spip.php                          #
 #-----------------------------------------------------#
 
-// retourne les css ou js utilises (en vue d'un insertion en head)
-function tweak_insert_header($type) {
-	include_spip('inc/filtres');
-	global $tweaks_metas_pipes;
-	$head = '';
-	if (isset($tweaks_metas_pipes[$type]))
-	  foreach	($tweaks_metas_pipes[$type] as $inc) {
-	  	$f = find_in_path('tweaks/'.$inc);
-	  	if ($type=='css')
-			$head .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />'."\n";
-	  	elseif ($type=='js')
-			$head .= "<script type=\"text/javascript\" src=\"$f\"></script>\n";
-
-	  }
-	return $head."\n";
+// si le tweak 'log_tweaks' est actif, on logue pour Tweak-Spip
+function tweak_log($variable, $prefixe='') {
+ if(!$GLOBALS['log_tweaks'] || !strlen($variable)) return;
+ if (!is_string($variable)) $variable = var_export($variable, true);
+ spip_log('TWEAKS. '.$prefixe.$variable);
 }
 
-// si le tweak 'log_tweaks' est activé, on logue pour Tweak-Spip
-function tweak_log($s) {
- if($GLOBALS['log_tweaks'] && strlen($s)) spip_log('TWEAKS. '.$s);
+function tweak_initialisation_d_un_tweak($tweak0, $tweak_input) {
+	global $tweaks, $metas_tweaks;
+	$tweak = &$tweaks[$tweak0];
+	if (!isset($tweak['categorie'])) $tweak['categorie'] = 'divers';
+	if (!isset($tweak['nom'])) $tweak['nom'] = _T('tweak:'.$tweak['id'].':nom');
+	if (!isset($tweak['description'])) $tweak['description'] = _T('tweak:'.$tweak['id'].':description');
+	$tweak['actif'] = isset($metas_tweaks[$tweak['id']])?$metas_tweaks[$tweak['id']]['actif']:0;
+	// Si Spip est trop ancien ou trop recent...
+	if ((isset($tweak['version-min']) && $GLOBALS['spip_version']<$tweak['version-min'])
+		|| (isset($tweak['version-max']) && $GLOBALS['spip_version']>$tweak['version-max']))
+			$tweak['actif'] = 0;
+	// au cas ou des variables sont presentes dans le code
+	$tweak['nb_variables'] = 0;
+	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
+	if (isset($tweak['code:options'])) $tweak['code:options'] = tweak_parse_code(tweak_parse_code_php($tweak['code:options']));
+	if (isset($tweak['code:fonctions'])) $tweak['code:fonctions'] = tweak_parse_code(tweak_parse_code_php($tweak['code:fonctions']));
+	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
+	$tweak['description'] = $tweak_input($tweak0, 'tweak_spip_admin');
 }
-
-// retourne le tableau $reg si le code propose est un code de boutons radio
-//  forme : choixX(choixY=traductionY|choixX=traductionX|etc)
-function tweak_is_radio($code, &$reg) {
-	return preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]*=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $code, $reg);
-}
-
-// obtenir la valeur d'un choix radio
-// forme de $s : choixX(choixY=traductionY|choixX=traductionX|etc)
-// resultat : choixX
-function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
 
 // lit ecrit les metas et initialise $tweaks_metas_pipes
 function tweak_initialisation($forcer=false) {
@@ -64,7 +60,7 @@ tweak_log("[#$rand]  -- lecture metas");
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$tweaks_metas_pipes = unserialize($GLOBALS['meta']['tweaks_pipelines']);
 tweak_log("[#$rand]  -- tweaks_metas_pipes = ".join(', ',array_keys($tweaks_metas_pipes)));
-tweak_log("[#$rand]"); $actifs=unserialize($GLOBALS['meta']['tweaks_actifs']);
+		$actifs=unserialize($GLOBALS['meta']['tweaks_actifs']);
 tweak_log("[#$rand]  -- ".(is_array($actifs)?count($actifs):0).' tweak(s) actif(s)'.(is_array($actifs)?" = ".join(', ',array_keys($actifs)):''));
 tweak_log("[#$rand] ".($forcer?"\$forcer = true":"tweak_initialisation($forcer) : Sortie car les metas sont présents"));
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
@@ -72,33 +68,33 @@ tweak_log("[#$rand] ".($forcer?"\$forcer = true":"tweak_initialisation($forcer) 
 	}
 
 	// ici on commence l'initialisation de tous les tweaks
-	global $tweaks, $metas_vars;
+	global $tweaks, $metas_vars, $metas_tweaks;
 	include_spip('tweak_spip');
+	// remplir $tweaks (et aussi $tweak_variables qu'on n'utilise pas ici);
 	include_spip('tweak_spip_config');
+	// charger les metas
 	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
-	// au cas ou un tweak a besoin d'input
+	// nettoyage des versions anterieures
+	unset($metas_vars['radio_set_options']);
+	unset($metas_vars['radio_type_urls2']);
+	unset($metas_vars['radio_filtrer_javascript2']);
+	unset($metas_vars['radio_suivi_forums']);
+	unset($metas_vars['desactive_cache']);
+	unset($metas_vars['target_blank']);
+	unset($metas_vars['']);
+//	unset($metas_vars['radio_type_urls3']);
+	// stocker les types de variables declarees
+	global $tweak_variables;
+	$metas_vars['_chaines'] = $tweak_variables['_chaines'];
+	$metas_vars['_nombres'] = $tweak_variables['_nombres'];
+	// au cas ou un tweak manipule des variables
 	$tweak_input = charger_fonction('tweak_input', 'inc');
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
-tweak_log("[#$rand]  -- foreach(\$tweaks) : tweak_parse_code, tweak_parse_description...");
-	foreach($temp = $tweaks as $i=>$tweak) {
-		if (!isset($tweak['id'])) { $tweaks[$i]['id']='erreur'; $tweaks[$i]['nom'] = _T('tweak:erreur_id');	}
-		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = 'divers';
-		if (!isset($tweak['nom'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':nom');
-		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
-		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
-		// Si Spip est trop ancien ou trop recent...
-		if ((isset($tweak['version-min']) && $GLOBALS['spip_version']<$tweak['version-min'])
-			|| (isset($tweak['version-max']) && $GLOBALS['spip_version']>$tweak['version-max']))
-				$tweaks[$i]['actif'] = 0;
-		// au cas ou des variables sont presentes dans le code
-		$tweaks[$i]['basic'] = $i*10; $tweaks[$i]['nb_variables'] = 0;
-		// ces 2 lignes peuvent initialiser des variables dans $metas_vars
-		if (isset($tweak['code:options'])) $tweaks[$i]['code:options'] = tweak_parse_code($tweak['code:options']);
-		if (isset($tweak['code:fonctions'])) $tweaks[$i]['code:fonctions'] = tweak_parse_code($tweak['code:fonctions']);
-		// cette ligne peut utiliser des variables dans $metas_vars
-		tweak_parse_description($i, $tweak_input);
-	}
+tweak_log("[#$rand]  -- foreach(\$tweaks) : tweak_initialisation_d_un_tweak()");
+
+	$id = 0;
+	foreach($temp = $tweaks as $tweak) $id = tweak_initialisation_d_un_tweak($tweak['id'], $tweak_input);
 	// installer $tweaks_metas_pipes
 	$tweaks_metas_pipes = array();
 tweak_log("[#$rand]  -- tweak_initialise_includes()...");
@@ -135,6 +131,7 @@ function tweak_echappe_balises($balises, $fonction, $texte){
 }
 
 // transforme un chemin d'image relatif en chemin html absolu
+// cette fonction est utilisable par les tweaks eux-meme durant l'execution du plugin
 function tweak_htmlpath($relative_path) {
 	$realpath = str_replace("\\", "/", realpath($relative_path));
 	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
@@ -166,9 +163,11 @@ function tweak_canonicalize($address) {
 //	- le code pour les options.php
 //	- le code pour les fonction.php
 //	- le code pour les pipelines utilises
+
+tweak_log("Début de tweak_spip_init.php");
+
 global $tweaks_metas_pipes;
 $tweaks_metas_pipes = array();
-
 // lancer l'initialisation
 tweak_initialisation();
 

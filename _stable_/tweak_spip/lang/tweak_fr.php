@@ -2,8 +2,9 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$temp_jQuery = $GLOBALS['spip_version_code']<1.92?
-	"\n\n{{Attention}} : ce tweak n&eacute;cessite le plugin {jQuery} pour fonctionner ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.":"";
+$temp_jQuery = $GLOBALS['spip_version_code']<1.92
+	?"\n\n{{Attention}} : ce tweak n&eacute;cessite le plugin {jQuery} pour fonctionner ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2."
+	:"\n\nCe tweak utilise la librairie {jQuery}.";
 $temp_couleurs = '<span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert olive</span>, <span style="background-color:navy;">navy/bleu marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu violet</span>, <span style="background-color:chocolate;">chocolate/brun clair</span>, <span style="background-color:cornsilk;">cornsilk/rose clair</span>, <span style="background-color:darkgreen;">darkgreen/vert fonce</span>, <span style="background-color:darkorange;">darkorange/orange fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune paille</span>, <span style="background-color:yellow;">yellow/jaune</span>';
 $temp_reset = parametre_url(self(),'reset','oui');
 
@@ -21,7 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inactif' => 'Tweak inactif',
 	'actifs' => 'Tweaks actifs :',
 	'activer_tweak' => 'Activer le tweak',
-	'validez_page' => 'Validez cette page pour modifier cette valeur',
+	'validez_page' => 'Validez cette page pour acc&eacute;der aux modifications.',
+	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
+	'variable_vide' => '(Vide)',
 	'tweak' => 'Tweak :',
 	'tweaks_liste' => 'Liste des tweaks',
 	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les tweaks un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette ou avec d'autres plugin.",
@@ -33,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // --------------------
 
 	'admin' => "1. Administration",
-	'typo-corr' => "2. Corrections typographiques",
+	'typo-corr' => "2. Am&eacute;liorations typographiques",
 	'typo-racc' => "3. Raccourcis typographiques",
 	'public' => "4. Affichage public",
 	'spip' => "5. Balises, filtres, crit&egrave;res",
@@ -42,8 +45,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // Chaines de langue concernant tous les tweaks configures dans tweak_spip_config.php
 // ----------------------------------------------------------------------------------
 
-	'desactive_cache:nom' => 'D&eacute;sactive le cache',
-	'desactive_cache:description' => 'Inhibition du cache de SPIP pour le d&eacute;veloppement du site.',
+	'SPIP_cache:nom' => 'SPIP et le cache...',
+	'SPIP_cache:description' => definir_puce()." Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.<br />{{D&eacute;sactiver le cache}} : %radio_desactive_cache%\n\n"
+		. definir_puce()." Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique au cache.<br />{{Valeur du quota}} : %quota_cache% Mo",
 
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
 	'supprimer_numero:description' => "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Attention, cette fonctionnalit&eacute; ne sera pas prise en compte si votre squelette utilise les balises &eacute;toil&eacute;es : <code>#TITRE*</code> ou <code>#NOM*</code>",
@@ -118,11 +122,8 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article1561]
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 	'smileys:aide' => 'Smileys : @liste@',
 
-	'quota_cache:nom' => 'Quota du cache',
-	'quota_cache:description' => "Modifie le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br />Valeur (en Mo) : %quota_cache%",
-
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br />Dossier(s) &agrave; utiliser : %dossier_squelettes%",
+	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points &#8220;:&#8221;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br />Dossier(s) &agrave; utiliser : %dossier_squelettes%",
 
 	'chatons:nom' => 'Chatons',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
@@ -133,7 +134,7 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 
 	'set_options:nom' => "Type d'interface priv&eacute;e",
-	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options%",
+	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options3%",
 
 	'type_urls:nom' => "Format des URLs",
 	'type_urls:description' => "Spip poss&egrave;de plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :
@@ -146,7 +147,7 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 
 Pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site Spip sous
   le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier.
-  Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de Spip.<br />Votre choix : %radio_type_urls2%",
+  Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de Spip.<br />Votre choix : %radio_type_urls3%",
 
 	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak Spip',
 	'log_tweaks:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak Spip' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
@@ -160,13 +161,13 @@ Pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &qu
 - <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
 - <i>toujours</i> : le javascript est accept&eacute; partout.
 
-Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <strong>toujours</strong> s&eacute;curis&eacute;e.<br />Votre choix : %radio_filtrer_javascript2%',
+Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <strong>toujours</strong> s&eacute;curis&eacute;e.<br />Votre choix : %radio_filtrer_javascript3%',
 	'js_jamais' => 'Jamais',
 	'js_defaut' => 'D&eacute;faut',
 	'js_toujours' => 'Toujours',
 
 	'suivi_forums:nom' => 'Suivi des forums',
-	'suivi_forums:description' => 'Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.<br />Votre choix : %radio_suivi_forums%',
+	'suivi_forums:description' => 'Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.<br />Votre choix : %radio_suivi_forums3%',
 	'sf_tous' => 'Tous',
 	'sf_defaut' => 'Par d&eacute;faut',
 	'sf_amont' => 'En amont',
@@ -177,17 +178,10 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
 	'f_jQuery:description' => "Emp&ecirc;che l'installation de jQuery dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. Spip l'utilise dans sa partie priv&eacute;e.",
 
-	'target_blank:nom' => 'Liens externes',
-	'target_blank:description' => "Permet aux liens externes au site de s'ouvrir dans une nouvelle fen&ecirc;tre ext&eacute;rieure.\n\nActiver ce tweak revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out} et/ou {spip_url}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
-		. $temp_jQuery,
-
-	'url_glossaire_externe:nom' => 'Lien vers le glossaire',
-	'url_glossaire_externe:description' => "Pr&eacute;cise l&rsquo;adresse utilis&eacute;e pour les raccourcis automatiques renvoyant vers un glossaire (syntaxe&nbsp;:&nbsp;<code>[?mot]</code>). Par d&eacute;faut (si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. Lien de test : [?SPIP]<br />Valeur : %url_glossaire_externe%",
-
 	'SPIP_liens:nom' => 'SPIP et les liens...',
-	'SPIP_liens:description' => definir_puce() . " {{Liens externes}} : permet aux liens externes au site de s'ouvrir dans une nouvelle fen&ecirc;tre ext&eacute;rieure.\n\nActiver ce tweak revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out} et/ou {spip_url}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
-		. $temp_jQuery . " Lien de test : [?SPIP]<br />Valeur : %radio_target_blank%\n\n"
-		. definir_puce() . " {{Lien vers le glossaire}} : pr&eacute;cise l&rsquo;adresse utilis&eacute;e pour les raccourcis automatiques renvoyant vers un glossaire (syntaxe&nbsp;:&nbsp;<code>[?mot]</code>). Par d&eacute;faut (si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. Lien de test : [?SPIP]<br />Valeur : %url_glossaire_externe%",
+	'SPIP_liens:description' => definir_puce() . " Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
+		. $temp_jQuery . /*"<br />Lien de test : [Google->http://www.google.com]".*/ "<br />{{Utiliser des liens externes}} : %radio_target_blank3%\n\n"
+		. definir_puce() . " Spip permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP]<br />{{Lien vers le glossaire}} : %url_glossaire_externe%",
 
 	'forum_lgrmaxi:nom' => 'Taille des forums',
 	'forum_lgrmaxi:description' => "Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si ce tweak est activ&eacute;, un message d'erreur s'affichera lorsque quelqu'un voudra poster un message  d'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;amoins qu'aucune limite ne s'applique.<br />Valeur (en caract&egrave;res) : %forum_lgrmaxi%",
@@ -207,7 +201,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'page_fin' => 'Derni&egrave;re page',
 
 	'sommaire:nom' => 'Sommaire en d&eacute;but d\'article',
-	'sommaire:description' => "Construit systématiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourcis SPIP <code>{{{Un autre titre}}}</code>. Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).<br />Attention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {D&eacute;coupe un article en pages}",
+	'sommaire:description' => "Construit systématiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourci SPIP <code>{{{Un autre titre}}}</code>. Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).<br />Attention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {D&eacute;coupe un article en pages}",
 	'sommaire:aide' => 'Un article sans sommaire&nbsp;: @interdit@',
 	'sommaire' => 'Sommaire',
 

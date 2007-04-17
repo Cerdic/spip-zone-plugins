@@ -30,13 +30,13 @@ function tweak_spip_exec_init($flux){
 }
 */
 function tweak_spip_header_prive($flux){
-	$flux .= "\n<!-- Debut header TWEAKS -->\n"
-		. tweak_insert_header('css')
-		. tweak_insert_header('js');
 	global $tweaks_metas_pipes;
 	if (isset($tweaks_metas_pipes['header_prive']))
 		eval($tweaks_metas_pipes['header_prive']);
-	return $flux."\n<!-- Fin header TWEAKS -->\n\n";
+	if (isset($tweaks_metas_pipes['header']))
+		$flux .= "\n<!-- Debut header Tweak-SPIP -->\n" . join("\n", $tweaks_metas_pipes['header']) . "\n<!-- Fin header Tweak-SPIP -->\n\n";
+		else $flux .= "\n<!-- Rien pour Tweak-SPIP -->\n";
+	return $flux;
 }
 
 function tweak_spip_install($action){

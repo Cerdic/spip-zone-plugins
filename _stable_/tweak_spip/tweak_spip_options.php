@@ -1,4 +1,5 @@
 <?php
+//include_spip('public/interfaces');global $table_des_traitements;echo'options:'; var_dump($table_des_traitements['TEXTE']);
 // fichier charge a chaque hit
 	global $tweaks_metas_pipes;
 

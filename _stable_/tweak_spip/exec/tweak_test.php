@@ -48,6 +48,15 @@ tweak_log("Début : exec_tweak_test()");
 			'PHP_SELF'=>getenv('PHP_SELF'),
 		);
 	tweak_array($a, 'getenv()');
+	
+	// lecture des variables stockees en meta
+	include_spip('inc/meta');
+	lire_metas();
+	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
+	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
+	tweak_array($metas_tweaks, 'Tweaks actifs : $metas_tweaks[]');
+	tweak_array($metas_vars, 'Contenu des variables : $metas_vars[]');
+
 
 	// test de tweak_htmlpath()
 	$relative_path = dirname(find_in_path('img/smileys/test'));

@@ -9,13 +9,13 @@ function tweak_spip_affichage_final($flux){
 }
 
 function tweak_spip_insert_head($flux){
-	$flux .= "\n<!-- Debut header TWEAKS -->\n"
-		. tweak_insert_header('css')
-		. tweak_insert_header('js');
 	global $tweaks_metas_pipes;
 	if (isset($tweaks_metas_pipes['insert_head']))
 		eval($tweaks_metas_pipes['insert_head']);
-	return $flux."\n<!-- Fin header TWEAKS -->\n\n";
+	if (isset($tweaks_metas_pipes['header']))
+		$flux .=  "\n<!-- Debut header Tweak-SPIP -->\n" . join("\n", $tweaks_metas_pipes['header']) . "<!-- Fin header Tweak-SPIP -->\n\n";
+		else $flux .=  "\n<!-- Rien pour Tweak-SPIP -->\n";
+	return $flux;
 }
 /*
 function tweak_spip_rendu_evenement($flux){

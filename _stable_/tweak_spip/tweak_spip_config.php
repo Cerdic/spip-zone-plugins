@@ -17,6 +17,7 @@ add_tweak( array(
 	'categorie' => 'admin',
 ));
 */
+/*
 add_tweak( array(
 	'id' => 'desactive_cache',
 	'code:options' => "\$_SERVER['REQUEST_METHOD']='POST';",
@@ -24,42 +25,68 @@ add_tweak( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on demande a Tweak Spip une case input. La variable est : quota_cache
-	// le /d demande a Tweak Spip de traiter la variable comme un nombre.
-	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS["quota_cache"]
-	$var = '%%quota_cache/d/$GLOBALS["quota_cache"]%%';
 add_tweak( array(
 	'id' => 'quota_cache',
-	'code:options' => "\$GLOBALS['quota_cache']=$var;",
+	'code:options' => "%%quota_cache%%",
+	'categorie' => 'admin',
+));
+*/
+add_variable( array(
+	'nom' => 'radio_desactive_cache',
+	'format' => 'nombre',
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 0,
+	// si la variable est egale a 1, on code...
+	'code:%s' => "\$_SERVER['REQUEST_METHOD']='POST';",
+));
+	// ici on demande a Tweak Spip une case input. La variable est : quota_cache
+	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['quota_cache']
+add_variable( array(
+	'nom' => 'quota_cache',
+	'format' => 'nombre',
+	'defaut' => "\$GLOBALS['quota_cache']",
+	'code' => "\$GLOBALS['quota_cache']=%s;",
+));
+add_tweak( array(
+	'id' => 'SPIP_cache',
+	'code:options' => "%%radio_desactive_cache%%\n%%quota_cache%%",
 	'categorie' => 'admin',
 ));
 
 	// ici on demande a Tweak Spip une case input. La variable est : dossier_squelettes
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS["dossier_squelettes"]
-	$var = '%%dossier_squelettes/s/$GLOBALS["dossier_squelettes"]%%';
+	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['dossier_squelettes']
+add_variable( array(
+	'nom' => 'dossier_squelettes',
+	'format' => 'chaine',
+	'defaut' => "\$GLOBALS['dossier_squelettes']",
+	'code' => "\$GLOBALS['dossier_squelettes']=%s;",
+));
 add_tweak( array(
 	'id' => 'dossier_squelettes',
-	'code:options' => "\$GLOBALS['dossier_squelettes']=$var;",
+	'code:options' => "%%dossier_squelettes%%",
 	'categorie' => 'admin',
 ));
 
 	// ici on demande a Tweak Spip une case input. La variable est : cookie_prefix
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS["cookie_prefix"]
-	$var = '%%cookie_prefix/s/$GLOBALS["cookie_prefix"]%%';
+	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['cookie_prefix']
+add_variable( array(
+	'nom' => 'cookie_prefix',
+	'format' => 'chaine',
+	'defaut' => "\$GLOBALS['cookie_prefix']",
+	'code' => "\$GLOBALS['cookie_prefix']=%s;",
+));
 add_tweak( array(
 	'id' => 'cookie_prefix',
-	'code:options' => "\$GLOBALS['cookie_prefix']=$var;",
+	'code:options' => "%%cookie_prefix%%",
 	'categorie' => 'admin',
 ));
 
 add_tweak( array(
 	'id' => 'supprimer_numero',
 	// inserer : $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';
-	'traitement:TITRE:pre_typo' => 'supprimer_numero',
+	'traitement:TITRE:post_typo' => 'supprimer_numero',
 	// inserer : $table_des_traitements['NOM'][]= 'typo(supprimer_numero(%s))';
-	'traitement:NOM:pre_typo' => 'supprimer_numero',
+	'traitement:NOM:post_typo' => 'supprimer_numero',
 	'categorie' => 'public',
 ));
 
@@ -83,27 +110,32 @@ add_tweak( array(
 ));
 
 	// ici on demande a Tweak Spip une case input. La variable est : suite_introduction
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// a la toute premiere activation du tweak, la valeur sera : "nbsp;(...)"
-	$var = '%%suite_introduction/s/"&nbsp;(...)"%%';
+	// a la toute premiere activation du tweak, la valeur sera : '&nbsp;(...)'
+add_variable( array(
+	'nom' => 'suite_introduction',
+	'format' => 'chaine',
+	'defaut' => '&nbsp;(...)',
+	'code' => "define('_INTRODUCTION_SUITE', %s);",
+));
 add_tweak( array(
 	'id' => 'suite_introduction',
-	'code:options' => "define('_INTRODUCTION_SUITE', $var);",
+	'code:options' => "%%suite_introduction%%",
 	'categorie' => 'spip',
 	'version-min' => 1.93,
 ));
 
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
-	// la variable Spip est : set_options
-	// pour les boutons radio, il faut utiliser une deuxieme variable avec le prefixe radio_ : radio_set_options
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// le avancees( signifie que avancees (traduit par : _T('icone_interface_complet')) sera coche par defaut
-	$var = '%%radio_set_options/s/"avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)"%%';
+add_variable( array(
+	'nom' => 'radio_set_options3',
+	'format' => 'nombre',
+	'radio' => array('basiques' => 'icone_interface_simple', 'avancees' => 'icone_interface_complet'),
+	'defaut' => 'avancees',
+	'code' => "\$GLOBALS['set_options']=%s;",
+));
 add_tweak( array(
 	'id' => 'set_options',
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
-	'code:options' => "\$GLOBALS['radio_set_options']=\$foo=$var;
-\$_GET['set_options'] = \$GLOBALS['set_options'] = tweak_choix(\$foo);",
+	'code:options' => "%%radio_set_options3%%",
 	'categorie' => 'admin',
 	// pipeline pour retirer en javascript le bouton de controle de l'interface
 	'pipeline:header_prive' => 'set_options_header_prive',
@@ -111,48 +143,63 @@ add_tweak( array(
 	'version-max' => 1.93,
 ));
 
-	// ici on demande a Tweak Spip six boutons radio : _T('page'), _T('html'), _T('propres'), _T('propres2'), _T('standard'),  et _T('qs')
-	// la variable Spip est : type_urls
-	// pour les boutons radio, il faut utiliser une deuxieme variable avec le prefixe radio_ : radio_type_urls2
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// le page( signifie que page (traduit par : _T('page')) sera coche par defaut
-	$var = '%%radio_type_urls2/s/"page(page=page|html=html|propres=propres|propres2=propres2|standard=standard|propres-qs=propres-qs)"%%';
+	// ici on demande a Tweak Spip six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
+add_variable( array(
+	'nom' => 'radio_type_urls3',
+	'format' => 'chaine',
+	'radio' => array('page' => 'page', 'html' => 'html', 'propres' => 'propres', 'propres2' => 'propres2', 'standard' => 'standard', 'propres-qs' => 'propres-qs' ),
+	'defaut' => 'page',
+	'code' => "\$GLOBALS['type_urls']=%s;",
+));
 add_tweak( array(
 	'id' => 'type_urls',
-	'code:options' => "\$GLOBALS['radio_type_urls2']=\$foo=$var;\n\$GLOBALS['type_urls'] = tweak_choix(\$foo);",
+	'code:options' => "%%radio_type_urls3%%",
 	'categorie' => 'admin',
 ));
 
 	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:js_jamais'), _T('tweak:js_defaut') et _T('tweak:js_toujours')
-	// la variable Spip est : filtrer_javascript
-	// pour les boutons radio, il faut utiliser une deuxieme variable avec le prefixe radio_ : radio_filtrer_javascript2
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// le 0( signifie que 'par defaut' (traduit par : _T('tweak:js_defaut')) sera coche par defaut
-	$var = '%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%';
+add_variable( array(
+	'nom' => 'radio_filtrer_javascript3',
+	'format' => 'nombre',
+	'radio' => array(-1 => 'tweak:js_jamais', 0 => 'tweak:js_defaut', 1 => 'tweak:js_toujours'),
+	'defaut' => 0,
+	// si la variable est non nulle, on code...
+	'code:%s!=0' => "\$GLOBALS['filtrer_javascript']=%s;",
+));
 add_tweak( array(
 	'id' => 'filtrer_javascript',
-	'code:options' => "\$GLOBALS['radio_filtrer_javascript2']=\$foo=$var;\n\$GLOBALS['filtrer_javascript']=tweak_choix(\$foo);",
+	'code:options' => "%%radio_filtrer_javascript3%%",
 	'categorie' => 'admin',
 	'version-min' => 1.92,
 ));
 
 	// ici on demande a Tweak Spip une case input. La variable est : forum_lgrmaxi
-	// le /d demande a Tweak Spip de traiter la variable comme un nombre.
 	// a la toute premiere activation du tweak, la valeur sera : 0 (aucune limite)
-	$var = '%%forum_lgrmaxi/d/0%%';
+add_variable( array(
+	'nom' => 'forum_lgrmaxi',
+	'format' => 'nombre',
+	'defaut' => 0,
+	'code:%s' => "define('_FORUM_LONGUEUR_MAXI', %s);",
+));
 add_tweak( array(
 	'id' => 'forum_lgrmaxi',
-	'code:options' => "if(\$foo=intval($var)) define('_FORUM_LONGUEUR_MAXI', \$foo);",
+	'code:options' => "%%forum_lgrmaxi%%",
 	'categorie' => 'admin',
 	'version-min' => 1.92,
 ));
 
 	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:sf_defaut'), _T('tweak:sf_amont') et _T('tweak:sf_tous')
-	$var = '%%radio_suivi_forums/s/"(=tweak:sf_defaut|_SUIVI_FORUMS_REPONSES=tweak:sf_amont|_SUIVI_FORUM_THREAD=tweak:sf_tous)"%%';
+add_variable( array(
+	'nom' => 'radio_suivi_forums3',
+	'format' => 'chaine',
+	'radio' => array('defaut' => 'tweak:sf_defaut', '_SUIVI_FORUMS_REPONSES' => 'tweak:sf_amont', '_SUIVI_FORUM_THREAD' => 'tweak:sf_tous'),
+	'defaut' => 'defaut',
+	// si la variable est différente de 'defaut' alors on codera le define
+	'code:%s!=="defaut"' => "define(%s, true);",
+));
 add_tweak( array(
 	'id' => 'suivi_forums',
-	'code:options' => "\$GLOBALS['radio_suivi_forums']=\$foo=$var;
-if (strlen(\$suivi=tweak_choix(\$foo))) define(\$suivi, true);",
+	'code:options' => "%%radio_suivi_forums3%%",
 	'categorie' => 'admin',
 	'version-min' => 1.92,
 ));
@@ -164,7 +211,7 @@ add_tweak( array(
 
 add_tweak( array (
 	'id' => 'xml',
-	'code:options' => "\$GLOBALS['xhtml'] = 'sax';",
+	'code:options' => "\$GLOBALS['xhtml']='sax';",
 	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
 	'categorie' =>'public',
 	'version-min' => '1.92',
@@ -179,12 +226,15 @@ add_tweak( array (
 ));
 
 	// ici on demande a Tweak Spip une case input. La variable est : style_p
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// a la toute premiere activation du tweak, la valeur sera : "spip"
-	$var = '%%style_p/s/"spip"%%';
+add_variable( array(
+	'nom' => 'style_p',
+	'format' => 'chaine',
+	'defaut' => 'spip',
+	'code:strlen(%s)' => ' class=%s',
+));
 add_tweak( array(
 	'id' => 'style_p',
-	'code:options' => "\$GLOBALS['class_spip']=strlen(\$foo=$var)?' class=\"'.\$foo.'\"':'';",
+	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';",
 	'categorie' => 'public',
 	'version-min' => 1.93,
 ));
@@ -237,45 +287,25 @@ add_tweak( array(
 	'pipeline:affichage_final' => 'InhibeFlash_affichage_final',
 ));
 
-add_tweak( array (
-	'id' => 'target_blank',
-	'categorie' =>'public',
-	// le fichier target_blank.js est automatiquement insere si le tweak est actif
-));
-
-	// ici on demande a Tweak Spip une case input. La variable est : url_glossaire_externe
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS["url_glossaire_externe"]
-	$var = '%%url_glossaire_externe/s/$GLOBALS["url_glossaire_externe"]%%';
-add_tweak( array(
-	'id' => 'url_glossaire_externe',
-	'code:options' => "if(strlen(\$foo=$var)) \$GLOBALS['url_glossaire_externe']=\$foo;",
-	'categorie' => 'public',
-));
-/*
-	// ici on demande a Tweak Spip une case input. La variable est : url_glossaire_externe
-	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS["url_glossaire_externe"]
-	$var = '%%url_glossaire_externe/s/$GLOBALS["url_glossaire_externe"]%%';
 add_variable( array(
-	'nom' => 'target_blank',
-	'type' => 'nombre',
+	'nom' => 'radio_target_blank3',
+	'format' => 'nombre',
+	'radio' => array(0 => 'item_oui', 1 => 'item_non'),
 	'defaut' => 0,
-	'code' => '$GLOBALS["tweak_target_blank"]=%s',
+	'code' => '$GLOBALS["tweak_target_blank"]=%s;',
 ));
 add_variable( array(
 	'nom' => 'url_glossaire_externe',
-	'type' => 'chaine',
+	'format' => 'chaine',
 	'defaut' => '$GLOBALS["url_glossaire_externe"]',
-	'code:strlen(%s)' => '$GLOBALS["url_glossaire_externe"]=%s',
+	'code:strlen(%s)' => '$GLOBALS["url_glossaire_externe"]=%s;',
 ));
 add_tweak( array(
 	'id' => 'SPIP_liens',
-	'code:options' => "%%url_glossaire_externe%%\n%%target_blank%%",
-	'code:js' => '$(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); });',
+	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe%%",
+	'code:js' => 'if (%%radio_target_blank%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 	'categorie' => 'public',
 ));
-*/
 
 
 //-----------------------------------------------------------------------------//
@@ -350,11 +380,14 @@ add_tweak( array(
 // http://www.spip-contrib.net/Citations
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
 // http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
-// Un Sommaire. voir :
+// voir :
 //		$GLOBALS['debut_intertitre'] = "<h3 class='mon_style_h3'>";
 //		$GLOBALS['fin_intertitre'] = "</h3>";
 // http://www.spip-contrib.net/Generation-automatique-de
 // Les sessions
+// colorations du code
+// boutonstexte
 
-tweak_log("tweak_spip_config");
+tweak_log("Fin de tweak_spip_config.php");
+//global $tweak_variables; tweak_log($tweak_variables, 'tweak_variables :');
 ?>
