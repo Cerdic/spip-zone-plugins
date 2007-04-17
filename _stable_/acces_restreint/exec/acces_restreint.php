@@ -83,8 +83,7 @@ function exec_acces_restreint(){
 		while ($row = spip_fetch_array($result)){
 			$vals = array();
 			$id_zone = $row['id_zone'];
-			$nb_rub_pub = count(AccesRestreint_liste_contenu_zone_rub($id_zone, TRUE));
-			$nb_rub_priv = count(AccesRestreint_liste_contenu_zone_rub($id_zone, FALSE));
+			$nb_rub = count(AccesRestreint_liste_contenu_zone_rub($id_zone));
 			$nb_aut = count(AccesRestreint_liste_contenu_zone_auteur($id_zone));
 			
 			$s = $row['id_zone'];
@@ -99,17 +98,19 @@ function exec_acces_restreint(){
 			$s = propre($row['descriptif']);
 			$vals[] = $s;
 			
-			$s = "";
-			if ($nb_rub_pub>0) $s .= "$nb_rub_pub "._T('accesrestreint:rubriques');
+			$s = ($row['publique']=='oui')?"<img src='"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/restreint-16.png' width='16' height='16' />":'';
+			$vals[] = $s;
+			
+			$s = ($row['privee']=='oui')?"<img src='"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/restreint-16.png' width='16' height='16' />":'';
 			$vals[] = $s;
 			
 			$s = "";
-			if ($nb_rub_priv>0) $s .= "$nb_rub_priv "._T('accesrestreint:rubriques');
-			$vals[] = $s;
-			
-			$s = "";
-			if ($nb_aut>0) $s .= "$nb_aut "._T('accesrestreint:auteurs');
-
+			if ($nb_rub>0){
+				$s .= "$nb_rub "._T('accesrestreint:rubriques');
+				if ($nb_aut>0) $s.=", ";
+			}
+			if ($nb_aut>0)
+				$s .= "$nb_aut "._T('accesrestreint:auteurs');
 			$vals[] = $s;
 			
 			$s="";
