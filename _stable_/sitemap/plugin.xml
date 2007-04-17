@@ -20,7 +20,7 @@ _ &copy; 2006 - Licence GPL
 _ Le contenu le plus proche de la racine est prioritaire
 _ La pr&#233;sence des squelettes article, br&#232;ve... est test&#233;e pour chaque type d'objet
 
-Usage : d&#233;clarer l'[URL du SiteMap->../spip.php?page=sitemap] dans Google (utiliser /?page=sitemap directement ne fonctionnera pas).
+Usage : d&#233;clarer l'[URL du SiteMap->../spip.php?page=sitemap] dans Google (utiliser /?page=sitemap directement ne fonctionnera pas). On peut aussi d&#233;clarer l'URL du SiteMap dans un fichier robots.txt contenant "Sitemap: http://www.example.com/spip.php?page=sitemap".
 	[it]
 	Questo plugin crea dinamicamente una [sitemap per Google->http://www.google.com/webmasters/sitemaps/]
 _ Il contenuto pi&ugrave; vicino alla radice del sito ha una priorit&#224; pi&ugrave; alta
