@@ -294,8 +294,8 @@
 		
 				$vals[] = "";
 		
-				// Un admin restreint ne peut agir que sur les zones auxquelles il appartient (excepté lui-même)
-				if($flag_editable && ($connect_toutes_rubriques || (AccesRestreint_test_appartenance_zone_auteur($id_zone, $connect_id_auteur) && $connect_id_auteur!=$id_auteur))){
+				// Un admin restreint ne peut agir que sur les zones auxquelles il appartient (excepté sur les admins) et excepté lui-même pour éviter de se retirer d'une zone par erreur
+				if($flag_editable && ($connect_toutes_rubriques || (AccesRestreint_test_appartenance_zone_auteur($id_zone, $connect_id_auteur) && autoriser('modifier', 'auteur', $id_auteur ) && $id_connect_auteur!=$id_auteur))){
 				  $s = "<a href='" . generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=$id_zone#zones") . "'>"._T('accesrestreint:info_retirer_zone')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</a>";
 					$vals[] = $s;
 				}
