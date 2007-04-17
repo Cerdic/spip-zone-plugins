@@ -69,6 +69,11 @@
 		$boucle->modificateur['crit_filtre'] = 1;
 		//$boucle->where[]= array("'='", "'$boucle->id_table." . "id_parent'", 0);
 	}
+	
+	function boucle_DONNEES_dist($id_boucle, &$boucles){
+		if (function_exists($f='boucle_FORMS_DONNEES') OR function_exists($f='boucle_FORMS_DONNEES_dist'))
+			return $f($id_boucle, &$boucles);
+	}
 	//
 	// <BOUCLE(FORMS_DONNEES)>
 	//
@@ -105,13 +110,13 @@
 		if ((\$r = _request(\$row['champ']))!==NULL){
 			if (is_array(\$r)){
 				if (strlen(implode("",\$r))) 
-					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
+					\$filtre .= " AND (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
 			}
 			elseif (strlen(\$r))
-				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r).")";
+				\$filtre .= " AND (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r).")";
 		}
 	}
-	if (strlen(\$filtre)) \$filtre = substr(\$filtre,4);
+	if (strlen(\$filtre)) \$filtre = substr(\$filtre,5);
 	else \$filtre="1=1";
 code;
 			$boucle->where[] = '$filtre';
@@ -162,6 +167,10 @@ code;
 		return calculer_boucle($id_boucle, $boucles); 
 	}
 
+	function boucle_TABLE_CHAMPS_dist($id_boucle, &$boucles){
+		if (function_exists($f='boucle_FORMS_CHAMPS') OR function_exists($f='boucle_FORMS_CHAMPS_dist'))
+			return $f($id_boucle, &$boucles);
+	}
 	//
 	// <BOUCLE(FORMS_CHAMPS)>
 	//
@@ -177,6 +186,10 @@ code;
 		return calculer_boucle($id_boucle, $boucles); 
 	}
 	
+	function boucle_DONNEE_CHAMPS_dist($id_boucle, &$boucles){
+		if (function_exists($f='boucle_FORMS_DONNEES_CHAMPS') OR function_exists($f='boucle_FORMS_DONNEES_CHAMPS_dist'))
+			return $f($id_boucle, &$boucles);
+	}
 	//
 	// <BOUCLE(FORMS_DONNEES_CHAMPS)>
 	//
