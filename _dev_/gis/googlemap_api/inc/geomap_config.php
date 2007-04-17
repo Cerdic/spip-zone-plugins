@@ -65,7 +65,7 @@ function inc_geomap_config(){
 		$out .= "</div>";
 
 		$out .= '</form>';
-		$out .= fin_cadre();
+		$out .= fin_cadre('r');
 		return $out;
 }
 
