@@ -128,7 +128,7 @@ code;
 			$boucle->where[] = '$filtre';
 			$boucle->from["dc"] =  "spip_forms_donnees_champs";
 			$boucle->where[] =  array("'='", "'dc.id_donnee'", "'$id_table.id_donnee'");
-			$boucle->having[] =  '('.$boucle->modificateur['crit_filtre'].'!="OU")?"res=$res":"1=1"';
+			$boucle->having[] =  '('.$boucle->modificateur['crit_filtre'].'!="OU" AND $res>0)?"res=$res":"1=1"';
 			$boucle->group[] = $boucle->id_table . '.id_donnee'; 
 		}
 		
