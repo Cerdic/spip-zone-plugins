@@ -17,7 +17,7 @@ function geoforms_liste_projections(){
 // pouvoir traiter des systemes de differentes natures
 function geoforms_systeme_vers_lat_lont($lat,$long,$systeme){
 	if (isset($GLOBALS['projections_lambert'][$systeme]))
-		return geoforms_lat_long_vers_lambert($lat,$long,$systeme);
+		return geoforms_lambert_vers_lat_long($lat,$long,$systeme);
 	return array($lat,$long);
 }
 
