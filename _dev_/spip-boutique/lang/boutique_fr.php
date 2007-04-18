@@ -15,9 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // d
 'dans_la_categorie'=>'Dans la cat&eacute;gorie :',
 'descriptif_de_la_categorie'=>'Descriptif de la cat&eacute;gorie',
+'descriptif_du_produit'=>'Descriptif du produit',
 
 // e
 'editer_une_categorie'=>'Edition d\'une cat&eacute;gorie',
+'eur'=>'&euro;',
 
 // g
 'gerer_les_categories'=>'Gestion des cat&eacute;gories',
@@ -37,14 +39,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // m
 'modifier_la_categorie'=>'Modifier la cat&eacute;gorie',
 
+// p
+'pour_cent'=>'%',
+'prix_achat'=>'Prix d\'achat',
+'prix_vente'=>'Prix de vente',
+
 // r
 'racine_de_la_boutique'=>'Racine de la boutique',
 'retour'=>'Retour',
 
 // t
 'texte_de_la_categorie'=>'Texte&nbsp;:',
+'texte_du_produit'=>'Texte',
 'titre_de_la_categorie'=>'Titre de la cat&eacute;gorie :',
-'tva'=>'Tva'
+'titre_du_produit'=>'Titre du produit',
+'tva'=>'Tva',
+
+// u
+'url_de_reference'=>'Url de r&eacute;f&eacute;rence',
 
 );
 ?>

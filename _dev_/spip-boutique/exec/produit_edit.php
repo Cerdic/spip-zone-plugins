@@ -1,5 +1,6 @@
 <?php
-include_spip("inc/boutique");
+include_spip("inc/produit");
+
 function exec_produit_edit(){
 		global $connect_statut, $connect_id_auteur;
 	echo debut_page(_T('boutique:editer_un_produit'));
@@ -28,18 +29,22 @@ function exec_produit_edit(){
 		echo '<input type="hidden" name="action" value="sauver_produit" />';
 		echo '<input type="hidden" name="id_produit" value="'._request('id_produit').'" />';
 		echo '<input type="hidden" name="redirect" value="'.lire_meta('adresse_site').'/ecrire/?exec=categories" />';
-		echo '<b>'._T('boutique:titre_de_la_categorie').'</b>';
+		echo '<b>'._T('boutique:titre_du_produit').'</b>';
 		echo '<input style="width: 480px;" class="formo" name="titre" value="'.$produit['titre'].'" size="40" type="text"><br />';
 		
-		echo '<table>';
-		echo '<tr><td>'._T('boutique:tva').'</td><td><input type="text" value="'.$produit['tva'].'" name="tva" /></td></tr>';
-		echo '</table>';
+		afficher_liste_categories($id_parent);
 		
-		afficher_liste_parents($id_parent);
+		echo '<br /><div align="center"><table style="border:1px solid;">';
+		echo '<tr><td>'._T('boutique:prix_vente').'</td><td><input type="text" value="'.$produit['prix_vente'].'" name="prix_vente" /></td><td>'._T('boutique:eur').'</td></tr>';
+		echo '<tr><td>'._T('boutique:prix_achat').'</td><td><input type="text" value="'.$produit['prix_achat'].'" name="prix_achat" /></td><td>'._T('boutique:eur').'</td></tr>';
+		echo '<tr><td>'._T('boutique:tva').'</td><td><input type="text" value="'.$produit['tva'].'" name="tva" /></td><td>'._T('boutique:pour_cent').'</td></tr>';
+		echo '<tr><td>'._T('boutique:url_de_reference').'</td><td><input type="text" value="'.$produit['url'].'" name="url" /></td><td></td></tr>';
+		echo '</table></div><br />';
 		
-		echo '<br /><b>'._T('boutique:descriptif_de_la_categorie').'</b>';
+		
+		echo '<br /><b>'._T('boutique:descriptif_du_produit').'</b>';
 		echo '<textarea name="descriptif" rows="5" class="forml" cols="">'.$produit['descriptif'].'</textarea><br /><br />';
-		echo '<br /><b>'._T('boutique:texte_de_la_categorie').'</b>';
+		echo '<br /><b>'._T('boutique:texte_du_produit').'</b>';
 		echo barre_textarea ( $produit['texte'], '20', $cols, $lang='' );
 		echo '<br /><div align="right"><input type="submit" class="fondo" value="'._T('boutique:enregistrer').'" /></div><br />';
 		echo '</form>';
@@ -48,5 +53,11 @@ function exec_produit_edit(){
 		if ($GLOBALS['spip_version_code']>=1.92) { echo fin_gauche(); }
 		echo fin_page();
 }
+
+function randomkeys($length)
+{
+	
+}
+
 
 ?>

@@ -13,10 +13,10 @@ function exec_produits_page(){
 			echo fin_boite_info();
 				$result = spip_query("SELECT id_categorie FROM spip_boutique_categories LIMIT 1");
 				if (spip_num_rows($result) > 0) {
-				echo bloc_des_raccourcis(icone_horizontale(_T('boutique:icone_creer_produit'), generer_url_ecrire("produits_edit","id_produit=new"), _DIR_PLUGIN_BOUTIQUE."/img_pack/petite_caisse.png", "creer.gif", false));
+					echo bloc_des_raccourcis(icone_horizontale(_T('boutique:icone_creer_produit'), generer_url_ecrire("produits_edit","id_produit=new"), _DIR_PLUGIN_BOUTIQUE."/img_pack/petite_caisse.png", "creer.gif", false));
 				} else {
 					if ($connect_statut == '0minirezo') {
-						echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categorie_edit","id_categorie=new"), "caissons_categorie.png", "creer.gif",false);
+						echo	bloc_des_raccourcis(icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categorie_edit","id_categorie=new"), _DIR_PLUGIN_BOUTIQUE."/img_pack/caissons_categorie.png", "creer.gif",false));
 					}
 				}
 		echo debut_droite();
@@ -29,14 +29,14 @@ function exec_produits_page(){
 			}else{
 				//echo _T('boutique:pas_d_article_a_cette_adresse');
 				if ($connect_statut == '0minirezo') {
-					echo	icone_horizontale (_T('boutique:creer_produit'), generer_url_ecrire("categorie_edit","new=oui&retour=nav"), _DIR_PLUGIN_BOUTIQUE."img_pack/caissons_categorie.png", "creer.gif",false);
+					echo	icone_horizontale (_T('boutique:creer_un_produit'), generer_url_ecrire("produit_edit","id_produit=new"), _DIR_PLUGIN_BOUTIQUE."img_pack/petite_caisse.png", "creer.gif",false);
 				}
 			}
 			
 		}else{
 			echo debut_cadre_trait_couleur();
 				if ($connect_statut == '0minirezo') {
-					echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categorie_edit","new=oui&retour=nav"), _DIR_PLUGIN_BOUTIQUE."img_pack/caissons_categorie.png", "creer.gif",false);
+					echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categorie_edit","id_categorie=oui"), _DIR_PLUGIN_BOUTIQUE."img_pack/caissons_categorie.png", "creer.gif",false);
 				}
 			echo fin_cadre_trait_couleur();
 		}

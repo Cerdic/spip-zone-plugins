@@ -29,8 +29,8 @@ function action_sauver_categorie_dist(){
 		$id_categorie = _request('id_categorie');
 	}
 
-	echo $sql_insert_categorie.'<br /><br /><br /><br />';
-	echo $sql_update_categorie;
+	// echo $sql_insert_categorie.'<br /><br /><br /><br />';
+	// echo $sql_update_categorie;
 	$redirect = _request('redirect').'&id_categorie='.$id_categorie;
 	redirige_par_entete($redirect);
 

@@ -1,3 +1,4 @@
+
 -- 
 -- Structure de la table `spip_boutique_auteurs_categories`
 -- 
@@ -81,13 +82,12 @@ CREATE TABLE `spip_boutique_produits` (
   `url_site` varchar(255) NOT NULL,
   `nom_site` tinytext NOT NULL,
   `id_categorie` bigint(20) NOT NULL,
-  `id_mot` bigint(20) NOT NULL,
   `id_parent` bigint(20) NOT NULL,
   `id_secteur` bigint(20) NOT NULL,
   `id_gamme` bigint(20) NOT NULL,
-  `prix_achat` bigint(20) NOT NULL,
-  `prix_vente` bigint(20) NOT NULL,
-  `tva` bigint(20) NOT NULL,
+  `prix_achat` float NOT NULL,
+  `prix_vente` float NOT NULL,
+  `tva` float NOT NULL,
   `lang` varchar(10) NOT NULL,
   `lang_choisie` varchar(3) NOT NULL,
   `statut` varchar(10) NOT NULL,

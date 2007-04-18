@@ -18,7 +18,7 @@ function exec_categories_page(){
 					echo bloc_des_raccourcis(icone_horizontale(_T('boutique:icone_creer_categorie'), generer_url_ecrire("categorie_edit","id_categorie=new"), _DIR_PLUGIN_BOUTIQUE."/img_pack/caissons_categorie.png", "creer.gif", false));
 				} else {
 					if ($connect_statut == '0minirezo') {
-						echo	icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categorie_edit","id_categorie=new"), _DIR_PLUGIN_BOUTIQUE."/img_pack/caissons_categorie.png", "creer.gif",false);
+						echo	bloc_des_raccourcis(icone_horizontale (_T('boutique:creer_categorie'), generer_url_ecrire("categorie_edit","id_categorie=new"), _DIR_PLUGIN_BOUTIQUE."/img_pack/caissons_categorie.png", "creer.gif",false));
 					}
 				}
 		echo debut_droite();
