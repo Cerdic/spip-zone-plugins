@@ -22,6 +22,7 @@ _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eac
  
  <lien>http://www.escoitar.org/documentacion/spip.php?article175</lien>
  <install>geomap_install.php</install>
+ <fonctions>public/geomap_balises.php</fonctions>
  <prefix>geomap</prefix>
  <chemin dir='' />
 </plugin>
