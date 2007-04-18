@@ -25,8 +25,23 @@ function exec_acces_restreint_edit(){
 	debut_gauche();
 	
 	/*debut_boite_info();
-	echo propre("Cette page vous permet de gerer les zones d'acces restreint de votre site");	
+	echo propre("Cette page vous permet de gerer les zones d'acces restreint de votre site");
 	fin_boite_info();*/
+	
+	// Boite info
+	 if ($id_zone) {
+		debut_boite_info();
+		echo "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" ;
+		echo _T('accesrestreint:zone_numero');
+		echo "<br /><span class='spip_xx-large'>";
+		echo "$id_zone";
+		echo '</span></div>';
+		fin_boite_info();
+	}
+
+//Raccourcis
+	$res = icone_horizontale(_T('accesrestreint:voir_toutes'), generer_url_ecrire("acces_restreint",''), "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", 'rien.gif',false);
+	echo bloc_des_raccourcis($res);
 	
 	debut_droite();
 	$requete = "SELECT * FROM spip_zones WHERE id_zone=$id_zone";
