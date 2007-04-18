@@ -161,8 +161,8 @@ function print_table($dir, $list, $allow) {	// print table of files
 		if ($stat['is_dir']) {
 			$link = make_link("list", $stat['rel'], NULL);
 		} else { //if(get_is_editable($dir,$item) || get_is_image($dir,$item)) {
-//			$link = $GLOBALS['spx']["home_url"]."/".$stat['rel'];
-//			$target = "_blank";
+//toggg			$link = $GLOBALS['spx']["home_url"]."/".$stat['rel'];
+//toggg			$target = "_blank";
 		} //else $link = "";
 		
 		echo "<TR class=\"rowdata\"><TD><INPUT TYPE=\"checkbox\" name=\"selitems[]\" value=\"";
