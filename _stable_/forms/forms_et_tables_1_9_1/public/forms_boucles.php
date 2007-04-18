@@ -70,7 +70,17 @@
 		//$boucle->where[]= array("'='", "'$boucle->id_table." . "id_parent'", 0);
 	}
 	
-	function boucle_DONNEES_dist($id_boucle, &$boucles){
+	function boucle_TABLES_dist($id_boucle, &$boucles){
+		if (function_exists($f='boucle_FORMS') OR function_exists($f='boucle_FORMS_dist'))
+			return $f($id_boucle, &$boucles);
+		else {
+			$boucle = &$boucles[$id_boucle];
+			$id_table = $boucle->id_table;
+			$boucle->from[$id_table] =  "spip_forms";
+			return calculer_boucle($id_boucle, $boucles); 
+		}
+	}
+	function boucle_DONNEES($id_boucle, &$boucles){
 		if (function_exists($f='boucle_FORMS_DONNEES') OR function_exists($f='boucle_FORMS_DONNEES_dist'))
 			return $f($id_boucle, &$boucles);
 	}
@@ -189,7 +199,6 @@ code;
 		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
 			$boucle->where[]= array("'='", "'$id_table.public'", "'\"oui\"'");
 		}
-	
 		return calculer_boucle($id_boucle, $boucles); 
 	}
 	

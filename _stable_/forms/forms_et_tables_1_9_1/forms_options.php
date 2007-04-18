@@ -25,6 +25,7 @@ $GLOBALS['spip_pipeline']['forms_bloc_edition_champ'] = '';
 $GLOBALS['spip_pipeline']['forms_label_details'] = '';
 $GLOBALS['spip_pipeline']['forms_input_champs'] = '';
 $GLOBALS['spip_pipeline']['forms_ajoute_styles'] = '';
+$GLOBALS['spip_pipeline']['forms_update_edition_champ'] = '';
 
 function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type=='form' OR $type=='donnee'){
