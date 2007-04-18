@@ -60,15 +60,17 @@ function exec_acces_restreint(){
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
 	$nb_aff = 1.5 * _TRANCHES;
-	$deb_aff = intval(_request('t_' .$tmp_var));
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
 		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 	}
 
+	$deb_aff = _request($tmp_var);
+	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
+
   if ($cpt) {
-	 	$result = spip_query("SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff, $nb_aff");
+	 	$result = spip_query("SELECT $select FROM $from$join$where$group$order" . (($deb_aff < 0) ? '' : " LIMIT $deb_aff, $nb_aff"));
 
 		$vals = '';
 		$vals[] = _T('accesrestreint:colonne_id');
