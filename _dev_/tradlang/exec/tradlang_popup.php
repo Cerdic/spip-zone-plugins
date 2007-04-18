@@ -85,7 +85,7 @@ $spip_lang = $spip_lang_sv;
 function _TT($text, $args = '')
 {
   //include_ecrire('inc_lang.php3');
-  return traduire_chaine($text, $args);
+  return _T($text, $args);
 }
 
 
@@ -793,7 +793,7 @@ function fin_html_ts()
 }
 
 
-function debut_table($titre_table, $retour="./trad_lang.php")
+function debut_table($titre_table)
 {
   global $left,$right;
   global $spip_lang, $module;
@@ -802,7 +802,7 @@ function debut_table($titre_table, $retour="./trad_lang.php")
   echo "<tr> ";
   echo "<td colspan=2 bgcolor=#000088>";
   echo "<table width=100% border=0 cellspacing=0 cellpadding=2 class=windowtitle>";
-  echo "<FORM ACTION='".$retour."' METHOD=POST> ";
+  echo "<FORM ACTION='".generer_url_ecrire("tradlang")."' METHOD=POST> ";
   echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>";
   echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>";
   echo "<tr> ";
@@ -1243,7 +1243,7 @@ if ($etape == 'traduction_id')
   recherche($table_ch, $type, $langue, $filtre, $date, $id, $cpt, 
 	    $lang_orig_aff, $lang_cible_aff, 2, $res_date);
 
-  echo "<FORM ACTION='trad_lang.php' NAME='returnable' METHOD='POST'>\n";
+  echo "<FORM ACTION='".generer_url_ecrire("tradlang")."' NAME='returnable' METHOD='POST'>\n";
   echo "<INPUT TYPE='hidden' NAME='filtre' VALUE='".$filtre."'>\n";
   echo "<INPUT TYPE='hidden' NAME='date' VALUE='".$date."'>";
   echo "<INPUT TYPE='hidden' NAME='tout' VALUE='".$tout."'>\n";
@@ -1400,7 +1400,7 @@ if ($etape == 'chercher')
     <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
     </head>';
 
-  echo '<form action="./trad_lang.php" name="recherche" method="post">';
+  echo '<form action="'.generer_url_ecrire("tradlang").'" name="recherche" method="post">';
   echo '<input name="lang_orig" type="hidden" value="'.$lang_orig.'">';
   echo '<input name="lang_cible" type="hidden" value="'.$lang_cible.'">';
   echo "<input name='spip_lang' type='hidden' value='$spip_lang'>";
@@ -1475,7 +1475,7 @@ if ($etape == 'commenter')
     <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
     </head>';
 
-  echo "<form name='commentaire' method='POST' action='./trad_lang.php'>";
+  echo "<form name='commentaire' method='POST' action='".generer_url_ecrire("tradlang")."'>";
   echo "<input name='lang_orig' type='hidden' value='$lang_orig'>";
   echo "<input name='etape' type='hidden' value='commenter'>";
   echo "<input name='spip_lang' type='hidden' value='$spip_lang'>";
