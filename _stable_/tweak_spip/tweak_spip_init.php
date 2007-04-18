@@ -18,6 +18,9 @@ function tweak_log($variable, $prefixe='') {
  spip_log('TWEAKS. '.$prefixe.$variable);
 }
 
+// compatibilite avec tweak-spip de version anterieure a 1.7.0.0
+function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
+
 function tweak_initialisation_d_un_tweak($tweak0, $tweak_input) {
 	global $tweaks, $metas_tweaks;
 	$tweak = &$tweaks[$tweak0];
