@@ -51,7 +51,7 @@ echo '</tr>';
 echo '<tr>';
 echo '<td>Mode de r&egrave;glement :</td>';
 echo '<td><select name="journal" type="text">';
-$query = spip_query ( "SELECT * FROM spip_asso_banques ORDER BY id_banque" ;
+$query = spip_query ( "SELECT * FROM spip_asso_banques ORDER BY id_banque" ) ;
 while ($data = spip_fetch_array($query)) {
 echo '<option value="'.$data['code'].'"> '.$data['intitule'].' </option>';
 }
