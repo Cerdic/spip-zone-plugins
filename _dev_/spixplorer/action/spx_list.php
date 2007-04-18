@@ -40,6 +40,15 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_list()
+{
+	include_spip('inc/spx_init');
+	list_dir($GLOBALS['spx']["dir"]);
+}
+
 //------------------------------------------------------------------------------
 // HELPER FUNCTIONS (USED BY MAIN FUNCTION 'list_dir', SEE BOTTOM)
 function make_list($_list1, $_list2) {		// make list of files

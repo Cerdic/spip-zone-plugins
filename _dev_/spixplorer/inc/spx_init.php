@@ -40,13 +40,19 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/actions');
+$test = determine_upload();
+
 // pour l'instant reserve aux admins toutes rubriques
-if (!$GLOBALS['connect_statut'] == '0minirezo' || !$GLOBALS['connect_toutes_rubriques']) {
+if ($GLOBALS['connect_statut'] != '0minirezo' || !$GLOBALS['connect_toutes_rubriques']) {
         include_spip('inc/headers');
         include_spip('inc/minipres');
         http_status('403');
         echo // spx_debut_html() .
-        	_T('ecrire:avis_non_acces_page');
+        	$GLOBALS['connect_statut'] . $GLOBALS['connect_toutes_rubriques'] .'*-*-*-*' . _T('ecrire:avis_non_acces_page');
 //        	. spx_fin_html();
         exit;
 }
