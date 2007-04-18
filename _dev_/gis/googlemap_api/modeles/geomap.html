@@ -16,7 +16,7 @@
     			map = new GMap2(document.getElementById("#ENV{id,'geomap'}"));
     			map.addControl(new GLargeMapControl());
     			map.addControl(new GMapTypeControl());
-    			map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{view_zoom,7}, G_MAP_TYPE);
+    			map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #GET{zoom}, G_MAP_TYPE);
     			map.enableDoubleClickZoom();
     			map.enableContinuousZoom();
     			markerManager = new GMarkerManager(map);
