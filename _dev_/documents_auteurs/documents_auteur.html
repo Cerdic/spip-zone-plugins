@@ -1,0 +1,15 @@
+#CACHE{0,cache-client}
+<div>
+	<h4><:auteurscomplets:vos_images:></h4>
+	<a onclick="$('#galerie_auteur').toggle()">Votre Galerie</a>
+		<div style="padding:10px">
+		<BOUCLE_DOCSAUTEUR(DOCUMENTS){id_auteur=#SESSION{id_auteur}}{extension IN png,jpg,gif}{doublons}>
+			<div style="float:left;margin:5px">
+			[<a href="#FICHIER" type="#MIME_TYPE">(#FICHIER|copie_locale|image_reduire{120,0}|image_recadre{80,0,center}|image_masque{#CHEMIN{masques/masque_vignette_carre.png}}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]<br />&lt;img#ID_DOCUMENT&gt;
+			</div>
+		</BOUCLE_DOCSAUTEUR>
+		<:nodocsauteurs:>
+		<//B_DOCSAUTEUR>
+	<br class="nettoyeur" />
+	</div>
+</div>
