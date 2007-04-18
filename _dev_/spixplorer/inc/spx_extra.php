@@ -52,7 +52,7 @@ function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NUL
 	if($_srt==NULL) $_srt=$GLOBALS['spx']["srt"];
 	if($_lang==NULL) $_lang=(isset($GLOBALS['spx']["lang"])?$GLOBALS['spx']["lang"]:NULL);
 	
-	$link = self(); // . "?action=spx_".$_action;
+	$link = $_SERVER['PHP_SELF'] . "?action=spx_".$_action;
 	if($_dir!=NULL) $link.="&dir=".urlencode($_dir);
 	if($_item!=NULL) $link.="&item=".urlencode($_item);
 	if($_order!=NULL) $link.="&order=".$_order;
