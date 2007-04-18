@@ -41,7 +41,7 @@ function geoforms_forms_bloc_edition_champ($flux){
 		$out .= " &nbsp;<select name='systeme_$champ' id='systeme_$champ' class='fondo verdana2'>\n";
 		$out .= "<option value=''>"._T("geoforms:latitude_longitude_$type")."</option>\n";
 		include_spip('inc/geoforms_projections');
-		foreach($GLOBALS['projections_lambert'] as $key=>$val){
+		foreach(geoforms_liste_projections() as $key){
 			$selected = ($key == $row['extra_info']) ? " selected='selected'": "";
 			$out .= "<option value='$key'$selected>"._T("geoforms:lambert_$type")." ("._T("geoforms:$key").")"."</option>\n";
 		}
@@ -69,6 +69,22 @@ function geoforms_forms_input_champs($flux){
 				$flux['data'].=$geomap_append_moveend_map("map-$id_form-$id",$vu[$id_form]['geox']['id'],$vu[$id_form]['geoy']['id'],$vu[$id_form]['geox']['value'],$vu[$id_form]['geoy']['value'], NULL,NULL,true);
 				unset($vu[$id_form]);
 			}
+		}
+	}
+	return $flux;
+}
+
+function geoforms_forms_update_edition_champ($flux){
+	$row = $flux['args']['row'];
+	$type = $row['type'];
+	$champ = $row['champ'];
+	if (in_array($type,array('geox','geoy','geoz'))){
+		if ($s = _request("systeme_$champ")){
+			include_spip('inc/geoforms_projections');
+			if (in_array($s,geoforms_liste_projections()))
+				$flux['data'] = $s;
+			else
+				$flux['data'] = "";
 		}
 	}
 	return $flux;
