@@ -1,10 +1,12 @@
 <?php
 
-  function AccesRestreint_cree_zone(){
-  	$titre = addslashes(_request('titre'));
-  	$descriptif = addslashes(_request('descriptif'));
+	function AccesRestreint_cree_zone(){
+		$titre = addslashes(_request('titre'));
+		$descriptif = addslashes(_request('descriptif'));
+		$publique = (_request('publique')=='oui')?'oui':'non';
+		$privee = (_request('privee')=='oui')?'oui':'non';
 		if (strlen($titre)>0){
-			$id_zone = spip_abstract_insert('spip_zones', "(titre,descriptif,maj)", "('$titre','$descriptif',NOW())");
+			$id_zone = spip_abstract_insert('spip_zones', "(titre,descriptif,publique,privee,maj)", "('$titre','$descriptif','$publique','$privee',NOW())");
 			if ($id_zone && _request('auto_attribue_droits')=='oui'){
 				global $connect_id_auteur, $connect_statut;
 				if ($connect_statut == '0minirezo')
@@ -14,9 +16,9 @@
 		} 
 		return 0;
 	}
-  function AccesRestreint_supprimer_zone(){
-  	$id_zone = intval(_request('supp_zone'));
-  	if ($id_zone){
+	function AccesRestreint_supprimer_zone(){
+		$id_zone = intval(_request('supp_zone'));
+		if ($id_zone){
 			spip_query("DELETE FROM spip_zones WHERE id_zone='$id_zone'");
 			spip_query("DELETE FROM spip_zones_rubriques WHERE id_zone='$id_zone'");
 			spip_query("DELETE FROM spip_zones_auteurs WHERE id_zone='$id_zone'");
@@ -24,12 +26,12 @@
 		return 0;
 	}
 
-  function AccesRestreint_enregistrer_zone(){
-    $titre = addslashes(_request('titre'));
-    $descriptif = addslashes(_request('descriptif'));
-    $publique = (_request('publique')=='oui')?'oui':'non';
-    $privee = (_request('privee')=='oui')?'oui':'non';
-    $id_zone = intval(_request('id_zone'));
+	function AccesRestreint_enregistrer_zone(){
+		$titre = addslashes(_request('titre'));
+		$descriptif = addslashes(_request('descriptif'));
+		$publique = (_request('publique')=='oui')?'oui':'non';
+		$privee = (_request('privee')=='oui')?'oui':'non';
+	$id_zone = intval(_request('id_zone'));
 		if (strlen($titre)>0 && $id_zone){
 			spip_query("UPDATE spip_zones SET titre='$titre', descriptif='$descriptif', privee='$privee', publique='$publique' WHERE id_zone=$id_zone");
 			// suppression de tous les liens zone-rubriques
