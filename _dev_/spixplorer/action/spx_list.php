@@ -187,7 +187,8 @@ function print_table($dir, $list, $allow) {	// print table of files
 			echo "<A HREF=\"".make_link("chmod",$dir,$item)."\" TITLE=\"";
 			echo _T('spixplorer:permlink')."\">";
 		}
-		echo parse_file_type($dir,$item).parse_file_perms(get_file_perms($dir,$item));
+		echo parse_file_type($dir,$item).parse_file_perms(get_file_perms($dir,$item)) .
+			'(' . get_file_own_grp($dir, $item) . ')';
 		if($allow) echo "</A>";
 		echo "</TD>\n";
 	// Actions

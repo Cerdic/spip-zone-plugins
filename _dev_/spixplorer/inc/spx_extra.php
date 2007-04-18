@@ -105,6 +105,9 @@ function parse_file_type($dir,$item) {		// parsed file type (d / l / -)
 function get_file_perms($dir,$item) {		// file permissions
 	return @decoct(@fileperms(get_abs_item($dir,$item)) & 0777);
 }
+function get_file_own_grp($dir, $item) {		// file owner and group
+	return @fileowner($dafil = get_abs_item($dir,$item)) . '/' . @filegroup($dafil);
+}
 //------------------------------------------------------------------------------
 function parse_file_perms($mode) {		// parsed file permisions
 	if(strlen($mode)<3) return "---------";
