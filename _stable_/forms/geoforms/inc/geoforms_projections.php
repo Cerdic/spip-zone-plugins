@@ -15,10 +15,11 @@ function geoforms_liste_projections(){
 	return array_keys($GLOBALS['projections_lambert']);
 }
 // pouvoir traiter des systemes de differentes natures
-function geoforms_systeme_vers_lat_lont($lat,$lont,$systeme){
-	return geoforms_lat_long_vers_lambert($lat,$lont,$systeme);
+function geoforms_systeme_vers_lat_lont($lat,$long,$systeme){
+	if (isset($GLOBALS['projections_lambert'][$systeme]))
+		return geoforms_lat_long_vers_lambert($lat,$long,$systeme);
+	return array($lat,$long);
 }
-
 
 $GLOBALS['projections_lambert']=array(
 'lambert1'=>array('fi0'=>55*0.9,'fi1'=>54*0.9,'fi2'=>56*0.9,'l0'=>3,'X'=>600000,'Y'=>1200000),
@@ -34,66 +35,43 @@ $terre_b=$terre_a*(1-$terre_f);
 
 // conversion lattitude longitude (en degres) vers lambert
 function geoforms_lat_long_vers_lambert($lat,$long,$lambert){
-	$pi = pi();
-	$e = exp(1);
-	$lat = $lat*$pi/180.0;
-	$long = $long*$pi/180.0;
-	$fi0 = $GLOBALS['projections_lambert'][$lambert]['fi0']*$pi/180.0;
-	$fi1 = $GLOBALS['projections_lambert'][$lambert]['fi1']*$pi/180.0;
-	$fi2 = $GLOBALS['projections_lambert'][$lambert]['fi2']*$pi/180.0;
-	$l0 = $GLOBALS['projections_lambert'][$lambert]['l0']*$pi/180.0;
-	$X0 = $GLOBALS['projections_lambert'][$lambert]['X'];
-	$Y0 = $GLOBALS['projections_lambert'][$lambert]['Y'];
-	
-	$s1=sin($fi1);
-	$s2=sin($fi2);
-	$c1=cos($fi1);
-	$c2=cos($fi2);
-	$n = log($c2/$c1) + 0.5*log( (1.0-$e*$e*$s1*$s1) / (1.0-$e*$e*$s2*$s2) );
-	$n = $n/log( (tan($fi1/2.0+$pi/4)*pow(1-$e*$s1,0.5*$e)*pow(1+$e*$s2,0.5*$e)) / (tan($fi2/2+$pi/4)*pow(1+$e*$s1,0.5*$e)*pow(1-$e*$s2,0.5*$e)) );
-	
-	$ro0 = $terre_a*$c1/($n*sqrt(1-$e*$e*$s1*$s1))*pow(tan($f1/2+$pi/4)*pow((1-$e*$s1)/(1+$e*$s1),0.5*$e),$n);
-	
-	$ro = $ro0*pow(pow((1+$e*sin($lat))/(1-$e*sin($lat)),0.5*$e)/tan($lat/2+$pi/4),$n);
-	$teta = $n*($long-$l0);
-	$X = $X0 + $ro * sin($teta);
-	$Y = $Y0 + $fi0-$ro*cos($teta);
-	return array($X,$Y);
+	static $converter=array();
+	if (!isset($converter[$lambert])){
+		include_spip('inc/gPoint');
+		$converter[$lambert] = new gPoint();
+		$converter[$lambert]->configLambertProjection(
+			$GLOBALS['projections_lambert'][$lambert]['X'],
+			$GLOBALS['projections_lambert'][$lambert]['Y'],
+			$GLOBALS['projections_lambert'][$lambert]['l0'],
+			$GLOBALS['projections_lambert'][$lambert]['fi0'],
+			$GLOBALS['projections_lambert'][$lambert]['fi1'],
+			$GLOBALS['projections_lambert'][$lambert]['fi2']);
+	}
+	$converter[$lambert]->setLongLat($long,$lat);
+	$converter[$lambert]->convertLLtoLCC();
+	return array($converter[$lambert]->lccE(),$converter[$lambert]->lccN());
 }
 
 function geoforms_lambert_vers_lat_long($X,$Y,$lambert,$eps=0.001){
-	$pi = pi();
-	$e = exp(1);
-	$fi0 = $GLOBALS['projections_lambert'][$lambert]['fi0']*$pi/180.0;
-	$fi1 = $GLOBALS['projections_lambert'][$lambert]['fi1']*$pi/180.0;
-	$fi2 = $GLOBALS['projections_lambert'][$lambert]['fi2']*$pi/180.0;
-	$l0 = $GLOBALS['projections_lambert'][$lambert]['l0']*$pi/180.0;
-	$X0 = $GLOBALS['projections_lambert'][$lambert]['X'];
-	$Y0 = $GLOBALS['projections_lambert'][$lambert]['Y'];
-	
-	$eps = $eps*$pi/180.0;
-	$maxiter = 100;
-	
-	$s1=sin($fi1);
-	$s2=sin($fi2);
-	$c1=cos($fi1);
-	$c2=cos($fi2);
-	$n = log($c2/$c1) + 0.5*log( (1.0-$e*$e*$s1*$s1) / (1.0-$e*$e*$s2*$s2) );
-	$n = $n/log( (tan($fi1/2.0+$pi/4)*pow(1-$e*$s1,0.5*$e)*pow(1+$e*$s2,0.5*$e)) / (tan($fi2/2+$pi/4)*pow(1+$e*$s1,0.5*$e)*pow(1-$e*$s2,0.5*$e)) );
-	
-	$ro0 = $terre_a*$c1/($n*sqrt(1-$e*$e*$s1*$s1))*pow(tan($f1/2+$pi/4)*pow((1-$e*$s1)/(1+$e*$s1),0.5*$e),$n);
-
-	$ro = sqrt(($X-$X0)*($X-$X0)+($Y0-$Y+$fi0)*($Y0-$Y+$fi0));
-	$teta = 2*atan(($X-$X0)/($Y0-$Y+$fi0+$ro));
-	
-	$long = $teta/$n+$l0;
-	$ro0surro=pow($ro0/$ro,1/$n);
-	$lat = 2*atan($ro0surro)-0.5*$pi;
-	do {
-		$lat0 = $lat;
-		$s = sin($lat0);
-		$lat = 2*atan($ro0surro*pow( (1+$e*$s)/(1-$e*$s),0.5*$e))-0.5*$pi;
-	} while (abs($lat-$lat0)>$eps && $maxiter--);
-	return array($lat*180.0/$pi,$long*180.0/$pi);
+	static $converter=array();
+	if (!isset($converter[$lambert])){
+		include_spip('inc/gPoint');
+		$converter[$lambert] = new gPoint();
+		$converter[$lambert]->configLambertProjection(
+			$GLOBALS['projections_lambert'][$lambert]['X'],
+			$GLOBALS['projections_lambert'][$lambert]['Y'],
+			$GLOBALS['projections_lambert'][$lambert]['l0'],
+			$GLOBALS['projections_lambert'][$lambert]['fi0'],
+			$GLOBALS['projections_lambert'][$lambert]['fi1'],
+			$GLOBALS['projections_lambert'][$lambert]['fi2']);
+	}
+	// attention, prendre en compte l'omission eventuelle des millions dans le Y du lambert
+	if ($Y<1000000 AND in_array($lambert,array('lambert1','lambert2','lambert3','lambert4'))){
+		$million = intval(substr($lambert,-1))*1000000;
+		$Y = $Y+$million;
+	}
+	$converter[$lambert]->setLambert($X,$Y);
+	$converter[$lambert]->convertLCCtoLL();
+	return array($converter[$lambert]->Lat(),$converter[$lambert]->Long());
 }
 ?>
