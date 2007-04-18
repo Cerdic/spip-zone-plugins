@@ -154,14 +154,14 @@ function print_table($dir, $list, $allow) {	// print table of files
 	
 	while(list($item,) = each($list)){
 		// link to dir / file
-		$abs_item=get_abs_item($dir,$item);
+		$stat = spx_stat($dir, $item);
 		$target="";
 		//$extra="";
-		//if(is_link($abs_item)) $extra=" -> ".@readlink($abs_item);
-		if(is_dir($abs_item)) {
-			$link = make_link("list",get_rel_item($dir, $item),NULL);
+		//if(is_link($stat['abs'])) $extra=" -> ".@readlink($stat['abs']);
+		if ($stat['is_dir']) {
+			$link = make_link("list", $stat['rel'], NULL);
 		} else { //if(get_is_editable($dir,$item) || get_is_image($dir,$item)) {
-//			$link = $GLOBALS['spx']["home_url"]."/".get_rel_item($dir, $item);
+//			$link = $GLOBALS['spx']["home_url"]."/".$stat['rel'];
 //			$target = "_blank";
 		} //else $link = "";
 		
@@ -172,15 +172,16 @@ function print_table($dir, $list, $allow) {	// print table of files
 		/*if($link!="") */ echo"<A HREF=\"".$link."\" TARGET=\"".$target."\">";
 		//else echo "<A>";
 		echo "<IMG border=\"0\" width=\"16\" height=\"16\" ";
-		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/".get_mime_type($dir, $item, "img")."\" ALT=\"\">&nbsp;";
+		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/" .
+			$stat['mime_img'] . "\" ALT=\"\">&nbsp;";
 		$s_item=$item;	if(strlen($s_item)>50) $s_item=substr($s_item,0,47)."...";
 		echo htmlspecialchars($s_item)."</A></TD>\n";	// ...$extra...
 	// Size
-		echo "<TD>".parse_file_size(get_file_size($dir,$item))."</TD>\n";
+		echo "<TD>".parse_file_size($stat['size'])."</TD>\n";
 	// Type
-		echo "<TD>".get_mime_type($dir, $item, "type")."</TD>\n";
+		echo "<TD>" . $stat['mime_type'] . "</TD>\n";
 	// Modified
-		echo "<TD>".parse_file_date(get_file_date($dir,$item))."</TD>\n";
+		echo "<TD>".parse_file_date($stat['mtime'])."</TD>\n";
 	// Permissions
 		echo "<TD>";
 		if($allow) {

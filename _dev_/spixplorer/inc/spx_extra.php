@@ -40,6 +40,18 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+function spx_stat($dir, $item)
+{
+	$fichier = get_abs_item($dir, $item);
+	($ret = stat($fichier)) || ($ret = array());
+	$ret['abs'] = $fichier;
+	$ret['rel'] = get_rel_item($dir, $item);
+	$ret['is_dir'] = is_dir($fichier);
+	$ret['mime_type'] = get_mime_type($dir, $item, 'type');
+	$ret['mime_img'] = get_mime_type($dir, $item, 'img');
+	return $ret;
+}
+
 //------------------------------------------------------------------------------
 // THESE ARE NUMEROUS HELPER FUNCTIONS FOR THE OTHER INCLUDE FILES
 //------------------------------------------------------------------------------
@@ -191,7 +203,7 @@ function get_mime_type($dir, $item, $query) {	// get file's mimetype
 		$mime_type	= $GLOBALS['spx']["super_mimes"]["file"][0];
 		$image		= $GLOBALS['spx']["super_mimes"]["file"][1];
 	}
-	
+
 	if($query=="img") return $image;
 	else return $mime_type;
 }
