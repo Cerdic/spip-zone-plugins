@@ -124,8 +124,8 @@
 		}
 		
 		$structure = Forms_structure($id_form);
-		$cle = isset($assoc_field['id_donnee'])?$assoc_field['id_donnee']:false;
-		
+		$cle = (isset($assoc_field['id_donnee']) AND ($assoc_field['id_donnee']!='-1'))?$assoc_field['id_donnee']:false;
+		var_dump($cle);
 		$output = "";
 		if ($data!=false){
 			$count_lignes = 0;
