@@ -94,7 +94,7 @@
 	
 	function Copy() {
 		if(NumChecked()==0) {
-			alert("<?php echo _T('spixplorer:"miscselitems"'); ?>");
+			alert("<?php echo _T('spixplorer:miscselitems'); ?>");
 			return;
 		}
 		document.selform.do_action.value = "copy";
@@ -103,7 +103,7 @@
 	
 	function Move() {
 		if(NumChecked()==0) {
-			alert("<?php echo _T('spixplorer:"miscselitems"'); ?>");
+			alert("<?php echo _T('spixplorer:miscselitems'); ?>");
 			return;
 		}
 		document.selform.do_action.value = "move";
@@ -113,10 +113,10 @@
 	function Delete() {
 		num=NumChecked();
 		if(num==0) {
-			alert("<?php echo _T('spixplorer:"miscselitems"'); ?>");
+			alert("<?php echo _T('spixplorer:miscselitems'); ?>");
 			return;
 		}
-		if(confirm("<?php echo _T('spixplorer:"miscdelitems"'); ?>")) {
+		if(confirm("<?php echo _T('spixplorer:miscdelitems'); ?>")) {
 			document.selform.do_action.value = "delete";
 			document.selform.submit();
 		}
@@ -124,7 +124,7 @@
 	
 	function Archive() {
 		if(NumChecked()==0) {
-			alert("<?php echo _T('spixplorer:"miscselitems"'); ?>");
+			alert("<?php echo _T('spixplorer:miscselitems'); ?>");
 			return;
 		}
 		document.selform.do_action.value = "arch";

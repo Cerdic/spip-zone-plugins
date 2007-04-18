@@ -201,7 +201,7 @@ function copy_dir($source,$dest) {		// copy dir
 	$ok = true;
 	
 	if(!@mkdir($dest,0777)) return false;
-	if(($handle=@opendir($source))===false) show_error(basename($source).": "._T('spixplorer:"opendir"'));
+	if(($handle=@opendir($source))===false) show_error(basename($source).": "._T('spixplorer:opendir'));
 	
 	while(($file=readdir($handle))!==false) {
 		if(($file==".." || $file==".")) continue;
@@ -222,13 +222,13 @@ function remove($item) {			// remove file / dir
 	$ok = true;
 	if(@is_link($item) || @is_file($item)) $ok=@unlink($item);
 	elseif(@is_dir($item)) {
-		if(($handle=@opendir($item))===false) show_error(basename($item).": "._T('spixplorer:"opendir"'));
+		if(($handle=@opendir($item))===false) show_error(basename($item).": "._T('spixplorer:opendir'));
 
 		while(($file=readdir($handle))!==false) {
 			if(($file==".." || $file==".")) continue;
 			
 			$new_item = $item."/".$file;
-			if(!@file_exists($new_item)) show_error(basename($item).": "._T('spixplorer:"readdir"'));
+			if(!@file_exists($new_item)) show_error(basename($item).": "._T('spixplorer:readdir'));
 			//if(!get_show_item($item, $new_item)) continue;
 			
 			if(@is_dir($new_item)) {

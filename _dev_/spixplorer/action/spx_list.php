@@ -77,13 +77,13 @@ function make_tables($dir, &$dir_list, &$file_list, &$tot_file_size, &$num_items
 	
 	// Open directory
 	$handle = @opendir(get_abs_dir($dir));
-	if($handle===false) show_error($dir.": "._T('spixplorer:"opendir"'));
+	if($handle===false) show_error($dir.": "._T('spixplorer:opendir'));
 	
 	// Read directory
 	while(($new_item = readdir($handle))!==false) {
 		$abs_new_item = get_abs_item($dir, $new_item);
 		
-		if(!@file_exists($abs_new_item)) show_error($dir.": "._T('spixplorer:"readdir"'));
+		if(!@file_exists($abs_new_item)) show_error($dir.": "._T('spixplorer:readdir'));
 		if(!get_show_item($dir, $new_item)) continue;
 		
 		$new_file_size = filesize($abs_new_item);
@@ -176,7 +176,7 @@ function print_table($dir, $list, $allow) {	// print table of files
 		echo "<TD>";
 		if($allow) {
 			echo "<A HREF=\"".make_link("chmod",$dir,$item)."\" TITLE=\"";
-			echo _T('spixplorer:"permlink"')."\">";
+			echo _T('spixplorer:permlink')."\">";
 		}
 		echo parse_file_type($dir,$item).parse_file_perms(get_file_perms($dir,$item));
 		if($allow) echo "</A>";
@@ -188,12 +188,12 @@ function print_table($dir, $list, $allow) {	// print table of files
 			if($allow) {
 				echo "<TD><A HREF=\"".make_link("edit",$dir,$item)."\">";
 				echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-				echo "src=\"plugins/spixplorer/_img/_edit.gif\" ALT=\""._T('spixplorer:"editlink"')."\" TITLE=\"";
-				echo _T('spixplorer:"editlink"')."\"></A></TD>\n";
+				echo "src=\"plugins/spixplorer/_img/_edit.gif\" ALT=\""._T('spixplorer:editlink')."\" TITLE=\"";
+				echo _T('spixplorer:editlink')."\"></A></TD>\n";
 			} else {
 				echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-				echo "src=\"plugins/spixplorer/_img/_edit_.gif\" ALT=\""._T('spixplorer:"editlink"')."\" TITLE=\"";
-				echo _T('spixplorer:"editlink"')."\"></TD>\n";
+				echo "src=\"plugins/spixplorer/_img/_edit_.gif\" ALT=\""._T('spixplorer:editlink')."\" TITLE=\"";
+				echo _T('spixplorer:editlink')."\"></TD>\n";
 			}
 		} else {
 			echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
@@ -204,12 +204,12 @@ function print_table($dir, $list, $allow) {	// print table of files
 			if($allow) {
 				echo "<TD><A HREF=\"".make_link("download",$dir,$item)."\">";
 				echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-				echo "src=\"plugins/spixplorer/_img/_download.gif\" ALT=\""._T('spixplorer:"downlink"');
-				echo "\" TITLE=\""._T('spixplorer:"downlink"')."\"></A></TD>\n";
+				echo "src=\"plugins/spixplorer/_img/_download.gif\" ALT=\""._T('spixplorer:downlink');
+				echo "\" TITLE=\""._T('spixplorer:downlink')."\"></A></TD>\n";
 			} else if(!$allow) {
 				echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-				echo "src=\"plugins/spixplorer/_img/_download_.gif\" ALT=\""._T('spixplorer:"downlink"');
-				echo "\" TITLE=\""._T('spixplorer:"downlink"')."\"></TD>\n";
+				echo "src=\"plugins/spixplorer/_img/_download_.gif\" ALT=\""._T('spixplorer:downlink');
+				echo "\" TITLE=\""._T('spixplorer:downlink')."\"></TD>\n";
 			}
 		} else {
 			echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
@@ -227,13 +227,13 @@ function list_dir($dir) {			// list directory contents
 	$dir_up = dirname($dir);
 	if($dir_up==".") $dir_up = "";
 	
-	if(!get_show_item($dir_up,basename($dir))) show_error($dir." : "._T('spixplorer:"accessdir"'));
+	if(!get_show_item($dir_up,basename($dir))) show_error($dir." : "._T('spixplorer:accessdir'));
 	
 	// make file & dir tables, & get total filesize & number of items
 	make_tables($dir, $dir_list, $file_list, $tot_file_size, $num_items);
 	
 	$s_dir=$dir;		if(strlen($s_dir)>50) $s_dir="...".substr($s_dir,-47);
-	show_header(_T('spixplorer:"actdir"').": /".get_rel_item("",$s_dir));
+	show_header(_T('spixplorer:actdir').": /".get_rel_item("",$s_dir));
 	
 	// Javascript functions:
 	include_spip("inc/spx_javascript");
@@ -252,19 +252,19 @@ function list_dir($dir) {			// list directory contents
 	// PARENT DIR
 	echo "<TD><A HREF=\"".make_link("list",$dir_up,NULL)."\">";
 	echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_up.gif\" ";
-	echo "ALT=\""._T('spixplorer:"uplink"')."\" TITLE=\""._T('spixplorer:"uplink"')."\"></A></TD>\n";
+	echo "ALT=\""._T('spixplorer:uplink')."\" TITLE=\""._T('spixplorer:uplink')."\"></A></TD>\n";
 	// HOME DIR
 	echo "<TD><A HREF=\"".make_link("list",NULL,NULL)."\">";
 	echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_home.gif\" ";
-	echo "ALT=\""._T('spixplorer:"homelink"')."\" TITLE=\""._T('spixplorer:"homelink"')."\"></A></TD>\n";
+	echo "ALT=\""._T('spixplorer:homelink')."\" TITLE=\""._T('spixplorer:homelink')."\"></A></TD>\n";
 	// RELOAD
 	echo "<TD><A HREF=\"javascript:location.reload();\"><IMG border=\"0\" width=\"16\" height=\"16\" ";
-	echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_refresh.gif\" ALT=\""._T('spixplorer:"reloadlink"');
-	echo "\" TITLE=\""._T('spixplorer:"reloadlink"')."\"></A></TD>\n";
+	echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_refresh.gif\" ALT=\""._T('spixplorer:reloadlink');
+	echo "\" TITLE=\""._T('spixplorer:reloadlink')."\"></A></TD>\n";
 	// SEARCH
 	echo "<TD><A HREF=\"".make_link("search",$dir,NULL)."\">";
 	echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_search.gif\" ";
-	echo "ALT=\""._T('spixplorer:"searchlink"')."\" TITLE=\""._T('spixplorer:"searchlink"');
+	echo "ALT=\""._T('spixplorer:searchlink')."\" TITLE=\""._T('spixplorer:searchlink');
 	echo "\"></A></TD>\n";
 	
 	echo "<TD>::</TD>";
@@ -272,50 +272,50 @@ function list_dir($dir) {			// list directory contents
 	if($allow) {
 		// COPY
 		echo "<TD><A HREF=\"javascript:Copy();\"><IMG border=\"0\" width=\"16\" height=\"16\" ";
-		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_copy.gif\" ALT=\""._T('spixplorer:"copylink"');
-		echo "\" TITLE=\""._T('spixplorer:"copylink"')."\"></A></TD>\n";
+		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_copy.gif\" ALT=\""._T('spixplorer:copylink');
+		echo "\" TITLE=\""._T('spixplorer:copylink')."\"></A></TD>\n";
 		// MOVE
 		echo "<TD><A HREF=\"javascript:Move();\"><IMG border=\"0\" width=\"16\" height=\"16\" ";
-		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_move.gif\" ALT=\""._T('spixplorer:"movelink"');
-		echo "\" TITLE=\""._T('spixplorer:"movelink"')."\"></A></TD>\n";
+		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_move.gif\" ALT=\""._T('spixplorer:movelink');
+		echo "\" TITLE=\""._T('spixplorer:movelink')."\"></A></TD>\n";
 		// DELETE
 		echo "<TD><A HREF=\"javascript:Delete();\"><IMG border=\"0\" width=\"16\" height=\"16\" ";
-		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_delete.gif\" ALT=\""._T('spixplorer:"dellink"');
-		echo "\" TITLE=\""._T('spixplorer:"dellink"')."\"></A></TD>\n";
+		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_delete.gif\" ALT=\""._T('spixplorer:dellink');
+		echo "\" TITLE=\""._T('spixplorer:dellink')."\"></A></TD>\n";
 		// UPLOAD
 		if(get_cfg_var("file_uploads")) {
 			echo "<TD><A HREF=\"".make_link("upload",$dir,NULL)."\">";
 			echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-			echo "src=\"plugins/spixplorer/_img/_upload.gif\" ALT=\""._T('spixplorer:"uploadlink"');
-			echo "\" TITLE=\""._T('spixplorer:"uploadlink"')."\"></A></TD>\n";
+			echo "src=\"plugins/spixplorer/_img/_upload.gif\" ALT=\""._T('spixplorer:uploadlink');
+			echo "\" TITLE=\""._T('spixplorer:uploadlink')."\"></A></TD>\n";
 		} else {
 			echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-			echo "src=\"plugins/spixplorer/_img/_upload_.gif\" ALT=\""._T('spixplorer:"uploadlink"');
-			echo "\" TITLE=\""._T('spixplorer:"uploadlink"')."\"></TD>\n";
+			echo "src=\"plugins/spixplorer/_img/_upload_.gif\" ALT=\""._T('spixplorer:uploadlink');
+			echo "\" TITLE=\""._T('spixplorer:uploadlink')."\"></TD>\n";
 		}
 		// ARCHIVE
 		if($GLOBALS['spx']["zip"] || $GLOBALS['spx']["tar"] || $GLOBALS['spx']["tgz"]) {
 			echo "<TD><A HREF=\"javascript:Archive();\"><IMG border=\"0\" width=\"16\" height=\"16\" ";
-			echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_archive.gif\" ALT=\""._T('spixplorer:"comprlink"');
-			echo "\" TITLE=\""._T('spixplorer:"comprlink"')."\"></A></TD>\n";
+			echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_archive.gif\" ALT=\""._T('spixplorer:comprlink');
+			echo "\" TITLE=\""._T('spixplorer:comprlink')."\"></A></TD>\n";
 		}
 	} else {
 		// COPY
 		echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-		echo "src=\"plugins/spixplorer/_img/_copy_.gif\" ALT=\""._T('spixplorer:"copylink"')."\" TITLE=\"";
-		echo _T('spixplorer:"copylink"')."\"></TD>\n";
+		echo "src=\"plugins/spixplorer/_img/_copy_.gif\" ALT=\""._T('spixplorer:copylink')."\" TITLE=\"";
+		echo _T('spixplorer:copylink')."\"></TD>\n";
 		// MOVE
 		echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-		echo "src=\"plugins/spixplorer/_img/_move_.gif\" ALT=\""._T('spixplorer:"movelink"')."\" TITLE=\"";
-		echo _T('spixplorer:"movelink"')."\"></TD>\n";
+		echo "src=\"plugins/spixplorer/_img/_move_.gif\" ALT=\""._T('spixplorer:movelink')."\" TITLE=\"";
+		echo _T('spixplorer:movelink')."\"></TD>\n";
 		// DELETE
 		echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-		echo "src=\"plugins/spixplorer/_img/_delete_.gif\" ALT=\""._T('spixplorer:"dellink"')."\" TITLE=\"";
-		echo _T('spixplorer:"dellink"')."\"></TD>\n";
+		echo "src=\"plugins/spixplorer/_img/_delete_.gif\" ALT=\""._T('spixplorer:dellink')."\" TITLE=\"";
+		echo _T('spixplorer:dellink')."\"></TD>\n";
 		// UPLOAD
 		echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-		echo "src=\"plugins/spixplorer/_img/_upload_.gif\" ALT=\""._T('spixplorer:"uplink"');
-		echo "\" TITLE=\""._T('spixplorer:"uplink"')."\"></TD>\n";
+		echo "src=\"plugins/spixplorer/_img/_upload_.gif\" ALT=\""._T('spixplorer:uplink');
+		echo "\" TITLE=\""._T('spixplorer:uplink')."\"></TD>\n";
 	}
 	
 	// ADMIN & LOGOUT
@@ -325,14 +325,14 @@ function list_dir($dir) {			// list directory contents
 		if($admin) {
 			echo "<TD><A HREF=\"".make_link("admin",$dir,NULL)."\">";
 			echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-			echo "src=\"plugins/spixplorer/_img/_admin.gif\" ALT=\""._T('spixplorer:"adminlink"')."\" TITLE=\"";
-			echo _T('spixplorer:"adminlink"')."\"></A></TD>\n";
+			echo "src=\"plugins/spixplorer/_img/_admin.gif\" ALT=\""._T('spixplorer:adminlink')."\" TITLE=\"";
+			echo _T('spixplorer:adminlink')."\"></A></TD>\n";
 		}
 		// LOGOUT
 		echo "<TD><A HREF=\"".make_link("logout",NULL,NULL)."\">";
 		echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-		echo "src=\"plugins/spixplorer/_img/_logout.gif\" ALT=\""._T('spixplorer:"logoutlink"')."\" TITLE=\"";
-		echo _T('spixplorer:"logoutlink"')."\"></A></TD>\n";
+		echo "src=\"plugins/spixplorer/_img/_logout.gif\" ALT=\""._T('spixplorer:logoutlink')."\" TITLE=\"";
+		echo _T('spixplorer:logoutlink')."\"></A></TD>\n";
 	}
 	echo "</TR></TABLE></TD>\n";
 	
@@ -342,7 +342,7 @@ function list_dir($dir) {			// list directory contents
 		echo "<SELECT name=\"mktype\"><option value=\"file\">".$GLOBALS['spx']["mimes"]["file"]."</option>";
 		echo "<option value=\"dir\">".$GLOBALS['spx']["mimes"]["dir"]."</option></SELECT>\n";
 		echo "<INPUT name=\"mkname\" type=\"text\" size=\"15\">";
-		echo "<INPUT type=\"submit\" value=\""._T('spixplorer:"btncreate"');
+		echo "<INPUT type=\"submit\" value=\""._T('spixplorer:btncreate');
 		echo "\"></TD></TR></FORM></TABLE></TD>\n";
 	}
 	
@@ -360,22 +360,22 @@ function list_dir($dir) {			// list directory contents
 	echo "<INPUT TYPE=\"checkbox\" name=\"toggleAllC\" onclick=\"javascript:ToggleAll(this);\"></TD>\n";
 	echo "<TD WIDTH=\"44%\" class=\"header\"><B>\n";
 	if($GLOBALS['spx']["order"]=="name") $new_srt = $_srt;	else $new_srt = "yes";
-	echo "<A href=\"".make_link("list",$dir,NULL,"name",$new_srt)."\">"._T('spixplorer:"nameheader"');
+	echo "<A href=\"".make_link("list",$dir,NULL,"name",$new_srt)."\">"._T('spixplorer:nameheader');
 	if($GLOBALS['spx']["order"]=="name") echo $_img;
 	echo "</A></B></TD>\n<TD WIDTH=\"10%\" class=\"header\"><B>";
 	if($GLOBALS['spx']["order"]=="size") $new_srt = $_srt;	else $new_srt = "yes";
-	echo "<A href=\"".make_link("list",$dir,NULL,"size",$new_srt)."\">"._T('spixplorer:"sizeheader"');
+	echo "<A href=\"".make_link("list",$dir,NULL,"size",$new_srt)."\">"._T('spixplorer:sizeheader');
 	if($GLOBALS['spx']["order"]=="size") echo $_img;
 	echo "</A></B></TD>\n<TD WIDTH=\"16%\" class=\"header\"><B>";
 	if($GLOBALS['spx']["order"]=="type") $new_srt = $_srt;	else $new_srt = "yes";
-	echo "<A href=\"".make_link("list",$dir,NULL,"type",$new_srt)."\">"._T('spixplorer:"typeheader"');
+	echo "<A href=\"".make_link("list",$dir,NULL,"type",$new_srt)."\">"._T('spixplorer:typeheader');
 	if($GLOBALS['spx']["order"]=="type") echo $_img;
 	echo "</A></B></TD>\n<TD WIDTH=\"14%\" class=\"header\"><B>";
 	if($GLOBALS['spx']["order"]=="mod") $new_srt = $_srt;	else $new_srt = "yes";
-	echo "<A href=\"".make_link("list",$dir,NULL,"mod",$new_srt)."\">"._T('spixplorer:"modifheader"');
+	echo "<A href=\"".make_link("list",$dir,NULL,"mod",$new_srt)."\">"._T('spixplorer:modifheader');
 	if($GLOBALS['spx']["order"]=="mod") echo $_img;
-	echo "</A></B></TD><TD WIDTH=\"8%\" class=\"header\"><B>"._T('spixplorer:"permheader"')."</B>\n";
-	echo "</TD><TD WIDTH=\"6%\" class=\"header\"><B>"._T('spixplorer:"actionheader"')."</B></TD></TR>\n";
+	echo "</A></B></TD><TD WIDTH=\"8%\" class=\"header\"><B>"._T('spixplorer:permheader')."</B>\n";
+	echo "</TD><TD WIDTH=\"6%\" class=\"header\"><B>"._T('spixplorer:actionheader')."</B></TD></TR>\n";
 	echo "<TR><TD colspan=\"7\"><HR></TD></TR>\n";
 		
 	// make & print Table using lists
@@ -383,14 +383,14 @@ function list_dir($dir) {			// list directory contents
 
 	// print number of items & total filesize
 	echo "<TR><TD colspan=\"7\"><HR></TD></TR><TR>\n<TD class=\"header\"></TD>";
-	echo "<TD class=\"header\">".$num_items." "._T('spixplorer:"miscitems"')." (";
+	echo "<TD class=\"header\">".$num_items." "._T('spixplorer:miscitems')." (";
 	if(function_exists("disk_free_space")) {
 		$free=parse_file_size(disk_free_space(get_abs_dir($dir)));
 	} elseif(function_exists("diskfreespace")) {
 		$free=parse_file_size(diskfreespace(get_abs_dir($dir)));
 	} else $free="?";
 	// echo "Total: ".parse_file_size(disk_total_space(get_abs_dir($dir))).", ";
-	echo _T('spixplorer:"miscfree"').": ".$free.")</TD>\n";
+	echo _T('spixplorer:miscfree').": ".$free.")</TD>\n";
 	echo "<TD class=\"header\">".parse_file_size($tot_file_size)."</TD>\n";
 	for($i=0;$i<4;++$i) echo"<TD class=\"header\"></TD>";
 	echo "</TR>\n<TR><TD colspan=\"7\"><HR></TD></TR></FORM></TABLE>\n";

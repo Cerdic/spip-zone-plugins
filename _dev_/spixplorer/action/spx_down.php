@@ -45,9 +45,9 @@ function download_item($dir, $item) {		// download file
 	// Security Fix:
 	$item=basename($item);
 
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:"accessfunc"'));
-	if(!get_is_file($dir,$item)) show_error($item.": "._T('spixplorer:"fileexist"'));
-	if(!get_show_item($dir, $item)) show_error($item.": "._T('spixplorer:"accessfile"'));
+	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
+	if(!get_is_file($dir,$item)) show_error($item.": "._T('spixplorer:fileexist'));
+	if(!get_show_item($dir, $item)) show_error($item.": "._T('spixplorer:accessfile'));
 	
 	$abs_item = get_abs_item($dir,$item);
 	$browser=id_browser();

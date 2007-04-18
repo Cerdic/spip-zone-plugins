@@ -112,11 +112,11 @@ $abs_dir=get_abs_dir($GLOBALS['spx']["dir"]);
 if(!@file_exists($GLOBALS['spx']["home_dir"])) {
 	if($GLOBALS['spx']["require_login"]) {
 		$extra="<A HREF=\"".make_link("logout",NULL,NULL)."\">".
-			_T('spixplorer:"btnlogout"')."</A>";
+			_T('spixplorer:btnlogout')."</A>";
 	} else $extra=NULL;
-	show_error(_T('spixplorer:"home"'),$extra);
+	show_error(_T('spixplorer:home'),$extra);
 }
-if(!down_home($abs_dir)) show_error($GLOBALS['spx']["dir"]." : "._T('spixplorer:"abovehome"'));
-if(!is_dir($abs_dir)) show_error($GLOBALS['spx']["dir"]." : "._T('spixplorer:"direxist"'));
+if(!down_home($abs_dir)) show_error($GLOBALS['spx']["dir"]." : "._T('spixplorer:abovehome'));
+if(!is_dir($abs_dir)) show_error($GLOBALS['spx']["dir"]." : "._T('spixplorer:direxist'));
 //------------------------------------------------------------------------------
 ?>

@@ -111,35 +111,35 @@ function search_items($dir) {			// search for item
 		$subdir=true;
 	}
 	
-	$msg=_T('spixplorer:"actsearchresults"');
+	$msg=_T('spixplorer:actsearchresults');
 	if($searchitem!=NULL) $msg.=": (/" . get_rel_item($dir, $searchitem).")";
 	show_header($msg);
 	
 	// Search Box
 	echo "<BR><TABLE><FORM name=\"searchform\" action=\"".make_link("search",$dir,NULL);
 	echo "\" method=\"post\">\n<TR><TD><INPUT name=\"searchitem\" type=\"text\" size=\"25\" value=\"";
-	echo $searchitem."\"><INPUT type=\"submit\" value=\""._T('spixplorer:"btnsearch"');
-	echo "\">&nbsp;<input type=\"button\" value=\""._T('spixplorer:"btnclose"');
+	echo $searchitem."\"><INPUT type=\"submit\" value=\""._T('spixplorer:btnsearch');
+	echo "\">&nbsp;<input type=\"button\" value=\""._T('spixplorer:btnclose');
 	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL);
 	echo "';\"></TD></TR><TR><TD><INPUT type=\"checkbox\" name=\"subdir\" value=\"y\"";
-	echo ($subdir?" checked>":">")._T('spixplorer:"miscsubdirs"')."</TD></TR></FORM></TABLE>\n";
+	echo ($subdir?" checked>":">")._T('spixplorer:miscsubdirs')."</TD></TR></FORM></TABLE>\n";
 	
 	// Results
 	if($searchitem!=NULL) {
 		echo "<TABLE width=\"95%\"><TR><TD colspan=\"2\"><HR></TD></TR>\n";
 		if(count($list)>0) {
 			// Table Header
-			echo "<TR>\n<TD WIDTH=\"42%\" class=\"header\"><B>"._T('spixplorer:"nameheader"');
-			echo "</B></TD>\n<TD WIDTH=\"58%\" class=\"header\"><B>"._T('spixplorer:"pathheader"');
+			echo "<TR>\n<TD WIDTH=\"42%\" class=\"header\"><B>"._T('spixplorer:nameheader');
+			echo "</B></TD>\n<TD WIDTH=\"58%\" class=\"header\"><B>"._T('spixplorer:pathheader');
 			echo "</B></TD></TR>\n<TR><TD colspan=\"2\"><HR></TD></TR>\n";
 	
 			// make & print table of found items
 			print_table($list);
 
 			echo "<TR><TD colspan=\"2\"><HR></TD></TR>\n<TR><TD class=\"header\">".count($list)." ";
-			echo _T('spixplorer:"miscitems"').".</TD><TD class=\"header\"></TD></TR>\n";
+			echo _T('spixplorer:miscitems').".</TD><TD class=\"header\"></TD></TR>\n";
 		} else {
-			echo "<TR><TD>"._T('spixplorer:"miscnoresult"')."</TD></TR>";
+			echo "<TR><TD>"._T('spixplorer:miscnoresult')."</TD></TR>";
 		}
 		echo "<TR><TD colspan=\"2\"><HR></TD></TR></TABLE>\n";
 	}

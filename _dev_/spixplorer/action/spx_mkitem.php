@@ -42,23 +42,23 @@ Comment:
 ------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
 function make_item($dir) {		// make new directory or file
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:"accessfunc"'));
+	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
 	
 	$mkname=$GLOBALS['spx']['__POST']["mkname"];
 	$mktype=$GLOBALS['spx']['__POST']["mktype"];
 	
 	$mkname=basename(stripslashes($mkname));
-	if($mkname=="") show_error(_T('spixplorer:"miscnoname"'));
+	if($mkname=="") show_error(_T('spixplorer:miscnoname'));
 	
 	$new = get_abs_item($dir,$mkname);
-	if(@file_exists($new)) show_error($mkname.": "._T('spixplorer:"itemdoesexist"'));
+	if(@file_exists($new)) show_error($mkname.": "._T('spixplorer:itemdoesexist'));
 	
 	if($mktype!="file") {
 		$ok=@mkdir($new, 0777);
-		$err=_T('spixplorer:"createdir"');
+		$err=_T('spixplorer:createdir');
 	} else {
 		$ok=@touch($new);
-		$err=_T('spixplorer:"createfile"');
+		$err=_T('spixplorer:createfile');
 	}
 	
 	if($ok===false) show_error($err);

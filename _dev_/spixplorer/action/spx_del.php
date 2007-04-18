@@ -42,7 +42,7 @@ Comment:
 ------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
 function del_items($dir) {		// delete files/dirs
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:"accessfunc"'));
+	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
 	
 	$cnt=count($GLOBALS['spx']['__POST']["selitems"]);
 	$err=false;
@@ -53,11 +53,11 @@ function del_items($dir) {		// delete files/dirs
 		$abs = get_abs_item($dir,$items[$i]);
 	
 		if(!@file_exists(get_abs_item($dir, $items[$i]))) {
-			$error[$i]=_T('spixplorer:"itemexist"');
+			$error[$i]=_T('spixplorer:itemexist');
 			$err=true;	continue;
 		}
 		if(!get_show_item($dir, $items[$i])) {
-			$error[$i]=_T('spixplorer:"accessitem"');
+			$error[$i]=_T('spixplorer:accessitem');
 			$err=true;	continue;
 		}
 		
@@ -65,7 +65,7 @@ function del_items($dir) {		// delete files/dirs
 		$ok=remove(get_abs_item($dir,$items[$i]));
 		
 		if($ok===false) {
-			$error[$i]=_T('spixplorer:"delitem"');
+			$error[$i]=_T('spixplorer:delitem');
 			$err=true;	continue;
 		}
 		

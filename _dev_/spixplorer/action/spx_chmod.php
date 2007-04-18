@@ -42,9 +42,9 @@ Comment:
 ------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
 function chmod_item($dir, $item) {		// change permissions
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:"accessfunc"'));
-	if(!file_exists(get_abs_item($dir, $item))) show_error($item.": "._T('spixplorer:"fileexist"'));
-	if(!get_show_item($dir, $item)) show_error($item.": "._T('spixplorer:"accessfile"'));
+	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
+	if(!file_exists(get_abs_item($dir, $item))) show_error($item.": "._T('spixplorer:fileexist'));
+	if(!get_show_item($dir, $item)) show_error($item.": "._T('spixplorer:accessfile'));
 	
 	// Execute
 	if(_request("confirm")=="true") {
@@ -56,18 +56,18 @@ function chmod_item($dir, $item) {		// change permissions
 		}
 		
 		if(!@chmod(get_abs_item($dir,$item),bindec($bin))) {
-			show_error($item.": "._T('spixplorer:"permchange"'));
+			show_error($item.": "._T('spixplorer:permchange'));
 		}
 		header("Location: ".make_link("link",$dir,NULL));
 		return;
 	}
 	
 	$mode = parse_file_perms(get_file_perms($dir,$item));
-	if($mode===false) show_error($item.": "._T('spixplorer:"permread"'));
+	if($mode===false) show_error($item.": "._T('spixplorer:permread'));
 	$pos = "rwx";
 	
 	$s_item=get_rel_item($dir,$item);	if(strlen($s_item)>50) $s_item="...".substr($s_item,-47);
-	show_header(_T('spixplorer:"actperms"').": /".$s_item);
+	show_header(_T('spixplorer:actperms').": /".$s_item);
 	
 
 	// Form
@@ -77,7 +77,7 @@ function chmod_item($dir, $item) {		// change permissions
 	
 	// print table with current perms & checkboxes to change	
 	for($i=0;$i<3;++$i) {
-		echo "<TR><TD>" . _T('spixplorer:"miscchmod"')[$i] . "</TD>";
+		echo "<TR><TD>" . _T('spixplorer:miscchmod')[$i] . "</TD>";
 		for($j=0;$j<3;++$j) {
 			echo "<TD>" . $pos{$j} . "&nbsp;<INPUT type=\"checkbox\"";
 			if($mode{(3*$i)+$j} != "-") echo " checked";
@@ -87,8 +87,8 @@ function chmod_item($dir, $item) {		// change permissions
 	}
 	
 	// Submit / Cancel
-	echo "</TABLE>\n<BR><TABLE>\n<TR><TD>\n<INPUT type=\"submit\" value=\""._T('spixplorer:"btnchange"');
-	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:"btncancel"');
+	echo "</TABLE>\n<BR><TABLE>\n<TR><TD>\n<INPUT type=\"submit\" value=\""._T('spixplorer:btnchange');
+	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:btncancel');
 	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><BR>\n";
 }
 //------------------------------------------------------------------------------

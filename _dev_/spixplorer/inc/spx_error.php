@@ -42,10 +42,10 @@ Comment:
 ------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
 function show_error($error,$extra=NULL) {		// show error-message
-	show_header(_T('spixplorer:"error"'));
-	echo "<CENTER><BR>"._T('spixplorer:"error"').":"."<BR><BR>\n";
+	show_header(_T('spixplorer:error'));
+	echo "<CENTER><BR>"._T('spixplorer:error').":"."<BR><BR>\n";
 	echo $error."\n<BR><BR><A HREF=\"javascript:window.history.back()\">";
-	echo _T('spixplorer:"back"')."</A>";
+	echo _T('spixplorer:back')."</A>";
 	if($extra!=NULL) echo " - ".$extra;
 	echo "<BR><BR></CENTER>\n";
 	show_footer();

@@ -44,15 +44,15 @@ Comment:
 function savefile($file_name) {			// save edited file
 	$code = stripslashes($GLOBALS['spx']['__POST']["code"]);
 	$fp = @fopen($file_name, "w");
-	if($fp===false) show_error(basename($file_name).": "._T('spixplorer:"savefile"'));
+	if($fp===false) show_error(basename($file_name).": "._T('spixplorer:savefile'));
 	fputs($fp, $code);
 	@fclose($fp);
 }
 //------------------------------------------------------------------------------
 function edit_file($dir, $item) {		// edit file
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:"accessfunc"'));
-	if(!get_is_file($dir, $item)) show_error($item.": "._T('spixplorer:"fileexist"'));
-	if(!get_show_item($dir, $item)) show_error($item.": "._T('spixplorer:"accessfile"'));
+	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
+	if(!get_is_file($dir, $item)) show_error($item.": "._T('spixplorer:fileexist'));
+	if(!get_show_item($dir, $item)) show_error($item.": "._T('spixplorer:accessfile'));
 	
 	$fname = get_abs_item($dir, $item);
 	
@@ -60,19 +60,19 @@ function edit_file($dir, $item) {		// edit file
 		// Save / Save As
 		$item=basename(stripslashes($GLOBALS['spx']['__POST']["fname"]));
 		$fname2=get_abs_item($dir, $item);
-		if(!isset($item) || $item=="") show_error(_T('spixplorer:"miscnoname"'));
-		if($fname!=$fname2 && @file_exists($fname2)) show_error($item.": "._T('spixplorer:"itemdoesexist"'));
+		if(!isset($item) || $item=="") show_error(_T('spixplorer:miscnoname'));
+		if($fname!=$fname2 && @file_exists($fname2)) show_error($item.": "._T('spixplorer:itemdoesexist'));
 		savefile($fname2);
 		$fname=$fname2;
 	}
 	
 	// open file
 	$fp = @fopen($fname, "r");
-	if($fp===false) show_error($item.": "._T('spixplorer:"openfile"'));
+	if($fp===false) show_error($item.": "._T('spixplorer:openfile'));
 	
 	// header
 	$s_item=get_rel_item($dir,$item);	if(strlen($s_item)>50) $s_item="...".substr($s_item,-47);
-	show_header(_T('spixplorer:"actedit"').": /".$s_item);
+	show_header(_T('spixplorer:actedit').": /".$s_item);
 	
 	// Wordwrap (works only in IE)
 ?><script language="JavaScript1.2" type="text/javascript">
@@ -103,9 +103,9 @@ function edit_file($dir, $item) {		// edit file
 	echo "</TEXTAREA><BR>\n<TABLE><TR><TD>Wordwrap: (IE only)</TD><TD><INPUT type=\"checkbox\" name=\"wrap\" ";
 	echo "onClick=\"javascript:chwrap();\" value=\"1\"></TD></TR></TABLE><BR>\n";
 	echo "<TABLE><TR><TD><INPUT type=\"text\" name=\"fname\" value=\"".$item."\"></TD>";
-	echo "<TD><input type=\"submit\" value=\""._T('spixplorer:"btnsave"');
-	echo "\"></TD>\n<TD><input type=\"reset\" value=\""._T('spixplorer:"btnreset"')."\"></TD>\n<TD>";
-	echo "<input type=\"button\" value=\""._T('spixplorer:"btnclose"')."\" onClick=\"javascript:location='";
+	echo "<TD><input type=\"submit\" value=\""._T('spixplorer:btnsave');
+	echo "\"></TD>\n<TD><input type=\"reset\" value=\""._T('spixplorer:btnreset')."\"></TD>\n<TD>";
+	echo "<input type=\"button\" value=\""._T('spixplorer:btnclose')."\" onClick=\"javascript:location='";
 	echo make_link("list",$dir,NULL)."';\"></TD></TR></FORM></TABLE><BR>\n";
 ?><script language="JavaScript1.2" type="text/javascript">
 <!--

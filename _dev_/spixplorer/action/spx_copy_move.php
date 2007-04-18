@@ -82,7 +82,7 @@ function dir_print($dir_list, $new_dir) {	// print list of directories
 }
 //------------------------------------------------------------------------------
 function copy_move_items($dir) {		// copy/move file/dir
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:"accessfunc"'));
+	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
 	
 	// Vars
 	$first = $GLOBALS['spx']['__POST']["first"];
@@ -101,8 +101,8 @@ function copy_move_items($dir) {		// copy/move file/dir
 	// Get New Location & Names
 	if(!_request("confirm")!="true") {
 		show_header(($GLOBALS['spx']["action"]!="move"?
-			_T('spixplorer:"actcopyitems"'):
-			_T('spixplorer:"actmoveitems"')
+			_T('spixplorer:actcopyitems'):
+			_T('spixplorer:actmoveitems')
 		));
 		
 		// JavaScript for Form:
@@ -124,8 +124,8 @@ function copy_move_items($dir) {		// copy/move file/dir
 		$s_dir=$dir;		if(strlen($s_dir)>40) $s_dir="...".substr($s_dir,-37);
 		$s_ndir=$new_dir;	if(strlen($s_ndir)>40) $s_ndir="...".substr($s_ndir,-37);
 		echo "<BR><IMG SRC=\"".$_img."\" align=\"ABSMIDDLE\" ALT=\"\">&nbsp;";
-		echo sprintf(($GLOBALS['spx']["action"]!="move"?_T('spixplorer:"actcopyfrom"'):
-			_T('spixplorer:"actmovefrom"')),$s_dir, $s_ndir);
+		echo sprintf(($GLOBALS['spx']["action"]!="move"?_T('spixplorer:actcopyfrom'):
+			_T('spixplorer:actmovefrom')),$s_dir, $s_ndir);
 		echo "<IMG SRC=\"plugins/spixplorer/_img/__paste.gif\" align=\"ABSMIDDLE\" ALT=\"\">\n";
 		
 		// Form for Target Directory & New Names
@@ -160,9 +160,9 @@ function copy_move_items($dir) {		// copy/move file/dir
 		// Submit & Cancel
 		echo "</TABLE><BR><TABLE><TR>\n<TD>";
 		echo "<INPUT type=\"submit\" value=\"";
-		echo ($GLOBALS['spx']["action"]!="move"?_T('spixplorer:"btncopy"'):_T('spixplorer:"btnmove"'));
+		echo ($GLOBALS['spx']["action"]!="move"?_T('spixplorer:btncopy'):_T('spixplorer:btnmove'));
 		echo "\" onclick=\"javascript:Execute();\"></TD>\n<TD>";
-		echo "<input type=\"button\" value=\""._T('spixplorer:"btncancel"');
+		echo "<input type=\"button\" value=\""._T('spixplorer:btncancel');
 		echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL);
 		echo "';\"></TD>\n</TR></FORM></TABLE><BR>\n";
 		return;
@@ -172,9 +172,9 @@ function copy_move_items($dir) {		// copy/move file/dir
 	// DO COPY/MOVE
 	
 	// ALL OK?
-	if(!@file_exists(get_abs_dir($new_dir))) show_error($new_dir.": "._T('spixplorer:"targetexist"'));
-	if(!get_show_item($new_dir,"")) show_error($new_dir.": "._T('spixplorer:"accesstarget"'));
-	if(!down_home(get_abs_dir($new_dir))) show_error($new_dir.": "._T('spixplorer:"targetabovehome"'));
+	if(!@file_exists(get_abs_dir($new_dir))) show_error($new_dir.": "._T('spixplorer:targetexist'));
+	if(!get_show_item($new_dir,"")) show_error($new_dir.": "._T('spixplorer:accesstarget'));
+	if(!down_home(get_abs_dir($new_dir))) show_error($new_dir.": "._T('spixplorer:targetabovehome'));
 	
 	
 	// copy / move files
@@ -188,19 +188,19 @@ function copy_move_items($dir) {		// copy/move file/dir
 	
 		// Check
 		if($new=="") {
-			$error[$i]= _T('spixplorer:"miscnoname"');
+			$error[$i]= _T('spixplorer:miscnoname');
 			$err=true;	continue;
 		}
 		if(!@file_exists($abs_item)) {
-			$error[$i]= _T('spixplorer:"itemexist"');
+			$error[$i]= _T('spixplorer:itemexist');
 			$err=true;	continue;
 		}
 		if(!get_show_item($dir, $tmp)) {
-			$error[$i]= _T('spixplorer:"accessitem"');
+			$error[$i]= _T('spixplorer:accessitem');
 			$err=true;	continue;
 		}
 		if(@file_exists($abs_new_item)) {
-			$error[$i]= _T('spixplorer:"targetdoesexist"');
+			$error[$i]= _T('spixplorer:targetdoesexist');
 			$err=true;	continue;
 		}
 	
@@ -218,8 +218,8 @@ function copy_move_items($dir) {		// copy/move file/dir
 		
 		if($ok===false) {
 			$error[$i]=($GLOBALS['spx']["action"]=="copy"?
-				_T('spixplorer:"copyitem"'):
-				_T('spixplorer:"moveitem"')
+				_T('spixplorer:copyitem'):
+				_T('spixplorer:moveitem')
 			);
 			$err=true;	continue;
 		}

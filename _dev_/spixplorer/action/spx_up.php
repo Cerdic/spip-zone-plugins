@@ -42,7 +42,7 @@ Comment:
 ------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
 function upload_items($dir) {		// upload file
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:"accessfunc"'));
+	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
 	
 	// Execute
 	if(_request("confirm")=="true") {	
@@ -61,19 +61,19 @@ function upload_items($dir) {		// upload file
 		
 			if($items[$i]=="" || $up_err==4) continue;
 			if($up_err==1 || $up_err==2) {
-				$errors[$i]=_T('spixplorer:"miscfilesize"');
+				$errors[$i]=_T('spixplorer:miscfilesize');
 				$err=true;	continue;
 			}
 			if($up_err==3) {
-				$errors[$i]=_T('spixplorer:"miscfilepart"');
+				$errors[$i]=_T('spixplorer:miscfilepart');
 				$err=true;	continue;
 			}
 			if(!@is_uploaded_file($tmp)) {
-				$errors[$i]=_T('spixplorer:"uploadfile"');
+				$errors[$i]=_T('spixplorer:uploadfile');
 				$err=true;	continue;
 			}
 			if(@file_exists($abs)) {
-				$errors[$i]=_T('spixplorer:"itemdoesexist"');
+				$errors[$i]=_T('spixplorer:itemdoesexist');
 				$err=true;	continue;
 			}
 			
@@ -86,7 +86,7 @@ function upload_items($dir) {		// upload file
 			}
 			
 			if($ok===false) {
-				$errors[$i]=_T('spixplorer:"uploadfile"');
+				$errors[$i]=_T('spixplorer:uploadfile');
 				$err=true;	continue;
 			}
 		}
@@ -104,7 +104,7 @@ function upload_items($dir) {		// upload file
 		return;
 	}
 	
-	show_header(_T('spixplorer:"actupload"'));
+	show_header(_T('spixplorer:actupload'));
 	
 	// List
 	echo "<BR><FORM enctype=\"multipart/form-data\" action=\"".make_link("upload",$dir,NULL);
@@ -114,8 +114,8 @@ function upload_items($dir) {		// upload file
 		echo "<TR><TD nowrap align=\"center\">";
 		echo "<INPUT name=\"userfile[]\" type=\"file\" size=\"40\"></TD></TR>\n";
 	}
-	echo "</TABLE>\n<BR><TABLE><TR><TD><INPUT type=\"submit\" value=\""._T('spixplorer:"btnupload"');
-	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:"btncancel"');
+	echo "</TABLE>\n<BR><TABLE><TR><TD><INPUT type=\"submit\" value=\""._T('spixplorer:btnupload');
+	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:btncancel');
 	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><BR>\n";
 	
 	return;

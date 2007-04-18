@@ -91,7 +91,7 @@ function spixplorer_install($action)
 			'#(?:require|include)[ (]+"\./\.config/(.*)\.php"\)?#' => 'include_spip("config/spx_$1")',
 			"#isset\(\\\$GLOBALS\['__POST'\]\[([^\]]+)\]\)((.+?=\s*)|[^\$]+?)\\\$GLOBALS\['__POST'\]\[\\1\]#"
 				=> '$3_request($1)',
-			'#\$GLOBALS\["(messages|error_msg)"\]\[([^\]]+)\]#' => '_T(\'spixplorer:$2\')',
+			'#\$GLOBALS\["(messages|error_msg)"\]\["([^"]+)"\]#' => '_T(\'spixplorer:$2\')',
 			'#\$GLOBALS\["date_fmt"\]#' =>  '_T(\'spixplorer:date_fmt\')',
 			'#\$GLOBALS\["text_dir"\]#' => '$GLOBALS[\'spip_lang_dir\']',
 

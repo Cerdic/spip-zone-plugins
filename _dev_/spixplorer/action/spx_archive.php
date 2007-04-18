@@ -72,12 +72,12 @@ function tgz_items($dir,$name) {
 }
 //------------------------------------------------------------------------------
 function archive_items($dir) {
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:"accessfunc"'));
-	if(!$GLOBALS['spx']["zip"] && !$GLOBALS['spx']["tar"] && !$GLOBALS['spx']["tgz"]) show_error(_T('spixplorer:"miscnofunc"'));
+	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
+	if(!$GLOBALS['spx']["zip"] && !$GLOBALS['spx']["tar"] && !$GLOBALS['spx']["tgz"]) show_error(_T('spixplorer:miscnofunc'));
 	
 	if(isset($GLOBALS['spx']['__POST']["name"])) {
 		$name=basename(stripslashes($GLOBALS['spx']['__POST']["name"]));
-		if($name=="") show_error(_T('spixplorer:"miscnoname"'));
+		if($name=="") show_error(_T('spixplorer:miscnoname'));
 		switch($GLOBALS['spx']['__POST']["type"]) {
 			case "zip":	zip_items($dir,$name);	break;
 			case "tar":	tar_items($dir,$name);	break;
@@ -86,7 +86,7 @@ function archive_items($dir) {
 		header("Location: ".make_link("list",$dir,NULL));
 	}
 	
-	show_header(_T('spixplorer:"actarchive"'));
+	show_header(_T('spixplorer:actarchive'));
 	echo "<BR><FORM name=\"archform\" method=\"post\" action=\"".make_link("arch",$dir,NULL)."\">\n";
 	
 	$cnt=count($GLOBALS['spx']['__POST']["selitems"]);
@@ -94,15 +94,15 @@ function archive_items($dir) {
 		echo "<INPUT type=\"hidden\" name=\"selitems[]\" value=\"".stripslashes($GLOBALS['spx']['__POST']["selitems"][$i])."\">\n";
 	}
 	
-	echo "<TABLE width=\"300\"><TR><TD>"._T('spixplorer:"nameheader"').":</TD><TD align=\"right\">";
+	echo "<TABLE width=\"300\"><TR><TD>"._T('spixplorer:nameheader').":</TD><TD align=\"right\">";
 	echo "<INPUT type=\"text\" name=\"name\" size=\"25\"></TD></TR>\n";
-	echo "<TR><TD>"._T('spixplorer:"typeheader"').":</TD><TD align=\"right\"><SELECT name=\"type\">\n";
+	echo "<TR><TD>"._T('spixplorer:typeheader').":</TD><TD align=\"right\"><SELECT name=\"type\">\n";
 	if($GLOBALS['spx']["zip"]) echo "<OPTION value=\"zip\">Zip</OPTION>\n";
 	if($GLOBALS['spx']["tar"]) echo "<OPTION value=\"tar\">Tar</OPTION>\n";
 	if($GLOBALS['spx']["tgz"]) echo "<OPTION value=\"tgz\">TGz</OPTION>\n";
 	echo "</SELECT></TD></TR>";
-	echo "<TR><TD></TD><TD align=\"right\"><INPUT type=\"submit\" value=\""._T('spixplorer:"btncreate"')."\">\n";
-	echo "<input type=\"button\" value=\""._T('spixplorer:"btncancel"');
+	echo "<TR><TD></TD><TD align=\"right\"><INPUT type=\"submit\" value=\""._T('spixplorer:btncreate')."\">\n";
+	echo "<input type=\"button\" value=\""._T('spixplorer:btncancel');
 	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><BR>\n";
 ?><script language="JavaScript1.2" type="text/javascript">
 <!--

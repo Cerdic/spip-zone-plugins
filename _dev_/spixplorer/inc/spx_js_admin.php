@@ -2,11 +2,11 @@
 <!--
 	function check_pwd() {
 		if(document.chpwd.newpwd1.value!=document.chpwd.newpwd2.value) {
-			alert("<?php echo _T('spixplorer:"miscnopassmatch"'); ?>");
+			alert("<?php echo _T('spixplorer:miscnopassmatch'); ?>");
 			return false;
 		}
 		if(document.chpwd.oldpwd.value==document.chpwd.newpwd1.value) {
-			alert("<?php echo _T('spixplorer:"miscnopassdiff"'); ?>");
+			alert("<?php echo _T('spixplorer:miscnopassdiff'); ?>");
 			return false;
 		}
 		return true;
@@ -32,7 +32,7 @@
 			}
 		}
 		
-		if(confirm("<?php echo _T('spixplorer:"miscdeluser"'); ?>")) {
+		if(confirm("<?php echo _T('spixplorer:miscdeluser'); ?>")) {
 			document.userform.action2.value = "rmuser";
 			document.userform.submit();
 		}
