@@ -26,8 +26,36 @@ if ($GLOBALS['spip_version_code']<1.92) {
 			return false;
 		}
 	}
+	if (!function_exists('ajax_action_greffe')) {
+		function ajax_action_greffe($idom, $corps)	{
+			return _request('var_ajaxcharset') ? $corps	: "\n<div id='$idom'>$corps\n</div>\n";
+		}
+	}
 }
 
+function tweak_suppr_metas_var($meta, $new = false) {
+ global $metas_vars;
+ if (!isset($metas_vars[$meta])) return;
+ if ($new) {
+ 	if (preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]*=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $metas_vars[$meta], $reg)) $metas_vars[$new] = $reg[1];
+	else $metas_vars[$new] = $metas_vars[$meta];
+ }
+ unset($metas_vars[$meta]);
+}
+
+function tweak_compatibilite_ascendante() {
+	tweak_suppr_metas_var('set_options');
+	tweak_suppr_metas_var('radio_set_options', 'radio_set_options3');
+	tweak_suppr_metas_var('radio_type_urls', 'radio_type_urls3');
+	tweak_suppr_metas_var('radio_type_urls2', 'radio_type_urls3');
+	tweak_suppr_metas_var('radio_filtrer_javascript', 'radio_filtrer_javascript3');
+	tweak_suppr_metas_var('radio_filtrer_javascript2', 'radio_filtrer_javascript3');
+	tweak_suppr_metas_var('radio_suivi_forums', 'radio_suivi_forums3');
+	tweak_suppr_metas_var('desactive_cache');
+	tweak_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
+	tweak_suppr_metas_var('target_blank');
+	tweak_suppr_metas_var('');
+}
 
 /*************/
 /* FONCTIONS */

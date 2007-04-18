@@ -79,13 +79,7 @@ tweak_log("[#$rand] ".($forcer?"\$forcer = true":"tweak_initialisation($forcer) 
 	// remplir $tweaks (et aussi $tweak_variables qu'on n'utilise pas ici);
 	include_spip('tweak_spip_config');
 	// nettoyage des versions anterieures
-	unset($metas_vars['radio_set_options']);
-	unset($metas_vars['radio_type_urls2']);
-	unset($metas_vars['radio_filtrer_javascript2']);
-	unset($metas_vars['radio_suivi_forums']);
-	unset($metas_vars['desactive_cache']);
-	unset($metas_vars['target_blank']);
-	unset($metas_vars['']);
+	tweak_compatibilite_ascendante();
 	// stocker les types de variables declarees
 	global $tweak_variables;
 	$metas_vars['_chaines'] = $tweak_variables['_chaines'];
