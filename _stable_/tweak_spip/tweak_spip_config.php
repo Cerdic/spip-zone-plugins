@@ -114,7 +114,7 @@ add_tweak( array(
 add_variable( array(
 	'nom' => 'suite_introduction',
 	'format' => 'chaine',
-	'defaut' => '&nbsp;(...)',
+	'defaut' => '"&nbsp;(...)"',
 	'code' => "define('_INTRODUCTION_SUITE', %s);",
 ));
 add_tweak( array(
@@ -129,7 +129,7 @@ add_variable( array(
 	'nom' => 'radio_set_options3',
 	'format' => 'nombre',
 	'radio' => array('basiques' => 'icone_interface_simple', 'avancees' => 'icone_interface_complet'),
-	'defaut' => 'avancees',
+	'defaut' => '"avancees"',
 	'code' => "\$GLOBALS['set_options']=%s;",
 ));
 add_tweak( array(
@@ -148,7 +148,7 @@ add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
 	'radio' => array('page' => 'page', 'html' => 'html', 'propres' => 'propres', 'propres2' => 'propres2', 'standard' => 'standard', 'propres-qs' => 'propres-qs' ),
-	'defaut' => 'page',
+	'defaut' => "strlen(\$GLOBALS['type_urls'])?\$GLOBALS['type_urls']:'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;",
 ));
 add_tweak( array(
@@ -193,7 +193,7 @@ add_variable( array(
 	'nom' => 'radio_suivi_forums3',
 	'format' => 'chaine',
 	'radio' => array('defaut' => 'tweak:sf_defaut', '_SUIVI_FORUMS_REPONSES' => 'tweak:sf_amont', '_SUIVI_FORUM_THREAD' => 'tweak:sf_tous'),
-	'defaut' => 'defaut',
+	'defaut' => '"defaut"',
 	// si la variable est différente de 'defaut' alors on codera le define
 	'code:%s!=="defaut"' => "define(%s, true);",
 ));
@@ -225,16 +225,21 @@ add_tweak( array (
 	'version-min' => '1.92',
 ));
 
-	// ici on demande a Tweak Spip une case input. La variable est : style_p
 add_variable( array(
 	'nom' => 'style_p',
 	'format' => 'chaine',
-	'defaut' => 'spip',
+	'defaut' => '"spip"',
+	'code:strlen(%s)' => ' class=%s',
+));
+add_variable( array(
+	'nom' => 'style_h',
+	'format' => 'chaine',
+	'defaut' => '"spip"',
 	'code:strlen(%s)' => ' class=%s',
 ));
 add_tweak( array(
-	'id' => 'style_p',
-	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';",
+	'id' => 'class_spip',
+	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';",
 	'categorie' => 'public',
 	'version-min' => 1.93,
 ));
@@ -303,7 +308,7 @@ add_variable( array(
 add_tweak( array(
 	'id' => 'SPIP_liens',
 	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe%%",
-	'code:js' => 'if (%%radio_target_blank%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
+	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 	'categorie' => 'public',
 ));
 

@@ -32,8 +32,8 @@ function tweak_initialisation_d_un_tweak($tweak0, $tweak_input) {
 	// au cas ou des variables sont presentes dans le code
 	$tweak['nb_variables'] = 0;
 	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
-	if (isset($tweak['code:options'])) $tweak['code:options'] = tweak_parse_code(tweak_parse_code_php($tweak['code:options']));
-	if (isset($tweak['code:fonctions'])) $tweak['code:fonctions'] = tweak_parse_code(tweak_parse_code_php($tweak['code:fonctions']));
+	if (isset($tweak['code:options'])) $tweak['code:options'] = tweak_parse_code_php($tweak['code:options']);
+	if (isset($tweak['code:fonctions'])) $tweak['code:fonctions'] = tweak_parse_code_php($tweak['code:fonctions']);
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
 	$tweak['description'] = $tweak_input($tweak0, 'tweak_spip_admin');
 }
@@ -70,11 +70,11 @@ tweak_log("[#$rand] ".($forcer?"\$forcer = true":"tweak_initialisation($forcer) 
 	// ici on commence l'initialisation de tous les tweaks
 	global $tweaks, $metas_vars, $metas_tweaks;
 	include_spip('tweak_spip');
-	// remplir $tweaks (et aussi $tweak_variables qu'on n'utilise pas ici);
-	include_spip('tweak_spip_config');
 	// charger les metas
 	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
+	// remplir $tweaks (et aussi $tweak_variables qu'on n'utilise pas ici);
+	include_spip('tweak_spip_config');
 	// nettoyage des versions anterieures
 	unset($metas_vars['radio_set_options']);
 	unset($metas_vars['radio_type_urls2']);

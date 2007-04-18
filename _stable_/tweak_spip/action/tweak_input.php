@@ -47,7 +47,7 @@ tweak_log(" -- tweak $index ($tweak) : %$var% prend la valeur '$final'");
 		spip_log("Tweak $index. Modification d'une variable par l'auteur id=$connect_id_auteur : %$var% = $final");
 	}
 	$serialized = serialize($metas_vars);
-spip_log($metas_vars, " -- metas_vars = ");
+//tweak_log($metas_vars, " -- metas_vars = ");
 	ecrire_meta('tweaks_variables', $serialized);
 	ecrire_metas();
 

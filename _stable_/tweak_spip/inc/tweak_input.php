@@ -19,8 +19,10 @@ include_spip('inc/message_select');
 function tweak_input_une_variable($index, $tweak, $variable, $label, &$ok_input_, &$ok_valeur_) {
 	global $tweak_variables, $metas_vars;
 	$actif = $tweak['actif'];
-	$valeur = $metas_vars[$variable];
-	if (preg_match(',^"(.*)"$,', trim($valeur), $matches)) $valeur = str_replace('\"','"',$matches[1]);
+	// la valeur de la variable n'est stockee dans les metas qu'au premier post
+	if (isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
+		else $valeur = tweak_get_defaut($variable);
+	$valeur = tweak_retire_guillemets($valeur);
 tweak_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 
 	// si la variable necessite des boutons radio
@@ -46,25 +48,29 @@ tweak_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 
 // renvoie la description de $tweak0 : toutes les %variables% ont ete remplacees par le code adequat
 function inc_tweak_input_dist($tweak0, $url_self) {
-	global $tweaks, $metas_vars;
+	global $tweaks, $tweak_variables, $metas_vars;
 	$tweak = &$tweaks[$tweak0];
 	$actif = $tweak['actif'];
 	$index = $tweak['index'];
-	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $tweak['description'], -1, PREG_SPLIT_DELIM_CAPTURE);
+	$descrip = str_replace('#PUCE', definir_puce(), $tweak['description']);
+	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 	
 tweak_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 	$ok_input = $ok_valeur = $ok_visible = '';
 	$tweak['nb_variables'] = 0; $variables = array();
-	for($i=0;$i<count($t);$i+=2) if (($var=trim($t[$i+1]))!='') {
-		// si le meta est present on stocke
-		if (isset($metas_vars[$var])) {
+	for($i=0;$i<count($t);$i+=2) if (strlen($var=trim($t[$i+1]))) {
+		// si la variable est presente on fabrique le input
+		if (isset($tweak_variables[$var])) {
 			tweak_input_une_variable(
 				$index + (++$tweak['nb_variables']), 
 				$tweak, $var, 
 				$t[$i], 
 				$ok_input, $ok_valeur);
 			$variables[] = $var;
-		} else { $temp = $t[$i]."[$var?]"; $ok_input .= $temp; $ok_valeur .= $temp; }
+		} else { 
+			// probleme a regler dans tweak_spip_config.php !
+			$temp = $t[$i]."[$var?]"; $ok_input .= $temp; $ok_valeur .= $temp; 
+		}
 	} else { $ok_input .= $t[$i]; $ok_valeur .= $t[$i]; }
 	$c = $tweak['nb_variables'];
 

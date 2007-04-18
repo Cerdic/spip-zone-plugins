@@ -42,14 +42,35 @@ function add_tweak($tableau) {
 	$tweaks[$tableau['id']] = $tableau;
 }
 
-// ajoute une variable à $tweak_variables
+// ajoute une variable à $tweak_variables et fabrique une liste des chaines et des nombres
 function add_variable($tableau) {
 	global $tweak_variables;
-	if($tableau['format']=='nombre') $tweak_variables['_nombres'][] = $tableau['nom'];
-		elseif($tableau['format']=='chaine') $tweak_variables['_chaines'][] = $tableau['nom'];
-	$tweak_variables[$tableau['nom']] = $tableau;
+	$nom = $tableau['nom'];
+	$tweak_variables[$nom] = $tableau;
+	// on fabrique ici une liste des chaines et une liste des nombres
+	if($tableau['format']=='nombre') $tweak_variables['_nombres'][] = $nom;
+		elseif($tableau['format']=='chaine') $tweak_variables['_chaines'][] = $nom;
 }
 
+// retourne la valeur 'defaut' (format php) de la variable apres compilation du code
+// le resultat comporte des guillemets si c'est une chaine
+function tweak_get_defaut($variable) {
+	global $tweak_variables;
+	// si la variable n'est pas declaree, serieux pb dans tweak_spip_config !
+	if (!isset($tweak_variables[$variable])) {
+		spip_log("Erreur - variable '$variable' non déclarée dans tweak_spip_config.php !");
+		return false;
+	}
+	$variable = &$tweak_variables[$variable];
+	$defaut = $variable['defaut'];
+	if($variable['format']=='nombre') $defaut = "intval($defaut)";
+		elseif($variable['format']=='chaine') $defaut = "strval($defaut)";
+//tweak_log("tweak_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");	
+	eval("\$defaut=$defaut;");
+	$defaut2 = tweak_php_format($defaut, $variable['format']!='nombre');
+tweak_log(" -- tweak_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");	
+	return $defaut2;
+}
 // installation de $tweaks_metas_pipes
 // $type ici est egal a 'options' ou 'fonctions'
 function set_tweaks_metas_pipes_fichier($tweaks_pipelines, $type) {
@@ -211,58 +232,53 @@ function tweak_initialise_includes() {
 	foreach($pipelines_utilises as $pipe) set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipe);
 }
 
+// retire les guillemets extremes s'il y en a
+function tweak_retire_guillemets($valeur) {
+	$valeur = trim($valeur);
+	if (preg_match(',^"(.*)"$,', trim($valeur), $matches)) $valeur = str_replace('\"','"',$matches[1]);
+	elseif (preg_match(',^\'(.*)\'$,', trim($valeur), $matches)) $valeur = str_replace("\'","'",$matches[1]);
+	return $valeur;
+}
+
 // met en forme une valeur dans le stype php
 function tweak_php_format($valeur, $is_chaine) {
-	if(preg_match(',^"(.*)"$,', trim($valeur), $regs)) $valeur = str_replace('\"', '"', $regs[1]);
+	$valeur = tweak_retire_guillemets($valeur);
 	return $is_chaine?'"'.str_replace('"', '\"', $valeur).'"':$valeur;
 }
 
-// retourne le code attache a la variable en fonction de sa valeur
+// retourne le code compile d'une variable en fonction de sa valeur
 function tweak_get_code_variable($variable, $valeur) {
 	global $tweak_variables;
-//echo "\ntweak_get_code_variable : variable = "; print_r($tweak_variables[$variable]);
-//echo "tweak_get_code_variable : \$valeur = $valeur\n";
 	// si la variable n'a pas ete declaree
 	if(!isset($tweak_variables[$variable])) return _L("// Variable '$variable' inconnue !");
 	$tweak_variable = &$tweak_variables[$variable];
 	// mise en forme php de $valeur
 	if(!strlen($valeur)) { 
 		if($tweak_variable['format']=='nombre') $valeur='0'; else $valeur='""'; 
-	} else $valeur = tweak_php_format($valeur, $tweak_variable['format']!='nombre');
+	} else 
+		$valeur = tweak_php_format($valeur, $tweak_variable['format']!='nombre');
 	$code = '';
 	foreach($tweak_variable as $type=>$param) if (preg_match(',^code(:?(.*))?$,', $type, $regs)) {
 		$eval = '$test = ' . (strlen($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
 		$test = false;
 		eval($eval);
-//echo "\ntweak_get_code_variable : \$regs = "; print_r($regs);
-//echo"\nEVAL : $eval => $test";
 		if($test) return str_replace('%s', $valeur, $param);
 	}
 }
 
 // remplace les valeurs marquees comme %%toto%% par le code reel prevu par $tweak_variables['toto']['code:condition']
-// si cette valeur n'existe pas encore, la valeur utilisee sera $tweak_variables['toto']['defaut']
 // attention de bien declarer les variables a l'aide de add_variable()
 function tweak_parse_code_php($code) {
 	global $metas_vars, $tweak_variables;
 	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)%%,U', $code, $matches)) {
-//echo "\n\n----- $matches[0] --------\nCODE = $code\n";
-		// la valeur de la variable est-elle stockee dans les metas ?
-		if (isset($metas_vars[$matches[1]])) {
-			$rempl = tweak_get_code_variable($matches[1], $metas_vars[$matches[1]]);
+		$nom = $matches[1];
+		// la valeur de la variable n'est stockee dans les metas qu'au premier post
+		if (isset($metas_vars[$nom])) {
+			$rempl = tweak_get_code_variable($nom, $metas_vars[$nom]);
 		} else { 
-			$variable = &$tweak_variables[$matches[1]];
-//echo "\n\$variable = ";print_r($variable);
-			$defaut = $tweak_variables[$matches[1]]['defaut'];
-			if($variable['format']=='nombre') $defaut = 'intval('.$defaut.')';
-				elseif($variable['format']=='chaine') $defaut = 'strval('.$defaut.')';
-//echo "\nEVAL DEFAUT : \$defaut=".$defaut.'; => ';	
-			eval('$defaut='.$defaut.';');
-			$defaut = tweak_php_format($defaut, $variable['format']!='nombre');
-			// placement de la valeur par defaut dans les metas
-			$metas_vars[$matches[1]] = $defaut;
-//echo $defaut;
-			$rempl = tweak_get_code_variable($matches[1], $defaut);
+			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
+			$defaut = tweak_get_defaut($nom);
+			$rempl = tweak_get_code_variable($nom, $defaut);
 			$code = "/* Valeur par defaut : {$variable['nom']} = $defaut */\n" . $code;
 		}
 		$code = str_replace($matches[0], $rempl, $code);
@@ -279,26 +295,15 @@ function tweak_parse_code_php($code) {
 function tweak_parse_code_js($code) {
 	global $metas_vars, $tweak_variables;
 	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)%%,U', $code, $matches)) {
-//echo "\n\n----- $matches[0] --------\nCODE = $code\n";
-		// la valeur de la variable est-elle stockee dans les metas ?
+		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if (isset($metas_vars[$matches[1]])) {
 			$rempl = $metas_vars[$matches[1]];
 		} else { 
-			$variable = &$tweak_variables[$matches[1]];
-//echo "\n\$variable = ";print_r($variable);
-			$defaut = $tweak_variables[$matches[1]]['defaut'];
-			if($variable['format']=='nombre') $defaut = 'intval('.$defaut.')';
-				elseif($variable['format']=='chaine') $defaut = 'strval('.$defaut.')';
-//echo "\nEVAL DEFAUT : \$defaut=".$defaut.'; => ';	
-			eval('$defaut='.$defaut.';');
-			$rempl = tweak_php_format($defaut, $variable['format']!='nombre');
-//echo $rempl;
+			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
+			$rempl = tweak_get_defaut($matches[1]);
 		}
 		$code = str_replace($matches[0], $rempl, $code);
-//echo "\nRETURN CODE = $code";
-
 	}
-//echo "\nFINAL RETURN CODE = ", tweak_optimise_js($code);
 	return tweak_optimise_js($code);
 }
 
@@ -326,43 +331,6 @@ function tweak_optimise_js($code) {
 	return $code;
 }
 
-// remplace les valeurs marquees comme %%toto%% par la valeur reelle de $metas_vars['toto']
-// attention : la description du tweak (trouvee dans lang/tweak_xx.php) doit 
-// obligatoirement conporter la demande de valeur : %toto%
-// %%toto/d%% oblige un nombre et %%toto/s%% oblige une chaine
-// %%toto/valeurpardefaut%% renvoie valeurpardefaut si le meta n'existe pas encore
-// syntaxe generale : %%toto/d/valeurpardefaut%% ou %%toto/s/valeurpardefaut%%
-// /s est une chaine, /d est un nombre
-// pour les boutons radio, il faut utiliser deux variables. Par ex : set_options.
-// $code est le code inline livre par tweak_spip_config
-function tweak_parse_code($code) {
-	global $metas_vars;
-	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)(/[ds]|/r\(.*?\))?(/[^%]+)?%%,', $code, $matches)) {
-		$rempl = '""';
-		// si le meta est present on garde la valeur du meta, sinon la valeur par defaut si elle existe
-		if (isset($metas_vars[$matches[1]])) {
-			$rempl = $metas_vars[$matches[1]];
-			if (preg_match(',^"(.*?)"$,', trim($rempl), $matches2)) $rempl = str_replace('\"','"',$matches2[1]);
-		} else {
-			$cmd = substr($matches[2], 1, 1);
-			// une valeur par defaut est-elle specifiee ?
-			$rempl = strlen($matches[3])>1?substr($matches[3],1):'""';
-			// une commande d ou s est-elle specifiee ?
-			if($cmd=='d') $rempl = 'intval('.$rempl.')';
-				elseif($cmd=='s') $rempl = 'strval('.$rempl.')';
-			eval('$rempl='.$rempl.';');
-		}
-		// si on ne veut pas de nombre, on met des guillemets !
-		if($cmd!='d' && $rempl[0]!='"') $rempl = '"'.str_replace('"','\"',$rempl).'"';
-		// placement de la variable
-		$code = str_replace($matches[0], $rempl, $code);
-		// on conserve le resultat dans $metas_vars
-		$metas_vars[$matches[1]] = $rempl;
-//print_r($metas_vars);
-//print_r($matches); echo "rempl=$rempl\ncode=$code\n\n";
-	}
-	return $code;
-}
 
 // lance la fonction d'installation de chaque tweak actif, si elle existe.
 function tweak_installe_tweaks() {

@@ -2,17 +2,22 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$temp_jQuery = $GLOBALS['spip_version_code']<1.92
-	?"\n\n{{Attention}} : ce tweak n&eacute;cessite le plugin {jQuery} pour fonctionner ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2."
-	:"\n\nCe tweak utilise la librairie {jQuery}.";
-$temp_couleurs = '<span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert olive</span>, <span style="background-color:navy;">navy/bleu marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu violet</span>, <span style="background-color:chocolate;">chocolate/brun clair</span>, <span style="background-color:cornsilk;">cornsilk/rose clair</span>, <span style="background-color:darkgreen;">darkgreen/vert fonce</span>, <span style="background-color:darkorange;">darkorange/orange fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune paille</span>, <span style="background-color:yellow;">yellow/jaune</span>';
-$temp_reset = parametre_url(self(),'reset','oui');
+// quelques chaines temporaires a traduire
+$temp['jQuery1'] = "{{Attention}} : ce tweak n&eacute;cessite le plugin {jQuery} pour fonctionner ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.";
+$temp['jQuery2'] = "Ce tweak utilise la librairie {jQuery}.";
+$temp['reset'] = 'R&eacute;initialisation totale du plugin';
 
+// un peu de code : ne pas toucher !
+$temp['couleurs'] = '<span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert olive</span>, <span style="background-color:navy;">navy/bleu marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu violet</span>, <span style="background-color:chocolate;">chocolate/brun clair</span>, <span style="background-color:cornsilk;">cornsilk/rose clair</span>, <span style="background-color:darkgreen;">darkgreen/vert fonce</span>, <span style="background-color:darkorange;">darkorange/orange fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune paille</span>, <span style="background-color:yellow;">yellow/jaune</span>';
+$temp['jQuery'] = "\n\n" . $GLOBALS['spip_version_code']<1.92?$temp['jQuery1']:$temp['jQuery2'];
+$temp['reset'] = $GLOBALS['spip_version_code']<1.92?'<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>':'';
+
+// traductions habituelles
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tweak SPIP',
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>"
-		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p><p>[R&eacute;initialisation totale du plugin->$temp_reset]</p>",
+		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p>" . $temp['reset'],
 	'raccourcis' => "Raccourcis typographiques actifs&nbsp;:",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
 	'nbtweak' => '@pipe@ : @nb@ tweak',
@@ -46,8 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // ----------------------------------------------------------------------------------
 
 	'SPIP_cache:nom' => 'SPIP et le cache...',
-	'SPIP_cache:description' => definir_puce()." Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.<br />{{D&eacute;sactiver le cache}} : %radio_desactive_cache%\n\n"
-		. definir_puce()." Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique au cache.<br />{{Valeur du quota}} : %quota_cache% Mo",
+	'SPIP_cache:description' => "#PUCE Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.<br />{{D&eacute;sactiver le cache}} : %radio_desactive_cache%\n\n"
+		. "#PUCE Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique au cache.<br />{{Valeur du quota}} : %quota_cache% Mo",
 
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
 	'supprimer_numero:description' => "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Voici la syntaxe &agrave; utiliser dans le cadre d'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code><br />Attention, cette fonctionnalit&eacute; ne sera pas prise en compte si votre squelette utilise les balises &eacute;toil&eacute;es : <code>#TITRE*</code> ou <code>#NOM*</code>",
@@ -72,7 +77,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
 	'desactiver_flash:description' => 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.'
-		. $temp_jQuery,
+		. $temp['jQuery'],
 
 	'toutmulti:nom' => 'Blocs multilingues',
 	'toutmulti:description' => "Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
@@ -102,7 +107,7 @@ _ Deux  exemples identiques :
 -* <code>Lorem ipsum [rouge]dolor[/rouge] sit amet</code>
 -* <code>Lorem ipsum [red]dolor[/red] sit amet</code>.
 
-34 couleurs sont disponibles (en fran&ccedil;ais ou en anglais) : " . $temp_couleurs,
+34 couleurs sont disponibles (en fran&ccedil;ais ou en anglais) : " . $temp['couleurs'],
 	'couleurs:aide' => 'Couleurs : <strong>[couleur]texte[/couleur]</strong>, avec <strong>couleur</strong> = @liste@',
 
 	'typo_exposants:nom' => 'Exposants typographiques',
@@ -123,7 +128,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 	'smileys:aide' => 'Smileys : @liste@',
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points &#8220;:&#8221;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br />Dossier(s) &agrave; utiliser : %dossier_squelettes%",
+	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&#8220;:&#8221;</html>. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br />Dossier(s) &agrave; utiliser : %dossier_squelettes%",
 
 	'chatons:nom' => 'Chatons',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
@@ -145,7 +150,7 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 - {standard} : URLs utilis&eacute;es par Spip v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
 - {propres-qs} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.
 
-Pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site Spip sous
+{{Attention}} : pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site Spip sous
   le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier.
   Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de Spip.<br />Votre choix : %radio_type_urls3%",
 
@@ -179,9 +184,9 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'f_jQuery:description' => "Emp&ecirc;che l'installation de jQuery dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. Spip l'utilise dans sa partie priv&eacute;e.",
 
 	'SPIP_liens:nom' => 'SPIP et les liens...',
-	'SPIP_liens:description' => definir_puce() . " Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
-		. $temp_jQuery . /*"<br />Lien de test : [Google->http://www.google.com]".*/ "<br />{{Utiliser des liens externes}} : %radio_target_blank3%\n\n"
-		. definir_puce() . " Spip permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP]<br />{{Lien vers le glossaire}} : %url_glossaire_externe%",
+	'SPIP_liens:description' => "#PUCE Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
+		. $temp['jQuery'] . /*"<br />Lien de test : [Google->http://www.google.com]".*/ "<br />{{Utiliser des liens externes}} : %radio_target_blank3%\n\n"
+		. "#PUCE Spip permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP]<br />{{Lien vers le glossaire}} : %url_glossaire_externe%",
 
 	'forum_lgrmaxi:nom' => 'Taille des forums',
 	'forum_lgrmaxi:description' => "Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si ce tweak est activ&eacute;, un message d'erreur s'affichera lorsque quelqu'un voudra poster un message  d'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;amoins qu'aucune limite ne s'applique.<br />Valeur (en caract&egrave;res) : %forum_lgrmaxi%",
@@ -189,8 +194,12 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'suite_introduction:nom' => 'Points de suite pour #INTRODUCTION',
 	'suite_introduction:description' => "Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION  sont : '&amp;nbsp;(...)'. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin d'introduire les articles, les br&egrave;ves, etc.. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant &agrave; l'utilisateur que le texte tronqu&eacute; a une suite.<br />Valeur : %suite_introduction%",
 
-	'style_p:nom' => 'Style des paragraphes',
-	'style_p:description' => "Jusqu'&agrave; la version 1.92 de Spip, les paragraphes html (marqu&eacute;s par la balise &lt;p&gt;) &eacute;taient syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Ce tweak vous permet de d&eacute;finir le style de vos paragraphes en fonction de vos feuilles de style.  Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.<br />Valeur : %style_p%",
+	'class_spip:nom' => 'SPIP et les styles...',
+	'class_spip:description' => "<p>Jusqu'&agrave; la version 1.92 de Spip, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;."
+	."<br />#PUCE {{Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :}}<br />Votre style : %style_p%"
+	."<br />#PUCE {{Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :}}<br />Votre style : %style_h%"
+	."<br />Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les css standards associ&eacute;s &agrave; ces raccourcis.</p>"
+	."<p>Pour afiner un peu, vous pouvez maintenant définir le style particulier des balises suivantes :</p>",
 
 	'decoupe:nom' => 'D&eacute;coupe un article en pages',
 	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.<br />Attention, cette pagination ne sera pas prise en compte si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}",
@@ -211,7 +220,5 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 */
 );
 
-unset($temp_jQuery);
-unset($temp_couleurs);
-unset($temp_reset);
+unset($temp);
 ?>

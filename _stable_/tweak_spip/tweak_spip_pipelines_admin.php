@@ -49,11 +49,13 @@ tweak_log("tweak_spip_install($action)");
 		case 'install':
 			break;
 		case 'uninstall':
-/*			foreach(array_keys($GLOBALS['meta']) as $meta) 
-				if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
-			ecrire_metas();*/
-			include_spip('inc/getdocument');
-			effacer_repertoire_temporaire(_DIR_TMP."tweak-spip");
+			foreach(array_keys($GLOBALS['meta']) as $meta) 
+				if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
+			ecrire_metas();
+			if (@file_exists($f=sous_repertoire(_DIR_TMP, "tweak-spip"))) {
+				include_spip('inc/getdocument');
+				effacer_repertoire_temporaire($f);
+			}
 			break;
 	}
 }	

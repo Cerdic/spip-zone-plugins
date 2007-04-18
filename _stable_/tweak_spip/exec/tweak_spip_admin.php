@@ -175,8 +175,6 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		exit;
 	}
 
-	// definitions manuelles de tous les tweaks : remplissage de $tweaks
-//	include_spip('tweak_spip_config');
 	// initialisation generale forcee : recuperation de $tweaks;
 	tweak_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
