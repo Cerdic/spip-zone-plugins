@@ -45,7 +45,10 @@ Comment:
 //------------------------------------------------------------------------------
 function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NULL) {
 						// make link to next page
-	if($_action=="" || $_action==NULL) $_action="list";
+	if (!$_action) {
+		$_action = "spx_list";
+	}
+	
 	if($_dir=="") $_dir=NULL;
 	if($_item=="") $_item=NULL;
 	if($_order==NULL) $_order=$GLOBALS['spx']["order"];
@@ -53,6 +56,13 @@ function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NUL
 	if($_lang==NULL) $_lang=(isset($GLOBALS['spx']["lang"])?$GLOBALS['spx']["lang"]:NULL);
 	
 	$link = $_SERVER['PHP_SELF'] . "?action=spx_".$_action;
+	if ($_action != "spx_list") {
+		include_spip('inc/securiser_action');
+	    $arg = $_action . '-' . $_dir . '-' . $_item;
+		$link .= '&arg=' . $arg .
+		    '&hash=' .  calculer_action_auteur('-' . $arg);
+	}
+
 	if($_dir!=NULL) $link.="&dir=".urlencode($_dir);
 	if($_item!=NULL) $link.="&item=".urlencode($_item);
 	if($_order!=NULL) $link.="&order=".$_order;
