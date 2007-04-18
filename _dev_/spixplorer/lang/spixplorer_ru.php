@@ -2,10 +2,12 @@
 
 // Russian Language Module (translated by Mikhail M. Pigulsky - mikhail@mikhail.pp.ru)
 
-$GLOBALS['spx']["charset"] = "windows-1251";
-$GLOBALS['spx']['spip_lang_dir'] = "ltr"; // ('ltr' for left to right, 'rtl' for right to left)
-_T('spixplorer:date_fmt') = "Y/m/d H:i";
-$GLOBALS['spx']["error_msg"] = array(
+//$GLOBALS['spx']["charset"] = "windows-1251";
+
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+	'date_fmt'      => "Y/m/d H:i",
       // error
       "error"                  => "ОШИБКА(И)",
       "back"                  => "Вернуться",
@@ -67,8 +69,7 @@ $GLOBALS['spx']["error_msg"] = array(
       "miscselfremove"      => "Вы не можете удалить самого себя",
       "miscuserexist"            => "Такой пользователь уже существует",
       "miscnofinduser"      => "Невозможно найти пользователя",
-);
-$GLOBALS['spx']["messages"] = array(
+
       // links
       "permlink"            => "ПОМЕНЯТЬ ПРАВА ДОСТУПА",
       "editlink"            => "РЕДАКТИРОВАТЬ",

@@ -2,10 +2,12 @@
 
 // English Language Module for v2.3 (translated by the QuiX project)
 
-$GLOBALS['spx']["charset"] = "iso-8859-1";
-$GLOBALS['spx']['spip_lang_dir'] = "ltr"; // ('ltr' for left to right, 'rtl' for right to left)
-_T('spixplorer:date_fmt') = "Y/m/d H:i";
-$GLOBALS['spx']["error_msg"] = array(
+//$GLOBALS['spx']["charset"] = "iso-8859-1";
+
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+	'date_fmt'      => "Y/m/d H:i",
 	// error
 	"error"			=> "ERROR(S)",
 	"back"			=> "Go Back",
@@ -67,8 +69,7 @@ $GLOBALS['spx']["error_msg"] = array(
 	"miscselfremove"	=> "You can't remove yourself.",
 	"miscuserexist"		=> "User already exists.",
 	"miscnofinduser"	=> "Can't find user.",
-);
-$GLOBALS['spx']["messages"] = array(
+
 	// links
 	"permlink"		=> "CHANGE PERMISSIONS",
 	"editlink"		=> "EDIT",

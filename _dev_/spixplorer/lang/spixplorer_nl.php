@@ -2,10 +2,12 @@
 
 // Dutch Language Module for v2.3 (translated by the QuiX project)
 
-$GLOBALS['spx']["charset"] = "iso-8859-1";
-$GLOBALS['spx']['spip_lang_dir'] = "ltr"; // ('ltr' for left to right, 'rtl' for right to left)
-_T('spixplorer:date_fmt') = "d-m-Y H:i";
-$GLOBALS['spx']["error_msg"] = array(
+//$GLOBALS['spx']["charset"] = "iso-8859-1";
+
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+	'date_fmt'      => "d-m-Y H:i",
 	// error
 	"error"			=> "FOUT(EN)",
 	"back"			=> "Ga Terug",
@@ -67,8 +69,7 @@ $GLOBALS['spx']["error_msg"] = array(
 	"miscselfremove"	=> "U kunt zichzelf niet verwijderen.",
 	"miscuserexist"		=> "De gebruiker bestaat al.",
 	"miscnofinduser"	=> "Kan gebruiker niet vinden.",
-);
-$GLOBALS['spx']["messages"] = array(
+
 	// links
 	"permlink"		=> "RECHTEN WIJZIGEN",
 	"editlink"		=> "BEWERKEN",

@@ -2,10 +2,12 @@
 
 // Spanish Language Module for v2.3 (translated by J. Pedro Flor P.)
 
-$GLOBALS['spx']["charset"] = "iso-8859-1";
-$GLOBALS['spx']['spip_lang_dir'] = "ltr"; // ('ltr' for left to right, 'rtl' for right to left)
-_T('spixplorer:date_fmt') = "Y/m/d H:i";
-$GLOBALS['spx']["error_msg"] = array(
+//$GLOBALS['spx']["charset"] = "iso-8859-1";
+
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+	'date_fmt'      => "Y/m/d H:i",
 	// error
 	"error"			=> "ERROR(ES)",
 	"back"			=> "Ir Atrás",
@@ -67,8 +69,7 @@ $GLOBALS['spx']["error_msg"] = array(
 	"miscselfremove"	=> "Ud. no puede borrarse a si mismo.",
 	"miscuserexist"		=> "Usuario ya existe.",
 	"miscnofinduser"	=> "No se puede encontrar usuario.",
-);
-$GLOBALS['spx']["messages"] = array(
+
 	// links
 	"permlink"		=> "PORMISOS CAMBIADOS",
 	"editlink"		=> "EDITAR",
