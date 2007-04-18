@@ -168,6 +168,22 @@ function tweak_insert_header($f, $type) {
 	} elseif ($type=='js') 
 		return "<script type=\"text/javascript\" src=\"".tweak_htmlpath($f)."\"></script>\n";
 }
+// sauve la configuration dans un fichier tmp/tweak-spip/config.php
+function tweak_sauve_configuration() {
+	global $tweaks, $metas_vars;
+	$metas = $variables = $actifs = array();
+	foreach($tweaks as $t) if($t['actif']) {
+		$actifs[] = $t['id'];
+		$variables = array_merge($variables, $t['variables']);
+	}
+	foreach($metas_vars as $i => $v) 
+		if($i!='_chaines' && $i!='_nombres') $metas[] = "'$i' => '$v'";
+	$sauve = "// Tweaks actifs\n\$tweaks = array('" . join("', '", $actifs) . "');\n";
+	$sauve .= "// Variables actives\n\$variables = array('" . join("', '", $variables) . "');\n";
+	$sauve .= "// Valeurs validees en metas\n\$valeurs = array(" . join(', ', $metas) . ");\n";
+	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "config.php";
+	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin Tweak-SPIP\n\n$sauve?".'>');
+}
 
 // cree un tableau $tweaks_pipelines et initialise $tweaks_metas_pipes
 function tweak_initialise_includes() {
@@ -279,7 +295,7 @@ function tweak_parse_code_php($code) {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
 			$defaut = tweak_get_defaut($nom);
 			$rempl = tweak_get_code_variable($nom, $defaut);
-			$code = "/* Valeur par defaut : {$variable['nom']} = $defaut */\n" . $code;
+			$code = "/* Valeur par defaut : {$nom} = $defaut */\n" . $code;
 		}
 		$code = str_replace($matches[0], $rempl, $code);
 //echo "\nRETURN CODE = $code";

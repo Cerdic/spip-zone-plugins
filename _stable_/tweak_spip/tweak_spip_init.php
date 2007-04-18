@@ -30,7 +30,7 @@ function tweak_initialisation_d_un_tweak($tweak0, $tweak_input) {
 		|| (isset($tweak['version-max']) && $GLOBALS['spip_version']>$tweak['version-max']))
 			$tweak['actif'] = 0;
 	// au cas ou des variables sont presentes dans le code
-	$tweak['nb_variables'] = 0;
+	$tweak['variables'] = array(); $tweak['nb_variables'] = 0;
 	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
 	if (isset($tweak['code:options'])) $tweak['code:options'] = tweak_parse_code_php($tweak['code:options']);
 	if (isset($tweak['code:fonctions'])) $tweak['code:fonctions'] = tweak_parse_code_php($tweak['code:fonctions']);
@@ -92,20 +92,25 @@ tweak_log("[#$rand] ".($forcer?"\$forcer = true":"tweak_initialisation($forcer) 
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
 tweak_log("[#$rand]  -- foreach(\$tweaks) : tweak_initialisation_d_un_tweak()");
 
+	// initialiser chaque tweak
 	$id = 0;
 	foreach($temp = $tweaks as $tweak) $id = tweak_initialisation_d_un_tweak($tweak['id'], $tweak_input);
 	// installer $tweaks_metas_pipes
 	$tweaks_metas_pipes = array();
 tweak_log("[#$rand]  -- tweak_initialise_includes()...");
+	// initialiser les includes et creer les fichiers de controle
 	tweak_initialise_includes();
+	// sauver la configuration
+	tweak_sauve_configuration();
 tweak_log("[#$rand]  -- tweak_installe_tweaks...");
+	// lancer la procedure d'installation pour chaque tweak
 	tweak_installe_tweaks();
-	// tweaks actifs
+	// en metas : tweaks actifs
 tweak_log("[#$rand]  -- ecriture metas");
 	ecrire_meta('tweaks_actifs', serialize($metas_tweaks));
-	// variables de tweaks
+	// en metas : variables de tweaks
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
-	// code inline pour les pipelines, mes_options et mes_fonctions;
+	// en metas : code inline pour les pipelines, mes_options et mes_fonctions;
 	ecrire_meta('tweaks_pipelines', serialize($tweaks_metas_pipes));
 	ecrire_metas();
 tweak_log("[#$rand] tweak_initialisation($forcer) : Sortie");

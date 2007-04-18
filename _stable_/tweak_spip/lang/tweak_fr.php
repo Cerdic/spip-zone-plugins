@@ -142,7 +142,7 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options3%",
 
 	'type_urls:nom' => "Format des URLs",
-	'type_urls:description' => "Spip poss&egrave;de plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :
+	'type_urls:description' => "Spip offre un choix sur plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :
 - {page} : la valeur par d&eacute;faut pour Spip v1.9 : <code>/spip.php?article123</code>.
 - {html} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
 - {propre} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.

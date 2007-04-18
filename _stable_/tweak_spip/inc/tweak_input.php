@@ -72,6 +72,7 @@ tweak_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 			$temp = $t[$i]."[$var?]"; $ok_input .= $temp; $ok_valeur .= $temp; 
 		}
 	} else { $ok_input .= $t[$i]; $ok_valeur .= $t[$i]; }
+	$tweak['variables'] = $variables;
 	$c = $tweak['nb_variables'];
 
 //	if (count($t)==1) { $ok_input .= "<p>$ok_input</p>"; $ok_valeur .= "<p>$ok_valeur</p>"; }
