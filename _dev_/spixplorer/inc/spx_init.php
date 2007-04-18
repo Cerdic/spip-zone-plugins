@@ -103,6 +103,7 @@ $GLOBALS['spx']["srt"] = spx_request('srt', 'yes');
 ob_start(); // prevent unwanted output
 include_spip("config/spx_conf");
 $GLOBALS['spx']["language"] = $GLOBALS['spip_lang'];
+$GLOBALS['spx']["lang"] = $GLOBALS['spip_lang'];
 include_spip("spx_lang/" . $GLOBALS['spx']["language"] . "_mimes");
 include_spip("config/spx_mimes");
 include_spip("inc/spx_extra");

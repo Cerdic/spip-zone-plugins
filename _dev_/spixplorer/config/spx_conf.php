@@ -6,7 +6,7 @@
 	$GLOBALS['spx']["require_login"] = false;
 	
 	// language: (en, de, es, fr, nl, ru)
-	$GLOBALS['spx']["language"] = "en";
+//	$GLOBALS['spx']["language"] = "en";
 	
 	// the filename of the QuiXplorer script: (you rarely need to change this)
 	$GLOBALS['spx']["script_name"] = "http://".$GLOBALS['spx']['__SERVER']['HTTP_HOST'].$GLOBALS['spx']['__SERVER']["PHP_SELF"];
@@ -22,10 +22,10 @@
 // Global User Variables (used when $require_login==false)
 	
 	// the home directory for the filemanager: (use '/', not '\' or '\\', no trailing '/')
-	$GLOBALS['spx']["home_dir"] = "/home/you/public_html";
+	$GLOBALS['spx']["home_dir"] = ".";
 	
 	// the url corresponding with the home directory: (no trailing '/')
-	$GLOBALS['spx']["home_url"] = "http://localhost/~you";
+	$GLOBALS['spx']["home_url"] = ".";
 	
 	// show hidden files in QuiXplorer: (hide files starting with '.', as in Linux/UNIX)
 	$GLOBALS['spx']["show_hidden"] = true;
