@@ -10,6 +10,7 @@
 	<prefix>geoforms</prefix>
 	<necessite id='forms' version='[0.301;]' />
 	<chemin dir='' />
+	<fonctions>public/geoforms_balises.php</fonctions>
 	<pipeline>
 		<nom>forms_types_champs</nom>
 		<inclure>inc/geoforms_types_champs.php</inclure>

@@ -11,6 +11,11 @@
  * source : http://fr.wikipedia.org/wiki/Projection_de_Lambert
  */
 
+// pouvoir traiter des systemes de differentes natures
+function geoforms_systeme_vers_lat_lont($lat,$lont,$systeme){
+	return geoforms_lat_long_vers_lambert($lat,$lont,$systeme);
+}
+
 $GLOBALS['projections_lambert']=array(
 'lambert1'=>array('fi0'=>55*0.9,'fi1'=>54*0.9,'fi2'=>56*0.9,'l0'=>3,'X'=>600000,'Y'=>1200000),
 'lambert2'=>array('fi0'=>52*0.9,'fi1'=>51*0.9,'fi2'=>53*0.9,'l0'=>3,'X'=>600000,'Y'=>2200000),
