@@ -40,8 +40,19 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+// pour l'instant reserve aux admins toutes rubriques
+if (!$GLOBALS['connect_statut'] == '0minirezo' || !$GLOBALS['connect_toutes_rubriques']) {
+        include_spip('inc/headers');
+        include_spip('inc/minipres');
+        http_status('403');
+        echo // spx_debut_html() .
+        	_T('ecrire:avis_non_acces_page');
+//        	. spx_fin_html();
+        exit;
+}
+
 //------------------------------------------------------------------------------
-// Vars
+/*/ Vars
 if(isset($_SERVER)) {
 	$GLOBALS['spx']['__GET']	=&$_GET;
 	$GLOBALS['spx']['__POST']	=&$_POST;
@@ -56,46 +67,44 @@ if(isset($_SERVER)) {
 	die("<B>ERROR: Your PHP version is too old</B><BR>".
 	"You need at least PHP 4.0.0 to run QuiXplorer; preferably PHP 4.3.1 or higher.");
 }
+*/
 //------------------------------------------------------------------------------
 // Get Action
-if(isset($GLOBALS['spx']['__GET']["action"])) $GLOBALS['spx']["action"]=$GLOBALS['spx']['__GET']["action"];
-else $GLOBALS['spx']["action"]="list";
+$spx_action = $GLOBALS['spx']["action"] = spx_request('action', 'list');
+/*
 if($GLOBALS['spx']["action"]=="post" && isset($GLOBALS['spx']['__POST']["do_action"])) {
 	$GLOBALS['spx']["action"]=$GLOBALS['spx']['__POST']["do_action"];
 }
-if($GLOBALS['spx']["action"]=="") $GLOBALS['spx']["action"]="list";
-$GLOBALS['spx']["action"]=stripslashes($GLOBALS['spx']["action"]);
+*/
+
 // Default Dir
-if(isset($GLOBALS['spx']['__GET']["dir"])) $GLOBALS['spx']["dir"]=stripslashes($GLOBALS['spx']['__GET']["dir"]);
-else $GLOBALS['spx']["dir"]="";
+$GLOBALS['spx']["dir"] = spx_request('dir', '');
+/* bugge de toute facon , == !!!!
 if($GLOBALS['spx']["dir"]==".") $GLOBALS['spx']["dir"]=="";
+*/
+
 // Get Item
-if(isset($GLOBALS['spx']['__GET']["item"])) $GLOBALS['spx']["item"]=stripslashes($GLOBALS['spx']['__GET']["item"]);
-else $GLOBALS['spx']["item"]="";
+$GLOBALS['spx']["item"] = spx_request('item', '');
+
 // Get Sort
-if(isset($GLOBALS['spx']['__GET']["order"])) $GLOBALS['spx']["order"]=stripslashes($GLOBALS['spx']['__GET']["order"]);
-else $GLOBALS['spx']["order"]="name";
-if($GLOBALS['spx']["order"]=="") $GLOBALS['spx']["order"]=="name";
+$GLOBALS['spx']["order"] = spx_request('order', 'name');
+
 // Get Sortorder (yes==up)
-if(isset($GLOBALS['spx']['__GET']["srt"])) $GLOBALS['spx']["srt"]=stripslashes($GLOBALS['spx']['__GET']["srt"]);
-else $GLOBALS['spx']["srt"]="yes";
-if($GLOBALS['spx']["srt"]=="") $GLOBALS['spx']["srt"]=="yes";
-// Get Language
-if(isset($GLOBALS['spx']['__GET']["lang"])) $GLOBALS['spx']["lang"]=$GLOBALS['spx']['__GET']["lang"];
-elseif() $GLOBALS['spx']["lang"]=_request("lang");
+$GLOBALS['spx']["srt"] = spx_request('srt', 'yes');
+
 //------------------------------------------------------------------------------
 // Necessary files
 ob_start(); // prevent unwanted output
 include_spip("config/spx_conf");
-if(isset($GLOBALS['spx']["lang"])) $GLOBALS['spx']["language"]=$GLOBALS['spx']["lang"];
-include_spip("spx_lang/".$GLOBALS['spx']["language"]."");
-include_spip("spx_lang/".$GLOBALS['spx']["language"]."_mimes");
+$GLOBALS['spx']["language"] = $GLOBALS['spip_lang'];
+include_spip("spx_lang/" . $GLOBALS['spx']["language"] . "_mimes");
 include_spip("config/spx_mimes");
 include_spip("inc/spx_extra");
 include_spip("inc/spx_header");
 include_spip("inc/spx_footer");
 include_spip("inc/spx_error");
 ob_end_clean(); // get rid of cached unwanted output
+
 //------------------------------------------------------------------------------
 if($GLOBALS['spx']["require_login"]) {	// LOGIN
 	ob_start(); // prevent unwanted output
@@ -107,6 +116,7 @@ if($GLOBALS['spx']["require_login"]) {	// LOGIN
 		login();
 	}
 }
+
 //------------------------------------------------------------------------------
 $abs_dir=get_abs_dir($GLOBALS['spx']["dir"]);
 if(!@file_exists($GLOBALS['spx']["home_dir"])) {
@@ -118,5 +128,12 @@ if(!@file_exists($GLOBALS['spx']["home_dir"])) {
 }
 if(!down_home($abs_dir)) show_error($GLOBALS['spx']["dir"]." : "._T('spixplorer:abovehome'));
 if(!is_dir($abs_dir)) show_error($GLOBALS['spx']["dir"]." : "._T('spixplorer:direxist'));
+
 //------------------------------------------------------------------------------
+
+function spx_request($var, $def = null)
+{
+	($ret = stripslashes(_request($var))) || ($ret = $def);
+	return $ret;
+}
 ?>
