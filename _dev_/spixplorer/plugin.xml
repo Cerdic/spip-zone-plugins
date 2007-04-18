@@ -9,8 +9,8 @@ Un fork de [quixplorer->http://quixplorer.sourceforge.net/]
 
 D&eacute;ja un essai pour le plugin charge, ne pas poser tout dans la zone comme Fck.
 	</description>
-	<install>
+	<!-- install>
 	spixplorer_install.php
 	</install>
-	<necessite id='chargeur' version='[0.1.0;]' />
+	<necessite id='chargeur' version='[0.1.0;]' / -->
 </plugin>
