@@ -32,7 +32,7 @@ add_tweak( array(
 ));
 */
 add_variable( array(
-	'nom' => 'radio_desactive_cache',
+	'nom' => 'radio_desactive_cache3',
 	'format' => 'nombre',
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
@@ -49,7 +49,7 @@ add_variable( array(
 ));
 add_tweak( array(
 	'id' => 'SPIP_cache',
-	'code:options' => "%%radio_desactive_cache%%\n%%quota_cache%%",
+	'code:options' => "%%radio_desactive_cache3%%\n%%quota_cache%%",
 	'categorie' => 'admin',
 ));
 
@@ -126,8 +126,8 @@ add_tweak( array(
 
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
 add_variable( array(
-	'nom' => 'radio_set_options3',
-	'format' => 'nombre',
+	'nom' => 'radio_set_options4',
+	'format' => 'chaine',
 	'radio' => array('basiques' => 'icone_interface_simple', 'avancees' => 'icone_interface_complet'),
 	'defaut' => '"avancees"',
 	'code' => "\$GLOBALS['set_options']=%s;",
@@ -135,7 +135,7 @@ add_variable( array(
 add_tweak( array(
 	'id' => 'set_options',
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
-	'code:options' => "%%radio_set_options3%%",
+	'code:options' => "%%radio_set_options4%%",
 	'categorie' => 'admin',
 	// pipeline pour retirer en javascript le bouton de controle de l'interface
 	'pipeline:header_prive' => 'set_options_header_prive',

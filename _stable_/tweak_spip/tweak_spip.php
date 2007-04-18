@@ -9,10 +9,11 @@
 #  la configuration du plugin                         #
 #-----------------------------------------------------#
 
+tweak_log("Chargement de tweak_spip.php...");
+
 /*****************/
 /* COMPATIBILITE */
 /*****************/
-
 
 if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -43,9 +44,11 @@ function tweak_suppr_metas_var($meta, $new = false) {
  unset($metas_vars[$meta]);
 }
 
+// on actualise/supprime de vieilles variables creees par les version anterieures de tweak-spip
 function tweak_compatibilite_ascendante() {
 	tweak_suppr_metas_var('set_options');
-	tweak_suppr_metas_var('radio_set_options', 'radio_set_options3');
+	tweak_suppr_metas_var('radio_set_options3');
+	tweak_suppr_metas_var('radio_set_options', 'radio_set_options4');
 	tweak_suppr_metas_var('radio_type_urls', 'radio_type_urls3');
 	tweak_suppr_metas_var('radio_type_urls2', 'radio_type_urls3');
 	tweak_suppr_metas_var('radio_filtrer_javascript', 'radio_filtrer_javascript3');
@@ -408,8 +411,6 @@ function tweak_initialisation_totale() {
 //    les hits ordinaires ne se servent que des metas, non des fichiers.
 //  - l'initialisation totale insere en premier lieu tweak_spip_config.php
 //
-
-tweak_log("Début de tweak_spip.php");
 
 global $tweaks, $tweak_variables;
 $tweak_variables = $tweaks = array();

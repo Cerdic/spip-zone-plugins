@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // ----------------------------------------------------------------------------------
 
 	'SPIP_cache:nom' => 'SPIP et le cache...',
-	'SPIP_cache:description' => "#PUCE Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.<br />{{D&eacute;sactiver le cache}} : %radio_desactive_cache%\n\n"
+	'SPIP_cache:description' => "#PUCE Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.<br />{{D&eacute;sactiver le cache}} : %radio_desactive_cache3%\n\n"
 		. "#PUCE Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique au cache.<br />{{Valeur du quota}} : %quota_cache% Mo",
 
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
@@ -139,7 +139,7 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 
 	'set_options:nom' => "Type d'interface priv&eacute;e",
-	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options3%",
+	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options4%",
 
 	'type_urls:nom' => "Format des URLs",
 	'type_urls:description' => "Spip offre un choix sur plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :

@@ -11,6 +11,8 @@
 #  va inclure tweak_spip.php                          #
 #-----------------------------------------------------#
 
+tweak_log("Chargement de tweak_spip_init.php");
+
 // si le tweak 'log_tweaks' est actif, on logue pour Tweak-Spip
 function tweak_log($variable, $prefixe='') {
  if(!$GLOBALS['log_tweaks'] || !strlen($variable)) return;
@@ -164,8 +166,6 @@ function tweak_canonicalize($address) {
 //	- le code pour les options.php
 //	- le code pour les fonction.php
 //	- le code pour les pipelines utilises
-
-tweak_log("Début de tweak_spip_init.php");
 
 global $tweaks_metas_pipes;
 $tweaks_metas_pipes = array();

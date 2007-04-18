@@ -15,16 +15,16 @@ tweak_log("Début : action_tweak_input_dist() - Une modification de variable(s) a
 		$arg = _request('arg');
 	}
 
-tweak_log(" -- arg = $arg (index du tweak appelant)");
+//tweak_log(" -- arg = $arg (index du tweak appelant)");
 	if (preg_match(",^\W*(\d+)$,", $arg, $r))
 		action_tweak_input_post($r[1]);
 	else spip_log("action_tweak_input_dist $arg pas compris");
-tweak_log("Fin   : action_tweak_input_dist()");
+tweak_log("Fin   : action_tweak_input_dist($arg)");
 }
 
 function action_tweak_input_post($index) {
 	global $connect_id_auteur, $metas_vars;
-tweak_log("Début : action_tweak_input_post($index) - On modifie la(les) variable(s) dans la base !");
+tweak_log("Début : action_tweak_input_post($index) - On modifie la(les) variable(s) dans la base");
 
 	// on lit les metas
 	lire_metas();
