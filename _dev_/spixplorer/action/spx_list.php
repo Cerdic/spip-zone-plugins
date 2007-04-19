@@ -160,7 +160,7 @@ function print_table($dir, $list, $allow) {	// print table of files
 		//if(is_link($stat['abs'])) $extra=" -> ".@readlink($stat['abs']);
 		if ($stat['is_dir']) {
 			$link = make_link("list", $stat['rel'], NULL);
-		} else { //if(get_is_editable($dir,$item) || get_is_image($dir,$item)) {
+		} else { //if($stat['edit'] || get_is_image($dir,$item)) {
 //toggg			$link = $GLOBALS['spx']["home_url"]."/".$stat['rel'];
 //toggg			$target = "_blank";
 		} //else $link = "";
@@ -191,34 +191,41 @@ htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
 	// Permissions
 '<TD>' .
 		($allow ?
-			'<A HREF="' . make_link("chmod",$dir,$item) . '" TITLE="' .
+			'<A HREF="' . make_link("chmod", $dir, $item) . '" TITLE="' .
 			_T('spixplorer:permlink') . '">'
 		: '') .
 		parse_file_type($dir,$item) . parse_file_perms($stat['perms']) .
 			'(' . $stat['owner'] . '/' . $stat['group'] . ')' .
 		($allow ? '</A>' : '') .
 '</TD>
-';
+' .
 	// Actions
-		echo "<TD>\n<TABLE>\n";
+'<TD>
+<TABLE>
+' .
 		// EDIT
-		if(get_is_editable($dir, $item)) {
-			if($allow) {
-				echo "<TD><A HREF=\"".make_link("edit",$dir,$item)."\">";
-				echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-				echo "src=\"plugins/spixplorer/_img/_edit.gif\" ALT=\""._T('spixplorer:editlink')."\" TITLE=\"";
-				echo _T('spixplorer:editlink')."\"></A></TD>\n";
-			} else {
-				echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-				echo "src=\"plugins/spixplorer/_img/_edit_.gif\" ALT=\""._T('spixplorer:editlink')."\" TITLE=\"";
-				echo _T('spixplorer:editlink')."\"></TD>\n";
-			}
-		} else {
-			echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-			echo "src=\"plugins/spixplorer/_img/_.gif\" ALT=\"\"></TD>\n";
-		}
+		($stat['edit'] ?
+			($allow ?
+				'<TD><A HREF="' . make_link("edit",$dir,$item) . '">' .
+				'<IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+				'src="plugins/spixplorer/_img/_edit.gif" ALT="' .
+				_T('spixplorer:editlink') . '" TITLE="' .
+				_T('spixplorer:editlink') . '"></A></TD>
+'
+			:
+				'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+				'src="plugins/spixplorer/_img/_edit_.gif" ALT="' .
+				_T('spixplorer:editlink') . '" TITLE="' .
+				_T('spixplorer:editlink') . '"></TD>
+'
+			)
+		:
+			'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+			'src="plugins/spixplorer/_img/_.gif" ALT=""></TD>
+'
+		);
 		// DOWNLOAD
-		if(get_is_file($dir,$item)) {
+		if ($stat['file']) {
 			if($allow) {
 				echo "<TD><A HREF=\"".make_link("download",$dir,$item)."\">";
 				echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";

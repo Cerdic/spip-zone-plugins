@@ -52,6 +52,8 @@ function spx_stat($dir, $item)
 	$ret['perms'] = get_file_perms($dir,$item);
 	$ret['owner'] = @fileowner($fichier);
 	$ret['group'] = @filegroup($fichier);
+	$ret['edit'] = get_is_editable($dir, $item);
+	$ret['file'] = get_is_file($dir, $item);
 	return $ret;
 }
 
