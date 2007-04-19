@@ -222,6 +222,9 @@ Vous pouvez choisir le type de remplacement :
 - {&eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 
 Votre choix : %liens_orphelins%',
+	'basique' => 'Basique',
+	'etendu' => '&Eacute;tendu',
+
 /*
 	':nom' => '',
 	':description' => '',
