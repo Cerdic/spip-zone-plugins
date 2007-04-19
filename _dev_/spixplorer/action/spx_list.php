@@ -223,24 +223,31 @@ htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
 			'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
 			'src="plugins/spixplorer/_img/_.gif" ALT=""></TD>
 '
-		);
+		) .
 		// DOWNLOAD
-		if ($stat['file']) {
-			if($allow) {
-				echo "<TD><A HREF=\"".make_link("download",$dir,$item)."\">";
-				echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-				echo "src=\"plugins/spixplorer/_img/_download.gif\" ALT=\""._T('spixplorer:downlink');
-				echo "\" TITLE=\""._T('spixplorer:downlink')."\"></A></TD>\n";
-			} else if(!$allow) {
-				echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-				echo "src=\"plugins/spixplorer/_img/_download_.gif\" ALT=\""._T('spixplorer:downlink');
-				echo "\" TITLE=\""._T('spixplorer:downlink')."\"></TD>\n";
-			}
-		} else {
-			echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-			echo "src=\"plugins/spixplorer/_img/_.gif\" ALT=\"\"></TD>\n";
-		}
-		echo "</TABLE>\n</TD></TR>\n";
+		($stat['file'] ?
+			($allow ?
+				'<TD><A HREF="' . make_link("download",$dir,$item) . '">' .
+				'<IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+				'src="plugins/spixplorer/_img/_download.gif" ALT="' . 
+				_T('spixplorer:downlink') .
+				'" TITLE="' . _T('spixplorer:downlink') . '"></A></TD>
+'
+			:
+				'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+				'src="plugins/spixplorer/_img/_download_.gif" ALT="' . 
+				_T('spixplorer:downlink') .
+				'" TITLE="' . _T('spixplorer:downlink') . '"></TD>
+'
+			)
+		:
+			'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+			'src="plugins/spixplorer/_img/_.gif" ALT=""></TD>
+'
+		) .
+		'</TABLE>
+</TD></TR>
+';
 	}
 }
 //------------------------------------------------------------------------------
