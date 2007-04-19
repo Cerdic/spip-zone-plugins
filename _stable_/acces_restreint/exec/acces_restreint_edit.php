@@ -11,13 +11,19 @@ function exec_acces_restreint_edit(){
 	global $connect_toutes_rubriques;
 	global $couleur_claire;
 	global $spip_lang_right;
-  include_ecrire('inc_presentation');
-	
+	global $new;
+	include_ecrire('inc_presentation');
+
 	$id_zone = intval($_GET['id_zone']);
 
-	if (isset($_POST['Enregistrer']))
+	if (isset($_POST['Enregistrer'])) {
+		if(_request('id_zone') == 0){
+			$id_zone = AccesRestreint_cree_zone();
+			set_request('id_zone', $id_zone);
+		}
 		AccesRestreint_enregistrer_zone();
-	  
+	}
+	
 	debut_page(_T('accesrestreint:page_zones_acces'));
 	
 	echo "<br /><br /><br />";
@@ -48,24 +54,42 @@ function exec_acces_restreint_edit(){
 	$res = spip_query($requete);
 	$row = spip_fetch_array($res);
 
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques OR !$row) {
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques OR (!$row && $new!='oui')) {
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
 	}
 
-	$titre = $row['titre'];
-	$descriptif = $row['descriptif'];
-	$publique = $row['publique'];
-	$privee = $row['privee'];
+	if ($row) {
+		$titre = $row['titre'];
+		$descriptif = $row['descriptif'];
+		$publique = $row['publique'];
+		$privee = $row['privee'];
+	} else if ($new='oui') {
+		$titre = _T('accesrestreint:titre');
+		$descriptif = _T('accesrestreint:descriptif');
+		$publique = 'oui';
+		$privee = 'non';
+		$id_zone = 0;
+	}
 
 	$retour = '';
 	if (isset($_GET['retour']))
 		$retour = $_GET['retour'];
 
 	debut_cadre_relief();
-	echo generer_url_post_ecrire('acces_restreint_edit',"id_zone=$id_zone".($retour?"&retour=".urlencode($retour):""));
+	if ($new == 'oui')
+		// URL temporaire pour éviter d'afficher un id_zone nul
+		echo generer_url_post_ecrire('acces_restreint_edit',"new=zone_cree".($retour?"&retour=".urlencode($retour):""));
+	else
+		echo generer_url_post_ecrire('acces_restreint_edit',"id_zone=$id_zone".($retour?"&retour=".urlencode($retour):""));
 	AccesRestreint_formulaire_zone($id_zone, $titre, $descriptif, $publique, $privee);
+
+	if ($new == 'oui' && $connect_statut == "0minirezo" && $connect_toutes_rubriques){
+	echo "<div class='verdana2'>";
+	echo "<input type='checkbox' name='auto_attribue_droits' value='oui' checked='checked' id='droits_admin'> <label for='droits_admin'>"._T("accesrestreint:ajouter_droits_auteur")."</label><br>";
+	echo "</div>";
+	}
 
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
 	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";

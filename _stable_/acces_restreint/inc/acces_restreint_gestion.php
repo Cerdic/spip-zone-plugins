@@ -31,7 +31,7 @@
 		$descriptif = addslashes(_request('descriptif'));
 		$publique = (_request('publique')=='oui')?'oui':'non';
 		$privee = (_request('privee')=='oui')?'oui':'non';
-	$id_zone = intval(_request('id_zone'));
+		$id_zone = intval(_request('id_zone'));
 		if (strlen($titre)>0 && $id_zone){
 			spip_query("UPDATE spip_zones SET titre='$titre', descriptif='$descriptif', privee='$privee', publique='$publique' WHERE id_zone=$id_zone");
 			// suppression de tous les liens zone-rubriques

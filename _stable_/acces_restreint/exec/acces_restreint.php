@@ -27,14 +27,20 @@ function exec_acces_restreint(){
 	echo propre(_T('accesrestreint:info_page'));	
 	fin_boite_info();
 	
+	if ($connect_statut == '0minirezo' && $connect_toutes_rubriques) {
+		$res = icone_horizontale(_T('accesrestreint:creer_zone'), generer_url_ecrire("acces_restreint_edit","new=oui"), "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", "creer.gif",false);
+		echo bloc_des_raccourcis($res);
+	}
+	
 	debut_droite();
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
 	}
-	if (_request('creer')!=NULL)
-		AccesRestreint_cree_zone();
+	
+/*	if (_request('creer')!=NULL)
+		AccesRestreint_cree_zone(); */
 	if (_request('supp_zone')!=NULL)
 		AccesRestreint_supprimer_zone();
 
@@ -139,7 +145,7 @@ function exec_acces_restreint(){
 
 	echo "<br/>";
 
-	debut_cadre_relief();
+/*	debut_cadre_relief();
 	echo generer_url_post_ecrire("acces_restreint");
 	AccesRestreint_formulaire_zone($id_zone , _T('accesrestreint:titre'), _T('accesrestreint:descriptif'), 'oui', 'non');
 
@@ -152,7 +158,7 @@ function exec_acces_restreint(){
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='creer' value='"._T('accesrestreint:bouton_creer_la_zone')."' class='fondo'></div>";
 	echo "</div>";
 	echo "</form>";
-	fin_cadre_relief();
+	fin_cadre_relief();*/
 
 	fin_page();
 }

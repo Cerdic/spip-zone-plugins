@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'publique' => 'Publique',
 'privee' => 'Priv&eacute;e',
 'voir_toutes' => 'Voir toutes les zones',
+'creer_zone' => 'Cr&eacute;er une nouvelle zone',
 'zone_numero' => 'ZONE NUM&Eacute;RO&nbsp;:',
 'zone_restreinte_publique' => "Restreindre l'acc&egrave;s &agrave; cette zone dans la partie publique",
 'zone_restreinte_espace_prive' => "Restreindre l'acc&egrave;s &agrave; cette zone dans l'espace priv&eacute;",
