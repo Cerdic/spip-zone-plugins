@@ -117,12 +117,9 @@
 			return;
 		}
 		if(confirm("<?php echo _T('spixplorer:miscdelitems'); ?>")) {
-//			document.selform.do_action.value = "delete";
 			document.selform.arg.value = document.selform.arg_del.value;
 			document.selform.hash.value = document.selform.hash_del.value;
 			document.getElementById("action").value = "spx_del";
-//			document.selform.setAttribute("action",
-//				document.selform.getAttribute("action").replace(/spx_post/, "spx_del"));
 			document.selform.submit();
 		}
 	}
@@ -132,7 +129,10 @@
 			alert("<?php echo _T('spixplorer:miscselitems'); ?>");
 			return;
 		}
-		document.selform.do_action.value = "arch";
+		document.selform.namearch.value = document.creaform.mkname.value;
+		document.selform.arg.value = document.selform.arg_archive.value;
+		document.selform.hash.value = document.selform.hash_archive.value;
+		document.getElementById("action").value = "spx_archive";
 		document.selform.submit();
 	}
 	

@@ -40,75 +40,65 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_archive()
+{
+	include_spip('inc/spx_init');
+	archive_items($GLOBALS['spx']["dir"]);
+}
+
 //------------------------------------------------------------------------------
-if($GLOBALS['spx']["zip"]) include_spip("inc/spx_lib_zip");
-//if($GLOBALS['spx']["tar"]) include_spip("inc/spx_lib_tar");
-//if($GLOBALS['spx']["tgz"]) include_spip("inc/spx_lib_tgz");
-//------------------------------------------------------------------------------
-function zip_items($dir,$name) {
-	$cnt=count($GLOBALS['spx']['__POST']["selitems"]);
+
+function zip_items($dir, $name, $aarchiver)
+{
 	$abs_dir=get_abs_dir($dir);
-	
-	$zipfile=new ZipFile();
-	for($i=0;$i<$cnt;++$i) {
-		$selitem=stripslashes($GLOBALS['spx']['__POST']["selitems"][$i]);
-		if(!$zipfile->add($abs_dir,$selitem)) {
-			show_error($selitem.": Failed adding item.");
-		}
+	$liste = array();
+	for ($i=0; $i < count($aarchiver); ++$i) {
+		$liste[$i] = get_abs_item($dir, stripslashes($aarchiver[$i]));
 	}
-	if(!$zipfile->save(get_abs_item($dir,$name))) {
-		show_error($name.": Failed saving zipfile.");
+	
+	include_spip('inc/pclzip');
+	spip_log('*** zipfile ***');
+	spip_log($liste);
+	$zipfile = new PclZip(_DIR_TMP . $name);
+	$erreur = $zipfile->create($liste); // , PCLZIP_OPT_ADD_PATH, "spip");
+	if ($erreur == 0) {
+		show_error("Erreur : " . $zipfile->errorInfo(true));
 	}
 	
 	header("Location: ".make_link("list",$dir,NULL));
 }
 //------------------------------------------------------------------------------
-function tar_items($dir,$name) {
+//function tar_items($dir, $name, $aarchiver) {
 	// ...
-}
+//}
 //------------------------------------------------------------------------------
-function tgz_items($dir,$name) {
+//function tgz_items($dir, $name, $aarchiver) {
 	// ...
-}
+//}
 //------------------------------------------------------------------------------
 function archive_items($dir) {
-	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
-	if(!$GLOBALS['spx']["zip"] && !$GLOBALS['spx']["tar"] && !$GLOBALS['spx']["tgz"]) show_error(_T('spixplorer:miscnofunc'));
+	if (($GLOBALS['spx']["permissions"]&01)!=01) {
+		show_error(_T('spixplorer:accessfunc'));
+	}
+	if (!function_exists('zip_items')
+	 && !function_exists('tar_items') && !function_exists('tgz_items')) {
+		show_error(_T('spixplorer:miscnofunc'));
+	}
 	
-	if(isset($GLOBALS['spx']['__POST']["name"])) {
-		$name=basename(stripslashes($GLOBALS['spx']['__POST']["name"]));
-		if($name=="") show_error(_T('spixplorer:miscnoname'));
-		switch($GLOBALS['spx']['__POST']["type"]) {
-			case "zip":	zip_items($dir,$name);	break;
-			case "tar":	tar_items($dir,$name);	break;
-			default:		tgz_items($dir,$name);
+	$aarchiver = _request('selitems');
+	$cnt=count($aarchiver);
+	if ($name = basename(_request('namearch'))) {
+		if (!($name = stripslashes($name))) show_error(_T('spixplorer:miscnoname'));
+		switch (substr(strrchr($name, "."), 1)) {
+			case "zip":	zip_items($dir, $name, $aarchiver);	break;
+			case "tar":	tar_items($dir, $name, $aarchiver);	break;
+			default:		tgz_items($dir, $name, $aarchiver);
 		}
-		header("Location: ".make_link("list",$dir,NULL));
 	}
-	
-	show_header(_T('spixplorer:actarchive'));
-	echo "<BR><FORM name=\"archform\" method=\"post\" action=\"".make_link("arch",$dir,NULL)."\">\n";
-	
-	$cnt=count($GLOBALS['spx']['__POST']["selitems"]);
-	for($i=0;$i<$cnt;++$i) {
-		echo "<INPUT type=\"hidden\" name=\"selitems[]\" value=\"".stripslashes($GLOBALS['spx']['__POST']["selitems"][$i])."\">\n";
-	}
-	
-	echo "<TABLE width=\"300\"><TR><TD>"._T('spixplorer:nameheader').":</TD><TD align=\"right\">";
-	echo "<INPUT type=\"text\" name=\"name\" size=\"25\"></TD></TR>\n";
-	echo "<TR><TD>"._T('spixplorer:typeheader').":</TD><TD align=\"right\"><SELECT name=\"type\">\n";
-	if($GLOBALS['spx']["zip"]) echo "<OPTION value=\"zip\">Zip</OPTION>\n";
-	if($GLOBALS['spx']["tar"]) echo "<OPTION value=\"tar\">Tar</OPTION>\n";
-	if($GLOBALS['spx']["tgz"]) echo "<OPTION value=\"tgz\">TGz</OPTION>\n";
-	echo "</SELECT></TD></TR>";
-	echo "<TR><TD></TD><TD align=\"right\"><INPUT type=\"submit\" value=\""._T('spixplorer:btncreate')."\">\n";
-	echo "<input type=\"button\" value=\""._T('spixplorer:btncancel');
-	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><BR>\n";
-?><script language="JavaScript1.2" type="text/javascript">
-<!--
-	if(document.archform) document.archform.name.focus();
-// -->
-</script><?php
+	header("Location: ".make_link("list",$dir,NULL));
 }
 //------------------------------------------------------------------------------
 ?>

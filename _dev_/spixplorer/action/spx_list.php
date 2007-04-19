@@ -323,11 +323,9 @@ function list_dir($dir) {			// list directory contents
 			echo "\" TITLE=\""._T('spixplorer:uploadlink')."\"></TD>\n";
 		}
 		// ARCHIVE
-		if($GLOBALS['spx']["zip"] || $GLOBALS['spx']["tar"] || $GLOBALS['spx']["tgz"]) {
-			echo "<TD><A HREF=\"javascript:Archive();\"><IMG border=\"0\" width=\"16\" height=\"16\" ";
-			echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_archive.gif\" ALT=\""._T('spixplorer:comprlink');
-			echo "\" TITLE=\""._T('spixplorer:comprlink')."\"></A></TD>\n";
-		}
+		echo "<TD><A HREF=\"javascript:Archive();\"><IMG border=\"0\" width=\"16\" height=\"16\" ";
+		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_archive.gif\" ALT=\""._T('spixplorer:comprlink');
+		echo "\" TITLE=\""._T('spixplorer:comprlink')."\"></A></TD>\n";
 	} else {
 		// COPY
 		echo "<TD><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
@@ -367,7 +365,7 @@ function list_dir($dir) {			// list directory contents
 	
 	// Create File / Dir
 	if($allow) {
-		echo "<TD align=\"right\"><TABLE><FORM action=\"".make_link("mkitem",$dir,NULL)."\" method=\"post\">\n<TR><TD>";
+		echo "<TD align=\"right\"><TABLE><FORM action=\"".make_link("mkitem",$dir,NULL)."\" method=\"post\" name=\"creaform\">\n<TR><TD>";
 		echo "<SELECT name=\"mktype\"><option value=\"file\">".$GLOBALS['spx']["mimes"]["file"]."</option>";
 		echo "<option value=\"dir\">".$GLOBALS['spx']["mimes"]["dir"]."</option></SELECT>\n";
 		echo "<input name=\"mkname\" type=\"text\" size=\"15\">";
@@ -384,6 +382,7 @@ function list_dir($dir) {			// list directory contents
 	echo '
 		<TABLE WIDTH="95%"><FORM name="selform" method="POST" action="spip.php">
 		<input type="hidden" name="action" id="action">
+		<input type="hidden" name="namearch">
 		<input type="hidden" name="arg">
 		<input type="hidden" name="hash">
 		<input type="hidden" name="first" value="y">
@@ -391,7 +390,7 @@ function list_dir($dir) {			// list directory contents
 		<input type="hidden" name="order" value="' . $GLOBALS['spx']["order"] .'">
 		<input type="hidden" name="srt" value="' . $GLOBALS['spx']["srt"] .'">
 		';
-	foreach (array('del') as $act) {
+	foreach (array('del', 'archive') as $act) {
 		list($arg, $hash) = make_hash($act, $dir);
 		echo '
 			<input type="hidden" name="arg_' . $act . '" value="' . $arg . '">
