@@ -41,7 +41,7 @@ Comment:
 
 -------------------------------------------------------------------------------*/
 //------------------------------------------------------------------------------
-function show_header($title) {			// header for html-page
+function show_header($title, $js = false) {			// header for html-page
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 	header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 	header("Cache-Control: no-cache, must-revalidate");
@@ -54,6 +54,11 @@ function show_header($title) {			// header for html-page
 	echo "<HEAD>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=".$GLOBALS['spx']["charset"]."\">\n";
 	echo "<title>QuiXplorer ".$GLOBALS['spx']["version"]." - the QuiX project</title>\n";
 	echo "<LINK href=\"plugins/spixplorer/_style/style.css\" rel=\"stylesheet\" type=\"text/css\">\n";
+	
+	// Javascript functions:
+	if ($js) {
+		include_spip("inc/spx_javascript");
+	}
 	echo "</HEAD>\n<BODY><center>\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"5\"><tbody>\n";
 	echo "<tr><td class=\"title\">";
 	if($GLOBALS['spx']["require_login"] && isset($GLOBALS['spx']['__SESSION']["s_user"])) echo "[".$GLOBALS['spx']['__SESSION']["s_user"]."] - ";

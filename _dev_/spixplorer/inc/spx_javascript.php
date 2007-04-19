@@ -88,7 +88,7 @@
 		}
 	}
 	
-<?php if($allow) { ?>
+<?php if (($GLOBALS['spx']["permissions"] & 01) == 01) { ?>
 	
 	// Copy / Move / Delete
 	

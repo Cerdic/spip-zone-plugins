@@ -265,10 +265,7 @@ function list_dir($dir) {			// list directory contents
 	make_tables($dir, $dir_list, $file_list, $tot_file_size, $num_items);
 	
 	$s_dir=$dir;		if(strlen($s_dir)>50) $s_dir="...".substr($s_dir,-47);
-	show_header(_T('spixplorer:actdir').": /".get_rel_item("",$s_dir));
-	
-	// Javascript functions:
-	include_spip("inc/spx_javascript");
+	show_header(_T('spixplorer:actdir').": /".get_rel_item("",$s_dir), true);
 	
 	// Sorting of items
 	$_img = "&nbsp;<IMG width=\"10\" height=\"10\" border=\"0\" align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/";
