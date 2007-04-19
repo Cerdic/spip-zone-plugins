@@ -151,9 +151,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"misclang"		=> "Language",
 	"miscnoresult"		=> "No results available.",
 	"miscsubdirs"		=> "Search subdirectories",
-	"miscpermnames"		=> array("View only","Modify","Change password","Modify & Change password",
-					"Administrator"),
-	"miscyesno"		=> array("Yes","No","Y","N"),
-	"miscchmod"		=> array("Owner", "Group", "Public"),
+	"miscpermnames"		=>
+		"View only/Modify/Change password/Modify & Change password/Administrator",
+	"miscyesno"		=> "Yes/No/Y/N",
+	"miscchmod"		=> "Owner/Group/Public"
 );
 ?>

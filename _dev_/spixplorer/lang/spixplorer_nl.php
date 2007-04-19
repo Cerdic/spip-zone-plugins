@@ -151,9 +151,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"misclang"		=> "Taal",
 	"miscnoresult"		=> "Geen resultaten beschikbaar.",
 	"miscsubdirs"		=> "Zoek in subdirectories",
-	"miscpermnames"		=> array("Alleen kijken","Wijzigen","Wachtwoord wijzigen",
-					"Wijzigen & Wachtwoord wijzigen","Beheerder"),
-	"miscyesno"		=> array("Ja","Nee","J","N"),
-	"miscchmod"		=> array("Eigenaar", "Groep", "Publiek"),
+	"miscpermnames"		=>
+		"Alleen kijken/Wijzigen/Wachtwoord wijzigen/Wijzigen & Wachtwoord wijzigen/Beheerder",
+	"miscyesno"		=> "Ja/Nee/J/N",
+	"miscchmod"		=> "Eigenaar/Groep/Publiek"
 );
 ?>

@@ -151,9 +151,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"misclang"		=> "Langage",
 	"miscnoresult"		=> "Aucun résultats.",
 	"miscsubdirs"		=> "Rechercher dans les sous-répertoires",
-	"miscpermnames"		=> array("Lecture seulement","Modifier","Changement le mot de passe","Modifier & Changer le mot de passe",
-					"Administrateur"),
-	"miscyesno"		=> array("Oui","Non","O","N"),
-	"miscchmod"		=> array("Propriétaire", "Groupe", "Publique"),
+	"miscpermnames"		=>
+		"Lecture seulement/Modifier/Changement le mot de passe/Modifier & Changer le mot de passe/Administrateur",
+	"miscyesno"		=> "Oui/Non/O/N",
+	"miscchmod"		=> "Propriétaire/Groupe/Publique"
 );
 ?>
