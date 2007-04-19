@@ -32,7 +32,7 @@ function liens_orphelins_rempl($texte){
 
 	// chiffres, lettres, 20 caracteres speciaux autorises dans les urls
 	$autorises =  '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9';
-	$autorisesfin = '\#\$\&\'\*\+\-\/\=\^\_\`\{\|\}\~a-zA-Z0-9';
+	$autorisesfin = '\#\$\&\'\*\+\-\/\=\^\_\`\|\~a-zA-Z0-9';
 
    // trouve : protocole://qqchose
    $texte = preg_replace(",([a-zA-Z]+://[{$autorises}:@]*[{$autorisesfin}]),", "@@LO1@@$1@@LO2@@", $texte);
