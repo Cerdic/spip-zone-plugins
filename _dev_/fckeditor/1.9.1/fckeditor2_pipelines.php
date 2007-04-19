@@ -1,21 +1,24 @@
 <?php
 
 // ICI : Commenter l'une des deux lignes pour fixer l'éditeur par défaut
-define('EDITEUR_PAR_DEFAUT', 'wysiwyg');
-//define('EDITEUR_PAR_DEFAUT', 'text');
-
-//$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
-//define('_DIR_PLUGIN_FCKEDITOR',(_DIR_PLUGINS.end($p)));
+    define('EDITEUR_PAR_DEFAUT', 'wysiwyg');
+    //define('EDITEUR_PAR_DEFAUT', 'text');
 
 // détermination du chemin de base par rapport à la racine du serveur
-$dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
-$i = 0;
-while($dir_relatif_array[$i] != 'ecrire') {
-	$dir_relatif .= $dir_relatif_array[$i];
-	$i++;
-}
-if($dir_relatif != '') $dir_relatif = "/".$dir_relatif;
-define('_DIR_PLUGIN_FCKEDITOR',$dir_relatif.'/plugins/fckeditor');
+  $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
+  define('_DIR_RELATIF_PLUGIN_FCKEDITOR',str_replace('../','',(_DIR_PLUGINS.end($p))));
+  
+  $dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+  $i = 0;
+  while($dir_relatif_array[$i] != 'ecrire') 
+    {
+  	 $dir_relatif .= $dir_relatif_array[$i]."/";
+  	 $i++;
+    }
+//if($dir_relatif != '') $dir_relatif = "/".$dir_relatif;
+
+define('_DIR_PLUGIN_FCKEDITOR',$dir_relatif._DIR_RELATIF_PLUGIN_FCKEDITOR);
+
 
 function fckeditor2_header_prive($flux) {
 	global $exec;
@@ -50,7 +53,7 @@ function fckeditor2_header_prive($flux) {
 			oFCKeditor.Config[ "AutoDetectLanguage" ] = false ;
 			oFCKeditor.Config[ "DefaultLanguage" ] = "'.$GLOBALS['_COOKIE']['spip_lang_ecrire'].'" ;
 			oFCKeditor.Height = "600";
-			oFCKeditor.ToolbarSet = "Spip";
+
 			oFCKeditor.ReplaceTextarea();
 			$(".spip_barre").remove();
 		';
