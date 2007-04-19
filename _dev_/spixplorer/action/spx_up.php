@@ -40,6 +40,15 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_up()
+{
+	include_spip('inc/spx_init');
+	upload_items($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+}
+
 //------------------------------------------------------------------------------
 function upload_items($dir) {		// upload file
 	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
@@ -107,7 +116,7 @@ function upload_items($dir) {		// upload file
 	show_header(_T('spixplorer:actupload'));
 	
 	// List
-	echo "<BR><FORM enctype=\"multipart/form-data\" action=\"".make_link("upload",$dir,NULL);
+	echo "<BR><FORM enctype=\"multipart/form-data\" action=\"".make_link("up",$dir,NULL);
 	echo "\" method=\"post\">\n<INPUT type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"";
 	echo get_max_file_size()."\"><INPUT type=\"hidden\" name=\"confirm\" value=\"true\"><TABLE>\n";
 	for($i=0;$i<10;$i++) {

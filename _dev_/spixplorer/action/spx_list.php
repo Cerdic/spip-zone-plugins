@@ -313,7 +313,7 @@ function list_dir($dir) {			// list directory contents
 		echo "\" TITLE=\""._T('spixplorer:dellink')."\"></A></TD>\n";
 		// UPLOAD
 		if(get_cfg_var("file_uploads")) {
-			echo "<TD><A HREF=\"".make_link("upload",$dir,NULL)."\">";
+			echo "<TD><A HREF=\"".make_link("up",$dir,NULL)."\">";
 			echo "<IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
 			echo "src=\"plugins/spixplorer/_img/_upload.gif\" ALT=\""._T('spixplorer:uploadlink');
 			echo "\" TITLE=\""._T('spixplorer:uploadlink')."\"></A></TD>\n";

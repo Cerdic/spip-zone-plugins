@@ -58,22 +58,16 @@ if ($GLOBALS['connect_statut'] != '0minirezo' || !$GLOBALS['connect_toutes_rubri
 }
 
 //------------------------------------------------------------------------------
-/*/ Vars
+// Vars
 if(isset($_SERVER)) {
-	$GLOBALS['spx']['__GET']	=&$_GET;
-	$GLOBALS['spx']['__POST']	=&$_POST;
-	$GLOBALS['spx']['__SERVER']	=&$_SERVER;
 	$GLOBALS['spx']['__FILES']	=&$_FILES;
 } elseif(isset($HTTP_SERVER_VARS)) {
-	$GLOBALS['spx']['__GET']	=&$HTTP_GET_VARS;
-	$GLOBALS['spx']['__POST']	=&$HTTP_POST_VARS;
-	$GLOBALS['spx']['__SERVER']	=&$HTTP_SERVER_VARS;
 	$GLOBALS['spx']['__FILES']	=&$HTTP_POST_FILES;
 } else {
 	die("<B>ERROR: Your PHP version is too old</B><BR>".
 	"You need at least PHP 4.0.0 to run QuiXplorer; preferably PHP 4.3.1 or higher.");
 }
-*/
+
 //------------------------------------------------------------------------------
 // Get Action
 $spx_action = $GLOBALS['spx']["action"] = spx_request('action', 'spx_list');
