@@ -40,6 +40,13 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+function action_spx_copy_move()
+{
+	include_spip('inc/spx_init');
+	copy_move_items($GLOBALS['spx']["dir"]);
+}
+
 //------------------------------------------------------------------------------
 function dir_list($dir) {			// make list of directories
 	// this list is used to copy/move items to a specific location
@@ -85,25 +92,28 @@ function copy_move_items($dir) {		// copy/move file/dir
 	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
 	
 	// Vars
-	$first = $GLOBALS['spx']['__POST']["first"];
+	$first = _request('first');
 	if($first=="y") $new_dir=$dir;
-	else $new_dir = stripslashes($GLOBALS['spx']['__POST']["new_dir"]);
+	else $new_dir = stripslashes(_request('new_dir'));
 	if($new_dir==".") $new_dir="";
-	$cnt=count($GLOBALS['spx']['__POST']["selitems"]);
+	$selitems = _request('selitems');
+	$cnt=count($selitems);
+	$newitems = _request('newitems');
+	$do_action = _request('do_action');
 
 	// Copy or Move?
-	if($GLOBALS['spx']["action"]!="move") {
+	if ($do_action != "move") {
 		$_img="plugins/spixplorer/_img/__copy.gif";
 	} else {
 		$_img="plugins/spixplorer/_img/__cut.gif";
 	}
 	
 	// Get New Location & Names
-	if(!_request("confirm")!="true") {
-		show_header(($GLOBALS['spx']["action"]!="move"?
-			_T('spixplorer:actcopyitems'):
+	if(_request("confirm")!="true") {
+		show_header($do_action != "move" ?
+			_T('spixplorer:actcopyitems') :
 			_T('spixplorer:actmoveitems')
-		));
+		);
 		
 		// JavaScript for Form:
 		// Select new target directory / execute action
@@ -124,14 +134,22 @@ function copy_move_items($dir) {		// copy/move file/dir
 		$s_dir=$dir;		if(strlen($s_dir)>40) $s_dir="...".substr($s_dir,-37);
 		$s_ndir=$new_dir;	if(strlen($s_ndir)>40) $s_ndir="...".substr($s_ndir,-37);
 		echo "<BR><IMG SRC=\"".$_img."\" align=\"ABSMIDDLE\" ALT=\"\">&nbsp;";
-		echo sprintf(($GLOBALS['spx']["action"]!="move"?_T('spixplorer:actcopyfrom'):
-			_T('spixplorer:actmovefrom')),$s_dir, $s_ndir);
+		echo sprintf($do_action != "move" ?_T('spixplorer:actcopyfrom') :
+			_T('spixplorer:actmovefrom'), $s_dir, $s_ndir);
 		echo "<IMG SRC=\"plugins/spixplorer/_img/__paste.gif\" align=\"ABSMIDDLE\" ALT=\"\">\n";
 		
 		// Form for Target Directory & New Names
-		echo "<BR><BR><FORM name=\"selform\" method=\"post\" action=\"";
-		echo make_link("post",$dir,NULL)."\"><TABLE>\n";
-		echo "<INPUT type=\"hidden\" name=\"do_action\" value=\"".$GLOBALS['spx']["action"]."\">\n";
+		echo "<BR><BR><FORM name=\"selform\" method=\"post\" action=\"spip.php\"><TABLE>\n";
+		list($arg, $hash) = make_hash('copy_move', $dir);
+		echo '
+			<input type="hidden" name="action" value="spx_copy_move">
+			<input type="hidden" name="arg" value="' . $arg . '">
+			<input type="hidden" name="hash" value="' . $hash . '">
+			<input type="hidden" name="dir" value="' . htmlentities($dir) .'">
+			<input type="hidden" name="order" value="' . $GLOBALS['spx']["order"] .'">
+			<input type="hidden" name="srt" value="' . $GLOBALS['spx']["srt"] .'">
+			';
+		echo "<INPUT type=\"hidden\" name=\"do_action\" value=\"" .	$do_action . "\">\n";
 		echo "<INPUT type=\"hidden\" name=\"confirm\" value=\"false\">\n";
 		echo "<INPUT type=\"hidden\" name=\"first\" value=\"n\">\n";
 		echo "<INPUT type=\"hidden\" name=\"new_dir\" value=\"".$new_dir."\">\n";
@@ -142,9 +160,9 @@ function copy_move_items($dir) {		// copy/move file/dir
 		
 		// Print Text Inputs to change Names
 		for($i=0;$i<$cnt;++$i) {
-			$selitem=stripslashes($GLOBALS['spx']['__POST']["selitems"][$i]);
-			if(isset($GLOBALS['spx']['__POST']["newitems"][$i])) {
-				$newitem=stripslashes($GLOBALS['spx']['__POST']["newitems"][$i]);
+			$selitem=stripslashes($selitems[$i]);
+			if(isset($newitems[$i])) {
+				$newitem=stripslashes($newitems[$i]);
 				if($first=="y") $newitem=$selitem;
 			} else $newitem=$selitem;
 			$s_item=$selitem;	if(strlen($s_item)>50) $s_item=substr($s_item,0,47)."...";
@@ -160,7 +178,7 @@ function copy_move_items($dir) {		// copy/move file/dir
 		// Submit & Cancel
 		echo "</TABLE><BR><TABLE><TR>\n<TD>";
 		echo "<INPUT type=\"submit\" value=\"";
-		echo ($GLOBALS['spx']["action"]!="move"?_T('spixplorer:btncopy'):_T('spixplorer:btnmove'));
+		echo $do_action != "move" ? _T('spixplorer:btncopy') : _T('spixplorer:btnmove');
 		echo "\" onclick=\"javascript:Execute();\"></TD>\n<TD>";
 		echo "<input type=\"button\" value=\""._T('spixplorer:btncancel');
 		echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL);
@@ -180,8 +198,8 @@ function copy_move_items($dir) {		// copy/move file/dir
 	// copy / move files
 	$err=false;
 	for($i=0;$i<$cnt;++$i) {
-		$tmp = stripslashes($GLOBALS['spx']['__POST']["selitems"][$i]);
-		$new = basename(stripslashes($GLOBALS['spx']['__POST']["newitems"][$i]));
+		$tmp = stripslashes($selitems[$i]);
+		$new = basename(stripslashes($newitems[$i]));
 		$abs_item = get_abs_item($dir,$tmp);
 		$abs_new_item = get_abs_item($new_dir,$new);
 		$items[$i] = $tmp;
@@ -205,7 +223,7 @@ function copy_move_items($dir) {		// copy/move file/dir
 		}
 	
 		// Copy / Move
-		if($GLOBALS['spx']["action"]=="copy") {
+		if ($do_action == "copy") {
 			if(@is_link($abs_item) || @is_file($abs_item)) {
 				// check file-exists to avoid error with 0-size files (PHP 4.3.0)
 				$ok=@copy($abs_item,$abs_new_item);	//||@file_exists($abs_new_item);
@@ -217,10 +235,9 @@ function copy_move_items($dir) {		// copy/move file/dir
 		}
 		
 		if($ok===false) {
-			$error[$i]=($GLOBALS['spx']["action"]=="copy"?
-				_T('spixplorer:copyitem'):
-				_T('spixplorer:moveitem')
-			);
+			$error[$i] = $do_action == "copy" ?
+				_T('spixplorer:copyitem') :
+				_T('spixplorer:moveitem');
 			$err=true;	continue;
 		}
 		

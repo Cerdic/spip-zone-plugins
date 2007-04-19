@@ -97,6 +97,9 @@
 			alert("<?php echo _T('spixplorer:miscselitems'); ?>");
 			return;
 		}
+		document.selform.arg.value = document.selform.arg_copy_move.value;
+		document.selform.hash.value = document.selform.hash_copy_move.value;
+		document.getElementById("action").value = "spx_copy_move";
 		document.selform.do_action.value = "copy";
 		document.selform.submit();
 	}
@@ -106,6 +109,9 @@
 			alert("<?php echo _T('spixplorer:miscselitems'); ?>");
 			return;
 		}
+		document.selform.arg.value = document.selform.arg_copy_move.value;
+		document.selform.hash.value = document.selform.hash_copy_move.value;
+		document.getElementById("action").value = "spx_copy_move";
 		document.selform.do_action.value = "move";
 		document.selform.submit();
 	}

@@ -382,6 +382,7 @@ function list_dir($dir) {			// list directory contents
 	echo '
 		<TABLE WIDTH="95%"><FORM name="selform" method="POST" action="spip.php">
 		<input type="hidden" name="action" id="action">
+		<input type="hidden" name="do_action">
 		<input type="hidden" name="namearch">
 		<input type="hidden" name="arg">
 		<input type="hidden" name="hash">
@@ -390,7 +391,7 @@ function list_dir($dir) {			// list directory contents
 		<input type="hidden" name="order" value="' . $GLOBALS['spx']["order"] .'">
 		<input type="hidden" name="srt" value="' . $GLOBALS['spx']["srt"] .'">
 		';
-	foreach (array('del', 'archive') as $act) {
+	foreach (array('del', 'archive', 'copy_move') as $act) {
 		list($arg, $hash) = make_hash($act, $dir);
 		echo '
 			<input type="hidden" name="arg_' . $act . '" value="' . $arg . '">
