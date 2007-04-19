@@ -60,6 +60,14 @@ function spx_stat($dir, $item)
 //------------------------------------------------------------------------------
 // THESE ARE NUMEROUS HELPER FUNCTIONS FOR THE OTHER INCLUDE FILES
 //------------------------------------------------------------------------------
+function make_hash($_action, $_dir, $_item=NULL)
+{
+	include_spip('inc/securiser_action');
+    $arg = $_dir . '-' . $_item;
+	$hash = calculer_action_auteur('spx_' . $_action . '-' . $arg);
+	return array($arg, $hash);
+}
+
 function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NULL) {
 						// make link to next page
 	if (!$_action) {
@@ -72,12 +80,10 @@ function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NUL
 	if($_srt==NULL) $_srt=$GLOBALS['spx']["srt"];
 	if($_lang==NULL) $_lang=(isset($GLOBALS['spx']["lang"])?$GLOBALS['spx']["lang"]:NULL);
 	
-	$link = $_SERVER['PHP_SELF'] . "?action=spx_".$_action;
+	$link = $_SERVER['PHP_SELF'] . '?action=spx_' . $_action;
 	if ($_action != "list") {
-		include_spip('inc/securiser_action');
-	    $arg = $_dir . '-' . $_item;
-		$link .= '&arg=' . $arg .
-		    '&hash=' .  calculer_action_auteur('spx_' . $_action . '-' . $arg);
+	    list($arg, $hash) = make_hash($_action, $_dir, $_item);
+		$link .= '&arg=' . $arg . '&hash=' .  $hash;
 	}
 
 	if($_dir!=NULL) $link.="&dir=".urlencode($_dir);
@@ -247,6 +253,7 @@ function copy_dir($source,$dest) {		// copy dir
 //------------------------------------------------------------------------------
 function remove($item) {			// remove file / dir
 	$ok = true;
+	spip_log('spixplorer Delete' . $item);
 	if(@is_link($item) || @is_file($item)) $ok=@unlink($item);
 	elseif(@is_dir($item)) {
 		if(($handle=@opendir($item))===false) show_error(basename($item).": "._T('spixplorer:opendir'));

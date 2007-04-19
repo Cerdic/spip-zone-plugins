@@ -370,8 +370,8 @@ function list_dir($dir) {			// list directory contents
 		echo "<TD align=\"right\"><TABLE><FORM action=\"".make_link("mkitem",$dir,NULL)."\" method=\"post\">\n<TR><TD>";
 		echo "<SELECT name=\"mktype\"><option value=\"file\">".$GLOBALS['spx']["mimes"]["file"]."</option>";
 		echo "<option value=\"dir\">".$GLOBALS['spx']["mimes"]["dir"]."</option></SELECT>\n";
-		echo "<INPUT name=\"mkname\" type=\"text\" size=\"15\">";
-		echo "<INPUT type=\"submit\" value=\""._T('spixplorer:btncreate');
+		echo "<input name=\"mkname\" type=\"text\" size=\"15\">";
+		echo "<input type=\"submit\" value=\""._T('spixplorer:btncreate');
 		echo "\"></TD></TR></FORM></TABLE></TD>\n";
 	}
 	
@@ -381,12 +381,27 @@ function list_dir($dir) {			// list directory contents
 	
 	
 	// Begin Table + Form for checkboxes
-	echo"<TABLE WIDTH=\"95%\"><FORM name=\"selform\" method=\"POST\" action=\"".make_link("post",$dir,NULL)."\">\n";
-	echo "<INPUT type=\"hidden\" name=\"do_action\"><INPUT type=\"hidden\" name=\"first\" value=\"y\">\n";
+	echo '
+		<TABLE WIDTH="95%"><FORM name="selform" method="POST" action="spip.php">
+		<input type="hidden" name="action" id="action">
+		<input type="hidden" name="arg">
+		<input type="hidden" name="hash">
+		<input type="hidden" name="first" value="y">
+		<input type="hidden" name="dir" value="' . htmlentities($dir) .'">
+		<input type="hidden" name="order" value="' . $GLOBALS['spx']["order"] .'">
+		<input type="hidden" name="srt" value="' . $GLOBALS['spx']["srt"] .'">
+		';
+	foreach (array('del') as $act) {
+		list($arg, $hash) = make_hash($act, $dir);
+		echo '
+			<input type="hidden" name="arg_' . $act . '" value="' . $arg . '">
+			<input type="hidden" name="hash_' . $act . '" value="' . $hash . '">
+			';
+	}
 	
 	// Table Header
 	echo "<TR><TD colspan=\"7\"><HR></TD></TR><TR><TD WIDTH=\"2%\" class=\"header\">\n";
-	echo "<INPUT TYPE=\"checkbox\" name=\"toggleAllC\" onclick=\"javascript:ToggleAll(this);\"></TD>\n";
+	echo "<input TYPE=\"checkbox\" name=\"toggleAllC\" onclick=\"javascript:ToggleAll(this);\"></TD>\n";
 	echo "<TD WIDTH=\"44%\" class=\"header\"><B>\n";
 	if($GLOBALS['spx']["order"]=="name") $new_srt = $_srt;	else $new_srt = "yes";
 	echo "<A href=\"".make_link("list",$dir,NULL,"name",$new_srt)."\">"._T('spixplorer:nameheader');

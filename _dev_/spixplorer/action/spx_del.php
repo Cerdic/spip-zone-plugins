@@ -40,16 +40,26 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_del()
+{
+	include_spip('inc/spx_init');
+	del_items($GLOBALS['spx']["dir"]);
+}
+
 //------------------------------------------------------------------------------
 function del_items($dir) {		// delete files/dirs
 	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
 	
-	$cnt=count($GLOBALS['spx']['__POST']["selitems"]);
+	$adetruire = _request('selitems');
+	$cnt=count($adetruire);
 	$err=false;
 	
 	// delete files & check for errors
 	for($i=0;$i<$cnt;++$i) {
-		$items[$i] = stripslashes($GLOBALS['spx']['__POST']["selitems"][$i]);
+		$items[$i] = stripslashes($adetruire[$i]);
 		$abs = get_abs_item($dir,$items[$i]);
 	
 		if(!@file_exists(get_abs_item($dir, $items[$i]))) {
