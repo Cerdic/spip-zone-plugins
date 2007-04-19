@@ -40,9 +40,18 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_edit()
+{
+	include_spip('inc/spx_init');
+	edit_file($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+}
+
 //------------------------------------------------------------------------------
 function savefile($file_name) {			// save edited file
-	$code = stripslashes($GLOBALS['spx']['__POST']["code"]);
+	$code = stripslashes(_request('code'));
 	$fp = @fopen($file_name, "w");
 	if($fp===false) show_error(basename($file_name).": "._T('spixplorer:savefile'));
 	fputs($fp, $code);
@@ -58,7 +67,7 @@ function edit_file($dir, $item) {		// edit file
 	
 	if(_request("dosave")=="yes") {
 		// Save / Save As
-		$item=basename(stripslashes($GLOBALS['spx']['__POST']["fname"]));
+		$item=basename(stripslashes(_request('fname')));
 		$fname2=get_abs_item($dir, $item);
 		if(!isset($item) || $item=="") show_error(_T('spixplorer:miscnoname'));
 		if($fname!=$fname2 && @file_exists($fname2)) show_error($item.": "._T('spixplorer:itemdoesexist'));
