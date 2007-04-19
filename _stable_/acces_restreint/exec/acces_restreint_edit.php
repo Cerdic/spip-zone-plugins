@@ -118,6 +118,8 @@ function exec_acces_restreint_edit(){
 	icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", "rien.gif");
 	echo "</div>\n";
 	
+	echo AccesRestreint_afficher_auteurs('<b>' . _T('accesrestreint:info_auteurs_lies_zone') . '</b>', array("FROM" => 'spip_auteurs AS auteurs, spip_zones_auteurs AS lien', 'WHERE' => "lien.id_zone='$id_zone' AND lien.id_auteur=auteurs.id_auteur", 'ORDER BY' => "auteurs.nom DESC"));
+	
 	fin_page();
 }
 

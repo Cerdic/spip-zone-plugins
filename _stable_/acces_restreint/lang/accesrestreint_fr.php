@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_zone' => 'Supprimer cette zone',
 'ajouter_droits_auteur' => "M'ajouter les droits d'acc&egrave;s &agrave; cette zone",
 
+'info_auteurs_lies_zone' => 'Les auteurs ayant acc&egrave;s &agrave; cette zone',
 'publique' => 'Publique',
 'privee' => 'Priv&eacute;e',
 'voir_toutes' => 'Voir toutes les zones',
