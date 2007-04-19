@@ -44,12 +44,12 @@ function exec_acces_restreint(){
 	if (_request('supp_zone')!=NULL)
 		AccesRestreint_supprimer_zone();
 
-	$requete = array("SELECT"=>"zones.*","FROM"=>"spip_zones AS zones");
+	$requete = array("SELECT"=>"zones.*","FROM"=>"spip_zones AS zones","ORDER BY"=>"zones.titre");
 	$select = $requete['SELECT'] ? $requete['SELECT'] : '*';
 	$from = $requete['FROM'] ? $requete['FROM'] : 'spip_articles AS articles';
 	$join = $requete['JOIN'] ? (' LEFT JOIN ' . $requete['JOIN']) : '';
 	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
-	$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+	$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : 'zones.titre';
 	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
 	$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
 
