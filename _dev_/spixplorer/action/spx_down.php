@@ -40,6 +40,15 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_down()
+{
+	include_spip('inc/spx_init');
+	download_item($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+}
+
 //------------------------------------------------------------------------------
 function download_item($dir, $item) {		// download file
 	// Security Fix:

@@ -227,7 +227,7 @@ htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
 		// DOWNLOAD
 		($stat['file'] ?
 			($allow ?
-				'<td><a href="' . make_link("download",$dir,$item) . '">' .
+				'<td><a href="' . make_link("down",$dir,$item) . '">' .
 				'<img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
 				'src="plugins/spixplorer/_img/_download.gif" alt="' . 
 				_T('spixplorer:downlink') .
