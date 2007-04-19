@@ -89,6 +89,11 @@ EOF;
 
 var Tweaks = new Array(); // Listes des tweaks
 
+function submit_general(tweak) {
+	document.forms.submitform.afficher_tweak.value = tweak;
+	document.forms.submitform.submit();
+}
+
 function tweakcheck(ischecked, index) {
  tweak = Tweaks[index][0];
  if(ischecked == true) {
@@ -175,6 +180,11 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		exit;
 	}
 
+	// afficher un tweak completement ?
+	$afficher_tweak = $_GET['afficher_tweak'];
+	if (!strlen($afficher_tweak) || $afficher_tweak=='non' ) $afficher_tweak = -1;
+		else $afficher_tweak = intval($afficher_tweak);
+
 	// initialisation generale forcee : recuperation de $tweaks;
 	tweak_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
@@ -184,7 +194,10 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		// pour la peine, un redirige,
 		// que les tweaks charges soient coherent avec la liste
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
+		$afficher_tweak = _request('afficher_tweak');
+		if (strlen($afficher_tweak) && $afficher_tweak!=='non')
+			redirige_par_entete(generer_url_ecrire('tweak_spip_admin', "afficher_tweak=$afficher_tweak", true) . "#tweak$afficher_tweak");
+			else redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
 	}
 //	else
 //		verif_tweaks();
@@ -238,7 +251,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
 		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$i) {
-			$s .= ligne_tweak($tweak, $js) . "\n";
+			$s .= ligne_tweak($tweak, $js, $afficher_tweak==$tweak['index']) . "\n";
 			$basics[] = $tweak['index'];
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
@@ -254,6 +267,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 
 	echo generer_url_post_ecrire('tweak_spip_admin', '', 'submitform');
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
+	echo "\n<input type='hidden' name='afficher_tweak' value='non'>";
 	foreach($temp = $tweaks as $tweak) echo "<input type='hidden' id='tweak_".$tweak['id']."' name='tweak_".$tweak['id']."' value='".($tweak['actif']?"1":"0")."' />";
 	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider2' value='"._T('bouton_valider')."' class='fondo' /></div>";
@@ -276,7 +290,7 @@ tweak_log("Fin   : exec_tweak_spip_admin()");
 }
 
 // affiche un tweak sur une ligne
-function ligne_tweak($tweak, &$js){
+function ligne_tweak($tweak, &$js, $afficher){
 	static $id_input=0;
 	$inc = $tweak_id = $tweak['id'];
 	$actif = $tweak['actif'];
@@ -287,7 +301,7 @@ function ligne_tweak($tweak, &$js){
 	$nb_var = intval($tweak['nb_variables']);
 	$index = intval($tweak['index']);
 
-	$s = "<form  style='margin:0 0 0 1em;'><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
+	$s = "<a name='tweak$index' id='tweak$index'></a><form  style='margin:0 0 0 1em;'><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
@@ -306,11 +320,11 @@ function ligne_tweak($tweak, &$js){
 	$p .= " onclick='tweakchange.apply(this,[$index])'";
 	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 	$js .= "Tweaks[$index] = Array(\"$inc\", $nb_var);\n";
-	$p .= bouton_block_invisible($tweak_id) . $tweak['nom'] . '</p>';
+	$p .= ($afficher?bouton_block_visible($tweak_id):bouton_block_invisible($tweak_id)) . $tweak['nom'] . '</p>';
 
 	$s .= propre($p) . "</div></form>";
 
-	$p = debut_block_invisible($tweak_id);
+	$p = $afficher?debut_block_visible($tweak_id):debut_block_invisible($tweak_id);
 
 	$p .= "\n<div class='detailtweak'>";
 //	$p .= ajax_action_auteur('tweak_input', $index, 'tweak_spip_admin', "tweak={$tweak['id']}", "<div id='tweak_input-$index'>{$tweak['description']}</div>");

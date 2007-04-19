@@ -123,7 +123,7 @@ add_variable( array(
 	'defaut' => 100,
 	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);",
 ));
-if($GLOBALS['spip_version_code']<1.93) {
+if($GLOBALS['spip_version']<1.93) {
 	add_tweak( array(
 		'id' => 'suite_introduction',
 		'code:options' => "%%suite_introduction%%",

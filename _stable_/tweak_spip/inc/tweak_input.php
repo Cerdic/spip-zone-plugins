@@ -86,7 +86,7 @@ tweak_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 		if($c>1) $ok_input .= "<div style=\"margin-top: 0; text-align: right;\">$bouton</div>";
 			else $ok_input = str_replace(_TWEAK_VAR, $bouton, $ok_input);
 	} else 
-		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('tweak:validez_page').'</div>';
+		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('tweak:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
 	// nettoyage...
 	$ok_input = str_replace(_TWEAK_VAR, '', $ok_input);
 	// HIDDENTWEAKVAR__ pour eviter d'avoir deux inputs du meme nom...
