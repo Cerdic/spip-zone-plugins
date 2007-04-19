@@ -40,12 +40,21 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_mkitem()
+{
+	include_spip('inc/spx_init');
+	make_item($GLOBALS['spx']["dir"]);
+}
+
 //------------------------------------------------------------------------------
 function make_item($dir) {		// make new directory or file
 	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
 	
-	$mkname=$GLOBALS['spx']['__POST']["mkname"];
-	$mktype=$GLOBALS['spx']['__POST']["mktype"];
+	$mkname = _request('mkname');
+	$mktype = _request('mktype');
 	
 	$mkname=basename(stripslashes($mkname));
 	if($mkname=="") show_error(_T('spixplorer:miscnoname'));
