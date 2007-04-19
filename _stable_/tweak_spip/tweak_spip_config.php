@@ -123,17 +123,26 @@ add_variable( array(
 	'defaut' => 100,
 	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);",
 ));
-add_tweak( array(
-	'id' => 'suite_introduction',
-	'code:options' => "%%suite_introduction%%",
-	'categorie' => 'spip',
-	'version-min' => 1.93,
-));
-add_tweak( array(
-	'id' => 'introduction',
-	'code:options' => "%%lgr_introduction%%",
-	'categorie' => 'spip',
-));
+if($GLOBALS['spip_version_code']<1.93) {
+	add_tweak( array(
+		'id' => 'suite_introduction',
+		'code:options' => "%%suite_introduction%%",
+		'categorie' => 'spip',
+		'version-min' => 1.93,
+	));
+	add_tweak( array(
+		'id' => 'introduction',
+		'code:options' => "%%lgr_introduction%%",
+		'categorie' => 'spip',
+	));
+} else { // on regroupe les deux variables !
+	add_tweak( array(
+		'id' => 'introduction2',
+		'code:options' => "%%lgr_introduction%%\n%%suite_introduction%%",
+		'categorie' => 'spip',
+		'version-min' => 1.93,
+	));
+}
 
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
 add_variable( array(
