@@ -40,6 +40,15 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_search()
+{
+	include_spip('inc/spx_init');
+	search_items($GLOBALS['spx']["dir"]);
+}
+
 //------------------------------------------------------------------------------
 function find_item($dir,$pat,&$list,$recur) {	// find items
 	$handle=@opendir(get_abs_dir($dir));
@@ -102,10 +111,11 @@ function print_table($list) {			// print table of found items
 }
 //------------------------------------------------------------------------------
 function search_items($dir) {			// search for item
-	if(isset($GLOBALS['spx']['__POST']["searchitem"])) {
-		$searchitem=stripslashes($GLOBALS['spx']['__POST']["searchitem"]);
-		$subdir=(_request("subdir")=="y");
-		$list=make_list($dir,$searchitem,$subdir);
+	set_time_limit(0);
+	if($searchitem = _request('searchitem')) {
+		$searchitem = stripslashes($searchitem);
+		$subdir = (_request("subdir")=="y");
+		$list = make_list($dir,$searchitem,$subdir);
 	} else {
 		$searchitem=NULL;
 		$subdir=true;
