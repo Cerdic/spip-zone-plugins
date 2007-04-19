@@ -7,7 +7,7 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_TWEAK_VAR', code_echappement("<!--  TWEAK-VAR -->\n", 'TWEAK'));
+define('_TWEAK_VAR', tweak_code_echappement("<!--  TWEAK-VAR -->\n", 'TWEAK'));
 
 include_spip('inc/actions');
 include_spip('inc/texte');
@@ -30,8 +30,10 @@ tweak_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 		$ok_input = $label;
 		foreach($radios as $code=>$traduc) {
 			$ok_input .= 
-"<input id=\"label_{$variable}_$code\" type=\"radio\"".($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"HIDDENTWEAKVAR__$variable\"/>
-<label for=\"label_{$variable}_$code\">".($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'').'</label> ';
+				"<label><input id=\"label_{$variable}_$code\" type=\"radio\""
+				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"HIDDENTWEAKVAR__$variable\"/>"
+				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
+				.'</label> ';
 		}
 		$ok_input .= _TWEAK_VAR;
 		$ok_valeur = $label.(strlen($valeur)?ucfirst(_T($radios[$valeur])):'&nbsp;-');

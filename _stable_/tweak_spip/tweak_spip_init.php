@@ -23,6 +23,17 @@ function tweak_log($variable, $prefixe='') {
 // compatibilite avec tweak-spip de version anterieure a 1.7.0.0
 function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
 
+// Echapper les les elements perilleux en les passant en base64
+// Creer un bloc base64 correspondant a $rempl ; au besoin en marquant
+// une $source differente ; optimisation du code spip !
+// echappe_retour() permet de revenir en arriere
+function tweak_code_echappement($rempl, $source='') {
+	// Convertir en base64
+	$base64 = base64_encode($rempl);
+	// guillemets simple dans la balise pour simplifier le tweak 'guillemets'
+	return "<span class='base64$source' title='$base64'></span>";
+}
+
 function tweak_initialisation_d_un_tweak($tweak0, $tweak_input) {
 	global $tweaks, $metas_tweaks;
 	$tweak = &$tweaks[$tweak0];

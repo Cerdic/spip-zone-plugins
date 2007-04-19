@@ -138,6 +138,41 @@ tweak_log("Début : exec_tweak_test()");
 	);
 	tweak_array(tweak_test_fun($textes, 'filets_sep'), 'filets_sep()');
 
+	// test des liens orphelins
+	$GLOBALS["liens_orphelins_etendu"]=true;
+	$textes = array(
+		"http://google.fr",
+		"voici : http://google.fr",
+		"voici :http://www.google.fr",
+		"voici http://www.google.fr",
+		"voici : https://mabanque.fr",
+		"voici : ftp://mabanque.fr",
+		"www.google.fr",
+		"voici : www.google.fr",
+		"voici : ftp.stockage.fr/tropdelaballe",
+		"http://user:password@www.commentcamarche.net:80/glossair/glossair.php3",
+		"http://serveur:port/repertoire/fichier.html",
+		"ftp://serveur/repertoire/fichier.qqchose",
+		"file:///disque|/repertoire/fichier.qqchose",
+		"file:///c|/tmp/fichier.txt",
+		"mailto:nom@organisation.domaine",
+		"mailto:Fabien.Gandon@sophia.inria.fr",
+		"telnet://bbs.monsite.com/",
+		"telnet://Nom:Password@serveur.ici:port",
+		"telnet://gandonf:abcde@gopa.insa.fr:23",
+		"gopher://serveur.ici:port/repertoire/fichier#marqueur",
+		"gopher://gopher.monsite.com/",
+		"newsrc://serveur:port/repertoire/nom.de.la.news",
+		"wais://host.ici:port/database",
+		"wais://wais.monsite.com/",
+		"news:fr.comp.lang.c++",
+		"voici : <div toto='ab.cd'></div>http://google.fr",
+		"moi+moi@world.com",
+		"mailto:moi-moi@world.com",
+		"mailto:nom@provider.com?subject=renseignement",
+	);
+	tweak_array(tweak_test_fun($textes, 'liens_orphelins'), 'liens_orphelins()');
+
 	echo '</div>';
 
 	echo fin_page();

@@ -117,9 +117,15 @@ add_variable( array(
 	'defaut' => '"&nbsp;(...)"',
 	'code' => "define('_INTRODUCTION_SUITE', %s);",
 ));
+add_variable( array(
+	'nom' => 'lgr_introduction',
+	'format' => 'nombre',
+	'defaut' => 100,
+	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);",
+));
 add_tweak( array(
 	'id' => 'suite_introduction',
-	'code:options' => "%%suite_introduction%%",
+	'code:options' => "%%suite_introduction%%\n%%lgr_introduction%%",
 	'categorie' => 'spip',
 	'version-min' => 1.93,
 ));
@@ -271,7 +277,7 @@ add_tweak( array(
 // couplage avec le tweak 'decoupe', donc 'sommaire' doit etre place juste apres :
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
 include_spip('inc/texte');
-$code = str_replace("'", "\'", code_echappement("<!--  -->\n", 'SOMMAIRE'));
+$code = str_replace("'", "\'", tweak_code_echappement("<!--  -->\n", 'SOMMAIRE'));
 add_tweak( array(
 	'id' => 'sommaire',
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",
@@ -357,6 +363,20 @@ add_tweak( array(
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'categorie'	 => 'typo-corr',
 	'pipeline:post_typo' => 'typo_guillemets',
+));
+
+add_variable( array(
+	'nom' => 'liens_orphelins',
+	'format' => 'nombre',
+	'radio' => array(0 => 'tweak:basique', 1 => 'tweak:etendu'),
+	'defaut' => 0,
+	'code:%s' => '$GLOBALS["liens_orphelins_etendu"]=true;',
+));
+add_tweak( array(
+	'id' => 'liens_orphelins',
+	'categorie'	 => 'typo-corr',
+	'code:options' => '%%liens_orphelins%%',
+	'pipeline:pre_propre' => 'liens_orphelins',
 ));
 
 add_tweak( array(

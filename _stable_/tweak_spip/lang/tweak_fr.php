@@ -214,6 +214,14 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'sommaire:aide' => 'Un article sans sommaire&nbsp;: @interdit@',
 	'sommaire' => 'Sommaire',
 
+	'liens_orphelins:nom' => 'Liens orphelins',
+	'liens_orphelins:description' => 'Remplace syst&eacute;matiquement tous les liens laiss&eacute;s en texte par les utilisateurs (notamment dans les forums) et qui ne sont donc pas cliquables, par des liens hypertextes au format Spip. Voici un test : {<html>www.spip.net</html>} est remplac&eacute; par [->www.spip.net].
+
+Vous pouvez choisir le type de remplacement :
+- {basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</html>} (tout protocole) ou {<html>www.spip.net</html>}.
+- {&eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
+
+Votre choix : %liens_orphelins%',
 /*
 	':nom' => '',
 	':description' => '',
