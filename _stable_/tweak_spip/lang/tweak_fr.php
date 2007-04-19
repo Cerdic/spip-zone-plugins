@@ -152,7 +152,9 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 
 {{Attention}} : pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site Spip sous
   le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier.
-  Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de Spip.<br />Votre choix : %radio_type_urls3%",
+  Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de Spip.
+_ Plus d'infos : [->http://www.spip.net/fr_article765.html]
+_ Votre choix : %radio_type_urls3%",
 
 	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak Spip',
 	'log_tweaks:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak Spip' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),

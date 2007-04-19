@@ -197,6 +197,8 @@ function tweak_les_tests() {
 		"wais://host.ici:port/database et wais://wais.monsite.com/",
 		"news:fr.comp.lang.c++ et pkoi pas : <div toto='ici.rien'></div>http://google.fr",
 		"moi+moi@world.com, mailto:moi-moi@world.com, mailto:nom@provider.com?subject=renseignement",
+		'une image ? <img src="http://mailer.e-flux.com/mail_images/toto.jpg" alt="" />',
+		'[<img src="http://mailer.e-flux.com/mail_images/toto.jpg" alt="" />->http://www.americas-society.org/] ',
 	);
 //	tweak_array(tweak_test_fun($textes, 'typo'), 'Test sur : echappements');
 	tweak_array(tweak_test_fun($textes, 'liens_orphelins'), 'Test sur : liens_orphelins()');

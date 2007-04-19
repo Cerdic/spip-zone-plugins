@@ -20,13 +20,13 @@ function liens_orphelins_rempl($texte){
 	// prudence 1 : on protege TOUTES les balises <a></a> pour eviter les doublons
 	if (strpos($texte, '<a')!==false) 
 		$texte = preg_replace_callback(',(<a\s*[^<]+</a>),Ums', 'liens_orphelins_echappe_balises_callback', $texte);
-	// prudence 2 : on protege TOUTES les balises contenant des slashs, histoire de voir plus clair
-	if (strpos($texte, '<')!==false) 
-		$texte = preg_replace_callback(',(<[^>]+\.[^>]*>),Ums', 'liens_orphelins_echappe_balises_callback', $texte);
-	// prudence 3 : on protege TOUS les raccourcis Spip, au cas ou...
+	// prudence 2 : on protege TOUS les raccourcis de liens Spip, au cas ou...
 	define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',(\[([^][]*)->(>?)([^]]*)\]),msS', 'liens_orphelins_echappe_balises_callback', $texte);
+	// prudence 3 : on protege TOUTES les balises contenant des points, histoire de voir plus clair
+	if (strpos($texte, '<')!==false) 
+		$texte = preg_replace_callback(',(<[^>]+\.[^>]*>),Ums', 'liens_orphelins_echappe_balises_callback', $texte);
 	// encore ici, on s'en va si pas de point...
 	if (strpos($texte, '.')===false) return echappe_retour($texte, 'LIENS');
 
