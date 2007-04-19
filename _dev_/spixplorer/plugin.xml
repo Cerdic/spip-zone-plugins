@@ -7,7 +7,7 @@ G&eacute;rer ses fichiers comme le serveur et plus.
 
 Un fork de [quixplorer->http://quixplorer.sourceforge.net/]
 
-D&eacute;ja un essai pour le plugin charge, ne pas poser tout dans la zone comme Fck.
+Utilisation: [spip.php?action=spx_list->../?action=spx_list]
 	</description>
 	<!-- install>
 	spixplorer_install.php
