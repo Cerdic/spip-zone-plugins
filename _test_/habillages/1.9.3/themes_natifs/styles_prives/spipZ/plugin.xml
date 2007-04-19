@@ -13,4 +13,8 @@ Premier theme pour l'espace prive. On trouvera un autre nom ensuite.
 	</description>
 	<lien>http://spip.graphismes.free.fr/spip.php?rubrique7</lien> <!-- URI de documentation -->
 	 <prefix>spipz</prefix>
+ 	<options>
+	spipz_options.php
+	</options>
+
 </plugin>
