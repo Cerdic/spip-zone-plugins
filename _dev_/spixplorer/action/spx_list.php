@@ -166,87 +166,87 @@ function print_table($dir, $list, $allow) {	// print table of files
 		} //else $link = "";
 		
 		echo '
-<TR class="rowdata"><TD><INPUT TYPE="checkbox" name="selitems[]" value="' .
-htmlspecialchars($item) . '" onclick="javascript:Toggle(this);"></TD>
+<tr class="rowdata"><td><input type="checkbox" name="selitems[]" value="' .
+htmlspecialchars($item) . '" onclick="javascript:Toggle(this);"></td>
 ' .
 	// Icon + Link
-'<TD nowrap>' .
-		/*if($link!="") */ '<A HREF="' . $link . '" TARGET="' . $target . '">' .
+'<td nowrap>' .
+		/*if($link!="") */ '<a href="' . $link . '" target="' . $target . '">' .
 		//else echo "<A>";
-'<IMG border="0" width="16" height="16" ' .
+'<img border="0" width="16" height="16" ' .
 /*toggg		echo "align=\"ABSMIDDLE\" */ 'src="plugins/spixplorer/_img/' .
-			$stat['mime_img'] . '" ALT="">&nbsp;' .
+			$stat['mime_img'] . '" alt="">&nbsp;' .
 htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
-'</A></TD>
+'</a></td>
 ' .	// ...$extra...
 	// Size
-'<TD>' . parse_file_size($stat['size']) . '</TD>
+'<td>' . parse_file_size($stat['size']) . '</td>
 ' .
 	// Type
-'<TD>' . $stat['mime_type'] . '</TD>
+'<td>' . $stat['mime_type'] . '</td>
 ' .
 	// Modified
-'<TD>' . parse_file_date($stat['mtime']) . '</TD>
+'<td>' . parse_file_date($stat['mtime']) . '</td>
 ' .
 	// Permissions
-'<TD>' .
+'<td>' .
 		($allow ?
-			'<A HREF="' . make_link("chmod", $dir, $item) . '" TITLE="' .
+			'<a href="' . make_link("chmod", $dir, $item) . '" title="' .
 			_T('spixplorer:permlink') . '">'
 		: '') .
 		parse_file_type($dir,$item) . parse_file_perms($stat['perms']) .
 			'(' . $stat['owner'] . '/' . $stat['group'] . ')' .
-		($allow ? '</A>' : '') .
-'</TD>
+		($allow ? '</a>' : '') .
+'</td>
 ' .
 	// Actions
-'<TD>
-<TABLE>
+'<td>
+<table>
 ' .
 		// EDIT
 		($stat['edit'] ?
 			($allow ?
-				'<TD><A HREF="' . make_link("edit",$dir,$item) . '">' .
+				'<td><a href="' . make_link("edit",$dir,$item) . '">' .
 				'<IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-				'src="plugins/spixplorer/_img/_edit.gif" ALT="' .
-				_T('spixplorer:editlink') . '" TITLE="' .
-				_T('spixplorer:editlink') . '"></A></TD>
+				'src="plugins/spixplorer/_img/_edit.gif" alt="' .
+				_T('spixplorer:editlink') . '" title="' .
+				_T('spixplorer:editlink') . '"></a></td>
 '
 			:
-				'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-				'src="plugins/spixplorer/_img/_edit_.gif" ALT="' .
-				_T('spixplorer:editlink') . '" TITLE="' .
-				_T('spixplorer:editlink') . '"></TD>
+				'<td><img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+				'src="plugins/spixplorer/_img/_edit_.gif" alt="' .
+				_T('spixplorer:editlink') . '" title="' .
+				_T('spixplorer:editlink') . '"></td>
 '
 			)
 		:
-			'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-			'src="plugins/spixplorer/_img/_.gif" ALT=""></TD>
+			'<td><img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+			'src="plugins/spixplorer/_img/_.gif" alt=""></td>
 '
 		) .
 		// DOWNLOAD
 		($stat['file'] ?
 			($allow ?
-				'<TD><A HREF="' . make_link("download",$dir,$item) . '">' .
-				'<IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-				'src="plugins/spixplorer/_img/_download.gif" ALT="' . 
+				'<td><a href="' . make_link("download",$dir,$item) . '">' .
+				'<img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+				'src="plugins/spixplorer/_img/_download.gif" alt="' . 
 				_T('spixplorer:downlink') .
-				'" TITLE="' . _T('spixplorer:downlink') . '"></A></TD>
+				'" title="' . _T('spixplorer:downlink') . '"></a></td>
 '
 			:
-				'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-				'src="plugins/spixplorer/_img/_download_.gif" ALT="' . 
+				'<td><img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+				'src="plugins/spixplorer/_img/_download_.gif" alt="' . 
 				_T('spixplorer:downlink') .
-				'" TITLE="' . _T('spixplorer:downlink') . '"></TD>
+				'" title="' . _T('spixplorer:downlink') . '"></td>
 '
 			)
 		:
-			'<TD><IMG border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-			'src="plugins/spixplorer/_img/_.gif" ALT=""></TD>
+			'<td><img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
+			'src="plugins/spixplorer/_img/_.gif" alt=""></td>
 '
 		) .
-		'</TABLE>
-</TD></TR>
+		'</table>
+</td></tr>
 ';
 	}
 }
