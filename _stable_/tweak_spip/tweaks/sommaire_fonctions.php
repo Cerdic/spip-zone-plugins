@@ -9,7 +9,6 @@ define('_sommaire_SANS_FOND', '[!fond]');
 // renvoie le sommaire d'une page d'article
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index) $index=0;
-//echo $texte;
 	// image de retour au sommaire
 	$titre = _T('tweak:sommaire');
 	$img = 'spip_out.gif';
