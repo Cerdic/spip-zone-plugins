@@ -224,6 +224,9 @@ Vous pouvez choisir le type de remplacement :
 Votre choix : %liens_orphelins%',
 	'basique' => 'Basique',
 	'etendu' => '&Eacute;tendu',
+	
+	'introduction:nom' => "Longueur d'#INTRODUCTION",
+	'introduction:description' => "Pr&eacute;cise (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Cette balise à placer dans les squelettes sert en g&eacute;n&eacute;ral à la une ou dans les rubriques afin d’introduire les articles, les br&egrave;ves, etc.. Une valeur nulle ou &eacute;gale à 100 ne modifie pas l'aspect de l'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egves et 600 pour les forums et les rubriques. <br />Valeur (en %) : %lgr_introduction%",
 
 /*
 	':nom' => '',

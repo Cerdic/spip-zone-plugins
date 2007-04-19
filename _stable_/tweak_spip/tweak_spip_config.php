@@ -125,9 +125,14 @@ add_variable( array(
 ));
 add_tweak( array(
 	'id' => 'suite_introduction',
-	'code:options' => "%%suite_introduction%%\n%%lgr_introduction%%",
+	'code:options' => "%%suite_introduction%%",
 	'categorie' => 'spip',
 	'version-min' => 1.93,
+));
+add_tweak( array(
+	'id' => 'introduction',
+	'code:options' => "%%lgr_introduction%%",
+	'categorie' => 'spip',
 ));
 
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
