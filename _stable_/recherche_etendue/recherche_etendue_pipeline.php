@@ -1,6 +1,7 @@
 <?php
 function RechercheEtendue_reconfig_indexation($reactive = false){
 	include_spip('inc/meta');
+	include_spip('base/abstract_sql');
 	$liste_rub_no_index = explode(',',$GLOBALS['meta']['recherche_etendue_rubriques_non_indexees']);
 	$in = "";
 	$liste_rub_no_index = implode(',',array_map('intval',$liste_rub_no_index));
@@ -80,8 +81,8 @@ function RechercheEtendue_affiche_droite($flux){
 			else{
 				$out .= generer_url_post_ecrire('naviguer', "id_rubrique=$id_rubrique");
 				$out .= "<input type='hidden' name='recherche_etendue_rubrique_off' value='$id_rubrique' />\n";
-				$out .= "<div>"._L("Desactiver l'indexation de cette rubrique par le moteur de recherche")."<br/>\n";
-				$out .= "<div align='$spip_lang_right'><input type='submit' name='Annuler' value='"._L('Desactiver')."' class='fondo'></div>\n";
+				$out .= "<div>"._L("D&eacute;sactiver l'indexation de cette rubrique par le moteur de recherche")."<br/>\n";
+				$out .= "<div align='$spip_lang_right'><input type='submit' name='Annuler' value='"._L('D&eacute;sactiver')."' class='fondo'></div>\n";
 				$out .= "</div></form>";
 			}
 			$out .= fin_cadre_relief(true);
