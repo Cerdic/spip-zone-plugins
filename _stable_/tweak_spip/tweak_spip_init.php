@@ -145,7 +145,7 @@ function tweak_echappe_balises($balises, $fonction, $texte){
 }
 
 // transforme un chemin d'image relatif en chemin html absolu
-// cette fonction est utilisable par les tweaks eux-meme durant l'execution du plugin
+// cette fonction est utilisable par les tweaks eux-memes durant l'execution du plugin
 function tweak_htmlpath($relative_path) {
 	$realpath = str_replace("\\", "/", realpath($relative_path));
 	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);

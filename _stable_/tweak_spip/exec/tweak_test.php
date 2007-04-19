@@ -159,7 +159,7 @@ function tweak_les_tests() {
 	$textes = array(
 		'avant <i class="style">le</i> "test"!',
 		'avant <code class="code">toto</code>. apres le "test"!',
-		'avant '.echappe_html('<script>toto</script>', 'TEST', truem).'apres le "test"!',
+		'avant '.echappe_html('<script>toto</script>', 'TEST', true).'apres le "test"!',
 		'avant '.echappe_html('<code class="code">toto</code>', 'TEST', true).'apres le "test"!',
 	);
 	tweak_array(tweak_test_fun($textes, 'typo_guillemets'), 'Test sur : typo_guillemets()');
