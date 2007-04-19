@@ -447,7 +447,7 @@ function AccesRestreint_afficher_auteurs_boucle($row, &$tous_id, $voir_logo, $bo
 					break;
 		}
 
-		$s = "<a href=\"".generer_url_ecrire("auteurs_infos","id_auteur=$id_auteur")."\" title=\"$nom\">";
+		$s = "<a href=\"".generer_url_ecrire("auteur_infos","id_auteur=$id_auteur")."\" title=\"$nom\">";
 	
 		if ($voir_logo) {
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
