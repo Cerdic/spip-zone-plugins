@@ -63,7 +63,7 @@ function spx_stat($dir, $item)
 function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NULL) {
 						// make link to next page
 	if (!$_action) {
-		$_action = "spx_list";
+		$_action = "list";
 	}
 	
 	if($_dir=="") $_dir=NULL;
@@ -73,11 +73,11 @@ function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NUL
 	if($_lang==NULL) $_lang=(isset($GLOBALS['spx']["lang"])?$GLOBALS['spx']["lang"]:NULL);
 	
 	$link = $_SERVER['PHP_SELF'] . "?action=spx_".$_action;
-	if ($_action != "spx_list") {
+	if ($_action != "list") {
 		include_spip('inc/securiser_action');
-	    $arg = $_action . '-' . $_dir . '-' . $_item;
+	    $arg = $_dir . '-' . $_item;
 		$link .= '&arg=' . $arg .
-		    '&hash=' .  calculer_action_auteur('-' . $arg);
+		    '&hash=' .  calculer_action_auteur('spx_' . $_action . '-' . $arg);
 	}
 
 	if($_dir!=NULL) $link.="&dir=".urlencode($_dir);

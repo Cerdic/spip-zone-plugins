@@ -67,7 +67,7 @@ function chmod_item($dir, $item) {		// change permissions
 		if(!@chmod(get_abs_item($dir,$item),bindec($bin))) {
 			show_error($item.": "._T('spixplorer:permchange'));
 		}
-		header("Location: ".make_link("link",$dir,NULL));
+		header("Location: ".make_link("list",$dir,NULL));
 		return;
 	}
 	
