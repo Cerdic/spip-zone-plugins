@@ -56,10 +56,10 @@ function sommaire_d_article_rempl($texte) {
 	$sansfond = !$img || strpos($texte, _sommaire_SANS_FOND)!==false;
 	if ($sansfond) {
 		$texte = str_replace(_sommaire_SANS_FOND, '', $texte);
-		$fond = 'background-color:white; border:1px solid gray;';
+		$fond = 'background-color:white; border:thin solid gray;';
 	} else {
 		$img = tweak_htmlpath($img);
-		$fond = "background:transparent url($img) no-repeat scroll left top; border-bottom:1px solid #999999; border-right:1px solid #999999;";
+		$fond = "background:transparent url($img) no-repeat scroll left top; border-bottom:thin solid #999999; border-right:1px solid #999999;";
 	}
 
 
@@ -69,6 +69,7 @@ display:block;
 float:right;
 /*position:relative;*/
 margin-left:1em;
+margin-right:0.4em;
 overflow:auto;
 z-index:100;
 /*width:160px;*/

@@ -31,25 +31,26 @@ function liens_orphelins_rempl($texte){
 	if (strpos($texte, '.')===false) return echappe_retour($texte, 'LIENS');
 
 	// chiffres, lettres, 20 caracteres speciaux autorises dans les urls
-	$autorises = '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9';
+	$autorises =  '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9';
+	$autorisesfin = '\#\$\&\'\*\+\-\/\=\^\_\`\{\|\}\~a-zA-Z0-9';
 
    // trouve : protocole://qqchose
-   $texte = preg_replace(",([a-zA-Z]+://[{$autorises}:@]*[{$autorises}]),", "@@LO1@@$1@@LO2@@", $texte);
+   $texte = preg_replace(",([a-zA-Z]+://[{$autorises}:@]*[{$autorisesfin}]),", "@@LO1@@$1@@LO2@@", $texte);
    // on protege, pour la suite...
-   $texte = preg_replace_callback(',@@LO1@@(.+)@@LO2@@,', 'liens_orphelins_raccourcis_callback', $texte);
+   $texte = preg_replace_callback(',@@LO1@@(.+)@@LO2@@,U', 'liens_orphelins_raccourcis_callback', $texte);
 // bizarre j'arrive pas a faire marcher directement :
 //	$texte = preg_replace_callback(',([a-zA-Z]+://[{$autorises}:@]*),', 'liens_orphelins_raccourcis_callback', $texte);
 
    // trouve : www.lieu.qqchose ou ftp.lieu.qqchose
-   $texte = preg_replace(",\b((www|ftp)\.[a-zA-Z0-9_-]+\.[{$autorises}]*),", "@@LO1@@$1@@LO2@@", $texte);
+   $texte = preg_replace(",\b((www|ftp)\.[a-zA-Z0-9_-]+\.[{$autorises}]*[{$autorisesfin}]),", "@@LO1@@$1@@LO2@@", $texte);
    // on protege, pour la suite...
-   $texte = preg_replace_callback(',@@LO1@@(.+)@@LO2@@,', 'liens_orphelins_raccourcis_callback', $texte);
+   $texte = preg_replace_callback(',@@LO1@@(.+)@@LO2@@,U', 'liens_orphelins_raccourcis_callback', $texte);
 // bizarre j'arrive pas a faire marcher directement :
 //	$texte = preg_replace_callback(',\b((www|ftp)\.[a-zA-Z0-9_-]+\.[{$autorises}]*),', 'liens_orphelins_raccourcis_callback', $texte);
 
    // trouve : mailto:qqchose ou news:qqchose
    if($GLOBALS["liens_orphelins_etendu"]) {
-	   $texte = preg_replace(",\b(news:[{$autorises}]*),", "[->$1]", $texte);
+	   $texte = preg_replace(",\b(news:[{$autorises}]*[{$autorisesfin}]),", "[->$1]", $texte);
 	   $texte = preg_replace(",\b(mailto:)?([{$autorises}]*@[a-zA-Z][a-zA-Z0-9-]*\.[a-zA-Z]+(\?[{$autorises}]*)?),", "[$2->mailto:$2]", $texte);
 	}
 	return echappe_retour($texte, 'LIENS');

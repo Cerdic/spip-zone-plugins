@@ -6,6 +6,11 @@
 #  Infos : http://www.spip-contrib.net/?article1554   #
 #-----------------------------------------------------#
 
+/*
+	Cette page test certaines fonctions presentes dans le plugin
+	Pour rajouter des tests, rdv tout en bas de cette page !
+*/
+
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
@@ -36,18 +41,54 @@ tweak_log("Début : exec_tweak_test()");
 	
 	echo "<br /><br /><br />";
 	gros_titre(_T('tweak:titre_tests'));
+	echo '<div style="width:98%; text-align:left; margin:0 auto">';
+	// et hop, on lance les tests !
+	tweak_les_tests();
+	echo '</div>';
 
-	echo '<div style="width:95%; text-align:left">';
-	tweak_array($_SERVER, '$_SERVER[]');
-	tweak_array($_ENV, '$_ENV[]');
+	echo fin_page();
+tweak_log("Fin   : exec_tweak_test()");
+}
+
+// renvoie un tableau contenant le texte original et sa transfrmation par la fonction $fonction
+// $textes est un tableau de chaines
+function tweak_test_fun(&$textes, $fonction) {
+	$a = array();
+	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, tweak non activé !");
+	foreach ($textes as $i=>$t) {
+		$b = $fonction($t);
+		$a["\$texte[$i]"] = htmlentities($t);
+//		$a["\$resultat[$i]"] = htmlentities($b);
+		$a["\$previsu[$i]"] = str_replace("\n",'\n', $b);
+	}
+	return $a;
+}
+
+// affiche un cadre de titre $titre base sur les donnees de $array
+function tweak_array($array, $titre) {
+	static $i;
+	debut_cadre_trait_couleur('administration-24.gif','','',++$i.". $titre");
+	foreach($array as $s=>$v) if(is_array($v))
+			foreach($v as $s2=>$v2) echo "\n<strong>{$s}[$s2]</strong> = ".trim($v2)."<br />";
+		else echo "\n<strong>$s</strong> = ".trim($v)."<br />";
+	fin_cadre_trait_couleur();
+}
+
+// affiche un text en rouge
+function tweak_red($s){ return "<span style='color:red;'>$s</span>"; }
+
+// effectue tous les tests !
+function tweak_les_tests() {
+	tweak_array($_SERVER, 'Echo de : $_SERVER[]');
+	tweak_array($_ENV, 'Echo de : $_ENV[]');
 	global $HTTP_ENV_VARS;
-	tweak_array($HTTP_ENV_VARS, 'global $HTTP_ENV_VARS');
+	tweak_array($HTTP_ENV_VARS, 'Echo de : $HTTP_ENV_VARS');
 	$a = array('DOCUMENT_ROOT'=>getenv('DOCUMENT_ROOT'), 
 			'REQUEST_URI'=>getenv('REQUEST_URI'), 
 			'SCRIPT_NAME'=>getenv('SCRIPT_NAME'),
 			'PHP_SELF'=>getenv('PHP_SELF'),
 		);
-	tweak_array($a, 'getenv()');
+	tweak_array($a, 'Echo de : getenv()');
 	
 	// lecture des variables stockees en meta
 	include_spip('inc/meta');
@@ -82,7 +123,7 @@ tweak_log("Début : exec_tweak_test()");
 			'$dir'=>$dir,
 			"tweak_canonicalize('$dir'.'/'.'$relative_path')"=>tweak_red(tweak_canonicalize($dir.'/'.$relative_path)),
 		);
-	tweak_array($a, 'tweak_htmlpath()');
+	tweak_array($a, 'Test sur : tweak_htmlpath()');
 
 	// test de tweak_canonicalize()
 	$dir = $dir.'/'.$relative_path;
@@ -98,7 +139,7 @@ tweak_log("Début : exec_tweak_test()");
 			'array_spliced()'=>$address2, 
 			'$resultat'=>tweak_red($address3), 
 		);
-	tweak_array($a, 'tweak_canonicalize()');
+	tweak_array($a, 'Test sur : tweak_canonicalize()');
 
 	// test de typo_exposants()
 	$textes = array(
@@ -112,7 +153,7 @@ tweak_log("Début : exec_tweak_test()");
 		"3 ou 4 m², 3 ou 4 m2 et 2 m3.",
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
 	);
-	tweak_array(tweak_test_fun($textes, 'typo_exposants'), 'typo_exposants()');
+	tweak_array(tweak_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants()');
 
 	// test de typo_guillemets()
 	$textes = array(
@@ -121,7 +162,7 @@ tweak_log("Début : exec_tweak_test()");
 		'avant '.echappe_html('<script>toto</script>', 'TEST', truem).'apres le "test"!',
 		'avant '.echappe_html('<code class="code">toto</code>', 'TEST', true).'apres le "test"!',
 	);
-	tweak_array(tweak_test_fun($textes, 'typo_guillemets'), 'typo_guillemets()');
+	tweak_array(tweak_test_fun($textes, 'typo_guillemets'), 'Test sur : typo_guillemets()');
 	
 	// test des smileys
 	$textes = array(
@@ -129,76 +170,35 @@ tweak_log("Début : exec_tweak_test()");
 		"Simples : :-> :-&gt; :-( :-D :-) |-) :'-) :’-) :'-D :’-D :'-( :’-( :-( :o) B-) ;-) :-p :-P' :-| :-/ :-o :-O",
 		"les courts (reconnus s'il y a un espace avant) : :) :( ;) :| |) :/ :(",
 	);
-	tweak_array(tweak_test_fun($textes, 'tweak_smileys_pre_typo'), 'tweak_smileys_pre_typo()');
+	tweak_array(tweak_test_fun($textes, 'tweak_smileys_pre_typo'), 'Test sur : tweak_smileys_pre_typo()');
 
 	// test des filets
 	$textes = array(
 		"__degrade.png__\n__ornement.png__",
 		"\n__6__\n__5__\n__4__\n__3__\n__2__\n__1__\n__0__\n",
 	);
-	tweak_array(tweak_test_fun($textes, 'filets_sep'), 'filets_sep()');
+	tweak_array(tweak_test_fun($textes, 'filets_sep'), 'Test sur : filets_sep()');
 
 	// test des liens orphelins
 	$GLOBALS["liens_orphelins_etendu"]=true;
 	$textes = array(
-		"http://google.fr",
-		"voici : http://google.fr",
-		"voici :http://www.google.fr",
-		"voici http://www.google.fr",
-		"voici : https://mabanque.fr",
-		"voici : ftp://mabanque.fr",
-		"www.google.fr",
-		"voici : www.google.fr",
-		"voici : ftp.stockage.fr/tropdelaballe",
-		"http://user:password@www.commentcamarche.net:80/glossair/glossair.php3",
-		"http://serveur:port/repertoire/fichier.html",
-		"ftp://serveur/repertoire/fichier.qqchose",
-		"file:///disque|/repertoire/fichier.qqchose",
-		"file:///c|/tmp/fichier.txt",
-		"mailto:nom@organisation.domaine",
-		"mailto:Fabien.Gandon@sophia.inria.fr",
-		"telnet://bbs.monsite.com/",
-		"telnet://Nom:Password@serveur.ici:port",
+		"http://google.fr et <html>http://google.fr</html> et <code>http://google.fr</code> et <cite>http://google.fr</cite>",
+		"Voici : http://google.fr. Voici :http://www.google.fr. Voici http://www.google.fr",
+		"voici : https://mabanque.fr ou encore ftp://mabanque.fr!",
+		"www.google.fr ou bien : www.google.fr",
+		"http://user:password@www.commentcamarche.net:80/glossair/glossair.php3 et http://serveur:port/repertoire/fichier.html",
+		"ftp://serveur/repertoire/fichier.qqchose, ou encore ftp.stockage.fr/tropdelaballe...",
+		"file:///disque|/repertoire/fichier.qqchose et : file:///c|/tmp/fichier.txt",
+		"mailto:nom@organisation.domaine et : mailto:Fabien.Gandon@sophia.inria.fr",
+		"telnet://bbs.monsite.com/ et telnet://Nom:Password@serveur.ici:port",
 		"telnet://gandonf:abcde@gopa.insa.fr:23",
-		"gopher://serveur.ici:port/repertoire/fichier#marqueur",
-		"gopher://gopher.monsite.com/",
+		"gopher://serveur.ici:port/repertoire/fichier#marqueur et gopher://gopher.monsite.com/",
 		"newsrc://serveur:port/repertoire/nom.de.la.news",
-		"wais://host.ici:port/database",
-		"wais://wais.monsite.com/",
-		"news:fr.comp.lang.c++",
-		"voici : <div toto='ab.cd'></div>http://google.fr",
-		"moi+moi@world.com",
-		"mailto:moi-moi@world.com",
-		"mailto:nom@provider.com?subject=renseignement",
+		"wais://host.ici:port/database et wais://wais.monsite.com/",
+		"news:fr.comp.lang.c++ et pkoi pas : <div toto='ici.rien'></div>http://google.fr",
+		"moi+moi@world.com, mailto:moi-moi@world.com, mailto:nom@provider.com?subject=renseignement",
 	);
-	tweak_array(tweak_test_fun($textes, 'liens_orphelins'), 'liens_orphelins()');
-
-	echo '</div>';
-
-	echo fin_page();
-tweak_log("Fin   : exec_tweak_test()");
+//	tweak_array(tweak_test_fun($textes, 'typo'), 'Test sur : echappements');
+	tweak_array(tweak_test_fun($textes, 'liens_orphelins'), 'Test sur : liens_orphelins()');
 }
-
-function tweak_test_fun(&$textes, $fonction) {
-	$a = array();
-	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, tweak non activé !");
-	foreach ($textes as $i=>$t) {
-		$b = $fonction($t);
-		$a["\$texte[$i]"] = htmlentities($t);
-//		$a["\$resultat[$i]"] = htmlentities($b);
-		$a["\$previsu[$i]"] = str_replace("\n",'\n', $b);
-	}
-	return $a;
-}
- 
-function tweak_array($a, $name) {
-	static $i;
-	debut_cadre_trait_couleur('administration-24.gif','','',++$i.". $name");
-	foreach($a as $s=>$v) if(is_array($v))
-			foreach($v as $s2=>$v2) echo "\n<strong>{$s}[$s2]</strong> = ".trim($v2)."<br />";
-		else echo "\n<strong>$s</strong> = ".trim($v)."<br />";
-	fin_cadre_trait_couleur();
-}
-
-function tweak_red($s){ return "<span style='color:red;'>$s</span>"; }
 ?>
