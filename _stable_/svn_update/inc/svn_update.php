@@ -26,10 +26,18 @@
 		}
 
 		else {
-			$entries = join("\n", file($entries));
-			if (!preg_match(',\surl="([^"]+)",', $entries, $r))
-				return "fichier .svn/entries non conforme ou illisible";
-			$old_src = $r[1];
+			// nouveau format de .svn/entries
+			$info = _SVN_COMMAND." $user info --xml $dest/";
+			exec($info, $out);
+			if (preg_match(',<url>(.*?)</url>,', join('',$out), $r)) {
+				$old_src = $r[1];
+			} else {
+				// ancien format
+				$entries = join("\n", file($entries));
+				if (!preg_match(',\surl="([^"]+)",', $entries, $r))
+					return "fichier .svn/entries non conforme ou illisible";
+				$old_src = $r[1];
+			}
 
 			// Switch ?
 			if ($old_src != $src) {
