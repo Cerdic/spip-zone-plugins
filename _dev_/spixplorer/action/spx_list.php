@@ -165,33 +165,40 @@ function print_table($dir, $list, $allow) {	// print table of files
 //toggg			$target = "_blank";
 		} //else $link = "";
 		
-		echo "<TR class=\"rowdata\"><TD><INPUT TYPE=\"checkbox\" name=\"selitems[]\" value=\"";
-		echo htmlspecialchars($item)."\" onclick=\"javascript:Toggle(this);\"></TD>\n";
+		echo '
+<TR class="rowdata"><TD><INPUT TYPE="checkbox" name="selitems[]" value="' .
+htmlspecialchars($item) . '" onclick="javascript:Toggle(this);"></TD>
+' .
 	// Icon + Link
-		echo "<TD nowrap>";
-		/*if($link!="") */ echo"<A HREF=\"".$link."\" TARGET=\"".$target."\">";
+'<TD nowrap>' .
+		/*if($link!="") */ '<A HREF="' . $link . '" TARGET="' . $target . '">' .
 		//else echo "<A>";
-		echo "<IMG border=\"0\" width=\"16\" height=\"16\" ";
-		echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/" .
-			$stat['mime_img'] . "\" ALT=\"\">&nbsp;";
-		$s_item=$item;	if(strlen($s_item)>50) $s_item=substr($s_item,0,47)."...";
-		echo htmlspecialchars($s_item)."</A></TD>\n";	// ...$extra...
+'<IMG border="0" width="16" height="16" ' .
+/*toggg		echo "align=\"ABSMIDDLE\" */ 'src="plugins/spixplorer/_img/' .
+			$stat['mime_img'] . '" ALT="">&nbsp;' .
+htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
+'</A></TD>
+' .	// ...$extra...
 	// Size
-		echo "<TD>".parse_file_size($stat['size'])."</TD>\n";
+'<TD>' . parse_file_size($stat['size']) . '</TD>
+' .
 	// Type
-		echo "<TD>" . $stat['mime_type'] . "</TD>\n";
+'<TD>' . $stat['mime_type'] . '</TD>
+' .
 	// Modified
-		echo "<TD>".parse_file_date($stat['mtime'])."</TD>\n";
+'<TD>' . parse_file_date($stat['mtime']) . '</TD>
+' .
 	// Permissions
-		echo "<TD>";
-		if($allow) {
-			echo "<A HREF=\"".make_link("chmod",$dir,$item)."\" TITLE=\"";
-			echo _T('spixplorer:permlink')."\">";
-		}
-		echo parse_file_type($dir,$item) . parse_file_perms($stat['perms']) .
-			'(' . $stat['owner'] . '/' . $stat['group'] . ')';
-		if($allow) echo "</A>";
-		echo "</TD>\n";
+'<TD>' .
+		($allow ?
+			'<A HREF="' . make_link("chmod",$dir,$item) . '" TITLE="' .
+			_T('spixplorer:permlink') . '">'
+		: '') .
+		parse_file_type($dir,$item) . parse_file_perms($stat['perms']) .
+			'(' . $stat['owner'] . '/' . $stat['group'] . ')' .
+		($allow ? '</A>' : '') .
+'</TD>
+';
 	// Actions
 		echo "<TD>\n<TABLE>\n";
 		// EDIT
