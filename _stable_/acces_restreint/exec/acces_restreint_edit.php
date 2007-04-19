@@ -30,10 +30,6 @@ function exec_acces_restreint_edit(){
 	gros_titre(_T('accesrestreint:titre_zones_acces'));
 	debut_gauche();
 	
-	/*debut_boite_info();
-	echo propre("Cette page vous permet de gerer les zones d'acces restreint de votre site");
-	fin_boite_info();*/
-	
 	// Boite info
 	 if ($id_zone) {
 		debut_boite_info();
@@ -42,6 +38,16 @@ function exec_acces_restreint_edit(){
 		echo "<br /><span class='spip_xx-large'>";
 		echo "$id_zone";
 		echo '</span></div>';
+		$nb_rub = count(AccesRestreint_liste_contenu_zone_rub($id_zone));
+		$nb_aut = count(AccesRestreint_liste_contenu_zone_auteur($id_zone));
+		$s = "";
+		if ($nb_rub>0){
+			$s .= "$nb_rub "._T('accesrestreint:rubriques');
+			if ($nb_aut>0) $s.=", ";
+		}
+		if ($nb_aut>0)
+			$s .= "$nb_aut "._T('accesrestreint:auteurs');
+		echo "<div style='text-align:center;'>$s</div>";
 		fin_boite_info();
 	}
 
