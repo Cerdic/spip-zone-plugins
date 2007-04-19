@@ -40,6 +40,15 @@ Comment:
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
 
 ------------------------------------------------------------------------------*/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function action_spx_chmod()
+{
+	include_spip('inc/spx_init');
+	chmod_item($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+}
+
 //------------------------------------------------------------------------------
 function chmod_item($dir, $item) {		// change permissions
 	if(($GLOBALS['spx']["permissions"]&01)!=01) show_error(_T('spixplorer:accessfunc'));
@@ -75,9 +84,10 @@ function chmod_item($dir, $item) {		// change permissions
 	echo make_link("chmod",$dir,$item) . "\">\n";
 	echo "<INPUT type=\"hidden\" name=\"confirm\" value=\"true\">\n";
 	
-	// print table with current perms & checkboxes to change	
+	// print table with current perms & checkboxes to change
+	$miscchmod = explode('/', _T('spixplorer:miscchmod')); 	
 	for($i=0;$i<3;++$i) {
-		echo "<TR><TD>" . _T('spixplorer:miscchmod')[$i] . "</TD>";
+		echo "<TR><TD>" . $miscchmod[$i] . "</TD>";
 		for($j=0;$j<3;++$j) {
 			echo "<TD>" . $pos{$j} . "&nbsp;<INPUT type=\"checkbox\"";
 			if($mode{(3*$i)+$j} != "-") echo " checked";
