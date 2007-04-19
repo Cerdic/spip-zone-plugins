@@ -1,8 +1,9 @@
 <?php
+
      /**
      * SPIP-Auteurs Complets
      *
-     * Copyright (c) 2006
+     * Copyright (c) 2006-2007
      * Quentin Drouet
      *
      * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
