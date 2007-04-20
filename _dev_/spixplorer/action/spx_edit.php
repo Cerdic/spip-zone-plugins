@@ -51,7 +51,7 @@ function action_spx_edit()
 
 //------------------------------------------------------------------------------
 function savefile($file_name) {			// save edited file
-	$code = stripslashes(_request('code'));
+	$code = _request('code');
 	$fp = @fopen($file_name, "w");
 	if($fp===false) show_error(basename($file_name).": "._T('spixplorer:savefile'));
 	fputs($fp, $code);

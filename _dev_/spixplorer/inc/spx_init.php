@@ -52,7 +52,7 @@ if ($GLOBALS['connect_statut'] != '0minirezo' || !$GLOBALS['connect_toutes_rubri
         include_spip('inc/minipres');
         http_status('403');
         echo // spx_debut_html() .
-        	$GLOBALS['connect_statut'] . $GLOBALS['connect_toutes_rubriques'] .'*-*-*-*' . _T('ecrire:avis_non_acces_page');
+        	'<a href="ecrire/">Spip admin</a> ' . _T('ecrire:avis_non_acces_page');
 //        	. spx_fin_html();
         exit;
 }
