@@ -92,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"typeheader"		=> "Type",
 	"modifheader"		=> "Modifié",
 	"permheader"		=> "Perm's",
+	"owner_group"		=> "Prop./Groupe",
 	"actionheader"		=> "Actions",
 	"pathheader"		=> "Chemin",
 	
