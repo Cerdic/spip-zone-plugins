@@ -279,27 +279,30 @@ function list_dir($dir) {			// list directory contents
 	}
 	
 	// Toolbar
-	echo "<br><table width=\"95%\"><tr><td><table><tr>\n";
+	echo '<br><table width="95%"><tr><td><table><tr>
+' .
 	
 	// PARENT DIR
-	echo "<td><a href=\"".make_link("list",$dir_up,NULL)."\">";
-	echo "<img border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_up.gif\" ";
-	echo "alt=\""._T('spixplorer:uplink')."\" title=\""._T('spixplorer:uplink')."\"></a></td>\n";
+	'<td><a href="' . make_link("list",$dir_up,NULL) . '">
+<img border="0" width="16" height="16" align="ABSMIDDLE" src="plugins/spixplorer/_img/_up.gif"
+alt="' . _T('spixplorer:uplink') . '" title="' . _T('spixplorer:uplink') . '"></a></td>
+' .
 	// HOME DIR
-	echo "<td><a href=\"".make_link("list",NULL,NULL)."\">";
-	echo "<img border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_home.gif\" ";
-	echo "alt=\""._T('spixplorer:homelink')."\" title=\""._T('spixplorer:homelink')."\"></a></td>\n";
+'<td><a href="' . make_link("list",NULL,NULL) . '">
+<img border="0" width="16" height="16" align="ABSMIDDLE" src="plugins/spixplorer/_img/_home.gif"
+alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '"></a></td>' .
 	// RELOAD
-	echo "<td><a href=\"javascript:location.reload();\"><img border=\"0\" width=\"16\" height=\"16\" ";
-	echo "align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_refresh.gif\" alt=\""._T('spixplorer:reloadlink');
-	echo "\" title=\""._T('spixplorer:reloadlink')."\"></a></td>\n";
+'<td><a href="javascript:location.reload();"><img border="0" width="16" height="16"
+align="ABSMIDDLE" src="plugins/spixplorer/_img/_refresh.gif" alt="' .
+_T('spixplorer:reloadlink') . '" title="' . _T('spixplorer:reloadlink') . '"></a></td>
+' .
 	// SEARCH
-	echo "<td><a href=\"".make_link("search",$dir,NULL)."\">";
-	echo "<img border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_search.gif\" ";
-	echo "alt=\""._T('spixplorer:searchlink')."\" title=\""._T('spixplorer:searchlink');
-	echo "\"></a></td>\n";
+'<td><a href="' . make_link("search",$dir,NULL) . '">
+<img border="0" width="16" height="16" align="ABSMIDDLE" src="plugins/spixplorer/_img/_search.gif"
+alt="' . _T('spixplorer:searchlink') . '" title="' . _T('spixplorer:searchlink') . '"></a></td>
+
 	
-	echo "<td>::</td>";
+<td>::</td>';
 	
 	if($allow) {
 		// COPY
