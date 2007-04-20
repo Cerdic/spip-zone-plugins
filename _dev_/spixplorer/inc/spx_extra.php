@@ -76,11 +76,9 @@ function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NUL
 		$_action = "list";
 	}
 	
-	if($_dir=="") $_dir=NULL;
-	if($_item=="") $_item=NULL;
-	if($_order==NULL) $_order=$GLOBALS['spx']["order"];
-	if($_srt==NULL) $_srt=$GLOBALS['spx']["srt"];
-	if($_lang==NULL) $_lang=(isset($GLOBALS['spx']["lang"])?$GLOBALS['spx']["lang"]:NULL);
+	$_order || ($_order = $GLOBALS['spx']["order"]);
+	$_srt || ($_srt = $GLOBALS['spx']["srt"]);
+//	if($_lang==NULL) $_lang=(isset($GLOBALS['spx']["lang"])?$GLOBALS['spx']["lang"]:NULL);
 	
 	$link = $_SERVER['PHP_SELF'] . '?action=spx_' . $_action;
 	if ($_action != "list") {
@@ -88,11 +86,17 @@ function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NUL
 		$link .= '&arg=' . $arg . '&hash=' .  $hash;
 	}
 
-	if($_dir!=NULL) $link.="&dir=".urlencode($_dir);
-	if($_item!=NULL) $link.="&item=".urlencode($_item);
-	if($_order!=NULL) $link.="&order=".$_order;
-	if($_srt!=NULL) $link.="&srt=".$_srt;
-	if($_lang!=NULL) $link.="&lang=".$_lang;
+	if ($_dir) $link.="&dir=".urlencode($_dir);
+	if ($_item) $link.="&item=".urlencode($_item);
+
+	if (!$_order && $_srt) {
+		$_order = 'name';
+	}
+	if ($_order) {
+		$link .= '&order=' . ($_srt != 'yes' ? '-' : '') . $_order;
+	}
+
+//	if($_lang!=NULL) $link.="&lang=".$_lang;
 	
 	return $link;
 }
