@@ -259,7 +259,9 @@ function list_dir($dir) {			// list directory contents
 	$admin=((($GLOBALS['spx']["permissions"]&04)==04) || (($GLOBALS['spx']["permissions"]&02)==02));
 	
 	$dir_up = dirname($dir);
-//	if($dir_up==".") $dir_up = "";
+	if($dir_up == '.') {
+		$dir_up = '';
+	}
 	
 //	if(!get_show_item($dir_up,basename($dir))) show_error($dir." : "._T('spixplorer:accessdir'));
 	
@@ -267,7 +269,8 @@ function list_dir($dir) {			// list directory contents
 	make_tables($dir, $dir_list, $file_list, $tot_file_size, $num_items);
 	
 	$s_dir=$dir;		if(strlen($s_dir)>50) $s_dir="...".substr($s_dir,-47);
-	show_header(_T('spixplorer:actdir').": /".get_rel_item("",$s_dir), true);
+	show_header('<a href="' . make_link('list', '') . '">' .
+		_T('spixplorer:actdir').": /" . '</a>' . link_all($s_dir), true);
 	
 	// Sorting of items
 	$_img = 
@@ -459,6 +462,23 @@ alt="' . _T('spixplorer:searchlink') . '" title="' . _T('spixplorer:searchlink')
 	}
 // -->
 </script><?php
+}
+
+// Fil d'Ariane
+function link_all($dir)
+{
+	if (!$dir) {
+		return '';
+	}
+	$ret = $sep = '';
+	while (($pos = strrpos($dir, '/')) !== false) {
+		$terminal = substr($dir, $pos + 1);
+		$ret = '<a href="' . make_link('list', $dir) . '">' . $terminal . $sep . '</a>' . $ret;
+		$dir = substr($dir, 0, $pos);
+		$sep = '/';
+	}
+	$ret = '<a href="' . make_link('list', $dir) . '">' . $dir . $sep . '</a>' . $ret;
+	return $ret;
 }
 //------------------------------------------------------------------------------
 ?>
