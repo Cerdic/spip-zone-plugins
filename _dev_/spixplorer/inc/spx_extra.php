@@ -50,8 +50,10 @@ function spx_stat($dir, $item)
 	$ret['mime_type'] = get_mime_type($dir, $item, 'type');
 	$ret['mime_img'] = get_mime_type($dir, $item, 'img');
 	$ret['perms'] = get_file_perms($dir,$item);
-	$ret['owner'] = @fileowner($fichier);
-	$ret['group'] = @filegroup($fichier);
+	$ret['owner'] = ($posix = posix_getpwuid($ret['uid'])) ?
+		$posix['name'] : $ret['uid'];
+	$ret['group'] = ($posix = posix_getgrgid($ret['gid'])) ?
+		$posix['name'] : $ret['gid'];
 	$ret['edit'] = get_is_editable($dir, $item);
 	$ret['file'] = get_is_file($dir, $item);
 	return $ret;
