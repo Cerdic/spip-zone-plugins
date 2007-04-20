@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Liens inter-contenus</nom>
 	<auteur>Nicolas Hoizey &copy; 2007 - Licence GNU/GPL</auteur>
-	<version>0.16</version>
+	<version>0.17</version>
 	<version_base>0.2</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>dev</etat>
@@ -31,6 +31,11 @@ Reste &agrave; faire :
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>
+		<inclure>lienscontenus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouter_onglets</action>
 		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
 </plugin>

@@ -72,4 +72,13 @@ function lienscontenus_header_prive($flux)
 	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_LIENSCONTENUS.'/css/styles.css" />';
 	return $flux;
 }
+
+function lienscontenus_ajouter_onglets($flux){
+    if ($GLOBALS['connect_statut'] == '0minirezo' && $GLOBALS['connect_toutes_rubriques']) {
+        if ($flux['args'] == 'configuration') {
+            $flux['data']['lienscontenus']= new Bouton('administration-24.gif', _T('lienscontenus:administration_liens_contenus'), generer_url_ecrire('lienscontenus_admin'));
+        }
+    }
+    return $flux;
+}
 ?>
