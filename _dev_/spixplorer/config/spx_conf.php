@@ -9,7 +9,8 @@
 //	$GLOBALS['spx']["language"] = "en";
 	
 	// the filename of the QuiXplorer script: (you rarely need to change this)
-	$GLOBALS['spx']["script_name"] = "http://".$GLOBALS['spx']['__SERVER']['HTTP_HOST'].$GLOBALS['spx']['__SERVER']["PHP_SELF"];
+	$GLOBALS['spx']["script_name"] =
+		"http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 	
 	// allow Zip, Tar, TGz -> Only (experimental) Zip-support
 	$GLOBALS['spx']["zip"] = false;	//function_exists("gzcompress");
