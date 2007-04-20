@@ -14,4 +14,13 @@ function geoforms_header_prive($flux){
 	return $flux;
 }
 
+
+function geoforms_ajouter_boutons($boutons_admin) {
+	if (autoriser('administrer','geoforms')) {
+	    $boutons_admin['configuration']->sousmenu['geoforms_config']= new Bouton(
+		    _DIR_PLUGIN_GEOFORMS.'img_pack/geoforms.png', _T('geoforms:configuration'));
+	}
+	return $boutons_admin;
+}
+
 ?>

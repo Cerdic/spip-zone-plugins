@@ -35,4 +35,8 @@
 		<nom>header_prive</nom>
 		<inclure>geoforms_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>geoforms_pipeline.php</inclure>
+	</pipeline>
 </plugin>
