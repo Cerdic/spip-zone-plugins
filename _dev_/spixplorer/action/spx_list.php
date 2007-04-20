@@ -195,9 +195,11 @@ htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
 			_T('spixplorer:permlink') . '">'
 		: '') .
 		parse_file_type($dir,$item) . parse_file_perms($stat['perms']) .
-			'(' . $stat['owner'] . '/' . $stat['group'] . ')' .
 		($allow ? '</a>' : '') .
 '</td>
+' .
+	// Owner/Group
+'<td>' . $stat['owner'] . '/' . $stat['group'] . '</td>
 ' .
 	// Actions
 '<td>
@@ -400,9 +402,9 @@ function list_dir($dir) {			// list directory contents
 	}
 	
 	// Table Header
-	echo "<TR><TD colspan=\"7\"><HR></TD></TR><TR><TD WIDTH=\"2%\" class=\"header\">\n";
+	echo "<TR><TD colspan=\"8\"><HR></TD></TR><TR><TD WIDTH=\"2%\" class=\"header\">\n";
 	echo "<input TYPE=\"checkbox\" name=\"toggleAllC\" onclick=\"javascript:ToggleAll(this);\"></TD>\n";
-	echo "<TD WIDTH=\"44%\" class=\"header\"><B>\n";
+	echo "<TD WIDTH=\"34%\" class=\"header\"><B>\n";
 	if($GLOBALS['spx']["order"]=="name") $new_srt = $_srt;	else $new_srt = "yes";
 	echo "<A href=\"".make_link("list",$dir,NULL,"name",$new_srt)."\">"._T('spixplorer:nameheader');
 	if($GLOBALS['spx']["order"]=="name") echo $_img;
@@ -419,14 +421,15 @@ function list_dir($dir) {			// list directory contents
 	echo "<A href=\"".make_link("list",$dir,NULL,"mod",$new_srt)."\">"._T('spixplorer:modifheader');
 	if($GLOBALS['spx']["order"]=="mod") echo $_img;
 	echo "</A></B></TD><TD WIDTH=\"8%\" class=\"header\"><B>"._T('spixplorer:permheader')."</B>\n";
+	echo "</TD><TD WIDTH=\"10%\" class=\"header\"><B>"._T('spixplorer:owner_group')."</B></TD>\n";
 	echo "</TD><TD WIDTH=\"6%\" class=\"header\"><B>"._T('spixplorer:actionheader')."</B></TD></TR>\n";
-	echo "<TR><TD colspan=\"7\"><HR></TD></TR>\n";
+	echo "<TR><TD colspan=\"8\"><HR></TD></TR>\n";
 		
 	// make & print Table using lists
 	print_table($dir, make_list($dir_list, $file_list), $allow);
 
 	// print number of items & total filesize
-	echo "<TR><TD colspan=\"7\"><HR></TD></TR><TR>\n<TD class=\"header\"></TD>";
+	echo "<TR><TD colspan=\"8\"><HR></TD></TR><TR>\n<TD class=\"header\"></TD>";
 	echo "<TD class=\"header\">".$num_items." "._T('spixplorer:miscitems')." (";
 	if(function_exists("disk_free_space")) {
 		$free=parse_file_size(disk_free_space(get_abs_dir($dir)));
@@ -437,7 +440,7 @@ function list_dir($dir) {			// list directory contents
 	echo _T('spixplorer:miscfree').": ".$free.")</TD>\n";
 	echo "<TD class=\"header\">".parse_file_size($tot_file_size)."</TD>\n";
 	for($i=0;$i<4;++$i) echo"<TD class=\"header\"></TD>";
-	echo "</TR>\n<TR><TD colspan=\"7\"><HR></TD></TR></FORM></TABLE>\n";
+	echo "</TR>\n<TR><TD colspan=\"8\"><HR></TD></TR></FORM></TABLE>\n";
 	
 ?><script language="JavaScript1.2" type="text/javascript">
 <!--
