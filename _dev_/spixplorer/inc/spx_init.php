@@ -86,7 +86,15 @@ $GLOBALS['spx']["item"] = spx_request('item', '');
 $GLOBALS['spx']["order"] = spx_request('order', 'name');
 
 // Get Sortorder (yes==up)
-$GLOBALS['spx']["srt"] = spx_request('srt', 'yes');
+if ($GLOBALS['spx']['order'][0] == '-') {
+	$GLOBALS['spx']["srt"] = 'no';
+	$GLOBALS['spx']['order'] = substr($GLOBALS['spx']['order'], 1);
+} elseif ($GLOBALS['spx']['order'][0] == '+') {
+	$GLOBALS['spx']["srt"] = 'yes';
+	$GLOBALS['spx']['order'] = substr($GLOBALS['spx']['order'], 1);
+} else {
+	$GLOBALS['spx']["srt"] = spx_request('srt', 'yes');
+}
 
 //------------------------------------------------------------------------------
 // Necessary files
