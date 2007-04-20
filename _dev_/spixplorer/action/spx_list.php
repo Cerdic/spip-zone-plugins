@@ -195,7 +195,7 @@ htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
 			_T('spixplorer:permlink') . '">'
 		: '') .
 		parse_file_type($dir,$item) . parse_file_perms($stat['perms']) .
-			'(' . $stat['owner'] . '/' . $stat['group'] . ')' .
+			'(' . $stat['uid'] . '/' . $stat['gid'] . ')' .
 		($allow ? '</a>' : '') .
 '</td>
 ' .
