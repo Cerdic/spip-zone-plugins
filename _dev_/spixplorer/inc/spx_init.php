@@ -75,17 +75,9 @@ if ($spx_action != 'spx_list') {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 }
-/*
-if($GLOBALS['spx']["action"]=="post" && isset($GLOBALS['spx']['__POST']["do_action"])) {
-	$GLOBALS['spx']["action"]=$GLOBALS['spx']['__POST']["do_action"];
-}
-*/
 
 // Default Dir
 $GLOBALS['spx']["dir"] = spx_request('dir', '');
-/* bugge de toute facon , == !!!!
-if($GLOBALS['spx']["dir"]==".") $GLOBALS['spx']["dir"]=="";
-*/
 
 // Get Item
 $GLOBALS['spx']["item"] = spx_request('item', '');

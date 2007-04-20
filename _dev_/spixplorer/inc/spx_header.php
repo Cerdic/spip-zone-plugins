@@ -50,19 +50,28 @@ function show_header($title, $js = false) {			// header for html-page
 	
 	//echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\"";
 	//echo "\"http://www.w3.org/TR/REC-html40/loose.dtd\">\n";
-	echo "<HTML lang=\"".$GLOBALS['spx']["language"]."\" dir=\"".$GLOBALS['spx']['spip_lang_dir']."\">\n";
-	echo "<HEAD>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=".$GLOBALS['spx']["charset"]."\">\n";
-	echo "<title>QuiXplorer ".$GLOBALS['spx']["version"]." - the QuiX project</title>\n";
-	echo "<LINK href=\"plugins/spixplorer/_style/style.css\" rel=\"stylesheet\" type=\"text/css\">\n";
-	
+	echo 
+'<HTML lang="' . $GLOBALS['spx']["language"] . '" dir="' . $GLOBALS['spip_lang_dir'] .
+'">
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=' . $GLOBALS['spx']["charset"] . '">
+<title>SpiXplorer: QuiXplorer ' . $GLOBALS['spx']["version"] . ' pour Spip</title>
+<LINK href="plugins/spixplorer/_style/style.css" rel="stylesheet" type="text/css">
+';	
 	// Javascript functions:
 	if ($js) {
 		include_spip("inc/spx_javascript");
 	}
-	echo "</HEAD>\n<BODY><center>\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"5\"><tbody>\n";
-	echo "<tr><td class=\"title\">";
-	if($GLOBALS['spx']["require_login"] && isset($GLOBALS['spx']['__SESSION']["s_user"])) echo "[".$GLOBALS['spx']['__SESSION']["s_user"]."] - ";
-	echo $title."</td></tr></tbody></table>\n\n";
+	echo '
+</HEAD>
+<BODY><center>
+<table border="0" width="100%" cellspacing="0" cellpadding="5"><tbody>
+<tr><td class="title">' .
+	($GLOBALS['spx']["require_login"] && isset($GLOBALS['spx']['__SESSION']["s_user"]) ?
+		'[' . $GLOBALS['spx']['__SESSION']["s_user"] . '] - ' : '') . $title . '
+</td></tr></tbody></table>
+
+';
 }
 //------------------------------------------------------------------------------
 ?>
