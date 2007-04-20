@@ -406,7 +406,7 @@ alt="' . _T('spixplorer:searchlink') . '" title="' . _T('spixplorer:searchlink')
 	}
 	
 	// Table Header
-	echo "<tr><td colspan=\"8\"><HR></td></tr><tr><td width=\"2%\" class=\"header\">\n";
+	echo "<tr><td colspan=\"8\"><hr /></td></tr><tr><td width=\"2%\" class=\"header\">\n";
 	echo "<input type=\"checkbox\" name=\"toggleAllC\" onclick=\"javascript:ToggleAll(this);\"></td>\n";
 	echo "<td width=\"34%\" class=\"header\"><b>\n";
 	if($GLOBALS['spx']["order"]=="name") $new_srt = $_srt;	else $new_srt = "yes";
@@ -427,13 +427,13 @@ alt="' . _T('spixplorer:searchlink') . '" title="' . _T('spixplorer:searchlink')
 	echo "</a></b></td><td width=\"8%\" class=\"header\"><b>"._T('spixplorer:permheader')."</b>\n";
 	echo "</td><td width=\"10%\" class=\"header\"><b>"._T('spixplorer:owner_group')."</b></td>\n";
 	echo "</td><td width=\"6%\" class=\"header\"><b>"._T('spixplorer:actionheader')."</b></td></tr>\n";
-	echo "<tr><td colspan=\"8\"><HR></td></tr>\n";
+	echo "<tr><td colspan=\"8\"><hr /></td></tr>\n";
 		
 	// make & print Table using lists
 	print_table($dir, make_list($dir_list, $file_list), $allow);
 
 	// print number of items & total filesize
-	echo "<tr><td colspan=\"8\"><HR></td></tr><tr>\n<td class=\"header\"></td>";
+	echo "<tr><td colspan=\"8\"><hr /></td></tr><tr>\n<td class=\"header\"></td>";
 	echo "<td class=\"header\">".$num_items." "._T('spixplorer:miscitems')." (";
 	if(function_exists("disk_free_space")) {
 		$free=parse_file_size(disk_free_space(get_abs_dir($dir)));
@@ -444,7 +444,7 @@ alt="' . _T('spixplorer:searchlink') . '" title="' . _T('spixplorer:searchlink')
 	echo _T('spixplorer:miscfree').": ".$free.")</td>\n";
 	echo "<td class=\"header\">".parse_file_size($tot_file_size)."</td>\n";
 	for($i=0;$i<4;++$i) echo"<td class=\"header\"></td>";
-	echo "</tr>\n<tr><td colspan=\"8\"><HR></td></tr></FORM></table>\n";
+	echo "</tr>\n<tr><td colspan=\"8\"><hr /></td></tr></FORM></table>\n";
 	
 ?><script language="JavaScript1.2" type="text/javascript">
 <!--

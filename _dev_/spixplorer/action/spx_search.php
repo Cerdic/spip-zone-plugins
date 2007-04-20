@@ -136,22 +136,22 @@ function search_items($dir) {			// search for item
 	
 	// Results
 	if($searchitem!=NULL) {
-		echo "<TABLE width=\"95%\"><TR><TD colspan=\"2\"><HR></TD></TR>\n";
+		echo "<TABLE width=\"95%\"><TR><TD colspan=\"2\"><hr /></TD></TR>\n";
 		if(count($list)>0) {
 			// Table Header
 			echo "<TR>\n<TD WIDTH=\"42%\" class=\"header\"><B>"._T('spixplorer:nameheader');
 			echo "</B></TD>\n<TD WIDTH=\"58%\" class=\"header\"><B>"._T('spixplorer:pathheader');
-			echo "</B></TD></TR>\n<TR><TD colspan=\"2\"><HR></TD></TR>\n";
+			echo "</B></TD></TR>\n<TR><TD colspan=\"2\"><hr /></TD></TR>\n";
 	
 			// make & print table of found items
 			print_table($list);
 
-			echo "<TR><TD colspan=\"2\"><HR></TD></TR>\n<TR><TD class=\"header\">".count($list)." ";
+			echo "<TR><TD colspan=\"2\"><hr /></TD></TR>\n<TR><TD class=\"header\">".count($list)." ";
 			echo _T('spixplorer:miscitems').".</TD><TD class=\"header\"></TD></TR>\n";
 		} else {
 			echo "<TR><TD>"._T('spixplorer:miscnoresult')."</TD></TR>";
 		}
-		echo "<TR><TD colspan=\"2\"><HR></TD></TR></TABLE>\n";
+		echo "<TR><TD colspan=\"2\"><hr /></TD></TR></TABLE>\n";
 	}
 ?><script language="JavaScript1.2" type="text/javascript">
 <!--
