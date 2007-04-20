@@ -279,7 +279,7 @@ function list_dir($dir) {			// list directory contents
 	}
 	
 	// Toolbar
-	echo '<br><table width="95%"><tr><td><table><tr>
+	echo '<br /><table width="95%"><tr><td><table><tr>
 ' .
 	
 	// PARENT DIR

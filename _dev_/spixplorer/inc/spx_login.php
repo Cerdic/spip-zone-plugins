@@ -66,7 +66,7 @@ function login() {
 		} else {
 			// Ask for Login
 			show_header(_T('spixplorer:actlogin'));
-			echo "<BR><TABLE width=\"300\"><TR><TD colspan=\"2\" class=\"header\" nowrap><B>";
+			echo "<br /><TABLE width=\"300\"><TR><TD colspan=\"2\" class=\"header\" nowrap><B>";
 			echo _T('spixplorer:actloginheader')."</B></TD></TR>\n<FORM name=\"login\" action=\"";
 			echo make_link("login",NULL,NULL)."\" method=\"post\">\n";
 			echo "<TR><TD>"._T('spixplorer:miscusername').":</TD><TD align=\"right\">";
@@ -78,7 +78,7 @@ function login() {
 			@include_spip("spx_lang/_info");
 			echo "</SELECT></TD></TR>\n";
 			echo "<TR><TD colspan=\"2\" align=\"right\"><INPUT type=\"submit\" value=\"";
-			echo _T('spixplorer:btnlogin')."\"></TD></TR>\n</FORM></TABLE><BR>\n";
+			echo _T('spixplorer:btnlogin')."\"></TD></TR>\n</FORM></TABLE><br />\n";
 ?><script language="JavaScript1.2" type="text/javascript">
 <!--
 	if(document.login) document.login.p_user.focus();

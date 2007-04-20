@@ -48,7 +48,7 @@ function admin($admin, $dir) {			// Change Password & Manage Users Form
 	include_spip("inc/spx_js_admin");
 	
 	// Change Password
-	echo "<BR><HR width=\"95%\"><TABLE width=\"350\"><TR><TD colspan=\"2\" class=\"header\"><B>";
+	echo "<br /><HR width=\"95%\"><TABLE width=\"350\"><TR><TD colspan=\"2\" class=\"header\"><B>";
 	echo _T('spixplorer:actchpwd').":</B></TD></TR>\n";
 	echo "<FORM name=\"chpwd\" action=\"".make_link("admin",$dir,NULL)."\" method=\"post\">\n";
 	echo "<INPUT type=\"hidden\" name=\"action2\" value=\"chpwd\">\n";
@@ -93,7 +93,7 @@ function admin($admin, $dir) {			// Change Password & Manage Users Form
 	}
 	
 	echo "<HR width=\"95%\"><input type=\"button\" value=\""._T('spixplorer:btnclose');
-	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\"><BR><BR>\n";
+	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\"><br /><br />\n";
 ?><script language="JavaScript1.2" type="text/javascript">
 <!--
 	if(document.chpwd) document.chpwd.oldpwd.focus();
@@ -141,7 +141,7 @@ function adduser($dir) {			// Add User
 	include_spip("inc/spx_js_admin2");
 	
 	echo "<FORM name=\"adduser\" action=\"".make_link("admin",$dir,NULL)."&action2=adduser\" method=\"post\">\n";
-	echo "<INPUT type=\"hidden\" name=\"confirm\" value=\"true\"><BR><TABLE width=\"450\">\n";
+	echo "<INPUT type=\"hidden\" name=\"confirm\" value=\"true\"><br /><TABLE width=\"450\">\n";
 	echo "<TR><TD>"._T('spixplorer:miscusername').":</TD>\n";
 		echo "<TD align=\"right\"><INPUT type=\"text\" name=\"user\" size=\"30\"></TD></TR>\n";
 	echo "<TR><TD>"._T('spixplorer:miscpassword').":</TD>\n";
@@ -176,7 +176,7 @@ function adduser($dir) {			// Add User
 	echo "<TR><TD colspan=\"2\" align=\"right\"><input type=\"submit\" value=\""._T('spixplorer:btnadd');
 		echo "\" onClick=\"return check_pwd();\">\n<input type=\"button\" value=\"";
 		echo _T('spixplorer:btncancel')."\" onClick=\"javascript:location='";
-		echo make_link("admin",$dir,NULL)."';\"></TD></TR></FORM></TABLE><BR>\n";
+		echo make_link("admin",$dir,NULL)."';\"></TD></TR></FORM></TABLE><br />\n";
 ?><script language="JavaScript1.2" type="text/javascript">
 <!--
 	if(document.adduser) document.adduser.user.focus();
@@ -221,7 +221,7 @@ function edituser($dir) {			// Edit User
 	
 	echo "<FORM name=\"edituser\" action=\"".make_link("admin",$dir,NULL)."&action2=edituser\" method=\"post\">\n";
 	echo "<INPUT type=\"hidden\" name=\"confirm\" value=\"true\"><INPUT type=\"hidden\" name=\"user\" value=\"".$data[0]."\">\n";
-	echo "<BR><TABLE width=\"450\">\n";
+	echo "<br /><TABLE width=\"450\">\n";
 	echo "<TR><TD>"._T('spixplorer:miscusername').":</TD>\n";
 		echo "<TD align=\"right\"><INPUT type\"text\" name=\"nuser\" size=\"30\" value=\"";
 		echo $data[0]."\"></TD></TR>\n";
@@ -262,7 +262,7 @@ function edituser($dir) {			// Edit User
 	echo "<TR><TD colspan=\"2\" align=\"right\"><input type=\"submit\" value=\""._T('spixplorer:btnsave');
 		echo "\" onClick=\"return check_pwd();\">\n<input type=\"button\" value=\"";
 		echo _T('spixplorer:btncancel')."\" onClick=\"javascript:location='";
-		echo make_link("admin",$dir,NULL)."';\"></TD></TR></FORM></TABLE><BR>\n";
+		echo make_link("admin",$dir,NULL)."';\"></TD></TR></FORM></TABLE><br />\n";
 }
 //------------------------------------------------------------------------------
 function removeuser($dir) {			// Remove User

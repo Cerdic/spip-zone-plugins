@@ -80,7 +80,7 @@ function chmod_item($dir, $item) {		// change permissions
 	
 
 	// Form
-	echo "<BR><TABLE width=\"175\"><FORM method=\"post\" action=\"";
+	echo "<br /><TABLE width=\"175\"><FORM method=\"post\" action=\"";
 	echo make_link("chmod",$dir,$item) . "\">\n";
 	echo "<INPUT type=\"hidden\" name=\"confirm\" value=\"true\">\n";
 	
@@ -97,9 +97,9 @@ function chmod_item($dir, $item) {		// change permissions
 	}
 	
 	// Submit / Cancel
-	echo "</TABLE>\n<BR><TABLE>\n<TR><TD>\n<INPUT type=\"submit\" value=\""._T('spixplorer:btnchange');
+	echo "</TABLE>\n<br /><TABLE>\n<TR><TD>\n<INPUT type=\"submit\" value=\""._T('spixplorer:btnchange');
 	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:btncancel');
-	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><BR>\n";
+	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><br />\n";
 }
 //------------------------------------------------------------------------------
 ?>

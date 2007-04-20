@@ -126,7 +126,7 @@ function search_items($dir) {			// search for item
 	show_header($msg);
 	
 	// Search Box
-	echo "<BR><TABLE><FORM name=\"searchform\" action=\"".make_link("search",$dir,NULL);
+	echo "<br /><TABLE><FORM name=\"searchform\" action=\"".make_link("search",$dir,NULL);
 	echo "\" method=\"post\">\n<TR><TD><INPUT name=\"searchitem\" type=\"text\" size=\"25\" value=\"";
 	echo $searchitem."\"><INPUT type=\"submit\" value=\""._T('spixplorer:btnsearch');
 	echo "\">&nbsp;<input type=\"button\" value=\""._T('spixplorer:btnclose');

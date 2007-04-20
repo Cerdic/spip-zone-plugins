@@ -64,7 +64,7 @@ if(isset($_SERVER)) {
 } elseif(isset($HTTP_SERVER_VARS)) {
 	$GLOBALS['spx']['__FILES']	=&$HTTP_POST_FILES;
 } else {
-	die("<B>ERROR: Your PHP version is too old</B><BR>".
+	die("<B>ERROR: Your PHP version is too old</B><br />".
 	"You need at least PHP 4.0.0 to run QuiXplorer; preferably PHP 4.3.1 or higher.");
 }
 

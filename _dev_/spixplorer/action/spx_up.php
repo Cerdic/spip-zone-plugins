@@ -104,7 +104,7 @@ function upload_items($dir) {		// upload file
 			$err_msg="";
 			for($i=0;$i<$cnt;$i++) {
 				if($errors[$i]==NULL) continue;
-				$err_msg .= $items[$i]." : ".$errors[$i]."<BR>\n";
+				$err_msg .= $items[$i]." : ".$errors[$i]."<br />\n";
 			}
 			show_error($err_msg);
 		}
@@ -116,16 +116,16 @@ function upload_items($dir) {		// upload file
 	show_header(_T('spixplorer:actupload'));
 	
 	// List
-	echo "<BR><FORM enctype=\"multipart/form-data\" action=\"".make_link("up",$dir,NULL);
+	echo "<br /><FORM enctype=\"multipart/form-data\" action=\"".make_link("up",$dir,NULL);
 	echo "\" method=\"post\">\n<INPUT type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"";
 	echo get_max_file_size()."\"><INPUT type=\"hidden\" name=\"confirm\" value=\"true\"><TABLE>\n";
 	for($i=0;$i<10;$i++) {
 		echo "<TR><TD nowrap align=\"center\">";
 		echo "<INPUT name=\"userfile[]\" type=\"file\" size=\"40\"></TD></TR>\n";
 	}
-	echo "</TABLE>\n<BR><TABLE><TR><TD><INPUT type=\"submit\" value=\""._T('spixplorer:btnupload');
+	echo "</TABLE>\n<br /><TABLE><TR><TD><INPUT type=\"submit\" value=\""._T('spixplorer:btnupload');
 	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:btncancel');
-	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><BR>\n";
+	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><br />\n";
 	
 	return;
 }

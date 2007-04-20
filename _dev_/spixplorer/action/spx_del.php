@@ -87,7 +87,7 @@ function del_items($dir) {		// delete files/dirs
 		for($i=0;$i<$cnt;++$i) {
 			if($error[$i]==NULL) continue;
 			
-			$err_msg .= $items[$i]." : ".$error[$i]."<BR>\n";
+			$err_msg .= $items[$i]." : ".$error[$i]."<br />\n";
 		}
 		show_error($err_msg);
 	}

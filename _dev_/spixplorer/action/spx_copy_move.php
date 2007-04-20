@@ -133,13 +133,13 @@ function copy_move_items($dir) {		// copy/move file/dir
 		// "Copy / Move from .. to .."
 		$s_dir=$dir;		if(strlen($s_dir)>40) $s_dir="...".substr($s_dir,-37);
 		$s_ndir=$new_dir;	if(strlen($s_ndir)>40) $s_ndir="...".substr($s_ndir,-37);
-		echo "<BR><IMG SRC=\"".$_img."\" align=\"ABSMIDDLE\" ALT=\"\">&nbsp;";
+		echo "<br /><IMG SRC=\"".$_img."\" align=\"ABSMIDDLE\" ALT=\"\">&nbsp;";
 		echo sprintf($do_action != "move" ?_T('spixplorer:actcopyfrom') :
 			_T('spixplorer:actmovefrom'), $s_dir, $s_ndir);
 		echo "<IMG SRC=\"plugins/spixplorer/_img/__paste.gif\" align=\"ABSMIDDLE\" ALT=\"\">\n";
 		
 		// Form for Target Directory & New Names
-		echo "<BR><BR><FORM name=\"selform\" method=\"post\" action=\"spip.php\"><TABLE>\n";
+		echo "<br /><br /><FORM name=\"selform\" method=\"post\" action=\"spip.php\"><TABLE>\n";
 		list($arg, $hash) = make_hash('copy_move', $dir);
 		echo '
 			<input type="hidden" name="action" value="spx_copy_move">
@@ -156,7 +156,7 @@ function copy_move_items($dir) {		// copy/move file/dir
 		
 		// List Directories to select Target
 		dir_print(dir_list($new_dir),$new_dir);
-		echo "</TABLE><BR><TABLE>\n";
+		echo "</TABLE><br /><TABLE>\n";
 		
 		// Print Text Inputs to change Names
 		for($i=0;$i<$cnt;++$i) {
@@ -176,13 +176,13 @@ function copy_move_items($dir) {		// copy/move file/dir
 		}
 		
 		// Submit & Cancel
-		echo "</TABLE><BR><TABLE><TR>\n<TD>";
+		echo "</TABLE><br /><TABLE><TR>\n<TD>";
 		echo "<INPUT type=\"submit\" value=\"";
 		echo $do_action != "move" ? _T('spixplorer:btncopy') : _T('spixplorer:btnmove');
 		echo "\" onclick=\"javascript:Execute();\"></TD>\n<TD>";
 		echo "<input type=\"button\" value=\""._T('spixplorer:btncancel');
 		echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL);
-		echo "';\"></TD>\n</TR></FORM></TABLE><BR>\n";
+		echo "';\"></TD>\n</TR></FORM></TABLE><br />\n";
 		return;
 	}
 	
@@ -249,7 +249,7 @@ function copy_move_items($dir) {		// copy/move file/dir
 		for($i=0;$i<$cnt;++$i) {
 			if($error[$i]==NULL) continue;
 			
-			$err_msg .= $items[$i]." : ".$error[$i]."<BR>\n";
+			$err_msg .= $items[$i]." : ".$error[$i]."<br />\n";
 		}
 		show_error($err_msg);
 	}
