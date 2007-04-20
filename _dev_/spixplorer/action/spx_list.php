@@ -391,8 +391,8 @@ function list_dir($dir) {			// list directory contents
 		<input type="hidden" name="hash">
 		<input type="hidden" name="first" value="y">
 		<input type="hidden" name="dir" value="' . htmlentities($dir) .'">
-		<input type="hidden" name="order" value="' . $GLOBALS['spx']["order"] .'">
-		<input type="hidden" name="srt" value="' . $GLOBALS['spx']["srt"] .'">
+		<input type="hidden" name="order" value="' .
+			($GLOBALS['spx']["srt"] == 'no' ? '-' : '') . $GLOBALS['spx']["order"] .'">
 		';
 	foreach (array('del', 'archive', 'copy_move') as $act) {
 		list($arg, $hash) = make_hash($act, $dir);

@@ -146,8 +146,8 @@ function copy_move_items($dir) {		// copy/move file/dir
 			<input type="hidden" name="arg" value="' . $arg . '">
 			<input type="hidden" name="hash" value="' . $hash . '">
 			<input type="hidden" name="dir" value="' . htmlentities($dir) .'">
-			<input type="hidden" name="order" value="' . $GLOBALS['spx']["order"] .'">
-			<input type="hidden" name="srt" value="' . $GLOBALS['spx']["srt"] .'">
+			<input type="hidden" name="order" value="' .
+			($GLOBALS['spx']["srt"] == 'no' ? '-' : '') . $GLOBALS['spx']["order"] .'">
 			';
 		echo "<INPUT type=\"hidden\" name=\"do_action\" value=\"" .	$do_action . "\">\n";
 		echo "<INPUT type=\"hidden\" name=\"confirm\" value=\"false\">\n";
