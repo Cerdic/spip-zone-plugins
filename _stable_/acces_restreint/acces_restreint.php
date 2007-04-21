@@ -221,6 +221,7 @@ function boucle_SYNDIC_ARTICLES($id_boucle, &$boucles) {
 		$boucle->where[] = '$acces_where';
 	}
 	return boucle_SYNDIC_ARTICLES_dist($id_boucle, $boucles);
+}
 
 //
 // <BOUCLE(EVENEMENTS)>
@@ -245,6 +246,6 @@ function boucle_EVENEMENTS($id_boucle, &$boucles) {
 	
 	return boucle_EVENEMENTS_dist($id_boucle, $boucles);
 }
-}
+
 
 ?>
