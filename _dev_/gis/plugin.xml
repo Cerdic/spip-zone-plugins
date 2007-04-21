@@ -3,7 +3,7 @@
  <nom>Escoitar Gis Plugin</nom>
  <icon></icon>
  <version>0.1.0</version>
- <version_base>0.1.2</version_base>
+ <version_base>0.1.3</version_base>
  <etat>dev</etat>
 
  <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>
@@ -43,6 +43,11 @@ _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eac
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<action>affiche_droite</action>
+		<inclure>gis_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>insertar_mapa</action>
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
