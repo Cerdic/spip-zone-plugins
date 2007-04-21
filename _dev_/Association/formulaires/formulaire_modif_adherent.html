@@ -3,6 +3,7 @@
 <legend>Modifier vos données</legend>
 <BOUCLE_adherent(SPIP_ASSO_ADHERENTS){id_auteur=#SESSION{id_auteur}}>
 <form action="#" method="POST">
+<input name="id" type="hidden" value="[(#ID_ADHERENT)]">
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'><label for="nom"><:asso:adherent_libelle_nom:> :</label></span>
 		<input name="nom" type="text" class="choix" size="40" value="[(#NOM)]" /> 

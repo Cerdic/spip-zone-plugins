@@ -28,6 +28,7 @@ function balise_FORMULAIRE_MODIF_ADHERENT ($p)
 function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 
 	//On récupère les champs
+	$id_adherent=_request('id');
 	$nom=_request('nom');
 	$prenom=_request('prenom');
 	$sexe=_request('sexe');
@@ -53,7 +54,7 @@ function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 	if ($bouton=='Confirmer'){	
 				
 		//enregistrement dans la table
-		spip_query ( " UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', email='$mail',  rue='$rue', cp='$cp', ville='$ville', telephone='$telephone' ");	
+		spip_query ( " UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', email='$mail',  rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable',	naissance='$naissance', profession='$profession', societe$='societe',	identifiant='$identifiant', passe='$passe', 	utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', secteur='$secteur', publication='$publication' WHERE id_adherent='$id_adherent' ");	
 		
 	}
 	else {
@@ -94,6 +95,7 @@ function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 				array(
 					'formulaires/formulaire_modif_adherent_previsu',0,
 					array(
+						'id'			=> $id_adherent,
 						'nom'		=> $nom,
 						'prenom'	=> $prenom,
 						'sexe'		=>$sexe,
