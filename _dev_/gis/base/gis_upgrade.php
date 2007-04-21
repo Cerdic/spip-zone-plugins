@@ -36,11 +36,23 @@
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.2");
 			}
 			ecrire_metas();
+			
+			if (version_compare($current_version,"0.1.3","<")){
+				spip_query("CREATE TABLE `spip_gis_mots` (
+					`id_gis` bigint(21) NOT NULL auto_increment,
+					`id_mot` int(11) default NULL,
+					`lat` float default NULL,
+					`lonx` float default NULL,
+					`zoom` tinyint(4) default NULL,
+					PRIMARY KEY  (`id_gis`)
+				)");
+			}
 		}
 	}
 	
 	function gis_vider_tables($nom_meta_base_version) {
 		spip_query("DROP TABLE spip_gis");
+		spip_query("DROP TABLE spip_gis_mots");
 		effacer_meta($nom_meta_base_version);
 		ecrire_metas();
 	}
