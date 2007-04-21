@@ -68,8 +68,9 @@ function show_header($title, $js = false) {			// header for html-page
 <table border="0" width="100%" cellspacing="0" cellpadding="5"><tbody>
 <tr><td class="title">' .
 	($GLOBALS['spx']["require_login"] && isset($GLOBALS['spx']['__SESSION']["s_user"]) ?
-		'[' . $GLOBALS['spx']['__SESSION']["s_user"] . '] - ' : '') . $title . '
-</td></tr></tbody></table>
+		'[' . $GLOBALS['spx']['__SESSION']["s_user"] . '] - ' : '') . $title . '</td>
+<td  width="10%" class="title"><a href="ecrire/">' . _T('retour_ecrire') . '</td>
+<td  width="10%" class="title"><a href="spip.php">' . _T('retour_spip') . '</td></tr></tbody></table>
 
 ';
 }
