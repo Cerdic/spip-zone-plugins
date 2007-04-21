@@ -202,7 +202,7 @@ $tableau_formulaire = '
 
 // http://doc.spip.org/@afficher_barre
 function afficher_barre($champ, $forum=false, $lang='') {
-	global $spip_lang, $options, $spip_lang_right, $spip_lang_left, $spip_lang;
+	global $spip_lang, $spip_lang_right, $spip_lang_left, $spip_lang;
 	static $num_barre = 0;
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
@@ -242,12 +242,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	if ($params!=$add)
 		$ret .= $add;
 
-	if ($options == "avancees") {
-		$params = array($champ,$champhelp,$spip_lang);
-		$add = pipeline("BarreTypoEnrichie_avancees",array($champ,$champhelp,$spip_lang));
-		if ($params!=$add)
-			$ret .= $add;
-	}
+	$params = array($champ,$champhelp,$spip_lang);
+	$add = pipeline("BarreTypoEnrichie_avancees",array($champ,$champhelp,$spip_lang));
+	if ($params!=$add)
+		$ret .= $add;
 	if (!$forum) {
 		$params = array($champ,$champhelp,$spip_lang);
 		$add = pipeline("BarreTypoEnrichie_ecrire",array($champ,$champhelp,$spip_lang));
@@ -278,29 +276,27 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$col ++;
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
 	}
-	if ($options == "avancees") {
-		$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
+	$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 
-
-//gestion des tableaux
-		$ret .= bouton_barre_racc("barre_tableau($champ, '"._DIR_RESTREINT."')",
-			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-tableau.png', _T('bartypenr:barre_tableau'),
-			$champhelp);
+	//gestion des tableaux
+	$ret .= bouton_barre_racc("barre_tableau($champ, '"._DIR_RESTREINT."')",
+		_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-tableau.png', _T('bartypenr:barre_tableau'),
+		$champhelp);
 
 	$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 
-// gestion du remplacement
+	// gestion du remplacement
       $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/chercher_remplacer.png", _T('bartypenr:barre_chercher'), $champhelp);
-// DEB Galerie JPK
-// idée originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
-  if (!$forum) {
-    $ret .= bouton_barre_racc ("javascript:barre_galerie($champ, '"._DIR_RESTREINT."')",
-_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/galerie.png', _T('bartypenr:barre_galerie'), $formulaire, $texte);
-  }
-// FIN Galerie JPK
+	// DEB Galerie JPK
+	// idée originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
+	if (!$forum) {
+		$ret .= bouton_barre_racc ("javascript:barre_galerie($champ, '"._DIR_RESTREINT."')",
+			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/galerie.png', _T('bartypenr:barre_galerie'), $formulaire, $texte);
+	}
+	// FIN Galerie JPK
 
 
-}
+
 
 	$ret .= "</td>";
 	$col++;
