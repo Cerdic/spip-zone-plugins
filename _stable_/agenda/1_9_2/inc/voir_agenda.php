@@ -71,7 +71,8 @@ function inc_voir_agenda($flag_editable){
 	$urlbase=parametre_url($urlbase,'annee',$annee);
 	$urlbase=parametre_url($urlbase,'mois',$mois);
 	$urlbase=parametre_url($urlbase,'jour',$jour);
-	while ($row = spip_fetch_array($res)){
+	$aut = charger_fonction('autoriser_evenement_voir','inc');
+	while ($row = spip_fetch_array($res)) if ($aut($row['id_evenement'])) {
 		$is_evt=($row['horaire']!='oui')
 						||($row['date_debut']<$datestart && $row['date_fin']>$datefin);
 		$concerne=(!$ajouter_id_article) || ($ajouter_id_article==$row['id_article']);
