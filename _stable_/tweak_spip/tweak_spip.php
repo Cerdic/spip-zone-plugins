@@ -208,11 +208,11 @@ function tweak_sauve_configuration() {
 		$variables = array_merge($variables, $t['variables']);
 	}
 	foreach($metas_vars as $i => $v) {
-		if($i!='_chaines' && $i!='_nombres') $metas[] = "'$i' => " . tweak_php_format($v, in_array($i, $metas_vars['_chaines']));
+		if($i!='_chaines' && $i!='_nombres') $metas[] = "\n".chr(9)."'$i' => " . tweak_php_format($v, in_array($i, $metas_vars['_chaines']));
 	}
-	$sauve = "// Tweaks actifs\n\$tweaks = array('" . join("', '", $actifs) . "');\n";
-	$sauve .= "// Variables actives\n\$variables = array('" . join("', '", $variables) . "');\n";
-	$sauve .= "// Valeurs validees en metas\n\$valeurs = array(" . join(', ', $metas) . ");\n";
+	$sauve = "// Tweaks actifs\n\$tweaks = array('\n" . chr(9) . join("',\n".chr(9)."'", $actifs) . "'\n);\n";
+	$sauve .= "\n// Variables actives\n\$variables = array('\n" . chr(9)  . join("',\n".chr(9)."'", $variables) . "'\n);\n";
+	$sauve .= "\n// Valeurs validees en metas\n\$valeurs = array(" . join(', ', $metas) . "\n);\n";
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "config.php";
 	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin Tweak-SPIP\n\n$sauve?".'>');
 }
