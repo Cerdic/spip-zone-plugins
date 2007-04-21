@@ -24,4 +24,7 @@ tweak_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tw
 tweak_log(' -- appel mes_options achevé par eval() ... tweak_options = '.intval($GLOBALS['tweak_options']));
 	}
 */
+
+	// pour forcer les logs du plugin, tweak actif ou non :
+	// $GLOBALS['log_tweaks'] = true;
 ?>
