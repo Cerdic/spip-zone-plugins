@@ -429,7 +429,7 @@ src="plugins/spixplorer/_img/_upload_.gif" alt="' . _T('spixplorer:uplink') .
 	echo
 '<tr><td colspan="8"><hr /></td></tr><tr><td width="2%" class="header">
 <input type="checkbox" name="toggleAllC" onclick="javascript:ToggleAll(this);"></td>
-<td width="34%" class="header"><b><a href="' . make_link("list", $dir, NULL, "name",
+<td class="header"><b><a href="' . make_link("list", $dir, NULL, "name",
  $GLOBALS['spx']["order"] == "name" ? $_srt : "yes") . '">' . _T('spixplorer:nameheader') .
 ($GLOBALS['spx']["order"] == "name" ? $_img : '') . '</a></b></td>
 <td width="10%" class="header"><b><a href="' . make_link("list", $dir, NULL, "size",
