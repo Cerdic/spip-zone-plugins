@@ -84,7 +84,7 @@ function gis_mots($id_mot) {
 	
 	$glat = NULL;
 	$glonx = NULL;
-	$result = spip_query("SELECT * FROM spip_gis WHERE id_article = " . intval($id_mot) . " AND type = 'mot'");
+	$result = spip_query("SELECT * FROM spip_gis_mots WHERE id_mot = " . intval($id_mot));
 	if ($row = spip_fetch_array($result)){
 		$glat = $row['lat'];
 		$glonx = $row['lonx'];
@@ -93,9 +93,9 @@ function gis_mots($id_mot) {
 		$glat = _request('lat');
 		$glonx = _request('lonx');
 		if (!$row)
-			spip_abstract_insert("spip_gis", "(id_article, type, lat, lonx)", "(" . _q($id_mot) .", 'mots', "._q($glat)." ,"._q($glonx).")");
+			spip_abstract_insert("spip_gis_mots", "(id_mot, lat, lonx)", "(" . _q($id_mot) .", "._q($glat)." ,"._q($glonx).")");
 		else
-			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx)."  WHERE id_article = " . _q($id_mot). " AND type = 'mot'");
+			spip_query("UPDATE spip_gis_mots SET lat="._q($glat).", lonx="._q($glonx)."  WHERE id_mot = " . _q($id_mot));
 	}
 	$s .= "\n<p>";
 	$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
