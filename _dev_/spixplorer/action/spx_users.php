@@ -61,7 +61,7 @@ function save_users() {
 	$content.="\r\n); ?>";
 	
 	// Write to File
-	$fp = @fopen("plugins/spixplorer/config/spx_htusers.php", "w");
+	$fp = @fopen(_DIR_PLUGIN_SPIXPLORER . "config/spx_htusers.php", "w");
 	if($fp===false) return false;	// Error
 	fputs($fp,$content);
 	fclose($fp);

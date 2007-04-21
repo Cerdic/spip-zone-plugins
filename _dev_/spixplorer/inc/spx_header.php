@@ -56,7 +56,7 @@ function show_header($title, $js = false) {			// header for html-page
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=' . $GLOBALS['spx']["charset"] . '">
 <title>SpiXplorer: QuiXplorer ' . $GLOBALS['spx']["version"] . ' pour Spip</title>
-<LINK href="plugins/spixplorer/_style/style.css" rel="stylesheet" type="text/css">
+<LINK href="' . _DIR_PLUGIN_SPIXPLORER . '_style/style.css" rel="stylesheet" type="text/css">
 ';	
 	// Javascript functions:
 	if ($js) {

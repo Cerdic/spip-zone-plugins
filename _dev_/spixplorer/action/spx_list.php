@@ -174,7 +174,7 @@ htmlspecialchars($item) . '" onclick="javascript:Toggle(this);"></td>
 		/*if($link!="") */ '<a href="' . $link . '" target="' . $target . '">' .
 		//else echo "<A>";
 '<img border="0" width="16" height="16" ' .
-/*toggg		echo "align=\"ABSMIDDLE\" */ 'src="plugins/spixplorer/_img/' .
+/*toggg		echo "align=\"ABSMIDDLE\" */ 'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/' .
 			$stat['mime_img'] . '" alt="">&nbsp;' .
 htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
 '</a></td>
@@ -210,20 +210,20 @@ htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
 			($allow ?
 				'<td><a href="' . make_link("edit",$dir,$item) . '">' .
 				'<img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-				'src="plugins/spixplorer/_img/_edit.gif" alt="' .
+				'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_edit.gif" alt="' .
 				_T('spixplorer:editlink') . '" title="' .
 				_T('spixplorer:editlink') . '"></a></td>
 '
 			:
 				'<td><img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-				'src="plugins/spixplorer/_img/_edit_.gif" alt="' .
+				'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_edit_.gif" alt="' .
 				_T('spixplorer:editlink') . '" title="' .
 				_T('spixplorer:editlink') . '"></td>
 '
 			)
 		:
 			'<td><img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-			'src="plugins/spixplorer/_img/_.gif" alt=""></td>
+			'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_.gif" alt=""></td>
 '
 		) .
 		// DOWNLOAD
@@ -231,20 +231,20 @@ htmlspecialchars(strlen($item) > 50 ? substr($item, 0, 47) . '...' : $item) .
 			($allow ?
 				'<td><a href="' . make_link("down",$dir,$item) . '">' .
 				'<img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-				'src="plugins/spixplorer/_img/_download.gif" alt="' . 
+				'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_download.gif" alt="' . 
 				_T('spixplorer:downlink') .
 				'" title="' . _T('spixplorer:downlink') . '"></a></td>
 '
 			:
 				'<td><img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-				'src="plugins/spixplorer/_img/_download_.gif" alt="' . 
+				'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_download_.gif" alt="' . 
 				_T('spixplorer:downlink') .
 				'" title="' . _T('spixplorer:downlink') . '"></td>
 '
 			)
 		:
 			'<td><img border="0" width="16" height="16" ' . //toggg align=\"ABSMIDDLE\" ";
-			'src="plugins/spixplorer/_img/_.gif" alt=""></td>
+			'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_.gif" alt=""></td>
 '
 		) .
 		'</table>
@@ -274,7 +274,7 @@ function list_dir($dir) {			// list directory contents
 	
 	// Sorting of items
 	$_img = 
-'&nbsp;<img width="10" height="10" border="0" align="ABSMIDDLE" src="plugins/spixplorer/_img/';
+'&nbsp;<img width="10" height="10" border="0" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/';
 	if ($GLOBALS['spx']['srt'] == 'yes') {
 		$_srt = 'no';	$_img .= '_arrowup.gif" alt="^">';
 	} else {
@@ -287,21 +287,21 @@ function list_dir($dir) {			// list directory contents
 	
 	// PARENT DIR
 	'<td><a href="' . make_link("list",$dir_up,NULL) . '">
-<img border="0" width="16" height="16" align="ABSMIDDLE" src="plugins/spixplorer/_img/_up.gif"
+<img border="0" width="16" height="16" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_up.gif"
 alt="' . _T('spixplorer:uplink') . '" title="' . _T('spixplorer:uplink') . '"></a></td>
 ' .
 	// HOME DIR
 '<td><a href="' . make_link("list",NULL,NULL) . '">
-<img border="0" width="16" height="16" align="ABSMIDDLE" src="plugins/spixplorer/_img/_home.gif"
+<img border="0" width="16" height="16" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_home.gif"
 alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '"></a></td>' .
 	// RELOAD
 '<td><a href="javascript:location.reload();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="plugins/spixplorer/_img/_refresh.gif" alt="' .
+align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_refresh.gif" alt="' .
 _T('spixplorer:reloadlink') . '" title="' . _T('spixplorer:reloadlink') . '"></a></td>
 ' .
 	// SEARCH
 '<td><a href="' . make_link("search",$dir,NULL) . '">
-<img border="0" width="16" height="16" align="ABSMIDDLE" src="plugins/spixplorer/_img/_search.gif"
+<img border="0" width="16" height="16" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_search.gif"
 alt="' . _T('spixplorer:searchlink') . '" title="' . _T('spixplorer:searchlink') . '"></a></td>
 
 	
@@ -310,56 +310,56 @@ alt="' . _T('spixplorer:searchlink') . '" title="' . _T('spixplorer:searchlink')
 	($allow ?
 		// COPY
 '<td><a href="javascript:Copy();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="plugins/spixplorer/_img/_copy.gif" alt="' .
+align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_copy.gif" alt="' .
 _T('spixplorer:copylink') . '" title="' . _T('spixplorer:copylink') .'"></a></td>
 ' .
 		// MOVE
 '<td><a href="javascript:Move();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="plugins/spixplorer/_img/_move.gif" alt="' .
+align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_move.gif" alt="' .
 _T('spixplorer:movelink') . '" title="' . _T('spixplorer:movelink') . '"></a></td>
 ' .
 		// DELETE
 '<td><a href="javascript:Delete();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="plugins/spixplorer/_img/_delete.gif" alt="' .
+align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_delete.gif" alt="' .
 _T('spixplorer:dellink') . '" title="' . _T('spixplorer:dellink') . '"></a></td>
 ' .
 		// UPLOAD
 		(get_cfg_var("file_uploads") ?
 '<td><a href="' . make_link("up",$dir,NULL) . '">
 <img border="0" width="16" height="16" align="ABSMIDDLE"
-src="plugins/spixplorer/_img/_upload.gif" alt="' . _T('spixplorer:uploadlink') .
+src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload.gif" alt="' . _T('spixplorer:uploadlink') .
 '" title="' . _T('spixplorer:uploadlink') . '"></a></td>
 '
 		:
 '<td><img border="0" width="16" height="16" align="ABSMIDDLE"
-src="plugins/spixplorer/_img/_upload_.gif" alt="' . _T('spixplorer:uploadlink') .
+src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:uploadlink') .
 '" title="' . _T('spixplorer:uploadlink') . '"></td>
 '
 		) .
 		// ARCHIVE
 '<td><a href="javascript:Archive();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="plugins/spixplorer/_img/_archive.gif" alt="' .
+align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_archive.gif" alt="' .
 _T('spixplorer:comprlink') . '" title="' . _T('spixplorer:comprlink') . '"></a></td>
 '
 	:
 		// COPY
 '<td><img border="0" width="16" height="16" align="ABSMIDDLE"
-src="plugins/spixplorer/_img/_copy_.gif" alt="' . _T('spixplorer:copylink') .
+src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_copy_.gif" alt="' . _T('spixplorer:copylink') .
 '" title="' . _T('spixplorer:copylink') . '"></td>
 ' .
 		// MOVE
 '<td><img border="0" width="16" height="16" align="ABSMIDDLE"
-src="plugins/spixplorer/_img/_move_.gif" alt="' . _T('spixplorer:movelink') .
+src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_move_.gif" alt="' . _T('spixplorer:movelink') .
 '" title="' . _T('spixplorer:movelink') . '"></td>
 ' .
 		// DELETE
 '<td><img border="0" width="16" height="16" align="ABSMIDDLE"
-src="plugins/spixplorer/_img/_delete_.gif" alt="' . _T('spixplorer:dellink') .
+src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_delete_.gif" alt="' . _T('spixplorer:dellink') .
 '" title="' . _T('spixplorer:dellink') . '"></td>
 ' .
 		// UPLOAD
 '<td><img border="0" width="16" height="16" align="ABSMIDDLE"
-src="plugins/spixplorer/_img/_upload_.gif" alt="' . _T('spixplorer:uplink') .
+src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:uplink') .
 '" title="' . _T('spixplorer:uplink') . '"></td>
 '
 	);
@@ -369,16 +369,16 @@ src="plugins/spixplorer/_img/_upload_.gif" alt="' . _T('spixplorer:uplink') .
 		echo "<td>::</td>";
 		// ADMIN
 		if($admin) {
-			echo "<td><a href=\"".make_link("admin",$dir,NULL)."\">";
-			echo "<img border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-			echo "src=\"plugins/spixplorer/_img/_admin.gif\" alt=\""._T('spixplorer:adminlink')."\" title=\"";
-			echo _T('spixplorer:adminlink')."\"></a></td>\n";
+			echo '<td><a href="' . make_link("admin",$dir,NULL) . '">';
+			echo '<img border="0" width="16" height="16" align="ABSMIDDLE" ';
+			echo 'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_admin.gif" alt="' . _T('spixplorer:adminlink') . '" title="';
+			echo _T('spixplorer:adminlink') . '"></a></td>' . "\n";
 		}
 		// LOGOUT
-		echo "<td><a href=\"".make_link("logout",NULL,NULL)."\">";
-		echo "<img border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
-		echo "src=\"plugins/spixplorer/_img/_logout.gif\" alt=\""._T('spixplorer:logoutlink')."\" title=\"";
-		echo _T('spixplorer:logoutlink')."\"></a></td>\n";
+		echo '<td><a href="' . make_link("logout",NULL,NULL) . '">';
+		echo '<img border="0" width="16" height="16" align="ABSMIDDLE" ';
+		echo 'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_logout.gif" alt="' . _T('spixplorer:logoutlink') . '" title="';
+		echo _T('spixplorer:logoutlink') . '"></a></td>' . "\n";
 	}
 	echo "</tr></table></td>\n";
 	

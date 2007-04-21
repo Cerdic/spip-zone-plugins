@@ -76,7 +76,7 @@ function dir_print($dir_list, $new_dir) {	// print list of directories
 	
 	echo "<TR><TD><A HREF=\"javascript:NewDir('".$dir_up;
 	echo "');\"><IMG border=\"0\" width=\"16\" height=\"16\"";
-	echo " align=\"ABSMIDDLE\" src=\"plugins/spixplorer/_img/_up.gif\" ALT=\"\">&nbsp;..</A></TD></TR>\n";
+	echo " align=\"ABSMIDDLE\" src=\"" . _DIR_PLUGIN_SPIXPLORER . "_img/_up.gif\" ALT=\"\">&nbsp;..</A></TD></TR>\n";
 	
 	// Print List Of Target Directories
 	if(!is_array($dir_list)) return;
@@ -84,7 +84,7 @@ function dir_print($dir_list, $new_dir) {	// print list of directories
 		$s_item=$new_item;	if(strlen($s_item)>40) $s_item=substr($s_item,0,37)."...";
 		echo "<TR><TD><A HREF=\"javascript:NewDir('".get_rel_item($new_dir,$new_item).
 			"');\"><IMG border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ".
-			"src=\"plugins/spixplorer/_img/dir.gif\" ALT=\"\">&nbsp;".$s_item."</A></TD></TR>\n";
+			"src=\"" . _DIR_PLUGIN_SPIXPLORER . "_img/dir.gif\" ALT=\"\">&nbsp;".$s_item."</A></TD></TR>\n";
 	}
 }
 //------------------------------------------------------------------------------
@@ -103,9 +103,9 @@ function copy_move_items($dir) {		// copy/move file/dir
 
 	// Copy or Move?
 	if ($do_action != "move") {
-		$_img="plugins/spixplorer/_img/__copy.gif";
+		$_img = _DIR_PLUGIN_SPIXPLORER . "_img/__copy.gif";
 	} else {
-		$_img="plugins/spixplorer/_img/__cut.gif";
+		$_img = _DIR_PLUGIN_SPIXPLORER . "_img/__cut.gif";
 	}
 	
 	// Get New Location & Names
@@ -136,7 +136,7 @@ function copy_move_items($dir) {		// copy/move file/dir
 		echo "<br /><IMG SRC=\"".$_img."\" align=\"ABSMIDDLE\" ALT=\"\">&nbsp;";
 		echo sprintf($do_action != "move" ?_T('spixplorer:actcopyfrom') :
 			_T('spixplorer:actmovefrom'), $s_dir, $s_ndir);
-		echo "<IMG SRC=\"plugins/spixplorer/_img/__paste.gif\" align=\"ABSMIDDLE\" ALT=\"\">\n";
+		echo "<IMG SRC=\"" . _DIR_PLUGIN_SPIXPLORER . "_img/__paste.gif\" align=\"ABSMIDDLE\" ALT=\"\">\n";
 		
 		// Form for Target Directory & New Names
 		echo "<br /><br /><FORM name=\"selform\" method=\"post\" action=\"spip.php\"><TABLE>\n";
@@ -166,7 +166,7 @@ function copy_move_items($dir) {		// copy/move file/dir
 				if($first=="y") $newitem=$selitem;
 			} else $newitem=$selitem;
 			$s_item=$selitem;	if(strlen($s_item)>50) $s_item=substr($s_item,0,47)."...";
-			echo "<TR><TD><IMG SRC=\"plugins/spixplorer/_img/_info.gif\" align=\"ABSMIDDLE\" ALT=\"\">";
+			echo "<TR><TD><IMG SRC=\"" . _DIR_PLUGIN_SPIXPLORER . "_img/_info.gif\" align=\"ABSMIDDLE\" ALT=\"\">";
 			// Old Name
 			echo "<INPUT type=\"hidden\" name=\"selitems[]\" value=\"";
 			echo $selitem."\">&nbsp;".$s_item."&nbsp;";
