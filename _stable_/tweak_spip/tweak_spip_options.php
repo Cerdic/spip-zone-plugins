@@ -18,8 +18,10 @@ tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['o
 	// inclusion des options pre-compilees
 	if (!$GLOBALS['tweak_options']) include_once(sous_repertoire(_DIR_TMP, "tweak-spip").'mes_options.php');
 tweak_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']));
+/*
 	if(!$GLOBALS['tweak_options']) {
 		if (isset($tweaks_metas_pipes['options'])) eval($tweaks_metas_pipes['options']);
 tweak_log(' -- appel mes_options achevé par eval() ... tweak_options = '.intval($GLOBALS['tweak_options']));
 	}
+*/
 ?>

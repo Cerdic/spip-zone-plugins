@@ -29,13 +29,11 @@ tweak_log("Début : action_tweak_input_post($index) - On modifie la(les) variable
 	// on lit les metas
 	lire_metas();
 	$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
-//tweak_log($_POST, '$_POST = ');
-//tweak_log($_GET, '$_GET = ');
 	// on recupere dans le POST le nom des variables a modifier et le nom du tweak correspondant
 	$variables = unserialize(urldecode(corriger_caracteres(_request('variables'))));
 	$tweak = corriger_caracteres(_request('tweak'));
 //tweak_log($variables, '$variables = ');
-//tweak_log($metas_vars, 'metas_vars :');
+tweak_log($metas_vars, 'metas_vars :');
 	// on traite chaque variable
 	foreach($variables as $var) {
 		// on recupere dans le POST la nouvelle valeur de la variable

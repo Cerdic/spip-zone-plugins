@@ -207,8 +207,9 @@ function tweak_sauve_configuration() {
 		$actifs[] = $t['id'];
 		$variables = array_merge($variables, $t['variables']);
 	}
-	foreach($metas_vars as $i => $v) 
-		if($i!='_chaines' && $i!='_nombres') $metas[] = "'$i' => '$v'";
+	foreach($metas_vars as $i => $v) {
+		if($i!='_chaines' && $i!='_nombres') $metas[] = "'$i' => " . tweak_php_format($v, in_array($i, $metas_vars['_chaines']));
+	}
 	$sauve = "// Tweaks actifs\n\$tweaks = array('" . join("', '", $actifs) . "');\n";
 	$sauve .= "// Variables actives\n\$variables = array('" . join("', '", $variables) . "');\n";
 	$sauve .= "// Valeurs validees en metas\n\$valeurs = array(" . join(', ', $metas) . ");\n";
@@ -305,8 +306,9 @@ function tweak_get_code_variable($variable, $valeur) {
 	} else 
 		$valeur = tweak_php_format($valeur, $tweak_variable['format']!='nombre');
 	$code = '';
-	foreach($tweak_variable as $type=>$param) if (preg_match(',^code(:?(.*))?$,', $type, $regs)) {
+	foreach($tweak_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
 		$eval = '$test = ' . (strlen($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
+if (strpos($param, 'class')) echo "$eval<br/>($param)<br/>";
 		$test = false;
 		eval($eval);
 		if($test) return str_replace('%s', $valeur, $param);
@@ -317,17 +319,19 @@ function tweak_get_code_variable($variable, $valeur) {
 // attention de bien declarer les variables a l'aide de add_variable()
 function tweak_parse_code_php($code) {
 	global $metas_vars, $tweak_variables;
-	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)%%,U', $code, $matches)) {
-		$nom = $matches[1];
+	while(preg_match(',(\')?%%([a-zA-Z_][a-zA-Z0-9_]*)%%(\')?,U', $code, $matches)) {
+		$cotes = $matches[1]=="'" && $matches[3]=="'";
+		$nom = $matches[2];
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if (isset($metas_vars[$nom])) {
 			$rempl = tweak_get_code_variable($nom, $metas_vars[$nom]);
 		} else { 
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
 			$defaut = tweak_get_defaut($nom);
-			$rempl = tweak_get_code_variable($nom, $defaut);
+			$rempl = $cotes . tweak_get_code_variable($nom, $defaut) . $cotes;
 			$code = "/* Valeur par defaut : {$nom} = $defaut */\n" . $code;
 		}
+		if ($cotes) $rempl = "'" . str_replace("'", "\'", $rempl) . "'";
 		$code = str_replace($matches[0], $rempl, $code);
 //echo "\nRETURN CODE = $code";
 
