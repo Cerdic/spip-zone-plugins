@@ -13,7 +13,7 @@
 		spip_log('TWEAKS. appel de mes_options (début) : strlen=' . strlen($tweaks_metas_pipes['options']));
 	}
 	// fonctions indispensables a l'execution
-	include_once _DIR_PLUGIN_TWEAK_SPIP . 'tweak_spip_init.php';
+	include_spip('tweak_spip_init');
 	tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
 
 	// inclusion des options pre-compilees, si l'on n'est jamais passé par ici...
