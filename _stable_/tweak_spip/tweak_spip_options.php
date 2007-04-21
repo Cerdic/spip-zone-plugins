@@ -1,19 +1,20 @@
 <?php
-//include_spip('public/interfaces');global $table_des_traitements;echo'options:'; var_dump($table_des_traitements['TEXTE']);
 // fichier charge a chaque hit
 	global $tweaks_metas_pipes;
 
-	// on active tout de suite les logs, si le tweak est actif.
-	$GLOBALS['log_tweaks'] = (strpos($GLOBALS['meta']['tweaks_actifs'], 'log_tweaks') !== false);
+	// pour forcer les logs du plugin, tweak actif ou non :
+	// $GLOBALS['forcer_log_tweaks'] = true
 
-if($GLOBALS['log_tweaks']) {
-	spip_log('TWEAKS. '.str_repeat('-', 80));
-	spip_log('TWEAKS. appel de mes_options (début) : strlen='.strlen($tweaks_metas_pipes['options']));
-}
+	// on active tout de suite les logs, si le tweak est actif.
+	$GLOBALS['log_tweaks'] = (strpos($GLOBALS['meta']['tweaks_actifs'], 'log_tweaks') !== false || $GLOBALS['forcer_log_tweaks']);
+
+	if($GLOBALS['log_tweaks']) {
+		spip_log('TWEAKS. '.str_repeat('-', 80));
+		spip_log('TWEAKS. appel de mes_options (début) : strlen='.strlen($tweaks_metas_pipes['options']));
+	}
 	// fonctions indispensables a l'execution
-	//include_spip('tweak_spip_init');
 	include_once _DIR_PLUGINS.'tweak_spip/tweak_spip_init.php';
-tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
+	tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
 
 	// inclusion des options pre-compilees
 	if (!$GLOBALS['tweak_options']) {
@@ -21,14 +22,14 @@ tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['o
 		if($file_exists) include_once($f);
 			else tweak_initialisation(1);
 	}
-tweak_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']) . ($file_exists?' et fichier trouvé':' et fichier non trouvé !!'));
+	tweak_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']) . ($file_exists?' et fichier trouvé':' et fichier non trouvé !!'));
+
 /*
 	if(!$GLOBALS['tweak_options']) {
 		if (isset($tweaks_metas_pipes['options'])) eval($tweaks_metas_pipes['options']);
 tweak_log(' -- appel mes_options achevé par eval() ... tweak_options = '.intval($GLOBALS['tweak_options']));
 	}
 */
+	 $GLOBALS['log_tweaks'] |= $GLOBALS['forcer_log_tweaks'];
 
-	// pour forcer les logs du plugin, tweak actif ou non :
-	// $GLOBALS['log_tweaks'] = true;
 ?>
