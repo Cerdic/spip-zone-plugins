@@ -16,8 +16,12 @@ if($GLOBALS['log_tweaks']) {
 tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
 
 	// inclusion des options pre-compilees
-	if (!$GLOBALS['tweak_options']) include_once(sous_repertoire(_DIR_TMP, "tweak-spip").'mes_options.php');
-tweak_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']));
+	if (!$GLOBALS['tweak_options']) {
+		$file_exists = file_exists($f = sous_repertoire(_DIR_TMP, "tweak-spip").'mes_options.php');
+		if($file_exists) include_once($f);
+			else tweak_initialisation(1);
+	}
+tweak_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']) . ($file_exists?' et fichier trouvé':' et fichier non trouvé !!'));
 /*
 	if(!$GLOBALS['tweak_options']) {
 		if (isset($tweaks_metas_pipes['options'])) eval($tweaks_metas_pipes['options']);
