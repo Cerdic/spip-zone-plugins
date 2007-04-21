@@ -3,58 +3,54 @@
 <legend>Confirmation de demande</legend>
 <form action="#" method="POST">
 	<div class='spip_form_champs'>
-		<span class='spip_form_label'>
-			<label for="nom">Nom :</label>
-			[<span class="spip_form_erreur">(#ENV{erreur_nom})</span>]
-		</span>
+		<span class='spip_form_label'><label for="nom"><:asso:adherent_libelle_nom:> :</label>[<span class="spip_form_erreur">(#ENV{erreur_nom})</span>]</span>
 		<input name="nom" type="text" class="choix" size="40" value="[(#ENV{nom})]" /> 
 	</div>
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
-			<label for="prenom">Pr&eacute;nom :</label>
+			<label for="prenom"><:asso:adherent_libelle_prenom:> :</label>
 			[<span class="spip_form_erreur">(#ENV{erreur_prenom})</span>]
 		</span>
 		<input name="prenom" type="text" class="choix" size="40" value="[(#ENV{prenom})]"  /> 
 	</div>
 	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="sexe"><:asso:adherent_libelle_sexe:> :</label></span>
+		<input name="sexe" type="radio" class="choix" value="M" [(#ENV{sexe}|=={M}|?{checked="checked"})] /> <:asso:adherent_libelle_masculin:>
+		<input name="sexe" type="radio" class="choix" value="F" [(#ENV{sexe}|=={F}|?{checked="checked"})] /> <:asso:adherent_libelle_feminin:>
+	</div>
+	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
-			<label for="mail">Email :</label>
+			<label for="mail"><:asso:adherent_libelle_email:> :</label>
 			[<span class="spip_form_erreur">(#ENV{erreur_email})</span>]
 		</span>
 		<input name="mail" type="text" class="choix" size="40" value="[(#ENV{mail})]" /> 
 	</div>
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
-			<label for="adresse">N&deg; et rue :</label> 
+			<label for="adresse"><:asso:adherent_libelle_adresse:> :</label> 
 			[<span class="spip_form_erreur">(#ENV{erreur_rue})</span>]
 		</span>
 		<textarea name="adresse" type="text" class="choix" rows="2" cols="30" />[(#ENV{adresse})]</textarea>
 	</div>
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
-			<label for="cp">Code postal :</label>
+			<label for="cp"><:asso:adherent_libelle_codepostal:> :</label>
 			[<span class="spip_form_erreur">(#ENV{erreur_cp})</span>]
 		</span>	
 		<input name="cp" type="text" class="choix" size="40" value="[(#ENV{cp})]" /> 
 	</div>
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
-			<label for="ville">Ville :</label> 
+			<label for="ville"><:asso:adherent_libelle_ville:> :</label> 
 			[<span class="spip_form_erreur">(#ENV{erreur_ville})</span>]
 		</span>
 		<input name="ville" type="text" class="choix" size="40" value="[(#ENV{ville})]" />
 	</div>
-	<div class='spip_form_champs'>
-		<span class='spip_form_label'>
-			<label for="telephone">T&eacute;l&eacute;phone:</label>
-		</span>
-		<input name="telephone" type="text" id="telephone" size="40" value="[(#ENV{telephone})]" />
-	</div>
 	<div class="spip_form_champs">
 		<span class='spip_form_label'>
-			<label for="commentaire">Commentaire:</label>
+			<label for="commentaire"><:asso:adherent_libelle_commentaire:>:</label>
 		</span>
-		<textarea name="commentaire" id="commentaire" rows="10" cols="30">[(#ENV{message})]</textarea>
+		<textarea name="commentaire" id="commentaire" rows="10" cols="30" />[(#ENV{commentaire})]</textarea>
 	</div>
 	<div>
 		<input type="submit" name="bouton" class="spip_bouton" value="[(#ENV{bouton})]" />	

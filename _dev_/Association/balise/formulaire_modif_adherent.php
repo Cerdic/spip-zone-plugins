@@ -30,11 +30,24 @@ function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 	//On récupère les champs
 	$nom=_request('nom');
 	$prenom=_request('prenom');
+	$sexe=_request('sexe');
 	$mail=_request('mail');
 	$rue=_request('adresse');
 	$cp=_request('cp');
 	$ville=_request('ville');
 	$telephone=_request('telephone');
+	$portable=_request('portable');
+	$naissance=_request('naissance');
+	$profession=_request('profession');
+	$societe=_request('societe');
+	$identifiant=_request('identifiant');
+	$passe=_request('passe');
+	$utilisateur1=_request('utilisateur1');
+	$utilisateur2=_request('utilisateur2');
+	$utilisateur3=_request('utilisateur3');
+	$utilisateur4=_request('utilisateur4');
+	$secteur=_request('secteur');
+	$publication=_request('publication');
 	$bouton=_request('bouton');
 	
 	if ($bouton=='Confirmer'){	
@@ -83,18 +96,31 @@ function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 					array(
 						'nom'		=> $nom,
 						'prenom'	=> $prenom,
+						'sexe'		=>$sexe,
 						'mail'		=> $mail,
 						'adresse'	=> $rue,
 						'cp'		=> $cp,
 						'ville'		=> $ville,
 						'telephone'=> $telephone,
-						'bouton'	=> $bouton,
+						'portable'	=> $portable,
+						'naissance'=> $naissance,
+						'profession'=> $profession,
+						'societe'	=> $societe,
+						'identifiant'	=> $identifiant,
+						'passe'		=> $passe,
+						'utilisateur1'	=> $utilisateur1,
+						'utilisateur2'	=> $utilisateur2,
+						'utilisateur3'	=> $utilisateur3,
+						'utilisateur4'	=> $utilisateur4,
+						'secteur'		=> $secteur,
+						'publication'	=> $publication,
+						'bouton'		=> $bouton,
 						'erreur_email' => $erreur_email,
-						'erreur_nom' => $erreur_nom,
+						'erreur_nom' 	=> $erreur_nom,
 						'erreur_prenom' => $erreur_prenom,
-						'erreur_rue' => $erreur_rue,
-						'erreur_cp' => $erreur_cp,
-						'erreur_ville' => $erreur_ville,
+						'erreur_rue' 	=> $erreur_rue,
+						'erreur_cp' 	=> $erreur_cp,
+						'erreur_ville' 	=> $erreur_ville,
 					)
 				),
 				false
