@@ -34,7 +34,7 @@ function tweak_code_echappement($rempl, $source='') {
 	return "<span class='base64$source' title='$base64'></span>";
 }
 
-function tweak_initialisation_d_un_tweak($tweak0, $tweak_input) {
+function tweak_initialisation_d_un_tweak($tweak0, $tweak_input, $modif) {
 	global $tweaks, $metas_tweaks;
 	$tweak = &$tweaks[$tweak0];
 	if (!isset($tweak['categorie'])) $tweak['categorie'] = 'divers';
@@ -51,7 +51,7 @@ function tweak_initialisation_d_un_tweak($tweak0, $tweak_input) {
 	if (isset($tweak['code:options'])) $tweak['code:options'] = tweak_parse_code_php($tweak['code:options']);
 	if (isset($tweak['code:fonctions'])) $tweak['code:fonctions'] = tweak_parse_code_php($tweak['code:fonctions']);
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
-	$tweak['description'] = $tweak_input($tweak0, 'tweak_spip_admin');
+	$tweak['description'] = $tweak_input($tweak0, 'tweak_spip_admin', $modif);
 }
 
 // lit ecrit les metas et initialise $tweaks_metas_pipes
@@ -104,7 +104,7 @@ tweak_log("[#$rand]  -- foreach(\$tweaks) : tweak_initialisation_d_un_tweak()");
 
 	// initialiser chaque tweak
 	$id = 0;
-	foreach($temp = $tweaks as $tweak) $id = tweak_initialisation_d_un_tweak($tweak['id'], $tweak_input);
+	foreach($temp = $tweaks as $tweak) $id = tweak_initialisation_d_un_tweak($tweak['id'], $tweak_input, false);
 	// installer $tweaks_metas_pipes
 	$tweaks_metas_pipes = array();
 tweak_log("[#$rand]  -- tweak_initialise_includes()...");

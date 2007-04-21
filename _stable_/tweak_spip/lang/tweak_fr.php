@@ -29,13 +29,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_tweak' => 'Activer le tweak',
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
+	'vars_modifiees' => 'Merci, ces param&egrave;tres ont &eacute;t&eacute;s modifi&eacute;s',
 	'variable_vide' => '(Vide)',
 	'tweak' => 'Tweak :',
 	'tweaks_liste' => 'Liste des tweaks',
-	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les tweaks un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette ou avec d'autres plugin.",
+	'presente_tweaks' => "Cette page liste les tweaks disponibles. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les tweaks un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette ou avec d'autres plugin.",
 	'erreur:nom' => 'Erreur !',
 	'erreur:description' => 'id manquant dans la d&eacute;finition du tweak !',
-	'erreur:version' => 'indisponible dans cette version de Spip.',
+	'erreur:version' => 'indisponible dans cette version de SPIP.',
 
 // categories de tweaks
 // --------------------
@@ -142,22 +143,22 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options4%",
 
 	'type_urls:nom' => "Format des URLs",
-	'type_urls:description' => "Spip offre un choix sur plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :
-- {page} : la valeur par d&eacute;faut pour Spip v1.9 : <code>/spip.php?article123</code>.
+	'type_urls:description' => "SPIP offre un choix sur plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :
+- {page} : la valeur par d&eacute;faut pour SPIP v1.9 : <code>/spip.php?article123</code>.
 - {html} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
 - {propre} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
 - {propres2} : l'extension '.html' est ajout&eacute;e aux adresses g&eacute;n&eacute;r&eacute;es : <code>/Mon-titre-d-article.html</code>.
-- {standard} : URLs utilis&eacute;es par Spip v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
+- {standard} : URLs utilis&eacute;es par SPIP v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
 - {propres-qs} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.
 
-{{Attention}} : pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site Spip sous
+{{Attention}} : pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous
   le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier.
-  Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de Spip.
+  Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.
 _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 _ Votre choix : %radio_type_urls3%",
 
-	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak Spip',
-	'log_tweaks:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak Spip' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
+	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak SPIP',
+	'log_tweaks:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak SPIP' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
 
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
 	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.<br />Votre choix : %cookie_prefix%',
@@ -183,26 +184,26 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html].",
 
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
-	'f_jQuery:description' => "Emp&ecirc;che l'installation de jQuery dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. Spip l'utilise dans sa partie priv&eacute;e.",
+	'f_jQuery:description' => "Emp&ecirc;che l'installation de jQuery dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l'utilise dans sa partie priv&eacute;e.",
 
 	'SPIP_liens:nom' => 'SPIP et les liens...',
-	'SPIP_liens:description' => "#PUCE Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
+	'SPIP_liens:description' => "#PUCE Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
 		. $temp['jQuery'] . /*"<br />Lien de test : [Google->http://www.google.com]".*/ "<br />{{Utiliser des liens externes}} : %radio_target_blank3%\n\n"
-		. "#PUCE Spip permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP]<br />{{Lien vers le glossaire}} : %url_glossaire_externe%",
+		. "#PUCE SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP]<br />{{Lien vers le glossaire}} : %url_glossaire_externe%",
 
 	'forum_lgrmaxi:nom' => 'Taille des forums',
 	'forum_lgrmaxi:description' => "Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si ce tweak est activ&eacute;, un message d'erreur s'affichera lorsque quelqu'un voudra poster un message  d'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;amoins qu'aucune limite ne s'applique.<br />Valeur (en caract&egrave;res) : %forum_lgrmaxi%",
 
 // ---------------------------------------------------------------------------
-// texte uniquement pour Spip<1.93
+// texte uniquement pour SPIP<1.93
 	'suite_introduction:nom' => 'Points de suite pour #INTRODUCTION',
 	'suite_introduction:description' => "Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(...)'. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc.. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.<br />Valeur : %suite_introduction%",
-// texte uniquement pour Spip<1.93
+// texte uniquement pour SPIP<1.93
 	'introduction:nom' => "Longueur d'#INTRODUCTION",
 	'introduction:description' => "Pr&eacute;cise (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc.. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l'aspect de l'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
 
 {{Attention}} : Avant d'activer cette fonctionnalit&eacute;, v&eacute;rifiez bien qu'aucune fonction {introduction()} n'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur grave.<br />Valeur (en %) : %lgr_introduction%",
-// texte uniquement pour Spip>=1.93
+// texte uniquement pour SPIP>=1.93
 	'introduction2:nom' => "Balise #INTRODUCTION",
 	'introduction2:description' => "<p>Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
 #PUCE Vous pouvez pr&eacute;ciser (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l'aspect de l'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
@@ -212,7 +213,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 
 // ---------------------------------------------------------------------------
 	'class_spip:nom' => 'SPIP et les styles...',
-	'class_spip:description' => "<p>Jusqu'&agrave; la version 1.92 de Spip, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;."
+	'class_spip:description' => "<p>Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;."
 	."<br />#PUCE {{Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :}}<br />Votre style : %style_p%"
 	."<br />#PUCE {{Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :}}<br />Votre style : %style_h%"
 	."<br />Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les css standards associ&eacute;s &agrave; ces raccourcis.</p>"
@@ -234,7 +235,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 
 // ---------------------------------------------------------------------------
 	'liens_orphelins:nom' => 'Liens orphelins',
-	'liens_orphelins:description' => 'Remplace syst&eacute;matiquement tous les liens laiss&eacute;s en texte par les utilisateurs (notamment dans les forums) et qui ne sont donc pas cliquables, par des liens hypertextes au format Spip. Voici un test : {<html>www.spip.net</html>} est remplac&eacute; par [->www.spip.net].
+	'liens_orphelins:description' => 'Remplace syst&eacute;matiquement tous les liens laiss&eacute;s en texte par les utilisateurs (notamment dans les forums) et qui ne sont donc pas cliquables, par des liens hypertextes au format SPIP. Par exemple : {<html>www.spip.net</html>} est remplac&eacute; par [->www.spip.net].
 
 Vous pouvez choisir le type de remplacement :
 - {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</html>} (tout protocole) ou {<html>www.spip.net</html>}.

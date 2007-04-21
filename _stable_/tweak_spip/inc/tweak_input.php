@@ -49,7 +49,7 @@ tweak_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 }
 
 // renvoie la description de $tweak0 : toutes les %variables% ont ete remplacees par le code adequat
-function inc_tweak_input_dist($tweak0, $url_self) {
+function inc_tweak_input_dist($tweak0, $url_self, $modif=false) {
 	global $tweaks, $tweak_variables, $metas_vars;
 	$tweak = &$tweaks[$tweak0];
 	$actif = $tweak['actif'];
@@ -105,6 +105,7 @@ tweak_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 		$res = ajax_action_auteur('tweak_input', $index, $url_self, "tweak={$tweak['id']}", "$res");
 	}
 //tweak_log("Fin   : inc_tweak_input_dist({$tweak['id']}) - {$tweak['nb_variables']} variables(s) trouvée(s)");
-	return ajax_action_greffe("tweak_input-$index", $res);
+	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('tweak:vars_modifiees').'&nbsp;&lt;</div>':'';
+	return ajax_action_greffe("tweak_input-$index", $res, $modif);
 }
 ?>

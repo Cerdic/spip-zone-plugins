@@ -28,8 +28,8 @@ if ($GLOBALS['spip_version_code']<1.92) {
 		}
 	}
 	if (!function_exists('ajax_action_greffe')) {
-		function ajax_action_greffe($idom, $corps)	{
-			return _request('var_ajaxcharset') ? $corps	: "\n<div id='$idom'>$corps\n</div>\n";
+		function ajax_action_greffe($idom, $corps, $br='<br />')	{
+			return _request('var_ajaxcharset') ? "$br$corps"	: "\n<div id='$idom'>$corps\n</div>\n";
 		}
 	}
 }

@@ -39,7 +39,7 @@ add_variable( array(
 	// si la variable est egale a 1, on code...
 	'code:%s' => "\$_SERVER['REQUEST_METHOD']='POST';",
 ));
-	// ici on demande a Tweak Spip une case input. La variable est : quota_cache
+	// ici on demande a Tweak SPIP une case input. La variable est : quota_cache
 	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['quota_cache']
 add_variable( array(
 	'nom' => 'quota_cache',
@@ -53,7 +53,7 @@ add_tweak( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on demande a Tweak Spip une case input. La variable est : dossier_squelettes
+	// ici on demande a Tweak SPIP une case input. La variable est : dossier_squelettes
 	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['dossier_squelettes']
 add_variable( array(
 	'nom' => 'dossier_squelettes',
@@ -67,7 +67,7 @@ add_tweak( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on demande a Tweak Spip une case input. La variable est : cookie_prefix
+	// ici on demande a Tweak SPIP une case input. La variable est : cookie_prefix
 	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['cookie_prefix']
 add_variable( array(
 	'nom' => 'cookie_prefix',
@@ -109,7 +109,7 @@ add_tweak( array(
 	'version-min' => 1.92,
 ));
 
-	// ici on demande a Tweak Spip une case input. La variable est : suite_introduction
+	// ici on demande a Tweak SPIP une case input. La variable est : suite_introduction
 	// a la toute premiere activation du tweak, la valeur sera : '&nbsp;(...)'
 add_variable( array(
 	'nom' => 'suite_introduction',
@@ -144,7 +144,7 @@ if($GLOBALS['spip_version']<1.93) {
 	));
 }
 
-	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
+	// ici on demande a Tweak SPIP deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
 add_variable( array(
 	'nom' => 'radio_set_options4',
 	'format' => 'chaine',
@@ -163,7 +163,7 @@ add_tweak( array(
 	'version-max' => 1.93,
 ));
 
-	// ici on demande a Tweak Spip six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
+	// ici on demande a Tweak SPIP six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
@@ -177,7 +177,7 @@ add_tweak( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:js_jamais'), _T('tweak:js_defaut') et _T('tweak:js_toujours')
+	// ici on demande a Tweak SPIP trois boutons radio : _T('tweak:js_jamais'), _T('tweak:js_defaut') et _T('tweak:js_toujours')
 add_variable( array(
 	'nom' => 'radio_filtrer_javascript3',
 	'format' => 'nombre',
@@ -193,7 +193,7 @@ add_tweak( array(
 	'version-min' => 1.92,
 ));
 
-	// ici on demande a Tweak Spip une case input. La variable est : forum_lgrmaxi
+	// ici on demande a Tweak SPIP une case input. La variable est : forum_lgrmaxi
 	// a la toute premiere activation du tweak, la valeur sera : 0 (aucune limite)
 add_variable( array(
 	'nom' => 'forum_lgrmaxi',
@@ -208,7 +208,7 @@ add_tweak( array(
 	'version-min' => 1.92,
 ));
 
-	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:sf_defaut'), _T('tweak:sf_amont') et _T('tweak:sf_tous')
+	// ici on demande a Tweak SPIP trois boutons radio : _T('tweak:sf_defaut'), _T('tweak:sf_amont') et _T('tweak:sf_tous')
 add_variable( array(
 	'nom' => 'radio_suivi_forums3',
 	'format' => 'chaine',
