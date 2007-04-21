@@ -22,10 +22,9 @@ function exec_tweak_input_dist() {
 tweak_log("Début : exec_tweak_input_dist() - Préparation du retour par Ajax (données transmises par GET)");
 
 	$script = _request('script');
-tweak_log(" -- script = $script");
-	if (!preg_match('/^\w+$/', $script)) { include_spip('minipres'); echo minipres(); exit;	}
 	$tweak = _request('tweak');
-tweak_log(" -- tweak = $tweak");
+tweak_log(" -- tweak = $tweak - script = $script");
+	if (!preg_match('/^\w+$/', $script)) { echo minipres(); exit;	}
 	// ici on commence l'initialisation de tous les tweaks
 	global $tweaks, $metas_vars, $metas_tweaks;
 	include_spip('tweak_spip');
