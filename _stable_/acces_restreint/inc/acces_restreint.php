@@ -367,7 +367,7 @@ include_spip('inc/rubriques');
 	// fonctions de filtrage evenements
 	// plus performant a priori : liste des rubriques exclues uniquement
 	// -> condition NOT IN
-	function AccesRestreint_evenements_exclus($publique=true){
+	function AccesRestreint_liste_evenements_exclus($publique=true){
 		static $liste_evenements_exclus=array();
 		if (!isset($liste_evenements_exclus[$publique]) || !is_array($liste_evenements_exclus[$publique])){
 			$liste_evenements_exclus[$publique] = array();
@@ -383,7 +383,7 @@ include_spip('inc/rubriques');
 		return $liste_evenements_exclus[$publique];
 	}
 	function AccesRestreint_evenements_accessibles_where($primary){
-		$liste = AccesRestreint_evenements_exclus(_DIR_RESTREINT!="");
+		$liste = AccesRestreint_liste_evenements_exclus(_DIR_RESTREINT!="");
 		return calcul_mysql_in($primary, join(",",$liste),"NOT");
 	}
 
