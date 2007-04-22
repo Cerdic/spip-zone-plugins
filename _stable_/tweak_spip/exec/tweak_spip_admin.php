@@ -260,7 +260,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
 		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$i) {
-			$s .= ligne_tweak($tweak, $js, true or $afficher_tweak==$tweak['index']) . "\n";
+			$s .= ligne_tweak($tweak, $js, $afficher_tweak==$tweak['index']) . "\n";
 			$basics[] = $tweak['index'];
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
