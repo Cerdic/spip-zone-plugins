@@ -60,5 +60,16 @@ function autoriser_site_voir($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
+function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
+	static $evenements_exclus=NULL;
+	if ($evenements_exclus===NULL){
+		$evenements_exclus = AccesRestreint_liste_evenements_exclus(_DIR_RESTREINT!="");
+		$evenements_exclus = array_flip($evenements_exclus);
+	}
+	
+	if (isset($evenements_exclus[$id]))
+		return false;
+	return true;
+}
 
 ?>
