@@ -96,10 +96,10 @@ function spixplorer_install($action)
 			'#\$GLOBALS\["text_dir"\]#' => '$GLOBALS[\'spip_lang_dir\']',
 
 			'#\$GLOBALS#' => "\$GLOBALS['spx']",
-			'#_img/#' => _DIR_PLUGIN_SPIXPLORER . "_img/",
+			'#_img/#' => "plugins/spixplorer/_img/",
 			'#fopen\("\./\.config/\.htusers\.php"#'
-				=> 'fopen("' . _DIR_PLUGIN_SPIXPLORER . 'config/spx_htusers.php"',
-			'#_style/#' => _DIR_PLUGIN_SPIXPLORER . '_style/',
+				=> 'fopen("plugins/spixplorer/config/spx_htusers.php"',
+			'#_style/#' => 'plugins/spixplorer/_style/',
 			'#.*have fun.*#i' => '$0
 
 	Adaptation spip, plugin spixplorer : bertrand@toggg.com © 2007
