@@ -142,6 +142,15 @@
 		document.selform.submit();
 	}
 	
+	function Fichier()
+	{
+		if (document.creaform.mktype.value == 'zip') {
+			this.apply("Archive");
+			return false;
+		}
+		return true;
+	}
+	
 <?php } ?>
 
 // -->

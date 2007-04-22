@@ -46,7 +46,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_spx_list()
 {
 	include_spip('inc/spx_init');
-	list_dir($GLOBALS['spx']["dir"]);
+	list_dir($GLOBALS['spx']['dir']);
 }
 
 //------------------------------------------------------------------------------
@@ -319,8 +319,8 @@ align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_move.gif" alt="' .
 _T('spixplorer:movelink') . '" title="' . _T('spixplorer:movelink') . '"></a></td>
 ' .
 		// DELETE
-'<td><a href="javascript:Delete();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_delete.gif" alt="' .
+'<td><a href="javascript:Delete();"><img border="0" width="32" height="32"
+align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/delete.png" alt="' .
 _T('spixplorer:dellink') . '" title="' . _T('spixplorer:dellink') . '"></a></td>
 ' .
 		// UPLOAD
@@ -369,28 +369,32 @@ src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:up
 		echo "<td>::</td>";
 		// ADMIN
 		if($admin) {
-			echo '<td><a href="' . make_link("admin",$dir,NULL) . '">';
-			echo '<img border="0" width="16" height="16" align="ABSMIDDLE" ';
-			echo 'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_admin.gif" alt="' . _T('spixplorer:adminlink') . '" title="';
-			echo _T('spixplorer:adminlink') . '"></a></td>' . "\n";
+			echo "<td><a href=\"".make_link("admin",$dir,NULL)."\">";
+			echo "<img border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
+			echo "src=\"plugins/spixplorer/_img/_admin.gif\" alt=\""._T('spixplorer:adminlink')."\" title=\"";
+			echo _T('spixplorer:adminlink')."\"></a></td>\n";
 		}
 		// LOGOUT
-		echo '<td><a href="' . make_link("logout",NULL,NULL) . '">';
-		echo '<img border="0" width="16" height="16" align="ABSMIDDLE" ';
-		echo 'src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_logout.gif" alt="' . _T('spixplorer:logoutlink') . '" title="';
-		echo _T('spixplorer:logoutlink') . '"></a></td>' . "\n";
+		echo "<td><a href=\"".make_link("logout",NULL,NULL)."\">";
+		echo "<img border=\"0\" width=\"16\" height=\"16\" align=\"ABSMIDDLE\" ";
+		echo "src=\"plugins/spixplorer/_img/_logout.gif\" alt=\""._T('spixplorer:logoutlink')."\" title=\"";
+		echo _T('spixplorer:logoutlink')."\"></a></td>\n";
 	}
 	echo "</tr></table></td>\n";
 	
 	// Create File / Dir
 	if($allow) {
+		list($arg, $hash) = make_hash('mkitem', $dir);
 		echo
-'<td align="right"><table><FORM action="' . make_link("mkitem",$dir,NULL) .
-' method="post" name="creaform">
+'<td align="right"><table><FORM action="spip.php" method="post" name="creaform">
 <tr><td>
+<input type="hidden" name="action" value="spx_mkitem">
+<input type="hidden" name="arg" value="' . $arg . '">
+<input type="hidden" name="hash" value="' . $hash . '">
 <SELECT name="mktype">
-<option value="file">' . $GLOBALS['spx']["mimes"]["file"] . '</option>
-<option value="dir">' . $GLOBALS['spx']["mimes"]["dir"] . '</option>
+<option value="file">' . $GLOBALS['spx']['mimes']['file'] . '</option>
+<option value="dir">' . $GLOBALS['spx']['mimes']['dir'] . '</option>
+<option value="archive">' . _T('spixplorer:comprlink') . '</option>
 </SELECT>
 <input name="mkname" type="text" size="15">
 <input type="submit" value="' . _T('spixplorer:btncreate') .
@@ -422,7 +426,7 @@ src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:up
 		echo '
 			<input type="hidden" name="arg_' . $act . '" value="' . $arg . '">
 			<input type="hidden" name="hash_' . $act . '" value="' . $hash . '">
-			';
+';
 	}
 	
 	// Table Header
