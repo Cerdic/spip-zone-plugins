@@ -44,4 +44,10 @@
 	go to http://www.php.net/pcre.pattern.syntax
 */
 //------------------------------------------------------------------------------
+	
+	// Experimental, connection FTP, laisser vide pour invalider ce mode
+	$GLOBALS['spx']["ftp_host"] = '';
+	$GLOBALS['spx']["ftp_user"] = '';
+	$GLOBALS['spx']["ftp_pass"] = '';
+
 ?>

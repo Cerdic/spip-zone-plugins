@@ -144,8 +144,8 @@
 	
 	function Fichier()
 	{
-		if (document.creaform.mktype.value == 'zip') {
-			this.apply("Archive");
+		if (document.creaform.mktype.value == 'archive') {
+			Archive();
 			return false;
 		}
 		return true;

@@ -64,8 +64,8 @@ function chmod_item($dir, $item) {		// change permissions
 			else $bin.='0';
 		}
 		
-		if(!@chmod(get_abs_item($dir,$item),bindec($bin))) {
-			show_error($item.": "._T('spixplorer:permchange'));
+		if ($error = spx_chmod(get_abs_item($dir,$item), bindec($bin))) {
+			show_error($item . ': ' . _T('spixplorer:permchange') . ' (' . $error . ')');
 		}
 		header("Location: ".make_link("list",$dir,NULL));
 		return;
@@ -77,7 +77,8 @@ function chmod_item($dir, $item) {		// change permissions
 	
 	$s_item=get_rel_item($dir,$item);	if(strlen($s_item)>50) $s_item="...".substr($s_item,-47);
 	show_header(_T('spixplorer:actperms').": /".$s_item);
-	
+
+// echo '<p>' . realpath(get_abs_item($dir,$item)) . '</p>';
 
 	// Form
 	echo "<br /><TABLE width=\"175\"><FORM method=\"post\" action=\"";
@@ -100,6 +101,37 @@ function chmod_item($dir, $item) {		// change permissions
 	echo "</TABLE>\n<br /><TABLE>\n<TR><TD>\n<INPUT type=\"submit\" value=\""._T('spixplorer:btnchange');
 	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:btncancel');
 	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><br />\n";
+}
+function spx_chmod($fichier, $omod)
+{
+	if (@chmod($fichier, $omod)) {
+		return '';
+	}
+	if (!($GLOBALS['spx']["ftp_host"])) {
+		return _T('no_ftp_config');
+	}
+
+	// set up basic connection
+	if (!($conn_id = @ftp_connect($GLOBALS['spx']["ftp_host"]))) {
+		return _T('erreur_ftp_connexion');
+	}
+
+	// login with username and password
+	if (@ftp_login($conn_id,
+			$GLOBALS['spx']["ftp_user"], $GLOBALS['spx']["ftp_pass"])) {
+	// try to chmod $file to 644
+		if (@ftp_chmod($conn_id, $omod, realpath($fichier)) !== false) {
+			$return = '';
+		} else {
+			$return = _T('erreur_ftp_chmod');
+		}
+	} else {
+		$return = _T('erreur_ftp_login');
+	}
+
+	// close the connection
+	ftp_close($conn_id);
+	return $return;	
 }
 //------------------------------------------------------------------------------
 ?>
