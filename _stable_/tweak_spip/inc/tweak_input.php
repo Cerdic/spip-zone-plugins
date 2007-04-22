@@ -28,12 +28,14 @@ tweak_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 	// si la variable necessite des boutons radio
 	if (is_array($radios = &$tweak_variables[$variable]['radio'])) {
 		$ok_input = $label;
+		$i = 0; $nb = intval($tweak_variables[$variable]['radio/ligne']);
 		foreach($radios as $code=>$traduc) {
+			$br = (($nb>0) && ( ++$i % $nb == 0))?'<br />':' ';
 			$ok_input .= 
 				"<label><input id=\"label_{$variable}_$code\" type=\"radio\""
 				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"HIDDENTWEAKVAR__$variable\"/>"
 				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
-				.'</label> ';
+				."</label>$br";
 		}
 		$ok_input .= _TWEAK_VAR;
 		$ok_valeur = $label.(strlen($valeur)?ucfirst(_T($radios[$valeur])):'&nbsp;-');
@@ -54,7 +56,11 @@ function inc_tweak_input_dist($tweak0, $url_self, $modif=false) {
 	$tweak = &$tweaks[$tweak0];
 	$actif = $tweak['actif'];
 	$index = $tweak['index'];
+	// remplacement des puces
 	$descrip = str_replace('#PUCE', definir_puce(), $tweak['description']);
+	// remplacement des zone input de format [[label->varable]]
+	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2 </legend>\\3</fieldset>', $descrip);
+	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 	
 tweak_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");

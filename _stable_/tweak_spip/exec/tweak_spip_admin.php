@@ -79,8 +79,17 @@ div.detailtweak hr {
 	}
 
 div.detailtweak p {
-	margin:.5em 0 .5em 0;
+	margin:0.3em 1em .3em 0;
 	padding:0;
+}
+
+div.detailtweak fieldset {
+	margin:.8em 4em .5em 4em;
+	-moz-border-radius:8px;
+}
+
+div.detailtweak legend {
+	font-weight:bold;
 }
 
 EOF;
@@ -149,7 +158,7 @@ tweak_log("Début : enregistre_modif_tweaks()");
 @unlink(_DIR_TMP."charger_pipelines.php");
 @unlink(_DIR_TMP."charger_plugins_fonctions.php");
 @unlink(_DIR_TMP."charger_plugins_options.php");
-		supprime_invalideurs();
+//		supprime_invalideurs();
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_SKELS);
 		@unlink(_DIR_TMP."tweak-spip.plat");
@@ -251,7 +260,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
 		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$i) {
-			$s .= ligne_tweak($tweak, $js, $afficher_tweak==$tweak['index']) . "\n";
+			$s .= ligne_tweak($tweak, $js, true or $afficher_tweak==$tweak['index']) . "\n";
 			$basics[] = $tweak['index'];
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
@@ -327,7 +336,6 @@ function ligne_tweak($tweak, &$js, $afficher){
 	$p = $afficher?debut_block_visible($tweak_id):debut_block_invisible($tweak_id);
 
 	$p .= "\n<div class='detailtweak'>";
-//	$p .= ajax_action_auteur('tweak_input', $index, 'tweak_spip_admin', "tweak={$tweak['id']}", "<div id='tweak_input-$index'>{$tweak['description']}</div>");
 	$p .= $tweak['description'];
 	if (isset($tweak['auteur']) && strlen($tweak['auteur'])) $p .= "<p>" . _T('auteur') .' '. ($tweak['auteur']) . "</p>";
 	$s .= propre($p) . '<hr style="margin:0"/>' . _T('tweak:tweak').' ';

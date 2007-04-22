@@ -6,11 +6,27 @@
 $temp['jQuery1'] = "{{Attention}} : cette fonctionnalit&eacute; n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.";
 $temp['jQuery2'] = "Cette fonctionnalit&eacute;  utilise la librairie {jQuery}.";
 $temp['reset'] = 'R&eacute;initialisation totale du plugin';
+$temp['type_urls'] = "#PUCE {{page}} : la valeur par d&eacute;faut pour SPIP v1.9 : <code>/spip.php?article123</code>.
+_ #PUCE {{html}} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
+_ #PUCE {{propre}} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
+_ #PUCE {{propres2}} : l'extension '.html' est ajout&eacute;e aux adresses g&eacute;n&eacute;r&eacute;es : <code>/Mon-titre-d-article.html</code>.
+_ #PUCE {{standard}} : URLs utilis&eacute;es par SPIP v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
+_ #PUCE {{propres-qs}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.";
 
 // un peu de code : ne pas toucher !
 $temp['couleurs'] = '<span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert olive</span>, <span style="background-color:navy;">navy/bleu marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu violet</span>, <span style="background-color:chocolate;">chocolate/brun clair</span>, <span style="background-color:cornsilk;">cornsilk/rose clair</span>, <span style="background-color:darkgreen;">darkgreen/vert fonce</span>, <span style="background-color:darkorange;">darkorange/orange fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune paille</span>, <span style="background-color:yellow;">yellow/jaune</span>';
 $temp['jQuery'] = "<p>" . ($GLOBALS['spip_version_code']<1.92?$temp['jQuery1']:$temp['jQuery2']) . "</p>";
-$temp['reset'] = $GLOBALS['spip_version_code']<1.92?'<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>':'';
+//$temp['reset'] = $GLOBALS['spip_version_code']<1.92?'<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>':'';
+$temp['reset'] = '<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>';
+$temp['decoration'] = "{&lt;sc&gt;}Lorem ipsum dolor sit amet{&lt;/sc&gt;}
+_ {&lt;souligne&gt;}Lorem ipsum dolor sit amet{&lt;/souligne&gt;}
+_ {&lt;barre&gt;}Lorem ipsum dolor sit amet{&lt;/barre&gt;}
+_ {&lt;dessus&gt;}Lorem ipsum dolor sit amet{&lt;/dessus&gt;}
+_ {&lt;clignote&gt;}Lorem ipsum dolor sit amet{&lt;/clignote&gt;}
+_ {&lt;surfluo&gt;}Lorem ipsum dolor sit amet{&lt;/surfluo&gt;}
+_ {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}";
+$temp['decoration'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['decoration']}</blockquote>";
+$temp['type_urls'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['type_urls']}</blockquote>";
 
 // traductions habituelles
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -52,8 +68,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // ----------------------------------------------------------------------------------
 
 	'SPIP_cache:nom' => 'SPIP et le cache...',
-	'SPIP_cache:description' => "#PUCE Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.<br />{{D&eacute;sactiver le cache}} : %radio_desactive_cache3%\n\n"
-		. "#PUCE Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique au cache.<br />{{Valeur du quota}} : %quota_cache% Mo",
+	'SPIP_cache:description' => "#PUCE Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[D&eacute;sactiver le cache :->%radio_desactive_cache3%]]"
+		. "#PUCE Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique au cache.[[Valeur du quota :->%quota_cache% Mo]]",
 
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
 	'supprimer_numero:description' => "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Voici la syntaxe &agrave; utiliser dans le cadre d'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code><br />Attention, cette fonctionnalit&eacute; ne sera pas prise en compte si votre squelette utilise les balises &eacute;toil&eacute;es : <code>#TITRE*</code> ou <code>#NOM*</code>",
@@ -90,16 +106,8 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 	'pucesli:description' => 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>&lt;ul>...&lt;/li>&lt;/ul>)',
 
 	'decoration:nom' => 'D&eacute;coration',
-	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Utilisation :
--* {&lt;sc&gt;}Lorem ipsum dolor sit amet{&lt;/sc&gt;}
--* {&lt;souligne&gt;}Lorem ipsum dolor sit amet{&lt;/souligne&gt;}
--* {&lt;barre&gt;}Lorem ipsum dolor sit amet{&lt;/barre&gt;}
--* {&lt;dessus&gt;}Lorem ipsum dolor sit amet{&lt;/dessus&gt;}
--* {&lt;clignote&gt;}Lorem ipsum dolor sit amet{&lt;/clignote&gt;}
--* {&lt;surfluo&gt;}Lorem ipsum dolor sit amet{&lt;/surfluo&gt;}
--* {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}
-
-Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
+	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Utilisation :{$temp['decoration']}
+_ Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
 	
 	'couleurs:nom' => 'Tout en couleurs',
@@ -129,7 +137,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 	'smileys:aide' => 'Smileys : @liste@',
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&#8220;:&#8221;</html>. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br />Dossier(s) &agrave; utiliser : %dossier_squelettes%",
+	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&#8220;:&#8221;</html>. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.[[Dossier(s) &agrave; utiliser :->%dossier_squelettes%]]",
 
 	'chatons:nom' => 'Chatons',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
@@ -140,28 +148,28 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 	'guillemets:description' => 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte original mais seulement l\'affichage final.',
 
 	'set_options:nom' => "Type d'interface priv&eacute;e",
-	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options4%",
+	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[Votre choix :->%radio_set_options4%]]",
 
+// ---------------------------------------------------------------------------
 	'type_urls:nom' => "Format des URLs",
-	'type_urls:description' => "SPIP offre un choix sur plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :
-- {page} : la valeur par d&eacute;faut pour SPIP v1.9 : <code>/spip.php?article123</code>.
-- {html} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
-- {propre} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
-- {propres2} : l'extension '.html' est ajout&eacute;e aux adresses g&eacute;n&eacute;r&eacute;es : <code>/Mon-titre-d-article.html</code>.
-- {standard} : URLs utilis&eacute;es par SPIP v1.8 et pr&eacute;c&eacute;dentes : <code>article.php3?id_article=123</code>
-- {propres-qs} : ce syst&egrave;me fonctionne en &quot;Query-String&quot;, c'est-&agrave;-dire sans utilisation de .htaccess ; les liens sont de la forme : <code>/?Mon-titre-d-article</code>.
+	'type_urls:description' => "#PUCE SPIP offre un choix sur plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :{$temp['type_urls']}
 
 {{Attention}} : pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous
   le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier.
   Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.
 _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
-_ Votre choix : %radio_type_urls3%",
+[[Format des URLs :->%radio_type_urls3%]]
 
+#PUCE {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>)ou une valeur vide (format <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de spip, à l'image de celui qui existe d&eacute;j&agrave; : {index.php}.
+[[Script d'appel :->%spip_script%]]
+",
+
+// ---------------------------------------------------------------------------
 	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak SPIP',
 	'log_tweaks:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak SPIP' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
 
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
-	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.<br />Votre choix : %cookie_prefix%',
+	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',
 
 	'filtrer_javascript:nom' => 'Gestion du javascript',
 	'filtrer_javascript:description' => 'Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
@@ -169,13 +177,13 @@ _ Votre choix : %radio_type_urls3%",
 - <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
 - <i>toujours</i> : le javascript est accept&eacute; partout.
 
-Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <strong>toujours</strong> s&eacute;curis&eacute;e.<br />Votre choix : %radio_filtrer_javascript3%',
+Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <strong>toujours</strong> s&eacute;curis&eacute;e.[[Votre choix :->%radio_filtrer_javascript3%]]',
 	'js_jamais' => 'Jamais',
 	'js_defaut' => 'D&eacute;faut',
 	'js_toujours' => 'Toujours',
 
 	'suivi_forums:nom' => 'Suivi des forums',
-	'suivi_forums:description' => 'Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.<br />Votre choix : %radio_suivi_forums3%',
+	'suivi_forums:description' => 'Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.[[Votre choix :->%radio_suivi_forums3%]]',
 	'sf_tous' => 'Tous',
 	'sf_defaut' => 'Par d&eacute;faut',
 	'sf_amont' => 'En amont',
@@ -188,36 +196,38 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 
 	'SPIP_liens:nom' => 'SPIP et les liens...',
 	'SPIP_liens:description' => "#PUCE Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
-		. $temp['jQuery'] . /*"<br />Lien de test : [Google->http://www.google.com]".*/ "<br />{{Utiliser des liens externes}} : %radio_target_blank3%\n\n"
-		. "#PUCE SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP]<br />{{Lien vers le glossaire}} : %url_glossaire_externe%",
+		. $temp['jQuery'] . /*"<br />Lien de test : [Google->http://www.google.com]".*/ "[[Utiliser des liens externes :->%radio_target_blank3%]]"
+		. "#PUCE SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[Lien vers le glossaire :->%url_glossaire_externe%]]",
 
 	'forum_lgrmaxi:nom' => 'Taille des forums',
-	'forum_lgrmaxi:description' => "Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si ce tweak est activ&eacute;, un message d'erreur s'affichera lorsque quelqu'un voudra poster un message  d'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;amoins qu'aucune limite ne s'applique.<br />Valeur (en caract&egrave;res) : %forum_lgrmaxi%",
+	'forum_lgrmaxi:description' => "Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si ce tweak est activ&eacute;, un message d'erreur s'affichera lorsque quelqu'un voudra poster un message  d'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;amoins qu'aucune limite ne s'applique.[[Valeur (en caract&egrave;res) :->%forum_lgrmaxi%]]",
 
 // ---------------------------------------------------------------------------
 // texte uniquement pour SPIP<1.93
 	'suite_introduction:nom' => 'Points de suite pour #INTRODUCTION',
-	'suite_introduction:description' => "Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(...)'. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc.. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.<br />Valeur : %suite_introduction%",
+	'suite_introduction:description' => "Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(...)'. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc.. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.[[Valeur :->%suite_introduction%]]",
 // texte uniquement pour SPIP<1.93
 	'introduction:nom' => "Longueur d'#INTRODUCTION",
 	'introduction:description' => "Pr&eacute;cise (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc.. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l'aspect de l'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
 
-{{Attention}} : Avant d'activer cette fonctionnalit&eacute;, v&eacute;rifiez bien qu'aucune fonction {introduction()} n'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur grave.<br />Valeur (en %) : %lgr_introduction%",
+{{Attention}} : Avant d'activer cette fonctionnalit&eacute;, v&eacute;rifiez bien qu'aucune fonction {introduction()} n'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur grave.[[Valeur (en %) :->%lgr_introduction%]]",
 // texte uniquement pour SPIP>=1.93
 	'introduction2:nom' => "Balise #INTRODUCTION",
 	'introduction2:description' => "<p>Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
 #PUCE Vous pouvez pr&eacute;ciser (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l'aspect de l'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
 
-{{Attention}} : Avant de modifier la valeur ci-dessous, v&eacute;rifiez bien qu'aucune fonction {introduction()} n'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur grave.<br />{{Longueur du r&eacute;sum&eacute; produit}} : %lgr_introduction%%\n\n
-#PUCE Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(...)'. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.<br />{{Points de suite}} : %suite_introduction%",
+{{Attention}} : Avant de modifier la valeur ci-dessous, v&eacute;rifiez bien qu'aucune fonction {introduction()} n'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur grave.
+[[Longueur du r&eacute;sum&eacute; :->%lgr_introduction%&nbsp;%]]
+#PUCE Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(...)'. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
+[[Points de suite :->%suite_introduction%]]",
 
 // ---------------------------------------------------------------------------
 	'class_spip:nom' => 'SPIP et les styles...',
-	'class_spip:description' => "<p>Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;."
-	."<br />#PUCE {{Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :}}<br />Votre style : %style_p%"
-	."<br />#PUCE {{Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :}}<br />Votre style : %style_h%"
-	."<br />Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les css standards associ&eacute;s &agrave; ces raccourcis.</p>"
-	."<p>Pour afiner un peu, vous pouvez maintenant d&eacute;finir le style particulier des balises suivantes :</p>",
+	'class_spip:description' => "<p>Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.</p>
+<p>#PUCE Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[Votre style :->%style_p%]]
+#PUCE Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[Votre style :->%style_h%]]</p>
+<p>Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces raccourcis.</p>"
+,//	."<p>Pour afiner un peu, vous pouvez maintenant d&eacute;finir le style particulier des balises suivantes :</p>",
 
 	'decoupe:nom' => 'D&eacute;coupe un article en pages',
 	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.<br />Attention, cette pagination ne sera pas prise en compte si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}",
@@ -240,8 +250,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 Vous pouvez choisir le type de remplacement :
 - {Basique} : sont remplac&eacute;s les liens du type {<html>http://spip.net</html>} (tout protocole) ou {<html>www.spip.net</html>}.
 - {&Eacute;tendu} : sont remplac&eacute;s en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
-
-Votre choix : %liens_orphelins%',
+[[Votre choix :->%liens_orphelins%]]',
 	'basique' => 'Basique',
 	'etendu' => '&Eacute;tendu',
 // ---------------------------------------------------------------------------

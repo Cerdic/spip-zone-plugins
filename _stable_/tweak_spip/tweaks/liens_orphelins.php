@@ -21,7 +21,6 @@ function liens_orphelins_rempl($texte){
 	if (strpos($texte, '<a')!==false) 
 		$texte = preg_replace_callback(',(<a\s*[^<]+</a>),Ums', 'liens_orphelins_echappe_balises_callback', $texte);
 	// prudence 2 : on protege TOUS les raccourcis de liens Spip, au cas ou...
-	define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 	if (strpos($texte, '[')!==false) 
 		$texte = preg_replace_callback(',(\[([^][]*)->(>?)([^]]*)\]),msS', 'liens_orphelins_echappe_balises_callback', $texte);
 	// prudence 3 : on protege TOUTES les balises contenant des points, histoire de voir plus clair
