@@ -102,6 +102,9 @@ function chmod_item($dir, $item) {		// change permissions
 	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:btncancel');
 	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><br />\n";
 }
+
+// changer les permissions de $fichier en $omod (octal comme 0644)
+// 1er essai par fs direct puis par ftp si echoue
 function spx_chmod($fichier, $omod)
 {
 	if (@chmod($fichier, $omod)) {
@@ -111,15 +114,15 @@ function spx_chmod($fichier, $omod)
 		return _T('no_ftp_config');
 	}
 
-	// set up basic connection
+	// connexion au serveur ftp
 	if (!($conn_id = @ftp_connect($GLOBALS['spx']["ftp_host"]))) {
 		return _T('erreur_ftp_connexion');
 	}
 
-	// login with username and password
+	// login sous le compte utilisateur
 	if (@ftp_login($conn_id,
 			$GLOBALS['spx']["ftp_user"], $GLOBALS['spx']["ftp_pass"])) {
-	// try to chmod $file to 644
+	// changer les permissions
 		if (@ftp_chmod($conn_id, $omod, realpath($fichier)) !== false) {
 			$return = '';
 		} else {
