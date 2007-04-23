@@ -14,10 +14,28 @@ var playa='';
 //tableau des mp3 de la page
 mp3Array = new Array();
 
+function Player_init(url_player) {
+
+soundManager.onload = function() {
+  // soundManager is initialised, ready to use. Create a sound for this demo page.
+  soundManager.createSound('aDrumSound',url_player);
+  }
+  
+}
+
+
 $(document).ready(function(){
 
 //mettre le player aflax en bas de page
 //$("#aflax_obj_0").appendTo("body");
+
+/*
+soundManager.onload = function() {
+  // soundManager is initialised, ready to use. Create a sound for this demo page.
+soundManager.debugMode = false;             // disable debug mode
+soundManager.defaultOptions.volume = 80;    // set global default volume
+}
+*/
 
 
 var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
@@ -80,9 +98,41 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 // .play() plugin jquery
 
 function player_play(i){
+	track_index = i ;
 	player_stop();
 	$("span.play_:eq("+i+")").html("stop").addClass("play_on");		
 	$(".playliste li:eq("+i+")").addClass("play_on");
+	if(soundManager.url != 'undefined'){
+		soundManager.createSound({
+	  	id:'son_'+i,url:mp3Array[i],
+	 	onfinish:function(){console.log(this.sID+' finished playing'),player_play(i+1)},     
+  onid3:function(){console.log(this.id3['songname'])},                
+  onload:function(){console.log(this.sID+' finished loading')},              
+  //'whileloading': null,          // callback function for "download progress update" (X of Y bytes received)
+  //'onplay': null,                // callback for "play" start
+  //'whileplaying': null,          // callback during play (position update)
+  //'onstop': null,                // callback for "user stop"
+  //'onbeforefinish': null,        // callback for "before sound finished playing (at [time])"
+  //'onbeforefinishtime': 5000,    // offset (milliseconds) before end of sound to trigger beforefinish..
+  //'onbeforefinishcomplete':null, // function to call when said sound finishes playing
+  //'onjustbeforefinish':null,     // callback for [n] msec before end of current sound
+  //'onjustbeforefinishtime':200,  // [n] - if not using, set to 0 (or null handler) and event will not fire.
+  //'multiShot': true,             // let sounds "restart" or layer on top of each other when played multiple times..
+  //'pan': 0,                      // "pan" settings, left-to-right, -100 to 100
+  'volume': 100    	
+	 	 });
+	  
+	  	//$("span#now_playing").html(i+"("+mp3Array[i]+")"+track_index);
+	  	//$("span#now_playing").append("son_"+i.id3.artist);
+		file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
+		file1 = file1.replace(/(%20)/g,' ');
+		file1 = file1.substr(0,55);
+		file1 = file1.replace(/(.mp3)/g,' ');
+		file1 = file1.replace(/(_|-)/g,' ');
+		$("#now_playing").html(file1) ;
+	    soundManager.play('son_'+i,{volume:50}) ;
+	}else{
+	
 	//Ajouter le musicplayer
 	playlist='';
 	deb=0;
@@ -106,6 +156,9 @@ $("#musicplayer").html('<object '+
 	'<param name="movie" value="'+musicplayerurl+'" />'+
 	'</object>');
 // Fin modification
+
+}
+
 }
 	
 
@@ -119,7 +172,9 @@ function player_stop(){
 						
 						$(".playliste li.play_on").removeClass("play_on");
 						//stop le musicplayer en flash < 8
+						soundManager.stopAll();
 						$("#musicplayer").html('');
+						$("#now_playing").html('');
 }	
 
 
@@ -128,8 +183,8 @@ function player_stop(){
 	{	
 		
 		track_index++;
-		file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
-		$("#pos").html(file1) ;
+		//file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
+		//$("#now_playing").html(file1) ;
 		player_play(track_index);
 		
 	}
@@ -139,7 +194,8 @@ function player_stop(){
 	function player_prev()
 	{	
 		track_index--;	
-		file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
+		//file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
+		//$("#now_playing").html(file1) ;
 		player_play(track_index);
 		
 	}

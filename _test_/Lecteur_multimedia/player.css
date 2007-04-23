@@ -4,6 +4,8 @@ margin:10px 0px 10px 0px;
 padding:0px;
 width:200px;
 font-size:9px;
+font-family:verdana, sans-serif;
+color:#999999;
 /*
 -moz-border-radius: 15px;*/
 }
@@ -13,8 +15,6 @@ font-size:9px;
 cursor:hand;
 cursor:pointer;
 text-align:right;
-font-variant:small-caps;
-font-weight:bold;
 margin-bottom:5px;
 }
 
@@ -23,6 +23,7 @@ list-style-type:none;
 padding:3px;
 margin:0;
 border: 1px solid #cccccc;
+
 }
 
 .radiobox a, .radiobox a:hover{
@@ -43,6 +44,14 @@ border: 1px solid #cccccc;
 
 .radiobox li.play_on{
 background:#e6e6e6;
+}
+
+div#now_playing{
+width:120px;
+height:13px;
+overflow:hidden;
+float:left;
+text-align:left;
 }
 
 span.play_{
