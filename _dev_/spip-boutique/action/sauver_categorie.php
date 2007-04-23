@@ -11,7 +11,8 @@ function action_sauver_categorie_dist(){
 	$id_secteur = $res_id_secteur_lang['id_secteur'];
 	
 	if (_request('id_categorie') == 'new'){
-		$lang = $res_id_secteur_lang['lang'];
+		//$lang = $res_id_secteur_lang['lang'];
+		if ($res_id_secteur_lang['lang'] == '' ) {$lang = lire_meta('langue_site');}else{$lang = $res_id_secteur_lang['lang'];}
 		$sql_insert_categorie = "INSERT INTO spip_boutique_categories ";
 		$sql_insert_categorie .= "(id_categorie,titre,descriptif,texte,logo,lang,id_parent,id_secteur,date,date_modif) ";
 		$sql_insert_categorie .= "VALUES ('','".addslashes(_request('titre'))."','".addslashes(_request('descriptif'))."','".addslashes(_request('texte'))."','','".$lang."','"._request('id_parent')."','".$id_secteur."',CURRENT_TIMESTAMP,'');";

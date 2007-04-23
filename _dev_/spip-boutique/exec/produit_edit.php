@@ -8,17 +8,17 @@ function exec_produit_edit(){
 			echo debut_boite_info();
 				echo _T('boutique:creer_un_produit');
 			echo fin_boite_info();
-				if (_request('id_produit') != "new"){
-					echo bloc_des_raccourcis(icone_horizontale(_T('boutique:retour'), generer_url_ecrire("categories","id_produit="._request('id_produit').""), "", _DIR_PLUGIN_BOUTIQUE."img_pack/back_32.png", false));
+				if (_request('id_produit') != "new" AND _request('id_categorie') != ""){
+					echo bloc_des_raccourcis(icone_horizontale(_T('boutique:retour'), generer_url_ecrire("categories","id_categorie="._request('id_categorie').""), "", _DIR_PLUGIN_BOUTIQUE."img_pack/back_32.png", false));
 				}else{
-					echo bloc_des_raccourcis(icone_horizontale(_T('boutique:retour'), generer_url_ecrire("categories","id_categorie="._request('id_parent').""), "", _DIR_PLUGIN_BOUTIQUE."img_pack/back_32.png", false));
+					echo bloc_des_raccourcis(icone_horizontale(_T('boutique:retour'), generer_url_ecrire("produits_page",""), "", _DIR_PLUGIN_BOUTIQUE."img_pack/back_32.png", false));
 				}
 		echo debut_droite();
 			
 		$res_produit = spip_query("SELECT * FROM spip_boutique_produits WHERE id_produit = '"._request('id_produit')."';");
 		$produit = spip_fetch_array($res_categorie);
 		if (spip_num_rows($res_produit) == 0 ){
-			$id_parent = _request('id_parent');
+			if (_request('id_parent') != '') { $id_parent = _request('id_parent'); }else{ $id_parent = 0;  };
 		}else{
 			$id_parent = $produit['id_parent'];
 		}
@@ -39,6 +39,7 @@ function exec_produit_edit(){
 		echo '<tr><td>'._T('boutique:prix_achat').'</td><td><input type="text" value="'.$produit['prix_achat'].'" name="prix_achat" /></td><td>'._T('boutique:eur').'</td></tr>';
 		echo '<tr><td>'._T('boutique:tva').'</td><td><input type="text" value="'.$produit['tva'].'" name="tva" /></td><td>'._T('boutique:pour_cent').'</td></tr>';
 		echo '<tr><td>'._T('boutique:url_de_reference').'</td><td><input type="text" value="'.$produit['url'].'" name="url" /></td><td></td></tr>';
+		echo '<tr><td>'._T('boutique:token_de_reference').'</td><td><input type="text" value="'.$produit['token'].'" name="token" /></td><td></td></tr>';
 		echo '</table></div><br />';
 		
 		
