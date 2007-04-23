@@ -163,6 +163,7 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 #PUCE {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>)ou une valeur vide (format <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de spip, à l'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[Script d'appel :->%spip_script%]]
 ",
+	'page' => 'page', 'html' => 'html', 'propres' => 'propres', 'propres2' => 'propres2', 'standard' => 'standard', 'propres-qs' => 'propres-qs',
 
 // ---------------------------------------------------------------------------
 	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak SPIP',
@@ -254,7 +255,9 @@ Vous pouvez choisir le type de remplacement :
 	'basique' => 'Basique',
 	'etendu' => '&Eacute;tendu',
 // ---------------------------------------------------------------------------
-
+	'auteur_forum:nom' => "Pas de forums anonymes",
+	'auteur_forum:description' => "Incite tous les auteurs de messages publics &agrave; remplir (d'au moins d'une lettre !) le champ &laquo;"._T('forum_votre_nom')."&raquo; afin d'&eacute;viter les contributions totalement anonymes." . $temp['jQuery'],
+	'nom_forum' => 'Merci de sp&eacute;cifier votre nom !',
 /*
 	':nom' => '',
 	':description' => '',

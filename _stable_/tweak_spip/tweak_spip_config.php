@@ -215,6 +215,20 @@ add_tweak( array(
 	'version-min' => 1.92,
 ));
 
+/*add_variable( array(
+	'nom' => 'radio_desactive_cache3',
+	'format' => 'nombre',
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 0,
+	'code' => "define('_FORUM_OBLIGE_AUTEUR', %s);",
+));*/
+add_tweak( array(
+	'id' => 'auteur_forum',
+	'categorie'	 => 'admin',
+	'code:options' => "define('_FORUM_OBLIGE_AUTEUR', 'oui');",
+	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
+));
+
 	// ici on demande a Tweak SPIP trois boutons radio : _T('tweak:sf_defaut'), _T('tweak:sf_amont') et _T('tweak:sf_tous')
 add_variable( array(
 	'nom' => 'radio_suivi_forums3',
