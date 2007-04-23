@@ -22,7 +22,11 @@ jQuery(function() {
 		return jQuery(".selitem:checked").length;
 	}
 	
-<?php if (($GLOBALS['spx']["permissions"] & 01) == 01) { ?>
+<?php
+if (($GLOBALS['spx']["permissions"] & 01) != 01) {
+	exit;
+}
+?>
 	
 	// Copy / Move / Delete
 	
@@ -84,8 +88,6 @@ jQuery(function() {
 		}
 		return true;
 	}
-	
-<?php } ?>
 
 // -->
 </script>

@@ -270,7 +270,7 @@ function list_dir($dir) {			// list directory contents
 	
 	$s_dir=$dir;		if(strlen($s_dir)>50) $s_dir="...".substr($s_dir,-47);
 	show_header('<a href="' . make_link('list', '') . '">' .
-		_T('spixplorer:actdir').": /" . '</a>' . link_all($s_dir), true);
+		_T('spixplorer:homelink') . '</a>' . link_all($s_dir), true);
 	
 	// Sorting of items
 	$_img = 
@@ -478,12 +478,11 @@ function link_all($dir)
 	if (!$dir) {
 		return '';
 	}
-	$ret = $sep = '';
+	$ret = '';
 	while (($pos = strrpos($dir, '/')) !== false) {
 		$terminal = substr($dir, $pos + 1);
-		$ret = '<a href="' . make_link('list', $dir) . '">' . $terminal . $sep . '</a>' . $ret;
+		$ret = '<a href="' . make_link('list', $dir) . '">' . $terminal . '</a>' . $ret;
 		$dir = substr($dir, 0, $pos);
-		$sep = '/';
 	}
 	$ret = '<a href="' . make_link('list', $dir) . '">' . $dir . $sep . '</a>' . $ret;
 	return $ret;
