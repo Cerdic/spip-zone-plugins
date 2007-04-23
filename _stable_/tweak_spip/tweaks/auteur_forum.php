@@ -12,7 +12,10 @@ $(document).ready(function(){
  if($('#formulaire_forum @confirmer_forum').length)
  	// eviter les forums anonymes
 	$('#formulaire_forum').bind('submit', function(event){
-		if($('#formulaire_forum #auteur').val().length==0) {
+		 t = $('#formulaire_forum #auteur');
+		if(t.val().length==0) {
+			t.attr('style','border-color:#E86519;');
+			t.focus();
 			alert($nom);
 			return false;
 		}
