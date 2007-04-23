@@ -129,8 +129,9 @@ function player_play(i){
 		file1 = file1.substr(0,55);
 		file1 = file1.replace(/(.mp3)/g,' ');
 		file1 = file1.replace(/(_|-)/g,' ');
+		//$("img[@alt='play']").attr()
 		$("#now_playing").html(file1) ;
-	    soundManager.play('son_'+i,{volume:50}) ;
+	    soundManager.play('son_'+i,{volume:100}) ;
 	}else{
 	
 	//Ajouter le musicplayer
