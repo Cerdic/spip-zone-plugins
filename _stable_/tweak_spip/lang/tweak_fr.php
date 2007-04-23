@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // Chaines de langue concernant tous les tweaks configures dans tweak_spip_config.php
 // ----------------------------------------------------------------------------------
 
-	'SPIP_cache:nom' => 'SPIP et le cache...',
+	'SPIP_cache:nom' => 'SPIP et le cache&hellip;',
 	'SPIP_cache:description' => "#PUCE Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[D&eacute;sactiver le cache :->%radio_desactive_cache3%]]"
 		. "#PUCE Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique au cache.[[Valeur du quota :->%quota_cache% Mo]]",
 
@@ -103,7 +103,7 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <strong><:trad:></strong>',
 
 	'pucesli:nom' => 'Belles puces',
-	'pucesli:description' => 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>&lt;ul>...&lt;/li>&lt;/ul>)',
+	'pucesli:description' => 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>&lt;ul>&hellip;&lt;/li>&lt;/ul>)',
 
 	'decoration:nom' => 'D&eacute;coration',
 	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Utilisation :{$temp['decoration']}
@@ -111,7 +111,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
 	
 	'couleurs:nom' => 'Tout en couleurs',
-	'couleurs:description' => "Permet d'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, ...) en utilisant des balises en raccourcis.
+	'couleurs:description' => "Permet d'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, &hellip;) en utilisant des balises en raccourcis.
 _ Deux  exemples identiques : 
 -* <code>Lorem ipsum [rouge]dolor[/rouge] sit amet</code>
 -* <code>Lorem ipsum [red]dolor[/red] sit amet</code>.
@@ -195,7 +195,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
 	'f_jQuery:description' => "Emp&ecirc;che l'installation de jQuery dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l'utilise dans sa partie priv&eacute;e.",
 
-	'SPIP_liens:nom' => 'SPIP et les liens...',
+	'SPIP_liens:nom' => 'SPIP et les liens&hellip;',
 	'SPIP_liens:description' => "#PUCE Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
 		. $temp['jQuery'] . /*"<br />Lien de test : [Google->http://www.google.com]".*/ "[[Utiliser des liens externes :->%radio_target_blank3%]]"
 		. "#PUCE SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[Lien vers le glossaire :->%url_glossaire_externe%]]",
@@ -206,7 +206,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 // ---------------------------------------------------------------------------
 // texte uniquement pour SPIP<1.93
 	'suite_introduction:nom' => 'Points de suite pour #INTRODUCTION',
-	'suite_introduction:description' => "Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(...)'. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc.. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.[[Valeur :->%suite_introduction%]]",
+	'suite_introduction:description' => "Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(&hellip;)'. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc.. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.[[Valeur :->%suite_introduction%]]",
 // texte uniquement pour SPIP<1.93
 	'introduction:nom' => "Longueur d'#INTRODUCTION",
 	'introduction:description' => "Pr&eacute;cise (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc.. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l'aspect de l'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
@@ -219,11 +219,11 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 
 {{Attention}} : Avant de modifier la valeur ci-dessous, v&eacute;rifiez bien qu'aucune fonction {introduction()} n'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur grave.
 [[Longueur du r&eacute;sum&eacute; :->%lgr_introduction%&nbsp;%]]
-#PUCE Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(...)'. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
+#PUCE Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : '&amp;nbsp;(&hellip;)'. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
 [[Points de suite :->%suite_introduction%]]",
 
 // ---------------------------------------------------------------------------
-	'class_spip:nom' => 'SPIP et les styles...',
+	'class_spip:nom' => 'SPIP et les styles&hellip;',
 	'class_spip:description' => "<p>Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.</p>
 <p>#PUCE Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[Votre style :->%style_p%]]
 #PUCE Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; :[[Votre style :->%style_h%]]</p>
