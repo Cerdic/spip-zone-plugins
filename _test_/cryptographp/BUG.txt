@@ -1,2 +1,7 @@
+- Version 0.2
+	+ integration de la version 1.4 de la classe cryptographp
+	+ suivi des changements lies a la classe
+	+ integration plus propre
+
 - Version 0.1 ;-)
 
