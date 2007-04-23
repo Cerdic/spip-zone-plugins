@@ -1,0 +1,54 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[fr]Attributs 1.0</multi>
+	</nom>
+	<icon>img_pack/attributs-24.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Joseph Larmarange - 2007 - 
+	<multi>
+		[fr]Distribu&#233; sous licence GPL
+	</multi>
+	</auteur>
+	<version>1.0</version>
+	<version_base>1.0</version_base>
+	<etat>
+	test
+	</etat>
+	<description>
+	<multi>
+	[fr] Permet de d&eacute;finir et d'ajouter des attributs aux diff&eacute;rents &eacute;l&eacute;ments de SPIP :
+- Articles
+- Rubriques
+- Br&egrave;ves
+- Sites
+- Auteurs
+
+Les attributs sont un doublement des mots-cl&eacute;s afin d'&eacute;viter d'avoir &agrave; les d&eacute;tourner pour d'autres usages.
+	</multi>
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	attributs_mes_options.php
+	</options>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	attributs
+	</prefix>
+	<install>inc/attributs_install.php</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>attributs_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>attributs_pipelines.php</inclure>
+	</pipeline>
+
+	<chemin dir='' />
+</plugin>
