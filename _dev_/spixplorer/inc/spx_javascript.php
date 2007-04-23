@@ -1,91 +1,25 @@
+<script src=".?page=jquery.js" type="text/javascript"></script>
+
 <script language="JavaScript1.2" type="text/javascript">
 <!--
+jQuery(function() {
 	// Checkboxes
-	function Toggle(e) {
-		if(e.checked) {
-			Highlight(e);
-			document.selform.toggleAllC.checked = AllChecked();
-		} else {
-			UnHighlight(e);
-			document.selform.toggleAllC.checked = false;
-		}
-   	}
+	jQuery(".selitem").attr('checked', false).click(function() {
+		jQuery(this).parents(".rowdata").toggleClass("rowdatasel");
+		jQuery("#toggle_all")
+			.attr('checked', this.checked ? 
+				!jQuery(".selitem:not(:checked)").length : false);
+   	});
 
-	function ToggleAll(e) {
-		if(e.checked) CheckAll();
-		else ClearAll();
-	}
-	
-	function CheckAll() {
-		var ml = document.selform;
-		var len = ml.elements.length;
-		for(var i=0; i<len; ++i) {
-			var e = ml.elements[i];
-			if(e.name == "selitems[]") {
-				e.checked = true;
-				Highlight(e);
-			}
-		}
-		ml.toggleAllC.checked = true;
-	}
-
-	function ClearAll() {
-		var ml = document.selform;
-		var len = ml.elements.length;
-		for (var i=0; i<len; ++i) {
-			var e = ml.elements[i];
-			if(e.name == "selitems[]") {
-				e.checked = false;
-				UnHighlight(e);
-			}
-		}
-		ml.toggleAllC.checked = false;
-	}
-   
-	function AllChecked() {
-		ml = document.selform;
-		len = ml.elements.length;
-		for(var i=0; i<len; ++i) {
-			if(ml.elements[i].name == "selitems[]" && !ml.elements[i].checked) return false;
-		}
-		return true;
-	}
+	jQuery("#toggle_all").click(function() {
+		jQuery(".selitem:"+(this.checked ? "not(:checked)" : "checked"))
+			.attr('checked', this.checked)
+			.parents(".rowdata").toggleClass("rowdatasel");
+	});
+});	
 	
 	function NumChecked() {
-		ml = document.selform;
-		len = ml.elements.length;
-		num = 0;
-		for(var i=0; i<len; ++i) {
-			if(ml.elements[i].name == "selitems[]" && ml.elements[i].checked) ++num;
-		}
-		return num;
-	}
-	
-	
-	// Row highlight
-
-	function Highlight(e) {
-		var r = null;
-		if(e.parentNode && e.parentNode.parentNode) {
-			r = e.parentNode.parentNode;
-		} else if(e.parentElement && e.parentElement.parentElement) {
-			r = e.parentElement.parentElement;
-		}
-		if(r && r.className=="rowdata") {
-			r.className = "rowdatasel";
-		}
-	}
-
-	function UnHighlight(e) {
-		var r = null;
-		if(e.parentNode && e.parentNode.parentNode) {
-			r = e.parentNode.parentNode;
-		} else if (e.parentElement && e.parentElement.parentElement) {
-			r = e.parentElement.parentElement;
-		}
-		if(r && r.className=="rowdatasel") {
-			r.className = "rowdata";
-		}
+		return jQuery(".selitem:checked").length;
 	}
 	
 <?php if (($GLOBALS['spx']["permissions"] & 01) == 01) { ?>

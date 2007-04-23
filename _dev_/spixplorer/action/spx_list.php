@@ -167,7 +167,7 @@ function print_table($dir, $list, $allow) {	// print table of files
 		
 		echo '
 <tr class="rowdata"><td><input type="checkbox" name="selitems[]" value="' .
-htmlspecialchars($item) . '" onclick="javascript:Toggle(this);"></td>
+htmlspecialchars($item) . '" class="selitem" /></td>
 ' .
 	// Icon + Link
 '<td nowrap>' .
@@ -410,7 +410,7 @@ src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:up
 	
 	// Begin Table + Form for checkboxes
 	echo '
-		<table width="95%"><FORM name="selform" method="POST" action="spip.php">
+		<table width="95%"><FORM name="selform" method="POST" action="spip.php" id="selform">
 		<input type="hidden" name="action" id="action">
 		<input type="hidden" name="do_action">
 		<input type="hidden" name="namearch">
@@ -432,7 +432,7 @@ src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:up
 	// Table Header
 	echo
 '<tr><td colspan="8"><hr /></td></tr><tr><td width="2%" class="header">
-<input type="checkbox" name="toggleAllC" onclick="javascript:ToggleAll(this);"></td>
+<input type="checkbox" name="toggleAllC" id="toggle_all"></td>
 <td class="header"><b><a href="' . make_link("list", $dir, NULL, "name",
  $GLOBALS['spx']["order"] == "name" ? $_srt : "yes") . '">' . _T('spixplorer:nameheader') .
 ($GLOBALS['spx']["order"] == "name" ? $_img : '') . '</a></b></td>
@@ -470,20 +470,6 @@ _T('spixplorer:miscfree') . ': ' .
 	echo '</tr>
 <tr><td colspan="8"><hr /></td></tr></FORM></table>
 ';
-	
-?><script language="JavaScript1.2" type="text/javascript">
-<!--
-	// Uncheck all items (to avoid problems with new items)
-	var ml = document.selform;
-	var len = ml.elements.length;
-	for(var i=0; i<len; ++i) {
-		var e = ml.elements[i];
-		if(e.name == "selitems[]" && e.checked == true) {
-			e.checked=false;
-		}
-	}
-// -->
-</script><?php
 }
 
 // Fil d'Ariane

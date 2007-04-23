@@ -51,10 +51,10 @@ function show_header($title, $js = false) {			// header for html-page
 	//echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\"";
 	//echo "\"http://www.w3.org/TR/REC-html40/loose.dtd\">\n";
 	echo 
-'<HTML lang="' . $GLOBALS['spx']["language"] . '" dir="' . $GLOBALS['spip_lang_dir'] .
-'">
+'<HTML lang="' . $GLOBALS['spip_lang'] . '" dir="' .
+			($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr') .'">
 <HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=' . $GLOBALS['spx']["charset"] . '">
+<meta http-equiv="Content-Type" content="text/html; charset=' . $GLOBALS['meta']['charset'] . '">
 <title>SpiXplorer: QuiXplorer ' . $GLOBALS['spx']["version"] . ' pour Spip</title>
 <LINK href="' . _DIR_PLUGIN_SPIXPLORER . '_style/style.css" rel="stylesheet" type="text/css">
 ';	
