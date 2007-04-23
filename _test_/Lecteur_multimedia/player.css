@@ -52,6 +52,7 @@ height:13px;
 overflow:hidden;
 float:left;
 text-align:left;
+border: 1px solid #cccccc;
 }
 
 span.play_{
