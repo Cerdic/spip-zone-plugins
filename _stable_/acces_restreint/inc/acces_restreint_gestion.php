@@ -94,7 +94,8 @@
 		if ($restric = in_array($root,$liste_rub_dir))	$class = " class='selec_rub'";
 	
 		// le style en fonction de la profondeur
-		list($style,$espace) = style_menu_rubriques($niv);
+		$a = style_menu_rubriques($niv);
+		$espace = array_pop($a);
 		$style = "style='padding-left:".($niv*1)."em;";
 		if ($restrictherit = in_array($root,$liste_rub))
 			$style .= "background-color: $couleur_claire;";
@@ -121,7 +122,7 @@
 				$r = bouton_block_visible("rub$root") . $r;
 			else
 				$r = bouton_block_invisible("rub$root") . $r;
-			$r = "<div $class$style>" . $r;
+			$r = "<div $class $style>" . $r;
 			$r .= "</div>\n";
 
 			if ($visible)
@@ -392,7 +393,7 @@
 				$out .= "</tr>";
 			}
 			
-			/*if ($connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees" AND $connect_toutes_rubriques) {
+			/*if ($connect_statut == '0minirezo' AND $flag_editable AND $connect_toutes_rubriques) {
 				$out .= "<tr><td></td><td colspan='2'>";
 				$out .= "<div style='width: 200px;'>";
 				icone_horizontale(_T('accesrestreint:icone_creer_zone'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "img_pack/zones-acces-24.gif", "creer.gif");
