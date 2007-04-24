@@ -95,12 +95,6 @@ function Forms_creer_champ($id_form,$type,$titre,$c=NULL,$champ=""){
 
 /* Operation sur les donnees -------------------------------*/
 
-function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
-	list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee,$specifiant,$linkable);
-	if (!count($t) && $specifiant)
-		list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee, false,$linkable);
-	return $t;
-}
 function Forms_creer_donnee($id_form,$c = NULL, $rang=NULL){
 	include_spip('inc/autoriser');
 	if (!autoriser('creer','donnee',0,NULL,array('id_form'=>$id_form)))
@@ -118,6 +112,21 @@ function Forms_supprimer_donnee($id_form,$id_donnee){
 	spip_query("UPDATE spip_forms_donnees SET statut='poubelle',bgch=0,bdte=0,niveau=0 WHERE id_donnee="._q($id_donnee));
 	return true;
 }
+
+function Forms_instituer_donnee($id_donnee,$statut){
+		spip_query("UPDATE spip_forms_donnees SET statut="._q($statut)." WHERE id_donnee="._q($id_donnee));
+}
+function Forms_ordonner_donnee($id_donnee,$rang){
+		include_spip("inc/forms");
+		Forms_rang_update($id_donnee,$rang);
+}
+function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
+	list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee,$specifiant,$linkable);
+	if (!count($t) && $specifiant)
+		list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee, false,$linkable);
+	return $t;
+}
+
 
 /* Operation sur les donnees arborescentes -------------------------------*/
 /* 
