@@ -7,11 +7,12 @@ function Auteur_forum_affichage_final($flux){
 		// filtrer et remettre le tout dans le charset cible
 		$nom = unicode2charset(html2unicode(_T('tweak:nom_forum')));
 		$nom = '"' . str_replace('"', '\"', $nom) . '"';
+		// code jQuery
 		$code =<<<jscode
 <script type="text/javascript"><!--
 $(document).ready(function(){
  form = $form;
- auteur = $('#formulaire_forum #auteur');
+ auteur = $('#auteur');
 // label = auteur.prev();
  if(form.length && auteur.length)
  	// eviter les forums anonymes
