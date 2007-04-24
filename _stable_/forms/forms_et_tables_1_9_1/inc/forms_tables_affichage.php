@@ -18,10 +18,99 @@ function forms_inserer_crayons($out){
 	$out = str_replace("</head>","",$out);
 	return $out;
 }
-function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer){
+
+// l'argument align n'est plus jamais fourni
+// http://doc.spip.org/@icone
+function icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher='oui', $expose=false){
+	global $spip_display;
+
+	if ($fonction == "supprimer.gif") {
+		$style = '-danger';
+	} else {
+		$style = '';
+		if ($expose) $style='-on';
+		if (strlen($fonction) < 3) $fonction = "rien.gif";
+	}
+
+	if ($spip_display == 1){
+		$hauteur = 20;
+		$largeur = 100;
+		$title = $alt = "";
+	}
+	else if ($spip_display == 3){
+		$hauteur = 30;
+		$largeur = 30;
+		$title = "\ntitle=\"$texte\"";
+		$alt = $texte;
+	}
+	else {
+		$hauteur = 70;
+		$largeur = 100;
+		$title = '';
+		$alt = $texte;
+	}
+
+	$size = 24;
+	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
+		$size = $match[1];
+	if ($spip_display != 1 AND $spip_display != 4){
+		if ($fonction != "rien.gif"){
+		  $icone = http_img_pack($fonction, $alt, "$title width='$size' height='$size'\n" .
+					  http_style_background($fond, "no-repeat center center"));
+		}
+		else {
+			$icone = http_img_pack($fond, $alt, "$title width='$size' height='$size'");
+		}
+	} else $icone = '';
+
+	if ($spip_display != 3){
+		$icone .= "<span>$texte</span>";
+	}
+
+	// cas d'ajax_action_auteur: faut defaire le boulot 
+	// (il faudrait fusionner avec le cas $javascript)
+	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
+	  list($x,$lien,$atts,$texte)= $r;
+	else $atts = '';
+	$lien = "\nhref='$lien'$atts";
+
+	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'"
+	. ">\n<tr><td class='icone36$style'>"
+	. ($expose?"":"<a"
+	. $lien
+	. '>')
+	. $icone
+	. ($expose?"":"</a>")
+	. "</td></tr></table>\n";
+
+	if ($afficher == 'oui')	echo $icone; else return $icone;
+}
+
+function afficher_tables_tous_corps($type_form, $link=NULL){
+	global $spip_lang_right;
+	include_spip('public/assembler');
+	$out = "";
+	$prefix = forms_prefixi18n($type_form);
+	$contexte = array('type_form'=>$type_form,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+	$out .= recuperer_fond("fonds/tables_tous",$contexte);
+	
+	if (autoriser('creer','form') && ($link!==false)) {
+	  $icone = find_in_path("img_pack/".($type_form?$type_form:'form')."-24.png");
+	  if (!$icone)
+	  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/table-24.png";
+		$out .=  "<div align='$spip_lang_right'>";
+		if ($link===NULL)
+			$link=generer_url_ecrire('forms_edit', "new=oui&type_form=$type_form");
+		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
+		$out .=  icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif","",false);
+		$out .=  "</div>";
+	}
+	return $out;
+}
+
+function afficher_tables_tous($type_form, $titre_page, $titre_type){
 	global $spip_lang_right;
 	include_spip("inc/presentation");
-	include_spip('public/assembler');
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 
@@ -39,44 +128,21 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 		echo boite_snippets($titre_type,_DIR_PLUGIN_FORMS."img_pack/$type_form-24.gif",'forms','forms');
 	
 	debut_droite();
+	$out = "";
 
 	$bouton_defaut = true;
 	if ( _request('exec')=='tables_tous'
 		&& (_request('var_mode')=='dev' OR (defined('_OUTILS_DEVELOPPEURS') && _OUTILS_DEVELOPPEURS))) {
 		$res = spip_query("SELECT type_form FROM spip_forms GROUP BY type_form ORDER BY type_form");
 		while ($row = spip_fetch_array($res)){
-			$prefix = forms_prefixi18n($row['type_form']);
-			$contexte = array('type_form'=>$row['type_form'],'titre_liste'=>_T("$prefix:toutes_tables")." [".$row['type_form']."]",'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-			echo recuperer_fond("fonds/tables_tous",$contexte);
-			if (autoriser('creer','form')) {
-			  $icone = find_in_path("img_pack/".($row['type_form']?$row['type_form']:'form')."-24.png");
-			  if (!$icone)
-			  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/table-24.png";
-				echo "<div style='float:right'>";
-				$link=generer_url_ecrire('forms_edit', "new=oui&type_form=".$row['type_form']);
-				$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-				echo icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
-				echo "</div>";
-				if ($row['type_form']==$type_form) $bouton_defaut = false;
-			}
+			$out .= afficher_tables_tous_corps($row['type_form']);
+			if ($row['type_form']==$type_form) $bouton_defaut = false;
 		}
 	}
 	if ($bouton_defaut) {
-		$prefix = forms_prefixi18n($type_form);
-		$contexte = array('type_form'=>$type_form,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-		echo recuperer_fond("fonds/tables_tous",$contexte);
-		
-		if (autoriser('creer','form')) {
-		  $icone = find_in_path("img_pack/".($type_form?$type_form:'form')."-24.png");
-		  if (!$icone)
-		  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/table-24.png";
-			echo "<div align='right'>";
-			$link=generer_url_ecrire('forms_edit', "new=oui&type_form=$type_form");
-			$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-			echo icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
-			echo "</div>";
-		}
+		$out .= afficher_tables_tous_corps($type_form);
 	}
+	echo forms_inserer_crayons($out);
 	
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();

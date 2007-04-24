@@ -889,6 +889,8 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 
 function Forms_liste_decrit_donnee($id_donnee, $specifiant=true, $linkable=true){
 	$t = array();$titreform="";
+	$id_form = 0;
+	$type_form = "";
 	if ($specifiant) $specifiant = "c.specifiant='oui' AND ";
 	else $specifiant="";
 	if ($linkable) $linkable = " AND f.linkable='oui'";
