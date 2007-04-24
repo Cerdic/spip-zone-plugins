@@ -11,7 +11,7 @@
  *
  */
 
-include_spip('exec/template/tables_affichage');
+include_spip('inc/forms_tables_affichage');
 
 function exec_donnees_tous(){
 	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q(_request('id_form')));

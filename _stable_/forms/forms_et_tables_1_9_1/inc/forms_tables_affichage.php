@@ -47,7 +47,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 		while ($row = spip_fetch_array($res)){
 			$prefix = forms_prefixi18n($row['type_form']);
 			$contexte = array('type_form'=>$row['type_form'],'titre_liste'=>_T("$prefix:toutes_tables")." [".$row['type_form']."]",'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-			echo recuperer_fond("exec/template/tables_tous",$contexte);
+			echo recuperer_fond("fonds/tables_tous",$contexte);
 			if (autoriser('creer','form')) {
 			  $icone = find_in_path("img_pack/".($row['type_form']?$row['type_form']:'form')."-24.png");
 			  if (!$icone)
@@ -64,7 +64,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 	if ($bouton_defaut) {
 		$prefix = forms_prefixi18n($type_form);
 		$contexte = array('type_form'=>$type_form,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-		echo recuperer_fond("exec/template/tables_tous",$contexte);
+		echo recuperer_fond("fonds/tables_tous",$contexte);
 		
 		if (autoriser('creer','form')) {
 		  $icone = find_in_path("img_pack/".($type_form?$type_form:'form')."-24.png");
@@ -145,7 +145,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	$out .=  gros_titre($titre_page,'',false);
 	$out .=  '</div>';
 	
-	$out .=  recuperer_fond("exec/template/donnees_tous",$contexte);
+	$out .=  recuperer_fond("fonds/donnees_tous",$contexte);
 	$out = forms_inserer_crayons($out);
 	
 	$out .=  "</td></tr></table><br />\n";

@@ -606,7 +606,7 @@
 					  . _q($url).", '$confirmation', '$statut',"._q($cookie).","
 					  . implode(',',array_map('_q',$rang)) .")");
 					$id_donnee = spip_insert_id();
-					# cf. GROS HACK exec/template/tables_affichage
+					# cf. GROS HACK inc/forms_tables_affichage
 					# rattrapper les documents associes a cette nouvelle donnee
 					# ils ont un id = 0-id_auteur
 					spip_query("UPDATE spip_documents_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));

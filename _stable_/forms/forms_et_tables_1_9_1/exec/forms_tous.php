@@ -37,11 +37,11 @@ function exec_forms_tous(){
 	echo recuperer_fond("exec/forms_tous",$contexte);	*/
 	
 	$contexte = array('type_form'=>'','titre_liste'=>_T('forms:tous_formulaires'),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-	echo recuperer_fond("exec/template/tables_tous",$contexte);
+	echo recuperer_fond("fonds/tables_tous",$contexte);
 	echo "<br />\n";
 
 	$contexte = array('type_form'=>'sondage','titre_liste'=>_T('forms:tous_sondages'),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-	echo recuperer_fond("exec/template/tables_tous",$contexte);
+	echo recuperer_fond("fonds/tables_tous",$contexte);
 	echo "<br />\n";
 
 	if (!include_spip('inc/autoriser'))

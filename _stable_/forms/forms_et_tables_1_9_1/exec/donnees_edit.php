@@ -11,7 +11,7 @@
  *
  */
 
-include_spip('exec/template/tables_affichage');
+include_spip('inc/forms_tables_affichage');
 
 function exec_donnees_edit(){
 	$type_form = 'table';

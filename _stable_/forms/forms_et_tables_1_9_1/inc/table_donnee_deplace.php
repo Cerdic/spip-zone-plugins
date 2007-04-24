@@ -19,7 +19,7 @@ include_spip("public/assembler");
 
 function inc_table_donnee_deplace_dist($id_donnee,$id_form){
 	$contexte = array('id_form'=>$id_form,'id_donnee'=>$id_donnee);
-	$res = recuperer_fond("exec/template/table_sort",$contexte);
+	$res = recuperer_fond("fonds/table_sort",$contexte);
 	return $res;
 }
 
