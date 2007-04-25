@@ -10,7 +10,7 @@ define('_sommaire_SANS_FOND', '[!fond]');
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index) $index=0;
 	// image de retour au sommaire
-	$titre = _T('tweak:sommaire');
+	$titre = _T('cout:sommaire');
 	$img = 'spip_out.gif';
 	$path = dirname(find_in_path(($GLOBALS['spip_version']<1.92?"img_pack/":"images/").$img));
 	list(,,,$size) = @getimagesize("$path/$img");
@@ -78,7 +78,7 @@ border-bottom:1px dotted silver;
 line-height:1;
 position:inherit;
 font-weight:bold;'.($sansfond?'':'margin-left:15px;').'
-text-align:center;">'._T('tweak:sommaire').'</div>
+text-align:center;">'._T('cout:sommaire').'</div>
 <ul style="font-size:84%;
 list-style-image:none;
 list-style-position:outside;

@@ -19,7 +19,7 @@ include_spip("inc/presentation");
 if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
 function exec_tweak_test() {
-tweak_log("Début : exec_tweak_test()");
+cout_log("Début : exec_tweak_test()");
 	global $connect_statut, $connect_toutes_rubriques;
 	
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
@@ -33,21 +33,21 @@ tweak_log("Début : exec_tweak_test()");
 	tweak_initialisation(true);
 
 	if ($GLOBALS['spip_version_code']<1.92) 
-  		debut_page(_T('tweak:titre_tests'), 'configuration', 'tweak_spip');
+  		debut_page(_T('cout:titre_tests'), 'configuration', 'tweak_spip');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('tweak:titre_tests'), "configuration", "tweak_spip");
+		echo $commencer_page(_T('cout:titre_tests'), "configuration", "tweak_spip");
 	}
 	
 	echo "<br /><br /><br />";
-	gros_titre(_T('tweak:titre_tests'));
+	gros_titre(_T('cout:titre_tests'));
 	echo '<div style="width:98%; text-align:left; margin:0 auto">';
 	// et hop, on lance les tests !
 	tweak_les_tests();
 	echo '</div>';
 
 	echo fin_page();
-tweak_log("Fin   : exec_tweak_test()");
+cout_log("Fin   : exec_tweak_test()");
 }
 
 // renvoie un tableau contenant le texte original et sa transfrmation par la fonction $fonction

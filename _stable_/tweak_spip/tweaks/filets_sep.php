@@ -10,7 +10,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 function filets_sep_installe() {
-//tweak_log('chatons_installe()');
+//cout_log('chatons_installe()');
 	$path = dirname(find_in_path('img/filets/test'));
 	$liste = $filets = array();
 	$dossier = opendir($path);
@@ -31,9 +31,9 @@ function filets_sep_installe() {
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
-// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function filets_sep_raccourcis() {
-	return _T('tweak:filets_sep:aide', array('liste' => $GLOBALS['meta']['tweaks_filets_sep_racc']));
+	return _T('cout:filets_sep:aide', array('liste' => $GLOBALS['meta']['tweaks_filets_sep_racc']));
 }
 
 // Fonction pour generer des filets de separation selon les balises presentes dans le texte fourni.

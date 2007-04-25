@@ -8,9 +8,9 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 function smileys_installe() {
 	$path = dirname(find_in_path('img/smileys/test'));
-tweak_log("smileys_installe() : $path");
+cout_log("smileys_installe() : $path");
 	$path2 = tweak_htmlpath($path);
-tweak_log(" -- abs. path = $path2");
+cout_log(" -- abs. path = $path2");
 
 	$smileys = array(
 	// les doubles :
@@ -74,9 +74,9 @@ tweak_log(" -- abs. path = $path2");
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
-// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function smileys_raccourcis() {
-	return _T('tweak:smileys:aide', array('liste' => $GLOBALS['meta']['tweaks_smileys_racc']));
+	return _T('cout:smileys:aide', array('liste' => $GLOBALS['meta']['tweaks_smileys_racc']));
 }
 
 // fonction de remplacement
@@ -91,7 +91,7 @@ function tweak_rempl_smileys($texte) {
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
 	// accessibilite : alt et title avec le smiley en texte
 	while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
-//tweak_log('smileys traités : '.$texte);
+//cout_log('smileys traités : '.$texte);
 	return $texte;
 }
 
@@ -100,7 +100,7 @@ function tweak_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	if (!isset($GLOBALS['meta']['tweaks_smileys']) || isset($GLOBALS['var_mode']))
 		smileys_installe();
-//tweak_log('smileys trouvés !');
+//cout_log('smileys trouvés !');
 	// appeler tweak_rempl_smileys() une fois que certaines balises ont ete protegees
 	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
 }

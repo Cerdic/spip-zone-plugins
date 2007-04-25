@@ -16,7 +16,7 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 // et calcule a l'avance les images trouvees dans le repertoire img/decoupe/
 function decoupe_installe() {
-tweak_log('decoupe_installe()');
+cout_log('decoupe_installe()');
 	$path = dirname(find_in_path('img/decoupe/test'));
 	$images = array();
 	$dossier=opendir($path);
@@ -32,8 +32,8 @@ tweak_log('decoupe_installe()');
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
-// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoupe_raccourcis() {
-	return _T('tweak:decoupe:aide', array('sep' => '<strong>'._decoupe_SEPARATEUR.'</strong>'));
+	return _T('cout:decoupe:aide', array('sep' => '<strong>'._decoupe_SEPARATEUR.'</strong>'));
 }
 ?>

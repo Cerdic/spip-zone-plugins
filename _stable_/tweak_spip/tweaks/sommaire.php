@@ -15,8 +15,8 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
-// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function sommaire_raccourcis() {
-	return _T('tweak:sommaire:aide', array('interdit' => '<strong>'._sommaire_SANS_SOMMAIRE.'</strong>'));
+	return _T('cout:sommaire:aide', array('interdit' => '<strong>'._sommaire_SANS_SOMMAIRE.'</strong>'));
 }
 ?>

@@ -30,15 +30,15 @@ function decouper_en_pages_rempl($texte) {
 	$suivant = '<a href="' . parametre_url(self(),'artpage', $artpage + 1) . '">'; 
 	$debut = '<a href="' . parametre_url(self(),'artpage', 0) . '">'; 
 	$fin = '<a href="' . parametre_url(self(),'artpage', $num_pages-1) . '">';
-	$alt = 'alt="'._T('tweak:page_precedente').'"';
+	$alt = 'alt="'._T('cout:page_precedente').'"';
 	$precedent = $artpage == 0?$images['precedent_off'].'/>'
-		:$precedent.$images['precedent'].' alt="'._T('tweak:page_precedente').'"/></a>';
+		:$precedent.$images['precedent'].' alt="'._T('cout:page_precedente').'"/></a>';
 	$suivant = $artpage == ($num_pages-1)?$images['suivant_off'].'/>'
-		:$suivant.$images['suivant'].' alt="'._T('tweak:page_suivante').'"/></a>';
+		:$suivant.$images['suivant'].' alt="'._T('cout:page_suivante').'"/></a>';
 	$debut = $artpage == 0?($temp=$images['precedent_off'].'/>').$temp
-		:$debut.($temp=$images['precedent'].' alt="'._T('tweak:page_debut').'"/>').$temp.'</a>';
+		:$debut.($temp=$images['precedent'].' alt="'._T('cout:page_debut').'"/>').$temp.'</a>';
 	$fin = $artpage == $num_pages-1?($temp=$images['suivant_off'].'/>').$temp
-		:$fin.($temp=$images['suivant'].' alt="'._T('tweak:page_fin').'"/>').$temp.'</a>';
+		:$fin.($temp=$images['suivant'].' alt="'._T('cout:page_fin').'"/>').$temp.'</a>';
 
 	// liens des differentes pages sous forme : 1 2 3 4
 	$milieu = array();

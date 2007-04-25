@@ -21,7 +21,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 function couleurs_installe() {
-tweak_log("couleurs_installe()");
+cout_log("couleurs_installe()");
 
 	$couleurs = array(
 		array('noir', 'rouge', 'marron', 'vert', 'vert olive', 'bleu marine', 'violet', 'gris', 'argent', 'vert clair', 'bleu', 'fuchia', 'bleu clair', 
@@ -45,9 +45,9 @@ tweak_log("couleurs_installe()");
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par le tweak
-// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function couleurs_raccourcis() {
-	return _T('tweak:couleurs:aide', array('liste' => $GLOBALS['meta']['tweaks_couleurs_racc']));
+	return _T('cout:couleurs:aide', array('liste' => $GLOBALS['meta']['tweaks_couleurs_racc']));
 }
 
 // callbacks

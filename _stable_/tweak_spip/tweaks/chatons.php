@@ -20,7 +20,7 @@ function chatons_pre_typo($texte) {
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 function chatons_installe() {
-//tweak_log('chatons_installe()');
+//cout_log('chatons_installe()');
 	$path = dirname(find_in_path('img/chatons/test'));
 	$liste = $chatons = array();
 	$dossier=opendir($path);
@@ -39,9 +39,9 @@ function chatons_installe() {
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
-// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function chatons_raccourcis() {
-	return _T('tweak:chatons:aide', array('liste' => $GLOBALS['meta']['tweaks_chatons_racc']));
+	return _T('cout:chatons:aide', array('liste' => $GLOBALS['meta']['tweaks_chatons_racc']));
 }
 
 ?>

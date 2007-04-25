@@ -5,7 +5,7 @@ function Auteur_forum_affichage_final($flux){
 		$form = $GLOBALS['spip_version_code']<1.92?"$('.previsu').parent()":"$('.previsu').parent().parent()";
 		#	include_spip('inc/charsets');
 		// filtrer et remettre le tout dans le charset cible
-		$nom = unicode2charset(html2unicode(_T('tweak:nom_forum')));
+		$nom = unicode2charset(html2unicode(_T('cout:nom_forum')));
 		$nom = '"' . str_replace('"', '\"', $nom) . '"';
 		// code jQuery
 		$code =<<<jscode

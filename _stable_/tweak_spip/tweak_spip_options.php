@@ -15,7 +15,7 @@
 	}
 	// fonctions indispensables a l'execution
 	include_spip('tweak_spip_init');
-	tweak_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
+	cout_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
 
 	// inclusion des options pre-compilees, si l'on n'est jamais passé par ici...
 	if (!$GLOBALS['tweak_options']) {
@@ -24,12 +24,12 @@
 			// si les fichiers sont absents, on recompile tout
 			else tweak_initialisation(1);
 	}
-	tweak_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']) . ($file_exists?' et fichier trouvé':' et fichier non trouvé !!'));
+	cout_log(' -- appel mes_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']) . ($file_exists?' et fichier trouvé':' et fichier non trouvé !!'));
 
 /*
 	if(!$GLOBALS['tweak_options']) {
 		if (isset($tweaks_metas_pipes['options'])) eval($tweaks_metas_pipes['options']);
-tweak_log(' -- appel mes_options achevé par eval() ... tweak_options = '.intval($GLOBALS['tweak_options']));
+cout_log(' -- appel mes_options achevé par eval() ... tweak_options = '.intval($GLOBALS['tweak_options']));
 	}
 */
 	 $GLOBALS['log_tweaks'] |= $GLOBALS['forcer_log_tweaks'];

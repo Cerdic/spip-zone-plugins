@@ -31,10 +31,10 @@ function decoration_pre_typo($texte) {
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
-// si cette fonction n'existe pas, le plugin cherche alors  _T('tweak:mon_tweak:aide');
+// si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoration_raccourcis() {
 	$liste = '<strong>sc</strong>, <strong>souligne</strong>, <strong>barre</strong>, <strong>dessus</strong>, <strong>clignote</strong>, <strong>surfluo</strong>, <strong>surgris</strong>';
-	return _T('tweak:decoration:aide', array('liste' => $liste));
+	return _T('cout:decoration:aide', array('liste' => $liste));
 }
 
 ?>

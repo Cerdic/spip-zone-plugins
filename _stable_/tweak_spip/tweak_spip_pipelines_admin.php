@@ -18,7 +18,7 @@ function tweak_spip_ajouter_onglets($flux){
 	// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) 
 		if ($flux['args']=='configuration')
-			$flux['data']['tweak_spip']= new Bouton("administration-24.gif", _T('tweak:titre'), generer_url_ecrire("tweak_spip_admin"));
+			$flux['data']['tweak_spip']= new Bouton("administration-24.gif", _T('cout:titre'), generer_url_ecrire("tweak_spip_admin"));
 	return $flux;
 }
 /*
@@ -40,7 +40,7 @@ function tweak_spip_header_prive($flux){
 }
 
 function tweak_spip_install($action){
-tweak_log("tweak_spip_install($action)");
+cout_log("tweak_spip_install($action)");
 	include_spip('inc/meta');
 	switch ($action){
 		case 'test':

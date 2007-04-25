@@ -11,21 +11,21 @@
 //                               options                                       //
 //-----------------------------------------------------------------------------//
 /*
-add_tweak( array(
+add_outil( array(
 	'id' => 'revision_nbsp',
 	'code:options' => '$GLOBALS["activer_revision_nbsp"] = true; $GLOBALS["test_i18n"] = true ;',
 	'categorie' => 'admin',
 ));
 */
 /*
-add_tweak( array(
+add_outil( array(
 	'id' => 'desactive_cache',
 	'code:options' => "\$_SERVER['REQUEST_METHOD']='POST';",
 	'auteur' => '[C&eacute;dric MORIN->mailto:cedric.morin@yterium.com]',
 	'categorie' => 'admin',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'quota_cache',
 	'code:options' => "%%quota_cache%%",
 	'categorie' => 'admin',
@@ -47,7 +47,7 @@ add_variable( array(
 	'defaut' => "\$GLOBALS['quota_cache']",
 	'code' => "\$GLOBALS['quota_cache']=%s;",
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'SPIP_cache',
 	'code:options' => "%%radio_desactive_cache3%%\n%%quota_cache%%",
 	'categorie' => 'admin',
@@ -61,7 +61,7 @@ add_variable( array(
 	'defaut' => "\$GLOBALS['dossier_squelettes']",
 	'code' => "\$GLOBALS['dossier_squelettes']=%s;",
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'dossier_squelettes',
 	'code:options' => "%%dossier_squelettes%%",
 	'categorie' => 'admin',
@@ -75,13 +75,13 @@ add_variable( array(
 	'defaut' => "\$GLOBALS['cookie_prefix']",
 	'code' => "\$GLOBALS['cookie_prefix']=%s;",
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'cookie_prefix',
 	'code:options' => "%%cookie_prefix%%",
 	'categorie' => 'admin',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'supprimer_numero',
 	// inserer : $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';
 	'traitement:TITRE:pre_typo' => 'supprimer_numero',
@@ -90,19 +90,19 @@ add_tweak( array(
 	'categorie' => 'public',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'paragrapher',
 	'code:options' => "\$GLOBALS['toujours_paragrapher']=true;",
 	'categorie' => 'admin',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'forcer_langue',
 	'code:options' => "\$GLOBALS['forcer_lang']=true;",
 	'categorie' => 'public',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'insert_head',
 	'code:options' => "\$GLOBALS['spip_pipeline']['affichage_final'] .= '|f_insert_head';", 
 	'categorie' => 'spip',
@@ -124,19 +124,19 @@ add_variable( array(
 	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);",
 ));
 if($GLOBALS['spip_version']<1.93) {
-	add_tweak( array(
+	add_outil( array(
 		'id' => 'suite_introduction',
 		'code:options' => "%%suite_introduction%%",
 		'categorie' => 'spip',
 		'version-min' => 1.93,
 	));
-	add_tweak( array(
+	add_outil( array(
 		'id' => 'introduction',
 		'code:options' => "%%lgr_introduction%%",
 		'categorie' => 'spip',
 	));
 } else { // on regroupe les deux variables !
-	add_tweak( array(
+	add_outil( array(
 		'id' => 'introduction2',
 		'code:options' => "%%lgr_introduction%%\n%%suite_introduction%%",
 		'categorie' => 'spip',
@@ -152,7 +152,7 @@ add_variable( array(
 	'defaut' => '"avancees"',
 	'code' => "\$GLOBALS['set_options']=%s;",
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'set_options',
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'code:options' => "%%radio_set_options4%%",
@@ -167,8 +167,8 @@ add_tweak( array(
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
-	'radio' => array('page' => 'tweak:page', 'html' => 'tweak:html', 'propres' => 'tweak:propres', 'propres2' => 'tweak:propres2', 
-			'standard' => 'tweak:standard', 'propres-qs' => 'tweak:propres-qs' ),
+	'radio' => array('page' => 'cout:page', 'html' => 'cout:html', 'propres' => 'cout:propres', 'propres2' => 'cout:propres2', 
+			'standard' => 'cout:standard', 'propres-qs' => 'cout:propres-qs' ),
 	'radio/ligne' => 4,
 	'defaut' => "strlen(\$GLOBALS['type_urls'])?\$GLOBALS['type_urls']:'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;",
@@ -179,22 +179,22 @@ add_variable( array(
 	'defaut' => "get_spip_script()",
 	'code' => "define('_SPIP_SCRIPT', %s);",
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'type_urls',
 	'code:options' => "%%radio_type_urls3%%;%%spip_script%%",
 	'categorie' => 'admin',
 ));
 
-	// ici on demande a Tweak SPIP trois boutons radio : _T('tweak:js_jamais'), _T('tweak:js_defaut') et _T('tweak:js_toujours')
+	// ici on demande a Tweak SPIP trois boutons radio : _T('cout:js_jamais'), _T('cout:js_defaut') et _T('cout:js_toujours')
 add_variable( array(
 	'nom' => 'radio_filtrer_javascript3',
 	'format' => 'nombre',
-	'radio' => array(-1 => 'tweak:js_jamais', 0 => 'tweak:js_defaut', 1 => 'tweak:js_toujours'),
+	'radio' => array(-1 => 'cout:js_jamais', 0 => 'cout:js_defaut', 1 => 'cout:js_toujours'),
 	'defaut' => 0,
 	// si la variable est non nulle, on code...
 	'code:%s' => "\$GLOBALS['filtrer_javascript']=%s;",
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'filtrer_javascript',
 	'code:options' => "%%radio_filtrer_javascript3%%",
 	'categorie' => 'admin',
@@ -209,7 +209,7 @@ add_variable( array(
 	'defaut' => 0,
 	'code:%s' => "define('_FORUM_LONGUEUR_MAXI', %s);",
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'forum_lgrmaxi',
 	'code:options' => "%%forum_lgrmaxi%%",
 	'categorie' => 'admin',
@@ -223,35 +223,35 @@ add_tweak( array(
 	'defaut' => 0,
 	'code' => "define('_FORUM_OBLIGE_AUTEUR', %s);",
 ));*/
-add_tweak( array(
+add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'admin',
 	'code:options' => "define('_FORUM_OBLIGE_AUTEUR', 'oui');",
 	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
 ));
 
-	// ici on demande a Tweak SPIP trois boutons radio : _T('tweak:sf_defaut'), _T('tweak:sf_amont') et _T('tweak:sf_tous')
+	// ici on demande a Tweak SPIP trois boutons radio : _T('cout:sf_defaut'), _T('cout:sf_amont') et _T('cout:sf_tous')
 add_variable( array(
 	'nom' => 'radio_suivi_forums3',
 	'format' => 'chaine',
-	'radio' => array('defaut' => 'tweak:sf_defaut', '_SUIVI_FORUMS_REPONSES' => 'tweak:sf_amont', '_SUIVI_FORUM_THREAD' => 'tweak:sf_tous'),
+	'radio' => array('defaut' => 'cout:sf_defaut', '_SUIVI_FORUMS_REPONSES' => 'cout:sf_amont', '_SUIVI_FORUM_THREAD' => 'cout:sf_tous'),
 	'defaut' => '"defaut"',
 	// si la variable est différente de 'defaut' alors on codera le define
 	'code:%s!=="defaut"' => "define(%s, true);",
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'suivi_forums',
 	'code:options' => "%%radio_suivi_forums3%%",
 	'categorie' => 'admin',
 	'version-min' => 1.92,
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'log_tweaks',
 	'code:options' => "\$GLOBALS['log_tweaks']=true;",
 ));
 
-add_tweak( array (
+add_outil( array(
 	'id' => 'xml',
 	'code:options' => "\$GLOBALS['xhtml']='sax';",
 	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
@@ -259,7 +259,7 @@ add_tweak( array (
 	'version-min' => '1.92',
 ));
 
-add_tweak( array (
+add_outil( array(
 	'id' => 'f_jQuery',
 	'code:options' => "\$GLOBALS['spip_pipeline']['insert_head'] = str_replace('|f_jQuery', '', \$GLOBALS['spip_pipeline']['insert_head']);",
 	'auteur' => 'Fil',
@@ -279,7 +279,7 @@ add_variable( array(
 	'defaut' => '"spip"',
 	'code:strlen(%s)' => ' class=%s',
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'class_spip',
 	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';",
 	'categorie' => 'public',
@@ -290,19 +290,19 @@ add_tweak( array(
 //                               fonctions                                     //
 //-----------------------------------------------------------------------------//
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'verstexte',
 	'auteur' => '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'categorie' => 'spip',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'orientation',
 	'auteur' 	 => 'Pierre Andrews (Mortimer) &amp; IZO',
 	'categorie' => 'spip',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'decoupe',
 	'code:options' => "define('_decoupe_SEPARATEUR', '++++');",
 	// inserer : $table_des_traitements['TEXTE'][]= 'decouper_en_pages(propre(%s))';
@@ -314,7 +314,7 @@ add_tweak( array(
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
 include_spip('inc/texte');
 $code = str_replace("'", "\'", tweak_code_echappement("<!--  -->\n", 'SOMMAIRE'));
-add_tweak( array(
+add_outil( array(
 	'id' => 'sommaire',
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",
 	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
@@ -327,7 +327,7 @@ add_tweak( array(
 //-----------------------------------------------------------------------------//
 
 // TODO : gestion du jQuery dans la fonction a revoir ?
-add_tweak( array(
+add_outil( array(
 	'id' => 'desactiver_flash',
 	'auteur' 	 => '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'categorie'	 => 'public',
@@ -347,7 +347,7 @@ add_variable( array(
 	'defaut' => '$GLOBALS["url_glossaire_externe"]',
 	'code:strlen(%s)' => '$GLOBALS["url_glossaire_externe"]=%s;',
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'SPIP_liens',
 	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe%%",
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
@@ -359,27 +359,27 @@ add_tweak( array(
 //                               TYPO                                          //
 //-----------------------------------------------------------------------------//
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'toutmulti',
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'ToutMulti_pre_typo',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'pucesli',
 	'auteur' 	 => '[J&eacute;r&ocirc;me Combaz->http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz]',
 	'categorie'	 => 'typo-corr',
 	'pipeline:pre_typo' => 'pucesli_pre_typo',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'decoration',
 	'auteur' 	 => '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'decoration_pre_typo',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'couleurs',
 	'auteur' 	 => '[Aur&eacute;lien PIERARD->mailto:aurelien.pierard(a)dsaf.pm.gouv.fr]',
 	'categorie'	 => 'typo-racc',
@@ -387,14 +387,14 @@ add_tweak( array(
 ));
 
 // tweak specifiquement français. D'autres langues peuvent etre ajoutees dans tweaks/typo_exposants.php
-add_tweak( array(
+add_outil( array(
 	'id' => 'typo_exposants',
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'categorie'	 => 'typo-corr',
 	'pipeline:post_typo' => 'typo_exposants',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'guillemets',
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'categorie'	 => 'typo-corr',
@@ -404,32 +404,32 @@ add_tweak( array(
 add_variable( array(
 	'nom' => 'liens_orphelins',
 	'format' => 'nombre',
-	'radio' => array(0 => 'tweak:basique', 1 => 'tweak:etendu'),
+	'radio' => array(0 => 'cout:basique', 1 => 'cout:etendu'),
 	'defaut' => 0,
 	'code:%s' => '$GLOBALS["liens_orphelins_etendu"]=true;',
 ));
-add_tweak( array(
+add_outil( array(
 	'id' => 'liens_orphelins',
 	'categorie'	 => 'typo-corr',
 	'code:options' => '%%liens_orphelins%%',
 	'pipeline:pre_propre' => 'liens_orphelins',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'filets_sep',
 	'auteur' 	 => 'FredoMkb',
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'filets_sep',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'smileys',
 	'auteur' 	 => 'Sylvain',
 	'categorie'	 => 'typo-corr',
 	'pipeline:pre_typo' => 'tweak_smileys_pre_typo',
 ));
 
-add_tweak( array(
+add_outil( array(
 	'id' => 'chatons',
 	'auteur' 	 => 'BoOz (booz.bloog@laposte.net)',
 	'categorie'	 => 'typo-racc',
@@ -449,6 +449,6 @@ add_tweak( array(
 // colorations du code
 // boutonstexte
 
-tweak_log("Fin de tweak_spip_config.php");
-//global $tweak_variables; tweak_log($tweak_variables, 'tweak_variables :');
+cout_log("Fin de tweak_spip_config.php");
+//global $tweak_variables; cout_log($tweak_variables, 'tweak_variables :');
 ?>

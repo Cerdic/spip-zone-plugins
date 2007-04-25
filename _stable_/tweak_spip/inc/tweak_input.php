@@ -23,7 +23,7 @@ function tweak_input_une_variable($index, $tweak, $variable, $label, &$ok_input_
 	if (isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
 		else $valeur = tweak_get_defaut($variable);
 	$valeur = tweak_retire_guillemets($valeur);
-tweak_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
+cout_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 
 	// si la variable necessite des boutons radio
 	if (is_array($radios = &$tweak_variables[$variable]['radio'])) {
@@ -45,7 +45,7 @@ tweak_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 		$len = $tweak_variables[$variable]['format']=='nombre'?4:0;
 //			else $len=strlen(strval($valeur));
 		$ok_input = $label."<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' />"._TWEAK_VAR;
-		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('tweak:variable_vide'));
+		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('cout:variable_vide'));
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
@@ -63,7 +63,7 @@ function inc_tweak_input_dist($tweak0, $url_self, $modif=false) {
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 	
-tweak_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
+cout_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 	$ok_input = $ok_valeur = $ok_visible = '';
 	$tweak['nb_variables'] = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if (strlen($var=trim($t[$i+1]))) {
@@ -88,11 +88,11 @@ tweak_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _TWEAK_VAR s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si le tweak est inactif
 	if ($actif) {
-		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('tweak:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
+		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('cout:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
 		if($c>1) $ok_input .= "<div style=\"margin-top: 0; text-align: right;\">$bouton</div>";
 			else $ok_input = str_replace(_TWEAK_VAR, $bouton, $ok_input);
 	} else 
-		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('tweak:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
+		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('cout:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
 	// nettoyage...
 	$ok_input = str_replace(_TWEAK_VAR, '', $ok_input);
 	// HIDDENTWEAKVAR__ pour eviter d'avoir deux inputs du meme nom...
@@ -110,8 +110,8 @@ tweak_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 		$res = ajax_action_auteur('tweak_input', $index, $url_self, "tweak={$tweak['id']}", "$res");
 	}
-//tweak_log("Fin   : inc_tweak_input_dist({$tweak['id']}) - {$tweak['nb_variables']} variables(s) trouvée(s)");
-	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('tweak:vars_modifiees').'&nbsp;&lt;</div>':'';
+//cout_log("Fin   : inc_tweak_input_dist({$tweak['id']}) - {$tweak['nb_variables']} variables(s) trouvée(s)");
+	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('cout:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return ajax_action_greffe("tweak_input-$index", $res, $modif);
 }
 ?>
