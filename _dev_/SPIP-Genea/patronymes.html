@@ -1,0 +1,95 @@
+#CACHE{86400}
+<BOUCLE_genea(SPIP_GENEA){id_genea}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title><:genea:liste_des_patronymes:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta name="description" content="<:genea:desc_liste_des_patronymes:>" />
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_genea">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<BOUCLE_rub(RUBRIQUES){id_rubrique}><div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:liste_des_patronymes:></div></BOUCLE_rub>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				[(#LOGO_INDIVIDU||image_reduire{80,80})]
+				<BOUCLE_nom_famille(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>[<p class="surtitre">(#TITRE||supprimer_numero)</p>]</BOUCLE_nom_famille>
+				<h1 class="titre"><:genea:liste_des_patronymes:></h1>
+				<p class="soustitre"><:genea:soustitre_patronyme:></p>
+				#FIN_SURLIGNE	
+			</div>
+			
+			#DEBUT_SURLIGNE
+			<div class="chapo"><:genea:desc_liste_des_patronymes:></div>
+			
+			<br class="nettoyeur" />
+			<div class="texte">
+				<div class="tab-pane">
+
+<?php
+function aff_cellule($initial){
+	echo "<div class='tab-page'>\n";
+	echo "	<h2 class='tab'>".chr($initial)."</h2>\n";
+	echo "	<p>";
+	$arbre = #ID_GENEA;
+	$result = spip_query("SELECT nom, COUNT(nom) FROM spip_genea_individus WHERE (id_genea=$arbre) GROUP BY nom HAVING ((nom>='".chr($initial)."' And nom<'".chr($initial+1)."')) ORDER BY nom");
+	$flux = "";
+	while (list ($nom, $nombre) = mysql_fetch_row($result)) {
+		if ($flux!='') { $flux .=", "; }
+		$flux .= "\n";
+		$url = "[(#URL_PAGE{individus})]";
+		if ($url!='') {
+			$url = parametre_url($url, 'id_genea', $arbre);
+			$url = parametre_url($url, 'nom', $nom);
+		}
+		$flux .= "		<a class='spip_in' href='$url'>$nom</a> &#91;$nombre&#93;";
+	}
+	if ($flux=='') { $flux .="		&nbsp;"; } else {  }
+	echo $flux; 	
+	echo "	</p>\n";
+	echo "</div>\n";
+}
+aff_cellule(63);
+$car = 65;
+while ($car < 91) {
+	aff_cellule($car);
+	$car++;
+}
+?>				
+				</div>
+			</div>
+            #FIN_SURLIGNE
+
+		</div><!-- fin contenu -->
+
+        [(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+        	[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<INCLURE{fond=inc-genealogie}{patronymes=1}{small=oui}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+    [(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_genea>

@@ -1,0 +1,15 @@
+<h3 class="spip"><:genea:liste_des_individus|majuscules|image_typo{police=ArgFlahm.ttf,taille=36}:></h3>
+<B_genea>
+<div>
+<BOUCLE_genea(INDIVIDUS){id_genea=#ENV{id_genea}} {par nom, prenoms}>
+	[<h4 class="spip">(#NOM|unique)</h4>]
+	[<ul>[(#SEXE|=={M}|?{' ',''}) #SET{titre_sexe, 'male'}] [(#SEXE|=={F}|?{' ',''}) #SET{titre_sexe, 'femelle'}]
+		<li class="tdindividu">
+			[<img src="#EVAL{_DIR_PLUGIN_GENEA}/img_pack/(#GET{titre_sexe}).gif" alt="" border="0" width="17" height="17" />]&nbsp;
+			<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]" class="individus">(#PRENOMS)</a>&nbsp;
+			<span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span>
+		</li>
+	</ul>]
+</BOUCLE_genea>
+</div>
+</B_genea>

@@ -1,0 +1,797 @@
+@charset "utf-8";
+																									
+/*--------------------------------------------------------------------------------------------------*/
+/* Feuille de styles css2 pour les exports Web d'Ancestrologie via le plugin CreationWeb            */ 
+/* documentation en français sur les css à http://www.yoyodesign.org/doc/w3c/css2/cover.html        */	
+/* version 8 septembre 2005 pour v2.0.8 															*/
+/*																									*/
+/* Conseils pour les modifications :							 						            */
+/*     Si vous ne comprenez pas bien le fonctionnement des css, informez-vous avant toute modif 	*/
+/*     Soyez prudents : modifiez un paramètre à la fois											    */ 
+/*     N'hésitez pas à commenter vos modifications                                                  */
+/*     Vous pouvez modifier et ajouter des paramètres entre les accolades, 							*/
+/*     mais en aucun cas les sélecteurs le long de la marge gauche (ils sont référencés 			*/
+/*     par le code html des pages. Pour en ajouter, il faut modifier le code de CreationWeb 	    */
+/*     Ne modifiez JAMAIS creationweb.css mais une copie renommée indiquée 						    */
+/*     dans l'onglet Paramétrage de CreationWeb  								    			    */
+/*     Pour des essais ponctuels, modifiez le fichier css qui se trouve dans 					    */
+/*     ...\Ancestrologie\ExportsWeb\Mon_dossier, il suffit ensuite de rafraîchir 				    */
+/*     l'affichage de la page dans le browser pour voir immédiatement l'effet produit			    */
+/*     Attention : il sera écrasé lors de la prochaine exécution de CreationWeb					    */
+/*     donc dès que vous êtes satisfait, sauvegardez le dans ...\Ancestrologie\ExportsWeb\Templates */
+/*     Si vous modifiez le fichier css qui se trouve dans ...\Ancestrologie\ExportsWeb\Templates	*/
+/*     vous devrez exécuter CreationWeb pour voir l'effet produit									*/
+/*     Rappelez-vous que c'est le browser qui exploite le contenu du css :							*/
+/*     Tous les paramètres déclarés légaux par la documentation officielle ne produisent pas		*/
+/*     nécessairement l'effet escompté (voire pas d'effet du tout) sur votre browser,				*/
+/*     donc pensez que vos futurs visiteurs le feront peut-être avec un browser différent			*/
+/*     du vôtre. Testez donc vos modifications au moins avec IE et Firefox							*/
+/*     Nota : si le contenu de ce fichier vous apparaît mal aligné, c'est qu'il contient aussi bien */
+/*     des tabulations que des espaces... Ça n'a pas d'importance sur le fonctionnement				*/
+/*																									*/
+/*     Si vous êtes satisfait du résultat et qu'il change profondément l'aspect de vos pages,		*/
+/*     faites m'en part à yves.bruant@magic.fr pour que	j'en fasse profiter tout le monde           */
+/*     Faites-moi vos commentaires à la même adresse                                                */
+/*--------------------------------------------------------------------------------------------------*/
+
+/*
+body   { 
+font-size: 10pt;  /* changer cette valeur pour redimentionner globalement le texte des pages générées  */
+                  /* mais il faut aussi ajuster la taille font de ulonglet et les valeurs en découlant */
+/*scrollbar-arrow-color:#fd9;	scrollbar-base-color: #011; scrollbar-face-color: #9bc;	 /* spécifique de IE */
+/*font-family: Verdana, Arial, Helvetica, sans-serif; 
+margin: 0 1px 1px 0; 
+padding: 0 0 0 0; 
+color: #036; 
+background-color: #ffe; 
+border: 0px dotted green; 	 
+}
+
+table          				  { font-size: 100%; color: #036; empty-cells: show; border: 0px solid silver }
+tr             				  { font-size: 100%; color: #036 }
+td             				  { font-size: 100%; color: #036 }
+a:link        				  { text-decoration: none; color: #036}
+a:visited     				  { text-decoration: none; color: #036}
+a:hover       				  { text-decoration: underline; color: #036 }  
+*/
+.nowrap						  { white-space: nowrap; }
+
+
+/* utilisé pour le formatage de toutes les pages */
+/*div#page                      { text-align: left; border: 0px dashed blue; margin: 0 0 0 0 } */
+
+/* utilisé pour les liens vers principaux - patronymes, prénoms, professions et lieux */
+/*div#principaux 				  { text-align: left; font-size: 60%; font-weight: bold; font-style: italic }*/
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Boutons de navigation                                                                      */
+/*--------------------------------------------------------------------------------------------*/
+div#adnavtop    			  { margin: 0.3em 0 0 0; text-align: center; border: 0px solid red } /* pour barre de navigation */	  
+div#adnavbot    			  { margin: -0.1em 0 0 0; text-align: center; border: 0px solid red } /* pour barre de navigation */   
+.petit                        { font-size: 70% }
+.navbut 					  { width: 31px; height: 14px; border: 0px none; margin: 0 8px;  }
+				 						   
+				 
+				 
+
+/*--------------------------------------------------------------------------------------------*/
+/* Présentation des onglets de navigation                                                     */
+/*--------------------------------------------------------------------------------------------*/
+/* debut de mise en forme des onglets de navigation principaux. Voir les commentaires pour adapter */  
+ul.onglet {
+    font-size: 10px;                /* taillefont ; mettre ici la taille voulue */
+    padding-bottom: 16px;           /* mettre ici : taillefont + padvaltop + padvalbot + (2 * borderep) + margeval + 1 */
+    border-bottom: 1px solid #432;  /* borderep */
+    font-weight: bold; list-style-type: none; margin: 0px 0px 1px 0px;	background: #875 } 
+
+ul.onglet li {
+	height: 13px;                   /* mettre : taillefont + padvaltop + padvalbot + (2 * borderep) */
+	margin: 2px 2px 0 2px;          /* margeval */
+    float: left; background-color: #fd9; border: 1px solid #400; }
+
+ul.onglet li.invisible        { background-color: silver; text-decoration: line-through; } 							  
+
+.onglet li.invisible a:hover  { background-color: silver; color: #666; } 
+
+.onglet a { 
+	padding-top: 0px;               /* padvaltop */										
+	padding-bottom: 1px;			/* padvalbot */
+	width: 130px;	                /* largeur de l'onglet */
+    float: left; display: block; color: #666; text-decoration: none; text-align: center; }
+
+.onglet a:hover               {	background: #432; color: #ffe; text-decoration: none; }
+
+ul.onglet li.actif            {	border-bottom: 1px solid #ffe; background-color: #ffe; }
+
+ul.onglet li.actif a          {	color: #400; }
+
+.onglet li.actif a:hover      {	background: #432; color: #ffe; font-weight: bolder; border-bottom: 1px solid #432; } 
+/* fin de mise en forme des onglets de navigation principaux */  
+										
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Présentation des lettres de sélection                                                      */
+/*--------------------------------------------------------------------------------------------*/
+/* utilisé pour les lettres en tête des lignes des pages patronymes et prénoms */
+div.lettres			  		  { line-height: 200%; text-align: center; font-size: 140%; font-weight: normal; color: #800; font-style: italic }
+.lettres a:link       		  { font-size: 100%; font-weight: bold; text-decoration: none;  }
+.lettres a:visited    		  { font-size: 100%; font-weight: bold; text-decoration: none;  }
+.lettres a:hover      		  { font-size: 100%; font-weight: bold; text-decoration: none; background: #fd9}	  
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/ 
+/*  Menu principal en haut des pages 				     									  */
+/*--------------------------------------------------------------------------------------------*/ 
+/* couleur fond du menu */				 
+table.mainmenu                { width: 100%; border-collapse: collapse ; border-style: solid; border-width: 1px; border-color: #357; margin: 1px 0 0 0 }
+/* couleur fond du menu */				 
+table.mainmenu tr             { background: #357; width: auto; line-height: 100% }
+/* couleur cellule du menu */				 
+table.mainmenu td             { text-align: center; border: 1px solid #ffe }
+/* caractères des liens de menu */
+table.mainmenu a:link         { font-size: 100%; font-weight: bold ; text-decoration: none; color: #ffe } 
+table.mainmenu a:visited      { font-size: 100%; font-weight: bold ; text-decoration: none; color: #ffe }
+table.mainmenu a:hover        { font-size: 100%; font-weight: bold ; text-decoration: none; color: #fd9; background: #432; display: block }
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Haut de page                                                                               */
+/*--------------------------------------------------------------------------------------------*/  
+/* cadre pour le titre  */
+table#hautpage                { border-collapse: separate; border: 0px none;  }
+/* couleur de fond du titre */
+table#hautpage tr             { background : #fd9 }
+table#hautpage td             { font-size: 160%; font-weight: bold; text-align: center; border-right: 1px solid #997; border-bottom: 1px solid #997; width: 100% }
+table#hautpage td.ancestro    { border-right: 1px solid #997; border-bottom: 1px solid #997; width: 1%; padding-left: 0.5em; padding-right: 0.5em }
+table#hautpage td.ancestro    { border-right: 1px solid #997; border-bottom: 1px solid #997; width: 1%; padding-left: 0.5em; padding-right: 0.5em }
+img.ecu                       { border: 0px none; margin: 0 }
+/* texte du sous-titre des pages le cas échéant */ 
+span#hautpagesoustitre        { font-size: 80%; font-weight: bold }
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Bas de page                                                                                */
+/*--------------------------------------------------------------------------------------------*/					  
+/* texte de bas de page */
+p#textebas  		          { margin: 0.5em 3% 0.3em 3%; text-align: center; font-size: 80%; font-weight: normal }
+/* Utilisé pour l'affichage des infos de copyright en bas de page */
+table#pied                    { margin: 0.5em 0; border: 0px none; border-collapse: separate; display: block } 
+table#pied tr                 { background : #fd9 }
+table#pied td                 { font-size: 100%; font-weight: bold; text-align: center; border-right: 1px solid #997; border-bottom: 1px solid #997; width: 100% }
+table#pied td.but             { border-right: 1px solid #997; border-bottom: 1px solid #997; width: 1%; padding: 0; }
+table#pied td.but img         { border: 2px outset silver; vertical-align: middle; padding: 0; margin: 0; height: 14px; width: 30px }
+table#pied td.but img:active  { border: 2px inset silver; vertical-align: middle; padding: 0; margin: 0; height: 14px; width: 30px }
+
+span#pied1                    {   }
+span#pied2					  { font-style: italic }
+span#pied3					  {  }
+span#pieddateheure			  { font-size: 80% } 
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* page Accueil                                                                               */
+/*--------------------------------------------------------------------------------------------*/ 
+/* utilisé pour le texte haut de la page d'accueil */ 
+p#textehaut  		          { margin: 0.5em 3% 0 3%; font-size: 80%; font-weight: normal; text-align: center }
+/* texte de l'email Ecrivez-moi à : */									 
+p#email                       { margin: 0.5em 0 0 0; text-align: center }
+/* lien email */
+p#email a:link                { font-size: 100%; font-weight: bold ; text-decoration: none; color: #00f }
+p#email a:visited             { font-size: 100%; font-weight: bold ; text-decoration: none; color: #00f }
+p#email a:hover               { font-size: 100%; font-weight: bold ; text-decoration: underline; color: #036 }
+/* lien gedcom */
+p#gedcom                      { margin: 0.5em 0 0 0; text-align: center }
+p#gedcom a:link               { font-size: 100%; font-weight: bold; text-decoration: none; color: #036 }
+p#gedcom a:visited            { font-size: 100%; font-weight: bold ; text-decoration: none; color: #036 }
+p#gedcom a:hover              { font-size: 100%; font-weight: bold ; text-decoration: underline; color: #036 }
+/* table pour les stats */	
+div.stats					  { text-align: center }  /* nécessaire à cause d'IE */
+table#stats                   { margin: 1em auto 0 auto; border: 8px ridge #f60; text-align: center; border-collapse: collapse } 
+/* couleur pour le fond du titre des stats */
+table#stats th                { background : #fd9; padding: 0.2em 0 0.2em 0; font-size: 110%; font-weight: bold; border-bottom: 1px solid silver; margin: 0 }	
+/* fond pour les stats */
+table#stats td                { padding: 0.2em 4em 0.1em 4em; font-size: 100%; font-weight: normal; text-align: center; background: #eed; margin: 0 }
+/* Texte des variables des statistiques */
+span.statsval 	              { font-weight: bold }
+/* utilisé pour le cadre des photos d'identité */	
+div#photos                    { margin: 0.5em 0 0 0; text-align: center }
+img.pidentaccueil             { border: 8px ridge #f60; margin: 0.5em 0.5em 0 0.5em }
+  
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Pages Patronymes                                                                           */
+/*--------------------------------------------------------------------------------------------*/
+/* utilisé pour l'affichage des patronymes sur la page des patronymes */   
+table#patronymes			{ font-weight: bold; margin: auto; border: 2px outset #fd9; text-align: center; padding: 0px; empty-cells: show; width: 100%; }
+table#patronymes td.lstnom	{ border: 2px inset #fd9; padding-left: 1em; padding-right: 1em; padding-top: 3px; padding-bottom: 3px; font-size: 70%; }
+table#patronymes td.initial	{ border: 2px inset #fd9; padding-left: 0.5em; padding-right: 0.5em; padding-top: 3px; padding-bottom: 3px; vertical-align: top; font-size: 160%; font-weight: bold; color: maroon; width: 3em; }
+a.nom:link        				  { text-decoration: none; color: #036; }
+a.nom:visited     				  { text-decoration: none; color: #036; }
+a.nom:hover       				  { text-decoration: underline; color: #036; }  
+span.nombre					{ color: red; vertical-align: middle; font-style: normal; }
+
+div#titrecourpatronymes       { margin: 0.5em 0 0 0; text-align: center; font-size: 140%; font-style: italic; font-weight: bold; background: #fd9; border: 1px outset #fd9 }
+div#courpatronymes            { margin: 0.5em 0 0 0; text-align: center; font-size: 100%; font-weight: bold; background: #ffe }  
+div#courpatronymes table      { font-weight: bold; margin: auto }
+div#courpatronymes td         { border: 0px outset silver }
+div#courpatronymes td.nom     {  }
+div#courpatronymes td.nbre    { text-align: right; padding-left: 2em }
+
+div#patronyme2p  	          { text-align: center; margin: 0.5em 0 0 0 }
+div#patronyme2p table         { font-weight: bold; margin-left: auto; margin-right: auto; padding: 0; border-collapse: collapse }
+	  
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Pages Prénoms                                                                              */
+/*--------------------------------------------------------------------------------------------*/
+/* utilisé pour l'affichage des patronymes sur la page des patronymes */ 
+div#prenoms                   { margin: 0.5em 0 0 0; text-align: center }
+div#prenoms table             { font-weight: bold; margin: auto; border: 1px outset #fd9; text-align: center }
+div#prenoms td                { border: 1px inset #fd9; padding-left: 1em; padding-right: 1em; padding-top: 3px; padding-bottom: 3px }
+div#prenoms td.g              { padding-left: 0.5em; padding-right: 0.5em; padding-top: 3px; padding-bottom: 3px; vertical-align: top; font-size: 160%; font-weight: bold; color: maroon }
+div#prenoms td.d              { padding-left: 0.5em; padding-right: 0.5em; padding-top: 3px; padding-bottom: 3px; vertical-align: bottom; font-size: 160%; font-weight: bold; color: maroon }
+
+div#titrecourprenoms          { margin: 0.5em 0 0 0; text-align: center; font-size: 140%; font-style: italic; font-weight: bold; background: #fd9; border: 1px outset #fd9 }  
+div#courprenoms               { margin: 0.5em 0 0 0; text-align: center; font-size: 100%; font-weight: bold; background: #ffe }  
+div#courprenoms table         { font-weight: bold; margin: auto }
+div#courprenoms td            { border: 0px outset silver }
+div#courprenoms td.nom        {  }
+div#courprenoms td.nbre       { text-align: right; padding-left: 2em }	  
+
+div#indivprenoms	          { text-align: center; margin: 0.5em 0 0 0 }
+div#indivprenoms table        { font-weight: bold; margin-left: auto; margin-right: auto; padding: 0; border-collapse: collapse }
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Pages Individus                                                                            */
+/*--------------------------------------------------------------------------------------------*/
+/* utilisé pour les libellés "Page n de nn" */
+span.petit                    { font-size: 80%; }
+/* utilisé pour l'affichage du numéro sosa aboville */
+
+div#individus		          { text-align: center; margin: 0.5em 0 0.3em 0 }
+div#individus table           { font-weight: bold; margin-left: auto; margin-right: auto; padding: 0; border-collapse: collapse}	   
+/* utilisé pour séparer les patronymes différents. mettre border-top: 0px ... pour supprimer la ligne */
+div#individus table tr.interligne td {border-top: 1px solid #5af; text-align: right; font-size: 80%; color: #5af }
+
+/* utilisé par toutes les lignes d'individus */
+td.evtype			          { border: 0px solid red; padding: 0 0.5em 0 0.5em; text-align: center; font-weight: bolder; font-size: 100%; color: maroon; cursor: pointer }
+td.tdnotes                    { border: 0px solid red; text-align: center; vertical-align: middle }
+td.tdpident                   { border: 0px solid red; text-align: center; vertical-align: middle }
+td.tdsexe                     { border: 0px solid red; text-align: center; vertical-align: middle }
+td.tdindividu                 { border: 0px solid red; text-align: left;   vertical-align: middle }
+img.noteident                 { margin: 0 0.5em 0 0.5em; border: 0px solid #039; height: 14px }
+img.photoident                { margin: 0 0.5em 0 0.5em; border: 1px solid #039; height: 12px }
+img.photoident:hover          { border: 1px solid #039; height: 58px }	 /* provoque le zoom de la photo d'identité. Ne marche pas avec IE */
+img.sexeident                 { margin: 0 0.5em 0 0.5em; border: 0px solid #039; height: 14px }
+   
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Pages Fiches                                                                               */
+/*--------------------------------------------------------------------------------------------*/
+/* utilisé pour l'affichage du numéro soza dans l'ascendance */
+span.ascsosa                  { font-size: 80%; font-weight: bold; color: #390; font-style: italic; font-weight: bold; margin: 0 0.7em 0 0.3em }   
+
+div#fiches                    { margin: 0.5em 0 0 0; }
+div.fiche                     { border: 2px solid #036; margin: 0 0 0.5em 0 }		
+table.titrefiche              { width: 100%; background:#fd9; border-bottom: 1px outset #fd9 }
+td.imagesexe                  { width: 1%; padding-left: 0.5em; padding-right: 0.5em }
+td.nomfiche                   { font-size: 160%; font-weight: bold; color: #036 }
+/* utilisé pour le numéro sosa dans le titre */
+span.titsosa                  { font-size: 80%; font-weight: bold; color: #390; font-style: italic; padding-left:1em }
+/* utilisé pour le surnom, sous le titre */
+span.surnom                   { font-size: 90%; font-weight: bold; text-shadow: 3px 3px 5px maroon; font-style: italic }	
+/* utilisé pour le cadre des photos d'identité */
+img.pident                    { border: 8px ridge #f60; margin: 1em 2em 1em 2em }
+img.pasdepident               { border: 8px solid #ffe; margin: 1em 2em 1em 2em }
+img.jamaisdepident            { border: 0px ridge #f60; margin: 0 }
+
+td.photoidentite              { width: 1%; text-align: center; vertical-align: top }
+td.prompt			          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.data				          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 1em }
+/* prefixe-suffixe */
+td.promptprefixe	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.dataprefixe		          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 1em }
+/* profession */
+td.promptprofession1          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.dataprofession1	          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 1em }
+td.promptprofession           { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 0.2em }
+td.dataprofession	          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 0.2em }
+/* naissance-décès */
+td.promptnaissdeces	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.datanaissdeces	          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 1em }
+/* parents */
+td.promptparents	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.dataparents  	          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 1em }
+/* Unions */
+td.promptunion	  	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.dataunion                  { font-weight: bold; text-align: left; vertical-align: top; padding-top: 1em; vertical-align: top }
+td.promptconjointinconnu      { font-style: italic; text-align: left; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.prompteveunion1	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 0.1em; width: 15% }
+td.dataeveunion1	          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 0.1em }
+td.prompteveunion	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 0em; width: 15% }
+td.dataeveunion		          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 0em }
+/* Enfants */
+td.promptenfant1  	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 0.3em }
+td.dataenfant1		          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 0.3em }
+td.promptenfant	  	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 0em }
+td.dataenfant		          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 0em }	 
+img.sexeenfant                { border: 0px none; margin-left:0; margin-right:0.2em; margin-top:0; margin-bottom:0 }
+/* Evenements */
+td.promptevenements1          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.dataevenements1	          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 1em }	 
+td.promptevenements	          { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 0.2em }
+td.dataevenements	          {	font-weight: bold; text-align: left; vertical-align: top; padding-top: 0.2em }	 
+  /* libellé événement */
+  span.evelib	              { font-size: 80%; font-weight: bold }								
+  /* descripteur événement */
+  span.evedesc	  	          { font-size: 80%; font-weight: bold }								
+  /* adresse événement */
+  span.eveadd		          { font-size: 80%; font-weight: bold }								
+  /* date événement */
+  span.evedate 		          { font-size: 80%; font-weight: bold }								
+  /* commentaire événement */
+  span.evecomment 	          { font-size: 70%; font-weight: normal }		
+/* Notes */
+td.promptnotes 	              { font-style: italic; text-align: right; vertical-align: top; padding-right: 0.1em; padding-top: 1em }
+td.datanotes	              {	font-weight: normal; text-align: left; vertical-align: top; padding-top: 1em }	   
+/* arbre d'ascendance */
+div.ascendance		          { position: relative; margin: 0.5em 0 0 0; border: 0px solid red; } 
+span.ascendanceprompt         { position: absolute; top: -0.5em; left: 1em; font-style: italic; }
+table.ascendance              { width: 100% }
+table.ascendance td           { width: 33% }
+table.ascendancehomme         { background: #ddf; border-collapse: collapse; width: 100%; border-right: 1px solid silver; border-bottom: 1px solid silver; }
+table.ascendancehomme td      { font-size: 100%; font-weight: bold; color: #445; }	  
+table.ascendancefemme         { background: #fdd; border-collapse: collapse; width: 100%; border-right: 1px solid silver; border-bottom: 1px solid silver; }
+table.ascendancefemme td      { font-size: 100%; font-weight: bold; color: #544; }	
+a.buttopfiches                { border: 1px outset #036; }
+a.buttopfiches:active         { border: 1px inset #036; }
+.ficimplexe                   { font-size: 80%; font-weight: bold; font-style: italic; color: maroon; text-decoration: blink }
+.ficimplexe a                 { color: maroon; }	   
+
+/* Bouton */
+a.boutonemail { /* définition de la classe "image" de la balise <a> */
+     display: block; /* la balise a doit être en bloc */
+     width: 61px; /* largeur de l'image réactive */
+     height: 19px; /* hauteur de l'image réactive */
+     background-image: url('../../../../Genea/ficheemailn.png'); /* source de l'image de départ */  
+     background-repeat: no-repeat; 
+	 margin: 0 auto
+     }
+	 
+a.boutonemail:link { /* définition de la classe "image" de la balise <a> au clic */
+     background-image: url('../../../../Genea/ficheemailn.png'); /* source de l'image d'arrivée */
+     }  
+
+a.boutonemail:visited { /* définition de la classe "image" de la balise <a> au clic */
+     background-image: url('../../../../Genea/ficheemailn.png'); /* source de l'image d'arrivée */
+     }  
+
+a.boutonemail:hover { /* définition de la classe "image" de la balise <a> au survol */
+     background-image: url('../../../../Genea/ficheemailh.png'); /* source de l'image d'arrivée */
+     }  
+
+a.boutonemail:focus { 
+     background-image: url('../../../../Genea/ficheemaila.png'); 
+     }  
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Page Lieux                                                                                 */
+/*--------------------------------------------------------------------------------------------*/
+div.lieux                     { margin: 0.5em 0 0.5em 0; text-align: center }
+div.lieux table      		  { font-weight: bold; margin: auto; border: 1px outset #fd9; text-align: center }
+div.lieux tr.titre            { font-size: 110%; font-style: italic; font-weight: bold; margin: auto; border: 1px outset #fd9; text-align: center; text-transform: uppercase; background-color: #fd9 }
+div.lieux td                  { border: 1px inset #fd9; padding-left: 1em; padding-right: 1em; padding-top: 3px; padding-bottom: 3px }
+				  
+div#titrecourlieux            { margin: 0.5em 0 0 0; text-align: center; font-size: 140%; font-style: italic; font-weight: bold; background: #fd9; border: 1px outset #fd9 }  
+div.courlieux                 { margin: 0.5em 0 0 0; text-align: center; font-size: 100%; font-weight: bold; background: #ffe }  
+div.courlieux table           { font-weight: bold; margin: auto }
+div.courlieux td              { border: 0px outset silver }
+div.courlieux td#nom          {  }
+div.courlieux td#nbre         { text-align: right; padding-left: 2em }	 
+
+div#indivlieux		          { text-align: center; margin: 0.5em 0 0 0 }
+div#indivlieux table          { font-weight: bold; margin-left: auto; margin-right: auto; padding: 0; border-collapse: collapse }	   
+span.lieuxnbre                { font-size: 80%; margin-left: 0.5em }
+					 
+
+/*--------------------------------------------------------------------------------------------*/
+/* Page Professions                                                                           */
+/*--------------------------------------------------------------------------------------------*/
+div#professions               { margin: 0.5em 0 0 0; text-align: center; font-size: 100%; font-weight: bold; background: #ffe }  
+div#professions table         { font-weight: bold; margin: auto; border: 0px outset #fd9; padding: 0px; empty-cells: show }
+div#professions td            { border: 0px outset silver }
+div#professions td.nom        {  }
+div#professions td.nbre       { text-align: right; padding-left: 2em }
+
+div#titrecourprofessions      {margin: 0.5em 0 0 0; text-align: center; font-size: 140%; font-style: italic; font-weight: bold; background: #fd9; border: 1px outset #fd9 }  
+div#courprofessions           { margin: 0.5em 0 0 0; text-align: center; font-size: 100%; font-weight: bold; background: #ffe }  
+div#courprofessions table     { font-weight: bold; margin: auto }
+div#courprofessions td        { border: 0px outset silver }
+div#courprofessions td.nom    {  }
+div#courprofessions td.nbre   { text-align: right; padding-left: 2em }	 
+
+div#indivprofessions	      { text-align: center; margin: 0.5em 0 0 0 }
+div#indivprofessions table    { font-weight: bold; margin-left: auto; margin-right: auto; padding: 0; border-collapse: collapse}
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Page Longévité                                                                            */
+/*--------------------------------------------------------------------------------------------*/
+div#longevite                 { margin: 0.5em 0 0 0; text-align: center; font-size: 100%; font-weight: bold; background: #ffe }  
+div#longevite table           { font-weight: bold; margin: auto; border: 0px outset #fd9; padding: 0px; empty-cells: show }
+div#longevite td              { border: 0px outset silver }
+div#longevite td.nom          {  }
+div#longevite td.nbre         { text-align: right; padding-left: 2em }	   
+
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Page Implexes                                                                              */
+/*--------------------------------------------------------------------------------------------*/
+div#implexes                  { margin: 2em 0; text-align: center; font-size: 100%; font-weight: bold; background: #ffe; border: 0px solid blue; }  
+div#implexes table            { font-weight: bold; margin: auto; border: 0px outset #fd9; padding: 0px; empty-cells: show; border-collapse: collapse; }
+div#implexes td               { border: 0px outset silver; }	   
+div#implexes td.implcommunlf  { padding-bottom: 0.5em;  }	 
+div#implexes td.implcommun    { text-align: left; padding-left: 0; color: maroon; font-size: 80%; }	   
+div#implexes td.implcommungen { text-align: right; padding-left: 0.5em; color: red; font-size: 80%; font-style: italic; text-decoration: none; }	   
+div#implexes td.implsepares   { font-weight: normal; text-align: left; padding-left: 0; font-size: 80%; color: maroon; font-style: italic; }	   
+div#implexes td.implsosa      { font-size: 80%; font-weight: normal; color: #390; font-style: italic; text-align: center; padding: 0 0.5em 0 0.5em; }	
+
+img.implsexe                  { margin: 0 0.5em 0 0.5em; }	
+.implsepares				  { font-weight: bold; color: maroon; font-style: italic; }
+.implnip              		  { font-size: 80%; font-weight: normal; color: maroon; font-style: italic; padding-left: 1em; }	
+.implalibasel				  { vertical-align: baseline } 
+.implintit                    { font-weight: bold; font-style: italic; line-height: 1.5em; }
+
+/*--------------------------------------------------------------------------------------------*/
+/* Page Cousinage                                                                             */
+/*--------------------------------------------------------------------------------------------*/  
+table#cousinage               { margin: 1.5em auto 1em auto; text-align: center; font-size: 90%; font-weight: bold; border: 0px solid blue; border-collapse: collapse }  
+table#cousinage td.t          { border-bottom: 2px solid silver; padding: 0 0 0.4em; empty-cells: hide; vertical-align: middle }  
+table#cousinage td.g          { border-right: 2px solid silver; padding: 1em 0 0 0; empty-cells: hide; vertical-align: middle }  
+table#cousinage td.d          { border-left: 2px solid silver; padding: 1em 0 0 0; empty-cells: hide; vertical-align: middle }  
+table#cousinage td.c          { border: 0px outset silver; padding: 0; empty-cells: hide; vertical-align: middle; width: 8em }  
+img.cousinage                 { border: 0px none; vertical-align: middle }  
+#pasdimplexe				  { line-height: 15em; text-align: center; font-weight: bold; font-style: italic; }
+
+div.arbre {	 
+position: relative;
+width: 760px;  
+overflow: hidden;
+margin : 0.5em 0 0 20px;
+padding: 0;	
+}
+/* sélecteur pour tracer la barre horizontale verte */
+p.top {
+margin: 0;			
+padding: 0;
+float: left;
+text-align: center;	 
+width: 760px;				 
+height: 7em;
+border-bottom: 2px solid #5f5; 
+}
+/* sélecteur pour tracer la barre horizontale et verticale verte */
+p.tv {	   
+margin: 0;			
+padding: 0;
+float: left;
+text-align: center;	 
+width: 376px; 
+border-left: 2px solid #5f5; 
+border-right: 2px solid #5f5; 
+}												
+/* sélecteur pour tracer la barre verticale verte */
+p.v {	   
+margin: 0;			
+padding: 0;
+float: left;
+text-align: center;	 
+width: 194px;  
+} 
+p.bottom {	 
+position: absolute;	
+left: 20px; 
+margin: 0;			
+padding: 0;
+text-align: center;	 
+width: 760px;
+height: 7em;
+}
+/* sélecteur pour marquer le X en cas de mariage */
+p.x {
+position: absolute;	 
+left: 373px; 
+margin: 0;			
+padding: 0; 
+height: 4em; 
+line-height: 4em; 	
+border: 2px solid #ffe;
+}
+/* sélecteur pour boîtes à personnages */
+p.boite {
+position: absolute; 
+width: 355px; 
+height: 4.1em; 
+margin: 0; 
+padding: 1px 0 0 0; 
+text-align: center; 
+overflow: hidden; 
+/*-moz-border-radius: 2em;     /* spécial firefox */
+}  
+/*
+.gauche { left:  10px; } 
+.centre { left: 200px; } 
+.droite { left: 390px; } 
+*/
+/* sélecteur pour boîtes homme en couple */
+.hommecouple                  { background: #ddf; border: 3px outset blue; }  
+/* sélecteur pour boîtes femme en couple */
+.femmecouple                  { background: #fdd; border: 3px outset red;  }			
+/* sélecteur pour boîtes d'individus de lignée homme, plus palichons */
+.homme                        { background: #eef; border: 2px outset blue; }
+/* sélecteur pour boîtes d'individus de lignée femme, plus palichons */
+.femme                        { background: #fee; border: 2px outset red;  }
+
+
+
+/* -----------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------------*/
+/* Présentation des dates de naissance, décès                                                 */
+/*--------------------------------------------------------------------------------------------*/
+span.dates {
+	font-size:80%;
+	font-weight:bold;
+	font-style:italic;
+	color:#00f;
+	margin-left:0.2em;
+}
+
+ 
+/************************************************/
+/* Partie reservee à l'affiche des individus    */
+/************************************************/
+
+table.dataidentite {
+	width: 100%;
+	margin-top: 0px;
+	font-size: 1.2em;
+}
+
+table.dataidentite tr.fiche-union {
+/*	border: 10px red dotted;
+	padding-bottom: 2em;*/
+}
+
+table.dataidentite td.titre-union {
+	width: 20%;
+	vertical-align: top;
+	text-align: left;
+	font-weight: bold;
+}
+
+table.dataidentite td.info-union {
+	width: 80%;
+	vertical-align: top;
+	text-align: left;
+}
+
+ul.evt-union {
+	list-style-type: disc;
+	list-style-position: inside;
+	font-size: 0.8em;
+	line-height: 1.2em;
+	font-style: italic;
+	margin-left: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+ul.enfant-union { font-size: 1em; }
+
+img.sexe {
+	border: 0px;
+	vertical-align:top;
+	padding-right: 0.1em;
+}
+
+.indivsosa { font-weight:bold; color:#390; }
+
+span.nom { margin-left:0.2em; }
+
+/************************************************/
+/* Partie permettant l'affichage de l'arbre     */
+/************************************************/
+#ascendant { position:relative; width:718; height:560px; text-align:left; }
+
+.boxm { background-color: #ddf; }
+.boxf { background-color: #fdd; }
+.border { position:absolute; background-color:#000000; }
+.shadow { position:absolute; background-color:#999999; }
+
+#box1 { position:absolute; top:220px; left:1px; height:61px; width:151px; z-index:5; clip:rect(auto, auto, 61px, auto); border: 1px solid #000; }
+#shadow1_1 { top:223px; left:4px; height:63px; width:153px; z-index:1; }
+#border1_3 { top:250px; left:152px; height:1px; width:12px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow1_3 { top:255px; left:127px; height:1px; width:12px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+
+#box2 { position:absolute; top:77px; left:177px; height:59px; width:151px; z-index:5; clip:rect(auto, auto, 59px, auto); border: 1px solid #000;  }
+#shadow2_1 { top:80px; left:180px; height:61px; width:153px; z-index:1; }
+#border2_2 { top:106px; left:163px; height:1px; width:13px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow2_2 { top:111px;left:168px; height:1px; width:13px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border2_3 { top:106px; left:329px; height:1px; width:12px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow2_3 { top:111px; left:333px; height:1px; width:12px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border2_4 { font-size:0;top:106px; left:163px; height:145px; width:1px; z-index:3; }
+#shadow2_4 { font-size:0;top:111px; left:168px; height:145px; width:1px; z-index:1; }
+
+#box4 { position:absolute; top:6px; left:355px; height:57px; width:151px; z-index:5; clip:rect(auto, auto, 57px, auto); border: 1px solid #000;  }
+#shadow4_1 { top:9px; left:358px; height:59px; width:153px; z-index:1; }
+#border4_2 { top:34px; left:341px; height:1px; width:13px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow4_2 { top:39px;left:345px; height:1px; width:13px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border4_3 { top:34px; left:502px; height:1px; width:12px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow4_3 { top:39px; left:508px; height:1px; width:12px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border4_4 { font-size:0;top:34px; left:341px; height:73px; width:1px; z-index:3; }
+#shadow4_4 { font-size:0;top:39px; left:345px; height:73px; width:1px; z-index:1; }
+
+#box5 { position:absolute; top:150px; left:355px; height:57px; width:151px; z-index:5; clip:rect(auto, auto, 57px, auto); border: 1px solid #000;  }
+#shadow5_1 { top:153px; left:358px; height:59px; width:153px; z-index:1; }
+#border5_2 { top:178px; left:341px; height:1px; width:13px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow5_2 { top:183px;left:345px; height:1px; width:13px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border5_3 { top:178px; left:502px; height:1px; width:12px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow5_3 { top:183px; left:508px; height:1px; width:12px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border5_5 { font-size:0;top:107px; left:341px; height:72px; width:1px; z-index:3; }
+#shadow5_5 { font-size:0;top:112px; left:345px; height:72px; width:1px; z-index:1; }
+
+#box3 { position:absolute; top:365px; left:177px; height:59px; width:151px; z-index:5; clip:rect(auto, auto, 59px, auto); border: 1px solid #000;}
+#shadow3_1 { top:368px; left:180px; height:61px; width:153px; z-index:1; }
+#border3_2 { top:394px; left:163px; height:1px; width:13px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow3_2 { top:399px;left:168px; height:1px; width:13px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border3_3 { top:394px; left:329px; height:1px; width:12px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow3_3 { top:399px; left:333px; height:1px; width:12px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border3_5 { font-size:0;top:251px; left:163px; height:144px; width:1px; z-index:3; }
+#shadow3_5 { font-size:0;top:256px; left:168px; height:144px; width:1px; z-index:1; }
+
+#box6 { position:absolute; top:294px; left:355px; height:57px; width:151px; z-index:5; clip:rect(auto, auto, 57px, auto); border: 1px solid #000;  }
+#shadow6_1 { top:297px; left:358px; height:59px; width:153px; z-index:1; }
+#border6_2 { top:322px; left:341px; height:1px; width:13px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow6_2 { top:327px;left:345px; height:1px; width:13px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border6_3 { top:322px; left:502px; height:1px; width:12px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow6_3 { top:327px; left:508px; height:1px; width:12px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border6_4 { font-size:0;top:322px; left:341px; height:73px; width:1px; z-index:3; }
+#shadow6_4 { font-size:0;top:327px; left:345px; height:73px; width:1px; z-index:1; }
+
+#box7 { position:absolute; top:438px; left:355px; height:57px; width:151px; z-index:5; clip:rect(auto, auto, 57px, auto); border: 1px solid #000;  }
+#shadow7_1 { top:441px; left:358px; height:59px; width:153px; z-index:1; }
+#border7_2 { top:466px; left:341px; height:1px; width:13px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow7_2 { top:471px;left:345px; height:1px; width:13px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border7_3 { top:466px; left:502px; height:1px; width:12px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow7_3 { top:471px; left:508px; height:1px; width:12px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border7_5 { font-size:0;top:395px; left:341px; height:72px; width:1px; z-index:3; }
+#shadow7_5 { font-size:0;top:400px; left:345px; height:72px; width:1px; z-index:1; }
+
+/************************************************/
+/* Partie reservee a la gestion des tabulations */
+/************************************************/
+.dynamic-tab-pane-control.tab-pane {
+	position:relative;
+	width:100%;			/* width needed weird IE bug */
+	margin-right:-2px; }/* to make room for the shadow */
+
+.dynamic-tab-pane-control .tab-row .tab {
+	width:70px;
+	height:16px;
+	background-image:url('tab.png');
+	position:relative;
+	top:0;
+	display:inline;
+	float:left;
+	overflow:hidden;
+	cursor:Default;
+	border:0px none;
+	z-index:1;
+	white-space:nowrap;
+	text-align:center;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	font-size:11px;
+	font-family:Tahoma;
+	margin-left:2px;
+	margin-right:-1px;
+	margin-top:1px;
+	margin-bottom:1px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:2px;
+	padding-bottom:0px; }
+
+.dynamic-tab-pane-control .tab-row .tab.selected {
+	width:74px !important;
+	height:18px !important;
+	background-image:url('tab.active.png') !important;
+	background-repaet:no-repeat;
+	border-bottom-width:0;
+	z-index:3;
+	top:-2px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	font-size:11px;
+	font-family:Tahoma;
+	margin-left:0px;
+	margin-right:-3px;
+	margin-top:1px;
+	margin-bottom:-3px;
+	padding-left:0;
+	padding-right:0;
+	padding-top:2px;
+	padding-bottom:0px; }
+
+.dynamic-tab-pane-control .tab-row .tab a {
+	font:11px Tahoma;
+	color:Black;
+	text-decoration:none;
+	cursor:default; }
+
+.dynamic-tab-pane-control .tab-row .tab.hover {
+	width:70px;
+	height:16px;
+	background-image:url('tab.hover.png');
+	background-repeat:no-repeat;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	font-size:11px;
+	font-family:Tahoma; }
+
+.dynamic-tab-pane-control .tab-page {
+	clear:both;
+	border:1px solid rgb( 145, 155, 156 );
+	background:rgb( 252 252 254 );
+	z-index:2;
+	position:relative;
+	top:-2px;
+	color:Black;
+	filter:	progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#fffcfcfe, EndColorStr=#fff4f3ee, GradientType=0)
+			progid:DXImageTransform.Microsoft.Shadow(Color=#ff919899, Strength=2, Direction=135);
+	/*244, 243, 238*/
+	/* 145, 155, 156*/
+	padding:10px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	font-size:11px;
+	font-family:Tahoma }
+
+.dynamic-tab-pane-control .tab-row {
+	z-index:1;
+	white-space:nowrap;}

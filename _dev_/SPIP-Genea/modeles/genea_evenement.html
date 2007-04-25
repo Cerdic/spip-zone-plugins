@@ -1,0 +1,6 @@
+<BOUCLE_naissance(SPIP_GENEA_EVT){id_individu=#ENV{individu}}{id_type_evt=#ENV{evt}}>
+<div>
+<BOUCLE_nom_evt(SPIP_GENEA_TYPE_EVT){id_type_evt}>[<h3 class="spip">(#NOM_EVT)</h3>]</BOUCLE_nom_evt>
+[Le (#DATE|affdate)][ à (#DATE|affdate{H\hi})][ - (#DESCRIPTIF)]
+</div>
+</BOUCLE_naissance>

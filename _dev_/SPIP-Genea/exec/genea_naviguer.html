@@ -1,0 +1,34 @@
+#CACHE{0}
+<br />
+<div class='liste'>
+<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; border-bottom: 1px solid #444444;' class='verdana2'><b><:genea:tous_arbres:></b></div>
+<table width='100%' cellpadding='5' cellspacing='0' border='0'>
+<B_genea>
+[<tr style='background-color: #dddddd;'>
+<td class="arial1" style='border-bottom: 1px solid #444444;' colspan="6">
+<div class='pagination'>(#PAGINATION)</div>
+</td>
+</tr>]
+<BOUCLE_genea(SPIP_GENEA){pagination}>
+<BOUCLE_individu(INDIVIDUS){id_genea}></BOUCLE_individu>#SET{individus,#TOTAL_BOUCLE}<//B_individu>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<tr class='tr_liste'>
+	<td class="arial11"><img src='#EVAL{_DIR_IMG_PACK}puce-[(#GET{individus}|?{'verte','orange'})]-breve.gif' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;</td>
+	<td class="arial11"><a href='[(#URL_ECRIRE{'genea_aff_arbre'}|parametre_url{'id_genea', #ID_GENEA})]' class='cellule-h'>#TITRE</a></td>
+	<td class="arial1">&nbsp;</td>
+	<td class="arial1"><:genea:nombre_individus:>&nbsp;:&nbsp;#GET{individus}</td>
+	<td>&nbsp;</td>
+</tr>
+</BOUCLE_rubrique>
+</BOUCLE_genea>
+</B_genea>
+<tr class='tr_liste'>
+	<td class="arial11"><img src='#EVAL{_DIR_IMG_PACK}puce-rouge-breve.gif' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;</td>
+	<td class="arial11"><:genea:no_arbre:></td>
+	<td class="arial1">&nbsp;</td>
+	<td class="arial1"><a href='[(#URL_ECRIRE{'genea_naviguer'}|parametre_url{'new', 'oui'})]'><:genea:creer_arbre:></a></td>
+	<td>&nbsp;</td>
+</tr>
+<//B_genea>
+</table>
+</div>

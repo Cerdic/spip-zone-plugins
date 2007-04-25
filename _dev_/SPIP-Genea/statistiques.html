@@ -1,0 +1,86 @@
+#CACHE{86400}
+<BOUCLE_genea(SPIP_GENEA){id_genea}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_nom_famille(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>#SET{nom_arbre, #TITRE||supprimer_numero}</BOUCLE_nom_famille>
+
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title><:genea:statistiques:>[ - (#ENV{nom}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta name="description" content="<:genea:desc_statistiques:>" />
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_genea">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<BOUCLE_rub(RUBRIQUES){id_rubrique}><div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:statistiques:></div></BOUCLE_rub>
+
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				[(#LOGO_INDIVIDU||image_reduire{80,80})]
+				[<p class="surtitre">(#GET{nom_arbre})</p>]
+				<h1 class="titre"><:genea:statistiques:></h1>
+				<p class="soustitre"><:genea:soustitre_statistiques:></p>
+				#FIN_SURLIGNE	
+
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{article_traductions}
+
+			</div>
+			
+			<div class="chapo"><:genea:desc_statistiques:></div>
+			
+			<br class="nettoyeur" />
+			<div class="texte">
+
+				[(#REM) Affichage des tableaux statistiques ]
+				
+				<BOUCLE_genea_principal(SPIP_GENEA){id_genea}>
+				<div class="stats">
+					<table id="stats">
+						<tr><th>STATISTIQUES</th></tr>
+						<BOUCLE_genea_indiv(INDIVIDUS){id_genea}></BOUCLE_genea_indiv><tr><td>Nombre d'individus : <span class="statsval">#TOTAL_BOUCLE</span></td></tr><//B_genea_indiv>
+						<tr><td>
+							<BOUCLE_genea_homme(INDIVIDUS){id_genea}{sexe='M'}></BOUCLE_genea_homme>Hommes : <span class="statsval">#TOTAL_BOUCLE</span>, <//B_genea_homme>
+							<BOUCLE_genea_femme(INDIVIDUS){id_genea}{sexe='F'}></BOUCLE_genea_femme>Femmes : <span class="statsval">#TOTAL_BOUCLE</span>, <//B_genea_femme>
+							<BOUCLE_genea_inconnu(INDIVIDUS){id_genea}{sexe=''}></BOUCLE_genea_inconnu>Inconnus : <span class="statsval">#TOTAL_BOUCLE</span><//B_genea_inconnu>
+						</td></tr>
+						<BOUCLE_genea_pat(INDIVIDUS){id_genea}{par nom}></BOUCLE_genea_pat><tr><td>Nombre de patronymes : <span class="statsval">#TOTAL_BOUCLE</span></td></tr><//B_genea_pat>
+						<BOUCLE_genea_union(SPIP_GENEA_FAMILLES){id_genea}></BOUCLE_genea_union><tr><td>Nombre d'unions : <span class="statsval">#TOTAL_BOUCLE</span></td></tr><//B_genea_union>
+					</table>
+				</div>
+				</BOUCLE_genea_principal>
+				
+			</div>
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<INCLURE{fond=inc-genealogie}{statistiques=1}{small=oui}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_genea>

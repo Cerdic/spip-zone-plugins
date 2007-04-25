@@ -1,0 +1,713 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Version 6 Demo: Arbre de Joseph Lythgoe</title>
+<meta name="Keywords" content="Arbre de Joseph Lythgoe">
+<meta name="Description" content="Version 6 Demo: Arbre de Joseph Lythgoe">
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<meta name="robots" content="noindex,nofollow">
+<script language="JavaScript" type="text/javascript" src="net.js"></script>
+<SCRIPT language="JavaScript" type="text/javascript">
+var lastpopup = '';
+var tree = '';
+var getperson_url = 'getperson.php?';
+var pedigree_url = 'pedigree.php?';
+var familygroup_url = 'familygroup.php?';
+var slotceiling = 16;
+var slotceiling_minus1 = 8;
+var display = 'standard';
+var pedcellpad = 5;
+var pedboxalign = 'center';
+var usepopups = 1;
+var popupchartlinks = 1;
+var popupkids = 1;
+var popupspouses = 1;
+var popuptimer = 500;
+var pedborderwidth = 1;
+var pedbordercolor = '#000000';
+var pedbullet = '&bull;';
+var emptycolor = '#CCCCCC';
+var hideempty = 0;
+var leftarrowimg = '<img border="0" src="ArrowLeft.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre">';
+var namepad = '';
+var allow_add = 0;
+var cmstngpath = '';
+var chartlink = '<img src="Chart.gif" border="0" width="11" height="10" title=" = Nouvel arbre" alt=" = Nouvel arbre">';
+var personID = 'I871';
+var parentset = 0;
+var generations = 4;
+var tngprint = 0;
+var unknown = 'Inconnu';
+var txt_parents = 'Parents';
+var txt_children = 'Enfants';
+var txt_family = 'Famille';
+var txt_addfam = 'Ajouter une nouvelle famille';
+var txt_editfam = 'Editer la famille';
+var txt_groupsheet = 'Feuille familiale';
+var families = new Array(), people = new Array(); endslots = new Array(), slots = new Array();
+var endslotctr;
+var firstperson = '', topparams = '', botparams = '', toplinks = '', botlinks = '';
+var pedxmlfile = 'pedxml.php?';
+</SCRIPT>
+<script language="JavaScript" src="tngpedigree.js" type="text/javascript"></script>
+<style type="text/css">
+.border { position:absolute; background-color:#000000; }
+.shadow { position:absolute; background-color:#999999; }
+.downarrow { position:absolute; z-index:7; cursor:pointer; visibility:hidden }
+.popup { position:absolute; visibility:hidden; background-color:#dddddd; z-index:8 }
+#leftarrow { position:absolute; visibility:hidden; top:273px; left:10px;z-index:5; }
+#popleft { font-size:10pt; }
+#popabbrleft { font-size:10pt; }
+#box1 { position:absolute; top:250px; left:27px; height:61px; width:151px; z-index:5; clip:rect(auto, auto, 61px, auto); }
+#td1 { font-size:12pt; text-align:center; }
+#img1 { height:51px;; }
+#pop1 { font-size:10pt; }
+#popabbr1 { font-size:10pt; }
+#border1_1 { top:249px; left:26px; height:63px; width:153px; z-index:4; }
+#shadow1_1 { top:253px; left:30px; height:63px; width:153px; z-index:1; }
+#border1_3 { top:280px; left:178px; height:1px; width:16px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow1_3 { top:285px; left:183px; height:1px; width:16px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#downarrow1 { top:317px;left:89px; }
+#box2 { position:absolute; top:107px; left:209px; height:59px; width:151px; z-index:5; clip:rect(auto, auto, 59px, auto); }
+#td2 { font-size:11pt; text-align:center; }
+#img2 { height:49px;; }
+#pop2 { font-size:9pt; }
+#popabbr2 { font-size:9pt; }
+#border2_1 { top:106px; left:208px; height:61px; width:153px; z-index:4; }
+#shadow2_1 { top:110px; left:212px; height:61px; width:153px; z-index:1; }
+#border2_2 { top:136px; left:194px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow2_2 { top:141px;left:199px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border2_3 { top:136px; left:360px; height:1px; width:16px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow2_3 { top:141px; left:365px; height:1px; width:16px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border2_4 { font-size:0;top:136px; left:194px; height:145px; width:1px; z-index:3; }
+#shadow2_4 { font-size:0;top:141px; left:199px; height:145px; width:1px; z-index:1; }
+#downarrow2 { top:172px;left:271px; }
+#box4 { position:absolute; top:36px; left:391px; height:57px; width:151px; z-index:5; clip:rect(auto, auto, 57px, auto); }
+#td4 { font-size:11pt; text-align:center; }
+#img4 { height:47px;; }
+#pop4 { font-size:9pt; }
+#popabbr4 { font-size:9pt; }
+#border4_1 { top:35px; left:390px; height:59px; width:153px; z-index:4; }
+#shadow4_1 { top:39px; left:394px; height:59px; width:153px; z-index:1; }
+#border4_2 { top:64px; left:376px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow4_2 { top:69px;left:381px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border4_3 { top:64px; left:542px; height:1px; width:16px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow4_3 { top:69px; left:547px; height:1px; width:16px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border4_4 { font-size:0;top:64px; left:376px; height:73px; width:1px; z-index:3; }
+#shadow4_4 { font-size:0;top:69px; left:381px; height:73px; width:1px; z-index:1; }
+#downarrow4 { top:99px;left:453px; }
+#box8 { position:absolute; top:1px; left:573px; height:55px; width:151px; z-index:5; clip:rect(auto, auto, 55px, auto); }
+#td8 { font-size:10pt; text-align:center; }
+#img8 { height:45px;; }
+#pop8 { font-size:9pt; }
+#popabbr8 { font-size:9pt; }
+#border8_1 { top:0px; left:572px; height:57px; width:153px; z-index:4; }
+#shadow8_1 { top:4px; left:576px; height:57px; width:153px; z-index:1; }
+#border8_2 { top:28px; left:558px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow8_2 { top:33px;left:563px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border8_4 { font-size:0;top:28px; left:558px; height:37px; width:1px; z-index:3; }
+#shadow8_4 { font-size:0;top:33px; left:563px; height:37px; width:1px; z-index:1; }
+#downarrow8 { top:62px;left:635px; }
+#offpage8 { position:absolute; visibility:hidden; top:21px; left:732px;z-index:5; }
+#box9 { position:absolute; top:73px; left:573px; height:55px; width:151px; z-index:5; clip:rect(auto, auto, 55px, auto); }
+#td9 { font-size:10pt; text-align:center; }
+#img9 { height:45px;; }
+#pop9 { font-size:9pt; }
+#popabbr9 { font-size:9pt; }
+#border9_1 { top:72px; left:572px; height:57px; width:153px; z-index:4; }
+#shadow9_1 { top:76px; left:576px; height:57px; width:153px; z-index:1; }
+#border9_2 { top:100px; left:558px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow9_2 { top:105px;left:563px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border9_5 { font-size:0;top:65px; left:558px; height:36px; width:1px; z-index:3; }
+#shadow9_5 { font-size:0;top:70px; left:563px; height:36px; width:1px; z-index:1; }
+#downarrow9 { top:134px;left:635px; }
+#offpage9 { position:absolute; visibility:hidden; top:93px; left:732px;z-index:5; }
+#box5 { position:absolute; top:180px; left:391px; height:57px; width:151px; z-index:5; clip:rect(auto, auto, 57px, auto); }
+#td5 { font-size:11pt; text-align:center; }
+#img5 { height:47px;; }
+#pop5 { font-size:9pt; }
+#popabbr5 { font-size:9pt; }
+#border5_1 { top:179px; left:390px; height:59px; width:153px; z-index:4; }
+#shadow5_1 { top:183px; left:394px; height:59px; width:153px; z-index:1; }
+#border5_2 { top:208px; left:376px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow5_2 { top:213px;left:381px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border5_3 { top:208px; left:542px; height:1px; width:16px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow5_3 { top:213px; left:547px; height:1px; width:16px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border5_5 { font-size:0;top:137px; left:376px; height:72px; width:1px; z-index:3; }
+#shadow5_5 { font-size:0;top:142px; left:381px; height:72px; width:1px; z-index:1; }
+#downarrow5 { top:243px;left:453px; }
+#box10 { position:absolute; top:145px; left:573px; height:55px; width:151px; z-index:5; clip:rect(auto, auto, 55px, auto); }
+#td10 { font-size:10pt; text-align:center; }
+#img10 { height:45px;; }
+#pop10 { font-size:9pt; }
+#popabbr10 { font-size:9pt; }
+#border10_1 { top:144px; left:572px; height:57px; width:153px; z-index:4; }
+#shadow10_1 { top:148px; left:576px; height:57px; width:153px; z-index:1; }
+#border10_2 { top:172px; left:558px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow10_2 { top:177px;left:563px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border10_4 { font-size:0;top:172px; left:558px; height:37px; width:1px; z-index:3; }
+#shadow10_4 { font-size:0;top:177px; left:563px; height:37px; width:1px; z-index:1; }
+#downarrow10 { top:206px;left:635px; }
+#offpage10 { position:absolute; visibility:hidden; top:165px; left:732px;z-index:5; }
+#box11 { position:absolute; top:217px; left:573px; height:55px; width:151px; z-index:5; clip:rect(auto, auto, 55px, auto); }
+#td11 { font-size:10pt; text-align:center; }
+#img11 { height:45px;; }
+#pop11 { font-size:9pt; }
+#popabbr11 { font-size:9pt; }
+#border11_1 { top:216px; left:572px; height:57px; width:153px; z-index:4; }
+#shadow11_1 { top:220px; left:576px; height:57px; width:153px; z-index:1; }
+#border11_2 { top:244px; left:558px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow11_2 { top:249px;left:563px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border11_5 { font-size:0;top:209px; left:558px; height:36px; width:1px; z-index:3; }
+#shadow11_5 { font-size:0;top:214px; left:563px; height:36px; width:1px; z-index:1; }
+#downarrow11 { top:278px;left:635px; }
+#offpage11 { position:absolute; visibility:hidden; top:237px; left:732px;z-index:5; }
+#box3 { position:absolute; top:395px; left:209px; height:59px; width:151px; z-index:5; clip:rect(auto, auto, 59px, auto); }
+#td3 { font-size:11pt; text-align:center; }
+#img3 { height:49px;; }
+#pop3 { font-size:9pt; }
+#popabbr3 { font-size:9pt; }
+#border3_1 { top:394px; left:208px; height:61px; width:153px; z-index:4; }
+#shadow3_1 { top:398px; left:212px; height:61px; width:153px; z-index:1; }
+#border3_2 { top:424px; left:194px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow3_2 { top:429px;left:199px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border3_3 { top:424px; left:360px; height:1px; width:16px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow3_3 { top:429px; left:365px; height:1px; width:16px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border3_5 { font-size:0;top:281px; left:194px; height:144px; width:1px; z-index:3; }
+#shadow3_5 { font-size:0;top:286px; left:199px; height:144px; width:1px; z-index:1; }
+#downarrow3 { top:460px;left:271px; }
+#box6 { position:absolute; top:324px; left:391px; height:57px; width:151px; z-index:5; clip:rect(auto, auto, 57px, auto); }
+#td6 { font-size:11pt; text-align:center; }
+#img6 { height:47px;; }
+#pop6 { font-size:9pt; }
+#popabbr6 { font-size:9pt; }
+#border6_1 { top:323px; left:390px; height:59px; width:153px; z-index:4; }
+#shadow6_1 { top:327px; left:394px; height:59px; width:153px; z-index:1; }
+#border6_2 { top:352px; left:376px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow6_2 { top:357px;left:381px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border6_3 { top:352px; left:542px; height:1px; width:16px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow6_3 { top:357px; left:547px; height:1px; width:16px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border6_4 { font-size:0;top:352px; left:376px; height:73px; width:1px; z-index:3; }
+#shadow6_4 { font-size:0;top:357px; left:381px; height:73px; width:1px; z-index:1; }
+#downarrow6 { top:387px;left:453px; }
+#box12 { position:absolute; top:289px; left:573px; height:55px; width:151px; z-index:5; clip:rect(auto, auto, 55px, auto); }
+#td12 { font-size:10pt; text-align:center; }
+#img12 { height:45px;; }
+#pop12 { font-size:9pt; }
+#popabbr12 { font-size:9pt; }
+#border12_1 { top:288px; left:572px; height:57px; width:153px; z-index:4; }
+#shadow12_1 { top:292px; left:576px; height:57px; width:153px; z-index:1; }
+#border12_2 { top:316px; left:558px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow12_2 { top:321px;left:563px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border12_4 { font-size:0;top:316px; left:558px; height:37px; width:1px; z-index:3; }
+#shadow12_4 { font-size:0;top:321px; left:563px; height:37px; width:1px; z-index:1; }
+#downarrow12 { top:350px;left:635px; }
+#offpage12 { position:absolute; visibility:hidden; top:309px; left:732px;z-index:5; }
+#box13 { position:absolute; top:361px; left:573px; height:55px; width:151px; z-index:5; clip:rect(auto, auto, 55px, auto); }
+#td13 { font-size:10pt; text-align:center; }
+#img13 { height:45px;; }
+#pop13 { font-size:9pt; }
+#popabbr13 { font-size:9pt; }
+#border13_1 { top:360px; left:572px; height:57px; width:153px; z-index:4; }
+#shadow13_1 { top:364px; left:576px; height:57px; width:153px; z-index:1; }
+#border13_2 { top:388px; left:558px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow13_2 { top:393px;left:563px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border13_5 { font-size:0;top:353px; left:558px; height:36px; width:1px; z-index:3; }
+#shadow13_5 { font-size:0;top:358px; left:563px; height:36px; width:1px; z-index:1; }
+#downarrow13 { top:422px;left:635px; }
+#offpage13 { position:absolute; visibility:hidden; top:381px; left:732px;z-index:5; }
+#box7 { position:absolute; top:468px; left:391px; height:57px; width:151px; z-index:5; clip:rect(auto, auto, 57px, auto); }
+#td7 { font-size:11pt; text-align:center; }
+#img7 { height:47px;; }
+#pop7 { font-size:9pt; }
+#popabbr7 { font-size:9pt; }
+#border7_1 { top:467px; left:390px; height:59px; width:153px; z-index:4; }
+#shadow7_1 { top:471px; left:394px; height:59px; width:153px; z-index:1; }
+#border7_2 { top:496px; left:376px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow7_2 { top:501px;left:381px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border7_3 { top:496px; left:542px; height:1px; width:16px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow7_3 { top:501px; left:547px; height:1px; width:16px; z-index:1; clip:rect(auto, auto, 1px, auto); }
+#border7_5 { font-size:0;top:425px; left:376px; height:72px; width:1px; z-index:3; }
+#shadow7_5 { font-size:0;top:430px; left:381px; height:72px; width:1px; z-index:1; }
+#downarrow7 { top:531px;left:453px; }
+#box14 { position:absolute; top:433px; left:573px; height:55px; width:151px; z-index:5; clip:rect(auto, auto, 55px, auto); }
+#td14 { font-size:10pt; text-align:center; }
+#img14 { height:45px;; }
+#pop14 { font-size:9pt; }
+#popabbr14 { font-size:9pt; }
+#border14_1 { top:432px; left:572px; height:57px; width:153px; z-index:4; }
+#shadow14_1 { top:436px; left:576px; height:57px; width:153px; z-index:1; }
+#border14_2 { top:460px; left:558px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow14_2 { top:465px;left:563px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border14_4 { font-size:0;top:460px; left:558px; height:37px; width:1px; z-index:3; }
+#shadow14_4 { font-size:0;top:465px; left:563px; height:37px; width:1px; z-index:1; }
+#downarrow14 { top:494px;left:635px; }
+#offpage14 { position:absolute; visibility:hidden; top:453px; left:732px;z-index:5; }
+#box15 { position:absolute; top:505px; left:573px; height:55px; width:151px; z-index:5; clip:rect(auto, auto, 55px, auto); }
+#td15 { font-size:10pt; text-align:center; }
+#img15 { height:45px;; }
+#pop15 { font-size:9pt; }
+#popabbr15 { font-size:9pt; }
+#border15_1 { top:504px; left:572px; height:57px; width:153px; z-index:4; }
+#shadow15_1 { top:508px; left:576px; height:57px; width:153px; z-index:1; }
+#border15_2 { top:532px; left:558px; height:1px; width:17px; z-index:3; clip:rect(auto, auto, 1px, auto); }
+#shadow15_2 { top:537px;left:563px; height:1px; width:17px; z-index:1;clip:rect(auto, auto, 1px, auto); }
+#border15_5 { font-size:0;top:497px; left:558px; height:36px; width:1px; z-index:3; }
+#shadow15_5 { font-size:0;top:502px; left:563px; height:36px; width:1px; z-index:1; }
+#downarrow15 { top:566px;left:635px; }
+#offpage15 { position:absolute; visibility:hidden; top:525px; left:732px;z-index:5; }
+</style>
+<style type="text/css">#mnav li:hover #third, #mnav li.sfhover #third {left: 130px;}</style>
+<SCRIPT language="JavaScript" type="text/javascript">var leftside = 0;</SCRIPT>
+<SCRIPT language="JavaScript" type="text/javascript" src="tngmenuhover.js"></SCRIPT>
+<link href="/genealogy/demo6/genstyle.css" rel="stylesheet">
+
+<link href="tngtabs1.css" rel="stylesheet" type="text/css">
+<!-- The Next Generation of Genealogy Sitebuilding, v.6.0.4 (12 Jan 2007), Written by Darrin Lythgoe, 2001-2007 -->
+</head>
+<body>
+<table align="right" width="400">
+<tr>
+<td><div style="float:right; position:relative; clear:both; z-index:103;">
+<ul id="mnav">
+<li><a href="#"><img src="ArrowDown.gif" width="25" height="8" vspace="4" border="0" align="left" alt="" />Chercher</a>
+<ul id="first">
+<li><a href="surnames.php"><img src="tng_names.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Noms 
+de famille</a></li>
+<li><a href="bookmarks.php"><img src="tng_bmk.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Signets</a></li>
+<li><a href="places.php"><img src="tng_place.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Lieux</a></li>
+<li><a href="anniversaries.php"><img src="tng_date.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Dates</a></li>
+<li><a href="cemeteries.php"><img src="tng_hs.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Cimetières</a></li>
+<li><a href="searchform.php"><img src="tng_search2.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Chercher</a></li>
+</ul>
+</li>
+<li><a href="#"><img src="ArrowDown.gif" width="25" height="8" vspace="4" border="0" align="left" alt="" />Médias</a>
+<ul id="second">
+<li><a href="browsemedia.php?mediatypeID=photos"><img src="tng_photo.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" /></a></li>
+<li><a href="browsemedia.php?mediatypeID=documents"><img src="tng_doc.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" /></a></li>
+<li><a href="browsemedia.php?mediatypeID=headstones"><img src="tng_hs.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" /></a></li>
+<li><a href="browsemedia.php?mediatypeID=histories"><img src="tng_hist.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" /></a></li>
+<li><a href="browsemedia.php?mediatypeID=recordings"><img src="tng_rec.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" /></a></li>
+<li><a href="browsemedia.php?mediatypeID=videos"><img src="tng_video.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" /></a></li>
+<li><a href="browsealbums.php"><img src="tng_album.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Albums</a></li>
+<li><a href="browsemedia.php"><img src="tng_media.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Tous 
+les médias</a></li>
+</ul>
+</li>
+<li><a href="#"><img src="ArrowDown.gif" width="25" height="8" vspace="4" border="0" align="left" alt="" />Info</a>
+<ul id="third">
+<li><a href="whatsnew.php"><img src="tng_new.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Quoi 
+de neuf ?</a></li>
+<li><a href="reports.php"><img src="tng_rpt.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Rapports</a></li>
+<li><a href="browsetrees.php"><img src="tng_stats.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Statistiques</a></li>
+<li><a href="browsenotes.php"><img src="tng_note.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Notes</a></li>
+<li><a href="browsesources.php"><img src="tng_src.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Sources</a></li>
+<li><a href="browserepos.php"><img src="tng_repo.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Dépôts</a></li>
+<li><a href="suggest.php"><img src="tng_contact.gif" width="20" height="20" border="0" hspace="4" style="vertical-align:middle" align="left" alt="" />Contactez-nous</a></li>
+</ul>
+</li>
+</ul>
+<br clear="all">
+<div align="right" style="padding-top:2px; padding-right:2px">
+<form style="margin:0px" action="savelanguage2.php" method="GET" name="tngmenu1">
+<select name="newlanguage1" id="newlanguage1" style="font-size: 10px;" onChange="document.tngmenu1.submit();"><option value="13">
+Afrikaans</option>
+<option value="14">Czech</option>
+<option value="15">Danish</option>
+<option value="4">Deutsch</option>
+<option value="1">English</option>
+<option value="6">Español</option>
+<option value="3" selected>Français</option>
+<option value="16">Italian/Italiano</option>
+<option value="2">Nederlands</option>
+<option value="5">Norsk</option>
+<option value="17">Polska</option>
+<option value="12">Português (BR)</option>
+<option value="8">Suomi</option>
+<option value="7">Svenska</option>
+</select>
+<input type="hidden" name="instance" value="1"></form>
+</div></td>
+</tr>
+</table>
+<span class="header">Joseph Lythgoe</span><br /><span class="normal"><img src="tng_male.gif" width="11" height="11" border="0" alt="" style="vertical-align: -1px;"/>&nbsp;1753 
+- 1803</span><br />
+<br clear="all" />
+<p class="smaller">
+<a href="index.php" target="_self" title="Page d'Accueil"><img src="tng_home.gif" width="16" height="15" border="0" class="tngmenuicon" vspace="0" hspace="1" alt="Page d'Accueil"/>Page 
+d'Accueil</a>&nbsp;&nbsp;&nbsp;
+<a href="searchform.php" title="Chercher"><img src="tng_search.gif" width="16" height="15" border="0" class="tngmenuicon" vspace="0" hspace="1" alt="Chercher"/>Chercher</a>&nbsp;&nbsp;&nbsp;
+<a href="javascript:newwindow=window.open('/genealogy/demo6/pedigree.php?personID=I871&amp;tree=&amp;tngprint=1','tngprint','width=850,height=600,status=no,resizable=yes,scrollbars=yes'); newwindow.focus();" onmouseover="window.status='Imprimer';return true" onmouseout="window.status='';return true" title="Imprimer"><img src="tng_print.gif" width="16" height="15" border="0" class="tngmenuicon" vspace="0" hspace="1" alt="Imprimer"/>Imprimer</a>&nbsp;&nbsp;&nbsp;
+<a href="login.php" title="Se connecter - Utilisateur: anonyme"><img src="tng_log.gif" width="16" height="15" border="0" class="tngmenuicon" vspace="0" hspace="1" alt="Se connecter - Utilisateur: anonyme"/>Se 
+connecter</a>&nbsp;&nbsp;&nbsp;
+<a href="javascript:newwindow=window.open('addbookmark.php','addbookmark','width=350,height=125,status=no,resizable=yes,scrollbars=yes'); newwindow.focus();" onmouseover="window.status='Ajouter un signet';return true" onmouseout="window.status='';return true" title=""><img src="tng_bmk2.gif" width="16" height="15" border="0" class="tngmenuicon" vspace="0" hspace="1" alt="Ajouter un signet"/>Ajouter 
+un signet</a>
+
+</p>
+<form style="margin:0px" action="pedigree.php" name="form1" id="form1">
+<table border="0" cellspacing="1" cellpadding="0" width="100%">
+<tr>
+<td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td nowrap>
+<ul id="tngnav">
+<li><a id="a0" href="getperson.php?personID=I871&amp;tree="><img src="tng_ind.gif" width="16" height="15" border="0" alt="" class="tngmenuicon"/>Personnes</a></li>
+<li><a id="a1" href="pedigree.php?personID=I871&amp;tree=" class="here"><img src="tng_ped.gif" width="16" height="15" border="0" alt="" class="tngmenuicon"/>Ancêtres</a></li>
+<li><a id="a2" href="descend.php?personID=I871&amp;tree="><img src="tng_desc.gif" width="16" height="15" border="0" alt="" class="tngmenuicon"/>Descendants</a></li>
+<li><a id="a3" href="relateform.php?primaryID=I871&amp;tree="><img src="tng_rel.gif" width="16" height="15" border="0" alt="" class="tngmenuicon"/>Parenté</a></li>
+<li><a id="a4" href="timeline.php?primaryID=I871&amp;tree="><img src="tng_time.gif" width="16" height="15" border="0" alt="" class="tngmenuicon"/>Ligne 
+du temps</a></li>
+<li><a id="a5" href="suggest.php?enttype=I&amp;ID=I871&amp;tree="><img src="tng_edit.gif" width="16" height="15" border="0" alt="" class="tngmenuicon"/>Suggestion</a></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td valign="top" class="fieldnameback" style="padding: 0.2em 0em 0.2em .7em; border-right: 1px solid #777; border-bottom: 1px solid #777;">
+<span class="fieldname"><span class="smaller">
+Générations: &nbsp;<select name="generations" style="font-size:9px" onChange="window.location.href='pedigree.php?personID=' + firstperson + '&amp;tree=&amp;parentset=0&amp;display=standard&amp;generations=' + this.options[this.selectedIndex].value">
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4" selected>4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+</select>&nbsp;&nbsp;&nbsp;
+<a href="pedigree.php?personID=I871&amp;tree=&amp;parentset=0&amp;display=standard" class="lightlink3" id="stdpedlnk" onClick="this.href += '&amp;generations=' + document.form1.generations.options[document.form1.generations.selectedIndex].value;">
+Standard</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 
+<a href="pedigree.php?personID=I871&amp;tree=&amp;parentset=0&amp;display=compact" class="lightlink" id="compedlnk" onClick="this.href += '&amp;generations=' + document.form1.generations.options[document.form1.generations.selectedIndex].value;">
+Compact</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 
+<a href="pedigree.php?personID=I871&amp;tree=&amp;parentset=0&amp;display=box" class="lightlink" id="boxpedlnk" onClick="this.href += '&amp;generations=' + document.form1.generations.options[document.form1.generations.selectedIndex].value;">
+Boîte</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 
+<a href="pedigreetext.php?personID=I871&amp;tree=&amp;parentset=0" class="lightlink" onClick="this.href += '&amp;generations=' + document.form1.generations.options[document.form1.generations.selectedIndex].value;">
+Texte seul</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 
+<a href="ahnentafel.php?personID=I871&amp;tree=&amp;parentset=0" class="lightlink" onClick="this.href += '&amp;generations=' + document.form1.generations.options[document.form1.generations.selectedIndex].value;">
+Ahnentafel</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; 
+<a href="extrastree.php?personID=I871&amp;tree=&amp;parentset=0&amp;showall=1" class="lightlink" onClick="this.href += '&amp;generations=' + document.form1.generations.options[document.form1.generations.selectedIndex].value;">
+Médias</a>
+</span></span>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table><br/>
+</form>
+<span class="normal">(Notes: Utilisez les ascenseurs pour voir tout l'arbre. <img src="ArrowDown.gif" width="25" height="8" alt=""> 
+= Information supplémentaire&nbsp;&nbsp;<img src="Chart.gif" border="0" width="11" height="10" title=" = Nouvel arbre" alt=" = Nouvel arbre">&nbsp;&nbsp; 
+= Nouvel arbre)</span><div id="loading" style="position:relative; width=200px; visibility=visible; z-index=9; margin:0px"><br /><span class="normal"><b>
+	Chargement...</b></span></div>
+<div align="left" style="position:relative;" id="outer">
+
+<!-- box for slot 1 -->
+<div id="leftarrow">
+</div>
+<div class="popup" id="popupleft" style=" top:273px; left:11px;" onmouseover="cancelTimer('left')" onMouseout="setTimer('left')">
+</div>
+<div id="box1" style="background-color:#cccc99"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow1" style="position:absolute; top:317px;left:89px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(1, 250,61)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup1" style="left:28px;" onmouseover="cancelTimer(1)" onmouseout="setTimer(1)">
+</div>
+
+<!-- box outline and shadow for slot 1 -->
+<div class="border" id="border1_1"></div>
+<div class="shadow" id="shadow1_1"></div>
+<div class="border" id="border1_3"></div>
+<div class="shadow" id="shadow1_3"></div>
+
+<!-- box for slot 2 -->
+<div id="box2" style="background-color:#e4e4b1">xavier</div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow2" style="position:absolute; top:172px;left:271px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(2, 107,59)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup2" style="left:210px;" onmouseover="cancelTimer(2)" onmouseout="setTimer(2)">
+</div>
+
+<!-- box outline and shadow for slot 2 -->
+<div class="border" id="border2_1"></div>
+<div class="shadow" id="shadow2_1"></div>
+<div class="border" id="border2_2"></div>
+<div class="shadow" id="shadow2_2"></div>
+<div class="border" id="border2_3"></div>
+<div class="shadow" id="shadow2_3"></div>
+<div class="border" id="border2_4"></div>
+<div class="shadow" id="shadow2_4"></div>
+
+<!-- box for slot 4 -->
+<div id="box4" style="background-color:#fcfcc9"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow4" style="position:absolute; top:99px;left:453px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(4, 36,57)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup4" style="left:392px;" onmouseover="cancelTimer(4)" onmouseout="setTimer(4)">
+</div>
+
+<!-- box outline and shadow for slot 4 -->
+<div class="border" id="border4_1"></div>
+<div class="shadow" id="shadow4_1"></div>
+<div class="border" id="border4_2"></div>
+<div class="shadow" id="shadow4_2"></div>
+<div class="border" id="border4_3"></div>
+<div class="shadow" id="shadow4_3"></div>
+<div class="border" id="border4_4"></div>
+<div class="shadow" id="shadow4_4"></div>
+
+<!-- box for slot 8 -->
+<div id="box8" style="background-color:#ffffe1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow8" style="position:absolute; top:62px;left:635px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(8, 1,55)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup8" style="left:574px;" onmouseover="cancelTimer(8)" onmouseout="setTimer(8)">
+</div>
+
+<!-- box outline and shadow for slot 8 -->
+<div class="border" id="border8_1"></div>
+<div class="shadow" id="shadow8_1"></div>
+<div class="border" id="border8_2"></div>
+<div class="shadow" id="shadow8_2"></div>
+<div class="border" id="border8_4"></div>
+<div class="shadow" id="shadow8_4"></div>
+<div id="offpage8"><a href="javascript:getNewFamilies(topparams,1,'M');"><img border="0" src="ArrowRight.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre"></a></div>
+
+<!-- box for slot 9 -->
+<div id="box9" style="background-color:#ffffe1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow9" style="position:absolute; top:134px;left:635px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(9, 73,55)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup9" style="left:574px;" onmouseover="cancelTimer(9)" onmouseout="setTimer(9)">
+</div>
+
+<!-- box outline and shadow for slot 9 -->
+<div class="border" id="border9_1"></div>
+<div class="shadow" id="shadow9_1"></div>
+<div class="border" id="border9_2"></div>
+<div class="shadow" id="shadow9_2"></div>
+<div class="border" id="border9_5"></div>
+<div class="shadow" id="shadow9_5"></div>
+<div id="offpage9"><a href="javascript:getNewFamilies(topparams,1,'M');"><img border="0" src="ArrowRight.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre"></a></div>
+
+<!-- box for slot 5 -->
+<div id="box5" style="background-color:#fcfcc9"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow5" style="position:absolute; top:243px;left:453px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(5, 180,57)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup5" style="left:392px;" onmouseover="cancelTimer(5)" onmouseout="setTimer(5)">
+</div>
+
+<!-- box outline and shadow for slot 5 -->
+<div class="border" id="border5_1"></div>
+<div class="shadow" id="shadow5_1"></div>
+<div class="border" id="border5_2"></div>
+<div class="shadow" id="shadow5_2"></div>
+<div class="border" id="border5_3"></div>
+<div class="shadow" id="shadow5_3"></div>
+<div class="border" id="border5_5"></div>
+<div class="shadow" id="shadow5_5"></div>
+
+<!-- box for slot 10 -->
+<div id="box10" style="background-color:#ffffe1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow10" style="position:absolute; top:206px;left:635px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(10, 145,55)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup10" style="left:574px;" onmouseover="cancelTimer(10)" onmouseout="setTimer(10)">
+</div>
+
+<!-- box outline and shadow for slot 10 -->
+<div class="border" id="border10_1"></div>
+<div class="shadow" id="shadow10_1"></div>
+<div class="border" id="border10_2"></div>
+<div class="shadow" id="shadow10_2"></div>
+<div class="border" id="border10_4"></div>
+<div class="shadow" id="shadow10_4"></div>
+<div id="offpage10"><a href="javascript:getNewFamilies(topparams,1,'M');"><img border="0" src="ArrowRight.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre"></a></div>
+
+<!-- box for slot 11 -->
+<div id="box11" style="background-color:#ffffe1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow11" style="position:absolute; top:278px;left:635px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(11, 217,55)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup11" style="left:574px;" onmouseover="cancelTimer(11)" onmouseout="setTimer(11)">
+</div>
+
+<!-- box outline and shadow for slot 11 -->
+<div class="border" id="border11_1"></div>
+<div class="shadow" id="shadow11_1"></div>
+<div class="border" id="border11_2"></div>
+<div class="shadow" id="shadow11_2"></div>
+<div class="border" id="border11_5"></div>
+<div class="shadow" id="shadow11_5"></div>
+<div id="offpage11"><a href="javascript:getNewFamilies(topparams,1,'M');"><img border="0" src="ArrowRight.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre"></a></div>
+
+<!-- box for slot 3 -->
+<div id="box3" style="background-color:#e4e4b1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow3" style="position:absolute; top:460px;left:271px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(3, 395,59)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup3" style="left:210px;" onmouseover="cancelTimer(3)" onmouseout="setTimer(3)">
+</div>
+
+<!-- box outline and shadow for slot 3 -->
+<div class="border" id="border3_1"></div>
+<div class="shadow" id="shadow3_1"></div>
+<div class="border" id="border3_2"></div>
+<div class="shadow" id="shadow3_2"></div>
+<div class="border" id="border3_3"></div>
+<div class="shadow" id="shadow3_3"></div>
+<div class="border" id="border3_5"></div>
+<div class="shadow" id="shadow3_5"></div>
+
+<!-- box for slot 6 -->
+<div id="box6" style="background-color:#fcfcc9"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow6" style="position:absolute; top:387px;left:453px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(6, 324,57)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup6" style="left:392px;" onmouseover="cancelTimer(6)" onmouseout="setTimer(6)">
+</div>
+
+<!-- box outline and shadow for slot 6 -->
+<div class="border" id="border6_1"></div>
+<div class="shadow" id="shadow6_1"></div>
+<div class="border" id="border6_2"></div>
+<div class="shadow" id="shadow6_2"></div>
+<div class="border" id="border6_3"></div>
+<div class="shadow" id="shadow6_3"></div>
+<div class="border" id="border6_4"></div>
+<div class="shadow" id="shadow6_4"></div>
+
+<!-- box for slot 12 -->
+<div id="box12" style="background-color:#ffffe1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow12" style="position:absolute; top:350px;left:635px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(12, 289,55)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup12" style="left:574px;" onmouseover="cancelTimer(12)" onmouseout="setTimer(12)">
+</div>
+
+<!-- box outline and shadow for slot 12 -->
+<div class="border" id="border12_1"></div>
+<div class="shadow" id="shadow12_1"></div>
+<div class="border" id="border12_2"></div>
+<div class="shadow" id="shadow12_2"></div>
+<div class="border" id="border12_4"></div>
+<div class="shadow" id="shadow12_4"></div>
+<div id="offpage12"><a href="javascript:getNewFamilies(botparams,1,'F');"><img border="0" src="ArrowRight.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre"></a></div>
+
+<!-- box for slot 13 -->
+<div id="box13" style="background-color:#ffffe1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow13" style="position:absolute; top:422px;left:635px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(13, 361,55)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup13" style="left:574px;" onmouseover="cancelTimer(13)" onmouseout="setTimer(13)">
+</div>
+
+<!-- box outline and shadow for slot 13 -->
+<div class="border" id="border13_1"></div>
+<div class="shadow" id="shadow13_1"></div>
+<div class="border" id="border13_2"></div>
+<div class="shadow" id="shadow13_2"></div>
+<div class="border" id="border13_5"></div>
+<div class="shadow" id="shadow13_5"></div>
+<div id="offpage13"><a href="javascript:getNewFamilies(botparams,1,'F');"><img border="0" src="ArrowRight.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre"></a></div>
+
+<!-- box for slot 7 -->
+<div id="box7" style="background-color:#fcfcc9"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow7" style="position:absolute; top:531px;left:453px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(7, 468,57)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup7" style="left:392px;" onmouseover="cancelTimer(7)" onmouseout="setTimer(7)">
+</div>
+
+<!-- box outline and shadow for slot 7 -->
+<div class="border" id="border7_1"></div>
+<div class="shadow" id="shadow7_1"></div>
+<div class="border" id="border7_2"></div>
+<div class="shadow" id="shadow7_2"></div>
+<div class="border" id="border7_3"></div>
+<div class="shadow" id="shadow7_3"></div>
+<div class="border" id="border7_5"></div>
+<div class="shadow" id="shadow7_5"></div>
+
+<!-- box for slot 14 -->
+<div id="box14" style="background-color:#ffffe1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow14" style="position:absolute; top:494px;left:635px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(14, 433,55)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup14" style="left:574px;" onmouseover="cancelTimer(14)" onmouseout="setTimer(14)">
+</div>
+
+<!-- box outline and shadow for slot 14 -->
+<div class="border" id="border14_1"></div>
+<div class="shadow" id="shadow14_1"></div>
+<div class="border" id="border14_2"></div>
+<div class="shadow" id="shadow14_2"></div>
+<div class="border" id="border14_4"></div>
+<div class="shadow" id="shadow14_4"></div>
+<div id="offpage14"><a href="javascript:getNewFamilies(botparams,1,'F');"><img border="0" src="ArrowRight.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre"></a></div>
+
+<!-- box for slot 15 -->
+<div id="box15" style="background-color:#ffffe1"></div>
+
+<!-- popup for  -->
+
+<div class="downarrow" id="downarrow15" style="position:absolute; top:566px;left:635px;z-index:7;cursor:pointer">
+<a href="#" onmouseover="showPopup(15, 505,55)"><img src="ArrowDown.gif" border="0" width="25" height="8"  alt=""></a></div>
+<div class="popup" id="popup15" style="left:574px;" onmouseover="cancelTimer(15)" onmouseout="setTimer(15)">
+</div>
+
+<!-- box outline and shadow for slot 15 -->
+<div class="border" id="border15_1"></div>
+<div class="shadow" id="shadow15_1"></div>
+<div class="border" id="border15_2"></div>
+<div class="shadow" id="shadow15_2"></div>
+<div class="border" id="border15_5"></div>
+<div class="shadow" id="shadow15_5"></div>
+<div id="offpage15"><a href="javascript:getNewFamilies(botparams,1,'F');"><img border="0" src="ArrowRight.gif" width="10" height="16" title=" = Nouvel arbre" alt=" = Nouvel arbre"></a></div>
+
+<table border="0" cellspacing="0" cellpadding="0" width="742" style="height: 584px;">
+<tr><td></td></tr></table>
+
+</div>
+<SCRIPT language="JavaScript" type="text/javascript">
+for( var c = 1; c < slotceiling; c++ ) {
+	var slot = document.getElementById('box'+c);
+	slot.oldcolor = slot.style.backgroundColor;
+}
+getNewChart(personID,generations,parentset);
+  </script>
+<hr size="1">
+<br/>This site powered by <a href="http://lythgoes.net/genealogy/software.php">
+The Next Generation of Genealogy Sitebuilding</a>, Copyright © 2001-2007, 
+created by Darrin Lythgoe, Sandy, Utah. All rights reserved.
+<br/>
+</body>
+</html>

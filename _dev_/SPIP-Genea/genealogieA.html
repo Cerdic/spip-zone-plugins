@@ -1,0 +1,188 @@
+#CACHE{86400}
+<BOUCLE_article_genea(INDIVIDUS){id_individu}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_genea_rub(SPIP_GENEA){id_genea}>#SET{id_rub, #ID_RUBRIQUE}</BOUCLE_genea_rub>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#MODELE{nomcomplet}{id_individu}) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_genea">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique=#GET{id_rub}}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80}|supprimer_numero)]</div>
+
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				[(#MODELE{info_article})]
+				#DEBUT_SURLIGNE
+				[(#LOGO_INDIVIDU||image_reduire{80,80})]
+				[<img src='IMG/indivon(#ID_INDIVIDU).jpg' width='148' height='160' alt="" class='spip_logos' />]
+				<BOUCLE_nom_famille(RUBRIQUES){id_rubrique=#GET{id_rub}}>[<p class="surtitre">(#TITRE)</p>]</BOUCLE_nom_famille>[(#SEXE|=={M}|?{' ',''}) #SET{titre_sexe, 'male'}] [(#SEXE|=={F}|?{' ',''}) #SET{titre_sexe, 'femelle'}]
+				<h1 class="titre">[<div style="float:left;"><img src="#EVAL{_DIR_PLUGIN_GENEA}/img_pack/(#GET{titre_sexe}).gif" width='32' height='28' border='0' align="texttop" /></div>][(#MODELE{nomcomplet}{id_individu})]</h1>
+				<p class="soustitre">[<span class="surnom">[(#SEXE|=={M}|?{' ',''})<:genea:aliasm:>][(#SEXE|=={F}|?{' ',''})<:genea:aliasf:>] &#34;(#SURNOM)&#34;&nbsp;</span>][<span class="titsosa">(Sosa (#SOSA))</span>]</p>
+				#FIN_SURLIGNE	
+
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{article_traductions}
+
+			</div>
+			
+			#DEBUT_SURLIGNE
+			<div class="chapo">
+				<table>
+					[<tr><td valign="top"><:genea:sexe:>&nbsp;:</td><td colspan="2">(#INTITULE_SEXE)</td></tr>]
+					[<tr><td valign="top"><:genea:naissance:>&nbsp;:</td><td colspan="2">(#DATE_NAISSANCE|affdate) à Paris-14e--Arrondissement (75014), FRANCE</td></tr>]
+					[<tr><td valign="top"><:genea:deces:>&nbsp;:</td><td colspan="2">(#DATE_DECES|affdate) à Romainville (93230), FRANCE</td></tr>]
+				</table>
+			</div>
+			<br class="nettoyeur" />
+			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="texte">(#TEXTE|image_reduire{520,0})</div>]
+
+<div>
+<table>
+<BOUCLE_parents(SPIP_GENEA_FAMILLES){id_famille}>
+<BOUCLE_pere(INDIVIDUS){id_individu=#ID_PERE}><tr><td><:genea:pere:>&nbsp;:</td><td colspan="2"><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></td></tr></BOUCLE_pere>
+<BOUCLE_mere(INDIVIDUS){id_individu=#ID_MERE}><tr><td><:genea:mere:>&nbsp;:</td><td colspan="2"><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></td></tr></BOUCLE_mere>
+</BOUCLE_parents>
+</table>
+
+<BOUCLE_famille(SPIP_GENEA_FAMILLES){id_genea}{id_pere=#ID_INDIVIDU || id_mere=#ID_INDIVIDU}>
+<h3 class="spip"><:genea:union:></h3>
+[(#_article_genea:ID_INDIVIDU|=={#ID_PERE}|?{' ',''}) #SET{epoux, #ID_MERE}][(#_article_genea:ID_INDIVIDU|=={#ID_MERE}|?{' ',''}) #SET{epoux, #ID_PERE}]
+<B_epoux>
+<ul>
+<BOUCLE_epoux(INDIVIDUS){id_individu=#GET{epoux}}>
+<li><span><:genea:mariage:>&nbsp;:</span>24 novembre 1956 à Montreuil (93100), FRANCE<br />
+<span><:genea:union:>&nbsp;#COMPTEUR_BOUCLE&nbsp;:&nbsp;</span><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span>
+</BOUCLE_epoux>
+<B_enfant>
+<ul>
+<BOUCLE_enfant(INDIVIDUS){id_famille}>
+[(#SEXE|=={M}|?{' ',''}) #SET{titre_sexe, 'male'}] [(#SEXE|=={F}|?{' ',''}) #SET{titre_sexe, 'femelle'}]
+<li><span><:genea:enfant:>&nbsp;#COMPTEUR_BOUCLE&nbsp;:</span>[<img src="#EVAL{_DIR_PLUGIN_GENEA}/img_pack/(#GET{titre_sexe}).gif" alt="<:genea:#GET{titre_sexe}:>" border="0" width="17" height="17" class="sexeenfant" />]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></li>
+</BOUCLE_enfant>
+</ul>
+</B_enfant>
+</li>
+</BOUCLE_epoux>
+</ul>
+</B_epoux>
+</BOUCLE_famille>
+
+<h3 class="spip"><:genea:evenement:></h3>
+<ul>
+	<li>Acquisition&nbsp;:<span> Achat d'une maison</span><span> Romainville 93230 FRANCE</span><span class="dates"> (2 mai 1954)</span><span class="evecomment"> </span></span></li>
+	<li>Crémation&nbsp;:<span> Crématorium de Pierrefitte</span><span> Pierrefitte-sur-Seine 93380 FRANCE</span><span class="dates"> (21 mai 1984)</span><span class="evecomment"> </span></li>
+</ul>
+
+<h3 class="spip"><:genea:profession:></h3>
+<ul>
+	<li>du 1965 au 15 mai 1984 - Plombier</li>
+</ul>
+
+<div class="ascendance">
+<h3 class="spip"><:genea:ascendance:></h3>
+<table class="ascendance"><tr>
+<td rowspan="4"><table class="ascendancehomme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM<br>&nbsp;&nbsp;#PRENOMS</a><br><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></td></tr></table></td>
+<td rowspan="2"><table class="ascendancehomme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Burot<br>&nbsp;&nbsp;Raymond, Jules, Léon</a><br><span class="dates">(o&nbsp;1885 … †&nbsp;1971)</span></td></tr></table></td>
+<td><table class="ascendancehomme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Burot<br>&nbsp;&nbsp;Léon, Hector</a><br><span class="dates">(o&nbsp;1858 … †&nbsp;1942)</span></td></tr></table></td>
+</tr><tr>
+<td><table class="ascendancefemme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Lamare (Lamarre)<br>&nbsp;&nbsp;Juliette, Clémentine</a><br><span class="dates">(o&nbsp;1862 … †&nbsp;1953)</span></td></tr></table></td>
+</tr><tr>
+<td rowspan="2"><table class="ascendancefemme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Leman<br>&nbsp;&nbsp;Germaine</a><br><span class="dates">(o&nbsp;1889 … †&nbsp;1930)</span></td></tr></table></td>
+<td><table class="ascendancehomme"><tr><td>&nbsp;</td></tr></table></td>
+</tr><tr>
+<td><table class="ascendancefemme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Leman<br>&nbsp;&nbsp;Clémence</a><br>&nbsp;</td></tr></table></td>
+</tr><tr>
+<td rowspan="4"><table class="ascendancefemme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Chauvet<br>&nbsp;&nbsp;Yvonne</a><br><span class="dates">(o&nbsp;1905 … †&nbsp;1991)</span></td></tr></table></td>
+<td rowspan="2"><table class="ascendancehomme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Chauvet<br>&nbsp;&nbsp;Jean</a><br><span class="dates">(o&nbsp;1874 … †&nbsp;1914)</span></td></tr></table></td>
+<td><table class="ascendancehomme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Chauvet<br>&nbsp;&nbsp;Jean</a><br><span class="dates">(o&nbsp;1840 … †&nbsp;1914)</span></td></tr></table></td>
+</tr><tr>
+<td><table class="ascendancefemme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Charvielle<br>&nbsp;&nbsp;Marguerite</a><br><span class="dates">(†&nbsp;1914)</span></td></tr></table></td>
+</tr><tr>
+<td rowspan="2"><table class="ascendancefemme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Faure<br>&nbsp;&nbsp;Adèle</a><br><span class="dates">(o&nbsp;1875 … †&nbsp;1930)</span></td></tr></table></td>
+<td><table class="ascendancehomme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Faure<br>&nbsp;&nbsp;Jean</a><br>&nbsp;</td></tr></table></td>
+</tr><tr>
+<td><table class="ascendancefemme"><tr><td>[<span class="ascsosa">(s (#SOSA))</span>]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">Jarjavelle<br>&nbsp;&nbsp;Jeanne</a><br>&nbsp;</td></tr></table></td>
+</tr></table>
+</div>
+</div>
+			#FIN_SURLIGNE
+
+			[(#REM) Portfolio : album d'images ]
+			<B_documents_portfolio>
+			<div id="documents_portfolio">
+				<h2><:info_portfolio:></h2>
+				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
+				[<a href="#URL_DOCUMENT" type="#MIME_TYPE" onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+				</BOUCLE_documents_portfolio>
+			</div>
+			</B_documents_portfolio>
+			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {id_article} {mode=document}{extension IN png,jpg,gif}>
+			<div class="spip_documents spip_documents_center" id="document_actif">
+				#EMBED_DOCUMENT
+				[<div class="spip_doc_titre">(#TITRE||supprimer_numero)</div>]
+				[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+			</div>
+			</BOUCLE_afficher_document>
+
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+
+			[(#REM) Autres documents joints a l'article ]
+			<B_documents_joints>
+			<div id="documents_joints">
+				<h2><:titre_documents_joints:></h2>
+				<ul>
+					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
+					<li>
+						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+					</li>
+					</BOUCLE_documents_joints>
+				</ul>
+			</div>
+			</B_documents_joints>
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique=#GET{id_rub}}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<div class="breves">
+				<h2 class="menu-titre"><a href=""><:meme_rubrique:></a></h2>
+				<ul>
+					<li><a href="">Statistiques</a></li>
+					<li><a href="">Liste des patronymes</a></li>
+					<li><a href="">Liste des lieux</a></li>
+				</ul>
+			</div>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_article_genea>

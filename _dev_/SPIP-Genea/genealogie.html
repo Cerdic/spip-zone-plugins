@@ -1,0 +1,235 @@
+#CACHE{86400}
+<BOUCLE_article_genea(INDIVIDUS){id_individu}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_genea_rub(SPIP_GENEA){id_genea}>#SET{id_rub, #ID_RUBRIQUE}</BOUCLE_genea_rub>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#MODELE{nomcomplet}{id_individu}) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+<style type="text/css">
+    </style>
+</head>
+
+<body class="page_genea">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_rub(RUBRIQUES){id_rubrique=#GET{id_rub}}><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>]</BOUCLE_rub>[ &gt; (#MODELE{nomcomplet}{id_individu})] </div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				[(#LOGO_INDIVIDU||image_reduire{80,80})]
+				<BOUCLE_nom_famille(RUBRIQUES){id_rubrique=#GET{id_rub}}>[<p class="surtitre">(#TITRE||supprimer_numero)</p>]</BOUCLE_nom_famille>[(#SEXE|=={M}|?{' ',''}) #SET{titre_sexe, 'male'}] [(#SEXE|=={F}|?{' ',''}) #SET{titre_sexe, 'femelle'}]
+				<h1 class="titre">[<div style="float:left;"><img src="#EVAL{_DIR_PLUGIN_GENEA}/img_pack/(#GET{titre_sexe}).gif" width='32' height='28' class="sexe" /></div>][(#MODELE{nomcomplet}{id_individu})]</h1>
+				<p class="soustitre">[<span class="surnom">[(#SEXE|=={M}|?{' ',''})<:genea:aliasm:>][(#SEXE|=={F}|?{' ',''})<:genea:aliasf:>] &#34;(#SURNOM)&#34;&nbsp;</span>]</p>
+				#FIN_SURLIGNE	
+			</div>
+			
+			#DEBUT_SURLIGNE
+			<div class="chapo">
+				<table>
+					[<tr><td valign="top" nowrap><:genea:sosa:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2" class="indivsosa">(#SOSA)</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:sexe:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#INTITULE_SEXE)</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:birt:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_NAISSANCE|affdate) à Paris-14e--Arrondissement (75014), FRANCE</td></tr>]
+					[<tr><td valign="top" nowrap><:genea:deat:></td><td valign="top">&nbsp;:&nbsp;</td><td colspan="2">(#DATE_DECES|affdate) à Romainville (93230), FRANCE</td></tr>]
+				</table>
+			</div>
+			<br class="nettoyeur" />
+			<div class="texte">
+				<div class="tab-pane">
+				
+					<B_conjointM>
+					<div class="tab-page">
+						<h2 class="tab"><:genea:union:></h2>
+						<table class="dataidentite">
+						<BOUCLE_conjointM(SPIP_GENEA_FAMILLES){id_genea}{id_pere=#ID_INDIVIDU}>
+							<BOUCLE_epouse(INDIVIDUS){id_individu=#ID_MERE}>
+								<tr class="fiche-union" border="1" style="padding-bottom:12em;">
+									<td class="titre-union"><:genea:union:>&nbsp;#_conjointM:COMPTEUR_BOUCLE&nbsp;:</td>
+									<td class="info-union">
+										<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span><br />
+										<B_mariageM>
+										<ul class="evt-union">
+										<BOUCLE_mariageM(GENEA_EVT){id_individu=#_article_genea:ID_INDIVIDU}{id_individu=#_conjointM:ID_MERE}{par date, date_fin}{type_evt IN ANUL, MARB, MARC, MARL, MARR, MARS, DIV, DIVF}>
+											<li>#GENEA_TRADUC&nbsp;: </span>[(#DATE|affdate)][ - (#DESCRIPTIF)][ - (#LIEU)]</li>
+										</BOUCLE_mariageM>
+										</ul>
+										</B_mariageM>
+										<B_enfantM>
+										<ul class="enfant-union">
+										<BOUCLE_enfantM(INDIVIDUS){id_famille=#_conjointM:ID_FAMILLE}>[(#SEXE|=={M}|?{' ',''}) #SET{titre_sexe, 'male'}] [(#SEXE|=={F}|?{' ',''}) #SET{titre_sexe, 'femelle'}]
+											<li><:genea:enfant:>&nbsp;#COMPTEUR_BOUCLE&nbsp;:</span>[<img src="#EVAL{_DIR_PLUGIN_GENEA}/img_pack/(#GET{titre_sexe}).gif" class="sexe" width="17" height="17" align="texttop" />]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></li>
+										</BOUCLE_enfantM>
+										</ul>
+										</B_enfantM>
+									</td>
+								</tr>
+							</BOUCLE_epouse>
+						</BOUCLE_conjointM>
+							<BOUCLE_conjointF(SPIP_GENEA_FAMILLES){id_genea}{id_mere=#ID_INDIVIDU}>
+								<BOUCLE_epoux(INDIVIDUS){id_individu=#ID_PERE}>
+									<tr class="fiche-union" border="1" style="padding-bottom:12em;">
+										<td class="titre-union"><:genea:union:>&nbsp;#_conjointF:COMPTEUR_BOUCLE&nbsp;:</td>
+										<td class="info-union">
+											<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span><br />
+											<B_mariageF>
+											<ul class="evt-union">
+											<BOUCLE_mariageF(GENEA_EVT){id_individu=#_article_genea:ID_INDIVIDU}{id_individu=#_conjointF:ID_PERE}{par date, date_fin}{type_evt IN ANUL, MARB, MARC, MARL, MARR, MARS, DIV, DIVF}>
+												<li>#GENEA_TRADUC&nbsp;: </span>[(#DATE|affdate)][ - (#DESCRIPTIF)][ - (#LIEU)]</li>
+											</BOUCLE_mariageF>
+											</ul>
+											</B_mariageF>
+											<B_enfantF>
+											<ul class="enfant-union">
+											<BOUCLE_enfantF(INDIVIDUS){id_famille=#_conjointF:ID_FAMILLE}>[(#SEXE|=={M}|?{' ',''}) #SET{titre_sexe, 'male'}] [(#SEXE|=={F}|?{' ',''}) #SET{titre_sexe, 'femelle'}]
+												<li class="enfant"><:genea:enfant:>&nbsp;#COMPTEUR_BOUCLE&nbsp;:</span>[<img src="#EVAL{_DIR_PLUGIN_GENEA}/img_pack/(#GET{titre_sexe}).gif" class="sexe" width="17" height="17" align="texttop" />]<a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></li>
+											</BOUCLE_enfantF>
+											</ul>
+											</B_enfantF>
+										</td>
+									</tr>
+								</BOUCLE_epoux>
+							</BOUCLE_conjointF>
+						<//B_conjointM>
+						</table>
+					</div>
+					</B_conjointM>
+					
+					<B_evt>
+					<div class="tab-page">
+						<h2 class="tab"><:genea:evenement:></h2>
+						<table class="dataidentite">
+						<BOUCLE_evt(GENEA_EVT){id_individu}{type_evt!='BIRT'}{type_evt!='DEAT'}{type_evt!='OCCU'}{type_evt!='MARB'}{type_evt!='MARC'}{type_evt!='MARL'}{type_evt!='MARS'}{type_evt!='MARR'}{type_evt!='DIV'}{type_evt!='DIVF'}{par date, date_fin}>
+							<tr>
+								<td valign="top" align="right" class="dates" nowrap>[(#DATE|affdate)][<br />(#DATE_FIN|affdate)]</td>
+								<td valign="top"> : </td>
+								<td valign="top">#GENEA_TRADUC  [=> (#DESCRIPTIF)][<br /><small>(#LIEU)</small>]</td>
+							</tr>
+						</BOUCLE_evt>
+						</table>
+					</div>
+					</B_evt>
+					
+					<B_profession>
+					<div class="tab-page">
+						<h2 class="tab"><:genea:profession:></h2>
+						<table class="dataidentite">
+						<BOUCLE_profession(GENEA_EVT){id_individu}{type_evt='OCCU'}{par date, date_fin}>
+							<tr>
+								<td valign="top" align="right" class="dates" nowrap>[(#DATE|affdate)][<br />(#DATE_FIN|affdate)]</td>
+								<td valign="top"> : </td>
+								<td valign="top">[(#DESCRIPTIF)][ chez (#LIEU)]</td>
+							</tr>
+						</BOUCLE_profession>
+						</table>
+					</div>
+					</B_profession>
+
+					<B_ascendance>
+					<div class="tab-page">
+						<h2 class="tab"><:genea:ascendance:></h2>
+						<div id="ascendant">
+
+<!-- box for slot 1 -->
+							<div id="box1" class="[(#SEXE|=={F}|?{'boxf', 'boxm'})]"><span class="nom">#NOM&nbsp;#PRENOMS</span><br /><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></div>
+							<div class="shadow" id="shadow1_1"></div>
+							<div class="border" id="border1_3"></div>
+							<div class="shadow" id="shadow1_3"></div>
+
+							<BOUCLE_ascendance(SPIP_GENEA_FAMILLES){id_famille}>
+<!-- box for slot 2 -->
+							<B_pere>
+							<div id="box2" class="boxm"><BOUCLE_pere(INDIVIDUS){id_individu=#ID_PERE}><span class="nom"><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a></span><br /><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span><BOUCLE_ascendancep(SPIP_GENEA_FAMILLES){id_famille}>#SET{gppat, #ID_PERE} #SET{gmpat, #ID_MERE}</BOUCLE_ascendancep></BOUCLE_pere></div>
+							<div class="shadow" id="shadow2_1"></div>
+							<div class="border" id="border2_2"></div>
+							<div class="shadow" id="shadow2_2"></div>
+							<div class="border" id="border2_3"></div>
+							<div class="shadow" id="shadow2_3"></div>
+							<div class="border" id="border2_4"></div>
+							<div class="shadow" id="shadow2_4"></div>
+<!-- box for slot 4 -->
+							<div id="box4" class="boxm">
+                              <BOUCLE_gperep(INDIVIDUS){id_individu=#GET{gppat}}><span class="nom"><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a></span><br /><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></BOUCLE_gperep></div>
+							<div class="shadow" id="shadow4_1"></div>
+							<div class="border" id="border4_2"></div>
+							<div class="shadow" id="shadow4_2"></div>
+							<div class="border" id="border4_4"></div>
+							<div class="shadow" id="shadow4_4"></div>
+<!-- box for slot 5 -->
+							<div id="box5" class="boxf">
+                              <BOUCLE_gmerep(INDIVIDUS){id_individu=#GET{gmpat}}><span class="nom"><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a></span><br /><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></BOUCLE_gmerep></div>
+							<div class="shadow" id="shadow5_1"></div>
+							<div class="border" id="border5_2"></div>
+							<div class="shadow" id="shadow5_2"></div>
+							<div class="border" id="border5_5"></div>
+							<div class="shadow" id="shadow5_5"></div>
+							</B_pere>
+<!-- box for slot 3 -->
+							<B_mere>
+							<div id="box3" class="boxf"><BOUCLE_mere(INDIVIDUS){id_individu=#ID_MERE}><span class="nom"><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a></span><br /><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span><BOUCLE_ascendancem(SPIP_GENEA_FAMILLES){id_famille}>#SET{gpmat, #ID_PERE} #SET{gmmat, #ID_MERE}</BOUCLE_ascendancem></BOUCLE_mere></div>
+							<div class="shadow" id="shadow3_1"></div>
+							<div class="border" id="border3_2"></div>
+							<div class="shadow" id="shadow3_2"></div>
+							<div class="border" id="border3_3"></div>
+							<div class="shadow" id="shadow3_3"></div>
+							<div class="border" id="border3_5"></div>
+							<div class="shadow" id="shadow3_5"></div>
+<!-- box for slot 6 -->
+							<div id="box6" class="boxm">
+                              <BOUCLE_gperem(INDIVIDUS){id_individu=#GET{gpmat}}><span class="nom"><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a></span><br /><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></BOUCLE_gperem></div>
+							<div class="shadow" id="shadow6_1"></div>
+							<div class="border" id="border6_2"></div>
+							<div class="shadow" id="shadow6_2"></div>
+							<div class="border" id="border6_4"></div>
+							<div class="shadow" id="shadow6_4"></div>
+<!-- box for slot 7 -->
+							<div id="box7" class="boxf">
+                              <BOUCLE_gmerem(INDIVIDUS){id_individu=#GET{gmmat}}><span class="nom"><a href="[(#URL_PAGE{genealogie}|parametre_url{id_individu,#ID_INDIVIDU})]">#NOM #PRENOMS</a></span><br /><span class="dates">([o&nbsp;(#DATE_NAISSANCE|affdate{annee})] ... [†&nbsp;(#DATE_DECES|affdate{annee})])</span></BOUCLE_gmerem></div>
+							<div class="shadow" id="shadow7_1"></div>
+							<div class="border" id="border7_2"></div>
+							<div class="shadow" id="shadow7_2"></div>
+							<div class="border" id="border7_5"></div>
+							<div class="shadow" id="shadow7_5"></div>
+							</B_mere>
+							</BOUCLE_ascendance>
+						</div>
+					</div>
+					</B_ascendance>
+					
+				</div>
+			</div>
+			#FIN_SURLIGNE
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique=#GET{id_rub}}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<INCLURE{fond=inc-genealogie}{id_genea}{small=oui}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+                </span>
+</body>
+</html>
+</BOUCLE_article_genea>

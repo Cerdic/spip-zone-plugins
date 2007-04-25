@@ -1,0 +1,31 @@
+<plugin>
+	<nom>Genea-SPIP - Plugin de g&eacute;n&eacute;alogie pour SPIP</nom>
+	<auteur>[Xavier BUROT->mailto:xebiaut@free.fr]
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Plugin de gestion d'arbre g&eacute;n&eacute;alogique &agrave; partir de fichier GEDCOM.</description>
+	<options>genea_mes_options.php</options>
+	<fonctions>genea_mes_fonctions.php</fonctions>
+	<prefix>genea</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>genea.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>genea.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>genea.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>head_prive</nom>
+		<inclure>genea.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>exec_init</nom>
+		<inclure>genea.php</inclure>
+	</pipeline>
+</plugin>

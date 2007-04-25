@@ -1,0 +1,27 @@
+[(#ENV{small}|=={oui}|?{' ', ''})
+<div class="breves">
+	<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+	<ul>
+		<li><a href="[(#URL_PAGE{statistiques}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{statistiques}|=={1}|?{' ',''}) class="on"]><:genea:statistiques:></a></li>
+		<li><a href="[(#URL_PAGE{patronymes}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{patronymes}|=={1}|?{' ',''}) class="on"]><:genea:liste_des_patronymes:></a></li>
+		<li><a href="[(#URL_PAGE{lieux}|parametre_url{id_genea,#ID_GENEA})]"[(#ENV{lieux}|=={1}|?{' ',''}) class="on"]><:genea:liste_des_lieux:></a></li>
+	</ul>
+</div>]
+[(#ENV{small}|!={oui}|?{' ', ''})
+<div class="liste-articles">
+	<h2 class="invisible"><:genea:liste_des_pages_genealogiques:></h2>
+	<ul>
+		<li>
+			<h3 class="titre"><a href="[(#URL_PAGE{statistiques}|parametre_url{id_genea,#ID_GENEA})]"><:genea:statistiques:></a></h3>
+			<small><:genea:soustitre_statistiques:></small>
+		</li>
+		<li>
+			<h3 class="titre"><a href="[(#URL_PAGE{patronymes}|parametre_url{id_genea,#ID_GENEA})]"><:genea:liste_des_patronymes:></a></h3>
+			<small><:genea:soustitre_patronyme:></small>
+		</li>
+		<li>
+			<h3 class="titre"><a href="[(#URL_PAGE{lieux}|parametre_url{id_genea,#ID_GENEA})]"><:genea:liste_des_lieux:></a></h3>
+			<small><:genea:soustitre_lieux:></small>
+		</li>
+	</ul>
+</div>]

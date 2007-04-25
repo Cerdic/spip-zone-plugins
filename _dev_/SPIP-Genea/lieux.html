@@ -1,0 +1,70 @@
+#CACHE{86400}
+<BOUCLE_genea(SPIP_GENEA){id_genea}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_nom_famille(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>#SET{nom_arbre, #TITRE||supprimer_numero}</BOUCLE_nom_famille>
+
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title><:genea:liste_des_lieux:>[ - (#ENV{nom}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta name="description" content="Liste des individus portant le meme patronyme." />
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_genea">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<BOUCLE_rub(RUBRIQUES){id_rubrique}><div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a></BOUCLE_ariane>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|couper{80}|supprimer_numero)</a>] &gt; <:genea:liste_des_lieux:></div></BOUCLE_rub>
+
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				#DEBUT_SURLIGNE
+				[(#LOGO_INDIVIDU||image_reduire{80,80})]
+				[<p class="surtitre">(#GET{nom_arbre})</p>]
+				<h1 class="titre"><:genea:liste_des_lieux:></h1>
+				<p class="soustitre"><:genea:soustitre_lieux:></p>
+				#FIN_SURLIGNE	
+
+				[(#REM) Inclure le modele des liens de traductions ]
+				#MODELE{article_traductions}
+
+			</div>
+			
+			<div class="chapo">
+				<h3 class="spip"></h3>
+			</div>
+			<br class="nettoyeur" />
+			<div class="texte">
+
+				
+			</div>
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<INCLURE{fond=inc-genealogie}{lieux=1}{small=oui}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_genea>
