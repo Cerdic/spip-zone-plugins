@@ -32,7 +32,7 @@
 	$GLOBALS['spx']["show_hidden"] = true;
 	
 	// filenames not allowed to access: (uses PCRE regex syntax)
-	$GLOBALS['spx']["no_access"] = "^\.ht";
+	$GLOBALS['spx']["no_access"] = "^\.ht|^spx_conf|connect\.php";
 	
 	// user permissions bitfield: (1=modify, 2=password, 4=admin, add the numbers)
 	$GLOBALS['spx']["permissions"] = 7;
