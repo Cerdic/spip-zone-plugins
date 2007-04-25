@@ -3,11 +3,13 @@
 	<nom>spixplorer, quixplorer pour spip</nom>
 	<prefix>spixplorer</prefix>
 	<description>
-G&eacute;rer ses fichiers comme le serveur et plus.
+G&eacute;rer ses fichiers comme le serveur et si besoin par FTP.
 
-Un fork de [quixplorer->http://quixplorer.sourceforge.net/]
+Un fork, adapt&eacute;n s&eacute;curis&eacute; et &eacute;tendu de [quixplorer->http://quixplorer.sourceforge.net/]
 
-Utilisation: [spip.php?action=spx_list->../?action=spx_list]
+Utilisation: bouton sous l'accueil ou [spip.php?action=spx_list->../?action=spx_list]
+
+
 	</description>
 	<pipeline>
     	<nom>ajouter_boutons</nom>
