@@ -27,6 +27,7 @@ _ {&lt;surfluo&gt;}Lorem ipsum dolor sit amet{&lt;/surfluo&gt;}
 _ {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}";
 $temp['decoration'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['decoration']}</blockquote>";
 $temp['type_urls'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['type_urls']}</blockquote>";
+$temp['note'] = "<sup>(*)</sup>";
 
 // traductions habituelles
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -45,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_tweak' => 'Activer le tweak',
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
-	'vars_modifiees' => 'Merci, les donn&eacute;es ont &eacute;t&eacute;s modifi&eacute;s',
+	'vars_modifiees' => 'Merci, les donn&eacute;es ont &eacute;t&eacute;s modifi&eacute;es',
 	'variable_vide' => '(Vide)',
 	'tweak' => 'Tweak :',
 	'tweaks_liste' => 'Liste des tweaks',
@@ -125,7 +126,7 @@ Quelque soit la couleur, la balise fermante peut aussi &ecirc;tre : <code>[/coul
 _ Un exemple de balises imbriqu&eacute;es : <code>[fond jaune]Lorem ipsum [rouge]dolor[/couleur] sit amet[/couleur]</code>.
 
 34 couleurs sont disponibles (en fran&ccedil;ais ou en anglais) : " . $temp['couleurs'],
-	'couleurs:aide' => 'Couleurs : <strong>[couleur]texte[/couleur]</strong>, <strong>[fond&nbsp;couleur]texte[/couleur]</strong>, <strong>[bg&nbsp;couleur]texte[/couleur]</strong> avec <strong>couleur</strong> = @liste@',
+	'couleurs:aide' => 'Mise en couleurs : <strong>[couleur]texte[/couleur]</strong>, <strong>[fond&nbsp;couleur]texte[/couleur]</strong>, <strong>[bg&nbsp;couleur]texte[/couleur]</strong> avec <strong>couleur</strong> = @liste@',
 
 	'typo_exposants:nom' => 'Exposants typographiques',
 	'typo_exposants:description' => "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
@@ -164,11 +165,13 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 
 _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 [[Format des URLs :->%radio_type_urls3%]]
-<p style='font-size:80%'><sup>(*)</sup> pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</p>
+<p style='font-size:80%'>{$temp['note']} pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</p>
 
 #PUCE {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de spip, à l'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[Script d'appel :->%spip_script%]]",
-	'page' => 'page', 'html' => 'html<sup>(*)</sup>', 'propres' => 'propres<sup>(*)</sup>', 'propres2' => 'propres2<sup>(*)</sup>', 'standard' => 'standard', 'propres-qs' => 'propres-qs',
+	'page' => 'page', 'html' => 'html'.$temp['note'], 
+	'propres' => 'propres'.$temp['note'], 'propres2' => 'propres2'.$temp['note'], 
+	'standard' => 'standard', 'propres-qs' => 'propres-qs',
 
 // ---------------------------------------------------------------------------
 	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak SPIP',

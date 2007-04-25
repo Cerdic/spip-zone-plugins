@@ -167,7 +167,8 @@ add_tweak( array(
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
-	'radio' => array('page' => 'page', 'html' => 'html', 'propres' => 'propres', 'propres2' => 'propres2', 'standard' => 'standard', 'propres-qs' => 'propres-qs' ),
+	'radio' => array('page' => 'tweak:page', 'html' => 'tweak:html', 'propres' => 'tweak:propres', 'propres2' => 'tweak:propres2', 
+			'standard' => 'tweak:standard', 'propres-qs' => 'tweak:propres-qs' ),
 	'radio/ligne' => 4,
 	'defaut' => "strlen(\$GLOBALS['type_urls'])?\$GLOBALS['type_urls']:'page'",
 	'code' => "\$GLOBALS['type_urls']=%s;",

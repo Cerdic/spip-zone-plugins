@@ -92,6 +92,12 @@ div.detailtweak legend {
 	font-weight:bold;
 }
 
+div.detailtweak sup {
+	font-size:85%;
+	font-variant:normal;
+	vertical-align:super;
+}
+
 EOF;
 	echo "</style>";
 	echo "<script type=\"text/javascript\"><!--
