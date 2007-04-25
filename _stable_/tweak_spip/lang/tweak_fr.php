@@ -112,12 +112,20 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
 	
 	'couleurs:nom' => 'Tout en couleurs',
 	'couleurs:description' => "Permet d'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, &hellip;) en utilisant des balises en raccourcis.
-_ Deux  exemples identiques : 
+
+Deux exemples identiques pour changer la couleur du texte : 
 -* <code>Lorem ipsum [rouge]dolor[/rouge] sit amet</code>
 -* <code>Lorem ipsum [red]dolor[/red] sit amet</code>.
 
+Idem pour changer le fond : 
+-* <code>Lorem ipsum [fond rouge]dolor[/rouge] sit amet</code>
+-* <code>Lorem ipsum [bg red]dolor[/red] sit amet</code>.
+
+Quelque soit la couleur, la balise fermante peut aussi &ecirc;tre : <code>[/couleur]</code> ou <code>[/color]</code>.
+_ Un exemple de balises imbriqu&eacute;es : <code>[fond jaune]Lorem ipsum [rouge]dolor[/couleur] sit amet[/couleur]</code>.
+
 34 couleurs sont disponibles (en fran&ccedil;ais ou en anglais) : " . $temp['couleurs'],
-	'couleurs:aide' => 'Couleurs : <strong>[couleur]texte[/couleur]</strong>, avec <strong>couleur</strong> = @liste@',
+	'couleurs:aide' => 'Couleurs : <strong>[couleur]texte[/couleur]</strong>, <strong>[fond&nbsp;couleur]texte[/couleur]</strong>, <strong>[bg&nbsp;couleur]texte[/couleur]</strong> avec <strong>couleur</strong> = @liste@',
 
 	'typo_exposants:nom' => 'Exposants typographiques',
 	'typo_exposants:description' => "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
@@ -152,18 +160,15 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 
 // ---------------------------------------------------------------------------
 	'type_urls:nom' => "Format des URLs",
-	'type_urls:description' => "#PUCE SPIP offre un choix sur plusieurs jeux d'URLs pour acc&eacute;der aux pages de votre site :{$temp['type_urls']}
+	'type_urls:description' => "#PUCE SPIP offre un choix sur plusieurs jeux d'URLs pour fabriquer les liens d'acc&egrave;s aux pages de votre site :{$temp['type_urls']}
 
-{{Attention}} : pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous
-  le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier.
-  Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.
 _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 [[Format des URLs :->%radio_type_urls3%]]
+<p style='font-size:80%'><sup>(*)</sup> pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</p>
 
-#PUCE {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>)ou une valeur vide (format <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de spip, à l'image de celui qui existe d&eacute;j&agrave; : {index.php}.
-[[Script d'appel :->%spip_script%]]
-",
-	'page' => 'page', 'html' => 'html', 'propres' => 'propres', 'propres2' => 'propres2', 'standard' => 'standard', 'propres-qs' => 'propres-qs',
+#PUCE {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de spip, à l'image de celui qui existe d&eacute;j&agrave; : {index.php}.
+[[Script d'appel :->%spip_script%]]",
+	'page' => 'page', 'html' => 'html<sup>(*)</sup>', 'propres' => 'propres<sup>(*)</sup>', 'propres2' => 'propres2<sup>(*)</sup>', 'standard' => 'standard', 'propres-qs' => 'propres-qs',
 
 // ---------------------------------------------------------------------------
 	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak SPIP',
@@ -193,7 +198,9 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html].",
 
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
-	'f_jQuery:description' => "Emp&ecirc;che l'installation de jQuery dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l'utilise dans sa partie priv&eacute;e.",
+	'f_jQuery:description' => "Emp&ecirc;che l'installation de {jQuery} dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l'utilise dans sa partie priv&eacute;e.
+	
+Attention : certaines fonctionnalit&eacute; de cette page n&eacute;cessitent les fonctions de {jQuery}. ",
 
 	'SPIP_liens:nom' => 'SPIP et les liens&hellip;',
 	'SPIP_liens:description' => "#PUCE Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
