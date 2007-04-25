@@ -14,7 +14,9 @@ define('_DIR_ECRIRE',$dir_absolu.'ecrire/');
 
 	$chemin = $dir_absolu;
 	$cheminEcrire = $dir_absolu.'ecrire/';
+  
 
+	
 	include ($cheminEcrire.'inc_connect.php');
 
 	if (defined("_ECRIRE_INC_VERSION")) return;
