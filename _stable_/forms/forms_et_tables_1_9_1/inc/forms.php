@@ -513,8 +513,8 @@
 			spip_query("UPDATE spip_forms_donnees SET rang=$rang_max WHERE id_donnee="._q($row['id_donnee']));
 		}
 		// borner le rang
+		if ($rang_nouv==0) $rang_nouv = Forms_rang_prochain($id_form);
 		$rang_nouv = min(max($rang_nouv,$rang_min),$rang_max);
-		
 		if ($rang_nouv>$rang) $rang_nouv++; // il faut se decaler d'un car on est devant actuellement
 		$rang_nouv = min($rang_nouv,Forms_rang_prochain($id_form));
 		
