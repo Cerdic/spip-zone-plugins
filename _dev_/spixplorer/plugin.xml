@@ -9,6 +9,10 @@ Un fork de [quixplorer->http://quixplorer.sourceforge.net/]
 
 Utilisation: [spip.php?action=spx_list->../?action=spx_list]
 	</description>
+	<pipeline>
+    	<nom>ajouter_boutons</nom>
+        <inclure>spx_pipelines.php</inclure>
+    </pipeline>
 	<!-- install>
 	spixplorer_install.php
 	</install>
