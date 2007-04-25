@@ -269,8 +269,10 @@ function list_dir($dir) {			// list directory contents
 	make_tables($dir, $dir_list, $file_list, $tot_file_size, $num_items);
 	
 	$s_dir=$dir;		if(strlen($s_dir)>50) $s_dir="...".substr($s_dir,-47);
-	show_header('<a href="' . make_link('list', '') . '">' .
-		_T('spixplorer:homelink') . '</a>' . link_all($s_dir), true);
+	show_header('<a href="' . make_link('list', '') . '">
+<img border="0" width="22" height="22" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/home.png"
+alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '">
+</a>' . link_all($s_dir), true);
 	
 	// Sorting of items
 	$_img = 
@@ -284,7 +286,7 @@ function list_dir($dir) {			// list directory contents
 	// Toolbar
 	echo '<br /><table width="95%"><tr><td><table><tr>
 ' .
-	
+/*	
 	// PARENT DIR
 	'<td><a href="' . make_link("list",$dir_up,NULL) . '">
 <img border="0" width="16" height="16" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_up.gif"
@@ -299,6 +301,7 @@ alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '
 align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_refresh.gif" alt="' .
 _T('spixplorer:reloadlink') . '" title="' . _T('spixplorer:reloadlink') . '"></a></td>
 ' .
+*/
 	// SEARCH
 '<td><a href="' . make_link("search",$dir,NULL) . '">
 <img border="0" width="16" height="16" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_search.gif"

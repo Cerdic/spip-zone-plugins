@@ -38,6 +38,10 @@ td.title a {
 	background-color: #E4EDF8;
 }
 
+td.title a img {
+	vertical-align: bottom;
+}
+
 small {
 	font-size: 10;
 }
