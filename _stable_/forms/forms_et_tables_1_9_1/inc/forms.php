@@ -471,10 +471,12 @@
 					$inserts = array_merge($inserts,$ins);
 				}
 			}
-			$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
-			spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
-			spip_query($q="INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
-				"VALUES ".join(',', $inserts));
+			if (count($inserts)){
+				$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
+				spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
+				spip_query($q="INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
+					"VALUES ".join(',', $inserts));
+			}
 		}
 		else
 			spip_log("erreur: ".serialize($erreur));

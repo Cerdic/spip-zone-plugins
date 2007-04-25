@@ -48,7 +48,7 @@
 		$_champ = champ_sql('champ', $p);  // indispensable
 		$_id_form = champ_sql('id_form', $p); 
 		if (!$_id_form) $_id_form = '0';// facultatif
-		$p->code = "forms_calcule_les_valeurs('$type', $_id_donnee, $_champ, $_id_form ". ($_separateur?", $_separateur":"").")";
+		$p->code = "forms_calcule_les_valeurs('$type', $_id_donnee, $_champ, $_id_form ". ($_separateur?", $_separateur":", ' '") . ($p->etoile?", true":"") .")";
 		
 		if (!$p->etoile=='**')
 			$p->interdire_scripts = false;

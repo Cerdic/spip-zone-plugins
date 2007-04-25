@@ -114,7 +114,7 @@ function Forms_supprimer_donnee($id_form,$id_donnee){
 }
 function Forms_modifier_donnee($id_donnee,$c = NULL){
 	include_spip('inc/forms');
-	return Forms_revision_donnee($id_donnee);
+	return Forms_revision_donnee($id_donnee,$c);
 }
 
 function Forms_instituer_donnee($id_donnee,$statut){
