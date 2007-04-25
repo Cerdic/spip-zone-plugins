@@ -41,7 +41,6 @@
 				// le formulaire qu'on ajoute
 				$flux['data'] .= attributs_formulaire('breves', $id_breve, $nouv_attribut, $supp_attribut, autoriser('modifier','breve',$id_breve), generer_url_ecrire('breves_voir',"id_breve=$id_breve"));
 				break;
-			case 'auteurs_edit':
 			case 'auteur_infos':
 				global $connect_statut;
 				include_spip('inc/attributs_gestion');
@@ -59,6 +58,25 @@
 				global $id_rubrique;
 				// le formulaire qu'on ajoute
 				$flux['data'] .= attributs_formulaire('syndic', $id_syndic, $nouv_attribut, $supp_attribut, autoriser('publierdans','rubrique',$id_rubrique), generer_url_ecrire('sites',"id_syndic=$id_syndic"));
+				break;
+			/* Pb de pipeline sur la page mots_type. Désactivé pour le moment
+			case 'mots_type':
+			case 'mots_types':
+				include_spip('inc/attributs_gestion');
+				$id_groupe = $flux['args']['id_groupe'];
+				$nouv_attribut = _request('nouv_attribut');
+				$supp_attribut = _request('supp_attribut');
+				// le formulaire qu'on ajoute
+				$flux['data'] .= attributs_formulaire('groupes_mots', $id_groupe, $nouv_attribut, $supp_attribut, autoriser('modifier','groupemots',$id_groupe), generer_url_ecrire('mots_type',"id_groupe=$id_groupe"));
+				break;*/
+			case 'mots_edit':
+				include_spip('inc/attributs_gestion');
+				$id_mot = $flux['args']['id_mot'];
+				$nouv_attribut = _request('nouv_attribut');
+				$supp_attribut = _request('supp_attribut');
+				global $id_groupe;
+				// le formulaire qu'on ajoute
+				$flux['data'] .= attributs_formulaire('mots', $id_mot, $nouv_attribut, $supp_attribut, autoriser('modifier','groupemots',$id_groupe), generer_url_ecrire('mots_edit',"id_mot=$id_mot"));
 				break;
 			default:
 				break;

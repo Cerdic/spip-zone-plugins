@@ -17,6 +17,8 @@ $spip_attributs = array(
 	"breves" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"syndic" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"auteurs" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+	"groupes_mots" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+	"mots" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"redacteurs" 	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 	"maj" 		=> "TIMESTAMP");
 
@@ -92,6 +94,29 @@ $tables_auxiliaires['spip_attributs_syndic'] = array(
 	'field' => &$spip_attributs_syndic,
 	'key' => &$spip_attributs_syndic_key);
 
+$spip_attributs_mots = array(
+	"id_attribut" 	=> "bigint(21) NOT NULL",
+	"id_mot" 	=> "bigint(21) NOT NULL");
+
+$spip_attributs_mots_key = array(
+	"KEY id_attribut" 	=> "id_attribut",
+	"KEY id_mot"	=> "id_mot");
+
+$tables_auxiliaires['spip_attributs_mots'] = array(
+	'field' => &$spip_attributs_mots,
+	'key' => &$spip_attributs_mots_key);
+
+$spip_attributs_groupes_mots = array(
+	"id_attribut" 	=> "bigint(21) NOT NULL",
+	"id_groupe" 	=> "bigint(21) NOT NULL");
+
+$spip_attributs_groupes_mots_key = array(
+	"KEY id_attribut" 	=> "id_attribut",
+	"KEY id_groupe"	=> "id_groupe");
+
+$tables_auxiliaires['spip_attributs_groupes_mots'] = array(
+	'field' => &$spip_attributs_groupes_mots,
+	'key' => &$spip_attributs_groupes_mots_key);
 
 //-- Relations ----------------------------------------------------
 
@@ -117,6 +142,14 @@ $tables_jointures['spip_syndic'][] = 'attributs_syndic';
 $tables_jointures['spip_syndic'][] = 'attributs';
 $tables_jointures['spip_attributs'][] = 'attributs_syndic';
 
+$tables_jointures['spip_mots'][] = 'attributs_mots';
+$tables_jointures['spip_mots'][] = 'attributs';
+$tables_jointures['spip_attributs'][] = 'attributs_mots';
+
+$tables_jointures['spip_groupes_mots'][] = 'attributs_groupes_mots';
+$tables_jointures['spip_groupes_mots'][] = 'attributs';
+$tables_jointures['spip_attributs'][] = 'attributs_groupes_mots';
+
 global $exceptions_des_jointures;
 $exceptions_des_jointures['titre_attribut'] = array('spip_attributs', 'titre');
 
@@ -129,6 +162,7 @@ $table_des_tables['attributs_rubriques']='attributs_rubriques';
 $table_des_tables['attributs_breves']='attributs_breves';
 $table_des_tables['attributs_auteurs']='attributs_auteurs';
 $table_des_tables['attributs_syndic']='attributs_syndic';
-
+$table_des_tables['attributs_mots']='attributs_mots';
+$table_des_tables['attributs_groupes_mots']='attributs_groupes_mots';
 
 ?>

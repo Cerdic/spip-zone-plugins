@@ -34,6 +34,18 @@ function attributs_nb_auteurs($id_attribut) {
 	return($nb);
 }
 
+function attributs_nb_groupes($id_attribut) {
+	$nb = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_attributs_groupes_mots WHERE id_attribut=$id_attribut"));
+	$nb = $nb['n'];
+	return($nb);
+}
+
+function attributs_nb_mots($id_attribut) {
+	$nb = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_attributs_mots WHERE id_attribut=$id_attribut"));
+	$nb = $nb['n'];
+	return($nb);
+}
+
 //Affichage de la liste des auteurs
 
 function attributs_afficher_auteurs($titre_table, $requete)
@@ -97,6 +109,112 @@ function attributs_afficher_auteurs_boucle($row, &$tous_id, $voir_logo, $bof)
 	return $vals;
 }
 
+function attributs_afficher_mots($titre_table, $requete)
+{
+	global $couleur_claire;
+
+	$tmp_var = 't_' . substr(md5(join(' ',$requete)), 0, 4);
+
+	return affiche_tranche_bandeau($requete, "mot-cle-24.gif", $couleur_claire, "black", $tmp_var, $titre_table, false,  array('',''), array('arial2','arial2'), 'attributs_afficher_mots_boucle');
+}
+
+function attributs_afficher_mots_boucle($row, &$tous_id, $voir_logo, $bof)
+{
+	global $spip_lang_right;
+
+	$vals = '';
+	$id_mot=$row["id_mot"];
+	if (autoriser('voir','mot',$id_auteur)){
+		$titre=typo($row["titre"]);
+		$descriptif=typo($row["descriptif"]);
+
+		$tous_id[] = $id_mot;
+
+		$puce='petite-cle.gif';
+		$title = '';
+
+		$s = "<a href=\"".generer_url_ecrire("mots_edit","id_mot=$id_mot")."\" title=\"$titre\">";
+
+		if ($voir_logo) {
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if ($logo = $chercher_logo($id_mot, 'id_mot', 'on'))  {
+				list($fid, $dir, $nom, $format) = $logo;
+				include_spip('inc/filtres_images');
+				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
+				if ($logo)
+					$s .= "<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
+			}
+		}
+	
+		$s .= http_img_pack($puce, $statut, "") ."&nbsp;&nbsp;";
+				
+		$s .= typo($titre);
+		
+		$s .= "</a> &nbsp;&nbsp;";
+		$vals[] = $s;
+		
+		$s = typo($descriptif);
+		$vals[] = $s;
+		
+
+	}
+
+	return $vals;
+}
+
+function attributs_afficher_groupes_mots($titre_table, $requete)
+{
+	global $couleur_claire;
+
+	$tmp_var = 't_' . substr(md5(join(' ',$requete)), 0, 4);
+
+	return affiche_tranche_bandeau($requete, "groupe-mot-24.gif", $couleur_claire, "black", $tmp_var, $titre_table, false,  array('',''), array('arial2','arial2'), 'attributs_afficher_groupes_mots_boucle');
+}
+
+function attributs_afficher_groupes_mots_boucle($row, &$tous_id, $voir_logo, $bof)
+{
+	global $spip_lang_right;
+
+	$vals = '';
+	$id_groupe=$row["id_groupe"];
+	if (autoriser('voir','groupemots',$id_auteur)){
+		$titre=typo($row["titre"]);
+		$descriptif=typo($row["descriptif"]);
+
+		$tous_id[] = $id_groupe;
+
+		$puce='';
+		$title = '';
+
+		$s = "<a href=\"".generer_url_ecrire("mots_type","id_groupe=$id_groupe")."\" title=\"$titre\">";
+
+		/*if ($voir_logo) {
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if ($logo = $chercher_logo($id_mot, 'id_mot', 'on'))  {
+				list($fid, $dir, $nom, $format) = $logo;
+				include_spip('inc/filtres_images');
+				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
+				if ($logo)
+					$s .= "<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
+			}
+		}*/
+	
+		//$s .= http_img_pack($puce, $statut, "") ."&nbsp;&nbsp;";
+				
+		$s .= typo($titre);
+		
+		$s .= "</a> &nbsp;&nbsp;";
+		$vals[] = $s;
+		
+		$s = typo($descriptif);
+		$vals[] = $s;
+		
+
+	}
+
+	return $vals;
+}
+
 // Fonctions de gestion
 
 function attributs_supprimer_attribut($id_attribut)
@@ -148,6 +266,16 @@ function attributs_supprimer_attribut($id_attribut)
 			$id_table = 'id_syndic';
 			$objet = 'site';
 			$url_base = 'sites';
+		}
+		else if ($table == 'groupes_mots') {
+			$id_table = 'id_groupe';
+			$objet = 'groupe_mot';
+			$url_base = 'mots_type';
+		}
+		else if ($table == 'mots') {
+			$id_table = 'id_mot';
+			$objet = 'mot';
+			$url_base = 'mots_edit';
 		}
 
 		list($nombre_attributs) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_attributs WHERE $table='oui'"),SPIP_NUM);

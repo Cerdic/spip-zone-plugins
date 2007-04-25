@@ -41,7 +41,7 @@ function maj_attribut($id_attribut) {
 			$champs[$champ] = corriger_caracteres($val);
 	}
 
-	$champs_checkbox = array('articles', 'rubriques', 'breves', 'auteurs', 'syndic', 'redacteurs');
+	$champs_checkbox = array('articles', 'rubriques', 'breves', 'auteurs', 'syndic', 'groupes_mots', 'mots', 'redacteurs');
 	foreach ($champs_checkbox as $champ) {
 		$val = (_request($champ, $c)=='oui')?'oui':'non';
 		$champs[$champ] = $val;

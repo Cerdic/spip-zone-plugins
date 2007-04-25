@@ -30,6 +30,8 @@ function exec_attribut_edit_dist(){
 		$brv = $row['breves'];
 		$sit = $row['syndic'];
 		$aut = $row['auteurs'];
+		$gpe = $row['groupes_mots'];
+		$mot = $row['mots'];
 		$redac = $row['redacteurs'];
 		$onfocus ='';
 	 } else {
@@ -50,6 +52,8 @@ function exec_attribut_edit_dist(){
 			$brv = 'non';
 			$sit = 'non';
 			$aut = 'non';
+			$gpe = 'non';
+			$mot = 'non';
 			$redac = 'oui';
 		}
 	}
@@ -78,6 +82,8 @@ function exec_attribut_edit_dist(){
 		if(strstr($retour,'exec=rubriques')) $icone_retour = 'rubrique-24.gif';
 		if(strstr($retour,'exec=breves')) $icone_retour = 'breve-24.gif';
 		if(strstr($retour,'exec=sites')) $icone_retour = 'site-24.gif';
+		if(strstr($retour,'exec=mots_type')) $icone_retour = 'groupe-mot-24.gif';
+		if(strstr($retour,'exec=mots_edit')) $icone_retour = 'mot-cle-24.gif';
 		$res .= icone_horizontale(_T('attributs:retour'), $retour, $icone_retour, "../"._DIR_PLUGIN_ATTRIBUTS. "img_pack/retour.png",false);
 	}
 	echo bloc_des_raccourcis($res);
@@ -137,6 +143,9 @@ function exec_attribut_edit_dist(){
 
 		echo attributs_afficher_auteurs('<b>' . _T('attributs:info_auteurs_lies_attribut') . '</b>', array("FROM" => 'spip_auteurs AS auteurs, spip_attributs_auteurs AS lien', 'WHERE' => "lien.id_attribut='$id_attribut' AND lien.id_auteur=auteurs.id_auteur", 'ORDER BY' => "auteurs.nom DESC"));
 
+		echo attributs_afficher_groupes_mots('<b>' . _T('attributs:info_groupes_mots_lies_attribut') . '</b>', array("FROM" => 'spip_groupes_mots AS groupesmots, spip_attributs_groupes_mots AS lien', 'WHERE' => "lien.id_attribut='$id_attribut' AND lien.id_groupe=groupesmots.id_groupe", 'ORDER BY' => "groupesmots.titre"));
+
+		echo attributs_afficher_mots('<b>' . _T('attributs:info_mots_lies_attribut') . '</b>', array("FROM" => 'spip_mots AS mots, spip_attributs_mots AS lien', 'WHERE' => "lien.id_attribut='$id_attribut' AND lien.id_mot=mots.id_mot", 'ORDER BY' => "mots.titre"));
 	}
 
 	fin_cadre_relief();
@@ -190,7 +199,16 @@ function exec_attribut_edit_dist(){
 
 		$checked = ($sit == 'oui') ? " checked='checked'" : "";
 		$res .= "<input type='checkbox' name='syndic' value='oui' id='opt_sit'$checked> ";
-		$res .= "<label for='opt_sit'>"._T("item_mots_cles_association_sites")."</label><p />";
+		$res .= "<label for='opt_sit'>"._T("item_mots_cles_association_sites")."</label><br />";
+
+		//$checked = ($gpe == 'oui') ? " checked='checked'" : "";
+		//$res .= "<input type='checkbox' name='groupes_mots' value='oui' id='opt_gpe'$checked> ";
+		//$res .= "<label for='opt_gpe'>"._T("attributs:attribut_association_groupes")."</label><br />";
+		$res .= "<input type='hidden' name='groupes_mots' value='non' id='opt_gpe'> ";
+
+		$checked = ($mot == 'oui') ? " checked='checked'" : "";
+		$res .= "<input type='checkbox' name='mots' value='oui' id='opt_mot'$checked> ";
+		$res .= "<label for='opt_mot'>"._T("attributs:attribut_association_mots")."</label><p />";
 
 		$res .= "<b>"._T("attributs:autoriser_redacteurs")."</b><br />";
 

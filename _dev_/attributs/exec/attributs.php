@@ -8,7 +8,7 @@ include_spip('inc/attributs_gestion');
 function exec_attributs_dist(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
-	global $supp_attribut, $conf_attribut, $titre_conf, $na, $nr, $nb, $nau, $ns;
+	global $supp_attribut, $conf_attribut, $titre_conf, $na, $nr, $nb, $nau, $ns, $ng, $nm;
 
 	$supp_attribut = intval($supp_attribut);
 	$conf_attribut = intval($conf_attribut);
@@ -48,22 +48,31 @@ function exec_attributs_dist(){
 		$s = "";
 			if ($na>0){
 				$s .= "$na&nbsp;"._T('attributs:articles');
-				if ($nr>0|$nb>0|$nau>0|$ns>0) $s.=", ";
+				if ($nr>0|$nb>0|$nau>0|$ns>0|$ng>0|$nm>0) $s.=", ";
 			}
 			if ($nr>0){
 				$s .= "$nr&nbsp;"._T('attributs:rubriques');
-				if ($nb>0|$nau>0|$ns>0) $s.=", ";
+				if ($nb>0|$nau>0|$ns>0|$ng>0|$nm>0) $s.=", ";
 			}
 			if ($nb>0){
 				$s .= "$nb&nbsp;"._T('attributs:breves');
-				if ($nau>0|$ns>0) $s.=", ";
+				if ($nau>0|$ns>0|$ng>0|$nm>0) $s.=", ";
 			}
 			if ($nau>0){
 				$s .= "$nau&nbsp;"._T('attributs:auteurs');
-				if ($ns>0) $s.=", ";
+				if ($ns>0|$ng>0|$nm>0) $s.=", ";
 			}
-			if ($ns>0)
+			if ($ns>0){
 				$s .= "$ns&nbsp;"._T('attributs:sites');
+				if ($ng>0|$nm>0) $s.=", ";
+			}
+			if ($ng>0){
+				$s .= "$ng&nbsp;"._T('attributs:groupes');
+				if ($nm>0) $s.=", ";
+			}
+			if ($nm>0){
+				$s .= "$nm&nbsp;"._T('attributs:mots');
+			}
 		echo " <b>$s</b>, ";
 		echo _T('attributs:conf_supp_3');
 		echo "<div style='text-align:right;'>";
@@ -117,6 +126,8 @@ function exec_attributs_dist(){
 		$vals[] = _T('attributs:brv');
 		$vals[] = _T('attributs:aut');
 		$vals[] = _T('attributs:sit');
+		//$vals[] = _T('attributs:gpe');
+		$vals[] = _T('attributs:mot');
 		$vals[] = '';
 		$vals[] = '';
 		$table[] = $vals;
@@ -130,6 +141,8 @@ function exec_attributs_dist(){
 			$nb_brv = attributs_nb_breves($id_attribut);
 			$nb_aut = attributs_nb_auteurs($id_attribut);
 			$nb_sit = attributs_nb_syndic($id_attribut);
+			$nb_gpe = attributs_nb_groupes($id_attribut);
+			$nb_mot = attributs_nb_mots($id_attribut);
 			
 			$s = $row['id_attribut'];
 			$vals[] = $s;
@@ -160,32 +173,47 @@ function exec_attributs_dist(){
 			$s = ($row['syndic']=='oui')?"<img src='"._DIR_PLUGIN_ATTRIBUTS."/img_pack/attribut-16.png' width='16' height='16' />":'';
 			$vals[] = $s;
 			
+			//$s = ($row['groupes_mots']=='oui')?"<img src='"._DIR_PLUGIN_ATTRIBUTS."/img_pack/attribut-16.png' width='16' height='16' />":'';
+			//$vals[] = $s;
+			
+			$s = ($row['mots']=='oui')?"<img src='"._DIR_PLUGIN_ATTRIBUTS."/img_pack/attribut-16.png' width='16' height='16' />":'';
+			$vals[] = $s;
+			
 			$s = "";
 			if ($nb_art>0){
 				$s .= "$nb_art&nbsp;"._T('attributs:articles');
-				if ($nb_rub>0|$nb_brv>0|$nb_sit>0|$nb_aut>0) $s.=",<br />";
+				if ($nb_rub>0|$nb_brv>0|$nb_sit>0|$nb_aut>0|$nb_grp>0|$nb_mot>0) $s.=",<br />";
 			}
 			if ($nb_rub>0){
 				$s .= "$nb_rub&nbsp;"._T('attributs:rubriques');
-				if ($nb_brv>0|$nb_sit>0|$nb_aut>0) $s.=",<br />";
+				if ($nb_brv>0|$nb_sit>0|$nb_aut>0|$nb_grp>0|$nb_mot>0) $s.=",<br />";
 			}
 			if ($nb_brv>0){
 				$s .= "$nb_brv&nbsp;"._T('attributs:breves');
-				if ($nb_sit>0|$nb_aut>0) $s.=",<br />";
+				if ($nb_sit>0|$nb_aut>0|$nb_grp>0|$nb_mot>0) $s.=",<br />";
 			}
 			if ($nb_aut>0){
 				$s .= "$nb_aut&nbsp;"._T('attributs:auteurs');
-				if ($nb_sit>0) $s.=",<br />";
+				if ($nb_sit>0|$nb_grp>0|$nb_mot>0) $s.=",<br />";
 			}
-			if ($nb_sit>0)
+			if ($nb_sit>0){
 				$s .= "$nb_sit&nbsp;"._T('attributs:sites');
+				if ($nb_grp>0|$nb_mot>0) $s.=",<br />";
+			}
+			if ($nb_gpe>0){
+				$s .= "$nb_gpe&nbsp;"._T('attributs:groupes');
+				if ($nb_mot>0) $s.=",<br />";
+			}
+			if ($nb_mot>0)
+				$s .= "$nb_mot&nbsp;"._T('attributs:mots');
+
 			$vals[] = $s;
 			
 			$s = "";
 
 			if (autoriser('supprimer','attribut',$id_attribut)) {
 				if ($nb_art OR  $nb_rub OR $nb_brv OR $nb_aut OR $nb_sit) 
-					$href = generer_url_ecrire("attributs","conf_attribut=$id_attribut&titre_conf=$titre&na=$nb_art&nr=$nb_rub&nb=$nb_brv&nau=$nb_aut&ns=$nb_sit");
+					$href = generer_url_ecrire("attributs","conf_attribut=$id_attribut&titre_conf=$titre&na=$nb_art&nr=$nb_rub&nb=$nb_brv&nau=$nb_aut&ns=$nb_sit&ng=$nb_gpe&nm=$nb_mot");
 				else 
 					$href = generer_url_ecrire("attributs","supp_attribut=$id_attribut");
 
@@ -204,8 +232,8 @@ function exec_attributs_dist(){
 	echo "<div class='liste'>";
 	echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
 	echo $tranches;
-	$largeurs = array('','','','','','','','','','');
-	$styles = array('arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1');
+	$largeurs = array('','','','','','','','','','','');
+	$styles = array('arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1');
 	echo afficher_liste($largeurs, $table, $styles);
 	echo "</table>";
 	echo "</div>";

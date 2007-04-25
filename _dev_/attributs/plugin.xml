@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Attributs 1.0</multi>
+	<multi>[fr]Attributs 1.1</multi>
 	</nom>
 	<icon>img_pack/attributs-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
@@ -9,8 +9,8 @@
 		[fr]Distribu&#233; sous licence GPL
 	</multi>
 	</auteur>
-	<version>1.0</version>
-	<version_base>1.0</version_base>
+	<version>1.1</version>
+	<version_base>1.1</version_base>
 	<etat>
 	test
 	</etat>
@@ -22,6 +22,8 @@
 - Br&egrave;ves
 - Sites
 - Auteurs
+- Mots-Cl&eacute;s
+- Groupes de mots-cl&eacute;
 
 Les attributs sont un doublement des mots-cl&eacute;s afin d'&eacute;viter d'avoir &agrave; les d&eacute;tourner pour d'autres usages.
 	</multi>
