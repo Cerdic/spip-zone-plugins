@@ -1,0 +1,63 @@
+/*  ------------------------------------------------------
+/*  Definition des styles propres a la galerie de photos
+/*  ------------------------------------------------------ */
+.table_photo {
+	height:300px;
+	width:300px;
+	background-image:url('plugins/gallery/img_pack/loading.gif');
+	background-position:center 50%;
+	background-repeat:no-repeat; }
+.table_photo, #table_vignette {
+	border:1px solid #ccc;
+	margin:0 auto 10px auto; }
+.table_photo td, #table_vignette td {
+	text-align:center;
+	vertical-align:middle; }
+
+#album_compteur {
+	font-size: 0.77em;
+	color:#808080;
+	text-align:center;
+	margin:5px auto; }
+	
+#table_vignette .arrow {
+	width:25px;
+	text-align:center;
+	vertical-align:middle; }
+#table_vignette .vignette {
+	width:60px;
+	height:60px;
+	padding:5px 0; }
+#table_vignette .vignette a img { 
+	border:2px solid #FFF;
+	filter:alpha(opacity=80);
+	-moz-opacity:0.8;
+	opacity:0.8; }
+#table_vignette .vignette a:hover img {
+	border:2px solid #F00;
+	filter:alpha(opacity=100);
+	-moz-opacity:1;
+	opacity:1; }
+
+/*  ------------------------------------------------------
+/*  Definition des styles propres a l'affichage en livre
+/*  ------------------------------------------------------ */
+#livre_photo { width:100%; height:100%; }
+#livre_photo .arrow {
+	width:25px;
+	text-align:center;
+	vertical-align:bottom; }
+#livre_photo .photo, #livre_photo .texte {
+	width:50%;
+	height:100%;
+	padding:0.4em;
+	vertical-align:top; }
+#livre_photo .photo {
+	vertical-align:middle;
+	text-align:center; }
+#livre_photo .texte { vertical-align:top; }
+#livre_photo .texte #titre {
+	text-align:center;
+	padding-bottom:0.5em;
+	font-size:0.9em; }
+#livre_photo .texte #descriptif { text-align:justify; }

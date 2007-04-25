@@ -1,0 +1,13 @@
+[(#REM) Calcul de la premiere photo affichee]
+#SET{premiere, #ENV{page_courante}}
+#SET{premiere, #GET{premiere}|moins{1}}
+#SET{premiere, #GET{premiere}|mult{#ENV{pas}}}
+#SET{premiere, #GET{premiere}|plus{1}}
+
+[(#REM) Calcul de la derniere photo affichee]
+#SET{derniere, #ENV{page_courante}}
+#SET{derniere, #GET{derniere}|mult{#ENV{pas}}}
+[(#GET{derniere}|>{#ENV{total}}|?{' ',''})[(#SET{derniere, #ENV{total}})]]
+
+[(#REM) Affiche le compteur de l'album ]
+<u>Photos :</u> &#91;#GET{premiere}-#GET{derniere}&#93; / #ENV{total}

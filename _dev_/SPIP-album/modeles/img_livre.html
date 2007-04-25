@@ -1,0 +1,50 @@
+<BOUCLE_tout(ARTICLES documents_articles documents){id_document}>
+#SET{sens, #ENV{senstri}}
+#SET{skinname, #ENV{skin}}
+#SET{skinname, #GET{skinname, 'livre'}}
+<B_livre>
+[(#ANCRE_PAGINATION)]
+<table>
+	<tr>
+		<td class="arrow">[(#PAGINATION{gallery_precedent})]</td>
+		<BOUCLE_livre(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens,0}}{pagination 1}>
+		<td>
+			<table id="livre_photo" cellspacing="0" cellpadding="0">
+			  <tr>
+	    		<td><img src="#CHEMIN{img_pack/livre_hbg.jpg}" width="100%" height="auto" /></td>
+			    <td><img src="#CHEMIN{img_pack/livre_hg.jpg}" width="100%" height="auto" /></td>
+			    <td><img src="#CHEMIN{img_pack/livre_hm.jpg}" width="100%" height="auto" /></td>
+	    		<td><img src="#CHEMIN{img_pack/livre_hd.jpg}" width="100%" height="auto" /></td>
+			    <td><img src="#CHEMIN{img_pack/livre_hbd.jpg}" width="100%" height="auto" /></td>
+			  </tr>
+			  <tr>
+			    <td><img src="#CHEMIN{img_pack/livre_mg.jpg}" width="100%" height="auto" /></td>
+	    		<td class="photo" style="background:url('#CHEMIN{img_pack/livre_fd.jpg}')">
+					<a [href="(#URL_DOCUMENT)" rel="lightbox"][ title="[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})"]>
+						<img[ src="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{src})"][ width="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{width})"][ height="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{height})"][ alt='(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})'] title='Cliquez sur la photo pour la visualiser dans sa taille originale.' />
+					</a>
+		    	</td>
+	    		<td><img src="#CHEMIN{img_pack/livre_mm.jpg}" width="100%" height="auto" /></td>
+		    	<td class="texte" style="background:url('#CHEMIN{/img_pack/livre_fd.jpg}')" style="max-width:220px; max-height:300;">
+		    		<dl>
+    			       [<dt id="titre" class="spip_doc_titre">(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})</dt>]
+		   			   [<dd id="descriptif" class="spip_doc_descriptif">(#DESCRIPTIF)</dd>]
+					</dl>
+				</td>
+			    <td><img src="#CHEMIN{img_pack/livre_md.jpg}" width="100%" height="auto" /></td>
+			  </tr>
+			  <tr>
+	    		<td><img src="#CHEMIN{img_pack/livre_bbg.jpg}" width="100%" height="auto" /></td>
+			    <td><img src="#CHEMIN{img_pack/livre_bg.jpg}" width="100%" height="auto" /></td>
+			    <td><img src="#CHEMIN{img_pack/livre_bm.jpg}" width="100%" height="auto" /></td>
+	    		<td><img src="#CHEMIN{img_pack/livre_bd.jpg}" width="100%" height="auto" /></td>
+			    <td><img src="#CHEMIN{img_pack/livre_bbd.jpg}" width="100%" height="auto" /></td>
+			  </tr>
+			</table>
+		</td>
+		</BOUCLE_livre>
+		<td class="arrow">[(#PAGINATION{gallery_suivant})]</td>
+	</tr>
+</table>
+</B_livre>
+</BOUCLE_tout>

@@ -1,0 +1,38 @@
+<BOUCLE_album(ARTICLES documents_articles documents){id_document}>
+[(#REM) Recuperation des variables d'initialisation du modele]
+#SET{increment, #ENV{nbre_vignette}}
+#SET{sens, #ENV{senstri}}
+
+<B_vignette>
+[(#ANCRE_PAGINATION)]
+#SET{debut, 1}
+<BOUCLE_vignette(DOCUMENTS){id_article}{extension IN png,jpg,gif}{par num titre, date}{inverse #GET{sens,0}}{pagination #GET{increment,10}}>
+[(#GET{debut}|!={0}|?{' ',''})
+<table class="table_photo">
+   <tr>
+      <td id="affiche_photo">
+         <a[ href="(#URL_DOCUMENT)" rel="lightbox"][ title='(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})']>
+            <img[ src="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{src})"][ width="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{width})"][ height="(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{height})"][ alt='(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})'] title="Cliquez sur la photo pour la visualiser dans sa taille originale." />
+         </a>
+         <dl>
+            <dt id="titre_photo" class="spip_doc_titre">[(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})]</dt>
+            <dd id="descriptif_photo" class="spip_doc_descriptif">[(#DESCRIPTIF)]</dd>
+         </dl>
+      </td>
+   </tr>
+</table>
+[<div id="album_compteur">(#PAGINATION{gallery_compteur}{total=#GRAND_TOTAL})</div>]
+<table id="table_vignette" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="arrow">[(#PAGINATION{gallery_precedent})]</td>#SET{debut, 0}]
+		<td class="vignette">
+			<a target="_self" href="javascript:fp_ShowImg('[(#URL_DOCUMENT)]','[(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{src})]','[(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{width})]','[(#LOGO_DOCUMENT||image_reduire{200,200}|extraire_attribut{height})]','[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]','[(#DESCRIPTIF|texte_backend)]');" title="[(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})]">
+            	<img[ src="(#LOGO_DOCUMENT||image_reduire{50}|extraire_attribut{src})"][ width="(#LOGO_DOCUMENT||image_reduire{50}|extraire_attribut{width})"][ height="(#LOGO_DOCUMENT||image_reduire{50}|extraire_attribut{height})"][ alt="(#TITRE|supprimer_numero|texte_backend|sinon{[(#FICHIER)]})"] />
+			</a> 
+		</td>
+</BOUCLE_vignette>
+		<td class="arrow">[(#PAGINATION{gallery_suivant})]</td>
+	</tr>
+</table>
+</B_vignette>
+</BOUCLE_album>
