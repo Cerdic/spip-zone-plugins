@@ -44,7 +44,7 @@ function action_charger()
 		'nom' => $zip,
 		'remove' => $remove,
 		'dest' => $dest,
-		'plugin' => $plugin);
+		'plugin' => $plugin));
 
 	redirige_par_entete($url_retour);
 }
