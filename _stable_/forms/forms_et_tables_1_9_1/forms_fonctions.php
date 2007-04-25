@@ -122,13 +122,20 @@
 			}
 			elseif ($t == 'texte')
 				$rendu = 'propre';
-			if (!$etoile){
-				if ($rendu){
-					include_spip('inc/texte');
-					$valeur = $rendu($valeur);
-				}
-				$valeur = wrap_champ($valeur,$wrap_champ[$id_form][$champ]);
-			}
+			if (!$etoile AND $rendu)
+				include_spip('inc/texte');
+			$valeur = pipeline('forms_calcule_valeur_en_clair',
+				array('args'=>array(
+					'valeur'=>$valeur,
+					'rendu'=>$rendu,
+					'wrap'=>$wrap_champ[$id_form][$champ],
+					'type'=>$type,
+					'id_donnee'=>$id_donnee,
+					'champ'=>$champ,
+					'id_form'=>$id_form,
+					'type_champ'=>$t,
+					'etoile'=>$etoile),'data'=>wrap_champ((!$etoile AND $rendu)?$rendu($valeur):$valeur,$wrap_champ[$id_form][$champ]))
+				);
 		}
 		return $valeur;
 	}

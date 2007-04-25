@@ -47,7 +47,7 @@
 		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]</td>
 		<td>[<a href='(#GET{lien_edit})'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>]#ID_DONNEE[(#GET{lien_edit}|?{' '})</a>]</td>
 		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
-		<BOUCLE_auteur(AUTEURS){id_auteur}>[(#ENV{affiche_de,1}|?{' '})<td>#NOM</td>]</BOUCLE_auteur>[(#ENV{affiche_de,1}|?{' '})<td>#IP</td>]<//B_auteur>
+		<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>[(#ENV{affiche_de,1}|?{' '})<td>#NOM</td>]</BOUCLE_auteur>[(#ENV{affiche_de,1}|?{' '})<td>#ID_AUTEUR:#IP</td>]<//B_auteur>
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{type !IN (separateur,textestatique)}{par rang}>
 		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
 		</BOUCLE_body>

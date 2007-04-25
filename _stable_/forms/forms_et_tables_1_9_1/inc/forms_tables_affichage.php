@@ -86,13 +86,13 @@ function icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher=
 	if ($afficher == 'oui')	echo $icone; else return $icone;
 }
 
-function afficher_tables_tous_corps($type_form, $link=NULL){
+function afficher_tables_tous_corps($type_form, $link=NULL, $fond='fonds/tables_tous'){
 	global $spip_lang_right;
 	include_spip('public/assembler');
 	$out = "";
 	$prefix = forms_prefixi18n($type_form);
-	$contexte = array('type_form'=>$type_form,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-	$out .= recuperer_fond("fonds/tables_tous",$contexte);
+	$contexte = array('type_form'=>$type_form,'prefix'=>$prefix,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+	$out .= recuperer_fond($fond,$contexte);
 	
 	if (autoriser('creer','form') && ($link!==false)) {
 	  $icone = find_in_path("img_pack/".($type_form?$type_form:'form')."-24.png");
