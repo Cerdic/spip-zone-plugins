@@ -13,7 +13,7 @@
 				echo "attributs install&eacute;<br/>";
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 			}
-			if ($current_version==1.1){
+			if ($current_version==1.0){
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
