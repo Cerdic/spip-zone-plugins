@@ -32,6 +32,10 @@
 		<inclure>inc/geoforms_types_champs.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>forms_pre_edition_donnee</nom>
+		<inclure>inc/geoforms_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>geoforms_pipeline.php</inclure>
 	</pipeline>

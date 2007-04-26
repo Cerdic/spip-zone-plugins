@@ -15,9 +15,15 @@ function geoforms_liste_projections(){
 	return array_keys($GLOBALS['projections_lambert']);
 }
 // pouvoir traiter des systemes de differentes natures
-function geoforms_systeme_vers_lat_lont($lat,$long,$systeme){
+function geoforms_systeme_vers_lat_lont($x,$y,$systeme){
 	if (isset($GLOBALS['projections_lambert'][$systeme]))
-		return geoforms_lambert_vers_lat_long($lat,$long,$systeme);
+		return geoforms_lambert_vers_lat_long($x,$y,$systeme);
+	return array($x,$y);
+}
+// pouvoir traiter des systemes de differentes natures
+function geoforms_lat_lont_vers_syst($lat,$long,$systeme){
+	if (isset($GLOBALS['projections_lambert'][$systeme]))
+		return geoforms_lat_long_vers_lambert($lat,$long,$systeme);
 	return array($lat,$long);
 }
 

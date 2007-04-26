@@ -52,27 +52,6 @@ function geoforms_forms_bloc_edition_champ($flux){
 	}
 	return $flux;
 }
-function geoforms_forms_input_champs($flux){
-	static $vu=array();
-	$type = $flux['args']['type'];
-	if (in_array($type,array('geox','geoy','geoz'))
-	  AND (_DIR_RESTREINT OR _request('exec')!=='forms_edit')
-	  ) {
-		$id_form = $flux['args']['id_form'];
-		$champ = $flux['args']['champ'];
-		$extra_info = $flux['args']['extra_info'];
-		$vu[$id_form][$type]=array('id'=>extraire_attribut($flux['data'],'id'),'value'=>extraire_attribut($flux['data'],'value'));
-		if (isset($vu[$id_form]['geox']) AND isset($vu[$id_form]['geoy'])){
-			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
-				$id = $vu[$id_form]['geox']['id']."-".$vu[$id_form]['geoy']['id'];
-				$flux['data'].="<div class='geomap' id='map-$id_form-$id'> </div>";
-				$flux['data'].=$geomap_append_moveend_map("map-$id_form-$id",$vu[$id_form]['geox']['id'],$vu[$id_form]['geoy']['id'],$vu[$id_form]['geox']['value'],$vu[$id_form]['geoy']['value'], NULL,NULL,true);
-				unset($vu[$id_form]);
-			}
-		}
-	}
-	return $flux;
-}
 
 function geoforms_forms_update_edition_champ($flux){
 	$row = $flux['args']['row'];
@@ -89,6 +68,53 @@ function geoforms_forms_update_edition_champ($flux){
 	}
 	return $flux;
 }
+
+function geoforms_forms_input_champs($flux){
+	static $vu=array();
+	$type = $flux['args']['type'];
+	if (in_array($type,array('geox','geoy','geoz'))
+	  AND (_DIR_RESTREINT OR _request('exec')!=='forms_edit')
+	  ) {
+		$id_form = $flux['args']['id_form'];
+		$champ = $flux['args']['champ'];
+		$extra_info = $flux['args']['extra_info'];
+		$vu[$id_form][$type]=array(
+			'id'=>extraire_attribut($flux['data'],'id'),
+			//'name'=>extraire_attribut($flux['data'],'name'),
+			'value'=>extraire_attribut($flux['data'],'value'),
+			'syst'=>$extra_info);
+		if (isset($vu[$id_form]['geox']) AND isset($vu[$id_form]['geoy'])){
+			include_spip('inc/geoforms');
+			$syst = $vu[$id_form]['geox']['syst'];
+			list($x,$y) = geoforms_latitude_longitude($vu[$id_form]['geox']['value'],$vu[$id_form]['geoy']['value'],$syst);
+			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
+				$id = $vu[$id_form]['geox']['id']."-".$vu[$id_form]['geoy']['id'];
+				$flux['data'].="<div class='geomap' id='map-$id_form-$id'> </div>";
+				$flux['data'].=$geomap_append_moveend_map("map-$id_form-$id",$vu[$id_form]['geox']['id'],$vu[$id_form]['geoy']['id'],$x,$y, NULL,NULL,true);
+				unset($vu[$id_form]);
+			}
+		}
+	}
+	return $flux;
+}
+
+function geoforms_forms_pre_edition_donnee($flux){
+	$geox = $geoy = NULL;
+	foreach($flux['data'] as $champ=>$val){
+		if (!$geox && $flux['args']['champs'][$champ]['type']=='geox') $geox = $champ;
+		if (!$geoy && $flux['args']['champs'][$champ]['type']=='geoy') $geoy = $champ;
+		if ($geox && $geoxy) continue;
+	}
+	if ($geox && $geoy){
+		$syst = $flux['args']['champs'][$geox]['extra_info'];
+		if (strlen($syst) AND ($flux['data'][$geox]<=90.0) AND ($flux['data'][$geoy]<=180.0)){
+			include_spip('inc/geoforms_projections');
+			list($flux['data'][$geox],$flux['data'][$geoy]) = geoforms_lat_lont_vers_syst($flux['data'][$geox],$flux['data'][$geoy],$syst);
+		}
+	}
+	return $flux;
+}
+
 function geoforms_forms_ajoute_styles($texte){
 	if ($f=find_in_path('geoforms.css')){
 		lire_fichier($f,$css);
