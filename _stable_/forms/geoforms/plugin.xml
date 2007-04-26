@@ -11,6 +11,7 @@
 	<necessite id='forms' version='[0.301;]' />
 	<chemin dir='' />
 	<fonctions>public/geoforms_balises.php</fonctions>
+	<options>geoforms_options.php</options>
 	<pipeline>
 		<nom>forms_types_champs</nom>
 		<inclure>inc/geoforms_types_champs.php</inclure>
