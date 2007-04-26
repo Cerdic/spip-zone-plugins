@@ -28,7 +28,7 @@
 Les attributs sont un doublement des mots-cl&eacute;s afin d'&eacute;viter d'avoir &agrave; les d&eacute;tourner pour d'autres usages.
 	</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Le-Plugin-Attribut</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	attributs_mes_options.php
 	</options>
