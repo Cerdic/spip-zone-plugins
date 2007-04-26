@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[fr]Th&egrave;me de test pour le d&eacute;veloppement du noisetier</multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cent20, Joseph Larmarange, Mogwaï - 2007 - 
+	<multi>
+		[fr]Distribu&#233; sous licence GPL
+	</multi>
+	</auteur>
+	<version>1.0</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>
+	[fr] Thème pour le plugin noisetier. Ce th&egrave;me sert de test pour le d&eacute;veloppement du plugin noisetier.
+	</multi>
+	</description>
+	<lien>http://groups.google.com/group/noisetier-dev</lien> <!-- URI de documentation -->
+	<prefix> 
+	theme_test
+	</prefix>
+	<chemin dir='' />
+</plugin>
