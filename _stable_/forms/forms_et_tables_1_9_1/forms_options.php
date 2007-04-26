@@ -20,12 +20,19 @@ include_spip('base/forms');
 $GLOBALS['forms_actif_exec'][] = 'donnees_edit';
 $GLOBALS['forms_saisie_km_exec'][] = 'donnees_edit';
 // pipelines d'ajout et surcharge des champs
+#edition du formulaire
 $GLOBALS['spip_pipeline']['forms_types_champs'] = '';
 $GLOBALS['spip_pipeline']['forms_bloc_edition_champ'] = '';
+$GLOBALS['spip_pipeline']['forms_update_edition_champ'] = '';
+
+#visualisation du formulaire
 $GLOBALS['spip_pipeline']['forms_label_details'] = '';
 $GLOBALS['spip_pipeline']['forms_input_champs'] = '';
 $GLOBALS['spip_pipeline']['forms_ajoute_styles'] = '';
-$GLOBALS['spip_pipeline']['forms_update_edition_champ'] = '';
+#modification des donnees apres saisie du formulaire
+$GLOBALS['spip_pipeline']['forms_pre_edition_donnee'] = '';
+
+#affichage des donnees
 $GLOBALS['spip_pipeline']['forms_calcule_valeur_en_clair'] = '';
 
 function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {

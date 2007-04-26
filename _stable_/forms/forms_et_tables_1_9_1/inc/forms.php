@@ -432,20 +432,50 @@
 		return $inserts;
 	}
 	
-	function Forms_insertions_reponse_post($id_form,$id_donnee,&$erreur,&$ok, $c = NULL){
+	function Forms_modifier_reponse($id_form,$id_donnee,&$erreur, $c = NULL, $structure = NULL){
+		if (!$structure)	$structure = Forms_structure($id_form);
 		$inserts = array();
-		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form));
-		while($row = spip_fetch_array($res)){
-			$champ = $row['champ'];
-			$type = $row['type'];
+		$champs_mod = array();
+		$valeurs = array();
+		$champs = array();
+		foreach($structure as $champ=>$infos){
 			if (!$c) 
 				$val = _request($champ);
 			else
 				$val = isset($c[$champ])?$c[$champ]:NULL;
+			if ($val!==NULL){
+				$valeurs[$champ] = $val;
+				$champs[$champ] = $infos;
+			}
+		}
+		// Envoyer aux plugins
+		$valeurs = pipeline('forms_pre_edition_donnee',
+			array(
+				'args' => array(
+					'id_form' => $id_form,
+					'id_donnee' => $id_donnee,
+					'champs' => $champs
+				),
+				'data' => $valeurs
+			)
+		);
+		foreach($valeurs as $champ=>$val){
+			$champs_mod[] = $champ;
+			$type = $champs[$champ]['type'];
 			$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
 			$inserts = array_merge($inserts,$ins);
 		}
-		return $inserts;
+		if (!count($erreur)){
+			if (count($champs_mod)){
+				$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
+				spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
+			}
+			if (count($inserts)){
+				spip_query($q="INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
+					"VALUES ".join(',', $inserts));
+			}
+		}
+		return count($inserts);
 	}
 
 	function Forms_revision_donnee($id_donnee, $c = NULL) {
@@ -460,25 +490,9 @@
 		include_spip("inc/forms_type_champs");
 		
 		$erreur = Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure);
-		if (!$erreur) {
-			$champs_mod = array();
-			foreach($structure as $champ=>$infos){
-				$val = _request($champ,$c);
-				if ($val!==NULL){
-					$champs_mod[] = $champ;
-					$type = $infos['type'];
-					$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
-					$inserts = array_merge($inserts,$ins);
-				}
-			}
-			if (count($inserts)){
-				$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
-				spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
-				spip_query($q="INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
-					"VALUES ".join(',', $inserts));
-			}
-		}
-		else
+		if (!$erreur)
+			Forms_modifier_reponse($id_form,$id_donnee,&$erreur, $c, $structure);
+		if (count($erreur))
 			spip_log("erreur: ".serialize($erreur));
 
 		return $erreur;
@@ -597,9 +611,6 @@
 				if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
 					spip_query("UPDATE spip_forms_donnees SET ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
-					// il faut faire un delete ici car les champs sont mis en insert et pas update (on peut avoir plusieurs donnees par champs)
-					// a ameliorer car risque de perte de donnees
-					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
 					if ($rang==NULL) $rang = array('rang'=>Forms_rang_prochain($id_form));
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, "
@@ -627,20 +638,22 @@
 			}
 			// Puis enregistrer les differents champs
 			if ($ok) {
-				$inserts = Forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok,$c);
-				if (!count($inserts)) {
+				#$inserts = Forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok,$c);
+				if (!Forms_modifier_reponse($id_form,$id_donnee,$erreur, $c)) {
 					// Reponse vide => annuler
 					$erreur['@'] = _T("forms:remplir_un_champ");
-					spip_query("DELETE FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+					$row = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
+					if(!$row = spip_fetch_array($row))
+						spip_query("DELETE FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 					$ok = false;
 				}
 			}
-			if ($ok) {
+			/*if ($ok) {
 				include_spip('inc/securiser_action');
 				spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 					"VALUES ".join(',', $inserts));
-			}
+			}*/
 			if ($ok || $confirme) {
 				if ($champconfirm)
 					if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champconfirm))))
