@@ -1,0 +1,32 @@
+#CACHE{86400}
+<BOUCLE_rubrique_principale(RUBRIQUES){id_rubrique}>
+[(#REM) Page affichée en cas d'id correct ]
+[(#REM) Déclaration du type de document, indispensable pour le navigateur web ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+[(#REM) Appel du modèle d'en-tête du plugin de thème]
+<INCLURE{fond=noisetier-head}{env}>
+</head>
+<body id="#ENV{page}">
+[(#REM) Appel du modèle de corps du plugin de thème ]
+<INCLURE{fond=noisetier-body}{env}>
+[(#REM) Balises html de fermeture de la page]
+</body>
+</html>
+</BOUCLE_rubrique_principale>
+[(#REM) Page affichée en cas d'id correct ]
+[(#REM) Déclaration du type de document, indispensable pour le navigateur web ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+[(#REM) Appel du modèle d'en-tête du plugin de thème]
+<INCLURE{fond=noisetier-head}{env}{page=articles}>
+</head>
+<body id="rubriques">
+[(#REM) Appel du modèle de corps du plugin de thème ]
+<INCLURE{fond=noisetier-body}{env}{page=rubriques}>
+[(#REM) Balises html de fermeture de la page]
+</body>
+</html>
+<//B_rubrique_principale>
