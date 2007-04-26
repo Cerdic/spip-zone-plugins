@@ -13,6 +13,7 @@ $spip_noisettes = array(
 	"exclue" => "varchar(255) NOT NULL",
 	"zone" => "varchar(255) NOT NULL",
 	"position" => "bigint(21) NOT NULL",
+	"titre" => "varchar(255) NOT NULL",
 	"descriptif" => "text NOT NULL",
 	"fond" => "varchar(255) NOT NULL",
 	"type" => "ENUM('noisette', 'texte') DEFAULT 'noisette' NOT NULL",
