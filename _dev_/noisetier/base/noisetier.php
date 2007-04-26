@@ -33,7 +33,8 @@ $spip_params_noisettes = array(
 	"id_noisette" => "bigint(21) NOT NULL",
 	"type" => "ENUM('env', 'param', 'attribut') DEFAULT 'env' NOT NULL",
 	"titre" => "varchar(255) NOT NULL",
-	"valeur" => "text NOT NULL",
+	"descriptif" => "text NOT NULL",
+	"valeur" => "varchar(255) NOT NULL",
 	"id_attribut" => "bigint(21) NOT NULL",
 	"maj" => "TIMESTAMP");
 
