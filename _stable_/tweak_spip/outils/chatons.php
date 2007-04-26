@@ -38,7 +38,7 @@ function chatons_installe() {
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
-// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
+// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function chatons_raccourcis() {
 	return _T('cout:chatons:aide', array('liste' => $GLOBALS['meta']['tweaks_chatons_racc']));

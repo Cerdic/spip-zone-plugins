@@ -40,7 +40,7 @@ function sommaire_d_article_rempl($texte) {
 	if (strpos($texte, '<h3')===false) return $texte;
 	if (strpos($texte, _sommaire_SANS_SOMMAIRE)!==false) return str_replace(_sommaire_SANS_SOMMAIRE, '', $texte);
 	$sommaire = ''; $i = 1; $nbh3 = 0;
-	// couplage avec le tweak 'decoupe_article'
+	// couplage avec l'outil 'decoupe_article'
 	if(defined('_decoupe_SEPARATEUR')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
 		if (count($pages) == 1) $sommaire = sommaire_d_une_page($texte, $nbh3);

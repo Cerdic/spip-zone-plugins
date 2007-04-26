@@ -2,7 +2,7 @@
 /*
  code & integration 2007 : Patrice Vanneufville
  Toutes les infos sur : http://www.spip-contrib.net/?article1564
- Ce tweak est base sur les references suivantes :
+ Cet outil est base sur les references suivantes :
  	http://gbiv.com/protocols/uri/rfc/rfc3986.html
 	http://tools.ietf.org/html/rfc3696
 */

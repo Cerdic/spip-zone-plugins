@@ -34,6 +34,6 @@ if (defined('_INTRODUCTION_LGR')) {
 		}
 	} // introduction()
  } //!function_exists('introduction') 
- else spip_log("Erreur - introduction() existe déjà et ne peut pas être surchargée par Tweak-Spip !");
+ else spip_log("Erreur - introduction() existe déjà et ne peut pas être surchargée par Tweak SPIP !");
 } //defined('_INTRODUCTION_LGR')
 ?>

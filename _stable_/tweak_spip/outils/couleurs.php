@@ -1,7 +1,7 @@
 <?php
 
 /*
-   Ce tweak en couleurs permet aux redacteurs d'un site spip de d'appliquer facilement des couleurs aux textes SPIP
+   Cet outil en couleurs permet aux redacteurs d'un site spip de d'appliquer facilement des couleurs aux textes SPIP
    Utilisation pour le redacteur : 
 		[rouge]Lorem ipsum dolor sit amet[/rouge]
 		[red]Lorem ipsum dolor sit amet[/red]
@@ -14,7 +14,7 @@
  *   +----------------------------------+
  *    Date : Vendredi 11 août 2003
  *    Idee originale :  Aurelien PIERARD : aurelien.pierard(a)dsaf.pm.gouv.fr
- *    Serieuse refonte et integration en tweak : Patrice Vanneufville, mars 2007
+ *    Serieuse refonte et integration en outil : Patrice Vanneufville, mars 2007
  *   +-------------------------------------+
  *  
 */
@@ -44,7 +44,7 @@ cout_log("couleurs_installe()");
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
-// le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par le tweak
+// le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function couleurs_raccourcis() {
 	return _T('cout:couleurs:aide', array('liste' => $GLOBALS['meta']['tweaks_couleurs_racc']));

@@ -73,7 +73,7 @@ cout_log(" -- abs. path = $path2");
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
-// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par le tweak
+// le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function smileys_raccourcis() {
 	return _T('cout:smileys:aide', array('liste' => $GLOBALS['meta']['tweaks_smileys_racc']));

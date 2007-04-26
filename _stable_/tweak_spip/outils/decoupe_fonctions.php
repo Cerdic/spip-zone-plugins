@@ -65,7 +65,7 @@ function decouper_en_pages($texte){
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// verification des metas qui stockent les liens d'image
 	if (!isset($GLOBALS['meta']['tweaks_decoupe']) || isset($GLOBALS['var_mode'])) {
-		include_spip('tweaks/decoupe');
+		include_spip('outils/decoupe');
 		decoupe_installe();
 	}
 	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
