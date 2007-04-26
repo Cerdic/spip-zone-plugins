@@ -3,8 +3,7 @@
 
 	function attributs_ajouterBoutons($boutons_admin) {
 		// si on est admin
-		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
-		AND $GLOBALS["options"]=="avancees") {
+		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu['attributs']= new Bouton(
 			"../"._DIR_PLUGIN_ATTRIBUTS."/img_pack/attribut-24.png",  // icone
