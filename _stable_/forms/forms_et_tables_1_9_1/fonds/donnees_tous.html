@@ -43,7 +43,7 @@
 [(#REM|?{'','modifier'}|autoriser{'donnee',#ID_DONNEE}|?{' '})
 #SET{lien_edit,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF} }
 ]
-	<tr class='tr_liste'>
+	<tr class='tr_liste' onmouseover='$(this).activeCrayons();'>
 		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]</td>
 		<td>[<a href='(#GET{lien_edit})'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>]#ID_DONNEE[(#GET{lien_edit}|?{' '})</a>]</td>
 		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
@@ -69,6 +69,7 @@
 	var search_string='<:bouton_chercher:>';
 	var clear_string='<:info_tout_afficher:>';
 	var apply_string='<:bouton_valider:>';
+	var crayons_init_dynamique = true;
 	$(document).ready(function() {
 		$("table#donnees_#GET{id}").tableSorter({
 		  
@@ -86,6 +87,12 @@
 	}).sortStop(function(a){
 		$("div#sorting_#GET{id}").hide();
 	});
+	jQuery.fn.activeCrayons = function(){
+		if (typeof cQuery != 'undefined'){
+			cQuery(this).initcrayons();
+		}
+		return this.unbind('mouseover');
+	}
 	// -->
 	</script>	
 </B_donnees>
