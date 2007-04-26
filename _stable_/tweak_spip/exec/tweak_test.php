@@ -29,7 +29,7 @@ cout_log("Début : exec_tweak_test()");
 		exit;
 	}
 	
-	// initialisation generale forcee : recuperation de $tweaks;
+	// initialisation generale forcee : recuperation de $outils;
 	tweak_initialisation(true);
 
 	if ($GLOBALS['spip_version_code']<1.92) 
@@ -54,7 +54,7 @@ cout_log("Fin   : exec_tweak_test()");
 // $textes est un tableau de chaines
 function tweak_test_fun(&$textes, $fonction) {
 	$a = array();
-	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, tweak non activé !");
+	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, outil non activé !");
 	foreach ($textes as $i=>$t) {
 		$b = $fonction($t);
 		$a["\$texte[$i]"] = htmlentities($t);

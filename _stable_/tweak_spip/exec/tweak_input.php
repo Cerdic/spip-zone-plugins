@@ -22,25 +22,25 @@ function exec_tweak_input_dist() {
 cout_log("Début : exec_tweak_input_dist() - Préparation du retour par Ajax (données transmises par GET)");
 
 	$script = _request('script');
-	$tweak = _request('tweak');
-cout_log(" -- tweak = $tweak - script = $script");
+	$outil = _request('tweak');
+cout_log(" -- tweak = $outil - script = $script");
 	if (!preg_match('/^\w+$/', $script)) { echo minipres(); exit;	}
-	// ici on commence l'initialisation de tous les tweaks
-	global $tweaks, $metas_vars, $metas_tweaks;
+	// ici on commence l'initialisation de tous les outils
+	global $outils, $metas_vars, $metas_tweaks;
 	include_spip('tweak_spip');
-	// remplir $tweaks (et aussi $tweak_variables qu'on n'utilise pas ici);
+	// remplir $outils (et aussi $cout_variables qu'on n'utilise pas ici);
 	include_spip('tweak_spip_config');
-cout_log(" -- exec_tweak_input_dist() - Appel de tweak_spip_config.php : nbtweaks = ".count($tweaks));
+cout_log(" -- exec_tweak_input_dist() - Appel de tweak_spip_config.php : nb_outils = ".count($outils));
 	// charger les metas
 	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
-cout_log(" -- appel de charger_fonction('tweak_input', 'inc') et de tweak_input($tweak, $script) :");
+cout_log(" -- appel de charger_fonction('tweak_input', 'inc') et de tweak_input($outil, $script) :");
 	$tweak_input = charger_fonction('tweak_input', 'inc');
-	tweak_initialisation_d_un_tweak($tweak, $tweak_input, true);
-cout_log("Fin   : exec_tweak_input_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration du tweak");	
+	tweak_initialisation_d_un_tweak($outil, $tweak_input, true);
+cout_log("Fin   : exec_tweak_input_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	
 
 	include_spip('inc/texte');
-	ajax_retour(propre($tweaks[$tweak]['description']));
+	ajax_retour(propre($outils[$outil]['description']));
 }
 ?>

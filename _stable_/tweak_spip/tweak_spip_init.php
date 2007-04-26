@@ -13,14 +13,14 @@
 
 cout_log("Chargement de tweak_spip_init.php");
 
-// si le tweak 'log_tweaks' est actif, on logue pour Tweak-Spip
+// si l'outil 'log_couteau_suisse' est actif, on logue pour Tweak SPIP
 function cout_log($variable, $prefixe='') {
- if(!$GLOBALS['log_tweaks'] || !strlen($variable)) return;
+ if(!$GLOBALS['log_couteau_suisse'] || !strlen($variable)) return;
  if (!is_string($variable)) $variable = var_export($variable, true);
  spip_log('TWEAKS. '.$prefixe.$variable);
 }
 
-// compatibilite avec tweak-spip de version anterieure a 1.7.0.0
+// compatibilite avec Tweak SPIP de version anterieure a 1.7.0.0
 function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
 
 // Echapper les les elements perilleux en les passant en base64
@@ -30,33 +30,33 @@ function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); r
 function tweak_code_echappement($rempl, $source='') {
 	// Convertir en base64
 	$base64 = base64_encode($rempl);
-	// guillemets simple dans la balise pour simplifier le tweak 'guillemets'
+	// guillemets simple dans la balise pour simplifier l'outil 'guillemets'
 	return "<span class='base64$source' title='$base64'></span>";
 }
 
 function tweak_initialisation_d_un_tweak($tweak0, $tweak_input, $modif) {
-	global $tweaks, $metas_tweaks;
-	$tweak = &$tweaks[$tweak0];
-	if (!isset($tweak['categorie'])) $tweak['categorie'] = 'divers';
-	if (!isset($tweak['nom'])) $tweak['nom'] = _T('cout:'.$tweak['id'].':nom');
-	if (!isset($tweak['description'])) $tweak['description'] = _T('cout:'.$tweak['id'].':description');
-	$tweak['actif'] = isset($metas_tweaks[$tweak['id']])?$metas_tweaks[$tweak['id']]['actif']:0;
+	global $outils, $metas_tweaks;
+	$outil = &$outils[$tweak0];
+	if (!isset($outil['categorie'])) $outil['categorie'] = 'divers';
+	if (!isset($outil['nom'])) $outil['nom'] = _T('cout:'.$outil['id'].':nom');
+	if (!isset($outil['description'])) $outil['description'] = _T('cout:'.$outil['id'].':description');
+	$outil['actif'] = isset($metas_tweaks[$outil['id']])?$metas_tweaks[$outil['id']]['actif']:0;
 	// Si Spip est trop ancien ou trop recent...
-	if ((isset($tweak['version-min']) && $GLOBALS['spip_version']<$tweak['version-min'])
-		|| (isset($tweak['version-max']) && $GLOBALS['spip_version']>$tweak['version-max']))
-			$tweak['actif'] = 0;
+	if ((isset($outil['version-min']) && $GLOBALS['spip_version']<$outil['version-min'])
+		|| (isset($outil['version-max']) && $GLOBALS['spip_version']>$outil['version-max']))
+			$outil['actif'] = 0;
 	// au cas ou des variables sont presentes dans le code
-	$tweak['variables'] = array(); $tweak['nb_variables'] = 0;
+	$outil['variables'] = array(); $outil['nb_variables'] = 0;
 	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
-	if (isset($tweak['code:options'])) $tweak['code:options'] = tweak_parse_code_php($tweak['code:options']);
-	if (isset($tweak['code:fonctions'])) $tweak['code:fonctions'] = tweak_parse_code_php($tweak['code:fonctions']);
+	if (isset($outil['code:options'])) $outil['code:options'] = tweak_parse_code_php($outil['code:options']);
+	if (isset($outil['code:fonctions'])) $outil['code:fonctions'] = tweak_parse_code_php($outil['code:fonctions']);
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
-	$tweak['description'] = $tweak_input($tweak0, 'tweak_spip_admin', $modif);
+	$outil['description'] = $tweak_input($tweak0, 'tweak_spip_admin', $modif);
 }
 
-// lit ecrit les metas et initialise $tweaks_metas_pipes
+// lit ecrit les metas et initialise $cout_metas_pipelines
 function tweak_initialisation($forcer=false) {
-	global $tweaks_metas_pipes;
+	global $cout_metas_pipelines;
 	$rand = rand();
 	// au premier passage, on force l'installation si var_mode est defini
 	static $deja_passe_ici;
@@ -74,54 +74,54 @@ cout_log("[#$rand]  -- lecture metas");
 		lire_metas();
 	}
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
-		$tweaks_metas_pipes = unserialize($GLOBALS['meta']['tweaks_pipelines']);
-cout_log("[#$rand]  -- tweaks_metas_pipes = ".join(', ',array_keys($tweaks_metas_pipes)));
+		$cout_metas_pipelines = unserialize($GLOBALS['meta']['tweaks_pipelines']);
+cout_log("[#$rand]  -- cout_metas_pipelines = ".join(', ',array_keys($cout_metas_pipelines)));
 		$actifs=unserialize($GLOBALS['meta']['tweaks_actifs']);
-cout_log("[#$rand]  -- ".(is_array($actifs)?count($actifs):0).' tweak(s) actif(s)'.(is_array($actifs)?" = ".join(', ',array_keys($actifs)):''));
+cout_log("[#$rand]  -- ".(is_array($actifs)?count($actifs):0).' outils(s) actif(s)'.(is_array($actifs)?" = ".join(', ',array_keys($actifs)):''));
 cout_log("[#$rand] ".($forcer?"\$forcer = true":"tweak_initialisation($forcer) : Sortie car les metas sont présents"));
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
 	}
 
-	// ici on commence l'initialisation de tous les tweaks
-	global $tweaks, $metas_vars, $metas_tweaks;
+	// ici on commence l'initialisation de tous les outils
+	global $outils, $metas_vars, $metas_tweaks;
 	include_spip('tweak_spip');
 	// charger les metas
 	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
-	// remplir $tweaks (et aussi $tweak_variables qu'on n'utilise pas ici);
+	// remplir $outils (et aussi $cout_variables qu'on n'utilise pas ici);
 	include_spip('tweak_spip_config');
 	// nettoyage des versions anterieures
 	tweak_compatibilite_ascendante();
 	// stocker les types de variables declarees
-	global $tweak_variables;
-	$metas_vars['_chaines'] = $tweak_variables['_chaines'];
-	$metas_vars['_nombres'] = $tweak_variables['_nombres'];
-	// au cas ou un tweak manipule des variables
+	global $cout_variables;
+	$metas_vars['_chaines'] = $cout_variables['_chaines'];
+	$metas_vars['_nombres'] = $cout_variables['_nombres'];
+	// au cas ou un outil manipule des variables
 	$tweak_input = charger_fonction('tweak_input', 'inc');
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
-cout_log("[#$rand]  -- foreach(\$tweaks) : tweak_initialisation_d_un_tweak()");
+cout_log("[#$rand]  -- foreach(\$outils) : tweak_initialisation_d_un_tweak()");
 
-	// initialiser chaque tweak
+	// initialiser chaque outil
 	$id = 0;
-	foreach($temp = $tweaks as $tweak) $id = tweak_initialisation_d_un_tweak($tweak['id'], $tweak_input, false);
-	// installer $tweaks_metas_pipes
-	$tweaks_metas_pipes = array();
+	foreach($temp = $outils as $outil) $id = tweak_initialisation_d_un_tweak($outil['id'], $tweak_input, false);
+	// installer $cout_metas_pipelines
+	$cout_metas_pipelines = array();
 cout_log("[#$rand]  -- tweak_initialise_includes()...");
 	// initialiser les includes et creer les fichiers de controle
 	tweak_initialise_includes();
 	// sauver la configuration
 	tweak_sauve_configuration();
 cout_log("[#$rand]  -- tweak_installe_tweaks...");
-	// lancer la procedure d'installation pour chaque tweak
+	// lancer la procedure d'installation pour chaque outil
 	tweak_installe_tweaks();
-	// en metas : tweaks actifs
+	// en metas : outils actifs
 cout_log("[#$rand]  -- ecriture metas");
 	ecrire_meta('tweaks_actifs', serialize($metas_tweaks));
-	// en metas : variables de tweaks
+	// en metas : variables d'outils
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// en metas : code inline pour les pipelines, mes_options et mes_fonctions;
-	ecrire_meta('tweaks_pipelines', serialize($tweaks_metas_pipes));
+	ecrire_meta('tweaks_pipelines', serialize($cout_metas_pipelines));
 	ecrire_metas();
 cout_log("[#$rand] tweak_initialisation($forcer) : Sortie");
 }
@@ -145,7 +145,7 @@ function tweak_echappe_balises($balises, $fonction, $texte){
 }
 
 // transforme un chemin d'image relatif en chemin html absolu
-// cette fonction est utilisable par les tweaks eux-memes durant l'execution du plugin
+// cette fonction est utilisable par les outils eux-memes durant l'execution du plugin
 function tweak_htmlpath($relative_path) {
 	$realpath = str_replace("\\", "/", realpath($relative_path));
 	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
@@ -172,14 +172,14 @@ function tweak_canonicalize($address) {
 /* DEBUT DU CODE */
 /*****************/
 
-// $tweaks_metas_pipes ne sert ici qu'a l'execution et ne comporte que :
+// $cout_metas_pipelines ne sert ici qu'a l'execution et ne comporte que :
 //	- le code pour <head></head>
 //	- le code pour les options.php
 //	- le code pour les fonction.php
 //	- le code pour les pipelines utilises
 
-global $tweaks_metas_pipes;
-$tweaks_metas_pipes = array();
+global $cout_metas_pipelines;
+$cout_metas_pipelines = array();
 // lancer l'initialisation
 tweak_initialisation();
 

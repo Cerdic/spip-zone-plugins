@@ -5,7 +5,7 @@
 // quelques chaines temporaires a traduire
 $temp['jQuery1'] = "{{Attention}} : cette fonctionnalit&eacute; n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.";
 $temp['jQuery2'] = "Cette fonctionnalit&eacute;  utilise la librairie {jQuery}.";
-$temp['reset'] = 'R&eacute;initialisation totale du plugin';
+$temp['reset'] = 'R&eacute;initialisation des outils';
 $temp['type_urls'] = "#PUCE {{page}} : la valeur par d&eacute;faut pour SPIP v1.9 : <code>/spip.php?article123</code>.
 _ #PUCE {{html}} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
 _ #PUCE {{propre}} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
@@ -37,25 +37,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p>" . $temp['reset'],
 	'raccourcis' => "Raccourcis typographiques actifs&nbsp;:",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
-	'nbtweak' => '@pipe@ : @nb@ tweak',
-	'nbtweaks' => '@pipe@ : @nb@ tweaks',
+	'nb_outil' => '@pipe@ : @nb@ outil',
+	'nb_outils' => '@pipe@ : @nb@ outils',
 	'titre_tests' => 'Tweak SPIP - Page de tests',
-	'actif' => 'Tweak actif',
-	'inactif' => 'Tweak inactif',
-	'actifs' => 'Tweaks actifs :',
-	'activer_tweak' => 'Activer le tweak',
+	'actif' => 'Outil actif',
+	'inactif' => 'Outil inactif',
+	'actifs' => 'Outils actifs :',
+	'activer_outil' => "Activer l'outil",
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
 	'vars_modifiees' => 'Merci, les donn&eacute;es ont &eacute;t&eacute;s modifi&eacute;es',
 	'variable_vide' => '(Vide)',
-	'tweak' => 'Tweak :',
-	'tweaks_liste' => 'Liste des tweaks',
-	'presente_tweaks' => "Cette page liste les tweaks disponibles. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les tweaks un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette ou avec d'autres plugin.",
+	'info_outil' => 'Outil :',
+	'liste_outils' => 'Liste des outils',
+	'presente_tweaks' => "Cette page liste les fonctionnalit&eacute;s disponibles. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette ou avec d'autres plugins.",
 	'erreur:nom' => 'Erreur !',
-	'erreur:description' => 'id manquant dans la d&eacute;finition du tweak !',
+	'erreur:description' => "id manquant dans la d&eacute;finition de l'outil !",
 	'erreur:version' => 'indisponible dans cette version de SPIP.',
 
-// categories de tweaks
+// categories d'outils
 // --------------------
 
 	'admin' => "1. Administration",
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spip' => "5. Balises, filtres, crit&egrave;res",
 	'divers' => "6. Divers",
 	
-// Chaines de langue concernant tous les tweaks configures dans tweak_spip_config.php
+// Chaines de langue concernant tous les outils configures dans tweak_spip_config.php
 // ----------------------------------------------------------------------------------
 
 	'SPIP_cache:nom' => 'SPIP et le cache&hellip;',
@@ -174,8 +174,8 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 	'standard' => 'standard', 'propres-qs' => 'propres-qs',
 
 // ---------------------------------------------------------------------------
-	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak SPIP',
-	'log_tweaks:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak SPIP' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
+	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; de Tweak SPIP',
+	'log_couteau_suisse:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak SPIP' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
 
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
 	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',
@@ -211,7 +211,7 @@ Attention : certaines fonctionnalit&eacute; de cette page n&eacute;cessitent les
 		. "#PUCE SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[Lien vers le glossaire :->%url_glossaire_externe%]]",
 
 	'forum_lgrmaxi:nom' => 'Taille des forums',
-	'forum_lgrmaxi:description' => "Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si ce tweak est activ&eacute;, un message d'erreur s'affichera lorsque quelqu'un voudra poster un message  d'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;amoins qu'aucune limite ne s'applique.[[Valeur (en caract&egrave;res) :->%forum_lgrmaxi%]]",
+	'forum_lgrmaxi:description' => "Par d&eacute;faut les messages de forum ne sont pas limit&eacute;s en taille. Si cet outil est activ&eacute;, un message d'erreur s'affichera lorsque quelqu'un voudra poster un message  d'une taille sup&eacute;rieure &agrave; la valeur sp&eacute;cifi&eacute;e, et le message sera refus&eacute;. Une valeur vide ou &eacute;gale &agrave; 0 signifie n&eacute;amoins qu'aucune limite ne s'applique.[[Valeur (en caract&egrave;res) :->%forum_lgrmaxi%]]",
 
 // ---------------------------------------------------------------------------
 // texte uniquement pour SPIP<1.93
@@ -241,7 +241,7 @@ Attention : certaines fonctionnalit&eacute; de cette page n&eacute;cessitent les
 ,//	."<p>Pour afiner un peu, vous pouvez maintenant d&eacute;finir le style particulier des balises suivantes :</p>",
 
 	'decoupe:nom' => 'D&eacute;coupe un article en pages',
-	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.<br />Attention, cette pagination ne sera pas prise en compte si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}",
+	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.<br />Attention, cette pagination ne sera pas prise en compte si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Cet ouril peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}",
 	'decoupe:aide' => 'S&eacute;parateur de pages&nbsp;: @sep@',
 	'page_suivante' => 'Page suivante',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
@@ -250,7 +250,7 @@ Attention : certaines fonctionnalit&eacute; de cette page n&eacute;cessitent les
 
 // ---------------------------------------------------------------------------
 	'sommaire:nom' => 'Sommaire en d&eacute;but d\'article',
-	'sommaire:description' => "Construit syst&eacute;matiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourci SPIP <code>{{{Un autre titre}}}</code>. Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).<br />Attention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Ce tweak peut &ecirc;tre coupl&eacute; avec {D&eacute;coupe un article en pages}",
+	'sommaire:description' => "Construit syst&eacute;matiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourci SPIP <code>{{{Un autre titre}}}</code>. Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).<br />Attention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Cet outil peut &ecirc;tre coupl&eacute; avec {D&eacute;coupe un article en pages}",
 	'sommaire:aide' => 'Un article sans sommaire&nbsp;: @interdit@',
 	'sommaire' => 'Sommaire',
 

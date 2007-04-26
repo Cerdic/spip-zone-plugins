@@ -40,7 +40,7 @@ add_variable( array(
 	'code:%s' => "\$_SERVER['REQUEST_METHOD']='POST';",
 ));
 	// ici on demande a Tweak SPIP une case input. La variable est : quota_cache
-	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['quota_cache']
+	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['quota_cache']
 add_variable( array(
 	'nom' => 'quota_cache',
 	'format' => 'nombre',
@@ -54,7 +54,7 @@ add_outil( array(
 ));
 
 	// ici on demande a Tweak SPIP une case input. La variable est : dossier_squelettes
-	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['dossier_squelettes']
+	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['dossier_squelettes']
 add_variable( array(
 	'nom' => 'dossier_squelettes',
 	'format' => 'chaine',
@@ -68,7 +68,7 @@ add_outil( array(
 ));
 
 	// ici on demande a Tweak SPIP une case input. La variable est : cookie_prefix
-	// a la toute premiere activation du tweak, la valeur sera : $GLOBALS['cookie_prefix']
+	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['cookie_prefix']
 add_variable( array(
 	'nom' => 'cookie_prefix',
 	'format' => 'chaine',
@@ -110,7 +110,7 @@ add_outil( array(
 ));
 
 	// ici on demande a Tweak SPIP une case input. La variable est : suite_introduction
-	// a la toute premiere activation du tweak, la valeur sera : '&nbsp;(...)'
+	// a la toute premiere activation de l'outil, la valeur sera : '&nbsp;(...)'
 add_variable( array(
 	'nom' => 'suite_introduction',
 	'format' => 'chaine',
@@ -202,7 +202,7 @@ add_outil( array(
 ));
 
 	// ici on demande a Tweak SPIP une case input. La variable est : forum_lgrmaxi
-	// a la toute premiere activation du tweak, la valeur sera : 0 (aucune limite)
+	// a la toute premiere activation de l'outil, la valeur sera : 0 (aucune limite)
 add_variable( array(
 	'nom' => 'forum_lgrmaxi',
 	'format' => 'nombre',
@@ -247,8 +247,8 @@ add_outil( array(
 ));
 
 add_outil( array(
-	'id' => 'log_tweaks',
-	'code:options' => "\$GLOBALS['log_tweaks']=true;",
+	'id' => 'log_couteau_suisse',
+	'code:options' => "\$GLOBALS['log_couteau_suisse']=true;",
 ));
 
 add_outil( array(
@@ -310,7 +310,7 @@ add_outil( array(
 	'categorie' => 'typo-racc',
 ));
 
-// couplage avec le tweak 'decoupe', donc 'sommaire' doit etre place juste apres :
+// couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
 include_spip('inc/texte');
 $code = str_replace("'", "\'", tweak_code_echappement("<!--  -->\n", 'SOMMAIRE'));
@@ -386,7 +386,7 @@ add_outil( array(
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
 ));
 
-// tweak specifiquement français. D'autres langues peuvent etre ajoutees dans tweaks/typo_exposants.php
+// outil specifiquement français. D'autres langues peuvent etre ajoutees dans outils/typo_exposants.php
 add_outil( array(
 	'id' => 'typo_exposants',
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
@@ -450,5 +450,5 @@ add_outil( array(
 // boutonstexte
 
 cout_log("Fin de tweak_spip_config.php");
-//global $tweak_variables; cout_log($tweak_variables, 'tweak_variables :');
+//global $cout_variables; cout_log($cout_variables, 'tweak_variables :');
 ?>

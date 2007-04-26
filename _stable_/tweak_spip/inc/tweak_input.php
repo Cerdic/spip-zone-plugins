@@ -15,10 +15,10 @@ include_spip('inc/layer');
 include_spip('inc/presentation');
 include_spip('inc/message_select');
 
-// retourne le code html qu'il faut pour fabriquer le formulaire du tweak proprietaire
-function tweak_input_une_variable($index, $tweak, $variable, $label, &$ok_input_, &$ok_valeur_) {
-	global $tweak_variables, $metas_vars;
-	$actif = $tweak['actif'];
+// retourne le code html qu'il faut pour fabriquer le formulaire de l'outil proprietaire
+function tweak_input_une_variable($index, $outil, $variable, $label, &$ok_input_, &$ok_valeur_) {
+	global $cout_variables, $metas_vars;
+	$actif = $outil['actif'];
 	// la valeur de la variable n'est stockee dans les metas qu'au premier post
 	if (isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
 		else $valeur = tweak_get_defaut($variable);
@@ -26,9 +26,9 @@ function tweak_input_une_variable($index, $tweak, $variable, $label, &$ok_input_
 cout_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 
 	// si la variable necessite des boutons radio
-	if (is_array($radios = &$tweak_variables[$variable]['radio'])) {
+	if (is_array($radios = &$cout_variables[$variable]['radio'])) {
 		$ok_input = $label;
-		$i = 0; $nb = intval($tweak_variables[$variable]['radio/ligne']);
+		$i = 0; $nb = intval($cout_variables[$variable]['radio/ligne']);
 		foreach($radios as $code=>$traduc) {
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'<br />':' ';
 			$ok_input .= 
@@ -42,7 +42,7 @@ cout_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 	} 
 	// ici, donc juste une case input
 	else {
-		$len = $tweak_variables[$variable]['format']=='nombre'?4:0;
+		$len = $cout_variables[$variable]['format']=='nombre'?4:0;
 //			else $len=strlen(strval($valeur));
 		$ok_input = $label."<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' />"._TWEAK_VAR;
 		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('cout:variable_vide'));
@@ -52,12 +52,12 @@ cout_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 
 // renvoie la description de $tweak0 : toutes les %variables% ont ete remplacees par le code adequat
 function inc_tweak_input_dist($tweak0, $url_self, $modif=false) {
-	global $tweaks, $tweak_variables, $metas_vars;
-	$tweak = &$tweaks[$tweak0];
-	$actif = $tweak['actif'];
-	$index = $tweak['index'];
+	global $outils, $cout_variables, $metas_vars;
+	$outil = &$outils[$tweak0];
+	$actif = $outil['actif'];
+	$index = $outil['index'];
 	// remplacement des puces
-	$descrip = str_replace('#PUCE', definir_puce(), $tweak['description']);
+	$descrip = str_replace('#PUCE', definir_puce(), $outil['description']);
 	// remplacement des zone input de format [[label->varable]]
 	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2 </legend>\\3</fieldset>', $descrip);
 	// remplacement des variables de format : %variable%
@@ -65,13 +65,13 @@ function inc_tweak_input_dist($tweak0, $url_self, $modif=false) {
 	
 cout_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 	$ok_input = $ok_valeur = $ok_visible = '';
-	$tweak['nb_variables'] = 0; $variables = array();
+	$outil['nb_variables'] = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if (strlen($var=trim($t[$i+1]))) {
 		// si la variable est presente on fabrique le input
-		if (isset($tweak_variables[$var])) {
+		if (isset($cout_variables[$var])) {
 			tweak_input_une_variable(
-				$index + (++$tweak['nb_variables']), 
-				$tweak, $var, 
+				$index + (++$outil['nb_variables']), 
+				$outil, $var, 
 				$t[$i], 
 				$ok_input, $ok_valeur);
 			$variables[] = $var;
@@ -80,13 +80,13 @@ cout_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 			$temp = $t[$i]."[$var?]"; $ok_input .= $temp; $ok_valeur .= $temp; 
 		}
 	} else { $ok_input .= $t[$i]; $ok_valeur .= $t[$i]; }
-	$tweak['variables'] = $variables;
-	$c = $tweak['nb_variables'];
+	$outil['variables'] = $variables;
+	$c = $outil['nb_variables'];
 
 //	if (count($t)==1) { $ok_input .= "<p>$ok_input</p>"; $ok_valeur .= "<p>$ok_valeur</p>"; }
 
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _TWEAK_VAR s'il n'y en a qu'une.
-	// attention : on ne peut pas modifier les variables si le tweak est inactif
+	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if ($actif) {
 		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('cout:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
 		if($c>1) $ok_input .= "<div style=\"margin-top: 0; text-align: right;\">$bouton</div>";
@@ -108,9 +108,9 @@ cout_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 			. "\n<div id='tweak$index-valeur' style='position:absolute; visibility:hidden;' >$ok_valeur</div>\n"
 			. $res;
 		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
-		$res = ajax_action_auteur('tweak_input', $index, $url_self, "tweak={$tweak['id']}", "$res");
+		$res = ajax_action_auteur('tweak_input', $index, $url_self, "tweak={$outil['id']}", "$res");
 	}
-//cout_log("Fin   : inc_tweak_input_dist({$tweak['id']}) - {$tweak['nb_variables']} variables(s) trouvée(s)");
+//cout_log("Fin   : inc_tweak_input_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvée(s)");
 	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('cout:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return ajax_action_greffe("tweak_input-$index", $res, $modif);
 }

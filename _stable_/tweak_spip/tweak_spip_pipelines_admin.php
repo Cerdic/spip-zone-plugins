@@ -30,11 +30,11 @@ function tweak_spip_exec_init($flux){
 }
 */
 function tweak_spip_header_prive($flux){
-	global $tweaks_metas_pipes;
-	if (isset($tweaks_metas_pipes['header_prive']))
-		eval($tweaks_metas_pipes['header_prive']);
-	if (isset($tweaks_metas_pipes['header']))
-		$flux .= "\n<!-- Debut header Tweak-SPIP -->\n" . join("\n", $tweaks_metas_pipes['header']) . "\n<!-- Fin header Tweak-SPIP -->\n\n";
+	global $cout_metas_pipelines;
+	if (isset($cout_metas_pipelines['header_prive']))
+		eval($cout_metas_pipelines['header_prive']);
+	if (isset($cout_metas_pipelines['header']))
+		$flux .= "\n<!-- Debut header Tweak-SPIP -->\n" . join("\n", $cout_metas_pipelines['header']) . "\n<!-- Fin header Tweak-SPIP -->\n\n";
 		else $flux .= "\n<!-- Rien pour Tweak-SPIP -->\n";
 	return $flux;
 }

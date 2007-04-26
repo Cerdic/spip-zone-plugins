@@ -102,7 +102,7 @@ EOF;
 	echo "</style>";
 	echo "<script type=\"text/javascript\"><!--
 
-var Tweaks = new Array(); // Listes des tweaks
+var Tweaks = new Array(); // Listes des outils
 
 function submit_general(tweak) {
 	document.forms.submitform.afficher_tweak.value = tweak;
@@ -149,15 +149,15 @@ function tweakchange(index) {
 // mise à jour des données si envoi via formulaire
 function enregistre_modif_tweaks(){
 cout_log("Début : enregistre_modif_tweaks()");
-	global $tweaks;
-	// recuperer les tweaks dans l'ordre des $_POST
+	global $outils;
+	// recuperer les outils dans l'ordre des $_POST
 	$test = array();
-	foreach($tweaks as $tweak) $test["tweak_".$tweak['id']] = $tweak['id'];
+	foreach($outils as $outil) $test["tweak_".$outil['id']] = $outil['id'];
 	$liste = array();
 	if (!isset($_POST['desactive_tous']))
 		foreach($_POST as $choix=>$val) if (isset($test[$choix]) && $val=='1') $liste[$test[$choix]]['actif'] = 1;
 	global $connect_id_auteur, $connect_login;
-	spip_log("Changement des tweaks actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
+	spip_log("Changement des outils actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
 	ecrire_meta('tweaks_actifs', serialize($liste));
 	ecrire_metas();
 		include_spip('inc/invalideur');
@@ -178,11 +178,11 @@ cout_log("Début : exec_tweak_spip_admin()");
 	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $couleur_claire;
-	global $tweaks;
+	global $outils;
 
 	// reset general
 	if (_request('reset')=='oui'){
-		spip_log("Reset de tous les tweaks par l'auteur id=$connect_id_auteur");
+		spip_log("Reset de tous les outils par l'auteur id=$connect_id_auteur");
 		foreach(array_keys($GLOBALS['meta']) as $meta)
 			if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
 		ecrire_metas();
@@ -195,19 +195,19 @@ cout_log("Début : exec_tweak_spip_admin()");
 		exit;
 	}
 
-	// afficher un tweak completement ?
+	// afficher un outil completement ?
 	$afficher_tweak = $_GET['afficher_tweak'];
 	if (!strlen($afficher_tweak) || $afficher_tweak=='non' ) $afficher_tweak = -1;
 		else $afficher_tweak = intval($afficher_tweak);
 
-	// initialisation generale forcee : recuperation de $tweaks;
+	// initialisation generale forcee : recuperation de $outils;
 	tweak_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
-	// sinon fait une passe de verif sur les tweaks
+	// sinon fait une passe de verif sur les outils
 	if (_request('changer_tweaks')=='oui'){
 		enregistre_modif_tweaks();
 		// pour la peine, un redirige,
-		// que les tweaks charges soient coherent avec la liste
+		// que les outils charges soient coherent avec la liste
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
 		$afficher_tweak = _request('afficher_tweak');
 		if (strlen($afficher_tweak) && $afficher_tweak!=='non')
@@ -254,25 +254,25 @@ cout_log("Début : exec_tweak_spip_admin()");
 	debut_droite();
 	lire_metas();
 
-	debut_cadre_trait_couleur('administration-24.gif','','',_T('cout:tweaks_liste'));
+	debut_cadre_trait_couleur('administration-24.gif','','',_T('cout:liste_outils'));
 
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
 	echo _T('cout:presente_tweaks'), $valider;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
-	foreach($temp = $tweaks as $tweak) $categ[_T('cout:'.$tweak['categorie'])] = $tweak['categorie']; ksort($categ);
+	foreach($temp = $outils as $outil) $categ[_T('cout:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 
 	$js = ''; $marge = '0';
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
-		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$i) {
-			$s .= ligne_tweak($tweak, $js, $afficher_tweak==$tweak['index']) . "\n";
-			$basics[] = $tweak['index'];
+		foreach($temp = $outils as $outil) if ($outil['categorie']==$i) {
+			$s .= ligne_tweak($outil, $js, $afficher_tweak==$outil['index']) . "\n";
+			$basics[] = $outil['index'];
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
 //		$ss .= $actif?" checked='checked'":"";
 		$ss .= " onclick='tweakcateg.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
-		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('cout:activer_tweak')."</label>";
+		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('cout:activer_outil')."</label>";
 		preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
 		echo "<form style='margin-top:$marge; margin-left:2em;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
 		$marge = '.8em';
@@ -283,7 +283,7 @@ cout_log("Début : exec_tweak_spip_admin()");
 	echo generer_url_post_ecrire('tweak_spip_admin', '', 'submitform');
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 	echo "\n<input type='hidden' name='afficher_tweak' value='non'>";
-	foreach($temp = $tweaks as $tweak) echo "<input type='hidden' id='tweak_".$tweak['id']."' name='tweak_".$tweak['id']."' value='".($tweak['actif']?"1":"0")."' />";
+	foreach($temp = $outils as $outil) echo "<input type='hidden' id='tweak_".$outil['id']."' name='tweak_".$outil['id']."' value='".($outil['actif']?"1":"0")."' />";
 	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider2' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	echo $valider;
@@ -304,17 +304,17 @@ cout_log("Début : exec_tweak_spip_admin()");
 cout_log("Fin   : exec_tweak_spip_admin()");
 }
 
-// affiche un tweak sur une ligne
-function ligne_tweak($tweak, &$js, $afficher){
+// affiche un outil sur une ligne
+function ligne_tweak($outil, &$js, $afficher){
 	static $id_input=0;
-	$inc = $tweak_id = $tweak['id'];
-	$actif = $tweak['actif'];
-	$erreur_version = (isset($tweak['version-min']) && $GLOBALS['spip_version']<$tweak['version-min'])
-		|| (isset($tweak['version-max']) && $GLOBALS['spip_version']>$tweak['version-max']);
+	$inc = $tweak_id = $outil['id'];
+	$actif = $outil['actif'];
+	$erreur_version = (isset($outil['version-min']) && $GLOBALS['spip_version']<$outil['version-min'])
+		|| (isset($outil['version-max']) && $GLOBALS['spip_version']>$outil['version-max']);
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('cout:'.($actif?'':'in').'actif');
-	$nb_var = intval($tweak['nb_variables']);
-	$index = intval($tweak['index']);
+	$nb_var = intval($outil['nb_variables']);
+	$index = intval($outil['index']);
 
 	$s = "<a name='tweak$index' id='tweak$index'></a><form  style='margin:0 0 0 1em;'><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
@@ -333,31 +333,31 @@ function ligne_tweak($tweak, &$js, $afficher){
 	$p .= $actif?" checked='checked'":"";
 	$p .= $erreur_version?" disabled='disabled'":"";
 	$p .= " onclick='tweakchange.apply(this,[$index])'";
-	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('cout:activer_tweak')."</label>";
+	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('cout:activer_outil')."</label>";
 	$js .= "Tweaks[$index] = Array(\"$inc\", $nb_var);\n";
-	$p .= ($afficher?bouton_block_visible($tweak_id):bouton_block_invisible($tweak_id)) . $tweak['nom'] . '</p>';
+	$p .= ($afficher?bouton_block_visible($tweak_id):bouton_block_invisible($tweak_id)) . $outil['nom'] . '</p>';
 
 	$s .= propre($p) . "</div></form>";
 
 	$p = $afficher?debut_block_visible($tweak_id):debut_block_invisible($tweak_id);
 
 	$p .= "\n<div class='detailtweak'>";
-	$p .= $tweak['description'];
-	if (isset($tweak['auteur']) && strlen($tweak['auteur'])) $p .= "<p>" . _T('auteur') .' '. ($tweak['auteur']) . "</p>";
-	$s .= propre($p) . '<hr style="margin:0"/>' . _T('cout:tweak').' ';
+	$p .= $outil['description'];
+	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= "<p>" . _T('auteur') .' '. ($outil['auteur']) . "</p>";
+	$s .= propre($p) . '<hr style="margin:0"/>' . _T('cout:info_outil').' ';
 	if ($erreur_version) $s .= _T('cout:erreur:version');
 	else {
 		$a = array();
-		if(isset($tweak['code:options'])) $a[] = "code options";
-		if(isset($tweak['code:fonction'])) $a[] = "code fonctions";
-		if(isset($tweak['code:js'])) $a[] = "code javascript";
-		if(isset($tweak['code:css'])) $a[] = "code styles";
-		if (find_in_path('tweaks/'.($temp=$tweak_id.'.php'))) $a[] = $temp;
-		if (find_in_path('tweaks/'.($temp=$tweak_id.'_options.php'))) $a[] = $temp;
-		if (find_in_path('tweaks/'.($temp=$tweak_id.'_fonctions.php'))) $a[] = $temp;
-		foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) $a[] = $pipe2;
-		if (find_in_path('tweaks/'.($temp=$tweak_id.'.js'))) $a[] = $temp;
-		if (find_in_path('tweaks/'.($temp=$tweak_id.'.css'))) $a[] = $temp;
+		if(isset($outil['code:options'])) $a[] = "code options";
+		if(isset($outil['code:fonction'])) $a[] = "code fonctions";
+		if(isset($outil['code:js'])) $a[] = "code javascript";
+		if(isset($outil['code:css'])) $a[] = "code styles";
+		if (find_in_path('outils/'.($temp=$tweak_id.'.php'))) $a[] = $temp;
+		if (find_in_path('outils/'.($temp=$tweak_id.'_options.php'))) $a[] = $temp;
+		if (find_in_path('outils/'.($temp=$tweak_id.'_fonctions.php'))) $a[] = $temp;
+		foreach ($outil as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) $a[] = $pipe2;
+		if (find_in_path('outils/'.($temp=$tweak_id.'.js'))) $a[] = $temp;
+		if (find_in_path('outils/'.($temp=$tweak_id.'.css'))) $a[] = $temp;
 		$s .= join(' | ', $a);
 	}
 	$s .= "</div>";

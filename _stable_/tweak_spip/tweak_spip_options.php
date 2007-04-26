@@ -1,21 +1,21 @@
 <?php
 
 // fichier charge a chaque hit
-	global $tweaks_metas_pipes;
+	global $cout_metas_pipelines;
 
-	// pour forcer les logs du plugin, tweak actif ou non :
-	// $GLOBALS['forcer_log_tweaks'] = true
+	// pour forcer les logs du plugin, outil actif ou non :
+	// $GLOBALS['forcer_log_couteau_suisse'] = true
 
-	// on active tout de suite les logs, si le tweak est actif.
-	$GLOBALS['log_tweaks'] = (strpos($GLOBALS['meta']['tweaks_actifs'], 'log_tweaks') !== false || $GLOBALS['forcer_log_tweaks']);
+	// on active tout de suite les logs, si l'outil est actif.
+	$GLOBALS['log_couteau_suisse'] = (strpos($GLOBALS['meta']['tweaks_actifs'], 'log_couteau_suisse') !== false || $GLOBALS['forcer_log_couteau_suisse']);
 
-	if($GLOBALS['log_tweaks']) {
+	if($GLOBALS['log_couteau_suisse']) {
 		spip_log('TWEAKS. ' . str_repeat('-', 80));
-		spip_log('TWEAKS. appel de mes_options (début) : strlen=' . strlen($tweaks_metas_pipes['options']));
+		spip_log('TWEAKS. appel de mes_options (début) : strlen=' . strlen($cout_metas_pipelines['options']));
 	}
 	// fonctions indispensables a l'execution
 	include_spip('tweak_spip_init');
-	cout_log("appel de mes_options (suite) : strlen=".strlen($tweaks_metas_pipes['options']));
+	cout_log("appel de mes_options (suite) : strlen=".strlen($cout_metas_pipelines['options']));
 
 	// inclusion des options pre-compilees, si l'on n'est jamais passé par ici...
 	if (!$GLOBALS['tweak_options']) {
@@ -28,10 +28,10 @@
 
 /*
 	if(!$GLOBALS['tweak_options']) {
-		if (isset($tweaks_metas_pipes['options'])) eval($tweaks_metas_pipes['options']);
+		if (isset($cout_metas_pipelines['options'])) eval($cout_metas_pipelines['options']);
 cout_log(' -- appel mes_options achevé par eval() ... tweak_options = '.intval($GLOBALS['tweak_options']));
 	}
 */
-	 $GLOBALS['log_tweaks'] |= $GLOBALS['forcer_log_tweaks'];
+	 $GLOBALS['log_couteau_suisse'] |= $GLOBALS['forcer_log_couteau_suisse'];
 
 ?>

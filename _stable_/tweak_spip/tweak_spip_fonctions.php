@@ -1,10 +1,10 @@
 <?php
 // fichier charge a chaque recalcul
-	global $tweaks_metas_pipes;
+	global $cout_metas_pipelines;
 
 	// fonctions indispensables a l'execution
 	// include_spip('tweak_spip_init');
-	cout_log("appel de mes_fonctions : strlen=" . strlen($tweaks_metas_pipes['fonctions']));
+	cout_log("appel de mes_fonctions : strlen=" . strlen($cout_metas_pipelines['fonctions']));
 
 	// inclusion des fonctions pre-compilees
 	if (!$GLOBALS['tweak_fonctions']) include_once(sous_repertoire(_DIR_TMP, "tweak-spip").'mes_fonctions.php');
@@ -12,7 +12,7 @@
 
 /*
 	if(!$GLOBALS['tweak_fonctions']) {
-		if (isset($tweaks_metas_pipes['fonctions'])) eval($tweaks_metas_pipes['fonctions']);
+		if (isset($cout_metas_pipelines['fonctions'])) eval($cout_metas_pipelines['fonctions']);
 cout_log(' -- appel mes_fonctions achevé par eval()... tweak_fonctions = '.intval($GLOBALS['tweak_fonctions']));
 	}
 */
