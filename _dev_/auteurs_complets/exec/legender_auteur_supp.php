@@ -22,8 +22,9 @@ function exec_legender_auteur_supp_dist()
 	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 
 	$id_auteur = intval($id_auteur);
+	$nom_table = "spip_auteurs_ajouts";
 
-	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	$auteur = spip_fetch_array(spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur"));
 
 	if (!$auteur) {
 		gros_titre(_T('info_acces_interdit'));

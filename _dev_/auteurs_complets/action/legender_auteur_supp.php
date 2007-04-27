@@ -36,6 +36,7 @@ function action_legender_auteur_supp_dist()
 function action_legender_auteur_supp_post($r){
 	global $auteur_session, $id_auteur;
 
+	$nom_table = "spip_auteurs_ajouts";
 	$prenom = _request('prenom');
 	$nom_famille = _request('nom_famille');
 	$organisation = _request('organisation');
@@ -57,7 +58,7 @@ function action_legender_auteur_supp_post($r){
 
 	$auteur = array();
 	if ($id_auteur) {
-		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+		$auteur = spip_fetch_array(spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur"));
 	}
 
 	 $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
@@ -79,7 +80,7 @@ function action_legender_auteur_supp_post($r){
 	$auteur['longitude'] = corriger_caracteres($longitude);
 
 // La requete SQL à passer dans la base
-	$n = spip_query("UPDATE spip_auteurs SET nom_famille=" . _q($auteur['nom_famille']) . ", prenom=" . _q($auteur['prenom']) . ", organisation=" . _q($auteur['organisation']) . ", url_organisation=" . _q($auteur['url_organisation']) . ", telephone=" . _q($auteur['telephone']) . ", fax=" . _q($auteur['fax']) . ", skype=" . _q($auteur['skype']) . ", adresse=" . _q($auteur['adresse']) . ", codepostal=" . _q($auteur['codepostal']) . ", ville=" . _q($auteur['ville']) . ", pays=" . _q($auteur['pays']) . ", latitude=" . _q($auteur['latitude']) . ", longitude=" . _q($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
+	$n = spip_query("UPDATE ".$nom_table." SET nom_famille=" . _q($auteur['nom_famille']) . ", prenom=" . _q($auteur['prenom']) . ", organisation=" . _q($auteur['organisation']) . ", url_organisation=" . _q($auteur['url_organisation']) . ", telephone=" . _q($auteur['telephone']) . ", fax=" . _q($auteur['fax']) . ", skype=" . _q($auteur['skype']) . ", adresse=" . _q($auteur['adresse']) . ", codepostal=" . _q($auteur['codepostal']) . ", ville=" . _q($auteur['ville']) . ", pays=" . _q($auteur['pays']) . ", latitude=" . _q($auteur['latitude']) . ", longitude=" . _q($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
 		if (!$n) die('UPDATE');
 // 	return $n;
 
@@ -87,7 +88,7 @@ function action_legender_auteur_supp_post($r){
 	if ($nom OR $statut) {
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('spip_auteurs', $id_auteur);
+			marquer_indexer($nom_table, $id_auteur);
 		}
 		ecrire_acces();
 	}

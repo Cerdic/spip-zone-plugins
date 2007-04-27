@@ -10,9 +10,10 @@ function exec_auteur_infos_supp_dist()
 	global $id_auteur, $redirect, $echec, $initial,
 	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 
+	$nom_table = "spip_auteurs_ajouts";
 	$id_auteur = intval($id_auteur);
 
-	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	$auteur = spip_fetch_array(spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur"));
 
 	if (!$auteur) {
                 gros_titre(_T('info_acces_interdit'));

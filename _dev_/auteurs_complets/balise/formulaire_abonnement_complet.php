@@ -49,6 +49,7 @@ include_spip ("inc/meta");
 include_spip ("inc/mail");
 include_spip ("inc/acces");
 
+$table_nom = "spip_auteurs_ajouts";
 
 //recuperation des variables utiles
 $oubli_pass = _request('oubli_pass');
@@ -261,7 +262,7 @@ function formulaire_inscription_auteurs_complets($type,$acces_membres,$formulair
 				$extras = bloog_extra_recup_saisie('auteurs');
 
 				// Modifier l'auteur dans la base
-				$result = spip_query("INSERT INTO spip_auteurs 
+				$result = spip_query("INSERT INTO ".$nom_table." 
 				(nom, bio, email, nom_famille, prenom, organisation, url_organisation, telephone, fax, skype, adresse, 
 				codepostal, ville, pays, latitude, longitude, nom_site, url_site, login, pass, statut, htpass, extra, cookie_oubli) "."
 				VALUES ("._q($nom_inscription_).", "._q($bio).", "._q($mail_inscription_).","._q($nom_famille).","._q($prenom).","._q($organisation).",

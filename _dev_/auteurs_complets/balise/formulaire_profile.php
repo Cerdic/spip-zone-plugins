@@ -24,6 +24,8 @@ function balise_FORMULAIRE_PROFILE_stat($args, $filtres) {
 function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  $pgp=' ', $nom =' ', $email=' ', $new_pass=' ', $new_pass2=' ', $bio=' ') {
 	global $REMOTE_ADDR, $afficher_texte, $_COOKIE, $_POST;
 
+	$nom_table="spip_auteurs";
+
 	$auteur_statut=$GLOBALS["auteur_session"]["statut"];
 	$statut=$auteur_session['statut'];
 	$id_auteur_session=$auteur_session['id_auteur'];
@@ -73,7 +75,7 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 	if($valider_auteur){
 
 		// Modifier l'auteur dans la base
-		$query = "UPDATE spip_auteurs SET $query_pass2
+		$query = "UPDATE ".$nom_table." SET $query_pass2
 			nom='".addslashes($prenom)." ".addslashes($nom_famille)."',
 			bio='".addslashes($bio)."',
 			email='".addslashes($email)."',
