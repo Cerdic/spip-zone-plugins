@@ -17,27 +17,15 @@ add_outil( array(
 	'categorie' => 'admin',
 ));
 */
-/*
-add_outil( array(
-	'id' => 'desactive_cache',
-	'code:options' => "\$_SERVER['REQUEST_METHOD']='POST';",
-	'auteur' => '[C&eacute;dric MORIN->mailto:cedric.morin@yterium.com]',
-	'categorie' => 'admin',
-));
 
-add_outil( array(
-	'id' => 'quota_cache',
-	'code:options' => "%%quota_cache%%",
-	'categorie' => 'admin',
-));
-*/
 add_variable( array(
 	'nom' => 'radio_desactive_cache3',
 	'format' => 'nombre',
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
 	// si la variable est egale a 1, on code...
-	'code:%s' => "\$_SERVER['REQUEST_METHOD']='POST';",
+	'code:%s' => "\$fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
+if (!in_array(\$fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';",
 ));
 	// ici on demande a Tweak SPIP une case input. La variable est : quota_cache
 	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['quota_cache']
@@ -379,11 +367,33 @@ add_outil( array(
 	'pipeline:pre_typo' => 'decoration_pre_typo',
 ));
 
+add_variable( array(
+	'nom' => 'couleurs_fonds',
+	'format' => 'nombre',
+	'radio' => array(1 => 'item_oui', 0 => 'item_non' ),
+	'defaut' => 1,
+	'code' => "define('_COULEURS_FONDS', %s);",
+));
+add_variable( array(
+	'nom' => 'set_couleurs',
+	'format' => 'nombre',
+	'radio' => array(0 => 'cout:toutes_couleurs', 1 => 'cout:certaines_couleurs'),
+	'radio/ligne' => 1,
+	'defaut' => 0,
+	'code' => "define('_COULEURS_SET', %s);",
+));
+add_variable( array(
+	'nom' => 'couleurs_perso',
+	'format' => 'chaine',
+	'defaut' => '$GLOBALS["url_glossaire_externe"]',
+	'code' => "define('_COULEURS_PERSO', %s);",
+));
 add_outil( array(
 	'id' => 'couleurs',
-	'auteur' 	 => '[Aur&eacute;lien PIERARD->mailto:aurelien.pierard(a)dsaf.pm.gouv.fr]',
+//	'auteur' 	 => '[Aur&eacute;lien PIERARD->mailto:aurelien.pierard(a)dsaf.pm.gouv.fr]',
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
+	'code:options' => "%%couleurs_fonds%% %%set_couleurs%%\n%%couleurs_perso%%",
 ));
 
 // outil specifiquement français. D'autres langues peuvent etre ajoutees dans outils/typo_exposants.php

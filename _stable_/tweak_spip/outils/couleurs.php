@@ -30,12 +30,31 @@ cout_log("couleurs_installe()");
 		array('black', 'red', 'maroon', 'green', 'olive', 'navy', 'purple', 'gray', 'silver', 'chartreuse', 'blue', 'fuchsia', 'aqua', 
 		'white', 'azure', 'bisque', 'brown', 'blueviolet', 'chocolate', 'cornsilk', 'darkgreen', 'darkorange', 'darkorchid', 'deepskyblue', 'gold', 
 		'ivory', 'orange', 'lavender', 'pink', 'plum', 'salmon', 'snow', 'turquoise', 'wheat', 'yellow') );
-
 	foreach ($couleurs[0] as $c=>$val) $couleurs[2][$val] = $couleurs[1][$c];
-	$aide = '<strong>'.join('</strong>, <strong>', array_merge($couleurs[0], $couleurs[1])).'</strong>';
-	$couleurs[0] = join('|', $couleurs[0]);
-	$couleurs[1] = join('|', $couleurs[1]);
 
+	$perso = trim(_COULEURS_PERSO);
+	if (_COULEURS_SET===1) {
+		$perso = preg_replace('^\s*(=|,)\s*^','\1', $perso);
+		$perso = explode(',', $perso);
+		$couleurs_perso = $aide = array();
+		foreach($perso as $p) {
+			list($a, $b) = explode('=', $p, 2);
+			if (strlen($a) && strlen($b)) {
+				if(in_array($b, $couleurs[0])) $b = $couleurs[2][$b];
+				$couleurs_perso[$a] = $b;
+			} elseif (strlen($a)) {
+				$b=in_array($a, $couleurs[0])?$couleurs[2][$a]:$a;
+				$couleurs_perso[$a] = $b;
+			}
+		}
+		$couleurs[2] = $couleurs_perso;
+		$couleurs[0] = join('|', array_keys($couleurs_perso));
+		$aide = '<strong>'.join('</strong>, <strong>', array_keys($couleurs_perso)).'</strong>';
+	} else {
+		$aide = '<strong>'.join('</strong>, <strong>', array_merge($couleurs[0], $couleurs[1])).'</strong>';
+		$couleurs[0] = join('|', $couleurs[0]);
+		$couleurs[1] = join('|', $couleurs[1]);
+	}
 	// sauvegarde en meta : aide
 	ecrire_meta('tweaks_couleurs_racc', $aide);
 	// sauvegarde en meta : couleurs
@@ -47,36 +66,53 @@ cout_log("couleurs_installe()");
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function couleurs_raccourcis() {
-	return _T('cout:couleurs:aide', array('liste' => $GLOBALS['meta']['tweaks_couleurs_racc']));
+	return _T('cout:couleurs:aide', array(
+		'liste' => $GLOBALS['meta']['tweaks_couleurs_racc'],
+		'fond' => _COULEURS_FONDS==1?_T('cout:couleurs_fonds'):'',
+	));
 }
 
 // callbacks
 function couleurs_texte_callback($matches) {
-	global $tweak_couleurs;
-	return "<span style=\"color:{$tweak_couleurs[2][$matches[1]]};\">";
+	global $outil_couleurs;
+	return "<span style=\"color:{$outil_couleurs[2][$matches[1]]};\">";
 }
 function couleurs_fond_callback($matches) {
-	global $tweak_couleurs;
-	return "<span style=\"background-color:{$tweak_couleurs[2][$matches[2]]};\">";
+	global $outil_couleurs;
+	return "<span style=\"background-color:{$outil_couleurs[2][$matches[2]]};\">";
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function couleurs_rempl($texte) {
 	if (strpos($texte, '[')===false || strpos($texte, '/')===false) return $texte;
 	// pour les callbacks
-	global $tweak_couleurs;
+	global $outil_couleurs;
 	// lecture des metas
-	$tweak_couleurs = unserialize($GLOBALS['meta']['tweaks_couleurs']);
-	// voila, on remplace tous les raccourcis francais...
-	$texte = preg_replace_callback(",\[($tweak_couleurs[0])\],", 'couleurs_texte_callback', $texte);
-	$texte = preg_replace_callback(",\[(bg|fond)\s+($tweak_couleurs[0])\],", 'couleurs_fond_callback', $texte);
-	// raccourcis anglais, plus facile...
-	$texte = preg_replace(",\[($tweak_couleurs[1])\],", '<span style="color:$1;">', $texte);
-	$texte = preg_replace(",\[(bg|fond)\s+($tweak_couleurs[1])\],", '<span style="background-color:$2;">', $texte);
-	// et toutes les balises de fin...
-	$texte = preg_replace(",\[/(couleur|$tweak_couleurs[0]|color|$tweak_couleurs[1])\],", '</span>', $texte);
+	$outil_couleurs = unserialize($GLOBALS['meta']['tweaks_couleurs']);
+
+	// voila, on remplace tous les raccourcis $outil_couleurs[0] (balises francaises ou personnalisees)...
+	$texte = preg_replace_callback(",\[($outil_couleurs[0])\],", 'couleurs_texte_callback', $texte);
+	if(_COULEURS_FONDS===1) {
+		$texte = preg_replace_callback(",\[(bg|fond)\s+($outil_couleurs[0])\],", 'couleurs_fond_callback', $texte);
+		$texte = preg_replace(",\[/(fond|bg)\],", '</span>', $texte);
+		$texte = preg_replace(",\[/(bg|fond)\s+($outil_couleurs[0])\],", '</span>', $texte);
+	}
+	// cas des 36 couleurs css
+	if(_COULEURS_SET===0) {
+		// raccourcis anglais, plus facile...
+		$texte = preg_replace(",\[($outil_couleurs[1])\],", '<span style="color:$1;">', $texte);
+		if(_COULEURS_FONDS===1)
+			$texte = preg_replace(",\[(bg|fond)\s+($outil_couleurs[1])\],", '<span style="background-color:$2;">', $texte);
+		// et toutes les balises de fin...
+		$texte = preg_replace(",\[/(couleur|$outil_couleurs[0]|color|$outil_couleurs[1])\],", '</span>', $texte);
+	} 
+	// cas des couleurs personnalisees
+	elseif(_COULEURS_SET===1) {
+		// et toutes les balises de fin...
+		$texte = preg_replace(",\[/(couleur|$outil_couleurs[0]|color|)\],", '</span>', $texte);
+	}
 	// menage
-	unset($tweak_couleurs);
+	unset($outil_couleurs);
 	return $texte;  
 }
 

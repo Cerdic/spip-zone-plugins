@@ -24,11 +24,12 @@ function tweak_input_une_variable($index, $outil, $variable, $label, &$ok_input_
 		else $valeur = tweak_get_defaut($variable);
 	$valeur = tweak_retire_guillemets($valeur);
 cout_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
+	$cout_variable = &$cout_variables[$variable];
 
 	// si la variable necessite des boutons radio
-	if (is_array($radios = &$cout_variables[$variable]['radio'])) {
+	if (is_array($radios = &$cout_variable['radio'])) {
 		$ok_input = $label;
-		$i = 0; $nb = intval($cout_variables[$variable]['radio/ligne']);
+		$i = 0; $nb = intval($cout_variable['radio/ligne']);
 		foreach($radios as $code=>$traduc) {
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'<br />':' ';
 			$ok_input .= 
@@ -42,9 +43,11 @@ cout_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 	} 
 	// ici, donc juste une case input
 	else {
-		$len = $cout_variables[$variable]['format']=='nombre'?4:0;
+		$len = $cout_variable['format']=='nombre'?4:0;
+		//$width = strlen($cout_variables[$variable]['width'])?'style="width:'.$cout_variables[$variable]['width'].';" ':'';
+		$width = !$len?'style="margin:0; padding:0; width:100%; float:left;" ':'';
 //			else $len=strlen(strval($valeur));
-		$ok_input = $label."<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' />"._TWEAK_VAR;
+		$ok_input = $label."<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' $width/>"._TWEAK_VAR;
 		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('cout:variable_vide'));
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
@@ -59,7 +62,7 @@ function inc_tweak_input_dist($tweak0, $url_self, $modif=false) {
 	// remplacement des puces
 	$descrip = str_replace('#PUCE', definir_puce(), $outil['description']);
 	// remplacement des zone input de format [[label->varable]]
-	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2 </legend>\\3</fieldset>', $descrip);
+	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend>\\3</fieldset>', $descrip);
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 	
@@ -111,6 +114,7 @@ cout_log("inc_tweak_input_dist() - Parse la description de '$tweak0'");
 		$res = ajax_action_auteur('tweak_input', $index, $url_self, "tweak={$outil['id']}", "$res");
 	}
 //cout_log("Fin   : inc_tweak_input_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvée(s)");
+	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
 	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('cout:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return ajax_action_greffe("tweak_input-$index", $res, $modif);
 }

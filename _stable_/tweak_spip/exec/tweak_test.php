@@ -202,5 +202,13 @@ function tweak_les_tests() {
 	);
 //	tweak_array(tweak_test_fun($textes, 'typo'), 'Test sur : echappements');
 	tweak_array(tweak_test_fun($textes, 'liens_orphelins'), 'Test sur : liens_orphelins()');
+
+/*	
+define('_COULEURS_FONDS', 1); define('_COULEURS_SET', 1);
+define('_COULEURS_PERSO', "bas =#99CC11, haut= brown, test= bleu");
+couleurs_installe();
+print_r(couleurs_pre_typo("to[bas]to[/bas]to[haut]to[/haut]toto[test]to[/couleur]to\nto[bg bas]to[/bg]to[bg haut]to[/bg]toto[bg test]to[/bg test]to\n"));
+print_r(couleurs_pre_typo("to[red]to[/red]to[bleu]to[/bleu]toto[rouge]to[/couleur]to\nto[bg red]to[/bg]to[bg bleu]to[/bg]toto[bg rouge]to[/bg rouge]to\n"));
+*/
 }
 ?>

@@ -24,6 +24,10 @@ div.cadre-padding *{
 /*	padding:0;
 	margin:0;*/
 }
+div.cadre-padding form{
+	padding:0;
+	margin:0;
+}
 div.cadre-padding ul li {
 	list-style:none ;
 }
