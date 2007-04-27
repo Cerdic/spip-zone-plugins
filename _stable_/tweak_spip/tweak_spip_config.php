@@ -24,6 +24,7 @@ add_variable( array(
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 0,
 	// si la variable est egale a 1, on code...
+	// jquery.js et forms_styles.css restent en cache.
 	'code:%s' => "\$fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
 if (!in_array(\$fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';",
 ));
@@ -39,6 +40,7 @@ add_outil( array(
 	'id' => 'SPIP_cache',
 	'code:options' => "%%radio_desactive_cache3%%\n%%quota_cache%%",
 	'categorie' => 'admin',
+		'auteur' => '[C&eacute;dric MORIN->mailto:cedric.morin@yterium.com] (d&eacute;sactivation)'
 ));
 
 	// ici on demande a Tweak SPIP une case input. La variable est : dossier_squelettes
