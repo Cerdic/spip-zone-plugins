@@ -76,7 +76,7 @@ function lienscontenus_header_prive($flux)
 function lienscontenus_ajouter_onglets($flux){
     if ($GLOBALS['connect_statut'] == '0minirezo' && $GLOBALS['connect_toutes_rubriques']) {
         if ($flux['args'] == 'configuration') {
-            $flux['data']['lienscontenus']= new Bouton('administration-24.gif', _T('lienscontenus:administration_liens_contenus'), generer_url_ecrire('lienscontenus_admin'));
+            $flux['data']['lienscontenus']= new Bouton(_DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif', _T('lienscontenus:configuration_liens_contenus'), generer_url_ecrire('config_lienscontenus'));
         }
     }
     return $flux;

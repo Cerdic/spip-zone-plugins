@@ -13,25 +13,24 @@ include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
 
-function exec_lienscontenus_admin()
+function exec_config_lienscontenus()
 {
-	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $couleur_claire;
 	global $tweaks;
 
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+	if ($GLOBALS['connect_statut'] != '0minirezo' OR !$GLOBALS['connect_toutes_rubriques']) {
+		debut_page(_T('icone_admin_plugin'), 'configuration', 'plugin');
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('tweak:titre'), "configuration", "lienscontenus");
+	echo $commencer_page(_T('lienscontenus:configuration'), 'configuration', 'lienscontenus');
 
-	gros_titre(_T('lienscontenus:configuration'));
-	echo barre_onglets("configuration", "lienscontenus");
+	gros_titre(_T('titre_configuration'));
+	echo barre_onglets('configuration', 'lienscontenus');
 
 	debut_gauche();
 	debut_boite_info();
@@ -44,9 +43,10 @@ function exec_lienscontenus_admin()
 	debut_droite();
 	lire_metas();
 
-	debut_cadre_trait_couleur('administration-24.gif','','',_T('lienscontenus:liste'));
+	debut_cadre_trait_couleur(_DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif','','',_T('lienscontenus:options'));
 
 	echo generer_url_post_ecrire('lienscontenus_admin', '', 'submitform');
+    
 	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider2' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	echo $valider;
