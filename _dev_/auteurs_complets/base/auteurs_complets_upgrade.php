@@ -16,7 +16,7 @@ function auteurs_complets_verifier_base(){
 		//definition de la table cible
 		$table_nom = "spip_auteurs_ajouts";
 		//création de la nouvelle table spip_auteurs_ajouts
-		spip_query("CREATE TABLE ".$table_nom." (id_auteur bigint(21));");
+		spip_query("CREATE TABLE ".$table_nom." (id_auteur bigint(21), PRIMARY KEY (id_auteur));");
 		//ajouts des différents champs
 		$desc = spip_abstract_showtable($table_nom, '', true);
 		if (!isset($desc['field']['nom_famille'])){
