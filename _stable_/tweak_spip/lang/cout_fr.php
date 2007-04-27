@@ -128,8 +128,7 @@ _ Un exemple de balises imbriqu&eacute;es : <code>[fond jaune]Lorem ipsum [rouge
 
 [[Permettre les fonds :->%couleurs_fonds%]]
 [[Set &agrave; utiliser :->%set_couleurs%]][[->%couleurs_perso%]]
-{$temp['note']}Le format de ces balises personnalis&eacute;es doit d&eacute;finir des couples &laquo;balise=couleur&raquo; s&eacute;par&eacute;s par des virgules. Exemples : &laquo;faible=jaune, fort=rouge&raquo; ou &laquo;bas=#99CC11, haut=brown&raquo; ou &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour ce dernier exemple, voici les balises autoris&eacute;es : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).",
-//34 couleurs sont disponibles (en fran&ccedil;ais ou en anglais) : " . $temp['couleurs'],
+{$temp['note']}Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).",
 	'couleurs:aide' => 'Mise en couleurs : <strong>[couleur]texte[/couleur]</strong>@fond@ avec <strong>couleur</strong> = @liste@',
 	'couleurs_fonds' => ', <strong>[fond&nbsp;couleur]texte[/couleur]</strong>, <strong>[bg&nbsp;couleur]texte[/couleur]</strong>',
 	'toutes_couleurs' => "Les 36 couleurs des styles css :" . $temp['couleurs'],
@@ -155,7 +154,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 	'smileys:aide' => 'Smileys : @liste@',
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&#8220;:&#8221;</html>. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.[[Dossier(s) &agrave; utiliser :->%dossier_squelettes%]]",
+	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.[[Dossier(s) &agrave; utiliser :->%dossier_squelettes%]]",
 
 	'chatons:nom' => 'Chatons',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.

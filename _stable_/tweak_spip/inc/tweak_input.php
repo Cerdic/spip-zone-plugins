@@ -44,10 +44,14 @@ cout_log(" -- tweak_input_une_variable($index) - Traite %$variable%");
 	// ici, donc juste une case input
 	else {
 		$len = $cout_variable['format']=='nombre'?4:0;
-		//$width = strlen($cout_variables[$variable]['width'])?'style="width:'.$cout_variables[$variable]['width'].';" ':'';
-		$width = !$len?'style="margin:0; padding:0; width:100%; float:left;" ':'';
+		$width = $len?'':'style="width:100%;" ';
+		$lignes = $cout_variable['format']=='nombre'?0:strval($cout_variable['lignes']);
 //			else $len=strlen(strval($valeur));
-		$ok_input = $label."<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' $width/>"._TWEAK_VAR;
+		$ok_input = $label . 
+			( $lignes < 2
+				?"<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' $width/>"
+				:"<textarea rows='$lignes' name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" $width/>".htmlspecialchars($valeur).'</textarea>'
+			) . _TWEAK_VAR;
 		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('cout:variable_vide'));
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
@@ -62,7 +66,7 @@ function inc_tweak_input_dist($tweak0, $url_self, $modif=false) {
 	// remplacement des puces
 	$descrip = str_replace('#PUCE', definir_puce(), $outil['description']);
 	// remplacement des zone input de format [[label->varable]]
-	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend>\\3</fieldset>', $descrip);
+	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend><div style"margin:1em;;">\\3</div></fieldset>', $descrip);
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 	

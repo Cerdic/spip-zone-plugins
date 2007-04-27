@@ -385,12 +385,13 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'couleurs_perso',
 	'format' => 'chaine',
+	'lignes' => 3,
 	'defaut' => '$GLOBALS["url_glossaire_externe"]',
 	'code' => "define('_COULEURS_PERSO', %s);",
 ));
 add_outil( array(
 	'id' => 'couleurs',
-//	'auteur' 	 => '[Aur&eacute;lien PIERARD->mailto:aurelien.pierard(a)dsaf.pm.gouv.fr]',
+	'auteur' 	 => 'Aur&eacute;lien PIERARD (id&eacute;e originale)',
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
 	'code:options' => "%%couleurs_fonds%% %%set_couleurs%%\n%%couleurs_perso%%",
