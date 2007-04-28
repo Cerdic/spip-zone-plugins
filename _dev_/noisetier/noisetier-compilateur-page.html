@@ -1,14 +1,10 @@
 #CACHE{86400}
-
-[(#REM) la ligne suivante sera supprimée une fois le compilateur fonctionnel]
-<p> Zone #ENV{zone}</p>
-
 <BOUCLE_noisettes(NOISETTES){page IN #ENV{page},'toutes'}{zone=#ENV{zone}}{exclue != #ENV{page}}{actif=oui}{par position}>
 [(#TYPE|=={'noisette'}|?{' ',''})
-[(#INCLURE_NOISETTE|{fond=noisettes/#FOND}{id_noisette=#ID_NOISETTE})]
+	[(#INCLURE_NOISETTE|{fond=noisettes/#FOND}{id_noisette=#ID_NOISETTE})]
 ]
 [(#TYPE|=={'texte'}|?{' ',''})
-[(#DESCRIPTIF)]
-[(#NOTES)]
+	[(#DESCRIPTIF)]
+	[(#NOTES)]
 ]
 </BOUCLE_noisettes>

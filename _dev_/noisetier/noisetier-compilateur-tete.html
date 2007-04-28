@@ -1,2 +1,19 @@
 #CACHE{86400}
 <meta  http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+[(#REM) Inclusion dans le head pour les noisettes le nécessitant]
+<BOUCLE_noisettes_avec_entete(NOISETTES){page IN #ENV{page},'toutes'}{exclue != #ENV{page}}{actif=oui}{par position}>
+	<BOUCLE_entetes_noisettes(PARAMS_NOISETTES){type=head}{id_noisette}>
+		[(#VALEUR)
+		]
+	</BOUCLE_entetes_noisettes>
+</BOUCLE_noisettes_avec_entete>
+[(#REM) Inclusion des noisettes d'en-têtes]
+<BOUCLE_noisettes(NOISETTES){page IN #ENV{page},'toutes'}{zone=head}{exclue != #ENV{page}}{actif=oui}{par position}>
+[(#TYPE|=={'noisette'}|?{' ',''})
+	[(#INCLURE_NOISETTE|{fond=noisettes/#FOND}{id_noisette=#ID_NOISETTE})]
+]
+[(#TYPE|=={'texte'}|?{' ',''})
+	[(#DESCRIPTIF)]
+	[(#NOTES)]
+]
+</BOUCLE_noisettes>
