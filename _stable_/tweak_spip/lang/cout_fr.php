@@ -64,13 +64,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'public' => "4. Affichage public",
 	'spip' => "5. Balises, filtres, crit&egrave;res",
 	'divers' => "6. Divers",
-	
+
 // Chaines de langue concernant tous les outils configures dans tweak_spip_config.php
 // ----------------------------------------------------------------------------------
 
 	'SPIP_cache:nom' => 'SPIP et le cache&hellip;',
 	'SPIP_cache:description' => "#PUCE Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[D&eacute;sactiver le cache :->%radio_desactive_cache3%]]"
-		. "#PUCE Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique au cache.[[Valeur du quota :->%quota_cache% Mo]]",
+		. "#PUCE Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.[[Valeur du quota :->%quota_cache% Mo]]",
 
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
 	'supprimer_numero:description' => "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Voici la syntaxe &agrave; utiliser dans le cadre d'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code><br />Attention, cette fonctionnalit&eacute; ne sera pas prise en compte si votre squelette utilise les balises &eacute;toil&eacute;es : <code>#TITRE*</code> ou <code>#NOM*</code>",
@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'insert_head:description' => "Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).",
 
 	'verstexte:nom' => 'Version texte',
-	'verstexte:description' => "2 filtres pour vos squelettes. 
+	'verstexte:description' => "2 filtres pour vos squelettes.
 _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires.
 _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein.",
 
@@ -110,16 +110,16 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Utilisation :{$temp['decoration']}
 _ Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
-	
+
 // ---------------------------------------------------------------------------
 	'couleurs:nom' => 'Tout en couleurs',
 	'couleurs:description' => "Permet d'appliquer facilement des couleurs &agrave; tous les textes du site (articles, br&egrave;ves, titres, forum, &hellip;) en utilisant des balises en raccourcis.
 
-Deux exemples identiques pour changer la couleur du texte : 
+Deux exemples identiques pour changer la couleur du texte :
 -* <code>Lorem ipsum [rouge]dolor[/rouge] sit amet</code>
 -* <code>Lorem ipsum [red]dolor[/red] sit amet</code>.
 
-Idem pour changer le fond, si l'option ci-dessous le permet : 
+Idem pour changer le fond, si l'option ci-dessous le permet :
 -* <code>Lorem ipsum [fond rouge]dolor[/fond rouge] sit amet</code>
 -* <code>Lorem ipsum [bg red]dolor[/bg red] sit amet</code>.
 
@@ -177,8 +177,8 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 
 #PUCE {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de spip, à l'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[Script d'appel :->%spip_script%]]",
-	'page' => 'page', 'html' => 'html'.$temp['note'], 
-	'propres' => 'propres'.$temp['note'], 'propres2' => 'propres2'.$temp['note'], 
+	'page' => 'page', 'html' => 'html'.$temp['note'],
+	'propres' => 'propres'.$temp['note'], 'propres2' => 'propres2'.$temp['note'],
 	'standard' => 'standard', 'propres-qs' => 'propres-qs',
 
 // ---------------------------------------------------------------------------
@@ -210,7 +210,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
 	'f_jQuery:description' => "Emp&ecirc;che l'installation de {jQuery} dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l'utilise dans sa partie priv&eacute;e.
-	
+
 Attention : certaines fonctionnalit&eacute; de cette page n&eacute;cessitent les fonctions de {jQuery}. ",
 
 	'SPIP_liens:nom' => 'SPIP et les liens&hellip;',

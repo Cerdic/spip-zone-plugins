@@ -3,8 +3,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 
-function action_tweak_input_dist() {
-cout_log("Début : action_tweak_input_dist() - Une modification de variable(s) a été demandée !");
+function action_description_outil_dist() {
+cout_log("Début : action_description_outil_dist() - Une modification de variable(s) a été demandée !");
 	if ($GLOBALS['spip_version_code']>=1.92) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -17,14 +17,14 @@ cout_log("Début : action_tweak_input_dist() - Une modification de variable(s) a 
 
 //cout_log(" -- arg = $arg (index de l'outil appelant)");
 	if (preg_match(",^\W*(\d+)$,", $arg, $r))
-		action_tweak_input_post($r[1]);
-	else spip_log("action_tweak_input_dist $arg pas compris");
-cout_log("Fin   : action_tweak_input_dist($arg)");
+		action_description_outil_post($r[1]);
+	else spip_log("action_description_outil_dist $arg pas compris");
+cout_log("Fin   : action_description_outil_dist($arg)");
 }
 
-function action_tweak_input_post($index) {
+function action_description_outil_post($index) {
 	global $connect_id_auteur, $metas_vars;
-cout_log("Début : action_tweak_input_post($index) - On modifie la(les) variable(s) dans la base");
+cout_log("Début : action_description_outil_post($index) - On modifie la(les) variable(s) dans la base");
 
 	// on lit les metas
 	lire_metas();
@@ -53,6 +53,6 @@ cout_log(" -- donc, réinitialisation forcée !");
 	// on reinitialise tout, au cas ou ...
 	include_spip('tweak_spip');
 	tweak_initialisation_totale();
-cout_log("Fin   : action_tweak_input_post(Array($index)) - Réinitialisation forcée terminée.");
+cout_log("Fin   : action_description_outil_post(Array($index)) - Réinitialisation forcée terminée.");
 }
 ?>

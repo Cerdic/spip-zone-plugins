@@ -34,7 +34,7 @@ function tweak_code_echappement($rempl, $source='') {
 	return "<span class='base64$source' title='$base64'></span>";
 }
 
-function tweak_initialisation_d_un_tweak($tweak0, $tweak_input, $modif) {
+function tweak_initialisation_d_un_tweak($tweak0, $description_outil, $modif) {
 	global $outils, $metas_tweaks;
 	$outil = &$outils[$tweak0];
 	if (!isset($outil['categorie'])) $outil['categorie'] = 'divers';
@@ -51,7 +51,7 @@ function tweak_initialisation_d_un_tweak($tweak0, $tweak_input, $modif) {
 	if (isset($outil['code:options'])) $outil['code:options'] = tweak_parse_code_php($outil['code:options']);
 	if (isset($outil['code:fonctions'])) $outil['code:fonctions'] = tweak_parse_code_php($outil['code:fonctions']);
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
-	$outil['description'] = $tweak_input($tweak0, 'tweak_spip_admin', $modif);
+	$outil['description'] = $description_outil($tweak0, 'admin_couteau_suisse', $modif);
 }
 
 // lit ecrit les metas et initialise $cout_metas_pipelines
@@ -98,13 +98,13 @@ cout_log("[#$rand] ".($forcer?"\$forcer = true":"tweak_initialisation($forcer) :
 	$metas_vars['_chaines'] = $cout_variables['_chaines'];
 	$metas_vars['_nombres'] = $cout_variables['_nombres'];
 	// au cas ou un outil manipule des variables
-	$tweak_input = charger_fonction('tweak_input', 'inc');
+	$description_outil = charger_fonction('description_outil', 'inc');
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
 cout_log("[#$rand]  -- foreach(\$outils) : tweak_initialisation_d_un_tweak()");
 
 	// initialiser chaque outil
 	$id = 0;
-	foreach($temp = $outils as $outil) $id = tweak_initialisation_d_un_tweak($outil['id'], $tweak_input, false);
+	foreach($temp = $outils as $outil) $id = tweak_initialisation_d_un_tweak($outil['id'], $description_outil, false);
 	// installer $cout_metas_pipelines
 	$cout_metas_pipelines = array();
 cout_log("[#$rand]  -- tweak_initialise_includes()...");

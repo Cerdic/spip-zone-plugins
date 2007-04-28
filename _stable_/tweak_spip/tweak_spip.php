@@ -96,10 +96,10 @@ function tweak_get_defaut($variable) {
 	$defaut = $variable['defaut'];
 	if($variable['format']=='nombre') $defaut = "intval($defaut)";
 		elseif($variable['format']=='chaine') $defaut = "strval($defaut)";
-//cout_log("tweak_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");	
+//cout_log("tweak_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
 	eval("\$defaut=$defaut;");
 	$defaut2 = tweak_php_format($defaut, $variable['format']!='nombre');
-cout_log(" -- tweak_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");	
+cout_log(" -- tweak_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
 	return $defaut2;
 }
 // installation de $cout_metas_pipelines
@@ -196,7 +196,7 @@ function tweak_insert_header($f, $type) {
 	if ($type=='css') {
 		include_spip('inc/filtres');
 		return "<link rel=\"stylesheet\" href=\"".tweak_htmlpath(direction_css($f))."\" type=\"text/css\" media=\"projection, screen\" />\n";
-	} elseif ($type=='js') 
+	} elseif ($type=='js')
 		return "<script type=\"text/javascript\" src=\"".tweak_htmlpath($f)."\"></script>\n";
 }
 // sauve la configuration dans un fichier tmp/tweak-spip/config.php
@@ -301,9 +301,9 @@ function tweak_get_code_variable($variable, $valeur) {
 	if(!isset($cout_variables[$variable])) return _L("// Variable '$variable' inconnue !");
 	$cout_variable = &$cout_variables[$variable];
 	// mise en forme php de $valeur
-	if(!strlen($valeur)) { 
-		if($cout_variable['format']=='nombre') $valeur='0'; else $valeur='""'; 
-	} else 
+	if(!strlen($valeur)) {
+		if($cout_variable['format']=='nombre') $valeur='0'; else $valeur='""';
+	} else
 		$valeur = tweak_php_format($valeur, $cout_variable['format']!='nombre');
 	$code = '';
 	foreach($cout_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
@@ -324,7 +324,7 @@ function tweak_parse_code_php($code) {
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if (isset($metas_vars[$nom])) {
 			$rempl = tweak_get_code_variable($nom, $metas_vars[$nom]);
-		} else { 
+		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
 			$defaut = tweak_get_defaut($nom);
 			$rempl = $cotes . tweak_get_code_variable($nom, $defaut) . $cotes;
@@ -347,7 +347,7 @@ function tweak_parse_code_js($code) {
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if (isset($metas_vars[$matches[1]])) {
 			$rempl = $metas_vars[$matches[1]];
-		} else { 
+		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
 			$rempl = tweak_get_defaut($matches[1]);
 		}

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Le Couteau Suisse</nom>
 	<icon>img/couteau-50.gif</icon>
-	<version>1.7.2.7 pour Spip 1.9 minimum.</version>
+	<version>1.7.2.8 pour Spip 1.9 minimum.</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
 _ &copy; 2007 - Distribu&#233; sous licence GPL
@@ -10,16 +10,16 @@ _ &copy; 2007 - Distribu&#233; sous licence GPL
 	stable
 	</etat>
 	<description>
-R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP. Chacun de ces outils peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin : cliquer sur {{Configuration}}, puis choisir l'onglet {{Le Couteau Suisse}}.
+R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP. Chacun de ces outils peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin et g&#233;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l'onglet {{Le Couteau Suisse}}.
 
 Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typographiques, Corrections typographiques, Affichage public, Balises, filtres, crit&#232;res, etc.
 	</description>
 	<lien>[->http://www.spip-contrib.net/Tweak-SPIP]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
-	tweak_spip_options.php
+	cout_options.php
 	</options>
 	<fonctions> <!-- fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
-	tweak_spip_fonctions.php
+	cout_fonctions.php
 	</fonctions>
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin :
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : tweak_spip_ma_fonction() par exemple)
@@ -27,7 +27,7 @@ Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typog
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
 	<prefix>tweak_spip</prefix>
-	<install>tweak_spip_pipelines_admin.php</install>
+	<install>cout_pipelines.php</install>
 	<chemin dir='' />
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
@@ -37,75 +37,46 @@ Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typog
 		-->
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>
-		<inclure>tweak_spip_pipelines_public.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
-		<inclure>tweak_spip_pipelines_public.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<action>ajouter_onglets</action>
-		<inclure>tweak_spip_pipelines_admin.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>
-		<inclure>tweak_spip_pipelines_admin.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>nettoyer_raccourcis_typo</nom>
 		<action>nettoyer_raccourcis_typo</action>
-		<inclure>tweak_spip_pipelines_typo.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>pre_propre</nom>
 		<action>pre_propre</action>
-		<inclure>tweak_spip_pipelines_typo.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>pre_typo</nom>
 		<action>pre_typo</action>
-		<inclure>tweak_spip_pipelines_typo.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_propre</nom>
 		<action>post_propre</action>
-		<inclure>tweak_spip_pipelines_typo.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_typo</nom>
 		<action>post_typo</action>
-		<inclure>tweak_spip_pipelines_typo.php</inclure>
+		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
-<!--
-	<pipeline>
-		<nom>rendu_evenement</nom>
-		<action>rendu_evenement</action>
-		<inclure>tweak_spip_pipelines_public.php</inclure>
-	</pipeline>
--->
-<!--
-	<pipeline>
-		<nom>pre_indexation</nom>
-		<action>pre_indexation</action>
-		<inclure>tweak_spip_pipelines_cron.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>pre_syndication</nom>
-		<action>pre_syndication</action>
-		<inclure>tweak_spip_pipelines_cron.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>post_syndication</nom>
-		<action>post_syndication</action>
-		<inclure>tweak_spip_pipelines_cron.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>taches_generales_cron</nom>
-		<action>taches_generales_cron</action>
-		<inclure>tweak_spip_pipelines_cron.php</inclure>
-	</pipeline>
--->
 </plugin>

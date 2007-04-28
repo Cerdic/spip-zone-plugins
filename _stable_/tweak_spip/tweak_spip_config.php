@@ -94,7 +94,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'insert_head',
-	'code:options' => "\$GLOBALS['spip_pipeline']['affichage_final'] .= '|f_insert_head';", 
+	'code:options' => "\$GLOBALS['spip_pipeline']['affichage_final'] .= '|f_insert_head';",
 	'categorie' => 'spip',
 	'version-min' => 1.92,
 ));
@@ -157,7 +157,7 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
-	'radio' => array('page' => 'cout:page', 'html' => 'cout:html', 'propres' => 'cout:propres', 'propres2' => 'cout:propres2', 
+	'radio' => array('page' => 'cout:page', 'html' => 'cout:html', 'propres' => 'cout:propres', 'propres2' => 'cout:propres2',
 			'standard' => 'cout:standard', 'propres-qs' => 'cout:propres-qs' ),
 	'radio/ligne' => 4,
 	'defaut' => "strlen(\$GLOBALS['type_urls'])?\$GLOBALS['type_urls']:'page'",

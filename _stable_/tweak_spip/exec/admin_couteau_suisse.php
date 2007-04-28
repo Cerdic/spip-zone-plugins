@@ -177,8 +177,8 @@ cout_log("Début : enregistre_modif_tweaks()");
 cout_log("Fin   : enregistre_modif_tweaks()");
 }
 
-function exec_tweak_spip_admin() {
-cout_log("Début : exec_tweak_spip_admin()");
+function exec_admin_couteau_suisse() {
+cout_log("Début : exec_admin_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $couleur_claire;
@@ -215,8 +215,8 @@ cout_log("Début : exec_tweak_spip_admin()");
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
 		$afficher_tweak = _request('afficher_tweak');
 		if (strlen($afficher_tweak) && $afficher_tweak!=='non')
-			redirige_par_entete(generer_url_ecrire('tweak_spip_admin', "afficher_tweak=$afficher_tweak", true) . "#tweak$afficher_tweak");
-			else redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
+			redirige_par_entete(generer_url_ecrire('admin_couteau_suisse', "afficher_tweak=$afficher_tweak", true) . "#tweak$afficher_tweak");
+			else redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));
 	}
 //	else
 //		verif_tweaks();
@@ -252,9 +252,9 @@ cout_log("Début : exec_tweak_spip_admin()");
 		fin_boite_info();
 	}
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
 	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
 	debut_droite();
 	lire_metas();
 
@@ -284,7 +284,7 @@ cout_log("Début : exec_tweak_spip_admin()");
 	echo "</td></tr></table>\n";
 	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
 
-	echo generer_url_post_ecrire('tweak_spip_admin', '', 'submitform');
+	echo generer_url_post_ecrire('admin_couteau_suisse', '', 'submitform');
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 	echo "\n<input type='hidden' name='afficher_tweak' value='non'>";
 	foreach($temp = $outils as $outil) echo "<input type='hidden' id='tweak_".$outil['id']."' name='tweak_".$outil['id']."' value='".($outil['actif']?"1":"0")."' />";
@@ -301,11 +301,11 @@ cout_log("Début : exec_tweak_spip_admin()");
 	fin_cadre_trait_couleur();
 //	fin_cadre_relief();
 
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
 	echo "</form>";
 
 	echo fin_gauche(), fin_page();
-cout_log("Fin   : exec_tweak_spip_admin()");
+cout_log("Fin   : exec_admin_couteau_suisse()");
 }
 
 // affiche un outil sur une ligne
