@@ -15,22 +15,22 @@
 	}
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');
-	cout_log("appel de cout_options (suite) : strlen=".strlen($cout_metas_pipelines['options']));
+	cs_log("appel de cout_options (suite) : strlen=".strlen($cout_metas_pipelines['options']));
 
 	// inclusion des options pre-compilees, si l'on n'est jamais passé par ici...
 	if (!$GLOBALS['tweak_options']) {
-		$file_exists = file_exists($f = sous_repertoire(_DIR_TMP, "tweak-spip").'mes_options.php');
+		$file_exists = file_exists($f = sous_repertoire(_DIR_TMP, "couteau-suisse").'mes_options.php');
 		if($file_exists) include_once($f);
 			// si les fichiers sont absents, on recompile tout
-			else tweak_initialisation(1);
+			else cs_initialisation(1);
 	}
-	cout_log(' -- appel de cout_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']) 
+	cs_log(' -- appel de cout_options achevé... tweak_options = '.intval($GLOBALS['tweak_options']) 
 		. ($file_exists?" et fichier '$f' trouvé":" et fichier '$f' non trouvé !!"));
 
 /*
 	if(!$GLOBALS['tweak_options']) {
 		if (isset($cout_metas_pipelines['options'])) eval($cout_metas_pipelines['options']);
-cout_log(' -- appel de cout_options achevé par eval() ... tweak_options = '.intval($GLOBALS['tweak_options']));
+cs_log(' -- appel de cout_options achevé par eval() ... tweak_options = '.intval($GLOBALS['tweak_options']));
 	}
 */
 	 $GLOBALS['log_couteau_suisse'] |= $GLOBALS['forcer_log_couteau_suisse'];

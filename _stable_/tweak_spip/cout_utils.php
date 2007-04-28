@@ -1,6 +1,6 @@
 <?php
 #-----------------------------------------------------#
-#  Plugin  : Couteau Suisse - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
@@ -9,7 +9,7 @@
 #  la configuration du plugin                         #
 #-----------------------------------------------------#
 
-cout_log("Chargement de tweak_spip.php...");
+cs_log("Chargement de cout_utils.php...");
 
 /*****************/
 /* COMPATIBILITE */
@@ -58,6 +58,13 @@ function tweak_compatibilite_ascendante() {
 	cout_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
 	cout_suppr_metas_var('target_blank');
 	cout_suppr_metas_var('');
+	/*
+	// compatibilite avec l'ancien plugin Tweak SPIP
+	if (@file_exists($f=sous_repertoire(_DIR_TMP, "tweak-spip"))) {
+		include_spip('inc/getdocument');
+		effacer_repertoire_temporaire($f);
+	}
+	*/
 }
 
 /*************/
@@ -87,19 +94,19 @@ function add_variable($tableau) {
 // le resultat comporte des guillemets si c'est une chaine
 function tweak_get_defaut($variable) {
 	global $cout_variables;
-	// si la variable n'est pas declaree, serieux pb dans tweak_spip_config !
+	// si la variable n'est pas declaree, serieux pb dans config_outils !
 	if (!isset($cout_variables[$variable])) {
-		spip_log("Erreur - variable '$variable' non déclarée dans tweak_spip_config.php !");
+		spip_log("Erreur - variable '$variable' non déclarée dans config_outils.php !");
 		return false;
 	}
 	$variable = &$cout_variables[$variable];
 	$defaut = $variable['defaut'];
 	if($variable['format']=='nombre') $defaut = "intval($defaut)";
 		elseif($variable['format']=='chaine') $defaut = "strval($defaut)";
-//cout_log("tweak_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
+//cs_log("tweak_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
 	eval("\$defaut=$defaut;");
 	$defaut2 = tweak_php_format($defaut, $variable['format']!='nombre');
-cout_log(" -- tweak_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
+cs_log(" -- tweak_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
 	return $defaut2;
 }
 // installation de $cout_metas_pipelines
@@ -116,9 +123,9 @@ function set_cout_metas_pipelines_fichier($tweaks_pipelines, $type) {
 	$code = str_replace("\n".'if(strlen($foo="")) ',"\n\$foo=''; //", $code);
 	// ... en avant le code !
 	$cout_metas_pipelines[$type] = $code;
-cout_log("set_cout_metas_pipelines_fichier($type) : strlen=".strlen($code));
-	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "mes_$type.php";
-cout_log(" -- fichier_dest = $fichier_dest");
+cs_log("set_cout_metas_pipelines_fichier($type) : strlen=".strlen($code));
+	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "mes_$type.php";
+cs_log(" -- fichier_dest = $fichier_dest");
 	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n++\$GLOBALS['tweak_$type'];\n$code?".'>');
 }
 
@@ -131,9 +138,9 @@ function set_cout_metas_pipelines_pipeline($tweaks_pipelines, $pipeline) {
 		foreach ($tweaks_pipelines[$pipeline]['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
 	}
 	$cout_metas_pipelines[$pipeline] = $code;
-cout_log("set_cout_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
-	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "$pipeline.php";
-cout_log(" -- fichier_dest = $fichier_dest");
+cs_log("set_cout_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
+	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "$pipeline.php";
+cs_log(" -- fichier_dest = $fichier_dest");
 	ecrire_fichier($fichier_dest, '<'."?php\n// Code de contrôle pour le plugin 'Couteau Suisse'\n$code?".'>');
 }
 
@@ -195,11 +202,11 @@ function tweak_aide_pipelines() {
 function tweak_insert_header($f, $type) {
 	if ($type=='css') {
 		include_spip('inc/filtres');
-		return "<link rel=\"stylesheet\" href=\"".tweak_htmlpath(direction_css($f))."\" type=\"text/css\" media=\"projection, screen\" />\n";
+		return "<link rel=\"stylesheet\" href=\"".cs_htmlpath(direction_css($f))."\" type=\"text/css\" media=\"projection, screen\" />\n";
 	} elseif ($type=='js')
-		return "<script type=\"text/javascript\" src=\"".tweak_htmlpath($f)."\"></script>\n";
+		return "<script type=\"text/javascript\" src=\"".cs_htmlpath($f)."\"></script>\n";
 }
-// sauve la configuration dans un fichier tmp/tweak-spip/config.php
+// sauve la configuration dans un fichier tmp/couteau-suisse/config.php
 function tweak_sauve_configuration() {
 	global $outils, $metas_vars;
 	$metas = $variables = $actifs = array();
@@ -213,7 +220,7 @@ function tweak_sauve_configuration() {
 	$sauve = "// Outils actifs\n\$outils = array('\n" . chr(9) . join("',\n".chr(9)."'", $actifs) . "'\n);\n";
 	$sauve .= "\n// Variables actives\n\$variables = array('\n" . chr(9)  . join("',\n".chr(9)."'", $variables) . "'\n);\n";
 	$sauve .= "\n// Valeurs validees en metas\n\$valeurs = array(" . join(', ', $metas) . "\n);\n";
-	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "config.php";
+	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "config.php";
 	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
 }
 
@@ -270,7 +277,7 @@ function tweak_initialise_includes() {
 	}
 	$tweaks_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
-	if (@file_exists($f=sous_repertoire(_DIR_TMP, "tweak-spip"))) {
+	if (@file_exists($f=sous_repertoire(_DIR_TMP, "couteau-suisse"))) {
 		include_spip('inc/getdocument');
 		effacer_repertoire_temporaire($f);
 	} else spip_log("Erreur - tweak_initialise_includes() : $f introuvable !");
@@ -388,15 +395,15 @@ function tweak_installe_tweaks() {
 		include_spip('outils/'.$outil['id']);
 		if (function_exists($f = $outil['id'].'_installe')) {
 			$f();
-cout_log(" -- $f() : installé !");
+cs_log(" -- $f() : installé !");
 		}
 	}
 }
 
 // on force la reinstallation complete des outils et des plugins
-function tweak_initialisation_totale() {
+function cs_initialisation_totale() {
 	// on force la reinstallation complete des outils
-	tweak_initialisation(true);
+	cs_initialisation(true);
 	// reinitialisation des pipelines, par precaution
 	// if (file_exists($f = _DIR_TMP."charger_pipelines.php")) @unlink($f);
 }
@@ -411,7 +418,7 @@ function tweak_initialisation_totale() {
 // $cout_variables : tableau de toutes les variables que les outils peuvent utiliser et manipuler
 //  - ces deux tableaux ne sont remplis qu'une seule fois, lors d'une initialisation totale
 //    les hits ordinaires ne se servent que des metas, non des fichiers.
-//  - l'initialisation totale insere en premier lieu tweak_spip_config.php
+//  - l'initialisation totale insere en premier lieu config_outils.php
 //
 
 global $outils, $cout_variables;
@@ -421,7 +428,7 @@ $cout_variables = $outils = array();
 $cout_variables['_chaines'] = $cout_variables['_nombres'] = array();
 
 // lancer l'initialisation
-tweak_initialisation();
+cs_initialisation();
 
 //print_r(unserialize($GLOBALS['meta']['tweaks_variables']));
 ?>

@@ -8,9 +8,9 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function smileys_installe() {
 	$path = dirname(find_in_path('img/smileys/test'));
-cout_log("smileys_installe() : $path");
-	$path2 = tweak_htmlpath($path);
-cout_log(" -- abs. path = $path2");
+cs_log("smileys_installe() : $path");
+	$path2 = cs_htmlpath($path);
+cs_log(" -- abs. path = $path2");
 
 	$smileys = array(
 	// les doubles :
@@ -91,7 +91,7 @@ function tweak_rempl_smileys($texte) {
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
 	// accessibilite : alt et title avec le smiley en texte
 	while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
-//cout_log('smileys traités : '.$texte);
+//cs_log('smileys traités : '.$texte);
 	return $texte;
 }
 
@@ -100,8 +100,8 @@ function tweak_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	if (!isset($GLOBALS['meta']['tweaks_smileys']) || isset($GLOBALS['var_mode']))
 		smileys_installe();
-//cout_log('smileys trouvés !');
+//cs_log('smileys trouvés !');
 	// appeler tweak_rempl_smileys() une fois que certaines balises ont ete protegees
-	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
 }
 ?>

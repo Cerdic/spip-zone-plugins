@@ -1,6 +1,6 @@
  <?php
 #-----------------------------------------------------#
-#  Plugin  : Couteau Suisse - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
@@ -19,7 +19,7 @@ include_spip("inc/presentation");
 if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
 function exec_tweak_test() {
-cout_log("Début : exec_tweak_test()");
+cs_log("Début : exec_tweak_test()");
 	global $connect_statut, $connect_toutes_rubriques;
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
@@ -30,13 +30,13 @@ cout_log("Début : exec_tweak_test()");
 	}
 
 	// initialisation generale forcee : recuperation de $outils;
-	tweak_initialisation(true);
+	cs_initialisation(true);
 
 	if ($GLOBALS['spip_version_code']<1.92)
   		debut_page(_T('cout:titre_tests'), 'configuration', 'tweak_spip');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('cout:titre_tests'), "configuration", "tweak_spip");
+		echo $commencer_page(_T('cout:titre_tests'), "configuration", 'tweak_spip');
 	}
 
 	echo "<br /><br /><br />";
@@ -47,7 +47,7 @@ cout_log("Début : exec_tweak_test()");
 	echo '</div>';
 
 	echo fin_page();
-cout_log("Fin   : exec_tweak_test()");
+cs_log("Fin   : exec_tweak_test()");
 }
 
 // renvoie un tableau contenant le texte original et sa transfrmation par la fonction $fonction
@@ -103,7 +103,7 @@ function tweak_les_tests() {
 	test_outil($metas_vars, 'Contenu des variables : $metas_vars[]');
 
 
-	// test de tweak_htmlpath()
+	// test de cs_htmlpath()
 	$relative_path = dirname(find_in_path('img/smileys/test'));
 	$realpath = str_replace("\\", "/", realpath($relative_path));
 	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
@@ -123,13 +123,13 @@ function tweak_les_tests() {
 			"str_replace('\\', '/', realpath('$relative_path'))"=>$realpath,
 			"substr('$realpath', strlen('$root'))"=>tweak_red($test_result),
 			"return?"=>(strlen($root) && strpos($realpath, $root)===0)?'oui':'non',
-			"tweak_htmlpath('$relative_path')"=>tweak_htmlpath($relative_path),
+			"cs_htmlpath('$relative_path')"=>cs_htmlpath($relative_path),
 			'$dir'=>$dir,
-			"tweak_canonicalize('$dir'.'/'.'$relative_path')"=>tweak_red(tweak_canonicalize($dir.'/'.$relative_path)),
+			"cs_canonicalize('$dir'.'/'.'$relative_path')"=>tweak_red(cs_canonicalize($dir.'/'.$relative_path)),
 		);
-	test_outil($a, 'Test sur : tweak_htmlpath()');
+	test_outil($a, 'Test sur : cs_htmlpath()');
 
-	// test de tweak_canonicalize()
+	// test de cs_canonicalize()
 	$dir = $dir.'/'.$relative_path;
 	$address = str_replace("//", "/", $dir);
 	$address1 = $address2 = explode('/', $address);
@@ -143,7 +143,7 @@ function tweak_les_tests() {
 			'array_spliced()'=>$address2,
 			'$resultat'=>tweak_red($address3),
 		);
-	test_outil($a, 'Test sur : tweak_canonicalize()');
+	test_outil($a, 'Test sur : cs_canonicalize()');
 
 	// test de typo_exposants()
 	$textes = array(

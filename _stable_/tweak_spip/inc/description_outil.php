@@ -1,13 +1,13 @@
 <?php
 #-----------------------------------------------------#
-#  Plugin  : Couteau Suisse - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_TWEAK_VAR', tweak_code_echappement("<!--  TWEAK-VAR -->\n", 'TWEAK'));
+define('_TWEAK_VAR', cs_code_echappement("<!--  TWEAK-VAR -->\n", 'TWEAK'));
 
 include_spip('inc/actions');
 include_spip('inc/texte');
@@ -23,7 +23,7 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 	if (isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
 		else $valeur = tweak_get_defaut($variable);
 	$valeur = tweak_retire_guillemets($valeur);
-cout_log(" -- description_outil_une_variable($index) - Traite %$variable%");
+cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 	$cout_variable = &$cout_variables[$variable];
 
 	// si la variable necessite des boutons radio
@@ -70,7 +70,7 @@ function inc_description_outil_dist($tweak0, $url_self, $modif=false) {
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-cout_log("inc_description_outil_dist() - Parse la description de '$tweak0'");
+cs_log("inc_description_outil_dist() - Parse la description de '$tweak0'");
 	$ok_input = $ok_valeur = $ok_visible = '';
 	$outil['nb_variables'] = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if (strlen($var=trim($t[$i+1]))) {
@@ -83,7 +83,7 @@ cout_log("inc_description_outil_dist() - Parse la description de '$tweak0'");
 				$ok_input, $ok_valeur);
 			$variables[] = $var;
 		} else {
-			// probleme a regler dans tweak_spip_config.php !
+			// probleme a regler dans config_outils.php !
 			$temp = $t[$i]."[$var?]"; $ok_input .= $temp; $ok_valeur .= $temp;
 		}
 	} else { $ok_input .= $t[$i]; $ok_valeur .= $t[$i]; }
@@ -117,7 +117,7 @@ cout_log("inc_description_outil_dist() - Parse la description de '$tweak0'");
 		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 		$res = ajax_action_auteur('description_outil', $index, $url_self, "tweak={$outil['id']}", "$res");
 	}
-//cout_log("Fin   : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvée(s)");
+//cs_log("Fin   : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvée(s)");
 	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
 	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('cout:vars_modifiees').'&nbsp;&lt;</div>':'';
 	return ajax_action_greffe("description_outil-$index", $res, $modif);

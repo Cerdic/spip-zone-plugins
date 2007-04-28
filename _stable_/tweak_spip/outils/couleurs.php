@@ -21,7 +21,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function couleurs_installe() {
-cout_log("couleurs_installe()");
+cs_log("couleurs_installe()");
 
 	$couleurs = array(
 		array('noir', 'rouge', 'marron', 'vert', 'vert olive', 'bleu marine', 'violet', 'gris', 'argent', 'vert clair', 'bleu', 'fuchia', 'bleu clair', 
@@ -121,7 +121,7 @@ function couleurs_pre_typo($texte) {
 	if (!isset($GLOBALS['meta']['tweaks_couleurs']) || isset($GLOBALS['var_mode']))
 		couleurs_installe();
 	// appeler couleurs_rempl() une fois que certaines balises ont ete protegees
-	return tweak_echappe_balises('', 'couleurs_rempl', $texte);
+	return cs_echappe_balises('', 'couleurs_rempl', $texte);
 }
 
 ?>

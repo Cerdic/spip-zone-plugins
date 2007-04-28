@@ -1,6 +1,6 @@
 <?php
 #-----------------------------------------------------#
-#  Plugin  : Couteau Suisse - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
@@ -152,7 +152,7 @@ function tweakchange(index) {
 
 // mise à jour des données si envoi via formulaire
 function enregistre_modif_tweaks(){
-cout_log("Début : enregistre_modif_tweaks()");
+cs_log("Début : enregistre_modif_tweaks()");
 	global $outils;
 	// recuperer les outils dans l'ordre des $_POST
 	$test = array();
@@ -171,14 +171,14 @@ cout_log("Début : enregistre_modif_tweaks()");
 //		supprime_invalideurs();
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_SKELS);
-		@unlink(_DIR_TMP."tweak-spip.plat");
-	tweak_initialisation_totale();
+		@unlink(_DIR_TMP."couteau-suisse.plat");
+	cs_initialisation_totale();
 
-cout_log("Fin   : enregistre_modif_tweaks()");
+cs_log("Fin   : enregistre_modif_tweaks()");
 }
 
 function exec_admin_couteau_suisse() {
-cout_log("Début : exec_admin_couteau_suisse()");
+cs_log("Début : exec_admin_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $couleur_claire;
@@ -205,7 +205,7 @@ cout_log("Début : exec_admin_couteau_suisse()");
 		else $afficher_tweak = intval($afficher_tweak);
 
 	// initialisation generale forcee : recuperation de $outils;
-	tweak_initialisation(true);
+	cs_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les outils
 	if (_request('changer_tweaks')=='oui'){
@@ -225,13 +225,13 @@ cout_log("Début : exec_admin_couteau_suisse()");
   		debut_page(_T('cout:titre'), 'configuration', 'tweak_spip');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('cout:titre'), "configuration", "tweak_spip");
+		echo $commencer_page(_T('cout:titre'), "configuration", 'tweak_spip');
 	}
 
 	tweak_styles_et_js();
 	echo "<br /><br /><br />";
 	gros_titre(_T('cout:titre'));
-	echo barre_onglets("configuration", "tweak_spip");
+	echo barre_onglets("configuration", 'tweak_spip');
 
 	debut_gauche();
 	debut_boite_info();
@@ -305,7 +305,7 @@ cout_log("Début : exec_admin_couteau_suisse()");
 	echo "</form>";
 
 	echo fin_gauche(), fin_page();
-cout_log("Fin   : exec_admin_couteau_suisse()");
+cs_log("Fin   : exec_admin_couteau_suisse()");
 }
 
 // affiche un outil sur une ligne

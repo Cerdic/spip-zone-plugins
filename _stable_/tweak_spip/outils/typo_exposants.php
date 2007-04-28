@@ -52,7 +52,7 @@ function typo_exposants($texte){
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
 	switch (lang_typo($lang)) {
 		case 'fr':
-			return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
+			return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
 		default:
 			return $texte;
 	}

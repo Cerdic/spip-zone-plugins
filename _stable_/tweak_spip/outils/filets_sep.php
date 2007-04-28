@@ -10,7 +10,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function filets_sep_installe() {
-//cout_log('chatons_installe()');
+//cs_log('chatons_installe()');
 	$path = dirname(find_in_path('img/filets/test'));
 	$liste = $filets = array();
 	$dossier = opendir($path);
@@ -20,7 +20,7 @@ function filets_sep_installe() {
 			$filets[0][] = '__'.$reg[1].'__';	
 			list(,$haut) = @getimagesize("$path/$reg[1]");
 			if ($haut) $haut="height:{$haut}px;";
-			$f = tweak_htmlpath($path).'/'.$reg[1];
+			$f = cs_htmlpath($path).'/'.$reg[1];
 			$filets[1][] = "<html><p class=\"spip filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\">&nbsp; &nbsp; &nbsp;</p></html>";
 		}
 	}
@@ -57,6 +57,6 @@ function filets_sep_rempl($texte) {
 // fonction pipeline
 function filets_sep($texte) {
 	if (strpos($texte, '__')===false) return $texte;
-	return tweak_echappe_balises('', 'filets_sep_rempl', $texte);
+	return cs_echappe_balises('', 'filets_sep_rempl', $texte);
 }
 ?>

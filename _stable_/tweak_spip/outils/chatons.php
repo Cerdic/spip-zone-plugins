@@ -15,12 +15,12 @@ function chatons_pre_typo($texte) {
 	if (strpos($texte, ':')===false) return $texte;
 	if (!isset($GLOBALS['meta']['tweaks_chatons']) || isset($GLOBALS['var_mode']))
 		chatons_installe();
-	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_chatons', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_chatons', $texte);
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function chatons_installe() {
-//cout_log('chatons_installe()');
+//cs_log('chatons_installe()');
 	$path = dirname(find_in_path('img/chatons/test'));
 	$liste = $chatons = array();
 	$dossier=opendir($path);
@@ -29,7 +29,7 @@ function chatons_installe() {
 			$chatons[0][] = ':'.$reg[1];
 			$liste[] = '<strong>:'.$reg[1].'</strong>';	
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
-			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"".tweak_htmlpath($path)."/$reg[1].$reg[2]\" $size/>";
+			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"".cs_htmlpath($path)."/$reg[1].$reg[2]\" $size/>";
 		}
 	}
 	ecrire_meta('tweaks_chatons_racc', join(', ', $liste));

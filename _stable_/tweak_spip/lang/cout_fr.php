@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spip' => "5. Balises, filtres, crit&egrave;res",
 	'divers' => "6. Divers",
 
-// Chaines de langue concernant tous les outils configures dans tweak_spip_config.php
+// Chaines de langue concernant de tous les outils configures dans config_outils.php
 // ----------------------------------------------------------------------------------
 
 	'SPIP_cache:nom' => 'SPIP et le cache&hellip;',
@@ -183,7 +183,7 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 
 // ---------------------------------------------------------------------------
 	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; du Couteau Suisse',
-	'log_couteau_suisse:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Couteau Suisse' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
+	'log_couteau_suisse:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Couteau Suisse' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
 
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
 	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',

@@ -1,7 +1,7 @@
 <?php
 
 #-----------------------------------------------------#
-#  Plugin  : Couteau Suisse - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
@@ -303,7 +303,7 @@ add_outil( array(
 // couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
 include_spip('inc/texte');
-$code = str_replace("'", "\'", tweak_code_echappement("<!--  -->\n", 'SOMMAIRE'));
+$code = str_replace("'", "\'", cs_code_echappement("<!--  -->\n", 'SOMMAIRE'));
 add_outil( array(
 	'id' => 'sommaire',
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",
@@ -462,6 +462,6 @@ add_outil( array(
 // colorations du code
 // boutonstexte
 
-cout_log("Fin de tweak_spip_config.php");
-//global $cout_variables; cout_log($cout_variables, 'tweak_variables :');
+cs_log("Fin de config_outils.php");
+//global $cout_variables; cs_log($cout_variables, 'tweak_variables :');
 ?>

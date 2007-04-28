@@ -23,7 +23,7 @@ deja une autre forme.
 */
 
 function typo_guillemets_echappe_balises_callback($matches) {
- return tweak_code_echappement($matches[1], 'GUILL');
+ return cs_code_echappement($matches[1], 'GUILL');
 }
 
 function typo_guillemets_rempl($texte){
@@ -168,7 +168,7 @@ function typo_guillemets($texte){
 	if (strpos($texte, '"')===false) return $texte;
 	// bug/tip de spip qui echappe les blocs html en ajoutant \n\n... donc on protege les echappements anterieurs
 	// $texte = preg_replace(',"base64([^"]*)",', "'base64$1'", $texte);
-	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_guillemets_rempl', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_guillemets_rempl', $texte);
 }
 
 ?>

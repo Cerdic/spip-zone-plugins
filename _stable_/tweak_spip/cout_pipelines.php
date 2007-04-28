@@ -6,7 +6,7 @@ include_spip('cout_lancement');
  ***********/
 
 function tweak_spip_install($action){
-cout_log("tweak_spip_install($action)");
+cs_log("tweak_spip_install($action)");
 	include_spip('inc/meta');
 	switch ($action){
 		case 'test':
@@ -18,7 +18,7 @@ cout_log("tweak_spip_install($action)");
 			foreach(array_keys($GLOBALS['meta']) as $meta)
 				if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			ecrire_metas();
-			if (@file_exists($f=sous_repertoire(_DIR_TMP, "tweak-spip"))) {
+			if (@file_exists($f=sous_repertoire(_DIR_TMP, "couteau-suisse"))) {
 				include_spip('inc/getdocument');
 				effacer_repertoire_temporaire($f);
 			}

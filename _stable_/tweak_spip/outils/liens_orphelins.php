@@ -8,10 +8,10 @@
 */
 
 function liens_orphelins_echappe_balises_callback($matches) {
- return tweak_code_echappement($matches[1], 'LIENS');
+ return cs_code_echappement($matches[1], 'LIENS');
 }
 function liens_orphelins_raccourcis_callback($matches) {
- return tweak_code_echappement('[->'.$matches[1].']', 'LIENS');
+ return cs_code_echappement('[->'.$matches[1].']', 'LIENS');
 }
 
 function liens_orphelins_rempl($texte){
@@ -57,7 +57,7 @@ function liens_orphelins_rempl($texte){
 
 function liens_orphelins($texte){
 	if (strpos($texte, '.')===false) return $texte;
-	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'liens_orphelins_rempl', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'liens_orphelins_rempl', $texte);
 }
 
 ?>

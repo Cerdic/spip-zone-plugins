@@ -14,7 +14,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	$img = 'spip_out.gif';
 	$path = dirname(find_in_path(($GLOBALS['spip_version']<1.92?"img_pack/":"images/").$img));
 	list(,,,$size) = @getimagesize("$path/$img");
-	$haut = "<img class=\"no_image_filtrer\" alt=\"$titre\" title=\"$titre\" src=\"".tweak_htmlpath($path)."/$img\" $size/>";
+	$haut = "<img class=\"no_image_filtrer\" alt=\"$titre\" title=\"$titre\" src=\"".cs_htmlpath($path)."/$img\" $size/>";
 	$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\">$haut</a> ";
 	// traitement des titres <h3>
 	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
@@ -57,7 +57,7 @@ function sommaire_d_article_rempl($texte) {
 		$texte = str_replace(_sommaire_SANS_FOND, '', $texte);
 		$fond = 'background-color:white; border:thin solid gray;';
 	} else {
-		$img = tweak_htmlpath($img);
+		$img = cs_htmlpath($img);
 		$fond = "background:transparent url($img) no-repeat scroll left top; border-bottom:thin solid #999999; border-right:1px solid #999999;";
 	}
 
@@ -92,7 +92,7 @@ padding:0pt;">'.$sommaire.'</ul></div></div>';
 
 function sommaire_d_article($texte){
 	if (strpos($texte, '<h3')===false) return $texte;
-	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte);
 }
 
 ?>
