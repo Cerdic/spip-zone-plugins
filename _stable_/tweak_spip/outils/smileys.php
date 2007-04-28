@@ -5,7 +5,7 @@
 // Toutes les infos sur : http://www.spip-contrib.net/?article1561
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function smileys_installe() {
 	$path = dirname(find_in_path('img/smileys/test'));
 cout_log("smileys_installe() : $path");
@@ -72,7 +72,7 @@ cout_log(" -- abs. path = $path2");
 	ecrire_metas();
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function smileys_raccourcis() {

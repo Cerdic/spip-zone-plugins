@@ -19,7 +19,7 @@
  *  
 */
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function couleurs_installe() {
 cout_log("couleurs_installe()");
 
@@ -62,7 +62,7 @@ cout_log("couleurs_installe()");
 	ecrire_metas();
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function couleurs_raccourcis() {

@@ -18,7 +18,7 @@ function chatons_pre_typo($texte) {
 	return tweak_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_chatons', $texte);
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function chatons_installe() {
 //cout_log('chatons_installe()');
 	$path = dirname(find_in_path('img/chatons/test'));
@@ -37,7 +37,7 @@ function chatons_installe() {
 	ecrire_metas();
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function chatons_raccourcis() {

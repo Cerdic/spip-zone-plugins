@@ -13,7 +13,7 @@
  *
 */
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // et calcule a l'avance les images trouvees dans le repertoire img/decoupe/
 function decoupe_installe() {
 cout_log('decoupe_installe()');
@@ -30,7 +30,7 @@ cout_log('decoupe_installe()');
 	ecrire_metas();
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoupe_raccourcis() {

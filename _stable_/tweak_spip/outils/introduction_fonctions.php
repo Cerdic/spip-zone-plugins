@@ -34,6 +34,6 @@ if (defined('_INTRODUCTION_LGR')) {
 		}
 	} // introduction()
  } //!function_exists('introduction') 
- else spip_log("Erreur - introduction() existe déjà et ne peut pas être surchargée par Tweak SPIP !");
+ else spip_log("Erreur - introduction() existe déjà et ne peut pas être surchargée par le Couteau Suisse !");
 } //defined('_INTRODUCTION_LGR')
 ?>

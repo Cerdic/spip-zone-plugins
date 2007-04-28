@@ -1,6 +1,6 @@
 <?php
 #-----------------------------------------------------#
-#  Plugin  : Tweak SPIP - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL               #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
@@ -13,14 +13,14 @@
 
 cout_log("Chargement de tweak_spip_init.php");
 
-// si l'outil 'log_couteau_suisse' est actif, on logue pour Tweak SPIP
+// si l'outil 'log_couteau_suisse' est actif, on logue dans tmp/spip.log
 function cout_log($variable, $prefixe='') {
  if(!$GLOBALS['log_couteau_suisse'] || !strlen($variable)) return;
  if (!is_string($variable)) $variable = var_export($variable, true);
  spip_log('TWEAKS. '.$prefixe.$variable);
 }
 
-// compatibilite avec Tweak SPIP de version anterieure a 1.7.0.0
+// compatibilite avec les plugins de version anterieure a 1.7.0.0
 function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
 
 // Echapper les les elements perilleux en les passant en base64

@@ -31,7 +31,7 @@ $temp['note'] = "<sup>(*)</sup>";
 
 // traductions habituelles
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'titre' => 'Tweak SPIP',
+	'titre' => 'Le Couteau Suisse',
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>"
 		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p>" . $temp['reset'],
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
 	'nb_outil' => '@pipe@ : @nb@ outil',
 	'nb_outils' => '@pipe@ : @nb@ outils',
-	'titre_tests' => 'Tweak SPIP - Page de tests',
+	'titre_tests' => 'Couteau Suisse - Page de tests',
 	'actif' => 'Outil actif',
 	'inactif' => 'Outil inactif',
 	'actifs' => 'Outils actifs :',
@@ -182,8 +182,8 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 	'standard' => 'standard', 'propres-qs' => 'propres-qs',
 
 // ---------------------------------------------------------------------------
-	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; de Tweak SPIP',
-	'log_couteau_suisse:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak SPIP' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
+	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; du Couteau Suisse',
+	'log_couteau_suisse:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Couteau Suisse' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
 
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
 	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',

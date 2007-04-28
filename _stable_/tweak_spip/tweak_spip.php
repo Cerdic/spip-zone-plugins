@@ -1,6 +1,6 @@
 <?php
 #-----------------------------------------------------#
-#  Plugin  : Tweak SPIP - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL               #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
@@ -44,7 +44,7 @@ function cout_suppr_metas_var($meta, $new = false) {
  unset($metas_vars[$meta]);
 }
 
-// on actualise/supprime de vieilles variables creees par les version anterieures de Tweak SPIP
+// on actualise/supprime de vieilles variables creees par les version anterieures du Couteau Suisse
 function tweak_compatibilite_ascendante() {
 	cout_suppr_metas_var('set_options');
 	cout_suppr_metas_var('radio_set_options3');

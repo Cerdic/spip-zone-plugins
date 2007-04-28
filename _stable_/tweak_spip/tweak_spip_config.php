@@ -1,7 +1,7 @@
 <?php
 
 #-----------------------------------------------------#
-#  Plugin  : Tweak SPIP - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL               #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
@@ -28,7 +28,7 @@ add_variable( array(
 	'code:%s' => "\$fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
 if (!in_array(\$fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';",
 ));
-	// ici on demande a Tweak SPIP une case input. La variable est : quota_cache
+	// ici on a besoin d'une case input. La variable est : quota_cache
 	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['quota_cache']
 add_variable( array(
 	'nom' => 'quota_cache',
@@ -43,7 +43,7 @@ add_outil( array(
 		'auteur' => '[C&eacute;dric MORIN->mailto:cedric.morin@yterium.com] (d&eacute;sactivation)'
 ));
 
-	// ici on demande a Tweak SPIP une case input. La variable est : dossier_squelettes
+	// ici on a besoin d'une case input. La variable est : dossier_squelettes
 	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['dossier_squelettes']
 add_variable( array(
 	'nom' => 'dossier_squelettes',
@@ -57,7 +57,7 @@ add_outil( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on demande a Tweak SPIP une case input. La variable est : cookie_prefix
+	// ici on a besoin d'une case input. La variable est : cookie_prefix
 	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['cookie_prefix']
 add_variable( array(
 	'nom' => 'cookie_prefix',
@@ -99,7 +99,7 @@ add_outil( array(
 	'version-min' => 1.92,
 ));
 
-	// ici on demande a Tweak SPIP une case input. La variable est : suite_introduction
+	// ici on a besoin d'une case input. La variable est : suite_introduction
 	// a la toute premiere activation de l'outil, la valeur sera : '&nbsp;(...)'
 add_variable( array(
 	'nom' => 'suite_introduction',
@@ -134,7 +134,7 @@ if($GLOBALS['spip_version']<1.93) {
 	));
 }
 
-	// ici on demande a Tweak SPIP deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
+	// ici on a besoin de deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
 add_variable( array(
 	'nom' => 'radio_set_options4',
 	'format' => 'chaine',
@@ -153,7 +153,7 @@ add_outil( array(
 	'version-max' => 1.93,
 ));
 
-	// ici on demande a Tweak SPIP six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
+	// ici on a besoin de six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
 add_variable( array(
 	'nom' => 'radio_type_urls3',
 	'format' => 'chaine',
@@ -175,7 +175,7 @@ add_outil( array(
 	'categorie' => 'admin',
 ));
 
-	// ici on demande a Tweak SPIP trois boutons radio : _T('cout:js_jamais'), _T('cout:js_defaut') et _T('cout:js_toujours')
+	// ici on a besoin de trois boutons radio : _T('cout:js_jamais'), _T('cout:js_defaut') et _T('cout:js_toujours')
 add_variable( array(
 	'nom' => 'radio_filtrer_javascript3',
 	'format' => 'nombre',
@@ -191,7 +191,7 @@ add_outil( array(
 	'version-min' => 1.92,
 ));
 
-	// ici on demande a Tweak SPIP une case input. La variable est : forum_lgrmaxi
+	// ici on a besoin d'une case input. La variable est : forum_lgrmaxi
 	// a la toute premiere activation de l'outil, la valeur sera : 0 (aucune limite)
 add_variable( array(
 	'nom' => 'forum_lgrmaxi',
@@ -220,7 +220,7 @@ add_outil( array(
 	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
 ));
 
-	// ici on demande a Tweak SPIP trois boutons radio : _T('cout:sf_defaut'), _T('cout:sf_amont') et _T('cout:sf_tous')
+	// ici on a besoin de trois boutons radio : _T('cout:sf_defaut'), _T('cout:sf_amont') et _T('cout:sf_tous')
 add_variable( array(
 	'nom' => 'radio_suivi_forums3',
 	'format' => 'chaine',

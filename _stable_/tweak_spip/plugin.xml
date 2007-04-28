@@ -1,7 +1,7 @@
 <plugin>
-	<nom>Tweak SPIP</nom>
-	<icon>img/tweak-24.gif</icon>
-	<version>1.7.2.4 pour Spip 1.9 minimum.</version>
+	<nom>Le Couteau Suisse</nom>
+	<icon>img/couteau-50.gif</icon>
+	<version>1.7.2.5 pour Spip 1.9 minimum.</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
 _ &copy; 2007 - Distribu&#233; sous licence GPL
@@ -10,7 +10,7 @@ _ &copy; 2007 - Distribu&#233; sous licence GPL
 	stable
 	</etat>
 	<description>
-R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP. Chacun de ces tweaks peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin : cliquer sur {{Configuration}}, puis choisir l'onglet {{Tweak SPIP}}.
+R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP. Chacun de ces outils peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin : cliquer sur {{Configuration}}, puis choisir l'onglet {{Le Couteau Suisse}}.
 
 Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typographiques, Corrections typographiques, Affichage public, Balises, filtres, crit&#232;res, etc.
 	</description>

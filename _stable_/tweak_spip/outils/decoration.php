@@ -29,7 +29,7 @@ function decoration_pre_typo($texte) {
 	return tweak_echappe_balises('', 'decoration_rempl', $texte);
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoration_raccourcis() {

@@ -1,6 +1,6 @@
 <?php
 #-----------------------------------------------------#
-#  Plugin  : Tweak SPIP - Licence : GPL               #
+#  Plugin  : Couteau Suisse - Licence : GPL               #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
 #  Infos : http://www.spip-contrib.net/?article1554   #
@@ -258,7 +258,7 @@ cout_log("Début : exec_tweak_spip_admin()");
 	debut_droite();
 	lire_metas();
 
-	debut_cadre_trait_couleur('administration-24.gif','','',_T('cout:liste_outils'));
+	debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),'','','&nbsp;'._T('cout:liste_outils'));
 
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
@@ -330,16 +330,16 @@ function ligne_tweak($outil, &$js, $afficher){
 		$s .=  "</div>";
 	}
 */
-	$p = '<p style="margin:0 0 0 2em;">';
+	$p = '<div style="margin:0 0 0 2em;">';
 	$p .= "<img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 
-	$p .= "<input type='checkbox' class='checkbox' name='foo_$inc' value='O' id='label_$id_input'";
+	$p .= "<input type='checkbox' class='checkbox' name='foo_$inc' value='O' id='label_$id_input' style=''";
 	$p .= $actif?" checked='checked'":"";
 	$p .= $erreur_version?" disabled='disabled'":"";
 	$p .= " onclick='tweakchange.apply(this,[$index])'";
 	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('cout:activer_outil')."</label>";
 	$js .= "Tweaks[$index] = Array(\"$inc\", $nb_var);\n";
-	$p .= ($afficher?bouton_block_visible($tweak_id):bouton_block_invisible($tweak_id)) . $outil['nom'] . '</p>';
+	$p .= ($afficher?bouton_block_visible($tweak_id):bouton_block_invisible($tweak_id)) . $outil['nom'] . '</div>';
 
 	$s .= propre($p) . "</div></form>";
 

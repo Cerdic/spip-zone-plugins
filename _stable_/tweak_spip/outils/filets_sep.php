@@ -8,7 +8,7 @@
 *	Toutes les infos sur : http://www.spip-contrib.net/?article1564
 */
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function filets_sep_installe() {
 //cout_log('chatons_installe()');
 	$path = dirname(find_in_path('img/filets/test'));
@@ -29,7 +29,7 @@ function filets_sep_installe() {
 	ecrire_metas();
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function filets_sep_raccourcis() {
