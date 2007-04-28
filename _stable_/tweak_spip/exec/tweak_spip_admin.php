@@ -359,7 +359,7 @@ function ligne_tweak($outil, &$js, $afficher){
 		if (find_in_path('outils/'.($temp=$tweak_id.'.php'))) $a[] = $temp;
 		if (find_in_path('outils/'.($temp=$tweak_id.'_options.php'))) $a[] = $temp;
 		if (find_in_path('outils/'.($temp=$tweak_id.'_fonctions.php'))) $a[] = $temp;
-		foreach ($outil as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) $a[] = $pipe2;
+		foreach ($outil as $pipe=>$fonc) if (is_pipeline_outil($pipe, $pipe2)) $a[] = $pipe2;
 		if (find_in_path('outils/'.($temp=$tweak_id.'.js'))) $a[] = $temp;
 		if (find_in_path('outils/'.($temp=$tweak_id.'.css'))) $a[] = $temp;
 		$s .= join(' | ', $a);

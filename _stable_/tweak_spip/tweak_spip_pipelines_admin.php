@@ -1,19 +1,6 @@
 <?php
-include_spip('tweak_spip_init');
-/*
-function tweak_spip_affiche_droite($flux){
-	return tweak_pipeline('affiche_droite', $flux);
-}
-function tweak_spip_affiche_gauche($flux){
-	return tweak_pipeline('affiche_gauche', $flux);
-}
-function tweak_spip_affiche_milieu($flux){
-	return tweak_pipeline('affiche_milieu', $flux);
-}
-function tweak_spip_ajouter_boutons($flux){
-	return tweak_pipeline('ajouter_boutons', $flux);
-}
-*/
+include_spip('cout_lancement');
+
 function tweak_spip_ajouter_onglets($flux){
 	// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) 
@@ -21,14 +8,7 @@ function tweak_spip_ajouter_onglets($flux){
 			$flux['data']['tweak_spip']= new Bouton(find_in_path('img/couteau-24.gif'), _T('cout:titre'), generer_url_ecrire("tweak_spip_admin"));
 	return $flux;
 }
-/*
-function tweak_spip_body_prive($flux){
-	return tweak_pipeline('body_prive', $flux);
-}
-function tweak_spip_exec_init($flux){
-	return tweak_pipeline('exec_init', $flux);
-}
-*/
+
 function tweak_spip_header_prive($flux){
 	global $cout_metas_pipelines;
 	if (isset($cout_metas_pipelines['header_prive']))

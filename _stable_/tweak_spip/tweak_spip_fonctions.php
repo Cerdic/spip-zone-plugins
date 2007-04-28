@@ -3,7 +3,7 @@
 	global $cout_metas_pipelines;
 
 	// fonctions indispensables a l'execution
-	// include_spip('tweak_spip_init');
+	// include_spip('cout_lancement');
 	cout_log("appel de mes_fonctions : strlen=" . strlen($cout_metas_pipelines['fonctions']));
 
 	// inclusion des fonctions pre-compilees

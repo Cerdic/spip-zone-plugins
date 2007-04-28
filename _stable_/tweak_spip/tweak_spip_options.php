@@ -14,7 +14,7 @@
 		spip_log('TWEAKS. appel de mes_options (début) : strlen=' . strlen($cout_metas_pipelines['options']));
 	}
 	// fonctions indispensables a l'execution
-	include_spip('tweak_spip_init');
+	include_spip('cout_lancement');
 	cout_log("appel de mes_options (suite) : strlen=".strlen($cout_metas_pipelines['options']));
 
 	// inclusion des options pre-compilees, si l'on n'est jamais passé par ici...

@@ -1,5 +1,5 @@
 <?php
-include_spip('tweak_spip_init');
+include_spip('cout_lancement');
 
 function tweak_spip_affichage_final($flux){
 	global $cout_metas_pipelines;

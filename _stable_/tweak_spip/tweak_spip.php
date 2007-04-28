@@ -138,13 +138,13 @@ cout_log(" -- fichier_dest = $fichier_dest");
 }
 
 // est-ce que $pipe est un pipeline ?
-function is_tweak_pipeline($pipe, &$set_pipe) {
+function is_pipeline_outil($pipe, &$set_pipe) {
 	if ($ok = preg_match(',^pipeline:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
 	return $ok;
 }
 
 // est-ce que $traitement est un traitement ?
-function is_tweak_traitements($traitement, $fonction, &$set_traitements_utilises) {
+function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises) {
 	if ($ok = preg_match(',^traitement:([A-Z]+):(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t))
 		$set_traitements_utilises[$t[1]][$t[3]][$t[2]][] = $fonction;
 	return $ok;
@@ -232,14 +232,14 @@ function tweak_initialise_includes() {
 		if ($outil['actif']) {
 			$inc = $outil['id']; $pipe2 = '';
 			foreach ($outil as $pipe=>$fonc) {
-				if (is_tweak_pipeline($pipe, $pipe2)) {
+				if (is_pipeline_outil($pipe, $pipe2)) {
 					// module a inclure
 					$tweaks_pipelines[$pipe2]['inclure'][] = $inc;
 					// fonction a appeler
 					$tweaks_pipelines[$pipe2]['fonction'][] = $fonc;
 					// liste des pipelines utilises
 					if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
-				} elseif (is_tweak_traitements($pipe, $fonc, $traitements_utilises)) {
+				} elseif (is_traitements_outil($pipe, $fonc, $traitements_utilises)) {
 					// bah rien a faire du coup... $traitements_utilises est deja rempli
 				}
 			}

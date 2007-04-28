@@ -15,21 +15,21 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	$path = dirname(find_in_path(($GLOBALS['spip_version']<1.92?"img_pack/":"images/").$img));
 	list(,,,$size) = @getimagesize("$path/$img");
 	$haut = "<img class=\"no_image_filtrer\" alt=\"$titre\" title=\"$titre\" src=\"".tweak_htmlpath($path)."/$img\" $size/>";
-	$haut = "<a title=\"$titre\" href=\"".self()."#tweak_sommaire\">$haut</a> ";
+	$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\">$haut</a> ";
 	// traitement des titres <h3>
 	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	$p = $page?",&nbsp;p$page":'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
-		$ancre = "\n<a id=\"tweak_sommaire_$index\" name=id=\"tweak_sommaire_$index\"></a>";
+		$ancre = "\n<a id=\"outil_sommaire_$index\" name=id=\"outil_sommaire_$index\"></a>";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
 			$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($regs[2][$i]));
 			$texte = substr($texte, 0, $pos2) . $ancre . $regs[1][$i] . $haut . $titre . substr($texte, $pos2 + strlen($regs[1][$i]) + strlen($regs[2][$i]));
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			$lien = couper($regs[2][$i], _sommaire_NB_CARACTERES);
 			$titre = htmlentities(textebrut(couper($regs[2][$i], 100)));
-			$sommaire .= "<li><a $st title=\"$titre\" href=\"".parametre_url(self(),'artpage', $page)."#tweak_sommaire_$index\">$lien</a>$p</li>";
+			$sommaire .= "<li><a $st title=\"$titre\" href=\"".parametre_url(self(),'artpage', $page)."#outil_sommaire_$index\">$lien</a>$p</li>";
 		}
 	}
 	return $sommaire;
@@ -62,7 +62,7 @@ function sommaire_d_article_rempl($texte) {
 	}
 
 
-$sommaire='<a name="tweak_sommaire" id="tweak_sommaire"></a><div id="tweak_sommaire" style="
+$sommaire='<a name="outil_sommaire" id="outil_sommaire"></a><div id="outil_sommaire" style="
 '.$fond.'
 display:block;
 float:right;

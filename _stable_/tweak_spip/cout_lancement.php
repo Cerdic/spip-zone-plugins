@@ -7,11 +7,11 @@
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions utilisees pendant  #
 #  l'execution du plugin                              #
-#  Seulement s'il y a lieu, tweak_spip_init.php       #
+#  Seulement s'il y a lieu, cout_lancement.php       #
 #  va inclure tweak_spip.php                          #
 #-----------------------------------------------------#
 
-cout_log("Chargement de tweak_spip_init.php");
+cout_log("Chargement de cout_lancement.php");
 
 // si l'outil 'log_couteau_suisse' est actif, on logue dans tmp/spip.log
 function cout_log($variable, $prefixe='') {

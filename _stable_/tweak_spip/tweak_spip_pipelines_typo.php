@@ -1,5 +1,5 @@
 <?php
-include_spip('tweak_spip_init');
+include_spip('cout_lancement');
 
 function tweak_spip_nettoyer_raccourcis_typo($flux){
 	global $cout_metas_pipelines;
