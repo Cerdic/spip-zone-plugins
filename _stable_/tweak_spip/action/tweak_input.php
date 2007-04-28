@@ -42,7 +42,7 @@ cout_log($metas_vars, 'metas_vars :');
 		// et on modifie les metas !
 		$metas_vars[$var] = $final;
 cout_log(" -- outil $index ($outil) : %$var% prend la valeur '$final'");
-		spip_log("Tweak $index. Modification d'une variable par l'auteur id=$connect_id_auteur : %$var% = $final");
+		spip_log("Outil du Couteau Suisse n°$index. Modification d'une variable par l'auteur id=$connect_id_auteur : %$var% = $final");
 	}
 	$serialized = serialize($metas_vars);
 //cout_log($metas_vars, " -- metas_vars = ");

@@ -65,9 +65,10 @@ function tweak_test_fun(&$textes, $fonction) {
 }
 
 // affiche un cadre de titre $titre base sur les donnees de $array
-function tweak_array($array, $titre) {
+function test_outil($array, $titre) {
+	global $icone;
 	static $i;
-	debut_cadre_trait_couleur('administration-24.gif','','',++$i.". $titre");
+	debut_cadre_trait_couleur($icone,'','',++$i.". $titre");
 	foreach($array as $s=>$v) if(is_array($v))
 			foreach($v as $s2=>$v2) echo "\n<strong>{$s}[$s2]</strong> = ".trim($v2)."<br />";
 		else echo "\n<strong>$s</strong> = ".trim($v)."<br />";
@@ -79,24 +80,27 @@ function tweak_red($s){ return "<span style='color:red;'>$s</span>"; }
 
 // effectue tous les tests !
 function tweak_les_tests() {
-	tweak_array($_SERVER, 'Echo de : $_SERVER[]');
-	tweak_array($_ENV, 'Echo de : $_ENV[]');
+	global $icone;
+	$icone = find_in_path('img/couteau-24.gif');
+
+	test_outil($_SERVER, 'Echo de : $_SERVER[]');
+	test_outil($_ENV, 'Echo de : $_ENV[]');
 	global $HTTP_ENV_VARS;
-	tweak_array($HTTP_ENV_VARS, 'Echo de : $HTTP_ENV_VARS');
+	test_outil($HTTP_ENV_VARS, 'Echo de : $HTTP_ENV_VARS');
 	$a = array('DOCUMENT_ROOT'=>getenv('DOCUMENT_ROOT'), 
 			'REQUEST_URI'=>getenv('REQUEST_URI'), 
 			'SCRIPT_NAME'=>getenv('SCRIPT_NAME'),
 			'PHP_SELF'=>getenv('PHP_SELF'),
 		);
-	tweak_array($a, 'Echo de : getenv()');
+	test_outil($a, 'Echo de : getenv()');
 	
 	// lecture des variables stockees en meta
 	include_spip('inc/meta');
 	lire_metas();
 	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
-	tweak_array($metas_tweaks, 'Tweaks actifs : $metas_tweaks[]');
-	tweak_array($metas_vars, 'Contenu des variables : $metas_vars[]');
+	test_outil($metas_tweaks, 'Outils actifs : $metas_tweaks[]');
+	test_outil($metas_vars, 'Contenu des variables : $metas_vars[]');
 
 
 	// test de tweak_htmlpath()
@@ -123,7 +127,7 @@ function tweak_les_tests() {
 			'$dir'=>$dir,
 			"tweak_canonicalize('$dir'.'/'.'$relative_path')"=>tweak_red(tweak_canonicalize($dir.'/'.$relative_path)),
 		);
-	tweak_array($a, 'Test sur : tweak_htmlpath()');
+	test_outil($a, 'Test sur : tweak_htmlpath()');
 
 	// test de tweak_canonicalize()
 	$dir = $dir.'/'.$relative_path;
@@ -139,7 +143,7 @@ function tweak_les_tests() {
 			'array_spliced()'=>$address2, 
 			'$resultat'=>tweak_red($address3), 
 		);
-	tweak_array($a, 'Test sur : tweak_canonicalize()');
+	test_outil($a, 'Test sur : tweak_canonicalize()');
 
 	// test de typo_exposants()
 	$textes = array(
@@ -153,7 +157,7 @@ function tweak_les_tests() {
 		"3 ou 4 m², 3 ou 4 m2 et 2 m3.",
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
 	);
-	tweak_array(tweak_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants()');
+	test_outil(tweak_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants()');
 
 	// test de typo_guillemets()
 	$textes = array(
@@ -162,7 +166,7 @@ function tweak_les_tests() {
 		'avant '.echappe_html('<script>toto</script>', 'TEST', true).'apres le "test"!',
 		'avant '.echappe_html('<code class="code">toto</code>', 'TEST', true).'apres le "test"!',
 	);
-	tweak_array(tweak_test_fun($textes, 'typo_guillemets'), 'Test sur : typo_guillemets()');
+	test_outil(tweak_test_fun($textes, 'typo_guillemets'), 'Test sur : typo_guillemets()');
 	
 	// test des smileys
 	$textes = array(
@@ -170,14 +174,14 @@ function tweak_les_tests() {
 		"Simples : :-> :-&gt; :-( :-D :-) |-) :'-) :’-) :'-D :’-D :'-( :’-( :-( :o) B-) ;-) :-p :-P' :-| :-/ :-o :-O",
 		"les courts (reconnus s'il y a un espace avant) : :) :( ;) :| |) :/ :(",
 	);
-	tweak_array(tweak_test_fun($textes, 'tweak_smileys_pre_typo'), 'Test sur : tweak_smileys_pre_typo()');
+	test_outil(tweak_test_fun($textes, 'tweak_smileys_pre_typo'), 'Test sur : tweak_smileys_pre_typo()');
 
 	// test des filets
 	$textes = array(
 		"__degrade.png__\n__ornement.png__",
 		"\n__6__\n__5__\n__4__\n__3__\n__2__\n__1__\n__0__\n",
 	);
-	tweak_array(tweak_test_fun($textes, 'filets_sep'), 'Test sur : filets_sep()');
+	test_outil(tweak_test_fun($textes, 'filets_sep'), 'Test sur : filets_sep()');
 
 	// test des liens orphelins
 	$GLOBALS["liens_orphelins_etendu"]=true;
@@ -200,8 +204,8 @@ function tweak_les_tests() {
 		'une image ? <img src="http://mailer.e-flux.com/mail_images/toto.jpg" alt="" />',
 		'[<img src="http://mailer.e-flux.com/mail_images/toto.jpg" alt="" />->http://www.americas-society.org/] ',
 	);
-//	tweak_array(tweak_test_fun($textes, 'typo'), 'Test sur : echappements');
-	tweak_array(tweak_test_fun($textes, 'liens_orphelins'), 'Test sur : liens_orphelins()');
+//	test_outil(tweak_test_fun($textes, 'typo'), 'Test sur : echappements');
+	test_outil(tweak_test_fun($textes, 'liens_orphelins'), 'Test sur : liens_orphelins()');
 
 /*	
 define('_COULEURS_FONDS', 1); define('_COULEURS_SET', 1);

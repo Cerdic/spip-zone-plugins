@@ -119,7 +119,7 @@ function set_cout_metas_pipelines_fichier($tweaks_pipelines, $type) {
 cout_log("set_cout_metas_pipelines_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "mes_$type.php";
 cout_log(" -- fichier_dest = $fichier_dest");
-	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin Tweak-SPIP\n++\$GLOBALS['tweak_$type'];\n$code?".'>');
+	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n++\$GLOBALS['tweak_$type'];\n$code?".'>');
 }
 
 // installation de $cout_metas_pipelines
@@ -134,7 +134,7 @@ function set_cout_metas_pipelines_pipeline($tweaks_pipelines, $pipeline) {
 cout_log("set_cout_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "$pipeline.php";
 cout_log(" -- fichier_dest = $fichier_dest");
-	ecrire_fichier($fichier_dest, '<'."?php\n// Code de contrôle pour le plugin Tweak-SPIP\n$code?".'>');
+	ecrire_fichier($fichier_dest, '<'."?php\n// Code de contrôle pour le plugin 'Couteau Suisse'\n$code?".'>');
 }
 
 // est-ce que $pipe est un pipeline ?
@@ -210,11 +210,11 @@ function tweak_sauve_configuration() {
 	foreach($metas_vars as $i => $v) {
 		if($i!='_chaines' && $i!='_nombres') $metas[] = "\n".chr(9)."'$i' => " . tweak_php_format($v, in_array($i, $metas_vars['_chaines']));
 	}
-	$sauve = "// Tweaks actifs\n\$outils = array('\n" . chr(9) . join("',\n".chr(9)."'", $actifs) . "'\n);\n";
+	$sauve = "// Outils actifs\n\$outils = array('\n" . chr(9) . join("',\n".chr(9)."'", $actifs) . "'\n);\n";
 	$sauve .= "\n// Variables actives\n\$variables = array('\n" . chr(9)  . join("',\n".chr(9)."'", $variables) . "'\n);\n";
 	$sauve .= "\n// Valeurs validees en metas\n\$valeurs = array(" . join(', ', $metas) . "\n);\n";
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "config.php";
-	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin Tweak-SPIP\n\n$sauve?".'>');
+	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
 }
 
 // cree un tableau $tweaks_pipelines et initialise $cout_metas_pipelines

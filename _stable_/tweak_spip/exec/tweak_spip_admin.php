@@ -106,7 +106,7 @@ EOF;
 	echo "</style>";
 	echo "<script type=\"text/javascript\"><!--
 
-var Tweaks = new Array(); // Listes des outils
+var Outils = new Array(); // Listes des outils
 
 function submit_general(tweak) {
 	document.forms.submitform.afficher_tweak.value = tweak;
@@ -114,7 +114,7 @@ function submit_general(tweak) {
 }
 
 function tweakcheck(ischecked, index) {
- tweak = Tweaks[index][0];
+ tweak = Outils[index][0];
  if(ischecked == true) {
  	classe = 'nomtweak_on';
 	html = '-input';
@@ -127,7 +127,7 @@ function tweakcheck(ischecked, index) {
  document.getElementById(tweak).className = classe;
  document.getElementById('tweak_'+tweak).value = test;
 
- if (Tweaks[index][1]>0) {
+ if (Outils[index][1]>0) {
   var chaine=document.getElementById('tweak'+index+html).innerHTML;
   if(html=='-input') chaine=chaine.replace(/HIDDENTWEAKVAR__/g,'');
   document.getElementById('tweak'+index+'-visible').innerHTML = chaine;
@@ -136,7 +136,7 @@ function tweakcheck(ischecked, index) {
 
 function tweakcateg(categ, lestweaks, count) {
  for(tk=0;tk<count;tk++) {
- 	name = Tweaks[lestweaks[tk]][0];
+ 	name = Outils[lestweaks[tk]][0];
 	if (!document.getElementsByName('foo_'+name)[0].disabled) {
 		document.getElementsByName('foo_'+name)[0].checked = this.checked;
 		tweakcheck(this.checked, lestweaks[tk]);
@@ -338,7 +338,7 @@ function ligne_tweak($outil, &$js, $afficher){
 	$p .= $erreur_version?" disabled='disabled'":"";
 	$p .= " onclick='tweakchange.apply(this,[$index])'";
 	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('cout:activer_outil')."</label>";
-	$js .= "Tweaks[$index] = Array(\"$inc\", $nb_var);\n";
+	$js .= "Outils[$index] = Array(\"$inc\", $nb_var);\n";
 	$p .= ($afficher?bouton_block_visible($tweak_id):bouton_block_invisible($tweak_id)) . $outil['nom'] . '</div>';
 
 	$s .= propre($p) . "</div></form>";

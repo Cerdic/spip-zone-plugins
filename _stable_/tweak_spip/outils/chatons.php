@@ -1,7 +1,7 @@
 <?php
 
-// Tweak CHATONS - 30 janvier 2007
-// refonte : Patrice Vanneufville
+// Outils CHATONS - 30 janvier 2007
+// Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville
 // Toutes les infos sur : http://www.spip-contrib.net/?article1554
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite

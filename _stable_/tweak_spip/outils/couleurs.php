@@ -10,11 +10,11 @@
 */
 /*
  *   +----------------------------------+
- *    Nom du Tweak : Couleurs dans vos textes
+ *    Nom de l'outil : Couleurs dans vos textes
  *   +----------------------------------+
  *    Date : Vendredi 11 août 2003
  *    Idee originale :  Aurelien PIERARD : aurelien.pierard(a)dsaf.pm.gouv.fr
- *    Serieuse refonte et integration en outil : Patrice Vanneufville, mars 2007
+ *    Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville, mars 2007
  *   +-------------------------------------+
  *  
 */

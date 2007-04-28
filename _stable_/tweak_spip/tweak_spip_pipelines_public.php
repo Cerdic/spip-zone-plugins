@@ -13,8 +13,8 @@ function tweak_spip_insert_head($flux){
 	if (isset($cout_metas_pipelines['insert_head']))
 		eval($cout_metas_pipelines['insert_head']);
 	if (isset($cout_metas_pipelines['header']))
-		$flux .=  "\n<!-- Debut header Tweak-SPIP -->\n" . join("\n", $cout_metas_pipelines['header']) . "<!-- Fin header Tweak-SPIP -->\n\n";
-		else $flux .=  "\n<!-- Rien pour Tweak-SPIP -->\n";
+		$flux .=  "\n<!-- Debut header du Couteau Suisse -->\n" . join("\n", $cout_metas_pipelines['header']) . "<!-- Fin header du Couteau Suisse -->\n\n";
+		else $flux .=  "\n<!-- Rien pour le Couteau Suisse -->\n";
 	return $flux;
 }
 /*

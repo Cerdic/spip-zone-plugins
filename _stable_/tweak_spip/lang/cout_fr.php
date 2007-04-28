@@ -33,13 +33,13 @@ $temp['note'] = "<sup>(*)</sup>";
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Le Couteau Suisse',
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
-		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>"
+		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Le&nbsp;Couteau&nbsp;Suisse'.</p>"
 		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p>" . $temp['reset'],
 	'raccourcis' => "Raccourcis typographiques actifs&nbsp;:",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
 	'nb_outil' => '@pipe@ : @nb@ outil',
 	'nb_outils' => '@pipe@ : @nb@ outils',
-	'titre_tests' => 'Couteau Suisse - Page de tests',
+	'titre_tests' => 'Le Couteau Suisse - Page de tests&hellip;',
 	'actif' => 'Outil actif',
 	'inactif' => 'Outil inactif',
 	'actifs' => 'Outils actifs :',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'variable_vide' => '(Vide)',
 	'info_outil' => 'Outil :',
 	'liste_outils' => 'Liste des outils',
-	'presente_tweaks' => "Cette page liste les fonctionnalit&eacute;s disponibles. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette ou avec d'autres plugins.",
+	'presente_tweaks' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
 	'erreur:nom' => 'Erreur !',
 	'erreur:description' => "id manquant dans la d&eacute;finition de l'outil !",
 	'erreur:version' => 'indisponible dans cette version de SPIP.',

@@ -1,9 +1,9 @@
 <?php
 /*
 *	+----------------------------------+
-*	Nom du Tweak : Filets de Separation
+*	Nom de l'outil : Filets de Separation
 *	Idee originale : FredoMkb
-*	Serieuse refonte : Patrice Vanneufville
+*	Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville
 *	+-------------------------------------+
 *	Toutes les infos sur : http://www.spip-contrib.net/?article1564
 */
