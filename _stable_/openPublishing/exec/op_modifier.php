@@ -120,7 +120,7 @@ function exec_op_modifier() {
 	
 	if (op_verifier_base())
 	{
-    		barre_onglets("op", "modifier");
+    		echo barre_onglets("op", "modifier");
 	}
 
 	debut_gauche();

@@ -42,8 +42,8 @@ function exec_op_effacer() {
 	
 	if (op_verifier_base())
 	{
-    barre_onglets("op", "effacer");
-    } 
+    		echo barre_onglets("op", "effacer");
+	} 
 	
 	
 	

@@ -42,7 +42,7 @@ function exec_op() {
 
 	if (op_verifier_base())
 	{
-    		barre_onglets("op", "voir");
+    		echo barre_onglets("op", "voir");
    	} 
 
 	debut_gauche();
@@ -57,7 +57,7 @@ function exec_op() {
 	
 	debut_droite();
 
-	debut_cadre_enfonce("racine-site-24.gif", false, "", bouton_block_invisible('op_general')._T('opconfig:op_configuration_voir_general'));
+	debut_cadre_enfonce("racine-site-24.gif", false, "", _T('opconfig:op_configuration_voir_general'));
 	if (op_verifier_base()) {
         	echo _T('opconfig:op_info_base_ok');
 	} 
@@ -69,15 +69,14 @@ function exec_op() {
 		echo '</form></div>';
 	}
 	
-	echo debut_block_invisible('op_general');
-		if (op_verifier_base()) {       
-			op_liste_config();
-		} 
-		else {
-			echo '<p />';
+	if (op_verifier_base()) {
+		op_liste_config();
+	}
+	else {
+		echo '<p />';
         	echo _T("opconfig:op_info_base_ko_bis");
-		}
-	echo fin_block();
+	}
+
 	fin_cadre_enfonce();
 
 	fin_page();

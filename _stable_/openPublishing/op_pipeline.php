@@ -1,4 +1,5 @@
 <?php
+
 function op_ajouterBouton($boutons_admin) {
 	// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
@@ -13,11 +14,11 @@ function op_ajouterOnglets($flux) {
   if($flux['args']=='op')
 	{
 	$flux['data']['voir']= new Bouton(null, 'Voir la configuration',
-											  generer_url_ecrire("op"));
+								  generer_url_ecrire("op"));
 	$flux['data']['modifier']= new Bouton(null, 'Modifier la configuration',
-											  generer_url_ecrire("op_modifier","action=creer"));
+								  generer_url_ecrire("op_modifier","action=creer"));
 	$flux['data']['effacer']= new Bouton(null, 'Supprimer Open-Publishing',
-											  generer_url_ecrire("op_effacer"));
+								  generer_url_ecrire("op_effacer"));
 	}
 	return $flux;
 }
@@ -27,4 +28,5 @@ function op_headerPrive($texte) {
 	$texte.= '<link rel="stylesheet" type="text/css" href="' . (_DIR_PLUGINS.end($p)) . '/css/op.css" />' . "\n";
 	return $texte;
 }
+
 ?> 
