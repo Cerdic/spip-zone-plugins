@@ -5,8 +5,6 @@ function noisetier_gestion_zone ($zone) {
 
 	if (isset($theme_zones[$zone]['insere_avant']))
 		echo $theme_zones[$zone]['insere_avant'];
-	else
-		echo "<div style='width:100%'>";
 
 	debut_cadre_formulaire();
 
@@ -15,10 +13,9 @@ function noisetier_gestion_zone ($zone) {
 	fin_cadre_formulaire();
 	echo '<br />';
 
-		if (isset($theme_zones[$zone]['insere_apres']))
+	if (isset($theme_zones[$zone]['insere_apres']))
 		echo $theme_zones[$zone]['insere_apres'];
-	else
-		echo "</div>";
+
 
 }
 
