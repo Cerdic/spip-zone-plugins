@@ -89,7 +89,7 @@ include_spip('base/abstract_sql');
 	}
 
 	function op_get_url_retour() {
-     		$row = spip_fetch_array(spip_abstract_select('lien_retour_abandon', 'spip_op_config', "id_config=1 LIMIT 1"));
+     		$row = spip_fetch_array(spip_abstract_select('lien_retour', 'spip_op_config', "id_config=1 LIMIT 1"));
  		return $row['lien_retour'];
 	}
 
