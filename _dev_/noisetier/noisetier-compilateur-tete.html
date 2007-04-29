@@ -8,7 +8,9 @@
 	</BOUCLE_entetes_noisettes>
 </BOUCLE_noisettes_avec_entete>
 [(#REM) Inclusion des noisettes d'en-têtes]
-<BOUCLE_noisettes(NOISETTES){page IN #ENV{page},'toutes'}{zone=head}{exclue != #ENV{page}}{actif=oui}{par position}>
+#SET{selection_page,#ENV{page}|noisetier_selection_page}
+#SET{selection_exclue,#ENV{page}|noisetier_selection_exclue}
+<BOUCLE_noisettes(NOISETTES){page==#GET{selection_page}}{exclue!==#GET{selection_exclue}}{zone=head}{actif=oui}{par position}>
 [(#TYPE|=={'noisette'}|?{' ',''})
 	[(#INCLURE_NOISETTE|{fond=noisettes/#FOND}{id_noisette=#ID_NOISETTE})]
 ]

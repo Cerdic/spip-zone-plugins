@@ -1,5 +1,7 @@
-#CACHE{86400}
-<BOUCLE_noisettes(NOISETTES){page IN #ENV{page},'toutes'}{zone=#ENV{zone}}{exclue != #ENV{page}}{actif=oui}{par position}>
+#CACHE{0}
+#SET{selection_page,#ENV{page}|noisetier_selection_page}
+#SET{selection_exclue,#ENV{page}|noisetier_selection_exclue}
+<BOUCLE_noisettes(NOISETTES){page==#GET{selection_page}}{exclue!==#GET{selection_exclue}}{zone=#ENV{zone}}{actif=oui}{par position}>
 [(#TYPE|=={'noisette'}|?{' ',''})
 	[(#INCLURE_NOISETTE|{fond=noisettes/#FOND}{id_noisette=#ID_NOISETTE})]
 ]
