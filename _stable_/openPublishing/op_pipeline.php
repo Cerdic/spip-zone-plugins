@@ -4,7 +4,7 @@ function op_ajouterBouton($boutons_admin) {
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
     // on voit le bouton dans la barre "naviguer"
 	    $boutons_admin['configuration']->sousmenu['op']= new Bouton(
-		    '../'._DIR_PLUGINS.'OpenPublishing/images/opconfig-24.gif', _T('Configurer Open-Publishing'));
+		    '../'._DIR_PLUGINS.'openPublishing/images/opconfig-24.gif', _T('Configurer openPublishing'));
 	}
 	return $boutons_admin;
 }
