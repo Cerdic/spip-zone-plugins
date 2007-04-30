@@ -182,7 +182,7 @@ function op_cadre_rubrique() {
 	$rubrique_array = get_rubriques_op();
 
 	if (count($rubrique_array) > 0 ) {
-		echo 'liste des rubriques open-publishing : <br />';
+		echo 'liste des rubriques openPublishing : <br />';
 		echo '<table border="1" cellpadding="2">';
 		while ($row = spip_fetch_array($rubrique_array)) {
 			echo '<tr><td>' . $row['op_rubrique'] . '</td><td><input type="submit" name="sup_rubrique_' . $row['op_rubrique'] . '" value="X" /></td></tr>';
@@ -190,7 +190,7 @@ function op_cadre_rubrique() {
 		echo '</table>';
 	}
 	else {
-		echo 'vous n\'avez pas encore de rubriques open-publishing ... <br />';
+		echo 'vous n\'avez pas encore de rubriques openPublishing ... <br />';
 	}
 	echo '<br />';
 	echo '<input type="text" name="num_rubrique_ajout" size="3" />&nbsp;';

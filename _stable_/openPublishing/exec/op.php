@@ -65,7 +65,7 @@ function exec_op() {
         	echo _T("opconfig:op_info_base_ko");
 		echo '<p /><div align="center">';
 		echo '<form method="post" action="'.generer_url_ecrire('op',"action=install").'">';
-		echo '<input type="submit" name="appliq" value="Installer les tables Open-publishing" />';
+		echo '<input type="submit" name="appliq" value="Installer les tables openPublishing" />';
 		echo '</form></div>';
 	}
 	

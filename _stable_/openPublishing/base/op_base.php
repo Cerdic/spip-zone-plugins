@@ -4,7 +4,7 @@
 
 /* Les tables du plugin openPublishing
 
-spip-op-rubriques : contient les numéros des rubriques open-publishing
+spip-op-rubriques : contient les numéros des rubriques openPublishing
 - op_rubrique
 
 spip-op-config : contient les options de configuration
@@ -15,7 +15,7 @@ spip-op-config : contient les options de configuration
 - rubrique-agenda : numéro de la rubrique agenda
 - lien-retour : adresse de la page de retour
 - lien-retour-abandon : adresse de la page de retour en cas d'abandon
-- id-auteur-op : numéro id de l'auteur open-publishing
+- id-auteur-op : numéro id de l'auteur openPublishing
 - message-retour : message affiché lors du retour
 - message-retour-abandon : message affiché lors de l'abandon
 - version : numéro de version du plugin
