@@ -1,5 +1,9 @@
 <?php
 
+// * Acces restreint, plugin pour SPIP * //
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	function AccesRestreint_cree_zone(){
 		$titre = addslashes(_request('titre'));
 		$descriptif = addslashes(_request('descriptif'));

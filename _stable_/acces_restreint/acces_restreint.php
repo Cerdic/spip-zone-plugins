@@ -1,4 +1,9 @@
 <?php
+
+// * Acces restreint, plugin pour SPIP * //
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/acces_restreint');
 
 // {tout_voir}

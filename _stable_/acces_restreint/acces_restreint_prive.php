@@ -1,5 +1,10 @@
 <?php
 
+// * Acces restreint, plugin pour SPIP * //
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
 function AccesRestreint_body_prive($flux) {
 	$exec = _request('exec');
 

@@ -1,5 +1,9 @@
 <?php
-//
+
+// * Acces restreint, plugin pour SPIP * //
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Les tables : 
 // 1 table descriptive des zones d'acces
 // 2 tables de liens zones<->auteurs et  zones<->rubriques

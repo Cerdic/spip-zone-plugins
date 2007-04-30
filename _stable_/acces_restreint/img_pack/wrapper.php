@@ -1,5 +1,9 @@
 <?php
 
+// * Acces restreint, plugin pour SPIP * //
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	// wrapper image pour scintillement MSIE, cf.
 	// http://www.ultra-fluide.com/ressources/css/css-hacks.htm#scintillement
 	if (!isset($_GET['file'])
