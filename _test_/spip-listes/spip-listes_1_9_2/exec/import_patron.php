@@ -38,7 +38,6 @@ function exec_import_patron(){
 	$lang = (isset($changer_lang)) ? $changer_lang : $GLOBALS['spip_lang'] ; 
 
 	$nomsite=lire_meta("nom_site"); 
-	$urlsite=lire_meta("adresse_site");
 	$message_texte ='';
 
 	include_spip('public/assembler');
@@ -63,7 +62,6 @@ function exec_import_patron(){
 		$message_erreur = _T('spiplistes:patron_erreur');
 	
 	$nomsite=lire_meta("nom_site");
-	$urlsite=lire_meta("adresse_site");
 	$charset = lire_meta('charset');
 	
 	echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n";
@@ -83,7 +81,7 @@ function exec_import_patron(){
 	echo "</form>";
 	echo "</div>";
 	echo "<div style='text-align:left;margin-right:250px;border-right:2px outset #000000'>";
-	echo liens_absolus($texte_patron,$urlsite).$message_erreur;
+	echo liens_absolus($texte_patron).$message_erreur;
 	
 	$contexte_pied = array('lang'=>$lang);
 	$texte_pied = recuperer_fond('modeles/piedmail', $contexte_pied);

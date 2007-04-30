@@ -395,8 +395,7 @@ function spiplistes_propre($texte){
 	$texte = propre($texte); // pb: enleve aussi <style>...  
 	$texte = propre_bloog($texte); //nettoyer les spip class truc en trop
 	$texte = ereg_replace("__STYLE__", $style_str, $texte);
-	$urlsite=lire_meta("adresse_site");
-	$texte = liens_absolus($texte,$urlsite);
+	$texte = liens_absolus($texte);
 	
 	return $texte;
 }
