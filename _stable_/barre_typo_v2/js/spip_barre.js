@@ -28,9 +28,6 @@ function toggle_preview() {
 	}
 }
 
-function preview_off() {
-}
-
 // Check for Browser & Platform for PC & IE specific bits
 // More details from: http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
@@ -151,28 +148,30 @@ function barre_search(chercher,rec_entier, rec_case, champ) {
 }
 
 function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier, champ) {
-	
 	var condition = "";
+	var selTop = champ.scrollTop;
 // les parametres (casse + global)
 	if (rec_tout == true) {
- condition = condition + "g";
+		condition = condition + "g";
 	} 
 	if (rec_case == false) {
- condition = condition + "i";
+		condition = condition + "i";
 	} 
 	if (rec_entier == true) {
- chercher = chercher + " ";
-  remplacer = remplacer + " ";
+		chercher = chercher + " ";
+		remplacer = remplacer + " ";
 	} 
 	var re = new RegExp(chercher, condition);
-
-  champ.value = champ.value.replace(re, remplacer);
-/*   mozWrap(txtarea, debut, fin); */
+	champ.value = champ.value.replace(re, remplacer);
+	champ.scrollTop = selTop;
+	champ.focus();
+	MajPreview();
 }
 
 function barre_2Majuscules(champ) {
 	var oldSelStart = champ.selectionStart;
 	var oldSelEnd = champ.selectionEnd;
+	var selTop = champ.scrollTop;
 	if(oldSelStart == oldSelEnd) {
 		champ.value = champ.value.toUpperCase();
 	} else {
@@ -186,12 +185,15 @@ function barre_2Majuscules(champ) {
 		+champ.value.substring(champ.selectionEnd,champ.value.length);
 	}
 	champ.setSelectionRange(oldSelStart,oldSelEnd);
+	champ.scrollTop = selTop;
 	champ.focus();
+	MajPreview();
 }
 
 function barre_2Minuscules(champ) {
 	var oldSelStart = champ.selectionStart;
 	var oldSelEnd = champ.selectionEnd;
+	var selTop = champ.scrollTop;
 	if(oldSelStart == oldSelEnd) {
 		champ.value = champ.value.toLowerCase();
 	} else {
@@ -205,7 +207,9 @@ function barre_2Minuscules(champ) {
 		+champ.value.substring(champ.selectionEnd,champ.value.length);
 	}
 	champ.setSelectionRange(oldSelStart,oldSelEnd);
+	champ.scrollTop = selTop;
 	champ.focus();
+	MajPreview();
 }
 
 // Shows the help messages in the helpline window
@@ -215,22 +219,22 @@ function helpline(help, champ) {
 
 
 function setCaretToEnd (input) {
-  setSelectionRange(input, input.value.length, input.value.length);
+	setSelectionRange(input, input.value.length, input.value.length);
 }
 
 
 function setSelectionRange(input, selectionStart, selectionEnd) {
-  if (input.setSelectionRange) {
-    input.focus();
-    input.setSelectionRange(selectionStart, selectionEnd);
-  }
-  else if (input.createTextRange) {
-    var range = input.createTextRange();
-    range.collapse(true);
-    range.moveEnd('character', selectionEnd);
-    range.moveStart('character', selectionStart);
-    range.select();
-  }
+	if (input.setSelectionRange) {
+		input.focus();
+		input.setSelectionRange(selectionStart, selectionEnd);
+	}
+	else if (input.createTextRange) {
+		var range = input.createTextRange();
+		range.collapse(true);
+		range.moveEnd('character', selectionEnd);
+		range.moveStart('character', selectionStart);
+		range.select();
+	}
 }
 
 // From http://www.massless.org/mozedit/
@@ -268,26 +272,25 @@ function mozWrap(txtarea, open, close)
 
 // Insert at Claret position. Code from
 // http://www.faqts.com/knowledge_base/view.phtml/aid/1052/fid/130
-     function storeCaret (textEl) {
-       if (textEl.createTextRange) 
-         textEl.caretPos = document.selection.createRange().duplicate();
-     }
+function storeCaret (textEl) {
+	if (textEl.createTextRange) 
+		textEl.caretPos = document.selection.createRange().duplicate();
+}
 
 //insere un tableau courcy michael ec49.org/sitenkit2/
- 	var zone_selection;
- 	function barre_tableau(champs_de_texte, cheminediteur){
- 		zone_selection = champs_de_texte;
-
- 		hauteur=600;
- 		largeur=700;
- 		propriete='scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur;
-		w=window.open(cheminediteur+'?exec=tableau_edit', '',propriete);
- 	}
+var zone_selection;
+function barre_tableau(champs_de_texte, cheminediteur){
+	zone_selection = champs_de_texte;
+	hauteur=600;
+	largeur=700;
+	propriete='scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur;
+	w=window.open(cheminediteur+'?exec=tableau_edit', '',propriete);
+}
 
 // DEB Galerie JPK 
 // idée originale de http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html
-  function barre_galerie(champs_de_texte, cheminediteur) {
+function barre_galerie(champs_de_texte, cheminediteur) {
 	zone_selection = champs_de_texte;
-    window.open(cheminediteur+'?exec=galerie', 'galerie',
-'width=550,height=400,menubar=no,scrollbars=yes,statusbar=yes')
-  }
+	window.open(cheminediteur+'?exec=galerie', 'galerie',
+		'width=550,height=400,menubar=no,scrollbars=yes,statusbar=yes')
+}

@@ -359,19 +359,18 @@ $(document).ready(function(){
 }
 
 // http://doc.spip.org/@afficher_textarea_barre
-function afficher_textarea_barre($texte, $forum=false)
-{
+function afficher_textarea_barre($texte, $forum=false) {
 	global $spip_display, $spip_ecran;
 
 	$rows = ($spip_ecran == "large") ? 28 : 15;
 
 	return (($spip_display == 4) ? '' :
 		afficher_barre('document.formulaire.texte', $forum))
-	. "<textarea name='texte' id='texte' "
-	. $GLOBALS['browser_caret']
-	. " rows='$rows' class='formo' cols='40'>"
-	. entites_html($texte)
-	. "</textarea>\n";
+			. "<textarea name='texte' id='texte' "
+			. $GLOBALS['browser_caret']
+			. " rows='$rows' class='formo' cols='40'>"
+			. entites_html($texte)
+			. "</textarea>\n";
 }
 
 ?>
