@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[fr]Bibliothèque de noisettes complémentaires pour le noisetier</multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cent 20, Joseph Larmarange, Mogwaï - 2007 - 
+	<multi>
+		[fr]Distribu&#233; sous licence GPL
+	</multi>
+	</auteur>
+	<version>0.1</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>
+	[fr] Noisettes complémentaires pour le noisetier. Cette bibliothèque de noisettes est dédiée aux noisettes nécessitant la présence d'autres plugins pour fonctionner, tel que le plugin agenda. Voir la documentation de chaque noisette.
+	</multi>
+	</description>
+	<lien>http://groups.google.com/group/noisetier-dev</lien> <!-- URI de documentation -->
+	<prefix>
+	biblio-noisettes
+	</prefix>
+	<chemin dir='' />
+</plugin>
