@@ -110,6 +110,9 @@ $media=_request('media');
 $agenda=_request('agenda');
 $abandonner=_request('abandonner');
 
+// recuperation url du site
+$url_site = _request('url_site');
+
 // on quitte et renvoie vers le sommaire
 if ($abandonner) {
 
@@ -119,9 +122,6 @@ if ($abandonner) {
 	return $message;
 
 }
-
-// recuperation url du site
-$url_site = _request('url_site');
 
 // on recupere l'id article (sinon on créer un nouveau article à chaque prévisualisation ou ajout de document ...
 $article = intval(stripslashes(_request('article')));
