@@ -56,7 +56,7 @@ _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultado
 	</pipeline>
 	<pipeline>
 		<nom>AccesRestreint_liste_zones_autorisees</nom>
-		<action>AccesRestreint_liste_zones_autorisees</action>
+		<action>liste_zones_autorisees</action>
 	</pipeline>
 	<chemin dir='' />
 </plugin>
