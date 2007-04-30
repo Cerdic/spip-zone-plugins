@@ -1,9 +1,0 @@
-<plugin>
-	<nom>Acc&#232;s &Eacute;largi - 2</nom>
-	<version>1.0</version>
-	<prefix>AE2</prefix>
-	<description>Surcharge permettant aux r&#233;dacteurs du site de mod&#233;rer le forum public de leurs articles</description>
-	<lien></lien> <!-- URI de documentation -->
-	<options>options.php</options>
-	<etat>experimental</etat>
-</plugin>

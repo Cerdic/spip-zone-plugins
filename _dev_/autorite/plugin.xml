@@ -1,0 +1,26 @@
+<plugin>
+	<nom>
+		Autorit&#233;
+	</nom>
+	<auteur>
+		&copy; Fil &amp; James 2007 - Distribué sous licence GNU/LGPL
+	</auteur>
+	<version>
+		  0.1
+	</version>
+	<etat>
+		  dev
+	</etat>
+	<description>
+		Quelques r&#233;glages d'autorisations (ajoutez les v&#244;tres !)
+		<h4><a href="?exec=cfg&cfg=autorite">Configuration</a></h4>
+	</description>
+	<lien>
+		[Documentation un jour sur ->http://www.spip-contrib.net/],
+	</lien>
+	<icon>todo.gif</icon>
+	<prefix>
+		  Autorite
+	</prefix>
+	<necessite id='cfg' />
+</plugin>

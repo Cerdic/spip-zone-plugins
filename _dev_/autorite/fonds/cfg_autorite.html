@@ -1,0 +1,44 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»</h4>
+
+<a href="http://www.spip-contrib.net/" class="spip_out">Documentation (un jour) sur contrib</a>
+
+]
+[(#REM) titre=Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»]
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset>
+<legend>
+	Droits d'&#233;dition
+</legend>
+<p>
+<label><input type="checkbox" name="auteur_mod_article" [checked="(#ENV{auteur_mod_article})"] />
+	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur peut modifier les articles dont il est l'auteur (et, par conséquent, mod&#233;rer le forum associ&#233;).
+</label>
+
+<br />
+
+[(#ENV{auteur_mod_article}|?{'',
+	<label><input type="checkbox" name="auteur_modere_forum" [checked="(#ENV{auteur_modere_forum})"] />
+	<strong>Auteur mod&#232;re forum</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer le forum des articles dont il est l'auteur.
+	</label>
+	<br />
+})]
+
+<label><input type="checkbox" name="auteur_mod_email" [checked="(#ENV{auteur_mod_email})"] />
+	<strong>Auteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
+</label>
+
+
+</p>
+</fieldset>
+
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" />
+<!--
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+-->
+</form>
+

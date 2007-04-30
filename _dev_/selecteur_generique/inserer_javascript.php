@@ -158,7 +158,8 @@ var appliquer_selecteur_cherche_rubrique = function() {
 				.attr('original', inp.attr('value'))
 				.parents('form')
 				.find('input[@name=id_parent]')
-					. attr('value', li.id)
+					.attr('value', li.id)
+					.trigger('change') // auteur_infos a un bind('change')
 				.end();
 			} else {
 				inp.attr('value', inp.attr('original'));
@@ -175,7 +176,7 @@ var appliquer_selecteur_cherche_rubrique = function() {
 // Premier chargement
 jQuery(document).ready(appliquer_selecteur_cherche_rubrique);
 
-// Chargements ajax suivants (pas pertinent pour le selecteur de rubriques dans articles_edit)
+// Chargements ajax suivants (pas pertinent pour le selecteur de rubriques dans articles_edit ou auteur_infos)
 //onAjaxLoad(function(){setTimeout(appliquer_selecteur_cherche_rubrique, 200);});
 
 
@@ -202,6 +203,7 @@ function SelecteurGenerique_inserer_javascript($flux) {
 	}
 
 	if (_request('exec') == 'articles_edit'
+	OR _request('exec') == 'auteur_infos'
 	OR _request('exec') == 'sites_edit') {
 		$js .= SelecteurGenerique_inserer_rubrique();
 	}

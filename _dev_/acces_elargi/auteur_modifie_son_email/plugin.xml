@@ -1,8 +1,0 @@
-<plugin>
-	<nom>Acc&#232;s &Eacute;largi - 3</nom>
-	<version>1.0</version>
-	<prefix>AE3</prefix>
-	<description>Surcharge permettant aux r&#233;dacteurs du site de modifier leur email</description>
-	<lien></lien> <!-- URI de documentation -->
-	<etat>experimental</etat>
-</plugin>
