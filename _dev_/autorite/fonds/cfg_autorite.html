@@ -7,6 +7,7 @@
 [(#REM) titre=Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»]
 #CACHE{0}
 
+
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
 <fieldset>
@@ -14,18 +15,17 @@
 	Droits d'&#233;dition
 </legend>
 <p>
-<label><input type="checkbox" name="auteur_mod_article" [checked="(#ENV{auteur_mod_article})"] />
+<label><input type="checkbox" name="auteur_mod_article" [checked="(#ENV{auteur_mod_article}?{checked})"] />
 	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur peut modifier les articles dont il est l'auteur (et, par conséquent, mod&#233;rer le forum associ&#233;).
 </label>
 
 <br />
 
-[(#ENV{auteur_mod_article}|?{'',
-	<label><input type="checkbox" name="auteur_modere_forum" [checked="(#ENV{auteur_modere_forum})"] />
+<label><input type="checkbox" name="auteur_modere_forum" [checked="(#ENV{auteur_modere_forum}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]
+/>
 	<strong>Auteur mod&#232;re forum</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer le forum des articles dont il est l'auteur.
 	</label>
 	<br />
-})]
 
 <label><input type="checkbox" name="auteur_mod_email" [checked="(#ENV{auteur_mod_email})"] />
 	<strong>Auteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
@@ -34,6 +34,42 @@
 
 </p>
 </fieldset>
+
+
+<fieldset>
+<legend>
+	Espace wiki
+</legend>
+
+<p>
+<label>
+Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire &#233;ditable par tous depuis l'espace public (&#224; condition d'avoir une interface, par exemple les crayons)&nbsp;:
+<select name="espace_wiki">[(#REM) multiple="multiple" size="5", ne marche pas]
+	<option value="0">(aucun)</option>
+	<BOUCLE_r(RUBRIQUES){racine}{par num titre, titre}>
+	<option value="#ID_RUBRIQUE"[(#ENV{espace_wiki}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>#TITRE</option>
+	</BOUCLE_r>
+</select>
+</label>
+
+[(#ENV{espace_wiki}|>{0}|?{
+	<label>
+	Voulez-vous ouvrir ce wiki&nbsp;:
+	<br />
+	<label><input type="checkbox" name="espace_wiki_redacteurs" [checked="(#ENV{espace_wiki_redacteurs}|?{checked})"] /> aux redacteurs du site.
+	</label>
+	<br />
+	<label><input type="checkbox" name="espace_wiki_visiteurs" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> aux visiteurs enregistr&#233;s.
+	</label>
+	<br />
+	<label><input type="checkbox" name="espace_wiki_anonyme" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> &#224; tous les visiteurs du site.
+	</label>
+})]
+
+</p>
+</fieldset>
+
+
 
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" />
 <!--
