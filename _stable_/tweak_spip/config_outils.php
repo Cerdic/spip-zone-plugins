@@ -171,7 +171,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'type_urls',
-	'code:options' => "%%radio_type_urls3%%;%%spip_script%%",
+	'code:options' => "%%radio_type_urls3%%\n%%spip_script%%",
 	'categorie' => 'admin',
 ));
 
@@ -206,13 +206,6 @@ add_outil( array(
 	'version-min' => 1.92,
 ));
 
-/*add_variable( array(
-	'nom' => 'radio_desactive_cache3',
-	'format' => 'nombre',
-	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
-	'defaut' => 0,
-	'code' => "define('_FORUM_OBLIGE_AUTEUR', %s);",
-));*/
 add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'admin',
@@ -274,6 +267,27 @@ add_outil( array(
 	'code:options' => "\$GLOBALS['class_spip']='%%style_p%%';\n\$GLOBALS['class_spip_plus']='%%style_h%%';",
 	'categorie' => 'public',
 	'version-min' => 1.93,
+));
+
+add_variable( array(
+	'nom' => 'admin_travaux',
+	'format' => 'nombre',
+	'radio' => array(0 => 'cout:tous', 1 => 'cout:sauf_admin'),
+	'defaut' => 0,
+	'code' => "define('_en_travaux_ADMIN', %s);",
+));
+add_variable( array(
+	'nom' => 'message_travaux',
+	'format' => 'chaine',
+	'defaut' => "_T('cout:prochainement')",
+	'lignes' => 3,
+	'code' => "define('_en_travaux_MESSAGE', %s);",
+));
+add_outil( array(
+	'id' => 'en_travaux',
+	'code:options' => "%%message_travaux%%\n%%admin_travaux%%",
+	'categorie' => 'admin',
+	'auteur' => '[Arnaud Ventre->ventrea@gmail.com]',
 ));
 
 //-----------------------------------------------------------------------------//

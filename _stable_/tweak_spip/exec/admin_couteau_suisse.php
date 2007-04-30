@@ -184,19 +184,22 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	global $couleur_claire;
 	global $outils;
 
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+		echo _T('avis_non_acces_page');
+		fin_page();
+		exit;
+	}
+
 	// reset general
 	if (_request('reset')=='oui'){
 		spip_log("Reset de tous les outils par l'auteur id=$connect_id_auteur");
 		foreach(array_keys($GLOBALS['meta']) as $meta)
 			if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
 		ecrire_metas();
-	}
-
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
-		echo _T('avis_non_acces_page');
-		fin_page();
-		exit;
+		cs_initialisation(true);
+		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));
 	}
 
 	// afficher un outil completement ?
@@ -348,7 +351,7 @@ function ligne_tweak($outil, &$js, $afficher){
 	$p .= "\n<div class='detailtweak'>";
 	$p .= $outil['description'];
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= "<p>" . _T('auteur') .' '. ($outil['auteur']) . "</p>";
-	$s .= propre($p) . '<hr style="margin:0"/>' . _T('cout:info_outil').' ';
+	$s .= propre($p) . '<hr style="margin:6pt 0 0 0;"/><div style="font-size:85%;">' . _T('cout:detail_outil').' ';
 	if ($erreur_version) $s .= _T('cout:erreur:version');
 	else {
 		$a = array();
@@ -364,7 +367,7 @@ function ligne_tweak($outil, &$js, $afficher){
 		if (find_in_path('outils/'.($temp=$tweak_id.'.css'))) $a[] = $temp;
 		$s .= join(' | ', $a);
 	}
-	$s .= "</div>";
+	$s .= "</div></div>";
 
 	$s .= fin_block();
 	$id_input++;

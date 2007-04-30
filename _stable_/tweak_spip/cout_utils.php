@@ -101,6 +101,7 @@ function tweak_get_defaut($variable) {
 	}
 	$variable = &$cout_variables[$variable];
 	$defaut = $variable['defaut'];
+	if(!strlen($defaut)) $defaut = "''";
 	if($variable['format']=='nombre') $defaut = "intval($defaut)";
 		elseif($variable['format']=='chaine') $defaut = "strval($defaut)";
 //cs_log("tweak_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
@@ -290,8 +291,8 @@ function tweak_initialise_includes() {
 // retire les guillemets extremes s'il y en a
 function tweak_retire_guillemets($valeur) {
 	$valeur = trim($valeur);
-	if (preg_match(',^"(.*)"$,', trim($valeur), $matches)) $valeur = str_replace('\"','"',$matches[1]);
-	elseif (preg_match(',^\'(.*)\'$,', trim($valeur), $matches)) $valeur = str_replace("\'","'",$matches[1]);
+	if (preg_match(',^"(.*)"$,ms', trim($valeur), $matches)) $valeur = str_replace('\"','"',$matches[1]);
+	elseif (preg_match(',^\'(.*)\'$,ms', trim($valeur), $matches)) $valeur = str_replace("\'","'",$matches[1]);
 	return $valeur;
 }
 

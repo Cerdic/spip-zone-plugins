@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
 	'vars_modifiees' => 'Merci, les donn&eacute;es ont &eacute;t&eacute;s modifi&eacute;es',
 	'variable_vide' => '(Vide)',
-	'info_outil' => 'Outil :',
+	'detail_outil' => 'En jeu :',
 	'liste_outils' => 'Liste des outils',
 	'presente_tweaks' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
 	'erreur:nom' => 'Erreur !',
@@ -248,8 +248,10 @@ Attention : certaines fonctionnalit&eacute; de cette page n&eacute;cessitent les
 <p>Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces raccourcis.</p>"
 ,//	."<p>Pour afiner un peu, vous pouvez maintenant d&eacute;finir le style particulier des balises suivantes :</p>",
 
-	'decoupe:nom' => 'D&eacute;coupe un article en pages',
-	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.<br />Attention, cette pagination ne sera pas prise en compte si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Cet ouril peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}",
+	'decoupe:nom' => 'D&eacute;coupe un texte en pages',
+	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.
+_ Cet outil peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}.
+_ Plus d'infos : [->http://www.spip-contrib.net/?article2135]",
 	'decoupe:aide' => 'S&eacute;parateur de pages&nbsp;: @sep@',
 	'page_suivante' => 'Page suivante',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
@@ -258,7 +260,7 @@ Attention : certaines fonctionnalit&eacute; de cette page n&eacute;cessitent les
 
 // ---------------------------------------------------------------------------
 	'sommaire:nom' => 'Sommaire en d&eacute;but d\'article',
-	'sommaire:description' => "Construit syst&eacute;matiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourci SPIP <code>{{{Un autre titre}}}</code>. Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).<br />Attention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Cet outil peut &ecirc;tre coupl&eacute; avec {D&eacute;coupe un article en pages}",
+	'sommaire:description' => "Construit syst&eacute;matiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourci SPIP (intertitres de la forme :<code>{{{Un autre titre}}}</code>). Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).<br />Attention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.",
 	'sommaire:aide' => 'Un article sans sommaire&nbsp;: @interdit@',
 	'sommaire' => 'Sommaire',
 
@@ -272,10 +274,20 @@ Vous pouvez choisir le type de remplacement :
 [[Votre choix :->%liens_orphelins%]]',
 	'basique' => 'Basique',
 	'etendu' => '&Eacute;tendu',
+
 // ---------------------------------------------------------------------------
 	'auteur_forum:nom' => "Pas de forums anonymes",
 	'auteur_forum:description' => "Incite tous les auteurs de messages publics &agrave; remplir (d'au moins d'une lettre !) le champ &laquo;"._T('forum_votre_nom')."&raquo; afin d'&eacute;viter les contributions totalement anonymes." . $temp['jQuery'],
 	'nom_forum' => 'Merci de sp&eacute;cifier votre nom !',
+
+// ---------------------------------------------------------------------------
+	'en_travaux:nom' => 'Site en travaux',
+	'en_travaux:description' => "Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
+[[Votre message de maintenance :->%message_travaux%]][[Fermer le site public &agrave; :->%admin_travaux%]]",
+	'prochainement' => "Ce site sera r&eacute;tabli tr&egrave;s prochainement.
+_ Merci de votre compr&eacute;hension.",
+	'tous' => 'Tous',
+	'sauf_admin' => 'Tous, sauf les administrateurs',
 /*
 	':nom' => '',
 	':description' => '',

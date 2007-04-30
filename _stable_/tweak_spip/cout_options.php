@@ -1,17 +1,16 @@
 <?php
-
 // fichier charge a chaque hit
 	global $cout_metas_pipelines;
 
 	// pour forcer les logs du plugin, outil actif ou non :
-	// $GLOBALS['forcer_log_couteau_suisse'] = true
+	// $GLOBALS['forcer_log_couteau_suisse'] = true;
 
 	// on active tout de suite les logs, si l'outil est actif.
 	$GLOBALS['log_couteau_suisse'] = (strpos($GLOBALS['meta']['tweaks_actifs'], 'log_couteau_suisse') !== false || $GLOBALS['forcer_log_couteau_suisse']);
 
 	if($GLOBALS['log_couteau_suisse']) {
-		spip_log('TWEAKS. ' . str_repeat('-', 80));
-		spip_log('TWEAKS. appel de cout_options (début) : strlen=' . strlen($cout_metas_pipelines['options']));
+		spip_log('COUTEAU-SUISSE. ' . str_repeat('-', 80));
+		spip_log('COUTEAU-SUISSE. appel de cout_options (début) : strlen=' . strlen($cout_metas_pipelines['options']));
 	}
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');

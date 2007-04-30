@@ -34,9 +34,9 @@ function cs_code_echappement($rempl, $source='') {
 	return "<span class='base64$source' title='$base64'></span>";
 }
 
-function cs_initialisation_d_un_outil($tweak0, $description_outil, $modif) {
+function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	global $outils, $metas_tweaks;
-	$outil = &$outils[$tweak0];
+	$outil = &$outils[$outil_];
 	if (!isset($outil['categorie'])) $outil['categorie'] = 'divers';
 	if (!isset($outil['nom'])) $outil['nom'] = _T('cout:'.$outil['id'].':nom');
 	if (!isset($outil['description'])) $outil['description'] = _T('cout:'.$outil['id'].':description');
@@ -51,7 +51,7 @@ function cs_initialisation_d_un_outil($tweak0, $description_outil, $modif) {
 	if (isset($outil['code:options'])) $outil['code:options'] = tweak_parse_code_php($outil['code:options']);
 	if (isset($outil['code:fonctions'])) $outil['code:fonctions'] = tweak_parse_code_php($outil['code:fonctions']);
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
-	$outil['description'] = $description_outil($tweak0, 'admin_couteau_suisse', $modif);
+	$outil['description'] = $description_outil($outil_, 'admin_couteau_suisse', $modif);
 }
 
 // lit ecrit les metas et initialise $cout_metas_pipelines

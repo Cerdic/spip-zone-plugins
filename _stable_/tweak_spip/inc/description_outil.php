@@ -50,17 +50,17 @@ cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 		$ok_input = $label .
 			( $lignes < 2
 				?"<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' $width/>"
-				:"<textarea rows='$lignes' name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" $width/>".htmlspecialchars($valeur).'</textarea>'
+				:"<textarea rows='$lignes' name='HIDDENTWEAKVAR__$variable' $width/>".htmlspecialchars($valeur).'</textarea>'
 			) . _TWEAK_VAR;
 		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('cout:variable_vide'));
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
 
-// renvoie la description de $tweak0 : toutes les %variables% ont ete remplacees par le code adequat
-function inc_description_outil_dist($tweak0, $url_self, $modif=false) {
+// renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
+function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	global $outils, $cout_variables, $metas_vars;
-	$outil = &$outils[$tweak0];
+	$outil = &$outils[$outil_];
 	$actif = $outil['actif'];
 	$index = $outil['index'];
 	// remplacement des puces
@@ -70,7 +70,7 @@ function inc_description_outil_dist($tweak0, $url_self, $modif=false) {
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-cs_log("inc_description_outil_dist() - Parse la description de '$tweak0'");
+cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$ok_input = $ok_valeur = $ok_visible = '';
 	$outil['nb_variables'] = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if (strlen($var=trim($t[$i+1]))) {
@@ -90,8 +90,6 @@ cs_log("inc_description_outil_dist() - Parse la description de '$tweak0'");
 	$outil['variables'] = $variables;
 	$c = $outil['nb_variables'];
 
-//	if (count($t)==1) { $ok_input .= "<p>$ok_input</p>"; $ok_valeur .= "<p>$ok_valeur</p>"; }
-
 	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _TWEAK_VAR s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if ($actif) {
@@ -105,12 +103,9 @@ cs_log("inc_description_outil_dist() - Parse la description de '$tweak0'");
 	// HIDDENTWEAKVAR__ pour eviter d'avoir deux inputs du meme nom...
 	$ok_visible .= $actif?str_replace("HIDDENTWEAKVAR__", "", $ok_input):$ok_valeur;
 	$variables = urlencode(serialize($variables));
-//	$ok_visible=paragrapher($ok_visible);
-//	$ok_input=paragrapher($ok_input);
-//	$ok_valeur=paragrapher($ok_valeur);
 	$res = "\n<div id='tweak$index-visible' >$ok_visible</div>";
 	if($c) {
-		$res = "\n<input type='hidden' value='$variables' name='variables'><input type='hidden' value='$tweak0' name='tweak'>"
+		$res = "\n<input type='hidden' value='$variables' name='variables'><input type='hidden' value='$outil_' name='tweak'>"
 			. "\n<div id='tweak$index-input' style='position:absolute; visibility:hidden;' >$ok_input</div>"
 			. "\n<div id='tweak$index-valeur' style='position:absolute; visibility:hidden;' >$ok_valeur</div>\n"
 			. $res;
