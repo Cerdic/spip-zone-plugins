@@ -82,7 +82,8 @@ function cron_spiplistes_cron($t){
 	
 			if ( $taille > 10 ) {
 	
-					$texte_patron_bg = $texte_patron_bg;
+					include_spip('inc/filtres');
+					$texte_patron_bg = liens_absolus($texte_patron_bg);
 					// si un mail a pu etre genere, on l'ajoute a la pile d'envoi
 					$type_bg = 'auto';
 					$statut_bg = 'encour';
