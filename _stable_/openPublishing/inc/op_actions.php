@@ -239,7 +239,7 @@ include_spip('base/abstract_sql');
 	function op_installer_base() {
 	
 		include_spip('inc/meta');
-		ecrire_meta('indy_version', '0.2.1');
+		ecrire_meta('indy_version', '0.2.2');
 		ecrire_metas();
 
 		if (!op_verifier_auteurs()) {
