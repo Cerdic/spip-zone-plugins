@@ -11,6 +11,7 @@ include_spip ("inc/session");
 include_spip ("inc/filtres");
 include_spip ("inc/acces");
 include_spip ("inc/documents");
+include_spip ("inc/ajouter_documents");
 include_spip ("inc/getdocument");
 include_spip('inc/barre');
 include_spip('base/abstract_sql');
@@ -414,7 +415,7 @@ else
 
 			// ajout du document
 			if ($ok==1) {
-				ajouter_un_document ($tmp, $fichier, "article", $article, $type_doc, $id_document, &$documents_actifs);
+				inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, &$documents_actifs);
 			}
 			else {
 				$mess_error = "erreur d'upload. L'extention de votre fichier n'est pas autoris&eacute;e ...";
