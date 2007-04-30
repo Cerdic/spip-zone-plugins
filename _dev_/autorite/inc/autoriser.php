@@ -1,6 +1,9 @@
 <?php
 
 // Ceci est une surcharge de inc/autoriser.php
+//
+// Voir le fichier fonds/cfg_autorite.html pour la definition des reglages
+// et bien sur "ecrire/?exec=cfg&cfg=autorite"
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

@@ -1,7 +1,7 @@
 [(#REM) descriptif=
 <h4>Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»</h4>
 
-<a href="http://www.spip-contrib.net/" class="spip_out">Documentation (un jour) sur contrib</a>
+<a href="http://www.spip-contrib.net/-Autorite-" class="spip_out">Cf. documentation</a>
 
 ]
 [(#REM) titre=Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»]
@@ -54,12 +54,12 @@ Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire
 
 [(#ENV{espace_wiki}|>{0}|?{
 	<label>
-	Voulez-vous ouvrir ce wiki&nbsp;:
+	Voulez-vous ouvrir ce wiki, au-del&#224; des administrateurs&nbsp;:
 	<br />
-	<label><input type="checkbox" name="espace_wiki_redacteurs" [checked="(#ENV{espace_wiki_redacteurs}|?{checked})"] /> aux redacteurs du site.
+	<label><input type="checkbox" name="espace_wiki_redacteurs" [checked="(#ENV{espace_wiki_redacteurs}|?{checked})"] /> aux r&#233;dacteurs du site&nbsp;;
 	</label>
 	<br />
-	<label><input type="checkbox" name="espace_wiki_visiteurs" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> aux visiteurs enregistr&#233;s.
+	<label><input type="checkbox" name="espace_wiki_visiteurs" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> aux visiteurs enregistr&#233;s&nbsp;;
 	</label>
 	<br />
 	<label><input type="checkbox" name="espace_wiki_anonyme" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> &#224; tous les visiteurs du site.
