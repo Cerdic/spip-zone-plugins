@@ -70,13 +70,29 @@
 <p>
 <label>
 Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire &#233;ditable par tous depuis l'espace public (&#224; condition d'avoir une interface, par exemple les crayons)&nbsp;:
+
 <br />
-<select name="espace_wiki" id="espace_wiki">
-	<option value="0">(aucun)</option>
-	<BOUCLE_r(RUBRIQUES){racine}{par num titre, titre}>
-	<option value="#ID_RUBRIQUE"[(#ENV{espace_wiki}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>#TITRE</option>
-	</BOUCLE_r>
+
+[(#REM)
+	Hack: si notre config n'existe pas, on veut un array vide
+	pour ne pas avoir d'erreur sur |in_array !
+]
+[(#SET{selected,[(#REM|sinon{-}|explode{''})]})]
+[(#CONFIG{autorite/espace_wiki,'',''}|is_array|?{
+	[(#SET{selected,#CONFIG{autorite/espace_wiki,'',''}})]
+})]
+
+<select name="espace_wiki[]" multiple="multiple" size="5" id="espace_wiki">
+<BOUCLE_rmul(RUBRIQUES){racine}{par num titre, titre}>
+	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
+	#TITRE
+	</option>
+</BOUCLE_rmul>
 </select>
+
+<small><br />(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)
+<br /><a onclick="$('#espace_wiki').find('option').attr('selected', false).end().trigger('change');">x</a> tout d&#233;selectionner</small>
+
 </label>
 </p>
 
@@ -105,7 +121,7 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 		else
 			$('#espace_wiki_qui:visible').slideUp('slow');
 	})
-	if (parseInt($('#espace_wiki')[0].value) == 0)
+	if ($('#espace_wiki option[@selected]').length == 0)
 		$('#espace_wiki_qui').hide();
 // --></script>
 

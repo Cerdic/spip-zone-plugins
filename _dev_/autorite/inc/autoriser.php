@@ -38,7 +38,16 @@ AND $GLOBALS['autorite']['espace_wiki_anonyme']) {
 ##
 if ($GLOBALS['autorite']['espace_wiki']) {
 	if (!function_exists('autorisation_wiki_visiteur')) {
-	function autorisation_wiki_visiteur($qui) {
+	function autorisation_wiki_visiteur($qui, $id_secteur) {
+		// espace_wiki est un array(secteur1, secteur2), ou un id_secteur
+		if (
+			(is_array($GLOBALS['autorite']['espace_wiki'])
+			AND !in_array($id_secteur,$GLOBALS['autorite']['espace_wiki']))
+		AND
+			$id_secteur != $GLOBALS['autorite']['espace_wiki']
+		)
+			return false;
+
 		switch($qui['statut']) {
 			case '0minirezo':
 			case '1comite':
@@ -57,7 +66,6 @@ if ($GLOBALS['autorite']['espace_wiki']) {
 		$autorite_erreurs[] = 'autorisation_wiki_visiteur';
 }
 
-
 ##
 ## autoriser_article_modifier
 ##
@@ -73,15 +81,11 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/auth');
 	return
 		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
-		OR (
+		OR
 			// Cas du wiki, on appelle la fonction qui verifie les droits wiki
-			$r['id_secteur'] == $GLOBALS['autorite']['espace_wiki']
-			AND autorisation_wiki_visiteur($qui)
-		)
+			autorisation_wiki_visiteur($qui, $r['id_secteur'])
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
-
-			# si on commente cette ligne : tous les articles sont modifiables
 			AND (
 				$GLOBALS['autorite']['auteur_mod_article']
 				OR in_array($r['statut'], array('prop','prepa', 'poubelle'))
@@ -111,8 +115,7 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_secteur FROM spip_rubriques WHERE id_rubrique="._q($id));
 	$r = spip_fetch_array($s);
-	if ($r['id_secteur'] == $GLOBALS['autorite']['espace_wiki']
-	AND autorisation_wiki_visiteur($qui))
+	if (autorisation_wiki_visiteur($qui, $r['id_secteur']))
 		return true;
 
 	// par defaut, NIET
