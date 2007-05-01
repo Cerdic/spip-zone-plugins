@@ -19,6 +19,28 @@
 <textarea name="testtextarea" rows="4" cols="40" style="width:100%;">[(#ENV{testtextarea})]</textarea>
 </fieldset>
 
+<fieldset><legend><:cfg:selecteurs:></legend>
+<label>Simple</label>
+<select name="testsel">
+  <option value="0">(aucun)</option>
+  <BOUCLE_r(RUBRIQUES){racine}{par num titre, titre}>
+    <option value="#ID_RUBRIQUE"[(#ENV{testsel}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>
+      #TITRE
+    </option>
+  </BOUCLE_r>
+</select>
+
+<label>Multiple</label>
+<select name="testselmul" multiple="multiple" size="5">
+  <option value="0">(aucun)</option>
+  <BOUCLE_r(RUBRIQUES){racine}{par num titre, titre}>
+    <option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#CONFIG{testsimple/testselmul,'',''}}|?{' selected="selected"'})]>
+      #TITRE
+    </option>
+  </BOUCLE_r>
+</select>
+</fieldset>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 <input type="reset" value="<:Reset:>" />
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
