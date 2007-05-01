@@ -156,7 +156,7 @@ class cfg_dist
 		    }
 		}
 		if (!preg_match_all(
-		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio)") name="(\w+)"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?[^>]*?>#ims',
+		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
 						$controldata, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
@@ -165,15 +165,19 @@ class cfg_dist
 				continue;
 			}
 		    if (!empty($regs[1])) {
-		    	$regs[2] = 'select';
+		    	$regs[2] = strtolower($regs[1]);
+			    if ($regs[2] == 'select' && !empty($regs[7])) {
+			    	$regs[2] = 'selmul';
+			    }
 		    }
-		    $this->champs[$regs[3]] = array('inp' => $regs[2], 'typ' => '');
-		    if (!empty($regs[4])) {
-		    	$this->champs[$regs[3]]['typ'] = $regs[4];
-		    }
+		    $this->champs[$regs[3]] =
+		    	array('inp' => $regs[2], 'typ' => '', 'array' => !empty($regs[4]));
 		    if (!empty($regs[5])) {
-		    	$this->champs[$regs[3]]['cfg'] = $regs[5];
-		    	if ($regs[5] == 'id') {
+		    	$this->champs[$regs[3]]['typ'] = $regs[5];
+		    }
+		    if (!empty($regs[6])) {
+		    	$this->champs[$regs[3]]['cfg'] = $regs[6];
+		    	if ($regs[6] == 'id') {
 			    	$this->champs[$regs[3]]['id'] = count($this->champs_id);
 		    		$this->champs_id[] = $regs[3];
 		    	}

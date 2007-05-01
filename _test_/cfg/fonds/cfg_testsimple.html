@@ -31,16 +31,15 @@
 </select>
 
 <label>Multiple</label>
-<select name="testselmul" multiple="multiple" size="5">
+<select name="testselmul[]" multiple="multiple" size="5">
   <option value="0">(aucun)</option>
-  <BOUCLE_r(RUBRIQUES){racine}{par num titre, titre}>
+  <BOUCLE_rmul(RUBRIQUES){racine}{par num titre, titre}>
     <option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#CONFIG{testsimple/testselmul,'',''}}|?{' selected="selected"'})]>
       #TITRE
     </option>
-  </BOUCLE_r>
+  </BOUCLE_rmul>
 </select>
 </fieldset>
-
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 <input type="reset" value="<:Reset:>" />
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
