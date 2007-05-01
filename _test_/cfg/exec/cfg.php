@@ -142,9 +142,16 @@ class cfg_dist
 		if (!lire_fichier($fichier, $controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
+		$get_multi = create_function(
+						'$bloc',
+						'return preg_replace("#\*(\w+?)\*#", "[$1]", $bloc[0]);'
+					);
 		if (preg_match_all('/\[\(#REM\) (\w+)(\*)?=(.*?)\]/sim',
 						$controldata, $matches, PREG_SET_ORDER)) {
 			foreach ($matches as $regs) {
+				// magouille pour les <multi> puisque [en] ne passe pas
+				// on mettra *en* à la place
+				$regs[3] = preg_replace_callback('#<multi>.+?</multi>#sim', $get_multi,	$regs[3]);
 			    if (empty($regs[2])) {
 				    $this->{$regs[1]} = $regs[3];
 			    } else {
