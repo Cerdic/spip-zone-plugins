@@ -1,0 +1,22 @@
+<div class="top">
+<div class="title">
+<a href="./">Sedna RSS</a>
+	&nbsp;
+<BOUCLE_titre(SITES){id_syndic}>#NOM_SITE
+	&nbsp;
+	<small><a href="[(#URL_SITE|abs_url)]">#URL_SITE</a></small>
+</BOUCLE_titre>
+	#NOM_SITE_SPIP
+	&nbsp;
+	<small><a href="#URL_SITE_SPIP/">#URL_SITE_SPIP/</a></small>
+<//B_titre>
+
+</div>
+
+<div class="topdate">
+	[(#ENV{recherche}|=={''}|?{&nbsp;,''})
+	#SET{date,#EVAL{date('Y-m-d')}}
+	[(#GET{date}|nom_jour)] [(#GET{date}|affdate_court)] #EVAL{date('H:i')}
+	][<b><:info_rechercher_02:> &laquo; (#ENV{recherche}) &raquo;</b>]
+</div>
+</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[Sedna RSS] [(#NOM_SITE_SPIP|supprimer_tags)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta http-equiv="refresh" content="900;url=[(#SELF|url_absolue)]" />
+[(#REM)
+	Liens vers le backend (voir ausi plus bas affichage html)
+]
+<BOUCLE_url_backend_ori(SITES){id_syndic}>
+	<link rel="alternate" type="application/rss+xml" title="RSS [(#NOM_SITE|attribut_html)], via [(#NOM_SITE_SPIP|attribut_html)]" href="#URL_PAGE{sedna-rss}&amp;id_syndic=#ID_SYNDIC[&amp;recherche=(#ENV{recherche})]" />
+	<link rel="alternate" type="application/rss+xml" title="RSS original" href="#URL_SYNDIC" />
+</BOUCLE_url_backend_ori>
+	<link rel="alternate" type="application/rss+xml" title="RSS [(#NOM_SITE_SPIP|attribut_html)]" href="#URL_PAGE{sedna-rss}[&amp;recherche=(#ENV{recherche})]" />
+<//B_url_backend_ori>
+<link rel="icon" type="image/png" href="#CHEMIN{sedna-icon.png}" />
+<link href="#CHEMIN{sedna.css}" rel="stylesheet" type="text/css" />
+<link href="#CHEMIN{sedna-#EVAL{$_COOKIE['sedna_color']?$_COOKIE['sedna_color']:'blue'}|concat{.css}}" rel="stylesheet" type="text/css" />
+<style type="text/css" id="rtl">
+	a.urlsite { float: #LANG_RIGHT; }
+	a.urlsiteon { float: #LANG_RIGHT; }
+	div.topdate { float: #LANG_RIGHT; }
+	div.marge { float: #LANG_RIGHT; }
+	#total_articles {
+		float: #LANG_RIGHT;
+		margin-#LANG_RIGHT: 50px;
+	}
+	div.desc {  
+		margin-#LANG_LEFT: 50px;
+		border-#LANG_LEFT: dotted 1px grey;
+	}
+	div.top .title {
+	 	float:#LANG_LEFT;
+	}
+	div.marge a.selected {
+		border-#LANG_LEFT: 3px solid #324C48;
+	}
+	div.milieu {
+		margin-#LANG_LEFT: 30px;
+	}
+	.date {
+		margin-#LANG_LEFT: -30px;
+		text-align: #LANG_LEFT;
+	}
+	div.bottomrss {
+		float: #LANG_LEFT;
+	}
+	.titre {
+		padding-#LANG_LEFT: 40px;
+	}
+</style>
+
+#INSERT_HEAD
+<script type="text/javascript" src="#CHEMIN{sedna.js}"></script>
+</head>
+
+<body>

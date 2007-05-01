@@ -1,0 +1,23 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Sedna
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Fil
+_ &copy; 2005-2007 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	stable
+	</etat>
+	<description>
+	Agregateur RSS
+	</description>
+	<prefix> 
+	sedna
+	</prefix>
+	<necessite id='SPIP' version='[1.9.2;]' />
+	<options>sedna_options.php</options>
+</plugin>

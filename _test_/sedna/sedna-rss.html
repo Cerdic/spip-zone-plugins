@@ -1,0 +1,60 @@
+<?php
+	@header('Content-type: text/xml[; charset=(#CHARSET)]');
+	echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.">\n";
+?>
+<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<channel>
+	<BOUCLE_titre(SITES){id_syndic}>
+		<title>[(#NOM_SITE|texte_backend)] (via [(#NOM_SITE_SPIP|texte_backend)])</title>
+		<link>#URL_SITE</link>
+		<description>[(#DESCRIPTIF|texte_backend)]</description>
+		<language>#LANG</language>
+	</BOUCLE_titre>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<link>#URL_SITE_SPIP/</link>
+		<language>#LANG</language>
+	<//B_titre>
+
+	<BOUCLE_20recents(SYNDIC_ARTICLES){contenu}{id_syndic?}{tri_sedna}{0,20}{unique}>
+		<item>
+		<title>[(#TITRE*|texte_backend)]</title>
+		<link>#URL_ARTICLE</link>
+		<date>#DATE</date>
+		[(#TAGS|tags2dcsubject)
+		]<description>[(#DESCRIPTIF*|texte_backend)][
+		-- (#TAGS|texte_backend)]</description>
+		<author>[(#LESAUTEURS*|texte_backend)]</author>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>#LANG</dc:language>
+<BOUCLE_source(SITES){id_syndic}>[
+		<source url="(#URL_SYNDIC)">[(#NOM_SITE|texte_backend)]</source>
+]</BOUCLE_source>
+		<dc:creator>[(#LESAUTEURS*|texte_backend)]</dc:creator>
+		[(#TAGS|microformat2enclosure)]
+		</item>
+	</BOUCLE_20recents>
+	<BOUCLE_tres_recents(SYNDIC_ARTICLES){contenu}{id_syndic?}{par date}{inverse}{age<3}{unique}>
+		<item>
+		<title>[(#TITRE*|texte_backend)]</title>
+		<link>#URL_ARTICLE</link>
+		<date>#DATE</date>
+		[(#TAGS|tags2dcsubject)
+		]<description>[(#DESCRIPTIF*|texte_backend)][
+		-- (#TAGS|texte_backend)]</description>
+		<author>[(#LESAUTEURS*|texte_backend)]</author>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>#LANG</dc:language>
+<BOUCLE_source2(SITES){id_syndic}>[
+		<source url="(#URL_SYNDIC)">[(#NOM_SITE|texte_backend)]</source>
+]</BOUCLE_source2>
+		<dc:creator>[(#LESAUTEURS*|texte_backend)]</dc:creator>
+		[(#TAGS|microformat2enclosure)]
+		</item>
+	</BOUCLE_tres_recents>
+
+</channel>
+
+</rss>

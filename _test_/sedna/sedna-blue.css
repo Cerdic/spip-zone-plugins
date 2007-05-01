@@ -1,0 +1,17 @@
+<style type="text/css" id="couleur">
+	h2 {
+		background: transparent url(sedna-blue.gif);
+	}
+	div.top {
+		background: transparent url(sedna-blue.gif);
+	}
+	div.bottom {
+		background: transparent url(sedna-blue.gif);
+	}
+	div.marge a:hover {
+		background-color: #6666ff;
+	}
+	div.marge a.selected {
+		background-color: #3333ff;
+	}
+</style>
