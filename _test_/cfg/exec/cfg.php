@@ -137,7 +137,6 @@ class cfg_dist
 	function set_vue($vue)
 	{
 		$this->vue = $vue;
-		$this->boite = _L('Configuration') . ' ' . $this->vue;
 		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
 		if (!lire_fichier($fichier, $this->controldata)) {
 			return _L('erreur_lecture_') . $nom;
@@ -339,9 +338,12 @@ class cfg_dist
 		
 			debut_droite("", true) .
 			
-//			gros_titre($this->titre, '', false) .
+			(!empty($this->boite) && !empty($this->titre) ? gros_titre($this->titre, '', false) : '') .
 			
-			debut_cadre_trait_couleur('', true, '', $this->titre);
+			debut_cadre_trait_couleur('', true, '',
+				empty($this->boite) ?
+					(empty($this->titre) ? _L('Configuration') . ' ' . $this->vue : $this->titre) :
+					$this->boite);
 	}
 
 	function fin_page()
