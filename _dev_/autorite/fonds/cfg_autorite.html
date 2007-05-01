@@ -82,7 +82,7 @@ Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire
 })]
 
 <select name="espace_wiki[]" multiple="multiple" size="5" id="espace_wiki">
-<BOUCLE_rmul(RUBRIQUES){racine}{par num titre, titre}>
+<BOUCLE_rmul(RUBRIQUES){racine}{tout}{par num titre, titre}>
 	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
 	#TITRE
 	</option>
