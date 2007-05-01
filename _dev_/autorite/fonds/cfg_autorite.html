@@ -10,6 +10,29 @@
 
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
+[(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
+[(#CONFIG{autorite_erreurs}|?{#CONFIG{autorite_erreurs}|unserialize|count|>{0}|?{' '}})
+
+	[(#REM|sinon{1}|debut_boite_info)]
+
+	[(#REM|sinon{warning.gif}|http_img_pack{<:avis_attention:>,width='48' height='48' style='float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;'})]
+	<strong><:avis_attention:></strong> Les autorisations suivantes sont d&#233;j&#224; d&#233;finies par ailleurs&nbsp;:
+	<ul><li>
+	<tt>
+	[(#CONFIG{autorite_erreurs}|unserialize|join{'</tt></li><li><tt>'})]
+	</tt>
+	</li></ul>
+	Le plugin &#171;&nbsp;Autorit&#233;&nbsp;&#187; ne peut pas les modifier&nbsp;; certains des r&#233;glages ci-dessous risquent par cons&#233;quent de ne pas fonctionner.
+	<br />Pour r&#233;gler ce probl&#232;me, vous devrez v&#233;rifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a d&#233;fini ces fonctions.
+
+	[(#REM|sinon{1}|fin_boite_info)]
+]
+
+
+<br />
+
+
+[(#REM) ------------------------ DROITS D'EDITION ------------------------ ]
 <fieldset>
 <legend>
 	Droits d'&#233;dition
@@ -35,7 +58,10 @@
 </p>
 </fieldset>
 
+<br />
 
+
+[(#REM) ------------------------ ESPACE WIKI ------------------------ ]
 <fieldset>
 <legend>
 	Espace wiki
@@ -45,7 +71,7 @@
 <label>
 Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire &#233;ditable par tous depuis l'espace public (&#224; condition d'avoir une interface, par exemple les crayons)&nbsp;:
 <br />
-<select name="espace_wiki">[(#REM) multiple="multiple" size="5", ne marche pas]
+<select name="espace_wiki" id="espace_wiki">
 	<option value="0">(aucun)</option>
 	<BOUCLE_r(RUBRIQUES){racine}{par num titre, titre}>
 	<option value="#ID_RUBRIQUE"[(#ENV{espace_wiki}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>#TITRE</option>
@@ -54,26 +80,38 @@ Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire
 </label>
 </p>
 
-[(#ENV{espace_wiki}|>{0}|?{
-	<p>
-	<label>
-	Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
-	<br />
-	<label><input type="checkbox" name="espace_wiki_redacteurs" [checked="(#ENV{espace_wiki_redacteurs}|?{checked})"] /> aux r&#233;dacteurs du site&nbsp;;
-	</label>
-	<br />
-	<label><input type="checkbox" name="espace_wiki_visiteurs" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> aux visiteurs enregistr&#233;s&nbsp;;
-	</label>
-	<br />
-	<label><input type="checkbox" name="espace_wiki_anonyme" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> &#224; tous les visiteurs du site.
-	</label>
-	</p>
-})]
+<p id="espace_wiki_qui">
+<label>
+Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
+<br />
+<label><input type="checkbox" name="espace_wiki_redacteurs" [checked="(#ENV{espace_wiki_redacteurs}|?{checked})"] /> aux r&#233;dacteurs du site&nbsp;;
+</label>
+<br />
+<label><input type="checkbox" name="espace_wiki_visiteurs" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> aux visiteurs enregistr&#233;s&nbsp;;
+</label>
+<br />
+<label><input type="checkbox" name="espace_wiki_anonyme" [checked="(#ENV{espace_wiki_anonyme}|?{checked})"] /> &#224; tous les visiteurs du site.
+</label>
+</p>
 
 </fieldset>
 
+[(#REM) Code jQuery de l'espace wiki ; plier/deplier la moderation ]
+<script type="text/javascript"><!--
+	$('#espace_wiki')
+	.bind('change', function() {
+		if (parseInt(this.value))
+			$('#espace_wiki_qui:hidden').slideDown('slow');
+		else
+			$('#espace_wiki_qui:visible').slideUp('slow');
+	})
+	if (parseInt($('#espace_wiki')[0].value) == 0)
+		$('#espace_wiki_qui').hide();
+// --></script>
 
 
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" />
 <!--
 <input type="reset" value="<:Reset:>" />
