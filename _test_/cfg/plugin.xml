@@ -29,4 +29,8 @@ _ La fonction correspondante {{lire_config($cfg='', $defaut=null, $serialize=fal
 	<options>
 	cfg_options.php
 	</options>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>cfg_pipeline.php</inclure>
+	</pipeline>
 </plugin>
