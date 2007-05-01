@@ -139,32 +139,14 @@ class cfg_dist
 		$this->vue = $vue;
 		$this->boite = _L('Configuration') . ' ' . $this->vue;
 		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
-		if (!lire_fichier($fichier, $controldata)) {
+		if (!lire_fichier($fichier, $this->controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
-		$get_multi = create_function(
-						'$bloc',
-						'return preg_replace("#\*(\w+?)\*#", "[$1]", $bloc[0]);'
-					);
-		if (preg_match_all('/\[\(#REM\) (\w+)(\*)?=(.*?)\]/sim',
-						$controldata, $matches, PREG_SET_ORDER)) {
-			foreach ($matches as $regs) {
-				// magouille pour les <multi> puisque [en] ne passe pas
-				// on mettra *en* à la place
-				$regs[3] = preg_replace_callback('#<multi>.+?</multi>#sim', $get_multi,	$regs[3]);
-			    if (empty($regs[2])) {
-				    $this->{$regs[1]} = $regs[3];
-			    } else {
-				    if (!is_array($this->{$regs[1]})) {
-				    	continue;
-				    }
-				    $this->{$regs[1]}[] = $regs[3];
-			    }
-		    }
-		}
+		$sans_rem = preg_replace_callback('/(\[\(#REM\) (\w+)(\*)?=)(.*?)\]/sim',
+						array($this, 'post_params'), $this->controldata);
 		if (!preg_match_all(
 		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
-						$controldata, $matches, PREG_SET_ORDER)) {
+						$sans_rem, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
 		foreach ($matches as $regs) {
@@ -250,6 +232,7 @@ class cfg_dist
 	*/
 	function get_fond($contexte = array())
 	{
+		include_spip('inc/securiser_action');
 	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->vue;
 		$contexte['_cfg_'] =
 			'?exec=cfg&cfg=' . $this->nom .
@@ -260,16 +243,45 @@ class cfg_dist
 		    '&arg=' . $arg .
 		    '&hash=' .  calculer_action_auteur('-' . $arg);
 	    include_spip('public/assembler');
-	    return recuperer_fond('fonds/cfg_' . $this->vue,
+	    $return = recuperer_fond('fonds/cfg_' . $this->vue,
 	    		$this->val ? array_merge($contexte, $this->val) : $contexte);
-	}
 
+		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
+		$this->rempar = array(array());
+		if (preg_match_all('/<!-- \w+\*?=/', $this->controldata, $this->rempar)) {
+			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
+								array($this, 'post_params'), $return);
+		}
+		if (!empty($this->rempar[0])) {
+			die("erreur manque parametre externe");
+		}
+		return $return;
+	}
+	// callback pour interpreter les parametres objets du formulaire
+	// commun avec celui de set_vue()
+	function post_params($regs) {
+		// a priori, eviter l'injection du motif
+		if (isset($this->rempar) && $regs[1] != array_shift($this->rempar[0])) {
+			die("erreur parametre interne");
+		}
+		if (empty($regs[3])) {
+		    $this->{$regs[2]} = $regs[4];
+		} else {
+		    if (!is_array($this->{$regs[2]})) {
+		    	continue;
+		    }
+		    $this->{$regs[2]}[] = $regs[4];
+		}
+		// plus besoin de garder ca
+		return '';
+	}
 	function sortie($contexte = array())
 	{
+		$formulaire = $this->get_fond($contexte);
 		return
 			$this->debut_page() .
 
-			$this->get_fond($contexte) .
+			$formulaire .
 			
 			$this->fin_page();
 				
