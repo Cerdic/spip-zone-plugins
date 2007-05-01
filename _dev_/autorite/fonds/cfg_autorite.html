@@ -8,7 +8,7 @@
 #CACHE{0}
 
 
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 [(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
 [(#CONFIG{autorite_erreurs}|?{#CONFIG{autorite_erreurs}|unserialize|count|>{0}|?{' '}})
@@ -27,8 +27,6 @@
 
 ]
 
-
-<br />
 
 
 [(#REM) ------------------------ DROITS D'EDITION ------------------------ ]
@@ -49,15 +47,13 @@
 	</label>
 	<br />
 
-<label><input type="checkbox" name="auteur_mod_email" [checked="(#ENV{auteur_mod_email})"] />
+<label><input type="checkbox" name="auteur_mod_email" [checked="(#ENV{auteur_mod_email}|?{checked})"] />
 	<strong>Auteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
 </label>
 
 
 </p>
 </fieldset>
-
-<br />
 
 
 [(#REM) ------------------------ ESPACE WIKI ------------------------ ]
@@ -96,7 +92,6 @@ Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire
 </p>
 
 <p id="espace_wiki_qui">
-<label>
 Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 <br />
 <label><input type="checkbox" name="espace_wiki_redacteurs" [checked="(#ENV{espace_wiki_redacteurs}|?{checked})"] /> aux r&#233;dacteurs du site&nbsp;;
@@ -127,10 +122,12 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 
 
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
-<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" />
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
 <!--
-<input type="reset" value="<:Reset:>" />
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
 -->
+</div>
 </form>
 
