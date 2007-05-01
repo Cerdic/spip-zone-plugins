@@ -1,5 +1,5 @@
 #CACHE{0}
-<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 [(#REM) descriptif=
 <h4>Configuration de la Barre Typographique Enlumin&eacute;e</h4>
@@ -64,9 +64,10 @@
 
 
 
-
+<div>
 <input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
 <input type="reset" value="<:reset:>" class="fondo" />
 <input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
 </form>
 
