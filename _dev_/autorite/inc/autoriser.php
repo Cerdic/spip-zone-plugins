@@ -83,7 +83,8 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 		OR
 			// Cas du wiki, on appelle la fonction qui verifie les droits wiki
-			autorisation_wiki_visiteur($qui, $r['id_secteur'])
+			$GLOBALS['autorite']['espace_wiki']
+			AND autorisation_wiki_visiteur($qui, $r['id_secteur'])
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND (

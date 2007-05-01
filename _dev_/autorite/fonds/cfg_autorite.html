@@ -13,8 +13,7 @@
 [(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
 [(#CONFIG{autorite_erreurs}|?{#CONFIG{autorite_erreurs}|unserialize|count|>{0}|?{' '}})
 
-	[(#REM|sinon{1}|debut_boite_info)]
-
+	<div class="cadre-info verdana1">
 	[(#REM|sinon{warning.gif}|http_img_pack{<:avis_attention:>,width='48' height='48' style='float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;'})]
 	<strong><:avis_attention:></strong> Les autorisations suivantes sont d&#233;j&#224; d&#233;finies par ailleurs&nbsp;:
 	<ul><li>
@@ -24,8 +23,8 @@
 	</li></ul>
 	Le plugin &#171;&nbsp;Autorit&#233;&nbsp;&#187; ne peut pas les modifier&nbsp;; certains des r&#233;glages ci-dessous risquent par cons&#233;quent de ne pas fonctionner.
 	<br />Pour r&#233;gler ce probl&#232;me, vous devrez v&#233;rifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a d&#233;fini ces fonctions.
+	</div>
 
-	[(#REM|sinon{1}|fin_boite_info)]
 ]
 
 
