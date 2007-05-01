@@ -53,7 +53,6 @@ class cfg_dist
 	function cfg_dist($nom, $vue = '', $cfg_id = '', $opt = array())
 	{
 		$this->nom = $nom;
-		$this->titre = _L('Configuration') . ' ' . $this->nom;
 		$this->base_url = generer_url_ecrire('');
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
@@ -277,6 +276,11 @@ class cfg_dist
 	function sortie($contexte = array())
 	{
 		$formulaire = $this->get_fond($contexte);
+		($this->titre && $this->boite)
+		 ||	($this->titre && ($this->boite = $this->titre) && !($this->titre = ''))
+		 || $this->boite
+		 || ($this->boite = _L('Configuration') . ' ' . $this->nom);
+
 		return
 			$this->debut_page() .
 
@@ -320,7 +324,7 @@ class cfg_dist
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		
-		return $commencer_page($this->titre, 'cfg', $this->nom) .
+		return $commencer_page($this->boite, 'cfg', $this->nom) .
 		
 			debut_gauche("accueil", true) .
 		
@@ -338,12 +342,9 @@ class cfg_dist
 		
 			debut_droite("", true) .
 			
-			(!empty($this->boite) && !empty($this->titre) ? gros_titre($this->titre, '', false) : '') .
+			($this->titre ? gros_titre($this->titre, '', false) : '') .
 			
-			debut_cadre_trait_couleur('', true, '',
-				empty($this->boite) ?
-					(empty($this->titre) ? _L('Configuration') . ' ' . $this->vue : $this->titre) :
-					$this->boite);
+			debut_cadre_trait_couleur('', true, '', $this->boite);
 	}
 
 	function fin_page()
