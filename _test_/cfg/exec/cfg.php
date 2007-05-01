@@ -339,9 +339,9 @@ class cfg_dist
 		
 			debut_droite("", true) .
 			
-			gros_titre($this->titre, '', false) .
+//			gros_titre($this->titre, '', false) .
 			
-			debut_cadre_trait_couleur('', true, '', $this->boite);
+			debut_cadre_trait_couleur('', true, '', $this->titre);
 	}
 
 	function fin_page()
