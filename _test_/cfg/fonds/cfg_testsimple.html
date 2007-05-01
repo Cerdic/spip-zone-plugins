@@ -34,12 +34,11 @@
   </BOUCLE_r>
 </select>
 <label>Multiple</label>
-#SET{selected,#REM|sinon{'"'}|explode{#CONFIG{testsimple/testselmul}}|array_filter{is_numeric}}
 <select name="testselmul[]" multiple="multiple" size="5">
   <option value="0">(aucun)</option>
   <BOUCLE_rmul(RUBRIQUES){racine}{par num titre, titre}>
     <option value="#ID_RUBRIQUE"
-    [(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
+    [(#ID_RUBRIQUE|in_array{#CONFIG{testsimple/testselmul,#ARRAY,''}}|?{' selected="selected"'})]>
       #TITRE
     </option>
   </BOUCLE_rmul>

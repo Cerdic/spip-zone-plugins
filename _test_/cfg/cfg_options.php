@@ -18,7 +18,7 @@ function balise_CONFIG($p) {
 	$sinon = interprete_argument_balise(2,$p);
 	$serialize = interprete_argument_balise(3,$p);
 	$p->code = 'lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . 
+		($sinon && $sinon != "''" ? ($sinon == "'#ARRAY'" ? 'array()' : $sinon) : 'null') . ',' . 
 		($serialize ? $serialize : 'true') . ')';
 	return $p;
 }
@@ -49,7 +49,7 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 	// pas de transcodage
 		$ret = $config;
 	}
-	return is_null($ret) && $def ? $def : $ret;
+	return is_null($ret) && !is_null($def) ? $def : $ret;
 }
 
 ?>
