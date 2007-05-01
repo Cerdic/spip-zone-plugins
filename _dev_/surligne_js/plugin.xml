@@ -27,8 +27,4 @@
 	<prefix>
 	Surlignejs
 	</prefix>
-	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>surlignejs_pipeline.php</inclure>
-	</pipeline>
 </plugin>

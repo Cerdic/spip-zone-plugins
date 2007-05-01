@@ -6,7 +6,7 @@
  *    
  * @author Renato Formato <renatoformato@virgilio.it> 
  *  
- * @version 0.3
+ * @version 0.31
  *
  *  Options
  *  - exact (string, default:"exact") 
@@ -61,7 +61,7 @@
     options: {},
     regex: [],
     engines: [
-    [/^http:\/\/(www\.)?google\./i, /q=([^&]+)/i],                   // Google
+    [/^http:\/\/(www\.)?google\./i, /q=([^&]+)/i],                            // Google
     [/^http:\/\/(www\.)?search\.yahoo\./i, /p=([^&]+)/i],                     // Yahoo
     [/^http:\/\/(www\.)?search\.msn\./i, /q=([^&]+)/i],                       // MSN
     [/^http:\/\/(www\.)?search\.live\./i, /query=([^&]+)/i],                  // MSN Live
@@ -71,7 +71,7 @@
     [/^http:\/\/(www\.)?feedster\./i, /q=([^&]+)/i],                          // Feedster
     [/^http:\/\/(www\.)?search\.lycos\./i, /q=([^&]+)/i],                     // Lycos
     [/^http:\/\/(www\.)?alltheweb\./i, /q=([^&]+)/i],                         // AllTheWeb
-    [/^http:\/\/(www\.)?technorati\.com\/search\/([^\?\/]+)/i, 1],   // Technorati
+    [/^http:\/\/(www\.)?technorati\.com/i, /([^\?\/]+)(?:\?.*)$/i],           // Technorati
     ],
     subs: {},
     decodeURL: function(URL,reg) {
