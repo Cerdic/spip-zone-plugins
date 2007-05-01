@@ -53,11 +53,11 @@ $essais = array(
 	array('serie',       $assoc,           $assoc,           $serassoc),
 	array('serie/two',   'element 2'),
 // pas la
-	array('assoc/pasla', null,             'defaut'),
-	array('serie/pasla', null,             'defaut'),
-	array('la/testid/',  null,             'defaut'),
-	array('pasla',       null,             'defaut'),
-	array('la/pasla',    null,             'defaut')
+	array('assoc/pasla', array(),             'defaut' , null),
+	array('serie/pasla', array(),             'defaut' , null),
+	array('la/testid/',  array(),             'defaut' , null),
+	array('pasla',       array(),             'defaut' , null),
+	array('la/pasla',    array(),             'defaut' , null)
 );
 $ok = true;
 $r = array(null, array(), array(), array());
@@ -94,7 +94,7 @@ foreach ($essais as $i => $spec) {
 	}
 	$att = array(null);
 	for ($nbarg = 1; $nbarg < 4; ++$nbarg) {
-		if ($r[$nbarg][$i] !== ($att[$nbarg] = isset($spec[$nbarg]) ? $spec[$nbarg] : $spec[1])) {
+		if ($r[$nbarg][$i] !== ($att[$nbarg] = count($spec) > $nbarg ? $spec[$nbarg] : $spec[1])) {
 			$err[] = $i . "({$essais[$i][0]}) $nbarg (" . print_r($r[$nbarg][$i], true) .
 				') attendu (' . print_r($att[$nbarg], true) . ')';
 		}
@@ -111,13 +111,13 @@ $s[2] .= '</dl>';
 
 function test_bal($bali, $skel, $contexte = array())
 {
-	$dossier = sous_repertoire(_DIR_VAR, 'cache-tests');
+	$dossier = sous_repertoire(_DIR_TMP, 'cache-tests');
 	$fichier = "$dossier$bali.html";
 
 	if (($handle = fopen($fichier, 'w'))) {
-		fwrite($handle, '[(#REM) ' . $bali . " ]\n" . $skel);
+		fwrite($handle, "#CACHE{0}\n[(#REM) " . $bali . " ]\n" . $skel);
 		fclose($handle);
-	    return recuperer_fond('local/cache-tests/' . $bali, $contexte);
+	    return recuperer_fond('tmp/cache-tests/' . $bali, $contexte);
 	}
 	return '';
 }

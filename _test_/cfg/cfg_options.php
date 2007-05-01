@@ -18,7 +18,7 @@ function balise_CONFIG($p) {
 	$sinon = interprete_argument_balise(2,$p);
 	$serialize = interprete_argument_balise(3,$p);
 	$p->code = 'lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? ($sinon == "'#ARRAY'" ? 'array()' : $sinon) : 'null') . ',' . 
+		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . 
 		($serialize ? $serialize : 'true') . ')';
 	return $p;
 }
@@ -42,6 +42,9 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 	// transcodage vers le mode serialize
 	if ($serialize && is_array($config)) {
 		$ret = serialize($config);
+	} elseif (!$serialize && is_null($config) && !$def) {
+	// pas de serialize requis et config vide, c'est qu'on veut une array()
+		$ret = array();
 	} elseif (!$serialize && ($c = @unserialize($config))) {
 	// transcodage vers le mode non serialize
 		$ret = $c;
@@ -49,7 +52,7 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 	// pas de transcodage
 		$ret = $config;
 	}
-	return is_null($ret) && !is_null($def) ? $def : $ret;
+	return is_null($ret) && $def ? $def : $ret;
 }
 
 ?>

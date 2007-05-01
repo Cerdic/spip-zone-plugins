@@ -38,7 +38,7 @@
   <option value="0">(aucun)</option>
   <BOUCLE_rmul(RUBRIQUES){racine}{par num titre, titre}>
     <option value="#ID_RUBRIQUE"
-    [(#ID_RUBRIQUE|in_array{#CONFIG{testsimple/testselmul,#ARRAY,''}}|?{' selected="selected"'})]>
+    [(#ID_RUBRIQUE|in_array{#CONFIG{testsimple/testselmul,'',''}}|?{' selected="selected"'})]>
       #TITRE
     </option>
   </BOUCLE_rmul>
