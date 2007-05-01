@@ -27,6 +27,7 @@ function action_description_outil_post($index) {
 cs_log("Début : action_description_outil_post($index) - On modifie la(les) variable(s) dans la base");
 
 	// on lit les metas
+	include_spip('inc/meta');
 	lire_metas();
 	$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
 	// on recupere dans le POST le nom des variables a modifier et le nom de l'outil correspondant
