@@ -260,13 +260,13 @@ class cfg_dist
 	function post_params($regs) {
 		// a priori, eviter l'injection du motif
 		if (isset($this->rempar) && $regs[1] != array_shift($this->rempar[0])) {
-			die("erreur parametre interne");
+			die("erreur parametre interne: " . htmlentities($regs[1]));
 		}
 		if (empty($regs[3])) {
 		    $this->{$regs[2]} = $regs[4];
 		} else {
 		    if (!is_array($this->{$regs[2]})) {
-		    	continue;
+		    	return;
 		    }
 		    $this->{$regs[2]}[] = $regs[4];
 		}
