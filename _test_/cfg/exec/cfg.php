@@ -298,22 +298,33 @@ class cfg_dist
 
 	function boite_liens($lien)
 	{
-		$dedans = debut_boite_info(true) .
-			'<h4>' . _L($lien) . '</h4><div>
-<form method="post" action="' . $this->base_url . '">
-<input type="hidden" name="exec" value="cfg" />
-<input type="hidden" name="cfg" value="' . $lien . '" />
-<p><label for="' . $lien . '_">' . _T('cfg:nouveau') . '</label>
-<input type="image" id="' . $lien . '_" name="nouveau" value="1" src="../dist/images/creer.gif" style="vertical-align: text-top;"/></p>';
+		$dedans = $simple = '';
 		if (($exi = lire_config($lien))) {
 			foreach ($exi as $compte => $info) {
+				// config simple ?
+				if (!is_array($info)) {
+					$dedans = '';
+					break;
+				}
 				$dedans .= '
 <p><label for="' . $lien . '_' . $compte . '">' . $compte . '</label>
 <input type="image" id="' . $lien . '_' . $compte . '" name="cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
 			}
+			if ($dedans) {
+				$dedans = '
+<p><label for="' . $lien . '_">' . _T('cfg:nouveau') . '</label>
+<input type="image" id="' . $lien . '_" name="nouveau" value="1" src="../dist/images/creer.gif" style="vertical-align: text-top;"/></p>' . $dedans;
+			} else {
+				$simple = '
+<input type="image" id="' . $lien . '" name="cfg_id" value="" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/>';
+			}
 		}
-		$dedans .= '</form></div>' . fin_boite_info(true);
-		return $dedans;
+		return debut_boite_info(true) .	'
+<form method="post" action="' . $this->base_url . '">
+<h4>' . _L($lien) . '
+<input type="hidden" name="exec" value="cfg" />
+<input type="hidden" name="cfg" value="' . $lien . '" />' . $simple . '</h4><div>' .
+			$dedans . '</div></form>' . fin_boite_info(true);
 	}
 	function debut_page()
 	{
