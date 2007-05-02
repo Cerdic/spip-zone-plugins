@@ -44,9 +44,10 @@ function AccesRestreint_liste_contenu_zone_rub_direct($id_zone){
 // liste des rubriques contenues dans une zone, directement ou par heritage
 function AccesRestreint_liste_contenu_zone_rub($id_zone){
 	include_spip('inc/rubriques');
-	return explode(',', calcul_branche(join(',',
-		AccesRestreint_liste_contenu_zone_rub_direct($id_zone)
-	)));
+	if ($rubs = AccesRestreint_liste_contenu_zone_rub_direct($id_zone))
+		return explode(',', calcul_branche(join(',', $rubs)));
+	else
+		return array();
 }
 
 // liste des zones a laquelle appartient un auteur
@@ -124,7 +125,8 @@ function AccesRestreint_liste_rubriques_exclues($publique=true) {
 
 			// Recurrence (descendre les branches)
 			include_spip('inc/rubriques');
-			$rubs = explode(',', calcul_branche(join(',', $rubs)));
+			if ($rubs)
+				$rubs = explode(',', calcul_branche(join(',', $rubs)));
 			// Supprimer les rubriques finalement autorisees de la liste
 			// des rubriques interdites
 			$liste_rub_exclues[$publique] = array_diff($liste_rub_exclues[$publique], $rubs);
