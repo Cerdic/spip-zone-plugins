@@ -34,6 +34,7 @@
 		$autorite_erreurs_version[] = 'auteur modere forum';
 		$autorite_erreurs_version[] = 'auteur modere petition';
 		$autorite_erreurs_version[] = 'auteur modifie email';
+		$autorite_erreurs_version[] = 'redacteurs voient stats';
 	}
 
 	if ($autorite_erreurs_version) {
@@ -75,6 +76,19 @@
 	<strong>Auteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
 </label>
 
+
+</p>
+</fieldset>
+
+[(#REM) ------------------------ DROITS DE LECTURE ------------------------ ]
+<fieldset>
+<legend>
+	Droits de consultation
+</legend>
+<p>
+<label><input type="checkbox" name="redacteurs_voirstats" [checked="(#ENV{redacteurs_lire_stats}?{checked})"] />
+	<strong>R&#233;dacteur voient stats</strong>&nbsp;: les r&#233;dacteurs peuvent visualiser les statistiques.
+</label>
 
 </p>
 </fieldset>

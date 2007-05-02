@@ -151,7 +151,7 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 
 
 ##
-## autoriser_forum_article_moderer
+## autoriser_modererforum
 ##
 if ($GLOBALS['autorite']['auteur_modere_forum']
 OR false // autre possibilite de surcharge ?
@@ -172,7 +172,7 @@ function autoriser_modererforum($faire, $type, $id, $qui, $opt) {
 }
 
 ##
-## autoriser_petition_article_moderer
+## autoriser_modererpetition
 ##
 if ($GLOBALS['autorite']['auteur_modere_petition']
 OR false // autre possibilite de surcharge ?
@@ -190,6 +190,24 @@ function autoriser_modererpetition($faire, $type, $id, $qui, $opt) {
 }
 } else
 	$autorite_erreurs[] = 'autoriser_modererpetition';
+}
+
+
+##
+## autoriser_voirstats
+##
+if ($GLOBALS['autorite']['redacteurs_lire_stats']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_voirstats')) {
+function autoriser_voirstats($faire, $type, $id, $qui, $opt) {
+	return
+		$GLOBALS['autorite']['redacteurs_lire_stats']
+			? in_array($qui['statut'], array('0minirezo', '1comite'))
+			: $qui['statut'] == '0minirezo';
+}
+} else
+	$autorite_erreurs[] = 'autoriser_voirstats';
 }
 
 
