@@ -28,6 +28,12 @@ function exec_cfg_dist($class = null)
 // la classe cfg represente une page de configuration
 class cfg_dist
 {
+// le storage, par defaut metapack: spip_meta serialise
+	var $storage = 'metapack';
+// l'objet de classe cfg_<storage> qui assure lecture/ecriture des config
+	var $sto = null;
+// les options de creation de cet objet
+	var $optsto = array();
 // le nom du meta (ou autre) ou va etre stocke la config concernee
 	var $nom = '';
 // le fond html utilise , en general pour config simple idem $nom
@@ -58,79 +64,23 @@ class cfg_dist
 			$this->$o = $v;
 		}
 		$this->cfg_id = $cfg_id;
+
+		// pre-analyser le formulaire
 		if ($vue) {
 			$this->message .= $this->set_vue($vue);
 		}
-		$this->lire();
+		
+		// creer le storage et lire les valeurs
+		$classto = 'cfg_' . $this->storage;
+		include_spip('inc/' . $classto);
+		$this->sto = new $classto($this, $this->optsto);
+		$this->val = $this->sto->lire();
 	}
 
 	function nom_config()
 	{
 	    return $this->nom . ($this->casier ? '/' . $this->casier : '') .
 	    		($this->cfg_id ? '/' . $this->cfg_id : '');
-	}
-	
-// recuperer les valeurs, utilise la fonction commune lire_cfg() de cfg_options.php
-	function lire()
-	{
-    	$this->val = lire_config($this->nom_config());
-    	if ($this->cfg_id) {
-    		$cles = explode('/', $this->cfg_id);
-			foreach ($this->champs_id as $i => $name) {
-				$this->val[$name] = $cles[$i];
-		    }
-    	}
-	    return $this->val;
-	}
-	
-// se positionner dans le tableau arborescent
-	function & monte_arbre(&$base, $chemin)
-	{
-		if (!$chemin) {
-			return $base;
-		}
-		foreach (explode('/', $chemin) as $chunk) {
-			if (!isset($base[$chunk])) {
-				$base[$chunk] = array();
-			}
-	    	$this->_report[] = array(&$base, $chunk);
-	    	$base = &$base[$chunk];
-		}
-		return $base;
-	}
-	
-// modifier le fragment qui peut etre tout le meta
-	function modifier($supprimer = false)
-	{
-    	($base = lire_config($this->nom)) || ($base = array());
-    	$ici = &$base;
-    	$this->_report = array();
-    	$ici = &$this->monte_arbre($ici, $this->casier);
-    	$ici = &$this->monte_arbre($ici, $this->cfg_id);
-		foreach ($this->champs as $name => $def) {
-			if (isset($def['id'])) {
-				continue;
-			}
-			if ($supprimer) {
-				unset($ici[$name]);
-			} else {
-				$ici[$name] = $this->val[$name];
-			}
-	    }
-		if ($supprimer) {
-			for ($i = count($this->_report); $i--; ) {
-				if ($this->_report[$i][0][$this->_report[$i][1]]) {
-					break;
-				}
-				unset($this->_report[$i][0][$this->_report[$i][1]]);
-			}
-		}
-		if ($supprimer && !$base) {
-		    effacer_meta($this->nom);
-		} else {
-		    ecrire_meta($this->nom, serialize($base));
-	    }
-	    ecrire_metas();
 	}
 
 	function set_vue($vue)
@@ -185,14 +135,14 @@ class cfg_dist
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
 		if ($supprimer) {
-			$this->modifier('supprimer');
+			$this->sto->modifier('supprimer');
 			$this->message .= _L('config_supprimee') . ' <b>' . $this->nom . '</b>';
 		} elseif (!($this->message = $this->controle())) {
 			if ($this->new_id != $this->cfg_id && !_request('_cfg_copier')) {
-				$this->modifier('supprimer');
+				$this->sto->modifier('supprimer');
 			}
 			$this->cfg_id = $this->new_id;
-			$this->modifier();
+			$this->sto->modifier();
 			$this->message .= _L('config_enregistree') . ' <b>' . $this->nom . '</b>';
 		}
 //		$this->message .= print_r($this->champs, true);
