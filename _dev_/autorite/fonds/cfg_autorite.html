@@ -7,7 +7,6 @@
 [(#REM) titre=Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»]
 #CACHE{0}
 
-
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 [(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
@@ -94,7 +93,8 @@
 
 <fieldset>
 	<legend>Crayons</legend>
-	<small><strong>Attention.</strong> Les r&#233;glages ci-dessous ne peuvent fonctionner que si vous utilisez un plugin proposant une interface d'&#233;dition (comme par exemple <a href="http://www.spip-contrib.net/Les-Crayons">les Crayons</a>).</small>
+	<small><strong>Attention.</strong> Les r&#233;glages ci-dessous ne peuvent fonctionner que si vous utilisez un plugin proposant une interface d'&#233;dition (comme par exemple <a href="http://www.spip-contrib.net/Les-Crayons">les Crayons</a>).
+	</small>
 
 [(#REM)
 	L'auteur d'un forum caracterise par son id_auteur, c'est deja pas mal ;
@@ -106,9 +106,10 @@
 	<br />
 	<select name="editer_forums">
 	<option value="0">Personne (valeur par d&#233;faut)</option>
-	<option value="1"[ selected="(#ENV{editer_forums}|=={1}|?{selected})"]>Les administrateurs</option>
-	<option value="2"[ selected="(#ENV{editer_forums}|=={2}|?{selected})"]>L'auteur du message, pendant une heure [s'il s'est enregistr&#233;]</option>
-	<option value="3"[ selected="(#ENV{editer_forums}|=={3}|?{selected})"]>L'auteur du message, ad vitam [s'il s'est enregistr&#233;]</option>
+	<option value="1"[ selected="(#ENV{editer_forums}|=={1}|?{selected})"]>Le webmestre</option>
+	<option value="2"[ selected="(#ENV{editer_forums}|=={2}|?{selected})"]>Les administrateurs</option>
+	<option value="3"[ selected="(#ENV{editer_forums}|=={3}|?{selected})"]>L'auteur du message, pendant une heure [s'il s'est enregistr&#233;]</option>
+	<option value="4"[ selected="(#ENV{editer_forums}|=={4}|?{selected})"]>L'auteur du message, ad vitam [s'il s'est enregistr&#233;]</option>
 	</select>
 	</p>
 
@@ -121,7 +122,8 @@
 	<br />
 	<select name="editer_forums">
 	<option value="0">Personne (valeur par d&#233;faut)</option>
-	<option value="1"[ selected="(#ENV{editer_signatures}|=={1}|?{selected})"]>Les administrateurs</option>
+	<option value="1"[ selected="(#ENV{editer_forums}|=={1}|?{selected})"]>Le webmestre</option>
+	<option value="2"[ selected="(#ENV{editer_forums}|=={2}|?{selected})"]>Les administrateurs</option>
 <!--
 	<option value="2"[ selected="(#ENV{editer_signatures}|=={2}|?{selected})"]>Le signataire, pendant une heure [s'il s'est enregistr&#233;]</option>
 	<option value="3"[ selected="(#ENV{editer_signatures}|=={3}|?{selected})"]>le signataire, ad vitam</option>
@@ -220,4 +222,16 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 -->
 </div>
 </form>
+
+
+
+[(#REM)
+	Mettre ce bloc ailleurs
+]
+<p><small>
+<strong>Note.</strong> &#171;&nbsp;Le webmestre&nbsp;&#187; d&#233;signe l'administrateur num&#233;ro [(#EVAL{_ID_WEBMESTRES}|replace{:,', '})]. Vous pouvez modifier cette valeur en &#233;ditant, par ftp, votre fichier config/mes_options.php et en inscrivant&nbsp;:
+<br /><code>define('_ID_WEBMESTRES', '3');</code> s'il s'agit de l'auteur num&#233;ro 3.
+<br />Vous pouvez avoir plusieurs webmestres en indiquant&nbsp;:
+<br /><code>define('_ID_WEBMESTRES', '2:3:8');</code>
+</small></p>
 

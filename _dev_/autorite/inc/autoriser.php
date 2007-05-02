@@ -7,8 +7,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 define ('_DEBUG_AUTORISER', false);
+define ('_ID_WEBMESTRES', '1'); // '1:5:90' a regler dans mes_options
 
 $GLOBALS['autorite'] = @unserialize($GLOBALS['meta']['autorite']);
 $autorite_erreurs = array();
@@ -249,9 +249,14 @@ OR false // autre possibilite de surcharge ?
 if (!function_exists('autoriser_forum_modifier')) {
 function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
 
+	// Le webmestre
+	if ($GLOBALS['autorite']['editer_forums'] >= 1
+	AND autoriser('webmestre', $type, $id, $qui, $opt))
+		return true;
+
 	// Les admins
 	if (
-		$GLOBALS['autorite']['editer_forums'] >= 1
+		$GLOBALS['autorite']['editer_forums'] >= 2
 		AND $qui['statut'] == '0minirezo'
 		AND !$qui['restreint']
 	)
@@ -260,10 +265,10 @@ function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
 	// L'auteur du message (enregistre')
 	// 2 = avec une periode de grace d'une heure
 	// 3 = ad vitam
-	if ($GLOBALS['autorite']['editer_forums'] >= 2
+	if ($GLOBALS['autorite']['editer_forums'] >= 3
 	AND isset($qui['id_auteur'])) {
 		$q = "SELECT id_forum FROM spip_forum WHERE id_forum="._q($id)." AND id_auteur="._q($qui['id_auteur']);
-		if ($GLOBALS['autorite']['editer_forums'] == 2)
+		if ($GLOBALS['autorite']['editer_forums'] == 3)
 			$q .= " AND date_heure > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
 		$s = spip_query($q);
 		if (spip_num_rows($s))
@@ -289,9 +294,14 @@ OR false // autre possibilite de surcharge ?
 if (!function_exists('autoriser_signature_modifier')) {
 function autoriser_signature_modifier($faire, $type, $id, $qui, $opt) {
 
+	// Le webmestre
+	if ($GLOBALS['autorite']['editer_signatures'] >= 1
+	AND autoriser('webmestre', $type, $id, $qui, $opt))
+		return true;
+
 	// Les admins
 	if (
-		$GLOBALS['autorite']['editer_signatures'] >= 1
+		$GLOBALS['autorite']['editer_signatures'] >= 2
 		AND $qui['statut'] == '0minirezo'
 		AND !$qui['restreint']
 	)
