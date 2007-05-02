@@ -211,6 +211,34 @@ function autoriser_voirstats($faire, $type, $id, $qui, $opt) {
 }
 
 
+// Autoriser a modifier un groupe de mots $id
+// y compris en ajoutant/modifiant les mots lui appartenant
+// http://doc.spip.org/@autoriser_groupemots_modifier
+##
+## autoriser_groupemots_modifier
+##
+if ($GLOBALS['autorite']['editer_mots']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_groupemots_modifier')) {
+function autoriser_groupemots_modifier($faire, $type, $id, $qui, $opt) {
+	return (
+		$qui['statut'] == '0minirezo'
+		AND (
+			!$qui['restreint']
+			OR
+			$GLOBALS['autorite']['editer_mots'] >= 1
+		)
+	) OR (
+		$qui['statut'] == '1comite'
+		AND $GLOBALS['autorite']['editer_mots'] >= 2
+	);
+}
+} else
+	$autorite_erreurs[] = 'autoriser_groupemots_modifier';
+}
+
+
 
 // Noter les erreurs pour les afficher dans le panneau de config
 if (serialize($autorite_erreurs) != $GLOBALS['meta']['autorite_erreurs']) {

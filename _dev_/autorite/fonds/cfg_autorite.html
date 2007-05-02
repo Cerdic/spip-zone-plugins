@@ -34,7 +34,8 @@
 		$autorite_erreurs_version[] = 'auteur modere forum';
 		$autorite_erreurs_version[] = 'auteur modere petition';
 		$autorite_erreurs_version[] = 'auteur modifie email';
-		$autorite_erreurs_version[] = 'redacteurs voient stats';
+		$autorite_erreurs_version[] = 'redacteur voit stats';
+		$autorite_erreurs_version[] = 'redacteur modifie mots';
 	}
 
 	if ($autorite_erreurs_version) {
@@ -76,6 +77,18 @@
 	<strong>Auteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
 </label>
 
+<br />
+<br />
+
+
+<label><strong>Mots-cl&#233;s&nbsp;:</strong> qui peut cr&#233;er et &#233;diter les mots-cl&#233;s&nbsp;:
+<br />
+<select name="editer_mots">
+	<option value="0">Les administrateurs complets</option>
+	<option value="1"[ selected="(#ENV{editer_mots}|=={1}|?{selected})"]>Tous les administrateurs (y compris restreints)</option>
+	<option value="2"[ selected="(#ENV{editer_mots}|=={2}|?{selected})"]>Tous les r&#233;dacteurs</option>
+</select>
+</label>
 
 </p>
 </fieldset>
