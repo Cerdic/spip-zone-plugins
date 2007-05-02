@@ -264,10 +264,7 @@ class cfg_dist
 		}
 		if (empty($regs[3])) {
 		    $this->{$regs[2]} = $regs[4];
-		} else {
-		    if (!is_array($this->{$regs[2]})) {
-		    	return;
-		    }
+		} elseif (is_array($this->{$regs[2]})) {
 		    $this->{$regs[2]}[] = $regs[4];
 		}
 		// plus besoin de garder ca
