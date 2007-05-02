@@ -26,7 +26,23 @@
 	</div>
 
 ]
+<?php
 
+	// Comment gerer ca proprement ?
+	$autorite_erreurs_version = array();
+	if ($GLOBALS['spip_version_code'] < '1.9251') {
+		$autorite_erreurs_version[] = 'auteur modere forum';
+		$autorite_erreurs_version[] = 'auteur modere petition';
+		$autorite_erreurs_version[] = 'auteur modifie email';
+	}
+
+	if ($autorite_erreurs_version) {
+		echo "Attention les choix suivants peuvent ne pas fonctionner avec votre version de SPIP&nbsp;:\n"
+		. "<ul><li>\n"
+		. join ("</li><li>", $autorite_erreurs_version)
+		. "</li></ul>\n";
+	}
+?>
 
 
 [(#REM) ------------------------ DROITS D'EDITION ------------------------ ]
@@ -36,7 +52,7 @@
 </legend>
 <p>
 <label><input type="checkbox" name="auteur_mod_article" [checked="(#ENV{auteur_mod_article}?{checked})"] />
-	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur peut modifier les articles dont il est l'auteur (et, par conséquent, mod&#233;rer le forum associ&#233;).
+	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur peut modifier les articles dont il est l'auteur (et, par conséquent, mod&#233;rer le forum et la p&#233;tition associ&#233;s).
 </label>
 
 <br />
@@ -44,8 +60,16 @@
 <label><input type="checkbox" name="auteur_modere_forum" [checked="(#ENV{auteur_modere_forum}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]
 />
 	<strong>Auteur mod&#232;re forum</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer le forum des articles dont il est l'auteur.
-	</label>
-	<br />
+</label>
+
+<br />
+
+<label><input type="checkbox" name="auteur_modere_petition" [checked="(#ENV{auteur_modere_petition}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]
+/>
+	<strong>Auteur mod&#232;re p&#233;tition</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer la p&#233;tition des articles dont il est l'auteur.
+</label>
+
+<br />
 
 <label><input type="checkbox" name="auteur_mod_email" [checked="(#ENV{auteur_mod_email}|?{checked})"] />
 	<strong>Auteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
@@ -68,15 +92,8 @@ Choisissez ci-dessous un secteur &#224; traiter comme un wiki, c'est-&#224;-dire
 
 <br />
 
-[(#REM)
-	Hack: si notre config n'existe pas, on veut un array vide
-	pour ne pas avoir d'erreur sur |in_array !
-]
-[(#SET{selected,[(#REM|sinon{-}|explode{''})]})]
-[(#CONFIG{autorite/espace_wiki,'',''}|is_array|?{
-	[(#SET{selected,#CONFIG{autorite/espace_wiki,'',''}})]
-})]
 
+#SET{selected,#CONFIG{autorite/espace_wiki,'',''}}
 <select name="espace_wiki[]" multiple="multiple" size="5" id="espace_wiki">
 <BOUCLE_rmul(RUBRIQUES){racine}{tout}{par num titre, titre}>
 	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
@@ -100,8 +117,13 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 <label><input type="checkbox" name="espace_wiki_visiteurs" [checked="(#ENV{espace_wiki_visiteurs}|?{checked})"] /> aux visiteurs enregistr&#233;s&nbsp;;
 </label>
 <br />
+
 <label><input type="checkbox" name="espace_wiki_anonyme" [checked="(#ENV{espace_wiki_anonyme}|?{checked})"] /> &#224; tous les visiteurs du site.
 </label>
+
+<label><small><br />&nbsp; &nbsp; <input type="checkbox" name="espace_wiki_rubrique_anonyme" [checked="(#ENV{espace_wiki_anonyme}|?{#ENV{espace_wiki_rubrique_anonyme}|?{checked}})"] /> les visiteurs anonymes peuvent cr&#233;er de nouvelles pages.
+</small></label>
+
 </p>
 
 </fieldset>

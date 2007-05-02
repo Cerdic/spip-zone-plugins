@@ -112,11 +112,16 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 		return true;
 
 	// Sinon, verifier si la rubrique est wiki
-	// et si on est bien redacteur
+	// et si on est bien enregistre (sauf cas de creation anonyme explicitement autorisee)
 	$s = spip_query(
 	"SELECT id_secteur FROM spip_rubriques WHERE id_rubrique="._q($id));
 	$r = spip_fetch_array($s);
-	if (autorisation_wiki_visiteur($qui, $r['id_secteur']))
+
+	if (autorisation_wiki_visiteur($qui, $r['id_secteur'])
+	AND (
+		$GLOBALS['autorite']['espace_wiki_rubrique_anonyme']
+		OR $qui['statut']
+	))
 		return true;
 
 	// par defaut, NIET
@@ -164,6 +169,27 @@ function autoriser_modererforum($faire, $type, $id, $qui, $opt) {
 }
 } else
 	$autorite_erreurs[] = 'autoriser_modererforum';
+}
+
+##
+## autoriser_petition_article_moderer
+##
+if ($GLOBALS['autorite']['auteur_modere_petition']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_modererpetition')) {
+function autoriser_modererpetition($faire, $type, $id, $qui, $opt) {
+	return
+		autoriser('modifier', $type, $id, $qui, $opt)
+		OR (
+			$GLOBALS['autorite']['auteur_modere_petition']
+			AND $type == 'article'
+			AND in_array($qui['statut'], array('0minirezo', '1comite'))
+			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+		);
+}
+} else
+	$autorite_erreurs[] = 'autoriser_modererpetition';
 }
 
 
