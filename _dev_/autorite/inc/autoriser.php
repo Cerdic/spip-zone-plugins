@@ -238,6 +238,72 @@ function autoriser_groupemots_modifier($faire, $type, $id, $qui, $opt) {
 	$autorite_erreurs[] = 'autoriser_groupemots_modifier';
 }
 
+##
+## Modifier un forum ?
+## A noter : il n'existe pas d'interface dans SPIP, il faut utiliser les crayons
+## TODO : cookie specialise (voir commentaires dans cfg_autorite.html)
+##
+if ($GLOBALS['autorite']['editer_forums']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_forum_modifier')) {
+function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
+
+	// Les admins
+	if (
+		$GLOBALS['autorite']['editer_forums'] >= 1
+		AND $qui['statut'] == '0minirezo'
+		AND !$qui['restreint']
+	)
+		return true;
+
+	// L'auteur du message (enregistre')
+	// 2 = avec une periode de grace d'une heure
+	// 3 = ad vitam
+	if ($GLOBALS['autorite']['editer_forums'] >= 2
+	AND isset($qui['id_auteur'])) {
+		$q = "SELECT id_forum FROM spip_forum WHERE id_forum="._q($id)." AND id_auteur="._q($qui['id_auteur']);
+		if ($GLOBALS['autorite']['editer_forums'] == 2)
+			$q .= " AND date_heure > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+		$s = spip_query($q);
+		if (spip_num_rows($s))
+			return true;
+	}
+
+	// par defaut
+	return autoriser_forum_modifier_dist($faire, $type, $id, $qui, $opt);
+
+}
+} else
+	$autorite_erreurs[] = 'autoriser_forum_modifier';
+}
+
+##
+## Modifier une signature ?
+## A noter : il n'existe pas d'interface dans SPIP, il faut utiliser les crayons
+## TODO : cookie specialise (voir commentaires dans cfg_autorite.html)
+##
+if ($GLOBALS['autorite']['editer_signatures']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_signature_modifier')) {
+function autoriser_signature_modifier($faire, $type, $id, $qui, $opt) {
+
+	// Les admins
+	if (
+		$GLOBALS['autorite']['editer_signatures'] >= 1
+		AND $qui['statut'] == '0minirezo'
+		AND !$qui['restreint']
+	)
+		return true;
+
+	// par defaut
+	return autoriser_signature_modifier_dist($faire, $type, $id, $qui, $opt);
+}
+} else
+	$autorite_erreurs[] = 'autoriser_signature_modifier';
+}
+
 
 
 // Noter les erreurs pour les afficher dans le panneau de config

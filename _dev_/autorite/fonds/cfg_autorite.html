@@ -77,8 +77,7 @@
 	<strong>Auteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
 </label>
 
-<br />
-<br />
+</p>
 
 
 <label><strong>Mots-cl&#233;s&nbsp;:</strong> qui peut cr&#233;er et &#233;diter les mots-cl&#233;s&nbsp;:
@@ -90,7 +89,49 @@
 </select>
 </label>
 
-</p>
+<br />
+<br />
+
+<fieldset>
+	<legend>Crayons</legend>
+	<small><strong>Attention.</strong> Les r&#233;glages ci-dessous ne peuvent fonctionner que si vous utilisez un plugin proposant une interface d'&#233;dition (comme par exemple <a href="http://www.spip-contrib.net/Les-Crayons">les Crayons</a>).</small>
+
+[(#REM)
+	L'auteur d'un forum caracterise par son id_auteur, c'est deja pas mal ;
+	pour des auteurs anonymes, il faudrait leur poser un cookie qui leur
+	ouvrirait ce droit tant que le cookie vit (donc, TODO).
+]
+	<p>
+	<label><strong>Forums&nbsp;:</strong> qui peut modifier le contenu des forums&nbsp;:
+	<br />
+	<select name="editer_forums">
+	<option value="0">Personne (valeur par d&#233;faut)</option>
+	<option value="1"[ selected="(#ENV{editer_forums}|=={1}|?{selected})"]>Les administrateurs</option>
+	<option value="2"[ selected="(#ENV{editer_forums}|=={2}|?{selected})"]>L'auteur du message, pendant une heure [s'il s'est enregistr&#233;]</option>
+	<option value="3"[ selected="(#ENV{editer_forums}|=={3}|?{selected})"]>L'auteur du message, ad vitam [s'il s'est enregistr&#233;]</option>
+	</select>
+	</p>
+
+[(#REM)
+	Pour les signataires c'est plus dur, car a priori pas d'id_auteur :
+	il faudra absolument un cookie specialise
+]
+	<p>
+	<label><strong>Forums&nbsp;:</strong> qui peut modifier les signatures des p&#233;titions&nbsp;:
+	<br />
+	<select name="editer_forums">
+	<option value="0">Personne (valeur par d&#233;faut)</option>
+	<option value="1"[ selected="(#ENV{editer_signatures}|=={1}|?{selected})"]>Les administrateurs</option>
+<!--
+	<option value="2"[ selected="(#ENV{editer_signatures}|=={2}|?{selected})"]>Le signataire, pendant une heure [s'il s'est enregistr&#233;]</option>
+	<option value="3"[ selected="(#ENV{editer_signatures}|=={3}|?{selected})"]>le signataire, ad vitam</option>
+-->
+	</select>
+	</label>
+	</p>
+
+</fieldset>
+
 </fieldset>
 
 [(#REM) ------------------------ DROITS DE LECTURE ------------------------ ]
@@ -100,7 +141,7 @@
 </legend>
 <p>
 <label><input type="checkbox" name="redacteurs_voirstats" [checked="(#ENV{redacteurs_lire_stats}?{checked})"] />
-	<strong>R&#233;dacteur voient stats</strong>&nbsp;: les r&#233;dacteurs peuvent visualiser les statistiques.
+	<strong>R&#233;dacteur voit stats</strong>&nbsp;: les r&#233;dacteurs peuvent visualiser les statistiques.
 </label>
 
 </p>
