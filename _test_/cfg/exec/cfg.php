@@ -260,14 +260,14 @@ class cfg_dist
 <p><label for="' . $lien . '_' . $compte . '">' . $compte . '</label>
 <input type="image" id="' . $lien . '_' . $compte . '" name="cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
 			}
-			if ($dedans) {
-				$dedans = '
+		}
+		if ($dedans) {
+			$dedans = '
 <p><label for="' . $lien . '_">' . _T('cfg:nouveau') . '</label>
 <input type="image" id="' . $lien . '_" name="nouveau" value="1" src="../dist/images/creer.gif" style="vertical-align: text-top;"/></p>' . $dedans;
-			} else {
-				$simple = '
+		} else {
+			$simple = '
 <input type="image" id="' . $lien . '" name="cfg_id" value="" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/>';
-			}
 		}
 		return debut_boite_info(true) .	'
 <form method="post" action="' . $this->base_url . '">
