@@ -1,0 +1,33 @@
+<!-- descriptif=<multi>[fr]Fond de test du storage {classic} pour le plugin de configuration cfg
+[en]Simple test for the {classic} storage of configuration plugin cfg</multi>
+<br /><a href="../?page=test_cfg&var_mode=recalcul" class="spip_in">
+<multi>[fr]Retour page test publique
+[en]Back to public result page</multi></a>
+-->
+
+<!-- boite=<multi>[fr]Test storage classic pour le plugin cfg [en]Classic storage test for the cfg plugin</multi>-->
+
+[(#REM) liens*=testmulti]
+[(#REM) liens*=testsimple]
+
+[(#REM) storage=classic]
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend><:cfg:storage_classic:></legend>
+<label>Email webmaster</label>
+<input type="text" name="email_webmaster" value="#ENV{email_webmaster}" size="30" />
+<br />
+<label>Nom site</label>
+<input type="text" name="nom_site" value="#ENV{nom_site}" size="70" />
+<br />
+<label>Descriptif site</label>
+<textarea name="descriptif_site" rows="4" cols="40" style="width:100%;">[(#ENV{descriptif_site})]</textarea>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<!--input type="submit" name="_cfg_delete" value="<:Supprimer:>" /-->
+</form>
+<!-- s:14:"activer_breves";s:3:"oui";s:22:"config_precise_groupes";s:3:"non";s:16:"mots_cles_forums";s:3:"non";s:17:"articles_surtitre";s:3:
+-->
