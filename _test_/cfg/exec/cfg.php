@@ -64,6 +64,8 @@ class cfg_dist
 	var $champs_id = array();
 // leurs valeurs
 	var $val = array();
+// pour tracer les valeurs modifiees
+	var $log_modif = '';
 	
 	function cfg_dist($nom, $vue = '', $cfg_id = '', $opt = array())
 	{
@@ -137,6 +139,30 @@ class cfg_dist
 		return autoriser($this->autoriser);
 	}
 
+	function log($message)
+	{
+		spip_log('cfg (' . $this->nom_config() . '): ' . $message);
+	}
+
+	function modifier($supprimer = false)
+	{
+		if ($supprimer) {
+			$this->sto->modifier($supprimer);
+			$this->message .= ($msg = _L('config_supprimee')) . ' <b>' . $this->nom_config() . '</b>';
+			$this->log($msg);
+			return;
+		}
+		if (($this->message = $this->controle())) {
+			return;
+		}
+		if (!$this->log_modif) {
+			$this->message .= _L('pas_de_changement') . ' <b>' . $this->nom_config() . '</b>';
+		}
+		$this->sto->modifier();
+		$this->message .= ($msg = _L('config_enregistree')) . ' <b>' . $this->nom_config() . '</b>';
+		$this->log($msg . ' ' . $this->log_modif);
+	}
+
 	function traiter()
 	{
 		$enregistrer = $supprimer = false;
@@ -149,15 +175,13 @@ class cfg_dist
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
 		if ($supprimer) {
-			$this->sto->modifier('supprimer');
-			$this->message .= _L('config_supprimee') . ' <b>' . $this->nom . '</b>';
+			$this->modifier('supprimer');
 		} elseif (!($this->message = $this->controle())) {
 			if ($this->new_id != $this->cfg_id && !_request('_cfg_copier')) {
-				$this->sto->modifier('supprimer');
+				$this->modifier('supprimer');
 			}
 			$this->cfg_id = $this->new_id;
-			$this->sto->modifier();
-			$this->message .= _L('config_enregistree') . ' <b>' . $this->nom . '</b>';
+			$this->modifier();
 		}
 //		$this->message .= print_r($this->champs, true);
 	}
@@ -170,7 +194,12 @@ class cfg_dist
 		  'pwd' => array('#^\w+$#',  _L('lettres, &#095; ou chiffres')));
 	    $return = '';
 		foreach ($this->champs as $name => $def) {
+			$oldval = $this->val[$name];
 		    $this->val[$name] = _request($name);
+		    if ($oldval != $this->val[$name]) {
+		    	$this->log_modif .= $name . ':' .
+		    		var_export($oldval, true) . '/' . var_export($this->val[$name], true) .', ';
+		    }
 		    if (!empty($def['typ']) && isset($chk[$def['typ']])) {
 		    	if (!preg_match($chk[$def['typ']][0], $this->val[$name])) {
 		    		$return .= _L($name) . '&nbsp;:<br />' .
