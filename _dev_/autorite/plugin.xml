@@ -23,4 +23,12 @@
 		  Autorite
 	</prefix>
 	<necessite id='cfg' version='[1.0.1;]' />
+
+
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>autorite_ajouter_bouton.php</inclure>
+	</pipeline>
+
 </plugin>

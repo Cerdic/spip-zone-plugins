@@ -1,6 +1,6 @@
 <?php
 
-// Assure la securite de la page de configuration du plugin
+// Prepare les messages d'aide de la page de configuration du plugin
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
