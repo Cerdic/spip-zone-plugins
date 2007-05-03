@@ -11,7 +11,8 @@
 [(#REM) la classe cfg_id permet de stocker dans un tableau sous cet index]
 <label for="id">*<:cfg:id:></label>
 <input type="text" name="id" class="cfg_id" value="#ENV{id}" size="15" />
-<label for="cfg_copier"><:cfg:copier_si_change:></label>
+<input type="submit" name="_cfg_affiche" value="&gt;">
+<label for="_cfg_copier"><:cfg:copier_si_change:></label>
 <input type="checkbox" name="_cfg_copier" />
 </fieldset>
 
