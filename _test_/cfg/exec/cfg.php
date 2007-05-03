@@ -20,6 +20,13 @@ function exec_cfg_dist($class = null)
 		($cfg_id = _request('cfg_id'))? $cfg_id : ''
 		);
 
+	if (!$config->autoriser()) {
+		include_spip('inc/minipres');
+		echo minipres(_T('info_acces_refuse') .
+			" (cfg {$config->nom} - {$config->vue} - {$config->cfg_id})");
+		exit;
+	}
+
 	$config->traiter();
 	echo $config->sortie();
 	return;
@@ -34,6 +41,8 @@ class cfg_dist
 	var $sto = null;
 // les options de creation de cet objet
 	var $optsto = array();
+// le "faire" de autoriser($faire), par defaut, autoriser_defaut_dist(): que les admins complets
+	var $autoriser = 'defaut';
 // le nom du meta (ou autre) ou va etre stocke la config concernee
 	var $nom = '';
 // le fond html utilise , en general pour config simple idem $nom
@@ -121,6 +130,11 @@ class cfg_dist
 		    }
 	    }
 	    return '';
+	}
+
+	function autoriser()
+	{
+		return autoriser($this->autoriser);
 	}
 
 	function traiter()
