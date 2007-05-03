@@ -9,6 +9,9 @@
 
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
+<div style="float:#LANG_RIGHT;"><img src='#DOSSIER_SQUELETTE/../illuminati.png' width='64' height='64' alt='Logo rigolo' /></div>
+
+
 [(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
 [(#CONFIG{autorite_erreurs}|?{#CONFIG{autorite_erreurs}|unserialize|count|>{0}|?{' '}})
 
