@@ -74,30 +74,30 @@ function colonne_table($table, $col) {
 }
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
-function valeur_colonne_table_dist($table, $col, $id) {
-	if (is_scalar($id)) {
-		$where = id_table_objet($table) . '=' . $id;
-	} else {
-		$where = $and = '';
-		foreach ($id as $col => $id) {
-			$where .= $and . $col . '=' . $id;
-			$and = ' AND';
+if (!function_exists('valeur_colonne_table')) {
+	function valeur_colonne_table($table, $col, $id) {
+		if (function_exists($f = $table.'_valeur_colonne_table_dist')
+		OR function_exists($f = $table.'_valeur_colonne_table')) {
+			return $f($table, $col, $id);
 		}
+		if (is_scalar($id)) {
+			$where = id_table_objet($table) . '=' . $id;
+		} else {
+			$where = $and = '';
+			foreach ($id as $col => $id) {
+				$where .= $and . $col . '=' . $id;
+				$and = ' AND';
+			}
+		}
+	    $s = spip_query(
+	        'SELECT ' . (is_array($col) ? implode($col, ', ') : $col) .
+	         ' FROM spip_' . table_objet($table) .
+	         ' WHERE ' . $where);
+	    if ($t = spip_fetch_array($s)) {
+	        return is_array($col) ? $t : $t[$col];
+	    }
+	    return false;
 	}
-    $s = spip_query(
-        'SELECT ' . (is_array($col) ? implode($col, ', ') : $col) .
-         ' FROM spip_' . table_objet($table) .
-         ' WHERE ' . $where);
-    if ($t = spip_fetch_array($s)) {
-        return is_array($col) ? $t : $t[$col];
-    }
-    return false;
-}
-function valeur_colonne_table($table, $col, $id) {
-	if (function_exists($f = $table.'_valeur_colonne_table_dist')
-	OR function_exists($f = $table.'_valeur_colonne_table'))
-		return $f($table, $col, $id);
-	return valeur_colonne_table_dist($table, $col, $id);
 }
 
 /**
