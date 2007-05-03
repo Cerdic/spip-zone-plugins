@@ -328,11 +328,4 @@ if (serialize($autorite_erreurs) != $GLOBALS['meta']['autorite_erreurs']) {
 unset($autorite_erreurs);
 
 
-// La securite de la configuration oblige a charger ce fichier
-// avant que cfg ne prenne en compte le POST de la nouvelle config
-if (_request('exec') == 'cfg'
-AND _request('cfg') == 'autorite') {
-	include_once _DIR_PLUGIN_AUTORITE.'fonds/cfg_autorite_fonctions.php';
-}
-
 ?>
