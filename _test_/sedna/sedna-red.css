@@ -1,17 +1,15 @@
-<style type="text/css" id="couleur">
-	h2 {
-		background: transparent url(sedna-red.gif);
-	}
-	div.top {
-		background: transparent url(sedna-red.gif);
-	}
-	div.bottom {
-		background: transparent url(sedna-red.gif);
-	}
-	div.marge a:hover {
-		background-color: #ff3333;
-	}
-	div.marge a.selected {
-		background-color: #cc3333;
-	}
-</style>
+h2 {
+	background: transparent url(sedna-red.gif);
+}
+div.top {
+	background: transparent url(sedna-red.gif);
+}
+div.bottom {
+	background: transparent url(sedna-red.gif);
+}
+div.marge a:hover {
+	background-color: #ff3333;
+}
+div.marge a.selected {
+	background-color: #cc3333;
+}
