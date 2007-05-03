@@ -1,15 +1,16 @@
 [(#REM) titre=Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»]
 
-[(#REM) descriptif=
-<div id="message"></div>
-<a href="http://www.spip-contrib.net/-Autorite-" class="spip_out">Cf. documentation</a>
+<!-- descriptif=
 
-]
+<img src='#DOSSIER_SQUELETTE/../illuminati.png' width='64' height='64' alt='Logo rigolo' style="float:#LANG_RIGHT;" />
+#EVAL{MESSAGE_CONFIG_AUTORISER}
+
+<a href="http://www.spip-contrib.net/-Autorite-" class="spip_out">Cf. documentation</a>
+-->
 #CACHE{0}
 
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
-<div style="float:#LANG_RIGHT;"><img src='#DOSSIER_SQUELETTE/../illuminati.png' width='64' height='64' alt='Logo rigolo' /></div>
 
 
 [(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
@@ -225,18 +226,3 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 -->
 </div>
 </form>
-
-
-
-[(#REM)
-
-Hack de la mort pour povuoir mettre ce que je veux dans la div de la marge ; a l'aide !
-
-]
-<div id="message2">
-#EVAL{MESSAGE_CONFIG_AUTORISER}
-</div>
-<script type='text/javascript'><!--
-	$('#message').html($('#message2').html());
-	$('#message2').empty();
-//--></script>
