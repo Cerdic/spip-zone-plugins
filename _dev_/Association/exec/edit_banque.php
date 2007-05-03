@@ -43,7 +43,7 @@ echo '<td>Num&eacute;ro :</td>';
 echo '<td><input name="id" type="text" size="3" readonly="true" value="'.$data['id_banque'].'"></td></tr>';
 echo '<tr>';
 echo '<td>Code :</td>';
-echo '<td><input name="code" type="text" value="'.$data['code'].'"></td></tr>';
+echo '<td><input name="code" type="text" value="'.$data['valeur'].'"></td></tr>';
 echo '<tr>';
 echo '<td>Intitul&eacute; :</td>';
 echo '<td><input name="intitule" type="text" size="50" value="'.$data['intitule'].'"></td>';

@@ -45,7 +45,7 @@ while ($data = spip_fetch_array($query))
 {
 echo '<tr> ';
 echo '<td class ='.$class.'>'.$data['id_banque'].'</td>';
-echo '<td class ='.$class.'>'.$data['code'].'</td>';
+echo '<td class ='.$class.'>'.$data['valeur'].'</td>';
 echo '<td class ='.$class.'>'.$data['intitule'].'</td>';
 echo '<td class ='.$class.'>'.$data['reference'].'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.number_format($data['solde'], 2, ',', ' ').' &euro;</td>';

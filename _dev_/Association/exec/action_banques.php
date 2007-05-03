@@ -31,7 +31,7 @@ $intitule=$_POST['intitule'];
 $reference=$_POST['reference'];
 $solde=$_POST['solde'];
 $date=$_POST['date'];
-$commentaire=$_POST['commentaires'];
+$commentaire=$_POST['commentaire'];
 $intitule= addslashes($intitule);
 $reference= addslashes($reference);
 $commentaire= addslashes($commentaire);
@@ -71,7 +71,7 @@ echo '</p>';
 }
 
 if ($action =="modifie") { 
-spip_query( "UPDATE spip_asso_banques SET code='$code', intitule='$intitule', reference='$reference', solde='$solde', date='$date', commentaire='$commentaire' WHERE id_banque='$id_banque' ");
+spip_query( "UPDATE spip_asso_banques SET valeur='$code', intitule='$intitule', reference='$reference', solde='$solde', date='$date', commentaire='$commentaire' WHERE id_banque='$id_banque' ");
 
 echo '<p><strong>Le compte financier "'.$code.'" a &eacute;t&eacute; mis &agrave; jour</strong></p>';
 echo '<p>';
@@ -80,7 +80,7 @@ echo '</p>';
 }
 
 if ($action == "ajoute") {
-spip_query( "INSERT INTO spip_asso_banques (code, intitule, reference, solde, date, commentaire) VALUES ('$code', '$intitule', '$reference', '$solde', '$date', '$commentaire' )");
+spip_query( "INSERT INTO spip_asso_banques (valeur, intitule, reference, solde, date, commentaire) VALUES ('$code', '$intitule', '$reference', '$solde', '$date', '$commentaire' )");
 echo '<p><strong>Le nouveau compte financier a &eacute;t&eacute; ajout&eacute;</strong></p>';
 echo '<p>';
 icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ecole.gif','rien.gif' );
