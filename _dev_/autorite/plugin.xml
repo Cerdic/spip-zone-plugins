@@ -6,14 +6,14 @@
 		&copy; Fil &amp; James 2007 - Distribué sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.3
+		0.4
 	</version>
 	<etat>
 		test
 	</etat>
 	<description>
 		Quelques r&#233;glages d'autorisations (ajoutez les v&#244;tres !)
-		<h4><a href="?exec=cfg&cfg=autorite">Configuration</a></h4>
+		<h4><a href="?exec=cfg&amp;cfg=autorite">Configuration</a></h4>
 	</description>
 	<lien>
 		[Documentation sur SPIP Contrib'->http://www.spip-contrib.net/-Autorite-],
