@@ -86,6 +86,20 @@ function icone_etendue($texte, $lien, $fond, $fonction="", $align="", $afficher=
 	if ($afficher == 'oui')	echo $icone; else return $icone;
 }
 
+function forms_barre_nav_gauche($page_actuelle,$liste_items){
+	$out = "<style>
+	.icone36-on{text-align:center;text-decoration:none;}
+	.icone36-on img {-moz-border-radius-bottomleft:5px;-moz-border-radius-bottomright:5px;-moz-border-radius-topleft:5px;-moz-border-radius-topright:5px;
+background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padding:4px;}
+.icone36-on span {color:#000000;display:block;font-family:Verdana,Arial,Sans,sans-serif;font-size:10px;font-weight:bold;margin:2px;width:100%;}
+.barre_nav .pointeur {margin-bottom:0.5em;}
+</style><div class='barre_nav'>";
+	foreach($liste_items as $item){
+		$out .= icone_etendue($item['titre'], isset($item['url'])?$item['url']:generer_url_ecrire($item['page']), $item['icone'], isset($item['action'])?$item['icone']:"rien.gif","", false, $page_actuelle==$item['page']);
+	}
+	return $out."</div>";
+}
+
 function afficher_tables_tous_corps($type_form, $link=NULL, $fond='fonds/tables_tous'){
 	global $spip_lang_right;
 	include_spip('public/assembler');
