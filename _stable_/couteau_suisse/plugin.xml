@@ -14,7 +14,7 @@ R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelle
 
 Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typographiques, Corrections typographiques, Affichage public, Balises, filtres, crit&#232;res, etc.
 	</description>
-	<lien>[->http://www.spip-contrib.net/Tweak-SPIP]</lien> <!-- URI de documentation -->
+	<lien>[->http://www.spip-contrib.net/Le-Couteau-Suisse]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
 	cout_options.php
 	</options>
