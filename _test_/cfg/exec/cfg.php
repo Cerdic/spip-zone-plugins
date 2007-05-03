@@ -233,7 +233,7 @@ class cfg_dist
 		$contexte est un tableau (nom=>valeur)
 		qui sera enrichi puis passe à recuperer_fond
 	*/
-	function get_fond($contexte = array())
+	function formulaire($contexte = array())
 	{
 		include_spip('inc/securiser_action');
 	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->vue;
@@ -277,7 +277,9 @@ class cfg_dist
 	}
 	function sortie($contexte = array())
 	{
-		$formulaire = $this->get_fond($contexte);
+		// appeler au prealable formulaire() car il recupere les <!-- machin=...->
+		// machin = titre, boite, descriptif ou autre ...
+		$formulaire = $this->formulaire($contexte);
 		($this->titre && $this->boite)
 		 ||	($this->titre && ($this->boite = $this->titre) && !($this->titre = ''))
 		 || $this->boite
@@ -285,11 +287,10 @@ class cfg_dist
 
 		return
 			$this->debut_page() .
-
+			debut_cadre_trait_couleur('', true, '', $this->boite) .
 			$formulaire .
-			
+			fin_cadre_trait_couleur(true) .			
 			$this->fin_page();
-				
 	}
 
 	function lier()
@@ -355,17 +356,12 @@ class cfg_dist
 		
 			debut_droite("", true) .
 			
-			($this->titre ? gros_titre($this->titre, '', false) : '') .
-			
-			debut_cadre_trait_couleur('', true, '', $this->boite);
+			($this->titre ? gros_titre($this->titre, '', false) : '');
 	}
 
 	function fin_page()
 	{
-		return fin_cadre_trait_couleur(true) .
-			fin_gauche() .
-		
-			fin_page();
+		return fin_gauche() . fin_page();
 	}
 }
 ?>
