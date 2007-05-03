@@ -141,7 +141,9 @@ class cfg_dist
 
 	function log($message)
 	{
-		spip_log('cfg (' . $this->nom_config() . '): ' . $message);
+		($GLOBALS['auteur_session'] && ($qui = $GLOBALS['auteur_session']['login']))
+		|| ($qui = $GLOBALS['ip']);
+		spip_log('cfg (' . $this->nom_config() . ') par ' . $qui . ': ' . $message);
 	}
 
 	function modifier($supprimer = false)
@@ -157,6 +159,7 @@ class cfg_dist
 		}
 		if (!$this->log_modif) {
 			$this->message .= _L('pas_de_changement') . ' <b>' . $this->nom_config() . '</b>';
+			return;
 		}
 		$this->sto->modifier();
 		$this->message .= ($msg = _L('config_enregistree')) . ' <b>' . $this->nom_config() . '</b>';
