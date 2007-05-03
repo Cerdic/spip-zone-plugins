@@ -4,8 +4,10 @@ if (_DIR_RESTREINT AND $auteur_session['statut'] == '0minirezo') {
 	$GLOBALS['svn_up_dir_skel'] = "squelettes";
 	if (isset($GLOBALS['dossier_squelettes'])
 		&& $GLOBALS['dossier_squelettes']!=""){
-		$GLOBALS['svn_up_dir_skel'] = explode(':',$GLOBALS['dossier_squelettes']);
-		$GLOBALS['svn_up_dir_skel'] = $GLOBALS['svn_up_dir_skel'][0];
+		$skel = explode(':',$GLOBALS['dossier_squelettes']);
+		$skel = $GLOBALS['svn_up_dir_skel'][0];
+		if (is_dir($skel))
+			$GLOBALS['svn_up_dir_skel'] = $skel;
 	}
 	if (!($GLOBALS['svn_up_dir_skel']
 	AND is_dir($GLOBALS['svn_up_dir_skel'].'/.svn')
