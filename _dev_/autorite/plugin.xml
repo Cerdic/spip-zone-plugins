@@ -18,9 +18,9 @@
 	<lien>
 		[Documentation sur SPIP Contrib'->http://www.spip-contrib.net/-Autorite-],
 	</lien>
-	<icon>illuminati.png</icon>
+	<icon>illuminati-128.png</icon>
 	<prefix>
 		  Autorite
 	</prefix>
-	<necessite id='cfg' />
+	<necessite id='cfg' version='[1.0.1;]' />
 </plugin>
