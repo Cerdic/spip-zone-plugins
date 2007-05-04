@@ -31,8 +31,8 @@
 <h1><:sedna:preferences:></h1>
 
 <ul>
-<li><a class="#EVAL{$_COOKIE['sedna_style'] == 'masquer'?'':'selected'}" id="desc_afficher" onmousedown="style_desc('afficher'); return false;"><:sedna:aff_resume:></a></li>
-<li><a class="#EVAL{$_COOKIE['sedna_style'] == 'masquer'?'selected':''}" id="desc_masquer" onmousedown="style_desc('masquer'); return false;"><:sedna:masquer_resume:></a></li>
+<li><a class="<?=$_COOKIE['sedna_style'] == 'masquer'?'':'selected';?>" id="desc_afficher" onmousedown="style_desc('afficher'); return false;"><:sedna:aff_resume:></a></li>
+<li><a class="<?=$_COOKIE['sedna_style'] == 'masquer'?'selected':'';?>" id="desc_masquer" onmousedown="style_desc('masquer'); return false;"><:sedna:masquer_resume:></a></li>
 </ul>
 
 <?php
@@ -42,14 +42,14 @@
 <ul>
 <li>
 <a id="synchrooui"
-	class='#EVAL{$_COOKIE['sedna_synchro'] == 'oui'?'selected':''}'
+	class='<?=$_COOKIE['sedna_synchro'] == 'oui'?'selected':'';?>'
 	onclick="sedna_synchro('oui');document.location=document.location;"
 	title="<:sedna:synchro_titre:>"
-><:sedna:synchro:>#EVAL{$GLOBALS['synchro']}</a>
+><:sedna:synchro:><?=$GLOBALS['synchro'];?></a>
 </li>
 <li>
 <a id="synchronon"
-	class='#EVAL{$_COOKIE['sedna_synchro'] != 'oui'?'selected':''}'
+	class='<?=$_COOKIE['sedna_synchro'] != 'oui'?'selected':''?>'
 	onclick="sedna_synchro('non');"
 ><:sedna:pas_synchro:></a>
 </li>
@@ -115,10 +115,6 @@ problemes dans les deux elements au sujet des sous-repertoires]
 		}
 	?></a>
 </li>
-<?php
-	$nom_site_#ID_SYNDIC = '[(#NOM_SITE|texte_script)]';
-	$url_site_#ID_SYNDIC = '[(#URL_SITE|abs_url|texte_script)]';
-?>
 </BOUCLE_sites>
 </ul>
 
