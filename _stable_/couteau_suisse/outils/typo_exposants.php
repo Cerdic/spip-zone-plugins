@@ -6,7 +6,7 @@
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
-	$sup='<sup>';
+	$sup='<sup class="typo_exposants">';
 	$fin='</sup>';
 	$trouve = array(
 		'/(\\bM)e?(lles?)\\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)

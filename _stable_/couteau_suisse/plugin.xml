@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Le Couteau Suisse</nom>
 	<icon>img/couteau-50.gif</icon>
-	<version>1.7.2.11 pour Spip 1.9 minimum.</version>
+	<version>1.7.2.12 pour Spip 1.9 minimum.</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
 _ &copy; 2007 - Distribu&#233; sous licence GPL
@@ -10,9 +10,13 @@ _ &copy; 2007 - Distribu&#233; sous licence GPL
 	stable
 	</etat>
 	<description>
-R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP. Chacun de ces outils peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin et g&#233;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l'onglet {{Le Couteau Suisse}}.
+R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de votre site SPIP.
+
+Chacun de ces outils peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin et g&#233;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l'onglet {{Le Couteau Suisse}}.
 
 Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typographiques, Corrections typographiques, Affichage public, Balises, filtres, crit&#232;res, etc.
+
+N'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur [Spip-Contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse]
 	</description>
 	<lien>[->http://www.spip-contrib.net/Le-Couteau-Suisse]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->

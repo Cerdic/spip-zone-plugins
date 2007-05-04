@@ -419,6 +419,7 @@ add_outil( array(
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'categorie'	 => 'typo-corr',
 	'pipeline:post_typo' => 'typo_exposants',
+	'code:css' => 'sup.typo_exposants { font-size:75%; font-variant:normal; vertical-align:super; }',
 ));
 
 add_outil( array(

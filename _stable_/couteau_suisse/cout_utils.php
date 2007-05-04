@@ -112,13 +112,13 @@ cs_log(" -- tweak_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defa
 }
 // installation de $cout_metas_pipelines
 // $type ici est egal a 'options' ou 'fonctions'
-function set_cout_metas_pipelines_fichier($tweaks_pipelines, $type) {
+function set_cout_metas_pipelines_fichier($infos_pipelines, $type) {
 	global $cout_metas_pipelines;
 	$code = '';
-	if (isset($tweaks_pipelines['inc_'.$type]))
-		foreach ($tweaks_pipelines['inc_'.$type] as $inc) $code .= "include_spip('outils/$inc');\n";
-	if (isset($tweaks_pipelines['code_'.$type]))
-		foreach ($tweaks_pipelines['code_'.$type] as $inline) $code .= $inline."\n";
+	if (isset($infos_pipelines['inc_'.$type]))
+		foreach ($infos_pipelines['inc_'.$type] as $inc) $code .= "include_spip('outils/$inc');\n";
+	if (isset($infos_pipelines['code_'.$type]))
+		foreach ($infos_pipelines['code_'.$type] as $inline) $code .= $inline."\n";
 	// on optimise avant...
 	$code = str_replace('intval("")', '0', $code);
 	$code = str_replace("\n".'if(strlen($foo="")) ',"\n\$foo=''; //", $code);
@@ -131,12 +131,12 @@ cs_log(" -- fichier_dest = $fichier_dest");
 }
 
 // installation de $cout_metas_pipelines
-function set_cout_metas_pipelines_pipeline($tweaks_pipelines, $pipeline) {
+function set_cout_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
 	global $cout_metas_pipelines;
 	$code = '';
-	if (isset($tweaks_pipelines[$pipeline])) {
-		foreach ($tweaks_pipelines[$pipeline]['inclure'] as $inc) $code .= "include_spip('outils/$inc');\n";
-		foreach ($tweaks_pipelines[$pipeline]['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
+	if (isset($infos_pipelines[$pipeline])) {
+		foreach ($infos_pipelines[$pipeline]['inclure'] as $inc) $code .= "include_spip('outils/$inc');\n";
+		foreach ($infos_pipelines[$pipeline]['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
 	}
 	$cout_metas_pipelines[$pipeline] = $code;
 cs_log("set_cout_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
@@ -225,11 +225,11 @@ function tweak_sauve_configuration() {
 	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
 }
 
-// cree un tableau $tweaks_pipelines et initialise $cout_metas_pipelines
+// cree un tableau $infos_pipelines et initialise $cout_metas_pipelines
 function tweak_initialise_includes() {
 	global $outils, $cout_metas_pipelines;
 	// toutes les infos sur les pipelines
-	$tweaks_pipelines = array();
+	$infos_pipelines = array();
 	// liste des pipelines utilises
 	$pipelines_utilises = array();
 	// liste des pipelines utilises
@@ -242,9 +242,9 @@ function tweak_initialise_includes() {
 			foreach ($outil as $pipe=>$fonc) {
 				if (is_pipeline_outil($pipe, $pipe2)) {
 					// module a inclure
-					$tweaks_pipelines[$pipe2]['inclure'][] = $inc;
+					$infos_pipelines[$pipe2]['inclure'][] = $inc;
 					// fonction a appeler
-					$tweaks_pipelines[$pipe2]['fonction'][] = $fonc;
+					$infos_pipelines[$pipe2]['fonction'][] = $fonc;
 					// liste des pipelines utilises
 					if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
 				} elseif (is_traitements_outil($pipe, $fonc, $traitements_utilises)) {
@@ -255,15 +255,15 @@ function tweak_initialise_includes() {
 			if ($f=find_in_path('outils/'.$inc.'.css')) $cout_metas_pipelines['header'][] = tweak_insert_header($f, 'css');
 			if ($f=find_in_path('outils/'.$inc.'.js')) $cout_metas_pipelines['header'][] = tweak_insert_header($f, 'js');
 			// recherche d'un code inline eventuellement propose
-			if (isset($outil['code:options'])) $tweaks_pipelines['code_options'][] = $outil['code:options'];
-			if (isset($outil['code:fonctions'])) $tweaks_pipelines['code_fonctions'][] = $outil['code:fonctions'];
-			if (isset($outil['code:css'])) $tweaks_pipelines['header'][] = "<style type=\"text/css\">\n"
+			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
+			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
+			if (isset($outil['code:css'])) $cout_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
 				.tweak_parse_code_js($outil['code:css'])."\n</style>";
-			if (isset($outil['code:js'])) $tweaks_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
+			if (isset($outil['code:js'])) $cout_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
 				.tweak_parse_code_js($outil['code:js'])."\n// --></script>";
 			// recherche d'un fichier montweak_options.php ou montweak_fonctions.php pour l'inserer dans le code
-			if ($temp=tweak_lire_fichier_php('outils/'.$inc.'_options.php')) $tweaks_pipelines['code_options'][] = $temp;
-			if ($temp=tweak_lire_fichier_php('outils/'.$inc.'_fonctions.php')) $tweaks_pipelines['code_fonctions'][] = $temp;
+			if ($temp=tweak_lire_fichier_php('outils/'.$inc.'_options.php')) $infos_pipelines['code_options'][] = $temp;
+			if ($temp=tweak_lire_fichier_php('outils/'.$inc.'_fonctions.php')) $infos_pipelines['code_fonctions'][] = $temp;
 		}
 	}
 	// mise en code des traitements trouves
@@ -276,16 +276,16 @@ function tweak_initialise_includes() {
 		$temp = "\$GLOBALS['table_des_traitements']['$b'][]='" . join('(', $traitements_utilises[$b]).'%s';
 		$traitements_utilises[$b] = $temp . str_repeat(')', substr_count($temp, '(')) . "';";
 	}
-	$tweaks_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
+	$infos_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
 	if (@file_exists($f=sous_repertoire(_DIR_TMP, "couteau-suisse"))) {
 		include_spip('inc/getdocument');
 		effacer_repertoire_temporaire($f);
 	} else spip_log("Erreur - tweak_initialise_includes() : $f introuvable !");
 	// installation de $cout_metas_pipelines
-	set_cout_metas_pipelines_fichier($tweaks_pipelines, 'options');
-	set_cout_metas_pipelines_fichier($tweaks_pipelines, 'fonctions');
-	foreach($pipelines_utilises as $pipe) set_cout_metas_pipelines_pipeline($tweaks_pipelines, $pipe);
+	set_cout_metas_pipelines_fichier($infos_pipelines, 'options');
+	set_cout_metas_pipelines_fichier($infos_pipelines, 'fonctions');
+	foreach($pipelines_utilises as $pipe) set_cout_metas_pipelines_pipeline($infos_pipelines, $pipe);
 }
 
 // retire les guillemets extremes s'il y en a

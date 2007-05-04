@@ -314,7 +314,7 @@ cs_log("Fin   : exec_admin_couteau_suisse()");
 // affiche un outil sur une ligne
 function ligne_tweak($outil, &$js, $afficher){
 	static $id_input=0;
-	$inc = $tweak_id = $outil['id'];
+	$inc = $outil_id = $outil['id'];
 	$actif = $outil['actif'];
 	$erreur_version = (isset($outil['version-min']) && $GLOBALS['spip_version']<$outil['version-min'])
 		|| (isset($outil['version-max']) && $GLOBALS['spip_version']>$outil['version-max']);
@@ -323,7 +323,7 @@ function ligne_tweak($outil, &$js, $afficher){
 	$nb_var = intval($outil['nb_variables']);
 	$index = intval($outil['index']);
 
-	$s = "<a name='tweak$index' id='tweak$index'></a><form  style='margin:0 0 0 1em;'><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
+	$s = "<a name='tweak$index' id='tweak$index'></a><form  style='margin:0 0 0 1em;'><div id='$outil_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
@@ -342,11 +342,11 @@ function ligne_tweak($outil, &$js, $afficher){
 	$p .= " onclick='tweakchange.apply(this,[$index])'";
 	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('cout:activer_outil')."</label>";
 	$js .= "Outils[$index] = Array(\"$inc\", $nb_var);\n";
-	$p .= ($afficher?bouton_block_visible($tweak_id):bouton_block_invisible($tweak_id)) . $outil['nom'] . '</div>';
+	$p .= ($afficher?bouton_block_visible($outil_id):bouton_block_invisible($outil_id)) . $outil['nom'] . '</div>';
 
 	$s .= propre($p) . "</div></form>";
 
-	$p = $afficher?debut_block_visible($tweak_id):debut_block_invisible($tweak_id);
+	$p = $afficher?debut_block_visible($outil_id):debut_block_invisible($outil_id);
 
 	$p .= "\n<div class='detailtweak'>";
 	$p .= $outil['description'];
@@ -359,12 +359,12 @@ function ligne_tweak($outil, &$js, $afficher){
 		if(isset($outil['code:fonction'])) $a[] = "code fonctions";
 		if(isset($outil['code:js'])) $a[] = "code javascript";
 		if(isset($outil['code:css'])) $a[] = "code styles";
-		if (find_in_path('outils/'.($temp=$tweak_id.'.php'))) $a[] = $temp;
-		if (find_in_path('outils/'.($temp=$tweak_id.'_options.php'))) $a[] = $temp;
-		if (find_in_path('outils/'.($temp=$tweak_id.'_fonctions.php'))) $a[] = $temp;
+		if (find_in_path('outils/'.($temp=$outil_id.'.php'))) $a[] = $temp;
+		if (find_in_path('outils/'.($temp=$outil_id.'_options.php'))) $a[] = $temp;
+		if (find_in_path('outils/'.($temp=$outil_id.'_fonctions.php'))) $a[] = $temp;
 		foreach ($outil as $pipe=>$fonc) if (is_pipeline_outil($pipe, $pipe2)) $a[] = $pipe2;
-		if (find_in_path('outils/'.($temp=$tweak_id.'.js'))) $a[] = $temp;
-		if (find_in_path('outils/'.($temp=$tweak_id.'.css'))) $a[] = $temp;
+		if (find_in_path('outils/'.($temp=$outil_id.'.js'))) $a[] = $temp;
+		if (find_in_path('outils/'.($temp=$outil_id.'.css'))) $a[] = $temp;
 		$s .= join(' | ', $a);
 	}
 	$s .= "</div></div>";
