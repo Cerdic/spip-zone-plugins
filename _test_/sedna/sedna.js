@@ -1,12 +1,12 @@
 /* Fixer le path du cookie sur le repertoire local (et non pas /) */
 function recuperer_cookiepath() {
 	var cookiepath = location.href;
-	/* remonter au repertoire */
-	cookiepath = cookiepath.substring(0,cookiepath.lastIndexOf('/'));
 	/* supprimer la methode http:// */
 	cookiepath = cookiepath.substring(cookiepath.indexOf('://')+3);
 	/* supprimer hostname */
 	cookiepath = cookiepath.substring(cookiepath.indexOf('/')+1);
+	/* remonter au repertoire */
+	cookiepath = cookiepath.substring(0,cookiepath.lastIndexOf('/'));
 	/* alert(cookiepath); */
 	return cookiepath;
 }
