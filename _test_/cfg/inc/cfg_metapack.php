@@ -79,6 +79,7 @@ class cfg_metapack
 		    ecrire_meta($this->cfg->nom, serialize($base));
 	    }
 	    ecrire_metas();
+	    return true;
 	}
 }
 ?>

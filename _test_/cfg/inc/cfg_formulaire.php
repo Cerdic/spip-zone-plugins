@@ -133,8 +133,9 @@ class cfg_formulaire
 	function modifier($supprimer = false)
 	{
 		if ($supprimer) {
-			$this->sto->modifier($supprimer);
-			$this->message .= ($msg = _L('config_supprimee')) . ' <b>' . $this->nom_config() . '</b>';
+			$ok = $this->sto->modifier($supprimer);
+			$this->message .= ($msg = $ok ? _L('config_supprimee') : _L('erreur_suppression'))
+								. ' <b>' . $this->nom_config() . '</b>';
 			$this->log($msg);
 			return;
 		}
@@ -145,8 +146,9 @@ class cfg_formulaire
 			$this->message .= _L('pas_de_changement') . ' <b>' . $this->nom_config() . '</b>';
 			return;
 		}
-		$this->sto->modifier();
-		$this->message .= ($msg = _L('config_enregistree')) . ' <b>' . $this->nom_config() . '</b>';
+		$ok = $this->sto->modifier();
+		$this->message .= ($msg = $ok ? _L('config_enregistree') : _L('erreur_enregistrement'))
+							. ' <b>' . $this->nom_config() . '</b>';
 		$this->log($msg . ' ' . $this->log_modif);
 	}
 

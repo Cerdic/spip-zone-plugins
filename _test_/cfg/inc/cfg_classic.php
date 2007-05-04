@@ -39,6 +39,7 @@ class cfg_classic
 			}
 	    }
 	    ecrire_metas();
+	    return true;
 	}
 }
 ?>
