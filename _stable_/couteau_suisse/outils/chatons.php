@@ -5,7 +5,7 @@
 // Toutes les infos sur : http://www.spip-contrib.net/?article1554
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
-function tweak_rempl_chatons($texte) {
+function cs_rempl_chatons($texte) {
 	if (strpos($texte, ':')===false) return $texte;
 	$chatons_rempl = unserialize($GLOBALS['meta']['tweaks_chatons']);
 	return str_replace($chatons_rempl[0], $chatons_rempl[1], $texte);
@@ -15,7 +15,7 @@ function chatons_pre_typo($texte) {
 	if (strpos($texte, ':')===false) return $texte;
 	if (!isset($GLOBALS['meta']['tweaks_chatons']) || isset($GLOBALS['var_mode']))
 		chatons_installe();
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_chatons', $texte);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_chatons', $texte);
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse

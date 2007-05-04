@@ -81,7 +81,7 @@ function smileys_raccourcis() {
 
 // fonction de remplacement
 // les balises suivantes sont protegees : html|code|cadre|frame|script|acronym|cite
-function tweak_rempl_smileys($texte) {
+function cs_rempl_smileys($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	$smileys_rempl = unserialize($GLOBALS['meta']['tweaks_smileys']);
 	// smileys a probleme :
@@ -101,7 +101,7 @@ function tweak_smileys_pre_typo($texte) {
 	if (!isset($GLOBALS['meta']['tweaks_smileys']) || isset($GLOBALS['var_mode']))
 		smileys_installe();
 //cs_log('smileys trouvés !');
-	// appeler tweak_rempl_smileys() une fois que certaines balises ont ete protegees
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
+	// appeler cs_rempl_smileys() une fois que certaines balises ont ete protegees
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_smileys', $texte);
 }
 ?>

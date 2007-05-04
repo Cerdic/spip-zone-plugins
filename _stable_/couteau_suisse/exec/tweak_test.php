@@ -33,10 +33,10 @@ cs_log("Début : exec_tweak_test()");
 	cs_initialisation(true);
 
 	if ($GLOBALS['spip_version_code']<1.92)
-  		debut_page(_T('cout:titre_tests'), 'configuration', 'tweak_spip');
+  		debut_page(_T('cout:titre_tests'), 'configuration', 'couteau_suisse');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('cout:titre_tests'), "configuration", 'tweak_spip');
+		echo $commencer_page(_T('cout:titre_tests'), "configuration", 'couteau_suisse');
 	}
 
 	echo "<br /><br /><br />";

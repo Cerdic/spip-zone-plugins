@@ -105,12 +105,12 @@ cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$variables = urlencode(serialize($variables));
 	$res = "\n<div id='tweak$index-visible' >$ok_visible</div>";
 	if($c) {
-		$res = "\n<input type='hidden' value='$variables' name='variables'><input type='hidden' value='$outil_' name='tweak'>"
+		$res = "\n<input type='hidden' value='$variables' name='variables'><input type='hidden' value='$outil_' name='outil'>"
 			. "\n<div id='tweak$index-input' style='position:absolute; visibility:hidden;' >$ok_input</div>"
 			. "\n<div id='tweak$index-valeur' style='position:absolute; visibility:hidden;' >$ok_valeur</div>\n"
 			. $res;
 		// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
-		$res = ajax_action_auteur('description_outil', $index, $url_self, "tweak={$outil['id']}", "$res");
+		$res = ajax_action_auteur('description_outil', $index, $url_self, "outil={$outil['id']}", "$res");
 	}
 //cs_log("Fin   : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvée(s)");
 	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);

@@ -34,7 +34,7 @@ function tweak_spip_ajouter_onglets($flux){
 	// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"])
 		if ($flux['args']=='configuration')
-			$flux['data']['tweak_spip']= new Bouton(find_in_path('img/couteau-24.gif'), _T('cout:titre'), generer_url_ecrire("admin_couteau_suisse"));
+			$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), _T('cout:titre'), generer_url_ecrire("admin_couteau_suisse"));
 	return $flux;
 }
 

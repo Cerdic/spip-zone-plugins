@@ -16,7 +16,7 @@ define('_DIR_PLUGIN_TWEAK_SPIP',(_DIR_PLUGINS.end($p)));
 // compatibilite spip 1.9
 if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
-function tweak_styles_et_js() {
+function cs_admin_styles_et_js() {
 	global $couleur_claire;
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
@@ -70,33 +70,33 @@ input.checkbox {
 	margin:0;
 	cursor:pointer;
 }
-div.detailtweak {
+div.detail_outil {
 	border-top:1px solid #B5BECF;
 	padding:0 .5em .5em .5em;
 	background:#F5F5F5;
 }
-div.detailtweak hr {
+div.detail_outil hr {
 	border-top:1px solid #67707F;
 	border-bottom:0;
 	border-left:0;
 	border-right:0;
 	}
 
-div.detailtweak p {
+div.detail_outil p {
 	margin:0.3em 1em .3em 0;
 	padding:0;
 }
 
-div.detailtweak fieldset {
+div.detail_outil fieldset {
 	margin:.8em 4em .5em 4em;
 	-moz-border-radius:8px;
 }
 
-div.detailtweak legend {
+div.detail_outil legend {
 	font-weight:bold;
 }
 
-div.detailtweak sup {
+div.detail_outil sup {
 	font-size:85%;
 	font-variant:normal;
 	vertical-align:super;
@@ -108,13 +108,13 @@ EOF;
 
 var Outils = new Array(); // Listes des outils
 
-function submit_general(tweak) {
-	document.forms.submitform.afficher_tweak.value = tweak;
+function submit_general(outil) {
+	document.forms.submitform.afficher_outil.value = outil;
 	document.forms.submitform.submit();
 }
 
 function tweakcheck(ischecked, index) {
- tweak = Outils[index][0];
+ outil = Outils[index][0];
  if(ischecked == true) {
  	classe = 'nomtweak_on';
 	html = '-input';
@@ -124,8 +124,8 @@ function tweakcheck(ischecked, index) {
 	html = '-valeur';
 	test = 0
  }
- document.getElementById(tweak).className = classe;
- document.getElementById('tweak_'+tweak).value = test;
+ document.getElementById(outil).className = classe;
+ document.getElementById('tweak_'+outil).value = test;
 
  if (Outils[index][1]>0) {
   var chaine=document.getElementById('tweak'+index+html).innerHTML;
@@ -203,9 +203,9 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	}
 
 	// afficher un outil completement ?
-	$afficher_tweak = $_GET['afficher_tweak'];
-	if (!strlen($afficher_tweak) || $afficher_tweak=='non' ) $afficher_tweak = -1;
-		else $afficher_tweak = intval($afficher_tweak);
+	$afficher_outil = $_GET['afficher_outil'];
+	if (!strlen($afficher_outil) || $afficher_outil=='non' ) $afficher_outil = -1;
+		else $afficher_outil = intval($afficher_outil);
 
 	// initialisation generale forcee : recuperation de $outils;
 	cs_initialisation(true);
@@ -216,25 +216,25 @@ cs_log("Début : exec_admin_couteau_suisse()");
 		// pour la peine, un redirige,
 		// que les outils charges soient coherent avec la liste
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
-		$afficher_tweak = _request('afficher_tweak');
-		if (strlen($afficher_tweak) && $afficher_tweak!=='non')
-			redirige_par_entete(generer_url_ecrire('admin_couteau_suisse', "afficher_tweak=$afficher_tweak", true) . "#tweak$afficher_tweak");
+		$afficher_outil = _request('afficher_outil');
+		if (strlen($afficher_outil) && $afficher_outil!=='non')
+			redirige_par_entete(generer_url_ecrire('admin_couteau_suisse', "afficher_outil=$afficher_outil", true) . "#outil$afficher_outil");
 			else redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));
 	}
 //	else
 //		verif_tweaks();
 
 	if ($GLOBALS['spip_version_code']<1.92)
-  		debut_page(_T('cout:titre'), 'configuration', 'tweak_spip');
+  		debut_page(_T('cout:titre'), 'configuration', 'couteau_suisse');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('cout:titre'), "configuration", 'tweak_spip');
+		echo $commencer_page(_T('cout:titre'), "configuration", 'couteau_suisse');
 	}
 
-	tweak_styles_et_js();
+	cs_admin_styles_et_js();
 	echo "<br /><br /><br />";
 	gros_titre(_T('cout:titre'));
-	echo barre_onglets("configuration", 'tweak_spip');
+	echo barre_onglets("configuration", 'couteau_suisse');
 
 	debut_gauche();
 	debut_boite_info();
@@ -273,7 +273,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
 		foreach($temp = $outils as $outil) if ($outil['categorie']==$i) {
-			$s .= ligne_tweak($outil, $js, $afficher_tweak==$outil['index']) . "\n";
+			$s .= ligne_tweak($outil, $js, $afficher_outil==$outil['index']) . "\n";
 			$basics[] = $outil['index'];
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
@@ -289,7 +289,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 
 	echo generer_url_post_ecrire('admin_couteau_suisse', '', 'submitform');
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
-	echo "\n<input type='hidden' name='afficher_tweak' value='non'>";
+	echo "\n<input type='hidden' name='afficher_outil' value='non'>";
 	foreach($temp = $outils as $outil) echo "<input type='hidden' id='tweak_".$outil['id']."' name='tweak_".$outil['id']."' value='".($outil['actif']?"1":"0")."' />";
 	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider2' value='"._T('bouton_valider')."' class='fondo' /></div>";
@@ -323,7 +323,7 @@ function ligne_tweak($outil, &$js, $afficher){
 	$nb_var = intval($outil['nb_variables']);
 	$index = intval($outil['index']);
 
-	$s = "<a name='tweak$index' id='tweak$index'></a><form  style='margin:0 0 0 1em;'><div id='$outil_id' class='nomtweak".($actif?'_on':'')."'>";
+	$s = "<a name='outil$index' id='outil$index'></a><form  style='margin:0 0 0 1em;'><div id='$outil_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
@@ -348,7 +348,7 @@ function ligne_tweak($outil, &$js, $afficher){
 
 	$p = $afficher?debut_block_visible($outil_id):debut_block_invisible($outil_id);
 
-	$p .= "\n<div class='detailtweak'>";
+	$p .= "\n<div class='detail_outil'>";
 	$p .= $outil['description'];
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= "<p>" . _T('auteur') .' '. ($outil['auteur']) . "</p>";
 	$s .= propre($p) . '<hr style="margin:6pt 0 0 0;"/><div style="font-size:85%;">' . _T('cout:detail_outil').' ';

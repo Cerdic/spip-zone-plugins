@@ -22,8 +22,8 @@ function exec_description_outil_dist() {
 cs_log("Début : exec_description_outil_dist() - Préparation du retour par Ajax (données transmises par GET)");
 
 	$script = _request('script');
-	$outil = _request('tweak');
-cs_log(" -- tweak = $outil - script = $script");
+	$outil = _request('outil');
+cs_log(" -- outil = $outil - script = $script");
 	if (!preg_match('/^\w+$/', $script)) { echo minipres(); exit;	}
 	// ici on commence l'initialisation de tous les outils
 	global $outils, $metas_vars, $metas_tweaks;

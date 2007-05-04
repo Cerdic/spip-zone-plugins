@@ -32,7 +32,7 @@ cs_log("Début : action_description_outil_post($index) - On modifie la(les) varia
 	$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
 	// on recupere dans le POST le nom des variables a modifier et le nom de l'outil correspondant
 	$variables = unserialize(urldecode(corriger_caracteres(_request('variables'))));
-	$outil = corriger_caracteres(_request('tweak'));
+	$outil = corriger_caracteres(_request('outil'));
 //cs_log($variables, '$variables = ');
 cs_log($metas_vars, 'metas_vars :');
 	// on traite chaque variable

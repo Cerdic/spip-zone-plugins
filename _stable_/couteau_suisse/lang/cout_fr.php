@@ -143,7 +143,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article1564]",
 
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
 	'filets_sep:description' =>  "Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de Spip.
-_ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d'une image plac&eacute;e dans le dossier plugins/tweak_spip/img/filets.
+_ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.
 _ Plus d'infos : [->http://www.spip-contrib.net/?article1563]",
 	'filets_sep:aide' => 'Filets de S&eacute;paration&nbsp;: <strong>__i__</strong> o&ugrave; <strong>i</strong> est un nombre.<br />Autres filets disponibles : @liste@',
 
@@ -158,7 +158,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 
 	'chatons:nom' => 'Chatons',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
-_ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire plugins/tweak_spip/img/chatons.',
+_ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire plugins/couteau_suisse/img/chatons.',
 	'chatons:aide' => 'Chatons : @liste@',
 
 	'guillemets:nom' => 'Guillemets typographiques',
