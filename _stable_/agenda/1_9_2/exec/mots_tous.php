@@ -20,30 +20,32 @@ include_spip('inc/pim_agenda_gestion');
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
-	global $conf_mot, $spip_lang, $spip_lang_right, $son_groupe;
+	global $spip_lang, $spip_lang_left, $spip_lang_right, $son_groupe;
 	global $evenements, $pim_agenda;
 
-	$conf_mot = intval($conf_mot);
+	$conf_mot = intval(_request('conf_mot'));
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_mots_tous'), "naviguer", "mots");
 	debut_gauche();
 
-	if (autoriser('modifier','groupemots',$id_groupe)  AND !$conf_mot){
+
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
+
+	if (autoriser('creer','groupemots')  AND !$conf_mot){
 		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
 
 		echo bloc_des_raccourcis($res);
 	}
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	debut_droite();
 
 	gros_titre(_T('titre_mots_tous'));
-	if (autoriser('modifier','groupemots',$id_groupe)) {
+	if (autoriser('creer','groupemots')) {
 	  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
 	}
 	echo "<br /><br />";
@@ -78,38 +80,30 @@ function exec_mots_tous_dist()
 
 		debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>";
-		if ($articles == "oui") echo "> "._T('info_articles_2')." &nbsp;&nbsp;";
-		if ($breves == "oui") echo "> "._T('info_breves_02')." &nbsp;&nbsp;";
-		if ($rubriques == "oui") echo "> "._T('info_rubriques')." &nbsp;&nbsp;";
-		if ($syndic == "oui") echo "> "._T('icone_sites_references')." &nbsp;&nbsp;";
-		if ($evenements == "oui") echo "> "._T('agenda:info_evenements')." &nbsp;&nbsp;";
-		if ($pim_agenda == "oui") echo "> "._T('pimagenda:info_evenements')." &nbsp;&nbsp;";
+		$res = '';
+		if ($articles == "oui") $res .= "> "._T('info_articles_2')." &nbsp;&nbsp;";
+		if ($breves == "oui") $res .= "> "._T('info_breves_02')." &nbsp;&nbsp;";
+		if ($rubriques == "oui") $res .= "> "._T('info_rubriques')." &nbsp;&nbsp;";
+		if ($syndic == "oui") $res .= "> "._T('icone_sites_references')." &nbsp;&nbsp;";
+		if ($evenements == "oui") $res .= "> "._T('agenda:info_evenements')." &nbsp;&nbsp;";
+		if ($pim_agenda == "oui") $res .= "> "._T('pimagenda:info_evenements')." &nbsp;&nbsp;";
 
-		if ($unseul == "oui" OR $obligatoire == "oui") echo "<br />";
-		if ($unseul == "oui") echo "> "._T('info_un_mot')." &nbsp;&nbsp;";
-		if ($obligatoire == "oui") echo "> "._T('info_groupe_important')." &nbsp;&nbsp;";
+		if ($unseul == "oui" OR $obligatoire == "oui") $res .= "<br />";
+		if ($unseul == "oui") $res .= "> "._T('info_un_mot')." &nbsp;&nbsp;";
+		if ($obligatoire == "oui") $res .= "> "._T('info_groupe_important')." &nbsp;&nbsp;";
 
-		echo "<br />";
-		if ($acces_minirezo == "oui") echo "> "._T('info_administrateurs')." &nbsp;&nbsp;";
-		if ($acces_comite == "oui") echo "> "._T('info_redacteurs')." &nbsp;&nbsp;";
-		if ($acces_forum == "oui") echo "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
+		$res .= "<br />";
+		if ($acces_minirezo == "oui") $res .= "> "._T('info_administrateurs')." &nbsp;&nbsp;";
+		if ($acces_comite == "oui") $res .= "> "._T('info_redacteurs')." &nbsp;&nbsp;";
+		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
-		echo "</font>";
+ 		echo "<span class='verdana1 spip_x-small'>", $res, "</span>";
 		if ($descriptif) {
-			echo "<div style='border: 1px dashed #aaaaaa;'>";
-			echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
-			echo "<b>",_T('info_descriptif'),"</b> ";
-			echo propre($descriptif);
-			echo "&nbsp; ";
-			echo "</font>";
-			echo "</div>";
+			echo "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; </div>";
 		}
 
 		if (strlen($texte)>0){
-			echo "<font face='Verdana,Arial,Sans,sans-serif'>";
-			echo propre($texte);
-			echo "</font>";
+			echo "<span class='verdana1 spip_small'>", propre($texte), "</span>";
 		}
 
 		//
@@ -121,7 +115,7 @@ function exec_mots_tous_dist()
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
-		// Preliminaire: confirmation de suppression d'un mot lie �qqch
+		// Preliminaire: confirmation de suppression d'un mot lie à qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
 			include_spip('inc/grouper_mots');
@@ -138,22 +132,22 @@ function exec_mots_tous_dist()
 			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 			echo "<tr>";
 			echo "<td>";
-			icone(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
+			echo icone_inline(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif", $spip_lang_left);
 			echo "</td>";
 			echo "\n<td id='editer_mot-$id_groupe-supprimer'",
 			  (!$groupe ? '' : " style='visibility: hidden'"),
 			  ">";
-			icone(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif");
+			echo icone_inline(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif", $spip_lang_left);
 			echo "</td>";
 			echo "<td>";
-			echo "<div align='$spip_lang_right'>";
-			icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif");
-			echo "</div>";
+			echo icone_inline(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif", $spip_lang_right);
 			echo "</td></tr></table>";
 		}	
 
 		fin_cadre_enfonce();
 	}
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 
 	echo fin_gauche(), fin_page();
