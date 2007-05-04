@@ -1,0 +1,6 @@
+#HTTP_HEADER{'Content-Type: text/javascript'}
+#CACHE{24*3600,cache-client}
+
+[(#INCLURE{sedna.js}
+	|replace{musicplayer.swf,#DOSSIER_SQUELETTE/musicplayer.swf}
+	|compacte_js)]
