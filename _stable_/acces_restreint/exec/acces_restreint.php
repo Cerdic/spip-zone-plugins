@@ -31,6 +31,10 @@ function exec_acces_restreint(){
 	
 	if ($connect_statut == '0minirezo' && $connect_toutes_rubriques) {
 		$res = icone_horizontale(_T('accesrestreint:creer_zone'), generer_url_ecrire("acces_restreint_edit","new=oui"), "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", "creer.gif",false);
+
+	if (autoriser('webmestre'))
+		$res .= icone_horizontale(_L('Configuration des acc&#232;s .htaccess'), generer_url_ecrire("acces_restreint_config"), "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", "cadenas-24.gif",false);
+
 		echo bloc_des_raccourcis($res);
 	}
 	
