@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 	if((($r=_request('page'))=='sedna') OR ($r=='sedna-rss')){
 		$forcer_lang = true;
 		include_spip('inc/cookie');
@@ -9,13 +12,6 @@
 		}
 	
 		$GLOBALS['marqueur'].=":".$_COOKIE['sedna_color'];
-		
-		// authentification du visiteur
-		if ($GLOBALS['_COOKIE']['spip_session'] OR
-		($GLOBALS['_SERVER']['PHP_AUTH_USER']  AND !$ignore_auth_http)) {
-			include_ecrire ("inc_session");
-			verifier_visiteur();
-		}
 
 		// Descriptifs : affiches ou masques ?
 		// l'accessibilite sans javascript => affiches par defaut
@@ -42,7 +38,7 @@
 			global $ex_syndic, $class_desc;
 	
 			// Articles a ignorer
-			if (!$_GET['id_syndic']
+			if (!_request('id_syndic')
 			AND $_COOKIE['sedna_ignore_'.$id_syndic])
 				return;
 	
@@ -124,7 +120,7 @@
 		// qu'on a stocke dans le champ spip_auteurs.sedna (a creer au besoin)
 		$synchro = '';
 		if ($_COOKIE['sedna_synchro'] == 'oui'
-		AND $id = $auteur_session['id_auteur']) {
+		AND $id = $GLOBALS['auteur_session']['id_auteur']) {
 			// Recuperer ce qu'on a stocke
 			if (!$s = spip_query("SELECT sedna FROM spip_auteurs
 			WHERE id_auteur=$id")) {
@@ -132,7 +128,8 @@
 				spip_query("ALTER TABLE spip_auteurs
 				ADD sedna TEXT NOT NULL DEFAULT ''");
 			}
-			list($champ) = spip_fetch_array($s);
+			$champ = spip_fetch_array($s);
+			$champ = $champ['sedna'];
 			// mixer avec le cookie en conservant un ordre chronologique
 			if ($_COOKIE['sedna_lu'] <> $champ) {
 				$lus_cookie = preg_split(',[- +],',$_COOKIE['sedna_lu']);
