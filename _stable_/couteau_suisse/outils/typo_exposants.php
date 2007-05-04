@@ -48,13 +48,21 @@ function typo_exposants_fr($texte){
 	return preg_replace($trouve, $remplace, $texte);
 }
 
+function typo_exposants_echappe_balises_callback($matches) {
+ return cs_code_echappement($matches[1], 'EXPO');
+}
+
 function typo_exposants($texte){
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
+	// prudence : on protege les balises <a>
+	if (strpos($texte, '<a ')!==false) 
+		$texte = preg_replace_callback('/(<a [^>]+>)/Ums', 'typo_exposants_echappe_balises_callback', $texte);
 	switch (lang_typo($lang)) {
 		case 'fr':
-			return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
+			$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
+			break;
 		default:
-			return $texte;
 	}
+	return echappe_retour($texte, 'EXPO');
 }
 ?>

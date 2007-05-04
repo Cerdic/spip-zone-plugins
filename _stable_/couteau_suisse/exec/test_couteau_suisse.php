@@ -18,8 +18,8 @@ include_spip("inc/presentation");
 // compatibilite spip 1.9
 if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
-function exec_tweak_test() {
-cs_log("Début : exec_tweak_test()");
+function exec_test_couteau_suisse() {
+cs_log("Début : exec_test_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
@@ -52,7 +52,7 @@ cs_log("Fin   : exec_tweak_test()");
 
 // renvoie un tableau contenant le texte original et sa transfrmation par la fonction $fonction
 // $textes est un tableau de chaines
-function tweak_test_fun(&$textes, $fonction) {
+function cs_test_fun(&$textes, $fonction) {
 	$a = array();
 	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, outil non activé !");
 	foreach ($textes as $i=>$t) {
@@ -156,8 +156,10 @@ function tweak_les_tests() {
 		"1er 1ers, 2e 2es, IIIe IIIes, ",
 		"3 ou 4 m², 3 ou 4 m2 et 2 m3.",
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
+		'avant <a href="www.monlien.com" title="Mon 1er titre" target="_blank">Mon 1er lien</a> apres le "test"!',
+		'avant [Mon 1er lien->www.monlien.com] apres le "test"!',
 	);
-	test_outil(tweak_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants()');
+	test_outil(cs_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants()');
 
 	// test de typo_guillemets()
 	$textes = array(
@@ -165,8 +167,10 @@ function tweak_les_tests() {
 		'avant <code class="code">toto</code>. apres le "test"!',
 		'avant '.echappe_html('<script>toto</script>', 'TEST', true).'apres le "test"!',
 		'avant '.echappe_html('<code class="code">toto</code>', 'TEST', true).'apres le "test"!',
+		'avant <a href="www.monlien.com" title="Mon titre" target="_blank">Mon lien</a> apres le "test"!',
+		'avant [Mon lien->www.monlien.com] apres le "test"!',
 	);
-	test_outil(tweak_test_fun($textes, 'typo_guillemets'), 'Test sur : typo_guillemets()');
+	test_outil(cs_test_fun($textes, 'typo_guillemets'), 'Test sur : typo_guillemets()');
 
 	// test des smileys
 	$textes = array(
@@ -174,14 +178,14 @@ function tweak_les_tests() {
 		"Simples : :-> :-&gt; :-( :-D :-) |-) :'-) :’-) :'-D :’-D :'-( :’-( :-( :o) B-) ;-) :-p :-P' :-| :-/ :-o :-O",
 		"les courts (reconnus s'il y a un espace avant) : :) :( ;) :| |) :/ :(",
 	);
-	test_outil(tweak_test_fun($textes, 'tweak_smileys_pre_typo'), 'Test sur : tweak_smileys_pre_typo()');
+	test_outil(cs_test_fun($textes, 'tweak_smileys_pre_typo'), 'Test sur : tweak_smileys_pre_typo()');
 
 	// test des filets
 	$textes = array(
 		"__degrade.png__\n__ornement.png__",
 		"\n__6__\n__5__\n__4__\n__3__\n__2__\n__1__\n__0__\n",
 	);
-	test_outil(tweak_test_fun($textes, 'filets_sep'), 'Test sur : filets_sep()');
+	test_outil(cs_test_fun($textes, 'filets_sep'), 'Test sur : filets_sep()');
 
 	// test des liens orphelins
 	$GLOBALS["liens_orphelins_etendu"]=true;
@@ -204,8 +208,8 @@ function tweak_les_tests() {
 		'une image ? <img src="http://mailer.e-flux.com/mail_images/toto.jpg" alt="" />',
 		'[<img src="http://mailer.e-flux.com/mail_images/toto.jpg" alt="" />->http://www.americas-society.org/] ',
 	);
-//	test_outil(tweak_test_fun($textes, 'typo'), 'Test sur : echappements');
-	test_outil(tweak_test_fun($textes, 'liens_orphelins'), 'Test sur : liens_orphelins()');
+//	test_outil(cs_test_fun($textes, 'typo'), 'Test sur : echappements');
+	test_outil(cs_test_fun($textes, 'liens_orphelins'), 'Test sur : liens_orphelins()');
 
 /*
 define('_COULEURS_FONDS', 1); define('_COULEURS_SET', 1);

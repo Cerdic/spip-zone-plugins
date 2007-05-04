@@ -104,7 +104,7 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <strong><:trad:></strong>',
 
 	'pucesli:nom' => 'Belles puces',
-	'pucesli:description' => 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>&lt;ul>&hellip;&lt;/li>&lt;/ul>)',
+	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
 
 	'decoration:nom' => 'D&eacute;coration',
 	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Utilisation :{$temp['decoration']}
