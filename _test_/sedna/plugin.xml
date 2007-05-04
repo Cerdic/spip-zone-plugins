@@ -12,8 +12,17 @@ _ &copy; 2005-2007 - Distribu&eacute; sous licence GPL
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	stable
 	</etat>
+
 	<description>
-	Agregateur RSS
+	Agr&#233;gateur RSS
+
+	Documentation &#224; venir sur [->www.spip-contrib.net/Sedna-agregateur]
+	
+<small>Note: si vous utilisiez l'ancien squelette sedna, vous pouvez conserver les anciennes URLs en indiquant dans un fichier <code>sedna/.htaccess</code> les lignes suivantes :
+<cadre>RewriteEngine On
+RewriteRule .* [URL_DU_SITE]/?page=sedna [QSA,R]</cadre>
+</small>
+
 	</description>
 	<prefix> 
 	sedna
