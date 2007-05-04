@@ -415,7 +415,7 @@ else
 
 			// ajout du document
 			if ($ok==1) {
-				inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, &$documents_actifs);
+				inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
 			}
 			else {
 				$mess_error = "erreur d'upload. L'extention de votre fichier n'est pas autoris&eacute;e ...";
