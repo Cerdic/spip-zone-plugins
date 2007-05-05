@@ -18,6 +18,8 @@ class cfg_formulaire
 	var $optsto = array();
 // le "faire" de autoriser($faire), par defaut, autoriser_defaut_dist(): que les admins complets
 	var $autoriser = 'defaut';
+// en cas de refus, un message informatif [(#REM) refus=...]
+	var $refus = '';
 // le nom du meta (ou autre) ou va etre stocke la config concernee
 	var $nom = '';
 // le fond html utilise , en general pour config simple idem $nom
@@ -29,6 +31,8 @@ class cfg_formulaire
 	var $casier = '';
 // descriptif
 	var $descriptif = '';
+// cfg doit-il encadrer le formulaire tout seul ?
+	var $presentation = 'auto';
 // compte-rendu des mises a jour, vide == pas d'erreur
 	var $message = '';
 // liens optionnels sur des sous-config [(#REM) liens*=xxx]
@@ -208,7 +212,7 @@ class cfg_formulaire
 	/*
 	 Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
 		$contexte est un tableau (nom=>valeur)
-		qui sera enrichi puis passe à recuperer_fond
+		qui sera enrichi puis passe a recuperer_fond
 	*/
 	function formulaire($contexte = array())
 	{
@@ -222,9 +226,10 @@ class cfg_formulaire
 		    '&lang=' . $GLOBALS['spip_lang'] .
 		    '&arg=' . $arg .
 		    '&hash=' .  calculer_action_auteur('-' . $arg);
-	    include_spip('public/assembler');
-	    $return = recuperer_fond('fonds/cfg_' . $this->vue,
-	    		$this->val ? array_merge($contexte, $this->val) : $contexte);
+		include_spip('inc/presentation'); // offrir les fonctions d'espace prive
+		include_spip('public/assembler');
+		$return = recuperer_fond('fonds/cfg_' . $this->vue,
+			$this->val ? array_merge($contexte, $this->val) : $contexte);
 
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
 		$this->rempar = array(array());

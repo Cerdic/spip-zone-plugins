@@ -22,8 +22,11 @@ function exec_cfg_dist($class = null)
 
 	if (!$config->autoriser()) {
 		include_spip('inc/minipres');
-		echo minipres(_T('info_acces_refuse') .
-			" (cfg {$config->nom} - {$config->vue} - {$config->cfg_id})");
+		echo minipres(_T('info_acces_refuse'),
+			$config->refus
+				? $config->refus
+				: " (cfg {$config->nom} - {$config->vue} - {$config->cfg_id})"
+			);
 		exit;
 	}
 
@@ -52,12 +55,22 @@ class cfg_dist extends cfg_formulaire
 		 || $this->boite
 		 || ($this->boite = _L('Configuration') . ' ' . $this->nom);
 
+
+		$debut = $this->debut_page();
+
+		// Mettre un cadre_trait_couleur autour du formulaire, sauf si demande
+		// express de ne pas le faire
+		if ($this->presentation == 'auto') {
+			$formulaire = 
+				debut_cadre_trait_couleur('', true, '', $this->boite)
+				.$formulaire
+				.fin_cadre_trait_couleur(true);
+		}
+
 		return
-			$this->debut_page() .
-			debut_cadre_trait_couleur('', true, '', $this->boite) .
-			$formulaire .
-			fin_cadre_trait_couleur(true) .			
-			$this->fin_page();
+			$debut
+			. $formulaire
+			. $this->fin_page();
 	}
 
 	function lier()
