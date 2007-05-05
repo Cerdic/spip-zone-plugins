@@ -41,4 +41,15 @@ function accesgroupes_affiche_milieu($flux){
 	}
 	return $flux;
 }
+function accesgroupes_affichage_final($flux){
+//return $flux;
+return '<style type="text/css">#contenu{display:none;}</style>';
+}
+
+function accesgroupes_pre_typo($flux){
+//echo 
+//$flux['data'] .= $flux;
+//$flux = debug_var($flux);
+return $flux;
+}
 ?>

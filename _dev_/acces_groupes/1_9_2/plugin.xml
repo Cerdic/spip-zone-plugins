@@ -15,7 +15,8 @@ merci à Cedric pour le concept initial du bridage de l'affichage des BOUCLES (pl
 		<description>
 		Permet de g&#233;rer l'acc&#232;s restreint (parties publique et priv&#233;e) &#224; des rubriques
 en utilisant des groupes d'utilisateurs.<br />
-					Documentation : [->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]<br /><br />
+		Documentation pre 1.9.2 : [->http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces]
+		Documentation : [->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]<br /><br />
 					{{/!\ ATTENTION !}} <br />
 					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultanéments !<br />
 - Si vous {{mettez &#224; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&#232;s restreint par groupes"}}
@@ -29,9 +30,9 @@ pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&#232;s da
 					<br />
 					Ce plugin est compatible avec les versions <strong>1.9.0</strong> et <strong>1.9.1</strong> de spip.
 					Il n’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.
-v 1.0.3 Ce script devient compatible avec SPIP 1.9.2 et +
+<br />v 1.0.3 Ce script est en cours de dev. pour devenir compatible avec SPIP 1.9.2 et +
 		</description>
-				<lien>http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces</lien> <!-- URI de documentation -->
+				<lien>http://www.spip-contrib.net/Le-plugin-acces-restreint-par</lien> <!-- URI de documentation -->
 				<icon>img_pack/groupe-48.png</icon>
 		<prefix>
 		accesgroupes
@@ -55,6 +56,19 @@ v 1.0.3 Ce script devient compatible avec SPIP 1.9.2 et +
 <inclure>accesgroupes_pipelines.php</inclure>
 </pipeline>
 -->
+<!--
+<pipeline>
+<nom>affichage_final</nom>
+<inclure>accesgroupes_pipelines.php</inclure>
+</pipeline>
+-->
+<!--
+<pipeline>
+<nom>pre_typo</nom>
+<inclure>accesgroupes_pipelines.php</inclure>
+</pipeline>
+-->
+<chemin dir='' />
 </plugin>
 
 

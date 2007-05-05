@@ -281,4 +281,27 @@ function accesgroupes_breve_restreinte($id_breve) {
 	}
 }
 
+//fct pour renvoyer le tableau des evenements appartenant aux rubriques à accès restreint
+function accesgroupes_liste_evenements_restreints() {
+
+        static $Tevenements_restreints;
+        if (!is_array($Tevenements_restreints)) {
+                $Tevenements_restreints = array();
+                // rattaches aux articles
+                $liste_art = accesgroupes_liste_articles_restreints();
+                $where = calcul_mysql_in('id_article', join(",",$liste_art));
+
+                $s = spip_query("SELECT id_evenement FROM spip_evenements WHERE $where");
+                while ($row = spip_fetch_array($s)){
+                        $Tevenements_restreints[] = $row['id_evenement'];
+                }
+        }
+        return $Tevenements_restreints;
+}
+
+// filtrage EVENEMENTS
+function accesgroupes_evenements_accessibles_where($primary){
+        $liste = accesgroupes_liste_evenements_restreints();
+        return calcul_mysql_in($primary, join(",",$liste),"NOT");
+}
 ?>

@@ -23,6 +23,14 @@ if (defined("_ECRIRE_INC_VERSION")){
 	// appel de la gestion de l'espace privé...
 	include_spip('inc/accesgroupes_prive');
 }
+
+function debug_var($var){
+// fonction pour débuggage / affichage variable
+$r = "<pre>";
+$r .= print_r($var);
+$r .= "<pre>";
+return $r;
+}
 // CACHE : nécessité d'un cache différencié selon les rubriques autorisées/restreintes 
 //   ajouter un marqueur de cache pour permettre de differencier le cache en fonction des rubriques autorisees
 // 	 potentiellement une version de cache differente par combinaison de rubriques autorisées pour un utilisateur + le cache de base sans autorisation
@@ -72,7 +80,7 @@ function accesgroupes_combin($id_parent = 0) {
 }
 
 // le filtre qui permet d'ajouter une img aux #TITRE des rubriques/articles/breves à accès restreint
-function accesgroupes_visualise($texte, $id_rub = 0, $image = 'ecrire/img_pack/cadenas-24.gif') {
+function accesgroupes_visualise($texte, $id_rub = 0, $image = 'dist/images/cadenas-24.gif') {
 	//echo '_DIR_SQUELETTE = '._DIR_SQUELETTE;		 
 	if (accesgroupes_verif_acces($id_rub, 'public') == 1 OR accesgroupes_verif_acces($id_rub, 'public') == 2) {
 		return "<img src=\"".$image."\" alt=\""._T('accesgroupes:bloque_rubrique')."\" style=\"border: none; vertical-align: baseline;\"> ".$texte;
@@ -85,7 +93,7 @@ function accesgroupes_visualise($texte, $id_rub = 0, $image = 'ecrire/img_pack/c
 // retourne 0 : accès libre | 1 : accès restreint non-connecté | 2 : accès restreint non-autorisé | 3 accès retreint autorisé
 function accesgroupes_verif_acces($rub, $prive_public){
 	// global $Tspip_rubriques, $Tspip_auteurs, $Tspip_auteurs_rubriques, $Tjpk_groupes_acces, $Tjpk_groupes_auteurs, $Tjpk_groupes;
-	
+	// Vérifie l'origine de la demande
 	$aut = $GLOBALS['auteur_session']['login'];
 	// vérifie si la rubrique courante est privée
 	do{ // boucle tant que la rubrique n'est pas la racine du site et que le retour est vide
