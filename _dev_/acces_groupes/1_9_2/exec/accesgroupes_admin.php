@@ -747,7 +747,7 @@ function exec_accesgroupes_admin() {
 			$group = false;
 			$group2 = false;
 			
-			$sql1 = "SELECT spip_auteurs.*
+			$sql1 = "SELECT DISTINCT spip_auteurs.*
 								FROM spip_auteurs
 									LEFT JOIN spip_accesgroupes_auteurs
 									ON spip_auteurs.id_auteur =  spip_accesgroupes_auteurs.id_auteur
@@ -768,6 +768,7 @@ function exec_accesgroupes_admin() {
 				$statut = str_replace("0minirezo", html_entity_decode(_T('info_administrateurs')), $statut);
 				$statut = str_replace("1comite", html_entity_decode(_T('info_redacteurs')), $statut);
 				$statut = str_replace("6visiteur", html_entity_decode(_T('info_visiteurs')), $statut);
+				$statut = str_replace("6forum", html_entity_decode(_T('info_visiteurs')), $statut);
 				
 				$premiere = strtoupper(substr(trim($nom), 0, 1));
 				
@@ -782,7 +783,7 @@ function exec_accesgroupes_admin() {
 				
 				if ($statut != $statut_old) {
 					echo "\r\n<option value=\"x\"> </option>";
-					echo "\r\n<option value=\"x\" style='background-color: $couleur_claire;'> ".strtoupper($statut)." :</option>";
+					echo "\r\n<option value=\"x\" style='background-color: $couleur_claire; font-weight:bold ;'> ".$statut." :</option>";
 				}
 				
 				if ($premiere != $premiere_old AND ($statut != _T('info_administrateurs') OR !$premiere_old)) {

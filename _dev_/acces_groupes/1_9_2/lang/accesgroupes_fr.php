@@ -21,10 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 								 (si ce fichier n\'existe pas, alors c\'est que votre install est "standard").',
 'titre_formulaire_patch' => 'Param&egrave;tres de la base de donn&eacute;es',
 'serveur_SQL' => 'Adresse serveur MySQL',
-'base_SQL' => 'Base de donn&eacute du SPIP', 
+'base_SQL' => 'Base de donn&eacute; du SPIP', 
 'user_SQL' => 'Utilisateur serveur MySQL',
 'pass_SQL' => 'Mot de passe serveur MySQL',
-'prefixe_tables' => 'Préfixe des tables SPIP',
+'prefixe_tables' => 'Pr&eacute;fixe des tables SPIP',
 
 'module_titre'=>'Acc&egrave;s restreints par groupes',
 'module_info'=>'Ce plugin permet de g&eacute;rer les restrictions d\'acc&egrave;s aux rubriques.<br />
@@ -123,7 +123,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'msg_demande_acces6' => '(lorsque vous aurez trait&eacute; la demande de cet auteur, ce message sera automatiquement effac&eacute; et un message l\'informant de votre d&eacute;cision lui sera envoy&eacute;)',
 'msg_demande_acces7' => 'Message de l\'utilisateur :',
 'titre_demande_acces' => 'Demande d\'int&eacute;gration dans un groupe pour acc&eacute;der &agrave; une rubrique restreinte',
-'demande_ok' => 'Votre demande à été envoy&eacute;e au(x) gestionnaire(s) du groupe',
+'demande_ok' => 'Votre demande &agrave;
+ &eacute;t&eacute; envoy&eacute;e au(x) gestionnaire(s) du groupe',
 'duplicata_demande_acces' => 'Il existe d&eacute;ja une demande d\'int&eacute;gration dans ce groupe &agrave; votre nom: merci d\'&ecirc;tre patient et d\'attendre que cette demande ait &eacute;t&eacute; trait&eacute;e...',
 'erreur_creation_demande_acces' => 'Une erreur s\'est produite lors de la cr&eacute;ation de votre demande d\'acc&egrave;s',
 'titre_msg_text' => 'Information',
