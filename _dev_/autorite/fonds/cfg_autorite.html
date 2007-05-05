@@ -1,6 +1,19 @@
 [(#REM) titre=Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»]
 
+[(#REM) presentation= ]
+
 [(#REM) autoriser=webmestre ]
+
+[(#REM) refus=Seuls les webmestres du site sont autoris&#233;s &#224; modifier ces param&#232;tres. Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.]
+[(#REM)
+	TODO:
+
+	Dommage qu'ici je ne puisse pas mettre le resultat du $message calcule
+	par cfg_autorite_fonctions.php ; mais pour cela il faudrait calculer
+	le squelette, or l'autoriser n'est base que sur l'analyse rapide.
+
+	Par ailleurs comment faire multilingue si on n'evalue pas ce squelette ?
+]
 
 <!-- descriptif=
 
@@ -11,6 +24,11 @@
 -->
 #CACHE{0}
 
+
+<:titre_page_config_fonctions|gros_titre{'',''}:>
+
+[(#REM|sinon{configuration}|barre_onglets{cfg_autorite})]
+
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 
@@ -18,8 +36,9 @@
 [(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
 [(#CONFIG{autorite_erreurs}|?{#CONFIG{autorite_erreurs}|unserialize|count|>{0}|?{' '}})
 
-	<div class="cadre-info verdana1">
-	[(#REM|sinon{warning.gif}|http_img_pack{<:avis_attention:>,width='48' height='48' style='float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;'})]
+	<br />
+
+	[(#REM|debut_boite_alerte)]
 	<strong><:avis_attention:></strong> Les autorisations suivantes sont d&#233;j&#224; d&#233;finies par ailleurs&nbsp;:
 	<ul><li>
 	<tt>
@@ -28,7 +47,8 @@
 	</li></ul>
 	Le plugin &#171;&nbsp;Autorit&#233;&nbsp;&#187; ne peut pas les modifier&nbsp;; certains des r&#233;glages ci-dessous risquent par cons&#233;quent de ne pas fonctionner.
 	<br />Pour r&#233;gler ce probl&#232;me, vous devrez v&#233;rifier si votre fichier <tt>mes_options.php</tt> (ou un autre plugin actif) a d&#233;fini ces fonctions.
-	</div>
+
+	[(#REM|fin_boite_alerte)]
 
 ]
 <?php
@@ -52,24 +72,24 @@
 ?>
 
 
-[(#REM) ------------------------ DROITS D'EDITION ------------------------ ]
+<br />
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx','R&#233;glage des autorisations'})]
+
+
+[(#REM) ------------------------ DROITS DES AUTEURS ------------------------ ]
 <fieldset>
 <legend>
-	Droits d'&#233;dition
+	Droits des auteurs
 </legend>
 <p>
-<label><input type="checkbox" name="auteur_mod_article" [checked="(#ENV{auteur_mod_article}?{checked})"] />
-	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur peut modifier les articles dont il est l'auteur (et, par conséquent, mod&#233;rer le forum et la p&#233;tition associ&#233;s).
+<label><input type="checkbox" name="auteur_mod_article" [checked="(#ENV{auteur_mod_article}?{checked})"] id="auteur_mod_article" />
+	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur peut modifier les articles publi&#233;s dont il est l'auteur (et, par conséquent, mod&#233;rer le forum et la p&#233;tition associ&#233;s).
 </label>
 
 <br />
 
-<label><input type="checkbox" name="redacteur_mod_article" [checked="(#ENV{redacteur_mod_article}|?{checked})"] />
-	<strong>Redacteur modifie articles proposes</strong>&nbsp;: chaque r&#233;dacteur peut modifier un article propos&eacute;s pour publication m&ecirc;me s'il n'en est pas auteur.
-</label>
-
-<br />
-
+<small>
 <label><input type="checkbox" name="auteur_modere_forum" [checked="(#ENV{auteur_modere_forum}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]
 />
 	<strong>Auteur mod&#232;re forum</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer le forum des articles dont il est l'auteur.
@@ -81,12 +101,45 @@
 />
 	<strong>Auteur mod&#232;re p&#233;tition</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer la p&#233;tition des articles dont il est l'auteur.
 </label>
+</small>
+
+</fieldset>
+[(#REM) Code jQuery de l'espace auteurs ; activer/desactiver le choix secondaire ]
+<script type="text/javascript"><!--
+	$('#auteur_mod_article')
+	.bind('change', function() {
+		var on = $(this).is(':checked');
+		$(this)
+		.parents('fieldset')
+		.find('input')
+			.not(this)
+			.attr('disabled', on ? 'disabled' : '')
+		.end();
+	})
+	if ($('#espace_wiki option[@selected]').length == 0)
+		$('#espace_wiki_qui').hide();
+// --></script>
+
+
+
+[(#REM) ---------------------- DROITS DES REDACTEURS -------------------- ]
+
+<fieldset>
+<legend>
+	Droits des r&#233;dacteurs
+</legend>
+<p>
+
+<label><input type="checkbox" name="auteur_mod_email" [checked="(#ENV{auteur_mod_email}|?{checked})"] />
+	<strong>R&#233;dacteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
+</label>
 
 <br />
 
-<label><input type="checkbox" name="auteur_mod_email" [checked="(#ENV{auteur_mod_email}|?{checked})"] />
-	<strong>Auteur modifie email</strong>&nbsp;: chaque r&#233;dacteur peut modifier son email sur sa fiche d'informations personnelles.
+<label><input type="checkbox" name="redacteur_mod_article" [checked="(#ENV{redacteur_mod_article}|?{checked})"] />
+	<strong>R&#233;dacteur modifie propos&#233;s</strong>&nbsp;: chaque r&#233;dacteur peut modifier un article propos&eacute; &#224; la publication, m&ecirc;me s'il n'en est pas auteur.
 </label>
+
 
 </p>
 
@@ -100,9 +153,18 @@
 </select>
 </label>
 
-<br />
-<br />
 
+<p>
+<label><input type="checkbox" name="redacteurs_voirstats" [checked="(#ENV{redacteurs_lire_stats}?{checked})"] />
+	<strong>R&#233;dacteur voit stats</strong>&nbsp;: les r&#233;dacteurs peuvent visualiser les statistiques.
+</label>
+
+</p>
+
+</fieldset>
+
+
+[(#REM) -------------------- CRAYONS -------------------------]
 <fieldset>
 	<legend>Crayons</legend>
 	<small><strong>Attention.</strong> Les r&#233;glages ci-dessous ne peuvent fonctionner que si vous utilisez un plugin proposant une interface d'&#233;dition (comme par exemple <a href="http://www.spip-contrib.net/Les-Crayons">les Crayons</a>).
@@ -144,21 +206,6 @@
 	</label>
 	</p>
 
-</fieldset>
-
-</fieldset>
-
-[(#REM) ------------------------ DROITS DE LECTURE ------------------------ ]
-<fieldset>
-<legend>
-	Droits de consultation
-</legend>
-<p>
-<label><input type="checkbox" name="redacteurs_voirstats" [checked="(#ENV{redacteurs_lire_stats}?{checked})"] />
-	<strong>R&#233;dacteur voit stats</strong>&nbsp;: les r&#233;dacteurs peuvent visualiser les statistiques.
-</label>
-
-</p>
 </fieldset>
 
 
@@ -233,4 +280,10 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
 -->
 </div>
+
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
 </form>
+
+

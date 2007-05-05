@@ -4,16 +4,20 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function Autorite_ajouterBoutons($boutons_admin) {
-	if (autoriser('webmestre')) {
+function Autorite_ajouter_onglets($flux) {
+	if ($flux['args'] == 'configuration'
+	AND autoriser('webmestre')) {
 		// on voit le bouton dans la barre "configurer"
-		$boutons_admin['configuration']->sousmenu['autorite']= new Bouton(
+		$flux['data']['cfg_autorite'] =
+			new Bouton(
 			"../"._DIR_PLUGIN_AUTORITE."illuminati-24.gif",  // icone
 			_T('autorite:icone_menu_config'),	// titre
-			'cfg&cfg=autorite' // exec
+			generer_url_ecrire('cfg', 'cfg=autorite'),
+			NULL,
+			'cfg_autorite'
 			);
 	}
-	return $boutons_admin;
+	return $flux;
 }
 
 ?>

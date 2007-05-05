@@ -6,7 +6,7 @@
 		&copy; Fil &amp; James 2007 - Distribué sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.4
+		0.5
 	</version>
 	<etat>
 		test
@@ -22,13 +22,13 @@
 	<prefix>
 		  Autorite
 	</prefix>
-	<necessite id='cfg' version='[1.0.1;]' />
+	<necessite id='cfg' version='[1.0.2;]' />
 
 
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>autorite_ajouter_bouton.php</inclure>
+		<nom>ajouter_onglets</nom>
+		<action>ajouter_onglets</action>
+		<inclure>autorite_ajouter_onglets.php</inclure>
 	</pipeline>
 
 </plugin>

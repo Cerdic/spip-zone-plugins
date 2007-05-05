@@ -71,6 +71,7 @@ if ($GLOBALS['autorite']['espace_wiki']) {
 ##
 if ($GLOBALS['autorite']['auteur_mod_article']
 OR $GLOBALS['autorite']['espace_wiki']
+OR $GLOBALS['autorite']['redacteur_mod_article']
 OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_article_modifier')) {
@@ -81,10 +82,11 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/auth');
 	return
 		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
-		OR
+		OR (
 			// Cas du wiki, on appelle la fonction qui verifie les droits wiki
 			$GLOBALS['autorite']['espace_wiki']
 			AND autorisation_wiki_visiteur($qui, $r['id_secteur'])
+		)
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND (
