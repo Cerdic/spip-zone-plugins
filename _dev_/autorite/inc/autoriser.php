@@ -92,6 +92,11 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 				OR in_array($r['statut'], array('prop','prepa', 'poubelle'))
 			)
 			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+		)
+		OR (
+			$GLOBALS['autorite']['redacteur_mod_article']
+			AND in_array($qui['statut'], array('0minirezo', '1comite'))
+			AND $r['statut']=='prop'
 		);
 }
 } else

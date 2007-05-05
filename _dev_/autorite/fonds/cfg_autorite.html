@@ -64,6 +64,12 @@
 
 <br />
 
+<label><input type="checkbox" name="redacteur_mod_article" [checked="(#ENV{redacteur_mod_article}|?{checked})"] />
+	<strong>Redacteur modifie articles proposes</strong>&nbsp;: chaque r&#233;dacteur peut modifier un article propos&eacute;s pour publication m&ecirc;me s'il n'en est pas auteur.
+</label>
+
+<br />
+
 <label><input type="checkbox" name="auteur_modere_forum" [checked="(#ENV{auteur_modere_forum}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]
 />
 	<strong>Auteur mod&#232;re forum</strong>&nbsp;: chaque r&#233;dacteur peut mod&#233;rer le forum des articles dont il est l'auteur.
