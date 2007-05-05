@@ -92,8 +92,8 @@ problemes dans les deux elements au sujet des sous-repertoires]
 </ul>
 
 <ul>
-#SET{sites,#ARRAY}
-<BOUCLE_sites(SITES){par nom_site}{syndication!=non}{id_rubrique?}>
+#SET{sites,#ARRAY{0,0}}
+<BOUCLE_sites(SITES){par nom_site}{syndication!=non}{id_rubrique?}{id_mot?}>
 <li>
 	<a href="[(#SELF|parametre_url{id_syndic,#ID_SYNDIC}|parametre_url{age,#ENV{age,''}})]"
 		class="[(#ENV{id_syndic}|=={#ID_SYNDIC}|?{'selected',''})]"
