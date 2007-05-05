@@ -10,18 +10,19 @@
 	#SET{latitude,#ENV{latit,42.94}}
 	#SET{lonxitude,#ENV{lonxit,-8.228}}
 	<//B_centrado>
-	$(document).ready(
-		function load() {
-    		if (GBrowserIsCompatible()) {
-    			// facelo mapa
-    			map = new GMap2(document.getElementById("map"));
-    			map.addControl(new GLargeMapControl());
-    			map.addControl(new GMapTypeControl());
-    			map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,7}, G_SATELLITE_MAP);
-    			map.enableDoubleClickZoom();
-    			map.enableContinuousZoom();
-    			markerManager = new GMarkerManager(map);
-  				//leemo-lo documento dos marcadores
+	function load() {
+		if (GBrowserIsCompatible()) {
+			// facelo mapa
+			map = new GMap2(document.getElementById("map"));
+    		map.addControl(new mapTypeControl());
+			map.addControl(new mapZoomControl());
+			map.addControl(new mapMoveControl());
+    		map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,7}, G_SATELLITE_MAP);
+    		center = map.getCenter();
+    		map.enableDoubleClickZoom();
+    		map.enableContinuousZoom();
+    		markerManager = new GMarkerManager(map);
+  			//leemo-lo documento dos marcadores
        			$.get('[(#URL_PAGE{rss-gis})]', {[id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml){
     				//xml almacena en un objeto xml los datos recogidos del documento leido
     				$("item", xml).each(function(item){
@@ -35,6 +36,5 @@
    				});
    			}
 		}
-	);
 	//]]>
 	</script>
