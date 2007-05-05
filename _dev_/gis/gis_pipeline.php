@@ -61,7 +61,8 @@ function gis_insertarp_head($flux){
 	$flux.='
 <script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
+<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'googlemap_api/js/customControls.js"></script>';
 	return $flux;
 }
 
