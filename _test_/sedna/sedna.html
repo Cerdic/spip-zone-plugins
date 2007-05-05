@@ -92,7 +92,8 @@ problemes dans les deux elements au sujet des sous-repertoires]
 </ul>
 
 <ul>
-<BOUCLE_sites(SITES){par nom_site}{syndication!=non}>
+#SET{sites,#ARRAY}
+<BOUCLE_sites(SITES){par nom_site}{syndication!=non}{id_rubrique?}>
 <li>
 	<a href="[(#SELF|parametre_url{id_syndic,#ID_SYNDIC}|parametre_url{age,#ENV{age,''}})]"
 		class="[(#ENV{id_syndic}|=={#ID_SYNDIC}|?{'selected',''})]"
@@ -115,6 +116,7 @@ problemes dans les deux elements au sujet des sous-repertoires]
 		}
 	?></a>
 </li>
+[(#GET{sites}|array_push{#ID_SYNDIC}|vide)]
 <?php
 	$nom_site_#ID_SYNDIC = '[(#NOM_SITE|texte_script)]';
 	$url_site_#ID_SYNDIC = '[(#URL_SITE|abs_url|texte_script)]';
@@ -147,7 +149,7 @@ problemes dans les deux elements au sujet des sous-repertoires]
 	Voir la definition des criteres {contenu} et {tri_sedna} dans sedna.php
 ]
 <?php
-<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic?} {contenu} {tri_sedna} {age<=#ENV{age,1}} {0,500}>
+<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic?}{id_syndic IN #GET{sites}} {contenu} {tri_sedna} {age<=#ENV{age,1}} {0,500}>
 	afficher_lien(
 	#ID_SYNDIC_ARTICLE,
 	'[(#URL_ARTICLE|creer_identifiant{#DATE})]',
