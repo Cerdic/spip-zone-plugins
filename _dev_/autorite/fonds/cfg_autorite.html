@@ -62,7 +62,14 @@
 		$autorite_erreurs_version[] = 'redacteur voit stats';
 		$autorite_erreurs_version[] = 'redacteur modifie mots';
 	}
-
+	if ($GLOBALS['spip_version_code'] < '1.9252') {
+		// autoriser(configurer)
+		$autorite_erreurs_version[] = 'configurer';
+		// autoriser(backup)
+		$autorite_erreurs_version[] = 'faire des sauvegardes';
+		// autoriser(destroy)
+		$autorite_erreurs_version[] = 'effacer la base';
+	}
 	if ($autorite_erreurs_version) {
 		echo "Attention les choix suivants peuvent ne pas fonctionner avec votre version de SPIP&nbsp;:\n"
 		. "<ul><li>\n"
@@ -270,6 +277,44 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 		$('#espace_wiki_qui').hide();
 // --></script>
 
+
+[(#REM) ---------------------- CONFUGURATION DU SITE -------------------- ]
+
+<fieldset>
+<legend>
+	Configuration du site
+</legend>
+<p>
+<label>Qui peut <strong>modifier la configuration</strong> du site&nbsp;?
+<select name="configurer">
+	<option value=""[ selected="(#ENV{configurer}|?{'',selected})"]>Tous les administrateurs</option>
+	<option value="webmestre"[ selected="(#ENV{configurer}|=={webmestre}|?{selected})"]>Le webmestre</option>
+</select>
+</label>
+</p>
+
+
+<p>
+<label>Qui peut effectuer des <strong>sauvegardes</strong>&nbsp;?
+<select name="backup">
+	<option value=""[ selected="(#ENV{backup}|=={''}|?{selected})"]>Tous les administrateurs (y compris restreints)</option>
+	<option value="admin"[ selected="(#ENV{backup}|=={admin}|?{selected})"]>Les administrateurs</option>
+	<option value="webmestre"[ selected="(#ENV{backup}|=={webmestre}|?{selected})"]>Le webmestre</option>
+	<option value="non"[ selected="(#ENV{backup}|=={non}|?{selected})"]>Personne</option>
+</select>
+</p>
+
+<p>
+<label>Qui peut <strong>effacer</strong> la base de donn&#233;es du site&nbsp;?
+<select name="destroy">
+	<option value=""[ selected="(#ENV{destroy}|?{'',selected})"]>Les administrateurs</option>
+	<option value="webmestre"[ selected="(#ENV{destroy}|=={webmestre}|?{selected})"]>Le webmestre</option>
+	<option value="non"[ selected="(#ENV{destroy}|=={non}|?{selected})"]>Personne</option>
+</select>
+<br /><small>L'option recommand&#233;e est &#171;&nbsp;personne&nbsp;&#187;, l'option standard de SPIP est &#171;&nbsp;les administrateurs&nbsp;&#187; (mais avec une v&#233;rification par FTP).</small>
+</p>
+
+</fieldset>
 
 
 [(#REM) ------------------------ BOUTON OK ------------------------ ]

@@ -322,6 +322,71 @@ function autoriser_signature_modifier($faire, $type, $id, $qui, $opt) {
 }
 
 
+##
+## autoriser_configurer (pages de configuration)
+##
+if ($GLOBALS['autorite']['configurer']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_configurer')) {
+function autoriser_configurer($faire, $type, $id, $qui, $opt) {
+	if ($GLOBALS['autorite']['configurer'] == 'webmestre')
+		return autoriser('webmestre');
+	else
+		return autoriser(''); // autorisation par defaut
+}
+} else
+	$autorite_erreurs[] = 'autoriser_configurer';
+}
+
+##
+## autoriser_backup (faire un backup partiel ou complet)
+##
+if ($GLOBALS['autorite']['backup']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_backup')) {
+function autoriser_backup($faire, $type, $id, $qui, $opt) {
+
+	if ($GLOBALS['autorite']['backup'] == 'webmestre')
+		return autoriser('webmestre');
+
+	if ($GLOBALS['autorite']['backup'] == 'admin')
+		return
+			$qui['statut'] == '0minirezo'
+			AND !$qui['restreint'];
+
+	// version normale
+	if ($GLOBALS['autorite']['backup'] == '')
+		return
+			$qui['statut'] == '0minirezo';
+}
+} else
+	$autorite_erreurs[] = 'autoriser_backup';
+}
+
+##
+## autoriser_destroy (vider la base de donnees)
+##
+if ($GLOBALS['autorite']['destroy']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_destroy')) {
+function autoriser_destroy($faire, $type, $id, $qui, $opt) {
+
+	if ($GLOBALS['autorite']['destroy'] == 'webmestre')
+		return autoriser('webmestre');
+
+	if ($GLOBALS['autorite']['destroy'] == 'non')
+		return false;
+
+	// Par defaut, idem configuration
+	return autoriser('configurer');
+}
+} else
+	$autorite_erreurs[] = 'autoriser_destroy';
+}
+
 
 // Noter les erreurs pour les afficher dans le panneau de config
 // BUG: la modif de config se faisant plus tard, si de nouvelles erreurs
