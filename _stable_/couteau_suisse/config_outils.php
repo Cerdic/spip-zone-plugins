@@ -309,6 +309,7 @@ add_outil( array(
 add_outil( array(
 	'id' => 'decoupe',
 	'code:options' => "define('_decoupe_SEPARATEUR', '++++');",
+	'code:css' => "div.decoupe_haut, div.decoupe_bas {display:block; text-align:center; }",
 	// inserer : $table_des_traitements['TEXTE'][]= 'decouper_en_pages(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'decouper_en_pages',
 	'categorie' => 'typo-racc',
@@ -322,6 +323,7 @@ add_outil( array(
 	'id' => 'sommaire',
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",
 	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
+	'code:css' => "div.cs_sommaire {display:block; float:right; /*position:relative;*/ margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; /*width:160px;*/ max-height:350px; }",
 	'traitement:TEXTE:post_propre' => 'sommaire_d_article',
 	'categorie' => 'typo-corr',
 ));

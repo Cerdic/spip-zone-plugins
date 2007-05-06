@@ -62,18 +62,7 @@ function sommaire_d_article_rempl($texte) {
 	}
 
 
-$sommaire='<a name="outil_sommaire" id="outil_sommaire"></a><div id="outil_sommaire" style="
-'.$fond.'
-display:block;
-float:right;
-/*position:relative;*/
-margin-left:1em;
-margin-right:0.4em;
-overflow:auto;
-z-index:100;
-/*width:160px;*/
-max-height:350px;
-"><div style="margin:3pt;"><div style="
+$sommaire='<a name="outil_sommaire" id="outil_sommaire"></a><div id="outil_sommaire" class="cs_sommaire" style="'.$fond.'"><div style="margin:3pt;"><div style="
 border-bottom:1px dotted silver;
 line-height:1;
 position:inherit;

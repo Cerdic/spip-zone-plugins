@@ -57,8 +57,9 @@ function decouper_en_pages_rempl($texte) {
 	// s'il existe plus de trois pages on retourne la pagination << < 1 2 3 4 > >>
 	// sinon une forme simplifiee : < 1 2 3 >
 	$pagination = $num_pages>3?"$debut $precedent $milieu $suivant $fin":"$precedent $milieu $suivant";
-	$pagination = "<p align='center'><span class='pagination'>$pagination</span></p>";
-	return $sommaire.$pagination.$pages[$artpage-1].$pagination;
+	$pagination1 = "<div class='pagination decoupe_haut'>$pagination</div>";
+	$pagination2 = "<div class='pagination decoupe_bas'>$pagination</div>";
+	return $sommaire.$pagination1.$pages[$artpage-1].$pagination2;
 }
 
 function decouper_en_pages($texte){
