@@ -65,7 +65,7 @@ function sedna_utils(){
 			onmouseover=\"getElementById('url".$id."').className='urlsiteon';\"
 			onmouseout=\"getElementById('url".$id."').className='urlsite';\"
 			>";
-			echo "<a href=\"?id_syndic=$id_syndic";
+			echo "<a href=\"".parametre_url(self(),'id_syndic',$id_syndic);
 			if ($age = intval($GLOBALS['age']))
 				echo "&amp;age=$age";
 			echo "\">".$GLOBALS['nom_site_'.$id_syndic]
