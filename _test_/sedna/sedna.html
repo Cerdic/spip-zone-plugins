@@ -119,8 +119,8 @@ problemes dans les deux elements au sujet des sous-repertoires]
 </li>
 [(#GET{sites}|array_push{#ID_SYNDIC}|vide)]
 <?php
-	$nom_site_#ID_SYNDIC = '[(#NOM_SITE|texte_script)]';
-	$url_site_#ID_SYNDIC = '[(#URL_SITE|abs_url|texte_script)]';
+	$GLOBALS['nom_site_#ID_SYNDIC'] = '[(#NOM_SITE|texte_script)]';
+	$GLOBALS['url_site_#ID_SYNDIC'] = '[(#URL_SITE|abs_url|texte_script)]';
 ?>
 </BOUCLE_sites>
 </ul>
