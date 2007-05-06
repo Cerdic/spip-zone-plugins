@@ -233,13 +233,14 @@ class cfg_formulaire
 
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
 		$this->rempar = array(array());
-		if (preg_match_all('/<!-- \w+\*?=/', $this->controldata, $rempar)) {
-			$this->rempar = $rempar;
+		if (preg_match_all('/<!-- \w+\*?=/', $this->controldata, $this->rempar)) {
+			$this->current_rempar = 0;
 			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
-								array($this, 'post_params'), $return);
-		}
-		if (!empty($this->rempar[0])) {
-			die("erreur manque parametre externe");
+								array(&$this, 'post_params'), $return);
+			if (preg_match('/<!-- \w+\*?=/', $return)) {
+				die('erreur manque parametre externe: '
+					. htmlentities(var_export($this->rempar, true)));
+			}
 		}
 		return $return;
 	}
@@ -247,8 +248,11 @@ class cfg_formulaire
 	// commun avec celui de set_vue()
 	function post_params($regs) {
 		// a priori, eviter l'injection du motif
-		if (isset($this->rempar) && $regs[1] != array_shift($this->rempar[0])) {
-			die("erreur parametre interne: " . htmlentities($regs[1]));
+		if (isset($this->rempar)) {
+			if (!isset($this->rempar[0][$this->current_rempar])
+				|| $regs[1] != $this->rempar[0][$this->current_rempar++]) {
+				die("erreur parametre interne: " . htmlentities(var_export($regs[1], true)));
+			}
 		}
 		if (empty($regs[3])) {
 		    $this->{$regs[2]} = $regs[4];
