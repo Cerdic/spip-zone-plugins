@@ -67,8 +67,8 @@ cs_log(" -- abs. path = $path2");
 		//$img = "<img alt=\"$smy\" title=\"$smy\" class=\"format_png\" src=\"$path2/$val\" $size/>";
 		$liste[] = '<strong>'.$smy.'</strong>';//.'&nbsp;:&nbsp;'.$img;
 	}
-	ecrire_meta('tweaks_smileys_racc', join(', ', $liste));
-	ecrire_meta('tweaks_smileys', serialize($smileys2));
+	ecrire_meta('cs_smileys_racc', join(', ', $liste));
+	ecrire_meta('cs_smileys', serialize($smileys2));
 	ecrire_metas();
 }
 
@@ -76,14 +76,14 @@ cs_log(" -- abs. path = $path2");
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function smileys_raccourcis() {
-	return _T('cout:smileys:aide', array('liste' => $GLOBALS['meta']['tweaks_smileys_racc']));
+	return _T('cout:smileys:aide', array('liste' => $GLOBALS['meta']['cs_smileys_racc']));
 }
 
 // fonction de remplacement
 // les balises suivantes sont protegees : html|code|cadre|frame|script|acronym|cite
 function cs_rempl_smileys($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
-	$smileys_rempl = unserialize($GLOBALS['meta']['tweaks_smileys']);
+	$smileys_rempl = unserialize($GLOBALS['meta']['cs_smileys']);
 	// smileys a probleme :
 	$texte = str_replace(':->', ':-&gt;', $texte); // remplacer > par &gt;
 	$texte = str_replace(':'.chr(146).'-', ':&#8217;-', $texte); // remplacer ’ (apostrophe curly) par &#8217;
@@ -96,9 +96,9 @@ function cs_rempl_smileys($texte) {
 }
 
 // fonction principale (pipeline pre_typo)
-function tweak_smileys_pre_typo($texte) {
+function cs_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
-	if (!isset($GLOBALS['meta']['tweaks_smileys']) || isset($GLOBALS['var_mode']))
+	if (!isset($GLOBALS['meta']['cs_smileys']) || isset($GLOBALS['var_mode']))
 		smileys_installe();
 //cs_log('smileys trouvés !');
 	// appeler cs_rempl_smileys() une fois que certaines balises ont ete protegees

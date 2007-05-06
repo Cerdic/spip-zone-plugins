@@ -7,7 +7,7 @@
 #-----------------------------------------------------#
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_TWEAK_VAR', cs_code_echappement("<!--  TWEAK-VAR -->\n", 'TWEAK'));
+define('_VAR_OUTIL', cs_code_echappement("<!--  VAR-OUTIL -->\n", 'OUTIL'));
 
 include_spip('inc/actions');
 include_spip('inc/texte');
@@ -17,19 +17,19 @@ include_spip('inc/message_select');
 
 // retourne le code html qu'il faut pour fabriquer le formulaire de l'outil proprietaire
 function description_outil_une_variable($index, $outil, $variable, $label, &$ok_input_, &$ok_valeur_) {
-	global $cout_variables, $metas_vars;
+	global $cs_variables, $metas_vars;
 	$actif = $outil['actif'];
 	// la valeur de la variable n'est stockee dans les metas qu'au premier post
 	if (isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
-		else $valeur = tweak_get_defaut($variable);
-	$valeur = tweak_retire_guillemets($valeur);
+		else $valeur = cs_get_defaut($variable);
+	$valeur = cs_retire_guillemets($valeur);
 cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
-	$cout_variable = &$cout_variables[$variable];
+	$cs_variable = &$cs_variables[$variable];
 
 	// si la variable necessite des boutons radio
-	if (is_array($radios = &$cout_variable['radio'])) {
+	if (is_array($radios = &$cs_variable['radio'])) {
 		$ok_input = $label;
-		$i = 0; $nb = intval($cout_variable['radio/ligne']);
+		$i = 0; $nb = intval($cs_variable['radio/ligne']);
 		foreach($radios as $code=>$traduc) {
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'<br />':' ';
 			$ok_input .=
@@ -38,20 +38,20 @@ cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
 				."</label>$br";
 		}
-		$ok_input .= _TWEAK_VAR;
+		$ok_input .= _VAR_OUTIL;
 		$ok_valeur = $label.(strlen($valeur)?ucfirst(_T($radios[$valeur])):'&nbsp;-');
 	}
 	// ici, donc juste une case input
 	else {
-		$len = $cout_variable['format']=='nombre'?4:0;
+		$len = $cs_variable['format']=='nombre'?4:0;
 		$width = $len?'':'style="width:100%;" ';
-		$lignes = $cout_variable['format']=='nombre'?0:strval($cout_variable['lignes']);
+		$lignes = $cs_variable['format']=='nombre'?0:strval($cs_variable['lignes']);
 //			else $len=strlen(strval($valeur));
 		$ok_input = $label .
 			( $lignes < 2
 				?"<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' $width/>"
 				:"<textarea rows='$lignes' name='HIDDENTWEAKVAR__$variable' $width/>".htmlspecialchars($valeur).'</textarea>'
-			) . _TWEAK_VAR;
+			) . _VAR_OUTIL;
 		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('cout:variable_vide'));
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
@@ -59,7 +59,7 @@ cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 
 // renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
 function inc_description_outil_dist($outil_, $url_self, $modif=false) {
-	global $outils, $cout_variables, $metas_vars;
+	global $outils, $cs_variables, $metas_vars;
 	$outil = &$outils[$outil_];
 	$actif = $outil['actif'];
 	$index = $outil['index'];
@@ -75,7 +75,7 @@ cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$outil['nb_variables'] = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if (strlen($var=trim($t[$i+1]))) {
 		// si la variable est presente on fabrique le input
-		if (isset($cout_variables[$var])) {
+		if (isset($cs_variables[$var])) {
 			description_outil_une_variable(
 				$index + (++$outil['nb_variables']),
 				$outil, $var,
@@ -90,16 +90,16 @@ cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$outil['variables'] = $variables;
 	$c = $outil['nb_variables'];
 
-	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _TWEAK_VAR s'il n'y en a qu'une.
+	// bouton 'Modifier' : en dessous du texte s'il y a plusieurs variables, a la place de _VAR_OUTIL s'il n'y en a qu'une.
 	// attention : on ne peut pas modifier les variables si l'outil est inactif
 	if ($actif) {
 		$bouton = "<input type='submit' class='fondo' value=\"".($c>1?_T('cout:modifier_vars', array('nb'=>$c)):_T('bouton_modifier'))."\" />";
 		if($c>1) $ok_input .= "<div style=\"margin-top: 0; text-align: right;\">$bouton</div>";
-			else $ok_input = str_replace(_TWEAK_VAR, $bouton, $ok_input);
+			else $ok_input = str_replace(_VAR_OUTIL, $bouton, $ok_input);
 	} else
 		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('cout:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
 	// nettoyage...
-	$ok_input = str_replace(_TWEAK_VAR, '', $ok_input);
+	$ok_input = str_replace(_VAR_OUTIL, '', $ok_input);
 	// HIDDENTWEAKVAR__ pour eviter d'avoir deux inputs du meme nom...
 	$ok_visible .= $actif?str_replace("HIDDENTWEAKVAR__", "", $ok_input):$ok_valeur;
 	$variables = urlencode(serialize($variables));

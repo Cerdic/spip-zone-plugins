@@ -26,13 +26,13 @@ cs_log("Début : exec_description_outil_dist() - Préparation du retour par Ajax (
 cs_log(" -- outil = $outil - script = $script");
 	if (!preg_match('/^\w+$/', $script)) { echo minipres(); exit;	}
 	// ici on commence l'initialisation de tous les outils
-	global $outils, $metas_vars, $metas_tweaks;
+	global $outils, $metas_vars, $metas_outils;
 	include_spip('cout_utils');
-	// remplir $outils (et aussi $cout_variables qu'on n'utilise pas ici);
+	// remplir $outils (et aussi $cs_variables qu'on n'utilise pas ici);
 	include_spip('config_outils');
 cs_log(" -- exec_description_outil_dist() - Appel de config_outils.php : nb_outils = ".count($outils));
 	// charger les metas
-	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
+	$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
 cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil, $script) :");

@@ -43,11 +43,11 @@ cs_log("Début : exec_test_couteau_suisse()");
 	gros_titre(_T('cout:titre_tests'));
 	echo '<div style="width:98%; text-align:left; margin:0 auto">';
 	// et hop, on lance les tests !
-	tweak_les_tests();
+	cs_les_tests();
 	echo '</div>';
 
 	echo fin_page();
-cs_log("Fin   : exec_tweak_test()");
+cs_log("Fin   : exec_test_couteau_suisse()");
 }
 
 // renvoie un tableau contenant le texte original et sa transfrmation par la fonction $fonction
@@ -76,10 +76,10 @@ function test_outil($array, $titre) {
 }
 
 // affiche un text en rouge
-function tweak_red($s){ return "<span style='color:red;'>$s</span>"; }
+function cs_red($s){ return "<span style='color:red;'>$s</span>"; }
 
 // effectue tous les tests !
-function tweak_les_tests() {
+function cs_les_tests() {
 	global $icone;
 	$icone = find_in_path('img/couteau-24.gif');
 
@@ -97,9 +97,9 @@ function tweak_les_tests() {
 	// lecture des variables stockees en meta
 	include_spip('inc/meta');
 	lire_metas();
-	$metas_tweaks = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
+	$metas_outils = isset($GLOBALS['meta']['tweaks_actifs'])?unserialize($GLOBALS['meta']['tweaks_actifs']):array();
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
-	test_outil($metas_tweaks, 'Outils actifs : $metas_tweaks[]');
+	test_outil($metas_outils, 'Outils actifs : $metas_outils[]');
 	test_outil($metas_vars, 'Contenu des variables : $metas_vars[]');
 
 
@@ -121,11 +121,11 @@ function tweak_les_tests() {
 			"find_in_path('img/smileys/test')"=>find_in_path('img/smileys/test'),
 			"dirname(find_in_path('img/smileys/test'))"=>$relative_path,
 			"str_replace('\\', '/', realpath('$relative_path'))"=>$realpath,
-			"substr('$realpath', strlen('$root'))"=>tweak_red($test_result),
+			"substr('$realpath', strlen('$root'))"=>cs_red($test_result),
 			"return?"=>(strlen($root) && strpos($realpath, $root)===0)?'oui':'non',
 			"cs_htmlpath('$relative_path')"=>cs_htmlpath($relative_path),
 			'$dir'=>$dir,
-			"cs_canonicalize('$dir'.'/'.'$relative_path')"=>tweak_red(cs_canonicalize($dir.'/'.$relative_path)),
+			"cs_canonicalize('$dir'.'/'.'$relative_path')"=>cs_red(cs_canonicalize($dir.'/'.$relative_path)),
 		);
 	test_outil($a, 'Test sur : cs_htmlpath()');
 
@@ -141,7 +141,7 @@ function tweak_les_tests() {
 			"explode('/', '$address')"=>$address1,
 			'array_keys($dessus, "..")'=>$keys,
 			'array_spliced()'=>$address2,
-			'$resultat'=>tweak_red($address3),
+			'$resultat'=>cs_red($address3),
 		);
 	test_outil($a, 'Test sur : cs_canonicalize()');
 
@@ -178,7 +178,7 @@ function tweak_les_tests() {
 		"Simples : :-> :-&gt; :-( :-D :-) |-) :'-) :’-) :'-D :’-D :'-( :’-( :-( :o) B-) ;-) :-p :-P' :-| :-/ :-o :-O",
 		"les courts (reconnus s'il y a un espace avant) : :) :( ;) :| |) :/ :(",
 	);
-	test_outil(cs_test_fun($textes, 'tweak_smileys_pre_typo'), 'Test sur : tweak_smileys_pre_typo()');
+	test_outil(cs_test_fun($textes, 'cs_smileys_pre_typo'), 'Test sur : cs_smileys_pre_typo()');
 
 	// test des filets
 	$textes = array(

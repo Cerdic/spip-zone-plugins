@@ -26,7 +26,7 @@ cs_log('decoupe_installe()');
 			$images[$reg[1]] = "<img class=\"no_image_filtrer\" src=\"".cs_htmlpath($path)."/$reg[1].$reg[2]\" $size";
 		}
 	}
-	ecrire_meta('tweaks_decoupe', serialize($images));
+	ecrire_meta('cs_decoupe', serialize($images));
 	ecrire_metas();
 }
 

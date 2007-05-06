@@ -24,8 +24,8 @@ function filets_sep_installe() {
 			$filets[1][] = "<html><p class=\"spip filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\">&nbsp; &nbsp; &nbsp;</p></html>";
 		}
 	}
-	ecrire_meta('tweaks_filets_sep_racc', join(', ', $liste));
-	ecrire_meta('tweaks_filets_sep', serialize($filets));
+	ecrire_meta('cs_filets_sep_racc', join(', ', $liste));
+	ecrire_meta('cs_filets_sep', serialize($filets));
 	ecrire_metas();
 }
 
@@ -33,7 +33,7 @@ function filets_sep_installe() {
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function filets_sep_raccourcis() {
-	return _T('cout:filets_sep:aide', array('liste' => $GLOBALS['meta']['tweaks_filets_sep_racc']));
+	return _T('cout:filets_sep:aide', array('liste' => $GLOBALS['meta']['cs_filets_sep_racc']));
 }
 
 // Fonction pour generer des filets de separation selon les balises presentes dans le texte fourni.
@@ -50,7 +50,7 @@ function filets_sep_rempl($texte) {
 	if (strpos($texte, '__')===false) return $texte;
 
 	// On remplace les balises filets images dans le texte par le code HTML correspondant.
-	$filets_rempl = unserialize($GLOBALS['meta']['tweaks_filets_sep']);
+	$filets_rempl = unserialize($GLOBALS['meta']['cs_filets_sep']);
 	return str_replace($filets_rempl[0], $filets_rempl[1], $texte);
 }
 

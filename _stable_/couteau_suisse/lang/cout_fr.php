@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'variable_vide' => '(Vide)',
 	'detail_outil' => 'En jeu :',
 	'liste_outils' => 'Liste des outils du Couteau Suisse',
-	'presente_tweaks' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
+	'presente_outils' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
 	'erreur:nom' => 'Erreur !',
 	'erreur:description' => "id manquant dans la d&eacute;finition de l'outil !",
 	'erreur:version' => 'indisponible dans cette version de SPIP.',
@@ -288,6 +288,10 @@ Vous pouvez choisir le type de remplacement :
 _ Merci de votre compr&eacute;hension.",
 	'tous' => 'Tous',
 	'sauf_admin' => 'Tous, sauf les administrateurs',
+	
+// ---------------------------------------------------------------------------
+	'boutonstexte:nom' => '',
+	'boutonstexte:description' => "Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police",
 	
 /*
 	':nom' => '',

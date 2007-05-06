@@ -15,10 +15,10 @@ cs_log("Chargement de cout_utils.php...");
 /* COMPATIBILITE */
 /*****************/
 
-if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
+if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
-	define('_DIR_PLUGIN_TWEAK_SPIP', $p);
+	define('_DIR_PLUGIN_COUTEAU_SUISSE', $p);
 }
 if ($GLOBALS['spip_version_code']<1.92) {
 	if (!function_exists('stripos')) {
@@ -34,7 +34,7 @@ if ($GLOBALS['spip_version_code']<1.92) {
 	}
 }
 
-function cout_suppr_metas_var($meta, $new = false) {
+function cs_suppr_metas_var($meta, $new = false) {
  global $metas_vars;
  if (!isset($metas_vars[$meta])) return;
  if ($new) {
@@ -45,19 +45,19 @@ function cout_suppr_metas_var($meta, $new = false) {
 }
 
 // on actualise/supprime de vieilles variables creees par les version anterieures du Couteau Suisse
-function tweak_compatibilite_ascendante() {
-	cout_suppr_metas_var('set_options');
-	cout_suppr_metas_var('radio_set_options3');
-	cout_suppr_metas_var('radio_set_options', 'radio_set_options4');
-	cout_suppr_metas_var('radio_type_urls', 'radio_type_urls3');
-	cout_suppr_metas_var('radio_type_urls2', 'radio_type_urls3');
-	cout_suppr_metas_var('radio_filtrer_javascript', 'radio_filtrer_javascript3');
-	cout_suppr_metas_var('radio_filtrer_javascript2', 'radio_filtrer_javascript3');
-	cout_suppr_metas_var('radio_suivi_forums', 'radio_suivi_forums3');
-	cout_suppr_metas_var('desactive_cache');
-	cout_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
-	cout_suppr_metas_var('target_blank');
-	cout_suppr_metas_var('');
+function cs_compatibilite_ascendante() {
+	cs_suppr_metas_var('set_options');
+	cs_suppr_metas_var('radio_set_options3');
+	cs_suppr_metas_var('radio_set_options', 'radio_set_options4');
+	cs_suppr_metas_var('radio_type_urls', 'radio_type_urls3');
+	cs_suppr_metas_var('radio_type_urls2', 'radio_type_urls3');
+	cs_suppr_metas_var('radio_filtrer_javascript', 'radio_filtrer_javascript3');
+	cs_suppr_metas_var('radio_filtrer_javascript2', 'radio_filtrer_javascript3');
+	cs_suppr_metas_var('radio_suivi_forums', 'radio_suivi_forums3');
+	cs_suppr_metas_var('desactive_cache');
+	cs_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
+	cs_suppr_metas_var('target_blank');
+	cs_suppr_metas_var('');
 	/*
 	// compatibilite avec l'ancien plugin Tweak SPIP
 	if (@file_exists($f=sous_repertoire(_DIR_TMP, "tweak-spip"))) {
@@ -80,40 +80,40 @@ function add_outil($tableau) {
 	$outils[$tableau['id']] = $tableau;
 }
 
-// ajoute une variable à $cout_variables et fabrique une liste des chaines et des nombres
+// ajoute une variable à $cs_variables et fabrique une liste des chaines et des nombres
 function add_variable($tableau) {
-	global $cout_variables;
+	global $cs_variables;
 	$nom = $tableau['nom'];
-	$cout_variables[$nom] = $tableau;
+	$cs_variables[$nom] = $tableau;
 	// on fabrique ici une liste des chaines et une liste des nombres
-	if($tableau['format']=='nombre') $cout_variables['_nombres'][] = $nom;
-		elseif($tableau['format']=='chaine') $cout_variables['_chaines'][] = $nom;
+	if($tableau['format']=='nombre') $cs_variables['_nombres'][] = $nom;
+		elseif($tableau['format']=='chaine') $cs_variables['_chaines'][] = $nom;
 }
 
 // retourne la valeur 'defaut' (format php) de la variable apres compilation du code
 // le resultat comporte des guillemets si c'est une chaine
-function tweak_get_defaut($variable) {
-	global $cout_variables;
+function cs_get_defaut($variable) {
+	global $cs_variables;
 	// si la variable n'est pas declaree, serieux pb dans config_outils !
-	if (!isset($cout_variables[$variable])) {
+	if (!isset($cs_variables[$variable])) {
 		spip_log("Erreur - variable '$variable' non déclarée dans config_outils.php !");
 		return false;
 	}
-	$variable = &$cout_variables[$variable];
+	$variable = &$cs_variables[$variable];
 	$defaut = $variable['defaut'];
 	if(!strlen($defaut)) $defaut = "''";
 	if($variable['format']=='nombre') $defaut = "intval($defaut)";
 		elseif($variable['format']=='chaine') $defaut = "strval($defaut)";
-//cs_log("tweak_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
+//cs_log("cs_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
 	eval("\$defaut=$defaut;");
-	$defaut2 = tweak_php_format($defaut, $variable['format']!='nombre');
-cs_log(" -- tweak_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
+	$defaut2 = cs_php_format($defaut, $variable['format']!='nombre');
+cs_log(" -- cs_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
 	return $defaut2;
 }
-// installation de $cout_metas_pipelines
+// installation de $cs_metas_pipelines
 // $type ici est egal a 'options' ou 'fonctions'
-function set_cout_metas_pipelines_fichier($infos_pipelines, $type) {
-	global $cout_metas_pipelines;
+function set_cs_metas_pipelines_fichier($infos_pipelines, $type) {
+	global $cs_metas_pipelines;
 	$code = '';
 	if (isset($infos_pipelines['inc_'.$type]))
 		foreach ($infos_pipelines['inc_'.$type] as $inc) $code .= "include_spip('outils/$inc');\n";
@@ -123,23 +123,23 @@ function set_cout_metas_pipelines_fichier($infos_pipelines, $type) {
 	$code = str_replace('intval("")', '0', $code);
 	$code = str_replace("\n".'if(strlen($foo="")) ',"\n\$foo=''; //", $code);
 	// ... en avant le code !
-	$cout_metas_pipelines[$type] = $code;
-cs_log("set_cout_metas_pipelines_fichier($type) : strlen=".strlen($code));
+	$cs_metas_pipelines[$type] = $code;
+cs_log("set_cs_metas_pipelines_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "mes_$type.php";
 cs_log(" -- fichier_dest = $fichier_dest");
 	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n++\$GLOBALS['tweak_$type'];\n$code?".'>');
 }
 
-// installation de $cout_metas_pipelines
-function set_cout_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
-	global $cout_metas_pipelines;
+// installation de $cs_metas_pipelines
+function set_cs_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
+	global $cs_metas_pipelines;
 	$code = '';
 	if (isset($infos_pipelines[$pipeline])) {
 		foreach ($infos_pipelines[$pipeline]['inclure'] as $inc) $code .= "include_spip('outils/$inc');\n";
 		foreach ($infos_pipelines[$pipeline]['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
 	}
-	$cout_metas_pipelines[$pipeline] = $code;
-cs_log("set_cout_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
+	$cs_metas_pipelines[$pipeline] = $code;
+cs_log("set_cs_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "$pipeline.php";
 cs_log(" -- fichier_dest = $fichier_dest");
 	ecrire_fichier($fichier_dest, '<'."?php\n// Code de contrôle pour le plugin 'Couteau Suisse'\n$code?".'>');
@@ -159,7 +159,7 @@ function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises
 }
 
 // lire un fichier php et retirer si possible les balises ?php
-function tweak_lire_fichier_php($file) {
+function cs_lire_fichier_php($file) {
 	$file=find_in_path($file);
 	if ($file && lire_fichier($file, $php)) {
 		if (preg_match(',^<\?php(.*)?\?>$,msi', trim($php), $regs)) return trim($regs[1]);
@@ -169,7 +169,7 @@ function tweak_lire_fichier_php($file) {
 }
 
 // retourne une aide concernant les raccourcis ajoutes par l'outil
-function tweak_aide_raccourcis() {
+function cs_aide_raccourcis() {
 	global $outils;
 	$aide = array();
 	foreach ($outils as $outil) {
@@ -185,10 +185,10 @@ function tweak_aide_raccourcis() {
 }
 
 // retourne une aide concernant les pipelines utilises par l'outil
-function tweak_aide_pipelines() {
-	global $cout_metas_pipelines, $outils;
+function cs_aide_pipelines() {
+	global $cs_metas_pipelines, $outils;
 	$aide = array();
-	foreach (array_keys($cout_metas_pipelines) as $pipe) {
+	foreach (array_keys($cs_metas_pipelines) as $pipe) {
 		// stockage de la liste des pipelines et du nombre d'outils actifs concernes
 		$nb=0; foreach($outils as $outil) if($outil['actif'] && isset($outil['pipeline:'.$pipe])) $nb++;
 		if ($nb) $aide[] = '<li style="margin-top: 0.7em;">' .  _T('cout:nb_outil'.($nb>1?'s':''), array('pipe'=>$pipe, 'nb'=>$nb)) . '</li>';
@@ -200,7 +200,7 @@ function tweak_aide_pipelines() {
 }
 
 // met en forme le fichier $f en vue d'un insertion en head
-function tweak_insert_header($f, $type) {
+function cs_insert_header($f, $type) {
 	if ($type=='css') {
 		include_spip('inc/filtres');
 		return "<link rel=\"stylesheet\" href=\"".cs_htmlpath(direction_css($f))."\" type=\"text/css\" media=\"projection, screen\" />\n";
@@ -208,7 +208,7 @@ function tweak_insert_header($f, $type) {
 		return "<script type=\"text/javascript\" src=\"".cs_htmlpath($f)."\"></script>\n";
 }
 // sauve la configuration dans un fichier tmp/couteau-suisse/config.php
-function tweak_sauve_configuration() {
+function cs_sauve_configuration() {
 	global $outils, $metas_vars;
 	$metas = $variables = $actifs = array();
 	foreach($outils as $t) if($t['actif']) {
@@ -216,7 +216,7 @@ function tweak_sauve_configuration() {
 		$variables = array_merge($variables, $t['variables']);
 	}
 	foreach($metas_vars as $i => $v) {
-		if($i!='_chaines' && $i!='_nombres') $metas[] = "\n".chr(9)."'$i' => " . tweak_php_format($v, in_array($i, $metas_vars['_chaines']));
+		if($i!='_chaines' && $i!='_nombres') $metas[] = "\n".chr(9)."'$i' => " . cs_php_format($v, in_array($i, $metas_vars['_chaines']));
 	}
 	$sauve = "// Outils actifs\n\$outils = array('\n" . chr(9) . join("',\n".chr(9)."'", $actifs) . "'\n);\n";
 	$sauve .= "\n// Variables actives\n\$variables = array('\n" . chr(9)  . join("',\n".chr(9)."'", $variables) . "'\n);\n";
@@ -225,9 +225,9 @@ function tweak_sauve_configuration() {
 	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
 }
 
-// cree un tableau $infos_pipelines et initialise $cout_metas_pipelines
-function tweak_initialise_includes() {
-	global $outils, $cout_metas_pipelines;
+// cree un tableau $infos_pipelines et initialise $cs_metas_pipelines
+function cs_initialise_includes() {
+	global $outils, $cs_metas_pipelines;
 	// toutes les infos sur les pipelines
 	$infos_pipelines = array();
 	// liste des pipelines utilises
@@ -254,22 +254,22 @@ function tweak_initialise_includes() {
 				}
 			}
 			// recherche d'un fichier .css et/ou .js eventuellement present dans outils/
-			if ($f=find_in_path('outils/'.$inc.'.css')) $cout_metas_pipelines['header'][] = tweak_insert_header($f, 'css');
-			if ($f=find_in_path('outils/'.$inc.'.js')) $cout_metas_pipelines['header'][] = tweak_insert_header($f, 'js');
+			if ($f=find_in_path('outils/'.$inc.'.css')) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
+			if ($f=find_in_path('outils/'.$inc.'.js')) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
 			// recherche d'un code inline eventuellement propose
 			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
 			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
-			if (isset($outil['code:css'])) $temp_css[] = tweak_parse_code_js($outil['code:css']);
-			if (isset($outil['code:js'])) $temp_js[] = tweak_parse_code_js($outil['code:js']);
-			// recherche d'un fichier montweak_options.php ou montweak_fonctions.php pour l'inserer dans le code
-			if ($temp=tweak_lire_fichier_php('outils/'.$inc.'_options.php')) $infos_pipelines['code_options'][] = $temp;
-			if ($temp=tweak_lire_fichier_php('outils/'.$inc.'_fonctions.php')) $infos_pipelines['code_fonctions'][] = $temp;
+			if (isset($outil['code:css'])) $temp_css[] = cs_parse_code_js($outil['code:css']);
+			if (isset($outil['code:js'])) $temp_js[] = cs_parse_code_js($outil['code:js']);
+			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
+			if ($temp=cs_lire_fichier_php('outils/'.$inc.'_options.php')) $infos_pipelines['code_options'][] = $temp;
+			if ($temp=cs_lire_fichier_php('outils/'.$inc.'_fonctions.php')) $infos_pipelines['code_fonctions'][] = $temp;
 		}
 	}
 	// concatenation des css et js inline trouves
-	if (count($temp_css)) $cout_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
+	if (count($temp_css)) $cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
 				.join("\n", $temp_css)."\n</style>";
-	if (count($temp_js)) $cout_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
+	if (count($temp_js)) $cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
 				.join("\n", $temp_js)."\n// --></script>";
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise){
@@ -286,15 +286,15 @@ function tweak_initialise_includes() {
 	if (@file_exists($f=sous_repertoire(_DIR_TMP, "couteau-suisse"))) {
 		include_spip('inc/getdocument');
 		effacer_repertoire_temporaire($f);
-	} else spip_log("Erreur - tweak_initialise_includes() : $f introuvable !");
-	// installation de $cout_metas_pipelines
-	set_cout_metas_pipelines_fichier($infos_pipelines, 'options');
-	set_cout_metas_pipelines_fichier($infos_pipelines, 'fonctions');
-	foreach($pipelines_utilises as $pipe) set_cout_metas_pipelines_pipeline($infos_pipelines, $pipe);
+	} else spip_log("Erreur - cs_initialise_includes() : $f introuvable !");
+	// installation de $cs_metas_pipelines
+	set_cs_metas_pipelines_fichier($infos_pipelines, 'options');
+	set_cs_metas_pipelines_fichier($infos_pipelines, 'fonctions');
+	foreach($pipelines_utilises as $pipe) set_cs_metas_pipelines_pipeline($infos_pipelines, $pipe);
 }
 
 // retire les guillemets extremes s'il y en a
-function tweak_retire_guillemets($valeur) {
+function cs_retire_guillemets($valeur) {
 	$valeur = trim($valeur);
 	if (preg_match(',^"(.*)"$,ms', trim($valeur), $matches)) $valeur = str_replace('\"','"',$matches[1]);
 	elseif (preg_match(',^\'(.*)\'$,ms', trim($valeur), $matches)) $valeur = str_replace("\'","'",$matches[1]);
@@ -302,24 +302,24 @@ function tweak_retire_guillemets($valeur) {
 }
 
 // met en forme une valeur dans le stype php
-function tweak_php_format($valeur, $is_chaine) {
-	$valeur = tweak_retire_guillemets($valeur);
+function cs_php_format($valeur, $is_chaine) {
+	$valeur = cs_retire_guillemets($valeur);
 	return $is_chaine?'"'.str_replace('"', '\"', $valeur).'"':$valeur;
 }
 
 // retourne le code compile d'une variable en fonction de sa valeur
-function tweak_get_code_variable($variable, $valeur) {
-	global $cout_variables;
+function cs_get_code_variable($variable, $valeur) {
+	global $cs_variables;
 	// si la variable n'a pas ete declaree
-	if(!isset($cout_variables[$variable])) return _L("// Variable '$variable' inconnue !");
-	$cout_variable = &$cout_variables[$variable];
+	if(!isset($cs_variables[$variable])) return _L("// Variable '$variable' inconnue !");
+	$cs_variable = &$cs_variables[$variable];
 	// mise en forme php de $valeur
 	if(!strlen($valeur)) {
-		if($cout_variable['format']=='nombre') $valeur='0'; else $valeur='""';
+		if($cs_variable['format']=='nombre') $valeur='0'; else $valeur='""';
 	} else
-		$valeur = tweak_php_format($valeur, $cout_variable['format']!='nombre');
+		$valeur = cs_php_format($valeur, $cs_variable['format']!='nombre');
 	$code = '';
-	foreach($cout_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
+	foreach($cs_variable as $type=>$param) if (preg_match(',^code(:(.*))?$,', $type, $regs)) {
 		$eval = '$test = ' . (strlen($regs[2])?str_replace('%s', $valeur, $regs[2]):'true') . ';';
 		$test = false;
 		eval($eval);
@@ -327,20 +327,20 @@ function tweak_get_code_variable($variable, $valeur) {
 	}
 }
 
-// remplace les valeurs marquees comme %%toto%% par le code reel prevu par $cout_variables['toto']['code:condition']
+// remplace les valeurs marquees comme %%toto%% par le code reel prevu par $cs_variables['toto']['code:condition']
 // attention de bien declarer les variables a l'aide de add_variable()
-function tweak_parse_code_php($code) {
-	global $metas_vars, $cout_variables;
+function cs_parse_code_php($code) {
+	global $metas_vars, $cs_variables;
 	while(preg_match(",([']?)%%([a-zA-Z_][a-zA-Z0-9_]*?)%%([']?),", $code, $matches)) {
 		$cotes = $matches[1]=="'" && $matches[3]=="'";
 		$nom = $matches[2];
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if (isset($metas_vars[$nom])) {
-			$rempl = tweak_get_code_variable($nom, $metas_vars[$nom]);
+			$rempl = cs_get_code_variable($nom, $metas_vars[$nom]);
 		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
-			$defaut = tweak_get_defaut($nom);
-			$rempl = $cotes . tweak_get_code_variable($nom, $defaut) . $cotes;
+			$defaut = cs_get_defaut($nom);
+			$rempl = $cotes . cs_get_code_variable($nom, $defaut) . $cotes;
 			$code = "/* Valeur par defaut : {$nom} = $defaut */\n" . $code;
 		}
 		if ($cotes) $rempl = str_replace("'", "\'", $rempl);
@@ -352,26 +352,26 @@ function tweak_parse_code_php($code) {
 
 // remplace les valeurs marquees comme %%toto%% par la valeur reelle de $metas_vars['toto']
 // + quelques optimisations du code
-// si cette valeur n'existe pas encore, la valeur utilisee sera $cout_variables['toto']['defaut']
+// si cette valeur n'existe pas encore, la valeur utilisee sera $cs_variables['toto']['defaut']
 // attention de bien declarer les variables a l'aide de add_variable()
-function tweak_parse_code_js($code) {
-	global $metas_vars, $cout_variables;
+function cs_parse_code_js($code) {
+	global $metas_vars, $cs_variables;
 	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)%%,U', $code, $matches)) {
 		// la valeur de la variable n'est stockee dans les metas qu'au premier post
 		if (isset($metas_vars[$matches[1]])) {
 			$rempl = $metas_vars[$matches[1]];
 		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
-			$rempl = tweak_get_defaut($matches[1]);
+			$rempl = cs_get_defaut($matches[1]);
 		}
 		$code = str_replace($matches[0], $rempl, $code);
 	}
-	return tweak_optimise_js($code);
+	return cs_optimise_js($code);
 }
 
 // attention : optimisation tres sommaire, pour codes simples !
 // -> optimise les if(0), if(1), if(false), if(true)
-function tweak_optimise_js($code) {
+function cs_optimise_js($code) {
 	$code = preg_replace(',if\s*\(\s*([^)]*\s*)\)\s*{\s*,imsS', 'if(\\1){', $code);
 	$code = str_replace('if(false){', 'if(0){', $code);
 	$code = str_replace('if(true){', 'if(1){', $code);
@@ -395,7 +395,7 @@ function tweak_optimise_js($code) {
 
 
 // lance la fonction d'installation de chaque outil actif, si elle existe.
-function tweak_installe_tweaks() {
+function cs_installe_outils() {
 	global $outils;
 	foreach($temp = $outils as $outil) if ($outil['actif']) {
 		include_spip('outils/'.$outil['id']);
@@ -421,17 +421,17 @@ function cs_initialisation_totale() {
 // les globales :
 //
 // $outils : tableau ultra complet avec tout ce qu'il faut savoir sur chaque outil
-// $cout_variables : tableau de toutes les variables que les outils peuvent utiliser et manipuler
+// $cs_variables : tableau de toutes les variables que les outils peuvent utiliser et manipuler
 //  - ces deux tableaux ne sont remplis qu'une seule fois, lors d'une initialisation totale
 //    les hits ordinaires ne se servent que des metas, non des fichiers.
 //  - l'initialisation totale insere en premier lieu config_outils.php
 //
 
-global $outils, $cout_variables;
-$cout_variables = $outils = array();
+global $outils, $cs_variables;
+$cs_variables = $outils = array();
 
 // liste des types de variable
-$cout_variables['_chaines'] = $cout_variables['_nombres'] = array();
+$cs_variables['_chaines'] = $cs_variables['_nombres'] = array();
 
 // lancer l'initialisation
 cs_initialisation();

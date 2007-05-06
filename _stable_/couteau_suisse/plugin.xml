@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Le Couteau Suisse</nom>
 	<icon>img/couteau-50.gif</icon>
-	<version>1.7.2.14 pour Spip 1.9 minimum.</version>
+	<version>1.7.2.15 pour Spip 1.9 minimum.</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
 _ &copy; 2007 - Distribu&#233; sous licence GPL
@@ -30,7 +30,7 @@ N'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publ
 		C'est par ailleurs conseille pour les noms de fichier
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
-	<prefix>tweak_spip</prefix>
+	<prefix>couteau_suisse</prefix>
 	<install>cout_pipelines.php</install>
 	<chemin dir='' />
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->

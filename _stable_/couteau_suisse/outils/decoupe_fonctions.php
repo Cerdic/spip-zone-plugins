@@ -23,7 +23,7 @@ function decouper_en_pages_rempl($texte) {
 		return join("<hr/>", $pages);
 
 	// images calculees par decoupe_installe()
-	$images = unserialize($GLOBALS['meta']['tweaks_decoupe']);
+	$images = unserialize($GLOBALS['meta']['cs_decoupe']);
 
 	// images et liens pour la navigation sous forme : << < ... > >>
 	$precedent = '<a href="' . parametre_url(self(),'artpage', $artpage - 1) . '">'; 
@@ -65,7 +65,7 @@ function decouper_en_pages_rempl($texte) {
 function decouper_en_pages($texte){
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// verification des metas qui stockent les liens d'image
-	if (!isset($GLOBALS['meta']['tweaks_decoupe']) || isset($GLOBALS['var_mode'])) {
+	if (!isset($GLOBALS['meta']['cs_decoupe']) || isset($GLOBALS['var_mode'])) {
 		include_spip('outils/decoupe');
 		decoupe_installe();
 	}

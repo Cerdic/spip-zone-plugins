@@ -11,7 +11,7 @@ include_spip('inc/layer');
 include_spip("inc/presentation");
 /*
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_TWEAK_SPIP',(_DIR_PLUGINS.end($p)));
+define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
 if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
@@ -42,17 +42,17 @@ div.cadre-padding ul li li {
 	margin:0;
 	padding:0 0 0.25em 0;
 }
-div.cadre-padding ul li li div.nomtweak, div.cadre-padding ul li li div.nomtweak_on {
+div.cadre-padding ul li li div.nomoutil, div.cadre-padding ul li li div.nomoutil_on {
 	border:1px solid #AFAFAF;
 	padding:.3em .3em .6em .3em;
 	font-weight:normal;
 }
-div.cadre-padding ul li li div.nomtweak a, div.cadre-padding ul li li div.nomtweak_on a {
+div.cadre-padding ul li li div.nomoutil a, div.cadre-padding ul li li div.nomoutil_on a {
 	outline:0;
 	outline:0 !important;
 	-moz-outline:0 !important;
 }
-div.cadre-padding ul li li div.nomtweak_on {
+div.cadre-padding ul li li div.nomoutil_on {
 	background:$couleur_claire;
 	font-weight:bold;
 }
@@ -113,14 +113,14 @@ function submit_general(outil) {
 	document.forms.submitform.submit();
 }
 
-function tweakcheck(ischecked, index) {
+function outilcheck(ischecked, index) {
  outil = Outils[index][0];
  if(ischecked == true) {
- 	classe = 'nomtweak_on';
+ 	classe = 'nomoutil_on';
 	html = '-input';
 	test = 1
  } else {
- 	classe = 'nomtweak';
+ 	classe = 'nomoutil';
 	html = '-valeur';
 	test = 0
  }
@@ -134,25 +134,25 @@ function tweakcheck(ischecked, index) {
  }
 }
 
-function tweakcateg(categ, lestweaks, count) {
+function categ_outil(categ, lesoutils, count) {
  for(tk=0;tk<count;tk++) {
- 	name = Outils[lestweaks[tk]][0];
+ 	name = Outils[lesoutils[tk]][0];
 	if (!document.getElementsByName('foo_'+name)[0].disabled) {
 		document.getElementsByName('foo_'+name)[0].checked = this.checked;
-		tweakcheck(this.checked, lestweaks[tk]);
+		outilcheck(this.checked, lesoutils[tk]);
 	}
  }
 }
 
-function tweakchange(index) {
- tweakcheck(this.checked, index);
+function outilchange(index) {
+ outilcheck(this.checked, index);
 }
 //--></script>";
 }
 
 // mise à jour des données si envoi via formulaire
-function enregistre_modif_tweaks(){
-cs_log("Début : enregistre_modif_tweaks()");
+function enregistre_modif_outils(){
+cs_log("Début : enregistre_modif_outils()");
 	global $outils;
 	// recuperer les outils dans l'ordre des $_POST
 	$test = array();
@@ -174,7 +174,7 @@ cs_log("Début : enregistre_modif_tweaks()");
 		@unlink(_DIR_TMP."couteau-suisse.plat");
 	cs_initialisation_totale();
 
-cs_log("Fin   : enregistre_modif_tweaks()");
+cs_log("Fin   : enregistre_modif_outils()");
 }
 
 function exec_admin_couteau_suisse() {
@@ -194,8 +194,10 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	// reset general
 	if (_request('reset')=='oui'){
 		spip_log("Reset de tous les outils par l'auteur id=$connect_id_auteur");
-		foreach(array_keys($GLOBALS['meta']) as $meta)
-			if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
+		foreach(array_keys($GLOBALS['meta']) as $meta) {
+			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
+			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
+		}
 		ecrire_metas();
 		cs_initialisation(true);
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
@@ -211,8 +213,8 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	cs_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les outils
-	if (_request('changer_tweaks')=='oui'){
-		enregistre_modif_tweaks();
+	if (_request('changer_outils')=='oui'){
+		enregistre_modif_outils();
 		// pour la peine, un redirige,
 		// que les outils charges soient coherent avec la liste
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
@@ -222,7 +224,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 			else redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));
 	}
 //	else
-//		verif_tweaks();
+//		verif_outils();
 
 	if ($GLOBALS['spip_version_code']<1.92)
   		debut_page(_T('cout:titre'), 'configuration', 'couteau_suisse');
@@ -240,14 +242,14 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	debut_boite_info();
 	echo propre(_T('cout:help'));
 	fin_boite_info();
-	$aide_racc = tweak_aide_raccourcis();
+	$aide_racc = cs_aide_raccourcis();
 	if(strlen($aide_racc)) {
 		echo '<br />';
 		debut_boite_info();
 		echo $aide_racc;
 		fin_boite_info();
 	}
-	$aide_pipes = tweak_aide_pipelines();
+	$aide_pipes = cs_aide_pipelines();
 	if(strlen($aide_pipes)) {
 		echo '<br />';
 		debut_boite_info();
@@ -265,7 +267,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
-	echo _T('cout:presente_tweaks'), $valider;
+	echo _T('cout:presente_outils'), $valider;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
 	foreach($temp = $outils as $outil) $categ[_T('cout:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 
@@ -278,7 +280,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
 //		$ss .= $actif?" checked='checked'":"";
-		$ss .= " onclick='tweakcateg.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
+		$ss .= " onclick='categ_outil.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
 		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('cout:activer_outil')."</label>";
 		preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
 		echo "<form style='margin-top:$marge; margin-left:2em;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
@@ -288,7 +290,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
 
 	echo generer_url_post_ecrire('admin_couteau_suisse', '', 'submitform');
-	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
+	echo "\n<input type='hidden' name='changer_outils' value='oui'>";
 	echo "\n<input type='hidden' name='afficher_outil' value='non'>";
 	foreach($temp = $outils as $outil) echo "<input type='hidden' id='tweak_".$outil['id']."' name='tweak_".$outil['id']."' value='".($outil['actif']?"1":"0")."' />";
 	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
@@ -323,7 +325,7 @@ function ligne_tweak($outil, &$js, $afficher){
 	$nb_var = intval($outil['nb_variables']);
 	$index = intval($outil['index']);
 
-	$s = "<a name='outil$index' id='outil$index'></a><form  style='margin:0 0 0 1em;'><div id='$outil_id' class='nomtweak".($actif?'_on':'')."'>";
+	$s = "<a name='outil$index' id='outil$index'></a><form  style='margin:0 0 0 1em;'><div id='$outil_id' class='nomoutil".($actif?'_on':'')."'>";
 /*
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
@@ -339,7 +341,7 @@ function ligne_tweak($outil, &$js, $afficher){
 	$p .= "<input type='checkbox' class='checkbox' name='foo_$inc' value='O' id='label_$id_input' style=''";
 	$p .= $actif?" checked='checked'":"";
 	$p .= $erreur_version?" disabled='disabled'":"";
-	$p .= " onclick='tweakchange.apply(this,[$index])'";
+	$p .= " onclick='outilchange.apply(this,[$index])'";
 	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('cout:activer_outil')."</label>";
 	$js .= "Outils[$index] = Array(\"$inc\", $nb_var);\n";
 	$p .= ($afficher?bouton_block_visible($outil_id):bouton_block_invisible($outil_id)) . $outil['nom'] . '</div>';

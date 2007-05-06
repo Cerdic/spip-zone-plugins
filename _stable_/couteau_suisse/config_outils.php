@@ -457,7 +457,7 @@ add_outil( array(
 	'id' => 'smileys',
 	'auteur' 	 => 'Sylvain',
 	'categorie'	 => 'typo-corr',
-	'pipeline:pre_typo' => 'tweak_smileys_pre_typo',
+	'pipeline:pre_typo' => 'cs_smileys_pre_typo',
 ));
 
 add_outil( array(
@@ -481,5 +481,5 @@ add_outil( array(
 // boutonstexte
 
 cs_log("Fin de config_outils.php");
-//global $cout_variables; cs_log($cout_variables, 'tweak_variables :');
+//global $cs_variables; cs_log($cs_variables, 'cs_variables :');
 ?>

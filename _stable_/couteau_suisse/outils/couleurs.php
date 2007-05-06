@@ -56,9 +56,9 @@ cs_log("couleurs_installe()");
 		$couleurs[1] = join('|', $couleurs[1]);
 	}
 	// sauvegarde en meta : aide
-	ecrire_meta('tweaks_couleurs_racc', $aide);
+	ecrire_meta('cs_couleurs_racc', $aide);
 	// sauvegarde en meta : couleurs
-	ecrire_meta('tweaks_couleurs', serialize($couleurs));
+	ecrire_meta('cs_couleurs', serialize($couleurs));
 	ecrire_metas();
 }
 
@@ -67,7 +67,7 @@ cs_log("couleurs_installe()");
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function couleurs_raccourcis() {
 	return _T('cout:couleurs:aide', array(
-		'liste' => $GLOBALS['meta']['tweaks_couleurs_racc'],
+		'liste' => $GLOBALS['meta']['cs_couleurs_racc'],
 		'fond' => _COULEURS_FONDS==1?_T('cout:couleurs_fonds'):'',
 	));
 }
@@ -88,7 +88,7 @@ function couleurs_rempl($texte) {
 	// pour les callbacks
 	global $outil_couleurs;
 	// lecture des metas
-	$outil_couleurs = unserialize($GLOBALS['meta']['tweaks_couleurs']);
+	$outil_couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
 
 	// voila, on remplace tous les raccourcis $outil_couleurs[0] (balises francaises ou personnalisees)...
 	$texte = preg_replace_callback(",\[($outil_couleurs[0])\],", 'couleurs_texte_callback', $texte);
@@ -118,7 +118,7 @@ function couleurs_rempl($texte) {
 
 function couleurs_pre_typo($texte) {
 	if (strpos($texte, '[')===false || strpos($texte, '/')===false) return $texte;
-	if (!isset($GLOBALS['meta']['tweaks_couleurs']) || isset($GLOBALS['var_mode']))
+	if (!isset($GLOBALS['meta']['cs_couleurs']) || isset($GLOBALS['var_mode']))
 		couleurs_installe();
 	// appeler couleurs_rempl() une fois que certaines balises ont ete protegees
 	return cs_echappe_balises('', 'couleurs_rempl', $texte);
