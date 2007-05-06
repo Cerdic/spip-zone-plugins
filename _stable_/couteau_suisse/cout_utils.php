@@ -234,6 +234,8 @@ function tweak_initialise_includes() {
 	$pipelines_utilises = array();
 	// liste des pipelines utilises
 	$traitements_utilises = array();
+	// variables temporaires
+	$temp_css = $temp_js = array();
 	// parcours de tous les outils
 	foreach ($outils as $i=>$outil) {
 		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
@@ -257,15 +259,18 @@ function tweak_initialise_includes() {
 			// recherche d'un code inline eventuellement propose
 			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
 			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
-			if (isset($outil['code:css'])) $cout_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
-				.tweak_parse_code_js($outil['code:css'])."\n</style>";
-			if (isset($outil['code:js'])) $cout_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
-				.tweak_parse_code_js($outil['code:js'])."\n// --></script>";
+			if (isset($outil['code:css'])) $temp_css[] = tweak_parse_code_js($outil['code:css']);
+			if (isset($outil['code:js'])) $temp_js[] = tweak_parse_code_js($outil['code:js']);
 			// recherche d'un fichier montweak_options.php ou montweak_fonctions.php pour l'inserer dans le code
 			if ($temp=tweak_lire_fichier_php('outils/'.$inc.'_options.php')) $infos_pipelines['code_options'][] = $temp;
 			if ($temp=tweak_lire_fichier_php('outils/'.$inc.'_fonctions.php')) $infos_pipelines['code_fonctions'][] = $temp;
 		}
 	}
+	// concatenation des css et js inline trouves
+	if (count($temp_css)) $cout_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
+				.join("\n", $temp_css)."\n</style>";
+	if (count($temp_js)) $cout_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
+				.join("\n", $temp_js)."\n// --></script>";
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise){
 		foreach($balise as $f=>$fonction) {

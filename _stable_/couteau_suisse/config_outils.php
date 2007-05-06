@@ -343,8 +343,8 @@ add_outil( array(
 add_variable( array(
 	'nom' => 'radio_target_blank3',
 	'format' => 'nombre',
-	'radio' => array(0 => 'item_oui', 1 => 'item_non'),
-	'defaut' => 0,
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 1,
 	'code' => '$GLOBALS["tweak_target_blank"]=%s;',
 ));
 add_variable( array(
@@ -359,6 +359,7 @@ add_outil( array(
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 	'categorie' => 'public',
 ));
+
 
 
 //-----------------------------------------------------------------------------//

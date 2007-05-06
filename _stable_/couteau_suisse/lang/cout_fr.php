@@ -209,9 +209,9 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html].",
 
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
-	'f_jQuery:description' => "Emp&ecirc;che l'installation de {jQuery} dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l'utilise dans sa partie priv&eacute;e.
+	'f_jQuery:description' => "Emp&ecirc;che l'installation de {jQuery} dans la partie publique afin d'&eacute;conmiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l'utilise dans sa partie priv&eacute;e.
 
-Attention : certaines fonctionnalit&eacute; de cette page n&eacute;cessitent les fonctions de {jQuery}. ",
+Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions de {jQuery}. ",
 
 	'SPIP_liens:nom' => 'SPIP et les liens&hellip;',
 	'SPIP_liens:description' => "#PUCE Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
@@ -288,6 +288,7 @@ Vous pouvez choisir le type de remplacement :
 _ Merci de votre compr&eacute;hension.",
 	'tous' => 'Tous',
 	'sauf_admin' => 'Tous, sauf les administrateurs',
+	
 /*
 	':nom' => '',
 	':description' => '',
