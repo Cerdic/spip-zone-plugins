@@ -166,13 +166,13 @@ function sedna_utils(){
 	// Calcul du delais optimal (on est tjs a jour, mais quand meme en cache)
 	// valeur max = 15 minutes (900s) (et on hacke #ENV{max_maj} pour affichage
 	// de "Derniere syndication..." en pied de page).
-	$_GET['max_maj'] = @filemtime(_DIR_TMP.'syndic.lock');
-	if ($_GET['max_maj'] > lire_meta('derniere_modif')) {
+	$GLOBALS['sedna_max_maj'] = @filemtime(_DIR_TMP.'syndic.lock');
+	if ($GLOBALS['sedna_max_maj'] > lire_meta('derniere_modif')) {
 		include_spip('inc/meta');
-		ecrire_meta('derniere_modif', $_GET['max_maj']);
+		ecrire_meta('derniere_modif', $GLOBALS['sedna_max_maj']);
 		ecrire_metas();
 	}
-	$_GET['max_maj'] = date('Y-m-d H:i:s', $_GET['max_maj']); # format SPIP
+	$GLOBALS['sedna_max_maj'] = date('Y-m-d H:i:s', $GLOBALS['sedna_max_maj']); # format SPIP
 }
 
 ?>

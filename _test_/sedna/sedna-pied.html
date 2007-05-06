@@ -34,6 +34,6 @@
 	<?php
 		if (!$ignore)
 			echo "<:sedna:derniere_syndication:>"
-			.date_relative('[(#ENV{max_maj})]');
+			.date_relative($GLOBALS['sedna_max_maj']);
 	?>
 </div>
