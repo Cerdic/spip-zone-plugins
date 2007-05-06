@@ -387,17 +387,6 @@ function autoriser_destroy($faire, $type, $id, $qui, $opt) {
 	$autorite_erreurs[] = 'autoriser_destroy';
 }
 
-
-// Noter les erreurs pour les afficher dans le panneau de config
-// BUG: la modif de config se faisant plus tard, si de nouvelles erreurs
-// apparaissent elles ne seront affichees qu'au hit suivant
-if (serialize($autorite_erreurs) != $GLOBALS['meta']['autorite_erreurs']) {
-	include_spip('inc/meta');
-	ecrire_meta('autorite_erreurs', serialize($autorite_erreurs));
-	ecrire_metas();
-	spip_log('Erreur autorite : '.join(', ', $autorite_erreurs));
-}
-unset($autorite_erreurs);
-
+if ($autorite_erreurs) $GLOBALS['autorite_erreurs'] = $autorite_erreurs;
 
 ?>

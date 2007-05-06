@@ -6,6 +6,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation'); // pour compat cfg 1.0.1
 
+// Noter les erreurs pour les afficher dans le panneau de config
+// BUG: la modif de config se faisant apres le passage dans inc/autoriser,
+// si de nouvelles erreurs apparaissent suite a une modif elles ne seront
+// affichees qu'au hit suivant
+include_spip('inc/autoriser');
+global $autorite_erreurs;
+if (!isset($autorite_erreurs)) {
+	if (isset($GLOBALS['meta']['autorite_erreurs'])) {
+		include_spip('inc/meta');
+		effacer_meta('autorite_erreurs');
+		ecrire_metas();
+		spip_log('Autorite : OK');
+	}
+}
+else if (serialize($autorite_erreurs) != $GLOBALS['meta']['autorite_erreurs']) {
+	include_spip('inc/meta');
+	ecrire_meta('autorite_erreurs', serialize($autorite_erreurs));
+	ecrire_metas();
+	spip_log('Erreur autorite : '.join(', ', $autorite_erreurs));
+}
+
+
 // Qui sont les webmestres ?
 $webmestres = array();
 include_spip('inc/texte');
@@ -15,7 +37,7 @@ while ($qui = spip_fetch_array($s)) {
 		$webmestres[$qui['id_auteur']] = typo($qui['nom']);
 }
 
-$message = 'Cette page de configuration est r&#233;serv&#233;e aux webmestres du site&nbsp;: &nbsp; <b>';
+$message = 'Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &nbsp; <b>';
 $message .= join(', ', $webmestres);
 $message .= "</b>\n"
 	."<hr />\n"
