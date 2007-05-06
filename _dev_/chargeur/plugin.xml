@@ -6,29 +6,33 @@
 	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
-	0.1.0
+	1.0.0
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
 _ Ce plugin permet de t&eacute;l&eacute;charger des zip et/ou activer des plugins
 
-Il fournit l'action charger qui charge un zip, le d&eacute;compresse et si plugin, l'active:
-- charger un zip et le décompresser: ?action=charger&amp;zip=[nom paquet sans .zip]
-- charger un plugin, le décompresser et l'activer: ?action=charger&amp;plugin=[prefixe plugin]
+Il fournit l'action {{charger}} qui charge un zip, le d&eacute;compresse et si plugin, l'active:
 
-Si le nom du zip differe du plugin, rajouter: &zip=[nom paquet sans .zip]
+- charger un plugin, le décompresser et l'activer: [->../?action=charger&amp;plugin=nom]
+
+- charger un zip et le décompresser: [../?action=charger&amp;zip=archive] (sans .zip)
+
+Si le nom du zip differe de son nom local, mettre à la fois {zip} et {plugin}:
+- [->../?action=charger&amp;plugin=nom&amp;zip=archive]
 
 Options supplementaires:
 - &amp;url_retour=[url retour], défaut ecrire/
 - &amp;depot=[url du depot des zip] defaut http://files.spip.org/spip-zone/
 
 On peut aussi simplement activer un plugin deja present par:
-- ?action=charger&amp;activer=[prefixe plugin]
+- [->../?action=charger&amp;activer=nom]
 	</description>
 	<lien>
-	[Documentation temporaire (kitspip)->http://toggg.lune-rouge.net/]
+	[Documentation sur contrib->http://www.spip-contrib.net/]
+et si probl&egrave;me zip [Codes d'erreur pclzip->http://trac.rezo.net/trac/spip/browser/spip/ecrire/inc/pclzip.php#L68]
 	</lien>
 	<prefix>
 	chargeur
