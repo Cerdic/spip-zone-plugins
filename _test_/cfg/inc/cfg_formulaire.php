@@ -233,7 +233,8 @@ class cfg_formulaire
 
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
 		$this->rempar = array(array());
-		if (preg_match_all('/<!-- \w+\*?=/', $this->controldata, $this->rempar)) {
+		if (preg_match_all('/<!-- \w+\*?=/', $this->controldata, $rempar)) {
+			$this->rempar = $rempar;
 			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
 								array($this, 'post_params'), $return);
 		}
