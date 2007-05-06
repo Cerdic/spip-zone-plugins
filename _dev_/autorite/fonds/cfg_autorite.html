@@ -65,9 +65,9 @@
 	if ($GLOBALS['spip_version_code'] < '1.9252') {
 		// autoriser(configurer)
 		$autorite_erreurs_version[] = 'configurer';
-		// autoriser(backup)
+		// autoriser(sauvegarder)
 		$autorite_erreurs_version[] = 'faire des sauvegardes';
-		// autoriser(destroy)
+		// autoriser(detruire)
 		$autorite_erreurs_version[] = 'effacer la base';
 	}
 	if ($autorite_erreurs_version) {
@@ -278,7 +278,7 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 // --></script>
 
 
-[(#REM) ---------------------- CONFUGURATION DU SITE -------------------- ]
+[(#REM) ---------------------- CONFIGURATION DU SITE -------------------- ]
 
 <fieldset>
 <legend>
@@ -286,6 +286,7 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 </legend>
 <p>
 <label>Qui peut <strong>modifier la configuration</strong> du site&nbsp;?
+<br />
 <select name="configurer">
 	<option value=""[ selected="(#ENV{configurer}|?{'',selected})"]>Tous les administrateurs</option>
 	<option value="webmestre"[ selected="(#ENV{configurer}|=={webmestre}|?{selected})"]>Le webmestre</option>
@@ -296,22 +297,24 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 
 <p>
 <label>Qui peut effectuer des <strong>sauvegardes</strong>&nbsp;?
-<select name="backup">
-	<option value=""[ selected="(#ENV{backup}|=={''}|?{selected})"]>Tous les administrateurs (y compris restreints)</option>
-	<option value="admin"[ selected="(#ENV{backup}|=={admin}|?{selected})"]>Les administrateurs</option>
-	<option value="webmestre"[ selected="(#ENV{backup}|=={webmestre}|?{selected})"]>Le webmestre</option>
-	<option value="non"[ selected="(#ENV{backup}|=={non}|?{selected})"]>Personne</option>
+<br />
+<select name="sauvegarder">
+	<option value=""[ selected="(#ENV{sauvegarder}|=={''}|?{selected})"]>Tous les administrateurs (y compris restreints)</option>
+	<option value="admin"[ selected="(#ENV{sauvegarder}|=={admin}|?{selected})"]>Les administrateurs</option>
+	<option value="webmestre"[ selected="(#ENV{sauvegarder}|=={webmestre}|?{selected})"]>Le webmestre</option>
+	<option value="non"[ selected="(#ENV{sauvegarder}|=={non}|?{selected})"]>Personne</option>
 </select>
 </p>
 
 <p>
 <label>Qui peut <strong>effacer</strong> la base de donn&#233;es du site&nbsp;?
-<select name="destroy">
-	<option value=""[ selected="(#ENV{destroy}|?{'',selected})"]>Les administrateurs</option>
-	<option value="webmestre"[ selected="(#ENV{destroy}|=={webmestre}|?{selected})"]>Le webmestre</option>
-	<option value="non"[ selected="(#ENV{destroy}|=={non}|?{selected})"]>Personne</option>
+<br />
+<select name="detruire">
+	<option value=""[ selected="(#ENV{detruire}|?{'',selected})"]>Les administrateurs</option>
+	<option value="webmestre"[ selected="(#ENV{detruire}|=={webmestre}|?{selected})"]>Le webmestre</option>
+	<option value="non"[ selected="(#ENV{detruire}|=={non}|?{selected})"]>Personne</option>
 </select>
-<br /><small>L'option recommand&#233;e est &#171;&nbsp;personne&nbsp;&#187;, l'option standard de SPIP est &#171;&nbsp;les administrateurs&nbsp;&#187; (mais avec une v&#233;rification par FTP).</small>
+<small><br />L'option recommand&#233;e est &#171;&nbsp;personne&nbsp;&#187;, l'option standard de SPIP est &#171;&nbsp;les administrateurs&nbsp;&#187; (mais toujours avec une v&#233;rification par FTP).</small>
 </p>
 
 </fieldset>

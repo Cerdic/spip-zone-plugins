@@ -340,51 +340,51 @@ function autoriser_configurer($faire, $type, $id, $qui, $opt) {
 }
 
 ##
-## autoriser_backup (faire un backup partiel ou complet)
+## autoriser_sauvegarder (faire un backup partiel ou complet)
 ##
-if ($GLOBALS['autorite']['backup']
+if ($GLOBALS['autorite']['sauvegarder']
 OR false // autre possibilite de surcharge ?
 ) {
-if (!function_exists('autoriser_backup')) {
-function autoriser_backup($faire, $type, $id, $qui, $opt) {
+if (!function_exists('autoriser_sauvegarder')) {
+function autoriser_sauvegarder($faire, $type, $id, $qui, $opt) {
 
-	if ($GLOBALS['autorite']['backup'] == 'webmestre')
+	if ($GLOBALS['autorite']['sauvegarder'] == 'webmestre')
 		return autoriser('webmestre');
 
-	if ($GLOBALS['autorite']['backup'] == 'admin')
+	if ($GLOBALS['autorite']['sauvegarder'] == 'admin')
 		return
 			$qui['statut'] == '0minirezo'
 			AND !$qui['restreint'];
 
 	// version normale
-	if ($GLOBALS['autorite']['backup'] == '')
+	if ($GLOBALS['autorite']['sauvegarder'] == '')
 		return
 			$qui['statut'] == '0minirezo';
 }
 } else
-	$autorite_erreurs[] = 'autoriser_backup';
+	$autorite_erreurs[] = 'autoriser_sauvegarder';
 }
 
 ##
-## autoriser_destroy (vider la base de donnees)
+## autoriser_detruire (vider la base de donnees)
 ##
-if ($GLOBALS['autorite']['destroy']
+if ($GLOBALS['autorite']['detruire']
 OR false // autre possibilite de surcharge ?
 ) {
-if (!function_exists('autoriser_destroy')) {
-function autoriser_destroy($faire, $type, $id, $qui, $opt) {
+if (!function_exists('autoriser_detruire')) {
+function autoriser_detruire($faire, $type, $id, $qui, $opt) {
 
-	if ($GLOBALS['autorite']['destroy'] == 'webmestre')
+	if ($GLOBALS['autorite']['detruire'] == 'webmestre')
 		return autoriser('webmestre');
 
-	if ($GLOBALS['autorite']['destroy'] == 'non')
+	if ($GLOBALS['autorite']['detruire'] == 'non')
 		return false;
 
 	// Par defaut, idem configuration
 	return autoriser('configurer');
 }
 } else
-	$autorite_erreurs[] = 'autoriser_destroy';
+	$autorite_erreurs[] = 'autoriser_detruire';
 }
 
 if ($autorite_erreurs) $GLOBALS['autorite_erreurs'] = $autorite_erreurs;
