@@ -60,33 +60,11 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 	[(#REM|fin_boite_alerte)]
 
 ]
-<?php
 
-	// Comment gerer ca proprement ?
-	$autorite_erreurs_version = array();
-	if ($GLOBALS['spip_version_code'] < '1.9251') {
-		$autorite_erreurs_version[] = 'auteur modere forum';
-		$autorite_erreurs_version[] = 'auteur modere petition';
-		$autorite_erreurs_version[] = 'auteur modifie email';
-		$autorite_erreurs_version[] = 'redacteur voit stats';
-		$autorite_erreurs_version[] = 'redacteur modifie mots';
-	}
-	if ($GLOBALS['spip_version_code'] < '1.9252') {
-		// autoriser(configurer)
-		$autorite_erreurs_version[] = 'configurer';
-		// autoriser(sauvegarder)
-		$autorite_erreurs_version[] = 'faire des sauvegardes';
-		// autoriser(detruire)
-		$autorite_erreurs_version[] = 'effacer la base';
-	}
-	if ($autorite_erreurs_version) {
-		echo "Attention les choix suivants peuvent ne pas fonctionner avec votre version de SPIP&nbsp;:\n"
-		. "<ul><li>\n"
-		. join ("</li><li>", $autorite_erreurs_version)
-		. "</li></ul>\n";
-	}
-?>
-
+[Attention les choix suivants peuvent ne pas fonctionner avec votre version de SPIP&nbsp;:
+<ul><li>
+(#REM|autorite_erreurs_version{</li><li>})
+</li></ul>]
 
 <br />
 
