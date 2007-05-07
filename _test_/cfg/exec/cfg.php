@@ -53,7 +53,7 @@ class cfg_dist extends cfg_formulaire
 		 || $this->boite
 		 || ($this->boite = _L('Configuration') . ' ' . $this->nom);
 
-		if (!$this->permise || !$this->autoriser()) {
+		if (!$this->_permise || !$this->autoriser()) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_acces_refuse'),
 				$this->refus

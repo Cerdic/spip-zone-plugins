@@ -19,7 +19,7 @@ class cfg_formulaire
 // le "faire" de autoriser($faire), par defaut, autoriser_defaut_dist(): que les admins complets
 	var $autoriser = 'defaut';
 // la config est-elle permise ?
-	var $permise = false;
+	var $_permise = false;
 // en cas de refus, un message informatif [(#REM) refus=...]
 	var $refus = '';
 // le nom du meta (ou autre) ou va etre stocke la config concernee
@@ -60,7 +60,7 @@ class cfg_formulaire
 		if ($vue) {
 			$this->message .= $this->set_vue($vue);
 		}
-		$this->permise = $this->autoriser();
+		$this->_permise = $this->autoriser();
 		
 		if (_request('_cfg_affiche')) {
 			$this->cfg_id = $sep = '';
@@ -92,7 +92,7 @@ class cfg_formulaire
 		if (!lire_fichier($fichier, $this->controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
-		$sans_rem = preg_replace_callback('/(\[\(#REM\) (\w+)(\*)?=)(.*?)\]/sim',
+		$sans_rem = preg_replace_callback('/(\[\(#REM\) ([a-z0-9]\w+)(\*)?=)(.*?)\]/sim',
 						array($this, 'post_params'), $this->controldata);
 		if (!preg_match_all(
 		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
@@ -161,7 +161,7 @@ class cfg_formulaire
 
 	function traiter()
 	{
-		if (!$this->permise) {
+		if (!$this->_permise) {
 			return;
 		}
 		$enregistrer = $supprimer = false;
@@ -251,16 +251,16 @@ class cfg_formulaire
 
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
 		$this->rempar = array(array());
-		if (preg_match_all('/<!-- \w+\*?=/', $this->controldata, $this->rempar)) {
+		if (preg_match_all('/<!-- [a-z0-9]\w+\*?=/i', $this->controldata, $this->rempar)) {
 /* en réserve au cas ou vraiement pas possible autrement
 			$GLOBALS['_current_cfg'] = &this;
 			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
 								array(&$GLOBALS['_current_cfg'], 'post_params'), $return);
 */
 			$this->current_rempar = 0;
-			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
+			$return = preg_replace_callback('/(<!-- ([a-z0-9]\w+)(\*)?=)(.*?)-->/sim',
 								array(&$this, 'post_params'), $return);
-			if (preg_match('/<!-- \w+\*?=/', $return)) {
+			if (preg_match('/<!-- [a-z0-9]\w+\*?=/', $return)) {
 				die('erreur manque parametre externe: '
 					. htmlentities(var_export($this->rempar, true)));
 			}
