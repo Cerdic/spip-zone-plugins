@@ -20,8 +20,16 @@ function exec_cfg_dist($class = null)
 		($cfg_id = _request('cfg_id'))? $cfg_id : ''
 		);
 
+	if ($message = lire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'])) {
+		include_spip('inc/meta');
+		effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
+		ecrire_metas();
+		$config->message = $message;
+	}
+
 	$config->traiter();
 	echo $config->sortie();
+
 	return;
 }
 

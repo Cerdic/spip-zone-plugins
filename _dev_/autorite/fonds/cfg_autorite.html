@@ -4,21 +4,27 @@
 
 [(#REM) autoriser=webmestre ]
 
-<!-- refus=Seuls les webmestres du site (<b>[(#REM|liste_webmestres)]</b>) sont autoris&#233;s &#224; modifier ces param&#232;tres. Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.
+
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../illuminati.png' width='64' height='64' alt='Logo rigolo' style="float:#LANG_RIGHT;" />
+})]
+
+<!-- refus=#GET{logo}<p>
+Seuls les webmestres du site [(<b>(#REM|liste_webmestres)</b>)] sont autoris&#233;s &#224; modifier ces param&#232;tres.</p>
+<p>Pour en savoir plus, voir <a href="http://www.spip-contrib.net/-Autorite-">la documentation</a>.</p>
 -->
 
 <!-- descriptif=
 
-<img src='#DOSSIER_SQUELETTE/../illuminati.png' width='64' height='64' alt='Logo rigolo' style="float:#LANG_RIGHT;" />
-
+#GET{logo}
 Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &nbsp;
  <b>[(#REM|liste_webmestres)]</b>
 <hr />
 <p><small>Si vous souhaitez modifier cette liste, veuillez éditer le fichier <tt>config/mes_options.php</tt> (le cr&#233;er le cas &#233;ch&#233;ant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante&nbsp;:</small></p>
-	<pre style='text-align:left;'>&lt;?php
-	define ('_ID_WEBMESTRES',
-	  '1:5:8');
-	?&gt;</pre>
+<html><pre>&lt;?php
+  define ('_ID_WEBMESTRES',
+  '1:5:8');
+?&gt;</pre></html>
 
 <p><small>A noter&nbsp;: les webmestres d&#233;finis de cette mani&#232;re n'ont plus besoin de proc&#233;der &#224; l'authentification par FTP pour les op&#233;rations d&#233;licates (mise &#224; niveau de la base de donn&#233;es, par exemple).</small></p>
 

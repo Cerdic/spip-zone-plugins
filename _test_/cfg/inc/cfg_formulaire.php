@@ -127,7 +127,7 @@ class cfg_formulaire
 
 	function autoriser()
 	{
-		return autoriser($this->autoriser);
+		return autoriser(trim($this->autoriser));
 	}
 
 	function log($message)
@@ -183,6 +183,18 @@ class cfg_formulaire
 			$this->modifier();
 		}
 //		$this->message .= print_r($this->champs, true);
+
+		// Il s'est produit une modif, on stocke le message dans une meta
+		// et on redirige le client, de maniere a charger la page
+		// avec la nouvelle config (ce qui permet par exemple a Autorite
+		// de controler d'eventuels conflits generes par les nouvelles autorisations)
+		if ($this->message) {
+			include_spip('inc/meta');
+			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], $this->message, 'non');
+			ecrire_metas();
+			include_spip('inc/headers');
+			redirige_par_entete(parametre_url(self(),null,null,'&'));
+		}
 	}
 
 	function controle()
