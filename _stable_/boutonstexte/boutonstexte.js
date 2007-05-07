@@ -61,7 +61,7 @@ function boutonsTexte(options)
 boutonsTexte.prototype.textOnly = function(elt)
 {
 	var that = this;
-	var texte = $(elt).parent().siblings(".texte");
+	var texte = $(elt).parent().next();
 	$("body").toggleClass('onlytext_wrapper');
 	if (this['backTextOnly']) {
 		texte.removeClass("onlytext");
