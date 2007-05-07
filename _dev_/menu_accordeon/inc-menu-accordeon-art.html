@@ -1,0 +1,11 @@
+<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+		<li><a href="#" class="hac[ (#EXPOSE)]">[(#TITRE|couper{80})]</a>
+			<B_menu_articles>
+			<ul>
+				<BOUCLE_menu_articles(ARTICLES) {id_rubrique} {par num titre, titre}>
+					<li><a href="#URL_ARTICLE">[(#TITRE|couper{80})]</a></li>
+				</BOUCLE_menu_articles>
+			</ul>
+			</B_menu_articles>
+		</li>
+</BOUCLE_rubriques>
