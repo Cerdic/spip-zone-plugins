@@ -20,16 +20,6 @@ function exec_cfg_dist($class = null)
 		($cfg_id = _request('cfg_id'))? $cfg_id : ''
 		);
 
-	if (!$config->autoriser()) {
-		include_spip('inc/minipres');
-		echo minipres(_T('info_acces_refuse'),
-			$config->refus
-				? $config->refus
-				: " (cfg {$config->nom} - {$config->vue} - {$config->cfg_id})"
-			);
-		exit;
-	}
-
 	$config->traiter();
 	echo $config->sortie();
 	return;
@@ -55,6 +45,15 @@ class cfg_dist extends cfg_formulaire
 		 || $this->boite
 		 || ($this->boite = _L('Configuration') . ' ' . $this->nom);
 
+		if (!$this->permise || !$this->autoriser()) {
+			include_spip('inc/minipres');
+			echo minipres(_T('info_acces_refuse'),
+				$this->refus
+					? $this->refus
+					: " (cfg {$config->nom} - {$config->vue} - {$config->cfg_id})"
+				);
+			exit;
+		}
 
 		$debut = $this->debut_page();
 

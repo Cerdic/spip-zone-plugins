@@ -18,6 +18,8 @@ class cfg_formulaire
 	var $optsto = array();
 // le "faire" de autoriser($faire), par defaut, autoriser_defaut_dist(): que les admins complets
 	var $autoriser = 'defaut';
+// la config est-elle permise ?
+	var $permise = false;
 // en cas de refus, un message informatif [(#REM) refus=...]
 	var $refus = '';
 // le nom du meta (ou autre) ou va etre stocke la config concernee
@@ -58,6 +60,7 @@ class cfg_formulaire
 		if ($vue) {
 			$this->message .= $this->set_vue($vue);
 		}
+		$this->permise = $this->autoriser();
 		
 		if (_request('_cfg_affiche')) {
 			$this->cfg_id = $sep = '';
@@ -158,6 +161,9 @@ class cfg_formulaire
 
 	function traiter()
 	{
+		if (!$this->permise) {
+			return;
+		}
 		$enregistrer = $supprimer = false;
 		if ($this->message ||
 			! (($enregistrer = _request('_cfg_ok')) ||
@@ -234,6 +240,11 @@ class cfg_formulaire
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
 		$this->rempar = array(array());
 		if (preg_match_all('/<!-- \w+\*?=/', $this->controldata, $this->rempar)) {
+/* en réserve au cas ou vraiement pas possible autrement
+			$GLOBALS['_current_cfg'] = &this;
+			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
+								array(&$GLOBALS['_current_cfg'], 'post_params'), $return);
+*/
 			$this->current_rempar = 0;
 			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
 								array(&$this, 'post_params'), $return);
