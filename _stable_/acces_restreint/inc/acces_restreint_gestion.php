@@ -12,8 +12,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if (strlen($titre)>0){
 			$id_zone = spip_abstract_insert('spip_zones', "(titre,descriptif,publique,privee,maj)", "('$titre','$descriptif','$publique','$privee',NOW())");
 			if ($id_zone && _request('auto_attribue_droits')=='oui'){
-				global $connect_id_auteur, $connect_statut;
-				if ($connect_statut == '0minirezo')
+				global $connect_id_auteur;
+				if (autoriser('modifier','zone'))
 					spip_abstract_insert('spip_zones_auteurs', "(id_zone,id_auteur)", "($id_zone,$connect_id_auteur)");
 			}
 			return $id_zone;
@@ -397,7 +397,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				$out .= "</tr>";
 			}
 			
-			/*if ($connect_statut == '0minirezo' AND $flag_editable AND $connect_toutes_rubriques) {
+			/*if (autoriser('modifier','zone') AND $flag_editable) {
 				$out .= "<tr><td></td><td colspan='2'>";
 				$out .= "<div style='width: 200px;'>";
 				icone_horizontale(_T('accesrestreint:icone_creer_zone'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "img_pack/zones-acces-24.gif", "creer.gif");

@@ -9,8 +9,6 @@ include_spip('inc/acces_restreint');
 include_spip('inc/acces_restreint_gestion');
 
 function exec_acces_restreint_edit(){
-	global $connect_statut;
-	global $connect_toutes_rubriques;
 	global $couleur_claire;
 	global $spip_lang_right;
 	global $new;
@@ -62,7 +60,7 @@ function exec_acces_restreint_edit(){
 	$res = spip_query($requete);
 	$row = spip_fetch_array($res);
 
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques OR (!$row && $new!='oui')) {
+	if (!autoriser('modifier','zone') OR (!$row && $new!='oui')) {
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
@@ -93,7 +91,7 @@ function exec_acces_restreint_edit(){
 		echo generer_url_post_ecrire('acces_restreint_edit',"id_zone=$id_zone".($retour?"&retour=".urlencode($retour):""));
 	AccesRestreint_formulaire_zone($id_zone, $titre, $descriptif, $publique, $privee);
 
-	if ($new == 'oui' && $connect_statut == "0minirezo" && $connect_toutes_rubriques){
+	if ($new == 'oui' && autoriser('modifier','zone')){
 	echo "<div class='verdana2'>";
 	echo "<input type='checkbox' name='auto_attribue_droits' value='oui' checked='checked' id='droits_admin'> <label for='droits_admin'>"._T("accesrestreint:ajouter_droits_auteur")."</label><br>";
 	echo "</div>";

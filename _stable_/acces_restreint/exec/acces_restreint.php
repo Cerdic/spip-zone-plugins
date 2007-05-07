@@ -10,8 +10,6 @@ include_spip('inc/acces_restreint_gestion');
 include_spip('inc/presentation');
 
 function exec_acces_restreint(){
-	global $connect_statut;
-	global $connect_toutes_rubriques;
 	global $couleur_claire;
 	global $spip_lang_right;
 	if ($GLOBALS['spip_version_code']<1.9204){
@@ -29,7 +27,7 @@ function exec_acces_restreint(){
 	echo propre(_T('accesrestreint:info_page'));	
 	fin_boite_info();
 	
-	if ($connect_statut == '0minirezo' && $connect_toutes_rubriques) {
+	if (autoriser('modifier','zone')) {
 		$res = icone_horizontale(_T('accesrestreint:creer_zone'), generer_url_ecrire("acces_restreint_edit","new=oui"), "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", "creer.gif",false);
 
 	if (autoriser('webmestre'))
@@ -39,7 +37,7 @@ function exec_acces_restreint(){
 	}
 	
 	debut_droite();
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	if (!autoriser('modifier','zone')) {
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
@@ -155,7 +153,7 @@ function exec_acces_restreint(){
 	echo generer_url_post_ecrire("acces_restreint");
 	AccesRestreint_formulaire_zone($id_zone , _T('accesrestreint:titre'), _T('accesrestreint:descriptif'), 'oui', 'non');
 
-	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques){
+	if (autoriser('modifier','zone')){
 		echo "<div class='verdana2'>";
 		echo "<input type='checkbox' name='auto_attribue_droits' value='oui' checked='checked' id='droits_admin'> <label for='droits_admin'>"._T("accesrestreint:ajouter_droits_auteur")."</label><br>";
 		echo "</div>";
