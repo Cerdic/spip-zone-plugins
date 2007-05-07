@@ -42,24 +42,24 @@ function liste_webmestres($void)
 }
 
 // Avertissements selon version code
-function autorite_erreurs_version($void, $separateur = '</li><li>')
+function autorite_erreurs_version($separateur = '</li><li>')
 {
 	$autorite_erreurs_version = array();
 	if ($GLOBALS['spip_version_code'] < '1.9251') {
-		$autorite_erreurs_version[] = 'auteur modere forum';
-		$autorite_erreurs_version[] = 'auteur modere petition';
-		$autorite_erreurs_version[] = 'auteur modifie email';
-		$autorite_erreurs_version[] = 'redacteur voit stats';
-		$autorite_erreurs_version[] = 'redacteur modifie mots';
+		$autorite_erreurs_version[] = _L('auteur modere forum');
+		$autorite_erreurs_version[] = _L('auteur modere petition');
+		$autorite_erreurs_version[] = _L('auteur modifie email');
+		$autorite_erreurs_version[] = _L('redacteur voit stats');
+		$autorite_erreurs_version[] = _L('redacteur modifie mots');
 	}
 	if ($GLOBALS['spip_version_code'] < '1.9252') {
 		// autoriser(configurer)
-		$autorite_erreurs_version[] = 'configurer';
+		$autorite_erreurs_version[] = _L('configurer');
 		// autoriser(sauvegarder)
-		$autorite_erreurs_version[] = 'faire des sauvegardes';
+		$autorite_erreurs_version[] = _L('faire des sauvegardes');
 		// autoriser(detruire)
-		$autorite_erreurs_version[] = 'effacer la base';
+		$autorite_erreurs_version[] = _L('effacer la base');
 	}
-	return join($separateur, $autorite_erreurs_version);
+	return join($separateur ? $separateur : '</li><li>', $autorite_erreurs_version);
 }
 ?>
