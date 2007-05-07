@@ -39,7 +39,7 @@ include_spip('inc/raccourcis');
 debut_droite();	
 
 	debut_cadre_formulaire();
-		gros_titre(_T('asso:Votre association'));
+		gros_titre(_T('asso:votre_asso'));
 		$query = spip_query ("SELECT * FROM spip_asso_profil WHERE id_profil=1");
 
 $i=0;
@@ -59,13 +59,13 @@ while ($data = mysql_fetch_assoc($query))
 	echo $data['siret'].'<br>';
 	echo $data['declaration'].'<br>';
 	echo $data['prefet'].'<br>';
-	echo _T('asso:President').' : '.$data['president'].'<br>';
+	echo _T('asso:president').' : '.$data['president'].'<br>';
 	}
 	
 	fin_cadre_formulaire();
 	
 echo '<br />';
-gros_titre(_T('asso:Votre &eacute;quipe'));		
+gros_titre(_T('asso:votre_equipe'));		
 echo '<br />';	
 	
 	debut_cadre_relief();

@@ -224,6 +224,13 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 
 	'date_du_jour' => 'Nous sommes le '.date('d/m/Y'),
 	'date_du_jour_heure' => 'Nous sommes le '.date('d/m/Y').' et il est '.date('H:i'),
-
+	
+	#Votre association
+	'votre_asso' => 'Votre association',
+	'president' => 'President',
+	'votre_equipe' => 'Votre &eacute;quipe',
+	'donnees_perso' => 'Donn&eacute;es Personnelles',
+	'donnees_internes' => 'Donn&eacute;es Internes'
+	
 );
 ?>

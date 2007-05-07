@@ -27,41 +27,41 @@ function exec_action_adherents() {
 
 	print association_date_du_jour();
 
+	$id_asso=$_POST['id_asso'];
 	$id_adherent=$_POST['id_adherent'];
 	$nom=addslashes($_POST['nom']);
 	$prenom=$_POST['prenom'];
+	$naissance=$_POST['naissance'];
 	$sexe=$_POST['sexe'];
-	$categorie=addslashes($_POST['categorie']);
-	$fonction=addslashes($_POST['fonction']);
 	$email=$_POST['email'];
-	$numero=$_POST['numero'];
-	$rue=addslashes($_POST['rue']);
-	$cp=$_POST['cp'];
+	$rue=addslashes($_POST['adresse']); //adresse
 	$ville=addslashes($_POST['ville']);
+	$cp=$_POST['cp'];
 	$telephone=$_POST['telephone'];
 	$portable=$_POST['portable'];
-	//$divers=$_POST['divers'];
-	$remarques=$_POST['remarques'];
-	$id_asso=$_POST['id_asso'];
-	$naissance=$_POST['naissance'];
 	$profession=addslashes($_POST['profession']);
 	$societe=addslashes($_POST['societe']);
-	//$identifiant=$_POST['identifiant'];
-	//$passe=$_POST['passe'];
 	$secteur=$_POST['secteur'];
+	
+	$categorie=addslashes($_POST['categorie']);
+	$fonction=addslashes($_POST['fonction']);
 	$publication=$_POST['publication'];
+	$validite=$_POST['validite'];
 	$utilisateur1=$_POST['utilisateur1'];
 	$utilisateur2=$_POST['utilisateur2'];
 	$utilisateur3=$_POST['utilisateur3'];
 	$utilisateur4=$_POST['utilisateur4'];
-	$validite=$_POST['validite'];
-	$statut=$_POST['statut'];
-
-	$rue=nl2br($rue); 
+	$remarques=$_POST['remarques'];	
 	$remarques=nl2br($remarques); 
+	//$numero=$_POST['numero'];
+	//$divers=$_POST['divers'];
+	//$identifiant=$_POST['identifiant'];
+	//$passe=$_POST['passe'];
+	$statut=$_POST['statut'];
 
 	$action=$_POST['action'];
 	$url_retour=$_POST['url_retour'];
+	$rue=nl2br($rue); 
 
 //---------------------------- 
 //AJOUT ADHERENT
@@ -70,7 +70,7 @@ function exec_action_adherents() {
 	if ($action=="ajoute"){
 
 // Inscription adherent
-		$query=spip_query("INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, numero, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation) VALUES ('$nom', '$prenom', '$sexe', '$email', '$numero', '$rue', '$cp', '$ville', '$telephone', '$portable', ".spip_abstract_quote($remarques).", '$id_asso', '$naissance', '$profession', '$societe', '$secteur', '$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', '$categorie', 'prospect', CURRENT_DATE() )");
+		$query=spip_query("INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation, validite, fonction) VALUES ('$nom', '$prenom', '$sexe', '$email', '$rue', '$cp', '$ville', '$telephone', '$portable', ".spip_abstract_quote($remarques).", '$id_asso', '$naissance', '$profession', '$societe', '$secteur', '$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', '$categorie', 'prospect', CURRENT_DATE(), '$validite', '$fonction' )");
 		if ($query) { 
 			echo '<p><strong>'._T('asso:adherent_message_ajout_adherent',array('prenom' => $prenom, 'nom' => $nom)).'</strong></p>';
 		}
