@@ -3,11 +3,11 @@
   Menu accordeon
   </nom>
   <auteur>        <!-- Auteur du plugin -->
-  <br />Bruno Bergot - [eliaz weblog->http://www.weblog.eliaz.fr/]
-  <br />Stephan d art-logic.info. [devel-art-logic.info->http://artlogic.ovh.org/spip_svn/]
+  Bruno Bergot - [eliaz weblog->http://www.weblog.eliaz.fr/article40.html]
+  <br />Idée originale de Stephan d art-logic.info.
   </auteur>
   <version>
-  0.1
+  0.2
   </version>
   <etat>
   dev
@@ -15,6 +15,8 @@
   <description>
   Un menu vertical en accord&#233;on qui fonctionne sur une liste comme pour celle des menus couramment utilis&#233;s.
   <br /><br />Pour ins&#233;rer le plugin dans vos squelettes, appelez le mod&#232;le inc-menu-accordeon.html au lieu de inc-rubriques.html
+  <br /><br />Par d&#233;faut le plugin listera les rubriques de premier niveau du site. On peut choisir de lister les articles en passant par l'interface de configration :
+  <br /><br />[Configuration->.?exec=cfg&cfg=menu-accordeon]</p>
   </description>
 	<lien>
 	http://bassistance.de/jquery-plugins/jquery-plugin-accordion/
