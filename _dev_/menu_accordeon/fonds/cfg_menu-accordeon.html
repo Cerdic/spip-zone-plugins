@@ -1,0 +1,18 @@
+#CACHE{0}
+<!-- descriptif=<multi>[fr]Ici vous pouvez choisir ce qui sera list&eacute; dans le menu.</multi>
+<br /><a href="http://www.weblog.eliaz.fr/article40.html" class="spip_out">Documentation pas encore faite.</a>
+-->
+<!-- titre=<multi>[fr]Configuration du menu-accordeon</multi>-->
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<fieldset><legend>Choix du type de menu</legend>
+  <label>Choix des &eacute;l&eacute;ments &agrave; lister :</label>
+  <select name="type">
+    <option value="rub"[ (#ENV{type}|=={rub}|?{selected="selected",''})]>les rubriques</option>
+	<option value="art"[ (#ENV{type}|=={art}|?{selected="selected",''})]>les articles</option>
+  </select>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+
