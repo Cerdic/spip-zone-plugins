@@ -35,5 +35,11 @@
 	noisetier
 	</prefix>
 	<install>inc/noisetier_install.php</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>noisetier_pipelines.php</inclure>
+	</pipeline>
 	<chemin dir='' />
 </plugin>
