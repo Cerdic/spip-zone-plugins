@@ -83,6 +83,17 @@ $choses_possibles['syndic'] = array(
 																				  'nom_id' => 'id_secteur')
 															   )
 									  );
+$choses_possibles['syndic_articles'] = array(
+									  'titre_chose' => 'Items RSS',
+									  'id_chose' => 'id_syndic_article',
+									  'table_principale' => 'spip_syndic_articles',
+									  'tables_limite' => array(
+															   'sites' => array(
+																				   'table' => 'spip_syndic',
+																				   'nom_id' => 'id_syndic'),
+															   )
+									  );
+
 
 /*$choses_possibles['forum'] = array(
 									  'titre_chose' => 'forum',
@@ -184,7 +195,6 @@ $choses_possibles['groupes_mots'] = array(
 																				   'nom_id' => 'id_mot'),
 															   )
 									  );
-
 
 //=============================MOTS=========================================
 /*
