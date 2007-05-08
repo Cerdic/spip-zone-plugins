@@ -44,13 +44,15 @@ function exec_noisetier_dist(){
 			echo '</span></div>';
 		}
 		echo _T('noisetier:restreindre_page');
+		echo "<div style='text-align:center;'>";
 		echo "<form method='get' action='".generer_url_ecrire('noisetier')."'>";
 		echo "<input type='hidden' name='exec' value='noisetier' />";
 		echo "<select name='page' class='verdana1 toile_foncee' style='max-height: 24px; border: 1px solid white; color: white; width: 100px;'>";
 		if ($page!='toutes') echo "<option value='toutes'>"._T('noisetier:toutes')."</option>";
+		asort($noisetier_pages);
 		foreach ($noisetier_pages as $unepage)
 			if($unepage!=$page) echo "<option value='$unepage'>$unepage</option>";
-		echo "</select><input type='submit' class='fondo' value='"._T('noisetier:changer')."'/></form>";
+		echo "</select><input type='submit' class='fondo' value='"._T('noisetier:changer')."'/></form></div>";
 	fin_boite_info();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'noiseteir'),'data'=>''));
 
