@@ -140,6 +140,36 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 
 
 ##
+## autoriser_rubrique_creerrubriquedans
+##
+if ($GLOBALS['autorite']['interdire_creer_secteur']
+OR $GLOBALS['autorite']['interdire_creer_sousrub']
+OR false // autre possibilite de surcharge ?
+) {
+if (!function_exists('autoriser_rubrique_creerrubriquedans')) {
+function autoriser_rubrique_creerrubriquedans($faire, $type, $id, $qui, $opt) {
+	if ($id == 0
+	AND $GLOBALS['autorite']['interdire_creer_secteur'])
+		return
+			$GLOBALS['autorite']['interdire_creer_rub_sauf_webmestre']
+			AND autoriser('webmestre');
+
+	if ($id != 0
+	AND $GLOBALS['autorite']['interdire_creer_sousrub'])
+		return
+			$GLOBALS['autorite']['interdire_creer_rub_sauf_webmestre']
+			AND autoriser('webmestre');
+
+	return
+		autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $opt);
+}
+} else
+	$autorite_erreurs[] = 'autoriser_rubrique_creerrubriquedans';
+}
+
+
+
+##
 ## autoriser_auteur_modifier
 ##
 if ($GLOBALS['autorite']['auteur_mod_email']

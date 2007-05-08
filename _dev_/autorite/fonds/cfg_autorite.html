@@ -138,6 +138,7 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 </p>
 
 
+<p>
 <label><strong>Mots-cl&#233;s&nbsp;:</strong> qui peut cr&#233;er et &#233;diter les mots-cl&#233;s&nbsp;:
 <br />
 <select name="editer_mots">
@@ -146,6 +147,26 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 	<option value="2"[ selected="(#ENV{editer_mots}|=={2}|?{selected})"]>Tous les r&#233;dacteurs</option>
 </select>
 </label>
+</p>
+
+
+<label>
+<p><strong>Rubriques&nbsp;:</strong>
+<br />Cochez les cases ci-dessous pour interdire aux administrateurs de cr&#233;er
+<br />
+<label><input type="checkbox" name="interdire_creer_secteur" [checked="(#ENV{interdire_creer_secteur}|?{checked})"] /> de nouvelles rubriques &#224; la racine du site&nbsp;;
+</label>
+<br />
+<label><input type="checkbox" name="interdire_creer_sousrub" [checked="(#ENV{interdire_creer_sousrub}|?{checked})"] /> de nouvelles sous-rubriques dans l'arborescence.
+</label>
+<br />
+<small><label>&nbsp; &nbsp; <input type="checkbox" name="interdire_creer_rub_sauf_webmestre" [checked="(#ENV{interdire_creer_rub_sauf_webmestre}|?{checked})"] /> Ce r&#233;glage ne s'applique pas aux webmestres.
+</label></small>
+
+<small><br />
+(Notez que seuls les administrateurs peuvent créer des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)
+</small>
+</p>
 
 
 <p>

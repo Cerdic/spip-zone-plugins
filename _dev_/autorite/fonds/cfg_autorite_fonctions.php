@@ -60,6 +60,9 @@ function autorite_erreurs_version($separateur = '</li><li>')
 		// autoriser(detruire)
 		$autorite_erreurs_version[] = _L('effacer la base');
 	}
+	if ($GLOBALS['spip_version_code'] < '1.9253') {
+		$autorite_erreurs_version[] = _L('interdire la creation de rubriques');
+	}
 	return join($separateur ? $separateur : '</li><li>', $autorite_erreurs_version);
 }
 ?>
