@@ -150,25 +150,6 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 </p>
 
 
-<label>
-<p><strong>Rubriques&nbsp;:</strong>
-<br />Cochez les cases ci-dessous pour interdire aux administrateurs de cr&#233;er
-<br />
-<label><input type="checkbox" name="interdire_creer_secteur" [checked="(#ENV{interdire_creer_secteur}|?{checked})"] /> de nouvelles rubriques &#224; la racine du site&nbsp;;
-</label>
-<br />
-<label><input type="checkbox" name="interdire_creer_sousrub" [checked="(#ENV{interdire_creer_sousrub}|?{checked})"] /> de nouvelles sous-rubriques dans l'arborescence.
-</label>
-<br />
-<small><label>&nbsp; &nbsp; <input type="checkbox" name="interdire_creer_rub_sauf_webmestre" [checked="(#ENV{interdire_creer_rub_sauf_webmestre}|?{checked})"] /> Ce r&#233;glage ne s'applique pas aux webmestres.
-</label></small>
-
-<small><br />
-(Notez que seuls les administrateurs peuvent créer des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)
-</small>
-</p>
-
-
 <p>
 <label><input type="checkbox" name="redacteurs_voirstats" [checked="(#ENV{redacteurs_lire_stats}?{checked})"] />
 	<strong>R&#233;dacteur voit stats</strong>&nbsp;: les r&#233;dacteurs peuvent visualiser les statistiques.
@@ -323,6 +304,25 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 	<option value="non"[ selected="(#ENV{detruire}|=={non}|?{selected})"]>Personne</option>
 </select>
 <small><br />L'option recommand&#233;e est &#171;&nbsp;personne&nbsp;&#187;, l'option standard de SPIP est &#171;&nbsp;les administrateurs&nbsp;&#187; (mais toujours avec une v&#233;rification par FTP).</small>
+</p>
+
+
+<p>
+<strong>Rubriques&nbsp;:</strong>
+<br />Cochez les cases ci-dessous pour interdire aux administrateurs de cr&#233;er
+<br />
+<label><input type="checkbox" name="interdire_creer_secteur" [checked="(#ENV{interdire_creer_secteur}|?{checked})"] /> de nouvelles rubriques &#224; la racine du site&nbsp;;
+</label>
+<br />
+<label><input type="checkbox" name="interdire_creer_sousrub" [checked="(#ENV{interdire_creer_sousrub}|?{checked})"] /> de nouvelles sous-rubriques dans l'arborescence.
+</label>
+<br />
+<small><label>&nbsp; &nbsp; <input type="checkbox" name="interdire_creer_rub_sauf_webmestre" [checked="(#ENV{interdire_creer_rub_sauf_webmestre}|?{checked})"] /> Ce r&#233;glage ne s'applique pas aux webmestres.
+</label></small>
+
+<small><br />
+(Notez que seuls les administrateurs peuvent créer des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)
+</small>
 </p>
 
 </fieldset>
