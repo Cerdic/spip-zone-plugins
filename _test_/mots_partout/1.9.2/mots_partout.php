@@ -26,5 +26,15 @@ function MotsPartout_ajouterOnglets($flux) {
 											  generer_url_ecrire("config_mots_partout"));
   return $flux;
 }
+function MotsPartout_afficherMots($flux) {
+  	if($flux['args']['exec']=='mots_types'){
+		$editer_mot = charger_fonction('editer_mot', 'inc');
+		$flux['data'] .= $editer_mot('groupes_mot', $flux['args']['id_groupe'], $cherche_mot, $select_group, true);
+	} elseif($flux['args']['exec']=='auteur_infos'){
+		$editer_mot = charger_fonction('editer_mot', 'inc');
+		$flux['data'] .= $editer_mot('auteur', $flux['args']['id_auteur'], $cherche_mot, $select_group, true);
+	}
+	return $flux;
+}
 
 ?>

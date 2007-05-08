@@ -112,10 +112,9 @@ function action_mots_partout() {
   if($switch == '') $switch = 'voir';
   $strict = intval($strict);
 
-
   if(count($mots_ajouter) && count($choses)) {
 	if(count($mots_ajouter)) {
-	  foreach($mots_ajouter as $m) {	
+	  foreach($mots_ajouter as $m) {
 		$from = array('spip_mots');
 		$select = array('id_groupe');
 		$where = array("id_mot = $m");
@@ -170,17 +169,17 @@ function action_mots_partout() {
 
   if(count($choses)) {
 	foreach($choses as $c) 
-	  $par_choses .= "&choses[]=$c";
+	  if ($c) $par_choses .= "&choses[]=$c";
   }
 
   $par_mots = '';
 
   if(count(_request('mots'))) {
 	foreach(_request('mots') as $id => $m) 
-	  $par_mots .= "&mots[$id]=$m";
+	  if ($m) $par_mots .= "&mots[$id]=$m";
   }
 
-  $redirect = _request('redirect')."&nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&redirect=$redirect$par_choses$par_mots";
+  $redirect = _request('redirect')."&nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&warning=$warning&redirect=$redirect$par_choses$par_mots";
 
   redirige_par_entete($redirect);
 
