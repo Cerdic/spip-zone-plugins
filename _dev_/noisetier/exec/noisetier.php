@@ -8,7 +8,10 @@ include_spip('options_noisetier');
 
 function exec_noisetier_dist(){
 	global $spip_lang_right;
-	global $theme_titre, $theme_zones;
+	global $theme_titre, $theme_zones, $noisetier_pages, $page;
+
+	if (!isset($page)) $page='toutes';
+
 	$theme_zones['head']['nom'] = "head";
 	$theme_zones['head']['titre'] = _T('noisetier:head_titre');
 	$theme_zones['head']['descriptif'] = _T('noisetier:head_descriptif');
@@ -28,10 +31,29 @@ function exec_noisetier_dist(){
 		echo "$theme_titre";
 		echo '</span></div>';
 	fin_boite_info();
+	echo "<br />";
 	pipeline('affiche_gauche',array('args'=>array('exec'=>'noisetier'),'data'=>''));
 
 	creer_colonne_droite();
+	debut_boite_info();
+		if ($page!='toutes') {
+			echo "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" ;
+			echo _T('noisetier:page_affichee');
+			echo "<br /><span style='font-size:large;'>";
+			echo "$page";
+			echo '</span></div>';
+		}
+		echo _T('noisetier:restreindre_page');
+		echo "<form method='get' action='".generer_url_ecrire('noisetier')."'>";
+		echo "<input type='hidden' name='exec' value='noisetier' />";
+		echo "<select name='page' class='verdana1 toile_foncee' style='max-height: 24px; border: 1px solid white; color: white; width: 100px;'>";
+		if ($page!='toutes') echo "<option value='toutes'>"._T('noisetier:toutes')."</option>";
+		foreach ($noisetier_pages as $unepage)
+			if($unepage!=$page) echo "<option value='$unepage'>$unepage</option>";
+		echo "</select><input type='submit' class='fondo' value='"._T('noisetier:changer')."'/></form>";
+	fin_boite_info();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'noiseteir'),'data'=>''));
+
 
 	debut_droite();
 	gros_titre(_T('noisetier:titre_noisetier'));

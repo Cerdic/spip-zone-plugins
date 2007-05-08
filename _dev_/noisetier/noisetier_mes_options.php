@@ -1,6 +1,14 @@
 <?php
 include_spip('base/noisetier');
 
+//Définition des pages gérées par le noisetier
+global $noisetier_pages;
+if (!isset($noisetier_pages)) $noisetier_pages = array();
+$noisetier_pages[]='article';
+$noisetier_pages[]='rubrique';
+$noisetier_pages[]='breve';
+$noisetier_pages[]='sommaire';
+
 function balise_INCLURE_NOISETTE($p) {
 	$champ = phraser_arguments_inclure($p, true);
 	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
