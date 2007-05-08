@@ -117,9 +117,19 @@ function exec_acces_restreint_edit(){
 
 	icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", "rien.gif");
 	echo "</div>\n";
-	
-	echo AccesRestreint_afficher_auteurs('<b>' . _T('accesrestreint:info_auteurs_lies_zone') . '</b>', array("FROM" => 'spip_auteurs AS auteurs, spip_zones_auteurs AS lien', 'WHERE' => "lien.id_zone='$id_zone' AND lien.id_auteur=auteurs.id_auteur", 'ORDER BY' => "auteurs.nom DESC"));
-	
+
+
+	// Selecteur d'auteurs sympathique
+	if ($GLOBALS['spip_version_code'] >= 1.9253) {
+		$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
+		echo $editer_auteurs('zone', $id_zone, $flag_editable=true, _request('cherche_auteur'), _request('ids'));
+	}
+	// Vieux SPIP
+	else {
+		echo AccesRestreint_afficher_auteurs('<b>' . _T('accesrestreint:info_auteurs_lies_zone') . '</b>', array("FROM" => 'spip_auteurs AS auteurs, spip_zones_auteurs AS lien', 'WHERE' => "lien.id_zone='$id_zone' AND lien.id_auteur=auteurs.id_auteur", 'ORDER BY' => "auteurs.nom DESC"));
+	}
+
+
 	fin_page();
 }
 

@@ -192,7 +192,8 @@ function SelecteurGenerique_inserer_javascript($flux) {
 
 	$js = '';
 
-	if (_request('exec') == 'articles') {
+	if (_request('exec') == 'articles'
+	OR _request('exec') == 'acces_restreint_edit') {
 		$js .= SelecteurGenerique_inserer_auteur();
 	}
 

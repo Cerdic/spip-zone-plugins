@@ -54,7 +54,7 @@ $tables_auxiliaires['spip_zones_rubriques'] = array(
 
 global $tables_jointures;
 $tables_jointures['spip_auteurs'][] = 'zones_auteurs';
-$tables_jointures['spip_zones'][] = 'zones_auteurs';
+$tables_jointures['spip_zones']['id_auteur'] = 'zones_auteurs';
 
 $tables_jointures['spip_rubriques'][] = 'zones_rubriques';
 $tables_jointures['spip_zones'][] = 'zones_rubriques';
