@@ -14,6 +14,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// compatibilite avec SPIP 1.92
+if(!function_exists('icone_inline')) {
+	// fonction placee dans inc/presentation
+	function icone_inline($texte, $lien, $fond, $fonction="", $align=""){	
+		return icone($texte, $lien, $fond, $fonction, $align);
+	}
+}
+
 // http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type_dist()
 {

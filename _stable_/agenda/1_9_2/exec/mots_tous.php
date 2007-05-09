@@ -17,6 +17,14 @@ include_spip('inc/actions');
 include_spip('inc/agenda_gestion');
 include_spip('inc/pim_agenda_gestion');
 
+// compatibilite avec SPIP 1.92
+if(!function_exists('icone_inline')) {
+	// fonction placee dans inc/presentation
+	function icone_inline($texte, $lien, $fond, $fonction="", $align=""){	
+		return icone($texte, $lien, $fond, $fonction, $align);
+	}
+}
+
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
@@ -115,7 +123,7 @@ function exec_mots_tous_dist()
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
-		// Preliminaire: confirmation de suppression d'un mot lie à qqch
+		// Preliminaire : confirmation de suppression d'un mot lie a qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
 			include_spip('inc/grouper_mots');
