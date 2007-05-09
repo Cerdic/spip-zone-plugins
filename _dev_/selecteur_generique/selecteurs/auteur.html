@@ -15,7 +15,7 @@
 [(#REM) Chercher les auteurs correspondant a la requete ]
 <BOUCLE_s(AUTEURS){tout}{contenu_auteur_select strict}{0,20}{par nom}{doublons}>
 <item>
-	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
+	<text><![CDATA[[(#STATUT|icone_statut_auteur) ]<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
 	<value><![CDATA[[(#NOM|textebrut)]]]></value>
 	<id>#ID_AUTEUR</id>
 
@@ -25,7 +25,7 @@
 	[(#REM) Si aucun, on recherche dans l'ensemble du texte ]
 	<BOUCLE_s1(AUTEURS){tout}{contenu_auteur_select}{0,20}{par nom}{doublons}>
 	<item>
-	<text><![CDATA[<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
+	<text><![CDATA[[(#STATUT|icone_statut_auteur) ]<b>#NOM</b>[ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]]]></text>
 	<value><![CDATA[[(#NOM|textebrut)]]]></value>
 	<id>#ID_AUTEUR</id>
 	</item>
