@@ -51,13 +51,7 @@ echo '<td><input name="nom"  type="text" size="40" value="'.$data['nom'].'"> </t
 echo '</tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_adherent').' :</td>';
-echo '<td><select name="id_adherent">';
-echo '<option value="0">'._T('asso:activite_libelle_invitation').'</option>';
-$sql = spip_query ("SELECT id_adherent, CONCAT(nom,' ',prenom,IF((SELECT count(*) FROM spip_asso_activites where spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent AND spip_asso_activites.id_evenement=".$data['id_evenement']."),' (d&eacute;j&agrave; inscrit)','')) as usuel FROM spip_asso_adherents ORDER BY nom,prenom") ;
-while ($adherent = spip_fetch_array($sql)) {
-echo '<option value="'.$adherent['id_adherent'].'"'.($adherent['id_adherent'] == $data['id_adherent'] ? ' selected="selected"' : '').'>'.$adherent['usuel'].'</option>';
-}
-echo '</select></td>';
+echo '<td><input name="id_adherent" type="text" value="'.$data['id_adherent'].'"> </td>';
 echo '</tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_accompagne_de').' :</td>';

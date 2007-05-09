@@ -101,12 +101,10 @@ function exec_activites(){
 		echo '<td class ='.$class.' style="text-align:right;">'.$heure.'</td>';
 		echo '<td class ='.$class.'>'.$data['intitule'].'</td>';
 		echo '<td class ='.$class.'>'.$data['lieu'].'</td>';
-		$sql = spip_query("SELECT spip_asso_activites.id_activite, spip_asso_activites.nom AS nom_complet, spip_asso_activites.id_adherent, spip_asso_adherents.nom, spip_asso_adherents.prenom FROM spip_asso_activites LEFT JOIN spip_asso_adherents ON (spip_asso_adherents.id_adherent=spip_asso_activites.id_adherent) WHERE spip_asso_activites.id_evenement=".$data['id_evenement']." ORDER BY spip_asso_adherents.nom, spip_asso_adherents.prenom");
-		echo '<td class ='.$class.'>';
+		$sql = spip_query("SELECT sum(inscrits) AS total FROM spip_asso_activites WHERE id_evenement=".$data['id_evenement']);
 		while ($inscrits = spip_fetch_array($sql)) {
-			echo '<a href="'.$url_edit_activites.'&id='.$inscrits['id_activite'].'">'.($inscrits['id_adherent'] > 0 ? $inscrits['nom'].' '.$inscrits['prenom'] : $inscrits['nom_complet'])."</a><br />";
+			echo '<td class ='.$class.'>'.$inscrits['total'].'</td>';
 		}
-		echo '</td>';
 		echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_articles.'&id_article='.$data['id_article'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:activite_bouton_modifier_article').'"></a></td>';
 		echo '<td class ='.$class.'><a href="'.$url_ajout_activite.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a>';
 		echo '<td class ='.$class.' style="text-align:center;"><a href="'.$url_voir_activites.'&id='.$data['id_evenement'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:activite_bouton_voir_liste_inscriptions').'"></a></td>';

@@ -90,7 +90,7 @@ function exec_action_activites(){
 				$nom = $data['nom'].' '.$data['prenom'];
 			}
 		}
-			echo '<p><strong>'._T('asso:activite_message_maj_inscription',array('nom' => $nom).'</strong></p>';
+		echo '<p><strong>'._T('asso:activite_message_maj_inscription',array('nom' => $nom)).'</strong></p>';
 		echo '<p>';
 		icone(_T('asso:bouton_retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
 		echo '</p>';
