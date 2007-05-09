@@ -275,7 +275,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
 		foreach($temp = $outils as $outil) if ($outil['categorie']==$i) {
-			$s .= ligne_tweak($outil, $js, $afficher_outil==$outil['index']) . "\n";
+			$s .= ligne_outil($outil, $js, $afficher_outil==$outil['index']) . "\n";
 			$basics[] = $outil['index'];
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
@@ -314,7 +314,7 @@ cs_log("Fin   : exec_admin_couteau_suisse()");
 }
 
 // affiche un outil sur une ligne
-function ligne_tweak($outil, &$js, $afficher){
+function ligne_outil($outil, &$js, $afficher){
 	static $id_input=0;
 	$inc = $outil_id = $outil['id'];
 	$actif = $outil['actif'];

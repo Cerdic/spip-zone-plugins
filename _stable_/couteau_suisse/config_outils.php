@@ -113,26 +113,18 @@ add_variable( array(
 	'defaut' => 100,
 	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);",
 ));
-if($GLOBALS['spip_version']<1.93) {
-	add_outil( array(
-		'id' => 'suite_introduction',
-		'code:options' => "%%suite_introduction%%",
-		'categorie' => 'spip',
-		'version-min' => 1.93,
-	));
-	add_outil( array(
-		'id' => 'introduction',
-		'code:options' => "%%lgr_introduction%%",
-		'categorie' => 'spip',
-	));
-} else { // on regroupe les deux variables !
-	add_outil( array(
-		'id' => 'introduction2',
-		'code:options' => "%%lgr_introduction%%\n%%suite_introduction%%",
-		'categorie' => 'spip',
-		'version-min' => 1.93,
-	));
-}
+add_variable( array(
+	'nom' => 'lien_introduction',
+	'format' => 'nombre',
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 0,
+	'code' => "define('_INTRODUCTION_LIEN', %s);",
+));
+add_outil( array(
+	'id' => 'introduction',
+	'code:options' => "%%lgr_introduction%%\n%%suite_introduction%%\n%%lien_introduction%%",
+	'categorie' => 'spip',
+));
 
 	// ici on a besoin de deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
 add_variable( array(
@@ -359,7 +351,6 @@ add_outil( array(
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 	'categorie' => 'public',
 ));
-
 
 
 //-----------------------------------------------------------------------------//
