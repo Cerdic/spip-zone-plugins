@@ -51,7 +51,8 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 		}
 	} else {
 		// on peut aussi comme cfg_extrapack donner directement table et le reste
-		list($table, $colid, $id, $cfg) = $cfg;
+		$tmp = $cfg; // le piege du list()
+		list($table, $colid, $id, $cfg) = $tmp;
 		if (!$colid) {
 			list($table, $colid) = get_table_id($table);
 		}
@@ -103,9 +104,6 @@ function get_table_id($table) {
 		'tables_principales' => 'base/serial',
 		'tables_auxiliaires' => 'base/auxiliaires',
 	);
-	if ($try = table_objet($table)) {
-		return array('spip_' . $try, array(id_table_objet($table)));
-	}
 	$try = array($table, 'spip_' . $table);
 	foreach ($catab as $categ => $catinc) {
 		include_spip($catinc);
@@ -115,6 +113,9 @@ function get_table_id($table) {
 					preg_split('/\s*,\s*/', $GLOBALS[$categ][$nom]['key']['PRIMARY KEY']));
 			}
 		}
+	}
+	if ($try = table_objet($table)) {
+		return array('spip_' . $try, array(id_table_objet($table)));
 	}
 	return array(false, false);
 }
