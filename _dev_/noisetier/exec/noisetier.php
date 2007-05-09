@@ -10,7 +10,7 @@ function exec_noisetier_dist(){
 	global $spip_lang_right;
 	global $theme_titre, $theme_zones, $noisetier_pages, $page;
 
-	if (!isset($page)) $page='toutes';
+	if (!isset($page)) $page='';
 
 	$theme_zones['head']['nom'] = "head";
 	$theme_zones['head']['titre'] = _T('noisetier:head_titre');
@@ -36,7 +36,7 @@ function exec_noisetier_dist(){
 
 	creer_colonne_droite();
 	debut_boite_info();
-		if ($page!='toutes') {
+		if ($page!='') {
 			echo "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" ;
 			echo _T('noisetier:page_affichee');
 			echo "<br /><span style='font-size:large;'>";
@@ -48,6 +48,7 @@ function exec_noisetier_dist(){
 		echo "<form method='get' action='".generer_url_ecrire('noisetier')."'>";
 		echo "<input type='hidden' name='exec' value='noisetier' />";
 		echo "<select name='page' class='verdana1 toile_foncee' style='max-height: 24px; border: 1px solid white; color: white; width: 100px;'>";
+		if ($page!='') echo "<option value=''>"._T('noisetier:voir_toutes_noisettes')."</option>";
 		if ($page!='toutes') echo "<option value='toutes'>"._T('noisetier:toutes')."</option>";
 		asort($noisetier_pages);
 		foreach ($noisetier_pages as $unepage)
@@ -62,13 +63,14 @@ function exec_noisetier_dist(){
 	echo typo(_T('noisetier:presentation_noisetier')) ;
 	echo '<br /><br />';
 
-	noisetier_gestion_zone('head');
+	noisetier_gestion_zone('head', $page);
 	foreach ($theme_zones as $theme_une_zone){
 		//La zone head a déjà été insérée
 		if ($theme_une_zone['nom']!='head')
-			noisetier_gestion_zone($theme_une_zone['nom']);
+			noisetier_gestion_zone($theme_une_zone['nom'],$page);
 	}
 
+	//Afficher ici les zones non gérées par le thème en cours mais qui disposent néanmoins d'une déclaration dans la base de donnée
 
 	echo fin_gauche(), fin_page();
 }

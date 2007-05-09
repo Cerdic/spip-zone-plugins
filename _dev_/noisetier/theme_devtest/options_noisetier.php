@@ -12,7 +12,7 @@ $theme_zones['entete']['insere_avant'] = "<div style='width:100%'>";
 $theme_zones['entete']['insere_apres'] = "</div>";
 $theme_zones['infos']['nom'] = "infos";
 $theme_zones['infos']['infos'] = "Infos contextuelles";
-$theme_zones['infos']['descriptif'] = "Pour afficher des &eacute;l&eacute;ments sp&eacute;cifiques à la page en cours.";
+$theme_zones['infos']['descriptif'] = "Pour afficher des &eacute;l&eacute;ments sp&eacute;cifiques &agrave; la page en cours.";
 $theme_zones['infos']['insere_avant'] = "<div style='width:150px;float:right'>";
 $theme_zones['infos']['insere_apres'] = "</div>";
 $theme_zones['infos']['pages_exlues'] = "sommaire";

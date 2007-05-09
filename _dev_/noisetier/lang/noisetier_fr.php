@@ -14,7 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'restreindre_page'=>'Restreindre l\'affichage &agrave; une page donn&eacute;e&nbsp;:',
 'toutes'=>'toutes',
 'changer'=>'Changer',
-
+'voir_toutes_noisettes'=>'Voir toutes les noisettes',
+'ajout_noisette_texte'=>'Ajouter une noisette ou un texte',
+'ajout_selection_noisette'=>'S&eacute;lectionnez une noisette &agrave; ajouter&nbsp;:',
 
 
 );
