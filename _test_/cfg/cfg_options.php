@@ -5,11 +5,19 @@
  */
 
 //
-// #CONFIG etendue dynamique interpretant les /
+// #CONFIG etendue interpretant les /, ~ et table:
 //
 // Par exemple #CONFIG{xxx/yyy/zzz} fait comme #CONFIG{xxx}['yyy']['zzz']
-// xxx etant un tableau serialise dans spip_meta comme avec exec=cfg&cfg=montruc
+// xxx est un tableau serialise dans spip_meta comme avec exec=cfg&cfg=xxx
+// si xxx demarre par ~ on utilise extra de spip_auteurs
+// ~ tout court veut sire l'auteur connecte,
+// ~duchmol celui de login "duchmol", ~123 celui d'id 123
+// table:123 l'extra de l'enregistrement id 123 de "table"
+// "table" est un nom de table ou un raccourci comme "article"
+// on peut croiser plusieurs id comme spip_auteurs_articles:6:123
+// (mais il n'y a pas d'extra dans spip_auteurs_articles ...)
 // Le 2eme argument de la balise est la valeur defaut comme pour la dist
+// Le 3eme argument permet de controler la serialisation du resultat
 //
 function balise_CONFIG($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
@@ -24,9 +32,14 @@ function balise_CONFIG($p) {
 }
 
 // lire_config() permet de recuperer une config depuis le php
+// memes arguments que la balise (forcement)
 // $cfg: la config, lire_config('montruc') est un tableau
 // lire_config('montruc/sub') est l'element "sub" de cette config
+// comme la balise pour ~, ~duchmol ou table:id
+// on peut aussi passer un tableau array($table, $colid, $id, $cfg) cf. inc/cfg_extrapack.php
 // $def: un defaut optionnel
+// $serialize: defaut false contrairement a la balise
+// (en php on veut plutot un tableau, en squellette, du texte)
 function lire_config($cfg='', $def=null, $serialize=false) {
 	$table = false;
 	if (is_string($cfg)) {
