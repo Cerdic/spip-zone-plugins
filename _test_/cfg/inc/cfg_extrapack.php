@@ -67,12 +67,16 @@ class cfg_extrapack
 // modifier le fragment qui peut etre tout le meta
 	function modifier($supprimer = false)
 	{
-/*
-    	($base = lire_config($this->cfg->nom)) || ($base = array());
+    	($base = lire_config(array(
+    		$this->cfg->table,
+    		'',
+    		$cles = explode('/', $this->cfg->cfg_id),
+    		array()
+    	))) || ($base = array());
     	$ici = &$base;
     	$this->_report = array();
+    	$ici = &$this->monte_arbre($ici, $this->cfg->nom);
     	$ici = &$this->monte_arbre($ici, $this->cfg->casier);
-    	$ici = &$this->monte_arbre($ici, $this->cfg->cfg_id);
 		foreach ($this->cfg->champs as $name => $def) {
 			if (isset($def['id'])) {
 				continue;
@@ -91,14 +95,17 @@ class cfg_extrapack
 				unset($this->_report[$i][0][$this->_report[$i][1]]);
 			}
 		}
-		if ($supprimer && !$base) {
-		    effacer_meta($this->cfg->nom);
-		} else {
-		    ecrire_meta($this->cfg->nom, serialize($base));
+
+		list($table, $colid) = get_table_id($this->cfg->table);
+		$extra = 'UPDATE ' . $table . ' SET extra=' .
+			($base ? _q(serialize($base)) : 'NULL');
+		$and = ' WHERE ';
+		foreach ($colid as $i => $name) {
+			$extra .= $and . $name . '=' . 
+				(is_numeric($cles[$i]) ? intval($cles[$i]) : _q($cles[$i]));
+			$and = ' AND ';
 	    }
-	    ecrire_metas();
-*/
-	    return true;
+		return spip_query($extra);
 	}
 }
 ?>
