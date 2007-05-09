@@ -188,7 +188,7 @@ class cfg_formulaire
 		// et on redirige le client, de maniere a charger la page
 		// avec la nouvelle config (ce qui permet par exemple a Autorite
 		// de controler d'eventuels conflits generes par les nouvelles autorisations)
-		if ($this->message) {
+		if ($this->message && $this->redirect) {
 			include_spip('inc/meta');
 			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], $this->message, 'non');
 			ecrire_metas();
