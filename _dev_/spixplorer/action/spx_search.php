@@ -95,10 +95,12 @@ function print_table($list) {			// print table of found items
 			$link = make_link("list",get_rel_item($dir, $item),NULL);
 		} else {
 			$img = get_mime_type($dir, $item, "img");
-			//if(get_is_editable($dir,$item) || get_is_image($dir,$item)) {
-				$link = $GLOBALS['spx']["home_url"]."/".get_rel_item($dir, $item);
-				$target = "_blank";
-			//}
+			if(get_is_editable($dir, $item) || get_is_image($dir, $item)) {
+				$link = make_link("show", $dir, $item);
+			} else {
+				$link = "";
+//				$link = $GLOBALS['spx']["home_url"]."/".get_rel_item($dir, $item);
+			}
 		}
 		
 		echo "<TR><TD>" . "<IMG border=\"0\" width=\"16\" height=\"16\" ";

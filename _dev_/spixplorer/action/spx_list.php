@@ -164,9 +164,6 @@ function print_table($dir, $list, $allow) {	// print table of files
 		} elseif($stat['edit'] || get_is_image($dir, $item)) {
 //toggg			$link = $GLOBALS['spx']["home_url"]."/".$stat['rel'];
 			$link = make_link("show", $dir, $item);
-		} elseif(get_is_image($dir, $item)) {
-			$link = $GLOBALS['spx']["home_url"]."/".$stat['rel'];
-			$target = "_self";
 		} else {
 			$link = "";
 		}

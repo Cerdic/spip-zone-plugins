@@ -89,7 +89,7 @@ function link_all($dir)
 	$ret = '';
 	while (($pos = strrpos($dir, '/')) !== false) {
 		$terminal = substr($dir, $pos + 1);
-		$terminal = strlen($terminal) > 50 ? '...' . substr(terminal,-47) : terminal;
+		$terminal = strlen($terminal) > 50 ? '...' . substr($terminal,-47) : $terminal;
 		$ret = '<a href="' . make_link('list', $dir) . '">' . $terminal . '</a>' . $ret;
 		$dir = substr($dir, 0, $pos);
 	}
