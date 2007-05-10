@@ -57,6 +57,8 @@ a:hover, a:active {
 	text-decoration: none;
 }
 
-pre {
+.code {
 	text-align: left;
+	font: monospace;
+	overflow: auto;
 }
