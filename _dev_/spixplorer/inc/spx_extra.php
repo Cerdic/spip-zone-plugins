@@ -329,21 +329,5 @@ function id_browser() {
 		return 'OTHER';
 	}
 }
-
-// Fil d'Ariane
-function link_all($dir)
-{
-	if (!$dir) {
-		return '';
-	}
-	$ret = '';
-	while (($pos = strrpos($dir, '/')) !== false) {
-		$terminal = substr($dir, $pos + 1);
-		$ret = '<a href="' . make_link('list', $dir) . '">' . $terminal . '</a>' . $ret;
-		$dir = substr($dir, 0, $pos);
-	}
-	$ret = '<a href="' . make_link('list', $dir) . '">' . $dir . $sep . '</a>' . $ret;
-	return $ret;
-}
 //------------------------------------------------------------------------------
 ?>

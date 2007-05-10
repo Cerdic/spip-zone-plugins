@@ -68,11 +68,33 @@ function show_header($title, $js = false) {			// header for html-page
 <table border="0" width="100%" cellspacing="0" cellpadding="5"><tbody>
 <tr><td class="title">' .
 	($GLOBALS['spx']["require_login"] && isset($GLOBALS['spx']['__SESSION']["s_user"]) ?
-		'[' . $GLOBALS['spx']['__SESSION']["s_user"] . '] - ' : '') . $title . '</td>
+		'[' . $GLOBALS['spx']['__SESSION']["s_user"] . '] - ' : '') .
+'<a href="' . make_link('list', '') . '">
+<img border="0" width="22" height="22" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/home.png"
+alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '">
+</a>' . link_all($GLOBALS['spx']['dir']) . $title . '
+</td>
 <td  width="10%" class="title"><a href="ecrire/">' . _T('retour_ecrire') . '</td>
 <td  width="10%" class="title"><a href="spip.php">' . _T('retour_spip') . '</td></tr></tbody></table>
 
 ';
+}
+
+// Fil d'Ariane
+function link_all($dir)
+{
+	if (!$dir) {
+		return '';
+	}
+	$ret = '';
+	while (($pos = strrpos($dir, '/')) !== false) {
+		$terminal = substr($dir, $pos + 1);
+		$terminal = strlen($terminal) > 50 ? '...' . substr(terminal,-47) : terminal;
+		$ret = '<a href="' . make_link('list', $dir) . '">' . $terminal . '</a>' . $ret;
+		$dir = substr($dir, 0, $pos);
+	}
+	$ret = '<a href="' . make_link('list', $dir) . '">' . $dir . $sep . '</a>' . $ret;
+	return $ret;
 }
 //------------------------------------------------------------------------------
 ?>

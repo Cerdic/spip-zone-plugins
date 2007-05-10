@@ -55,11 +55,7 @@ function show_item($dir, $item) {		// afficher un fichier
 	if(!file_exists(get_abs_item($dir, $item))) show_error($item.": "._T('spixplorer:fileexist'));
 	if(!get_show_item($dir, $item)) show_error($item.": "._T('spixplorer:accessfile'));
 
-	$s_dir = strlen($s_dir) > 50 ? '...' . substr($dir,-47) : $dir;
-	show_header('<a href="' . make_link('list', '') . '">
-<img border="0" width="22" height="22" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/home.png"
-alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '">
-</a>' . link_all($s_dir), true);
+	show_header('<strong>' . $item . '</strong>', true);
 	
 	// Caracteristiques du fichier, TODO affichage en clair
 	$stat = spx_stat($dir, $item);

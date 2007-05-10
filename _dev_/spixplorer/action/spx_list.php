@@ -275,10 +275,7 @@ function list_dir($dir) {			// list directory contents
 	make_tables($dir, $dir_list, $file_list, $tot_file_size, $num_items);
 	
 	$s_dir=$dir;		if(strlen($s_dir)>50) $s_dir="...".substr($s_dir,-47);
-	show_header('<a href="' . make_link('list', '') . '">
-<img border="0" width="22" height="22" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/home.png"
-alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '">
-</a>' . link_all($s_dir), true);
+	show_header('', true);
 	
 	// Sorting of items
 	$_img = 
