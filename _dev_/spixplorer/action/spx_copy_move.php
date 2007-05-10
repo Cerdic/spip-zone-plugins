@@ -183,6 +183,8 @@ function copy_move_items($dir) {		// copy/move file/dir
 		echo "<input type=\"button\" value=\""._T('spixplorer:btncancel');
 		echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL);
 		echo "';\"></TD>\n</TR></FORM></TABLE><br />\n";
+
+	    show_footer();
 		return;
 	}
 	

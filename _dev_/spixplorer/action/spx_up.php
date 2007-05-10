@@ -127,6 +127,7 @@ function upload_items($dir) {		// upload file
 	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:btncancel');
 	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><br />\n";
 	
+	show_footer();
 	return;
 }
 //------------------------------------------------------------------------------

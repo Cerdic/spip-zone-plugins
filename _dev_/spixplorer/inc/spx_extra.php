@@ -66,7 +66,7 @@ function make_hash($_action, $_dir, $_item=NULL)
 {
 	include_spip('inc/securiser_action');
     $arg = $_dir . '-' . $_item;
-	$hash = calculer_action_auteur('spx_' . $_action . '-' . $arg);
+	$hash = calculer_action_auteur($_action . '-' . $arg);
 	return array($arg, $hash);
 }
 

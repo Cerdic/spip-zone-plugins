@@ -84,7 +84,8 @@ function edit_file($dir, $item) {		// edit file
 	show_header(_T('spixplorer:actedit').": /".$s_item);
 	
 	// Wordwrap (works only in IE)
-?><script language="JavaScript1.2" type="text/javascript">
+	echo '
+<script language="JavaScript1.2" type="text/javascript">
 <!--
 	function chwrap() {
 		if(document.editfrm.wrap.checked) {
@@ -94,12 +95,13 @@ function edit_file($dir, $item) {		// edit file
 		}
 	}
 // -->
-</script><?php
-
+</script>
+' .
 	// Form
-	echo "<br /><FORM name=\"editfrm\" method=\"post\" action=\"".make_link("edit",$dir,$item)."\">\n";
-	echo "<input type=\"hidden\" name=\"dosave\" value=\"yes\">\n";
-	echo "<TEXTAREA NAME=\"code\" rows=\"25\" cols=\"120\" wrap=\"off\">";
+'
+<br /><FORM name="editfrm" method="post" action="' . make_link("edit",$dir,$item) . '">
+<input type="hidden" name="dosave" value="yes">
+<TEXTAREA NAME="code" rows="25" cols="120" wrap="off">';
 		
 	// Show File In TextArea
 	$buffer="";
@@ -107,20 +109,25 @@ function edit_file($dir, $item) {		// edit file
 		$buffer .= fgets($fp, 4096);
 	}
 	@fclose($fp);
-	echo htmlspecialchars($buffer);
+	echo htmlspecialchars($buffer) . '
 	
-	echo "</TEXTAREA><br />\n<TABLE><TR><TD>Wordwrap: (IE only)</TD><TD><INPUT type=\"checkbox\" name=\"wrap\" ";
-	echo "onClick=\"javascript:chwrap();\" value=\"1\"></TD></TR></TABLE><br />\n";
-	echo "<TABLE><TR><TD><INPUT type=\"text\" name=\"fname\" value=\"".$item."\"></TD>";
-	echo "<TD><input type=\"submit\" value=\""._T('spixplorer:btnsave');
-	echo "\"></TD>\n<TD><input type=\"reset\" value=\""._T('spixplorer:btnreset')."\"></TD>\n<TD>";
-	echo "<input type=\"button\" value=\""._T('spixplorer:btnclose')."\" onClick=\"javascript:location='";
-	echo make_link("list",$dir,NULL)."';\"></TD></TR></FORM></TABLE><br />\n";
-?><script language="JavaScript1.2" type="text/javascript">
+</TEXTAREA><br />
+<TABLE><TR><TD>Wordwrap: (IE only)</TD><TD><INPUT type="checkbox" name="wrap"
+onClick="javascript:chwrap();" value="1"></TD></TR></TABLE><br />
+<TABLE><TR><TD><INPUT type="text" name="fname" value="' . $item . '"></TD>
+<TD><input type="submit" value="' . _T('spixplorer:btnsave') . '"></TD>
+<TD><input type="reset" value="' . _T('spixplorer:btnreset') . '"></TD>
+<TD>
+<input type="button" value="' . _T('spixplorer:btnclose') . '" onClick="javascript:location=\''
+	. make_link("list",$dir,NULL) . '\';">
+</TD></TR></FORM></TABLE><br />
+<script language="JavaScript1.2" type="text/javascript">
 <!--
 	if(document.editfrm) document.editfrm.code.focus();
 // -->
-</script><?php
+</script>
+';
+	show_footer();
 }
 //------------------------------------------------------------------------------
 ?>

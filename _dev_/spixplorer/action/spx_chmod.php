@@ -101,6 +101,8 @@ function chmod_item($dir, $item) {		// change permissions
 	echo "</TABLE>\n<br /><TABLE>\n<TR><TD>\n<INPUT type=\"submit\" value=\""._T('spixplorer:btnchange');
 	echo "\"></TD>\n<TD><input type=\"button\" value=\""._T('spixplorer:btncancel');
 	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL)."';\">\n</TD></TR></FORM></TABLE><br />\n";
+
+    show_footer();
 }
 
 // changer les permissions de $fichier en $omod (octal comme 0644)

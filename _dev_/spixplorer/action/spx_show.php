@@ -72,11 +72,13 @@ alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '
 	$link = $GLOBALS['spx']['home_url'] . '/' . $stat['rel'];
 	// Montrer le fichier
 	if ($stat['edit']) {
-		echo '<pre>' . htmlentities(file_get_contents($stat['abs'])) . '</pre><hr />';
+		echo '<pre>' . htmlentities(file_get_contents($stat['abs'])) . '</pre>';
 	} elseif (get_is_image($dir, $item)) {
 		echo '<p><a href="' . $link . '" alt="' . _T('spixplorer:pleine_page') .
-		'"><img src="' . $link . '" /></a></p><hr />';
+		'"><img src="' . $link . '" /></a></p>';
 	}
+	
+	show_footer();
 }
 //------------------------------------------------------------------------------
 ?>

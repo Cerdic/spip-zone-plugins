@@ -158,6 +158,8 @@ function search_items($dir) {			// search for item
 	if(document.searchform) document.searchform.searchitem.focus();
 // -->
 </script><?php
+
+	show_footer();
 }
 //------------------------------------------------------------------------------
 ?>
