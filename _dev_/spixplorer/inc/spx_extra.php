@@ -81,7 +81,7 @@ function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NUL
 //	if($_lang==NULL) $_lang=(isset($GLOBALS['spx']["lang"])?$GLOBALS['spx']["lang"]:NULL);
 	
 	$link = $_SERVER['PHP_SELF'] . '?action=spx_' . $_action;
-	if ($_action != "list") {
+	if ($_action != 'list' && $_action != 'show') {
 	    list($arg, $hash) = make_hash($_action, $_dir, $_item);
 		$link .= '&arg=' . $arg . '&hash=' .  $hash;
 	}
@@ -328,6 +328,22 @@ function id_browser() {
 	} else {
 		return 'OTHER';
 	}
+}
+
+// Fil d'Ariane
+function link_all($dir)
+{
+	if (!$dir) {
+		return '';
+	}
+	$ret = '';
+	while (($pos = strrpos($dir, '/')) !== false) {
+		$terminal = substr($dir, $pos + 1);
+		$ret = '<a href="' . make_link('list', $dir) . '">' . $terminal . '</a>' . $ret;
+		$dir = substr($dir, 0, $pos);
+	}
+	$ret = '<a href="' . make_link('list', $dir) . '">' . $dir . $sep . '</a>' . $ret;
+	return $ret;
 }
 //------------------------------------------------------------------------------
 ?>

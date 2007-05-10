@@ -71,7 +71,7 @@ if(isset($_SERVER)) {
 //------------------------------------------------------------------------------
 // Get Action
 $spx_action = $GLOBALS['spx']["action"] = spx_request('action', 'spx_list');
-if ($spx_action != 'spx_list') {
+if ($spx_action != 'spx_list' && $spx_action != 'spx_show') {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
 }

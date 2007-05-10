@@ -92,6 +92,7 @@ function make_tables($dir, &$dir_list, &$file_list, &$tot_file_size, &$num_items
 	while(($new_item = readdir($handle))!==false) {
 		$abs_new_item = get_abs_item($dir, $new_item);
 		
+// est-il nécessaire de mourrir si on a un telle erreur ? On pourrait mettre le ligne en rouge ...
 		if(!@file_exists($abs_new_item)) show_error($dir.": "._T('spixplorer:readdir'));
 		if(!get_show_item($dir, $new_item)) continue;
 		
@@ -160,10 +161,15 @@ function print_table($dir, $list, $allow) {	// print table of files
 		//if(is_link($stat['abs'])) $extra=" -> ".@readlink($stat['abs']);
 		if ($stat['is_dir']) {
 			$link = make_link("list", $stat['rel'], NULL);
-		} else { //if($stat['edit'] || get_is_image($dir,$item)) {
+		} elseif($stat['edit'] || get_is_image($dir, $item)) {
 //toggg			$link = $GLOBALS['spx']["home_url"]."/".$stat['rel'];
-//toggg			$target = "_blank";
-		} //else $link = "";
+			$link = make_link("show", $dir, $item);
+		} elseif(get_is_image($dir, $item)) {
+			$link = $GLOBALS['spx']["home_url"]."/".$stat['rel'];
+			$target = "_self";
+		} else {
+			$link = "";
+		}
 		
 		echo '
 <tr class="rowdata"><td><input type="checkbox" name="selitems[]" value="' .
@@ -473,22 +479,6 @@ _T('spixplorer:miscfree') . ': ' .
 	echo '</tr>
 <tr><td colspan="8"><hr /></td></tr></FORM></table>
 ';
-}
-
-// Fil d'Ariane
-function link_all($dir)
-{
-	if (!$dir) {
-		return '';
-	}
-	$ret = '';
-	while (($pos = strrpos($dir, '/')) !== false) {
-		$terminal = substr($dir, $pos + 1);
-		$ret = '<a href="' . make_link('list', $dir) . '">' . $terminal . '</a>' . $ret;
-		$dir = substr($dir, 0, $pos);
-	}
-	$ret = '<a href="' . make_link('list', $dir) . '">' . $dir . $sep . '</a>' . $ret;
-	return $ret;
 }
 //------------------------------------------------------------------------------
 ?>

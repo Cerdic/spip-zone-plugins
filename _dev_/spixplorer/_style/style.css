@@ -56,3 +56,7 @@ a:hover, a:active {
 	color: #778899;
 	text-decoration: none;
 }
+
+pre {
+	text-align: left;
+}
