@@ -4,7 +4,11 @@
 /***********************************************************************/
 
 //==========================ARTICLES============================================
-global $choses_possibles;
+global $choses_possibles,$statuts_possibles;
+$statuts_possibles[]='publie';
+$statuts_possibles[]='propose';
+$statuts_possibles[]='technique';
+$statuts_possibles[]='poubelle';
 
 $choses_possibles['articles'] = array(
 									  'titre_chose' => 'public:articles',
