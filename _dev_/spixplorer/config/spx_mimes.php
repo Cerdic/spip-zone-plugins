@@ -2,7 +2,7 @@
 //------------------------------------------------------------------------------
 // editable files:
 $GLOBALS['spx']['editable_ext'] = array(
-	'\.txt$|\.php$|\.php3$|\.phtml$|\.inc$|\.sql$|\.pl$',
+	'\.log(\.\d+)?$|\.txt$|\.php$|\.php3$|\.phtml$|\.inc$|\.sql$|\.pl$',
 	'\.htm$|\.html$|\.shtml$|\.dhtml$|\.xml$',
 	'\.js$|\.css$|\.cgi$|\.cpp$\.c$|\.cc$|\.cxx$|\.hpp$|\.h$',
 	'\.pas$|\.p$|\.java$|\.py$|\.sh$\.tcl$|\.tk$'

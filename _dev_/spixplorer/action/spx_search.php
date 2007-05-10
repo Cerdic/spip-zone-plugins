@@ -103,12 +103,13 @@ function print_table($list) {			// print table of found items
 			}
 		}
 		
-		echo "<TR><TD>" . "<IMG border=\"0\" width=\"16\" height=\"16\" ";
-		echo "align=\"ABSMIDDLE\" src=\"" . _DIR_PLUGIN_SPIXPLORER . "_img/" . $img . "\" ALT=\"\">&nbsp;";
-		/*if($link!="")*/ echo"<A HREF=\"".$link."\" TARGET=\"".$target."\">";
-		//else echo "<A>";
-		echo $s_item."</A></TD><TD><A HREF=\"" . make_link("list",$dir,NULL)."\"> /";
-		echo $s_dir."</A></TD></TR>\n";
+		echo '
+<TR><TD><IMG border="0" width="16" height="16"
+src="' . _DIR_PLUGIN_SPIXPLORER . '_img/' . $img . '" ALT="">&nbsp;' .
+		($link ? '<A HREF="' . $link . '">' . $s_item . '</A>' : $s_item ) . '
+</TD><TD><A HREF="' . make_link('list', $dir, NULL) . '"> / ' .
+		$s_dir . '</A></TD></TR>
+';
 	}
 }
 //------------------------------------------------------------------------------
@@ -128,38 +129,57 @@ function search_items($dir) {			// search for item
 	show_header($msg);
 	
 	// Search Box
-	echo "<br /><TABLE><FORM name=\"searchform\" action=\"".make_link("search",$dir,NULL);
-	echo "\" method=\"post\">\n<TR><TD><INPUT name=\"searchitem\" type=\"text\" size=\"25\" value=\"";
-	echo $searchitem."\"><INPUT type=\"submit\" value=\""._T('spixplorer:btnsearch');
-	echo "\">&nbsp;<input type=\"button\" value=\""._T('spixplorer:btnclose');
-	echo "\" onClick=\"javascript:location='".make_link("list",$dir,NULL);
-	echo "';\"></TD></TR><TR><TD><INPUT type=\"checkbox\" name=\"subdir\" value=\"y\"";
-	echo ($subdir?" checked>":">")._T('spixplorer:miscsubdirs')."</TD></TR></FORM></TABLE>\n";
+	echo '
+<br /><TABLE><FORM name="searchform" action="' . make_link("search",$dir,NULL) .
+'" method="post">
+<TR><TD><INPUT name="searchitem" type="text" size="25" value="' .
+	$searchitem . '"><INPUT type="submit" value="' . _T('spixplorer:btnsearch') .
+'">&nbsp;<input type="button" value="' . _T('spixplorer:btnclose') .
+'" onClick="javascript:location=\'' . make_link('list', $dir , NULL) .
+'\';"></TD></TR><TR><TD><INPUT type="checkbox" name="subdir" value="y"' .
+	($subdir ? ' checked="checked">' : '>') . _T('spixplorer:miscsubdirs') . '
+</TD></TR></FORM></TABLE>
+';
 	
 	// Results
-	if($searchitem!=NULL) {
-		echo "<TABLE width=\"95%\"><TR><TD colspan=\"2\"><hr /></TD></TR>\n";
-		if(count($list)>0) {
+	if ($searchitem != NULL) {
+		echo '
+<TABLE width="95%"><TR><TD colspan="2"><hr /></TD></TR>
+';
+		if (count($list) > 0) {
 			// Table Header
-			echo "<TR>\n<TD WIDTH=\"42%\" class=\"header\"><B>"._T('spixplorer:nameheader');
-			echo "</B></TD>\n<TD WIDTH=\"58%\" class=\"header\"><B>"._T('spixplorer:pathheader');
-			echo "</B></TD></TR>\n<TR><TD colspan=\"2\"><hr /></TD></TR>\n";
+			echo '
+<TR>
+<TD WIDTH="42%" class="header"><B>' . _T('spixplorer:nameheader') .
+'</B></TD>
+<TD WIDTH="58%" class="header"><B>' ._T('spixplorer:pathheader') . '
+</B></TD></TR>
+<TR><TD colspan="2"><hr /></TD></TR>
+';
 	
 			// make & print table of found items
 			print_table($list);
-
-			echo "<TR><TD colspan=\"2\"><hr /></TD></TR>\n<TR><TD class=\"header\">".count($list)." ";
-			echo _T('spixplorer:miscitems').".</TD><TD class=\"header\"></TD></TR>\n";
+			
+			echo '
+<TR><TD colspan="2"><hr /></TD></TR>
+<TR><TD class="header">' . count($list) . ' ' .
+			_T('spixplorer:miscitems') . '.</TD><TD class="header"></TD></TR>
+';
 		} else {
-			echo "<TR><TD>"._T('spixplorer:miscnoresult')."</TD></TR>";
+			echo '
+<TR><TD>' . _T('spixplorer:miscnoresult') . '</TD></TR>';
 		}
-		echo "<TR><TD colspan=\"2\"><hr /></TD></TR></TABLE>\n";
+		echo '
+<TR><TD colspan="2"><hr /></TD></TR></TABLE>
+';
 	}
-?><script language="JavaScript1.2" type="text/javascript">
+	echo '
+<script language="JavaScript1.2" type="text/javascript">
 <!--
 	if(document.searchform) document.searchform.searchitem.focus();
 // -->
-</script><?php
+</script>
+';
 
 	show_footer();
 }
