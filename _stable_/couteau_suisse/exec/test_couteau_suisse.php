@@ -158,6 +158,7 @@ function cs_les_tests() {
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
 		'avant <a href="www.monlien.com" title="Mon 1er titre" target="_blank">Mon 1er lien</a> apres le "test"!',
 		'avant [Mon 1er lien->www.monlien.com] apres le "test"!',
+		'on est passé du 7e au 15e rang, pas du 17e au 5e ou du 7e au 3e !',
 	);
 	test_outil(cs_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants()');
 

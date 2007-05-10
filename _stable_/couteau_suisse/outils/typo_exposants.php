@@ -24,7 +24,7 @@ function typo_exposants_fr($texte){
 		'/(\\b1)(r?es?)\\b/', // 1e(s), 1re(s)
 
 		'/(\\b[02-9IVX]+)(ième|ème|i&egrave;me|&egrave;me|me)(s?)\\b/', // Erreurs me, ème, ième, mes, èmes, ièmes
-		'/(\\b[02-9IVX]+)(es?)\\b/', // 2e(s), IIIe(s)...
+		'/\b([0-9IVX]+?)(es?)\b/', // 2e(s), IIIe(s)... (les 1(e?r?s?) ont deja ete remplaces)
 	);
 	$remplace = array(
 		"M$sup\\2$fin",		// Mlle(s), Mme(s)
@@ -45,7 +45,7 @@ function typo_exposants_fr($texte){
 		"\\1$sup\\2$fin", // 2e(s), IIIe(s)...
 	);
 
-	return preg_replace($trouve, $remplace, $texte);
+	return preg_replace($trouve, $remplace, $texte, -1);
 }
 
 function typo_exposants_echappe_balises_callback($matches) {
@@ -59,6 +59,7 @@ function typo_exposants($texte){
 		$texte = preg_replace_callback('/(<a [^>]+>)/Ums', 'typo_exposants_echappe_balises_callback', $texte);
 	switch (lang_typo($lang)) {
 		case 'fr':
+			$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
 			$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
 			break;
 		default:
