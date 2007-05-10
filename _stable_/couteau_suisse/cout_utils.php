@@ -237,6 +237,7 @@ function cs_initialise_includes() {
 	// variables temporaires
 	$temp_css = $temp_js = array();
 	// parcours de tous les outils
+	include_spip('public/assembler');
 	foreach ($outils as $i=>$outil) {
 		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
 		if ($outil['actif']) {
@@ -253,9 +254,11 @@ function cs_initialise_includes() {
 					// bah rien a faire du coup... $traitements_utilises est deja rempli
 				}
 			}
-			// recherche d'un fichier .css et/ou .js eventuellement present dans outils/
-			if ($f=find_in_path('outils/'.$inc.'.css')) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
-			if ($f=find_in_path('outils/'.$inc.'.js')) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
+			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
+			if ($f=find_in_path("outils/$inc.css")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
+			if ($f=find_in_path("outils/$inc.js")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
+//			if ($f=find_in_path("outils/$inc.css.html")) $cs_metas_pipelines['header'][] = cs_insert_header("/?page=outils/$inc.css", 'js');
+			if ($f=find_in_path("outils/$inc.css.html")) $temp_css[] = recuperer_fond("outils/$inc.css");
 			// recherche d'un code inline eventuellement propose
 			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
 			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];

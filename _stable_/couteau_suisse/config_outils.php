@@ -145,6 +145,13 @@ add_outil( array(
 	'version-max' => 1.93,
 ));
 
+add_outil( array(
+	'id' => 'simpl_interface',
+	'code:options' => "define('_ACTIVER_PUCE_RAPIDE', false);",
+	'categorie' => 'admin',
+	'version-min' => 1.93,
+));
+
 	// ici on a besoin de six boutons radio : 'page', 'html', 'propres', 'propres2, ''standard' et 'propres-qs'
 add_variable( array(
 	'nom' => 'radio_type_urls3',
@@ -351,6 +358,7 @@ add_outil( array(
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 	'categorie' => 'public',
 ));
+
 
 
 //-----------------------------------------------------------------------------//

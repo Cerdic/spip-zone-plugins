@@ -167,6 +167,10 @@ _ Cet outil remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trou
 	'set_options:nom' => "Type d'interface priv&eacute;e",
 	'set_options:description' => "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.[[Votre choix :->%radio_set_options4%]]",
 
+	'simpl_interface:nom' => "All&egrave;gement de l'interface priv&eacute;e",
+	'simpl_interface:description' => "D&eacute;sactive le menu de changement rapide de statut d'un article au survol de sa puce color&eacute;e. Cela est utile si vous cherchez &agrave; obtenir une interface priv&eacute;e la plus d&eacute;pouill&eacute;e possible afin d'optimiser les performances client.",
+
+
 // ---------------------------------------------------------------------------
 	'type_urls:nom' => "Format des URLs",
 	'type_urls:description' => "#PUCE SPIP offre un choix sur plusieurs jeux d'URLs pour fabriquer les liens d'acc&egrave;s aux pages de votre site :{$temp['type_urls']}
@@ -175,7 +179,7 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 [[Format des URLs :->%radio_type_urls3%]]
 <p style='font-size:80%'>{$temp['note']} pour utiliser les formats {html}, {propre} ou {propre2}, Recopiez le fichier &quot;htaccess.txt&quot; du r&eacute;pertoire de base du site SPIP sous le sous le nom &quot;.htaccess&quot; (attention &agrave; ne pas &eacute;craser d'autres r&eacute;glages que vous pourriez avoir mis dans ce fichier) ; si votre site est en &quot;sous-r&eacute;pertoire&quot;, vous devrez aussi &eacute;diter la ligne &quot;RewriteBase&quot; ce fichier. Les URLs d&eacute;finies seront alors redirig&eacute;es vers les fichiers de SPIP.</p>
 
-#PUCE {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de spip, à l'image de celui qui existe d&eacute;j&agrave; : {index.php}.
+#PUCE {{Uniquement si vous utilisez le format {page} ci-dessus}}, alors il vous est possible de choisir le script d'appel &agrave; SPIP. Par d&eacute;faut, SPIP choisit {spip.php}, mais {index.php} (format : <code>/index.php?article123</code>) ou une valeur vide (format : <code>/?article123</code>) fonctionnent aussi. Pour tout autre valeur, il vous faut absolument cr&eacute;er le fichier correspondant dans la racine de spip, &agrave; l'image de celui qui existe d&eacute;j&agrave; : {index.php}.
 [[Script d'appel :->%spip_script%]]",
 	'page' => 'page', 'html' => 'html'.$temp['note'],
 	'propres' => 'propres'.$temp['note'], 'propres2' => 'propres2'.$temp['note'],
@@ -227,13 +231,14 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 <p>{{Attention}} : Avant d'activer cette fonctionnalit&eacute;, v&eacute;rifiez bien qu'aucune fonction {balise_INTRODUCTION()} n'existe d&eacute;j&agrave; dans votre squelette ou vos plugins, la surcharge produirait alors une erreur grave.</p>
 #PUCE Vous pouvez pr&eacute;ciser (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l'aspect de l'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
 [[Longueur du r&eacute;sum&eacute; :->%lgr_introduction%&nbsp;%]]
-#PUCE Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : &laquo;&amp;nbsp;(&hellip;)&raquo;. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
+#PUCE Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : <html>&laquo;&amp;nbsp;(&hellip;)&raquo;</html>. Vous pouvez ici pr&eacute;ciser votre propre cha&icirc;ne de carat&egrave;re indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
 [[Points de suite :->%suite_introduction%]]
 #PUCE Si la balise #INTRODUCTION est utilis&eacute;e pour r&eacute;sumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite d&eacute;finis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : &laquo;Lire la suite de l'article&hellip;&raquo;
 [[Points de suite cliquables :->%lien_introduction%]]
 ",
 
 // ---------------------------------------------------------------------------
+// TODO : a partir de 1.93 il faut changer (ul ol pour style_h et simplement li pour style_p)
 	'class_spip:nom' => 'SPIP et les styles&hellip;',
 	'class_spip:description' => "<p>Jusqu'&agrave; la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises syst&eacute;matiquement affubl&eacute;s du style &quot;spip&quot;. Par exemple : <code><p class=\"spip\"></code>. Vous pouvez ici d&eacute;finir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu'aucun style particulier ne sera appliqu&eacute;.</p>
 <p>#PUCE Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[Votre style :->%style_p%]]
