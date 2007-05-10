@@ -44,6 +44,9 @@
 	go to http://www.php.net/pcre.pattern.syntax
 */
 //------------------------------------------------------------------------------
+
+	// actions a ne pas securiser
+	$GLOBALS['spx']['actions_libres'] = array('spx_list', 'spx_show', 'spx_search');
 	
 	// Experimental, connection FTP, laisser vide pour invalider ce mode
 	$GLOBALS['spx']["ftp_host"] = '';

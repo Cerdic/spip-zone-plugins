@@ -75,13 +75,13 @@ function make_link($_action,$_dir,$_item=NULL,$_order=NULL,$_srt=NULL,$_lang=NUL
 	if (!$_action) {
 		$_action = "list";
 	}
-	
+	$_action = 'spx_' . $_action;
 	$_order || ($_order = $GLOBALS['spx']["order"]);
 	$_srt || ($_srt = $GLOBALS['spx']["srt"]);
 //	if($_lang==NULL) $_lang=(isset($GLOBALS['spx']["lang"])?$GLOBALS['spx']["lang"]:NULL);
 	
-	$link = $_SERVER['PHP_SELF'] . '?action=spx_' . $_action;
-	if ($_action != 'list' && $_action != 'show') {
+	$link = $_SERVER['PHP_SELF'] . '?action=' . $_action;
+	if (!in_array($_action, $GLOBALS['spx']['actions_libres'])) {
 	    list($arg, $hash) = make_hash($_action, $_dir, $_item);
 		$link .= '&arg=' . $arg . '&hash=' .  $hash;
 	}

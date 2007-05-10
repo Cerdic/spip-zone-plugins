@@ -68,14 +68,6 @@ if(isset($_SERVER)) {
 	"You need at least PHP 4.0.0 to run QuiXplorer; preferably PHP 4.3.1 or higher.");
 }
 
-//------------------------------------------------------------------------------
-// Get Action
-$spx_action = $GLOBALS['spx']["action"] = spx_request('action', 'spx_list');
-if ($spx_action != 'spx_list' && $spx_action != 'spx_show') {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-}
-
 // Default Dir
 $GLOBALS['spx']["dir"] = spx_request('dir', '');
 
@@ -109,6 +101,14 @@ include_spip("inc/spx_header");
 include_spip("inc/spx_footer");
 include_spip("inc/spx_error");
 ob_end_clean(); // get rid of cached unwanted output
+
+//------------------------------------------------------------------------------
+// Get Action
+$spx_action = $GLOBALS['spx']["action"] = spx_request('action', 'spx_list');
+if (!in_array($spx_action, $GLOBALS['spx']['actions_libres'])) {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
+}
 
 //------------------------------------------------------------------------------
 if($GLOBALS['spx']["require_login"]) {	// LOGIN
