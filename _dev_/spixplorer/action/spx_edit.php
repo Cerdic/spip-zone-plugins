@@ -109,9 +109,7 @@ function edit_file($dir, $item) {		// edit file
 		$buffer .= fgets($fp, 4096);
 	}
 	@fclose($fp);
-	echo htmlspecialchars($buffer) . '
-	
-</TEXTAREA><br />
+	echo htmlspecialchars($buffer) . '</TEXTAREA><br />
 <TABLE><TR><TD>Wordwrap: (IE only)</TD><TD><INPUT type="checkbox" name="wrap"
 onClick="javascript:chwrap();" value="1"></TD></TR></TABLE><br />
 <TABLE><TR><TD><INPUT type="text" name="fname" value="' . $item . '"></TD>

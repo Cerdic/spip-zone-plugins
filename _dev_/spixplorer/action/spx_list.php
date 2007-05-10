@@ -284,47 +284,22 @@ function list_dir($dir) {			// list directory contents
 	}
 	
 	// Toolbar
-	echo '<br /><table width="95%"><tr><td><table><tr>
+	echo '<table width="95%"><tr><td><table><tr>
 ' .
-/*	
-	// PARENT DIR
-	'<td><a href="' . make_link("list",$dir_up,NULL) . '">
-<img border="0" width="16" height="16" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_up.gif"
-alt="' . _T('spixplorer:uplink') . '" title="' . _T('spixplorer:uplink') . '"></a></td>
-' .
-	// HOME DIR
-'<td><a href="' . make_link("list",NULL,NULL) . '">
-<img border="0" width="16" height="16" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_home.gif"
-alt="' . _T('spixplorer:homelink') . '" title="' . _T('spixplorer:homelink') . '"></a></td>' .
-	// RELOAD
-'<td><a href="javascript:location.reload();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_refresh.gif" alt="' .
-_T('spixplorer:reloadlink') . '" title="' . _T('spixplorer:reloadlink') . '"></a></td>
-' .
-*/
 	// SEARCH
-'<td><a href="' . make_link("search",$dir,NULL) . '">
-<img border="0" width="16" height="16" align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_search.gif"
-alt="' . _T('spixplorer:searchlink') . '" title="' . _T('spixplorer:searchlink') . '"></a></td>
-
+'<td>' . btn_link('search', $dir) . '</td>
 	
 <td>::</td>' .
 	
 	($allow ?
 		// COPY
-'<td><a href="javascript:Copy();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_copy.gif" alt="' .
-_T('spixplorer:copylink') . '" title="' . _T('spixplorer:copylink') .'"></a></td>
+'<td>' . btn_link('copy', $dir, null, 'javascript:Copy();') . '</td>
 ' .
 		// MOVE
-'<td><a href="javascript:Move();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_move.gif" alt="' .
-_T('spixplorer:movelink') . '" title="' . _T('spixplorer:movelink') . '"></a></td>
+'<td>' . btn_link('move', $dir, null, 'javascript:Move();') . '</td>
 ' .
 		// DELETE
-'<td><a href="javascript:Delete();"><img border="0" width="32" height="32"
-align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/delete.png" alt="' .
-_T('spixplorer:dellink') . '" title="' . _T('spixplorer:dellink') . '"></a></td>
+'<td>' . btn_link('del', $dir, null, 'javascript:Delete();') . '</td>
 ' .
 		// UPLOAD
 		(get_cfg_var("file_uploads") ?
@@ -394,6 +369,7 @@ src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:up
 <input type="hidden" name="action" value="spx_mkitem">
 <input type="hidden" name="arg" value="' . $arg . '">
 <input type="hidden" name="hash" value="' . $hash . '">
+<input type="hidden" name="dir" value="' . $dir . '">
 <SELECT name="mktype">
 <option value="file">' . $GLOBALS['spx']['mimes']['file'] . '</option>
 <option value="dir">' . $GLOBALS['spx']['mimes']['dir'] . '</option>
@@ -477,4 +453,11 @@ _T('spixplorer:miscfree') . ': ' .
 	show_footer();
 }
 //------------------------------------------------------------------------------
+function btn_link($action, $dir, $item = null, $href = '') {
+	return '
+<td><a href="' . ($href ? $href : make_link($action, $dir, $item)) . '">
+<img border="0" width="32" height="32"
+src="' . _DIR_PLUGIN_SPIXPLORER . '_img/' . $action . '.png"
+alt="' . ($alt = _T('spixplorer:' . $action . 'link')) . '" title="' . $alt . '"></a></td>';
+}
 ?>
