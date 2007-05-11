@@ -104,6 +104,7 @@
 			$filtre->sql_serveur = $boucle->sql_serveur;
 			$filtre->from['forms_champs']='spip_forms_champs';
 			$filtre->select[]='champ';
+			$filtre->select[]='type';
 			foreach($boucle->where as $cond){
 				if ($cond[1] == "'$id_table.id_form'"){
 					$cond[1] = "'forms_champs.id_form'";
@@ -127,7 +128,10 @@
 			}
 			elseif (strlen(\$r)){
 				\$res++;
-				\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r).")";
+				if (in_array(\$row['type'],array('mot','select','multiple')))
+					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r).")";
+				else
+					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur LIKE "._q(\$r).")";
 			}
 		}
 	}
