@@ -4,8 +4,8 @@
 
 $GLOBALS['spx']["mimes"]=array(
 	// dir, exe, file
-	"dir"	=> "Répertoire",
-	"exe"	=> "Exécutable",
+	"dir"	=> "R&eacute;pertoire",
+	"exe"	=> "Ex&eacute;cutable",
 	"file"	=> "Fichier",
 
 	// text
@@ -26,7 +26,7 @@ $GLOBALS['spx']["mimes"]=array(
 	"javas"	=> "Fichier source Java",
 	"javac"	=> "Fichier classe Java",
 	// Pascal
-	"pas"	=> "Fichie Pascal",
+	"pas"	=> "Fichier Pascal",
 	
 	// images
 	"gif"	=> "Image GIF",
@@ -48,10 +48,10 @@ $GLOBALS['spx']["mimes"]=array(
 	"real"	=> "Fichier RealAudio",
 	
 	// movie
-	"mpg"	=> "Fichier vidéo MPG",
-	"mov"	=> "Fichier Vidéo",
-	"avi"	=> "Fichier vidéo AVI",
-	"flash"	=> "Fichier vidéo Flash",
+	"mpg"	=> "Fichier vido MPG",
+	"mov"	=> "Fichier Vid&eacute;o",
+	"avi"	=> "Fichier vid&eacute;o AVI",
+	"flash"	=> "Fichier vid&eacute;o Flash",
 	
 	// Micosoft / Adobe
 	"word"	=> "Document Word",
