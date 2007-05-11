@@ -121,7 +121,7 @@ $tables_principales['spip_forms_donnees'] = array(
 $spip_forms_donnees_champs = array(
 	"id_donnee" 	=> "bigint(21) NOT NULL",
 	"champ" 	=> "varchar(255) NOT NULL",
-	"valeur" 	=> "BLOB NOT NULL",
+	"valeur" 	=> "TEXT NOT NULL",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_forms_donnees_champs_key = array(

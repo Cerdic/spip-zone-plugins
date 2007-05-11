@@ -178,13 +178,15 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	}
 	
 	$prefix = forms_prefixi18n($type_form);
-	$contexte = array_merge($contexte,
-		array('id_form'=>$id_form,
+	$defaut_cont = 		array('id_form'=>$id_form,
 		'titre_liste'=>$titre_page,
 		'aucune_reponse'=>_T("$prefix:aucune_reponse"),
 		'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
-		'statuts' => array('prepa','prop','propose','publie','refuse') )
-	);
+		'statuts' => array('prepa','prop','propose','publie','refuse'));
+	if (_request('tri')) $defaut_cont['tri'] = _request('tri');
+	if (_request('champ')) $defaut_cont['champ'] = _request('champ');
+	if (_request('senstri')) $defaut_cont['senstri'] = _request('senstri');
+	$contexte = array_merge($contexte,$defaut_cont);
 	
   $icone = find_in_path("img_pack/$type_form-24.png");
   if (!$icone)

@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.29;
+	$GLOBALS['forms_base_version'] = 0.30;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -242,6 +242,11 @@
 			spip_query("ALTER TABLE spip_forms_donnees ADD niveau bigint(21) DEFAULT '0' NOT NULL AFTER bdte");
 			echo "forms update @ 0.29<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.29,'non');
+		}
+		if ($current_version<0.30){
+			spip_query("ALTER TABLE spip_forms_donnees_champs CHANGE valeur 'valeur' TEXT NOT NULL");
+			echo "forms update @ 0.30<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.30,'non');
 		}
 		ecrire_metas();
 	}
