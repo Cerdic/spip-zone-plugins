@@ -1,0 +1,34 @@
+<!-- descriptif=<multi>[fr]Fond de test du storage {php} pour le plugin de configuration cfg
+[en]Simple test for the {php} storage of configuration plugin cfg</multi>
+<br /><a href="../?page=test_cfg&var_mode=recalcul" class="spip_in">
+<multi>[fr]Retour page test publique
+[en]Back to public result page</multi></a>
+-->
+
+<!-- boite=<multi>[fr]Test storage php pour le plugin cfg [en]php storage test for the cfg plugin</multi>-->
+
+[(#REM) liens*=testmulti]
+[(#REM) liens*=testsimple]
+
+[(#REM) storage=php]
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend><:cfg:storage_php:></legend>
+<label>Texte php</label>
+<input type="text" name="php_text" value="#ENV{php_text}" size="50" />
+<br />
+<label>Int php</label>
+<input type="text" name="int_php" class="" value="#ENV{int_php}" size="20" />
+<br />
+<label>Bool php</label>
+<input type="checkbox" name="bool_php" [(#ENV{bool_php}|?{checked="checked" })]/>
+<br />
+<label>Plusieurs lignes php</label>
+<textarea name="textarea_php" rows="4" cols="40" style="width:100%;">[(#ENV{textarea_php})]</textarea>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
