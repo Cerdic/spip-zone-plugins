@@ -1,9 +1,24 @@
 <!-- descriptif=<multi>[fr]Fond de test des extras auteur pour le plugin de configuration cfg
 [en]Author's extra test for the configuration plugin cfg</multi>
+
+<form action="./?exec=cfg&amp;cfg=testauteur">
+<input type="hidden" name="exec" value="cfg" />
+<input type="hidden" name="cfg" value="testauteur" />
+<select id="cfg_id" name="cfg_id" onchange="this.form.submit();">
+<BOUCLE_aut(AUTEURS){tout}{par login}>
+	<option value="#ID_AUTEUR" [(#ENV{cfg_id}|=={#ID_AUTEUR}|?{selected="selected"})]>
+	#LOGIN
+	</option>
+</BOUCLE_aut>
+</select>
+<input type="submit" name="go" value="&gt;" />
+</form>
+
 <br /><a href="../?page=test_cfg&var_mode=recalcul" class="spip_in">
 <multi>[fr]Retour page test publique
 [en]Back to public result page</multi></a>
 -->
+
 <!-- titre=<multi>[fr]Test auteur extra pour le plugin cfg [en]Author's extra test for the cfg plugin</multi>-->
 
 [(#REM) liens*=testsimple]
