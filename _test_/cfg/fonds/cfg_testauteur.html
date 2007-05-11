@@ -4,6 +4,10 @@
 <form action="./?exec=cfg&amp;cfg=testauteur">
 <input type="hidden" name="exec" value="cfg" />
 <input type="hidden" name="cfg" value="testauteur" />
+
+[(#REM) Attention, important de ne pas faire <select name="xxx"...>
+	pour ne pas etre vu comme un champ de config]
+
 <select id="cfg_id" name="cfg_id" onchange="this.form.submit();">
 <BOUCLE_aut(AUTEURS){tout}{par login}>
 	<option value="#ID_AUTEUR" [(#ENV{cfg_id}|=={#ID_AUTEUR}|?{selected="selected"})]>
