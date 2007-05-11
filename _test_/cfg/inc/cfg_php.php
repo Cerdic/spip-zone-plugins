@@ -79,7 +79,8 @@ class cfg_php
 			if ($supprimer) {
 				unset($ici[$name]);
 			} else {
-				$ici[$name] = $this->cfg->val[$name];
+				$ici[$name] = isset($def['typ']) && ($cnv = $this->cfg->types[$def['typ']][2]) ?
+					$cnv($this->cfg->val[$name]) : $this->cfg->val[$name];
 			}
 	    }
 		if ($supprimer) {

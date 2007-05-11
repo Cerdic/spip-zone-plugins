@@ -47,6 +47,11 @@ class cfg_formulaire
 	var $val = array();
 // pour tracer les valeurs modifiees
 	var $log_modif = '';
+// configuration des types
+	var $types = array(
+		  'id' => array('#^[a-z_]\w*$#i', 'lettre ou &#095; suivie de lettres, chiffres ou &#095;'),
+		  'idnum' => array('#^\d+$#', 'chiffres', 'intval'),
+		  'pwd' => array('#^\w+$#', 'lettres, &#095; ou chiffres'));
 	
 	function cfg_formulaire($nom, $vue = '', $cfg_id = '', $opt = array())
 	{
@@ -199,10 +204,6 @@ class cfg_formulaire
 
 	function controle()
 	{
-		$chk = array(
-		  'id' => array('#^[a-z_]\w*$#i', _L('lettre ou &#095; suivie de lettres, chiffres ou &#095;')),
-		  'idnum' => array('#^\d+$#', _L('chiffres')),
-		  'pwd' => array('#^\w+$#',  _L('lettres, &#095; ou chiffres')));
 	    $return = '';
 		foreach ($this->champs as $name => $def) {
 			$oldval = $this->val[$name];
@@ -211,10 +212,10 @@ class cfg_formulaire
 		    	$this->log_modif .= $name . ':' .
 		    		var_export($oldval, true) . '/' . var_export($this->val[$name], true) .', ';
 		    }
-		    if (!empty($def['typ']) && isset($chk[$def['typ']])) {
-		    	if (!preg_match($chk[$def['typ']][0], $this->val[$name])) {
+		    if (!empty($def['typ']) && isset($this->types[$def['typ']])) {
+		    	if (!preg_match($this->types[$def['typ']][0], $this->val[$name])) {
 		    		$return .= _L($name) . '&nbsp;:<br />' .
-		    		  $chk[$def['typ']][1] . '<br />';
+		    		  $this->types[$def['typ']][1] . '<br />';
 		    	}
 		    }
 	    }
