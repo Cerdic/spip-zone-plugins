@@ -229,7 +229,10 @@ function echappe_retour($letexte, $source='') {
 		',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*></\1>,UmsS',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
-				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
+				if (preg_match(",title=[\"']([^\"'>]*)[\"'],Uims",$reg[0],$rempl))
+					$rempl = base64_decode($rempl[1]);
+				else $rempl="";
+				//$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
 				$letexte = str_replace($reg[0], $rempl, $letexte);
 			}
 		}
