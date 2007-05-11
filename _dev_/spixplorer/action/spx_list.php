@@ -295,11 +295,11 @@ function list_dir($dir) {			// list directory contents
 		// COPY
 '<td>' . btn_link('copy', $dir, null, 'javascript:Copy();') . '</td>
 ' .
-		// MOVE
-'<td>' . btn_link('move', $dir, null, 'javascript:Move();') . '</td>
-' .
 		// DELETE
 '<td>' . btn_link('del', $dir, null, 'javascript:Delete();') . '</td>
+' .
+		// MOVE
+'<td>' . btn_link('move', $dir, null, 'javascript:Move();') . '</td>
 ' .
 		// UPLOAD
 		(get_cfg_var("file_uploads") ?
