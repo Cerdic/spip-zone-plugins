@@ -45,7 +45,7 @@ function typo_exposants_fr($texte){
 		"\\1$sup\\2$fin", // 2e(s), IIIe(s)...
 	);
 
-	return preg_replace($trouve, $remplace, $texte, -1);
+	return preg_replace($trouve, $remplace, $texte);
 }
 
 function typo_exposants_echappe_balises_callback($matches) {
@@ -59,7 +59,6 @@ function typo_exposants($texte){
 		$texte = preg_replace_callback('/(<a [^>]+>)/Ums', 'typo_exposants_echappe_balises_callback', $texte);
 	switch (lang_typo($lang)) {
 		case 'fr':
-			$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
 			$texte = cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
 			break;
 		default:
