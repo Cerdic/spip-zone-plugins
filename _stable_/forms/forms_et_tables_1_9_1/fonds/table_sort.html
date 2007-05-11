@@ -8,12 +8,15 @@
 </BOUCLE_la>
 <input type='submit' value='<:bouton_valider:>' class='fondo' />
 </div>
+[(#SELF|parametre_url{dummy,'',&}|parse_str{#GET{args}})]
+#SET{retour,#GET{args}|table_valeur{retour}}
+#GET{retour}
 <B_donnees>
 <ul class="sortable verdana2" id="sort_table">
 <BOUCLE_donnees(FORMS_DONNEES){id_form}{statut!=poubelle}{par rang}{rang>=#GET{rang_deb}}{rang<#GET{rang_deb}|plus{#ENV{total,20}}}>
 #SET{lien_edit,''}
 [(#REM|?{'','modifier'}|autoriser{'donnee',#ID_DONNEE}|?{' '})
-#SET{lien_edit,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF} }
+#SET{lien_edit,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#GET{retour}} }
 ]
 	<li class="sortableitem [(#ID_DONNEE|=={#ENV{id_donnee}}|?{selected})]" id="#ID_DONNEE-#RANG"> 
 		#SET{texte,''}
