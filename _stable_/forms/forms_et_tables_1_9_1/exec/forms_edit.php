@@ -213,7 +213,7 @@ function exec_forms_edit(){
 			$row['moderation'] = "priori";
 		}
 		$row['forms_obligatoires'] = "";
-		$row['email'] = array();
+		$row['email'] = serialize(array());
 		$row['champconfirm'] = "";
 		$row['texte'] = "";
 		$row['public'] = "non";
