@@ -57,6 +57,10 @@ a:hover, a:active {
 	text-decoration: none;
 }
 
+.toolbar {
+	text-align: left;
+}
+
 .code {
 	text-align: left;
 	font: monospace;
