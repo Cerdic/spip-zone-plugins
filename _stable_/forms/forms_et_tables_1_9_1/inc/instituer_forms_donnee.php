@@ -11,6 +11,9 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!include_spip('inc/autoriser'))
+	include_spip('inc/autoriser_compat');
+include_spip('inc/minipres');
 
 function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NULL)
 {

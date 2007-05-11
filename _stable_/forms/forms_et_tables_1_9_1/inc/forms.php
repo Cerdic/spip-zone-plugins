@@ -491,7 +491,7 @@
 		
 		$erreur = Forms_valide_conformite_champs_reponse_post($id_form, $id_donnee, $c, $structure);
 		if (!$erreur)
-			Forms_modifier_reponse($id_form,$id_donnee,&$erreur, $c, $structure);
+			Forms_modifier_reponse($id_form,$id_donnee,$erreur, $c, $structure);
 		if (count($erreur))
 			spip_log("erreur: ".serialize($erreur));
 
