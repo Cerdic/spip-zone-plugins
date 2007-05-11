@@ -47,6 +47,9 @@
 <BOUCLE_donnees(FORMS_DONNEES spip_forms_donnees_champs){statut IN #ENV*{statuts}}{id_form}{champ?}{par #GET{tri}}{inverse #ENV{senstri,0}}{pagination 20}>
 #SET{lien_supp,#URL_ACTION_AUTEUR{forms_donnee_supprime,#ID_FORM:#ID_DONNEE,#EVAL{_DIR_RESTREINT_ABS}|concat{#SELF}|urlencode}}
 #SET{lien_edit,''}
+[(#REM|?{'','modifier'}|autoriser{'donnee',#ID_DONNEE}|?{' '})
+#SET{lien_edit,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF} }
+]
 	<tr class='tr_liste' onmouseover='$(this).activeCrayons();'>
 		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]</td>
 		<td>[<a href='(#GET{lien_edit})'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>]#ID_DONNEE[(#GET{lien_edit}|?{' '})</a>]</td>

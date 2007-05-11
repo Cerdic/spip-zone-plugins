@@ -1,3 +1,4 @@
+var sort_table_serial_init;
 function init_sort_table(){
 	$('#sort_table').Sortable(
 		{
@@ -11,12 +12,17 @@ function init_sort_table(){
 			revert:			true,
 			tolerance:		'intersect',
 			/*containment: 'parent',*/
+			onStart : function(){
+				sort_table_serial_init = $.SortSerialize($(this).parent().attr("id")).hash;
+			},
 			onStop : function(){
 				serial = $.SortSerialize($(this).parent().attr("id"));
 				var url = $(this).parent().siblings('a').attr("rel");
-				/*alert(url+'&'+serial.hash);*/
-				$(this).parent().siblings('input[@name=ordre]').val(serial.hash);
-				$(this).parent().parent().find('input[@type=submit]').eq(0).each(function(){ this.click(); });
+				//alert(serial.hash);
+				if (sort_table_serial_init!=serial.hash){
+					$(this).parent().siblings('input[@name=ordre]').val(serial.hash);
+					$(this).parent().parent().find('input[@type=submit]').eq(0).each(function(){ this.click(); });
+				}
 			}
 		}
 	)

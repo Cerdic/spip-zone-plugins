@@ -27,6 +27,7 @@ function action_table_donnee_deplace(){
 		$id_form = $args[0];
 		$id_donnee = $args[1];
 		$ordre = _request('ordre');
+		$rang_nouv = 0;
 		if ($ordre){
 			$table_sort = explode("&",$ordre);
 			$last_rang = 0;
@@ -49,8 +50,9 @@ function action_table_donnee_deplace(){
 					}
 				}
 			}
-			if (autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form)))
-				Forms_rang_update($id_donnee,$rang_nouv);
+			if ($rang_nouv)
+				if (autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form)))
+					Forms_rang_update($id_donnee,$rang_nouv);
 		}
 		else {
 			if (autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form))){
