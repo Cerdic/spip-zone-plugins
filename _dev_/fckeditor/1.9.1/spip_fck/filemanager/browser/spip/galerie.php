@@ -1,24 +1,17 @@
 <?php
 
 // détermination du chemin de base par rapport à la racine du serveur
+$dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+$i = 0;
+$dir_relatif="";
+while($dir_relatif_array[$i] != 'plugins') {
+	$dir_relatif .= $dir_relatif_array[$i];
+	$i++;
+}
+define('_DIR_ECRIRE',$dir_relatif.'/ecrire/');
 
-$dir_absolu_array = split('/', $_SERVER["HTTP_REFERER"]);
-$i = 1;
-$dir_absolu='http:/';
-while($dir_absolu_array[$i] != 'plugins') 
-  {
-  	$dir_absolu .= $dir_absolu_array[$i].'/';
-  	$i++;
-  }
-define('_DIR_ECRIRE',$dir_absolu.'ecrire/');
-
-	$chemin = $dir_absolu;
-	$cheminEcrire = $dir_absolu.'ecrire/';
-  
-
-	
-	include ($cheminEcrire.'inc_connect.php');
-
+	$chemin = "../../../../../../";
+	$cheminEcrire = $chemin."ecrire/";
 	if (defined("_ECRIRE_INC_VERSION")) return;
 	define("_ECRIRE_INC_VERSION", "1");
 	function spip_connect_db($host, $port, $login, $pass, $db) {
@@ -26,7 +19,7 @@ define('_DIR_ECRIRE',$dir_absolu.'ecrire/');
 		$fck_mysql_link = @mysql_connect($host, $login, $pass);
 		mysql_select_db($db);
 	}
-
+	include ($cheminEcrire.'inc_connect.php');
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>
@@ -97,9 +90,8 @@ echo $data;
 
 function sous_arborescence($id_rubrique) {
 	global $cheminEcrire;
-  
 
-  $image_article = array('prepa'=>'blanche', 'prop'=>'orange', 'publie'=>'verte', 'poubelle'=>'poubelle', 'refuse'=>'rouge');
+	$image_article = array('prepa'=>'blanche', 'prop'=>'orange', 'publie'=>'verte', 'poubelle'=>'poubelle', 'refuse'=>'rouge');
 	$nbDocsTotal = 0;
 	
 	$sousRubriques = mysql_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent = $id_rubrique ORDER BY titre");
