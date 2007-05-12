@@ -28,8 +28,7 @@ print association_date_du_jour();
 	
 $id_activite= $_GET['id'];
 
-$query = spip_query ("SELECT * FROM spip_asso_activites RIGHT JOIN spip_asso_comptes ON id_activite=id_journal WHERE id_activite=$id_activite AND imputation='activite' ");
-$i=0;
+$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_activite=$id_activite ");
 
 echo '<form method="post" action="'.$url_action_activites.'">';
 echo '<fieldset><legend>'._T('asso:activite_mise_a_jour_inscription').'</legend>';
@@ -51,11 +50,15 @@ echo '<td><input name="nom"  type="text" size="40" value="'.$data['nom'].'"> </t
 echo '</tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_adherent').' :</td>';
-echo '<td><input name="id_adherent" type="text" value="'.$data['id_adherent'].'"> </td>';
+echo '<td><input name="id_membre" type="text" value="'.$data['id_membre'].'"> </td>';
 echo '</tr>';
 echo '<tr> ';
-echo '<td>'._T('asso:activite_libelle_accompagne_de').' :</td>';
-echo '<td><input name="accompagne"  type="text" size="40" value="'.$data['accompagne'].'"> </td>';
+echo '<td>'._T('asso:activite_libelle_membres').' :</td>';
+echo '<td><input name="membres"  type="text" size="40" value="'.$data['membres'].'"> </td>';
+echo '</tr>';
+echo '<tr> ';
+echo '<td>'._T('asso:activite_libelle_non_membres').' :</td>';
+echo '<td><input name="non_membres"  type="text" size="40" value="'.$data['non_membres'].'"> </td>';
 echo '</tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_nombre_inscrit').' :</td>';
@@ -80,21 +83,6 @@ echo '</tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_montant_inscription').' :</td>';
 echo '<td><input name="montant"  type="text" value="'.$data['montant'].'"> </td>';
-echo '</tr>';
-echo '<tr>';
-echo '<td>'._T('asso:activite_libelle_date_paiement').' :</td>';
-echo '<td><input name="date_paiement" value="'.$data['date_paiement'].'" type="text"> </td>';
-echo '</tr>';
-echo '<tr>';
-echo '<td>'._T('asso:activite_libelle_mode_paiement').' :</td>';
-echo '<td><select name="journal" type="text">';
-$sql = spip_query ( "SELECT * FROM spip_asso_banques ORDER BY id_banque" );
-while ($banque = spip_fetch_array($sql)) {
-echo '<option value="'.$banque['code'].'" ';
-	if ($data['journal']==$banque['code']) { echo ' selected="selected"'; }
-echo '>'.$banque['intitule'].'</option>';
-}
-echo '</select></td>';
 echo '</tr>';
 echo '<tr>';
 echo '<td>'._T('asso:activite_libelle_statut').' :</td>';

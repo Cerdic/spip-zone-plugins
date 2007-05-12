@@ -47,8 +47,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 # Adherents
  # Titres
 	'adherent_titre_action_membres_actifs' => 'Action sur les membres actifs',
- 'adherent_titre_modifier_membre' => 'Modifier un membre actif',
- 'adherent_titre_ajout_adherent' => 'Ajout d\'adh&eacute;rent',
+	'adherent_titre_modifier_membre' => 'Modifier un membre actif',
+	'adherent_titre_ajout_adherent' => 'Ajout d\'adh&eacute;rent',
 	'adherent_titre_ajouter_membre_actif' => 'Ajouter des membres actifs',
 	'adherent_titre_ajouter_membre' => 'Ajouter un membre',
 	'adherent_titre_fiche_signaletique' => 'Fiche signal&eacute;tique membre',
@@ -86,6 +86,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_utilisateur3' => 'Utilisateur 3',
 	'adherent_libelle_utilisateur4' => 'Utilisateur 4',
 	'adherent_libelle_validite' => 'Validit&eacute;',
+	'adherent_libelle_date_validite' => 'Date limite de validit&eacute;',
 	'adherent_libelle_remarques' => 'Remarques',
 	'adherent_libelle_identifiant' => 'Identifiant',
 	'adherent_libelle_visiteur_spip' => 'Visiteur SPIP',
@@ -134,22 +135,22 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_bouton_modifier' => 'Modifier',
 	'adherent_bouton_envoyer' => 'Envoyer',
 	'adherent_bouton_modifier_membre' => 'Modifier le membre',
- 'adherent_bouton_maj_operation' => 'Mettre &agrave; jour l\'op&eacute;ration',
- 'adherent_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
+	'adherent_bouton_maj_operation' => 'Mettre &agrave; jour l\'op&eacute;ration',
+	'adherent_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
 
 	# Label
- 'adherent_label_modifier_visiteur' => 'Modifier le visiteur',
- 'adherent_label_envoyer_courrier' => 'Envoyer un courrier',
- 'adherent_label_ajouter_cotisation' => 'Ajouter une cotisation',
- 'adherent_label_modifier_membre' => 'Modifier membre',
- 'adherent_label_voir_membre' => 'Voir le membre',
+	'adherent_label_modifier_visiteur' => 'Modifier le visiteur',
+	'adherent_label_envoyer_courrier' => 'Envoyer un courrier',
+	'adherent_label_ajouter_cotisation' => 'Ajouter une cotisation',
+	'adherent_label_modifier_membre' => 'Modifier membre',
+	'adherent_label_voir_membre' => 'Voir le membre',
 
 	# Message
 	'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
- 'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
- 'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
- 'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
- 'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
+	'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
+	'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
+	'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
+	'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
 	'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
 	# Liste
 	'adherent_liste_legende' => 'En bleu : Relanc&eacute; | En rose : A &eacute;ch&eacute;ance | En vert : A jour<br> En brun : D&eacute;sactiv&eacute; | En jaune paille : Prospect',
@@ -167,14 +168,17 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
  # Sous-titres
 	'activite_mise_a_jour_inscription' => 'Mettre &agrave; jour une inscription',
 	'activite_ajouter_inscription' => 'Ajouter une inscription',
-	# Libelle
+	
+# Libelle
 	'activite_libelle_inscription' => 'Inscription n&deg;',
 	'activite_libelle_date' => 'Date',
 	'activite_libelle_nomcomplet' => 'Nom complet',
-	'activite_libelle_adherent' => 'Adh&eacute;rent',
+	'activite_libelle_adherent' => 'N&deg; d\'adh&eacute;rent',
 	'activite_libelle_invitation' => ' -- Invitation ext&eacute;rieure -- ',
-	'activite_libelle_accompagne_de' => 'Accompagn&eacute; de',
-	'activite_libelle_nombre_inscrit' => 'Nombre d\'inscrits',
+	'activite_libelle_accompagne_de' => 'Je serai accompagn&eacute; de',
+	'activite_libelle_membres' => 'Noms des participants membres',
+	'activite_libelle_non_membres' => 'Noms des participants non membres',
+	'activite_libelle_nombre_inscrit' => 'Nombre total d\'inscrits',
 	'activite_libelle_email' => 'Email',
 	'activite_libelle_telephone' => 'T&eacute;l&eacute;phone',
 	'activite_libelle_adresse_complete' => 'Adresse compl&egrave;te',
@@ -194,7 +198,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_entete_toutes' => 'Toutes',
 	'activite_entete_validees' => 'Valid&eacute;es',
 	'activite_entete_nom' => 'Nom',
-	'activite_entete_accompagne_de' => 'Accompagn&eacute; de',
+	'activite_entete_adherent' => 'Adh&eacute;rent',
 	'activite_entete_inscrits' => 'Inscrits',
 	'activite_entete_montant' => 'Montant',
 	'activite_entete_commentaire' => 'Commentaire',
@@ -214,14 +218,41 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_liste_nombre_inscrits' => 'Nombre d\'inscrits : @total@',
 	'activite_liste_total_participations' => 'Total des participations : @total@ &euro;',
 
-
 	# Message
 	'activite_justification_compte_inscription' => 'Inscription n&deg; @id_activite@ - @nom@',
 	'activite_message_ajout_inscription' => 'L\'inscription de @nom@ a &eacute;t&eacute; enregistr&eacute;e pour un montant de @montant@ &euro;',
 	'activite_message_maj_inscription' => 'L\'inscription de @nom@ a &eacute;t&eacute; mise &agrave; jour',
 	'activite_message_confirmation_supprimer' => 'Vous vous appr&ecirc;tez &agrave; effacer @nombre@ inscription@pluriel@ !',
 	'activite_message_suppression' => 'Suppression effectu&eacute;e !',
+	'activite_message_sujet' => 'Inscription activit&eacute;',
+	'activite_message_confirmation_inscription'=>'
+Bonjour,
 
+Nous venons d\'enregistrer pour vous l\'inscription suivante:
+
+Activit&eacute;: @activite@
+Date: @date@
+Lieu: @lieu@
+
+De: @nom@
+N&deg; d\'adh&eacute;rent: @id_adherent@
+Accompagn&eacute; de
+	Membres: @membres@
+	Non-membres: @non_membres@
+Nombre total d\'inscrits: @inscrits@
+
+Cette inscription ne sera d&eacute;finitive qu\'apr&egrave;s v&eacute;rification et dans la mesure o&ugrave;, sauf stipulation contraire, le montant de @montant@ euros nous est parvenu.
+
+Dans cette attente et dans l\'attente de vous retrouver, nous vous adressons nos salutations les meilleures.
+
+L\'&eacute;quipe @nomasso@
+	',
+	'activite_message_webmaster'=>'
+De: @nom@
+Activit&eacute;: @activite@
+Nombre: @inscrits@
+Commentaire: @commentaire@
+	',	
 	'date_du_jour' => 'Nous sommes le '.date('d/m/Y'),
 	'date_du_jour_heure' => 'Nous sommes le '.date('d/m/Y').' et il est '.date('H:i'),
 	

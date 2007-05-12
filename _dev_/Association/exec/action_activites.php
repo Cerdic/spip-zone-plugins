@@ -29,8 +29,9 @@ function exec_action_activites(){
 	$id_evenement=$_POST['id_evenement'];
 	$date=$_POST['date'];
 	$nom=addslashes($_POST['nom']);
-	$id_adherent=$_POST['id_adherent'];
-	$accompagne=addslashes($_POST['accompagne']);
+	$id_membre=$_POST['id_membre'];
+	$non_membres=addslashes($_POST['membres']);
+	$non_membres=addslashes($_POST['membres']);
 	$inscrits=$_POST['inscrits'];
 	$email=$_POST['email'];
 	$telephone=$_POST['telephone'];
@@ -50,24 +51,9 @@ function exec_action_activites(){
 //----------------------------
 
 	if ($action=="ajoute"){
-
-		spip_query( "INSERT INTO spip_asso_activites (date, id_evenement, nom, id_adherent, accompagne, inscrits, email, telephone, adresse, montant, date_paiement, statut, commentaire) VALUES ('$date', '$id_evenement', '$nom', '$id_adherent', '$accompagne', '$inscrits', '$email', '$telephone', '$adresse', '$montant', '$date_paiement', '$statut', '$commentaire' )" );
-
-		$query=spip_query( "SELECT MAX(id_activite) AS id_activite FROM spip_asso_activites" );
-		while ($data = spip_fetch_array($query)) {
-			$id_activite=$data['id_activite'];
-			$justification=_T('asso:activite_justification_compte_inscription',array('id_activite' => $id_activite, 'nom' => $nom));
-		}
-
-		spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ('$date_paiement','$journal','$montant','$justification','activite','$id_activite')");
-
-		if ($id_adherent) {
-		 $query = spip_query("SELECT nom, prenom FROM spip_asso_adherents WHERE id_adherent=$id_adherent");
-		 while ($data = spip_fetch_array($query)) {
-			 $nom = $data['nom'].' '.$data['prenom'];
-			}
-		}
-
+		
+		spip_query( "INSERT INTO spip_asso_activites (date, id_evenement, nom, id_adherent, membres, non_membres, inscrits, email, telephone, adresse, montant, commentaire) VALUES ('$date', '$id_evenement', '$nom', '$id_membre', '$membres', '$non_membres', '$inscrits', '$email', '$telephone', '$adresse', '$montant', '$commentaire' )" );
+		
 		echo '<p><strong>'._T('asso:activite_message_ajout_inscription',array('nom' => $nom, 'montant' => $montant)).'</strong></p>';
 		echo '<p>';
 		icone(_T('asso:bouton_retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
@@ -80,21 +66,32 @@ function exec_action_activites(){
 
 	if ($action=="modifie") {
 
-		spip_query("UPDATE spip_asso_activites SET date='$date', id_evenement='$id_evenement', nom='$nom', id_adherent='$id_adherent', accompagne='$accompagne', inscrits='$inscrits', email='$email', telephone='$telephone', adresse='$adresse', montant='$montant', date_paiement='$date_paiement', statut='$statut', commentaire='$commentaire' WHERE id_activite='$id_activite' ");
-
-		spip_query("UPDATE spip_asso_comptes SET date='$date_paiement', journal='$journal', recette='$montant' WHERE id_journal=$id_activite AND imputation='activite' ");
-
-		if ($id_adherent) {
-			$query = spip_query( "SELECT nom, prenom FROM spip_asso_adherents WHERE id_adherent=$id_adherent" );
-			while ($data = spip_fetch_array($query)) {
-				$nom = $data['nom'].' '.$data['prenom'];
-			}
-		}
+		spip_query("UPDATE spip_asso_activites SET date='$date', id_evenement='$id_evenement', nom='$nom', id_adherent='$id_membre', membres='$membres', non_membres='$non_membres', inscrits='$inscrits', email='$email', telephone='$telephone', adresse='$adresse', montant='$montant', date_paiement='$date_paiement', statut='$statut', commentaire='$commentaire' WHERE id_activite='$id_activite' ");
+		
 		echo '<p><strong>'._T('asso:activite_message_maj_inscription',array('nom' => $nom)).'</strong></p>';
 		echo '<p>';
 		icone(_T('asso:bouton_retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
 		echo '</p>';
 	}
+	
+//----------------------------
+//AJOUT PAIEMENT
+//----------------------------
+
+	if ($action=="paie") {
+		
+		spip_query("UPDATE spip_asso_activites SET nom='$nom', id_adherent='$id_membre', membres='$membres', non_membres='$non_membres', inscrits='$inscrits', montant='$montant', date_paiement='$date_paiement', statut='$statut', commentaire='$commentaire' WHERE id_activite='$id_activite' ");
+		
+		$justification=_T('asso:activite_justification_compte_inscription',array('id_activite' => $id_activite, 'nom' => $nom));
+		
+		spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ('$date_paiement','$journal','$montant','$justification','activite','$id_activite')");
+		
+		echo '<p><strong>'._T('asso:activite_message_maj_inscription',array('nom' => $nom)).'</strong></p>';
+		echo '<p>';
+		icone(_T('asso:bouton_retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
+		echo '</p>';
+	}	
+
 //----------------------------
 //SUPPRESSION PROVISOIRE INSCRIPTIONS
 //----------------------------

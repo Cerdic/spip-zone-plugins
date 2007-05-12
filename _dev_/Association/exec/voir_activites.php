@@ -20,6 +20,7 @@ function exec_voir_activites(){
 	$url_activites = generer_url_ecrire('activites');
 	$url_edit_activite=generer_url_ecrire('edit_activite');
 	$url_ajout_activite=generer_url_ecrire('ajout_activite');
+	$url_ajout_participation=generer_url_ecrire('ajout_participation');
 	$url_action_activites = generer_url_ecrire('action_activites');
 	include_spip ('inc/navigation');
 
@@ -64,11 +65,11 @@ if ( isset ($_POST['statut'] ))
 	echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_id').'</strong></td>';
 	echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_date').'</strong></td>';
 	echo '<td><strong>'._T('asso:activite_entete_nom').'</strong></td>';
-	echo '<td><strong>'._T('asso:activite_entete_accompagne_de').'</strong></td>';
+	echo '<td><strong>'._T('asso:activite_entete_adherent').'</strong></td>';
 	echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_inscrits').'</strong></td>';
 	echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_montant').'</strong></td>';
 	echo '<td><strong>'._T('asso:activite_entete_commentaire').'</strong></td>';
-	echo '<td colspan="2" style="text-align:center"><strong>'._T('asso:activite_entete_action').'</strong></td>';
+	echo '<td colspan="3" style="text-align:center"><strong>'._T('asso:activite_entete_action').'</strong></td>';
 	echo '</tr>';
 
 	$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_evenement='$id_evenement' AND statut like '$statut'  ORDER by id_activite") ;
@@ -85,11 +86,12 @@ if ( isset ($_POST['statut'] ))
 		if(empty($data['email'])) { echo $data['nom']; }
 		else { echo '<a href="mailto:'.$data['email'].'">'.$data['nom'].'</a>'; }
 		echo '</td>';
-		echo '<td class ='.$class.'>'.$data['accompagne'].'</td>';
+				echo '<td class ='.$class.' style="text-align:right">'.$data['id_adherent'].'</td>';
 		echo '<td class ='.$class.' style="text-align:right">'.$data['inscrits'].'</td>';
 		echo '<td class ='.$class.' style="text-align:right">'.number_format($data['montant'], 2, ',', ' ').'</td>';
 		echo '<td class ='.$class.'>'.$data['commentaire'].'</td>';
 		echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:activite_bouton_maj_inscription').'"></a>';
+		echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_ajout_participation.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:activite_bouton_ajouter_inscription').'"></a>';
 		echo '<td class ='.$class.' style="text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_activite'].'></td>';
 		echo '</tr>';
 

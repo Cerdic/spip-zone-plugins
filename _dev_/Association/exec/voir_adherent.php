@@ -38,9 +38,10 @@ function exec_voir_adherent(){
 	echo '<fieldset><legend>'._T('asso:adherent_titre_fiche_signaletique_id',array('id' => $id_adherent)).'</legend>';
 	echo '<table width="70%">';	
 	while($data = spip_fetch_array($query)) {
+		$id_asso=$data['id_asso'];
 		echo '<tr> ';
 		echo '<td>'._T('asso:adherent_libelle_reference_interne').' :</td>';
-		echo '<td><strong>'.$data['id_asso'].'</strong></td>';
+		echo '<td><strong>'.$id_asso.'</strong></td>';
 		echo '<td rowspan=6><img src="/IMG/auton'.$data['id_auteur'].'.jpg"></td>';
 		echo '<td rowspan=6>';
 		$link=generer_url_ecrire('edit_adherent',"id=$id_adherent");
@@ -187,8 +188,9 @@ function exec_voir_adherent(){
 	echo '<td><strong>&nbsp;</strong></td>';
 	echo '</tr>';
 	echo '<tr>';
-	$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=$id_adherent ORDER BY date DESC" );
-//$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
+	$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=$id_asso ORDER BY date DESC" );
+	//$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=$id_adherent ORDER BY date DESC" );
+	//$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
 
 	while ($data = spip_fetch_array($query)) {
 		$class= "pair";
