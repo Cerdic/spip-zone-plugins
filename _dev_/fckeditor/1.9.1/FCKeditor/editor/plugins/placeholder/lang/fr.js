@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
  * Copyright (C) 2003-2007 Frederico Caldeira Knabben
  *
@@ -18,10 +18,10 @@
  *
  * == END LICENSE ==
  *
- * Placholder Italian language file.
+ * Placholder French language file.
  */
-FCKLang.PlaceholderBtn			= 'Insérer/Modifier Substitut' ;
-FCKLang.PlaceholderDlgTitle		= 'Propriétés de Substitut' ;
-FCKLang.PlaceholderDlgName		= 'Nom de Substitut' ;
-FCKLang.PlaceholderErrNoName	= 'Veuillez saisir le nom de Substitut' ;
+FCKLang.PlaceholderBtn			= 'Insérer/Modifier une note de bas de page' ;
+FCKLang.PlaceholderDlgTitle		= 'Propriétés de la note de bas de page' ;
+FCKLang.PlaceholderDlgName		= 'Nom de la note de bas de page' ;
+FCKLang.PlaceholderErrNoName	= 'Veuillez saisir le nom de la note de bas de page' ;
 FCKLang.PlaceholderErrNameInUse	= 'Ce nom est déjà utilisé' ;
