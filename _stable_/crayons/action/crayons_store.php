@@ -151,6 +151,7 @@ function action_crayons_store_dist() {
 				case 'document':
 				case 'mot':
 				case 'signature':
+				case 'petition':
 				default:
 				    include_spip('inc/modifier');
 				    $fun = 'revision_'.$type;
