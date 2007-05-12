@@ -5,4 +5,12 @@ list-style:none;
 margin:0;
 padding:0;
 }
-#listmenu a.hac{cursor:pointer;}
+#listmenu a.hac{
+display:block;
+background:transparent url(images/deplierhaut.gif) left 50% no-repeat;
+text-indent:10px;
+cursor:pointer;
+}
+#listmenu a.selected{
+background:transparent url(images/deplierbas.gif) left 50% no-repeat;
+}
