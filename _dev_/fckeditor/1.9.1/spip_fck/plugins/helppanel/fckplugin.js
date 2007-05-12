@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2006 Frederico Caldeira Knabben
  * 
@@ -18,7 +18,7 @@
  */
 
 // Register the related command.
-FCKCommands.RegisterCommand( 'HelpPanel', new FCKDialogCommand( 'HelpPanel', FCKLang.HelppanelDlgTitle, FCKPlugins.Items['helppanel'].Path + 'fck_help.html', 500, 400 ) ) ;
+FCKCommands.RegisterCommand( 'HelpPanel', new FCKDialogCommand( 'HelpPanel', FCKLang.HelppanelDlgTitle, FCKPlugins.Items['helppanel'].Path + 'fck_help.html', 800, 600 ) ) ;
 
 // Create the "Helppanel" toolbar button.
 var oHelppanelItem = new FCKToolbarButton( 'HelpPanel', FCKLang.HelppanelBtn ) ;

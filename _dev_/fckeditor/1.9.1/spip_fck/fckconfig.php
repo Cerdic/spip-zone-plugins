@@ -10,9 +10,29 @@
 		//FCKConfig.ProtectedSource.Add( /<\?[\s\S]*?\?>/g ) ; 
 		
 		// Ajout des plug-ins
-		FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");		
-
+		FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
+    FCKConfig.Plugins.Add( "tablecommands", null, "' . $_GET['path'] . '/FCKeditor/editor/plugins/" ) ;		
+    FCKConfig.Plugins.Add( "placeholder", "en,it,de,fr","' . $_GET['path'] . '/FCKeditor/editor/plugins/" ) ;
+    
 		FCKConfig.ToolbarSets["Spip"] = [
+      	["Source","-","Save","NewPage","Preview","-","Templates"],
+      	["Cut","Copy","Paste","PasteText","PasteWord","-","Print","SpellCheck"],
+      	["Undo","Redo","-","Find","Replace","-","SelectAll","RemoveFormat"],
+      	["Form","Checkbox","Radio","TextField","Textarea","Select","Button","ImageButton","HiddenField"],
+      	"/",
+      	["Bold","Italic","Underline","StrikeThrough","-","Subscript","Superscript"],
+      	["OrderedList","UnorderedList","-","Outdent","Indent"],
+      	["JustifyLeft","JustifyCenter","JustifyRight","JustifyFull"],
+      	["Link","Unlink","Anchor"],
+      	["Image","Flash","Rule","Smiley","SpecialChar","PageBreak","Placeholder"],
+      	["Table","-","TableInsertRow","TableDeleteRows","TableInsertColumn","TableDeleteColumns","TableInsertCell","TableDeleteCells","TableMergeCells","TableSplitCell"],
+      	"/",
+      	["Style","FontFormat","FontName","FontSize"],
+      	["TextColor","BGColor"],
+      	["FitWindow","-","About","HelpPanel"]
+      ] ;
+      
+		FCKConfig.ToolbarSets["BarreBreve"] = [
 			["Source","-","Save","NewPage","Preview","-","Templates"],
 			["Undo","Redo","-","Find","Replace","-","SelectAll","RemoveFormat"],
 			["Cut","Copy","Paste","PasteText","PasteWord","-","Print","SpellCheck"],
@@ -23,7 +43,7 @@
 			["Link","Unlink","Anchor"],
 			"/",
 			["Style","FontFormat","FontName","FontSize"],
-			["Image","Flash","Table","Rule","Smiley","SpecialChar","PageBreak","UniversalKey"],
+			["Image","Table","Rule","Smiley","SpecialChar"],
 			["TextColor","BGColor"],
 			["FitWindow","-","About","HelpPanel"]
 		] ;
@@ -59,5 +79,6 @@
 		
 		FCKConfig.FlashUpload = true ;
 		FCKConfig.FlashUploadURL = "' . $_GET['path'] . '/spip_fck/filemanager/upload/spip/upload." + _QuickUploadLanguage + "?Type=Flash" ;
+
 	';
 ?>
