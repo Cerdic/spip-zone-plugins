@@ -47,6 +47,7 @@ function action_spx_del()
 {
 	include_spip('inc/spx_init');
 	del_items($GLOBALS['spx']["dir"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

@@ -47,6 +47,7 @@ function action_spx_mkitem()
 {
 	include_spip('inc/spx_init');
 	make_item($GLOBALS['spx']["dir"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

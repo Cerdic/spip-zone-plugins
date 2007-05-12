@@ -47,6 +47,7 @@ function action_spx_show()
 {
 	include_spip('inc/spx_init');
 	show_item($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

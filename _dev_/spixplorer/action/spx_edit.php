@@ -47,6 +47,7 @@ function action_spx_edit()
 {
 	include_spip('inc/spx_init');
 	edit_file($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

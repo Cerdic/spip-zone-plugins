@@ -43,10 +43,10 @@ Comment:
 //------------------------------------------------------------------------------
 function show_footer() {			// footer for html-page
 	echo '
-<hr /><SMALL><A class="title" href="http://quixplorer.sourceforge.net">
+<hr /><div class="footer"><A class="title" href="http://quixplorer.sourceforge.net">
 QuiXplorer ' . $GLOBALS['spx']['version'] . '</A> -
-<A href="http://spip.net">SPIP</A></SMALL>
-</center></BODY>
+<A class="title" href="http://spip.net">SPIP</A></div>
+</BODY>
 </HTML>
 ';
 }

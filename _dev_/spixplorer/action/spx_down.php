@@ -47,6 +47,7 @@ function action_spx_down()
 {
 	include_spip('inc/spx_init');
 	download_item($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

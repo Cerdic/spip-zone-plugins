@@ -47,6 +47,7 @@ function action_spx_chmod()
 {
 	include_spip('inc/spx_init');
 	chmod_item($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

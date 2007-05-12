@@ -47,6 +47,7 @@ function action_spx_up()
 {
 	include_spip('inc/spx_init');
 	upload_items($GLOBALS['spx']["dir"], $GLOBALS['spx']["item"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

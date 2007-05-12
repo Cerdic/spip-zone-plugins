@@ -64,7 +64,7 @@ function show_header($title, $js = false) {			// header for html-page
 	}
 	echo '
 </HEAD>
-<BODY><center>
+<BODY>
 <table border="0" width="100%" cellspacing="0" cellpadding="5"><tbody>
 <tr><td class="title">' .
 	($GLOBALS['spx']["require_login"] && isset($GLOBALS['spx']['__SESSION']["s_user"]) ?

@@ -47,6 +47,7 @@ function action_spx_search()
 {
 	include_spip('inc/spx_init');
 	search_items($GLOBALS['spx']["dir"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

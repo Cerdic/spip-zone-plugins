@@ -47,6 +47,7 @@ function action_spx_archive()
 {
 	include_spip('inc/spx_init');
 	archive_items($GLOBALS['spx']["dir"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------

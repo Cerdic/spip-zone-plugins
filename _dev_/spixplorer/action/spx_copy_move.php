@@ -45,6 +45,7 @@ function action_spx_copy_move()
 {
 	include_spip('inc/spx_init');
 	copy_move_items($GLOBALS['spx']["dir"]);
+	exit;
 }
 
 //------------------------------------------------------------------------------
