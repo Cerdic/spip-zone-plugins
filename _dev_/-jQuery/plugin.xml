@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Librairie javascript par John Resig pour [jquery.js->http://jquery.com] et Dave Methvin pour [jq-corner.js->http://methvin.com/jquery/jq-corner-demo.html], mis en plugin par BoOz.
-	NE PAS UTILISER A PARTIR DE SPIP 1.9.2 (la librairie est integree dans SPIP)
+_ NE PAS UTILISER A PARTIR DE SPIP 1.9.2 (la librairie est int&#233;gr&#233;e dans SPIP).
 	</auteur>
 	<version>
 	1.0.4
@@ -13,7 +13,7 @@
 	stable
 	</etat>
 	<description>
-	ajoute l'appel &#224; {{jquery.js}} et {{jq-corner.js}} dans l'entete (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
+	Ajoute l'appel &#224; {{jquery.js}} et {{jq-corner.js}} dans l'ent&#234;te (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>
