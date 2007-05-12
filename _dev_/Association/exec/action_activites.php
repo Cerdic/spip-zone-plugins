@@ -30,8 +30,8 @@ function exec_action_activites(){
 	$date=$_POST['date'];
 	$nom=addslashes($_POST['nom']);
 	$id_membre=$_POST['id_membre'];
-	$non_membres=addslashes($_POST['membres']);
-	$non_membres=addslashes($_POST['membres']);
+	$membres=addslashes($_POST['membres']);
+	$non_membres=addslashes($_POST['non_membres']);
 	$inscrits=$_POST['inscrits'];
 	$email=$_POST['email'];
 	$telephone=$_POST['telephone'];
