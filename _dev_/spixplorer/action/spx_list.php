@@ -304,21 +304,14 @@ function list_dir($dir) {			// list directory contents
 ' .
 		// UPLOAD
 		(get_cfg_var("file_uploads") ?
-'<span><a href="' . make_link("up",$dir,NULL) . '">
-<img border="0" width="16" height="16" align="ABSMIDDLE"
-src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload.gif" alt="' . _T('spixplorer:uploadlink') .
-'" title="' . _T('spixplorer:uploadlink') . '"></a></span>
+'<span>' . btn_link('up', $dir) . '</span>
 '
 		:
-'<span><img border="0" width="16" height="16" align="ABSMIDDLE"
-src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:uploadlink') .
-'" title="' . _T('spixplorer:uploadlink') . '"></span>
+'<span class="inactif">' . btn_link('up', $dir) . '</span>
 '
 		) .
 		// ARCHIVE
-'<span><a href="javascript:Archive();"><img border="0" width="16" height="16"
-align="ABSMIDDLE" src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_archive.gif" alt="' .
-_T('spixplorer:comprlink') . '" title="' . _T('spixplorer:comprlink') . '"></a></span>
+'<span>' . btn_link('archive', $dir, null, 'javascript:Archive();') . '</span>
 '
 	:
 		// COPY
