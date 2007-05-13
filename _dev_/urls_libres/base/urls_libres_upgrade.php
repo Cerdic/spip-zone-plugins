@@ -14,9 +14,11 @@
 			}
 			ecrire_metas();
 		}
+		spip_log('install urls libres: ' . $version_cible);
 	}
 	
 	function urls_libres_vider_tables($nom_meta_base_version) {
+		spip_log('uninstall urls libres: ' . $GLOBALS['meta'][$nom_meta_base_version]);
 		include_spip('base/urls_libres_serial');
 		include_spip('base/abstract_sql');
 		spip_query("DROP TABLE spip_urls");
