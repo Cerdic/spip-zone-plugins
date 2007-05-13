@@ -25,4 +25,14 @@ $spip_urls = array(
 $spip_urls_key = array(
 	"PRIMARY KEY"		=> "url",
 	"KEY type"	=> "type, id_objet"); // unique
+
+$tables_principales['spip_urls'] =
+	array('field' => &$spip_urls, 'key' => &$spip_urls_key);
+
+$table_primary['urls'] = "url";
+
+// ??? $table_date['urls'] = 'maj';
+
+$table_des_tables['urls'] = 'urls';
+
 ?>

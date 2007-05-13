@@ -8,6 +8,9 @@
 	<version>
 	0.0.1
 	</version>
+	<version_base>
+	0.1
+	</version_base>
 	<etat>
 	dev
 	</etat>
@@ -26,4 +29,7 @@ ce qui a &eacute;t&eacute; d&eacute;j&agrave; diffus&eacute;.
 	<options>
 	urls_libres_options.php
 	</options>
+	<install>
+	base/urls_libres_upgrade.php
+	</install>
 </plugin>
