@@ -290,8 +290,8 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 <label>Qui peut effectuer des <strong>sauvegardes</strong>&nbsp;?
 <br />
 <select name="sauvegarder">
-	<option value=""[ selected="(#ENV{sauvegarder}|=={''}|?{selected})"]>Tous les administrateurs (y compris restreints)</option>
-	<option value="admin"[ selected="(#ENV{sauvegarder}|=={admin}|?{selected})"]>Les administrateurs</option>
+	<option value=""[ selected="(#ENV{sauvegarder}|=={''}|?{selected})"]>Les administrateurs</option>
+	<option value="admin"[ selected="(#ENV{sauvegarder}|=={minirezo}|?{selected})"]>admins... y compris restreints</option>
 	<option value="webmestre"[ selected="(#ENV{sauvegarder}|=={webmestre}|?{selected})"]>Le webmestre</option>
 	<option value="non"[ selected="(#ENV{sauvegarder}|=={non}|?{selected})"]>Personne</option>
 </select>

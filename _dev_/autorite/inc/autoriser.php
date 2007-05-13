@@ -381,15 +381,18 @@ function autoriser_sauvegarder($faire, $type, $id, $qui, $opt) {
 	if ($GLOBALS['autorite']['sauvegarder'] == 'webmestre')
 		return autoriser('webmestre');
 
-	if ($GLOBALS['autorite']['sauvegarder'] == 'admin')
+	// admins y compris restreints
+	if ($GLOBALS['autorite']['sauvegarder'] == 'minirezo')
+		return
+			$qui['statut'] == '0minirezo';
+
+	// version normale
+	if ($GLOBALS['autorite']['sauvegarder'] == ''
+	OR $GLOBALS['autorite']['sauvegarder'] == 'admin' # jusque v0.7 de ce plugin
+	)
 		return
 			$qui['statut'] == '0minirezo'
 			AND !$qui['restreint'];
-
-	// version normale
-	if ($GLOBALS['autorite']['sauvegarder'] == '')
-		return
-			$qui['statut'] == '0minirezo';
 }
 } else
 	$autorite_erreurs[] = 'autoriser_sauvegarder';

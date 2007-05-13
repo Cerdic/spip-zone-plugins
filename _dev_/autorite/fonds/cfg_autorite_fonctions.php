@@ -55,13 +55,15 @@ function autorite_erreurs_version($separateur = '</li><li>')
 	if ($GLOBALS['spip_version_code'] < '1.9252') {
 		// autoriser(configurer)
 		$autorite_erreurs_version[] = _L('configurer');
-		// autoriser(sauvegarder)
-		$autorite_erreurs_version[] = _L('faire des sauvegardes');
 		// autoriser(detruire)
 		$autorite_erreurs_version[] = _L('effacer la base');
 	}
 	if ($GLOBALS['spip_version_code'] < '1.9253') {
 		$autorite_erreurs_version[] = _L('interdire la creation de rubriques');
+	}
+	if ($GLOBALS['spip_version_code'] < '1.9254') {
+		// autoriser(sauvegarder)
+		$autorite_erreurs_version[] = _L('faire des sauvegardes');
 	}
 	return join($separateur ? $separateur : '</li><li>', $autorite_erreurs_version);
 }
