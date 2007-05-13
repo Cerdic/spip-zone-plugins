@@ -10,11 +10,25 @@
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
+				urls_libres_insert();
 				ecrire_meta($nom_meta_base_version, $current_version = $version_cible, 'non');
 			}
 			ecrire_metas();
 		}
 		spip_log('install urls libres: ' . $version_cible);
+	}
+	
+	function urls_libres_insert() {
+//		include dirname(dirname(__FILE__)) . '/urls/urls_libres_generer.php';
+		foreach (array(
+				'article' => 'select id_article from spip_articles'
+			) as $objet => $query) {
+			$fun = 'generer_url_' . $objet;
+			$result = spip_query($query);
+			while ($row = spip_fetch_array($result, SPIP_NUM)) {
+				spip_log($url=$fun($row[0], false));
+			}
+		}
 	}
 	
 	function urls_libres_vider_tables($nom_meta_base_version) {

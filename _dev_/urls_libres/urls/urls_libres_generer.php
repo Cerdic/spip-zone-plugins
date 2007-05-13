@@ -11,7 +11,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+//if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 function _store_url($url, $type, $id_objet, $prefix = '')
 {
@@ -30,8 +30,8 @@ function _store_url($url, $type, $id_objet, $prefix = '')
 	}
 	return $url;
 }
-function _generer_url_libre($type, $id_objet, $prefix = '')
-{
+function _generer_url_libre($type, $id_objet, $prefix = '', $upd_objet = true)
+{spip_log($type . '/' . $id_objet . $prefix);
 	static $priotype = array(
 		'article'=>0, 'rubrique'=>1, 'mot'=>2, 'auteur'=>3,
 		'site'=>4, 'syndic'=>5, 'breve'=>6);
@@ -152,7 +152,7 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 	}
 
 	// Mettre a jour dans la table objet ?
-	spip_query("UPDATE $table SET url_propre=" . _q($url) . " WHERE $col_id=$id_objet");
+	$upd_objet && spip_query("UPDATE $table SET url_propre=" . _q($url) . " WHERE $col_id=$id_objet");
 
 	spip_release_lock($lock);
 
@@ -162,22 +162,22 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 }
 
 // http://doc.spip.org/@generer_url_article
-function generer_url_article($id_article) {
-	($url = _generer_url_libre('article', $id_article, '')) ||
+function generer_url_article($id_article, $upd_objet = true) {
+	($url = _generer_url_libre('article', $id_article, '', $upd_objet)) ||
 	($url = get_spip_script('./')."?page=article&id_article=$id_article");
 	return $url;
 }
 
 // http://doc.spip.org/@generer_url_rubrique
-function generer_url_rubrique($id_rubrique) {
-	($url = _generer_url_libre('rubrique', $id_rubrique, '-')) ||
+function generer_url_rubrique($id_rubrique, $upd_objet = true) {
+	($url = _generer_url_libre('rubrique', $id_rubrique, '-', $upd_objet)) ||
 	($url = get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique");
 	return $url;
 }
 
 // http://doc.spip.org/@generer_url_breve
-function generer_url_breve($id_breve) {
-	($url = _generer_url_libre('breve', $id_breve, '+')) ||
+function generer_url_breve($id_breve, $upd_objet = true) {
+	($url = _generer_url_libre('breve', $id_breve, '+', $upd_objet)) ||
 	($url = get_spip_script('./')."?page=breve&id_breve=$id_breve");
 	return $url;
 }
@@ -185,28 +185,28 @@ function generer_url_breve($id_breve) {
 // C'est special pour les forums, generer_url_forum_dist()
 // retourne generer_url_xxx($id)."#forum$id_forum"
 // http://doc.spip.org/@generer_url_forum
-function generer_url_forum($id_forum, $show_thread=false) {
+function generer_url_forum($id_forum, $show_thread=false, $upd_objet = true) {
 	include_spip('inc/forum');
-	return generer_url_forum_dist($id_forum, $show_thread);
+	return generer_url_forum_dist($id_forum, $show_thread);//, $upd_objet
 }
 
 // http://doc.spip.org/@generer_url_mot
-function generer_url_mot($id_mot) {
-	($url = _generer_url_libre('mot', $id_mot, '+-')) ||
+function generer_url_mot($id_mot, $upd_objet = true) {
+	($url = _generer_url_libre('mot', $id_mot, '+-', $upd_objet)) ||
 	($url = get_spip_script('./')."?page=mot&id_mot=$id_mot");
 	return $url;
 }
 
 // http://doc.spip.org/@generer_url_auteur
-function generer_url_auteur($id_auteur) {
-	($url = _generer_url_libre('auteur', $id_auteur, '_')) ||
+function generer_url_auteur($id_auteur, $upd_objet = true) {
+	($url = _generer_url_libre('auteur', $id_auteur, '_', $upd_objet)) ||
 	($url = get_spip_script('./')."?page=auteur&id_auteur=$id_auteur");
 	return $url;
 }
 
 // http://doc.spip.org/@generer_url_site
-function generer_url_site($id_syndic) {
-	($url = _generer_url_libre('site', $id_syndic, '@')) ||
+function generer_url_site($id_syndic, $upd_objet = true) {
+	($url = _generer_url_libre('site', $id_syndic, '@', $upd_objet)) ||
 	($url = get_spip_script('./')."?page=site&id_syndic=$id_syndic");
 	return $url;
 }
