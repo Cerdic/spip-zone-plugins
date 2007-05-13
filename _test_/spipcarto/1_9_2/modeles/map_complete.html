@@ -1,0 +1,45 @@
+<div class="carto_carte">
+ <BOUCLE_carte(CARTO_CARTES){id_carto_carte=#ID_MAP}>
+  <B_objets>
+  <B_objets2>
+  <div class="carto_objets">
+  <BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
+	<div style="position: absolute;[(#GEOMETRIE|wkt2coords{HTMLDIV,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" class="carto_objet carto_objet_[(#ID_CARTO_OBJET)]
+	 <BOUCLE_mot(MOTS){id_carto_objet}{par titre}{0,1}{doublons mots}>carto_mot_#ID_MOT">[(#LOGO_MOT|#_objet2:URL_OBJET)]<a 
+		[onMouseOver="$('div.carto_objet_[(#ID_CARTO_OBJET)] img').attr('src','IMG/(#LOGO_MOT_SURVOL|fichier)');" ]
+		[onMouseOut="$('div.carto_objet_[(#ID_CARTO_OBJET)] img').attr('src','IMG/(#LOGO_MOT_NORMAL|fichier)');" ]</BOUCLE_mot>"><a <//B_mot>
+	   href="[(#URL_OBJET)]" class="carto_lien"[ title='(#TEXTE|texte_script)']>#TITRE</a>
+	</div>
+  </BOUCLE_objets2>
+  </div>
+  </B_objets2>
+  <map name="map#ID_CARTO_CARTE" id="map#ID_CARTO_CARTE">
+  <BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
+	<area 
+		<BOUCLE_script(MOTS){id_carto_objet}{par titre}{0,1}>
+		[onMouseOver="$('div.carto_objet_[(#ID_CARTO_OBJET)] img').attr('src','IMG/(#LOGO_MOT_SURVOL|fichier)');" ]
+		[onMouseOut="$('div.carto_objet_[(#ID_CARTO_OBJET)] img').attr('src','IMG/(#LOGO_MOT_NORMAL|fichier)');" ]
+		</BOUCLE_script>
+		shape="[(#GEOMETRIE|wkt2shape)]" 
+		coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" 
+		href="[(#URL_OBJET|sinon{'#'})]" 
+		[alt='(#TITRE|texte_script)']
+	/>
+  </BOUCLE_objets>
+  </map>
+  </B_objets>
+  <img class="carto_fond" alt="#TITRE" 
+  		src="#URL_SITE_SPIP/spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" 
+  		usemap="#map#ID_CARTO_CARTE"  
+  		style="[height: (#ENV{args}|wkt2imgheight{#CALLAGE,#URL_CARTE})px;][width: (#ENV{args}|wkt2imgwidth{#CALLAGE,#URL_CARTE})px;]"/>
+  <B_mot2>
+  <div class="carto_mots">
+   <ul>
+  <BOUCLE_mot2(MOTS){par titre}{!doublons mots}>
+  	<li>[(#LOGO_MOT)] <a href="#" onclick="$('div.carto_mot_#ID_MOT').toggle();return false;">#TITRE</a></li>
+  </BOUCLE_mot2>
+   </ul>
+  </div>
+  </B_mot2>
+ </BOUCLE_carte>
+</div>
