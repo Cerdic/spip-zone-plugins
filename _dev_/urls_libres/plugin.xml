@@ -1,0 +1,29 @@
+<plugin>
+	<nom>
+	Urls Libres
+	</nom>
+	<auteur>bertrand Gugger [->http://toggg.com/]
+	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>
+	0.0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+_ Ce plugin permet de g&#233;rer des urls libres, autorisant plusieurs urls "propres" par objet.
+_ Notamment il mémorise les anciennes valeurs éventuelles et permet leur modification sans oublier
+ce qui a &eacute;t&eacute; d&eacute;j&agrave; diffus&eacute;.
+	</description>
+	<lien>
+	[Documentation provisoire->http://toggg.com/spip/spip.php?article19]
+	</lien>
+	<prefix>
+	urls_libres
+	</prefix>
+	<chemin dir='' />
+	<options>
+	urls_libres_options.php
+	</options>
+</plugin>
