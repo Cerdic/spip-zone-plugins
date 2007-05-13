@@ -14,7 +14,7 @@
     FCKConfig.Plugins.Add( "tablecommands", null, "' . $_GET['path'] . '/FCKeditor/editor/plugins/" ) ;		
     FCKConfig.Plugins.Add( "notebasdepage", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
     
-		FCKConfig.ToolbarSets["Spip"] = [
+		FCKConfig.ToolbarSets["BarreArticle"] = [
       	["Source","-","Save","NewPage","Preview","-","Templates"],
       	["Cut","Copy","Paste","PasteText","PasteWord","-","Print","SpellCheck"],
       	["Undo","Redo","-","Find","Replace","-","SelectAll","RemoveFormat"],

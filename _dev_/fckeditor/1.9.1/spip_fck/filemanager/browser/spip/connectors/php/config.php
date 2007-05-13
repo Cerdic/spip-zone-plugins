@@ -34,13 +34,25 @@ include ($cheminEcrire.'inc_connect.php');
 // SECURITY: You must explicitelly enable this "connector". (Set it to "true").
 $Config['Enabled'] = true ;
 
-// Path to user files relative to the document root.
 
-$chemin = split("/", $_SERVER["PHP_SELF"]);
-$chemin_final = "";
-if($chemin[1]!="plugins") $chemin_final .= "/".$chemin[1];
-$chemin_final .= "/IMG/";
-$Config['UserFilesPath'] = $chemin_final;
+
+//détermination du chemin des images de Spip par rapport à la racine du serveur
+  $chemin_final='';  
+  $dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+  $i = 0;
+  while($dir_relatif_array[$i] != 'plugins') 
+    {
+  	 $chemin_final .= $dir_relatif_array[$i]."/";
+  	 $i++;
+    }
+    $chemin_final .="IMG/";
+    $Config['CheminImgSpip'] = $chemin_final;
+
+//**************************************************************************************    
+//Décommenter cette ligne pour faire du chemin par défaut, le chemin des images de spip
+    $Config['UserFilesPath']=$Config['CheminImgSpip'];
+
+
 
 // Fill the following value it you prefer to specify the absolute path for the
 // user files directory. Usefull if you are using a virtual directory, symbolic
@@ -119,9 +131,9 @@ array_push($Config['FileNameAllowedChars'],')','(','[',']','~');
 /*  				     avec joker, placer une étoile à la fin du nom	*/
 /*--------------------------------------------------------------------------------------*/
 
-
-$Config['DeleteOk'] = true;
-$Config['RenameOk'] = true;
+//Supprimées "en hard" du fichier connector.php
+$Config['DeleteOk'] = false;
+$Config['RenameOk'] = false;
 
 // Fichier cachés
 $Config['DirNameHidden'] = array('');

@@ -28,30 +28,43 @@ if ( !$Config['Enabled'] )
 	SendError( 1, 'This connector is disabled. Please check the "editor/filemanager/browser/default/connectors/php/config.php" file' ) ;
 
 // Get the "UserFiles" path.
-$GLOBALS["UserFilesPath"] = '' ;
+    $GLOBALS["UserFilesPath"] = '' ;
 
-if ( isset( $Config['UserFilesPath'] ) )
-	$GLOBALS["UserFilesPath"] = $Config['UserFilesPath'] ;
-else if ( isset( $_GET['ServerPath'] ) )
-	$GLOBALS["UserFilesPath"] = $_GET['ServerPath'] ;
-else
-	$GLOBALS["UserFilesPath"] = '/UserFiles/' ;
+    if ( isset( $Config['UserFilesPath'] ) )
+    	$GLOBALS["UserFilesPath"] = $Config['UserFilesPath'] ;
+    else if ( isset( $_GET['ServerPath'] ) )
+    	$GLOBALS["UserFilesPath"] = $_GET['ServerPath'] ;
+    else
+    	$GLOBALS["UserFilesPath"] = '/UserFiles/' ;
 
-if ( ! ereg( '/$', $GLOBALS["UserFilesPath"] ) )
-	$GLOBALS["UserFilesPath"] .= '/' ;
 
-if ( strlen( $Config['UserFilesAbsolutePath'] ) > 0 ) 
-{
-	$GLOBALS["UserFilesDirectory"] = $Config['UserFilesAbsolutePath'] ;
+    if ( ! ereg( '/$', $GLOBALS["UserFilesPath"] ) )
+    	$GLOBALS["UserFilesPath"] .= '/' ;
 
-	if ( ! ereg( '/$', $GLOBALS["UserFilesDirectory"] ) )
-		$GLOBALS["UserFilesDirectory"] .= '/' ;
-}
-else
-{
-	// Map the "UserFiles" path to a local directory.
-	$GLOBALS["UserFilesDirectory"] = GetRootPath() . $GLOBALS["UserFilesPath"] ;
-}
+
+    if ( strlen( $Config['UserFilesAbsolutePath'] ) > 0 ) 
+    {
+    	$GLOBALS["UserFilesDirectory"] = $Config['UserFilesAbsolutePath'] ;
+
+      	if ( ! ereg( '/$', $GLOBALS["UserFilesDirectory"] ) )
+      		$GLOBALS["UserFilesDirectory"] .= '/' ;
+    }
+    else
+    {
+    	// Map the "UserFiles" path to a local directory.
+	     $GLOBALS["UserFilesDirectory"] = GetRootPath() . $GLOBALS["UserFilesPath"] ;
+    }
+//Recherche le dossier IMG Spip
+    $GLOBALS["CheminImgSpip"] = '' ;
+
+    if ( isset( $Config['CheminImgSpip'] ) )
+    	$GLOBALS["CheminImgSpip"] = $Config['CheminImgSpip'] ;
+
+
+    if ( ! ereg( '/$', $GLOBALS["CheminImgSpip"] ) )
+    	$GLOBALS["CheminImgSpip"] .= '/' ;
+
+    
 
 DoResponse() ;
 
@@ -64,10 +77,10 @@ function DoResponse()
 	$sCommand	= $_GET['Command'] ;
 	$sResourceType	= $_GET['Type'] ;
 	$sCurrentFolder	= $_GET['CurrentFolder'] ;
-	$sFileName	= $_GET['FileName'] ;
-	$nFileName	= $_GET['NewName'] ;
-	$sFolderName	= $_GET['FolderName'] ;
-	$nFolderName	= $_GET['NewName'] ;
+// 	$sFileName	= $_GET['FileName'] ;
+// 	$nFileName	= $_GET['NewName'] ;
+// 	$sFolderName	= $_GET['FolderName'] ;
+// 	$nFolderName	= $_GET['NewName'] ;
 
 	// Check if it is an allowed type.
 	if ( !in_array( $sResourceType, array('File','Image','Flash','Media','') ) )
@@ -102,18 +115,18 @@ function DoResponse()
 		case 'CreateFolder' :
 			CreateFolder( $sResourceType, $sCurrentFolder ) ;
 			break ;
-		case 'DeleteFile' :
-			DeleteFile( $sResourceType, $sCurrentFolder, $sFileName ) ;
-			break ;
-		case 'DeleteFolder' :
-			DeleteFolder( $sResourceType, $sCurrentFolder, $sFolderName ) ;
-			break ;
-		case 'RenameFile' :
-			RenameFile( $sResourceType, $sCurrentFolder, $sFileName, $nFileName ) ;
-			break ;
-		case 'RenameFolder' :
-			RenameFolder( $sResourceType, $sCurrentFolder, $sFolderName, $nFolderName ) ;
-			break ;
+// 		case 'DeleteFile' :
+// 			DeleteFile( $sResourceType, $sCurrentFolder, $sFileName ) ;
+// 			break ;
+// 		case 'DeleteFolder' :
+// 			DeleteFolder( $sResourceType, $sCurrentFolder, $sFolderName ) ;
+// 			break ;
+// 		case 'RenameFile' :
+// 			RenameFile( $sResourceType, $sCurrentFolder, $sFileName, $nFileName ) ;
+// 			break ;
+// 		case 'RenameFolder' :
+// 			RenameFolder( $sResourceType, $sCurrentFolder, $sFolderName, $nFolderName ) ;
+// 			break ;
 	}
 
 	CreateXmlFooter() ;

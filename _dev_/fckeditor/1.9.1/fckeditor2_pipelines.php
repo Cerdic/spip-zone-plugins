@@ -19,6 +19,7 @@
 
 define('_DIR_PLUGIN_FCKEDITOR',$dir_relatif._DIR_RELATIF_PLUGIN_FCKEDITOR);
 
+
 function fckeditor2_header_prive($flux) {
 	global $exec;
 
@@ -52,7 +53,7 @@ function fckeditor2_header_prive($flux) {
 			oFCKeditor.Config[ "AutoDetectLanguage" ] = false ;
 			oFCKeditor.Config[ "DefaultLanguage" ] = "'.$GLOBALS['_COOKIE']['spip_lang_ecrire'].'" ;
 			oFCKeditor.Height = "600";
-    	oFCKeditor.ToolbarSet = "Spip";
+    	oFCKeditor.ToolbarSet = "BarreArticle";
 			oFCKeditor.ReplaceTextarea();
 			$(".spip_barre").remove();
 		';
