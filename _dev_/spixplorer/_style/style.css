@@ -61,6 +61,12 @@ a:hover, a:active {
 	text-align: left;
 	margin: 2px 1%;
 }
+.toolbar form {
+	display: inline;
+}
+.toolbar input, .toolbar select {
+	margin-bottom: 8px;
+}
 .toolbar span {
 	margin: 1px 2px;
 }

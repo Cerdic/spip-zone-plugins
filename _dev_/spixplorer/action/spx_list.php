@@ -352,26 +352,25 @@ src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:up
 		echo "src=\"plugins/spixplorer/_img/_logout.gif\" alt=\""._T('spixplorer:logoutlink')."\" title=\"";
 		echo _T('spixplorer:logoutlink')."\"></a></span>\n";
 	}
-	echo "</span>\n";
+//	echo "</span>\n";
 	
 	// Create File / Dir
 	if($allow) {
 		list($arg, $hash) = make_hash('mkitem', $dir);
 		echo
-'<span align="right"><table><FORM action="spip.php" method="post" name="creaform">
-<span>
-<input type="hidden" name="action" value="spx_mkitem">
-<input type="hidden" name="arg" value="' . $arg . '">
-<input type="hidden" name="hash" value="' . $hash . '">
-<input type="hidden" name="dir" value="' . $dir . '">
+'<FORM action="spip.php" method="post" name="creaform"><span align="right">
+<input type="hidden" name="action" value="spx_mkitem" />
+<input type="hidden" name="arg" value="' . $arg . '" />
+<input type="hidden" name="hash" value="' . $hash . '" />
+<input type="hidden" name="dir" value="' . $dir . '" />
 <SELECT name="mktype">
 <option value="file">' . $GLOBALS['spx']['mimes']['file'] . '</option>
 <option value="dir">' . $GLOBALS['spx']['mimes']['dir'] . '</option>
 <option value="archive">' . _T('spixplorer:comprlink') . '</option>
 </SELECT>
-<input name="mkname" type="text" size="15">
-<input type="submit" value="' . _T('spixplorer:btncreate') .
-'"></span></FORM>
+<input name="mkname" type="text" size="15" />
+<input type="submit" value="' . _T('spixplorer:btncreate') . '" />
+</span></FORM>
 ';
 	}
 	
@@ -383,7 +382,7 @@ src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:up
 	
 	// Begin Table + Form for checkboxes
 	echo '
-		<table width="95%"><FORM name="selform" method="POST" action="spip.php" id="selform">
+		<FORM name="selform" method="POST" action="spip.php" id="selform">
 		<input type="hidden" name="action" id="action">
 		<input type="hidden" name="do_action">
 		<input type="hidden" name="namearch">
@@ -404,7 +403,7 @@ src="' . _DIR_PLUGIN_SPIXPLORER . '_img/_upload_.gif" alt="' . _T('spixplorer:up
 	
 	// Table Header
 	echo
-'<tr><td colspan="8"><hr /></td></tr><tr><td width="2%" class="header">
+'<table width="95%"><tr><td colspan="8"><hr /></td></tr><tr><td width="2%" class="header">
 <input type="checkbox" name="toggleAllC" id="toggle_all"></td>
 <td class="header"><b><a href="' . make_link("list", $dir, NULL, "name",
  $GLOBALS['spx']["order"] == "name" ? $_srt : "yes") . '">' . _T('spixplorer:nameheader') .
@@ -441,7 +440,7 @@ _T('spixplorer:miscfree') . ': ' .
 		echo '<td class="header"></td>';
 	}
 	echo '</tr>
-<tr><td colspan="8"><hr /></td></tr></FORM></table>
+<tr><td colspan="8"><hr /></td></tr></table></FORM>
 ';
 
 	show_footer();
