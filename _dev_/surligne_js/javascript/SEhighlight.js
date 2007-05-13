@@ -103,7 +103,7 @@
       [/[\xD9-\xDC]/ig,'u'],
       [/\xFF/ig,'y'],
       [/\xD1/ig,'n'],
-      [/\x91\x92/ig,'\'']
+      [/[\x91\x92]/ig,'\'']
     ],
     matchAccent : /[\xC0-\xC5\xC7-\xCF\xD1-\xD6\xD8-\xDC\xFF]/ig,  
 		replaceAccent: function(q) {
