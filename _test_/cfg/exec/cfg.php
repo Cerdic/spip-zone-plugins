@@ -14,7 +14,7 @@ function exec_cfg_dist($class = null)
 	    class cfg extends cfg_dist { }
 	} 
 
-	$config = new $class(
+	$config = & new $class(
 		($nom = _request('cfg'))? $nom : 'cfg',
 		($vue = _request('vue'))? $vue : $nom,
 		($cfg_id = _request('cfg_id'))? $cfg_id : ''
