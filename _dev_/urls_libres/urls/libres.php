@@ -42,7 +42,7 @@ c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
 	define ('_terminaison_urls_propres', '');
 	define ('_debut_urls_propres', '');
 
-	include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'analyser.php';
-	include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'generer.php';
+	include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'urls_libres_analyser.php';
+	include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'urls_libres_generer.php';
 }
 ?>
