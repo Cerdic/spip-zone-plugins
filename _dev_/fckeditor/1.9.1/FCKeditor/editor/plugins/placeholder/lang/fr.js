@@ -21,7 +21,7 @@
  * Placholder French language file.
  */
 FCKLang.PlaceholderBtn			= 'Insérer/Modifier une note de bas de page' ;
-FCKLang.PlaceholderDlgTitle		= 'Propriétés de la note de bas de page' ;
-FCKLang.PlaceholderDlgName		= 'Nom de la note de bas de page' ;
-FCKLang.PlaceholderErrNoName	= 'Veuillez saisir le nom de la note de bas de page' ;
-FCKLang.PlaceholderErrNameInUse	= 'Ce nom est déjà utilisé' ;
+FCKLang.PlaceholderDlgTitle		= 'Note de bas de page' ;
+FCKLang.PlaceholderDlgName		= 'Texte de la note de bas de page :' ;
+FCKLang.PlaceholderErrNoName	= 'Veuillez saisir le texte de la note de bas de page' ;
+FCKLang.PlaceholderErrNameInUse	= 'Ce texte est déjà utilisé' ;

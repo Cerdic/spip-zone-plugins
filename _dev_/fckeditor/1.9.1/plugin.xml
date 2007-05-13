@@ -12,12 +12,12 @@ Cette version semble stable, n&#233;anmoins, il se peut que certains firewalls b
 -* - Seule la zone &laquo;texte&raquo; est &#233;ditable,
 -* - Se substitue &#224; la barre SPIP mais propose une option pour la r&#233;&#233;dition d'article initalement &#233;cris avec l'&#233;diteur SPIP,
 -* - G&#233;n&#232;re du HTML,
--* - Bas&#233; sur FCKeditor 2.42 modifi&#233;,
+-* - Bas&#233; sur FCKeditor 2.42,
 -* - Ajout d'une aide &#224; l'utilisation en fran&ccedil;ais,
 -* - Possibilit&#233; de lier et d'ins&#233;rer des fichiers et images envoy&#233;s par SPIP,
 -* - Possibilit&#233; de supprimer et renommer les fichiers envoy&#233;s par FCKeditor.
 -* - Int&#233;gration du plugin d'&#233;dition de tableau.
--* - Int&#233;gration du plugin "Notes de bas de page".
+-* - Cr&#233;ation du plugin &laquo;Notes de bas de page&raquo; &#224; partir de &laquo;placeholder&raquo;.
 
 <u>Limitations</u>
 -* - Ne pas mixer pour un m&#234;me article l'&#233;dition WYSIWYG et le code SPIP,

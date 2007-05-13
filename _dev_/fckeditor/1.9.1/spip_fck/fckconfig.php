@@ -12,7 +12,7 @@
 		// Ajout des plug-ins
 		FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
     FCKConfig.Plugins.Add( "tablecommands", null, "' . $_GET['path'] . '/FCKeditor/editor/plugins/" ) ;		
-    FCKConfig.Plugins.Add( "placeholder", "en,it,de,fr","' . $_GET['path'] . '/FCKeditor/editor/plugins/" ) ;
+    FCKConfig.Plugins.Add( "notebasdepage", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
     
 		FCKConfig.ToolbarSets["Spip"] = [
       	["Source","-","Save","NewPage","Preview","-","Templates"],
@@ -24,7 +24,7 @@
       	["OrderedList","UnorderedList","-","Outdent","Indent"],
       	["JustifyLeft","JustifyCenter","JustifyRight","JustifyFull"],
       	["Link","Unlink","Anchor"],
-      	["Image","Flash","Rule","Smiley","SpecialChar","PageBreak","Placeholder"],
+      	["Image","Flash","Rule","Smiley","SpecialChar","PageBreak","notebasdepage"],
       	["Table","-","TableInsertRow","TableDeleteRows","TableInsertColumn","TableDeleteColumns","TableInsertCell","TableDeleteCells","TableMergeCells","TableSplitCell"],
       	"/",
       	["Style","FontFormat","FontName","FontSize"],
