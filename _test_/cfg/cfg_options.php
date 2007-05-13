@@ -62,13 +62,17 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 			$id = explode(':', array_shift($cfg));
 			list($table, $colid) = get_table_id(array_shift($id));
 		}
-	} else {
+	} elseif ($cfg) {
 		// on peut aussi comme cfg_extrapack donner directement table et le reste
-		$tmp = $cfg; // le piege du list()
-		list($table, $colid, $id, $cfg) = $tmp;
-		if (!$colid) {
+		list($table, $colid, $id, $cfg) = array_pad($cfg, '', 4);
+		if ($table && !$colid) {
 			list($table, $colid) = get_table_id($table);
 		}
+		if (!is_array($cfg)) {
+			$cfg = explode('/', $cfg);
+		}
+	} else {
+		$cfg = array();
 	}
 	// dans une table
 	if ($table) {
