@@ -169,6 +169,20 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 	return finir_url_libre_dist($url, $opt);
 }
 
+// calcul a partir de $url et $opt
+function finir_url_libre_calcul($url, $opt)
+{
+	return ($url = ($url ?
+			  (isset($opt['qs']) ? $opt['qs'] : _qs_urls_libres)
+			. (isset($opt['debut']) ? $opt['debut'] : _debut_urls_libres)
+			. $url
+			. (isset($opt['terminaison']) ? $opt['terminaison'] : _terminaison_urls_libres) 
+			: $opt['def']))
+		. ($opt['args'] ?
+			(((strpos($url, '?') === false) ? '?' : '&') . $opt['args']) : '')
+		. ($opt['ancre'] ? '#'. $opt['ancre'] : '');
+}
+
 // le traitement final
 function finir_url_libre_dist($url, $opt = array(
 			// defaut si $url est vide
@@ -185,18 +199,19 @@ function finir_url_libre_dist($url, $opt = array(
 			'ancre' => 			''
 			))
 {
+	// ce qu'on rend sans custom mais qu'on lui soumet au cas ou
+	$opt['dist'] = finir_url_libre_calcul($url, $opt);
+	// finir_url_libre redefinie ?
 	if (function_exists('finir_url_libre')) {
-		return finir_url_libre($url, $opt);
+		// custom ne dit rien ... mais peut changer $url ou $opt
+		if (is_null($custom = finir_url_libre($url, $opt))) {
+			// on recalcule donc
+			return finir_url_libre_calcul($url, $opt);
+		}
+		return $custom;
 	}
-	return ($url = ($url ?
-			  (isset($opt['qs']) ? $opt['qs'] : _qs_urls_libres)
-			. (isset($opt['debut']) ? $opt['debut'] : _debut_urls_libres)
-			. $url
-			. (isset($opt['terminaison']) ? $opt['terminaison'] : _terminaison_urls_libres) 
-			: $opt['def']))
-		. ($opt['args'] ?
-			(((strpos($url, '?') === false) ? '?' : '&') . $opt['args']) : '')
-		. ($opt['ancre'] ? '#'. $opt['ancre'] : '');
+	// pas de custom, rien ne change
+	return $opt['dist'];
 }
 
 // http://doc.spip.org/@generer_url_article
