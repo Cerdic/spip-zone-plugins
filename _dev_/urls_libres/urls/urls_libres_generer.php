@@ -169,14 +169,30 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 	return finir_url_libre_dist($url, $opt);
 }
 
-
-function finir_url_libre_dist($url, $opt = array('args' => '', 'ancre' => '', 'def' => ''))
+// le traitement final
+function finir_url_libre_dist($url, $opt = array(
+			// defaut si $url est vide
+			'def' =>			'',
+			// a rajouter en marque query string ("./?")
+			'qs' =>				null,
+			// avant $url
+			'debut' =>			null,
+			// apres $url
+			'terminaison' =>	null,
+			// arguments (GET) optionnels, ne pas commencer par ? ni &
+			'args' => 			'',
+			// l'ancre finale dans la page sans le #
+			'ancre' => 			''
+			))
 {
 	if (function_exists('finir_url_libre')) {
 		return finir_url_libre($url, $opt);
 	}
 	return ($url = ($url ?
-			  _qs_urls_libres . _debut_urls_libres . $url . _terminaison_urls_libres
+			  (isset($opt['qs']) ? $opt['qs'] : _qs_urls_libres)
+			. (isset($opt['debut']) ? $opt['debut'] : _debut_urls_libres)
+			. $url
+			. (isset($opt['terminaison']) ? $opt['terminaison'] : _terminaison_urls_libres) 
 			: $opt['def']))
 		. ($opt['args'] ?
 			(((strpos($url, '?') === false) ? '?' : '&') . $opt['args']) : '')
