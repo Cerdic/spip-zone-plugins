@@ -15,7 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'toutes'=>'toutes',
 'changer'=>'Changer',
 'voir_toutes_noisettes'=>'Voir toutes les noisettes',
-'ajout_noisette_texte'=>'Ajouter une noisette ou un texte',
+'ajout_noisette'=>'Ajouter une noisette&nbsp;:',
+'ajout_texte'=>'Ajouter un texte&nbsp;:',
 'ajout_selection_noisette'=>'S&eacute;lectionnez une noisette &agrave; ajouter&nbsp;:',
 
 
