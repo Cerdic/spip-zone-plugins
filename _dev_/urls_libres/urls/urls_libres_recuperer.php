@@ -122,6 +122,11 @@ function recuperer_parametres_url(&$fond, $url) {
 
 		if ($row = spip_fetch_array($result)) {
 			$contexte[$col_id] = $row[$col_id];
+			// generer spip_urls pour la prochaine fois
+			if (function_exists($fun = 'generer_url_' . $type)) {
+				$gurl = $fun($row[$col_id]);
+				spip_log('url libre generee sur demande: ' . $gurl);
+			}
 		}
 	}
 
