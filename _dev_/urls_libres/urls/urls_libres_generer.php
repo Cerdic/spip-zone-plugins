@@ -170,12 +170,14 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 }
 
 
-function finir_url_libre_dist($url, $opt = array('args' => '', 'ancre' => ''))
+function finir_url_libre_dist($url, $opt = array('args' => '', 'ancre' => '', 'def' => ''))
 {
 	if (function_exists('finir_url_libre')) {
 		return finir_url_libre($url, $opt);
 	}
-	return _qs_urls_libres . _debut_urls_libres . $url . _terminaison_urls_libres
+	return ($url = ($url ?
+			  _qs_urls_libres . _debut_urls_libres . $url . _terminaison_urls_libres
+			: $opt['def']))
 		. ($opt['args'] ?
 			(((strpos($url, '?') === false) ? '?' : '&') . $opt['args']) : '')
 		. ($opt['ancre'] ? '#'. $opt['ancre'] : '');
@@ -183,26 +185,23 @@ function finir_url_libre_dist($url, $opt = array('args' => '', 'ancre' => ''))
 
 // http://doc.spip.org/@generer_url_article
 function generer_url_article($id_article, $args='', $ancre='') {
-	($url = _generer_url_libre('article', $id_article, '',
-				array('args' => $args, 'ancre' => $ancre))) ||
-	($url = get_spip_script('./')."?page=article&id_article=$id_article");
-	return $url;
+	return _generer_url_libre('article', $id_article, '',
+				array('args' => $args, 'ancre' => $ancre,
+				 'def' =>  get_spip_script('./')."?page=article&id_article=$id_article"));
 }
 
 // http://doc.spip.org/@generer_url_rubrique
 function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
-	($url = _generer_url_libre('rubrique', $id_rubrique, '-',
-				array('args' => $args, 'ancre' => $ancre))) ||
-	($url = get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique");
-	return $url;
+	return _generer_url_libre('rubrique', $id_rubrique, '-',
+				array('args' => $args, 'ancre' => $ancre,
+				 'def' =>  get_spip_script('./')."?page=rubrique&id_rubrique=$id_rubrique"));
 }
 
 // http://doc.spip.org/@generer_url_breve
 function generer_url_breve($id_breve, $args='', $ancre='') {
-	($url = _generer_url_libre('breve', $id_breve, '+',
-				array('args' => $args, 'ancre' => $ancre))) ||
-	($url = get_spip_script('./')."?page=breve&id_breve=$id_breve");
-	return $url;
+	return _generer_url_libre('breve', $id_breve, '+',
+				array('args' => $args, 'ancre' => $ancre,
+				 'def' =>  get_spip_script('./')."?page=breve&id_breve=$id_breve"));
 }
 
 // C'est special pour les forums, generer_url_forum_dist()
@@ -215,26 +214,23 @@ function generer_url_forum($id_forum, $args='', $ancre='', $show_thread=false) {
 
 // http://doc.spip.org/@generer_url_mot
 function generer_url_mot($id_mot, $args='', $ancre='') {
-	($url = _generer_url_libre('mot', $id_mot, '+-',
-				array('args' => $args, 'ancre' => $ancre))) ||
-	($url = get_spip_script('./')."?page=mot&id_mot=$id_mot");
-	return $url;
+	return _generer_url_libre('mot', $id_mot, '+-',
+				array('args' => $args, 'ancre' => $ancre,
+				 'def' =>  get_spip_script('./')."?page=mot&id_mot=$id_mot"));
 }
 
 // http://doc.spip.org/@generer_url_auteur
 function generer_url_auteur($id_auteur, $args='', $ancre='') {
-	($url = _generer_url_libre('auteur', $id_auteur, '_',
-				array('args' => $args, 'ancre' => $ancre))) ||
-	($url = get_spip_script('./')."?page=auteur&id_auteur=$id_auteur");
-	return $url;
+	return _generer_url_libre('auteur', $id_auteur, '_',
+				array('args' => $args, 'ancre' => $ancre,
+				 'def' =>  get_spip_script('./')."?page=auteur&id_auteur=$id_auteur"));
 }
 
 // http://doc.spip.org/@generer_url_site
 function generer_url_site($id_syndic, $args='', $ancre='') {
-	($url = _generer_url_libre('site', $id_syndic, '@',
-				array('args' => $args, 'ancre' => $ancre))) ||
-	($url = get_spip_script('./')."?page=site&id_syndic=$id_syndic");
-	return $url;
+	return _generer_url_libre('site', $id_syndic, '@',
+				array('args' => $args, 'ancre' => $ancre,
+				 'def' =>  get_spip_script('./')."?page=site&id_syndic=$id_syndic"));
 }
 
 // http://doc.spip.org/@generer_url_document
