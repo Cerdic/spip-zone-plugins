@@ -13,7 +13,7 @@
 
 //if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
-function _store_url($url, $type, $id_objet, $prefix = '')
+function _store_url($url, $type, $id_objet, $prefix = '', $version)
 {
 	$url = _debut_urls_propres . $prefix . $url .
 			strrev($prefix) . _terminaison_urls_propres;
@@ -22,13 +22,12 @@ function _store_url($url, $type, $id_objet, $prefix = '')
 	if (($result = spip_query(
 		"SELECT type, id_objet, version from spip_urls WHERE url=$q_url"))
 	 &&	($deja = spip_fetch_array($result))) {
-		$version = $deja['version'] + 1;
 		spip_query("UPDATE spip_urls SET
 			version=$version, maj=NOW(), type=$q_type, id_objet=$id_objet
 			WHERE url=$q_url");
 	} else {
 		spip_query("INSERT INTO spip_urls (url, type, id_objet, version, maj)
-			VALUE ($q_url, $q_type, $id_objet, 0, NOW())");
+			VALUE ($q_url, $q_type, $id_objet, $version, NOW())");
 	}
 	return $url;
 }
@@ -126,25 +125,30 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 	AND preg_match(',^(article|breve|rubrique|mot|auteur)[0-9]+$,', $url))
 		$url = $url.','.$id_objet;
 
-	// Mettre a jour l'url
-	// Inserer la nouvelle reference absolue
-	$url_abs = _store_url($url, $type, $id_objet, $prefix);
-
-	$url = _debut_urls_propres . $url . _terminaison_urls_propres;
-
-	// url deja utilisee ?
-	if (($result = spip_query('SELECT type, id_objet from spip_urls WHERE url=' . _q($url)))
-		&& ($deja = spip_fetch_array($result))) {
-		// utilisee par un type prioritaire ? ==> que l'url absolue
-		if ($priotype[$deja['type']] < $priotype[$type]) {
-			return $url_abs;
-		}
-	}
-
-	$q_url = _q($url);
-
 	// store est ce qui existe deja pour l'objet, si pas vide c'est qu'on change
 	$version = $store ? $store['version'] + 1 : 0;
+
+	// Mettre a jour l'url
+	// Inserer la nouvelle reference absolue
+	if ($prefix) {
+		$url_abs = _store_url($url, $type, $id_objet, $prefix, $version++);
+
+		$url = _debut_urls_propres . $url . _terminaison_urls_propres;
+		$q_url = _q($url);
+
+		// url deja utilisee ?
+		if (($result = spip_query('SELECT type, id_objet from spip_urls WHERE url=' . $q_url))
+			&& ($deja = spip_fetch_array($result))) {
+			// utilisee par un type prioritaire ? ==> que l'url absolue
+			if ($priotype[$deja['type']] < $priotype[$type]) {
+				return $url_abs;
+			}
+		}
+	} else {
+		$url = _debut_urls_propres . $url . _terminaison_urls_propres;
+		$q_url = _q($url);
+	}
+
 	// deja est ce qui etait reference pour l'url
 	if ($deja) {
 		// on ecrase l'url non prioritaire
