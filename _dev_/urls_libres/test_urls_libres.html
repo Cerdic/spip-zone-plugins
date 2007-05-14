@@ -1,0 +1,53 @@
+#CACHE{0}
+<BOUCLE_url_principal(SPIP_URLS) {url}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_url">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	&gt; <:info_urls:>[ &gt; (#URL|couper{80})]</div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : affichage de l'url ]
+		<div id="contenu"><dl>
+
+			<dt>&#035;TYPE</dt>
+			<dd>#TYPE</dd>
+
+			<dt>&#035;ID_OBJET</dt>
+			<dd>#ID_OBJET</dd>
+
+			<dt>&#035;VERSION</dt>
+			<dd>#VERSION</dd>
+
+		</dl></div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_url_principal>
