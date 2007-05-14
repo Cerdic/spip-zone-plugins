@@ -72,7 +72,7 @@
 	
 	function boucle_TABLES_dist($id_boucle, &$boucles){
 		if (function_exists($f='boucle_FORMS') OR function_exists($f='boucle_FORMS_dist'))
-			return $f($id_boucle, &$boucles);
+			return $f($id_boucle, $boucles);
 		else {
 			$boucle = &$boucles[$id_boucle];
 			$id_table = $boucle->id_table;
@@ -82,7 +82,7 @@
 	}
 	function boucle_DONNEES($id_boucle, &$boucles){
 		if (function_exists($f='boucle_FORMS_DONNEES') OR function_exists($f='boucle_FORMS_DONNEES_dist'))
-			return $f($id_boucle, &$boucles);
+			return $f($id_boucle, $boucles);
 	}
 	//
 	// <BOUCLE(FORMS_DONNEES)>
@@ -190,7 +190,7 @@ code;
 
 	function boucle_TABLE_CHAMPS_dist($id_boucle, &$boucles){
 		if (function_exists($f='boucle_FORMS_CHAMPS') OR function_exists($f='boucle_FORMS_CHAMPS_dist'))
-			return $f($id_boucle, &$boucles);
+			return $f($id_boucle, $boucles);
 	}
 	//
 	// <BOUCLE(FORMS_CHAMPS)>
@@ -208,7 +208,7 @@ code;
 	
 	function boucle_DONNEE_CHAMPS_dist($id_boucle, &$boucles){
 		if (function_exists($f='boucle_FORMS_DONNEES_CHAMPS') OR function_exists($f='boucle_FORMS_DONNEES_CHAMPS_dist'))
-			return $f($id_boucle, &$boucles);
+			return $f($id_boucle, $boucles);
 	}
 	//
 	// <BOUCLE(FORMS_DONNEES_CHAMPS)>

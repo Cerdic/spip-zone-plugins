@@ -47,7 +47,7 @@ function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) 
 }
 // en cas d'appel avec le nom de la table (crayons)
 function autoriser_forms_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
-	return autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt);
+	return autoriser_donnee_dist($faire,"donnee",$id_donnee,$qui,$opt);
 }
 function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	static $types = array();
