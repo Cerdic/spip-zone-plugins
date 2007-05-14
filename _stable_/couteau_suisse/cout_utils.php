@@ -107,7 +107,7 @@ function cs_get_defaut($variable) {
 //cs_log("cs_get_defaut() - \$defaut[{$variable['nom']}] = $defaut");
 	eval("\$defaut=$defaut;");
 	$defaut2 = cs_php_format($defaut, $variable['format']!='nombre');
-cs_log(" -- cs_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
+//cs_log(" -- cs_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
 	return $defaut2;
 }
 // installation de $cs_metas_pipelines

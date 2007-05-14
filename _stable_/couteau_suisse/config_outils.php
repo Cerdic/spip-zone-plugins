@@ -307,7 +307,11 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'decoupe',
-	'code:options' => "define('_decoupe_SEPARATEUR', '++++');",
+	'code:options' => "define('_decoupe_SEPARATEUR', '++++');
+if (isset(\$_GET['var_recherche'])) {
+	include_spip('inc/headers');
+	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
+}",
 	'code:css' => "div.decoupe_haut, div.decoupe_bas {display:block; text-align:center; }",
 	// inserer : $table_des_traitements['TEXTE'][]= 'decouper_en_pages(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'decouper_en_pages',
@@ -358,7 +362,6 @@ add_outil( array(
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 	'categorie' => 'public',
 ));
-
 
 
 //-----------------------------------------------------------------------------//
