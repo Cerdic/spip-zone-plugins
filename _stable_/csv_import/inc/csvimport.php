@@ -161,11 +161,15 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 		echo "</table>";
 		echo "</div>\n";
 	}
-	$out = "";
+	$out = "<br />";
 	if (defined('_DIR_PLUGIN_FORMS')&&($GLOBALS['meta']['forms_base_version']>0.17)){
-		include_spip('public/assembler');
-		$contexte = array('type_form'=>'table','titre_liste'=>_T("forms:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-		$out .= "<br/>" . recuperer_fond("exec/template/tables_import_tous",$contexte);
+		if (include_spip('inc/forms_tables_affichage'))
+			$out .= afficher_tables_tous_corps('table');
+		else {
+			include_spip('public/assembler');
+			$contexte = array('type_form'=>'table','titre_liste'=>_T("forms:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+			$out .= recuperer_fond("exec/template/tables_import_tous",$contexte);
+		}
 		echo $out;
 	}
 	
