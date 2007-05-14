@@ -1,5 +1,5 @@
 #CACHE{0}
-<BOUCLE_url_principal(SPIP_URLS) {url}>
+<BOUCLE_url_principal(SPIP_URLS) {id_url=1}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -20,19 +20,49 @@
 
 	<div id="conteneur">
 
-		[(#REM) Contenu principal : affichage de l'url ]
-		<div id="contenu"><dl>
+		[(#REM) Contenu principal : affichage des urls ]
+		<div id="contenu">
+			<div id="boucle">
+				<B_url_boucle>
+				<table>
+				<thead>
+				<tr>
+				<td>&#035;URL</td>
+				<td>&#035;TYPE</td>
+				<td>&#035;ID_OBJET</td>
+				<td>&#035;VERSION</td>
+				</tr>
+				</thead>
+				<tbody>
+				<BOUCLE_url_boucle(SPIP_URLS) {par url} {0,50}>
+					<tr>
+					<td>#URL</td>
+					<td>#TYPE</td>
+					<td>#ID_OBJET</td>
+					<td>#VERSION</td>
+					</tr>
+				</BOUCLE_url_boucle>
+				<tbody>
+				</table>
+				</B_url_boucle>
+				Rien dans spip_urls :(
+				<//B_url_boucle>
+			</div><!-- fin boucle -->
+			<div id="endessous"><h3><hr />id_url == 1</h3>
+				<dl>
 
-			<dt>&#035;TYPE</dt>
-			<dd>#TYPE</dd>
+					<dt>&#035;TYPE</dt>
+					<dd>#TYPE</dd>
 
-			<dt>&#035;ID_OBJET</dt>
-			<dd>#ID_OBJET</dd>
+					<dt>&#035;ID_OBJET</dt>
+					<dd>#ID_OBJET</dd>
 
-			<dt>&#035;VERSION</dt>
-			<dd>#VERSION</dd>
+					<dt>&#035;VERSION</dt>
+					<dd>#VERSION</dd>
 
-		</dl></div><!-- fin contenu -->
+				</dl>
+			</div><!-- fin endessous -->
+		</div><!-- fin contenu -->
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
