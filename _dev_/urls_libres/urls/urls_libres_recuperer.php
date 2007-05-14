@@ -74,42 +74,55 @@ function recuperer_parametres_url(&$fond, $url) {
 	}
 	if (!$url_propre) return;
 
-	// Compatilibite avec propres2
-	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
+	// Compatilibite avec propres2 et constantes hors url
+	$url_propre = preg_replace(
+		array(	',\.html$,i',
+				'/^' . preg_quote(_debut_urls_libres) . '/',
+				'/' . preg_quote(_terminaison_urls_libres) . '$/'
+			 ), '', $url_propre);
 
-	// Detecter les differents types d'objets demandes
-	if (preg_match(',^\+-(.*?)-?\+?$,', $url_propre, $regs)) {
-		$type = 'mot';
-		$url_propre = $regs[1];
-	}
-	else if (preg_match(',^-(.*?)-?$,', $url_propre, $regs)) {
-		$type = 'rubrique';
-		$url_propre = $regs[1];
-	}
-	else if (preg_match(',^\+(.*?)\+?$,', $url_propre, $regs)) {
-		$type = 'breve';
-		$url_propre = $regs[1];
-	}
-	else if (preg_match(',^_(.*?)_?$,', $url_propre, $regs)) {
-		$type = 'auteur';
-		$url_propre = $regs[1];
-	}
-	else if (preg_match(',^@(.*?)@?$,', $url_propre, $regs)) {
-		$type = 'syndic';
-		$url_propre = $regs[1];
-	}
-	else {
-		$type = 'article';
-		preg_match(',^(.*)$,', $url_propre, $regs);
-		$url_propre = $regs[1];
-	}
-
-	$table = "spip_".table_objet($type);
-	$col_id = id_table_objet($type);
-	$result = spip_query("SELECT $col_id FROM $table WHERE url_propre=" . _q($url_propre));
+	// rechercher dans la table des urls
+	$result = spip_query("SELECT * FROM spip_urls WHERE url=" . _q($url_propre));
 
 	if ($row = spip_fetch_array($result)) {
-		$contexte[$col_id] = $row[$col_id];
+		$col_id = id_table_objet($type = $row['type']);
+		$contexte[$col_id] = $row['id_objet'];
+	} else {
+		// mode transitoire repris de propres ?
+		// Detecter les differents types d'objets demandes d'apres "hieroglyphes"
+		if (preg_match(',^\+-(.*?)-?\+?$,', $url_propre, $regs)) {
+			$type = 'mot';
+			$url_propre = $regs[1];
+		}
+		else if (preg_match(',^-(.*?)-?$,', $url_propre, $regs)) {
+			$type = 'rubrique';
+			$url_propre = $regs[1];
+		}
+		else if (preg_match(',^\+(.*?)\+?$,', $url_propre, $regs)) {
+			$type = 'breve';
+			$url_propre = $regs[1];
+		}
+		else if (preg_match(',^_(.*?)_?$,', $url_propre, $regs)) {
+			$type = 'auteur';
+			$url_propre = $regs[1];
+		}
+		else if (preg_match(',^@(.*?)@?$,', $url_propre, $regs)) {
+			$type = 'syndic';
+			$url_propre = $regs[1];
+		}
+		else {
+			$type = 'article';
+			preg_match(',^(.*)$,', $url_propre, $regs);
+			$url_propre = $regs[1];
+		}
+
+		$table = "spip_".table_objet($type);
+		$col_id = id_table_objet($type);
+		$result = spip_query("SELECT $col_id FROM $table WHERE url_propre=" . _q($url_propre));
+
+		if ($row = spip_fetch_array($result)) {
+			$contexte[$col_id] = $row[$col_id];
+		}
 	}
 
 	// En mode Query-String, on fixe ici le $fond utilise

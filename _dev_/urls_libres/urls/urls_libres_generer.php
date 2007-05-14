@@ -11,12 +11,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 function _store_url($url, $type, $id_objet, $prefix = '', $version)
 {
-	$url = _debut_urls_propres . $prefix . $url .
-			strrev($prefix) . _terminaison_urls_propres;
+	$url = $prefix . $url .	strrev($prefix);
 	$q_url = _q($url);
 	$q_type = _q($type);
 	if (($result = spip_query(
@@ -83,7 +82,7 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 		$modif_url_libre = true;
 
 	if ($store && $store['url'] && !$modif_url_libre)
-		return $store['url'];
+		return finir_url_libre_dist($store['url']);
 
 	// Sinon, creer l'URL
 	include_spip('inc/filtres');
@@ -133,7 +132,6 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 	if ($prefix) {
 		$url_abs = _store_url($url, $type, $id_objet, $prefix, $version++);
 
-		$url = _debut_urls_propres . $url . _terminaison_urls_propres;
 		$q_url = _q($url);
 
 		// url deja utilisee ?
@@ -141,11 +139,10 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 			&& ($deja = spip_fetch_array($result))) {
 			// utilisee par un type prioritaire ? ==> que l'url absolue
 			if ($priotype[$deja['type']] < $priotype[$type]) {
-				return $url_abs;
+				return finir_url_libre_dist($url_abs);
 			}
 		}
 	} else {
-		$url = _debut_urls_propres . $url . _terminaison_urls_propres;
 		$q_url = _q($url);
 	}
 
@@ -166,7 +163,16 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 
 	spip_log("Creation de l'url propre '$url' pour $col_id=$id_objet");
 
-	return $url;
+	return finir_url_libre_dist($url);
+}
+
+
+function finir_url_libre_dist($url)
+{
+	if (function_exists('finir_url_libre')) {
+		return finir_url_libre($url);
+	}
+	return _qs_urls_libres . _debut_urls_libres . $url . _terminaison_urls_libres;
 }
 
 // http://doc.spip.org/@generer_url_article

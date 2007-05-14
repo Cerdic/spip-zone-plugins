@@ -38,11 +38,21 @@ c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
 	< ?php $type_urls = 'qlibres'; ? >
 
 */
-
+	// pour compatibilite
 	define ('_terminaison_urls_propres', '');
-	define ('_debut_urls_propres', '');
+	define ('_debut_urls_propres', './?');
 
-	include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'urls_libres_recuperer.php';
-	include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'urls_libres_generer.php';
+	// constantes non incluses dans l'url libre stockee
+	define ('_terminaison_urls_libres', _terminaison_urls_propres);
+	if (($pos = strpos(_debut_urls_propres, '?')) !== false) {
+		define ('_debut_urls_libres', substr(_debut_urls_propres, $pos + 1));
+		define ('_qs_urls_libres', substr(_debut_urls_propres, 0, $pos + 1));
+	} else {
+		define ('_debut_urls_libres', _debut_urls_propres);
+		define ('_qs_urls_libres', '');
+	}
+
+	include_spip('urls/urls_libres_recuperer');
+	include_spip('urls/urls_libres_generer');
 }
 ?>
