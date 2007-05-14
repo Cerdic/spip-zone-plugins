@@ -1,3 +1,15 @@
+[(#REM) 
+
+Modele de carte avec legende
+
+Exemple de CSS allant avec :
+div.carto_carte{position:relative;}
+div.carto_objets{position:relative;top:-12px;left:-12px}
+div.carto_objet{position:absolute;}
+div.carto_mots{float:left;border:2px dashed;padding:4px;margin:8px;}
+div.carto_mots ul li a.on{font-weight: bold;}
+
+]
 <div class="carto_carte">
  <BOUCLE_carte(CARTO_CARTES){id_carto_carte=#ID_MAP}>
   <B_objets>
@@ -36,7 +48,7 @@
   <div class="carto_mots">
    <ul>
   <BOUCLE_mot2(MOTS){par titre}{!doublons mots}>
-  	<li>[(#LOGO_MOT)] <a href="#" onclick="$('div.carto_mot_#ID_MOT').toggle();return false;">#TITRE</a></li>
+  	<li>[(#LOGO_MOT)] <a class="on" href="#" onclick="$('div.carto_mot_#ID_MOT').toggle();$(this).toggleClass('on');return false;">#TITRE</a></li>
   </BOUCLE_mot2>
    </ul>
   </div>
