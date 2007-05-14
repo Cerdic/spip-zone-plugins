@@ -123,10 +123,7 @@ function recuperer_parametres_url(&$fond, $url) {
 		if ($row = spip_fetch_array($result)) {
 			// on a trouve notre bebe
 			$contexte[$col_id] = $row[$col_id];
-			// se rappeler de cette version comme la plus ancienne ...
-			// meme si semblable a generer_url_xxx qui suit qui en fera peut-etre un second
-			_store_url($url_propre, $type, $row[$col_id], $prefix = '', $version = 0);
-			// generer spip_urls pour la prochaine fois
+			// generer les 1, 2 ou 3 spip_urls pour la prochaine fois
 			if (function_exists($fun = 'generer_url_' . $type)) {
 				$gurl = $fun($row[$col_id]);
 				spip_log('url libre generee sur demande: ' . $gurl);

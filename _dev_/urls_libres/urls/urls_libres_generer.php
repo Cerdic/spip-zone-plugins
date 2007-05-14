@@ -63,9 +63,11 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 	// A-t-on cette url ? Prendre la derniere version
 	$result = spip_query("SELECT url, version FROM spip_urls
 		WHERE type=$q_type AND id_objet=$id_objet ORDER BY version DESC LIMIT 1");
-	if (!($store = spip_fetch_array($result))) {
+	if (!($store = spip_fetch_array($result)) && $row['url_propre']) {
 		// objet non référencé
-// .... to do tout doux .... 
+		// se rappeler de cette version comme la plus ancienne ...
+		// meme si semblable aux genereration qui suivent
+		_store_url($row['url_propre'], $type, $id_object, '', 0);
 	}
 
 	// Si l'on n'est pas dans spip_redirect.php3 sur un objet non publie
