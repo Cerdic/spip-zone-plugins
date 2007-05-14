@@ -17,27 +17,30 @@ function _store_url($url, $type, $id_objet, $prefix = '')
 {
 	$url = _debut_urls_propres . $prefix . $url .
 			strrev($prefix) . _terminaison_urls_propres;
+	$q_url = _q($url);
+	$q_type = _q($type);
 	if (($result = spip_query(
-		"SELECT type, id_objet, version from spip_urls WHERE url=$url"))
+		"SELECT type, id_objet, version from spip_urls WHERE url=$q_url"))
 	 &&	($deja = spip_fetch_array($result))) {
 		$version = $deja['version'] + 1;
 		spip_query("UPDATE spip_urls SET
-			version=$version, maj=NOW(), type=$type AND id_objet=$id_objet
-			WHERE url=$url");
+			version=$version, maj=NOW(), type=$q_type, id_objet=$id_objet
+			WHERE url=$q_url");
 	} else {
 		spip_query("INSERT INTO spip_urls (url, type, id_objet, version, maj)
-			VALUE ($url, $type, $id_objet, 0, NOW()");
+			VALUE ($q_url, $q_type, $id_objet, 0, NOW())");
 	}
 	return $url;
 }
 function _generer_url_libre($type, $id_objet, $prefix = '')
 {
-	spip_log('_generer_url_libre("' . $type . '",' . $id_objet . ',"' $prefix .'")');
+	spip_log('_generer_url_libre("' . $type . '",' . $id_objet . ',"' . $prefix .'")');
 	static $priotype = array(
 		'article'=>0, 'rubrique'=>1, 'mot'=>2, 'auteur'=>3,
 		'site'=>4, 'syndic'=>5, 'breve'=>6);
 
-	$table = table_objet($type);
+	$q_type = _q($type);
+	$table = 'spip_' . table_objet($type);
 	$col_id = id_table_objet($type);
 
 	// Auteurs : on prend le nom
@@ -61,7 +64,7 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 
 	// A-t-on cette url ? Prendre la derniere version
 	$result = spip_query("SELECT url, version FROM spip_urls
-		WHERE type=$type AND id_objet=$id_objet ORDER version DESC LIMIT 1");
+		WHERE type=$q_type AND id_objet=$id_objet ORDER BY version DESC LIMIT 1");
 	if (!($store = spip_fetch_array($result))) {
 		// objet non référencé
 // .... to do tout doux .... 
@@ -123,8 +126,6 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 	AND preg_match(',^(article|breve|rubrique|mot|auteur)[0-9]+$,', $url))
 		$url = $url.','.$id_objet;
 
-	$url = _q($url);
-
 	// Mettre a jour l'url
 	// Inserer la nouvelle reference absolue
 	$url_abs = _store_url($url, $type, $id_objet, $prefix);
@@ -132,7 +133,7 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 	$url = _debut_urls_propres . $url . _terminaison_urls_propres;
 
 	// url deja utilisee ?
-	if (($result = spip_query("SELECT type, id_objet from spip_urls WHERE url=$url"))
+	if (($result = spip_query('SELECT type, id_objet from spip_urls WHERE url=' . _q($url)))
 		&& ($deja = spip_fetch_array($result))) {
 		// utilisee par un type prioritaire ? ==> que l'url absolue
 		if ($priotype[$deja['type']] < $priotype[$type]) {
@@ -140,20 +141,22 @@ function _generer_url_libre($type, $id_objet, $prefix = '')
 		}
 	}
 
+	$q_url = _q($url);
+
 	// store est ce qui existe deja pour l'objet, si pas vide c'est qu'on change
 	$version = $store ? $store['version'] + 1 : 0;
 	// deja est ce qui etait reference pour l'url
 	if ($deja) {
 		// on ecrase l'url non prioritaire
-		spip_query("UPDATE spip_urls SET url=$url,
-			version=$version, maj=NOW() WHERE type=$type AND id_objet=$id_objet");
+		spip_query("UPDATE spip_urls SET url=$q_url,
+			version=$version, maj=NOW() WHERE type=$q_type AND id_objet=$id_objet");
 	} else {
 		spip_query("INSERT INTO spip_urls (url, type, id_objet, version, maj)
-			VALUE ($url, $type, $id_objet, $version, NOW()");
+			VALUE ($q_url, $q_type, $id_objet, $version, NOW())");
 	}
 
 	// Mettre a jour dans la table objet ?
-	spip_query("UPDATE $table SET url_propre=" . _q($url) . " WHERE $col_id=$id_objet");
+	spip_query("UPDATE $table SET url_propre=$q_url WHERE $col_id=$id_objet");
 
 	spip_release_lock($lock);
 
