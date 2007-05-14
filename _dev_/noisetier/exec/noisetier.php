@@ -8,7 +8,7 @@ include_spip('options_noisetier');
 
 function exec_noisetier_dist(){
 	global $spip_lang_right;
-	global $theme_titre, $theme_zones, $noisetier_pages, $page;
+	global $theme_titre, $theme_zones, $noisetier_pages, $noisetier_description_pages, $page;
 
 	if (!isset($page)) $page='';
 
@@ -42,6 +42,7 @@ function exec_noisetier_dist(){
 			echo "<br /><span style='font-size:large;'>";
 			echo "$page";
 			echo '</span></div>';
+			if (isset($noisetier_description_pages[$page])) echo propre($noisetier_description_pages[$page]);
 		}
 		echo _T('noisetier:restreindre_page');
 		echo "<div style='text-align:center;'>";
@@ -63,16 +64,30 @@ function exec_noisetier_dist(){
 	echo typo(_T('noisetier:presentation_noisetier')) ;
 	echo '<br /><br />';
 
-	noisetier_gestion_zone('head', $page);
+	noisetier_gestion_zone('head', $page, true);
 	foreach ($theme_zones as $theme_une_zone){
 		//La zone head a déjà été insérée
 		if ($theme_une_zone['nom']!='head')
-			noisetier_gestion_zone($theme_une_zone['nom'],$page);
+			//Restriction en fonction du paramètre page
+			if(noisetier_affiche_zone_page($theme_une_zone,$page))
+				noisetier_gestion_zone($theme_une_zone['nom'],$page);
 	}
 
 	//Afficher ici les zones non gérées par le thème en cours mais qui disposent néanmoins d'une déclaration dans la base de donnée
 
 	echo fin_gauche(), fin_page();
+}
+
+// détermine si une zone donnée doit être affichée sur une page donnée
+function noisetier_affiche_zone_page($theme_une_zone,$page) {
+	if ($page=='') return true;
+	if (isset($theme_une_zone['pages_exclues']) && preg_match("/(^|,)".$page."(,|$)/",$theme_une_zone['pages_exclues']))
+		return false;
+	if (isset($theme_une_zone['pages']) 
+		&& !preg_match("/(^|,)".$page."(,|$)/",$theme_une_zone['pages'])
+		&& !preg_match("/(^|,)toutes(,|$)/",$theme_une_zone['pages']))
+		return false;
+	return true;
 }
 
 ?>

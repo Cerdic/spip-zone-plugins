@@ -2,12 +2,20 @@
 include_spip('base/noisetier');
 
 //Définition des pages gérées par le noisetier
-global $noisetier_pages;
+global $noisetier_pages, $noisetier_description_pages;
 if (!isset($noisetier_pages)) $noisetier_pages = array();
 $noisetier_pages[]='article';
+$noisetier_pages[]='articles';
+$noisetier_description_pages['articles']="<multi>[fr]Cette page est renvoy&eacute;e lorsque le squelette {article} est appel&eacute; sans id_article ou avec un id_article incorrect.[en]This page...</multi>";
 $noisetier_pages[]='rubrique';
+$noisetier_pages[]='rubriques';
+$noisetier_description_pages['rubriques']="<multi>[fr]Cette page est renvoy&eacute;e lorsque le squelette {rubrique} est appel&eacute; sans id_rubrique ou avec un id_rubrique incorrect.[en]This page...</multi>";
 $noisetier_pages[]='breve';
+$noisetier_pages[]='breves';
+$noisetier_description_pages['breves']="<multi>[fr]Cette page est renvoy&eacute;e lorsque le squelette {breve} est appel&eacute; sans id_breve ou avec un id_breve incorrect.[en]This page...</multi>";
 $noisetier_pages[]='sommaire';
+$noisetier_pages[]='accueil';
+
 
 function balise_INCLURE_NOISETTE($p) {
 	$champ = phraser_arguments_inclure($p, true);
