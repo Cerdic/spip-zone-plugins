@@ -31,7 +31,7 @@
 		<a href='[(#SELF|parametre_url{tri,rang}|parametre_url{champ,''}|parametre_url{senstri,#GET{testtri}|=={rang}?{ #REM|sinon{1}|moins{#GET{senstri}},'0'}})]'>
 		Rang</a></th>]
 		[(#ENV{affiche_de,1}|?{' '})<th class='neutre'>De</th>]
-		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{tout}{par rang}>
+		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{listable=oui}{tout}{par rang}>
 		[(#SPECIFIANT|=={oui}|?{'',' '})<th class="neutre">#TITRE</th>]		
 		[(#SPECIFIANT|=={oui}|?{' ',''})<th class="[(#GET{testtri}|=={#CHAMP}|?{#GET{senstri}|?{headerSortUp,headerSortDown},'header'})]">
 		<a href='[(#SELF|parametre_url{champ,#CHAMP}|parametre_url{tri,''}|parametre_url{senstri,#GET{testtri}|=={#CHAMP}?{ #REM|sinon{1}|moins{#GET{senstri}},'0'}})]'>
@@ -55,7 +55,7 @@
 		<td>[<a href='(#GET{lien_edit})'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>]#ID_DONNEE[(#GET{lien_edit}|?{' '})</a>]</td>
 		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
 		<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>[(#ENV{affiche_de,1}|?{' '})<td>#NOM</td>]</BOUCLE_auteur>[(#ENV{affiche_de,1}|?{' '})<td>#ID_AUTEUR:#IP</td>]<//B_auteur>
-		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{type !IN (separateur,textestatique)}{par rang}>
+		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{type !IN (separateur,textestatique)}{listable=oui}{par rang}>
 		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
 		</BOUCLE_body>
 		[(#GET{documents})<td>]

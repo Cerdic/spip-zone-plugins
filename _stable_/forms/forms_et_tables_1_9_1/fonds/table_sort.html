@@ -8,7 +8,6 @@
 </BOUCLE_la>
 <input type='submit' value='<:bouton_valider:>' class='fondo' />
 </div>
-[(#SELF|parametre_url{dummy,'',&}|parse_str{#GET{args}})]
 #SET{retour,#GET{args}|table_valeur{retour}}
 #GET{retour}
 <B_donnees>

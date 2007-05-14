@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.30;
+	$GLOBALS['forms_base_version'] = 0.31;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -247,6 +247,11 @@
 			spip_query("ALTER TABLE spip_forms_donnees_champs CHANGE valeur 'valeur' TEXT NOT NULL");
 			echo "forms update @ 0.30<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.30,'non');
+		}
+		if ($current_version<0.31){
+			spip_query("ALTER TABLE spip_forms_champs ADD listable ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER specifiant");
+			echo "forms update @ 0.31<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.31,'non');
 		}
 		ecrire_metas();
 	}

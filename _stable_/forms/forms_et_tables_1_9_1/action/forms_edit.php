@@ -105,6 +105,7 @@ function Forms_update($id_form){
 	$champ_obligatoire = _request('champ_obligatoire');
 	$champ_public = _request('champ_public');
 	$champ_specifiant = _request('champ_specifiant');
+	$champ_listable = _request('champ_listable');
 	$aide_champ = _request('aide_champ');
 	$wrap_champ = _request('wrap_champ');
 	$supp_choix = _request('supp_choix');
@@ -185,7 +186,7 @@ function Forms_update($id_form){
 				}
 				else {
 					spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire)
-						.", specifiant="._q($champ_specifiant).", public="._q($champ_public)
+						.", specifiant="._q($champ_specifiant).", listable="._q($champ_listable).", public="._q($champ_public)
 						.", aide="._q($aide_champ).", html_wrap="._q($wrap_champ)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 					Forms_update_edition_champ($id_form, $champ);
 					// switch select to multi ou inversement, apres avoir fait les mises a jour
