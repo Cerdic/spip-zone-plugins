@@ -8,7 +8,7 @@ include_spip('options_noisetier');
 
 function exec_noisetier_dist(){
 	global $spip_lang_right;
-	global $theme_titre, $theme_zones, $noisetier_pages, $noisetier_description_pages, $page;
+	global $theme_titre, $theme_descriptif, $theme_zones, $noisetier_pages, $noisetier_description_pages, $page;
 
 	if (!isset($page)) $page='';
 
@@ -30,6 +30,7 @@ function exec_noisetier_dist(){
 		echo "<br /><span style='font-size:large;'>";
 		echo "$theme_titre";
 		echo '</span></div>';
+		if (isset($theme_descriptif)) echo propre($theme_descriptif);
 	fin_boite_info();
 	echo "<br />";
 	pipeline('affiche_gauche',array('args'=>array('exec'=>'noisetier'),'data'=>''));

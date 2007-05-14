@@ -1,8 +1,9 @@
 <?php
 
-global $theme_titre, $theme_zones;
+global $theme_titre, $theme_descriptif, $theme_zones;
 
 $theme_titre = 'Devtest';
+$theme_descriptif = '<multi>[fr]Th&egrave;me servant au d&eacute;veloppement du noisetier.[en]This theme...</multi>';
 
 $theme_zones = array();
 $theme_zones['entete']['nom'] = "entete";
