@@ -24,6 +24,7 @@
 		//print_r($data);
 		//mettre les documents dans un tableau
 		
+		// trouver des enclosures (podcast)
 		$enclosure = $data['enclosures'] ;
 		// href et type sont obligatoires
 			if (($enc_regs_url = extraire_attribut($enclosure,'href')
@@ -34,21 +35,28 @@
 				$data['enc_enclosure']['length'] = extraire_attribut($enclosure,'length') ;
 				if(!$data['enc_enclosure']['type']) $data['enc_enclosure']['type'] = substr($url, -3);
 			}
+			
+		$data['enclosures_all'][] = $data['enc_enclosure'] ;	
 		
 		// trouver une image dans le descriptif (flickr)
+		// <img src="http://farm1.static.flickr.com/209/465887020_320ee68662_m.jpg" width="180" height="240" alt="Apéro Belleville 19/7/04" style="border: 1px solid #ddd;" />
 		$enclosure = $data['descriptif'] ;
 			if (($enc_regs_url = extraire_attribut($enclosure,'src'))) {
 				$url  = substr(urldecode($enc_regs_url), 0,255);
+				//var_dump($url);
 				$ext = substr($url, -3);
-				if($ext == (jpg|png|gif)){
+				if(preg_match("/(jpg|gif|png)/",$ext)){
 				$data['enc_image']['url'] = addslashes(abs_url($url, $le_lien));
 				$data['enc_image']['type'] = $ext ;
 				}
 			}
 			
+		$data['enclosures_all'][] = $data['enc_image'] ;
+		
 		
 		//trouver un flv chez  dailymotion ou une image chez flickr
 		# <media:content url="http://www.dailymotion.com/swf/3ndb67rMbTuLh8E2i" type="application/x-shockwave-flash" duration="520" width="320" height="240"/>
+		# <media:content url="http://farm1.static.flickr.com/169/465892205_c6232dab5f_o.jpg" type="image/jpeg" height="1920" width="2560"/>
 		//echo $item ;
 		if (preg_match(',(<media:content[^>]*>),i',
 		$data['item'], $match)) {
@@ -60,9 +68,9 @@
 			$data['enc_media']['type'] = trim(extraire_attribut($go,'type'));
 		}
 		
-		
-		// trouver une image dailymotion
-		// <media:thumbnail url="http://static-02.dailymotion.com/dyn/preview/320x240/2084714.jpg?20070218160100" height="240" width="320"/>			
+		// trouver une vignette miniature du media
+		// <media:thumbnail url="http://static-02.dailymotion.com/dyn/preview/320x240/2084714.jpg?20070218160100" height="240" width="320"/>	
+		// <media:thumbnail url="http://farm1.static.flickr.com/169/465892205_c22c43b50d_s.jpg" height="75" width="75"/>		
 		if (preg_match(',(<media:thumbnail[^>]+\/>),i',
 		$data['item'], $match)) {
 			$go=str_replace('media:thumbnail','mediathumbnail',$match[1]);
@@ -71,16 +79,14 @@
 		
 		}
 		
-		$data['enclosures_all'][] = $data['enc_enclosure'] ;
-		$data['enclosures_all'][] = $data['enc_media'] ;
 		
-		//on ne prend pas l'image si le media est déjà une image (doublons)
-		if($data['enc_media']['type'] != 'image/jpeg'){
-			$data['enclosures_all'][] = $data['enc_image'] ;
+		// si le media est un flv, on prend le flv et aussi la miniature (a terme la mettre dans la vignette du doc distant spip)
+		if($data['enc_media']['type'] == 'application/x-shockwave-flash'){	
+			$data['enclosures_all'][] = $data['enc_media'] ;
 			$data['enclosures_all'][] = $data['enc_thumbnail'] ;
 		}
 		
-		//var_dump($data['item']);var_dump($data['enclosures_all']);die("coucou");
+		//var_dump($data['item']);var_dump($data['descriptif']);var_dump($data['enclosures_all']);die("coucou");
 		
 		/**/
 		
