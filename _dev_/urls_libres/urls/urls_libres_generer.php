@@ -72,8 +72,9 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 	}
 
 	// Recalculer l'url-propre seulement si l'objet a change apres l'url libre
-	if ($store && $store['url'] && $store['maj'] >= $row['maj'])
+	if ($store && $store['url'] && $store['maj'] >= $row['maj']) {
 		return finir_url_libre_dist($store['url'], $opt);
+	}
 
 	// Sinon, creer l'URL
 	include_spip('inc/filtres');
@@ -105,6 +106,13 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 		if (strlen($url) < 2) $url = $type.$id_objet;
 	}
 
+	// l'url a-t-elle change ?
+	$url_abs = $prefix . $url .	strrev($prefix);
+	if ($store && ($store['url'] == $url || $store['url'] == $url_abs)) {
+		return finir_url_libre_dist($store['url'], $opt);
+	}
+
+	// Changement ou creation, on regenere
 	// Verifier les eventuels doublons et mettre a jour
 	$lock = "url $type $id_objet";
 	spip_get_lock($lock, 10);
@@ -121,27 +129,22 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 	// Mettre a jour l'url
 	// Inserer la nouvelle reference absolue
 	if ($prefix) {
-		$url_abs = _store_url($url, $type, $id_objet, $prefix, $version++);
-
-		$q_url = _q($url);
-
-		// url deja utilisee ?
-		if (($result = spip_query('SELECT type, id_objet from spip_urls WHERE url=' . $q_url))
-			&& ($deja = spip_fetch_array($result))) {
-			// utilisee par un type prioritaire ? ==> que l'url absolue
-			if ($priotype[$deja['type']] < $priotype[$type]) {
-				return finir_url_libre_dist($url_abs, $opt);
-			}
-		}
-	} else {
-		$q_url = _q($url);
+		_store_url($url_abs, $type, $id_objet, '', $version++);
 	}
 
-	// deja est ce qui etait reference pour l'url
-	if ($deja) {
-		// on ecrase l'url non prioritaire
-		spip_query("UPDATE spip_urls SET url=$q_url,
-			version=$version, maj=NOW() WHERE type=$q_type AND id_objet=$id_objet");
+	$q_url = _q($url);
+
+	// url deja utilisee ?
+	if (($result = spip_query('SELECT type, id_objet from spip_urls WHERE url=' . $q_url))
+		&& ($deja = spip_fetch_array($result))) {
+		// utilisee par un type prioritaire ? ==> que l'url absolue
+		if ($priotype[$deja['type']] < $priotype[$type]) {
+			$q_url = _q($url = $url_abs);
+		} else {
+			// on ecrase l'url non prioritaire (on ne la connaitra plus, dommage)
+			spip_query("UPDATE spip_urls SET type=$q_type, id_objet=$id_objet,
+				version=$version, maj=NOW() WHERE url=$q_url");
+		}
 	} else {
 		spip_query("INSERT INTO spip_urls (url, type, id_objet, version, maj)
 			VALUE ($q_url, $q_type, $id_objet, $version, NOW())");
