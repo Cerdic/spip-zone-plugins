@@ -57,12 +57,12 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 		$statut = 'statut';
 
 	// Vérifier l'existence de l'objet et recuperer son URL defaut, titre et statut
-	$result = spip_query("SELECT url_propre, $statut, $champ_titre
+	$result = spip_query("SELECT url_propre, maj, $statut, $champ_titre
 			FROM $table WHERE $col_id=$id_objet");
 	if (!($row = spip_fetch_array($result))) return ""; // objet inexistant
 
 	// A-t-on cette url ? Prendre la derniere version
-	$result = spip_query("SELECT url, version FROM spip_urls
+	$result = spip_query("SELECT url, version, maj FROM spip_urls
 		WHERE type=$q_type AND id_objet=$id_objet ORDER BY version DESC LIMIT 1");
 	if (!($store = spip_fetch_array($result)) && $row['url_propre']) {
 		// objet non référencé
@@ -71,20 +71,8 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 		_store_url($row['url_propre'], $type, $id_object, '', 0);
 	}
 
-	// Si l'on n'est pas dans spip_redirect.php3 sur un objet non publie
-	// ou en preview (astuce pour corriger un url-propre) + admin connecte
-	// Ne pas recalculer l'url-propre,
-	// sauf si :
-	// 1) il n'existe pas, ou
-	// 2) l'objet n'est pas 'publie' et on est admin connecte, ou
-	// 3) on le demande explicitement (preview) et on est admin connecte
-	$modif_url_libre = false;
-	if (function_exists('action_redirect_dist') AND
-	($GLOBALS['preview'] OR ($row['statut'] <> 'publie'))
-	AND $GLOBALS['auteur_session']['statut'] == '0minirezo')
-		$modif_url_libre = true;
-
-	if ($store && $store['url'] && !$modif_url_libre)
+	// Recalculer l'url-propre seulement si l'objet a change apres l'url libre
+	if ($store && $store['url'] && $store['maj'] >= $row['maj'])
 		return finir_url_libre_dist($store['url'], $opt);
 
 	// Sinon, creer l'URL
