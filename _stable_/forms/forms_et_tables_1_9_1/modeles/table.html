@@ -8,7 +8,7 @@
 <BOUCLE_caption(FORMS){id_form=#ENV{id_table}}><caption>#TITRE</caption></BOUCLE_caption>
 <thead><tr class='row_first'>
 	<th class='neutre'>id</th>
-	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{type !IN (separateur,textestatique)}{par rang}{listable_admin=oui}>
+	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{type !IN (separateur,textestatique)}{par rang}{listable=oui}>
 		[(#SPECIFIANT|=={oui}|?{'',' '})<th class="neutre">#TITRE</th>]
 		[(#SPECIFIANT|=={oui}|?{' ',''})<th class="[(#GET{testtri}|=={#CHAMP}|?{#GET{senstri}|?{headerSortUp,headerSortDown},'header'})]">
 		<a href='[(#SELF|parametre_url{champ,#CHAMP}|parametre_url{senstri,#GET{testtri}|=={#CHAMP}?{ #REM|sinon{1}|moins{#GET{senstri}},'0'}})]'>
@@ -17,12 +17,12 @@
 </tr></thead>
 <tbody>
 <BOUCLE_donnees(FORMS_DONNEES spip_forms_donnees_champs){id_form=#ENV{id_table}}{id_mot?}{champ?}{par #GET{tri}}{inverse #ENV{senstri,0}}{pagination 10}>
-#SET{lien_supp,#URL_ACTION_AUTEUR{forms_donnee_supprime,#ID_FORM:#ID_DONNEE,#EVAL{_DIR_RESTREINT_ABS}|concat{#SELF}|urlencode}}
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]'>
 		<td><a href='[(#SELF|parametre_url{id_donnee,#ID_DONNEE}|ancre_url{donnee-#ID_DONNEE})]'>#ID_DONNEE</a></td>
-		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{listable_admin=oui}>
+		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{listable=oui}>
 		<td ><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
 		</BOUCLE_body>
+	</tr>
 </BOUCLE_donnees>
 </tbody>
 </table>
