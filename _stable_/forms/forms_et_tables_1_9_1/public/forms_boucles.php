@@ -182,7 +182,7 @@ code;
 			foreach($boucle->modificateur['crit_id_mot']['select'] as $cond)		$boucle->select[]=$cond;
 			foreach($boucle->modificateur['crit_id_mot']['from'] as $key=>$cond)			$boucle->from[$key]=$cond;
 			foreach($boucle->modificateur['crit_id_mot']['where'] as $cond)			$boucle->where[]=$cond;
-			foreach($boucle->modificateur['crit_id_mot']['group'] as $cond)			$boucle->group[]=$cond;
+			//foreach($boucle->modificateur['crit_id_mot']['group'] as $cond)			$boucle->group[]=$cond;
 		}
 	
 		return calculer_boucle($id_boucle, $boucles); 
