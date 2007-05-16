@@ -143,7 +143,7 @@ function Forms_boite_selection_donnees($recherche, $les_donnees, $type, $type_ta
 				$out .= "</option>";
 			}
 		}
-		$nb_ligne = max(10,round($nb_ligne/4));
+		$nb_ligne = min(50,max(10,round($nb_ligne/4)));
 		$out = "<select name='id_donnee_liee[]' multiple='multiple' class='fondl' style='width:100%' size='$nb_ligne'>"
 		  .$out .= "</select>";
 	}
