@@ -33,7 +33,7 @@
 			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'champs.type'", "'\"mot\"'");
 			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'donnees_champs.champ'", "'champs.champ'");
 			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'donnees_champs.id_donnee'", "'$id_table.id_donnee'");
-			$boucle->modificateur['crit_id_mot']['group'][] = $id_table . '.id_donnee'; 
+			//$boucle->modificateur['crit_id_mot']['group'][] = $id_table . '.id_donnee'; 
 	
 			$t = "donnees_champs";
 			return $t;
