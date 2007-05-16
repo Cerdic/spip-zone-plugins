@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Association</nom>
 	<auteur>												<!-- Auteur du plugin -->
-	Bernard Blazin - François de Montlivault - [plugandspip->http://www.plugandspip.com]<br>
+	Bernard Blazin - François de Montlivault - [plugandspip->http://www.plugandspip.com]<br />
 	[Voir la notice en ligne->http://www.plugandspip.com/spip.php?page=explications]
 	</auteur>
 	<version>0.5</version>

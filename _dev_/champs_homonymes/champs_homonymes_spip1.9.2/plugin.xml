@@ -15,7 +15,7 @@ _ &copy; 2006 - 2007 - Distribue sous licence GNU/GPL
 	</etat>
 	<description>
 	Rendre possible la visualisation et la mise &agrave; jour de nouveaux champs ajout&eacute;s dans plusieurs tables de SPIP gr&acirc;ce aux champs EXTRA.
-<hr>
+<hr />
 Ce plugin...
 <ul>
 <li>-surcharge le fichier extra.php<br /></li>
@@ -23,7 +23,7 @@ Ce plugin...
 <li>-ne modifie pas la base de donn&eacute;es de SPIP (la modification des tables est &agrave; votre discression)<br /></li>
 <li>-synchronise les mises &agrave; jour des champs EXTRA avec leur champ homonyme<br /></li>
 </ul>
-<hr>
+<hr />
 Une fois activ&eacute;, ce plugin offre en option des [pages de test autodocument&#233;es->../spip.php?page=homonymes_plus2] qui permettent
 <ul>
 <li>-de cr&eacute;er temporairement certains champs extra<br /></li>
@@ -33,9 +33,9 @@ Une fois activ&eacute;, ce plugin offre en option des [pages de test autodocumen
 <li>-de supprimer ces nouveaux champs temporaires pour revenir &agrave; la version originale des tables de SPIP </li>
 </ul>
 <em>Seul un administrateur non restreint peut faire ces tests.</em>
-<hr>
+<hr />
 Pour SPIP 1.9.2a [8878]
-<hr>
+<hr />
 Pour plus d'informations ou pour nous laisser vos commentaires: <a href="http://monsitespip.com/spip.php?article7" target="_blank">www.monsitespip.com/spip.php?article7</a>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction

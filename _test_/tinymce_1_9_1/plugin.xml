@@ -4,17 +4,17 @@
 	<version>0.2.2 (pour spip 1.9.1)</version>
 	<etat>test</etat>
 	<description>
-{{Editeur WYSIWYG TinyMCE}}<br>
-Installe TinyMCE avec filemanager (gestion de fichiers) et ibrowser (gestion d'images)<br>
-Telecharge TinyMCE et les pack de langues spécifié depuis Internet (cf fichier tinymce_acti_options.php) et l'installe.<br>
-ATTENTION : necessite de patcher Spip pour lui ajouter un id sur une div de l espace prive :<br>
-- Modifier le fichier ecrire/exec/articles.php pour ajouter a la div de la ligne 615 un id contenu_article<br>
-  Modifier le fichier ecrire/exec/breves_voir.php pour ajouter a la table de la ligne 90 un id contenu_article<br>
-  Un ticket est ouvert sur Spip-Trac pour integration automatique de cet id dans la prochaine<br>
+{{Editeur WYSIWYG TinyMCE}}<br />
+Installe TinyMCE avec filemanager (gestion de fichiers) et ibrowser (gestion d'images)<br />
+Telecharge TinyMCE et les pack de langues spécifié depuis Internet (cf fichier tinymce_acti_options.php) et l'installe.<br />
+ATTENTION : necessite de patcher Spip pour lui ajouter un id sur une div de l espace prive :<br />
+- Modifier le fichier ecrire/exec/articles.php pour ajouter a la div de la ligne 615 un id contenu_article<br />
+  Modifier le fichier ecrire/exec/breves_voir.php pour ajouter a la table de la ligne 90 un id contenu_article<br />
+  Un ticket est ouvert sur Spip-Trac pour integration automatique de cet id dans la prochaine<br />
   version 1.9.2 : http://trac.rezo.net/trac/spip/ticket/771
-- Configurer ensuite TinyMCE selon votre convenance (cf. http://wiki.moxiecode.com/index.php/TinyMCE:Index)<br>
-- Creer les styles necessaires dans la feuilles de styles "plugins/tinymce/config/tiny_mce_style.css"<br>
-  (les deux premiers styles sont obligatoires afin que les autres styles soient affiches correctement)<br>
+- Configurer ensuite TinyMCE selon votre convenance (cf. http://wiki.moxiecode.com/index.php/TinyMCE:Index)<br />
+- Creer les styles necessaires dans la feuilles de styles "plugins/tinymce/config/tiny_mce_style.css"<br />
+  (les deux premiers styles sont obligatoires afin que les autres styles soient affiches correctement)<br />
 	</description>
 	<lien>[http://www.acti.fr]</lien> <!-- URL de documentation -->
 	<prefix>tinymce_acti</prefix>

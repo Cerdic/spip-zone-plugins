@@ -14,7 +14,7 @@ _ Mis en plugin par Fil, Izo, BoOz
 	test
 	</etat>
 	<description>
-	Ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] sur les liens de type image (<code><a href="#URL_DOCUMENT" type="#MIME_TYPE" ...</code>) ou de class="thickbox"
+	Ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] sur les liens de type image (<code><a href="#URL_DOCUMENT" type="#MIME_TYPE">...</a></code>) ou de class="thickbox"
 
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
 _ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2

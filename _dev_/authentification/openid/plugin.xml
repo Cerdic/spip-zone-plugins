@@ -24,11 +24,11 @@
    <description>
       <multi>
         [fr]Authentification des auteurs et visiteurs à l'aide de leur OpenID.
-        <br>{Utilisation&nbsp;:} Un utilisateur qui souhaite utiliser son OpenID pour accéder au site doit l'entrer comme adresse de son site web dans son profil. Ensuite, au lieu de mettre son login ou adresse email, il suffit d'entrer son OpenID pour se logguer.
-        <br>{Ce plugin contient les librairies PHP OpenID [JainRain->http://www.openidenabled.com/openid/libraries/php] version 1.2.2.}
+        <br />{Utilisation&nbsp;:} Un utilisateur qui souhaite utiliser son OpenID pour accéder au site doit l'entrer comme adresse de son site web dans son profil. Ensuite, au lieu de mettre son login ou adresse email, il suffit d'entrer son OpenID pour se logguer.
+        <br />{Ce plugin contient les librairies PHP OpenID [JainRain->http://www.openidenabled.com/openid/libraries/php] version 1.2.2.}
         [en]Authenticates users with their OpenID.
-        <br>{Using this plugin:} a user wishing to authenticate with her OpenID should enter it as her web site address in her profile. Then, instead of entering her login or email address in the authentication page, she should enter her OpenID.
-        <br>{This plugin contains the [JainRain->http://www.openidenabled.com/openid/libraries/php] PHP OpenID libraries version 1.2.2.}
+        <br />{Using this plugin:} a user wishing to authenticate with her OpenID should enter it as her web site address in her profile. Then, instead of entering her login or email address in the authentication page, she should enter her OpenID.
+        <br />{This plugin contains the [JainRain->http://www.openidenabled.com/openid/libraries/php] PHP OpenID libraries version 1.2.2.}
        </multi>
    </description>
    <lien>
