@@ -16,7 +16,7 @@
 Walma cr&eacute;&eacute;e des galeries &agrave; partir des images jointes &agrave; vos articles ou lors d'une recherche.
 _ Explications et forum voir [->http://elastick.net/?id_article=51]
 _ Bient&ocirc;t plus &agrave; propos du plugin sur [spip-contrib->http://www.spip-contrib.net/Presentation-de-Walma]
-_ Pour l'instant il vous suffit d'appeler [?page=walma&id_article=xx->../?page=walma&id_article=xx]
+_ Pour l'instant il vous suffit d'appeler [?page=walma&amp;id_article=xx->../?page=walma&amp;id_article=xx]
 _ la premiere phase du plugin se contente de porter walma en 1.9.2 en decoupant plusieurs fichiers css,js,squelette
 _ voir aussi le fichier README.txt
 	</description>
