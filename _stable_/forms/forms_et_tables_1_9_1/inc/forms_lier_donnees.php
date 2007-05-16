@@ -165,7 +165,7 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table
 		if (!strlen($recherche)){
 			$res = spip_query("SELECT d.id_donnee FROM spip_forms_donnees AS d
 			  JOIN spip_forms AS f ON f.id_form=d.id_form
-			  WHERE f.type_form="._q($type_table)." AND $in GROUP BY d.id_donnee $limit");
+			  WHERE d.statut!='poubelle' AND f.type_form="._q($type_table)." AND $in GROUP BY d.id_donnee $limit");
 		}
 		else {
 			$res = spip_query("SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
