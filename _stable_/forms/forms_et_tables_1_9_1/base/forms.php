@@ -52,6 +52,7 @@ $formschamp_field = array(
 		"obligatoire" => "varchar(3)",
 		"extra_info" => "text", // une info supplementaire par champ a utiliser librement ex : type mot->id_groupe, type url->verif, type fichier -> taille
 		'specifiant' => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+		'listable_admin' => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		'listable' => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		'public' => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 		'aide' => "text",

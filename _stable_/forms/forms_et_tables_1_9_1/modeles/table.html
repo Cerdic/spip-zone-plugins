@@ -8,7 +8,7 @@
 <BOUCLE_caption(FORMS){id_form=#ENV{id_table}}><caption>#TITRE</caption></BOUCLE_caption>
 <thead><tr class='row_first'>
 	<th class='neutre'>id</th>
-	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{type !IN (separateur,textestatique)}{par rang}{specifiant=oui}>
+	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{type !IN (separateur,textestatique)}{par rang}{listable_admin=oui}>
 	<th [(#SPECIFIANT|=={oui}|?{'','class="neutre"'})#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#COMPTEUR_BOUCLE|plus{1}}]>#TITRE</th>
 	</BOUCLE_head>
 </tr></thead>
@@ -17,7 +17,7 @@
 #SET{lien_supp,#URL_ACTION_AUTEUR{forms_donnee_supprime,#ID_FORM:#ID_DONNEE,#EVAL{_DIR_RESTREINT_ABS}|concat{#SELF}|urlencode}}
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]'>
 		<td><a href='[(#SELF|parametre_url{id_donnee,#ID_DONNEE}|ancre_url{donnee-#ID_DONNEE})]'>#ID_DONNEE</a></td>
-		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{specifiant=oui}>
+		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{listable_admin=oui}>
 		<td ><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
 		</BOUCLE_body>
 </BOUCLE_donnees>

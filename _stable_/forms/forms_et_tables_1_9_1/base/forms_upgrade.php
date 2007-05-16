@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.31;
+	$GLOBALS['forms_base_version'] = 0.32;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -251,6 +251,13 @@
 		if ($current_version<0.31){
 			spip_query("ALTER TABLE spip_forms_champs ADD listable ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER specifiant");
 			echo "forms update @ 0.31<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.31,'non');
+		}
+		if ($current_version<0.32){
+			spip_query("ALTER TABLE spip_forms_champs CHANGE listable listable_admin ENUM('non', 'oui') DEFAULT 'oui' NOT NULL");
+			spip_query("ALTER TABLE spip_forms_champs ADD listable ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER listable_admin");
+			spip_query("UPDATE spip_forms_champs SET listable=specifiant"); // valeur par defaut pour iso fonctionnalite cote public
+			echo "forms update @ 0.32<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.31,'non');
 		}
 		ecrire_metas();

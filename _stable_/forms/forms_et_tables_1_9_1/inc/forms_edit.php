@@ -141,6 +141,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 	$obligatoire = $row['obligatoire'];
 	$extra_info = $row['extra_info'];
 	$specifiant = $row['specifiant'];
+	$listable_admin = $row['listable_admin'];
 	$listable = $row['listable'];
 	$public = $row['public'];
 	$aide = $row['aide'];
@@ -159,9 +160,14 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<label for='spec_$champ'>"._T("forms:champ_specifiant")."</label>";
 		$out .= "<br />\n";
 
+		$checked = ($listable_admin == 'oui') ? " checked='checked'" : "";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_listable_admin' value='oui' id='listadm_$champ'$checked> ";
+		$out .= "<label for='listadm_$champ'>"._T("forms:champ_listable_admin")."</label>";
+		$out .= "<br />\n";
+		
 		$checked = ($listable == 'oui') ? " checked='checked'" : "";
 		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_listable' value='oui' id='list_$champ'$checked> ";
-		$out .= "<label for='list_$champ'>"._T("forms:champ_listable")."</label>";
+		$out .= "<label for='list_$champ'>"._T("forms:champ_listable_publique")."</label>";
 		$out .= "<br />\n";
 
 		$checked = ($public == 'oui') ? " checked='checked'" : "";
