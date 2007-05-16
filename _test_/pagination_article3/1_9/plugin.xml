@@ -13,7 +13,7 @@
   </etat>
   <description>
   Paginer les articles en les decoupant selon les intertitres 
-  <code><h3 class="paginart3"></code> correspondant au raccourci <code>{p{titre}p}</code> et en 
+  <code><h3 class="paginart3">...</h3></code> correspondant au raccourci <code>{p{titre}p}</code> et en 
   presentant les pages sous forme d'onglets
   </description>
   <fonctions>

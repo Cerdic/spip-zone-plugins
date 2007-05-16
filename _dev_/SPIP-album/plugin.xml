@@ -11,11 +11,11 @@ Mini galerie sous forme de mod&egrave;les avec integration [Lightbox JS->http://
 Il ajoute deux mod&egrave;les de gestion des photos:
 
 -* {{Affichage d'une image seule avec l'option Lightbox :}}
--** <u>Code :</u> <code><imgXX|lightbox></code>.
+-** <u>Code :</u> &lt;imgXX|lightbox&gt;.
 -** <u>Utilisation :</u> Le {{XX}} correspond au num&eacute;ro de l'image &agrave; afficher. Apr&egrave;s le parametre {Lightbox}, vous pouvez ins&eacute;rer les parametres d'alignement ({left, right,center}) comme pour le mod&egrave;le original.
 
 -* {{Affichage d'une gallerie de photos}}
--** <u>Code :</u> <code><imgXX|album|nbre_vignette=YY></code>.
+-** <u>Code :</u> &lt;imgXX|album|nbre_vignette=YY&gt;.
 -** <u>Utilisation :</u> Le {{XX}} correspond au num&eacute;ro de la premi&egrave;re image de la gallerie qui sera affich&eacute;e. Il est &agrave; noter que les photos sont tri&eacute;es par ordre croissant en fonction du {num titre} et de la {date}.
 _ {{YY}} correspond au nombre de vignettes affich&eacute;es en bas pouvant aller de 1 à 10. En cas d'absence de ce dernier parametre, le nombre de vignettes est de {{10}}.
 -** <u>A noter :</u> Cette galerie int&egrave;gre aussi l'option {Lightbox} lorsque l'on clique sur la photo s&eacute;lectionn&eacute;e.
