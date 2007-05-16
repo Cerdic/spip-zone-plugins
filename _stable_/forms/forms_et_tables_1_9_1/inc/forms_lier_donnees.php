@@ -133,7 +133,8 @@ function Forms_boite_selection_donnees($recherche, $les_donnees, $type, $type_ta
 	$out = "";
 	$liste_res = Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table);
 	if (count($liste_res)){
-		$out .= "<select name='id_donnee_liee[]' multiple='multiple' class='fondl' style='width:100%' size='10'>";
+		$nb_ligne = max(10,ceil(count($liste_res)/5));
+		$out .= "<select name='id_donnee_liee[]' multiple='multiple' class='fondl' style='width:100%' size='$nb_ligne'>";
 		foreach($liste_res as $titre=>$donnees){
 			$out .= "<option value=''>$titre</option>";
 			foreach($donnees as $id_donnee=>$champs){
