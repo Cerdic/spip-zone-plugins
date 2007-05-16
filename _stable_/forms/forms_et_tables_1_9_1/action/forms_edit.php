@@ -188,7 +188,7 @@ function Forms_update($id_form){
 				else {
 					spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire)
 						.", specifiant="._q($champ_specifiant)
-						.", listable="._q($champ_listable).", listable_admin="._q($champ_listable)
+						.", listable="._q($champ_listable).", listable_admin="._q($champ_listable_admin)
 						.", public="._q($champ_public)
 						.", aide="._q($aide_champ).", html_wrap="._q($wrap_champ)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 					Forms_update_edition_champ($id_form, $champ);
