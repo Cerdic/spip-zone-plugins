@@ -15,32 +15,50 @@
 	Forms_importe_types_etendus();
 
 	function Forms_importe_types_etendus(){
-		if ($f = find_in_path('etc/forms_types_champs.xml')){
-			$date = filemtime($f);
+		// dans l'espace public on evite un find_in_path a chaque hit
+		if (_DIR_RESTREINT) {
 			if (isset($GLOBALS['meta']['forms_types_champs']))
 				$t = unserialize($GLOBALS['meta']['forms_types_champs']);
-			if (isset($t['date'])&& ($t['date']==$date) && isset($t['types']) && is_array($t['types']))
+			if (isset($t['types']) && is_array($t['types']))
 				$GLOBALS['forms_types_champs_etendus'] = $t['types'];
-			else {
-				include_spip('inc/plugin');
-				$contenu = "";
-				lire_fichier ($f, $contenu);
-				$GLOBALS['forms_types_champs_etendus']=array();
-				$data = parse_plugin_xml($contenu);
-				if (isset($data['types']))
-					foreach($data['types'] as $types)
-						if (isset($types['type'])) 
-							foreach($types['type'] as $type){
-								if (isset($type['field'])){
-									$champ = end($type['field']);
-									$libelle = isset($type['label'])?trim(applatit_arbre($type['label'])):$champ;
-									$match = isset($type['match'])?trim(end($type['match'])):"";
-									if (!in_array($champ,Forms_liste_types_champs()))
-										$GLOBALS['forms_types_champs_etendus'][$champ]=array('label'=>$libelle,'match'=>$match);
+		}
+		else {
+			if ($f = find_in_path('etc/forms_types_champs.xml')){
+				$date = filemtime($f);
+				if (isset($GLOBALS['meta']['forms_types_champs']))
+					$t = unserialize($GLOBALS['meta']['forms_types_champs']);
+				if (isset($t['date'])&& ($t['date']==$date) && isset($t['types']) && is_array($t['types']))
+					$GLOBALS['forms_types_champs_etendus'] = $t['types'];
+				else {
+					include_spip('inc/plugin');
+					$contenu = "";
+					lire_fichier ($f, $contenu);
+					$GLOBALS['forms_types_champs_etendus']=array();
+					$data = parse_plugin_xml($contenu);
+					if (isset($data['types']))
+						foreach($data['types'] as $types)
+							if (isset($types['type'])) 
+								foreach($types['type'] as $type){
+									if (isset($type['field'])){
+										$champ = end($type['field']);
+										$libelle = isset($type['label'])?trim(applatit_arbre($type['label'])):$champ;
+										$match = isset($type['match'])?trim(end($type['match'])):"";
+										$format = array();
+										if (isset($type['formate'])){
+											foreach($type['formate'] as $fmt){
+												$match = isset($fmt['match'])?trim(end($fmt['match'])):"";
+												$replace = isset($fmt['replace'])?trim(end($fmt['replace'])):"";
+												if ($match&&$replace)
+													$format[] = array('match'=>$match,'replace'=>$replace);
+											}
+										}
+										if (!in_array($champ,Forms_liste_types_champs()))
+											$GLOBALS['forms_types_champs_etendus'][$champ]=array('label'=>$libelle,'match'=>$match,'formate'=>$format);
+									}
 								}
-							}
-				ecrire_meta('forms_types_champs',serialize(array("date"=>$date,"types"=>$GLOBALS['forms_types_champs_etendus'])));
-				ecrire_metas();
+					ecrire_meta('forms_types_champs',serialize(array("date"=>$date,"types"=>$GLOBALS['forms_types_champs_etendus'])));
+					ecrire_metas();
+				}
 			}
 		}
 	}

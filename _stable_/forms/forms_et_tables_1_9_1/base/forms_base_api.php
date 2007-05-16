@@ -263,14 +263,4 @@ function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 	}
 }
 
-
-/*function Forms_modifier_donnee($id_form,$id_donnee,$c = NULL){
-	include_spip('inc/forms');
-	$c = array('ligne_1'=>_L("Nouvelle ligne"),"select_1"=>$niveau);
-	$new = 0;
-	$erreur = array();
-	Forms_enregistrer_reponse_formulaire($id_form, $new, $erreur, $reponse, '', '' , $c);
-	return array($new,$erreur);
-}*/
-
 ?>

@@ -122,6 +122,15 @@
 			}
 			elseif ($t == 'texte')
 				$rendu = 'propre';
+			elseif (!in_array($t,array('ligne','separateur','textestatique'))){
+				if (!isset($GLOBALS['forms_types_champs_etendus']))
+					include_spip('inc/forms_type_champs');
+					if (isset($GLOBALS['forms_types_champs_etendus'][$t])
+					  && isset($GLOBALS['forms_types_champs_etendus'][$t]['formate'])
+					)
+						foreach($GLOBALS['forms_types_champs_etendus'][$t]['formate'] as $formate)
+							$valeur = preg_replace($formate['match'],$formate['replace'],$valeur);
+			}
 			if (!$etoile AND $rendu)
 				include_spip('inc/texte');
 			$valeur = pipeline('forms_calcule_valeur_en_clair',
