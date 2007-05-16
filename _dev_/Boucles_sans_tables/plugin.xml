@@ -1,6 +1,6 @@
 <plugin>
  	<nom>Boucles sans tables</nom>
-	<auteur>Christian Lefebvre, Atos Worldline &copy; 2005/2006 - Distribue sous licence GNU/GPL</auteur>
+	<auteur>Christian Lefebvre, Atos Worldline &#169; 2005/2006 - Distribue sous licence GNU/GPL</auteur>
 	<version>1.0</version>
 	<etat>test</etat>
 	<description>boucles sur des conditions, tableaux ...

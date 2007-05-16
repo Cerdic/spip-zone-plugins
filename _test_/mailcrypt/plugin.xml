@@ -5,9 +5,9 @@ Paolo</auteur>
 <version>0.6</version>
 <etat>test</etat>
 <description><multi>[fr]
-Les liens e-mail contenus dans les articles sont encodés mais sont toujours utilisables (lire readme.txt pour les détails).
-<p>La balise #CRYPTM_IMP, à placer dans une boucle article, crée un lien vers une page d'impression dans une nouvelle fenêtre.</p>
-<p>(Ce plugin est la mise à jour de ce systeme : [->http://www.spip-contrib.net/Un-systeme-antispam])</p>
+Les liens e-mail contenus dans les articles sont encod&#233;s mais sont toujours utilisables (lire readme.txt pour les d&#233;tails).
+<p>La balise #CRYPTM_IMP, &#224; placer dans une boucle article, cr&#233;e un lien vers une page d'impression dans une nouvelle fenêtre.</p>
+<p>(Ce plugin est la mise &#224; jour de ce systeme : [->http://www.spip-contrib.net/Un-systeme-antispam])</p>
 </multi>
 </description>
 <fonctions>crypt.php</fonctions>

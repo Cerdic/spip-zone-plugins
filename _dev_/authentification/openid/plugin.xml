@@ -8,8 +8,8 @@
    <auteur>        <!-- Auteur du plugin -->
        [Edouard Lafargue->mailto:edouard@lafargue.name]
        <multi>
- 	 [fr]_ &copy; 2007 - Distribu&eacute; sous licence GNU/GPL
-         [en]_ &copy; 2007 - Distributed under GNU/GPL License
+ 	 [fr]_ &#169; 2007 - Distribu&eacute; sous licence GNU/GPL
+         [en]_ &#169; 2007 - Distributed under GNU/GPL License
         </multi>
    </auteur>
    <version>
@@ -23,8 +23,8 @@
    </icon>
    <description>
       <multi>
-        [fr]Authentification des auteurs et visiteurs à l'aide de leur OpenID.
-        <br />{Utilisation&nbsp;:} Un utilisateur qui souhaite utiliser son OpenID pour accéder au site doit l'entrer comme adresse de son site web dans son profil. Ensuite, au lieu de mettre son login ou adresse email, il suffit d'entrer son OpenID pour se logguer.
+        [fr]Authentification des auteurs et visiteurs &#224; l'aide de leur OpenID.
+        <br />{Utilisation&nbsp;:} Un utilisateur qui souhaite utiliser son OpenID pour acc&#233;der au site doit l'entrer comme adresse de son site web dans son profil. Ensuite, au lieu de mettre son login ou adresse email, il suffit d'entrer son OpenID pour se logguer.
         <br />{Ce plugin contient les librairies PHP OpenID [JainRain->http://www.openidenabled.com/openid/libraries/php] version 1.2.2.}
         [en]Authenticates users with their OpenID.
         <br />{Using this plugin:} a user wishing to authenticate with her OpenID should enter it as her web site address in her profile. Then, instead of entering her login or email address in the authentication page, she should enter her OpenID.

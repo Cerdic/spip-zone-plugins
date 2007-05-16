@@ -7,7 +7,7 @@
 		</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) &amp; ARNO*
+	  Pierre Andrews (Mortimer) &#38; ARNO*
 	</auteur>
 	<version>
 	  0.3
@@ -55,7 +55,7 @@ In maniera predefinita, Se il codice da colorare ha pi&#249; di una linea, sar&#
 Questa impostazione pu&#242; essere modificata globalmente grazie alla costante PLUGIN_COLORATION_CODE_TELECHARGE, che normalmente &#232; impostata a true.
 Quest'ultima pu&#242; anche essere modificata localmente aggiugendo la classe "sans_telechargement" o "chargement", es: {{&lt;code class="php sans_telechargement">}}
 
-_ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in questo modo: #TEXTE**|coloration_code_color&#123;spip,code&#125;: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro), vedi l'esempio lecode.html. L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà: &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV&#123;id_article&#125;" title="vedi il codice dell'articolo" class="spip_in"&gt;Vedi il codice dell'articolo&lt;/a&gt;
+_ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in questo modo: #TEXTE**|coloration_code_color&#123;spip,code&#125;: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro), vedi l'esempio lecode.html. L'url per vedere il codice dell'articolo dalla sua stessa pagina sar&#224;: &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV&#123;id_article&#125;" title="vedi il codice dell'articolo" class="spip_in"&gt;Vedi il codice dell'articolo&lt;/a&gt;
 	  </multi>
 	</description>
     <options> <!-- charge a chaque hit -->

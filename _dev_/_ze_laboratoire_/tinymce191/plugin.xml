@@ -1,10 +1,10 @@
 <plugin>
-	<nom>Intégration de TinyMCE a l'édition d'articles</nom>
+	<nom>Int&#233;gration de TinyMCE &#224; l'&#233;dition d'articles</nom>
 	<auteur>Brice Favre bfavre@alternancesoft.com</auteur>
 	<version>0.1</version>
 	<etat>experimental</etat>
 	<description>
-	Intégration de l'éditeur Tiny MCE sur SPIP
+	Int&#233;gration de l'&#233;diteur Tiny MCE sur SPIP
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<options> <!--Fichier charge a chaque hit -->

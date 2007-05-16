@@ -1,10 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	R&#233;vision typographique (ins&#233;cables &amp; notes)
+	R&#233;vision typographique (ins&#233;cables &#38; notes)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	fil@rezo.net
-_ &copy; 2005-6 - Distribu&#233; sous licence GNU/GPL
+_ &#169; 2005-6 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.3

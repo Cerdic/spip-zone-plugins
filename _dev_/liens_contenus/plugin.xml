@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Liens inter-contenus</nom>
-	<auteur>Nicolas Hoizey &copy; 2007 - Licence GNU/GPL</auteur>
+	<auteur>Nicolas Hoizey &#169; 2007 - Licence GNU/GPL</auteur>
 	<version>0.17</version>
 	<version_base>0.2</version_base>
 	<install>base/lienscontenus_upgrade.php</install>

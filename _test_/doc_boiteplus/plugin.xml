@@ -14,7 +14,7 @@
 	</etat>
 	<description>
 	  Permet d'ajouter une boite dans le portfolio de l'article, necessite le plugin 
-	  _ http://www.spip-contrib.net/Des-mots-clefs-partout
+_ http://www.spip-contrib.net/Des-mots-clefs-partout
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::

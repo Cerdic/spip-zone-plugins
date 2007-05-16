@@ -3,9 +3,9 @@
  <version>0.1</version>
  <prefix>Glossaire</prefix>
  <etat>experimental</etat>
- <auteur>Fran&ccedil;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]).
+ <auteur>Fran&#231;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]).
 _ Plugin&#233; par fred (homere1974[at]yahoo.fr)
-_ &copy; 2003 - Distribu&#233; sous licence GNU/GPL</auteur>
+_ &#169; 2003 - Distribu&#233; sous licence GNU/GPL</auteur>
 <description>Gestion d'un glossaire interne li&#233; &#224; un groupe de mots cl&#233;s nomm&#233; &quot;glossaire&quot;.
 _ Filtre lier_au_glossaire.
 _ Les squelettes doivent disposer de la balise <code>#INSERT_HEAD</code>.</description>

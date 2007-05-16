@@ -3,9 +3,9 @@
 	Enluminures typographiques pour 1.9.2 et suivantes
 	</nom>
 	<auteur><!-- Auteur du plugin -->
-[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] &#224; partir des raccourcis mis en place par [Fran&ccedil;ois->http://www.spip-contrib.net/_Francois-Schreuer_]
+[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]
 
-&copy; 2007 - Distribu&#233; sous licence GNU/GPL
+&#169; 2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
 	<version>
@@ -57,7 +57,7 @@ $GLOBALS['debut_intertitre_5'] = '<h6 class="spip">';
 $GLOBALS['fin_intertitre_5'] = '</h6>';
 </code>
 
-Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=bte->./?exec=cfg&amp;cfg=bte] pour configurer ces options (les options de cfg sont priortitaires par rapport à celles de mes_options.php !)
+Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=bte->./?exec=cfg&amp;cfg=bte] pour configurer ces options (les options de cfg sont priortitaires par rapport &#224; celles de mes_options.php !)
 
 {Certaines icones proviennent de [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
 	</description>

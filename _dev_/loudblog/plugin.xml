@@ -5,7 +5,7 @@
 	<auteur>	<!-- Auteur du plugin -->
 	[Philippe DROUOT->mailto:phil@africacomputing.org]
 _ Interface [loudblog->http://loudblog.de]	-> spip.
-_ &copy; 2006 - Distribue sous licence GNU/GPL
+_ &#169; 2006 - Distribue sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -15,7 +15,7 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	</etat>
 	<description>
 	Ajout d'une balise <code>#LOUDBLOG{code htmeuleuh avec des balises loudblog dedans}</code> pour interfacer [loudblog->http://loudblog.net] avec spip.
-	Voir [démo->http://spiptest.africa-web.org/] pour se faire une idée de à quoi ca sert et lire le fichier lisezmoi.txt pour la configuration.
+	Voir [d&#233;mo->http://spiptest.africa-web.org/] pour se faire une id&#233;e de &#224; quoi ca sert et lire le fichier lisezmoi.txt pour la configuration.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 

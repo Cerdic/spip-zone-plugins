@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Mail SMTP</nom>
-	<auteur>Cedric&amp;Booz</auteur>
+	<auteur>Cedric &#38; Booz</auteur>
 	<version>1.9.2</version>
 	<etat>test</etat>
 	<description>Utilisation d'un serveur SMTP pour l'envoi des mails par SPIP

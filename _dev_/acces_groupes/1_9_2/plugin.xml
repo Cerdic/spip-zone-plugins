@@ -3,8 +3,8 @@
 Acc&#232;s restreint par groupes
 </nom>
 <auteur>        <!-- Auteur du plugin -->
-Coyote &amp; cy_altern _
-merci à Cedric pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
+Coyote &#38; cy_altern _
+merci &#224; Cedric pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
 		</auteur>
 		<version>
 		1.0.3 (spip 192)
@@ -18,7 +18,7 @@ en utilisant des groupes d'utilisateurs.<br />
 		Documentation pre 1.9.2 : [->http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces]
 		Documentation : [->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]<br /><br />
 					{{/!\ ATTENTION !}} <br />
-					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultanéments !<br />
+					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultan&#233;ment !<br />
 - Si vous {{mettez &#224; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&#232;s restreint par groupes"}}
 version 0.61 ou 0.7, vous {{DEVEZ}} proc&#233;der &#224; la mise &#224; jour des tables de la base de donn&#233;es
 en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin !

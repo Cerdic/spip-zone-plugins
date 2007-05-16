@@ -5,7 +5,7 @@
  <version_base>0.1.0</version_base>
  <etat>dev</etat>
  <auteur>[erational->http://www.erational.org] 
-_ &copy; 2007 - Licence GPL</auteur>
+_ &#169; 2007 - Licence GPL</auteur>
  <description>
     <multi>[fr]Permet d'ajouter un formulaire de recherche google dans votre squelette.
    Ce formulaire utilise l'[API de recherche AJAX de Google->http://code.google.com/apis/ajaxsearch/]<br />

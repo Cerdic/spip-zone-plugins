@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Maïeul Rouquette (maieulrouquette @ tele2.fr)
-_ &copy; 2007 - Licence GPL
+_ &#169; 2007 - Licence GPL
 	</auteur>
 	<version>
 	1.0
@@ -13,8 +13,8 @@ _ &copy; 2007 - Licence GPL
 	test
 	</etat>
 	<description>
-	Plugin chargé d'importer massivement des documents distants. A partir de la [page suivante->./?exec=documents_distants] 
-	Nécéssite SPIp 1.9.2
+	Plugin charg&#233; d'importer massivement des documents distants. A partir de la [page suivante->./?exec=documents_distants] 
+	N&#233;c&#233;ssite SPIp 1.9.2
 	</description>
 	
 

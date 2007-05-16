@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Edition WYSIWYG avec FCKeditor -dev</nom>
-	<auteur>[Frank SAURET->http://electropol.free.fr] &copy; 2006 - Distribu&#233; sous licence GNU/GPL</auteur>
+	<auteur>[Frank SAURET->http://electropol.free.fr] &#169; 2006 - Distribu&#233; sous licence GNU/GPL</auteur>
 	<version>1.0 (pour spip 1.9.1)</version>
 	<etat>dev</etat>
 	<description>
@@ -12,7 +12,7 @@ Cette version semble stable, n&#233;anmoins, il se peut que certains firewalls b
 -* - Se substitue &#224; la barre SPIP mais propose une option pour la r&#233;&#233;dition d'article initalement &#233;cris avec l'&#233;diteur SPIP,
 -* - G&#233;n&#232;re du HTML,
 -* - Bas&#233; sur FCKeditor 2.2 modifi&#233;,
--* - Ajout d'une aide &#224; l'utilisation en fran&ccedil;ais.
+-* - Ajout d'une aide &#224; l'utilisation en fran&#231;ais.
 
 <u>Limitations</u>
 -* - Ne pas mixer pour un m&#234;me article l'&#233;dition WYSIWYG et le code SPIP,

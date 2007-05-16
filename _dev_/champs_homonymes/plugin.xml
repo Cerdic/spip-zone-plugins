@@ -5,7 +5,7 @@
 	<auteur>	<!-- Auteur du plugin -->
  	Iago, contact: <a href="mailto:francois.vachon@iago.ca">francois.vachon@iago.ca</a>
 _ Site web: [iago.ca->http://www.iago.ca]
-_ &copy; 2006 - Distribue sous licence GNU/GPL
+_ &#169; 2006 - Distribue sous licence GNU/GPL
  	
 	
 	</auteur>
@@ -22,7 +22,7 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 _ Ce plugin utilise une version modifi&#233;e du fichier extra.php de la version 1.9.1
 _ À l'activation de ce plugin, le fichier extra.php contenu dans ce plugin aura priorit&#233; sur celui natif de SPIP.
 _ Pour &#233;viter tout conflit possible, ne pas activer avec un autre plugin contenant aussi un fichier extra.php.
-_ Nouvautés de la version 0.2: meilleur synchronisation des champs homonymes et des champs extra.  
+_ Nouvaut&#233;s de la version 0.2: meilleur synchronisation des champs homonymes et des champs extra.  
 	<hr />
 	{{Derni&#232;re version test&#233;e:}} 
 _ SPIP 1.9.2 alpha SVN [7334]

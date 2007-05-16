@@ -14,7 +14,7 @@
         <description>
         Les liens de syndication des actualit&#233;s Google changeant tout le temps, m&#234;me si il s'agit de la m&#234;me news, et compte-tenu des crit&#232;res de v&#233;rification des articles syndiqu&#233;s pr&#233;sents dans la base, il n'est pas possible de syndiquer actuellement les articles de Google actualit&#233;s sans avoir trois, quatre, cinq, six (et ceatera !) fois le m&#234;me article. Avec ce patch, c'est possible. Vous n'avez qu'&#224; l'activer et il vous &#233;vitera d'avoir des dizaines de doublons si vous syndiquez des recherches google.
         
-        Attention : il vous faut rajouter un champs "url_propre" &#224; la table "syndic_articles". Je vais essayer de faire en sorte que le plugin le fasse tout seul, &ccedil;a doit bien &#234;tre possible... Je passe donc le plugin en dev pour cette raison seulement.
+        Attention : il vous faut rajouter un champs "url_propre" &#224; la table "syndic_articles". Je vais essayer de faire en sorte que le plugin le fasse tout seul, &#231;a doit bien &#234;tre possible... Je passe donc le plugin en dev pour cette raison seulement.
         </description>
 	<lien></lien> <!-- URI de documentation -->
         <prefix>

@@ -8,8 +8,8 @@
 
 Travaux originaux :
 _ QCM : Mathieu GIANNECCHINI
-_ Mots crois&#233;s : Ma&iuml;eul ROUQUETTE
-_ Diagrammes d'&#233;checs : Fran&ccedil;ois SCHREUER
+_ Mots crois&#233;s : Ma&#239;eul ROUQUETTE
+_ Diagrammes d'&#233;checs : Fran&#231;ois SCHREUER
 	</auteur>
 	<description>
 Des jeux avec Spip !
@@ -28,7 +28,7 @@ Un exemple :
         Un e-responsable
 </jeux></code></quote>
 
-Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
+Ce plugin fonctionne de fa&#231;on optimale sur les squelettes disposant de la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
 
 _ Si vous avez une version de Spip inf&#233;rieure ou &#233;gale &#224; {{1.9.1}}, certains jeux n&#233;cessiteront l'activation du plugin [jQuery->http://files.spip.org/spip-zone/jqueryplugin.zip].
 _ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&#233;es sur votre server.

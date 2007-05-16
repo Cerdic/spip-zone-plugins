@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Mini Calendrier</nom>
 	<auteur>James (james.at.rezo.net)
-_ &copy; 2006 - Licence GNU/GPL</auteur>
+_ &#169; 2006 - Licence GNU/GPL</auteur>
 	<version>0.2</version>
 	<etat>test</etat>
 	<description>Permet l'utilisation d'une balise #CALENDRIER_MINI.

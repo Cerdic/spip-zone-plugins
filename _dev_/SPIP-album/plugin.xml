@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SPIP-Album</nom>
 	<auteur>[Xavier BUROT->mailto:xebiaut@free.fr] &agrave; partir d'une ide&eacute;es de [Matthieu->http://]
-_ &copy; 2007 - Distribu&eacute; sous licence GNU/GPL</auteur>
+_ &#169; 2007 - Distribu&eacute; sous licence GNU/GPL</auteur>
 	<lien>[Exemple d'utilisation->http://xebiaut.free.fr/]</lien>
 	<version>2.0</version>
 	<etat>test</etat>

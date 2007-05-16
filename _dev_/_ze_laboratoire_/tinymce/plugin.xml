@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Edition article via tinyMCE</nom>
-	<auteur>Christian Lefebvre, Atos Worldline &copy; 2006 - Distribue sous licence GNU/GPL</auteur>
+	<auteur>Christian Lefebvre, Atos Worldline &#169; 2006 - Distribue sous licence GNU/GPL</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>test d'edition d'article avec tinyMCE

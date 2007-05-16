@@ -12,12 +12,12 @@
 	test
 	</etat>
 	<description>
-	Ce plugin permet d'insérer un mini calendrier dans vos pages
-	et de paramètrer facilement les actions à accomplir quand la date cliquée
-	contient au moins un événement.
+	Ce plugin permet d'ins&#233;rer un mini calendrier dans vos pages
+	et de param&#232;trer facilement les actions &#224; accomplir quand la date cliqu&#233;e
+	contient au moins un &#233;v&#233;nement.
 	Voir la doc sur la wiki.
-	Le code est documenté.
-	Nécessite Agenda et Widget Agenda.
+	Le code est document&#233;.
+	N&#233;cessite Agenda et Widget Agenda.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->

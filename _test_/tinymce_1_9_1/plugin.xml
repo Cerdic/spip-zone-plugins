@@ -6,7 +6,7 @@
 	<description>
 {{Editeur WYSIWYG TinyMCE}}<br />
 Installe TinyMCE avec filemanager (gestion de fichiers) et ibrowser (gestion d'images)<br />
-Telecharge TinyMCE et les pack de langues spécifié depuis Internet (cf fichier tinymce_acti_options.php) et l'installe.<br />
+Telecharge TinyMCE et les pack de langues sp&#233;cifi&#233; depuis Internet (cf fichier tinymce_acti_options.php) et l'installe.<br />
 ATTENTION : necessite de patcher Spip pour lui ajouter un id sur une div de l espace prive :<br />
 - Modifier le fichier ecrire/exec/articles.php pour ajouter a la div de la ligne 615 un id contenu_article<br />
   Modifier le fichier ecrire/exec/breves_voir.php pour ajouter a la table de la ligne 90 un id contenu_article<br />

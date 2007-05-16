@@ -3,7 +3,7 @@
 	T&eacute;l&eacute;chargeur
 	</nom>
 	<auteur>bertrand Gugger [->http://toggg.com/]
-	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
+_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
 	1.0.0
@@ -16,15 +16,15 @@ _ Ce plugin permet de t&eacute;l&eacute;charger des zip et/ou activer des plugin
 
 Il fournit l'action {{charger}} qui charge un zip, le d&eacute;compresse et si plugin, l'active:
 
-- charger un plugin, le décompresser et l'activer: [->../?action=charger&amp;plugin=nom]
+- charger un plugin, le d&#233;compresser et l'activer: [->../?action=charger&amp;plugin=nom]
 
-- charger un zip et le décompresser: [../?action=charger&amp;zip=archive] (sans .zip)
+- charger un zip et le d&#233;compresser: [../?action=charger&amp;zip=archive] (sans .zip)
 
-Si le nom du zip differe de son nom local, mettre à la fois {zip} et {plugin}:
+Si le nom du zip differe de son nom local, mettre &#224; la fois {zip} et {plugin}:
 - [->../?action=charger&amp;plugin=nom&amp;zip=archive]
 
 Options supplementaires:
-- &amp;url_retour=[url retour], défaut ecrire/
+- &amp;url_retour=[url retour], d&#233;faut ecrire/
 - &amp;depot=[url du depot des zip] defaut http://files.spip.org/spip-zone/
 
 On peut aussi simplement activer un plugin deja present par:

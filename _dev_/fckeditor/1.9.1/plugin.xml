@@ -1,6 +1,6 @@
 <plugin>
 	<nom>FCKeditor (2.4.2) pour Spip (1.9.1) [V-1.4]</nom>
-	<auteur>[Frank SAURET->http://electropol.free.fr], Val&#233;rian &copy; 2007 - Distribu&#233; sous licence GNU/GPL</auteur>
+	<auteur>[Frank SAURET->http://electropol.free.fr], Val&#233;rian &#169; 2007 - Distribu&#233; sous licence GNU/GPL</auteur>
 	<version>1.4 (pour spip 1.9.1)</version>
 	<etat>dev</etat>
 	<description>
@@ -12,7 +12,7 @@
 -* - Se substitue &#224; la barre SPIP mais propose une option pour la r&#233;&#233;dition d'article initalement &#233;cris avec l'&#233;diteur SPIP,
 -* - G&#233;n&#232;re du HTML,
 -* - Bas&#233; sur FCKeditor 2.42,
--* - Ajout d'une aide &#224; l'utilisation en fran&ccedil;ais,
+-* - Ajout d'une aide &#224; l'utilisation en fran&#231;ais,
 -* - Possibilit&#233; de lier et d'ins&#233;rer des fichiers et images envoy&#233;s par SPIP,
 -* - Possibilit&#233; de supprimer et renommer les fichiers envoy&#233;s par FCKeditor.
 -* - Int&#233;gration du plugin d'&#233;dition de tableau.
@@ -27,7 +27,7 @@
 -* - Pour l'instant le plugin doit &#234;tre install&#233;dans la racine du r&#233;pertoire plugin de spip.
 
 <u>Attention</u>
--* - Le plugin passe FCKEditor dans la langue de l'utilisateur de SPIP. Il est donc n&#233;c&#233;ssaire de choisir au moins un fois la langue pour b&#233;n&#233;ficier du fran&ccedil;ais.
+-* - Le plugin passe FCKEditor dans la langue de l'utilisateur de SPIP. Il est donc n&#233;c&#233;ssaire de choisir au moins un fois la langue pour b&#233;n&#233;ficier du fran&#231;ais.
 
 	</description>
 	<lien>[http://electropol.free.fr]</lien> <!-- URL de documentation -->

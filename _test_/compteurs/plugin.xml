@@ -2,17 +2,17 @@
  	<nom>Gestion de compteurs</nom>
 	<auteur>Christian Lefebvre, Atos Worldline
 
-	&copy; 2006 Distribue sous licence GNU/GPL v2</auteur>
+	&#169; 2006 Distribue sous licence GNU/GPL v2</auteur>
 	<version>1.0</version>
 	<etat>test</etat>
 	<description>compteurs simples, de clics, de votes ou d'actions.
-_ Le plugin défini deux balises :
--* une balise #COMPTEUR_PLUS{type, id, categ, montant} permettant d'ajouter un montant (1 par défaut) au compteur de la donnée de type "type", et d'identifiant "id" (par exemple 'article, 42'), sur la categorie "categ" (par exemple 'vote', '' par défaut).
--* une balise #COMPTEUR{type, id, categ} pour récupérer le contenu courant d'un compteur, sou sla forme d'un tableau de 2 entrées : montant total, nombre d'ajouts.
+_ Le plugin d&#233;fini deux balises :
+-* une balise #COMPTEUR_PLUS{type, id, categ, montant} permettant d'ajouter un montant (1 par d&#233;faut) au compteur de la donn&#233;e de type "type", et d'identifiant "id" (par exemple 'article, 42'), sur la cat&#233;gorie "categ" (par exemple 'vote', '' par d&#233;faut).
+-* une balise #COMPTEUR{type, id, categ} pour r&#233;cup&#233;rer le contenu courant d'un compteur, sou sla forme d'un tableau de 2 entr&#233;es : montant total, nombre d'ajouts.
 
-  Ainsi, pour gérer un vote 'oui/non', on peut faire des #COMPTEUR_PLUS{article, 42, vote, 1} ou #COMPTEUR_PLUS{article, 42, vote, -1}. #COMPTEUR_PLUS{article, 42, vote} renverra alors un tableau avec le total des montant (0 signifiant 50%/50%) et le nombre de votes.
+  Ainsi, pour g&#233;rer un vote 'oui/non', on peut faire des #COMPTEUR_PLUS{article, 42, vote, 1} ou #COMPTEUR_PLUS{article, 42, vote, -1}. #COMPTEUR_PLUS{article, 42, vote} renverra alors un tableau avec le total des montant (0 signifiant 50%/50%) et le nombre de votes.
 
-{{installation}} : il faut créer la table compteurs, via le script compteurs.sql
+{{installation}} : il faut cr&#233;er la table compteurs, via le script compteurs.sql
 	</description>
 
 	<options>compteurs_opt.php</options>

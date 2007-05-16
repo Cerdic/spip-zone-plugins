@@ -4,7 +4,7 @@
  <prefix>glossaire_allergie</prefix>
  <etat>dev</etat>
  <auteur>Philippe Auriol [contact->mailto:philippe.auriol@gmail.com]
- _ [page perso->http://philippe.auriol.free.fr/]</auteur>
+_ [page perso->http://philippe.auriol.free.fr/]</auteur>
  <description> Ce plugin est un glossaire bas&#233; sur la 
  [contrib de Francois Schreuer->http://www.spip-contrib.net/Un-glossaire-interne], 
  il a &#233;t&#233; modifi&#233; pour supporter la pr&#233;sence des mots dans les liens 

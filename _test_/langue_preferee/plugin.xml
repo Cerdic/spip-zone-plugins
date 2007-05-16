@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Langue pr&eacute;f&eacute;r&eacute;e par l'internaute</nom>
-	<auteur>Nicolas Hoizey &copy; 2007 - Licence GNU/GPL</auteur>
+	<auteur>Nicolas Hoizey &#169; 2007 - Licence GNU/GPL</auteur>
 	<version>0.1</version>
 	<etat>test</etat>
 	<description>
@@ -11,8 +11,8 @@ Utilisez la balise <code>#LANGUE_PREFEREE_REDIRECTION</code> dans <code>sommaire
 Si aucune langue disponible n'est compatible avec les choix configur&eacute;s dans le navigateur, la langue par d&eacute;faut du site est choisie.
 Si cette langue n'est utilis&eacute;e par aucun secteur (!!!), le premier secteur trouv&eacute; est choisi.
 
-Il est possible de laisser l'internaute choisir sa langue pr&eacute;f&eacute;r&eacute;e, différente de celle configur&eacute;e dans son navigateur, en la pr&eacute;cisant en param&egrave;tre d'appel du sommaire, avec <code>/?lang=fr</code> par exemple pour le fran&ccedil;ais.
-Ce choix est alors stock&eacute; dans un cookie pour utilisation ultérieure prioritaire sur la configuration du navigateur.
+Il est possible de laisser l'internaute choisir sa langue pr&eacute;f&eacute;r&eacute;e, diff&#233;rente de celle configur&eacute;e dans son navigateur, en la pr&eacute;cisant en param&egrave;tre d'appel du sommaire, avec <code>/?lang=fr</code> par exemple pour le fran&#231;ais.
+Ce choix est alors stock&eacute; dans un cookie pour utilisation ult&#233;rieure prioritaire sur la configuration du navigateur.
 La balise <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> permet de proposer un lien de suppression de ce cookie.
 <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{mon message personnalise}</code> permet de remplacer le message propos&eacute; par d&eacute;faut.
     </description>

@@ -4,8 +4,8 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	fil@rezo.net
-_ &copy; 2006 - Distribue sous licence GNU/GPL
-_ bas&#233; sur hAtom2Atom.xsl : &copy; 2005 [Luke Arno->http://lukearno.com/], 2005-06 [Robert Bachmann->http://rbach.priv.at/], 2005-06 [Benjamin Carlyle->http://soundadvice.id.au/] (voir le fichier pour la licence).
+_ &#169; 2006 - Distribue sous licence GNU/GPL
+_ bas&#233; sur hAtom2Atom.xsl : &#169; 2005 [Luke Arno->http://lukearno.com/], 2005-06 [Robert Bachmann->http://rbach.priv.at/], 2005-06 [Benjamin Carlyle->http://soundadvice.id.au/] (voir le fichier pour la licence).
 _ N&#233;cessite les fonctions php-xml et le binaire tidy.
 	</auteur>
 	<version>

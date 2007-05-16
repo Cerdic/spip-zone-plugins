@@ -2,7 +2,7 @@
 	<nom>Syndiquer dans spip_articles</nom>
 	<auteur><a href="http://francois.schreuer.org/">franz</a>
 
-	&copy; 2006 - Distribu&#233; sous licence GPL</auteur>
+	&#169; 2006 - Distribu&#233; sous licence GPL</auteur>
 	<version>
 	0.1
 	</version>
@@ -14,7 +14,7 @@
 	la table <code>spip_articles</code> et non plus dans la table <code>spip_syndic_articles</code>. Avantage&nbsp;? On peut d&#233;sormais g&#233;rer des logos, auteurs,
 	mots-cl&#233;s et autres statistiques de fr&#233;quentation (entre autres) sur les articles syndiqu&#233;s.
 
-	Attention : ce plugin affecte profond&#233;ment le fonctionnement de SPIP, notamment en rempla&ccedil;ant plusieurs fichiers importants. &Agrave; utiliser avec grande prudence, donc.
+	Attention : ce plugin affecte profond&#233;ment le fonctionnement de SPIP, notamment en rempla&#231;ant plusieurs fichiers importants. &Agrave; utiliser avec grande prudence, donc.
 
 	Ce plugin a &#233;t&#233; d&#233;velopp&#233; dans le cadre du projet de portail <a href="http://mouvements.be/">mouvements.be/</a>.
 	</description>

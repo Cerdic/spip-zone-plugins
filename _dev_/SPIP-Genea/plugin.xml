@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Genea-SPIP - Plugin de g&eacute;n&eacute;alogie pour SPIP</nom>
 	<auteur>[Xavier BUROT->mailto:xebiaut@free.fr]
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL</auteur>
+_ &#169; 2006 - Distribu&eacute; sous licence GNU/GPL</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>Plugin de gestion d'arbre g&eacute;n&eacute;alogique &agrave; partir de fichier GEDCOM.</description>
