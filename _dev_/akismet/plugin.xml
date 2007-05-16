@@ -15,7 +15,7 @@ _ Cette extension, basé de la classe PHP4 fournie par [Alex Potsides->http://ww
     	test
 	</etat>
 	<description>
-		Portage pour SPIP d'[Akismet->http://akismet.com], une extension anti-spam de Wordpress . Cette extension de Spip nécessite l'extension CFG. [ Accédez à la configuration->.?exec=cfg&cfg=akismet]
+		Portage pour SPIP d'[Akismet->http://akismet.com], une extension anti-spam de Wordpress . Cette extension de Spip nécessite l'extension CFG. [ Accédez à la configuration->.?exec=cfg&amp;cfg=akismet]
 	</description>
 	<lien></lien> <!-- URI de documentation -->
   	<prefix>akismet

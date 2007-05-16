@@ -19,7 +19,7 @@
           Permet de cloner en xx exemplaires une rubriques "source" avec ses articles vers une rubrique "cible"
 					<br />
 					N'oubliez pas de configurer les secteurs contenant les rubriques "sources" et "cibles" 
-					dans [l'interface de configuration->.?exec=cfg&cfg=gener_cont]
+					dans [l'interface de configuration->.?exec=cfg&amp;cfg=gener_cont]
 					<!-- 	en tête du fichier /exec/gener_cont.php  -->
         </description>
 				<lien>  

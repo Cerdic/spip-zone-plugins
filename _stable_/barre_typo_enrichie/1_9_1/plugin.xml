@@ -74,7 +74,7 @@ $GLOBALS['debut_intertitre_5'] = '<h6 class="spip">';
 $GLOBALS['fin_intertitre_5'] = '</h6>';
 </code>
 
-Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&cfg=bte->./?exec=cfg&cfg=bte] pour configurer ces options (les options de cfg sont priortitaires par rapport à celles de mes_options.php !)
+Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=bte->./?exec=cfg&amp;cfg=bte] pour configurer ces options (les options de cfg sont priortitaires par rapport à celles de mes_options.php !)
 
 {Certaines icones proviennent de [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
 	</description>
