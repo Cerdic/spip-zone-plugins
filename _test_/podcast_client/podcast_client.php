@@ -55,7 +55,7 @@
 		
 		
 		//trouver un flv chez  dailymotion ou une image chez flickr
-		# <media:content url="http://www.dailymotion.com/swf/3ndb67rMbTuLh8E2i" type="application/x-shockwave-flash" duration="520" width="320" height="240"/>
+		# <media:content url="http://www.dailymotion.com/get/14/80x60/flv/3088827.flv?key=733d92b170af04321c5d108635a6d94512c133a.flv" type="video/x-flv" duration="215" width="80" height="60"/>
 		# <media:content url="http://farm1.static.flickr.com/169/465892205_c6232dab5f_o.jpg" type="image/jpeg" height="1920" width="2560"/>
 		//echo $item ;
 		if (preg_match(',(<media:content[^>]*>),i',
@@ -81,7 +81,7 @@
 		
 		
 		// si le media est un flv, on prend le flv et aussi la miniature (a terme la mettre dans la vignette du doc distant spip)
-		if($data['enc_media']['type'] == 'application/x-shockwave-flash'){	
+		if($data['enc_media']['type'] == 'video/x-flv'){	
 			$data['enclosures_all'][] = $data['enc_media'] ;
 			$data['enclosures_all'][] = $data['enc_thumbnail'] ;
 		}
