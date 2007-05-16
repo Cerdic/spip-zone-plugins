@@ -133,17 +133,19 @@ function Forms_boite_selection_donnees($recherche, $les_donnees, $type, $type_ta
 	$out = "";
 	$liste_res = Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table);
 	if (count($liste_res)){
-		$nb_ligne = max(10,ceil(count($liste_res)/5));
-		$out .= "<select name='id_donnee_liee[]' multiple='multiple' class='fondl' style='width:100%' size='$nb_ligne'>";
+		$nb_ligne = 0;
 		foreach($liste_res as $titre=>$donnees){
 			$out .= "<option value=''>$titre</option>";
 			foreach($donnees as $id_donnee=>$champs){
+				$nb_ligne++;
 				$out .= "<option value='$id_donnee'>&nbsp;&nbsp;&nbsp;";
 				$out .= implode (", ",$champs);
 				$out .= "</option>";
 			}
 		}
-		$out .= "</select>";
+		$nb_ligne = max(10,round($nb_ligne/4));
+		$out = "<select name='id_donnee_liee[]' multiple='multiple' class='fondl' style='width:100%' size='$nb_ligne'>"
+		  .$out .= "</select>";
 	}
 	$out .= "<input id='_id_donnee_liee' type='hidden' name='_id_donnee_liee' value='' />";
 	return $out;
@@ -169,17 +171,19 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table
 			  WHERE d.statut!='poubelle' AND f.type_form="._q($type_table)." AND $in GROUP BY d.id_donnee $limit");
 		}
 		else {
-			$res = spip_query("SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
+			$res = spip_query($s = "SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
 			JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
 			JOIN spip_forms AS f ON d.id_form = f.id_form
 			WHERE d.statut!='poubelle' AND f.type_form="._q($type_table)
 			." AND $in AND valeur LIKE "._q("$recherche%")." GROUP BY c.id_donnee $limit");
+				var_dump($s);
 			if (spip_num_rows($res)<10){
-				$res = spip_query("SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
+				$res = spip_query($s = "SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
 				JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
 				JOIN spip_forms AS f ON d.id_form = f.id_form
 				WHERE d.statut!='poubelle' AND f.type_form="
 				._q($type_table)." AND $in AND valeur LIKE "._q("%$recherche%")." GROUP BY c.id_donnee $limit");
+				var_dump($s);
 			}
 		}
 		while ($row = spip_fetch_array($res)){
