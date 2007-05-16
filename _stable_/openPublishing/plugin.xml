@@ -25,9 +25,9 @@
 		</li>
 		</ul>
 				
-		{{Procedure d'installation :}} </li>
+		{{Procedure d'installation :}} <br />
 		<ul>
-		<li>Activez ce plugin <br />
+		<li>Activez ce plugin </li>
 		<li>Allez dans l'onglet de configuration openPublishing.</li>
 		<li>Cr&eacute;ez les nouvelles tables dans la base de donn&#233;es.</li>
 		<li>Modifiez la configuration par d&eacute;faut du plugin.</li>
