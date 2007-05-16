@@ -1,6 +1,6 @@
 [(#REM)
 
-	Controleur pour le crayon 'auteur_qui', uniquement html
+	Controleur pour le crayon 'auteur_listes' (spip-listes), uniquement html ... pour l'instant
 
 ]
 #CACHE{0}
@@ -16,15 +16,19 @@
 	 style="width:#ENV{largeur}px;" value="[(#EMAIL**|entites_html)]" />
 	</fieldset>
 	<B_l>
-	<fieldset><legend>Abonn&eacute;e? &agrave;</legend>
-	<select class="crayon-active" name="#ENV{name_nom}" multiple="multiple" >
+		<fieldset><legend>Abonn&eacute;e? &agrave;</legend>
+		<select class="crayon-active" name="#ENV{name_listes[]}" multiple="multiple" >
 	<BOUCLE_l(LISTES)>
-	<option
-	 style="width:#ENV{largeur}px;" value="#ID_LISTE"
-	<BOUCLE_al(SPIP_AUTEURS_LISTES){id_auteur}{id_liste}{tous}>selected="selected"</BOUCLE_al>
-	>#TITRE</option>
+		<option
+		 style="width:#ENV{largeur}px;" value="#ID_LISTE"
+		<BOUCLE_al(SPIP_AUTEURS_LISTES){id_auteur}{id_liste}{tous}>
+			selected="selected"
+		</BOUCLE_al>
+		>
+		#TITRE
+		</option>
 	</BOUCLE_l>
-	</select>
+		</select>
+		</fieldset>
 	</B_l>
-	</fieldset>
 </BOUCLE_a>
