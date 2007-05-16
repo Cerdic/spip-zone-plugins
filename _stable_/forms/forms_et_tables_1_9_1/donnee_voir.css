@@ -5,6 +5,7 @@ span.donnees{
 	padding-top: 1em;
 	border-bottom: 1px dashed #666;
 	padding-bottom: 0.4em;
+	overflow:none;	
 }
 
 span.donnee-champ {
