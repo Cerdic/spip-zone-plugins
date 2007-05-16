@@ -1,0 +1,82 @@
+[(#REM|sinon{_DIR_PLUGIN_SPIPLISTES}|defined|?{'',' '})
+	#EVAL{exit("Il faut le plugin spip-listes, d&eacute;sol&eacute;...")}
+]
+[(#REM|sinon{_DIR_PLUGIN_CRAYONS}|defined|?{'',' '})
+	#EVAL{exit("Il faut le plugin crayons, d&eacute;sol&eacute;...")}
+]
+
+[(#ENV**|htmlentities)]
+
+[(#ENV*{message_formulaire})]
+
+[(#ENV*{confirm_formulaire})]
+
+<BOUCLE_auteur(AUTEURS){tous} {id_auteur=#ENV{id_auteur}}>
+<div class="#EDIT{listes}" style="text-align:left; border:1px solid purple; padding:2px;">
+
+#SET{bonjour,#NOM|concat{#NOM|concat{#LOGIN}|?{' aka '}}|concat{#LOGIN}}
+	<h4>bonjour, #GET{bonjour} !</h4>
+	<h4><:spiplistes:abonnement:></h4>
+	<B_aff_listes>
+		<ul style='width:350px;list-style-type:none'>
+	<BOUCLE_aff_listes(SPIP_LISTES) {statut=liste} {0,100}>
+		<BOUCLE_aff_inscription(SPIP_AUTEURS_LISTES){tous} {id_liste} {id_auteur=#ENV{id_auteur}}>
+			#TITRE
+		</BOUCLE_aff_inscription>
+		#SET{ok_inscrit,1}
+		</B_aff_inscription>
+	</BOUCLE_aff_listes>
+		</ul>
+	</B_aff_listes>
+	[(#GET{ok_inscrit}|?{'',' '})
+		Pas d'abonnement ?
+	]
+</div>
+</BOUCLE_auteur>
+
+<B_listes>
+	<fieldset>
+	<legend>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</legend>
+	<ul style='width:350px;list-style-type:none'>
+<BOUCLE_listes(SPIP_LISTES) {statut=liste} {0,(#ENV{formulaire_affiche}|?{100,0})}>
+				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
+				<li style="margin-bottom:3px">
+				<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_LISTE" /><a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>				
+				</li>]
+				<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
+				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
+				<li style="margin-bottom:3px">
+					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
+					<a title='<:spiplistes:infos_liste:>' href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
+				</li>]
+</BOUCLE_listes>
+	</ul>
+</B_listes>
+	[(#ENV{formulaire_affiche}|?{' ',''})<fieldset>
+	<legend><:spiplistes:abo_1_lettre:></legend>]
+<//B_listes>
+[(#ENV{formulaire_affiche}|?{' ',''})
+	[(#ENV*{extra_aut}|bloog_extra_saisie{'auteurs', 'inscription','true'})]
+	<input style="margin-top:3px" type='submit' name='Valider'
+		value='<:spiplistes:abonnement_bouton:>' />
+	<input type="hidden" name="d"  value="[(#ENV{d})]"  />
+	<input type="hidden" name="confirm"  value="oui" />
+	</fieldset>
+	</div>
+	</form>
+]
+[(#ENV{formulaire_cookie_affiche}|?{' ',''})
+<fieldset> 
+	<legend><:spiplistes:abonnement_bouton:></legend>
+	<h4><:spiplistes:abonnement_change_format:></h4>
+	[(#ENV*{erreur}|sinon{
+	<:spiplistes:abonnement_texte_mail:>
+	<form action="#SELF" method="post">
+		<div style="text-align:right">
+			<input type="text" class="fondo" name="email_desabo" value="" />
+			<input type="hidden" name="desabo" value="oui" />
+			<input type="submit" class="fondl" name="oubli" value="OK" />
+		</div>
+	</form>})]
+</fieldset>
+]

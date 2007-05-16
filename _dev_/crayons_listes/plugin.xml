@@ -1,0 +1,42 @@
+<plugin>
+	<nom>
+	<multi>
+	Crayons pour spip-liste
+	[ar]&#1575;&#1604;&#1602;&#1604;&#1605; pour spip-liste
+	[it]Pennarelli per spip-liste
+	</multi>
+	</nom>
+	<auteur>
+	toggg
+	&copy; 2007-2007 -
+	Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>
+	0.0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+Pour apporter la technologie de crayons &agrave; spip-listes
+	</description>
+	<lien>
+	</lien>
+	<prefix>
+	Craylist
+	</prefix>
+	<!-- icon>
+	images/crayon.png
+	</icon>
+	<fonctions>tetecrayons.php</fonctions>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>tetecrayons.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>tetecrayons.php</inclure>
+	</pipeline -->
+	<chemin dir='' />
+</plugin>
