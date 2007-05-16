@@ -1,4 +1,5 @@
 #SET{colonnes_sans_tri,'0'}
+#MODELE{donnee,id_donnee=#EVAL{$_GET['id_donnee']} }
 <script type="text/javascript" src="#EVAL{_DIR_PLUGIN_FORMS}javascript/jquery.tablesorter.dev.js"></script>
 <div><div id="sorting"><div>Tri en cours, un instant...</div></div>
 <div id="filter"></div></div>
@@ -24,7 +25,6 @@
 </tbody>
 </table>
 </B_head>
-#MODELE{donnee,id_donnee=#EVAL{$_GET['id_donnee']} }
 <script type="text/javascript"><!--
 var search_string='<:bouton_chercher:>';
 var clear_string='<:info_tout_afficher:>';
