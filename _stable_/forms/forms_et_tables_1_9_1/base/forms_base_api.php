@@ -129,6 +129,17 @@ function Forms_infos_donnee($id_donnee,$specifiant=true,$linkable=false){
 	list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee,$specifiant,$linkable);
 	if (!count($t) && $specifiant)
 		list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee, false,$linkable);
+	if (!count($t) && !$id_form) { 
+		// verifier qu'une donnee vide n'existe pas suite a enregistrement errone..
+		$res2 = spip_query("SELECT f.titre AS titreform,f.id_form,f.type_form FROM spip_forms_donnees AS d
+		JOIN spip_forms AS f ON f.id_form=d.id_form
+		WHERE d.id_donnee="._q($id_donnee));
+		if ($row2 = spip_fetch_array($res2)){
+			$titreform = $row2['titreform'];
+			$id_form = $row2['id_form'];
+			$type_form = $row2['type_form'];
+		}
+	}
 	return array($id_form,$titreform,$type_form,$t);
 }
 function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
