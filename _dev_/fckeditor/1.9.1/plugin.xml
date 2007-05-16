@@ -1,11 +1,10 @@
 <plugin>
-	<nom>FCKeditor (2.4.2) pour Spip (1.9.1) [V-1.3]</nom>
+	<nom>FCKeditor (2.4.2) pour Spip (1.9.1) [V-1.4]</nom>
 	<auteur>[Frank SAURET->http://electropol.free.fr], Val&#233;rian &copy; 2007 - Distribu&#233; sous licence GNU/GPL</auteur>
-	<version>1.3 (pour spip 1.9.1)</version>
+	<version>1.4 (pour spip 1.9.1)</version>
 	<etat>dev</etat>
 	<description>
 {{Edition WYSIWYG avec FCKeditor}}
-Cette version semble stable, n&#233;anmoins, il se peut que certains firewalls bloquent les scripts.
 <br /><br />
 <u>Caract&#233;ristiques :</u>
 -* - Edition des articles et des br&#232;ves,
@@ -18,18 +17,18 @@ Cette version semble stable, n&#233;anmoins, il se peut que certains firewalls b
 -* - Possibilit&#233; de supprimer et renommer les fichiers envoy&#233;s par FCKeditor.
 -* - Int&#233;gration du plugin d'&#233;dition de tableau.
 -* - Cr&#233;ation du plugin &laquo;Notes de bas de page&raquo; &#224; partir de &laquo;placeholder&raquo;.
+-* - Suppression du d&#233;coupage de texte long.
 
 <u>Limitations</u>
 -* - Ne pas mixer pour un m&#234;me article l'&#233;dition WYSIWYG et le code SPIP,
 -* - Les fichiers envoy&#233;s sur le serveur par l'interm&#233;diaire de FCKeditor sont partag&#233;s entre tous les utilisateurs. 
 -* - Il est possible de d&#233;sactiver ces fonctionnalit&#233;s &#224; l'aide des fichiers de configuration,
 -* - Les fichiers envoy&#233;s par l'interm&#233;diaire de FCKeditor ne sont pas utilisables par SPIP.
+-* - Pour l'instant le plugin doit &#234;tre install&#233;dans la racine du r&#233;pertoire plugin de spip.
 
 <u>Attention</u>
 -* - Le plugin passe FCKEditor dans la langue de l'utilisateur de SPIP. Il est donc n&#233;c&#233;ssaire de choisir au moins un fois la langue pour b&#233;n&#233;ficier du fran&ccedil;ais.
 
-<u>Bugs</u>
--* - Il y a un probl&#232;me pour la r&#233;&#233;dition des articles long.
 	</description>
 	<lien>[http://electropol.free.fr]</lien> <!-- URL de documentation -->
 	<prefix>fckeditor2</prefix>
@@ -39,5 +38,5 @@ Cette version semble stable, n&#233;anmoins, il se peut que certains firewalls b
 		<action>header_prive</action>
 		<inclure>fckeditor2_pipelines.php</inclure>
 	</pipeline>
-
+	
 </plugin>
