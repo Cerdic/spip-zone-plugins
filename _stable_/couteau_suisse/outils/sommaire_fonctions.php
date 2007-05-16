@@ -28,7 +28,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 			$texte = substr($texte, 0, $pos2) . $ancre . $regs[1][$i] . $haut . $titre . substr($texte, $pos2 + strlen($regs[1][$i]) + strlen($regs[2][$i]));
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			$lien = couper($regs[2][$i], _sommaire_NB_CARACTERES);
-			$titre = htmlentities(textebrut(couper($regs[2][$i], 100)));
+			$titre = attribut_html(propre(couper($regs[2][$i], 100)));
 			$sommaire .= "<li><a $st title=\"$titre\" href=\"".parametre_url(self(),'artpage', $page)."#outil_sommaire_$index\">$lien</a>$p</li>";
 		}
 	}
