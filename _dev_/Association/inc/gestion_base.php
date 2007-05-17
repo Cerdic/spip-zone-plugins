@@ -9,14 +9,9 @@
 * Pour plus de details voir le fichier COPYING.txt.
 *  
 **/
-// inspiré du plugin agenda
 
-//include_spip('inc/texte');
-//include_spip('inc/date');
-include_spip('association_mes_fonctions'); //?
-
-function asso_verifier_base(){
-	$version_base = 0.40; //version actuelle
+function association_verifier_base(){
+	$version_base = 0.50; //version actuelle
 	$current_version = 0.0;
 	
 	if (   (!isset($GLOBALS['meta']['asso_base_version']) )
@@ -57,8 +52,8 @@ function asso_verifier_base(){
 		}
 		
 		if ($current_version<0.50){
-		spip_query("ALTER TABLE `spip_asso_profil` ADD `indexation` TEXT NOT NULL AFTER `mail` ");
-		spip_query("ALTER TABLE `spip_asso_activites` ADD `non_membres` TEXT NOT NULL AFTER `accompagne`, CHANGE accompagne membres, ");
+		spip_query("ALTER TABLE spip_asso_profil ADD indexation TEXT NOT NULL AFTER mail ");
+		spip_query("ALTER TABLE spip_asso_activites ADD membres TEXT NOT NULL AFTER accompagne, ADD non_membres TEXT NOT NULL AFTER membres ");
 		ecrire_meta('asso_base_version',$current_version=0.50);
 		}
 		
