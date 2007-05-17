@@ -20,6 +20,7 @@ function exec_voir_activites(){
 	$url_activites = generer_url_ecrire('activites');
 	$url_edit_activite=generer_url_ecrire('edit_activite');
 	$url_ajout_activite=generer_url_ecrire('ajout_activite');
+	$url_pdf_activite=generer_url_ecrire('pdf_activite');
 	$url_ajout_participation=generer_url_ecrire('ajout_participation');
 	$url_action_activites = generer_url_ecrire('action_activites');
 	include_spip ('inc/navigation');
@@ -44,6 +45,9 @@ if ( isset ($_POST['statut'] ))
 		$titre = $data['titre'];
 	}
 	echo '<td><strong>'.$date.': '.$titre.'</strong></td>';
+	echo '<td>';
+	echo '<a href="'.$url_pdf_activite.'&id='.$id_evenement.'">Imprimer</a>';
+	echo '</td>';
 	echo '<td style="text-align:right;">';
 	echo '<form method="post" action="'.$url_voir_activites.'">';
 	echo '<input type="hidden" name="id" value="'.$id_evenement.'">';
@@ -63,7 +67,7 @@ if ( isset ($_POST['statut'] ))
 	echo '<table width="70%" border="0">';
 	echo '<tr bgcolor="#D9D7AA">';
 	echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_id').'</strong></td>';
-	echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_date').'</strong></td>';
+	echo '<td><strong>'._T('asso:activite_entete_date').'</strong></td>';
 	echo '<td><strong>'._T('asso:activite_entete_nom').'</strong></td>';
 	echo '<td><strong>'._T('asso:activite_entete_adherent').'</strong></td>';
 	echo '<td style="text-align:right"><strong>'._T('asso:activite_entete_inscrits').'</strong></td>';

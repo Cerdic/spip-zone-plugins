@@ -3,7 +3,7 @@
 define('FPDF_FONTPATH','font/');
 include_spip('pdf/pdf_table');
 
-$statut=$_GET['statut'];
+$critere=$_GET['critere'];
 $query=spip_query("SELECT nom FROM spip_asso_profil WHERE id_profil=1");
 $association=spip_fetch_array($query);
 
@@ -43,6 +43,6 @@ $prop=array(
           'color1'=>array(224,235,255),
           'color2'=>array(255,255,255),
           'padding'=>2);
-$pdf->Table("SELECT * FROM spip_asso_adherents WHERE statut=$statut ORDER BY nom,prenom",$prop);
+$pdf->Table("SELECT * FROM spip_asso_adherents WHERE $critere ORDER BY nom,prenom",$prop);
 $pdf->Output();
 ?>
