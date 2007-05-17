@@ -20,7 +20,7 @@ function exec_action_activites(){
 
 	include_spip ('inc/navigation');
 
-	debut_cadre_relief(  "", false, "", $titre = _T('asso:titre_action_sur_inscriptions'));
+	debut_cadre_relief(  "", false, "", $titre = _T('asso:activite_titre_inscriptions_activites'));
 	debut_boite_info();
 
 	print association_date_du_jour();
