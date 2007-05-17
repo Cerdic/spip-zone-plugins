@@ -31,12 +31,18 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 	}
 	// si les points de suite ont ete ajoutes
 	if (strpos($result, '@@CS_SUITE@@') !== false) {
+		// precaution sur le tout paragrapher !
+		$mem = $GLOBALS['toujours_paragrapher'];  
+		$GLOBALS['toujours_paragrapher'] = false;  
+		// des points de suite bien propres
 		$intro_suite = propre(_INTRODUCTION_SUITE);
+		// si les points de suite sont cliquables
 		if ($id && _INTRODUCTION_LIEN == 1) {
 			if (substr($intro_suite, 0, 6) == '<br />') 
 				$intro_suite = propre("<br />[".substr($intro_suite, 6)."->art$id]");
 				else $intro_suite = propre("&nbsp;[{$intro_suite}->art$id]");
 		}
+		$GLOBALS['toujours_paragrapher'] = $mem; 
 		$result = str_replace('@@CS_SUITE@@', $intro_suite, $result);
 	}
 	return $result;
