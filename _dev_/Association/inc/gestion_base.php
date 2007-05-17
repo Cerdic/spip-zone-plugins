@@ -15,14 +15,6 @@
 //include_spip('inc/date');
 include_spip('association_mes_fonctions'); //?
 
-function asso_install(){
-	asso_verifier_base();
-}
-
-//function asso_uninstall(){
-//	include_spip('base/association');
-//	include_spip('base/abstract_sql');
-//}
 function asso_verifier_base(){
 	$version_base = 0.40; //version actuelle
 	$current_version = 0.0;
@@ -64,10 +56,12 @@ function asso_verifier_base(){
 		ecrire_meta('asso_base_version',$current_version=0.40);
 		}
 		
-		//if ($current_version<0.50){
-		//spip_query("ALTER TABLE `spip_asso_profil` ADD `indexation` TEXT NOT NULL AFTER `mail` ");
-		//ecrire_meta('asso_base_version',$current_version=0.50);
-		//}
+		if ($current_version<0.50){
+		spip_query("ALTER TABLE `spip_asso_profil` ADD `indexation` TEXT NOT NULL AFTER `mail` ");
+		spip_query("ALTER TABLE `spip_asso_activites` ADD `non_membres` TEXT NOT NULL AFTER `accompagne`, CHANGE accompagne membres, ");
+		ecrire_meta('asso_base_version',$current_version=0.50);
+		}
+		
 		ecrire_metas();
 	}
 /*
@@ -97,4 +91,13 @@ function asso_verifier_base(){
 	}
 	*/
 }
+
+function asso_install(){
+	asso_verifier_base();
+}
+
+//function asso_uninstall(){
+//	include_spip('base/association');
+//	include_spip('base/abstract_sql');
+//}
 ?>
