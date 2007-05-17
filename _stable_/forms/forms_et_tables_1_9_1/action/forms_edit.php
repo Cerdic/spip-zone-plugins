@@ -40,6 +40,8 @@ function Forms_update_edition_champ($id_form,$champ) {
 	if ($row = spip_fetch_array($res)){
 		$type = $row['type'];
 		$extra_info = "";
+		if ($type == 'texte')
+			if ($champ_barre_typo=_request('champ_barre_typo')) $extra_info = $champ_barre_typo;
 		if ($type == 'url')
 			if ($champ_verif=_request('champ_verif')) $extra_info = $champ_verif;
 		if ($type == 'mot') {

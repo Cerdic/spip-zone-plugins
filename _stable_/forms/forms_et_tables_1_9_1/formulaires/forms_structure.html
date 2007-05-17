@@ -31,7 +31,7 @@
 				[(#TYPE|=={date}|?{' ',''}) #SET{class,date-picker} #SET{date-picker,1}]
 				[(#TYPE|=={password}|?{' ',''}) #SET{type,password}]
 				[(#TYPE|=={texte}|?{' ',''}) #SET{afficher,0}
-					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},input-#ID_FORM-#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{' ',#ENV{crayon_active,''},' ',#ENV**{erreur}|forms_valeur{#CHAMP}|?{champ_obli_oubli}})] })]
+					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},input-#ID_FORM-#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{' ',#ENV{crayon_active,''},' ',#ENV**{erreur}|forms_valeur{#CHAMP}|?{champ_obli_oubli}})],'',#EXTRA_INFO})]
 				]
 				[(#TYPE|=={fichier}|?{' ',''}) #SET{afficher,0}
 					<input type='file' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP'

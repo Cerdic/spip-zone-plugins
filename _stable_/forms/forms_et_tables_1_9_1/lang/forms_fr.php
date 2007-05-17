@@ -4,6 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aide_contextuelle'=>'Aide contextuelle',
+'activer_barre_typo'=>'Activer la barre typographique',
 'adresse_invalide'=>"Cette adresse n'est pas valide.",
 'afficher'=>'Afficher',
 'ajouter_champ' => "Ajouter un champ",
@@ -46,6 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'changer_choix_multiple' => "Changer en choix multiple",
 'changer_choix_unique' => "Changer en choix unique",
 'choisir_email' => "Choisir l'email en fonction de",
+'confirm_supprimer_champ' => 'Etes-vous certain de vouloir supprimer le champ \'@champ@\' ?',
+'confirm_supprimer_donnee' => 'Etes-vous certain de vouloir supprimer la donnee \'@donnee@\' ?',
+'confirm_vider_table' => 'Etes-vous certain de vouloir vider le contenu de la table \'@table@\' ?',
 'confirmer_reponse' => "Envoyer un mail d'accus&eacute; de r&eacute;ception avec :",
 'csv_classique' => "CSV classique (,)",
 'csv_excel' => "CSV pour Excel (;)",

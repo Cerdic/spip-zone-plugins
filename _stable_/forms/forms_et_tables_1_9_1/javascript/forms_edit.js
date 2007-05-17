@@ -30,9 +30,23 @@ jQuery.fn.ajaxWait = function() {
 	return this;
 }
 
+var action_confirmee=true;
+function confirmAction(message) {
+	if (!confirm(message)) {
+		/*if (!e) var e = window.event;
+		e.cancelBubble = true;
+		if (e.stopPropagation) e.stopPropagation();*/
+		action_confirmee=false;
+		return false;
+	}
+	action_confirmee=true;
+	return true;
+}
+
 jQuery.fn.ajaxAction = function() {
 	var id=$(this).attr("id");
 	$('#'+id+' a.ajaxAction').click(function(){
+		if ($(this).is('.confirmer') && (action_confirmee==false)) return false;
 		var action = $(this).attr("href");
 		var idtarget = action.split('#')[1];
 		if (!idtarget) idtarget = id;		

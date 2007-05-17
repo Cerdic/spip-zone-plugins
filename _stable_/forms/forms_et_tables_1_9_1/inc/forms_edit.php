@@ -179,6 +179,12 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out = "<input type='hidden' name='champ_public' value='oui' />";
 	}
 
+	if ($type == 'texte') {
+		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_barre_typo' value='oui' id='barre_typo_$champ'$checked> ";
+		$out .= "<label for='barre_typo_$champ'>"._T("forms:activer_barre_typo")."</label>";
+		$out .= "<br />\n";
+	}
 	if ($type == 'url') {
 		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
 		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_verif' value='oui' id='verif_$champ'$checked> ";
@@ -336,8 +342,11 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		}
 		$out .= "</span>";
 		// Supprimer un champ
+		$message = unicode_to_javascript(addslashes(html2unicode(_T("forms:confirm_supprimer_champ",array('champ'=>$row['titre'])))));
 		$link = parametre_url($action_link,'supp_champ', $champ);
-		$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("forms:supprimer_champ")."'></a>";
+		$out .= "<a href='$link#champs' class='ajaxAction confirmer' rel='$redirect' "
+		. "onclick=\"return confirmAction('$message')\">"
+		. "<img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("forms:supprimer_champ")."'></a>";
 		$out .= "</div>\n";
 
 		// Modifier un champ
