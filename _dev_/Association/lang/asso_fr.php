@@ -91,7 +91,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_identifiant' => 'Identifiant',
 	'adherent_libelle_visiteur_spip' => 'Visiteur SPIP',
 	'adherent_libelle_statut' => 'Statut de cotisation',
-	'adherent_libelle_categorie_choix' => 'Choisissez une ca&eacute;gorie de cotisation',
+	'adherent_libelle_categorie_choix' => 'Choisissez une cat&eacute;gorie de cotisation',
 
 	'adherent_libelle_statut_ok' => '&Agrave; jour',
 	'adherent_libelle_statut_echu' => '&Agrave &eacute;ch&eacute;ance',

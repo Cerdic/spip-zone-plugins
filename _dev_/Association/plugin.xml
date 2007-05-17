@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Association</nom>
 	<auteur>												<!-- Auteur du plugin -->
-	Bernard Blazin - François de Montlivault - [plugandspip->http://www.plugandspip.com]<br />
+	Bernard Blazin - Fran&ccedil;ois de Montlivault - [plugandspip->http://www.plugandspip.com]<br />
 	[Voir la notice en ligne->http://www.plugandspip.com/spip.php?page=explications]
 	</auteur>
 	<version>0.5</version>
@@ -9,7 +9,7 @@
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 
-	<fonctions>association_mes_fonctions.php</fonctions>  	<!-- fichier charge a chaque recalul de page (espace public) -->
+	<fonctions>association_mes_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
 	<!-- <options>association_mes_options.php</options>	-->		 <!-- fichier charge a chaque hit -->
 
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
