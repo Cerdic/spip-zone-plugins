@@ -22,7 +22,7 @@ function exec_association() {
 		exit;
 	}
 	
-	asso_verifier_base();		
+	association_verifier_base();		
 
 	debut_page(_T('asso:association'), "naviguer", "association");
 
