@@ -88,7 +88,7 @@ function association_verifier_base(){
 }
 
 function asso_install(){
-	asso_verifier_base();
+	association_verifier_base();
 }
 
 //function asso_uninstall(){
