@@ -329,11 +329,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "</table>";
 	 $ret .= $toolbox;
 	 $ret .= '<script type="text/javascript"><!--
-/*function hauteurTextarea() {
-	hauteur = (hauteur_fenetre() - 40) /2;
-	source = document.getElementById("text_area");
-	source.style.height = hauteur + "px";
-}*/
 
 function MajPreviewCallBack() {
 	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:$("#text_area").val() }, function(data) {
@@ -350,10 +345,23 @@ function MajPreview() {
 
 $(document).ready(function(){
 	$("#text_area").after("<div id=\"article_preview\"></div>");
-	//$("#text_area").oneresize($("#article_preview").height($("#text_area").height()+"px"));
 	$.ajaxTimeout( 5000 );
 	$("#text_area").keypress(function() { MajPreview() });
 });
+
+form_dirty = false;
+warn_onunload = true;
+
+$(window).bind("beforeunload", function(e) { 
+	if ( (warn_onunload == true) && (form_dirty == true) ) {
+		e.returnValue = \'Quitter la page sans sauvegarder ?\' 
+	}
+} );
+
+$("form").submit ( function() {warn_onunload=false;} );
+$("textarea").change ( function() {form_dirty=true;} );
+$("input").change ( function() {form_dirty=true;} );
+
 	 //--></script>';
 	return $ret;
 }
