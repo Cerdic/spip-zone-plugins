@@ -25,10 +25,12 @@ Pour apporter la technologie de crayons &agrave; spip-listes
 	<prefix>
 	Craylist
 	</prefix>
+	<options>
+	crayons_listes_options.php
+	</options>
 	<!-- icon>
 	images/crayon.png
 	</icon>
-	<fonctions>tetecrayons.php</fonctions>
 	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>tetecrayons.php</inclure>
