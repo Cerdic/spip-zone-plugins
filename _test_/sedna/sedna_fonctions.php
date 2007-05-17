@@ -68,7 +68,7 @@ AND _request('page')=='sedna') {
 
 	// unicode 24D0 = caractere de forme "(a)"
 	function antispam2($texte) {
-		return preg_replace(',(\w+)@(\w+\.\w+),','\\1&#x24d0;\\2', $texte);
+		return str_replace('@','&#x24d0;', $texte);
 	}
 	
 ?>
