@@ -75,9 +75,6 @@ echo '<td><input name="profession" type="text"  size= "40"></td>';
 echo '<tr> ';	
 echo '<td>'._T('asso:adherent_libelle_societe').' :</td>';
 echo '<td><input name="societe" type="text" size= "40"></td></tr>';
-echo '<tr> ';	
-echo '<td>'._T('asso:adherent_libelle_secteur').' :</td>';
-echo '<td><input name="secteur" type="text"></td>';
 echo '</table><HR>';
 #données internes
 echo '<strong>'._T('asso:donnees_internes').'</strong>';
@@ -94,19 +91,20 @@ while($categorie = spip_fetch_array($query))
 {
 echo '<option value = "'.$categorie["valeur"].'"> '.$categorie["libelle"].'</option>';
 }
-echo '</select>';
-echo '<tr> ';	
-echo '<td>'._T('asso:adherent_libelle_accord').' :</td>';
-echo '<td><input name="publication" type="radio" value="oui" checked>oui';
-echo '<input name="publication" type="radio" value="non" unchecked>non</td></tr>';
+echo '</select></td>';
+echo '<td>'._T('asso:adherent_libelle_date_validite').' (AAAA-MM-JJ) :</td>';
+echo '<td><input name="validite" type="text"></td></tr>';
 echo '<tr> ';	
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td></tr>';
-echo '<tr> ';
-echo '<td>'._T('asso:adherent_libelle_date_validite').' (AAAA-MM-JJ) :</td>';
-echo '<td><input name="validite" type="text"></td></tr>';
+echo '<tr> ';	
+echo '<td>'._T('asso:adherent_libelle_secteur').' :</td>';
+echo '<td><input name="secteur" type="text"></td>';
+echo '<td>'._T('asso:adherent_libelle_accord').' :</td>';
+echo '<td><input name="publication" type="radio" value="oui" checked>oui';
+echo '<input name="publication" type="radio" value="non" unchecked>non</td></tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:adherent_libelle_utilisateur1').' :</td>';
 echo '<td><input name="utilisateur1" type="text"></td>';

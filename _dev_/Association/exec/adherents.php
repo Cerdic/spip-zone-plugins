@@ -45,7 +45,7 @@ function exec_adherents() {
 		
 	switch($filtre) {
 		case "defaut":
-			$critere= "statut <> 'sorti'";
+			$critere= "statut<>'sorti'";
 			break;
 		case "ok":
 			$critere="statut='ok'";

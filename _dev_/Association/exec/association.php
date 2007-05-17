@@ -9,38 +9,37 @@
 * Pour plus de details voir le fichier COPYING.txt.
 *  
 **/
-	include_spip('inc/presentation');
-	include_spip('inc/gestion_base');
+include_spip('inc/presentation');
+include_spip('inc/gestion_base');
 
 function exec_association() {
-global $connect_statut, $connect_toutes_rubriques;
+	global $connect_statut, $connect_toutes_rubriques;
 
-if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) 
-	{
+	if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
 		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
 	}
 	
-asso_verifier_base();		
+	asso_verifier_base();		
 
-debut_page(_T('asso:association'), "naviguer", "association");
+	debut_page(_T('asso:association'), "naviguer", "association");
 
-$url_edit_adherent = generer_url_ecrire('edit_adherent');
+	$url_edit_adherent = generer_url_ecrire('edit_adherent');
 
-debut_gauche();
-      	debut_boite_info();
-      	echo propre(_T('asso:info_doc'));  	
-      	fin_boite_info();
+	debut_gauche();
+     debut_boite_info();
+     echo propre(_T('asso:info_doc'));  	
+     fin_boite_info();
 
-include_spip('inc/raccourcis');
+	include_spip('inc/raccourcis');
 
-debut_droite();	
+	debut_droite();	
 
 	debut_cadre_formulaire();
-		gros_titre(_T('asso:votre_asso'));
-		$query = spip_query ("SELECT * FROM spip_asso_profil WHERE id_profil=1");
+	gros_titre(_T('asso:votre_asso'));
+	$query = spip_query ("SELECT * FROM spip_asso_profil WHERE id_profil=1");
 
 $i=0;
 

@@ -135,24 +135,25 @@ $tables_principales['spip_asso_banques']= array(
 );	
 
 $tables_principales['spip_asso_activites']= array(
- 'field' => array(
+	'field' => array(
 					"id_activite"		=> "bigint(20) NOT NULL auto_increment",
 					"id_evenement"	=> "bigint(20) NOT NULL",
 					"nom"				=> "text NOT NULL",
 					"id_adherent"		=> "bigint(20) NOT NULL",
-					"accompagne"		=> "text NOT NULL",
+					"membres"		=> "text NOT NULL",
+					"non_membres"	=> "text NOT NULL",
 					"inscrits"			=> "int(11) NOT NULL default '0'",
 					"date"				=> "date NOT NULL default '0000-00-00'",
 					"telephone"		=> "text NOT NULL",
 					"adresse"			=> "text NOT NULL",
-					"email"				=> "text NOT NULL",
-					"commentaire"		=> "text NOT NULL",
+					"email"			=> "text NOT NULL",
+					"commentaire"	=> "text NOT NULL",
 					"montant"			=> "float NOT NULL default '0'",
 					"date_paiement"	=> "date NOT NULL default '0000-00-00'",
 					"statut"			=> "text NOT NULL",
 					),
 					
-'key' => array("PRIMARY KEY" => "id_activite")
+	'key' => array("PRIMARY KEY" => "id_activite")
 );	
 
 //
