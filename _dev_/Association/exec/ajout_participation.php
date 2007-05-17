@@ -44,7 +44,7 @@ function exec_ajout_participation() {
 		echo '</tr>';
 		echo '<tr> ';
 		echo '<td>'._T('asso:activite_libelle_adherent').' :</td>';
-		echo '<td><input name="id_adherent" type="text" value="'.$data['id_adherent'].'"> </td>';
+		echo '<td><input name="id_membre" type="text" value="'.$data['id_adherent'].'"> </td>';
 		echo '</tr>';
 		echo '<tr> ';
 		echo '<td>'._T('asso:activite_libelle_membres').' :</td>';
