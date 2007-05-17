@@ -76,19 +76,6 @@ echo '<td>'._T('asso:activite_libelle_montant_inscription').' :</td>';
 echo '<td><input name="montant"  type="text"> </td>';
 echo '</tr>';
 echo '<tr>';
-echo '<td>'._T('asso:activite_libelle_date_paiement').' :</td>';
-echo '<td><input name="date_paiement" value="'.date('Y-m-d').'" type="text"> </td>';
-echo '</tr>';
-echo '<tr>';
-echo '<td>'._T('asso:activite_libelle_mode_paiement').' :</td>';
-echo '<td><select name="journal" type="text">';
-$query = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque") ;
-while ($data = spip_fetch_array($query)) {
-echo '<option value="'.$data['code'].'"> '.$data['intitule'].' </option>';
-}
-echo '</select></td>';
-echo '</tr>';
-echo '<tr>';
 echo '<td>'._T('asso:activite_libelle_statut').' :</td>';
 echo '<td><input name="statut"  type="checkbox" value="ok" unchecked>ok</td>';
 echo '</tr>';

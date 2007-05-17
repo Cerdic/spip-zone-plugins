@@ -50,7 +50,7 @@ echo '<td><input name="nom"  type="text" size="40" value="'.$data['nom'].'"> </t
 echo '</tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_adherent').' :</td>';
-echo '<td><input name="id_membre" type="text" value="'.$data['id_membre'].'"> </td>';
+echo '<td><input name="id_membre" type="text" value="'.$data['id_adherent'].'"> </td>';
 echo '</tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:activite_libelle_membres').' :</td>';
