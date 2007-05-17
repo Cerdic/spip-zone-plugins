@@ -80,9 +80,16 @@ add_outil( array(
 	'categorie' => 'public',
 ));
 
+add_variable( array(
+	'nom' => 'paragrapher',
+	'format' => 'nombre',
+	'radio' => array(1 => 'item_oui', 0 => 'item_non', -1 => 'cout:par_defaut'),
+	'defaut' => "\$GLOBALS['toujours_paragrapher']?1:-1",
+	'code:%s>=0' => "\$GLOBALS['toujours_paragrapher']=%s;",
+));
 add_outil( array(
-	'id' => 'paragrapher',
-	'code:options' => "\$GLOBALS['toujours_paragrapher']=true;",
+	'id' => 'paragrapher2',
+	'code:options' => '%%paragrapher%%',
 	'categorie' => 'admin',
 ));
 
@@ -212,11 +219,11 @@ add_outil( array(
 	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
 ));
 
-	// ici on a besoin de trois boutons radio : _T('cout:sf_defaut'), _T('cout:sf_amont') et _T('cout:sf_tous')
+	// ici on a besoin de trois boutons radio : _T('cout:par_defaut'), _T('cout:sf_amont') et _T('cout:sf_tous')
 add_variable( array(
 	'nom' => 'radio_suivi_forums3',
 	'format' => 'chaine',
-	'radio' => array('defaut' => 'cout:sf_defaut', '_SUIVI_FORUMS_REPONSES' => 'cout:sf_amont', '_SUIVI_FORUM_THREAD' => 'cout:sf_tous'),
+	'radio' => array('defaut' => 'cout:par_defaut', '_SUIVI_FORUMS_REPONSES' => 'cout:sf_amont', '_SUIVI_FORUM_THREAD' => 'cout:sf_tous'),
 	'defaut' => '"defaut"',
 	// si la variable est différente de 'defaut' alors on codera le define
 	'code:%s!=="defaut"' => "define(%s, true);",
@@ -362,7 +369,6 @@ add_outil( array(
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 	'categorie' => 'public',
 ));
-
 
 //-----------------------------------------------------------------------------//
 //                               TYPO                                          //
