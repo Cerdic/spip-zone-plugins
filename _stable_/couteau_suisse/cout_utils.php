@@ -110,6 +110,7 @@ function cs_get_defaut($variable) {
 //cs_log(" -- cs_get_defaut() - \$defaut[{$variable['nom']}] est devenu : $defaut2");
 	return $defaut2;
 }
+
 // installation de $cs_metas_pipelines
 // $type ici est egal a 'options' ou 'fonctions'
 function set_cs_metas_pipelines_fichier($infos_pipelines, $type) {
@@ -235,7 +236,7 @@ function cs_initialise_includes() {
 	// liste des pipelines utilises
 	$traitements_utilises = array();
 	// variables temporaires
-	$temp_css = $temp_js = array();
+	$temp_css = $temp_js = $temp_filtre_imprimer = array();
 	// parcours de tous les outils
 	include_spip('public/assembler');
 	foreach ($outils as $i=>$outil) {
@@ -265,15 +266,31 @@ function cs_initialise_includes() {
 			if (isset($outil['code:css'])) $temp_css[] = cs_parse_code_js($outil['code:css']);
 			if (isset($outil['code:js'])) $temp_js[] = cs_parse_code_js($outil['code:js']);
 			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
-			if ($temp=cs_lire_fichier_php('outils/'.$inc.'_options.php')) $infos_pipelines['code_options'][] = $temp;
-			if ($temp=cs_lire_fichier_php('outils/'.$inc.'_fonctions.php')) $infos_pipelines['code_fonctions'][] = $temp;
+			if ($temp=cs_lire_fichier_php("outils/{$inc}_options.php")) 
+				$infos_pipelines['code_options'][] = $temp;
+			if ($temp=cs_lire_fichier_php("outils/{$inc}_fonctions.php")) {
+				$infos_pipelines['code_fonctions'][] = $temp;
+				// existe-t-il un filtre 'monoutil_imprimer' ?
+				//eval($temp);
+				// include_spip("outils/{$inc}_fonctions");
+				$f = $inc.'_imprimer';
+				if (($f)) {
+					// prise en compte du filtre 'monoutil_imprimer' par le filtre du plugin : 'cs_imprimer'
+					// ce filtre rend un texte imprimable (utilise par le sommaire ou la decoupe en page)
+					$temp_filtre_imprimer[] = "\tif (function_exists('$f')) \$texte = $f(\$texte);";
+				}
+			}
 		}
 	}
-	// concatenation des css et js inline trouves
-	if (count($temp_css)) $cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
-				.join("\n", $temp_css)."\n</style>";
-	if (count($temp_js)) $cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
-				.join("\n", $temp_js)."\n// --></script>";
+	// concatenation des css inline, js inline et filtres trouves
+	if (count($temp_css))
+		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
+			.join("\n", $temp_css)."\n</style>";
+	if (count($temp_js))
+		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
+			.join("\n", $temp_js)."\n// --></script>";
+	$infos_pipelines['code_fonctions'][] = "\n// Filtre du Couteau Suisse qui rend un document imprimable\nfunction cs_imprimer(\$texte) {\n" 
+			.join("\n", $temp_filtre_imprimer)."\n\treturn \$texte;\n}";
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise){
 		foreach($balise as $f=>$fonction) {
@@ -398,6 +415,8 @@ function cs_optimise_js($code) {
 
 
 // lance la fonction d'installation de chaque outil actif, si elle existe.
+// la fonction doit etre ecrite sous la forme monoutil_installe() et placee
+// dans le fichier outils/monoutil.php
 function cs_installe_outils() {
 	global $outils;
 	foreach($temp = $outils as $outil) if ($outil['actif']) {

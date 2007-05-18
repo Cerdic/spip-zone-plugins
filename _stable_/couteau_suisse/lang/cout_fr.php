@@ -28,6 +28,7 @@ _ {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}";
 $temp['decoration'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['decoration']}</blockquote>";
 $temp['type_urls'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['type_urls']}</blockquote>";
 $temp['note'] = "<sup>(*)</sup>";
+// fin du code
 
 // traductions habituelles
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -210,7 +211,7 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'sf_amont' => 'En amont',
 
 	'xml:nom' =>'Validateur XML',
-	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html].",
+	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html]. Un bouton intitul&eacute; &laquo;&nbsp;"._T('analyse_xml')."&nbsp;&raquo; est ajout&eacute; aux autres boutons d'administration.",
 
 	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
 	'f_jQuery:description' => "Emp&ecirc;che l'installation de {jQuery} dans la partie publique afin d'&eacute;conmiser un peu de &laquo;temps machine&raquo;. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. SPIP l'utilise dans sa partie priv&eacute;e.

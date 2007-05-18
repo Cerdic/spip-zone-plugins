@@ -6,6 +6,13 @@ define('_sommaire_SANS_FOND', '[!fond]');
 
 // TODO : ajouter un fichier css pour le sommaire
 
+// Filtre local utilise par le filtre 'cs_imprimer' afin d'eviter la decoupe
+// Exemple : lors d'une impression a l'aide du squelette imprimer.html,
+// remplacer la balise #TEXTE par [(#TEXTE*|propre|cs_imprimer)].
+function sommaire_imprimer($texte) {
+	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE), '', $texte);
+}
+
 // renvoie le sommaire d'une page d'article
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index) $index=0;
@@ -37,8 +44,9 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function sommaire_d_article_rempl($texte) {
-	if (strpos($texte, '<h3')===false) return $texte;
-	if (strpos($texte, _sommaire_SANS_SOMMAIRE)!==false) return str_replace(_sommaire_SANS_SOMMAIRE, '', $texte);
+	// s'il n'y a pas de balise <h3> ou si le raccourcis _sommaire_SANS_SOMMAIRE est present dans le texte, alors on laisse tomber
+	if (strpos($texte, '<h3')===false || strpos($texte, _sommaire_SANS_SOMMAIRE)!==false) 
+		return sommaire_imprimer($texte);
 	$sommaire = ''; $i = 1; $nbh3 = 0;
 	// couplage avec l'outil 'decoupe_article'
 	if(defined('_decoupe_SEPARATEUR')) {

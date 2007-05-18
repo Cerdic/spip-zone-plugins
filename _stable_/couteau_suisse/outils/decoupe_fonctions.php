@@ -1,6 +1,12 @@
 <?php
-
 define('_decoupe_NB_CARACTERES', 60);
+
+// Filtre local utilise par le filtre 'cs_imprimer' afin d'eviter la decoupe
+// Exemple : lors d'une impression a l'aide du squelette imprimer.html,
+// remplacer la balise #TEXTE par [(#TEXTE*|propre|cs_imprimer)].
+function decoupe_imprimer($texte) {
+	return str_replace(_decoupe_SEPARATEUR, '', $texte);
+}
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
@@ -63,7 +69,7 @@ function decouper_en_pages_rempl($texte) {
 	$pagination = $num_pages>3?"$debut $precedent $milieu $suivant $fin":"$precedent $milieu $suivant";
 	$pagination1 = "<div class='pagination decoupe_haut'>$pagination</div>";
 	$pagination2 = "<div class='pagination decoupe_bas'>$pagination</div>";
-	$page = $pages[$artpage-1];
+	$page = trim($pages[$artpage-1]);
 	if (isset($_GET['decoupe_recherche'])) {
 		include_spip('inc/surligne');
 		$page = surligner_mots($page, $_GET['decoupe_recherche']);
