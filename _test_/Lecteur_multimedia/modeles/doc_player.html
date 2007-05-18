@@ -1,9 +1,9 @@
 [(#REM)
 
-Modele pour <doc> modifié pour le plugin Lecteur Flash pour MP3
+Modele pour <doc> modifie pour le plugin Lecteur Flash pour MP3
 http://spip-zone.info/spip.php?article18
 
-Si le document est de format mp3, afficher la vignette si elle est personnalisée
+Si le document est de format mp3, afficher la vignette si elle est personnalisee
 Afficher le TITRE, le DESCRIPTIF suivi du lecteur flash permettant de faire jouer ce fichier.
 
 Sinon, utiliser le comportement normal.
@@ -13,10 +13,11 @@ Sinon, utiliser le comportement normal.
 <BOUCLE_doc (DOCUMENTS) {id_document}>
 #SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
 
-<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+
+[(#REM) Document MP3 ? ]
 [(#TYPE_DOCUMENT|=={MP3}|?{
-[<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-(#ID_VIGNETTE|?{
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+[(#ID_VIGNETTE|?{
 <dt><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
 <img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' /></a></dt>
 ,
@@ -24,8 +25,8 @@ Sinon, utiliser le comportement normal.
 })]
 [
 <dt class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
-<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
-</dl>
+<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>
 [(#GET{player}|=={pixplayer}|?{' ',''})
 <object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf' id='audioplayer#ID_DOCUMENT' height='24' width='290'>
 <param name="wmode" value="opaque" />
@@ -67,27 +68,36 @@ Sinon, utiliser le comportement normal.
 	[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ]
-,
-''
+</dd>
+</dl>
 })]
+
+
+[(#REM) Document Flash ? ]
 [(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+
+<dt class='spip_doc_titre'>
 <object type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
 <param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" />
 <param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|urlencode)]&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]" />
 <param name="wmode" value="opaque" />
+[<strong>(#TITRE)</strong>]
 [<span><a href="(#URL_DOCUMENT)" rel="enclosure">#URL_DOCUMENT</a></span>]
 </object>
-
-<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-[<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
+</dt>
+[<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
 </dl>
 ]
 
+
+[(#REM) Sinon : document normal ]
 [(#TYPE_DOCUMENT|match{^(Flash Video|MP3)$}|?{'',' '})
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"]><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]' /></a>
 [
-<div class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></div>][
-<div class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</div>]
+<dt class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
+<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+</dl>
 ]
-</div>
 </BOUCLE_doc>
