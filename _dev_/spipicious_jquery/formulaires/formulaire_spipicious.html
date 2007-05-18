@@ -1,0 +1,21 @@
+#CACHE{0}
+<div id="form_spipicious">
+<BOUCLE_groupes(GROUPES_MOTS){par titre}><?php
+$current_auteur_id = (int) "#ENV{auteur_id}";
+if (('#TITRE'=='- tags -')||('#TITRE'=='-* tags -')) { 
+  if ($current_auteur_id != 0) { ?>
+  <form action="[(#ENV{self})]" method="post">
+    <fieldset	class='spip_encadrer'>
+	  <legend><:spipicious:add_tags:></legend>	  	  
+	  <input type="text" name="tags" size="40" value="<BOUCLE_tagA(SPIPICIOUS){id_article=#ENV{id}}{id_auteur=#ENV{auteur_id}}{par position}><BOUCLE_mot(MOTS){id_mot}>#TITRE </BOUCLE_mot></BOUCLE_tagA>" /><br />
+    <input type="hidden" name="page" value="#SELF" />	 
+    <input type="hidden" name="id_article" value="#ENV{id}" />	
+	  <input type="submit" class="spip_bouton" name="add_tags" value="<:bouton_valider:>" /> 
+    </fieldset>
+  </form><?php } else { ?>
+  <:spipicious:identifier:>
+  #LOGIN_PUBLIC
+<?php  }
+} ?>
+</BOUCLE_groupes>
+</div>

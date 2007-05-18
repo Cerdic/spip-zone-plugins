@@ -1,0 +1,72 @@
+#CACHE{86400}
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+<link rel="stylesheet" href="#CHEMIN{css/spipicious.css}" type="text/css" media="all" />
+</head>
+
+<body class="page_auteur">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]</div>
+
+	<div id="conteneur">
+	
+	
+	
+
+		[(#REM) Contenu principal : affichage de l'auteur ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				[(#LOGO_AUTEUR||image_reduire{200,200})]
+				<h1 class="titre">#NOM</h1>
+				[<p class="soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			</div>
+			
+				<!-----extra SPIPICIOUS ---->
+			  <div style='background:lightgreen;margin:10px 0'>
+        <h1>balise NUAGE_TAGS_AUTEUR</h1><hr />   
+        #NUAGE_TAGS_AUTEUR
+        </div>
+        
+        <div style='background:pink;margin:10px 0; color: #fff;'>
+        <h1>balise NUAGE_TAGS_AUTEUR_ARTICLES</h1><hr />   
+        #NUAGE_TAGS_AUTEUR_ARTICLES
+        </div>
+				
+				
+				<!-----extra SPIPICIOUS ---->
+
+			[<div class="texte">(#BIO)</div><br />]
+
+			<br class="nettoyeur" />
+
+			[<div class="encart">
+			(#FORMULAIRE_ECRIRE_AUTEUR)
+			</div><!-- fin encart -->]
+
+
+
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+
+		</div><!-- fin contenu -->
+
+
+
+	</div><!-- fin conteneur -->
+
+
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_auteur_principal>

@@ -1,0 +1,5 @@
+[(#REM) squelette de la balise #NUAGE_TAGS_ARTICLE_DETAILS a placer ds une boucle ARTICLE
+        affichage le nuage de tags lie a chaque auteur ayant tague l'article               
+]<div id="nuage_tags_article_details"><BOUCLE_listAuthor(AUTEURS){tout}><B_tagAut><:spipicious:by:> <a href="#_listAuthor:URL_AUTEUR">#_listAuthor:NOM</a> <:spipicious:to:>  
+<BOUCLE_tagAut(SPIPICIOUS){id_auteur}{id_article}{par position}><BOUCLE_tag(MOTS){id_mot}><a rel="tag" href="#URL_MOT">#TITRE</a> </BOUCLE_tag></BOUCLE_tagAut>
+<br /></B_tagAut></BOUCLE_listAuthor></div>
