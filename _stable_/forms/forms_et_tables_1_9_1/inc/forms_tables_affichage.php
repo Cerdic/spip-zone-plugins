@@ -182,7 +182,8 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 		'titre_liste'=>$titre_page,
 		'aucune_reponse'=>_T("$prefix:aucune_reponse"),
 		'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
-		'statuts' => array('prepa','prop','propose','publie','refuse'));
+		'statuts' => array('prepa','prop','propose','publie','refuse'),
+		'recherche'=>_request('recherche'));
 	if (_request('tri')) $defaut_cont['tri'] = _request('tri');
 	if (_request('champ')) $defaut_cont['champ'] = _request('champ');
 	if (_request('senstri')) $defaut_cont['senstri'] = _request('senstri');
@@ -222,6 +223,21 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 			$out .=  "</div>";
 		}
 	}
+	// formulaire recherche
+	if ($recherche=_request('recherche')) {
+	  $recherche_aff = $recherche;
+	  $onfocus = "";
+	} else {
+	  $recherche_aff = _T('info_rechercher');
+	  $onfocus = "this.value='';";
+	}
+	$out .= "<div style='width:10em;float:$spip_lang_left'><form method='get' style='margin: 0px;' action='" . self() . "' class='verdana2' ><div>";
+	$out .= form_hidden(self());
+	$out .= '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" onfocus="'.$onfocus . '" />';
+	if ($recherche)
+		$out .= "<br /><a href='".parametre_url(self(),'recherche','')."'>"._T('info_tout_afficher')."</a>";
+	$out .= "</div></form></div>";
+
 	
 	$out .=  '<div style="clear:left;text-align:center">';
 	$out .=  gros_titre($titre_page,'',false);

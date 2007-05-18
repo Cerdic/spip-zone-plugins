@@ -70,6 +70,42 @@
 		//$boucle->where[]= array("'='", "'$boucle->id_table." . "id_parent'", 0);
 	}
 	
+	// {recherche_donnee} ou {recherche_donnee susan}
+	function critere_recherche_donnee_dist($idb, &$boucles, $crit) {
+		global $table_des_tables;
+		$boucle = &$boucles[$idb];
+		$t = $boucle->id_table;
+		if ($t=='forms_donnees'){
+			if (isset($crit->param[0]))
+				$_quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+			else
+				$_quoi = '@$Pile[0]["recherche"]';
+	
+			$k = count($boucle->join)+1;
+			$boucle->join[$k]= array($t,'id_donnee');
+			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
+			$op = array("'LIKE'","'L$k.valeur'","_q('%'.".$_quoi.".'%')");
+			$boucle->where[]= array("'?'",$_quoi,$op,"''");
+		}
+	}
+
+	// {tri_donnee champ}
+	function critere_tri_donnee_dist($idb, &$boucles, $crit) {
+		global $table_des_tables;
+		$boucle = &$boucles[$idb];
+		$t = $boucle->id_table;
+		if ($t=='forms_donnees'){
+			$_quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	
+			$k = count($boucle->join)+1;
+			$boucle->join[$k]= array($t,'id_donnee');
+			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
+			$op = array("'='", "'L$k.champ'", "_q(".$_quoi.")");
+			$boucle->where[]= array("'?'",$_quoi."!='rang'",$op,"''");
+			$boucle->order[]= "($_quoi=='rang'?'$t.rang':'L$k.valeur')";
+		}
+	}
+
 	function boucle_TABLES_dist($id_boucle, &$boucles){
 		if (function_exists($f='boucle_FORMS') OR function_exists($f='boucle_FORMS_dist'))
 			return $f($id_boucle, $boucles);
