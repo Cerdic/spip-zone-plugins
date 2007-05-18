@@ -1,5 +1,5 @@
 <?php
-function auteur_listes_revision($a, $b)
+function spip_auteurs_liste_revision($a, $b)
 {
 	spip_log($a);
 	spip_log($b);	
