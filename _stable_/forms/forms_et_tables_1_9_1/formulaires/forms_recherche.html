@@ -1,7 +1,10 @@
-#SET{valeurs,#EVAL{$_GET}|serialize}#SET{url,#SELF}
+#SET{valeurs,#EVAL{$_REQUEST}|serialize}#SET{url,#SELF}
 <B_filtre>
-<form action='#SELF' method='get'>
+<form action='#SELF' method='post'>
 <fieldset class='recherche spip_forms'><legend><:info_rechercher:></legend>
+<label for="recherche"><:info_rechercher:></label>
+<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche,#EVAL{_request("recherche")}}|sinon{''})]" />
+<br />
 [(#GET{url}|parametre_url{submit,''}|form_hidden)]
 <BOUCLE_filtre(FORMS_CHAMPS){id_form}{par rang}{specifiant=oui}{type IN (select,multiple,mot)}>
 [(#INCLURE{fond=formulaires/forms_structure}{id_form}{champ}{valeurs=#GET{valeurs}})]
