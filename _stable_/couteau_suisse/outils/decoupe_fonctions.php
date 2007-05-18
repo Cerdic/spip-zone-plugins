@@ -5,7 +5,7 @@ define('_decoupe_NB_CARACTERES', 60);
 // Exemple : lors d'une impression a l'aide du squelette imprimer.html,
 // remplacer la balise #TEXTE par [(#TEXTE*|propre|cs_imprimer)].
 function decoupe_imprimer($texte) {
-	return str_replace(_decoupe_SEPARATEUR, '', $texte);
+	return str_replace(_decoupe_SEPARATEUR, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>', $texte);
 }
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
