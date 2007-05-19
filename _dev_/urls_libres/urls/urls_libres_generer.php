@@ -140,10 +140,20 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 		// utilisee par un type prioritaire ? ==> que l'url absolue
 		if ($priotype[$deja['type']] < $priotype[$type]) {
 			$q_url = _q($url = $url_abs);
-		} else {
+		} elseif ($priotype[$deja['type']] > $priotype[$type]) {
 			// on ecrase l'url non prioritaire (on ne la connaitra plus, dommage)
 			spip_query("UPDATE spip_urls SET type=$q_type, id_objet=$id_objet,
 				version=$version, maj=NOW() WHERE url=$q_url");
+		} else {
+			// 2 objets du meme type ont la meme url
+			$result = spip_query('SELECT COUNT(*) from spip_urls WHERE url LIKE ' .
+					_q($url . ',%'));
+			$compte = spip_fetch_array($result, SPIP_NUM);
+			$compte = $compte[0] + 1;
+			$url = $url . ',' . $compte;
+			$q_url = _q($url);
+			spip_query("INSERT INTO spip_urls (url, type, id_objet, version, maj)
+				VALUE ($q_url, $q_type, $id_objet, $version, NOW())");
 		}
 	} else {
 		spip_query("INSERT INTO spip_urls (url, type, id_objet, version, maj)
