@@ -19,7 +19,7 @@
 	<lien>
 		[Documentation sur SPIP Contrib'->La-mutualisation-facile],
 	</lien>
-	<icon></icon>
+	<icon>mutualiser.png</icon>
 	<prefix>
 		  Mutualisation
 	</prefix>
