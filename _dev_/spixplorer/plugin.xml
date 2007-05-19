@@ -11,6 +11,8 @@ Utilisation: bouton sous l'accueil ou [spip.php?action=spx_list->../?action=spx_
 
 
 	</description>
+		<icon>spixplorer.png</icon>
+
 	<pipeline>
     	<nom>ajouter_boutons</nom>
         <inclure>spx_pipelines.php</inclure>
