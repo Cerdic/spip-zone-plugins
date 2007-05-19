@@ -13,6 +13,9 @@
 		FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
     FCKConfig.Plugins.Add( "tablecommands", null, "' . $_GET['path'] . '/FCKeditor/editor/plugins/" ) ;		
     FCKConfig.Plugins.Add( "notebasdepage", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
+    FCKConfig.Plugins.Add( "geshighlighter", "en,nl,fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
+    
+
     
 		FCKConfig.ToolbarSets["BarreArticle"] = [
       	["Source","-","Save","NewPage","Preview","-","Templates"],
@@ -24,7 +27,7 @@
       	["OrderedList","UnorderedList","-","Outdent","Indent"],
       	["JustifyLeft","JustifyCenter","JustifyRight","JustifyFull"],
       	["Link","Unlink","Anchor"],
-      	["Image","Flash","Rule","Smiley","SpecialChar","PageBreak","notebasdepage"],
+      	["Image","Flash","Rule","Smiley","SpecialChar","PageBreak","notebasdepage","RtHighlight"],
       	["Table","-","TableInsertRow","TableDeleteRows","TableInsertColumn","TableDeleteColumns","TableInsertCell","TableDeleteCells","TableMergeCells","TableSplitCell"],
       	"/",
       	["Style","FontFormat","FontName","FontSize"],
