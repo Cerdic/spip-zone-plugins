@@ -25,6 +25,9 @@ _ La fonction correspondante {{lire_config($cfg='', $defaut=null, $serialize=fal
 	<prefix>
 	cfg
 	</prefix>
+	<icon>
+	cfg.png
+	</icon>
 	<chemin dir='' />
 	<options>
 	cfg_options.php
