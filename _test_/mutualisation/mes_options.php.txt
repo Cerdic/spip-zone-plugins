@@ -1,0 +1,26 @@
+<?php
+
+	if (!defined("_ECRIRE_INC_VERSION")) return;
+	require _DIR_RACINE.'mutualisation/mutualiser.php';
+
+	$site = str_replace('www.', '', $_SERVER['HTTP_HOST']);
+	if ($site != $_SERVER['HTTP_HOST']) {
+		include_spip('inc/headers');
+		redirige_par_entete('http://'.$site.'/');
+	}
+
+	define ('_INSTALL_HOST_DB', 'localhost');
+	define ('_INSTALL_USER_DB', 'loginsql');
+	define ('_INSTALL_PASS_DB', '123456HDJ');
+	define ('_INSTALL_NAME_DB', 'mutu_'.prefixe_mutualisation($site));
+	define ('_INSTALL_TABLE_PREFIX', 'spip');
+
+	demarrer_site($site,
+		array(
+			'creer_site' => true,
+			'creer_base' => true,
+			'mail' => 'fil@rezo.net'
+		)
+	);
+
+?>

@@ -33,8 +33,6 @@ function demarrer_site($site = '', $options = array()) {
 		$options
 	);
 
-	// Le prefixe = max 10 caracteres a-z0-9, qui ressemblent au domaine
-	// et ne commencent pas par un chiffre
 	if ($options['cookie_prefix'])
 		$GLOBALS['cookie_prefix'] = prefixe_mutualisation($site);
 	if ($options['table_prefix'])
@@ -72,17 +70,23 @@ function demarrer_site($site = '', $options = array()) {
 // Cette fonction cree un prefixe acceptable par MySQL a partir du nom
 // du site ; a utiliser comme prefixe des tables, comme suffixe du nom
 // de la base de donnees ou comme prefixe des cookies...
+// Max 12 caracteres a-z0-9, qui ressemblent au domaine et ne commencent
+// pas par un chiffre
 // http://doc.spip.org/@prefixe_mutualisation
 function prefixe_mutualisation($site) {
-	static $prefix;
+	static $prefix = array();
 
-	if (!isset($prefix)) {
-		$prefix = preg_replace(',^www\.|[^a-z0-9],', '', strtolower($site));
-		$prefix = substr($prefix, 0, 10);
-		if (!preg_match(',^[a-z],', $prefix))
-			$prefix = 'a'.$prefix;
+	if (!isset($prefix[$site])) {
+		$p = preg_replace(',^www\.|[^a-z0-9],', '', strtolower($site));
+		// si c'est plus long que 12 on coupe et on pose un md5 d'unicite
+		if (strlen($p) > 12)
+			$p = substr($p, 0, 8) . substr(md5($site),-4);
+		// si ca commence par un chiffre on ajoute a
+		if (ord($p) < 58)
+			$p = 'a'.$p;
+		$prefix[$site] = $p;
 	}
-	return $prefix;
+	return $prefix[$site];
 
 }
 
