@@ -29,13 +29,13 @@ $tables_principales['spip_noisettes'] = array(
 
 
 $spip_params_noisettes = array(
-	"id_param" => "bigint(21) NOT NULL",
+	"id_param" => "bigint(21) NOT NULL auto_increment",
 	"id_noisette" => "bigint(21) NOT NULL",
-	"type" => "ENUM('env', 'param', 'attribut', 'head') DEFAULT 'env' NOT NULL",
+	"type" => "ENUM('env', 'param', 'mot', 'head') DEFAULT 'env' NOT NULL",
 	"titre" => "varchar(255) NOT NULL",
 	"descriptif" => "text NOT NULL",
 	"valeur" => "varchar(255) NOT NULL",
-	"id_attribut" => "bigint(21) NOT NULL",
+	"id_mot" => "bigint(21) NOT NULL",
 	"maj" => "TIMESTAMP");
 
 $spip_params_noisettes_key = array(

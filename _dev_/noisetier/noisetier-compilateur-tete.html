@@ -3,7 +3,7 @@
 [(#REM) Inclusion dans le head pour les noisettes le nécessitant]
 <BOUCLE_noisettes_avec_entete(NOISETTES){page IN #ENV{page},'toutes'}{exclue != #ENV{page}}{actif=oui}{par position}>
 	<BOUCLE_entetes_noisettes(PARAMS_NOISETTES){type=head}{id_noisette}>
-		[(#VALEUR)
+		[(#DESCRIPTIF)
 		]
 	</BOUCLE_entetes_noisettes>
 </BOUCLE_noisettes_avec_entete>

@@ -18,8 +18,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajout_noisette'=>'Ajouter une noisette&nbsp;:',
 'ajout_texte'=>'Ajouter un texte&nbsp;:',
 'ajout_selection_noisette'=>'S&eacute;lectionnez une noisette &agrave; ajouter&nbsp;:',
-
-
+'titre_nouveau_texte'=>'Titre du texte',
+'descriptif_nouveau_texte'=>'Texte &agrave; ins&eacute;rer',
+'probleme_noisette_sans_xml'=>'Le noisetier n\'a pas d&eacute;tect&eacute; de d&eacute;claration xml au d&eacute;but de la noisette au sein d\'une balise [noisetier(#REM)]. La noisette n\'a pas &eacute;t&eacute; install&eacute;e.<br />(Voir la documentation pour plus d\'informations.)',
+'probleme_titre_noisette_sans_xml'=>'Absence de d&eacute;claration xml de la noisette',
+'probleme_noisette_sans_titre'=>'Le noisetier n\'a pas d&eacute;tect&eacute; de titre de noisette dans la d&eacute;claration xml au d&eacute;but de la noisette. La noisette n\'a pas &eacute;t&eacute; install&eacute;e.<br />(Voir la documentation pour plus d\'informations.)',
+'probleme_titre_noisette_sans_titre'=>'Noisette sans titre',
+'probleme_titre_param_sans_titre'=>'Param&egrave;tre sans titre',
+'probleme_param_sans_titre'=>'Le noisetier a d&eacute;tect&eacute; un param&egrave;tre sans titre dans la d&eacute;claration xml au d&eacute;but de la noisette. La noisette n\'a pas &eacute;t&eacute; install&eacute;e.<br />(Voir la documentation pour plus d\'informations.)',
+'probleme_titre_param_sans_valeur'=>'Param&egrave;tre sans valeur par d&eacute;faut',
+'probleme_param_sans_valeur'=>'Le noisetier a d&eacute;tect&eacute; un param&egrave;tre sans valeur par d&eacute;faut dans la d&eacute;claration xml au d&eacute;but de la noisette. La noisette n\'a pas &eacute;t&eacute; install&eacute;e.<br />(Voir la documentation pour plus d\'informations.)',
+'probleme_titre_mot_sans_titre'=>'Mot-cl&eacute; sans titre',
+'probleme_mot_sans_titre'=>'Le noisetier a d&eacute;tect&eacute; un mot-cl&eacute; sans titre dans la d&eacute;claration xml au d&eacute;but de la noisette. La noisette n\'a pas &eacute;t&eacute; install&eacute;e.<br />(Voir la documentation pour plus d\'informations.)',
+'probleme_titre_mot_sans_objet'=>'Mot-cl&eacute; sans type d\'objet',
+'probleme_mot_sans_objet'=>'Le noisetier a d&eacute;tect&eacute; un mot-cl&eacute; sans type d\'objet dans la d&eacute;claration xml au d&eacute;but de la noisette. La noisette n\'a pas &eacute;t&eacute; install&eacute;e.<br />(Voir la documentation pour plus d\'informations.)',
 );
 
 

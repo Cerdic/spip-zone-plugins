@@ -41,7 +41,7 @@ function noisetier_liste_elements_sousrepertoire ($sousrepertoire) {
 	if (!isset($liste)) {
 		$liste = array();
 		// Recherche dans le répertoire des squelettes
-		$liste = array_merge($liste,preg_files(_DIR_SKELS.$plugin."/$sousrepertoire/"));
+		$liste = array_merge($liste,preg_files("../squelettes".$plugin."/$sousrepertoire/"));
 		// Recherche dans les plugins
 		$lcpa = liste_chemin_plugin_actifs();
 		foreach ($lcpa as $plugin)
@@ -68,14 +68,15 @@ function noisetier_liste_noisettes() {
 function noisetier_form_ajout_noisette_texte($page,$zone) {
 	debut_cadre_enfonce();
 	echo "<b>"._T('noisetier:ajout_noisette')."</b><br />";
+	$redirect = generer_url_ecrire('noisetier',"page=$page");;
 	//Ajout d'une noisette
-	$action_link = generer_action_auteur("noisetier", 'ajout_noisette');
+	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_noisette', $redirect);
 	echo "<form class='ajaxAction' method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
 	echo form_hidden($action_link);
 	echo "<input type='hidden' name='page' value='$page' />";
 	echo "<input type='hidden' name='zone' value='$zone' />";
 	echo _T('noisetier:ajout_selection_noisette');
-	echo " <select name='ajout_noisette' value='' class='fondo'>\n";
+	echo " <select name='url_noisette' value='' class='fondo'>\n";
 	$liste_noisettes = noisetier_liste_noisettes();
 	foreach ($liste_noisettes as $nom => $chemin) 
 		echo "<option value='$chemin'>$nom</option>\n";
@@ -85,7 +86,7 @@ function noisetier_form_ajout_noisette_texte($page,$zone) {
 	fin_cadre_enfonce();
 	//Ajout d'un texte
 	debut_cadre_enfonce();
-	$action_link = generer_action_auteur("noisetier", 'ajout_texte');
+	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_texte', $redirect);
 	echo "<form class='ajaxAction' method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
 	echo form_hidden($action_link);
 	echo "<input type='hidden' name='page' value='$page' />";
