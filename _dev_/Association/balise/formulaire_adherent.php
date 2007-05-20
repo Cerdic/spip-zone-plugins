@@ -31,6 +31,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	$nom=_request('nom');
 	$prenom=_request('prenom');
 	$mail=_request('mail');
+	$sexe=_request('sexe');
 	$rue=_request('adresse');
 	$cp=_request('cp');
 	$ville=_request('ville');
@@ -38,10 +39,12 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	$commentaire=_request('commentaire');
 	$bouton=_request('bouton');
 	
+	echo "yo".$bouton ;
+	
 	if ($bouton=='Confirmer'){	
 		//on envoit des emails
 		
-		$query = spip_query( " SELECT * FROM spip_asso_profil " );
+		$query = spip_query( " SELECT * FROM spip_asso_profil WHERE id_profil=1" );
 		while ($data = spip_fetch_array($query)) {
 			$nomasso=$data['nom'];
 			$adresse=$data['mail'];
@@ -63,7 +66,8 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$sujet='Demande d\'adh&eacute;sion';
 		
 		//au webmaster
-		$message = "Un nouveau membre vient de demander son adh&eacute;sion :\n\nNOM : ".$nom."\nPr&eacute;nom : ".$prenom."\nEmail :<a href='mailto:'".$mail."'>".$mail."</a>\nAdresse: ".$rue." ".$cp." ".$ville."\nT&eacute;l&eacute;phone: ".$telephone."\n\nCommentaire: ".$text;
+		$message = "Un nouveau membre vient de demander son adh&eacute;sion :\n\nNOM : ".$nom."\nPr&eacute;nom : ".$prenom."\nEmail :<a href='mailto:'".$mail."'>".$mail."</a>\nAdresse: ".$rue." ".$cp." ".$ville."\nT&eacute;l&eacute;phone: "
+		.$telephone."\n\nCommentaire: ".$commentaire;
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
 		//au demandeur
@@ -71,8 +75,14 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$message= "Bonjour ".$prenom."\n\n\nVous venez de demander votre inscription &agrave; l'association ".$nomasso."\nNous allons prendre contact avec vous tr&egrave;s rapidement.\n\nAvec nos remerciements. \n\n\nLe bureau de ".$nomasso."\r\n";
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
+		echo " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, commentaire, creation) 
+		VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', CURRENT_DATE() ) " ;
+		
 		//enregistrement dans la table
-		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, commentaire, creation) VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', CURRENT_DATE() ) ");	
+		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, commentaire, creation) 
+		VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', CURRENT_DATE() ) ");	
+		$id = spip_insert_id();
+		echo "vla id -> $id ";
 		
 	}
 	else {
@@ -82,7 +92,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			$bouton='Confirmer';	 // si pas d'erreur
 			
 			//email invalide
-			if ( $email != email_valide($email) || empty($email) ){
+			if (!email_valide($mail) || empty($mail) ){
 				$erreur_email='Adresse courriel invalide !';
 				$bouton='Soumettre';
 			}
@@ -108,6 +118,8 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 				$bouton='Soumettre';
 			}	
 			
+			echo "le bouton -> $bouton car $erreur_email $erreur_nom $erreur_prenom $erreur_rue $erreur_cp $erreur_ville" ;
+			
 			//on retourne les infos à un formulaire de previsualisation		
 			return inclure_balise_dynamique(
 				array(
@@ -115,6 +127,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 					array(
 						'nom'		=> $nom,
 						'prenom'	=> $prenom,
+						'sexe'		=> $sexe ,
 						'mail'		=> $mail,
 						'adresse'	=> $rue,
 						'cp'		=> $cp,
@@ -135,6 +148,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		}
 	}		
 	
+	
 	//On retourne au formulaire d'adhesion
 	return array (
 		'formulaires/formulaire_adherent',0, 
@@ -146,6 +160,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			'cp'		=> $cp,
 			'ville'		=> $ville,
 			'telephone'=> $telephone,
+			'tamere'=> "oui",
 			'commentaire'=> $commentaire
 			)
 		);
