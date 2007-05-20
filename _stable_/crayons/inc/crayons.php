@@ -5,19 +5,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\d+(?:-\w+)?))\b,');
 
 function colonne_table($table, $col) {
-	static $catab = array(
-		'tables_principales' => 'base/serial',
-		'tables_auxiliaires' => 'base/auxiliaires',
-	);
-	$brut = '';
-	foreach ($catab as $categ => $catinc) {
-		include_spip($catinc);
-		if (isset($GLOBALS[$categ]['spip_' . table_objet($table)]['field'][$col])) {
-			$brut = $GLOBALS[$categ]['spip_' . table_objet($table)]['field'][$col];
-			break;
-		}
-	}
-	if (!$brut) {
+	$nom_table = '';
+	if (!(($tabref = &crayons_get_table($table, $nom_table)) && ($brut = $tabref['field'][$col]))) {
 		return false;
 	}
 	$ana = explode(' ', $brut);
@@ -31,7 +20,10 @@ function colonne_table($table, $col) {
 			case 1:	if ($mot[strlen($mot) - 1] == ')') {
 					$pos = strpos($mot, '(');
 					$ret['type'] = strtolower(substr($mot, 0, $pos++));
-					if (count($vir = explode(',', substr($mot, $pos, -1))) > 1) {
+					$vir = explode(',', substr($mot, $pos, -1));
+					if ($ret['type'] == 'enum') {
+						$ret['enum'] = $vir;
+					} elseif (count($vir) > 1) {
 						$ret['long'] = $vir;
 					} else {
 						$ret['long'] = $vir[0];
@@ -75,19 +67,24 @@ function colonne_table($table, $col) {
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
 function valeur_colonne_table_dist($table, $col, $id) {
-	if (is_scalar($id)) {
-		$where = id_table_objet($table) . '=' . $id;
-	} else {
-		$where = $and = '';
-		foreach ($id as $col => $id) {
-			$where .= $and . $col . '=' . $id;
-			$and = ' AND';
-		}
+	$nom_table = '';
+	if (!(($tabref = &crayons_get_table($table, $nom_table))
+			&& ($tabid = explode(',', $tabref['key']['PRIMARY KEY'])))) {
+		spip_log('crayons: table ' . $table . ' inconnue');
+		return false;
 	}
+	if (is_scalar($id)) {
+		$id = explode('-', $id);
+	}
+	$where = $and = '';
+	foreach ($id as $idcol => $idval) {
+		$where .= $and . (is_int($idcol) ? trim($tabid[$idcol]) : $idcol) . '=' . $idval;
+		$and = ' AND ';
+	}
+
     $s = spip_query(
         'SELECT ' . (is_array($col) ? implode($col, ', ') : $col) .
-         ' FROM spip_' . table_objet($table) .
-         ' WHERE ' . $where);
+         ' FROM ' . $nom_table . ' WHERE ' . $where);
     if ($t = spip_fetch_array($s)) {
         return is_array($col) ? $t : $t[$col];
     }
@@ -172,5 +169,30 @@ function wdgcfg() {
 			isset($metacrayons[$cfgi]) ? $metacrayons[$cfgi] : $def;
 	}
 	return $wdgcfg;
+}
+
+function &crayons_get_table($table, &$nom_table) {
+	static $catab = array('tables_principales',	'tables_auxiliaires');
+	static $return = array();
+	static $noms = array();
+	if (!isset($return[$table])) {
+		$return[$table] = $noms[$table] = '';
+		include_spip('base/serial');
+		include_spip('base/auxiliaires');
+		include_spip('public/parametrer');
+		$try = array( 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
+		foreach ($catab as $i=>$categ) {
+			foreach ($try as $nom) {
+				if (isset($GLOBALS[$categ][$nom])) {
+					$noms[$table] = $nom;
+					$return[$table] = & $GLOBALS[$categ][$nom];
+					break 2;
+				}
+			}
+			spip_log($GLOBALS[$categ]);
+		}
+	}
+	$nom_table = $noms[$table];
+	return $return[$table];
 }
 ?>

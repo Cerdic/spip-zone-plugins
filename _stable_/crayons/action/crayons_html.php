@@ -79,7 +79,8 @@ function controleur_dist($regs) {
 	    $options['hauteurMaxi'] = 0;
         $option['inmode'] = 'ligne';
         if ($sqltype['long']) {
-        	$inputAttrs['maxlength'] = $sqltype['long'];
+        	$inputAttrs['maxlength'] = is_array($sqltype['long']) ?
+        			$sqltype['long'][0] : $sqltype['long'];
         }
 	}
 
@@ -126,7 +127,7 @@ class Crayon {
 	// $options : options directes du crayon (developpement)
     function Crayon($name, $texts = array(), $options = array()) {
         $this->name = $name;
-    	list($this->type, $this->modele, $this->id) = explode('-', $this->name);
+    	list($this->type, $this->modele, $this->id) = explode('-', $this->name, 3);
     	if (is_scalar($texts)) {
     		$texts = array($this->modele => $texts);
     	}
