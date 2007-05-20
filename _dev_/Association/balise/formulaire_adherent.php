@@ -123,7 +123,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 				$bouton='Soumettre';
 			}	
 			
-			echo "le bouton -> $bouton car $erreur_email $erreur_nom $erreur_prenom $erreur_rue $erreur_cp $erreur_ville" ;
+			//echo "le bouton -> $bouton car $erreur_email $erreur_nom $erreur_prenom $erreur_rue $erreur_cp $erreur_ville" ;
 			
 			//on retourne les infos à un formulaire de previsualisation		
 			return inclure_balise_dynamique(
