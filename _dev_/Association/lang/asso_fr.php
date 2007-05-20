@@ -65,7 +65,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_photo' => 'Photo',
 	'adherent_libelle_nom' => 'Nom',
 	'adherent_libelle_prenom' => 'Pr&eacute;nom',
-	'adherent_libelle_sexe' => 'Sexe',
+	'adherent_libelle_sexe' => 'Civilit&eacute;',
 	'adherent_libelle_date_naissance' => 'Date de naissance',
 	'adherent_libelle_categorie' => 'Cat&eacute;gorie',
 	'adherent_libelle_fonction' => 'Fonction',
@@ -103,8 +103,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_non' => 'non',
 	'adherent_libelle_homme' => 'H',
 	'adherent_libelle_femme' => 'F',
-	'adherent_libelle_masculin' => 'Masculin',
-	'adherent_libelle_feminin' => 'F&eacute;minin',
+	'adherent_libelle_masculin' => 'Monsieur',
+	'adherent_libelle_feminin' => 'Madame',
 
 	# En-tetes
 	'adherent_entete_date' => 'Date',
