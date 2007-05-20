@@ -57,6 +57,9 @@ function noisetier_ajout_noisette() {
 	preg_match('/\/noisettes\/([[:graph:]]+).htm/',$url_noisette,$matches);
 	$fond = $matches[1];
 	
+	// On fait les vérifications ici car la noisette n'est pas installée si problème.
+	// Mais l'installation des mots et des paramètres se fait après l'installation des noisettes
+	// car on a besoin de l'id_noisette.
 	//Vérification des paramètres
 	$params = $arbre['param'];
 	$table_param = array();
@@ -80,10 +83,12 @@ function noisetier_ajout_noisette() {
 	//Vérification des mots-clés
 	$mots = $arbre['mot'];
 	$table_mot = array();
+	$types_mots = spip_abstract_showtable("spip_groupes_mots", '', true);
+	$champs_interdits = array ('id_groupe','titre','descriptif','texte','unseul','obligatoire','minirezo','comite','maj');
 	foreach ($mots as $mot) {
-		$titre = addslashes(corriger_caracteres(spip_xml_aplatit($param['titre'])));
-		$descriptif = addslashes(corriger_caracteres(spip_xml_aplatit($param['descriptif'])));
-		$objet = addslashes(corriger_caracteres(spip_xml_aplatit($param['objet'])));
+		$titre = addslashes(corriger_caracteres(spip_xml_aplatit($mot['titre'])));
+		$descriptif = addslashes(corriger_caracteres(spip_xml_aplatit($mot['descriptif'])));
+		$objet = addslashes(corriger_caracteres(spip_xml_aplatit($mot['objet'])));
 		if ($titre=='') {
 			include_spip('inc/minipres');
 			echo minipres(_T('noisetier:probleme_titre_mot_sans_titre'),_T('noisetier:probleme_mot_sans_titre'));
@@ -94,7 +99,17 @@ function noisetier_ajout_noisette() {
 			echo minipres(_T('noisetier:probleme_titre_mot_sans_objet'),_T('noisetier:probleme_mot_sans_objet'));
 			exit;
 		}
-		$table_mot[] = "'$titre','$descriptif','$objet'";
+		$objets = explode(',',$objet);
+		foreach ($objets as $objet) {
+			//Vérification qu'il s'agit d'un type d'objet valable
+			if ($types_mots['field'][$objet]=='' OR in_array($objet,$champs_interdits)){
+				include_spip('inc/minipres');
+				echo minipres(_T('noisetier:probleme_titre_mot_objet_incorrect'),_T('noisetier:probleme_mot_objet_incorrect'));
+				exit;
+			}
+			// Si un mot porte sur plusieurs types d'objets, alors on le duplique
+			$table_mot[] = array('titre'=>$titre,'descriptif'=>$descriptif,'objet'=>$objet);
+		}
 	}
 	
 	// Insertion de la noisette
@@ -117,6 +132,10 @@ function noisetier_ajout_noisette() {
 		$head = addslashes(corriger_caracteres(spip_xml_aplatit($head)));
 		spip_abstract_insert("spip_params_noisettes","(id_noisette,type,descriptif)","('$id_noisette','head','$head')");
 	}
+	
+	// Insertion des mots-clés
+	foreach ($table_mot as $mot)
+		noisetier_ajout_mot($mot, $id_noisette);
 
 
 	return $id_noisette;
@@ -130,6 +149,33 @@ function noisetier_reecrire_crochets ($texte) {
 	$texte = preg_replace('`<lg-([[:alpha:]]{2})>`','[$1]',$texte);
 	
 	return $texte;
+}
+
+function noisetier_ajout_mot ($mot, $id_noisette) {
+	// On récupère l'id_groupe et le type de mot. Si le groupe n'existe pas, on le créé
+	$objet = $mot['objet'];
+	$type = 'noisetier-'.$objet;
+	// On recherche le groupe de mots-clés
+	$res = spip_query("SELECT id_groupe FROM spip_groupes_mots WHERE titre='$type'");
+	if ($row=spip_fetch_array($res))
+		$id_groupe = $row['id_groupe'];
+	else {
+		//Cela signifie que le groupe de mots n'existe pas et qu'il faut le créer
+		$descriptif = addslashes(corriger_caracteres(_T('noisetier:descriptif_groupe_mot')));
+		$id_groupe = spip_abstract_insert("spip_groupes_mots","(titre,descriptif,$objet,minirezo)","('$type','$descriptif','oui','oui')");
+	}
+	// On vérifie si le mot-clé existe déjà dans la base, sinon on l'installe
+	$descriptif = $mot['descriptif'];
+	$titre = $mot['titre'];
+	$res = spip_query("SELECT id_mot FROM spip_mots WHERE type='$type' AND titre='$titre'");
+	if ($row=spip_fetch_array($res))
+		$id_mot = $row['id_mot'];
+	else
+		//Cela signifie que le mot n'existe pas et qu'il faut le créer
+		$id_mot = spip_abstract_insert("spip_mots","(titre,descriptif,id_groupe,type)","('$titre','$descriptif','$id_groupe','$type')");
+	// On ajoute l'information dans la table spip_params_noisettes
+	spip_abstract_insert("spip_params_noisettes","(titre,id_noisette,id_mot,type)","('$titre','$id_noisette','$id_mot','mot')");
+
 }
 
 ?>
