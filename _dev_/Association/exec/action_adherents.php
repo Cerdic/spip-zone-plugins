@@ -13,6 +13,12 @@ include_spip('inc/presentation');
 include_spip('inc/filtres');
 include_spip('inc/acces');
 
+if(!function_exists(_q)){
+		function _q($a) {
+			return (is_int($a)) ? strval($a) : ("'" . addslashes($a) . "'");
+			}
+		}
+
 function exec_action_adherents() {
 	global $connect_statut, $connect_toutes_rubriques;
 
@@ -70,7 +76,12 @@ function exec_action_adherents() {
 	if ($action=="ajoute"){
 
 // Inscription adherent
-		$query=spip_query("INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation, validite, fonction) VALUES ('$nom', '$prenom', '$sexe', '$email', '$rue', '$cp', '$ville', '$telephone', '$portable', ".spip_abstract_quote($remarques).", '$id_asso', '$naissance', '$profession', '$societe', '$secteur', '$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', '$categorie', 'prospect', CURRENT_DATE(), '$validite', '$fonction' )");
+		$query=spip_query("INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, 
+		profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation, validite, fonction) 
+		VALUES ('$nom', '$prenom', '$sexe', '$email', '$rue', '$cp', '$ville', '$telephone', '$portable', ".spip_abstract_quote($remarques).", 
+		'$id_asso', '$naissance', '$profession', '$societe', '$secteur', 
+		'$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', 
+		'$categorie', 'prospect', CURRENT_DATE(), '$validite', '$fonction' )");
 		if ($query) { 
 			echo '<p><strong>'._T('asso:adherent_message_ajout_adherent',array('prenom' => $prenom, 'nom' => $nom)).'</strong></p>';
 		}
@@ -114,13 +125,19 @@ function exec_action_adherents() {
 
 	if ($action=="modifie") {
 		
-		spip_query("UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', categorie='$categorie', fonction='$fonction', email='$email', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable', remarques='$remarques', id_asso='$id_asso', naissance='$naissance', profession='$profession',societe='$societe', secteur='$secteur', publication='$publication', utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', statut='$statut', validite='$validite' WHERE id_adherent='$id_adherent'");
+		spip_query("UPDATE spip_asso_adherents SET 
+		nom="._q($nom).", prenom="._q($prenom).", sexe="._q($sexe).", categorie="._q($categorie).", 
+		fonction="._q($fonction).", email="._q($email).", numero="._q($numero).", rue="._q($rue).", cp="._q($cp).", ville="._q($ville).", 
+		telephone="._q($telephone).", portable="._q($portable).", remarques="._q($remarques).", id_asso="._q($id_asso).", naissance="._q($naissance).", 
+		profession="._q($profession).",societe="._q($societe).", secteur="._q($secteur).", publication="._q($publication).", utilisateur1="._q($utilisateur1).", 
+		utilisateur2="._q($utilisateur2).", utilisateur3="._q($utilisateur3).", utilisateur4="._q($utilisateur4).", statut="._q($statut).", validite="._q($validite)." 
+		WHERE id_adherent="._q($id_adherent));
 		//on enregistre l'id_auteur
-		$query=spip_query("SELECT * FROM spip_auteurs WHERE email='$email' ");
+		$query=spip_query("SELECT * FROM spip_auteurs WHERE email="._q($email));
 		while ($data=spip_fetch_array($query)) {
 			$id_auteur=$data['id_auteur'];
 			$email=$data['email'];
-			spip_query("UPDATE spip_asso_adherents SET id_auteur=$id_auteur  WHERE email='$email' AND email <>'' ");
+			spip_query("UPDATE spip_asso_adherents SET id_auteur=$id_auteur  WHERE email="._q($email)." AND email <>'' ");
 		}
 
 		echo '<p><strong>'._T('asso:adherent_message_maj_adherent',array('prenom' => $prenom, 'nom' => $nom)).'</strong></p>';
