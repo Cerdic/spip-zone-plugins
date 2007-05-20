@@ -66,12 +66,13 @@ function colonne_table($table, $col) {
 }
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
-function valeur_colonne_table_dist($table, $col, $id) {
+function table_where($table, $id)
+{
 	$nom_table = '';
 	if (!(($tabref = &crayons_get_table($table, $nom_table))
 			&& ($tabid = explode(',', $tabref['key']['PRIMARY KEY'])))) {
 		spip_log('crayons: table ' . $table . ' inconnue');
-		return false;
+		return array(false, false);
 	}
 	if (is_scalar($id)) {
 		$id = explode('-', $id);
@@ -80,6 +81,15 @@ function valeur_colonne_table_dist($table, $col, $id) {
 	foreach ($id as $idcol => $idval) {
 		$where .= $and . (is_int($idcol) ? trim($tabid[$idcol]) : $idcol) . '=' . $idval;
 		$and = ' AND ';
+	}
+	return array($nom_table, $where);
+}
+//	var_dump(colonne_table('forum', 'id_syndic')); die();
+
+function valeur_colonne_table_dist($table, $col, $id) {
+	list($nom_table, $where) = table_where($table, $id);
+	if (!$nom_table) {
+		return false;
 	}
 
     $s = spip_query(

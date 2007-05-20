@@ -158,8 +158,9 @@ function action_crayons_store_dist() {
 				    break;
 			}
 			if (!$fun or !function_exists($fun)) {
-			    $return['$erreur'] = "$type: " . _U('crayons:non_implemente');
-			    break;
+				    $fun = 'crayons_update';
+//			    $return['$erreur'] = "$type: " . _U('crayons:non_implemente');
+//			    break;
 			}
 			$updates[$type] = array('fun'=>$fun, 'ids'=>array());
 		}
@@ -184,7 +185,11 @@ function action_crayons_store_dist() {
 	        // Enregistrer dans la base
 	        // $updok = ... quand on aura un retour
 	        // -- revisions_articles($id_article, $c) --
-	        $idschamps['fun']($id, $champsvaleurs['chval']);
+	        if ($idschamps['fun'] == 'crayons_update') {
+		        crayons_update($id, $champsvaleurs['chval'], $type);
+	        } else {
+		        $idschamps['fun']($id, $champsvaleurs['chval']);
+	        }
 	    }
 	}
 
@@ -247,6 +252,29 @@ function vues_dist($type, $modele, $id, $content){
 			return typo($valeur);
 		}
 	}
+}
+
+//
+// Fonctions de mise a jour generique
+//
+function crayons_update($id, $colval = array(), $type = '')
+{
+	if (!$colval) {
+		return false;
+	}
+	list($nom_table, $where) = table_where($type, $id);
+	if (!$nom_table) {
+		return false;
+	}
+
+	$update = $sep = '';
+	foreach ($colval as $col => $val) {
+		$update .= $sep . $col . '=' . _q($val);
+		$sep = ', ';
+	}
+
+    return spip_query(
+        'UPDATE ' . $nom_table . ' SET ' . $update . ' WHERE ' . $where);
 }
 
 //
