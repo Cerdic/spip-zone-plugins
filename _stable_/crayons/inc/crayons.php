@@ -79,7 +79,7 @@ function table_where($table, $id)
 	}
 	$where = $and = '';
 	foreach ($id as $idcol => $idval) {
-		$where .= $and . (is_int($idcol) ? trim($tabid[$idcol]) : $idcol) . '=' . $idval;
+		$where .= $and . (is_int($idcol) ? trim($tabid[$idcol]) : $idcol) . '=' . _q($idval);
 		$and = ' AND ';
 	}
 	return array($nom_table, $where);
