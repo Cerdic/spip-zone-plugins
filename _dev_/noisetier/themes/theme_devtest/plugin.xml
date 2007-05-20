@@ -21,5 +21,6 @@
 	<prefix> 
 	theme_test
 	</prefix>
+	<necessite id="noisetier" version="[0.1;]" />
 	<chemin dir='' />
 </plugin>

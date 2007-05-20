@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Biblioth&egrave;que de noisettes pour le noisetier</multi>
+	<multi>[fr]Biblio-noisettes</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cent 20, Joseph Larmarange, Mogwaï - 2007 - 
@@ -14,12 +14,13 @@
 	</etat>
 	<description>
 	<multi>
-	[fr] Biblioth&egrave;ques de noisettes pour le plugin noisetier. Certaines noisettes peuvent n&eacute;cessiter le plugin attributs pour fonctionner.
+	[fr] Biblioth&egrave;que de noisettes pour le plugin noisetier.
 	</multi>
 	</description>
 	<lien>http://groups.google.com/group/noisetier-dev</lien> <!-- URI de documentation -->
 	<prefix>
 	biblio-noisettes
 	</prefix>
+	<necessite id="noisetier" version="[0.1;]" />
 	<chemin dir='' />
 </plugin>
