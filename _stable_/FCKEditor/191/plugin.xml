@@ -2,7 +2,7 @@
 	<nom>FCKeditor (2.4.2) pour Spip (1.9.1) [V-1.4]</nom>
 	<auteur>[Frank SAURET->http://electropol.free.fr], Val&#233;rian &copy; 2007 - Distribu&#233; sous licence GNU/GPL</auteur>
 	<version>1.4 (pour spip 1.9.1)</version>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<description>
 {{Edition WYSIWYG avec FCKeditor}}
 <br /><br />
