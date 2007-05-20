@@ -73,7 +73,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$message= "Bonjour ".$prenom."\n\n\nVous venez de demander votre inscription &agrave; l'association ".$nomasso."\nNous allons prendre contact avec vous tr&egrave;s rapidement.\n\nAvec nos remerciements. \n\n\nLe bureau de ".$nomasso."\r\n";
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
-		echo " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, remarques, creation) 
+		//echo " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, remarques, creation) 
 		//VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', NOW() ) " ;
 		
 		
@@ -87,7 +87,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, remarques, creation) 
 		VALUES ("._q($nom).", "._q($prenom).",  "._q($mail).",  "._q($rue).", "._q($cp).", "._q($ville).", "._q($telephone).","._q(prospect).", "._q($commentaire).", NOW() ) ");	
 		$id = spip_insert_id();
-		echo "id -> $id ";
+		//echo "id -> $id ";
 		
 	}
 	else {
