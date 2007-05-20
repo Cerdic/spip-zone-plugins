@@ -39,8 +39,6 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	$commentaire=_request('commentaire');
 	$bouton=_request('bouton');
 	
-	echo "yo".$bouton ;
-	
 	if ($bouton=='Confirmer'){	
 		//on envoit des emails
 		
@@ -75,14 +73,21 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$message= "Bonjour ".$prenom."\n\n\nVous venez de demander votre inscription &agrave; l'association ".$nomasso."\nNous allons prendre contact avec vous tr&egrave;s rapidement.\n\nAvec nos remerciements. \n\n\nLe bureau de ".$nomasso."\r\n";
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
-		echo " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, commentaire, creation) 
-		VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', CURRENT_DATE() ) " ;
+		echo " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, remarques, creation) 
+		//VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', NOW() ) " ;
+		
+		
+		if(!function_exists(_q)){
+		function _q($a) {
+			return (is_int($a)) ? strval($a) : ("'" . addslashes($a) . "'");
+			}
+		}
 		
 		//enregistrement dans la table
-		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, commentaire, creation) 
-		VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', CURRENT_DATE() ) ");	
+		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, remarques, creation) 
+		VALUES ("._q($nom).", "._q($prenom).",  "._q($mail).",  "._q($rue).", "._q($cp).", "._q($ville).", "._q($telephone).","._q(prospect).", "._q($commentaire).", NOW() ) ");	
 		$id = spip_insert_id();
-		echo "vla id -> $id ";
+		echo "id -> $id ";
 		
 	}
 	else {
