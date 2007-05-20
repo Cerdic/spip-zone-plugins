@@ -17,4 +17,11 @@
 		}
 	}
 
+	function noisetier_vider_tables($nom_meta_base_version) {
+		spip_query("DROP TABLE spip_noisettes");
+		spip_query("DROP TABLE spip_params_noisettes");
+		effacer_meta($nom_meta_base_version);
+		ecrire_metas();
+	}
+
 ?>
