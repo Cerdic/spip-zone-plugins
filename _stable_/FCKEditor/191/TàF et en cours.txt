@@ -1,0 +1,9 @@
+-- J'ai corrigé en partie le bug de navigation dans les images,
+-- Supprimé les possibilités de suppression et renommage (elles causait le bug),
+-- Le bug de document long est corrigé (suppression du découpage) par contre c'est fait à l'arrache en imposant mon fichier articles_edit.php
+
+-----------------------------------------------------------------------------------------------------------------------------
+Il reste :
+-- Permettre l'accés conjointement aux répertoires userfile et img de spip,
+-- Corriger le bug d'accés à la bdd (dans galerie et config),
+-- Supprimer le découpage de document long plus proprement,
