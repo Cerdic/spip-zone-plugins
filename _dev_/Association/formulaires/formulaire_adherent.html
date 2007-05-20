@@ -55,6 +55,17 @@
 		</span>
 		<input name="telephone" type="text" id="telephone" size="40" />
 	</div>
+	
+	
+	<div class="spip_form_champs">
+		<select name="categorie">
+		<BOUCLE_cotiz(SPIP_ASSO_CATEGORIES)>
+		<option value="#VALEUR">#LIBELLE - #COTISATION euros</option>
+		</BOUCLE_cotiz>
+		</select>
+	</div>
+	
+	
 	<div class="spip_form_champs">
 		<span class='spip_form_label'>
 			<label for="commentaire"><:asso:adherent_libelle_commentaire:> :</label>

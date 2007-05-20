@@ -36,6 +36,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	$cp=_request('cp');
 	$ville=_request('ville');
 	$telephone=_request('telephone');
+	$categorie=_request('categorie');
 	$commentaire=_request('commentaire');
 	$bouton=_request('bouton');
 	
@@ -64,8 +65,10 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$sujet='Demande d\'adh&eacute;sion';
 		
 		//au webmaster
-		$message = "Un nouveau membre vient de demander son adh&eacute;sion :\n\nNOM : ".$nom."\nPr&eacute;nom : ".$prenom."\nEmail :<a href='mailto:'".$mail."'>".$mail."</a>\nAdresse: ".$rue." ".$cp." ".$ville."\nT&eacute;l&eacute;phone: "
-		.$telephone."\n\nCommentaire: ".$commentaire;
+		$message = "Un nouveau membre vient de demander son adh&eacute;sion :\n\nNOM : ".$nom."\nPr&eacute;nom : ".$prenom."\nEmail :<a href='mailto:'".$mail."'>".$mail."</a>\nAdresse: ".$rue." ".$cp." ".$ville
+		."\nT&eacute;l&eacute;phone: ".$telephone
+		."\n\nCat&eacute;gorie ".$categorie
+		."\n\nCommentaire: ".$commentaire;
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
 		//au demandeur
@@ -84,8 +87,8 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		}
 		
 		//enregistrement dans la table
-		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, remarques, creation) 
-		VALUES ("._q($nom).", "._q($prenom).",  "._q($mail).",  "._q($rue).", "._q($cp).", "._q($ville).", "._q($telephone).","._q(prospect).", "._q($commentaire).", NOW() ) ");	
+		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, categorie, statut, remarques, creation) 
+		VALUES ("._q($nom).", "._q($prenom).",  "._q($mail).",  "._q($rue).", "._q($cp).", "._q($ville).", "._q($telephone).", "._q($categorie).", "._q(prospect).", "._q($commentaire).", NOW() ) ");	
 		$id = spip_insert_id();
 		//echo "id -> $id ";
 		
@@ -124,7 +127,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			}	
 			
 			//echo "le bouton -> $bouton car $erreur_email $erreur_nom $erreur_prenom $erreur_rue $erreur_cp $erreur_ville" ;
-			
+			echo $categorie ;
 			//on retourne les infos à un formulaire de previsualisation		
 			return inclure_balise_dynamique(
 				array(
@@ -138,6 +141,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 						'cp'		=> $cp,
 						'ville'		=> $ville,
 						'telephone'=> $telephone,
+						'categorie'=> $categorie,
 						'commentaire'=> $commentaire,
 						'bouton'	=> $bouton,
 						'erreur_email' => $erreur_email,

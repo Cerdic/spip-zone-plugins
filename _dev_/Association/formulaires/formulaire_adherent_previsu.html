@@ -46,12 +46,24 @@
 		</span>
 		<input name="ville" type="text" class="choix" size="40" value="[(#ENV{ville})]" />
 	</div>
-	<div class='spip_form_champs'>
-		<span class='spip_form_label'>
-			<label for="telephone"><:asso:adherent_libelle_telephone:> :</label> 
-		</span>
-		<input name="telephone" type="text" class="choix" size="40" value="[(#ENV{telephone})]" />
+	
+	<B_cotiz>
+	<div class="spip_form_champs">
+		<select name="categorie">
+		<BOUCLE_cotiz(SPIP_ASSO_CATEGORIES)>
+		<option value="#VALEUR" [(#VALEUR|=={#ENV{categorie}}|?{'selected',''})] >#LIBELLE - #COTISATION euros</option>
+		</BOUCLE_cotiz>
+		</select>
 	</div>
+	</B_cotiz>
+	
+	<div class='spip_form_champs'> 
+ 		<span class='spip_form_label'> 
+ 		<label for="telephone"><:asso:adherent_libelle_telephone:> :</label>  
+ 		</span> 
+ 		<input name="telephone" type="text" class="choix" size="40" value="[(#ENV{telephone})]" /> 
+ 	</div> 
+	
 	<div class="spip_form_champs">
 		<span class='spip_form_label'>
 			<label for="commentaire"><:asso:adherent_libelle_commentaire:>:</label>
