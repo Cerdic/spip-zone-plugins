@@ -189,7 +189,6 @@ function &crayons_get_table($table, &$nom_table) {
 					break 2;
 				}
 			}
-			spip_log($GLOBALS[$categ]);
 		}
 	}
 	$nom_table = $noms[$table];
