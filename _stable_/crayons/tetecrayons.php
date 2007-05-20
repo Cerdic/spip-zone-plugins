@@ -135,10 +135,17 @@ EOH;
 // #EDIT{ps} pour appeler le crayon ps ;
 // si cette fonction est absente, balise_EDIT_dist() met a vide
 function balise_EDIT($p) {
-	$boucle = &$p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle];
+	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	// #EDIT hors boucle ? ne rien faire
+	if (!$p->boucles[$i_boucle]->type_requete) {
+		$p->code = "''";
+		$p->interdire_scripts = false;
+		return $p;
+	}
 	// le compilateur 1.9.2 ne calcule pas primary pour les tables secondaires
-	if (!($primary = $boucle->primary)) {
-		list($nom, $desc) = trouver_def_table($boucle->type_requete, $boucle);
+	if (!($primary = $p->boucles[$i_boucle]->primary)) {
+		list($nom, $desc) = trouver_def_table(
+			$p->boucles[$i_boucle]->type_requete, $p->boucles[$i_boucle]);
 		$primary = $desc['key']['PRIMARY KEY'];
 	}
 	$primary = explode(',',$primary);
@@ -147,7 +154,7 @@ function balise_EDIT($p) {
 		$id[] = champ_sql(trim($key),$p);
 	$primary = implode(".'-'.",$id);
 	$p->code = "classe_boucle_crayon('"
-		. $boucle->type_requete
+		. $p->boucles[$i_boucle]->type_requete
 		."',"
 		.sinon(interprete_argument_balise(1,$p),"''")
 		.","
