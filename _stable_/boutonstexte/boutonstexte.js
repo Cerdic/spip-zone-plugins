@@ -2,11 +2,11 @@
  *  boutonstexte.js (c) toggg http://toggg.com 2006 -- licence LGPL
  */
 
-// on dépend de jQuery (ou autre définissant $)
-if (typeof $ == 'function') {
-	$(document).ready(function(){
+// on dépend de jQuery
+if (typeof jQuery == 'function') {
+	jQuery(document).ready(function(){
 		boutonstexte.tmp = '';
-		boutonstexte.fixedUp = $("img.textsizeup");
+		boutonstexte.fixedUp = jQuery("img.textsizeup");
 		if (boutonstexte.fixedUp.length) {
 			boutonstexte.fixedUp
 			  .click(function() {boutonstexte.fontBigger();})
@@ -19,7 +19,7 @@ if (typeof $ == 'function') {
 			  boutonstexte.txtSizeUp + '"><img src="' +
 			  boutonstexte.imgPath + '/fontsizeup.png" /></button>';
 		}
-		boutonstexte.fixedDown = $("img.textsizedown");
+		boutonstexte.fixedDown = jQuery("img.textsizedown");
 		if (boutonstexte.fixedDown.length) {
 			boutonstexte.fixedDown
 			  .click(function() {boutonstexte.fontSmaller();})
@@ -41,7 +41,7 @@ if (typeof $ == 'function') {
 			  boutonstexte.imgPath + '/textonly.png" /></button>';
 		}
 		if (boutonstexte.tmp) {
-			$(boutonstexte.selector).before(
+			jQuery(boutonstexte.selector).before(
 				'<span class="boutonstexte">' + boutonstexte.tmp + '</span>');
 		}
 	});
@@ -61,20 +61,20 @@ function boutonsTexte(options)
 boutonsTexte.prototype.textOnly = function(elt)
 {
 	var that = this;
-	var texte = $(elt).parent().next();
-	$("body").toggleClass('onlytext_wrapper');
+	var texte = jQuery(elt).parent().next();
+	jQuery("body").toggleClass('onlytext_wrapper');
 	if (this['backTextOnly']) {
 		texte.removeClass("onlytext");
-		$(elt).attr({ 'title': that.txtOnly, 'alt': that.txtOnly }).
-			parent().insertBefore($("#marktextonly")).after(texte);
-		$("#marktextonly").remove();
-		$('body').children().show();
+		jQuery(elt).attr({ 'title': that.txtOnly, 'alt': that.txtOnly }).
+			parent().insertBefore(jQuery("#marktextonly")).after(texte);
+		jQuery("#marktextonly").remove();
+		jQuery('body').children().show();
 		this.backTextOnly = false;
 		return;
 	}
 	texte.addClass("onlytext");
-	$(texte[texte.length-1]).after('<div id="marktextonly">marktextonly</div>');
-	$(elt).attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip }).
+	jQuery(texte[texte.length-1]).after('<div id="marktextonly">marktextonly</div>');
+	jQuery(elt).attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip }).
 		parent().prependTo("body").after(texte).
 		siblings().gt(texte.length-1).hide();
 	this.backTextOnly = true;
@@ -82,18 +82,18 @@ boutonsTexte.prototype.textOnly = function(elt)
 boutonsTexte.prototype.fontBigger = function(elt)
 {
 	var that = this;
-	var work = elt ? $(elt).parent().next() : $(this.selector);
+	var work = elt ? jQuery(elt).parent().next() : jQuery(this.selector);
 	work.each(function(){
-		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
+		var m = jQuery(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
 		this.style.fontSize = (that.rate * parseFloat(m[1])) + m[2];
 	});
 }
 boutonsTexte.prototype.fontSmaller = function(elt)
 {
 	var that = this;
-	var work = elt ? $(elt).parent().next() : $(this.selector);
+	var work = elt ? jQuery(elt).parent().next() : jQuery(this.selector);
 	work.each(function(){
-		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
+		var m = jQuery(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
 		this.style.fontSize = (parseFloat(m[1]) / that.rate) + m[2];
 	});
 }
