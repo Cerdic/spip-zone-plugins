@@ -5,7 +5,11 @@
 	<etat>dev</etat>
 	<auteur>Camille Lafitte [contact->mailto:cam.lafit@zerttyu.net]
 _ [mon site->http://km.azerttyu.net]</auteur>
-	<description>Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL</description>
+	<description>
+		Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL.<br/>
+		Un complement de documentation est accessible [ici->http://www.spip-contrib.net/Plugin-Archive]
+		
+	</description>
 	<fonctions>
 		archive_fonctions.php
 	</fonctions>
