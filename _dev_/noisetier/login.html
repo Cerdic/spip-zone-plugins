@@ -4,6 +4,11 @@
 ]
 #CACHE{24 * 3600}
 #HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+[(#REM)
+	Sécurité : en l'absence d'une noisette spécifique à la page login
+	on charge la page login de la dist.
+]
+<BOUCLE_test(NOISETTES){page=login}{type=noisette}{0,1}{actif=oui}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -16,3 +21,6 @@
 [(#REM) Balises html de fermeture de la page]
 </body>
 </html>
+</BOUCLE_test>
+<INCLURE{fond=dist/login}{env}>
+<//B_test>
