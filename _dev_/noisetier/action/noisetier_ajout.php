@@ -5,15 +5,18 @@ function action_noisetier_ajout_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	
-	if ($arg=='ajout_texte') $id_noisette = noisetier_ajout_texte();
-	if ($arg=='ajout_noisette') $id_noisette = noisetier_ajout_noisette();
-}
-
-function noisetier_ajout_texte() {
-	include_spip('base/abstract_sql');
-	include_spip('inc/filtres');
 	$page = _request('page');
 	$zone = _request('zone');
+	if ($arg=='ajout_texte') $id_noisette = noisetier_ajout_texte($page, $zone);
+	if ($arg=='ajout_noisette') {
+		$url_noisette = _request('url_noisette');
+		$id_noisette = noisetier_ajout_noisette($page, $zone, $url_noisette);
+	}
+}
+
+function noisetier_ajout_texte($page, $zone) {
+	include_spip('base/abstract_sql');
+	include_spip('inc/filtres');
 	$titre = addslashes(corriger_caracteres(_T('noisetier:titre_nouveau_texte')));
 	$descriptif = addslashes(corriger_caracteres(_T('noisetier:descriptif_nouveau_texte')));
 	$position = 1;
@@ -24,14 +27,9 @@ function noisetier_ajout_texte() {
 	return $id_noisette;
 }
 
-function noisetier_ajout_noisette() {
+function noisetier_ajout_noisette($page, $zone, $url_noisette) {
 	include_spip('base/abstract_sql');
 	include_spip('inc/filtres');
-	global $infos_ajout_noisette;
-	$infos_ajout_noisette = "";
-	$page = _request('page');
-	$zone = _request('zone');
-	$url_noisette = _request('url_noisette');
 	// Ajout de plugins au début de l'url car le script action est effectué à la racine du site et l'url contient alors un ../ de trop au début.
 	$contenu_noisette = file_get_contents ('plugins/'.$url_noisette);
 	if (!preg_match('`\[noisetier\(#REM\)([^]]*)\]`',$contenu_noisette,$matches)) {
@@ -143,8 +141,8 @@ function noisetier_ajout_noisette() {
 
 function noisetier_reecrire_crochets ($texte) {
 	// Transformation des <lien> en [ et des </lien> en ]
-	$texte = preg_replace('`<lien>`','[',$texte);
-	$texte = preg_replace('`</lien>`',']',$texte);
+	$texte = preg_replace('`<url>`','[',$texte);
+	$texte = preg_replace('`</url>`',']',$texte);
 	// Transformation des <lg-**> en [**]
 	$texte = preg_replace('`<lg-([[:alpha:]]{2})>`','[$1]',$texte);
 	
