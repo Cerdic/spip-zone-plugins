@@ -17,7 +17,7 @@
 		Attention ce plugin ne s'installe pas comme les autres (cf. documentation).
 	</description>
 	<lien>
-		[Documentation sur SPIP Contrib'->La-mutualisation-facile],
+		[Documentation sur SPIP Contrib'->http://www.spip-contrib.net/La-mutualisation-facile],
 	</lien>
 	<icon>mutualiser.png</icon>
 	<prefix>
