@@ -200,7 +200,11 @@ function csvimport_csv_ligne($ligne, $delim = ',') {
  */
 
 function csvimport_importcharset($texte){
-	return importer_charset($texte,'iso-8859-1');
+	include_spip('inc/charsets');
+	$charset_source = 'iso-8859-1';
+	if (is_utf8($texte))
+		$charset_source = 'utf-8';
+	return importer_charset($texte,$charset_source);
 }
 
 function csvimport_importcsv($file, $head = 0, $delim = ",", $enclos = '"', $len = 10000) {
