@@ -8,7 +8,7 @@
 [(#REM) Appel du modèle d'en-tête du plugin de thème]
 <INCLURE{fond=noisetier-head}{env}>
 </head>
-<body id="#ENV{page}">
+<body id="#ENV{page}" class="page_#ENV{page}">
 [(#REM) Appel du modèle de corps du plugin de thème ]
 <INCLURE{fond=noisetier-body}{env}>
 [(#REM) Balises html de fermeture de la page]
@@ -21,9 +21,9 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 [(#REM) Appel du modèle d'en-tête du plugin de thème]
-<INCLURE{fond=noisetier-head}{env}{page=articles}>
+<INCLURE{fond=noisetier-head}{env}{page=rubriques}>
 </head>
-<body id="rubriques">
+<body id="rubriques" class="page_#rubriques">
 [(#REM) Appel du modèle de corps du plugin de thème ]
 <INCLURE{fond=noisetier-body}{env}{page=rubriques}>
 [(#REM) Balises html de fermeture de la page]
