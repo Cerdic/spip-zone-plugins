@@ -1,0 +1,37 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Glossaire
+	</nom>
+	<icon>img_pack/glossaire-64.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ &#169; 2006,2007 - Licence GPL
+	</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<install>base/glossaire_upgrade.php</install>
+	<etat>
+	stable
+	</etat>
+	<description>
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix> 
+	glossaire
+	</prefix>
+	<fonctions>
+	glossaire_filtres.php
+	</fonctions>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>glossaire_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>ajouter</action>
+		<inclure>glossaire_filtres.php</inclure>
+	</pipeline>
+	<necessite id="forms" version="[0.301;]" />
+	<chemin dir=''  />
+</plugin>
