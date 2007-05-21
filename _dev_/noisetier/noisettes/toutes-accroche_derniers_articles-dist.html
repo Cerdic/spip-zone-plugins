@@ -1,0 +1,41 @@
+#CACHE{24*3600}
+[noisetier(#REM)
+<titre>Affiche l'accroche des derniers articles publiés</titre>
+<description>
+	<multi>
+		<fr>Pour les derniers articles publiés sur le site on affiche le surtitre, le titre, le sous titre le logo, la date de publication et l'introduction </fr>
+	</multi>
+</description>
+<auteur>fraichdist</auteur>
+<version>0.9344</version>
+<lien>
+	<documentation>url de la documentation intégrale de la noisette</documentation>
+	<svn>url de la version svn de ce fichier</svn>
+</lien>
+<param>
+	<titre>nb_accroche</titre>
+	<descriptif>Nombre d'accroche à afficher</descriptif>
+	<valeur>10</valeur>
+</param>
+]
+
+<div class="element">
+<B_articles_recents>
+<div class="liste-articles">
+	<h2 class="invisible"><:derniers_articles:></h2>
+	<ul>
+		<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,#ENV{nb_accroche,10}} {doublons}>
+		<li>
+			[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
+			[<p class="surtitre">(#SURTITRE)</p>]
+			<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+			[<p class="soustitre">(#SOUSTITRE)</p>]
+			<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+			[<div class="#EDIT{intro} texte introduction">(#INTRODUCTION)</div>]
+			<br class="nettoyeur" />
+		</li>
+		</BOUCLE_articles_recents>
+	</ul>
+</div>
+</B_articles_recents>
+</div>
