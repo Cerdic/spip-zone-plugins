@@ -77,6 +77,11 @@ class cfg_table
 	function modifier($supprimer = false)
 	{
 //spip_log($val);
+		$this->cfg_id = $sep = '';
+		foreach ($this->cfg->champs_id as $name) {
+			$this->cfg_id .= $sep . _request($name);
+			$sep = '/';
+	    }
     	$base = $this->lire();
 		// Hmm... a revoir pour table uniquement de liaison...
     	$existe = count($base) > count($this->cfg->champs_id);
