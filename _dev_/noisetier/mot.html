@@ -1,0 +1,32 @@
+#CACHE{86400}
+<BOUCLE_mot_principal(MOTS){id_mot}>
+[(#REM) Page affichée en cas d'id correct ]
+[(#REM) Déclaration du type de document, indispensable pour le navigateur web ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+[(#REM) Appel du modèle d'en-tête du plugin de thème]
+<INCLURE{fond=noisetier-head}{env}>
+</head>
+<body id="#ENV{page}" class="page_#ENV{page}">
+[(#REM) Appel du modèle de corps du plugin de thème ]
+<INCLURE{fond=noisetier-body}{env}>
+[(#REM) Balises html de fermeture de la page]
+</body>
+</html>
+</BOUCLE_mot_principal>
+[(#REM) Page affichée en cas d'id correct ]
+[(#REM) Déclaration du type de document, indispensable pour le navigateur web ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+[(#REM) Appel du modèle d'en-tête du plugin de thème]
+<INCLURE{fond=noisetier-head}{env}{page=mots}>
+</head>
+<body id="mots" class="page_mots">
+[(#REM) Appel du modèle de corps du plugin de thème ]
+<INCLURE{fond=noisetier-body}{env}{page=mots}>
+[(#REM) Balises html de fermeture de la page]
+</body>
+</html>
+<//B_mot_principal>

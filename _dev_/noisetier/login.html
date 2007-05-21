@@ -1,0 +1,18 @@
+[(#REM)
+	Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
+	conserver cette page en memoire
+]
+#CACHE{24 * 3600}
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+[(#REM) Appel du modèle d'en-tête du plugin de thème]
+<INCLURE{fond=noisetier-head}{env}>
+</head>
+<body id="#ENV{page}" class="page_#ENV{page}">
+[(#REM) Appel du modèle de corps du plugin de thème ]
+<INCLURE{fond=noisetier-body}{env}>
+[(#REM) Balises html de fermeture de la page]
+</body>
+</html>
