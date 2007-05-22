@@ -1,4 +1,4 @@
-<BOUCLE_tags(MOTS){id_groupe==^#ENV{id}}>[
+<BOUCLE_tags(MOTS){id_groupe==^((#ENV{id}))$}>[
 (#ID_MOT|nuage_pop{#TITRE,#URL_MOT})
 ]<BOUCLE_pop(ARTICLES){id_mot}{par popularite}{inverse}{0,200}>[
 (#ID_MOT|nuage_pop{'','',#POPULARITE_ABSOLUE})

@@ -1,4 +1,4 @@
-<BOUCLE_tags(MOTS){id_groupe==^#ENV{id}}{id_groupe!==^#ENV{notid,-1}}>[
+<BOUCLE_tags(MOTS){id_groupe==^((#ENV{id}))$}{id_groupe!==^((#ENV{notid,-1}))$}>[
 (#ID_MOT|nuage{#TITRE,#URL_MOT})
 ]<BOUCLE_pop(ARTICLES){id_mot}></BOUCLE_pop>[
 (#ID_MOT|nuage{'','',#TOTAL_BOUCLE})
