@@ -14,7 +14,7 @@ function action_noisetier_ajout_dist() {
 	}
 }
 
-function noisetier_ajout_texte($page, $zone) {
+function noisetier_ajout_texte($page, $zone, $exclue='') {
 	include_spip('base/abstract_sql');
 	include_spip('inc/filtres');
 	$titre = addslashes(corriger_caracteres(_T('noisetier:titre_nouveau_texte')));
@@ -23,11 +23,11 @@ function noisetier_ajout_texte($page, $zone) {
 	$query = "SELECT MAX(position) AS positionmax FROM spip_noisettes WHERE zone='$zone'";
 	$res = spip_query($query);
 	if ($row = spip_fetch_array($res)) $position = $row['positionmax']+1;
-	$id_noisette = spip_abstract_insert("spip_noisettes","(page,zone,position,titre,descriptif,type)","('$page','$zone','$position','$titre','$descriptif','texte')");
+	$id_noisette = spip_abstract_insert("spip_noisettes","(page,exclue,zone,position,titre,descriptif,type)","('$page','$exclue','$zone','$position','$titre','$descriptif','texte')");
 	return $id_noisette;
 }
 
-function noisetier_ajout_noisette($page, $zone, $url_noisette) {
+function noisetier_ajout_noisette($page, $zone, $url_noisette, $exclue='') {
 	include_spip('base/abstract_sql');
 	include_spip('inc/filtres');
 	// Ajout de plugins au début de l'url car le script action est effectué à la racine du site et l'url contient alors un ../ de trop au début.
@@ -48,6 +48,9 @@ function noisetier_ajout_noisette($page, $zone, $url_noisette) {
 		exit;
 		}
 	$descriptif = addslashes(corriger_caracteres(spip_xml_aplatit($arbre['description'])));
+	$auteur = addslashes(corriger_caracteres(spip_xml_aplatit($arbre['auteur'])));
+	$lien = addslashes(corriger_caracteres(spip_xml_aplatit($arbre['lien'])));
+	$version = addslashes(corriger_caracteres(spip_xml_aplatit($arbre['version'])));
 	$position = 1;
 	$query = "SELECT MAX(position) AS positionmax FROM spip_noisettes WHERE zone='$zone'";
 	$res = spip_query($query);
@@ -111,7 +114,7 @@ function noisetier_ajout_noisette($page, $zone, $url_noisette) {
 	}
 	
 	// Insertion de la noisette
-	$id_noisette = spip_abstract_insert("spip_noisettes","(page,zone,position,titre,descriptif,type,fond)","('$page','$zone','$position','$titre','$descriptif','noisette','$fond')");
+	$id_noisette = spip_abstract_insert("spip_noisettes","(page,exclue,zone,position,titre,descriptif,auteur,lien,version,type,fond)","('$page','$exclue','$zone','$position','$titre','$descriptif','$auteur','$lien','$version','noisette','$fond')");
 	
 	// Insertion des variables d'environnement
 	$envs = $arbre['env'];
