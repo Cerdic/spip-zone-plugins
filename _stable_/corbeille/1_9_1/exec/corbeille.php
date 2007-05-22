@@ -1,6 +1,7 @@
 <?php
 
 include(dirname(__FILE__).'/../inc_corbeille.php');
+include(dirname(__FILE__).'/../inc_param.php');
 
 
 //
@@ -13,6 +14,9 @@ function exec_corbeille(){
   global $debut;
   global $effacer;
   include_spip("inc/presentation");
+  //charge les paramétres de conf
+  global $corbeille_param;
+
 
 	$js='
 <script type="text/javascript">
@@ -38,78 +42,24 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 		$page = "corbeille";	
 
 		if (empty($debut)) $debut = 0;
-		$titre = "titre";
+		//si type_act non nul tous les éléments effaçable le sont. 
 		if (! empty($type_act)) {
-			$statut = "poubelle"; $table = "spip_signatures"; $id = "id_signature";
-			Corbeille_effacement( $table, $statut, $titre, $id);
-			$statut = "refuse"; $table = "spip_breves"; $id = "id_breve";
-			Corbeille_effacement( $table, $statut, $titre, $id);
-			$statut = "poubelle"; $table = "spip_articles"; $id = "id_article";
-			Corbeille_effacement( $table, $statut, $titre, $id);
-			$statut = "off"; $table = "spip_forum"; $id = "id_forum";
-			Corbeille_effacement( $table, $statut, $titre, $id);
-			$statut = "privoff"; $table = "spip_forum"; $id = "id_forum";
-			Corbeille_effacement( $table, $statut, $titre, $id);
-			$statut = "5poubelle"; $titre = "nom"; $table="spip_auteurs"; $id="id_auteur";
-			Corbeille_effacement( $table, $statut, $titre, $id);			 
+			//pour chacun des objets declarés dans inc_param la fonction effacement est appellée
+			foreach($corbeille_param as $objet) {
+				Corbeille_effacement( $objet["table"], $objet["statut"], $objet["titre"], $objet["id"]);
+			}
 			$debut=0;$type_act=0;
 		}
-
+		//si un type_doc est spécifié alors recherche des éléments
 		if (! empty($type_doc)) {
-
-			switch($type_doc) 
-			{
-				case "signatures" : 
-					$statut = "poubelle"; 
-					$titre = "nom_email"; 
-					$table = "spip_signatures";
-					$id = "id_signature"; 
-					$temps = "date_time"; 
-					//$page_voir = array($page4,'id_document');
-					$libelle = _T("corbeille:petitions_toutes");
-					break;
-				case "breves" : 
-					$statut = "refuse"; 
-					$table = "spip_breves"; 
-					$id = "id_breve"; 
-					$temps = "date_heure"; 
-					$page_voir = array("breves_voir",'id_breve');
-					$libelle = _T("corbeille:breves_toutes");
-					break;
-				case "articles" : 
-					$statut = "poubelle"; 
-					$table = "spip_articles"; 
-					$id = "id_article"; 
-					$temps = "date";  
-					$page_voir = array("articles",'id_article');
-					$libelle = _T("corbeille:articles_tous");
-					break;
-				case "forums_publics" :
-					$statut = "off";
-					$table = "spip_forum";
-					$id = "id_forum";
-					$temps = "date_heure";
-					//$page_voir = array($page3,'id_document');
-					$libelle = _T("corbeille:messages_tous_pub");
-					break;
-				case "forums_prives" :
-					$statut = "privoff"; 
-					$table = "spip_forum"; 
-					$id = "id_forum"; 
-					$temps = "date_heure"; 
-					//$page_voir = array($page3,'id_document');
-					$libelle = _T("corbeille:messages_tous_pri");
-					break;
-				case "auteurs" :  
-					$statut = "5poubelle"; 
-					$titre = "nom"; 
-					$table="spip_auteurs"; 
-					$id="id_auteur"; 
-					$temps = "maj"; 
-					$page_voir = array("auteurs_edit",'id_auteur');
-					$libelle = _T("corbeille:auteurs_tous");
-					break;
-			}
+			//charge les paramétres propre à l'objet demandé (breves, articles, auteurs, ...)
+			$statut = $corbeille_param[$type_doc]["statut"];
+			$titre = $corbeille_param[$type_doc]["titre"];
+			$table = $corbeille_param[$type_doc]["table"];
+			$id = $corbeille_param[$type_doc]["id"];
+			$temps = $corbeille_param[$type_doc]["temps"];
+			$page_voir = $corbeille_param[$type_doc]["page_voir"];
+			$libelle = $corbeille_param[$type_doc]["libelle"];
 
 			//securite
 			if (empty($table) || empty($temps) || empty($id) || empty($statut) || empty($titre)) die(_T("corbeille:souci"));

@@ -7,7 +7,6 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
  
-
 /* static public */
 
 /* public static */
@@ -76,36 +75,28 @@ function Corbeille_affiche_ligne($titre,$url,$total_table){
 }
 
 function Corbeille_affiche($page){
-		//case "signatures" :
-		$statut = "poubelle"; $titre = "nom_email"; $table = "spip_signatures"; $id = "id_signature"; $temps = "date_time";
-		$total_signatures = Corbeille_compte_elements_vider($table, $statut, $titre);
-		//case "breves" :
-		$statut = "refuse"; $table = "spip_breves"; $id = "id_breve"; $temps = "date_heure";
-		$total_breves = Corbeille_compte_elements_vider($table, $statut, $titre);
-		//case "articles" :
-		$statut = "poubelle"; $table = "spip_articles"; $id = "id_article"; $temps = "date";
-		$total_articles = Corbeille_compte_elements_vider($table, $statut, $titre);
-		//case "forums_publics" :
-		$statut = "off"; $table = "spip_forum"; $id = "id_forum"; $temps = "date_heure";
-		$total_forums_publics = Corbeille_compte_elements_vider($table, $statut, $titre);
-		//case "forums_prives" :
-		$statut = "privoff"; $table = "spip_forum"; $id = "id_forum"; $temps = "date_heure";
-		$total_forums_prives = Corbeille_compte_elements_vider($table, $statut, $titre);
-		//case "auteurs" :
-		$statut = "5poubelle"; $titre = "nom"; $table="spip_auteurs"; $id="id_auteur"; $temps = "maj";
-		$total_auteur = Corbeille_compte_elements_vider($table, $statut, $titre);
-		$totaux = ($total_auteur + $total_forums_prives + $total_forums_publics + $total_articles + $total_breves + $total_signatures); 
-	
+  		//charge les paramétres
+		global $corbeille_param;
+		//initialise les variables
+		$totaux = array();
+			
+		//Calcul du nombre d'objets effaçable
+		foreach($corbeille_param as $key => $objet) {
+			$totaux[$key] = Corbeille_compte_elements_vider($objet["table"],$objet["statut"],$objet["titre"]);
+			$totaux["tout"] += $totaux[$key];
+		}
+ 	
 		//types de documents geres par la corbeille
 		echo "<strong>"._T('corbeille:choix_doc')."</strong><br/>";
 		echo "<style type='text/css'>div a.corbeille {display:block;border:3px solid #f00;padding: 5px;margin-right:5px} div a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
 	
-  	Corbeille_affiche_ligne(_T('lien_petitions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures);
-		Corbeille_affiche_ligne(_T('icone_breves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves);
-		Corbeille_affiche_ligne(_T('icone_articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles);
-		Corbeille_affiche_ligne(_T('titre_forum'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics);
-		Corbeille_affiche_ligne(_T('icone_forum_administrateur'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives); 
-		Corbeille_affiche_ligne(_T('icone_auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur);
+		//parcours les totaux et genere une ligne de résulat par type d'objet
+		foreach($totaux as $key => $total) {
+			//ignore tout car pas de paramétre déclaré dans inc_param
+			if ($key != "tout") {
+				Corbeille_affiche_ligne($corbeille_param[$key]["libelle_court"],generer_url_ecrire($page,"type_doc=".$key),$total);
+			}
+		}
 		// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
 }
 
