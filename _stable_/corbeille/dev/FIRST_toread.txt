@@ -1,0 +1,4 @@
+Attention la version dev est moins évoluée que la 1_9_1
+Entre autre : absence du support multilinguisme
+
+Je suggére de virer du svn ce repertoire. Cela ne sert qu'à embrouiller les gens (enfin au moins moi).
