@@ -1,5 +1,8 @@
 #CACHE{86400}
-<meta  http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+[(#REM) Preciser le charset ]
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+[(#REM) Fierement fabrique avec SPIP ]
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
 [(#REM) Inclusion dans le head pour les noisettes le nécessitant]
 <BOUCLE_noisettes_avec_entete(NOISETTES){page IN #ENV{page},'toutes'}{exclue != #ENV{page}}{actif=oui}{par position}>
 	<BOUCLE_entetes_noisettes(PARAMS_NOISETTES){type=head}{id_noisette}>
@@ -19,3 +22,5 @@
 	[(#NOTES)]
 ]
 </BOUCLE_noisettes>
+[(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ]
+#INSERT_HEAD

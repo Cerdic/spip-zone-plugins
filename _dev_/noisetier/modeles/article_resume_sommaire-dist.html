@@ -1,0 +1,10 @@
+#CACHE
+<BOUCLE_un_article(ARTICLES){id_article}>
+	[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
+	[<p class="surtitre">(#SURTITRE)</p>]
+	<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+	[<p class="soustitre">(#SOUSTITRE)</p>]
+	<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+	[<div class="#EDIT{intro} texte introduction">(#INTRODUCTION)</div>]
+	<br class="nettoyeur" />
+</BOUCLE_un_article>

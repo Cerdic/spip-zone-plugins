@@ -6,11 +6,11 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 [(#REM) Appel du modèle d'en-tête du plugin de thème]
-<INCLURE{fond=noisetier-head}{env}>
+<INCLURE{fond=noisetier-head}{env}{page=mot}>
 </head>
-<body id="#ENV{page}" class="page_#ENV{page}">
+<body id="mot" class="page_mot">
 [(#REM) Appel du modèle de corps du plugin de thème ]
-<INCLURE{fond=noisetier-body}{env}>
+<INCLURE{fond=noisetier-body}{env}{page=mot}>
 [(#REM) Balises html de fermeture de la page]
 </body>
 </html>

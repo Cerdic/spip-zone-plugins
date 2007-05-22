@@ -5,11 +5,11 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 [(#REM) Appel du modèle d'en-tête du plugin de thème]
-<INCLURE{fond=noisetier-head}{env}>
+<INCLURE{fond=noisetier-head}{env}{page=forum}>
 </head>
-<body id="#ENV{page}" class="page_#ENV{page}">
+<body id="forum" class="page_forum">
 [(#REM) Appel du modèle de corps du plugin de thème ]
-<INCLURE{fond=noisetier-body}{env}>
+<INCLURE{fond=noisetier-body}{env}{page=forum}>
 [(#REM) Balises html de fermeture de la page]
 </body>
 </html>

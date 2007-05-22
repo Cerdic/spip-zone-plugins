@@ -14,6 +14,11 @@
 	<descriptif>Nombre d'accroche &agrave; afficher</descriptif>
 	<valeur>10</valeur>
 </param>
+<param>
+	<titre>resume_article</titre>
+	<descriptif>R&eacute;sum&eacute; des articles</descriptif>
+	<valeur>modeles/article_resume_sommaire-dist</valeur>
+</param>
 ]
 
 <div class="element">
@@ -23,13 +28,7 @@
 	<ul>
 		<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,#ENV{nb_accroche,10}} {doublons}>
 		<li>
-			[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
-			[<p class="surtitre">(#SURTITRE)</p>]
-			<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-			[<p class="soustitre">(#SOUSTITRE)</p>]
-			<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
-			[<div class="#EDIT{intro} texte introduction">(#INTRODUCTION)</div>]
-			<br class="nettoyeur" />
+		<INCLURE{fond=#ENV{resume_article}}{id_article=#ID_ARTICLE}>
 		</li>
 		</BOUCLE_articles_recents>
 	</ul>

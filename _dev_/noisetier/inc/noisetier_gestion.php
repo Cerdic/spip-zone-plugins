@@ -11,12 +11,15 @@ function noisetier_gestion_zone ($zone, $page, $cadre_formulaire=false) {
 	echo "<div id='zone-$zone' name='zone-$zone'>";
 
 	if ($cadre_formulaire) debut_cadre_formulaire(); else debut_cadre_trait_couleur();
+		if ($cadre_formulaire) $style_titre = 'font-size:120%;'; else $style_titre = 'font-size:110%;';
 		if (isset($theme_zones[$zone]['titre']))
-			echo "<div><b style='font-size:120%;'>".typo($theme_zones[$zone]['titre'])."</b> ($zone)</div>";
+			echo "<div style='$style_titre'><b>".typo($theme_zones[$zone]['titre'])."</b> <span style='font-size:85%;'>($zone)</span></div>";
 		else
-			echo "<div><b style='font-size:120%;'>$zone</b></div>";
-		if (isset($theme_zones[$zone]['descriptif']))
-			echo "<div>".typo($theme_zones[$zone]['descriptif'])."</div>";
+			echo "<div style='$style_titre'><b>$zone</b></div>";
+		if (isset($theme_zones[$zone]['descriptif'])){
+			if (!$cadre_formulaire) $style_descriptif = 'font-size:90%;'; else $style_descriptif = '';
+			echo "<div style='$style_descriptif'>".typo($theme_zones[$zone]['descriptif'])."</div>";
+		}
 		echo "<br />";
 
 		//Afficher les différentes noisettes dans des debut_cadre_relief()
@@ -67,33 +70,36 @@ function noisetier_liste_noisettes() {
 // Formulaire d'ajout d'une noisette
 function noisetier_form_ajout_noisette_texte($page,$zone) {
 	debut_cadre_enfonce();
-	echo "<b>"._T('noisetier:ajout_noisette')."</b><br />";
+	echo bouton_block_invisible("form-ajout-$zone");
+	echo "<b>"._T('noisetier:ajout_noisette_texte')."</b>";
 	$redirect = generer_url_ecrire('noisetier',"page=$page");;
 	//Ajout d'une noisette
 	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_noisette', $redirect);
-	echo "<form class='ajaxAction' method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
+	echo debut_block_invisible("form-ajout-$zone");
+	echo "<form class='ajaxAction' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px;'>";
 	echo form_hidden($action_link);
 	echo "<input type='hidden' name='page' value='$page' />";
 	echo "<input type='hidden' name='zone' value='$zone' />";
+	//echo _T('noisetier:ajout_noisette');
 	echo _T('noisetier:ajout_selection_noisette');
-	echo " <select name='url_noisette' value='' class='fondo'>\n";
+	echo " <select name='url_noisette' value='' class='fondo' style='width:150px;'>\n";
 	$liste_noisettes = noisetier_liste_noisettes();
 	foreach ($liste_noisettes as $nom => $chemin) 
 		echo "<option value='$chemin'>$nom</option>\n";
 	echo "</select>";
 	echo " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo'>";
 	echo "</form>";
-	fin_cadre_enfonce();
+	echo "<hr />";
 	//Ajout d'un texte
-	debut_cadre_enfonce();
 	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_texte', $redirect);
-	echo "<form class='ajaxAction' method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
+	echo "<form class='ajaxAction' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px;'>";
 	echo form_hidden($action_link);
 	echo "<input type='hidden' name='page' value='$page' />";
 	echo "<input type='hidden' name='zone' value='$zone' />";
-	echo "<b>"._T('noisetier:ajout_texte')."</b>";
+	echo _T('noisetier:ajout_texte');
 	echo " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo'>";
 	echo "</form>";
+	echo fin_block();
 	fin_cadre_enfonce();
 }
 
