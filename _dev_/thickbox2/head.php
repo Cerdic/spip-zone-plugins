@@ -8,6 +8,19 @@ function ThickBox1_insert_head($flux){
 // $("a.thickbox,a[@type='image/jpeg'],...").size() > 0)
 if(!isset($GLOBALS["spip_pipeline"]["insert_js"]))
 
+$flux .= ThickBox1_header_prive($flux);
+
+else
+
+$flux .=
+'
+<link rel="stylesheet" href="'.url_absolue(find_in_path('thickbox.css')).'" type="text/css" media="projection, screen" />';
+
+return $flux;
+}
+
+function ThickBox1_header_prive($flux) {
+
 $flux .=
 
 '
@@ -29,13 +42,8 @@ if(typeof onAjaxLoad == "function") onAjaxLoad(init_f);
 $(document).ready(init_f);
 // --></script>';
 
-else
-
-$flux .=
-'
-<link rel="stylesheet" href="'.url_absolue(find_in_path('thickbox.css')).'" type="text/css" media="projection, screen" />';
-
 return $flux;
+
 }
 
 function ThickBox1_insert_js($flux){
