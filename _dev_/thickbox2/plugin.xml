@@ -31,4 +31,12 @@ _ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
 		<nom>body_prive</nom>
 		<action>insert_head</action>
 	</pipeline>
+	<pipeline>
+	 <nom>insert_js</nom>
+	 <inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+	 <nom>verifie_js_necessaire</nom>
+	 <inclure>head.php</inclure>
+	</pipeline>	
 </plugin>
