@@ -18,8 +18,21 @@
 	}
 
 	function noisetier_vider_tables($nom_meta_base_version) {
-		spip_query("DROP TABLE spip_noisettes");
-		spip_query("DROP TABLE spip_params_noisettes");
+		//spip_query("DROP TABLE spip_noisettes");
+		//spip_query("DROP TABLE spip_params_noisettes");
+		// Suppression des mots clés inutiles
+		include_spip('public/interfaces');
+		global $tables_jointures;
+		$res = spip_query("SELECT id_mot FROM spip_mots WHERE type REGESP '^noisetier-'");
+		while ($row=spip_fetch_array($res)) {
+			$id_mot = $row['id_mot'];
+			foreach($tables_jointures['spip_mots'] as $table) {
+				spip_query("DELETE FROM spip_$table WHERE id_mot=$id_mot");
+			}
+			spip_query("DELETE FROM spip_mots WHERE id_mot=$id_mot");
+		}
+		//Suppression des groupes de mots clés inutiles
+		spip_query("DELETE FROM spip_groupes_mots WHERE titre REGEXP '^noisetier-'");
 		effacer_meta($nom_meta_base_version);
 		ecrire_metas();
 	}

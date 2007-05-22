@@ -17,6 +17,9 @@ $spip_noisettes = array(
 	"descriptif" => "text NOT NULL",
 	"fond" => "varchar(255) NOT NULL",
 	"type" => "ENUM('noisette', 'texte') DEFAULT 'noisette' NOT NULL",
+	"auteur" => "varchar(255) NOT NULL",
+	"version" => "varchar(255) NOT NULL",
+	"lien" => "varchar(255) NOT NULL",
 	"actif" => "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 	"maj" => "TIMESTAMP");
 
