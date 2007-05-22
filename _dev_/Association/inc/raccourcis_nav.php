@@ -6,7 +6,8 @@ debut_raccourcis();
 	icone_horizontale(_T('asso:menu2_titre_relances_cotisations'),generer_url_ecrire('edit_relances'),  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
 	icone_horizontale(_T('asso:menu2_titre_ventes_asso'), generer_url_ecrire('ventes') , '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/journaux.png','rien.gif' ); 
 	echo "<hr />";
-	icone_horizontale(_T('asso:Gestion de l\'association'), generer_url_ecrire("association"), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/annonce.gif', '');
+	icone_horizontale(_T('asso:Profil de l\'association'), generer_url_ecrire("profil"), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ecole.gif', 'rien.gif');
+	echo "<div style='float:right;width:2em'><a href='".generer_url_ecrire("association")."'>+</a></div>" ;
 	
 	fin_raccourcis();
 
