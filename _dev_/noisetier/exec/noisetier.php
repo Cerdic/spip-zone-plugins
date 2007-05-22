@@ -21,8 +21,12 @@ function exec_noisetier_dist(){
 	pipeline('exec_init',array('args'=>array('exec'=>'noisetier'),'data'=>''));
 
 	//Affichage de la page
+	
+	
 	debut_page(_T('noisetier:titre_noisetier'));
-
+	echo "<br/>";
+	gros_titre(_T('noisetier:titre_noisetier'));
+	
 	debut_gauche();
 	debut_boite_info();
 		echo "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" ;
@@ -61,7 +65,6 @@ function exec_noisetier_dist(){
 
 
 	debut_droite();
-	gros_titre(_T('noisetier:titre_noisetier'));
 	echo typo(_T('noisetier:presentation_noisetier')) ;
 	echo '<br /><br />';
 
