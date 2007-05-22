@@ -16,12 +16,18 @@
 		include_spip('inc/forms_compat_191');
 	include_spip('forms_filtres');
 	function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separateur=" ",$etoile=false,$traduit=true){
+		static $raw_vals,$raw_id=0;
 		$lesvaleurs = array();
 		if (strncmp($champ,'joint_',6)!=0){
-			$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
-			while ($row = spip_fetch_array($res)){
-				$lesvaleurs[] = (!$traduit)?$row['valeur']:forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $row['valeur'], $id_form, $etoile);
+			if ($raw_id!=$id_donnee){
+				$raw_vals = array();
+				$res = spip_query("SELECT champ,valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
+				while ($row = spip_fetch_array($res)) $raw_vals[$row['champ']][] = $row['valeur'];
+				$raw_id = $id_donnee;
 			}
+			if (isset($raw_vals[$champ]))
+				foreach($raw_vals[$champ] as $val)
+					$lesvaleurs[] = (!$traduit)?$val:forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $val, $id_form, $etoile);
 			return implode($separateur,$lesvaleurs);
 		}
 		else 
@@ -72,10 +78,7 @@
 	}
 
 	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form, $etoile=false){
-		static $type_champ=array();
-		static $wrap_champ=array();
-		static $choix_s=array();
-		static $mots_s=array();
+		static $structure=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
 		$ok = $id_donnee && $champ;
 		$ok = $ok && in_array($type, array('forms_donnees_champs','forms_champs'));
@@ -88,25 +91,19 @@
 				$ok = false;
 		}
 		// on recupere le type du champ si pas deja fait (une seule requete par table et par champ)
-		if ($ok && (!isset($type_champ[$id_form][$champ]) || !isset($wrap_champ[$id_form][$champ]))){
-			$res = spip_query("SELECT type,html_wrap FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
-			if ($row = spip_fetch_array($res)){
-				$type_champ[$id_form][$champ] = $row['type'];
-				$wrap_champ[$id_form][$champ] = $row['html_wrap'];
-			}
-			else 
-				$ok = false;
-		}
+		if ($ok && !isset($structure[$id_form]))
+			$structure[$id_form] = Forms_structure($id_form, false);
 		$rendu = 'typo';
 		if ($ok) {
-			$t = $type_champ[$id_form][$champ];
+			$t = $structure[$id_form][$champ]['type'];
 			if ($t == 'select' OR $t == 'multiple'){
-				if (!isset($choix_s[$id_form][$champ][$valeur])){
-					$res = spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($valeur));
-					if ($row = spip_fetch_array($res)) $choix_s[$id_form][$champ][$valeur] = $row['titre'];
-					else $choix_s[$id_form][$champ][$valeur] = $valeur;
+				if (!isset($structure[$id_form][$champ]['choix'][$valeur])){
+					$res = spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
+					while ($row = spip_fetch_array($res))
+						$structure[$id_form][$champ]['choix'][$row['choix']] = $row['titre'];
 				}
-				$valeur = $choix_s[$id_form][$champ][$valeur];
+				if (isset($structure[$id_form][$champ]['choix'][$valeur]))
+					$valeur = $structure[$id_form][$champ]['choix'][$valeur];
 			}
 			elseif ($t == 'mot'){
 				if (!isset($mots_s[$valeur])){

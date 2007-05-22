@@ -84,7 +84,7 @@
 			$k = count($boucle->join)+1;
 			$boucle->join[$k]= array($t,'id_donnee');
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
-			$op = array("'LIKE'","'L$k.valeur'","_q('%'.".$_quoi.".'%')");
+			$op = array("'LIKE'","'L$k.valeur'","_q(strpos($_quoi,'%')===false?'%'.".$_quoi.".'%':$_quoi)");
 			$boucle->where[]= array("'?'",$_quoi,$op,"''");
 		}
 	}
@@ -148,6 +148,10 @@
 				}
 			}
 			//$filtre->where[] = array("'='","'forms_champs.type'","'\"mot\"'");
+			$k = count($boucle->join)+1;
+			$boucle->join[$k]= array($t,'id_donnee');
+			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
+			
 			$reqfiltre = calculer_requete_sql($filtre);
 			
 			$boucle->hash .= <<<code
@@ -160,14 +164,14 @@
 				\$r = array_diff(\$r,array('')); // enlever les valeurs vides
 				\$res += count(\$r);
 				if (strlen(implode("",\$r))) 
-					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur IN (".implode(',',array_map('_q',\$r))."))";
+					\$filtre .= " OR (L$k.champ="._q(\$row['champ'])." AND L$k.valeur IN (".implode(',',array_map('_q',\$r))."))";
 			}
 			elseif (strlen(\$r)){
 				\$res++;
 				if (in_array(\$row['type'],array('mot','select','multiple')))
-					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur="._q(\$r).")";
+					\$filtre .= " OR (L$k.champ="._q(\$row['champ'])." AND L$k.valeur="._q(\$r).")";
 				else
-					\$filtre .= " OR (dc.champ="._q(\$row['champ'])." AND dc.valeur LIKE "._q(\$r).")";
+					\$filtre .= " OR (L$k.champ="._q(\$row['champ'])." AND L$k.valeur LIKE "._q(\$r).")";
 			}
 		}
 	}
@@ -176,8 +180,8 @@
 code;
 			$boucle->select[] = 'COUNT('.$boucle->id_table . '.id_donnee) AS res';
 			$boucle->where[] = '$filtre';
-			$boucle->from["dc"] =  "spip_forms_donnees_champs";
-			$boucle->where[] =  array("'='", "'dc.id_donnee'", "'$id_table.id_donnee'");
+			//$boucle->from["dc"] =  "spip_forms_donnees_champs";
+			//$boucle->where[] =  array("'='", "'dc.id_donnee'", "'$id_table.id_donnee'");
 			$boucle->having[] =  '('.$boucle->modificateur['crit_filtre'].'!="OU" AND $res>0)?"res=$res":"1=1"';
 			$boucle->group[] = $boucle->id_table . '.id_donnee'; 
 		}

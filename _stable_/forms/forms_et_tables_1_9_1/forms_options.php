@@ -51,15 +51,16 @@ function autoriser_forms_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 }
 function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	static $types = array();
+	static $opts = array();
 	if (!isset($opt['id_form']) OR !isset($opt['statut'])){
-		if ($id_donnee>0){
+		if (!isset($opts[$id_donnee])){
+			$opts[$id_donnee] = array('id_form'=>0,'statut'=>'');
 			$res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
-			if (!$row = spip_fetch_array($res)) return false;
-			$opt['id_form'] = $row['id_form'];
-			$opt['statut'] = $row['statut'];
+			if ($row = spip_fetch_array($res))
+				$opts[$id_donnee] = $row;
+			$opts[$id_donnee] = array_merge($opts[$id_donnee],$opt);
 		}
-		else
-			$opt['statut'] = '';
+		$opt = $opts[$id_donnee];
 	}
 	$id_form = $opt['id_form'];
 	if (!isset($opt['type_form'])){
@@ -105,7 +106,7 @@ function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 
 	)
 		$a = $f($faire,$type,intval($id_donnee),$qui,$opt);
-	if (_DEBUG_AUTORISER) spip_log("autoriser_form_donnee_dist delegue a $f($faire,$type,$id): ".($a?'OK':'niet'));
+	if (_DEBUG_AUTORISER) spip_log("autoriser_form_donnee_dist delegue a $f($faire,$type,$id_donnee): ".($a?'OK':'niet'));
 	return $a;
 }
 

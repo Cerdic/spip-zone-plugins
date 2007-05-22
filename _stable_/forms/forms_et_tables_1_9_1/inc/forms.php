@@ -21,7 +21,7 @@
 		}
 	}
 	
-	function Forms_structure($id_form){
+	function Forms_structure($id_form, $complete = true){
 		include_spip('inc/texte'); # typo et textebrut
 		// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
 		// a chaque ligne
@@ -32,19 +32,21 @@
 			$champ = $row['champ'];
 			foreach ($row as $k=>$v)
 				$structure[$champ][$k] = $v;
-			if (($type == 'select') OR ($type == 'multiple')){
-				$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
-				while ($row2 = spip_fetch_array($res2)){
-					$structure[$champ]['choix'][$row2['choix']] = $c = trim(textebrut(typo($row2['titre'])));
-					$structure[$champ]['choixrev'][$c] = $row2['choix'];
+			if ($complete){
+				if (($type == 'select') OR ($type == 'multiple')){
+					$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
+					while ($row2 = spip_fetch_array($res2)){
+						$structure[$champ]['choix'][$row2['choix']] = $c = trim(textebrut(typo($row2['titre'])));
+						$structure[$champ]['choixrev'][$c] = $row2['choix'];
+					}
 				}
-			}
-			else if ($type == 'mot') {
-				$id_groupe = intval($row['extra_info']);
-				$res2 = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe="._q($id_groupe));
-				while ($row2 = spip_fetch_array($res2)) {
-					$structure[$champ]['choix'][$row2['id_mot']] = $c = trim(textebrut(typo($row2['titre'])));
-					$structure[$champ]['choixrev'][$c] = $row2['id_mot'];
+				else if ($type == 'mot') {
+					$id_groupe = intval($row['extra_info']);
+					$res2 = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe="._q($id_groupe));
+					while ($row2 = spip_fetch_array($res2)) {
+						$structure[$champ]['choix'][$row2['id_mot']] = $c = trim(textebrut(typo($row2['titre'])));
+						$structure[$champ]['choixrev'][$c] = $row2['id_mot'];
+					}
 				}
 			}
 		}
