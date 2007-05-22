@@ -58,7 +58,7 @@ function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 			$res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 			if ($row = spip_fetch_array($res))
 				$opts[$id_donnee] = $row;
-			$opts[$id_donnee] = array_merge($opts[$id_donnee],$opt);
+			$opts[$id_donnee] = is_array($opt)?array_merge($opts[$id_donnee],$opt):$opts[$id_donnee];
 		}
 		$opt = $opts[$id_donnee];
 	}
