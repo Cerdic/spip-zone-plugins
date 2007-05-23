@@ -102,6 +102,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_statut_relance' => 'Relanc&eacute;',
 	'adherent_libelle_statut_sorti' => 'D&eacute;sactiv&eacute;',
 	'adherent_libelle_statut_prospect' => 'Prospect',
+	
 
 	'adherent_libelle_oui' => 'oui',
 	'adherent_libelle_non' => 'non',
@@ -131,6 +132,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_entete_statut_echu' => '&Agrave relancer',
 	'adherent_entete_statut_relance' => 'Relanc&eacute;s',
 	'adherent_entete_statut_sorti' => 'D&eacute;sactiv&eacute;s',
+	'adherent_entete_statut_erreur_bank' => 'Paiement refus&eacute;',
 	'adherent_entete_statut_prospect' => 'Prospects',
 	'adherent_entete_statut_tous' => 'Tous',
 

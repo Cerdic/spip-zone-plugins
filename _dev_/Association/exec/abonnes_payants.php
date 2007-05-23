@@ -20,8 +20,17 @@ function exec_abonnes_payants() {
 		fin_page();
 		exit;
 	}
+	
 	debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 
+	// definir une meta qui flag le fork du plugin asso pour gerer des abonnements
+	
+	if(!isset($GLOBALS['meta']['asso_devient_abo'])) {
+	 //echo "coucou" ;
+	}
+	
+	
+	
 	$url_adherents = generer_url_ecrire('adherents');
 	$url_ajout_cotisation = generer_url_ecrire('ajout_cotisation');
 	$url_edit_adherent = generer_url_ecrire('edit_adherent');
@@ -78,11 +87,16 @@ debut_gauche();
 		case "prospect":
 			$critere="statut='prospect'"; 
 			break;
+		case "erreur_bank":
+			$critere="statut='erreur_bank'"; 
+			break;
 		case "tous":
 			$critere="statut LIKE '%'";
 			break;	
 	}
 
+	echo "<style>.erreur_bank{background-color:red}</style>";
+	
 	echo '<table width="100%">';
 	echo '<tr>';
 
@@ -132,10 +146,10 @@ debut_gauche();
 	echo '<form method="post" action="'.$url_adherent.'">';
 	echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 	echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-	foreach (array('defaut','ok','echu','relance','sorti','prospect','tous') as $statut) {
+	foreach (array('defaut','ok','echu','relance','sorti','prospect','tous','erreur_bank') as $statut) {
 		echo '<option value="'.$statut.'"';
 		if ($filtre==$statut) {echo ' selected="selected"';}
-		echo '> '._T('asso:adherent_entete_statut_'.$statut);
+		echo '> '._T('asso:adherent_entete_statut_'.$statut) .'</option>';
 	}
 	echo '</select>';
 	echo '</form>';
@@ -205,6 +219,9 @@ debut_gauche();
 				break;
 			case "prospect":
 				$class="prospect";	   
+				break;	 
+			case "erreur_bank":
+				$class="erreur_bank";	   
 				break;	   
 		}
 
