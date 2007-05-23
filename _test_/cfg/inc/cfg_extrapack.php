@@ -97,7 +97,7 @@ class cfg_extrapack
 
 		list($table, $colid) = get_table_id($this->cfg->table);
 		$extra = 'UPDATE ' . $table . ' SET extra=' .
-			($base ? _q(serialize($base)) : '');
+			($base ? _q(serialize($base)) : "''");
 		$and = ' WHERE ';
 		foreach ($colid as $i => $name) {
 			$extra .= $and . $name . '=' . 
