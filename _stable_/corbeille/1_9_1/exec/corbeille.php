@@ -12,7 +12,7 @@ function exec_corbeille(){
   global $connect_statut;
   global $operation;
   global $debut;
-  global $effacer;
+  global $effacer; //array des id des objets à effacer
   include_spip("inc/presentation");
   //charge les paramétres de conf
   global $corbeille_param;
@@ -45,8 +45,8 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 		//si type_act non nul tous les éléments effaçable le sont. 
 		if (! empty($type_act)) {
 			//pour chacun des objets declarés dans inc_param la fonction effacement est appellée
-			foreach($corbeille_param as $objet) {
-				Corbeille_effacement( $objet["table"], $objet["statut"], $objet["titre"], $objet["id"]);
+			foreach($corbeille_param as $key => $objet) {
+				Corbeille_effacement($key); //indique l'objet à vider
 			}
 			$debut=0;$type_act=0;
 		}

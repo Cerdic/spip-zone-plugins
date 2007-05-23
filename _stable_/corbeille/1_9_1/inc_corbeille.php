@@ -28,7 +28,12 @@ function Corbeille_ajouterOnglets($flux) {
 	return $flux;
 }
 
-function Corbeille_effacement($table, $statut, $titre, $id) {
+//vide l'ensembles des element effacçable d'un objet
+function Corbeille_effacement($type_doc) {
+	$table = $corbeille_param[$type_doc]["table"];
+	$statut = $corbeille_param[$type_doc]["statut"];
+	$titre = $corbeille_param[$type_doc]["titre"];
+	 
 	$total=Corbeille_compte_elements_vider($table, $statut, $titre);
 	if ($total == 0) {
 		echo "$table vide <br />";
