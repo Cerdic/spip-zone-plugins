@@ -35,7 +35,8 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 	$table = $corbeille_param[$type_doc]["table"];
 	$index = $corbeille_param[$type_doc]["id"];
 	$statut = $corbeille_param[$type_doc]["statut"];
-	$titre = $corbeille_param[$type_doc]["titre"];	 
+	$titre = $corbeille_param[$type_doc]["titre"];
+
 	 
 	//compte le nb total d'objet supprimable 
 	$total=Corbeille_compte_elements_vider($table, $statut, $titre);
@@ -43,16 +44,19 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 	if ($total == 0) {
 		echo "$table vide <br />";
 	} else {
-		//supprime tous les élements à mettre à la poubelle
+		//determine les index des éléments à supprimer
 		if (is_null($tabid)) {
-			$req = "DELETE FROM $table WHERE statut='$statut'";
+			//recupére les identifiants des objets à supprimer
+			$req = "SELECT $index FROM $table WHERE statut='$statut'";			
 			$result = spip_query($req);
-		} else {
-			//supprime les élements défini par le tableau
-			foreach($tabid as $id) {
-				$req = "DELETE FROM $table WHERE statut='$statut' AND $index = $id";
-				$result = spip_query($req);
+			while ($row = spip_fetch_array($result)) {
+				$tabid[] = $row[$index];
 			}
+		}
+		//supprime les élements défini par la liste des index
+		foreach($tabid as $id) {
+			$req = "DELETE FROM $table WHERE statut='$statut' AND $index = $id";
+			$result = spip_query($req);
 		}
 	}
 }
