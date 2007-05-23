@@ -8,7 +8,7 @@ function ThickBox1_insert_head($flux){
 // $("a.thickbox,a[@type='image/jpeg'],...").size() > 0)
 if(!isset($GLOBALS["spip_pipeline"]["insert_js"]))
 
-$flux .= ThickBox1_header_prive($flux);
+$flux = ThickBox1_header_prive($flux);
 
 else
 
@@ -81,7 +81,8 @@ function ThickBox1_verifie_js_necessaire($flux) {
 
 //var_dump($flux["page"]);
 $page = $flux["page"]["texte"];
-$necessaire = preg_match(",<a.*type\s*=\s*['\"]image/(?:jpeg|png|gif)['\"],iUs",$page);
+$necessaire = preg_match(",<a.*type\s*=\s*['\"]image/(?:jpeg|png|gif)['\"],iUs",$page) ||
+              preg_match(",<a.*class\s*=\s*['\"].*\bthickbox\b.*['\"],iUs",$page);
 
 $flux["data"]["ThickBox1"] = $necessaire;
 
