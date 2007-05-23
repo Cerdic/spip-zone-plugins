@@ -146,7 +146,7 @@ debut_gauche();
 	echo '<form method="post" action="'.$url_adherent.'">';
 	echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 	echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-	foreach (array('defaut','ok','echu','relance','sorti','prospect','tous','erreur_bank') as $statut) {
+	foreach (array('defaut','ok','echu','relance','erreur_bank','sorti','prospect','tous') as $statut) {
 		echo '<option value="'.$statut.'"';
 		if ($filtre==$statut) {echo ' selected="selected"';}
 		echo '> '._T('asso:adherent_entete_statut_'.$statut) .'</option>';
