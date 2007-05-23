@@ -54,18 +54,7 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 				$result = spip_query($req);
 			}
 		}
-	
-		for ($i = 0; $i < count($total); $i++) {
-			$req_corbeille = "select COUNT(*) AS total from $table WHERE statut like '$statut'";
-			$result_corbeille = spip_query($req_corbeille);
-			$row = spip_fetch_array($result_corbeille);
-			$total = $row['total'];
-			$result = spip_query($req);
-			if (! $result) { echo _T("corbeille:erreur"); }
-			echo "$table : $total <br/>\n";
-		}
 	}
-	return $total;
 }
 
 // affiche l'icone poubelle (vide ou pleine)
