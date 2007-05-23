@@ -111,6 +111,9 @@ function couleurs_rempl($texte) {
 		// et toutes les balises de fin...
 		$texte = preg_replace(",\[/(couleur|$outil_couleurs[0]|color|)\],", '</span>', $texte);
 	}
+	// patch de conformite : les <span> doivent etre inclus dans les paragraphes
+	while (preg_match(",(<span style=\"(background-)?color:[^;]+;\">)([^<]*)\n[\n]+,Sms", $texte, $regs))
+		$texte = str_replace($regs[0], "$regs[1]$regs[3]</span>\n\n$regs[1]", $texte);
 	// menage
 	unset($outil_couleurs);
 	return $texte;  

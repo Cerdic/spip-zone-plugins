@@ -52,7 +52,6 @@ cs_log(" -- abs. path = $path2");
 	 ':|'	=> 'bof.png',
 	 '|)'	=> 'rouge.png',
 	 ':/'	=> 'mouais.png',
-	 ':('	=> 'pas_content.png',
 	);
 
 	$liste = array();
@@ -63,9 +62,8 @@ cs_log(" -- abs. path = $path2");
 		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
 		$smileys2[1][] = $img = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>";
-		// liste des raccourcis disponibles
-		//$img = "<img alt=\"$smy\" title=\"$smy\" class=\"format_png\" src=\"$path2/$val\" $size/>";
-		$liste[] = '<strong>'.$smy.'</strong>';//.'&nbsp;:&nbsp;'.$img;
+		// liste des raccourcis et smileys disponibles
+		$liste[] = '<strong>'.$smy.'</strong>';
 	}
 	ecrire_meta('cs_smileys_racc', join(', ', $liste));
 	ecrire_meta('cs_smileys', serialize($smileys2));
@@ -90,7 +88,8 @@ function cs_rempl_smileys($texte) {
 	// voila, on remplace tous les smileys d'un coup...
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
 	// accessibilite : alt et title avec le smiley en texte
-	while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
+	$texte = preg_replace('/@@64@@([^@]*)@@65@@/e', "base64_decode('\\1')", $texte);
+	//while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
 //cs_log('smileys traités : '.$texte);
 	return $texte;
 }

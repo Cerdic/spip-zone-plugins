@@ -154,6 +154,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article1563]",
 _ Plus d'infos : [->http://www.spip-contrib.net/?article1561]
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 	'smileys:aide' => 'Smileys : @liste@',
+	'smileys_dispos' => 'Frimousses disponibles :',
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.[[Dossier(s) &agrave; utiliser :->%dossier_squelettes%]]",

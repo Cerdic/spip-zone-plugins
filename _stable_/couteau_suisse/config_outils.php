@@ -225,7 +225,7 @@ add_variable( array(
 	'format' => 'chaine',
 	'radio' => array('defaut' => 'cout:par_defaut', '_SUIVI_FORUMS_REPONSES' => 'cout:sf_amont', '_SUIVI_FORUM_THREAD' => 'cout:sf_tous'),
 	'defaut' => '"defaut"',
-	// si la variable est différente de 'defaut' alors on codera le define
+	// si la variable est differente de 'defaut' alors on codera le define
 	'code:%s!=="defaut"' => "define(%s, true);",
 ));
 add_outil( array(
@@ -465,6 +465,7 @@ add_outil( array(
 	'id' => 'smileys',
 	'auteur' 	 => 'Sylvain',
 	'categorie'	 => 'typo-corr',
+	'code:css' => "table.cs_smileys td {text-align:center; font-size:90%; font-weight:bold;}",
 	'pipeline:pre_typo' => 'cs_smileys_pre_typo',
 ));
 
@@ -475,7 +476,7 @@ add_outil( array(
 	'pipeline:pre_typo' => 'chatons_pre_typo',
 ));
 
-// Idées d'ajouts :
+// Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
 // http://www.spip-contrib.net/Citations
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
