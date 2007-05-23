@@ -40,10 +40,12 @@ $urlsite=lire_meta("adresse_site");
 	if (!isset($patron)) $patron = $_POST['patron'] ;
 	if (!isset($date)) $date = $_POST['date'] ; 
 	
-	include_spip('public/assembler');
-	$contexte_patron = array('date' => $date);
-	$texte_patron = recuperer_fond('patrons/'.$patron, $contexte_patron);
-	//texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;   
+	// pour utiliser recuperer_fond il faut etre dans un action afin que les url_article soient bonnes
+	// et pas de la forme 'redirect=...'
+	//include_spip('public/assembler');
+	//$contexte_patron = array('date' => $date);
+	//$texte_patron = recuperer_fond('patrons/'.$patron, $contexte_patron);
+	$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;   
 	
 	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
 	
