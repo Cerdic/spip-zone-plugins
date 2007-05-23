@@ -2,7 +2,7 @@
 
 include_spip('inc/plugin');
 
-function noisetier_gestion_zone ($zone, $page, $cadre_formulaire=false) {
+function noisetier_gestion_zone ($zone, $page, $cadre_enfonce=false) {
 	global $theme_zones;
 	if (isset($theme_zones[$zone]['insere_avant:'.$page]))
 		echo $theme_zones[$zone]['insere_avant:'.$page];
@@ -10,13 +10,14 @@ function noisetier_gestion_zone ($zone, $page, $cadre_formulaire=false) {
 		echo $theme_zones[$zone]['insere_avant'];
 	echo "<div id='zone-$zone' name='zone-$zone'>";
 
-	if ($cadre_formulaire) debut_cadre_formulaire(); else debut_cadre_trait_couleur();
-		if ($cadre_formulaire) $style_titre = 'font-size:120%;'; else $style_titre = 'font-size:110%;';
-		if (isset($theme_zones[$zone]['titre']))
-			echo "<div style='$style_titre'><b>".typo($theme_zones[$zone]['titre'])."</b> <span style='font-size:85%;'>($zone)</span></div>";
-		else
-			echo "<div style='$style_titre'><b>$zone</b></div>";
-		if (isset($theme_zones[$zone]['descriptif'])){
+	if (isset($theme_zones[$zone]['titre']))
+		$titre_zone = typo($theme_zones[$zone]['titre'])." <span style='font-size:85%;font-weight:normal;'>($zone)</span>";
+	else
+		$titre_zone = "$zone";
+	if ($cadre_enfonce) debut_cadre_enfonce("../"._DIR_PLUGIN_NOISETIER."/img_pack/zone-24.png",'','',$titre_zone);
+	else debut_cadre_trait_couleur("../"._DIR_PLUGIN_NOISETIER."/img_pack/zone-24.png",'','',$titre_zone);
+
+	if (isset($theme_zones[$zone]['descriptif'])){
 			if (!$cadre_formulaire) $style_descriptif = 'font-size:90%;'; else $style_descriptif = '';
 			echo "<div style='$style_descriptif'>".typo($theme_zones[$zone]['descriptif'])."</div>";
 		}
@@ -36,7 +37,7 @@ function noisetier_gestion_zone ($zone, $page, $cadre_formulaire=false) {
 		//Formulaire d'ajout d'une noisette
 		noisetier_form_ajout_noisette_texte($page==''?'toutes':$page,$zone);
 
-	if ($cadre_formulaire) fin_cadre_formulaire(); else fin_cadre_trait_couleur();
+	if ($cadre_enfonce) fin_cadre_enfonce(); else fin_cadre_trait_couleur();
 	echo '<br />';
 
 	echo "</div>";
@@ -78,7 +79,7 @@ function noisetier_liste_noisettes() {
 
 // Formulaire d'ajout d'une noisette
 function noisetier_form_ajout_noisette_texte($page,$zone) {
-	debut_cadre_enfonce();
+	debut_cadre_formulaire();
 	echo bouton_block_invisible("form-ajout-$zone");
 	echo "<b>"._T('noisetier:ajout_noisette_texte')."</b>";
 	$redirect = generer_url_ecrire('noisetier',"page=$page");;
@@ -108,7 +109,7 @@ function noisetier_form_ajout_noisette_texte($page,$zone) {
 	echo "</form>";
 
 	echo fin_block();
-	fin_cadre_enfonce();
+	fin_cadre_formulaire();
 }
 
 // Affiche un texte
