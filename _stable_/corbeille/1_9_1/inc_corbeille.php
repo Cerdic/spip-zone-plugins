@@ -29,21 +29,37 @@ function Corbeille_ajouterOnglets($flux) {
 }
 
 //vide l'ensembles des element effacçable d'un objet
-function Corbeille_effacement($type_doc) {
+//argument optionnel : tabid liste des id à supprimer
+function Corbeille_effacement($type_doc, $tabid=NULL) {
+	global $corbeille_param;
 	$table = $corbeille_param[$type_doc]["table"];
+	$index = $corbeille_param[$type_doc]["id"];
 	$statut = $corbeille_param[$type_doc]["statut"];
-	$titre = $corbeille_param[$type_doc]["titre"];
+	$titre = $corbeille_param[$type_doc]["titre"];	 
 	 
+	//compte le nb total d'objet supprimable 
 	$total=Corbeille_compte_elements_vider($table, $statut, $titre);
+	
 	if ($total == 0) {
 		echo "$table vide <br />";
 	} else {
+		//supprime tous les élements à mettre à la poubelle
+		if (is_null($tabid)) {
+			$req = "DELETE FROM $table WHERE statut='$statut'";
+			$result = spip_query($req);
+		} else {
+			//supprime les élements défini par le tableau
+			foreach($tabid as $id) {
+				$req = "DELETE FROM $table WHERE statut='$statut' AND $index = $id";
+				$result = spip_query($req);
+			}
+		}
+	
 		for ($i = 0; $i < count($total); $i++) {
 			$req_corbeille = "select COUNT(*) AS total from $table WHERE statut like '$statut'";
 			$result_corbeille = spip_query($req_corbeille);
 			$row = spip_fetch_array($result_corbeille);
 			$total = $row['total'];
-			$req = "DELETE FROM $table WHERE statut='$statut'";
 			$result = spip_query($req);
 			if (! $result) { echo _T("corbeille:erreur"); }
 			echo "$table : $total <br/>\n";

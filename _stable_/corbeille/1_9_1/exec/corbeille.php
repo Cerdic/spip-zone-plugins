@@ -72,18 +72,17 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 				if (count($effacer) == 0) $log_efface .= _T("corbeille:aucun");
 				else {
 					$log_efface .= "<ul>";
-					for ($i = 0; $i < count($effacer); $i++) {
-						$id_doc = $effacer[$i];
+					//rappelle les éléments supprimés
+					foreach($effacer as $i => $id_doc) {
 						$req2 = "SELECT $titre FROM $table WHERE $id=$id_doc";
 						$result2 = spip_query($req2);
 						$row2 = spip_fetch_array($result2, SPIP_NUM);
 						$log_efface .= "<li>" . $row2[0];
-						$req = "DELETE FROM $table WHERE statut='$statut' and $id=$id_doc";
-						$result = spip_query($req);
-						if (! $result) $log_efface .= _T("corbeille:erreur");
 						$log_efface .= "</li>\n";
-					}					 
+					}
 					$log_efface .= "</ul>";
+					//supprime les objets selectionnés
+					Corbeille_effacement($type_doc, $effacer);
 				}
 				$log_efface .= "</div>\n";
 			}
