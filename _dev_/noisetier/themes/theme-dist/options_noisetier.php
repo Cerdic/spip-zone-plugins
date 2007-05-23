@@ -24,19 +24,19 @@ $theme_zones['contenu']['nom'] = "contenu";
 $theme_zones['contenu']['titre'] = "<multi>[fr]Contenu de la page</multi>";
 $theme_zones['contenu']['descriptif'] = "<multi>[fr]Cette zone est destin&eacute;e &agrave; l'affichage du contenu principal de la page.</multi>";
 
-$theme_zones['infos-gauche']['nom'] = "infos-gauche";
-$theme_zones['infos-gauche']['titre'] = "<multi>[fr]Infos &agrave; gauche</multi>";
-$theme_zones['infos-gauche']['descriptif'] = "<multi>[fr]Informations compl&eacute;mentaires dans une colonne &agrave; gauche.</multi>";
-$theme_zones['infos-gauche']['pages_exclues'] = "login";
-$theme_zones['infos-gauche']['insere_avant'] = "<div style='width:245px; float:left;'>";
-$theme_zones['infos-gauche']['insere_apres'] = "</div>";
+$theme_zones['infosgauche']['nom'] = "infosgauche";
+$theme_zones['infosgauche']['titre'] = "<multi>[fr]Infos &agrave; gauche</multi>";
+$theme_zones['infosgauche']['descriptif'] = "<multi>[fr]Informations compl&eacute;mentaires dans une colonne &agrave; gauche.</multi>";
+$theme_zones['infosgauche']['pages_exclues'] = "login";
+$theme_zones['infosgauche']['insere_avant'] = "<div style='width:245px; float:left;'>";
+$theme_zones['infosgauche']['insere_apres'] = "</div>";
 
-$theme_zones['infos-droite']['nom'] = "infos-droite";
-$theme_zones['infos-droite']['titre'] = "<multi>[fr]Infos &agrave; froite</multi>";
-$theme_zones['infos-droite']['descriptif'] = "<multi>[fr]Informations compl&eacute;mentaires dans une colonne &agrave; droite.</multi>";
-$theme_zones['infos-droite']['pages_exclues'] = "login";
-$theme_zones['infos-droite']['insere_avant'] = "<div style='width:245px; float:right;'>";
-$theme_zones['infos-droite']['insere_apres'] = "</div>";
+$theme_zones['infosdroite']['nom'] = "infosdroite";
+$theme_zones['infosdroite']['titre'] = "<multi>[fr]Infos &agrave; droite</multi>";
+$theme_zones['infosdroite']['descriptif'] = "<multi>[fr]Informations compl&eacute;mentaires dans une colonne &agrave; droite.</multi>";
+$theme_zones['infosdroite']['pages_exclues'] = "login";
+$theme_zones['infosdroite']['insere_avant'] = "<div style='width:245px; float:right;'>";
+$theme_zones['infosdroite']['insere_apres'] = "</div>";
 
 $theme_zones['souscontenu']['nom'] = "souscontenu";
 $theme_zones['souscontenu']['titre'] = "<multi>[fr]Sous-contenu</multi>";

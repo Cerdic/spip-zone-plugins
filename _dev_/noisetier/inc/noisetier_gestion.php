@@ -85,29 +85,28 @@ function noisetier_form_ajout_noisette_texte($page,$zone) {
 	//Ajout d'une noisette
 	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_noisette', $redirect);
 	echo debut_block_invisible("form-ajout-$zone");
-	echo "<form class='ajaxAction' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px;'>";
+	echo "<form class='ajaxAction' name='ajout_noisette_$zone' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px; border-bottom: 1px dashed #999;''>";
 	echo form_hidden($action_link);
 	echo "<input type='hidden' name='page' value='$page' />";
 	echo "<input type='hidden' name='zone' value='$zone' />";
-	//echo _T('noisetier:ajout_noisette');
 	echo _T('noisetier:ajout_selection_noisette');
 	echo " <select name='url_noisette' value='' class='fondo' style='width:150px;'>\n";
 	$liste_noisettes = noisetier_liste_noisettes();
 	foreach ($liste_noisettes as $nom => $chemin) 
 		echo "<option value='$chemin'>$nom</option>\n";
 	echo "</select>";
-	echo " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo'>";
+	icone_horizontale(_T('noisetier:ajout_noisette'), "javascript: document.forms.ajout_noisette_$zone.submit();", "../"._DIR_PLUGIN_NOISETIER."/img_pack/noisette-24.png", "creer.gif",true);
 	echo "</form>";
-	echo "<hr />";
+	//echo "<hr />";
 	//Ajout d'un texte
 	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_texte', $redirect);
-	echo "<form class='ajaxAction' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px;'>";
+	echo "<form class='ajaxAction' name='ajout_texte_$zone' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px; >";
 	echo form_hidden($action_link);
 	echo "<input type='hidden' name='page' value='$page' />";
 	echo "<input type='hidden' name='zone' value='$zone' />";
-	echo _T('noisetier:ajout_texte');
-	echo " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo'>";
+	icone_horizontale(_T('noisetier:ajout_texte'), "javascript: document.forms.ajout_texte_$zone.submit();", "../"._DIR_PLUGIN_NOISETIER."/img_pack/texte-24.png", "creer.gif",true);
 	echo "</form>";
+
 	echo fin_block();
 	fin_cadre_enfonce();
 }
