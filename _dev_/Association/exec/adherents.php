@@ -118,7 +118,7 @@ function exec_adherents() {
 	foreach (array('defaut','ok','echu','relance','sorti','prospect','tous') as $statut) {
 		echo '<option value="'.$statut.'"';
 		if ($filtre==$statut) {echo ' selected="selected"';}
-		echo '> '._T('asso:adherent_entete_statut_'.$statut);
+		echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
 	}
 	echo '</select>';
 	echo '</form>';
