@@ -115,18 +115,29 @@ function noisetier_form_ajout_noisette_texte($page,$zone) {
 // Affiche un texte
 function noisetier_affiche_texte($row) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
+	global $noisette_visible;
 	debut_cadre_relief();
 	$id_noisette = $row['id_noisette'];
+	echo "<a name='noisette-$id_noisette'></a>";
 	echo "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/texte-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
 	// Supprimer le texte (ajouter action)
 	echo "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
 	echo "<a ><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
 	echo "</div>\n";
 	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
-	echo bouton_block_invisible("noisette-$id_noisette");
+	if ($noisette_visible==$id_noisette)
+		echo bouton_block_visible("noisette-$id_noisette");
+	else
+		echo bouton_block_invisible("noisette-$id_noisette");
 	echo "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
 	echo "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
-	echo debut_block_invisible("noisette-$id_noisette");
+	if ($noisette_visible==$id_noisette)
+		echo debut_block_visible("noisette-$id_noisette");
+	else
+		echo debut_block_invisible("noisette-$id_noisette");
+	
+	
+	
 	
 	echo fin_block();
 	fin_cadre_relief();
@@ -135,18 +146,29 @@ function noisetier_affiche_texte($row) {
 // Affiche une noisette
 function noisetier_affiche_noisette($row) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
+	global $noisette_visible;
 	debut_cadre_relief();
 	$id_noisette = $row['id_noisette'];
+	echo "<a name='noisette-$id_noisette'></a>";
 	echo "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/noisette-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
 	// Supprimer le texte (ajouter action)
 	echo "<div style='float: $spip_lang_right; position:relative;'>";
 	echo "<a ><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("noisetier:supprimer_noisette")."'></a>";
 	echo "</div>\n";
 	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
-	echo bouton_block_invisible("noisette-$id_noisette");
+	if ($noisette_visible==$id_noisette)
+		echo bouton_block_visible("noisette-$id_noisette");
+	else
+		echo bouton_block_invisible("noisette-$id_noisette");
 	echo "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
 	echo "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
-	echo debut_block_invisible("noisette-$id_noisette");
+	if ($noisette_visible==$id_noisette)
+		echo debut_block_visible("noisette-$id_noisette");
+	else
+		echo debut_block_invisible("noisette-$id_noisette");
+	
+	
+	
 	
 	echo fin_block();
 	fin_cadre_relief();

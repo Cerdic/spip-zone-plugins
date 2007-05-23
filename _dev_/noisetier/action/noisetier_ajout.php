@@ -12,6 +12,13 @@ function action_noisetier_ajout_dist() {
 		$url_noisette = _request('url_noisette');
 		$id_noisette = noisetier_ajout_noisette($page, $zone, $url_noisette);
 	}
+	
+	$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
+	if ($redirect==NULL) $redirect="";
+	if ($redirect) $redirect = parametre_url($redirect,"noisette_visible",$id_noisette);
+	if ($redirect) $redirect = ancre_url($redirect,"noisette-$id_noisette");
+	if ($redirect)
+		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
 }
 
 function noisetier_ajout_texte($page, $zone, $exclue='') {
