@@ -22,7 +22,16 @@ function noisetier_gestion_zone ($zone, $page, $cadre_formulaire=false) {
 		}
 		echo "<br />";
 
-		//Afficher les différentes noisettes dans des debut_cadre_relief()
+		//Afficher les différentes noisettes 
+		if ($page=='') $condition = "";
+		else $condition = " AND page REGEXP '(^toutes$)|((^|,)$page(,|$))' AND exclue NOT REGEXP '((^|,)$page(,|$))'";
+		$query = "SELECT * FROM spip_noisettes WHERE zone='$zone'$condition ORDER BY position";
+		$res = spip_query($query);
+		while ($row = spip_fetch_array($res)) {
+			$type = $row['type'];
+			if ($type=='texte') noisetier_affiche_texte($row);
+			if ($type=='noisette') noisetier_affiche_noisette($row);
+		}
 		
 		//Formulaire d'ajout d'une noisette
 		noisetier_form_ajout_noisette_texte($page==''?'toutes':$page,$zone);
@@ -103,5 +112,44 @@ function noisetier_form_ajout_noisette_texte($page,$zone) {
 	fin_cadre_enfonce();
 }
 
+// Affiche un texte
+function noisetier_affiche_texte($row) {
+	global $couleur_claire, $spip_lang_left, $spip_lang_right;
+	debut_cadre_relief();
+	$id_noisette = $row['id_noisette'];
+	echo "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/texte-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
+	// Supprimer le texte (ajouter action)
+	echo "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
+	echo "<a ><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
+	echo "</div>\n";
+	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
+	echo bouton_block_invisible("noisette-$id_noisette");
+	echo "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
+	echo "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
+	echo debut_block_invisible("noisette-$id_noisette");
+	
+	echo fin_block();
+	fin_cadre_relief();
+}
+
+// Affiche une noisette
+function noisetier_affiche_noisette($row) {
+	global $couleur_claire, $spip_lang_left, $spip_lang_right;
+	debut_cadre_relief();
+	$id_noisette = $row['id_noisette'];
+	echo "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/noisette-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
+	// Supprimer le texte (ajouter action)
+	echo "<div style='float: $spip_lang_right; position:relative;'>";
+	echo "<a ><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("noisetier:supprimer_noisette")."'></a>";
+	echo "</div>\n";
+	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
+	echo bouton_block_invisible("noisette-$id_noisette");
+	echo "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
+	echo "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
+	echo debut_block_invisible("noisette-$id_noisette");
+	
+	echo fin_block();
+	fin_cadre_relief();
+}
 
 ?>

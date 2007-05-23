@@ -36,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'probleme_titre_mot_objet_incorrect'=>'Mot-cl&eacute; avec type d\'objet incorrect',
 'probleme_mot_objet_incorrect'=>'Le noisetier a d&eacute;tect&eacute; un mot-cl&eacute; avec un type d\'objet incorrect dans la d&eacute;claration xml au d&eacute;but de la noisette. La noisette n\'a pas &eacute;t&eacute; install&eacute;e.<br />(Voir la documentation pour plus d\'informations.)',
 'descriptif_groupe_mot'=>'Ce groupe de mots-cl&eacute;s est g&eacute;r&eacute; par le plugin noisetier. Il contient les mots-cl&eacute;s n&eacute;cessaires à l\'ex&eacute;cution des noisettes actuellement install&eacute;es. Ne modifiez pas le titre de ces groupes sous peine d\'erreurs de gestion de la part du noisetier.',
+'supprimer_texte'=>'Supprimer ce texte',
+'supprimer_noisette'=>'Supprimer cette noisette',
 
 );
 ?>
