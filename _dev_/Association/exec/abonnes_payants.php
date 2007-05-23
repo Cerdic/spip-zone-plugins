@@ -40,13 +40,13 @@ debut_gauche();
 	
 	debut_cadre_formulaire();
 	
-	icone_horizontale("ajouter un abonn&eacute;",generer_url_ecrire('ajout_adherent'), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','creer.gif');
+	icone_horizontale(_T('asso:menu2_titre_ajouter_abonne'),generer_url_ecrire('ajout_adherent'), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','creer.gif');
 	
 	fin_cadre_formulaire();
 	
 	echo "<br /><br />";
 	
-	debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_liste_actifs'));
+	debut_cadre_relief(  "", false, "", $titre = "Tous les abonn&eacute;s");
 	
 	debut_boite_info();
 
@@ -99,11 +99,12 @@ debut_gauche();
 			echo ' <strong>'.$data['init'].'</strong>';
 		}
 		else {
-			echo ' <a href="'.$url_adherents.'&lettre='.$data['init'].'&filtre='.$filtre.'">'.$data['init'].'</a>';
+			
+			echo ' <a href="'.generer_url_ecrire("abonnes_payants","lettre=".$data['init']."&filtre=$filtre").'">'.$data['init'].'</a>';
 		}
 	}
 	if ($lettre == "%") { echo ' <strong>'._T('asso:adherent_entete_tous').'</strong>'; }
-	else { echo ' <a href="'.$url_adherents.'&filtre='.$filtre.'">'._T('asso:adherent_entete_tous').'</a>'; }
+	else { echo ' <a href="'.generer_url_ecrire("abonnes_payants","filtre=$filtre").'">'._T('asso:adherent_entete_tous').'</a>'; }
 
 	echo '<td>';
 	echo '<a href="'.$url_pdf_adherents.'&'.$critere.'">Imprimer</a>';
@@ -147,7 +148,7 @@ debut_gauche();
 	echo '<form method="post" action="'.$url_action_adherents.'">';
 	echo '<tr bgcolor="#D9D7AA">';
 	echo '<td><strong>'._T('asso:adherent_libelle_id').'</strong></td>';
-	echo '<td><strong>'._T('asso:adherent_libelle_photo').'</strong></td>';
+	//echo '<td><strong>'._T('asso:adherent_libelle_photo').'</strong></td>';
 	echo '<td><strong>'._T('asso:adherent_libelle_nom').'</strong></td>';
 	echo '<td><strong>'._T('asso:adherent_libelle_prenom').'</strong></td>';
 	//echo '<td><strong>'._T('asso:adherent_libelle_fonction').'</strong></td>';
@@ -158,7 +159,7 @@ debut_gauche();
 	echo '<td><strong>'._T('asso:adherent_libelle_ville').'</strong></td>';
 	//echo '<td><strong>'._T('asso:adherent_libelle_portable').'</strong></td>';
 	//echo '<td><strong>'._T('asso:adherent_libelle_telephone').'</strong></td>';
-	echo '<td><strong>'._T('asso:adherent_libelle_reference_interne_abrev').'</strong></td>';
+	//echo '<td><strong>'._T('asso:adherent_libelle_reference_interne_abrev').'</strong></td>';
 	echo '<td><strong>'._T('asso:adherent_libelle_categorie').'</strong></td>';
 	echo '<td><strong>'._T('asso:adherent_libelle_validite').'</strong></td>';
 	//echo '<td><strong>'._T('asso:adherent_entete_statut_ok').'</strong></td>';
@@ -173,10 +174,14 @@ debut_gauche();
 	if (empty($debut)) { $debut=0; }
 
 	if (empty($lettre)) {
-		$query = spip_query ( "SELECT spip_asso_adherents.*, spip_asso_categories.libelle AS libelle_categorie FROM spip_asso_adherents LEFT JOIN spip_asso_categories ON (spip_asso_categories.id_categorie=spip_asso_adherents.categorie) WHERE $critere ORDER BY nom LIMIT $debut,$max_par_page" );
+		$query = spip_query ( "SELECT spip_asso_adherents.*, spip_asso_categories.libelle AS libelle_categorie FROM spip_asso_adherents 
+		LEFT JOIN spip_asso_categories ON (spip_asso_categories.valeur=spip_asso_adherents.categorie) 
+		WHERE $critere ORDER BY nom LIMIT $debut,$max_par_page" );
 	}
 	else {
-		$query = spip_query ( "SELECT spip_asso_adherents.*, spip_asso_categories.libelle AS libelle_categorie FROM spip_asso_adherents LEFT JOIN spip_asso_categories ON (spip_asso_categories.id_categorie=spip_asso_adherents.categorie) WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom LIMIT $debut,$max_par_page" );
+		$query = spip_query ( "SELECT spip_asso_adherents.*, spip_asso_categories.libelle AS libelle_categorie FROM spip_asso_adherents 
+		LEFT JOIN spip_asso_categories ON (spip_asso_categories.valeur=spip_asso_adherents.categorie) 
+		WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom LIMIT $debut,$max_par_page" );
 	}
 
 	$i=0;
@@ -205,17 +210,17 @@ debut_gauche();
 
 		echo '<tr> ';
 		echo '<td class ='.$class.' style="text-align:right;">'.$data["id_adherent"].'</td>';
-		echo '<td class ="'.$class.'">';
+/*		echo '<td class ="'.$class.'">';
 		if ( !empty ($data['id_auteur'])) {
 			echo'<img src="/IMG/auton'.$data['id_auteur'].'.jpg" width="60" eight= "60" title="'.$data["nom"].' '.$data["prenom"].'">';
 		}
-/*
+
 if (empty ($data['vignette']))
 {echo'';}
 else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "60" title="'.$data["nom"].' '.$data["prenom"].'">';}
-*/
+
 		echo '</td>';
-		echo '<td class ='.$class.'>';
+*/		echo '<td class ='.$class.'>';
 		if (empty($data["email"])) { echo $data["nom"].'</td>'; }
 		else	{
 			echo '<a href="mailto:'.$data["email"].'">'.$data["nom"].'</a></td>';
@@ -228,8 +233,8 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 		echo '<td class ='.$class.'>'.$data["ville"].'</td>';
 //echo '<td class ='.$class.'>'.$data["portable"].'</td>';
 //echo '<td class ='.$class.'>'.$data["telephone"].'</td>';
-		echo '<td class ='.$class.' style="text-align:right;">'.$data["id_asso"].'</td>'; //référence interne
-		echo '<td class ='.$class.'>'.$data["categorie"].'</td>';
+		//echo '<td class ='.$class.' style="text-align:right;">'.$data["id_asso"].'</td>'; //référence interne
+		echo '<td class ='.$class.'>'.$data["libelle_categorie"].'</td>';
 		echo '<td class ='.$class.'>'.association_datefr($data['validite']).'</td>';
 //echo '<td class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
 //echo '<td class ='.$class.'>'.$data["remarques"].'</td>';
@@ -251,7 +256,7 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 					case "6forum":
 						$logo="visit-12.gif";							
 				}
-				echo '<a href="/ecrire/?exec=auteurs_edit&id_auteur='.$data["id_auteur"].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
+				echo '<a href="'.generer_url_ecrire("auteurs_edit","id_auteur=".$data['id_auteur']).'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
 			}
 		}
 		else { echo '&nbsp;</td>'; }
@@ -292,7 +297,7 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 				echo '<strong>'.$position.' </strong>';
 			}
 			else {
-				echo '<a href="'.$url_adherents.'&lettre='.$lettre.'&debut='.$position.'&filtre='.$filtre.'">'.$position.'</a> ';
+				echo '<a href="'.generer_url_ecrire("abonnes_payants","lettre=$lettre&debut=$position&filtre=$filtre").'>'.$position.'</a> ';
 			}
 		}	
 	}
