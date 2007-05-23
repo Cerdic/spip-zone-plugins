@@ -53,7 +53,16 @@ $corbeille_param = array (
 								"page_voir" => array("auteurs_edit",'id_auteur'),
 								"libelle" => _L("Tous les auteurs dans la corbeille :"),
 								"libelle_court" => _T('icone_auteurs')
-								)					
+								),					
+	"syndic" =>			array(	"statut" => "refuse",
+								"titre" => "nom_site",
+								"table"=>"spip_syndic",
+								"tableliee"=> array("spip_syndic_articles"),
+								"id"=>"id_syndic",
+								"temps" => "maj",
+								"libelle" => _L("Tous les syndications dans la corbeille :"),
+								"libelle_court" => _T('icone_syndic')
+								)	
 	);
 
 //print_r($corbeille_param);
