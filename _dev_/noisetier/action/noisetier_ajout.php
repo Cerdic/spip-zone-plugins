@@ -72,10 +72,10 @@ function noisetier_ajout_noisette($page, $zone, $url_noisette, $exclue='') {
 	$params = $arbre['param'];
 	$table_param = array();
 	foreach ($params as $param) {
-		$titre = addslashes(corriger_caracteres(spip_xml_aplatit($param['titre'])));
-		$descriptif = addslashes(corriger_caracteres(spip_xml_aplatit($param['descriptif'])));
+		$titre_param = addslashes(corriger_caracteres(spip_xml_aplatit($param['titre'])));
+		$descriptif_param = addslashes(corriger_caracteres(spip_xml_aplatit($param['descriptif'])));
 		$valeur = addslashes(corriger_caracteres(spip_xml_aplatit($param['valeur'])));
-		if ($titre=='') {
+		if ($titre_param=='') {
 			include_spip('inc/minipres');
 			echo minipres(_T('noisetier:probleme_titre_param_sans_titre'),_T('noisetier:probleme_param_sans_titre'));
 			exit;
@@ -85,7 +85,7 @@ function noisetier_ajout_noisette($page, $zone, $url_noisette, $exclue='') {
 			echo minipres(_T('noisetier:probleme_titre_param_sans_valeur'),_T('noisetier:probleme_param_sans_valeur'));
 			exit;
 		}
-		$table_param[] = "'$titre','$descriptif','$valeur'";
+		$table_param[] = "'$titre_param','$descriptif_param','$valeur'";
 	}
 	
 	//Vérification des mots-clés
@@ -94,10 +94,10 @@ function noisetier_ajout_noisette($page, $zone, $url_noisette, $exclue='') {
 	$types_mots = spip_abstract_showtable("spip_groupes_mots", '', true);
 	$champs_interdits = array ('id_groupe','titre','descriptif','texte','unseul','obligatoire','minirezo','comite','maj');
 	foreach ($mots as $mot) {
-		$titre = addslashes(corriger_caracteres(spip_xml_aplatit($mot['titre'])));
-		$descriptif = addslashes(corriger_caracteres(spip_xml_aplatit($mot['descriptif'])));
+		$titre_mot = addslashes(corriger_caracteres(spip_xml_aplatit($mot['titre'])));
+		$descriptif_mot = addslashes(corriger_caracteres(spip_xml_aplatit($mot['descriptif'])));
 		$objet = addslashes(corriger_caracteres(spip_xml_aplatit($mot['objet'])));
-		if ($titre=='') {
+		if ($titre_mot=='') {
 			include_spip('inc/minipres');
 			echo minipres(_T('noisetier:probleme_titre_mot_sans_titre'),_T('noisetier:probleme_mot_sans_titre'));
 			exit;
@@ -116,7 +116,7 @@ function noisetier_ajout_noisette($page, $zone, $url_noisette, $exclue='') {
 				exit;
 			}
 			// Si un mot porte sur plusieurs types d'objets, alors on le duplique
-			$table_mot[] = array('titre'=>$titre,'descriptif'=>$descriptif,'objet'=>$objet);
+			$table_mot[] = array('titre'=>$titre_mot,'descriptif'=>$descriptif_mot,'objet'=>$objet);
 		}
 	}
 	
