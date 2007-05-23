@@ -36,7 +36,7 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 	$index = $corbeille_param[$type_doc]["id"];
 	$statut = $corbeille_param[$type_doc]["statut"];
 	$titre = $corbeille_param[$type_doc]["titre"];
-
+	$table_liee = $corbeille_param[$type_doc]["tableliee"];
 	 
 	//compte le nb total d'objet supprimable 
 	$total=Corbeille_compte_elements_vider($table, $statut, $titre);
@@ -57,6 +57,13 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 		foreach($tabid as $id) {
 			$req = "DELETE FROM $table WHERE statut='$statut' AND $index = $id";
 			$result = spip_query($req);
+			//suppresion des elements liés	
+			if ($table_liee) {
+				foreach($table_liee as $unetable) {
+					$req = "DELETE FROM $unetable WHERE $index = $id";
+					$result = spip_query($req);							
+				}
+			}
 		}
 	}
 }
