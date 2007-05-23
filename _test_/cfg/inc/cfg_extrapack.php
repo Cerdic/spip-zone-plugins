@@ -39,7 +39,7 @@ class cfg_extrapack
     		$this->cfg->table,
     		'',
     		$cles = explode('/', $this->cfg->cfg_id),
-    		explode('/', $this->cfg->nom . ($this->cfg->casier ? '/' . $this->cfg->casier : ''))
+    		$this->cfg->casier ? explode('/', $this->cfg->casier) : array()
     	));
 
 		foreach ($this->cfg->champs_id as $i => $name) {
@@ -75,7 +75,6 @@ class cfg_extrapack
     	))) || ($base = array());
     	$ici = &$base;
     	$this->_report = array();
-    	$ici = &$this->monte_arbre($ici, $this->cfg->nom);
     	$ici = &$this->monte_arbre($ici, $this->cfg->casier);
 		foreach ($this->cfg->champs as $name => $def) {
 			if (isset($def['id'])) {
@@ -98,7 +97,7 @@ class cfg_extrapack
 
 		list($table, $colid) = get_table_id($this->cfg->table);
 		$extra = 'UPDATE ' . $table . ' SET extra=' .
-			($base ? _q(serialize($base)) : 'NULL');
+			($base ? _q(serialize($base)) : '');
 		$and = ' WHERE ';
 		foreach ($colid as $i => $name) {
 			$extra .= $and . $name . '=' . 
