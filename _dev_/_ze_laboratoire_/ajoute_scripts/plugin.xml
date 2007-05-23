@@ -1,0 +1,30 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>
+  [it] Aggiungi script
+  [fr] Ajoute scripts
+  </multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[Renato Formato->mailto:renatoformato@virgilio.it]
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<icon></icon>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>[it] Aggiunge degli scripts da un modello direttamente nell'head della pagina
+  [fr] Ajoute des scripts depuis un squelette directament dans le head
+  </multi>
+	</description>
+  <fonctions>
+  ajoute_script_fonctions.php
+  </fonctions>
+	<lien></lien>
+	<prefix>
+	Ajoute_script
+	</prefix>
+</plugin>
