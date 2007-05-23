@@ -61,8 +61,13 @@ function exec_noisetier_dist(){
 			if($unepage!=$page) echo "<option value='$unepage'>$unepage</option>";
 		echo "</select><input type='submit' class='fondo' value='"._T('noisetier:changer')."'/></form></div>";
 	fin_boite_info();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'noiseteir'),'data'=>''));
 
+	// Raccourcis
+	$res = icone_horizontale(_T('noisetier:gestion_base_distribution'), generer_url_ecrire("noisetier_distribution",""), "base-24.gif", "rien.gif",false);
+	$res .= icone_horizontale(_T('noisetier:gestion_mots'), generer_url_ecrire("noisetier_mots",""), "groupe-mot-24.gif", "rien.gif",false);
+	echo bloc_des_raccourcis($res);
+
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'noiseteir'),'data'=>''));
 
 	debut_droite();
 	echo typo(_T('noisetier:presentation_noisetier')) ;

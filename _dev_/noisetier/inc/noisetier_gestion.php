@@ -120,9 +120,12 @@ function noisetier_affiche_texte($row) {
 	$id_noisette = $row['id_noisette'];
 	echo "<a name='noisette-$id_noisette'></a>";
 	echo "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/texte-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
-	// Supprimer le texte (ajouter action)
+	// Actif ?
+	$actif = $row['actif'];
+	if ($actif=='oui') $puce_actif = _DIR_PLUGIN_NOISETIER."img_pack/actif-on-16.png";
+	else $puce_actif = _DIR_PLUGIN_NOISETIER."img_pack/actif-off-16.png";
 	echo "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
-	echo "<a ><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
+	echo "<a ><img src='$puce_actif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
 	echo "</div>\n";
 	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
 	if ($noisette_visible==$id_noisette)
@@ -137,7 +140,8 @@ function noisetier_affiche_texte($row) {
 		echo debut_block_invisible("noisette-$id_noisette");
 	
 	
-	
+	//Supression du texte (faire un formulaire)
+	icone_horizontale(_T('noisetier:supprimer_texte'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/texte-24.png", "supprimer.gif",true);
 	
 	echo fin_block();
 	fin_cadre_relief();
@@ -151,9 +155,12 @@ function noisetier_affiche_noisette($row) {
 	$id_noisette = $row['id_noisette'];
 	echo "<a name='noisette-$id_noisette'></a>";
 	echo "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/noisette-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
-	// Supprimer le texte (ajouter action)
-	echo "<div style='float: $spip_lang_right; position:relative;'>";
-	echo "<a ><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("noisetier:supprimer_noisette")."'></a>";
+	// Actif ?
+	$actif = $row['actif'];
+	if ($actif=='oui') $puce_actif = _DIR_PLUGIN_NOISETIER."img_pack/actif-on-16.png";
+	else $puce_actif = _DIR_PLUGIN_NOISETIER."img_pack/actif-off-16.png";
+	echo "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
+	echo "<a ><img src='$puce_actif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
 	echo "</div>\n";
 	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
 	if ($noisette_visible==$id_noisette)
@@ -168,7 +175,8 @@ function noisetier_affiche_noisette($row) {
 		echo debut_block_invisible("noisette-$id_noisette");
 	
 	
-	
+	//Supression de la noisette. Doubler le bouton si mots clés pour suppression avec ou sans suppression des mots clés liés
+	icone_horizontale(_T('noisetier:supprimer_noisette'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/noisette-24.png", "supprimer.gif",true);
 	
 	echo fin_block();
 	fin_cadre_relief();

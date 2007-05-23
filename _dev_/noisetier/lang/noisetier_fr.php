@@ -38,6 +38,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'descriptif_groupe_mot'=>'Ce groupe de mots-cl&eacute;s est g&eacute;r&eacute; par le plugin noisetier. Il contient les mots-cl&eacute;s n&eacute;cessaires à l\'ex&eacute;cution des noisettes actuellement install&eacute;es. Ne modifiez pas le titre de ces groupes sous peine d\'erreurs de gestion de la part du noisetier.',
 'supprimer_texte'=>'Supprimer ce texte',
 'supprimer_noisette'=>'Supprimer cette noisette',
+'gestion_base_distribution'=>'Fichiers de distribution et gestion de la base',
+'gestion_mots'=>'Gestion des mots-cl&eacute;s du noisetier',
+'supprimer_texte'=>'Supprimer ce texte',
+'supprimer_noisette'=>'Supprimer cette noisette',
 
 );
 ?>
