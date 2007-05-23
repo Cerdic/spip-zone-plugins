@@ -69,9 +69,9 @@ function controleur_dist($regs) {
     } elseif (
    preg_match(",[\n\r],", $valeur[$champ])  // si la valeur fait plusieurs lignes on doit mettre un textarea
     OR
-	// on regarde le type tel que defini dans serial (attention il y a des blob)
+	// on regarde le type tel que defini dans serial (attention il y avait des blob dans les vieux spip)
     ($sqltype = colonne_table($type, $champ)) &&
-	   ( in_array($sqltype['type'] , array('mediumtext', 'longblob')) ||
+	   ( in_array($sqltype['type'] , array('mediumtext', 'longblob', 'longtext')) ||
 	   (($sqltype['type'] == 'text' || $sqltype['type'] == 'blob') && in_array($champ, array('descriptif', 'bio'))))) {
 	    $options['hauteurMini'] = 80; // hauteur mini d'un textarea
         $option['inmode'] = 'texte';
