@@ -26,9 +26,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_soumettre' => 'Submit',
 	'bouton_supprimer' => 'Delete',
 
+	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
 	'effacer_les_tables' => 'Drop tables',
 	'gestion_association' => 'Association Management',
+	'gestion_des_banques' => 'Gestion des banques',
 	'gestion_de_lassoc' => 'Management of the association',
 	'ID' => 'ID',
 	'info_doc' => '<p>This plugin will allow you to handle a small association on-line.</p> <p>You can browse, add, modify active members, mass mail them for cotisations, handle donations and associative selling, and keep a financial board.</p>',
@@ -43,7 +45,8 @@ The president
 
 PS: Please do not reply directly to this is an automated message.
 	',
-
+	'profil_de_lassociation' => 'Profil de l\'association',
+	
 # Adherents
  # Titres
 	'adherent_titre_action_membres_actifs' => 'Actions on actives members',
