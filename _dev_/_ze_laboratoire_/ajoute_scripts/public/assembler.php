@@ -405,7 +405,6 @@ function jquery_chargee($page) {
 function analyse_js_ajoutee($page) {
   //verifie si jquery.js.html est chargee
   $corps = $page['texte'];
-  var_dump($corps,$GLOBALS["cle_head"]);
   if(!($jquery_chargee = jquery_chargee($corps))) return $page;
   //verifie js necessaire
   $js_necessaire = pipeline("verifie_js_necessaire",array("page" => $page, "data" => ""));
