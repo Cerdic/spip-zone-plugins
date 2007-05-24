@@ -18,6 +18,22 @@
 _ Ce plugin permet de g&#233;rer des urls libres, autorisant plusieurs urls "propres" par objet.
 _ Notamment il mémorise les anciennes valeurs éventuelles et permet leur modification sans oublier
 ce qui a &eacute;t&eacute; d&eacute;j&agrave; diffus&eacute;.
+
+Fonctionnement défaut: query string : http://mon.site.tld/?titre-de-l-objet:
+Rien a faire
+
+Pour fonctionner en mode url sans ? : http://mon.site.tld/titre-de-l-objet
+ recopiez le fichier {{htaccess.txt}} du repertoire du plugin dans le
+ repertoire de base du site SPIP sous le nom {{.htaccess}}
+ (attention a ne pas ecraser d'autres reglages
+ que vous pourriez avoir mis dans ce fichier) 
+
+Si votre site est en sous-repertoire,
+ vous devrez aussi editer la ligne {{RewriteBase}} ce fichier.
+
+Definissez ensuite dans ecrire/mes_options.php :
+	&lt;?php 	define ('_debut_urls_propres', ''); ?&gt;
+
 	</description>
 	<lien>
 	[Documentation provisoire->http://toggg.com/spip/spip.php?article19]

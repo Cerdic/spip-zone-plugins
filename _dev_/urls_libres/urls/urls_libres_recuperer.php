@@ -18,6 +18,10 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 	$id_objet = 0;
 
+	// si la page est deja dans l'url, rien a faire
+	if (preg_match('#\?.*page=#', $url)) {
+		return;
+	}
 	// Migration depuis anciennes URLs ?
 	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 		if (preg_match(
@@ -66,11 +70,9 @@ function recuperer_parametres_url(&$fond, $url) {
 		$url_propre = preg_replace(',[?].*,', '', $url);
 	}
 	// Mode Query-String ?
-	$adapter_le_fond = false;
 	if (!$url_propre
 	AND preg_match(',([?])([^=/?&]+)(&.*)?$,', $GLOBALS['REQUEST_URI'], $r)) {
 		$url_propre = $r[2];
-		$adapter_le_fond = true;
 	}
 	if (!$url_propre) return;
 
@@ -131,11 +133,9 @@ function recuperer_parametres_url(&$fond, $url) {
 		}
 	}
 
-	// En mode Query-String, on fixe ici le $fond utilise
-	if ($adapter_le_fond) {
-		$fond = $type;
-		if ($type == 'syndic') $fond = 'site';
-	}
+	// On fixe ici le $fond utilise
+	$fond = $type;
+	if ($type == 'syndic') $fond = 'site';
 
 	return;
 }
