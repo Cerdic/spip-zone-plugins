@@ -278,6 +278,8 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 					'process_ins' => 'php');
 			}
 		}
+		
+		$local['cle_head'] = md5(microtime().rand());
 	}
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?

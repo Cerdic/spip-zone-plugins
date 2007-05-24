@@ -130,13 +130,11 @@ function assembler_page ($fond) {
 					$GLOBALS[$var] = $val;
 			}
 		} else {
-			$GLOBALS["cle_head"] = md5(microtime().rand());
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, '', $chemin_cache);
-			//ajouter les scripts poue le mettre en cache
+			//ajouter les scripts pour le mettre en cache
       $page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
 			$page['insert_js_inline'] = pipeline("insert_js",array("type" => "inline","data" => array()));
-			$page['cle_head'] = $GLOBALS["cle_head"];
 			
 			if ($chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
@@ -444,21 +442,29 @@ function analyse_js_ajoutee($page) {
     $corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_script,0);
   }
   //trouve les textes ajoutee par les squelettes
-  $script_pos = 0;
+  $debut_commentaire = 0;
   $scripts_a_ajouter = array();
-  $debut_script = "<!-- spip_debut_texte_head".$page["cle_head"]."-->";
+  $debut_script = "<!-- spip_debut_texte_head";
   $len_debut_script = strlen($debut_script);
-  $fin_script = "<!-- spip_fin_texte_head".$page["cle_head"]."-->";
-  $len_fin_script = strlen($fin_script);  
-  while(($script_pos = strpos($corps,$debut_script,$script_pos))!==false) {
-    $script_pos += $len_debut_script;
-    if(($script_pos_fin = strpos($corps,$fin_script,$script_pos))!==false) {
-      $len_code = $script_pos_fin-$script_pos;
-      $code = substr($corps,$script_pos,$len_code);
-      $scripts_a_ajouter[] = $code;
-      $script_pos -= $len_debut_script;
-      $corps = substr_replace($corps,'',$script_pos,$len_code+$len_fin_script);
+  $fin_script = "<!-- spip_fin_texte_head";
+  $len_fin_script = strlen($fin_script);
+  while(($debut_commentaire = strpos($corps,$debut_script,$debut_commentaire))!==false) {
+    if(($fin_pos = strpos($corps,$fin_script,$debut_commentaire))===false) {
+      //commentaire ouverte et pas ferme
+      //seul cas a verifier parce que le autres sont fait au temps de la compilation
+      $page['texte'] = "#FIN_TEXTE_HEAD manquant";
+      return $page;        
+    } 
+    $fin_commentaire = strpos($corps,"-->",$fin_pos+$len_fin_script)+3;
+    $commentaire = substr($corps,$debut_commentaire,$fin_commentaire-$debut_commentaire);
+    if(preg_match(",".$debut_script."(.*)-->(.*)".$fin_script."(.*)-->,Us",$commentaire,$texte)) {
+        if(!$texte[1] || ($texte[1]!=$texte[3]) || ($texte[1]!=$page["contexte"]["cle_head"])) {
+          spip_log("ajoute script dans le head interdite ".$texte[0]);
+        } else {
+          $scripts_a_ajouter[] = $texte[2];
+        }    
     }
+    $corps = substr_replace($corps,'',$debut_commentaire,$fin_commentaire-$debut_commentaire);
   }
   //ajoute les script ajoutee pas les squelettes
   if(count($scripts_a_ajouter)) {
