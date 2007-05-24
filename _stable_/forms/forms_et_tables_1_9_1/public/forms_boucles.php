@@ -48,6 +48,7 @@
 		if ($e!='spip_forms_donnees_champs' || $x!='valeur') return NULL; // on ne traite ici qu'un cas particulier
 		
 		//$boucle->from["mots"] =  "spip_mots";
+		$id_table = $boucle->id_table;
 		$boucle->from["donnees_champs"] =  "spip_forms_donnees_champs";
 		$boucle->from["champs"] =  "spip_forms_champs";
 		$boucle->where[]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
@@ -149,7 +150,7 @@
 			}
 			//$filtre->where[] = array("'='","'forms_champs.type'","'\"mot\"'");
 			$k = count($boucle->join)+1;
-			$boucle->join[$k]= array($t,'id_donnee');
+			$boucle->join[$k]= array($id_table,'id_donnee');
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
 			
 			$reqfiltre = calculer_requete_sql($filtre);
