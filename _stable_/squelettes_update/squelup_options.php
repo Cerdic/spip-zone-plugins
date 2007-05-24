@@ -5,7 +5,7 @@ if (_DIR_RESTREINT AND $auteur_session['statut'] == '0minirezo') {
 	if (isset($GLOBALS['dossier_squelettes'])
 		&& $GLOBALS['dossier_squelettes']!=""){
 		$skel = explode(':',$GLOBALS['dossier_squelettes']);
-		$skel = $GLOBALS['svn_up_dir_skel'][0];
+		$skel = $skel[0];
 		if (is_dir($skel))
 			$GLOBALS['svn_up_dir_skel'] = $skel;
 	}
