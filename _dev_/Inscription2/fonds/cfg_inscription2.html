@@ -1,0 +1,194 @@
+[(#REM) titre=Configuration du formulaire «&nbsp;Inscription2&nbsp;»]
+
+[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../Inscription2.png' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
+
+<!-- descriptif=
+
+#GET{logo}
+Ce plugin permet de configurer une Inscription2 sur le site, ici vous pourriez choisir les questions a repondre
+-->
+
+#CACHE{0}
+
+
+<:titre_page_config_fonctions|gros_titre{'',''}:>
+
+[(#REM|sinon{configuration}|barre_onglets{cfg_inscription2})]
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<br />
+
+
+
+
+[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
+<fieldset>
+<legend>
+	Informations par défaut
+</legend>
+<p>
+	Informations obligatoires par défaut
+<br /><br />
+
+<label>
+	<input type="checkbox" name="nom" checked="checked" id="nom" style="display: none;"/>
+	<strong><:inscription2:nom:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="email" checked="checked" id="email" style="display: none;" />
+	<strong><:inscription2:email:></strong>
+</label>
+<br />
+</fieldset>
+
+<fieldset>
+<legend>
+	Informations personnelles
+</legend>
+<p>
+Informations personnelles qui seront demandees aux nouveaux adherents du site
+<br /><br />
+
+<label>
+	<input type="checkbox" name="prenom" [checked="(#ENV{prenom}?{checked})"] id="prenom" />
+	<strong><:inscription2:prenom:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="naissance" [checked="(#ENV{naissance}?{checked})"] id="naissance" />
+	<strong><:inscription2:naissance:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="sexe" [checked="(#ENV{sexe}?{checked})"] id="sexe" />
+	<strong><:inscription2:sexe:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="adresse" [checked="(#ENV{adresse}?{checked})"] id="adresse" />
+	<strong><:inscription2:adresse:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="code_postal" [checked="(#ENV{code_postal}?{checked})"] id="code_postal" />
+	<strong><:inscription2:code_postal:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="ville" [checked="(#ENV{ville}?{checked})"] id="ville" />
+	<strong><:inscription2:ville:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="telephone" [checked="(#ENV{telephone}?{checked})"] id="telephone" />
+	<strong><:inscription2:telephone:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="fax" [checked="(#ENV{fax}?{checked})"] id="fax" />
+	<strong><:inscription2:fax:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="mobile" [checked="(#ENV{mobile}?{checked})"] id="mobile" />
+	<strong><:inscription2:mobile:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="profession" [checked="(#ENV{profession}?{checked})"] id="profession" />
+	<strong><:inscription2:profession:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="societe" [checked="(#ENV{societe}?{checked})"] id="societe" />
+	<strong><:inscription2:societe:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="secteur" [checked="(#ENV{secteur}?{checked})"] id="secteur" />
+	<strong><:inscription2:secteur:></strong>
+</label>
+<br />
+</p>
+</fieldset>
+
+[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
+<fieldset>
+<legend>
+	Informations Generales
+</legend>
+<p>
+Options qui seront demandees aux nouveaux adherents du site
+<br /><br />
+
+<label>
+	<input type="checkbox" name="newsletter" onclick="showhide(this)" [checked="(#ENV{newsletter}?{checked})"] id="newsletter" />
+	<strong><:inscription2:newsletter:></strong> 
+</label>
+
+<div id="news" style="[(#ENV{newsletter}|=={on}|?{display: block;, display:none;})]">
+<label>
+Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adherents (&#224; condition d'avoir Spip-Listes ou equivalent)&nbsp;:
+<br />
+#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
+<BOUCLE_listes(LISTES){tout}{par num titre, titre}>
+	<option value="#ID_LISTE"[(#ID_LISTE|in_array{#GET{selected}}|?{ selected="selected"})]>
+	#TITRE
+	</option>
+</BOUCLE_listes>
+</select>
+
+<small><br />(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)
+<br />
+<a onclick="$('#newsletters').find('option').attr('selected', false);">> tout d&#233;selectionner</a> </small>
+</label>
+<br />
+</div>
+
+<label>
+	<input type="checkbox" name="fonction" [checked="(#ENV{fonction}?{checked})"] id="fonction" />
+	<strong><:inscription2:fonction:></strong>
+</label>
+<br />
+
+[(#REM) Code jQuery plier/deplier les listes ]
+<script type="text/javascript"><!--
+function showhide(boxName) {
+if(boxName.checked){
+	$('#news').slideDown('slow');
+}
+else 
+	$('#news').slideUp('slow');
+}
+// --></script>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>
+
+

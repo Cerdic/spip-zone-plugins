@@ -1,0 +1,139 @@
+#CACHE{0}
+
+<form method="post" action="#SELF">
+
+
+[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
+<fieldset>
+<legend>
+	Informations personnelles
+</legend>
+<br />
+Veuillez inserez les informations demand&eacute;s
+<br /><br />
+
+<label [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
+	<strong><:inscription2:nom:></strong><br />
+	<input type="text" name="nom" id="nom" /><br />
+</label>
+
+<label [style="(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:prenom:></strong><br />
+	<input type="text" name="prenom" id="prenom" /><br />
+</label>
+
+<label [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:naissance:></strong><br />
+	<input type="text" name="naissance" id="naissance" /><br />
+</label>
+
+<label [style="(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:sexe:></strong><br />
+	<input name="sexe" type="radio" value="M" /> <:inscription2:masculin:>
+	<input name="sexe" type="radio" value="F" /> <:inscription2:feminin:><br />
+</label>
+
+<label [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:adresse:></strong><br />
+	<input type="text" name="adresse" id="adresse" /><br />
+	<input type="text" name="adresse2" id="adresse2" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:code_postal:></strong><br />
+	<input type="text" name="code_postal" id="code_postal" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:ville:></strong><br />
+	<input type="text" name="ville" id="ville" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/email}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:email:></strong><br />
+	<input type="text" name="email" id="email" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:telephone:></strong><br />
+	<input type="text" name="telephone" id="telephone" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:fax:></strong><br />
+	<input type="text" name="fax" id="fax" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:mobile:></strong><br />
+	<input type="text" name="mobile" id="mobile" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/profession}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:profession:></strong><br />
+	<input type="text" name="profession" id="profession" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/societe}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:societe:></strong><br />
+	<input type="text" name="societe" id="societe" />
+<br /></label>
+
+<label [style="(#CONFIG{inscription2/secteur}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:secteur:></strong><br />
+	<input type="text" name="secteur" id="secteur" />
+<br /></label>
+
+
+</fieldset>
+
+[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
+<fieldset>
+<legend>
+	Informations Generales
+</legend>
+<br />
+
+<label [style="(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:newsletter:></strong><br /> 
+	<input type="checkbox" name="newsletter" onclick="showhide(this)" id="newsletter" />
+</label>
+
+<div id="news" name="news" [style="(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})"]>
+<label>
+Veuillez choisir les listes de diffusion auxquelles vous voulez vous abonner<br />
+<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
+<BOUCLE_listes(LISTES){tout}{par num titre, titre}>
+	<option value="#ID_LISTE">
+	#TITRE
+	</option>
+</BOUCLE_listes>
+</select>
+
+<small><br />(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)
+<br />
+<a onclick="$('#newsletters').find('option').attr('selected', false);">> tout d&#233;selectionner</a> </small>
+</label>
+<br />
+</div>
+
+<label style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
+	<strong><:inscription2:fonction:></strong><br />
+	<input type="text" name="fonction" id="fonction" />
+</label>
+<br />
+</fieldset>
+
+<p><input type="submit" value="<:bouton_valider:>" /></p>
+
+[(#REM) Code jQuery plier/deplier les listes ]
+<script type="text/javascript"><!--
+function showhide(boxName) {
+if(boxName.checked)
+	$('#news').slideDown('slow');
+else 
+	$('#news').slideUp('slow');
+}
+// --></script>
+
+</form>
