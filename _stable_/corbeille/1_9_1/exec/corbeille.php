@@ -6,6 +6,9 @@ include(dirname(__FILE__).'/../inc_param.php');
 
 //
 // Corbeille
+/** 
+ *exec_corbeille() function principale d'éxécution de l'administration du plugin
+ */ 
 function exec_corbeille(){
   global $type_doc;
   global $type_act;

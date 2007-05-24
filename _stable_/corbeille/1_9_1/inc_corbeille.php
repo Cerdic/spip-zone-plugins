@@ -10,6 +10,11 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 /* static public */
 
 /* public static */
+/**
+ * Corbeille_ajouterBoutons() ajoute un lien au panneau d'administration
+ * @param $boutons_admin flux html de la barre de menu dans la partie privée
+ * @ return flux html édité     
+ */
 function Corbeille_ajouterBoutons($boutons_admin) {
 	// si on est admin
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
@@ -23,13 +28,14 @@ function Corbeille_ajouterBoutons($boutons_admin) {
 }
 
 /* public static */
-function Corbeille_ajouterOnglets($flux) {
-	$rubrique = $flux['args'];
-	return $flux;
-}
 
-//vide l'ensembles des element effacçable d'un objet
-//argument optionnel : tabid liste des id à supprimer
+/**
+ *Corbeille_effacement() supprime les elements selectionnés par l'utilisateur
+ * @param $type_doc nom de l'objet spip défini dans inc_param.php @see inc_param.php
+ * @param $tabid tableau des id à supprimer, optionnel si tout les éléments sont supprimés
+ *      
+ * @return neant  
+ */  
 function Corbeille_effacement($type_doc, $tabid=NULL) {
 	global $corbeille_param;
 	$table = $corbeille_param[$type_doc]["table"];
@@ -39,7 +45,7 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 	$table_liee = $corbeille_param[$type_doc]["tableliee"];
 	 
 	//compte le nb total d'objet supprimable 
-	$total=Corbeille_compte_elements_vider($table, $statut, $titre);
+	$total=Corbeille_compte_elements_vider($type_doc);
 	
 	if ($total == 0) {
 		echo "$table vide <br />";
@@ -67,23 +73,45 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 		}
 	}
 }
-
-// affiche l'icone poubelle (vide ou pleine)
+ 
+/**
+ *Corbeille_icone_poubelle() affiche l'icone poubelle (vide ou pleine)
+ * @param $total_table nb d'eléments supprimable pour un objet donné
+ */
 function Corbeille_icone_poubelle($total_table) {
-	if (empty($total_table)) 	return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-empty-24.png' alt='trash empty'/>"; 
-	                     else return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-full-24.png'  alt='trash full'/>";
+	if (empty($total_table)) {
+		return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-empty-24.png' alt='trash empty'/>";
+	} else {
+		return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-full-24.png'  alt='trash full'/>";
+	}
 }
 
-// compteur
-function Corbeille_compte_elements_vider($table, $statut, $titre) {
-                        $req_corbeille = "select COUNT(*) from $table WHERE statut like '$statut'";
-                        $result_corbeille = spip_query($req_corbeille);
-                        $total1 = 0;
-                        if ($row = spip_fetch_array($result_corbeille,SPIP_NUM)) $total = $row[0];
+/**
+ *Corbeille_compte_elements_vider() compte le nombre d'element supprimable pour un objet donné
+ * @param $type_doc 
+ * @return $total , nb d'élements supprimable  
+*/
+function Corbeille_compte_elements_vider($type_doc) {
+	global $corbeille_param;
+	$table = $corbeille_param[$type_doc]["table"];
+	$statut = $corbeille_param[$type_doc]["statut"];
+	
+    $req_corbeille = "select COUNT(*) from $table WHERE statut like '$statut'";
+    $result_corbeille = spip_query($req_corbeille);
+    
+    $total1 = 0;
+    if ($row = spip_fetch_array($result_corbeille,SPIP_NUM)) $total = $row[0];
 	return ($total);
 }
   
-// affiche ligne
+/**
+ *Corbeille_affiche_ligne() affiche une ligne par objet dans le menu de gauche
+ *@param $titre libelle à afficher dans le menu
+ *@param $url url de la page de gestion de l'objet
+ *@param $total_table nb d'element supprimable
+ *
+ *@return neant    
+ */ 
 function Corbeille_affiche_ligne($titre,$url,$total_table){
 		echo "<div class='verdana2' style='width:100%;padding:5px;'>\n";		
 		if ($total_table>0) $style = "class='corbeille'";
@@ -94,7 +122,10 @@ function Corbeille_affiche_ligne($titre,$url,$total_table){
 		echo "</a>";
     echo "</div>\n";
 }
-
+/**Corbeille_affiche() affiche la page d'administration 
+ *@param $page flux html de la page d'administration
+ *@return neant
+ */  
 function Corbeille_affiche($page){
   		//charge les paramétres
 		global $corbeille_param;
@@ -102,9 +133,9 @@ function Corbeille_affiche($page){
 		$totaux = array();
 			
 		//Calcul du nombre d'objets effaçable
-		foreach($corbeille_param as $key => $objet) {
-			$totaux[$key] = Corbeille_compte_elements_vider($objet["table"],$objet["statut"],$objet["titre"]);
-			$totaux["tout"] += $totaux[$key];
+		foreach($corbeille_param as $type_doc => $objet) {
+			$totaux[$type_doc] = Corbeille_compte_elements_vider($type_doc);
+			$totaux["tout"] += $totaux[$type_doc];
 		}
  	
 		//types de documents geres par la corbeille
@@ -121,7 +152,8 @@ function Corbeille_affiche($page){
 		// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
 }
 
-//
+
+/**  semble non utilisé jusqu'à present */
 // recupere les details du forum
 function recupere_forum_detail($id_document){
   $str = "";	

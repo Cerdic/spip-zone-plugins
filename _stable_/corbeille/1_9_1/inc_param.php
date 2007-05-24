@@ -1,4 +1,19 @@
 <?php
+/**
+ *\file inc_param.php
+ * Paramétre de configuration de la corbeille
+ * "nom de l'objet spip" => array ("statut" => nom du statut dans la base de données (bdd),
+ * 									"titre" => nom du champ retourné dans le listing,
+ * 									"table" => nom de la table spip dans la bdd,
+ * 									"id" => clef primaire dans la table,
+ * 									"temps" => aucune idée à quoi ça peut servir,
+ * 									"page_voir" => parametres pour voir le détail d'un objet
+ * 									"libelle" => texte long dans la partie droite de l'affichage,
+ * 									"libelle_court" => texte court dans le menu gauche,
+ * 									"tablelie"  => tableau des tables spip à vider en meme temps    )  
+ *
+ */  
+
 /* Déclaration des paramétres de configuration */
 global $corbeille_param;
 $corbeille_param = array (
@@ -7,7 +22,7 @@ $corbeille_param = array (
 								"table" => "spip_signatures", 
 								"id" => "id_signature",
 								"temps" => "date_time",
-								"page_voir" => array($page4,'id_document'),
+								"page_voir" => array("signatures",'id_document'),
 								"libelle" => _L("Toutes les p&eacute;titions dans la corbeille :"),
 								"libelle_court" => _T('lien_petitions'),
 								),
@@ -60,11 +75,10 @@ $corbeille_param = array (
 								"tableliee"=> array("spip_syndic_articles"),
 								"id"=>"id_syndic",
 								"temps" => "maj",
+								"page_voir" => array("sites",'id_syndic'),
 								"libelle" => _L("Tous les syndications dans la corbeille :"),
 								"libelle_court" => _T('icone_syndic')
 								)	
 	);
-
-//print_r($corbeille_param);
 
 ?>
