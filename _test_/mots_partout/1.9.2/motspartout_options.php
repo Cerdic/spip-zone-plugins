@@ -18,24 +18,25 @@ foreach ($choses as $chose){
   $table_principale = $choses_possibles[$chose]['table_principale'];
 	
 
-  $spip_mots_choses = array(
+  $spip_mots_choses[$chose] = array(
 							"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 							$id_chose	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
-  $spip_mots_choses_key = array(
+  $spip_mots_choses_key[$chose] = array(
 								"PRIMARY KEY"	=> "$id_chose, id_mot",
 								"KEY id_mot"	=> "id_mot");
 
+  $table_des_tables['mots_'.$chose]='mots_'.$chose;
   $tables_auxiliaires['spip_mots_'.$chose] = array(
-												   'field' => &$spip_mots_choses,
-												   'key' => &$spip_mots_choses_key);
+												   'field' => &$spip_mots_choses[$chose],
+												   'key' => &$spip_mots_choses_key[$chose]);
 
-	if (!in_array($chose,$tables_jointures['spip_'.$chose]))
+/*	if (!in_array($chose,$tables_jointures['spip_'.$chose]))
 		$tables_jointures['spip_'.$chose][]= $chose;
 	if (!in_array('mots',$tables_jointures['spip_'.$chose]))
 		$tables_jointures['spip_'.$chose][]= 'mots';
 	if (!in_array('mots_'.$chose,$tables_jointures['spip_mots']))
 		$tables_jointures['spip_mots'][]= 'mots_'.$chose;
-
+*/
 }
 ?>
