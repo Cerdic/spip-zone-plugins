@@ -339,5 +339,23 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 	fin_boite_info();  
 	fin_cadre_relief();  
 	fin_page();
+	
+	//Tout ce qui suit est a passer en spip_cron a l'occasion
+	
+	//Petite routine pour mettre à jour les statuts de cotisation "échu"
+	spip_query("UPDATE spip_asso_adherents SET statut='echu' WHERE statut = 'ok' AND validite < CURRENT_DATE() ");
+
+	//ROUTINE ID_AUTEUR
+	//Enregistrement de l'id_auteur d'emails correspondants
+	$query=spip_query("SELECT spip_auteurs.email, spip_auteurs.id_auteur 
+	FROM spip_auteurs , spip_asso_adherents 
+	WHERE spip_auteurs.email = spip_asso_adherents.email AND spip_auteurs.email <> '' " );
+	
+	while ($data=spip_fetch_array($query)) {
+	$id_auteur=$data['id_auteur'];
+	$email=$data['email'];
+	spip_query("UPDATE spip_asso_adherents SET id_auteur=$id_auteur  WHERE email='$email' AND email <>'' ");
+	}
+	
 }
 ?>

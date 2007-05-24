@@ -93,7 +93,9 @@ echo '</table>';
 
 	fin_cadre_relief();	
 		fin_page();
-		
+	
+	//Tout ce qui suit est a passer en spip_cron a l'occasion
+	
 	//Petite routine pour mettre à jour les statuts de cotisation "échu"
 	spip_query("UPDATE spip_asso_adherents SET statut='echu' WHERE statut = 'ok' AND validite < CURRENT_DATE() ");
 
