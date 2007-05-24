@@ -99,12 +99,16 @@ echo '</table>';
 
 	//ROUTINE ID_AUTEUR
 	//Enregistrement de l'id_auteur d'emails correspondants
-	$query=spip_query("SELECT * FROM spip_auteurs");
+	$query=spip_query("SELECT spip_auteurs.email, spip_auteurs.id_auteur 
+	FROM spip_auteurs , spip_asso_adherents 
+	WHERE spip_auteurs.email = spip_asso_adherents.email AND spip_auteurs.email <> '' " );
+	
 	while ($data=spip_fetch_array($query)) {
 	$id_auteur=$data['id_auteur'];
 	$email=$data['email'];
 	spip_query("UPDATE spip_asso_adherents SET id_auteur=$id_auteur  WHERE email='$email' AND email <>'' ");
 	}
-
+	
+	
 }
 ?>
