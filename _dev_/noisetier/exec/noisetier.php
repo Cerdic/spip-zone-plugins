@@ -22,7 +22,6 @@ function exec_noisetier_dist(){
 
 	//Affichage de la page
 	
-	
 	debut_page(_T('noisetier:titre_noisetier'));
 	echo "<br/>";
 	gros_titre(_T('noisetier:titre_noisetier'));
@@ -74,15 +73,41 @@ function exec_noisetier_dist(){
 	echo '<br /><br />';
 
 	noisetier_gestion_zone('head', $page, true);
+	$zones_affichees = array();
+	$zones_affichees['head'] = 'oui';
 	foreach ($theme_zones as $theme_une_zone){
 		//La zone head a déjà été insérée
 		if ($theme_une_zone['nom']!='head')
 			//Restriction en fonction du paramètre page
-			if(noisetier_affiche_zone_page($theme_une_zone,$page))
+			if(noisetier_affiche_zone_page($theme_une_zone,$page)) {
 				noisetier_gestion_zone($theme_une_zone['nom'],$page);
+				$nom_zone = $theme_une_zone['nom'];
+				$zones_affichees[$nom_zone] = 'oui';
+			}
 	}
 
 	//Afficher ici les zones non gérées par le thème en cours mais qui disposent néanmoins d'une déclaration dans la base de donnée
+	if ($page=='') $cond='';
+	else $cond="WHERE page REGEXP '(^|,)$page(,|$)'";
+	$res = spip_query("SELECT DISTINCT zone FROM spip_noisettes $cond");
+	$theme_zones_warning = array();
+	while ($row=spip_fetch_array($res)) {
+		$zone = $row['zone'];
+		if ($zones_affichees[$zone]!='oui') {
+			$theme_zones_warning[$zone]['nom']=$zone;
+			//$theme_zones_warning[$zone]['insere_avant']="<div style='float:left; width:100%'>";
+			//$theme_zones_warning[$zone]['insere_apres']="</div>";
+		}
+	}
+	
+	if (count($theme_zones_warning)>0){
+		echo "<p style='border-top:3px solid #900; clear:both;font-weight:bold;'><img src='"._DIR_IMG_PACK."warning.gif' />"._T('noisetier:zones_non_gerees')."</p>";
+		echo "<p style='text-align:justify;font-size:90%;'>"._T('noisetier:zones_non_gerees_explication')."</p>";
+	}
+	foreach ($theme_zones_warning as $theme_une_zone) {
+		noisetier_gestion_zone($theme_une_zone['nom'],$page,true);
+		}
+
 
 	echo fin_gauche(), fin_page();
 }

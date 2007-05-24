@@ -7,7 +7,7 @@ $theme_descriptif = '<multi>[fr]Th&egrave;me bas&eacute; sur les squelettes four
 $theme_zones = array();
 
 $theme_zones['entete']['nom'] = "entete";
-$theme_zones['entete']['titre'] = "<multi>[fr]En-T&ecirc;te de la page</multi>";
+$theme_zones['entete']['titre'] = "<multi>[fr]En-t&ecirc;te de la page</multi>";
 $theme_zones['entete']['pages_exclues'] = "login";
 
 $theme_zones['soustete']['nom'] = "soustete";

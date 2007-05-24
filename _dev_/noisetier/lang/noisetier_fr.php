@@ -42,6 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gestion_mots'=>'Gestion des mots-cl&eacute;s du noisetier',
 'supprimer_texte'=>'Supprimer ce texte',
 'supprimer_noisette'=>'Supprimer cette noisette',
+'zones_non_gerees'=>'Zones non g&eacute;r&eacute;es par le th&egrave;me en cours',
+'zones_non_gerees_explication'=>'Le noisetier a d&eacute;tect&eacute; des noisettes et/ou des textes dans des zones non prises en compte par le plugin de th&egrave;me en cours. Ces noisettes et/ou textes, bien que pr&eacute;sents dans la base du noisetier, ne seront donc pas affich&eacute;s sur vos pages publiques. Vous pouvez d&eacute;cider de les conserver n&eacute;anmoins, de les supprimer ou de les d&eacute;placer dans une autre zone.',
 
 );
 ?>
