@@ -30,9 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_soumettre' => 'Soumettre',
 	'bouton_supprimer' => 'Supprimer',
 	
+	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
 	'effacer_les_tables' => 'Effacer les tables',
 	'gestion_association' => 'Gestion d\'une Association',
+	'gestion_des_banques' => 'Gestion des banques',
 	'gestion_de_lassoc' => 'Gestion de l\'association',
 	'ID' => 'ID',
 	'info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons et des ventes associatives, et tenir une livre de comptes.</p>',
@@ -47,7 +49,8 @@ Le bureau de l\'association.
 
 Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique 
 	',
-
+	'profil_de_lassociation' => 'Profil de l\'association',
+	
 # Adherents
  # Titres
 	'adherent_titre_action_membres_actifs' => 'Action sur les membres actifs',
