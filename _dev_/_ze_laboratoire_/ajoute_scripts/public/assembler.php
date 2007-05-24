@@ -130,11 +130,13 @@ function assembler_page ($fond) {
 					$GLOBALS[$var] = $val;
 			}
 		} else {
+			$GLOBALS["cle_head"] = md5(microtime().rand());
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, '', $chemin_cache);
 			//ajouter les scripts poue le mettre en cache
       $page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
 			$page['insert_js_inline'] = pipeline("insert_js",array("type" => "inline","data" => array()));
+			$page['cle_head'] = $GLOBALS["cle_head"];
 			
 			if ($chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
@@ -403,6 +405,7 @@ function jquery_chargee($page) {
 function analyse_js_ajoutee($page) {
   //verifie si jquery.js.html est chargee
   $corps = $page['texte'];
+  var_dump($corps,$GLOBALS["cle_head"]);
   if(!($jquery_chargee = jquery_chargee($corps))) return $page;
   //verifie js necessaire
   $js_necessaire = pipeline("verifie_js_necessaire",array("page" => $page, "data" => ""));
@@ -444,9 +447,9 @@ function analyse_js_ajoutee($page) {
   //trouve les textes ajoutee par les squelettes
   $script_pos = 0;
   $scripts_a_ajouter = array();
-  $debut_script = "<!-- spip_debut_texte_head -->";
+  $debut_script = "<!-- spip_debut_texte_head".$page["cle_head"]."-->";
   $len_debut_script = strlen($debut_script);
-  $fin_script = "<!-- spip_fin_texte_head -->";
+  $fin_script = "<!-- spip_fin_texte_head".$page["cle_head"]."-->";
   $len_fin_script = strlen($fin_script);  
   while(($script_pos = strpos($corps,$debut_script,$script_pos))!==false) {
     $script_pos += $len_debut_script;
