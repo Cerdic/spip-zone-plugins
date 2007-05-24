@@ -20,7 +20,7 @@ function csvimport_visu_extrait($nombre,$import_mode,$table,$id_form){
 		csvimport_table_visu_extrait($table,$nombre);
 	else {
 		$contexte = array('id_form'=>$id_form,'total'=>$nombre);
-		$out = recuperer_fond("exec/template/tables_visu_extrait",$contexte);
+		$out = recuperer_fond("fonds/tables_visu_extrait",$contexte);
 		echo $out;
 	}
 }
