@@ -10,7 +10,7 @@
 	</auteur>
 	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
 	<version>
-	  0.2
+	  0.3
 	</version>
 	<etat>
 	  test
@@ -27,8 +27,11 @@
 	  MotsPartout
 	</prefix>
 	<options>
-	  motspartout_options.php
+	  mots_partout_choses.php
 	</options>
+	<fonctions>
+	  motspartout_fonctions.php
+	</fonctions>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>

@@ -11,7 +11,7 @@ if (!$tables_installees){
 	
 foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 global $choses_possibles;
-include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
+//include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
    
 foreach ($choses as $chose){
   $id_chose = $choses_possibles[$chose]['id_chose'];
@@ -31,12 +31,12 @@ foreach ($choses as $chose){
 												   'field' => &$spip_mots_choses[$chose],
 												   'key' => &$spip_mots_choses_key[$chose]);
 
-/*	if (!in_array($chose,$tables_jointures['spip_'.$chose]))
-		$tables_jointures['spip_'.$chose][]= $chose;
+	if (!in_array('mots_'.$chose,$tables_jointures['spip_'.$chose]))
+		$tables_jointures['spip_'.$chose][]= 'mots_'.$chose;
 	if (!in_array('mots',$tables_jointures['spip_'.$chose]))
 		$tables_jointures['spip_'.$chose][]= 'mots';
 	if (!in_array('mots_'.$chose,$tables_jointures['spip_mots']))
 		$tables_jointures['spip_mots'][]= 'mots_'.$chose;
-*/
+
 }
 ?>
