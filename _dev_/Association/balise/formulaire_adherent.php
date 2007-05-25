@@ -97,6 +97,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$valeur = spip_fetch_array(spip_query("SELECT cotisation, libelle FROM spip_asso_categories WHERE valeur='$categorie'") );
 		//var_dump($valeur);
 		
+		/*
 		//dire merci
 		return array (
 		'formulaires/formulaire_adherent_merci',0, 
@@ -114,7 +115,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			)
 		);
 		
-		/*
+		*/
 		
 		// insertion du formulaire de paiement
 		return inclure_balise_dynamique(
@@ -139,10 +140,10 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 				);
 		
 		// fin paiement
-		*/
+		
 	}
 	else {
-		if ($bouton=='Soumettre' OR $bouton=='Retour'){
+		if ($bouton=='Valider' OR $bouton=='Retour'){
 			
 			//On contrôle les données du formulaire			
 			$erreur = "non" ;	 // si pas d'erreur
@@ -192,7 +193,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 						'telephone'=> $telephone,
 						'categorie'=> $categorie,
 						'commentaire'=> $commentaire,
-						'bouton'	=> "Soumettre",
+						'bouton'	=> "Valider",
 						'erreur_email' => $erreur_email,
 						'erreur_nom' => $erreur_nom,
 						'erreur_prenom' => $erreur_prenom,
