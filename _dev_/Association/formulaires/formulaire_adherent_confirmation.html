@@ -1,0 +1,52 @@
+<div class="spip_forms">
+<h1>Confirmation</h1>
+
+
+
+<div>
+	<dl>
+		<dt>
+		Votre adresse
+		<dt>
+		<dd>
+		[(#ENV{sexe}|=={M}|?{'Monsieur','Madame'} )][ (#ENV{prenom})][ (#ENV{nom})]
+		<dd>
+		<dd>
+		[ (#ENV{adresse})]
+		</dd>
+		<dd>
+		[ (#ENV{cp})][ (#ENV{ville})]
+		</dd>
+	</dl>
+	
+	<dl>
+		<dt>
+		Votre abonnement
+		<dt>
+		<dd>
+		[ (#ENV{libelle})][ (#ENV{valeur}) Euros]
+		</dd>
+	</dl>
+	
+	
+</div>
+
+	<div style="height:40px;margin-top:20px;float:right;font-size:1.5em;clear:both">
+		<form action="#" method="POST">
+			<input name="nom" type="hidden" value="[(#ENV{nom})]" /> 
+			<input name="prenom" type="hidden" value="[(#ENV{prenom})]"  /> 
+			<input name="sexe" type="hidden" value="[(#ENV{sexe})]"  /> 
+			<input name="mail" type="hidden" value="[(#ENV{mail})]" /> 
+			<input name="adresse" type="hidden" value="[(#ENV{adresse})]" />
+			<input name="cp" type="hidden" value="[(#ENV{cp})]" /> 
+			<input name="ville" type="hidden" value="[(#ENV{ville})]" />
+			<input name="categorie" type="hidden" value="[(#ENV{categorie})]" / >
+			<input name="telephone" type="hidden" value="[(#ENV{telephone})]" /> 
+			<input name="commentaire" type="hidden" value="[(#ENV{commentaire})]" />	
+			
+			<input type="submit" name="bouton" class="spip_bouton" value="Retour" />
+			<input type="submit" name="bouton" class="spip_bouton" value="[(#ENV{bouton})]" />	
+		</form>	
+	</div>
+	
+</div>

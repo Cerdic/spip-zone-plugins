@@ -40,6 +40,8 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	$commentaire=_request('commentaire');
 	$bouton=_request('bouton');
 	
+	//echo "le bouton -> $bouton " ;
+	
 	if ($bouton=='Confirmer'){	
 		//on envoit des emails
 		
@@ -89,15 +91,61 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		//enregistrement dans la table
 		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, categorie, statut, remarques, creation) 
 		VALUES ("._q($nom).", "._q($prenom).",  "._q($mail).",  "._q($rue).", "._q($cp).", "._q($ville).", "._q($telephone).", "._q($categorie).", "._q(prospect).", "._q($commentaire).", NOW() ) ");	
-		$id = spip_insert_id();
-		//echo "id -> $id ";
 		
+		$id_adherent = spip_insert_id();
+		//echo "id -> $id ";
+		$valeur = spip_fetch_array(spip_query("SELECT cotisation, libelle FROM spip_asso_categories WHERE valeur='$categorie'") );
+		//var_dump($valeur);
+		
+		//dire merci
+		return array (
+		'formulaires/formulaire_adherent_merci',0, 
+		array (
+			'nom'		=> $nom,
+			'prenom'	=> $prenom,
+			'mail'		=> $mail,
+			'adresse'	=> $rue,
+			'cp'		=> $cp,
+			'ville'		=> $ville,
+			'telephone'=> $telephone,
+			'commentaire'=> $commentaire,
+			'categorie'=> $valeur['libelle'],
+			'valeur'=> $valeur['cotisation']  // montant
+			)
+		);
+		
+		/*
+		
+		// insertion du formulaire de paiement
+		return inclure_balise_dynamique(
+					array(
+						'formulaires/formulaire_adherent_paiement',0,
+						array(
+							'nom'		=> $nom,
+							'prenom'	=> $prenom,
+							'sexe'		=> $sexe ,
+							'mail'		=> $mail,
+							'adresse'	=> $rue,
+							'cp'		=> $cp,
+							'ville'		=> $ville,
+							'telephone'=> $telephone,
+							'categorie'=> $valeur['libelle'],
+							'valeur'=> $valeur['cotisation'], // montant
+							'id_adherent'=> $id_adherent, // reference
+							'texte_bouton'=> 'Payer par carte de credit'
+						)
+					),
+					false
+				);
+		
+		// fin paiement
+		*/
 	}
 	else {
-		if ($bouton=='Soumettre'){
+		if ($bouton=='Soumettre' OR $bouton=='Retour'){
 			
 			//On contrôle les données du formulaire			
-			$bouton='Confirmer';	 // si pas d'erreur
+			$erreur = "non" ;	 // si pas d'erreur
 			
 			//email invalide
 			if (!email_valide($mail) || empty($mail) ){
@@ -107,25 +155,26 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			//donnees manquantes
 			if ( empty($nom) ){
 				$erreur_nom='Nom manquant !';
-				$bouton='Soumettre';
+				$erreur = "oui" ;
 			}
 			if ( empty($prenom) ){
 				$erreur_prenom='Prenom manquant !';
-				$bouton='Soumettre';
+				$erreur = "oui" ;
 			}
 			if ( empty($rue) ){
 				$erreur_rue='Rue manquante !';
-				$bouton='Soumettre';
+				$erreur = "oui" ;
 			}
 			if ( empty($cp)  ){
 				$erreur_cp='Code postal manquant !';
-				$bouton='Soumettre';
+				$erreur = "oui" ;
 			}
 			if ( empty($ville) ){
 				$erreur_ville='Ville manquante !';
-				$bouton='Soumettre';
+				$erreur = "oui" ;
 			}	
 			
+			if ($erreur == "oui" OR $bouton=='Retour'){
 			//echo "le bouton -> $bouton car $erreur_email $erreur_nom $erreur_prenom $erreur_rue $erreur_cp $erreur_ville" ;
 			//echo $categorie ;
 			//on retourne les infos à un formulaire de previsualisation		
@@ -143,7 +192,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 						'telephone'=> $telephone,
 						'categorie'=> $categorie,
 						'commentaire'=> $commentaire,
-						'bouton'	=> $bouton,
+						'bouton'	=> "Soumettre",
 						'erreur_email' => $erreur_email,
 						'erreur_nom' => $erreur_nom,
 						'erreur_prenom' => $erreur_prenom,
@@ -154,11 +203,39 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 				),
 				false
 			);
+			}else{
+			
+			$valeur = spip_fetch_array(spip_query("SELECT cotisation, libelle, valeur FROM spip_asso_categories WHERE valeur='$categorie'") );
+			
+			return inclure_balise_dynamique(
+					array(
+						'formulaires/formulaire_adherent_confirmation',0,
+						array(
+							'nom'		=> $nom,
+							'prenom'	=> $prenom,
+							'sexe'		=> $sexe ,
+							'mail'		=> $mail,
+							'adresse'	=> $rue,
+							'cp'		=> $cp,
+							'ville'		=> $ville,
+							'telephone'=> $telephone,
+							'categorie'=> $valeur['valeur'],
+							'valeur'=> $valeur['cotisation'], // montant
+							'libelle'=> $valeur['libelle'],
+							'commentaire'=> $commentaire,
+							'bouton'	=> "Confirmer",
+						)
+					),
+					false
+				);
+			
+			}
+			
 		}
 	}		
 	
 	
-	//On retourne au formulaire d'adhesion
+	//formulaire d'adhesion
 	return array (
 		'formulaires/formulaire_adherent',0, 
 		array (
@@ -169,7 +246,6 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			'cp'		=> $cp,
 			'ville'		=> $ville,
 			'telephone'=> $telephone,
-			'tamere'=> "oui",
 			'commentaire'=> $commentaire
 			)
 		);
