@@ -2,29 +2,32 @@
 
 include_spip('inc/plugin');
 
-function noisetier_gestion_zone ($zone, $page, $cadre_enfonce=false) {
+function noisetier_gestion_zone ($zone, $page, $cadre_enfonce=false, $ajax=false) {
 	global $theme_zones;
+	$out = '';
 	if (isset($theme_zones[$zone]['insere_avant:'.$page]))
-		echo $theme_zones[$zone]['insere_avant:'.$page];
+		$out .= $theme_zones[$zone]['insere_avant:'.$page];
 	else
-		echo $theme_zones[$zone]['insere_avant'];
-	echo "<div id='zone-$zone' name='zone-$zone'>";
+		$out .= $theme_zones[$zone]['insere_avant'];
 
+	$out .= "<div id='zone-$zone' name='zone-$zone'>";
 	if (isset($theme_zones[$zone]['titre']))
 		$titre_zone = typo($theme_zones[$zone]['titre'])." <span style='font-size:85%;font-weight:normal;'>($zone)</span>";
 	else
 		$titre_zone = "$zone";
 	if ($cadre_enfonce)
-		if ($zone=='head') debut_cadre_enfonce("../"._DIR_PLUGIN_NOISETIER."/img_pack/zone-24.png",'','',$titre_zone);
-		else debut_cadre_enfonce("../"._DIR_PLUGIN_NOISETIER."/img_pack/zone-warning-24.png",'','',$titre_zone);
-	else debut_cadre_trait_couleur("../"._DIR_PLUGIN_NOISETIER."/img_pack/zone-24.png",'','',$titre_zone);
+		if ($zone=='head') $out .= debut_cadre_enfonce("../"._DIR_PLUGIN_NOISETIER."/img_pack/zone-24.png",true,'',$titre_zone);
+		else $out .= debut_cadre_enfonce("../"._DIR_PLUGIN_NOISETIER."/img_pack/zone-warning-24.png",true,'',$titre_zone);
+	else $out .= debut_cadre_trait_couleur("../"._DIR_PLUGIN_NOISETIER."/img_pack/zone-24.png",true,'',$titre_zone);
 
 	if (isset($theme_zones[$zone]['descriptif'])){
 			if (!$cadre_formulaire) $style_descriptif = 'font-size:90%;'; else $style_descriptif = '';
-			echo "<div style='$style_descriptif'>".typo($theme_zones[$zone]['descriptif'])."</div>";
+			$out .= "<div style='$style_descriptif'>".typo($theme_zones[$zone]['descriptif'])."</div>";
 		}
-		echo "<br />";
+		$out .= "<br />";
 
+		$contenu_zone = '';
+		$contenu_zone .= "<div id='contenuzone-$zone'>";
 		//Afficher les différentes noisettes 
 		if ($page=='') $condition = "";
 		else $condition = " AND page REGEXP '(^toutes$)|((^|,)$page(,|$))' AND exclue NOT REGEXP '((^|,)$page(,|$))'";
@@ -32,22 +35,29 @@ function noisetier_gestion_zone ($zone, $page, $cadre_enfonce=false) {
 		$res = spip_query($query);
 		while ($row = spip_fetch_array($res)) {
 			$type = $row['type'];
-			if ($type=='texte') noisetier_affiche_texte($row);
-			if ($type=='noisette') noisetier_affiche_noisette($row);
+			if ($type=='texte') $contenu_zone .= noisetier_affiche_texte($row);
+			if ($type=='noisette') $contenu_zone .= noisetier_affiche_noisette($row);
 		}
 		
+		$contenu_zone .= "</div>";
+		
+		if ($ajax) return $contenu_zone;
+		
+		$out .= $contenu_zone;
+		
 		//Formulaire d'ajout d'une noisette
-		if (!$cadre_enfonce OR $zone=='head') noisetier_form_ajout_noisette_texte($page==''?'toutes':$page,$zone);
+		if (!$cadre_enfonce OR $zone=='head') $out .= noisetier_form_ajout_noisette_texte($page==''?'toutes':$page,$zone);
 
-	if ($cadre_enfonce) fin_cadre_enfonce(); else fin_cadre_trait_couleur();
-	echo '<br />';
+	if ($cadre_enfonce) $out .= fin_cadre_enfonce(true); else $out .= fin_cadre_trait_couleur(true);
+	$out .= '<br />';
 
-	echo "</div>";
+	$out .= "</div>";
 	if (isset($theme_zones[$zone]['insere_apres:'.$page]))
-		echo $theme_zones[$zone]['insere_apres:'.$page];
+		$out .= $theme_zones[$zone]['insere_apres:'.$page];
 	else
-		echo $theme_zones[$zone]['insere_apres'];
-
+		$out .= $theme_zones[$zone]['insere_apres'];
+	
+	return $out;
 }
 
 // Liste les éléments html d'un sous répertoire qu'ils soient dans un plugin ou dans le répertoire squelettes
@@ -81,107 +91,119 @@ function noisetier_liste_noisettes() {
 
 // Formulaire d'ajout d'une noisette
 function noisetier_form_ajout_noisette_texte($page,$zone) {
-	debut_cadre_formulaire();
-	echo bouton_block_invisible("form-ajout-$zone");
-	echo "<b>"._T('noisetier:ajout_noisette_texte')."</b>";
+	$out = '';
+	$out .= debut_cadre_formulaire('', true);
+	$out .= bouton_block_invisible("form-ajout-$zone");
+	$out .= "<b>"._T('noisetier:ajout_noisette_texte')."</b>";
 	$redirect = generer_url_ecrire('noisetier',"page=$page");;
 	//Ajout d'une noisette
 	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_noisette', $redirect);
-	echo debut_block_invisible("form-ajout-$zone");
-	echo "<form class='ajaxAction' name='ajout_noisette_$zone' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px; border-bottom: 1px dashed #999;''>";
-	echo form_hidden($action_link);
-	echo "<input type='hidden' name='page' value='$page' />";
-	echo "<input type='hidden' name='zone' value='$zone' />";
-	echo _T('noisetier:ajout_selection_noisette');
-	echo " <select name='url_noisette' value='' class='fondo' style='width:150px;'>\n";
+	$out .= debut_block_invisible("form-ajout-$zone");
+	$out .= "<form class='ajaxAction' name='ajout_noisette_$zone' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px; border-bottom: 1px dashed #999;''>";
+	$out .= form_hidden($action_link);
+	$out .= "<input type='hidden' name='page' value='$page' />";
+	$out .= "<input type='hidden' name='zone' value='$zone' />";
+	$out .= _T('noisetier:ajout_selection_noisette');
+	$out .= " <select name='url_noisette' value='' class='fondo' style='width:150px;'>\n";
 	$liste_noisettes = noisetier_liste_noisettes();
 	foreach ($liste_noisettes as $nom => $chemin) 
-		echo "<option value='$chemin'>$nom</option>\n";
-	echo "</select>";
-	icone_horizontale(_T('noisetier:ajout_noisette'), "javascript: document.forms.ajout_noisette_$zone.submit();", "../"._DIR_PLUGIN_NOISETIER."/img_pack/noisette-24.png", "creer.gif",true);
-	echo "</form>";
-	//echo "<hr />";
+		$out .= "<option value='$chemin'>$nom</option>\n";
+	$out .= "</select>";
+	$out .= icone_horizontale(_T('noisetier:ajout_noisette'), "javascript: document.forms.ajout_noisette_$zone.submit();", "../"._DIR_PLUGIN_NOISETIER."/img_pack/noisette-24.png", "creer.gif",false);
+	$out .= "</form>";
 	//Ajout d'un texte
 	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_texte', $redirect);
-	echo "<form class='ajaxAction' name='ajout_texte_$zone' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px; >";
-	echo form_hidden($action_link);
-	echo "<input type='hidden' name='page' value='$page' />";
-	echo "<input type='hidden' name='zone' value='$zone' />";
-	icone_horizontale(_T('noisetier:ajout_texte'), "javascript: document.forms.ajout_texte_$zone.submit();", "../"._DIR_PLUGIN_NOISETIER."/img_pack/texte-24.png", "creer.gif",true);
-	echo "</form>";
+	$out .= "<form class='ajaxAction' name='ajout_texte_$zone' method='POST' action='$action_link' style='border: 0px; margin: 10px 0px; >";
+	$out .= form_hidden($action_link);
+	$out .= "<input type='hidden' name='page' value='$page' />";
+	$out .= "<input type='hidden' name='zone' value='$zone' />";
+	$out .= icone_horizontale(_T('noisetier:ajout_texte'), "javascript: document.forms.ajout_texte_$zone.submit();", "../"._DIR_PLUGIN_NOISETIER."/img_pack/texte-24.png", "creer.gif",false);
+	$out .= "</form>";
 
-	echo fin_block();
-	fin_cadre_formulaire();
+	$out .= fin_block();
+	$out .= fin_cadre_formulaire(true);
+
+	return $out;
 }
 
 // Affiche un texte
 function noisetier_affiche_texte($row) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	global $noisette_visible;
-	debut_cadre_relief();
+	$out = '';
+	$out .= "<div id='noisette-$id_noisette'>";
+	$out .= debut_cadre_relief('', true);
+	$out .= "<a name='noisette-$id_noisette'></a>";
 	$id_noisette = $row['id_noisette'];
-	echo "<a name='noisette-$id_noisette'></a>";
-	echo "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/texte-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
+	$out .= "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/texte-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
 	// Actif ?
 	$actif = $row['actif'];
 	if ($actif=='oui') $puce_actif = _DIR_PLUGIN_NOISETIER."img_pack/actif-on-16.png";
 	else $puce_actif = _DIR_PLUGIN_NOISETIER."img_pack/actif-off-16.png";
-	echo "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
-	echo "<a ><img src='$puce_actif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
-	echo "</div>\n";
-	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
+	$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
+	$out .= "<a ><img src='$puce_actif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
+	$out .= "</div>\n";
+	$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
 	if ($noisette_visible==$id_noisette)
-		echo bouton_block_visible("noisette-$id_noisette");
+		$out .= bouton_block_visible("noisette-$id_noisette");
 	else
-		echo bouton_block_invisible("noisette-$id_noisette");
-	echo "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
-	echo "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
+		$out .= bouton_block_invisible("noisette-$id_noisette");
+	$out .= "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
+	$out .= "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
 	if ($noisette_visible==$id_noisette)
-		echo debut_block_visible("noisette-$id_noisette");
+		$out .= debut_block_visible("noisette-$id_noisette");
 	else
-		echo debut_block_invisible("noisette-$id_noisette");
+		$out .= debut_block_invisible("noisette-$id_noisette");
 	
 	
 	//Supression du texte (faire un formulaire)
-	icone_horizontale(_T('noisetier:supprimer_texte'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/texte-24.png", "supprimer.gif",true);
+	$out .= icone_horizontale(_T('noisetier:supprimer_texte'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/texte-24.png", "supprimer.gif",false);
 	
-	echo fin_block();
-	fin_cadre_relief();
+	$out .= fin_block();
+	$out .= fin_cadre_relief(true);
+	$out .= "</div>";
+	
+	return $out;
 }
 
 // Affiche une noisette
 function noisetier_affiche_noisette($row) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	global $noisette_visible;
-	debut_cadre_relief();
+		$out = '';
+	$out .= "<div id='noisette-$id_noisette'>";
+	$out .= debut_cadre_relief('', true);
+	$out .= "<a name='noisette-$id_noisette'></a>";
 	$id_noisette = $row['id_noisette'];
-	echo "<a name='noisette-$id_noisette'></a>";
-	echo "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/noisette-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
+	$out .= "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/noisette-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
 	// Actif ?
 	$actif = $row['actif'];
 	if ($actif=='oui') $puce_actif = _DIR_PLUGIN_NOISETIER."img_pack/actif-on-16.png";
 	else $puce_actif = _DIR_PLUGIN_NOISETIER."img_pack/actif-off-16.png";
-	echo "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
-	echo "<a ><img src='$puce_actif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
-	echo "</div>\n";
-	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
+	$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
+	$out .= "<a ><img src='$puce_actif' style='border:0' alt='"._T("noisetier:supprimer_texte")."'></a>";
+	$out .= "</div>\n";
+	$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
 	if ($noisette_visible==$id_noisette)
-		echo bouton_block_visible("noisette-$id_noisette");
+		$out .= bouton_block_visible("noisette-$id_noisette");
 	else
-		echo bouton_block_invisible("noisette-$id_noisette");
-	echo "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
-	echo "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
+		$out .= bouton_block_invisible("noisette-$id_noisette");
+	$out .= "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
+	$out .= "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
 	if ($noisette_visible==$id_noisette)
-		echo debut_block_visible("noisette-$id_noisette");
+		$out .= debut_block_visible("noisette-$id_noisette");
 	else
-		echo debut_block_invisible("noisette-$id_noisette");
+		$out .= debut_block_invisible("noisette-$id_noisette");
 	
 	
-	//Supression de la noisette. Doubler le bouton si mots clés pour suppression avec ou sans suppression des mots clés liés
-	icone_horizontale(_T('noisetier:supprimer_noisette'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/noisette-24.png", "supprimer.gif",true);
+	//Supression de la noisette  (faire un formulaire)
+	$out .= icone_horizontale(_T('noisetier:supprimer_noisette'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/noisette-24.png", "supprimer.gif",false);
 	
-	echo fin_block();
-	fin_cadre_relief();
+	$out .= fin_block();
+	$out .= fin_cadre_relief(true);
+	$out .= "</div>";
+	
+	return $out;
 }
 
 ?>
