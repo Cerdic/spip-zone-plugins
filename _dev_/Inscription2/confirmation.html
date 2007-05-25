@@ -45,7 +45,7 @@
 			echo "rien a faire";
 	}else{
 		$htpass = generer_htpass($pass);
-		spip_query("UPDATE spip_auteurs SET statut = 'visiteur', pass='$pass', htpass='$htpass', alea_actuel='' WHERE id_auteur = ".$id);
+		spip_query("UPDATE spip_auteurs SET statut = '6forum', pass='$pass', htpass='$htpass', alea_actuel='' WHERE id_auteur = ".$id);
 		echo "mot de passe chang&eacute;";
 	}	
 ?>

@@ -25,10 +25,10 @@ Ce plugin permet de configurer une Inscription2 sur le site, ici vous pourriez c
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 <fieldset>
 <legend>
-	Informations par défaut
+	<:inscription2:info_defaut:>
 </legend>
 <p>
-	Informations obligatoires par défaut
+	<:inscription2:info_defaut_desc:>
 <br /><br />
 
 <label>
@@ -46,15 +46,21 @@ Ce plugin permet de configurer une Inscription2 sur le site, ici vous pourriez c
 
 <fieldset>
 <legend>
-	Informations personnelles
+	<:inscription2:info_perso:>
 </legend>
 <p>
-Informations personnelles qui seront demandees aux nouveaux adherents du site
+<:inscription2:info_perso_desc:>
 <br /><br />
 
 <label>
 	<input type="checkbox" name="prenom" [checked="(#ENV{prenom}?{checked})"] id="prenom" />
 	<strong><:inscription2:prenom:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="login" [checked="(#ENV{login}?{checked})"] id="login" />
+	<strong><:inscription2:user:></strong>
 </label>
 <br />
 
@@ -129,10 +135,10 @@ Informations personnelles qui seront demandees aux nouveaux adherents du site
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
 <fieldset>
 <legend>
-	Informations Generales
+	<:inscription2:info_gener:>
 </legend>
 <p>
-Options qui seront demandees aux nouveaux adherents du site
+<:inscription2:info_gener_desc:>
 <br /><br />
 
 <label>
@@ -166,6 +172,50 @@ Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adher
 </label>
 <br />
 
+<label>
+	<input type="checkbox" name="divers" [checked="(#ENV{divers}?{checked})"] id="divers" />
+	<strong><:inscription2:divers:></strong><br />
+	<:inscription2:exp_divers:>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="categorie" [checked="(#ENV{categorie}?{checked})"] id="categorie" />
+	<strong><:inscription2:categorie:></strong><br />
+	<:inscription2:exp_categorie:>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="publication" [checked="(#ENV{publication}?{checked})"] id="publication" />
+	<strong><:inscription2:publication:></strong><br />
+	<:inscription2:exp_publication:>
+</label>
+<br />
+</fieldset>
+
+<fieldset>
+<legend>
+	<:inscription2:info_internes:>
+</legend>
+<p>
+<:inscription2:info_internes_desc:>
+<br /><br />
+
+<label>
+	<input type="checkbox" name="creation" [checked="(#ENV{creation}?{checked})"] id="creation" />
+	<strong><:inscription2:creation:></strong>
+</label>
+<br />
+
+<label>
+	<input type="checkbox" name="statut_relances" [checked="(#ENV{statut_relances}?{checked})"] id="statut_relances" />
+	<strong><:inscription2:statut_rel:></strong><br />
+	<:inscription2:exp_statut_rel:>
+</label>
+<br />
+
+</fieldset>
 [(#REM) Code jQuery plier/deplier les listes ]
 <script type="text/javascript"><!--
 function showhide(boxName) {

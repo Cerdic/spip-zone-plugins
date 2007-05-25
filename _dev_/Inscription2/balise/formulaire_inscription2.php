@@ -21,10 +21,13 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	//recuperer les infos inserées par le visiteur
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
-		if($val!='')
+		if($val!='' and $cle != 'naissance')
 			$var_user[$cle] = _request($cle);
+		if($cle == 'naissance')
+			$var_user[$cle] = _request('annee').'-'._request('mois').'-'._request('jour');
 	}
-	$mail = $var_user[email];		
+	$mail = $var_user[email];	
+	$commentaire = true;
 	if ($mail) {
 		include_spip('inc/filtres'); // pour email_valide
 		$commentaire = message_inscription($var_user, $mode);
@@ -53,7 +56,6 @@ function test_inscription($mode, $var_user) {
 	$var_user['nom'] = $nom;	
 	if (!email_valide($var_user['email'])) 
 		return _T('info_email_invalide');
-	$var_user['bio'] = $mode;
 	return $var_user;}
 
 function message_inscription($var_user, $mode) {
@@ -64,7 +66,7 @@ function message_inscription($var_user, $mode) {
 	else //c'est un array
 		$var_user = $declaration;
 
-	$row = spip_query("SELECT statut, id_auteur, login, email FROM spip_auteurs WHERE email=" . _q($var_user['email']));
+	$row = spip_query("SELECT nom, statut, id_auteur, login, email, alea_actuel FROM spip_auteurs WHERE email=" . _q($var_user['email']));
 	$row = spip_fetch_array($row);
 
 	if (!$row) 							// il n'existe pas, creer les identifiants  
@@ -73,10 +75,9 @@ function message_inscription($var_user, $mode) {
 	if ($row['statut'] == '5poubelle')	// irrecuperable
 		return _T('form_forum_access_refuse');
 	
-	if ($row['statut'] != 'nouveau')	// deja inscrit
-		return _T('form_forum_email_deja_enregistre');
-	// existant mais encore muet, ou ressucite: renvoyer les infos
-	/**RENVOYER MAIL D'INSCRIPTION **/
+	if ($row['statut'] != 'aconfirmer')	// deja inscrit
+		envoyer_inscription($row);/**RENVOYER MAIL D'INSCRIPTION **/
+		return _T('inscription2:mail_registre');
 	return $row;}
 
 function inscription_nouveau($declaration){

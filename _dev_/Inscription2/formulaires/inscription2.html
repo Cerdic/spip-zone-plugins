@@ -1,15 +1,25 @@
 #CACHE{0}
 
-<form method="post" action="#SELF">
+<div>
+	[(#ENV{message})]
+</div>
 
+<div [style="(#ENV{commentaire}|=={1}|?{display: none;, display:block;})"]>
+	#ENV{commentaire}
+</div>
+
+<div [style="(#ENV{commentaire}|=={1}|?{display: block;, display:none;})"]>
+<h3><:inscription2:formulaire_inscription:></h3>
+
+<form method="post" action="#SELF">
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 <fieldset>
 <legend>
-	Informations personnelles
+	<:inscription2:info_perso:>
 </legend>
 <br />
-Veuillez inserez les informations demand&eacute;s
+<:inscription2:inserez_infos:>
 <br /><br />
 
 <label [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
@@ -22,9 +32,43 @@ Veuillez inserez les informations demand&eacute;s
 	<input type="text" name="prenom" id="prenom" /><br />
 </label>
 
+<label [style="(#CONFIG{inscription2/login}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:user:></strong><br />
+	<input type="text" name="login" id="login" /><br />
+</label>
+
 <label [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>
 	<strong><:inscription2:naissance:></strong><br />
-	<input type="text" name="naissance" id="naissance" /><br />
+	
+	<select name="jour" id="jour">
+	<?php
+	for ($i=1;$i<=31;$i++)
+		echo "<option>$i</option>\n";
+	?>
+	</select> 
+	
+	<select name="mois" id="mois">
+	<option><:inscription2:janvier:></option>
+	<option><:inscription2:fevrier:></option>
+	<option><:inscription2:mars:></option>
+	<option><:inscription2:avril:></option>
+	<option><:inscription2:mai:></option>
+	<option><:inscription2:juin:></option>
+	<option><:inscription2:juillet:></option>
+	<option><:inscription2:aout:></option>
+	<option><:inscription2:septembre:></option>
+	<option><:inscription2:octobre:></option>
+	<option><:inscription2:novembre:></option>
+	<option><:inscription2:decembre:></option>
+	</select>
+	
+	<select name="annee" id="annee">
+	<?php
+	$today_year=date('Y');
+	for ($i=$today_year;$i>=$today_year-100;$i--)
+		echo "<option>$i</option>\n";
+	?>
+	</select> 
 </label>
 
 <label [style="(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})"]>
@@ -94,46 +138,33 @@ Veuillez inserez les informations demand&eacute;s
 </legend>
 <br />
 
-<label [style="(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:newsletter:></strong><br /> 
-	<input type="checkbox" name="newsletter" onclick="showhide(this)" id="newsletter" />
-</label>
-
-<div id="news" name="news" [style="(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})"]>
-<label>
-Veuillez choisir les listes de diffusion auxquelles vous voulez vous abonner<br />
-<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
-<BOUCLE_listes(LISTES){tout}{par num titre, titre}>
-	<option value="#ID_LISTE">
-	#TITRE
-	</option>
-</BOUCLE_listes>
-</select>
-
-<small><br />(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)
-<br />
-<a onclick="$('#newsletters').find('option').attr('selected', false);">> tout d&#233;selectionner</a> </small>
-</label>
-<br />
-</div>
-
 <label style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
 	<strong><:inscription2:fonction:></strong><br />
 	<input type="text" name="fonction" id="fonction" />
-</label>
-<br />
+<br /></label>
+
+
+<label style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
+	<input type="checkbox" name="publication" id="publication" />
+	<strong><:inscription2:publication:></strong><br />
+<br /></label>
+
+
+<label style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]">
+	<strong><:inscription2:categorie:></strong><br />
+	<input type="text" name="categorie" id="categorie" />
+<br /></label>
+
+
+<label style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
+	<strong><:inscription2:divers:></strong><br />
+	<input type="text" name="divers" id="divers" />
+<br /></label>
+
+
 </fieldset>
 
 <p><input type="submit" value="<:bouton_valider:>" /></p>
 
-[(#REM) Code jQuery plier/deplier les listes ]
-<script type="text/javascript"><!--
-function showhide(boxName) {
-if(boxName.checked)
-	$('#news').slideDown('slow');
-else 
-	$('#news').slideUp('slow');
-}
-// --></script>
-
 </form>
+</div>

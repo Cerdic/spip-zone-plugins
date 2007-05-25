@@ -10,4 +10,3 @@ function confirmation($id, $mode, $cle){
 		return 'rien';
 }
 ?>
-	
