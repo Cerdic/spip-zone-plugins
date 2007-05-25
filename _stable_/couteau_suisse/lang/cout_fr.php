@@ -206,8 +206,8 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'js_defaut' => 'D&eacute;faut',
 	'js_toujours' => 'Toujours',
 
-	'suivi_forums:nom' => 'Suivi des forums',
-	'suivi_forums:description' => 'Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.[[Votre choix :->%radio_suivi_forums3%]]',
+	'suivi_forums:nom' => 'Suivi des forums publics',
+	'suivi_forums:description' => 'Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum public associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.[[Votre choix :->%radio_suivi_forums3%]]',
 	'sf_tous' => 'Tous',
 	'sf_amont' => 'En amont',
 
