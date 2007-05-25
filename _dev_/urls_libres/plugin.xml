@@ -34,10 +34,12 @@ Si votre site est en sous-repertoire,
 Definissez ensuite dans ecrire/mes_options.php :
 	&lt;?php 	define ('_debut_urls_propres', ''); ?&gt;
 
+Ou configurez gr&agrave;ce au lien ci-dessous (methode conseill&eacute;e)
+
 	</description>
 	<lien>
-	[Documentation provisoire->http://toggg.com/spip/spip.php?article19]
-	</lien>
+	[<multi>Documentation[ar][&#1578;&#1608;&#1579;&#1610;&#1602;[it]Documentazione</multi>->http://toggg.com/spip/spip.php?article19] (provisoire)<span style="float: right;">
+[<multi>Configuration[ar]&#1575;&#1604;&#1575;&#1593;&#1583;&#1575;&#1583;[it]Configurazione</multi>->.?exec=cfg&amp;cfg=urls_libres]</span></lien>
 	<prefix>
 	urls_libres
 	</prefix>

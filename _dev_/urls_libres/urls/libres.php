@@ -29,10 +29,17 @@ Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
 Definissez ensuite dans ecrire/mes_options.php :
 	< ?php 	define ('_debut_urls_propres', ''); ? >
+ ou configurez grace a cfg ecrire/?exec=cfg&cfg=urls_libres (methode conseillee)
 */
+	// config cfg ?
+	(function_exists('lire_config') && $cfg = lire_config('urls_libres')) ||
+	($cfg = array('mode_direct' => '', 'term_html' => '', 'debut_url' => '', 'fin_url' => ''));
+spip_log($cfg, 'mon');
 	// pour compatibilite
-	define('_terminaison_urls_propres', '');
-	define('_debut_urls_propres', '?');
+	define('_terminaison_urls_propres', $cfg['fin_url'] . ($cfg['term_html'] ? '.html' : ''));
+	define('_debut_urls_propres',
+	 (!$cfg['mode_direct'] && strpos($cfg['debut_url'], '?') === false ? '?' : '')
+	 	. $cfg['debut_url']);
 
 	// constantes non incluses dans l'url libre stockee
 	define('_terminaison_urls_libres', _terminaison_urls_propres);

@@ -1,0 +1,46 @@
+<!-- descriptif=
+<h4>Configuration des urls libres</h4>
+Ici vous pouvez configurer les options des urls libres.
+
+Attention, pour les urls libres en mode direct (sans {{?}}, ancien mode query string), vous devez mettre en service .htaccess &agrave; la racine du site, au minimum y reproduire la derni&egrave;re ligne du htaccess.txt livr&eacute; avec le plugin.
+
+[Documentation provisoire->http://toggg.com/spip/spip.php?article19]
+-->
+[(#REM) titre=Configuration des urls libres]
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend><:urls_libres:options_generales:></legend>
+<p>
+<label for="mode_direct">Mode direct sans ?</label>
+<input type="checkbox" name="mode_direct" id="mode_direct"
+ [checked="(#ENV{mode_direct})"] />
+Mettre .htaccess en service si activ&eacute;.
+</p>
+<p>
+<label for="term_html">Terminaisons .html (ancien propres 2)</label>
+<input type="checkbox" name="term_html" id="term_html" [checked="(#ENV{term_html})"] />
+</p>
+</fieldset>
+
+<fieldset><legend><:urls_libres:options_speciales:></legend>
+<p>
+<label for="debut_url">D&eacute;but url</label>
+<input type="text" name="debut_url" id="debut_url" class="type_txt" size="10"
+	value="#ENV{debut_url}" />
+<br />Attention, l'option query string, mode direct ci-dessus d&eacute;sactiv&eacute;e ins&egrave;rera un ? devant cette chaîne n'en inclut pas.
+</p>
+<p>
+<label for="fin_url">Terminaison url</label>
+<input type="text" name="fin_url" id="fin_url" class="type_txt" size="10"
+	value="#ENV{fin_url}" />
+<br />Sera ins&eacute; avant .html si terminaisons .html ci-dessus activ&eacute;e
+</p>
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+
