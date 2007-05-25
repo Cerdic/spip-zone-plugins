@@ -281,6 +281,9 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 		
 		$local['cle_head'] = md5(microtime().rand());
 	}
+  //si la cle_head est pas dans le contexte et le contexte est local on la cree
+  if(!isset($local['cle_head']))
+    $local['cle_head'] = md5(microtime().rand());
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique_fond = 0;

@@ -244,6 +244,8 @@ function inclure_page($fond, $contexte_inclus) {
 			$cacher($contexte_inclus, $use_cache, $chemin_cache, $page,
 				$lastmodified);
 	}
+	collecte_cle_head($page['contexte']['cle_head']);
+	
 	if ($lang_select) lang_select();
 
 	return $page;
@@ -441,9 +443,40 @@ function analyse_js_ajoutee($page) {
     $pos_fin_script = strpos($corps,"</script>",$pos_script)+strlen("</script>");
     $corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_script,0);
   }
+  
+  //trouve les textes ajoutee par les squelettes et les enleve depuis le $corps
+  collecte_cle_head($page['contexte']['cle_head']);
+  $scripts_a_ajouter = collecte_head_squelette($corps); 
+  //un erreur ?
+  if(!is_array($scripts_a_ajouter)) {
+    $page['texte'] = $scripts_a_ajouter;
+    return $page;
+  }
+  //ajoutee scripts
+  if(count($scripts_a_ajouter)) {
+    $scripts_a_ajouter = array_unique($scripts_a_ajouter);
+    $pos_fin_head = strpos($corps,"</head>");
+    $corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_head,0);
+  }
+  
+  $page['texte'] = $corps;
+  return $page;
+  
+}
+
+function collecte_cle_head($cle = false) {
+  static $cles = array();
+  if(!$cle) return $cles; 
+  $cles[] = $cle;
+}
+
+function collecte_head_squelette(&$corps) {
+  static $scripts_a_ajouter = array();
+  //un erreur precedent ?
+  if(!is_array($scripts_a_ajouter)) return $scripts_a_ajouter; 
   //trouve les textes ajoutee par les squelettes
+  $cles = collecte_cle_head();
   $debut_commentaire = 0;
-  $scripts_a_ajouter = array();
   $debut_script = "<!-- spip_debut_texte_head";
   $len_debut_script = strlen($debut_script);
   $fin_script = "<!-- spip_fin_texte_head";
@@ -452,13 +485,13 @@ function analyse_js_ajoutee($page) {
     if(($fin_pos = strpos($corps,$fin_script,$debut_commentaire))===false) {
       //commentaire ouverte et pas ferme
       //seul cas a verifier parce que le autres sont fait au temps de la compilation
-      $page['texte'] = "#FIN_TEXTE_HEAD manquant";
-      return $page;        
+      $scripts_a_ajouter = "#FIN_TEXTE_HEAD manquant";
+      return $scripts_a_ajouter;
     } 
     $fin_commentaire = strpos($corps,"-->",$fin_pos+$len_fin_script)+3;
     $commentaire = substr($corps,$debut_commentaire,$fin_commentaire-$debut_commentaire);
     if(preg_match(",".$debut_script."(.*)-->(.*)".$fin_script."(.*)-->,Us",$commentaire,$texte)) {
-        if(!$texte[1] || ($texte[1]!=$texte[3]) || ($texte[1]!=$page["contexte"]["cle_head"])) {
+        if(!$texte[1] || ($texte[1]!=$texte[3]) || !in_array($texte[1],$cles)) {
           spip_log("ajoute script dans le head interdite ".$texte[0]);
         } else {
           $scripts_a_ajouter[] = $texte[2];
@@ -466,15 +499,8 @@ function analyse_js_ajoutee($page) {
     }
     $corps = substr_replace($corps,'',$debut_commentaire,$fin_commentaire-$debut_commentaire);
   }
-  //ajoute les script ajoutee pas les squelettes
-  if(count($scripts_a_ajouter)) {
-    $scripts_a_ajouter = array_unique($scripts_a_ajouter);
-    $pos_fin_head = strpos($corps,"</head>");
-    $corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_head,0);
-  }  
   
-  $page['texte'] = $corps;
-  return $page;
+  return $scripts_a_ajouter;  
 }
 
 // http://doc.spip.org/@push_script
