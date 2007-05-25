@@ -1,10 +1,10 @@
 [(#REM) descriptif=
-<h4>Exp&eacute;rimental pour 1.9.2</h4>
+<h4>Configuration du plugin boutonstexte</h4>
 Ici vous pouvez configurer les boutons dans le texte qui servent à augmenter/diminuer la taille de police de l'affichage des textes.<br />
 Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du texte * correspondant, vide fonctionne mais ram&egrave;nera le d&eacute;faut &agrave; la prochaine mise &agrave; jour.
 <br /><a href="http://www.spip-contrib.net/?article1474" class="spip_out">Documentation sur contrib</a>
-
 ]
+
 [(#REM) titre=Configuration du plugin boutonstexte]
 #CACHE{0}
 
@@ -12,23 +12,23 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 
 <fieldset><legend><:boutonstexte:textes_icones:></legend>
 <p>
-<label>* Texte seulement</label>
-<input type="text" name="txtOnly" class="type_txt" size="60"
+<label for="_btx_txtOnly">* Texte seulement</label>
+<input type="text" name="txtOnly" class="type_txt" id="_btx_txtOnly" size="60"
 	value="#ENV{txtOnly,boutonstexte:texte_seulement}" />
 </p>
 <p>
-<label>Texte retour spip</label>
-<input type="text" name="txtBackSpip" class="type_txt" size="60"
+<label for="_btx_txtBackSpip">Texte retour spip</label>
+<input type="text" name="txtBackSpip" class="type_txt" id="_btx_txtBackSpip" size="60"
 	value="#ENV{txtBackSpip,boutonstexte:retour_a_spip}" />
 </p>
 <p>
-<label>* Texte augmenter</label>
-<input type="text" name="txtSizeUp" class="type_txt" size="60"
+<label for="_btx_txtSizeUp">* Texte augmenter</label>
+<input type="text" name="txtSizeUp" class="type_txt" id="_btx_txtSizeUp" size="60"
 	value="#ENV{txtSizeUp,boutonstexte:augmenter_police}" />
 </p>
 <p>
-<label>* Texte diminuer</label>
-<input type="text" name="txtSizeDown" class="type_txt" size="60"
+<label for="_btx_txtSizeDown">* Texte diminuer</label>
+<input type="text" name="txtSizeDown" class="type_txt" id="_btx_txtSizeDown" size="60"
 	value="#ENV{txtSizeDown,boutonstexte:diminuer_police}" />
 </p>
 <p>* si <b>_</b> ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut)</p>
@@ -36,21 +36,21 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 
 <fieldset><legend><:boutonstexte:selecteur:></legend>
 <p>
-<label>Expression CSS ou etendue jQuery</label>
-<input type="text" name="selector" class="type_txt" size="60"
+<label for="_btx_selector">Expression CSS ou etendue jQuery</label>
+<input type="text" name="selector" class="type_txt" id="_btx_selector" size="60"
 	value="#ENV{selector,#contenu .texte}" />
 </p>
 </fieldset>
 
 <fieldset><legend><:boutonstexte:donnees_techniques:></legend>
-<p><label>Fichier javascript</label>
-<input type="text" name="jsFile" class="type_file" size="15"
+<p><label for="_btx_jsFile">Fichier javascript</label>
+<input type="text" name="jsFile" class="type_file" id="_btx_jsFile" size="15"
 	value="#ENV{jsFile,boutonstexte.js}" />
-<label>Fichier style</label>
-<input type="text" name="cssFile" class="type_file" size="15"
+<label for="_btx_cssFile">Fichier style</label>
+<input type="text" name="cssFile" class="type_file" id="_btx_cssFile" size="15"
 	value="#ENV{cssFile,boutonstexte}" />
-<label>R&eacute;pertoire d'image</label>
-<input type="text" name="imgPath" class="type_file" size="20"
+<label for="_btx_imgPath">R&eacute;pertoire d'image</label>
+<input type="text" name="imgPath" class="type_file" id="_btx_imgPath" size="20"
 	value="#ENV{imgPath,images/fontsizeup.png}" />(adresse d'une image)
 </p>
 <p>Si vide, reviendront au d&eacute;faut</p>
