@@ -15,7 +15,7 @@
 #SET{selection_exclue,#ENV{page}|noisetier_selection_exclue}
 <BOUCLE_noisettes(NOISETTES){page==#GET{selection_page}}{exclue!==#GET{selection_exclue}}{zone=head}{actif=oui}{par position}>
 [(#TYPE|=={'noisette'}|?{' ',''})
-	[(#INCLURE_NOISETTE|{fond=noisettes/#FOND}{id_noisette=#ID_NOISETTE})]
+	<INCLURE{fond=noisette}{id_noisette=#ID_NOISETTE}{env}>
 ]
 [(#TYPE|=={'texte'}|?{' ',''})
 	[(#DESCRIPTIF)]
