@@ -1,3 +1,27 @@
+<style>
+.spip_forms{
+width:500px;
+border:1px solid black;
+}
+.spip_form_champs{
+height:40px;
+clear:both;
+}
+
+.spip_form_champs input ,.spip_form_champs textarea{
+display:block;
+float:right;
+}
+
+.spip_form_label{
+display:block;
+float:left;
+clear:both;
+}
+
+legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
+</style>
+
 <div class="spip_forms">
 <fieldset>
 <legend>Confirmation de demande</legend>
@@ -16,9 +40,9 @@
 		<input name="prenom" type="text" class="choix" size="40" value="[(#ENV{prenom})]"  /> 
 	</div>
 	<div class='spip_form_champs'>
-		<span class='spip_form_label'><label for="sexe"><:asso:adherent_libelle_sexe:> :</label></span>
-		<input name="sexe" type="radio" class="choix" value="M" [(#ENV{sexe}|=={M}|?{checked="checked"})] /> <:asso:adherent_libelle_masculin:>
-		<input name="sexe" type="radio" class="choix" value="F" [(#ENV{sexe}|=={F}|?{checked="checked"})] /> <:asso:adherent_libelle_feminin:>
+		<span class='spip_form_label' style="float:none;display:inline"><label for="sexe"><:asso:adherent_libelle_sexe:> :</label></span>
+		<input style="float:none;display:inline" name="sexe" type="radio" class="choix" value="M" [(#ENV{sexe}|=={M}|?{checked="checked"})] /> <:asso:adherent_libelle_masculin:>
+		<input style="float:none;display:inline" name="sexe" type="radio" class="choix" value="F" [(#ENV{sexe}|=={F}|?{checked="checked"})] /> <:asso:adherent_libelle_feminin:>
 	</div>
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
@@ -27,12 +51,12 @@
 		</span>
 		<input name="mail" type="text" class="choix" size="40" value="[(#ENV{mail})]" /> 
 	</div>
-	<div class='spip_form_champs'>
+	<div class='spip_form_champs' style="height:120px">
 		<span class='spip_form_label'>
 			<label for="adresse"><:asso:adherent_libelle_adresse:> :</label> 
 			[<span class="spip_form_erreur">(#ENV{erreur_rue})</span>]
 		</span>
-		<textarea name="adresse" type="text" class="choix" rows="2" cols="30" />[(#ENV{adresse})]</textarea>
+		<textarea name="adresse" type="text" class="choix" rows="5" cols="30" />[(#ENV{adresse})]</textarea>
 	</div>
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
@@ -51,7 +75,7 @@
 	
 	<B_cotiz>
 	<div class="spip_form_champs">
-		<select name="categorie">
+		<select name="categorie" style="float:right">
 		<BOUCLE_cotiz(SPIP_ASSO_CATEGORIES)>
 		<option value="#VALEUR" [(#VALEUR|=={#ENV{categorie}}|?{'selected',''})] >#LIBELLE - #COTISATION euros</option>
 		</BOUCLE_cotiz>
@@ -70,9 +94,9 @@
 		<span class='spip_form_label'>
 			<label for="commentaire"><:asso:adherent_libelle_commentaire:>:</label>
 		</span>
-		<textarea name="commentaire" id="commentaire" rows="10" cols="30" />[(#ENV{commentaire})]</textarea>
+		<textarea name="commentaire" id="commentaire" rows="5" cols="30" />[(#ENV{commentaire})]</textarea>
 	</div>
-	<div>
+	<div class="spip_form_champs" style="margin-top:10px;font-size:1.5em">
 		<input type="submit" name="bouton" class="spip_bouton" value="[(#ENV{bouton})]" />	
 	</div>
 </form>
