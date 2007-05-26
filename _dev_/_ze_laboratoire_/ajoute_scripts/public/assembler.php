@@ -437,24 +437,17 @@ function analyse_js_ajoutee($page) {
       else
         push_script($scripts_a_ajouter,$script,true);    
     }
-  //ajoute les scripts trouvee
-  if(count($scripts_a_ajouter)) {
-    list($pos_script,$appelle) = $jquery_chargee;
-    $pos_fin_script = strpos($corps,"</script>",$pos_script)+strlen("</script>");
-    $corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_script,0);
-  }
-  
   //trouve les textes ajoutee par les squelettes et les enleve depuis le $corps
   collecte_cle_head($page['contexte']['cle_head']);
-  $scripts_a_ajouter = collecte_head_squelette($corps); 
+  $scripts_collecte = collecte_head_squelette($corps); 
   //un erreur ?
-  if(!is_array($scripts_a_ajouter)) {
-    $page['texte'] = $scripts_a_ajouter;
+  if(!is_array($scripts_collecte)) {
+    $page['texte'] = $scripts_collecte;
     return $page;
   }
-  //ajoutee scripts
+  //ajoutee scripts inline a la fin du <head> 
   if(count($scripts_a_ajouter)) {
-    $scripts_a_ajouter = array_unique($scripts_a_ajouter);
+    $scripts_a_ajouter = array_unique(array_merge($scripts_a_ajouter,$scripts_collecte));
     $pos_fin_head = strpos($corps,"</head>");
     $corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_head,0);
   }
@@ -466,7 +459,7 @@ function analyse_js_ajoutee($page) {
 
 function collecte_cle_head($cle = false) {
   static $cles = array();
-  if(!$cle) return $cles; 
+  if(!$cle) return array_unique($cles); 
   $cles[] = $cle;
 }
 
