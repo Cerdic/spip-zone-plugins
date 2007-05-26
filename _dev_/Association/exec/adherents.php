@@ -157,10 +157,10 @@ function exec_adherents() {
 	if (empty($debut)) { $debut=0; }
 
 	if (empty($lettre)) {
-		$query = spip_query ( "SELECT spip_asso_adherents.*, spip_asso_categories.libelle AS libelle_categorie FROM spip_asso_adherents LEFT JOIN spip_asso_categories ON (spip_asso_categories.id_categorie=spip_asso_adherents.categorie) WHERE $critere ORDER BY nom LIMIT $debut,$max_par_page" );
+		$query = spip_query ( "SELECT * FROM spip_asso_adherents  WHERE $critere ORDER BY nom LIMIT $debut,$max_par_page" );
 	}
 	else {
-		$query = spip_query ( "SELECT spip_asso_adherents.*, spip_asso_categories.libelle AS libelle_categorie FROM spip_asso_adherents LEFT JOIN spip_asso_categories ON (spip_asso_categories.valeur=spip_asso_adherents.categorie) WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom LIMIT $debut,$max_par_page" );
+		$query = spip_query ( "SELECT * FROM spip_asso_adherents WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom LIMIT $debut,$max_par_page" );
 	}
 
 	$i=0;
@@ -215,7 +215,7 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 //echo '<td class ='.$class.'>'.$data["portable"].'</td>';
 //echo '<td class ='.$class.'>'.$data["telephone"].'</td>';
 		echo '<td class ='.$class.' style="text-align:right;">'.$data["id_asso"].'</td>'; //rfrence interne
-		echo '<td class ='.$class.'>'.$data["libelle_categorie"].'</td>';
+		echo '<td class ='.$class.'>'.$data["valeur"].'</td>';
 		echo '<td class ='.$class.'>'.association_datefr($data['validite']).'</td>';
 //echo '<td class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
 //echo '<td class ='.$class.'>'.$data["remarques"].'</td>';
