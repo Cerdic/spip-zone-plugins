@@ -68,7 +68,7 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 		// objet non référencé
 		// se rappeler de cette version comme la plus ancienne ...
 		// meme si semblable aux genereration qui suivent
-		_store_url($row['url_propre'], $type, $id_object, '', 0);
+		_store_url($row['url_propre'], $type, $id_object, '', -1);
 	}
 
 	// Recalculer l'url-propre seulement si l'objet a change apres l'url libre
