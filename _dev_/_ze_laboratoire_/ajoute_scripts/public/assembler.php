@@ -494,7 +494,10 @@ function collecte_head_squelette(&$corps) {
         if(!$texte[1] || ($texte[1]!=$texte[3]) || !in_array($texte[1],$cles)) {
           spip_log("ajoute script dans le head interdite ".$texte[0]);
         } else {
-          $scripts_a_ajouter[] = $texte[2];
+          //ajoute les elements
+          if(preg_match_all(",<([a-zA-z]+)[^>]*(/)?".">(?(2)|.*?</\\1>),s",$texte[2],$elements)) {
+            $scripts_a_ajouter = array_merge($scripts_a_ajouter,$elements[0]);
+          }
         }    
     }
     $corps = substr_replace($corps,'',$debut_commentaire,$fin_commentaire-$debut_commentaire);
