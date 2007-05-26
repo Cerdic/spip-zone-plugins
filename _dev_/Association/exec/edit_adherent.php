@@ -94,8 +94,8 @@ echo '<td colspan="3"><input name="email" type="text" size="40" value="'.$data['
 echo '<tr> ';
 echo '<td>'._T('asso:adherent_libelle_rue').' :</td>';
 echo '<td><textarea  name="rue" cols="30">'.$data['rue'].'</textarea></td>';
-//echo '<td>'._T('asso:adherent_libelle_num_rue').' :</td>';
-//echo '<td><input name="numero" type="text" size="10" value="'.$data['numero'].'"></td></tr>';
+echo '<td>'._T('asso:adherent_libelle_num_rue').' :</td>';
+echo '<td><input name="numero" type="text" size="10" value="'.$data['numero'].'"></td></tr>';
 echo '<tr> ';
 echo '<td>'._T('asso:adherent_libelle_ville').' :</td>';
 echo '<td><input name="ville" type="text" size="40" value="'.$data['ville'].'"></td>';
