@@ -476,6 +476,12 @@ add_outil( array(
 	'pipeline:pre_typo' => 'chatons_pre_typo',
 ));
 
+add_outil( array(
+	'id' => 'glossaire',
+	'categorie'	 => 'typo-corr',
+	'pipeline:post_propre' => 'glossaire_post_propre',
+));
+
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
 // http://www.spip-contrib.net/Citations

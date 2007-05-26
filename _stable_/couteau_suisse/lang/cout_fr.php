@@ -290,9 +290,10 @@ _ Merci de votre compr&eacute;hension.",
 	'sauf_admin' => 'Tous, sauf les administrateurs',
 	
 // ---------------------------------------------------------------------------
-	'boutonstexte:nom' => '',
-	'boutonstexte:description' => "Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police",
-	
+	'glossaire:nom' => 'Glossaire interne',
+	'glossaire:description' => "Gestion d'un glossaire interne li&#233; &#224; un groupe de mots-cl&#233;s nomm&#233; &quot;Glossaire&quot;.
+_ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
+
 /*
 	':nom' => '',
 	':description' => '',

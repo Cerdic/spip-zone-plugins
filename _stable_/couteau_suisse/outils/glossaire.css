@@ -1,0 +1,47 @@
+/* Empecher la definition de s'afficher comme les autres liens, vous pouvez donner les attributs standards de votre texte */
+a.cs_glossaire, a.cs_glossaire:hover {
+	color: #000000;
+	text-decoration: none;
+}
+a.cs_glossaire sup {}
+a.cs_glossaire img {}
+
+/* L'effet de survol est obtenu grace aux proprietes display */
+a.cs_glossaire span.dl,
+a.cs_glossaire span.dt,
+a.cs_glossaire span.dd {
+	display: none;
+}
+a.cs_glossaire:hover span.dl,
+a.cs_glossaire:hover span.dt,
+a.cs_glossaire:hover span.dd {
+	display: block;
+}
+
+/* La deco */
+a.cs_glossaire:hover span.dl {
+	/* Placement de la definition dans la page. */
+	position: absolute;
+	width: 180px;
+	/* Déco */
+	padding: 6px;
+	border: 1px solid #ffc300;
+	background-color: #FFFFFF;
+	font-size: 75%;
+}
+a.cs_glossaire:hover span.dt {
+	padding: 3px;
+	background-color: #ffffbf;
+	font-weight: bold;
+	text-align: right;
+}
+a.cs_glossaire:hover span.dd {
+	padding: 3px;
+	text-align: left;
+	line-height: 1.3em;
+}
+
+a.cs_glossaire span.mot {
+	border-bottom: 1px dotted gray;
+/* cursor: help; */
+}
