@@ -130,11 +130,11 @@ function noisetier_form_ajout_noisette_texte($page,$zone) {
 function noisetier_affiche_texte($row) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	global $noisette_visible;
+	$id_noisette = $row['id_noisette'];
 	$out = '';
 	$out .= "<div id='noisette-$id_noisette'>";
 	$out .= debut_cadre_relief('', true);
 	$out .= "<a name='noisette-$id_noisette'></a>";
-	$id_noisette = $row['id_noisette'];
 	$out .= "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/texte-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
 	// Actif ?
 	$actif = $row['actif'];
@@ -170,11 +170,11 @@ function noisetier_affiche_texte($row) {
 function noisetier_affiche_noisette($row) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	global $noisette_visible;
-		$out = '';
+	$id_noisette = $row['id_noisette'];
+	$out = '';
 	$out .= "<div id='noisette-$id_noisette'>";
 	$out .= debut_cadre_relief('', true);
 	$out .= "<a name='noisette-$id_noisette'></a>";
-	$id_noisette = $row['id_noisette'];
 	$out .= "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/noisette-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
 	// Actif ?
 	$actif = $row['actif'];
