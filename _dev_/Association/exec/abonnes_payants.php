@@ -314,7 +314,7 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 				echo '<strong>'.$position.' </strong>';
 			}
 			else {
-				echo '<a href="'.generer_url_ecrire("abonnes_payants","lettre=$lettre&debut=$position&filtre=$filtre").'>'.$position.'</a> ';
+				echo '<a href="'.generer_url_ecrire("abonnes_payants","lettre=$lettre&debut=$position&filtre=$filtre").'">'.$position.'</a> ';
 			}
 		}	
 	}
