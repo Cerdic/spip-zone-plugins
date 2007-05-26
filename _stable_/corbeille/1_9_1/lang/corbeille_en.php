@@ -22,6 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'ecrit' => " wrote:",
 	'effacer' => 'Erase',
   'erreur' => 'Error',
+  
+  // I  
+  'icone_syndic' => "Syndicated sites",
 
 	// M
 	'messages_tous_pri' => 'All private forum messages in the recycle bin:',

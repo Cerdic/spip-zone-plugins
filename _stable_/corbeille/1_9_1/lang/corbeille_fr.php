@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacer' => "Effacer",
  	'erreur' => " : erreur !",
  	
+	'icone_syndic' => "Sites syndiqu&eacute;s",
+	
 	'messages_tous_pri' => "Tous les messages du forum des administrateurs dans la corbeille :", 
  	'messages_tous_pub' => "Tous les messages du forum dans la corbeille :",
  
