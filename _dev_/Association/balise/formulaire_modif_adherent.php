@@ -33,7 +33,7 @@ function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 	$prenom=_request('prenom');
 	$sexe=_request('sexe');
 	$mail=_request('mail');
-	$rue=_request('adresse');
+	$rue=_request('rue');
 	$cp=_request('cp');
 	$ville=_request('ville');
 	$telephone=_request('telephone');
@@ -78,7 +78,7 @@ function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 				$bouton='Soumettre';
 			}
 			if ( empty($rue) ){
-				$erreur_rue='Rue manquante !';
+				$erreur_rue='Adresse manquante !';
 				$bouton='Soumettre';
 			}
 			if ( empty($cp)  ){
@@ -100,7 +100,7 @@ function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 						'prenom'	=> $prenom,
 						'sexe'		=>$sexe,
 						'mail'		=> $mail,
-						'adresse'	=> $rue,
+						'rue'		=> $rue,
 						'cp'		=> $cp,
 						'ville'		=> $ville,
 						'telephone'=> $telephone,
@@ -137,7 +137,7 @@ function balise_FORMULAIRE_MODIF_ADHERENT_dyn() {
 			'nom'		=> $nom,
 			'prenom'	=> $prenom,
 			'mail'		=> $mail,
-			'adresse'	=> $rue,
+			'rue'		=> $rue,
 			'cp'		=> $cp,
 			'ville'		=> $ville,
 			'telephone'=> $telephone,

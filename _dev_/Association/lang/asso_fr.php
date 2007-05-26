@@ -208,7 +208,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_entete_validees' => 'Valid&eacute;es',
 	'activite_entete_nom' => 'Nom',
 	'activite_entete_adherent' => 'Adh&eacute;rent',
-	'activite_entete_inscrits' => 'Inscrits',
+	'activite_entete_inscrits' => 'Nbre',
 	'activite_entete_montant' => 'Montant',
 	'activite_entete_commentaire' => 'Commentaire',
 

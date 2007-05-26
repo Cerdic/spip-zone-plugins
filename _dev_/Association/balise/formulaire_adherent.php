@@ -32,7 +32,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	$prenom=_request('prenom');
 	$mail=_request('mail');
 	$sexe=_request('sexe');
-	$rue=_request('adresse');
+	$rue=_request('rue');
 	$cp=_request('cp');
 	$ville=_request('ville');
 	$telephone=_request('telephone');
@@ -43,7 +43,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	//echo "le bouton -> $bouton " ;
 	
 	if ($bouton=='Confirmer'){	
-		//on envoit des emails
+		//on envoit des emails si tout est contrôlé et confirmé
 		
 		$query = spip_query( " SELECT * FROM spip_asso_profil WHERE id_profil=1" );
 		while ($data = spip_fetch_array($query)) {
@@ -67,7 +67,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$sujet='Demande d\'adh&eacute;sion';
 		
 		//au webmaster
-		$message = "Un nouveau membre vient de demander son adh&eacute;sion :\n\nNOM : ".$nom."\nPr&eacute;nom : ".$prenom."\nEmail :<a href='mailto:'".$mail."'>".$mail."</a>\nAdresse: ".$rue." ".$cp." ".$ville
+		$message = "Un nouveau membre vient de demander son adh&eacute;sion :\n\nNOM : ".$nom."\nPr&eacute;nom : ".$prenom."\nEmail :".$mail."'>".$mail."\nAdresse: ".$rue." ".$cp." ".$ville
 		."\nT&eacute;l&eacute;phone: ".$telephone
 		."\n\nCat&eacute;gorie ".$categorie
 		."\n\nCommentaire: ".$commentaire;
@@ -78,9 +78,6 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$message= "Bonjour ".$prenom."\n\n\nVous venez de demander votre inscription &agrave; l'association ".$nomasso."\nNous allons prendre contact avec vous tr&egrave;s rapidement.\n\nAvec nos remerciements. \n\n\nLe bureau de ".$nomasso."\r\n";
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
-		//echo " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, remarques, creation) 
-		//VALUES ('$nom', '$prenom',  '$mail',  '$rue', '$cp', '$ville', '$telephone','prospect', '$commentaire', NOW() ) " ;
-		
 		
 		if(!function_exists(_q)){
 		function _q($a) {
@@ -88,24 +85,25 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			}
 		}
 		
-		//enregistrement dans la table
+		//on enregistre les données dans la table
 		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, categorie, statut, remarques, creation) 
 		VALUES ("._q($nom).", "._q($prenom).",  "._q($mail).",  "._q($rue).", "._q($cp).", "._q($ville).", "._q($telephone).", "._q($categorie).", "._q(prospect).", "._q($commentaire).", NOW() ) ");	
+		
+		/*
+		//dire merci		
 		
 		$id_adherent = spip_insert_id();
 		//echo "id -> $id ";
 		$valeur = spip_fetch_array(spip_query("SELECT cotisation, libelle FROM spip_asso_categories WHERE valeur='$categorie'") );
 		//var_dump($valeur);
 		
-		/*
-		//dire merci
 		return array (
 		'formulaires/formulaire_adherent_merci',0, 
 		array (
 			'nom'		=> $nom,
 			'prenom'	=> $prenom,
 			'mail'		=> $mail,
-			'adresse'	=> $rue,
+			'rue'	=> $rue,
 			'cp'		=> $cp,
 			'ville'		=> $ville,
 			'telephone'=> $telephone,
@@ -114,8 +112,6 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			'valeur'=> $valeur['cotisation']  // montant
 			)
 		);
-		
-		*/
 		
 		// insertion du formulaire de paiement
 		return inclure_balise_dynamique(
@@ -126,7 +122,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 							'prenom'	=> $prenom,
 							'sexe'		=> $sexe ,
 							'mail'		=> $mail,
-							'adresse'	=> $rue,
+							'rue'		=> $rue,
 							'cp'		=> $cp,
 							'ville'		=> $ville,
 							'telephone'=> $telephone,
@@ -140,7 +136,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 				);
 		
 		// fin paiement
-		
+		*/	
 	}
 	else {
 		if ($bouton=='Valider' OR $bouton=='Retour'){
@@ -163,7 +159,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 				$erreur = "oui" ;
 			}
 			if ( empty($rue) ){
-				$erreur_rue='Rue manquante !';
+				$erreur_rue='Adresse manquante !';
 				$erreur = "oui" ;
 			}
 			if ( empty($cp)  ){
@@ -176,39 +172,42 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			}	
 			
 			if ($erreur == "oui" OR $bouton=='Retour'){
-			//echo "le bouton -> $bouton car $erreur_email $erreur_nom $erreur_prenom $erreur_rue $erreur_cp $erreur_ville" ;
-			//echo $categorie ;
-			//on retourne les infos à un formulaire de previsualisation		
-			return inclure_balise_dynamique(
-				array(
-					'formulaires/formulaire_adherent_previsu',0,
+				//echo "le bouton -> $bouton car $erreur_email $erreur_nom $erreur_prenom $erreur_rue $erreur_cp $erreur_ville" ;
+				//echo $categorie ;
+				
+				//on retourne les infos à un formulaire de correction		
+				return inclure_balise_dynamique(
 					array(
-						'nom'		=> $nom,
-						'prenom'	=> $prenom,
-						'sexe'		=> $sexe ,
-						'mail'		=> $mail,
-						'adresse'	=> $rue,
-						'cp'		=> $cp,
-						'ville'		=> $ville,
-						'telephone'=> $telephone,
-						'categorie'=> $categorie,
-						'commentaire'=> $commentaire,
-						'bouton'	=> "Valider",
-						'erreur_email' => $erreur_email,
-						'erreur_nom' => $erreur_nom,
-						'erreur_prenom' => $erreur_prenom,
-						'erreur_rue' => $erreur_rue,
-						'erreur_cp' => $erreur_cp,
-						'erreur_ville' => $erreur_ville,
-					)
-				),
-				false
-			);
-			}else{
-			
-			$valeur = spip_fetch_array(spip_query("SELECT cotisation, libelle, valeur FROM spip_asso_categories WHERE valeur='$categorie'") );
-			
-			return inclure_balise_dynamique(
+						'formulaires/formulaire_adherent_previsu',0,
+						array(
+							'nom'		=> $nom,
+							'prenom'	=> $prenom,
+							'sexe'		=> $sexe ,
+							'mail'		=> $mail,
+							'rue'		=> $rue,
+							'cp'		=> $cp,
+							'ville'		=> $ville,
+							'telephone'=> $telephone,
+							'categorie'	=> $categorie,
+							'commentaire'=> $commentaire,
+							'bouton'	=> "Valider",
+							'erreur_email' => $erreur_email,
+							'erreur_nom' => $erreur_nom,
+							'erreur_prenom' => $erreur_prenom,
+							'erreur_rue' => $erreur_rue,
+							'erreur_cp' => $erreur_cp,
+							'erreur_ville' => $erreur_ville,
+						)
+					),
+					false
+				);
+			}
+			else {
+				
+				$valeur = spip_fetch_array(spip_query("SELECT cotisation, libelle, valeur FROM spip_asso_categories WHERE valeur='$categorie'") );
+				// si non on demande confirmation des données
+				
+				return inclure_balise_dynamique(
 					array(
 						'formulaires/formulaire_adherent_confirmation',0,
 						array(
@@ -216,20 +215,20 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 							'prenom'	=> $prenom,
 							'sexe'		=> $sexe ,
 							'mail'		=> $mail,
-							'adresse'	=> $rue,
+							'rue'		=> $rue,
 							'cp'		=> $cp,
 							'ville'		=> $ville,
 							'telephone'=> $telephone,
-							'categorie'=> $valeur['valeur'],
-							'valeur'=> $valeur['cotisation'], // montant
-							'libelle'=> $valeur['libelle'],
+							'categorie'	=> $valeur['valeur'],
+							'valeur'		=> $valeur['cotisation'], // montant
+							'libelle'		=> $valeur['libelle'],
 							'commentaire'=> $commentaire,
 							'bouton'	=> "Confirmer",
 						)
 					),
 					false
 				);
-			
+				
 			}
 			
 		}
@@ -243,7 +242,7 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			'nom'		=> $nom,
 			'prenom'	=> $prenom,
 			'mail'		=> $mail,
-			'adresse'	=> $rue,
+			'rue'		=> $rue,
 			'cp'		=> $cp,
 			'ville'		=> $ville,
 			'telephone'=> $telephone,

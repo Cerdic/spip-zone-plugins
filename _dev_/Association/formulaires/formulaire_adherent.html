@@ -25,10 +25,7 @@ legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
 
 <div class="spip_forms">
 <fieldset>
-
-<legend>Formulaire d'adh&eacute;sion</legend>
-
-
+<legend>Formulaire de demande d'adh&eacute;sion</legend>
 <form action="#" method="POST">
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
@@ -58,10 +55,10 @@ legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
 	</div>
 	<div class='spip_form_champs' style="height:120px">
 		<span class='spip_form_label'>
-			<label for="adresse"><:asso:adherent_libelle_adresse:> :</label>
+			<label for="rue"><:asso:adherent_libelle_adresse:> :</label>
 			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
 		</span>
-		<textarea name="adresse" type="text" id="adresse" rows="5" cols="30" /></textarea>
+		<textarea name="rue" id="rue" rows="5" cols="30" /></textarea>
 	</div>
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
@@ -86,6 +83,9 @@ legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
 	
 	
 	<div class="spip_form_champs">
+		<span class='spip_form_label'>
+			<label for="categorie"><:asso:adherent_libelle_categorie:> :</label>
+		</span>
 		<select name="categorie" >
 		<BOUCLE_cotiz(SPIP_ASSO_CATEGORIES)>
 		<option value="#VALEUR">#LIBELLE - #COTISATION euros</option>
@@ -96,7 +96,7 @@ legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
 	
 	<div class="spip_form_champs">
 		<span class='spip_form_label'>
-			<label for="commentaire"><:asso:adherent_libelle_commentaire:> :</label>
+			<label for="commentaire"><:asso:adherent_libelle_remarques:> :</label>
 		</span>
 		<textarea name="commentaire" id="commentaire" rows="5" cols="30" /></textarea>
 	</div>

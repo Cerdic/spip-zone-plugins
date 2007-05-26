@@ -54,10 +54,10 @@ legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
 	</div>
 	<div class='spip_form_champs' style="height:120px[(#ENV{erreur_rue}|?{';background-color:#ffe2e2',''})]">
 		<span class='spip_form_label'>
-			<label for="adresse"><:asso:adherent_libelle_adresse:> :</label> 
+			<label for="rue"><:asso:adherent_libelle_adresse:> :</label> 
 			[<span class="spip_form_erreur">(#ENV{erreur_rue})</span>]
 		</span>
-		<textarea name="adresse" type="text" class="choix" rows="5" cols="30" />[(#ENV{adresse})]</textarea>
+		<textarea name="rue" class="choix" rows="5" cols="30" />[(#ENV{rue})]</textarea>
 	</div>
 	<div class='spip_form_champs' [(#ENV{erreur_cp}|?{'style="background-color:#ffe2e2"',''})]>
 		<span class='spip_form_label'>
@@ -76,6 +76,9 @@ legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
 	
 	<B_cotiz>
 	<div class="spip_form_champs">
+		<span class='spip_form_label'>
+			<label for="categorie"><:asso:adherent_libelle_categorie:> :</label>
+		</span>
 		<select name="categorie" style="float:right">
 		<BOUCLE_cotiz(SPIP_ASSO_CATEGORIES)>
 		<option value="#VALEUR" [(#VALEUR|=={#ENV{categorie}}|?{'selected',''})] >#LIBELLE - #COTISATION euros</option>
@@ -93,7 +96,7 @@ legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
 	
 	<div class="spip_form_champs">
 		<span class='spip_form_label'>
-			<label for="commentaire"><:asso:adherent_libelle_commentaire:>:</label>
+			<label for="commentaire"><:asso:adherent_libelle_remarques:>:</label>
 		</span>
 		<textarea name="commentaire" id="commentaire" rows="5" cols="30" />[(#ENV{commentaire})]</textarea>
 	</div>
