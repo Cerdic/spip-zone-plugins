@@ -46,10 +46,10 @@
 										$format = array();
 										if (isset($type['formate'])){
 											foreach($type['formate'] as $fmt){
-												$match = isset($fmt['match'])?trim(end($fmt['match'])):"";
+												$matchr = isset($fmt['match'])?trim(end($fmt['match'])):"";
 												$replace = isset($fmt['replace'])?trim(end($fmt['replace'])):"";
-												if ($match&&$replace)
-													$format[] = array('match'=>$match,'replace'=>$replace);
+												if ($matchr&&$replace)
+													$format[] = array('match'=>$matchr,'replace'=>$replace);
 											}
 										}
 										if (!in_array($champ,Forms_liste_types_champs()))
