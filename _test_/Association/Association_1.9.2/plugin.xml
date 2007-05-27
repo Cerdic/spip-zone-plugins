@@ -6,7 +6,9 @@
 	<version>0.6</version>
 	<etat>test</etat>
 	<description>
-		Gestion de petites associations</br>
+		Gestion de petites associations
+		_ Ce plugin n&eacute;cessite l'installation plugins cfg
+		
 		[Configuration->.?exec=cfg&amp;cfg=association]
 	</description>
 	<prefix>association</prefix>	
