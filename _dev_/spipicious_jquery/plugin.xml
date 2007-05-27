@@ -26,5 +26,6 @@ _ N&#233cessite le plugin balise_session
 		<nom>header_prive</nom>
 		<inclure>spipicious_fonctions.php</inclure>
 	</pipeline>
+	<necessite id="SelecteurGenerique" version="[0.1;]" />
 	<chemin dir='' />
 </plugin>
