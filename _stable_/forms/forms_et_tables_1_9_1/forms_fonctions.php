@@ -98,7 +98,7 @@
 			$t = $structure[$id_form][$champ]['type'];
 			if ($t == 'select' OR $t == 'multiple'){
 				if (!isset($structure[$id_form][$champ]['choix'][$valeur])){
-					$res = spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
+					$res = spip_query("SELECT choix,titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 					while ($row = spip_fetch_array($res))
 						$structure[$id_form][$champ]['choix'][$row['choix']] = $row['titre'];
 				}
@@ -116,6 +116,9 @@
 			elseif ($t == 'password'){
 				$rendu = "";
 				$valeur="******"; # ne jamais afficher en clair un password, si on veut vraiment le faire on utilise l'etoile sur le champ
+			}
+			elseif ($t == 'url'){
+				$rendu = "calculer_url";
 			}
 			elseif ($t == 'texte')
 				$rendu = 'propre';
@@ -140,7 +143,7 @@
 					'champ'=>$champ,
 					'id_form'=>$id_form,
 					'type_champ'=>$t,
-					'etoile'=>$etoile),'data'=>wrap_champ((!$etoile AND $rendu)?$rendu($valeur):$valeur,$wrap_champ[$id_form][$champ]))
+					'etoile'=>$etoile),'data'=>wrap_champ((!$etoile AND $rendu)?$rendu($valeur):$valeur,$structure[$id_form][$champ]['html_wrap']))
 				);
 		}
 		return $valeur;

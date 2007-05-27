@@ -127,8 +127,8 @@ $spip_forms_donnees_champs = array(
 	"maj" 		=> "TIMESTAMP");
 
 $spip_forms_donnees_champs_key = array(
-	"KEY champ" 	=> "champ, id_donnee",
-	"KEY id_donnee" => "id_donnee");
+	"UNIQUE champ" 	=> "champ (128), id_donnee, valeur(128)",
+	"KEY id_donnee" => "id_donnee"	);
 
 $tables_principales['spip_forms_donnees_champs'] = array(
 	'field' => &$spip_forms_donnees_champs,

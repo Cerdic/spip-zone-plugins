@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.33;
+	$GLOBALS['forms_base_version'] = 0.34;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -62,8 +62,8 @@
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			// attention on vient peut etre d'une table spip-forms 1.8
-			$desc = spip_abstract_showtable('spip_forms','',true);
-			if (isset($desc['field'])) 
+			$res = spip_query("SHOW FULL COLUMNS FROM spip_forms");
+			if ($row = spip_fetch_array($res))
 				$current_version=0.1;
 			else {
 				creer_base();
@@ -260,6 +260,11 @@
 			spip_query("ALTER TABLE spip_forms_donnees_champs CHANGE valeur valeur TEXT NOT NULL");
 			echo "forms update @ 0.33<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.33,'non');
+		}
+		if ($current_version<0.34){
+			spip_query("ALTER TABLE spip_forms_donnees_champs DROP INDEX champ , ADD UNIQUE champ ( champ ( 128 ) , id_donnee , valeur ( 128 ) )"); 
+			echo "forms update @ 0.34<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.34,'non');
 		}
 		ecrire_metas();
 	}
