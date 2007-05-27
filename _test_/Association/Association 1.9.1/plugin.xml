@@ -5,7 +5,7 @@
 	[Voir la notice en ligne->http://www.plugandspip.com/spip.php?page=explications]
 	</auteur>
 	<version>0.5</version>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 
