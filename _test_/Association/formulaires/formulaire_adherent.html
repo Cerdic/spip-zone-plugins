@@ -1,0 +1,109 @@
+<style>
+.spip_forms{
+width:500px;
+}
+.spip_form_champs{
+height:40px;
+clear:both;
+padding:5px;
+}
+
+.spip_form_champs input ,.spip_form_champs textarea, .spip_form_champs select{
+display:block;
+float:right;
+width:250px;
+}
+
+.spip_form_label{
+display:block;
+float:left;
+clear:both;
+}
+
+legend {font-size:2em;font-weight:bold;margin:5px 0px 5px 0px}
+</style>
+
+<div class="spip_forms">
+<fieldset>
+<legend>Formulaire de demande d'adh&eacute;sion</legend>
+<form action="#" method="POST">
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="nom">Nom :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="nom" type="text" id="nom" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="prenom">prenom :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="prenom" type="text" id="prenom" size="40" />
+	</div>
+		<div style="height:40px;">
+		<span class="spip_form_label" style="float:none;display:inline"><label for="sexe"><:asso:adherent_libelle_sexe:> :</label></span>
+		<input style="float:none;display:inline" name="sexe" type="radio" class="choix" value="M" /> <:asso:adherent_libelle_masculin:>
+		<input style="float:none;display:inline" name="sexe" type="radio" class="choix" value="F" /> <:asso:adherent_libelle_feminin:>
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="mail"><:asso:adherent_libelle_email:> :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="mail" type="text" id="mail" size="40" />
+	</div>
+	<div class='spip_form_champs' style="height:120px">
+		<span class='spip_form_label'>
+			<label for="rue"><:asso:adherent_libelle_adresse:> :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<textarea name="rue" id="rue" rows="5" cols="30" /></textarea>
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="cp"><:asso:adherent_libelle_codepostal:> :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="cp" type="text" id="cp" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="ville"><:asso:adherent_libelle_ville:> :</label>
+			<span class='spip_form_label_obligatoire'>(Obligatoire)</span>
+		</span>
+		<input name="ville" type="text" id="ville" size="40" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="telephone"><:asso:adherent_libelle_telephone:> :</label>
+		</span>
+		<input name="telephone" type="text" id="telephone" size="40" />
+	</div>
+	
+	
+	<div class="spip_form_champs">
+		<span class='spip_form_label'>
+			<label for="categorie"><:asso:adherent_libelle_categorie:> :</label>
+		</span>
+		<select name="categorie" >
+		<BOUCLE_cotiz(SPIP_ASSO_CATEGORIES)>
+		<option value="#VALEUR">#LIBELLE - #COTISATION euros</option>
+		</BOUCLE_cotiz>
+		</select>
+	</div>
+	
+	
+	<div class="spip_form_champs">
+		<span class='spip_form_label'>
+			<label for="commentaire"><:asso:adherent_libelle_remarques:> :</label>
+		</span>
+		<textarea name="commentaire" id="commentaire" rows="5" cols="30" /></textarea>
+	</div>
+	<div style="height:40px;margin-top:20px;float:right;font-size:1.5em;clear:both">
+		<input type="submit" name="bouton" class="spip_bouton" value="Valider" />
+		<input type="reset" class="spip_bouton" value="Effacer" />
+	</div>
+</form>
+</fieldset>
+</div>
