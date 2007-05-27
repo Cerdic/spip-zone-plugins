@@ -1,30 +1,11 @@
-#CACHE{86400}
-<BOUCLE_article_principal(ARTICLES) {id_article}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+#CACHE{0}
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
 <INCLURE{fond=inc-head}>
-<link rel="stylesheet" href="#CHEMIN{css/spipicious.css}" type="text/css" media="all" />
-<style type="text/css">
-<!--
-.exemple {
-  margin:0 0 10px 0;
-  padding: 10px;  
-}
-.exemple a {
-  color: #000;
-  text-decoration: underline;
-}
-.exemple a:hover {
-  color: #eee;
-}
-
-#tags {
-  width: 95%;
-}
--->
-</style>
 </head>
 
 <body class="page_article">
@@ -38,67 +19,45 @@
 
 
 	<div id="conteneur">
-	
-	<!-----extra SPIPICIOUS ---->
-	  <div style='background:yellow;' class="exemple">
-	  <h1>FORMULAIRE_SPIPICIOUS</h1>
-	  #FORMULAIRE_SPIPICIOUS
-	  </div>
-	  
-	  <div style='background:orange;' class="exemple">
-    <h1>FORMULAIRE_SPIPICIOUS_AJAX</h1>	
-	  #FORMULAIRE_SPIPICIOUS_AJAX	
-	  </div>
-    
-    <div style='background:pink;' class="exemple">
-    <h1>balise NUAGE_TAGS_ARTICLE</h1><hr />   
-    #NUAGE_TAGS_ARTICLE
-    </div>
-    
-    <div style='background:lightgreen;' class="exemple">
-    <h1>balise NUAGE_TAGS_ARTICLE_DETAILS</h1><hr />   
-    #NUAGE_TAGS_ARTICLE_DETAILS
-    </div>
-    
-    <div style='background:lightblue'  class="exemple">
-  	<h1>BOUCLE SPIPICIOUS</h1><hr /> 
-  	<BOUCLE_f(SPIPICIOUS){id_article}>id_article:#ID_ARTICLE - mot: #ID_MOT  - auteur:#ID_AUTEUR<br /></BOUCLE_f>
-  	</div>
-    
-    <!----- extra SPIPICIOUS ---->
 
 		[(#REM) Contenu principal : contenu de l'article ]
 		<div id="contenu">
 
-			<div class="cartouche">
-				<h1 class="titre">#TITRE</h1>
-				[<p class="soustitre">(#SOUSTITRE)</p>]
-
-
-				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
-
-
-			</div>
-			
-			#DEBUT_SURLIGNE
-			[<div class="chapo">(#CHAPO)</div>]
-			<br class="nettoyeur" />
-			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			[<div class="texte">(#TEXTE|image_reduire{520,0})</div>]
-			#FIN_SURLIGNE
-
-
+		<div>
+    		<h1>FORMULAIRE_SPIPICIOUS_AJAX</h1>
+	  		#FORMULAIRE_SPIPICIOUS_AJAX
+	  	</div>
 
 		</div><!-- fin contenu -->
 
 
-			
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<B_articles_rubrique>
+			<div class="breves">
+				<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+				<ul>
+					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_articles_rubrique>
+				</ul>
+			</div>
+			</B_articles_rubrique>
+
+			[(#REM) Menu de navigation mots-cles ]
+			#MODELE{article_mots}
 
 		</div><!-- fin navigation -->
 
 	</div><!-- fin conteneur -->
 
-
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
 </div><!-- fin page -->
 </body>

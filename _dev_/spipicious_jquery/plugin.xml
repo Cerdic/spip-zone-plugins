@@ -1,15 +1,14 @@
 <plugin>
 	<nom>spip.icio.us</nom>
 	<auteur>[erational->http://www.erational.org]
-_ &copy; 2006 - Licence GPL
-_ La partie Ajax est de Pierre Andrews sous licence GPL 
-_ Prototype est de Sam Stephenson (voir la licence) 
+_ &copy; 2006-2007 - Licence GPL 
 	</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description><multi>
 	  [fr]Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) sur les articles de SPIP &#224; la fa&ccedil;on d'un [del.icio.us->http://del.icio.us/]
 _ N&#233cessite le plugin balise_session
+_ N&#233cessite le plugin s&#233;lecteur g&#233;n&#233;rique
 - Les mots-cl&#233;s sont ajout&#233;s dans un groupe d&#233;di&#233; {{- tags -}}
 - voir les fichiers exemples pour voir les nouvelles balises et boucles
 	  [en] A suspicous tag allowing visitors to tag SPIP articles</multi> 
