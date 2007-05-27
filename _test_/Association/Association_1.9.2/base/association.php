@@ -35,36 +35,6 @@ $spip_asso_categories_key = array(
 $tables_principales['spip_asso_categories'] = array(
 		'field' => &$spip_asso_categories, 
 		'key' => &$spip_asso_categories_key);
-		
-//-- Table PROFIL ASSOCIATION ------------------------------------------						
-$spip_asso_profil = array(
-						"id_profil" 	=> "BIGINT(21) NOT NULL AUTO_INCREMENT",
-						"nom" 		=> "TINYTEXT NOT NULL",
-						"numero" 		=> "TINYTEXT NOT NULL",
-						"rue" 			=> "TINYTEXT NOT NULL",
-						"cp" 			=> "TINYTEXT NOT NULL",
-						"ville" 			=> "TINYTEXT NOT NULL",
-						"telephone" 	=> "TINYTEXT",
-						"siret" 		=> "TINYTEXT",
-						"declaration" 	=> "TINYTEXT",
-						"prefet" 		=> "TINYTEXT",
-						"president" 	=> "TINYTEXT",
-						"maj" 			=> "timestamp(14) NOT NULL",
-						"mail"			=> "TINYTEXT NOT NULL",
-						"dons" 		=> "TINYTEXT",
-						"ventes" 		=> "TINYTEXT",
-						"comptes" 	=> "TINYTEXT",
-						"activites"		=>"TINYTEXT",
-						"indexation"	=>"TINYTEXT"
-						);
-
-$spip_asso_profil_key = array(
-						"PRIMARY KEY" => "id_profil"
-						);
-
-$tables_principales['spip_asso_profil'] = array(
-		'field' => &$spip_asso_profil, 
-		'key' => &$spip_asso_profil_key);
 
 //-- Table ADHERENTS ------------------------------------------
 $spip_asso_adherents = array(
@@ -247,7 +217,6 @@ $tables_principales['spip_asso_activites'] = array(
 //	$tables_jointures['spip_bienfaiteurs'][]= 'adherents';
 //	$tables_jointures['spip_ventes'][]= 'banque';
 //	$tables_jointures['spip_banque'][]= 'ventes';
-//	$tables_jointures['spip_profil'][]= 'profil';	
 
 //-- Table des tables ----------------------------------------------------
 
@@ -256,7 +225,6 @@ global $table_des_tables;
 	$table_des_tables['asso_bienfaiteurs'] = 'asso_bienfaiteurs';
 	$table_des_tables['asso_ventes'] = 'asso_ventes';
 	$table_des_tables['asso_comptes'] = 'asso_comptes';
-	$table_des_tables['asso_profil'] = 'asso_profil';
 	$table_des_tables['asso_categories'] = 'asso_categories';
      $table_des_tables['asso_financiers'] = 'asso_financiers';
 	$table_des_tables['asso_livres'] = 'asso_livres';

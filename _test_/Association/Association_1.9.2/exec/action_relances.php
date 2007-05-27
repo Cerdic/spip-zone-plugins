@@ -38,17 +38,17 @@ $statut_tab=(isset($_POST["statut"])) ? $_POST["statut"]:array();
 $relance_tab=(isset($_POST["relance"])) ? $_POST["relance"]:array();
 $count=count ($email_tab);
 
-$query = spip_query ("SELECT * FROM spip_asso_profil WHERE id_profil=1");
 
-while ($data = mysql_fetch_assoc($query)){
 //On prépare le mail et on envoi! On peut modifier le $headers à sa guise
-$expediteur = $data['nom']." <".$data['mail'].">";       //expéditeur Association
+$nomasso=lire_config('association/nom');
+$adresse=lire_config('association/email');
+$expediteur=$nomasso.'<'.$adresse.'>';      //expéditeur Association
 $entetes .= "Reply-To: ".$data['mail']."\n";      // réponse automatique à Association
 $entetes .= "X-Mailer: PHP/" . phpversion();         // mailer
 $entete .= "MIME-Version: 1.0\n";
 $entete .= "Content-Type: text/plain; charset=$charset\n";	// Type Mime pour un message au format HTML
 $entete .= "Content-Transfer-Encoding: 8bit\n";
-$entetes .= "X-Sender: < ".$data['mail'].">\n";   } 
+$entetes .= "X-Sender: < ".$adresse.">\n";
 $entetes .= "X-Priority: 1\n";                // Message urgent ! 
 $entetes .= "X-MSMail-Priority: High\n";         // définition de la priorité
 //$entetes .= "Return-Path: < webmaster@ >\n"; // En cas d' erreurs 

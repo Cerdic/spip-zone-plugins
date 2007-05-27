@@ -45,12 +45,9 @@ function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_dyn() {
 	if ($bouton=='Confirmer'){	
 		//on envoit des emails
 		
-		$query = spip_query( " SELECT * FROM spip_asso_profil " );
-		while ($data = spip_fetch_array($query)) {
-			$nomasso=$data['nom'];
-			$adresse=$data['mail'];
-			$expediteur=$nomasso.'<'.$adresse.'>';
-		}		
+		$nomasso=lire_config('association/nom');
+		$adresse=lire_config('association/email');
+		$expediteur=$nomasso.'<'.$adresse.'>';		
 		$entete .= "Reply-To: ".$data['mail']."\n";     					 // réponse automatique à Association
 		$entete .= "MIME-Version: 1.0\n";
 		$entete .= "Content-Type: text/plain; charset=$charset\n";	// Type Mime pour un message au format HTML

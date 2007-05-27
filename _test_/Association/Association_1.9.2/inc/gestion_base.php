@@ -57,6 +57,12 @@ function association_verifier_base(){
 		ecrire_meta('asso_base_version',$current_version=0.50);
 		}
 		
+		if ($current_version<0.60){
+		spip_query("DROP TABLE spip_asso_profil  ");
+		
+		ecrire_meta('asso_base_version',$current_version=0.60);
+		}		
+		
 		ecrire_metas();
 	}
 /*

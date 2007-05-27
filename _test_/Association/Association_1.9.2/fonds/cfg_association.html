@@ -1,0 +1,70 @@
+[(#REM) titre=Configuration du plugin Association»]
+
+<!-- descriptif=Cette zone permet de configurer les variables de base du plugin.-->
+
+#CACHE{0}
+
+<:asso:titre_page_config|gros_titre{'',''}:>
+
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+	<br />
+
+	<!-- Informations sur l'association -->
+	<fieldset>
+		<legend><:asso:config_info_asso:></legend>
+				<label for="nom"><strong><:asso:config_libelle_nom:></strong></label>
+		<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class='formo'/>
+		<label for="rue"><strong><:asso:config_libelle_rue:></strong></label>
+		<textarea name="rue" id="rue"  class='formo'/>[(#ENV{rue})]</textarea>
+		<label for="cp"><strong><:asso:config_libelle_codepostal:></strong></label>
+		<input type="text" name="cp" [value="(#ENV{cp})"] id="cp"  class='formo'/>
+		<label for="ville"><strong><:asso:config_libelle_ville:></strong></label>
+		<input type="text" name="ville" [value="(#ENV{ville})"] id="ville"  class='formo'/>	
+		<label for="email"><strong><:asso:config_libelle_email:></strong></label>
+		<input type="text" name="email" [value="(#ENV{email})"] id="email"  class='formo'/>
+		<label for="telephone"><strong><:asso:config_libelle_telephone:></strong></label>
+		<input type="text" name="telephone" [value="(#ENV{telephone})"] id="telephone"  class='formo'/>
+		<label for="siret"><strong><:asso:config_libelle_siret:></strong></label>
+		<input type="text" name="siret" [value="(#ENV{siret})"] id="siret"  class='formo'/>
+		<label for="declaration"><strong><:asso:config_libelle_declaration:></strong></label>
+		<input type="text" name="declaration" [value="(#ENV{declaration})"] id="declaration"  class='formo'/>
+		<label for="prefet"><strong><:asso:config_libelle_prefet:></strong></label>
+		<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet"  class='formo'/>
+	</fieldset>
+
+	<!-- Options du plugin -->
+	<fieldset>
+	<legend><:asso:config_info_plugin:></legend>
+	<label>
+			<input type="checkbox" name="dons" [checked="(#ENV{dons}?{checked})"] id="dons" />
+			<strong><:asso:config_libelle_dons:></strong> 
+		</label>
+		<br />
+		<label>
+			<input type="checkbox" name="ventes" [checked="(#ENV{ventes}?{checked})"] id="ventes" />
+			<strong><:asso:config_libelle_ventes:></strong> 
+		</label>
+		<br />
+		<label>
+			<input type="checkbox" name="comptes" [checked="(#ENV{comptes}?{checked})"] id="comptes" />
+			<strong><:asso:config_libelle_comptes:></strong> 
+		</label>
+		<br />
+		<label>
+			<input type="checkbox" name="activites" [checked="(#ENV{activites}?{checked})"] id="activites" />
+			<strong><:asso:config_libelle_activites:></strong> 
+		</label>
+		<br />
+		<label for="indexation"><strong><:asso:config_libelle_indexation:></strong></label>
+		<input type="radio" name="indexation" value="num" [checked="(#ENV{indexation}|=={num}|?{checked})"] id="indexation" /><:asso:config_libelle_id_adherent:>
+		<input type="radio" name="indexation" value="ref" [checked="(#ENV{indexation}|=={ref}|?{checkted})"] id="indexation" /><:asso:config_libelle_id_asso:>
+	</fieldset>
+
+<div><input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" /></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+</form>
+
+

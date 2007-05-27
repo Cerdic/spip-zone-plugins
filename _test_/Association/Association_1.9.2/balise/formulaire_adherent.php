@@ -45,12 +45,9 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	if ($bouton=='Confirmer'){	
 		//on envoit des emails si tout est contrôlé et confirmé
 		
-		$query = spip_query( " SELECT * FROM spip_asso_profil WHERE id_profil=1" );
-		while ($data = spip_fetch_array($query)) {
-			$nomasso=$data['nom'];
-			$adresse=$data['mail'];
-			$expediteur=$nomasso.'<'.$adresse.'>';
-		}		
+		$nomasso=lire_config('association/nom');
+		$adresse=lire_config('association/email');
+		$expediteur=$nomasso.'<'.$adresse.'>';		
 		$entete .= "Reply-To: ".$data['mail']."\n";     					 // réponse automatique à Association
 		$entete .= "MIME-Version: 1.0\n";
 		$entete .= "Content-Type: text/plain; charset=$charset\n";	// Type Mime pour un message au format HTML
@@ -77,13 +74,6 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		$adresse= $mail;
 		$message= "Bonjour ".$prenom."\n\n\nVous venez de demander votre inscription &agrave; l'association ".$nomasso."\nNous allons prendre contact avec vous tr&egrave;s rapidement.\n\nAvec nos remerciements. \n\n\nLe bureau de ".$nomasso."\r\n";
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
-		
-		
-		if(!function_exists(_q)){
-		function _q($a) {
-			return (is_int($a)) ? strval($a) : ("'" . addslashes($a) . "'");
-			}
-		}
 		
 		//on enregistre les données dans la table
 		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, categorie, statut, remarques, creation) 
