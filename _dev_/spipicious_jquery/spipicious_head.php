@@ -58,14 +58,6 @@ function spipicious_preparer_page($page, $droits, $wdgcfg = array()) {
 			function(li) {
 			if (li.id > 0) {
 					jQuery(me)
-					.attr('name', 'old_value')
-					.parents('form')
-					.append(
-						jQuery("<input type='hidden' name='nouv_mot' value='"+li.id+"' />"
-						)
-					)
-					.find("input[@type=submit]")
-						.click()
 					.end();
 				}
 			}
