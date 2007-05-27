@@ -34,7 +34,7 @@ Definissez ensuite dans ecrire/mes_options.php :
 	// config cfg ?
 	(function_exists('lire_config') && $cfg = lire_config('urls_libres')) ||
 	($cfg = array('mode_direct' => '', 'term_html' => '', 'debut_url' => '', 'fin_url' => ''));
-spip_log($cfg, 'mon');
+
 	// pour compatibilite
 	define('_terminaison_urls_propres', $cfg['fin_url'] . ($cfg['term_html'] ? '.html' : ''));
 	define('_debut_urls_propres',
