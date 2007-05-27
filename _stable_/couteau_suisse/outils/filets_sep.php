@@ -46,7 +46,7 @@ function filets_sep_rempl($texte) {
 
 	// On remplace les balises filets numeriques dans le texte par le code HTML correspondant.
 	while (preg_match($modele_nombre, $texte))
-		$texte = preg_replace($modele_nombre,'$1<html><p class="spip filet_sep filet_sep_$2">&nbsp; &nbsp; &nbsp;</p></html>$3',$texte); 
+		$texte = preg_replace($modele_nombre,'$1<p class="spip filet_sep filet_sep_$2">&nbsp; &nbsp; &nbsp;</p>$3',$texte); 
 	if (strpos($texte, '__')===false) return $texte;
 
 	// On remplace les balises filets images dans le texte par le code HTML correspondant.
