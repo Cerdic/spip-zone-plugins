@@ -49,8 +49,11 @@ cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 //			else $len=strlen(strval($valeur));
 		$ok_input = $label .
 			( $lignes < 2
-				?"<input name='HIDDENTWEAKVAR__$variable' value=\"".htmlspecialchars($valeur)."\" type='text' size='$len' $width/>"
-				:"<textarea rows='$lignes' name='HIDDENTWEAKVAR__$variable' $width/>".htmlspecialchars($valeur).'</textarea>'
+				// <html></html> empechera SPIP de modifier le contenu des <input> ou <textarea>
+				?"<html><input name='HIDDENTWEAKVAR__$variable' value=\""
+					. htmlspecialchars($valeur) . "\" type='text' size='$len' $width/></html>"
+				:"<html><textarea rows='$lignes' name='HIDDENTWEAKVAR__$variable' $width/>"
+					. htmlspecialchars($valeur) . '</textarea></html>'
 			) . _VAR_OUTIL;
 		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('cout:variable_vide'));
 	}
