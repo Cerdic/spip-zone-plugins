@@ -33,7 +33,7 @@ function _store_url($url, $type, $id_objet, $prefix = '', $version)
 function _generer_url_libre($type, $id_objet, $prefix = '',
 						$opt = array('args' => '', 'ancre' => ''))
 {
-	spip_log('_generer_url_libre("' . $type . '",' . $id_objet . ',"' . $prefix .'")');
+	spip_log('_generer_url_libre("' . $type . '",' . $id_objet . ',"' . $prefix .'")', 'urls');
 	static $priotype = array(
 		'article'=>0, 'rubrique'=>1, 'mot'=>2, 'auteur'=>3,
 		'site'=>4, 'syndic'=>5, 'breve'=>6);
@@ -165,7 +165,7 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 
 	spip_release_lock($lock);
 
-	spip_log("Creation de l'url propre '$url' pour $col_id=$id_objet");
+	spip_log("Creation de l'url propre '$url' pour $col_id=$id_objet", 'urls');
 
 	return finir_url_libre_dist($url, $opt);
 }

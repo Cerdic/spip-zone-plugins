@@ -128,7 +128,7 @@ function recuperer_parametres_url(&$fond, $url) {
 			// generer les 1, 2 ou 3 spip_urls pour la prochaine fois
 			if (function_exists($fun = 'generer_url_' . $type)) {
 				$gurl = $fun($row[$col_id]);
-				spip_log('url libre generee sur demande: ' . $gurl);
+				spip_log('url libre generee sur demande: ' . $gurl, 'urls');
 			}
 		}
 	}
