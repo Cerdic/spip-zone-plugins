@@ -222,6 +222,16 @@ function boucle_ASSO_ACTIVITES($id_boucle, &$boucles) {
         return calculer_boucle($id_boucle, $boucles);
 }
 
+function association_auteur_infos($id='', $nom='') {
+	if ($id) $query = "SELECT * FROM spip_asso_adherents WHERE id_auteur=$id";
+	if ($nom) $query = "SELECT * FROM spip_asso_adherents WHERE nom='$nom'";
+	$result = spip_query($query);
+
+	if ($row = spip_fetch_array($result)) {
+		$row=serialize($row);
+	}
+	return $row;
+}
 	// Page blanche //include_spip('base/association');
 	//include_spip('inc/plugin');
 function association_header_prive($flux){
@@ -248,8 +258,7 @@ function association_date_du_jour($heure=false) {
 }
 
 //Creation d'un login
-function association_cree_login($email) {
-     $login = substr($email, 0, strpos($email, "@"));
+function association_cree_login($nom) {
      $login = strtolower($login);
      $login = ereg_replace("[^a-zA-Z0-9]", "", $login);     
 		

@@ -88,10 +88,10 @@ function exec_action_adherents() {
 		}
 		
 // Inscription visiteur
-		if( email_valide($email) || empty($email) ){
+		if( email_valide($email) ){
 			$pass = creer_pass_aleatoire(8, $email);
-			$nom_inscription =  association_cree_login($email);                                  
-			$login = association_cree_login($email);
+			$nom_inscription =  $prenom.' '.$nom;                                  
+			$login = association_cree_login($nom);
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);
 			$statut = '6forum' ;
