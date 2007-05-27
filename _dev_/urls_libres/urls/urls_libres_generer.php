@@ -33,7 +33,6 @@ function _store_url($url, $type, $id_objet, $prefix = '', $version)
 function _generer_url_libre($type, $id_objet, $prefix = '',
 						$opt = array('args' => '', 'ancre' => ''))
 {
-	spip_log('_generer_url_libre("' . $type . '",' . $id_objet . ',"' . $prefix .'")', 'urls');
 	static $priotype = array(
 		'article'=>0, 'rubrique'=>1, 'mot'=>2, 'auteur'=>3,
 		'site'=>4, 'syndic'=>5, 'breve'=>6);
@@ -62,14 +61,9 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 	if (!($row = spip_fetch_array($result))) return ""; // objet inexistant
 
 	// A-t-on cette url ? Prendre la derniere version
-	$result = spip_query("SELECT url, version, maj FROM spip_urls
+	$result = spip_query("SELECT id_url, url, version, maj FROM spip_urls
 		WHERE type=$q_type AND id_objet=$id_objet ORDER BY version DESC LIMIT 1");
-	if (!($store = spip_fetch_array($result)) && $row['url_propre']) {
-		// objet non référencé
-		// se rappeler de cette version comme la plus ancienne ...
-		// meme si semblable aux genereration qui suivent
-		_store_url($row['url_propre'], $type, $id_object, '', -1);
-	}
+	$store = spip_fetch_array($result);
 
 	// Recalculer l'url-propre seulement si l'objet a change apres l'url libre
 	if ($store && $store['url'] && $store['maj'] >= $row['maj']) {
@@ -77,6 +71,13 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 	}
 
 	// Sinon, creer l'URL
+	spip_log('_generer_url_libre("' . $type . '",' . $id_objet . ',"' . $prefix .'")', 'urls');
+	if (!$store && $row['url_propre']) {
+		// objet sans reference dans urls libres
+		// se rappeler de cette version comme la plus ancienne ...
+		// meme si semblable aux genereration qui suivent
+		_store_url($row['url_propre'], $type, $id_object, '', -1);
+	}
 	include_spip('inc/filtres');
 	include_spip('inc/charsets');
 	$url = translitteration(corriger_caracteres(
@@ -109,6 +110,8 @@ function _generer_url_libre($type, $id_objet, $prefix = '',
 	// l'url a-t-elle change ?
 	$url_abs = $prefix . $url .	strrev($prefix);
 	if ($store && ($store['url'] == $url || $store['url'] == $url_abs)) {
+		// mettre a jour la date pour ne plus y revenir
+		spip_query('UPDATE spip_urls set maj=' . _q($row['maj']) . ' WHERE id_url=' . $store['id_url']);
 		return finir_url_libre_dist($store['url'], $opt);
 	}
 
