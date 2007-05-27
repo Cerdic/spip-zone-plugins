@@ -21,7 +21,7 @@ function action_cs_travaux(){
 	include_spip('inc/charsets');
 	include_spip('inc/texte');
 	$page = minipres(
-		_T('info_travaux_titre'),
+		defined('_en_travaux_TITRE')?_T('info_travaux_titre'):$GLOBALS['meta']['nom_site'],
 		charset2unicode(propre(_en_travaux_MESSAGE))
 	);
 	// a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement

@@ -289,9 +289,16 @@ add_variable( array(
 	'lignes' => 3,
 	'code' => "define('_en_travaux_MESSAGE', %s);",
 ));
+add_variable( array(
+	'nom' => 'titre_travaux',
+	'format' => 'nombre',
+	'radio' => array(1 => 'cout:travaux_titre', 0 => 'cout:travaux_nom_site'),
+	'defaut' => 1,
+	'code:%s' => "define('_en_travaux_TITRE', %s);",
+));
 add_outil( array(
 	'id' => 'en_travaux',
-	'code:options' => "%%message_travaux%%\n%%admin_travaux%%",
+	'code:options' => "%%message_travaux%%\n%%admin_travaux%%\n%%titre_travaux%%",
 	'categorie' => 'admin',
 	'auteur' => '[Arnaud Ventre->ventrea@gmail.com]',
 ));

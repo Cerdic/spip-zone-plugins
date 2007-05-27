@@ -283,11 +283,13 @@ Vous pouvez choisir le type de remplacement :
 // ---------------------------------------------------------------------------
 	'en_travaux:nom' => 'Site en travaux',
 	'en_travaux:description' => "Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
-[[Votre message de maintenance :->%message_travaux%]][[Fermer le site public pour :->%admin_travaux%]]",
+[[Votre message de maintenance :->%message_travaux%]][[Titre du message :->%titre_travaux%]][[Fermer le site public pour :->%admin_travaux%]]",
 	'prochainement' => "Ce site sera r&eacute;tabli tr&egrave;s prochainement.
 _ Merci de votre compr&eacute;hension.",
 	'tous' => 'Tous',
 	'sauf_admin' => 'Tous, sauf les administrateurs',
+	'travaux_titre' => '<i>'._T('info_travaux_titre').'</i>',
+	'travaux_nom_site' => '<i>'.$GLOBALS['meta']['nom_site'].'</i>',
 	
 // ---------------------------------------------------------------------------
 	'glossaire:nom' => 'Glossaire interne',

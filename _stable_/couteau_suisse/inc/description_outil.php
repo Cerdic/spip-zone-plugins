@@ -55,7 +55,7 @@ cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 				:"<html><textarea rows='$lignes' name='HIDDENTWEAKVAR__$variable' $width/>"
 					. htmlspecialchars($valeur) . '</textarea></html>'
 			) . _VAR_OUTIL;
-		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;'._T('cout:variable_vide'));
+		$ok_valeur = $label.(strlen($valeur)?echapper_tags($valeur):'&nbsp;'._T('cout:variable_vide'));
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
