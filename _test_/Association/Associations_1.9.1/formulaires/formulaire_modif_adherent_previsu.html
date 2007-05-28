@@ -1,0 +1,100 @@
+<div class="spip_forms">
+<fieldset>
+<legend>Confirmer vos modifications</legend>
+<form action="#" method="POST">
+<input name="id" type="hidden" value="[(#ENV{id})]">
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="nom"><:asso:adherent_libelle_nom:> :</label>
+			[<span class="spip_form_erreur">(#ENV{erreur_nom})</span>]
+		</span>
+		<input name="nom" type="text" class="choix" size="40" value="[(#ENV{nom})]" /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="prenom"><:asso:adherent_libelle_prenom:> :</label>
+			[<span class="spip_form_erreur">(#ENV{erreur_prenom})</span>]
+		</span>
+		<input name="prenom" type="text" class="choix" size="40" value="[(#ENV{prenom})]"  /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="sexe"><:asso:adherent_libelle_sexe:> :</label></span>
+		<input name="sexe" type="radio" class="choix" value="H" [(#ENV{sexe}|=={H}|?{checked="checked"})] /> <:asso:adherent_libelle_masculin:>
+		<input name="sexe" type="radio" class="choix" value="F" [(#ENV{sexe}|=={F}|?{checked="checked"})] /> <:asso:adherent_libelle_feminin:>
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="mail"><:asso:adherent_libelle_email:> :</label>
+			[<span class="spip_form_erreur">(#ENV{erreur_email})</span>]
+		</span>
+		<input name="mail" type="text" class="choix" size="40" value="[(#ENV{mail})]" /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="rue"><:asso:adherent_libelle_adresse:> :</label> 
+			[<span class="spip_form_erreur">(#ENV{erreur_rue})</span>]
+		</span>
+		<textarea name="rue" class="choix" rows="2" cols="30" />[(#ENV{rue})]</textarea>
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="cp"><:asso:adherent_libelle_codepostal:> :</label>
+			[<span class="spip_form_erreur">(#ENV{erreur_cp})</span>]
+		</span>	
+		<input name="cp" type="text" class="choix" size="40" value="[(#ENV{cp})]" /> 
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="ville"><:asso:adherent_libelle_ville:> :</label> 
+			[<span class="spip_form_erreur">(#ENV{erreur_ville})</span>]
+		</span>
+		<input name="ville" type="text" class="choix" size="40" value="[(#ENV{ville})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'>
+			<label for="telephone"><:asso:adherent_libelle_telephone:> :</label>
+		</span>
+		<input name="telephone" type="text" id="telephone" size="40" value="[(#ENV{telephone})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="portable"><:asso:adherent_libelle_portable:> :</label></span>
+		<input name="portable" type="text" id="portable" size="40" value="[(#ENV{portable})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="naissance"><:asso:adherent_libelle_date_naissance:> :</label></span>
+		<input name="naissance" type="text" id="naissance" size="40" value="[(#ENV{naissance})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="profession"><:asso:adherent_libelle_profession:> :</label></span>
+		<input name="profession" type="text" id="profession" size="40" value="[(#ENV{profession})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="societe"><:asso:adherent_libelle_societe:> :</label></span>
+		<input name="societe" type="text" id="societe" size="40" value="[(#ENV{societe})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="utilisateur1"><:asso:adherent_libelle_utilisateur1:> :</label></span>
+		<input name="utilisateur1" type="text" id="utilisateur1" size="40" value="[(#ENV{utilisateur1})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="utilisateur2"><:asso:adherent_libelle_utilisateur2:> :</label></span>
+		<input name="utilisateur2" type="text" id="utilisateur2" size="40" value="[(#ENV{utilisateur2})]" />
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="utilisateur3"><:asso:adherent_libelle_utilisateur3:> :</label></span>
+		<input name="utilisateur3" type="text" id="utilisateur3" size="40" value="[(#ENV{utilisateur3})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="utilisateur4"><:asso:adherent_libelle_utilisateur4:> :</label></span>
+		<input name="utilisateur4" type="text" id="utilisateur4" size="40" value="[(#ENV{utilisateur4})]" />
+	</div>
+	<div class='spip_form_champs'>
+		<span class='spip_form_label'><label for="publication"><:asso:adherent_libelle_accord:> :</label></span>
+		<input name="publication" type="radio" class="choix" value="oui" [(#ENV{publication}|=={oui}|?{checked="checked"})] /> <:asso:adherent_libelle_oui:>
+		<input name="publication" type="radio" class="choix" value="non" [(#ENV{publication}|=={non}|?{checked="checked"})] /> <:asso:adherent_libelle_non:>
+	</div>
+	<div>
+		<input type="submit" name="bouton" class="spip_bouton" value="[(#ENV{bouton})]" />	
+	</div>
+</form>
+</fieldset>
+</div>
