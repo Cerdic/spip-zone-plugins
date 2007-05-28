@@ -4,6 +4,8 @@
 // Serieuse refonte et integration au Couteau Suisse : Patrice Vanneufville
 // Toutes les infos sur : http://www.spip-contrib.net/Plugin-glossaire
 
+charger_generer_url();  # pour generer_url_mot()
+
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
 	$r = spip_query("SELECT id_mot, titre, texte FROM spip_mots WHERE type='Glossaire'");
@@ -20,7 +22,7 @@ function cs_rempl_glossaire($texte) {
 	return $texte;
 }
 
-function glossaire_post_propre($texte) {
+function cs_glossaire($texte) {
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte);
 }
 

@@ -1,9 +1,8 @@
 <plugin>
 	<nom>Le Couteau Suisse</nom>
 	<icon>img/couteau-50.gif</icon>
-	<version>1.7.2.22 pour Spip 1.9 minimum.</version>
-	<auteur>	<!-- Auteur du plugin -->
- 	Patrice Vanneufville
+	<version>1.7.3.0 pour Spip 1.9 minimum.</version>
+	<auteur>Patrice Vanneufville
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->

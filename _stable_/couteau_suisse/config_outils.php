@@ -486,7 +486,8 @@ add_outil( array(
 add_outil( array(
 	'id' => 'glossaire',
 	'categorie'	 => 'typo-corr',
-	'pipeline:post_propre' => 'glossaire_post_propre',
+//	'pipeline:post_propre' => 'cs_glossaire',
+	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 ));
 
 // Idees d'ajouts :
