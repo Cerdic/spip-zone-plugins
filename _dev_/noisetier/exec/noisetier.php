@@ -63,9 +63,10 @@ function exec_noisetier_dist(){
 	fin_boite_info();
 
 	// Raccourcis
-	$res = icone_horizontale(_T('noisetier:gestion_base_distribution'), generer_url_ecrire("noisetier_distribution",""), "../"._DIR_PLUGIN_NOISETIER."/img_pack/distribution-24.png", "rien.gif",false);
+	$res = icone_horizontale(_T('noisetier:gestion_distribution'), generer_url_ecrire("noisetier_distribution",""), "../"._DIR_PLUGIN_NOISETIER."/img_pack/distribution-24.png", "rien.gif",false);
+	$res .= icone_horizontale(_T('noisetier:maj_noisettes'), generer_url_ecrire("noisetier_majnoisettes",""), "../"._DIR_PLUGIN_NOISETIER."/img_pack/maj-24.png", "rien.gif",false);
 	$res .= icone_horizontale(_T('noisetier:gestion_mots'), generer_url_ecrire("noisetier_mots",""), "groupe-mot-24.gif", "rien.gif",false);
-	echo bloc_des_raccourcis($res);
+	if (autoriser('gerer','noisetier')) echo bloc_des_raccourcis($res);
 
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'noiseteir'),'data'=>''));
 
