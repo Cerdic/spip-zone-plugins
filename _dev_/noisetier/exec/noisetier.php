@@ -8,8 +8,9 @@ include_spip('options_noisetier');
 
 function exec_noisetier_dist(){
 	global $spip_lang_right;
-	global $theme_titre, $theme_descriptif, $theme_zones, $noisetier_pages, $noisetier_description_pages, $page;
+	global $theme_titre, $theme_descriptif, $theme_zones, $noisetier_pages, $noisetier_description_pages;
 
+	$page = _request('page');
 	if (!isset($page)) $page='';
 
 	$theme_zones['head']['nom'] = "head";
