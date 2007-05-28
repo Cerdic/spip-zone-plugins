@@ -52,18 +52,18 @@ function demarrer_site($site = '', $options = array()) {
 		_DIR_RESTREINT
 	);
 
+	if (is_dir($e.'squelettes'))
+		$GLOBALS['dossier_squelettes'] = $e.'squelettes';
+
+	if (is_readable($f = $e._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')) 
+		include($f); // attention cet include n'est pas en globals
+
 	spip_initialisation(
 		($e . _NOM_PERMANENTS_INACCESSIBLES),
 		($e . _NOM_PERMANENTS_ACCESSIBLES),
 		($e . _NOM_TEMPORAIRES_INACCESSIBLES),
 		($e . _NOM_TEMPORAIRES_ACCESSIBLES)
 	);
-
-	if (is_dir($e.'squelettes'))
-		$GLOBALS['dossier_squelettes'] = $e.'squelettes';
-
-	if (is_readable($f = $e._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')) 
-		include($f); // attention cet include n'est pas en globals
 
 }
 

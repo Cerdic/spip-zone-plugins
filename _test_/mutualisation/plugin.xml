@@ -12,7 +12,7 @@
 		dev
 	</etat>
 	<description>
-		Ce plugin contient quelques fonctions facililtant la mutualisation de sites : notamment <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> et <code>mutualiser_creer()</code>.
+		Ce plugin contient quelques fonctions facilitant la mutualisation de sites : notamment <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> et <code>mutualiser_creer()</code>.
 
 		Attention ce plugin ne s'installe pas comme les autres (cf. documentation).
 	</description>
