@@ -115,7 +115,7 @@ function exec_action_adherents() {
 		else {
 			echo '<p><strong>'._T('asso:adherent_message_email_invalide').'</strong></p>';
 			echo '<p>';
-			icone(_T('asso:bouton_retour'), 'javascript:history.go(-1)', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
+			icone(_T('asso:bouton_retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
 			echo '</p>';
 		}
 	}
