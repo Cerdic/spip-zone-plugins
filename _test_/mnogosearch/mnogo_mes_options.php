@@ -50,6 +50,8 @@ function critere_recherche($idb, &$boucles, $crit) {
 function mnogo_querystring($recherche,$debut,$nombre){
 	$default_qs=array('q'=>'','m'=>'bool','wm'=>'wrd','sp'=>1,'sy'=>1,'wf'=>'2221','type'=>'','ul'=>'','fmt'=>'xml','np'=>0,'ps'=>10,'GroupBySite'=>'no');
 	$key_translate = array('recherche'=>'q','site'=>'ul');
+	if (isset($GLOBALS['mnogosearch_default_qs']))
+		$default_qs = $GLOBALS['mnogosearch_default_qs'];
 
 	foreach($_REQUEST as $key=>$value){
 		if (isset($key_translate[$key]))
@@ -75,6 +77,7 @@ function mnogo_formate_recherche($recherche){
 	$recherche = trim($recherche);
 	$recherche = preg_replace(',\s(ET|AND)\s,',' & ',$recherche);
 	$recherche = preg_replace(',\s(OU|OR)\s,',' | ',$recherche);
+	$recherche = preg_replace(',\s(PAS|NOT)\s,',' ~ ',$recherche);
 	$recherche = preg_replace(',\s(?=\s),','',$recherche);
 	return $recherche;
 }
@@ -92,8 +95,9 @@ function hash_where($recherche=NULL){
 	// alors qu'en MySQL 4.1 c'est interdit !
 	$vers = spip_query("SELECT VERSION() AS v");
 	$vers = spip_fetch_array($vers);
-	if (substr($vers['v'], 0, 1) >= 4
-	AND substr($vers['v'], 2, 1) >= 1 )
+	if ((substr($vers['v'], 0, 1) >= 4
+		AND substr($vers['v'], 2, 1) >= 1 )
+		OR substr($vers['v'], 0, 1) >= 5)
 		return  "HEX(hash)='$h'";
 	else
 		return "hash=0x$h";
