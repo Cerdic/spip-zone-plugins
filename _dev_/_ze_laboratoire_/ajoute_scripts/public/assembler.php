@@ -123,7 +123,7 @@ function assembler_page ($fond) {
 		$page['entetes']["Connection"] = "close";
 		$page['texte'] = "";
 	} else {
-		if (!$use_cache)  {
+    if (!$use_cache)  {
 			if (isset($page['contexte'])){
 				// Remplir les globals pour les boutons d'admin
 				foreach ($page['contexte'] as $var=>$val)
@@ -152,7 +152,7 @@ function assembler_page ($fond) {
 				// Si la page est vide, produire l'erreur 404 ou message d'erreur pour les inclusions
 				if (trim($page['texte']) === ''
 				AND $var_mode != 'debug') {
-					$page = message_erreur_404();
+          $page = message_erreur_404();
 				}
 				// pas de cache client en mode 'observation'
 				if ($var_mode) {
@@ -411,15 +411,16 @@ function analyse_js_ajoutee($page) {
   $scripts_fichier = $page['insert_js_fichier'];
   $scripts_inline = $page['insert_js_inline'];
   $scripts_a_ajouter = array();
-  foreach($scripts_fichier as $nom => $script) 
-    if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
-      //ajoute script fichier
-      if(is_array($script)) 
-        foreach($script as $code) 
-          push_script($scripts_a_ajouter,$code);
-      else
-        push_script($scripts_a_ajouter,$script);
-    }
+  if(is_array($scripts_fichier))
+    foreach($scripts_fichier as $nom => $script) 
+      if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
+        //ajoute script fichier
+        if(is_array($script)) 
+          foreach($script as $code) 
+            push_script($scripts_a_ajouter,$code);
+        else
+          push_script($scripts_a_ajouter,$script);
+      }
   //ajoute le scripts trouvee
   if(count($scripts_a_ajouter)) {
     $scripts_a_ajouter = join("|",$scripts_a_ajouter);
@@ -428,15 +429,16 @@ function analyse_js_ajoutee($page) {
     $corps = substr_replace($corps,$params,$pos_script,strlen($appelle));
   }  
   $scripts_a_ajouter = array();
-  foreach($scripts_inline as $nom => $script) 
-    if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
-      //ajoute script inline
-      if(is_array($script)) 
-        foreach($script as $code) 
-          push_script($scripts_a_ajouter,$code,true);
-      else
-        push_script($scripts_a_ajouter,$script,true);    
-    }
+  if(is_array($scripts_fichier))
+    foreach($scripts_inline as $nom => $script) 
+      if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
+        //ajoute script inline
+        if(is_array($script)) 
+          foreach($script as $code) 
+            push_script($scripts_a_ajouter,$code,true);
+        else
+          push_script($scripts_a_ajouter,$script,true);    
+      }
   //trouve les textes ajoutee par les squelettes et les enleve depuis le $corps
   collecte_cle_head($page['contexte']['cle_head']);
   $scripts_collecte = collecte_head_squelette($corps); 
