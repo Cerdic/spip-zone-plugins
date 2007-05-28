@@ -19,7 +19,7 @@
     <icon>plugin-24.gif</icon>
 
     <fonctions>association_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
-	<!--<options>association_options.php</options>		 <!-- fichier charge a chaque hit -->
+	<!--<options>association_options.php</options>-->		 <!-- fichier charge a chaque hit -->
 
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
