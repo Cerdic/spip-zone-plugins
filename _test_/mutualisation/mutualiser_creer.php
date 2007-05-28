@@ -18,6 +18,35 @@ function mutualiser_creer($e, $options) {
 	include_spip('inc/minipres');
 	$GLOBALS['meta']["charset"] = 'utf-8'; // pour que le mail fonctionne
 
+	if ($options['code']) {
+		$secret = md5($code.$options['code']);
+
+		if ($options['code'] != $_REQUEST['code_activation']
+		AND $_COOKIE['mutu_code_activation'] != $secret) {
+			echo minipres(
+				_L('Installation de votre site SPIP'),
+				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
+			
+				(isset($_REQUEST['code_activation'])
+					? _L('Erreur...')
+					: ''
+				) .
+
+				'<h3>'.
+				_L('Veuillez entrer le code d\'activation du site :').
+				'</h3>'.
+
+				"<form method='post' action='".self()."'>
+				<input type='text' name='code_activation' size='10' />
+				<input type='submit' value='ok' />
+				</form>
+				"
+			);
+			exit;
+		} else {
+			setcookie('mutu_code_activation', $secret);
+		}
+	}
 
 	if ($options['creer_base']) {
 

@@ -26,6 +26,7 @@ function demarrer_site($site = '', $options = array()) {
 			'creer_site' => false,
 			'creer_base' => false,
 			'mail' => '',
+			'code' => 'ecureuil', // code d'activation par defaut
 			'table_prefix' => false,
 			'cookie_prefix' => false,
 			'repertoire' => 'sites'
