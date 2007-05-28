@@ -325,8 +325,8 @@ function handler(event) { var e=(event||window.event) //w3||ie
 
 		var saisie = tags.pop() ;
 		
-		var is_text = new RegExp('^[A-Za-z0-9]+$');
-		var re = new RegExp('^'+saisie+'[A-Za-z0-9]+$' , 'gi');
+		var is_text = new RegExp('^[A-Za-z0-9 ихйюабдглмноясртжзышэ-]+$', 'gi');
+		var re = new RegExp('^'+saisie+'[A-Za-z0-9 ихйюабдглмноясртжзышэ-]+$' , 'gi');
 		
 		if(saisie.match(is_text)){
 
