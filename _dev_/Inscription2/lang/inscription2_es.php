@@ -19,6 +19,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'inserez_infos' => 'Ingrese los datos solicitados',
 
+'form' => 'Formulario',
+'fiche' => 'Ficha',
+'fiche_mod' => 'Modificable',
+'table' => 'Tabla',
+'form_expl' => ': El campo ser&aacute; mostrado en el formulario INSCRIPTION2',
+'fiche_expl'=> ': El campo ser&aacute; visible en la ficha de adherente',
+'fiche_mod_expl' => ': El campo ser&aacute; visible y modificable en la ficha de adherente, con la condicion de tener instalado el plugin CRAYONS',
+'table_expl' => ': El campo estar&aacute; presente en la tabla de adherentes (espacio privado)',
+
 'icone_menu_config' => 'Inscripci&oacute;n2',
 'nom' => 'Apellido',
 'prenom' => 'Nombre',

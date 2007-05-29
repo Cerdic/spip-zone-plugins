@@ -21,7 +21,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	//recuperer les infos inserées par le visiteur
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
-		if($val!='' and $cle != 'naissance')
+		if($val!='' and $cle != 'naissance' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle))
 			$var_user[$cle] = _request($cle);
 		if($cle == 'naissance')
 			$var_user[$cle] = _request('annee').'-'._request('mois').'-'._request('jour');

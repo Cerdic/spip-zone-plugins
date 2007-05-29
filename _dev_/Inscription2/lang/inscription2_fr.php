@@ -19,6 +19,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'inserez_infos' => 'Veuillez inserez les informations demand&eacute;s',
 
+'form' => 'Formulaire',
+'fiche' => 'Fiche',
+'fiche_mod' => 'Modifiable',
+'table' => 'Table',
+'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire INSCRIPTION2',
+'fiche_expl'=> ' : Le champ sera visible sur la fiche d\'adherent',
+'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par le propre adherent &agrave; condition d\'utiliser CRAYONS',
+'table_expl' => ' : Le champ sera affich&eacute; sur la liste des adherents (espace priv&eacute;)',
+
 'icone_menu_config' => 'Inscription2',
 'nom' => 'Nom',
 'prenom' => 'Prenom',

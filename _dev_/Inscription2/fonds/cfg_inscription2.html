@@ -46,88 +46,285 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <legend>
 	<:inscription2:info_perso:>
 </legend>
-<p>
 <:inscription2:info_perso_desc:>
 <br /><br />
 
-<label>
-	<input type="checkbox" name="prenom" [checked="(#ENV{prenom}?{checked})"] id="prenom" />
+<table>
+<tr>
+<td />
+<td width='70'> <:inscription2:form:> </td>
+<td width='70'> <:inscription2:fiche:> </td>
+<td width='70'> <:inscription2:fiche_mod:> </td>
+<td width='70'> <:inscription2:table:> </td>
+</tr><tr>
+<td>
 	<strong><:inscription2:prenom:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="login" [checked="(#ENV{login}?{checked})"] id="login" />
+</td><td>
+	<label>
+		<input type="checkbox" name="prenom" [checked="(#ENV{prenom}?{checked})"] id="prenom" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="prenom_fiche" [checked="(#ENV{prenom_fiche}?{checked})"] id="prenom_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="prenom_fiche_mod" [checked="(#ENV{prenom_fiche_mod}?{checked})"] id="prenom_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="prenom_table" [checked="(#ENV{prenom_table}?{checked})"] id="prenom_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:user:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="naissance" [checked="(#ENV{naissance}?{checked})"] id="naissance" />
+</td><td>
+	<label>
+		<input type="checkbox" name="login" [checked="(#ENV{login}?{checked})"] id="login" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="login_fiche" [checked="(#ENV{login_fiche}?{checked})"] id="login_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="login_fiche_mod" [checked="(#ENV{login_fiche_mod}?{checked})"] id="login_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="login_table" [checked="(#ENV{login_table}?{checked})"] id="login_table" />
+	</label>
+</td>
+</tr><tr>	
+<td>
 	<strong><:inscription2:naissance:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="sexe" [checked="(#ENV{sexe}?{checked})"] id="sexe" />
+</td><td>
+	<label>
+		<input type="checkbox" name="naissance" [checked="(#ENV{naissance}?{checked})"] id="naissance" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="naissance_fiche" [checked="(#ENV{naissance_fiche}?{checked})"] id="naissance_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="naissance_fiche_mod" [checked="(#ENV{naissance_fiche_mod}?{checked})"] id="naissance_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="naissance_table" [checked="(#ENV{naissance_table}?{checked})"] id="naissance_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:sexe:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="adresse" [checked="(#ENV{adresse}?{checked})"] id="adresse" />
+</td><td>
+	<label>
+		<input type="checkbox" name="sexe" [checked="(#ENV{sexe}?{checked})"] id="sexe" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="sexe_fiche" [checked="(#ENV{sexe_fiche}?{checked})"] id="sexe_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="sexe_fiche_mod" [checked="(#ENV{sexe_fiche_mod}?{checked})"] id="sexe_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="sexe_table" [checked="(#ENV{sexe_table}?{checked})"] id="sexe_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:adresse:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="code_postal" [checked="(#ENV{code_postal}?{checked})"] id="code_postal" />
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse" [checked="(#ENV{adresse}?{checked})"] id="adresse" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_fiche" [checked="(#ENV{adresse_fiche}?{checked})"] id="adresse_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_fiche_mod" [checked="(#ENV{adresse_fiche_mod}?{checked})"] id="adresse_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_table" [checked="(#ENV{adresse_table}?{checked})"] id="adresse_table" />
+	</label>
+</td>
+</tr><tr>
+<td>	
 	<strong><:inscription2:code_postal:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="ville" [checked="(#ENV{ville}?{checked})"] id="ville" />
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal" [checked="(#ENV{code_postal}?{checked})"] id="code_postal" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_fiche" [checked="(#ENV{code_postal_fiche}?{checked})"] id="code_postal_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_fiche_mod" [checked="(#ENV{code_postal_fiche_mod}?{checked})"] id="code_postal_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_table" [checked="(#ENV{code_postal_table}?{checked})"] id="code_postal_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:ville:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="telephone" [checked="(#ENV{telephone}?{checked})"] id="telephone" />
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_form" [checked="(#ENV{ville_form}?{checked})"] id="ville_form" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_fiche" [checked="(#ENV{ville_fiche}?{checked})"] id="ville_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_fiche_mod" [checked="(#ENV{ville_fiche_mod}?{checked})"] id="ville_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_table" [checked="(#ENV{ville_table}?{checked})"] id="ville_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:telephone:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="fax" [checked="(#ENV{fax}?{checked})"] id="fax" />
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_form" [checked="(#ENV{telephone_form}?{checked})"] id="telephone_form" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_fiche" [checked="(#ENV{telephone_fiche}?{checked})"] id="telephone_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_fiche_mod" [checked="(#ENV{telephone_fiche_mod}?{checked})"] id="telephone_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_table" [checked="(#ENV{telephone_table}?{checked})"] id="telephone_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:fax:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="mobile" [checked="(#ENV{mobile}?{checked})"] id="mobile" />
+</td><td>
+	<label>
+		<input type="checkbox" name="fax" [checked="(#ENV{fax}?{checked})"] id="fax" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_fiche" [checked="(#ENV{fax_fiche}?{checked})"] id="fax_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_fiche_mod" [checked="(#ENV{fax_fiche_mod}?{checked})"] id="fax_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_table" [checked="(#ENV{fax_table}?{checked})"] id="fax_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:mobile:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="profession" [checked="(#ENV{profession}?{checked})"] id="profession" />
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile" [checked="(#ENV{mobile}?{checked})"] id="mobile" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_fiche" [checked="(#ENV{mobile_fiche}?{checked})"] id="mobile_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_fiche_mod" [checked="(#ENV{mobile_fiche_mod}?{checked})"] id="mobile_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_table" [checked="(#ENV{mobile_table}?{checked})"] id="mobile_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:profession:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="societe" [checked="(#ENV{societe}?{checked})"] id="societe" />
+</td><td>
+	<label>
+		<input type="checkbox" name="profession" [checked="(#ENV{profession}?{checked})"] id="profession" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="profession_fiche" [checked="(#ENV{profession_fiche}?{checked})"] id="profession_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="profession_fiche_mod" [checked="(#ENV{profession_fiche_mod}?{checked})"] id="profession_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="profession_table" [checked="(#ENV{profession_table}?{checked})"] id="profession_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:societe:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="secteur" [checked="(#ENV{secteur}?{checked})"] id="secteur" />
+</td><td>
+	<label>
+		<input type="checkbox" name="societe" [checked="(#ENV{societe}?{checked})"] id="societe" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="societe_fiche" [checked="(#ENV{societe_fiche}?{checked})"] id="societe_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="societe_fiche_mod" [checked="(#ENV{societe_fiche_mod}?{checked})"] id="societe_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="societe_table" [checked="(#ENV{societe_table}?{checked})"] id="societe_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:secteur:></strong>
-</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="secteur" [checked="(#ENV{secteur}?{checked})"] id="secteur" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="secteur_fiche" [checked="(#ENV{secteur_fiche}?{checked})"] id="secteur_fiche" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="secteur_fiche_mod" [checked="(#ENV{secteur_fiche_mod}?{checked})"] id="secteur_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="secteur_table" [checked="(#ENV{secteur_table}?{checked})"] id="secteur_table" />
+	</label>
+</td>
+</tr>
+</table>
 <br />
-</p>
+<small>
+<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
+<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
+<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
+<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
+</small>
 </fieldset>
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
