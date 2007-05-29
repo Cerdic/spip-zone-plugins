@@ -19,7 +19,7 @@ include_spip("inc/presentation");
 if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
 function exec_test_couteau_suisse() {
-cs_log("Début : exec_test_couteau_suisse()");
+cs_log("D&eacute;but : exec_test_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
@@ -54,7 +54,7 @@ cs_log("Fin   : exec_test_couteau_suisse()");
 // $textes est un tableau de chaines
 function cs_test_fun(&$textes, $fonction) {
 	$a = array();
-	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, outil non activé !");
+	if (!function_exists($fonction)) return array('erreur' => "$fonction() introuvable, outil non activ&eacute; !");
 	foreach ($textes as $i=>$t) {
 		$b = $fonction($t);
 		$a["\$texte[$i]"] = htmlentities($t);
@@ -158,7 +158,7 @@ function cs_les_tests() {
 		"Mlle, Mlles, Mme, Mmes et erreurs Melle, Melles",
 		'avant <a href="www.monlien.com" title="Mon 1er titre" target="_blank">Mon 1er lien</a> apres le "test"!',
 		'avant [Mon 1er lien->www.monlien.com] apres le "test"!',
-		'on est passé du 7e au 15e rang, pas du 17e au 5e ou du 7e au 3e !',
+		'on est pass&eacute; du 7e au 15e rang, pas du 17e au 5e ou du 7e au 3e !',
 	);
 	test_outil(cs_test_fun($textes, 'typo_exposants'), 'Test sur : typo_exposants()');
 
