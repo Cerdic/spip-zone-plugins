@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //
 // Serveur d'images Lilypond developpe pour SPIP par
 // Richard Christophe � partir du serveur Tex de Philippe Riviere <fil@rezo.net> et Benjamin Sonntag <benjamin@sonntag.fr>
@@ -76,7 +76,7 @@ function lilypond_($texte, $code_format) {
 	}
 	
 
-	if (!file_exists($fichier_image) OR (filemtime($fichier_image)<filemtime("lilyserv.php"))) {
+	if (!file_exists($fichier_image) OR (filemtime($fichier_image)<filemtime("server.php"))) {
 		
 		$cmd = $lilypond_bin." --safe --png --output=$cache_dir"." ".$fichier_source." 2> ".$fichier ;
 		exec($cmd);
