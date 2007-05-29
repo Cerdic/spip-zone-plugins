@@ -32,7 +32,8 @@ function memobox_dropit(drag) {
 }
 
 function memobox_addItem(node) {
-	this.find('>li:last-child a').click(memobox_delItem).parent().prepend(node).end().end();	
+	this.find('>li:last-child a').click(memobox_delItem).parent().prepend(node).end().end();
+	this.find('>li:last-child a').removeClass('memobox_drag');
 }
 
 function memobox_delItem() {
