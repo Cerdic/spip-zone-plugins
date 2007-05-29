@@ -70,7 +70,7 @@ function demarrer_site($site = '', $options = array()) {
 
 // Cette fonction cree un prefixe acceptable par MySQL a partir du nom
 // du site ; a utiliser comme prefixe des tables, comme suffixe du nom
-// de la base de donnees ou comme prefixe des cookies...
+// de la base de donnees ou comme prefixe des cookies... unicite quasi garantie
 // Max 12 caracteres a-z0-9, qui ressemblent au domaine et ne commencent
 // pas par un chiffre
 // http://doc.spip.org/@prefixe_mutualisation
@@ -80,7 +80,10 @@ function prefixe_mutualisation($site) {
 	if (!isset($prefix[$site])) {
 		$p = preg_replace(',^www\.|[^a-z0-9],', '', strtolower($site));
 		// si c'est plus long que 12 on coupe et on pose un md5 d'unicite
-		if (strlen($p) > 12)
+		// meme chose si ca contenait un caractere autre que [a-z0-9],
+		// afin d'eviter de se faire chiper c.a.domaine.tld par ca.domaine.tld
+		if (strlen($p) > 12
+		OR $p != $site)
 			$p = substr($p, 0, 8) . substr(md5($site),-4);
 		// si ca commence par un chiffre on ajoute a
 		if (ord($p) < 58)
