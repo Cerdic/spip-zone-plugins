@@ -25,12 +25,11 @@ function noisetier_ajout_texte($page, $zone, $exclue='') {
 	include_spip('base/abstract_sql');
 	include_spip('inc/filtres');
 	$titre = addslashes(corriger_caracteres(_T('noisetier:titre_nouveau_texte')));
-	$descriptif = addslashes(corriger_caracteres(_T('noisetier:descriptif_nouveau_texte')));
 	$position = 1;
 	$query = "SELECT MAX(position) AS positionmax FROM spip_noisettes WHERE zone='$zone'";
 	$res = spip_query($query);
 	if ($row = spip_fetch_array($res)) $position = $row['positionmax']+1;
-	$id_noisette = spip_abstract_insert("spip_noisettes","(page,exclue,zone,position,titre,descriptif,type)","('$page','$exclue','$zone','$position','$titre','$descriptif','texte')");
+	$id_noisette = spip_abstract_insert("spip_noisettes","(page,exclue,zone,position,titre,type)","('$page','$exclue','$zone','$position','$titre','texte')");
 	return $id_noisette;
 }
 
