@@ -10,12 +10,12 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	1.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	test
+	stable
 	</etat>
 	<description>
 	Ins&eacute;rer des notations musicales en utilisant Lilypond : http://lilypond.org/web/index
 	</description>
-	<lien>http://www.spip.net/fr_article3448.html</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Lilyspip</lien> <!-- URI de documentation -->
 	
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
