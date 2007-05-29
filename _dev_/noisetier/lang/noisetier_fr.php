@@ -49,6 +49,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'noisette_non_active'=>'Noisette non active',
 'desactiver'=>'D&eacute;sactiver cette noisette ou ce texte',
 'activer'=>'Activer cette noisette ou ce texte',
+'info_titre_texte'=>'Titre du texte',
+'info_non_insere'=>'pour information, non ins&eacute;r&eacute; dans les squelettes',
+'info_texte'=>'Texte &agrave; ins&eacute;rer dans la page',
 
 );
 ?>

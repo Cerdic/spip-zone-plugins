@@ -142,6 +142,7 @@ function noisetier_affiche_texte($id_noisette, $page, $row=NULL) {
 		$row = spip_fetch_array(spip_query("SELECT * FROM spip_noisettes WHERE type='texte' AND id_noisette=$id_noisette"));
 	if (!$row) return '';
 	$redirect = generer_url_ecrire('noisetier',($page=='')?'':"page=$page");
+	$zone = $row['zone'];
 	
 	$out = '';
 	$out .= "<div id='noisette-$id_noisette'>";
@@ -183,15 +184,46 @@ function noisetier_affiche_texte($id_noisette, $page, $row=NULL) {
 	else
 		$out .= debut_block_invisible("noisette-$id_noisette");
 	
+	//Modification du texte
+	$redirect = ancre_url($redirect,"noisette-$id_noisette");
+	$out .= "<div style='margin:5px 0; padding:5px 0; border-top:1px dashed #999;'>";
+	$out .= "<i>id_noisette&nbsp;: $id_noisette</i><p />";
+	$out .= debut_cadre_formulaire('',true);
+	$out .= "<div class='serif'>";
+	$action_link = generer_action_auteur("noisetier_editer","texte-$id_noisette",$redirect);
+	$action_link_noredir = parametre_url($action_link,'redirect','');
+	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir' style='border: 0; margin:0;' name='editer_$id_noisette'>";
+	$out .= form_hidden($action_link_noredir);
+	$out .= "<input type='hidden' name='redirect' value='$redirect' />";
+	$out .= "<input type='hidden' name='idtarget' value='noisette-$id_noisette' />";
+	$titre = entites_html($row['titre']);
+	$descriptif = entites_html($row['descriptif']);
+	$out .= "<b>"._T('noisetier:info_titre_texte')."</b> ["._T('noisetier:info_non_insere')."]</br>";
+	$out .= "<input type='text' name='titre' class='formo' value=\"$titre\" size='40'/>";
+	$out .= "<p /><b>"._T('noisetier:info_texte')."</b></br>";
+	$out .= "<textarea name='descriptif' class='forml' rows='4' cols='40'>";
+	$out .= $descriptif;
+	$out .= "</textarea>";
+	$out .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
+	$out .= "</form></div>";
+	$out .= fin_cadre_formulaire(true);
+	$out .= "</div>";
 	
 	//Supression du texte (faire un formulaire)
 	if (autoriser('gerer','noisetier')) {
-		$out .= icone_horizontale(_T('noisetier:supprimer_texte'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/texte-24.png", "supprimer.gif",false);
-		$out .= fin_block();
-		$out .= fin_cadre_relief(true);
-		$out .= "</div>";
+		$redirect = ancre_url($redirect,"zone-$zone");
+		$action_link = generer_action_auteur("noisetier_suppression","suppression-$id_noisette",$redirect);
+		$action_link_noredir = parametre_url($action_link,'redirect','');
+		$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir' style='border:0; margin:0; display:inline;' name='sup_texte_$id_noisette'>";
+		$out .= form_hidden($action_link_noredir);
+		$out .= "<input type='hidden' name='redirect' value='$redirect' />";
+		$out .= "<input type='hidden' name='idtarget' value='zone-$zone' />";
+		$out .= icone_horizontale(_T('noisetier:supprimer_texte'), "javascript: document.forms.sup_texte_$id_noisette.submit();", "../"._DIR_PLUGIN_NOISETIER."/img_pack/texte-24.png", "supprimer.gif",false);
+		$out .= "</form>";
 	}
-	
+	$out .= fin_block();
+	$out .= fin_cadre_relief(true);
+	$out .= "</div>";
 	return $out;
 }
 
@@ -203,6 +235,7 @@ function noisetier_affiche_noisette($id_noisette, $page, $row=NULL) {
 		$row = spip_fetch_array(spip_query("SELECT * FROM spip_noisettes WHERE type='noisette' AND id_noisette=$id_noisette"));
 	if (!$row) return '';
 	$redirect = generer_url_ecrire('noisetier',($page=='')?'':"page=$page");
+	$zone = $row['zone'];
 	
 	$out = '';
 	$out .= "<div id='noisette-$id_noisette'>";
@@ -248,10 +281,11 @@ function noisetier_affiche_noisette($id_noisette, $page, $row=NULL) {
 	//Supression de la noisette  (faire un formulaire)
 	if (autoriser('gerer','noisetier')) {
 		$out .= icone_horizontale(_T('noisetier:supprimer_noisette'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/noisette-24.png", "supprimer.gif",false);
-		$out .= fin_block();
-		$out .= fin_cadre_relief(true);
-		$out .= "</div>";
+	
 	}
+	$out .= fin_block();
+	$out .= fin_cadre_relief(true);
+	$out .= "</div>";
 	
 	return $out;
 }
