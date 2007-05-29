@@ -136,7 +136,7 @@ function lilyspip_pre_propre($letexte) {
 	foreach ($regs as $lily) {
 		$mid = lilyspip_genere_midi($lily[1]);
 		if ($mid == "") $aendtag = ""; else $aendtag = "</a>";
-		$img = "\n<p class=\"spip\" style=\"text-align: center;\">".$mid.lilyspip_genere_image($lily[1]).$aendtag."</p>\n";
+		$img = "\n<div class=\"lilypond\" >".$mid.lilyspip_genere_image($lily[1]).$aendtag."</div>\n";
 		
 		$letexte = str_replace($lily[0], $img, $letexte);
 	}		
