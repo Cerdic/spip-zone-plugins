@@ -66,6 +66,14 @@ div.cadre-padding div.droite label {
 	display:block;
 	width:10.1em;
 }
+/* a partir de SPIP v1.93 */
+div.cadre-padding .titrem {
+	display:inline;
+	font-weight:normal;
+	background-position:left 1pt;
+	background-color:white;
+	padding:0 0 0 12pt;
+}
 input.checkbox {
 	margin:0;
 	cursor:pointer;
@@ -324,6 +332,7 @@ function ligne_outil($outil, &$js, $afficher){
 	$titre_etat = _T('cout:'.($actif?'':'in').'actif');
 	$nb_var = intval($outil['nb_variables']);
 	$index = intval($outil['index']);
+	$pliage_id = 'plie_'.$outil_id;
 
 	$s = "<a name='outil$index' id='outil$index'></a><form  style='margin:0 0 0 1em;'><div id='$outil_id' class='nomoutil".($actif?'_on':'')."'>";
 /*
@@ -337,19 +346,23 @@ function ligne_outil($outil, &$js, $afficher){
 */
 	$p = '<div style="margin:0 0 0 2em;">';
 	$p .= "<img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
-
 	$p .= "<input type='checkbox' class='checkbox' name='foo_$inc' value='O' id='label_$id_input' style=''";
 	$p .= $actif?" checked='checked'":"";
 	$p .= $erreur_version?" disabled='disabled'":"";
 	$p .= " onclick='outilchange.apply(this,[$index])'";
 	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('cout:activer_outil')."</label>";
 	$js .= "Outils[$index] = Array(\"$inc\", $nb_var);\n";
-	$p .= ($afficher?bouton_block_visible($outil_id):bouton_block_invisible($outil_id)) . $outil['nom'] . '</div>';
-
+	// compatibilite SPIP < v1.93
+	if(function_exists('bouton_block_depliable'))
+		$p .= bouton_block_depliable($outil['nom'], $afficher, $pliage_id);
+		else $p .= ($afficher?bouton_block_visible($pliage_id):bouton_block_invisible($pliage_id)) . $outil['nom'];
+	$p .= '</div>';
 	$s .= propre($p) . "</div></form>";
 
-	$p = $afficher?debut_block_visible($outil_id):debut_block_invisible($outil_id);
-
+	// compatibilite SPIP < v1.93
+	if(function_exists('debut_block_depliable'))
+		$p = debut_block_depliable($afficher, $pliage_id);
+		else $p = $afficher?debut_block_visible($pliage_id):debut_block_invisible($pliage_id);
 	$p .= "\n<div class='detail_outil'>";
 	$p .= $outil['description'];
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= "<p>" . _T('auteur') .' '. ($outil['auteur']) . "</p>";
