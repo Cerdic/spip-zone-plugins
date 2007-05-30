@@ -1,14 +1,11 @@
 #CACHE{86400}
 
-<div id="block-op-center">
-<div id="block-op-publie-titre"><b>&nbsp;&nbsp;<b><:opconfig:ajouter_agenda:></b></b></div>
-<div id="block-op-content">
+<div id="block-titre">&nbsp;&nbsp;<b><:opconfig:ajouter_agenda:></b></div>
+<div id="block-contenu">
 
-<div style="font-size : 0.7em;">
-	<p><:opconfig:explication_agenda:></p>
-</div>	
+<div style="font-size : 0.8em;"><p><:opconfig:explication_agenda:></p></div>	
+
 	<p>
-	<small>
 	[(#ENV**{choix_agenda}|checkbox_agenda)]
 	<br />
 	[(#ENV**{annee}|select_annee)]
@@ -20,8 +17,7 @@
 	[(#ENV{heure}|select_heure)]
 	<br />
 	
-	</small>
 	</p>
 	<br />
 </div>
-</div>
+

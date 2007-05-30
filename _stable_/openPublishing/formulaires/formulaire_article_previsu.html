@@ -2,19 +2,17 @@
 
 <h2 class="previsualisation"><center><:opconfig:previsualisation:></center></h2><br />
 
-<div id="block-op-center">
-[<div id="block-op-center-titre"><b>&nbsp;&nbsp;(#ENV*{titre})</b></div>]
+<div id="block">
+[<div id="block-titre"><b>&nbsp;&nbsp;(#ENV*{titre})</b></div>]
 
-<div id="block-op-content">
+<div id="block-contenu">
 	<p>
-	<small>
 	[(#ENV*{texte}|image_reduire{800,0})]
 	[(#ENV*{erreur})]
-	</small>
 	</p>
 
 </div>
-<div id="block-op-footer">
+<div id="block-pied">
 	le&nbsp;[(#ENV*{date_redac}|affdate)][, <:par_auteur:> (#LESAUTEURS)]
 		[, &nbsp;Auteur : (#ENV*{nom_inscription})]
 		[, &nbsp;Mail : (#ENV*{mail_inscription})]
