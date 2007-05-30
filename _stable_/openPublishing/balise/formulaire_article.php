@@ -202,10 +202,22 @@ $date_redac = $date_debut;
 */
 
 // on demande un nouvel identifiant
-	if (($previsualiser) || ($media) || ($valider)) {
+	if (($previsualiser) || ($media) || ($valider) || isset($_REQUEST['tags']) ) {
 		if (!$article) $article=op_request_new_id($connect_id_auteur);
 	}
 
+	// on enregistre les mots cles (necessite le plugin tag machine)
+	
+	if (isset($_REQUEST['tags'])) {
+		include_spip('inc/tag-machine');
+		ajouter_liste_mots(_request('tags'),
+			$article,
+			$groupe_defaut = 'tags',
+			'articles',
+			'id_article',
+			true);
+	}
+	
 // l'auteur demande la publication de son article
 if($valider) {
 
@@ -332,6 +344,9 @@ if($valider) {
 		" . spip_abstract_quote($phone) . "
 		)");
 
+	
+	
+	
 	} // fin du else
 	
 	$url_retour = $url_site . op_get_url_retour();
@@ -345,6 +360,8 @@ else
 {
 	// statut de l'article : en préparation
 	$statut="prepa";
+	
+	
 	
 	// si l'auteur demande la prévisualisation
 	if($previsualiser)
@@ -373,6 +390,8 @@ else
 		$formulaire_previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism",
 		"<\\1no-f\\2", $formulaire_previsu);
 	}
+	
+	
 	
 	// si l'auteur ajoute un documents
 	if($media) {
