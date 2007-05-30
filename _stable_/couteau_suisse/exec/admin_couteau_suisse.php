@@ -17,7 +17,7 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
 function cs_admin_styles_et_js() {
-	global $couleur_claire;
+	global $couleur_claire, $couleur_foncee;
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding *{
@@ -66,14 +66,22 @@ div.cadre-padding div.droite label {
 	display:block;
 	width:10.1em;
 }
-/* a partir de SPIP v1.93 */
+/* debut SPIP v1.93 */
 div.cadre-padding .titrem {
 	display:inline;
 	font-weight:normal;
 	background-position:left 1pt;
 	background-color:white;
 	padding:0 0 0 12pt;
+	cursor:help;
 }
+div.cadre-padding .deplie {
+	cursor:default;
+}
+div.cadre-padding .hover {
+	background-color:$couleur_foncee;
+}
+/* fin SPIP v1.93 */
 input.checkbox {
 	margin:0;
 	cursor:pointer;
