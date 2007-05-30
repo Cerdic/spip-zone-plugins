@@ -293,7 +293,7 @@ _ Merci de votre compr&eacute;hension.",
 	
 // ---------------------------------------------------------------------------
 	'glossaire:nom' => 'Glossaire interne',
-	'glossaire:description' => "Gestion d'un glossaire interne li&#233; &#224; un groupe de mots-cl&#233;s nomm&#233; &quot;Glossaire&quot;.
+	'glossaire:description' => "Gestion d'un glossaire interne li&#233; &#224; un groupe de mots-cl&#233;s nomm&#233; &laquo;&nbsp;Glossaire&nbsp;&raquo;. Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[Nombre maximal de liens par mot :->%glossaire_limite%]]
 _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 
 /*

@@ -483,9 +483,16 @@ add_outil( array(
 	'pipeline:pre_typo' => 'chatons_pre_typo',
 ));
 
+add_variable( array(
+	'nom' => 'glossaire_limite',
+	'format' => 'nombre',
+	'defaut' => 0,
+	'code:%s>0' => "define('_GLOSSAIRE_LIMITE', %s);",
+));
 add_outil( array(
 	'id' => 'glossaire',
 	'categorie'	 => 'typo-corr',
+	'code:options' => '%%glossaire_limite%%',
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 ));

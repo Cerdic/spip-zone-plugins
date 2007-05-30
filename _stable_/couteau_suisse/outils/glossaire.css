@@ -3,8 +3,6 @@ a.cs_glossaire, a.cs_glossaire:hover {
 	color: #000000;
 	text-decoration: none;
 }
-a.cs_glossaire sup {}
-a.cs_glossaire img {}
 
 /* L'effet de survol est obtenu grace aux proprietes display */
 a.cs_glossaire span.dl,
