@@ -344,6 +344,7 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 //		$(document).ready(function(){
 //		$(\'#carto_form\').one(\'mouseover\',function(){
 //			$(\'div.dhtmldiv\').each(function(){alert($(this).attr(\'id\')+\'/\'+$(this).css(\'top\')+\'/\'+$(this).css(\'left\'))})
+			$(\'.cadre-padding, .cadre-r\').css(\'overflow\',\'visible\');
 			$(\'#mapImageDiv\').css(\'top\',\'40px\').css(\'left\',\'10px\');
 			$(\'#myCanvasDiv\').css(\'top\',\'40px\').css(\'left\',\'10px\');
 			$(\'#myCanvas2Div\').css(\'top\',\'40px\').css(\'left\',\'10px\');

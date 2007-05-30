@@ -14,7 +14,7 @@
   </B_objets>
   <BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
   <a href="[(#URL_OBJET)]" title='[(#TEXTE|texte_script)]'>
-	<img style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLDIV,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;"[ alt='(#TEXTE|texte_script)'] src="<BOUCLE_MOT(MOTS){id_carto_objet}{par titre}{0,1}>[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="motobj#ID_MOT</BOUCLE_MOT>dist/images/croix-rouge.gif<//B_MOT>"/>
+	<img style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLDIV,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;"[ alt='(#TEXTE|texte_script)'] src="<BOUCLE_MOT(MOTS){id_carto_objet}{par titre}{0,1}>[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="motobj#ID_MOT</BOUCLE_MOT>#CHEMIN{images/croix-rouge.gif}<//B_MOT>"/>
   </a>
   </BOUCLE_objets2>
  </BOUCLE_carte>

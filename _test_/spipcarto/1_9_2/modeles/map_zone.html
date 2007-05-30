@@ -7,14 +7,15 @@
   <map name="map#ID_CARTO_CARTE" id="map#ID_CARTO_CARTE">
   <BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
   [(#GEOMETRIE|wkt2shape|choixsiegal{POLY,' ',''})]
-	<area <BOUCLE_MOT(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOver="document.getElementById('motobj#ID_MOT').src='IMG/(#LOGO_MOT_SURVOL|fichier)'" ]</BOUCLE_MOT>
-	shape="[(#GEOMETRIE|wkt2shape)]" coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" href="[(#URL_OBJET)]" alt="#TITRE"/>
+	<area <BOUCLE_MOT(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOver="document.getElementById('motobj[(#ID_MOT)]-[(#ID_CARTO_OBJET)]').src='IMG/(#LOGO_MOT_SURVOL|fichier)'" ][onMouseOut="document.getElementById('motobj[(#ID_MOT)]-[(#ID_CARTO_OBJET)]').src='IMG/(#LOGO_MOT_NORMAL|fichier)'" ]</BOUCLE_MOT>
+	 title="[(#TEXTE|textebrut)]"
+	 shape="[(#GEOMETRIE|wkt2shape)]" coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" href="[(#URL_OBJET)]" alt="#TITRE"/>
   </BOUCLE_objets>
   </map>
   </B_objets>
   <BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
-  <a href="[(#URL_OBJET)]" title='[(#TEXTE|texte_script)]'>
-	<img <BOUCLE_MOT1(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOut="this.src='IMG/(#LOGO_MOT_NORMAL|fichier)'" ]</BOUCLE_MOT1>style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLZONE,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;"[ alt='(#TEXTE|texte_script)'] src="<BOUCLE_MOT2(MOTS){id_carto_objet}{par titre}{0,1}>[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="motobj#ID_MOT</BOUCLE_MOT2>dist/images/croix-rouge.gif<//B_MOT2>"/>
+  <a href="[(#URL_OBJET)]" title="[(#TEXTE|textebrut)]">
+	<img alt="logo" <BOUCLE_MOT1(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOut="this.src='IMG/(#LOGO_MOT_NORMAL|fichier)'" ][onMouseOver="this.src='IMG/(#LOGO_MOT_SURVOL|fichier)'" ]</BOUCLE_MOT1>style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLZONE,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;"[ alt='(#TEXTE|texte_script)'] src="<BOUCLE_MOT2(MOTS){id_carto_objet}{par titre}{0,1}>[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="motobj[(#ID_MOT)]-[(#ID_CARTO_OBJET)]</BOUCLE_MOT2>#CHEMIN{images/croix-rouge.gif}<//B_MOT2>"/>
   </a>
   </BOUCLE_objets2>
  </BOUCLE_carte>

@@ -201,7 +201,7 @@
 	<!-- #DESCRIPTIF -->
 			<g id="spipCarto_#ID_MOT">
 			<BOUCLE_OBJECT(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{id_mot}{doublons obj}>
-				<a target='new' xlink:href='[(#URL_OBJET|entites_html)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE,#_M:DESCRIPTIF})] onmouseover="statusChange('#TEXTE');" class="[(#GEOMETRIE|wkt2shape{SVG})[(#_M:DESCRIPTIF)]]"/></a>
+				<a target='new' xlink:href='[(#URL_OBJET|entites_html)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE,#_M:DESCRIPTIF})] onmouseover="statusChange('[(#TEXTE|texte_backend)]');" class="[(#GEOMETRIE|wkt2shape{SVG})[(#_M:DESCRIPTIF)]]"/></a>
 			</BOUCLE_OBJECT>
 			</g>
 		 </BOUCLE_M>
@@ -212,7 +212,7 @@
 				<!-- Couche d'objets SPIP -->
 				<B_objets>
 				<BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{doublons obj}>
-				<a target='new' xlink:href='[(#URL_OBJET|entites_html)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE})] onmouseover="statusChange('#TEXTE');" class="[(#GEOMETRIE|wkt2shape{SVG})]"/></a>
+				<a target='new' xlink:href='[(#URL_OBJET|entites_html)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE})] onmouseover="statusChange('[(#TEXTE|texte_backend)]');" class="[(#GEOMETRIE|wkt2shape{SVG})]"/></a>
 				</BOUCLE_objets>
 				</B_objets>	
 			</g>
