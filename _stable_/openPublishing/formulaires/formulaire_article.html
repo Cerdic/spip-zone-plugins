@@ -9,63 +9,59 @@
 
 	[<div id="erreur"><p>(#ENV*{mess_error})</p></div>]
 
-	<div id="block-op">
+	<div id="block">
 
-	<center>
-
-	<div id="block-op-bande"><b><:opconfig:redigez_article:></b></div>
-	
+		
 	<br />
 
-	<table style="text-align:left">
-	<tr><td valign="top" >
+	<table>
+	<tr><td valign="top" width="200">
 	
-		<div id="block-op-center">
-		<div id="block-op-content">
+		<div id="block-titre">&nbsp;<b><:opconfig:redigez_article:></b></div>
+		<div id="block-contenu">
 
 		<p><label><b><small><:opconfig:publie_titre:>&nbsp;[<:opconfig:obligatoire:>]</small></b></label></p>
 		<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="60" maxlength="80"></p>
 
-		<hr />
+		
+		<p><label><b><small><:opconfig:publie_texte:></b></small></label></p>
+		<p><div id="op-textearea">[(#ENV**{texte}|barre_article{30,62})]</div></p>
 
-			<p><label><b><small><:opconfig:publie_texte:></b></small></label></p>
-			<p><div id="op-textearea">[(#ENV**{texte}|barre_article{30,62})]</div></p>
-
-		<hr />
-
-		<div id="op-identif">
-			<p>
-			<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b><br /><br />
-			<table cellspacing="0" cellpadding="0" border="0" width="100%">
-			<tr><td width="40%"><:opconfig:votre_nom:>&nbsp;:&nbsp;</td><td>
-			<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="25"></td></tr>
-			<tr><td width="40%"><:opconfig:votre_mail:>&nbsp;:&nbsp;</td><td>
-			<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="25"></td></tr>
-			<tr><td width="40%"><:opconfig:votre_groupe:>&nbsp;:&nbsp;</td><td>
-			<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="25"></td></tr>
-			<tr><td width="40%"><:opconfig:votre_phone:>&nbsp;:&nbsp;</td><td>
-			<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="25"></td></tr>
-			</table>
-			</p>
-		</div>
-
-		</div>
 		</div>
 
 	</td>
-	<td valign="top" width="300" >
+	<td valign="top" width="100%">
 		<INCLURE{fond=tags-open}{id_article=#ENV{article}}>
 		<br />
 		[(#ENV*{formulaire_documents})]
 		<br />
 		[(#ENV*{formulaire_agenda})]
+		<br />
+
+		<div id="block-titre">&nbsp;&nbsp;<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b></div>
+		<div id="block-contenu"><br />
+
+		<div style="font-size : 0.8em;">
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tr><td><:opconfig:votre_nom:>&nbsp;:&nbsp;</td><td>
+			<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="25"></td></tr>
+			<tr><td><:opconfig:votre_mail:>&nbsp;:&nbsp;</td><td>
+			<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="25"></td></tr>
+			<tr><td><:opconfig:votre_groupe:>&nbsp;:&nbsp;</td><td>
+			<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="25"></td></tr>
+			<tr><td><:opconfig:votre_phone:>&nbsp;:&nbsp;</td><td>
+			<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="25"></td></tr>
+			</table>
+		</div>
+
+		</div>
 	</td>
 
 	</tr>
 	</table>
 	<br />
 
-	<div id="block-op-bande">
+	<div id="block-pied">
 		&nbsp;&nbsp;<label><b><:opconfig:publie_rubrique:></b></label>
 		<select name="rubrique" value="[(#ENV**{rubrique})]">
 			<BOUCLE_rubrique_op(op_rubriques)>
