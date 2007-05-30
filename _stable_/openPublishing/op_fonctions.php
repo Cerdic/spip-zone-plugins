@@ -9,7 +9,12 @@ include_spip('inc/op_actions');
 function boucle_OP_RUBRIQUES_dist($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
+
         $boucle->from[$id_table] =  "spip_op_rubriques";
+	$boucle->from["rubriques"] =  "spip_rubriques";
+	$boucle->where[]= array("'='", "'rubriques.id_rubrique'", "'$id_table.op_rubrique'");
+	$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;
+
         return calculer_boucle($id_boucle, $boucles);
 }
 

@@ -34,6 +34,8 @@ spip_op_auteurs : contient les informations sur les auteurs op
 include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 
 global $tables_principales;
+global $tables_jointures;
+
 
 //-- Table OP_CONFIG ------------------------------------------
 $op_config = array(
@@ -95,7 +97,14 @@ $op_rubriques_key = array(
 $tables_principales['spip_op_rubriques'] =
 	array('field' => &$op_rubriques, 'key' => &$op_rubriques_key);
 
-// table des table et table primary
+//-- Jointures ---------------------------------------------------------
+
+$tables_jointures['spip_rubriques'][]= 'op_rubriques';
+$tables_jointures['spip_op_rubriques'][] = 'rubriques';
+
+
+//-- table des table et table primary ------------------------------------
+
 global $table_des_tables, $table_primary;
 
 
