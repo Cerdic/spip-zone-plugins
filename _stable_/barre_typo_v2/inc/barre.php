@@ -43,14 +43,39 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 }
 
 // sert a construire les sousbarre
+function bte_renomme_block($nom_block) { 
+	global $numero_block, $compteur_block; 
+	if (!isset($numero_block[$nom_block])){ 
+		$compteur_block++; 
+		$numero_block[$nom_block] = $compteur_block;
+	}
+	return $numero_block["$nom_block"];
+}
+
+function bte_debut_block_visible($nom_block){ 
+	global $browser_layer; 
+	if (!$browser_layer) return ''; 
+	return "<div id='Layer".bte_renomme_block($nom_block)."' style='display: block;'>"; 
+} 
+
+function bte_debut_block_invisible($nom_block){ 
+	global $browser_layer; 
+	if (!$browser_layer) return ''; 
+
+	// si on n'accepte pas js, ne pas fermer 
+	if (!_SPIP_AJAX) 
+		return debut_block_visible($nom_block); 
+	return "<div id='Layer".bte_renomme_block($nom_block)."' style='display: none;'>"; 
+}
+
 function produceWharf($id, $title = '', $sb = '') {
   $visible = ($changer_virtuel || $virtuel);
   $res .= $title;
   $GLOBALS['numero_block'][$id] = ($GLOBALS['compteur_block']+1);
   if ($visible) {
-    $res .= debut_block_visible("arb_".$GLOBALS['numero_block'][$id]);
+    $res .= bte_debut_block_visible("arb_".$GLOBALS['numero_block'][$id]);
   } else {
-    $res .= debut_block_invisible("arb_".$GLOBALS['numero_block'][$id]);
+    $res .= bte_debut_block_invisible("arb_".$GLOBALS['numero_block'][$id]);
   }
   $res .= $sb;
   $res .= fin_block();
