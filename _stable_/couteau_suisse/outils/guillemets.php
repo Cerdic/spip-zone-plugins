@@ -22,6 +22,51 @@ de la forme &ldquo;mot&rdquo;, sauf si la barre d'insertion de SPIP proposait
 deja une autre forme.
 */
 
+// voir aussi : http://trac.rezo.net/trac/spip/changeset/9429
+
+// definitions des chaines de remplacement
+define('_GUILLEMETS_defaut', '&ldquo;$1&rdquo;');
+define('_GUILLEMETS_fr', '&laquo;&nbsp;$1&nbsp;&raquo;'); //LRTEUIN
+//define('_GUILLEMETS_ar', '');
+define('_GUILLEMETS_bg', '&bdquo;$1&ldquo;');
+//define('_GUILLEMETS_br', '');
+//define('_GUILLEMETS_bs', '');
+define('_GUILLEMETS_ca', '&laquo;$1&raquo;');
+define('_GUILLEMETS_cpf', '&laquo;&nbsp;$1&nbsp;&raquo;');
+//define('_GUILLEMETS_cpf_hat', '');
+define('_GUILLEMETS_cs', '&bdquo;$1&ldquo;');
+define('_GUILLEMETS_da', '&raquo;$1&laquo;');
+define('_GUILLEMETS_de', '&bdquo;$1&ldquo;'); //ou "&raquo;$1&laquo;" // LRTEUIN
+define('_GUILLEMETS_en', '&ldquo;$1&rdquo;'); //LRTEUIN
+define('_GUILLEMETS_eo', '&laquo;$1&raquo;');
+define('_GUILLEMETS_es', '&laquo;$1&raquo;');
+//define('_GUILLEMETS_eu', '');
+//define('_GUILLEMETS_fa', '');
+//define('_GUILLEMETS_fon', '');
+//define('_GUILLEMETS_gl', '');
+define('_GUILLEMETS_hu', '&bdquo;$1&rdquo;');
+define('_GUILLEMETS_it', '&laquo;$1&raquo;');
+define('_GUILLEMETS_it_fem', '&laquo;$1&raquo;');
+define('_GUILLEMETS_ja', '&#12300;$1&#12301;');
+//define('_GUILLEMETS_lb', '');
+define('_GUILLEMETS_nl', '&bdquo;$1&rdquo;');
+//define('_GUILLEMETS_oc_auv', '');
+//define('_GUILLEMETS_oc_gsc', '');
+//define('_GUILLEMETS_oc_lms', '');
+//define('_GUILLEMETS_oc_lnc', '');
+//define('_GUILLEMETS_oc_ni', '');
+//define('_GUILLEMETS_oc_ni_la', '');
+//define('_GUILLEMETS_oc_prv', '');
+//define('_GUILLEMETS_oc_va', '');
+define('_GUILLEMETS_pl', '&bdquo;$1&rdquo;');
+define('_GUILLEMETS_pt', '&laquo;$1&raquo;');
+define('_GUILLEMETS_pt_br', '&laquo;$1&raquo;');
+define('_GUILLEMETS_ro', '&bdquo;$1&rdquo;');
+define('_GUILLEMETS_ru', '&laquo;$1&raquo;');
+define('_GUILLEMETS_tr', '&laquo;$1&raquo;');
+//define('_GUILLEMETS_vi', '');
+define('_GUILLEMETS_zh', '&#12300;$1&#12301;'); // ou "&ldquo;$1&rdquo;" en chinois simplifie
+
 function typo_guillemets_echappe_balises_callback($matches) {
  return cs_code_echappement($matches[1], 'GUILL');
 }
@@ -31,134 +76,14 @@ function typo_guillemets_rempl($texte){
 	if (strpos($texte, '"')===false) return $texte;
 	// prudence : on protege TOUTES les balises contenant des doubles guillemets droits
 	if (strpos($texte, '<')!==false) 
-		$texte = preg_replace_callback('/(<[^>]+"[^>]*>)/Ums', 'typo_guillemets_echappe_balises_callback', $texte);
-
+//		$texte = preg_replace_callback('/(<[^>]+"[^>]*>)/Ums', 'typo_guillemets_echappe_balises_callback', $texte);
+		$texte = preg_replace('/(<[^>]+"[^>]*>)/Umse', 'cs_code_echappement("\\1", "GUILL")', $texte);
+		;
+	// choix de la langue, de la constante et de la chaine de remplacement
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
-	switch ($lang) {
-//	switch ($GLOBALS['spip_lang']){
-		case 'fr':
-			$guilles="&laquo;&nbsp;$1&nbsp;&raquo;"; //LRTEUIN
-		break;
-//		case 'ar':
-//			$guilles="";
-//		break;
-		case 'bg':
-			$guilles="&bdquo;$1&ldquo;";
-		break;
-//		case 'br':
-//			$guilles="";
-//		break;
-//		case 'bs':
-//			$guilles="";
-//		break;
-		case 'ca':
-			$guilles="&laquo;$1&raquo;";
-		break;
-		case 'cpf':
-			$guilles="&laquo;&nbsp;$1&nbsp;&raquo;";
-		break;
-//		case 'cpf_hat':
-//			$guilles="";
-//		break;
-		case 'cs':
-			$guilles="&bdquo;$1&ldquo;";
-		break;
-		case 'da':
-			$guilles="&raquo;$1&laquo;";
-		break;
-		case 'de':
-			$guilles="&bdquo;$1&ldquo;"; //ou "&raquo;$1&laquo;" // LRTEUIN
-		break;
-		case 'en':
-			$guilles="&ldquo;$1&rdquo;"; //LRTEUIN
-		break;
-		case 'eo':
-			$guilles="&laquo;$1&raquo;";
-		break;
-		case 'es':
-			$guilles="&laquo;$1&raquo;";
-		break;
-//		case 'eu':
-//			$guilles="";
-//		break;
-//		case 'fa':
-//			$guilles="";
-//		break;
-//		case 'fon':
-//			$guilles="";
-//		break;
-//		case 'gl':
-//			$guilles="";
-//		break;
-		case 'hu':
-			$guilles="&bdquo;$1&rdquo;";
-		break;
-		case 'it':
-			$guilles="&laquo;$1&raquo;";
-		break;
-		case 'it_fem':
-			$guilles="&laquo;$1&raquo;";
-		break;
-		case 'ja':
-			$guilles="&#12300;$1&#12301;";
-		break;
-//		case 'lb':
-//			$guilles="";
-//		break;
-		case 'nl':
-			$guilles="&bdquo;$1&rdquo;";
-		break;
-//		case 'oc_auv':
-//			$guilles="";
-//		break;
-//		case 'oc_gsc':
-//			$guilles="";
-//		break;
-//		case 'oc_lms':
-//			$guilles="";
-//		break;
-//		case 'oc_lnc':
-//			$guilles="";
-//		break;
-//		case 'oc_ni':
-//			$guilles="";
-//		break;
-//		case 'oc_ni_la':
-//			$guilles="";
-//		break;
-//		case 'oc_prv':
-//			$guilles="";
-//		break;
-//		case 'oc_va':
-//			$guilles="";
-//		break;
-		case 'pl':
-			$guilles="&bdquo;$1&rdquo;";
-		break;
-		case 'pt':
-			$guilles="&laquo;$1&raquo;";
-		break;
-		case 'pt_br':
-			$guilles="&laquo;$1&raquo;";
-		break;
-		case 'ro':
-			$guilles="&bdquo;$1&rdquo;";
-		break;
-		case 'ru':
-			$guilles="&laquo;$1&raquo;";
-		break;
-		case 'tr':
-			$guilles="&laquo;$1&raquo;";
-		break;
-//		case 'vi':
-//			$guilles="";
-//		break;
-		case 'zh':
-			$guilles="&#12300;$1&#12301;"; // ou "&ldquo;$1&rdquo;" en chinois simplifie
-		break;
-		default:
-			$guilles="&ldquo;$1&rdquo;";
-	}
+	$constante = '_GUILLEMETS_'.$lang;
+	$guilles = defined($constante)?constant($constante):_GUILLEMETS_defaut;
+	
 	// Remplacement des autres paires de guillemets (et suppression des espaces apres/avant)
 	// Et retour des balises contenant des doubles guillemets droits
 	return echappe_retour(preg_replace('/"\s*(.*?)\s*"/', $guilles, $texte), 'GUILL');
@@ -166,8 +91,6 @@ function typo_guillemets_rempl($texte){
 
 function typo_guillemets($texte){
 	if (strpos($texte, '"')===false) return $texte;
-	// bug/tip de spip qui echappe les blocs html en ajoutant \n\n... donc on protege les echappements anterieurs
-	// $texte = preg_replace(',"base64([^"]*)",', "'base64$1'", $texte);
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'typo_guillemets_rempl', $texte);
 }
 
