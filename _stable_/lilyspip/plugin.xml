@@ -1,0 +1,49 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Lilyspip
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	RICHARD Christophe
+_ &#169; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	1.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	stable
+	</etat>
+	<description>
+	Ins&eacute;rer des notations musicales en utilisant Lilypond : http://lilypond.org/web/index
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-Lilyspip</lien> <!-- URI de documentation -->
+	
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	lilyspip
+	</prefix>
+	<install>
+	lilyspip_gestion.php
+	</install>	
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
+	ex : template_affichage_final()
+	Le parametre inclure est egalement facultatif, si la fonction est deja chargee en memoire (car presente dans le fichier options par exemple)	-->
+	
+	 <pipeline>
+
+	<nom>ajouter_boutons</nom>
+	<action>ajouterBoutons</action>
+	<inclure>lilyspip_gestion.php</inclure>
+	</pipeline>
+	
+	
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>lilypond.php</inclure>
+	</pipeline>
+
+</plugin>

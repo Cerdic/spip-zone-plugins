@@ -1,0 +1,65 @@
+
+**********************************
+* Installation php non sécurisée *
+**********************************
+
+Installer lilypond en utilisant le script d'installation http://lilypond.org/web/install/
+
+Puis ImageMagick s'il n'est pas déja installé http://www.imagemagick.org/script/install-source.php#unix
+
+Copier le fichier server.php dans le dossier du serveur web et adapter les variables globales 
+
+Lilypond et exécuté en mode safe mais il peut boucler indéfiniment
+ 
+
+
+*******************************************************
+* Installation du serveur en utilisant un script bash *
+*******************************************************
+
+Installation identique de lilypond 
+
+Copier dans un dossier externe au serveur web le script lilypond.sh puis l'adapter si nécessaire (60 correspond à 60 secondes de temps CPU avant que lilypond soit stoppé)
+
+Copier le fichier bashserver.php dans le dossier du serveur web et adapter les variables globales 
+  
+Si PHP est utilisé en safe mode, les fonctions comme exec() et toutes celles qui permettent l'exécution en ligne de commande refuseront d'exécuter des programmes qui ne sont pas dans le dossier safe_mode_exec_dir. 
+
+
+
+********************************************************************
+* Installation du serveur en mode jail en utilisant un script bash *
+********************************************************************
+
+Cette installation permet d'utiliser toutes les fonctionnalités de lilypond (include ...)
+
+Non testé 
+
+-j,--jail=user,group,jail,dir
+    Run LilyPond in a chroot jail.
+
+    The --jail option provides a more flexible alternative to --safe when LilyPond formatting is available through a web server or whenever LilyPond executes externally provided sources.
+
+    The --jail option works by changing the root of LilyPond to jail just before starting the actual compilation process. The user and group are then changed to match those provided, and the current directory is changed to dir. This setup guarantees that it is not possible (at least in theory) to escape from the jail. Note that for --jail to work LilyPond must be run as root, which is usually accomplished in a safe way using sudo.
+
+    Setting up a jail is a slightly delicate matter, as we must be sure that LilyPond is able to find whatever it needs to compile the source inside the jail. A typical setup comprises the following items:
+
+    Setting up a separate filesystem
+        A separate filesystem should be created for LilyPond, so that it can be mounted with safe options such as noexec, nodev, and nosuid. In this way, it is impossible to run executables or to write directly to a device from LilyPond. If you do not want to create a separate partition, just create a file of reasonable size and use it to mount a loop device. A separate filesystem also guarantees that LilyPond cannot write more space than it is allowed.
+    Setting up a separate user
+        A separate user and group (say, `lily'/`lily') with low privileges should be used to run LilyPond inside the jail. There should be a single directory writable by this user, which should be passed in dir.
+    Preparing the jail
+        LilyPond needs to read a number of files while running. All these files are to be copied into the jail, under the same path they appear in the real root filesystem. The entire content of the LilyPond installation (e.g., /usr/share/lilypond) should be copied.
+
+        If problems arise, the simplest way to trace them down is to run LilyPond using strace, which will allow you to determine which files are missing.
+    Running LilyPond
+        In a jail mounted with noexec it is impossible to execute any external program. Therefore LilyPond must be run with a backend that does not require any such program. As we already mentioned, it must be also run with superuser privileges (which, of course, it will lose immediately), possibly using sudo. It is a good idea to limit the number of seconds of CPU time LilyPond can use (e.g., using ulimit -t), and, if your operating system supports it, the amount of memory that can be allocated. 
+
+
+Pour pouvoir exécuter lilypond avec sudo sans mot de passe :
+
+dans /etc/sudoers
+
+apache ALL=NOPASSWD:/home/script/lilyspip.sh (utilisateur apache ou nobody suivant la version) 
+
+
