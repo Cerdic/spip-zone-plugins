@@ -76,8 +76,8 @@ function typo_guillemets_rempl($texte){
 	if (strpos($texte, '"')===false) return $texte;
 	// prudence : on protege TOUTES les balises contenant des doubles guillemets droits
 	if (strpos($texte, '<')!==false) 
-//		$texte = preg_replace_callback('/(<[^>]+"[^>]*>)/Ums', 'typo_guillemets_echappe_balises_callback', $texte);
-		$texte = preg_replace('/(<[^>]+"[^>]*>)/Umse', 'cs_code_echappement("\\1", "GUILL")', $texte);
+		$texte = preg_replace_callback('/(<[^>]+"[^>]*>)/Ums', 'typo_guillemets_echappe_balises_callback', $texte);
+//		$texte = preg_replace('/(<[^>]+"[^>]*>)/Umse', 'cs_code_echappement("\\1", "GUILL")', $texte);
 		;
 	// choix de la langue, de la constante et de la chaine de remplacement
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
