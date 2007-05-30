@@ -44,7 +44,7 @@ function memobox_delItem() {
 function memobox_createCookieString() {
 	var c='';
 	memobox_ul.find('li>a:first-child').each(function(){
-		c+=this.href+'|'+this.title+'|'+$(this).text()+',';
+		c+=this.href+'|'+this.title+'|'+encodeURI($(this).text())+',';
 	}).end();
 	memobox_createCookie('memobox',c,365);
 }
@@ -54,7 +54,7 @@ function memobox_init() {
 	var items = cookie ? cookie.split(',') : [];
 	for(var i=0;i<items.length-1;i++) {
 		var args = items[i].split('|'); 
-		memobox_addItem.apply(memobox_ul.append(MEMOBOX_ITEM),['<a href="'+args[0]+'" title="'+args[1]+'">'+args[2]+'</a>']);
+		memobox_addItem.apply(memobox_ul.append(MEMOBOX_ITEM),['<a href="'+args[0]+'" title="'+args[1]+'">'+decodeURI(args[2])+'</a>']);
 	}
 }
 
