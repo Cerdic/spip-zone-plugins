@@ -14,7 +14,7 @@ function inscription2_verifier_base(){
 	foreach(lire_config('inscription2') as $cle => $val) {
 		if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'login' and $cle != 'naissance' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle))
 			spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
-		if($cle == 'naissance')
+		if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance')
 			spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE");
 	}	
 }

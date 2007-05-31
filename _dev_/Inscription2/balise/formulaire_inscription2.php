@@ -21,10 +21,12 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	//recuperer les infos inserées par le visiteur
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
-		if($val!='' and $cle != 'naissance' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle))
+		if($val!='' and $cle !='creation' and $cle != 'naissance' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle))
 			$var_user[$cle] = _request($cle);
-		if($cle == 'naissance')
+		if($val!='' and $cle == 'naissance')
 			$var_user[$cle] = _request('annee').'-'._request('mois').'-'._request('jour');
+		if($val!='' and $cle == 'creation')
+			$var_user[$cle] = date('Y-m-d');
 	}
 	$mail = $var_user[email];	
 	$commentaire = true;
@@ -89,12 +91,9 @@ function inscription_nouveau($declaration){
 	foreach($declaration as $cle => $val){
 		if ($cle == 'email' or $cle == 'nom' or $cle == 'bio' or $cle == 'statut' or $cle == 'login')
 			$auteurs[$cle] = $val;
-		else{
-			$aux = spip_query("SHOW FIELDS FROM spip_auteurs_elargis WHERE field = '$cle'");
-			if($aux == '') //si le champ n'existe pas ds la table, on l'ajoute
-				spip_query("ALTER TABLE spip_auteurs_elargis ADD COLUMN '$cle' VARCHAR(30)");
+		else
 			$elargis[$cle]= $val;
-	}}
+	}
 	//insertion des données dans la table spip_auteurs
 	$declaration['alea_actuel'] = rand(1,9999);
 	$auteurs['alea_actuel']=$declaration['alea_actuel'];

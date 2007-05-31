@@ -4,13 +4,18 @@
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	global $tables_principales;
-
+	$table_nom = "spip_auteurs_elargis";
 	foreach(lire_config('inscription2') as $cle => $val) {
-		if($val!='' and $cle != 'nom' and $cle != 'email'){
-			if($cle == 'naissance' )
+		if($val!='' and $cle != 'nom' and $cle != 'email' and $cle != 'login' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle)){
+			if($cle == 'naissance' ){
 				$spip_auteurs_elargis[$cle] = "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
-			else
+				if (!isset($desc['field'][$cle]))
+					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE");
+			}else{
 				$spip_auteurs_elargis[$cle] = 'text NOT NULL';
+				if (!isset($desc['field'][$cle]))
+					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
+			}
 		}
 	}
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";

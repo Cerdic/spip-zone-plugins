@@ -13,7 +13,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 
 <:titre_page_config_fonctions|gros_titre{'',''}:>
 
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 <br />
 
@@ -28,18 +28,58 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <p>
 	<:inscription2:info_defaut_desc:>
 <br /><br />
-
-<label>
-	<input type="checkbox" name="nom" checked="checked" id="nom" style="display: none;"/>
+<table>
+<tr>
+<td width='140'/>
+<td width='70'> <:inscription2:form:> </td>
+<td width='70'> <:inscription2:fiche_mod:> </td>
+<td width='70'> <:inscription2:fiche:> </td>
+<td width='70'> <:inscription2:table:> </td>
+</tr><tr>
+<td>
 	<strong><:inscription2:nom:></strong>
-</label>
-<br />
-
-<label>
-	<input type="checkbox" name="email" checked="checked" id="email" style="display: none;" />
+</td><td>
+	<label>
+		<input type="checkbox" name="nom" checked="checked" id="nom" style='display:none;' />
+		par d&eacute;faut
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_fiche_mod" onclick = "enadis(this,nom_fiche)" [checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_fiche" [checked="(#ENV{nom_fiche}?{checked})"] id="nom_fiche" [disabled ="(#ENV{nom_fiche_mod}?{true})"] />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_table" [checked="(#ENV{nom_table}?{checked})"] id="nom_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:email:></strong>
-</label>
-<br />
+</td><td>
+	<label>
+		<input type="checkbox" name="email" checked="checked" id="email" style='display:none;'/>
+		par d&eacute;faut
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="email_fiche_mod" onclick = "enadis(this,email_fiche)" [checked="(#ENV{email_fiche_mod}?{checked})"] id="email_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="email_fiche" [checked="(#ENV{email_fiche}?{checked})"] id="email_fiche" [disabled ="(#ENV{email_fiche_mod}?{true})"] />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="email_table" [checked="(#ENV{email_table}?{checked})"] id="email_table" />
+	</label>
+</td>
+</tr>
+</table>
+
 </fieldset>
 
 <fieldset>
@@ -51,10 +91,10 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 
 <table>
 <tr>
-<td />
+<td width='140'/>
 <td width='70'> <:inscription2:form:> </td>
-<td width='70'> <:inscription2:fiche:> </td>
 <td width='70'> <:inscription2:fiche_mod:> </td>
+<td width='70'> <:inscription2:fiche:> </td>
 <td width='70'> <:inscription2:table:> </td>
 </tr><tr>
 <td>
@@ -65,11 +105,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="prenom_fiche" [checked="(#ENV{prenom_fiche}?{checked})"] id="prenom_fiche" />
+		<input type="checkbox" name="prenom_fiche_mod" onclick = "enadis(this,prenom_fiche)" [checked="(#ENV{prenom_fiche_mod}?{checked})"] id="prenom_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="prenom_fiche_mod" [checked="(#ENV{prenom_fiche_mod}?{checked})"] id="prenom_fiche_mod" />
+		<input type="checkbox" name="prenom_fiche" [checked="(#ENV{prenom_fiche}?{checked})"] id="prenom_fiche" [disabled ="(#ENV{prenom_fiche_mod}?{true})"] />
 	</label>
 </td><td>
 	<label>
@@ -78,18 +118,18 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </td>
 </tr><tr>
 <td>
-	<strong><:inscription2:user:></strong>
+	<strong><:inscription2:login:></strong>
 </td><td>
 	<label>
 		<input type="checkbox" name="login" [checked="(#ENV{login}?{checked})"] id="login" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="login_fiche" [checked="(#ENV{login_fiche}?{checked})"] id="login_fiche" />
+		<input type="checkbox" name="login_fiche_mod" onclick = "enadis(this,login_fiche)" [checked="(#ENV{login_fiche_mod}?{checked})"] id="login_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="login_fiche_mod" [checked="(#ENV{login_fiche_mod}?{checked})"] id="login_fiche_mod" />
+		<input type="checkbox" name="login_fiche" [checked="(#ENV{login_fiche}?{checked})"] id="login_fiche" [disabled ="(#ENV{login_fiche_mod}?{true})"] />
 	</label>
 </td><td>
 	<label>
@@ -105,11 +145,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="naissance_fiche" [checked="(#ENV{naissance_fiche}?{checked})"] id="naissance_fiche" />
+		<input type="checkbox" name="naissance_fiche_mod" onclick = "enadis(this,naissance_fiche)" [checked="(#ENV{naissance_fiche_mod}?{checked})"] id="naissance_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="naissance_fiche_mod" [checked="(#ENV{naissance_fiche_mod}?{checked})"] id="naissance_fiche_mod" />
+		<input type="checkbox" name="naissance_fiche" [checked="(#ENV{naissance_fiche}?{checked})"] id="naissance_fiche" [disabled ="(#ENV{naissance_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -125,11 +165,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="sexe_fiche" [checked="(#ENV{sexe_fiche}?{checked})"] id="sexe_fiche" />
+		<input type="checkbox" name="sexe_fiche_mod" onclick = "enadis(this,sexe_fiche)" [checked="(#ENV{sexe_fiche_mod}?{checked})"] id="sexe_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="sexe_fiche_mod" [checked="(#ENV{sexe_fiche_mod}?{checked})"] id="sexe_fiche_mod" />
+		<input type="checkbox" name="sexe_fiche" [checked="(#ENV{sexe_fiche}?{checked})"] id="sexe_fiche" [disabled ="(#ENV{sexe_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -145,11 +185,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="adresse_fiche" [checked="(#ENV{adresse_fiche}?{checked})"] id="adresse_fiche" />
+		<input type="checkbox" name="adresse_fiche_mod" onclick = "enadis(this,adresse_fiche)" [checked="(#ENV{adresse_fiche_mod}?{checked})"] id="adresse_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="adresse_fiche_mod" [checked="(#ENV{adresse_fiche_mod}?{checked})"] id="adresse_fiche_mod" />
+		<input type="checkbox" name="adresse_fiche" [checked="(#ENV{adresse_fiche}?{checked})"] id="adresse_fiche" [disabled ="(#ENV{adresse_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -165,11 +205,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="code_postal_fiche" [checked="(#ENV{code_postal_fiche}?{checked})"] id="code_postal_fiche" />
+		<input type="checkbox" name="code_postal_fiche_mod" onclick = "enadis(this,code_postal_fiche)" [checked="(#ENV{code_postal_fiche_mod}?{checked})"] id="code_postal_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="code_postal_fiche_mod" [checked="(#ENV{code_postal_fiche_mod}?{checked})"] id="code_postal_fiche_mod" />
+		<input type="checkbox" name="code_postal_fiche" [checked="(#ENV{code_postal_fiche}?{checked})"] id="code_postal_fiche" [disabled ="(#ENV{code_postal_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -185,11 +225,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="ville_fiche" [checked="(#ENV{ville_fiche}?{checked})"] id="ville_fiche" />
+		<input type="checkbox" name="ville_fiche_mod" onclick = "enadis(this,ville_fiche)" [checked="(#ENV{ville_fiche_mod}?{checked})"] id="ville_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="ville_fiche_mod" [checked="(#ENV{ville_fiche_mod}?{checked})"] id="ville_fiche_mod" />
+		<input type="checkbox" name="ville_fiche" [checked="(#ENV{ville_fiche}?{checked})"] id="ville_fiche" [disabled ="(#ENV{ville_fiche_mod}?{true})"] />
 	</label>
 </td><td>
 	<label>
@@ -205,11 +245,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="telephone_fiche" [checked="(#ENV{telephone_fiche}?{checked})"] id="telephone_fiche" />
+		<input type="checkbox" name="telephone_fiche_mod" onclick = "enadis(this,telephone_fiche)" [checked="(#ENV{telephone_fiche_mod}?{checked})"] id="telephone_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="telephone_fiche_mod" [checked="(#ENV{telephone_fiche_mod}?{checked})"] id="telephone_fiche_mod" />
+		<input type="checkbox" name="telephone_fiche" [checked="(#ENV{telephone_fiche}?{checked})"] id="telephone_fiche" [disabled ="(#ENV{telephone_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -225,11 +265,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="fax_fiche" [checked="(#ENV{fax_fiche}?{checked})"] id="fax_fiche" />
+		<input type="checkbox" name="fax_fiche_mod" onclick = "enadis(this,fax_fiche)" [checked="(#ENV{fax_fiche_mod}?{checked})"] id="fax_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="fax_fiche_mod" [checked="(#ENV{fax_fiche_mod}?{checked})"] id="fax_fiche_mod" />
+		<input type="checkbox" name="fax_fiche" [checked="(#ENV{fax_fiche}?{checked})"] id="fax_fiche" [disabled ="(#ENV{fax_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -245,11 +285,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="mobile_fiche" [checked="(#ENV{mobile_fiche}?{checked})"] id="mobile_fiche" />
+		<input type="checkbox" name="mobile_fiche_mod" onclick = "enadis(this,mobile_fiche)" [checked="(#ENV{mobile_fiche_mod}?{checked})"] id="mobile_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="mobile_fiche_mod" [checked="(#ENV{mobile_fiche_mod}?{checked})"] id="mobile_fiche_mod" />
+		<input type="checkbox" name="mobile_fiche" [checked="(#ENV{mobile_fiche}?{checked})"] id="mobile_fiche" [disabled ="(#ENV{mobile_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -265,11 +305,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="profession_fiche" [checked="(#ENV{profession_fiche}?{checked})"] id="profession_fiche" />
+		<input type="checkbox" name="profession_fiche_mod" onclick = "enadis(this,profession_fiche)" [checked="(#ENV{profession_fiche_mod}?{checked})"] id="profession_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="profession_fiche_mod" [checked="(#ENV{profession_fiche_mod}?{checked})"] id="profession_fiche_mod" />
+		<input type="checkbox" name="profession_fiche" [checked="(#ENV{profession_fiche}?{checked})"] id="profession_fiche" [disabled ="(#ENV{profession_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -285,11 +325,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="societe_fiche" [checked="(#ENV{societe_fiche}?{checked})"] id="societe_fiche" />
+		<input type="checkbox" name="societe_fiche_mod" onclick = "enadis(this,societe_fiche)" [checked="(#ENV{societe_fiche_mod}?{checked})"] id="societe_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="societe_fiche_mod" [checked="(#ENV{societe_fiche_mod}?{checked})"] id="societe_fiche_mod" />
+		<input type="checkbox" name="societe_fiche" [checked="(#ENV{societe_fiche}?{checked})"] id="societe_fiche" [disabled ="(#ENV{societe_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
@@ -305,15 +345,35 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="secteur_fiche" [checked="(#ENV{secteur_fiche}?{checked})"] id="secteur_fiche" />
+		<input type="checkbox" name="secteur_fiche_mod" onclick = "enadis(this,secteur_fiche)" [checked="(#ENV{secteur_fiche_mod}?{checked})"] id="secteur_fiche_mod" />
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="secteur_fiche_mod" [checked="(#ENV{secteur_fiche_mod}?{checked})"] id="secteur_fiche_mod" />
+		<input type="checkbox" name="secteur_fiche" [checked="(#ENV{secteur_fiche}?{checked})"] id="secteur_fiche" [disabled ="(#ENV{secteur_fiche_mod}?{true})"]/>
 	</label>
 </td><td>
 	<label>
 		<input type="checkbox" name="secteur_table" [checked="(#ENV{secteur_table}?{checked})"] id="secteur_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:inscription2:fonction:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="fonction" [checked="(#ENV{fonction}?{checked})"] id="fonction" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fonction_fiche_mod" onclick = "enadis(this,fonction_fiche)" [checked="(#ENV{fonction_fiche_mod}?{checked})"] id="fonction_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fonction_fiche" [checked="(#ENV{fonction_fiche}?{checked})"] id="fonction_fiche" [disabled ="(#ENV{fonction_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fonction_table" [checked="(#ENV{fonction_table}?{checked})"] id="fonction_table" />
 	</label>
 </td>
 </tr>
@@ -321,8 +381,8 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <br />
 <small>
 <strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
-<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
 <strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
+<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
 <strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
 </small>
 </fieldset>
@@ -362,12 +422,6 @@ Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adher
 </div>
 
 <label>
-	<input type="checkbox" name="fonction" [checked="(#ENV{fonction}?{checked})"] id="fonction" />
-	<strong><:inscription2:fonction:></strong>
-</label>
-<br />
-
-<label>
 	<input type="checkbox" name="divers" [checked="(#ENV{divers}?{checked})"] id="divers" />
 	<strong><:inscription2:divers:></strong><br />
 	<:inscription2:exp_divers:>
@@ -376,7 +430,7 @@ Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adher
 
 <label>
 	<input type="checkbox" name="categorie" [checked="(#ENV{categorie}?{checked})"] id="categorie" />
-	<strong><:inscription2:categorie:></strong><br />
+	<strong><:inscription2:categorie:></strong><br /><strong>Pas encore disponible.....</strong><br />
 	<:inscription2:exp_categorie:>
 </label>
 <br />
@@ -405,7 +459,7 @@ Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adher
 
 <label>
 	<input type="checkbox" name="statut_relances" [checked="(#ENV{statut_relances}?{checked})"] id="statut_relances" />
-	<strong><:inscription2:statut_rel:></strong><br />
+	<strong><:inscription2:statut_rel:></strong><br /><strong>Pas encore disponible.....</strong><br />
 	<:inscription2:exp_statut_rel:>
 </label>
 <br />
@@ -419,6 +473,16 @@ if(boxName.checked){
 }
 else 
 	$('#news').slideUp('slow');
+}
+// --></script>
+
+<script type="text/javascript"><!--
+function enadis(boxName, boxNom) {
+if(boxName.checked){
+	boxNom.disabled = true;
+	boxNom.checked = false;
+}else 
+	boxNom.disabled = false;
 }
 // --></script>
 
