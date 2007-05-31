@@ -14,35 +14,34 @@ cs_log(" -- abs. path = $path2");
 
 	$smileys = array(
 	// les doubles :
-	 ':-(('	=> 'en_colere.png',
 	 ':-))'	=> 'mort_de_rire.png',
 	 ':))'	=> 'mort_de_rire.png',
-	 ":'-))"=> 'pleure_de_rire.png',
 	// attention ' est different de ’ (&#8217;) (SPIP utilise/ecrit ce dernier)
 	 ":&#8217;-))"=> 'pleure_de_rire.png',
+	 ":'-))"=> 'pleure_de_rire.png',
+	 ':-(('	=> 'en_colere.png',
 
 	// les simples :
-	 ':-&gt;' => 'diable.png',
-	 ':-('	=> 'pas_content.png',
-	 ':-D'	=> 'mort_de_rire.png',
+	 ';-)'	=> 'clin_d-oeil.png',
 	 ':-)'	=> 'sourire.png',
-	 '|-)'	=> 'rouge.png',
-	 ":'-)"=> 'pleure_de_rire.png',
+	 ':-D'	=> 'mort_de_rire.png',
 	 ":&#8217;-)"=> 'pleure_de_rire.png',
+	 ":'-)"=> 'pleure_de_rire.png',
 	 ":'-D"	=> 'pleure_de_rire.png',
 	 ":&#8217;-D"	=> 'pleure_de_rire.png',
-	 ":'-("	=> 'triste.png',
+	 ':-('	=> 'pas_content.png',
 	 ":&#8217;-("	=> 'triste.png',
-	 ":-("	=> 'triste.png',
+	 ":'-("	=> 'triste.png',
+	 ':-&gt;' => 'diable.png',
+	 '|-)'	=> 'rouge.png',
 	 ':o)'	=> 'rigolo.png',
 	 'B-)'	=> 'lunettes.png',
-	 ';-)'	=> 'clin_d-oeil.png',
-	 ':-p'	=> 'tire_la_langue.png',
 	 ':-P'	=> 'tire_la_langue.png',
+	 ':-p'	=> 'tire_la_langue.png',
 	 ':-|'	=> 'bof.png',
 	 ':-/'	=> 'mouais.png',
-	 ':-o'	=> 'surpris.png',
 	 ':-O'	=> 'surpris.png',
+	 ':-o'	=> 'surpris.png',
 
 	// les courts : tester a l'usage...
 	// attention : ils ne sont reconnus que s'il y a un espace avant !
@@ -62,6 +61,7 @@ cs_log(" -- abs. path = $path2");
 		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
 		$smileys2[1][] = $img = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>";
+		$smileys2[2][] = $val;
 		// liste des raccourcis et smileys disponibles
 		$liste[] = '<strong>'.$smy.'</strong>';
 	}
