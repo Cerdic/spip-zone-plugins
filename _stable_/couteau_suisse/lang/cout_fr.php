@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Le Couteau Suisse',
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Le&nbsp;Couteau&nbsp;Suisse'.</p>"
-		."<p>Documentation : [Tweak-SPIP->http://www.spip-contrib.net/Tweak-SPIP]</p>" . $temp['reset'],
+		."<p>Documentation : [Le Couteau Suisse->http://www.spip-contrib.net/?article2166]</p>" . $temp['reset'],
 	'raccourcis' => "Raccourcis typographiques actifs&nbsp;:",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
 	'nb_outil' => '@pipe@ : @nb@ outil',
