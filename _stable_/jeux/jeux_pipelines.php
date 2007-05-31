@@ -36,7 +36,7 @@ function jeux_pre($chaine, $indexJeux){
 //
 	return $texteAvant . $header
 		.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste))
-		."<a name=\"JEU$indexJeux\"></a>$chaine"
+		."<a name=\"JEU$indexJeux\"></a><div class=\"jeux_global\">$chaine</div>"
 		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre($texteApres, ++$indexJeux);
 }
 

@@ -339,7 +339,7 @@ function jeux_qcm($texte, $indexJeux) {
   $texte = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
 
   // calcul des extremes
-  $tete = '<div class="jeux qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
+  $tete = '<div class="jeux_cadre qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= jeux_form_debut('qcm', $indexJeux);
 	$pied = '<br /><div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();

@@ -121,7 +121,7 @@ function jeux_trous($texte, $indexJeux) {
    // reinserer les trous mis en forme
   $texte = trous_inserer_les_trous($html, $indexJeux);
 
-  $tete = '<div class="jeux">' . ($titre?'<div class="jeux_titre">'.$titre.'<hr /></div>':'');
+  $tete = '<div class="jeux_cadre">' . ($titre?'<div class="jeux_titre">'.$titre.'<hr /></div>':'');
   $pied = jeux_config('indices')?trous_afficher_indices($indexJeux):'';
   
   if (!isset($_POST["var_correction_".$indexJeux])) { 

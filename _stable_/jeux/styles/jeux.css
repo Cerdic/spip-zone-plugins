@@ -1,20 +1,17 @@
 /* Histoire de mettre tous les navigateurs d'accord... */
-* { margin:0pt; padding:0pt; }
-ul, ol, dd, dir, menu { padding-left: 40px; } /* decalage des listes */
-ul, ol { margin:1em; } /* marge des listes */
-ol ul, ul ol, ul ul, ol ol { margin-top: 0; margin-bottom: 0 } /* liste imbriquees */
-p { margin:1em auto; } /* separation des paragraphes */
-fieldset { padding:4pt; }
-.check { margin-left:3pt; margin-right:3pt; }
-
-/* Bug Spip 1.9.1 ?
-#haut-page>div { text-align:center; }
-*/
+.jeux_global { margin:0pt; padding:0pt; }
+.jeux_global p { margin:1em auto; } /* separation des paragraphes */
+/*ul, ol, dd, dir, menu { padding-left: 40px; } /* decalage des listes */
+/*ul, ol { margin:1em; } /* marge des listes */
+/*ol ul, ul ol, ul ul, ol ol { margin-top: 0; margin-bottom: 0 } /* liste imbriquees */
+/*fieldset { padding:4pt; }
+.check { margin-left:3pt; margin-right:3pt; }*/
 
 /* Espaceur de blocs */
 .jeux_nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
 
-.jeux { 
+/* Un cadre. Par exemple : les QCM ou les trous */
+.jeux_cadre { 
  text-align:left;
  font-size: 90%;
  /*font-family     : arial, helvetica, sans-serif;*/

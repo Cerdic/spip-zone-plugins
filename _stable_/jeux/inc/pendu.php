@@ -57,7 +57,7 @@ function pendu_pendu($js, $indexJeux) {
  $regles = jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('pendu:regle').'</p>' : '';
  $js = echappe_html("$js
  	pendu_init($indexJeux);
-// --></script>", 'JEUX');
+// --></script>", 'JEUX', true);
  // scripts autorises ?
  if ((!_DIR_RESTREINT && $GLOBALS["filtrer_javascript"]!=1) || ($GLOBALS["filtrer_javascript"]==-1)) $js = _T('jeux:erreur_scripts');
  // les scripts etaient totalement interdits avant 1.92
