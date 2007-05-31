@@ -19,6 +19,7 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 
+@define('_SPIP_LISTE_SEND_THREADS',1);
 function spip_listes_onglets($rubrique, $onglet){
 	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
 	
@@ -33,6 +34,7 @@ function spip_listes_onglets($rubrique, $onglet){
 
 
 function boite_autocron(){
+	@define('_SPIP_LISTE_SEND_THREADS',1);
 	$res = spip_query("SELECT COUNT(a.id_auteur) AS n FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='encour'");
 	$n = 0;
 	if ($row = spip_fetch_array($res))
@@ -57,7 +59,7 @@ function boite_autocron(){
 		 
 		$href = generer_action_auteur('spiplistes_envoi_lot','envoyer');
 		
-		for ($i=0;$i<4;$i++)
+		for ($i=0;$i<_SPIP_LISTE_SEND_THREADS;$i++)
 			echo "<span id='proc$i' class='processus' name='$href'></span>";
 		if (_request('exec')=='spip_listes')
 			echo "<a href='".generer_url_ecrire('spip_listes')."' id='redirect_after'></a>";
