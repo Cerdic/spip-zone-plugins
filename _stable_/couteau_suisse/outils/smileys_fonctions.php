@@ -1,5 +1,10 @@
 <?php
 
+// Outil SMILEYS - 25 decembre 2006
+// balise #SMILEYS : Patrice Vanneufville, 2007
+// Toutes les infos sur : http://www.spip-contrib.net/?article1561
+// dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
+
 // fonction qui renvoie un tableau de smileys uniques
 function smileys_uniques($smileys) {
 	$max = count($smileys[1]);
@@ -44,14 +49,10 @@ function balise_SMILEYS_dist($p) {
 	$html = "<table summary=\"$titre\" class=\"spip cs_smileys smileys\">$head";
 	$l = 1;
 	for ($i=0; $i<$max; $i++) {
-		//echo $i,':', $i % 5, '<br>';
 		if ($i % $nb_col == 0) {
 			$class = 'row_'.alterner($l++, 'even', 'odd');
 			$html .= "<tr class=\"$class\">";
 		}
-/*
-<a onmouseout="helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', document.getElementById('barre_1'))" onmouseover="helpline('Insérer un E accent aigu majuscule',document.getElementById('barre_1'))" title="Insérer un E accent aigu majuscule" tabindex="1000" class="spip_barre" href="javascript:barre_inserer('\u00c9',document.getElementById('textarea_1'))"><img alt="Insérer un E accent aigu majuscule" style="height: 16px; width: 16px; background-position: center;" src="dist/icones_barre/eacute-maj.png"/></a>
-*/
 		$html .= $liens
 			?"<td><a href=\"javascript:barre_inserer('{$smileys[0][$i]}',document.getElementById('textarea_1'))\">{$smileys[1][$i]}</a></td>"
 			:"<td>{$smileys[1][$i]}<br />{$smileys[0][$i]}</td>";

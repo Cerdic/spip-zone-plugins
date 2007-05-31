@@ -12,6 +12,9 @@ cs_log("smileys_installe() : $path");
 	$path2 = cs_htmlpath($path);
 cs_log(" -- abs. path = $path2");
 
+	// l'ordre des smileys ici est important :
+	//  - les doubles, puis les simples, puis les courts
+	//  - le raccourci insere par la balise #SMILEYS est la premiere occurence de chaque fichier
 	$smileys = array(
 	// les doubles :
 	 ':-))'	=> 'mort_de_rire.png',
