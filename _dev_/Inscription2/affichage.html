@@ -1,0 +1,57 @@
+<div class = "affichage">
+<?php 
+	$aux = "";
+	$var_user = array();
+	$auteur = array();
+	//liste d'elements a afficher
+	foreach(lire_config('inscription2') as $cle => $val) {
+		//Si la $cle est marqué pour être affichée mais pas modifiable
+		if($val!='' and ereg("^.+_fiche$", $cle)){ 
+			$aux = str_replace("_fiche", "", $cle);
+			if($aux == 'login' or $aux == 'nom' or $aux == 'email')
+				$auteur[$aux] = "";
+			else
+				$var_user[$aux] = "";
+		}elseif($val!='' and ereg("^.+_fiche_mod$", $cle)){ //champ modifiable
+			$aux = str_replace("_fiche_mod", "", $cle);
+			if($aux == 'login' or $aux == 'nom'or $aux == 'email')
+				$auteur[$aux] = "1";
+			else
+				$var_user[$aux] = "1";
+		}
+	}
+	if(is_array($var_user)){
+	$aux = join(', ',array_keys($var_user));
+	$aux = spip_query("SELECT $aux FROM spip_auteurs_elargis WHERE id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
+	$aux = spip_fetch_array($aux);
+	}
+	if(is_array($auteur)){
+		$aux2 = join(', ',array_keys($auteur));
+		$aux2 = spip_query("SELECT $aux2 FROM spip_auteurs WHERE id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
+		$aux2 = spip_fetch_array($aux2);
+		foreach($aux2 as $cle => $val){
+		echo '<div>';
+		echo '<strong>'._T('inscription2:'.$cle).' : </strong>';
+		if($var_user[$cle]=="1")
+			echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.$val.'</span>';  
+		else 
+			echo '<span>'.$val.'</span>';  
+		echo '</div>';
+		}
+	}
+	if(!is_array($aux) and !is_array($aux2)){
+		echo _T('inscription2:erreur_user_not_found');
+		return;
+	}
+	$id = $GLOBALS['auteur_session']['id_auteur'];
+	foreach($aux as $cle => $val){
+		echo '<div>';
+		echo '<strong>'._T('inscription2:'.$cle).' : </strong>';
+		if($var_user[$cle]=="1")
+			echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.$val.'</span>';  
+		else 
+			echo '<span>'.$val.'</span>';  
+		echo '</div>';
+	}
+?>
+</div>
