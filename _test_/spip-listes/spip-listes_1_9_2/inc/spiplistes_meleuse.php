@@ -46,13 +46,13 @@ if ($message_pile > 0){
 	$id_liste = $row["id_liste"];
 	$email_test = $row["email_test"];
 	
-	$nb_emails_envoyes = $row["nb_emails_envoyes"];
+	$nb_emails_envoyes = 0;
 	$total_abonnes = $row["total_abonnes"];
 	
-	$nb_emails_echec = $row["nb_emails_echec"];
-	$nb_emails_non_envoyes = $row["nb_emails_non_envoyes"];
-	$nb_emails['texte'] = $row["nb_emails_texte"];
-	$nb_emails['html'] = $row["nb_emails_html"];
+	$nb_emails_echec = 0;
+	$nb_emails_non_envoyes = 0;
+	$nb_emails['texte'] = 0;
+	$nb_emails['html'] = 0;
 
 	$debut_envoi = $row["date_debut_envoi"];
 
@@ -71,7 +71,7 @@ if ($message_pile > 0){
 		$mail_collectif = 'non' ;
 	} 
 	else {
-		//est-ce un mail collectif ?
+		//est-ce un mail collectif ? // a degager : on devrait toujours avoir une liste
 		if($id_liste == 0){
 			$mail_collectif = 'oui' ;
 			spiplistes_log(_T('spiplistes:envoi_tous')) ;
@@ -266,14 +266,22 @@ if ($message_pile > 0){
 		spip_query("UPDATE spip_courriers SET titre="._q(_T('spiplistes:erreur_destinataire')).", statut='publie' WHERE id_courrier="._q($id_courrier)); 
 	}
 #echo 	spip_timer();
-	// faire le bilan apres l'envoi d'un lot	
+	// faire le bilan apres l'envoi d'un lot en esperant que les differents processus simultanes se telescopent pas trop
 	if($test != 'oui'){
+		$stats = spip_fetch_array(spip_query("SELECT nb_emails_envoyes,nb_emails_non_envoyes,nb_emails_echec,nb_emails_texte,nb_emails_html FROM spip_courriers AS messages WHERE id_courrier = $id_courrier"));
+		$nb_emails_envoyes = $nb_emails_envoyes + $stats['nb_emails_envoyes'] ;
 		spip_query("UPDATE spip_courriers SET nb_emails_envoyes="._q($nb_emails_envoyes)." WHERE id_courrier="._q($id_courrier)); 
-	   if($nb_emails_non_envoyes > 0)
-	    spip_query("UPDATE spip_courriers SET nb_emails_non_envoyes="._q($nb_emails_non_envoyes)." WHERE id_courrier="._q($id_courrier));
-	    if($nb_emails_echec > 0)
-	    spip_query("UPDATE spip_courriers SET nb_emails_echec="._q($nb_emails_echec)." WHERE id_courrier="._q($id_courrier)); 
-	    spip_query("UPDATE spip_courriers SET nb_emails_texte="._q($nb_emails['texte'])." WHERE id_courrier="._q($id_courrier)); 
+	   if($nb_emails_non_envoyes > 0){
+			$nb_emails_non_envoyes = $nb_emails_non_envoyes + $stats['nb_emails_non_envoyes'] ;
+			spip_query("UPDATE spip_courriers SET nb_emails_non_envoyes="._q($nb_emails_non_envoyes)." WHERE id_courrier="._q($id_courrier));
+	    }
+		if($nb_emails_echec > 0){
+			$nb_emails_echec = $nb_emails_echec + $stats['nb_emails_echec'] ;
+			spip_query("UPDATE spip_courriers SET nb_emails_echec="._q($nb_emails_echec)." WHERE id_courrier="._q($id_courrier)); 
+	    }
+		$nb_emails['texte'] = $nb_emails['texte'] + $stats['nb_emails_texte'] ;
+		$nb_emails['html'] = $nb_emails['html'] + $stats['nb_emails_html'] ;
+		spip_query("UPDATE spip_courriers SET nb_emails_texte="._q($nb_emails['texte'])." WHERE id_courrier="._q($id_courrier)); 
 	    spip_query("UPDATE spip_courriers SET nb_emails_html="._q($nb_emails['html'])." WHERE id_courrier="._q($id_courrier)); 
 		if($fin_envoi=="oui")
 			spip_query("UPDATE spip_courriers SET date_fin_envoi=NOW() WHERE id_courrier="._q($id_courrier)); 
@@ -286,22 +294,22 @@ else {
 
 
 /******************************************************************************************/
-/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
-/* par email pour SPIP. http://bloog.net/spip-listes                                      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
-/*                                                                                        */
-/* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
-/* (version 2).                                                                           */
-/*                                                                                        */
-/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
-/* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
-/* pour plus de détails.                                                                  */
-/*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
-/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
-/* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     			      */
+/* par email pour SPIP. http://bloog.net/spip-listes                                     					      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                              				      */
+/*                                                                                       								      */
+/* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes                        */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation                                   */
+/* (version 2).                                                                                                                                         */
+/*                                                                                                                                                           */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,                      */
+/* ni explicite ni implicite, y compris les garanties de commercialisation ou                                              */
+/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU                     */
+/* pour plus de détails.                                                                                                                            */
+/*                                                                                                                                                           */
+/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                                                */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                                                  */
+/* Free Software Foundation,                                                                                                                 */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                                                 */
 /******************************************************************************************/
 ?>
