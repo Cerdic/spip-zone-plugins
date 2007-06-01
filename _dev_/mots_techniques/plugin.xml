@@ -21,6 +21,13 @@ technique sinon le champs technique restera vide.
 - Par d&eacute;faut, tous les groupes de mots cl&eacute;s cr&eacute;&eacute;s via l'interface de 
 gestion des groupes de mots cl&eacute;s auront la valeur 'oui' inscrite dans le 
 champs affiche_formulaire.
+- L'interface de gestion des groupes de mots cl&eacute;s n'affichera que les 
+groupes dont le champs technique est soit vide soit 'oui'.
+- Les plugins pourront rajouter des groupes de mots-cl&eacute;s avec une autre 
+valeur dans le champs technique, mais ceux-ci seront invisibles via 
+l'interface de gestion des groupes de mots cl&eacute;s. Ce sera au plugin de 
+fournir l'interface de gestion de ces groupes sp&eacute;cifiques de mots-cl&eacute;s, 
+en fonction de chaque usage.
 	</multi>
 	</description>
 	<options> <!-- fichier charge a chaque hit -->

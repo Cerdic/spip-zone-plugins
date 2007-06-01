@@ -22,15 +22,15 @@ function action_instituer_groupe_mots()
 	$arg = $securiser_action();
 
 	if (preg_match(",^([a-zA-Z_]\w+)$,", $arg, $r)) 
-	  action_instituer_groupe_mots_get2($arg);
+	  action_instituer_groupe_mots_get($arg);
 	elseif (!preg_match(",^(-?\d+)$,", $arg, $r)) {
 		 spip_log("action_instituer_groupe_mots $arg pas compris");
-	} else action_instituer_groupe_mots_post2($r);
+	} else action_instituer_groupe_mots_post($r);
 }
 
 
 // http://doc.spip.org/@action_instituer_groupe_mots_post
-function action_instituer_groupe_mots_post2($r)
+function action_instituer_groupe_mots_post($r)
 {
 	global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $descriptif, $id_groupe, $obligatoire, $rubriques, $syndic, $texte, $unseul, $technique, $affiche_formulaire;
 
@@ -56,7 +56,7 @@ function action_instituer_groupe_mots_post2($r)
 
 
 // http://doc.spip.org/@action_instituer_groupe_mots_get
-function action_instituer_groupe_mots_get2($table)
+function action_instituer_groupe_mots_get($table)
 {
 	$titre = _T('info_mot_sans_groupe');
 
