@@ -1,0 +1,43 @@
+<plugin>
+	<nom>Mots techniques pour SPIP svn</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Joseph et toutes les bonnes volont&eacute;es - 2007
+	</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>
+	Plugin de dev pour tester l'ajout d'un champs technique aux mots cl&eacute;s. Cf. les discussions sur spip-dev.
+_ Le d&eacute;veloppement s'est bas&eacute; sur la version SVN 9451 de SPIP.
+- Ajout d'un champ technique de type texte &agrave; la table spip_groupes_mots.
+- Ajout d'un champ affiche_formulaire de type varchar(3) &agrave; la table 
+spip_groupes_mots.
+- Sur la page exec/mots_type ajout d'une case à cocher mots techniques. 
+Si elle est coch&eacute;e, alors la valeur 'oui' sera mise dans le champs 
+technique sinon le champs technique restera vide.
+- Par d&eacute;faut, tous les groupes de mots cl&eacute;s cr&eacute;&eacute;s via l'interface de 
+gestion des groupes de mots cl&eacute;s auront la valeur 'oui' inscrite dans le 
+champs affiche_formulaire.
+	</multi>
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	mots_techniques_mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	mots_techniques_mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	mots_techniques
+	</prefix>
+	<install>inc/mots_techniques_install.php</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<chemin dir='' />
+</plugin>
