@@ -28,6 +28,11 @@ valeur dans le champs technique, mais ceux-ci seront invisibles via
 l'interface de gestion des groupes de mots cl&eacute;s. Ce sera au plugin de 
 fournir l'interface de gestion de ces groupes sp&eacute;cifiques de mots-cl&eacute;s, 
 en fonction de chaque usage.
+- Les formulaires d'ajout de mots-cl&eacute;s sur les diff&eacute;rents objets 
+(articles, breves, etc...) ne proposeront que les mots-cl&eacute;s des groupes 
+de mots-cl&eacute;s tels que le champs affiche_formulaire = oui. Ce qui 
+permettra à un plugin de g&eacute;rer ses groupes de mots cl&eacute;s sp&eacute;cifiques tout 
+en les rendant disponibles en tant que mot cl&eacute; classique.
 	</multi>
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
