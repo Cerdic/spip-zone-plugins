@@ -33,6 +33,9 @@ en fonction de chaque usage.
 de mots-cl&eacute;s tels que le champs affiche_formulaire = oui. Ce qui 
 permettra à un plugin de g&eacute;rer ses groupes de mots cl&eacute;s sp&eacute;cifiques tout 
 en les rendant disponibles en tant que mot cl&eacute; classique.
+- Pour mieux distinguer les mots cl&eacute;s non techniques des mots cl&eacute;s 
+techniques, les mots cl&eacute;s techniques seront repr&eacute;sent&eacute;s par une petite 
+roue dent&eacute;e au lieu d'une cl&eacute; à molette.
 	</multi>
 	</description>
 	<options> <!-- fichier charge a chaque hit -->

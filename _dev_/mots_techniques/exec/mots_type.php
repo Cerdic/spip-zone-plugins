@@ -58,13 +58,6 @@ function exec_mots_type()
 		}
 	}
 
-	// Les mots clés techniques différents de technique='oui' ne sont pas gérés l'interface de gestion des mots clés techniques.
-	if ($technique != '' AND $technique != 'oui') {
-		include_spip('inc/minipres');
-		echo minipres(_T('motstechniques:type_mot_technique_non_gere_titre'),_T('motstechniques:type_mot_technique_non_gere'));
-		exit;
-	}
-
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
