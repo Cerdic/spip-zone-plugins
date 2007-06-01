@@ -63,11 +63,11 @@ function pendu_trouve(lettre, jeu) {
 	Long=Cherche[jeu].length; // Longueur du mot a trouver
 	Propositions[jeu]+=lettre; // stocker la lettre dans les lettres deja proposees
 	trv=0;
-	for (i=0;i<Long;i++) if(Cherche[jeu].substr(i,1)==lettre) {
+for (i=0;i<Long;i++) if(Cherche[jeu].substr(i,1)==lettre) {
 		trv=1;	// Traitement si la lettre est trouvee
-		gauche=Chaine[jeu].substr(0,i);
-		droite=Chaine[jeu].substr(i+1,Long);
-		Chaine[jeu]=gauche+lettre+droite;
+		aGauche=Chaine[jeu].substr(0,i);
+		aDroite=Chaine[jeu].substr(i+1,Long);
+		Chaine[jeu]=aGauche+lettre+aDroite;
 	}
 	pendu_aff_mot(jeu); // On affiche le mot 
 	pendu_clavier_grise(jeu, lettre, true); // On grise le clavier

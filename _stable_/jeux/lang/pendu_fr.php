@@ -12,7 +12,7 @@ _ La t&ecirc;te, un bras, une jambe... Au bout de la six&egrave;me erreur, vous 
 'cliquez'	=> "Cliquez sur la lettre que vous voulez proposer :",
 
 // javascript
-'fini'		=> 'Vous êtes pendu(e) !\nIl fallait trouver : ',
+'fini'		=> 'Pendu(e) !\nIl fallait trouver : ',
 
 );
 

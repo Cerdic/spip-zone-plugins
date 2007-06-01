@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Des jeux dans vos articles</nom>
 	<etat>test</etat>
-	<version>0.5.3 pour Spip 1.9 minimum.</version>
+	<version>0.5.4 pour Spip 1.9 minimum.</version>
 	<icon>img/jeux-48.png</icon>
 	<auteur>
 [Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net], novembre 2006
