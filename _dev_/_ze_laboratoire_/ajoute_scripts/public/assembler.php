@@ -429,7 +429,7 @@ function analyse_js_ajoutee($page) {
     $corps = substr_replace($corps,$params,$pos_script,strlen($appelle));
   }  
   $scripts_a_ajouter = array();
-  if(is_array($scripts_fichier))
+  if(is_array($scripts_inline))
     foreach($scripts_inline as $nom => $script) 
       if(!isset($js_necessaire[$nom]) || $js_necessaire[$nom]) {
         //ajoute script inline
@@ -448,7 +448,7 @@ function analyse_js_ajoutee($page) {
     return $page;
   }
   //ajoutee scripts inline a la fin du <head> 
-  if(count($scripts_a_ajouter)) {
+  if(count($scripts_a_ajouter) || count($scripts_collecte)) {
     $scripts_a_ajouter = array_unique(array_merge($scripts_a_ajouter,$scripts_collecte));
     $pos_fin_head = strpos($corps,"</head>");
     $corps = substr_replace($corps,join("\n",$scripts_a_ajouter),$pos_fin_head,0);
