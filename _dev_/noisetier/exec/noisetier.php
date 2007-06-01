@@ -101,8 +101,9 @@ function exec_noisetier_dist(){
 	}
 	
 	if (count($theme_zones_warning)>0){
-		echo "<p style='border-top:3px solid #900; clear:both;font-weight:bold;'><img src='"._DIR_IMG_PACK."warning.gif' />"._T('noisetier:zones_non_gerees')."</p>";
-		echo "<p style='text-align:justify;font-size:90%;'>"._T('noisetier:zones_non_gerees_explication')."</p>";
+		echo "<p style='border-top:3px solid #900; clear:both;'>";
+		echo gros_titre("<img src='"._DIR_IMG_PACK."warning.gif' />&nbsp;"._T('noisetier:zones_non_gerees'));
+		echo "</p><p style='text-align:justify;font-size:90%;' class='serif'>"._T('noisetier:zones_non_gerees_explication')."</p>";
 	}
 	foreach ($theme_zones_warning as $theme_une_zone) {
 		echo noisetier_gestion_zone($theme_une_zone['nom'],$page,true);

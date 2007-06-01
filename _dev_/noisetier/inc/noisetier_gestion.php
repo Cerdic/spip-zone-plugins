@@ -95,10 +95,9 @@ function noisetier_liste_noisettes() {
 function noisetier_form_ajout_noisette_texte($page,$zone) {
 	$out = '';
 	$out .= debut_cadre_formulaire('', true);
-	$out .= bouton_block_invisible("form-ajout-$zone");
-	$out .= "<b>"._T('noisetier:ajout_noisette_texte')."</b>";
+	$out .= bouton_block_depliable(_T('noisetier:ajout_noisette_texte'),false,"form-ajout-$zone");
 	$redirect = generer_url_ecrire('noisetier',($page=='')?'':"page=$page");
-	$out .= debut_block_invisible("form-ajout-$zone");
+	$out .= debut_block_depliable(false,"form-ajout-$zone");
 	//Ajout d'une noisette
 	$action_link = generer_action_auteur("noisetier_ajout", 'ajout_noisette', $redirect);
 	$action_link_noredir = parametre_url($action_link,'redirect','');
@@ -172,17 +171,16 @@ function noisetier_affiche_texte($id_noisette, $page, $row=NULL) {
 	$out .= "</div>\n";
 	
 	// Titre du texte
-	$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
+	$out .= "<div style='padding: 0px 20px 2px 30px; color: black;'>";
 	if ($noisette_visible==$id_noisette)
-		$out .= bouton_block_visible("noisette-$id_noisette");
+		$out .= bouton_block_depliable(typo($row['titre']),true,"block-noisette-$id_noisette");
 	else
-		$out .= bouton_block_invisible("noisette-$id_noisette");
-	$out .= "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
+		$out .= bouton_block_depliable(typo($row['titre']),false,"block-noisette-$id_noisette");
 	$out .= "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
 	if ($noisette_visible==$id_noisette)
-		$out .= debut_block_visible("noisette-$id_noisette");
+		$out .= debut_block_depliable(true,"block-noisette-$id_noisette");
 	else
-		$out .= debut_block_invisible("noisette-$id_noisette");
+		$out .= debut_block_depliable(false,"block-noisette-$id_noisette");
 	
 	//Modification du texte
 	$redirect = ancre_url($redirect,"noisette-$id_noisette");
@@ -265,18 +263,16 @@ function noisetier_affiche_noisette($id_noisette, $page, $row=NULL) {
 	$out .= "</div>\n";
 
 	// Titre de la noisette
-	$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>";
+	$out .= "<div style='padding: 0px 20px 2px 30px; color: black;'>";
 	if ($noisette_visible==$id_noisette)
-		$out .= bouton_block_visible("noisette-$id_noisette");
+		$out .= bouton_block_depliable(typo($row['titre']),true,"block-noisette-$id_noisette");
 	else
-		$out .= bouton_block_invisible("noisette-$id_noisette");
-	$out .= "<strong id='titre_nom_$id_noisette'>".typo($row['titre'])."</strong>";
+		$out .= bouton_block_depliable(typo($row['titre']),false,"block-noisette-$id_noisette");
 	$out .= "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
 	if ($noisette_visible==$id_noisette)
-		$out .= debut_block_visible("noisette-$id_noisette");
+		$out .= debut_block_depliable(true,"block-noisette-$id_noisette");
 	else
-		$out .= debut_block_invisible("noisette-$id_noisette");
-	
+		$out .= debut_block_depliable(false,"block-noisette-$id_noisette");
 	
 	//Supression de la noisette  (faire un formulaire)
 	if (autoriser('gerer','noisetier')) {
