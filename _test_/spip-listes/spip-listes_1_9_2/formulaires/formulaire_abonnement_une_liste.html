@@ -29,15 +29,16 @@ texte d'inscription en tant que visiteur
 
 
 
-
+<a name="spip-listes"></a>
 [(#ENV{mode_login}|?{' ',''})
-	<form action="#SELF" method="post" class="lettre">
+	<form action="#SELF#spip-listes" method="post" class="lettre">
 ]
 		<BOUCLE_liste(LISTES) {statut=liste} {id_liste=#ENV{id_liste}}>
 			<fieldset style="margin-bottom:1em;">
 			<legend style="font-weight:bold;">#TITRE</legend>
+			[(#ENV{mode_login}|?{' ',''})
 			<div style="margin-bottom:1em">#TEXTE</div>
-			
+			]
 			<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
 			
 			[(#ENV{mode_login}|?{' ',''})
