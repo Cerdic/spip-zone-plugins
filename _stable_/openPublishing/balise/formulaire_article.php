@@ -478,8 +478,8 @@ else
 	}
 
 	// pour le moment le flag n'est pas mis en place
-	//$flag = op_get_tagmachine();
-	//if ($flag == 'oui') {
+	$flag = op_get_tagmachine();
+	if ($flag == 'oui') {
 		// Gestion des mot-clefs avec tag machine
 		$formulaire_tagopen = inclure_balise_dynamique(
 		array('formulaires/formulaire_tagopen',	0,
@@ -487,7 +487,7 @@ else
 				'id_article' => $article,
 			)
 		), false);
-	//}
+	}
 
 	// Liste des documents associés à l'article
 	op_liste_vignette($article);

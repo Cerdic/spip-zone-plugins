@@ -50,7 +50,8 @@ $op_config = array(
 		"id_auteur_op"			=> "bigint(21) NOT NULL",
 		"message_retour"		=> "text NOT NULL",
 		"message_retour_abandon"	=> "text NOT NULL",
-		"version"			=> "text NOT NULL"
+		"version"			=> "text NOT NULL",
+		"tagmachine"			=> "ENUM('oui','non') DEFAULT 'non' NOT NULL"
 		);
 
 $op_config_key = array(

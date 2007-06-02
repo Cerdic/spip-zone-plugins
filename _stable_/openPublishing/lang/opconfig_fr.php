@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'op_info_base_ok' => 'Le plugin openPublishing est correctement install&eacute;',
 	'op_info_base_ko' => 'Les tables de donn&eacute;e du plugin openPublishing doivent-&ecirc;tre install&eacute;es.',
 	'op_info_deja_ko' => 'Les tables de donn&eacute;e du plugin openPublishing a &eacute;t&eacute; d&eacute;sinstall&eacute;e',
+	'op_info_base_up' => 'Attention, la base de donn&eacute;e du plugin openPublishing doit &ecirc;tre upgrader. Cela est du à un changement de version du plugin openPublishing. Appuyez sur le bouton pour continuer.',
 	'op_info_base_ko_bis' => 'Le plugin openPublishing n&eacute;cessite l\'installation d\'une table suppl&eacute;mentaire pour fonctionner. Si vous n\'installez pas cette table, alors le plugin ne marchera pas.',
 	'op_info_desinstal' => '<b>Cette commande efface la base de donn&eacute;e cr&eacute;&eacute;e lors de l\'installation du plugin openPublishing.</b><p />  La base de donn&eacute;e de spip n\'est pas effac&eacute;e. Si vous souhaitez supprimer le plugin openPublishing, alors vous devrez &eacute;galement supprimer par ftp le contenu du dossier plugin openPublishing',
 	'op_position_info' => '1. Que voulez-vous faire ?',

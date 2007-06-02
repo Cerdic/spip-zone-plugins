@@ -1,9 +1,9 @@
 <plugin>
 	<nom>openPublishing</nom>
-	<version>0.2.2</version>
+	<version>0.3</version>
 	<etat>stable</etat>
 	<auteur>Collectif Indymedia Lille [contact->mailto:imc.lille@no-log.org] _ [site->http://lille.indymedia.org]
-_ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
+	_ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<description>
 		{{Plugin openPublishing pour site de publication libre.}} <br /> <br />
@@ -27,7 +27,7 @@ _ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 				
 		{{Procedure d'installation :}} <br />
 		<ul>
-		<li>Activez ce plugin </li>
+		<li>Activez ce plugin <br />
 		<li>Allez dans l'onglet de configuration openPublishing.</li>
 		<li>Cr&eacute;ez les nouvelles tables dans la base de donn&#233;es.</li>
 		<li>Modifiez la configuration par d&eacute;faut du plugin.</li>

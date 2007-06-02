@@ -32,6 +32,9 @@ function exec_op() {
                 	op_installer_base();
 			op_set_id_auteur(999);
                 break;
+		case "upgrade" :
+			op_upgrade_base();
+		break;
         }
     	}	
 	
@@ -77,6 +80,14 @@ function exec_op() {
         	echo _T("opconfig:op_info_base_ko_bis");
 	}
 
+	if (op_verifier_upgrade()) {
+		echo _T("opconfig:op_info_base_up");
+		echo '<p /><div align="center">';
+		echo '<form method="post" action="'.generer_url_ecrire('op',"action=upgrade").'">';
+		echo '<input type="submit" name="appliq" value="Upgrader les tables openPublishing" />';
+		echo '</form></div>';
+	}
+
 	fin_cadre_enfonce();
 
 	fin_page();
@@ -89,6 +100,9 @@ function op_liste_config() {
 	echo "<li>Version install&eacute;e : <b>".op_get_version()."</b></li>";
 	echo "<li>Gestion d'un agenda : <b>".op_get_agenda()."</b></li>";
 	echo "<li>Gestion des documents : <b>".op_get_document()."</b></li>";
+	echo "<li>Gestion des mots-clefs<ul>";
+		echo "<li>Plugin Tag Machine : <b>".op_get_tagmachine()."</b></li>";
+	echo "</ul>";
 	echo "<li>Post-traitement<ul>";
 		echo "<li>Titre en minuscule : <b>".op_get_titre_minus()."</b></li>";
 		echo "<li>Anti-spam : <b>".op_get_antispam()."</b></li>";
