@@ -36,27 +36,33 @@ function decouper_en_pages_rempl($texte) {
 	$images = unserialize($GLOBALS['meta']['cs_decoupe']);
 
 	// images et liens pour la navigation sous forme : << < ... > >>
+	// precedent
+	$alt = _T('cout:page_precedente');
+	$alt = "title=\"$alt\" alt=\"$alt\"";
 	$precedent = '<a href="' . parametre_url($self,'artpage', $artpage - 1) . '">'; 
+	$precedent = $artpage == 1?$images['precedent_off']." $alt />"
+		:$precedent.$images['precedent']."$alt /></a>";
+	// suivant
+	$alt = _T('cout:page_suivante');
+	$alt = "title=\"$alt\" alt=\"$alt\"";
 	$suivant = '<a href="' . parametre_url($self,'artpage', $artpage + 1) . '">'; 
-	$debut = '<a href="' . parametre_url($self,'artpage', 0) . '">'; 
-	$fin = '<a href="' . parametre_url($self,'artpage', $num_pages) . '">';
-	$alt = '"'._T('cout:page_precedente').'"';
-	$alt = " alt=$alt title=$alt";
-	$precedent = $artpage == 1?$images['precedent_off'].'/>'
-		:$precedent.$images['precedent'].$alt.'/></a>';
-	$alt = '"'._T('cout:page_suivante').'"';
-	$alt = " alt=$alt title=$alt";
-	$suivant = ($artpage == $num_pages)?$images['suivant_off'].'/>'
-		:$suivant.$images['suivant'].$alt.'/></a>';
-	$alt = '"'._T('cout:page_debut').'"';
-	$alt = " alt=$alt title=$alt";
-	$debut = $artpage == 1?($temp=$images['precedent_off'].'/>').$temp
-		:$debut.($temp=$images['precedent'].$alt.'/>').$temp.'</a>';
-	$alt = '"'._T('cout:page_fin').'"';
-	$alt = " alt=$alt title=$alt";
-	$fin = ($artpage == $num_pages)?($temp=$images['suivant_off'].'/>').$temp
-		:$fin.($temp=$images['suivant'].$alt.'/>').$temp.'</a>';
-
+	$suivant = ($artpage == $num_pages)?$images['suivant_off']." $alt />"
+		:$suivant.$images['suivant']."$alt /></a>";
+	// s'il existe plus de trois pages on calcule les liens << et >>
+	if ($num_pages>3) {
+		// debut
+		$alt = _T('cout:page_debut');
+		$alt = "title=\"$alt\" alt=\"$alt\"";
+		$debut = '<a href="' . parametre_url($self,'artpage', 0) . '">'; 
+		$debut = $artpage == 1?($temp=$images['precedent_off']." $alt />").$temp
+			:$debut.($temp=$images['precedent']." $alt />").$temp.'</a>';
+		// fin
+		$alt = _T('cout:page_fin');
+		$alt = "title=\"$alt\" alt=\"$alt\"";
+		$fin = '<a href="' . parametre_url($self,'artpage', $num_pages) . '">';
+		$fin = ($artpage == $num_pages)?($temp=$images['suivant_off']." $alt />").$temp
+			:$fin.($temp=$images['suivant']." $alt />").$temp.'</a>';
+	}
 	// liens des differentes pages sous forme : 1 2 3 4
 	$milieu = array();
 	for ($i = 1; $i <= $num_pages; $i++) {
