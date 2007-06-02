@@ -14,8 +14,8 @@ function cs_rempl_glossaire($texte) {
 	while($mot = spip_fetch_array($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
 //		$table[$mot[id_mot]] = "<abbr title=\"$mot[texte]\">$mot[titre]</abbr>";
 		$lien = generer_url_mot($mot['id_mot']);
-		$table1[$mot['id_mot']] = "<a name=\"mot$mot[id_mot]\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"mot\">";
-		$table2[$mot['id_mot']] = "</span><span class=\"dl\"><span class=\"dt\">$mot[titre]</span><span class=\"dd\">"
+		$table1[$mot['id_mot']] = "<a name=\"mot$mot[id_mot]\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
+		$table2[$mot['id_mot']] = "</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">"
 			. nl2br(trim($mot['texte'])) . "</span></span></a>";
 		// a chaque mot reconnu, on pose une balise temporaire	
 		$texte = preg_replace(",\b$mot[titre]\b,i", "@@GLOSS\\0#$mot[id_mot]@@", $texte, $limit);
