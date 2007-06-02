@@ -5,6 +5,18 @@
 // Toutes les infos sur : http://www.spip-contrib.net/?article1561
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
+// compatibilite SPIP < 1.92
+if (!function_exists('interprete_argument_balise')) {
+	function interprete_argument_balise($n,$p) {
+		if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
+			return calculer_liste($p->param[0][$n],
+										$p->descr,
+										$p->boucles,
+										$p->id_boucle);	
+		else return NULL;
+	}
+}
+
 // fonction qui renvoie un tableau de smileys uniques
 function smileys_uniques($smileys) {
 	$max = count($smileys[1]);
