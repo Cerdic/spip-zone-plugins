@@ -154,6 +154,13 @@ function jeux_stylesheet($b) {
  return $f?'<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />'."\n":'';
 }
 
+// pour inserer un css.html
+function jeux_stylesheet_html($b) {
+ $f = find_in_path("styles/$b.html");
+ $args = 'ltr=' . $GLOBALS['spip_lang_left'];
+ return $f?'<link rel="stylesheet" type="text/css" href="'.generer_url_public("$b.css", $args)."\" >\n"."\n":'';
+}
+
 // pour inserer un js
 function jeux_javascript($b) {
  $f = find_in_path("javascript/$b.js");
@@ -170,7 +177,9 @@ function jeux_block_init() {
 }
 function jeux_block_invisible($id, $texte, $block) {
  if (!strlen($texte)) return '';
- return $GLOBALS['spip_version_code']<1.92?							// compatibilite avec 1.9.1
+ if(function_exists('bouton_block_depliable'))						// fonction introduite en 1.93
+ 	return bouton_block_depliable($texte, false, $id).debut_block_depliable(false, $id).$block.fin_block();
+ else return $GLOBALS['spip_version_code']<1.92?				// compatibilite avec 1.9.1
 	bouton_block_visible($id).$texte.debut_block_visible($id).$block.fin_block()
 	:bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block();
 }

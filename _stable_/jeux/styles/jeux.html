@@ -161,3 +161,10 @@ table.jeux_grille td{
 .jeux_grille td.jeux_bas{
 	border-bottom:1px solid black;
 }
+
+/* Deplier / Replier */
+.replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
+.deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
+.impliable {}
+.bloc_depliable.replie { display: none; }
+.bloc_depliable.deplie { display: block; background: none; }

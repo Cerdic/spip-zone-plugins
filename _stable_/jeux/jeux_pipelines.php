@@ -26,7 +26,7 @@ function jeux_pre($chaine, $indexJeux){
 	// calcul des fichiers necessaires pour le header
 	if(count($liste)) {
 		// on oblige qd meme jeux.css et layer.js si un jeu est detecte
-		$header = jeux_stylesheet('jeux') ."\n". jeux_javascript('layer') . "\n";
+		$header = jeux_stylesheet_html('jeux') ."\n". jeux_javascript('layer') . "\n";
 		// css et js des jeux detectes
 		foreach($liste as $jeu) $header .= jeux_stylesheet($jeu) . "\n";
 		foreach($liste as $jeu) $header .= jeux_javascript($jeu) . "\n";
