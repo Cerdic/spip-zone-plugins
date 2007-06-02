@@ -1,0 +1,16 @@
+<plugin>
+ 	<nom>Critere IN light</nom>
+	<auteur>
+		Christian Lefebvre;
+
+		- &#169; 2007 Distribue sous licence GNU/GPL v2
+	</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+	Critere IN* qui fait comme un IN mais sans chercher a garder l'ordre des parametres, ce qui simplifie enormement la requete generee
+	</description>
+	<lien></lien>
+	<fonctions>critereIN.php</fonctions>
+	<prefix>critereIN</prefix>
+</plugin>
