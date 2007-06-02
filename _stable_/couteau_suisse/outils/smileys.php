@@ -87,7 +87,9 @@ function cs_rempl_smileys($texte) {
 	$smileys_rempl = unserialize($GLOBALS['meta']['cs_smileys']);
 	// smileys a probleme :
 	$texte = str_replace(':->', ':-&gt;', $texte); // remplacer > par &gt;
-	$texte = str_replace(':'.chr(146).'-', ':&#8217;-', $texte); // remplacer ’ (apostrophe curly) par &#8217;
+	// remplacer ’ (apostrophe curly) par &#8217;
+	$texte = str_replace(':’-', ':&#8217;-', $texte);
+	$texte = str_replace(':'.chr(146).'-', ':&#8217;-', $texte);
 	// voila, on remplace tous les smileys d'un coup...
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
 	// accessibilite : alt et title avec le smiley en texte
