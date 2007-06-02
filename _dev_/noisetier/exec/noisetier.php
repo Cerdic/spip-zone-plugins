@@ -7,7 +7,7 @@ include_spip('inc/noisetier_gestion');
 include_spip('options_noisetier');
 
 function exec_noisetier_dist(){
-	global $spip_lang_right;
+	global $spip_lang_right, $les_notes;
 	global $theme_titre, $theme_descriptif, $theme_zones, $noisetier_pages, $noisetier_description_pages;
 
 	$page = _request('page');
@@ -109,6 +109,13 @@ function exec_noisetier_dist(){
 		echo noisetier_gestion_zone($theme_une_zone['nom'],$page,true);
 		}
 
+	if ($les_notes) {
+		debut_cadre_relief();
+		echo "<div $dir_lang class='arial11'>";
+		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
+		echo "</div>";
+		fin_cadre_relief();
+	}
 
 	echo fin_gauche(), fin_page();
 }

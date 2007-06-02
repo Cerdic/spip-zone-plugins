@@ -176,7 +176,7 @@ function noisetier_affiche_texte($id_noisette, $page, $row=NULL) {
 		$out .= bouton_block_depliable(typo($row['titre']),true,"block-noisette-$id_noisette");
 	else
 		$out .= bouton_block_depliable(typo($row['titre']),false,"block-noisette-$id_noisette");
-	$out .= "<div style='font-size:90%;'>".typo($row['descriptif'])."</div></div>";
+	$out .= "<div style='font-size:90%;'>".couper(typo($row['descriptif']),150)."</div></div>";
 	if ($noisette_visible==$id_noisette)
 		$out .= debut_block_depliable(true,"block-noisette-$id_noisette");
 	else
@@ -184,6 +184,8 @@ function noisetier_affiche_texte($id_noisette, $page, $row=NULL) {
 	
 	//Modification du texte
 	$redirect = ancre_url($redirect,"noisette-$id_noisette");
+	$out .= "<div style='margin:5px 0; padding:5px 0; border-top:1px dashed #999;'>";
+	$out .= propre($row['descriptif'])."</div>";
 	$out .= "<div style='margin:5px 0; padding:5px 0; border-top:1px dashed #999;'>";
 	$out .= "<i>id_noisette&nbsp;: $id_noisette</i><p />";
 	$out .= debut_cadre_formulaire('',true);
