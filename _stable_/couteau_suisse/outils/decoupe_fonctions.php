@@ -39,16 +39,23 @@ function decouper_en_pages_rempl($texte) {
 	$precedent = '<a href="' . parametre_url($self,'artpage', $artpage - 1) . '">'; 
 	$suivant = '<a href="' . parametre_url($self,'artpage', $artpage + 1) . '">'; 
 	$debut = '<a href="' . parametre_url($self,'artpage', 0) . '">'; 
-	$fin = '<a href="' . parametre_url($self,'artpage', $num_pages-1) . '">';
-	$alt = 'alt="'._T('cout:page_precedente').'"';
+	$fin = '<a href="' . parametre_url($self,'artpage', $num_pages) . '">';
+	$alt = '"'._T('cout:page_precedente').'"';
+	$alt = " alt=$alt title=$alt";
 	$precedent = $artpage == 1?$images['precedent_off'].'/>'
-		:$precedent.$images['precedent'].' alt="'._T('cout:page_precedente').'"/></a>';
+		:$precedent.$images['precedent'].$alt.'/></a>';
+	$alt = '"'._T('cout:page_suivante').'"';
+	$alt = " alt=$alt title=$alt";
 	$suivant = ($artpage == $num_pages)?$images['suivant_off'].'/>'
-		:$suivant.$images['suivant'].' alt="'._T('cout:page_suivante').'"/></a>';
+		:$suivant.$images['suivant'].$alt.'/></a>';
+	$alt = '"'._T('cout:page_debut').'"';
+	$alt = " alt=$alt title=$alt";
 	$debut = $artpage == 1?($temp=$images['precedent_off'].'/>').$temp
-		:$debut.($temp=$images['precedent'].' alt="'._T('cout:page_debut').'"/>').$temp.'</a>';
+		:$debut.($temp=$images['precedent'].$alt.'/>').$temp.'</a>';
+	$alt = '"'._T('cout:page_fin').'"';
+	$alt = " alt=$alt title=$alt";
 	$fin = ($artpage == $num_pages)?($temp=$images['suivant_off'].'/>').$temp
-		:$fin.($temp=$images['suivant'].' alt="'._T('cout:page_fin').'"/>').$temp.'</a>';
+		:$fin.($temp=$images['suivant'].$alt.'/>').$temp.'</a>';
 
 	// liens des differentes pages sous forme : 1 2 3 4
 	$milieu = array();
@@ -56,10 +63,11 @@ function decouper_en_pages_rempl($texte) {
 		if ($i == $artpage) {
 			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
 		} else {
-			// isoler la premiere ligne non vide de chaque page pour les attributs alt et title
-			$alt = preg_split("/[\r\n]+/", trim(safehtml($pages[$i-1])), 2);
-			$alt = attribut_html(propre(couper($alt[0], _decoupe_NB_CARACTERES)));//.' (...)';
-			$milieu[] = '<a href="' . parametre_url($self,'artpage', $i) . "\" alt=\"$alt\" title=\"$alt\">$i</a>";
+			// isoler la premiere ligne non vide de chaque page pour l'attribut title
+			$page = trim(safehtml(cs_imprimer($pages[$i-1])));
+			$title = preg_split("/[\r\n]+/", $page, 2);
+			$title = attribut_html(propre(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
+			$milieu[] = '<a href="' . parametre_url($self,'artpage', $i) . "\" title=\"$title\">$i</a>";
 		}
 	}
 	$milieu = join(' ', $milieu);

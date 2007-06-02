@@ -6,6 +6,12 @@
 
 charger_generer_url();  # pour generer_url_mot()
 
+// Filtre local utilise par le filtre 'cs_imprimer'
+// Cette fonction retire du texte les boites de definition
+function glossaire_imprimer($texte) {
+	return preg_replace(',<span class="gl_d[td]">.*?</span>,', '', $texte);
+}
+
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
