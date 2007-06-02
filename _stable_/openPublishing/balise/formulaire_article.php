@@ -139,6 +139,9 @@ $jour = stripslashes(_request('jour'));
 $heure = stripslashes(_request('heure'));
 $choix_agenda = stripslashes(_request('choix_agenda'));
 
+// données pour formulaire tagopen
+$formulaire_tagopen = stripslashes(_request('formulaire_tagopen'));
+
 // donnée prévisualisation
 $rubrique= intval(stripslashes(_request('rubrique')));
 
@@ -474,6 +477,18 @@ else
 		), false);
 	}
 
+	// pour le moment le flag n'est pas mis en place
+	//$flag = op_get_tagmachine();
+	//if ($flag == 'oui') {
+		// Gestion des mot-clefs avec tag machine
+		$formulaire_tagopen = inclure_balise_dynamique(
+		array('formulaires/formulaire_tagopen',	0,
+			array(
+				'id_article' => $article,
+			)
+		), false);
+	//}
+
 	// Liste des documents associés à l'article
 	op_liste_vignette($article);
 
@@ -486,6 +501,7 @@ else
 			'formulaire_documents' => $formulaire_documents,
 			'formulaire_previsu' => $formulaire_previsu,
 			'formulaire_agenda' => $formulaire_agenda,
+			'formulaire_tagopen' => $formulaire_tagopen,
 			'bouton' => $bouton,
 			'article' => $article,
 			'rubrique' => $rubrique,
