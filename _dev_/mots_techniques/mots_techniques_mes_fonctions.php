@@ -1,7 +1,7 @@
 <?php
 include_spip('base/mots_techniques');
 
-function boucle_MOTS_dist($id_boucle, &$boucles) {
+function boucle_MOTS($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_mots";
@@ -20,7 +20,7 @@ function boucle_MOTS_dist($id_boucle, &$boucles) {
 // <BOUCLE(GROUPES_MOTS)>
 //
 // http://doc.spip.org/@boucle_GROUPES_MOTS_dist
-function boucle_GROUPES_MOTS_dist($id_boucle, &$boucles) {
+function boucle_GROUPES_MOTS($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_groupes_mots";
