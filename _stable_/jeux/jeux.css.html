@@ -1,3 +1,19 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
 /* Histoire de mettre tous les navigateurs d'accord... */
 .jeux_global { margin:0pt; padding:0pt; }
 .jeux_global p { margin:1em auto; } /* separation des paragraphes */
@@ -163,8 +179,17 @@ table.jeux_grille td{
 }
 
 /* Deplier / Replier */
-.replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
-.deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
-.impliable {}
-.bloc_depliable.replie { display: none; }
-.bloc_depliable.deplie { display: block; background: none; }
+.jeux_global .titrem { 
+	display: inline;
+/*	display: block; background-color: #eee; */
+	padding-top: 6px; padding-bottom: 4px;
+	background-repeat: no-repeat;
+	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] 0.6em;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 14px;
+	cursor:pointer;
+	}
+.jeux_global .replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
+.jeux_global .deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
+.jeux_global .impliable {}
+.jeux_global .bloc_depliable.replie { display: none; }
+.jeux_global .bloc_depliable.deplie { display: block; background: none; }
