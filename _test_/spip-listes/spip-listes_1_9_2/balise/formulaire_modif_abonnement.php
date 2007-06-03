@@ -151,10 +151,10 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 					$erreur = _T('pass_erreur_acces_refuse');
 				else {
 					$cookie = creer_uniqid();
-					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email));
-	
+					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email_desabo));
 					$message = _T('spiplistes:abonnement_mail_passcookie', array('nom_site_spip' => $nomsite, 'adresse_site' => $urlsite, 'cookie' => $cookie));
-					if (envoyer_mail($email, "[$nomsite] "._T('spiplistes:abonnement_titre_mail'), $message))
+					
+					if (envoyer_mail($email_desabo, "[$nomsite] "._T('spiplistes:abonnement_titre_mail'), $message))
 						$erreur = _T('spiplistes:pass_recevoir_mail');
 					else
 						$erreur = _T('pass_erreur_probleme_technique');
