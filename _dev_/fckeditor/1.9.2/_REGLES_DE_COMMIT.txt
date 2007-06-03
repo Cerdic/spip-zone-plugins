@@ -6,28 +6,9 @@ Contact : http://electropol.free.fr
 Voici les régles à suivre avant de commiter des modifications sur
 cette branche.
 
-A. Obligation de n'intervenir que dans le planning de travail. Pour le modifier
+A. Obligation de n'intervenir que dans le planning de travail (fichier TaF.txt). Pour le modifier
 contactez moi à vincevg@free.fr.
-
-          Planning de modification :
-          
-          1. Faire le pluggin  à partir de la dernière version de FCKEditor (Terminé Frank SAURET),
-          2. Intégrer l'aide (Terminé Frank SAURET),
-          3. Faire une page de personnalisation dans la partie configuration,
-          (le style de la barre d'outils, choisir les boutons  …),
-          4. Permettre le basculement entre l'éditeur spip et fckeditor (Terminé Valérian),
-          5. Intégrer les liens vers d'autres articles (Terminé Valérian),
-          6. Prévoir un loader,
-          7. Ajouter la fonctionnalité note de bas de page,
-          8. Redim auto selon la taille d'écran,
-          9. Mettre un bouton wysiwyg sur chapo, brève et autre,
-          10. Changer la langue selon celle de spip,
-          11. Possibilité de lien auto sur wikipédia,
-          12. Texte de survol,
-          13. Intégrer les raccourcis Typo spip,
-          14. Faire du vrai wywiwyg en attribuant à la fenêtre fck la feuille du squelette.
-          15. Intégrer l'insertion de fichiers uploadés par SPIP (liens et intégration) (Terminé Valérian)
-          
+                   
 B. Obligation de commenter les commits
 
    Si vous envoyez des modifications, il faut toujours les commenter
@@ -36,9 +17,7 @@ B. Obligation de commenter les commits
    
 C.  Modification du code
 
-    Cette version n'a pas vocation à évoluer. Si vous avez envie de vous
-    retrousser les manches allez plutôt voir la version dev. 
-    
+       
     Vous pouvez néanmoins apporter des modifications mineures. Incrémentez à 
     chaque fois le N° de version mineure. Ex : passer de la 1.9 à 1.10. 
   
