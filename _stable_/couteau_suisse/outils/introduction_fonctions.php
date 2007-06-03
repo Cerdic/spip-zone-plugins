@@ -14,19 +14,19 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 			else if (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
 			else
-				$result = PtoBR(propre(supprimer_tags(couper_intro($chapo."\n\n\n".$texte, round(500*_INTRODUCTION_LGR/100), $intro_suite))));
+				$result = PtoBR(propre(supprimer_tags(couper_intro(cs_imprimer($chapo."\n\n\n".$texte), round(500*_INTRODUCTION_LGR/100), $intro_suite))));
 			break;
 		case 'breves':
-			$result = PtoBR(propre(supprimer_tags(couper_intro($texte, round(300*_INTRODUCTION_LGR/100), $intro_suite))));
+			$result = PtoBR(propre(supprimer_tags(couper_intro(cs_imprimer($texte), round(300*_INTRODUCTION_LGR/100), $intro_suite))));
 			break;
 		case 'forums':
-			$result = PtoBR(propre(supprimer_tags(couper_intro($texte, round(600*_INTRODUCTION_LGR/100), $intro_suite))));
+			$result = PtoBR(propre(supprimer_tags(couper_intro(cs_imprimer($texte), round(600*_INTRODUCTION_LGR/100), $intro_suite))));
 			break;
 		case 'rubriques':
 			if (strlen($descriptif))
 				return propre($descriptif);
 			else
-				$result = PtoBR(propre(supprimer_tags(couper_intro($texte, round(600*_INTRODUCTION_LGR/100), $intro_suite))));
+				$result = PtoBR(propre(supprimer_tags(couper_intro(cs_imprimer($texte), round(600*_INTRODUCTION_LGR/100), $intro_suite))));
 			break;
 	}
 	// si les points de suite ont ete ajoutes
