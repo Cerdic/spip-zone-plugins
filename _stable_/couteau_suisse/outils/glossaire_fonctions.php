@@ -24,7 +24,7 @@ function cs_rempl_glossaire($texte) {
 		$table2[$mot['id_mot']] = "</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">"
 			. nl2br(trim($mot['texte'])) . "</span></span></a>";
 		// a chaque mot reconnu, on pose une balise temporaire	
-		$texte = preg_replace(",\b$mot[titre]\b,i", "@@GLOSS\\0#$mot[id_mot]@@", $texte, $limit);
+		$texte = preg_replace(",(\W)($mot[titre])(\W),i", "\\1@@GLOSS\\2#$mot[id_mot]@@\\3", $texte, $limit);
 	}
 	// remplacement final des balises posees ci-dessus
 	return preg_replace(",@@GLOSS([^#]+)#([0-9]+)@@,e", '"$table1[\\2]\\1$table2[\\2]"', $texte);
