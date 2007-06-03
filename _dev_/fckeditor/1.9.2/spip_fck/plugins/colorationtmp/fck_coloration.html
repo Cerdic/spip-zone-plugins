@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--
+ * Plugin de coloration syntaxique par Frank SAURET.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Propriété de coloration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta content="noindex, nofollow" name="robots">
+		<script language="javascript">
+
+var oEditor = window.parent.InnerDialogLoaded() ;
+var FCKLang = oEditor.FCKLang ;
+var FCKcolorations = oEditor.FCKcolorations ;
+
+window.onload = function ()
+{
+	// First of all, translate the dialog box texts
+	oEditor.FCKLanguageManager.TranslatePage( document ) ;
+
+	LoadSelected() ;
+
+	// Show the "Ok" button.
+	window.parent.SetOkButton( true ) ;
+}
+
+var eSelected = oEditor.FCKSelection.GetSelectedElement() ;
+
+function LoadSelected()
+{
+	if ( !eSelected )
+		return ;
+
+	if ( eSelected.tagName == 'SPAN' && eSelected._fckcoloration )
+		document.getElementById('txtName').value = eSelected._fckcoloration ;
+	else
+		eSelected == null ;
+}
+
+function Ok()
+{
+	var sValue = document.getElementById('txtName').value ;
+
+	if ( eSelected && eSelected._fckcoloration == sValue )
+		return true ;
+
+	if ( sValue.length == 0 )
+	{
+		alert( FCKLang.colorationErrNoName ) ;
+		return false ;
+	}
+
+	if ( FCKcolorations.Exist( sValue ) )
+	{
+		alert( FCKLang.colorationErrNameInUse ) ;
+		return false ;
+	}
+
+	FCKcolorations.Add( sValue ) ;
+	return true ;
+}
+
+		</script>
+	</head>
+	<body scroll="no" style="OVERFLOW: hidden">
+
+								<span fckLang="ColorationInserer">Code source</span><br>
+								  <TEXTAREA id="txtName" NAME="Zone" COLS="110" ROWS="15">
+                  </TEXTAREA>
+
+	</body>
+</html>
