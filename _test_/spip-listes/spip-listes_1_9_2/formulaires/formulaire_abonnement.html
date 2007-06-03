@@ -24,7 +24,7 @@ texte d'inscription en tant que rédacteur
 ]
 [(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
 <fieldset>
-<legend><:spiplistes:devenir_abonne:></legend>
+<legend style="color:#000000"><:spiplistes:devenir_abonne:></legend>
 <strong><:spiplistes:devenir_redac:></strong>
 <div><:spiplistes:inscription_redacteurs:></div>
 <div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
@@ -36,7 +36,7 @@ texte d'inscription en tant que visiteur
 ]
 [(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
 <fieldset>
-<legend><:spiplistes:devenir_abonne:></legend>
+<legend style="color:#000000"><:spiplistes:devenir_abonne:></legend>
 <div><:spiplistes:inscription_visiteurs:></div>
 <div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
 	[(#CONFIG{accepter_inscriptions}|=={oui}|?{' ',''})
@@ -64,7 +64,7 @@ texte d'inscription en tant que visiteur
 		
 		<B_listes>
 			<fieldset>
-			<legend>[(#TOTAL_BOUCLE|=={1}|?{
+			<legend style="color:#000000">[(#TOTAL_BOUCLE|=={1}|?{
 				<:spiplistes:abo_1_lettre:></legend>
 				,<:spiplistes:abo_listes:></legend>})]
 			
@@ -79,7 +79,7 @@ texte d'inscription en tant que visiteur
 		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
 		</B_listes>
 			[(#ENV{mode_login}|?{' ',''})
-			<fieldset>
+			<fieldset style="color:#000000">
 			<legend><:spiplistes:abo_1_lettre:></legend>]
 		<//B_listes>
 		[(#ENV{mode_login}|?{' ',''})
@@ -100,6 +100,6 @@ texte d'inscription en tant que visiteur
 			<input name="desabo" id="desabo" value="oui" type="radio" />
 				<label for="suppl_abo_non"><:spiplistes:desabonnement:></label>
 			</div>
-		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" value="<:bouton_valider:>" />
-		</div></div></fieldset></form>]
+		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" value="<:bouton_valider:>" /></div>
+		</div></fieldset></form>]
 </div>

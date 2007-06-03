@@ -2,7 +2,7 @@
 
 <BOUCLE_liste(LISTES) {statut=liste} {id_liste=#ENV{liste}}>
 			<fieldset style="margin-bottom:1em;">
-			<legend style="font-weight:bold;">#TITRE</legend>
+			<legend style="font-weight:bold;color:#000000">#TITRE</legend>
 			#TEXTE
 			</fieldset>
 		</BOUCLE_liste>
@@ -16,7 +16,7 @@
 </BOUCLE_auteur>
 <B_listes>
 	<fieldset>
-	<legend>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</legend>
+	<legend style="color:#000000">[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</legend>
 	<ul style='width:350px;list-style-type:none'>
 <BOUCLE_listes(LISTES) {statut=liste} {0,(#ENV{formulaire_affiche}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
@@ -33,7 +33,7 @@
 	</ul>
 </B_listes>
 	[(#ENV{formulaire_affiche}|?{' ',''})<fieldset>
-	<legend><:spiplistes:abo_1_lettre:></legend>]
+	<legend style="color:#000000"><:spiplistes:abo_1_lettre:></legend>]
 <//B_listes>
 [(#ENV{formulaire_affiche}|?{' ',''})
 [(#ENV*{extra_aut}|bloog_extra_saisie{'auteurs', 'inscription','true'})]
@@ -46,7 +46,7 @@
 ]
 [(#ENV{formulaire_cookie_affiche}|?{' ',''})
 <fieldset> 
-	<legend><:spiplistes:abonnement_bouton:></legend>
+	<legend style="color:#000000"><:spiplistes:abonnement_bouton:></legend>
 	<h4><:spiplistes:abonnement_change_format:></h4>
 	[(#ENV*{erreur}|sinon{
 	<:spiplistes:abonnement_texte_mail:>
