@@ -85,7 +85,7 @@ function message_inscription2($var_user, $mode) {
 		envoyer_inscription2($row);/**RENVOYER MAIL D'INSCRIPTION **/
 		return _T('inscription2:mail_renvoye');
 	}
-	return _T('inscription2:mail_registre');}
+	return _T('form_forum_email_deja_enregistre');}
 
 function inscription2_nouveau($declaration){
 	if (!isset($declaration['login']))

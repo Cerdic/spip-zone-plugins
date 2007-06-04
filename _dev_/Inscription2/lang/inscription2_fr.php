@@ -66,17 +66,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_email_inscription' =>   'Vous avez demand&eacute; de participer dans notre site @nom_site@. 
 Vous &ecirc;tes actuellement sur le point de finir votre inscription. Il vous suffit de cliquer le lien ci dessous pour activer votre compte et choisir votre mot de passe.
 @link_activation@
-Votre login est&nbsp;: @login@.
+Votre login est&nbsp;: @login@
 
 Si vous n\'avez pas demand&eacute; cette inscription ou vous ne voulez plus faire partie de notre site, cliquez le lien ci dessous.\n
 @link_suppresion@
 Merci de votre confiance.
 
 L\'equipe de @nom_site@',
-'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; à l\'adresse fourni. Pour activer votre compte veuillez suivre les instructions.',
+'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fourni. Pour activer votre compte veuillez suivre les instructions.',
 'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute, veuillez activer votre compte en suivant les instructiones dans votre mail.',
-'mail_registre' => 'Cette adresse email existe d&eacute;j&agrave;, veuillez utiliser vos identifiants personnelles.',
+'redemande_password' => 'Reinserez votre mot de passe&nbsp;:',
+'texte_email_confirmation' => 'Votre compte vient d\'&ecirc;tre activ&eacute;, vous pouvez d&egrave;s maintenant vous connecter dans notre site en utilisant vos identifiants personnalles.\n
 
+Votre login est&nbsp;: @login@
+et votre mot de passe vous venez de la saisir.
+Merci de Votre Confiance
+
+L\'equipe de @nom_site@',
+'compte_active' => 'Votre compte a &eacute;t&eacute; activ&eacute;',
+'suppression_faite' => "la suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;",
 'janvier' => 'janvier',
 'fevrier' => 'f&eacute;vrier',
 'mars' => 'mars',

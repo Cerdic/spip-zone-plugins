@@ -4,7 +4,7 @@ function confirmation_inscription2($id, $mode, $cle){
 	$q = spip_fetch_array($q);
 	if($q['statut'] == 'aconfirmer' and $mode == 'conf' and $cle ==  $q['alea_actuel']){
 		return 'pass';
-	}elseif($q['statut'] == 'aconfirmer' and $mod == 'sup' and $cle ==  $q['alea_actuel']){
+	}elseif($q['statut'] == 'aconfirmer' and $mode == 'sup' and $cle ==  $q['alea_actuel']){
 		return 'sup';
 	}else
 		return 'rien';

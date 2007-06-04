@@ -72,13 +72,22 @@ Su nombre de usuario es: *@login@*
 
 Si usted no ha solicitado ser parte de nuestro sitio haga click en el link siguiente para eliminar la solicitud.
 @link_suppresion@
-Muchas Gracias.
+
+Muchas gracias.
 
 El equipo de @nom_site@',
 'lisez_mail' => 'Un email acaba de ser enviado a la direcci&oacute;n email ingresada. Para poder utilizar su cuenta solo le queda un paso, siga las instrucciones que estan en el email y active su cuenta.',
 'mail_renvoye' => 'Esta direccion email ya existe en nuestra base de datos. Para activar su cuenta sigas las instrucciones que estan en el email que acaba de ser enviado.',
-'mail_registre' => 'Esta direccion email ya ha sido resgistrada anteriormente. Utilise su nombre de usuario habitual.',
+'redemande_password' => 'Vuelva a ingresar su contrase&ntilde;a:',
+'texte_email_confirmation' => 'Su cuenta acaba de ser activada. Usted puede conectarse desde ya con sus identificadores personales.
+Su nombre de usuario es: @login@
+y sa contrase&ntilde;a es la que acaba de ingresar.
 
+Muchas gracias.
+
+El equipo de @nom_site@',
+'compte_active' => 'Cuenta activada',
+'suppression_faite' => 'Sus datos han sido suprimidos con exito',
 
 'janvier' => 'Enero',
 'fevrier' => 'Febrero',
