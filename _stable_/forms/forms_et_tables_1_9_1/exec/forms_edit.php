@@ -15,7 +15,7 @@ include_spip('inc/forms');
 include_spip('inc/forms_edit');
 include_spip('inc/forms_type_champs'); // gestion des types de champs
 
-function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n='forms'){
+function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n='form'){
 	global $spip_lang_right;
 	$out = "<div class='verdana3'>";
 	if ($nb_reponses){
@@ -46,10 +46,8 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 }
 
 function contenu_boite_resume($id_form, $row, &$apercu){
-	$prefixei18n = 'forms';
-	$is_form = 	in_array($row['type_form'],array('','sondage'));
-	if (!$is_form)
-		$prefixei18n = str_replace("_","",$row['type_form']);
+	$prefixei18n = forms_prefixi18n($row['type_form']);
+	$is_form = 	$prefixei18n=='form';
 
 	$out = "";
 
@@ -193,10 +191,8 @@ function exec_forms_edit(){
 	// Recupere les donnees ---------------------------------------------------------------
 	if ($new == 'oui' && !$titre) {
 		$row['type_form'] = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
-		$prefixei18n = 'forms';
-		$is_form = 	in_array($row['type_form'],array('','sondage'));
-		if (!$is_form)
-			$prefixei18n = $row['type_form'];
+		$prefixei18n = forms_prefixi18n($row['type_form']);
+		$is_form = 	$prefixei18n=='form';
 		
 		$titre = _T("$prefixei18n:nouveau_formulaire");
 		include_spip('inc/charset');
@@ -223,11 +219,8 @@ function exec_forms_edit(){
 		
 		$action_link = generer_action_auteur("forms_edit","new",urlencode($redirect));
 	}
-	$prefixei18n = 'forms';
-	$is_form = 	in_array($row['type_form'],array('','sondage'));
-	if (!$is_form)
-		$prefixei18n = $row['type_form'];
-
+	$prefixei18n = forms_prefixi18n($row['type_form']);
+	$is_form = 	$prefixei18n=='form';
 
 	// gauche raccourcis ---------------------------------------------------------------
 	debut_gauche();

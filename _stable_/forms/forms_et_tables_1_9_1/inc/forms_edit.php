@@ -280,10 +280,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	global $spip_lang_right,$couleur_claire,$spip_lang_left;
 	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
 	$row = spip_fetch_array($res);
-	$prefixei18n = 'forms';
-	$is_form = 	in_array($row['type_form'],array('','sondage'));
-	if (!$is_form)
-		$prefixei18n = str_replace("_","",$row['type_form']);
+	$prefixei18n = forms_prefixi18n($row['type_form']);
+	$is_form = 	$prefixei18n=='form';
 	
 	$out = "";
 	if (!$id_form) return $out;
@@ -471,10 +469,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 // Edition des donnees du formulaire
 //
 function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
-	$prefixei18n = 'forms';
-	$is_form = 	in_array($row['type_form'],array('','sondage'));
-	if (!$is_form)
-		$prefixei18n = str_replace("_","",$row['type_form']);
+	$prefixei18n = forms_prefixi18n($row['type_form']);
+	$is_form = 	$prefixei18n=='form';
 
 	$out = "";
 	$out .= "<p>";

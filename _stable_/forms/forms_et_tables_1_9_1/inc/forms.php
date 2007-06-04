@@ -113,7 +113,7 @@
 		return $type_table;
 	}
 	function forms_prefixi18n($type_table){
-		$prefixi18n = in_array($type_table,array('sondage',''))?'forms':$type_table;
+		$prefixi18n = in_array($type_table,array('sondage',''))?'form':$type_table;
 		return $prefixi18n = str_replace("_","",strtolower($prefixi18n));
 	}
 	function Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur, $simu = false){
