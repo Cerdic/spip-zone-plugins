@@ -81,7 +81,7 @@
 		static $structure=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
 		$ok = $id_donnee && $champ;
-		$ok = $ok && in_array($type, array('forms_donnees_champs','forms_champs'));
+		$ok = $ok && in_array($type, array('forms_donnees_champs','forms_champs','forms_donnees'));
 		// on recupere la valeur du champ si pas deja la
 		if ($ok && !$valeur){
 			$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
