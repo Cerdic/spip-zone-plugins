@@ -44,7 +44,6 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	  $code_sep="''";
 
 	if($boucle->limit) {
-		error_log("LIMIT :  $boucle->limit");
 		list($start,$end)=explode(',', $boucle->limit);
 		$end= "($start+$end>count(\$__t)?count(\$__t):$start+$end)";
 		$total= "($end-$start)";
@@ -52,7 +51,6 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 		$start='0'; $total= $end= 'count($__t)';
 	}
 
-error_log("$id_boucle ".$boucle->total_boucle." => $start,$end '".$boucle->mode_partie."' => ".$boucle->partie."/".$boucle->total_parties);
 	if($boucle->mode_partie) {
 		$start= $start."+$boucle->partie-1";
 		$incr=$boucle->total_parties;
@@ -209,8 +207,6 @@ function balise_AFFECTER($p) {
 					   $boucle->id_boucle);
 	  return;
 	}
-
-	error_log("balise_AFFECTER : <<$var>>\n");
 
 	if($var{0}=='+') {
 		$var= substr($var, 1);

@@ -43,11 +43,7 @@ function critere_IN($idb, &$boucles, $crit) {
 	}
 	$boucles[$idb]->in .= $x;
 
-	error_log("==> $arg, $op, ".var_export($val, 1).", $col");
-
 	$where = array("'$op'", "'$arg'", "'('.join(',',array_map('_q', $var)).')'");
-
-	error_log("=> where = ".var_export($where, 1));
 
 	$boucles[$idb]->where[]= (!$crit->cond ? $where :
 	  array("'?'",
