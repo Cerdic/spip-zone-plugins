@@ -190,9 +190,11 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 		'tri'=>$prefix=='form'?'date':'rang',
 		'senstri'=>$prefix=='form'?'1':'0',
 		);
-	if (_request('tri')) $defaut_cont['tri'] = _request('tri');
+	if (_request('tri')) {
+		$defaut_cont['tri'] = _request('tri');
+		$defaut_cont['senstri'] = _request('senstri');
+	}
 	if (_request('champ')) $defaut_cont['champ'] = _request('champ');
-	if (_request('senstri')) $defaut_cont['senstri'] = _request('senstri');
 	$contexte = array_merge($contexte,$defaut_cont);
 	
   $icone = find_in_path("img_pack/$type_form-24.png");
