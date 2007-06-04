@@ -76,7 +76,6 @@ function balise_PREFS($p) {
 function critere_anonymous($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if($boucle->type_requete!='session') {
-		error_log("Heu ...");
 		return;
 	}
 	if($crit->not) {
@@ -89,7 +88,6 @@ function critere_anonymous($idb, &$boucles, $crit) {
 function critere_admin($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if($boucle->type_requete!='session') {
-		error_log("Heu ...");
 		return;
 	}
 	if($crit->not) {
@@ -102,7 +100,6 @@ function critere_admin($idb, &$boucles, $crit) {
 function critere_visiteur($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if($boucle->type_requete!='session') {
-		error_log("Heu ...");
 		return;
 	}
 	if($crit->not) {

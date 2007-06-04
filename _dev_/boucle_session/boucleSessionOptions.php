@@ -22,5 +22,4 @@ if($cacheParIdAuteur) {
 		  : '--');
 }
 
-error_log($GLOBALS['marqueur']);
 ?>
