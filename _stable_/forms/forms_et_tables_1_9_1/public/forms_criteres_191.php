@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2006                                                *
+ *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -53,7 +53,7 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if (!$boucle->primary)
-		erreur_squelette(_L('doublons sur une table sans index'), $param);
+		erreur_squelette(_T('zbug_doublon_table_sans_index'), "BOUCLE$idb");
 	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	// mettre un tableau pour que ce ne soit pas vu comme une constante
 	$boucle->where[]= array("calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
@@ -67,7 +67,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	  ')], \'' . 
 	  ($crit->not ? '' : 'NOT') .
 				"')");
-# la ligne suivante avait l'intention d'éviter une collecte deja faite
+# la ligne suivante avait l'intention d'eviter une collecte deja faite
 # mais elle fait planter une boucle a 2 critere doublons:
 # {!doublons A}{doublons B}
 # (de http://article.gmane.org/gmane.comp.web.spip.devel/31034)
@@ -98,20 +98,23 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 // {pagination}
 // {pagination 20}
 // {pagination #ENV{pages,5}} etc
+// {pagination 20 #ENV{truc,chose}} pour utiliser la variable debut_#ENV{truc,chose}
 // http://www.spip.net/@pagination
 // http://doc.spip.org/@critere_pagination_dist
 function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	// definition de la taille de la page
-	$pas = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-
+	$pas = !isset($crit->param[0][0]) ? "''" : calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
+	$debut = !isset($crit->param[0][1]) ? "'$idb'" : calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucles[$idb]->id_parent);
 	$pas = ($pas== "''") ? '10' : "((\$a = intval($pas)) ? \$a : 10)";
 
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
-	$boucle->partie = 'intval(_request("debut'.$idb.'"))';
+	$boucle->partie = 'intval(_request("debut".'.$debut.'))';
+	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
-	$boucle->fragment = 'fragment_'.$boucle->descr['nom'].$idb;
+	if (!isset($boucle->modificateur['fragment']))
+		$boucle->modificateur['fragment'] = 'fragment_'.$boucle->descr['nom'].$idb;
 }
 
 // {fragment}
@@ -123,7 +126,7 @@ function critere_fragment_dist($idb, &$boucles, $crit) {
 	if ($crit->not)
 		$param = false;
 	$boucle = &$boucles[$idb];
-	$boucle->fragment = $param;
+	$boucle->modificateur['fragment'] = $param;
 }
 
 
@@ -168,14 +171,21 @@ function critere_traduction_dist($idb, &$boucles, $crit) {
 	$table = $boucle->id_table;
 	$arg = kwote(calculer_argument_precedent($idb, 'id_trad', $boucles));
 	$dprim = kwote(calculer_argument_precedent($idb, $prim, $boucles));
-	$boucle->where[]= array("'AND'",
-		array("'>'", "'$table.". "id_trad'", 0),
+	$boucle->where[]=
 		array("'OR'",
-			array("'='", "'$table." . "id_trad'", $arg),
-			array("'='", "'$table.$prim'", $dprim)));
+			array("'AND'",
+				array("'='", "'$table.id_trad'", 0),
+				array("'='", "'$table.$prim'", $dprim)
+			),
+			array("'AND'",
+				array("'>'", "'$table.id_trad'", 0),
+				array("'='", "'$table.id_trad'", $arg)
+			)
+		);
 }
 
 // {origine_traduction}
+//   (id_trad>0 AND id_article=id_trad) OR (id_trad=0)
 // http://www.spip.net/@origine_traduction
 // http://doc.spip.org/@critere_origine_traduction_dist
 function critere_origine_traduction_dist($idb, &$boucles, $crit) {
@@ -183,10 +193,13 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 	$prim = $boucle->primary;
 	$table = $boucle->id_table;
 
-	$c= array("'='", "'$table." . "id_trad'", "'$table.$prim'");
+	$c =
+	array("'OR'",
+		array("'='", "'$table." . "id_trad'", "'$table.$prim'"),
+		array("'='", "'$table.id_trad'", "'0'")
+	);
 	$boucle->where[]= ($crit->not ? array("'NOT'", $c) : $c);
 }
-
 
 // {meme_parent}
 // http://www.spip.net/@meme_parent
@@ -202,7 +215,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	} else if ($boucle->type_requete == 'forums') {
 			$boucle->where[]= array("'='", "'$mparent'", $arg);
 			$boucle->where[]= array("'>'", "'$mparent'", 0);
-			$boucle->plat =  true;
+			$boucle->modificateur['plat'] = true;
 	} else erreur_squelette(_T('zbug_info_erreur_squelette'), "{meme_parent} BOUCLE$idb");
 }
 
@@ -243,6 +256,43 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 		$boucle->where[]= $c;
 }
 
+// c'est la commande SQL "GROUP BY"
+// par exemple <boucle(articles){fusion lang}>
+// http://doc.spip.org/@critere_fusion_dist
+function critere_fusion_dist($idb,&$boucles, $crit) {
+	if (isset($crit->param[0])) {
+		$x = $crit->param[0];
+		if ($x[0]->type == 'texte')
+			$boucles[$idb]->group[] = $x[0]->texte;
+		else 	$boucles[$idb]->group[] = '".' . calculer_critere_arg_dynamique($idb, $boucles, $x) . '."';
+	} else 
+		erreur_squelette(_T('zbug_info_erreur_squelette'),
+			"{groupby ?} BOUCLE$idb");
+}
+
+// http://doc.spip.org/@calculer_critere_arg_dynamique
+function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
+{
+	global $table_des_tables, $tables_des_serveurs_sql;
+
+	$boucle = $boucles[$idb];
+
+	$arg = calculer_liste($crit, array(), $boucles, $boucle->id_parent);
+	$r = $boucle->type_requete;
+	$s = $boucles[$idb]->sql_serveur;
+	if (!$s) $s = 'localhost';
+	$t = $table_des_tables[$r];
+	// pour les tables non Spip
+	if (!$t) $t = $r; else $t = "spip_$t";
+	$desc = $tables_des_serveurs_sql[$s][$t];
+
+	if (is_array($desc['field'])){
+		$liste_field = implode(',',array_map('_q',array_keys($desc['field'])));
+		return	"((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$suffix):(\$x$suffix) ) : '')";
+	} else {
+		return "((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ('$boucle->id_table.' . \$x$suffix) : '')";
+	}
+}
 // Tri : {par xxxx}
 // http://www.spip.net/@par
 // http://doc.spip.org/@critere_par_dist
@@ -261,24 +311,18 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	  $fct = ""; // en cas de fonction SQL
 	// tris specifies dynamiquement
 	  if ($tri[0]->type != 'texte') {
-	      $order = 
-		calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
-				$r = $boucle->type_requete;
-				$s = $boucles[$idb]->sql_serveur;
-				if (!$s) $s = 'localhost';
-				$t = $table_des_tables[$r];
-				// pour les tables non Spip
-				if (!$t) $t = $r; else $t = "spip_$t";
-				$desc = $tables_des_serveurs_sql[$s][$t];
-				if (is_array($desc['field'])){
-					$liste_field = implode(',',array_map('spip_abstract_quote',array_keys($desc['field'])));
-		      $order =
-			"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$sens):(\$x$sens) ) : '')";
-				}
-				else{
-		      $order =
-			"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ('$boucle->id_table.' . \$x$sens) : '')";
-				}
+	    // on sait pas faire pour les serveurs externes. A revoir.
+	 	if (!$boucles[$idb]->sql_serveur) {
+	  	// calculer le order dynamique qui verifie les champs
+			$order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
+	    // et ajouter un champ hasard dans le select pour supporter 'hasard' comme tri dynamique
+			if (spip_abstract_select(array("RAND()")))
+				$par = "RAND()";
+			else
+				$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
+			  ." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP()";
+			$boucle->select[]= $par . " AS hasard";
+		}
 	  } else {
 	      $par = array_shift($tri);
 	      $par = $par->texte;
@@ -297,7 +341,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $boucle->select[] = $texte . " AS $as";
 		  $order = "'$as'";
 	      } else {
-	      if (!ereg("^" . CHAMP_SQL_PLUS_FONC . '$', $par, $match)) 
+	      if (!preg_match(",^" . CHAMP_SQL_PLUS_FONC . '$,is', $par, $match)) 
 		erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
 	      else {
 		if ($match[2]) { $par = substr($match[2],1,-1); $fct = $match[1]; }
@@ -327,7 +371,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 				.") AS date_thread";
 			$boucle->group[] = $t . ".id_thread";
 			$order = "'date_thread'";
-			$boucle->plat = true;
+			$boucle->modificateur['plat'] = true;
 		}
 	// par titre_mot ou type_mot voire d'autres
 		else if (isset($exceptions_des_jointures[$par])) {
@@ -552,16 +596,18 @@ function calculer_criteres ($idb, &$boucles) {
 }
 
 // Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
-
+// hum, c'est kwoi cette fonxion ?
 // http://doc.spip.org/@kwote
 function kwote($lisp)
 {
 	if (preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r))
-		return $r[1] . "\"" . spip_abstract_quote(str_replace(array("\\'","\\\\"),array("'","\\"),$r[2])) . "\"" ;
+		return $r[1] . "\"" . _q(str_replace(array("\\'","\\\\"),array("'","\\"),$r[2])) . "\"" ;
 	else
-		return "spip_abstract_quote($lisp)"; 
+		return "_q($lisp)"; 
 }
 
+// Si on a une liste de valeurs dans #ENV{x}, utiliser la double etoile
+// pour faire par exemple {id_article IN #ENV**{liste_articles}}
 // http://doc.spip.org/@critere_IN_dist
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
@@ -576,7 +622,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			if (is_numeric($r[2]))
 				$x .= "\n\t$var" . "[]= $r[2];";
 			else
-				$x .= "\n\t$var" . "[]= " . spip_abstract_quote($r[2]) . ";";
+				$x .= "\n\t$var" . "[]= " . _q($r[2]) . ";";
 		} else {
 		  // Pour permettre de passer des tableaux de valeurs
 		  // on repere l'utilisation brute de #ENV**{X}, 
@@ -594,7 +640,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$op = '<>';
 	} else $op = '=';
 
-	$arg = "FIELD($arg,\" . join(',',array_map('spip_abstract_quote', $var)) . \")";
+	$arg = "FIELD($arg,\" . join(',',array_map('_q', $var)) . \")";
 	if ($boucles[$idb]->group) $arg = "SUM($arg)";
 	$boucles[$idb]->select[]=  "$arg AS cpt$cpt";
 	$op = array("'$op'", "'cpt$cpt'", 0);
@@ -687,21 +733,23 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 	  }
 	}
+	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
+	$boucles[$idb]->modificateur['criteres'][$col] = true;
+	
 	// ajout pour le cas special d'une condition sur le champ statut:
 	// il faut alors interdire a la fonction de boucle
 	// de mettre ses propres criteres de statut
 	// http://www.spip.net/@statut (a documenter)
-
+	// garde pour compatibilite avec code des plugins anterieurs, mais redondant avec la ligne precedente
 	if ($col == 'statut') $boucles[$idb]->statut = true;
 
-	// ajout pour le cas spécial des forums
+	// ajout pour le cas special des forums
 	// il faut alors interdire a la fonction de boucle sur forum
 	// de selectionner uniquement les forums sans pere
 
 	elseif ($boucles[$idb]->type_requete == 'forums' AND
 		($col == 'id_parent' OR $col == 'id_forum'))
-	  $boucles[$idb]->plat = true;
-
+		$boucles[$idb]->modificateur['plat'] = true;
 	// inserer le nom de la table SQL devant le nom du champ
 	if ($table) {
 		if ($col[0] == "`") 
@@ -823,7 +871,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 		}
 	}
 
-  $boucle->lien = true;
+  $boucle->modificateur['lien'] = true;
   return $n;
 }
 
