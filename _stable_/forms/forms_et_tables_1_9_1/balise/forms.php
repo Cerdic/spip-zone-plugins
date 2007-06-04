@@ -126,7 +126,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			'id_article' => $id_article,
 			'id_form' => $id_form,
 			'id_donnee' => $id_donnee?$id_donnee:(0-$GLOBALS['auteur_session']['id_auteur']), # GROS Hack pour les jointures a la creation
-			'self' => $url,
+			'self' => parametre_url($url,'id_donnee',$id_donnee<0?0:$id_donnee),
 			'valeurs' => serialize($valeurs),
 			'url_validation' => str_replace("&amp;","&",$url_validation),
 			'affiche_sondage' => $affiche_sondage,
