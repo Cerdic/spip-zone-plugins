@@ -247,7 +247,12 @@ function inclure_page($fond, $contexte_inclus) {
 	collecte_cle_head($page['contexte']['cle_head']);
 	
 	if ($lang_select) lang_select();
-
+  
+  //effache les texte a ajouter a head si on est dans l'espace privee
+  //on a pas de moyen pour ajouter dans le head
+  if(!_DIR_RESTREINT)
+    collecte_head_squelette($page['texte'],true);
+  
 	return $page;
 }
 
@@ -465,7 +470,7 @@ function collecte_cle_head($cle = false) {
   $cles[] = $cle;
 }
 
-function collecte_head_squelette(&$corps) {
+function collecte_head_squelette(&$corps,$effache=false) {
   static $scripts_a_ajouter = array();
   //un erreur precedent ?
   if(!is_array($scripts_a_ajouter)) return $scripts_a_ajouter; 
@@ -486,12 +491,14 @@ function collecte_head_squelette(&$corps) {
     $fin_commentaire = strpos($corps,"-->",$fin_pos+$len_fin_script)+3;
     $commentaire = substr($corps,$debut_commentaire,$fin_commentaire-$debut_commentaire);
     if(preg_match(",".$debut_script."(.*)-->(.*)".$fin_script."(.*)-->,Us",$commentaire,$texte)) {
-        if(!$texte[1] || ($texte[1]!=$texte[3]) || !in_array($texte[1],$cles)) {
-          spip_log("ajoute script dans le head interdite ".$texte[0]);
-        } else {
-          //ajoute les elements
-          if(preg_match_all(",<([a-zA-z]+)[^>]*(/)?".">(?(2)|.*?</\\1>),s",$texte[2],$elements)) {
-            $scripts_a_ajouter = array_merge($scripts_a_ajouter,$elements[0]);
+        if(!$effache) {
+          if(!$texte[1] || ($texte[1]!=$texte[3]) || !in_array($texte[1],$cles)) {
+            spip_log("ajoute script dans le head interdite ".$texte[0]);
+          } else {
+            //ajoute les elements
+            if(preg_match_all(",<([a-zA-z]+)[^>]*(/)?".">(?(2)|.*?</\\1>),s",$texte[2],$elements)) {
+              $scripts_a_ajouter = array_merge($scripts_a_ajouter,$elements[0]);
+            }
           }
         }    
     }
