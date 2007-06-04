@@ -102,8 +102,8 @@
 			$boucle->join[$k]= array($t,'id_donnee');
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
 			$op = array("'='", "'L$k.champ'", "_q(".$_quoi.")");
-			$boucle->where[]= array("'?'",$_quoi."!='rang'",$op,"''");
-			$boucle->order[]= "($_quoi=='rang'?'$t.rang':'L$k.valeur')";
+			$boucle->where[]= array("'?'","!in_array($_quoi,array('rang','date','id_donnee','url'))",$op,"''");
+			$boucle->order[]= "(in_array($_quoi,array('rang','date','id_donnee','url'))?'$t.'.$_quoi:'L$k.valeur')";
 		}
 	}
 

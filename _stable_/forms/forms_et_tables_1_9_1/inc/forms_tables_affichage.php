@@ -183,7 +183,13 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 		'aucune_reponse'=>_T("$prefix:aucune_reponse"),
 		'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
 		'statuts' => array('prepa','prop','propose','publie','refuse'),
-		'recherche'=>_request('recherche'));
+		'recherche'=>_request('recherche'),
+		'affiche_rang'=>$prefix=='form'?0:1,
+		'affiche_de'=>$prefix=='form'?1:0,
+		'affiche_date'=>$prefix=='form'?1:0,
+		'tri'=>$prefix=='form'?'date':'rang',
+		'senstri'=>$prefix=='form'?'1':'0',
+		);
 	if (_request('tri')) $defaut_cont['tri'] = _request('tri');
 	if (_request('champ')) $defaut_cont['champ'] = _request('champ');
 	if (_request('senstri')) $defaut_cont['senstri'] = _request('senstri');
