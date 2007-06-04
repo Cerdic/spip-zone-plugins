@@ -87,8 +87,8 @@ function decouper_en_pages_rempl($texte) {
 	// s'il existe plus de trois pages on retourne la pagination << < 1 2 3 4 > >>
 	// sinon une forme simplifiee : < 1 2 3 >
 	$pagination = $num_pages>3?"$debut $precedent $milieu $suivant $fin":"$precedent $milieu $suivant";
-	$pagination1 = "<a name='navig_haut' id='decoupe_haut'></a><div class='pagination decoupe_haut'>$pagination</div>";
-	$pagination2 = "<a name='navig_bas' id='decoupe_bas'></a><div class='pagination decoupe_bas'>$pagination</div>";
+	$pagination1 = "<a name='decoupe_haut' id='decoupe_haut'></a><div class='pagination decoupe_haut'>$pagination</div>";
+	$pagination2 = "<a name='decoupe_bas' id='decoupe_bas'></a><div class='pagination decoupe_bas'>$pagination</div>";
 	$page = trim($pages[$artpage-1]);
 	if (isset($_GET['decoupe_recherche'])) {
 		include_spip('inc/surligne');
