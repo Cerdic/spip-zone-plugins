@@ -13,6 +13,9 @@ function sommaire_imprimer($texte) {
 	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE), '', $texte);
 }
 
+// aide le Couteau Suisse a calculer la balise #INTRODUCTION
+$GLOBALS['cs_introduire'][] = 'sommaire_imprimer';
+
 // renvoie le sommaire d'une page d'article
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index) $index=0;

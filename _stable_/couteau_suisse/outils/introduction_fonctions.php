@@ -3,6 +3,14 @@
 if (!defined('_INTRODUCTION_SUITE')) define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 if (!defined('_INTRODUCTION_LGR')) define('_INTRODUCTION_LGR', 100);
 
+// fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
+function cs_introduire($texte) {
+	$liste = array_unique($GLOBALS['cs_introduire']);
+	foreach($liste as $f)
+		if (function_exists($f)) $texte = $f($texte);
+	return $texte;
+}
+
 function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 	$intro_suite = '@@CS_SUITE@@';
 	switch ($type) {
@@ -14,19 +22,19 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 			else if (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
 			else
-				$result = PtoBR(propre(supprimer_tags(couper_intro(cs_imprimer($chapo."\n\n\n".$texte), round(500*_INTRODUCTION_LGR/100), $intro_suite))));
+				$result = PtoBR(propre(supprimer_tags(couper_intro(cs_introduire($chapo."\n\n\n".$texte), round(500*_INTRODUCTION_LGR/100), $intro_suite))));
 			break;
 		case 'breves':
-			$result = PtoBR(propre(supprimer_tags(couper_intro(cs_imprimer($texte), round(300*_INTRODUCTION_LGR/100), $intro_suite))));
+			$result = PtoBR(propre(supprimer_tags(couper_intro(cs_introduire($texte), round(300*_INTRODUCTION_LGR/100), $intro_suite))));
 			break;
 		case 'forums':
-			$result = PtoBR(propre(supprimer_tags(couper_intro(cs_imprimer($texte), round(600*_INTRODUCTION_LGR/100), $intro_suite))));
+			$result = PtoBR(propre(supprimer_tags(couper_intro(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), $intro_suite))));
 			break;
 		case 'rubriques':
 			if (strlen($descriptif))
 				return propre($descriptif);
 			else
-				$result = PtoBR(propre(supprimer_tags(couper_intro(cs_imprimer($texte), round(600*_INTRODUCTION_LGR/100), $intro_suite))));
+				$result = PtoBR(propre(supprimer_tags(couper_intro(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), $intro_suite))));
 			break;
 	}
 	// si les points de suite ont ete ajoutes

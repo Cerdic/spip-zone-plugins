@@ -8,6 +8,12 @@ function decoupe_imprimer($texte) {
 	return str_replace(_decoupe_SEPARATEUR, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>', $texte);
 }
 
+// aide le Couteau Suisse a calculer la balise #INTRODUCTION
+function decoupe_introduire($texte) {
+	return str_replace(_decoupe_SEPARATEUR, '<p>&nbsp;</p>', $texte);
+}
+$GLOBALS['cs_introduire'][] = 'decoupe_introduire';
+
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
