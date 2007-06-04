@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fonction' => 'Funci&oacute;n',
 'masculin' => 'masculino',
 'feminin' => 'femenino',
-'login' => 'Usuario (login)',
+'username' => 'Usuario (login)',
 'divers' => 'Varios',
 'exp_divers' => 'Campo que sera propuesto con el nombre de comentario',
 'categorie' => 'Categoria de cotisaci&oacute;n',
@@ -76,7 +76,9 @@ Muchas Gracias.
 
 El equipo de @nom_site@',
 'lisez_mail' => 'Un email acaba de ser enviado a la direcci&oacute;n email ingresada. Para poder utilizar su cuenta solo le queda un paso, siga las instrucciones que estan en el email y active su cuenta.',
-'mail_registre' => 'Esta direccion email ya existe en nuestra base de datos. Para activar su cuenta sigas las instrucciones que estan en el email que acaba de ser enviado.',
+'mail_renvoye' => 'Esta direccion email ya existe en nuestra base de datos. Para activar su cuenta sigas las instrucciones que estan en el email que acaba de ser enviado.',
+'mail_registre' => 'Esta direccion email ya ha sido resgistrada anteriormente. Utilise su nombre de usuario habitual.',
+
 
 'janvier' => 'Enero',
 'fevrier' => 'Febrero',

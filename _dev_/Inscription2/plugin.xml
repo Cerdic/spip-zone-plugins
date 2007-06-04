@@ -22,7 +22,7 @@
 	<necessite id='cfg' version='[1.0.2;]' />
 	<install>base/inscription2_installer.php</install>
 	<options>
-		inscription2_mes_fonctions.php
+		inscription2_mes_options.php
 	</options>
 	<options>
 		base/inscription2.php

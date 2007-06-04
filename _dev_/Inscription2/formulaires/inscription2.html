@@ -1,11 +1,11 @@
 #CACHE{0}
 
 <div>
-	[(#ENV{message})]
+	[(#ENV*{message})]
 </div>
 
 <div [style="(#ENV{commentaire}|=={1}|?{display: none;, display:block;})"]>
-	#ENV{commentaire}
+	#ENV*{commentaire}
 </div>
 
 <div [style="(#ENV{commentaire}|=={1}|?{display: block;, display:none;})"]>
@@ -32,9 +32,9 @@
 	<input type="text" name="prenom" id="prenom" /><br />
 </label>
 
-<label [style="(#CONFIG{inscription2/login}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:user:></strong><br />
-	<input type="text" name="login" id="login" /><br />
+<label [style="(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:username:></strong><br />
+	<input type="text" name="username" id="username" /><br />
 </label>
 
 <label [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>

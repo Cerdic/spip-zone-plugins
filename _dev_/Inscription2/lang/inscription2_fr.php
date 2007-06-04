@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fonction' => 'Fonction',
 'masculin' => 'masculin',
 'feminin' => 'feminin',
-'login' => 'Nom d\'utilisateur (login)',
+'username' => 'Nom d\'utilisateur (login)',
 'divers' => 'Divers',
 'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
 'categorie' => 'Cat&eacute;gorie de cotisation',
@@ -74,7 +74,8 @@ Merci de votre confiance.
 
 L\'equipe de @nom_site@',
 'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; à l\'adresse fourni. Pour activer votre compte veuillez suivre les instructions.',
-'mail_registre' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute, veuillez activer votre compte en suivant les instructiones dans votre mail.',
+'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute, veuillez activer votre compte en suivant les instructiones dans votre mail.',
+'mail_registre' => 'Cette adresse email existe d&eacute;j&agrave;, veuillez utiliser vos identifiants personnelles.',
 
 'janvier' => 'janvier',
 'fevrier' => 'f&eacute;vrier',

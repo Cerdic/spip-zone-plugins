@@ -11,18 +11,22 @@ function balise_FORMULAIRE_INSCRIPTION2_stat($args, $filtres) {
 	$mode = $args[0];
 	if(!$mode)
 		$mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? 'redac' : 'forum'; 
-	if(!test_mode_inscription($mode))
+	if(!test_mode_inscription2($mode))
 		return '';
 	else return array($mode);}
 
 function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
-	if (!test_mode_inscription($mode)) 
+	if (!test_mode_inscription2($mode)) 
 		return _T('pass_rien_a_faire_ici');
 	//recuperer les infos inserées par le visiteur
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
-		if($val!='' and $cle !='creation' and $cle != 'naissance' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle))
+		if($val!='' and $cle !='creation' and $cle !='username' and $cle != 'naissance' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle)){
 			$var_user[$cle] = _request($cle);
+			if($cle == 'adresse')
+				$var_user[$cle] .= ' '._request('adresse2');
+		}if($val!='' and $cle == 'username')
+			$var_user['login'] = _request($cle);
 		if($val!='' and $cle == 'naissance')
 			$var_user[$cle] = _request('annee').'-'._request('mois').'-'._request('jour');
 		if($val!='' and $cle == 'creation')
@@ -32,9 +36,9 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	$commentaire = true;
 	if ($mail) {
 		include_spip('inc/filtres'); // pour email_valide
-		$commentaire = message_inscription($var_user, $mode);
+		$commentaire = message_inscription2($var_user, $mode);
 		if (is_array($commentaire)) 
-			$commentaire = envoyer_inscription($commentaire);
+			$commentaire = envoyer_inscription2($commentaire);
 	}
 	$message = $commentaire ? '' : _T('inscription2:lisez_mail');
 	return array("formulaires/inscription2", $GLOBALS['delais'],
@@ -45,12 +49,12 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 				'mail_inscription' => _request('mail_inscription'),
 				'self' => str_replace('&amp;','&',(self()))));}
 
-function test_mode_inscription($mode) {
+function test_mode_inscription2($mode) {
 	return (($mode == 'redac' AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
 		OR ($mode == 'forum' AND ($GLOBALS['meta']['accepter_visiteurs'] == 'oui'
 			OR $GLOBALS['meta']['forums_publics'] == 'abo')));}
 
-function test_inscription($mode, $var_user) {
+function test_inscription2($mode, $var_user) {
 	include_spip('inc/filtres');
 	$nom = trim(corriger_caracteres($var_user['nom']));
 	if (!$nom || strlen($nom) > 64)
@@ -60,8 +64,8 @@ function test_inscription($mode, $var_user) {
 		return _T('info_email_invalide');
 	return $var_user;}
 
-function message_inscription($var_user, $mode) {
-	$declaration = test_inscription($mode, $var_user);
+function message_inscription2($var_user, $mode) {
+	$declaration = test_inscription2($mode, $var_user);
 	
 	if (is_string($declaration))
 		return  $declaration;
@@ -72,19 +76,20 @@ function message_inscription($var_user, $mode) {
 	$row = spip_fetch_array($row);
 
 	if (!$row) 							// il n'existe pas, creer les identifiants  
-		return inscription_nouveau($var_user);
+		return inscription2_nouveau($var_user);
 	
 	if ($row['statut'] == '5poubelle')	// irrecuperable
 		return _T('form_forum_access_refuse');
 	
-	if ($row['statut'] != 'aconfirmer')	// deja inscrit
-		envoyer_inscription($row);/**RENVOYER MAIL D'INSCRIPTION **/
-		return _T('inscription2:mail_registre');
-	return $row;}
+	if ($row['statut'] == 'aconfirmer'){	// deja inscrit
+		envoyer_inscription2($row);/**RENVOYER MAIL D'INSCRIPTION **/
+		return _T('inscription2:mail_renvoye');
+	}
+	return _T('inscription2:mail_registre');}
 
-function inscription_nouveau($declaration){
+function inscription2_nouveau($declaration){
 	if (!isset($declaration['login']))
-		$declaration['login'] = test_login($declaration['nom'], $declaration['email']);
+		$declaration['login'] = inscription2_test_login($declaration['nom'], $declaration['email']);
 
 	$declaration['statut'] = 'aconfirmer';
 	//insertion des données ds la table spip_auteurs
@@ -105,16 +110,16 @@ function inscription_nouveau($declaration){
 	
 	return $declaration;}
 
-function envoyer_inscription($var_user) {
+function envoyer_inscription2($var_user) {
 	include_spip('inc/mail');
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	$message = _T('inscription2:message_auto')
 			. _T('inscription2:email_bonjour', array('nom'=>$var_user['nom']))."\n\n"
 			. _T('inscription2:texte_email_inscription', array(
-			'link_activation' => $adresse_site.'/?page=confirmation&id='
+			'link_activation' => $adresse_site.'/?page=inscription2_confirmation&id='
 			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=conf', 
-			'link_suppresion' => $adresse_site.'/?page=confirmation&id='
+			'link_suppresion' => $adresse_site.'/?page=inscription2_confirmation&id='
 			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=sup',
 			'login' => $var_user['login'], 'nom_site' => $nom_site_spip ));
 
@@ -125,8 +130,7 @@ function envoyer_inscription($var_user) {
 	else
 		return _T('inscription2:probleme_email');}
 
-// http://doc.spip.org/@test_login
-function test_login($nom, $mail) {
+function inscription2_test_login($nom, $mail) {
 	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
 	$login_base = preg_replace("/[^\w\d_]/", "_", $nom);
