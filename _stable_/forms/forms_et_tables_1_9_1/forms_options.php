@@ -186,14 +186,20 @@ if ((intval(_request('ajout_reponse'))) && (_request('ajout_cookie_form') == 'ou
 foreach($_COOKIE as $cookie=>$value){
 	if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie,$reg)){
 		$idf = intval($reg[1]);
-		$res = spip_query("SELECT id_article FROM spip_forms_articles WHERE id_form=".intval($idf));
+		$res = spip_query("SELECT id_article,id_rubrique FROM spip_forms_articles WHERE id_form=".intval($idf));
 		while($row=spip_fetch_array($res)){
 			$ida = $row['id_article'];
+			$idr = $row['id_rubrique'];
 			if (
 						(isset($GLOBALS['article'])&&($GLOBALS['article']==$ida))
 					||(isset($GLOBALS['id_article'])&&($GLOBALS['id_article']==$ida))
 					||(isset($GLOBALS["article$ida"]))
-					||(isset($GLOBALS['contexte_inclus']['id_article'])&&($GLOBALS['contexte_inclus']['id_article']==$ida)) ){
+					||(isset($GLOBALS['contexte_inclus']['id_article'])&&($GLOBALS['contexte_inclus']['id_article']==$idr))
+					||(isset($GLOBALS['rubrique'])&&($GLOBALS['rubrique']==$idr))
+					||(isset($GLOBALS['id_rubrique'])&&($GLOBALS['id_rubrique']==$idr))
+					||(isset($GLOBALS["rubrique$idr"]))
+					||(isset($GLOBALS['contexte_inclus']['rubrique'])&&($GLOBALS['contexte_inclus']['rubrique']==$idr))
+					){
 					// un article qui utilise le form va etre rendu
 					// il faut utiliser le marquer cache pour ne pas polluer la page commune
 					$GLOBALS['marqueur'].=":sondage $idf";
