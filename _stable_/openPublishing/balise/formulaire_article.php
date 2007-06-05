@@ -28,7 +28,7 @@ function balise_FORMULAIRE_ARTICLE ($p) {
    Déclare le nom de la balise et un tableau des variables à récupérer dans le contexte.
 */
 
-	$p = calculer_balise_dynamique($p,'FORMULAIRE_ARTICLE',array('0'));
+	$p = calculer_balise_dynamique($p,'FORMULAIRE_ARTICLE',array(0));
 	return $p;
 }
 
@@ -170,6 +170,14 @@ $mail_inscription= stripslashes(_request('mail_inscription'));
 $group_name= stripslashes(_request('group_name'));
 $phone= stripslashes(_request('phone'));
 
+//Affichage info auteur identifié
+$auteur_session = $GLOBALS['auteur_session'];
+if($auteur_session) {
+	if (!$nom_inscription) $nom_inscription = $auteur_session['nom'];
+	if (!$mail_inscription) $mail_inscription = $auteur_session['email'];
+}
+
+
 $mess_error= stripslashes(_request('mess_error'));
 
 // autres données non utilisées (reliquat #FORMULAIRE_ARTICLE)
@@ -220,9 +228,9 @@ $date_redac = $date_debut;
 */
 
 // on demande un nouvel identifiant
-	if (($previsualiser) || ($media) || ($valider) || isset($_REQUEST['tags']) || ($mots)) {
-		if (!$article) $article=op_request_new_id($connect_id_auteur);
-	}
+if (($previsualiser) || ($media) || ($valider) || isset($_REQUEST['tags']) || ($mots)) {
+	if (!$article) $article=op_request_new_id($connect_id_auteur);
+}
 
 	// on enregistre les mots cles (necessite le plugin tag machine)
 	
