@@ -15,8 +15,6 @@ function op_ajouterOnglets($flux) {
 	{
 	$flux['data']['voir']= new Bouton(null, 'Voir la configuration',
 								  generer_url_ecrire("op"));
-	$flux['data']['modifier']= new Bouton(null, 'Modifier la configuration',
-								  generer_url_ecrire("op_modifier","action=creer"));
 	$flux['data']['effacer']= new Bouton(null, 'Supprimer openPublishing',
 								  generer_url_ecrire("op_effacer"));
 	}
