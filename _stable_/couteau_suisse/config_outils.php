@@ -429,6 +429,14 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
 	'code:options' => "%%couleurs_fonds%% %%set_couleurs%%\n%%couleurs_perso%%",
+	'code:fonctions' => "// aide le Couteau Suisse a calculer la balise #INTRODUCTION
+function couleurs_introduire(\$texte) {
+	\$couleurs = unserialize(\$GLOBALS['meta']['cs_couleurs']);
+	\$couleurs = _COULEURS_SET===0?\"\$couleurs[0]|\$couleurs[1]\":\$couleurs[0];
+	return preg_replace(\",\[/?(bg|fond)?\s*(\$couleurs|couleur|color)\],i\", '', \$texte);
+}
+\$GLOBALS['cs_introduire'][] = 'couleurs_introduire';
+",
 ));
 
 // outil specifiquement français. D'autres langues peuvent etre ajoutees dans outils/typo_exposants.php
