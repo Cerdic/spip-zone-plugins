@@ -102,6 +102,7 @@ function op_liste_config() {
 	echo "<li>Gestion des documents : <b>".op_get_document()."</b></li>";
 	echo "<li>Gestion des mots-clefs<ul>";
 		echo "<li>Plugin Tag Machine : <b>".op_get_tagmachine()."</b></li>";
+		echo "<li>Mot-clefs : <b>".op_get_motclefs()."</b></li>";
 	echo "</ul>";
 	echo "<li>Post-traitement<ul>";
 		echo "<li>Titre en minuscule : <b>".op_get_titre_minus()."</b></li>";

@@ -51,7 +51,8 @@ $op_config = array(
 		"message_retour"		=> "text NOT NULL",
 		"message_retour_abandon"	=> "text NOT NULL",
 		"version"			=> "text NOT NULL",
-		"tagmachine"			=> "ENUM('oui','non') DEFAULT 'non' NOT NULL"
+		"tagmachine"			=> "ENUM('oui','non') DEFAULT 'non' NOT NULL",
+		"motclefs"			=> "ENUM('oui','non') DEFAULT 'non' NOT NULL"
 		);
 
 $op_config_key = array(

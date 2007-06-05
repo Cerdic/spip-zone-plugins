@@ -17,6 +17,7 @@ include_spip('base/abstract_sql');
 	op_get_url_abandon() :
 	op_get_id_auteur();
 	op_get_tagmachine(); renvoi le flag tagmachine
+	op_get_motclefs(): renvoi le flag motclefs
 	op_set_id_auteur();
 	op_set_url_retour() :
 	op_set_url_abandon() :
@@ -27,6 +28,8 @@ include_spip('base/abstract_sql');
 	op_set_document($i) : maj du flag document
 	op_set_titre_minus($i) : maj du flag titre minus
 	op_set_antispam($i) : maj du flag anti_spam
+	op_set_tagmachine($i) : maj du flag tagmachine
+	op_set_motclefs($i) : maj du flag motclefs
 */
 
 	function set_config_rubrique($ajout_rubrique) {
@@ -84,6 +87,11 @@ include_spip('base/abstract_sql');
  		return $row['tagmachine'];
 	}
 
+	function op_get_motclefs() {
+		$row = spip_fetch_array(spip_abstract_select('motclefs', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['motclefs'];
+	}
+
 	function op_get_renvoi_normal() {
 		$row = spip_fetch_array(spip_abstract_select('message_retour', 'spip_op_config', "id_config=1 LIMIT 1"));
  		return $row['message_retour'];
@@ -121,6 +129,11 @@ include_spip('base/abstract_sql');
 
 	function op_set_tagmachine($flag_tagmachine) {
 		$retour = spip_query('UPDATE spip_op_config SET tagmachine = '.spip_abstract_quote($flag_tagmachine).' WHERE id_config = 1');
+		return $retour;
+	}
+
+	function op_set_motclefs($flag_motclefs) {
+		$retour = spip_query('UPDATE spip_op_config SET motclefs = '.spip_abstract_quote($flag_motclefs).' WHERE id_config = 1');
 		return $retour;
 	}
 
@@ -260,9 +273,11 @@ include_spip('base/abstract_sql');
 			// on ajoute ce qui faut dans les bases existantes
 			$req = "
 			ALTER TABLE `spip_op_config` ADD (
-			`tagmachine` ENUM('oui','non') DEFAULT 'non' NOT NULL
+			`tagmachine` ENUM('oui','non') DEFAULT 'non' NOT NULL,
+			`motclefs` ENUM('oui','non') DEFAULT 'non' NOT NULL
 			);
 			";
+			
 			spip_query($req);
 			spip_query('UPDATE `spip_op_config` SET `version` = "0.3" WHERE `id_config` = 1 LIMIT 1');
 		}
@@ -308,6 +323,7 @@ include_spip('base/abstract_sql');
 			`message_retour_abandon` text NOT NULL,
 			`version` text NOT NULL,
 			`tagmachine` ENUM('oui','non') DEFAULT 'non' NOT NULL,
+			`motclefs` ENUM('oui','non') DEFAULT 'non' NOT NULL,
 			PRIMARY KEY  (`id_config`)
 			);
 			";

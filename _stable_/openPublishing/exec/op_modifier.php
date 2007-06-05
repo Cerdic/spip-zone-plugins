@@ -27,6 +27,7 @@ function exec_op_modifier() {
 	$modif_renvoi_normal = "";
 	$modif_renvoi_abandon = "";
 	$modif_tagmachine = "";
+	$modif_motclefs = "";
   
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		debut_page(_T('opconfig:op_config'), "administration", "INDY");
@@ -63,6 +64,7 @@ function exec_op_modifier() {
 			$modif_renvoi_normal = stripslashes(_request('modif_renvoi_normal'));
 			$modif_renvoi_abandon = stripslashes(_request('modif_renvoi_abandon'));
 			$modif_tagmachine = stripslashes(_request('modif_tagmachine'));
+			$modif_motclefs = stripslashes(_request('modif_motclefs'));
 			$modif_url = _request('modif_url');
 			$num_rubrique_ajout = stripslashes(_request('num_rubrique_ajout'));
 			$active_agenda = stripslashes(_request('active_agenda'));
@@ -70,6 +72,7 @@ function exec_op_modifier() {
 			$active_titre_minus = stripslashes(_request('active_titre_minus'));
 			$active_antispam = stripslashes(_request('active_antispam'));
 			$active_tagmachine = stripslashes(_request('active_tagmachine'));
+			$active_motclefs = stripslashes(_request('active_motclefs'));
 			$renvoi_normal = _request('renvoi_normal');
 			$renvoi_abandon = _request('renvoi_abandon');
 			$url_retour = _request('url_retour');
@@ -112,6 +115,9 @@ function exec_op_modifier() {
 			}
 			if($modif_tagmachine) {
 				op_set_tagmachine($active_tagmachine);
+			}
+			if($modif_motclefs) {
+				op_set_motclefs($active_motclefs);
 			}
 			
                 break;
@@ -169,6 +175,7 @@ function exec_op_modifier() {
 		op_cadre_traitement();
 		op_cadre_agenda();
 		op_cadre_documents();
+		op_cadre_motclefs();
 		op_cadre_tagmachine();
 
 		echo '</form>';
@@ -303,7 +310,7 @@ function op_cadre_documents() {
 
 function op_cadre_tagmachine() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestions du plugin Tag Machine");
-	echo 'autoriser la gestion des mots-clefs par le plugin Tag Machine ?';
+	echo 'autoriser la gestion des mots-clefs par le plugin Tag Machine ?&nbsp;';
 	echo '<select name="active_tagmachine">';
 	$r = op_get_tagmachine();
 	if ($r == 'oui') {
@@ -316,6 +323,24 @@ function op_cadre_tagmachine() {
 	}
 	echo '</select><br />';
 	echo '<input type="submit" name="modif_tagmachine" value="appliquer les changements" />';
+	fin_cadre_enfonce();
+}
+
+function op_cadre_motclefs() {
+	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestions des mot-clefs");
+	echo 'autoriser la gestion des mots-clefs ?&nbsp;';
+	echo '<select name="active_motclefs">';
+	$r = op_get_motclefs();
+	if ($r == 'oui') {
+		echo '<option value="oui" selected >oui</option>' .
+		'<option value="non">non</option>';
+	}
+	else {
+		echo '<option value="oui">oui</option>' .
+		'<option value="non" selected>non</option>';
+	}
+	echo '</select><br />';
+	echo '<input type="submit" name="modif_motclefs" value="appliquer les changements" />';
 	fin_cadre_enfonce();
 }
 

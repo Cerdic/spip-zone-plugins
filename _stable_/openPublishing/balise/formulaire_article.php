@@ -107,14 +107,24 @@ if($article) {
 $previsualiser= _request('previsualiser');
 $valider= _request('valider');
 $media=_request('media');
+$mots=_request('mots');
 $agenda=_request('agenda');
 $abandonner=_request('abandonner');
 
 // recuperation url du site
 $url_site = _request('url_site');
 
+// on recupere l'id article (sinon on créer un nouveau article à chaque prévisualisation ou ajout de document ...
+$article = intval(stripslashes(_request('article')));
+
 // on quitte et renvoie vers le sommaire
 if ($abandonner) {
+
+	// Attention, en cas d'abandon,
+	// il faut supprimer les enregistrements éventuellement créer dans la table spip_mot_article
+	if($article) {
+		spip_query("DELETE FROM spip_mots_articles WHERE id_article = '$article'");
+	}
 
 	$url_retour = $url_site . op_get_url_abandon() ;
 	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_abandon();
@@ -122,9 +132,6 @@ if ($abandonner) {
 	return $message;
 
 }
-
-// on recupere l'id article (sinon on créer un nouveau article à chaque prévisualisation ou ajout de document ...
-$article = intval(stripslashes(_request('article')));
 
 // données pour formulaire document
 $formulaire_documents = stripslashes(_request('formulaire_documents'));
@@ -141,6 +148,14 @@ $choix_agenda = stripslashes(_request('choix_agenda'));
 
 // données pour formulaire tagopen
 $formulaire_tagopen = stripslashes(_request('formulaire_tagopen'));
+
+// données pour formulaire motclefs
+$formulaire_motclefs = stripslashes(_request('formulaire_motclefs'));
+if (!empty($_POST["motschoix"])) {
+	$motschoix=$_POST["motschoix"];	
+}
+
+//$motchoix = stripslashes(_request('motchoix'));
 
 // donnée prévisualisation
 $rubrique= intval(stripslashes(_request('rubrique')));
@@ -205,7 +220,7 @@ $date_redac = $date_debut;
 */
 
 // on demande un nouvel identifiant
-	if (($previsualiser) || ($media) || ($valider) || isset($_REQUEST['tags']) ) {
+	if (($previsualiser) || ($media) || ($valider) || isset($_REQUEST['tags']) || ($mots)) {
 		if (!$article) $article=op_request_new_id($connect_id_auteur);
 	}
 
@@ -394,6 +409,26 @@ else
 		"<\\1no-f\\2", $formulaire_previsu);
 	}
 	
+	// si l'auteur demande des mots-clefs
+	if($mots) {
+		if ($motschoix){
+			foreach($motschoix as $mot){
+
+				//protection contre mots-clefs vide
+				$row = spip_fetch_array(spip_abstract_select('titre', 'spip_mots', "id_mot=$mot LIMIT 1"));
+ 				$titremot = $row['titre'];
+				if (!(strcmp($titremot,"")==0)) {
+					if ($mot) {
+					// on lie l'article aux mots clefs choisis
+					spip_abstract_insert('spip_mots_articles', "(id_mot,id_article)", "(
+						" . spip_abstract_quote($mot) .",
+						" . spip_abstract_quote($article) . "
+					)");
+					}
+				}
+			}
+		}
+	}
 	
 	
 	// si l'auteur ajoute un documents
@@ -489,6 +524,19 @@ else
 		), false);
 	}
 
+	$flag = op_get_motclefs();
+	if ($flag =='oui') {
+		// Gestion des mot-clefs
+		$bouton= "Ajouter les nouveaux mot-clefs";
+		$formulaire_motclefs = inclure_balise_dynamique(
+		array('formulaires/formulaire_motclefs', 0,
+			array(
+				'id_article' => $article,
+				'bouton' => $bouton,
+			)
+		), false);
+	}
+
 	// Liste des documents associés à l'article
 	op_liste_vignette($article);
 
@@ -502,6 +550,7 @@ else
 			'formulaire_previsu' => $formulaire_previsu,
 			'formulaire_agenda' => $formulaire_agenda,
 			'formulaire_tagopen' => $formulaire_tagopen,
+			'formulaire_motclefs' => $formulaire_motclefs,
 			'bouton' => $bouton,
 			'article' => $article,
 			'rubrique' => $rubrique,
@@ -686,14 +735,15 @@ function select_heure($heure) {
 // fonction qui demande à la base un nouvel id_article
 function op_request_new_id($connect_id_auteur)
 {
-    $statut_nouv='prepa';
-    $forums_publics = substr(lire_meta('forums_publics'),0,3);
-    spip_query("INSERT INTO spip_articles (statut, date, accepter_forum) VALUES ( 'prepa', NOW(), '$forums_publics')");
-    $article = mysql_insert_id();
-    spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $article");
-    spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $article)");
-
-    return $article;
+	$statut_nouv='prepa';
+	$forums_publics = substr(lire_meta('forums_publics'),0,3);
+	spip_query("INSERT INTO spip_articles (statut, date, accepter_forum) VALUES ( 'prepa', NOW(), '$forums_publics')");
+	$article = mysql_insert_id();
+	spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $article");
+	spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $article)");
+	// lors de la demande d'un nouvel id article, il faut supprimer les relations éventuelles avec la table mots_articles
+	spip_query("DELETE FROM spip_mots_articles WHERE id_article = '$article'");
+	return $article;
 }
 
 // fonction qui liste les documents
