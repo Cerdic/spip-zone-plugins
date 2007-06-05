@@ -73,20 +73,23 @@ function exec_op() {
 	}
 	
 	if (op_verifier_base()) {
-		op_liste_config();
+		if (op_verifier_upgrade()) {
+			echo _T("opconfig:op_info_base_up");
+			echo '<p /><div align="center">';
+			echo '<form method="post" action="'.generer_url_ecrire('op',"action=upgrade").'">';
+			echo '<input type="submit" name="appliq" value="Upgrader les tables openPublishing" />';
+			echo '</form></div>';
+		}
+		else {
+			op_liste_config();
+		}
 	}
 	else {
 		echo '<p />';
         	echo _T("opconfig:op_info_base_ko_bis");
 	}
 
-	if (op_verifier_upgrade()) {
-		echo _T("opconfig:op_info_base_up");
-		echo '<p /><div align="center">';
-		echo '<form method="post" action="'.generer_url_ecrire('op',"action=upgrade").'">';
-		echo '<input type="submit" name="appliq" value="Upgrader les tables openPublishing" />';
-		echo '</form></div>';
-	}
+	
 
 	fin_cadre_enfonce();
 

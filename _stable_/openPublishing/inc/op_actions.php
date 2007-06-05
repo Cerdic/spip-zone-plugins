@@ -299,63 +299,16 @@ include_spip('base/abstract_sql');
 
 	function op_installer_base() {
 	
+	
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
+		creer_base();
+
 		include_spip('inc/meta');
 		ecrire_meta('indy_version', '0.3');
 		ecrire_metas();
 
-		if (!op_verifier_auteurs()) {
-			$req = "
-			CREATE TABLE `spip_op_auteurs` (
-			`id_auteur` bigint(21) NOT NULL auto_increment,
-			`id_article` bigint(21) DEFAULT '0' NOT NULL,
-			`id_real_auteur` bigint(21) DEFAULT '0' NOT NULL,
-			`nom` text NOT NULL,
-			`email` text NOT NULL,
-			`group_name` text NOT NULL,
-			`phone` text NOT NULL,
-			PRIMARY KEY  (`id_auteur`),
-			KEY (`id_article`)
-			);		
-			";		
-			spip_query($req);
-		}
-
-		if (!op_verifier_config()) {
-			$req = "
-			CREATE TABLE `spip_op_config` (
-			`id_config` bigint(21) NOT NULL auto_increment,
-			`agenda` ENUM('oui','non') DEFAULT 'oui' NOT NULL,
-			`documents` ENUM('oui','non') DEFAULT 'oui' NOT NULL,
-			`anti_spam` ENUM('oui','non') DEFAULT 'oui' NOT NULL,
-			`titre_minus` ENUM('oui','non') DEFAULT 'oui' NOT NULL,
-			`rubrique_agenda` bigint(21) NOT NULL,
-			`lien_retour` text NOT NULL,
-			`lien_retour_abandon` text NOT NULL,
-			`id_auteur_op` bigint(21) NOT NULL,
-			`message_retour` text NOT NULL,
-			`message_retour_abandon` text NOT NULL,
-			`version` text NOT NULL,
-			`tagmachine` ENUM('oui','non') DEFAULT 'non' NOT NULL,
-			`motclefs` ENUM('oui','non') DEFAULT 'non' NOT NULL,
-			`statut` ENUM('publie','prop','prepa') DEFAULT 'prop' NOT NULL,
-			PRIMARY KEY  (`id_config`)
-			);
-			";
-			spip_query($req);
-			// dans la foulée : créer l'enregistrement par défaut
-			op_insert_first_config();
-		}
-
-		if (!op_verifier_rubriques()) {
-			$req = "
-			CREATE TABLE `spip_op_rubriques` (
-			`id_rubrique` bigint(21) NOT NULL auto_increment,
-			`op_rubrique` bigint(21) DEFAULT '0' NOT NULL,
-			PRIMARY KEY (`id_rubrique`)
-			);
-			";
-			spip_query($req);
-		}
+		op_insert_first_config();
 	}
 
 	function op_insert_first_config() {
