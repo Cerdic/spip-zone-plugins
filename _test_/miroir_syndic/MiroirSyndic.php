@@ -57,7 +57,7 @@ function MiroirSyndic_regler_rubrique($t) {
 
 	if ($nom_rub) {
 		#spip_log("rubrique '$nom_rub'");
-		$r = creer_rubrique_nommee($nom_rub, $t['lang'], $t['id_rubrique']);
+		$r = creer_rubrique_nommee($nom_rub, $t['id_rubrique']);
 		spip_query("UPDATE spip_articles SET
 		id_rubrique=$r WHERE id_article=".$t['id_article']);
 	}
@@ -122,40 +122,47 @@ function MiroirSyndic_miroir() {
 
 
 
-// creer_rubrique_nommee('/truc/machin/chose', $lang) a partir de id_rubrique
-function creer_rubrique_nommee($titre, $lang = '', $id_parent=0) {
+// creer_rubrique_nommee('/truc/machin/chose') a partir de id_rubrique
+// et avec la langue $lang
+if(!function_exists('creer_rubrique_nommee')) {
+function creer_rubrique_nommee($titre, $id_parent=0) {
 
 	// eclater l'arborescence demandee
 	$arbo = explode('/', preg_replace(',^/,', '', $titre));
 
 	foreach ($arbo as $titre) {
 		$s = spip_query("SELECT id_rubrique, id_secteur FROM spip_rubriques
-		WHERE titre = '".addslashes($titre)."'
+		WHERE titre = "._q($titre)."
 		AND id_parent=".intval($id_parent));
 		if (!$t = spip_fetch_array($s)) {
-			spip_query("INSERT INTO spip_rubriques
-			(titre, id_parent, statut, lang) VALUES
-			('".addslashes($titre)."', $id_parent, 'prive', '$lang')");
-			$id_rubrique = spip_insert_id();
+			include_spip('base/abstract_sql');
+			$id_rubrique = spip_abstract_insert('spip_rubriques',
+				'(titre, id_parent, statut)',
+				'('._q($titre).", $id_parent, 'prive')"
+			);
 			if ($id_parent > 0) {
-				$t = spip_fetch_array(spip_query(
-				"SELECT id_secteur FROM spip_rubriques
-				WHERE id_rubrique=$id_rubrique"));
-				$id_secteur = $t['id_secteur'];
-			} else
+				$data = spip_fetch_array(spip_query(
+					"SELECT id_secteur,lang FROM spip_rubriques
+					WHERE id_rubrique=$id_parent"));
+				$id_secteur = $data['id_secteur'];
+				$lang = $data['lang'];
+			} else {
 				$id_secteur = $id_rubrique;
+				$lang = $GLOBALS['meta']['langue_site'];
+			}
 
-			spip_query("UPDATE spip_rubriques SET id_secteur=$id_secteur
+			spip_query("UPDATE spip_rubriques SET id_secteur=$id_secteur, lang="._q($lang)."
 			WHERE id_rubrique=$id_rubrique");
-		} else
+		} else {
 			$id_rubrique = $t['id_rubrique'];
+		}
 
 		// pour la recursion
 		$id_parent = $id_rubrique;
 	}
 
-	return $id_rubrique;
+	return intval($id_rubrique);
 }
-
+}
 
 ?>
