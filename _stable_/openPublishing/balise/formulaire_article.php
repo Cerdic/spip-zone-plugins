@@ -247,7 +247,8 @@ if (($previsualiser) || ($media) || ($valider) || isset($_REQUEST['tags']) || ($
 if($valider) {
 
 	// statut de l'article : proposé
-	$statut= 'prop';
+	//$statut= 'prop';
+	$statut = op_get_statut();
 
 	/*
 	 * vérifications et traitements des champs texte

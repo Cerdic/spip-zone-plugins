@@ -100,6 +100,7 @@ function op_liste_config() {
 	echo "<li>Version install&eacute;e : <b>".op_get_version()."</b></li>";
 	echo "<li>Gestion d'un agenda : <b>".op_get_agenda()."</b></li>";
 	echo "<li>Gestion des documents : <b>".op_get_document()."</b></li>";
+	echo "<li>Statut des articles : <b>".op_get_statut()."</b></li>";
 	echo "<li>Gestion des mots-clefs<ul>";
 		echo "<li>Plugin Tag Machine : <b>".op_get_tagmachine()."</b></li>";
 		echo "<li>Mot-clefs : <b>".op_get_motclefs()."</b></li>";

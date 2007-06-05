@@ -19,6 +19,9 @@ spip-op-config : contient les options de configuration
 - message-retour : message affiché lors du retour
 - message-retour-abandon : message affiché lors de l'abandon
 - version : numéro de version du plugin
+- tagmachine : flag OUI / NON
+- motclefs : flag OUI / NON
+- statut : prepa, prop, publie
 
 spip_op_auteurs : contient les informations sur les auteurs op
 - id_auteur : id de l'auteur op
@@ -52,7 +55,8 @@ $op_config = array(
 		"message_retour_abandon"	=> "text NOT NULL",
 		"version"			=> "text NOT NULL",
 		"tagmachine"			=> "ENUM('oui','non') DEFAULT 'non' NOT NULL",
-		"motclefs"			=> "ENUM('oui','non') DEFAULT 'non' NOT NULL"
+		"motclefs"			=> "ENUM('oui','non') DEFAULT 'non' NOT NULL",
+		"statut"			=> "ENUM('prepa','prop','publie') DEFAULT 'prop' NOT NULL"
 		);
 
 $op_config_key = array(

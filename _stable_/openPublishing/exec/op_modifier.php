@@ -28,6 +28,7 @@ function exec_op_modifier() {
 	$modif_renvoi_abandon = "";
 	$modif_tagmachine = "";
 	$modif_motclefs = "";
+	$modif_statut = "";
   
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		debut_page(_T('opconfig:op_config'), "administration", "INDY");
@@ -65,6 +66,7 @@ function exec_op_modifier() {
 			$modif_renvoi_abandon = stripslashes(_request('modif_renvoi_abandon'));
 			$modif_tagmachine = stripslashes(_request('modif_tagmachine'));
 			$modif_motclefs = stripslashes(_request('modif_motclefs'));
+			$modif_statut = stripslashes(_request('modif_statut'));
 			$modif_url = _request('modif_url');
 			$num_rubrique_ajout = stripslashes(_request('num_rubrique_ajout'));
 			$active_agenda = stripslashes(_request('active_agenda'));
@@ -73,6 +75,7 @@ function exec_op_modifier() {
 			$active_antispam = stripslashes(_request('active_antispam'));
 			$active_tagmachine = stripslashes(_request('active_tagmachine'));
 			$active_motclefs = stripslashes(_request('active_motclefs'));
+			$select_statut = stripslashes(_request('select_statut'));
 			$renvoi_normal = _request('renvoi_normal');
 			$renvoi_abandon = _request('renvoi_abandon');
 			$url_retour = _request('url_retour');
@@ -118,6 +121,9 @@ function exec_op_modifier() {
 			}
 			if($modif_motclefs) {
 				op_set_motclefs($active_motclefs);
+			}
+			if($modif_statut) {
+				op_set_statut($select_statut);
 			}
 			
                 break;
@@ -177,6 +183,7 @@ function exec_op_modifier() {
 		op_cadre_documents();
 		op_cadre_motclefs();
 		op_cadre_tagmachine();
+		op_cadre_statut();
 
 		echo '</form>';
 	}
@@ -341,6 +348,31 @@ function op_cadre_motclefs() {
 	}
 	echo '</select><br />';
 	echo '<input type="submit" name="modif_motclefs" value="appliquer les changements" />';
+	fin_cadre_enfonce();
+}
+
+function op_cadre_statut() {
+	debut_cadre_enfonce("racine-site-24.gif", false, "", "Statut des articles");
+	echo 'Quel statut pour les articles publi&eacute;s ?&nbsp;';
+	echo '<select name="select_statut">';
+	$r = op_get_statut();
+	if ($r == 'publie') {
+		echo '<option value="publie" selected >publie</option>' .
+		'<option value="prop">prop</option>' .
+		'<option value="prepa">prepa</option>';
+	}
+	else if ($r == 'prop') {
+		echo '<option value="prop" selected >prop</option>' .
+		'<option value="publie">publie</option>' .
+		'<option value="prepa">prepa</option>';
+	}
+	else {
+		echo '<option value="prop" selected >prepa</option>' .
+		'<option value="publie">publie</option>' .
+		'<option value="prop">prop</option>';
+	}
+	echo '</select><br />';
+	echo '<input type="submit" name="modif_statut" value="appliquer les changements" />';
 	fin_cadre_enfonce();
 }
 
