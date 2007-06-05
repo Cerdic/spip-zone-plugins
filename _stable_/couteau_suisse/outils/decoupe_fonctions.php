@@ -17,6 +17,8 @@ $GLOBALS['cs_introduire'][] = 'decoupe_introduire';
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
+	// au cas ou on ne veuille pas de decoupe
+	if ($_GET['artpage']=='print') return decoupe_imprimer($texte);
 	// recherche du sommaire s'il existe
 	if (defined('_sommaire_REM') && (substr_count($texte, _sommaire_REM)==2)) {
 		$pages = explode(_sommaire_REM, $texte);

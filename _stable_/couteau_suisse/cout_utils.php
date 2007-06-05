@@ -402,13 +402,12 @@ function cs_optimise_js($code) {
 			$ouvre=strpos($temp, '{', $min);
 			$ferme=strpos($temp, '}', $min);
 			if($ferme!==false) { if($ouvre!==false && $ouvre<$ferme) $nbouvre++; else $nbouvre--; }
-//echo "<:$min,$ouvre,$ferme,$nbouvre:>";
 		} while($ferme!==false && $nbouvre>0);
 		if($ferme===false) return "/* Erreur sur les accolades : \{$regs[2] */";
 		$temp = substr($temp, 0, $ferme);
 		$rempl = "if($regs[1])\{$temp}";
-		if(intval($regs[1])) $code = str_replace($rempl, "/* optimisation 'if($regs[1])'*/ $temp", $code);
-			else $code = str_replace($rempl, "/* optimisation '\{$temp}'*/", $code);
+		if(intval($regs[1])) $code = str_replace($rempl, "/* optimisation : 'if($regs[1])' */ $temp", $code);
+			else $code = str_replace($rempl, "/* optimisation : 'if($regs[1]) {$temp}' */", $code);
 	}
 	return $code;
 }

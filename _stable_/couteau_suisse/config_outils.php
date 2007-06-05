@@ -326,8 +326,8 @@ if (isset(\$_GET['var_recherche'])) {
 	include_spip('inc/headers');
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
 }",
-	'code:css' => "div.decoupe_haut, div.decoupe_bas {display:block; text-align:center; }
-div.decoupe_haut img, div.decoupe_bas img { border:none; margin:0pt; padding:0pt; }",
+	'code:css' => "div.pagination {display:block; text-align:center; }
+div.pagination img { border:none; margin:0pt; padding:0pt; }",
 	// inserer : $table_des_traitements['TEXTE'][]= 'decouper_en_pages(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'decouper_en_pages',
 	'categorie' => 'typo-racc',
