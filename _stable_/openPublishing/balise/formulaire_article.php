@@ -28,7 +28,7 @@ function balise_FORMULAIRE_ARTICLE ($p) {
    Déclare le nom de la balise et un tableau des variables à récupérer dans le contexte.
 */
 
-	$p = calculer_balise_dynamique($p,'FORMULAIRE_ARTICLE',array(0));
+	$p = calculer_balise_dynamique($p,'FORMULAIRE_ARTICLE',array('id_rubrique'));
 	return $p;
 }
 
@@ -49,7 +49,7 @@ Elle doit retourner soit :
 	return ($args);
 }
 
-function balise_FORMULAIRE_ARTICLE_dyn($id_machin) {
+function balise_FORMULAIRE_ARTICLE_dyn($id_rubrique) {
 
 /* c’est ici qu’on met le traitement des données (insertion en base etc).
 
@@ -155,10 +155,11 @@ if (!empty($_POST["motschoix"])) {
 	$motschoix=$_POST["motschoix"];	
 }
 
-//$motchoix = stripslashes(_request('motchoix'));
-
-// donnée prévisualisation
+// donnée rubrique
 $rubrique= intval(stripslashes(_request('rubrique')));
+if ($id_rubrique) {
+	if (!$rubrique) { $rubrique=$id_rubrique;}
+}
 
 // donnée article
 $titre= stripslashes(_request('titre'));
@@ -188,8 +189,6 @@ $surtitre= '';
 $soustitre=  '';
 $chapo= '';
 $descriptif= '';
-//$auteur_statut=$GLOBALS["auteur_session"]["statut"];
-//$articles_publics = $GLOBALS['articles_publics'];
 
 // déclarations de variables supplémentaires (pour la fonction ajout_document)
 $documents_actifs = array();
