@@ -18,6 +18,7 @@ function mutualiser_creer($e, $options) {
 	include_spip('inc/minipres');
 	$GLOBALS['meta']["charset"] = 'utf-8'; // pour que le mail fonctionne
 
+
 	if ($options['code']) {
 		$secret = md5($code.$options['code']);
 
@@ -50,6 +51,7 @@ function mutualiser_creer($e, $options) {
 
 	if ($options['creer_base']) {
 
+
 		if (defined('_INSTALL_HOST_DB')
 		AND defined('_INSTALL_USER_DB')
 		AND defined('_INSTALL_PASS_DB')
@@ -61,6 +63,28 @@ function mutualiser_creer($e, $options) {
 				if (_request('creerbase')) {
 					if (mysql_query('CREATE DATABASE '._INSTALL_NAME_DB)
 					AND mysql_select_db(_INSTALL_NAME_DB)) {
+						
+							// Pour chaque base creee on cree aussi un user MYSQL spécifique qui aura les droits sur la base 						
+							if ($options['creer_user_base']) {
+								// un mot de passe aleatoire 
+								$motdepasse=gen_md5_password();
+								// creation du user ( il faut que le user du site principal ait les droits de create_user mysql, create_user 
+								// The CREATE USER statement was added in MySQL 5.0.2. (sinon faut passer par GRANT )						
+								if (mysql_query("CREATE USER "._INSTALL_NAME_DB." IDENTIFIED by '$motdepasse'" ) )
+								{	
+									// les droits qui vont bien 
+									if (!mysql_query("GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_NAME_DB."'@'localhost' "))
+									{
+											die (__FILE__." " . __LINE__.":Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_NAME_DB."'@'localhost'  ") ;
+									}
+								}
+								else {
+									die (__FILE__." " . __LINE__.": KO . "._INSTALL_NAME_DB." IDENTIFIED by $motdepasse ") ;
+								}
+		
+							}
+							
+						
 						echo minipres(
 							_L('La base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;t&#233; cr&#233;&#233;e'),
 							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
@@ -198,4 +222,10 @@ function mutualiser_creer($e, $options) {
 	}
 }
 
+function gen_md5_password($len = 6)
+{
+    // function calculates 32-digit hexadecimal md5 hash
+    // of some random data
+    return substr(md5(rand().rand()), 0, $len);
+}
 ?>
