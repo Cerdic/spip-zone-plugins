@@ -12,13 +12,19 @@ function glossaire_imprimer($texte) {
 	return preg_replace(',<span class="gl_d[td]">.*?</span>,', '', $texte);
 }
 
+function glossaire_echappe_balises_callback($matches) {
+ return cs_code_echappement($matches[1], 'GLOSS');
+}
+
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 	$r = spip_query("SELECT id_mot, titre, texte FROM spip_mots WHERE type='Glossaire'");
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
-	while($mot = spip_fetch_array($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
+	while($mot = spip_fetch_array($r)) if ($mot['id_mot']<>$GLOBALS['id_mot'] && preg_match(",(\W)($mot[titre])(\W),i", $texte)) {
 //		$table[$mot[id_mot]] = "<abbr title=\"$mot[texte]\">$mot[titre]</abbr>";
+		// prudence : on protege TOUTES les balises contenant le mot en question
+		$texte = preg_replace_callback(",(<[^>]*$mot[titre][^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
 		$lien = generer_url_mot($mot['id_mot']);
 		$table1[$mot['id_mot']] = "<a name=\"mot$mot[id_mot]\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
 		$table2[$mot['id_mot']] = "</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">"
@@ -27,7 +33,8 @@ function cs_rempl_glossaire($texte) {
 		$texte = preg_replace(",(\W)($mot[titre])(\W),i", "\\1@@GLOSS\\2#$mot[id_mot]@@\\3", $texte, $limit);
 	}
 	// remplacement final des balises posees ci-dessus
-	return preg_replace(",@@GLOSS([^#]+)#([0-9]+)@@,e", '"$table1[\\2]\\1$table2[\\2]"', $texte);
+	$texte = preg_replace(",@@GLOSS([^#]+)#([0-9]+)@@,e", '"$table1[\\2]\\1$table2[\\2]"', $texte);
+	return echappe_retour($texte, 'GLOSS');
 }
 
 function cs_glossaire($texte) {
