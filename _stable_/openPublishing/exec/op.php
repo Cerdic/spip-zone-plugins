@@ -86,13 +86,13 @@ function exec_op() {
 				$retour = set_config_rubrique($num_rubrique_ajout);
 				switch ($retour) {
 				   case "ok" :
-					$message_modif = 'la rubrique ' . $num_rubrique_ajout . ' a &eacute;t&eacute; correctement ajout&eacute;e.';
+					$message_modif = _T('opconfig:la_rubrique') . $num_rubrique_ajout . _T('opconfig:ajout_correct');
 					break;
 				   case "deja" :
-					$message_modif = 'la rubrique ' . $num_rubrique_ajout . ' est d&eacute;j&agrave; dans la base.';
+					$message_modif = _T('opconfig:la_rubrique') . $num_rubrique_ajout . _T('opconfig:deja_base');
 					break;
 				   case "ko" :
-					$message_modif = 'la rubrique ' . $num_rubrique_ajout . ' n\'a pas &eacute;t&eacute; ajout&eacute;e : erreur inconue.';
+					$message_modif = _T('opconfig:la_rubrique') . $num_rubrique_ajout . _T('opconfig:ajout_incorrect');
 					break;
 				}
 			}
@@ -149,37 +149,35 @@ function exec_op() {
 	
 	debut_droite();
 
-	debut_cadre_enfonce("racine-site-24.gif", false, "", _T('opconfig:op_configuration_voir_general'));
+	debut_cadre_enfonce(null, false, "", _T('opconfig:op_configuration_voir_general'));
 
 	if (op_verifier_base()) {
 		if (op_verifier_upgrade()) {
 			echo _T("opconfig:op_info_base_up");
 			echo '<p /><div align="center">';
 			echo '<form method="post" action="'.generer_url_ecrire('op',"action=upgrade").'">';
-			echo '<input type="submit" name="appliq" value="Upgrader les tables openPublishing" />';
+			echo "<input type='submit' name='appliq' value='"._T('opconfig:upgrader')."' />";
 			echo '</form></div>';
 			fin_cadre_enfonce();
 		}
 		else {
 			echo _T('opconfig:op_info_base_ok');
-			echo "<br />Version install&eacute;e : ". op_get_version();
-			echo "&nbsp;/&nbsp;id de l'auteur anonymous : " . op_get_id_auteur() . "<br />";
 			fin_cadre_enfonce();
 
 
 			// les messages de retours de l'action demandé par l'utilisateur
 			if ($message_modif) {
-				debut_cadre_enfonce("racine-site-24.gif", false, "", "r&eacute;sultat ...");
+				debut_cadre_enfonce(null, false, "", _T('opconfig:resultat'));
 				echo '<b>' . $message_modif . '</b><br />';
 				fin_cadre_enfonce();
 			}
 			echo '<form method="post" action="'.generer_url_ecrire('op',"action=config").'">';
 		
-			op_cadre_rubrique();
-			op_cadre_renvoi();
-			op_cadre_traitement();
-			op_cadre_agenda();
-			op_cadre_autre();
+			echo "<br /";op_cadre_rubrique();
+			echo "<br /";op_cadre_renvoi();
+			echo "<br /";op_cadre_traitement();
+			echo "<br /";op_cadre_agenda();
+			echo "<br /";op_cadre_autre();
 	
 			echo '</form>';
 		}	
@@ -188,7 +186,7 @@ function exec_op() {
         	echo _T("opconfig:op_info_base_ko");
 		echo '<p /><div align="center">';
 		echo '<form method="post" action="'.generer_url_ecrire('op',"action=install").'">';
-		echo '<input type="submit" name="appliq" value="Installer les tables openPublishing" />';
+		echo "<input type='submit' name='appliq' value='"._T('opconfig:installer')."' />";
 		echo '</form></div>';
 		echo '<p />';
         	echo _T("opconfig:op_info_base_ko_bis");
@@ -200,30 +198,31 @@ function exec_op() {
 
 function op_liste_config() {
 
-	echo "- Version install&eacute;e : <b>".op_get_version()."</b><br />";
-	echo "- Gestion d'un agenda : <b>".op_get_agenda()."</b><br />";
-	echo "- Gestion des documents : <b>".op_get_document()."</b><br />";
-	echo "- Statut des articles : <b>".op_get_statut()."</b><br />";
-	echo "- Gestion des mots-clefs<ul>";
-		echo "<li>Plugin Tag Machine : <b>".op_get_tagmachine()."</b></li>";
-		echo "<li>Mot-clefs : <b>".op_get_motclefs()."</b></li>";
+	echo "- "._T('opconfig:info_version')."<b>".op_get_version()."</b><br />";
+	echo "- "._T('opconfig:info_auteur')."<b>".op_get_id_auteur()."</b><br />";
+	echo "- "._T('opconfig:info_agenda')."<b>".op_get_agenda()."</b><br />";
+	echo "- "._T('opconfig:info_document')."<b>".op_get_document()."</b><br />";
+	echo "- "._T('opconfig:info_statut')."<b>".op_get_statut()."</b><br />";
+	echo "- "._T('opconfig:info_motclefstag')."<ul>";
+		echo "<li>"._T('opconfig:info_tagmachine')."<b>".op_get_tagmachine()."</b></li>";
+		echo "<li>"._T('opconfig:info_motclefs')."<b>".op_get_motclefs()."</b></li>";
 	echo "</ul>";
-	echo "- Post-traitement<ul>";
-		echo "<li>Titre en minuscule : <b>".op_get_titre_minus()."</b></li>";
-		echo "<li>Anti-spam : <b>".op_get_antispam()."</b></li>";
+	echo "- "._T('opconfig:info_traitement')."<ul>";
+		echo "<li>"._T('opconfig:info_titre')."<b>".op_get_titre_minus()."</b></li>";
+		echo "<li>"._T('opconfig:info_antispam')."<b>".op_get_antispam()."</b></li>";
 	echo "</ul>";
 }
 
 function op_cadre_rubrique() {
 
-	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion des rubriques");
+	debut_cadre_relief(null, false, "", _T('opconfig:rubrique_gestion'));
 
-	echo "<small>Indiquez ici les rubriques sur lesquelles vous permettez l'openPublishing. Attention, les rubriques doivent exister ! Cliquez sur la croix pour supprimer votre selection.</small><br /><br />";
+	echo '<small>'._T('opconfig:rubrique_explique').'</small><br /><br />';
 		
 	$rubrique_array = get_rubriques_op();
 
 	if (count($rubrique_array) > 0 ) {
-		echo 'liste des rubriques openPublishing : <br />';
+		echo _T('opconfig:rubrique_liste').'<br />';
 		echo '<table border="1" cellpadding="2">';
 		while ($row = spip_fetch_array($rubrique_array)) {
 			echo '<tr><td>' . $row['op_rubrique'] . '</td><td><input type="submit" name="sup_rubrique_' . $row['op_rubrique'] . '" value="X" /></td></tr>';
@@ -231,152 +230,194 @@ function op_cadre_rubrique() {
 		echo '</table>';
 	}
 	else {
-		echo 'vous n\'avez pas encore de rubriques openPublishing ... <br />';
+		echo _T('opconfig:rubrique_pasencore').'<br />';
 	}
 	echo '<br />';
 	echo '<input type="text" name="num_rubrique_ajout" size="3" />&nbsp;';
-	echo '<input type="submit" name="ajout_rubrique" value="ajouter cette rubrique" />';
-	fin_cadre_enfonce();
+	echo "<input type='submit' name='ajout_rubrique' value='"._T('opconfig:rubrique_ajouter')."' class='fondo'/>";
+	fin_cadre_relief();
 }
 
 
 function op_cadre_renvoi() {
-	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion des renvois");
-	echo '<small>Les textes de renvois sont les petites phrases que le plugin affiche lorsqu\'une publication c\'est' .
-		'soit d&eacute;roul&eacute;e normallement, soit termin&eacute;e par un abandon (les balises HTML sont permises).</small><br />';
-	echo '<small>Les redirections permettent de diriger l\'utilisateur vers une page de votre site (de type "spip.php?page=sommaire").</small><br /><br />';
-	echo '<b>texte de renvoi normal</b><br />';
+	debut_cadre_relief(null, false, "", _T('opconfig:renvoi_gestion'));
+	echo '<small>'._T('opconfig:renvoi_explique').'</small><br />';
+	echo '<small>'._T('opconfig:renvoi_explique2').'</small><br /><br />';
+	echo '<b>'._T('opconfig:renvoi_normal').'</b><br />';
 	echo '<textarea name="renvoi_normal" rows="5" cols="50">'.op_get_renvoi_normal().'</textarea><br />';
-	echo '<input type="submit" name="modif_renvoi_normal" value="modifier ce texte" /><br /><br />';
-	echo '<b>texte de renvoi lors d\'un abandon</b><br />';
+	echo "<input type='submit' name='modif_renvoi_normal' value='"._T('opconfig:renvoi_modif')."' class='fondo' /><br /><br />";
+	echo '<b>'._T('renvoi_abandon').'</b><br />';
 	echo '<textarea name="renvoi_abandon" rows="5" cols="50">'.op_get_renvoi_abandon().'</textarea><br />';
-	echo '<input type="submit" name="modif_renvoi_abandon" value="modifier ce texte" /><br /><br />';
-	echo '<b>redirection normale :</b>&nbsp;';
+	echo "<input type='submit' name='modif_renvoi_abandon' value='"._T('opconfig:renvoi_modif')."' class='fondo' /><br /><br />";
+	echo '<b>'._T('redirection_normal').'</b>&nbsp;';
 	echo '<input type="text" name="url_retour" size="30" value="'.op_get_url_retour().'" /><br />';
-	echo '<b>redirection lors d\'un abandon :</b>&nbsp;';
+	echo '<b>'._T('redirection_abandon').'</b>&nbsp;';
 	echo '<input type="text" name="url_abandon" size="30" value="'.op_get_url_abandon().'" /><br />';
-	echo '<input type="submit" name="modif_url" value="modifier ces adresses" />';
-	fin_cadre_enfonce();
+	echo "<input type='submit' name='modif_url' value='"._T('opconfig:redirection_modif')."' class='fondo' />";
+	fin_cadre_relief();
 }
 
 function op_cadre_traitement() {
-	debut_cadre_enfonce("racine-site-24.gif", false, "", "Post-traitement des textes");
-	echo '<small>Ces traitements seront appliqu&eacute;s lorsque l\'utilisateur validera son texte.</small><br /><br />';
-	echo 'imposer les titres en minuscule ?&nbsp;';
-	echo '<select name="active_titre_minus">';
+	debut_cadre_relief(null, false, "",_T('opconfig:post_traitement'));
+
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<h3>"._T('opconfig:titre_minuscule')."</h3>";
+
 	$r = op_get_titre_minus();
-	if ($r == 'oui') {
-		echo '<option value="oui" selected >oui</option>' .
-		'<option value="non">non</option>';
-	}
-	else {
-		echo '<option value="oui">oui</option>' .
-		'<option value="non" selected>non</option>';
-	}
-	echo '</select><br /><small>(les majuscules seront transform&eacute;es en minuscule)</small><br />';
-	echo 'activer l\'anti-spam ?&nbsp;';
-	echo '<select name="active_antispam">';
+	$texte1 = '' ;
+	$texte2 = '' ;
+	if ($r == 'oui') {$texte1 = "checked";}
+	else {$texte2 = "checked";}
+
+  	echo "<input type='radio' name='active_titre_minus' value='oui' $texte1 id='statut_oui'>";
+	echo "<label for='statut_oui'>"._T('opconfig:titre_impo_minuscule')."</label> ";
+	echo "<p><input type='radio' name='active_titre_minus' value='non' $texte2 id='statut_non'>";
+	echo "<label for='statut_non'>"._T('opconfig:titre_non_minuscule')."</label></b> ";
+	echo "</td></tr>";
+	
+	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<h3>"._T('opconfig:anti_spam')."</h3>";
+
 	$r = op_get_antispam();
-	if ($r == 'oui') {
-		echo '<option value="oui" selected >oui</option>' .
-		'<option value="non">non</option>';
-	}
-	else {
-		echo '<option value="oui">oui</option>' .
-		'<option value="non" selected>non</option>';
-	}
-	echo '</select><br /><small>(les @ des adresses mails du texte seront transform&eacute;s.)</small><br />';
-	echo '<input type="submit" name="modif_traitement" value="appliquer les changements" />';
-	fin_cadre_enfonce();
+	$texte1 = '' ;
+	$texte2 = '' ;
+	if ($r == 'oui') {$texte1 = "checked";}
+	else {$texte2 = "checked";}
+
+	echo "<input type='radio' name='active_antispam' value='oui' $texte1 id='statut_oui'>";
+	echo "<label for='statut_oui'>"._T('opconfig:antispam_oui')."</label> ";
+	echo "<p><input type='radio' name='active_antispam' value='non' $texte2 id='statut_non'>";
+	echo "<label for='statut_non'>"._T('opconfig:antispam_non')."</label></b> ";
+	echo "</td></tr>";
+
+
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo "<input type='submit' name='modif_traitement' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "</td></tr>";
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo '<small>'._T('opconfig:traitement_explique').'</small>';
+	echo "</td></tr>";
+
+	echo "</table>\n";
+
+	fin_cadre_relief();
 }
 
 function op_cadre_agenda() {
-	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion de l'agenda");
-	echo '<small>L\'orsque l\'utilisateur coche la case "Agenda", son article est publi&eacute; sous forme de '.
-		'br&egrave; dans la rubrique indiqu&eacute;e ci-dessous.</small><br /><br />';
-	echo 'activer l\'agenda ?&nbsp;' .
-		'<select name="active_agenda">';
+	debut_cadre_relief(null, false, "", _T('opconfig:gestion_agenda'));
+
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<h3>"._T('opconfig:agenda_active')."</h3>";
+
 	$r = op_get_agenda();
-	if ($r == 'oui') {
-		echo '<option value="oui" selected >oui</option>' .
-		'<option value="non">non</option>';
-	}
-	else {
-		echo '<option value="oui">oui</option>' .
-		'<option value="non" selected>non</option>';
-	}
-	echo '</select><br />';
-	echo 'rubrique de l\'agenda : ';
-	echo '<input type="text" name="num_rubrique_agenda" size="3" value="'. op_get_rubrique_agenda() .'" /><br />';
-	echo '<input type="submit" name="modif_agenda" value="appliquer les changements" />';
-	fin_cadre_enfonce();
+	$texte1 = '' ;
+	$texte2 = '' ;
+	if ($r == 'oui') {$texte1 = "checked";}
+	else {$texte2 = "checked";}
+
+	echo "<input type='radio' name='active_agenda' value='oui' $texte1 id='statut_oui'>";
+	echo "<label for='statut_oui'>"._T('opconfig:agenda_oui')."</label> ";
+	echo "<p><input type='radio' name='active_agenda' value='non' $texte2 id='statut_non'>";
+	echo "<label for='statut_non'>"._T('opconfig:agenda_non')."</label></b> ";
+	echo "</td></tr>";
+
+	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<p><h3>"._T('opconfig:agenda_rubrique');
+	echo '<input type="text" name="num_rubrique_agenda" size="3" value="'. op_get_rubrique_agenda() .'" /></h3></p>';
+	echo "</td></tr>";
+
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo "<input type='submit' name='modif_agenda' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "</td></tr>";
+
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo '<small>'._T('opconfig:agenda_explique').'</small>';
+	echo "</td></tr>";
+
+	echo "</table>\n";
+
+	fin_cadre_relief();
 }
 
 function op_cadre_autre() {
-	debut_cadre_enfonce("racine-site-24.gif", false, "", "Autres &eacute;lements de configuration");
+	debut_cadre_relief(null, false, "", _T('opconfig:gestion_autre'));
 
-	echo 'Autoriser l\'upload de document ?&nbsp;';
-	echo '<select name="active_document">';
+	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
+
+	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<h3>"._T('opconfig:upload_active')."</h3>";
+
 	$r = op_get_document();
-	if ($r == 'oui') {
-		echo '<option value="oui" selected >oui</option>' .
-		'<option value="non">non</option>';
-	}
-	else {
-		echo '<option value="oui">oui</option>' .
-		'<option value="non" selected>non</option>';
-	}
-	echo '</select><br />';
+	$texte1 = '' ;
+	$texte2 = '' ;
+	if ($r == 'oui') {$texte1 = "checked";}
+	else {$texte2 = "checked";}
 
-	echo 'Autoriser la gestion des mots-clefs par le plugin Tag Machine ?&nbsp;';
-	echo '<select name="active_tagmachine">';
+	echo "<input type='radio' name='active_document' value='oui' $texte1 id='statut_oui'>";
+	echo "<label for='statut_oui'>"._T('opconfig:upload_oui')."</label> ";
+	echo "<p><input type='radio' name='active_document' value='non' $texte2 id='statut_non'>";
+	echo "<label for='statut_non'>"._T('opconfig:upload_non')."</label></b> ";
+	echo "</td></tr>";
+
+	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<h3>"._T('opconfig:tagmachine_active')."</h3>";
+
 	$r = op_get_tagmachine();
-	if ($r == 'oui') {
-		echo '<option value="oui" selected >oui</option>' .
-		'<option value="non">non</option>';
-	}
-	else {
-		echo '<option value="oui">oui</option>' .
-		'<option value="non" selected>non</option>';
-	}
-	echo '</select><br />';
+	$texte1 = '' ;
+	$texte2 = '' ;
+	if ($r == 'oui') {$texte1 = "checked";}
+	else {$texte2 = "checked";}
 
-	echo 'Autoriser la gestion des mots-clefs ?&nbsp;';
-	echo '<select name="active_motclefs">';
+	echo "<input type='radio' name='active_tagmachine' value='oui' $texte1 id='statut_oui'>";
+	echo "<label for='statut_oui'>"._T('opconfig:tagmachine_oui')."</label> ";
+	echo "<p><input type='radio' name='active_tagmachine' value='non' $texte2 id='statut_non'>";
+	echo "<label for='statut_non'>"._T('opconfig:tagmachine_non')."</label></b> ";
+	echo "</td></tr>";
+
+	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<h3>"._T('opconfig:motclefs_active')."</h3>";
+
 	$r = op_get_motclefs();
-	if ($r == 'oui') {
-		echo '<option value="oui" selected >oui</option>' .
-		'<option value="non">non</option>';
-	}
-	else {
-		echo '<option value="oui">oui</option>' .
-		'<option value="non" selected>non</option>';
-	}
-	echo '</select><br />';
+	$texte1 = '' ;
+	$texte2 = '' ;
+	if ($r == 'oui') {$texte1 = "checked";}
+	else {$texte2 = "checked";}
 
+	echo "<input type='radio' name='active_motclefs' value='oui' $texte1 id='statut_oui'>";
+	echo "<label for='statut_oui'>"._T('opconfig:motclefs_oui')."</label> ";
+	echo "<p><input type='radio' name='active_motclefs' value='non' $texte2 id='statut_non'>";
+	echo "<label for='statut_non'>"._T('opconfig:motclefs_non')."</label></b> ";
+	echo "</td></tr>";
 
-	echo 'Quel statut pour les articles publi&eacute;s ?&nbsp;';
-	echo '<select name="select_statut">';
+	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
+	echo "<h3>"._T('opconfig:statut_select')."</h3>";
+
 	$r = op_get_statut();
-	if ($r == 'publie') {
-		echo '<option value="publie" selected >publie</option>' .
-		'<option value="prop">prop</option>' .
-		'<option value="prepa">prepa</option>';
-	}
-	else if ($r == 'prop') {
-		echo '<option value="prop" selected >prop</option>' .
-		'<option value="publie">publie</option>' .
-		'<option value="prepa">prepa</option>';
-	}
-	else {
-		echo '<option value="prop" selected >prepa</option>' .
-		'<option value="publie">publie</option>' .
-		'<option value="prop">prop</option>';
-	}
-	echo '</select><br />';
+	$texte1 = '' ;
+	$texte2 = '' ;
+	$texte3 = '' ;
 
-	echo '<input type="submit" name="modif_autre" value="appliquer les changements" />';
-	fin_cadre_enfonce();
+	if ($r == 'publie') {$texte1 = "checked";}
+	else if ($r == 'prop') {$texte2 = "checked";}
+	else {$texte3 = "checked";}
+
+	echo "<input type='radio' name='select_statut' value='publie' $texte1 id='statut_publie'>";
+	echo "<label for='statut_publie'>"._T('opconfig:statut_publie')."</label> ";
+	echo "<p><input type='radio' name='select_statut' value='prop' $texte2 id='statut_prop'>";
+	echo "<label for='statut_prop'>"._T('opconfig:statut_prop')."</label></b> ";
+	echo "<p><input type='radio' name='select_statut' value='prepa' $texte3 id='statut_prepa'>";
+	echo "<label for='statut_prepa'>"._T('opconfig:statut_prepa')."</label></b> ";
+	echo "</td></tr>";
+
+	echo "<tr><td style='text-align:$spip_lang_right;'>";
+	echo "<input type='submit' name='modif_autre' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "</td></tr>";
+
+	echo "</table>\n";
+
+	fin_cadre_relief();
 }
 
 ?>

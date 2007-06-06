@@ -73,9 +73,9 @@ function exec_op_effacer() {
 		echo _T('opconfig:op_info_desinstal');
 		echo '<div align="center">';
 	    echo '<form method="post" action="'.generer_url_ecrire('op_effacer',"action=desinstall").'">';
-	    echo '<input type="submit" name="appliq" value="D&eacute;sinstaller l\'openPublishing" />';
+	    echo "<input type='submit' name='appliq' value='"._T('opconfig:deinstaller')."' />";
 	    echo '</form></div>';
-		fin_boite_alerte();        
+		fin_boite_alerte();
 		} 
 		else {
 		echo " ";

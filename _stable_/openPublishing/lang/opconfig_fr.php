@@ -7,21 +7,55 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'ajouter_agenda' => 'Ajouter dans l\'agenda',
 'abandonner' => 'Abandonner',
+'anti_spam' => 'Activer l\'anti-spam ?',
+'antispam_oui' => 'Les @ des adresses mails du texte seront transform&eacute;s',
+'antispam_non' => 'Les @ des adresses mails ne seront pas transform&eacute;s',
+'agenda_explique' => 'L\'orsque l\'utilisateur coche la case "Agenda", son article est publi&eacute; sous forme de br&egrave;ve dans la rubrique indiqu&eacute;e ci-dessus',
+'agenda_rubrique' =>  'rubrique de l\'agenda : ',
+'agenda_active' => 'activer l\'agenda ?&nbsp;',
+'agenda_oui' => 'L\'agenda sera activ&eacute;',
+'agenda_non' => 'L\'agenda ne sera pas activ&eacute;',
+'ajout_correct' => ' a &eacute;t&eacute; correctement ajout&eacute;e.',
+'ajout_incorrect' => ' n\'a pas &eacute;t&eacute; ajout&eacute;e : erreur inconue.',
 
 // D
 'document_joint' => 'Joindre un document',
 'document_inclusion' => 'Document (le fichier apparaitra sous forme de lien sous l\'article)',
+'deja_base' => ' est d&eacute;j&agrave; dans la base.',
+'deinstaller' => 'D&eacute;sinstaller l\'openPublishing',
 
 // E
 'explication_agenda' => 'Pour ajouter votre article dans l\'agenda (dans le cas d\'un &eacute;v&eacute;nement), cochez la case ci-dessous et choisissez la date et l\'heure correspondant &agrave; l\'&eacute;v&eacute;nement. Votre article sera publi&eacute; dans l\'agenda (et non dans une des rubriques "contributions").',
 'extensions_acceptees' => 'Les extensions de fichier accept&eacute;es sont :',
 
+//G
+'gestion_agenda' => 'Gestion de l\'agenda',
+'gestion_autre' => 'Autres &eacute;lements de configuration',
+
 // I
 'identification' => 'identification',
 'image_inclusion' => 'Image (pour inclusion directe dans l\'article)',
+'installer' => 'Installer les tables openPublishing',
+'info_version' => 'Version install&eacute;e : ',
+'info_auteur' => 'Id de l\'auteur anonymous : ',
+'info_agenda' => 'Gestion d\'un agenda : ',
+'info_document' => 'Gestion des documents : ',
+'info_statut' => 'Statut des articles : ',
+'info_motclefstag' => 'Gestion des mots-cl&eacute;s',
+'info_tagmachine' => 'Plugin Tag Machine : ',
+'info_motclefs' => 'Mots-cl&eacute;s : ',
+'info_traitement' => 'Post-traitement',
+'info_titre' => 'Titre en minuscule : ',
+'info_antispam' => 'Anti-spam : ',
+
+// L
+'la_rubrique' => 'la rubrique ',
 
 // M
-'motclefs' => 'Choisir des mots-clefs',
+'motclefs' => 'Choisir des mots-cl&eacute;s',
+'motclefs_active' => 'Autoriser la gestion des mots-cl&eacute;s ?&nbsp;',
+'motclefs_oui' => 'Les utilisateurs pourront choisir leurs mot-cl&eacute;s',
+'motclefs_non' => 'Les utilisateurs ne pourront pas choisir leurs mot-cl&eacute;s',
 
 // O
 'op_config' => 'Configuration du plugin openPublishing',
@@ -32,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'po_fonctions_info' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle vous permet d\'activer ou modifier les fonctions avanc&eacute;es de l\'openPublishing. <p /> Les modifications effectu&eacute;es dans ces pages influent notablement sur le fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n\'&ecirc;tes pas familier du fonctionnement du plugin openPublishing. <p /> <b>Plus g&eacute;n&eacute;ralement, il est fortement conseill&eacute; de laisser la charge de ces pages au webmestre principal de votre site.</b>',
 'op_effacer_info' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle vous permet de supprimer proprement le plugin openPublishing. <p /> Les modifications effectu&eacute;es dans ces pages influent notablement sur le fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n\'&ecirc;tes pas familier du fonctionnement du plugin openPublishing. <p /> <b>Plus g&eacute;n&eacute;ralement, il est fortement conseill&eacute; de laisser la charge de ces pages au webmestre principal de votre site.</b>',
 'op_modifier_info' => '<b>Cette page est uniquement accessible aux responsables du site. </b><p /> Elle vous permet de modifier les diff&eacute;rentes options de l\'openPublishing.</b>',
-'op_raccourcis_documentation' => '<a href=\'https://docs.indymedia.org/view/Local/ImcLilleSite\'>Documentation du plugin openPublishing</a>',
+'op_raccourcis_documentation' => '<a href=\'https://.indymedia.org/view/Local/ImcLilleSite\'>Documentation du plugin openPublishing</a>',
 'op_configuration_voir_general' => 'Configuration du plugin openPublishing',
 'op_configuration_effacer' => 'D&eacute;sinstaller le plugin openPublishing',
 'op_configuration_modifier' => 'Configuration du plugin openPublishing',
@@ -70,16 +104,50 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'publie_rubrique' => 'Rubrique',
 'previsualisation' => 'Pr&eacute;visualisation',
 'previsualiser' => 'Pr&eacute;visualiser',
+'post_traitement' => 'Post-traitement des textes',
 
 // R
 'redigez_article' => 'R&eacute;digez votre article',
+'renvoi_explique' => 'Les textes de renvois sont les petites phrases que le plugin affiche lorsqu\'une publication c\'est soit d&eacute;roul&eacute;e normallement, soit termin&eacute;e par un abandon (les balises HTML sont permises).',
+'renvoi_explique2' => 'Les redirections permettent de diriger l\'utilisateur vers une page de votre site (de type "/spip.php?page=sommaire").',
+'renvoi_gestion' => 'Gestion des renvois',
+'renvoi_normal' => 'texte de renvoi normal',
+'renvoi_abandon' => 'texte de renvoi lors d\'un abandon',
+'renvoi_modif' => 'modifier ce texte',
+'redirection_normal' => 'redirection normale :',
+'redirection_abandon' => 'redirection lors d\'un abandon :',
+'redirection_modif' => 'modifier ces adresses',
+'rubrique_gestion' => 'Gestion des rubriques openPublishing',
+'rubrique_ajouter' => 'ajouter cette rubrique',
+'rubrique_pasencore' => 'Vous n\'avez pas encore de rubriques openPublishing ...',
+'rubrique_liste' => 'liste des rubriques openPublishing :',
+'rubrique_explique' => 'Indiquez ici les rubriques sur lesquelles vous permettez l\'openPublishing. Attention, les rubriques doivent exister ! Cliquez sur la croix pour supprimer votre selection.',
+'resultat' => 'r&eacute;sultat ...',
+
+// S
+'statut_select' => 'Quel statut pour les articles publi&eacute;s ?&nbsp;',
+'statut_publie' => 'Les articles seront publi&eacute;s avec le statut "publie"',
+'statut_prop' => 'Les articles seront publi&eacute;s avec le statut "prop"',
+'statut_prepa' => 'Les articles seront publi&eacute;s avec le statut "prepa"',
 
 // T
-
 'telecharger_document' => 'T&eacute;l&eacute;chargez votre document',
+'titre_minuscule' => 'Post-traitement du titre',
+'titre_impo_minuscule' => 'Les titres sont impos&eacute;s en minuscule',
+'titre_non_minuscule' => 'Les titres peuvent utiliser des majuscules',
+'traitement_explique' => 'Ces traitements seront appliqu&eacute;s lorsque l\'utilisateur validera son texte.',
+'tagmachine_active' => 'Autoriser la gestion des mots-cl&eacute;s par le plugin Tag Machine ?&nbsp;',
+'tagmachine_oui' => 'Les utilisateurs pourront utiliser le plugin Tag Machine',
+'tagmachine_non' => 'Les utilisateurs ne pourront pas utiliser le plugin Tag Machine',
+
+//U
+'upload_active' => 'Autoriser l\'upload de document ?&nbsp;',
+'upload_oui' => 'Les utilisateurs pourront uploader des documents',
+'upload_non' => 'Les utilisateurs ne pourront pas uploader des documents',
+'upgrader' => 'Upgrader les tables openPublishing',
+
 
 // V
-
 'votre_nom' => 'Votre nom ou pseudo',
 'votre_mail' => 'Votre email',
 'votre_groupe' => 'Votre groupe &eacute;ventuel',
