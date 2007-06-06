@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_internes' => 'Informations Internes',
 'info_internes_desc' => 'Options qui seront stock&eacute;es dans la base de donn&eacute;es mais ne seront pas affich&eacute;es dans le formulaire des nouveaux adh&eacute;rents',
 
-'inserez_infos' => 'Veuillez ins&eacute;rez les informations demand&eacute;s',
+'inserez_infos' => 'Veuillez ins&eacute;rer les informations demand&eacute;es',
 
 'form' => 'Formulaire',
 'fiche' => 'Fiche',
