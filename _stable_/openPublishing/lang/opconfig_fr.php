@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajout_correct' => ' a &eacute;t&eacute; correctement ajout&eacute;e.',
 'ajout_incorrect' => ' n\'a pas &eacute;t&eacute; ajout&eacute;e : erreur inconue.',
 'aide_formulaire' => 'Aide : Cliquez sur les fleches pour "d&eacute;rouler" le menu.',
+'aide_inclusion' => 'Pour inclure directement une image ou un document dans votre article, recopiez dans votre texte le code figurant sous la vignette. Vous pouvez aussi ne rien faire, dans ce cas, vos documents apparaitrons dans une liste sous votre article.',
 
 // D
 'document_joint' => 'Joindre un document ou une image',
@@ -30,6 +31,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'explication_agenda' => 'Pour ajouter votre article dans l\'agenda (dans le cas d\'un &eacute;v&eacute;nement), cochez la case ci-dessous et choisissez la date et l\'heure correspondant &agrave; l\'&eacute;v&eacute;nement. Votre article sera publi&eacute; dans l\'agenda (et non dans une des rubriques "contributions").',
 'extensions_acceptees' => 'Les extensions de fichier accept&eacute;es sont :',
+'erreur_anonymous' => 'erreur, pas d\'auteur anonymous dans la base, publication impossible',
+'erreur_die' => 'veuillez verifiez votre installation du plugin openPublishing',
+'erreur_insertion' => 'erreur lors de l\'insertion de votre article dans la base de donn&eacute;e, veuillez contactez les responsables du site',
+'erreur_upload' => 'erreur d\'upload, le fichier temporaire est introuvable, il ce peut que vous tentiez d\'uploader un fichier trop volumineux. La taille maximale autoris&eacute;e est de 5 Mo',
+'erreur_extension' => 'erreur d\'upload. L\'extention de votre fichier n\'est pas autoris&eacute;e ...',
 
 //G
 'gestion_agenda' => 'Gestion de l\'agenda',
@@ -120,6 +126,7 @@ enfonc&eacute;e',
 'previsualisation' => 'Pr&eacute;visualisation',
 'previsualiser' => 'Pr&eacute;visualiser',
 'post_traitement' => 'Post-traitement des textes',
+'publier_agenda' => 'Publier en tant que br&egrave;ve dans l\'agenda',
 
 // R
 'redigez_article' => 'R&eacute;diger votre article',

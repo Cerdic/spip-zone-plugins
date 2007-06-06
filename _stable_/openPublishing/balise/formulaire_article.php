@@ -79,8 +79,8 @@ $connect_id_auteur =  op_get_id_auteur();
 
 // si il n'est pas dans la base => plugins openpublishing mal installé
 if(!$connect_id_auteur) {
-	echo "erreur, pas d'auteur anonymous dans la base, publication impossible";
-	die("veuillez verifiez votre installation du plugin OpenPublishing");
+	echo _T('opconfig:erreur_anonymous');
+	die(_T('opconfig:erreur_die'));
 }
 
 // securite (additif spip_indy, peut-être toujour utile)
@@ -350,7 +350,7 @@ if($valider) {
 		$retour = '';
 	}
 	else{
-		$retour = "erreur lors de l'insertion de votre article dans la base de donnée, veuillez contactez les responsables du site";
+		$retour = _T('opconfig:erreur_insertion');
 	}
 	
 	// on lie l'article à l'auteur anonymous
@@ -455,7 +455,7 @@ else
 		// vérification si upload OK
 		if( !is_uploaded_file($tmp) ) {
 			echo $error;
-			$mess_error = "erreur d'upload, le fichier temporaire est introuvable, il ce peut que vous tentiez d'uploader un fichier trop volumineux. La taille maximale autorisée est de 5 Mo";
+			$mess_error = _T('opconfig:erreur_upload');
 			$erreur_document = 1;
     		}
 		else {
@@ -483,7 +483,7 @@ else
 				inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
 			}
 			else {
-				$mess_error = "erreur d'upload. L'extention de votre fichier n'est pas autoris&eacute;e ...";
+				$mess_error = _T('opconfig:erreur_extension');
 				$erreur_document = 1;
 			}
 		}
@@ -613,7 +613,7 @@ function checkbox_agenda($choix_agenda) {
 
 	$checked = '';
 	if ($choix_agenda == "OK") $checked = "CHECKED";
-	return "<input type='checkbox' name='choix_agenda' value='OK' '$checked' />&nbsp;Publier en tant que br&egrave;ve dans l'agenda<br />";
+	return "<input type='checkbox' name='choix_agenda' value='OK' '$checked' />&nbsp;"._T('opconfig:publier_agenda')."<br />";
 }
 
 // pour garder la valeur lors d'un rechargement de page
@@ -765,7 +765,7 @@ function op_liste_vignette($article)
 		echo '<div id="block-center">';
 		echo '<div id="block-center-titre"><b>&nbsp;&nbsp;Vos documents</b></div>';
 		echo '<div id="block-content"><small>';
-		echo '<center><p>Pour inclure directement une image ou un document dans votre article, recopiez dans votre texte le code figurant sous la vignette. Vous pouvez aussi ne rien faire, dans ce cas, vos documents apparaitrons dans une liste sous votre article.</p></center></small>';
+		echo '<center><p>'._T('opconfig:aide_inclusion').'</p></center></small>';
 	}
 	else return;
 
@@ -803,14 +803,6 @@ function op_liste_vignette($article)
 	}
 	echo '</tr></table>';
 
-	echo '<small><p>';
-	echo 'Conseil de mise en page :<br /> Placez vos images inclues dans un tableau (|||) afin d\'&eacute;viter qu\'elles ne "bousculent" votre mise en page. <br />';
-	echo '<div style="width : 400px; background-color: #eee; margin: 10px;">';
-	echo '&nbsp;ceci est le texte au dessus de mon image<br />';
-	echo ' | <code>&lt;imgxxxx|center&gt;</code> | ceci est le texte &agrave; c&ocirc;t&eacute; de l\'image&nbsp;|<br />';
-	echo '&nbsp;ceci est le texte en dessous de l\'image<br />';
-	echo '</div>';
-	echo '</p></small>';
 	echo '</center>';
 	echo '</div></div><br />';
 }
@@ -833,7 +825,6 @@ function afficher_tab($tab_ext) {
 }
 
 // reliquat spipindy, fonction qui coupe les trop gros textes.
-
 function coupe_trop_long($texte){    // utile pour les textes > 32ko
     if (strlen($texte) > 28*1024) {
         $texte = str_replace("\r\n","\n",$texte);
