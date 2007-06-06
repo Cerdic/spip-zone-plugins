@@ -63,18 +63,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.',
 'email_bonjour' => 'Bonjour @nom@,',
 'message_auto' => '(ceci est un message automatique)',
-'texte_email_inscription' =>   'Vous avez demand&eacute; de participer &agrave; notre site @nom_site@. 
-Vous &ecirc;tes actuellement sur le point de finir votre inscription. Il vous suffit de cliquer le lien ci dessous pour activer votre compte et choisir votre mot de passe.
+'texte_email_inscription' =>   'Vous avez demand&eacute; &agrave; participer &agrave; notre site @nom_site@. 
+Vous &ecirc;tes actuellement sur le point de finir votre inscription. Il vous suffit de cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
 @link_activation@
 Votre login est&nbsp;: @login@
 
-Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire partie de notre site, cliquez le lien ci dessous.\n
+Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.\n
 @link_suppresion@
 Merci de votre confiance.
 
 L\'6eacute;quipe de @nom_site@',
 'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
-'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructiones contenues dans le mail.',
+'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
 'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
 'texte_email_confirmation' => 'Votre compte vient d\'&ecirc;tre activ&eacute;, vous pouvez d&egrave;s maintenant vous connecter &agrave; notre site en utilisant vos identifiants personnels.\n
 
@@ -82,7 +82,7 @@ Votre login est&nbsp;: @login@
 et votre mot de passe vous venez de le saisir.
 Merci de Votre Confiance
 
-L\'equipe de @nom_site@',
+L\'&eacute;quipe de @nom_site@',
 'compte_active' => 'Votre compte a &eacute;t&eacute; activ&eacute;',
 'suppression_faite' => "la suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;",
 'janvier' => 'janvier',
