@@ -250,7 +250,7 @@ function inclure_page($fond, $contexte_inclus) {
   
   //effache les texte a ajouter a head si on est dans l'espace privee
   //on a pas de moyen pour ajouter dans le head
-  if(!_DIR_RESTREINT)
+  if(test_espace_prive())
     collecte_head_squelette($page['texte'],true);
   
 	return $page;
