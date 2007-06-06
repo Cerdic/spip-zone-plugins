@@ -12,7 +12,7 @@ include_spip('base/indexation_etendue');
 				&& (($current_version = $GLOBALS['meta']['Recherche_etendue_base_version'])==$version_base))
 			return;
 	
-		include_spip('base/forms');
+		include_spip('base/indexation_etendue');
 		if ($current_version==0.0){
 			include_spip('base/abstract_sql');
 			creer_base();
