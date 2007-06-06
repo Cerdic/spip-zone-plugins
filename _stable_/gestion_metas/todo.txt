@@ -1,3 +1,5 @@
+- Créer une balise spécifique pour le plugin afin que l'utilisateur du plugin n'est pas à connaitre le nom de la table dans laquelle aller chercher les infos.
+
 - Générer 'à la volée' la possibilité de faire des métas pour les autres objets de SPIP : auteurs, documents, mots, brèves etc., ainsi que pour les objets non-spip.
 	Problèmes :	- certains fichier exec ne correspondent pas au nom de l'objet (ex : rubriques et naviguer)
 			- Où sotcker l'information de ce qui existe ? table supplémentaire ? Table spip_metas ?

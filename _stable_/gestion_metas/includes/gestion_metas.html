@@ -1,5 +1,5 @@
 <BOUCLE_breve (BREVES) {id_breve}>
-<BOUCLE_metas_breves (EXT_SPIP_GESTION_METAS) {id_breve}>
+<BOUCLE_metas_breves (SPIP_GESTION_METAS) {id_breve}>
 	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_breve:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
 	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
 	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
@@ -8,7 +8,7 @@
 <//B_metas_breves>
 </BOUCLE_breve>
 <BOUCLE_article (ARTICLES) {id_article}>
-<BOUCLE_metas_articles (EXT_SPIP_GESTION_METAS) {id_article}>
+<BOUCLE_metas_articles (SPIP_GESTION_METAS) {id_article}>
 	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_article:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
 	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
 	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
@@ -17,7 +17,7 @@
 <//B_metas_articles>
 </BOUCLE_article>
 <BOUCLE_rubrique (RUBRIQUES) {id_rubrique}>
-<BOUCLE_metas_rubriques (EXT_SPIP_GESTION_METAS) {id_rubrique}>
+<BOUCLE_metas_rubriques (SPIP_GESTION_METAS) {id_rubrique}>
 	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_rubrique:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
 	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
 	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
@@ -26,7 +26,7 @@
 <//B_metas_rubriques>
 </BOUCLE_rubrique>
 [(#REM) Si on passe id_rubrique=0, SPIP ne trouvera pas de rubrique et donc exécutera le code suivant]
-<BOUCLE_metas_sommaire (EXT_SPIP_GESTION_METAS) {id_rubrique}>
+<BOUCLE_metas_sommaire (SPIP_GESTION_METAS) {id_rubrique}>
 	<title>[(#TITRE|supprimer_numero|textebrut|entites_html)][(#TITRE|=={''}|?{' ',''})[(#_rubrique:TITRE|supprimer_numero|textebrut|entites_html)]] &ndash; #NOM_SITE_SPIP</title>
 	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
 	[<meta name="description" content="(#DESCRIPTION|entites_html)">]

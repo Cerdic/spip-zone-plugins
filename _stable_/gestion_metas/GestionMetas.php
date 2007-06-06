@@ -29,7 +29,7 @@ function GestionMetas_affiche_gauche($flux) {
 
 function formulaire_metas() {
 	
-	$GestionMetasTable = 'ext_'.$GLOBALS['table_prefix'].'_gestion_metas';
+	$GestionMetasTable = $GLOBALS['table_prefix'].'_gestion_metas';
 	switch (_request('exec')) {
 		case 'naviguer':
 			$ElementGestionMetas = 'rubrique';

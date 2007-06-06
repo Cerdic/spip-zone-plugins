@@ -11,7 +11,7 @@ Pour, par exemple, la page sommaire, on pourra utiliser [(#INCLURE{fond=includes
 
 
 
-Ce squelette suppose que votre table s'apelle ext_spip_gestion_metas, MAIS, si vous avez spécifié un autre préfixe à vos tables, la table créée s'appellera ext_PREFIXE_gestion_metas (ext_ pour externe à spip), vous devrez modifier le squelette d'affichage en conséquences.
+Ce squelette suppose que votre table s'apelle spip_gestion_metas, MAIS, si vous avez spécifié un autre préfixe à vos tables, la table créée s'appellera PREFIXE_gestion_metas, vous devrez modifier le squelette d'affichage en conséquences.
 
 
 
