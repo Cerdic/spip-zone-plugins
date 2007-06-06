@@ -21,6 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aide_formulaire' => 'Aide : Cliquez sur les fleches pour "d&eacute;rouler" le menu.',
 'aide_inclusion' => 'Pour inclure directement une image ou un document dans votre article, recopiez dans votre texte le code figurant sous la vignette. Vous pouvez aussi ne rien faire, dans ce cas, vos documents apparaitrons dans une liste sous votre article.',
 
+// C
+
+'configurer_op' => 'Configurer openPublishing',
+
 // D
 'document_joint' => 'Joindre un document ou une image',
 'document_inclusion' => 'Document (le fichier apparaitra sous forme de lien sous l\'article)',
@@ -151,6 +155,7 @@ enfonc&eacute;e',
 'statut_publie' => 'Les articles seront publi&eacute;s avec le statut "publie"',
 'statut_prop' => 'Les articles seront publi&eacute;s avec le statut "prop"',
 'statut_prepa' => 'Les articles seront publi&eacute;s avec le statut "prepa"',
+'suprimmer_op' => 'Supprimer openPublishing',
 
 // T
 'telecharger_document' => 'T&eacute;l&eacute;chargez votre document',
@@ -170,6 +175,7 @@ enfonc&eacute;e',
 
 
 // V
+'voir_configuration' => 'Voir la configuration',
 'votre_nom' => 'Votre nom ou pseudo',
 'votre_mail' => 'Votre email',
 'votre_groupe' => 'Votre groupe &eacute;ventuel',
