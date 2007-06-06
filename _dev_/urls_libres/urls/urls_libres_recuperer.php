@@ -18,8 +18,8 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 	$id_objet = 0;
 
-	// si la page est deja dans l'url, rien a faire
-	if (preg_match('#\?.*page=#', $url)) {
+	// si la page est deja dans l'url ou qu'on est dans un test, rien a faire
+	if (preg_match('#squel.php\?test=|\?.*page=#', $url)) {
 		return;
 	}
 	// Migration depuis anciennes URLs ?
