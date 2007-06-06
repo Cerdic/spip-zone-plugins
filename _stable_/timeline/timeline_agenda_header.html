@@ -38,7 +38,7 @@ function onLoad() {
   bandInfos[1].highlight = true;
   bandInfos[2].highlight = true;
   
-  var tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
+  tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
   Timeline.loadXML("[(#URL_PAGE{timeline_agenda_xml}|parametre_url{id_rubrique,#ENV{id_rubrique}})]", function(xml, url) { eventSource.loadXML(xml, url); });
 }
 
