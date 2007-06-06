@@ -11,16 +11,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'antispam_oui' => 'Les @ des adresses mails du texte seront transform&eacute;s',
 'antispam_non' => 'Les @ des adresses mails ne seront pas transform&eacute;s',
 'agenda_explique' => 'L\'orsque l\'utilisateur coche la case "Agenda", son article est publi&eacute; sous forme de br&egrave;ve dans la rubrique indiqu&eacute;e ci-dessus',
+'agenda_explique2' => 'Si vous publiez votre article en tant que br&egrave;ve dans l\'agenda, celui n\'apparaitra pas dans la rubrique selectionn&eacute;e mais dans la rubrique "Agenda" du site.',
 'agenda_rubrique' =>  'rubrique de l\'agenda : ',
 'agenda_active' => 'activer l\'agenda ?&nbsp;',
 'agenda_oui' => 'L\'agenda sera activ&eacute;',
 'agenda_non' => 'L\'agenda ne sera pas activ&eacute;',
 'ajout_correct' => ' a &eacute;t&eacute; correctement ajout&eacute;e.',
 'ajout_incorrect' => ' n\'a pas &eacute;t&eacute; ajout&eacute;e : erreur inconue.',
+'aide_formulaire' => 'Aide : Cliquez sur les fleches pour "d&eacute;rouler" le menu.',
 
 // D
-'document_joint' => 'Joindre un document',
+'document_joint' => 'Joindre un document ou une image',
 'document_inclusion' => 'Document (le fichier apparaitra sous forme de lien sous l\'article)',
+'document_explique' => 'Cette option permet d\'uploader des documents provenant de votre ordinateur et de les lier &agrave; votre article.',
 'deja_base' => ' est d&eacute;j&agrave; dans la base.',
 'deinstaller' => 'D&eacute;sinstaller l\'openPublishing',
 
@@ -33,7 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gestion_autre' => 'Autres &eacute;lements de configuration',
 
 // I
-'identification' => 'identification',
+'identification' => 'Identification',
+'identif_explique' => 'Vous pouvez vous identifier, mais cela n\'est pas obligatoire. Ces options ajoutent simplement votre nom ou pseudo et les autres informations tels que le mail, le num&eacute;ro de t&eacute;l&eacute;phone, etc ..., &agrave; la suite de votre article.',
 'image_inclusion' => 'Image (pour inclusion directe dans l\'article)',
 'installer' => 'Installer les tables openPublishing',
 'info_version' => 'Version install&eacute;e : ',
@@ -56,6 +60,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'motclefs_active' => 'Autoriser la gestion des mots-cl&eacute;s ?&nbsp;',
 'motclefs_oui' => 'Les utilisateurs pourront choisir leurs mot-cl&eacute;s',
 'motclefs_non' => 'Les utilisateurs ne pourront pas choisir leurs mot-cl&eacute;s',
+'motclefs_explique' => 'Les mots-cl&eacute;s sont utiles pour r&eacute;f&eacute;rencer votre article sur ce site et
+pour le retrouver lors d\'une recherche par th&eacute;matique.',
+'motclefs_explique2' => 'Pour choisir plusieurs mots-cl&eacute;s, maintenir la touche SHIFT ou CTRL
+enfonc&eacute;e',
+'motclefs_liste' => 'Liste des mots-cl&eacute;s associ&eacute;s &agrave; votre article :',
+'motclefs_ajouter' => '&nbsp;&nbsp;Ajouter un mot-cl&eacute;s',
+'motclefs_explique3' => 'Cette option permet de cr&eacute;er de nouveaux mots-cl&eacute;s et de les associer &agrave; votre article.',
+'motclefs_explique4' => 'Pour ajouter des mots-cl&eacute;s &agrave; votre article, saississez des mots s&eacute;par&eacute;s par un espace ci-dessous. Vous pouvez utiliser les mots-cl&eacute;s qui vous seront sugg&eacute;r&eacute;s pendant la saisie, ou bien en cr&eacute;er des nouveaux.',
+'motclefs_explique5' => 'Pour des mots compos&eacute;s, saisir l\'expression entre guillemets. Exemple de saisie ',
+'motclefs_explique6' => 'politique "&eacute;conomie solidaire"',
+'motclefs2' => 'mots-cl&eacute;s',
 
 // O
 'op_config' => 'Configuration du plugin openPublishing',
@@ -107,7 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'post_traitement' => 'Post-traitement des textes',
 
 // R
-'redigez_article' => 'R&eacute;digez votre article',
+'redigez_article' => 'R&eacute;diger votre article',
 'renvoi_explique' => 'Les textes de renvois sont les petites phrases que le plugin affiche lorsqu\'une publication c\'est soit d&eacute;roul&eacute;e normallement, soit termin&eacute;e par un abandon (les balises HTML sont permises).',
 'renvoi_explique2' => 'Les redirections permettent de diriger l\'utilisateur vers une page de votre site (de type "/spip.php?page=sommaire").',
 'renvoi_gestion' => 'Gestion des renvois',

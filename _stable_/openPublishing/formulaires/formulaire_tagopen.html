@@ -15,6 +15,7 @@
 	// utilisation des nouvelles feuilles de styles
 	// ajout deplier/replier
 	// ajout champs d'explication
+	// internationalisation
 ]
 
 <style type='text/css'>
@@ -36,18 +37,18 @@
 	// javascript ci-dessous
 ]
 
-<div id="block-titre">#BOUTON_BLOCK<b>&nbsp;&nbsp;Ajouter un mot-cl&eacute;f</b></div>
+<div id="block-titre">#BOUTON_BLOCK<b><:opconfig:motclefs_ajouter:></b></div>
 
 <div style="background-color: #eee; text-style: justify; margin: 5px; margin-right:55px">
-<p><small>Cette option permet de cr&eacute;er de nouveaux mots-clefs et de les associer &agrave; votre article.</small></p>
+<p><small><:opconfig:motclefs_explique3:></small></p>
 </div>
 
 #DEBUT_BLOCK
 <div id="block-contenu">
 
 <div style="font-size: 0.7em;">
-	<p>Pour ajouter des mots-cl&eacute;s &agrave; votre article, saississez des mots s�par�s par un espace ci-dessous. Vous pouvez utiliser les mots-cl&eacute;s qui vous seront sugg&eacute;r&eacute;s pendant la saisie, ou bien en cr&eacute;er des nouveaux.</p>
-	<p>Pour des mots compos�s, saisir l'expression entre guillemets. Exemple de saisie <br /><span style="background-color:#ffe2e2">politique "&eacute;conomie solidaire"</span></p>
+	<p><:opconfig:motclefs_explique4:></p>
+	<p><:opconfig:motclefs_explique5:><br /><span style="background-color:#ffe2e2"><:opconfig:motclefs_explique6:></span></p>
 </div>
 
 <BOUCLE_a(ARTICLES){id_article = #ENV*{id_article} }{statut IN prop,publie,creat,prepa}>
@@ -55,7 +56,7 @@
 [(#SELF|parametre_url{tags,""}|form_hidden)]
 
 <table style="width:100%"><tr><td align='right' style="font-size: 0.7em;">
-	<div style="width:50px">mots-cl&eacute;s</div>
+	<div style="width:50px"><:opconfig:motclefs2:></div>
 </td><td>
 	<input type='text' name='tags' autocomplete='off' id='tags'
 	value="<BOUCLE_m(MOTS){type=tags}{id_article = #ENV*{id_article} }{" "}>[(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})][(#TITRE*|entites_html)][(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})]</BOUCLE_m>"  />
@@ -78,7 +79,7 @@
 [(#SELF|parametre_url{tags,""}|form_hidden)]
 
 <table style="width:100%"><tr><td align='right' style="font-size: 0.7em;">
-	<div style="width:50px">mots-cl&eacute;s</div>
+	<div style="width:50px"><:opconfig:motclefs2:></div>
 </td><td>
 	<input type='text' name='tags' autocomplete='off' id='tags'
 	value="<BOUCLE_m1(MOTS){type=tags}{id_article = #ENV*{id_article} }{" "}>[(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})][(#TITRE*|entites_html)][(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})]</BOUCLE_m1>" />

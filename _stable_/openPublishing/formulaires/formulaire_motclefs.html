@@ -3,7 +3,7 @@
 <div id="block-titre">#BOUTON_BLOCK&nbsp;&nbsp;<b><:opconfig:motclefs:></b></div>
 
 <div style="background-color: #eee; text-style: justify; margin: 5px; margin-right:55px">
-<p><small>Les mots-clefs sont utiles pour référencer votre article sur ce site. Ils permettent de retrouver votre article lorsqu'une recherche par th&eacute;mathique est faite.</small></p>
+<p><small><:opconfig:motclefs_explique:></small></p>
 </div>
 
 #DEBUT_BLOCK
@@ -12,7 +12,7 @@
 
 <div style="font-size : 0.8em;">
 
-	<p>Pour choisir un ou des mots-clefs, selectionné les dans la liste ci-dessous (la selection multiple à l'aide des touches SHIFT et CTRL fonctionne)</p>
+	<p><:opconfig:motclefs_explique2:></p>
 	<select name='motschoix[]' multiple size='8'>
 	<BOUCLE_groupes(GROUPES_MOTS)>
 		<option value="">[(#TITRE|majuscules)]</option>
@@ -30,7 +30,7 @@
 	</small>
 
 	<B_motarticle>
-	<b>Liste des mots-clefs associés à votre article :</b><br />
+	<b><:opconfig:motclefs_liste:></b><br />
 	<div style="background-color: #eee; text-style: justify; margin: 5px;">
 	<BOUCLE_motarticle(MOTS){par titre}{id_article = #ENV*{id_article} }>
 		[(#TITRE),&nbsp;]
