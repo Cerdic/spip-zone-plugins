@@ -1,5 +1,102 @@
 #CACHE{0}
 
+<script src="#CHEMIN{jquery.validate.js}" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	jQuery.validator.addMethod("chaine", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\. ]+$/.test(value);
+	}, "Ce champ est obligatoire, entrez une chaine valide svp");
+
+	jQuery.validator.addMethod("postal", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z0-9\- ]+$/.test(value);
+	}, "Ce champ est obligatoire, entrez un code postal valide svp");
+	
+	jQuery.validator.addMethod("numero", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[0-9\. ]+$/.test(value);
+	}, "Ce champ est obligatoire, entrez un numero valide svp");
+
+$().ready(function() {
+	// validate signup form on submit
+	$("#inscription").validate({
+		rules: {
+			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true},
+			prenom:{[(#CONFIG{inscription2/prenom}|=={on}|?{required: true,}),]chaine:true},
+			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true},
+			adresse: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true},
+			adresse2: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true},
+			code_postal: {[(#CONFIG{inscription2/code_postal}|=={on}|?{required: true,}),]postal:true},
+			ville: {[(#CONFIG{inscription2/ville}|=={on}|?{required: true,}),]chaine:true},
+			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true},
+			telephone: {[(#CONFIG{inscription2/telephone}|=={on}|?{required: true,}),]numero:true},
+			fax: {[(#CONFIG{inscription2/fax}|=={on}|?{required: true,}),]numero:true},
+			mobile: {[(#CONFIG{inscription2/mobile}|=={on}|?{required: true,}),]numero:true},
+			profession: {[(#CONFIG{inscription2/profession}|=={on}|?{required: true,}),]chaine:true},
+			societe: {[(#CONFIG{inscription2/societe}|=={on}|?{required: true,}),]chaine:true},
+			secteur:{[(#CONFIG{inscription2/secteur}|=={on}|?{required: true,}),]chaine:true},
+			fonction: {[(#CONFIG{inscription2/fonction}|=={on}|?{required: true,}),]chaine:true}
+		},
+		messages: {
+			nom: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable"},
+			prenom:{
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable"},
+			username: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable"},
+			adresse: {
+				required:"Ce champ est obligatoire",
+				postal:"Entrez une chaine de caracteres valable"},
+			adresse2: {
+				required:"Ce champ est obligatoire",
+				postal:"Entrez une chaine de caracteres valable"},
+			code_postal: {
+				required:"Ce champ est obligatoire",
+				postal:"Entrez un code postal valable"},
+			ville: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable"},
+			email: {
+				required:"Ce champ est obligatoire",
+				email:"Entrez un email valable"},
+			telephone: {
+				required:"Ce champ est obligatoire",
+				numero:"Entrez un numero valable"},
+			fax: {
+				required:"Ce champ est obligatoire",
+				numero:"Entrez un numero valable"},
+			mobile: {
+				required:"Ce champ est obligatoire",
+				numero:"Entrez un numero valable"},
+			profession: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable"},
+			societe: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable"},
+			secteur:{
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable"},
+			fonction: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable"}
+		}
+	});
+
+	// propose username by combining first- and lastname
+	$("#username").focus(function() {
+		var prenom = $("#prenom").val();
+		var nom = $("#nom").val();
+		if(prenom && nom && !this.value) {
+			this.value = prenom + "." + nom;
+		}
+	});
+});
+
+</script>
+
 <div>
 	[(#ENV*{message})]
 </div>
@@ -11,7 +108,7 @@
 <div [style="(#ENV{commentaire}|=={1}|?{display: block;, display:none;})"]>
 <h3><:inscription2:formulaire_inscription:></h3>
 
-<form method="post" action="#SELF">
+<form method="post" action="#SELF" name="inscription" id="inscription" >
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 <fieldset>
@@ -22,20 +119,20 @@
 <:inscription2:inserez_infos:>
 <br /><br />
 
-<label [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
-	<strong><:inscription2:nom:></strong><br />
+<p [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
+	<label for="nom"><strong><:inscription2:nom:></strong></label><br />
 	<input type="text" name="nom" id="nom" /><br />
-</label>
+</p>
 
-<label [style="(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:prenom:></strong><br />
+<p [style="(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})"]>
+	<label for="prenom"><strong><:inscription2:prenom:></strong></label><br />
 	<input type="text" name="prenom" id="prenom" /><br />
-</label>
+</p>
 
-<label [style="(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:username:></strong><br />
+<p [style="(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})"]>
+	<label for="username"><strong><:inscription2:username:></strong></label><br />
 	<input type="text" name="username" id="username" /><br />
-</label>
+</p>
 
 <label [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>
 	<strong><:inscription2:naissance:></strong><br />
@@ -77,56 +174,57 @@
 	<input name="sexe" type="radio" value="F" /> <:inscription2:feminin:><br />
 </label>
 
-<label [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:adresse:></strong><br />
+<p [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
+	<label for="adresse"><strong><:inscription2:adresse:></strong><br /></label>
 	<input type="text" name="adresse" id="adresse" /><br />
+	<label for="adresse2"><strong><:inscription2:adresse_comp:></strong><br /></label>
 	<input type="text" name="adresse2" id="adresse2" />
-<br /></label>
+<br /></p>
 
-<label [style="(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:code_postal:></strong><br />
+<p [style="(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})"]>
+	<label for="code_postal"><strong><:inscription2:code_postal:></strong><br /></label>
 	<input type="text" name="code_postal" id="code_postal" />
-<br /></label>
+<br /></p>
 
-<label [style="(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:ville:></strong><br />
+<p [style="(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})"]>
+	<label for="ville"><strong><:inscription2:ville:></strong><br /></label>
 	<input type="text" name="ville" id="ville" />
-<br /></label>
+<br /></p>
 
-<label [style="(#CONFIG{inscription2/email}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:email:></strong><br />
-	<input type="text" name="email" id="email" />
-<br /></label>
+<p [style="(#CONFIG{inscription2/email}|=={on}|?{display: block;, display:none;})"]>
+	<label for="email"><strong><:inscription2:email:></strong></label><br />
+	<input type="text" name="email" id="email" /><br />
+</p>
 
-<label [style="(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:telephone:></strong><br />
-	<input type="text" name="telephone" id="telephone" />
-<br /></label>
+<p [style="(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})"]>
+	<label for="telephone"><strong><:inscription2:telephone:></strong><br /></label>
+	<input type="text" name="telephone" id="telephone"  />
+<br /></p>
 
-<label [style="(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:fax:></strong><br />
-	<input type="text" name="fax" id="fax" />
-<br /></label>
+<p [style="(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})"]>
+	<label for="fax"><strong><:inscription2:fax:></strong><br /></label>
+	<input type="text" name="fax" id="fax"/>
+<br /></p>
 
-<label [style="(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:mobile:></strong><br />
-	<input type="text" name="mobile" id="mobile" />
-<br /></label>
+<p [style="(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})"]>
+	<label for="mobile"><strong><:inscription2:mobile:></strong><br /></label>
+	<input type="text" name="mobile" id="mobile"/>
+<br /></p>
 
-<label [style="(#CONFIG{inscription2/profession}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:profession:></strong><br />
+<p [style="(#CONFIG{inscription2/profession}|=={on}|?{display: block;, display:none;})"]>
+	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
 	<input type="text" name="profession" id="profession" />
-<br /></label>
+<br /></p>
 
-<label [style="(#CONFIG{inscription2/societe}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:societe:></strong><br />
+<p [style="(#CONFIG{inscription2/societe}|=={on}|?{display: block;, display:none;})"]>
+	<label for="societe"><strong><:inscription2:societe:></strong><br /></label>
 	<input type="text" name="societe" id="societe" />
-<br /></label>
+<br /></p>
 
-<label [style="(#CONFIG{inscription2/secteur}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:secteur:></strong><br />
+<p [style="(#CONFIG{inscription2/secteur}|=={on}|?{display: block;, display:none;})"]>
+	<label for="secteur"><strong><:inscription2:secteur:></strong><br /></label>
 	<input type="text" name="secteur" id="secteur" />
-<br /></label>
+<br /></p>
 
 
 </fieldset>
@@ -138,16 +236,16 @@
 </legend>
 <br />
 
-<label style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
-	<strong><:inscription2:fonction:></strong><br />
-	<input type="text" name="fonction" id="fonction" />
-<br /></label>
+<p style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
+	<label for="fonction"><strong><:inscription2:fonction:></strong><br /></label>
+	<input type="text" type="text" name="fonction" id="fonction" />
+<br /></p>
 
 
-<label style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
+<p style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
 	<input type="checkbox" name="publication" id="publication" />
 	<strong><:inscription2:publication:></strong><br />
-<br /></label>
+<br /></p>
 
 
 <label style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]">
