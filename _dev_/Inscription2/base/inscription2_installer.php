@@ -1,5 +1,4 @@
 <?php
-
 $GLOBALS['inscription2_version'] = 0.1;
 function inscription2_verifier_base(){
 	include_spip('base/abstract_sql');
