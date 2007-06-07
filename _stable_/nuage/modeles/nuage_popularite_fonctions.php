@@ -1,6 +1,6 @@
 <?php
 
-function nuage_pop($id_mot, $titre = '', $url = '', $poids = -1){
+function nuage_pop($id_mot, $titre = '', $url = '', $poids = -1, $expose = array()){
 	static $nuage;
 	$texte = '';
 	if($titre and $url){
@@ -22,7 +22,8 @@ function nuage_pop($id_mot, $titre = '', $url = '', $poids = -1){
 				$s = ceil(15*$score);
 				$t = '<font size="'.$s.'">'.$t.'</font>';
 				$l = $t.'<span class="frequence"> ('.($poids[$id]?$poids[$id]:"0")."/".$max.")</span>";
-				$texte .= '<li><a rel="tag" href="'.$url[$id].'">';
+				$class = in_array($id, $expose) ? ' class="on"': '';
+				$texte .= '<li><a rel="tag" href="'.$url[$id].'"'.$class.'>';
 				$texte .= $l.'</a></li>'."\n";
 			}
 			$texte = $texte ? '<ul class="nuage">'."\n".$texte."</ul>\n":"";
