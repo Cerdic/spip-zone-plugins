@@ -21,10 +21,7 @@ img.crayon-edit, img.crayon-crayon {
 }
 .crayon-boutons {
     width: 40px;
-    display: none;
-}
-.crayon-boutons div {
-	position: absolute;
+/*    display: none; */
 }
 .crayon-boutons a {
 	cursor: pointer;
@@ -48,6 +45,14 @@ img.crayon-edit, img.crayon-crayon {
 .crayon-html textarea {
 	overflow: auto;
 }
+.crayon-html {
+	position: relative;
+	top:-1px;
+	left:-1px;
+}
+.crayon-html>* {
+	position: absolute;
+}
 
 /* resizer */
 .resizehandle {
@@ -56,12 +61,6 @@ img.crayon-edit, img.crayon-crayon {
 	font-size:0.1em;
 	height:16px;
 	width:100%;
-}
-.resizehandle + .crayon-boutons {
-    /* hack pas beau pour compenser la hauteur du div .jstHandle */
-    position:relative;
-    top:-16px;
-    /* fin hack */
 }
 
 /* Les crayons dans un tableau !*/

@@ -1,7 +1,7 @@
 /*
- * resizehandle.js (c) Fil 2007, plugin pour jQuery ecrit
- * a partir du fichier resize.js du projet DotClear
- * (c) 2005 Nicolas Martin & Olivier Meunier and contributors
+ * resizehandle.js (c) Fil 2007, plugin pour jQuery
+ * @ http://www.jquery.info/spip.php?article44
+ * Distribue sous licence GNU/LGPL et MIT
  */
 jQuery.fn.resizehandle = function() {
   return this.each(function() {

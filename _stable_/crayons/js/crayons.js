@@ -71,8 +71,8 @@ jQuery.fn.opencrayon = function(evt, percent) {
     // voir si je dispose deja du crayon comme voisin
     if (jQuery(this).is('.crayon-has')) {
       jQuery(this)
-      .hide()
-      .next()
+      .css('visibility','hidden')
+      .prev()
         .show();
     }
     // sinon charger le formulaire
@@ -101,10 +101,10 @@ jQuery.fn.opencrayon = function(evt, percent) {
             return false;
           }
           jQuery(me)
-          .hide()
+          .css('visibility','hidden')
           .addClass('crayon-has')
-          .after('<div class="crayon-html">'+c.$html+'</div>')
-          .next()
+          .before('<div class="crayon-html"><div>'+c.$html+'</div></div>')
+          .prev()
             .activatecrayon(percent);
         }
       );
@@ -114,12 +114,12 @@ jQuery.fn.opencrayon = function(evt, percent) {
 
 // annule le crayon ouvert (fonction destructive)
 jQuery.fn.cancelcrayon = function() {
-  return this.prev()
+  return this.next()
     .filter('.crayon-has')
-    .show()
+    .css('visibility','visible')
     .removeClass('crayon-has')
     .removeClass('crayon-changed')
-  .next()
+  .prev()
     .remove();
 }
 
@@ -127,8 +127,8 @@ jQuery.fn.cancelcrayon = function() {
 jQuery.fn.hidecrayon = function() {
   return this
   .filter('.crayon-has')
-  .show()
-  .next()
+  .css('visibility','visible')
+  .prev()
     .hide()
     .removeClass('crayon-hover');
 }
@@ -166,7 +166,7 @@ jQuery.fn.activatecrayon = function(percent) {
         }
 
         jQuery(me)
-        .prev()
+        .next()
           .html(
             d[jQuery('input.crayon-id', me).val()]
           )
@@ -186,7 +186,7 @@ jQuery.fn.activatecrayon = function(percent) {
         .find(".crayon-boutons")
           .show();
         jQuery(me)
-        .prev()
+        .next()
           .addClass('crayon-changed');
         e.cancelBubble = true; // ne pas remonter l'evenement vers la page
       })
@@ -196,7 +196,7 @@ jQuery.fn.activatecrayon = function(percent) {
         .find(".crayon-boutons")
           .show();
         jQuery(me)
-        .prev()
+        .next()
           .addClass('crayon-changed');
         e.cancelBubble = true; // ne pas remonter l'evenement vers la page
       })
@@ -205,12 +205,12 @@ jQuery.fn.activatecrayon = function(percent) {
       })
       .find(".crayon-active")
         .css({
-            'fontSize': jQuery(me).prev().css('fontSize'),
-            'fontFamily': jQuery(me).prev().css('fontFamily'),
-            'fontWeight': jQuery(me).prev().css('fontWeight'),
-            'lineHeight': jQuery(me).prev().css('lineHeight'),
-            'color': jQuery(me).prev().css('color'),
-            'backgroundColor': jQuery(me).prev().css('backgroundColor')
+            'fontSize': jQuery(me).next().css('fontSize'),
+            'fontFamily': jQuery(me).next().css('fontFamily'),
+            'fontWeight': jQuery(me).next().css('fontWeight'),
+            'lineHeight': jQuery(me).next().css('lineHeight'),
+            'color': jQuery(me).next().css('color'),
+            'backgroundColor': jQuery(me).next().css('backgroundColor')
         })
         .each(function(n){
           // focus pour commencer a taper son texte directement dans le champ
@@ -288,7 +288,11 @@ jQuery.fn.activatecrayon = function(percent) {
             this.scrollTop = this.scrollHeight * percent - hauteur;
           }
         })
-        .resizehandle();
+        .resizehandle()
+          // decaler les boutons qui suivent un resizer de 16px vers le haut
+          .next('.resizehandle')
+            .next('.crayon-boutons')
+            .css('margin-top', '-16px');
       })
     .end();
   });
