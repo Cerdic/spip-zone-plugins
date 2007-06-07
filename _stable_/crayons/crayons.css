@@ -46,8 +46,7 @@ img.crayon-edit, img.crayon-crayon {
 	max-width: 703px;
 }
 .crayon-html textarea {
-	overflow: scroll;
-	overflow-x: hidden;
+	overflow: auto;
 }
 
 /* resizer */
