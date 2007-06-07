@@ -88,7 +88,7 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 		  $extra = get_extra($id_auteur,'auteur');
 	
 	   	If ($extra['abo'] == 'non')  {
-				$msg_formulaire = "<h4>"._T('spiplistes:desabonnement_valid')."</h4>".$mail_abo;
+				$msg_formulaire = "<h4>"._T('spiplistes:desabonnement_valid').":</h4>&nbsp;".$mail_abo;
 			  
 		  }
 	   	else {
