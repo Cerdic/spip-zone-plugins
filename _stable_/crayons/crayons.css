@@ -27,7 +27,8 @@ img.crayon-edit, img.crayon-crayon {
 	cursor: pointer;
 }
 .crayon-icones {
-    float: right;
+	float: right;
+	width: 35px;
 }
 .crayon-icones span {
     position:absolute;

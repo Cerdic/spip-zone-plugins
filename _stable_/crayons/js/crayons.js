@@ -82,6 +82,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
         return;
       }
       jQuery(this)
+      .find('.crayon-icones')
       .append(configCrayons.mkimg('searching')); // icone d'attente
       var me=this;
       jQuery.getJSON(configCrayons.url_crayons_html,
