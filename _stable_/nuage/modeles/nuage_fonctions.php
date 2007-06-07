@@ -1,6 +1,6 @@
 <?php
 
-function nuage($id_mot, $titre = '', $url = '', $poids = -1){
+function nuage($id_mot, $titre = '', $url = '', $poids = -1, $expose = array()){
 	static $nuage;
 	$texte = '';
 	if($titre and $url){
@@ -21,7 +21,8 @@ function nuage($id_mot, $titre = '', $url = '', $poids = -1){
 				if($score > 0.05){
 					$s = ($unite=floor($score += 0.900001)) . '.' . floor(10*($score - $unite));
 					$l = $t.'<span class="frequence"> ('.$poids[$id]."/".$max.")</span>";
-					$texte .= '<li><a rel="tag" href="'.$url[$id].'" style="font-size: '.$s.'em;">';
+					$class = in_array($id, $expose) ? ' class="on"': '';
+					$texte .= '<li><a rel="tag" href="'.$url[$id].'" style="font-size: '.$s.'em;"'.$class.'>';
 					$texte .= $l.'</a></li>'."\n";
 				}
 			}
