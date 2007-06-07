@@ -49,6 +49,7 @@ img.crayon-edit, img.crayon-crayon {
 	position: relative;
 	top:-1px;
 	left:-1px;
+	z-index:5000;
 }
 .crayon-html>* {
 	position: absolute;
