@@ -131,84 +131,63 @@ if(!$connect_id_auteur) {
 
 // Les différentes actions que peut faire un utilisateur
 
-$previsualiser= _request('previsualiser');
-$valider= _request('valider');
-$media=_request('media');
-$mots=_request('mots');
-$agenda=_request('agenda');
-$abandonner=_request('abandonner');
+$previsualiser	= _request('previsualiser');
+$valider	= _request('valider');
+$media		= _request('media');
+$mots		= _request('mots');
+$agenda		= _request('agenda');
+$abandonner	= _request('abandonner');
+$tags		= _request('tags');
 
 // url et id de l'article
 
 $url_site = _request('url_site');
 $article = intval(stripslashes(_request('article')));
 
-// Si l'utilisateur a cliqué sur le bouton "abandonner"
-
-if ($abandonner) {
-
-	// suppression des enregistrements éventuellement créé dans la table spip_mot_article
-
-	if($article) {
-		spip_query("DELETE FROM spip_mots_articles WHERE id_article = '$article'");
-	}
-
-	// construction de la page de retour
-
-	$url_retour = $url_site . op_get_url_abandon() ;
-	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_abandon();
-	$message = $message . $retour;
-	return $message;
-}
-
 // données pour formulaire document
 
-$formulaire_documents = stripslashes(_request('formulaire_documents'));
-$doc = stripslashes(_request('doc'));
-$type_doc = stripslashes(_request('type'));
+$formulaire_documents 	= stripslashes(_request('formulaire_documents'));
+$doc 			= stripslashes(_request('doc'));
+$type_doc 		= stripslashes(_request('type'));
 
 // données pour formulaire agenda
 
-$formulaire_agenda = stripslashes(_request('formulaire_agenda'));
-$annee = stripslashes(_request('annee'));
-$mois = stripslashes(_request('mois'));
-$jour = stripslashes(_request('jour'));
-$heure = stripslashes(_request('heure'));
-$choix_agenda = stripslashes(_request('choix_agenda'));
+$formulaire_agenda 	= stripslashes(_request('formulaire_agenda'));
+$annee 			= stripslashes(_request('annee'));
+$mois			= stripslashes(_request('mois'));
+$jour 			= stripslashes(_request('jour'));
+$heure 			= stripslashes(_request('heure'));
+$choix_agenda 		= stripslashes(_request('choix_agenda'));
 
 // données pour formulaire tagopen
 
-$formulaire_tagopen = stripslashes(_request('formulaire_tagopen'));
+$formulaire_tagopen 	= stripslashes(_request('formulaire_tagopen'));
 
 // données pour formulaire motclefs
 
-$formulaire_motclefs = stripslashes(_request('formulaire_motclefs'));
-if (!empty($_POST["motschoix"])) {
-	$motschoix=$_POST["motschoix"];	
-}
+$formulaire_motclefs 	= stripslashes(_request('formulaire_motclefs'));
+if (!empty($_POST["motschoix"])) { $motschoix=$_POST["motschoix"]; }
 
 // donnée rubrique
 
-$rubrique= intval(stripslashes(_request('rubrique')));
-if ($id_rubrique) {
-	if (!$rubrique) { $rubrique=$id_rubrique;}
-}
+$rubrique		= intval(stripslashes(_request('rubrique')));
+if ($id_rubrique) { if (!$rubrique) { $rubrique=$id_rubrique;}}
 
 // donnée article
 
-$titre= stripslashes(_request('titre'));
-$texte= stripslashes(_request('texte'));
+$titre			= stripslashes(_request('titre'));
+$texte			= stripslashes(_request('texte'));
 
 // donnée identification
 
-$nom_inscription= stripslashes(_request('nom_inscription'));
-$mail_inscription= stripslashes(_request('mail_inscription'));
-$group_name= stripslashes(_request('group_name'));
-$phone= stripslashes(_request('phone'));
+$nom_inscription	= stripslashes(_request('nom_inscription'));
+$mail_inscription	= stripslashes(_request('mail_inscription'));
+$group_name		= stripslashes(_request('group_name'));
+$phone			= stripslashes(_request('phone'));
 
 // le message d'erreur
 
-$mess_error= stripslashes(_request('mess_error'));
+$mess_error		= stripslashes(_request('mess_error'));
 
 // déclarations de variables supplémentaires (pour la fonction ajout_document)
 
@@ -233,23 +212,30 @@ if ($mail_inscription) $mail_inscription = entites_html($mail_inscription);
 if ($group_name) $group_name = entites_html($group_name);
 if ($phone) $phone = entites_html($phone);
 
+// Si l'utilisateur a cliqué sur le bouton "abandonner"
+
+if ($abandonner) {
+
+	// suppression des enregistrements éventuellement créé dans la table spip_mot_article
+
+	if($article) {
+		spip_query("DELETE FROM spip_mots_articles WHERE id_article = '$article'");
+	}
+
+	// construction de la page de retour
+
+	$url_retour = $url_site . op_get_url_abandon() ;
+	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_abandon();
+	$message = $message . $retour;
+	return $message;
+}
+
 // on demande un nouvel identifiant pour l'article si l'utilisateur clique sur l'un des boutons action
 
-if (($previsualiser) || ($media) || ($valider) || isset($_REQUEST['tags']) || ($mots)) {
+if (($previsualiser) || ($media) || ($valider) || ($tags) || ($mots)) {
 	if (!$article) $article=op_request_new_id($connect_id_auteur);
 }
 
-// on enregistre les mots cles (necessite le plugin tag machine)
-	
-if (isset($_REQUEST['tags'])) {
-	include_spip('inc/tag-machine');
-	ajouter_liste_mots(_request('tags'),
-		$article,
-		$groupe_defaut = 'tags',
-		'articles',
-		'id_article',
-		true);
-}
 
 // Affichage des infos si l'auteur est identifié et s'il n'a pas modifié les champs identification
 
@@ -432,7 +418,18 @@ else
 		}
 	}
 	
+	// si l'auteur demande des mots-clés avec Tag machine
 	
+	if ($tags) {
+		include_spip('inc/tag-machine');
+		ajouter_liste_mots(_request('tags'),
+			$article,
+			$groupe_defaut = 'tags',
+			'articles',
+			'id_article',
+			true);
+	}	
+
 	// si l'auteur ajoute un documents
 
 	if($media) {
