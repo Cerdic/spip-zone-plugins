@@ -47,6 +47,8 @@ include_spip('inc/actions');
 $test = determine_upload();
 
 // pour l'instant reserve aux admins toutes rubriques
+$auth = charger_fonction('auth', 'inc');
+$auth();
 if ($GLOBALS['connect_statut'] != '0minirezo' || !$GLOBALS['connect_toutes_rubriques']) {
         include_spip('inc/headers');
         include_spip('inc/minipres');
