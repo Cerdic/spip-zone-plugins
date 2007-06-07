@@ -462,12 +462,12 @@ else
 
 			// verification si extention OK
 
-			$tableau = split('[/]', $type);
+			$tableau = split('[.]', $fichier);
 			$type_ext = $tableau[1];
 		
 			// renomme les extensions
 			if (strcmp($type_ext,"jpeg")==0) $type_ext = "jpg";
-
+			
 			$tab_ext = get_types_documents();
 
 			$ok = 0;

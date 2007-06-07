@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'agenda_non' => 'L\'agenda ne sera pas activ&eacute;',
 'ajout_correct' => ' a &eacute;t&eacute; correctement ajout&eacute;e.',
 'ajout_incorrect' => ' n\'a pas &eacute;t&eacute; ajout&eacute;e : erreur inconue.',
-'aide_formulaire' => 'Aide : Cliquez sur les fleches pour "d&eacute;rouler" le menu.',
+'aide_formulaire' => 'Aide : Cliquez sur les fl&egrave;ches pour "d&eacute;rouler" le menu.',
 'aide_inclusion' => 'Pour inclure directement une image ou un document dans votre article, recopiez dans votre texte le code figurant sous la vignette. Vous pouvez aussi ne rien faire, dans ce cas, vos documents apparaitrons dans une liste sous votre article.',
 
 // C
@@ -72,8 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'motclefs_non' => 'Les utilisateurs ne pourront pas choisir leurs mot-cl&eacute;s',
 'motclefs_explique' => 'Les mots-cl&eacute;s sont utiles pour r&eacute;f&eacute;rencer votre article sur ce site et
 pour le retrouver lors d\'une recherche par th&eacute;matique.',
-'motclefs_explique2' => 'Pour choisir plusieurs mots-cl&eacute;s, maintenir la touche SHIFT ou CTRL
-enfonc&eacute;e',
+'motclefs_explique2' => 'Pour choisir plusieurs mots-cl&eacute;s, maintenir la touche SHIFT ou CTRL (Pomme sur les Macs) enfonc&eacute;e',
 'motclefs_liste' => 'Liste des mots-cl&eacute;s associ&eacute;s &agrave; votre article :',
 'motclefs_ajouter' => '&nbsp;&nbsp;Ajouter un mot-cl&eacute;s',
 'motclefs_explique3' => 'Cette option permet de cr&eacute;er de nouveaux mots-cl&eacute;s et de les associer &agrave; votre article.',
