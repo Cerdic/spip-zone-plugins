@@ -12,6 +12,8 @@ function typo_exposants_fr($texte){
 		'/(\\bM)e?(lles?)\\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
 		'/(\\bM)(mes?)\\b/',
 
+		'/(\\bM)(gr)\\b/',		// Mgr
+
 		'/\b(D|P)(rs?)([\s\.-])/',	// Dr(s), Pr(s) suivis d'un espace d'un point ou d'un tiret
 		'/\b(S)(te?s?)([\s\.-])/',  // St(e)(s) suivis d'un espace d'un point ou d'un tiret
 		'/\b(B)(x|se|ses)([\s\.-])/',  // Bx, Bse(s) suivis d'un espace d'un point ou d'un tiret
@@ -28,6 +30,7 @@ function typo_exposants_fr($texte){
 	);
 	$remplace = array(
 		"M$sup\\2$fin",		// Mlle(s), Mme(s)
+		"M$sup\\2$fin",
 		"M$sup\\2$fin",
 
 		"\\1$sup\\2$fin\\3",	// Dr(s), Pr(s), St(e)(s), Bx, Bse(s)
