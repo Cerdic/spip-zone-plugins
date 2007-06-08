@@ -9,7 +9,7 @@
 	$desc = spip_abstract_showtable($table_nom, '', true);
 	spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (id_auteur bigint(21), PRIMARY KEY (id_auteur))");
 	foreach(lire_config('inscription2') as $cle => $val) {
-		if($val!='' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle)){
+		if($val!='' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and !ereg("^.+_(fiche|table).*$", $cle)){
 			if($cle == 'naissance' ){
 				$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 				if (!isset($desc['field'][$cle]))

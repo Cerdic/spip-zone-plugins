@@ -392,34 +392,9 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <legend>
 	<:inscription2:info_gener:>
 </legend>
-<p>
+
 <:inscription2:info_gener_desc:>
 <br /><br />
-
-<label>
-	<input type="checkbox" name="newsletter" onclick="showhide(this)" [checked="(#ENV{newsletter}?{checked})"] id="newsletter" />
-	<strong><:inscription2:newsletter:></strong> 
-</label>
-
-<div id="news" style="[(#ENV{newsletter}|=={on}|?{display: block;, display:none;})]">
-<label>
-Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adherents (&#224; condition d'avoir Spip-Listes ou equivalent)&nbsp;:
-<br />
-#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
-<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
-<BOUCLE_listes(LISTES){tout}{par num titre, titre}>
-	<option value="#ID_LISTE"[(#ID_LISTE|in_array{#GET{selected}}|?{ selected="selected"})]>
-	#TITRE
-	</option>
-</BOUCLE_listes>
-</select>
-
-<small><br />(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)
-<br />
-<a onclick="$('#newsletters').find('option').attr('selected', false);">> tout d&#233;selectionner</a> </small>
-</label>
-<br />
-</div>
 
 <label>
 	<input type="checkbox" name="divers" [checked="(#ENV{divers}?{checked})"] id="divers" />
@@ -427,13 +402,53 @@ Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adher
 	<:inscription2:exp_divers:>
 </label>
 <br />
-
+<div style="[(#CONFIG{plugin/SPIPLISTES}|?{display: block;, display:none;})]">
 <label>
-	<input type="checkbox" name="categorie" [checked="(#ENV{categorie}?{checked})"] id="categorie" />
-	<strong><:inscription2:categorie:></strong><br /><strong>Pas encore disponible.....</strong><br />
-	<:inscription2:exp_categorie:>
+	<input type="checkbox" name="newsletter" onclick="showhide(this, '#news')" [(#ENV{newsletter}|?{#CONFIG{plugin/SPIPLISTES}|?{checked="checked"}})] id="newsletter" />
+	<strong><:inscription2:newsletter:></strong> 
 </label>
+
+<label id="news" style="[(#ENV{newsletter}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_listes:><br />
+
+#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
+[(#CONFIG{plugin/SPIPLISTES})<BOUCLE_listes(LISTES){tout}>
+	<option value="#ID_LISTE"[(#ID_LISTE|in_array{#GET{selected}}|?{ selected="selected"})]>
+	#TITRE
+	</option>
+</BOUCLE_listes>]
+</select>
+
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
+</label>
+</div>
+
+<div [style="(#CONFIG{plugin/ASSOCIATION}|?{display: block;, display:none;})"]>
+<label>
+	<input type="checkbox" name="categorie" onclick="showhide(this, '#categs')" [checked="(#ENV{categorie}?{checked})"] id="categorie" />
+	<strong><:inscription2:categorie:></strong><br /><strong></strong>
+	<:inscription2:exp_categorie:>
+	<br />
+</label>
+
+<label id='categs' style="[(#ENV{categorie}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_categories:>
 <br />
+#SET{selected,#CONFIG{inscription2/categories,'',''}}
+<select name="categories[]" multiple="multiple" size="5" id="categories">
+[(#CONFIG{plugin/ASSOCIATION})<BOUCLE_categories(SPIP_ASSO_CATEGORIES)>
+	<option value="#ID_CATEGORIE"[(#ID_CATEGORIE|in_array{#GET{selected}}|?{ selected="selected"})]>
+	#LIBELLE
+	</option>
+</BOUCLE_categories>]
+</select>
+
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small>
+</label>
+</div>
 
 <label>
 	<input type="checkbox" name="publication" [checked="(#ENV{publication}?{checked})"] id="publication" />
@@ -467,12 +482,12 @@ Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adher
 </fieldset>
 [(#REM) Code jQuery plier/deplier les listes ]
 <script type="text/javascript"><!--
-function showhide(boxName) {
+function showhide(boxName, boxNom) {
 if(boxName.checked){
-	$('#news').slideDown('slow');
+	$(boxNom).slideDown('slow');
 }
 else 
-	$('#news').slideUp('slow');
+	$(boxNom).slideUp('slow');
 }
 // --></script>
 

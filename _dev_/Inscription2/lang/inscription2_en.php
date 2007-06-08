@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gener_desc' => 'Options which will be asked to the new adherents of the site',
 'info_internes' => 'Internal information',
 'info_internes_desc' => 'Options which will be stored in the data base but will not be displayed in the form for the new members',
+'choisir_listes' => "Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adherents&nbsp;: ",
+'select_listes' => '(you may select a group holding down the shift key)',
+'deselect_listes' => '> deselect all',
 
 'inserez_infos' => 'Please fill the form with informations requested',
 
@@ -44,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'societe' => 'Company',
 'secteur' => 'Sector of activity',
 'newsletter' => 'Newsletter',
+'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous voulez vous abonner',
 'fonction' => 'Function',
 'masculin' => 'male',
 'feminin' => 'female',
@@ -52,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'exp_divers' => 'Field which will be proposed to the visitors under the name of comment',
 'categorie' => 'Category of contribution',
 'exp_categorie' => 'Drop-down list of the categories from the table \'spip_asso_categories\' so that the user chooses one of them',
+'choisir_categories' => 'Select them in the following list:',
 'publication' => 'Publication',
 'exp_publication' => 'Publication authorization of the personal data',
 
@@ -66,10 +71,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_email_inscription' =>   'You asked to take part in our site @nom_site@. 
 You are currently about to finish your inscription. You just have to click the link below to activate your account and to choose your password.
 @link_activation@
+
 Your login is&nbsp;: @login@
 
 If you did not ask for this inscription or you do not want to form part of our site any more, click link below.\n
 @link_suppresion@
+
 Thank you for your confidence.
 
 The @nom_site@\'s Team',
@@ -80,11 +87,13 @@ The @nom_site@\'s Team',
 
 Your login is&nbsp;: @login@
 and your password you just typed it.
+
 Thank you for your confidence
 
 The @nom_site@\'s Team',
 'compte_active' => 'Your account was activated',
 'suppression_faite' => "erasure completed",
+
 'janvier' => 'January',
 'fevrier' => 'February',
 'mars' => 'March',

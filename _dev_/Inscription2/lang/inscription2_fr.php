@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gener_desc' => 'Options qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
 'info_internes' => 'Informations Internes',
 'info_internes_desc' => 'Options qui seront stock&eacute;es dans la base de donn&eacute;es mais ne seront pas affich&eacute;es dans le formulaire des nouveaux adh&eacute;rents',
+'choisir_listes' => "Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adherents&nbsp;: ",
+'select_listes' => '(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)',
+'deselect_listes' => '> tout d&#233;selectionner',
 
 'inserez_infos' => 'Veuillez ins&eacute;rer les informations demand&eacute;es',
 
@@ -44,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'societe' => 'Soci&eacute;t&eacute;',
 'secteur' => 'Secteur',
 'newsletter' => 'Listes de diffusion',
+'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous voulez vous abonner',
 'fonction' => 'Fonction',
 'masculin' => 'masculin',
 'feminin' => 'f&eacute;minin',
@@ -51,7 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'divers' => 'Divers',
 'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
 'categorie' => 'Cat&eacute;gorie de cotisation',
-'exp_categorie' => 'Liste d&eacute;roulante des cat&eacute;gories de la table \'spip_asso_categories\' pour que l\'utilisateur en choisisse une',
+'exp_categorie' => 'Liste d&eacute;roulante des cat&eacute;gories de la table \'spip_asso_categories\' &agrave; proposer aux nouveaux adherents.',
+'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
 'publication' => 'Publication',
 'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 
@@ -66,10 +71,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_email_inscription' =>   'Vous avez demand&eacute; &agrave; participer &agrave; notre site @nom_site@. 
 Vous &ecirc;tes actuellement sur le point de finir votre inscription. Il vous suffit de cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
 @link_activation@
+
 Votre login est&nbsp;: @login@
 
 Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.\n
 @link_suppresion@
+
 Merci de votre confiance.
 
 L\'6eacute;quipe de @nom_site@',
@@ -80,11 +87,13 @@ L\'6eacute;quipe de @nom_site@',
 
 Votre login est&nbsp;: @login@
 et votre mot de passe vous venez de le saisir.
+
 Merci de Votre Confiance
 
 L\'&eacute;quipe de @nom_site@',
 'compte_active' => 'Votre compte a &eacute;t&eacute; activ&eacute;',
 'suppression_faite' => "la suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;",
+
 'janvier' => 'janvier',
 'fevrier' => 'f&eacute;vrier',
 'mars' => 'mars',

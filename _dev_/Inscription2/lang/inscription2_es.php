@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gener_desc' => 'Opciones que seran solicitadas a los nuevos adherentes del sitio',
 'info_internes' => 'Informaciones Internas',
 'info_internes_desc' => 'Opciones que seran almacenadas en la base de datos, pero que no seran solicitadas a los adherentes del sitio en el formulario de inscription',
+'choisir_listes' => "Elija las listas de difusion (Spip-listes) que seran propuestas a los nuevos adherentes del sitio: ",
+'select_listes' => '(puede seleccionar varias presionando la tecla shift)',
+'deselect_listes' => '> deseleccionar todo',
 
 'inserez_infos' => 'Ingrese los datos solicitados',
 
@@ -44,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'societe' => 'Sociedad',
 'secteur' => 'Sector',
 'newsletter' => 'Listas de difusi&oacute;n',
+'exp_newsletter' => 'Elija las listas de difusi&oacute;n a las que se quiere abonar',
 'fonction' => 'Funci&oacute;n',
 'masculin' => 'masculino',
 'feminin' => 'femenino',
@@ -51,7 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'divers' => 'Varios',
 'exp_divers' => 'Campo que sera propuesto con el nombre de comentario',
 'categorie' => 'Categoria de cotisaci&oacute;n',
-'exp_categorie' => 'Lista de categor&iacute;as de la tabla \'spip_asso_categories\' para que el usuario elija una',
+'exp_categorie' => 'Lista de categor&iacute;as de la tabla \'spip_asso_categories\' que se propondr&aacute;n a los nuevos adherentes.',
+'choisir_categories' => 'Elijalas en la siguiente lista:',
 'publication' => 'Publicaci&oacute;n',
 'exp_publication' => 'Autorisaci&oacute;n de publicaci&oacute;n de los datos personales en un eventual anuario',
 
@@ -63,8 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'probleme_email' => 'Problema de e-mail&nbsp;: el correo de activaci&oacute;n no pudo enviarse.',
 'email_bonjour' => 'Buenos D&iacute;as @nom@,',
 'message_auto' => '(Mensaje Autom&aacute;tico)',
-'texte_email_inscription' =>   
-'Usted acaba de solicitar vuestra inscripci&oacute;n en nuestro sitio @nom_site@. 
+'texte_email_inscription' => 'Usted acaba de solicitar vuestra inscripci&oacute;n en nuestro sitio @nom_site@. 
 Actualmente esta a punto de terminar el ciclo de inscripc&oacute;n. Lo &uacute;nico que le queda por hacer es hacer click en el link siguiente para activar su cuenta e ingresar su contrase&ntilde;a. Una vez finalizado usted podr&aacute; conectarse a nuestra pagina con su nombre de usuario y contrase&ntilde;a.
 @link_activation@
 
@@ -80,6 +84,7 @@ El equipo de @nom_site@',
 'mail_renvoye' => 'Esta direccion email ya existe en nuestra base de datos. Para activar su cuenta sigas las instrucciones que estan en el email que acaba de ser enviado.',
 'redemande_password' => 'Vuelva a ingresar su contrase&ntilde;a:',
 'texte_email_confirmation' => 'Su cuenta acaba de ser activada. Usted puede conectarse desde ya con sus identificadores personales.
+
 Su nombre de usuario es: @login@
 y sa contrase&ntilde;a es la que acaba de ingresar.
 

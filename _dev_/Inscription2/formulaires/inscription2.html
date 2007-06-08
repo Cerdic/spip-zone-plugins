@@ -3,7 +3,6 @@
 <script src="#CHEMIN{jquery.validate.js}" type="text/javascript"></script>
 
 <script type="text/javascript">
-
 	jQuery.validator.addMethod("chaine", function(value, element) {
 		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\. ]+$/.test(value);
 	}, "Ce champ est obligatoire, entrez une chaine valide svp");
@@ -15,8 +14,8 @@
 	jQuery.validator.addMethod("numero", function(value, element) {
 		return !jQuery.validator.methods.required(value, element) || /^[0-9\. ]+$/.test(value);
 	}, "Ce champ est obligatoire, entrez un numero valide svp");
-
-$().ready(function() {
+	
+	$().ready(function() {
 	// validate signup form on submit
 	$("#inscription").validate({
 		rules: {
@@ -94,7 +93,6 @@ $().ready(function() {
 		}
 	});
 });
-
 </script>
 
 <div>
@@ -248,16 +246,39 @@ $().ready(function() {
 <br /></p>
 
 
-<label style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]">
-	<strong><:inscription2:categorie:></strong><br />
-	<input type="text" name="categorie" id="categorie" />
-<br /></label>
 
+<label style="[(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})]">
+	<strong><:inscription2:newsletter:></strong><br />
+	<:inscription2:exp_newsletter:><br />
+	#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+	<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
+		<option value='0'>-</option>
+	<BOUCLE_listes(LISTES){tout}>
+		[<option value="#ID_LISTE" (#ID_LISTE|in_array{#GET{selected}})>
+		#TITRE
+		</option>]
+</BOUCLE_listes>
+</select>
+</label>
+
+<label style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
+	<strong><:inscription2:categorie:></strong><br />
+	#SET{selected,#CONFIG{inscription2/categories,'',''}}
+	<select name="categories" id="categories">
+		<option value='0'>-</option>
+	<BOUCLE_categories(SPIP_ASSO_CATEGORIES){tout}>
+		[<option value="#ID_CATEGORIE" (#ID_CATEGORIE|in_array{#GET{selected}})>
+		#LIBELLE
+		</option>]
+</BOUCLE_categories>
+</select>
+</label>
 
 <label style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
 	<strong><:inscription2:divers:></strong><br />
 	<input type="text" name="divers" id="divers" />
-<br /></label>
+	<br />
+</label>
 
 
 </fieldset>
