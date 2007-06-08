@@ -8,6 +8,8 @@ function action_mes_fichiers()
 {
 	global $connect_statut, $connect_toutes_rubriques;
 	$test = determine_upload();
+	$auth = charger_fonction('auth', 'inc');
+	$auth();
 	if (!($connect_statut == '0minirezo' and $connect_toutes_rubriques)) {
 		include_spip('inc/headers');
 		include_spip('inc/minipres');
