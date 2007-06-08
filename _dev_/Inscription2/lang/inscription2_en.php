@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'divers' => 'any other business',
 'exp_divers' => 'Field which will be proposed to the visitors under the name of comment',
 'categorie' => 'Category of contribution',
-'exp_categorie' => 'Drop-down list of the categories of the table \'spip_asso_categories\' so that the user chooses one',
+'exp_categorie' => 'Drop-down list of the categories from the table \'spip_asso_categories\' so that the user chooses one of them',
 'publication' => 'Publication',
 'exp_publication' => 'Publication authorization of the personal data',
 
