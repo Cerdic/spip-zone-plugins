@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'divers' => 'Divers',
 'exp_divers' => 'Champ qui sera propos&eacute; aux visiteurs avec le nom de commentaire',
 'categorie' => 'Cat&eacute;gorie de cotisation',
-'exp_categorie' => 'Liste d&eacute;roulante des cat&eacute;gories de la table \'spip_asso_categories\' pour que l\'utilisateur choisisse une',
+'exp_categorie' => 'Liste d&eacute;roulante des cat&eacute;gories de la table \'spip_asso_categories\' pour que l\'utilisateur en choisisse une',
 'publication' => 'Publication',
 'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
 
