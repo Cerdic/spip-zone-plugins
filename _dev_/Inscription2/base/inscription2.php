@@ -1,9 +1,12 @@
 <?php
 	/**Plugin Inscription 2 avec CFG **/
 	if (!defined("_ECRIRE_INC_VERSION")) return;
-
+	include_spip('cfg_options');
+	include_spip('base/abstract_sql');
+	
 	global $tables_principales;
 	$table_nom = "spip_auteurs_elargis";
+	$desc = spip_abstract_showtable($table_nom, '', true);
 	spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (id_auteur bigint(21), PRIMARY KEY (id_auteur))");
 	foreach(lire_config('inscription2') as $cle => $val) {
 		if($val!='' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and !ereg("^.+_fiche$", $cle) and !ereg("^.+_fiche_mod$", $cle) and !ereg("^.+_table$", $cle)){
