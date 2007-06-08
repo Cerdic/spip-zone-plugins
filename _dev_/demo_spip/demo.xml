@@ -1,0 +1,49 @@
+<demos>
+<demo name="test">
+  <step num="1">
+    <title>Demo step 1</title>
+    <content><![CDATA[
+      <p>
+      Testo dello step <strong>1</strong>
+      </p>
+      <p>
+      Highlight del testo crea rubrica
+      </p>          
+    ]]>
+    </content>
+    <actions>
+      <highlight selector="table.cellule-h-table[a[@href*='?exec=rubriques_edit&amp;new=oui']]" color="red" />
+      <highlight selector="table.cellule-h-table[a[@href*='?exec=articles_edit&amp;new=oui']]" />
+    </actions>
+  </step>
+  <step num="2">
+    <title>Demo step 2</title>
+    <content><![CDATA[
+      <p>
+      Testo dello step <strong>2</strong>
+      </p>          
+    ]]>
+    </content>
+  </step>
+  <step num="3">
+    <title>Demo step 3</title>  
+    <content><![CDATA[
+      <p>
+      Testo dello step <strong>3</strong>
+      </p>          
+    ]]>
+    </content>
+  </step>
+  <step num="4">
+    <title>Demo step 4</title>  
+    <content><![CDATA[
+      <p>
+      Testo dello step <strong>4</strong>
+      </p>          
+    ]]>
+    </content>
+  </step>
+</demo>
+<demo name="test2">
+</demo>
+</demos>

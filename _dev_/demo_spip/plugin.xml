@@ -1,0 +1,14 @@
+<plugin>
+	<version>0.1</version>
+	<nom>spip demo</nom>
+	<prefix>spip_demo</prefix>
+	<description>
+    Crea demo per SPIP
+	</description>
+	<pipeline>
+	 <nom>header_prive</nom>
+	 <inclure>spip_demo_pipelines.php</inclure>
+	</pipeline>
+</plugin>
+
+
