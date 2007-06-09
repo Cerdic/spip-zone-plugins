@@ -27,37 +27,37 @@
 		}
 	}
 	if(is_array($var_user)){
-	$aux = join(', ',array_keys($var_user));
-	$aux = spip_query("SELECT $aux FROM spip_auteurs_elargis WHERE id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
-	$aux = spip_fetch_array($aux);
+		$aux = join(', ',array_keys($var_user));
+		$aux = spip_query("SELECT $aux FROM spip_auteurs_elargis WHERE id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
+		$aux = spip_fetch_array($aux);
 	}
 	if(is_array($auteur)){
 		$aux2 = join(', ',array_keys($auteur));
 		$aux2 = spip_query("SELECT $aux2 FROM spip_auteurs WHERE id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
 		$aux2 = spip_fetch_array($aux2);
-		foreach($aux2 as $cle => $val){
-		echo '<div>';
-		echo '<strong>'._T('inscription2:'.$cle).' : </strong>';
-		if($var_user[$cle]=="1")
-			echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.$val.'</span>';  
-		else 
-			echo '<span>'.$val.'</span>';  
-		echo '</div>';
-		}
 	}
 	if(!is_array($aux) and !is_array($aux2)){
 		echo _T('inscription2:erreur_user_not_found');
 		return;
 	}
 	$id = $GLOBALS['auteur_session']['id_auteur'];
-	foreach($aux as $cle => $val){
-		echo '<div>';
-		echo '<strong>'._T('inscription2:'.$cle).' : </strong>';
-		if($var_user[$cle]=="1")
-			echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.$val.'</span>';  
-		else 
-			echo '<span>'.$val.'</span>';  
-		echo '</div>';
+	if(is_array($aux2)){
+		foreach($aux2 as $cle => $val){
+			echo '<div><strong>'._T('inscription2:'.$cle).' : </strong>';
+			if($auteur[$cle]=="1")
+				echo '<span class="crayon spip_auteurs-'.$cle.'-'.$id.' ">'.$val.'</span></div>';  
+			else 
+				echo '<span>'.$val.'</span></div>';  
+		}
+	}
+	if(is_array($aux)){
+		foreach($aux as $cle => $val){
+			echo '<div><strong>'._T('inscription2:'.$cle).' : </strong>';
+			if($var_user[$cle]=="1")
+				echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.$val.'</span></div>';  
+			else 
+				echo '<span>'.$val.'</span></div>';  
+		}
 	}
 ?>
 </div>
