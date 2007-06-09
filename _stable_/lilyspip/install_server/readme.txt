@@ -63,7 +63,7 @@ Copier dans un dossier extérieur au serveur Web (par exemple /home/script/) le s
 
 	#!/bin/sh
 	ulimit -t 60
-	cmd="/usr/local/bin/lilypond --png --output=$1 $2 2> $1"
+	cmd="/usr/local/bin/lilypond --safe --png --output=$1 $2 2> $1"
 	eval $cmd
 	
 où 60 correspond à 60 secondes de temps CPU avant que le processus ne soit stoppé.
