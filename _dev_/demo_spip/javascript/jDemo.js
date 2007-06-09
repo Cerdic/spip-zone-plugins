@@ -107,6 +107,7 @@
                   var $target = $($cmd.attr('selector'));
                   var offset = $target.offset({scroll:false});
                   queue.push(function(){
+                    jDemo.queues["mouse"].target = $target;
                     $mouse = $('<img id="jDemo_pointer" src="'+jDemo.path_resources+'Cursor.png">').css({position:'absolute',left:offset.left,top:offset.top,zIndex:3000+2});
                     $("body").append($mouse);jDemo.executeQueue("mouse");
                     jDemo.actionsToRevert.push(function() {$mouse.remove();});
@@ -117,24 +118,31 @@
                   var speed = 1000/($cmd.attr('speed') || 100);
                   var offset = $target.offset({scroll:false});
                   queue.push(function(){
+                    jDemo.queues["mouse"].target = $target;
                     var offsetPointer = $('#jDemo_pointer').offset({scroll:false});
                     var distance = Math.sqrt(Math.pow(offset.top-offsetPointer.top,2)+Math.pow(offset.left-offsetPointer.left,2));
                     $('#jDemo_pointer').animate({top:offset.top,left:offset.left},parseInt(distance*speed),function(){jDemo.executeQueue("mouse");});
                     });
                   break;
                  case "click":
+                    var delay = $cmd.attr('delayEvent');
                     queue.push(function(){
                       var offset = $('#jDemo_pointer').offset({scroll:false});
                       var $click = $('<img id="jDemo_click" src="'+jDemo.path_resources+'CursorClick.png">').css({position:'absolute',left:offset.left,top:offset.top,zIndex:3000+1});
                       $("body").append($click);
                       jDemo.actionsToRevert.push(function() {$click.remove();});
-                      jDemo.executeQueue("mouse");
+                      if(delay) {
+                        window.setTimeout(function(){jDemo.queues["mouse"].target.click();jDemo.executeQueue("mouse");},delay*1000);
+                      } else 
+                        jDemo.executeQueue("mouse");
                     });
+                    break;
                 case "pause":
                     var time = $cmd.attr('time')*1000 || 1000;
                     queue.push(function(){
                       window.setTimeout(function(){jDemo.executeQueue("mouse")},time);
                     });
+                    break;
               }
             });
             jDemo.queues["mouse"] = {queue:queue,loop:($(this).attr("loop") || false),index:0};
@@ -151,8 +159,6 @@
     },
     navigate: function() {
       $('#jDemo_window').jqmHide().remove();
-      jDemo.stopLoops();
-      jDemo.revertActions();
       var data = this.rel.split(/&/);
       jDemo.loadDemo('',data[0],data[1]);
       return false;    
@@ -175,9 +181,8 @@
       $.each(jDemo.queues,function(i,n){
         if(n && n.timeOutHandle)
           window.clearTimeout(n.timeOutHandle);
-          jDemo.queues[i] = null;
+        jDemo.queues[i] = null;
       })
     }
   }
-  
 })(jQuery)

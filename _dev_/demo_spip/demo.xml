@@ -55,6 +55,15 @@
       </p>          
     ]]>
     </content>
+    <actions>
+      <mouse loop="true">
+        <set selector="div.jqmWindow" />
+        <pause time="1" />
+        <move selector="div.titrem[a[@href*=articles_page]]" />
+        <pause time="1" />
+        <click delayEvent="1" />
+      </mouse>
+    </actions>
   </step>
 </demo>
 <demo name="test2">
