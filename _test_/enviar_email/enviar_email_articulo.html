@@ -5,7 +5,7 @@
 
 <head>
 
-	<title>[Enviar artículo: (#TITRE|textebrut)]</title>
+	<title>[<:enviarmail:envoyer_article:>: (#TITRE|textebrut)]</title>
 	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
 	<INCLURE{fond=inc-head}>
 
@@ -59,16 +59,16 @@ if (!$HTTP_POST_VARS){
 <div style="width:90%; margin:auto;padding-top:.6em">
   <form action="<?php $phpself; ?>" method="POST" enctype="multipart/form-data" class="formulario">
 
-<h2 style="text-align:center;"><span style="text-decoration:underline;color:#f28000">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.9em;margin-bottom:.9em">Enviar [referencia de <span style="font-weight:bold;font-style:italic">'(#TITRE)'</span> ]por correo electrónico</div></h2>
+<h2 style="text-align:center;"><span style="text-decoration:underline;color:#f28000">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.9em;margin-bottom:.9em">[<:enviarmail:envoyer:> <span style="font-weight:bold;font-style:italic">'(#TITRE)'</span> ]<:enviarmail:par_courriel:></div></h2>
 
     <fieldset style="text-align:left; margin-bottom:.6em">
-   <b>Enviar a la dirección:</b><div style="font-size:95%;color:#999999">(separa con comas si escribes más de una)</div><input name="destino" class="campos" value="" size="40"></fieldset>
+   <b><:enviarmail:a_destination:></b><div style="font-size:95%;color:#999999">(<:enviarmail:separe_virgule:>)</div><input name="destino" class="campos" value="" size="40"></fieldset>
        <fieldset style="text-align:left">
-       <legend style="font-weight:bold">Datos opcionales</legend>
-    Asunto <span style="font-size:95%;color:#999999">(título que quieres darle al mensaje)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
-Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
-     Tu dirección de correo electrónico<br /><input name="email" class="campos" size="40" value=""><br />
-     Puedes añadir un texto en el mensaje<br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
+       <legend style="font-weight:bold"><:enviarmail:donnees_optionnelles:></legend>
+    <:enviarmail:sujet:> <span style="font-size:95%;color:#999999">(<:enviarmail:titre_vouloir:>)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
+<:enviarmail:nom:><br /><input name="nombre" class="campos" size="40" value=""><br/>
+     <:enviarmail:adresse:><br /><input name="email" class="campos" size="40" value=""><br />
+     <:enviarmail:texte:><br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
      <div style="text-align:center">
       <input type="submit" name="enviar" class="boton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
       </div>
@@ -81,23 +81,23 @@ Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
 }else{
 
 // REVISA QUE HAYA UN EMAIL PARA ENVIAR EL MENSAJE
-if (!$destino) { echo "<p style='color:red; font-size:90%'>Lo sentimos :-( pero sin dirección de correo electrónico válida<br />no podemos enviar el mensaje</p>";
+if (!$destino) { echo "<p style='color:red; font-size:90%'>Lo sentimos :-( pero sin direcciÃ³n de correo electrÃ³nico vÃ¡lida<br />no podemos enviar el mensaje</p>";
 
 ?>
 
 <div style="width:90%; margin:auto;">
   <form action="<?php $phpself; ?>" method="POST" enctype="multipart/form-data" class="formulario">
-        <h2 style="text-align:center; margin-bottom:.1em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:1.2em">Enviar [referencia de <span style="font-weight:bold; font-style: italic">'(#TITRE)'</span> ]por correo electrónico</div></h2>
+        <h2 style="text-align:center; margin-bottom:.1em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:1.2em"><:enviarmail:envoyer:> [<:enviarmail:reference_de:> <span style="font-weight:bold; font-style: italic">'(#TITRE)'</span> ]<:enviarmail:par_courriel:></div></h2>
     <fieldset style="text-align:left; margin-bottom:.6em">
-   <b>Enviar a la dirección:</b><div style="font-size:95%;color:#999999">(separa con comas si escribes más de una)</div><input name="destino" class="campos" value="" size="40"></fieldset>
+   <b><:enviarmail:a_destination:>:</b><div style="font-size:95%;color:#999999">(<:enviarmail:separe_virgule:>)</div><input name="destino" class="campos" value="" size="40"></fieldset>
        <fieldset style="text-align:left">
-       <legend style="font-weight:bold">Datos opcionales</legend>
-    Asunto <span style="font-size:95%;color:#999999">(título que quieres darle al mensaje)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
-Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
-     Tu dirección de correo electrónico<br /><input name="email" class="campos" size="40" value=""><br />
-     Puedes añadir un texto en el mensaje<br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
+       <legend style="font-weight:bold"><:enviarmail:donnees_optionnelles:></legend>
+    <:enviarmail:sujet:> <span style="font-size:95%;color:#999999">(<:enviarmail:titre_vouloir:>)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
+<:enviarmail:nom:><br /><input name="nombre" class="campos" size="40" value=""><br/>
+     <:enviarmail:adresse:><br /><input name="email" class="campos" size="40" value=""><br />
+     <:enviarmail:texte:><br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
      <div style="text-align:center">
-      <input type="submit" name="enviar" class="boton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
+      <input type="submit" name="enviar" class="boton" style="margin-top:.3em" value="<:enviarmail:envoi:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
       </div>
       
       <input type="hidden" name="message" value="1">
@@ -113,7 +113,7 @@ Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
 
 include_spip("phpmailer/class.phpmailer");
 include_spip("phpmailer/class.smtp");	
-include_spip('inc/meta'); // para coger datos automáticamente del servidor, usuario,...
+include_spip('inc/meta'); // para coger datos automÃ¡ticamente del servidor, usuario,...
 $mail = new PHPMailer();
 
 $mail->IsSMTP();
@@ -126,7 +126,7 @@ $mail->Mailer = "smtp";
 //Asignamos a Host el nombre de nuestro servidor smtp
   $mail->Host = "smtp.hotpop.com";
 
-  //Le indicamos que el servidor smtp requiere autenticación
+  //Le indicamos que el servidor smtp requiere autenticaciÃ³n
   $mail->SMTPAuth = true;
 
   //Le decimos cual es nuestro nombre de usuario y password
@@ -141,10 +141,10 @@ $mail->CharSet	= lire_meta('charset');  // Juego de caracteres
 $mail->Timeout="20";
 
 // $mail->WordWrap = "50";                                 // set word wrap to 50 characters
-// $mail->AddAttachment("/var/tmp/file.tar.gz");         // añadir archivos
-// $mail->AddAttachment("#DOSSIER_SQUELETTE/imagenes/logo_64.jpg", "logo_64.jpg");    // añadir archivos con nombre
+// $mail->AddAttachment("/var/tmp/file.tar.gz");         // aÃ±adir archivos
+// $mail->AddAttachment("#DOSSIER_SQUELETTE/imagenes/logo_64.jpg", "logo_64.jpg");    // aÃ±adir archivos con nombre
 
-// PARTE COMÚN
+// PARTE COMÃšN
 
   //Asignamos asunto y cuerpo del mensaje
   
@@ -177,17 +177,17 @@ $texto_html.="<p style='padding:0px;margin:0px;text-align:left;font-size:120%;fo
 
 $texto_html.="<div style='padding:.9em;padding-top:0px'>";
 
-if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. Quizás esta información te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
+if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. QuizÃ¡s esta informaciÃ³n te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
 $texto_html.="<p style='text-align:left'>".$comentario."</p>";
 
 $texto_html.="<div style='border: 1px solid silver;background-color:whitesmoke'>";
 $texto_html.="<div style='font-size:120%;padding:.3em;text-align:center;border-bottom:1px dotted silver'>".'[(#TITRE)]'."</div>";
 $texto_html.="<div style='padding:.9em;padding-bottom:.3em;font-size:95%;'>".'[(#TEXTE|couper{1200})]'."</div>";
-$texto_html.="<div style='font-size:90%;text-align:right;padding-bottom:.6em;padding-right:.9em'><a href='$url_sitio/$url_art'>leer más &rsaquo;&rsaquo;&rsaquo;</a></div>";
+$texto_html.="<div style='font-size:90%;text-align:right;padding-bottom:.6em;padding-right:.9em'><a href='$url_sitio/$url_art'>leer mÃ¡s &rsaquo;&rsaquo;&rsaquo;</a></div>";
 $texto_html.="</div>";
 
 if (!$HTTP_POST_VARS["email"]) { $email_aut=""; } else { $email_aut=" (".$HTTP_POST_VARS["email"].")"; }
-$texto_html.="<div style='font-size:80%;color:#999999;text-align:left'>Envíado por: ".$remite.$email_aut."</div>";
+$texto_html.="<div style='font-size:80%;color:#999999;text-align:left'>EnvÃ­ado por: ".$remite.$email_aut."</div>";
 
 $texto_html.="</div></div>";
 
@@ -195,22 +195,22 @@ $mail->Body = $texto_html;
   
 // COMIENZO PARTE TEXTO PLANO 
 
-if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. Quizás esta información te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
+if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. QuizÃ¡s esta informaciÃ³n te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
 $texto_plano=$comentario."\n\n";
 $texto_plano.="-------------------------- \n";
 $texto_plano.='[(#NOM_SITE_SPIP)]'."\n".'[(#URL_SITE_SPIP)]'."\n\n";
 $texto_plano.='[(#TITRE)]'."\n\n";
 $texto_plano.='[(#TEXTE|couper{1200})]'."\n\n";
-$texto_plano.="leer más: ".$url_sitio."/".$url_art."\n\n";
+$texto_plano.="leer mÃ¡s: ".$url_sitio."/".$url_art."\n\n";
 $texto_plano.="-------------------------- \n";
-$texto_plano.="Envíado por: ".$remite.$email_aut;
+$texto_plano.="EnvÃ­ado por: ".$remite.$email_aut;
 
 
   $mail->AltBody = $texto_plano;
   
-// SE ENVÍA EL MENSAJE
+// SE ENVÃA EL MENSAJE
 
-// Envío (5 intentos)
+// EnvÃ­o (5 intentos)
 $enviado = $mail->Send();
 $intentos=1; 
    	while((!$enviado)&&($intentos<5)&&($mail->ErrorInfo!="SMTP Error: Data not accepted")){
@@ -224,7 +224,7 @@ if ($mail->ErrorInfo=="SMTP Error: Data not accepted") { // soluciona un bug con
 	   $enviado=true;
 }
 
-//información final sobre el envío
+//informaciÃ³n final sobre el envÃ­o
 
 if($enviado)
 {

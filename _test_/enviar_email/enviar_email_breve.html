@@ -66,17 +66,17 @@ if (!$HTTP_POST_VARS){
 
 <div style="width:95%; margin:auto;">
   <form action="<?php $phpself; ?>" method="POST" enctype="multipart/form-data" class="formulario">
-        <h2 style="text-align:center; margin-bottom:.2em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.6em;">Enviar [la referencia de "<span style="font-weight:bold; font-style: italic">(#TITRE)</span>" ]por correo electrónico</div></h2>
+        <h2 style="text-align:center; margin-bottom:.2em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.6em;"><:enviarmail:envoyer:> [<:enviarmail:reference_de:> "<span style="font-weight:bold; font-style: italic">(#TITRE)</span>" ]<:enviarmail:par_courriel:></div></h2>
     <fieldset style="text-align:left; margin-bottom:.6em">
-   <b>Enviar a la dirección:</b><div style="font-size:95%;color:#999999">(separa con comas si escribes más de una)</div><input name="destino" class="campos" value="" size="40"></fieldset>
+   <b><:enviarmail:a_destination:></b><div style="font-size:95%;color:#999999">(<:enviarmail:separe_virgule:>)</div><input name="destino" class="campos" value="" size="40"></fieldset>
        <fieldset style="text-align:left">
-       <legend style="font-weight:bold">Datos opcionales</legend>
-    Asunto <span style="font-size:95%;color:#999999">(título que quieres darle al mensaje)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
-      Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
-     Tu dirección de correo electrónico<br /><input name="email" class="campos" size="40" value=""><br />
-     Puedes añadir un texto en el mensaje<br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
+       <legend style="font-weight:bold"><:enviarmail:donnees_optionnelles:></legend>
+    <:enviarmail:sujet:> <span style="font-size:95%;color:#999999">(<:enviarmail:titre_vouloir:>)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
+      <:enviarmail:nom:><br /><input name="nombre" class="campos" size="40" value=""><br/>
+     <:enviarmail:adresse:><br /><input name="email" class="campos" size="40" value=""><br />
+     <:enviarmail:texte:><br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
      <div style="text-align:center">
-      <input type="submit" name="enviar" class="spip_bouton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
+      <input type="submit" name="Enviar" class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:envoyer:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
       </div>
       <input type="hidden" name="message" value="1">
       </fieldset>
@@ -93,17 +93,17 @@ if (!$destino) { echo "<p style='color:red; font-size:90%'>Lo sentimos :-(, pero
 
 <div style="width:90%; margin:auto;">
   <form action="<?php $phpself; ?>" method="POST" enctype="multipart/form-data" class="formulario">
-        <h2 style="text-align:center; margin-bottom:.2em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.6em;">Enviar [la referencia de "<span style="font-weight:bold; font-style: italic">(#TITRE)</span>" ]por correo electrónico</div></h2>
+        <h2 style="text-align:center; margin-bottom:.2em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.6em;"><:enviarmail:envoyer:> [<:enviarmail:reference_de:> "<span style="font-weight:bold; font-style: italic">(#TITRE)</span>" ]<:enviarmail:par_courriel:></div></h2>
     <fieldset style="text-align:left; margin-bottom:.6em">
-   <b>Enviar a la dirección:</b><div style="font-size:95%;color:#999999">(separa con comas si escribes más de una)</div><input name="destino" class="campos" value="" size="40"></fieldset>
+   <b><:enviarmail:a_destination:>:</b><div style="font-size:95%;color:#999999">(<:enviarmail:separe_virgule:>)</div><input name="destino" class="campos" value="" size="40"></fieldset>
        <fieldset style="text-align:left">
-       <legend style="font-weight:bold">Datos opcionales</legend>
-    Asunto <span style="font-size:95%;color:#999999">(título que quieres darle al mensaje)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
-      Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
-     Tu dirección de correo electrónico<br /><input name="email" class="campos" size="40" value=""><br />
-     Puedes añadir un texto en el mensaje<br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
+       <legend style="font-weight:bold"><:enviarmail:donnees_optionnelles:></legend>
+    <:enviarmail:sujet:> <span style="font-size:95%;color:#999999">(<:enviarmail:titre_vouloir:>)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
+      <:enviarmail:nom:><br /><input name="nombre" class="campos" size="40" value=""><br/>
+     <:enviarmail:adresse:><br /><input name="email" class="campos" size="40" value=""><br />
+     <enviarmail:texte:><br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
      <div style="text-align:center">
-      <input type="submit" name="enviar" class="spip_bouton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
+      <input type="submit" name="enviar" class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:Enviar:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
       </div>
       
       <input type="hidden" name="message" value="1">
