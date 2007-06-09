@@ -23,11 +23,19 @@ global $Config ;
 // SECURITY: You must explicitelly enable this "uploader". 
 $Config['Enabled'] = true ;
 
-// Path to uploaded files relative to the document root.
-$chemin = split("/", $_SERVER["PHP_SELF"]);
-$chemin_final = "";
-if($chemin[1]!="plugins") $chemin_final .= "/".$chemin[1];
-$chemin_final .= "/IMG/";
+// détermination du chemin de base par rapport à la racine du serveur
+  $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
+  define('_DIR_RELATIF_PLUGIN_FCKEDITOR',str_replace('../','',(_DIR_PLUGINS.end($p))));
+    
+  $dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+  $i = 0;
+  while($dir_relatif_array[$i] != 'plugins') 
+    {
+  	 $chemin_final .= $dir_relatif_array[$i]."/";
+  	 $i++;
+    }
+    $chemin_final .="IMG/";
+    
 $Config['UserFilesPath'] = $chemin_final ;
 
 $Config['AllowedExtensions']['File']	= array() ;

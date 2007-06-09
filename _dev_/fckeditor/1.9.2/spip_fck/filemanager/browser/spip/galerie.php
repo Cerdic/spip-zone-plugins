@@ -1,7 +1,7 @@
 <?php
 
 	$chemin = "../../../../../../";
-	$cheminEcrire = $chemin."config/";
+	$cheminEcrire = $chemin."ecrire/";
 	$cheminImages = $chemin."dist/images/";
 	if (defined("_ECRIRE_INC_VERSION")) return;
 	define("_ECRIRE_INC_VERSION", "1");
@@ -10,7 +10,7 @@
 		$fck_mysql_link = @mysql_connect($host, $login, $pass);
 		mysql_select_db($db);
 	}
-	include ($cheminEcrire.'connect.php');
+	include ($cheminEcrire.'inc_connect.php');
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>

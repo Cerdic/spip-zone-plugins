@@ -120,47 +120,61 @@ function OpenFile( fileUrl )
 
 function DeleteFile( fileName )
 {
-	if (confirm('Voulez vous vraiment effacer ' + unescape(fileName) + '?')) {
-		oConnector.SendCommand( 'DeleteFile', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FileName=" + fileName, DeleteFileCallBack ) ;
-	}
+
+confirm('Fonction inactive');
+// 	if (confirm('Voulez vous vraiment effacer ' + unescape(fileName) + '?')) {
+// 		oConnector.SendCommand( 'DeleteFile', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FileName=" + fileName, DeleteFileCallBack ) ;
+// 	}
 }
+
 
 function DeleteFolder( folderName )
 {
-	if (confirm('Voulez vous vraiment effacer ' + unescape(folderName) + ' et les fichiers qu\'il contient ?')) {
-		oConnector.SendCommand( 'DeleteFolder', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FolderName=" + folderName, DeleteFolderCallBack ) ;
-	}
+confirm('Fonction inactive');
+// 	if (confirm('Voulez vous vraiment effacer ' + unescape(folderName) + ' et les fichiers qu\'il contient ?')) {
+// 		oConnector.SendCommand( 'DeleteFolder', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FolderName=" + folderName, DeleteFolderCallBack ) ;
+// 	}
 }
+
 
 function RenameFile( fileName )
 {
-	var promptMsg='Veuillez entrer le nouveau nom pour ' + unescape(fileName) + ' :';
-	var newName=prompt(promptMsg,unescape(fileName));
-	
-	if ((newName!=null)&&(newName!='')&&(newName!=fileName)) {
-		oConnector.SendCommand( 'RenameFile', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FileName=" + fileName + "&NewName=" + escape( newName ), RenameFileCallBack ) ;
-	}
+confirm('Fonction inactive');
+// 	var promptMsg='Veuillez entrer le nouveau nom pour ' + unescape(fileName) + ' :';
+// 	var newName=prompt(promptMsg,unescape(fileName));
+// 	
+// 	if ((newName!=null)&&(newName!='')&&(newName!=fileName)) {
+// 		oConnector.SendCommand( 'RenameFile', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FileName=" + fileName + "&NewName=" + escape( newName ), RenameFileCallBack ) ;
+// 	}
 }
+
 
 function RenameFolder( folderName )
 {
-	var promptMsg='Veuillez entrer le nouveau nom pour ' + unescape(folderName) + ' :';
-	var newName=prompt(promptMsg,unescape(folderName));
-	
-	if ((newName!=null)&&(newName!='')&&(newName!=unescape(folderName))) {
-		oConnector.SendCommand( 'RenameFolder', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FolderName=" + folderName + "&NewName=" + escape ( newName ), RenameFolderCallBack ) ;
-	}
+// 	var promptMsg='Veuillez entrer le nouveau nom pour ' + unescape(folderName) + ' :';
+// 	var newName=prompt(promptMsg,unescape(folderName));
+// 	
+// 	if ((newName!=null)&&(newName!='')&&(newName!=unescape(folderName))) {
+// 		oConnector.SendCommand( 'RenameFolder', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FolderName=" + folderName + "&NewName=" + escape ( newName ), RenameFolderCallBack ) ;
+// 	}
+confirm('Fonction inactive');
 }
+
 
 function LoadResources( resourceType, folderPath )
 {
-	if(resourceType=='SpipGal') {
+	if(resourceType=='SpipGal') 
+  {
+
 		oListManager.Clear() ;
 		document.getElementById('galerie').innerHTML = '<iframe width="100%" height="100%" style="border: none;" src="' + galerieSpip + '"></iframe>';
-	} else {
-		if(resourceType=='Spip') {
-			resourceType = '';
-		}
+	} 
+  else 
+  {
+  		if(resourceType=='Spip') 
+      {
+  			resourceType = '';
+  		}
 		oListManager.Clear() ;
 		document.getElementById('galerie').innerHTML = '';
 		oConnector.ResourceType = resourceType ;
@@ -283,3 +297,4 @@ window.onload = function()
 	<div id="galerie"><div>
 </body>
 </html>
+
