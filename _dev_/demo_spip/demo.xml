@@ -37,8 +37,10 @@
     ]]>
     </content>
     <actions>
-      <mouse>
+      <mouse loop="true">
         <set selector="div.jqmWindow" />
+        <!-- time is in seconds -->
+        <pause time="1"/>
         <!-- speed is in px/s -->
         <move selector="table.cellule-h-table[a[@href*='?exec=rubriques_edit&amp;new=oui']]" speed="200" />
         <click />
