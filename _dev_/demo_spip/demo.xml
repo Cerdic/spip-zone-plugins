@@ -24,6 +24,9 @@
       </p>          
     ]]>
     </content>
+    <actions>
+      <reversehighlight selector="table.cellule-h-table[a[@href*='?exec=rubriques_edit&amp;new=oui']]" />    
+    </actions>
   </step>
   <step num="3">
     <title>Demo step 3</title>  
@@ -33,6 +36,14 @@
       </p>          
     ]]>
     </content>
+    <actions>
+      <mouse>
+        <set selector="div.jqmWindow" />
+        <!-- speed is in px/s -->
+        <move selector="table.cellule-h-table[a[@href*='?exec=rubriques_edit&amp;new=oui']]" speed="200" />
+        <click />
+      </mouse>
+    </actions>
   </step>
   <step num="4">
     <title>Demo step 4</title>  
