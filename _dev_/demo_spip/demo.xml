@@ -37,18 +37,29 @@
     ]]>
     </content>
     <actions>
+      <!-- the loop attribute enable looping of mouse actions -->
       <mouse loop="true">
+        <!-- set the mouse image to the offset of the element selected by selector -->
         <set selector="div.jqmWindow" />
         <!-- time is in seconds -->
         <pause time="1"/>
         <!-- speed is in px/s -->
         <move selector="table.cellule-h-table[a[@href*='?exec=rubriques_edit&amp;new=oui']]" speed="200" />
+        <!-- when using "set" or "move", the targeted element is stored, 
+             enabling to show a click image on the last selected element.
+             Optionally a delayEvent="seconds" attribute will fire a real 
+             click event on the element itself after n seconds from the
+             moment the "click" image is displayed. 
+        -->
         <click />
       </mouse>
     </actions>
   </step>
   <step num="4">
     <window>
+      <!-- styling of the window 
+           each rule defines a name property and its value
+      -->
       <css>
         <rule name="top" val="10px" />
         <rule name="left" val="10px" />
