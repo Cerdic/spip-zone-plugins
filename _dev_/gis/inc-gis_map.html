@@ -22,10 +22,19 @@
     		map.enableDoubleClickZoom();
     		map.enableContinuousZoom();
     		markerManager = new GMarkerManager(map);
-			<BOUCLE_kml(documents){id_article?}{id_rubrique ?}{0,1}{extension=kml}>
+			<BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>
+			[(#ENV{id_article}|=={''}|?{'',
 			var kml = new GGeoXml("#URL_SITE_SPIP/#URL_DOCUMENT");
 			map.addOverlay(kml)
-			</BOUCLE_kml>
+			})]
+			</BOUCLE_kml_art>
+			<BOUCLE_kml_rub(documents){id_rubrique}{0,1}{extension=kml}>
+			[(#ENV{id_rubrique}|=={''}|?{'',
+			var kml = new GGeoXml("#URL_SITE_SPIP/#URL_DOCUMENT");
+			map.addOverlay(kml)
+			})]
+			</BOUCLE_kml_rub>
+			<//B_kml_art>
   			//leemo-lo documento dos marcadores
        			$.get('[(#URL_PAGE{rss-gis})]', {[id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml){
     				//xml almacena en un objeto xml los datos recogidos del documento leido
