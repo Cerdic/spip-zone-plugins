@@ -9,7 +9,7 @@
 
 	[<div id="erreur"><p>(#ENV*{mess_error})</p></div>]
 
-	<div id="block">
+	<div class="block">
 
 		
 	<br />
@@ -17,8 +17,8 @@
 	<table>
 	<tr><td valign="top" width="200">
 	
-		<div id="block-titre">&nbsp;<b><:opconfig:redigez_article:></b></div>
-		<div id="block-contenu">
+		<div class="block-titre">&nbsp;<b><:opconfig:redigez_article:></b></div>
+		<div class="block-contenu">
 
 		<p><label><b><small><:opconfig:publie_titre:>&nbsp;[<:opconfig:obligatoire:>]</small></b></label></p>
 		<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="60" maxlength="80"></p>
@@ -41,14 +41,14 @@
 		[(#ENV*{formulaire_agenda})]
 		<br />
 
-		<div id="block-titre">#BOUTON_BLOCK&nbsp;&nbsp;<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b></div>
+		#BOUTON_BLOCK&nbsp;&nbsp;<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b>
 
 		<div style="background-color: #eee; text-style: justify; margin: 5px; margin-right:55px">
 		<p><small><:opconfig:identif_explique:></small></p>
 		</div>
 
 		#DEBUT_BLOCK
-		<div id="block-contenu"><br />
+		<div class="block-contenu"><br />
 
 		<div style="font-size : 0.8em;">
 			<table cellspacing="0" cellpadding="0" border="0">
@@ -71,7 +71,7 @@
 	</table>
 	<br />
 
-	<div id="block-pied">
+	<div class="block-pied">
 		&nbsp;&nbsp;<label><b><:opconfig:publie_rubrique:></b></label>
 		<select name="rubrique" value="[(#ENV**{rubrique})]">
 			<BOUCLE_rubrique_op(op_rubriques)>
