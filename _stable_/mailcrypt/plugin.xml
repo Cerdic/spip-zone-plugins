@@ -1,0 +1,22 @@
+<plugin>
+<nom>MailCrypt</nom>
+<auteur>Alexis Roussel, Paolo</auteur>
+<version>0.6</version>
+<etat>stable</etat>
+<description><multi>[fr]
+Les liens e-mail contenus dans les articles sont encod&#233;s mais sont toujours utilisables (lire readme.txt pour les d&#233;tails).
+<p>La balise #CRYPTM_IMP, &#224; placer dans une boucle article, cr&#233;e un lien vers une page d'impression dans une nouvelle fen&#234;tre.</p>
+<p>(Ce plugin est la mise &#224; jour de ce systeme : [->http://www.spip-contrib.net/Mailcrypt-systeme-antispam])</p>
+</multi>
+</description>
+<fonctions>crypt.php</fonctions>
+<prefix>cryptm</prefix>
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>decrypt.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>post_propre</nom>
+	<action>cryptage</action>
+</pipeline>
+</plugin>
