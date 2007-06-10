@@ -1,0 +1,74 @@
+<plugin>
+<nom> <!-- Nom du plugin -->
+Acc&#232;s restreint par groupes
+</nom>
+<auteur>        <!-- Auteur du plugin -->
+Coyote &#38; cy_altern _
+merci &#224; Cedric pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
+		</auteur>
+		<version>
+		1.0.3 (spip 192)
+		</version>
+		<etat>
+		stable
+		</etat>
+		<description>
+		Permet de g&#233;rer l'acc&#232;s restreint (parties publique et priv&#233;e) &#224; des rubriques
+en utilisant des groupes d'utilisateurs.<br />
+		Documentation pre 1.9.2 : [->http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces]
+		Documentation : [->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]<br /><br />
+					{{/!\ ATTENTION !}} <br />
+					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultan&#233;ment !<br />
+- Si vous {{mettez &#224; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&#232;s restreint par groupes"}}
+version 0.61 ou 0.7, vous {{DEVEZ}} proc&#233;der &#224; la mise &#224; jour des tables de la base de donn&#233;es
+en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin !
+					<br />
+					v 1.0.1 : support de exec=articles_versions pour le filtrage de l'espace priv&#233;
+<br />
+v 1.0.2 : impl&#233;mentation du crit&#232;re {{tout_voir}} et du filtre {{accesgroupes_visualise}}
+pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&#232;s dans les squelettes
+					<br />
+					Ce plugin est compatible avec les versions <strong>1.9.0</strong> et <strong>1.9.1</strong> de spip.
+					Il n’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.
+<br />v 1.0.3 Ce script devient compatible avec SPIP 1.9.2 et +
+		</description>
+				<lien>http://www.spip-contrib.net/Le-plugin-acces-restreint-par</lien> <!-- URI de documentation -->
+				<icon>img_pack/groupe-48.png</icon>
+		<prefix>
+		accesgroupes
+		</prefix>
+				<!-- fichier charge a chaque hit -->
+		<options>
+			inc/accesgroupes_options.php
+		</options>
+				<!-- fichier charge a chaque recalcul -->
+		<fonctions>
+			inc/accesgroupes_fonctions.php
+		</fonctions>
+		<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+<pipeline>
+<nom>ajouter_boutons</nom>
+<inclure>accesgroupes_pipelines.php</inclure>
+</pipeline>
+<!--
+<pipeline>
+<nom>affiche_milieu</nom>
+<inclure>accesgroupes_pipelines.php</inclure>
+</pipeline>
+-->
+<!--
+<pipeline>
+<nom>affichage_final</nom>
+<inclure>accesgroupes_pipelines.php</inclure>
+</pipeline>
+-->
+<!--
+<pipeline>
+<nom>pre_typo</nom>
+<inclure>accesgroupes_pipelines.php</inclure>
+</pipeline>
+-->
+<chemin dir='' />
+</plugin>
+
+
