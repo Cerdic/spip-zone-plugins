@@ -118,6 +118,6 @@ cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 //cs_log("Fin   : inc_description_outil_dist({$outil['id']}) - {$outil['nb_variables']} variables(s) trouvée(s)");
 	$res = preg_replace(',(<br />)?</fieldset><fieldset><legend></legend>,', '', $res);
 	$modif=$modif?'<div style="font-weight:bold; color:green; margin:0.4em; text-align:center">&gt;&nbsp;'._T('cout:vars_modifiees').'&nbsp;&lt;</div>':'';
-	return ajax_action_greffe("description_outil-$index", $res, $modif);
+	return cs_ajax_action_greffe("description_outil-$index", $res, $modif);
 }
 ?>

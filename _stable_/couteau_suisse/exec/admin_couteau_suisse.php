@@ -18,6 +18,14 @@ if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
 function cs_admin_styles_et_js() {
 	global $couleur_claire, $couleur_foncee;
+	// SPIP v193
+/*
+	if (!$couleur_claire) { 
+		$couleurs = charger_fonction('couleurs', 'inc'); 
+		$couleurs = $couleurs($GLOBALS['auteur_session']['prefs']['couleur']);
+		print_r($couleurs);
+	}
+*/
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding *{
@@ -67,7 +75,12 @@ div.cadre-padding div.droite label {
 	width:10.1em;
 }
 /* debut SPIP v1.93 */
-div.cadre-padding .titrem {
+div.cadre_padding form{
+	padding:0;
+	margin:0;
+}
+
+div.cadre_padding .titrem {
 	display:inline;
 	font-weight:normal;
 	background-position:left 1pt;

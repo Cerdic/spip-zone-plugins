@@ -27,11 +27,18 @@ if ($GLOBALS['spip_version_code']<1.92) {
 			return false;
 		}
 	}
+/*
 	if (!function_exists('ajax_action_greffe')) {
 		function ajax_action_greffe($idom, $corps, $br='<br />')	{
 			return _request('var_ajaxcharset') ? "$br$corps"	: "\n<div id='$idom'>$corps\n</div>\n";
 		}
 	}
+*/
+}
+
+// SPIP 1.93 a change cette fonction. donc, en attendant mieux...
+function cs_ajax_action_greffe($idom, $corps, $br='<br />')	{
+	return _request('var_ajaxcharset') ? "$br$corps"	: "\n<div id='$idom'>$corps\n</div>\n";
 }
 
 function cs_suppr_metas_var($meta, $new = false) {

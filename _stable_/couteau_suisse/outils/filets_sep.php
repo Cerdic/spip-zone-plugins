@@ -10,7 +10,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function filets_sep_installe() {
-//cs_log('chatons_installe()');
+//cs_log('filets_sep_installe()');
 	$path = dirname(find_in_path('img/filets/test'));
 	$liste = $filets = array();
 	$dossier = opendir($path);
