@@ -19,6 +19,7 @@
     actionsToRevert: [],
     path_resources: "",
     queues: {},
+    css:{},
     init: function(url,name,step) {
       $.get(url,function(data){
         jDemo.xmlData = {data:data,steps:{}};
@@ -66,8 +67,10 @@
           var $rule = $(this);
           css[$rule.attr('name')] = $rule.attr('val'); 
         });
-        $jDemoWindow.css(css);  
+        $.extend(jDemo.css,css);
       }
+      $jDemoWindow.css(jDemo.css);  
+
       
       $('#jDemo_prev').click(jDemo.navigate);
       $('#jDemo_next').click(jDemo.navigate);
@@ -82,11 +85,12 @@
       var $actions = $('actions>',$step);
       $actions.each(function(){
         $el = $(this);
+        var revert = ($el.attr("revert")=="false"?false:true); 
         switch(this.tagName) {
           case 'highlight':
             var $target = $($el.attr('selector'));
             var curr_color = $target.css('background-color');
-            jDemo.actionsToRevert.push(function() {$target.css('background-color',curr_color)});
+            if(revert) jDemo.actionsToRevert.push(function() {$target.css('background-color',curr_color)});
             $target.css('background-color',$el.attr('color') || 'yellow');
             break;
           case 'reversehighlight':
@@ -99,12 +103,16 @@
             offset.height = $target.height();
             offset.bottom = offset.top+offset.height;
             offset.right = offset.left+$target.width();
-            var $overlay_base = $('<div class="jqmOverlay"></div>').css({position:'absolute','z-index':3000-1,opacity:0.5});
-            var $overlay = $([]).add($overlay_base.clone().css({top:'0px',left:'0px',width:$(document).width(),height:offset.top})).
-            add($overlay_base.clone().css({top:offset.bottom,left:'0px',width:$(document).width(),height:$(document).height()-offset.bottom})).
-            add($overlay_base.clone().css({top:offset.top,left:'0px',width:offset.left,height:offset.height})).
-            add($overlay_base.clone().css({top:offset.top,left:offset.right,width:$(document).width()-offset.right,height:offset.height}));
-            jDemo.actionsToRevert.push(function() {$overlay.remove();});
+            offset.totalHeight = Math.max($(window).height(),$(document).height());
+            var $overlay = $('#jDemo_overlay');
+            if(!$overlay.size()) {
+              var $overlay_base = $('<div class="jqmOverlay"></div>').css({position:'absolute','z-index':3000-1,opacity:0.5});
+              $overlay = $('<div id="jDemo_overlay">').append($overlay_base.clone().css({top:'0px',left:'0px',width:$(document).width(),height:offset.top})).
+              append($overlay_base.clone().css({top:offset.bottom,left:'0px',width:$(document).width(),height:offset.totalHeight-offset.bottom})).
+              append($overlay_base.clone().css({top:offset.top,left:'0px',width:offset.left,height:offset.height})).
+              append($overlay_base.clone().css({top:offset.top,left:offset.right,width:$(document).width()-offset.right,height:offset.height}));
+            }
+            if(revert) jDemo.actionsToRevert.push(function() {$overlay.remove();});
             $("body").append($overlay);
             break;
           case 'mouse':
@@ -124,7 +132,7 @@
                     jDemo.queues[qName].target = $target;
                     $mouse = $('<img id="jDemo_pointer" src="'+jDemo.path_resources+'Cursor.png">').css({position:'absolute',left:offset.left,top:offset.top,zIndex:3000+2});
                     $("body").append($mouse);
-                    jDemo.actionsToRevert.push(function() {$mouse.remove();});
+                    if(revert) jDemo.queues[qName].actionsToRevert.push(function() {$mouse.remove();});
                     jDemo.executeQueue(qName);
                   });
                   break;
@@ -145,7 +153,7 @@
                       var offset = $('#jDemo_pointer').offset({scroll:false});
                       var $click = $('<img id="jDemo_click" src="'+jDemo.path_resources+'CursorClick.png">').css({position:'absolute',left:offset.left,top:offset.top,zIndex:3000+1});
                       $("body").append($click);
-                      jDemo.actionsToRevert.push(function() {$click.remove();});
+                      if(revert) jDemo.queues[qName].actionsToRevert.push(function() {$click.remove();});
                       if(delay) {
                         var q = jDemo.queues[qName];
                         jDemo.executeDelayed(q,function(){                          
@@ -164,7 +172,7 @@
                     break;
               }
             });
-            jDemo.queues[qName] = {queue:queue,loop:($(this).attr("loop") || false),index:0,timeOutHandle:[]};
+            jDemo.queues[qName] = {queue:queue,loop:($(this).attr("loop") || false),index:0,timeOutHandle:[],actionsToRevert:[]};
             jDemo.executeQueue(qName);
             break;
         }
@@ -192,16 +200,23 @@
       else 
         if(q.loop) {
           q.index = 0;
-          var f = function() {jDemo.revertActions();jDemo.executeQueue(queue)}; 
+          var f = function() {
+            var action;
+            while(action = q.actionsToRevert.pop())
+              action();
+            jDemo.executeQueue(queue)
+          }; 
           jDemo.executeDelayed(q,f,1000);
         }
     },
     stopLoops: function() {
       $.each(jDemo.queues,function(i,n){
         if(n) {
-          var handle;
+          var handle,action;
           while(handle = n.timeOutHandle.pop())
             window.clearTimeout(handle);
+          while(action = n.actionsToRevert.pop())
+            action();  
         }
         jDemo.queues[i] = null;
       })
