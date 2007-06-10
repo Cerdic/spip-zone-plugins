@@ -48,6 +48,16 @@
     </actions>
   </step>
   <step num="4">
+    <window>
+      <css>
+        <rule name="top" val="10px" />
+        <rule name="left" val="10px" />
+        <rule name="marginLeft" val="0" />
+        <rule name="width" val="200px" />
+        <rule name="height" val="100px" />
+        <rule name="overflow" val="auto" />
+      </css>
+    </window>
     <title>Demo step 4</title>  
     <content><![CDATA[
       <p>

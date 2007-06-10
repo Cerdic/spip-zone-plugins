@@ -37,8 +37,8 @@
       $steps = jDemo.xmlData.steps[name]; 
       
       if(!step) step = 1;
+      $step = $steps.filter('[@num='+step+']');
       step--;
-      $step = $steps.eq(step);
       if(!$step.size())
         return alert("Step non trovato");
       var title = $('title',$step).text();
@@ -56,9 +56,22 @@
   
       res += ' <a href="#" class="jqmClose">Chiudi</a></div></div>';
       $('body').append(res);
+      
+      $window = $step.find('window');
+      $jDemoWindow = $('#jDemo_window'); 
+      if($window.size()) {
+        var $css = $window.find('css');
+        var css = {};
+        $css.find('>rule').each(function(){
+          var $rule = $(this);
+          css[$rule.attr('name')] = $rule.attr('val'); 
+        });
+        $jDemoWindow.css(css);  
+      }
+      
       $('#jDemo_prev').click(jDemo.navigate);
       $('#jDemo_next').click(jDemo.navigate);
-      $('#jDemo_window').jqm({overlay:0,onHide:function(hash){
+      $jDemoWindow.jqm({overlay:0,onHide:function(hash){
         hash.w.hide();
         jDemo.stopLoops();
         jDemo.revertActions();
@@ -99,6 +112,7 @@
               alert("E' necessario il plugin dimensions");
               break;
             }
+            var qName = 'mouse'+$step.attr('num');
             var queue = [];
             $(">",this).each(function(){
               $cmd = $(this);
@@ -107,10 +121,11 @@
                   var $target = $($cmd.attr('selector'));
                   var offset = $target.offset({scroll:false});
                   queue.push(function(){
-                    jDemo.queues["mouse"].target = $target;
+                    jDemo.queues[qName].target = $target;
                     $mouse = $('<img id="jDemo_pointer" src="'+jDemo.path_resources+'Cursor.png">').css({position:'absolute',left:offset.left,top:offset.top,zIndex:3000+2});
-                    $("body").append($mouse);jDemo.executeQueue("mouse");
+                    $("body").append($mouse);
                     jDemo.actionsToRevert.push(function() {$mouse.remove();});
+                    jDemo.executeQueue(qName);
                   });
                   break;
                 case "move":
@@ -118,10 +133,10 @@
                   var speed = 1000/($cmd.attr('speed') || 100);
                   var offset = $target.offset({scroll:false});
                   queue.push(function(){
-                    jDemo.queues["mouse"].target = $target;
+                    jDemo.queues[qName].target = $target;
                     var offsetPointer = $('#jDemo_pointer').offset({scroll:false});
                     var distance = Math.sqrt(Math.pow(offset.top-offsetPointer.top,2)+Math.pow(offset.left-offsetPointer.left,2));
-                    $('#jDemo_pointer').animate({top:offset.top,left:offset.left},parseInt(distance*speed),function(){jDemo.executeQueue("mouse");});
+                    $('#jDemo_pointer').animate({top:offset.top,left:offset.left},parseInt(distance*speed),function(){jDemo.executeQueue(qName);});
                     });
                   break;
                  case "click":
@@ -132,21 +147,25 @@
                       $("body").append($click);
                       jDemo.actionsToRevert.push(function() {$click.remove();});
                       if(delay) {
-                        window.setTimeout(function(){jDemo.queues["mouse"].target.click();jDemo.executeQueue("mouse");},delay*1000);
+                        var q = jDemo.queues[qName];
+                        jDemo.executeDelayed(q,function(){                          
+                            q.target.click();
+                            jDemo.executeQueue(qName);
+                        },delay*1000);
                       } else 
-                        jDemo.executeQueue("mouse");
+                        jDemo.executeQueue(qName);
                     });
                     break;
                 case "pause":
                     var time = $cmd.attr('time')*1000 || 1000;
                     queue.push(function(){
-                      window.setTimeout(function(){jDemo.executeQueue("mouse")},time);
+                      jDemo.executeDelayed(jDemo.queues[qName],function(){jDemo.executeQueue(qName)},time);
                     });
                     break;
               }
             });
-            jDemo.queues["mouse"] = {queue:queue,loop:($(this).attr("loop") || false),index:0};
-            jDemo.executeQueue("mouse");
+            jDemo.queues[qName] = {queue:queue,loop:($(this).attr("loop") || false),index:0,timeOutHandle:[]};
+            jDemo.executeQueue(qName);
             break;
         }
       });
@@ -174,15 +193,21 @@
         if(q.loop) {
           q.index = 0;
           var f = function() {jDemo.revertActions();jDemo.executeQueue(queue)}; 
-          q.timeOutHandle = window.setTimeout(f,1000);
+          jDemo.executeDelayed(q,f,1000);
         }
     },
     stopLoops: function() {
       $.each(jDemo.queues,function(i,n){
-        if(n && n.timeOutHandle)
-          window.clearTimeout(n.timeOutHandle);
+        if(n) {
+          var handle;
+          while(handle = n.timeOutHandle.pop())
+            window.clearTimeout(handle);
+        }
         jDemo.queues[i] = null;
       })
+    },
+    executeDelayed: function(queue,f,delay) {
+      if(queue) queue.timeOutHandle.push(window.setTimeout(f,delay));
     }
   }
 })(jQuery)
