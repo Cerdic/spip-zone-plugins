@@ -1,0 +1,23 @@
+[(#REM)
+	Modele pour le XSPF Web Music Player (Flash): jukebox des mp3 en portfolio
+	http://musicplayer.sourceforge.net/
+	
+	<template><musicplayer123></template>
+	ou 123 est l'id article fournissant les documents mp3 attaches]
+
+<script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
+
+<p id="player1">
+<a href="http://www.macromedia.com/go/getflashplayer">
+Get the Flash Player</a> to see this player.
+</p>
+
+<script type="text/javascript">
+
+	var s1 = new SWFObject("#CHEMIN{xspf_player.swf}","musicplayer","600","200","7");
+	s1.addVariable("playlist_url",
+		encodeURIComponent("spip.php?page=xspf&type=mp3&id_article=[(#ENV{id_musicplayer})]"))
+	s1.addVariable("autoload","true");
+	s1.write("player1");
+
+</script>

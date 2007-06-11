@@ -1,6 +1,6 @@
 <plugin>
 	<nom>
-	Liste de documents XSPF
+	Liste de documents XSPF + mod&egrave;les players
 	</nom>
 	<auteur>collectif spip [->http://spip.net/]
 	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL pour la partie spip
@@ -21,9 +21,13 @@ Ce plugin fournit un squelette produisant des listes de documents au format
 
 Il int&egrave;gre [swfobject.js->http://blog.deconcept.com/swfobject/] pour faciliter l'inclusion des contenus Flash.
 
-Il inclut des mod&egrave;les pour players comme [rotator->http://www.jeroenwijering.com/?item=Flash_Image_Rotator] mais peut être utilis&eacute; avec tout logiciel compatible xspf
+Il inclut des mod&egrave;les pour players comme
+-* [Rotator->http://www.jeroenwijering.com/?item=Flash_Image_Rotator] <code><rotator123></code> o&ugrave; 123 est un id article fournissant les images.
+-* [Musicplayer->http://musicplayer.sourceforge.net/] <code><musicplayer123></code> o&ugrave; 123 est un id article fournissant les mp3.
 
-Attention, la licence de certains de ces players est semi-commerciale, c'est pourquoi ils ne sont pas inclus dans cette contribution. Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.
+Il peut de plus &egrave;tre utilis&eacute; avec tout logiciel compatible xspf.
+
+Attention, la licence de certains de ces players (rotator) est semi-commerciale, c'est pourquoi ils ne sont pas inclus dans cette contribution. Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.
 	</description>
 	<lien>
 	[Documentation sur contrib->http://www.spip-contrib.net/]
