@@ -7,16 +7,21 @@
 	_ Le logo xifish.gif est la propri&eacute;t&eacute; de [->http://www.xiph.org/], tout droit r&eacute;serv&eacute;
 	</auteur>
 	<version>
-	0.0.0
+	0.0.1
 	</version>
 	<etat>
 	dev
 	</etat>
+	<icon>
+	_img/xifish.gif
+	</icon>
 	<description>
 Ce plugin fournit un squelette produisant des listes de documents au format
 [XSPF->http://www.xspf.org/]
 
-Il inclut des mod&agrave;les pour players comme [rotator->http://www.jeroenwijering.com/?item=Flash_Image_Rotator] mais peut être utilis&eacute; avec tout logiciel compatible xspf
+Il int&egrave;gre [swfobject.js->http://blog.deconcept.com/swfobject/] pour faciliter l'inclusion des contenus Flash.
+
+Il inclut des mod&egrave;les pour players comme [rotator->http://www.jeroenwijering.com/?item=Flash_Image_Rotator] mais peut être utilis&eacute; avec tout logiciel compatible xspf
 
 Attention, la licence de certains de ces players est semi-commerciale, c'est pourquoi ils ne sont pas inclus dans cette contribution. Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.
 	</description>
