@@ -7,7 +7,7 @@ function boucle_MOTS($id_boucle, &$boucles) {
 	$boucle->from[$id_table] =  "spip_mots";
 
 	// Restreindre aux mots cles non techniques
-	if (!isset($boucle->modificateur['tout'])&&!isset($boucle->modificateur['criteres']['technique'])) {
+	if (!isset($boucle->modificateur['tout'])) {
 		$boucle->from["groupes"] =  "spip_groupes_mots";
 		$boucle->where[]= array("'='", "'groupes.id_groupe'", "'$id_table.id_groupe'");
 		$boucle->where[]= array("'='", "'groupes.technique'", "'\"\"'");
@@ -33,5 +33,9 @@ function boucle_GROUPES_MOTS($id_boucle, &$boucles) {
 
 	return calculer_boucle($id_boucle, $boucles); 
 }
+
+
+
+
 
 ?>
