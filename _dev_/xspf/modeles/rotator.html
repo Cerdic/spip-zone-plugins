@@ -1,0 +1,35 @@
+[(#REM)
+	Modele pour le Flash image Rotator 3.8: diaporama avec les images en portfolio
+	http://www.jeroenwijering.com/extras/readme.html
+	http://www.jeroenwijering.com/?item=Flash_Image_Rotator
+	This script is licensed under a Creative Commons License.
+	It allows you to use and modify the script for noncommercial purposes. 
+	For commercial use, Jeroenwijering distribute licenses of the script for 15 euros. 
+	For more info and instant ordering, please advance to his online order page!
+	http://www.jeroenwijering.com/?order=form
+	
+	Modele spip mis au point sur irc a l'initiative d'alexandra
+	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
+	Merci a eux.
+	
+	<template><rotator123></template>
+	ou 123 est l'id article fournissant les documents attaches]
+
+<script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
+
+<p id="player1">
+<a href="http://www.macromedia.com/go/getflashplayer">
+Get the Flash Player</a> to see this player.
+</p>
+
+<script type="text/javascript">
+
+	var s1 = new SWFObject("#CHEMIN{imagerotator.swf}","rotator","600","200","7");
+	s1.addVariable("file",
+		encodeURIComponent("spip.php?page=xspf&type=jpg|png|gif&id_article=[(#ENV{id_rotator})]"))
+	s1.addVariable("transition","lines");
+	s1.addVariable("overstretch","false");
+	s1.addVariable("backcolor","0xFFFFFF");
+	s1.write("player1");
+
+</script>

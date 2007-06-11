@@ -1,0 +1,24 @@
+#CACHE{3600}[(#HTTP_HEADER{Content-type: application/xspf+xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<BOUCLE_article(ARTICLES) {id_article}>
+[(#SET{img_defaut,[(#LOGO_ARTICLE_RUBRIQUE||extraire_attribut{src}|sinon{[(#CHEMIN{_img/fish_xiph_org.png})]})]})]
+
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+<title>[(#NOM_SITE_SPIP|translitteration)]: [(#TITRE|translitteration)]</title>
+
+<B_doc>
+    <trackList>
+<BOUCLE_doc(DOCUMENTS){id_article}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>
+
+    <track>
+    <location>[(#URL_DOCUMENT|url_absolue)]</location>
+    <image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>
+    <annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>
+    </track>
+</BOUCLE_doc>
+    </trackList>
+</B_doc>
+</playlist>
+
+</BOUCLE_article>
+<:aucun_article:>
+<//B_article>

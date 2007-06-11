@@ -1,0 +1,29 @@
+<plugin>
+	<nom>
+	Liste de documents XSPF
+	</nom>
+	<auteur>collectif spip [->http://spip.net/]
+	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL pour la partie spip
+	_ Le logo xifish.gif est la propri&eacute;t&eacute; de [->http://www.xiph.org/], tout droit r&eacute;serv&eacute;
+	</auteur>
+	<version>
+	0.0.0
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+Ce plugin fournit un squelette produisant des listes de documents au format
+[XSPF->http://www.xspf.org/]
+
+Il inclut des mod&agrave;les pour players comme [rotator->http://www.jeroenwijering.com/?item=Flash_Image_Rotator] mais peut être utilis&eacute; avec tout logiciel compatible xspf
+
+Attention, la licence de certains de ces players est semi-commerciale, c'est pourquoi ils ne sont pas inclus dans cette contribution. Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.
+	</description>
+	<lien>
+	[Documentation sur contrib->http://www.spip-contrib.net/]
+	</lien>
+	<prefix>
+	xspf
+	</prefix>
+</plugin>
