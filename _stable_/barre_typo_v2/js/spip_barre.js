@@ -8,6 +8,23 @@ var theSelection = false;
 // Variables globales
 var currentTimeout;
 
+// Ancienne function de SPIP 1.9.2 non dispo en 1.9.3
+function bte_swap_couche(couche, rtl, dir, no_swap) { 
+	var layer; 
+	var triangle = document.getElementById('triangle' + couche); 
+	if (!(layer = findObj('Layer' + couche))) return; 
+	if (layer.style.display == "none"){ 
+			layer.style.display = 'block'; 
+	} else { 
+			layer.style.display = 'none'; 
+	} 
+}
+
+if(typeof swap_couche=="undefined"){
+	swap_couche = bte_swap_couche;
+	alert("ici");
+}
+
 // Déclencher une fonction après n secondes ou annuler un appel précédent à la fonction
 function delayFunction(callbackFunction, seconds){
 	if(this.currentTimeout)
