@@ -25,13 +25,16 @@ function mnogo_verifier_base(){
 }
 	
 
-function mnogo_getresults($recherche, $debut, $nombre){
+function mnogo_getresults($recherche, $debut, $nombre, $c=false){
 	global $tables_principales;
 	global $mnogo_resultats_synthese;
 	global $mnogo_resultats;
 	$url = isset($GLOBALS['meta']['mnogo_url_search'])?$GLOBALS['meta']['mnogo_url_search']:"";
-	$qs = mnogo_querystring($recherche,$debut,$nombre);
+	$qs = mnogo_querystring($recherche,$debut,$nombre,$c);
 	$url .= (strpos($url,"?")!==FALSE)?"&$qs":"?$qs";
+	$hashwere = hash_where($recherche, $c);
+	$hash = mnogo_hash($recherche, $c);
+
 
 	$arbre = array();
 	include_spip('inc/distant');
@@ -47,22 +50,21 @@ function mnogo_getresults($recherche, $debut, $nombre){
 		$dernier = intval(applatit_arbre($arbre['recherche'][0]['balise_MNOGO_DERNIER']));
 		$resume = applatit_arbre($arbre['recherche'][0]['balise_MNOGO_RESUME_RESULTATS']);
 		// regarder si le resume etait la et a change
-		$res = spip_query("SELECT * FROM spip_mnogosearch_summary WHERE ".hash_where($recherche));
+		$res = spip_query("SELECT * FROM spip_mnogosearch_summary WHERE $hashwere");
 		if ($row = spip_fetch_array($res)){
 			$changed = false;
 			$changed = $changed OR ($row['total']!=$total);
 			$changed = $changed OR ($row['resume_resultats']!=$resume);
 			if ($changed){
-				spip_query("UPDATE FROM spip_mnogosearch SET valide='non' WHERE ".hash_where($recherche));
-				spip_query("UPDATE FROM spip_mnogosearch_summary SET resume_resultats=".spip_abstract_quote($resume).", total=".spip_abstract_quote($total).", maj=NOW(), WHERE ".hash_where($recherche));
+				spip_query("UPDATE FROM spip_mnogosearch SET valide='non' WHERE $hashwere");
+				spip_query("UPDATE FROM spip_mnogosearch_summary SET resume_resultats=".spip_abstract_quote($resume).", total=".spip_abstract_quote($total).", maj=NOW(), WHERE $hashwere");
 			}
 		}
 		else
-			spip_query("INSERT INTO spip_mnogosearch_summary SET resume_resultats=".spip_abstract_quote($resume).", total=".spip_abstract_quote($total).", maj=NOW(), hash=0x".mnogo_hash($recherche));
+			spip_query("INSERT INTO spip_mnogosearch_summary SET resume_resultats=".spip_abstract_quote($resume).", total=".spip_abstract_quote($total).", maj=NOW(), hash=0x$hash");
 
 		if (isset($arbre['recherche'][0]['resultats'][0]['resultat'][$dernier-$premier])){
-			$hashwere = hash_where();
-			$value['hash'] = "0x".mnogo_hash($recherche);
+			$value['hash'] = "0x".$hash;
 			foreach ($arbre['recherche'][0]['resultats'][0]['resultat'] as $key=>$liste){
 				$value['numero'] = $key+$premier;
 				$value['titre'] = spip_abstract_quote(applatit_arbre($liste['balise_MNOGO_ITEM_TITRE']));
