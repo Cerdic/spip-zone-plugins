@@ -296,6 +296,10 @@ _ Merci de votre compr&eacute;hension.",
 	'glossaire:description' => "Gestion d'un glossaire interne li&#233; &#224; un groupe de mots-cl&#233;s nomm&#233; &laquo;&nbsp;Glossaire&nbsp;&raquo;. Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[Nombre maximal de liens par mot :->%glossaire_limite%]]
 _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 
+// ---------------------------------------------------------------------------
+	'mailcrypt:nom' => 'MailCrypt',
+	'mailcrypt:description' => "Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d'activer la messagerie du lecteur. Cet outil antispam tente d'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.",
+
 /*
 	':nom' => '',
 	':description' => '',

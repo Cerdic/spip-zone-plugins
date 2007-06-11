@@ -506,6 +506,14 @@ add_outil( array(
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 ));
 
+add_outil( array(
+	'id' => 'mailcrypt',
+	'auteur' 	 => 'Alexis Roussel, Paolo',
+	'categorie'	 => 'typo-corr',
+	'pipeline:post_propre' => 'mailcrypt_post_propre',
+	'code:js' => "function lien(ad){ return 'mailto:' + ad.replace(/\.\..+t\.\./,'@'); }",
+));
+
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
 // http://www.spip-contrib.net/Citations
