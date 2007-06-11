@@ -212,6 +212,14 @@ function cs_les_tests() {
 //	test_outil(cs_test_fun($textes, 'typo'), 'Test sur : echappements');
 	test_outil(cs_test_fun($textes, 'liens_orphelins'), 'Test sur : liens_orphelins()');
 
+	$textes = array(
+		"mailto:nom@organisation.domaine et : mailto:Fabien.Gandon@sophia.inria.fr (on supprime ces liens)",
+		"moi+moi@world.com, mailto:moi-moi@world.com, mailto:nom@provider.com?subject=renseignement",
+		"pat@moi.com [->pat@moi.com] [pat->pat@moi.com]",
+		"<a href='mailto:moi@toto.com'>Moi</a> et : <a href='mailto:moi@toto.com'>moi@toto.com</a>",
+	);
+	test_outil(cs_test_fun($textes, 'mailcrypt_post_propre'), 'Test sur : mailcrypt_post_propre()');
+
 /*
 define('_COULEURS_FONDS', 1); define('_COULEURS_SET', 1);
 define('_COULEURS_PERSO', "bas =#99CC11, haut= brown, test= bleu");
