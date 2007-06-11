@@ -22,7 +22,6 @@ function bte_swap_couche(couche, rtl, dir, no_swap) {
 
 if(typeof swap_couche=="undefined"){
 	swap_couche = bte_swap_couche;
-	alert("ici");
 }
 
 // Déclencher une fonction après n secondes ou annuler un appel précédent à la fonction
