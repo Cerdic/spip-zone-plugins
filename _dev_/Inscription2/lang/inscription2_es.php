@@ -105,7 +105,11 @@ El equipo de @nom_site@',
 'septembre' => 'Septiembre',
 'octobre' => 'Octubre',
 'novembre' => 'Noviembre',
-'decembre' => 'Diciembre'
+'decembre' => 'Diciembre',
+
+'accesrestreint' => 'Acceso Restringido',
+'choisir_zones' => 'Elija las zonas a las que seran afectados los nuevos adherentes del sitio'
+
 
 );
 

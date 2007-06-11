@@ -22,8 +22,10 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
 		if($val!='' and !ereg("^.+_(fiche|table).*$", $cle)){
+			if($cle== 'zones')
+				continue;
 			
-			if($val!='' and $cle == 'username')
+			elseif($val!='' and $cle == 'username')
 				$var_user['login'] = _request($cle);
 			
 			elseif($val!='' and $cle == 'naissance')
@@ -42,14 +44,19 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 			}
 			elseif(ereg("^newsletter.*$", $cle))
 				$var_user['newsletters'] = _request('newsletters');
-			
+	
+			elseif(ereg("^statut_rel.*$", $cle))
+				$var_user['statut_relances'] = lire_config('inscription2/statut_rel');
+	
+			elseif($cle=='accesrestreint') 
+				$var_user['zones'] = lire_config('inscription2/zones');
+
 			else
 				$var_user[$cle] = _request($cle);
-		}		
+		}
 	}
-	$mail = $var_user[email];
 	$commentaire = true;
-	if($mail){
+	if($var_user[email]){
 		$commentaire = message_inscription2($var_user, $mode);
 		if (is_array($commentaire)) 
 			$commentaire = envoyer_inscription2($commentaire);
@@ -90,7 +97,7 @@ function inscription2_nouveau($declaration){
 	$declaration['statut'] = 'aconfirmer';
 	//insertion des données ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
-		if($cle == 'newsletters')
+		if($cle == 'newsletters' or $cle == 'zones')
 			continue;
 		if ($cle == 'email' or $cle == 'nom' or $cle == 'bio' or $cle == 'statut' or $cle == 'login')
 			$auteurs[$cle] = $val;
@@ -112,6 +119,10 @@ function inscription2_nouveau($declaration){
 				(id_auteur, id_liste, statut, date_inscription, format) 
 				VALUES ('$n', '$value', 'valide','$date', 'texte' )");
 	}}
+	if(isset($declaration['zones'])){
+		foreach($declaration['zones'] as $value)
+			spip_query("INSERT INTO spip_zone_auteurs (id_auteur, id_zone)VALUES ('$n', '$value')");
+	}
 	$n = spip_abstract_insert('spip_auteurs_elargis', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	
 	return $declaration;}

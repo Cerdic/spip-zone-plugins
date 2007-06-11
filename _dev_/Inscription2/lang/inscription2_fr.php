@@ -105,7 +105,10 @@ L\'&eacute;quipe de @nom_site@',
 'septembre' => 'septembre',
 'octobre' => 'octobre',
 'novembre' => 'novembre',
-'decembre' => 'd&eacute;cembre'
+'decembre' => 'd&eacute;cembre',
+
+'accesrestreint' => 'Acc&egrave;s Restreint',
+'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s'
 
 );
 

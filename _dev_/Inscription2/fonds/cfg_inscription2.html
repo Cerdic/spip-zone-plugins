@@ -446,7 +446,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </select>
 
 <small><br /><:inscription2:select_listes:><br />
-<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small>
+<a onclick="$('#categories').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small>
 </label>
 </div>
 
@@ -473,11 +473,35 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <br />
 
 <label>
-	<input type="checkbox" name="statut_relances" [checked="(#ENV{statut_relances}?{checked})"] id="statut_relances" />
-	<strong><:inscription2:statut_rel:></strong><br /><strong>Pas encore disponible.....</strong><br />
-	<:inscription2:exp_statut_rel:>
+	<input type="checkbox" name="statut_relances" onclick="showhide(this, '#statut_rel')" [checked="(#ENV{statut_relances}?{checked})"] id="statut_relances" />
+	<strong><:inscription2:statut_rel:></strong><br />
+	<:inscription2:exp_statut_rel:><br/>
+</label><label>
+	<input type="text" name="statut_rel" id="statut_rel" style="[(#ENV{statut_relances}|=={on}|?{display: block;, display:none;})]">
 </label>
-<br />
+
+<div style="[(#CONFIG{plugin/ACCESRESTREINT}|?{display: block;, display:none;})]">
+<label>
+	<input type="checkbox" name="accesrestreint" onclick="showhide(this, '#zones')" [(#ENV{accesrestreint}|?{#CONFIG{plugin/ACCESRESTREINT}|?{checked="checked"}})] id="accesrestreint" />
+	<strong><:inscription2:accesrestreint:></strong> 
+</label>
+
+<label id="zones" style="[(#ENV{accesrestreint}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_zones:><br />
+
+#SET{selected,#CONFIG{inscription2/zones,'',''}}
+<select name="zones[]" multiple="multiple" size="5" id="zones">
+[(#CONFIG{plugin/ACCESRESTREINT})<BOUCLE_zones(Spip_zones){tout}>
+	<option value="#ID_ZONE"[(#ID_ZONE|in_array{#GET{selected}}|?{ selected="selected"})]>
+	#TITRE
+	</option>
+</BOUCLE_zones>]
+</select>
+
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#zones').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
+</label>
+</div>
 
 </fieldset>
 [(#REM) Code jQuery plier/deplier les listes ]
