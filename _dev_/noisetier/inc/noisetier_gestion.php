@@ -91,7 +91,22 @@ function noisetier_liste_noisettes() {
 	return $result;
 }
 
-// Formulaire d'ajout d'une noisette
+//Calculer la liste des positions au sein d'une zone en fonction de la page en cours.
+function noisetier_liste_positions($page,$zone) {
+	static $liste;
+	if(!isset($liste)) {
+		$liste = array();
+		if ($page=='') $condition = "";
+		else $condition = " AND page REGEXP '(^toutes$)|((^|,)$page(,|$))' AND exclue NOT REGEXP '((^|,)$page(,|$))'";
+		$query = "SELECT position FROM spip_noisettes WHERE zone='$zone'$condition ORDER BY position";
+		$res = spip_query($query);
+		while ($row = spip_fetch_array($res)) {
+			$liste[] = $row['position'];
+		}
+	}
+}
+
+// Formulaire d'ajout d'une noisette ou d'un texte
 function noisetier_form_ajout_noisette_texte($page,$zone) {
 	$out = '';
 	$out .= debut_cadre_formulaire('', true);
@@ -148,11 +163,29 @@ function noisetier_affiche_texte($id_noisette, $page, $row=NULL) {
 	$out .= debut_cadre_relief('', true);
 	$out .= "<a name='noisette-$id_noisette'></a>";
 	$out .= "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/texte-24.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;margin-right:5px;'/>";
+	
+	$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
+	//Fleches monter/descendre
+	$out .= "<span class='boutons_ordonne'>";
+		$position = $row['position'];
+		$liste_positions = noisetier_liste_positions($page,$zone);
+		$aff_min=true;
+		$aff_max=true;
+		if ($aff_min) {
+			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
+			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
+			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("noisetier:monter")."'></a>";
+		}
+		if ($aff_max) {
+			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",urlencode($redirect));
+			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
+			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("noisetier:descendre")."'></a>";
+		}
+		$out .= "</span>";
 	// Actif ?
 	$actif = $row['actif'];
 	if ($actif=='oui') $puce = "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/actif-on-16.png' style='border:0' alt='"._T("noisetier:noisette_active")."'>";
 	else $puce = "<img src='"._DIR_PLUGIN_NOISETIER."img_pack/actif-off-16.png' style='border:0' alt='"._T("noisetier:noisette_non_active")."'>";
-	$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
 	if (autoriser('gerer','noisetier')){
 		if($actif=='oui') $action_link = generer_action_auteur("noisetier_active","desactiver-$id_noisette",$redirect);
 		else $action_link = generer_action_auteur("noisetier_active","activer-$id_noisette",$redirect);
@@ -184,12 +217,11 @@ function noisetier_affiche_texte($id_noisette, $page, $row=NULL) {
 	
 	//Modification du texte
 	$redirect = ancre_url($redirect,"noisette-$id_noisette");
-	$out .= "<div style='margin:5px 0; padding:5px 0; border-top:1px dashed #999;'>";
-	$out .= propre($row['descriptif'])."</div>";
-	$out .= "<div style='margin:5px 0; padding:5px 0; border-top:1px dashed #999;'>";
-	$out .= "<i>id_noisette&nbsp;: $id_noisette</i><p />";
+	if($row['descriptif']!='')
+		$out .= "<div style='margin:5px 0; padding:5px 0; border-top:1px dashed #999;'>".propre($row['descriptif'])."</div>";
+	$out .= "<div style='margin:5px 0; padding:5px 0; border-top:1px dashed #999;' class='serif'>";
+	$out .= "<b class='serif'>id_noisette&nbsp;:</b> $id_noisette<p />";
 	$out .= debut_cadre_formulaire('',true);
-	$out .= "<div class='serif'>";
 	$action_link = generer_action_auteur("noisetier_editer","texte-$id_noisette",$redirect);
 	$action_link_noredir = parametre_url($action_link,'redirect','');
 	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir' style='border: 0; margin:0;' name='editer_$id_noisette'>";
@@ -205,7 +237,7 @@ function noisetier_affiche_texte($id_noisette, $page, $row=NULL) {
 	$out .= $descriptif;
 	$out .= "</textarea>";
 	$out .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
-	$out .= "</form></div>";
+	$out .= "</form>";
 	$out .= fin_cadre_formulaire(true);
 	$out .= "</div>";
 	
@@ -276,6 +308,16 @@ function noisetier_affiche_noisette($id_noisette, $page, $row=NULL) {
 	else
 		$out .= debut_block_depliable(false,"block-noisette-$id_noisette");
 	
+	//Infos sur la noisette
+	$out .= "<div style='margin:5px 0; padding:5px 0; border-top:1px dashed #999;' class='serif'>";
+	$out .= "<b class='serif'>id_noisette&nbsp;:</b> $id_noisette";
+	if ($row['version']!='')
+		$out .= " - <b class='serif'>"._T('noisetier:info_version')."</b> ".$row['version'];
+	if ($row['auteur']!='')
+		$out .= " - <b class='serif'>"._T('noisetier:info_auteur')."</b> ".$row['auteur'];
+	if ($row['lien']!='')
+		$out .= "<br /><b class='serif'>"._T('noisetier:info_lien')."</b> <a href='".$row['lien']." class='spip_url spip_out'>".couper($row['lien'],40)."</a>";
+	$out .= "</div>";
 	//Supression de la noisette  (faire un formulaire)
 	if (autoriser('gerer','noisetier')) {
 		$out .= icone_horizontale(_T('noisetier:supprimer_noisette'), "", "../"._DIR_PLUGIN_NOISETIER."/img_pack/noisette-24.png", "supprimer.gif",false);

@@ -51,6 +51,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_titre_texte'=>'Titre du texte',
 'info_non_insere'=>'pour information, non ins&eacute;r&eacute; dans les squelettes',
 'info_texte'=>'Texte &agrave; ins&eacute;rer dans la page',
+'monter'=>'Monter',
+'descendre'=>'Descendre',
+'info_version'=>'Version&nbsp;:',
+'info_auteur'=>'Auteur&nbsp;:',
+'info_lien'=>'Documentation&nbsp;:',
+
 
 );
 ?>
