@@ -77,11 +77,11 @@ function spiplistes_taches_generales_cron($taches_generales){
 
 $spiplistes_v = $GLOBALS['meta']['spiplistes_version'] ;
 
+//afficher la version de spip_listes dans le pied de page
 if($spiplistes_v == 1.91)
 $GLOBALS['spiplistes_version'] = "SPIP-listes 1.9.1";
-
-if($spiplistes_v == 1.92)
-$GLOBALS['spiplistes_version'] = "SPIP-listes 1.9.2";
+if($spiplistes_v >= 1.92)
+$GLOBALS['spiplistes_version'] = "SPIP-listes $spiplistes_v";
 
 
 include_spip('inc/options_spip_listes');
