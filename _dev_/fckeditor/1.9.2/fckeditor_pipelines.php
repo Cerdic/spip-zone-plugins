@@ -34,11 +34,11 @@ function fckeditor_header_prive($flux) {
 	
 		$code='
 			
-			$("#text_area").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"Toggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("#text_area").val()+"</textarea></div>");
-			$(".spip_barre").before("<input type=\"button\" value=\"'._T("fckeditor:texte_editeur_avance").'\" id=\"fckeditor_switch\" onclick=\"Toggle()\" />");
+			$("#text_area").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"ArticleToggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("#text_area").val()+"</textarea></div>");
+			$(".spip_barre").before("<input type=\"button\" value=\"'._T("fckeditor:texte_editeur_avance").'\" id=\"fckeditor_switch\" onclick=\"ArticleToggle()\" />");
 			$("#text_area").css("display", "none");
 			$("#fckeditor_switch").css("display", "none");
-			$(document.forms["formulaire"]).bind("submit", PrepareSave);
+			$(document.forms["formulaire"]).bind("submit", ArticlePrepareSave);
 			$(".spip_barre").css("display", "none");
 
 			var oFCKeditor = new FCKeditor( "fckeditor_data" , "100%", "600", "Spip") ;
@@ -54,11 +54,11 @@ function fckeditor_header_prive($flux) {
 		
 		$code='
 			
-			$("#texte").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"Toggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("#texte").val()+"</textarea></div>");
-			$(".spip_barre").before("<input type=\"button\" value=\"'._T("fckeditor:texte_editeur_avance").'\" id=\"fckeditor_switch\" onclick=\"Toggle()\" />");
+			$("#texte").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"BreveToggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("#texte").val()+"</textarea></div>");
+			$(".spip_barre").before("<input type=\"button\" value=\"'._T("fckeditor:texte_editeur_avance").'\" id=\"fckeditor_switch\" onclick=\"BreveToggle()\" />");
 			$("#texte").css("display", "none");
 			$("#fckeditor_switch").css("display", "none");
-			$(document.forms["formulaire"]).bind("submit", PrepareSave);
+			$(document.forms["formulaire"]).bind("submit", BrevePrepareSave);
 			$(".spip_barre").css("display", "none");
 
 			var oFCKeditor = new FCKeditor(\'fckeditor_data\' , "100%", "300", "Spip") ;

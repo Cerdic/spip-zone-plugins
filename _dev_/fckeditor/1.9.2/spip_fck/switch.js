@@ -1,4 +1,4 @@
-function Toggle()
+function ArticleToggle()
 {
 	
 	// Try to get the FCKeditor instance, if available.
@@ -37,7 +37,7 @@ function Toggle()
 	}
 }
 
-function PrepareSave()
+function ArticlePrepareSave()
 {
 	// Get the _Textarea and _FCKeditor DIVs.
 	var eTextarea	= document.getElementById( 'text_area' ) ;
@@ -48,5 +48,57 @@ function PrepareSave()
 	{
 		var oEditor = FCKeditorAPI.GetInstance( 'fckeditor_data' ) ;
 		$("#text_area").val( oEditor.GetXHTML() );
+	}
+}
+function BreveToggle()
+{
+	
+	// Try to get the FCKeditor instance, if available.
+	var oEditor ;
+	if ( typeof( FCKeditorAPI ) != 'undefined' )
+		oEditor = FCKeditorAPI.GetInstance( 'fckeditor_data' ) ;
+	
+	// If the _Textarea DIV is visible, switch to FCKeditor.
+	if ( $("#texte").css("display") != 'none' )
+	{
+		//oEditor.SetHTML( eTextarea.value ) ;
+		oEditor.SetHTML( $("#texte").val() ) ;
+		
+		// Switch the DIVs display.
+		$("#texte").css("display", "none");
+		$("#fckeditor_switch").css("display", "none");
+		$("#fckeditor_div").css("display", "");
+		$(".spip_barre").css("display", "none");
+		
+		// This is a hack for Gecko 1.0.x ... it stops editing when the editor is hidden.
+		if ( oEditor && !document.all )
+		{
+			if ( oEditor.EditMode == FCK_EDITMODE_WYSIWYG )
+				oEditor.MakeEditable() ;
+		}
+	}
+	else
+	{
+		// Set the textarea value to the editor value.
+		$("#texte").val( oEditor.GetXHTML() );
+		
+		$("#texte").css("display", "");
+		$("#fckeditor_switch").css("display", "");
+		$("#fckeditor_div").css("display", "none");
+		$(".spip_barre").css("display", "");
+	}
+}
+
+function BrevePrepareSave()
+{
+	// Get the _Textarea and _FCKeditor DIVs.
+	var eTextarea	= document.getElementById( 'texte' ) ;
+	var eFCKeditor	= document.getElementById( 'fckeditor_div' ) ;
+	
+	// If the textarea isn't visible update the content from the editor.
+	if ( $("#texte").css("display") == 'none' )
+	{
+		var oEditor = FCKeditorAPI.GetInstance( 'fckeditor_data' ) ;
+		$("#texte").val( oEditor.GetXHTML() );
 	}
 }
