@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SPIP-Listes</nom>
 	<auteur>BoOz@rezo.net</auteur>
-	<version>1.92</version>
+	<version>1.96</version>
 	<etat>test</etat>
 	<icon>spip-listes.png</icon>
 	<description>Listes d'informations par email</description>

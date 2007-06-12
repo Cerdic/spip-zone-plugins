@@ -243,6 +243,8 @@ $extras = bloog_extra_recup_saisie('auteurs');
 $result = spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
 				"VALUES ("._q($nom_inscription_).", "._q($mail_inscription_).","._q($login_).","._q($mdpass).","._q($statut).","._q($htpass).","._q($extras).","._q($cookie).")");
 				spip_log("insert inscription : ->".$mail_inscription_);
+			$id_abo=spip_insert_id();
+	spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`,`spip_listes_format`) VALUES ("._q($id_abo).","._q($type_abo).")");		
 		
 // abonnement aux listes http://www.phpfrance.com/tutorials/index.php?page=2&id=13
 

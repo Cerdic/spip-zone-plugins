@@ -36,7 +36,12 @@
 	<legend style="color:#000000"><:spiplistes:abo_1_lettre:></legend>]
 <//B_listes>
 [(#ENV{formulaire_affiche}|?{' ',''})
-[(#ENV*{extra_aut}|bloog_extra_saisie{'auteurs', 'inscription','true'})]
+ <div style="text-align: left;"> 
+				 <strong>Format :</strong><br> 
+				 <input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio">Html<br> 
+				 <input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio">Texte<br> 
+				 <input name="suppl_abo" [(#ENV{format}|=={html}|?{'checked=checked',''})] value="non" type="radio">D&eacute;sabonnement<br> 
+				 </div> 
 	<input style="margin-top:3px" type='submit' name='Valider' value='<:spiplistes:abonnement_bouton:>' />
 	<input type="hidden" name="d"  value="[(#ENV{d})]"  />
 	<input type="hidden" name="confirm"  value="oui" />

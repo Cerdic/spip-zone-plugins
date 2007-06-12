@@ -19,9 +19,8 @@ function action_spiplistes_changer_statut_abonne_dist()
 		$statut = _request('statut');
 		if (autoriser('statutabonement','auteur',$id_auteur))
 		if(($statut=='html') OR ($statut=='texte') OR ($statut=='non')){
-			$extras = get_extra($id_auteur,"auteur");
-			$extras["abo"] = $statut;
-			set_extra($id_auteur,$extras,"auteur");
+		spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`="._q($statut)." WHERE `id_auteur`=$id_auteur");		
+		//var_dump($abo);die("coucou");
 		}
 	}
 	if ($action=='listeabo'){
@@ -47,7 +46,7 @@ function action_spiplistes_changer_statut_abonne_dist()
 	}
 	
 	if ($redirect){
-		redirige_par_entete(str_replace("&amp;","&",$redirect));
+		redirige_par_entete(str_replace("&amp;","&",$redirect)."#abo$id_auteur");
 	}
 }
 

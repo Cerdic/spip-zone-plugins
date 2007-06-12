@@ -76,24 +76,25 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 	
 			// fin de l'abo  aux listes
 		
-		 	// prendre en compte les extras
+		 	// modif du format de reception
 		
-		  $extras = bloog_extra_recup_saisie('auteurs');
-		
-		  spip_query("UPDATE spip_auteurs SET extra = "._q($extras)." WHERE cookie_oubli ="._q($d));
-		  spip_query("UPDATE spip_auteurs SET cookie_oubli = '0' WHERE cookie_oubli ="._q($d));
+		 $type_abo = _request('suppl_abo');
+		 spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`="._q($type_abo)." WHERE `id_auteur` ="._q($id_auteur));	
 		
 		  // affichage des modifs
+		$ab_o = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`="._q($id_auteur))) ;
 		
-		  $extra = get_extra($id_auteur,'auteur');
+		spip_query("UPDATE spip_auteurs SET cookie_oubli = '0' WHERE cookie_oubli ="._q($d));
+
+		$abo = $ab_o["spip_listes_format"];
 	
-	   	If ($extra['abo'] == 'non')  {
+	   	If ($abo == 'non')  {
 				$msg_formulaire = "<h4>"._T('spiplistes:desabonnement_valid').":</h4>&nbsp;".$mail_abo;
 			  
 		  }
 	   	else {
 	   		$msg_formulaire = "<h4>"._T('spiplistes:abonnement_modifie')."</h4>" ;
-	   		$confirm_formulaire = "<p>"._T('spiplistes:abonnement_nouveau_format').$extra['abo']."<br />";
+	   		$confirm_formulaire = "<p>"._T('spiplistes:abonnement_nouveau_format').$abo."<br />";
 	   	}
 	
 	
@@ -120,7 +121,10 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 		if ($row = spip_fetch_array($res)) {
 			$formulaire_affiche = '1';
 	  	$id_auteur = $row['id_auteur'];
-			$extra_aut = $row['extra'];
+		
+		$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
+		//var_dump($abo);die("coucou");
+		$format = $abo["spip_listes_format"];
 		}
 		else
 		{
@@ -136,7 +140,7 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 				'formulaire_affiche' => $formulaire_affiche,
 				'formulaire_cookie_affiche' => '',
 				'd' => $d,
-				'extra_aut' => $extra_aut
+				'format' => $format
 					)
 			);
 			

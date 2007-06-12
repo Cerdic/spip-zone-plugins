@@ -20,6 +20,7 @@
 /******************************************************************************************/
 
 @define('_SPIP_LISTE_SEND_THREADS',1);
+
 function spip_listes_onglets($rubrique, $onglet){
 	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
 	
@@ -623,6 +624,7 @@ function spiplistes_afficher_auteurs($query, $url){
 		$i++;
 		echo "<tr bgcolor='$couleur'>";
 		
+
 		// statut auteur
 		echo "<td>";
 		echo bonhomme_statut($row);
@@ -655,18 +657,11 @@ function spiplistes_afficher_auteurs($query, $url){
 		
 		// Abonne ou pas ?
 		echo '</td><td>';
-		
-		$extra = unserialize ($row["extra"]);
-		
-		if( !is_array($extra) ){
-			$extra = array();
-			$extra["abo"] = "non";
-			set_extra($row["id_auteur"],$extra,'auteur');
-			get_extra($row["id_auteur"],'auteur');
-		}
-		
-		$abo = $extra["abo"];
-		
+		$id_auteur=$row['id_auteur'] ;
+		$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
+		//var_dump($abo);die("coucou");
+		$abo = $abo["spip_listes_format"];
+		//var_dump($abo);
 		if($abo == "non")
 			echo "-";
 		else
@@ -674,18 +669,19 @@ function spiplistes_afficher_auteurs($query, $url){
 		
 		// Modifier l'abonnement
 		echo '</td><td>';
-		
+		echo "<a name='abo".$row['id_auteur']."'></a>";
+
 		$retour = parametre_url($url,'debut',$debut);
 		if ($row["statut"] != '0minirezo') {
 			$u = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-format", $retour);
-			if($extra["abo"] == 'html'){
+			if($abo == 'html'){
 				$option_abo = "<a href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
 				 . "</a> | <a href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')."</a>";
 			}
-			elseif ($extra["abo"] == 'texte') 
+			elseif ($abo == 'texte') 
 				$option_abo = "<a href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
 				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>html</a>";
-			elseif(($extra["abo"] == 'non')OR (!$extra["abo"])) 
+			elseif(($abo == 'non')OR (!$abo)) 
 				$option_abo = "<a href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')
 				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>html</a>";
 			echo "&nbsp;".$option_abo;

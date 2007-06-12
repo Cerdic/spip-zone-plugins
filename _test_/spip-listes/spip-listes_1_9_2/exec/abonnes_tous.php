@@ -62,6 +62,7 @@ function exec_abonnes_tous(){
 	
 	spiplistes_cherche_auteur();
 	
+	//Compter tous les abonnes a des listes (doublons ?)
 	$result_pile = spip_query(
 	  'SELECT listes.statut, COUNT(abonnements.id_auteur)
 	   FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste)
@@ -70,11 +71,13 @@ function exec_abonnes_tous(){
 	while ($row = spip_fetch_array($result_pile, SPIP_NUM)) {
 		$nb_abonnes[$row[0]] = intval($row[1]);
 	}
-	
+
+	//evaluer les extras de tous les auteurs + compter tous les auteurs
 	$result = spip_query(
 	  'SELECT extra, COUNT(spip_auteurs.id_auteur) FROM spip_auteurs GROUP BY extra');
 	$nb_inscrits = 0;
 
+	//repartition des extras
 	$cmpt = array('texte'=>0, 'html'=>0, 'non'=>0);
 	
 	while ($row = spip_fetch_array($result, SPIP_NUM)) {
@@ -84,12 +87,15 @@ function exec_abonnes_tous(){
 			$cmpt[$abo['abo']] += $row[1];
 		}
 	}
+	
+	//Total des auteurs qui ont un format html ou texte
 	$total_abo = $cmpt['html'] + $cmpt['texte'] ;
-
+	
+	
+	//Total des auteurs qui ne sont pas abonnes a une liste
 	$abonnes = spip_query("select a.id_auteur, count(d.id_liste) from spip_auteurs a  
 	      left join spip_auteurs_listes d on a.id_auteur =  
 	          d.id_auteur group by a.id_auteur having count(d.id_liste) = 0;"); 
-
 	$nb_abonnes_auc = spip_num_rows($abonnes);
 	
 	echo debut_cadre_relief('forum-interne-24.gif');
@@ -98,7 +104,9 @@ function exec_abonnes_tous(){
 	echo"<div style='float:right;width:150px'>";
 	echo "<b>"._T('spiplistes:repartition')."</b>  <br /><b>"._T('spiplistes:html')."</b> : {$cmpt['html']} <br /><b>"._T('spiplistes:texte')."</b> : {$cmpt['texte']} <br /><b>"._T('spiplistes:desabonnes')."</b> : {$cmpt['non']}";
 	echo"</div>";
-	$total = $cmpt['html'] + $cmpt['texte'] + $cmpt['non'];
+	
+	$total = $cmpt['html'] + $cmpt['texte'] + $cmpt['non']; // ?
+	
 	echo "Nombre d'abonn&eacute;s : ". $total_abo .
 	  "<p>Abonn&eacute;s aux listes publiques : " . $nb_abonnes['liste'] .
 	  "<br />Abonn&eacute;s aux listes internes : ". $nb_abonnes['inact'] .

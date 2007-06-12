@@ -63,9 +63,8 @@ function exec_abonne_edit(){
 	// MODE ABONNE: gestion d'un abonne---------------------------------------------
 	
 	if($champs_extra AND ($confirm == 'oui') ){
-		// prendre en compte les extras
-		$extras = bloog_extra_recup_saisie('auteurs');
-		spip_query("UPDATE spip_auteurs SET extra = "._q($extras)." WHERE id_auteur ="._q($id_auteur));
+		$type_abo = _request('suppl_abo');
+		 spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`="._q($type_abo)." WHERE `id_auteur` ="._q($id_auteur));	
 	}
 	
 	$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur="._q($id_auteur));
@@ -114,7 +113,18 @@ function exec_abonne_edit(){
 				echo"<form action='?exec=abonne_edit' method='post'>";
 				echo"<p align='center'>";
 				
-				bloog_extra_saisie($extra, 'auteurs', 'inscription');
+				$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
+		//var_dump($abo);die("coucou");
+		$abo = $abo["spip_listes_format"];
+				$c1 = ( $abo == 'html')? 'checked=checked)': '';
+				$c2 = ( $abo == 'texte')? 'checked=checked': '';
+				$c3 = ( $abo == 'non')? 'checked=checked': '';
+				echo'<div style="text-align: left;">';
+				echo'<strong>Format :</strong><br>';
+				echo'<input name="suppl_abo" value="html" '.$c1.'  type="radio">Html<br>';
+				echo'<input name="suppl_abo" value="texte" '.$c2.' type="radio">Texte<br>';
+				echo'<input name="suppl_abo" '.$c3.' value="non" type="radio">D&eacute;sabonnement<br>';
+				echo'</div>';
 				echo"<input type='submit' name='Valider' value='"._T('spiplistes:modifier')."'>";
 				echo"<input type='hidden' name='id_auteur'  value=$id_auteur >";
 				echo"<input type='hidden' name='confirm'  value='oui' >";

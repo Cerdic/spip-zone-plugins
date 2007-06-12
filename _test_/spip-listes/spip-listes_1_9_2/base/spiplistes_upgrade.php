@@ -19,19 +19,24 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 
-
-	$GLOBALS['spiplistes_version'] = 1.95;
+	//version actuelle du plugin à changer en cas de maj
+	$GLOBALS['spiplistes_version'] = 1.96;
+	
 	function spiplistes_verifier_base(){
-		$accepter_visiteurs = lire_meta('accepter_visiteurs');
-
-		if($accepter_visiteurs != 'oui'){
-			$accepter_visiteurs = 'oui';
-			ecrire_meta("accepter_visiteurs", $accepter_visiteurs);
-			ecrire_metas();
-			echo _T('spiplistes:autorisation_inscription');
-		}
 		
+		//activer si besoin l'inscription des visiteurs
+		$accepter_visiteurs = lire_meta('accepter_visiteurs');
+			if($accepter_visiteurs != 'oui'){
+				$accepter_visiteurs = 'oui';
+				ecrire_meta("accepter_visiteurs", $accepter_visiteurs);
+				ecrire_metas();
+				echo _T('spiplistes:autorisation_inscription');
+			}
+		
+		//install
 		$version_base = $GLOBALS['spiplistes_version'];
+		
+		// Comparaison de la verison actuelle avec la version installée ($GLOBALS['meta']['spiplistes_version'])
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta']['spiplistes_version']) )
 				|| (($current_version = $GLOBALS['meta']['spiplistes_version'])!=$version_base)){
@@ -54,7 +59,7 @@
 				include_spip('base/abstract_sql');
 				creer_base();
 				
-				//Mise a jour des listes anciennes // a mettre en fonction
+				//Migrer des listes anciennes // a deplacer dans une en fonction
 				$resultat_aff = spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'");
 				if(@spip_num_rows($resultat_aff) > 0){
 					echo "<h3>SPIP-listes va mettre a jour</h3>";
@@ -74,7 +79,7 @@
 						$options="<p>".$titre_liste."<br/>";
 						echo $options."</p>";
 						
-						//pied de page
+						// ajout du pied de page
 						include_spip('public/assembler');
 						$contexte_pied = array('lang'=>$langue);
 						$pied = recuperer_fond('modeles/piedmail', $contexte_pied);
@@ -102,11 +107,12 @@
 						spip_query("DELETE FROM spip_articles WHERE id_article ="._q($id_article));
 						spip_query("DELETE FROM spip_auteurs_articles WHERE id_article ="._q($id_article));
 			
-						//manquent les courriers
+						//manque un traitement pour récuperer les courriers
 					}
 				}
 				ecrire_meta('spiplistes_version',$current_version=$version_base,'non');
 			}
+			
 			if ($current_version<1.92){
 				echo "SpipListes Maj 1.92<br />";
 				spip_query("ALTER TABLE spip_listes ADD titre_message varchar(255) NOT NULL default '';");
@@ -134,6 +140,60 @@
 				spip_query("ALTER TABLE spip_auteurs_courriers ADD etat varchar(5) NOT NULL default '' AFTER statut");
 				ecrire_meta('spiplistes_version', $current_version=1.95);
 			}
+			
+			if ($current_version<1.96){
+				echo "SpipListes Maj 1.96<br />";
+				include_spip('base/abstract_sql');
+				
+				//installer la table spip_auteurs_elargis si besoin
+				$table_nom = "spip_auteurs_elargis";
+				spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (
+				`id_auteur` BIGINT NOT NULL ,
+				`spip_listes_format` VARCHAR( 8 ) DEFAULT 'non' NOT NULL
+				 ) ");
+				/*
+				echo "<hr>" ;
+				$desc = spip_abstract_showtable($table_nom, '', true);
+				var_dump($desc);
+				echo "<hr>" ;	
+				
+				$res = spip_query("SELECT COUNT(a.id_auteur) AS n FROM spip_auteurs AS a");
+				$n = 0;
+				if ($row = spip_fetch_array($res))
+				$n = $row['n'];
+				echo "-$n-" ;
+				*/
+				//evaluer les extras de tous les auteurs + compter tous les auteurs
+				$result = spip_query(
+				  'SELECT extra, spip_auteurs.id_auteur FROM spip_auteurs');
+				$nb_inscrits = 0;
+			
+				//repartition des extras
+				$cmpt = array('texte'=>0, 'html'=>0, 'non'=>0);
+				
+				while ($row = spip_fetch_array($result, SPIP_NUM)) {
+					$nb_inscrits ++ ;
+					$abo = unserialize($row[0]);
+					$format = $abo['abo'] ;
+				if($format=="texte" OR $format=="html")
+				spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
+				VALUES ("._q($row[1]).","._q($format).") ");
+				else
+				spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
+				VALUES ("._q($row[1]).","._q('non').") ");
+				
+					if ($abo['abo']) {
+						$cmpt[$abo['abo']] ++;
+					}
+				}
+				
+				echo "<br />html : ".$cmpt['html']." <br />texte : ".$cmpt['texte']."<br />non : ".$cmpt['non']."<br />somme :".$nb_inscrits  ;
+	
+				ecrire_meta('spiplistes_version', $current_version=1.96);
+			}
+			
+			
+			
 			ecrire_metas();
 		}
 	}

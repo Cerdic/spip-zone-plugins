@@ -162,14 +162,14 @@ if ($message_pile > 0){
 		//chopper un lot 
 		
 		if($test == 'oui')
-			$result_inscrits = spip_query("SELECT id_auteur, nom, email, extra FROM spip_auteurs WHERE email ="._q($email_test)." ORDER BY id_auteur ASC");
+			$result_inscrits = spip_query("SELECT id_auteur, nom, email FROM spip_auteurs WHERE email ="._q($email_test)." ORDER BY id_auteur ASC");
 		else{
 			//$result_inscrits = spip_query("SELECT a.nom, a.id_auteur, a.email, a.extra FROM spip_auteurs AS a, spip_auteurs_courriers AS b WHERE a.id_auteur=b.id_auteur AND b.id_courrier = "._q($id_courrier)." ORDER BY a.id_auteur ASC  LIMIT 0,".intval($limit));
 			// un id pour ce processus
 			$id_process = substr(creer_uniqid(),0,5);
 			spip_query("UPDATE spip_auteurs_courriers SET etat="._q($id_process)." WHERE etat='' AND id_courrier = "._q($id_courrier)." LIMIT ".intval($limit));
 			$result_inscrits = spip_query(
-				"SELECT a.nom, a.id_auteur, a.email, a.extra 
+				"SELECT a.nom, a.id_auteur, a.email 
 				FROM spip_auteurs AS a, spip_auteurs_courriers AS b 
 				WHERE a.id_auteur=b.id_auteur AND b.id_courrier = "._q($id_courrier)." AND etat="._q($id_process)."
 				ORDER BY a.id_auteur ASC");
@@ -193,22 +193,26 @@ if ($message_pile > 0){
 					$debut_envoi = true; // ne pas faire 20 update au premier lot :)
 				}
 		
-				$extra = unserialize ($row2["extra"]);
+				$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
+				
+				$format_abo = $abo["spip_listes_format"];
 
 				$nom_auteur = $row2["nom"];
 				$email = $row2["email"];
 				
-				$str_temp .= $nom_auteur."(".$extra['abo'].") - $email";
+				$str_temp .= $nom_auteur."(".$format_abo.") - $email";
 				$total=$total+1;
 				unset ($cookie);
 
-				if ( ($extra["abo"] == 'texte') 
-				  OR ($extra["abo"] == 'html') ) {
+				
+
+				if ( ($format_abo == 'texte') 
+				  OR ($format_abo == 'html') ) {
 					$cookie = creer_uniqid();
 					spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email));				
 
 					if ($is_from_valide){
-						if ($extra["abo"] == 'html')  // email HTML ------------------
+						if ($format_abo == 'html')  // email HTML ------------------
 							// desabo pied de page HTML
 							$body = $pageh.$pied_page."<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
 						else						// email TXT -----------------------
@@ -217,15 +221,15 @@ if ($message_pile > 0){
 							  . filtrer_entites(_T('spiplistes:abonnement_mail'))."\n"
 							  . filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
 
-						$email_a_envoyer[$extra["abo"]]->Body = $body;
-						$email_a_envoyer[$extra["abo"]]->SetAddress($email,$nom_auteur);
+						$email_a_envoyer[$format_abo]->Body = $body;
+						$email_a_envoyer[$format_abo]->SetAddress($email,$nom_auteur);
 
 						
-						if ($email_a_envoyer[$extra["abo"]]->send()) {
+						if ($email_a_envoyer[$format_abo]->send()) {
 							spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur="._q($id_auteur)." AND id_courrier="._q($id_courrier));				
 							$str_temp .= "  [OK]";
 							$nb_emails_envoyes++;
-							$nb_emails[$extra['abo']]++;
+							$nb_emails[$format_abo]++;
 						}
 						else {
 							$str_temp .= _T('spiplistes:erreur_mail');
