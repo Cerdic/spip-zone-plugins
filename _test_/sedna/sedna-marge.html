@@ -1,0 +1,116 @@
+<h1><:sedna:articles_recents_court:></h1>
+<ul>
+	<li><a href="[(#SELF|parametre_url{age,''})]"
+	class="[(#ENV{age}|=={''}|?{'selected',''})]"><:date_aujourdhui|ucfirst:></a></li>
+	<li><a href="[(#SELF|parametre_url{age,2})]"
+	class="[(#ENV{age}|=={2}|?{'selected',''})]"><:sedna:deuxjours:></a></li>
+	<li><a href="[(#SELF|parametre_url{age,7})]"
+	class="[(#ENV{age}|=={7}|?{'selected',''})]"><:sedna:semaine:></a></li>
+	<li><a href="[(#SELF|parametre_url{age,31})]"
+	class="[(#ENV{age}|=={31}|?{'selected',''})]"><:sedna:mois:></a></li>
+	<li><a href="[(#SELF|parametre_url{age,365})]"
+	class="[(#ENV{age}|=={365}|?{'selected',''})]"><:sedna:annee:></a></li>
+</ul>
+<h1>&nbsp;</h1>
+<form action="#SELF" method="get">
+<div>
+	<input type="text" name="recherche" value="[(#ENV{recherche})]" size="10" />
+	[<input type="hidden" name="age" value="(#ENV{age})" />]
+	[<input type="hidden" name="id_syndic" value="(#ENV{id_syndic})" />]
+	<input type="submit" name="var_submit" value="<:info_rechercher|attribut_html:>" style="font-size:9px;" />
+</div>
+</form>
+
+<h1><:sedna:preferences:></h1>
+
+<ul>
+<li><a class="<?=$_COOKIE['sedna_style'] == 'masquer'?'':'selected';?>" id="desc_afficher" onmousedown="style_desc('afficher'); return false;"><:sedna:aff_resume:></a></li>
+<li><a class="<?=$_COOKIE['sedna_style'] == 'masquer'?'selected':'';?>" id="desc_masquer" onmousedown="style_desc('masquer'); return false;"><:sedna:masquer_resume:></a></li>
+</ul>
+
+<?php
+	// Si on se connecte on peut memoriser son cookie
+	if ($auteur_session) { ?>
+
+<ul>
+<li>
+<a id="synchrooui"
+	class='<?=$_COOKIE['sedna_synchro'] == 'oui'?'selected':'';?>'
+	onclick="sedna_synchro('oui');document.location=document.location;"
+	title="<:sedna:synchro_titre:>"
+><:sedna:synchro:><?=$GLOBALS['synchro'];?></a>
+</li>
+<li>
+<a id="synchronon"
+	class='<?=$_COOKIE['sedna_synchro'] != 'oui'?'selected':''?>'
+	onclick="sedna_synchro('non');"
+><:sedna:pas_synchro:></a>
+</li>
+</ul>
+
+
+<ul>
+
+<?php
+	if ($auteur_session['statut'] == '0minirezo') {
+?>
+
+<li>
+<a href="[(#URL_ECRIRE{#ENV{id_syndic,''}|?{sites,sites_tous}}|parametre_url{id_syndic,#ENV{id_syndic,''}})]">[(#ENV{id_syndic}|?{<:ecrire:icone_modifier_site:>, <:login_acces_prive:>})]</a>
+</li>
+
+<?php } ?>
+
+<li>
+[(#REM) Ici #SELF est passe "a cote'" de #URL_LOGOUT, car il y a des
+problemes dans les deux elements au sujet des sous-repertoires]
+<a href="[(#URL_LOGOUT|#SELF)]"><:sedna:deconnexion:></a>
+</li>
+</ul>
+
+<?php } else { ?>
+
+<ul>
+<li>
+<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]"><:sedna:connexion:></a>
+</li>
+</ul>
+
+<?php } ?>
+
+[(#INCLURE{fond=sedna_selecteur_couleurs}{self=#SELF})]
+<h1><:sedna:sources:></h1>
+<ul>
+	<li><a href="[(#URL_PAGE{sedna}|parametre_url{age,#ENV{age,''}})]" class="[(#ENV{id_syndic}|=={''}|?{'selected',''})]"><b><:sedna:toutes:></b></a></li>
+</ul>
+
+<ul>
+<BOUCLE_sites(SITES){par nom_site}{syndication!=non}{id_rubrique?}{id_mot?}>
+<li>
+	<a href="[(#SELF|parametre_url{id_syndic,#ID_SYNDIC}|parametre_url{age,#ENV{age,''}})]"
+		class="[(#ENV{id_syndic}|=={#ID_SYNDIC}|?{'selected',''})]"
+	><?php
+		if ($_COOKIE['sedna_ignore_[(#ID_SYNDIC)]']) {
+			echo '<span
+			onclick="change_site( #ID_SYNDIC ); document.location=document.location; return false;"
+			style="float: #LANG_RIGHT;"
+			title="<:sedna:afficher_sources:>">+</span> ';
+			echo '<s>';
+		} else {
+			echo '<span
+			onclick="change_site( #ID_SYNDIC ); document.location=document.location; return false;"
+			style="float: #LANG_RIGHT;"
+			title="<:sedna:masquer_sources:>">-</span> ';
+		}
+	?>[(#SYNDICATION|syndication_en_erreur|?{<span title="<:sedna:probleme_de_syndication:>"> &#x2193;</span>,''}) ]#NOM_SITE<?php
+		if ($_COOKIE['sedna_ignore_[(#ID_SYNDIC)]']) {
+			echo '</s>';
+		}
+	?></a>
+</li>
+</BOUCLE_sites>
+</ul>
+
+[(#INCLURE{fond=sedna_galaxie})]
+
+#MENU_LANG
