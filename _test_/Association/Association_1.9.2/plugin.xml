@@ -7,14 +7,13 @@
 	<etat>test</etat>
 	<description>
 		Gestion de petites associations
-		_ Ce plugin n&eacute;cessite l'installation plugins cfg
-		
-		[Configuration->.?exec=cfg&amp;cfg=association]
+_ Ce plugin n&eacute;cessite l'installation du plugin cfg
 	</description>
 	<prefix>association</prefix>	
-
+	<install>inc/association_install.php</install>
 	<lien>
          [Documentation->http://www.spip-contrib.net/Plugin-Gestion-d-associations]
+	    [Configuration->.?exec=cfg&amp;cfg=association]
     </lien>
     <icon>plugin-24.gif</icon>
 
