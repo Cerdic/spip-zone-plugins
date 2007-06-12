@@ -20,68 +20,87 @@
 	// validate signup form on submit
 	$("#inscription").validate({
 		rules: {
-			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true},
-			prenom:{[(#CONFIG{inscription2/prenom}|=={on}|?{required: true,}),]chaine:true},
-			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true},
-			adresse: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true},
-			adresse2: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true},
-			code_postal: {[(#CONFIG{inscription2/code_postal}|=={on}|?{required: true,}),]postal:true},
-			ville: {[(#CONFIG{inscription2/ville}|=={on}|?{required: true,}),]chaine:true},
-			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true},
-			telephone: {[(#CONFIG{inscription2/telephone}|=={on}|?{required: true,}),]numero:true},
-			fax: {[(#CONFIG{inscription2/fax}|=={on}|?{required: true,}),]numero:true},
-			mobile: {[(#CONFIG{inscription2/mobile}|=={on}|?{required: true,}),]numero:true},
-			profession: {[(#CONFIG{inscription2/profession}|=={on}|?{required: true,}),]chaine:true},
-			societe: {[(#CONFIG{inscription2/societe}|=={on}|?{required: true,}),]chaine:true},
-			secteur:{[(#CONFIG{inscription2/secteur}|=={on}|?{required: true,}),]chaine:true},
-			fonction: {[(#CONFIG{inscription2/fonction}|=={on}|?{required: true,}),]chaine:true}
+			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
+			prenom:{[(#CONFIG{inscription2/prenom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,15]},
+			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			adresse: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,30]},
+			adresse2: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,30]},
+			code_postal: {[(#CONFIG{inscription2/code_postal}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,10]},
+			ville: {[(#CONFIG{inscription2/ville}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
+			telephone: {[(#CONFIG{inscription2/telephone}|=={on}|?{required: true,}),]numero:true, rangeLength:[3,15]},
+			fax: {[(#CONFIG{inscription2/fax}|=={on}|?{required: true,}),]numero:true, rangeLength:[3,15]},
+			mobile: {[(#CONFIG{inscription2/mobile}|=={on}|?{required: true,}),]numero:true, rangeLength:[3,15]},
+			profession: {[(#CONFIG{inscription2/profession}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			societe: {[(#CONFIG{inscription2/societe}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			secteur:{[(#CONFIG{inscription2/secteur}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			fonction: {[(#CONFIG{inscription2/fonction}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			divers: {chaine:true, rangeLength:[3,30]}
 		},
 		messages: {
 			nom: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable"},
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 20 carateres"},
 			prenom:{
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable"},
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 15 carateres"},
 			username: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable"},
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
 			adresse: {
 				required:"Ce champ est obligatoire",
-				postal:"Entrez une chaine de caracteres valable"},
+				postal:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 30 carateres"},
 			adresse2: {
 				required:"Ce champ est obligatoire",
-				postal:"Entrez une chaine de caracteres valable"},
+				postal:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 30 carateres"},
 			code_postal: {
 				required:"Ce champ est obligatoire",
-				postal:"Entrez un code postal valable"},
+				postal:"Entrez un code postal valable",
+				rangeLength:"Min 3 Max 10 carateres"},
 			ville: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable"},
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
 			email: {
 				required:"Ce champ est obligatoire",
-				email:"Entrez un email valable"},
+				email:"Entrez un email valable",
+				rangeLength:"Min 5 Max 30 carateres"},
 			telephone: {
 				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valable"},
+				numero:"Entrez un numero valable",
+				rangeLength:"Min 3 Max 15 carateres"},
 			fax: {
 				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valable"},
+				numero:"Entrez un numero valable",
+				rangeLength:"Min 3 Max 15 carateres"},
 			mobile: {
 				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valable"},
+				numero:"Entrez un numero valable",
+				rangeLength:"Min 3 Max 15 carateres"},
 			profession: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable"},
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
 			societe: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable"},
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
 			secteur:{
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable"},
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 20 carateres"},
 			fonction: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable"}
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
+			divers:{
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 30 carateres"}
 		}
 	});
 
@@ -133,16 +152,16 @@
 	<input type="text" name="username" id="username" /><br />
 </p>
 
-<label [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>
+<div [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>
 	<strong><:inscription2:naissance:></strong><br />
-	
+	<span>
 	<select name="jour" id="jour">
 	<?php
 	for ($i=1;$i<=31;$i++)
 		echo "<option>$i</option>\n";
 	?>
 	</select> 
-	
+	</span><span>
 	<select name="mois" id="mois">
 	<option value='01'><:inscription2:janvier:></option>
 	<option value='02'><:inscription2:fevrier:></option>
@@ -157,15 +176,15 @@
 	<option value='11'><:inscription2:novembre:></option>
 	<option value='12'><:inscription2:decembre:></option>
 	</select>
-	
+	</span><span>
 	<select name="annee" id="annee">
 	<?php
 	$today_year=date('Y');
 	for ($i=$today_year;$i>=$today_year-100;$i--)
 		echo "<option>$i</option>\n";
 	?>
-	</select> 
-</label>
+	</select> </span>
+</div>
 
 <label [style="(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})"]>
 	<strong><:inscription2:sexe:></strong><br />
@@ -252,14 +271,22 @@
 	<strong><:inscription2:newsletter:></strong><br />
 	<:inscription2:exp_newsletter:><br />
 	#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+	<div>
 	<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
-		<option value='0'>-</option>
 	<BOUCLE_listes(LISTES){tout}>
 		[<option value="#ID_LISTE" (#ID_LISTE|in_array{#GET{selected}})>
 		#TITRE
 		</option>]
-</BOUCLE_listes>
-</select>
+	</BOUCLE_listes>
+	</select><br />
+	</div><div>
+	<strong><:inscription2:format:></strong><br />
+	<:inscription2:expl_format:>
+	<select name="format" id="format">
+		<option value = "texte"><:inscription2:texte:></option>
+		<option value = "html"><:inscription2:html:></option>
+	</select>
+	</div>
 </label>
 
 <label style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >

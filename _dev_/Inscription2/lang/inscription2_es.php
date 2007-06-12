@@ -108,8 +108,17 @@ El equipo de @nom_site@',
 'decembre' => 'Diciembre',
 
 'accesrestreint' => 'Acceso Restringido',
-'choisir_zones' => 'Elija las zonas a las que seran afectados los nuevos adherentes del sitio'
+'choisir_zones' => 'Elija las zonas a las que ser&aacute;n afectados los nuevos adherentes del sitio',
 
+'domaines' => 'Restringir las inscripciones a ciertos dominios',
+'exp_domaines' => 'Defina sus dominios en el archivo inc/dominios.php siguiendo el modelo',
+'domaine' => 'Dominio',
+'choix_domaine' => 'Elija su dominio',
+'mail_non_domaine' => 'La direcci&oacute;n email que ha ingresado no pertenece al dominio elegido, intentelo nuevamente',
+'format' => 'Formato',
+'expl_format' => 'Elija el formato en el que prefiere recibir los emails de las listas de difusion',
+'texte' => 'Texto', 
+'html' => 'HTML'
 
 );
 

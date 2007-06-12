@@ -114,7 +114,12 @@ L\'&eacute;quipe de @nom_site@',
 'exp_domaines' => 'Veuillez definir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
 'domaine' => 'Domaine',
 'choix_domaine' => 'Veuillez choisir votre domaine',
-'mail_non_domaine' => 'L\'adresse email que vous avez donnée n\appartient pas au domaine que vous avez indiqu&eacute; vueillez essayer &agrave; nouveau'
+'mail_non_domaine' => 'L\'adresse email que vous avez donnée n\'appartient pas au domaine que vous avez indiqu&eacute; vueillez essayer &agrave; nouveau',
+'format' => 'Format',
+'expl_format' => 'Veuillez choisir le format que vous pr&eacute;f&eacute;rez pour recevoir les emails des listes de diffusion',
+'texte' => 'Texte', 
+'html' => 'HTML'
+
 );
 
 

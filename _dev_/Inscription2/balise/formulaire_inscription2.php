@@ -42,9 +42,10 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 				if($aux != '0')
 					$var_user['categorie'] = $aux;
 			}
-			elseif(ereg("^newsletter.*$", $cle))
+			elseif(ereg("^newsletter.*$", $cle)){
 				$var_user['newsletters'] = _request('newsletters');
-	
+				$var_user['`spip_listes_format`'] =_request('format');
+			}
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['statut_relances'] = lire_config('inscription2/statut_rel');
 	
@@ -88,7 +89,7 @@ function test_mode_inscription2($mode) {
 			OR $GLOBALS['meta']['forums_publics'] == 'abo')));}
 
 function message_inscription2($var_user, $mode) {
-	$row = spip_query("SELECT nom, statut, id_auteur, login, email, alea_actuel FROM spip_auteurs WHERE email=" . _q($var_user['email']));
+	$row = spip_query("SELECT nom, statut, id_auteur, login, email, alea_actuel FROM `spip_auteurs` WHERE email=" . _q($var_user['email']));
 	$row = spip_fetch_array($row);
 
 	if (!$row) 							// il n'existe pas, creer les identifiants  
@@ -127,15 +128,15 @@ function inscription2_nouveau($declaration){
 	if(isset($declaration['newsletters'])){
 		foreach($declaration['newsletters'] as $value){
 			if($value != '0')
-				spip_query("INSERT INTO spip_auteurs_listes 
-				(id_auteur, id_liste, statut, date_inscription, format) 
-				VALUES ('$n', '$value', 'valide','$date', 'texte' )");
+				spip_query("INSERT INTO `spip_auteurs_listes` 
+				(`id_auteur`, `id_liste`, `statut`, `date_inscription`) 
+				VALUES ('$n', '$value', 'valide','$date')");
 	}}
 	if(isset($declaration['zones'])){
 		foreach($declaration['zones'] as $value)
-			spip_query("INSERT INTO spip_zones_auteurs (id_auteur, id_zone)VALUES ('$n', '$value')");
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
 	}
-	$n = spip_abstract_insert('spip_auteurs_elargis', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
+	$n = spip_abstract_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	
 	return $declaration;}
 

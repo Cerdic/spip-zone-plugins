@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gener_desc' => 'Options which will be asked to the new adherents of the site',
 'info_internes' => 'Internal information',
 'info_internes_desc' => 'Options which will be stored in the data base but will not be displayed in the form for the new members',
-'choisir_listes' => "Choisissez ci-dessous les listes de diffusion &#224; proposer aux nouveaux adherents&nbsp;: ",
+'choisir_listes' => "Choose the newsletters that will be proposed to the new adherents of the site:",
 'select_listes' => '(you may select a group holding down the shift key)',
 'deselect_listes' => '> deselect all',
 
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'societe' => 'Company',
 'secteur' => 'Sector of activity',
 'newsletter' => 'Newsletter',
-'exp_newsletter' => 'Choisissez ci-dessous les listes de diffusion auxquelles vous voulez vous abonner',
+'exp_newsletter' => 'Choose the newsletter to wich you want to subscribe',
 'fonction' => 'Function',
 'masculin' => 'male',
 'feminin' => 'female',
@@ -107,6 +107,18 @@ The @nom_site@\'s Team',
 'novembre' => 'November',
 'decembre' => 'December'
 
+'accesrestreint' => 'Restricted access',
+'choisir_zones' => 'Choose the areas where the new adherents of the site will be affected',
+
+'domaines' => 'Restrict the inscriptions to certain domains',
+'exp_domaines' => 'Define your domains in the file inc/domaines.php following the model',
+'domaine' => 'Domain',
+'choix_domaine' => 'Choose your domain',
+'mail_non_domaine' => 'The email that you entered does not belong to the chosen domain, try again',
+'format' => 'Format',
+'expl_format' => 'Choose the format that you prefer to receive the emails of the newsletters',
+'texte' => 'Text', 
+'html' => 'HTML'
 );
 
 
