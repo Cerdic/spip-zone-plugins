@@ -313,8 +313,6 @@ function affichage_donnee_edit($type_form){
 	}
 	if (autoriser('administrer','form',$id_form)) {
 		$prefix = forms_prefixi18n($type_form);
-		var_dump(_T("$prefix:aucune_reponse"));
-		var_dump(("$prefix:aucune_reponse"));
 		echo icone_horizontale(_T("$prefix:suivi_reponses")."<br />".(($nb_reponses==0)?_T("$prefix:aucune_reponse"):(($nb_reponses==1)?_T("$prefix:une_reponse"):_T("$prefix:nombre_reponses",array('nombre'=>$nb_reponses)))),
 			generer_url_ecrire('donnees_tous',"id_form=$id_form".(strpos($retour,"exec=donnees_tous")===FALSE?"&retour=$retour":"")), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
 			
