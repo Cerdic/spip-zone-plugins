@@ -133,7 +133,7 @@ function inscription2_nouveau($declaration){
 	}}
 	if(isset($declaration['zones'])){
 		foreach($declaration['zones'] as $value)
-			spip_query("INSERT INTO spip_zone_auteurs (id_auteur, id_zone)VALUES ('$n', '$value')");
+			spip_query("INSERT INTO spip_zones_auteurs (id_auteur, id_zone)VALUES ('$n', '$value')");
 	}
 	$n = spip_abstract_insert('spip_auteurs_elargis', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	

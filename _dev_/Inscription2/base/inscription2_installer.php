@@ -18,7 +18,7 @@ function inscription2_verifier_base(){
 		//ajouts des différents champs
 		$desc = spip_abstract_showtable($table_nom, '', true);
 		foreach(lire_config('inscription2') as $cle => $val) {
-			if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'login' and $cle != 'naissance' and !ereg("^.+_(fiche|table).*$", $cle))
+			if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'naissance' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categorie|zone|newsletter).*$", $cle) and !ereg("^.+_(fiche|table).*$", $cle))
 				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
 			if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance')
 				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");

@@ -477,7 +477,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:statut_rel:></strong><br />
 	<:inscription2:exp_statut_rel:><br/>
 </label><label>
-	<input type="text" name="statut_rel" id="statut_rel" style="[(#ENV{statut_relances}|=={on}|?{display: block;, display:none;})]">
+	<input type="text" name="statut_rel" id="statut_rel" style="[(#ENV{statut_relances}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_rel}">
 </label>
 
 <div style="[(#CONFIG{plugin/ACCESRESTREINT}|?{display: block;, display:none;})]">
