@@ -50,18 +50,30 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	
 			elseif($cle=='accesrestreint') 
 				$var_user['zones'] = lire_config('inscription2/zones');
+				
+			elseif( $cle == 'domaines')
+				$dom = _request($cle);
 
 			else
 				$var_user[$cle] = _request($cle);
 		}
 	}
 	$commentaire = true;
-	if($var_user[email]){
+	$aux = true;
+	if($dom){
+		$aux = false;
+		include(_DIR_PLUGIN_INSCRIPTION2."/inc/domaines.php");
+		foreach($domaine[$dom] as $val)
+			$aux = ($aux or ereg("^.*".$val."$", $var_user[email]));
+		if(!$aux)
+			$message = _T('inscription2:mail_non_domaine');
+	}
+	if($var_user[email] and $aux){
 		$commentaire = message_inscription2($var_user, $mode);
 		if (is_array($commentaire)) 
 			$commentaire = envoyer_inscription2($commentaire);
+		$message = $commentaire ? '' : _T('inscription2:lisez_mail');
 	}
-	$message = $commentaire ? '' : _T('inscription2:lisez_mail');
 	return array("formulaires/inscription2", $GLOBALS['delais'],
 			array('message' => $message,
 				'mode' => $mode,

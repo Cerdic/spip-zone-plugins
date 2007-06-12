@@ -503,6 +503,12 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </label>
 </div>
 
+<label>
+	<input type="checkbox" name="domaines" onclick="showhide(this, '#expl')" [(#ENV{domaines}|?{checked="checked"})] id="domaines" />
+	<strong><:inscription2:domaines:></strong> <br />
+	<span id="expl" style="[(#ENV{domaines}|=={on}|?{display: block;, display:none;})]"><:inscription2:exp_domaines:></span>
+</label>
+
 </fieldset>
 [(#REM) Code jQuery plier/deplier les listes ]
 <script type="text/javascript"><!--

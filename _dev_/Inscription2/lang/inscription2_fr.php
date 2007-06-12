@@ -108,8 +108,13 @@ L\'&eacute;quipe de @nom_site@',
 'decembre' => 'd&eacute;cembre',
 
 'accesrestreint' => 'Acc&egrave;s Restreint',
-'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s'
+'choisir_zones' => 'Veuillez choisir les zones auxquelles vous voulez que les nouveaux adh&eacute;rents soient affect&eacute;s',
 
+'domaines' => 'Restreindre l\'acc&egrave;s &agrave; une liste predefinie des domaines',
+'exp_domaines' => 'Veuillez definir vos domaines dans le fichier inc/domaines.php en suivant le mod&egrave;le.',
+'domaine' => 'Domaine',
+'choix_domaine' => 'Veuillez choisir votre domaine',
+'mail_non_domaine' => 'L\'adresse email que vous avez donnée n\appartient pas au domaine que vous avez indiqu&eacute; vueillez essayer &agrave; nouveau'
 );
 
 

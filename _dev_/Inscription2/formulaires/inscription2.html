@@ -3,6 +3,7 @@
 <script src="#CHEMIN{jquery.validate.js}" type="text/javascript"></script>
 
 <script type="text/javascript">
+	
 	jQuery.validator.addMethod("chaine", function(value, element) {
 		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\. ]+$/.test(value);
 	}, "Ce champ est obligatoire, entrez une chaine valide svp");
@@ -116,7 +117,7 @@
 <br />
 <:inscription2:inserez_infos:>
 <br /><br />
-
+	
 <p [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
 	<label for="nom"><strong><:inscription2:nom:></strong></label><br />
 	<input type="text" name="nom" id="nom" /><br />
@@ -279,6 +280,21 @@
 	<input type="text" name="divers" id="divers" />
 	<br />
 </label>
+
+<?php
+	include(_DIR_PLUGIN_INSCRIPTION2."/inc/domaines.php");
+	if(sizeof($domaine)>0){
+		echo '	<label style="[(#CONFIG{inscription2/domaines}|=={on}|?{display: block;, display:none;})]">
+				<strong><:inscription2:domaine:></strong><br />
+				<:inscription2:choix_domaine:><br />
+				<select id="domaines" name="domaines">';
+		foreach($domaine as $cle => $value)
+				echo '<option value= '.$cle.'>'.$cle.'</option>';
+		echo '	</select>
+				<br />
+				</label>';
+	}
+?>
 
 
 </fieldset>
