@@ -504,6 +504,7 @@ add_outil( array(
 	'code:options' => '%%glossaire_limite%%',
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
+	'traitement:CHAPO:post_propre' => 'cs_glossaire',
 ));
 
 add_outil( array(
