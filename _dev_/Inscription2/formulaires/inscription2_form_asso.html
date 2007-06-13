@@ -1,0 +1,9 @@
+
+<select name="categories" id="categories">
+		<option value='0'>-</option>
+	<BOUCLE_categories(SPIP_ASSO_CATEGORIES){tout}>
+		[<option value="#ID_CATEGORIE" (#ID_CATEGORIE|in_array{#GET{selected}})>
+		#LIBELLE
+		</option>]
+</BOUCLE_categories>
+</select>

@@ -1,5 +1,3 @@
-<label id="zones" style="[(#ENV{accesrestreint}|=={on}|?{display: block;, display:none;})]">
-<:inscription2:choisir_zones:><br />
 
 #SET{selected,#CONFIG{inscription2/zones,'',''}}
 <select name="zones[]" multiple="multiple" size="5" id="zones">
@@ -9,7 +7,3 @@
 	</option>
 </BOUCLE_zones>
 </select>
-
-<small><br /><:inscription2:select_listes:><br />
-<a onclick="$('#zones').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
-</label>

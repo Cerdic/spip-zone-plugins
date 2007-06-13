@@ -1,0 +1,18 @@
+<div>
+#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
+	<BOUCLE_listes(LISTES){tout}>
+		[<option value="#ID_LISTE" (#ID_LISTE|in_array{#GET{selected}})>
+		#TITRE
+		</option>]
+	</BOUCLE_listes>
+</select><br />
+</div>
+<div>
+	<strong><:inscription2:format:></strong><br />
+	<:inscription2:expl_format:>
+	<select name="format" id="format">
+		<option value = "texte"><:inscription2:texte:></option>
+		<option value = "html"><:inscription2:html:></option>
+	</select>
+</div>

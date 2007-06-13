@@ -402,12 +402,19 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<:inscription2:exp_divers:>
 </label>
 <br />
-<div style="[(#CONFIG{plugin/SPIPLISTES}|?{display: block;, display:none;})]">
+
+<div [style="(#CONFIG{plugin/SPIPLISTES}|?{display: block;, display:none;})"]>
 <label>
 	<input type="checkbox" name="newsletter" onclick="showhide(this, '#news')" [(#ENV{newsletter}|?{#CONFIG{plugin/SPIPLISTES}|?{checked="checked"}})] id="newsletter" />
 	<strong><:inscription2:newsletter:></strong> 
 </label>
-[(#CONFIG{plugin/SPIPLISTES}) <INCLURE{fond=inscription2_spip_listes}>]
+
+<label id="news" style="[(#ENV{newsletter}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_listes:><br />
+[(#CONFIG{plugin/SPIPLISTES/version}|?{' ', ''}) <INCLURE{fond=fonds/inscription2_spip_listes}>]
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
+</label>
 </div>
 
 <div [style="(#CONFIG{plugin/ASSOCIATION}|?{display: block;, display:none;})"]>
@@ -417,7 +424,15 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<:inscription2:exp_categorie:>
 	<br />
 </label>
-[(#CONFIG{plugin/ASSOCIATION}) <INCLURE{fond=inscription2_association}>
+
+<label id='categs' style="[(#ENV{categorie}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_categories:>
+<br />
+[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=fonds/inscription2_association}>]
+
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#categories').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small>
+</label>
 </div>
 
 <label>
@@ -450,12 +465,19 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<input type="text" name="statut_rel" id="statut_rel" style="[(#ENV{statut_relances}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_rel}">
 </label>
 
-<div style="[(#CONFIG{plugin/ACCESRESTREINT}|?{display: block;, display:none;})]">
+<div [style="(#CONFIG{plugin/ACCESRESTREINT}|?{display: block;, display:none;})"]>
 <label>
 	<input type="checkbox" name="accesrestreint" onclick="showhide(this, '#zones')" [(#ENV{accesrestreint}|?{#CONFIG{plugin/ACCESRESTREINT}|?{checked="checked"}})] id="accesrestreint" />
 	<strong><:inscription2:accesrestreint:></strong> 
 </label>
-[(#CONFIG{plugin/ACCESRESTREINT})<INCLURE{fond=inscription2_acces_restreint}>
+
+<label id="zones" style="[(#ENV{accesrestreint}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_zones:><br />
+[(#CONFIG{plugin/ACCESRESTREINT}|?{' ', ''})<INCLURE{fond=fonds/inscription2_acces_restreint}>]
+
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#zones').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
+</label>
 </div>
 
 <label>

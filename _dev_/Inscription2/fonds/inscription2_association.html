@@ -1,0 +1,8 @@
+#SET{selected,#CONFIG{inscription2/categories,'',''}}
+<select name="categories[]" multiple="multiple" size="5" id="categories">
+<BOUCLE_categories(SPIP_ASSO_CATEGORIES)>
+	<option value="#ID_CATEGORIE"[(#ID_CATEGORIE|in_array{#GET{selected}}|?{ selected="selected"})]>
+	#LIBELLE
+	</option>
+</BOUCLE_categories>
+</select>
