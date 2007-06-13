@@ -267,9 +267,18 @@ if($valider) {
  		$titre = strtolower($titre);
 	}
 
+	// vérification avant mise en Base de donnée
+	$flag_ok = 'ok';
+	// vérification taille du titre : si trois caractère ou moins : erreur
+	if (strlen($titre) < 4) {
+		$flag_ok = 'ko';
+		$mess_error = _T('forum_attention_trois_caracteres');
+	}
+		
+
 	// l'auteur demande une insertion dans l'agenda
 
-	if ($choix_agenda == "OK") {
+	if (($choix_agenda == "OK") && (flag_ok == 'ok')) {
 
 		// construction de la date complete
 
@@ -297,7 +306,7 @@ if($valider) {
 
 		spip_query("DELETE FROM spip_articles WHERE id_article = '$article' LIMIT 1");
 	}
-	else { // soit il s'agit d'un article, soit d'une breve. Les deux à la fois ne sont pas possible
+	else if ($flag_ok== 'ok') { // soit il s'agit d'un article, soit d'une breve. Les deux à la fois ne sont pas possible
 
 		// préparation de la mise en base de donnée
 
@@ -346,247 +355,244 @@ if($valider) {
 	}
 	
 	// construction de la page de retour
-
-	$url_retour = $url_site . op_get_url_retour();
-	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_normal();
-	$message = $message . $retour;
-	return $message;
+	if ($flag_ok == 'ok') {
+		$url_retour = $url_site . op_get_url_retour();
+		$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_normal();
+		$message = $message . $retour;
+		return $message;
+	}
 }
 
 // si l'auteur ne valide pas ou entre pour la première fois, ou bien on effectue une action
 
-else
-{
-	// statut de l'article : en préparation
 
-	$statut="prepa";
+// statut de l'article : en préparation
+
+$statut="prepa";
 	
-	// si l'auteur demande la prévisualisation
+// si l'auteur demande la prévisualisation
 
-	if($previsualiser)
-	{
+if($previsualiser) {
 
-		// quelques petites vérifications
+	// quelques petites vérifications
 
-		if (strlen($titre) < 3){$erreur .= _T('forum_attention_trois_caracteres');}
-		if(!$erreur){$bouton= _T('form_prop_confirmer_envoi');}
+	if (strlen($titre) < 3){$erreur .= _T('forum_attention_trois_caracteres');}
+	if(!$erreur){$bouton= _T('form_prop_confirmer_envoi');}
 
-		// on rempli le formulaire de prévisualisation
+	// on rempli le formulaire de prévisualisation
 
-		$formulaire_previsu = inclure_balise_dynamique(
-		array('formulaires/formulaire_article_previsu', 0,
-			array(
-				'date_redac' => $date_redac,
-				'titre' => interdire_scripts(typo($titre)),
-				'texte' => propre($texte),
-				'erreur' => $erreur,
-				'nom_inscription' => $nom_inscription,
-				'mail_inscription' => $mail_inscription,
-				'group_name' => $group_name,
-				'phone' => $phone
-			)
-		), false);
-
-		// aucune idée de ce que c'est, mais ça à l'air important
-
-		$formulaire_previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism",
-		"<\\1no-f\\2", $formulaire_previsu);
-	}
-	
-	// si l'auteur demande des mots-clefs
-
-	if($mots) {
-		if ($motschoix){
-			foreach($motschoix as $mot){
-
-				//protection contre mots-clefs vide
-
-				$row = spip_fetch_array(spip_abstract_select('titre', 'spip_mots', "id_mot=$mot LIMIT 1"));
- 				$titremot = $row['titre'];
-				if (!(strcmp($titremot,"")==0)) {
-					if ($mot) {
-
-					// on lie l'article aux mots clefs choisis
-
-					spip_abstract_insert('spip_mots_articles', "(id_mot,id_article)", "(
-						" . spip_abstract_quote($mot) .",
-						" . spip_abstract_quote($article) . "
-					)");
-					}
-				}
-			}
-		}
-	}
-	
-	// si l'auteur demande des mots-clés avec Tag machine
-	
-	if ($tags) {
-		include_spip('inc/tag-machine');
-		ajouter_liste_mots(_request('tags'),
-			$article,
-			$groupe_defaut = 'tags',
-			'articles',
-			'id_article',
-			true);
-	}	
-
-	// si l'auteur ajoute un documents
-
-	if($media) {
-
-		// compatibilité php < 4.1
-
-    		if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
-		
-		// récupération des variables
-
-		$fichier = $_FILES['doc']['name'];
-		$size = $_FILES['doc']['size'];
-		$tmp = $_FILES['doc']['tmp_name'];
-		$type = $_FILES['doc']['type'];
-		$error = $_FILES['doc']['error'];
-		
-		// vérification si upload OK
-
-		if( !is_uploaded_file($tmp) ) {
-			echo $error;
-			$mess_error = _T('opconfig:erreur_upload');
-			$erreur_document = 1;
-    		}
-		else {
-
-			// verification si extention OK
-
-			$tableau = split('[.]', $fichier);
-			$type_ext = $tableau[1];
-		
-			// renomme les extensions
-
-			if (strcmp($type_ext,"jpeg")==0) $type_ext = "jpg";
-			
-			$tab_ext = get_types_documents();
-
-			$ok = 0;
-
-			// test si l'extension est autorisé
-
-			while ($row = mysql_fetch_array($tab_ext)) {
-				if (strcmp($row[0],$type_ext)==0) {
-					$ok = 1;
-				}
-			}
-
-			// ajout du document
-
-			if ($ok==1) {
-				inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
-			}
-			else { // sinon, erreur
-				$mess_error = _T('opconfig:erreur_extension');
-				$erreur_document = 1;
-			}
-		}
-
-	}
-
-	// cas d'un nouvel article ou re-affichage du formulaire
-
-	$flag = op_get_agenda();
-	if ($flag == 'oui') {
-
-		// Gestion de l'agenda
-
-		$formulaire_agenda = inclure_balise_dynamique(
-		array('formulaires/formulaire_agenda',	0,
-			array(
-				'annee' => $annee,
-				'mois' => $mois,
-				'jour' => $jour,
-				'heure' => $heure,
-				'choix_agenda' => $choix_agenda
-			)
-		), false);
-	}
-	
-	$flag = op_get_document();
-	if ($flag == 'oui') {
-
-		// Gestion des documents
-
-		$bouton= "Ajouter un nouveau document";
-		$formulaire_documents = inclure_balise_dynamique(
-		array('formulaires/formulaire_documents',	0,
-			array(
-				'id_article' => $article,
-				'tab_ext' => get_types_documents(),
-				'bouton' => $bouton,
-			)
-		), false);
-	}
-
-	$flag = op_get_tagmachine();
-	if ($flag == 'oui') {
-
-		// Gestion des mot-clefs avec tag machine
-
-		$formulaire_tagopen = inclure_balise_dynamique(
-		array('formulaires/formulaire_tagopen',	0,
-			array(
-				'id_article' => $article,
-			)
-		), false);
-	}
-
-	$flag = op_get_motclefs();
-	if ($flag =='oui') {
-
-		// Gestion des mot-clefs
-
-		$bouton= "Ajouter les nouveaux mot-clefs";
-		$formulaire_motclefs = inclure_balise_dynamique(
-		array('formulaires/formulaire_motclefs', 0,
-			array(
-				'id_article' => $article,
-				'bouton' => $bouton,
-			)
-		), false);
-	}
-
-	// Liste des documents associés à l'article
-
-	op_liste_vignette($article);
-
-	// le bouton valider
-
-	$bouton= _T('form_prop_confirmer_envoi');
-
-	// et on remplit le formulaire avec tout ça
-
-	return array('formulaires/formulaire_article', 0,
+	$formulaire_previsu = inclure_balise_dynamique(
+	array('formulaires/formulaire_article_previsu', 0,
 		array(
-			'formulaire_documents' => $formulaire_documents,
-			'formulaire_previsu' => $formulaire_previsu,
-			'formulaire_agenda' => $formulaire_agenda,
-			'formulaire_tagopen' => $formulaire_tagopen,
-			'formulaire_motclefs' => $formulaire_motclefs,
-			'bouton' => $bouton,
-			'article' => $article,
-			'rubrique' => $rubrique,
-			'mess_error' => $mess_error,
-			'annee' => $annee,
-			'mois' => $mois,
-			'jour' => $jour,
-			'heure' => $heure,
-			'url' =>  $url,
+			'date_redac' => $date_redac,
 			'titre' => interdire_scripts(typo($titre)),
-			'texte' => $texte,
+			'texte' => propre($texte),
+			'erreur' => $erreur,
 			'nom_inscription' => $nom_inscription,
 			'mail_inscription' => $mail_inscription,
 			'group_name' => $group_name,
 			'phone' => $phone
-		));
+		)
+	), false);
+
+	// aucune idée de ce que c'est, mais ça à l'air important
+	$formulaire_previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism",
+	"<\\1no-f\\2", $formulaire_previsu);
 }
+	
+	// si l'auteur demande des mots-clefs
+
+if($mots) {
+	if ($motschoix){
+		foreach($motschoix as $mot){
+
+			//protection contre mots-clefs vide
+
+			$row = spip_fetch_array(spip_abstract_select('titre', 'spip_mots', "id_mot=$mot LIMIT 1"));
+			$titremot = $row['titre'];
+			if (!(strcmp($titremot,"")==0)) {
+				if ($mot) {
+
+				// on lie l'article aux mots clefs choisis
+
+				spip_abstract_insert('spip_mots_articles', "(id_mot,id_article)", "(
+					" . spip_abstract_quote($mot) .",
+					" . spip_abstract_quote($article) . "
+				)");
+				}
+			}
+		}
+	}
 }
+	
+// si l'auteur demande des mots-clés avec Tag machine
+	
+if ($tags) {
+	include_spip('inc/tag-machine');
+	ajouter_liste_mots(_request('tags'),
+		$article,
+		$groupe_defaut = 'tags',
+		'articles',
+		'id_article',
+		true);
+}	
+
+// si l'auteur ajoute un documents
+
+if($media) {
+
+	// compatibilité php < 4.1
+
+	if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
+		
+	// récupération des variables
+
+	$fichier = $_FILES['doc']['name'];
+	$size = $_FILES['doc']['size'];
+	$tmp = $_FILES['doc']['tmp_name'];
+	$type = $_FILES['doc']['type'];
+	$error = $_FILES['doc']['error'];
+		
+	// vérification si upload OK
+
+	if( !is_uploaded_file($tmp) ) {
+		echo $error;
+		$mess_error = _T('opconfig:erreur_upload');
+		$erreur_document = 1;
+	}
+	else {
+
+		// verification si extention OK
+
+		$tableau = split('[.]', $fichier);
+		$type_ext = $tableau[1];
+	
+		// renomme les extensions
+
+		if (strcmp($type_ext,"jpeg")==0) $type_ext = "jpg";
+			
+		$tab_ext = get_types_documents();
+
+		$ok = 0;
+
+		// test si l'extension est autorisé
+
+		while ($row = mysql_fetch_array($tab_ext)) {
+			if (strcmp($row[0],$type_ext)==0) {
+				$ok = 1;
+			}
+		}
+
+		// ajout du document
+
+		if ($ok==1) {
+			inc_ajouter_documents_dist ($tmp, $fichier, "article", $article, $type_doc, $id_document, $documents_actifs);
+		}
+		else { // sinon, erreur
+			$mess_error = _T('opconfig:erreur_extension');
+			$erreur_document = 1;
+		}
+	}
+}
+
+// cas d'un nouvel article ou re-affichage du formulaire
+
+$flag = op_get_agenda();
+if ($flag == 'oui') {
+
+	// Gestion de l'agenda
+
+	$formulaire_agenda = inclure_balise_dynamique(
+	array('formulaires/formulaire_agenda',	0,
+		array(
+			'annee' => $annee,
+			'mois' => $mois,
+			'jour' => $jour,
+			'heure' => $heure,
+			'choix_agenda' => $choix_agenda
+		)
+	), false);
+}
+	
+$flag = op_get_document();
+if ($flag == 'oui') {
+
+	// Gestion des documents
+
+	$bouton= "Ajouter un nouveau document";
+	$formulaire_documents = inclure_balise_dynamique(
+	array('formulaires/formulaire_documents',	0,
+		array(
+			'id_article' => $article,
+			'tab_ext' => get_types_documents(),
+			'bouton' => $bouton,
+		)
+	), false);
+}
+
+$flag = op_get_tagmachine();
+if ($flag == 'oui') {
+
+	// Gestion des mot-clefs avec tag machine
+
+	$formulaire_tagopen = inclure_balise_dynamique(
+	array('formulaires/formulaire_tagopen',	0,
+		array(
+			'id_article' => $article,
+		)
+	), false);
+}
+
+$flag = op_get_motclefs();
+if ($flag =='oui') {
+
+	// Gestion des mot-clefs
+
+	$bouton= "Ajouter les nouveaux mot-clefs";
+	$formulaire_motclefs = inclure_balise_dynamique(
+	array('formulaires/formulaire_motclefs', 0,
+		array(
+			'id_article' => $article,
+			'bouton' => $bouton,
+		)
+	), false);
+}
+
+// Liste des documents associés à l'article
+
+op_liste_vignette($article);
+
+// le bouton valider
+
+$bouton= _T('form_prop_confirmer_envoi');
+
+// et on remplit le formulaire avec tout ça
+
+return array('formulaires/formulaire_article', 0,
+	array(
+		'formulaire_documents' => $formulaire_documents,
+		'formulaire_previsu' => $formulaire_previsu,
+		'formulaire_agenda' => $formulaire_agenda,
+		'formulaire_tagopen' => $formulaire_tagopen,
+		'formulaire_motclefs' => $formulaire_motclefs,
+		'bouton' => $bouton,
+		'article' => $article,
+		'rubrique' => $rubrique,
+		'mess_error' => $mess_error,
+		'annee' => $annee,
+		'mois' => $mois,
+		'jour' => $jour,
+		'heure' => $heure,
+		'url' =>  $url,
+		'titre' => interdire_scripts(typo($titre)),
+		'texte' => $texte,
+		'nom_inscription' => $nom_inscription,
+		'mail_inscription' => $mail_inscription,
+		'group_name' => $group_name,
+		'phone' => $phone
+	));
+}
+
 
 
 ?>
