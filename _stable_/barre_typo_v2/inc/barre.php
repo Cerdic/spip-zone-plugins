@@ -78,7 +78,7 @@ function produceWharf($id, $title = '', $sb = '') {
     $res .= bte_debut_block_invisible("arb_".$GLOBALS['numero_block'][$id]);
   }
   $res .= $sb;
-  $res .= fin_block();
+  $res .= '</div>';
   return $res;
 }
 
@@ -324,6 +324,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 
 	$ret .= "</td>";
+	$col++;
 
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
@@ -333,6 +334,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 
 	$ret .= "</td>";
+	$col++;
 
 	if (!_DIR_RESTREINT) {
 		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
