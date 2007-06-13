@@ -1,0 +1,58 @@
+[(#REM)
+	Modele pour le Flash MEDIA player 3.8  : Playlist below, using mixed media files
+	http://www.jeroenwijering.com/extras/readme.html
+	http://www.jeroenwijering.com/?item=Flash_video_Player
+	The Flash Media player supports playback of a single media file of any format the Adobe Flash Player can handle (MP3,FLV,SWF,JPG,PNG or GIF).
+	This script is licensed under a Creative Commons License.
+	It allows you to use and modify the script for noncommercial purposes. 
+	For commercial use, Jeroenwijering distribute licenses of the script for 15 euros. 
+	For more info and instant ordering, please advance to his online order page!
+	http://www.jeroenwijering.com/?order=form
+	
+	Modele spip mis au point sur irc a l'initiative d'alexandra
+	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
+	
+<template><rotator123></template>
+	ou 123 est l'id article fournissant les documents attaches]
+
+<script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
+<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/ -->
+
+<noscript>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </noscript>
+<!-- alternetive texte pour ceux qui ont le js desactive -->
+
+<div id="flashcontent">
+
+		
+<p>
+<a href="http://www.macromedia.com/go/getflashplayer">
+Get the Flash Player</a> to see this player.
+</p>
+
+<script type="text/javascript">
+// <![CDATA[
+
+	var s1 = new SWFObject("#CHEMIN{mediaplayer.swf}","mediaplayer","320","240","7");
+	s1.addVariable("file",
+		encodeURIComponent("spip.php?page=xspf&type=jpg|png|gif|mp3|flv|swf&id_article=[(#ENV{id_mediaplayer})]"));
+	s1.addParam("allowfullscreen","true");
+	s1.addVariable("displayheight","200");
+	s1.addVariable("backcolor","0x000000");
+	s1.addVariable("frontcolor","0xCCCCCC");
+	s1.addVariable("lightcolor","0x996600");
+	s1.addVariable("showdigits","true");
+	s1.addVariable("thumbsinplaylist","true");
+	s1.addVariable("type","flv,swf,mp3,jpg,png,gif");
+	s1.write("flashcontent");
+// ]]>
+</script>
+
+</div>
+
+[(#REM)
+Assistant wizard pour personnaliser les variables
+http://www.jeroenwijering.com/extras/wizard.html
+Toutes les options du flash image rotator des flashvars sont disponibles ici 
+http://www.jeroenwijering.com/extras/readme.html]
+
+

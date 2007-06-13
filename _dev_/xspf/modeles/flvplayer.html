@@ -1,0 +1,53 @@
+[(#REM)
+	Modele pour le Flash video player 3.8 3.8 : Single flv with full display and preview
+	http://www.jeroenwijering.com/extras/readme.html
+	http://www.jeroenwijering.com/?item=Flash_video_Player
+	This script is licensed under a Creative Commons License.
+	It allows you to use and modify the script for noncommercial purposes. 
+	For commercial use, Jeroenwijering distribute licenses of the script for 15 euros. 
+	For more info and instant ordering, please advance to his online order page!
+	http://www.jeroenwijering.com/?order=form
+	
+	Modele spip mis au point sur irc a l'initiative d'alexandra
+	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
+	
+<template><flvplayer123></template>
+	ou 123 est l'id article fournissant les documents attaches]
+
+<script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
+<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/ -->
+
+<noscript>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </noscript>
+<!-- alternetive texte pour ceux qui ont le js desactive -->
+<div id="flashcontent">
+
+		
+<p>
+<a href="http://www.macromedia.com/go/getflashplayer">
+Get the Flash Player</a> to see this player.
+</p>
+
+<script type="text/javascript">
+// <![CDATA[
+
+	var s1 = new SWFObject("#CHEMIN{flvplayer.swf}","flvplayer","320","240","7");
+	s1.addVariable("file",
+		encodeURIComponent("spip.php?page=xspf&type=flv&id_article=[(#ENV{id_flvplayer})]"));
+	s1.addParam("allowfullscreen","true");
+	s1.write("flashcontent");
+	s1.addVariable('displayheight',"240");
+	s1.addVariable("width","320");
+	s1.addVariable("image","url");
+	s1.addVariable("backcolor","0xFFFFFF");
+	s1.addParam("menu","true");
+// ]]>
+</script>
+
+</div>
+
+[(#REM)
+Assistant wizard pour personnaliser les variables
+http://www.jeroenwijering.com/extras/wizard.html
+Toutes les options flashvars du lecteur flash video player sont disponibles ici 
+http://www.jeroenwijering.com/extras/readme.html]
+
