@@ -38,8 +38,7 @@ techniques, les mots cl&eacute;s techniques seront repr&eacute;sent&eacute;s par
 roue dent&eacute;e au lieu d'une cl&eacute; à molette.
 - Par d&eacute;faut, les boucles MOTS et GROUPES_MOTS filtreront les mots-cl&eacute;s 
 techniques. Cependant, le critère {tout} permettra de renvoyer tous 
-les mots cl&eacute;s, et le critère {technique=truc} permettra de renvoyer 
-uniquement les mots des groupes tel que technique vaut truc.
+les mots cl&eacute;s.
 
 ATTENTION : il semble que la d&eacute;claration des tables de SPIP &eacute;crase celle r&eacute;alis&eacute;e par le plugin. Il faut donc commenter les lignes 387 et 388 de base/serial.php pour pouvoir tester les boucles.
 	</multi>
