@@ -180,9 +180,12 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 	<option value="0">Personne (valeur par d&#233;faut)</option>
 	<option value="1"[ selected="(#ENV{editer_forums}|=={1}|?{selected})"]>Le webmestre</option>
 	<option value="2"[ selected="(#ENV{editer_forums}|=={2}|?{selected})"]>Les administrateurs</option>
-	<option value="3"[ selected="(#ENV{editer_forums}|=={3}|?{selected})"]>L'auteur du message, pendant une heure [s'il s'est enregistr&#233;]</option>
-	<option value="4"[ selected="(#ENV{editer_forums}|=={4}|?{selected})"]>L'auteur du message, ad vitam [s'il s'est enregistr&#233;]</option>
+	<option value="3"[ selected="(#ENV{editer_forums}|=={3}|?{selected})"]>L'auteur du message, pendant une heure</option>
+	<option value="4"[ selected="(#ENV{editer_forums}|=={4}|?{selected})"]>L'auteur du message, ad vitam</option>
 	</select>
+
+	<small><br />Pour le moment, l'option &#171;&#160;auteur&#160;&#187; ne fonctionne que pour les auteurs enregistr&#233;s (forums sur abonnement, par exemple). Et, si elle est activ&#233;e, les administrateurs du site ont aussi la capacit&#233; d'&#233;diter les forums.
+	</small>
 	</p>
 
 [(#REM)
