@@ -7,10 +7,7 @@
 
 // Dire rapidement si ca vaut le coup de chercher des droits
 function analyse_droits_rapide_dist() {
-    if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
-        return false;
-    else
-        return true;
+    return isset($GLOBALS['auteur_session']['statut']);
 }
 
 // Le pipeline header_prive (pour y tester les crayons)
