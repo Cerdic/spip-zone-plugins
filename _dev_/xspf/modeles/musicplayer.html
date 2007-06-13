@@ -6,18 +6,26 @@
 	ou 123 est l'id article fournissant les documents mp3 attaches]
 
 <script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
+<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/ -->
 
-<p id="player1">
+<noscript>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </noscript>
+<!-- alternetive texte pour ceux qui ont le js desactive -->
+
+<div id="flashcontent">
+
+<p>
 <a href="http://www.macromedia.com/go/getflashplayer">
 Get the Flash Player</a> to see this player.
 </p>
 
 <script type="text/javascript">
-
-	var s1 = new SWFObject("#CHEMIN{xspf_player.swf}","musicplayer","600","200","7");
+// <![CDATA[
+	var s1 = new SWFObject("#CHEMIN{xspf_player.swf}","musicplayer","100%","100%","7");
 	s1.addVariable("playlist_url",
 		encodeURIComponent("spip.php?page=xspf&type=mp3&id_article=[(#ENV{id_musicplayer})]"))
 	s1.addVariable("autoload","true");
-	s1.write("player1");
-
+	s1.write("flashcontent");
+// ]]>
 </script>
+</div>
+
