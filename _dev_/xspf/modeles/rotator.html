@@ -10,26 +10,51 @@
 	
 	Modele spip mis au point sur irc a l'initiative d'alexandra
 	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
-	Merci a eux.
 	
-	<template><rotator123></template>
+<template><rotator123></template>
 	ou 123 est l'id article fournissant les documents attaches]
 
 <script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
+<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/ -->
 
-<p id="player1">
+<noscript>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </noscript>
+<!-- alternetive texte pour ceux qui ont le js desactive -->
+<div id="flashcontent">
+
+		
+<p>
 <a href="http://www.macromedia.com/go/getflashplayer">
 Get the Flash Player</a> to see this player.
 </p>
 
 <script type="text/javascript">
+// <![CDATA[
 
-	var s1 = new SWFObject("#CHEMIN{imagerotator.swf}","rotator","600","200","7");
+	var s1 = new SWFObject("#CHEMIN{imagerotator.swf}","rotator","100%","100%","7");
 	s1.addVariable("file",
-		encodeURIComponent("spip.php?page=xspf&type=jpg|png|gif&id_article=[(#ENV{id_rotator})]"))
-	s1.addVariable("transition","lines");
+		encodeURIComponent("spip.php?page=xspf&type=jpg|png|gif&id_article=[(#ENV{id_rotator})]"));
+	s1.addVariable("transition","fades");
 	s1.addVariable("overstretch","false");
 	s1.addVariable("backcolor","0xFFFFFF");
-	s1.write("player1");
-
+	s1.addVariable("shownavigation","true");
+	s1.addVariable("overstretch","true");
+	s1.addVariable("frontcolor","0x000000");
+	s1.addVariable("lightcolor","0xCC0000");
+	s1.addVariable("kenburns","false");
+	s1.addVariable("overstretch","none");
+	s1.addVariable("repeat","true");
+	s1.addVariable("rotatetime","10");
+	s1.addVariable("shuffle","false");
+	s1.addVariable("height","100%");
+	s1.addVariable("width","100%");
+	s1.addVariable("logo","url");
+	s1.addParam('menu','true');
+	s1.write("flashcontent");
+// ]]>
 </script>
+
+</div>
+
+[(#REM)
+Toutes les options du flash image rotator des flashvars sont disponibles ici http://www.jeroenwijering.com/extras/readme.html
+Les transitions disponibles  (fade,bgfade,blocks,bubbles,circles,fluids,lines,random,slowfade):	]
