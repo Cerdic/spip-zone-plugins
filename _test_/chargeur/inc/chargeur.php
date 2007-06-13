@@ -33,7 +33,7 @@ function chargeur_charger_zip($quoi = array())
 	}
 
 	include_spip('inc/distant');
-	$contenu = recuperer_page($quoi['zip']);
+	$contenu = recuperer_page($quoi['zip'], false, false, 8000000);
 
 	if (!$contenu || !($fichier = chargeur_ecrire_fichier_zip($quoi['zip'], $contenu))) {
 		spip_log('charger_decompresser impossible de charger ' . $quoi['zip']);
