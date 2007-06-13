@@ -1,0 +1,15 @@
+<label id="news" style="[(#ENV{newsletter}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_listes:><br />
+
+#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
+<BOUCLE_listes(LISTES){tout}>
+	<option value="#ID_LISTE"[(#ID_LISTE|in_array{#GET{selected}}|?{ selected="selected"})]>
+	#TITRE
+	</option>
+</BOUCLE_listes>
+</select>
+
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
+</label>

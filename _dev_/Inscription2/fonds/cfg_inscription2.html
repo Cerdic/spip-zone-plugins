@@ -407,22 +407,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<input type="checkbox" name="newsletter" onclick="showhide(this, '#news')" [(#ENV{newsletter}|?{#CONFIG{plugin/SPIPLISTES}|?{checked="checked"}})] id="newsletter" />
 	<strong><:inscription2:newsletter:></strong> 
 </label>
-
-<label id="news" style="[(#ENV{newsletter}|=={on}|?{display: block;, display:none;})]">
-<:inscription2:choisir_listes:><br />
-
-#SET{selected,#CONFIG{inscription2/newsletters,'',''}}
-<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
-[(#CONFIG{plugin/SPIPLISTES})<BOUCLE_listes(LISTES){tout}>
-	<option value="#ID_LISTE"[(#ID_LISTE|in_array{#GET{selected}}|?{ selected="selected"})]>
-	#TITRE
-	</option>
-</BOUCLE_listes>]
-</select>
-
-<small><br /><:inscription2:select_listes:><br />
-<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
-</label>
+[(#CONFIG{plugin/SPIPLISTES}) <INCLURE{fond=inscription2_spip_listes}>]
 </div>
 
 <div [style="(#CONFIG{plugin/ASSOCIATION}|?{display: block;, display:none;})"]>
@@ -432,22 +417,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<:inscription2:exp_categorie:>
 	<br />
 </label>
-
-<label id='categs' style="[(#ENV{categorie}|=={on}|?{display: block;, display:none;})]">
-<:inscription2:choisir_categories:>
-<br />
-#SET{selected,#CONFIG{inscription2/categories,'',''}}
-<select name="categories[]" multiple="multiple" size="5" id="categories">
-[(#CONFIG{plugin/ASSOCIATION})<BOUCLE_categories(SPIP_ASSO_CATEGORIES)>
-	<option value="#ID_CATEGORIE"[(#ID_CATEGORIE|in_array{#GET{selected}}|?{ selected="selected"})]>
-	#LIBELLE
-	</option>
-</BOUCLE_categories>]
-</select>
-
-<small><br /><:inscription2:select_listes:><br />
-<a onclick="$('#categories').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small>
-</label>
+[(#CONFIG{plugin/ASSOCIATION}) <INCLURE{fond=inscription2_association}>
 </div>
 
 <label>
@@ -485,22 +455,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<input type="checkbox" name="accesrestreint" onclick="showhide(this, '#zones')" [(#ENV{accesrestreint}|?{#CONFIG{plugin/ACCESRESTREINT}|?{checked="checked"}})] id="accesrestreint" />
 	<strong><:inscription2:accesrestreint:></strong> 
 </label>
-
-<label id="zones" style="[(#ENV{accesrestreint}|=={on}|?{display: block;, display:none;})]">
-<:inscription2:choisir_zones:><br />
-
-#SET{selected,#CONFIG{inscription2/zones,'',''}}
-<select name="zones[]" multiple="multiple" size="5" id="zones">
-[(#CONFIG{plugin/ACCESRESTREINT})<BOUCLE_zones(Spip_zones){tout}>
-	<option value="#ID_ZONE"[(#ID_ZONE|in_array{#GET{selected}}|?{ selected="selected"})]>
-	#TITRE
-	</option>
-</BOUCLE_zones>]
-</select>
-
-<small><br /><:inscription2:select_listes:><br />
-<a onclick="$('#zones').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
-</label>
+[(#CONFIG{plugin/ACCESRESTREINT})<INCLURE{fond=inscription2_acces_restreint}>
 </div>
 
 <label>
