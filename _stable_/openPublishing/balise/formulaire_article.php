@@ -519,7 +519,7 @@ if ($flag == 'oui') {
 
 	// Gestion des documents
 
-	$bouton= "Ajouter un nouveau document";
+	$bouton= 'Ajouter l\'image ou le document';
 	$formulaire_documents = inclure_balise_dynamique(
 	array('formulaires/formulaire_documents',	0,
 		array(
