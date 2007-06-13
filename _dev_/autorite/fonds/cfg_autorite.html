@@ -192,10 +192,10 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 	<p>
 	<label><strong>Signatures&nbsp;:</strong> qui peut modifier les signatures des p&#233;titions&nbsp;:
 	<br />
-	<select name="editer_forums">
+	<select name="editer_signatures">
 	<option value="0">Personne (valeur par d&#233;faut)</option>
-	<option value="1"[ selected="(#ENV{editer_forums}|=={1}|?{selected})"]>Le webmestre</option>
-	<option value="2"[ selected="(#ENV{editer_forums}|=={2}|?{selected})"]>Les administrateurs</option>
+	<option value="1"[ selected="(#ENV{editer_signatures}|=={1}|?{selected})"]>Le webmestre</option>
+	<option value="2"[ selected="(#ENV{editer_signatures}|=={2}|?{selected})"]>Les administrateurs</option>
 <!--
 	<option value="2"[ selected="(#ENV{editer_signatures}|=={2}|?{selected})"]>Le signataire, pendant une heure [s'il s'est enregistr&#233;]</option>
 	<option value="3"[ selected="(#ENV{editer_signatures}|=={3}|?{selected})"]>le signataire, ad vitam</option>
