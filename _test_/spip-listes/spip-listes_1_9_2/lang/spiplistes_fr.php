@@ -136,7 +136,7 @@ et de recevoir les lettres d\'informations.',
 'jours' => 'jours',
 
 //L
-'langue' => '<strong>Langue :</strong>&nbsp;',<br>
+'langue' => '<strong>Langue :</strong>&nbsp;',
 'lire' => 'Lire',
 'Listes_de_diffusion' => 'Listes de diffusion',
 'login' => 'Connexion',
