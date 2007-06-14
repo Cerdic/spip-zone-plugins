@@ -37,7 +37,7 @@ function exec_smslist_boiteenvois_tous() {
 
 	echo debut_droite("smslist",true);
 	
-	include_spip("exec/template/tables_affichage");
+	include_spip("inc/forms_tables_affichage");
 	$liste = Forms_liste_tables('smslist_boiteenvoi');
 	echo affichage_donnees_tous_corps('smslist_boiteenvoi',reset($liste));
 

@@ -37,8 +37,6 @@ function exec_smslist_config() {
 	echo creer_colonne_droite();
 
 	echo debut_droite("smslist",true);
-	
-	include_spip("exec/template/tables_affichage");
 	$liste = Forms_liste_tables('smslist_compte');
 	echo affichage_donnees_tous_corps('smslist_compte',reset($liste));
 

@@ -54,7 +54,7 @@ function exec_spip_sms_listes() {
 		'colonne_extra_titre'=>"<img src='"._DIR_PLUGIN_SMSLIST. "img_pack/envoyer-message-16.png' width='16' height='16' alt='"._T('icone_envoyer_message')."' />",
 		'colonne_extra_url'=>generer_url_action('smslist_envoyer_message')
 		);
-		echo recuperer_fond("exec/template/donnees_tous",$contexte);	
+		echo recuperer_fond("fonds/donnees_tous",$contexte);	
 	}
 
 	// messages en attende d'envoi
@@ -69,7 +69,7 @@ function exec_spip_sms_listes() {
 		'colonne_extra_titre'=>"<img src='"._DIR_IMG_PACK. "supprimer.gif' width='24' height='24' alt='"._T('bouton_annuler')."' />",
 		'colonne_extra_url'=>generer_url_action('smslist_instituer_envoi','statut=poubelle')
 		);
-		echo $s1=recuperer_fond("exec/template/donnees_tous",$contexte);	
+		echo $s1=recuperer_fond("fonds/donnees_tous",$contexte);	
 	}
 	// messages interrompus
 	foreach(Forms_liste_tables('smslist_boiteenvoi') as $id_form){
@@ -83,7 +83,7 @@ function exec_spip_sms_listes() {
 		'colonne_extra_titre'=>"<img src='"._DIR_PLUGIN_SMSLIST. "img_pack/envoyer-message-16.png' width='16' height='16' alt='"._T('smslist:reprendre_envoi')."' />",
 		'colonne_extra_url'=>generer_url_action('smslist_instituer_envoi','statut=prop')
 		);
-		echo $s2=recuperer_fond("exec/template/donnees_tous",$contexte);	
+		echo $s2=recuperer_fond("fonds/donnees_tous",$contexte);	
 	}	
 	// messages en cours d'envoi
 	foreach(Forms_liste_tables('smslist_boiteenvoi') as $id_form){
@@ -97,7 +97,7 @@ function exec_spip_sms_listes() {
 		'colonne_extra_titre'=>"<img src='"._DIR_IMG_PACK. "warning-24.gif' width='24' height='24' alt='"._T('smslist:stopper_envoi')."' />",
 		'colonne_extra_url'=>generer_url_action('smslist_instituer_envoi','statut=refuse')
 		);
-		echo $s3=recuperer_fond("exec/template/donnees_tous",$contexte);
+		echo $s3=recuperer_fond("fonds/donnees_tous",$contexte);
 		if (_request('var_mode')!='test')
 			echo smslist_boite_autocron();
 	}
