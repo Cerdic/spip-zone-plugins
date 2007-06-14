@@ -1,0 +1,35 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+          csv2spip
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+          cy_altern
+					(c) 2006 - Licence GPL
+        </auteur>
+        <version>
+         3.0
+        </version>
+        <etat>
+          test
+        </etat>
+        <description>
+          Permet de r&#233;aliser l'int&#233;gration d'auteurs et administrateurs restreints &#224; partir de fichiers CSV. 
+					Ce plugin g&#232;re &#233;galement la cr&#233;ation de rubriques pour les admins restreints 
+					ainsi que la cr&#233;ation de groupes pour les restrictions d'acc&#232;s (plugin acces_groupes).
+					Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&#233;s avec &#233;ventuellement la sauvegarde/gestion
+					de leurs articles.
+        </description>
+				<lien>http://www.spip-contrib.net/?article1550</lien> <!-- URI de documentation -->
+        <prefix>
+          csv2spip
+        </prefix>
+				<icon>
+				  img_pack/csv2spip-24.png
+				</icon>
+        <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+        <pipeline>
+        		<nom>ajouter_boutons</nom>
+            <inclure>csv2spip_pipelines.php</inclure>
+        </pipeline>
+        <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        -->
+</plugin>
