@@ -47,7 +47,7 @@ function exec_courrier_edit(){
 	}
 
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
 	if ($connect_statut != "0minirezo" ) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
@@ -57,7 +57,7 @@ function exec_courrier_edit(){
 
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 
 	debut_gauche();
@@ -155,12 +155,12 @@ function exec_courrier_edit(){
 	if(!intval($id_message))
 		echo "<input type='hidden' name='new' value=\"oui\" />";
 
-	echo "<b>Sujet du courrier</b> (obligatoire)<br />";
+	echo _T('spiplistes:sujet_courrier');
 
 	echo "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' />";
 	echo "<br />";
 	echo "<br />";
-	echo "<b>Texte du courrier</b> (HTML autoris&eacute;)";
+	echo _T('spiplistes:texte_courrier');
 	echo aide ("raccourcis");
 	echo "<br />";
 	echo afficher_barre('document.formulaire.texte');

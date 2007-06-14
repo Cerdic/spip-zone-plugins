@@ -40,7 +40,7 @@ function exec_abonnes_tous(){
 	$urlsite=lire_meta("adresse_site"); 
 	
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
 	if ($connect_statut != "0minirezo" ) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
@@ -49,7 +49,7 @@ function exec_abonnes_tous(){
 	}
 	
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur))
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
 	spip_listes_raccourcis();
@@ -107,10 +107,10 @@ function exec_abonnes_tous(){
 	
 	$total = $cmpt['html'] + $cmpt['texte'] + $cmpt['non']; // ?
 	
-	echo "Nombre d'abonn&eacute;s : ". $total_abo .
-	  "<p>Abonn&eacute;s aux listes publiques : " . $nb_abonnes['liste'] .
-	  "<br />Abonn&eacute;s aux listes internes : ". $nb_abonnes['inact'] .
-	  "<br />Abonn&eacute;s &agrave; aucune liste : " . ($nb_abonnes_auc - $cmpt['non']) . "</p>";
+	echo _T('spiplistes:nbre_abonnes'). $total_abo .
+	  _T('spiplistes:abonnes_liste_pub') . $nb_abonnes['liste'] .
+	  _T('spiplistes:abonnes_liste_int') . $nb_abonnes['inact'] .
+	  _T('spiplistes:abonne_aucune_liste') . ($nb_abonnes_auc - $cmpt['non']) . "</p>";
 	
 	echo"</div>";
 	

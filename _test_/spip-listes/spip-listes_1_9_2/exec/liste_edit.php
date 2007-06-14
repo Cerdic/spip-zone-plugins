@@ -43,7 +43,7 @@ function exec_liste_edit(){
 	$urlsite=lire_meta("adresse_site"); 
 	 
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
 	if (!autoriser('modifier','liste',$id_liste)) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
@@ -53,7 +53,7 @@ function exec_liste_edit(){
 	
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 	
 	debut_gauche();
@@ -197,10 +197,10 @@ function exec_liste_edit(){
 		$pied = recuperer_fond('modeles/piedmail', $contexte_pied);
 	}	
 
-	echo "<p><b>Texte du pied de page</b>";
+	echo _T('spiplistes:texte_pied');
 	//echo aide ("artdesc");
 	//echo "<br />"._T('texte_contenu_article')."<br />";
-	echo "<br />(Message ajout&eacute; en bas de chaque email au moment de l'envoi)<br />";
+	echo _T('spiplistes:texte_contenu_pied');
 	echo "<input type='hidden' name='pied_page' value='$pied'>";
 	
 

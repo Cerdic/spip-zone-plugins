@@ -114,12 +114,12 @@ function exec_import_export(){
 // generation du fichier export fin
 
 // Admin SPIP-Listes
-	echo debut_page("SPIP-listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
 // spip-listes bien installe?
 	if (!function_exists(spip_listes_onglets)){
-		echo("<h3>erreur: spip-listes est mal install&eacute;!</h3>"); 
-		echo("<p>V&eacute;rifier les &eacute;tapes d'installation, notamment si vous avez bien renomm&eacute;<i>mes_options.txt</i> en <i>mes_options.php3</i>.</p>");
+		echo(_T('spiplistes:erreur_install')); 
+		echo(_T('spiplistes:erreur_install2'));
 		echo fin_page();
 		exit;
 	}
@@ -132,7 +132,7 @@ function exec_import_export(){
 
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 
 	debut_gauche();
@@ -307,7 +307,7 @@ function exec_import_export(){
 			if ($nb_listes = 1) $ischecked = "";
 			else $ischecked = "checked='checked'";
 			echo "<input type=\"checkbox\" name=\"list_abo[]\" $ischecked value=\"".$id_liste."\" />\n";
-			echo "<a href='?exec=import_export&liste=$id_liste' title='informations sur cette liste'>$titre</a><br />" ;
+			echo "<a href='?exec=import_export&liste=$id_liste' title='"._T('spiplistes:infos_liste')."'>$titre</a><br />" ;
 		}
 		echo "<br />";
 		bloog_extra_saisie('', 'auteurs', 'inscription');

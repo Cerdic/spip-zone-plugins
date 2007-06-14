@@ -38,9 +38,9 @@
 [(#ENV{formulaire_affiche}|?{' ',''})
  <div style="text-align: left;"> 
 				 <strong>Format :</strong><br> 
-				 <input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio">Html<br> 
-				 <input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio">Texte<br> 
-				 <input name="suppl_abo" [(#ENV{format}|=={html}|?{'checked=checked',''})] value="non" type="radio">D&eacute;sabonnement<br> 
+				 <input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio"><:html:><br> 
+				 <input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio"><:texte:><br> 
+				 <input name="suppl_abo" [(#ENV{format}|=={html}|?{'checked=checked',''})] value="non" type="radio"><:desabonnement:><br> 
 				 </div> 
 	<input style="margin-top:3px" type='submit' name='Valider' value='<:spiplistes:abonnement_bouton:>' />
 	<input type="hidden" name="d"  value="[(#ENV{d})]"  />
@@ -59,7 +59,7 @@
 		<div style="text-align:right">
 			<input type="text" class="fondo" name="email_desabo" value="" />
 			<input type="hidden" name="desabo" value="oui" />
-			<input type="submit" class="fondl" name="oubli" value="OK" />
+			<input type="submit" class="fondl" name="oubli" value="<:pass_ok:>" />
 		</div>
 	</form>})]
 </fieldset>

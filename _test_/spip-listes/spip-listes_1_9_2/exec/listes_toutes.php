@@ -36,10 +36,10 @@ function exec_listes_toutes(){
 	$urlsite=lire_meta("adresse_site"); 
 	
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
 	if (!function_exists('spip_listes_onglets')){
-		echo("<h3>erreur: spip-listes est mal installe !</h3>");     
+		echo(_T('spiplistes:erreur_install'));     
 		echo fin_page();
 		exit;
 	}
@@ -52,7 +52,7 @@ function exec_listes_toutes(){
 	
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 	$statut_auteur=$statut;
-	spip_listes_onglets("messagerie", "Spip listes");
+	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 	
 	debut_gauche();

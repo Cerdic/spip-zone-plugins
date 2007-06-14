@@ -62,7 +62,7 @@
 				//Migrer des listes anciennes // a deplacer dans une en fonction
 				$resultat_aff = spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'");
 				if(@spip_num_rows($resultat_aff) > 0){
-					echo "<h3>SPIP-listes va mettre a jour</h3>";
+					echo _T('spiplistes:mettre_a_jour');
 					while ($row = spip_fetch_array($resultat_aff)) {
 						$id_article=$row['id_article'];
 						$titre_liste=corriger_caracteres($row['titre']);

@@ -56,8 +56,8 @@ function spiplistes_afficher_pile_messages(){
 	</style>";
 	$out .= "<table class='tab'>" ;	
 	$out .= "<tr style='padding:5px'>";
-	$out .= "<td style='font-weight:bold;background-color:#eeeecc'>envoi du patron</td>";
-	$out .= "<td style='font-weight:bold;background-color:#eeeecc'>sur la liste</td>";
+	$out .= "<td style='font-weight:bold;background-color:#eeeecc'>"._T('spiplistes:envoi_patron')."</td>";
+	$out .= "<td style='font-weight:bold;background-color:#eeeecc'>"._T('spiplistes:sur_liste')."</td>";
 	$out .= "<td style='font-weight:bold;background-color:#eeeecc'>"._T('spiplistes:prochain_envoi_prevu')."</td>";
 	$out .= "</tr>";
 
@@ -82,9 +82,9 @@ function spiplistes_afficher_pile_messages(){
 		$out .= "</td>" ;
 		$out .= "<td>";
 		if($proch != 0)
-			$out .= "dans <b>$proch</b> "._T('spiplistes:jours')."</td>";
+			$out .= _T('spiplistes:dans_jours')." <b>$proch</b> "._T('spiplistes:jours')."</td>";
 		else 
-			$out .= "<b>aujourd'hui</b></td>";
+			$out .= "<b>"._T('date_aujourdhui')."</b></td>";
 		$out .= "</tr>" ;
 	}
 	$out .= "</table>" ;
@@ -112,7 +112,7 @@ function exec_spip_listes() {
 	$urlsite=lire_meta("adresse_site"); 
 	
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
 	if ($connect_statut != "0minirezo" ) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
@@ -122,7 +122,7 @@ function exec_spip_listes() {
 	
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 	
 	debut_gauche();

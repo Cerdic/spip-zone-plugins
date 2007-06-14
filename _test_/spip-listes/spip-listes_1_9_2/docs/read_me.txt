@@ -1,4 +1,4 @@
-If you want to use the squelette version of abonnement.php3, which in turn uses
+If you want to use the template version of abonnement.php3, which in turn uses
 the new form tag #FORMULAIRE_MODIF_LISTES, you have to overwrite the old
 abonnement.php3 file with abonnement.php3.txt that you can find in this folder.
 Just don't forget to rename it abonnement.php3.

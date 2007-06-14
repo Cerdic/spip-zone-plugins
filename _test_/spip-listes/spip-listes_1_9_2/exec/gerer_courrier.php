@@ -51,7 +51,7 @@ function exec_gerer_courrier(){
 	$urlsite=lire_meta("adresse_site"); 
 
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
 	if ($connect_statut != "0minirezo" ) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
@@ -61,7 +61,7 @@ function exec_gerer_courrier(){
 
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 
 	debut_gauche();
@@ -207,7 +207,7 @@ function exec_gerer_courrier(){
 		
 		if ($statut == 'ready' && $pret_envoi) {
 			echo "<span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
-			<b>"._T('spiplistes:message_presque_envoye')."</b></span><br /> &agrave; destination de $destinataire<br />"._T('spiplistes:confirme_envoi');
+			<b>"._T('spiplistes:message_presque_envoye')."</b></span><br /> "._T('spiplistes:a_destination').$destinataire."<br />"._T('spiplistes:confirme_envoi');
 			echo "<form action='?exec=gerer_courrier&id_message=".$id_message."' method='post'>";
 			echo "<div style='text-align:center'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo' /></div>";
 			echo "</form>";
@@ -220,7 +220,7 @@ function exec_gerer_courrier(){
 				echo "</div>";
 			}
 			echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
-			<b>"._T('spiplistes:envoi_program')."</b></span><br /> &agrave; destination de $destinataire<br /><br />
+			<b>"._T('spiplistes:envoi_program')."</b></span><br /> "._T('spiplistes:a_destination').$destinataire."<br /><br />
 			<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a></p>";
 		}
 		
@@ -228,19 +228,19 @@ function exec_gerer_courrier(){
 			echo "<span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
 			<b>"._T('spiplistes:message_arch')."</b></span>";
 			echo "<ul>";
-			echo "<li>Envoy&eacute; &agrave $destinataire</li>";
-			echo "<li>Date de l'envoi : $date_heure</li>";
+			echo "<li>"._T('spiplistes:envoyer_a').$destinataire."</li>";
+			echo "<li>"._T('spiplistes:envoi_date').$date_heure."</li>";
 			echo "<ul>";
-			echo "<li>Debut de l'envoi : $debut_envoi</li>";
-			echo "<li>Fin de l'envoi : $fin_envoi</li>";
+			echo "<li>"._T('spiplistes:envoi_debut').$debut_envoi."</li>";
+			echo "<li>"._T('spiplistes:envoi_fin').$fin_envoi."</li>";
 			echo "</ul>";
-			echo "<li>Nombre d'inscrits : $total_abonnes</li>";
+			echo "<li>"._T('spiplistes:nbre_abonnes').$total_abonnes."</li>";
 			echo "<ul>";
-			echo "<li>Format html : $nb_emails_html</li>";
-			echo "<li>Format texte : $nb_emails_texte</li>";
-			echo "<li>D&eacute;sabonn&eacute;s : $nb_emails_non_envoyes</li>";
+			echo "<li>"._T('spiplistes:format_html').$nb_emails_html."</li>";
+			echo "<li>"._T('spiplistes:format_texte').$nb_emails_texte."</li>";
+			echo "<li>"._T('spiplistes:desabonnes').": ".$nb_emails_non_envoyes."</li>";
 			echo "</ul>";
-			echo "<li>Nombre d'envois en erreur : $nb_emails_echec</li>";
+			echo "<li>"._T('spiplistes:erreur_envoi').$nb_emails_echec."</li>";
 			echo "</ul>";
 		}
 		
@@ -256,7 +256,7 @@ function exec_gerer_courrier(){
 		echo "<tr><td width=100%>";
 		if ($statut=="redac" OR $statut=="ready") {
 			echo "<div style='float:right'>";
-			icone ('Modifier ce courrier',generer_url_ecrire('courrier_edit','id_message='.$id_message), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
+			icone (_T('spiplistes:bouton_modifier'),generer_url_ecrire('courrier_edit','id_message='.$id_message), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
 			echo "</div>";
 		}
 		
@@ -265,21 +265,21 @@ function exec_gerer_courrier(){
 		
 		echo "<br /><font face='Georgia,Garamond,Times,serif' size=3>";
 		echo debut_boite_info();
-		echo "<b>Version HTML</b> <a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_message)."\" title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n";
+		echo _T('spiplistes:version_html')." <a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_message)."\" title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n";
 		echo "<iframe src=\"?exec=courrier_preview&id_message=$id_message\" width=\"100%\" height=\"500\"></iframe>\n";
 		echo fin_boite_info();    
 		echo "<p>";
 		echo debut_boite_info();
 		
 		if($message_texte !=''){
-			$alt = 'Calcul avec le patron version texte';
+			$alt = _T('spiplistes:calcul_patron');
 		}
 		else{
-			$alt = 'Calcul depuis la version HTML du message';
+			$alt = _T('spiplistes:calcul_html');
 			$message_texte = version_texte($texte);
 		}
 		
-		echo "<b> Version texte </b> <a href='#' title='$alt'><small>(?)</small></a><br />";
+		echo _T('spiplistes:version_texte')." <a href='#' title='$alt'><small>(?)</small></a><br />";
 		
 		echo "<textarea name='texte' rows='20' class='formo' cols='40' wrap=soft>";
 		echo $message_texte ;

@@ -42,7 +42,7 @@ function exec_abonne_edit(){
 	$urlsite=lire_meta("adresse_site"); 
 		
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
 	if ($connect_statut != "0minirezo" ) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
@@ -52,7 +52,7 @@ function exec_abonne_edit(){
 	
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 	
 	debut_gauche();
@@ -121,9 +121,9 @@ function exec_abonne_edit(){
 				$c3 = ( $abo == 'non')? 'checked=checked': '';
 				echo'<div style="text-align: left;">';
 				echo'<strong>Format :</strong><br>';
-				echo'<input name="suppl_abo" value="html" '.$c1.'  type="radio">Html<br>';
-				echo'<input name="suppl_abo" value="texte" '.$c2.' type="radio">Texte<br>';
-				echo'<input name="suppl_abo" '.$c3.' value="non" type="radio">D&eacute;sabonnement<br>';
+				echo'<input name="suppl_abo" value="html" '.$c1.'  type="radio">'._T('spiplistes:html').'<br>';
+				echo'<input name="suppl_abo" value="texte" '.$c2.' type="radio">'._T('spiplistes:texte').'<br>';
+				echo'<input name="suppl_abo" '.$c3.' value="non" type="radio">'._T('spiplistes:desabonnement').'<br>';
 				echo'</div>';
 				echo"<input type='submit' name='Valider' value='"._T('spiplistes:modifier')."'>";
 				echo"<input type='hidden' name='id_auteur'  value=$id_auteur >";

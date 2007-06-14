@@ -16,7 +16,7 @@
 		  // on voit le bouton dans la barre "naviguer"
 		  $boutons_admin['naviguer']->sousmenu["spip_listes"]= new Bouton(
 			_DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif",  // icone
-			"lettres d'information"	// titre
+			_T('spiplistes:bouton_listes')	// titre
 			);
 		}
 		return $boutons_admin;

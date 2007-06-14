@@ -274,7 +274,7 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 		
 		if ($element == 'listes') {
 			$nb_abo= spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste="._q($id_row)));
-			$nb_abo = ($nb_abo>1)? $nb_abo." abonn&eacute;s" : $nb_abo." abonn&eacute;";
+			$nb_abo = ($nb_abo>1)? $nb_abo._T('spiplistes:nb_abonnes_plur') : $nb_abo._T('spiplistes:nb_abonnes_sing');
 			
 			$en_liste.= " <span style='font-size:100%;color:#666666' dir='ltr'>\n";
 			$en_liste.= "(".$nb_abo.")\n";
@@ -293,13 +293,13 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 		
 		switch ($element){
 			case "abonnements":
-				$en_liste.= "<td width='120' class='arial1'><a href=\"".$url_desabo."\" dir='ltr' style='display:block;'>D&eacute;sabonnement</a></td>\n";
+				$en_liste.= "<td width='120' class='arial1'><a href=\"".$url_desabo."\" dir='ltr' style='display:block;'>"._T('spiplistes:desabonnement')."</a></td>\n";
 				break;
 			default:
 				$en_liste.= "<td width='120' class='arial1'>".$date."</td>\n";
 		}
 		
-		$en_liste.= "<td width='50' class='arial1'><b>N&nbsp;".$id_row."</b></td>\n";
+		$en_liste.= "<td width='50' class='arial1'><b>"._T('spiplistes:numero').$id_row."</b></td>\n";
 		$en_liste.= "</tr>\n";
 	
 	}
@@ -641,7 +641,7 @@ function spiplistes_afficher_auteurs($query, $url){
 			echo '</td><td>';
 			if ($row['messagerie'] == 'oui' AND $row['login']
 			  AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non" AND $messagerie != "non")
-				echo 'erreur'; // bouton_imessage($row['id_auteur'],"force")."&nbsp;";
+				echo _T('spiplistes:erreur'); // bouton_imessage($row['id_auteur'],"force")."&nbsp;";
 			if ($connect_statut=="0minirezo"){
 				if (strlen($row['email'])>3)
 					echo "<a href='mailto:".$row['email']."'>"._T('lien_email')."</a>";
@@ -680,10 +680,10 @@ function spiplistes_afficher_auteurs($query, $url){
 			}
 			elseif ($abo == 'texte') 
 				$option_abo = "<a href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
-				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>html</a>";
+				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
 			elseif(($abo == 'non')OR (!$abo)) 
 				$option_abo = "<a href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')
-				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>html</a>";
+				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
 			echo "&nbsp;".$option_abo;
 		}
 		echo "</td></tr>\n";

@@ -123,7 +123,7 @@ function bloog_extra_saisie($extra, $type, $ensemble='',$no_echo='') {
 			case "select":
 				$choix = explode(",",$choix);
 				if (!is_array($choix)) {
-					$affiche .= "Pas de choix d&eacute;finis.\n";
+					$affiche .= _T('spiplistes:choix_defini');
 					break;
 				}
 
@@ -150,7 +150,7 @@ function bloog_extra_saisie($extra, $type, $ensemble='',$no_echo='') {
 			case "radio":
 				$choix = explode(",",$choix);
 				if (!is_array($choix)) {
-					$affiche .= "Pas de choix d&eacute;finis.\n";
+					$affiche .= _T('spiplistes:choix_defini');
 					break;
 				}
 				$valeurs = explode(",",$valeurs);
@@ -178,7 +178,7 @@ function bloog_extra_saisie($extra, $type, $ensemble='',$no_echo='') {
 			case "multiple":
 				$choix = explode(",",$choix);
 				if (!is_array($choix)) {
-					$affiche .= "Pas de choix d&eacute;finis.\n";
+					$affiche .= _T('spiplistes:choix_defini');
 					break; }
 				for ($i=0; $i < count($choix); $i++) {
 					$affiche .= "<input type='checkbox' name='suppl_$champ$i'";

@@ -74,7 +74,7 @@ function exec_config(){
 
 
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
 	if ($connect_statut != "0minirezo" ) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
@@ -84,7 +84,7 @@ function exec_config(){
 
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 
 	debut_gauche();
@@ -130,46 +130,44 @@ function exec_config(){
 	echo "<form action='".generer_url_ecrire('config')."' method='post'>";
 
 	echo '<br />';
-	echo debut_cadre_relief("", false, "", "Envoi des emails");
+	echo debut_cadre_relief("", false, "", _T('spiplistes:email_envoi'));
 
-	echo debut_cadre_trait_couleur("", false, "", "Adresse d'envoi par d&eacute;faut");
+	echo debut_cadre_trait_couleur("", false, "", _T('spiplistes:adresse_envoi'));
 	$adresse_defaut = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
 	echo "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' CLASS='formo' />";
 	
 	echo fin_cadre_trait_couleur();
 
-	echo debut_cadre_trait_couleur("", false, "", "M&eacute;thode d'envoi");
+	echo debut_cadre_trait_couleur("", false, "", _T('spiplistes:methode_envoi'));
 
-	echo "<p>
-	Si vous n'&ecirc;tes pas s&ucirc;r, choisissez la fonction mail de PHP.
-	</p>";
+	echo _T('spiplistes:pas_sur');
 
 	$mailer_smtp = $GLOBALS['meta']['mailer_smtp'];
 
-	echo bouton_radio("mailer_smtp", "non", "Utiliser la fonction mail() de PHP", $mailer_smtp == "non", "changeVisible(this.checked, 'smtp', 'none', 'block');");
+	echo bouton_radio("mailer_smtp", "non", _T('spiplistes:php_mail'), $mailer_smtp == "non", "changeVisible(this.checked, 'smtp', 'none', 'block');");
 	echo "<br />";
-	echo bouton_radio("mailer_smtp", "oui", "Utiliser SMTP", $mailer_smtp == "oui", "changeVisible(this.checked, 'smtp', 'block', 'none');");
+	echo bouton_radio("mailer_smtp", "oui", _T('spiplistes:smtp'), $mailer_smtp == "oui", "changeVisible(this.checked, 'smtp', 'block', 'none');");
 
 	if ($mailer_smtp == "oui") $style = "display: block;";
 	else $style = "display: none;";
 	echo "<div id='smtp' style='$style'>";
 	echo "<ul>";
-	echo "<li>H&ocirc;te <input type='text' name='smtp_server' value='".$GLOBALS['meta']['smtp_server']."' size='30' class='formo' />";
-	echo "<li>Port <input type='text' name='smtp_port' value='".$GLOBALS['meta']['smtp_port']."' size='4' class='fondl' />";
-	echo "<li>Requiert une identification";
+	echo "<li>"._T('spiplistes:smtp_hote')." <input type='text' name='smtp_server' value='".$GLOBALS['meta']['smtp_server']."' size='30' class='formo' />";
+	echo "<li>"._T('spiplistes:smtp_port')." <input type='text' name='smtp_port' value='".$GLOBALS['meta']['smtp_port']."' size='4' class='fondl' />";
+	echo "<li>"._T('spiplistes:spip_ident');
 
 	$smtp_identification = $GLOBALS['meta']['smtp_identification'];
 
-	echo bouton_radio("smtp_identification", "oui", "oui", $smtp_identification == "oui", "changeVisible(this.checked, 'smtp-auth', 'block', 'none');");
+	echo bouton_radio("smtp_identification", "oui", _T('item_oui'), $smtp_identification == "oui", "changeVisible(this.checked, 'smtp-auth', 'block', 'none');");
 	echo "&nbsp;";
-	echo bouton_radio("smtp_identification", "non", "non", $smtp_identification == "non", "changeVisible(this.checked, 'smtp-auth', 'none', 'block');");
+	echo bouton_radio("smtp_identification", "non", _T('item_non'), $smtp_identification == "non", "changeVisible(this.checked, 'smtp-auth', 'none', 'block');");
 
 	if ($smtp_identification == "oui") $style = "display: block;";
 	else $style = "display: none;";
 	echo "<div id='smtp-auth' style='$style'>";
 	echo "<ul>";
-	echo "<li>Login <input type='text' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' CLASS='formo' />";
-	echo "<li>Password <input type='password' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' CLASS='formo' />";
+	echo "<li>"._T('item_login')." <input type='text' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' CLASS='formo' />";
+	echo "<li>"._T('entree_passe_ldap')." <input type='password' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' CLASS='formo' />";
 	echo "</ul>";
 	echo "</div>";
 
@@ -182,13 +180,13 @@ function exec_config(){
 	if ($mailer_smtp == "oui") $style = "display: block;";
 	else $style = "display: none;" ;
 	echo "<div style='$style'>";
-	echo debut_cadre_relief("", false, "", "adresse email du <i>sender</i> SMTP");
-	echo "<p style='margin:10px'>Lors d'un envoi via la m&eacute;thode SMTP ce champ d&eacute;finit l'adresse de l'envoyeur.</p>";
+	echo debut_cadre_relief("", false, "", _T('spiplistes:adresse_smtp'));
+	echo "<p style='margin:10px'>"._T('spiplistes:adresse_smtp')."</p>";
 	echo "<input type='text' name='smtp_sender' value=\"".$GLOBALS['meta']['smtp_sender']."\" class='formo' />";
 	echo fin_cadre_relief();
 	echo "</div>\n";
 
-	echo "<input type='submit' name='valid_smtp' value='"._T('spiplistes:valider')."' class='fondo' style='float:right' />";
+	echo "<input type='submit' name='valid_smtp' value='"._T('bouton_valider')."' class='fondo' style='float:right' />";
 	echo "<hr style='clear:both;visibility:hidden' />";
 
 	echo "</form>";	
@@ -207,9 +205,9 @@ function exec_config(){
 
 	echo "<form action='".generer_url_ecrire('config')."' method='post'>";
 	echo "<input type='hidden' name='reinitialiser_config' value='oui' />";
-	echo "<label for='spiplistes_lots'>Nombre d'envois par lot</label>" ;
+	echo "<label for='spiplistes_lots'>"._T('spiplistes:nombre_lot')."</label>" ;
 	echo "<input type='text' name='spiplistes_lots' value=\"".$GLOBALS['meta']['spiplistes_lots']."\" class='formo' />";
-	echo "<label for='spiplistes_charset_envoi'>Charset de l'envoi</label>" ;
+	echo "<label for='spiplistes_charset_envoi'>"._T('spiplistes:envoi_charset')."</label>" ;
 	echo "<input type='text' name='spiplistes_charset_envoi' value=\"".$GLOBALS['meta']['spiplistes_charset_envoi']."\" class='formo' />";
 
 	echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right' />";

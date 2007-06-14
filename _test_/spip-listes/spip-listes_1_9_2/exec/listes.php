@@ -67,7 +67,7 @@ function exec_listes_dist(){
 
  
 	// Admin SPIP-Listes
-	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
 	if ($connect_statut != "0minirezo" ) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
@@ -77,7 +77,7 @@ function exec_listes_dist(){
 
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 
 	// Creer une liste -----------------------------------------
@@ -317,7 +317,7 @@ function exec_listes_dist(){
 		echo "</form>";	
 		
 		echo "<div style='margin:10px 0px 10px 0px'>";
-		echo menu_langues('changer_lang', $lang , '<strong>Langue :</strong>&nbsp;','', '');
+		echo menu_langues('changer_lang', $lang , _T('spiplistes:langue'),'', '');
 		echo "</div>";
 		
 		//regler email d'envoi de la liste
@@ -356,7 +356,7 @@ function exec_listes_dist(){
 	else {
 		if(($changer_extra == "oui") AND ($auto == "oui") )
 			echo "<h2>"._T('spiplistes:date_act')."</h2>" ;
-		echo "<h3> Sujet du courrier automatique : $titre_message</h3>";
+		echo "<h3> "._T('spiplistes:sujet_courrier_auto').$titre_message."</h3>";
 		echo _T('spiplistes:env_esquel')." <em>".$patron."</em> " ;
 		echo "<br />"._T('spiplistes:Tous_les')."  <b>".$periode."</b>  "._T('info_jours') ;
 		
@@ -365,7 +365,7 @@ function exec_listes_dist(){
 			
 		$proch = round(  (( (24*3600*$periode) - $sablier) / (3600*24)) ) ;
 		$last = round(  ($sablier / (3600*24)) ) ;
-		echo "<br />Dernier envoi il y a <b>$last</b> "._T('spiplistes:jours')."<br />";
+		echo "<br />"._T('spiplistes:dernier_envoi')." <b>$last</b> "._T('spiplistes:jours')."<br />";
 		if($proch != 0) {
 			echo "<br />"._T('spiplistes:prochain_envoi_prevu_dans')."<b>$proch</b> "._T('spiplistes:jours')."<br />";
 		}
@@ -387,10 +387,10 @@ function exec_listes_dist(){
 	echo "<input type='hidden' name='changer_extra' value='oui'>";
 	echo "<div id='auto_oui_detail'>";
 	
-	$sujet_message = ($titre_message=='') ? $titre." de ".$nomsite : $titre_message ;
+	$sujet_message = ($titre_message=='') ? $titre." "._T('zxml_de')." ".$nomsite : $titre_message ;
 	
 	echo "<ul style='list-style-type:none;'>";
-	echo "<li>Sujet : <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl' /> </li>" ;
+	echo "<li>"._T('spiplistes:message_sujet').": <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl' /> </li>" ;
 	echo "<li>"._T('spiplistes:squel');
 	
 	
