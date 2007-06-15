@@ -229,7 +229,7 @@ function exec_import_export(){
 								spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) ".
 								"VALUES ("._q($nom_inscription).","._q($mail_inscription).","._q($login).","._q($mdpass).","._q($statut).","._q($htpass).","._q($cookie).")");
 								$id = spip_insert_id();
-								$ok = spip_query("INSERT INTO `spip_auteurs_elargis` (id_auteur,spip_listes_format) VALUES ('$id',$format_abo)");
+								$ok = spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`,`spip_listes_format`) VALUES ('$id',$format_abo)");
 							}
 
 							// Inscription aux listes
@@ -360,7 +360,7 @@ function exec_import_export(){
 			echo "<input type=\"radio\" name=\"export_id\" value=\"".$id_liste."\"$checked />$titre <small>".spip_listes_nb_abonnes_liste($id_liste)."</small><br />\n";
 		}
 		echo "<input type=\"radio\" name=\"export_id\"value=\"abo_sans_liste\"$checked /><strong>"._T('spiplistes:abonne_aucune_liste')."</strong> <br />\n";
-		echo "<input type=\"radio\" name=\"export_id\"value=\"desabo\"$checked /><strong>"._T('spiplistes:desabonnes')."</strong> <br />\n"; 
+		echo "<input type=\"radio\" name=\"export_id\"value=\"desabo\"$checked /><strong>"._T('spiplistes:desabonnes')."</strong><br />\n"; 
 		echo "<input type='submit' name='export_txt' class='fondo' value='"._T('bouton_valider')."' />\n";
 		echo "</form>\n";
 		echo fin_cadre_relief();
