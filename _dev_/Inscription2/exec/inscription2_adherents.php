@@ -22,7 +22,7 @@ function exec_inscription2_adherents() {
 	
 	debut_page(_T('inscription2:gestion_adherents'), "", "");
 	
-	include(_DIR_PLUGIN_INSCRIPTION2.'/inc/table_adherents.html');
+	echo recuperer_fond('inc/table_adherents');
 	
 	fin_page();	
 }
