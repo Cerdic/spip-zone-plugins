@@ -176,7 +176,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 		$row=spip_fetch_array($res);
 		$titre_page = $row['titre'];
 	}
-	
+
 	$prefix = forms_prefixi18n($type_form);
 	$defaut_cont = 		array('id_form'=>$id_form,
 		'titre_liste'=>$titre_page,

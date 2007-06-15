@@ -147,6 +147,39 @@ function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
 	return $t;
 }
 
+function Forms_donnees_liees($id_donnee,$type_form_lie){
+	include_spip('base/abstract_sql');
+	$liste = Forms_liste_tables($type_form_lie);
+	$in_liste = calcul_mysql_in('id_form',implode(',',$liste));
+	$res = spip_query("SELECT * FROM spip_forms_donnees_donnees WHERE id_donnee="._q($id_donnee)." OR id_donnee_liee="._q($id_donnee));
+	$valeurs = array();
+	while ($row = spip_fetch_array($res)){
+		$liee = $row['id_donnee']+$row['id_donnee_liee']-$id_donnee;
+		$res2 = spip_query("SELECT * FROM spip_forms_donnees WHERE id_donnee="._q($liee)." AND $in_liste");
+		if ($row2 = spip_fetch_array($res2))
+			$valeurs[] = $liee;
+	}
+	return $valeurs;
+}
+function Forms_delier_donnee($id_donnee,$id_donnee_liee=0,$type_form_lie = ""){
+	if ($id_donnee_liee!=0){
+		spip_query("DELETE FROM spip_forms_donnees_donnees WHERE id_donnee="._q($id_donnee)." AND id_donnee_liee="._q($id_donnee_liee));
+		spip_query("DELETE FROM spip_forms_donnees_donnees WHERE id_donnee_liee="._q($id_donnee)." AND id_donnee="._q($id_donnee_liee));
+	}
+	else {
+		include_spip('base/abstract_sql');
+		$liste = Forms_liste_tables($type_form_lie);
+		$in_liste = calcul_mysql_in('id_form',implode(',',$liste));
+		$res = spip_query("SELECT * FROM spip_forms_donnees_donnees WHERE id_donnee="._q($id_donnee)." OR id_donnee_liee="._q($id_donnee));
+		while ($row = spip_fetch_array($res)){
+			$liee = $row['id_donnee']+$row['id_donnee_liee']-$id_donnee;
+			$res2 = spip_query("SELECT * FROM spip_forms_donnees WHERE id_donnee="._q($liee)." AND $in_liste");
+			if ($row2 = spip_fetch_array($res2))
+				spip_query("DELETE FROM spip_forms_donnees_donnees WHERE id_donnee=".$row['id_donnee']." AND id_donnee_liee=".$row['id_donnee_liee']);
+		}
+	}
+}
+
 
 /* Operation sur les donnees arborescentes -------------------------------*/
 /* 
