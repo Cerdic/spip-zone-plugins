@@ -71,7 +71,7 @@ function exec_import_patron(){
   echo "<div style='float:right;width:200px;text-align:left;border:1px solid #000;background: yellow;color: #000;margin-bottom: 10px;padding:10px;'>";  
   echo "<p><strong>$patron</strong><p>\n";
   if($patron_version_texte) echo _T('spiplistes:patron_detecte');
-  echo _T('spiplistes:date_ref').": $date\n";
+  echo _T('spiplistes:date_ref').": $date<br />";
   
   echo menu_langues('changer_lang', $lang , '<strong>Langue :</strong>&nbsp;','', generer_url_ecrire('import_patron','id_message='.$id_message.'&patron='.$patron.'&date='.$date ) );
 

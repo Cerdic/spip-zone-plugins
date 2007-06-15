@@ -398,7 +398,7 @@ et de recevoir les lettres d\'informations.',
 
 'lettre_info' => 'La lettre d\'information du site',
 
-'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>\n',
+'patron_detecte' => '<p><strong>Patron d&eacute;tect&eacute; pour la version texte</strong><p>',
 
 'patron_erreur' => 'Le patron sp&eacute;cifi&eacute; ne donne pas de r&eacute;sulat avec les param&egrave;tres choisis',
 
