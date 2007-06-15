@@ -429,6 +429,11 @@ function remplir_liste_envois($id_courrier,$id_liste){
 }
 
 // Nombre d'abonnes a une liste : a faire
+function spip_listes_nb_abonnes_liste($id_liste){
+	$row = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_listes WHERE id_liste=$id_liste"));
+	$nb_abo = ( $row['n'] >1)?  $row['n']." abonn&eacute;s" :  $row['n']." abonn&eacute;";
+	return "(".$nb_abo.")";
+}
 
 function spiplistes_cherche_auteur(){
 	if (!$cherche_auteur = _request('cherche_auteur')) return;
