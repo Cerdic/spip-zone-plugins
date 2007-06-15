@@ -62,7 +62,7 @@ function exec_abonnes_tous(){
 	
 	spiplistes_cherche_auteur();
 	
-	//Compter tous les abonnes a des listes (doublons ?)
+	//Compter tous les abonnes a des listes 
 	$result_pile = spip_query(
 	  'SELECT listes.statut, COUNT(abonnements.id_auteur)
 	   FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste)
@@ -73,8 +73,7 @@ function exec_abonnes_tous(){
 	}
 
 	//evaluer les extras de tous les auteurs + compter tous les auteurs
-	$result = spip_query(
-	  'SELECT extra, COUNT(spip_auteurs.id_auteur) FROM spip_auteurs GROUP BY extra');
+	$result = spip_query('SELECT `spip_listes_format` , COUNT(`spip_listes_format`) FROM `spip_auteurs_elargis` GROUP BY `spip_listes_format`');
 	$nb_inscrits = 0;
 
 	//repartition des extras
@@ -82,9 +81,9 @@ function exec_abonnes_tous(){
 	
 	while ($row = spip_fetch_array($result, SPIP_NUM)) {
 		$nb_inscrits += $row[1];
-		$abo = unserialize($row[0]);
-		if ($abo['abo']) {
-			$cmpt[$abo['abo']] += $row[1];
+		$abo =$row[0];
+		if ($abo) {
+			$cmpt[$abo] += $row[1];
 		}
 	}
 	
@@ -110,7 +109,7 @@ function exec_abonnes_tous(){
 	echo _T('spiplistes:nbre_abonnes'). $total_abo .
 	  _T('spiplistes:abonnes_liste_pub') . $nb_abonnes['liste'] .
 	  _T('spiplistes:abonnes_liste_int') . $nb_abonnes['inact'] .
-	  _T('spiplistes:abonne_aucune_liste') . ($nb_abonnes_auc - $cmpt['non']) . "</p>";
+	 "<br />". _T('spiplistes:abonne_aucune_liste') . " : ". ($nb_abonnes_auc - $cmpt['non']) . "</p>";
 	
 	echo"</div>";
 	
