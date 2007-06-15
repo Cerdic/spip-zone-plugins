@@ -1,0 +1,36 @@
+<BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
+<a name='form#ID_FORM'></a>
+<div class='spip_forms'>
+
+<div class='spip_descriptif'>#DESCRIPTIF</div>
+[<p class='spip_form_ok'>(#ENV{formok})
+	[(#TYPE_FORM|=={sondage}|?{' ',''})	<a href='[(#ENV{self}|parametre_url{'resultats',#ID_FORM}|ancre_url{form#ID_FORM})]'><:forms:voir_resultats:></a>]
+	[<span class='spip_form_ok_confirmation'>(#ENV{reponse})</span>]
+</p>]
+[<p class='spip_form_erreur'>(#ENV*{erreur_message})</p>]
+[<img src='(#ENV{url_validation})' width='1' height='1' alt='validation de la saisie' />]
+[(#ENV{formvisible}|?{' '})
+	[(#ENV{formactif})
+	<form method='post' action='#ENV{self}#form#ID_FORM'
+		enctype='multipart/form-data'>
+	]	
+		<div>
+		[(#ENV{self}|form_hidden)]
+		<input type='hidden' name='ajout_reponse' value='#ID_FORM' />
+		[<input type='hidden' name='id_donnee' value='(#ENV{id_donnee})' />]
+		
+		<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
+		</div>
+			<INCLURE{fond=#ENV{class}}{id_form}{affiche_sondage}{erreur}{valeurs=#ENV**{valeurs}}{affiche_bouton=0}>
+			<INCLURE{fond=formulaires/liste_sms}{valeurs=#ENV**{valeurs}}>
+		<p id='abo_desabo' style='text-align:#LANG_RIGHT'>
+		<label for='desabo'><:smslist:desabonnement:></label> <input id='desabo' type="checkbox" name="desabonnement"  value="1" />
+		</p>
+		<div style='text-align:#LANG_RIGHT' class='spip_bouton'><input type="submit" name='Valider' value="<:bouton_valider:>" /></div>
+	[(#ENV{formactif})
+	</form>
+	]
+	[<div class='spip_form_notes'>(#NOTES)</div>]
+]
+</div>
+</BOUCLE_form>

@@ -1,0 +1,23 @@
+#SET{listes,#ARRAY}
+<BOUCLE_formslistes(FORMS){type_form=smslist_liste}>
+[(#GET{listes}|array_push{#ID_FORM}|vide)]
+</BOUCLE_formslistes>
+<B_listes>
+	<fieldset id='choix_liste'>
+	<legend>[(#TOTAL_BOUCLE|=={1}|?{
+		<:smslist:abo_1_liste:></legend>
+		,<:smslist:abo_listes:></legend><ul>})]
+
+	<BOUCLE_listes(FORMS_DONNEES){id_form IN #GET{listes}}{0,100}>
+			[(#TOTAL_BOUCLE|=={1}|?{' ',''})
+			<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_DONNEE" />
+			]
+			[(#TOTAL_BOUCLE|!={1}|?{' ',''})
+			<li>
+			<label><input type="checkbox" name="liste&#91;&#93;"
+				[(#ID_DONNEE|in_any{#ENV**{valeurs}|table_valeur{liste}}|?{'checked="checked"',''})]
+			  value="#ID_DONNEE" />#LESVALEURS{' ',ligne_1}</label></li>]
+	</BOUCLE_listes>
+	[(#COMPTEUR_BOUCLE|!={1}|?{'</ul>',''})]
+	</fieldset>
+</B_listes>

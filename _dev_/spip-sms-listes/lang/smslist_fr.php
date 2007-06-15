@@ -27,7 +27,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'messages_en_redaction' => 'Messages en cours de r&eacute;daction',
 'spip_sms_liste' => 'Spip-SMS-listes',
 'reprendre_envoi' => 'Reprendre cet envoi',
-'stopper_envoi' => 'Stopper cet envoi'
+'stopper_envoi' => 'Stopper cet envoi',
+
+'abonnement_enregistre' => 'Votre abonement a bien &eacute;t&eacute; pris en compte.',
+'abonnement_supprime' => 'Votre abonnement a &eacute;t&eacute; arr&ecirc;t&eacute;',
+'abonnement_modifie' => 'Votre abonnement a &eacute;t&eacute; mis &agrave; jour',
+'desabonnement' => 'Arr&ecirc;ter votre abonement',
 
 );
 

@@ -81,40 +81,6 @@
 			<aide></aide>
 			<html_wrap></html_wrap>
 		</field>
-		<field>
-			<champ>multiple_1</champ>
-			<rang>5</rang>
-			<titre>Vos intérêts</titre>
-			<type>multiple</type>
-			<obligatoire></obligatoire>
-			<extra_info></extra_info>
-			<specifiant></specifiant>
-			<public></public>
-			<aide></aide>
-			<html_wrap></html_wrap>
-			<les_choix>
-				<un_choix>
-					<choix>multiple_1_1</choix>
-					<titre>Culture</titre>
-					<rang>1</rang>
-				</un_choix>
-				<un_choix>
-					<choix>multiple_1_3</choix>
-					<titre>Sport</titre>
-					<rang>2</rang>
-				</un_choix>
-				<un_choix>
-					<choix>multiple_1_4</choix>
-					<titre>Votre mairie</titre>
-					<rang>3</rang>
-				</un_choix>
-				<un_choix>
-					<choix>multiple_1_2</choix>
-					<titre>Dernière Minute</titre>
-					<rang>4</rang>
-				</un_choix>
-			</les_choix>
-		</field>
 	</fields>
 </form>
 </forms>

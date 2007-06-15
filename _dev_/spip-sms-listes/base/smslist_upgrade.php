@@ -40,11 +40,11 @@
 	
 	function smslist_vider_tables($nom_meta_base_version) {
 		include_spip('base/forms_base_api');
-		/*Forms_supprimer_tables('smslist_liste');
+		Forms_supprimer_tables('smslist_liste');
 		Forms_supprimer_tables('smslist_abonne');
 		Forms_supprimer_tables('smslist_message');
 		Forms_supprimer_tables('smslist_boiteenvoi');
-		Forms_supprimer_tables('smslist_compte');*/
+		Forms_supprimer_tables('smslist_compte');
 		
 		// fin
 		effacer_meta($nom_meta_base_version);
