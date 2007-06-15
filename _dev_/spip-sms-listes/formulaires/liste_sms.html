@@ -4,8 +4,8 @@
 </BOUCLE_formslistes>
 <B_listes>
 	<fieldset id='choix_liste'>
-	<legend>[(#TOTAL_BOUCLE|=={1}|?{
-		<:smslist:abo_1_liste:></legend>
+	[<legend>(#TOTAL_BOUCLE|=={1}|?{
+		''
 		,<:smslist:abo_listes:></legend><ul>})]
 
 	<BOUCLE_listes(FORMS_DONNEES){id_form IN #GET{listes}}{0,100}>
