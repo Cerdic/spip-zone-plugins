@@ -18,8 +18,8 @@
 
 <u>Fin de l'installation et mise &agrave; jour :</u>
 -* -Vous devez avoir install&#233; et valid&#233; le plugin {{Chargeur}}
--* -Pour finir d'installer FCKEditor vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=fckeditor&amp;dest_path=fckeditor/fckeditor] pour t&#233;l&#233;charger automatiquement la derni&#232;re version valid&#233;e pour ce plugin de FCKEditor. 
--* -Pour utiliser Geshi (coloration syntaxique), vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=geshi&amp;dest_path=fckeditor/spip_fck/plugins/coloration/geshi] pour ajouter le module correspondant. 
+-* -Pour finir d'installer FCKEditor vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=fckeditor&amp;dest_path=plugins/fckeditor] pour t&#233;l&#233;charger automatiquement la derni&#232;re version valid&#233;e pour ce plugin de FCKEditor. 
+-* -Pour utiliser Geshi (coloration syntaxique), vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=geshi&amp;dest_path=plugins/fckeditor/spip_fck/plugins/coloration] pour ajouter le module correspondant. 
 
 <u>Caract&#233;ristiques :</u>
 -* - Edition des articles et des br&#232;ves,
