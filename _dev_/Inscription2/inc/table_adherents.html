@@ -1,0 +1,314 @@
+<style>
+/* jqModal base Styling courtesy of;
+	Brice Burgess <bhb@iceburg.net> */
+.jqmWindow {
+    display: none;
+    
+    position: fixed;
+    top: 17%;
+    left: 50%;
+    
+    margin-left: -300px;
+    width: 600px;
+    
+    background-color: #EEE;
+    color: #333;
+    border: 1px solid black;
+    padding: 12px;
+}
+
+* html .jqmWindow {
+    position: absolute;
+    top: 0%;
+	left:0%;
+	z-index:3500;
+}
+
+.jqmOverlay { background-color: #000; }
+
+* div.jqmOverlay {
+    position: fixed;
+    top: 0px;
+	left:0px;
+	z-index:3499;
+}
+
+/* Background iframe styling for IE6. Prevents ActiveX bleed-through (<select> form elements, etc.) */
+* iframe.jqm {position:absolute;top:0;left:0;z-index:-1;
+	width: expression(this.parentNode.offsetWidth+'px');
+	height: expression(this.parentNode.offsetHeight+'px');
+}
+
+*html.jqm {position:absolute;z-index:0;
+}
+div.jqmConfirm input[type="submit"] { padding: 4px; margin: 10px 30px; background: #000; color: #FFF; border: 1px solid #AAA; }
+
+/* jqModal confirm CSS courtesy of;
+   Alexandre Plennevaux <alexandre@pixeline.be>,
+   Brice Burgess <bhb@iceburg.net> */
+div.jqmConfirm { /* contains + positions the alert window */
+  display: none;
+  
+  position: fixed;
+  top: 17%;
+  width: 100%;
+}
+    
+* html div.jqmConfirm {
+    position: absolute;
+    top: 17%;
+	left: 30%;
+	width: 40%;
+}
+
+div.jqmConfirmWindow {
+  height:auto;
+  width: auto;
+  margin: auto;
+  
+  max-width:400px;
+  padding: 0 10px 10px;
+  
+  background:#FFF;
+  border:1px dotted #FFF;
+}
+
+.jqmConfirmTitle{
+  margin:5px 2px;
+  height:20px;
+  color:#000;
+  background:#FFF;
+}
+.jqmConfirmTitle h1{
+  margin:5px 2px;
+  padding-left:5px;
+  padding:0;
+  font-size:14px;
+  text-transform:capitalize;
+  letter-spacing:-1px;
+  font-weight:bold;
+  color:#000;
+
+  float:left;
+  height:20px;
+}
+
+div.jqmConfirm .jqmClose em{display:none;}
+div.jqmConfirm .jqmClose {
+  width:20px;
+  height:20px;
+  display:block;
+  float:right;
+  clear:right;
+  background:transparent url(confirm/close_icon_double.png) 0 0 no-repeat;
+}
+
+div.jqmConfirm a.jqmClose:hover{ background-position: 0 -20px; }
+
+div.jqmConfirmContent{
+  border-top:px;
+  color:#000;
+  font:11px/14pt arial;
+  padding:5px 20px 5px;
+  margin:5px;
+  border:1px dotted #111;
+  letter-spacing:0px;
+  background:#FFF url(confirm/darkgrid.png);
+}
+
+.clearfix:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+.clearfix {display: inline-block;}
+
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+</style>
+
+
+<script src="<?php echo find_in_path('javascript/jqModal.js');?>" type="text/javascript"></script>
+<script type="text/javascript">
+/* Overriding Javascript's Alert Dialog */
+function confirm(msg,callback) {
+  $('#confirm')
+    .jqmShow()
+    .find('p.jqmConfirmMsg')
+      .html(msg)
+    .end()
+    .find(':submit:visible')
+      .click(function(){
+        if(this.value == 'yes')
+          (typeof callback == 'string') ?
+            window.location.href = callback :
+            callback;
+        $('#confirm').jqmHide();
+      });
+}
+
+
+$().ready(function() {
+  $('#confirm').jqm({overlay: 88, modal: true, trigger: false});
+  
+  // trigger a confirm whenever links of class alert are pressed.
+  $('a.confirm').click(function() { 
+    confirm('',this.href); 
+    return false;
+  });
+});
+</script>
+
+<div style="margin-top : 15pt; margin-left : 15pt; font-size: 10pt;">
+<div style="float:left; width:150pt; text-align: left; border-width:1; border-color:black; border-style :groove; background-color : #E0E0E0 ;" >
+	<strong><?php echo _T('inscription2:raccourcis');?></strong>
+	<ul style='text-align: left; '>
+		<li><a href="?exec=cfg&cfg=inscription2"><?php echo _T('inscription2:configuration');?></a></li>
+		<li><a href="?exec=ajouter_adherent"><?php echo _T('inscription2:ajouter_adherent');?></a></li>
+		<li><a href="?exec=nettoyer_tables"><?php echo _T('inscription2:nettoyer_tables');?></a></li>
+	</ul>
+</div>
+
+<div style="margin-left:20pt">
+	<strong><?php echo _T('inscription2:liste_adherents');?></strong><br/>
+	<span style="float:left; margin-left:10pt;" >
+	<form method="post" action="">
+	<input type="text" name="valeur" onfocus='this.value=""' size="10" value="<?php echo _T('info_rechercher');?>">
+	<select name="case" id="case">
+		<option value="id">ID</option>
+	<?php
+		foreach(lire_config('inscription2') as $cle => $val){
+			if($val!= '' and ereg("^.+_table$", $cle)){
+				$cle = str_replace("_table", "", $cle);
+				echo "<option value='$cle'>"._T('inscription2:'.$cle)."</option>";
+			}
+		}
+	?>
+	</select>
+	<input type="submit" value="<?php echo _T('rechercher');?>" />
+	</form>
+	</span><br/><br/><br/>
+	<?php
+	$id=_request('id');
+	$act=_request('act');
+	if(isset($id) and $act='sup'){
+		spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
+		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
+		spip_query("DELETE FROM spip_zone_auteurs WHERE id_auteur='$id'");
+		spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
+	}
+	echo '<table style="border-width:1; border-color:black; border-style :groove; float:left; margin-left:10pt;">';
+	echo '<tr style="background-color : #E0E0E0 ;">';
+	echo '<td><strong>ID</strong></td>';
+	if(lire_config('inscription2/nom_table')){
+		echo '<td><strong>'._T('inscription2:nom').'</strong></td>';
+		$table_auteurs[] = "a.nom";
+	}
+	if(lire_config('inscription2/prenom_table')){
+		echo '<td><strong>'._T('inscription2:prenom').'</strong></td>';
+		$table_auteurs[] = "b.prenom";
+	}
+	if(lire_config('inscription2/email_table')){
+		$table_auteurs[] = "a.email";
+	}
+	foreach(lire_config('inscription2') as $cle => $val){
+		if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table'){
+			$cle = str_replace("_table", "", $cle);
+			if(lire_config('inscription2/'.$cle)){
+			if($cle == 'bio' or $cle == 'statut' or $cle == 'username')
+				if($cle == 'username')
+					$table_auteurs[] = "a.login";
+				else				
+					$table_auteurs[] = "a.".$cle;
+			else
+				$table_auteurs[] = "b.".$cle;
+			}
+			echo '<td><strong>'._T('inscription2:'.$cle).'</strong></td>';
+		}
+	}
+	echo '<td colspan="2" style="text-align:center;"><strong>'._T('inscription2:action_adherent').'</strong></td>';
+	echo '<td><strong>'._T('inscription2:supprimer_adherent_red').'</strong></td>';
+	echo '</tr>';
+	
+	if ( isset ($_POST['valeur'])) {
+		$valeur=$_POST['valeur'];
+		$case=$_POST['case'];
+		if($case=='id')
+			$critere="a.id_auteur='$valeur'";
+		else
+			$critere="$case='$valeur'"; 
+	}else
+		$critere="a.id_auteur<>'0'"; 
+	
+	$max_par_page=30;
+	$debut=$_GET['debut'];
+	if (empty($debut)) 
+		$debut=0; 
+	
+	$query = spip_query ( "SELECT a.id_auteur, ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
+			ON b.id_auteur = a.id_auteur WHERE $critere ORDER BY id_auteur LIMIT $debut,$max_par_page" );
+	
+	$i=0;
+	while ($data = spip_fetch_array($query)) {	
+		echo '<tr>';
+		
+		if(!empty($data['id_auteur']))
+			echo '<td>'.$data['id_auteur'].'</td>';
+		else 
+			echo '<td> </td>';
+		
+		if(!empty($data['nom']) and !empty($data['email']))
+			echo '<td><a href="mailto:'.$data['email'].'">'.$data['nom'].'</a></td>';
+		elseif(!empty($data['nom']))
+			echo '<td>'.$data['nom'].'</td><td></td>';
+		elseif(!empty($data['email']))
+			echo '<td><a href="mailto:'.$data['email'].'">'.$data['email'].'</a></td>';
+		else
+			echo '<td> </td>';
+			
+		if(!empty($data['prenom']))
+			echo '<td>'.$data['prenom'].'</td>';
+		else
+			echo '<td> </td>';
+		foreach(lire_config('inscription2') as $cle => $val){
+			if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table'){
+				$cle = str_replace("_table", "", $cle);
+				if($cle == 'username')
+					$cle = 'login';
+				if(!empty($data[$cle])){
+					echo '<td>'.$data[$cle].'</td>';
+				}
+				else echo '<td> </td>';
+			}
+		}
+		echo '<td><a href=""><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" title="'._T('inscription2:editer_adherent').'"></a></td>';
+		echo '<td><a href=""><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/adherent-12.gif" title="'._T('inscription2:fiche_adherent').'"></a></td>';
+		echo '<td><a href="?exec=inscription2_adherents&id='.$data['id_auteur'].'&act=sup" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" title="'._T('inscription2:supprimer_adherent').'"></a></td>';
+		echo '</tr>';
+	}
+	
+	?>
+	</table>
+</div>
+
+<!-- Confirm Dialog -->
+<div class="jqmConfirm" id="confirm">
+
+	<div id="ex3b" class="jqmConfirmWindow">
+    <div class="jqmConfirmTitle clearfix">
+    <h1>Confirmation </h1><a href="#" class="jqmClose"><em>Close</em></a>
+	</div>
+  
+	<div class="jqmConfirmContent">
+	<p class="jqmConfirmMsg"></p>
+	<p>Vous etes sur le point d'effacer un utilisateur, voulez vous continuer?</p>
+	</div>
+  
+	<input type="submit" value="no" />
+	<input type="submit" value="yes" />  
+</div>

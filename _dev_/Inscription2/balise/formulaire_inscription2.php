@@ -75,13 +75,13 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 			$commentaire = envoyer_inscription2($commentaire);
 		$message = $commentaire ? '' : _T('inscription2:lisez_mail');
 	}
+	$var_user['message'] = $message;
+	$var_user['commentaire'] = $commentaire;
+	$var_user['mode'] = $mode;
+	$var_user['self'] = str_replace('&amp;','&',(self()));
+	$var_user['adresse2'] = _request('adresse2');
 	return array("formulaires/inscription2", $GLOBALS['delais'],
-			array('message' => $message,
-				'mode' => $mode,
-				'commentaire' => $commentaire,
-				'nom_inscription' => _request('nom_inscription'),
-				'mail_inscription' => _request('mail_inscription'),
-				'self' => str_replace('&amp;','&',(self()))));}
+			$var_user);}
 
 function test_mode_inscription2($mode) {
 	return (($mode == 'redac' AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')

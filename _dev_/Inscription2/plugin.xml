@@ -15,7 +15,7 @@
 		Inscription au site personnalis&eacute; ajout des champs complemmentaires
 		<h4><a href="?exec=cfg&amp;cfg=inscription2">Configuration</a></h4>
 	</description>
-	<icon>inscription2.png</icon>
+	<icon>imagers/inscription2.png</icon>
 	<prefix>
 		  Inscription2
 	</prefix>
@@ -24,12 +24,14 @@
 	<options>
 		inscription2_mes_options.php
 	</options>
-	<options>
-		base/inscription2.php
-	</options>
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<action>ajouter_onglets</action>
+		<inclure>inscription2_ajouter_onglets.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>
 

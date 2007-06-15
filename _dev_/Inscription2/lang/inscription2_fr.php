@@ -118,7 +118,19 @@ L\'&eacute;quipe de @nom_site@',
 'format' => 'Format',
 'expl_format' => 'Veuillez choisir le format que vous pr&eacute;f&eacute;rez pour recevoir les emails des listes de diffusion',
 'texte' => 'Texte', 
-'html' => 'HTML'
+'html' => 'HTML',
+
+'gestion_adherent' => 'Genstion d\'adh&eacute;rents',
+'configuration' => 'Configuration',
+'ajouter_adherent' => 'Ajouter adh&eacute;rent',
+'liste_adherents' => 'Liste d\'adh&eacute;rents',
+'nettoyer_tables' => 'Nettoyer tables',
+'raccourcis' => 'Raccourcis',
+'supprimer_adherent_red' => 'Sup',
+'supprimer_adherent' => 'Supprimer adh&eacute;rent',
+'editer_adherent' => 'Editer adh&eacute;rent',
+'fiche_adherent' => 'Fiche adh&eacute;rent',
+'action_adherent' => 'Action adh&eacute;rent'
 
 );
 

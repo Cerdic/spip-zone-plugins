@@ -1,11 +1,11 @@
 #CACHE{0}
 
-<script src="#CHEMIN{jquery.validate.js}" type="text/javascript"></script>
+<script src="#CHEMIN{javascript/jquery.validate.js}" type="text/javascript"></script>
 
 <script type="text/javascript">
 	
 	jQuery.validator.addMethod("chaine", function(value, element) {
-		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\. ]+$/.test(value);
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.сзаийвкофы ]+$/.test(value);
 	}, "Ce champ est obligatoire, entrez une chaine valide svp");
 
 	jQuery.validator.addMethod("postal", function(value, element) {
@@ -139,17 +139,17 @@
 	
 <p [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
 	<label for="nom"><strong><:inscription2:nom:></strong></label><br />
-	<input type="text" name="nom" id="nom" /><br />
+	<input type="text" name="nom" id="nom" [value="(#CONFIG{inscription2/nom}|=={on}|?{#ENV{nom}, ''})"]/><br />
 </p>
 
 <p [style="(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})"]>
 	<label for="prenom"><strong><:inscription2:prenom:></strong></label><br />
-	<input type="text" name="prenom" id="prenom" /><br />
+	<input type="text" name="prenom" id="prenom" [value="(#CONFIG{inscription2/prenom}|=={on}|?{#ENV{prenom}, ''})"]/><br />
 </p>
 
 <p [style="(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})"]>
 	<label for="username"><strong><:inscription2:username:></strong></label><br />
-	<input type="text" name="username" id="username" /><br />
+	<input type="text" name="username" id="username" [value="(#CONFIG{inscription2/username}|=={on}|?{#ENV{login}, ''})"]/><br />
 </p>
 
 <div [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>
@@ -194,54 +194,54 @@
 
 <p [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
 	<label for="adresse"><strong><:inscription2:adresse:></strong><br /></label>
-	<input type="text" name="adresse" id="adresse" /><br />
+	<input type="text" name="adresse" id="adresse" [value="(#CONFIG{inscription2adresse}|=={on}|?{#ENV{adresse}, ''})"]/><br />
 	<label for="adresse2"><strong><:inscription2:adresse_comp:></strong><br /></label>
-	<input type="text" name="adresse2" id="adresse2" />
+	<input type="text" name="adresse2" id="adresse2" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse2}, ''})"] />
 <br /></p>
 
 <p [style="(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})"]>
 	<label for="code_postal"><strong><:inscription2:code_postal:></strong><br /></label>
-	<input type="text" name="code_postal" id="code_postal" />
+	<input type="text" name="code_postal" id="code_postal" [value="(#CONFIG{inscription2/code_postal}|=={on}|?{#ENV{code_postal}, ''})"]/>
 <br /></p>
 
 <p [style="(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})"]>
 	<label for="ville"><strong><:inscription2:ville:></strong><br /></label>
-	<input type="text" name="ville" id="ville" />
+	<input type="text" name="ville" id="ville" [value="(#CONFIG{inscription2/ville}|=={on}|?{#ENV{ville}, ''})"]/>
 <br /></p>
 
 <p [style="(#CONFIG{inscription2/email}|=={on}|?{display: block;, display:none;})"]>
 	<label for="email"><strong><:inscription2:email:></strong></label><br />
-	<input type="text" name="email" id="email" /><br />
+	<input type="text" name="email" id="email" [value="(#CONFIG{inscription2/email}|=={on}|?{#ENV{email}, ''})"] /><br />
 </p>
 
 <p [style="(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})"]>
 	<label for="telephone"><strong><:inscription2:telephone:></strong><br /></label>
-	<input type="text" name="telephone" id="telephone"  />
+	<input type="text" name="telephone" id="telephone" [value="(#CONFIG{inscription2/telephone}|=={on}|?{#ENV{telephone}, ''})"] />
 <br /></p>
 
 <p [style="(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})"]>
 	<label for="fax"><strong><:inscription2:fax:></strong><br /></label>
-	<input type="text" name="fax" id="fax"/>
+	<input type="text" name="fax" id="fax" [value="(#CONFIG{inscription2/fax}|=={on}|?{#ENV{fax}, ''})"]/>
 <br /></p>
 
 <p [style="(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})"]>
 	<label for="mobile"><strong><:inscription2:mobile:></strong><br /></label>
-	<input type="text" name="mobile" id="mobile"/>
+	<input type="text" name="mobile" id="mobile" [value="(#CONFIG{inscription2/mobile}|=={on}|?{#ENV{mobile}, ''})"]/>
 <br /></p>
 
 <p [style="(#CONFIG{inscription2/profession}|=={on}|?{display: block;, display:none;})"]>
 	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
-	<input type="text" name="profession" id="profession" />
+	<input type="text" name="profession" id="profession" [value="(#CONFIG{inscription2/profession}|=={on}|?{#ENV{profession}, ''})"] />
 <br /></p>
 
 <p [style="(#CONFIG{inscription2/societe}|=={on}|?{display: block;, display:none;})"]>
 	<label for="societe"><strong><:inscription2:societe:></strong><br /></label>
-	<input type="text" name="societe" id="societe" />
+	<input type="text" name="societe" id="societe" [value="(#CONFIG{inscription2/societe}|=={on}|?{#ENV{societe}, ''})"] />
 <br /></p>
 
 <p [style="(#CONFIG{inscription2/secteur}|=={on}|?{display: block;, display:none;})"]>
 	<label for="secteur"><strong><:inscription2:secteur:></strong><br /></label>
-	<input type="text" name="secteur" id="secteur" />
+	<input type="text" name="secteur" id="secteur" [value="(#CONFIG{inscription2/secteur}|=={on}|?{#ENV{secteur}, ''})"] />
 <br /></p>
 
 
@@ -256,12 +256,12 @@
 
 <p style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
 	<label for="fonction"><strong><:inscription2:fonction:></strong><br /></label>
-	<input type="text" type="text" name="fonction" id="fonction" />
+	<input type="text" type="text" name="fonction" id="fonction" [value="(#CONFIG{inscription2/fonction}|=={on}|?{#ENV{fonction}, ''})"]/>
 <br /></p>
 
 
 <p style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
-	<input type="checkbox" name="publication" id="publication" />
+	<input type="checkbox" name="publication" id="publication" [value="(#CONFIG{inscription2/publication}|=={on}|?{#ENV{publication}, ''})"]/>
 	<strong><:inscription2:publication:></strong><br />
 <br /></p>
 
@@ -270,18 +270,17 @@
 <label style="[(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})]">
 	<strong><:inscription2:newsletter:></strong><br />
 	<:inscription2:exp_newsletter:><br />
-	[(#CONFIG{plugin/SPIPLISTES}) <INCLURE{fond=formulaires/inscription2_form_listes}>]
+	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
 </label>
 
 <label style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
 	<strong><:inscription2:categorie:></strong><br />
-	#SET{selected,#CONFIG{inscription2/categories,'',''}}
-	[(#CONFIG{plugin/SPIPLISTES}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
+	[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
 </label>
 
 <label style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
 	<strong><:inscription2:divers:></strong><br />
-	<input type="text" name="divers" id="divers" />
+	<input type="text" name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]/>
 	<br />
 </label>
 
