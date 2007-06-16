@@ -298,7 +298,16 @@ function exec_import_export(){
 		echo "<legend>"._T('spiplistes:abonnement_newsletter')."</legend>";
 		echo _T('spiplistes:importer_preciser');
 		echo "<form action='$PHP_SELF?etape=2' method='post'enctype='multipart/form-data' name='importform'> ";
-		bloog_extra_saisie('', 'auteurs', 'inscription');
+		echo'<div style="text-align: left;">';
+				echo'<strong>Format :</strong><br>';
+				echo'<input name="suppl_abo" value="html" checked="checked"  type="radio">'._T('spiplistes:html').'<br>';
+				echo'<input name="suppl_abo" value="texte" type="radio">'._T('spiplistes:texte').'<br>';
+				echo'<input name="suppl_abo" value="non" type="radio">'._T('spiplistes:desabonnement').'<br>';
+				echo'</div>';
+				echo"<p>";
+				echo"<input type='submit' name='Valider' value='"._T('spiplistes:modifier')."'>";
+				echo"<input type='hidden' name='confirm'  value='oui' >";
+				echo"</p>";
 	} else {
 		echo "<fieldset> ";
 		echo "<legend>"._T('spiplistes:abonnement_newsletter')."</legend>";
@@ -314,7 +323,15 @@ function exec_import_export(){
 			echo "<a href='?exec=import_export&liste=$id_liste' title='"._T('spiplistes:infos_liste')."'>$titre</a><br />" ;
 		}
 		echo "<br />";
-		bloog_extra_saisie('', 'auteurs', 'inscription');
+		echo'<strong>Format :</strong><br>';
+				echo'<input name="suppl_abo" value="html" checked="checked"  type="radio">'._T('spiplistes:html').'<br>';
+				echo'<input name="suppl_abo" value="texte" type="radio">'._T('spiplistes:texte').'<br>';
+				echo'<input name="suppl_abo" value="non" type="radio">'._T('spiplistes:desabonnement').'<br>';
+				echo'</div>';
+				echo"<p>";
+				echo"<input type='submit' name='Valider' value='"._T('spiplistes:modifier')."'>";
+				echo"<input type='hidden' name='confirm'  value='oui' >";
+				echo"</p>";
 		echo "</div>";
 
 	} // fin du test nb listes

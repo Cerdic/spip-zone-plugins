@@ -91,9 +91,7 @@ function exec_liste_edit(){
 			$texte = $row["texte"];
 			$date = $row["date"];
 			$statut = $row['statut'];
-			
-			$extra=$row["extra"];
-	
+				
 			$result_auteur = spip_query("SELECT * FROM spip_auteurs_listes WHERE id_liste="._q($id_liste)." AND id_auteur="._q($connect_id_auteur));
 			$flag_auteur = (spip_num_rows($result_auteur) > 0);
 	
@@ -182,11 +180,6 @@ function exec_liste_edit(){
 	echo "<textarea id='text_area' NAME='texte' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='5' COLS='40' wrap=soft>";
 	echo $texte;
  	echo "</textarea>\n";
-
-	if ($champs_extra) {
-		include_spip('inc/extra');
-		extra_saisie($extra, 'articles', $id_secteur);
-	}
 	
 	$pied = $pied_page ;
 

@@ -1,7 +1,6 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/extra_plus');
 include_spip('inc/autoriser');
 function action_spiplistes_supprimer_abonne_dist()
 {
@@ -19,6 +18,7 @@ function action_spiplistes_supprimer_abonne_dist()
 			if($statut=='6forum'){
 				spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur));
 				spip_query("DELETE FROM spip_auteurs WHERE id_auteur="._q($id_auteur));
+				spip_query("DELETE FROM `spip_auteurs_elargis` WHERE id_auteur="._q($id_auteur));
 			}
 		}
 	}	

@@ -72,11 +72,11 @@ function exec_abonnes_tous(){
 		$nb_abonnes[$row[0]] = intval($row[1]);
 	}
 
-	//evaluer les extras de tous les auteurs + compter tous les auteurs
+	//evaluer les formats de tous les auteurs + compter tous les auteurs
 	$result = spip_query('SELECT `spip_listes_format` , COUNT(`spip_listes_format`) FROM `spip_auteurs_elargis` GROUP BY `spip_listes_format`');
 	$nb_inscrits = 0;
 
-	//repartition des extras
+	//repartition des formats
 	$cmpt = array('texte'=>0, 'html'=>0, 'non'=>0);
 	
 	while ($row = spip_fetch_array($result, SPIP_NUM)) {
@@ -181,7 +181,6 @@ function exec_abonnes_tous(){
 		aut.email AS email,
 		aut.url_site AS url_site,
 		aut.messagerie AS messagerie,
-		aut.extra AS extra,
 		UPPER(aut.nom) AS unom,
 		count(lien.id_liste) as compteur
 		$sql_sel

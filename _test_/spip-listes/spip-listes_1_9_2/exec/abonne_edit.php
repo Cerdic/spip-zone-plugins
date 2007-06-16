@@ -29,7 +29,6 @@ function exec_abonne_edit(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $connect_id_auteur;
-	global $champs_extra;
 	$id_auteur = _request('id_auteur');
 	$confirm = _request('confirm');
 	$suppr_auteur = _request('suppr_auteur');
@@ -62,7 +61,7 @@ function exec_abonne_edit(){
 	
 	// MODE ABONNE: gestion d'un abonne---------------------------------------------
 	
-	if($champs_extra AND ($confirm == 'oui') ){
+	if($confirm == 'oui'){
 		$type_abo = _request('suppl_abo');
 		 spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`="._q($type_abo)." WHERE `id_auteur` ="._q($id_auteur));	
 	}
@@ -82,7 +81,6 @@ function exec_abonne_edit(){
 		$pgp=$row["pgp"];
 		$messagerie=$row["messagerie"];
 		$imessage=$row["imessage"];
-		$extra = $row["extra"];
 		$low_sec = $row["low_sec"];
 		
 		echo "<div align='center'>";
@@ -107,11 +105,9 @@ function exec_abonne_edit(){
 			echo "</font>";
 			echo fin_cadre_relief();
 			
-			if ($champs_extra AND $extra) {
 				echo debut_cadre_relief("$logo");
 				
 				echo"<form action='?exec=abonne_edit' method='post'>";
-				echo"<p align='center'>";
 				
 				$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
 		//var_dump($abo);die("coucou");
@@ -125,13 +121,14 @@ function exec_abonne_edit(){
 				echo'<input name="suppl_abo" value="texte" '.$c2.' type="radio">'._T('spiplistes:texte').'<br>';
 				echo'<input name="suppl_abo" '.$c3.' value="non" type="radio">'._T('spiplistes:desabonnement').'<br>';
 				echo'</div>';
+				echo"<p>";
 				echo"<input type='submit' name='Valider' value='"._T('spiplistes:modifier')."'>";
 				echo"<input type='hidden' name='id_auteur'  value=$id_auteur >";
 				echo"<input type='hidden' name='confirm'  value='oui' >";
 				echo"</p>";
 				echo"</form>";
 				echo fin_cadre_relief();
-			}
+			
 		}
 		
 		

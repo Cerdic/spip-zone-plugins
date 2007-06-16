@@ -46,7 +46,7 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 	 // La personne valide le formulaire
 	
 	 // revoir le test ?
-	if($champs_extra AND ($confirm == 'oui') ){
+	if($confirm == 'oui'){
 		$res = spip_query("SELECT * FROM spip_auteurs WHERE cookie_oubli="._q($d)." AND statut<>'5poubelle' AND pass<>''");
 	  if ($row = spip_fetch_array($res)) {
 	  	$id_auteur = $row['id_auteur'];
@@ -78,7 +78,7 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 		
 		 	// modif du format de reception
 		
-		 $type_abo = _request('suppl_abo');
+		 $type_abo = _request('suppl_abo'); //??
 		 spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`="._q($type_abo)." WHERE `id_auteur` ="._q($id_auteur));	
 		
 		  // affichage des modifs

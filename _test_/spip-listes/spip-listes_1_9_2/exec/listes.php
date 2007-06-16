@@ -186,7 +186,7 @@ function exec_listes_dist(){
 	if($changer_lang)
 		$result = spip_query("UPDATE spip_listes SET lang="._q($changer_lang)." WHERE id_liste="._q($id_liste));
 
-	// prendre en compte les modifs sur les extras
+	// prendre en compte les modifs sur le message auto
 	if($Valider_auto){
 		if($auto == "oui"){
 			$result = spip_query("UPDATE spip_listes SET message_auto='oui' WHERE id_liste="._q($id_liste));
