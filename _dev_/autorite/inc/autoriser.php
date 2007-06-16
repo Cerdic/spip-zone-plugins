@@ -271,6 +271,9 @@ function autoriser_groupemots_modifier($faire, $type, $id, $qui, $opt) {
 		AND $GLOBALS['autorite']['editer_mots'] >= 2
 	);
 }
+	# signaler un risque de bug avec un autoriser_mot_modifier personnalise
+	if (function_exists('autoriser_mot_modifier'))
+		$autorite_erreurs[] = 'autoriser_mot_modifier';
 } else
 	$autorite_erreurs[] = 'autoriser_groupemots_modifier';
 }
