@@ -1,27 +1,27 @@
 img.crayon-img-changed {
-    display: none;
+	display: none;
 }
 .crayon-changed img.crayon-img-changed {
-    display: inline;
+	display: inline;
 }
 .crayon-changed img.crayon-crayon {
-    display: none;
+	display: none;
 }
 img.crayon-edit, img.crayon-crayon {
-    visibility: hidden;
+	visibility: hidden;
 }
 .crayon-autorise:hover > span > span > img.crayon-edit, .crayon-hover > span > span > img.crayon-edit,
 .crayon-autorise:hover > span > span > img.crayon-crayon, .crayon-hover > span > span > img.crayon-crayon {
-    visibility: visible;
+	visibility: visible;
 }
 .crayon-autorise:hover, .crayon-hover {
 }
 .crayon-boutons, .crayon-searching {
-    float: right;
+	float: right;
 }
 .crayon-boutons {
-    width: 40px;
-/*    display: none; */
+	width: 40px;
+/*	display: none; */
 }
 .crayon-boutons a {
 	cursor: pointer;
@@ -31,7 +31,7 @@ img.crayon-edit, img.crayon-crayon {
 	width: 35px;
 }
 .crayon-icones span {
-    position:absolute;
+	position:absolute;
 }
 .crayon-edit, .crayon-crayon, .crayon-img-changed {
 	cursor: pointer;

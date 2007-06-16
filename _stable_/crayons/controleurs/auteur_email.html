@@ -7,5 +7,5 @@
 
 <BOUCLE_a(AUTEURS){id_auteur}{tous}>
 <input class="crayon-active" name="#ENV{name_email}"
- style="width:#ENV{largeur}px;" value="[(#EMAIL**|entites_html)]" />
+ style="width:#ENV{largeur}px;#ENV{style}" value="[(#EMAIL**|entites_html)]" />
 </BOUCLE_a>

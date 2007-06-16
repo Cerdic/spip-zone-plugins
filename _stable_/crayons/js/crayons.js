@@ -85,14 +85,30 @@ jQuery.fn.opencrayon = function(evt, percent) {
       .find('.crayon-icones')
       .append(configCrayons.mkimg('searching')); // icone d'attente
       var me=this;
+      var params = {
+        'w': jQuery(this).width(),
+        'h': jQuery(this).height(),
+        'wh': window.innerHeight,
+        'em': jQuery(this).css('fontSize'),
+        'class': me.className,
+        'color': jQuery(this).css('color'),
+        'font-size': jQuery(this).css('fontSize'),
+        'font-family': jQuery(this).css('fontFamily'),
+        'font-weight': jQuery(this).css('fontWeight'),
+        'line-height': jQuery(this).css('lineHeight'),
+        'background-color': jQuery(this).css('backgroundColor')
+      };
+      if (params['background-color'] == 'transparent') {
+        jQuery(me).parents()
+        .each(function(){
+          var bg = jQuery(this).css('backgroundColor');
+          if (bg != 'transparent'
+          && params['background-color'] == 'transparent')
+            params['background-color'] = bg;
+        });
+      }
       jQuery.getJSON(configCrayons.url_crayons_html,
-        {
-          'w': jQuery(this).width(),
-          'h': jQuery(this).height(),
-          'wh': window.innerHeight,
-          'em': jQuery(this).css('fontSize'),
-          'class': me.className
-        },
+        params,
         function (c) {
           jQuery(me)
           .find("img.crayon-searching")
@@ -142,7 +158,6 @@ jQuery.fn.activatecrayon = function(percent) {
   })
   .each(function(){
     var me = this;
-    var w,h;
     jQuery(me)
     .find('form')
       .ajaxForm({"dataType":"json",
@@ -205,14 +220,6 @@ jQuery.fn.activatecrayon = function(percent) {
         e.cancelBubble = true; // ne pas remonter l'evenement vers la page
       })
       .find(".crayon-active")
-        .css({
-            'fontSize': jQuery(me).next().css('fontSize'),
-            'fontFamily': jQuery(me).next().css('fontFamily'),
-            'fontWeight': jQuery(me).next().css('fontWeight'),
-            'lineHeight': jQuery(me).next().css('lineHeight'),
-            'color': jQuery(me).next().css('color'),
-            'backgroundColor': jQuery(me).next().css('backgroundColor')
-        })
         .each(function(n){
           // focus pour commencer a taper son texte directement dans le champ
           // on essaie de positionner la selection (la saisie) au niveau du clic

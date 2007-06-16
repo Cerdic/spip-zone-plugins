@@ -6,7 +6,7 @@
 #CACHE{0}
 
 <BOUCLE_a(AUTEURS){id_auteur}{tous}>
-<fieldset><legend>Qui ?</legend>
+<fieldset style="#ENV{style}"><legend>Qui ?</legend>
 <label><:ecrire:info_nom:> :</label> <input class="crayon-active" name="#ENV{name_nom}"
  style="width:#ENV{largeur}px;" value="[(#NOM**|entites_html)]" />
  <br />

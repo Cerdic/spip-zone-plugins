@@ -15,7 +15,7 @@
 <BOUCLE_f(FORUMS){id_forum}{statut==.}{id_parent=0}{id_article>0}>
 
 <B_a>
-<fieldset>
+<fieldset style="#ENV{style}">
 Associer ce forum &#224; l'article :
 <select class="crayon-active" name="#ENV{name_id_article}"
 	onchange="cQuery(this).parents('form.formulaire_spip').submit();">

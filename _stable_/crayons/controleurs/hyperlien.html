@@ -4,54 +4,53 @@
 
 ]
 #CACHE{0}
-
 <BOUCLE_a(AUTEURS){id_auteur}{tous}>
-<fieldset><legend>Hyperlien</legend>
+<fieldset style="#ENV{largeur}px;#ENV{style}"><legend>Hyperlien</legend>
 <label><:form_prop_nom_site:></label> <input class="crayon-active" name="#ENV{name_nom_site}"
- style="width:#ENV{largeur}px;" value="[(#NOM_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#NOM_SITE**|entites_html)]" />
  <br />
  <label><:forum_url:></label> <input class="crayon-active" name="#ENV{name_url_site}"
- style="width:#ENV{largeur}px;" value="[(#URL_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#URL_SITE**|entites_html)]" />
 </fieldset>
 </BOUCLE_a>
 
 <BOUCLE_b(ARTICLES){id_article}{statut==.}>
-<fieldset><legend>Hyperlien</legend>
+<fieldset style="#ENV{largeur}px;#ENV{style}"><legend>Hyperlien</legend>
 <label><:form_prop_nom_site:></label> <input class="crayon-active" name="#ENV{name_nom_site}"
- style="width:#ENV{largeur}px;" value="[(#NOM_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#NOM_SITE**|entites_html)]" />
  <br />
  <label><:forum_url:></label> <input class="crayon-active" name="#ENV{name_url_site}"
- style="width:#ENV{largeur}px;" value="[(#URL_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#URL_SITE**|entites_html)]" />
 </fieldset>
 </BOUCLE_b>
 
 <BOUCLE_c(SIGNATURES){id_signature}{statut==.}>
-<fieldset><legend>Hyperlien</legend>
+<fieldset style="#ENV{largeur}px;#ENV{style}"><legend>Hyperlien</legend>
 <label><:form_prop_nom_site:></label> <input class="crayon-active" name="#ENV{name_nom_site}"
- style="width:#ENV{largeur}px;" value="[(#NOM_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#NOM_SITE**|entites_html)]" />
  <br />
  <label><:forum_url:></label> <input class="crayon-active" name="#ENV{name_url_site}"
- style="width:#ENV{largeur}px;" value="[(#URL_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#URL_SITE**|entites_html)]" />
 </fieldset>
 </BOUCLE_c>
 
 <BOUCLE_d(FORUMS){id_forum}{statut==.}>
-<fieldset><legend>Hyperlien</legend>
+<fieldset style="#ENV{largeur}px;#ENV{style}"><legend>Hyperlien</legend>
 <label><:form_prop_nom_site:></label> <input class="crayon-active" name="#ENV{name_nom_site}"
- style="width:#ENV{largeur}px;" value="[(#NOM_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#NOM_SITE**|entites_html)]" />
  <br />
  <label><:forum_url:></label> <input class="crayon-active" name="#ENV{name_url_site}"
- style="width:#ENV{largeur}px;" value="[(#URL_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#URL_SITE**|entites_html)]" />
 </fieldset>
 </BOUCLE_d>
 
 <BOUCLE_e(SITES){id_syndic=#ENV{id_site}}{statut==.}>
-<fieldset><legend>Hyperlien</legend>
+<fieldset style="#ENV{largeur}px;#ENV{style}"><legend>Hyperlien</legend>
 <label><:form_prop_nom_site:></label> <input class="crayon-active" name="#ENV{name_nom_site}"
- style="width:#ENV{largeur}px;" value="[(#NOM_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#NOM_SITE**|entites_html)]" />
  <br />
  <label><:forum_url:></label> <input class="crayon-active" name="#ENV{name_url_site}"
- style="width:#ENV{largeur}px;" value="[(#URL_SITE**|entites_html)]" />
+ style="width:100%;" value="[(#URL_SITE**|entites_html)]" />
 </fieldset>
 </BOUCLE_e>
 

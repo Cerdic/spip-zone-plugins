@@ -6,11 +6,11 @@
 #CACHE{0}
 
 <BOUCLE_c(SIGNATURES){id_signature}{statut==.}>
-<fieldset><legend>Qui ?</legend>
+<fieldset style="width:#ENV{largeur}px;#ENV{style}"><legend>Qui ?</legend>
 <label><:ecrire:info_nom:> :</label> <input class="crayon-active" name="#ENV{name_nom_email}"
- style="width:#ENV{largeur}px;" value="[(#NOM**|entites_html)]" />
+ style="width:100%;" value="[(#NOM**|entites_html)]" />
  <br />
  <label><:ecrire:email_2:></label> <input class="crayon-active" name="#ENV{name_ad_email}"
- style="width:#ENV{largeur}px;" value="[(#EMAIL**|entites_html)]" />
+ style="width:100%;" value="[(#EMAIL**|entites_html)]" />
 </fieldset>
 </BOUCLE_c>

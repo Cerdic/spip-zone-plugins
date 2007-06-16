@@ -85,10 +85,13 @@ function controleur_dist($regs) {
 	}
 
     $crayon = new Crayon($nomcrayon, $valeur, $options);
-    $inputAttrs['style'] = 'width:' . $crayon->largeur . 'px;' .
+	$inputAttrs['style'] = join($crayon->styles);
+
+	if (!$controleur)
+		$inputAttrs['style'] .= 'width:' . $crayon->largeur . 'px;' .
          ($crayon->hauteur ? ' height:' . $crayon->hauteur . 'px;' : '');
 
-    $html = $controleur ? $crayon->formulaire() :
+    $html = $controleur ? $crayon->formulaire(null, $inputAttrs) :
     				$crayon->formulaire($option['inmode'], $inputAttrs);
     $status = NULL;
 
@@ -116,10 +119,12 @@ class Crayon {
     var $largeurMaxi = 700;
     var $hauteurMini = 80;
     var $hauteurMaxi = 700;
+    var $largeur;
     // le mode d'entree: texte, ligne ou controleur
     var $inmode = '';
     // eventuellement le fond modele pour le controleur
     var $controleur = '';
+    var $styles = array();
 
 	// le constructeur du crayon
 	// $name : son nom
@@ -138,6 +143,7 @@ class Crayon {
         	$this->$opt = $val;
         }
 		$this->dimension();
+        $this->css();
     }
 
 	// calcul du md5 associe aux valeurs
@@ -155,9 +161,17 @@ class Crayon {
 	    $this->hauteur = min(max(intval($_GET['h']), $this->hauteurMini), $maxheight);
     }
 
+	// recuperer les elements de style
+    function css() {
+    	foreach(array('color', 'font-size', 'font-family', 'font-weight', 'line-height', 'background-color') as $property) {
+    		if (null !== ($p = _request($property)))
+    			$this->styles[] = "$property:$p;";
+    	}
+    }
+
 	// formulaire standard
     function formulaire($contexte = array(), $inputAttrs = array()) {
-    		include_spip('inc/filtres');
+    	include_spip('inc/filtres');
         return liens_absolus('<form class="formulaire_spip" method="post" action="' .
         	str_replace('crayons_html', 'crayons_store', self(true)) . '">' .
         	$this->code() .
@@ -197,6 +211,7 @@ class Crayon {
         foreach ($this->texts as $champ => $val) {
 	        $contexte['name_' . $champ] = 'content_' . $this->key . '_' . $champ;
         }
+		$contexte['style'] = join(' ',$this->styles);
         include_spip('public/assembler');
         return recuperer_fond($this->controleur, $contexte);
     }
