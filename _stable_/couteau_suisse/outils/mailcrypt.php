@@ -13,7 +13,7 @@ function mailcrypt_rempl($texte) {
 
 	// nettoyage total, on ne sait jamais... regexp trouvee dans l'outil "liens orphelins"
 	$autorises =  '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9';
-	$texte = preg_replace(",\b[{$autorises}]*@[a-zA-Z][a-zA-Z0-9-]*\.[a-zA-Z]+(\?[{$autorises}]*)?,", _mailcrypt_MAIL, $texte);
+	$texte = preg_replace(",\b[{$autorises}]*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?[{$autorises}]*)?,", _mailcrypt_MAIL, $texte);
 	return $texte;
 }
 

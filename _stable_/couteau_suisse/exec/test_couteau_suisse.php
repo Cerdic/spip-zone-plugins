@@ -206,6 +206,7 @@ function cs_les_tests() {
 		"wais://host.ici:port/database et wais://wais.monsite.com/",
 		"news:fr.comp.lang.c++ et pkoi pas : <div toto='ici.rien'></div>http://google.fr",
 		"moi+moi@world.com, mailto:moi-moi@world.com, mailto:nom@provider.com?subject=renseignement",
+		"moi+moi@kekpar.tm.fr, mailto:moi-moi@kekpar.tm.fr, mailto:nom@provider.com.tm.fr?subject=renseignement",
 		'une image ? <img src="http://mailer.e-flux.com/mail_images/toto.jpg" alt="" />',
 		'[<img src="http://mailer.e-flux.com/mail_images/toto.jpg" alt="" />->http://www.americas-society.org/] ',
 	);
@@ -216,7 +217,9 @@ function cs_les_tests() {
 		"mailto:nom@organisation.domaine et : mailto:Fabien.Gandon@sophia.inria.fr (on supprime ces liens)",
 		"moi+moi@world.com, mailto:moi-moi@world.com, mailto:nom@provider.com?subject=renseignement",
 		"pat@moi.com [->pat@moi.com] [pat->pat@moi.com]",
+		"pat@moi.com.tm.fr [->pat@moi.com.tm.fr] [pat->pat@moi.com.tm.fr]",
 		"<a href='mailto:moi@toto.com'>Moi</a> et : <a href='mailto:moi@toto.com'>moi@toto.com</a>",
+		"<a href='mailto:moi@kekpar.tm.fr'>Moi</a> et : <a href='mailto:moi@kekpar.tm.fr'>moi@kekpar.tm.fr</a>",
 	);
 	test_outil(cs_test_fun($textes, 'mailcrypt_post_propre'), 'Test sur : mailcrypt_post_propre()');
 

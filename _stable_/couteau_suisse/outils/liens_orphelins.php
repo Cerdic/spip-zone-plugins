@@ -50,7 +50,7 @@ function liens_orphelins_rempl($texte){
    // trouve : mailto:qqchose ou news:qqchose
    if($GLOBALS["liens_orphelins_etendu"]) {
 	   $texte = preg_replace(",\b(news:[{$autorises}]*[{$autorisesfin}]),", "[->$1]", $texte);
-	   $texte = preg_replace(",\b(mailto:)?([{$autorises}]*@[a-zA-Z][a-zA-Z0-9-]*\.[a-zA-Z]+(\?[{$autorises}]*)?),", "[$2->mailto:$2]", $texte);
+	   $texte = preg_replace(",\b(mailto:)?([{$autorises}]*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?[{$autorises}]*)?),", "[$2->mailto:$2]", $texte);
 	}
 	return echappe_retour($texte, 'LIENS');
 }
