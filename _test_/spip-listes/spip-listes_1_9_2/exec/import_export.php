@@ -122,9 +122,10 @@ function exec_import_export(){
 		exit;
 	}
 
+	
 	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 		$statut_auteur=$statut;
-		spip_listes_onglets(_T('spiplistes:spip_listes'), "Spip listes");
+		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	}
 
 	debut_gauche();
@@ -211,16 +212,16 @@ function exec_import_export(){
 								$mail = $row['email'] ;
 								$id = $row['id_auteur'] ;
 								$tmp_log .= _T('spiplistes:adresse_deja_inclus')." ";								
-								$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id")) ;		
+								$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`='$id'")) ;		
 				
 									if($abo){
 									$ok = spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`=$format_abo WHERE id_auteur="._q($id));
 									}
 									else{
-									$ok = spip_query("INSERT INTO `spip_auteurs_elargis` (id_auteur,spip_listes_format) VALUES ('$id',$format_abo).");
+									$ok = spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`,`spip_listes_format`) VALUES ('$id',$format_abo)");
+									}
 									if ($ok){  
 									$tmp_log .=  "("._T('spiplistes:mis_a_jour').")";
-									}
 								
 								}
 							}
@@ -229,7 +230,7 @@ function exec_import_export(){
 								spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) ".
 								"VALUES ("._q($nom_inscription).","._q($mail_inscription).","._q($login).","._q($mdpass).","._q($statut).","._q($htpass).","._q($cookie).")");
 								$id = spip_insert_id();
-								$ok = spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`,`spip_listes_format`) VALUES ('$id',$format_abo)");
+								$ok = spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`,`spip_listes_format`) VALUES  ('$id',$format_abo)");
 							}
 
 							// Inscription aux listes
