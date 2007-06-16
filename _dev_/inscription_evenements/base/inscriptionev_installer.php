@@ -1,1 +1,50 @@
-<?php$GLOBALS['inscriptionev_version'] = 0.1;function inscriptionev_verifier_base(){	include_spip('base/abstract_sql');		$accepter_visiteurs = lire_meta('accepter_visiteurs');	if($accepter_visiteurs != 'oui'){		ecrire_meta("accepter_visiteurs", "oui");		ecrire_metas();	}		$version_base = $GLOBALS['inscriptionev_version'];	if (!isset($GLOBALS['meta']['inscriptionev_version']) ){		//definition de la table cible		$table_nom = "spip_auteurs_evenements";		//création de la nouvelle table spip_auteurs_elargis		spip_query("CREATE TABLE ".$table_nom." (id_auteur bigint(21), PRIMARY KEY (id_auteur));");		//ajouts des différents champs		$desc = spip_abstract_showtable($table_nom, '', true);		foreach(lire_config('inscriptionev') as $cle => $val) {			if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'naissance' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categorie|zone|newsletter).*$", $cle) and !ereg("^.+_(fiche|table).*$", $cle))				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");			if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance')				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");		}		ecrire_meta('inscriptionev_version',$version_base,'oui');	}	ecrire_metas();}		//supprime les données depuis la table spip_auteurs_ajouts	function inscriptionev_vider_tables() {		include_spip('base/abstract_sql');		//supprime la table spip_auteurs_ajouts		spip_query("DROP TABLE spip_auteurs_evenements");		effacer_meta('inscriptionev_version');		ecrire_metas();	}		function inscriptionev_install($action){		$version_base = $GLOBALS['inscriptionev_version'];		switch ($action){			case 'test': 				return isset($GLOBALS['meta']['inscriptionev_version']);				break;			case 'install':				inscriptionev_verifier_base();				break;			case 'uninstall':				inscriptionev_vider_tables();				break;		}	}?>
+<?php
+/**
+* Plugin Association
+*
+* Copyright (c) 2007
+* Bernard Blazin & François de Montlivault
+* http://www.plugandspip.com 
+* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+* Pour plus de details voir le fichier COPYING.txt.
+*  
+**/
+
+// Declaration des tables evenements
+
+include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
+
+global $tables_principales;
+global $tables_auxiliaires;
+		
+//-- Table ACTIVITES ------------------------------------------
+$spip_asso_activites = array(
+					"id_activite"		=> "bigint(20) NOT NULL auto_increment",
+					"id_evenement"	=> "bigint(20) NOT NULL",
+					"nom"				=> "text NOT NULL",
+					"id_adherent"		=> "bigint(20) NOT NULL",
+					"accompagne"	=> "text NOT NULL",
+					"inscrits"			=> "int(11) NOT NULL default '0'",
+					"date"				=> "date NOT NULL default '0000-00-00'",
+					"telephone"		=> "text NOT NULL",
+					"adresse"			=> "text NOT NULL",
+					"email"			=> "text NOT NULL",
+					"commentaire"	=> "text NOT NULL",
+					"montant"			=> "float NOT NULL default '0'",
+					"date_paiement"	=> "date NOT NULL default '0000-00-00'",
+					"statut"			=> "text NOT NULL",
+					"maj"				=> "timestamp(14) NOT NULL"
+					);						
+$spip_asso_activites_key = array(
+						"PRIMARY KEY" => "id_activite"
+						);
+
+$tables_principales['spip_asso_activites'] = array(
+		'field' => &$spip_asso_activites, 
+		'key' => &$spip_asso_activites_key);
+
+//-- Table des tables ----------------------------------------------------
+
+global $table_des_tables;
+	$table_des_tables['asso_activites'] = 'asso_activites';
+?>
