@@ -28,14 +28,14 @@ $theme_zones['infosgauche']['nom'] = "infosgauche";
 $theme_zones['infosgauche']['titre'] = "<multi>[fr]Infos &agrave; gauche</multi>";
 $theme_zones['infosgauche']['descriptif'] = "<multi>[fr]Informations compl&eacute;mentaires dans une colonne &agrave; gauche.</multi>";
 $theme_zones['infosgauche']['pages_exclues'] = "login";
-$theme_zones['infosgauche']['insere_avant'] = "<div style='width:245px; float:left;'>";
+$theme_zones['infosgauche']['insere_avant'] = "<div style='width:49%; float:left;'>";
 $theme_zones['infosgauche']['insere_apres'] = "</div>";
 
 $theme_zones['infosdroite']['nom'] = "infosdroite";
 $theme_zones['infosdroite']['titre'] = "<multi>[fr]Infos &agrave; droite</multi>";
 $theme_zones['infosdroite']['descriptif'] = "<multi>[fr]Informations compl&eacute;mentaires dans une colonne &agrave; droite.</multi>";
 $theme_zones['infosdroite']['pages_exclues'] = "login";
-$theme_zones['infosdroite']['insere_avant'] = "<div style='width:245px; float:right;'>";
+$theme_zones['infosdroite']['insere_avant'] = "<div style='width:49%; float:right;'>";
 $theme_zones['infosdroite']['insere_apres'] = "</div>";
 
 $theme_zones['souscontenu']['nom'] = "souscontenu";
