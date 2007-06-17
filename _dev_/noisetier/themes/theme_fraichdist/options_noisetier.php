@@ -2,7 +2,7 @@
 
 global $theme_titre, $theme_descriptif, $theme_zones;
 
-$theme_titre = 'Dist';
+$theme_titre = 'Fraichdist';
 $theme_descriptif = '<multi>[fr]Th&egrave;me bas&eacute; sur les squelettes fournis en standard avec SPIP.</multi>';
 $theme_zones = array();
 

@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Th&egrave;me dist pour le noisetier</multi>
+	<multi>[fr]Th&egrave;me fraichdist pour le noisetier</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cent20, Joseph Larmarange, pour la mise en th&egrave;me pour le noisetier <br />
@@ -15,7 +15,7 @@
 	</etat>
 	<description>
 	<multi>
-	[fr] Th&#232;me pour le plugin noisetier. Ce th&egrave;me est bas&eacute; sur la distribution dist livr&eacute;e en standard avec SPIP.
+	[fr] Th&#232;me pour le plugin noisetier. Ce th&egrave;me est bas&eacute; sur la distribution fraichdist livr&eacute;e en standard avec SPIP.
 	</multi>
 	</description>
 	<lien>http://groups.google.com/group/noisetier-dev</lien> <!-- URI de documentation -->
