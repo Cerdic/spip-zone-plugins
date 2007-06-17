@@ -136,9 +136,11 @@ function exec_courrier_edit(){
 	echo "<input type='hidden' name='nomsite' value=\"$nomsite\" />";
 
 	$auj = date('Y-m-d');
-	echo "<div style='margin-left:200px;height:200px'><p>"._T('spiplistes:date_ref')."</p><div><input type=\"text\" class=\"date-picker\" name=\"date\" style=\"text-align:center;width:8em\" value=\"$auj\" /></div>";
-
-	echo "<p style='padding-left:20px;clear:both'>"._T('spiplistes:alerte_modif')."<br /><br /><input type='submit' name='Valider' value='"._T('spiplistes:charger_le_patron')."' class='fondo' /></p></div>";
+	echo "<div style='margin-left:200px;height:200px'>";
+	echo "<p>"._T('spiplistes:date_ref')."</p><p><input type=\"text\" class=\"date-picker\" name=\"date\" style=\"text-align:center;width:8em\" value=\"$auj\" /></p>";
+	echo "<br />";
+	echo "<p>"._T('spiplistes:alerte_modif')."</p><p><input type='submit' name='Valider' value='"._T('spiplistes:charger_le_patron')."' class='fondo' /></p>";
+	echo "</div>";
 	echo "</form>";
 	echo "<br style='clear:both' />";
 
