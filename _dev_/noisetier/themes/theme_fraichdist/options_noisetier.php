@@ -43,7 +43,7 @@ $theme_zones['souscontenu']['titre'] = "<multi>[fr]Sous-contenu</multi>";
 $theme_zones['souscontenu']['descriptif'] = "<multi>[fr]Informations compl&eacute;mentaires affich&eacute;es sous le contenu principal et sous les bo&icirc;tes d'infos.</multi>";
 $theme_zones['souscontenu']['pages_exclues'] = "login";
 $theme_zones['souscontenu']['insere_avant'] = "<div style='width:100%; float:left;'>";
-$theme_zones['souscontenu']['insere_apres'] = "</div></div>";
+$theme_zones['souscontenu']['insere_apres'] = "</div>";
 
 $theme_zones['pied']['nom'] = "pied";
 $theme_zones['pied']['titre'] = "<multi>[fr]Pied de page</multi>";
