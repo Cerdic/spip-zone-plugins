@@ -70,7 +70,7 @@ if (!$HTTP_POST_VARS){
      <:enviarmail:adresse:><br /><input name="email" class="campos" size="40" value=""><br />
      <:enviarmail:texte:><br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
      <div style="text-align:center">
-      <input type="submit" name="enviar" class="boton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
+      <input type="submit" name="enviar" class="boton" style="margin-top:.3em" value="<:enviarmail:envoi:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
       </div>
       <input type="hidden" name="message" value="1">
       </fieldset>
@@ -81,7 +81,7 @@ if (!$HTTP_POST_VARS){
 }else{
 
 // REVISA QUE HAYA UN EMAIL PARA ENVIAR EL MENSAJE
-if (!$destino) { echo "<p style='color:red; font-size:90%'>Lo sentimos :-( pero sin dirección de correo electrónico válida<br />no podemos enviar el mensaje</p>";
+if (!$destino) { echo "<p style='color:red; font-size:90%'><:enviarmail:sentimos:> :-( <:enviarmail:direction:><br /><:enviarmail:podemos:></p>";
 
 ?>
 
@@ -97,7 +97,7 @@ if (!$destino) { echo "<p style='color:red; font-size:90%'>Lo sentimos :-( pero 
      <:enviarmail:adresse:><br /><input name="email" class="campos" size="40" value=""><br />
      <:enviarmail:texte:><br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
      <div style="text-align:center">
-      <input type="submit" name="enviar" class="boton" style="margin-top:.3em" value="<:enviarmail:envoi:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
+      <input type="submit" name="<:enviarmail:envoi:>" class="boton" style="margin-top:.3em" value="<:enviarmail:envoi:>">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="<:enviarmail:annuler:>" onclick="window.close();"> 
       </div>
       
       <input type="hidden" name="message" value="1">
@@ -136,7 +136,7 @@ $mail->Mailer = "smtp";
  
 $mail->Host = "localhost"; // Servidor de SMTP 
 
-$mail->SetLanguage("es", "phpmailer/language/");
+$mail->SetLanguage("fr", "phpmailer/language/");
 $mail->CharSet	= lire_meta('charset');  // Juego de caracteres
 $mail->Timeout="20";
 
@@ -150,7 +150,7 @@ $mail->Timeout="20";
   
       //Estoy recibiendo los campos, compongo el cuerpo
 
-    if (!$HTTP_POST_VARS["nombre"]) { $remite= "No ha escrito su nombre"; } else { $remite= $HTTP_POST_VARS["nombre"]; }
+    if (!$HTTP_POST_VARS["nombre"]) { $remite= _T('enviarmail:no_escrito_nombre'); } else { $remite= $HTTP_POST_VARS["nombre"]; }
     $mail->FromName = $remite; // el nombre que queremos que vea
     $mail->From = $HTTP_POST_VARS["email"]; // el email del nombre que se ve
     
@@ -177,17 +177,17 @@ $texto_html.="<p style='padding:0px;margin:0px;text-align:left;font-size:120%;fo
 
 $texto_html.="<div style='padding:.9em;padding-top:0px'>";
 
-if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. Quizás esta información te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
+if (!$HTTP_POST_VARS["coment"]) { $comentario=""._T('enviarmail:hola').""; } else { $comentario=$HTTP_POST_VARS["coment"]; }
 $texto_html.="<p style='text-align:left'>".$comentario."</p>";
 
 $texto_html.="<div style='border: 1px solid silver;background-color:whitesmoke'>";
 $texto_html.="<div style='font-size:120%;padding:.3em;text-align:center;border-bottom:1px dotted silver'>".'[(#TITRE)]'."</div>";
 $texto_html.="<div style='padding:.9em;padding-bottom:.3em;font-size:95%;'>".'[(#TEXTE|couper{1200})]'."</div>";
-$texto_html.="<div style='font-size:90%;text-align:right;padding-bottom:.6em;padding-right:.9em'><a href='$url_sitio/$url_art'>leer más &rsaquo;&rsaquo;&rsaquo;</a></div>";
+$texto_html.="<div style='font-size:90%;text-align:right;padding-bottom:.6em;padding-right:.9em'><a href='$url_sitio/$url_art'>"._T('enviarmail:leer')."</a></div>";
 $texto_html.="</div>";
 
 if (!$HTTP_POST_VARS["email"]) { $email_aut=""; } else { $email_aut=" (".$HTTP_POST_VARS["email"].")"; }
-$texto_html.="<div style='font-size:80%;color:#999999;text-align:left'>Envíado por: ".$remite.$email_aut."</div>";
+$texto_html.="<div style='font-size:80%;color:#999999;text-align:left'>"._T('enviarmail:enviado_por')." ".$remite.$email_aut."</div>";
 
 $texto_html.="</div></div>";
 
@@ -195,15 +195,15 @@ $mail->Body = $texto_html;
   
 // COMIENZO PARTE TEXTO PLANO 
 
-if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. Quizás esta información te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
+if (!$HTTP_POST_VARS["coment"]) { $comentario=""._T('enviarmail:enviado').""; } else { $comentario=$HTTP_POST_VARS["coment"]; }
 $texto_plano=$comentario."\n\n";
 $texto_plano.="-------------------------- \n";
 $texto_plano.='[(#NOM_SITE_SPIP)]'."\n".'[(#URL_SITE_SPIP)]'."\n\n";
 $texto_plano.='[(#TITRE)]'."\n\n";
 $texto_plano.='[(#TEXTE|couper{1200})]'."\n\n";
-$texto_plano.="leer más: ".$url_sitio."/".$url_art."\n\n";
+$texto_plano.=""._T('enviarmail:leer')."".$url_sitio."/".$url_art."\n\n";
 $texto_plano.="-------------------------- \n";
-$texto_plano.="Envíado por: ".$remite.$email_aut;
+$texto_plano.=""._T('enviarmail:enviado_por')." ".$remite.$email_aut;
 
 
   $mail->AltBody = $texto_plano;
@@ -228,19 +228,19 @@ if ($mail->ErrorInfo=="SMTP Error: Data not accepted") { // soluciona un bug con
 
 if($enviado)
 {
-echo "<div style='margin-left:15px;margin-right:15px'><center><br /><br /><h2 style='text-align:center; font-weight:bold; margin-bottom:.6em'><span style='text-decoration:underline;color:#f28000'>".'[(#NOM_SITE_SPIP)]'."</span></h2><br /><h1 style='text-align:center;font-size:95%'>La referencia de<i><b><div style='padding-top:.9em;padding-bottom:.9em;font-size:115%'>\"".'[(#TITRE|texte_script)]'."\"</div></b></i><div style='padding-bottom:.6em'>ya se ha enviado a:</div>";
+echo "<div style='margin-left:15px;margin-right:15px'><center><br /><br /><h2 style='text-align:center; font-weight:bold; margin-bottom:.6em'><span style='text-decoration:underline;color:#f28000'>".'[(#NOM_SITE_SPIP)]'."</span></h2><br /><h1 style='text-align:center;font-size:95%'>\""._T('enviarmail:referencia')."\"<i><b><div style='padding-top:.9em;padding-bottom:.9em;font-size:115%'>\"".'[(#TITRE|texte_script)]'."\"</div></b></i><div style='padding-bottom:.6em'>"._T('enviarmail:enviado')." </div>";
 foreach($separar as $email_destino) { echo $email_destino."<br />"; }
 echo "</h1 />";
 }
 else{
-echo "<div style='margin-left:15px;margin-right:15px'><center><font color='red'><br /><br /><h2 style='text-align:center; font-weight:bold; margin-bottom:.3em'><span style='text-decoration:underline;color:#f28000'>".'[(#NOM_SITE_SPIP)]'."</span></h2><br /><h1 style='text-align:center;font-size:90%'>Lo sentimos<br />Ha habido un problema y no se ha podido enviar el correo :-(</h1></font></center></div>";
+echo "<div style='margin-left:15px;margin-right:15px'><center><font color='red'><br /><br /><h2 style='text-align:center; font-weight:bold; margin-bottom:.3em'><span style='text-decoration:underline;color:#f28000'>".'[(#NOM_SITE_SPIP)]'."</span></h2><br /><h1 style='text-align:center;font-size:90%'>"._T('enviarmail:sentimos')."<br />"._T('enviarmail:problema')."</h1></font></center></div>";
 }
 
 ?>
 
 <div style="text-align:center">
 <br />
-<input type="button"  class="boton" value="Cerrar" onclick="window.close();">
+<input type="button"  class="boton" value="<:enviarmail:fermer:>" onclick="window.close();">
 </div>
 
 <?php

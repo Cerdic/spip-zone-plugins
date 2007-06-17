@@ -16,7 +16,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'adresse' 			=> 'Tu dirección de correo electrónico',
 'texte' 			=> 'Puedes añadir un texto en el mensaje',
 'envoi'				=> 'Enviar',
-'annuler' 			=> 'Cancelar'
+'annuler' 			=> 'Cancelar',
+'enviar_title'      => 'Enviar la referencia de este documento por email',
+'enviar_por_email'  => 'enviar por email',
+'referencia'		=>	'La referencia de',
+'envidio'			=>	'ya se ha enviado a:',
+'sentimos'			=>	'Lo sentimos',
+'problema'			=>	'Ha habido un problema y no se ha podido enviar el correo :-(',
+'hola'				=>	'Hola. Quizás esta información te pueda interesar.',
+'leer '				=>	'leer más:',
+'enviado_por'		=>	'Envíado por: ',
+'direction'			=>	'pero sin dirección de correo electrónico válida',
+'podemos'			=>	'no podemos enviar el mensaje',
+'fermer'			=>	'cerrar',
+'documento'			=>	 'Hola. Quizás este documento de',
+'interesar'			=>	 'te pueda interesar.',
+'descargarte'		=>	 'Si visitas la web podrás descargarte los siguientes documentos:',
+'source'			=>	 'fuente',
+
+
+
 );
 
 

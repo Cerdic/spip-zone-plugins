@@ -25,7 +25,7 @@ $javascript_centrar_enviar = "<script language=\"JavaScript1.2\">
 		$url = generer_url_public('',$arg);
 		
 // prepara el enlace completo
-		$enlace = $javascript_centrar_enviar."<a href=\"javascript:;\" onClick=\"centrarVentana('$url','Enviar_documento','scrollbars=yes,resizable=yes','440','460','true')\" title=\"Enviar la referencia de este documento por email\" border=\"0\"><img src=\"$logo\" border=\"0\" /> Enviar por email</a>";
+		$enlace = $javascript_centrar_enviar."<a href=\"javascript:;\" onClick=\"centrarVentana('$url','Enviar_documento','scrollbars=yes,resizable=yes','440','460','true')\" title=\""._T('enviarmail:enviar_title')."\" style=\"border:none\"><img src=\"$logo\" style=\"border:none\" alt=\""._T('enviarmail:enviar_title')." title=\""._T('enviarmail:enviar_title')."\" /> "._T('enviarmail:enviar_por_email')."</a>";
 		return $enlace;
 
 }
