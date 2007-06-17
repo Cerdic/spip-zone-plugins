@@ -9,6 +9,11 @@ a.cs_glossaire span.gl_dl,
 a.cs_glossaire span.gl_dt,
 a.cs_glossaire span.gl_dd {
  	display: none;
+	z-index:999;
+}
+
+a.cs_glossaire span.gl_dd {
+	font-weight:normal;
 }
 
 a.cs_glossaire:hover span.gl_dt,
