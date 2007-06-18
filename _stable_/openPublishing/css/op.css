@@ -1,140 +1,101 @@
-#op #erreur {
+.op-bordure {
 	display: block;
-	height: 50px;
-	text-align: center;
-	color: #fff;
-	font-weight: bold;
-	background-color: red;
-	margin-left: 5px;
-	margin-right: 15px;
+	border : 1px solid #d7b8e1;
 }
 
-#op #block-op {
-	display: block;
-	margin-left:5px;
-	margin-right: 15px;
-	background-color: #fff;
+.block-sans {
+clear: both;
+-moz-border-radius: 10px;
 }
 
-#op #block-op-footer {
-	display: block;
-	color: #fff;
-	background-color: #8a5e99;
-	border-top: 1px solid #d7b8e1;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	padding: 0em;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	padding-right: 4px;
-	text-align: right;
-	font-style: italic;
-	font-size: 0.8em;
-	vertical-align: middle;
+.block {
+clear: both;
+border: medium solid #8a5e99;
+-moz-border-radius: 10px;
 }
 
-#op #block-op-bande {
-	display: block;
-	color: #fff;
-	background-color: #8a5e99;
-	border-top: 1px solid #d7b8e1;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	padding: 0em;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 0.9em;
-	vertical-align: middle;
+.block-titre {
+text-align: center;
+font-family: Georgia ,"Times New Roman", Times, serif;
+color: #8a5e99;
+font-weight: bold;
+font-size: 1.2em;
+padding-top: 2px;
+padding-bottom: 2px;
+margin-left : 5px;
+margin-right : 5px;
 }
 
-#op #block-op-footer a {
-	text-decoration: none;
-	color: #fff;
-	border: 1px solid #fff;
-	-moz-border-radius:5px;
+.block-contenu {
+text-align: justify;
+font-family: Georgia ,"Times New Roman", Times, serif;
+font-weight: normal;
+font-size: 0.9em;
+padding-left: 8px;
+padding-right: 8px;
 }
 
-#op #block-op-footer a:hover {
-	color : #fff;
-	background-color: #d7b8e1;
-	text-decoration: none;
+.block-contenu a {
+text-decoration: none;
+background-color: #fff;
+color: #8a5e99;
 }
 
-#op #block-op-center {
-	display: block;
-	background-color: #fff;
-	color: #333;
-	border: medium solid #8a5e99;
-	width: 98%;
-	margin-right: 0px;
-	margin-left: 2px;
-	padding-right: 0px;
-	padding-left: 0px;
-	padding-bottom: 0px;
-	padding-top: 0px;
-	-moz-border-radius: 10px;
+.block-contenu a:hover {
+color : #fff;
+background-color: #d7b8e1;
+text-decoration: none;
 }
 
-#op #block-op-center-titre {
-	display: block;
-	padding: 0em;
-	text-align: center;
-	line-height: 18px;
-	background-color: #fff;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-top: 2px;
-	padding-bottom: 4px;
-	color: #829891;
-	text-shadow: 0px 0px 3px #999999;
-	font-family:georgia, times, serif;
-	font-weight: bold;
+.block-contenu-txt {
+text-align: justify;
+font-family: Georgia ,"Times New Roman", Times, serif;
+font-weight: normal;
+font-size: 0.9em;
+
+padding-left: 8px;
+padding-right: 8px;
 }
 
-#op #block-op-publie-titre {
-	display: block;
-	padding: 0em;
-	text-align: left;
-	line-height: 18px;
-	background-color: #fff;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-top: 2px;
-	padding-bottom: 4px;
-	color: #829891;
-	text-shadow: 0px 0px 3px #999999;
-	font-family:georgia, times, serif;
-	font-weight: bold;
+.block-contenu-txt a {
+text-decoration: none;
+background-color: #fff;
+color: #8a5e99;
 }
 
-#op #block-op-content small {
-	text-align: justify;
+.block-contenu-txt a:hover {
+color : #fff;
+background-color: #d7b8e1;
+text-decoration: none;
 }
 
-#op #block-op-content p {
-	text-align: justify;
-	color: black;
-	margin-left: 10px;
-	margin-right: 10px;
-	
+.block-contenu-txt img {
+/*border: large solid #fff;*/
+margin-right : 15px;
+margin-bottom : 15px;
+margin-left: 0px;
+margin-top: 15px;
 }
 
-#op #block-op-content hr {
-	margin-left : 10px;
-	margin-right : 10px;
+.block-pied {
+color: #fff;
+background-color: #8a5e99;
+text-align: right;
+font-family: Georgia ,"Times New Roman", Times, serif;
+font-weight: normal;
+font-size: 0.8em;
+padding-top: 4px;
 }
 
-#op #op-textearea {
-	margin-left : 10px;
-	margin-right : 10px;
+.block-pied a{
+text-decoration: none;
+color: #fff;
+border: 1px solid #fff;
+-moz-border-radius:5px;
 }
 
-#op #op-identif {
-	font-size : 0.8em;
-	margin-left : 10px;
-	margin-bottom : 10px;
+.block-pied a:hover{
+color : #fff;
+background-color: #d7b8e1;
+text-decoration: none;
 }

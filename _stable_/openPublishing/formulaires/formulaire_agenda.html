@@ -1,15 +1,12 @@
 #CACHE{86400}
 
-#BOUTON_BLOCK&nbsp;&nbsp;<b><:opconfig:ajouter_agenda:></b>
+<div style="background-color: #eee; text-style: justify; padding:5px; margin: 5px; margin-right:5px">
 
-<div style="background-color: #eee; text-style: justify; margin: 5px; margin-right:55px">
-<p><small><:opconfig:agenda_explique2:></p></small>
-</div>
+	<b><:opconfig:ajouter_agenda:></b>
 
-#DEBUT_BLOCK
-<div class="block-contenu">
+	<p><:opconfig:agenda_explique2:></p>
+	<p><:opconfig:explication_agenda:></p>
 
-<div style="font-size : 0.8em;"><p><:opconfig:explication_agenda:></p></div>	
 
 	<p>
 	[(#ENV**{choix_agenda}|checkbox_agenda)]
@@ -25,5 +22,5 @@
 	
 	</p>
 	<br />
+
 </div>
-#FIN_BLOCK

@@ -27,44 +27,41 @@
 		<p><label><b><small><:opconfig:publie_texte:></b></small></label></p>
 		<p><div id="op-textearea">[(#ENV**{texte}|barre_article{30,62})]</div></p>
 
+		<p>[(#ENV*{formulaire_motclefs})]</p>
+		
+
 		</div>
 
 	</td>
 	<td valign="top" width="100%">
-		<p><small><:opconfig:aide_formulaire:></small></p>
-		[(#ENV*{formulaire_motclefs})]
-		<br />
-		[(#ENV*{formulaire_tagopen})]
-		<br />
-		[(#ENV*{formulaire_documents})]
-		<br />
-		[(#ENV*{formulaire_agenda})]
-		<br />
 
-		#BOUTON_BLOCK&nbsp;&nbsp;<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b>
+		<div class="block-contenu">
 
-		<div style="background-color: #eee; text-style: justify; margin: 5px; margin-right:55px">
-		<p><small><:opconfig:identif_explique:></small></p>
-		</div>
-
-		#DEBUT_BLOCK
-		<div class="block-contenu"><br />
-
-		<div style="font-size : 0.8em;">
-			<table cellspacing="0" cellpadding="0" border="0">
-			<tr><td><:opconfig:votre_nom:>&nbsp;:&nbsp;</td><td>
-			<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="25"></td></tr>
-			<tr><td><:opconfig:votre_mail:>&nbsp;:&nbsp;</td><td>
-			<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="25"></td></tr>
-			<tr><td><:opconfig:votre_groupe:>&nbsp;:&nbsp;</td><td>
-			<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="25"></td></tr>
-			<tr><td><:opconfig:votre_phone:>&nbsp;:&nbsp;</td><td>
-			<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="25"></td></tr>
-			</table>
-		</div>
+		<p>[(#ENV*{formulaire_tagopen})]</p>
+		<p>[(#ENV*{formulaire_documents})]</p>
+		<p>[(#ENV*{formulaire_agenda})]</p>
+		
+		<p>
+				<div style="background-color: #eee; text-style: justify; padding:5px; margin: 5px; margin-right:5px">
+				<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b>
+				
+				<p><:opconfig:identif_explique:></p>
+			
+	
+				<table cellspacing="0" cellpadding="0" border="0">
+				<tr><td><:opconfig:votre_nom:>&nbsp;:&nbsp;</td><td>
+				<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="25"></td></tr>
+				<tr><td><:opconfig:votre_mail:>&nbsp;:&nbsp;</td><td>
+				<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="25"></td></tr>
+				<tr><td><:opconfig:votre_groupe:>&nbsp;:&nbsp;</td><td>
+				<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="25"></td></tr>
+				<tr><td><:opconfig:votre_phone:>&nbsp;:&nbsp;</td><td>
+				<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="25"></td></tr>
+				</table>
+			</div>
+		</p>
 
 		</div>
-		#FIN_BLOCK
 	</td>
 
 	</tr>

@@ -1,18 +1,11 @@
 #CACHE{86400}
 
-#BOUTON_BLOCK&nbsp;&nbsp;<b><:opconfig:motclefs:></b>
+<div style="background-color: #eee; text-style: justify; padding:5px; margin: 5px; margin-right:5px">
 
-<div style="background-color: #eee; text-style: justify; margin: 5px; margin-right:55px">
-<p><small><:opconfig:motclefs_explique:></small></p>
-</div>
-
-#DEBUT_BLOCK
-<div class="block-contenu">
-
-
-<div style="font-size : 0.8em;">
-
+	<b><:opconfig:motclefs:></b>
+	<p><:opconfig:motclefs_explique:></p>
 	<p><:opconfig:motclefs_explique2:></p>
+
 	<select name='motschoix[]' multiple size='8'>
 	<BOUCLE_groupes(GROUPES_MOTS)>
 		<option value="">[(#TITRE|majuscules)]</option>
@@ -31,15 +24,10 @@
 
 	<B_motarticle>
 	<b><:opconfig:motclefs_liste:></b><br />
-	<div style="background-color: #eee; text-style: justify; margin: 5px;">
 	<BOUCLE_motarticle(MOTS){par titre}{id_article = #ENV*{id_article} }>
 		[(#TITRE),&nbsp;]
 	</BOUCLE_motarticle>
-	</div>
 	</B_motarticle>
 	<br>
 
-</div>
-</div>
-#FIN_BLOCK
-</div>
+	</div>
