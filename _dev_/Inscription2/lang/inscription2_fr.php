@@ -130,7 +130,10 @@ L\'&eacute;quipe de @nom_site@',
 'supprimer_adherent' => 'Supprimer adh&eacute;rent',
 'editer_adherent' => 'Editer adh&eacute;rent',
 'fiche_adherent' => 'Fiche adh&eacute;rent',
-'action_adherent' => 'Action adh&eacute;rent'
+'action_adherent' => 'Action adh&eacute;rent',
+'auteur' => 'Auteur',
+'aconfirmer' => 'A confirmer',
+'statut' => 'Statut'
 
 );
 

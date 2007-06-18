@@ -1,0 +1,338 @@
+#CACHE{0}
+
+<script src="#CHEMIN{javascript/jquery.validate.js}" type="text/javascript"></script>
+<script language="javascript" src="#CHEMIN{javascript/md5.js}"></script>
+<script type="text/javascript">
+	
+	jQuery.validator.addMethod("chaine", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.сзаийвкофы ]+$/.test(value);
+	}, "Ce champ est obligatoire, entrez une chaine valide svp");
+
+	jQuery.validator.addMethod("postal", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z0-9\- ]+$/.test(value);
+	}, "Ce champ est obligatoire, entrez un code postal valide svp");
+	
+	jQuery.validator.addMethod("numero", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[0-9\. ]+$/.test(value);
+	}, "Ce champ est obligatoire, entrez un numero valide svp");
+	
+	$().ready(function() {
+	// validate signup form on submit
+	$("#inscription").validate({
+		rules: {
+			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
+			prenom:{[(#CONFIG{inscription2/prenom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,15]},
+			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			adresse: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,30]},
+			adresse2: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,30]},
+			code_postal: {[(#CONFIG{inscription2/code_postal}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,10]},
+			ville: {[(#CONFIG{inscription2/ville}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
+			telephone: {[(#CONFIG{inscription2/telephone}|=={on}|?{required: true,}),]numero:true, rangeLength:[3,15]},
+			fax: {[(#CONFIG{inscription2/fax}|=={on}|?{required: true,}),]numero:true, rangeLength:[3,15]},
+			mobile: {[(#CONFIG{inscription2/mobile}|=={on}|?{required: true,}),]numero:true, rangeLength:[3,15]},
+			profession: {[(#CONFIG{inscription2/profession}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			societe: {[(#CONFIG{inscription2/societe}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			secteur:{[(#CONFIG{inscription2/secteur}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			fonction: {[(#CONFIG{inscription2/fonction}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			divers: {chaine:true, rangeLength:[3,30]}
+		},
+		messages: {
+			nom: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 20 carateres"},
+			prenom:{
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 15 carateres"},
+			username: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
+			adresse: {
+				required:"Ce champ est obligatoire",
+				postal:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 30 carateres"},
+			adresse2: {
+				required:"Ce champ est obligatoire",
+				postal:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 30 carateres"},
+			code_postal: {
+				required:"Ce champ est obligatoire",
+				postal:"Entrez un code postal valable",
+				rangeLength:"Min 3 Max 10 carateres"},
+			ville: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
+			email: {
+				required:"Ce champ est obligatoire",
+				email:"Entrez un email valable",
+				rangeLength:"Min 5 Max 30 carateres"},
+			telephone: {
+				required:"Ce champ est obligatoire",
+				numero:"Entrez un numero valable",
+				rangeLength:"Min 3 Max 15 carateres"},
+			fax: {
+				required:"Ce champ est obligatoire",
+				numero:"Entrez un numero valable",
+				rangeLength:"Min 3 Max 15 carateres"},
+			mobile: {
+				required:"Ce champ est obligatoire",
+				numero:"Entrez un numero valable",
+				rangeLength:"Min 3 Max 15 carateres"},
+			profession: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
+			societe: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
+			secteur:{
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 20 carateres"},
+			fonction: {
+				required:"Ce champ est obligatoire",
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 10 carateres"},
+			divers:{
+				chaine:"Entrez une chaine de caracteres valable",
+				rangeLength:"Min 3 Max 30 carateres"}
+		}
+	});
+
+	// propose username by combining first- and lastname
+	$("#username").focus(function() {
+		var prenom = $("#prenom").val();
+		var nom = $("#nom").val();
+		if(prenom && nom && !this.value) {
+			this.value = prenom + "." + nom;
+		}
+	});
+	
+});
+
+function cryptage() {
+    if(document.inscription.pass1.value == document.inscription.pass2.value){
+		str = document.inscription.pass1.value;
+		document.inscription.pass.value = MD5(str);
+		document.inscription.pass2.value = '';
+		document.inscription.pass1.value = '';
+	}else{
+		document.inscription.pass1.value = '';
+		document.inscription.pass2.value = '';
+	}
+  }
+</script>
+
+<div>
+	[(#ENV*{message})]
+</div>
+
+<div [style="(#ENV{commentaire}|=={1}|?{display: none;, display:block;}) color:red; font-style:bold;"]>
+	#ENV*{commentaire}
+</div>
+
+<div >
+<h3><:inscription2:formulaire_inscription:></h3>
+
+<form method="post" action="#SELF" name="inscription" id="inscription" >
+
+[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
+<fieldset>
+<legend>
+	<:inscription2:info_perso:>
+</legend>
+<br />
+<:inscription2:inserez_infos:>
+<br /><br />
+	
+<p [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
+	<label for="nom"><strong><:inscription2:nom:></strong></label><br />
+	<input type="text" name="nom" id="nom" [value="(#CONFIG{inscription2/nom}|=={on}|?{#ENV{nom}, ''})"]/><br />
+</p>
+
+<p [style="(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})"]>
+	<label for="prenom"><strong><:inscription2:prenom:></strong></label><br />
+	<input type="text" name="prenom" id="prenom" [value="(#CONFIG{inscription2/prenom}|=={on}|?{#ENV{prenom}, ''})"]/><br />
+</p>
+
+<div [style="(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})"]>
+	<label for="username"><strong><:inscription2:username:></strong></label><br />
+	<input type="text" name="username" id="username" [value="(#CONFIG{inscription2/username}|=={on}|?{#ENV{login}, ''})"]/><br /><br />
+</div>
+
+<div>
+	<label for="pass1"><strong><:pass_choix_pass:></strong><br />
+	<input type='password' name='pass1' id='pass1'></label><br /><br />
+	<label for="pass2"><strong><:inscription2:redemande_password:></strong><br />
+	<input type='password' name='pass2' id='pass2'></label><br />
+	<input type='password' name='pass' id='pass' style="display:none;"><br />
+</div>
+	
+<div><label for='statut'><strong><:inscription2:statut:></strong><br />
+	<select name="statut" id="statut">
+	<option value='0minirezo'><:info_administrateur:></option>
+	<option value='1comite'><:inscription2:auteur:></option>
+	<option value='6forum'><:info_visiteur_1:></option>.
+	<option value='aconfirmer'><:inscription2:aconfirmer:></option>
+	</select><br /><br /></label>
+</div>
+
+<div [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:naissance:></strong><br />
+	<span>
+	<select name="jour" id="jour">
+	<?php
+	for ($i=1;$i<=31;$i++)
+		echo "<option>$i</option>\n";
+	?>
+	</select> 
+	</span><span>
+	<select name="mois" id="mois">
+	<option value='01'><:inscription2:janvier:></option>
+	<option value='02'><:inscription2:fevrier:></option>
+	<option value='03'><:inscription2:mars:></option>
+	<option value='04'><:inscription2:avril:></option>
+	<option value='05'><:inscription2:mai:></option>
+	<option value='06'><:inscription2:juin:></option>
+	<option value='07'><:inscription2:juillet:></option>
+	<option value='08'><:inscription2:aout:></option>
+	<option value='09'><:inscription2:septembre:></option>
+	<option value='10'><:inscription2:octobre:></option>
+	<option value='11'><:inscription2:novembre:></option>
+	<option value='12'><:inscription2:decembre:></option>
+	</select>
+	</span><span>
+	<select name="annee" id="annee">
+	<?php
+	$today_year=date('Y');
+	for ($i=$today_year;$i>=$today_year-100;$i--)
+		echo "<option>$i</option>\n";
+	?>
+	</select> </span>
+</div>
+
+<label [style="(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})"]>
+	<strong><:inscription2:sexe:></strong><br />
+	<input name="sexe" type="radio" value="M" /> <:inscription2:masculin:>
+	<input name="sexe" type="radio" value="F" /> <:inscription2:feminin:><br />
+</label>
+
+<p [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
+	<label for="adresse"><strong><:inscription2:adresse:></strong><br /></label>
+	<input type="text" name="adresse" id="adresse" [value="(#CONFIG{inscription2adresse}|=={on}|?{#ENV{adresse}, ''})"]/><br />
+	<label for="adresse2"><strong><:inscription2:adresse_comp:></strong><br /></label>
+	<input type="text" name="adresse2" id="adresse2" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse2}, ''})"] />
+<br /></p>
+
+<p [style="(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})"]>
+	<label for="code_postal"><strong><:inscription2:code_postal:></strong><br /></label>
+	<input type="text" name="code_postal" id="code_postal" [value="(#CONFIG{inscription2/code_postal}|=={on}|?{#ENV{code_postal}, ''})"]/>
+<br /></p>
+
+<p [style="(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})"]>
+	<label for="ville"><strong><:inscription2:ville:></strong><br /></label>
+	<input type="text" name="ville" id="ville" [value="(#CONFIG{inscription2/ville}|=={on}|?{#ENV{ville}, ''})"]/>
+<br /></p>
+
+<p [style="(#CONFIG{inscription2/email}|=={on}|?{display: block;, display:none;})"]>
+	<label for="email"><strong><:inscription2:email:></strong></label><br />
+	<input type="text" name="email" id="email" [value="(#CONFIG{inscription2/email}|=={on}|?{#ENV{email}, ''})"] /><br />
+</p>
+
+<p [style="(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})"]>
+	<label for="telephone"><strong><:inscription2:telephone:></strong><br /></label>
+	<input type="text" name="telephone" id="telephone" [value="(#CONFIG{inscription2/telephone}|=={on}|?{#ENV{telephone}, ''})"] />
+<br /></p>
+
+<p [style="(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})"]>
+	<label for="fax"><strong><:inscription2:fax:></strong><br /></label>
+	<input type="text" name="fax" id="fax" [value="(#CONFIG{inscription2/fax}|=={on}|?{#ENV{fax}, ''})"]/>
+<br /></p>
+
+<p [style="(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})"]>
+	<label for="mobile"><strong><:inscription2:mobile:></strong><br /></label>
+	<input type="text" name="mobile" id="mobile" [value="(#CONFIG{inscription2/mobile}|=={on}|?{#ENV{mobile}, ''})"]/>
+<br /></p>
+
+<p [style="(#CONFIG{inscription2/profession}|=={on}|?{display: block;, display:none;})"]>
+	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
+	<input type="text" name="profession" id="profession" [value="(#CONFIG{inscription2/profession}|=={on}|?{#ENV{profession}, ''})"] />
+<br /></p>
+
+<p [style="(#CONFIG{inscription2/societe}|=={on}|?{display: block;, display:none;})"]>
+	<label for="societe"><strong><:inscription2:societe:></strong><br /></label>
+	<input type="text" name="societe" id="societe" [value="(#CONFIG{inscription2/societe}|=={on}|?{#ENV{societe}, ''})"] />
+<br /></p>
+
+<p [style="(#CONFIG{inscription2/secteur}|=={on}|?{display: block;, display:none;})"]>
+	<label for="secteur"><strong><:inscription2:secteur:></strong><br /></label>
+	<input type="text" name="secteur" id="secteur" [value="(#CONFIG{inscription2/secteur}|=={on}|?{#ENV{secteur}, ''})"] />
+<br /></p>
+
+
+</fieldset>
+
+[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
+<fieldset>
+<legend>
+	Informations Generales
+</legend>
+<br />
+
+<p style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
+	<label for="fonction"><strong><:inscription2:fonction:></strong><br /></label>
+	<input type="text" type="text" name="fonction" id="fonction" [value="(#CONFIG{inscription2/fonction}|=={on}|?{#ENV{fonction}, ''})"]/>
+<br /></p>
+
+
+<p style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
+	<input type="checkbox" name="publication" id="publication" [value="(#CONFIG{inscription2/publication}|=={on}|?{#ENV{publication}, ''})"]/>
+	<strong><:inscription2:publication:></strong><br />
+<br /></p>
+
+
+
+<label style="[(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})]">
+	<strong><:inscription2:newsletter:></strong><br />
+	<:inscription2:exp_newsletter:><br />
+	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
+</label>
+
+<label style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
+	<strong><:inscription2:categorie:></strong><br />
+	[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
+</label>
+
+<label style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
+	<strong><:inscription2:divers:></strong><br />
+	<input type="text" name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]/>
+	<br />
+</label>
+
+<?php
+	include(_DIR_PLUGIN_INSCRIPTION2."/inc/domaines.php");
+	if(sizeof($domaine)>0){
+		echo '	<label style="[(#CONFIG{inscription2/domaines}|=={on}|?{display: block;, display:none;})]">
+				<strong><:inscription2:domaine:></strong><br />
+				<:inscription2:choix_domaine:><br />
+				<select id="domaines" name="domaines">';
+		foreach($domaine as $cle => $value)
+				echo '<option value= '.$cle.'>'.$cle.'</option>';
+		echo '	</select>
+				<br />
+				</label>';
+	}
+?>
+
+
+</fieldset>
+
+<p><input onClick="cryptage();" type="submit" value="<:bouton_valider:>" /></p>
+
+</form>
+</div>
