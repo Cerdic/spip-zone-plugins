@@ -278,7 +278,7 @@ if($valider) {
 
 	// l'auteur demande une insertion dans l'agenda
 
-	if (($choix_agenda == "OK") && (flag_ok == 'ok')) {
+	if (($choix_agenda == "OK") && ($flag_ok == 'ok')) {
 
 		// construction de la date complete
 
