@@ -3,16 +3,23 @@
 	Charger la librairie crayons et ses addenda
 
 ]
-#CACHE{7*24*3600,cache-client}
+#CACHE{0}
+//# CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
 /* cQuery est jQuery, renommee pour eviter tout conflit */
 
 [(#CHEMIN{js/jquery-1.1.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''}
-	|replace{'var \$ = cQuery','// dont set dollar'})]
+	|replace{'var \$ = cQuery','// dont set dollar'}
+	|compacte_js)]
+
+[(#CHEMIN{js/jquery.dimensions.js}|spip_file_get_contents
+	|replace{jQuery,cQuery,''}
+	|compacte_js)]
 
 [(#CHEMIN{js/form.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''})]
+	|replace{jQuery,cQuery,''}
+	|compacte_js)]
 
 [(#CHEMIN{js/crayons.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''})]

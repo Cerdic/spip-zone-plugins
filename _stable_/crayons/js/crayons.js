@@ -57,6 +57,18 @@ function uniConfirm(txt)
   return confirm(entity2unicode(txt));
 }
 
+// donne le crayon d'un element
+jQuery.fn.crayon = function(){
+  if (this.length)
+    return jQuery(
+      jQuery.map(this, function(a){
+        return '#'+(jQuery(a).find('.crayon-icones').attr('rel'));
+      })
+      .join(','));
+  else
+    return jQuery([]);
+}
+
 // ouvre un crayon
 jQuery.fn.opencrayon = function(evt, percent) {
   if (evt.stopPropagation) {
@@ -72,7 +84,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
     if (jQuery(this).is('.crayon-has')) {
       jQuery(this)
       .css('visibility','hidden')
-      .prev()
+      .crayon()
         .show();
     }
     // sinon charger le formulaire
@@ -82,7 +94,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
         return;
       }
       jQuery(this)
-      .find('.crayon-icones')
+      .find('.crayon-icones span')
       .append(configCrayons.mkimg('searching')); // icone d'attente
       var me=this;
       var params = {
@@ -117,12 +129,23 @@ jQuery.fn.opencrayon = function(evt, percent) {
             uniAlert(c.$erreur);
             return false;
           }
+          id_crayon++;
           jQuery(me)
           .css('visibility','hidden')
           .addClass('crayon-has')
-          .before('<div class="crayon-html"><div>'+c.$html+'</div></div>')
-          .prev()
-            .activatecrayon(percent);
+          .find('.crayon-icones')
+            .attr('rel','crayon_'+id_crayon);
+          var pos = jQuery(me).offset({'scroll':false});
+          jQuery('<div class="crayon-html" id="crayon_'+id_crayon+'"></div>')
+          .css({
+            'position':'absolute',
+            'top':pos['top']-1,
+            'left':pos['left']-1
+          })
+          .appendTo('body')
+          .html(c.$html);
+          jQuery(me)
+          .activatecrayon(percent);
         }
       );
     }
@@ -131,93 +154,93 @@ jQuery.fn.opencrayon = function(evt, percent) {
 
 // annule le crayon ouvert (fonction destructive)
 jQuery.fn.cancelcrayon = function() {
-  return this.next()
+  this
     .filter('.crayon-has')
     .css('visibility','visible')
     .removeClass('crayon-has')
     .removeClass('crayon-changed')
-  .prev()
+  .crayon()
     .remove();
+  return this;
 }
 
 // masque le crayon ouvert
 jQuery.fn.hidecrayon = function() {
-  return this
+  this
   .filter('.crayon-has')
   .css('visibility','visible')
-  .prev()
+  .crayon()
     .hide()
     .removeClass('crayon-hover');
+  return this;
 }
 
 // active un crayon qui vient d'etre charge
 jQuery.fn.activatecrayon = function(percent) {
-  return this
+  this
+  .crayon()
   .click(function(e){
     e.stopPropagation();
   })
+  this
   .each(function(){
-    var me = this;
-    jQuery(me)
+    var me = jQuery(this);
+    var crayon = jQuery(this).crayon();
+    crayon
     .find('form')
       .ajaxForm({"dataType":"json",
       "after":function(d){
-        jQuery(me)
-          .find("img.crayon-searching")
-            .remove();
+        me
+        .find("img.crayon-searching")
+          .remove();
         if (d.$erreur > '') {
           if (d.$annuler) {
             if (d.$erreur > ' ') {
               uniAlert(d.$erreur);
             }
-            jQuery(me)
-              .cancelcrayon();
+            me
+            .cancelcrayon();
           } else {
               uniAlert(d.$erreur+'\n'+configCrayons.txt.error);
-              jQuery(me)
-                .find(".crayon-boutons")
-                  .show(); // boutons de validation
+              crayon
+              .find(".crayon-boutons")
+                .show(); // boutons de validation
           }
           return false;
         }
-
-        jQuery(me)
-        .next()
-          .html(
-            d[jQuery('input.crayon-id', me).val()]
-          )
-          .iconecrayon();
-        jQuery(me)
-          .cancelcrayon();
+        me
+        .cancelcrayon()
+        .html(
+          d[jQuery('input.crayon-id', crayon).val()]
+        )
+        .iconecrayon();
       }})
       .one('submit', function(){
-        jQuery(this)
+        crayon
         .append(configCrayons.mkimg('searching')) // icone d'attente
         .find(".crayon-boutons")
           .hide(); // boutons de validation
       })
       // keyup pour les input et textarea ...
       .keyup(function(e){
-        jQuery(this)
+        crayon
         .find(".crayon-boutons")
           .show();
-        jQuery(me)
-        .next()
-          .addClass('crayon-changed');
+        me
+        .addClass('crayon-changed');
         e.cancelBubble = true; // ne pas remonter l'evenement vers la page
       })
       // ... change pour les select : ici on submit direct, pourquoi pas
       .change(function(e){
-        jQuery(this)
+        crayon
         .find(".crayon-boutons")
           .show();
-        jQuery(me)
-        .next()
-          .addClass('crayon-changed');
-        e.cancelBubble = true; // ne pas remonter l'evenement vers la page
+        me
+        .addClass('crayon-changed');
+        e.cancelBubble = true;
       })
       .keypress(function(e){
-        e.cancelBubble = true; // ne pas remonter l'evenement vers la page
+        e.cancelBubble = true;
       })
       .find(".crayon-active")
         .each(function(n){
@@ -233,7 +256,7 @@ jQuery.fn.activatecrayon = function(percent) {
         })
         .keypress(function(e){
           if (e.keyCode == 27) {
-            jQuery(me)
+            me
             .cancelcrayon();
           }
           // Clavier pour sauver
@@ -245,7 +268,7 @@ jQuery.fn.activatecrayon = function(percent) {
             || (e.charCode==19 && e.keyCode==19)
           ) || (!e.charCode && e.keyCode == 119 /* F8, windows */)
           ) {
-            jQuery(me)
+            crayon
             .find("form.formulaire_spip")
             .submit();
           }
@@ -270,25 +293,21 @@ jQuery.fn.activatecrayon = function(percent) {
       .find(".crayon-cancel")
         .click(function(e){
           e.stopPropagation();
-          jQuery(me)
+          me
           .cancelcrayon();
         })
       .end()
+      // decaler verticalement si la fenetre d'edition n'est pas visible
       .each(function(){
-        // rendre les boutons visibles (cf. plugin jquery/dimensions.js)
+        var offset = jQuery(this).offset({'scroll':false});
         var hauteur = parseInt(jQuery(this).css('height'));
-        var buttonpos = (this.offsetTop || 0) + hauteur;
-        var scrolltop = window.pageYOffset ||
-          jQuery.boxModel && document.documentElement.scrollTop  ||
-          document.body.scrollTop || 0;
-        var scrollleft = window.pageXOffset || 
-          jQuery.boxModel && document.documentElement.scrollLeft ||
-          document.body.scrollLeft || 0;
-        var h = window.innerHeight;
-        if (buttonpos - h + 20 > scrolltop) {
-          window.scrollTo(scrollleft, buttonpos - h + 30);
-        }
-        // Si c'est textarea, on essaie de le caler verticalement
+        var scrolltop = jQuery(window).scrollTop();
+        var h = jQuery(window).height();
+        if (offset['top'] - 5 <= scrolltop)
+          jQuery(window).scrollTop(offset['top'] - 5);
+        else if (offset['top'] + hauteur - h + 20 > scrolltop)
+          jQuery(window).scrollTop(offset['top'] + hauteur - h + 30);
+        // Si c'est textarea, on essaie de caler verticalement son contenu
         // et on lui ajoute un resizehandle
         jQuery("textarea", this)
         .each(function(){
@@ -355,13 +374,14 @@ jQuery.fn.initcrayons = function(){
 // demarrage
 jQuery(document).ready(function() {
   if (!configCrayons.droits) return;
+  id_crayon = 0; // global
 
   // sortie, demander pour sauvegarde si oubli
   if (configCrayons.txt.sauvegarder) {
     jQuery(window).unload(function(e) {
       var chg = jQuery(".crayon-changed");
       if (chg.length && uniConfirm(configCrayons.txt.sauvegarder)) {
-        chg.next().find('form').submit();
+        chg.crayon().find('form').submit();
       }
     });
   }
@@ -378,10 +398,8 @@ jQuery(document).ready(function() {
   // un clic en dehors ferme tous les crayons ouverts ?
   if (configCrayons.cfg.clickhide)
   jQuery("html")
-  .click(function() {
-    jQuery('form')
-    .parents()
-    .prev('.crayon')
+  .click(function(){
+    jQuery('.crayon-has')
     .hidecrayon();
   });
 });

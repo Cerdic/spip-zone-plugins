@@ -163,10 +163,17 @@ class Crayon {
 
 	// recuperer les elements de style
     function css() {
-    	foreach(array('color', 'font-size', 'font-family', 'font-weight', 'line-height', 'background-color') as $property) {
+    	foreach(array('color', 'font-size', 'font-family', 'font-weight', 'line-height') as $property) {
     		if (null !== ($p = _request($property)))
     			$this->styles[] = "$property:$p;";
     	}
+    	
+    	$property = 'background-color';
+		if (!$p = _request($property)
+		OR $p == 'transparent') {
+			$p = 'white';
+		}
+		$this->styles[] = "$property:$p;";
     }
 
 	// formulaire standard

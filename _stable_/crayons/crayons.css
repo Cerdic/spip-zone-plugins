@@ -21,17 +21,19 @@ img.crayon-edit, img.crayon-crayon {
 }
 .crayon-boutons {
 	width: 40px;
-/*	display: none; */
 }
 .crayon-boutons a {
 	cursor: pointer;
 }
 .crayon-icones {
 	float: right;
-	width: 35px;
+	width: 65px;
+	position: relative;
 }
 .crayon-icones span {
 	position:absolute;
+	right:0px;
+	z-index:4999;
 }
 .crayon-edit, .crayon-crayon, .crayon-img-changed {
 	cursor: pointer;
@@ -47,13 +49,11 @@ img.crayon-edit, img.crayon-crayon {
 	overflow: auto;
 }
 .crayon-html {
-	position: relative;
-	top:-1px;
-	left:-1px;
 	z-index:5000;
 }
-.crayon-html>* {
-	position: absolute;
+.crayon-html .crayon-boutons {
+	position:absolute;
+	right:0px;
 }
 
 /* resizer */
@@ -64,12 +64,3 @@ img.crayon-edit, img.crayon-crayon {
 	height:16px;
 	width:100%;
 }
-
-/* Les crayons dans un tableau !
-td .crayon-icones span {
-	margin-left:-20px;
-}
-td .crayon-html {
-	padding-bottom:10px;
-}
-*/
