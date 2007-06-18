@@ -207,9 +207,33 @@ $().ready(function() {
 	<table style="border-width:1; border-color:black; border-style :groove; float:left; margin-left:10pt;">
 	<tr style="background-color : #E0E0E0 ;">
 	<?php
+	include_spip('base/abstract_sql');
+	
+	$url = "?exec=inscription2_adherents";
+	
 	$id=_request('id');
 	$act=_request('act');
-	include_spip('base/abstract_sql');
+	$valeur=$_POST['valeur'];
+	$case=$_POST['case'];
+	$debut=$_GET['debut'];
+	$ordre = $_GET['ordre'];
+	
+	if ( isset($valeur)) {
+		if($case=='id')
+			$critere="a.id_auteur='$valeur'";
+		else
+			$critere="$case='$valeur'"; 
+	}else
+		$critere="a.id_auteur<>'0'"; 
+	
+	$max_par_page=5;
+	if (empty($debut)) 
+		$debut=0; 
+	if(empty($ordre))
+		$ordre = 'id_auteur';
+	
+	$url = $url.'&debut='.$debut;
+	
 	if(isset($id) and $act=='sup'){
 		spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
@@ -222,13 +246,13 @@ $().ready(function() {
 			if($val=='' and isset($desc['field'][$cle]))
 				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);}
 	}
-	echo '<td><strong>ID</strong></td>';
+	echo '<td><strong><a href="'.$url.'&ordre=id_auteur">ID</a></strong></td>';
 	if(lire_config('inscription2/nom_table')){
-		echo '<td><strong>'._T('inscription2:nom').'</strong></td>';
+		echo '<td><strong><a href="'.$url.'&ordre=nom">'._T('inscription2:nom').'</a></strong></td>';
 		$table_auteurs[] = "a.nom";
 	}
 	if(lire_config('inscription2/prenom_table')){
-		echo '<td><strong>'._T('inscription2:prenom').'</strong></td>';
+		echo '<td><strong><a href="'.$url.'&ordre=prenom">'._T('inscription2:prenom').'</a></strong></td>';
 		$table_auteurs[] = "b.prenom";
 	}
 	if(lire_config('inscription2/email_table')){
@@ -246,30 +270,15 @@ $().ready(function() {
 			else
 				$table_auteurs[] = "b.".$cle;
 			}
-			echo '<td><strong>'._T('inscription2:'.$cle).'</strong></td>';
+			echo '<td><strong><a href="'.$url.'&ordre='.$cle.'">'._T('inscription2:'.$cle).'</a></strong></td>';
 		}
 	}
-	echo '<td colspan="2" style="text-align:center;"><strong>'._T('inscription2:action_adherent').'</strong></td>';
+	echo '<td colspan="2" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut">'._T('inscription2:action_adherent').'</a></strong></td>';
 	echo '<td><strong>'._T('inscription2:supprimer_adherent_red').'</strong></td>';
 	echo '</tr>';
 	
-	if ( isset ($_POST['valeur'])) {
-		$valeur=$_POST['valeur'];
-		$case=$_POST['case'];
-		if($case=='id')
-			$critere="a.id_auteur='$valeur'";
-		else
-			$critere="$case='$valeur'"; 
-	}else
-		$critere="a.id_auteur<>'0'"; 
-	
-	$max_par_page=5;
-	$debut=$_GET['debut'];
-	if (empty($debut)) 
-		$debut=0; 
-	
 	$query = spip_query ( "SELECT a.id_auteur, a.statut, ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
-			ON b.id_auteur = a.id_auteur WHERE $critere ORDER BY id_auteur LIMIT $debut,$max_par_page" );
+			ON b.id_auteur = a.id_auteur WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page" );
 	
 	$i=0;
 	while ($data = spip_fetch_array($query)) {	
@@ -333,7 +342,7 @@ $().ready(function() {
 				echo '<strong>'.$position.' </strong>';
 			}
 			else {
-				echo '<a href="'.generer_url_ecrire("inscription2_adherents","debut=$position").'">'.$position.'</a> ';
+				echo '<a href="'.generer_url_ecrire("inscription2_adherents","debut=$position&ordre=$ordre").'">'.$position.'</a> ';
 			}
 		}
 	}	
