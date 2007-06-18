@@ -81,8 +81,8 @@ function ThickBox1_verifie_js_necessaire($flux) {
 
 //var_dump($flux["page"]);
 $page = $flux["page"]["texte"];
-$necessaire = preg_match(",<a.*type\s*=\s*['\"]image/(?:jpeg|png|gif)['\"],iUs",$page) ||
-              preg_match(",<a.*class\s*=\s*['\"].*\bthickbox\b.*['\"],iUs",$page);
+$necessaire = preg_match(",<a[^>]+type\s*=\s*['\"]image/(?:jpeg|png|gif)['\"],iUs",$page) ||
+              preg_match(",<a[^>]+class\s*=\s*['\"].*\bthickbox\b.*['\"],iUs",$page);
 
 $flux["data"]["ThickBox1"] = $necessaire;
 
