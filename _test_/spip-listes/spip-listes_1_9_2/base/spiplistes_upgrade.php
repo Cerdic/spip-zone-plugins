@@ -22,6 +22,28 @@
 	//version actuelle du plugin à changer en cas de maj
 	$GLOBALS['spiplistes_version'] = 1.97;
 	
+	
+	//initialiser les variables
+		if (!isset($GLOBALS['meta']['spiplistes_lots'])){
+		ecrire_meta('spiplistes_lots' , 30) ;
+		ecrire_metas();
+		}
+		
+		if (!isset($GLOBALS['meta']['spiplistes_charset_envoi'])){
+		ecrire_meta('spiplistes_charset_envoi' , 'iso-8859-1') ;
+		ecrire_metas();
+		}
+
+		if (!isset($GLOBALS['meta']['mailer_smtp'])){
+		ecrire_meta('mailer_smtp' , 'non') ;
+		ecrire_metas();
+		}
+		
+		if(!$abonnement_config = $GLOBALS['meta']['abonnement_config']){
+		ecrire_meta('abonnement_config', 'simple');
+		ecrire_metas();
+		}
+	
 	function spiplistes_verifier_base(){
 		
 		//activer si besoin l'inscription des visiteurs
@@ -232,6 +254,9 @@
 		spip_query("DROP TABLE spip_auteurs_listes");
 		spip_query("DROP TABLE spip_auteurs_mod_listes");
 		effacer_meta('spiplistes_version');
+		effacer_meta('spiplistes_charset_envoi');
+		effacer_meta('spiplistes_lots');
+		effacer_meta('abonnement_config');
 		ecrire_metas();
 	}
 	

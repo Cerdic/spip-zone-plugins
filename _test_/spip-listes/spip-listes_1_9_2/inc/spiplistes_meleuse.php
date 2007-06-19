@@ -151,12 +151,6 @@ if ($message_pile > 0){
 
 		spiplistes_log(_T('spiplistes:message'). $titre);
 
-		//initialiser la taille des lots
-		$lot=$GLOBALS['meta']['spiplistes_lots'];
-		if (!isset($lot)) {
-			ecrire_meta('spiplistes_lots' , 30) ;
-			ecrire_metas();
-		}
 		$limit=$GLOBALS['meta']['spiplistes_lots']; // nombre de messages envoyes par boucles.	
 		
 		//chopper un lot 

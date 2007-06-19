@@ -73,12 +73,13 @@ function cron_spiplistes_cron($t){
 			$titre_patron_bg = ($titre_message =="") ? $titre_bg." de ".$nomsite : $titre_message;
 			$titre_bg = $titre_patron_bg;
 			
-			spip_log("Message choppe->$titre".$titre_bg);
+			spip_log("Message choppe -> $titre".$titre_bg, "spiplistes");
 	
 			// ne pas envoyer des textes de moins de 10 caracteres
 			include_spip('inc/spiplistes_api');
 			$taille = strlen(spip_listes_strlen(version_texte($texte_patron_bg))) ;
-			spip_log("taille ->$taille");
+			spip_log("taille -> $taille","spiplistes");
+			//spip_log("txt -> ".version_texte($texte_patron_bg),"spiplistes");
 	
 			if ( $taille > 10 ) {
 	

@@ -96,10 +96,7 @@ function exec_config(){
 	// MODE CONFIG: Configuration de spip-listes -----------------------------------
 
 	spiplistes_configurer();
-	if(!$abonnement_config = $GLOBALS['meta']['abonnement_config']){
-		ecrire_meta('abonnement_config', $abonnement_config);
-		ecrire_metas();
-	}
+
 	$config = $GLOBALS['meta']['abonnement_config'] ;
 
 	echo debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:mode_inscription'));
@@ -192,9 +189,7 @@ function exec_config(){
 	echo "</form>";	
 
 	echo fin_cadre_relief();
-
-	if (!isset($GLOBALS['meta']['spiplistes_charset_envoi']))
-		$GLOBALS['meta']['spiplistes_charset_envoi'] = 'iso-8859-1'; # par defaut a cause des vieux clients mails et des webmails
+	
 	if (($reinitialiser_config == 'oui' AND $Valider_reinit)) {
 		ecrire_meta('spiplistes_lots' , _request('spiplistes_lots')) ;
 		ecrire_meta('spiplistes_charset_envoi' , _request('spiplistes_charset_envoi')) ;
@@ -214,6 +209,36 @@ function exec_config(){
 	echo "<hr style='clear:both;visibility:hidden' />";
 	echo "</form>";
 	echo fin_cadre_relief();
+
+
+	
+function sl_console_lit_log($logname){
+	$files = preg_files(defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION ,"$logname\.log(\.[0-9])?");
+	krsort($files);
+
+	$log = "";
+	foreach($files as $nom){
+		if (lire_fichier($nom,$contenu))
+			$log.=$contenu;
+	}
+	$contenu = explode("<br />",nl2br($contenu));
+	
+	$out = "";
+	$maxlines = 40;
+	while ($contenu && $maxlines--){
+		$out .= array_pop($contenu)."\n";
+	}
+	return $out;
+}
+
+if(_request('logs')=="oui"){
+echo "<a name='logs'></a>";
+echo debut_cadre_relief("", false, "", "Logs");
+	echo "<pre>".sl_console_lit_log("spiplistes")."</pre>";
+	echo fin_cadre_relief();
+}else{
+echo "<a href='".generer_url_ecrire('config','logs=oui#logs')."'>Logs</a>";
+}
 
 	// MODE CONFIG FIN -------------------------------------------------------------
 
