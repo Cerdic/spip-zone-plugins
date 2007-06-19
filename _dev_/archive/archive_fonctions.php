@@ -1,11 +1,24 @@
 <?php
-
-// ajoute le critere {archive}
+// ajoute le critere {archive x}
 function critere_archive_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->modificateur['archive'] = true;
-}
+	$id_table = $boucle->id_table;
+	$marchive = $id_table .'.archive';
 
+	$boucle->modificateur['criteres']['archive'] = true;
+
+    //reduit le critére à la boucle articles uniquement
+    if ($boucle->type_requete == 'articles') {
+        //recherche la valeur de x dans {critere x}
+        //si x vaut "seulement" alors on indique uniquement les articles archivés
+        if ($crit->param[0][0]->texte == "seulement") {
+	        $boucle->where[]= array("'='", "'$marchive'", "1");
+	    //sinon tous les articles sont retournés archivé ou non
+	    } else {
+	        //ne fait rien
+	    }
+    }
+}
 
 //
 // <BOUCLE(ARTICLES)>
@@ -15,12 +28,13 @@ function boucle_ARTICLES($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$marchive = $id_table .'.archive';
 
-	if (!$boucle->modificateur['archive']) {
+    //si le critere {archive} est absent on affiche uniquement les elements non archivé
+	if (!$boucle->modificateur['criteres']['archive']) {
  		if (!$GLOBALS['var_preview']) {
  			//ajoute le critere de selection
-			//$boucle->where[]= array("'<>'", "'$marchive'", "'\'1\''");
 			$boucle->where[]= array("'IS'", "'$marchive'", "'NULL'");
 		}
+	} else {      
 	}
 	
 	return boucle_ARTICLES_dist($id_boucle, $boucles);
