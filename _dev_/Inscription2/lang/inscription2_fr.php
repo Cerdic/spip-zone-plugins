@@ -133,7 +133,8 @@ L\'&eacute;quipe de @nom_site@',
 'action_adherent' => 'Action adh&eacute;rent',
 'auteur' => 'Auteur',
 'aconfirmer' => 'A confirmer',
-'statut' => 'Statut'
+'statut' => 'Statut',
+'infos_adherent' => 'Informations suppl&eacute;mentaires'
 
 );
 
