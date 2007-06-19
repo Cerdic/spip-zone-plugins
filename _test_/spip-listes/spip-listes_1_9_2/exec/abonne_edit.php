@@ -63,6 +63,8 @@ function exec_abonne_edit(){
 	
 	if($confirm == 'oui'){
 		$type_abo = _request('suppl_abo');
+		if($type_abo=='non') spiplistes_desabonner($id_auteur);
+		
 		 spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`="._q($type_abo)." WHERE `id_auteur` ="._q($id_auteur));	
 	}
 	

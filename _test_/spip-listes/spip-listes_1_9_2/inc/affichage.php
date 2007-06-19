@@ -19,7 +19,8 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 
-@define('_SPIP_LISTE_SEND_THREADS',1);
+include_spip('inc/spiplistes_api');
+
 
 function spip_listes_onglets($rubrique, $onglet){
 	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
@@ -382,58 +383,6 @@ function spiplistes_afficher_pagination($fond, $arguments, $total, $position, $n
 	return $pagination;
 }
 
-//function spiplistes_propre($texte)
-// passe propre() sur un texte puis nettoye les trucs rajoutes par spip sur du html
-// ca s'utilise pour afficher un courrier dans l espace prive
-// on l'applique au courrier avant de confirmer l'envoi
-function spiplistes_propre($texte){
-	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
-	if (isset($style_reg[0])) 
-		$style_str = $style_reg[0]; 
-	else 
-		$style_str = "";
-	$texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
-	//passer propre si y'a pas de html (balises fermantes)
-	if( !preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $texte) ) 
-	$texte = propre($texte); // pb: enleve aussi <style>...  
-	$texte = propre_bloog($texte); //nettoyer les spip class truc en trop
-	$texte = ereg_replace("__STYLE__", $style_str, $texte);
-	$texte = liens_absolus($texte);
-	
-	return $texte;
-}
-
-//taille d'une chaine sans saut de lignes ni espaces
-function spip_listes_strlen($out){
-	$out = preg_replace("/(\r\n|\n|\r| )+/", "", $out);
-	return $out ;
-}
-
-
-// API a enrichir
-
-// ajouter les abonnes d'une liste a un envoi
-function remplir_liste_envois($id_courrier,$id_liste){
-	if($id_liste==0)
-		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs ORDER BY id_auteur ASC");
-	else
-		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste="._q($id_liste));
-	
-	while($row_ = spip_fetch_array($result_m)) {
-		$id_abo = $row_['id_auteur'];
-		spip_query("INSERT INTO spip_auteurs_courriers (id_auteur,id_courrier,statut,maj) VALUES ("._q($id_abo).","._q($id_courrier).",'a_envoyer', NOW()) ");
-	}
-	$res = spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_courriers WHERE id_courrier="._q($id_courrier)." AND statut='a_envoyer'");
-	if ($row = spip_fetch_array($res))
-		spip_query("UPDATE spip_courriers SET total_abonnes="._q($row['n'])." WHERE id_courrier="._q($id_courrier)); 
-}
-
-// Nombre d'abonnes a une liste : a faire
-function spip_listes_nb_abonnes_liste($id_liste){
-	$row = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_listes WHERE id_liste=$id_liste"));
-	$nb_abo = ( $row['n'] >1)?  $row['n']." abonn&eacute;s" :  $row['n']." abonn&eacute;";
-	return "(".$nb_abo.")";
-}
 
 function spiplistes_cherche_auteur(){
 	if (!$cherche_auteur = _request('cherche_auteur')) return;

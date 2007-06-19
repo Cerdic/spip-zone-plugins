@@ -20,7 +20,7 @@
 /******************************************************************************************/
 
 	//version actuelle du plugin à changer en cas de maj
-	$GLOBALS['spiplistes_version'] = 1.96;
+	$GLOBALS['spiplistes_version'] = 1.97;
 	
 	function spiplistes_verifier_base(){
 		
@@ -192,6 +192,30 @@
 				ecrire_meta('spiplistes_version', $current_version=1.96);
 			}
 			
+			if ($current_version<1.97){
+				echo "SpipListes Maj 1.97<br />";
+				include_spip('base/abstract_sql');
+
+			echo "regulariser les desabonnes avec listes...<br />";
+
+			$result = spip_query("SELECT a.`email`, a.id_auteur FROM `spip_auteurs` a, `spip_auteurs_listes` l, `spip_auteurs_elargis` f
+			WHERE a.id_auteur=f.id_auteur 
+			AND f.spip_listes_format = 'non'
+			AND a.id_auteur = l.id_auteur
+			AND a.statut!='5poubelle' 
+			GROUP BY email
+			");
+			
+			$nb_inscrits = spip_num_rows($result);
+			echo $nb_inscrits ;
+			
+			while($res = spip_fetch_array($result)){
+			spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur =".$res['id_auteur']) ;			
+			} 
+
+
+				ecrire_meta('spiplistes_version', $current_version=1.97);
+			}
 			
 			
 			ecrire_metas();
