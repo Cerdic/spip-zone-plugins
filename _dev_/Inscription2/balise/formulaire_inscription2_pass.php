@@ -46,7 +46,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 				$var_user['statut_relances'] = lire_config('inscription2/statut_rel');
 	
 			elseif($cle=='accesrestreint') 
-				$var_user['zones'] = lire_config('inscription2/zones');
+				$var_user['zones'] = _request('zones');
 				
 			elseif( $cle == 'domaines')
 				$dom = _request($cle);

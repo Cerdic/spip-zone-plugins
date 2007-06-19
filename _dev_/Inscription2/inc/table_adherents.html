@@ -270,7 +270,10 @@ $().ready(function() {
 			else
 				$table_auteurs[] = "b.".$cle;
 			}
-			echo '<td><strong><a href="'.$url.'&ordre='.$cle.'">'._T('inscription2:'.$cle).'</a></strong></td>';
+			if($cle =='username')
+				echo '<td><strong><a href="'.$url.'&ordre=login">'._T('inscription2:'.$cle).'</a></strong></td>';
+			else
+				echo '<td><strong><a href="'.$url.'&ordre='.$cle.'">'._T('inscription2:'.$cle).'</a></strong></td>';
 		}
 	}
 	echo '<td colspan="2" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut">'._T('inscription2:action_adherent').'</a></strong></td>';

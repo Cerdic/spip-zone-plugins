@@ -22,7 +22,7 @@
 		rules: {
 			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
 			prenom:{[(#CONFIG{inscription2/prenom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,15]},
-			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
+			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
 			adresse: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,30]},
 			adresse2: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,30]},
 			code_postal: {[(#CONFIG{inscription2/code_postal}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,10]},
@@ -313,6 +313,16 @@ function cryptage() {
 	<input type="text" name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]/>
 	<br />
 </label>
+
+<label id="zones" style="[(#CONFIG{inscription2/accesrestreint}|=={on}|?{display: block;, display:none;})]">
+<strong><:inscription2:accesrestreint:></strong> <br />
+<:inscription2:choisir_zones:><br />
+[(#CONFIG{plugin/ACCESRESTREINT}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_acces}>]
+
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#zones').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
+</label>
+
 
 <?php
 	include(_DIR_PLUGIN_INSCRIPTION2."/inc/domaines.php");
