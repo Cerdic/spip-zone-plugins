@@ -17,7 +17,6 @@ _ ADAPTATION POUR SPIP 1.9.2 par [Coyote->http://www.spip-contrib.net/_Coyote_] 
 
 &#169; 2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
-	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
 	<version>
 	2.1.3
 	</version>
@@ -33,8 +32,11 @@ La barre est enrichie de plusieurs barres th&#233;matiques pour:
 -* Une fonction chercher/remplacer dans le texte de l'article
 -* L'insertion des caract&#232;res sp&#233;ciaux
 -* Changer la casse
+-* Calculer les statistiques du texte (mots, signes, caract&egrave;res)
 
 {Certaines icones proviennent de [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
+
+[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Barre-Typographique-V2</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
