@@ -1,0 +1,49 @@
+<!-- descriptif=Fond de test inclusions et boucles pour le plugin de configuration cfg :
+boucle sur les rubriques racine et inclusion des champs de formulaire par &lt;INCLURE...&gt; . 
+
+
+<br /><a href="../?page=test_cfg&var_mode=recalcul" class="spip_in">
+<multi>[fr]Retour page test publique
+[en]Back to public result page</multi></a>
+<:crayons:editer:>-->
+
+<!-- titre=Test boucles et inclusions pour le plugin cfg -->
+
+[(#REM) liens*=testtable]
+[(#REM) liens*=testcasier]
+[(#REM) liens*=testclassic]
+[(#REM) liens*=testphp]
+[(#REM) liens*=testauteur]
+[(#REM) liens*=testmulti]
+[(#REM) liens*=crayons]
+
+[(#REM) boite=Test cfg]
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+
+<fieldset><legend><:cfg:boucles_et_inclusions:></legend>
+<BOUCLE_racine(RUBRIQUES){racine}{par num titre}>
+
+	<label for="cfg_bidule_rubrique_#ID_RUBRIQUE">#TITRE</label>
+	<select name="bidule_rubrique_#ID_RUBRIQUE" id="cfg_bidule_rubrique_#ID_RUBRIQUE" class="forml">
+		<option value="non"[ selected="(#ENV{bidule_rubrique_#ID_RUBRIQUE}|=={non}|?{selected})"]><:non:></option>
+		<option value="oui"[ selected="(#ENV{bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{selected})"]><:oui:></option>
+	</select>
+	
+	[(#CONFIG{testinclure/bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{' ',''})
+		<blockquote>
+		<INCLURE{fond=fonds/inc-articles-rubrique}{nom=articles_rubrique_#ID_RUBRIQUE}{label=Articles de #TITRE}{cfg_rep=testinclure}{id_rubrique}>
+		</blockquote>
+	]
+	<br />
+</BOUCLE_racine>
+</fieldset>
+
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
