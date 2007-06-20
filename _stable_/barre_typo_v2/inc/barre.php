@@ -340,6 +340,9 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col++;
 		$ret .=    bouton_barre_racc("toggle_preview();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
+		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
+		$col++;
+		$ret .=    bouton_barre_racc("toggle_stats();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
 		$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$ret .= aide("raccourcis");
 		$ret .= "";
@@ -362,14 +365,34 @@ function MajPreviewCallBack() {
 		});
 }
 
+function MajStatsCallBack() {
+	$.post("' . generer_url_ecrire("article_stats",""). '", { texte:$("#text_area").val() }, function(data) {
+		$("#article_stats").empty()
+		$("#article_stats").append(data);
+		});
+}
+
+function MajCallBack() {
+	MajStatsCallBack();
+	MajPreviewCallBack();
+}
+
 function MajPreview() {
-	if ($("#article_preview").css("display") != "none") {
-		delayFunction("MajPreviewCallBack()",1);
+	if ($("#article_preview").css("display") != "none" & $("#article_stats").css("display") != "none") {
+		delayFunction("MajCallBack()",1);
+	} else {
+		if ($("#article_preview").css("display") != "none") {
+			delayFunction("MajPreviewCallBack()",1);
+		}
+		if ($("#article_stats").css("display") != "none") {
+			delayFunction("MajStatsCallBack()",1);
+		}
 	}
 }
 
 $(document).ready(function(){
 	$("#text_area").after("<div id=\"article_preview\"></div>");
+	$("#text_area").before("<div id=\"article_stats\"></div>");
 	$.ajaxTimeout( 5000 );
 	$("#text_area").keypress(function() { MajPreview() });
 });

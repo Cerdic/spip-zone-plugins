@@ -51,3 +51,11 @@ sup {
 	background-color: #FFF;
 	padding: 0 1em;
 }
+
+#article_stats {
+	display:none;
+	border:1px solid #555;
+	background-color: #EEE;
+	padding: 0.5em;
+	margin-top: 5px;
+}

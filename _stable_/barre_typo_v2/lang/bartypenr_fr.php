@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_cr_tout' => 'Tout remplacer',
 'barre_gestion_cr_entier' => 'Mot entier',
 'barre_preview' => 'Mode pr&eacute;visualisation',
+'barre_stats' => 'Afficher les statistiques du texte',
 
 'barre_ancres' => 'Gestion des ancres',
 'barre_gestion_anc_caption' => 'Gestion des ancres',
@@ -56,7 +57,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_titraille' => 'Titraille',
 'cfg_insertcss' => 'Insertion CSS',
 
-'galerie' => 'Galerie de documents'
+'galerie' => 'Galerie de documents',
+
+'stats_statistiques' => 'Statistiques&nbsp;:',
+'stats_mots' => 'mots',
+'stats_caracteres' => 'caract&egrave;res',
+'stats_signes' => 'signes'
 
 );
 ?>

@@ -44,6 +44,15 @@ function toggle_preview() {
 	}
 }
 
+function toggle_stats() {
+	if ($("#article_stats").css("display") == "none") {
+		$("#article_stats").show();
+		MajPreview();
+	} else {
+		$("#article_stats").hide();
+	}
+}
+
 // Check for Browser & Platform for PC & IE specific bits
 // More details from: http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
