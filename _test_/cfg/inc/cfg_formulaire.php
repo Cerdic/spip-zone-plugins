@@ -97,11 +97,15 @@ class cfg_formulaire
 		if (!lire_fichier($fichier, $this->controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
-		$sans_rem = preg_replace_callback('/(\[\(#REM\) ([a-z0-9]\w+)(\*)?=)(.*?)\]/sim',
-						array($this, 'post_params'), $this->controldata);
+		preg_replace_callback('/(\[\(#REM\) ([a-z0-9]\w+)(\*)?=)(.*?)\]/sim',
+					array($this, 'post_params'), $this->controldata);
+
+		include_spip('public/assembler');
+		$fond_compile = recuperer_fond('fonds/cfg_' . $this->vue);
+
 		if (!preg_match_all(
 		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
-						$sans_rem, $matches, PREG_SET_ORDER)) {
+						$fond_compile, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
 		foreach ($matches as $regs) {
