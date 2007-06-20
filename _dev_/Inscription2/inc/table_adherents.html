@@ -150,8 +150,8 @@ function confirm(msg,callback) {
       });
 }
 
-//alert($("html").html().length);
-$(document).bind("load", function() { alert('hola');
+// trigger a confirm whenever links of class alert are pressed.
+$().ready(function() {
   $('#confirm').jqm({overlay: 88, modal: true, trigger: false});
   
   // trigger a confirm whenever links of class alert are pressed.
@@ -295,7 +295,7 @@ $(document).bind("load", function() { alert('hola');
 		if(!empty($data['nom']) and !empty($data['email']))
 			echo '<td><a href="mailto:'.$data['email'].'">'.$data['nom'].'</a></td>';
 		elseif(!empty($data['nom']))
-			echo '<td>'.$data['nom'].'</td><td></td>';
+			echo '<td>'.$data['nom'].'</td>';
 		elseif(!empty($data['email']))
 			echo '<td><a href="mailto:'.$data['email'].'">'.$data['email'].'</a></td>';
 		else
