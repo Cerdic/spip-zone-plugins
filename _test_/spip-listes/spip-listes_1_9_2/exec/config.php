@@ -197,7 +197,6 @@ function exec_config(){
 	}
 
 	echo debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:tableau_bord'));
-
 	echo "<form action='".generer_url_ecrire('config')."' method='post'>";
 	echo "<input type='hidden' name='reinitialiser_config' value='oui' />";
 	echo "<label for='spiplistes_lots'>"._T('spiplistes:nombre_lot')."</label>" ;
@@ -234,8 +233,10 @@ function sl_console_lit_log($logname){
 if(_request('logs')=="oui"){
 echo "<a name='logs'></a>";
 echo debut_cadre_relief("", false, "", "Logs");
-	echo "<pre>".sl_console_lit_log("spiplistes")."</pre>";
-	echo fin_cadre_relief();
+echo "<div style='width:98%;overflow:auto'>";
+echo "<pre>".sl_console_lit_log("spiplistes")."</pre>";
+echo "</div>";
+echo fin_cadre_relief();
 }else{
 echo "<a href='".generer_url_ecrire('config','logs=oui#logs')."'>Logs</a>";
 }
