@@ -192,20 +192,20 @@ $reta .= bouton_barre_racc ("barre_raccourci('&lsquo;','&rsquo;',$champ)", _DIR_
 	// caracteres
 if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 
-$reta .= bouton_barre_racc ("barre_inserer('&Agrave;',$champ)", _DIR_IMG_ICONES_BARRE."agrave-maj.png", _T('barre_a_accent_grave'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&Eacute;',$champ)", _DIR_IMG_ICONES_BARRE."eacute-maj.png", _T('barre_e_accent_aigu'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&Agrave;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/agrave-maj.png', _T('barre_a_accent_grave'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&Eacute;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/eacute-maj.png', _T('barre_e_accent_aigu'), $champhelp);
 $reta .= bouton_barre_racc ("barre_inserer('&Egrave;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/eagrave-maj.png', _T('bartypenr:barre_e_accent_grave'), $champhelp);
 $reta .= bouton_barre_racc ("barre_inserer('&aelig;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/aelig.png', _T('bartypenr:barre_ea'), $champhelp);
 $reta .= bouton_barre_racc ("barre_inserer('&AElig;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/aelig-maj.png', _T('bartypenr:barre_ea_maj'), $champhelp);
 
 if ($spip_lang == "fr") {
-$reta .= bouton_barre_racc ("barre_inserer('&oelig;',$champ)", _DIR_IMG_ICONES_BARRE."oelig.png", _T('barre_eo'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&OElig;',$champ)", _DIR_IMG_ICONES_BARRE."oelig-maj.png", _T('barre_eo_maj'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&oelig;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/oelig.png', _T('barre_eo'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&OElig;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/oelig-maj.png', _T('barre_eo_maj'), $champhelp);
 $reta .= bouton_barre_racc ("barre_inserer('&Ccedil;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/ccedil-maj.png', _T('bartypenr:barre_c_cedille_maj'), $champhelp);
 }
 }
 // euro
-$reta .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", _DIR_IMG_ICONES_BARRE."euro.png", _T('barre_euro'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/euro.png', _T('barre_euro'), $champhelp);
 $reta .= '&nbsp;'.RaccourcisMajusculesMinuscules($champ, $champhelp);
 
 $reta .= '&nbsp;';
