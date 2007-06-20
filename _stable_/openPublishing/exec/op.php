@@ -140,7 +140,9 @@ function exec_op() {
 	debut_boite_info();
 	echo _T('opconfig:op_voir_info');
 	echo '<br /><br />';
-	op_liste_config();
+	if (op_verifier_base()) {
+		op_liste_config();
+	}
 	fin_boite_info();
 
 	debut_raccourcis();
