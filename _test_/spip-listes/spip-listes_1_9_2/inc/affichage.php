@@ -501,36 +501,10 @@ function spiplistes_afficher_auteurs($query, $url){
 	// ici commence la vraie boucle
 	echo debut_cadre_relief('redacteurs-24.gif');
 	echo "<table border='0' cellpadding=3 cellspacing=0 width='100%' class='arial2'>\n";
-	echo "<tr bgcolor='#DBE1C5'>";
-	echo "<td width='20'>";
-	$img = "<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0'>";
-	if ($tri=='statut')
-		echo $img;
-	else
-		echo "<a href='".parametre_url($url,'tri','statut')."' title='"._T('lien_trier_statut')."'>$img</a>";
-	
-	echo "</td><td>";
-	if ($tri == '' OR $tri=='nom')
-		echo '<b>'._T('info_nom').'</b>';
-	else
-		echo "<a href='".parametre_url($url,'tri','nom')."' title='"._T('lien_trier_nom')."'><b>"._T('info_nom')."</b></a>";
-	
-	if ($GLOBALS['options'] == 'avancees') echo "</td><td colspan='2'><b>"._T('info_contact')."</b>";
-		echo "</td><td>";
-	if ($visiteurs != 'oui') {
-		if ($tri=='nombre')
-			echo "<b>"._T('spiplistes:format')."</b>";
-		else
-			echo "<b>"._T('spiplistes:format')."</b>"; 
-	}
-	echo "</td><td>";
-	echo "<b>"._T('spiplistes:modifier')."</b>";
-	
-	echo "</td></tr>\n";
 	
 	if ($nombre_auteurs > $max_par_page) {
-		echo "<tr bgcolor='white'><td colspan='".($GLOBALS['options'] == 'avancees' ? 5 : 3)."'>";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
+		echo "<tr bgcolor='white'><td colspan='6'>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>";
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 			if ($j > 0) echo " | ";
 			
@@ -549,7 +523,7 @@ function spiplistes_afficher_auteurs($query, $url){
 		
 		if (($tri == 'nom') AND $GLOBALS['options'] == 'avancees') {
 			// affichage des lettres
-			echo "<tr bgcolor='white'><td colspan='5'>";
+			echo "<tr bgcolor='white'><td colspan='6'>";
 			echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 			foreach ($lettre as $key => $val) {
 				if ($val == $debut)
@@ -562,6 +536,33 @@ function spiplistes_afficher_auteurs($query, $url){
 		}
 		echo "<tr height='5'></tr>";
 	}
+	
+	echo "<tr bgcolor='#DBE1C5'>";
+	echo "<td width='20'>";
+	$img = "<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0'>";
+	if ($tri=='statut')
+		echo $img;
+	else
+		echo "<a href='".parametre_url($url,'tri','statut')."' title='"._T('lien_trier_statut')."'>$img</a>";
+	
+	echo "</td><td>";
+	if ($tri == '' OR $tri=='nom')
+		echo '<b>'._T('info_nom').'</b>';
+	else
+		echo "<a href='".parametre_url($url,'tri','nom')."' title='"._T('lien_trier_nom')."'><b>"._T('info_nom')."</b></a>";
+	
+	echo "</td><td colspan='2'><b>"._T('info_site')."</b>";
+		echo "</td><td>";
+	if ($visiteurs != 'oui') {
+		if ($tri=='nombre')
+			echo "<b>"._T('spiplistes:format')."</b>";
+		else
+			echo "<b>"._T('spiplistes:format')."</b>"; 
+	}
+	echo "</td><td>";
+	echo "<b>"._T('spiplistes:modifier')."</b>";
+	
+	echo "</td></tr>\n";
 	
 	//translate extra field data
 	list(,,,$trad,$val) = explode("|",_T("spiplistes:options")); 
@@ -626,7 +627,6 @@ function spiplistes_afficher_auteurs($query, $url){
 		echo "<a name='abo".$row['id_auteur']."'></a>";
 
 		$retour = parametre_url($url,'debut',$debut);
-		if ($row["statut"] != '0minirezo') {
 			$u = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-format", $retour);
 			if($abo == 'html'){
 				$option_abo = "<a href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
@@ -639,7 +639,7 @@ function spiplistes_afficher_auteurs($query, $url){
 				$option_abo = "<a href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')
 				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
 			echo "&nbsp;".$option_abo;
-		}
+		
 		echo "</td></tr>\n";
 	}
 	
