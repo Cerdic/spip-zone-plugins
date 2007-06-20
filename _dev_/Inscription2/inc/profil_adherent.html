@@ -40,12 +40,12 @@
 		foreach($aux as $cle => $val){
 			echo '<div><strong>'._T('inscription2:'.$cle).' : </strong>';
 			if($cle == 'login' or $cle == 'nom' or $cle == 'email'){
-				if($auteur['b'.$cle]=="1")
+				if($auteur['a.'.$cle]=="1")
 					echo '<span class="crayon spip_auteurs-'.$cle.'-'.$id.' ">'.$val.'</span></div>';  
 				else 
 					echo '<span>'.$val.'</span></div>';  
 			}else{
-				if($auteur['b'.$cle]=="1")
+				if($auteur['b.'.$cle]=="1")
 					echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.$val.'</span></div>';  
 				else 
 					echo '<span>'.$val.'</span></div>';  
