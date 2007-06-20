@@ -12,13 +12,14 @@ _ Le code initial de Courcy a a &eacute;t&eacute; en grande partie r&eacute;-&ea
 -** pour permettre de cr&eacute;er mais aussi de modifier un tableau existant
 -** pour int&eacute;grer les &eacute;l&eacute;ments HTML titre et r&eacute;sum&eacute; de tableau
 -* Galerie de documents : [SCRIPT ORIGINAL POUR SPIP 1.7.2->http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html]
+-* Statistiques : [Joseph->http://www.spip-contrib.net/Joseph] &agrave; partir d'une [contribution de François Schreuer->http://www.spip-contrib.net/Mesurer-la-longueur-d-un-article].
 _ ADAPTATION POUR SPIP 1.9.2 par [Coyote->http://www.spip-contrib.net/_Coyote_] (28 mars 2007)
 
 &#169; 2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
 	<version>
-	2.1.2
+	2.1.3
 	</version>
 	<etat>
 	stable
@@ -35,7 +36,7 @@ La barre est enrichie de plusieurs barres th&#233;matiques pour:
 
 {Certaines icones proviennent de [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/BarreTypoEnrichie</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Barre-Typographique-V2</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
