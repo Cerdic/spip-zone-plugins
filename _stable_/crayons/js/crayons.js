@@ -110,12 +110,14 @@ jQuery.fn.opencrayon = function(evt, percent) {
         'line-height': jQuery(this).css('lineHeight'),
         'background-color': jQuery(this).css('backgroundColor')
       };
-      if (params['background-color'] == 'transparent') {
+      if (params['background-color'] == 'transparent'
+      || params['background-color'] == 'rgba(0, 0, 0, 0)') {
         jQuery(me).parents()
         .each(function(){
           var bg = jQuery(this).css('backgroundColor');
           if (bg != 'transparent'
-          && params['background-color'] == 'transparent')
+          && (params['background-color'] == 'transparent'
+          || params['background-color'] == 'rgba(0, 0, 0, 0)'))
             params['background-color'] = bg;
         });
       }
