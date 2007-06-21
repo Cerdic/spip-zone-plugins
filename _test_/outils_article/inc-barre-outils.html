@@ -1,0 +1,48 @@
+#CACHE{0}
+[(#REM) squelette de la noisette  boite à outils pour article format barre]
+
+
+
+<BOUCLE_article_boite(ARTICLES) {id_article}>
+
+
+[(#CONFIG{outils_article/texte}|?{' ',''})
+<img src="#CHEMIN{img_pack/texteplus.png}" alt="fontsizeup" class="textsizeup" /> <img src="#CHEMIN{img_pack/textemoins.png}" alt="fontsizedown" class="textsizedown" />
+]
+
+
+[(#CONFIG{outils_article/pdf}|?{' ',''})
+#ARTICLE_PDF{id_article}
+]
+
+
+[(#CONFIG{outils_article/impression}|?{' ',''})
+<a href="#URL_PAGE{imprimer,id_article=#ID_ARTICLE}" title="afficher une version imprimable de cet article" onclick="window.open(this.href,'_blank');return false;">
+<img src='plugins/outils_article/img_pack/printer.png' alt="impression" title="impression" />
+</a>
+]
+
+[(#CONFIG{outils_article/mail}|?{' ',''})
+#ENVIAR_EMAIL** 
+]
+
+
+
+<BOUCLE_auteur_article(AUTEURS){id_article}>
+[(#CONFIG{outils_article/auteur}|?{' ',''})
+<a href="#URL_AUTEUR"><img src="#CHEMIN{img_pack/auteur.png}" title="articles du même auteur"></a>
+]
+</BOUCLE_auteur_article>
+
+[(#CONFIG{outils_article/reagir}|?{' ',''})
+[<a href="(#PARAMETRES_FORUM|url_reponse_forum)" title="réagir à l'article"><img src="#CHEMIN{img_pack/chat.png}"></a>]
+]
+
+<BOUCLE_compteur_forum(FORUMS){id_article}></BOUCLE_compteur_forum>
+[(#CONFIG{outils_article/compteur}|?{' ',''})
+#TOTAL_BOUCLE réactions
+]
+<//B_compteur_forum>
+
+</ul>
+</BOUCLE_article_boite>

@@ -1,0 +1,39 @@
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+[(#REM) descriptif=
+<h4><:outilsarticle:config_titre:></h4>
+<:outilsarticle:config_descr:><br />
+
+]
+[(#REM) titre=plugin outils article]
+
+
+<fieldset><legend><:outilsarticle:elements:></legend>
+   <label><:outilsarticle:taille:></label>
+   <input type="checkbox" name="texte" [checked="(#ENV{texte,on})"] />
+   <br />
+    <label><:outilsarticle:pdf:></label>
+   <input type="checkbox" name="pdf" [checked="(#ENV{pdf,on})"] />
+   <br />
+    <label><:outilsarticle:impression:></label>
+   <input type="checkbox" name="impression" [checked="(#ENV{impression,on})"] />
+   <br />
+   &nbsp;&nbsp;<label><:outilsarticle:mail:></label>
+   <input type="checkbox" name="mail" [checked="(#ENV{mail,on})"] />
+   <br />
+   &nbsp;&nbsp;<label><:outilsarticle:auteur:></label>
+   <input type="checkbox" name="auteur" [checked="(#ENV{auteur,on})"] />	
+   <br />
+	 &nbsp;&nbsp;<label><:outilsarticle:reagir:></label>
+   <input type="checkbox" name="reagir" [checked="(#ENV{reagir,on})"] />
+   <br />
+	 &nbsp;&nbsp;<label><:outilsarticle:compteur:></label>
+   <input type="checkbox" name="compteur" [checked="(#ENV{compteur,on})"] />
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
