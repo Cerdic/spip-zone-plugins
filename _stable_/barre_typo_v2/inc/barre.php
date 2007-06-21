@@ -356,14 +356,14 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	 $ret .= '<script type="text/javascript"><!--
 
 function MajPreviewCallBack() {
-	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:$("#text_area").val() }, function(data) {
+	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:'.$champ.'.value }, function(data) {
 		$("#article_preview").empty()
 		$("#article_preview").append(data);
 		});
 }
 
 function MajStatsCallBack() {
-	$.post("' . generer_url_ecrire("article_stats",""). '", { texte:barre_selection(document.formulaire.texte) }, function(data) {
+	$.post("' . generer_url_ecrire("article_stats",""). '", { texte:barre_selection('.$champ.') }, function(data) {
 		$("#article_stats").empty()
 		$("#article_stats").append(data);
 		});
@@ -394,12 +394,12 @@ function MajStats() {
 }
 
 $(document).ready(function(){
-	$("#text_area").after("<div id=\"article_preview\"></div>");
-	$("#text_area").before("<div id=\"article_stats\"></div>");
+	$('.$champ.').after("<div id=\"article_preview\"></div>");
+	$('.$champ.').before("<div id=\"article_stats\"></div>");
 	$.ajaxTimeout( 5000 );
-	$("#text_area").keypress(function() { MajPreview() });
-	$("#text_area").select(function() { MajStats() });
-	$("#text_area").click(function() { MajStats() });
+	$('.$champ.').keypress(function() { MajPreview() });
+	$('.$champ.').select(function() { MajStats() });
+	$('.$champ.').click(function() { MajStats() });
 });
 
 form_dirty = false;
