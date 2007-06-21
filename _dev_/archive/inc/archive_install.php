@@ -7,7 +7,7 @@ include_spip('base/abstract_sql');
 function archive_install() {
 	$ok = false;
 	//version en cours
-	$archive_version = 0.1;
+	$archive_version = 0.4;
 	
 	//vérifie si le plugin est initialisé ou non
 	if ((!isset($GLOBALS['meta']['archive_version'])) || $GLOBALS['meta']['archive_version'] < $archive_version) {
