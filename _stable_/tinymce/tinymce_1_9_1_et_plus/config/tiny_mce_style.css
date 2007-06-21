@@ -1,0 +1,36 @@
+/* CSS Document */
+/* styles pour le texte dans le mini-word et le rendu de l'article */
+
+/* .mceContentBody contient les styles pour le texte par défaut dans le mini-word (en général, équivalent à la balise body de la CSS classique) */
+.mceContentBody {
+	font-size: 0.70em;
+	color:#000000;
+}
+
+/* #contenu_article contient les styles pour le texte par défaut dans la page de rendu du back-office (en général, équivalent à la balise body de la CSS classique) */
+#contenu_article {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	color:#000000;
+}
+
+
+/* définissez ensuite les différents styles souhaités, en préfixant par "#contenu_article " ou ".mceContentBody ". Par exemple : 
+#contenu_article h1, .mceContentBody h1 {
+	padding:30px 0px 25px 0px;
+	margin:0px 0px 0px 0px;
+	color:#49862b;
+	font-size:1.3em;
+}
+
+.style1, #contenu_article .style1, .mceContentBody .style1 {
+	padding:30px 0px 25px 0px;
+	margin:0px 0px 0px 0px;
+	color:#49862b;
+	font-size:1.3em;
+}
+
+*/

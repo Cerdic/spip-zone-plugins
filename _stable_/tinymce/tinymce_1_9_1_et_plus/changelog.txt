@@ -1,0 +1,29 @@
+TODO : 
+ - ajout de configuration du plugin pour permettre de choisir les zones sur lesquelles ont souhaite le mini-word (descriptif article, texte article, ps article, texte brève, ...)
+ - passage de ibrowser et filemanager en tant que plugin complet de TinyMCE (ajout de tous les paramètres de configuration possibles)
+
+v 0.3.0 : 14/06/2007 : Cédric Despres
+ - plugin compatible spip 1.9.1 et 1.9.2
+ - fonctionnement sur Firefox et IE 6 et 7 testé (suite au bug repéré sur IE depuis la version Spip 1.9.2)
+ - les plugin ibrowser et filemanager sont maintenant livrés non compressés (pour le plus grand bonheur de SVN ! )
+
+v 0.2.2 : 09/02/2007 : Cédric Despres
+ - utilisation uniquement des fonctions interne à Spip. Aucune librairie externe nécessaire.
+
+v 0.2.1 : 09/02/2007 : Cédric Despres
+ - suppression de la nécessité de la librairie CURL pour le tééléchargement des pack de langues.
+
+v 0.2 : 09/02/2007 : Cédric Despres
+ - Les fichiers de TinyMCE ont été supprimés afin d'alléger le plugin (et la SVN). Ils sont automatiquement téléchargés au premier chargement du plugin (fichiers TinyMCE + packs de langues).
+   Le téléchargement du pack de langue nécessite la librairie CURL. A défaut, on essaie de l'activer via PHP.
+   En cas de nouvelle version de TinyMCE ou de pack de langues souhaités autres que Anglais, il faut changer deux constantes dans le fichier tinymce_acti_options.php.
+   
+
+v 0.1 : 06/02/2007 : Cedric Despres
+	- Création du plugin intégrant TinyMCE dans Spip
+	- intégration de ibrowser dans TinyMCE sous forme de plugin (ajout de variable dans la configuration de TinyMCE)
+	- intégration de filemanager dans TinyMCE sous forme de plugin (ajout de variable dans la configuration de TinyMCE)
+   Le plugin nécessite la modification de deux fichiers Spip pour fonctionner (la modification sera sans doute intégrer à la prochaine version de Spip)
+   Le plugin activé intègre le mini-word dans la page de modification d'article et de breves
+   Le plugin activé permet le rendu de l'article/brêve avec les styles du site
+ 
