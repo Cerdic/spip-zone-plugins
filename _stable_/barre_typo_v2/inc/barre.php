@@ -363,7 +363,7 @@ function MajPreviewCallBack() {
 }
 
 function MajStatsCallBack() {
-	$.post("' . generer_url_ecrire("article_stats",""). '", { texte:$("#text_area").val() }, function(data) {
+	$.post("' . generer_url_ecrire("article_stats",""). '", { texte:barre_selection(document.formulaire.texte) }, function(data) {
 		$("#article_stats").empty()
 		$("#article_stats").append(data);
 		});
@@ -387,11 +387,19 @@ function MajPreview() {
 	}
 }
 
+function MajStats() {
+	if ($("#article_stats").css("display") != "none") {
+		delayFunction("MajStatsCallBack()",1);
+	}
+}
+
 $(document).ready(function(){
 	$("#text_area").after("<div id=\"article_preview\"></div>");
 	$("#text_area").before("<div id=\"article_stats\"></div>");
 	$.ajaxTimeout( 5000 );
 	$("#text_area").keypress(function() { MajPreview() });
+	$("#text_area").select(function() { MajStats() });
+	$("#text_area").click(function() { MajStats() });
 });
 
 form_dirty = false;

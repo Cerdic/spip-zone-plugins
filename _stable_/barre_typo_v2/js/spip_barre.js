@@ -214,6 +214,7 @@ function barre_capitales(champ,majuscules) {
 			}
 			txtarea.focus();
 			theSelection = '';
+			MajPreview();
 			return;
 		}
 	}
@@ -271,6 +272,9 @@ function barre_2Minuscules(champ) {
 	champ.focus();
 	MajPreview();
 }
+
+
+
 
 // Shows the help messages in the helpline window
 function helpline(help, champ) {
@@ -353,4 +357,19 @@ function barre_galerie(champs_de_texte, cheminediteur) {
 	zone_selection = champs_de_texte;
 	window.open(cheminediteur+'?exec=galerie', 'galerie',
 		'width=550,height=400,menubar=no,scrollbars=yes,statusbar=yes')
+}
+
+function barre_selection(champ) {
+	var resultat = "";
+	champ.focus();
+	if (champ.setSelectionRange)
+		resultat = champ.value.substring(champ.selectionStart, champ.selectionEnd);
+	else if ((clientVer >= 4) && is_ie && is_win) {
+		resultat = document.selection.createRange().text;
+	}
+
+	if (resultat.length==0) {
+		resultat = champ.value;
+	}
+	return resultat;
 }
