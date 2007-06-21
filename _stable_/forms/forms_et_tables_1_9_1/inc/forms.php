@@ -468,6 +468,7 @@
 		}
 		if (!count($erreur)){
 			if (count($champs_mod)){
+				include_spip('base/abstract_sql');
 				$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
 				spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
 			}
@@ -637,6 +638,7 @@
 					$_GET["deja_enregistre_$id_form"] = $id_donnee;
 				}
 			}
+
 			// Puis enregistrer les differents champs
 			if ($ok) {
 				#$inserts = Forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok,$c);
