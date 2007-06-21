@@ -193,6 +193,41 @@ function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier,
 	MajPreview();
 }
 
+
+function barre_capitales(champ,majuscules) {
+	var txtarea = champ;
+
+	txtarea.focus();
+
+	if (majuscules!=true) {
+		majuscules=false;
+	}
+
+	if ((clientVer >= 4) && is_ie && is_win)
+	{
+		theSelection = document.selection.createRange().text; // Get text selection
+		if (theSelection) {
+			if (majuscules) {
+				document.selection.createRange().text = theSelection.toUpperCase();
+			} else {
+				document.selection.createRange().text = theSelection.toLowerCase();
+			}
+			txtarea.focus();
+			theSelection = '';
+			return;
+		}
+	}
+	else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
+	{
+		if (majuscules) {
+			barre_2Majuscules(champ);
+		} else {
+			barre_2Minuscules(champ);
+		}
+		return;
+	}
+}
+
 function barre_2Majuscules(champ) {
 	var oldSelStart = champ.selectionStart;
 	var oldSelEnd = champ.selectionEnd;

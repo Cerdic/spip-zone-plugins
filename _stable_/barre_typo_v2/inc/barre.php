@@ -103,8 +103,8 @@ $tableau_formulaire = '
 
 // Changer la casse
 function RaccourcisMajusculesMinuscules($champ, $champhelp) {
-	return bouton_barre_racc ("barre_2Majuscules($champ)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_uppercase.png', _T('bartypenr:barre_gestion_cr_changercassemajuscules'), $champhelp) .'&nbsp;'
-. bouton_barre_racc ("barre_2Minuscules($champ)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_lowercase.png', _T('bartypenr:barre_gestion_cr_changercasseminuscules'), $champhelp);
+	return bouton_barre_racc ("barre_capitales($champ,true)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_uppercase.png', _T('bartypenr:barre_gestion_cr_changercassemajuscules'), $champhelp) .'&nbsp;'
+. bouton_barre_racc ("barre_capitales($champ,false)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_lowercase.png', _T('bartypenr:barre_gestion_cr_changercasseminuscules'), $champhelp);
 }
 
 // gestion de la recherche
