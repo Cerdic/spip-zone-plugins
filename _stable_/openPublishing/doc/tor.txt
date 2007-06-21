@@ -1,0 +1,74 @@
+Le plugin openPublishing permet d'écrire un article sans ce loger sur l'interface privée de spip.
+Ainsi, spip n'enregistre pas qui a écrit tel article. De plus, si votre spip est correctement configuré, celui n'enregistrera pas les adresses IP des personnes utilisant le système de forum. C'est bien, mais insuffisant pour la sécurité, car même si le site permet de ne pas s'identifier, le serveur, quant à lui, peut stocker des informations permettant de vous identifier (par exemple votre adresse ip). Or, dans la plus part des cas, il impossible à un webmaster de configurer le serveur hébergeant son site pour ne pas stocker les adresses IP. Il faut donc que ce soit les visiteurs eux-même qui évitent de dévoiler leur IP.
+
+Voici donc une petite doc vous permettant de se connecter à un serveur sans dévoiler votre adresse ip, le tout en passant par le réseau TOR.
+
+
+
+----------------------------------------
+Extrait du site de présentation de TOR :
+
+Tor est une panoplie d'outils pour tout un éventail d'organisations et de personnes cherchant à améliorer la confidentialité et la sécurité de leurs échanges sur Internet. Utiliser Tor peut aider à rendre anonymes votre navigation et vos publications sur la toile, vos communications de messagerie instantanée, IRC, SSH, et les autres applications utilisant le protocole TCP. Tor fournit également aux développeurs logiciels une plate-forme sur laquelle ils peuvent créer de nouvelles applications intégrant anonymat, sécurité et confidentialité.
+
+Le but de Tor est de protéger contre l'analyse de trafic, une forme de surveillance des réseaux qui menace l'anonymat et la confidentialité des activités et relations entre personnes privées, entre partenaires commerciaux ou entre partenaires institutionnels. Avec Tor, les communications rebondissent au travers d'un réseau de serveurs distribués (nœuds), appelés onion routers, qui vous protègent contre les sites web qui enregistrent les pages que vous visitez, contre les observateurs externes, et contre les « onions routers » eux-mêmes.
+
+Plus le nombre d'utilisateurs de Tor sera important, et plus il y aura de volontaires créant de nouveaux serveurs, plus la sécurité offerte par Tor sera importante. Merci d'envisager, s'il-vous-plaît, le fait d'offrir de votre temps ou d'offrir votre bande-passante. Souvenez-vous aussi qu'il s'agit d'un programme en cours de développement — il ne serait pas judicieux de se fier totalement au réseau Tor actuel si vous avez besoin d'un anonymat très strict. 
+
+Voir : http://tor.eff.org/index.html.fr
+----------------------------------------
+
+
+
+1- Installation de TOR (ubuntu feisty)
+--------------------------------------
+
+
+1.1 1ere étape : installer Tor et privoxy
+-----------------------------------------
+
+$sudo apt-get install privoxy tor
+
+
+
+1.2 2ème étape : Configurer privoxy
+-----------------------------------
+
+page d'explication pour une configuration minimale : http://doc.ubuntu-fr.org/privoxy
+Il s'agit de deux trois options a modifier dans le fichier de configuration de privoxy
+
+
+
+1.3 3ème étape : "Torrifier" ses applications
+---------------------------------------------
+
+page de configuration plus avancée : http://tor.eff.org/docs/tor-doc-unix.html.fr
+
+
+
+1.3.1 Client Web : Firefox
+--------------------------
+
+La configuration est très simple, il suffit d'installer torbutton pour firefox.
+Page d'aide pour accelerer Firefox : http://wiki.noreply.org/noreply/TheOnionRouter/FireFoxTorPerf (cela permet d'accelerer le temps de chargement des pages, ce qui est appréciable avec TOR)
+
+
+
+1.3.2 Client Mail : Thunderbird
+-------------------------------
+
+La configuration est très simple, il suffit d'installer torbutton pour thunderbird.
+
+
+
+1.3.3 Client Rss : Akregator
+----------------------------
+
+Il se peut que vous utilisez un client RSS pour récupérer les flux RSS que produit un site sous spip. Il faut donc le "torrifier" lui aussi. Il suffit de lancer Akregator à l'aide de torify. Attention, Akregator utilise en interne Konqueror pour l'affichage, il faut donc torifier aussi Konqueror (configurer->Utiliser un proxy-> même configuration que pour firefox).
+
+
+
+
+1- Installation de TOR (windows)
+--------------------------------
+
+A faire !
