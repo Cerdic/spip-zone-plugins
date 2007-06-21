@@ -1,6 +1,6 @@
 [(#REM) titre=Configuration du formulaire «&nbsp;Inscription2&nbsp;»]
 
-[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../Inscription2.png' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
+[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../images/Inscription2.PNG' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
 
 <!-- descriptif=
 
@@ -10,15 +10,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 
 #CACHE{0}
 
-
-<:titre_page_config_fonctions|gros_titre{'',''}:>
-
 <form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 <br />
 
-
-
+[(#REM|debut_cadre_trait_couleur{1,'xxx',''})]
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 <fieldset>
@@ -30,11 +26,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <br /><br />
 <table>
 <tr>
-<td width='140'/>
-<td width='70'> <:inscription2:form:> </td>
-<td width='70'> <:inscription2:fiche_mod:> </td>
-<td width='70'> <:inscription2:fiche:> </td>
-<td width='70'> <:inscription2:table:> </td>
+<td width='140px'/>
+<td width='70px'> <:inscription2:form:> </td>
+<td width='70px'> <:inscription2:fiche_mod:> </td>
+<td width='70px'> <:inscription2:fiche:> </td>
+<td width='70px'> <:inscription2:table:> </td>
 </tr><tr>
 <td>
 	<strong><:inscription2:nom:></strong>
@@ -457,13 +453,16 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </label>
 <br />
 
-<label>
+<div>
+<span>
 	<input type="checkbox" name="statut_relances" onclick="showhide(this, '#statut_rel')" [checked="(#ENV{statut_relances}?{checked})"] id="statut_relances" />
 	<strong><:inscription2:statut_rel:></strong><br />
 	<:inscription2:exp_statut_rel:><br/>
-</label><label>
+</span>
+<span>
 	<input type="text" name="statut_rel" id="statut_rel" style="[(#ENV{statut_relances}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_rel}">
-</label>
+</span>
+</div>
 
 <div [style="(#CONFIG{plugin/ACCESRESTREINT}|?{display: block;, display:none;})"]>
 <label>

@@ -29,7 +29,7 @@
 	
 	$spip_auteurs_elargis_key = array("PRIMARY KEY"	=> "id_auteur");
 
-	$tables_principales['spip_auteurs_elargis']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
+	$tables_principales['`spip_auteurs_elargis`']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
 	
 function confirmation_inscription2($id, $mode, $cle){
 	$q = spip_query("SELECT statut, alea_actuel FROM spip_auteurs WHERE id_auteur = '$id'");
