@@ -24,7 +24,7 @@ $corbeille_param = array (
 								"temps" => "date_time",
 								"page_voir" => array("signatures",'id_document'),
 								"libelle" => _L("Toutes les p&eacute;titions dans la corbeille :"),
-								"libelle_court" => _T('lien_petitions'),
+								"libelle_court" => strtolower(_T('lien_petitions')),
 								),
 	"breves"=>	 		array(	"statut" => "refuse", 
 								"titre" => "titre",
@@ -78,7 +78,7 @@ $corbeille_param = array (
 								"temps" => "maj",
 								"page_voir" => array("sites",'id_syndic'),
 								"libelle" => _L("Tous les syndications dans la corbeille :"),
-								"libelle_court" => _T('icone_syndic')
+								"libelle_court" => _T('titre_syndication')
 								)	
 	);
 
