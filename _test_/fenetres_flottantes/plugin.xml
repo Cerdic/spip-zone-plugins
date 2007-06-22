@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Affichage d'une fen&ecirc;tre flottante</nom>
+ 	<version>1.11</version>
+ 	<prefix>FenFlo</prefix>
+ 	<auteur>Mathieu Imbert[contact->mailto:mathieu_imbert@hotmail.fr]</auteur>
+ 	<description>Plugin permettant d'ouvrir une fen&ecirc;tre flottante</description>
+ 	<etat>test</etat>
+ 	<fonction>fenetre_flottante_fonct.php</fonction>
+ 	<pipeline>
+  		<nom>affichage_final</nom>
+  		<action>Affichage_fenetre</action>
+  		<inclure>fenetre_flottante_fonct.php</inclure>
+ 	</pipeline>
+ 	<pipeline>
+  		<nom>insert_head</nom>
+  		<action>insertion_in_head</action>
+  		<inclure>define_head.php</inclure>
+ 	</pipeline>
+ 	<pipeline>
+ 		<nom>ajouter_boutons</nom>
+ 		<action>ajout_bouton_prive</action>
+ 		<inclure>fenetreflo_pipeline.php</inclure>
+ 	</pipeline>
+</plugin>
