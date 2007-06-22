@@ -15,17 +15,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // Pas besoin de contexte de compilation
 global $balise_FORMS_collecte;
-$balise_FORMS_collecte = array('id_form','id_article','id_donnee');
+$balise_FORMS_collecte = array('id_form','id_article','id_donnee', 'id_donnee_liee');
 
 function balise_FORMS ($p) {
-	return calculer_balise_dynamique($p,'FORMS', array('id_form', 'id_article', 'id_donnee', 'class'));
+	return calculer_balise_dynamique($p,'FORMS', array('id_form', 'id_article', 'id_donnee','id_donnee_liee', 'class'));
 }
 
 function balise_FORMS_stat($args, $filtres) {
 	return $args;
 }
 
-function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="") {
+function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_donnee_liee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="") {
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 	$url = self();
@@ -69,6 +69,9 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		$url_validation = Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
 		if (!$erreur) {
 			$formok = _T($reponse_enregistree);
+			if ($id_donnee_liee && $id_donnee){
+				spip_query("INSERT INTO spip_forms_donnees_donnees (id_donnee,id_donnee_liee) VALUES ("._q($id_donnee).","._q($id_donnee_liee).")");
+			}
 			if ($reponse)
 			  $reponse = _T($message_confirm,array('mail'=>$reponse));
 			if (!_DIR_RESTREINT 

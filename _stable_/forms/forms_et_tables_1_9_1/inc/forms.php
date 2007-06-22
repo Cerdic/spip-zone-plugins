@@ -666,6 +666,7 @@
 					$hash = md5("forms confirme reponse $id_reponse $cookie ".hash_env());
 					$url = generer_url_public($script_validation,"mel_confirm=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
+					if ($mailconfirm) $reponse = $mailconfirm;
 				}
 				if ($row['type_form']=='sondage') {
 					include_spip("inc/session");
@@ -675,7 +676,6 @@
 				}
 			}
 		}
-	
 		return $r;
 	}
 

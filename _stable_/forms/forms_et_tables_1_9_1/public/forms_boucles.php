@@ -96,6 +96,7 @@
 		$boucle = &$boucles[$idb];
 		$t = $boucle->id_table;
 		if ($t=='forms_donnees'){
+			$not = $crit->not;
 			$_quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	
 			$k = count($boucle->join)+1;
@@ -103,7 +104,7 @@
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
 			$op = array("'='", "'L$k.champ'", "_q(".$_quoi.")");
 			$boucle->where[]= array("'?'","!in_array($_quoi,array('rang','date','id_donnee','url'))",$op,"''");
-			$boucle->order[]= "(in_array($_quoi,array('rang','date','id_donnee','url'))?'$t.'.$_quoi:(strncmp($_quoi,'date_',5)==0?'STR_TO_DATE(L$k.valeur,\'%d/%m/%Y\')':'L$k.valeur'))";
+			$boucle->order[]= "(in_array($_quoi,array('rang','date','id_donnee','url'))?'$t.'.$_quoi:(strncmp($_quoi,'date_',5)==0?'STR_TO_DATE(L$k.valeur,\'%d/%m/%Y\')':'L$k.valeur'))".($not?".' DESC'":"");
 		}
 	}
 	// {date_compare champ operateur valeur}
