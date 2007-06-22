@@ -226,7 +226,7 @@ $().ready(function() {
 	}else
 		$critere="a.id_auteur<>'0'"; 
 	
-	$max_par_page=5;
+	$max_par_page=30;
 	if (empty($debut)) 
 		$debut=0; 
 	if(empty($ordre))
@@ -334,7 +334,7 @@ $().ready(function() {
 		echo '</tr>';
 		
 	}
-	$query = spip_query("SELECT id_auteur FROM spip_auteurs_elargis a WHERE $critere");
+	$query = spip_query("SELECT id_auteur FROM spip_auteurs WHERE $critere");
 	$nombre_selection=spip_num_rows($query);
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 

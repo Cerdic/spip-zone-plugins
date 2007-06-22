@@ -194,7 +194,7 @@
 
 <p [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
 	<label for="adresse"><strong><:inscription2:adresse:></strong><br /></label>
-	<input type="text" name="adresse" id="adresse" [value="(#CONFIG{inscription2adresse}|=={on}|?{#ENV{adresse}, ''})"]/><br />
+	<input type="text" name="adresse" id="adresse" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse}, ''})"]/><br />
 	<label for="adresse2"><strong><:inscription2:adresse_comp:></strong><br /></label>
 	<input type="text" name="adresse2" id="adresse2" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse2}, ''})"] />
 <br /></p>

@@ -145,7 +145,7 @@ function envoyer_inscription2($var_user) {
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	$message = _T('inscription2:message_auto')
-			. _T('inscription2:email_bonjour', array('nom'=>$var_user['nom']))."\n\n"
+			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
 			. _T('inscription2:texte_email_inscription', array(
 			'link_activation' => $adresse_site.'/?page=inscription2_confirmation&id='
 			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=conf', 
