@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Barre typographique pour les rubriques pour Spip 1.9.1
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Arnault PACHOT 
+ 	[OpenStudio->http://www.openstudio.fr] - Licence GPL
+	</auteur>
+	<version>
+	1.5
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ce plugin active la barre typographique de Spip sur les rubriques
+	</description>
+	<lien>http://www.spip-contrib.net/Barre-typographique-pour-les</lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+
+	</options>
+	
+	
+
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	typo_rubrique
+	</prefix>
+
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
