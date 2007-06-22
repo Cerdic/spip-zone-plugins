@@ -19,9 +19,12 @@ $lilypond_version = "2.10.15";
 // Cache du serveur
 $cache_dir = "CACHE/lilyspip";
 
-
-
-$code = stripslashes($_GET['code']); 
+if (get_magic_quotes_gpc()) {
+    $code = stripslashes($_GET['code']); 
+} 
+else {
+ $code = ($_GET['code']);
+} 
 $format = $_GET['format']; 
 
 
