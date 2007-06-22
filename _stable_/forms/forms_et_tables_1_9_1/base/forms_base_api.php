@@ -81,7 +81,12 @@ function Forms_supprimer_tables($type_ou_id){
 
 include_spip('forms_fonctions');
 function Forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile=false, $traduit=true){
-	return forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $champ, $id_form, $separateur,$etoile,$traduit);
+	if (is_array($champ))
+		foreach($champ as $k=>$ch)
+			$champ[$k] = forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $ch, $id_form, $separateur,$etoile,$traduit);
+	else
+		$champ = forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $champ, $id_form, $separateur,$etoile,$traduit);
+	return $champ;
 }
 function Forms_creer_champ($id_form,$type,$titre,$c=NULL,$champ=""){
 	include_spip('inc/forms_edit');

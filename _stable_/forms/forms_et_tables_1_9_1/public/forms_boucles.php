@@ -103,10 +103,19 @@
 			$boucle->from["L$k"]= 'spip_forms_donnees_champs';
 			$op = array("'='", "'L$k.champ'", "_q(".$_quoi.")");
 			$boucle->where[]= array("'?'","!in_array($_quoi,array('rang','date','id_donnee','url'))",$op,"''");
-			$boucle->order[]= "(in_array($_quoi,array('rang','date','id_donnee','url'))?'$t.'.$_quoi:'L$k.valeur')";
+			$boucle->order[]= "(in_array($_quoi,array('rang','date','id_donnee','url'))?'$t.'.$_quoi:(strncmp($_quoi,'date_',5)==0?'STR_TO_DATE(L$k.valeur,\'%d/%m/%Y\')':'L$k.valeur'))";
 		}
 	}
-
+	// {date_compare champ operateur valeur}
+	function critere_date_valeur_future_dist($idb, &$boucles, $crit) {
+		global $table_des_tables;
+		$boucle = &$boucles[$idb];
+		$t = $boucle->id_table;
+		if ($t=='forms_donnees_champs' OR $t=='forms_donnees'){
+			$boucle->where[]= array("'>='","'STR_TO_DATE(valeur,\'%d/%m/%Y\')'","'NOW()'");
+		}
+	}
+	
 	function boucle_TABLES_dist($id_boucle, &$boucles){
 		if (function_exists($f='boucle_FORMS') OR function_exists($f='boucle_FORMS_dist'))
 			return $f($id_boucle, $boucles);
@@ -266,7 +275,7 @@ code;
 			$boucle->where[]= array("'='", "'$id_table.champ'", "'champs.champ'");
 			$boucle->where[]= array("'='", "'donnees.id_form'", "'champs.id_form'");
 			$boucle->where[]= array("'='", "'champs.public'", "'\"oui\"'");
-			$boucle->group[] = $boucle->id_table . '.champ'; // ?  
+			//$boucle->group[] = $boucle->id_table . '.champ'; // ?  
 		}
 		if (!$boucle->statut && !isset($boucle->modificateur['tout']) && !$boucle->tout)
 			$boucle->where[]= array("'='", "'donnees.statut'", "'\"publie\"'");
