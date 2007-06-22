@@ -1,0 +1,50 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Interface PMB pour SPIP 1.9.1
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Arnault PACHOT 
+ 	[OpenStudio->http://www.openstudio.fr]
+_ Renaud Aioutz 
+	[Bibliothèques de Tence, Saint-Jeures et Le Mazet-Saint-Voy->http://www.3bm.fr]
+_ &copy; 2007 - Licence GPL
+	</auteur>
+	<version>
+	0.21
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ce plugin permet d'interfacer SPIP avec un catalogue en ligne sous PMB. Il fournit des boucles, balises et critères pour parcourir le catalogue depuis
+	vos squelettes. 
+	</description>
+	<lien>http://www.spip-contrib.net/Interface-PMB-pour-SPIP</lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	pmb_mes_options.php
+	</options>
+	
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	pmb_mes_fonctions.php</fonctions>
+	
+	<pipeline>
+  		<nom>post_syndication</nom>
+  		<action>traitement_flux</action>
+  		<inclure>pmb_parsing.php</inclure>
+ 	</pipeline>
+
+	
+		
+
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	pmb
+	</prefix>
+
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
