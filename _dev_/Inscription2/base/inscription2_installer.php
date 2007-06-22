@@ -33,6 +33,14 @@ function inscription2_verifier_base(){
 		if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance')
 			spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
 	}
+	$s = spip_query("SELECT a.id_auteur FROM spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur WHERE b.id_auteur is null");
+	while($q = spip_fetch_array($s))
+		$a[] = $q['id_auteur'];
+	if($a){
+		$a = join('), (', $a);
+		spip_query("insert into spip_auteurs_elargis (id_auteur) values (".$a.")");
+	}
+	
 	ecrire_meta('inscription2_version',$version_base);
 	ecrire_metas();
 }
