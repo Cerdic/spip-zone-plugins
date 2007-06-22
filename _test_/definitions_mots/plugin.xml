@@ -1,0 +1,52 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	D&eacute;finitions de mots clefs
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Arnault Pachot - [OpenStudio->http://www.openstudio.fr]
+	</auteur>
+	<version>
+	1.0.8
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	{{{Pr&eacute;sentation}}}
+Recherche chaque mot clef pr&eacute;sent dans le texte et propose un lien interactif vers sa d&eacute;finition.
+
+Ce plugin a &eacute;t&eacute; developp&eacute; dans le cadre du projet {{Casa d'Art}} : site internet p&eacute;dagogique autour des m&eacute;tiers d'art du plateau de la Chaise-Dieu en Haute-Loire (Auvergne). 
+
+{{{Description}}}
+<img4057|left> Ce plugin met automatiquement en surbrillance tous les mots clefs du site qui sont pr&eacute;sents dans un texte. Le visiteur du site est alors invit&eacute; &agrave; cliquer sur le mot clefs pour en afficher sa d&eacute;finition (r&eacute;sum&eacute;).
+
+
+Une petite fenêtre s'affiche alors &agrave; l'interieur du texte et pr&eacute;sente un r&eacute;sum&eacute; de la d&eacute;finition du mot clefs. Le visiteur peut ensuite choisir de fermer cette fenetre ou bien d'en savoir plus sur le mot clefs et d'afficher ainsi la d&eacute;finition complète. C'est la page {mot} qui sera alors appel&eacute;e.
+<img4058|center>
+
+
+{{{Installation}}}
+- Installer le plugin en copiant le r&eacute;pertoire /definitions_mots &agrave; l'interieur du r&eacute;pertoire /plugins
+- activez le plugin depuis l'espace priv&eacute;
+- appelez le filtre {definitions_mots} dans vos squelettes lorsque vous souhaitez activer le plugin (pages sommaire, article, rubrique...etc...). Exemple : <code>[(#TEXTE|definitions_mots)]</code>
+
+{{{D&eacute;monstration}}}
+Vous trouverez un exemple d'utilisation de ce plugin sur le site de Casa d'Art : [->http://www.casadart.fr]
+
+{{{Licence}}}
+Licence GNU/GPL. 
+Copyright (c) 2007 [Casa d'Art->http://www.casadart.fr] & [OpenStudio->http://www.openstudio.fr]
+
+</description>
+	<lien>http://www.spip-contrib.net/Afficher-les-definitions-de-mots</lien> <!-- URI de documentation -->
+	<prefix>
+	definitions
+	</prefix>
+	<fonctions>definitions_mes_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>definitions_head.php</inclure>
+	</pipeline>
+	
+	
+</plugin>

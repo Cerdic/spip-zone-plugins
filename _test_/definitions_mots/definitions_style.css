@@ -1,0 +1,51 @@
+.definition{
+	display: inline;
+}
+.definition {display: inline;}
+.mot{
+	
+	display: inline;
+	border-bottom: 1px dashed orange;
+}
+.mot a{
+	display: inline;
+	border-bottom: 1px dashed orange;
+}
+.mot_afficher {
+	vertical-align: top;
+	display: inline;
+}
+.mot:hover{
+	
+	background: #ffa500;
+	
+}
+.def a{
+	display: inline;
+	color: #ffff7f;
+}
+
+	
+.defdiv{
+	border: 1px dotted #cccccc;
+	float: right;
+	width: 40%;
+	display: none;
+	padding: 0.5em;
+	color: white;
+	font-size: 0.85em;
+	background: #508d20;
+	margin: 1em;
+	margin-right: 0;
+}
+.defdiv a{
+	color: #ffff7f;
+}
+.bouton-fermer {
+	float: right;
+	display: inline;
+}
+.bouton-fermer img{
+	vertical-align: top;
+	display: inline;
+}
