@@ -28,7 +28,7 @@
 [(#GET{snippet_present}|?{' '}) #SET{lien_exporte,#URL_ACTION_AUTEUR{snippet_exporte,forms:#ID_FORM}}]
 #SET{lien_vider,#URL_ACTION_AUTEUR{forms_donnees_vide,#ID_FORM,#EVAL{_DIR_RESTREINT_ABS}|concat{#SELF}|urlencode}}
 #SET{lien_supprimer,(#URL_ECRIRE{forms_edit,supp_form=#ID_FORM}|parametre_url{type_form,#ENV{type_form,''}}|parametre_url{retour,#SELF|urlencode}|ancre_url{'resume'})}
-#SET{message,#REM|sinon{forms:confirm_vider_table}|_T{#ARRAY{table,#TITRE}}|html2unicode|addslashes|unicode_to_javascript}
+#SET{message,#REM|sinon{forms:confirm_vider_table}|_T{#ARRAY{table,#TITRE*}}|html2unicode|addslashes|unicode_to_javascript}
 <tr class='tr_liste'>
 <td class="arial11">
 <img src='#EVAL{_DIR_IMG_PACK}puce-[(#GET{donnees}|?{'verte','orange'})]-breve.gif' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
