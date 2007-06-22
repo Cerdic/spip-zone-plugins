@@ -20,7 +20,6 @@ function inscription2_verifier_tables(){
 	foreach(lire_config('inscription2') as $clef => $val) {
 		$cle = ereg_replace("_(fiche|table).*", "", $clef);
 		if($cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_rel'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle) ){
-			echo $cle.' ';
 			if($cle == 'naissance' and !isset($desc['field'][$cle]) and $_POST[$clef]!=''){
 					spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
 					$desc['field'][$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";

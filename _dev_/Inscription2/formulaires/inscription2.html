@@ -285,7 +285,7 @@
 </label>
 
 <?php
-	include(_DIR_PLUGIN_INSCRIPTION2."/inc/domaines.php");
+	include(find_in_path("inc/domaines.php"));
 	if(sizeof($domaine)>0){
 		echo '	<label style="[(#CONFIG{inscription2/domaines}|=={on}|?{display: block;, display:none;})]">
 				<strong><:inscription2:domaine:></strong><br />
