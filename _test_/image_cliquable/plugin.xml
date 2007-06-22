@@ -1,0 +1,20 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Image cliquable
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Arnault PACHOT 
+ 	[OpenStudio->http://www.openstudio.fr] - Licence GPL
+	</auteur>
+	<version>
+	1.2
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ce plugin permet d'ajouter des images cliquables dans le texte de vos articles, rubriques, brèves...<br/>
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-Image-Cliquable</lien> <!-- URI de documentation -->	
+	<prefix>image_cliquable</prefix>
+</plugin>

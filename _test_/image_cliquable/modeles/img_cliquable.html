@@ -1,0 +1,52 @@
+<BOUCLE_document (DOCUMENTS) {id_document}>
+[(#REM)
+
+	Modele pour <img>
+
+	Si on est en mode "vignette" ou appele avec embed=oui,
+	on affiche l'image complete ; sinon le logo
+
+	Si un lien est passe #ENV{lien} on ajoute le a href
+	ou on truque le #URL_DOCUMENT
+
+]
+
+[(#SET{
+	image,
+		#MODE|=={vignette}
+		|sinon{#ENV{embed}}
+		|?{' '}
+})][
+
+	(#REM) image complete ?
+
+][(#GET{image})
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]
+
+<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] usemap="AP[#(#URL_DOCUMENT|md5)]" alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] />
+
+<map name="AP[(#URL_DOCUMENT|md5)]" id="AP[(#URL_DOCUMENT|md5)]">
+[<area shape="#ENV{type1}" coords="(#ENV{coord1})" href="#ENV{lien1}" alt="#ENV{alt1}" />]
+[<area shape="#ENV{type2}" coords="(#ENV{coord2})" href="#ENV{lien2}" alt="#ENV{alt2}" />]
+[<area shape="#ENV{type3}" coords="(#ENV{coord3})" href="#ENV{lien3}" alt="#ENV{alt3}" />]
+[<area shape="#ENV{type4}" coords="(#ENV{coord4})" href="#ENV{lien4}" alt="#ENV{alt4}" />]
+[<area shape="#ENV{type5}" coords="(#ENV{coord5})" href="#ENV{lien5}" alt="#ENV{alt5}" />]
+[<area shape="#ENV{type6}" coords="(#ENV{coord6})" href="#ENV{lien6}" alt="#ENV{alt6}" />]
+[<area shape="#ENV{type7}" coords="(#ENV{coord7})" href="#ENV{lien7}" alt="#ENV{alt7}" />]
+[<area shape="#ENV{type8}" coords="(#ENV{coord8})" href="#ENV{lien8}" alt="#ENV{alt8}" />]
+[<area shape="#ENV{type9}" coords="(#ENV{coord9})" href="#ENV{lien9}" alt="#ENV{alt9}" />]
+[<area shape="#ENV{type10}" coords="(#ENV{coord10})" href="#ENV{lien10}" alt="#ENV{alt10}" />]
+[<area shape="#ENV{type11}" coords="(#ENV{coord11})" href="#ENV{lien11}" alt="#ENV{alt11}" />]
+[<area shape="#ENV{type12}" coords="(#ENV{coord12})" href="#ENV{lien12}" alt="#ENV{alt12}" />]
+</map>
+
+
+[(#ENV{lien}|?{</a>})]</span>
+][
+
+	(#REM) sinon logo document + lien + alt + title etc
+
+][(#GET{image}|?{'',' '})
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[ width:(#LOGO_DOCUMENT||largeur)px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]>[(#LOGO_DOCUMENT||inserer_attribut{alt,#TITRE|strlen|?{#TITRE {#TYPE_DOCUMENT},#TYPE_DOCUMENT}})]</a></span>
+]</BOUCLE_document>
