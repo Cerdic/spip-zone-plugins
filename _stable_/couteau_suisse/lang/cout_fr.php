@@ -300,7 +300,12 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 	'mailcrypt:nom' => 'MailCrypt',
 	'mailcrypt:description' => "Masque tous les liens de courriels pr&eacute;sents dans vos textes en les rempla&ccedil;ant par un lien Javascript permettant quand m&ecirc;me d'activer la messagerie du lecteur. Cet outil antispam tente d'emp&ecirc;cher les robots de collecter les adresses &eacute;lectroniques laiss&eacute;es en clair dans les forums ou dans les balises de vos squelettes.",
 
+// ---------------------------------------------------------------------------
+	'no_IP:nom' => "Pas de stockage IP",
+	'no_IP:description' => "D&eacute;sactive le m&eacute;canisme d'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun   num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques   ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).",
+
 /*
+// ---------------------------------------------------------------------------
 	':nom' => '',
 	':description' => '',
 */

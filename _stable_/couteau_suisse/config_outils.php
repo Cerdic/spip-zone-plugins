@@ -236,6 +236,12 @@ add_outil( array(
 ));
 
 add_outil( array(
+	'id' => 'no_IP',
+	'code:options' => '$ip = substr(md5($ip),0,16);',
+	'categorie' => 'admin',
+));
+
+add_outil( array(
 	'id' => 'log_couteau_suisse',
 	'code:options' => "\$GLOBALS['log_couteau_suisse']=true;",
 ));
