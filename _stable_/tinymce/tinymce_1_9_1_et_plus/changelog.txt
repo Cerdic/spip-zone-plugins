@@ -2,6 +2,9 @@ TODO :
  - ajout de configuration du plugin pour permettre de choisir les zones sur lesquelles ont souhaite le mini-word (descriptif article, texte article, ps article, texte brève, ...)
  - passage de ibrowser et filemanager en tant que plugin complet de TinyMCE (ajout de tous les paramètres de configuration possibles)
 
+v 0.3.1 : 22/06/2007 : Cédric Despres
+ - utilisation des fonctions standard de Spip pour le téléchargement
+
 v 0.3.0 : 14/06/2007 : Cédric Despres
  - plugin compatible spip 1.9.1 et 1.9.2
  - fonctionnement sur Firefox et IE 6 et 7 testé (suite au bug repéré sur IE depuis la version Spip 1.9.2)

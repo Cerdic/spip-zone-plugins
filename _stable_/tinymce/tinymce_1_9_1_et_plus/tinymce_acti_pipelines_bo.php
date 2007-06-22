@@ -13,7 +13,7 @@ function tinymce_acti_header_prive($flux) {
 		include_spip('inc/dirtool');
 		
 		//récupère l'archive de TinyMCE sur le web et la met dans le répertoire du plugin
-		$zip_content = spip_file_get_contents(_PLUGIN_TINYMCE_ARCHIVE_URL);
+		$zip_content = recuperer_page(_PLUGIN_TINYMCE_ARCHIVE_URL, false, false, 10485760);
 		if (!ecrire_fichier(_DIR_RACINE.'/IMG/tinymce_archive.zip', $zip_content, true, false))
 			return;
 		//dézippe l'archive récupérée		
@@ -22,10 +22,6 @@ function tinymce_acti_header_prive($flux) {
 		supprimer_fichier(_DIR_RACINE.'/IMG/tinymce_archive.zip');
 		
 		//dézippe les plugins filemanager et ibrowser
-		/*$zip = new PclZip(_DIR_PLUGIN_TINYMCE.'/files/filemanager.zip');
-		$zip->extract(_DIR_TINYMCE_FILES.'/plugins');
-		$zip = new PclZip(_DIR_PLUGIN_TINYMCE.'/files/ibrowser.zip');
-		$zip->extract(_DIR_TINYMCE_FILES.'/plugins');*/
 		$dir = new dirtool(_DIR_PLUGIN_TINYMCE.'/files/filemanager');
 		$dir->copy(_DIR_TINYMCE_FILES.'/plugins/filemanager', 0775);
 		$dir = new dirtool(_DIR_PLUGIN_TINYMCE.'/files/ibrowser');
@@ -33,7 +29,7 @@ function tinymce_acti_header_prive($flux) {
 		
 		//télécharge les packages de langues TinyMCE nécessaires sur le web (si on veut autre chose que l'Anglais)
 		if (!empty(${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME})) {
-			$zip_content = spip_file_get_contents(_PLUGIN_TINYMCE_LANGUAGES_URL.'?dlang[]='.implode('&dlang[]=',${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME}).'&format=zip&submit=Download', 'force');
+			$zip_content = recuperer_page(_PLUGIN_TINYMCE_LANGUAGES_URL.'?dlang[]='.implode('&dlang[]=',${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME}).'&format=zip&submit=Download', false, false, 10485760);
 			if (!ecrire_fichier(_DIR_RACINE.'/IMG/tinymce_languages_archive.zip', $zip_content))
 				return;
 			//dézippe l'archive de langues récupérée		
