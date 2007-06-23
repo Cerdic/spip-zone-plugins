@@ -53,10 +53,10 @@ function mutualiser_creer($e, $options) {
 
 
 		if (defined('_INSTALL_HOST_DB')
-		AND defined('_INSTALL_USER_DB')
-		AND defined('_INSTALL_PASS_DB')
+		AND defined('_INSTALL_USER_DB_ROOT')
+		AND defined('_INSTALL_PASS_DB_ROOT')
 		AND defined('_INSTALL_NAME_DB')) {
-			$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB, _INSTALL_PASS_DB);
+			$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB_ROOT, _INSTALL_PASS_DB_ROOT);
 
 			// si la base n'existe pas, on va travailler
 			if (!mysql_select_db(_INSTALL_NAME_DB)) {
@@ -70,18 +70,23 @@ function mutualiser_creer($e, $options) {
 								$motdepasse=gen_md5_password();
 								// creation du user ( il faut que le user du site principal ait les droits de create_user mysql, create_user 
 								// The CREATE USER statement was added in MySQL 5.0.2. (sinon faut passer par GRANT )						
-								if (mysql_query("CREATE USER "._INSTALL_NAME_DB." IDENTIFIED by '$motdepasse'" ) )
+								if (mysql_query("CREATE USER "._INSTALL_NAME_DB." @"._INSTALL_HOST_DB." IDENTIFIED by '$motdepasse'" ) )
 								{	
 									// les droits qui vont bien 
-									if (!mysql_query("GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_NAME_DB."'@'localhost' "))
+									if (!mysql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_NAME_DB."'@'"._INSTALL_HOST_DB."' "))
 									{
-											die (__FILE__." " . __LINE__.":Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_NAME_DB."'@'localhost'  ") ;
+											die (__FILE__." " . __LINE__.":Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_NAME_DB."'@'"._INSTALL_HOST_DB."'  ") ;
 									}
 								}
 								else {
 									die (__FILE__." " . __LINE__.": KO . "._INSTALL_NAME_DB." IDENTIFIED by $motdepasse ") ;
 								}
-		
+								
+								mysql_close($link);	
+								define ('_INSTALL_USER_DB', _INSTALL_NAME_DB);
+								define ('_INSTALL_PASS_DB', $motdepasse);
+								$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB, _INSTALL_PASS_DB);
+
 							}
 							
 						
