@@ -5,6 +5,9 @@ require_once 'HTMLPurifier/AttrDef.php';
 // Enum = Enumerated
 /**
  * Validates a keyword against a list of valid values.
+ * @warning The case-insensitive compare of this function uses PHP's
+ *          built-in strtolower and ctype_lower functions, which may
+ *          cause problems with international comparisons
  */
 class HTMLPurifier_AttrDef_Enum extends HTMLPurifier_AttrDef
 {
@@ -34,11 +37,28 @@ class HTMLPurifier_AttrDef_Enum extends HTMLPurifier_AttrDef
     function validate($string, $config, &$context) {
         $string = trim($string);
         if (!$this->case_sensitive) {
+            // we may want to do full case-insensitive libraries
             $string = ctype_lower($string) ? $string : strtolower($string);
         }
         $result = isset($this->valid_values[$string]);
         
         return $result ? $string : false;
+    }
+    
+    /**
+     * @param $string In form of comma-delimited list of case-insensitive
+     *      valid values. Example: "foo,bar,baz". Prepend "s:" to make
+     *      case sensitive
+     */
+    function make($string) {
+        if (strlen($string) > 2 && $string[0] == 's' && $string[1] == ':') {
+            $string = substr($string, 2);
+            $sensitive = true;
+        } else {
+            $sensitive = false;
+        }
+        $values = explode(',', $string);
+        return new HTMLPurifier_AttrDef_Enum($values, $sensitive);
     }
     
 }

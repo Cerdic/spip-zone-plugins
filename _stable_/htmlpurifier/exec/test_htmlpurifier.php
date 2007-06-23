@@ -234,8 +234,8 @@ _ Usage {{[*interdit*]}}: pour mettre plus d'espace vertical entre deux éléments
 
 <code>{</code><code>5{</code>Titre niveau cinq<code>}5</code><code>}</code>";
 	$time_start = microtime(true);
-	for ($i = 1; $i <= 100; $i++) {
-		$resultat = propre($texte);
+	for ($i = 1; $i <= 1; $i++) {
+		$resultat = safehtml(propre($texte));
 	}
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;

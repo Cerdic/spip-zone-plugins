@@ -1,6 +1,6 @@
 
 README
-    All about HTMLPurifier
+    All about HTML Purifier
 
 HTML Purifier is an HTML filtering solution that uses a unique combination 
 of robust whitelists and agressive parsing to ensure that not only are 
@@ -19,4 +19,4 @@ Places to go:
   an in-depth installation guide.
 * See WYSIWYG for information on editors like TinyMCE and FCKeditor
 
-HTMLPurifier can be found on the web at: http://hp.jpsband.org/
+HTML Purifier can be found on the web at: http://htmlpurifier.org/
