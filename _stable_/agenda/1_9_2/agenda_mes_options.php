@@ -3,6 +3,9 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FI
 define('_DIR_PLUGIN_AGENDA',(_DIR_PLUGINS.end($p)));
 include_spip('base/agenda_evenements');
 
+//Pour 1.9.3: permet d'utiliser les criteres racine, meme_parent, id_parent
+$exceptions_des_tables['evenements']['id_parent']='id_evenement_source';
+
 function cron_agenda_nettoyer_base($t){
 	# les evenements lies a un article inexistant
 	$res = spip_query("SELECT evenements.id_evenement,evenements.id_article
