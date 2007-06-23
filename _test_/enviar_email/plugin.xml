@@ -17,7 +17,7 @@ Enviar la referencia al artículo o a la breve por email
 _ Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artículos o breves)
 _ Los dos ** asteriscos son importantes, no los olvides.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/article1407.html</lien> <!-- URI de documentation -->
 	<fonctions>
 	baliza_enviar_email.php
 	</fonctions>

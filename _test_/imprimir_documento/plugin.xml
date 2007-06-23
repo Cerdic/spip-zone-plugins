@@ -21,7 +21,7 @@ _ Los dos ** asteriscos son importantes, no los olvides.
 _ Pour l'utiliser, il suffit d'ajouter la balise #IMPRIMIR_DOCUMENTO** dans les squelettes sans oublier les deux ast&#233;risques (dans les aricles et br&#232;ves)
 </multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/article1406.html</lien> <!-- URI de documentation -->
 	<fonctions>
 	baliza_imprimir_documento.php
 	</fonctions>

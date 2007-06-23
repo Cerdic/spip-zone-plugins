@@ -26,7 +26,7 @@
 	Utilidad de gesti&oacute;n de los documentos: una p&aacute;gina que resume todos los documentos del sitio.
 	</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/article2174.html</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction-->
 	<prefix>
 	GestionDocuments

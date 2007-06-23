@@ -17,7 +17,7 @@ _ &#169; 2006 - GPL
 	<description>
 	Outil de Statisitique [PHPmyVisites->http://www.phpmyvisites.net]
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/article1510.html</lien> <!-- URI de documentation -->
 	<prefix> 
 	phpmv
 	</prefix>

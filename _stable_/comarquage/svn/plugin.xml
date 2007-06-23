@@ -23,7 +23,7 @@ Les param&#232;tres de connexion &#224; La Documentation fran&#231;aise sont aju
 Ce plugin n&#233;cessite le plugin boucles_xml
 N&#233;cessite SPIP 1.9.1 ou une version de d&#233;veloppement
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/article1513.html</lien> <!-- URI de documentation -->
 	<prefix> 
 	comarquage
 	</prefix>

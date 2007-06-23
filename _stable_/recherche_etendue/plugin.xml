@@ -40,7 +40,7 @@ _ Ciclo INDEX
 _ Filtro google_like	
 	</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/article2188.html</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	recherche_etendue_options.php
 	</options>

@@ -19,7 +19,7 @@ _ [C&#233;dric Morin->http://www.notre-ville.net]
 _ N&#233;cessite GD2 sur votre serveur
 _ Inserez la balise #ARTICLE_PDF dans votre squelette pour avoir un lien de t&#233;l&#233;chargement de l'article au format PDF
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/article2226.html</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	article_pdf_mes_options.php
 	</options>
