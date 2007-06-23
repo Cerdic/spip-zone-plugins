@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Interface Th&eacute;lia</nom>
+ 	<version>1.0</version>
+ 	<prefix>spip_thelia</prefix>
+ 	<auteur>Arnault Pachot[contact->mailto:apachot@openstudio.fr]</auteur>
+ 	<description>Plugin permettant d'utiliser les boulces Thélia dans les squelettes</description>
+ 	<etat>test</etat>
+ 	<fonction></fonction>
+ 	<pipeline>
+  		<nom>affichage_final</nom>
+  		<action>appeler_moteur_thelia</action>
+  		<inclure>spip_thelia_fonct.php</inclure>
+ 	</pipeline>
+ 	
+</plugin>
