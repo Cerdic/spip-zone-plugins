@@ -1,0 +1,13 @@
+#CACHE{24*3600}
+[description(#REM)<multi>
+<lg-fr>Affiche, pour un article, le logo de l'article, surtitre, titre, soustitre, date, auteur, introduction.
+</multi>]
+<BOUCLE_un_article(ARTICLES){id_article}>
+	<INCLURE{fond=#ENV{modele_logo}}{id_article=#ID_ARTICLE}>
+	[<p class="surtitre">(#SURTITRE)</p>]
+	<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+	[<p class="soustitre">(#SOUSTITRE)</p>]
+	<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+	[<div class="#EDIT{intro} texte introduction">(#INTRODUCTION)</div>]
+	<br class="nettoyeur" />
+</BOUCLE_un_article>

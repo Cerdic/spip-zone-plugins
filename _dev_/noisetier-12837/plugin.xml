@@ -1,0 +1,45 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[fr]Noisetier 0.1</multi>
+	</nom>
+	<icon>img_pack/noisetier-24.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+	Cent20, Joseph Larmarange, Mogwaï - 2007 - 
+	<multi>
+		[fr]Distribu&#233; sous licence GPL
+	</multi>
+	</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>
+	[fr] Gestionnaire de noisettes. Nécessite un plugin de thème pour noisetier pour fonctionner.
+	</multi>
+	</description>
+	<lien>http://groups.google.com/group/noisetier-dev</lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	noisetier_mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	noisetier_mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	noisetier
+	</prefix>
+	<install>inc/noisetier_install.php</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>noisetier_pipelines.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>

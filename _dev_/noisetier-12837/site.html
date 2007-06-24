@@ -1,0 +1,33 @@
+#CACHE{86400}
+<BOUCLE_site_principal(SITES){id_syndic}>
+[(#REM) Page affichée en cas d'id correct ]
+[(#REM) Déclaration du type de document, indispensable pour le navigateur web ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
+<BOUCLE_lang(RUBRIQUES){id_rubrique}><html dir="#LANG_DIR" lang="#LANG"></BOUCLE_lang>
+<head>
+[(#REM) Appel du modèle d'en-tête du plugin de thème]
+<INCLURE{fond=noisetier-head}{env}{page=site}>
+</head>
+<body id="site" class="page_site">
+[(#REM) Appel du modèle de corps du plugin de thème ]
+<INCLURE{fond=noisetier-body}{env}{page=site}>
+[(#REM) Balises html de fermeture de la page]
+</body>
+</html>
+</BOUCLE_site_principal>
+[(#REM) Page affichée en cas d'id correct ]
+[(#REM) Déclaration du type de document, indispensable pour le navigateur web ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+[(#REM) Appel du modèle d'en-tête du plugin de thème]
+<INCLURE{fond=noisetier-head}{env}{page=sites}>
+</head>
+<body id="sites" class="page_sites">
+[(#REM) Appel du modèle de corps du plugin de thème ]
+<INCLURE{fond=noisetier-body}{env}{page=sites}>
+[(#REM) Balises html de fermeture de la page]
+</body>
+</html>
+<//B_site_principal>

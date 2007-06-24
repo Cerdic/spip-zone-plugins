@@ -1,0 +1,13 @@
+<theme>
+	<nom>Th&egrave;me dist pour le noisetier</nom>
+	<auteur>Cent 20, Joseph Larmarange - 2007</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<type>themes</type>
+	<squelettes>noisetier</squelettes>
+	<description>
+	<multi>
+	[fr] Th&#232;me pour le plugin noisetier. Ce th&egrave;me est bas&eacute; sur la distribution dist livr&eacute;e en standard avec SPIP.
+	</multi>
+	</description>
+</theme>

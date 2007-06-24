@@ -1,0 +1,9 @@
+<theme>
+	<nom>Thème de test pour le d&eacute;veloppement du Noisetier</nom>
+	<auteur>Cent 20, Joseph Larmarange, Mogwaï - 2007</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<type>themes</type>
+	<squelettes>noisetier</squelettes>
+	<description></description>
+</theme>
