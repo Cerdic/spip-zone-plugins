@@ -1,0 +1,37 @@
+<plugin>
+	<nom>
+	Correcteur d'orthographe
+	</nom>
+	<auteur>Antoine Pitrou</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+
+		<div class='verdana2'><:ortho_avis_privacy:></div>
+		<div class='verdana2'><blockquote class='spip'><p>
+		<:ortho_avis_privacy2:>
+		</p></blockquote></div>
+
+	</description>
+	<lien>
+	</lien>
+	<prefix>
+	Ortho
+	</prefix>
+	<icon>images/ortho-24.gif</icon>
+	<pipeline>
+		<nom>boite_infos</nom>
+		<action>bouton_ortho</action>
+		<inclure>presentation_ortho.php</inclure>
+	</pipeline>
+
+	<version_base>0.1</version_base>
+	<install>inc/ortho_install.php</install>
+
+	<chemin dir='' type='prive' />
+	<necessite id='spip' version='[1.9257;]' />
+</plugin>
