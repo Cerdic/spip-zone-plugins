@@ -1,0 +1,1 @@
+#SET{selected,#CONFIG{inscription2/liste_inscription_evenement,'',''}}<select name="liste_inscription_evenement[]" multiple="multiple" size="5" id="liste_inscription_evenement">[(#CONFIG{plugin/AGENDA})<BOUCLE_agenda(MOTS){id_groupe=7}>	<option value="#ID_MOT"[(#ID_MOT|in_array{#GET{selected}}|?{ selected="selected"})]>	#TITRE	</option></BOUCLE_agenda>]</select>

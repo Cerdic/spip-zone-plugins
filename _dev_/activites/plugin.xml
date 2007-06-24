@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Inscription &agrave; des activit&eacute;s</nom>
+	<auteur>
+		&copy; ubu - 2007 - Distribu&eacute; sous licence GNU/LGPL
+	</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		Inscription aux événements enregistrés dans l'agenda et proposés comme activités à l'aide de ce plugin
+	</description>
+	<icon></icon>
+	<prefix>activites</prefix>
+	<fonctions>activites_mes_fonctions.php</fonctions> 
+	<necessite id='cfg' version='[1.0.2;]' />
+	<necessite id="WCalendar" version="[0.11;]" />
+	<necessite id="Agenda" version="[0.14;]" />
+	<necessite id="Inscription2" version="[0.1;]" />
+	<install>base/activites_installer.php</install>
+	
+</plugin>
