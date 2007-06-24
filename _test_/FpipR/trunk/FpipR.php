@@ -86,25 +86,27 @@ function FpipR_affiche_gauche($flux) {
 	  }*/
 	if($acces) {
 	  $to_ret = '<div>&nbsp;</div>';
-	  $to_ret .='<div style="z-index: 1;" class="bandeau_rubriques">
-<div style="position: relative;">
-<div style="position: absolute; top: -12px; left: 3px;">
-<font size="1" face="Verdana,Arial,Sans,sans-serif">
-<img alt="article-24" src="'.find_in_path('fpipr.gif').'"/>
-</font>
-</div>
-<div class="verdana2" style="border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; background-color: white; color: black;">
-<font size="1" face="Verdana,Arial,Sans,sans-serif">
-   <b>'._T('fpipr:Flickr').'</b>
-		</font>
+	  $to_ret .='
+<div style="z-index: 1;" class="bandeau_rubriques">
+	<div style="position: relative;">
+		<div style="position: absolute; top: -12px; left: 3px;">
+			<font size="1" face="Verdana,Arial,Sans,sans-serif">
+				<img alt="article-24" src="'.find_in_path('fpipr.gif').'"/>
+			</font>
 		</div>
-		</div>';
+		<div class="verdana2" style="border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; background-color: white; color: black;">
+			<font size="1" face="Verdana,Arial,Sans,sans-serif">
+   				<b>'._T('fpipr:Flickr').'</b>
+			</font>
+		</div>
+	</div>';
+	
 	  $to_ret .= '<div class="plan-articles">';
 
 	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_photos',"type=$type&id=$id",true).'">'._T('fpipr:ajouter_photos').'</a>';
 	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_sets',"type=$type&id=$id",true).'">'._T('fpipr:ajouter_sets').'</a>';
 	  $to_ret .= '</div>';
-	  $to_ret .= '</div></div>';
+	  $to_ret .= '</div>';
 
 	  $flux['data'] .= $to_ret;
 
