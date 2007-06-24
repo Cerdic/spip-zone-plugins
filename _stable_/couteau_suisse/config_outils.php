@@ -334,8 +334,8 @@ if (isset(\$_GET['var_recherche'])) {
 }",
 	'code:css' => "div.pagination {display:block; text-align:center; }
 div.pagination img { border:none; margin:0pt; padding:0pt; }",
-	// inserer : $table_des_traitements['TEXTE'][]= 'decouper_en_pages(propre(%s))';
-	'traitement:TEXTE:post_propre' => 'decouper_en_pages',
+	// inserer : $table_des_traitements['TEXTE'][]= 'cs_decoupe(propre(%s))';
+	'traitement:TEXTE:post_propre' => 'cs_decoupe',
 	'categorie' => 'typo-racc',
 ));
 

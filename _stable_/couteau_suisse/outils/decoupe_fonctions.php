@@ -99,7 +99,7 @@ function decouper_en_pages_rempl($texte) {
 	return $sommaire.$pagination1.$page.$pagination2;
 }
 
-function decouper_en_pages($texte){
+function cs_decoupe($texte){
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// verification des metas qui stockent les liens d'image
 	if (!isset($GLOBALS['meta']['cs_decoupe']) || isset($GLOBALS['var_mode'])) {
@@ -107,6 +107,11 @@ function decouper_en_pages($texte){
 		decoupe_installe();
 	}
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
+}
+
+// Compatibilite
+function decouper_en_pages($texte){
+	return cs_decoupe($texte);
 }
 
 ?>
