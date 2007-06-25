@@ -35,7 +35,9 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 		$ancre = "\n<a id=\"outil_sommaire_$index\" name=id=\"outil_sommaire_$index\"></a>";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
 			$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($regs[2][$i]));
-			$texte = substr($texte, 0, $pos2) . $ancre . $regs[1][$i] . $haut . $titre . substr($texte, $pos2 + strlen($regs[1][$i]) + strlen($regs[2][$i]));
+			$texte = substr($texte, 0, $pos2) . $ancre . $regs[1][$i] 
+				. $haut	. $titre 
+				. substr($texte, $pos2 + strlen($regs[1][$i]) + strlen($regs[2][$i]));
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			$lien = couper($regs[2][$i], _sommaire_NB_CARACTERES);
 			$titre = attribut_html(propre(couper($regs[2][$i], 100)));
@@ -51,6 +53,7 @@ function sommaire_d_article_rempl($texte) {
 	if (strpos($texte, '<h3')===false || strpos($texte, _sommaire_SANS_SOMMAIRE)!==false) 
 		return sommaire_imprimer($texte);
 	$sommaire = ''; $i = 1; $nbh3 = 0;
+	$texte0 = $texte;
 	// couplage avec l'outil 'decoupe_article'
 	if(defined('_decoupe_SEPARATEUR')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
@@ -60,7 +63,7 @@ function sommaire_d_article_rempl($texte) {
 			$texte = join(_decoupe_SEPARATEUR, $pages);
 		}
 	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
-	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) return $texte;
+	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) return $texte0;
 
 	$img = find_in_path('img/sommaire/coin.gif');
 	$sansfond = !$img || strpos($texte, _sommaire_SANS_FOND)!==false;
