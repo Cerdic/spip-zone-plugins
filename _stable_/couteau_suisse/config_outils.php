@@ -348,7 +348,7 @@ add_outil( array(
 	'id' => 'sommaire',
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",
 	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
-	'code:css' => "div.cs_sommaire {display:block; float:right; /*position:relative;*/ margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; /*width:160px;*/ max-height:350px; }",
+	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
 	'traitement:TEXTE:post_propre' => 'sommaire_d_article',
 	'categorie' => 'typo-corr',
 ));
