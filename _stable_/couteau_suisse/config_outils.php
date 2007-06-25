@@ -139,7 +139,7 @@ add_variable( array(
 	'format' => 'chaine',
 	'radio' => array('basiques' => 'icone_interface_simple', 'avancees' => 'icone_interface_complet'),
 	'defaut' => '"avancees"',
-	'code' => "\$GLOBALS['set_options']=%s;",
+	'code' => "\$_GET['set_options']=\$GLOBALS['set_options']=%s;",
 ));
 add_outil( array(
 	'id' => 'set_options',
