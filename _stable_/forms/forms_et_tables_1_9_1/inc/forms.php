@@ -440,8 +440,12 @@
 		$valeurs = array();
 		$champs = array();
 		foreach($structure as $champ=>$infos){
-			if (!$c) 
-				$val = _request($champ);
+			if (!$c){
+				if ($infos['type'] == 'fichier' AND isset($_FILES[$champ]['tmp_name']))
+					$val = $_FILES[$champ];
+				else
+					$val = _request($champ);
+			}
 			else
 				$val = isset($c[$champ])?$c[$champ]:NULL;
 			if ($val!==NULL){
