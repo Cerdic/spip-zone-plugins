@@ -163,6 +163,8 @@ function is_pipeline_outil($pipe, &$set_pipe) {
 function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises) {
 	if ($ok = preg_match(',^traitement:([A-Z]+):(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t))
 		$set_traitements_utilises[$t[1]][$t[3]][$t[2]][] = $fonction;
+	elseif ($ok = preg_match(',^traitement:([A-Z]+)$,', $traitement, $t))
+		$set_traitements_utilises[$t[1]][0][] = $fonction;
 	return $ok;
 }
 
@@ -278,8 +280,6 @@ function cs_initialise_includes() {
 			if ($temp=cs_lire_fichier_php("outils/{$inc}_fonctions.php")) {
 				$infos_pipelines['code_fonctions'][] = $temp;
 				// existe-t-il un filtre 'monoutil_imprimer' ?
-				//eval($temp);
-				// include_spip("outils/{$inc}_fonctions");
 				$f = $inc.'_imprimer';
 				if (($f)) {
 					// prise en compte du filtre 'monoutil_imprimer' par le filtre du plugin : 'cs_imprimer'
@@ -301,9 +301,12 @@ function cs_initialise_includes() {
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise){
 		foreach($balise as $f=>$fonction) {
-			$pre = isset($fonction['pre'])?join('(', $fonction['pre']).'(':'';
-			$post = isset($fonction['post'])?join('(', $fonction['post']).'(':'';
-			$traitements_utilises[$b][$f] = $post.$f.'('.$pre;
+			if ($f===0)	$traitements_utilises[$b][$f] = $fonction[0].'(';
+			else {
+				$pre = isset($fonction['pre'])?join('(', $fonction['pre']).'(':'';
+				$post = isset($fonction['post'])?join('(', $fonction['post']).'(':'';
+				$traitements_utilises[$b][$f] = $post.$f.'('.$pre;
+			}
 		}
 		$temp = "\$GLOBALS['table_des_traitements']['$b'][]='" . join('(', $traitements_utilises[$b]).'%s';
 		$traitements_utilises[$b] = $temp . str_repeat(')', substr_count($temp, '(')) . "';";
