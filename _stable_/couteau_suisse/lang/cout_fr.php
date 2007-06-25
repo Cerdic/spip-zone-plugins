@@ -260,7 +260,8 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2135]",
 
 // ---------------------------------------------------------------------------
 	'sommaire:nom' => 'Sommaire en d&eacute;but d\'article',
-	'sommaire:description' => "Construit syst&eacute;matiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourci SPIP (intertitres de la forme :<code>{{{Un autre titre}}}</code>). Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).<br />Attention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>. Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.",
+	'sommaire:description' => "Construit syst&eacute;matiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourci SPIP (intertitres de la forme :<code>{{{Un autre titre}}}</code>). Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).\n\nAttention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.\n\nCet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.
+[[Largeur du sommaire (9 &agrave; 99 caract&egrave;res) :->%lgr_sommaire%]]",
 	'sommaire:aide' => 'Un article sans sommaire&nbsp;: @interdit@',
 	'sommaire' => 'Sommaire',
 

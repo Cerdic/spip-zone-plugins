@@ -344,9 +344,15 @@ div.pagination img { border:none; margin:0pt; padding:0pt; }",
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
 include_spip('inc/texte');
 $code = str_replace("'", "\'", cs_code_echappement("<!--  -->\n", 'SOMMAIRE'));
+add_variable( array(
+	'nom' => 'lgr_sommaire',
+	'format' => 'nombre',
+	'defaut' => 30,
+	'code:%s>=9 && %s<=99' => "define('_sommaire_NB_CARACTERES', %s);",
+));
 add_outil( array(
 	'id' => 'sommaire',
-	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",
+	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\n%%lgr_sommaire%%",
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}", //div.decoupe_haut {display:none;}",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:js' => '$(document).ready(function () { if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',

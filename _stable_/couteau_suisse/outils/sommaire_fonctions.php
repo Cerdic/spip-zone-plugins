@@ -1,6 +1,5 @@
 <?php
 
-define('_sommaire_NB_CARACTERES', 30);
 define('_sommaire_NB_TITRES_MINI', 2);
 define('_sommaire_SANS_FOND', '[!fond]');
 
@@ -19,6 +18,7 @@ $GLOBALS['cs_introduire'][] = 'sommaire_imprimer';
 // renvoie le sommaire d'une page d'article
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index) $index=0;
+	define('_sommaire_NB_CARACTERES', 30);
 	// image de retour au sommaire
 	$titre = _T('cout:sommaire');
 	$img = 'spip_out.gif';
