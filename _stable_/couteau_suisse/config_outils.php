@@ -347,8 +347,10 @@ $code = str_replace("'", "\'", cs_code_echappement("<!--  -->\n", 'SOMMAIRE'));
 add_outil( array(
 	'id' => 'sommaire',
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');",
+	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}", //div.decoupe_haut {display:none;}",
+	// s'il y a un sommaire, on cache la navigation haute sur les pages
+	'code:js' => '$(document).ready(function () { if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',
 	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
-	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
 	'traitement:TEXTE:post_propre' => 'sommaire_d_article',
 	'categorie' => 'typo-corr',
 ));
