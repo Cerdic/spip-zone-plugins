@@ -87,7 +87,6 @@ text-align:center;">'._T('cout:sommaire').'</div>
 list-style-image:none;
 list-style-position:outside;
 list-style-type:none;
-/*list-style-type:square;*/
 margin:0.3em 0.5em 0.1em 0.7em;
 padding:0pt;">'.$sommaire.'</ul></div></div>';
 
