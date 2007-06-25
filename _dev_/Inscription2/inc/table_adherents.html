@@ -310,13 +310,13 @@ $().ready(function() {
 				$cle = str_replace("_table", "", $cle);
 				if($cle == 'username')
 					$cle = 'login';
-				if(!empty($data[$cle])){
+				if(!empty($data[$cle]))
 					echo '<td>'.$data[$cle].'</td>';
-				}
-				else echo '<td> </td>';
+				else 
+					echo '<td> </td>';
 			}
 		}
-		echo '<td><a href=""><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" title="'._T('inscription2:editer_adherent').'"></a></td>';
+		echo '<td><a href="?exec=editer_adherent&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" title="'._T('inscription2:editer_adherent').'"></a></td>';
 		
 		if($data['statut']=='0minirezo')
 			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif"';
