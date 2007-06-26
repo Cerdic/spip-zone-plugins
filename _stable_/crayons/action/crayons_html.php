@@ -180,7 +180,7 @@ class Crayon {
     function formulaire($contexte = array(), $inputAttrs = array()) {
     	include_spip('inc/filtres');
         return liens_absolus('<form class="formulaire_spip" method="post" action="' .
-        	str_replace('crayons_html', 'crayons_store', self(true)) . '">' .
+        	url_absolue(parametre_url(self(),'action', 'crayons_store')) . '">' .
         	$this->code() .
 	        $this->input($contexte, $inputAttrs) .
         	$this->boutons() . // array('edit'=>'')
