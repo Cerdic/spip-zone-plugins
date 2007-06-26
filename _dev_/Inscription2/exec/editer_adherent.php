@@ -1,6 +1,15 @@
 <?php
 
 function exec_editer_adherent(){
+	
+	global $connect_statut;
+	global $connect_toutes_rubriques;
+	if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
+		echo _T('avis_non_acces_page');
+		fin_page();
+		exit;
+	}
+	
 	$id = _request('id');
 	$act = _request('act');
 
@@ -19,10 +28,48 @@ function exec_editer_adherent(){
 				else
 					$var_user['b.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
 			}
+			elseif ($val!='' and $cle == 'accesrestreint'){
+				$aux = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id");
+				while($q = spip_fetch_array($aux))
+					$acces[]=$q['id_zone'];
+				$acces_array = $_POST['acces'];
+				if(!empty($acces) and empty($acces_array))
+					spip_query("delete from spip_zones_auteurs where id_auteur = $id");
+				elseif(empty($acces) and !empty($acces_array))
+					spip_query("insert into spip_zones_auteurs (id_zone, id_auteur) values (".join(", $id), (", $acces_array).", $id)");
+				elseif(!empty($acces) and !empty($acces_array)){
+					$diff1 = array_diff($acces_array, $acces);
+					$diff2 = array_diff($acces, $acces_array);
+					if (!empty($diff1))
+						spip_query("insert into spip_zones_auteurs (id_zone, id_auteur) values (".join(", $id), (", $diff1).", $id)");
+					if(!empty($diff2))
+						foreach($diff2 as $val)
+							spip_query("delete from spip_zones_auteurs where id_auteur= $id and id_zone = $val");
+				}
+			}elseif ($val!='' and $cle == 'newsletter'){
+				$aux = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
+				while($q = spip_fetch_array($aux))
+					$listes[]=$q['id_liste'];
+				$listes_array = $_POST['news'];
+				if(!empty($listes) and empty($listes_array))
+					spip_query("delete from spip_auteurs_listes where id_auteur = $id");
+				elseif(empty($listes) and !empty($listes_array))
+					spip_query("insert into spip_auteurs_listes (id_liste, id_auteur) values (".join(", $id), (", $listes_array).", $id)");
+				elseif(!empty($listes) and !empty($listes_array)){
+					$diff1 = array_diff($listes_array, $listes);
+					$diff2 = array_diff($listes, $listes_array);
+					if (!empty($diff1))
+						spip_query("insert into spip_auteurs_listes (id_liste, id_auteur) values (".join(", $id), (", $diff1).", $id)");
+					if(!empty($diff2))
+						foreach($diff2 as $val)
+							spip_query("delete from spip_auteurs_listes where id_auteur= $id and id_liste = $val");
+				}
+			}
 		}
 		$q1 = spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id'");
 		if($q1)
 			$message = "adherent mis à jour";
+		
 	}
 
 
@@ -37,11 +84,21 @@ function exec_editer_adherent(){
 			else 
 				$var_user['b.'.$cle] = '1';
 		}
-		elseif($cle=='accesrestreint'){
+		elseif($cle=='accesrestreint' and $val != ''){
+			$zones = spip_query("select id_zone, titre from spip_zones");
 			$acces = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id");
+			while($q = spip_fetch_array($acces))
+				$aux1[]=$q['id_zone'];
+			while($q = spip_fetch_array($zones))
+				$aux2[] = $q;
 		}
-		elseif($cle=='newsletter'){
-			$news = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
+		elseif($cle=='newsletter' and $val != ''){
+			$news = spip_query("select id_liste, titre from spip_listes");
+			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
+			while($q = spip_fetch_array($listes))
+				$aux3[]=$q['id_liste'];
+			while($q = spip_fetch_array($news))
+				$aux4[] = $q;
 		}
 	}
 
@@ -64,6 +121,28 @@ function exec_editer_adherent(){
 	foreach ($query as $cle => $val){
 		echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
 		echo "<td><input type='text' name='$cle' value='$val'><br /></td><tr/>"; 
+	}
+	if($news){
+		echo "<tr><td><strong>"._T('inscription2:newsletter')."</strong></td><td>";
+		echo "<select name='news[]' id='news' multiple>";
+		foreach($aux4 as $val){
+			if (in_array($val['id_liste'], $aux3))
+				echo "<option value='".$val['id_liste']."' selected>".$val['titre']."</option>";
+			else 
+				echo "<option value='".$val['id_liste']."'>".$val['titre']."</option>";
+		}
+		echo "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
+	}
+	if($zones){
+		echo "<tr><td><strong>"._T('inscription2:accesrestreint')."</strong></td><td>";
+		echo "<select name='acces[]' id='acces' multiple>";
+		foreach($aux2 as $val){
+			if (in_array($val['id_zone'], $aux1))
+				echo "<option value='".$val['id_zone']."' selected>".$val['titre']."</option>";
+			else 
+				echo "<option value='".$val['id_zone']."'>".$val['titre']."</option>";
+		}
+		echo "</select><br/><a onclick=\"$('#acces').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 	}
 	echo "</table>";
 	echo "<input type='submit' value='Valider'></form>";
