@@ -3,12 +3,16 @@
 	<nom>mes_fichiers.zip</nom>
 	<prefix>mes_fichiers</prefix>
 	<description>
-Pour cr&eacute;er ou restaurer une copie compl&egrave;te de votre spip dans [tmp/mes_fichiers.zip->../tmp/mes_fichiers.zip] dans tmp/
-	
-[Sauvegarder->../?action=mes_fichiers]
+Ce plugin fabrique un fichier d'archives contenant le dernier dump de sauvegarde, le dossier <code>squelettes/</code>, le dossier <code>IMG/</code> et le fichier <code>mes_options.php</code>
 
-Restituer: la m&egrave;me avec ?action=decompresser_mes_fichiers
+Pour cr&eacute;er ou restaurer une copie compl&egrave;te de votre spip dans le fichier [mes_fichiers.zip->../tmp/mes_fichiers.zip] dans <code>tmp/</code>
 
-[Cr&#233;er, Mettre &#224; Jour ou Restaurer->./?exec=admin_tech]
+[Sauvegarder->../spip.php?action=mes_fichiers]
+
+[Restituer->../spip.php?action=decompresser_mes_fichiers]
 	</description>
+	<chemin dir='' />
+	<etat>stable</etat>
+	<lien>http://www.spip-contrib.net/Mes-fichiers</lien>
+	<auteur>James - GNU/GPL (c) 2007</auteur>
 </plugin>

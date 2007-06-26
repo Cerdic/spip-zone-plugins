@@ -3,6 +3,25 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_mes_fichiers() {
+
+	//securite
+	if(@function_exists('autoriser')) {
+		if(!autoriser('sauvegarder')) {
+			$paspermis = true;
+		}
+	}
+	//vieille methode pour compatiblite ascendante
+	else {	
+		global $connect_statut;		global $connect_toutes_rubriques;		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
+			$paspermis = true;
+		}
+	}
+
+	if($paspermis) {
+		include_spip('inc/minipres');
+		echo minipres();		exit;
+	}
+	
 	include_spip('inc/pclzip');
 	$mes_options = defined('_FILE_OPTIONS') ? _FILE_OPTIONS : 'ecrire/mes_options.php';
 	$IMG = defined('_DIR_IMG') ? _DIR_IMG: 'IMG/';
