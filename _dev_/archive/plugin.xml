@@ -6,7 +6,7 @@
 	<auteur>Camille Lafitte [contact->mailto:cam.lafit@zerttyu.net]
 _ [mon site->http://km.azerttyu.net]</auteur>
 	<description>
-		Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL.</br> Pensez à utiliser le critére <b>{archive}</b> ou bien <b>archive seulement</b>
+		Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL.<br /> Pensez &agrave; utiliser le crit&egrave;re <b>{archive}</b> ou bien <b>archive seulement</b>
 	</description>
 	<lien>[->http://www.spip-contrib.net/Plugin-Archive]</lien>
 	<fonctions>
