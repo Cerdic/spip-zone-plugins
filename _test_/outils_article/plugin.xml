@@ -26,13 +26,13 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
         
 					[fr]ins&eacute;rer une panoplie d'outils pour vos articles sous forme de barre ou de boite gr&acirc;ce &agrave; deux noisettes &agrave; ins&eacute;rer dans vos squelettes : 
 					<ul>
-					<li><code><INCLURE{fond=inc-barre-outils}{id_article}></code> pour la version en barre</li>
-					<li><code><INCLURE{fond=inc-boite-outils}{id_article}></code> pour la version en boite</li>
+					<li><code>&lt;INCLURE{fond=inc-barre-outils}{id_article}&gt;</code> pour la version en barre</li>
+					<li><code>&lt;INCLURE{fond=inc-boite-outils}{id_article}&gt;</code> pour la version en boite</li>
 					</ul>
 					[es]insertar una panoplia de herramientas para sus artículos en forma de barra o de cojea con dos avellanas que deben insertarse en sus esqueletos : 
 					<ul>
-					<li><code><INCLURE{fond=inc-barre-outils}{id_article}></code> para la versi&oacute;n barra </li>
-					<li><code><INCLURE{fond=inc-boite-outils}{id_article}></code> para la versi&oacute;n cojea </li>
+					<li><code>&lt;INCLURE{fond=inc-barre-outils}{id_article}&gt;</code> para la versi&oacute;n barra </li>
+					<li><code>&lt;INCLURE{fond=inc-boite-outils}{id_article}&gt;</code> para la versi&oacute;n cojea </li>
 					</ul>
 			</multi>
           
