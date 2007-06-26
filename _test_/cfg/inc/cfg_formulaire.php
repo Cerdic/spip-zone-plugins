@@ -98,7 +98,7 @@ class cfg_formulaire
 			return _L('erreur_lecture_') . $nom;
 		}
 		preg_replace_callback('/(\[\(#REM\) ([a-z0-9]\w+)(\*)?=)(.*?)\]/sim',
-					array($this, 'post_params'), $this->controldata);
+					array(&$this, 'post_params'), $this->controldata);
 
 		include_spip('public/assembler');
 		$fond_compile = recuperer_fond('fonds/cfg_' . $this->vue);

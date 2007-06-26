@@ -32,7 +32,7 @@ boucle sur les rubriques racine et inclusion des champs de formulaire par &lt;IN
 		<option value="oui"[ selected="(#ENV{bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{selected})"]><:oui:></option>
 	</select>
 	
-	[(#CONFIG{testinclure/bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{' ',''})
+	[(#ENV{bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{' ',''})
 		<blockquote>
 		<INCLURE{fond=fonds/inc-articles-rubrique}{nom=articles_rubrique_#ID_RUBRIQUE}{label=Articles de #TITRE}{cfg_rep=testinclure}{id_rubrique}>
 		</blockquote>
