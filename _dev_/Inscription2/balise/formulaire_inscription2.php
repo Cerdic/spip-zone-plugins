@@ -65,7 +65,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 		include(find_in_path("inc/domaines.php"));
 		$var_user['sites'] = $domaine[$var_user['dom']]['sites'] ;
 		$var_user['zone'] = $domaine[$var_user['dom']]['zones'] ;
-		$aux = !$var_user['sites'];
+		$aux = !empty($var_user['sites']);
 		foreach($var_user['sites'] as $val)
 			$aux = ($aux or ereg("^.*".$val."$", $var_user[email]));
 		if(!$aux)

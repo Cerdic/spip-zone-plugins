@@ -49,7 +49,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 				$var_user['zones'] = _request('zones');
 				
 			elseif( $cle == 'domaines')
-				$dom = _request($cle);
+				$var_user['dom'] = _request($cle);
 
 			else
 				$var_user[$cle] = _request($cle);
@@ -59,10 +59,12 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 	$var_user['statut'] = _request('statut');
 	$commentaire = true;
 	$aux = true;
-	if($dom){
-		$aux = false;
-		include(_DIR_PLUGIN_INSCRIPTION2."/inc/domaines.php");
-		foreach($domaine[$dom] as $val)
+	if($var_user['dom']){
+		include(find_in_path("inc/domaines.php"));
+		$var_user['sites'] = $domaine[$var_user['dom']]['sites'] ;
+		$var_user['zone'] = $domaine[$var_user['dom']]['zones'] ;
+		$aux = !empty($var_user['sites']);
+		foreach($var_user['sites'] as $val)
 			$aux = ($aux or ereg("^.*".$val."$", $var_user[email]));
 		if(!$aux)
 			$message = _T('inscription2:mail_non_domaine');
@@ -103,7 +105,7 @@ function inscription2_nouveau_pass($declaration){
 
 	//insertion des données ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
-		if($cle == 'newsletters' or $cle == 'zones')
+		if($cle == 'newsletters' or $cle == 'zones' or $cle == 'dom' or $cle =='sites' or $cle == 'zone')
 			continue;
 		if ($cle == 'email' or $cle == 'nom' or $cle == 'bio' or $cle == 'statut' or $cle == 'login' or $cle =='pass')
 			$auteurs[$cle] = $val;
@@ -127,6 +129,11 @@ function inscription2_nouveau_pass($declaration){
 		foreach($declaration['zones'] as $value)
 			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
 	}
+	if(isset($declaration['dom']) and $declaration['zone'] and lire_config('plugin/ACCESRESTREINT')){
+		foreach($declaration['zone'] as $value)
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
+	}
+	
 	$n = spip_abstract_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	
 	return $declaration;}

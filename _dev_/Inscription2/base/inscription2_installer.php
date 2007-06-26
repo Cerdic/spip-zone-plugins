@@ -17,7 +17,7 @@ function inscription2_verifier_base(){
 		spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, id_auteur bigint NOT NULL, FOREIGN KEY (id_auteur) REFERENCES spip_auteurs (id_auteur));");
 	}
 	$desc = spip_abstract_showtable($table_nom, '', true);
-	if($desc['KEY']['PRIMARY KEY']!='id'){
+	if($desc['key']['PRIMARY KEY']!='id'){
 		spip_query("ALTER TABLE ".$table_nom." DROP PRIMARY KEY");
 		if(!isset($desc['fields']['id']))
 			spip_query("ALTER TABLE ".$table_nom." ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY");
@@ -28,11 +28,17 @@ function inscription2_verifier_base(){
 	//ajouts des différents champs
 	$desc = spip_abstract_showtable($table_nom, '', true);
 	foreach(lire_config('inscription2') as $cle => $val) {
-		if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'naissance' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categorie|zone|newsletter).*$", $cle) and !ereg("^.+_(fiche|table).*$", $cle))
+		$cle = ereg_replace("_(fiche|table).*$","", $cle);
+		if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'naissance' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle)){
 			spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
-		if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance')
+			$desc['field'][$cle] = "TEXT NOT NULL";
+		}if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance'){
 			spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
+			$desc['field'][$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
+		}
 	}
+	if($GLOBALS['meta']['spiplistes_version'])
+		spip_query("ALTER TABLE `".$table_nom."` ADD `spip_listes_format` VARCHAR(8)");
 	$s = spip_query("SELECT a.id_auteur FROM spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur WHERE b.id_auteur is null");
 	while($q = spip_fetch_array($s))
 		$a[] = $q['id_auteur'];

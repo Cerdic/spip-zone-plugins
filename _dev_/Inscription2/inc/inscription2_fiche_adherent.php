@@ -34,6 +34,7 @@ function inscription2_fiche_adherent($id_adherent){
 					$toto.= '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id_adherent.' ">'.$val.'</span>';
 				$toto.= "\n</div>";  
 			}
+			$toto .=" <form name='lala' action='?exec=editer_adherent&id=".$id_adherent."' method='post'><input type='submit' value="._T('inscription2:editer_adherent')." /></form>";
 			$toto .= fin_block();
 			$toto .= fin_cadre_enfonce(true);
 		}

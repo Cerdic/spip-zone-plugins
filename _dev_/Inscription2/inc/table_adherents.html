@@ -242,9 +242,12 @@ $().ready(function() {
 	}
 	if($act=='net'){
 		$desc = spip_abstract_showtable('spip_auteurs_elargis', '', true);
-		foreach(lire_config('inscription2') as $cle =>$val){
-			if($val=='' and isset($desc['field'][$cle]))
-				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);}
+		foreach($desc['field'] as $cle =>$val){
+			if(!(lire_config('inscription2/'.$cle) or lire_config('inscription2/'.$cle.'_fiche') 
+				or lire_config('inscription2/'.$cle.'_fiche_mod') or lire_config('inscription2/'.$cle.'_table')) 
+				and $cle != 'id' and $cle != 'id_auteur' and $cle != 'spip_listes_format')
+				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);
+		}
 	}
 	echo '<td><strong><a href="'.$url.'&ordre=id_auteur">ID</a></strong></td>';
 	if(lire_config('inscription2/nom_table')){
@@ -332,7 +335,7 @@ $().ready(function() {
 		echo '</tr>';
 		
 	}
-	$query = spip_query("SELECT id_auteur FROM spip_auteurs WHERE $critere");
+	$query = spip_query("SELECT a.id_auteur FROM spip_auteurs a WHERE $critere");
 	$nombre_selection=spip_num_rows($query);
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 
