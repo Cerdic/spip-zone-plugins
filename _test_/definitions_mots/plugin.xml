@@ -18,11 +18,10 @@ Recherche chaque mot clef pr&eacute;sent dans le texte et propose un lien intera
 Ce plugin a &eacute;t&eacute; developp&eacute; dans le cadre du projet {{Casa d'Art}} : site internet p&eacute;dagogique autour des m&eacute;tiers d'art du plateau de la Chaise-Dieu en Haute-Loire (Auvergne). 
 
 {{{Description}}}
-<img4057|left> Ce plugin met automatiquement en surbrillance tous les mots clefs du site qui sont pr&eacute;sents dans un texte. Le visiteur du site est alors invit&eacute; &agrave; cliquer sur le mot clefs pour en afficher sa d&eacute;finition (r&eacute;sum&eacute;).
-
+Ce plugin met automatiquement en surbrillance tous les mots clefs du site qui sont pr&eacute;sents dans un texte. Le visiteur du site est alors invit&eacute; &agrave; cliquer sur le mot clefs pour en afficher sa d&eacute;finition (r&eacute;sum&eacute;).
 
 Une petite fenêtre s'affiche alors &agrave; l'interieur du texte et pr&eacute;sente un r&eacute;sum&eacute; de la d&eacute;finition du mot clefs. Le visiteur peut ensuite choisir de fermer cette fenetre ou bien d'en savoir plus sur le mot clefs et d'afficher ainsi la d&eacute;finition complète. C'est la page {mot} qui sera alors appel&eacute;e.
-<img4058|center>
+
 
 
 {{{Installation}}}
@@ -35,7 +34,7 @@ Vous trouverez un exemple d'utilisation de ce plugin sur le site de Casa d'Art :
 
 {{{Licence}}}
 Licence GNU/GPL. 
-Copyright (c) 2007 [Casa d'Art->http://www.casadart.fr] & [OpenStudio->http://www.openstudio.fr]
+Copyright (c) 2007 [Casa d'Art->http://www.casadart.fr] &amp; [OpenStudio->http://www.openstudio.fr]
 
 </description>
 	<lien>http://www.spip-contrib.net/Afficher-les-definitions-de-mots</lien> <!-- URI de documentation -->
