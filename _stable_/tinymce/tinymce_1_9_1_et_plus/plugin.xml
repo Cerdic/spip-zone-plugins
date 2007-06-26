@@ -4,20 +4,20 @@
 	<version>0.3.1 (pour 1.9.1 et +)</version>
 	<etat>stable</etat>
 	<description>
-{{Editeur WYSIWYG TinyMCE}}<br>
-Installe TinyMCE avec filemanager (gestion de fichiers) et ibrowser (gestion d'images)<br>
-(par défaut, stocke les images dans "images/librairie/" et les fichiers dans "/documents/")<br>
-Telecharge TinyMCE et les packs de langues specifies depuis Internet et l'installe.<br>
-Si vous souhaitez avoir un rendu sur le back-office avec les styles du site, <br>
-il est necessaire de modifier Spip pour lui ajouter un id sur une div de l espace prive<br>
- (non obligatoire, le plugin focntionnera, meme sans cette modif) :<br>
-- Modifier le fichier ecrire/exec/articles.php pour ajouter a la div de la ligne 615 un id contenu_article<br>
-  Modifier le fichier ecrire/exec/breves_voir.php pour ajouter a la table de la ligne 90 un id contenu_article<br>
-  Un ticket est ouvert sur Spip-Trac pour integration automatique de cet id dans une prochaine<br>
+{{Editeur WYSIWYG TinyMCE}}<br />
+Installe TinyMCE avec filemanager (gestion de fichiers) et ibrowser (gestion d'images)<br />
+(par d&eacute;faut, stocke les images dans "images/librairie/" et les fichiers dans "/documents/")<br />
+Telecharge TinyMCE et les packs de langues specifies depuis Internet et l'installe.<br />
+Si vous souhaitez avoir un rendu sur le back-office avec les styles du site, <br />
+il est necessaire de modifier Spip pour lui ajouter un id sur une div de l espace prive<br />
+ (non obligatoire, le plugin focntionnera, meme sans cette modif) :<br />
+- Modifier le fichier ecrire/exec/articles.php pour ajouter a la div de la ligne 615 un id contenu_article<br />
+  Modifier le fichier ecrire/exec/breves_voir.php pour ajouter a la table de la ligne 90 un id contenu_article<br />
+  Un ticket est ouvert sur Spip-Trac pour integration automatique de cet id dans une prochaine<br />
   version de spip : http://trac.rezo.net/trac/spip/ticket/771
-- Configurer ensuite TinyMCE selon votre convenance (cf. http://wiki.moxiecode.com/index.php/TinyMCE:Index)<br>
-- Creer les styles necessaires dans la feuilles de styles "plugins/tinymce/config/tiny_mce_style.css"<br>
-  (les deux premiers styles sont obligatoires afin que les suivants soient affiches correctement)<br>
+- Configurer ensuite TinyMCE selon votre convenance (cf. http://wiki.moxiecode.com/index.php/TinyMCE:Index)<br />
+- Creer les styles necessaires dans la feuilles de styles "plugins/tinymce/config/tiny_mce_style.css"<br />
+  (les deux premiers styles sont obligatoires afin que les suivants soient affiches correctement)<br />
 	</description>
 	<lien>[http://www.acti.fr]</lien> <!-- URL de documentation -->
 	<prefix>tinymce_acti</prefix>
