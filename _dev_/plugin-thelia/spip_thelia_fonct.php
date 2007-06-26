@@ -2,12 +2,13 @@
 
 function spip_thelia_appeler_moteur_thelia($texte)
 {
-?>
-<?php 
+	?>
+<?php
 foreach ($_POST as $key => $value) $$key = $value;
 foreach ($_GET as $key => $value) $$key = $value;
 ?>
-<?php 	include_once("classes/Navigation.class.php");
+<?php
+	include_once("classes/Navigation.class.php");
 
 	session_start();
 
@@ -15,7 +16,7 @@ foreach ($_GET as $key => $value) $$key = $value;
 	
 	/* Le fichier html associŽ au php ( fond ) est parsŽ afin de subsituer les informations au bon endroit */
 
-	include_once("fonctions/boucles.php");
+	//include_once("fonctions/boucles.php");
 	include_once("fonctions/substitutions.php");
 	include_once("fonctions/action.php");
 	include_once("fonctions/divers.php");
@@ -29,9 +30,16 @@ foreach ($_GET as $key => $value) $$key = $value;
 	include_once("classes/Promo.class.php");
 	include_once("classes/Perso.class.php");
 	include_once("classes/Smtp.class.php");
+	include_once("classes/Rubrique.class.php");
+	include_once("classes/Produit.class.php");
+	include_once("classes/Produitdesc.class.php");
 	include_once("fonctions/parseur.php");
 	include_once("fonctions/fonctsajax.php");
 	include_once("client/fonctperso/perso.php");
+	include_once(_DIR_PLUGINS."plugin-thelia/boucles-thelia.php");
+	
+$racine = $id_rubrique;
+$pageret=1;
 
 	include_once("lib/Sajax.php");
 	
@@ -58,12 +66,13 @@ function analyse($res){
 
 	$res = preg_replace("|<THELIA([^>]*)>\n|Us", "<THELIA\\1>", $res);
 	
+	
 	while(strstr($res, "<THELIA")) {
 		$boucles = pre($res);
 		$res = boucle_simple($res, $boucles);
 		$res = post($res);
 	}
-
+	
 	// boucles avec sinon
 	$res = str_replace("BTHELIA", "THELIA", $res);
 	$res = boucle_sinon(explode("\n", $res));
@@ -75,10 +84,9 @@ function analyse($res){
 		$res = boucle_simple($res, $boucles);
 		$res = post($res);
 	}
-	
 	// on envoie le rŽsultat
 	
-	return "";//$res;
+	return $res;
 
 }
 		
@@ -180,15 +188,12 @@ function analyse($res){
 	if($vpaiement && ! strstr( $_SESSION["navig"]->urlprec, "paiement.php")) header("Location: index.php");
 
 	// chargement du squelette	
-	/*$lect = file($fond);
-	if(!file_exists($fond)) { echo "Impossible d'ouvrir $fond"; exit; }
-	$res = file_get_contents($fond);
-	*/
-	$res= str_replace( "DIESE_", "#", $texte);
+	$res = str_replace("THELIA-", "#", $texte);
+	
 	// initialisation de l'ajax
 	if($sajax == 1){
 		$sajaxjs = sajax_get_javascript();
-		if(!file_exists($fond)) { echo "Impossible d'ouvrir fonctions/fonctsajax.js"; exit; }
+		//if(!file_exists($fond)) { echo "Impossible d'ouvrir fonctions/fonctsajax.js"; exit; }
 		$sajaxjs .= file_get_contents("fonctions/fonctsajax.js");
 		$jsf = fopen("fonctsajaxgen.js", "w");
 		fputs($jsf, $sajaxjs);
@@ -219,7 +224,6 @@ function analyse($res){
             $_SESSION["navig"]->panier = new Panier();	
 	}
 
-	
 
 
 }
