@@ -277,8 +277,7 @@ $().ready(function() {
 	echo '<td colspan="2" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut">'._T('inscription2:action_adherent').'</a></strong></td>';
 	echo '<td><strong>'._T('inscription2:supprimer_adherent_red').'</strong></td>';
 	echo '</tr>';
-	echo "SELECT a.id_auteur, a.statut, ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
-			ON b.id_auteur = a.id_auteur WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
+	
 	$query = spip_query ( "SELECT a.id_auteur, a.statut, ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
 			ON b.id_auteur = a.id_auteur WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page" );
 	
