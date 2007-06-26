@@ -22,7 +22,7 @@ $link6= generer_url_ecrire('comptes');
 
 $query = spip_query("SELECT * FROM spip_asso_profil where id_profil=1");
 
-while ($data = spip_fetch_assoc($query)) {
+while ($data = spip_fetch_array($query)) {
 	$dons=$data['dons'];
 	$ventes=$data['ventes'];
 	$comptes=$data['comptes'];
