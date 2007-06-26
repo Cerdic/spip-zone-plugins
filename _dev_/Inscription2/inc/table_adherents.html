@@ -261,7 +261,6 @@ $().ready(function() {
 	foreach(lire_config('inscription2') as $cle => $val){
 		if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table'){
 			$cle = str_replace("_table", "", $cle);
-			if(lire_config('inscription2/'.$cle)){
 			if($cle == 'bio' or $cle == 'statut' or $cle == 'username')
 				if($cle == 'username')
 					$table_auteurs[] = "a.login";
@@ -269,7 +268,6 @@ $().ready(function() {
 					$table_auteurs[] = "a.".$cle;
 			else
 				$table_auteurs[] = "b.".$cle;
-			}
 			if($cle =='username')
 				echo '<td><strong><a href="'.$url.'&ordre=login">'._T('inscription2:'.$cle).'</a></strong></td>';
 			else
@@ -279,7 +277,8 @@ $().ready(function() {
 	echo '<td colspan="2" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut">'._T('inscription2:action_adherent').'</a></strong></td>';
 	echo '<td><strong>'._T('inscription2:supprimer_adherent_red').'</strong></td>';
 	echo '</tr>';
-	
+	echo "SELECT a.id_auteur, a.statut, ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
+			ON b.id_auteur = a.id_auteur WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
 	$query = spip_query ( "SELECT a.id_auteur, a.statut, ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
 			ON b.id_auteur = a.id_auteur WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page" );
 	
