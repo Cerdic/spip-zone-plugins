@@ -131,6 +131,35 @@
 			
 						//manque un traitement pour récuperer les courriers
 					}
+				//evaluer les extras de tous les auteurs et les virer
+				$result = spip_query(
+				  'SELECT extra, spip_auteurs.id_auteur FROM spip_auteurs');
+				while ($row = spip_fetch_array($result, SPIP_NUM)) {
+					$abo = unserialize($row[0]);
+					$format = $abo['abo'] ;
+				if($format=="texte" OR $format=="html")
+				spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
+				VALUES ("._q($row[1]).","._q($format).") ");
+				else
+				spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
+				VALUES ("._q($row[1]).","._q('non').") ");
+				}
+				
+				echo "regulariser les desabonnes avec listes...<br />";
+
+				$result = spip_query("SELECT a.`email`, a.id_auteur FROM `spip_auteurs` a, `spip_auteurs_listes` l, `spip_auteurs_elargis` f
+				WHERE a.id_auteur=f.id_auteur 
+				AND f.spip_listes_format = 'non'
+				AND a.id_auteur = l.id_auteur
+				AND a.statut!='5poubelle' 
+				GROUP BY email
+				");
+				
+				while($res = spip_fetch_array($result)){
+				spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur =".$res['id_auteur']) ;			
+				} 
+				
+				
 				}
 				ecrire_meta('spiplistes_version',$current_version=$version_base,'non');
 			}
@@ -173,18 +202,7 @@
 				`id_auteur` BIGINT NOT NULL ,
 				`spip_listes_format` VARCHAR( 8 ) DEFAULT 'non' NOT NULL
 				 ) ");
-				/*
-				echo "<hr>" ;
-				$desc = spip_abstract_showtable($table_nom, '', true);
-				var_dump($desc);
-				echo "<hr>" ;	
 				
-				$res = spip_query("SELECT COUNT(a.id_auteur) AS n FROM spip_auteurs AS a");
-				$n = 0;
-				if ($row = spip_fetch_array($res))
-				$n = $row['n'];
-				echo "-$n-" ;
-				*/
 				//evaluer les extras de tous les auteurs + compter tous les auteurs
 				$result = spip_query(
 				  'SELECT extra, spip_auteurs.id_auteur FROM spip_auteurs');
@@ -242,6 +260,7 @@
 			
 			ecrire_metas();
 		}
+	spip_log("spip-listes $current_version","spiplistes");
 	}
 	
 	function spiplistes_vider_tables() {
