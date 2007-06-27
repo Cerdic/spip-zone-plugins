@@ -2,7 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_cookie_dist
 function action_session_dist() {
 
 	// La cible de notre operation de connexion
