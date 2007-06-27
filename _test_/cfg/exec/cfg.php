@@ -7,6 +7,8 @@
  *
  */
 // la fonction appelee par le core, une simple "factory" de la classe cfg
+include_spip("inc/presentation");
+
 function exec_cfg_dist($class = null)
 {
 	// classe standard ?
