@@ -43,9 +43,9 @@ jQuery.SplickerBox = function(e,m,s) {
 	this.last = 0;
 	this.left = this.top=0;
 	if(s == 0 || s == 'auto')
-		this.cote = 70;
+		this.cote = 100;
 	else
-		this.cote = s;
+		this.cote = 100;
 	this.init()
 }
 
