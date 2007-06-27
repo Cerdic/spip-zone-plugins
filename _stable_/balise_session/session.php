@@ -30,6 +30,12 @@ if(isset($GLOBALS['auteur_session'])) {
 	//ci desous, et ajouter un # devant la ligne au dessus.
 	//vous pouvez aussi cloner ce fichier et le nommer statut.php
 	#$GLOBALS['marqueur'] .= ':'.$GLOBALS['auteur_session']['statut'];
+
+	if(@function_exists('session_start')) {
+		session_start();
+		$GLOBALS['auteur_session'] = array_merge($_SESSION, $GLOBALS['auteur_session']);
+	}
+
 }
 # au travail...
 include _DIR_RESTREINT_ABS.'public.php';

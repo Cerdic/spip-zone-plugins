@@ -39,6 +39,10 @@ Bonjour
 			<:icone_deconnecter:>
 		</a>
 	</li>
+	<li>
+		<a href="[(#URL_ACTION_AUTEUR{session,test=test,#SELF})]">
+			test=[(#SESSION{test}|sinon{0})]
+	</li>
 </ul>][
 (#SESSION{id_auteur}|?{'',
 <h2 class="menu-titre">Login public</h2>
