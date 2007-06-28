@@ -40,66 +40,66 @@
 		messages: {
 			nom: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 20 carateres"},
 			prenom:{
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 15 carateres"},
 			username: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 10 carateres"},
 			adresse: {
 				required:"Ce champ est obligatoire",
-				postal:"Entrez une chaine de caracteres valable",
+				postal:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 30 carateres"},
 			adresse2: {
 				required:"Ce champ est obligatoire",
-				postal:"Entrez une chaine de caracteres valable",
+				postal:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 30 carateres"},
 			code_postal: {
 				required:"Ce champ est obligatoire",
-				postal:"Entrez un code postal valable",
+				postal:"Entrez un code postal valide",
 				rangeLength:"Min 3 Max 10 carateres"},
 			ville: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 10 carateres"},
 			email: {
 				required:"Ce champ est obligatoire",
-				email:"Entrez un email valable",
+				email:"Entrez un email valide",
 				rangeLength:"Min 5 Max 30 carateres"},
 			telephone: {
 				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valable",
+				numero:"Entrez un numero valide",
 				rangeLength:"Min 3 Max 15 carateres"},
 			fax: {
 				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valable",
+				numero:"Entrez un numero valide",
 				rangeLength:"Min 3 Max 15 carateres"},
 			mobile: {
 				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valable",
+				numero:"Entrez un numero valide",
 				rangeLength:"Min 3 Max 15 carateres"},
 			profession: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 10 carateres"},
 			societe: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 10 carateres"},
 			secteur:{
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 20 carateres"},
 			fonction: {
 				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 10 carateres"},
 			divers:{
-				chaine:"Entrez une chaine de caracteres valable",
+				chaine:"Entrez une chaine de caracteres valide",
 				rangeLength:"Min 3 Max 30 carateres"}
 		}
 	});
@@ -129,39 +129,47 @@
 <form method="post" action="#SELF" name="inscription" id="inscription" >
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
-<fieldset>
+<style>
+.infos-auteurs > div{margin:15px 0px;clear:both}
+.infos-auteurs input, .select , textarea{display:block;float:right;width:250px}
+.infos-auteurs label{float:left}
+
+</style>
+
+<fieldset class="infos-auteurs">
 <legend>
 	<:inscription2:info_perso:>
 </legend>
-<br />
+
+<div class="sous-legende">
 <:inscription2:inserez_infos:>
-<br /><br />
+</div>
 	
-<p [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
-	<label for="nom"><strong><:inscription2:nom:></strong></label><br />
-	<input type="text" name="nom" id="nom" [value="(#CONFIG{inscription2/nom}|=={on}|?{#ENV{nom}, ''})"]/><br />
-</p>
+<div [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
+	<label for="nom"><strong><:inscription2:nom:></strong></label>
+	<input type="text" name="nom" id="nom" [value="(#CONFIG{inscription2/nom}|=={on}|?{#ENV{nom}, ''})"]/>
+</div>
 
-<p [style="(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})"]>
-	<label for="prenom"><strong><:inscription2:prenom:></strong></label><br />
-	<input type="text" name="prenom" id="prenom" [value="(#CONFIG{inscription2/prenom}|=={on}|?{#ENV{prenom}, ''})"]/><br />
-</p>
+<div [style="(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})"]>
+	<label for="prenom"><strong><:inscription2:prenom:></strong></label>
+	<input type="text" name="prenom" id="prenom" [value="(#CONFIG{inscription2/prenom}|=={on}|?{#ENV{prenom}, ''})"]/>
+</div>
 
-<p [style="(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})"]>
-	<label for="username"><strong><:inscription2:username:></strong></label><br />
-	<input type="text" name="username" id="username" [value="(#CONFIG{inscription2/username}|=={on}|?{#ENV{login}, ''})"]/><br />
-</p>
+<div [style="(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})"]>
+	<label for="username"><strong><:inscription2:username:></strong></label>
+	<input type="text" name="username" id="username" [value="(#CONFIG{inscription2/username}|=={on}|?{#ENV{login}, ''})"]/>
+</div>
 
 <div [style="(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:naissance:></strong><br />
-	<span>
+	<label><strong><:inscription2:naissance:></strong></label>
+	<div class="select">
 	<select name="jour" id="jour">
 	<?php
 	for ($i=1;$i<=31;$i++)
 		echo "<option>$i</option>\n";
 	?>
 	</select> 
-	</span><span>
+	
 	<select name="mois" id="mois">
 	<option value='01'><:inscription2:janvier:></option>
 	<option value='02'><:inscription2:fevrier:></option>
@@ -176,126 +184,131 @@
 	<option value='11'><:inscription2:novembre:></option>
 	<option value='12'><:inscription2:decembre:></option>
 	</select>
-	</span><span>
+	
 	<select name="annee" id="annee">
 	<?php
 	$today_year=date('Y');
 	for ($i=$today_year;$i>=$today_year-100;$i--)
 		echo "<option>$i</option>\n";
 	?>
-	</select> </span>
+	</select> 
+	</div>
 </div>
 
-<label [style="(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})"]>
-	<strong><:inscription2:sexe:></strong><br />
-	<input name="sexe" type="radio" value="M" /> <:inscription2:masculin:>
-	<input name="sexe" type="radio" value="F" /> <:inscription2:feminin:><br />
-</label>
+<div [style="(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})"]>
+	<label><strong><:inscription2:sexe:></strong></label>
+	<div class="select">
+	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="M" /> <:inscription2:masculin:>
+	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="F" /> <:inscription2:feminin:>
+	</div>
+</div>
 
-<p [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
-	<label for="adresse"><strong><:inscription2:adresse:></strong><br /></label>
-	<input type="text" name="adresse" id="adresse" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse}, ''})"]/><br />
-	<label for="adresse2"><strong><:inscription2:adresse_comp:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
+	<label for="adresse"><strong><:inscription2:adresse:></strong></label>
+	<input type="text" name="adresse" id="adresse" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse}, ''})"]/>
+</div>
+<div [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
+	<label for="adresse2"><strong><:inscription2:adresse_comp:></strong></label>
 	<input type="text" name="adresse2" id="adresse2" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse2}, ''})"] />
-<br /></p>
+</div>
 
-<p [style="(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})"]>
-	<label for="code_postal"><strong><:inscription2:code_postal:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})"]>
+	<label for="code_postal"><strong><:inscription2:code_postal:></strong></label>
 	<input type="text" name="code_postal" id="code_postal" [value="(#CONFIG{inscription2/code_postal}|=={on}|?{#ENV{code_postal}, ''})"]/>
-<br /></p>
+</div>
 
-<p [style="(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})"]>
-	<label for="ville"><strong><:inscription2:ville:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})"]>
+	<label for="ville"><strong><:inscription2:ville:></strong></label>
 	<input type="text" name="ville" id="ville" [value="(#CONFIG{inscription2/ville}|=={on}|?{#ENV{ville}, ''})"]/>
-<br /></p>
+</div>
 
-<p [style="(#CONFIG{inscription2/email}|=={on}|?{display: block;, display:none;})"]>
-	<label for="email"><strong><:inscription2:email:></strong></label><br />
-	<input type="text" name="email" id="email" [value="(#CONFIG{inscription2/email}|=={on}|?{#ENV{email}, ''})"] /><br />
-</p>
+<div [style="(#CONFIG{inscription2/email}|=={on}|?{display: block;, display:none;})"]>
+	<label for="email"><strong><:inscription2:email:></strong></label>
+	<input type="text" name="email" id="email" [value="(#CONFIG{inscription2/email}|=={on}|?{#ENV{email}, ''})"] />
+</div>
 
-<p [style="(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})"]>
-	<label for="telephone"><strong><:inscription2:telephone:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})"]>
+	<label for="telephone"><strong><:inscription2:telephone:></strong></label>
 	<input type="text" name="telephone" id="telephone" [value="(#CONFIG{inscription2/telephone}|=={on}|?{#ENV{telephone}, ''})"] />
-<br /></p>
+</div>
 
-<p [style="(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})"]>
-	<label for="fax"><strong><:inscription2:fax:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})"]>
+	<label for="fax"><strong><:inscription2:fax:></strong></label>
 	<input type="text" name="fax" id="fax" [value="(#CONFIG{inscription2/fax}|=={on}|?{#ENV{fax}, ''})"]/>
-<br /></p>
+</div>
 
-<p [style="(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})"]>
-	<label for="mobile"><strong><:inscription2:mobile:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})"]>
+	<label for="mobile"><strong><:inscription2:mobile:></strong></label>
 	<input type="text" name="mobile" id="mobile" [value="(#CONFIG{inscription2/mobile}|=={on}|?{#ENV{mobile}, ''})"]/>
-<br /></p>
+</div>
 
-<p [style="(#CONFIG{inscription2/profession}|=={on}|?{display: block;, display:none;})"]>
-	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/profession}|=={on}|?{display: block;, display:none;})"]>
+	<label for="profession"><strong><:inscription2:profession:></strong></label>
 	<input type="text" name="profession" id="profession" [value="(#CONFIG{inscription2/profession}|=={on}|?{#ENV{profession}, ''})"] />
-<br /></p>
+</div>
 
-<p [style="(#CONFIG{inscription2/societe}|=={on}|?{display: block;, display:none;})"]>
-	<label for="societe"><strong><:inscription2:societe:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/societe}|=={on}|?{display: block;, display:none;})"]>
+	<label for="societe"><strong><:inscription2:societe:></strong></label>
 	<input type="text" name="societe" id="societe" [value="(#CONFIG{inscription2/societe}|=={on}|?{#ENV{societe}, ''})"] />
-<br /></p>
+</div>
 
-<p [style="(#CONFIG{inscription2/secteur}|=={on}|?{display: block;, display:none;})"]>
-	<label for="secteur"><strong><:inscription2:secteur:></strong><br /></label>
+<div [style="(#CONFIG{inscription2/secteur}|=={on}|?{display: block;, display:none;})"]>
+	<label for="secteur"><strong><:inscription2:secteur:></strong></label>
 	<input type="text" name="secteur" id="secteur" [value="(#CONFIG{inscription2/secteur}|=={on}|?{#ENV{secteur}, ''})"] />
-<br /></p>
+</div>
 
 
 </fieldset>
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
-<fieldset>
+<fieldset class="infos-auteurs">
 <legend>
 	Informations Generales
 </legend>
-<br />
 
-<p style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
-	<label for="fonction"><strong><:inscription2:fonction:></strong><br /></label>
+
+<div style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
+	<label for="fonction"><strong><:inscription2:fonction:></strong></label>
 	<input type="text" type="text" name="fonction" id="fonction" [value="(#CONFIG{inscription2/fonction}|=={on}|?{#ENV{fonction}, ''})"]/>
-<br /></p>
+</div>
 
 
-<p style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
+<div style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
 	<input type="checkbox" name="publication" id="publication" [value="(#CONFIG{inscription2/publication}|=={on}|?{#ENV{publication}, ''})"]/>
-	<strong><:inscription2:publication:></strong><br />
-<br /></p>
+	<strong><:inscription2:publication:></strong>
+</div>
 
 
 
-<label style="[(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})]">
-	<strong><:inscription2:newsletter:></strong><br />
-	<:inscription2:exp_newsletter:><br />
+<div style="[(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})]">
+	<strong><:inscription2:newsletter:></strong>
+	<p><:inscription2:exp_newsletter:></p>
 	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
-</label>
+</div>
 
-<label style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
-	<strong><:inscription2:categorie:></strong><br />
+<div style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
+	<p><strong><:inscription2:categorie:></strong></p>
 	[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
-</label>
+</div>
 
-<label style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
-	<strong><:inscription2:divers:></strong><br />
-	<input type="text" name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]/>
-	<br />
-</label>
+<div style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
+	<label><strong><:inscription2:divers:></strong></label>
+	<textarea name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]>
+	</textarea>	
+</div>
 
 <?php
 	include(find_in_path("inc/domaines.php"));
 	if(sizeof($domaine)>0){
-		echo '	<label style="[(#CONFIG{inscription2/domaines}|=={on}|?{display: block;, display:none;})]">
-				<strong><:inscription2:domaine:></strong><br />
-				<:inscription2:choix_domaine:><br />
+		echo '	<div style="[(#CONFIG{inscription2/domaines}|=={on}|?{display: block;, display:none;})]">
+				<p><strong><:inscription2:domaine:></strong></p>
+				<:inscription2:choix_domaine:>
 				<select id="domaines" name="domaines">';
 		foreach($domaine as $cle => $value)
 				echo '<option value= '.$cle.'>'.$cle.'</option>';
 		echo '	</select>
-				<br />
-				</label>';
+				
+				</div>';
 	}
 ?>
 
