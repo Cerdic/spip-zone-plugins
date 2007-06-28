@@ -130,10 +130,14 @@
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 <style>
-.infos-auteurs > div{margin:15px 0px;clear:both}
+.infos-auteurs > div{height:35px;clear:both;padding:5px}
 .infos-auteurs input, .select , textarea{display:block;float:right;width:250px}
-.infos-auteurs label{float:left}
+.infos-auteurs label{display:block;float:left}
+.infos-auteurs > div.textarea {height:70px;clear:both;padding:5px}
+.infos-auteurs > div.grand_select {height:auto;margin-bottom:15px;clear:both;padding:5px}
 
+div.error{background-color:#ffe2e2}
+label.error{font-size:0.7em;display:block;clear:both}
 </style>
 
 <fieldset class="infos-auteurs">
@@ -203,13 +207,9 @@
 	</div>
 </div>
 
-<div [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
+<div  class="textarea" [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
 	<label for="adresse"><strong><:inscription2:adresse:></strong></label>
-	<input type="text" name="adresse" id="adresse" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse}, ''})"]/>
-</div>
-<div [style="(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})"]>
-	<label for="adresse2"><strong><:inscription2:adresse_comp:></strong></label>
-	<input type="text" name="adresse2" id="adresse2" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse2}, ''})"] />
+	<textarea name="adresse" id="adresse" [value="(#CONFIG{inscription2/adresse}|=={on}|?{#ENV{adresse}, ''})"]></textarea>
 </div>
 
 <div [style="(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})"]>
@@ -280,18 +280,18 @@
 
 
 
-<div style="[(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})]">
+<div class="grand_select" style="[(#CONFIG{inscription2/newsletter}|=={on}|?{display: block;, display:none;})]">
 	<strong><:inscription2:newsletter:></strong>
 	<p><:inscription2:exp_newsletter:></p>
 	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
 </div>
 
-<div style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
+<div class="grand_select" style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
 	<p><strong><:inscription2:categorie:></strong></p>
 	[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
 </div>
 
-<div style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
+<div class="grand_select" style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
 	<label><strong><:inscription2:divers:></strong></label>
 	<textarea name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]>
 	</textarea>	
@@ -300,7 +300,7 @@
 <?php
 	include(find_in_path("inc/domaines.php"));
 	if(sizeof($domaine)>0){
-		echo '	<div style="[(#CONFIG{inscription2/domaines}|=={on}|?{display: block;, display:none;})]">
+		echo '	<div  class="grand_select" style="[(#CONFIG{inscription2/domaines}|=={on}|?{display: block;, display:none;})]">
 				<p><strong><:inscription2:domaine:></strong></p>
 				<:inscription2:choix_domaine:>
 				<select id="domaines" name="domaines">';

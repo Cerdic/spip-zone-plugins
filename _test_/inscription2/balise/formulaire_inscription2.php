@@ -35,7 +35,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 				$var_user[$cle] = date('Y-m-d');
 			
 			elseif($cle == 'adresse')
-				$var_user[$cle] = _request('adresse').' '._request('adresse2');
+				$var_user[$cle] = _request('adresse');
 			
 			elseif(ereg("^categorie.*$", $cle)){
 				$aux = _request('categories');
