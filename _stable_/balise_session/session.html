@@ -21,7 +21,7 @@
 			<div class="cartouche">
 				<h1 class="titre">Balise #[(#REM)]SESSION</h1>
 				<dl class='spip_document_0 spip_documents spip_documents_right'  style='float:right;'>
-					<dt><a href="http://klike.free.fr/paquets/balise_session.zip" type="application/zip" title='Zip - 6.8 ko'><img src='#CHEMIN{vignettes/zip.png}' width='47' height='48' alt='Zip - 6.8 ko' /></a></dt>
+					<dt><a href="http://files.spip.org/spip-zone/balise_session.zip" type="application/zip" title='Zip - 9.2 ko'><img src='#CHEMIN{vignettes/zip.png}' width='47' height='48' alt='Zip - 9.2 ko' /></a></dt>
 					<dt class='spip_doc_titre' style='width:120px;'><strong>plugin balise_session</strong></dt>
 					<dd class='spip_doc_descriptif' style='width:120px;'>T&eacute;l&eacute;chargez, d&eacute;zippez &agrave; la racine de votre site et activez le plugin Balise Session</dd>
 				</dl>
@@ -29,7 +29,7 @@
 				<a href="http://www.spip.net/fr_article3368.html#config" class="spip_out">
 				#[(#REM)]CONFIG
 				</a>
-				&agrave; ceci pr&egrave;s qu'elle s'appuie sur le tableau associatif <tt>$auteur_session</tt>. le param&egrave;tre pass&eacute; en argument d&eacute;termine la valeur de session &agrave; afficher. Pour avoir une liste exhaustive des valeurs possible, consultez la doc de la fonction
+				&agrave; ceci pr&egrave;s qu'elle s'appuie sur le tableau associatif <tt>$auteur_session</tt>. Le param&egrave;tre pass&eacute; en argument d&eacute;termine la valeur de session &agrave; afficher. Pour avoir une liste exhaustive des valeurs possible, consultez la doc de la fonction
 				<a href="http://doc.spip.org/@ajouter_session" class="spip_out">
 				ajouter_session
 				</a>
@@ -128,6 +128,19 @@
 				&eacute;l&eacute;ments issus de cette page de d&eacute;monstration, ou bien encore, 
 				de votre propre cru !
 				<code class='spip_code' dir='ltr'>:D</code></p>
+				<h3 class="spip">Gestion de valeurs suppl&eacute;mentaires</h3>
+				<p class="spip">Il est possible de g&eacute;rer des valeurs suppl&eacute;mentaires à celles contenues dans le tableau <tt>$auteur_session</tt>.
+				Pour cela, il faut ajouter le paramètre <code class='spip_code' dir='ltr'>{session}</code> à l'appel de squelettes inclus.
+				Dès lors, la balise #[(#REM)]SESSION s'appuiera aussi sur le tableau associatif <tt>$_SESSION</tt> php standard.</p>
+				<p class="spip">Exemple : <code class='spip_code' dir='ltr'>&lt;INCLURE(session.php){session}{fond=boite_session}&gt;</code></p>
+				<p class="spip">Ce plugin introduit pour ces valeurs, une action permettant de cr&eacute;er/affecter une valeur en lui pr&eacute;cisant un nom,
+				ou de vider cette valeur. Pour faire appel à cette action, on utlisera soit un formulaire ad hoc, soit, dans ce type pr&eacute;cis de noisettes, la balise #[(#REM)]URL_ACTION_AUTEUR de la manière suivante:</p>
+				<p class="spip"><code class='spip_code' dir='ltr'>&lt;a href="[(#[(#REM)]URL_ACTION_AUTEUR{session,[(#[(#REM)]ENV{session})]-affecter-nom-valeur,url})]"&gt;<br />texte du lien<br />&lt;/a&gt;</code><br />
+				ou nom sera le code employé pour restituer la valeur via la notation #[(#REM)]SESSION{nom},<br />
+				valeur pourra être une balise spip ou une constante,<br />
+				url, l'adresse de destination du lien, #[(#REM)]SELF ou tout autre adresse imaginable.</p>
+				<p class="spip">ou bien</p>
+				<p class="spip"><code class='spip_code' dir='ltr'>&lt;a href="[(#[(#REM)]URL_ACTION_AUTEUR{session,[(#[(#REM)]ENV{session})]-vider-nom,url})]"&gt;<br />texte du lien<br />&lt;/a&gt;</code></p>
 			</div>
 
 		</div><!-- fin contenu -->
@@ -138,16 +151,18 @@
 				<INCLURE(session.php){fond=boite_connexion}>
 			</div>
 
-			<INCLURE(session.php){fond=boite_donnees}>
+			<INCLURE(session.php){fond=boite_session}{session}>
+
+			<INCLURE(session.php){fond=boite_donnees}{session}>
 			
 			<div class="breves">
 				<h2 class="menu-titre">Pour plus d'informations</h2>
 				<ul>
-					<li>Auteur&nbsp;: James (c) 2006</li>
+					<li>Auteur&nbsp;: James (c) 2006-2007</li>
 					<li>Licence&nbsp;: GNU/GPL (code &amp; doc)</li>
 					<li>Sugg&eacute;rer des am&eacute;liorations&nbsp;: <a href="http://listes.rezo.net/mailman/listinfo/spip-zone">spip-zone</a></li>
 					<li>Conseils d'utilisation&nbsp;: <a href="http://listes.rezo.net/mailman/listinfo/spip">liste utilisateurs</a></li>
-					<li>Int&eacute;gration dans un squelette sans passer par l'installation du plugin <a href="http://sarka-spip.com/">sarka-spip.com</a></li>
+					<li>Int&eacute;gration dans un squelette sans passer par l'installation du plugin <a href="http://sarka-spip.com/spip.php?article278">sarka-spip.com</a></li>
 				</ul>
 			</div>
 		</div>

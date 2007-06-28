@@ -1,4 +1,4 @@
-#CACHE{0}[<h2 class="menu-titre">(#SESSION{id_auteur}|?{
+[<h2 class="menu-titre">(#SESSION{id_auteur}|?{
 Bonjour
 })[(#SESSION{nom})]</h2>
 <ul>
@@ -7,19 +7,19 @@ Bonjour
 		<div class="texte">[
 			(#LOGO_AUTEUR|right|#URL_AUTEUR|image_reduire{48})
 			][
-			(#EVAL{_DIR_PLUGIN_WIDGETS}|match{^plugins\/}|?{' '})
+			(#EVAL{_DIR_PLUGIN_CRAYONS}|match{^plugins\/}|?{' '})
 			[<:signature:>&nbsp;:<br />
-			<div class="widget auteur-nom-#ID_AUTEUR">(#NOM)</div>]
+			<div class="#EDIT{nom}">(#NOM)</div>]
 			[<:bio:>&nbsp;:<br />
-			<div class="widget auteur-bio-#ID_AUTEUR">(#BIO)</div>]
+			<div class="#EDIT{bio}">(#BIO)</div>]
 			[<:pgp:>&nbsp;:<br />
-			<div class="widget auteur-pgp-#ID_AUTEUR">(#PGP)</div>]
+			<div class="#EDIT{pgp}">(#PGP)</div>]
 			[<:nom_site:>&nbsp;:<br />
-			<div class="widget auteur-nom_site-#ID_AUTEUR">(#NOM_SITE)</div>]
+			<div class="#EDIT{nom_site}">(#NOM_SITE)</div>]
 			[<:lien_site:>&nbsp;:<br />
-			<div class="widget auteur-url_site-#ID_AUTEUR">(#URL_SITE)</div>]
+			<div class="#EDIT{url_site}">(#URL_SITE)</div>]
 		][
-			(#EVAL{_DIR_PLUGIN_WIDGETS}|match{^plugins\/}|?{'',' '})
+			(#EVAL{_DIR_PLUGIN_CRAYONS}|match{^plugins\/}|?{'',' '})
 			[<div><a href="(#URL_AUTEUR)"><:voir_en_ligne:></a></div>]
 			[<div>(#BIO)</div>]
 			[<div><a href="#URL_SITE">(#NOM_SITE)</a></div>]
@@ -38,10 +38,6 @@ Bonjour
 		<a href="#URL_LOGOUT">
 			<:icone_deconnecter:>
 		</a>
-	</li>
-	<li>
-		<a href="[(#URL_ACTION_AUTEUR{session,test=test,#SELF})]">
-			test=[(#SESSION{test}|sinon{0})]
 	</li>
 </ul>][
 (#SESSION{id_auteur}|?{'',
