@@ -274,8 +274,8 @@ label.error{font-size:0.7em;display:block;clear:both}
 
 
 <div style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
-	<input type="checkbox" name="publication" id="publication" [value="(#CONFIG{inscription2/publication}|=={on}|?{#ENV{publication}, ''})"]/>
 	<strong><:inscription2:publication:></strong>
+	<input type="checkbox" style="display:inline;float:none;width:15px" name="publication" id="publication" [value="(#CONFIG{inscription2/publication}|=={on}|?{#ENV{publication}, ''})"]/>
 </div>
 
 
