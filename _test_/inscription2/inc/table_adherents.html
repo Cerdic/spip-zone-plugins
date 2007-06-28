@@ -187,7 +187,7 @@ $().ready(function() {
 <div style="margin-left:20pt">
 	<strong><:inscription2:liste_adherents:></strong><br/>
 	<span style="float:left; margin-left:10pt;" >
-	<form method="post" action="">
+	<form method="post" action="?exec=inscription2_adherents">
 	<input type="text" name="valeur" onfocus='this.value=""' size="10" value="<:info_rechercher:>">
 	<select name="case" id="case">
 		<option value="id">ID</option>
@@ -219,9 +219,9 @@ $().ready(function() {
 	$ordre =_request('ordre');
 	
 	if ( isset($valeur)) {
-		if($case=='id')
+		if($case=='id'){
 			$critere="a.id_auteur='$valeur'";
-		else
+		}else
 			$critere="$case='$valeur'"; 
 	}else
 		$critere="a.id_auteur<>'0'"; 
