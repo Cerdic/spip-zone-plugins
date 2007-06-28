@@ -293,8 +293,7 @@ label.error{font-size:0.7em;display:block;clear:both}
 
 <div class="grand_select" style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
 	<label><strong><:inscription2:divers:></strong></label>
-	<textarea name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]>
-	</textarea>	
+	<textarea name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]></textarea>	
 </div>
 
 <?php
