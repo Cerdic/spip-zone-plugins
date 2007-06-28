@@ -14,6 +14,33 @@
 	
 <template><rotator123></template>
 	ou 123 est l'id article fournissant les documents attaches]
+	
+	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
+	- width : px|%,320
+	- height : px|%,240
+	- displaywidth : px|%,width
+	- displayheight : px|%,height
+	- transition : fade|bgfade|blocks|bubbles|circles|fluids|lines|random|slowfade,fade
+	- overstretch : true|false|fit|none,none
+	- shownavigation : true|false,true
+	- shuffle : true|false,false
+	- repeat : true|false,false
+	- showdownload: true|false,false
+	
+	- align : left|center|right,center	
+	]
+
+[(#SET{width,#ENV{width,320}})]
+[(#SET{height,#ENV{height,240}})]
+[(#SET{displaywidth,[(#ENV{displaywidth,[(#GET{width})]})]})]
+[(#SET{displayheight,[(#ENV{displayheight,[(#GET{height})]})]})]
+[(#SET{transition,#ENV{transition,fade}})]
+[(#SET{overstretch,#ENV{overstretch,none}})]
+[(#SET{shownavigation,#ENV{shownavigation,true}})]
+[(#SET{shuffle,#ENV{shuffle,false}})]
+[(#SET{repeat,#ENV{repeat,false}})]
+[(#SET{align,#ENV{align,center}})]
+[(#SET{showdownload,#ENV{showdownload,false}})]
 
 <script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
 <!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/ -->
@@ -32,17 +59,27 @@ Get the Flash Player</a> to see this player.
 <script type="text/javascript">
 // <![CDATA[
 
-	var s1 = new SWFObject("#CHEMIN{mediaplayer.swf}","mediaplayer","320","240","7");
+	var s1 = new SWFObject("#CHEMIN{mediaplayer.swf}","mediaplayer","#GET{width}","#GET{height}","7");
 	s1.addVariable("file",
 		encodeURIComponent("spip.php?page=xspf&type=jpg|png|gif|mp3|flv|swf&id_article=[(#ENV{id_mediaplayer})]"));
 	s1.addParam("allowfullscreen","true");
-	s1.addVariable("displayheight","200");
 	s1.addVariable("backcolor","0x000000");
 	s1.addVariable("frontcolor","0xCCCCCC");
 	s1.addVariable("lightcolor","0x996600");
 	s1.addVariable("showdigits","true");
 	s1.addVariable("thumbsinplaylist","true");
 	s1.addVariable("type","flv,swf,mp3,jpg,png,gif");
+	
+	s1.addVariable("transition","#GET{transition}");
+	s1.addVariable("shownavigation","#GET{shownavigation}");
+	s1.addVariable("showdownload","#GET{showdownload}");
+	s1.addVariable("overstretch","#GET{overstretch}");
+	s1.addVariable("shuffle","#GET{shuffle}");
+	s1.addVariable("repeat","#GET{repeat}");
+	s1.addVariable("height","#GET{height}");
+	s1.addVariable("width","#GET{width}");
+	s1.addVariable("displaywidth","#GET{displaywidth}");
+	s1.addVariable("displayheight","#GET{displayheight}");
 	s1.write("flashcontent");
 // ]]>
 </script>

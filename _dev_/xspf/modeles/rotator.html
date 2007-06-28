@@ -13,6 +13,35 @@
 	
 <template><rotator123></template>
 	ou 123 est l'id article fournissant les documents attaches]
+	
+	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
+	- width : px|%,100%
+	- height : px|%,100%
+	- displaywidth : px|%,width
+	- displayheight : px|%,height
+	- transition : fade|bgfade|blocks|bubbles|circles|fluids|lines|random|slowfade,fade
+	- overstretch : true|false|fit|none,none
+	- shownavigation : true|false,true
+	- rotatetime : secondes,10
+	- shuffle : true|false,false
+	- repeat : true|false,true
+	- showdownload: true|false,false
+	
+	- align : left|center|right,center
+	
+]
+[(#SET{width,#ENV{width,100%}})]
+[(#SET{height,#ENV{height,100%}})]
+[(#SET{displaywidth,[(#ENV{displaywidth,[(#GET{width})]})]})]
+[(#SET{displayheight,[(#ENV{displayheight,[(#GET{height})]})]})]
+[(#SET{transition,#ENV{transition,fade}})]
+[(#SET{overstretch,#ENV{overstretch,none}})]
+[(#SET{shownavigation,#ENV{shownavigation,true}})]
+[(#SET{rotatetime,#ENV{rotatetime,10}})]
+[(#SET{shuffle,#ENV{shuffle,false}})]
+[(#SET{repeat,#ENV{repeat,true}})]
+[(#SET{align,#ENV{align,center}})]
+[(#SET{showdownload,#ENV{showdownload,false}})]
 
 <script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
 <!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/ -->
@@ -30,24 +59,25 @@ Get the Flash Player</a> to see this player.
 <script type="text/javascript">
 // <![CDATA[
 
-	var s1 = new SWFObject("#CHEMIN{imagerotator.swf}","rotator","100%","100%","7");
+	var s1 = new SWFObject("#CHEMIN{imagerotator.swf}","rotator","#GET{width}","#GET{height}","7");
 	s1.addVariable("file",
 		encodeURIComponent("spip.php?page=xspf&type=jpg|png|gif&id_article=[(#ENV{id_rotator})]"));
-	s1.addVariable("transition","fades");
-	s1.addVariable("overstretch","false");
+	s1.addVariable("transition","#GET{transition}");
 	s1.addVariable("backcolor","0xFFFFFF");
-	s1.addVariable("shownavigation","true");
-	s1.addVariable("overstretch","true");
+	s1.addVariable("shownavigation","#GET{shownavigation}");
+	s1.addVariable("showdownload","#GET{showdownload}");
 	s1.addVariable("frontcolor","0x000000");
 	s1.addVariable("lightcolor","0xCC0000");
 	s1.addVariable("kenburns","false");
-	s1.addVariable("overstretch","none");
-	s1.addVariable("repeat","true");
-	s1.addVariable("rotatetime","10");
-	s1.addVariable("shuffle","false");
-	s1.addVariable("height","100%");
-	s1.addVariable("width","100%");
+	s1.addVariable("overstretch","#GET{overstretch}");
+	s1.addVariable("repeat","#GET{repeat}");
+	s1.addVariable("rotatetime","#GET{rotatetime}");
+	s1.addVariable("shuffle","#GET{shuffle}");
+	s1.addVariable("height","#GET{height}");
+	s1.addVariable("width","#GET{width}");
 	s1.addVariable("logo","url");
+	s1.addVariable("displaywidth","#GET{displaywidth}");
+	s1.addVariable("displayheight","#GET{displayheight}");
 	s1.addParam('menu','true');
 	s1.write("flashcontent");
 // ]]>
