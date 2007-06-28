@@ -91,8 +91,8 @@ function action_fragment_recommander() {
 		$r .= " <input type='text' id='recommander_to' name='recommander_to' class='forml'
 		value='".htmlspecialchars(_request('recommander_to'))."' class='formo' /></p>";
 		$r .= "<p><label for='recommander_message'>"._T('forum_texte')."</label>";
-		$r .= " <input type='text' id='recommander_message' name='recommander_message' class='forml'
-		value='".htmlspecialchars(_request('recommander_message'))."' class='forml' /></p>";
+		$r .= " <textarea id='recommander_message' name='recommander_message' class='forml'
+		value='".htmlspecialchars(_request('recommander_message'))."' class='forml'></textarea></p>";
 		$r .= "<div class='spip_bouton'><input type='submit' name='recommander_email' value='"._T('recommander:recommander_message')."' /></div>";
 
 		if (!_request('recommander_cle')) {
