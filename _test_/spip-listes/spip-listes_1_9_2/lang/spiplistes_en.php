@@ -6,7 +6,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 
 
 //_ 
-'_aide' => '<p>SPIP-Lists allows you to send newsletters or other automatic messages to people who have signed up. </p> <p>You can write your message in simple text format, in HTML, or apply a stencil - called "patron" in SPIP language - that can include SPIP-code.</p>
+'_aide' => '<p>SPIP-Lists allows you to send newsletters or other automated messages to people who have signed up. </p> <p>You can write your message in simple text format, in HTML, or apply a stencil - called "patron" in SPIP language - that can include SPIP-code.</p>
 <p>A sign-up form on the webpage frontend allows users to decide themselves to which newsletters they want to subscribe and the format in which they want to receive it (HTML or text).</p> 
 <p>Every message is automatically converted from HTML into text format for those who prefer receiving it in this format.</p><p><b>Note:</b><br/>Sending out a newsletter can take several minutes: The messages are sent out in batches that are sent out one by one. You can manually speed-up the sending process. </p>',
 
@@ -16,7 +16,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 'abonnement'=>'You would like to change your subscription to the newsletter',
 'abonnement_bouton'=>'Change your subscription',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Lists</a>' ,
-'abonnement_change_format'=>'You can change the format in which you will receive the newsletter: ',
+'abonnement_change_format'=>'You can change the format in which you will receive the newsletter or subscribe: ',
 'abonnement_mail' => 'To change your subscription, please visit the following webpage: ',
 'abonnement_mail_passcookie' => '(this is an automatically generated e-mail)
 To change your subscription to the newsletter of this site:
@@ -45,7 +45,6 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'aff_encours' => 'Sending in progress',
 'aff_envoye' => 'Messages sent',
 'aff_lettre_auto' => 'Sent newsletters',
-'aff_envoye' => 'Sent messages',
 'alerte_edit' => 'Note: This message can be modified by every administrator of the website and received by all subscribers. Use this newsletter only to announce special events of your website.',
 'alerte_modif' => '<b>Once your message is saved, you can still modify its content </b>',
 'annuler_envoi' => 'Cancel',
@@ -109,6 +108,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'form_forum_identifiants' => 'Confirm',
 'form_forum_identifiant_confirm'=>'Your subscription has been registered. You will receive a confirmation e-mail.',
 'format' => 'Format',
+'format2' => 'Format:',
 'format_html' => 'HTML format: ',
 'format_texte' => 'Text format: ',
 
@@ -120,8 +120,8 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'info_heberg' => 'Certain web service providers deactivate automatic e-mail messages from their servers. In this case, the following features of SPIP-Lists will not work',
 'info_nouv' => 'You have activated the automatic e-mail messages',
 'info_nouv_texte' => 'The next message will be sent in @proch@ days',
-'inscription_mail_forum' => 'This is the identification code to connect yourself to the website @nom_site_spip@ (@adresse_site@)',
-'inscription_mail_redac' => 'This is the identification code to connect yourself to the website @nom_site_spip@ (@adresse_site@) and to the editors backend (@adresse_site@/ecrire)',
+'inscription_mail_forum' => 'This is your identification code to login to the website @nom_site_spip@ (@adresse_site@)',
+'inscription_mail_redac' => 'This is your identification code to login to the website @nom_site_spip@ (@adresse_site@) and to the private area (@adresse_site@/ecrire)',
 'inscription_visiteurs' => 'The subscription allows you to acces to the restricted parts of this website, to post messages in the forum and to receive the newsletters',
 
 'inscription_redacteurs' =>'The editor\'s backend is open to website visitors after registration. Once registered, you can read and comment on articles submitted for publication, submit your own articles and participate in all forums. The subscription also allows you to access to the restricted parts of the website and to receive the newsletters.',
@@ -134,6 +134,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'langue' => '<strong>Language:</strong>&nbsp;',
 'lire' => 'Read',
 'Listes_de_diffusion' => 'Mailing lists',
+'log' => 'Logs',
 'login' => 'Login',
 'logout' => 'Logout',
 'lot_suivant' => 'Send the next batch',
@@ -146,7 +147,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'mail_non' => 'Your e-mail address is not subscribed to the newsletter of  @nom_site_spip@',
 'message_arch' => 'Message has been archived;',
 'messages_auto' => 'Automatic messages',
-'messages_auto_texte' => '<p>The default configuration of the template will automatically send messages with the list of articles and news published since the last newsletter.</p><p>you can change the layout of the newsletter with your own icon and a background image. for the titles in the file called; <b>"nouveautes.html"</b> at the root of your SPIP site.</p>',
+'messages_auto_texte' => '<p>The default configuration of the template will automatically send messages with the list of articles and news published since the last newsletter.</p><p>you can change the layout of the newsletter with your own icon and a background image. for the titles in the file called; <b>"nouveautes.html"</b> (located in the /dist folder).</p>',
 'message_redac' => 'Editing in progress and ready to send',
 'message_en_cours' => 'Sending in progress',
 'message_type' => 'E-mail',
@@ -198,6 +199,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 
 //R
 'recherche' => 'Search',
+'regulariser' => 'put in order the unsubscribed for lists...<br />',
 'revenir_haut' => 'Top of the page',
 'reponse' => 'Reply to message',
 'reponse_plur' => 'replies',
@@ -245,7 +247,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'abon_ajouter' => 'ADD A SUBSCRIBER &nbsp; ',
 'abonees' => 'all subscribers',
 'abonne_listes' => 'This contact has been added to the following listes',
-'abonne_aucune_liste' => '<br />Not subscribed to any list: ',
+'abonne_aucune_liste' => 'Not subscribed to any list',
 'abonnement_simple' => '<b>Simple sign-up : </b><br /><i>Subscribers receive a confirmation message</i>',
 'abonnement_code_acces' => '<b>Subscription with login: </b><br /><i>Additionally subscribers receive a username and password to identify on the website. </i>',
 'abonnement_newsletter' => '<b>Subscription to the newsletter. </b>',
@@ -395,7 +397,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 
 'lettre_info' => 'The newsletter of ',
 
-'patron_detecte' => '<p><strong>Detected stencil for the text version</strong><p>\n',
+'patron_detecte' => '<p><strong>Detected stencil for the text version</strong><p>',
 
 'patron_erreur' => 'With the current parameters, the stencil (patron) finds no news to be send',
 
@@ -408,7 +410,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 
 // ====================== inc-presentation.php3 ======================
 
-'listes_emails' => 'Newsletter',
+'listes_emails' => 'Newsletters',
 
 
 // ====================== mes-options.php3 ======================

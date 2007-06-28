@@ -145,7 +145,7 @@
 				VALUES ("._q($row[1]).","._q('non').") ");
 				}
 				
-				echo "regulariser les desabonnes avec listes...<br />";
+				echo _T('spiplistes:regulariser');
 
 				$result = spip_query("SELECT a.`email`, a.id_auteur FROM `spip_auteurs` a, `spip_auteurs_listes` l, `spip_auteurs_elargis` f
 				WHERE a.id_auteur=f.id_auteur 
