@@ -63,6 +63,7 @@ display:none;
 #TB_window img {
 	display:block;
 	margin: 10px 0 10px 10px;
+	border:none;
 }
 
 #TB_legend{
