@@ -119,8 +119,18 @@ function exec_editer_adherent(){
 	echo "<form name='adherent' method='post' action='?exec=editer_adherent&act=val&id=$id'>";
 	echo "<table>";
 	foreach ($query as $cle => $val){
-		echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
-		echo "<td><input type='text' name='$cle' value='$val'><br /></td><tr/>"; 
+		if($cle=='publication'){
+			if ($val == 'on')	
+				$val = 'checked';
+			else
+				$val ='';
+			
+			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
+			echo "<td><input type='checkbox' name='$cle' $val><br /></td><tr/>"; 	
+		}else{
+			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
+			echo "<td><input type='text' name='$cle' value='$val'><br /></td><tr/>"; 
+		}
 	}
 	if($news){
 		echo "<tr><td><strong>"._T('inscription2:newsletter')."</strong></td><td>";

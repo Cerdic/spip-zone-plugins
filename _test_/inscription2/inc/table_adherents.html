@@ -213,10 +213,10 @@ $().ready(function() {
 	
 	$id=_request('id');
 	$act=_request('act');
-	$valeur=$_POST['valeur'];
-	$case=$_POST['case'];
-	$debut=$_GET['debut'];
-	$ordre = $_GET['ordre'];
+	$valeur=_request('valeur');
+	$case=_request('case');
+	$debut=_request('debut');
+	$ordre =_request('ordre');
 	
 	if ( isset($valeur)) {
 		if($case=='id')
@@ -234,7 +234,7 @@ $().ready(function() {
 	
 	$url = $url.'&debut='.$debut;
 	
-	if(isset($id) and $act=='sup'){
+	if(!empty($id) and $act=='sup'){
 		spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_zone_auteurs WHERE id_auteur='$id'");
@@ -281,7 +281,9 @@ $().ready(function() {
 	echo '<td><strong>'._T('inscription2:supprimer_adherent_red').'</strong></td>';
 	echo '</tr>';
 	
-	$query = spip_query ( "SELECT a.id_auteur, a.statut, ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
+	$table_auteurs[] = 'a.id_auteur';
+	$table_auteurs[] = 'a.statut';
+	$query = spip_query ( "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
 			ON b.id_auteur = a.id_auteur WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page" );
 	
 	$i=0;
@@ -293,19 +295,22 @@ $().ready(function() {
 		else 
 			echo '<td> </td>';
 		
-		if(!empty($data['nom']) and !empty($data['email']))
-			echo '<td><a href="mailto:'.$data['email'].'">'.$data['nom'].'</a></td>';
-		elseif(!empty($data['nom']))
-			echo '<td>'.$data['nom'].'</td>';
-		elseif(!empty($data['email']))
-			echo '<td><a href="mailto:'.$data['email'].'">'.$data['email'].'</a></td>';
-		else
-			echo '<td> </td>';
-			
-		if(!empty($data['prenom']))
-			echo '<td>'.$data['prenom'].'</td>';
-		else
-			echo '<td> </td>';
+		if(lire_config('inscription2/nom_table') or lire_config('inscription2/email_table')){
+			if(!empty($data['nom']) and !empty($data['email']))
+				echo '<td><a href="mailto:'.$data['email'].'">'.$data['nom'].'</a></td>';
+			elseif(!empty($data['nom']))
+				echo '<td>'.$data['nom'].'</td>';
+			elseif(!empty($data['email']))
+				echo '<td><a href="mailto:'.$data['email'].'">'.$data['email'].'</a></td>';
+			else
+				echo '<td> </td>';
+		}
+		if(lire_config('inscription2/prenom_table')){
+			if(!empty($data['prenom']))
+				echo '<td>'.$data['prenom'].'</td>';
+			else
+				echo '<td> </td>';
+		}
 		foreach(lire_config('inscription2') as $cle => $val){
 			if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table'){
 				$cle = str_replace("_table", "", $cle);
@@ -331,12 +336,16 @@ $().ready(function() {
 			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/defaut-12.gif"';
 			
 		echo '<td><a href="?exec=auteur_infos&id_auteur='.$data['id_auteur'].'"><img src='.$url_logo.' title="'._T('inscription2:fiche_adherent').'"></a></td>';
-		echo '<td><a href="?exec=inscription2_adherents&id='.$data['id_auteur'].'&act=sup" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" title="'._T('inscription2:supprimer_adherent').'"></a></td>';
+		if($data['statut'] != '0minirezo' and $data['statut'] != '1comite')
+			echo '<td><a href="?exec=inscription2_adherents&id='.$data['id_auteur'].'&act=sup" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" title="'._T('inscription2:supprimer_adherent').'"></a></td>';
+		else 
+			echo '<td><a href="?exec=inscription2_adherents" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/interdit-12.gif" title="'._T('inscription2:supprimer_adherent').'"></a></td>';
 		echo '</tr>';
 		
 	}
-	$query = spip_query("SELECT a.id_auteur FROM spip_auteurs a WHERE $critere");
-	$nombre_selection=spip_num_rows($query);
+	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a WHERE $critere");
+	$query = spip_fetch_array($query);
+	$nombre_selection = $query['COUNT(*)'];
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 
 	if ($pages != 1)	{

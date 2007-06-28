@@ -27,17 +27,19 @@ function inscription2_verifier_base(){
 	}
 	//ajouts des différents champs
 	$desc = spip_abstract_showtable($table_nom, '', true);
-	foreach(lire_config('inscription2') as $cle => $val) {
-		$cle = ereg_replace("_(fiche|table).*$","", $cle);
-		if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'naissance' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle)){
-			spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
-			$desc['field'][$cle] = "TEXT NOT NULL";
-		}if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance'){
-			spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
-			$desc['field'][$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
+	if (is_array(lire_config('inscription2')){
+		foreach(lire_config('inscription2') as $cle => $val) {
+			$cle = ereg_replace("_(fiche|table).*$","", $cle);
+			if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'naissance' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle)){
+				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
+				$desc['field'][$cle] = "TEXT NOT NULL";
+			}if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance'){
+				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
+				$desc['field'][$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
+			}
 		}
 	}
-	if($GLOBALS['meta']['spiplistes_version'])
+	if($GLOBALS['meta']['spiplistes_version'] and !isset($desc['field']['spiplistes_version']))
 		spip_query("ALTER TABLE `".$table_nom."` ADD `spip_listes_format` VARCHAR(8)");
 	$s = spip_query("SELECT a.id_auteur FROM spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur WHERE b.id_auteur is null");
 	while($q = spip_fetch_array($s))
@@ -56,7 +58,13 @@ function inscription2_verifier_base(){
 	function inscription2_vider_tables() {
 		include_spip('base/abstract_sql');
 		//supprime la table spip_auteurs_ajouts
+		$desc = spip_abstract_showtable('spip_auteurs_elargis', '', true);
+		foreach(lire_config('inscription2') as $cle => $val){
+			if(isset($desc['field'][$cle])	and $cle != 'id' and $cle != 'id_auteur' and $cle != 'spip_listes_format')
+				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);
+		}
 		spip_query("DROP TABLE spip_auteurs_elargis");
+		effacer_meta('inscription2');
 		effacer_meta('inscription2_version');
 		ecrire_metas();
 	}
