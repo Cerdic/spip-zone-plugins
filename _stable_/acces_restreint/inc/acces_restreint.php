@@ -78,19 +78,6 @@ function AccesRestreint_liste_contenu_zone_auteur($id_zone) {
 	return $liste_auteurs;
 }
 
-function AccesRestreint_liste_rubriques_acces_proteges($publique=true){
-	static $liste_acces_protege=array(); // la calculer une seule fois par hit
-	if (!isset($liste_acces_protege[$publique]) || !is_array($liste_acces_protege[$publique])){
-		if ($publique)
-			$cond = "publique='oui'";
-		else
-			$cond = "privee='oui'";
-		$liste_acces_protege[$publique] = AccesRestreint_liste_contenu_zone_rub($cond);
-	}
-	return $liste_acces_protege[$publique];
-}
-
-
 // fonctions de filtrage rubrique
 // plus performant a priori : liste des rubriques exclues uniquement
 // -> condition NOT IN
@@ -102,35 +89,20 @@ function AccesRestreint_liste_rubriques_exclues($publique=true) {
 	static $liste_rub_exclues = array();
 	if (!isset($liste_rub_exclues[$publique]) || !is_array($liste_rub_exclues[$publique])) {
 
-		// Initialiser : toute rubrique appartenant a une zone
-		// publique (ou privee, c'est selon)
-		$liste_rub_exclues[$publique] = AccesRestreint_liste_rubriques_acces_proteges($publique);
+		// Ne selectionner que les zones pertinentes
+		if ($publique)
+			$cond = "publique='oui'";
+		else
+			$cond = "privee='oui'";
 
 		// Si le visiteur est autorise sur certaines zones publiques,
-		// on retire les rubriques correspondantes de la liste des zones
-		// interdites
-		if ($GLOBALS['AccesRestreint_zones_autorisees']) {
+		// on selectionne les rubriques correspondant aux autres zones,
+		// sinon on selectionne toutes celles correspondant à une zone.
+		if ($GLOBALS['AccesRestreint_zones_autorisees'])
+			$cond .= " AND zr.id_zone NOT IN (".$GLOBALS['AccesRestreint_zones_autorisees'].")";
 
-			// Ne selectionner que les zones pertinentes
-			if ($publique)
-				$cond = "z.publique='oui'";
-			else
-				$cond = "z.privee='oui'";
-
-			// Initialise la recurrence avec les rubriques "parentes" des zones actives
-			$rubs = array();
-			$s = spip_query("SELECT DISTINCT(zr.id_rubrique) FROM spip_zones AS z LEFT JOIN spip_zones_rubriques AS zr USING(id_zone) WHERE z.id_zone IN (".$GLOBALS['AccesRestreint_zones_autorisees'].") AND $cond");
-			while ($row = spip_fetch_array($s))
-				$rubs[] = $row['id_rubrique'];
-
-			// Recurrence (descendre les branches)
-			include_spip('inc/rubriques');
-			if ($rubs)
-				$rubs = explode(',', calcul_branche(join(',', $rubs)));
-			// Supprimer les rubriques finalement autorisees de la liste
-			// des rubriques interdites
-			$liste_rub_exclues[$publique] = array_diff($liste_rub_exclues[$publique], $rubs);
-		}
+		$liste_rub_exclues[$publique] = AccesRestreint_liste_contenu_zone_rub($cond);
+		$liste_rub_exclues[$publique] = array_unique($liste_rub_exclues[$publique]);
 	}
 	return $liste_rub_exclues[$publique];
 }
