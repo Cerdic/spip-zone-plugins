@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['inscription2_version'] = 0.2;
+$GLOBALS['inscription2_version'] = 0.3;
 
 function inscription2_verifier_base(){
 	include_spip('base/abstract_sql');
@@ -14,7 +14,7 @@ function inscription2_verifier_base(){
 	$table_nom = "spip_auteurs_elargis";
 	if (!isset($GLOBALS['meta']['inscription2_version']) ){
 		//création de la nouvelle table spip_auteurs_elargis
-		spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, id_auteur bigint NOT NULL, FOREIGN KEY (id_auteur) REFERENCES spip_auteurs (id_auteur));");
+		spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, id_auteur bigint NOT NULL, INDEX id_auteur (id_auteur) );");
 	}
 	$desc = spip_abstract_showtable($table_nom, '', true);
 	if($desc['key']['PRIMARY KEY']!='id'){
@@ -23,11 +23,14 @@ function inscription2_verifier_base(){
 			spip_query("ALTER TABLE ".$table_nom." ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY");
 		else 
 			spip_query("ALTER TABLE ".$table_nom." ADD PRIMARY KEY (id)");
-		spip_query("ALTER TABLE ".$table_nom." ADD FOREIGN KEY (id_auteur) REFERENCES spip_auteurs (id_auteur)");
 	}
+	if($desc['key']['KEY id_auteur'])
+		spip_query("ALTER TABLE ".$table_nom." DROP INDEX id_auteur, ADD INDEX id_auteur (id_auteur)");
+	else
+		spip_query("ALTER TABLE ".$table_nom." ADD INDEX id_auteur (id_auteur)");
 	//ajouts des différents champs
 	$desc = spip_abstract_showtable($table_nom, '', true);
-	if (is_array(lire_config('inscription2')){
+	if (is_array(lire_config('inscription2'))){
 		foreach(lire_config('inscription2') as $cle => $val) {
 			$cle = ereg_replace("_(fiche|table).*$","", $cle);
 			if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'naissance' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle)){
@@ -39,7 +42,7 @@ function inscription2_verifier_base(){
 			}
 		}
 	}
-	if($GLOBALS['meta']['spiplistes_version'] and !isset($desc['field']['spiplistes_version']))
+	if($GLOBALS['meta']['spiplistes_version'] and !isset($desc['field']['spip_listes_format']))
 		spip_query("ALTER TABLE `".$table_nom."` ADD `spip_listes_format` VARCHAR(8)");
 	$s = spip_query("SELECT a.id_auteur FROM spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur WHERE b.id_auteur is null");
 	while($q = spip_fetch_array($s))
