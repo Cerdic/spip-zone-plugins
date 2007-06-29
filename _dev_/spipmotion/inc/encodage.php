@@ -21,7 +21,7 @@ function inc_encodage($files){
 $dir_ftp = determine_upload();
 
 	foreach ($files as $arg) {
-		$encodageflv = _DIR_PLUGIN_SPIPMOTION.'script_bash/spipmotion.sh --e '.$dir_ftp.$arg['name'].' --s '.$dir_ftp.$arg['name'].'.flv --bitrate '.lire_config("spipmotion/bitrate").' --audiobitrate '.lire_config("spipmotion/bitrate_audio").' --audiofreq '. lire_config("spipmotion/frequence_audio").' --fps '.lire_config("spipmotion/fps").' --p '.lire_config("spipmotion/chemin");
+		$encodageflv = _DIR_PLUGIN_SPIPMOTION.'script_bash/spipmotion.sh --e '.$dir_ftp.$arg['name'].' --s '.$dir_ftp.$arg['name'].'.flv --bitrate '.lire_config("spipmotion/bitrate","448").' --audiobitrate '.lire_config("spipmotion/bitrate_audio","64").' --audiofreq '. lire_config("spipmotion/frequence_audio","22050").' --fps '.lire_config("spipmotion/fps","15").' --p '.lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg");
 		$x = shell_exec($encodageflv);
 		spip_log($encodageflv);
 	}

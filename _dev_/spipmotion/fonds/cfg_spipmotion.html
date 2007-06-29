@@ -26,7 +26,7 @@ Pour l'instant on se contente de la video ... on verra plus tard pour le reste..
 	<strong><:spipmotion:chemin_executable:></strong>
 </td><td>
 	<label>
-		<input type="text" name="chemin" class="formo" value="#ENV{chemin}">
+		<input type="text" name="chemin" class="formo" [value="(#ENV{chemin}|?{#ENV{chemin},'/usr/local/bin/ffmpeg'})"]>
 	</label>
 </td>
 </tr>
@@ -36,7 +36,7 @@ Pour l'instant on se contente de la video ... on verra plus tard pour le reste..
 	<strong><:spipmotion:width_video:></strong>
 </td><td>
 	<label>
-		<input type="text" name="width" class="formo" value="#ENV{width}" style="width:30px;" />
+		<input type="text" name="width" class="formo" [value="(#ENV{width}|?{#ENV{width},'340'})"] style="width:3em;" />
 	</label>
 </td>
 </tr>
@@ -46,7 +46,7 @@ Pour l'instant on se contente de la video ... on verra plus tard pour le reste..
 	<strong><:spipmotion:height_video:></strong>
 </td><td>
 	<label>
-		<input type="text" name="height" id="height" class="formo" [value="(#ENV{height})"] style="width:30px;" />
+		<input type="text" name="height" id="height" class="formo" [value="(#ENV{height}|?{#ENV{height},'280'})"] style="width:3em;" />
 	</label>
 </td>
 </tr>
@@ -56,7 +56,7 @@ Pour l'instant on se contente de la video ... on verra plus tard pour le reste..
 	<strong><:spipmotion:bitrate:></strong>
 </td><td>
 	<label>
-		<input type="text" name="bitrate" id="bitrate" class="formo" [value="(#ENV{bitrate})"] style="width:30px;" />
+		<input type="text" name="bitrate" id="bitrate" class="formo" [value="(#ENV{bitrate}|?{#ENV{bitrate},'448'})"] style="width:3em;" />
 	</label>
 </td>
 </tr>
@@ -66,7 +66,7 @@ Pour l'instant on se contente de la video ... on verra plus tard pour le reste..
 	<strong><:spipmotion:framerate:></strong>
 </td><td>
 	<label>
-		<input type="text" name="fps" id="fps" class="formo" [value="(#ENV{fps})"] style="width:30px;" />
+		<input type="text" name="fps" id="fps" class="formo" [value="(#ENV{fps}|?{#ENV{fps},'15'})"] style="width:3em;" />
 	</label>
 </td>
 </tr>
@@ -76,7 +76,7 @@ Pour l'instant on se contente de la video ... on verra plus tard pour le reste..
 	<strong><:spipmotion:frequence_audio:></strong>
 </td><td>
 	<label>
-		<input type="text" name="frequence_audio" id="frequence_audio" class="formo" [value="(#ENV{frequence_audio})"] style="width:30px;" />
+		<input type="text" name="frequence_audio" id="frequence_audio" class="formo" [value="(#ENV{frequence_audio}|?{#ENV{frequence_audio},'22050'})"] style="width:5em;" />
 	</label>
 </td>
 </tr>
@@ -86,7 +86,7 @@ Pour l'instant on se contente de la video ... on verra plus tard pour le reste..
 	<strong><:spipmotion:bitrate_audio:></strong>
 </td><td>
 	<label>
-		<input type="text" name="bitrate_audio" id="bitrate_audio" class="formo" [value="(#ENV{bitrate_audio})"] style="width:30px;" />
+		<input type="text" name="bitrate_audio" id="bitrate_audio" class="formo" [value="(#ENV{bitrate_audio}|?{#ENV{bitrate_audio},'64'})"] style="width:3em;" />
 	</label>
 </td>
 </tr>
