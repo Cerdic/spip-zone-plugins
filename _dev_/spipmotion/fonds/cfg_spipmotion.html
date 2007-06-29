@@ -1,0 +1,132 @@
+[(#REM) titre=Configuration du plugin «&nbsp;Spipmotion&nbsp;»]
+
+[(#REM) descriptif=
+Ce plugin permet d"encoder à la volee des videos au format flv
+
+Pour l'instant on se contente de la video ... on verra plus tard pour le reste...
+]
+
+#CACHE{0}
+
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<br />
+
+[(#REM|debut_cadre_trait_couleur{1,"xxx",""})]
+
+[(#REM) ------------------------ INFOS POUR ENCODAGE ------------------------ ]
+<fieldset>
+<legend>
+	<:spipmotion:options_config:>
+</legend>
+
+<table>
+<tr>
+<td>
+	<strong><:spipmotion:chemin_executable:></strong>
+</td><td>
+	<label>
+		<input type="text" name="chemin" class="formo" value="#ENV{chemin}">
+	</label>
+</td>
+</tr>
+
+<tr>
+<td>
+	<strong><:spipmotion:width_video:></strong>
+</td><td>
+	<label>
+		<input type="text" name="width" class="formo" value="#ENV{width}" style="width:30px;" />
+	</label>
+</td>
+</tr>
+
+<tr>	
+<td>
+	<strong><:spipmotion:height_video:></strong>
+</td><td>
+	<label>
+		<input type="text" name="height" id="height" class="formo" [value="(#ENV{height})"] style="width:30px;" />
+	</label>
+</td>
+</tr>
+
+<tr>	
+<td>
+	<strong><:spipmotion:bitrate:></strong>
+</td><td>
+	<label>
+		<input type="text" name="bitrate" id="bitrate" class="formo" [value="(#ENV{bitrate})"] style="width:30px;" />
+	</label>
+</td>
+</tr>
+
+<tr>	
+<td>
+	<strong><:spipmotion:framerate:></strong>
+</td><td>
+	<label>
+		<input type="text" name="fps" id="fps" class="formo" [value="(#ENV{fps})"] style="width:30px;" />
+	</label>
+</td>
+</tr>
+
+<tr>	
+<td>
+	<strong><:spipmotion:frequence_audio:></strong>
+</td><td>
+	<label>
+		<input type="text" name="frequence_audio" id="frequence_audio" class="formo" [value="(#ENV{frequence_audio})"] style="width:30px;" />
+	</label>
+</td>
+</tr>
+
+<tr>	
+<td>
+	<strong><:spipmotion:bitrate_audio:></strong>
+</td><td>
+	<label>
+		<input type="text" name="bitrate_audio" id="bitrate_audio" class="formo" [value="(#ENV{bitrate_audio})"] style="width:30px;" />
+	</label>
+</td>
+</tr>
+
+</table>
+</fieldset>
+
+[(#REM) Code jQuery plier/deplier les listes ]
+<script type="text/javascript"><!--
+function showhide(boxName, boxNom) {
+if(boxName.checked){
+	$(boxNom).slideDown("slow");
+}
+else 
+	$(boxNom).slideUp("slow");
+}
+// --></script>
+
+<script type="text/javascript"><!--
+function enadis(boxName, boxNom) {
+if(boxName.checked){
+	boxNom.disabled = true;
+	boxNom.checked = false;
+}else 
+	boxNom.disabled = false;
+}
+// --></script>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>
+
+
