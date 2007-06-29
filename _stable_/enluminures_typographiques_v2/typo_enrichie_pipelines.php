@@ -11,7 +11,7 @@ function TypoEnluminee_insert_head($flux) {
 		}
 	}
 	if (!$BarreTypoEnrichie_Preserve_Header) {
-		$cssFile = find_in_path('css/bartypenr.css');
+		$cssFile = find_in_path('css/enluminurestypo.css');
 		$incHead = <<<EOH
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
 EOH;
@@ -19,6 +19,11 @@ EOH;
 	} else {
 		return $flux;
 	}
+}
+
+function TypoEnluminee_header_prive($texte) {
+	$texte.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGIN_TYPOENLUMINEE . 'css/enluminurestypo.css" />' . "\n";
+	return $texte;
 }
 
 ?>

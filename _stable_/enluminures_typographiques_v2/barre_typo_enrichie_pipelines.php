@@ -1,9 +1,4 @@
 <?php
-if (!defined('_DIR_PLUGIN_TYPOENLUMINEE')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-	define('_DIR_PLUGIN_TYPOENLUMINEE',(_DIR_PLUGINS.end($p)));
-}
-
 
 // pour les caracteres
 function afficher_boutonsavances($champ, $champhelp) {
