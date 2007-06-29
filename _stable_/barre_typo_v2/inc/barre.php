@@ -11,10 +11,6 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-if (!defined('_DIR_PLUGIN_BARRETYPOENRICHIE')){
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-	define('_DIR_PLUGIN_BARRETYPOENRICHIE',(_DIR_PLUGINS.end($p)));
-}
 
 // construit un bouton (ancre) de raccourci avec icone et aide
 
