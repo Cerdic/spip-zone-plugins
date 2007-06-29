@@ -76,7 +76,7 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 			if (count($liste)){
 				include_spip('forms_fonctions');
 				$id_form = intval(reset($liste));
-		  	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
+		  	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut='publie'");
 		  	while ($row = spip_fetch_array($res)){
 		  		$accro=str_replace(".","",forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'ligne_1', $id_form,' ', true));
 		  		$desc = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'texte_1', $id_form,' ', true);
