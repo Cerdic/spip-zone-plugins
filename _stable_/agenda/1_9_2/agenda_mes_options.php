@@ -1,6 +1,9 @@
 <?php
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_AGENDA',(_DIR_PLUGINS.end($p)));
+
+if (!defined('_DIR_PLUGIN_AGENDA')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_AGENDA',(_DIR_PLUGINS.end($p)));
+}
 include_spip('base/agenda_evenements');
 
 //Pour 1.9.3: permet d'utiliser les criteres racine, meme_parent, id_parent
