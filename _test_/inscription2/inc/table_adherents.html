@@ -210,36 +210,53 @@ $().ready(function() {
 	include_spip('base/abstract_sql');
 	
 	$url = "?exec=inscription2_adherents";
-	
+	//supprimer un auteur ou nettoyer 
 	$id=_request('id');
 	$act=_request('act');
+	
+	//rechercher
 	$valeur=_request('valeur');
 	$case=_request('case');
-	$debut=_request('debut');
-	$ordre =_request('ordre');
-	
-	if ( isset($valeur)) {
+	if (isset($valeur)) {
 		if($case=='id'){
 			$critere="a.id_auteur='$valeur'";
 		}else
 			$critere="$case='$valeur'"; 
 	}else
 		$critere="a.id_auteur<>'0'"; 
-	
+		
+	//pagination
 	$max_par_page=30;
+	$debut=_request('debut');
 	if (empty($debut)) 
 		$debut=0; 
+	
+	//ordre
+	$ordre =_request('ordre');
+	$desc = _request('desc');
+	
 	if(empty($ordre))
-		$ordre = 'id_auteur';
+		$ordre = 'id_auteur '.$desc;
+	else
+		$ordre .= ' '.$desc;
 	
-	$url = $url.'&debut='.$debut;
+	if($desc=='DESC')
+		$desc = 'ASC';
+	else
+		$desc = 'DESC';
 	
+
+	//$url = $url.'&debut='.$debut;
+	
+	//supprimer un auteur
 	if(!empty($id) and $act=='sup'){
 		spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_zone_auteurs WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
 	}
+
+	//nettoyer la table
 	if($act=='net'){
 		$desc = spip_abstract_showtable('spip_auteurs_elargis', '', true);
 		foreach($desc['field'] as $cle =>$val){
@@ -249,13 +266,14 @@ $().ready(function() {
 				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);
 		}
 	}
-	echo '<td><strong><a href="'.$url.'&ordre=id_auteur">ID</a></strong></td>';
+	
+	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'">ID</a></strong></td>';
 	if(lire_config('inscription2/nom_table')){
-		echo '<td><strong><a href="'.$url.'&ordre=nom">'._T('inscription2:nom').'</a></strong></td>';
+		echo '<td><strong><a href="'.$url.'&ordre=nom&desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
 		$table_auteurs[] = "a.nom";
 	}
 	if(lire_config('inscription2/prenom_table')){
-		echo '<td><strong><a href="'.$url.'&ordre=prenom">'._T('inscription2:prenom').'</a></strong></td>';
+		echo '<td><strong><a href="'.$url.'&ordre=prenom&desc='.$desc.'">'._T('inscription2:prenom').'</a></strong></td>';
 		$table_auteurs[] = "b.prenom";
 	}
 	if(lire_config('inscription2/email_table')){
@@ -272,12 +290,12 @@ $().ready(function() {
 			else
 				$table_auteurs[] = "b.".$cle;
 			if($cle =='username')
-				echo '<td><strong><a href="'.$url.'&ordre=login">'._T('inscription2:'.$cle).'</a></strong></td>';
+				echo '<td><strong><a href="'.$url.'&ordre=login&desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
 			else
-				echo '<td><strong><a href="'.$url.'&ordre='.$cle.'">'._T('inscription2:'.$cle).'</a></strong></td>';
+				echo '<td><strong><a href="'.$url.'&ordre='.$cle.'&desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
 		}
 	}
-	echo '<td colspan="2" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut">'._T('inscription2:action_adherent').'</a></strong></td>';
+	echo '<td colspan="2" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut&desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
 	echo '<td><strong>'._T('inscription2:supprimer_adherent_red').'</strong></td>';
 	echo '</tr>';
 	
