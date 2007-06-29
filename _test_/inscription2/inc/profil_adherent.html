@@ -1,9 +1,9 @@
 <div class = "affichage">
 <?php 
 	$aux = "";
-	$var_user = array();
 	$auteur = array();
 	//liste d'elements a afficher
+	$auteur['b.id'] = "0";
 	foreach(lire_config('inscription2') as $cle => $val) {
 		//Si la $cle est marqué pour être affichée mais pas modifiable
 		if($val!='' and ereg("^.+_fiche$", $cle)){ 
@@ -37,18 +37,23 @@
 	}
 	$id = $GLOBALS['auteur_session']['id_auteur'];
 	if(is_array($aux)){
+		// sur la table spip_auteurs_elargis, s'il n'existe pas on l'ajoute.
+		if($aux['id'] == NULL)
+			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
 		foreach($aux as $cle => $val){
-			echo '<div><strong>'._T('inscription2:'.$cle).' : </strong>';
-			if($cle == 'login' or $cle == 'nom' or $cle == 'email'){
-				if($auteur['a.'.$cle]=="1")
-					echo '<span class="crayon auteur-'.$cle.'-'.$id.' ">'.sinon($val,'...').'</span></div>';  
-				else 
-					echo '<span>'.sinon($val,'...').'</span></div>';  
-			}else{
-				if($auteur['b.'.$cle]=="1")
-					echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.sinon($val,'...').'</span></div>';  
-				else 
-					echo '<span>'.sinon($val,'...').'</span></div>';  
+			if($cle != 'id'){
+				echo '<div><strong>'._T('inscription2:'.$cle).' : </strong>';
+				if($cle == 'login' or $cle == 'nom' or $cle == 'email'){
+					if($auteur['a.'.$cle]=="1")
+						echo '<span class="crayon auteur-'.$cle.'-'.$id.' ">'.sinon($val,'...').'</span></div>';  
+					else 
+						echo '<span>'.sinon($val,'...').'</span></div>';  
+				}else{
+					if($auteur['b.'.$cle]=="1")
+						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.sinon($val,'...').'</span></div>';  
+					else 
+						echo '<span>'.sinon($val,'...').'</span></div>';  
+				}
 			}
 		}
 	}

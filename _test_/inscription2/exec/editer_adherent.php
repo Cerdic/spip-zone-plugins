@@ -74,6 +74,7 @@ function exec_editer_adherent(){
 
 
 	foreach(lire_config('inscription2') as $cle => $val){
+		$var_user['b.id'] = '1';
 		if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(fiche|table).*$", "", $cle);
@@ -103,8 +104,9 @@ function exec_editer_adherent(){
 	}
 
 	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
-
 	$query = spip_fetch_array($query);
+	if($query['id'] == NULL)
+			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
 	
 	debut_page(_T('inscription2:editer_adherent'), "", "");
 	debut_gauche();
