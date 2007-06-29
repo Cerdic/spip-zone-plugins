@@ -64,7 +64,7 @@
 	include_once("classes/Stock.class.php");
 	include_once("classes/Perso.class.php");
 
-	include_once("divers.php");
+	include_once("fonctions/divers.php");
 	include_once("lib/magpierss/rss_fetch.inc");
 			
 	/* Gestion des boucles de type Rubrique*/
