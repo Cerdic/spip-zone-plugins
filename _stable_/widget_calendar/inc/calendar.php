@@ -1,7 +1,10 @@
 <?php
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_WIDGET_CALENDAR',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_WIDGET_CALENDAR')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+	define('_DIR_PLUGIN_WIDGET_CALENDAR',(_DIR_PLUGINS.end($p)));
+}
+
 define('_WIDGET_CALENDAR_BACK_IN_TIME',4);
 
 global $WCalendar_independants,$WCalendar_lies,$WCalendar_statiques;
