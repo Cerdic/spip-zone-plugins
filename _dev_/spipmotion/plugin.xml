@@ -1,12 +1,13 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	SPIPmotion
+	<nom>
+		SPIPmotion
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
+	<icon>images/flv.png</icon>
+	<auteur>
 	Quentin Drouet (kent1)
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	experimental
@@ -14,16 +15,17 @@
 	<description>
 	<multi>
 	[fr] Faire un dailymotion sous spip? Premi&#232;res infos [par ici->http://kent1.sklunk.net/spip.php?article71].
+	<h4><a href="?exec=cfg&amp;cfg=spipmotion">Configuration</a></h4>
 	</multi>
 	</description>
 	<lien>http://kent1.sklunk.net/spip.php?article71</lien>
+	<necessite id='cfg' version='[1.0.2;]' />
 	<options> <!-- fichier charge a chaque hit -->
 	spipmotion_options.php
 	</options>
 	<prefix>
 	spipmotion
 	</prefix>
-	
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
@@ -34,7 +36,5 @@
 		<action>affiche_droite</action>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
-	
-
-	
+	<chemin dir='' />
 </plugin>

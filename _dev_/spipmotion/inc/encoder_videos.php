@@ -90,7 +90,7 @@ function texte_encoder_manuel_videos($dir, $inclus = '', $mode = 'videos') {
 			}
 			// si l'extension est connu par spip et que c'est un format video que l'on peut encoder
 			if ($exts[$ext] == 'oui'){
-				if (($ext == 'mp4') OR ($ext == 'avi'))
+				if (($ext == 'mp4') OR ($ext == 'avi') OR ($ext == 'mpg'))
 			  $texte_upload[] = "\n<option value=\"$f\">" .
 			    str_repeat("&nbsp;",$k+2) .
 			    $lefichier .

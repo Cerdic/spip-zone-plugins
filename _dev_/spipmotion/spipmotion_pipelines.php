@@ -30,9 +30,9 @@ function spipmotion_ajouter_onglets($flux) {
 	global $connect_statut, $connect_toutes_rubriques;
 	if($connect_statut == '0minirezo' AND $connect_toutes_rubriques)
 		if($flux['args']=='configuration')
-		$flux['data']['config_spipmotion']= new Bouton("",
+		$flux['data']['config_spipmotion']= new Bouton("../"._DIR_PLUGIN_SPIPMOTION."images/flv.png",
 		_T('spipmotion:titre'),
-		generer_url_ecrire("config_spipmotion"));
+		parametre_url(generer_url_ecrire('cfg'),'cfg','spipmotion'));
 	return $flux;
 }
 
