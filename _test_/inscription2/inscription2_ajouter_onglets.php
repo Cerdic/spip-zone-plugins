@@ -22,7 +22,7 @@ function Inscription2_ajouter_onglets($flux) {
 function Inscription2_ajouter_boutons($boutons_admin){
 
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-		
+
 		$boutons_admin['auteurs']->sousmenu['inscription2_adherents']= new Bouton(
 		"../"._DIR_PLUGIN_INSCRIPTION2."images/inscription2_icone.png", // icone
 		_T("inscription2:adherents") //titre
@@ -32,7 +32,7 @@ function Inscription2_ajouter_boutons($boutons_admin){
 }
 
 function Inscription2_affiche_milieu($flux){
-	if ($GLOBALS['spip_version_code']<=1.256){
+	if ($GLOBALS['spip_version_code']<=1.9256){
 		switch($flux['args']['exec']) {	
 		case 'auteur_infos':
 		case 'auteurs_edit':
