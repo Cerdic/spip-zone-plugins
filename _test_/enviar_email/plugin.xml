@@ -1,10 +1,13 @@
 <plugin>
 	<nom>
-	Enviar email
+	<multi>
+	[es]Enviar email
+	[fr]Envoyer par mail
+	</multi>
 	</nom>
 	<auteur>
-joseluis@digital77.com
-_ CopyLeft - 2006
+	joseluis@digital77.com
+		_ CopyLeft - 2006
 	</auteur>
 	<version>
 	0.1
@@ -13,11 +16,21 @@ _ CopyLeft - 2006
 	test
 	</etat>
 	<description>
-Enviar la referencia al artículo o a la breve por email
-_ Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artículos o breves)
-_ Los dos ** asteriscos son importantes, no los olvides.
+		<multi>	
+[es]Enviar la referencia al artículo o a la breve por email
+	- Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artículos o breves)
+	- Los dos ** asteriscos son importantes, no los olvides.
+[fr]Envoyer la r&eacute;f&eacute;rence de l'article par mail
+	<br>- Pour l'utiliser coller la balise #ENVIAR_EMAIL** dans votre squelette</br>	
+	<br>- les deux ast&eacute;risques sont indispensables</br>
+		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/article1407.html</lien> <!-- URI de documentation -->
+	
+	<lien> 
+		[es] [Documentación sobre contrib->http://www.spip-contrib.net/?article1407]
+		<br>[fr] [Documentation sur contrib->http://www.spip-contrib.net/?article2228]</br>
+	</lien>
+	<icon>sobre.gif</icon>
 	<fonctions>
 	baliza_enviar_email.php
 	</fonctions>
