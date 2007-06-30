@@ -131,7 +131,7 @@ function exec_editer_adherent(){
 			echo "<td><input type='checkbox' name='$cle' $val><br /></td><tr/>"; 	
 		}else{
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
-			if($cle == 'adresse' OR $cle == 'diverse')
+			if($cle == 'adresse' OR $cle == 'divers')
 				echo "<td><textarea name='$cle'>$val</textarea><br /></td><tr/>"; 
 			else
 				echo "<td><input type='text' name='$cle' value='$val'><br /></td><tr/>"; 
