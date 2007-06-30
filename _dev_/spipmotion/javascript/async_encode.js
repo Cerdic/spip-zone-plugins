@@ -1,13 +1,13 @@
 // JavaScript Document
-jQuery.async_upload_count = 0;
-jQuery.fn.async_upload = function(add_function) {
+jQuery.async_encode_count = 0;
+jQuery.fn.async_encode = function(add_function) {
 	return this.submit(function(){
-		return do_async_upload(this);
+		return do_async_encode(this);
 	});
 
-	function do_async_upload(form) {
-		jQuery.async_upload_count++;
-		var num = jQuery.async_upload_count;
+	function do_async_encode(form) {
+		jQuery.async_encode_count++;
+		var num = jQuery.async_encode_count;
 		var jForm = $(form);
 		var par = $(jForm).parent();
 		$("div.upload_message",par)
@@ -65,7 +65,7 @@ jQuery.fn.async_upload = function(add_function) {
 	}
 }
 
-function async_upload_article_edit(res,jForm){
+function async_encode_article_edit(res,jForm){
 	var cont;
 
 	//add a class to new documents
@@ -97,17 +97,17 @@ function async_upload_article_edit(res,jForm){
 	return true;
 }
 
-function async_upload_icon(res) {
+function async_encode_icon(res) {
 	res.find(">div").each(function(){
 		var cont = $("#"+this.id);
 		verifForm(cont.html($(this).html()));
-		$("form.form_upload_icon",cont).async_upload(async_upload_icon);
+		$("form.form_upload_icon",cont).async_encode(async_encode_icon);
 		cont.find("img[@onclick]").each(function(){this.onclick();});
 	});
 	return true;
 }
 
-function async_upload_portfolio_documents(res){
+function async_encode_portfolio_documents(res){
 	res.find(">div").each(function(){
 	var cont = $("#"+this.id);
 	var self = $(this);
@@ -116,7 +116,7 @@ function async_upload_portfolio_documents(res){
 			.append(self.clone().get());
 		}
 		verifForm(cont.html(self.html()));
-		$("form.form_upload",cont).async_upload(async_upload_portfolio_documents);
+		$("form.form_upload",cont).async_encode(async_encode_portfolio_documents);
 	});
 	return true;
 }

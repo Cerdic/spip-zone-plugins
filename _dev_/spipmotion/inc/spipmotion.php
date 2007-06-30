@@ -21,18 +21,26 @@ function spipmotion_afficher_insertion_videos($id_article) {
 
 	$s = "";
 	// Ajouter le formulaire d'ajout de videos
-	$s .= "\n<p>";
-	$s .= "\n";
 	$s .= afficher_videos_colonne($id_article, 'article', true);
 	return $s;
 }
 
 function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
-	global $connect_id_auteur, $connect_statut, $options;
+	
+	include_spip('inc/autoriser');
+	// il faut avoir les droits de modif sur l'article pour pouvoir uploader !
+	if (!autoriser('joindredocument',$type,$id))
+		return "";
 
-	// seuls cas connus : exec=articles_edit ou breves_edit
-	$script = $type.'s_edit';
-
+	include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
+	// seuls cas connus : article, breve ou rubrique
+	if ($script==NULL){
+		$script = $type.'s_edit';
+		if (!test_espace_prive())
+			$script = parametre_url(self(),"show_docs",'');
+	}
+	$id_document_actif = _request('show_docs');
+	
 	// videos associees
 	$res = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='' ORDER BY docs.id_document");
 
@@ -53,32 +61,69 @@ function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
 	$joindre_videos = charger_fonction('joindre_videos', 'inc');
 
 	// Ajouter nouveau document
-	$ret .= "</div><p>&nbsp;</p>\n<a name='videos'></a>\n<a name='portfolio_videos'></a>\n";
+	$ret .= "<br /><br /><div id='videos'></div>\n<div id='portfolio_videos'></div>\n";
+	if (!isset($GLOBALS['meta']["documents_$type"]) OR $GLOBALS['meta']["documents_$type"]!='non') {
+		$ret .= $joindre_videos(array(
+			'cadre' => 'enfonce',
+			'icone' => 'doc-24.gif',
+			'fonction' => 'creer.gif',
+			'titre' => _T('spipmotion:bouton_ajouter_videos'),
+			'script' => $script,
+			'args' => "id_$type=$id",
+			'id' => $id,
+			'intitule' => _T('info_telecharger'),
+			'mode' => 'videos',
+			'type' => $type,
+			'ancre' => '',
+			'id_document' => 0,
+			'iframe_script' => generer_url_ecrire("documents_colonne","id=$id&type=$type",true)
+		));
+		$ret .= $encoder_videos(array(
+			'cadre' => 'enfonce',
+			'icone' => 'doc-24.gif',
+			'fonction' => 'creer.gif',
+			'titre' => _T('spipmotion:bouton_encoder_videos'),
+			'script' => $script,
+			'args' => "id_$type=$id",
+			'id' => $id,
+			'intitule' => _T('info_encoder'),
+			'mode' => 'videos',
+			'type' => $type,
+			'ancre' => '',
+			'id_document' => 0,
+			'iframe_script' => generer_url_ecrire("documents_colonne","id=$id&type=$type",true)
+		));
+	}
 
-		if ($GLOBALS['meta']["documents_article"] != 'non') {
+/*
 			$titre_cadre = _T('spipmotion:bouton_ajouter_videos');
 			$ret .= debut_cadre_enfonce("doc-24.gif", true, "creer.gif", $titre_cadre);
 			$ret .= $encoder_videos($script, "id_$type=$id", $id, "", 'videos',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
 			$ret .= $joindre_videos($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'videos',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
 			$ret .= fin_cadre_enfonce(true);
-		}
+*/
+
 
 		// Afficher les videos lies
-		$ret .= "<p></p><div id='liste_documents_videos'>\n";
+		$ret .= "<div id='liste_documents_videos'>\n";
 
 		foreach($videos_lies as $doc) {
-			$ret .= afficher_case_document_videos($doc, $id, $script, $type, $id_doc_actif == $doc);
+			$id_document = $doc['id_document'];
+			$deplier = $id_document_actif==$id_document;
+			$ret .= afficher_case_document_videos($doc, $id, $script, $type, $deplier);
 		}
 		$ret .= "</div>";
 	
-
+  if (test_espace_prive()){
 	$ret .= "<script src='"._DIR_PLUGIN_SPIPMOTION."/javascript/async_encode.js' type='text/javascript'></script>\n";
 	$ret .= <<<EOF
 	<script type='text/javascript'>
 	$("form.form_encode").async_encode(async_encode_article_edit)
 	</script>
 EOF;
+}
 	return $ret;
+	
 }
 //
 // Affiche le raccourci <doc123|left>
@@ -113,14 +158,15 @@ function est_inclus_videos($id_document) {
 
 // http://doc.spip.org/@afficher_case_document
 function afficher_case_document_videos($id_document, $id, $script, $type, $deplier=false) {
-	global $connect_id_auteur, $connect_statut;
-	global $options, $couleur_foncee, $spip_lang_left, $spip_lang_right;
+	global $spip_lang_right;
 
 	charger_generer_url();
 
-	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+	$res = spip_query("SELECT docs.*,l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));
+	if (!$document = spip_fetch_array($res)) return "";
 
 	$id_vignette = $document['id_vignette'];
+	$extension = $document['extension'];
 	$id_type = $document['id_type'];
 	$titre = $document['titre'];
 	$descriptif = $document['descriptif'];
@@ -135,10 +181,9 @@ function afficher_case_document_videos($id_document, $id, $script, $type, $depli
 	$doublon = est_inclus_videos($id_document);
 
 	$cadre = strlen($titre) ? $titre : basename($document['fichier']);
-
-	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
-	if ($letype = @spip_fetch_array($result)) {
-		$type_extension = $letype['extension'];
+	
+	$result = spip_query("SELECT titre,inclus FROM spip_types_documents WHERE extension="._q($extension));
+	if ($letype = spip_fetch_array($result)) {
 		$type_inclus = $letype['inclus'];
 		$type_titre = $letype['titre'];
 	}
