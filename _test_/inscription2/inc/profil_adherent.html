@@ -2,6 +2,8 @@
 <div class = "affichage">
 <?php 
 include_spip('inc/filtres');
+include_spip('inc/headers');
+
 	$aux = "";
 	$auteur = array();
 	//liste d'elements a afficher
@@ -35,7 +37,8 @@ include_spip('inc/filtres');
 		$aux = spip_fetch_array($aux);
 	}
 	if(!is_array($aux)){
-		echo _T('inscription2:erreur_user_not_found');
+		echo _T('inscription2:erreur_user_not_found')."</div>";
+		redirige_par_entete('./');
 		return;
 	}
 	$id = $GLOBALS['auteur_session']['id_auteur'];
