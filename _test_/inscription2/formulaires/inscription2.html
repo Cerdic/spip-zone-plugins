@@ -253,6 +253,13 @@ label.error{font-size:0.7em;display:block;clear:both}
 	<input type="text" name="secteur" id="secteur" [value="(#CONFIG{inscription2/secteur}|=={on}|?{#ENV{secteur}, ''})"] />
 </div>
 
+[(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''})
+<div>
+	<label for="fonction"><strong><:inscription2:fonction:></strong></label>
+	<input type="text" type="text" name="fonction" id="fonction" value="#ENV{fonction}" />
+</div>
+]
+
 [(#CONFIG{inscription2/divers}|=={on}|?{' ', ''})
 <div class="grand_select">
 	<label><strong><:inscription2:divers:></strong></label>
@@ -267,12 +274,6 @@ label.error{font-size:0.7em;display:block;clear:both}
 <legend>
 	Informations Generales
 </legend>
-
-
-<div style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
-	<label for="fonction"><strong><:inscription2:fonction:></strong></label>
-	<input type="text" type="text" name="fonction" id="fonction" [value="(#CONFIG{inscription2/fonction}|=={on}|?{#ENV{fonction}, ''})"]/>
-</div>
 
 
 <div style="[(#CONFIG{inscription2/publication}|=={on}|?{display: block;, display:none;})]">
