@@ -1,5 +1,7 @@
+#CACHE{0}
 <div class = "affichage">
 <?php 
+include_spip('inc/filtres');
 	$aux = "";
 	$auteur = array();
 	//liste d'elements a afficher
@@ -26,6 +28,7 @@
 				$auteur['b.'.$aux] = "1";
 		}
 	}
+
 	if(is_array($auteur)){
 		$aux = join(', ',array_keys($auteur));
 		$aux = spip_query("SELECT $aux FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur WHERE a.id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
@@ -39,7 +42,8 @@
 	if(is_array($aux)){
 		// sur la table spip_auteurs_elargis, s'il n'existe pas on l'ajoute.
 		if($aux['id'] == NULL)
-			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
+			//spip_insert_id() ??
+			$id_elargi = spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
 		foreach($aux as $cle => $val){
 			if($cle != 'id'){
 				echo '<div><strong>'._T('inscription2:'.$cle).' : </strong>';
