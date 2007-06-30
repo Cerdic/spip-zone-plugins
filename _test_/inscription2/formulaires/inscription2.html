@@ -24,7 +24,6 @@
 			prenom:{[(#CONFIG{inscription2/prenom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,15]},
 			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
 			adresse: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,30]},
-			adresse2: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,30]},
 			code_postal: {[(#CONFIG{inscription2/code_postal}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,10]},
 			ville: {[(#CONFIG{inscription2/ville}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,10]},
 			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
@@ -53,11 +52,7 @@
 			adresse: {
 				required:"Ce champ est obligatoire",
 				postal:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 30 carateres"},
-			adresse2: {
-				required:"Ce champ est obligatoire",
-				postal:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 30 carateres"},
+				rangeLength:"Min 10 Max 1000 carateres"},
 			code_postal: {
 				required:"Ce champ est obligatoire",
 				postal:"Entrez un code postal valide",
@@ -65,7 +60,7 @@
 			ville: {
 				required:"Ce champ est obligatoire",
 				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 10 carateres"},
+				rangeLength:"Min 2 Max 80 carateres"},
 			email: {
 				required:"Ce champ est obligatoire",
 				email:"Entrez un email valide",
@@ -77,7 +72,7 @@
 			fax: {
 				required:"Ce champ est obligatoire",
 				numero:"Entrez un numero valide",
-				rangeLength:"Min 3 Max 15 carateres"},
+				rangeLength:"Min 3 Max 20 carateres"},
 			mobile: {
 				required:"Ce champ est obligatoire",
 				numero:"Entrez un numero valide",
@@ -85,22 +80,22 @@
 			profession: {
 				required:"Ce champ est obligatoire",
 				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 10 carateres"},
+				rangeLength:"Min 3 Max 20 carateres"},
 			societe: {
 				required:"Ce champ est obligatoire",
 				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 10 carateres"},
+				rangeLength:"Min 3 Max 20 carateres"},
 			secteur:{
 				required:"Ce champ est obligatoire",
 				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 20 carateres"},
+				rangeLength:"Min 3 Max 50 carateres"},
 			fonction: {
 				required:"Ce champ est obligatoire",
 				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 10 carateres"},
+				rangeLength:"Min 3 Max 50 carateres"},
 			divers:{
 				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 30 carateres"}
+				rangeLength:"Min 3 Max 1000 carateres"}
 		}
 	});
 
@@ -114,31 +109,30 @@
 	});
 });
 </script>
-
-<div>
-	[(#ENV*{message})]
-</div>
-
-<div [style="(#ENV{commentaire}|=={1}|?{display: none;, display:block;})"]>
-	#ENV*{commentaire}
-</div>
-
-<div [style="(#ENV{commentaire}|=={1}|?{display: block;, display:none;})"]>
-<h3><:inscription2:formulaire_inscription:></h3>
-
-<form method="post" action="#SELF" name="inscription" id="inscription" >
-
-[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 <style>
 .infos-auteurs > div{height:35px;clear:both;padding:5px}
 .infos-auteurs input, .select , textarea{display:block;float:right;width:250px}
 .infos-auteurs label{display:block;float:left}
 .infos-auteurs > div.textarea {height:70px;clear:both;padding:5px}
 .infos-auteurs > div.grand_select {height:auto;margin-bottom:15px;clear:both;padding:5px}
-
+.inscription2 h2 {margin:10px 0px}
 div.error{background-color:#ffe2e2}
 label.error{font-size:0.7em;display:block;clear:both}
 </style>
+
+[<div>(#ENV*{message})</div>]
+
+
+[<div>(#ENV*{commentaire}|=={1}|?{'',' '}) #ENV*{commentaire} </div>]
+
+<div class="inscription2" [style="(#ENV{commentaire}|=={1}|?{display: block;, display:none;})"]>
+
+<h2><:inscription2:formulaire_inscription:></h2>
+
+<form method="post" action="#SELF" name="inscription" id="inscription" >
+
+[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
+
 
 <fieldset class="infos-auteurs">
 <legend>
@@ -148,6 +142,16 @@ label.error{font-size:0.7em;display:block;clear:both}
 <div class="sous-legende">
 <:inscription2:inserez_infos:>
 </div>
+
+[(#CONFIG{inscription2/sexe}|=={on}|?{' ', ''})
+<div>
+	<label><strong><:inscription2:sexe:></strong></label>
+	<div class="select">
+	<input name="sexe" checked="checked" style="display:inline;float:none;width:10px" type="radio" value="M" /> <:inscription2:masculin:>
+	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="F" /> <:inscription2:feminin:>
+	</div>
+</div>
+]
 	
 <div [style="(#CONFIG{inscription2/nom}|=={on}|?{display: block;, display:none;})"] >
 	<label for="nom"><strong><:inscription2:nom:></strong></label>
@@ -196,14 +200,6 @@ label.error{font-size:0.7em;display:block;clear:both}
 		echo "<option>$i</option>\n";
 	?>
 	</select> 
-	</div>
-</div>
-
-<div [style="(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})"]>
-	<label><strong><:inscription2:sexe:></strong></label>
-	<div class="select">
-	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="M" /> <:inscription2:masculin:>
-	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="F" /> <:inscription2:feminin:>
 	</div>
 </div>
 
