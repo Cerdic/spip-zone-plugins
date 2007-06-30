@@ -40,7 +40,8 @@ function demarrer_site($site = '', $options = array()) {
 	if ($options['table_prefix'])
 		$GLOBALS['table_prefix'] = prefixe_mutualisation($site);
 
-	if (!is_dir($e = _DIR_RACINE . $options['repertoire'].'/' . $site . '/')) {
+	$adr_site = $options['repertoire'].'/' . $site . '/';
+	if (!is_dir($e = _DIR_RACINE . $adr_site)) {
 		spip_initialisation();
 		require dirname(__FILE__).'/mutualiser_creer.php';
 		mutualiser_creer($e, $options);
@@ -55,7 +56,7 @@ function demarrer_site($site = '', $options = array()) {
 	);
 
 	if (is_dir($e.'squelettes'))
-		$GLOBALS['dossier_squelettes'] = $e.'squelettes';
+		$GLOBALS['dossier_squelettes'] = $adr_site.'squelettes';
 
 	if (is_readable($f = $e._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')) 
 		include($f); // attention cet include n'est pas en globals
