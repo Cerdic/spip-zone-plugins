@@ -53,10 +53,18 @@ function mutualiser_creer($e, $options) {
 
 
 		if (defined('_INSTALL_HOST_DB')
-		AND defined('_INSTALL_USER_DB_ROOT')
-		AND defined('_INSTALL_PASS_DB_ROOT')
+		AND (
+			(defined('_INSTALL_USER_DB_ROOT') AND defined('_INSTALL_PASS_DB_ROOT'))
+			OR
+			(defined('_INSTALL_USER_DB') AND defined('_INSTALL_PASS_DB'))
+			)
 		AND defined('_INSTALL_NAME_DB')) {
-			$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB_ROOT, _INSTALL_PASS_DB_ROOT);
+			
+			if(defined('_INSTALL_USER_DB_ROOT'))
+				$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB_ROOT, _INSTALL_PASS_DB_ROOT);
+			else
+				$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB, _INSTALL_PASS_DB);
+				
 
 			// si la base n'existe pas, on va travailler
 			if (!mysql_select_db(_INSTALL_NAME_DB)) {
