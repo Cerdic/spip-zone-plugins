@@ -290,8 +290,10 @@ label.error{font-size:0.7em;display:block;clear:both}
 </div>
 
 <div class="grand_select" style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
-	<p><strong><:inscription2:categorie:></strong></p>
+	<label><strong><:inscription2:categorie:></strong></label>
+	<div class="select">
 	[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
+	</div>
 </div>
 
 <?php
