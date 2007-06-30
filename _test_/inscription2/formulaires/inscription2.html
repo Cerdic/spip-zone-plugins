@@ -253,6 +253,12 @@ label.error{font-size:0.7em;display:block;clear:both}
 	<input type="text" name="secteur" id="secteur" [value="(#CONFIG{inscription2/secteur}|=={on}|?{#ENV{secteur}, ''})"] />
 </div>
 
+[(#CONFIG{inscription2/divers}|=={on}|?{' ', ''})
+<div class="grand_select">
+	<label><strong><:inscription2:divers:></strong></label>
+	<textarea name="divers" id="divers">#ENV{divers}</textarea>	
+</div>
+]
 
 </fieldset>
 
@@ -285,11 +291,6 @@ label.error{font-size:0.7em;display:block;clear:both}
 <div class="grand_select" style="[(#CONFIG{inscription2/categorie}|=={on}|?{display: block;, display:none;})]" >
 	<p><strong><:inscription2:categorie:></strong></p>
 	[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
-</div>
-
-<div class="grand_select" style="[(#CONFIG{inscription2/divers}|=={on}|?{display: block;, display:none;})]">
-	<label><strong><:inscription2:divers:></strong></label>
-	<textarea name="divers" id="divers" [value="(#CONFIG{inscription2/divers}|=={on}|?{#ENV{divers}, ''})"]></textarea>	
 </div>
 
 <?php
