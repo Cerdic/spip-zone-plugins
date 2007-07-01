@@ -129,6 +129,17 @@ div.jqmConfirmContent{
 * html .clearfix {height: 1%;}
 .clearfix {display: block;}
 
+
+input, select {
+background-color:#E4E4E4;
+background-position:center bottom;
+border:1px solid #C0CAD4;
+float:none;
+font-family:Verdana,Arial,Sans,sans-serif;
+font-size:11px;
+padding:3px;
+}
+
 </style>
 
 <script src="#CHEMIN{javascript/jqModal.js}" type="text/javascript"></script>
@@ -162,50 +173,50 @@ $().ready(function() {
 });
 </script>
 
-<div style="margin-top : 15pt; margin-left : 15pt; font-size: 10pt;">
+<div style="margin-top : 15pt; margin-left : 15pt; font-size: 8pt;">
+
 <div style="float:left; ">
-<div style="width:150pt; text-align: left; border-width:1; border-color:black; border-style :groove; background-color : #E0E0E0 ;" >
-	<strong><:inscription2:raccourcis:></strong>
-	<ul style='text-align: left; '>
-		<li><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
-		<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
-		<li><a href="?exec=inscription2_adherents&act=net" class="confirm"><:inscription2:nettoyer_tables:></a></li>
-	</ul>
-</div>
-<br /><br />
-<div style="width:150pt; text-align: left;">
-	<ul style='text-align: left;'>
-	<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> Admin<br/>
-	<img src="#CHEMIN{'images/redac-12.gif'}" title="<:inscription2:fiche_adherent:>"> Auteur<br/>
-	<img src="#CHEMIN{'images/adherent-12.gif'}" title="<:inscription2:fiche_adherent:>"> Adherent<br/>
-	<img src="#CHEMIN{'images/aconf-12.gif'}" title="<:inscription2:fiche_adherent:>"> A confirmer<br/>
-	<img src="#CHEMIN{'images/defaut-12.gif'}" title="<:inscription2:fiche_adherent:>"> Autre<br/>
-	</ul>
-</div>
+	<div style="width:150pt; text-align: left; border-width:1; border-color:black; border-style :groove; background-color : #E0E0E0 ;" >
+		<strong><:inscription2:raccourcis:></strong>
+		<ul style='text-align: left; list-style-type:none'>
+			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
+			<li style="margin-top:5px"><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
+			<li><a href="?exec=inscription2_adherents&act=net" class="confirm"><:inscription2:nettoyer_tables:></a></li>
+		</ul>
+	</div>
+
+	<div style="width:150pt; text-align: left;">
+		<ul style='text-align: left;'>
+		<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> Admin<br/>
+		<img src="#CHEMIN{'images/redac-12.gif'}" title="<:inscription2:fiche_adherent:>"> Auteur<br/>
+		<img src="#CHEMIN{'images/adherent-12.gif'}" title="<:inscription2:fiche_adherent:>"> Adherent<br/>
+		<img src="#CHEMIN{'images/aconf-12.gif'}" title="<:inscription2:fiche_adherent:>"> A confirmer<br/>
+		<img src="#CHEMIN{'images/defaut-12.gif'}" title="<:inscription2:fiche_adherent:>"> Autre<br/>
+		</ul>
+	</div>
+	
 </div>	
 
-<div style="margin-left:20pt">
-	<strong><:inscription2:liste_adherents:></strong><br/>
-	<span style="float:left; margin-left:10pt;" >
-	<form method="post" action="?exec=inscription2_adherents">
-	<input type="text" name="valeur" onfocus='this.value=""' size="10" value="<:info_rechercher:>">
-	<select name="case" id="case">
-		<option value="id">ID</option>
-	<?php
-		foreach(lire_config('inscription2') as $cle => $val){
-			if($val!= '' and ereg("^.+_table$", $cle)){
-				$cle = str_replace("_table", "", $cle);
-				echo "<option value='$cle'>"._T('inscription2:'.$cle)."</option>";
+<div style="margin:0% 2% 2% 23%">
+	<h2><strong><:inscription2:liste_adherents:></strong></h2>
+	<div style="margin:10px 0px;height:40px" >
+		<div style="float:right" >
+		<form method="post" action="?exec=inscription2_adherents">
+		<input type="text" name="valeur" onfocus='this.value=""' size="10" value="<:info_rechercher:>">
+		<select name="case" id="case">
+			<option value="id">ID</option>
+		<?php
+			foreach(lire_config('inscription2') as $cle => $val){
+				if($val!= '' and ereg("^.+_table$", $cle)){
+					$cle = str_replace("_table", "", $cle);
+					echo "<option value='$cle'>"._T('inscription2:'.$cle)."</option>";
+				}
 			}
-		}
-	?>
-	</select>
-	<input type="submit" value="<:info_rechercher:>" />
-	</form>
-	</span><br/><br/><br/>
-
-	<table style="border-width:1; border-color:black; border-style :groove; float:left; margin-left:10pt;">
-	<tr style="background-color : #E0E0E0 ;">
+		?>
+		</select>
+		<input type="submit" value="<:info_rechercher:>" />
+		</form>
+		</div>
 	<?php
 	include_spip('base/abstract_sql');
 	
@@ -266,7 +277,31 @@ $().ready(function() {
 				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);
 		}
 	}
+
+	$lettre = array();
+		$qlettre = spip_query(
+	'select distinct upper(left(a.nom,1)) l, count(*) from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur group by l order by l');
+		$count = 0;
+		while ($rlettre = spip_fetch_array($qlettre, SPIP_NUM)) {
+			$lettre[$rlettre[0]] = $count;
+			$count += intval($rlettre[1]);
+		}
+
+	foreach ($lettre as $key => $val) {
+				if ($val == $debut)
+					echo "<b>$key</b> ";
+				else
+					echo "<a href='".parametre_url($url,'debut',$val)."'>$key</a> ";
+			}
 	
+	?>
+	
+	</div>
+
+	<table style="clear:right;border-width:1; border-color:black; border-style :groove; margin-left:10pt;">
+	<tr style="background-color : #E0E0E0 ;">
+	<?php
+		
 	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'">ID</a></strong></td>';
 	if(lire_config('inscription2/nom_table')){
 		echo '<td><strong><a href="'.$url.'&ordre=nom&desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
@@ -361,6 +396,11 @@ $().ready(function() {
 		echo '</tr>';
 		
 	}
+	?>
+	</table>	
+
+	<div style="margin:10px;font-size:0.7em">
+	<?php
 	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a WHERE $critere");
 	$query = spip_fetch_array($query);
 	$nombre_selection = $query['COUNT(*)'];
@@ -377,9 +417,10 @@ $().ready(function() {
 			}
 		}
 	}	
-	?>
-	</table>
 	
+	?>
+	</div>
+
 </div>
 
 </div>
