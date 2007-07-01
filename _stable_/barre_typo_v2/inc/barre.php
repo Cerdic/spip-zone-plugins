@@ -408,7 +408,7 @@ $(window).bind("beforeunload", function(e) {
 } );
 
 $("form").submit ( function() {warn_onunload=false;} );
-$("textarea").change ( function() {form_dirty=true;} );
+$('.$champ.').change ( function() {form_dirty=true;} );
 $("input").change ( function() {form_dirty=true;} );
 
 	 //--></script>';
