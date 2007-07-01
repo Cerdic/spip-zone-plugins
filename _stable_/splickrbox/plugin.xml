@@ -15,12 +15,15 @@
 	<description>
 	Noisette pour afficher les dernieres photos &#224; la Flickr (le "badge") , tout &#231;a en javascript via <code>#INSERT_HEAD</code> et le plugin JQuery.
 
--* On peut l'utiliser en modele avec {&lt;splickrbox>&gt;}. en lui passant en option un parametre d'id pour limiter la boucle document,
+-* On peut l'utiliser en modele avec {&lt;splickrbox&gt;}. en lui passant en option un parametre d'id pour limiter la boucle document,
 -* On peut l'utiliser dans les squelettes avec la balise <code>#MODELE{splickrbox}</code>
 -* On peut l'utiliser avec diff&#233;rent param&#232;tres (qu'on peut aussi combiner):
 -** {&lt;splickrbox|right&gt;} et {&lt;splickrbox|left&gt;} pour les alignements
 -** {&lt;splickrbox|taille=24&gt;} permet de specifier le nombre de vignettes &#224; afficher. Ce nombre devrait &#234;tre un multiple du nombre de colonnes.
 -** {&lt;splickrbox|colonnes=10&gt;} permet de specifier le nombre de colonnes &#224; afficher.
+-** {&lt;splickrbox|masque=carre-100.png&gt;} permet de d&eacute;finir la taille des vignettes (le masque correspond &agrave; la grande vignette).
+-** {&lt;splickrbox|tri=date&gt;} permet de specifier le classement (date, hasard...).
+-** {&lt;splickrbox|senstri=1&gt;} permet d'inverser le sens de classement choisi ci-dessus.
 	</description>
 	<lien>http://trac.rezo.net/trac/spip-zone/wiki/SplickrBox</lien> <!-- URI de documentation -->
 	<prefix>
