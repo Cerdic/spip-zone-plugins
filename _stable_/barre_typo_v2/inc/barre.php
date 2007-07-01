@@ -408,7 +408,11 @@ $(window).bind("beforeunload", function(e) {
 } );
 
 $("form").submit ( function() {warn_onunload=false;} );
-$('.$champ.').change ( function() {form_dirty=true;} );
+$('.$champ.')
+	.parents(\'form\')
+	.find(\'input,textarea,select\')
+	.not(\'[@type=hidden]\')
+	.change ( function() {form_dirty=true;} );
 $("input").change ( function() {form_dirty=true;} );
 
 	 //--></script>';
