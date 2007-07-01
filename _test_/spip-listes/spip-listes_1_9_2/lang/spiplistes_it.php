@@ -25,7 +25,7 @@ Per modificare la propria iscrizione alla newsletter di questo sito:
 
 Andate all\'indirizzo seguente:
 
-    @adresse_site@/abonnement.php3?d=@cookie@
+@adresse_site@/spip.php?page=abonnement&d=@cookie@
 
 In seguito potete confermare la variazione del vostro abbonamento.',
 'abonnement_modifie'=>'Le modifiche sono state registrate',
