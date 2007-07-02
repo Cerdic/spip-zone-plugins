@@ -26,7 +26,8 @@ include_spip('inc/indexation_etendue');
 function exec_index_tous_dist()
 {
 	global $connect_statut;
-	Recherche_etendue_verifier_base();
+	if (version_compare($GLOBALS['spip_version_code'],'1.92','<'))
+		RechercheEtendue_verifier_base();
 	$INDEX_elements_objet;
 
 	$INDEX_elements_objet = array();

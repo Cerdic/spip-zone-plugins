@@ -79,7 +79,8 @@ function exec_admin_index_dist()
 	}
 	include_spip('inc/indexation');
 	include_spip('inc/indexation_etendue');
-	Recherche_etendue_verifier_base();
+	if (version_compare($GLOBALS['spip_version_code'],'1.92','<'))
+		RechercheEtendue_verifier_base();
 	
 	
 	if ($forcer_indexation = intval($forcer_indexation))

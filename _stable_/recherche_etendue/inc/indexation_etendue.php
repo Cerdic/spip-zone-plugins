@@ -5,11 +5,12 @@ include_spip('inc/meta');
 include_spip('base/indexation_etendue');
 
 
-	function Recherche_etendue_verifier_base(){
-		$version_base = 0.12;
+	$Recherche_etendue_version_base = 0.12;
+	function RechercheEtendue_verifier_base(){
+		global $Recherche_etendue_version_base;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['Recherche_etendue_base_version']) )
-				&& (($current_version = $GLOBALS['meta']['Recherche_etendue_base_version'])==$version_base))
+				&& (($current_version = $GLOBALS['meta']['Recherche_etendue_base_version'])==$Recherche_etendue_version_base))
 			return;
 	
 		include_spip('base/indexation_etendue');
@@ -17,7 +18,7 @@ include_spip('base/indexation_etendue');
 			include_spip('base/abstract_sql');
 			creer_base();
 			spip_query("ALTER IGNORE TABLE spip_index ADD PRIMARY KEY (id_table, id_objet, hash)");
-			ecrire_meta('Recherche_etendue_base_version',$current_version=$version_base);
+			ecrire_meta('Recherche_etendue_base_version',$current_version=$Recherche_etendue_version_base);
 		}
 		if ($current_version<0.11){
 			include_spip('base/abstract_sql');
@@ -32,10 +33,19 @@ include_spip('base/indexation_etendue');
 		}
 		ecrire_metas();
 	}
+	function RechercheEtendue_vider_tables(){
+		spip_query('DROP TABLE spip_recherches');
+		spip_query('DROP TABLE spip_types_tables');
+		//spip_query("ALTER TABLE spip_index DROP PRIMARY KEY");
+		//spip_query("ALTER IGNORE TABLE spip_index ADD INDEX id_table");
+		effacer_meta('Recherche_etendue_base_version');
+		ecrire_metas();
+	}
 
 	function update_index_tables_sql_from_meta(){
 		global $table_des_tables;
-		Recherche_etendue_verifier_base();
+		if (version_compare($GLOBALS['spip_version_code'],'1.92','<'))
+			RechercheEtendue_verifier_base();
 
 		// mettre a jour le contenu de spip_types_tables en fonction de la meta
 		$liste_tables = liste_index_tables();
@@ -58,4 +68,19 @@ include_spip('base/indexation_etendue');
 		ecrire_metas();
 		//$exceptions_des_tables['index']['table'] = 'id_table';
 	}
+	
+	function RechercheEtendue_install($action){
+		global $Recherche_etendue_version_base;
+		switch ($action){
+			case 'test':
+				return (isset($GLOBALS['meta']['Recherche_etendue_base_version']) AND ($GLOBALS['meta']['Recherche_etendue_base_version']>=$Recherche_etendue_version_base));
+				break;
+			case 'install':
+				RechercheEtendue_verifier_base();
+				break;
+			case 'uninstall':
+				RechercheEtendue_vider_tables();
+				break;
+		}
+	}	
 ?>
