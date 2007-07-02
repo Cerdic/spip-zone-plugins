@@ -156,16 +156,6 @@ function exec_w3c_go_home(){
 			$vals = '';
 			$vals[] = ++$cpt;
 	
-/*			if ($ok){
-				$cpt_ok++;
-				$puce = 'puce-verte-breve.gif';
-				$alt = "OK";
-			}
-			else{
-				$puce = 'puce-orange-breve.gif';
-				$alt = "";
-			}
-*/	
 			$s = "";
 			//$s = "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' style='border:0' alt='$alt' />&nbsp;&nbsp;";
 			$s .= "<a href='$loc'>".lignes_longues($loc,50)."</a>";
@@ -175,20 +165,20 @@ function exec_w3c_go_home(){
 				$s = "";
 				$loce = urlencode($loc);
 				$url_affiche = $url_affiche[$nom].$loce;
-				$url_voir = $url_voir[$nom].$loce;
+				$url_v = $url_voir[$nom].$loce;
 				$id_test++;
 				if ($etat[$nom]){
-					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")'>";
+					$s .= "<a href='$url_v' id='t$id_test' onclick='return affiche_rapport(\"$url_v\",\"t$id_test\")'>";
 					$s .= "OK (".date('d-m-Y H:i',$etat[$nom]).")</a>";
 				}
 				else {
-					$url_test = $url_test[$nom].$loce;
-					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")' rel='$url_test' class='test'></a>";
+					$url_t = $url_test[$nom].$loce;
+					$s .= "<a href='$url_v' id='t$id_test' onclick='return affiche_rapport(\"$url_v\",\"t$id_test\")' rel='$url_t' class='test'></a>";
 					// la methode img en noscript
 					if ($noscript){
-						$url_test = parametre_url($url_test,'var_mode','image');
-						$url_test = parametre_url($url_test,'time',$time_mark); // eviter de taper dans le cache navigateur
-						$s .= "<noscript><a href='$url_voir' ><img src='$url_test' alt='test'/></a></noscript>";
+						$url_t = parametre_url($url_t,'var_mode','image');
+						$url_t = parametre_url($url_t,'time',$time_mark); // eviter de taper dans le cache navigateur
+						$s .= "<noscript><a href='$url_v' ><img src='$url_t' alt='test'/></a></noscript>";
 					}
 				}
 				$vals[] = $s;
