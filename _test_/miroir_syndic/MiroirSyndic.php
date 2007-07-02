@@ -44,6 +44,11 @@ function MiroirSyndic_creer_article($t) {
 //
 function MiroirSyndic_regler_rubrique($t) {
 	$nom_rub = '';
+	if (isset($GLOBALS['mode_rubrique_miroir_disallow'][$t['id_secteur']]))
+		return;
+	if (isset($GLOBALS['mode_rubrique_miroir_allow']) 
+		 AND !isset($GLOBALS['mode_rubrique_miroir_allow'][$t['id_secteur']]))
+		return;
 
 	if (_MODE_RUBRIQUE_MIROIR != '') {
 		$annee = substr(trim($t['date']), 0, strlen('2006'));
