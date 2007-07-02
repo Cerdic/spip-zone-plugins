@@ -44,11 +44,6 @@ function MiroirSyndic_creer_article($t) {
 //
 function MiroirSyndic_regler_rubrique($t) {
 	$nom_rub = '';
-	if (isset($GLOBALS['mode_rubrique_miroir_disallow'][$t['id_secteur']]))
-		return;
-	if (isset($GLOBALS['mode_rubrique_miroir_allow']) 
-		 AND !isset($GLOBALS['mode_rubrique_miroir_allow'][$t['id_secteur']]))
-		return;
 
 	if (_MODE_RUBRIQUE_MIROIR != '') {
 		$annee = substr(trim($t['date']), 0, strlen('2006'));
@@ -101,22 +96,30 @@ function MiroirSyndic_miroir() {
 
 	while ($t = spip_fetch_array($s)) {
 		$nombre ++;
+		if (
+			!isset($GLOBALS['mode_rubrique_miroir_disallow'][$t['id_secteur']])
+			AND (
+			  !isset($GLOBALS['mode_rubrique_miroir_allow']) 
+			  OR isset($GLOBALS['mode_rubrique_miroir_allow'][$t['id_secteur']])
+			)
+		){
 
-		// Si l'article n'existe pas, on le cree ; a priori sa rubrique
-		// est la meme que la rubrique du site syndique (idem pour le secteur)
-		if (!$t['id_article']) {
-			$t['id_article'] = MiroirSyndic_creer_article($t);
-
-			MiroirSyndic_regler_rubrique($t);
+			// Si l'article n'existe pas, on le cree ; a priori sa rubrique
+			// est la meme que la rubrique du site syndique (idem pour le secteur)
+			if (!$t['id_article']) {
+				$t['id_article'] = MiroirSyndic_creer_article($t);
+	
+				MiroirSyndic_regler_rubrique($t);
+			}
+	
+			spip_query("UPDATE spip_articles SET
+				titre = '".addslashes($t['titre'])."',
+				date = '".$t['date']."',
+				surtitre = '".addslashes($t['lesauteurs'])."',
+				chapo = '".addslashes($t['descriptif'])."',
+				soustitre = '".addslashes($t['tags'])."'
+				WHERE id_article=".$t['id_article']);
 		}
-
-		spip_query("UPDATE spip_articles SET
-			titre = '".addslashes($t['titre'])."',
-			date = '".$t['date']."',
-			surtitre = '".addslashes($t['lesauteurs'])."',
-			chapo = '".addslashes($t['descriptif'])."',
-			soustitre = '".addslashes($t['tags'])."'
-			WHERE id_article=".$t['id_article']);
 
 	}
 
