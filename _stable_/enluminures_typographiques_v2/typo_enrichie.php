@@ -299,6 +299,7 @@ function TypoEnluminee_post_typo($texte) {
 function TypoEnluminee_nettoyer_raccourcis_typo($texte){
 	$texte = preg_replace(',{[1-5]{,','',$texte);
 	$texte = preg_replace(',}[1-5]},','',$texte);
+	$texte = str_replace('&hellip;','...',$texte);
 	return $texte;
 }
 
