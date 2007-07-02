@@ -63,10 +63,13 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 
 ]
 
-[Attention les choix suivants peuvent ne pas fonctionner avec votre version de SPIP&nbsp;:
-<ul><li>
-(#REM|autorite_erreurs_version)
-</li></ul>]
+[
+	[(#REM|debut_boite_alerte)]
+		Attention les choix suivants peuvent ne pas fonctionner
+		avec votre version de SPIP&nbsp;:
+			<ul><li>(#REM|autorite_erreurs_version)</li></ul>
+	[(#REM|fin_boite_alerte)]
+]
 
 <br />
 
@@ -356,12 +359,20 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 	<option value=""[ selected="(#ENV{statut_auteur_rubrique}|?{'',selected})"]>les administrateurs</option>
 	<option value="1"[ selected="(#ENV{statut_auteur_rubrique}|=={1}|?{selected})"]>administrateurs et r&#233;dacteurs</option>
 	<option value="2"[ selected="(#ENV{statut_auteur_rubrique}|=={2}|?{selected})"]>tous</option>
+	<option value="-1"[ selected="(#ENV{statut_auteur_rubrique}|=={-1}|?{selected})"]>personne</option>
 </select>
 </label>
-<small><br />
-(Attention&#160;: les administrateurs associ&#233;s &#224; des rubriques ont des droits limit&#233;s.)
-</small>
 
+<p>
+<label><b>Administrateurs restreints&nbsp;?</b>
+<br />les administrateurs associés à des rubriques ont&nbsp;:
+<br />
+<select name="statut_ignorer_admins_restreints">
+	<option value=""[ selected="(#ENV{statut_ignorer_admins_restreints}|?{'',selected})"]>des droits limit&#233;s &#224; ces rubriques</option>
+	<option value="oui"[ selected="(#ENV{statut_ignorer_admins_restreints}|=={oui}|?{selected})"]>les m&#234;mes droits que tous les administrateurs</option>
+</select>
+</label>
+</p>
 </fieldset>
 
 [(#REM) ------------------------ BOUTON OK ------------------------ ]

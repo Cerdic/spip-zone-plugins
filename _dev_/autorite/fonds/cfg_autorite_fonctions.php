@@ -42,7 +42,7 @@ function liste_webmestres($void)
 }
 
 // Avertissements selon version code
-function autorite_erreurs_version($separateur = null)
+function autorite_erreurs_version($void)
 {
 	$autorite_erreurs_version = array();
 	if ($GLOBALS['spip_version_code'] < '1.9251') {
@@ -65,6 +65,11 @@ function autorite_erreurs_version($separateur = null)
 		// autoriser(sauvegarder)
 		$autorite_erreurs_version[] = _L('faire des sauvegardes');
 	}
-	return join(isset($separateur) ? $separateur : '</li><li>', $autorite_erreurs_version);
+	if ($GLOBALS['spip_version_code'] < '1.9258') {
+		// define(_STATUT_AUTEUR_CREATION)
+		$autorite_erreurs_version[] = _L('associer des rubriques aux auteurs');
+		$autorite_erreurs_version[] = _L('ignorer la notion d\'administrateur restreint');
+	}
+	return join('</li><li>', $autorite_erreurs_version);
 }
 ?>

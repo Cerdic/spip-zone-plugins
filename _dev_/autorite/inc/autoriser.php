@@ -44,6 +44,12 @@ if ($GLOBALS['autorite']['statut_auteur_rubrique']) {
 	}
 }
 
+if ($GLOBALS['autorite']['statut_ignorer_admins_restreints'] == 'oui') {
+	if (defined('_ADMINS_RESTREINTS'))
+		$autorite_erreurs[] = 'ignorer_admins_restreints';
+	else
+		define('_ADMINS_RESTREINTS', false);
+}
 
 
 // Charger les versions *_dist des fonctions
