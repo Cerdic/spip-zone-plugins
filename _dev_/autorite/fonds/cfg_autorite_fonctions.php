@@ -42,7 +42,7 @@ function liste_webmestres($void)
 }
 
 // Avertissements selon version code
-function autorite_erreurs_version($separateur = '</li><li>')
+function autorite_erreurs_version($separateur = null)
 {
 	$autorite_erreurs_version = array();
 	if ($GLOBALS['spip_version_code'] < '1.9251') {
@@ -65,6 +65,6 @@ function autorite_erreurs_version($separateur = '</li><li>')
 		// autoriser(sauvegarder)
 		$autorite_erreurs_version[] = _L('faire des sauvegardes');
 	}
-	return join($separateur ? $separateur : '</li><li>', $autorite_erreurs_version);
+	return join(isset($separateur) ? $separateur : '</li><li>', $autorite_erreurs_version);
 }
 ?>

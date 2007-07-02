@@ -333,6 +333,37 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 </fieldset>
 
 
+[(#REM) ---------------------- CONFIGURATION DES AUTEURS ----------------- ]
+
+<fieldset>
+<legend>
+	Configuration des auteurs
+</legend>
+<p>
+<label>A la cr&#233;ation d'un auteur, quel est le <b>statut par d&#233;faut</b>&nbsp;?
+<br />
+<select name="statut_auteur_creation">
+	<option value="visiteur"[ selected="(#ENV{statut_auteur_creation}|=={visiteur}|?{selected})"]>visiteur</option>
+	<option value=""[ selected="(#ENV{statut_auteur_creation}|?{'',selected})"]>r&#233;dacteur</option>
+	<option value="admin"[ selected="(#ENV{statut_auteur_creation}|=={minirezo}|?{selected})"]>administrateur</option>
+</select>
+</label>
+</p>
+
+<label>Quels types d'auteurs peut-on <b>associer &#224; des rubriques</b>&nbsp;?
+<br />
+<select name="statut_auteur_rubrique">
+	<option value=""[ selected="(#ENV{statut_auteur_rubrique}|?{'',selected})"]>les administrateurs</option>
+	<option value="1"[ selected="(#ENV{statut_auteur_rubrique}|=={1}|?{selected})"]>administrateurs et r&#233;dacteurs</option>
+	<option value="2"[ selected="(#ENV{statut_auteur_rubrique}|=={2}|?{selected})"]>tous</option>
+</select>
+</label>
+<small><br />
+(Attention&#160;: les administrateurs associ&#233;s &#224; des rubriques ont des droits limit&#233;s.)
+</small>
+
+</fieldset>
+
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />

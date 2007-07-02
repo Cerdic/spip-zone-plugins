@@ -14,9 +14,45 @@ $GLOBALS['autorite'] = @unserialize($GLOBALS['meta']['autorite']);
 $autorite_erreurs = array();
 
 
+//
+// Les DEFINE
+//
+
+if ($GLOBALS['autorite']['statut_auteur_creation']) {
+	if (defined('_STATUT_AUTEUR_CREATION'))
+		$autorite_erreurs[] = 'statut_auteur_creation';
+	else {
+		switch($GLOBALS['autorite']['statut_auteur_creation']) {
+			case 'visiteur':
+				define('_STATUT_AUTEUR_CREATION', '6forum');
+			case 'admin':
+				define('_STATUT_AUTEUR_CREATION', '0minirezo');
+		}
+	}
+}
+
+if ($GLOBALS['autorite']['statut_auteur_rubrique']) {
+	if (defined('_STATUT_AUTEUR_RUBRIQUE'))
+		$autorite_erreurs[] = 'statut_auteur_rubrique';
+	else {
+		switch($GLOBALS['autorite']['statut_auteur_rubrique']) {
+			case '1':
+				define('_STATUT_AUTEUR_RUBRIQUE', '0minirezo,1comite');
+			case '2':
+				define('_STATUT_AUTEUR_RUBRIQUE', '0minirezo,1comite,6forum');
+		}
+	}
+}
+
+
+
 // Charger les versions *_dist des fonctions
 include _DIR_RESTREINT.'inc/autoriser.php';
 
+
+//
+// Les FONCTIONS
+//
 
 ##
 ## Dire aux crayons si les visiteurs anonymes ont des droits
