@@ -21,10 +21,14 @@
 	}
 	
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
-	
 	$spip_auteurs_elargis_key = array("PRIMARY KEY"	=> "id", 'KEY id_auteur' => 'id_auteur');
-
+	
+	$spip_pays['id'] = "bigint(21) NOT NULL";
+	$spip_pays['pays'] = "text NOT NULL ";
+	$spip_pays_key = array("PRIMARY KEY"	=> "id");
+	
 	$tables_principales['`spip_auteurs_elargis`']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
+	$tables_principales['`spip_pays`']  =	array('field' => &$spip_pays, 'key' => &$spip_pays_key);
 
 	
 # autoriser les visiteurs a modifier leurs infos

@@ -30,9 +30,6 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 			elseif($val!='' and $cle == 'creation')
 				$var_user[$cle] = date('Y-m-d');
 			
-			elseif($cle == 'adresse')
-				$var_user[$cle] = _request('adresse').' '._request('adresse2');
-			
 			elseif(ereg("^categorie.*$", $cle)){
 				$aux = _request('categories');
 				if($aux != '0')
@@ -79,7 +76,6 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 	$var_user['commentaire'] = $commentaire;
 	$var_user['mode'] = $mode;
 	$var_user['self'] = str_replace('&amp;','&',(self()));
-	$var_user['adresse2'] = _request('adresse2');
 	return array("formulaires/inscription2_pass", $GLOBALS['delais'],
 			$var_user);}
 
