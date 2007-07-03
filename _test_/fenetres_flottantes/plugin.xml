@@ -4,7 +4,7 @@
  	<prefix>FenFlo</prefix>
  	<auteur>[Mathieu Imbert->mailto:mathieu_imbert@hotmail.fr], Arnault Pachot - [OpenStudio->http://www.openstudio.fr]</auteur>
  	<description>Plugin permettant d'ouvrir une fen&ecirc;tre flottante,
-	 et si vous avez cfg: [Configuration->.?exec=cfg&cfg=FenFlo]</description>
+	 et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=FenFlo]</description>
  	<etat>test</etat>
  	<fonction>fenetre_flottante_fonct.php</fonction>
  	<pipeline>
