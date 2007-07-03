@@ -54,6 +54,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 
 	// Elaborer le formulaire
 	$corps_supp = '';
+	$var_user['a.id_auteur'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 			$cle = ereg_replace("^username.*$", "login", $cle);
@@ -65,14 +66,6 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 			else 
 				$var_user['b.'.$cle] = '1';
 		}
-		elseif($cle=='accesrestreint' and $val != ''){
-			$zones = spip_query("select id_zone, titre from spip_zones");
-			$acces = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id");
-			while($q = spip_fetch_array($acces))
-				$aux1[]=$q['id_zone'];
-			while($q = spip_fetch_array($zones))
-				$aux2[] = $q;
-		}
 		elseif($cle=='newsletter' and $val != ''){
 			$news = spip_query("select id_liste, titre from spip_listes");
 			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
@@ -82,19 +75,19 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 				$aux4[] = $q;
 		}
 	}
-	
-	
+		
 	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
 	$query = spip_fetch_array($query);
-	if($query['id'] == NULL)
+	if($query['id_auteur'] == NULL)
 			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
 
 	foreach ($query as $cle => $val){
+		if($cle!= 'id_auteur')
 		$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
 		. "<input type='text' name='$cle' class='formo' value='$val'><br />"; 
 	}
 	if($news){
-		$corps_supp .= "<strong>"._T('inscription2:newsletter')."</strong>"
+		$corps_supp .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
 		. "<select name='news[]' id='news' multiple>";
 		foreach($aux4 as $val){
 			if (in_array($val['id_liste'], $aux3))
@@ -104,20 +97,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		}
 		$corps_supp .= "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 	}
-	if($zones){
-		$corps_supp .= "<strong>"._T('inscription2:accesrestreint')."</strong><br />"
-		. "<select name='acces[]' id='acces' multiple>";
-		foreach($aux2 as $val){
-			if (in_array($val['id_zone'], $aux1))
-				$corps_supp .= "<option value='".$val['id_zone']."' selected>".$val['titre']."</option>";
-			else 
-				$corps_supp .= "<option value='".$val['id_zone']."'>".$val['titre']."</option>";
-		}
-		$corps_supp .= "</select><br/><a onclick=\"$('#acces').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
-	}
-
-
-	$corps_supp .= "\n<br />";
+		$corps_supp .= "\n<br />";
 
 
 	//
@@ -213,6 +193,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 
 	$id = _request('id_auteur');
 	
+	$var_user['a.id_auteur'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 			$cle = ereg_replace("^username.*$", "login", $cle);
@@ -224,14 +205,6 @@ function legender_auteur_supp_voir($auteur, $redirect)
 			else 
 				$var_user['b.'.$cle] = '1';
 		}
-		elseif($cle=='accesrestreint' and $val != ''){
-			$zones = spip_query("select id_zone, titre from spip_zones");
-			$acces = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id");
-			while($q = spip_fetch_array($acces))
-				$aux1[]=$q['id_zone'];
-			while($q = spip_fetch_array($zones))
-				$aux2[] = $q;
-		}
 		elseif($cle=='newsletter' and $val != ''){
 			$news = spip_query("select id_liste, titre from spip_listes");
 			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
@@ -241,19 +214,18 @@ function legender_auteur_supp_voir($auteur, $redirect)
 				$aux4[] = $q;
 		}
 	}
-	
-	
+		
 	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
 	$query = spip_fetch_array($query);
-	if($query['id'] == NULL)
+	if($query['id_auteur'] == NULL)
 		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
 //Debut de l'affichage des données...
 
 	foreach ($query as $cle => $val){
-		if (strlen($val) > 2){ $res .= "<strong>"._T('inscription2:'.$cle)." : </strong>" . $val . "<br />"; }
+		if (strlen($val) >= 1){ $res .= "<strong>"._T('inscription2:'.$cle)." : </strong>" . $val . "<br />"; }
 	}
 	if($aux4 and $aux3){
-		$res .= "<strong>"._T('inscription2:newsletter')."</strong>"
+		$res .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
 		. "<select name='news[]' id='news' multiple>";
 		foreach($aux4 as $val){
 			if (in_array($val['id_liste'], $aux3))
@@ -263,18 +235,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		}
 		$res .= "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 	}
-	if($aux2 and $aux1){
-		$res .= "<strong>"._T('inscription2:accesrestreint')."</strong><br />"
-		. "<select name='acces[]' id='acces' multiple>";
-		foreach($aux2 as $val){
-			if (in_array($val['id_zone'], $aux1))
-				$res .= "<option value='".$val['id_zone']."' selected>".$val['titre']."</option>";
-			else 
-				$res .= "<option value='".$val['id_zone']."'>".$val['titre']."</option>";
-		}
-		$res .= "</select><br/><a onclick=\"$('#acces').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
-	}
-
+	
 	$res .= "</div>\n";
 
 	return $res;

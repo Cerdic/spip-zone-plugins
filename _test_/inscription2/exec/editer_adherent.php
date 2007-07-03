@@ -69,12 +69,10 @@ function exec_editer_adherent(){
 		$q1 = spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id'");
 		if($q1)
 			$message = "adherent mis à jour";
-		
 	}
 
-
+	$var_user['b.id'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
-		$var_user['b.id'] = '1';
 		if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(fiche|table).*$", "", $cle);
@@ -121,6 +119,8 @@ function exec_editer_adherent(){
 	echo "<form name='adherent' method='post' action='?exec=editer_adherent&act=val&id=$id'>";
 	echo "<table>";
 	foreach ($query as $cle => $val){
+		if($cle == 'id')
+			continue;
 		if($cle=='publication'){
 			if ($val == 'on')	
 				$val = 'checked';

@@ -263,7 +263,7 @@ $().ready(function() {
 	if(!empty($id) and $act=='sup'){
 		spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
-		spip_query("DELETE FROM spip_zone_auteurs WHERE id_auteur='$id'");
+		spip_query("DELETE FROM spip_zones_auteurs WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
 	}
 
