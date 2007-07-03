@@ -17,8 +17,7 @@
 	}
 
 	function Forms_ajouter_boutons($boutons_admin) {
-		// si on est admin
-		if (autoriser('administrer','form',$id_form)) {
+		if (autoriser('administrer','form',0)) {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
 			"../"._DIR_PLUGIN_FORMS."img_pack/form-24.gif",  // icone
