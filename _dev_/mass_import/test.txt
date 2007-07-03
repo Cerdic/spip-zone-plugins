@@ -1,0 +1,92 @@
+Fichier Test du plugin Mass Import$$$
+{{{Introduction}}}
+Après avoir installé et activé le plugin mass_import dans votre SPIP (dans le répertoire habituel ./plugins/) 
+vous pouvez tester si le script fonctionne bien en collant le contenu de ce fichier 
+dans le {{formulaire d'import}}.
+
+Si cela fonctionne correctement,
+Il devrait vous créer automatiquement 5 articles dans votre spip
+
+{{{A suivre ...}}}
+il est sans doute possible de l'améliorer ce script pour fournir à terme 
+- des imports avec des supports standards (support XML, CVS, ...)
+- gérer des images et documents
+- ...
+
+***
+Licence de Mass Import
+$$$
+la licence de ce script est sous GPL
+http://www.gnu.org/copyleft/gpl.html
+
+***
+Auteur$$$
+_ version 1.2 par erational 
+_ http://www.erational.org
+
+***
+Article respect du formatage SPIP$$$
+
+{{{un intertitre}}}
+
+un paragraphe avec un texte en {italique} ou en {{gras}} pour voir la syntaxe et ensuite un lien [->spip.net].
+
+une ligne:
+----
+
+une poésie de Blaise Cendrars pour tester les retours chariots
+_ Le monde entier est toujours là
+_ La vie pleine de choses surprenantes
+_ Je sors de la pharmacie
+_ Je descends juste de la bascule
+_ Je pèse mes 80 kilos
+_ Je t'aime
+
+une liste simple de directions:
+- nord
+- est
+- ouest
+- sud
+
+une liste ordonnée de cépages:
+-# riesling
+-# chardonnay
+-# chenin
+-# pinot
+-## pinot blanc
+-## pinot gris
+-# carignan
+
+un tableau de personnes
+|{{nom}}|{{prenom}}|{{age}}|
+|doe|john|32|
+|peel|emma||
+|weeder|karin|28|
+
+un insert avec balise HTML
+<code>
+			<div class="cartouche">
+				[(#LOGO_AUTEUR||image_reduire{200,200})]
+				<h1 class="#EDIT{qui} titre">#NOM</h1>
+				[<p class="#EDIT{hyperlien} soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			</div>
+</code>
+
+
+***
+Article test pour la conversion d'URL$$$
+
+Cet article teste la conversion d'URL par l'expression rationelle (regex en anglais). 
+normalement elle ne rentre pas en conflit avec les tags HTML ni les raccourcis habituels de SPIP
+
+{{exemple:}} un lien html <a href="http://www.google">google</a> et lien  email en fin de ligne: <a href="mailto:bill@msn.org">bill</a>
+et enfin un lien spip [regex->http://en.wikipedia.org/wiki/Regular_expression] et toujours en fin de ligne [spip-contrib->http://www.spip-contrib.org]
+
+puis une liste ordonnée avec la syntaxe spip:
+- http://www.spip.net
+- http://www.spip-herbier.net
+- http://www.spip-contrib.org
+
+dernier test vers nos amis de spip-party: http://www.spip-party.net 
+_ ouf ! 
+_ merci [spip->http://www.spip.net]

@@ -1,0 +1,33 @@
+<plugin>
+	<nom>Importer en masse</nom>
+	<icon>img/massimport-50.png</icon>
+	<version>Spip 1.9</version>
+	<auteur>[erational->http://www.erational.org]
+_ &#169; 2005-2007 - Distribu&#233; sous licence GPL
+	</auteur>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	dev
+	</etat>
+	<description>
+	Pour importer massivement et simplement des articles dans SPIP
+- A tester et affiner le format d'import (csv ? microfiche ? xml ?)
+- Voir le fichier {test.txt} pour la syntaxe de la microfiche
+  </description>
+	<lien>[->http://www.spip-contrib.net/Importer-en-masse-des-articles]</lien> <!-- URI de documentation -->
+	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	</fonctions>
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin :
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : tweak_spip_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix>MassImport</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>mass_import_pipelines.php</inclure>
+	</pipeline>
+</plugin>
