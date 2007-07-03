@@ -2,6 +2,44 @@
 
 function FenFlo_insertion_in_head($flux)
 {
+	
+	if(lire_config('FenFlo/zoom_ouverture_FenFlo') == "on")
+	{	$script_open = "if($('#window').css('display') == 'none') {
+					$(this).TransferTo(
+						{
+							to:'window',
+							className:'transferer2', 
+							duration: 400,
+							complete: function()
+							{
+								$('#window').show();
+							}
+						}
+					);
+				}
+				this.blur();";
+
+	}
+	else
+	{
+		$script_open = "$('#window').show();";
+	}
+	
+	if(lire_config('FenFlo/zoom_fermeture_FenFlo') == "on")
+	{
+		$script_close = "$('#window').TransferTo(
+					{
+						to:'windowOpen',
+						className:'transferer2', 
+						duration: 400
+					}
+				).hide();";
+	}
+	else
+	{
+		$script_close = "$('#window').hide();";
+	}
+
 	$ajout_script="<link rel=\"stylesheet\" href=\""._DIR_PLUGINS."fenetres_flottantes/floating-windows.css\" type=\"text/css\" media=\"all\" />
 <script type=\"text/javascript\" src=\""._DIR_PLUGINS."fenetres_flottantes/interface.js\"></script>
 <script type=\"text/javascript\" src=\""._DIR_PLUGINS."fenetres_flottantes/jquery.cookie.js\"></script>
@@ -17,20 +55,8 @@ $(document).ready(
 		$('#windowOpen').bind(
 			'click',
 			function() {
-				if($('#window').css('display') == 'none') {
-					$(this).TransferTo(
-						{
-							to:'window',
-							className:'transferer2', 
-							duration: 0,
-							complete: function()
-							{
-								$('#window').show();
-							}
-						}
-					);
-				}
-				this.blur();
+				
+				".$script_open."
 				return false;
 			}
 		);
@@ -38,13 +64,7 @@ $(document).ready(
 			'click',
 			function()
 			{
-				$('#window').TransferTo(
-					{
-						to:'windowOpen',
-						className:'transferer2', 
-						duration: 400
-					}
-				).hide();
+				".$script_close."
 			}
 		);
 		$('#windowMin').bind(
