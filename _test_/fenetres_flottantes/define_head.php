@@ -18,7 +18,7 @@ $(document).ready(
 						{
 							to:'window',
 							className:'transferer2', 
-							duration: 400,
+							duration: 0,
 							complete: function()
 							{
 								$('#window').show();
@@ -71,8 +71,8 @@ $(document).ready(
 			{
 				minWidth: 200,
 				minHeight: 60,
-				maxWidth: 900,
-				maxHeight: 800,
+				maxWidth: 1800,
+				maxHeight: 1800,
 				dragHandle: '#windowTop',
 				handlers: {
 					se: '#windowResize'
@@ -110,6 +110,9 @@ addLoadEvent(function(){
 
 		
 });
+
+
+			
 
 </script>";
 	

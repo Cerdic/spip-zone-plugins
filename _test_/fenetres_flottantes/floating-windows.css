@@ -5,9 +5,9 @@
 	left: 200px;
 	top: 100px;
 	width: 400px;
-	max-width:800px;
+	max-width:1800px;
 	height: 300px;
-	max-height: 400px;
+	max-height: 1400px;
 	overflow: hidden;
 	display: none;
 }
@@ -61,7 +61,7 @@
 {
 	position: relative;
 	height: 270px;
-	max-height: 370px;
+	max-height: 1000px;
 	background-image: url(images/window_bottom_end.png);
 	background-position: right bottom;
 	background-repeat: no-repeat;
@@ -70,7 +70,7 @@
 {
 	position: relative;
 	height: 270px;
-	max-height: 370px;
+	max-height: 1370px;
 	background-image: url(images/window_bottom_start.png);
 	background-position: left bottom;
 	background-repeat: no-repeat;
@@ -94,9 +94,9 @@
 	margin-right: 10px;
 	border: 1px solid #6caf00;
 	height: 255px;
-	max-height: 355px;
+	max-height: 1355px;
 	width: 375px;
-	max-width: 775px;
+	max-width: 1775px;
 	font-family:Arial, Helvetica, sans-serif;
 	background-color: #fff;
 }

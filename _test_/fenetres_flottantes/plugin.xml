@@ -1,9 +1,10 @@
 <plugin>
 	<nom>Affichage d'une fen&ecirc;tre flottante</nom>
- 	<version>1.11</version>
+ 	<version>1.2</version>
  	<prefix>FenFlo</prefix>
- 	<auteur>Mathieu Imbert[contact->mailto:mathieu_imbert@hotmail.fr]</auteur>
- 	<description>Plugin permettant d'ouvrir une fen&ecirc;tre flottante</description>
+ 	<auteur>[Mathieu Imbert->mailto:mathieu_imbert@hotmail.fr], Arnault Pachot - [OpenStudio->http://www.openstudio.fr]</auteur>
+ 	<description>Plugin permettant d'ouvrir une fen&ecirc;tre flottante,
+	 et si vous avez cfg: [Configuration->.?exec=cfg&cfg=FenFlo]</description>
  	<etat>test</etat>
  	<fonction>fenetre_flottante_fonct.php</fonction>
  	<pipeline>
@@ -16,9 +17,5 @@
   		<action>insertion_in_head</action>
   		<inclure>define_head.php</inclure>
  	</pipeline>
- 	<pipeline>
- 		<nom>ajouter_boutons</nom>
- 		<action>ajout_bouton_prive</action>
- 		<inclure>fenetreflo_pipeline.php</inclure>
- 	</pipeline>
+ 	
 </plugin>
