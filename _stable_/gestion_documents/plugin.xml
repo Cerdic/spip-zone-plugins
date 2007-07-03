@@ -1,35 +1,41 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>
+	<multi>[fr]
+	Gestion de documents
+	[it]
+	Gestione dei documenti
 	[es]
-	Edicion grupal de articulos
+	Gesti&oacute;n de los documentos
 	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Martin Gaitan
+	Cedric MORIN
 	</auteur>
 	<version>
 	0.1
 	</version>
+	<etat>
+	stable
+	</etat>
 	<description>
-	Este plugin permite la edición grupal de atributos de los articulos. Estado, asignacion de palabras claves, seccion, etc. 
+	<multi>[fr]
+	Outils de gestion des documents : une page r&#233;capitulative de tous les documents.
+	[it]
+	Utility di gestione dei documenti : una pagina che mostra tutti i documenti.
+	[es]
+	Utilidad de gesti&oacute;n de los documentos: una p&aacute;gina que resume todos los documentos del sitio.
+	</multi>
 	</description>
+	<lien>http://www.spip-contrib.net/article2174.html</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction-->
 	<prefix>
-	EdicionGrupal
+	GestionDocuments
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-  	<nom>header_prive</nom>
-	 <inclure>edicion_grupal.php</inclure>
-	 </pipeline>
-	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>edicion_grupal.php</inclure>
+		<inclure>gestion_documents.php</inclure>
 	</pipeline>
-
-
-
 	<chemin dir='' type='prive' />
 </plugin>
