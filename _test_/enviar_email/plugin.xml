@@ -18,17 +18,17 @@
 	<description>
 		<multi>	
 [es]Enviar la referencia al artículo o a la breve por email
-	- Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artículos o breves)
-	- Los dos ** asteriscos son importantes, no los olvides.
+- Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artículos o breves)
+- Los dos ** asteriscos son importantes, no los olvides.
 [fr]Envoyer la r&eacute;f&eacute;rence de l'article par mail
-	<br>- Pour l'utiliser coller la balise #ENVIAR_EMAIL** dans votre squelette</br>	
-	<br>- les deux ast&eacute;risques sont indispensables</br>
+- Pour l'utiliser coller la balise #ENVIAR_EMAIL** dans votre squelette<br />	
+- les deux ast&eacute;risques sont indispensables<br />
 		</multi>
 	</description>
 	
 	<lien> 
 		[es] [Documentación sobre contrib->http://www.spip-contrib.net/?article1407]
-		<br>[fr] [Documentation sur contrib->http://www.spip-contrib.net/?article2228]</br>
+		[fr] [Documentation sur contrib->http://www.spip-contrib.net/?article2228]<br />
 	</lien>
 	<icon>sobre.gif</icon>
 	<fonctions>
