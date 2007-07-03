@@ -38,12 +38,12 @@ $GLOBALS['spip_pipeline']['forms_calcule_valeur_en_clair'] = '';
 function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type=='form' OR $type=='donnee'){
 		if ($faire=='administrer'){
-			return ($qui['statut'] == '0minirezo');
+			return ($qui['statut'] == '0minirezo'); // tous les admin, restreint ou non
 		}
-		else
-			return ($qui['statut'] == '0minirezo');
 	}
-	return false;
+	return
+		$qui['statut'] == '0minirezo'
+		AND !$qui['restreint'];
 }
 // en cas d'appel avec le nom de la table (crayons)
 function autoriser_forms_donnee_dist($faire,$type,$id_donnee,$qui,$opt){

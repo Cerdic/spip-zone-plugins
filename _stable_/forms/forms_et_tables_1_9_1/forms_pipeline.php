@@ -18,10 +18,7 @@
 
 	function Forms_ajouter_boutons($boutons_admin) {
 		// si on est admin
-		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
-		AND $GLOBALS["options"]=="avancees" 
-		AND (!isset($GLOBALS['meta']['activer_forms']) OR $GLOBALS['meta']['activer_forms']!="non") ) {
-
+		if (autoriser('administrer','form',$id_form)) {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
 			"../"._DIR_PLUGIN_FORMS."img_pack/form-24.gif",  // icone

@@ -16,7 +16,8 @@
 </tr>]
 <BOUCLE_forms(FORMS){type_form=#ENV{type_form,''}}{pagination 10 #ENV{type_form,form}}>
 <BOUCLE_rep(FORMS_DONNEES){id_form}{statut IN (prepa,prop,publie)}></BOUCLE_rep>#SET{donnees,#TOTAL_BOUCLE}<//B_rep>
-#SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
+#SET{lien_edite,''}
+[(#REM|sinon{structurer}|autoriser{form,#ID_FORM}|?{' '}) #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})} ]
 #SET{lien_affiche,(#URL_ECRIRE{(#TYPE_FORM|match{(^$|^sondage$)}|?{forms_reponses,donnees_tous}),id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
 [(#GET{donnees}|?{'',' '})
 	[(#TYPE_FORM|match{(^$|^sondage$)}|?{' ',''}) #SET{lien_affiche,''}]
@@ -41,7 +42,7 @@
 <td class="arial1">[<a href='(#GET{lien_affiche})' title='<:forms:afficher:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/donnees-24.png' width='24' height='24' alt='<:forms:afficher:>' /></a>]</td>
 <td class="arial1">[(#GET{donnees}|=={0}|?{#ENV{prefix,'form'}|concat{':aucune_reponse'}}|_T)][(#GET{donnees}|=={1}|?{#ENV{prefix,'form'}|concat{':une_reponse'}}|_T)]
 [(#GET{donnees}|>{1}|?{' '})  [(#EVAL{ _T("[(#ENV{prefix,'form'})]:nombre_reponses",array("nombre"=>[(#GET{donnees})])) })]  ]</td>
-<td class="arial1"><a href='#GET{lien_edite}' title='<:forms:editer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/editer-24.png' width='24' height='24' alt='<:forms:editer:>' /></a></td>
+<td class="arial1">[<a href='(#GET{lien_edite})' title='<:forms:editer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/editer-24.png' width='24' height='24' alt='<:forms:editer:>' /></a>]</td>
 <td class="arial1"><a href='#GET{lien_duplique}' title='<:forms:dupliquer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/dupliquer-24.png' width='24' height='24' alt='<:forms:dupliquer:>' /></a></td>
 [<td class="arial1"><a href='(#GET{lien_exporte})' title='<:forms:exporter:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/exporter-form-24.png' width='24' height='24' alt='<:forms:exporter:>' /></a></td>]
 <td>&nbsp;</td>

@@ -119,6 +119,15 @@ function exec_forms_edit(){
 
 	$id_form = intval(_request('id_form'));
 	
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
+	if (!autoriser('structurer','form',$id_form)) {
+		echo debut_page("&laquo; $titre &raquo;", "documents", "forms","");
+		echo _T('acces_interdit');
+		echo fin_page();
+		exit();
+	}
+	
 	$new = _request('new');
 	$supp_form = intval(_request('supp_form'));
 	$supp_rejet = _request('supp_rejet');
@@ -232,8 +241,6 @@ function exec_forms_edit(){
 	if ($retour) {
 		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
 	}
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
 	if (autoriser('administrer','form',$id_form)) {
 		$nretour = urlencode(self());
 		icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):(($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
