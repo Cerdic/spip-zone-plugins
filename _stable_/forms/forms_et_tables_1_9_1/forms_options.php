@@ -109,6 +109,15 @@ function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	if (_DEBUG_AUTORISER) spip_log("autoriser_form_donnee_dist delegue a $f($faire,$type,$id_donnee): ".($a?'OK':'niet'));
 	return $a;
 }
+function autoriser_form_donnee_voir_dist($faire, $type, $id_donnee, $qui, $opt) {
+	if (!isset($opt['id_form']) OR !$id_form = $opt['id_form']) return false;
+	// un admin dans le back office a toujours le droit de modifier
+	if (($qui['statut'] == '0minirezo')) return true;
+	return false;
+}
+function autoriser_table_donnee_voir_dist($faire, $type, $id_donnee, $qui, $opt) {
+	return autoriser_form_donnee_voir_dist($faire, $type, $id_donnee, $qui, $opt);
+}
 
 function autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $opt) {
 	if (!intval($id_donnee)) return false;

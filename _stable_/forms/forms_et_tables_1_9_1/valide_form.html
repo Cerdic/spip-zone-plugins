@@ -56,7 +56,7 @@ function valide_sondage()
 			$cookie = $row['cookie'];
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
-			$hash_verif = md5("forms confirme reponse $id_reponse $cookie ".hash_env());
+			$hash_verif = md5("forms confirme reponse $id_donnee $cookie ".hash_env());
 			if ($hash_verif==$hash) {
 				$env = unserialize('[(#ENV*|texte_script)]');
 				Forms_generer_mail_reponse_formulaire($id_form, $id_donnee, $env);

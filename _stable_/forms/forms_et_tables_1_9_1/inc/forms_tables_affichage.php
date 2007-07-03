@@ -260,6 +260,13 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 
 function affichage_donnees_tous($type_form){
   include_spip("inc/presentation");
+  $id_form = _request('id_form');
+	if (!autoriser('voir','donnee',0,null,array('id_form'=>$id_form,'type_form'=>$type_form))) {
+		echo debut_page("&laquo; $titre &raquo;", "documents", "forms","");
+		echo _T('acces_interdit');
+		echo fin_page();
+		exit();
+	}
 
   _Forms_install();
 	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
@@ -271,7 +278,7 @@ function affichage_donnees_tous($type_form){
 		else
 			$retour = generer_url_ecrire('tables_tous');
 	}
-	echo affichage_donnees_tous_corps($type_form,_request('id_form'),$retour, $titre_page);
+	echo affichage_donnees_tous_corps($type_form,$id_form,$retour, $titre_page);
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
 	echo fin_page();
