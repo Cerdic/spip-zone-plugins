@@ -54,7 +54,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 
 	// Elaborer le formulaire
 	$corps_supp = '';
-	$var_user['a.id_auteur'] = '0';
+	$var_user['b.id'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 			$cle = ereg_replace("^username.*$", "login", $cle);
@@ -63,7 +63,10 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
-			else 
+			elseif($cle == 'pays'){
+				$var_user['c.pays'] = '1';
+				$var_user['c.id as id_pays'] = '1';
+			}else 
 				$var_user['b.'.$cle] = '1';
 		}
 		elseif($cle=='newsletter' and $val != ''){
@@ -76,13 +79,25 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		}
 	}
 		
-	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
+	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
 	$query = spip_fetch_array($query);
-	if($query['id_auteur'] == NULL)
+	if($query['id'] == NULL)
 			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
 
 	foreach ($query as $cle => $val){
-		if($cle!= 'id_auteur')
+		if($cle == 'id_pays')
+			continue;
+		if($cle == 'pays'){
+			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
+				. "<select name='$cle' id='$cle' class='formo'>";
+			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
+			foreach($liste_pays as $cle=> $val){
+				if ($cle == $query['id_pays'])
+					$corps_supp .= "<option value='$cle' selected>$val</option>";
+				else 
+					$corps_supp .= "<option value='$cle'>$val</option>";
+			}$corps_supp .= "</select>";
+		}elseif($cle!= 'id_auteur')
 		$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
 		. "<input type='text' name='$cle' class='formo' value='$val'><br />"; 
 	}
@@ -202,6 +217,8 @@ function legender_auteur_supp_voir($auteur, $redirect)
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
+			elseif($cle == 'pays')
+				$var_user['c.pays'] = '1';
 			else 
 				$var_user['b.'.$cle] = '1';
 		}
@@ -215,7 +232,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		}
 	}
 		
-	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
+	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
 	$query = spip_fetch_array($query);
 	if($query['id_auteur'] == NULL)
 		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");

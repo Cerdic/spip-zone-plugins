@@ -74,7 +74,7 @@ function action_editer_auteur_supp_post($r){
 				$aux = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id_auteur");
 				while($q = spip_fetch_array($aux))
 					$listes[]=$q['id_liste'];
-				$listes_array = $_POST['news'];
+				$listes_array = _request('news');
 				if(!empty($listes) and empty($listes_array))
 					spip_query("delete from spip_auteurs_listes where id_auteur = $id_auteur");
 				elseif(empty($listes) and !empty($listes_array))

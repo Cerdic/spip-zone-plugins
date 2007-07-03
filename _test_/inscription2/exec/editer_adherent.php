@@ -80,7 +80,10 @@ function exec_editer_adherent(){
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
-			else 
+			elseif($cle == 'pays'){
+				$var_user['c.pays'] = '1';
+				$var_user['c.id as id_pays'] = '1';
+			}else 
 				$var_user['b.'.$cle] = '1';
 		}
 		elseif($cle=='accesrestreint' and $val != ''){
@@ -101,7 +104,7 @@ function exec_editer_adherent(){
 		}
 	}
 
-	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
+	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
 	$query = spip_fetch_array($query);
 	if($query['id'] == NULL)
 			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
@@ -119,9 +122,20 @@ function exec_editer_adherent(){
 	echo "<form name='adherent' method='post' action='?exec=editer_adherent&act=val&id=$id'>";
 	echo "<table>";
 	foreach ($query as $cle => $val){
-		if($cle == 'id')
+		if($cle == 'id' or $cle == 'id_pays')
 			continue;
-		if($cle=='publication'){
+		if($cle == 'pays'){
+			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>"
+				. "<td><select name='$cle' id='$cle' >";
+			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
+			foreach($liste_pays as $cle=> $val){
+				if ($cle == $query['id_pays'])
+					echo "<option value='$cle' selected>$val</option>";
+				else 
+					 echo "<option value='$cle'>$val</option>";
+			}
+			echo "</select></td></tr>";
+		}elseif($cle=='publication'){
 			if ($val == 'on')	
 				$val = 'checked';
 			else
