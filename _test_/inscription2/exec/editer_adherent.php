@@ -87,6 +87,8 @@ function exec_editer_adherent(){
 				$var_user['b.'.$cle] = '1';
 		}
 		elseif($cle=='accesrestreint' and $val != ''){
+			$aux1=array();
+			$aux2=array();
 			$zones = spip_query("select id_zone, titre from spip_zones");
 			$acces = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id");
 			while($q = spip_fetch_array($acces))
@@ -95,6 +97,8 @@ function exec_editer_adherent(){
 				$aux2[] = $q;
 		}
 		elseif($cle=='newsletter' and $val != ''){
+			$aux3=array();
+			$aux4=array();
 			$news = spip_query("select id_liste, titre from spip_listes");
 			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
 			while($q = spip_fetch_array($listes))

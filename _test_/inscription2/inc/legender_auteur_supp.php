@@ -68,8 +68,9 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 				$var_user['c.id as id_pays'] = '1';
 			}else 
 				$var_user['b.'.$cle] = '1';
-		}
-		elseif($cle=='newsletter' and $val != ''){
+		}elseif($cle=='newsletter' and $val != ''){
+			$aux3 = array();
+			$aux4 = array();
 			$news = spip_query("select id_liste, titre from spip_listes");
 			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
 			while($q = spip_fetch_array($listes))
@@ -223,6 +224,8 @@ function legender_auteur_supp_voir($auteur, $redirect)
 				$var_user['b.'.$cle] = '1';
 		}
 		elseif($cle=='newsletter' and $val != ''){
+			$aux3 = array();
+			$aux4 = array();
 			$news = spip_query("select id_liste, titre from spip_listes");
 			$listes = spip_query("select id_liste from spip_auteurs_listes where id_auteur = $id");
 			while($q = spip_fetch_array($listes))

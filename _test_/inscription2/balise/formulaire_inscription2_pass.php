@@ -73,7 +73,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 		$message = $commentaire ? '' : _T('inscription2:lisez_mail');
 	}
 	$var_user['message'] = $message;
-	$var_user['commentaire'] = $commentaire;
+	$var_user['commentaires'] = $commentaire;
 	$var_user['mode'] = $mode;
 	$var_user['self'] = str_replace('&amp;','&',(self()));
 	return array("formulaires/inscription2_pass", $GLOBALS['delais'],

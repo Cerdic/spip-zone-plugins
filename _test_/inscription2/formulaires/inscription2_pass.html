@@ -128,10 +128,7 @@ function cryptage() {
 </script>
 <style>
 .infos-auteurs > div{height:35px;clear:both;padding:5px}
-.infos-auteurs input, .select , textarea{display:block;float:right;width:250px}
 .infos-auteurs label{display:block;float:left}
-.infos-auteurs > div.textarea {height:70px;clear:both;padding:5px}
-.infos-auteurs > div.grand_select {height:auto;margin-bottom:15px;clear:both;padding:5px}
 .inscription2 h2 {margin:10px 0px}
 div.error{background-color:#ffe2e2}
 label.error{font-size:0.7em;color:red;display:block;clear:both}
@@ -140,9 +137,9 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 [<div>(#ENV*{message})</div>]
 
 
-[<div style="color:red; font-style:bold;">(#ENV*{commentaire}|=={1}|?{'',' '}) #ENV*{commentaire} </div>]
+[<div style="color:red; font-style:bold;">(#ENV*{commentaires}|=={1}|?{'',' '}) #ENV*{commentaires} </div>]
 
-<div class="inscription2" [style="(#ENV{commentaire}|=={1}|?{display: block;, display:none;})"]>
+<div class="inscription2" [style="(#ENV{commentaires}|=={1}|?{display: block;, display:none;})"]>
 
 <h2><:inscription2:formulaire_inscription:></h2>
 
@@ -302,9 +299,9 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 </div>
 ]
 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
-<div class="grand_select">
-	<label><strong><:inscription2:commentaire:></strong></label>
-	<textarea name="commentaire" id="commentaire">#ENV{divers}</textarea>	
+<div >
+	<label><strong><:inscription2:commentaire:></strong></label><br />
+	<textarea name="commentaire" id="commentaire">#ENV{commentaire}</textarea>	
 </div>
 ]
 
@@ -318,6 +315,12 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 </legend>
 <br />
 
+[(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
+<div >
+	<label><strong><:inscription2:divers:></strong></label><br />
+	<textarea name="divers" id="divers">#ENV{divers}</textarea>	
+</div>
+]
 [(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
 <div>
 	<strong><:inscription2:publication:></strong>
