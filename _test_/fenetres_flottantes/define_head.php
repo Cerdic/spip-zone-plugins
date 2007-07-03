@@ -4,7 +4,11 @@ function FenFlo_insertion_in_head($flux)
 {
 	$ajout_script="<link rel=\"stylesheet\" href=\""._DIR_PLUGINS."fenetres_flottantes/floating-windows.css\" type=\"text/css\" media=\"all\" />
 <script type=\"text/javascript\" src=\""._DIR_PLUGINS."fenetres_flottantes/interface.js\"></script>
-	<script type=\"text/javascript\">
+<script type=\"text/javascript\" src=\""._DIR_PLUGINS."fenetres_flottantes/jquery.cookie.js\"></script>
+	
+
+
+<script type=\"text/javascript\">
 $(document).ready(
 	
 	function()
@@ -55,6 +59,7 @@ $(document).ready(
 				$('#windowMax').show();
 			}
 		);
+		
 		$('#windowMax').bind(
 			'click',
 			function()
@@ -83,9 +88,20 @@ $(document).ready(
 					if (!document.getElementById('window').isMinimized) {
 						windowContentEl.css('height', size.height - 48 + 'px');
 					}
+					$.cookie('width_FenFlo', size.width);
+					$.cookie('height_FenFlo', size.height);
+					
+						
+				},
+				onDragStop : function() {
+					var topFenFlo = $('#window').css('top');
+					var leftFenFlo = $('#window').css('left');
+					$.cookie('top_FenFlo', topFenFlo);
+					$.cookie('left_FenFlo', leftFenFlo);
 				}
 			}
 		);
+		
 	}
 );
 </script>

@@ -69,9 +69,29 @@ return $texte;
 function modif_fenetre($arg)
 {
 	
-	$marge_haut= lire_config('FenFlo/hauteur_FenFlo','300')-30;
-	$marge2_haut= lire_config('FenFlo/hauteur_FenFlo','300')-45;
-	$marge_larg= lire_config('FenFlo/largeur_FenFlo','400')-25;
+	//on teste si les dimensions de la fenêtre sont enregistrées dans les cookies
+	$valeur_top_FenFlo = $_COOKIE['top_FenFlo'];
+	$valeur_left_FenFlo = $_COOKIE['left_FenFlo'];
+	$valeur_width_FenFlo = $_COOKIE['width_FenFlo'];
+	$valeur_height_FenFlo = $_COOKIE['height_FenFlo'];
+
+	//si pas de cookies, on applique les valeurs de configuration
+	if ($valeur_top_FenFlo == "")
+		$valeur_top_FenFlo = lire_config('FenFlo/posy_FenFlo','100px');
+	if ($valeur_left_FenFlo == "")
+		$valeur_left_FenFlo = lire_config('FenFlo/posx_FenFlo','100px');
+	if ($valeur_width_FenFlo == "")
+		$valeur_width_FenFlo = lire_config('FenFlo/largeur_FenFlo','400');
+	if ($valeur_height_FenFlo == "")
+		$valeur_height_FenFlo = lire_config('FenFlo/hauteur_FenFlo','300');
+
+	
+
+	$marge_haut= $valeur_height_FenFlo-30;
+	
+	$marge2_haut= $valeur_height_FenFlo-45;
+	$marge_larg= $valeur_width_FenFlo-25;
+
 	
 	$afficher_close = "none";
 	$pos_bouton_close = "10";
@@ -85,10 +105,10 @@ function modif_fenetre($arg)
 	  $arg = preg_replace('/(<\/head>)/i',"<style type=\"text/css\" media=\"screen\">
 	  #window
 	  {
-	   left:".lire_config('FenFlo/posx_FenFlo','100')."px;
-           top:".lire_config('FenFlo/posy_FenFlo','100')."px;
-           width:".lire_config('FenFlo/largeur_FenFlo','400')."px;
-	   height:".lire_config('FenFlo/hauteur_FenFlo','300')."px;
+	   left:".$valeur_left_FenFlo.";
+           top:".$valeur_top_FenFlo.";
+           width:".$valeur_width_FenFlo."px;
+	   height:".$valeur_height_FenFlo."px;
 	   }
           #windowBottom
  	  {
