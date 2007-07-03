@@ -5,27 +5,29 @@
       	 
      
 	<p>Hauteur de la fenêtre(en pixels) <br/>
-	<input type="text" name="reglage1_hauteur_FenFlo" value="[(#CONFIG{FenFlo/reglage1_hauteur_FenFlo}|sinon{300})]"></p>
+	<input type="text" name="hauteur_FenFlo" value="[(#CONFIG{FenFlo/hauteur_FenFlo}|sinon{300})]"></p>
 
 	<p>Largeur de la fenêtre(en pixels) <br/>
-	<input type="text" name="reglage1_largeur_FenFlo" value="[(#CONFIG{FenFlo/reglage1_largeur_FenFlo}|sinon{400})]"></p>
+	<input type="text" name="largeur_FenFlo" value="[(#CONFIG{FenFlo/largeur_FenFlo}|sinon{400})]"></p>
 
 	<p>position de la fenêtre en x par rapport au bord haut gauche <br/>
-	<input type="text" name="reglage1_posx_FenFlo" value="[(#CONFIG{FenFlo/reglage1_posx_FenFlo}|sinon{100})]"></p>
+	<input type="text" name="posx_FenFlo" value="[(#CONFIG{FenFlo/posx_FenFlo}|sinon{100})]"></p>
 
 	<p>position de la fenêtre en y par rapport au bord haut gauche<br>
-	<input type="text" name="reglage1_posy_FenFlo" value="[(#CONFIG{FenFlo/reglage1_posy_FenFlo}|sinon{100})]"></p>
+	<input type="text" name="posy_FenFlo" value="[(#CONFIG{FenFlo/posy_FenFlo}|sinon{100})]"></p>
 
 	<p>couleur de la fenetre, valeurs possibles : antracite, bleu, gris, orange, rose ou vert<br/>
-	<input type="text" name="reglage1_couleur_FenFlo" value="[(#CONFIG{FenFlo/reglage1_couleur_FenFlo}|sinon{vert})]"></p>
+	<input type="text" name="couleur_FenFlo" value="[(#CONFIG{FenFlo/couleur_FenFlo}|sinon{vert})]"></p>
 
 	<p>couleur de la bordure<br>
-	<input type="text" name="reglage1_couleurbordure_FenFlo" value="[(#CONFIG{FenFlo/reglage1_couleurbordure_FenFlo}|sinon{#6caf00})]"></p>
+	<input type="text" name="couleurbordure_FenFlo" value="[(#CONFIG{FenFlo/couleurbordure_FenFlo}|sinon{#6caf00})]"></p>
 
 	<p>div sur lequel sera utiliser la fenêtre<br/>
-	<input type="text" name="reglage2_attribut_FenFlo" value="[(#CONFIG{FenFlo/reglage2_attribut_FenFlo}|sinon{contenu})]"></p>
+	<input type="text" name="attribut_FenFlo" value="[(#CONFIG{FenFlo/attribut_FenFlo}|sinon{contenu})]"></p>
 
-	
+	<p>autoriser la fermeture de la fenêtre<br/>
+	<input type="checkbox" name="close_FenFlo" [checked="(#CONFIG{FenFlo/close_FenFlo})"]>
+	</p>
 	<input type="submit" name="_cfg_ok" value="<:OK:>" />
 	<input type="reset" value="<:Reset:>" />
 	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
