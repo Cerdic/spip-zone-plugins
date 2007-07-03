@@ -36,8 +36,35 @@ if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
 	}
 
 
-	function EdicionGrupal_header_prive(){
-		return "<script>-----</script>";
+	function EdicionGrupal_header_prive($flux){
+		 $flux .=  "<script type=\"text/javascript\">
+<!--
+function checkAll(form)
+{
+	for (i = 0, n = form.elements.length; i < n; i++) {
+		if(form.elements[i].type == \"checkbox\") {
+			if(form.elements[i].checked == true)
+				form.elements[i].checked = false;
+			else
+				form.elements[i].checked = true;
+		}
+	}
+}
+
+function getNumChecked(form)
+{
+	var num = 0;
+	for (i = 0, n = form.elements.length; i < n; i++) {
+		if(form.elements[i].type == \"checkbox\") {
+			if(form.elements[i].checked == true)
+				num++;
+		}
+	}
+	return num;
+}
+//-->
+</script>";
+		return $flux;
 	}
 
 ?>

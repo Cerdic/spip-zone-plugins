@@ -155,7 +155,11 @@ creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 debut_droite();
 echo _request('filtro');
-echo afficher_objets('article',_T('Tu seleccion'),	array("FROM" =>"spip_articles AS articles", 'ORDER BY' => "articles.date DESC"));
+echo "<form name=\"lista\" id=\"lista\" action=\"\" method=\"post\">";
+echo "<input type=\"checkbox\" onclick=\"checkAll(document.getElementById('lista'));\" />";
+echo afficher_objets('article',_T('Tu seleccion'),array("FROM" =>"spip_articles AS articles", 'ORDER BY' => "articles.date DESC"));
+echo "</form>";
+
 //echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 
 
