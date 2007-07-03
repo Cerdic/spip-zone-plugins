@@ -40,6 +40,17 @@ function demarrer_site($site = '', $options = array()) {
 	if ($options['table_prefix'])
 		$GLOBALS['table_prefix'] = prefixe_mutualisation($site);
 
+	if ($options['creer_user_base']) {
+		define('_INSTALL_USER_DB', _INSTALL_NAME_DB);
+		define('_INSTALL_PASS_DB',
+			substr(md5(
+				_INSTALL_PASS_DB_ROOT   # secret du site
+				. $_SERVER['REMOTE_ADDR'] # un truc variable
+				. _INSTALL_USER_DB # un autre truc variable
+			), 0, 8)
+		);
+	}
+
 	$adr_site = $options['repertoire'].'/' . $site . '/';
 	if (!is_dir($e = _DIR_RACINE . $adr_site)) {
 		spip_initialisation();
