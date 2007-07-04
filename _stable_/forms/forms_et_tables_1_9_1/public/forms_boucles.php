@@ -173,7 +173,7 @@
 		if ((\$r = _request(\$row['champ']))!==NULL){
 			if (is_array(\$r)){
 				\$r = array_diff(\$r,array('')); // enlever les valeurs vides
-				if (\$row['type']=='select') \$res++; // une seule valeur possible dans un select !
+				if (\$row['type']=='select') \$res+=max(1,count(\$r)); // une seule valeur possible dans un select !
 				else \$res += count(\$r);
 				if (strlen(implode("",\$r))) 
 					\$filtre .= " OR (L$k.champ="._q(\$row['champ'])." AND L$k.valeur IN (".implode(',',array_map('_q',\$r))."))";
