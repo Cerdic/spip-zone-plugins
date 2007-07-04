@@ -1,7 +1,19 @@
 <?php
 
-if (!defined('_INTRODUCTION_SUITE')) define('_INTRODUCTION_SUITE', '&nbsp;(...)');
-if (!defined('_INTRODUCTION_LGR')) define('_INTRODUCTION_LGR', 100);
+define('_INTRODUCTION_CODE', '@@CS_SUITE@@');
+
+// compatibilite avec SPIP 1.92 et anterieurs
+$GLOBALS['cs_couper_intro'] = 'couper_intro';
+if ($GLOBALS['spip_version_code']<1.925) {
+	$GLOBALS['cs_couper_intro'] = 'couper_intro2';
+	function couper_intro2($texte, $long, $suite) {
+		$texte = couper_intro($texte, $long);
+		$i = strpos($texte, '&nbsp;(...)');
+		if (strlen($texte) - $i == 11)
+			$texte = substr($texte, 0, $i) . _INTRODUCTION_CODE;
+		return $texte;
+	}
+}
 
 // fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
 function cs_introduire($texte) {
@@ -12,7 +24,9 @@ function cs_introduire($texte) {
 }
 
 function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
-	$intro_suite = '@@CS_SUITE@@';
+	define('_INTRODUCTION_SUITE', '&nbsp;(...)');
+	define('_INTRODUCTION_LGR', 100);
+	$couper = $GLOBALS['cs_couper_intro'];
 	switch ($type) {
 		case 'articles':
 			# si descriptif contient juste des espaces ca produit une intro vide, 
@@ -22,23 +36,23 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 			else if (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
 			else
-				$result = PtoBR(propre(supprimer_tags(couper_intro(cs_introduire($chapo."\n\n\n".$texte), round(500*_INTRODUCTION_LGR/100), $intro_suite))));
+				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($chapo."\n\n\n".$texte), round(500*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			break;
 		case 'breves':
-			$result = PtoBR(propre(supprimer_tags(couper_intro(cs_introduire($texte), round(300*_INTRODUCTION_LGR/100), $intro_suite))));
+			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(300*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			break;
 		case 'forums':
-			$result = PtoBR(propre(supprimer_tags(couper_intro(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), $intro_suite))));
+			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			break;
 		case 'rubriques':
 			if (strlen($descriptif))
 				return propre($descriptif);
 			else
-				$result = PtoBR(propre(supprimer_tags(couper_intro(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), $intro_suite))));
+				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			break;
 	}
 	// si les points de suite ont ete ajoutes
-	if (strpos($result, '@@CS_SUITE@@') !== false) {
+	if (strpos($result, _INTRODUCTION_CODE) !== false) {
 		// precaution sur le tout paragrapher !
 		$mem = $GLOBALS['toujours_paragrapher'];  
 		$GLOBALS['toujours_paragrapher'] = false;  
@@ -51,13 +65,12 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 				else $intro_suite = propre("&nbsp;[{$intro_suite}->art$id]");
 		}
 		$GLOBALS['toujours_paragrapher'] = $mem; 
-		$result = str_replace('@@CS_SUITE@@', $intro_suite, $result);
+		$result = str_replace(_INTRODUCTION_CODE, $intro_suite, $result);
 	}
 	return $result;
 } // introduction()
 
 if (!function_exists('balise_INTRODUCTION')) {
-
 	// #INTRODUCTION
 	function balise_INTRODUCTION($p) {
 		$type = $p->type_requete;
