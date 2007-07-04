@@ -108,7 +108,8 @@ function chargeur_charger_zip($quoi = array())
 
 // pas de fichiers caches et preg_files() les ignore (*sigh*)
 function chargeur_montre_tout($quoi)
-{echo($quoi['dest']);
+{
+	# echo($quoi['dest']);
 	if (!($d = @opendir($quoi['dest']))) {
 		return;
 	}
