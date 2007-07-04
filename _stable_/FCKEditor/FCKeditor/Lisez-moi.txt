@@ -1,0 +1,7 @@
+Entièrement compatible avec la version 2.4.2 de fckeditor.
+
+Vous pouvez télécharger cette version sur http://www.fckeditor.net/ voire essayer la dernière version en cours. 
+
+Ensuite décompressez l'archive dans ce répetoire.
+
+Si problème contactez-moi par mon site http://electropol.free.fr/spip/spip.php?article8 
