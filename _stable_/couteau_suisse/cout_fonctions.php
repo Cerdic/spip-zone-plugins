@@ -10,7 +10,9 @@ if ($GLOBALS['spip_version_code']<1.92) {
 
 // fichier charge a chaque recalcul
 	global $cs_metas_pipelines;
-
+// globale qui sert a la balise #INTRODUCTION
+	$GLOBALS['cs_introduire'] = array();
+	
 	// inclusion des fonctions pre-compilees
 	cs_log("appel de cout_fonctions : strlen=" . strlen($cs_metas_pipelines['fonctions']));
 	if (!$GLOBALS['cs_fonctions']) include_once(sous_repertoire(_DIR_TMP, "couteau-suisse").'mes_fonctions.php');
