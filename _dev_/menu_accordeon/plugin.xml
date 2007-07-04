@@ -3,7 +3,7 @@
   Menu accordeon
   </nom>
   <auteur>        <!-- Auteur du plugin -->
-  Bruno Bergot - [eliaz weblog->http://www.weblog.eliaz.fr/article40.html]
+  Bruno Bergot - [eliaz weblog->http://www.weblog.eliaz.fr/article51.html]
   <br />Id&#233;e originale de Stephan d art-logic.info.
   </auteur>
   <version>
@@ -19,7 +19,7 @@
   <br /><br />[Configuration->.?exec=cfg&amp;cfg=menu-accordeon]
   </description>
 	<lien>
-	http://bassistance.de/jquery-plugins/jquery-plugin-accordion/
+	http://www.spip-contrib.net/Plugin-Menu-Accordeon
 	</lien> <!-- URI de documentation -->
   <fonctions>
   menuaccordeon_fonctions.php
