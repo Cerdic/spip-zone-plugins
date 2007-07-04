@@ -6,6 +6,7 @@ function ThickBox1_insert_head($flux){
 
 // TODO: ne charger thickbox.js et thickbox.css que si 
 // $("a.thickbox,a[@type='image/jpeg'],...").size() > 0)
+var_dump(isset($GLOBALS["spip_pipeline"]["insert_js"]));
 if(!isset($GLOBALS["spip_pipeline"]["insert_js"]))
 
 $flux = ThickBox1_header_prive($flux);
