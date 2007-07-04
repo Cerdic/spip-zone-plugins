@@ -6,6 +6,9 @@
 	<description>
 {{Edition WYSIWYG avec FCKeditor}}
 <br /><br />
+<u>Vous devez t&#233;l&#233;charger fckeditor pour que cette version marche (voir dans le r&#233;pertoire fckeditor du plugin).
+De même, si vous voulez utiliser geshi vous devez l'ajouter dans le r&#233;pertoire \spip_fck\plugins\geshighlighter\geshi.</u>
+
 <u>Caract&#233;ristiques :</u>
 -* - Edition des articles et des br&#232;ves,
 -* - Seule la zone &laquo;texte&raquo; est &#233;ditable,
