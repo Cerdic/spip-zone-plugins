@@ -34,7 +34,7 @@ function valide_sondage()
 			$nom_cookie = Forms_nom_cookie_form($id_form);
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
-			$hash_verif = md5("forms valide reponse sondage $id_reponse $cookie ".hash_env());
+			$hash_verif = md5("forms valide reponse sondage $id_donnee $cookie ".hash_env());
 			if ($cookie && $cookie == $_COOKIE[$nom_cookie]
 				&& ($hash_verif==$hash)) {
 				// Ensuite verifier que le cookie n'a pas deja ete utilise pour le meme formulaire
