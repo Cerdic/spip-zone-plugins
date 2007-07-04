@@ -10,7 +10,7 @@ if ($GLOBALS['spip_version_code']<1.92) {
 
 // fichier charge a chaque recalcul
 	global $cs_metas_pipelines;
-// globale qui sert a la balise #INTRODUCTION
+// liste de filtres qui sert a la balise #INTRODUCTION
 	$GLOBALS['cs_introduire'] = array();
 	
 	// inclusion des fonctions pre-compilees
