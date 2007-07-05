@@ -19,7 +19,7 @@ function action_mise_a_jour() {
 	);
 
 	$query = "SELECT id_paquet FROM spip_paquets WHERE titre="._q($paquet);
-	$result = spip_query($$query);
+	$result = spip_query($query);
 	$row = spip_fetch_array($result);
 	if($row) {
 		//update de la date de maj du paquet
