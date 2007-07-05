@@ -22,7 +22,7 @@ $spip_abonnements = array(
 						"libelle" 			=> "text NOT NULL",
 						"duree" 			=> "text NOT NULL",
 						"montant" 		=> "float NOT NULL default '0'",
-						"commentaires" 	=> "text NOT NULL",
+						"commentaire" 	=> "text NOT NULL",
 						"maj" 				=> "timestamp(14) NOT NULL"
 						);
 
