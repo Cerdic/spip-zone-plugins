@@ -1,0 +1,30 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Abonnement
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  BoOz (booz@rezo.net)
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<icon></icon>
+	<description>
+	Un plugin pour gerer des abonnements. Necessite le plugin inscription2
+	</description>
+	<lien>http://spip-zone.info/spip.php?page=sommaire_abo</lien> <!-- URI de documentation -->
+	<prefix>
+	abonnement
+	</prefix>
+	<fonctions>
+	</fonctions>
+	<install>base/abonnement_upgrade.php</install>
+	<pipeline>
+		<nom></nom>
+		<inclure></inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>
