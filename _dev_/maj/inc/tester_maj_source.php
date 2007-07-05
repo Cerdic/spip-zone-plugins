@@ -38,8 +38,10 @@ function inc_tester_maj_source() {
 }
 
 function config_source($source) {
+	if($source == 'chargeur')
+		return '<p>'._T('maj:chargeur_ok').'</p>';
 	if($source == 'fichier')
-		return '<p>'._T('fichier_ok').'</p>';
+		return '<p>'._T('maj:fichier_ok').'</p>';
 	if($source != 'rss')
 		return '<p>'.$source.'&nbsp;: OK</p>';
 	return verifier_rss();

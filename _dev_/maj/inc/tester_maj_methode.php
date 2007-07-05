@@ -40,6 +40,8 @@ function inc_tester_maj_methode() {
 function config_methode($methode) {
 	if($methode == 'svn')
 		return '<p>'._T('svn_ok').'</p>';
+	if($methode == 'chargeur')
+		return '<p>'._T('chargeur_ok').'</p>';
 	if($methode != 'spip_loader')
 		return '<p>'.$methode.'&nbsp;: OK</p>';
 	return verifier_spip_loader();

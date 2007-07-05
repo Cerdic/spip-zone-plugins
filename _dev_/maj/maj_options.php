@@ -1,8 +1,16 @@
 <?php
 
 define('_URL_LOADER_PROXY', $GLOBALS['meta']['http_proxy']);
-$maj_methode = array('svn' => 'svn', 'spip_loader' => 'https?');
-$maj_source = array('fichier', 'rss');
+$maj_methode = array(
+	'chargeur' => 'https?',
+	'svn' => 'svn',
+	'spip_loader' => 'https?'
+);
+$maj_source = array(
+	'chargeur',
+	'fichier',
+	'rss'
+);
 
 #anciennes constantes devenues obsoletes
 /*define('_SPIP_LOADER_UPDATE_AUTEURS', '1');

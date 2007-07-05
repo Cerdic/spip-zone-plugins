@@ -40,6 +40,10 @@ function tester_svn() {
 	return ($return == 0);		
 }
 
+function tester_chargeur() {
+	return true;
+}
+
 function verifier_spip_loader(){
 	global $spip_lang_right;
 	global $connect_id_auteur;
