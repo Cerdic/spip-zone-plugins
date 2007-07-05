@@ -11,7 +11,7 @@
     <div style="position:relative;[float:(#ENV{align}|match{left|right});]" class="splickrbox [splickrbox_(#ENV{align})]">
         <table cellpadding="0" cellspacing="0" ><tr>
 <BOUCLE_flickr(DOCUMENTS){par #ENV{tri, date}}{inverse #ENV{senstri, 1}}{extension==jpg|png|gif}{0,#ENV{taille,12}}{id_article?}{id_rubrique?}>
-            <td> <a href="#FICHIER" class="thickbox">[(#FICHIER|copie_locale|image_masque{#ENV{masque,carre-100.png}}|image_aplatir{jpg})]</a></td>
+            <td> <a href="#FICHIER" class="thickbox" [title="(#TITRE)"]>[(#FICHIER|copie_locale|image_masque{#ENV{masque,carre-100.png}}|image_aplatir{jpg})]</a></td>
             [(#COMPTEUR_BOUCLE|Splickr_juste_a_x{#ENV{colonnes,3},</tr><tr>})] 
 </BOUCLE_flickr>
             <td></td>
