@@ -35,6 +35,13 @@
 [<p>(#DESCRIPTIF)</p>]
 </div>
 </BOUCLE_docs_diapo>
+[(#ENV{align}|=={diapo}|?{' ',''})
+<script type="text/javascript">
+$(document).ready(function(){
+	if ($("#diapo_ico").attr("class")=="selected")
+	$("#diapo_ico").click();
+});
+]
 <!-- fin diapo#ID_ARTICLE -->
 </div>
 </BOUCLE_art>
