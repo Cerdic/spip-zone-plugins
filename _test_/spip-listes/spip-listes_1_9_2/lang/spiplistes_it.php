@@ -12,7 +12,7 @@ comporre il messaggio in HTML.
 col quale desiderano ricevere le comunicazioni (HTML/testo). <br /><br />Ogni messaggio verr&agrave; tradotto automaticamente in formato testo per quegli iscritti che ne hanno fatto richiesta.<br /><br /><b>Nota:</b><br />L\'invio delle e-mail pu&ograve; durare alcuni minuti: i flussi partono a poco a poco mentre gli utenti visitano il sito pubblico. &Egrave; anche possibile provocare manualmente l\'invio dei flussi cliccando sul link "controlla gli invii" durante un invio.',
 
 // A
-'abo_1_lettre' => 'Newsletter di SisMagazine',
+'abo_1_lettre' => 'Iscrizione alla newsletter di',
 'abonnement_0' => 'Iscrizione',
 'abonnement'=>'Si desidera modificare la propria iscrizione alla newsletter',
 'abonnement_bouton'=>'Modifica l&#39;iscrizione',
@@ -25,7 +25,7 @@ Per modificare la propria iscrizione alla newsletter di questo sito:
 
 Andate all\'indirizzo seguente:
 
-@adresse_site@/spip.php?page=editnewsletter&d=@cookie@
+@adresse_site@/spip.php?page=abonnement&d=@cookie@
 
 In seguito potete confermare la variazione del vostro abbonamento.',
 'abonnement_modifie'=>'Le modifiche sono state registrate',
@@ -357,7 +357,7 @@ e ricevere le newsletter.',
 
 // ====================== inscription-listes.php3 / abonnement.php3 ======================
 
-'abo_listes' => '<b>Abbonamento alle Newsletter di SisMagazine</b>',
+'abo_listes' => '<b>Abbonamento alle Newsletter di </b>',
 'acces_refuse' => 'Non &egrave; pi&ugrave; possibile accedere a questo sito',
 
 'confirmation_format' => ' in formato ',
