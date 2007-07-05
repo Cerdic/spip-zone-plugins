@@ -1,0 +1,7 @@
+id_continent;Nom;Latitude;Longitude;Zoom
+1;<multi>[fr]Afrique[en]Africa[es]Africa</multi>;-1.230374;20.126953;3
+2;<multi>[fr]Amérique du Nord[en]North America[es]Norteamérica</multi>;44.087585;-98.261719;3
+3;<multi>[fr]Amérique du Sud[en]South America</multi>;-18.812718;-58.183594;3
+4;<multi>[fr]Asie[en]Asia[es]Asia</multi>;40.313043;92.109375;3
+5;<multi>[fr]Europe[es]Europa</multi>;50.847;20.742;4
+6;<multi>[fr]Océanie[en]Oceania[es]Oceania</multi>;-28.304381;145.371094;4

@@ -1,0 +1,232 @@
+id_pays;id_continent;Nom;Latitude;Longitude;Zoom;Indicatif téléphonique
+1;4;Afghanistan;;;;93
+2;1;Afrique du Sud;;;;27
+3;5;Albanie;;;;355
+4;1;Algérie;;;;213
+5;5;Allemagne;;;;49
+6;5;Andorre;;;;376
+7;1;Angola;;;;244
+8;2;Anguilla;;;;1
+9;2;Antigua-et-Barbuda;;;;1
+10;2;Antilles néerlandaises;;;;599
+11;4;Arabie saoudite;;;;966
+12;3;Argentine;;;;54
+13;5;Arménie;;;;374
+14;3;Aruba;;;;297
+15;1;Ascension ( Sainte-Hélène);;;;247
+16;6;Australie;;;;61
+17;5;Autriche;;;;43
+18;5;Azerbaïdjan;;;;994
+19;2;Bahamas;;;;1
+20;4;Bahreïn;;;;973
+21;4;Bangladesh;;;;880
+22;2;Barbade;;;;1
+23;5;Belgique;;;;32
+24;2;Belize;;;;501
+25;1;Bénin;;;;229
+26;2;Bermudes;;;;1
+27;4;Bhoutan;;;;975
+28;5;Biélorussie;;;;375
+29;4;Birmanie;;;;95
+30;3;Bolivie;;;;591
+31;5;Bosnie-Herzégovine;;;;387
+32;1;Botswana;;;;267
+33;3;Brésil;;;;55
+34;4;Brunei;;;;673
+35;5;Bulgarie;;;;359
+36;1;Burkina Faso;;;;226
+37;1;Burundi;;;;257
+38;4;Cambodge;;;;855
+39;1;Cameroun;;;;237
+40;2;Canada;;;;1
+41;1;Cap-Vert;;;;238
+42;1;Centrafrique;;;;236
+43;3;Chili;;;;56
+44;4;Chine;;;;86
+45;5;Chypre;;;;357
+46;3;Colombie;;;;57
+47;1;Comores;;;;269
+48;1;Congo-Brazzaville;;;;242
+49;1;Congo-Kinshasa;;;;243
+50;4;Corée du Nord;;;;850
+51;4;Corée du Sud;;;;82
+52;2;Costa Rica;;;;506
+53;1;Côte d'Ivoire;;;;225
+54;5;Croatie;;;;385
+55;2;Cuba;;;;53
+56;5;Danemark;;;;45
+57;2;Département d'outre-mer (France) Martinique;;;;596
+58;6;Diego Garcia;;;;
+59;1;Djibouti;;;;253
+60;2;Dominique;;;;1
+61;1;Égypte;;;;20
+62;4;Émirats arabes unis;;;;971
+63;3;Équateur;;;;593
+64;1;Érythrée;;;;291
+65;5;Espagne;;;;34
+66;5;Estonie;;;;372
+67;2;États-Unis;;;;1
+68;1;Éthiopie;;;;251
+69;6;Fidji;;;;679
+70;5;Finlande;;;;358
+71;5;France;;;;33
+72;1;Gabon;;;;241
+73;1;Gambie;;;;220
+74;5;Géorgie;;;;995
+75;1;Ghana;;;;233
+76;1;Gibraltar;;;;350
+77;5;Grèce;;;;302
+78;2;Grenade;;;;1
+79;5;Groenland;;;;299
+80;2;Guadeloupe;;;;590
+81;2;Guam;;;;1
+82;3;Guatemala;;;;502
+83;1;Guinée;;;;224
+84;1;Guinée équatoriale;;;;240
+85;1;Guinée-Bissau;;;;245
+86;3;Guyana;;;;592
+87;3;Guyane (France);;;;594
+88;2;Haïti;;;;509
+89;2;Honduras;;;;504
+90;4;Hong Kong;;;;852
+91;5;Hongrie;;;;36
+92;6;Île Christmas (Australie) Île Christmas, Îles Cocos (Keeling) Îles Cocos, Australie (Territoire) Île Heard et îles McDonald;;;;672
+93;2;Îles Caïmanes;;;;1
+94;6;Îles Cook;;;;682
+95;5;Îles Féroé;;;;298
+96;3;Îles Malouines (Falkland);;;;500
+97;2;Îles Mariannes du Nord;;;;1
+98;6;Îles Salomon;;;;677
+99;2;Îles Turques et Caïques;;;;1
+100;2;Îles Vierges américaines;;;;1
+101;2;Îles Vierges britanniques;;;;1
+102;4;Inde;;;;91
+103;4;Indonésie;;;;62
+104;4;Irak;;;;964
+105;4;Iran;;;;98
+106;5;Irlande;;;;353
+107;5;Islande;;;;354
+108;4;Israël;;;;972
+109;5;Italie;;;;39
+110;2;Jamaïque;;;;1
+111;4;Japon;;;;81
+112;4;Jordanie;;;;962
+113;4;Kazakhstan;;;;7
+114;1;Kenya;;;;254
+115;4;Kirghizstan;;;;997
+116;2;Kiribati;;;;686
+117;4;Koweït;;;;965
+118;4;Laos;;;;856
+119;1;Lesotho;;;;266
+120;5;Lettonie;;;;371
+121;4;Liban;;;;961
+122;1;Libéria;;;;231
+123;1;Libye;;;;218
+124;5;Liechtenstein;;;;423
+125;5;Lituanie;;;;370
+126;5;Luxembourg;;;;352
+127;4;Macao;;;;853
+128;5;Macédoine;;;;389
+129;1;Madagascar;;;;261
+130;4;Malaisie;;;;60
+131;1;Malawi;;;;265
+132;4;Maldives;;;;960
+133;1;Mali;;;;223
+134;5;Malte;;;;356
+135;1;Maroc;;;;212
+136;6;Marshall;;;;692
+137;4;Maurice;;;;230
+138;1;Mauritanie;;;;222
+139;1;Mayotte;;;;269
+140;2;Mexique;;;;52
+141;6;Micronésie;;;;691
+142;5;Moldavie;;;;373
+143;5;Monaco;;;;377
+144;4;Mongolie;;;;976
+145;5;Monténégro;;;;382
+146;2;Montserrat;;;;1
+147;1;Mozambique;;;;258
+148;1;Namibie;;;;264
+149;6;Nauru;;;;674
+150;4;Népal;;;;977
+151;2;Nicaragua;;;;505
+152;1;Niger;;;;227
+153;1;Nigeria;;;;234
+154;6;Niué;;;;683
+155;5;Norvège;;;;47
+156;6;Nouvelle-Calédonie;;;;687
+157;6;Nouvelle-Zélande;;;;64
+158;4;Oman;;;;968
+159;1;Ouganda;;;;256
+160;4;Ouzbékistan;;;;998
+161;4;Pakistan;;;;92
+162;6;Palaos;;;;680
+163;4;Palestine (Autorité palestinienne, réservé);;;;970
+164;2;Panamá;;;;507
+165;6;Papouasie-Nouvelle-Guinée;;;;675
+166;3;Paraguay;;;;595
+167;5;Pays-Bas;;;;31
+168;3;Pérou;;;;51
+169;4;Philippines;;;;63
+170;5;Pologne;;;;48
+171;6;Polynésie française;;;;689
+172;2;Porto Rico;;;;1
+173;5;Portugal;;;;351
+174;4;Qatar;;;;974
+175;5;République  Tchèque;;;;420
+176;2;République dominicaine;;;;1
+177;4;Réunion;;;;262
+178;5;Roumanie;;;;40
+179;5;Royaume-Uni;;;;44
+180;5;Russie;;;;7
+181;1;Rwanda;;;;250
+182;2;Saint-Christophe-et-Niévès;;;;1
+183;5;Saint-Marin;;;;378
+184;2;Saint-Pierre-et-Miquelon;;;;508
+185;2;Saint-Vincent-et-les Grenadines;;;;1
+186;1;Sainte-Hélène, île;;;;290
+187;2;Sainte-Lucie;;;;1
+188;2;Salvador;;;;503
+189;6;Samoa;;;;685
+190;6;Samoa américaines;;;;684
+191;1;São Tomé-et-Principe;;;;239
+192;1;Sénégal;;;;221
+193;5;Serbie;;;;381
+194;1;Seychelles;;;;248
+195;1;Sierra Leone;;;;232
+196;4;Singapour;;;;65
+197;5;Slovaquie;;;;421
+198;5;Slovénie;;;;386
+199;1;Somalie;;;;252
+200;1;Soudan;;;;249
+201;4;Sri Lanka;;;;94
+202;5;Suède;;;;46
+203;5;Suisse;;;;41
+204;3;Suriname;;;;597
+205;1;Swaziland;;;;268
+206;4;Tadjikistan;;;;992
+207;4;Taïwan (réservé);;;;886
+208;1;Tanzanie;;;;255
+209;1;Tchad;;;;235
+210;4;Territoire britannique de l'océan Indien;;;;246
+211;6;Territoires extérieurs de l’Australie;;;;
+212;4;Thaïlande;;;;66
+213;4;Timor oriental;;;;670
+214;1;Togo;;;;228
+215;6;Tokelau;;;;690
+216;6;Tonga;;;;676
+217;3;Trinité-et-Tobago;;;;1
+218;1;Tunisie;;;;216
+219;4;Turkménistan;;;;993
+220;5;Turquie;;;;90
+221;6;Tuvalu;;;;688
+222;5;Ukraine;;;;380
+223;3;Uruguay;;;;598
+224;6;Vanuatu;;;;678
+225;5;Vatican (Saint-Siège);;;;379,39
+226;3;Vénézuela;;;;58
+227;4;Viêt Nam;;;;84
+228;6;Wallis-et-Futuna;;;;681
+229;4;Yémen;;;;967
+230;1;Zambie;;;;260
+231;1;Zimbabwe;;;;263

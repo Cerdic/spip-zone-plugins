@@ -23,8 +23,11 @@
 		if ($current_version==0.0){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
+			include_spip('inc/import_origine');
 			creer_base();
 			echo "SPIP_Geo installed @ 0.01 <br/>";
+			import_origine_continents();
+			import_origine_pays();
 			ecrire_meta('spip_geo_base_version',$current_version=$version_base);
 		}
 		ecrire_metas();

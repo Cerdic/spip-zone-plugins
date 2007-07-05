@@ -21,6 +21,7 @@ $spip_geo_continent = array(
 	"nom" 	=> "varchar(255) NOT NULL",
 	"latitude" 	=> "text",
 	"longitude" 	=> "text",
+	"zoom" 	=> "text",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_geo_continent_key = array(
@@ -32,6 +33,8 @@ $spip_geo_pays = array(
 	"nom" 	=> "varchar(255) NOT NULL",
 	"latitude" 	=> "text",
 	"longitude" 	=> "text",
+	"zoom" 	=> "text",
+	"indic_tel" => "text",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_geo_pays_key = array(
@@ -45,6 +48,7 @@ $spip_geo_ville = array(
 	"nom" 	=> "varchar(255) NOT NULL",
 	"latitude" 	=> "text",
 	"longitude" => "text",
+	"zoom" 	=> "text",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_geo_ville_key = array(
