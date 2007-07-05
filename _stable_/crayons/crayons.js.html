@@ -7,7 +7,7 @@
 #HTTP_HEADER{'Content-Type: text/javascript'}
 /* cQuery est jQuery, renommee pour eviter tout conflit */
 
-[(#CHEMIN{js/jquery-1.1.js}|spip_file_get_contents
+[(#CHEMIN{js/jquery.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''}
 	|replace{'var \$ = cQuery','// dont set dollar'}
 	|compacte_js)]
