@@ -1,0 +1,282 @@
+<style>
+/* jqModal base Styling courtesy of;
+	Brice Burgess <bhb@iceburg.net> */
+.jqmWindow {
+    display: none;
+    
+    position: fixed;
+    top: 17%;
+    left: 50%;
+    
+    margin-left: -300px;
+    width: 600px;
+    
+    background-color: #EEE;
+    color: #333;
+    border: 1px solid black;
+    padding: 12px;
+}
+
+* html .jqmWindow {
+    position: absolute;
+    top: 0%;
+	left:0%;
+	z-index:3500;
+}
+
+.jqmOverlay { background-color: #000; }
+
+* div.jqmOverlay {
+    position: fixed;
+    top: 0px;
+	left:0px;
+	z-index:3499;
+}
+
+/* Background iframe styling for IE6. Prevents ActiveX bleed-through (<select> form elements, etc.) */
+* iframe.jqm {position:absolute;top:0;left:0;z-index:-1;
+	width: expression(this.parentNode.offsetWidth+'px');
+	height: expression(this.parentNode.offsetHeight+'px');
+}
+
+*html.jqm {position:absolute;z-index:0;
+}
+div.jqmConfirm input[type="submit"] { padding: 4px; margin: 10px 30px; background: #000; color: #FFF; border: 1px solid #AAA; }
+
+/* jqModal confirm CSS courtesy of;
+   Alexandre Plennevaux <alexandre@pixeline.be>,
+   Brice Burgess <bhb@iceburg.net> */
+div.jqmConfirm { /* contains + positions the alert window */
+  display: none;
+  
+  position: fixed;
+  top: 17%;
+  width: 100%;
+}
+    
+* html div.jqmConfirm {
+    position: absolute;
+    top: 17%;
+	left: 30%;
+	width: 40%;
+}
+
+div.jqmConfirmWindow {
+  height:auto;
+  width: auto;
+  margin: auto;
+  
+  max-width:400px;
+  padding: 0 10px 10px;
+  
+  background:#FFF;
+  border:1px dotted #FFF;
+}
+
+.jqmConfirmTitle{
+  margin:5px 2px;
+  height:20px;
+  color:#000;
+  background:#FFF;
+}
+.jqmConfirmTitle h1{
+  margin:5px 2px;
+  padding-left:5px;
+  padding:0;
+  font-size:14px;
+  text-transform:capitalize;
+  letter-spacing:-1px;
+  font-weight:bold;
+  color:#000;
+
+  float:left;
+  height:20px;
+}
+
+div.jqmConfirm .jqmClose em{display:none;}
+div.jqmConfirm .jqmClose {
+  width:20px;
+  height:20px;
+  display:block;
+  float:right;
+  clear:right;
+  background:transparent url(confirm/close_icon_double.png) 0 0 no-repeat;
+}
+
+div.jqmConfirm a.jqmClose:hover{ background-position: 0 -20px; }
+
+div.jqmConfirmContent{
+  border-top:px;
+  color:#000;
+  font:11px/14pt arial;
+  padding:5px 20px 5px;
+  margin:5px;
+  border:1px dotted #111;
+  letter-spacing:0px;
+  background:#FFF url(confirm/darkgrid.png);
+}
+
+.clearfix:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+.clearfix {display: inline-block;}
+
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+
+
+input, select, textarea {
+background-color:#E4E4E4;
+background-position:center bottom;
+border:1px solid #C0CAD4;
+float:none;
+font-family:Verdana,Arial,Sans,sans-serif;
+font-size:11px;
+padding:3px;
+}
+
+</style>
+
+<script src="#CHEMIN{javascript/jqModal.js}" type="text/javascript"></script>
+<script type="text/javascript">
+/* Overriding Javascript's Alert Dialog */
+function confirm(msg,callback) {
+  $('#confirm')
+    .jqmShow()
+    .find('p.jqmConfirmMsg')
+      .html(msg)
+    .end()
+    .find(':submit:visible')
+      .click(function(){
+        if(this.value == 'yes')
+          (typeof callback == 'string') ?
+            window.location.href = callback :
+            callback;
+        $('#confirm').jqmHide();
+      });
+}
+
+// trigger a confirm whenever links of class alert are pressed.
+$().ready(function() {
+  $('#confirm').jqm({overlay: 88, modal: true, trigger: false});
+  
+  // trigger a confirm whenever links of class alert are pressed.
+  $('a.confirm').click(function() { 
+    confirm('',this.href); 
+    return false;
+  });
+});
+</script>
+
+<div style="margin-top : 15pt; margin-left : 15pt; font-size: 8pt;">
+
+<div style="float:left; ">
+	<div style="width:150pt; text-align: left; border-width:1; border-color:black; border-style :groove; background-color : #E0E0E0 ;" >
+		<strong><:inscription2:raccourcis:></strong>
+		<ul style='text-align: left; list-style-type:none'>
+			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
+			<li style="margin-top:5px"><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
+			<li><a href="?exec=inscription2_adherents&act=net" class="confirm"><:inscription2:nettoyer_tables:></a></li>
+		
+		</ul>
+	</div>
+
+
+		<?php
+		if(_DIR_PLUGIN_ABONNEMENT){
+		?>
+	<div style="width:150pt; text-align: left; border-width:1; border-color:black; border-style :groove; background-color : #E0E0E0 ;margin-top:5px" >
+		<strong>Abonnements</strong>
+		<ul style='text-align: left; list-style-type:none'>
+		<li><a href="?exec=abonnement_tous">Abonnements</a></li>
+		<li><a href="?exec=abonnement_relances">Relances</a></li>
+		<li><a href="?exec=abonnement_alertes">Alertes</a></li>
+		</ul>
+	</div>
+		<?php
+		}
+		?>
+
+	
+</div>	
+
+
+
+<div style="margin:0% 2% 2% 23%" id="form_abo">
+	<h2><strong>Abonnements</strong></h2>
+	<div style="margin:10px 0px;height:40px" >
+	<a href="#" onclick="$('#ajouter').toggle('slow');">Ajouter un abonnement</a>	
+	<style>
+	#form_abo{}
+	#form_abo table{margin-top:20px}
+	#ajouter{width:300px;margin:10px 0px}
+	#ajouter div {height:30px;padding:5px;clear:right}
+	#ajouter label {float:left;width:100px}
+	#ajouter input, textarea {float:right;width:180px}
+	#ajouter div.textarea {height:auto;padding:5px;}
+	#ajouter .valider {width:80px}
+	</style>
+	<div id="ajouter" style="display:none">
+	<form action="#SELF" method="post">
+		<div>
+		<label>Libell&eacute; :</label><input type="text" value="" name="abo_libelle"/>
+		</div><div>
+		<label>Dur&eacute;e :</label> <input type="text" value="" name="abo_duree"/>
+		</div><div>
+		<label>Montant :</label> <input type="text" value="" name="abo_montant"/>
+		</div><div class="textarea">
+		<label>Commentaire :</label> <textarea name="abo_commentaire"></textarea>
+		</div><div>
+		<input class="valider" type="submit" name="valider" value="Ajouter"/>			
+		</div>
+	</form>
+	</div>
+	
+	<table style="clear:right;border-width:1; border-color:black; border-style :groove; margin-left:10pt;">
+	<tr style="background-color : #E0E0E0 ;">
+	<td>ID</td><td>Libelle</td><td>Montant</td><td>Dur&eacute;e</td><td>Commentaire</td><td>Supprimer</td>
+	</tr>
+	<BOUCLE_abos(SPIP_ABONNEMENTS)>
+	<tr>
+	<td>#ID_ABONNEMENT</td>
+	<td>#LIBELLE</td>
+	<td>#MONTANT</td>
+	<td>#DUREE</td>
+	<td>#COMMENTAIRE</td>
+	<td>
+	<a href="[(#SELF|parametre_url{'supprimer_abo',#ID_ABONNEMENT})]" class="confirm">
+	<img src="#CHEMIN{/images/poubelle-12.gif}" title="supprimer"></a>
+	</td>
+	</tr>
+	</BOUCLE_abos>
+	</table>	
+
+	
+
+</div>
+
+</div>
+
+
+<!-- Confirm Dialog -->
+<div class="jqmConfirm" id="confirm">
+
+	<div id="ex3b" class="jqmConfirmWindow">
+    <div class="jqmConfirmTitle clearfix">
+    <h1>Confirmation </h1><a href="#" class="jqmClose"><em>Close</em></a>
+	</div>
+  
+	<div class="jqmConfirmContent">
+	<p class="jqmConfirmMsg"></p>
+	<p>êtes vous sûr(e) de voloir continuer?</p>
+	<p>Toutes les modifications seront irreversibles!!!</p>
+	</div>
+  
+	<input type="submit" value="no" />
+	<input type="submit" value="yes" />  
+</div>

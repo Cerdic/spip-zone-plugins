@@ -16,9 +16,7 @@
 	Un plugin pour gerer des abonnements. Necessite le plugin inscription2
 	</description>
 	<lien>http://spip-zone.info/spip.php?page=sommaire_abo</lien> <!-- URI de documentation -->
-	<prefix>
-	abonnement
-	</prefix>
+	<prefix>abonnement</prefix>
 	<fonctions>
 	</fonctions>
 	<install>base/abonnement_upgrade.php</install>
@@ -27,4 +25,5 @@
 		<inclure></inclure>
 	</pipeline>
 	<chemin dir='' />
+	<necessite id="inscription2" version="[0.2;]" /> 
 </plugin>
