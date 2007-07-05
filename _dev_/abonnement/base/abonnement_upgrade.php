@@ -10,50 +10,41 @@
 **/
 
 //version actuelle du plugin à changer en cas de maj
-	$GLOBALS['abonnement_version'] = 0.1;
+	$GLOBALS['abonnement_base_version'] = 0.1;
 	
-		function abonnement_verifier_base(){
-		//install
-		$version_base = $GLOBALS['abonnement_version'];
-		
-		// Comparaison de la version actuelle avec la version installée
-		
-if (  (!isset($GLOBALS['meta']['abonnement_version']) OR (($current_version = $GLOBALS['meta']['abonnement_version'])!=$version_base) ) ) {
-				include_spip('base/abonnement');
-				include_spip('base/abstract_sql');
-				$desc = spip_abstract_showtable("spip_abonnements", '', true);
-				if (!isset($desc['field']['id_abonnement'])){
-					// Verifie que les tables spip_listes existent, sinon les creer
-					spip_log('creation des tables spip_abonnements');
-					echo "creation des tables spip_abonnements";
-					include_spip('base/create');
-					creer_base();
-				}
-			//autres maj
-			
-			ecrire_meta('abonnement_version',$current_version=$version_base,'non');
-			}
-		ecrire_metas();
+	function abonnement_upgrade(){
+		$version_base = $GLOBALS['abonnement_base_version'];
+		$current_version = 0.0;
+		if (   (isset($GLOBALS['meta']['abonnement_base_version']) )
+				&& (($current_version = $GLOBALS['meta']['abonnement_base_version'])==$version_base))
+			return;
+
+		include_spip('base/abonnement');
+		if ($current_version==0.0){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			echo "creation des tables spip_abonnements";
+
+			ecrire_meta('abonnement_base_version',$current_version=$version_base);
 		}
-		
-		
-		function abonnement_vider_tables() {
-		include_spip('base/abstract_sql');
-		// suppression du champ evenements a la table spip_groupe_mots
+		ecrire_metas();
+	}
+	
+	function abonnement_vider_tables() {
 		spip_query("DROP TABLE spip_abonnements");
-		effacer_meta('abonnement_version');
+		effacer_meta('abonnement_base_version');
 		ecrire_metas();
 	}
 	
 	function abonnement_install($action){
-		$version_base = $GLOBALS['abonnement_version'];
+		global $abonnement_base_version;
 		switch ($action){
 			case 'test':
-				return (isset($GLOBALS['meta']['abonnement_version']) 
-				  AND ($GLOBALS['meta']['abonnement']>=$version_base));
+				return (isset($GLOBALS['meta']['abonnement_base_version']) AND ($GLOBALS['meta']['abonnement_base_version']>=$abonnement_base_version));
 				break;
 			case 'install':
-				abonnement_verifier_base();
+				abonnement_upgrade();
 				break;
 			case 'uninstall':
 				abonnement_vider_tables();
