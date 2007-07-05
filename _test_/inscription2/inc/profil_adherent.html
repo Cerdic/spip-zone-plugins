@@ -56,9 +56,12 @@ include_spip('inc/headers');
 					else 
 						echo '<span>'.sinon($val,'...').'</span></div>';  
 				}else{
-					if($auteur['b.'.$cle]=="1")
-						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.' ">'.sinon($val,'...').'</span></div>';  
-					else 
+					if( $auteur['b.pays']=="1" and $cle == 'pays')
+						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.'">'.recuperer_fond('vues/pays', array('pays'=> $val)).'</span></div>'; 
+					elseif($auteur['b.'.$cle]=="1")
+						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.'">'.sinon($val,'...').'</span></div>';  
+					
+					else
 						echo '<span>'.sinon($val,'...').'</span></div>';  
 				}
 			}
