@@ -20,7 +20,7 @@
 /******************************************************************************************/
 
 	//version actuelle du plugin à changer en cas de maj
-	$GLOBALS['spiplistes_version'] = 1.97;
+	$GLOBALS['spiplistes_version'] = 1.98;
 	
 	
 	//initialiser les variables
@@ -58,7 +58,7 @@
 		//install
 		$version_base = $GLOBALS['spiplistes_version'];
 		
-		// Comparaison de la verison actuelle avec la version installée ($GLOBALS['meta']['spiplistes_version'])
+		// Comparaison de la verison actuelle avec la version installee ($GLOBALS['meta']['spiplistes_version'])
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta']['spiplistes_version']) )
 				|| (($current_version = $GLOBALS['meta']['spiplistes_version'])!=$version_base)){
@@ -257,6 +257,30 @@
 				ecrire_meta('spiplistes_version', $current_version=1.97);
 			}
 			
+			
+			if ($current_version<1.98){
+				
+				echo "SpipListes Maj 1.98<br />";
+				include_spip('base/abstract_sql');
+			
+			echo "regulariser l'index";
+			$table_nom = "spip_auteurs_elargis";
+			//ajout des index
+			$desc = spip_abstract_showtable($table_nom, '', true);
+			if($desc['key']['PRIMARY KEY']!='id'){
+			 	spip_query("ALTER TABLE ".$table_nom." DROP PRIMARY KEY");
+					if(!isset($desc['fields']['id']))
+					spip_query("ALTER TABLE ".$table_nom." ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY");
+					else 
+					spip_query("ALTER TABLE ".$table_nom." ADD PRIMARY KEY (id)");
+			}
+			if($desc['key']['KEY id_auteur'])
+			spip_query("ALTER TABLE ".$table_nom." DROP INDEX id_auteur, ADD INDEX id_auteur (id_auteur)");
+			else
+			spip_query("ALTER TABLE ".$table_nom." ADD INDEX id_auteur (id_auteur)");
+			
+			ecrire_meta('spiplistes_version', $current_version=1.98);
+			}
 			
 			ecrire_metas();
 		}
