@@ -1,6 +1,5 @@
-  D'abord une boucle en dur de 1 à 10 de 2 en 2 (ou "zz" s'il est spécifié
-dans l'url) :
-<BOUCLE_for1(FOR){debut=1}{fin=10}{par (#ENV{zz,2})}>
+D'abord une boucle en dur de 1 (ou "fd" si spécifi&eacute; dans l'url) à 10 (ou "ff") de 2 en 2 (ou "fp" ) :
+<BOUCLE_for1(FOR){debut=(#ENV{fd,1})}{fin=(#ENV{ff,10})}{par (#ENV{fp,2})}>
 	<br>for1 : #COMPTEUR_BOUCLE
 </BOUCLE_for1>
 
