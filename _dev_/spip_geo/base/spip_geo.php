@@ -31,6 +31,7 @@ $spip_geo_pays = array(
 	"id_pays" 	=> "bigint(21) NOT NULL",
 	"id_continent" 	=> "bigint(21) NOT NULL",
 	"nom" 	=> "varchar(255) NOT NULL",
+	"code_iso" => "text",
 	"latitude" 	=> "text",
 	"longitude" 	=> "text",
 	"zoom" 	=> "text",

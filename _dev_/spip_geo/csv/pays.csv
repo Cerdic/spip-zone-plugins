@@ -1,232 +1,233 @@
-id_pays;id_continent;Nom;Latitude;Longitude;Zoom;Indicatif téléphonique
-1;4;Afghanistan;;;;93
-2;1;Afrique du Sud;;;;27
-3;5;Albanie;;;;355
-4;1;Algérie;;;;213
-5;5;Allemagne;;;;49
-6;5;Andorre;;;;376
-7;1;Angola;;;;244
-8;2;Anguilla;;;;1
-9;2;Antigua-et-Barbuda;;;;1
-10;2;Antilles néerlandaises;;;;599
-11;4;Arabie saoudite;;;;966
-12;3;Argentine;;;;54
-13;5;Arménie;;;;374
-14;3;Aruba;;;;297
-15;1;Ascension ( Sainte-Hélène);;;;247
-16;6;Australie;;;;61
-17;5;Autriche;;;;43
-18;5;Azerbaïdjan;;;;994
-19;2;Bahamas;;;;1
-20;4;Bahreïn;;;;973
-21;4;Bangladesh;;;;880
-22;2;Barbade;;;;1
-23;5;Belgique;;;;32
-24;2;Belize;;;;501
-25;1;Bénin;;;;229
-26;2;Bermudes;;;;1
-27;4;Bhoutan;;;;975
-28;5;Biélorussie;;;;375
-29;4;Birmanie;;;;95
-30;3;Bolivie;;;;591
-31;5;Bosnie-Herzégovine;;;;387
-32;1;Botswana;;;;267
-33;3;Brésil;;;;55
-34;4;Brunei;;;;673
-35;5;Bulgarie;;;;359
-36;1;Burkina Faso;;;;226
-37;1;Burundi;;;;257
-38;4;Cambodge;;;;855
-39;1;Cameroun;;;;237
-40;2;Canada;;;;1
-41;1;Cap-Vert;;;;238
-42;1;Centrafrique;;;;236
-43;3;Chili;;;;56
-44;4;Chine;;;;86
-45;5;Chypre;;;;357
-46;3;Colombie;;;;57
-47;1;Comores;;;;269
-48;1;Congo-Brazzaville;;;;242
-49;1;Congo-Kinshasa;;;;243
-50;4;Corée du Nord;;;;850
-51;4;Corée du Sud;;;;82
-52;2;Costa Rica;;;;506
-53;1;Côte d'Ivoire;;;;225
-54;5;Croatie;;;;385
-55;2;Cuba;;;;53
-56;5;Danemark;;;;45
-57;2;Département d'outre-mer (France) Martinique;;;;596
-58;6;Diego Garcia;;;;
-59;1;Djibouti;;;;253
-60;2;Dominique;;;;1
-61;1;Égypte;;;;20
-62;4;Émirats arabes unis;;;;971
-63;3;Équateur;;;;593
-64;1;Érythrée;;;;291
-65;5;Espagne;;;;34
-66;5;Estonie;;;;372
-67;2;États-Unis;;;;1
-68;1;Éthiopie;;;;251
-69;6;Fidji;;;;679
-70;5;Finlande;;;;358
-71;5;France;;;;33
-72;1;Gabon;;;;241
-73;1;Gambie;;;;220
-74;5;Géorgie;;;;995
-75;1;Ghana;;;;233
-76;1;Gibraltar;;;;350
-77;5;Grèce;;;;302
-78;2;Grenade;;;;1
-79;5;Groenland;;;;299
-80;2;Guadeloupe;;;;590
-81;2;Guam;;;;1
-82;3;Guatemala;;;;502
-83;1;Guinée;;;;224
-84;1;Guinée équatoriale;;;;240
-85;1;Guinée-Bissau;;;;245
-86;3;Guyana;;;;592
-87;3;Guyane (France);;;;594
-88;2;Haïti;;;;509
-89;2;Honduras;;;;504
-90;4;Hong Kong;;;;852
-91;5;Hongrie;;;;36
-92;6;Île Christmas (Australie) Île Christmas, Îles Cocos (Keeling) Îles Cocos, Australie (Territoire) Île Heard et îles McDonald;;;;672
-93;2;Îles Caïmanes;;;;1
-94;6;Îles Cook;;;;682
-95;5;Îles Féroé;;;;298
-96;3;Îles Malouines (Falkland);;;;500
-97;2;Îles Mariannes du Nord;;;;1
-98;6;Îles Salomon;;;;677
-99;2;Îles Turques et Caïques;;;;1
-100;2;Îles Vierges américaines;;;;1
-101;2;Îles Vierges britanniques;;;;1
-102;4;Inde;;;;91
-103;4;Indonésie;;;;62
-104;4;Irak;;;;964
-105;4;Iran;;;;98
-106;5;Irlande;;;;353
-107;5;Islande;;;;354
-108;4;Israël;;;;972
-109;5;Italie;;;;39
-110;2;Jamaïque;;;;1
-111;4;Japon;;;;81
-112;4;Jordanie;;;;962
-113;4;Kazakhstan;;;;7
-114;1;Kenya;;;;254
-115;4;Kirghizstan;;;;997
-116;2;Kiribati;;;;686
-117;4;Koweït;;;;965
-118;4;Laos;;;;856
-119;1;Lesotho;;;;266
-120;5;Lettonie;;;;371
-121;4;Liban;;;;961
-122;1;Libéria;;;;231
-123;1;Libye;;;;218
-124;5;Liechtenstein;;;;423
-125;5;Lituanie;;;;370
-126;5;Luxembourg;;;;352
-127;4;Macao;;;;853
-128;5;Macédoine;;;;389
-129;1;Madagascar;;;;261
-130;4;Malaisie;;;;60
-131;1;Malawi;;;;265
-132;4;Maldives;;;;960
-133;1;Mali;;;;223
-134;5;Malte;;;;356
-135;1;Maroc;;;;212
-136;6;Marshall;;;;692
-137;4;Maurice;;;;230
-138;1;Mauritanie;;;;222
-139;1;Mayotte;;;;269
-140;2;Mexique;;;;52
-141;6;Micronésie;;;;691
-142;5;Moldavie;;;;373
-143;5;Monaco;;;;377
-144;4;Mongolie;;;;976
-145;5;Monténégro;;;;382
-146;2;Montserrat;;;;1
-147;1;Mozambique;;;;258
-148;1;Namibie;;;;264
-149;6;Nauru;;;;674
-150;4;Népal;;;;977
-151;2;Nicaragua;;;;505
-152;1;Niger;;;;227
-153;1;Nigeria;;;;234
-154;6;Niué;;;;683
-155;5;Norvège;;;;47
-156;6;Nouvelle-Calédonie;;;;687
-157;6;Nouvelle-Zélande;;;;64
-158;4;Oman;;;;968
-159;1;Ouganda;;;;256
-160;4;Ouzbékistan;;;;998
-161;4;Pakistan;;;;92
-162;6;Palaos;;;;680
-163;4;Palestine (Autorité palestinienne, réservé);;;;970
-164;2;Panamá;;;;507
-165;6;Papouasie-Nouvelle-Guinée;;;;675
-166;3;Paraguay;;;;595
-167;5;Pays-Bas;;;;31
-168;3;Pérou;;;;51
-169;4;Philippines;;;;63
-170;5;Pologne;;;;48
-171;6;Polynésie française;;;;689
-172;2;Porto Rico;;;;1
-173;5;Portugal;;;;351
-174;4;Qatar;;;;974
-175;5;République  Tchèque;;;;420
-176;2;République dominicaine;;;;1
-177;4;Réunion;;;;262
-178;5;Roumanie;;;;40
-179;5;Royaume-Uni;;;;44
-180;5;Russie;;;;7
-181;1;Rwanda;;;;250
-182;2;Saint-Christophe-et-Niévès;;;;1
-183;5;Saint-Marin;;;;378
-184;2;Saint-Pierre-et-Miquelon;;;;508
-185;2;Saint-Vincent-et-les Grenadines;;;;1
-186;1;Sainte-Hélène, île;;;;290
-187;2;Sainte-Lucie;;;;1
-188;2;Salvador;;;;503
-189;6;Samoa;;;;685
-190;6;Samoa américaines;;;;684
-191;1;São Tomé-et-Principe;;;;239
-192;1;Sénégal;;;;221
-193;5;Serbie;;;;381
-194;1;Seychelles;;;;248
-195;1;Sierra Leone;;;;232
-196;4;Singapour;;;;65
-197;5;Slovaquie;;;;421
-198;5;Slovénie;;;;386
-199;1;Somalie;;;;252
-200;1;Soudan;;;;249
-201;4;Sri Lanka;;;;94
-202;5;Suède;;;;46
-203;5;Suisse;;;;41
-204;3;Suriname;;;;597
-205;1;Swaziland;;;;268
-206;4;Tadjikistan;;;;992
-207;4;Taïwan (réservé);;;;886
-208;1;Tanzanie;;;;255
-209;1;Tchad;;;;235
-210;4;Territoire britannique de l'océan Indien;;;;246
-211;6;Territoires extérieurs de l’Australie;;;;
-212;4;Thaïlande;;;;66
-213;4;Timor oriental;;;;670
-214;1;Togo;;;;228
-215;6;Tokelau;;;;690
-216;6;Tonga;;;;676
-217;3;Trinité-et-Tobago;;;;1
-218;1;Tunisie;;;;216
-219;4;Turkménistan;;;;993
-220;5;Turquie;;;;90
-221;6;Tuvalu;;;;688
-222;5;Ukraine;;;;380
-223;3;Uruguay;;;;598
-224;6;Vanuatu;;;;678
-225;5;Vatican (Saint-Siège);;;;379,39
-226;3;Vénézuela;;;;58
-227;4;Viêt Nam;;;;84
-228;6;Wallis-et-Futuna;;;;681
-229;4;Yémen;;;;967
-230;1;Zambie;;;;260
-231;1;Zimbabwe;;;;263
+id_pays;id_continent;Nom;Code ISO;Latitude;Longitude;Indicatif téléphonique
+1;4;Afghanistan;AF;33.0000;65.0000;93
+2;1;Afrique du Sud;ZA;-29.0000;24.0000;27
+3;5;Albanie;AL;41.0000;20.0000;355
+4;1;Algérie;DZ;28.0000;3.0000;213
+5;5;Allemagne;DE;51.0000;9.0000;49
+6;5;Andorre;AD;42.5000;1.5000;376
+7;1;Angola;AO;-12.5000;18.5000;244
+8;2;Anguilla;AI;18.2500;-63.1667;1
+9;2;Antigua-et-Barbuda;AG;17.0500;-61.8000;1
+10;2;Antilles néerlandaises;AN;12.2500;-68.7500;599
+11;4;Arabie saoudite;SA;25.0000;45.0000;966
+12;3;Argentine;AR;-34.0000;-64.0000;54
+13;5;Arménie;AM;40.0000;45.0000;374
+14;3;Aruba;AW;12.5000;-69.9667;297
+15;1;Ascension;;;;247
+16;6;Australie;AU;-27.0000;133.0000;61
+17;5;Autriche;AT;47.3333;13.3333;43
+18;5;Azerbaïdjan;AZ;40.5000;47.5000;994
+19;2;Bahamas;BS;24.2500;-76.0000;1
+20;4;Bahreïn;BH;26.0000;50.5500;973
+21;4;Bangladesh;BD;24.0000;90.0000;880
+22;2;Barbade;BB;13.1667;-59.5333;1
+23;5;Belgique;BE;50.8333;4.0000;32
+24;2;Belize;BZ;17.2500;-88.7500;501
+25;1;Bénin;BJ;9.5000;2.2500;229
+26;2;Bermudes;BM;32.3333;-64.7500;1
+27;4;Bhoutan;BT;27.5000;90.5000;975
+28;5;Biélorussie;BY;53.0000;28.0000;375
+29;4;Birmanie;MM;;;95
+30;3;Bolivie;BO;-17.0000;-65.0000;591
+31;5;Bosnie-Herzégovine;BA;44.0000;18.0000;387
+32;1;Botswana;BW;-22.0000;24.0000;267
+33;3;Brésil;BR;-10.0000;-55.0000;55
+34;4;Brunei;BN;4.5000;114.6667;673
+35;5;Bulgarie;BG;43.0000;25.0000;359
+36;1;Burkina Faso;BF;13.0000;-2.0000;226
+37;1;Burundi;BI;-3.5000;30.0000;257
+38;4;Cambodge;KH;13.0000;105.0000;855
+39;1;Cameroun;CM;6.0000;12.0000;237
+40;2;Canada;CA;60.0000;-95.0000;1
+41;1;Cap-Vert;CV;16.0000;-24.0000;238
+42;1;Centrafrique;CF;7.0000;21.0000;236
+43;3;Chili;CL;-30.0000;-71.0000;56
+44;4;Chine;CN;35.0000;105.0000;86
+45;5;Chypre;CY;35.0000;33.0000;357
+46;3;Colombie;CO;4.0000;-72.0000;57
+47;1;Comores;KM;-12.1667;44.2500;269
+48;1;Congo-Brazzaville;CG;-1.0000;15.0000;242
+49;1;Congo-Kinshasa;CD;-3.680632;23.56842;243
+50;4;Corée du Nord;KP;40.0000;127.0000;850
+51;4;Corée du Sud;KR;37.0000;127.5000;82
+52;2;Costa Rica;CR;10.0000;-84.0000;506
+53;1;Côte d'Ivoire;CI;8.0000;-5.0000;225
+54;5;Croatie;HR;45.1667;15.5000;385
+55;2;Cuba;CU;21.5000;-80.0000;53
+56;5;Danemark;DK;56.0000;10.0000;45
+57;6;Diego Garcia;;-7.336589;72.423248;
+58;1;Djibouti;DJ;11.5000;43.0000;253
+59;2;Dominique;DM;15.4167;-61.3333;1
+60;1;Égypte;EG;27.0000;30.0000;20
+61;4;Émirats arabes unis;AE;24.0000;54.0000;971
+62;3;Équateur;EC;-2.0000;-77.5000;593
+63;1;Érythrée;ER;15.0000;39.0000;291
+64;5;Espagne;ES;40.0000;-4.0000;34
+65;5;Estonie;EE;59.0000;26.0000;372
+66;2;États-Unis;US;38.0000;-97.0000;1
+67;1;Éthiopie;ET;8.0000;38.0000;251
+68;6;Fidji;FJ;-18.0000;175.0000;679
+69;5;Finlande;FI;64.0000;26.0000;358
+70;5;France;FR;46.0000;2.0000;33
+71;1;Gabon;GA;-1.0000;11.7500;241
+72;1;Gambie;GM;13.4667;-16.5667;220
+73;5;Géorgie;GE;42.0000;43.5000;995
+74;1;Ghana;GH;8.0000;-2.0000;233
+75;1;Gibraltar;GI;36.1833;-5.3667;350
+76;5;Grèce;GR;39.0000;22.0000;302
+77;2;Grenade;GD;12.1167;-61.6667;1
+78;5;Groenland;GL;72.0000;-40.0000;299
+79;2;Guadeloupe;GP;16.2500;-61.5833;590
+80;2;Guam;GU;13.4667;144.7833;1
+81;3;Guatemala;GT;15.5000;-90.2500;502
+82;1;Guinée;GN;11.0000;-10.0000;224
+83;1;Guinée équatoriale;GQ;2.0000;10.0000;240
+84;1;Guinée-Bissau;GW;12.0000;-15.0000;245
+85;3;Guyana;GY;5.0000;-59.0000;592
+86;3;Guyane;GF;4.0000;-53.0000;594
+87;2;Haïti;HT;19.0000;-72.4167;509
+88;2;Honduras;HN;15.0000;-86.5000;504
+89;4;Hong Kong;HK;22.2500;114.1667;852
+90;5;Hongrie;HU;47.0000;20.0000;36
+91;6;Île Christmas;CX;-10.5000;105.6667;672
+92;2;Îles Caïmanes;KY;19.5000;-80.5000;1
+93;6;Îles Cook;CK;-21.2333;-159.7667;682
+94;5;Îles Féroé;FO;62.0000;-7.0000;298
+95;3;Îles Malouines (Falkland);FK;-51.7500;-59.0000;500
+96;2;Îles Mariannes du Nord;MP;15.2000;145.7500;1
+97;6;Îles Salomon;SB;-8.0000;159.0000;677
+98;2;Îles Turques et Caïques;TC;21.7500;-71.5833;1
+99;2;Îles Vierges américaines;VI;18.3333;-64.8333;1
+100;2;Îles Vierges britanniques;VG;18.5000;-64.5000;1
+101;4;Inde;IN;20.0000;77.0000;91
+102;4;Indonésie;ID;-5.0000;120.0000;62
+103;4;Irak;IQ;33.0000;44.0000;964
+104;4;Iran;IR;32.0000;53.0000;98
+105;5;Irlande;IE;53.0000;-8.0000;353
+106;5;Islande;IS;65.0000;-18.0000;354
+107;4;Israël;IL;31.5000;34.7500;972
+108;5;Italie;IT;42.8333;12.8333;39
+109;2;Jamaïque;JM;18.2500;-77.5000;1
+110;4;Japon;JP;36.0000;138.0000;81
+111;4;Jordanie;JO;31.0000;36.0000;962
+112;4;Kazakhstan;KZ;48.0000;68.0000;7
+113;1;Kenya;KE;1.0000;38.0000;254
+114;4;Kirghizstan;KG;41.0000;75.0000;997
+115;2;Kiribati;KI;1.4167;173.0000;686
+116;4;Koweït;KW;29.5000;45.7500;965
+117;4;Laos;LA;18.0000;105.0000;856
+118;1;Lesotho;LS;-29.5000;28.5000;266
+119;5;Lettonie;LV;57.0000;25.0000;371
+120;4;Liban;LB;33.8333;35.8333;961
+121;1;Libéria;LR;6.5000;-9.5000;231
+122;1;Libye;LY;25.0000;17.0000;218
+123;5;Liechtenstein;LI;47.1667;9.5333;423
+124;5;Lituanie;LT;56.0000;24.0000;370
+125;5;Luxembourg;LU;49.7500;6.1667;352
+126;4;Macao;MO;22.1667;113.5500;853
+127;5;Macédoine;MK;41.8333;22.0000;389
+128;1;Madagascar;MG;-20.0000;47.0000;261
+129;4;Malaisie;MY;2.5000;112.5000;60
+130;1;Malawi;MW;-13.5000;34.0000;265
+131;4;Maldives;MV;3.2500;73.0000;960
+132;1;Mali;ML;17.0000;-4.0000;223
+133;5;Malte;MT;35.8333;14.5833;356
+134;1;Maroc;MA;32.0000;-5.0000;212
+135;6;Marshall;MH;9.0000;168.0000;692
+136;2;Martinique;MQ;14.6667;-61.0000;596
+137;4;Maurice;MU;-20.2833;57.5500;230
+138;1;Mauritanie;MR;20.0000;-12.0000;222
+139;1;Mayotte;YT;-12.8333;45.1667;269
+140;2;Mexique;MX;23.0000;-102.0000;52
+141;6;Micronésie;FM;6.9167;158.2500;691
+142;5;Moldavie;MD;47.0000;29.0000;373
+143;5;Monaco;MC;43.7333;7.4000;377
+144;4;Mongolie;MN;46.0000;105.0000;976
+145;5;Monténégro;ME;42.779275;19.231567;382
+146;2;Montserrat;MS;16.7500;-62.2000;1
+147;1;Mozambique;MZ;-18.2500;35.0000;258
+148;1;Namibie;NA;-22.0000;17.0000;264
+149;6;Nauru;NR;-0.5333;166.9167;674
+150;4;Népal;NP;28.0000;84.0000;977
+151;2;Nicaragua;NI;13.0000;-85.0000;505
+152;1;Niger;NE;16.0000;8.0000;227
+153;1;Nigeria;NG;10.0000;8.0000;234
+154;6;Niué;NU;-19.0333;-169.8667;683
+155;5;Norvège;NO;62.0000;10.0000;47
+156;6;Nouvelle-Calédonie;NC;-21.5000;165.5000;687
+157;6;Nouvelle-Zélande;NZ;-41.0000;174.0000;64
+158;4;Oman;OM;21.0000;57.0000;968
+159;1;Ouganda;UG;1.0000;32.0000;256
+160;4;Ouzbékistan;UZ;41.0000;64.0000;998
+161;4;Pakistan;PK;30.0000;70.0000;92
+162;6;Palaos;PW;7.5000;134.5000;680
+163;4;Palestine;PS;32.0000;35.2500;970
+164;2;Panamá;PA;9.0000;-80.0000;507
+165;6;Papouasie-Nouvelle-Guinée;PG;-6.0000;147.0000;675
+166;3;Paraguay;PY;-23.0000;-58.0000;595
+167;5;Pays-Bas;NL;52.5000;5.7500;31
+168;3;Pérou;PE;-10.0000;-76.0000;51
+169;4;Philippines;PH;13.0000;122.0000;63
+170;5;Pologne;PL;52.0000;20.0000;48
+171;6;Polynésie française;PF;-15.0000;-140.0000;689
+172;2;Porto Rico;PR;18.2500;-66.5000;1
+173;5;Portugal;PT;39.5000;-8.0000;351
+174;4;Qatar;QA;25.5000;51.2500;974
+175;5;République  Tchèque;CZ;49.7500;15.5000;420
+176;2;République dominicaine;DO;19.0000;-70.6667;1
+177;4;Réunion;RE;-21.1000;55.6000;262
+178;5;Roumanie;RO;46.0000;25.0000;40
+179;5;Royaume-Uni;GB;54.0000;-2.0000;44
+180;5;Russie;RU;60.0000;100.0000;7
+181;1;Rwanda;RW;-2.0000;30.0000;250
+182;2;Saint-Christophe-et-Niévès;KN;17.3333;-62.7500;1
+183;5;Saint-Marin;SM;43.7667;12.4167;378
+184;2;Saint-Pierre-et-Miquelon;PM;46.8333;-56.3333;508
+185;2;Saint-Vincent-et-les Grenadines;VC;13.2500;-61.2000;1
+186;1;Sainte-Hélène, île;SH;-15.9333;-5.7000;290
+187;2;Sainte-Lucie;LC;13.8833;-61.1333;1
+188;2;Salvador;SV;13.8333;-88.9167;503
+189;6;Samoa;WS;-13.5833;-172.3333;685
+190;6;Samoa américaines;AS;-14.3333;-170.0000;684
+191;1;São Tomé-et-Principe;ST;1.0000;7.0000;239
+192;1;Sénégal;SN;14.0000;-14.0000;221
+193;5;Serbie;RS;44.119142;20.917969;381
+194;1;Seychelles;SC;-4.5833;55.6667;248
+195;1;Sierra Leone;SL;8.5000;-11.5000;232
+196;4;Singapour;SG;1.3667;103.8000;65
+197;5;Slovaquie;SK;48.6667;19.5000;421
+198;5;Slovénie;SI;46.0000;15.0000;386
+199;1;Somalie;SO;10.0000;49.0000;252
+200;1;Soudan;SD;15.0000;30.0000;249
+201;4;Sri Lanka;LK;7.0000;81.0000;94
+202;5;Suède;SE;62.0000;15.0000;46
+203;5;Suisse;CH;47.0000;8.0000;41
+204;3;Suriname;SR;4.0000;-56.0000;597
+205;1;Swaziland;SZ;-26.5000;31.5000;268
+206;4;Syrie;SY;35.0000;38.0000;963
+207;4;Tadjikistan;TJ;39.0000;71.0000;992
+208;4;Taïwan;TW;23.5000;121.0000;886
+209;1;Tanzanie;TZ;-6.0000;35.0000;255
+210;1;Tchad;TD;15.0000;19.0000;235
+211;4;Territoire britannique de l'océan Indien;IO;-6.0000;71.5000;246
+212;6;Territoires extérieurs de l’Australie;HM;-53.1000;72.5167;
+213;4;Thaïlande;TH;15.0000;100.0000;66
+214;4;Timor oriental;TL;-9.665738;124.326782;670
+215;1;Togo;TG;8.0000;1.1667;228
+216;6;Tokelau;TK;-9.0000;-172.0000;690
+217;6;Tonga;TO;-20.0000;-175.0000;676
+218;3;Trinité-et-Tobago;TT;11.0000;-61.0000;1
+219;1;Tunisie;TN;34.0000;9.0000;216
+220;4;Turkménistan;TM;40.0000;60.0000;993
+221;5;Turquie;TR;39.0000;35.0000;90
+222;6;Tuvalu;TV;-8.0000;178.0000;688
+223;5;Ukraine;UA;49.0000;32.0000;380
+224;3;Uruguay;UY;-33.0000;-56.0000;598
+225;6;Vanuatu;VU;-16.0000;167.0000;678
+226;5;Vatican (Saint-Siège);VA;41.9000;12.4500;379,39
+227;3;Vénézuela;VE;8.0000;-66.0000;58
+228;4;Viêt Nam;VN;16.0000;106.0000;84
+229;6;Wallis-et-Futuna;WF;-13.3000;-176.2000;681
+230;4;Yémen;YE;15.0000;48.0000;967
+231;1;Zambie;ZM;-15.0000;30.0000;260
+232;1;Zimbabwe;ZW;-20.0000;30.0000;263
