@@ -39,4 +39,4 @@ function return_agenda() {
 	$reponse = op_get_rubrique_agenda();
 	return $reponse;
 }
-?> 
+?>
