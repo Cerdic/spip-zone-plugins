@@ -91,7 +91,7 @@ $tableau_formulaire = '
 </td><td>
 '._T('bartypenr:barre_langue').'&nbsp;: <input type="text" name="lien_langue" value="" size="10" maxlength="10" />
 </td><td>
-  <input type="button" value="OK" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');lien_nom.value=\'\';lien_bulle.value=\'\';lien_langue.value=\'\';" /> 
+  <input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');lien_nom.value=\'\';lien_bulle.value=\'\';lien_langue.value=\'\';" /> 
 </td></tr></table>
 ';
   return produceWharf('tableau_lien','',$tableau_formulaire); 	
@@ -150,7 +150,7 @@ _T('bartypenr:barre_gestion_anc_nom')
 .'</i></label> <br />
       <input type="text" name="ancre_nom" id="ancre_nom" />
 	  
-	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', ancre_nom.value, '.$champ.');" />
+	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', ancre_nom.value, '.$champ.');" />
     </td>
 	<td style="width:auto;"><strong>'.
 _T('bartypenr:barre_gestion_anc_pointer')
@@ -161,7 +161,7 @@ _T('bartypenr:barre_gestion_anc_cible')
 	<label for="ancre_bulle"><i>'.
 _T('bartypenr:barre_gestion_anc_bulle')
 .'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle" />
-	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" /> 
+	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" /> 
 </td>
   </tr> 
 </table>';

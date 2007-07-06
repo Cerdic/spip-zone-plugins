@@ -58,11 +58,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_insertcss' => 'Insertion CSS',
 
 'galerie' => 'Galerie de documents',
+'galerie_document' => '&nbsp;document',
+'galerie_deplier' => 'D&eacute;plier&nbsp;:',
+'galerie_tout' => 'tout',
+'galerie_docs' => 'les docs',
+'galerie_replier' => 'Replier&nbsp;:',
+'galerie_fichier' => 'Fichier&nbsp;:',
+'galerie_type' => 'Type&nbsp;:',
+'galerie_taille' => 'Taille&nbsp;:',
+'galerie_descrip' => 'Descriptif&nbsp;:',
+'galerie_aucun' => 'Aucun',
+'galerie_ajouter' => 'Ajouter&nbsp;:',
 
 'stats_statistiques' => 'Statistiques&nbsp;:',
-'stats_mots' => 'mots',
-'stats_caracteres' => 'caract&egrave;res',
-'stats_signes' => 'signes'
+'stats_mots' => 'mots, ',
+'stats_caracteres' => 'caract&egrave;res, ',
+'stats_signes' => 'signes.',
+
+'tableau_titre' => 'Titre du tableau',
+'tableau_resume' => 'R&eacute;sum&eacute; du tableau (accessibilit&eacute;)',
+'tableau_prem_ligne' => 'la premi&egrave;re ligne du tableau accueille les intitul&eacute;s des colonnes',
+'tableau_enregistrer' => '<strong>Enregistrer</strong>'
 
 );
 ?>

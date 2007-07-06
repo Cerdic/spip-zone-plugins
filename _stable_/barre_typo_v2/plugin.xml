@@ -1,12 +1,21 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Barre Typo V2 pour 1.9.2 et suivantes
+	<multi>[ar]&#1588;&#1585;&#1610;&#1591; &#1578;&#1606;&#1587;&#1610;&#1602; &#1573;&#1589;&#1583;&#1575;&#1585; &#1634; &#1604;&#1600;&#1633;.&#1641;.&#1634; &#1608;&#1605;&#1575; &#1576;&#1593;&#1583;&#1607;[fr]Barre Typo V2 pour 1.9.2 et suivantes[en]Typographical toolbar V2 for 1.9.2 and newer versions</multi>
 	</nom>
 	<auteur><!-- Auteur du plugin -->
 -* [Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]
--* Extensibilit&eacute; : Bill (Stephane LAURENT - spipcarto@gmail.com) : des pipelines pour rajouter des boutons et la possibilit&eacute; de rajouter des traitements dans pre_propre
--* Pr&#233;visualisation : [->http://www.spip-contrib.net/Previsualisation-dynamique-d]
--* Editeur de tableaux : [Christian Quentin->http://www.spip-contrib.net/_quentic_] &#224; partir du travail de [Courcy->http://www.spip-contrib.net/_courcy_] dans l'[article->http://www.spip-contrib.net/Editeur-de-tableau-pour-la-1-7] pour l'&eacute;diteur de tableau
+-* <multi>[ar]&#1586;&#1610;&#1575;&#1583;&#1577; &#1575;&#1604;&#1608;&#1592;&#1575;&#1574;&#1601;: &#1576;&#1610;&#1604; (&#1587;&#1578;&#1610;&#1601;&#1575;&#1606; &#1604;&#1608;&#1585;&#1575;&#1606; - spipcarto@gmail.com): &#1571;&#1606;&#1575;&#1576;&#1610;&#1576; &#1604;&#1573;&#1590;&#1575;&#1601;&#1577; &#1571;&#1586;&#1585;&#1575;&#1585; &#1608;&#1575;&#1605;&#1603;&#1575;&#1606; &#1575;&#1590;&#1575;&#1601;&#1577; &#1605;&#1593;&#1575;&#1604;&#1580;&#1575;&#1578; &#1601;&#1610; &#1583;&#1575;&#1604;&#1577; pre_propre[fr]Extensibilit&eacute; : Bill (Stephane LAURENT - spipcarto@gmail.com) : des pipelines pour rajouter des boutons et la possibilit&eacute; de rajouter des traitements dans pre_propre[en]Extended by Bill (Stephane LAURENT - spipcarto@gmail.com): Pipelines to add buttons and possibilty to add more processing in pre_propre</multi>
+-* <multi>[ar]&#1593;&#1585;&#1590; &#1605;&#1587;&#1576;&#1602;[fr]Pr&#233;visualisation [en]Preview</multi>: [->http://www.spip-contrib.net/Previsualisation-dynamique-d]
+-* <multi>[ar]&#1605;&#1581;&#1585;&#1585; &#1575;&#1604;&#1580;&#1583;&#1575;&#1608;&#1604;[fr]Editeur de tableaux [en]Table editor</multi>: [Christian Quentin->http://www.spip-contrib.net/_quentic_] 
+<multi>[ar]&#1576;&#1575;&#1604;&#1575;&#1593;&#1578;&#1605;&#1575;&#1583; &#1593;&#1604;&#1609; &#1593;&#1605;&#1604; [Courcy->http://www.spip-contrib.net/_courcy_] &#1601;&#1610; [&#1575;&#1604;&#1605;&#1602;&#1575;&#1604;->http://www.spip-contrib.net/Editeur-de-tableau-pour-la-1-7] &#1604;&#1605;&#1581;&#1585;&#1585; &#1575;&#1604;&#1580;&#1583;&#1575;&#1608;&#1604;
+_ &#1578;&#1605;&#1578; &#1575;&#1593;&#1575;&#1583;&#1577; &#1603;&#1578;&#1575;&#1576;&#1577; &#1605;&#1593;&#1592;&#1605; &#1576;&#1585;&#1605;&#1580;&#1610;&#1575;&#1578; Courcy &#1605;&#1606; &#1575;&#1580;&#1604;:
+-** &#1575;&#1606;&#1578;&#1575;&#1580; &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#1580;&#1583;&#1575;&#1608;&#1604; SPIP &#1608;&#1604;&#1610;&#1587; HTML (&#1578;&#1605; &#1581;&#1584;&#1601; &#1605;&#1581;&#1585;&#1585; &#1575;&#1604;&#1577;&#1575;&#1606; &#1575;&#1604;&#1582;&#1604;&#1575;&#1610;&#1575; &#1575;&#1610;&#1590;&#1575;&#1611;)
+-** &#1575;&#1604;&#1587;&#1605;&#1575;&#1581; &#1576;&#1575;&#1606;&#1588;&#1575;&#1569; &#1580;&#1583;&#1608;&#1604; &#1575;&#1608; &#1578;&#1593;&#1583;&#1610;&#1604; &#1580;&#1583;&#1608;&#1604; &#1605;&#1608;&#1580;&#1608;&#1583;
+-** &#1583;&#1605;&#1580; &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; HTML &#1575;&#1604;&#1605;&#1578;&#1593;&#1604;&#1602;&#1577; &#1576;&#1593;&#1606;&#1608;&#1575;&#1606; &#1575;&#1604;&#1580;&#1583;&#1608;&#1604; &#1608;&#1605;&#1604;&#1582;&#1589;&#1607;
+-* &#1589;&#1575;&#1604;&#1577; &#1593;&#1585;&#1590; &#1575;&#1604;&#1605;&#1587;&#1578;&#1606;&#1583;&#1575;&#1578;: [&#1587;&#1603;&#1585;&#1610;&#1576;&#1578; &#1575;&#1589;&#1604;&#1610; &#1604;&#1604;&#1575;&#1589;&#1583;&#1575;&#1585; &#1633;.&#1639;.&#1634; -> http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html]
+-* &#1575;&#1604;&#1575;&#1581;&#1589;&#1575;&#1569;&#1575;&#1578;: [Joseph->http://www.spip-contrib.net/Joseph] &#1575;&#1593;&#1578;&#1605;&#1575;&#1583;&#1575;&#1611; &#1593;&#1604;&#1609; [&#1605;&#1587;&#1575;&#1607;&#1605;&#1577; &#1605;&#1606; François Schreuer->http://www.spip-contrib.net/Mesurer-la-longueur-d-un-article].
+_ &#1578;&#1603;&#1610;&#1610;&#1601; &#1604;&#1600;SPIP &#1633;.&#1641;.&#1634; &#1605;&#1606; [Coyote->http://www.spip-contrib.net/_Coyote_] (&#1634;&#1640; &#1570;&#1584;&#1575;&#1585; &#1634;&#1632;&#1632;&#1639;).
+[fr]&#224; partir du travail de [Courcy->http://www.spip-contrib.net/_courcy_] dans l'[article->http://www.spip-contrib.net/Editeur-de-tableau-pour-la-1-7] pour l'&eacute;diteur de tableau
 _ Le code initial de Courcy a a &eacute;t&eacute; en grande partie r&eacute;-&eacute;crit pour : 
 -** g&eacute;n&eacute;rer une syntaxe de tableau SPIP et non HTML (l'&eacute;diteur de couleur de cellules disparait donc aussi)
 -** pour permettre de cr&eacute;er mais aussi de modifier un tableau existant
@@ -14,8 +23,16 @@ _ Le code initial de Courcy a a &eacute;t&eacute; en grande partie r&eacute;-&ea
 -* Galerie de documents : [SCRIPT ORIGINAL POUR SPIP 1.7.2->http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html]
 -* Statistiques : [Joseph->http://www.spip-contrib.net/Joseph] &agrave; partir d'une [contribution de François Schreuer->http://www.spip-contrib.net/Mesurer-la-longueur-d-un-article].
 _ ADAPTATION POUR SPIP 1.9.2 par [Coyote->http://www.spip-contrib.net/_Coyote_] (28 mars 2007)
-
-&#169; 2007 - Distribu&#233; sous licence GNU/GPL
+[en]based on the work of [Courcy->http://www.spip-contrib.net/_courcy_] in the  [article->http://www.spip-contrib.net/Editeur-de-tableau-pour-la-1-7] for the table editor
+_ The initial Courcy code has been mostly rewritten to: 
+-** generate a SPIP table syntax not a HTML syntax (the colour editor for the cells is scrapped along the way)
+-** allow to create and modify an existing table
+-** integrate HTML elements such as the table title and summary
+-* Documents gallery: [ORIGINAL SCRIPT FOR SPIP 1.7.2->http://www.gasteroprod.com/la-galerie-spip-pour-reutiliser-facilement-les-images-et-documents.html]
+-* Statistics: [Joseph->http://www.spip-contrib.net/Joseph] based on a [contribution from François Schreuer->http://www.spip-contrib.net/Mesurer-la-longueur-d-un-article].
+_ CUSTOMISATION FOR SPIP 1.9.2 from [Coyote->http://www.spip-contrib.net/_Coyote_] (28 March 2007)
+</multi>
+_ <multi>[ar]&#169; &#1634;&#1632;&#1632;&#1639; - &#1605;&#1608;&#1586;&#1593; &#1576;&#1605;&#1608;&#1580;&#1576; &#1575;&#1604;&#1578;&#1585;&#1582;&#1610;&#1589; &#1575;&#1604;&#1593;&#1575;&#1605; GNU/GPL[fr]&#169; 2007 - Distribu&#233; sous licence GNU/GPL[en]&#169; 2007 - distributed under the GNU/GPL license</multi>
 	</auteur>
 	<version>
 	2.1.4
@@ -24,7 +41,16 @@ _ ADAPTATION POUR SPIP 1.9.2 par [Coyote->http://www.spip-contrib.net/_Coyote_] 
 	stable
 	</etat>
 	<description>
-Am&#233;liore la barre typographique de SPIP.
+<multi>[ar]&#1578;&#1581;&#1587;&#1610;&#1606; &#1588;&#1585;&#1610;&#1591; &#1575;&#1583;&#1608;&#1575;&#1578; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577; &#1601;&#1610; SPIP
+
+&#1608;&#1578;&#1571;&#1578;&#1610; &#1593;&#1583;&#1577; &#1575;&#1588;&#1585;&#1591;&#1577; &#1605;&#1578;&#1582;&#1589;&#1589;&#1577; &#1604;&#1573;&#1594;&#1606;&#1575;&#1569; &#1607;&#1584;&#1575; &#1575;&#1604;&#1588;&#1585;&#1610;&#1591; &#1605;&#1606; &#1571;&#1580;&#1604;:
+-* &#1573;&#1583;&#1575;&#1585;&#1577; &#1608;&#1589;&#1604;&#1575;&#1578; &#1607;&#1575;&#1610;&#1576;&#1585;&#1578;&#1603;&#1587;&#1578; &#1605;&#1593; &#1573;&#1583;&#1575;&#1585;&#1577; &#1604;&#1604;&#1576;&#1575;&#1604;&#1608;&#1606;&#1575;&#1578;
+-* &#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1580;&#1583;&#1575;&#1608;&#1604;
+-* &#1608;&#1592;&#1610;&#1601;&#1577; &#1576;&#1581;&#1579; &#1608;&#1575;&#1587;&#1578;&#1576;&#1583;&#1575;&#1604; &#1601;&#1610; &#1605;&#1575;&#1583;&#1577; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;
+-* &#1573;&#1583;&#1585;&#1575;&#1580; &#1581;&#1585;&#1608;&#1601; &#1582;&#1575;&#1589;&#1577;
+-* &#1578;&#1594;&#1610;&#1610;&#1585; &#1575;&#1604;&#1575;&#1581;&#1585;&#1601; &#1575;&#1604;&#1604;&#1575;&#1578;&#1610;&#1606;&#1610;&#1577; &#1605;&#1606; &#1589;&#1594;&#1610;&#1585;&#1577; &#1575;&#1604;&#1609; &#1603;&#1576;&#1610;&#1585;&#1577; &#1608;&#1576;&#1575;&#1604;&#1593;&#1603;&#1587;
+-* &#1581;&#1587;&#1575;&#1576; &#1575;&#1581;&#1589;&#1575;&#1569;&#1575;&#1578; &#1575;&#1604;&#1606;&#1589; (&#1575;&#1604;&#1603;&#1604;&#1605;&#1575;&#1578; &#1608;&#1575;&#1604;&#1575;&#1581;&#1585;&#1601;)
+[fr]Am&#233;liore la barre typographique de SPIP.
 
 La barre est enrichie de plusieurs barres th&#233;matiques pour:
 -* La gestion des liens hypertextes avec gestion des bulles
@@ -33,10 +59,19 @@ La barre est enrichie de plusieurs barres th&#233;matiques pour:
 -* L'insertion des caract&#232;res sp&#233;ciaux
 -* Changer la casse
 -* Calculer les statistiques du texte (mots, signes, caract&egrave;res)
+[en]Enhances SPIP's typographical toolbar
 
-{Certaines icones proviennent de [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
+The toolbar is enriched with several special toolbars aiming at:
+-* the management of hypertext links with balloon help
+-* tables management
+-* a search/replace function in the article's body
+-* inserting special characters
+-* changing case
+-* text statistics (words, characters)</multi>
 
-[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]
+{<multi>[ar]&#1576;&#1593;&#1590; &#1575;&#1604;&#1575;&#1610;&#1602;&#1608;&#1606;&#1575;&#1578; &#1578;&#1571;&#1578;&#1610; &#1605;&#1606;[fr]Certaines icones proviennent de[en]Some icons are courtesy of</multi> [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
+
+[<multi>[ar]&#1605;&#1579;&#1575;&#1604; &#1578;&#1591;&#1576;&#1610;&#1602;&#1610;[fr]Exemple d'utilisation[en]practical example</multi>->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Barre-Typographique-V2</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction

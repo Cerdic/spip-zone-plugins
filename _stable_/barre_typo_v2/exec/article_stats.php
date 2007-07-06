@@ -12,11 +12,11 @@ function exec_article_stats_dist()
 	$texte = propre($_POST['texte']);
 	echo('<b>'._T('bartypenr:stats_statistiques').'</b> ');
 	echo(nombre_de_mots($texte));
-	echo(' '._T('bartypenr:stats_mots').', ');
+	echo(' '._T('bartypenr:stats_mots'));
 	echo(strlen(supprimer_blancs(textebrut($texte))));
-	echo(' '._T('bartypenr:stats_caracteres').', ');
+	echo(' '._T('bartypenr:stats_caracteres'));
 	echo(strlen(textebrut($texte)));
-	echo(' '._T('bartypenr:stats_signes').'.');
+	echo(' '._T('bartypenr:stats_signes'));
 }
 
 function supprimer_blancs($texte) {

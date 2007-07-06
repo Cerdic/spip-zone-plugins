@@ -20,7 +20,7 @@ function exec_galerie() {
 
 	echo install_debut_html(_T('bartypenr:galerie'));
 
-	echo '<script type="text/javascript" src="../dist/javascript/layer.js"></script><table width="100%" border="0" cellpadding="5" cellspacing="0" style="text-align:left;"><tr><td>';
+	echo '<script type="text/javascript" src="../dist/javascript/layer.js"></script><table width="100%" border="0" cellpadding="5" cellspacing="0" style="text-align:'.$spip_lang_left.';"><tr><td>';
 	list($data, $nbDocsTotal) = sous_arborescence(0);
 	?>
 	<script type="text/javascript" language="JavaScript" >
@@ -107,13 +107,13 @@ function exec_galerie() {
 		-->
 		</script>
 		<p>
-		D&eacute;plier : 
-		<a href="javascript:showAll();">tout</a> -
-		<a href="javascript:showNice();">les docs</a>
+		<?php echo _T('bartypenr:galerie_deplier'); ?> 
+		<a href="javascript:showAll();"><?php echo _T('bartypenr:galerie_tout'); ?></a> -
+		<a href="javascript:showNice();"><?php echo _T('bartypenr:galerie_docs'); ?></a>
 		<br />
-		Replier :
-		<a href="javascript:hideAll();">tout</a> -
-		<a href="javascript:hideDocs();">les docs</a>
+		<?php echo _T('bartypenr:galerie_replier'); ?>
+		<a href="javascript:hideAll();"><?php echo _T('bartypenr:galerie_tout'); ?></a> -
+		<a href="javascript:hideDocs();"><?php echo _T('bartypenr:galerie_docs'); ?></a>
 		</p>
 		<?php
 	}
@@ -167,19 +167,19 @@ function afficher_un_document($id_document){
 	$retour .= '<a href="'.$fichier.'" target="_blank">'.document_et_vignette($document, $url, true).'</a>';
 	$retour .= '</td>';
 
-	$retour .= '<th align="right" valign="top">Fichier&nbsp;:</th>';
+	$retour .= '<th align="right" valign="top">'._T('bartypenr:galerie_fichier').'</th>';
 	$retour .= '<td valign="top"><a href="'.$fichier.'">'.$fichier.'</a></td></tr>';
 	
-	$retour .= '<tr><th align="right" valign="top">Type&nbsp;:</th>';
+	$retour .= '<tr><th align="right" valign="top">'._T('bartypenr:galerie_type').'</th>';
 	$retour .= '<td valign="top">'.($type_titre ? $type_titre : majuscules($type_extension)).'</td></tr>';
 
-	$retour .= '<tr><th align="right" valign="top">Taille&nbsp;:</th>';
+	$retour .= '<tr><th align="right" valign="top">'._T('bartypenr:galerie_taille').'</th>';
 	$retour .= '<td valign="top">'.taille_en_octets($taille).'</td></tr>';
 
-	$retour .= '<tr><th align="right" valign="top">Descriptif&nbsp;:</th>';
-	$retour .= '<td valign="top">'.($descriptif ? propre($descriptif) : 'Aucun').'</td></tr>';
+	$retour .= '<tr><th align="right" valign="top">'._T('bartypenr:galerie_descrip').'</th>';
+	$retour .= '<td valign="top">'.($descriptif ? propre($descriptif) : _T('bartypenr:galerie_aucun')).'</td></tr>';
 
-	$retour .= '<tr><th align="right" valign="top">Ajouter&nbsp;:</th>';
+	$retour .= '<tr><th align="right" valign="top">'._T('bartypenr:galerie_ajouter').'</th>';
 	$retour .= '<td valign="top">';
 	$retour .= '<a href="javascript:addDoc('.$id_document.', \'left\');">left</a>';
 	$retour .= ' | <a href="javascript:addDoc('.$id_document.', \'center\');">center</a>';
@@ -240,7 +240,7 @@ function sous_arborescence($id_rubrique) {
 				$retour .= '<img src="'._DIR_IMG_PACK.'rien.gif" width="16" height="14" alt="" />';
 			}
 			$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'rubrique-24.gif" style="vertical-align:bottom;" alt="" /> ';
-			$retour .= $row['titre'].' ('.$nbDocs.' document'.($nbDocs > 1 ? 's' : '').')';
+			$retour .= $row['titre'].' ('.$nbDocs._T('bartypenr:galerie_document').($nbDocs > 1 ? 's' : '').')';
 			if ($content != '') {
 				$retour .= '<br />';
 				$retour .= debut_block_invisible('rub'.$row['id_rubrique']);
@@ -275,7 +275,7 @@ $article['id'] = $listeArticles[$i]['id'];
 				}
 				$retour .= $bouton;
 				$retour .= '</td><td valign="top"><img src="'._DIR_IMG_PACK.'article-24.gif" style="vertical-align:bottom;" alt="" /> ';
-				$retour .= $article['titre'].' ('.$article['nb'].' document'.($article['nb'] > 1 ? 's' : '').')';
+				$retour .= $article['titre'].' ('.$article['nb']._T('bartypenr:galerie_document').($article['nb'] > 1 ? 's' : '').')';
 				//$retour .= $listeArticles[$i]['titre'].' ('.$listeArticles[$i]['nb'].' document'.($listeArticles[$i]['nb'] > 1 ? 's' : '').')';
 				$retour .= '<br />';
 				$retour .= debut_block_invisible('art'.$article['id']);

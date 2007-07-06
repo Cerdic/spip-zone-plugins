@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_adresse' => 'Address',
 'barre_lien_externe' => 'External link',
 'barre_bulle' => 'Help bubble',
+'barre_galerie' => 'Open gallery',
 'barre_gestion_caption' => 'Caption and Summary',
 'barre_gestion_colonne' => 'No. of columns',
 'barre_gestion_ligne' => 'No. of lines',
@@ -41,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_cr_tout' => 'Replace all',
 'barre_gestion_cr_entier' => 'Only complete words',
 'barre_preview' => 'Preview mode',
+'barre_stats' => 'Show text statistics',
 
 'barre_ancres' => 'Anchors',
 'barre_gestion_anc_caption' => 'Anchors',
@@ -48,7 +50,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_anc_nom' => 'Anchor name',
 'barre_gestion_anc_pointer' => 'Point to an anchor',
 'barre_gestion_anc_cible' => 'Anhor target',
-'barre_gestion_anc_bulle' => 'Anchor help bubble'
+'barre_gestion_anc_bulle' => 'Anchor help bubble',
+'barre_avances' => 'Direction, direction!',
+'barre_boutonsavances' => 'Extra justifications, use with caution!',
+'cfg_puces' => 'Bullets',
+'cfg_titraille' => 'Headings',
+'cfg_insertcss' => 'Inser CSS',
+
+'galerie' => 'Documents gallery',
+'galerie_document' => '&nbsp;document',
+'galerie_deplier' => 'Expand:',
+'galerie_tout' => 'all',
+'galerie_docs' => 'the docs',
+'galerie_replier' => 'Collapse:',
+'galerie_fichier' => 'File:',
+'galerie_type' => 'Type:',
+'galerie_taille' => 'Size:',
+'galerie_descrip' => 'Description:',
+'galerie_aucun' => 'None',
+'galerie_ajouter' => 'Add:',
+
+'stats_statistiques' => 'Statistics:',
+'stats_mots' => 'words, ',
+'stats_caracteres' => 'characters, ',
+'stats_signes' => 'marks.',
+
+'tableau_titre' => 'Table title',
+'tableau_resume' => 'Table summary (accessability)',
+'tableau_prem_ligne' => 'First row for columns headings',
+'tableau_enregistrer' => '<strong>Enter</strong>'
 
 );
 ?>
