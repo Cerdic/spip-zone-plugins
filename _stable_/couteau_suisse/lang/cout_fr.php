@@ -125,7 +125,7 @@ Idem pour changer le fond, si l'option ci-dessous le permet :
 -* <code>Lorem ipsum [fond rouge]dolor[/fond rouge] sit amet</code>
 -* <code>Lorem ipsum [bg red]dolor[/bg red] sit amet</code>.
 
-Quelque soit la couleur, la balise fermante peut aussi &ecirc;tre : <code>[/couleur]</code> ou <code>[/color]</code>, et <code>[/fond]</code> ou <code>[/bg]</code>.
+Quelle que soit la couleur, la balise fermante peut aussi &ecirc;tre : <code>[/couleur]</code> ou <code>[/color]</code>, et <code>[/fond]</code> ou <code>[/bg]</code>.
 _ Un exemple de balises imbriqu&eacute;es : <code>[fond jaune]Lorem ipsum [rouge]dolor[/couleur] sit amet[/fond]</code>.
 
 [[Permettre les fonds :->%couleurs_fonds%]]
