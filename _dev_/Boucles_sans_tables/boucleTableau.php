@@ -58,36 +58,43 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	} else {
 		$incr=1;
 	}
-	$var=null; $cle='';
+	$init=null; $var=null; $cle='';
 
 	foreach($boucle->criteres as $critere) {
 	  if($critere->op=='valeur') {
-		  $var= '$Pile[$SP][\'valeur\']';
+		$var= '$Pile[$SP][\'valeur\']';
+		$init= "\$__t= &$var;";
 	  } elseif($critere->op=='=' && $critere->param[0][0]->texte=='valeur') {
-		  $var= calculer_liste($critere->param[1],
-							   array(), $boucles, $boucle->id_parent);
+		$var= calculer_liste($critere->param[1],
+			array(), $boucles, $boucle->id_parent);
+		$init= "\$__t= &$var;";
 	  } elseif($critere->op=='=' && $critere->param[0][0]->texte=='var') {
 		$var= '$GLOBALS['.calculer_liste($critere->param[1],
 			array(), $boucles, $boucle->id_parent).']';
+		$init= "\$__t= &$var;";
 	  } elseif($critere->op=='=' && $critere->param[0][0]->texte=='fonction') {
-		$var= calculer_liste($critere->param[1],
-			array(), $boucles, $boucle->id_parent);
+		$init= "eval('\$__t='.".calculer_liste($critere->param[1],
+			array(), $boucles, $boucle->id_parent).".';');";
 	  } elseif($critere->op=='=' && $critere->param[0][0]->texte=='cle') {
 		$cle.= '['.calculer_liste($critere->param[1],
 			array(), $boucles, $boucle->id_parent).']';
 	  }
 	}
 
-	if($var===null) {
+	if($init===null) {
 	  erreur_squelette("pas de variable s&eacute;lectionn&eacute;e",
 					   $boucle->id_boucle);
 	  return;
 	}
 
+	if($cle) {
+		$init.="\$__t= \$__t$cle;";
+	}
+
 	// s'il y a des limites ou un increment, il faut ruser
 	if($boucle->limit || $boucle->mode_partie) {
 		$code=<<<CODE
-	\$__t= &${var}$cle;
+	$init
 	\$SP++;
 	if(!is_array(\$__t) || empty(\$__t)) { return ''; }
 	\$__t_k= array_keys(\$__t);
@@ -107,7 +114,8 @@ CODE;
 	// sinon, un brave foreach fait l'affaire
 	} else {
 		$code=<<<CODE
-	\$__t= ${var}$cle;
+	$init
+	error_log("__t=".var_export(\$__t, 1));
 	\$SP++;
 	if(!is_array(\$__t) || empty(\$__t)) { return ''; }
 	\$code=array();
