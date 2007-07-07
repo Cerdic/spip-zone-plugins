@@ -58,8 +58,8 @@ function inc_encoder_videos_dist($v) {
 		(intval($v['id']) .'/' .intval($v['id_document']) . "/".$v['mode'].'/'.$v['type']),
 		(!test_espace_prive())?$v['script']:generer_url_ecrire($v['script'], $v['args'], true),
 		"$iframe$debut$res$dir_ftp$distant$fin",
-		" method='post' style='border: 0px; margin: 0px;'");
-
+		" method='post' enctype='multipart/form-data' class='form_upload'");
+		
 	if ($v['cadre']) {
 		$debut_cadre = 'debut_cadre_'.$v['cadre'];
 		$fin_cadre = 'fin_cadre_'.$v['cadre'];

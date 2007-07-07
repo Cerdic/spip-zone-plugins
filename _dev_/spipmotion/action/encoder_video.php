@@ -17,74 +17,86 @@ include_spip('base/abstract_sql');
 include_spip('inc/actions');
 
 function action_encoder_video_dist(){
-global $hash, $url, $chemin, $ancre,
-	  $sousaction1,
-	  $sousaction2,
-	  $sousaction3,
-	  $sousaction4,
-	  $sousaction5,
-	  $_FILES,  $HTTP_POST_FILES;
-
+	global $redirect;
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
+	$arg = $securiser_action();
 
+	if (!preg_match(',^(-?\d+)\D(\d+)\D(\w+)/(\w+)$,',$arg,$r)) {
+		spip_log("action_encoder_dist incompris: " . $arg);
+		$redirect = urldecode(_request('redirect'));
+		return;
+	}
+
+	list(, $id, $id_document, $mode, $type) = $r;
+	$actifs = array();
+	$redirect = action_encoder_video_sous_action($id, $id_document, $mode, $type, $actifs);
+}
+
+function action_encoder_video_sous_action($id, $id_document, $mode, $type, &$documents_actifs)
+{
+
+	$hash = _request('hash');
+	$url = _request('url');
+	$chemin = _request('chemin');
+	$ancre = _request('ancre');
+	$sousaction1 = _request('sousaction1');
+	$sousaction2 = _request('sousaction2');
+	$sousaction3 = _request('sousaction3');
+	$sousaction4 = _request('sousaction4');
+	$sousaction5 = _request('sousaction5');
 	$redirect = _request('redirect');
 	$iframe_redirect = _request('iframe_redirect');
-	if (!preg_match(',^(-?\d+)\D(\d+)\D(\w+)/(\w+)$,',_request('arg'),$r)) {
-	  spip_log("action_encoder_videos_dist incompris: " . _request('arg'));
-	  redirige_par_entete(urldecode($redirect));
-	}
-	list($arg, $id, $id_document, $mode, $type) = $r;
-
-     // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
-     // et son transcodage est couteux et perilleux
-     $sousaction = 'spip_action_encoder_video' .
+	
+	// pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
+// et son transcodage est couteux et perilleux
+	$sousaction = 
        ($sousaction1 ? 1 :
 	($sousaction2 ? 2 :
 	 ($sousaction3 ? 3 : 
 	  ($sousaction4 ? 4 :
 	   $sousaction5 ))));
 
-     $path = ($sousaction1 ? ($_FILES ? $_FILES : $HTTP_POST_FILES) :
+     $path = ($sousaction1 ? ($_FILES ? $_FILES : $GLOBALS['HTTP_POST_FILES']) :
 	     ($sousaction2 ? $url : $chemin));
 
-     $documents_actifs = array();
-
-     if (function_exists($sousaction))
-       $type_image = $sousaction($path, $mode, $type, $id, $id_document, 
-				 $hash, $redirect, $documents_actifs, $iframe_redirect);
-
-     else spip_log("spip_action: sousaction inconnue $sousaction");
+     $sousaction = charger_fonction('encoder_video' . $sousaction, 'inc');
+     $type_video = $sousaction($path, $mode, $type, $id, $id_document, 
+		 $hash, $redirect, $documents_actifs, $iframe_redirect);
 
      $redirect = urldecode($redirect);
      if ($documents_actifs) {
-	$redirect .= '&show_docs=' . join(',',$documents_actifs);
+	$redirect = parametre_url($redirect,'show_docs',join(',',$documents_actifs),'&');
+     }
+     
+    if (!$ancre) {
+
+		if ($mode=='vignette')
+			$ancre = 'images';
+		else if ($type_video)
+			$ancre = 'portfolio';
+		else
+			$ancre = 'documents';
      }
 
-	if (!$ancre) {
-		$ancre = 'videos';
-	}
-
-	$redirect .= '#' . $ancre;
+    $redirect .= '#' . $ancre;
+    if ($type == 'rubrique') {
+	include_spip('inc/rubriques');
+	calculer_rubriques();
+     }
 
 	if(_request("iframe") == 'iframe') {
-		$redirect = urldecode($iframe_redirect)."&show_docs=".join(',',$documents_actifs)."&iframe=iframe";
+		$redirect = parametre_url(urldecode($iframe_redirect),"show_docs",join(',',$documents_actifs),'&')."&iframe=iframe";
 	}
-
-	redirige_par_entete($redirect);
-     ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
-
+	return $redirect;
 }
 
-
-// http://doc.spip.org/@spip_action_joindre3
-function spip_action_encoder_video3($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
+// http://doc.spip.org/@inc_joindre3_dist
+function inc_encoder_video3_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (!$path || strstr($path, '..')) return;
-
+	    
 	$upload = determine_upload();
 	if ($path != '/' AND $path != './') $upload .= $path;
-
 
 	if (!is_dir($upload))
 	  // seul un fichier est demande
@@ -101,7 +113,6 @@ function spip_action_encoder_video3($path, $mode, $type, $id, $id_document,$hash
 					);
 	  }
 	}
-
 	$encodage = charger_fonction('encodage', 'inc');
 	return $encodage($files);
 }

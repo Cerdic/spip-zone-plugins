@@ -122,6 +122,7 @@ function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
 	</script>
 EOF;
 }
+
 	return $ret;
 	
 }
