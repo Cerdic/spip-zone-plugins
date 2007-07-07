@@ -63,6 +63,11 @@ function gis_insertarp_head($flux){
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'googlemap_api/js/customControls.js"></script>';
+	$flux .= '<script language="javascript">
+			$(document).ready(function() {
+				load();
+			});
+			</script>';
 	return $flux;
 }
 
