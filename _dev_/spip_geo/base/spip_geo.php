@@ -17,8 +17,9 @@ global $tables_principales;
 global $tables_auxiliaires;
 
 $spip_geo_continent = array(
-	"id_continent" 	=> "bigint(21) NOT NULL",
+	"id_continent" 	=> "SMALLINT NOT NULL",
 	"nom" 	=> "varchar(255) NOT NULL",
+	"code_onu" 	=> "SMALLINT NOT NULL",
 	"latitude" 	=> "text",
 	"longitude" 	=> "text",
 	"zoom" 	=> "text",
@@ -28,8 +29,8 @@ $spip_geo_continent_key = array(
 	"PRIMARY KEY" => "id_continent");
 	
 $spip_geo_pays = array(
-	"id_pays" 	=> "bigint(21) NOT NULL",
-	"id_continent" 	=> "bigint(21) NOT NULL",
+	"id_pays" 	=> "SMALLINT NOT NULL",
+	"id_continent" 	=> "SMALLINT NOT NULL",
 	"nom" 	=> "varchar(255) NOT NULL",
 	"code_iso" => "text",
 	"latitude" 	=> "text",
@@ -40,12 +41,12 @@ $spip_geo_pays = array(
 
 $spip_geo_pays_key = array(
 	"KEY id_continent" 	=> "id_continent",
-	"KEY id_pays" 	=> "id_pays");
+	"PRIMARY KEY id_pays" 	=> "id_pays");
 	
 $spip_geo_ville = array(
-	"id_ville" 	=> "bigint(21) NOT NULL",
-	"id_continent" 	=> "bigint(21) NOT NULL",
-	"id_pays" 	=> "bigint(21) NOT NULL",
+	"id_ville" 	=> "int NOT NULL",
+	"id_continent" 	=> "SMALLINT NOT NULL",
+	"id_pays" 	=> "SMALLINT NOT NULL",
 	"nom" 	=> "varchar(255) NOT NULL",
 	"latitude" 	=> "text",
 	"longitude" => "text",
@@ -55,7 +56,7 @@ $spip_geo_ville = array(
 $spip_geo_ville_key = array(
 	"KEY id_continent" 	=> "id_continent",
 	"KEY id_pays" 	=> "id_pays",
-	"KEY id_ville" 	=> "id_ville");
+	"PRIMARY KEY id_ville" 	=> "id_ville");
 
 $tables_principales['spip_geo_continent'] = array(
 	'field' => &$spip_geo_continent,

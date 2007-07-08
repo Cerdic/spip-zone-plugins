@@ -9,9 +9,9 @@ if (count($continents)<5)
 array_shift($continents); # supprimer la premiere ligne
 
 foreach ($continents as $ligne) {
-	list($id_continent,$nom,$latitude,$longitude,$zoom) = explode(';', $ligne);
+	list($id_continent,$nom,$code_onu,$latitude,$longitude,$zoom) = explode(';', $ligne);
 	echo propre($nom)." $id_continent<br />\n";
-	spip_query("INSERT IGNORE spip_geo_continent (id_continent, nom, latitude, longitude, zoom) VALUES ('$id_continent', "._q($nom).", '$latitude', '$longitude', '$zoom')");
+	spip_query("INSERT IGNORE spip_geo_continent (id_continent, nom, code_onu, latitude, longitude, zoom) VALUES ('$id_continent', "._q($nom).", '$code_onu', '$latitude', '$longitude', '$zoom')");
 }
 }
 
