@@ -391,6 +391,9 @@ function MajStats() {
 	}
 }
 
+form_dirty = false;
+warn_onunload = true;
+
 $(document).ready(function(){
 	$('.$champ.').after("<div id=\"article_preview\"></div>");
 	$('.$champ.').before("<div id=\"article_stats\"></div>");
@@ -398,24 +401,22 @@ $(document).ready(function(){
 	$('.$champ.').keypress(function() { MajPreview() });
 	$('.$champ.').select(function() { MajStats() });
 	$('.$champ.').click(function() { MajStats() });
+	$(window).bind("beforeunload", function(e) { 
+		if ( (warn_onunload == true) && (form_dirty == true) ) {
+			e.returnValue = \'Quitter la page sans sauvegarder ?\' 
+		}
+	} );
+	$("form").submit ( function() {warn_onunload=false;} );
+	$('.$champ.')
+		.parents(\'form\')
+		.find(\'input,textarea,select\')
+		.not(\'[@type=hidden]\')
+		.change ( function() {form_dirty=true;} );
+	$("input").change ( function() {form_dirty=true;} );
 });
 
-form_dirty = false;
-warn_onunload = true;
 
-$(window).bind("beforeunload", function(e) { 
-	if ( (warn_onunload == true) && (form_dirty == true) ) {
-		e.returnValue = \'Quitter la page sans sauvegarder ?\' 
-	}
-} );
 
-$("form").submit ( function() {warn_onunload=false;} );
-$('.$champ.')
-	.parents(\'form\')
-	.find(\'input,textarea,select\')
-	.not(\'[@type=hidden]\')
-	.change ( function() {form_dirty=true;} );
-$("input").change ( function() {form_dirty=true;} );
 
 	 //--></script>';
 	return $ret;
