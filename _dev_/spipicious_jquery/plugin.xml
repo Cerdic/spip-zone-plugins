@@ -7,8 +7,8 @@ _ &#169; 2006-2007 - Licence GPL
 	<etat>dev</etat>
 	<description><multi>
 	  [fr]Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) sur les articles de SPIP &#224; la fa&#231;on d'un [del.icio.us->http://del.icio.us/]
-_ N&#233;cessite le plugin balise_session
-_ N&#233;cessite le plugin s&#233;lecteur g&#233;n&#233;rique
+_ N&#233cessite le plugin balise_session
+_ N&#233cessite le plugin s&#233;lecteur g&#233;n&#233;rique
 - Les mots-cl&#233;s sont ajout&#233;s dans un groupe d&#233;di&#233; {{- tags -}}
 - voir les fichiers exemples pour voir les nouvelles balises et boucles
 	  [en] A suspicous tag allowing visitors to tag SPIP articles</multi> 
@@ -17,13 +17,10 @@ _ N&#233;cessite le plugin s&#233;lecteur g&#233;n&#233;rique
 	<prefix>spipicious</prefix>
 	<options>spipicious_options.php</options>
 	<fonctions>spipicious_fonctions.php</fonctions>
+	<install>base/spipicious_upgrade.php</install>
 	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>spipicious_head.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>header_prive</nom>
-		<inclure>spipicious_fonctions.php</inclure>
 	</pipeline>
 	<necessite id="SelecteurGenerique" version="[0.1;]" />
 	<chemin dir='' />
