@@ -335,8 +335,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	if (!_DIR_RESTREINT) {
 		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col++;
-		$ret .=    bouton_barre_racc("toggle_preview();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
-		$ret .=    bouton_barre_racc("toggle_stats();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
+		if (!$forum) {
+			$ret .= bouton_barre_racc("toggle_preview();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
+			$ret .= bouton_barre_racc("toggle_stats();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
+		}
 		$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$ret .= aide("raccourcis");
 		$ret .= "</td>";
