@@ -10,12 +10,11 @@ img.crayon-img-changed {
 img.crayon-edit, img.crayon-crayon {
 	visibility: hidden;
 }
-.crayon-autorise:hover > span > span > img.crayon-edit, .crayon-hover > span > span > img.crayon-edit,
-.crayon-autorise:hover > span > span > img.crayon-crayon, .crayon-hover > span > span > img.crayon-crayon {
+
+.crayon-hover img.crayon-edit, .crayon-hover img.crayon-crayon {
 	visibility: visible;
 }
-.crayon-autorise:hover, .crayon-hover {
-}
+
 .crayon-boutons, .crayon-searching {
 	float: right;
 }
@@ -37,6 +36,7 @@ img.crayon-edit, img.crayon-crayon {
 }
 .crayon-edit, .crayon-crayon, .crayon-img-changed {
 	cursor: pointer;
+	border:0;
 } 
 .formulaire_spip .crayon-active {
 	padding: 1px;

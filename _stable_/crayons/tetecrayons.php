@@ -134,7 +134,7 @@ EOH;
 function balise_EDIT($p) {
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	// #EDIT hors boucle ? ne rien faire
-	if (!$p->boucles[$i_boucle]->type_requete) {
+	if (!$type = $p->boucles[$i_boucle]->type_requete) {
 		$p->code = "''";
 		$p->interdire_scripts = false;
 		return $p;
@@ -151,7 +151,7 @@ function balise_EDIT($p) {
 		$id[] = champ_sql(trim($key),$p);
 	$primary = implode(".'-'.",$id);
 	$p->code = "classe_boucle_crayon('"
-		. $p->boucles[$i_boucle]->type_requete
+		. $type
 		."',"
 		.sinon(interprete_argument_balise(1,$p),"''")
 		.","
@@ -161,27 +161,25 @@ function balise_EDIT($p) {
 	return $p;
 }
 
+
 // Donne la classe crayon en fonction
 // - du type de la boucle
 // (attention aux exceptions pour #EDIT dans les boucles HIERARCHIE et SITES)
 // - du champ demande (vide, + ou se terminant par + : (+)classe type--id)
 // - de l'id courant
-function classe_boucle_crayon($type_boucle, $champ, $id) {
-	$type_boucle = $type_boucle[strlen($type_boucle) - 1] == 's' ?
-			substr($type_boucle, 0, -1) : 
+function classe_boucle_crayon($type, $champ, $id) {
+	$type = $type[strlen($type) - 1] == 's' ?
+			substr($type, 0, -1) : 
 			str_replace(
 				array('hierarchie', 'syndication'),
 				array('rubrique',   'site'),
-				$type_boucle);
+				$type);
 
-	$plus = '';
-	if ($champ && $champ[strlen($champ) - 1] == '+') {
-		$champ = substr($champ, 0, -1);
-		if ($champ) {
-			$plus = " $type_boucle--$id";
-		}
-	}
-	return 'crayon ' . $type_boucle . '-' . $champ . '-' . $id . $plus;
+	$plus = (substr($champ, -1) == '+' AND $champ = substr($champ, 0, -1))
+		? " $type--$id"
+		: '';
+
+	return 'crayon ' . $type . '-' . $champ . '-' . $id . $plus;
 }
 
 ?>

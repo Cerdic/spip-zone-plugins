@@ -219,9 +219,11 @@ jQuery.fn.activatecrayon = function(percent) {
       }})
       .one('submit', function(){
         crayon
-        .append(configCrayons.mkimg('searching')) // icone d'attente
-        .find(".crayon-boutons")
-          .hide(); // boutons de validation
+        .find('form')
+        .css('opacity', 0.5)
+        .after(configCrayons.mkimg('searching')) // icone d'attente
+        .find(".crayon-boutons,.resizehandle")
+          .remove();
       })
       // keyup pour les input et textarea ...
       .keyup(function(e){
@@ -351,15 +353,13 @@ jQuery.fn.initcrayon = function(){
   .iconecrayon();
 
   // :hover pour MSIE
-  if (jQuery.browser.msie) {
-    this.hover(
-      function(){
-        jQuery(this).addClass('crayon-hover');
-      },function(){
-        jQuery(this).removeClass('crayon-hover');
-      }
-    );
-  }
+  this.hover(
+    function(){
+      jQuery(this).addClass('crayon-hover');
+    },function(){
+      jQuery(this).removeClass('crayon-hover');
+    }
+  );
 
   return this;
 }
