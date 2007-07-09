@@ -6,11 +6,10 @@
 #CACHE{0}
 
 <BOUCLE_d(FORUMS){id_forum}{statut==.}>
-<fieldset style="#ENV{style}"><legend>Qui ?</legend>
-<label><:ecrire:info_nom:> :</label> <input class="crayon-active" name="#ENV{name_auteur}"
- style="width:#ENV{largeur}px;" value="[(#NOM**|entites_html)]" />
- <br />
- <label><:ecrire:email_2:></label> <input class="crayon-active" name="#ENV{name_email_auteur}"
- style="width:#ENV{largeur}px;" value="[(#EMAIL**|entites_html)]" />
+<fieldset style="#ENV{style};text-align:right;"><legend>Qui ?</legend>
+<label><:ecrire:info_nom:> : <input class="crayon-active" name="#ENV{name_auteur}"
+ style="width:#ENV{largeur}px;" value="[(#NOM**|entites_html)]" /></label><br />
+ <label><:ecrire:email_2:> <input class="crayon-active" name="#ENV{name_email_auteur}"
+ style="width:#ENV{largeur}px;" value="[(#EMAIL**|entites_html)]" /></label>
 </fieldset>
 </BOUCLE_d>
