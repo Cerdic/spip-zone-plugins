@@ -351,8 +351,9 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$ret .= "</table>";
 	 $ret .= $toolbox;
-	 $ret .= '<script type="text/javascript"><!--
-
+	 $ret .= '<script type="text/javascript"><!--';
+	 if (!$forum) {
+		$ret .= '
 function MajPreviewCallBack() {
 	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:'.$champ.'.value }, function(data) {
 		$("#article_preview").empty()
@@ -389,18 +390,23 @@ function MajStats() {
 	if ($("#article_stats").css("display") != "none") {
 		delayFunction("MajStatsCallBack()",1);
 	}
-}
-
+}';
+	 }
+	 $ret .= '
 form_dirty = false;
 warn_onunload = true;
 
-$(document).ready(function(){
+$(document).ready(function(){';
+	 if (!$forum) {
+	 $ret .= '
 	$('.$champ.').after("<div id=\"article_preview\"></div>");
 	$('.$champ.').before("<div id=\"article_stats\"></div>");
 	$.ajaxTimeout( 5000 );
 	$('.$champ.').keypress(function() { MajPreview() });
 	$('.$champ.').select(function() { MajStats() });
-	$('.$champ.').click(function() { MajStats() });
+	$('.$champ.').click(function() { MajStats() });';
+	 }
+	 $ret .= '
 	$(window).bind("beforeunload", function(e) { 
 		if ( (warn_onunload == true) && (form_dirty == true) ) {
 			e.returnValue = \'Quitter la page sans sauvegarder ?\' 
@@ -414,10 +420,6 @@ $(document).ready(function(){
 		.change ( function() {form_dirty=true;} );
 	$("input").change ( function() {form_dirty=true;} );
 });
-
-
-
-
 	 //--></script>';
 	return $ret;
 }
