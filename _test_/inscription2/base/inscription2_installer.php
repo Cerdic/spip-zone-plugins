@@ -18,7 +18,7 @@ function inscription2_verifier_base(){
 		spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, id_auteur bigint NOT NULL, INDEX id_auteur (id_auteur) );");
 	
 	//ajout des index
-	$desc = spip_abstract_showtable($table_nom, '', true);
+	$desc = spip_abstract_showtable($table_nom, '', false);
 	if($desc['key']['PRIMARY KEY']!='id'){
 		spip_query("ALTER TABLE ".$table_nom." DROP PRIMARY KEY");
 		if(!isset($desc['fields']['id']))
@@ -67,7 +67,7 @@ function inscription2_verifier_base(){
 	
 	//les pays
 	include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-	$desc = spip_abstract_showtable('spip_pays', '', true);
+	$desc = spip_abstract_showtable('spip_pays', '', false);
 	if($desc['field']['pays']=='int NOT NULL') //bug de la version 0.4
 		spip_query("DROP TABLE spip_pays");
 	if(!$desc){

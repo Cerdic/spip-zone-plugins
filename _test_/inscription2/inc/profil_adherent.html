@@ -44,10 +44,14 @@ include_spip('inc/headers');
 	$id = $GLOBALS['auteur_session']['id_auteur'];
 	if(is_array($aux)){
 		// sur la table spip_auteurs_elargis, s'il n'existe pas on l'ajoute.
-		if($aux['id'] == NULL)
-			//spip_insert_id() ??
-			$id_elargi = spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
-		foreach($aux as $cle => $val){
+		if($aux['id'] == NULL){
+			spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
+			if(is_array($auteur)){
+				$aux = join(', ',array_keys($auteur));
+				$aux = spip_query("SELECT $aux FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur WHERE a.id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
+				$aux = spip_fetch_array($aux);
+			}
+		}foreach($aux as $cle => $val){
 			if($cle != 'id'){
 				echo '<div><strong>'._T('inscription2:'.$cle).' : </strong>';
 				if($cle == 'login' or $cle == 'nom' or $cle == 'email'){
@@ -57,9 +61,9 @@ include_spip('inc/headers');
 						echo '<span>'.sinon($val,'...').'</span></div>';  
 				}else{
 					if( $auteur['b.pays']=="1" and $cle == 'pays')
-						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.'">'.recuperer_fond('vues/pays', array('pays'=> $val)).'</span></div>'; 
+						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$aux['id'].'">'.recuperer_fond('vues/pays', array('pays'=> $val)).'</span></div>'; 
 					elseif($auteur['b.'.$cle]=="1")
-						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$id.'">'.sinon($val,'...').'</span></div>';  
+						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$aux['id'].'">'.sinon($val,'...').'</span></div>';  
 					
 					else
 						echo '<span>'.sinon($val,'...').'</span></div>';  

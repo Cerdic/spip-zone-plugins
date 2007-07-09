@@ -2,12 +2,14 @@
 	/**Plugin Inscription 2 avec CFG **/
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('cfg_options');
+	include_spip('base/serial');
 	
 	// a chaque validation de cfg, verifier l'etat de la table spip_auteurs_elargis	
 	if(_request('exec')=='cfg' and _request('cfg')=='inscription2'){
 		include_spip('inscription2_mes_fonctions');
 		inscription2_verifier_tables();
 	}
+	$GLOBALS['table_des_tables']['auteurs_elargis'] = 'auteurs_elargis';
 	global $tables_principales;
 	$table_nom = "spip_auteurs_elargis";
 	foreach(lire_config('inscription2') as $cle => $val) {
@@ -16,7 +18,7 @@
 			if($cle == 'naissance' )
 				$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 			else
-				$spip_auteurs_elargis[$cle] = "text NOT NULL ";
+				$spip_auteurs_elargis[$cle] = "text NOT NULL";
 		}
 	}
 	
@@ -27,8 +29,8 @@
 	$spip_pays['pays'] = "text NOT NULL ";
 	$spip_pays_key = array("PRIMARY KEY"	=> "id");
 	
-	$tables_principales['`spip_auteurs_elargis`']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
-	$tables_principales['`spip_pays`']  =	array('field' => &$spip_pays, 'key' => &$spip_pays_key);
+	$tables_principales['spip_auteurs_elargis']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
+	$tables_principales['spip_pays']  =	array('field' => &$spip_pays, 'key' => &$spip_pays_key);
 
 	
 # autoriser les visiteurs a modifier leurs infos
