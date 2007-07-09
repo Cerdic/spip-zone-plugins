@@ -37,6 +37,10 @@
 #define ('_DEBUG_AUTORISER', true);
 if (!function_exists('autoriser_spip_auteurs_elargis')) {
 function autoriser_spip_auteurs_elargis($faire, $type, $id, $qui, $opt) {
+	$query = spip_query("select id_auteur from spip_auteurs_elargis where id=$id");
+	$query = spip_fetch_array($query);
+	if($query['id_auteur']==$qui['id_auteur'])
+		$qui['id_auteur'] = $id;
 	return autoriser($faire,'auteur', $id, $qui, $opt);
 }
 }

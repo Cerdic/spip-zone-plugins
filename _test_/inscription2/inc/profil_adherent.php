@@ -1,9 +1,12 @@
-#CACHE{0}
-<div class = "affichage">
 <?php 
 include_spip('inc/filtres');
 include_spip('inc/headers');
-
+	
+	if(!$GLOBALS['auteur_session'])
+		redirige_par_entete('./');
+	$id_auteur=intval($contexte_inclus['id_auteur']);
+	if(!$id_auteur)
+		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$aux = "";
 	$auteur = array();
 	//liste d'elements a afficher
@@ -33,22 +36,23 @@ include_spip('inc/headers');
 
 	if(is_array($auteur)){
 		$aux = join(', ',array_keys($auteur));
-		$aux = spip_query("SELECT $aux FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur WHERE a.id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
+		$aux = spip_query("SELECT $aux FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur WHERE a.id_auteur = ".$id_auteur );
 		$aux = spip_fetch_array($aux);
 	}
+	
 	if(!is_array($aux)){
 		echo _T('inscription2:erreur_user_not_found')."</div>";
 		redirige_par_entete('./');
 		return;
 	}
-	$id = $GLOBALS['auteur_session']['id_auteur'];
+	
 	if(is_array($aux)){
 		// sur la table spip_auteurs_elargis, s'il n'existe pas on l'ajoute.
 		if($aux['id'] == NULL){
-			spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
+			spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id_auteur)");
 			if(is_array($auteur)){
 				$aux = join(', ',array_keys($auteur));
-				$aux = spip_query("SELECT $aux FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur WHERE a.id_auteur = ".$GLOBALS['auteur_session']['id_auteur'] );
+				$aux = spip_query("SELECT $aux FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b ON a.id_auteur=b.id_auteur WHERE a.id_auteur = ".$id_auteur );
 				$aux = spip_fetch_array($aux);
 			}
 		}foreach($aux as $cle => $val){
@@ -56,7 +60,7 @@ include_spip('inc/headers');
 				echo '<div><strong>'._T('inscription2:'.$cle).' : </strong>';
 				if($cle == 'login' or $cle == 'nom' or $cle == 'email'){
 					if($auteur['a.'.$cle]=="1")
-						echo '<span class="crayon auteur-'.$cle.'-'.$id.' ">'.sinon($val,'...').'</span></div>';  
+						echo '<span class="crayon auteur-'.$cle.'-'.$id_auteur.' ">'.sinon($val,'...').'</span></div>';  
 					else 
 						echo '<span>'.sinon($val,'...').'</span></div>';  
 				}else{
@@ -72,4 +76,3 @@ include_spip('inc/headers');
 		}
 	}
 ?>
-</div>

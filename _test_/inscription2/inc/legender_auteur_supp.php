@@ -59,7 +59,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
+			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'statut')
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
@@ -214,7 +214,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
+			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'statut')
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
