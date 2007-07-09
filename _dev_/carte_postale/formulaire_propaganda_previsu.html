@@ -1,0 +1,11 @@
+<fieldset class="previsualisation">
+	<legend><:votre_mail:></legend>
+		<p><:emmetteur:> [(#ENV*{nom_expediteur})] - <em>[(#ENV*{mail})]</em></p>
+		[<p><b><:destinataire:></b> (#ENV*{destinataire})</p>]
+		[<p><b><:form_prop_sujet:></b> (#ENV*{sujet})</p>]
+		[<div>
+		(#ENV*{texte}|nl2br)
+		</div>]
+		[<div class="formerreur">(#ENV*{erreur})</div>]
+		[<div style='text-align:right;'><input type='submit' name='valider' class='spip_bouton' value="(#ENV*{bouton})" /></div>]
+</fieldset>
