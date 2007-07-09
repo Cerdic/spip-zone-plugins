@@ -15,7 +15,8 @@
 	$table_des_tables['listes'] = 'listes';
 
 	//creer la table auteurs_elargis si besoin
-	if(!is_array($spip_auteurs_elargis)){
+	if(!is_array($tables_principales['spip_auteurs_elargis'])){
+	die ("toto");
 	$spip_auteurs_elargis['id'] = "bigint(21) NOT NULL";
 	$spip_auteurs_elargis['id_auteur'] = "bigint(21) NOT NULL";
 	$spip_auteurs_elargis['`spip_listes_format`'] = "VARCHAR( 8 ) DEFAULT 'non' NOT NULL";
