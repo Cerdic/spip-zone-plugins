@@ -3,6 +3,7 @@
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('cfg_options');
 	include_spip('base/serial');
+	include_spip('base/abstract_sql');
 	
 	// a chaque validation de cfg, verifier l'etat de la table spip_auteurs_elargis	
 	if(_request('exec')=='cfg' and _request('cfg')=='inscription2'){
@@ -12,13 +13,15 @@
 	$GLOBALS['table_des_tables']['auteurs_elargis'] = 'auteurs_elargis';
 	global $tables_principales;
 	$table_nom = "spip_auteurs_elargis";
+	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
 		$cle = ereg_replace("_(fiche|table).*", "", $cle);
-		if($val!='' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_rel'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle) ){
+		if($val!='' and $cle != 'nom' and $cle != 'statut' and $cle != 'email' and $cle != 'username' and $cle != 'statut_rel'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle) ){
 			if($cle == 'naissance' )
 				$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 			else
 				$spip_auteurs_elargis[$cle] = "text NOT NULL";
+			$var_user[$cle] = ' ';
 		}
 	}
 	
@@ -31,7 +34,16 @@
 	
 	$tables_principales['spip_auteurs_elargis']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
 	$tables_principales['spip_pays']  =	array('field' => &$spip_pays, 'key' => &$spip_pays_key);
-
+	
+	if(is_array($var_user) and isset($GLOBALS['auteur_session']['id_auteur'])){
+		$id = $GLOBALS['auteur_session']['id_auteur'];
+		$query = spip_query("select ".join(', ', array_keys($var_user))." from spip_auteurs_elargis where id_auteur = $id");
+		$query = spip_fetch_array($query);
+		/*var_dump($query);
+		exit;*/
+		$GLOBALS['auteur_session'] = array_merge($query,$GLOBALS['auteur_session'] );
+		
+	}
 	
 # autoriser les visiteurs a modifier leurs infos
 #define ('_DEBUG_AUTORISER', true);
