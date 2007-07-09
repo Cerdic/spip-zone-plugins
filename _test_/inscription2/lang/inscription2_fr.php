@@ -134,7 +134,9 @@ L\'&eacute;quipe de @nom_site@',
 'auteur' => 'Auteur',
 'aconfirmer' => 'A confirmer',
 'statut' => 'Statut',
-'infos_adherent' => 'Informations suppl&eacute;mentaires'
+'infos_adherent' => 'Informations suppl&eacute;mentaires',
+'visiteur' => 'Visiteur',
+'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents'
 
 );
 
