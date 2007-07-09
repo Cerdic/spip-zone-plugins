@@ -1,0 +1,109 @@
+<div class="formulaire_spip formulaire_article">
+<form action="#formulaire_article" method="post" name="formulaire_article" id="formulaire_article">
+	[(#ENV*{previsu})]
+	<fieldset>
+	<legend><:dates:></legend>
+		<p><:dates_obligatoires:></p>
+		<input class="fondl" type="hidden" name="id_rubrique" value="9" size="50"></input>
+
+		<BOUCLE_id_article(ARTICLES){statut==prop|publie|poubelle|prepa|refuse}{tout}{par id_article}{inverse}{0,1}>
+		[<input class="fondl" type="hidden" name="id_article" value="(#ID_ARTICLE)" size="50"></input>]
+		</BOUCLE_id_article>
+
+<input type="hidden" name="date_modif" value="[(#ENV{date})]" />
+
+<label><:debut:></label>
+
+<input name="date1" id="date1" value="[(#ENV{date1})]" type="text" class="fondl" /> - [(#ENV*{heure_debut})] [(#ENV*{minute_debut})]
+
+<br />
+
+<label><:fin:></label>
+<input name="date2" id="date2" value="[(#ENV{date2})]" type="text" class="fondl" /> - [(#ENV*{heure_fin})] [(#ENV*{minute_fin})]
+
+</fieldset>
+
+<fieldset>
+	<legend><:localisation_type:></legend>
+	<div>
+		<label><:info_multi_cet_article:></label>
+		<select name="var_lang" class="fondl" >
+		[(#ENV*{langues})]
+		</select>
+
+		<br /><br />
+		<label><:forme_event:> [Obligatoire]</label><br />
+		<select name="mot_cle" class="fondl" >
+		<BOUCLE_mot_sel(MOTS){id_mot=#ENV{mot_cle}}{par titre}{doublons mot_sel}>
+		<option value="#ID_MOT" selected="selected">#TITRE</option>
+		</BOUCLE_mot_sel>
+		<BOUCLE_mot(MOTS){id_groupe=6}{id_mot!=40}{id_mot!=48}{par titre}{doublons mot_sel}>
+		<option value="#ID_MOT">#TITRE</option>
+		</BOUCLE_mot>
+		</select>
+		<br /><br />
+		
+		<label><:localisation:></label><br />
+		<select id="touspays" name="pays" class="fondl" onfocus="setpays()" onblur="showvillesByPays(whichPays())" onchange="showvillesByPays(whichPays())">
+		<option><:pays:></option>
+		<BOUCLE_mot_selpays(MOTS){id_mot=#ENV{pays}}{par titre}>
+		<option value="#ID_MOT" selected="selected">#TITRE</option>
+		</BOUCLE_mot_selpays>
+		</select><br />
+		
+		<select id="toutesvilles" name="ville" class="fondl" onblur="showstructuresByVille(whichVille())" onchange="showstructuresByVille(whichVille())">
+		<option><:ville:></option>
+		<BOUCLE_mot_selville(MOTS){id_mot=#ENV{ville}}{par titre}>
+		<option value="#ID_MOT" selected="selected">#TITRE</option>
+		</BOUCLE_mot_selville>
+		</select><br />
+
+		<select id="toutesstructures" name="structure" class="fondl">
+		<option><:structure:></option>
+		<BOUCLE_mot_selstructure(MOTS){id_mot=#ENV{structure}}{par titre}>
+		<option value="#ID_MOT" selected="selected">#TITRE</option>
+		</BOUCLE_mot_selstructure>
+		</select>
+</div>	
+	</fieldset>
+
+<br style="clear:both" />
+
+<fieldset>
+	<legend><:votre_article:></legend>
+	<div>
+		<label><:texte_titre_obligatoire:></label>
+		<input class="forml" type="text" id="titre" name="titre" value="[(#ENV*{titre})]" size="50"></input>
+
+		<br /><br />
+
+		<input class="forml" name="descriptif" type="hidden">[(#ENV*{descriptif})]</input>
+
+		<label><:info_lieu:></label>
+		<textarea id="chapo" name="chapo" style="width:90%;margin:0 auto">[(#ENV*{chapo})]</textarea>
+		<br /><br />
+		<label><:info_texte:></label><br />
+        	<textarea id="texte" name="texte" style="width:90%;margin:0 auto">[(#ENV*{texte})]</textarea>
+
+		<input class="forml" name="ps" type="hidden">[(#ENV*{ps})]</input><br />
+</div>
+	</fieldset>
+
+	<fieldset>
+	<legend><:entree_infos_perso:></legend>
+	<div>
+		<label><:form_pet_votre_nom:></label>
+		[(#ENV{nom_auteur_session})]
+		<input class="forml" type="hidden" name="nom_auteur_session" value="[(#ENV{nom_auteur_session})]" size="50"></input><br />
+
+		<label><:form_pet_votre_email:></label>
+		[(#ENV{email_auteur_session})]
+		<input class="forml" type="hidden" name="email_auteur_session" value="[(#ENV{email_auteur_session})]" size="50"></input><br />
+	</div>
+	</fieldset>
+	<br />
+
+<div style="float:right"><input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" /></div>
+</form>
+<br />
+</div>

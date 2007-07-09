@@ -1,0 +1,51 @@
+<BOUCLE_article_principal(ARTICLES) {id_document}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>Sklunk <BOUCLE_aut(AUTEURS){id_article}>[- (#NOM)]</BOUCLE_aut> - [(#TITRE|textebrut|couper{50})]</title>
+
+<meta name="generator" content="SPIP #SPIP_VERSION" />
+<meta name="publisher" content="Sklunk.net" />
+<meta name="copyright" content="Sklunk.net" />
+<meta name="keywords" content="sklunk, [(#EXTRA|extra{keyword})]" />
+<meta name="description" content="[(#INTRODUCTION|texte_backend|couper{196})]" />
+<meta name="identifier-url" content="#URL_SITE_SPIP" />
+<meta name="robot" content="follow, index, all" />
+<meta name="expires" content="never" />
+<meta name="document-class" content="Published" />
+<meta name="document-rights" content="Copywritten Work" />
+<meta name="document-type" content="Public" />
+<meta name="document-distribution" content="Global" />
+<meta name="revised" content="<BOUCLE_auteur_header(AUTEURS){id_article}>#NOM</BOUCLE_auteur_header>, [(#DATE_MODIF|mois)]/[(#DATE_MODIF|jour)]/[(#DATE_MODIF|annee)]" />
+<meta name="reply-to" content="#EMAIL_WEBMASTER" />
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{images/favicons/favicon.ico})" />]
+[<link rel="icon" type="image/png" href="(#CHEMIN{images/favicons/favicon.png})" />]
+
+#INSERT_HEAD
+<script type="text/javascript" src="#CHEMIN{javascript/thickbox.js}"></script>
+<link rel='stylesheet' media='print, projection, screen, tv' type='text/css' href='#CHEMIN{thickbox.css}' />
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#footer, .fragment-menu, #nav-rapide').css('opacity',0.7);
+	TB_chemin_close = 'http://www.sklunk.net/plugins/thickbox2/close.gif';
+	TB_show('','<BOUCLE_afficher_document(DOCUMENTS){id_article}{0,1}{extension==(png|jpg|gif)$}>#FICHIER</BOUCLE_afficher_document>','')
+});
+</script>
+
+<link rel='stylesheet' media='print, projection, screen, tv' type='text/css' href='#CHEMIN{css/sklunk.css}' />
+<link rel='stylesheet' media='print, projection, screen, tv' type='text/css' href='spip.php?page=styles_sklunk_carte_auto' />
+</head>
+
+<body>
+
+<div style="margin:200px auto;width:600px;background:transparent">
+[<a style="margin:0 auto"><a href="#URL_SITE_SPIP" title="#NOM_SITE_SPIP">(#NOM_SITE_SPIP|image_typo{police=Eurosti.ttf, couleur=ffffff, taille=100, align=center,largeur=600px})</a></h1>]
+</div>
+
+<INCLURE {fond=footer}{lang}>
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+</body>
+</html>
+</BOUCLE_article_principal>
