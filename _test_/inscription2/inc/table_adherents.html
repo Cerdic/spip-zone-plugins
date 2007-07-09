@@ -140,6 +140,11 @@ font-size:11px;
 padding:3px;
 }
 
+tr.row { background:#FFF8DC; }
+tr.even { background:#AFF5DF; }
+
+td {padding:3px}	
+	
 </style>
 
 <script src="#CHEMIN{javascript/jqModal.js}" type="text/javascript"></script>
@@ -176,7 +181,7 @@ $().ready(function() {
 <div style="margin-top : 15pt; margin-left : 15pt; font-size: 8pt;">
 
 <div style="float:left; ">
-	<div style="width:150pt; text-align: left; border-width:1; border-color:black; border-style :groove; background-color : #E0E0E0 ;" >
+	<div class="cadre-r" style="width:150pt; text-align: left; background-color : #E0E0E0 ;margin-top:5px;padding:5px" >
 		<strong><:inscription2:raccourcis:></strong>
 		<ul style='text-align: left; list-style-type:none'>
 			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
@@ -190,7 +195,7 @@ $().ready(function() {
 		<?php
 		if(defined('_DIR_PLUGIN_ABONNEMENT')){
 		?>
-	<div style="width:150pt; text-align: left; border-width:1; border-color:black; border-style :groove; background-color : #E0E0E0 ;margin-top:5px" >
+	<div class="cadre-r" style="width:150pt; text-align: left; background-color : #E0E0E0 ;margin-top:5px;padding:5px" >
 		<strong>Abonnements</strong>
 		<ul style='text-align: left; list-style-type:none'>
 		<li><a href="?exec=abonnement_tous">Abonnements</a></li>
@@ -198,6 +203,18 @@ $().ready(function() {
 		<li><a href="?exec=abonnement_alertes">Alertes</a></li>
 		</ul>
 	</div>
+	
+	<style>
+	tr.prospect { background:#F0DCF4; }
+	tr.abonne { background:#DCF3F4; }
+	tr.relance { background:#AFF5DF; }
+	tr.relance2 { background:#AFF5DF; }
+	tr.relance3 { background:#AFF5DF; }
+	tr.relance4 { background:#AFF5DF; }
+	tr.sorti { background:#E6EAC9; }
+	tr.erreur_bank { background:#FFF8DC; }
+	</style>
+	
 		<?php
 		}
 		?>
@@ -316,7 +333,7 @@ $().ready(function() {
 	
 	</div>
 
-	<table style="clear:right;border-width:1; border-color:black; border-style :groove; margin-left:10pt;">
+	<table class="cadre-r" style="clear:right; margin-left:10pt;padding:5px">
 	<tr style="background-color : #E0E0E0 ;">
 	<?php
 		
@@ -367,7 +384,16 @@ $().ready(function() {
 	
 	$i=0;
 	while ($data = spip_fetch_array($query)) {	
-		echo '<tr>';
+		
+		//switch statut
+		if($i%2 == 0){
+		 $class='row';
+		 } 
+		 else {
+		 $class='even';
+		 }
+		
+		echo '<tr class="'.$class.'">';
 		
 		if(!empty($data['id_auteur']))
 			echo '<td>'.$data['id_auteur'].'</td>';
@@ -420,7 +446,7 @@ $().ready(function() {
 		else 
 			echo '<td><a href="?exec=inscription2_adherents" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/interdit-12.gif" title="'._T('inscription2:supprimer_adherent').'"></a></td>';
 		echo '</tr>';
-		
+	$i++;	
 	}
 	?>
 	</table>	
