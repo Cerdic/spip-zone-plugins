@@ -94,7 +94,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
         return;
       }
       jQuery(this)
-      .find('.crayon-icones span')
+      .find('>span.crayon-icones span')
       .append(configCrayons.mkimg('searching')); // icone d'attente
       var me=this;
       var params = {
@@ -135,7 +135,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
           jQuery(me)
           .css('visibility','hidden')
           .addClass('crayon-has')
-          .find('.crayon-icones')
+          .find('>.crayon-icones')
             .attr('rel','crayon_'+id_crayon);
           var pos = jQuery(me).offset({'scroll':false});
           jQuery('<div class="crayon-html" id="crayon_'+id_crayon+'"></div>')
