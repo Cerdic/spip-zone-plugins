@@ -1,0 +1,62 @@
+[(#REM) titre=Configuration de SPIP.ICIO.US]
+
+<!-- descriptif=
+
+Ce plugin permet d'ajouter ais&eacute;ment des tags aux articles.
+-->
+
+#CACHE{0}
+
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<br />
+
+[(#REM) ------------------------ MANIERE D'INSERTION DU FORMULAIRE) ------------------------ ]
+
+<br />
+
+<strong><:spipicious:types_utilisateurs:></strong>
+<br />
+
+<label for="people">
+#SET{selected,#CONFIG{spipicious/people,'',''}}
+#SET{0minirezo,0minirezo}
+#SET{1comite,1comite}
+#SET{6forum,6forum}
+
+<select name="people[]" multiple="multiple" size="3" id="people">
+	<option value="0minirezo"[(#GET{0minirezo}|in_array{#GET{selected}}|?{ selected="selected"})]>
+	<:spipicious:administrateurs:></option>
+	<option value="1comite"[(#GET{1comite}|in_array{#GET{selected}}|?{ selected="selected"})]>
+	<:spipicious:redacteurs:>
+	</option>
+	<option value="6forum"[(#GET{6forum}|in_array{#GET{selected}}|?{ selected="selected"})]>
+	<:spipicious:visiteurs:>
+	</option>
+</select>
+
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#people').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a></small><br />
+</label>
+<br /><br />
+
+<strong><:spipicious:nom_groupe_tag:></strong>
+<br />
+<select name="groupe_mot" id="groupe_mot" class="formo">
+	<option [value="(#ENV{groupe_mot}|?{#ENV{groupe_mot},- tags -})"] selected>[(#ENV{groupe_mot}|?{#ENV{groupe_mot},'- tags -'})]</option>
+	<BOUCLE_gpemots(GROUPES_MOTS){titre != (#ENV{groupe_mot}|?{#ENV{groupe_mot},- tags -})}{par multi titre}>
+	<option value="#TITRE">#TITRE</option>
+	</BOUCLE_gpemots>
+</select>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+
+</div>
+<br style="clear:both" />
+</form>

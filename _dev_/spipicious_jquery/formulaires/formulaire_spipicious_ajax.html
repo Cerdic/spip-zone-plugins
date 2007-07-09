@@ -1,21 +1,18 @@
-#CACHE{0}
+[(#SET{groupe_mot,#CONFIG{spipicious/groupe_mot}})]
+
 <div id="form_spipicious_ajax">
-<BOUCLE_groupes(GROUPES_MOTS){titre == '- tags -'}>
 	<form action="" method="post">
-		<fieldset class='spip_encadrer'>
-
+		<fieldset>
 		<legend><:spipicious:add_tags:></legend>
-
+<BOUCLE_groupes(GROUPES_MOTS){titre == #GET{groupe_mot}}>
 		<input type="hidden" id="select_groupe" name="select_groupe" value="#ID_GROUPE" />
-		<input type="hidden" id="type_groupe" name="type_groupe" value="#TYPE" />
-	
+		<input type="hidden" id="type_groupe" name="type_groupe" value="#TITRE" />
+</BOUCLE_groupes>
 		<label for="tags">Tags:</label>
 		<input type="text" id="tags" name="tags" size="40" value="" /><br />
 
-		<input type="hidden" name="id_article" id="spipicious_id" value="#ENV{id}" />
+		<input type="hidden" name="spipicious_id" id="spipicious_id" value="#ENV{id}" />
 		<input type="submit" class="spip_bouton" name="add_tags" value="<:bouton_valider:>" />
 		</fieldset>
 	</form>
-
-</BOUCLE_groupes>
 </div>
