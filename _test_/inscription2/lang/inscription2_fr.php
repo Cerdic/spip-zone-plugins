@@ -136,7 +136,9 @@ L\'&eacute;quipe de @nom_site@',
 'statut' => 'Statut',
 'infos_adherent' => 'Informations suppl&eacute;mentaires',
 'visiteur' => 'Visiteur',
-'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents'
+'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
+'pays' => 'Pays',
+'commentaire' => 'Commentaire'
 
 );
 
