@@ -130,8 +130,10 @@ function cryptage() {
 .infos-auteurs > div{height:35px;clear:both;padding:5px}
 .infos-auteurs label{display:block;float:left}
 .inscription2 h2 {margin:10px 0px}
-div.error{background-color:#ffe2e2}
+.inscription2 div {margin:10px 0px; float: none;clear:both}
+ div.error{background-color:#ffe2e2}
 label.error{font-size:0.7em;color:red;display:block;clear:both}
+select.formo{width:auto; float:left;margin:1px;}
 </style>
 
 [<div>(#ENV*{message})</div>]
@@ -141,9 +143,7 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 
 <div class="inscription2" [style="(#ENV{commentaires}|=={1}|?{display: block;, display:none;})"]>
 
-<h2><:inscription2:formulaire_inscription:></h2>
-
-<form method="post" action="#SELF" name="inscription" id="inscription" >
+<form method="post" action="#SELF" name="inscription" id="inscription">
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 <fieldset>
@@ -158,31 +158,31 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
 <div>
 	<label for="nom"><strong><:inscription2:nom:></strong></label><br />
-	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
+	<input type="text" name="nom" id="nom" value="#ENV{nom}" class="formo"/>
 </div>
 ]
 [(#CONFIG{inscription2/prenom}|=={on}|?{' ', ''})	
 <div>
 	<label for="prenom"><strong><:inscription2:prenom:></strong></label><br />
-	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" />
+	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" class="formo"/>
 </div>
 ]
 [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
 <div>
 	<label for="username"><strong><:inscription2:username:></strong></label><br />
-	<input type="text" name="username" id="username" value="#ENV{login}" />
+	<input type="text" name="username" id="username" value="#ENV{login}" class="formo"/>
 </div>]
 
 <div>
 	<label for="pass1"><strong><:pass_choix_pass:></strong><br />
-	<input type='password' name='pass1' id='pass1'></label><br /><br />
+	<input type='password' name='pass1' id='pass1' class="formo"></label><br />
 	<label for="pass2"><strong><:inscription2:redemande_password:></strong><br />
-	<input type='password' name='pass2' id='pass2'></label><br />
-	<input type='password' name='pass' id='pass' style="display:none;"><br />
+	<input type='password' name='pass2' id='pass2' class="formo"></label><br />
+	<input type='password' name='pass' id='pass' style="display:none;">
 </div>
 	
-<div><label for='statut'><strong><:inscription2:statut:></strong><br />
-	<select name="statut" id="statut">
+<div style="float:none;"><label for='statut'><strong><:inscription2:statut:></strong><br />
+	<select name="statut" id="statut" class="formo">
 	<option value='0minirezo'><:info_administrateur:></option>
 	<option value='1comite'><:inscription2:auteur:></option>
 	<option value='6forum'><:info_visiteur_1:></option>.
@@ -191,16 +191,16 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 </div>
 
 [(#CONFIG{inscription2/naissance}|=={on}|?{' ',''})
-<div>
-	<label><strong><:inscription2:naissance:></strong></label><br />
-	<div>
-	<select name="jour" id="jour">
+<div style="float:none;">
+	<label><strong><:inscription2:naissance:></strong></label>
+	<span>
+	<select name="jour" id="jour" class="formo">
 	<?php
 	for ($i=1;$i<=31;$i++)
 		echo "<option>$i</option>\n";
 	?>
 	</select> 
-	<select name="mois" id="mois">
+	<select name="mois" id="mois" class="formo">
 	<option value='01'><:inscription2:janvier:></option>
 	<option value='02'><:inscription2:fevrier:></option>
 	<option value='03'><:inscription2:mars:></option>
@@ -214,32 +214,32 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 	<option value='11'><:inscription2:novembre:></option>
 	<option value='12'><:inscription2:decembre:></option>
 	</select>
-	<select name="annee" id="annee">
+	<select name="annee" id="annee" class="formo">
 	<?php
 	$today_year=date('Y');
 	for ($i=$today_year;$i>=$today_year-100;$i--)
 		echo "<option>$i</option>\n";
 	?>
 	</select>
-	</div><br />
+	</span><br />
 </div>]
 
 [(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})
 <div>
 	<label for="adresse"><strong><:inscription2:adresse:></strong><br /></label>
-	<input type="textarea" name="adresse" id="adresse" [value="(#CONFIG{inscription2adresse}|=={on}|?{#ENV{adresse}, ''})"]/><br />
+	<textarea name="adresse" id="adresse" class="formo">#ENV{adresse}</textarea>
 </div>]
 
 [(#CONFIG{inscription2/code_postal}|=={on}|?{' ', ''})
 <div>
 	<label for="code_postal"><strong><:inscription2:code_postal:></strong><br /></label>
-	<input type="text" name="code_postal" id="code_postal" [value="(#CONFIG{inscription2/code_postal}|=={on}|?{#ENV{code_postal}, ''})"]/>
+	<input type="text" name="code_postal" id="code_postal" class="formo" value="#ENV{code_postal}"/>
 </div>]
 
 [(#CONFIG{inscription2/ville}|=={on}|?{' ', ''})
 <div>
 	<label for="ville"><strong><:inscription2:ville:></strong><br /></label>
-	<input type="text" name="ville" id="ville" [value="(#CONFIG{inscription2/ville}|=={on}|?{#ENV{ville}, ''})"]/>
+	<input type="text" name="ville" id="ville"  class="formo" value="#ENV{ville}"/>
 </div>]
 
 [(#CONFIG{inscription2/pays}|=={on}|?{' ', ''})	
@@ -253,55 +253,55 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 [(#CONFIG{inscription2/email}|=={on}|?{' ', ''})
 <div>
 	<label for="email"><strong><:inscription2:email:></strong></label><br />
-	<input type="text" name="email" id="email" [value="(#CONFIG{inscription2/email}|=={on}|?{#ENV{email}, ''})"] /><br />
+	<input type="text" name="email" id="email" class="formo" value="#ENV{email}"/>
 </div>]
 
 [(#CONFIG{inscription2/telephone}|=={on}|?{' ', ''})
 <div>
 	<label for="telephone"><strong><:inscription2:telephone:></strong><br /></label>
-	<input type="text" name="telephone" id="telephone" [value="(#CONFIG{inscription2/telephone}|=={on}|?{#ENV{telephone}, ''})"] />
+	<input type="text" name="telephone" id="telephone" class="formo" value="#ENV{telephone}"/>
 </div>]
 
 [(#CONFIG{inscription2/fax}|=={on}|?{' ', ''})
 <div>
 	<label for="fax"><strong><:inscription2:fax:></strong><br /></label>
-	<input type="text" name="fax" id="fax" [value="(#CONFIG{inscription2/fax}|=={on}|?{#ENV{fax}, ''})"]/>
+	<input type="text" name="fax" id="fax" class="formo" value="#ENV{fax}"/>
 </div>]
 
 [(#CONFIG{inscription2/mobile}|=={on}|?{' ', ''})
 <div>
 	<label for="mobile"><strong><:inscription2:mobile:></strong><br /></label>
-	<input type="text" name="mobile" id="mobile" [value="(#CONFIG{inscription2/mobile}|=={on}|?{#ENV{mobile}, ''})"]/>
+	<input type="text" name="mobile" id="mobile" class="formo" value="#ENV{mobile}"/>
 </div>]
 
 [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
 <div>
 	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
-	<input type="text" name="profession" id="profession" [value="(#CONFIG{inscription2/profession}|=={on}|?{#ENV{profession}, ''})"] />
+	<input type="text" name="profession" id="profession" class="formo" value="#ENV{profession}"/>
 </div>]
 
 [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})
 <div>
 	<label for="societe"><strong><:inscription2:societe:></strong><br /></label>
-	<input type="text" name="societe" id="societe" [value="(#CONFIG{inscription2/societe}|=={on}|?{#ENV{societe}, ''})"] />
+	<input type="text" name="societe" id="societe" class="formo" value="#ENV{societe}"/>
 </div>]
 
 [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''})
 <div>
 	<label for="secteur"><strong><:inscription2:secteur:></strong></label>
-	<input type="text" name="secteur" id="secteur" value="#ENV{secteur}" />
+	<input type="text" name="secteur" id="secteur" class="formo" value="#ENV{secteur}"/>
 </div>
 ]
 [(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''})
 <div>
 	<label for="fonction"><strong><:inscription2:fonction:></strong></label>
-	<input type="text" type="text" name="fonction" id="fonction" value="#ENV{fonction}" />
+	<input type="text" name="fonction" id="fonction" class="formo" value="#ENV{fonction}"/>
 </div>
 ]
 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
 <div >
 	<label><strong><:inscription2:commentaire:></strong></label><br />
-	<textarea name="commentaire" id="commentaire">#ENV{commentaire}</textarea>	
+	<textarea name="commentaire" id="commentaire" class="formo">#ENV{commentaire} </textarea>	
 </div>
 ]
 
@@ -318,13 +318,13 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
 <div >
 	<label><strong><:inscription2:divers:></strong></label><br />
-	<textarea name="divers" id="divers">#ENV{divers}</textarea>	
+	<textarea name="divers" id="divers" class="formo">#ENV{divers}</textarea>	
 </div>
 ]
 [(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
 <div>
 	<strong><:inscription2:publication:></strong>
-	<input type="checkbox" style="display:inline;float:none;width:15px" name="publication" id="publication" value="#ENV{publication}" />
+	<input type="checkbox" style="display:inline;float:none;width:15px" class="formo" name="publication" id="publication" value="#ENV{publication}" />
 </div>
 ]
 [(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})
@@ -362,7 +362,7 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 				<div  class="grand_select">
 				<p><strong><:inscription2:domaine:></strong></p>
 				<:inscription2:choix_domaine:>
-				<select id="domaines" name="domaines">';
+				<select id="domaines" name="domaines" class="formo">';
 		foreach($domaine as $cle => $value)
 				echo '<option value= '.$cle.'>'.$cle.'</option>';
 		echo '	</select>

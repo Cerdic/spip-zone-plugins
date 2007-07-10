@@ -1,4 +1,7 @@
-<div style="text-align: left; border-width:1; border-color:black; border-style :groove; background-color : #E0E0E0 ; " >
+<?php
+	debut_boite_info();
+?>
+<div>
 	<strong><:inscription2:raccourcis:></strong>
 	<ul style='text-align: left; '>
 		<li><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
@@ -6,6 +9,11 @@
 	</ul>
 </div>
 <?php
-debut_droite();
+	fin_boite_info();
+	debut_droite();
+	debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', $return = false, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
 ?>
 	#FORMULAIRE_INSCRIPTION2_PASS
+<?php
+	fin_cadre_sous_rub();
+?>
