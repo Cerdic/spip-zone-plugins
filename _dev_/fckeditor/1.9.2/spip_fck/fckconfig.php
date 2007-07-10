@@ -15,7 +15,7 @@
 	 FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
     FCKConfig.Plugins.Add( "tablecommands", null, "' . $_GET['path'] . '/fckeditor/editor/plugins/" ) ;		
     FCKConfig.Plugins.Add( "notebasdepage", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
-    FCKConfig.Plugins.Add( "geshighlighter", "en,nl,fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
+    //FCKConfig.Plugins.Add( "geshighlighter", "en,nl,fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
     FCKConfig.Plugins.Add( "coloration", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
 		
 		

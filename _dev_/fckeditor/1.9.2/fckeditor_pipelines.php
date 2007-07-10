@@ -46,7 +46,7 @@ function fckeditor_header_prive($flux) {
 			oFCKeditor.Config["CustomConfigurationsPath"] = "'._DIR_PLUGIN_ABS_FCKEDITOR.'/spip_fck/fckconfig.php?path='._DIR_PLUGIN_ABS_FCKEDITOR.'&" + ( new Date() * 1 ) ;
 			oFCKeditor.Config[ "AutoDetectLanguage" ] = false ;
 			oFCKeditor.Config[ "DefaultLanguage" ] = "'.$langue.'" ;
-      oFCKeditor.ToolbarSet = "BarreArticle";			
+         oFCKeditor.ToolbarSet = "BarreArticle";			
 			oFCKeditor.ReplaceTextarea();
 		';
 	}
@@ -66,7 +66,7 @@ function fckeditor_header_prive($flux) {
 			oFCKeditor.Config["CustomConfigurationsPath"] = "'._DIR_PLUGIN_ABS_FCKEDITOR.'/spip_fck/fckconfig.php?path='._DIR_PLUGIN_ABS_FCKEDITOR.'&" + ( new Date() * 1 ) ;
 			oFCKeditor.Config[ "AutoDetectLanguage" ] = false ;
 			oFCKeditor.Config[ "DefaultLanguage" ] = "'.$langue.'" ;
-      oFCKeditor.ToolbarSet = "BarreBreve";			
+         oFCKeditor.ToolbarSet = "BarreBreve";			
 			oFCKeditor.ReplaceTextarea();
 		';
 	}	
