@@ -143,7 +143,9 @@ padding:3px;
 tr.row { background:#FFF8DC; }
 tr.even { background:#AFF5DF; }
 
-td {padding:3px}	
+td {padding:3px}
+
+a:hover{font-weight:bold;}
 	
 </style>
 
@@ -181,21 +183,25 @@ $().ready(function() {
 <div style="margin-top : 15pt; margin-left : 15pt; font-size: 8pt;">
 
 <div style="float:left; ">
-	<div class="cadre-r" style="width:150pt; text-align: left; background-color : #E0E0E0 ;margin-top:5px;padding:5px" >
+	<?php
+	debut_boite_info();
+	?>
+	<div id='raccourcis' style="width:150pt; text-align: left; margin-top:5px;padding:5px" >
 		<strong><:inscription2:raccourcis:></strong>
 		<ul style='text-align: left; list-style-type:none'>
-			<li style="margin-top:5px"><a class ="cellule-h" href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
-			<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
-			<li style="margin-top:5px"><a class ="confirm cellule-h" href="?exec=inscription2_adherents&act=net"><:inscription2:nettoyer_tables:></a></li>
+			<li style="margin-top:5px"><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
+			<li style="margin-top:5px"><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
+			<li style="margin-top:5px"><a class ="confirm" href="?exec=inscription2_adherents&act=net"><:inscription2:nettoyer_tables:></a></li>
 		
 		</ul>
 	</div>
 
-
-		<?php
+	<?php
+		fin_boite_info();
 		if(defined('_DIR_PLUGIN_ABONNEMENT')){
-		?>
-	<div class="cadre-r" style="width:150pt; text-align: left; background-color : #E0E0E0 ;margin-top:5px;padding:5px" >
+		debut_boite_info();
+	?>
+	<div style="width:150pt; text-align: left; margin-top:5px;padding:5px" >
 		<strong>Abonnements</strong>
 		<ul style='text-align: left; list-style-type:none'>
 		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=abonnement_tous">Abonnements</a></li>
@@ -215,9 +221,10 @@ $().ready(function() {
 	tr.erreur_bank { background:#FFF8DC; }
 	</style>
 	
-		<?php
+	<?php
+		fin_boite_info();
 		}
-		?>
+	?>
 
 
 	<div style="width:150pt; text-align: left;">

@@ -12,8 +12,7 @@ function exec_ajouter_adherent() {
 	}
 	
 	debut_page(_T('inscription2:gestion_adherents'), "", "");
-	debut_gauche();
-
+	
 	echo recuperer_fond('inc/nouveau_adherent');
 	
 	fin_page();
