@@ -19,7 +19,7 @@ function inscription2_verifier_base(){
 	
 	//ajout des index
 	$desc = spip_abstract_showtable($table_nom, '', false);
-	if($desc['key']['PRIMARY KEY']!='id'){
+	if(is_array($desc) and $desc['key']['PRIMARY KEY']!='id'){
 		spip_query("ALTER TABLE ".$table_nom." DROP PRIMARY KEY");
 		if(!isset($desc['fields']['id']))
 			spip_query("ALTER TABLE ".$table_nom." ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY");
@@ -67,13 +67,9 @@ function inscription2_verifier_base(){
 	
 	//les pays
 	include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-	$desc = spip_abstract_showtable('spip_pays', '', false);
-	if($desc['field']['pays']=='int NOT NULL') //bug de la version 0.4
-		spip_query("DROP TABLE spip_pays");
-	if(!$desc){
-		spip_query("CREATE TABLE spip_pays (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, pays text NOT NULL );");
-		spip_query("INSERT INTO spip_pays (pays) VALUES (\"".join('"), ("',$liste_pays)."\")");
-	}
+	spip_query("DROP TABLE spip_pays");
+	spip_query("CREATE TABLE spip_pays (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, pays text NOT NULL );");
+	spip_query("INSERT INTO spip_pays (pays) VALUES (\"".join('"), ("',$liste_pays)."\")");
 	ecrire_meta('inscription2_version',$version_base);
 	ecrire_metas();
 }
