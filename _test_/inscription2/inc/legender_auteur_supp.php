@@ -98,7 +98,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 				else 
 					$corps_supp .= "<option value='$cle'>$val</option>";
 			}$corps_supp .= "</select>";
-		}elseif($cle!= 'id_auteur')
+		}elseif($cle!= 'id_auteur' and $cle != 'statut')
 		$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
 		. "<input type='text' name='$cle' class='formo' value='$val'><br />"; 
 	}

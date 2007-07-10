@@ -138,7 +138,9 @@ L\'&eacute;quipe de @nom_site@',
 'visiteur' => 'Visiteur',
 'exp_statut' => 'Choisissez le statut que vous voulez attribuer aux nouveaux adh&eacute;rents',
 'pays' => 'Pays',
-'commentaire' => 'Commentaire'
+'commentaire' => 'Commentaire',
+'validite' => 'Date de validit&eacute;',
+'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;'
 
 );
 

@@ -41,15 +41,18 @@ function inscription2_verifier_base(){
 	if (is_array(lire_config('inscription2'))){
 		foreach(lire_config('inscription2') as $cle => $val) {
 			$cle = ereg_replace("_(fiche|table).*$","", $cle);
-			if($val!='' and !isset($desc['field'][$cle])  and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'naissance' and $cle != 'pays' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle)){
-				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
-				$desc['field'][$cle] = "TEXT NOT NULL";
-			}if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance'){
+			if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance'){
 				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
 				$desc['field'][$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
-			}if($val!='' and !isset($desc['field'][$cle]) and $cle == 'pays'){
+			}elseif($val!='' and !isset($desc['field'][$cle]) and $cle == 'validite'){
+				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+				$desc['field'][$cle] = "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
+			}elseif($val!='' and !isset($desc['field'][$cle]) and $cle == 'pays'){
 				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." int NOT NULL");
 				$desc['field'][$cle] = " int NOT NULL";
+			}elseif($val!='' and !isset($desc['field'][$cle])  and $cle != 'statut' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle)){
+				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
+				$desc['field'][$cle] = "TEXT NOT NULL";
 			}
 		}
 	}

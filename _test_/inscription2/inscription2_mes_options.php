@@ -19,7 +19,11 @@
 		if($val!='' and $cle != 'nom' and $cle != 'statut' and $cle != 'email' and $cle != 'username' and $cle != 'statut_rel'  and $cle != 'accesrestreint' and !ereg("^(domaine|categories|zone|newsletter).*$", $cle) ){
 			if($cle == 'naissance' )
 				$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
-			else
+			elseif($cle == 'validite' )
+				$spip_auteurs_elargis[$cle] = "datetime DEFAULT '0000-00-00 00:00:00 NOT NULL";
+			elseif($cle == 'pays')
+				$spip_auteurs_elargis[$cle] = "int NOT NULL";
+			else	
 				$spip_auteurs_elargis[$cle] = "text NOT NULL";
 			$var_user[$cle] = ' ';
 		}

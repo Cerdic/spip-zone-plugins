@@ -440,16 +440,6 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<:inscription2:exp_divers:>
 </label>
 <br />
-<br />
-<div>
-	<strong><:inscription2:statut:></strong><br />
-	<:inscription2:exp_statut:><br />
-	<select name="statut" id="statut">
-		<option value='6forum'><:inscription2:visiteur:></option>
-		<option value='1comite'><:inscription2:auteur:></option>
-	</select>
-</div>
-<br />
 
 <div [style="(#CONFIG{plugin/SPIPLISTES}|?{display: block;, display:none;})"]>
 <label>
@@ -497,13 +487,30 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </legend>
 <p>
 <:inscription2:info_internes_desc:>
-<br /><br />
+<br />
+
+<div>
+	<strong><:inscription2:statut:></strong><br />
+	<:inscription2:exp_statut:><br />
+	<select name="statut" id="statut">
+		<option value='6forum'><:inscription2:visiteur:></option>
+		<option value='1comite'><:inscription2:auteur:></option>
+	</select>
+</div>
+<br />
 
 <label>
 	<input type="checkbox" name="creation" [checked="(#ENV{creation}?{checked})"] id="creation" />
 	<strong><:inscription2:creation:></strong>
 </label>
-<br />
+<br /><br />
+
+<label>
+	<input type="checkbox" name="validite" [checked="(#ENV{validite}?{checked})"] id="validite" />
+	<strong><:inscription2:validite:></strong><br />
+	<:inscription2:exp_validite:>
+</label>
+<br /><br />
 
 <div>
 <span>
@@ -515,7 +522,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<input type="text" name="statut_rel" id="statut_rel" style="[(#ENV{statut_relances}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_rel}">
 </span>
 </div>
-
+<br />
 <div [style="(#CONFIG{plugin/ACCESRESTREINT}|?{display: block;, display:none;})"]>
 <label>
 	<input type="checkbox" name="accesrestreint" onclick="showhide(this, '#zones')" [(#ENV{accesrestreint}|?{#CONFIG{plugin/ACCESRESTREINT}|?{checked="checked"}})] id="accesrestreint" />
