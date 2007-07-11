@@ -50,20 +50,35 @@ function typo_partout_insertion_in_body_prive ($texte)
 			".$activer_barre_rubriques.$activer_barre_mots.$activer_barre_configuration.$activer_barre_sites.$activer_barre_articles."
 			
 		});
-	</script><script type=\"text/javascript\" src=\"../dist/javascript/spip_barre.js\"></script>
+	</script>
 ";
 
-	$barre_temporaire = "
-		<div id=\"barre_typo_rubrique_texte\" style=\"display: none;\">".afficher_barre('document.formulaire_rubrique.texte')."</div>
-		<div id=\"barre_typo_rubrique_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire_rubrique.descriptif')."</div>		
-		<div id=\"barre_typo_mot_texte\" style=\"display: none;\">".afficher_barre('document.formulaire_mot.texte')."</div>
-		<div id=\"barre_typo_mot_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire_mot.descriptif')."</div>		
-		<div id=\"barre_typo_site_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire_site.descriptif')."</div>		
-		<div id=\"barre_typo_configuration_descriptif_site\" style=\"display: none;\">".afficher_barre('document.formulaire_configuration.descriptif_site')."</div>		
-		<div id=\"barre_typo_article_chapo\" style=\"display: none;\">".afficher_barre('document.formulaire.chapo')."</div>
-		
-	";
-
+	if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_typo_partout') == "on"))
+	{
+		$barre_temporaire = "<div id=\"barre_typo_rubrique_texte\" style=\"display: none;\">".afficher_barre('document.formulaire_rubrique.texte')."</div>
+		<div id=\"barre_typo_rubrique_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire_rubrique.descriptif')."</div>";
+	}
+	else if (($_GET['exec'] == "mots_edit")	&& (lire_config('typo_partout/mots_typo_partout') == "on"))	
+	{
+		$barre_temporaire = "<div id=\"barre_typo_mot_texte\" style=\"display: none;\">".afficher_barre('document.formulaire_mot.texte')."</div>
+		<div id=\"barre_typo_mot_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire_mot.descriptif')."</div>";
+	}		
+	else if (($_GET['exec'] == "sites_edit") && (lire_config('typo_partout/sites_typo_partout') == "on"))		
+	{
+		$barre_temporaire = "<div id=\"barre_typo_site_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire_site.descriptif')."</div>";		
+	}
+	else if (($_GET['exec'] == "configuration") && (lire_config('typo_partout/configuration_typo_partout') == "on")) 	
+	{
+		$barre_temporaire = "<div id=\"barre_typo_configuration_descriptif_site\" style=\"display: none;\">".afficher_barre('document.formulaire_configuration.descriptif_site')."</div>";		
+	}
+	else if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_typo_partout') == "on"))		
+	{
+		$barre_temporaire = "<div id=\"barre_typo_article_chapo\" style=\"display: none;\">".afficher_barre('document.formulaire.chapo')."</div>";
+	}	
+	else
+	{
+		$barre_temporaire = "";
+	}
 	return $ajout_texte.$texte.$barre_temporaire;
 	
 }
