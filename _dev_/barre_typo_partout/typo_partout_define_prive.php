@@ -9,11 +9,14 @@ function typo_partout_insertion_in_body_prive ($texte)
 		$(document).ready(function(){
 			
 			$('body.rubriques').find('.cadre-formulaire').find(\"form\").attr('name', 'formulaire');
+			$('body.mots').find('#page').find(\"form\").attr('name', 'formulaire');
 			$('#barre_typo_texte').insertBefore(\"textarea[@name=texte]\");
 			$('#barre_typo_descriptif').insertBefore(\"textarea[@name=descriptif]\");
 			
 			$('body.rubriques').find('.cadre-formulaire').find('#barre_typo_texte').css(\"display\",\"block\");
 			$('body.rubriques').find('.cadre-formulaire').find('#barre_typo_descriptif').css(\"display\",\"block\");
+			$('body.mots').find('.cadre-formulaire').find('#barre_typo_texte').css(\"display\",\"block\");
+			$('body.mots').find('.cadre-formulaire').find('#barre_typo_descriptif').css(\"display\",\"block\");
 		});
 	</script><script type=\"text/javascript\" src=\"../dist/javascript/spip_barre.js\"></script>
 ";
