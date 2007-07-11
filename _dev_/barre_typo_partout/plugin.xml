@@ -1,0 +1,45 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Barre typographique partout
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Arnault PACHOT 
+ 	[OpenStudio->http://www.openstudio.fr] - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, breves, sites.. etc) 
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+
+	</options>
+	<pipeline>
+  		<nom>body_prive</nom>
+  		<action>insertion_in_body_prive</action>
+  		<inclure>typo_partout_define_prive.php</inclure>
+ 	</pipeline>
+	<pipeline>
+  		<nom>header_prive</nom>
+  		<action>insertion_in_head_prive</action>
+  		<inclure>typo_partout_define_prive.php</inclure>
+ 	</pipeline>
+	
+
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	typo_partout
+	</prefix>
+
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
