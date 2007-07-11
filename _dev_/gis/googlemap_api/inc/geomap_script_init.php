@@ -8,6 +8,7 @@
  * (c) 2007 - Distribu’do baixo licencia GNU/GPL
  *
  */
+include_spip('inc/distant');
 
 function inc_geomap_script_init_dist(){
 	static $deja_insere = false;
