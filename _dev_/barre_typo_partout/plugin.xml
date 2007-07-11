@@ -13,7 +13,8 @@
 	test
 	</etat>
 	<description>
-	Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, breves, sites.. etc) 
+	Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, sites, mots clefs.. etc...),
+	 et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=typo_partout] 
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
