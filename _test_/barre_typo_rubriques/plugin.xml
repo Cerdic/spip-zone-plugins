@@ -1,13 +1,13 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Barre typographique pour les rubriques pour Spip 1.9.1
+	Barre typographique pour les rubriques pour Spip 1.9.2
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Arnault PACHOT 
  	[OpenStudio->http://www.openstudio.fr] - Licence GPL
 	</auteur>
 	<version>
-	1.5
+	2.0
 	</version>
 	<etat>
 	test
@@ -19,7 +19,16 @@
 	<options> <!-- fichier charge a chaque hit -->
 
 	</options>
-	
+	<pipeline>
+  		<nom>body_prive</nom>
+  		<action>insertion_in_body_prive</action>
+  		<inclure>define_prive.php</inclure>
+ 	</pipeline>
+	<pipeline>
+  		<nom>header_prive</nom>
+  		<action>insertion_in_head_prive</action>
+  		<inclure>define_prive.php</inclure>
+ 	</pipeline>
 	
 
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
