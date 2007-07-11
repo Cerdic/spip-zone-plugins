@@ -19,10 +19,11 @@
 	<p>couleur de la fenetre, valeurs possibles : antracite, bleu, gris, orange, rose ou vert<br/>
 	<input type="text" name="couleur_FenFlo" value="[(#CONFIG{FenFlo/couleur_FenFlo}|sinon{vert})]"></p>
 
-	<p>couleur de la bordure<br>
+	<p>couleur de la bordure (au format CSS)<br>
 	<input type="text" name="couleurbordure_FenFlo" value="[(#CONFIG{FenFlo/couleurbordure_FenFlo}|sinon{#6caf00})]"></p>
 
-	<p>div sur lequel sera utiliser la fenêtre<br/>
+	<p>élément au format jQuery sur lequel sera utilis&eacute; la fenêtre. 
+	exemple : #contenu (pour le div de id=contenu), .rubriques (pour le div de class=rubriques)...voir : http://docs.jquery.com <br/>
 	<input type="text" name="attribut_FenFlo" value="[(#CONFIG{FenFlo/attribut_FenFlo}|sinon{contenu})]"></p>
 
 	<p>autoriser la fermeture de la fenêtre<br/>
