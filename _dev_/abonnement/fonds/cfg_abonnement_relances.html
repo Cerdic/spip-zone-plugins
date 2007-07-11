@@ -1,0 +1,88 @@
+<!-- descriptif=
+
+<div style="width:150pt; text-align: left; margin-top:5px;padding:5px" >
+		<strong>Abonnements</strong>
+		<ul style='text-align: left; list-style-type:none'>
+		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=abonnement_tous">Abonnements</a></li>
+		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement_relances">Relances</a></li>
+		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement">Emails de confirmation</a></li>
+		</ul>
+</div>
+
+-->
+
+<!-- boite=Emails de relance-->
+
+<style>
+	.cadre-info {margin-bottom:10px}
+	.ajouter div {height:40px;padding:5px;clear:right}
+	.ajouter label {float:left;width:150px;font-weight:bold}
+	.ajouter input {float:right;width:250px}
+	.ajouter textarea {float:right;width:250px;height:100px}
+	.ajouter div.textarea {height:auto;padding:5px;margin-top:5px}
+</style>
+	
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset class="ajouter"><legend>Exp&eacute;diteur</legend>
+<div>
+<label>Nom expediteur</label>
+<input type="text" name="nom_envoi" value="#ENV{nom_envoi}"  />
+</div>
+<div>
+<label>Adresse email expediteur</label>
+<input type="text" name="email_envoi" value="#ENV{email_envoi}" />
+</div>
+</fieldset>
+<br />
+<fieldset class="ajouter"><legend>Email de relance avant &eacute;ch&eacute;ance 1</legend>
+<div>
+<label>Sujet</label>
+<input type="text" name="sujet_relance1" value="#ENV{sujet_relance1}" />
+</div>
+<div>
+<label>Texte</label>
+<textarea name="texte_relance1">[(#ENV{texte_relance1})]</textarea>
+</div>
+</fieldset>
+
+<fieldset class="ajouter"><legend>Email de relance avant &eacute;ch&eacute;ance 2</legend>
+<div>
+<label>Sujet</label>
+<input type="text" name="sujet_relance2" value="#ENV{sujet_relance2}" />
+</div>
+<div>
+<label>Texte</label>
+<textarea name="texte_relance2" >[(#ENV{texte_relance2})]</textarea>
+</div>
+</fieldset>
+
+<fieldset class="ajouter"><legend>Email de relance à &eacute;ch&eacute;ance</legend>
+<div>
+<label>Sujet</label>
+<input type="text" name="sujet_relance3" value="#ENV{sujet_relance3}" />
+</div>
+<div>
+<label>Texte</label>
+<textarea name="texte_relance3" >[(#ENV{texte_relance3})]</textarea>
+</div>
+</fieldset>
+
+<fieldset class="ajouter"><legend>Email de relance après &eacute;ch&eacute;ance</legend>
+<div>
+<label>Sujet</label>
+<input type="text" name="sujet_relance4" value="#ENV{sujet_relance4}" />
+</div>
+<div>
+<label>Texte</label>
+<textarea name="texte_relance4" >[(#ENV{texte_relance4})]</textarea>
+</div>
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<!--input type="submit" name="_cfg_delete" value="<:Supprimer:>" /-->
+</form>
+<!-- s:14:"activer_breves";s:3:"oui";s:22:"config_precise_groupes";s:3:"non";s:16:"mots_cles_forums";s:3:"non";s:17:"articles_surtitre";s:3:
+-->

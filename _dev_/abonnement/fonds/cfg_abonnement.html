@@ -1,0 +1,66 @@
+<!-- descriptif=
+
+<div style="width:150pt; text-align: left; margin-top:5px;padding:5px" >
+		<strong>Abonnements</strong>
+		<ul style='text-align: left; list-style-type:none'>
+		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=abonnement_tous">Abonnements</a></li>
+		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=abonnement_relances">Relances</a></li>
+		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement">Emails de confirmation</a></li>
+		</ul>
+</div>
+
+-->
+
+<!-- boite=Alertes envoy&eacute;es lors de l'abonnement-->
+
+
+<style>
+	.cadre-info {margin-bottom:10px}
+	.ajouter div {height:40px;padding:5px;clear:right}
+	.ajouter label {float:left;width:150px;font-weight:bold}
+	.ajouter input {float:right;width:250px}
+	.ajouter textarea {float:right;width:250px;height:100px}
+	.ajouter div.textarea {height:auto;padding:5px;margin-top:5px}
+</style>
+	
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset class="ajouter"><legend>Expediteur</legend>
+<div>
+<label>Nom expediteur</label>
+<input type="text" name="nom_envoi" value="#ENV{nom_envoi}"  />
+</div>
+<div>
+<label>Adresse email expediteur</label>
+<input type="text" name="email_envoi" value="#ENV{email_envoi}" />
+</div>
+</fieldset>
+<br />
+<fieldset class="ajouter"><legend>Mail de confirmation d'abonnement</legend>
+<div>
+<label>Sujet</label>
+<input type="text" name="sujet_ok" value="#ENV{sujet_ok}" size="50" />
+</div>
+<div>
+<label>Texte</label>
+<textarea name="texte_ok">[(#ENV{texte_ok})]</textarea>
+</div>
+</fieldset>
+
+<fieldset class="ajouter"><legend>Mail &eacute;chec d'abonnement</legend>
+<div>
+<label>Sujet</label>
+<input type="text" name="sujet_ko" value="#ENV{sujet_ko}" />
+</div>
+<div>
+<label>Texte</label>
+<textarea name="texte_ko" >[(#ENV{texte_ko})]</textarea>
+</div>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<!--input type="submit" name="_cfg_delete" value="<:Supprimer:>" /-->
+</form>
+<!-- s:14:"activer_breves";s:3:"oui";s:22:"config_precise_groupes";s:3:"non";s:16:"mots_cles_forums";s:3:"non";s:17:"articles_surtitre";s:3:
+-->
