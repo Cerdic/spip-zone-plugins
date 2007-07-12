@@ -1,4 +1,5 @@
-[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{inc/jqModal_confirm.css}|direction_css)"/>]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/jqModal_confirm.css}|direction_css)"/>]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)"/>]
 
 <script src="#CHEMIN{javascript/jqModal.js}" type="text/javascript"></script>
 <script type="text/javascript">
@@ -31,68 +32,45 @@ $().ready(function() {
 });
 </script>
 
-<div style="margin-top : 15pt; margin-left : 15pt; font-size: 8pt;">
+<div id="conteneur">
 
-<div style="float:left; ">
+<div id="menu">
+		
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	#INCLURE{fond=inc/menu_abonnement}	
+	]
+
 	<?php
 	debut_boite_info();
 	?>
-	<div id='raccourcis' style="width:150pt; text-align: left; margin-top:5px;padding:5px" >
+	<div class='raccourcis'>
 		<strong><:inscription2:raccourcis:></strong>
-		<ul style='text-align: left; list-style-type:none'>
-			<li style="margin-top:5px"><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
-			<li style="margin-top:5px"><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
-			<li style="margin-top:5px"><a class ="confirm" href="?exec=inscription2_adherents&act=net"><:inscription2:nettoyer_tables:></a></li>
+		<ul>
+			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
+			<li><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
+			<li><a class ="confirm" href="?exec=inscription2_adherents&act=net"><:inscription2:nettoyer_tables:></a></li>
 		
 		</ul>
 	</div>
-
 	<?php
-		fin_boite_info();
-		if(defined('_DIR_PLUGIN_ABONNEMENT')){
-		debut_boite_info();
+	fin_boite_info();
 	?>
-	<div style="width:150pt; text-align: left; margin-top:5px;padding:5px" >
-		<strong>Abonnements</strong>
-		<ul style='text-align: left; list-style-type:none'>
-		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=abonnement_tous">Abonnements</a></li>
-		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement_relances">Relances</a></li>
-		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement">Emails de confirmation</a></li>
-		</ul>
-	</div>
 	
-	<style>
-	tr.prospect { background:#F0DCF4; }
-	tr.abonne { background:#DCF3F4; }
-	tr.relance { background:#AFF5DF; }
-	tr.relance2 { background:#AFF5DF; }
-	tr.relance3 { background:#AFF5DF; }
-	tr.relance4 { background:#AFF5DF; }
-	tr.sorti { background:#E6EAC9; }
-	tr.erreur_bank { background:#FFF8DC; }
-	</style>
-	
-	<?php
-		fin_boite_info();
-		}
-	?>
-
-
-	<div style="width:150pt; text-align: left;">
-		<ul style='text-align: left;'>
+	<div class="legend">
+		
 		<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> Admin<br/>
 		<img src="#CHEMIN{'images/redac-12.gif'}" title="<:inscription2:fiche_adherent:>"> Auteur<br/>
 		<img src="#CHEMIN{'images/adherent-12.gif'}" title="<:inscription2:fiche_adherent:>"> Adherent<br/>
 		<img src="#CHEMIN{'images/aconf-12.gif'}" title="<:inscription2:fiche_adherent:>"> A confirmer<br/>
 		<img src="#CHEMIN{'images/defaut-12.gif'}" title="<:inscription2:fiche_adherent:>"> Autre<br/>
-		</ul>
+		
 	</div>
 	
 </div>	
 
-<div style="margin:0% 2% 2% 23%">
+<div id="principal">
 	<h2><strong><:inscription2:liste_adherents:></strong></h2>
-	<div style="margin:10px 0px;height:40px" >
+	<div id="tetiere" >
 		<div style="float:right" >
 		<form method="post" action="?exec=inscription2_adherents">
 		<input type="text" name="valeur" onfocus='this.value=""' size="10" value="<:info_rechercher:>">
@@ -192,8 +170,8 @@ $().ready(function() {
 	
 	</div>
 
-	<table class="cadre-r" style="clear:right; margin-left:10pt;padding:5px">
-	<tr style="background-color : #E0E0E0 ;">
+	<table class="cadre-r">
+	<tr>
 	<?php
 		
 	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'">ID</a></strong></td>';
@@ -310,7 +288,7 @@ $().ready(function() {
 	?>
 	</table>	
 
-	<div style="margin:10px;font-size:0.7em">
+	<div id="pagination">
 	<?php
 	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a WHERE $critere");
 	$query = spip_fetch_array($query);

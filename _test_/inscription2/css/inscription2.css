@@ -1,0 +1,50 @@
+#conteneur {
+margin-top : 15pt; 
+margin-left : 15pt; 
+font-size: 8pt
+}
+
+#menu  {
+float:left;
+width:150pt;
+text-align: left; 
+}
+
+.raccourcis {margin-top:5px;padding:5px}
+
+.legend {padding-left : 50px}
+
+.raccourcis ul {
+list-style-type:none;
+padding-left : 40px;
+}
+.raccourcis li {
+margin-top:5px
+}
+ 
+#principal {margin:0% 2% 2% 23%}
+
+#tetiere{margin:10px 0px;height:40px}
+
+input, select, textarea {
+background-color:#E4E4E4;
+background-position:center bottom;
+border:1px solid #C0CAD4;
+float:none;
+font-family:Verdana,Arial,Sans,sans-serif;
+font-size:11px;
+padding:3px;
+}
+
+#principal table {clear:right; margin-left:10pt;padding:5px}
+#principal tr { background-color : #E0E0E0 ;}
+#principal tr.row { background:#FFF8DC; }
+#principal tr.even { background:#AFF5DF; }
+
+#principal td {padding:3px}
+
+#pagination {margin:10px;font-size:0.7em}
+
+a:hover{font-weight:bold;}
+	
+.cadre-info {margin-bottom:10px}
