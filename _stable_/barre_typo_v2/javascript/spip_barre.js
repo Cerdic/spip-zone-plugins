@@ -32,24 +32,24 @@ function delayFunction(callbackFunction, seconds){
 		this.currentTimeout = setTimeout(callbackFunction, seconds*1000);
 }
 
-function toggle_preview() {
-	if ($("#article_preview").css("display") == "none") {
-		$("#text_area").css("height",parseInt($("#text_area").css("height"))/2+"px");
-		$("#article_preview").css("height",$("#text_area").css("height"));
-		$("#article_preview").show();
-		MajPreview();
+function toggle_preview(barre, champ) {
+	if ($("#article_preview"+barre).css("display") == "none") {
+		$(champ).css("height",parseInt($(champ).css("height"))/2+"px");
+		$("#article_preview"+barre).css("height",$(champ).css("height"));
+		$("#article_preview"+barre).show();
+		MajPreview(barre,champ.id);
 	} else {
-		$("#text_area").css("height",parseInt($("#text_area").css("height"))*2+"px");
-		$("#article_preview").hide();
+		$(champ).css("height",parseInt($(champ).css("height"))*2+"px");
+		$("#article_preview"+barre).hide();
 	}
 }
 
-function toggle_stats() {
-	if ($("#article_stats").css("display") == "none") {
-		$("#article_stats").show();
-		MajPreview();
+function toggle_stats(barre,champ) {
+	if ($("#article_stats"+barre).css("display") == "none") {
+		$("#article_stats"+barre).show();
+		MajStats(barre,champ.id);
 	} else {
-		$("#article_stats").hide();
+		$("#article_stats"+barre).hide();
 	}
 }
 
@@ -68,7 +68,7 @@ var is_win = ((clientPC.indexOf("win")!=-1) || (clientPC.indexOf("16bit") != -1)
 var is_mac = (clientPC.indexOf("mac")!=-1);
 
 
-function barre_raccourci(debut,fin,champ) {
+function barre_raccourci(debut,fin,champ, barre) {
 	var txtarea = champ;
 
 	txtarea.focus();
@@ -104,12 +104,12 @@ function barre_raccourci(debut,fin,champ) {
 	}
 	else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
 	{
-		mozWrap(txtarea, debut, fin);
+		mozWrap(txtarea, debut, fin, barre);
 		return;
 	}
 }
 
-function barre_demande(debut,milieu,fin,affich,bulle,champ) {
+function barre_demande(debut,milieu,fin,affich,bulle,champ,barre) {
 	var inserer = affich;
 	var monhelp ="";
 	if (bulle != "") {monhelp = "|"+bulle; }
@@ -117,25 +117,25 @@ function barre_demande(debut,milieu,fin,affich,bulle,champ) {
 	if (inserer != null) {
 		if (inserer == "") {inserer = "xxx"; }
 
-		barre_raccourci(debut, monhelp+milieu+inserer+fin, champ);
+		barre_raccourci(debut, monhelp+milieu+inserer+fin, champ, barre);
 	}
 }
 
-function barre_demande_lien(debut,milieu,fin,affich,bulle,langue,champ) {
+function barre_demande_lien(debut,milieu,fin,affich,bulle,langue,champ,barre) {
 	if (langue != "") {bulle = bulle+"{"+langue+"}"; }
-	barre_demande(debut,milieu,fin,affich,bulle,champ);
+	barre_demande(debut,milieu,fin,affich,bulle,champ,barre);
 }
 
-function barre_ancre(debut,milieu,fin,affich,champ) {
+function barre_ancre(debut,milieu,fin,affich,champ,barre) {
 	var inserer = affich;
 	var renvoi = '';
 	if (inserer != null) {
 		if (inserer == "") {inserer = "xxx"; }
-		barre_raccourci(debut+inserer+milieu+fin, renvoi, champ);
+		barre_raccourci(debut+inserer+milieu+fin, renvoi, champ, barre);
 	}
 }
 
-function barre_inserer(text,champ) {
+function barre_inserer(text,champ, barre) {
 	var txtarea = champ;
 	
 	if (txtarea.createTextRange && txtarea.caretPos) {
@@ -145,7 +145,7 @@ function barre_inserer(text,champ) {
 	} else {
 		//txtarea.value  += text;
 		//txtarea.focus();
-		mozWrap(txtarea, '', text);
+		mozWrap(txtarea, '', text, barre);
 		return;
 	}
 }
@@ -172,7 +172,7 @@ function barre_search(chercher,rec_entier, rec_case, champ) {
 	}
 }
 
-function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier, champ) {
+function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier, champ, barre) {
 	var condition = "";
 	var selTop = champ.scrollTop;
 // les parametres (casse + global)
@@ -190,11 +190,11 @@ function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier,
 	champ.value = champ.value.replace(re, remplacer);
 	champ.scrollTop = selTop;
 	champ.focus();
-	MajPreview();
+	MajPreview(barre, champ.id);
 }
 
 
-function barre_capitales(champ,majuscules) {
+function barre_capitales(champ,majuscules,barre) {
 	var txtarea = champ;
 
 	txtarea.focus();
@@ -214,22 +214,22 @@ function barre_capitales(champ,majuscules) {
 			}
 			txtarea.focus();
 			theSelection = '';
-			MajPreview();
+			MajPreview(barre, txtarea.id);
 			return;
 		}
 	}
 	else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
 	{
 		if (majuscules) {
-			barre_2Majuscules(champ);
+			barre_2Majuscules(champ, barre);
 		} else {
-			barre_2Minuscules(champ);
+			barre_2Minuscules(champ, barre);
 		}
 		return;
 	}
 }
 
-function barre_2Majuscules(champ) {
+function barre_2Majuscules(champ, barre) {
 	var oldSelStart = champ.selectionStart;
 	var oldSelEnd = champ.selectionEnd;
 	var selTop = champ.scrollTop;
@@ -248,10 +248,10 @@ function barre_2Majuscules(champ) {
 	champ.setSelectionRange(oldSelStart,oldSelEnd);
 	champ.scrollTop = selTop;
 	champ.focus();
-	MajPreview();
+	MajPreview(barre, champ.id);
 }
 
-function barre_2Minuscules(champ) {
+function barre_2Minuscules(champ, barre) {
 	var oldSelStart = champ.selectionStart;
 	var oldSelEnd = champ.selectionEnd;
 	var selTop = champ.scrollTop;
@@ -270,7 +270,7 @@ function barre_2Minuscules(champ) {
 	champ.setSelectionRange(oldSelStart,oldSelEnd);
 	champ.scrollTop = selTop;
 	champ.focus();
-	MajPreview();
+	MajPreview(barre, champ.id);
 }
 
 
@@ -302,7 +302,7 @@ function setSelectionRange(input, selectionStart, selectionEnd) {
 }
 
 // From http://www.massless.org/mozedit/
-function mozWrap(txtarea, open, close)
+function mozWrap(txtarea, open, close, barre)
 {
 	var selLength = txtarea.textLength;
 	var selStart = txtarea.selectionStart;
@@ -330,7 +330,7 @@ function mozWrap(txtarea, open, close)
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
-	MajPreview();
+	MajPreview(barre, txtarea.id);
 	return;
 }
 
@@ -359,17 +359,65 @@ function barre_galerie(champs_de_texte, cheminediteur) {
 		'width=550,height=400,menubar=no,scrollbars=yes,statusbar=yes')
 }
 
-function barre_selection(champ) {
+function barre_selection(idchamp) {
 	var resultat = "";
+	champ = $("#"+idchamp);
 	champ.focus();
 	if (champ.setSelectionRange)
-		resultat = champ.value.substring(champ.selectionStart, champ.selectionEnd);
+		resultat = $(champ).text().substring(champ.selectionStart, champ.selectionEnd);
 	else if ((clientVer >= 4) && is_ie && is_win) {
 		resultat = document.selection.createRange().text;
 	}
 
 	if (resultat.length==0) {
-		resultat = champ.value;
+		resultat = $(champ).text();
 	}
 	return resultat;
+}
+
+function barre_content(idchamp) {
+	var resultat = "";
+	champ = $("#"+idchamp);
+	champ.focus();
+	resultat = $(champ).text();
+	return resultat;
+}
+
+function MajPreview(num_barre,idchamp) {
+	if ($("#article_preview"+num_barre).css("display") != "none" && $("#article_stats'"+num_barre).css("display") != "none") {
+		delayFunction("MajCallBack("+num_barre+",'"+idchamp+"')",1);
+	} else {
+		if ($("#article_preview"+num_barre).css("display") != "none") {
+			delayFunction("MajPreviewCallBack("+num_barre+",'"+idchamp+"')",1);
+		}
+		if ($("#article_stats"+num_barre).css("display") != "none") {
+			delayFunction("MajStatsCallBack("+num_barre+",'"+idchamp+"')",1);
+		}
+	}
+}
+
+function MajStats(num_barre,champ) {
+	idchamp = $(champ).attr("id");
+	if ($("#article_stats"+num_barre).css("display") != "none") {
+		delayFunction("MajStatsCallBack("+num_barre+",'"+idchamp+"')",1);
+	}
+}
+
+function MajPreviewCallBack(num_barre,idchamp) {
+	$.post("?exec=article_preview", { texte:barre_content(idchamp) }, function(data) {
+		$("#article_preview"+num_barre).empty()
+		$("#article_preview"+num_barre).append(data);
+		});
+}
+
+function MajStatsCallBack(num_barre,idchamp) {
+	$.post("?exec=article_stats", { texte:barre_selection(idchamp) }, function(data) {
+		$("#article_stats"+num_barre).empty()
+		$("#article_stats"+num_barre).append(data);
+		});
+}
+
+function MajCallBack(num_barre,champ) {
+	MajStatsCallBack(num_barre,$(champ).attr("id"));
+	MajPreviewCallBack(num_barre,$(champ).attr("id"));
 }

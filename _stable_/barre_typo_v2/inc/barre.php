@@ -81,52 +81,52 @@ function produceWharf($id, $title = '', $sb = '') {
 //gestion des lignes optionnelles
 
 // construction des liens
-function afficher_gestion_lien($champ) {
+function afficher_gestion_lien($champ, $num_barre) {
 
 $tableau_formulaire = '
  <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
 <tr><td> 
-'._T('bartypenr:barre_adresse').'&nbsp;: <input type="text" name="lien_nom" value="http://" size="21" maxlength="255" /><br />
-'._T('bartypenr:barre_bulle').'&nbsp;: <input type="text" name="lien_bulle" value="" size="21" maxlength="255" />
+'._T('bartypenr:barre_adresse').'&nbsp;: <input type="text" name="lien_nom" id="lien_nom'.$num_barre.'" value="http://" size="21" maxlength="255" /><br />
+'._T('bartypenr:barre_bulle').'&nbsp;: <input type="text" name="lien_bulle" id="lien_bulle'.$num_barre.'" value="" size="21" maxlength="255" />
 </td><td>
-'._T('bartypenr:barre_langue').'&nbsp;: <input type="text" name="lien_langue" value="" size="10" maxlength="10" />
+'._T('bartypenr:barre_langue').'&nbsp;: <input type="text" name="lien_langue" id="lien_langue'.$num_barre.'" value="" size="10" maxlength="10" />
 </td><td>
-  <input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');lien_nom.value=\'\';lien_bulle.value=\'\';lien_langue.value=\'\';" /> 
+  <input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', document.formulaire.lien_nom'.$num_barre.'.value, document.formulaire.lien_bulle'.$num_barre.'.value, document.formulaire.lien_langue'.$num_barre.'.value,'.$champ.','.$num_barre.');document.formulaire.lien_nom'.$num_barre.'.value=\'\';document.formulaire.lien_bulle'.$num_barre.'.value=\'\';document.formulaire.lien_langue'.$num_barre.'.value=\'\';" /> 
 </td></tr></table>
 ';
   return produceWharf('tableau_lien','',$tableau_formulaire); 	
 }
 
 // Changer la casse
-function RaccourcisMajusculesMinuscules($champ, $champhelp) {
-	return bouton_barre_racc ("barre_capitales($champ,true)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_uppercase.png', _T('bartypenr:barre_gestion_cr_changercassemajuscules'), $champhelp) .'&nbsp;'
-. bouton_barre_racc ("barre_capitales($champ,false)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_lowercase.png', _T('bartypenr:barre_gestion_cr_changercasseminuscules'), $champhelp);
+function RaccourcisMajusculesMinuscules($champ, $champhelp, $num_barre) {
+	return bouton_barre_racc ("barre_capitales($champ,true,$num_barre)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_uppercase.png', _T('bartypenr:barre_gestion_cr_changercassemajuscules'), $champhelp) .'&nbsp;'
+. bouton_barre_racc ("barre_capitales($champ,false,$num_barre)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_lowercase.png', _T('bartypenr:barre_gestion_cr_changercasseminuscules'), $champhelp);
 }
 
 // gestion de la recherche
 
-function afficher_gestion_remplacer($champ, $champhelp) {
+function afficher_gestion_remplacer($champ, $champhelp, $num_barre) {
 
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
-<tr><td><label for="barre_chercher'.$champ.'">'.
+<tr><td><label for="barre_chercher'.$num_barre.'">'.
 _T('bartypenr:barre_gestion_cr_chercher')
-.'</label> <input type="text" id="barre_chercher'.$champ.'" name="barre_chercher" value="" size="12" maxlength="255" /><br />
-<input type="checkbox" name="rec_case" id="rec_case'.$champ.'" value="yes" />
-<label for="rec_case'.$champ.'">'._T('bartypenr:barre_gestion_cr_casse').'</label><br />
+.'</label> <input type="text" id="barre_chercher'.$num_barre.'" name="barre_chercher" value="" size="12" maxlength="255" /><br />
+<input type="checkbox" name="rec_case" id="rec_case'.$num_barre.'" value="yes" />
+<label for="rec_case'.$num_barre.'">'._T('bartypenr:barre_gestion_cr_casse').'</label><br />
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_chercher').'" class="fondo"
-  onclick="javascript:barre_search(document.formulaire.barre_chercher.value, document.formulaire.rec_entier.checked, document.formulaire.rec_case.checked,'.$champ.');" /> 
-</td><td><label for="barre_remplacer'.$champ.'">'
+  onclick="javascript:barre_search(document.formulaire.barre_chercher.value, document.formulaire.rec_entier.checked, document.formulaire.rec_case.checked,'.$num_barre.');" /> 
+</td><td><label for="barre_remplacer'.$num_barre.'">'
 ._T('bartypenr:barre_gestion_cr_remplacer')
-.'</label> <input type="text" name="barre_remplacer" id="barre_remplacer'.$champ.'" value="" size="12" maxlength="255" /><br />
-<input type="checkbox" name="rec_tout" id="rec_tout'.$champ.'" value="yes" />
-<label for="rec_tout'.$champ.'">'._T('bartypenr:barre_gestion_cr_tout').'</label><br />
-<input type="checkbox" name="rec_entier" id="rec_entier'.$champ.'" value="yes" />
-<label for="rec_entier'.$champ.'">'._T('bartypenr:barre_gestion_cr_entier').'</label><br />
+.'</label> <input type="text" name="barre_remplacer" id="barre_remplacer'.$num_barre.'" value="" size="12" maxlength="255" /><br />
+<input type="checkbox" name="rec_tout" id="rec_tout'.$num_barre.'" value="yes" />
+<label for="rec_tout'.$num_barre.'">'._T('bartypenr:barre_gestion_cr_tout').'</label><br />
+<input type="checkbox" name="rec_entier" id="rec_entier'.$num_barre.'" value="yes" />
+<label for="rec_entier'.$num_barre.'">'._T('bartypenr:barre_gestion_cr_entier').'</label><br />
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_remplacer').'" class="fondo"
-  onclick="javascript:barre_searchreplace(document.formulaire.barre_chercher.value, document.formulaire.barre_remplacer.value, document.formulaire.rec_tout.checked, document.formulaire.rec_case.checked, document.formulaire.rec_entier.checked,'.$champ.');" /> 
+  onclick="javascript:barre_searchreplace(document.formulaire.barre_chercher'.$num_barre.'.value, document.formulaire.barre_remplacer'.$num_barre.'.value, document.formulaire.rec_tout'.$num_barre.'.checked, document.formulaire.rec_case'.$num_barre.'.checked, document.formulaire.rec_entier'.$num_barre.'.checked,'.$champ.','.$num_barre.');" /> 
 </td>
-<td>'._T('bartypenr:barre_gestion_cr_changercasse').' :'. RaccourcisMajusculesMinuscules($champ, $champhelp).'
+<td>'._T('bartypenr:barre_gestion_cr_changercasse').' :'. RaccourcisMajusculesMinuscules($champ, $champhelp, $num_barre).'
 </td>
 </tr></table>';
 
@@ -134,7 +134,7 @@ _T('bartypenr:barre_gestion_cr_chercher')
 }
 
 // pour les ancres
-function afficher_gestion_ancre($champ) {
+function afficher_gestion_ancre($champ, $num_barre) {
 
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
@@ -145,23 +145,23 @@ _T('bartypenr:barre_gestion_anc_caption')
     <td style="width:auto;"><strong>'.
 _T('bartypenr:barre_gestion_anc_inserer')
 .'</strong><br />
-    <label for="ancre_nom'.$champ.'"><i>'.
+    <label for="ancre_nom'.$num_barre.'"><i>'.
 _T('bartypenr:barre_gestion_anc_nom')
 .'</i></label> <br />
-      <input type="text" name="ancre_nom" id="ancre_nom'.$champ.'" />
+      <input type="text" name="ancre_nom" id="ancre_nom'.$num_barre.'" />
 	  
-	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', ancre_nom.value, '.$champ.');" />
+	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', document.formulaire.ancre_nom'.$num_barre.'.value, '.$champ.','.$num_barre.');" />
     </td>
 	<td style="width:auto;"><strong>'.
 _T('bartypenr:barre_gestion_anc_pointer')
 .'</strong><br />
-    <label for="ancre_cible'.$champ.'"><i>'.
+    <label for="ancre_cible'.$num_barre.'"><i>'.
 _T('bartypenr:barre_gestion_anc_cible')
-.'</i></label> <input type="text" name="ancre_cible" id="ancre_cible'.$champ.'" /><br />
-	<label for="ancre_bulle'.$champ.'"><i>'.
+.'</i></label> <input type="text" name="ancre_cible" id="ancre_cible'.$num_barre.'" /><br />
+	<label for="ancre_bulle'.$num_barre.'"><i>'.
 _T('bartypenr:barre_gestion_anc_bulle')
-.'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle'.$champ.'" />
-	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" /> 
+.'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle'.$num_barre.'" />
+	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', document.formulaire.ancre_cible'.$num_barre.'.value, document.formulaire.ancre_bulle'.$num_barre.'.value, '.$champ.', '.$num_barre.');" /> 
 </td>
   </tr> 
 </table>';
@@ -202,7 +202,7 @@ $reta .= bouton_barre_racc ("barre_inserer('&Ccedil;',$champ)", _DIR_PLUGIN_BARR
 }
 // euro
 $reta .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/euro.png', _T('barre_euro'), $champhelp);
-$reta .= '&nbsp;'.RaccourcisMajusculesMinuscules($champ, $champhelp);
+$reta .= '&nbsp;'.RaccourcisMajusculesMinuscules($champ, $champhelp, $num_barre);
 
 $reta .= '&nbsp;';
 	
@@ -238,12 +238,12 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 
  // Pregeneration des toolzbox.. (wharfing)
-    $toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
-    $toolbox .= afficher_gestion_lien($champ);
-    $toolbox .= afficher_gestion_ancre($champ);
-    $toolbox .= afficher_gestion_remplacer($champ, $champhelp);
+    $toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp, $num_barre);
+    $toolbox .= afficher_gestion_lien($champ, $num_barre);
+    $toolbox .= afficher_gestion_ancre($champ, $num_barre);
+    $toolbox .= afficher_gestion_remplacer($champ, $champhelp, $num_barre);
 //un pipeline pour ajouter une toolbox
-    $params=array($champ,$champhelp,$spip_lang);
+    $params=array($champ,$champhelp,$spip_lang, $num_barre);
     $add=pipeline("BarreTypoEnrichie_toolbox",$params);
     if ($params!=$add)
 		$toolbox .= $add;
@@ -277,9 +277,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	}
 	$ret .= "&nbsp;</td>\n<td>";
 	$col ++;
-
-	// Lien hypertexte, notes de bas de page, citations
-//	$ret .= bouton_barre_racc ("barre_demande('[','->',']', '".addslashes(_T('barre_lien_input'))."', $champ)", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
 
 // gestion des liens
       $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
@@ -336,8 +333,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col++;
 		if (!$forum) {
-			$ret .= bouton_barre_racc("toggle_preview();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
-			$ret .= bouton_barre_racc("toggle_stats();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
+			$ret .= bouton_barre_racc("toggle_preview($num_barre,$champ);", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
+			$ret .= bouton_barre_racc("toggle_stats($num_barre,$champ);", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
 		}
 		$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$ret .= aide("raccourcis");
@@ -352,46 +349,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "</table>";
 	 $ret .= $toolbox;
 	 $ret .= '<script type="text/javascript"><!--';
-	 if (!$forum) {
-		$ret .= '
-function MajPreviewCallBack() {
-	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:'.$champ.'.value }, function(data) {
-		$("#article_preview").empty()
-		$("#article_preview").append(data);
-		});
-}
-
-function MajStatsCallBack() {
-	$.post("' . generer_url_ecrire("article_stats",""). '", { texte:barre_selection('.$champ.') }, function(data) {
-		$("#article_stats").empty()
-		$("#article_stats").append(data);
-		});
-}
-
-function MajCallBack() {
-	MajStatsCallBack();
-	MajPreviewCallBack();
-}
-
-function MajPreview() {
-	if ($("#article_preview").css("display") != "none" & $("#article_stats").css("display") != "none") {
-		delayFunction("MajCallBack()",1);
-	} else {
-		if ($("#article_preview").css("display") != "none") {
-			delayFunction("MajPreviewCallBack()",1);
-		}
-		if ($("#article_stats").css("display") != "none") {
-			delayFunction("MajStatsCallBack()",1);
-		}
-	}
-}
-
-function MajStats() {
-	if ($("#article_stats").css("display") != "none") {
-		delayFunction("MajStatsCallBack()",1);
-	}
-}';
-	 }
 	 $ret .= '
 form_dirty = false;
 warn_onunload = true;
@@ -399,12 +356,12 @@ warn_onunload = true;
 $(document).ready(function(){';
 	 if (!$forum) {
 	 $ret .= '
-	$('.$champ.').after("<div id=\"article_preview'.$champ.'\"></div>");
-	$('.$champ.').before("<div id=\"article_stats'.$champ.'\"></div>");
+	$('.$champ.').after("<div id=\"article_preview'.$num_barre.'\"></div>");
+	$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
 	$.ajaxTimeout( 5000 );
-	$('.$champ.').keypress(function() { MajPreview() });
-	$('.$champ.').select(function() { MajStats() });
-	$('.$champ.').click(function() { MajStats() });';
+	$('.$champ.').keypress(function() { MajPreview('.$num_barre.','.$champ.') });
+	$('.$champ.').select(function() { MajStats('.$num_barre.','.$champ.') });
+	$('.$champ.').click(function() { MajStats('.$num_barre.','.$champ.') });';
 	 }
 	 $ret .= '
 	$(window).bind("beforeunload", function(e) { 

@@ -1,5 +1,5 @@
 /* Pour le mode preview dans l'admin */
-#article_preview {
+#article_preview1, #article_preview2, #article_preview3, #article_preview4, #article_preview4, #article_preview5, #article_preview6 {
 	display:none;
 	border:1px solid #F00;
 	overflow: auto;
@@ -8,7 +8,7 @@
 }
 
 /* Pour les stats dans l'admin */
-#article_stats {
+#article_stats1, #article_stats2, #article_stats3, #article_stats4, #article_stats5, #article_stats6 {
 	display:none;
 	border:1px solid #555;
 	background-color: #EEE;
