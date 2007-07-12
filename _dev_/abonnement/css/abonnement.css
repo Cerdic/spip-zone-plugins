@@ -1,0 +1,27 @@
+input, select, textarea {
+background-color:#E4E4E4;
+background-position:center bottom;
+border:1px solid #C0CAD4;
+float:none;
+font-family:Verdana,Arial,Sans,sans-serif;
+font-size:11px;
+padding:3px;
+}
+
+	.form_abo{}
+	.form_abo table{margin-top:20px}
+	#ajouter{width:300px;margin:10px 0px}
+	#ajouter div {height:30px;padding:5px;clear:right}
+	#ajouter label {float:left;width:100px}
+	#ajouter input, textarea {float:right;width:180px}
+	#ajouter div.textarea {height:auto;padding:5px;}
+	#ajouter .valider {width:80px}
+	
+	tr.prospect { background:#F0DCF4; } 
+ 	tr.abonne { background:#DCF3F4; } 
+ 	tr.relance1 { background:#AFF5DF; } 
+ 	tr.relance2 { background:#AFF5DF; } 
+ 	tr.relance3 { background:#AFF5DF; } 
+ 	tr.relance4 { background:#AFF5DF; } 
+ 	tr.sorti { background:#E6EAC9; } 
+ 	tr.erreur_bank { background:#FFF8DC; } 
