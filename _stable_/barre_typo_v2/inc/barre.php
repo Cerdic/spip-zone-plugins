@@ -230,7 +230,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	if (!$lang) $lang = $spip_lang;
 	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
 	$ret = ($num_barre > 0)  ? '' :
-	  $layer_public . '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
+	  $layer_public . '<script type="text/javascript" src="' . find_in_path('javascript/spip_barre.js').'"></script>';
 
 
 	$num_barre++;
