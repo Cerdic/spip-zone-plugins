@@ -21,7 +21,7 @@ function exec_editer_adherent(){
 			if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 				$cle = ereg_replace("^username.*$", "login", $cle);
 				$cle = ereg_replace("_(fiche|table).*$", "", $cle);
-				if($cle == 'nom' or $cle == 'email' or $cle == 'login')
+				if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'statut')
 					$var_user['a.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
 				elseif(ereg("^statut_rel.*$", $cle))
 					$var_user['b.statut_relances'] =  '`statut_relances` = \''.$_POST['statut_relances'].'\'';
@@ -76,7 +76,7 @@ function exec_editer_adherent(){
 		if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
+			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'statut')
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
@@ -107,9 +107,12 @@ function exec_editer_adherent(){
 				$aux4[] = $q;
 		}
 	}
-
-	$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
+	if($var_user['c.pays'])
+		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
+	else
+		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
 	$query = spip_fetch_array($query);
+	
 	if($query['id'] == NULL)
 			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
 	
