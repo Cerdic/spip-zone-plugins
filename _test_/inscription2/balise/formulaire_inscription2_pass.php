@@ -44,9 +44,6 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 	
 			elseif($cle=='accesrestreint') 
 				$var_user['zones'] = _request('zones');
-				
-			elseif( $cle == 'domaines')
-				$var_user['dom'] = _request($cle);
 
 			else
 				$var_user[$cle] = _request($cle);
@@ -56,13 +53,14 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 	$var_user['statut'] = _request('statut');
 	$commentaire = true;
 	$aux = true;
-	if($var_user['dom']){
+	if($var_user['domaines']){
 		include(find_in_path("inc/domaines.php"));
-		$var_user['sites'] = $domaine[$var_user['dom']]['sites'] ;
-		$var_user['zone'] = $domaine[$var_user['dom']]['zones'] ;
-		$aux = !empty($var_user['sites']);
+		$var_user['sites'] = $domaine[$var_user['domaines']]['sites'] ;
+		$var_user['zone'] = $domaine[$var_user['domaines']]['zones'] ;
 		foreach($var_user['sites'] as $val)
 			$aux = ($aux or ereg("^.*".$val."$", $var_user[email]));
+		if(!$aux)
+			$aux = empty($var_user['sites']);
 		if(!$aux)
 			$message = _T('inscription2:mail_non_domaine');
 	}
@@ -101,7 +99,7 @@ function inscription2_nouveau_pass($declaration){
 
 	//insertion des données ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
-		if($cle == 'newsletters' or $cle == 'zones' or $cle == 'dom' or $cle =='sites' or $cle == 'zone')
+		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone')
 			continue;
 		if ($cle == 'email' or $cle == 'nom' or $cle == 'bio' or $cle == 'statut' or $cle == 'login' or $cle =='pass')
 			$auteurs[$cle] = $val;
@@ -125,7 +123,7 @@ function inscription2_nouveau_pass($declaration){
 		foreach($declaration['zones'] as $value)
 			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
 	}
-	if(isset($declaration['dom']) and $declaration['zone'] and lire_config('plugin/ACCESRESTREINT')){
+	if(isset($declaration['domaines']) and $declaration['zone'] and lire_config('plugin/ACCESRESTREINT')){
 		foreach($declaration['zone'] as $value)
 			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
 	}

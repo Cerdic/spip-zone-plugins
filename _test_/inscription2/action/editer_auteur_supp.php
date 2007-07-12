@@ -41,7 +41,7 @@ function action_editer_auteur_supp_post($r){
 
 		foreach(lire_config('inscription2') as $cle => $val){
 			echo $cle;
-			if($val!='' and !ereg("^(accesrestreint|domaine|categories|zone|news).*$", $cle)){
+			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
 				$cle = ereg_replace("^username.*$", "login", $cle);
 				$cle = ereg_replace("_(fiche|table).*$", "", $cle);
 				if($cle == 'nom' or $cle == 'email' or $cle == 'login')
