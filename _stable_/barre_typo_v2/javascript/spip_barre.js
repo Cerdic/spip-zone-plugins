@@ -32,22 +32,24 @@ function delayFunction(callbackFunction, seconds){
 		this.currentTimeout = setTimeout(callbackFunction, seconds*1000);
 }
 
-function toggle_preview(barre, champ) {
+function toggle_preview(barre, strchamp) {
+	champ = eval(strchamp);
 	if ($("#article_preview"+barre).css("display") == "none") {
 		$(champ).css("height",parseInt($(champ).css("height"))/2+"px");
 		$("#article_preview"+barre).css("height",$(champ).css("height"));
 		$("#article_preview"+barre).show();
-		MajPreview(barre,champ.id);
+		MajPreview(barre,strchamp);
 	} else {
 		$(champ).css("height",parseInt($(champ).css("height"))*2+"px");
 		$("#article_preview"+barre).hide();
 	}
 }
 
-function toggle_stats(barre,champ) {
+function toggle_stats(barre,strchamp) {
+	champ = eval(strchamp);
 	if ($("#article_stats"+barre).css("display") == "none") {
 		$("#article_stats"+barre).show();
-		MajStats(barre,champ.id);
+		MajStats(barre,strchamp);
 	} else {
 		$("#article_stats"+barre).hide();
 	}
@@ -359,9 +361,8 @@ function barre_galerie(champs_de_texte, cheminediteur) {
 		'width=550,height=400,menubar=no,scrollbars=yes,statusbar=yes')
 }
 
-function barre_selection(idchamp) {
+function barre_selection(champ) {
 	var resultat = "";
-	champ = $("#"+idchamp);
 	champ.focus();
 	if (champ.setSelectionRange)
 		resultat = $(champ).text().substring(champ.selectionStart, champ.selectionEnd);
@@ -370,54 +371,52 @@ function barre_selection(idchamp) {
 	}
 
 	if (resultat.length==0) {
-		resultat = $(champ).text();
+		resultat = $(champ).val();
 	}
 	return resultat;
 }
 
-function barre_content(idchamp) {
+function barre_content(champ) {
 	var resultat = "";
-	champ = $("#"+idchamp);
 	champ.focus();
-	resultat = $(champ).text();
+	resultat = $(champ).val();
 	return resultat;
 }
 
-function MajPreview(num_barre,idchamp) {
+function MajPreview(num_barre,champ) {
 	if ($("#article_preview"+num_barre).css("display") != "none" && $("#article_stats'"+num_barre).css("display") != "none") {
-		delayFunction("MajCallBack("+num_barre+",'"+idchamp+"')",1);
+		delayFunction("MajCallBack("+num_barre+","+String(champ)+")",1);
 	} else {
 		if ($("#article_preview"+num_barre).css("display") != "none") {
-			delayFunction("MajPreviewCallBack("+num_barre+",'"+idchamp+"')",1);
+			delayFunction("MajPreviewCallBack("+num_barre+","+String(champ)+")",1);
 		}
 		if ($("#article_stats"+num_barre).css("display") != "none") {
-			delayFunction("MajStatsCallBack("+num_barre+",'"+idchamp+"')",1);
+			delayFunction("MajStatsCallBack("+num_barre+","+String(champ)+")",1);
 		}
 	}
 }
 
 function MajStats(num_barre,champ) {
-	idchamp = $(champ).attr("id");
 	if ($("#article_stats"+num_barre).css("display") != "none") {
-		delayFunction("MajStatsCallBack("+num_barre+",'"+idchamp+"')",1);
+		delayFunction("MajStatsCallBack("+num_barre+","+String(champ)+")",1);
 	}
 }
 
-function MajPreviewCallBack(num_barre,idchamp) {
-	$.post("?exec=article_preview", { texte:barre_content(idchamp) }, function(data) {
+function MajPreviewCallBack(num_barre,champ) {
+	$.post("?exec=article_preview", { texte:barre_content(champ) }, function(data) {
 		$("#article_preview"+num_barre).empty()
 		$("#article_preview"+num_barre).append(data);
 		});
 }
 
-function MajStatsCallBack(num_barre,idchamp) {
-	$.post("?exec=article_stats", { texte:barre_selection(idchamp) }, function(data) {
+function MajStatsCallBack(num_barre,champ) {
+	$.post("?exec=article_stats", { texte:barre_selection(champ) }, function(data) {
 		$("#article_stats"+num_barre).empty()
 		$("#article_stats"+num_barre).append(data);
 		});
 }
 
 function MajCallBack(num_barre,champ) {
-	MajStatsCallBack(num_barre,$(champ).attr("id"));
-	MajPreviewCallBack(num_barre,$(champ).attr("id"));
+	MajStatsCallBack(num_barre,champ);
+	MajPreviewCallBack(num_barre,champ);
 }

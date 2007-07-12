@@ -333,8 +333,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col++;
 		if (!$forum) {
-			$ret .= bouton_barre_racc("toggle_preview($num_barre,$champ);", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
-			$ret .= bouton_barre_racc("toggle_stats($num_barre,$champ);", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
+			$ret .= bouton_barre_racc("toggle_preview($num_barre,'$champ');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
+			$ret .= bouton_barre_racc("toggle_stats($num_barre,'$champ');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
 		}
 		$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$ret .= aide("raccourcis");
@@ -359,9 +359,9 @@ $(document).ready(function(){';
 	$('.$champ.').after("<div id=\"article_preview'.$num_barre.'\"></div>");
 	$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
 	$.ajaxTimeout( 5000 );
-	$('.$champ.').keypress(function() { MajPreview('.$num_barre.','.$champ.') });
-	$('.$champ.').select(function() { MajStats('.$num_barre.','.$champ.') });
-	$('.$champ.').click(function() { MajStats('.$num_barre.','.$champ.') });';
+	$('.$champ.').keypress(function() { MajPreview('.$num_barre.',"'.$champ.'") });
+	$('.$champ.').select(function() { MajStats('.$num_barre.',"'.$champ.'") });
+	$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });';
 	 }
 	 $ret .= '
 	$(window).bind("beforeunload", function(e) { 
