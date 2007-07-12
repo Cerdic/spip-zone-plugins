@@ -1,13 +1,13 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Barre typographique partout
+	Barre typographique g&eacute;n&eacute;ralis&eacute;e
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Arnault PACHOT 
  	[OpenStudio->http://www.openstudio.fr] - Licence GPL
 	</auteur>
 	<version>
-	0.1
+	1.0
 	</version>
 	<etat>
 	test
