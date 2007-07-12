@@ -11,8 +11,15 @@
 	Modele spip mis au point sur irc a l'initiative d'alexandra
 	avec la participation de kent1, cy_altern, marcimat, renato et toggg.
 	
-<template><flvplayer123></template>
-	ou 123 est l'id article fournissant les documents attaches
+	Plusieurs methodes d'insertion :
+	
+	Méthode classique <template><flvplayer123></template> ou 123 est l'id article fournissant les documents attaches
+	Méthode par rubrique (on prend les videos parmis les documents de la rubrique) :
+	<template><flvplayer|rubrique=123></template>
+	Méthode par secteur (on prend les videos parmis les documents du secteur) :
+	<template><flvplayer|secteur=123></template>
+	Méthode par document unique (on prend un seul document) :
+	<template><flvplayer|document=123></template>
 	
 	Pour les options, voir http://www.jeroenwijering.com/extras/readme.html
 	- width : px|%,320
@@ -25,9 +32,29 @@
 	- shuffle : true|false,false
 	- repeat : true|false,false
 	- showdownload: true|false,false
-	
 	- align : left|center|right,center	
 	]
+	
+[(#ENV{id_rubrique}|?{' ',''}) 
+  [(#SET{objet_spip,id_rubrique})]
+  [(#SET{objet_val,[(#ENV{id_rubrique})]})]
+]
+[(#ENV{id_secteur}|?{' ',''}) 
+  [(#SET{objet_spip,id_secteur})]
+  [(#SET{objet_val,[(#ENV{id_secteur})]})]
+]
+[(#ENV{id_document}|?{' ',''}) 
+  [(#SET{objet_spip,id_document})]
+  [(#SET{objet_val,[(#ENV{id_document})]})]
+]
+[(#ENV{id_article}|?{' ',''}) 
+  [(#SET{objet_spip,id_article})]
+  [(#SET{objet_val,[(#ENV{id_article})]})]
+]
+[(#GET{objet_spip}|?{'',' '}) 
+  [(#SET{objet_spip,id_article})]
+  [(#SET{objet_val,[(#ENV{id_flvplayer})]})]
+] 
 
 [(#SET{width,#ENV{width,320}})]
 [(#SET{height,#ENV{height,240}})]
@@ -44,7 +71,7 @@
 <script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
 <!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/ -->
 
-<noscript>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </noscript>
+<noscript>Désolé, mais le javascript est néecessaire dans la version actuelle. Merci de le réactiver pour afficher le contenu multimedia </noscript>
 <!-- alternetive texte pour ceux qui ont le js desactive -->
 <div id="flashcontent" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]>
 
@@ -58,15 +85,13 @@ Get the Flash Player</a> to see this player.
 // <![CDATA[
 
 	var s1 = new SWFObject("#CHEMIN{flvplayer.swf}","flvplayer","#GET{width}","#GET{height}","7");
-	s1.addVariable("file",
-		encodeURIComponent("spip.php?page=xspf&type=flv&id_article=[(#ENV{id_flvplayer})]"));
+	s1.addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,flv,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s1.addParam("allowfullscreen","true");
 	s1.addParam("menu","true");
 	s1.addVariable("image","url");
 	s1.addVariable("backcolor","0xFFFFFF");
 	s1.addVariable("showdigits","true");
 	s1.addVariable("thumbsinplaylist","true");
-	s1.addVariable("type","flv");
 	s1.addVariable("shownavigation","#GET{shownavigation}");
 	s1.addVariable("showdownload","#GET{showdownload}");
 	s1.addVariable("overstretch","#GET{overstretch}");
@@ -87,4 +112,3 @@ Assistant wizard pour personnaliser les variables
 http://www.jeroenwijering.com/extras/wizard.html
 Toutes les options flashvars du lecteur flash video player sont disponibles ici 
 http://www.jeroenwijering.com/extras/readme.html]
-

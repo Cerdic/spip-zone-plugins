@@ -16,6 +16,27 @@
 	- align : left|center|right,center
 	
 ]
+
+[(#ENV{id_rubrique}|?{' ',''}) 
+  [(#SET{objet_spip,id_rubrique})]
+  [(#SET{objet_val,[(#ENV{id_rubrique})]})]
+]
+[(#ENV{id_secteur}|?{' ',''}) 
+  [(#SET{objet_spip,id_secteur})]
+  [(#SET{objet_val,[(#ENV{id_secteur})]})]
+]
+[(#ENV{id_document}|?{' ',''}) 
+  [(#SET{objet_spip,id_document})]
+  [(#SET{objet_val,[(#ENV{id_document})]})]
+]
+[(#ENV{id_article}|?{' ',''}) 
+  [(#SET{objet_spip,id_article})]
+  [(#SET{objet_val,[(#ENV{id_article})]})]
+]
+[(#GET{objet_spip}|?{'',' '}) 
+  [(#SET{objet_spip,id_article})]
+  [(#SET{objet_val,[(#ENV{id_musicplayer})]})]
+]
 [(#SET{autoplay,#ENV{autoplay,false}})]
 [(#SET{autoload,#ENV{autoload,true}})]
 [(#SET{repeat,#ENV{repeat,false}})]
@@ -39,8 +60,7 @@ Get the Flash Player</a> to see this player.
 <script type="text/javascript">
 // <![CDATA[
 	var s1 = new SWFObject("#CHEMIN{xspf_player.swf}","musicplayer","100%","100%","7");
-	s1.addVariable("playlist_url",
-		encodeURIComponent("spip.php?page=xspf&type=mp3&id_article=[(#ENV{id_musicplayer})]"))
+	s1.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s1.addVariable("autoload","#GET{autoload}");
 	s1.addVariable("autoplay","#GET{autoplay}");
 	s1.addVariable("repeat_playlist","#GET{repeat}");
