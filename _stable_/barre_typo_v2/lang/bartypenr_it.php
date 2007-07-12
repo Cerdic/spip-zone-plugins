@@ -41,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_cr_tout' => 'Sostituisci tutto',
 'barre_gestion_cr_entier' => 'Solo parole intere',
 'barre_preview' => 'Modalità Anteprima',
+'barre_stats' => 'Afficher les statistiques du texte',
 
 'barre_ancres' => 'Segnalibro',
 'barre_gestion_anc_caption' => 'Segnalibri',
@@ -51,6 +52,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_anc_bulle' => 'Guida del Segnalibro',
 'barre_avances' => 'Allineamento&nbsp;!',
 'barre_boutonsavances' => 'Formattazione supplementare, utilizzare con moderazione e discernimento&nbsp;!'
+'cfg_puces' => 'Traitement des puces',
+'cfg_titraille' => 'Titraille',
+'cfg_insertcss' => 'Insertion CSS',
+
+'galerie' => 'Galerie de documents',
+'galerie_document' => '&nbsp;document',
+'galerie_deplier' => 'D&eacute;plier&nbsp;:',
+'galerie_tout' => 'tout',
+'galerie_docs' => 'les docs',
+'galerie_replier' => 'Replier&nbsp;:',
+'galerie_fichier' => 'Fichier&nbsp;:',
+'galerie_type' => 'Type&nbsp;:',
+'galerie_taille' => 'Taille&nbsp;:',
+'galerie_descrip' => 'Descriptif&nbsp;:',
+'galerie_aucun' => 'Aucun',
+'galerie_ajouter' => 'Ajouter&nbsp;:',
+
+'stats_statistiques' => 'Statistiques&nbsp;:',
+'stats_mots' => 'mots, ',
+'stats_caracteres' => 'caract&egrave;res, ',
+'stats_signes' => 'signes.',
+
+'tableau_titre' => 'Titre du tableau',
+'tableau_resume' => 'R&eacute;sum&eacute; du tableau (accessibilit&eacute;)',
+'tableau_prem_ligne' => 'la premi&egrave;re ligne du tableau accueille les intitul&eacute;s des colonnes',
+'tableau_enregistrer' => '<strong>Enregistrer</strong>'
 
 );
 ?>
