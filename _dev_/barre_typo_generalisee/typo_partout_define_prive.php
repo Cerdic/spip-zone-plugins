@@ -45,10 +45,7 @@ function typo_partout_insertion_in_body_prive ($texte)
 	}
 	$ajout_texte = "<script type=\"text/javascript\">
 		$(document).ready(function(){
-			
-			
-			".$activer_barre_rubriques.$activer_barre_mots.$activer_barre_configuration.$activer_barre_sites.$activer_barre_articles."
-			
+		".$activer_barre_rubriques.$activer_barre_mots.$activer_barre_configuration.$activer_barre_sites.$activer_barre_articles."
 		});
 	</script>
 ";
@@ -79,12 +76,12 @@ function typo_partout_insertion_in_body_prive ($texte)
 	{
 		$barre_temporaire = "";
 	}
-	return $ajout_texte.$texte.$barre_temporaire;
+	return $texte.$ajout_texte.$barre_temporaire;
 	
 }
 function typo_partout_insertion_in_head_prive ($texte)
 {
-	return $texte."<script type=\"text/javascript\" src=\"../dist/javascript/spip_barre.js\"></script>";
+	return $texte."<script type=\"text/javascript\" src=\"".find_in_path('javascript/spip_barre.js')."\"></script>";
 }
 
 ?>
