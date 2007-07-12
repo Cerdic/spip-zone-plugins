@@ -109,20 +109,20 @@ function afficher_gestion_remplacer($champ, $champhelp) {
 
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
-<tr><td><label for="barre_chercher">'.
+<tr><td><label for="barre_chercher'.$champ.'">'.
 _T('bartypenr:barre_gestion_cr_chercher')
-.'</label> <input type="text" id="barre_chercher" name="barre_chercher" value="" size="12" maxlength="255" /><br />
-<input type="checkbox" name="rec_case" id="rec_case" value="yes" />
-<label for="rec_case">'._T('bartypenr:barre_gestion_cr_casse').'</label><br />
+.'</label> <input type="text" id="barre_chercher'.$champ.'" name="barre_chercher" value="" size="12" maxlength="255" /><br />
+<input type="checkbox" name="rec_case" id="rec_case'.$champ.'" value="yes" />
+<label for="rec_case'.$champ.'">'._T('bartypenr:barre_gestion_cr_casse').'</label><br />
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_chercher').'" class="fondo"
   onclick="javascript:barre_search(document.formulaire.barre_chercher.value, document.formulaire.rec_entier.checked, document.formulaire.rec_case.checked,'.$champ.');" /> 
-</td><td><label for="barre_remplacer">'
+</td><td><label for="barre_remplacer'.$champ.'">'
 ._T('bartypenr:barre_gestion_cr_remplacer')
-.'</label> <input type="text" name="barre_remplacer" id="barre_remplacer" value="" size="12" maxlength="255" /><br />
-<input type="checkbox" name="rec_tout" id="rec_tout" value="yes" />
-<label for="rec_tout">'._T('bartypenr:barre_gestion_cr_tout').'</label><br />
-<input type="checkbox" name="rec_entier" id="rec_entier" value="yes" />
-<label for="rec_entier">'._T('bartypenr:barre_gestion_cr_entier').'</label><br />
+.'</label> <input type="text" name="barre_remplacer" id="barre_remplacer'.$champ.'" value="" size="12" maxlength="255" /><br />
+<input type="checkbox" name="rec_tout" id="rec_tout'.$champ.'" value="yes" />
+<label for="rec_tout'.$champ.'">'._T('bartypenr:barre_gestion_cr_tout').'</label><br />
+<input type="checkbox" name="rec_entier" id="rec_entier'.$champ.'" value="yes" />
+<label for="rec_entier'.$champ.'">'._T('bartypenr:barre_gestion_cr_entier').'</label><br />
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_remplacer').'" class="fondo"
   onclick="javascript:barre_searchreplace(document.formulaire.barre_chercher.value, document.formulaire.barre_remplacer.value, document.formulaire.rec_tout.checked, document.formulaire.rec_case.checked, document.formulaire.rec_entier.checked,'.$champ.');" /> 
 </td>
@@ -145,22 +145,22 @@ _T('bartypenr:barre_gestion_anc_caption')
     <td style="width:auto;"><strong>'.
 _T('bartypenr:barre_gestion_anc_inserer')
 .'</strong><br />
-    <label for="ancre_nom"><i>'.
+    <label for="ancre_nom'.$champ.'"><i>'.
 _T('bartypenr:barre_gestion_anc_nom')
 .'</i></label> <br />
-      <input type="text" name="ancre_nom" id="ancre_nom" />
+      <input type="text" name="ancre_nom" id="ancre_nom'.$champ.'" />
 	  
 	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', ancre_nom.value, '.$champ.');" />
     </td>
 	<td style="width:auto;"><strong>'.
 _T('bartypenr:barre_gestion_anc_pointer')
 .'</strong><br />
-    <label for="ancre_cible"><i>'.
+    <label for="ancre_cible'.$champ.'"><i>'.
 _T('bartypenr:barre_gestion_anc_cible')
-.'</i></label> <input type="text" name="ancre_cible" id="ancre_cible" /><br />
-	<label for="ancre_bulle"><i>'.
+.'</i></label> <input type="text" name="ancre_cible" id="ancre_cible'.$champ.'" /><br />
+	<label for="ancre_bulle'.$champ.'"><i>'.
 _T('bartypenr:barre_gestion_anc_bulle')
-.'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle" />
+.'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle'.$champ.'" />
 	<input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" /> 
 </td>
   </tr> 
@@ -399,8 +399,8 @@ warn_onunload = true;
 $(document).ready(function(){';
 	 if (!$forum) {
 	 $ret .= '
-	$('.$champ.').after("<div id=\"article_preview\"></div>");
-	$('.$champ.').before("<div id=\"article_stats\"></div>");
+	$('.$champ.').after("<div id=\"article_preview'.$champ.'\"></div>");
+	$('.$champ.').before("<div id=\"article_stats'.$champ.'\"></div>");
 	$.ajaxTimeout( 5000 );
 	$('.$champ.').keypress(function() { MajPreview() });
 	$('.$champ.').select(function() { MajStats() });
