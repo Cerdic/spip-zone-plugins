@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_zones_acces' => "Zones d'acc&egrave;s restreint",
 'info_retirer_zone' => 'Enlever de la zone',
 'info_retirer_zones' => 'Enlever de toutes les zones',
+'info_ajouter_zones' => 'Ajouter toutes les zones',
 'selectionner_une_zone' => 'S&eacute;lectionner une zone',
 'titre_ajouter_zone' => 'Rejoindre la zone',
 'icone_creer_zone' => 'Cr&eacute;er une nouvelle zone',

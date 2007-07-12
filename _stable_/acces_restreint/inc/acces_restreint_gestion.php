@@ -255,9 +255,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				$zones_supp = "";
 			else
 				$zones_supp = " AND id_zone=$supp_zone";
-			$query = "DELETE FROM spip_zones_$table WHERE $id_table=$id_objet $zones_supp";
+				$query = "DELETE FROM spip_zones_$table WHERE $id_table=$id_objet $zones_supp";
 
 			$result = spip_query($query);
+			$reindexer = true;
+		}
+
+		$add_zone = _request('add_zone');
+		
+		if (($add_zone == -1) && $flag_editable) {
+			$query = "DELETE FROM spip_zones_$table WHERE $id_table=$id_objet";
+			$result = spip_query($query);
+				
+			$allzones = "SELECT * FROM spip_zones";
+			$result_allzones = spip_query($allzones);
+			while($row = spip_fetch_array($result_allzones)) {
+					$id_zone = $row['id_zone'];
+					$query = "INSERT INTO spip_zones_$table (id_zone,$id_table) VALUES ($id_zone, $id_objet)";
+					$result = spip_query($query);
+				}
 			$reindexer = true;
 		}
 		
@@ -343,12 +359,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			}*/
 			else
 				$out .= debut_block_invisible("leszones");
-	
-			if ($nombre_zones_associes > 3) {
+				
 				$out .= "<div align='right' class='arial1'>";
-				$out .= "<a href='". generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=-1#zones"). "'>"._T('accesrestreint:info_retirer_zones')."</a>";
-				$out .= "</div><br />\n";
+				$out .= "<a href='". generer_url_ecrire($url_base, "$id_table=$id_objet&add_zone=-1#zones"). "'>"._T('accesrestreint:info_ajouter_zones')."</a>";
+
+			if ($nombre_zones_associes > 3) {
+				$out .= "<br /><a href='". generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=-1#zones"). "'>"._T('accesrestreint:info_retirer_zones'). http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</a>";
 			}
+			
+				$out .= "</div><br />\n";
 	
 			// il faudrait rajouter STYLE='margin:1px;' qq part
 	
