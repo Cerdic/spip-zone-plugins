@@ -119,7 +119,15 @@ The @nom_site@\'s Team',
 'format' => 'Format',
 'expl_format' => 'Choose the format that you prefer to receive the emails of the newsletters',
 'texte' => 'Text', 
-'html' => 'HTML'
+'html' => 'HTML',
+
+//formulaires
+'email_valide' => 'Please fill in a valid email',
+'numero_valide' => 'Please fill in a valid number',
+'cp_valide' => 'Please fill in a valid postal code',
+'chaine_valide' => 'Please fill in a valid string',
+'champ_obligatoire' => 'This field is required',
+'caracteres' => 'characters'
 );
 
 

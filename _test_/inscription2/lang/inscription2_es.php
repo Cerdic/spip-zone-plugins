@@ -118,7 +118,15 @@ El equipo de @nom_site@',
 'format' => 'Formato',
 'expl_format' => 'Elija el formato en el que prefiere recibir los emails de las listas de difusion',
 'texte' => 'Texto', 
-'html' => 'HTML'
+'html' => 'HTML',
+
+//formulaires
+'email_valide' => '<NEW>Entrez un email valide svn',
+'numero_valide' => '<NEW>Entrez un num&eacute;ro valide svp',
+'cp_valide' => '<NEW>Entrez un code postal valide svp',
+'chaine_valide' => '<NEW>Entrez une cha&icirc;ne de caract&egrave;res valide',
+'champ_obligatoire' => '<NEW>Ce champ est obligatoire',
+'caracteres' => '<NEW>caract&egrave;res'
 
 );
 
