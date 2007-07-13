@@ -7,15 +7,15 @@
 	
 	jQuery.validator.addMethod("chaine", function(value, element) {
 		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.сзаийвкофы ]+$/.test(value);
-	}, "Ce champ est obligatoire, entrez une chaine valide svp");
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
 
 	jQuery.validator.addMethod("postal", function(value, element) {
 		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z0-9\- ]+$/.test(value);
-	}, "Ce champ est obligatoire, entrez un code postal valide svp");
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:cp_valide:>");
 	
 	jQuery.validator.addMethod("numero", function(value, element) {
 		return !jQuery.validator.methods.required(value, element) || /^[0-9\. \-]+$/.test(value);
-	}, "Ce champ est obligatoire, entrez un numero valide svp");
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:numero_valide:>");
 	
 	$().ready(function() {
 	// validate signup form on submit
@@ -40,66 +40,66 @@
 		},
 		messages: {
 			nom: {
-				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 20 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
 			prenom:{
-				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 20 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
 			username: {
-				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 20 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
 			adresse: {
-				required:"Ce champ est obligatoire",
-				postal:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 10 Max 1000 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				postal:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
 			code_postal: {
-				required:"Ce champ est obligatoire",
+				required:"<:inscription2:champ_obligatoire:>",
 				postal:"Entrez un code postal valide",
-				rangeLength:"Min 3 Max 20 carateres"},
+				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
 			ville: {
-				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 2 Max 80 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 2 Max 80 <:inscription2:caracteres:>"},
 			pays: {
-				required:"Ce champ est obligatoire"},
+				required:"<:inscription2:champ_obligatoire:>"},
 			email: {
-				required:"Ce champ est obligatoire",
-				email:"Entrez un email valide",
-				rangeLength:"Min 5 Max 30 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				email:"<:inscription2:email_valide:>",
+				rangeLength:"Min 5 Max 30 <:inscription2:caracteres:>"},
 			telephone: {
-				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valide",
-				rangeLength:"Min 6 Max 20 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
 			fax: {
-				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valide",
-				rangeLength:"Min 6 Max 20 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
 			mobile: {
-				required:"Ce champ est obligatoire",
-				numero:"Entrez un numero valide",
-				rangeLength:"Min 6 Max 20 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
 			profession: {
-				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 30 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 30 <:inscription2:caracteres:>"},
 			societe: {
-				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 30 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 30 <:inscription2:caracteres:>"},
 			secteur:{
-				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 50 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
 			fonction: {
-				required:"Ce champ est obligatoire",
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 50 carateres"},
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
 			divers:{
-				chaine:"Entrez une chaine de caracteres valide",
-				rangeLength:"Min 3 Max 1000 carateres"}
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 3 Max 1000 <:inscription2:caracteres:>"}
 		}
 	});
 
