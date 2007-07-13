@@ -54,7 +54,6 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 		}
 	}
 	$commentaire = true;
-	$aux = true;
 	if($var_user['domaines']){
 		include(find_in_path("inc/domaines.php"));
 		$var_user['sites'] = $domaine[$var_user['domaines']]['sites'] ;
