@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'code_postal' => 'Postal Code',
 'sexe' => 'Gender',
 'ville' => 'City',
+'pays' => 'Country',
 'email' => 'E-Mail',
 'telephone' => 'Telephone',
 'fax' => 'Fax',
@@ -105,7 +106,7 @@ The @nom_site@\'s Team',
 'septembre' => 'September',
 'octobre' => 'October',
 'novembre' => 'November',
-'decembre' => 'December'
+'decembre' => 'December',
 
 'accesrestreint' => 'Restricted access',
 'choisir_zones' => 'Choose the areas where the new adherents of the site will be affected',
