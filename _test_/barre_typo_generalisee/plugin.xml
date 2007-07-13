@@ -16,7 +16,7 @@
 	Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, sites, mots clefs.. etc...),
 	 et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=typo_partout] 
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 
 	</options>
