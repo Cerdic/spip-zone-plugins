@@ -40,7 +40,7 @@
 -* - Il est possible de d&eacute;sactiver ces fonctionnalit&eacute;s &agrave; l'aide des fichiers de configuration,
 -* - Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP.
 -* - Pour l'instant le plugin doit &#234;tre install&#233;dans la racine du r&#233;pertoire plugin de spip.
--* - Le plugin n'est pas compatible avec le plugin "Barre Typo Enlumin&#233e pour 1.9.1 et suivantes" (apparition de multiples boutons).
+-* - Le plugin n'est pas compatible avec le plugin "Barre Typo Enlumin&#233;e pour 1.9.1 et suivantes" (apparition de multiples boutons).
 
 <u>Attention :</u>
 -* - Le plugin passe FCKEditor dans la langue de l'utilisateur de SPIP. Il est donc n&#233;c&#233;ssaire de choisir au moins un fois la langue pour b&#233;n&#233;ficier du fran&#231;ais.
