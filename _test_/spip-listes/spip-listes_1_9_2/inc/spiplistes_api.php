@@ -79,6 +79,8 @@ function spiplistes_propre($texte){
 	$texte = propre($texte); // pb: enleve aussi <style>...  
 	$texte = propre_bloog($texte); //nettoyer les spip class truc en trop
 	$texte = ereg_replace("__STYLE__", $style_str, $texte);
+	//les liens avec double début #URL_SITE_SPIP/#URL_ARTICLE
+	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
 	$texte = liens_absolus($texte);
 	
 	return $texte;
