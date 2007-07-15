@@ -133,7 +133,7 @@ class Crayon {
     function Crayon($name, $texts = array(), $options = array()) {
         $this->name = $name;
     	list($this->type, $this->modele, $this->id) = explode('-', $this->name, 3);
-    	if (is_scalar($texts)) {
+    	if (is_scalar($texts) || is_null($texts)) {
     		$texts = array($this->modele => $texts);
     	}
         $this->texts = $texts;
