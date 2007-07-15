@@ -50,6 +50,7 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 	if (!$type) {
 		$type = 'auteur';
 		$id = $proprietaire;
+		$ids['id_auteur'] = $id;
 	}
 
 	include_spip('inc/autoriser');
