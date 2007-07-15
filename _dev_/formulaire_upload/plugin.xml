@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Formulaire Upload
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	fil@rezo.net
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+		Permet a chaque redacteur d'uploader des documents dans sa boite perso
+	</description>
+	<prefix>
+		FormulaireUpload
+	</prefix>
+
+	<fonctions>base/formulaire_upload.php</fonctions>
+
+	<version_base>0.1</version_base>
+	<install>base/formulaire_upload_install.php</install>
+</plugin>

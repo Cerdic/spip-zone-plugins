@@ -1,0 +1,61 @@
+<div class="formulaire_spip formulaire_upload"  id="formulaire_upload">
+
+<form action="#ENV{url}#formulaire_upload" method="post" enctype="multipart/form-data"><div>
+[(#ENV{url_post}|form_hidden)]
+
+
+[(#REM)
+	Ce qui suit est herite du formulaire forum mais ne semble plus servir, a voir...
+]
+
+[<input type="hidden" name="arg" value="(#ENV{arg})" />]
+[<input type="hidden" name="hash" value="(#ENV{hash})" />]
+[<input type="hidden" name="verif_(#ENV{hash})" value="ok" />]
+[<input type="hidden" name="afficher_texte" value="(#ENV{afficher_texte})" />]
+
+
+#ENV{debug}
+
+	<fieldset><legend>Vos fichiers</legend>
+
+	<B_docs>
+		[<p class="pagination">(#PAGINATION)</p>]
+	<BOUCLE_docs(DOCUMENTS){id_auteur=#ENV{proprietaire}}
+	{!par id_document}{pagination 3}>
+	<div class="spip_doc_descriptif" style='float:#LANG_LEFT;width:80px; margin-bottom: 8px; text-align:center;'>
+		[(#LOGO_DOCUMENT|#URL_DOCUMENT||reduire_image{78,0}
+			|inserer_attribut{title,#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]})]
+		[<br />(#DATE|affdate_court)]
+	</div>
+	<div style='float:#LANG_RIGHT;width:60%;'>
+		<div style='float:#LANG_RIGHT;width:10px;'><input type="checkbox" name="supprimer[]" value="#ID_DOCUMENT" title="supprimer ce document" /></div>
+	<h4 class="#EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})]</h4>
+	[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF|sinon{<:info_descriptif:>})</div>]
+	</div>
+	<br style='clear: both;' />
+	</BOUCLE_docs>
+	</B_docs>
+		#PAGINATION
+	<//B_docs>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>
+	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
+
+	<div style="margin-top:5px; padding:5px; border-top: dotted gray 1px;">
+		<label>Choisir les fichiers à ajouter&nbsp;:
+		<input type="file" name="fichier" class="forml" />
+		</label>
+	</div>
+
+	<p class="spip_bouton"><input type="submit" value="<:bouton_enregistrer:>" /></p>
+
+	</fieldset>
+	<br style="clear:both;" />
+
+
+</div>
+</form>
+
+</div>
+<br style="clear:both" />

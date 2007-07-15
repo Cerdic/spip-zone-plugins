@@ -1,0 +1,99 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
+/********************************/
+/* GESTION DU FORMULAIRE UPLOAD */
+/********************************/
+
+// Contexte du formulaire
+
+function balise_FORMULAIRE_UPLOAD ($p) {
+	$p = calculer_balise_dynamique($p,'FORMULAIRE_UPLOAD', array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic'));
+	return $p;
+}
+
+/*
+// http://doc.spip.org/@balise_FORMULAIRE_UPLOAD_stat
+function balise_FORMULAIRE_UPLOAD_stat($args, $filtres) {
+	#include_spip('balise/formulaire_forum');
+	#return balise_FORMULAIRE_FORUM_stat($args,$filtres);
+	return $args;
+}
+*/
+
+// http://doc.spip.org/@balise_FORMULAIRE_UPLOAD_dyn
+function balise_FORMULAIRE_UPLOAD_dyn(
+	$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic
+) {
+
+	// Le contexte nous servira peut-etre a identifier
+	// le type d'upload (est-ce destine a un article etc)
+	// Pour l'instant on uploade tout dans la fiche auteur
+
+	// id_rubrique est parfois passee pour les articles, on n'en veut pas
+	$ids = array();
+	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
+		$id_rubrique = 0;
+	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
+		$ids[$o] = ($x = intval($$o)) ? $x : '';
+	}
+
+	if (!$proprietaire = intval($GLOBALS['auteur_session']['id_auteur']))
+		return false;
+
+	include_spip('inc/autoriser');
+	if (!autoriser(''))
+		return false;
+
+
+	$invalider = false;
+
+	// supprimer des documents ?
+	if (is_array(_request('supprimer')))
+	foreach (_request('supprimer') as $supprimer) {
+		if ($supprimer = intval($supprimer)
+		AND $s = spip_query("SELECT * FROM spip_documents_auteurs WHERE id_auteur="._q($proprietaire)." AND id_document="._q($supprimer))
+		AND $t = spip_fetch_array($s)) {
+			include_spip('inc/documents');
+			$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($supprimer));
+			$t = spip_fetch_array($s);
+			unlink(copie_locale(get_spip_doc($t['fichier'])));
+			spip_query("DELETE FROM spip_documents_auteurs WHERE id_document="._q($supprimer));
+			spip_query("DELETE FROM spip_documents WHERE id_document="._q($supprimer));
+			$invalider = true;
+			spip_log('supprimer '.$supprimer, 'upload');
+		}
+	}
+
+	// Ajouter un document
+	if ($files = ($_FILES ? $_FILES : $GLOBALS['HTTP_POST_FILES'])
+	AND autoriser('')) {
+		spip_log($files, 'upload');
+		include_spip('action/joindre');
+		$joindre1 = charger_fonction('joindre1', 'inc');
+		$joindre1($files, 'document', 'auteur', $proprietaire, 0,
+		 $hash, $redirect, $documents_actifs, $iframe_redirect);
+		$invalider = true;
+		spip_log($files, 'upload');
+	}
+
+	if ($invalider) {
+		include_spip('inc/invalideur');
+		suivre_invalideur("0",true);
+		spip_log('invalider', 'upload');
+	}
+
+	return array('formulaires/upload', 0,
+	array(
+		'url' => $script, # ce sur quoi on fait le action='...'
+		'url_post' => $script_hidden, # pour les variables hidden
+		'arg' => $arg,
+		'hash' => $hash,
+		'nobot' => _request('nobot'),
+		'proprietaire' => $proprietaire,
+		'debug' => $debug /* un truc a afficher si on veut debug */
+		));
+}
+
+?>

@@ -1,0 +1,107 @@
+#CACHE{86400}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+
+<style type="text/css"><!--
+	#zone-documents td { vertical-align: top; font-size:small;}
+	#zone-documents td { border-top: dotted gray 1px;  padding-top: 5px; padding-bottom:8px; }
+
+	#zone-documents table {}
+	.fiche-document { }
+	.logo-document { width: 130px; text-align: center; }
+// --></style>
+
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.MultiFile.js})"></script>
+]
+</head>
+
+<body class="page_article">
+<div id="page">
+
+<div style="width:40%; float:#LANG_RIGHT">
+#FORMULAIRE_UPLOAD
+</div>
+
+
+<script type='text/javascript'><!--
+if (window.jQuery && jQuery.fn.ajaxForm) {
+function upload_attach (re) {
+	jQuery('#formulaire_upload>form')
+
+	// changer l'action : pas indispensable mais permet d'eviter la lenteur du
+	// recalcul total de la page, qui provoque en plus un rechargement
+	// des javascripts etc. dans l'iframe.
+	.attr('action', '#URL_PAGE{mini_formulaire_upload}')
+
+	.ajaxForm({
+		'beforeSubmit': function(formData, jqForm, options){
+			$('#formulaire_upload')
+			.css('opacity',0.2);
+			return true;
+		},
+		'success': function(e){
+			var h;
+			if (h = $('<iframe><\/iframe>').html(e).find('#formulaire_upload').html()) {
+				$('#formulaire_upload')
+				.html(h)
+				.animate({'opacity':1.0}, 'slow');
+				upload_attach(true);
+			}
+			else
+				alert('bug !');
+		}
+	});
+	// si on reattache les evenements, remettre les crayons
+	if (re && window.cQuery)
+		cQuery("#formulaire_upload .crayon:lt(1000)").initcrayon();
+
+	// si multifile est la, on l'utilise (trop bien)
+	if (jQuery.fn.MultiFile)
+	$('#formulaire_upload>form input[@type=file]').MultiFile({
+		max: 5,
+		STRING: {'remove': 'x', 'selected': '$file'}
+	});
+};
+upload_attach(false);
+}
+// --></script>
+
+
+
+<div style="width:55%; float:#LANG_LEFT">
+
+<B_tous>
+<p class="pagination">#PAGINATION</p>
+<table id="zone-documents">
+<BOUCLE_tous(DOCUMENTS){id_auteur>0}{pagination}{!par date}>
+<tr><td class="logo-document">
+#ID_AUTEUR [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+<small><br />#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]</small>
+</td>
+<td class="fiche-document">
+<small style="float:right; margin-left:10px;"><BOUCLE_a(AUTEURS){id_document}>#NOM</BOUCLE_a>[, (#DATE|affdate_court)]<br />
+</small>
+
+[<strong>(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})</strong>]
+[<div class="descriptif">(#DESCRIPTIF|PtoBR)</div>]
+</td>
+</tr>
+</BOUCLE_tous>
+</table>
+</B_tous>
+
+<p>Pas encore de document sur la zone de téléchargement</p>
+<//B_tous>
+
+</div>
+
+<br style="clear:both;" />
+
+
+</div>
+</body>
+</html>
