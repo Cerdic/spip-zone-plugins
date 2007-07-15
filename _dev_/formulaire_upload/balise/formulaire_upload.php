@@ -35,17 +35,26 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 	$ids = array();
 	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
 		$id_rubrique = 0;
-	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
-		$ids[$o] = ($x = intval($$o)) ? $x : '';
+	foreach (array('id_article', 'id_breve', 'id_rubrique', 'id_syndic', 'id_forum') as $o) {
+		if ($x = intval($$o)) {
+			$ids[$o] = $x;
+			$id = $x;
+			$type = str_replace('id_', '', $o);
+		}
 	}
 
 	if (!$proprietaire = intval($GLOBALS['auteur_session']['id_auteur']))
 		return false;
 
+
+	if (!$type) {
+		$type = 'auteur';
+		$id = $proprietaire;
+	}
+
 	include_spip('inc/autoriser');
 	if (!autoriser(''))
 		return false;
-
 
 	$invalider = false;
 
@@ -53,26 +62,26 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 	if (is_array(_request('supprimer')))
 	foreach (_request('supprimer') as $supprimer) {
 		if ($supprimer = intval($supprimer)
-		AND $s = spip_query("SELECT * FROM spip_documents_auteurs WHERE id_auteur="._q($proprietaire)." AND id_document="._q($supprimer))
+		AND $s = spip_query("SELECT * FROM spip_documents_${type}s WHERE id_${type}="._q($id)." AND id_document="._q($supprimer))
 		AND $t = spip_fetch_array($s)) {
 			include_spip('inc/documents');
 			$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($supprimer));
 			$t = spip_fetch_array($s);
 			unlink(copie_locale(get_spip_doc($t['fichier'])));
-			spip_query("DELETE FROM spip_documents_auteurs WHERE id_document="._q($supprimer));
+			spip_query("DELETE FROM spip_documents_${type}s WHERE id_document="._q($supprimer));
 			spip_query("DELETE FROM spip_documents WHERE id_document="._q($supprimer));
 			$invalider = true;
-			spip_log('supprimer '.$supprimer, 'upload');
+			spip_log("supprimer document ($type)".$supprimer, 'upload');
 		}
 	}
 
 	// Ajouter un document
-	if ($files = ($_FILES ? $_FILES : $GLOBALS['HTTP_POST_FILES'])
+	if ($files = ($_FILES ? $_FILES : $HTTP_POST_FILES)
 	AND autoriser('')) {
 		spip_log($files, 'upload');
 		include_spip('action/joindre');
 		$joindre1 = charger_fonction('joindre1', 'inc');
-		$joindre1($files, 'document', 'auteur', $proprietaire, 0,
+		$joindre1($files, 'document', $type, $id, 0,
 		 $hash, $redirect, $documents_actifs, $iframe_redirect);
 		$invalider = true;
 		spip_log($files, 'upload');
@@ -85,15 +94,17 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 	}
 
 	return array('formulaires/upload', 0,
+
+	array_merge($ids,
 	array(
 		'url' => $script, # ce sur quoi on fait le action='...'
 		'url_post' => $script_hidden, # pour les variables hidden
 		'arg' => $arg,
 		'hash' => $hash,
 		'nobot' => _request('nobot'),
-		'proprietaire' => $proprietaire,
 		'debug' => $debug /* un truc a afficher si on veut debug */
-		));
+		))
+	);
 }
 
 ?>

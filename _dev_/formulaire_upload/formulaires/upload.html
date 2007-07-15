@@ -20,7 +20,8 @@
 
 	<B_docs>
 		[<p class="pagination">(#PAGINATION)</p>]
-	<BOUCLE_docs(DOCUMENTS){id_auteur=#ENV{proprietaire}}
+	<BOUCLE_docs(DOCUMENTS)
+	{id_auteur?}{id_article?}{id_breve?}{id_rubrique?}
 	{!par id_document}{pagination 3}>
 	<div class="spip_doc_descriptif" style='float:#LANG_LEFT;width:80px; margin-bottom: 8px; text-align:center;'>
 		[(#LOGO_DOCUMENT|#URL_DOCUMENT||reduire_image{78,0}

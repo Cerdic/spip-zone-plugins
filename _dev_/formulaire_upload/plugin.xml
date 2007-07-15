@@ -12,7 +12,7 @@
 	dev
 	</etat>
 	<description>
-		Permet a chaque redacteur d'uploader des documents dans sa boite perso
+		Permet &#224; chaque r&#233;dacteur d'uploader des documents dans sa bo&#238;te perso ; {cf.} [la zone d'upload->../spip.php?page=upload_zone].
 	</description>
 	<prefix>
 		FormulaireUpload
