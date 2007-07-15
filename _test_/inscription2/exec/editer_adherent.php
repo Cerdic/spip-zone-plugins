@@ -18,10 +18,10 @@ function exec_editer_adherent(){
 		
 	if($act=='val'){
 		foreach(lire_config('inscription2') as $cle => $val){
-			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
+			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut'){
 				$cle = ereg_replace("^username.*$", "login", $cle);
 				$cle = ereg_replace("_(fiche|table).*$", "", $cle);
-				if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'statut')
+				if($cle == 'nom' or $cle == 'email' or $cle == 'login' )
 					$var_user['a.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
 				elseif(ereg("^statut_rel.*$", $cle))
 					$var_user['b.statut_relances'] =  '`statut_relances` = \''.$_POST['statut_relances'].'\'';
@@ -73,10 +73,10 @@ function exec_editer_adherent(){
 
 	$var_user['b.id'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
-		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
+		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'statut')
+			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
