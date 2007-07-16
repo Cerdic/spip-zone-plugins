@@ -1,75 +1,12 @@
 <html>
 <head>
 	<title><:inscription2:page_confirmation:></title>
-<script language="javascript" src="#CHEMIN{javascript/md5.js}"></script>
-<script language="javascript">
-<!--
-  function cryptage() {
-    if(document.password.pass1.value == document.password.pass2.value){
-		str = document.password.pass1.value;
-		document.password.pass.value = MD5(str);
-		document.password.pass2.value = '';
-		document.password.pass1.value = '';
-	}else{
-		document.password.pass1.value = '';
-		document.password.pass2.value = '';
-	}
-  }
-// -->
-</script>
 	<INCLURE{fond=inc-head}>
 </head>
 
 <body>
 	<INCLURE{fond=inc-entete}>
-<?php
-	$id = $_GET['id'];
-	$mode = $_GET['mode'];
-	$cle = $_GET['cle'];
-	$pass = $_POST['pass'];
-	if($id != '' and $mode != '' and $cle != '' and $pass == ''){
-		$n = confirmation_inscription2($id, $mode, $cle);
-		if ($n == 'pass'){
-	?>
-		
-		<form name='password' method='post' action="#SELF" >
-		<:pass_choix_pass:><br />
-		<input type='password' name='pass1' id='pass1'><br />
-		<:inscription2:redemande_password:><br />
-		<input type='password' name='pass2' id='pass2'>
-		<input type='password' name='pass' id='pass' style="display:none;">
-	
-		<input onClick="cryptage();" type="submit" value='<:bouton_valider:>'/>
-	<?php 	
-		}elseif($n == 'sup'){
-			spip_query("DELETE FROM spip_auteurs WHERE id_auteur = '$id'");
-			spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur = '$id'");
-			echo "<strong>"._T('inscription2:suppression_faite')."</strong>";
-		}else
-			echo "rien a faire";
-	}else{
-		include_spip('inc/mail');
-		$htpass = generer_htpass($pass);
-		$statut = lire_config('inscription2/statut');
-		spip_query("UPDATE spip_auteurs SET statut = '$statut', pass='$pass', htpass='$htpass', alea_actuel='' WHERE id_auteur = ".$id);
-		echo "<strong>"._T('pass_nouveau_enregistre')."</strong>";
-		$var_user = spip_query("SELECT nom, email, login FROM spip_auteurs WHERE id_auteur=".$id);
-		$var_user = spip_fetch_array($var_user);
-		if($var_user){
-			$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
-			$adresse_site = $GLOBALS['meta']["adresse_site"];
-			$message = _T('inscription2:message_auto')
-			. _T('inscription2:email_bonjour', array('nom'=>$var_user['nom']))."\n\n"
-			. _T('inscription2:texte_email_confirmation', array('login'=> $var_user['login'], 'nom_site' => $nom_site_spip));
-			if (envoyer_mail($var_user['email'],"[$nom_site_spip] "._T('inscription2:compte_active'), $message))
-				return;
-			else
-				return _T('inscription2:probleme_email');
-		}else
-			return _T('inscription2:probleme_email');
-	}
-?>
-
+#FORMULAIRE_INSCRIPTION2_CONFIRMATION
 	<INCLURE{fond=inc-pied}>
 </body>
 </html>
