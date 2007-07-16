@@ -26,7 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fiche' => 'card-index',
 'fiche_mod' => 'Modifiable',
 'table' => 'Table',
+'par_defaut' => '<NEW> par d&eacute;faut',
 'form_expl' => ' : The field will be displayed on the form INSCRIPTION2',
+'form_oblig_expl' => '<NEW> : Rendre la saisie obligatoire dans le formulaire',
 'fiche_expl'=> ' : The field will be visible on the card of member',
 'fiche_mod_expl' => ' : The field could be modified from the public interface by the member if the plugin CRAYONS is used (PENCILS)',
 'table_expl' => ' : The field will be displayed on the list of the adherents (private area)',
@@ -119,15 +121,7 @@ The @nom_site@\'s Team',
 'format' => 'Format',
 'expl_format' => 'Choose the format that you prefer to receive the emails of the newsletters',
 'texte' => 'Text', 
-'html' => 'HTML',
-
-//formulaires
-'email_valide' => 'Please fill in a valid email',
-'numero_valide' => 'Please fill in a valid number',
-'cp_valide' => 'Please fill in a valid postal code',
-'chaine_valide' => 'Please fill in a valid string',
-'champ_obligatoire' => 'This field is required',
-'caracteres' => 'characters'
+'html' => 'HTML'
 );
 
 

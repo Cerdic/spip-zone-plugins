@@ -39,11 +39,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </td><td>
 	<label>
 		<input type="checkbox" name="nom" checked="checked" id="nom" style='display:none;' />
-		par d&eacute;faut
+		<:inscription2:par_defaut:>
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="nom_fiche_mod" onclick = "enadis(this,nom_fiche)" [checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
+		<input type="checkbox" name="nom_fiche_mod" onclick="enadis(this,nom_fiche)" [checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
 	</label>
 </td><td>
 	<label>
@@ -60,7 +60,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </td><td>
 	<label>
 		<input type="checkbox" name="email" checked="checked" id="email" style='display:none;'/>
-		par d&eacute;faut
+		<:inscription2:par_defaut:>
 	</label>
 </td><td>
 	<label>
@@ -99,7 +99,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:prenom:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="prenom" [checked="(#ENV{prenom}?{checked})"] id="prenom" />
+		<input type="checkbox" name="prenom" [checked="(#ENV{prenom}?{checked})"] onclick="showoblig(this)" id="prenom" />
+	</label>
+	<label style="[(#ENV{prenom}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="prenom_obligatoire" [checked="(#ENV{prenom_obligatoire}?{checked})"] id="prenom_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -119,7 +123,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:username:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="username" [checked="(#ENV{username}?{checked})"] id="username" />
+		<input type="checkbox" name="username" [checked="(#ENV{username}?{checked})"] onclick="showoblig(this)" id="username" />
+	</label>
+	<label style="[(#ENV{username}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="username_obligatoire" [checked="(#ENV{username_obligatoire}?{checked})"] id="username_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -139,7 +147,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:naissance:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="naissance" [checked="(#ENV{naissance}?{checked})"] id="naissance" />
+		<input type="checkbox" name="naissance" [checked="(#ENV{naissance}?{checked})"] onclick="showoblig(this)" id="naissance" />
+	</label>
+	<label style="[(#ENV{naissance}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="naissance_obligatoire" [checked="(#ENV{naissance_obligatoire}?{checked})"] id="naissance_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -159,7 +171,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:sexe:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="sexe" [checked="(#ENV{sexe}?{checked})"] id="sexe" />
+		<input type="checkbox" name="sexe" [checked="(#ENV{sexe}?{checked})"] onclick="showoblig(this)" id="sexe" />
+	</label>
+	<label style="[(#ENV{sexe}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="sexe_obligatoire" [checked="(#ENV{sexe_obligatoire}?{checked})"] id="sexe_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -179,7 +195,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:adresse:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="adresse" [checked="(#ENV{adresse}?{checked})"] id="adresse" />
+		<input type="checkbox" name="adresse" [checked="(#ENV{adresse}?{checked})"] onclick="showoblig(this)" id="adresse" />
+	</label>
+	<label style="[(#ENV{adresse}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="adresse_obligatoire" [checked="(#ENV{adresse_obligatoire}?{checked})"] id="adresse_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -199,7 +219,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:code_postal:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="code_postal" [checked="(#ENV{code_postal}?{checked})"] id="code_postal" />
+		<input type="checkbox" name="code_postal" [checked="(#ENV{code_postal}?{checked})"] onclick="showoblig(this)" id="code_postal" />
+	</label>
+	<label style="[(#ENV{code_postal}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="code_postal_obligatoire" [checked="(#ENV{code_postal_obligatoire}?{checked})"] id="code_postal_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -219,7 +243,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:ville:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="ville" [checked="(#ENV{ville}?{checked})"] id="ville" />
+		<input type="checkbox" name="ville" [checked="(#ENV{ville}?{checked})"] onclick="showoblig(this)" id="ville" />
+	</label>
+	<label style="[(#ENV{ville}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="ville_obligatoire" [checked="(#ENV{ville_obligatoire}?{checked})"] id="ville_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -239,7 +267,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:pays:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="pays" [checked="(#ENV{pays}?{checked})"] id="pays" />
+		<input type="checkbox" name="pays" [checked="(#ENV{pays}?{checked})"] onclick="showoblig(this)" id="pays" />
+	</label>
+	<label style="[(#ENV{pays}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="pays_obligatoire" [checked="(#ENV{pays_obligatoire}?{checked})"] id="pays_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -259,7 +291,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:telephone:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="telephone" [checked="(#ENV{telephone}?{checked})"] id="telephone" />
+		<input type="checkbox" name="telephone" [checked="(#ENV{telephone}?{checked})"] onclick="showoblig(this)" id="telephone" />
+	</label>
+	<label style="[(#ENV{telephone}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="telephone_obligatoire" [checked="(#ENV{telephone_obligatoire}?{checked})"] id="telephone_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -279,7 +315,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:fax:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="fax" [checked="(#ENV{fax}?{checked})"] id="fax" />
+		<input type="checkbox" name="fax" [checked="(#ENV{fax}?{checked})"] onclick="showoblig(this)" id="fax" />
+	</label>
+	<label style="[(#ENV{fax}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="fax_obligatoire" [checked="(#ENV{fax_obligatoire}?{checked})"] id="fax_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -299,7 +339,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:mobile:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="mobile" [checked="(#ENV{mobile}?{checked})"] id="mobile" />
+		<input type="checkbox" name="mobile" [checked="(#ENV{mobile}?{checked})"] onclick="showoblig(this)" id="mobile" />
+	</label>
+	<label style="[(#ENV{mobile}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="mobile_obligatoire" [checked="(#ENV{mobile_obligatoire}?{checked})"] id="mobile_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -319,7 +363,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:profession:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="profession" [checked="(#ENV{profession}?{checked})"] id="profession" />
+		<input type="checkbox" name="profession" [checked="(#ENV{profession}?{checked})"] onclick="showoblig(this)" id="profession" />
+	</label>
+	<label style="[(#ENV{profession}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="profession_obligatoire" [checked="(#ENV{profession_obligatoire}?{checked})"] id="profession_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -339,7 +387,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:societe:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="societe" [checked="(#ENV{societe}?{checked})"] id="societe" />
+		<input type="checkbox" name="societe" [checked="(#ENV{societe}?{checked})"] onclick="showoblig(this)" id="societe" />
+	</label>
+	<label style="[(#ENV{societe}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="societe_obligatoire" [checked="(#ENV{societe_obligatoire}?{checked})"] id="societe_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -359,7 +411,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:secteur:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="secteur" [checked="(#ENV{secteur}?{checked})"] id="secteur" />
+		<input type="checkbox" name="secteur" [checked="(#ENV{secteur}?{checked})"] onclick="showoblig(this)" id="secteur" />
+	</label>
+	<label style="[(#ENV{secteur}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="secteur_obligatoire" [checked="(#ENV{secteur_obligatoire}?{checked})"] id="secteur_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -379,7 +435,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:fonction:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="fonction" [checked="(#ENV{fonction}?{checked})"] id="fonction" />
+		<input type="checkbox" name="fonction" [checked="(#ENV{fonction}?{checked})"] onclick="showoblig(this)" id="fonction" />
+	</label>
+	<label style="[(#ENV{fonction}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="fonction_obligatoire" [checked="(#ENV{fonction_obligatoire}?{checked})"] id="fonction_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -399,7 +459,11 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:commentaire:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="commentaire" [checked="(#ENV{commentaire}?{checked})"] id="commentaire" />
+		<input type="checkbox" name="commentaire" [checked="(#ENV{commentaire}?{checked})"] onclick="showoblig(this)" id="commentaire" />
+	</label>
+	<label style="[(#ENV{commentaire}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="commentaire_obligatoire" [checked="(#ENV{commentaire_obligatoire}?{checked})"] id="commentaire_obligatoire" />
+		<span style="color:red">*</span>
 	</label>
 </td><td>
 	<label>
@@ -419,6 +483,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <br />
 <small>
 <strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
+<strong><span style="color:red">*</span></strong><:inscription2:form_oblig_expl:><br />
 <strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
 <strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
 <strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
@@ -492,7 +557,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <div>
 	<strong><:inscription2:statut:></strong><br />
 	<:inscription2:exp_statut:><br />
-	<select name="statut" id="statut">
+	<select name="statut_nouveau" id="statut_nouveau">
 		<option value='6forum'><:inscription2:visiteur:></option>
 		<option value='1comite'><:inscription2:auteur:></option>
 	</select>
@@ -553,6 +618,17 @@ if(boxName.checked){
 }
 else 
 	$(boxNom).slideUp('slow');
+}
+// --></script>
+
+<script type="text/javascript"><!--
+function showoblig(boxName) {
+if(boxName.checked){
+	$(boxName).parent().next('label').slideDown('slow');
+}
+else 
+	$(boxName).parent().next('label').slideUp('slow');
+	$(boxName).parent().next('label').find('input[@type=checkbox]').eq(0).attr({ checked: ''});
 }
 // --></script>
 

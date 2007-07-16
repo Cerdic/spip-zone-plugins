@@ -26,7 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fiche' => 'Ficha',
 'fiche_mod' => 'Modificable',
 'table' => 'Tabla',
+'par_defaut' => '<NEW> par d&eacute;faut',
 'form_expl' => ': El campo ser&aacute; mostrado en el formulario INSCRIPTION2',
+'form_oblig_expl' => '<NEW> : Rendre la saisie obligatoire dans le formulaire',
 'fiche_expl'=> ': El campo ser&aacute; visible en la ficha de adherente',
 'fiche_mod_expl' => ': El campo ser&aacute; visible y modificable en la ficha de adherente, con la condicion de tener instalado el plugin CRAYONS',
 'table_expl' => ': El campo estar&aacute; presente en la tabla de adherentes (espacio privado)',
@@ -118,15 +120,7 @@ El equipo de @nom_site@',
 'format' => 'Formato',
 'expl_format' => 'Elija el formato en el que prefiere recibir los emails de las listas de difusion',
 'texte' => 'Texto', 
-'html' => 'HTML',
-
-//formulaires
-'email_valide' => '<NEW>Entrez un email valide svn',
-'numero_valide' => '<NEW>Entrez un num&eacute;ro valide svp',
-'cp_valide' => '<NEW>Entrez un code postal valide svp',
-'chaine_valide' => '<NEW>Entrez une cha&icirc;ne de caract&egrave;res valide',
-'champ_obligatoire' => '<NEW>Ce champ est obligatoire',
-'caracteres' => '<NEW>caract&egrave;res'
+'html' => 'HTML'
 
 );
 

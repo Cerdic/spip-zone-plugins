@@ -26,7 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fiche' => 'Fiche',
 'fiche_mod' => 'Modifiable',
 'table' => 'Table',
+'par_defaut' => 'par d&eacute;faut',
 'form_expl' => ' : Le champ sera affich&eacute; sur le formulaire INSCRIPTION2',
+'form_oblig_expl' => ' : Rendre la saisie obligatoire dans le formulaire',
 'fiche_expl'=> ' : Le champ sera visible sur la fiche d\'adh&eacute;rent',
 'fiche_mod_expl' => ' : Le champ sera modifiable depuis l\'interface publique par l\'adh&eacute;rent &agrave; condition d\'utiliser le plugin CRAYONS',
 'table_expl' => ' : Le champ sera affich&eacute; sur la liste des adh&eacute;rents (espace priv&eacute;)',
@@ -140,15 +142,8 @@ L\'&eacute;quipe de @nom_site@',
 'pays' => 'Pays',
 'commentaire' => 'Commentaire',
 'validite' => 'Date de validit&eacute;',
-'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
+'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;'
 
-//formulaires
-'email_valide' => 'Entrez un email valide svn',
-'numero_valide' => 'Entrez un num&eacute;ro valide svp',
-'cp_valide' => 'Entrez un code postal valide svp',
-'chaine_valide' => 'Entrez une cha&icirc;ne de caract&egrave;res valide',
-'champ_obligatoire' => 'Ce champ est obligatoire',
-'caracteres' => 'caract&egrave;res'
 );
 
 
