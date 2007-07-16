@@ -55,7 +55,7 @@ function typo_partout_insertion_in_body_prive ($texte)
 		$barre_temporaire = "<div id=\"barre_typo_rubrique_texte\" style=\"display: none;\">".afficher_barre('document.formulaire_rubrique.texte')."</div>
 		<div id=\"barre_typo_rubrique_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire_rubrique.descriptif')."</div>";
 	}
-	else if (($_GET['exec'] == "mots_edit")	&& (lire_config('typo_partout/mots_typo_partout') == "on"))	
+	else if ((($_GET['exec'] == "mots_edit")||($_GET['exec'] == "mots_type"))	&& (lire_config('typo_partout/mots_typo_partout') == "on"))	
 	{
 		$barre_temporaire = "<div id=\"barre_typo_mot_texte\" style=\"display: none;\">".afficher_barre('document.formulaire_mot.texte')."</div>
 		<div id=\"barre_typo_mot_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire_mot.descriptif')."</div>";
