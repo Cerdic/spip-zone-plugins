@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+<title>Upload Zone - [(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
 <INCLURE{fond=inc-head}>
 
@@ -10,8 +10,8 @@
 	#zone-documents td { vertical-align: top; font-size:small;}
 	#zone-documents td { border-top: dotted gray 1px;  padding-top: 5px; padding-bottom:8px; }
 
-	#zone-documents table {}
-	.fiche-document { }
+	#zone-documents table { }
+	.fiche-document { width: 70%; }
 	.logo-document { width: 130px; text-align: center; }
 // --></style>
 
@@ -19,12 +19,31 @@
 ]
 </head>
 
-<body class="page_article">
+<body class="page_upload">
+
 <div id="page">
 
-<div style="width:40%; float:#LANG_RIGHT">
-#FORMULAIRE_UPLOAD
-</div>
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a></div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+			<div class="cartouche">
+			<h1 class="titre">Upload zone</h1>
+			</div>
+
+			<INCLURE{fond=modeles/upload_documents_auteurs}>
+
+		</div>
+	</div>
+
+	<div id="navigation">
+		#FORMULAIRE_UPLOAD
+	</div>
 
 
 <script type='text/javascript'><!--
@@ -72,32 +91,6 @@ upload_attach(false);
 
 
 
-<div style="width:55%; float:#LANG_LEFT">
-
-<B_tous>
-<p class="pagination">#PAGINATION</p>
-<table id="zone-documents">
-<BOUCLE_tous(DOCUMENTS){id_auteur>0}{pagination}{!par date}>
-<tr><td class="logo-document">
-#ID_AUTEUR [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-<small><br />#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]</small>
-</td>
-<td class="fiche-document">
-<small style="float:right; margin-left:10px;"><BOUCLE_a(AUTEURS){id_document}>#NOM</BOUCLE_a>[, (#DATE|affdate_court)]<br />
-</small>
-
-[<strong class="#EDIT{titre}">(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})</strong>]
-[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF|PtoBR)</div>]
-</td>
-</tr>
-</BOUCLE_tous>
-</table>
-</B_tous>
-
-<p>Pas encore de document sur la zone de téléchargement</p>
-<//B_tous>
-
-</div>
 
 <hr style="clear:both;" />
 

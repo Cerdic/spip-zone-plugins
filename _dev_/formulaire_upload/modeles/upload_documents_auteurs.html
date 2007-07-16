@@ -1,0 +1,23 @@
+<B_tous>
+<p class="pagination">#PAGINATION</p>
+<table id="zone-documents">
+<BOUCLE_tous(DOCUMENTS){id_auteur>0}{pagination}{!par date}>
+<tr><td class="logo-document">
+#ID_AUTEUR [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+<small><br />#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]</small>
+</td>
+
+<td class="fiche-document">
+<small style="float:right; margin-left:10px;"><BOUCLE_a(AUTEURS){id_document}>#NOM</BOUCLE_a>[, (#DATE|affdate_court)]<br />
+</small>
+
+[<strong class="#EDIT{titre}">(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})</strong>]
+[<div class="descriptif">(#DESCRIPTIF|PtoBR)</div>]
+</td>
+</tr>
+</BOUCLE_tous>
+</table>
+</B_tous>
+
+<p>Pas encore de document sur la zone de téléchargement</p>
+<//B_tous>
