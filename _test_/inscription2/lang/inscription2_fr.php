@@ -62,6 +62,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choisir_categories' => 'Choisissez-les ci-dessous&nbsp;:',
 'publication' => 'Publication',
 'exp_publication' => 'Autorisation de publication des donn&eacute;es personnelles',
+'admin' => 'Admin',
+'auteur' => 'Auteur',
+'adherent' => 'Adh&eacute;rent',
+'a_confirmer' => '&Agrave; confirmer',
+'autre' => 'Autre',
+'confirmation' => '<p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
 
 'creation' => 'Date de cr&eacute;ation de la fiche',
 'statut_rel' => 'Statut interne',

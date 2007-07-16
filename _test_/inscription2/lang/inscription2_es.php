@@ -62,6 +62,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choisir_categories' => 'Elijalas en la siguiente lista:',
 'publication' => 'Publicaci&oacute;n',
 'exp_publication' => 'Autorisaci&oacute;n de publicaci&oacute;n de los datos personales en un eventual anuario',
+'admin' => '<NEW>Admin',
+'auteur' => '<NEW>Auteur',
+'adherent' => '<NEW>Adh&eacute;rent',
+'a_confirmer' => '<NEW>&Agrave; confirmer',
+'autre' => '<NEW>Autre',
+'confirmation' => '<NEW><p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
 
 'creation' => 'Fecha de craci&oacute;n de la fiche',
 'statut_rel' => 'Statut interno',

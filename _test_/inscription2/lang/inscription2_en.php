@@ -63,6 +63,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choisir_categories' => 'Select them in the following list:',
 'publication' => 'Publication',
 'exp_publication' => 'Publication authorization of the personal data',
+'admin' => 'Admin',
+'auteur' => 'Author',
+'adherent' => '<NEW>Adh&eacute;rent',
+'a_confirmer' => '<NEW>&Agrave; confirmer',
+'autre' => '<NEW>Autre',
+'confirmation' => '<NEW><p>&Ecirc;tes vous s&ucirc;r(e) de vouloir continuer?</p><p>Toutes les modifications seront irreversibles!!!</p>',
 
 'creation' => 'Creation date of the card',
 'statut_rel' => 'Internal status',
