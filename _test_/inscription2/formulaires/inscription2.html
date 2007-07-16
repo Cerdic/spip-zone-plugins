@@ -22,21 +22,21 @@
 	$("#inscription").validate({
 		rules: {
 			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			prenom:{[(#CONFIG{inscription2/prenom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
+			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
 			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			adresse: {[(#CONFIG{inscription2/adresse}|=={on}|?{required: true,}),] rangeLength:[3,1000]},
-			code_postal: {[(#CONFIG{inscription2/code_postal}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
-			ville: {[(#CONFIG{inscription2/ville}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
-			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
-			telephone: {[(#CONFIG{inscription2/telephone}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
-			fax: {[(#CONFIG{inscription2/fax}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
-			mobile: {[(#CONFIG{inscription2/mobile}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
-			profession: {[(#CONFIG{inscription2/profession}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
-			societe: {[(#CONFIG{inscription2/societe}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
-			secteur:{[(#CONFIG{inscription2/secteur}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
-			fonction: {[(#CONFIG{inscription2/fonction}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
+			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[3,1000]},
+			code_postal: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
+			ville: {[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
+			email: {[(#CONFIG{inscription2/email_obligatoire}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
+			telephone: {[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			fax: {[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			mobile: {[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
+			profession: {[(#CONFIG{inscription2/profession_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
+			societe: {[(#CONFIG{inscription2/societe_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
+			secteur:{[(#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
+			fonction: {[(#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
 			divers: {rangeLength:[3,1000]},
-			pays:{[(#CONFIG{inscription2/secteur}|=={on}|?{required: true,''})]}
+			pays:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''})]}
 		},
 		messages: {
 			nom: {
