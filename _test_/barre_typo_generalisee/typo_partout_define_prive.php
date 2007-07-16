@@ -2,6 +2,11 @@
 
 function typo_partout_insertion_in_body_prive ($texte)
 {
+	if (!function_exists('lire_config')) {
+		return ($texte);
+	
+	}	
+
 	include_spip('inc/barre');
 	include_spip('inc/presentation');
 	include_spip('inc/documents');
@@ -286,6 +291,10 @@ function typo_partout_insertion_in_body_prive ($texte)
 }
 function typo_partout_insertion_in_head_prive ($texte)
 {
+	if (!function_exists('lire_config')) {
+		return ($texte);
+	
+	}
 	return $texte."<script type=\"text/javascript\" src=\"".find_in_path('javascript/spip_barre.js')."\"></script>";
 }
 

@@ -7,14 +7,14 @@
  	[OpenStudio->http://www.openstudio.fr] - Licence GPL
 	</auteur>
 	<version>
-	1.0
+	1.1
 	</version>
 	<etat>
 	test
 	</etat>
 	<description>
 	Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, sites, mots clefs.. etc...),
-	 et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=typo_partout] 
+	 [acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=typo_partout] 
 	</description>
 	<lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
