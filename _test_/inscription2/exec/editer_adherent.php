@@ -23,8 +23,8 @@ function exec_editer_adherent(){
 				$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 				if($cle == 'nom' or $cle == 'email' or $cle == 'login' )
 					$var_user['a.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
-				elseif(ereg("^statut_rel.*$", $cle))
-					$var_user['b.statut_relances'] =  '`statut_relances` = \''.$_POST['statut_relances'].'\'';
+				elseif(ereg("^statut_int.*$", $cle))
+					$var_user['b.statut_interne'] =  '`statut_interne` = \''.$_POST['statut_interne'].'\'';
 				else
 					$var_user['b.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
 			}
@@ -78,8 +78,8 @@ function exec_editer_adherent(){
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
 				$var_user['a.'.$cle] = '0';
-			elseif(ereg("^statut_rel.*$", $cle))
-				$var_user['b.statut_relances'] = '1';
+			elseif(ereg("^statut_int.*$", $cle))
+				$var_user['b.statut_interne'] = '1';
 			elseif($cle == 'pays'){
 				$var_user['c.pays'] = '1';
 				$var_user['c.id as id_pays'] = '1';
