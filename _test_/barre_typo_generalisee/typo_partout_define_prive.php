@@ -24,17 +24,17 @@ function typo_partout_insertion_in_body_prive ($texte)
 	if (lire_config('typo_partout/articles_descriptif_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.articles').find('#barre_typo_article_descriptif').insertBefore(\"textarea[@name=descriptif]\");
-		$('body.articles').find('.cadre-formulaire').find('#barre_typo_article_descriptif').css(\"display\",\"block\");";
+		$('body.articles').find('#barre_typo_article_descriptif').css(\"display\",\"block\");";
 	}
 	if (lire_config('typo_partout/articles_chapo_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.articles').find('#barre_typo_article_chapo').insertBefore(\"textarea[@name=chapo]\");
-		$('body.articles').find('.cadre-formulaire').find('#barre_typo_article_chapo').css(\"display\",\"block\");";
+		$('body.articles').find('#barre_typo_article_chapo').css(\"display\",\"block\");";
 	}
 	if (lire_config('typo_partout/articles_ps_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.articles').find('#barre_typo_article_ps').insertBefore(\"textarea[@name=ps]\");
-		$('body.articles').find('.cadre-formulaire').find('#barre_typo_article_ps').css(\"display\",\"block\");";
+		$('body.articles').find('#barre_typo_article_ps').css(\"display\",\"block\");";
 	}
 
 	//barres dans la page rubrique
@@ -46,13 +46,13 @@ function typo_partout_insertion_in_body_prive ($texte)
 	if (lire_config('typo_partout/rubriques_descriptif_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.rubriques').find('#barre_typo_rubrique_descriptif').insertBefore(\"textarea[@name=descriptif]\");
-		$('body.rubriques').find('.cadre-formulaire').find('#barre_typo_rubrique_descriptif').css(\"display\",\"block\");	
+		$('body.rubriques').find('#barre_typo_rubrique_descriptif').css(\"display\",\"block\");	
 		$('body.rubriques').find('form[textarea]').attr('name', 'formulaire_rubrique');";
 	}
 	if (lire_config('typo_partout/rubriques_texte_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.rubriques').find('#barre_typo_rubrique_texte').insertBefore(\"textarea[@name=texte]\");
-		$('body.rubriques').find('.cadre-formulaire').find('#barre_typo_rubrique_texte').css(\"display\",\"block\");
+		$('body.rubriques').find('#barre_typo_rubrique_texte').css(\"display\",\"block\");
 		$('body.rubriques').find('form[textarea]').attr('name', 'formulaire_rubrique');";
 	}
 	
@@ -65,13 +65,13 @@ function typo_partout_insertion_in_body_prive ($texte)
 	if (lire_config('typo_partout/groupesmots_descriptif_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.mots').find('#barre_typo_mot_descriptif').insertBefore(\"textarea[@name=descriptif]\");
-		$('body.mots').find('.cadre-formulaire').find('#barre_typo_mot_descriptif').css(\"display\",\"block\");
+		$('body.mots').find('#barre_typo_mot_descriptif').css(\"display\",\"block\");
 		$('body.mots').find('form[textarea]').attr('name', 'formulaire_mot');";
 	}
 	if (lire_config('typo_partout/groupesmots_texte_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.mots').find('#barre_typo_mot_texte').insertBefore(\"textarea[@name=texte]\");
-		$('body.mots').find('.cadre-formulaire').find('#barre_typo_mot_texte').css(\"display\",\"block\");
+		$('body.mots').find('#barre_typo_mot_texte').css(\"display\",\"block\");
 		$('body.mots').find('form[textarea]').attr('name', 'formulaire_mot');";
 	}
 
@@ -84,13 +84,13 @@ function typo_partout_insertion_in_body_prive ($texte)
 	if (lire_config('typo_partout/mots_descriptif_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.mots').find('#barre_typo_mot_descriptif').insertBefore(\"textarea[@name=descriptif]\");
-		$('body.mots').find('.cadre-formulaire').find('#barre_typo_mot_descriptif').css(\"display\",\"block\");
+		$('body.mots').find('#barre_typo_mot_descriptif').css(\"display\",\"block\");
 		$('body.mots').find('form[textarea]').attr('name', 'formulaire_mot');";
 	}
 	if (lire_config('typo_partout/mots_texte_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.mots').find('#barre_typo_mot_texte').insertBefore(\"textarea[@name=texte]\");
-		$('body.mots').find('.cadre-formulaire').find('#barre_typo_mot_texte').css(\"display\",\"block\");
+		$('body.mots').find('#barre_typo_mot_texte').css(\"display\",\"block\");
 		$('body.mots').find('form[textarea]').attr('name', 'formulaire_mot');";
 	}
 	
@@ -103,7 +103,7 @@ function typo_partout_insertion_in_body_prive ($texte)
 	if (lire_config('typo_partout/sites_description_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.sites').find('#barre_typo_site_descriptif').insertBefore(\"textarea[@name=descriptif]\");
-		$('body.sites').find('.cadre-formulaire').find('#barre_typo_site_descriptif').css(\"display\",\"block\");
+		$('body.sites').find('#barre_typo_site_descriptif').css(\"display\",\"block\");
 		$('body.sites').find('form[textarea]').attr('name', 'formulaire_site');";
 	}
 
@@ -128,7 +128,7 @@ function typo_partout_insertion_in_body_prive ($texte)
 	if (lire_config('typo_partout/configuration_description_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.configuration').find('#barre_typo_configuration_descriptif_site').insertBefore(\"textarea[@name=descriptif_site]\");
-		$('body.configuration').find('.cadre-couleur').find('#barre_typo_configuration_descriptif_site').css(\"display\",\"block\");
+		$('body.configuration').find('#barre_typo_configuration_descriptif_site').css(\"display\",\"block\");
 		$('body.configuration').find('form[textarea]').attr('name', 'formulaire_configuration');";
 	}
 
@@ -140,7 +140,9 @@ function typo_partout_insertion_in_body_prive ($texte)
 	}
 	if (lire_config('typo_partout/auteurs_quietesvous_typo_partout') == "on")
 	{
-		//a faire
+		$activer_barres .= "$('body.auteurs').find('#barre_typo_auteur_quietesvous').insertBefore(\"textarea[@name=bio]\");
+		$('body.auteurs').find('#barre_typo_auteur_quietesvous').css(\"display\",\"block\");
+		$('body.auteurs').find('form[textarea]').attr('name', 'formulaire_auteur');";
 	}
 
 	$ajout_texte = "<script type=\"text/javascript\">
@@ -207,6 +209,14 @@ function typo_partout_insertion_in_body_prive ($texte)
 	{
 		$barre_temporaire .= "<div id=\"barre_typo_article_ps\" style=\"display: none;\">".afficher_barre('document.formulaire.ps')."</div>";
 	}
+	
+
+	//auteurs
+	if (($_GET['exec'] == "auteur_infos") && (lire_config('typo_partout/auteurs_quietesvous_typo_partout') == "on"))		
+	{
+		$barre_temporaire .= "<div id=\"barre_typo_auteur_quietesvous\" style=\"display: none;\">".afficher_barre('document.formulaire_auteur.bio')."</div>";
+	}
+	
 	return $texte.$ajout_texte.$barre_temporaire;
 	
 }
