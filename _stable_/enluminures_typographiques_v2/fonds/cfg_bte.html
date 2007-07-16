@@ -6,14 +6,14 @@
 ]
 [(#REM) titre=Barre Typographique Enlumin&eacute;e]
 
-<fieldset><legend><:bartypenr:cfg_puces:></legend>
+<fieldset><legend><:enlumtypo:cfg_puces:></legend>
 	<label for="sc_puces">Remplacement des fauses puces de SPIP (- en début de ligneà par de vraies listes à puces (-* en début de ligne)&nbsp;:</label>
 	<select name="puces" id="sc_puces" class="forml">
 		<option value="Oui"[ selected="(#ENV{puces,Non}|=={Oui}|?{selected})"]>Remplacement</option>
 		<option value="Non"[ selected="(#ENV{puces,Non}|=={Non}|?{selected})"]>Conserver le traitement par défaut de SPIP</option>
 	</select>
 </fieldset>
-<fieldset><legend><:bartypenr:cfg_titraille:></legend>
+<fieldset><legend><:enlumtypo:cfg_titraille:></legend>
 	<p>Les valeurs par défaut sont basées sur la valeur historique de SPIP pour {{{}}} <=> H3. En HTML, il n'y a pas de H7 ce qui explique la balise choisie pour le niveau 5.</p>
 	<p>N'oubliez pas que la titraille sert à donner un sens dans la hiérarchisation des idées d'un texte, et <strong>surtout pas</strong> à obtenir un effet de taille de texte !</p>
 	<p>Titraille de premier niveau&nbsp;: {{{}}} ou {1{}1}<br />
@@ -47,14 +47,14 @@
 	<input type="text" name="titraille5close" id="sc_titraille5close" value="[(#ENV{titraille5close,'</strong>'})]" size="30" class="fondl" />
 	</p>
 </fieldset>
-<fieldset><legend><:bartypenr:cfg_insertcss:></legend>
+<fieldset><legend><:enlumtypo:cfg_insertcss:></legend>
 	<label for="sc_insertcss">Insertion automatique des CSS spécifiques à la BTE dans l'espace public (via &#35;INSERT_HEAD dans les squelettes)&nbsp;:</label>
 	<select name="insertcss" id="sc_insertcss" class="forml">
 		<option value="Oui"[ selected="(#ENV{insertcss,Oui}|=={Oui}|?{selected})"]>Insertion automatique</option>
 		<option value="Non"[ selected="(#ENV{insertcss,Oui}|=={Non}|?{selected})"]>Ne pas faire l'insertion automatique</option>
 	</select>
 </fieldset>
-<!--<fieldset><legend><:bartypenr:cfg_mode_titraille:></legend>
+<!--<fieldset><legend><:enlumtypo:cfg_mode_titraille:></legend>
 	<label for="sc_mode_titraille">Raccourcis typographiques de titraille par numéro ou par nombre d'étoiles&nbsp;:</label>
 	<select name="mode_titraille" id="sc_mode_titraille" class="forml">
 		<option value="Numbers"[ selected="(#ENV{mode_titraille,Numbers}|=={Numbers}|?{selected})"]>Numéros</option>
