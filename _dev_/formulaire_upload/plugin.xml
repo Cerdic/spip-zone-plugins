@@ -18,6 +18,8 @@
 		FormulaireUpload
 	</prefix>
 
+	<lien>http://www.spip-contrib.net/Formulaire-Upload</lien>
+
 	<fonctions>base/formulaire_upload.php</fonctions>
 
 	<version_base>0.1</version_base>

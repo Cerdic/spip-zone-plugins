@@ -86,8 +86,8 @@ upload_attach(false);
 <small style="float:right; margin-left:10px;"><BOUCLE_a(AUTEURS){id_document}>#NOM</BOUCLE_a>[, (#DATE|affdate_court)]<br />
 </small>
 
-[<strong>(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})</strong>]
-[<div class="descriptif">(#DESCRIPTIF|PtoBR)</div>]
+[<strong class="#EDIT{titre}">(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})</strong>]
+[<div class="#EDIT{descriptif} descriptif">(#DESCRIPTIF|PtoBR)</div>]
 </td>
 </tr>
 </BOUCLE_tous>
@@ -99,8 +99,9 @@ upload_attach(false);
 
 </div>
 
-<br style="clear:both;" />
+<hr style="clear:both;" />
 
+<a href="http://www.spip-contrib.net/Formulaire-Upload">Documentation &amp; bugs</a>
 
 </div>
 </body>

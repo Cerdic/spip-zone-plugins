@@ -54,7 +54,7 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 	}
 
 	include_spip('inc/autoriser');
-	if (!autoriser(''))
+	if (!autoriser('joindredocument', $type, $id))
 		return false;
 
 	$invalider = false;
@@ -77,8 +77,7 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 	}
 
 	// Ajouter un document
-	if ($files = ($_FILES ? $_FILES : $HTTP_POST_FILES)
-	AND autoriser('')) {
+	if ($files = ($_FILES ? $_FILES : $HTTP_POST_FILES)) {
 		spip_log($files, 'upload');
 		include_spip('action/joindre');
 		$joindre1 = charger_fonction('joindre1', 'inc');
