@@ -1,7 +1,4 @@
 #CACHE{0}
-
-<script src="#CHEMIN{javascript/jquery.validate.js}" type="text/javascript"></script>
-
 <script type="text/javascript">
 /* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
 	
@@ -112,17 +109,11 @@
 		}
 	});
 });
+
+$(document).ready(function() {
+	$('.obligatoire label').append('*');
+});
 </script>
-<style>
-.infos-auteurs > div{height:35px;clear:both;padding:5px}
-.infos-auteurs input, .select , textarea{display:block;float:right;width:250px}
-.infos-auteurs label{display:block;float:left}
-.infos-auteurs > div.textarea {height:70px;clear:both;padding:5px}
-.infos-auteurs > div.grand_select {height:auto;margin-bottom:15px;clear:both;padding:5px}
-.inscription2 h2 {margin:10px 0px}
-div.error{background-color:#ffe2e2}
-label.error{font-size:0.7em;color:red;display:block;clear:both}
-</style>
 
 [<div>(#ENV*{message})</div>]
 

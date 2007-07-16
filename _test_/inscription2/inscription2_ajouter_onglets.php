@@ -63,4 +63,27 @@ function Inscription2_affiche_milieu($flux){
 	}
 	return $flux;
 }
+
+function inscription2_affichage_final($page){
+
+    // regarder si la page contient le formulaire inscription2
+    if (!strpos($page, 'id="inscription"'))
+        return $page;
+
+	$page = inscription2_preparer_page($page);
+    return $page;
+}
+
+function inscription2_preparer_page($page) {
+
+	$css = find_in_path('css/inscription2_forms.css');
+	$jqueryvalidate = find_in_path('javascript/jquery.validate.js');
+
+    $incHead = <<<EOS
+<script type='text/javascript' src='$jqueryvalidate'></script>
+<link rel="stylesheet" href="$css" type="text/css" media="all" />
+EOS;
+	return substr_replace($page, $incHead, strpos($page, '</head>'), 0);
+
+}
 ?>

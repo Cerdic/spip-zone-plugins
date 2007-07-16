@@ -1,0 +1,9 @@
+.infos-auteurs > div{height:35px;clear:both;padding:5px}
+.infos-auteurs input, .select , textarea{display:block;float:right;width:250px}
+.infos-auteurs label{display:block;float:left}
+.infos-auteurs > div.textarea {height:70px;clear:both;padding:5px}
+.infos-auteurs > div.grand_select {height:auto;margin-bottom:15px;clear:both;padding:5px}
+.inscription2 h2 {margin:10px 0px}
+.obligatoire label{color:#a40000}
+div.error{background-color:#ffe2e2}
+label.error{font-size:0.9em;color:red;display:block;clear:both}
