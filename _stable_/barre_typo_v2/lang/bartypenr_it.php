@@ -4,15 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Aide des boutons supplémentaires de la barre typo
-'barre_intertitre2' => 'Converti in {2{sottotitolo 2o-livello}2}',
-'barre_intertitre3' => 'Converti in {3{sottotitolo 3o-livello}3}',
 'barre_langue' => 'Abbreviazione lingua', 
-'barre_miseenevidence' => '[*Evidenziare*] il testo',
-'barre_exposant' => 'Sovrimpressione',
-'barre_petitescapitales' => 'Maiuscoletto',
-'barre_centrer' => '[|Centrare|] il paragrafo',
-'barre_alignerdroite' => '[/allinea a destra/] il paragrafo',
-'barre_encadrer' => '[(Riquadro)] attorno al paragrafo',
 'barre_e_accent_grave' => 'Inserisci E grave maiuscola',
 'barre_ea' => 'Inserisci &aelig;',
 'barre_ea_maj' => 'Inserisci &AElig;',
@@ -22,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_tableau' => 'Inserisci/modifica una tabella',
 'barre_glossaire' => 'Voce di [?Glossario] (Wikipedia)',
 
-'barre_poesie' => 'stile poetico',
 'barre_caracteres' => 'Caratteri speciali',
 'barre_adresse' => 'Indirizzo',
 'barre_lien_externe' => 'Link esterno',
@@ -50,11 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_anc_pointer' => 'Punta a un Segnalibro',
 'barre_gestion_anc_cible' => 'Segnalibro referenziato',
 'barre_gestion_anc_bulle' => 'Guida del Segnalibro',
-'barre_avances' => 'Allineamento&nbsp;!',
-'barre_boutonsavances' => 'Formattazione supplementare, utilizzare con moderazione e discernimento&nbsp;!'
-'cfg_puces' => 'Traitement des puces',
-'cfg_titraille' => 'Titraille',
-'cfg_insertcss' => 'Insertion CSS',
 
 'galerie' => 'Galerie de documents',
 'galerie_document' => '&nbsp;document',

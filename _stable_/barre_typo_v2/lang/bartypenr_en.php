@@ -4,15 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Aide des boutons supplémentaires de la barre typo
-'barre_intertitre2' => 'Turn into a {2{2nd-level subtitle}2}',
-'barre_intertitre3' => 'Turn into a {3{3rd-level subtitle}3}',
 'barre_langue' => 'Abbreviated lnguage', 
-'barre_miseenevidence' => '[*Accentuate*] the text',
-'barre_exposant' => 'Superscript',
-'barre_petitescapitales' => 'Small caps',
-'barre_centrer' => '[|Centre|] the paragraph',
-'barre_alignerdroite' => '[/Right-align/] the paragraph',
-'barre_encadrer' => '[(Place a border)] round the paragraph',
 'barre_e_accent_grave' => 'Insert capital E grave',
 'barre_ea' => 'Insert &aelig;',
 'barre_ea_maj' => 'Insert &AElig;',
@@ -22,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_tableau' => 'Insert/modify a table',
 'barre_glossaire' => '[?Glossary] reference (Wikipedia)',
 
-'barre_poesie' => 'display like poetry',
 'barre_caracteres' => 'Special characters',
 'barre_adresse' => 'Address',
 'barre_lien_externe' => 'External link',
@@ -51,11 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_anc_pointer' => 'Point to an anchor',
 'barre_gestion_anc_cible' => 'Anhor target',
 'barre_gestion_anc_bulle' => 'Anchor help bubble',
-'barre_avances' => 'Direction, direction!',
-'barre_boutonsavances' => 'Extra justifications, use with caution!',
-'cfg_puces' => 'Bullets',
-'cfg_titraille' => 'Headings',
-'cfg_insertcss' => 'Inser CSS',
 
 'galerie' => 'Documents gallery',
 'galerie_document' => '&nbsp;document',
