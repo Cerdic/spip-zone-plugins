@@ -53,6 +53,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 				$var_user[$cle] = _request($cle);
 		}
 	}
+	$aux = true;
 	$commentaire = true;
 	if($var_user['domaines']){
 		include(find_in_path("inc/domaines.php"));
@@ -67,7 +68,6 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	}
 	if($var_user[email] and $aux){
 		$commentaire = message_inscription2($var_user, $mode);
-		echo $commentaire;
 		if (is_array($commentaire)) 
 			$commentaire = envoyer_inscription2($commentaire);
 		$message = $commentaire ? '' : _T('inscription2:lisez_mail');
