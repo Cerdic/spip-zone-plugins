@@ -128,7 +128,10 @@ The @nom_site@\'s Team',
 'format' => 'Format',
 'expl_format' => 'Choose the format that you prefer to receive the emails of the newsletters',
 'texte' => 'Text', 
-'html' => 'HTML'
+'html' => 'HTML',
+
+'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
+
 );
 
 

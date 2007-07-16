@@ -149,7 +149,9 @@ L\'&eacute;quipe de @nom_site@',
 'pays' => 'Pays',
 'commentaire' => 'Commentaire',
 'validite' => 'Date de validit&eacute;',
-'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;'
+'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
+
+'page_confirmation' => 'Page de confirmation de votre inscription'
 
 );
 

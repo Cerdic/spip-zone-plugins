@@ -127,7 +127,9 @@ El equipo de @nom_site@',
 'format' => 'Formato',
 'expl_format' => 'Elija el formato en el que prefiere recibir los emails de las listas de difusion',
 'texte' => 'Texto', 
-'html' => 'HTML'
+'html' => 'HTML',
+
+'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 
 );
 
