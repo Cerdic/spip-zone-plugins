@@ -23,7 +23,8 @@ function typo_partout_insertion_in_body_prive ($texte)
 	}
 	if (lire_config('typo_partout/articles_descriptif_typo_partout') == "on")
 	{
-		//a faire
+		$activer_barres .= "$('body.articles').find('#barre_typo_article_descriptif').insertBefore(\"textarea[@name=descriptif]\");
+		$('body.articles').find('.cadre-formulaire').find('#barre_typo_article_descriptif').css(\"display\",\"block\");";
 	}
 	if (lire_config('typo_partout/articles_chapo_typo_partout') == "on")
 	{
@@ -32,7 +33,8 @@ function typo_partout_insertion_in_body_prive ($texte)
 	}
 	if (lire_config('typo_partout/articles_ps_typo_partout') == "on")
 	{
-		//a faire
+		$activer_barres .= "$('body.articles').find('#barre_typo_article_ps').insertBefore(\"textarea[@name=ps]\");
+		$('body.articles').find('.cadre-formulaire').find('#barre_typo_article_ps').css(\"display\",\"block\");";
 	}
 
 	//barres dans la page rubrique
@@ -193,11 +195,18 @@ function typo_partout_insertion_in_body_prive ($texte)
 	}
 	
 	//articles
+	if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_descriptif_typo_partout') == "on"))		
+	{
+		$barre_temporaire .= "<div id=\"barre_typo_article_descriptif\" style=\"display: none;\">".afficher_barre('document.formulaire.descriptif')."</div>";
+	}
 	if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_chapo_typo_partout') == "on"))		
 	{
 		$barre_temporaire .= "<div id=\"barre_typo_article_chapo\" style=\"display: none;\">".afficher_barre('document.formulaire.chapo')."</div>";
 	}	
-	
+	if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_ps_typo_partout') == "on"))		
+	{
+		$barre_temporaire .= "<div id=\"barre_typo_article_ps\" style=\"display: none;\">".afficher_barre('document.formulaire.ps')."</div>";
+	}
 	return $texte.$ajout_texte.$barre_temporaire;
 	
 }
