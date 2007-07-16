@@ -552,6 +552,34 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <br />
 </fieldset>
 
+
+<fieldset>
+<legend>
+	Abonnement
+</legend>
+<p>
+<:inscription2:info_internes_desc:>
+<br />
+<label>
+	<input type="checkbox" name="validite" [checked="(#ENV{validite}?{checked})"] id="validite" />
+	<strong><:inscription2:validite:></strong><br />
+	<:inscription2:exp_validite:>
+</label>
+<br /><br />
+
+<div>
+<span>
+	<strong>Statut d'abonnement</strong><br />
+	Ici le statut de l'abonn&eacute; (prospect/abonn&eacute;/relance/sorti)<br/>
+</span>
+<span>
+	<input type="text" name="statut_abonnement" id="statut_abo" value="#ENV{statut_abonnement}">
+</span>
+</div>
+<br />
+</fieldset>
+
+
 <fieldset>
 <legend>
 	<:inscription2:info_internes:>
@@ -576,21 +604,14 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </label>
 <br /><br />
 
-<label>
-	<input type="checkbox" name="validite" [checked="(#ENV{validite}?{checked})"] id="validite" />
-	<strong><:inscription2:validite:></strong><br />
-	<:inscription2:exp_validite:>
-</label>
-<br /><br />
-
 <div>
 <span>
-	<input type="checkbox" name="statut_relances" onclick="showhide(this, '#statut_rel')" [checked="(#ENV{statut_relances}?{checked})"] id="statut_relances" />
+	<input type="checkbox" name="statut_int" onclick="showhide(this, '#statut_interne')" [checked="(#ENV{statut_int}?{checked})"] id="statut_int" />
 	<strong><:inscription2:statut_rel:></strong><br />
 	<:inscription2:exp_statut_rel:><br/>
 </span>
 <span>
-	<input type="text" name="statut_rel" id="statut_rel" style="[(#ENV{statut_relances}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_rel}">
+	<input type="text" name="statut_interne" id="statut_interne" style="[(#ENV{statut_int}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_interne}">
 </span>
 </div>
 <br />

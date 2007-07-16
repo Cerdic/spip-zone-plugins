@@ -20,7 +20,10 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 		if($val!='' and !ereg("^.+_(obligatoire|fiche|table).*$", $cle)){
 			if($cle== 'zones')
 				continue;
-			
+				
+			if($cle== 'statut_int')
+				continue;
+				
 			elseif($val!='' and $cle == 'username')
 				$var_user['login'] = _request($cle);
 			

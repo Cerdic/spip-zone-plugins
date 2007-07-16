@@ -105,8 +105,10 @@ $().ready(function() {
 			$critere="a.id_auteur='$valeur'";
 		}else
 			$critere="$case='$valeur'"; 
-	}else
+	}else{
 		$critere="a.id_auteur<>'0'"; 
+		if(defined('_DIR_PLUGIN_ABONNEMENT')) $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') " ;	
+		}
 		
 	//pagination
 	$max_par_page=30;

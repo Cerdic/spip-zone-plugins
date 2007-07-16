@@ -24,6 +24,9 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 		if($val!='' and !ereg("^.+_(obligatoire|fiche|table).*$", $cle)){
 			if($cle== 'zones')
 				continue;
+				
+			if($cle== 'statut_int')
+				continue;	
 			
 			elseif($val!='' and $cle == 'username')
 				$var_user['login'] = _request($cle);
@@ -43,8 +46,11 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 				$var_user['newsletters'] = _request('newsletters');
 				$var_user['`spip_listes_format`'] =_request('format');
 			}
-			elseif(ereg("^statut_rel.*$", $cle))
-				$var_user['statut_relances'] = lire_config('inscription2/statut_rel');
+			elseif(ereg("^statut_interne.*$", $cle))
+				$var_user['statut_interne'] = lire_config('inscription2/statut_interne');
+			
+			elseif(ereg("^statut_abonnement.*$", $cle))
+				$var_user['statut_abonnement'] = lire_config('inscription2/statut_abonnement');
 	
 			elseif($cle=='accesrestreint') 
 				$var_user['zones'] = lire_config('inscription2/zones');
