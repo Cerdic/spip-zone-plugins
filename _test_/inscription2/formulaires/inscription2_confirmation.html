@@ -1,0 +1,26 @@
+<script language="javascript" src="#CHEMIN{javascript/md5.js}"></script>
+<script language="javascript">
+<!--
+  function cryptage() {
+    if(document.password.pass1.value == document.password.pass2.value){
+		str = document.password.pass1.value;
+		document.password.pass.value = MD5(str);
+		document.password.pass2.value = '';
+		document.password.pass1.value = '';
+	}else{
+		document.password.pass1.value = '';
+		document.password.pass2.value = '';
+	}
+  }
+// -->
+</script>
+
+<form name='password' method='post' action="#SELF" >
+	<:pass_choix_pass:><br />
+	<input type='password' name='pass1' id='pass1'><br />
+	<:inscription2:redemande_password:><br />
+	<input type='password' name='pass2' id='pass2'>
+	<input type='password' name='pass' id='pass' style="display:none;">
+	
+	<input onClick="cryptage();" type="submit" value='<:bouton_valider:>'/>
+</form>
