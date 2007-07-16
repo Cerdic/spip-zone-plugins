@@ -17,7 +17,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 	//recuperer les infos inserées par le visiteur
 	$var_user = array();
 	foreach(lire_config('inscription2') as $cle => $val) {
-		if($val!='' and !ereg("^.+_(fiche|table).*$", $cle)){
+		if($val!='' and !ereg("^.+_(obligatoire|fiche|table).*$", $cle)){
 			if($cle== 'zones')
 				continue;
 			

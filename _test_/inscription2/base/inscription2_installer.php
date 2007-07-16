@@ -40,7 +40,7 @@ function inscription2_verifier_base(){
 	//ajouts des différents champs
 	if (is_array(lire_config('inscription2'))){
 		foreach(lire_config('inscription2') as $cle => $val) {
-			$cle = ereg_replace("_(fiche|table).*$","", $cle);
+			$cle = ereg_replace("_(obligatoire|fiche|table).*$","", $cle);
 			if($val!='' and !isset($desc['field'][$cle]) and $cle == 'naissance'){
 				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." DATE DEFAULT '0000-00-00' NOT NULL");
 				$desc['field'][$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";

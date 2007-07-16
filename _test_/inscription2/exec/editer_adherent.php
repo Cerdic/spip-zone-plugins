@@ -20,7 +20,7 @@ function exec_editer_adherent(){
 		foreach(lire_config('inscription2') as $cle => $val){
 			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut'){
 				$cle = ereg_replace("^username.*$", "login", $cle);
-				$cle = ereg_replace("_(fiche|table).*$", "", $cle);
+				$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 				if($cle == 'nom' or $cle == 'email' or $cle == 'login' )
 					$var_user['a.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
 				elseif(ereg("^statut_rel.*$", $cle))
@@ -75,7 +75,7 @@ function exec_editer_adherent(){
 	foreach(lire_config('inscription2') as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
-			$cle = ereg_replace("_(fiche|table).*$", "", $cle);
+			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
@@ -107,6 +107,7 @@ function exec_editer_adherent(){
 				$aux4[] = $q;
 		}
 	}
+	
 	if($var_user['c.pays'])
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
 	else

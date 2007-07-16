@@ -1,26 +1,43 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2006                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
+include_spip('inc/acces');
+include_spip('inc/action');
 
-// La fonction qui en appelle une autre et qui va nous modifier notre base de donnee comme on en a envie...
+// http://doc.spip.org/@exec_legender_auteur_dist
+function exec_legender_auteur_supp_dist()
+{
+	global $connect_id_auteur, $spip_display;
 
-function auteurs_complets_ajouts() {
+	$id_auteur = intval(_request('id_auteur'))
+	$nom_table = "spip_auteurs_elargis";
+	$redirect = _request('redirect');
+	$echec = _request('echec');
+	$new = _request('new');
 
-	// On récupère les globales nécessaires
-	global $id_auteur, $redirect, $echec, $initial,
-	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
+	$s = spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur");
+	$auteur = spip_fetch_array($s);
 
-	$id_auteur = intval(_request('id_auteur'));
-
-// On crée un array des données associées à un auteur...
-	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur"));
-
-// On récupère le fichier qui contient ce dont on a besoin
-	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
-	$fiche_supp = $legender_auteur_supp($auteur);
+	if (!$auteur AND !$new) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('auteurs'));
+	}
 	
-// On lui passe en paramètre ce qui nous est nécessaire
-	//return $legender_auteur_supp($id_auteur, $auteur);
-	return $fiche_supp;
+
+	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
+	$fiche = $legender_auteur_supp($auteur, $new, $echec, $redirect));
+	
+	return $fiche;
 }
 ?>

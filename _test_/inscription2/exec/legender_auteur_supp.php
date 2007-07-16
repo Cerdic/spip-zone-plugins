@@ -18,25 +18,24 @@ include_spip('inc/action');
 // http://doc.spip.org/@exec_legender_auteur_dist
 function exec_legender_auteur_supp_dist()
 {
-  global $id_auteur, $retour, $echec, $initial,
-	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
+	global $connect_id_auteur, $spip_display;
 
-	$id_auteur = intval($id_auteur);
+	$id_auteur = intval(_request('id_auteur'))
 	$nom_table = "spip_auteurs_elargis";
+	$redirect = _request('redirect');
+	$echec = _request('echec');
+	$new = _request('new');
 
-	$auteur = spip_fetch_array(spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur"));
+	$s = spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur");
+	$auteur = spip_fetch_array($s);
 
-	if (!$auteur) {
-		gros_titre(_T('info_acces_interdit'));
-		exit;
+	if (!$auteur AND !$new) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('auteurs'));
 	}
-	if (!$echec AND $retour) {
-		redirige_par_entete(rawurldecode($retour));
-		exit;
-	}
+	
 
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
-
-	ajax_retour($legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $retour));
+	$fiche = $legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $retour));
 }
 ?>

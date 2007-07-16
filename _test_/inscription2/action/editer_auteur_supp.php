@@ -20,8 +20,6 @@ function action_editer_auteur_supp_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	$echec = array();
-
 	if (!preg_match(",^(\d+)$,", $arg, $r)) {
 		$r = "action_editer_auteur_supp_dist $arg pas compris";
 		spip_log($r);
@@ -35,7 +33,9 @@ function action_editer_auteur_supp_dist()
 function action_editer_auteur_supp_post($r){
 	global $auteur_session;
 
-		$redirect = _request('redirect');
+	$echec = array();
+	
+	$redirect = _request('redirect');
 
 		list($tout, $id_auteur, $ajouter_id_article,$x,$s) = $r;
 
@@ -43,7 +43,7 @@ function action_editer_auteur_supp_post($r){
 			echo $cle;
 			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
 				$cle = ereg_replace("^username.*$", "login", $cle);
-				$cle = ereg_replace("_(fiche|table).*$", "", $cle);
+				$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 				if($cle == 'nom' or $cle == 'email' or $cle == 'login')
 					$var_user['a.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
 				elseif(ereg("^statut_rel.*$", $cle))
@@ -90,19 +90,38 @@ function action_editer_auteur_supp_post($r){
 				}
 			}
 		}
-		$echec = array();
 	
 		spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id_auteur'");
 		// if (!$n) die('UPDATE FAILED '. $id_auteur .'');
 
 	// il faudrait rajouter OR $echec mais il y a conflit avec Ajax
 
+	// Si on modifie la fiche auteur, reindexer
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
+		include_spip("inc/indexation");
+		marquer_indexer('spip_auteurs', $id_auteur);
+	}
+	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
+	ecrire_acces();
+
+	$echec = $echec ? '&echec=' . join('@@@', $echec) : '';
+
 	$redirect = rawurldecode($redirect);
-	
-	if (!$redirect)
+	if ($echec) {
+		// revenir au formulaire de saisie
+		$ret = !$redirect
+			? '' 
+			: ('&redirect=' . rawurlencode($redirect));
+
+		return generer_url_ecrire('auteur_infos',
+			"id_auteur=$id_auteur$echec$ret",'&');
+	} else {
+		// modif: renvoyer le resultat ou a nouveau le formulaire si erreur
+		if (!$redirect)
 			$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", '&', true);
 
 		return $redirect;
+	}
 }
 
 ?>
