@@ -34,7 +34,6 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode) {
 				'pass' => $pass,
 			)
 		), false);
-		}
 	
 	}elseif($n == 'sup'){
 			spip_query("DELETE FROM spip_auteurs WHERE id_auteur = '$id'");
@@ -42,7 +41,6 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode) {
 			echo "<strong>"._T('inscription2:suppression_faite')."</strong>";
 	}else
 			echo "rien a faire";
-
 	}else{
 		include_spip('inc/mail');
 		$htpass = generer_htpass($pass);
