@@ -41,6 +41,9 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 		<input type="checkbox" name="nom" checked="checked" id="nom" style='display:none;' />
 		<:inscription2:par_defaut:>
 	</label>
+	<label style="display:none;">
+		<input type="checkbox" name="nom_obligatoire" checked="checked" id="nom_obligatoire" />
+	</label>
 </td><td>
 	<label>
 		<input type="checkbox" name="nom_fiche_mod" onclick="enadis(this,nom_fiche)" [checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
@@ -61,6 +64,9 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<label>
 		<input type="checkbox" name="email" checked="checked" id="email" style='display:none;'/>
 		<:inscription2:par_defaut:>
+	</label>
+	<label style="display:none;">
+		<input type="checkbox" name="email_obligatoire" checked="checked" id="email_obligatoire" />
 	</label>
 </td><td>
 	<label>

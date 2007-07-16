@@ -12,7 +12,7 @@ include_spip('inc/headers');
 	//liste d'elements a afficher
 	$auteur['b.id'] = "0";
 	foreach(lire_config('inscription2') as $cle => $val) {
-		//Si la $cle est marquÈ pour Ítre affichÈe mais pas modifiable
+		//Si la $cle est marqué pour être affichée mais pas modifiable
 		if($val!='' and ereg("^.+_fiche$", $cle)){ 
 			$aux = str_replace("_fiche", "", $cle);
 			if($aux == 'username' or $aux == 'nom' or $aux == 'email')
@@ -65,9 +65,9 @@ include_spip('inc/headers');
 						echo '<span>'.sinon($val,'...').'</span></div>';  
 				}else{
 					if( $auteur['b.pays']=="1" and $cle == 'pays')
-						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$aux['id'].'">'.recuperer_fond('vues/pays', array('pays'=> $val)).'</span></div>'; 
+						echo '<span class="crayon auteurs_elargi-'.$cle.'-'.$aux['id'].'">'.recuperer_fond('vues/pays', array('pays'=> $val)).'</span></div>'; 
 					elseif($auteur['b.'.$cle]=="1")
-						echo '<span class="crayon spip_auteurs_elargis-'.$cle.'-'.$aux['id'].'">'.sinon($val,'...').'</span></div>';  
+						echo '<span class="crayon auteurs_elargi-'.$cle.'-'.$aux['id'].'">'.sinon($val,'...').'</span></div>';  
 					
 					else
 						echo '<span>'.sinon($val,'...').'</span></div>';  

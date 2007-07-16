@@ -156,24 +156,24 @@ select.formo{width:auto; float:left;margin:1px;}
 </div>
 
 [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="nom"><strong><:inscription2:nom:></strong></label><br />
 	<input type="text" name="nom" id="nom" value="#ENV{nom}" class="formo"/>
 </div>
 ]
 [(#CONFIG{inscription2/prenom}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="prenom"><strong><:inscription2:prenom:></strong></label><br />
 	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" class="formo"/>
 </div>
 ]
 [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="username"><strong><:inscription2:username:></strong></label><br />
 	<input type="text" name="username" id="username" value="#ENV{login}" class="formo"/>
 </div>]
 
-<div>
+<div class="obligatoire">
 	<label for="pass1"><strong><:pass_choix_pass:></strong><br />
 	<input type='password' name='pass1' id='pass1' class="formo"></label><br />
 	<label for="pass2"><strong><:inscription2:redemande_password:></strong><br />
@@ -191,7 +191,7 @@ select.formo{width:auto; float:left;margin:1px;}
 </div>
 
 [(#CONFIG{inscription2/naissance}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/naissance_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label><strong><:inscription2:naissance:></strong></label>
 	<div class="select">
 	<INCLURE{fond=formulaires/inscription2_form_date_naissance}>
@@ -199,25 +199,25 @@ select.formo{width:auto; float:left;margin:1px;}
 </div>]
 
 [(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="adresse"><strong><:inscription2:adresse:></strong><br /></label>
 	<textarea name="adresse" id="adresse" class="formo">#ENV{adresse}</textarea>
 </div>]
 
 [(#CONFIG{inscription2/code_postal}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="code_postal"><strong><:inscription2:code_postal:></strong><br /></label>
 	<input type="text" name="code_postal" id="code_postal" class="formo" value="#ENV{code_postal}"/>
 </div>]
 
 [(#CONFIG{inscription2/ville}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/ville_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="ville"><strong><:inscription2:ville:></strong><br /></label>
 	<input type="text" name="ville" id="ville"  class="formo" value="#ENV{ville}"/>
 </div>]
 
 [(#CONFIG{inscription2/pays}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/pays_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="pays"><strong><:inscription2:pays:></strong></label><br />
 	<div>
 	<INCLURE{fond=formulaires/inscription2_pays}>
@@ -225,55 +225,55 @@ select.formo{width:auto; float:left;margin:1px;}
 </div>]
 
 [(#CONFIG{inscription2/email}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="email"><strong><:inscription2:email:></strong></label><br />
 	<input type="text" name="email" id="email" class="formo" value="#ENV{email}"/>
 </div>]
 
 [(#CONFIG{inscription2/telephone}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="telephone"><strong><:inscription2:telephone:></strong><br /></label>
 	<input type="text" name="telephone" id="telephone" class="formo" value="#ENV{telephone}"/>
 </div>]
 
 [(#CONFIG{inscription2/fax}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/fax_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="fax"><strong><:inscription2:fax:></strong><br /></label>
 	<input type="text" name="fax" id="fax" class="formo" value="#ENV{fax}"/>
 </div>]
 
 [(#CONFIG{inscription2/mobile}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="mobile"><strong><:inscription2:mobile:></strong><br /></label>
 	<input type="text" name="mobile" id="mobile" class="formo" value="#ENV{mobile}"/>
 </div>]
 
 [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/profession_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
 	<input type="text" name="profession" id="profession" class="formo" value="#ENV{profession}"/>
 </div>]
 
 [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="societe"><strong><:inscription2:societe:></strong><br /></label>
 	<input type="text" name="societe" id="societe" class="formo" value="#ENV{societe}"/>
 </div>]
 
 [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="secteur"><strong><:inscription2:secteur:></strong></label>
 	<input type="text" name="secteur" id="secteur" class="formo" value="#ENV{secteur}"/>
 </div>
 ]
 [(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="fonction"><strong><:inscription2:fonction:></strong></label>
 	<input type="text" name="fonction" id="fonction" class="formo" value="#ENV{fonction}"/>
 </div>
 ]
 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
-<div >
+<div[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label><strong><:inscription2:commentaire:></strong></label><br />
 	<textarea name="commentaire" id="commentaire" class="formo">#ENV{commentaire} </textarea>	
 </div>
@@ -285,7 +285,7 @@ select.formo{width:auto; float:left;margin:1px;}
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
 <fieldset>
 <legend>
-	Informations Generales
+	<:inscription2:general_infos:>
 </legend>
 <br />
 

@@ -27,7 +27,7 @@
 			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[3,1000]},
 			code_postal: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
 			ville: {[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
-			email: {[(#CONFIG{inscription2/email_obligatoire}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
+			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
 			telephone: {[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
 			fax: {[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
 			mobile: {[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
@@ -126,14 +126,13 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 
 [<div>(#ENV*{message})</div>]
 
-
 [<div style="color:red; font-style:bold;">(#ENV*{commentaires}|=={1}|?{'',' '}) #ENV*{commentaires} </div>]
 
 <div class="inscription2" [style="(#ENV{commentaires}|=={1}|?{display: block;, display:none;})"]>
 
 <h2><:inscription2:formulaire_inscription:></h2>
 
-<form method="post" action="#SELF" name="inscription" id="inscription" >
+<form method="post" action="#SELF" name="inscription" id="inscription">
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 
@@ -148,7 +147,7 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 </div>
 
 [(#CONFIG{inscription2/sexe}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label><strong><:inscription2:sexe:></strong></label>
 	<div class="select">
 	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="M" /> <:inscription2:masculin:>
@@ -157,25 +156,25 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 </div>
 ]
 [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="nom"><strong><:inscription2:nom:></strong></label>
 	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
 </div>
 ]
 [(#CONFIG{inscription2/prenom}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="prenom"><strong><:inscription2:prenom:></strong></label>
 	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" />
 </div>
 ]
 [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="username"><strong><:inscription2:username:></strong></label>
 	<input type="text" name="username" id="username" value="#ENV{login}" />
 </div>
 ]
 [(#CONFIG{inscription2/naissance}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/naissance_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label><strong><:inscription2:naissance:></strong></label>
 	<div class="select">
 	<INCLURE{fond=formulaires/inscription2_form_date_naissance}>
@@ -183,28 +182,28 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 </div>]
 
 [(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})	
-<div  class="textarea">
+<div class="textarea[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse"><strong><:inscription2:adresse:></strong></label>
 	<textarea name="adresse" id="adresse" value="#ENV{adresse}"></textarea>
 </div>
 ]
 
 [(#CONFIG{inscription2/code_postal}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="code_postal"><strong><:inscription2:code_postal:></strong></label>
 	<input type="text" name="code_postal" id="code_postal" value="#ENV{code_postal}" />
 </div>
 ]
 
 [(#CONFIG{inscription2/ville}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/ville_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="ville"><strong><:inscription2:ville:></strong></label>
 	<input type="text" name="ville" id="ville" value="#ENV{ville}" />
 </div>
 ]
 
 [(#CONFIG{inscription2/pays}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/pays_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="pays"><strong><:inscription2:pays:></strong></label>
 	<div class="select">
 	<INCLURE{fond=formulaires/inscription2_pays}>
@@ -213,25 +212,25 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 ]
 
 [(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="email"><strong><:inscription2:email:></strong></label>
 	<input type="text" name="email" id="email" value="#ENV{email}" />
 </div>
 ]
 [(#CONFIG{inscription2/telephone}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="telephone"><strong><:inscription2:telephone:></strong></label>
 	<input type="text" name="telephone" id="telephone" value="#ENV{telephone}" />
 </div>
 ]
 [(#CONFIG{inscription2/fax}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/fax_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="fax"><strong><:inscription2:fax:></strong></label>
 	<input type="text" name="fax" id="fax" value="#ENV{fax}" />
 </div>
 ]
 [(#CONFIG{inscription2/mobile}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="mobile"><strong><:inscription2:mobile:></strong></label>
 	<input type="text" name="mobile" id="mobile" value="#ENV{mobile}" />
 </div>
@@ -243,25 +242,25 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 </div>
 ]
 [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="societe"><strong><:inscription2:societe:></strong></label>
 	<input type="text" name="societe" id="societe" value="#ENV{societe}" />
 </div>
 ]
 [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''})	
-<div>
+<div[ (#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="secteur"><strong><:inscription2:secteur:></strong></label>
 	<input type="text" name="secteur" id="secteur" value="#ENV{secteur}" />
 </div>
 ]
 [(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''})
-<div>
+<div[ (#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="fonction"><strong><:inscription2:fonction:></strong></label>
 	<input type="text" type="text" name="fonction" id="fonction" value="#ENV{fonction}" />
 </div>
 ]
 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
-<div class="grand_select">
+<div class="grand_select[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
 	<label><strong><:inscription2:commentaire:></strong></label>
 	<textarea name="commentaire" id="commentaire">#ENV{divers}</textarea>	
 </div>
@@ -272,7 +271,7 @@ label.error{font-size:0.7em;color:red;display:block;clear:both}
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
 <fieldset class="infos-auteurs">
 <legend>
-	Informations Generales
+	<:inscription2:general_infos:>
 </legend>
 
 [(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})

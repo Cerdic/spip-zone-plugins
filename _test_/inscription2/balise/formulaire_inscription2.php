@@ -67,6 +67,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	}
 	if($var_user[email] and $aux){
 		$commentaire = message_inscription2($var_user, $mode);
+		echo $commentaire;
 		if (is_array($commentaire)) 
 			$commentaire = envoyer_inscription2($commentaire);
 		$message = $commentaire ? '' : _T('inscription2:lisez_mail');
@@ -97,6 +98,7 @@ function message_inscription2($var_user, $mode) {
 		envoyer_inscription2($row);/**RENVOYER MAIL D'INSCRIPTION **/
 		return _T('inscription2:mail_renvoye');
 	}
+
 	return _T('form_forum_email_deja_enregistre');}
 
 function inscription2_nouveau($declaration){
@@ -158,7 +160,8 @@ function envoyer_inscription2($var_user) {
 			 $message))
 		return false;
 	else
-		return _T('inscription2:probleme_email');}
+		return _T('inscription2:probleme_email');
+}
 
 function inscription2_test_login($var_user) {
 	if(!isset($var_user['login']))
