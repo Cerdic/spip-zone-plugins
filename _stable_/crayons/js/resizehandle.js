@@ -26,4 +26,4 @@ jQuery.fn.resizehandle = function() {
       })
     );
   });
-}
+};

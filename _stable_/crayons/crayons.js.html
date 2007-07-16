@@ -21,12 +21,15 @@
 	|compacte_js)]
 
 [(#CHEMIN{js/crayons.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''})]
+	|replace{jQuery,cQuery,''}
+	|compacte_js)]
 
 [(#CHEMIN{js/resizehandle.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''})]
+	|replace{jQuery,cQuery,''}
+	|compacte_js)]
 
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
 [(#CHEMIN{js/crayons-fade.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''})]
+	|replace{jQuery,cQuery,''}
+	|compacte_js)]
 ]

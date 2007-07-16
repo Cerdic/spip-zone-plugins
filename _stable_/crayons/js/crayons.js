@@ -16,12 +16,14 @@ function cfgCrayons(options)
   for (opt in options) {
     this[opt] = options[opt];
   }
-}
+};
+
 cfgCrayons.prototype.mkimg = function(what, extra) {
   return '<img class="crayon-' + what +
     '" src="' + this.imgPath + '/' + this.img[what].file +
     '" title="' + this.img[what].txt + (extra ? extra : '') + '" />';
-}
+};
+
 cfgCrayons.prototype.iconclick = function(c) {
 
   // le + qui passe en prive pour editer tout si classe type--id
@@ -36,7 +38,7 @@ cfgCrayons.prototype.iconclick = function(c) {
   return "<span class='crayon-icones'><span>" + boite +
       this.mkimg('img-changed', cray ? ' (' + cray[1] + ')': '') +
       link +"</span></span>";
-}
+};
 
 function entity2unicode(txt)
 {
@@ -45,17 +47,17 @@ function entity2unicode(txt)
     reg[i] = String.fromCharCode(parseInt(reg[i]));
   }
   return reg.join('');
-}
+};
 
 function uniAlert(txt)
 {
   alert(entity2unicode(txt));
-}
+};
 
 function uniConfirm(txt)
 {
   return confirm(entity2unicode(txt));
-}
+};
 
 // donne le crayon d'un element
 jQuery.fn.crayon = function(){
@@ -67,7 +69,7 @@ jQuery.fn.crayon = function(){
       .join(','));
   else
     return jQuery([]);
-}
+};
 
 // ouvre un crayon
 jQuery.fn.opencrayon = function(evt, percent) {
@@ -152,7 +154,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
       );
     }
   });
-}
+};
 
 // annule le crayon ouvert (fonction destructive)
 jQuery.fn.cancelcrayon = function() {
@@ -164,7 +166,7 @@ jQuery.fn.cancelcrayon = function() {
   .crayon()
     .remove();
   return this;
-}
+};
 
 // masque le crayon ouvert
 jQuery.fn.hidecrayon = function() {
@@ -175,7 +177,7 @@ jQuery.fn.hidecrayon = function() {
     .hide()
     .removeClass('crayon-hover');
   return this;
-}
+};
 
 // active un crayon qui vient d'etre charge
 jQuery.fn.activatecrayon = function(percent) {
@@ -183,7 +185,7 @@ jQuery.fn.activatecrayon = function(percent) {
   .crayon()
   .click(function(e){
     e.stopPropagation();
-  })
+  });
   this
   .each(function(){
     var me = jQuery(this);
@@ -327,7 +329,7 @@ jQuery.fn.activatecrayon = function(percent) {
       })
     .end();
   });
-}
+};
 
 // insere les icones dans l'element
 jQuery.fn.iconecrayon = function(){
@@ -338,7 +340,7 @@ jQuery.fn.iconecrayon = function(){
         jQuery(this).parents('.crayon').eq(0).opencrayon(e);
       });
     });
-}
+};
 
 // initialise les crayons
 jQuery.fn.initcrayon = function(){
@@ -362,7 +364,7 @@ jQuery.fn.initcrayon = function(){
   );
 
   return this;
-}
+};
 
 /* une fonction pour initialiser les crayons dynamiquement */
 jQuery.fn.initcrayons = function(){
@@ -371,7 +373,7 @@ jQuery.fn.initcrayons = function(){
   .not('.crayon-autorise')
   .filter(configCrayons.droits)
   .initcrayon();
-}
+};
 
 // demarrage
 jQuery(document).ready(function() {
