@@ -58,11 +58,11 @@ $().ready(function() {
 	
 	<div class="legend">
 		
-		<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> Admin<br/>
-		<img src="#CHEMIN{'images/redac-12.gif'}" title="<:inscription2:fiche_adherent:>"> Auteur<br/>
-		<img src="#CHEMIN{'images/adherent-12.gif'}" title="<:inscription2:fiche_adherent:>"> Adherent<br/>
-		<img src="#CHEMIN{'images/aconf-12.gif'}" title="<:inscription2:fiche_adherent:>"> A confirmer<br/>
-		<img src="#CHEMIN{'images/defaut-12.gif'}" title="<:inscription2:fiche_adherent:>"> Autre<br/>
+		<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:admin:><br/>
+		<img src="#CHEMIN{'images/redac-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:auteur:><br/>
+		<img src="#CHEMIN{'images/adherent-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:adherent:><br/>
+		<img src="#CHEMIN{'images/aconf-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:a_confirmer:><br/>
+		<img src="#CHEMIN{'images/defaut-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:autre:><br/>
 		
 	</div>
 	
@@ -133,7 +133,7 @@ $().ready(function() {
 	
 	//supprimer un auteur
 	if(!empty($id) and $act=='sup'){
-		spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
+		spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_zones_auteurs WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
@@ -325,8 +325,7 @@ $().ready(function() {
   
 	<div class="jqmConfirmContent">
 	<p class="jqmConfirmMsg"></p>
-	<p>êtes vous sûr(e) de voloir continuer?</p>
-	<p>Toutes les modifications seront irreversibles!!!</p>
+	<:inscription2:confirmation:>
 	</div>
   
 	<input type="submit" value="no" />
