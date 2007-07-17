@@ -15,7 +15,7 @@
 function forms_donnee_valeur_colonne_table($table,$champ,$id_donnee){
 	include_spip("inc/forms");
 	$valeurs = Forms_valeurs($id_donnee,NULL,$champ);
-	return isset($valeurs[$champ])?$valeurs[$champ]:'';
+	return isset($valeurs[$champ]) ? $valeurs : false;
 }
 function forms_donnee_revision($id_donnee,$c=NULL){
 	include_spip('inc/forms');
@@ -31,7 +31,7 @@ function forms_champ_valeur_colonne_table($table,$champ,$id){
 	OR !$row = spip_fetch_array($res))
 		return false;
 
-	return 	$row[$champ];
+	return $row;
 }
 
 // Crayons sur les champs
