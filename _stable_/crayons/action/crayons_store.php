@@ -215,7 +215,7 @@ function vues_dist($type, $modele, $id, $content){
 	// la regler histoire d'avoir la bonne typo dans le propre()
 	// NB: ceci n'a d'impact que sur le "par defaut" en bas
 	if (colonne_table($type, 'lang')) {
-		lang_select($a = valeur_colonne_table($type, 'lang', $id));
+		lang_select($a = array_pop(valeur_colonne_table($type, 'lang', $id)));
 	} else {
 		lang_select($a = $GLOBALS['meta']['langue_site']);
 	}
@@ -241,7 +241,7 @@ function vues_dist($type, $modele, $id, $content){
 		// dans la base de donnees (meme si a priori la valeur est
 		// ce qu'on vient d'envoyer, il y a nettoyage des caracteres et
 		// eventuellement d'autres filtres de saisie...)
-		$valeur = valeur_colonne_table($type, $modele, $id);
+		$valeur = array_pop(valeur_colonne_table($type, $modele, $id));
 		
 		// seul spip core sait rendre les donnees
 		if (in_array($modele,
