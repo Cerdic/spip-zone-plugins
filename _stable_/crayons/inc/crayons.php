@@ -20,7 +20,7 @@ function logo_revision($id, $file, $type, $ref) {
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$_id_objet = id_table_objet($type);
 
-	// Chargemen d'un nouveau logo ?
+	// Chargement d'un nouveau logo ?
 	if ($file['logo']) {
 		define('FILE_UPLOAD', true); // message pour json_export :(
 
@@ -44,7 +44,6 @@ function logo_revision($id, $file, $type, $ref) {
 			@unlink($on[0]);
 	}
 
-	else
 
 	// Reduire le logo ?
 	if (is_array($cfg = @unserialize($GLOBALS['meta']['crayons']))
