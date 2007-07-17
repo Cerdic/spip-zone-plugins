@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ville' => 'City',
 'pays' => 'Country',
 'email' => 'E-Mail',
-'telephone' => 'Telephone',
+'telephone' => 'Phone',
 'fax' => 'Fax',
 'mobile' => 'Mobile',
 'profession' => 'Profession',
@@ -130,6 +130,8 @@ The @nom_site@\'s Team',
 'expl_format' => 'Choose the format that you prefer to receive the emails of the newsletters',
 'texte' => 'Text', 
 'html' => 'HTML',
+
+'votre_profil' => 'Your profile',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 

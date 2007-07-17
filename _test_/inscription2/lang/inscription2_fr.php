@@ -152,6 +152,8 @@ L\'&eacute;quipe de @nom_site@',
 'validite' => 'Date de validit&eacute;',
 'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
 
+'votre_profil' => 'Votre profil',
+
 'page_confirmation' => 'Page de confirmation de votre inscription'
 
 );

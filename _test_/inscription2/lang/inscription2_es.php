@@ -130,6 +130,8 @@ El equipo de @nom_site@',
 'texte' => 'Texto', 
 'html' => 'HTML',
 
+'votre_profil' => '<NEW>Votre profil',
+
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 
 );
