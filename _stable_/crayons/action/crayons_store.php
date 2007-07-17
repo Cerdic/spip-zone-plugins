@@ -188,7 +188,7 @@ function action_crayons_store_dist() {
 	        // Enregistrer dans la base
 	        // $updok = ... quand on aura un retour
 	        // -- revisions_articles($id_article, $c) --
-	        $idschamps['fun']($id, $champsvaleurs['chval'], $type);
+	        $idschamps['fun']($id, $champsvaleurs['chval'], $type, $champsvaleurs['wdg']);
 	    }
 	}
 

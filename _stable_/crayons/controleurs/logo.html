@@ -32,11 +32,20 @@
 		|extraire_attribut{width})&times;[(#GET{image}
 		|extraire_attribut{height})]px)]&nbsp;:</small>
 
+	[(#SET{supprimer,
+		[<label><br />
+			<input type="checkbox" name="(#ENV{name_logo})_supprimer" id="#ENV{name_logo}_supprimer" />
+			supprimer ce logo
+			</label>]
+	})]
 }|sinon{
 	Choisir un logo&nbsp;:
 })]
 </legend>
 
-<input class="crayon-active" name="#ENV{name_logo}" type="file" onchange="if(!this.value.match(/\.(png|jpeg|jpg|gif)$/i)){alert('Il faut choisir une image :-)');this.value=''};" />
+<input class="crayon-active" name="#ENV{name_logo}" type="file"
+onchange="if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('Il faut choisir une image :-)'); this.value=''; }; var q=cQuery('##ENV{name_logo}_supprimer').parent(); this.value ? q.hide() : q.show();" />
+
+#GET{supprimer}
 
 </fieldset>

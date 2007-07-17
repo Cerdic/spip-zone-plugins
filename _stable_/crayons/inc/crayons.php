@@ -13,7 +13,9 @@ function valeur_champ_logo($table, $id, $champ) {
 }
 
 // cette fonction de revision recoit le fichier upload a passer en logo
-function logo_revision($id, $file, $type) {
+// en reference : le nom du widget, pour aller chercher d'autres donnees
+// (ex: supprimer)
+function logo_revision($id, $file, $type, $ref) {
 
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$_id_objet = id_table_objet($type);
@@ -33,6 +35,16 @@ function logo_revision($id, $file, $type) {
 		); // beurk
 	}
 
+	else
+
+	// Suppression du logo ?
+	if ($wid = array_pop($ref)
+	AND $_POST['content_'.$wid.'_logo_supprimer'] == 'on') {
+		if ($on = $chercher_logo($id, $_id_objet, 'on'))
+			@unlink($on[0]);
+	}
+
+	else
 
 	// Reduire le logo ?
 	if (is_array($cfg = @unserialize($GLOBALS['meta']['crayons']))
