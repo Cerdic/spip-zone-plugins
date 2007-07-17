@@ -21,7 +21,8 @@
 
 	<br/>
 	Le fonctionnement est bas&eacute; sur l'utilisation des balises <multi>.
-
+	<br/>
+	[Acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
@@ -35,30 +36,6 @@
 	<icon>
 	</icon>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-	<pipeline>
-		<nom>pre_propre</nom>
-		<inclure>extension_multilingue.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>post_propre</nom>
-		<inclure>extension_multilingue.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>pre_typo</nom>
-		<inclure>extension_multilingue.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>post_typo</nom>
-		<inclure>extension_multilingue.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>nettoyer_raccourcis_typo</nom>
-		<inclure>extension_multilingue.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>BarreTypoEnrichie_avancees</nom>
-		<inclure>extension_multilingue.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>BarreTypoEnrichie_toolbox</nom>
 		<inclure>extension_multilingue.php</inclure>
