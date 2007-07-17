@@ -6,33 +6,26 @@
 
 ]
 
-[(#SET{image,[(#LOGO_ARTICLE_NORMAL
-	||sinon{#LOGO_AUTEUR_NORMAL}
-	|sinon{#LOGO_BREVE_NORMAL}
-	|sinon{#LOGO_RUBRIQUE_NORMAL}
-	|sinon{#LOGO_SITE_NORMAL}
-)]})]
+[(#SET{resize,[(#ENV{class}|match{\bresize-\d+\b}|replace{resize-})]})]
+
+[(#SET{image,
+	[(#ID_ARTICLE|?{#LOGO_ARTICLE_NORMAL})]
+	[(#ID_AUTEUR|?{#LOGO_AUTEUR_NORMAL})]
+	[(#ID_BREVE|?{#LOGO_BREVE_NORMAL})]
+	[(#ID_RUBRIQUE|?{#LOGO_RUBRIQUE_NORMAL})]
+	[(#ID_SYNDIC|?{#LOGO_SITE_NORMAL})]
+})]
 
 [(#GET{image}|?{
 
-	[(#SET{logo,[(#GET{image}|image_reduire{0,120})]})]
+	[(#SET{logo,[(#GET{image}
+		|image_reduire{#GET{resize,0},#GET{resize,120}})]})]
 	[(#SET{url,[(#GET{logo}|extraire_attribut{src}|replace{\?.*$})]})]
 	[(#SET{url,[(#GET{url}|parametre_url{s,#EVAL{time()}})]})]
 	[(#SET{width,[(#GET{logo}|extraire_attribut{width})]})]
 
-	<div style="width:[(#GET{width}|max{120})]px;text-align:center;" class="spip_doc_descriptif">
-
 	[(#GET{logo}|inserer_attribut{src,#GET{url}})]
 
-	[<br />
-		(#GET{image}|extraire_attribut{width})
-	&times;
-		[(#GET{image}|extraire_attribut{height})] pixels
-	]
-	</div>
-
 ,
-
-	'(pas de logo)'
-
+	'<small><abbr title="logo">?</abbr></small>'
 })]

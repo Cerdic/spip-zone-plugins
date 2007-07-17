@@ -217,8 +217,14 @@ jQuery.fn.activatecrayon = function(percent) {
           }
           return false;
         }
-        me
-        .cancelcrayon()
+        // Desactive celui pour qui on vient de recevoir les nouvelles donnees
+        jQuery(me)
+        .cancelcrayon();
+        // Insere les donnees dans *tous* les elements ayant le meme code
+        jQuery(
+          '.crayon.crayon-autorise.' +
+            me[0].className.match(/crayon ([^ ]+)/)[1]
+        )
         .html(
           d[jQuery('input.crayon-id', crayon).val()]
         )

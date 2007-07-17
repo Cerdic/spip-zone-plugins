@@ -11,12 +11,13 @@
 
 ]
 
-[(#SET{image,[(#LOGO_ARTICLE_NORMAL
-	||sinon{#LOGO_AUTEUR_NORMAL}
-	|sinon{#LOGO_BREVE_NORMAL}
-	|sinon{#LOGO_RUBRIQUE_NORMAL}
-	|sinon{#LOGO_SITE_NORMAL}
-)]})]
+[(#SET{image,
+	[(#ID_ARTICLE|?{#LOGO_ARTICLE_NORMAL})]
+	[(#ID_AUTEUR|?{#LOGO_AUTEUR_NORMAL})]
+	[(#ID_BREVE|?{#LOGO_BREVE_NORMAL})]
+	[(#ID_RUBRIQUE|?{#LOGO_RUBRIQUE_NORMAL})]
+	[(#ID_SYNDIC|?{#LOGO_SITE_NORMAL})]
+})]
 
 <fieldset[ style="(#ENV{style});"]>
 <legend>[(#GET{image}|?{
@@ -25,9 +26,12 @@
 	[(#SET{url,[(#GET{logo}|extraire_attribut{src}|replace{\?.*$})]})]
 	[(#SET{urls,[(#GET{url}|parametre_url{s,#EVAL{time()}})]})]
 
-	[(#GET{logo}|inserer_attribut{src,#GET{urls}}
+	<small>[(#GET{logo}|inserer_attribut{src,#GET{urls}}
 		|inserer_attribut{style,vertical-align:middle;})]
-	&mdash; remplacer ce logo :
+	&nbsp; remplacer ce logo
+	[((#GET{logo}
+		|extraire_attribut{width})&times;[(#GET{logo}
+		|extraire_attribut{height})]px)]&nbsp;:</small>
 
 }|sinon{
 	Choisir un logo :
