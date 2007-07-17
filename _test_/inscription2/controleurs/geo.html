@@ -1,0 +1,17 @@
+[(#REM)
+
+	Controleur pour le crayon 'geo', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
+<fieldset>
+<label><:auteurscomplets:entree_latitude:></label> <input class="crayon-active" name="#ENV{name_latitude}"
+ style="width:#ENV{largeur}px;" value="[(#LATITUDE**|entites_html)]" />
+ <br />
+ <label><:auteurscomplets:entree_longitude:></label> <input class="crayon-active" name="#ENV{name_longitude}"
+ style="width:#ENV{largeur}px;" value="[(#LONGITUDE**|entites_html)]" />
+</fieldset>
+</BOUCLE_a>
+<//B_a>

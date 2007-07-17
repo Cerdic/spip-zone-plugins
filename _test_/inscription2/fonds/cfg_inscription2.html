@@ -414,6 +414,30 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </td>
 </tr><tr>
 <td>
+	<strong><:inscription2:url_societe:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="url_societe" [checked="(#ENV{societe}?{checked})"] onclick="showoblig(this)" id="url_societe" />
+	</label>
+	<label style="[(#ENV{url_societe}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="url_societe_obligatoire" [checked="(#ENV{url_societe_obligatoire}?{checked})"] id="url_societe_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="url_societe_fiche_mod" onclick = "enadis(this,url_societe_fiche)" [checked="(#ENV{url_societe_fiche_mod}?{checked})"] id="url_societe_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="url_societe_fiche" [checked="(#ENV{url_societe_fiche}?{checked})"] id="url_societe_fiche" [disabled ="(#ENV{url_societe_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="url_societe_table" [checked="(#ENV{url_societe_table}?{checked})"] id="url_societe_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
 	<strong><:inscription2:secteur:></strong>
 </td><td>
 	<label>

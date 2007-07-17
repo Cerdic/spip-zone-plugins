@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mobile' => 'Mobile',
 'profession' => 'Profession',
 'societe' => 'Company',
+'url_societe' => '<NEW>Site soci&eacute;t&eacute;',
 'secteur' => 'Sector of activity',
 'newsletter' => 'Newsletter',
 'exp_newsletter' => 'Choose the newsletter to wich you want to subscribe',

@@ -1,0 +1,29 @@
+[(#REM)
+
+	Controleur pour le crayon 'adressecomplete', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS_ELARGIS){id=(#ENV{id_auteurs_elargi})}>
+<fieldset style="background-color:#fff;">
+<legend><:inscription2:votre_adresse:></legend>
+<label><:inscription2:adresse:></label> 
+<textarea class="crayon-active" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;" />[(#ADRESSE**|entites_html)]</textarea>
+<br />
+<label><:inscription2:code_postal:></label> <input class="crayon-active" name="#ENV{name_code_postal}"
+ style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL**|entites_html)]" />
+<br />
+<label><:inscription2:ville:></label> <input class="crayon-active" name="#ENV{name_ville}"
+ style="width:#ENV{largeur}px;" value="[(#VILLE**|entites_html)]" />
+ <br />
+ <label><:inscription2:pays:></label> 
+#SET{id,#PAYS}
+<select class="crayon-active" name="#ENV{name_pays}" style="width:#ENV{largeur}px;#ENV{style}" />
+<BOUCLE_r(SPIP_PAYS){tous}>
+<option value="#ID"[(#GET{id}|=={#ID}|?{selected})]>[(#PAYS|couper{30})]</option>
+</BOUCLE_r>
+</select>
+</fieldset>
+</BOUCLE_a>
+<//B_a>

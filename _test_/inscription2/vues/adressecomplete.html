@@ -1,0 +1,16 @@
+[(#REM)
+
+	Vue pour le crayon 'adressecomplete'
+
+]
+#CACHE{0}
+<span class="#EDIT{adressecomplete} adr">
+	[<span class="street-address">(#ENV*{adresse}|typo)</span><br />]
+	[<span class="postal-code">(#ENV*{code_postal}|typo)</span>]
+	[<span class="locality">(#ENV*{ville}|typo)</span><br />]
+	<span class="country-name">
+		<BOUCLE_r(SPIP_PAYS){id=#ENV{pays}}>
+		#PAYS
+		</BOUCLE_r>
+	</span>
+</span>

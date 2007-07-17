@@ -1,0 +1,21 @@
+[(#REM)
+
+	Controleur pour le crayon 'telfax', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS_ELARGIS){id=(#ENV{id_auteurs_elargi})}{tous}>
+<fieldset style="background-color:#fff;">
+<legend><:inscription2:vos_contacts:></legend>
+<label><:inscription2:telephone:> : </label> <input class="crayon-active" name="#ENV{name_telephone}"
+ style="width:#ENV{largeur}px;" value="[(#TELEPHONE**|entites_html)]" />
+<br />
+<label><:inscription2:mobile:> : </label> <input class="crayon-active" name="#ENV{name_mobile}"
+ style="width:#ENV{largeur}px;" value="[(#MOBILE**|entites_html)]" />
+<br />
+<label><:inscription2:fax:> : </label> <input class="crayon-active" name="#ENV{name_fax}"
+ style="width:#ENV{largeur}px;" value="[(#FAX**|entites_html)]" />
+</fieldset>
+</BOUCLE_a>
+<//B_a>
