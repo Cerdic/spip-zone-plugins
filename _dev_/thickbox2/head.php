@@ -55,15 +55,23 @@ if($flux['type']=='inline')
 var init_f = function() {
 	var me = this;
 	if ($("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",me).addClass("thickbox").size()) {
-		jQuery("head")
-		.prepend("<link rel=\'stylesheet\'type=\'text/css\' href=\''.url_absolue(find_in_path('thickbox.css')).'\' />");
-		$.getScript("'.url_absolue(find_in_path('javascript/thickbox.js')).'",
-		function(){
-		TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
-		TB_chemin_close = "'.url_absolue(find_in_path('close.gif')).'";
-		TB_chemin_css = "'.url_absolue(find_in_path('thickbox.css')).'";
-		TB_init(me);
-		});
+	
+		var TB_initload = function(){
+			TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
+			TB_chemin_close = "'.url_absolue(find_in_path('close.gif')).'";
+			TB_chemin_css = "'.url_absolue(find_in_path('thickbox.css')).'";
+			TB_init(me);
+		};
+
+		if (typeof TB_init == "function") {
+			TB_initload();
+		} else {
+			jQuery("head")
+			.prepend("<link rel=\'stylesheet\'type=\'text/css\' href=\''.url_absolue(find_in_path('thickbox.css')).'\' />");
+			$.getScript("'
+				.url_absolue(find_in_path('javascript/thickbox.js'))
+				.'", TB_initload)
+		}
 	};
 }
 //onAjaxLoad is defined in private area only
