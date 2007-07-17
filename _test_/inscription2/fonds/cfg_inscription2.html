@@ -417,7 +417,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:url_societe:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="url_societe" [checked="(#ENV{societe}?{checked})"] onclick="showoblig(this)" id="url_societe" />
+		<input type="checkbox" name="url_societe" [checked="(#ENV{url_societe}?{checked})"] onclick="showoblig(this)" id="url_societe" />
 	</label>
 	<label style="[(#ENV{url_societe}|=={on}|?{display: block;, display:none;})]">
 		<input type="checkbox" name="url_societe_obligatoire" [checked="(#ENV{url_societe_obligatoire}?{checked})"] id="url_societe_obligatoire" />
