@@ -29,8 +29,8 @@
 	<small>[(#GET{logo}|inserer_attribut{src,#GET{urls}}
 		|inserer_attribut{style,vertical-align:middle;})]
 	&nbsp; remplacer ce logo
-	[((#GET{logo}
-		|extraire_attribut{width})&times;[(#GET{logo}
+	[((#GET{image}
+		|extraire_attribut{width})&times;[(#GET{image}
 		|extraire_attribut{height})]px)]&nbsp;:</small>
 
 }|sinon{
