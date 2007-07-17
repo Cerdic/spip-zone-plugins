@@ -1,10 +1,9 @@
 <?php
 /**
-* Plugin Association
+* Plugin Inscription2
 *
 * Copyright (c) 2007
-* Bernard Blazin & François de Montlivault
-* http://www.plugandspip.com 
+* Sergio and co
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 * Pour plus de details voir le fichier COPYING.txt.
 *  

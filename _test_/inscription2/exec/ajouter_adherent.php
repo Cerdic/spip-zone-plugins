@@ -1,5 +1,13 @@
 <?php
-
+/**
+* Plugin Inscription2
+*
+* Copyright (c) 2007
+* Sergio and co
+* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+* Pour plus de details voir le fichier COPYING.txt.
+*  
+**/
 include_spip('public/assembler');
 function exec_ajouter_adherent() {
 

@@ -1,4 +1,7 @@
 <?php 
+// un profil public editable avec les crayons
+// marche avec profil_adherent.html
+
 include_spip('inc/filtres');
 include_spip('inc/headers');
 	

@@ -37,11 +37,12 @@ padding:3px;
 }
 
 #principal table {clear:right; margin-left:10pt;padding:5px}
-#principal tr { background-color : #E0E0E0 ;}
+#principal tr, #droite tr { background-color : #E0E0E0 ;}
+ { background-color : #E0E0E0 ;}
 #principal tr.row { background:#FFF8DC; }
 #principal tr.even { background:#AFF5DF; }
 
-#principal td {padding:3px}
+#principal td, #droite td {padding:3px}
 
 #pagination {margin:10px;font-size:0.7em}
 
