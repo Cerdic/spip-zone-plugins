@@ -260,6 +260,13 @@ $(document).ready(function() {
 </fieldset>
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
+#SET{afficher_plus, false}
+[(#CONFIG{inscription2/publication}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/categorie}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/domaines}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+
+[(#GET{afficher_plus}|=={true}|?{' ', ''})
 <fieldset class="infos-auteurs">
 <legend>
 	<:inscription2:general_infos:>
@@ -303,10 +310,8 @@ $(document).ready(function() {
 				</div>]';
 	}
 ?>
-
-
 </fieldset>
-
+]
 <p style="text-align:right"><input type="submit" value="<:bouton_valider:>" /></p>
 
 </form>
