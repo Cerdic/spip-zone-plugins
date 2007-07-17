@@ -49,7 +49,7 @@ function Inscription2_affiche_milieu($flux){
 		case 'auteur_infos':
 				include_spip('inc/inscription2_gestion');
 				$id_auteur = $flux['args']['id_auteur'];
-				$flux['data'] .= auteurs_complets_ajouts($id_auteur);
+				$flux['data'] .= inscription2_ajouts($id_auteur);
 				break;
 			case 'auteurs_edit':
 				include_spip('inc/inscription2_fiche_adherent');
