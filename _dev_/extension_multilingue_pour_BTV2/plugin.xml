@@ -7,7 +7,7 @@
 	</auteur>
 	<lien></lien>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	dev
@@ -20,7 +20,9 @@
 	sur l'ensemble des zones de textes : titres, descriptifs et textes.
 
 	<br/>
-	Le fonctionnement est bas&eacute; sur l'utilisation des balises <multi>.
+	Le fonctionnement est bas&eacute; sur l'utilisation des balises <code><multi></code>.
+	<br/>
+	<b>Attention :</b> ce plugin n'est pas compatible avec les enluminures pour la BTV2.
 	<br/>
 	[Acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]
 	</description>

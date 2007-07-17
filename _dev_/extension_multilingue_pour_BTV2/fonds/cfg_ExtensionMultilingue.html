@@ -7,12 +7,8 @@
 [(#REM) titre=Extension Multilingue]
 
 
-<p>Langue 1<br/>
-<input type="text" name="langue1_ExtensionMultilingue" value="[(#CONFIG{ExtensionMultilingue/langue1_ExtensionMultilingue}|sinon{fr})]"></p>
-<p>Langue 2<br/>
-<input type="text" name="langue2_ExtensionMultilingue" value="[(#CONFIG{ExtensionMultilingue/langue2_ExtensionMultilingue}|sinon{en})]"></p>
-<p>Langue 3<br/>
-<input type="text" name="langue3_ExtensionMultilingue" value="[(#CONFIG{ExtensionMultilingue/langue3_ExtensionMultilingue}|sinon{de})]"></p>
+<p>Langues (s&eacute;par&eacute;es par des virgules)<br/>
+<input type="text" name="langues_ExtensionMultilingue" value="[(#CONFIG{ExtensionMultilingue/langues_ExtensionMultilingue}|sinon{'fr,en,de'})]"></p>
 
 <input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
 <input type="reset" value="<:reset:>" class="fondo" />
