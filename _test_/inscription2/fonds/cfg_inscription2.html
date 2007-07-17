@@ -529,13 +529,6 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <:inscription2:info_gener_desc:>
 <br /><br />
 
-<label>
-	<input type="checkbox" name="divers" [checked="(#ENV{divers}?{checked})"] id="divers" />
-	<strong><:inscription2:divers:></strong><br />
-	<:inscription2:exp_divers:>
-</label>
-<br />
-
 <div [style="(#CONFIG{plugin/SPIPLISTES}|?{display: block;, display:none;})"]>
 <label>
 	<input type="checkbox" name="newsletter" onclick="showhide(this, '#news')" [(#ENV{newsletter}|?{#CONFIG{plugin/SPIPLISTES}|?{checked="checked"}})] id="newsletter" />
@@ -611,7 +604,12 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <p>
 <:inscription2:info_internes_desc:>
 <br />
-
+<label>
+	<input type="checkbox" name="divers" [checked="(#ENV{divers}?{checked})"] id="divers" />
+	<strong><:inscription2:divers:></strong><br />
+	<:inscription2:exp_divers:>
+</label>
+<br />
 <div>
 	<strong><:inscription2:statut:></strong><br />
 	<:inscription2:exp_statut:><br />
