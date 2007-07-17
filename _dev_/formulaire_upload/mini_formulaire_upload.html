@@ -5,6 +5,13 @@
 <title>Version AJAX du #/FORMULAIRE_UPLOAD</title>
 </head>
 <body>
-#FORMULAIRE_UPLOAD
+[(#ENV{liste}|?{' '})
+	<div id="tous_docs">
+	<INCLURE{fond=modeles/upload_documents_auteurs}>
+	</div>
+]
+[(#ENV{liste}|?{'',' '})
+	#FORMULAIRE_UPLOAD
+]
 </body>
 </html>

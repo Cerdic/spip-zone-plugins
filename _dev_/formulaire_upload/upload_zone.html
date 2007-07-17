@@ -36,10 +36,43 @@
 			<h1 class="titre">Upload zone</h1>
 			</div>
 
+			<div id="tous_docs">
 			<INCLURE{fond=modeles/upload_documents_auteurs}>
+			</div>
 
 		</div>
 	</div>
+
+
+<script type="text/javascript"><!--
+
+var pagination_zone = function() {
+	$('#zone-documents')
+	.prev('.pagination')
+	.find('a')
+	.click(function(){
+		var r = $(this).attr('href').match(/[?&;]debut_tous=([0-9]+)/);
+		r = r ? r[1] : 0;
+		$.get(
+			'#URL_PAGE{mini_formulaire_upload}&liste=1&debut_tous='+r,
+			function(c) {
+				$('#tous_docs')
+				.html(
+					$('<iframe>').html(c).find('#tous_docs').html()
+				);
+				pagination_zone();
+			}
+		);
+		return false;
+	});
+};
+pagination_zone();
+
+// --></script>
+
+
+
+
 
 	<div id="navigation">
 		#FORMULAIRE_UPLOAD
@@ -74,6 +107,7 @@ function upload_attach (re) {
 				alert('bug !');
 		}
 	});
+
 	// si on reattache les evenements, remettre les crayons
 	if (re && window.cQuery)
 		cQuery("#formulaire_upload .crayon:lt(1000)").initcrayon();
@@ -84,6 +118,27 @@ function upload_attach (re) {
 		max: 5,
 		STRING: {'remove': 'x', 'selected': '$file'}
 	});
+
+	// et la pagination
+	$('#formulaire_upload .pagination a')
+	.click(function(){
+		var r = $(this).attr('href').match(/[?&;]debut_docs=([0-9]+)/);
+		r = r ? r[1] : 0;
+		$.get(
+			'#URL_PAGE{mini_formulaire_upload}&debut_docs='+r,
+			function(c) {
+				$('#formulaire_upload')
+				.html(
+					$('<iframe>').html(c).find('#formulaire_upload').html()
+				);
+				upload_attach(true);
+			}
+		);
+		return false;
+	});
+
+	console.log($('#formulaire_upload .pagination a'));
+
 };
 upload_attach(false);
 }
