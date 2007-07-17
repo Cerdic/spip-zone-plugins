@@ -5,28 +5,27 @@
 ]
 #CACHE{0}
 
-[(#REM)
 
-	On doit hacker l'url du logo avec sa date pour eviter le cache du navigateur
+[(#REM) En fonction de du contexte, choisir un logo ]
 
-]
+[(#SET{image,[(#ID_ARTICLE|?{#LOGO_ARTICLE_NORMAL}
+	|sinon{[(#ID_AUTEUR|?{#LOGO_AUTEUR_NORMAL})]}
+	|sinon{[(#ID_BREVE|?{#LOGO_BREVE_NORMAL})]}
+	|sinon{[(#ID_RUBRIQUE|?{#LOGO_RUBRIQUE_NORMAL})]}
+	|sinon{[(#ID_SYNDIC|?{#LOGO_SITE_NORMAL})]}
+	|sinon{[(#ID_MOT|?{#LOGO_MOT_NORMAL})]})]})]
 
-[(#SET{image,
-	[(#ID_ARTICLE|?{#LOGO_ARTICLE_NORMAL})]
-	[(#ID_AUTEUR|?{#LOGO_AUTEUR_NORMAL})]
-	[(#ID_BREVE|?{#LOGO_BREVE_NORMAL})]
-	[(#ID_RUBRIQUE|?{#LOGO_RUBRIQUE_NORMAL})]
-	[(#ID_SYNDIC|?{#LOGO_SITE_NORMAL})]
-})]
 
 <fieldset[ style="(#ENV{style});"]>
 <legend>[(#GET{image}|?{
 
 	[(#SET{logo,[(#GET{image}|reduire_image{0,40})]})]
-	[(#SET{url,[(#GET{logo}|extraire_attribut{src}|replace{\?.*$})]})]
-	[(#SET{urls,[(#GET{url}|parametre_url{s,#EVAL{time()}})]})]
 
-	<small>[(#GET{logo}|inserer_attribut{src,#GET{urls}}
+	[(#REM) hacke l'url pour eviter le cache du navigateur ]
+	[(#SET{url,[(#GET{logo}|extraire_attribut{src}
+		|parametre_url{s,#EVAL{time()}})]})]
+
+	<small>[(#GET{logo}|inserer_attribut{src,#GET{url}}
 		|inserer_attribut{style,vertical-align:middle;})]
 	&nbsp; remplacer ce logo
 	[((#GET{image}
@@ -34,7 +33,7 @@
 		|extraire_attribut{height})]px)]&nbsp;:</small>
 
 }|sinon{
-	Choisir un logo :
+	Choisir un logo&nbsp;:
 })]
 </legend>
 
