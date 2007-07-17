@@ -4,6 +4,57 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\d+(?:-\w+)?))\b,');
 
+// Si un logo est demande, on renvoie la date dudit logo (permettra de gerer
+// un "modifie par ailleurs" si la date a change, rien de plus)
+function valeur_champ_logo($table, $id, $champ) {
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	$on = $chercher_logo($id, id_table_objet($table), 'on');
+	return $on ? filemtime($on[0]) : false;
+}
+
+// cette fonction de revision recoit le fichier upload a passer en logo
+function logo_revision($id, $file, $type) {
+
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	$_id_objet = id_table_objet($type);
+
+	// Chargemen d'un nouveau logo ?
+	if ($file['logo']) {
+		define('FILE_UPLOAD', true); // message pour json_export :(
+
+		// supprimer l'ancien logo
+		$on = $chercher_logo($id, $_id_objet, 'on');
+		if ($on) @unlink($on[0]);
+
+		// ajouter le nouveau
+		include_spip('action/iconifier');
+		action_spip_image_ajouter_dist(
+			type_du_logo($_id_objet).'on'.$id, false, false
+		); // beurk
+	}
+
+
+	// Reduire le logo ?
+	if (is_array($cfg = @unserialize($GLOBALS['meta']['crayons']))
+	AND $max = intval($cfg['reduire_logo'])) {
+		$on = $chercher_logo($id, $_id_objet, 'on');
+		include_spip('inc/filtres');
+		@copy($on[0], $temp = _DIR_VAR.'tmp'.rand(0,999).'.'.$on[3]);
+		$img1 = filtrer('image_reduire', $temp, $max);
+		$img2 = preg_replace(',[?].*,', '', extraire_attribut($img1, 'src'));
+		if (@file_exists($img2)
+		AND $img2 !=  $temp) {
+			@unlink($on[0]);
+			$dest = $on[1].$on[2].'.'
+				.preg_replace(',^.*\.(gif|jpg|png)$,', '\1', $img2);
+			@rename($img2,$dest);
+		}
+		@unlink($temp);
+	}
+
+	return true;
+}
+
 function colonne_table($table, $col) {
 	$nom_table = '';
 	if (!(($tabref = &crayons_get_table($table, $nom_table)) && ($brut = $tabref['field'][$col]))) {
@@ -88,24 +139,39 @@ function table_where($table, $id)
 
 function valeur_colonne_table_dist($table, $col, $id) {
 	list($nom_table, $where) = table_where($table, $id);
-	if (!$nom_table) {
+	if (!$nom_table)
 		return false;
+
+	$r = array();
+
+	// valeurs non SQL
+	foreach ($col as $champ) {
+		if (function_exists($f = 'valeur_champ_'.$champ)) {
+			$r[$champ] = $f($table, $id, $champ);
+			$col = array_diff($col, array($champ));
+		}
 	}
 
-    $s = spip_query(
-        'SELECT `' . (is_array($col) ? implode($col, '`, `') : $col) .
-         '` FROM ' . $nom_table . ' WHERE ' . $where);
-    if ($t = spip_fetch_array($s)) {
-        return is_array($col) ? $t : $t[$col];
-    }
-    return false;
-}
-function valeur_colonne_table($table, $col, $id) {
-	if (function_exists($f = $table.'_valeur_colonne_table_dist')
-	OR function_exists($f = $table.'_valeur_colonne_table')) {
-		return $f($table, $col, $id);
+	// valeurs SQL
+	if (count($col)) {
+		$s = spip_query(
+			'SELECT `' . implode($col, '`, `') .
+			'` FROM ' . $nom_table . ' WHERE ' . $where);
+		$t = spip_fetch_array($s);
+		$r = array_merge($r, $t);
 	}
-	return valeur_colonne_table_dist($table, $col, $id);
+
+	return $r;
+}
+
+function valeur_colonne_table($table, $col, $id) {
+	if (!is_array($col))
+		$col = array($col);
+
+	if (function_exists($f = $table.'_valeur_colonne_table_dist')
+	OR function_exists($f = $table.'_valeur_colonne_table')
+	OR $f = 'valeur_colonne_table_dist')
+		return $f($table, $col, $id);
 }
 
 /**
@@ -152,6 +218,21 @@ function var2js($var) {
             }
     }
     return false;
+}
+
+function json_export($var) {
+	$var = var2js($var);
+
+	// flag indiquant qu'on est en iframe et qu'il faut proteger nos
+	// donnees dans un <textarea> ; attention $_FILES a ete vide par array_pop
+	if (defined('FILE_UPLOAD'))
+		return "<textarea>".htmlspecialchars($var)."</textarea>";
+	else
+		return $var;
+}
+
+function return_log($var) {
+	die(json_export(array('$erreur'=> var_export($var,true))));
 }
 
 function _U($texte)
@@ -204,4 +285,5 @@ function &crayons_get_table($table, &$nom_table) {
 	$nom_table = $noms[$table];
 	return $return[$table];
 }
+
 ?>

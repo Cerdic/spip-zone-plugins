@@ -193,7 +193,7 @@ jQuery.fn.activatecrayon = function(percent) {
     crayon
     .find('form')
       .ajaxForm({"dataType":"json",
-      "after":function(d){
+      "success": function(d) {
         me
         .find("img.crayon-searching")
           .remove();
@@ -207,8 +207,13 @@ jQuery.fn.activatecrayon = function(percent) {
           } else {
               uniAlert(d.$erreur+'\n'+configCrayons.txt.error);
               crayon
-              .find(".crayon-boutons")
-                .show(); // boutons de validation
+              .find('form')
+                .css('opacity', 1.0)
+                .find(".crayon-boutons,.resizehandle")
+                  .show()
+                .end()
+                .find('.crayon-searching')
+                  .remove();
           }
           return false;
         }
@@ -222,10 +227,10 @@ jQuery.fn.activatecrayon = function(percent) {
       .one('submit', function(){
         crayon
         .find('form')
-        .css('opacity', 0.5)
-        .after(configCrayons.mkimg('searching')) // icone d'attente
-        .find(".crayon-boutons,.resizehandle")
-          .remove();
+          .css('opacity', 0.5)
+          .after(configCrayons.mkimg('searching')) // icone d'attente
+          .find(".crayon-boutons,.resizehandle")
+            .hide();
       })
       // keyup pour les input et textarea ...
       .keyup(function(e){
@@ -248,10 +253,11 @@ jQuery.fn.activatecrayon = function(percent) {
       .keypress(function(e){
         e.cancelBubble = true;
       })
-      .find(".crayon-active")
+      .find(".crayon-active[@type!=file]")
         .each(function(n){
           // focus pour commencer a taper son texte directement dans le champ
           // on essaie de positionner la selection (la saisie) au niveau du clic
+          // ne pas le faire sur un input de [@type=file]
           if (n==0) {
             this.focus();
             // premiere approximation, en fonction de la hauteur du clic

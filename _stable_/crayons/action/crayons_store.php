@@ -17,14 +17,21 @@ function post_crayons() {
 
         $name = $_POST['name_'.$crayon];
         $content = array();
-        foreach (explode(',', $_POST['fields_'.$crayon]) as $field) {
-            $content[$field] = $_POST['content_'.$crayon.'_'.$field];
-            // Compatibilite charset autre que utf8 ; en effet on recoit
-            // obligatoirement les donnees en utf-8, par la magie d'ajax
-            if ($GLOBALS['meta']['charset']!='utf-8') {
-                include_spip('inc/charsets');
-                $content[$field] = importer_charset($content[$field], 'utf-8');
+        if ($_POST['fields_'.$crayon]) {
+          foreach (explode(',', $_POST['fields_'.$crayon]) as $field) {
+            // cas particulier d'un envoi de fichier
+            if (isset($_FILES['content_'.$crayon.'_'.$field])) {
+                $content[$field] = $_FILES['content_'.$crayon.'_'.$field];
+            } else {
+            	$content[$field] = $_POST['content_'.$crayon.'_'.$field];
+            	// Compatibilite charset autre que utf8 ; en effet on recoit
+            	// obligatoirement les donnees en utf-8, par la magie d'ajax
+            	if ($GLOBALS['meta']['charset']!='utf-8') {
+            	    include_spip('inc/charsets');
+            	    $content[$field] = importer_charset($content[$field], 'utf-8');
+            	}
             }
+          }
         }
 
         // Si les donnees POSTees ne correspondent pas a leur md5,
@@ -70,18 +77,14 @@ function action_crayons_store_dist() {
 				list(,$crayon,$type,$modele,$id) = $regs;
 				$wid = $postee[3];
 				if (!autoriser('modifier', $type, $id, NULL, array('modele'=>$modele))) {
-					$return['$erreur'] = 
-					  "$type $id: " . _U('crayons:non_autorise');
-				  break;
+					$return['$erreur'] =
+						"$type $id: " . _U('crayons:non_autorise');
+					break;
 				}
 
 				// recuperer l'existant pour calculer son md5 et verifier
 				// qu'il n'a pas ete modifie entre-temps
-
-				$data = array();
-				foreach ($content as $champtable => $val) {
-					$data[$champtable] = valeur_colonne_table($type, $champtable, $id);
-				}
+				$data = valeur_colonne_table($type, array_keys($content), $id);
 				$md5 = md5(serialize($data));
 
 				// est-ce que le champ a ete modifie dans la base entre-temps ?
@@ -109,7 +112,7 @@ function action_crayons_store_dist() {
 
 	// une quelconque erreur ... ou rien ==> on ne fait rien !
 	if ($return['$erreur']) {
-		echo var2js($return);
+		echo json_export($return);
 		exit;
 	}
 
@@ -176,7 +179,7 @@ function action_crayons_store_dist() {
 
 	// il manque une fonction de mise à jour ==> on ne fait rien !
 	if ($return['$erreur']) {
-	    echo var2js($return);
+	    echo json_export($return);
 	    exit;
 	}
 	// hop ! mises à jour table par table et id par id
@@ -185,11 +188,7 @@ function action_crayons_store_dist() {
 	        // Enregistrer dans la base
 	        // $updok = ... quand on aura un retour
 	        // -- revisions_articles($id_article, $c) --
-	        if ($idschamps['fun'] == 'crayons_update') {
-		        crayons_update($id, $champsvaleurs['chval'], $type);
-	        } else {
-		        $idschamps['fun']($id, $champsvaleurs['chval']);
-	        }
+	        $idschamps['fun']($id, $champsvaleurs['chval'], $type);
 	    }
 	}
 
@@ -203,7 +202,7 @@ function action_crayons_store_dist() {
 			  OR $f = 'vues_dist';
 			$return[$wid] = $f($type, $modele, $id, $content);
 	}
-	echo var2js($return);
+	echo json_export($return);
 	exit;
 }
 

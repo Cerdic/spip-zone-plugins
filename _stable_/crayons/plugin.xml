@@ -22,16 +22,16 @@
 	</multi>
 	</auteur>
 	<version>
-	0.7
+	0.8
 	</version>
 	<etat>
 	stable
 	</etat>
 	<description>
-<multi>Ce plugin {{disponible uniquement en 1.9.2 r&#233;cente}} fournit des fonctions d'&#233;dition rapide depuis les pages publiques du site. Pour en b&#233;n&#233;ficier, il faut des squelettes
+<multi>Ce plugin {{disponible uniquement &#224; partir de SPIP 1.9.2}} fournit des fonctions d'&#233;dition rapide depuis les pages publiques du site. Pour en b&#233;n&#233;ficier, il faut des squelettes
 &#171;&#160;compatibles crayons&#160;&#187;.
 
-Comme dans les squelettes r&#233;cents de la dist/ 1.9.2, il suffit d'avoir une balise {#EDIT&#123;machin&#125;} &#224; chaque endroit que l'on veut rendre 
+Comme dans les squelettes de la dist/, il suffit d'avoir une balise {#EDIT&#123;machin&#125;} &#224; chaque endroit que l'on veut rendre 
 &#233;ditable. Par exemple, pour que le titre soit &#233;ditable:
 _ <code><h1 class="#EDIT{titre} autres classes">#TITRE</h1></code>.
 [it] Questo plugin {{disponibile unicamente per una versione 1.9.2 aggiornata}} fornisce delle funzioni di modifica rapida dalle pagine pubbliche del sito. Per utilizzarlo, &#232; necessario avere dei modelli

@@ -1,0 +1,39 @@
+[(#REM)
+
+	Controleur pour le crayon 'logo'
+
+]
+#CACHE{0}
+
+[(#REM)
+
+	On doit hacker l'url du logo avec sa date pour eviter le cache du navigateur
+
+]
+
+[(#SET{image,[(#LOGO_ARTICLE_NORMAL
+	||sinon{#LOGO_AUTEUR_NORMAL}
+	|sinon{#LOGO_BREVE_NORMAL}
+	|sinon{#LOGO_RUBRIQUE_NORMAL}
+	|sinon{#LOGO_SITE_NORMAL}
+)]})]
+
+<fieldset[ style="(#ENV{style});"]>
+<legend>[(#GET{image}|?{
+
+	[(#SET{logo,[(#GET{image}|reduire_image{0,40})]})]
+	[(#SET{url,[(#GET{logo}|extraire_attribut{src}|replace{\?.*$})]})]
+	[(#SET{urls,[(#GET{url}|parametre_url{s,#EVAL{time()}})]})]
+
+	[(#GET{logo}|inserer_attribut{src,#GET{urls}}
+		|inserer_attribut{style,vertical-align:middle;})]
+	&mdash; remplacer ce logo :
+
+}|sinon{
+	Choisir un logo :
+})]
+</legend>
+
+<input class="crayon-active" name="#ENV{name_logo}" type="file" onchange="if(!this.value.match(/\.(png|jpeg|jpg|gif)$/i)){alert('Il faut choisir une image :-)');this.value=''};" />
+
+</fieldset>
