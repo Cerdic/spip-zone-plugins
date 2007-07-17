@@ -123,9 +123,23 @@ if ($_GET['exec'] == "rubriques_edit")
 		$('textarea[@name=texte]').css(\"display\", \"none\");
 		$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");
 		$('form[textarea]').bind(\"submit\", function(e) { 
-			$('input[@name=titre]').val('<multi>[".$langues_choisies[0]."]'+$('input[@name=zone_multilingue_1_document_formulaire_rubrique_titre]').val()+'[".$langues_choisies[1]."]'+$('input[@name=zone_multilingue_2_document_formulaire_rubrique_titre]').val()+'[".$langues_choisies[2]."]'+$('input[@name=zone_multilingue_3_document_formulaire_rubrique_titre]').val()+'</multi>');
-			$('textarea[@name=descriptif]').val('<multi>[".$langues_choisies[0]."]'+$('textarea[@name=zone_multilingue_1_document_formulaire_rubrique_descriptif]').val()+'[".$langues_choisies[1]."]'+$('textarea[@name=zone_multilingue_2_document_formulaire_rubrique_descriptif]').val()+'[".$langues_choisies[2]."]'+$('textarea[@name=zone_multilingue_3_document_formulaire_rubrique_descriptif]').val()+'</multi>');
-			$('textarea[@name=texte]').val('<multi>[".$langues_choisies[0]."]'+$('textarea[@name=zone_multilingue_1_document_formulaire_rubrique_texte]').val()+'[".$langues_choisies[1]."]'+$('textarea[@name=zone_multilingue_2_document_formulaire_rubrique_texte]').val()+'[".$langues_choisies[2]."]'+$('textarea[@name=zone_multilingue_3_document_formulaire_rubrique_texte]').val()+'</multi>');
+			$('input[@name=titre]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_document_formulaire_rubrique_titre]').val()+";
+			}
+			$newtab .= "'</multi>');$('textarea[@name=descriptif]').val('<multi>'+";
+			
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_rubrique_descriptif]').val()+";
+			}
+			$newtab .= "'</multi>');$('textarea[@name=texte]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_rubrique_texte]').val()+";
+			}
+			$newtab .= "'</multi>');
 		} );
 	});
 	</script>
