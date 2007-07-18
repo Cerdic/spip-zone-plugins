@@ -37,9 +37,12 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
 				$ret .= "
-				<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">
-       				".afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ)."<input type='text' class='formo' name=\"zone_multilingue_".$i."_".$nom_champ."\" value=\"".extraire_multi_lang($titre, $langues_choisies[$i])."\" size='40'  />
-				</div>";
+				<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
+				if (lire_config('ExtensionMultilingue/typotitres_ExtensionMultilingue') == "on")
+				{			
+					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
+				}
+				$ret .= "<input type='text' class='formo' name=\"zone_multilingue_".$i."_".$nom_champ."\" value=\"".extraire_multi_lang($titre, $langues_choisies[$i])."\" size='40'  /></div>";
 			}
         		
 			$ret .= "</div>";
@@ -57,9 +60,13 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{	
-				$ret.="<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">
-       					".afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ)."<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"4\" cols=\"40\">".entites_html(extraire_multi_lang($descriptif, $langues_choisies[$i]))."</textarea>
-				</div>";
+				$ret .= "<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
+				if (lire_config('ExtensionMultilingue/typodescriptifs_ExtensionMultilingue') == "on")
+				{			
+					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
+
+				}
+				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"4\" cols=\"40\">".entites_html(extraire_multi_lang($descriptif, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret.="</div>";
 		}
@@ -76,9 +83,12 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
-				$ret.="<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">
-       					".afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ)."<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"15\" cols=\"40\">".entites_html(extraire_multi_lang($texte, $langues_choisies[$i]))."</textarea>
-				</div>";
+				$ret .= "<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
+				if (lire_config('ExtensionMultilingue/typotextes_ExtensionMultilingue') == "on")
+				{			
+					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
+				}
+				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"15\" cols=\"40\">".entites_html(extraire_multi_lang($texte, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret.="	</div>";
 		}

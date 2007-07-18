@@ -10,6 +10,10 @@
 <p>Langues (s&eacute;par&eacute;es par des virgules)<br/>
 <input type="text" name="langues_ExtensionMultilingue" value="[(#CONFIG{ExtensionMultilingue/langues_ExtensionMultilingue}|sinon{'fr,en,de'})]"></p>
 
+<p>Afficher la barre typo sur les titres : <input type="checkbox" name="typotitres_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typotitres_ExtensionMultilingue})"]>
+<br/>Afficher la barre typo sur les descriptifs : <input type="checkbox" name="typodescriptifs_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typodescriptifs_ExtensionMultilingue})"]>
+<br/>Afficher la barre typo sur les textes : <input type="checkbox" name="typotextes_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typotextes_ExtensionMultilingue})"]>
+</p>	
 <input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
 <input type="reset" value="<:reset:>" class="fondo" />
 <input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
