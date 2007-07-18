@@ -88,7 +88,8 @@
 }
 .tabs-container {
     border-top: 1px solid #97a5b0;
-    padding: 1em 8px;
+    padding: 2px;
+
     background: #fff; /* declare background color for container to avoid distorted fonts in IE while fading */
 }
 .tabs-loading em {
