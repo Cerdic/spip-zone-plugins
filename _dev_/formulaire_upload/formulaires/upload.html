@@ -38,7 +38,10 @@
 	[(#CONFIG{formupload/insert_code}|?{' ',''})
 	<div class="insert_code">
 		<strong><:formupload:insert_code:></strong><br>
-		&lt;img#ID_DOCUMENT|left&gt; &lt;img#ID_DOCUMENT|center&gt; &lt;img#ID_DOCUMENT|right&gt;
+		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{' ',''})
+		&lt;img#ID_DOCUMENT|left&gt; &lt;img#ID_DOCUMENT|center&gt; &lt;img#ID_DOCUMENT|right&gt;]
+		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{'',' '})
+		&lt;doc#ID_DOCUMENT|left&gt; &lt;doc#ID_DOCUMENT|center&gt; &lt;doc#ID_DOCUMENT|right&gt;]
 	</div>]
 	
 	</div>
