@@ -153,6 +153,25 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	 }
 
 	}
+
+	else if ($_GET['exec'] == "sites_edit")
+	{
+		global $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic, $connect_id_rubrique;
+
+		$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic));
+
+		if ($row = spip_fetch_array($result)) {
+			$id_syndic = $row["id_syndic"];
+			$id_rubrique = $row["id_rubrique"];
+			$titre = $row["nom_site"];
+			$url_site = $row["url_site"];
+			$url_syndic = $row["url_syndic"];
+			$descriptif = $row["descriptif"];
+			$syndication = $row["syndication"];
+			$extra=$row["extra"];
+		}
+	}
+
 	/*if ($_GET['exec'] == "articles_edit")
 	{
 		$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
@@ -169,10 +188,10 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		
 	}*/
 
-	if (($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
+	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 
-		if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type"))
+		if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type") || ($champ_fin == "lien_nom"))
 		{
 			//cas des input
 			$ret="
@@ -300,7 +319,7 @@ function ExtensionMultilingue_header_prive($texte) {
 
 
 $newtab="";
-	if (($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
+	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 
 		$newtab = " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
