@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Invalideurs
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	spip-dev@rezo.net
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+		Les anciens invalideurs de SPIP 1.9.2 (par forum, par article etc).
+	</description>
+	<prefix>
+		Invalideur
+	</prefix>
+
+	<lien>http://www.spip-contrib.net/Plugin-Invalideur</lien>
+
+	<version_base>0.1</version_base>
+	<install>base/invalideur_install.php</install>
+</plugin>
