@@ -48,12 +48,55 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 
 		
 	}
-	if ($_GET['exec'] == "configuration")
+	else if ($_GET['exec'] == "configuration")
 	{
 		$titre = $GLOBALS['meta']["nom_site"];
 		$descriptif = $GLOBALS['meta']["descriptif_site"];
 
 	}
+	else if ($_GET['exec'] == "mots_type")
+	{
+		global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;
+
+		if ($new == "oui") {
+		  $id_groupe = 0;
+		  $titre = filtrer_entites(_T('titre_nouveau_groupe'));
+		  $onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		  $ancien_type = '';
+		  $unseul = 'non';
+		  $obligatoire = 'non';
+		  $articles = 'oui';
+		  $breves = 'oui';
+		  $rubriques = 'non';
+		  $syndic = 'oui';
+		  $acces_minirezo = 'oui';
+		  $acces_comite = 'oui';
+		  $acces_forum = 'non';
+		} else {
+			$id_groupe= intval($id_groupe);
+			$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
+
+			while($row = spip_fetch_array($result_groupes)) {
+				$id_groupe = $row['id_groupe'];
+				$titre = $row['titre'];
+				//$titre = typo($type);
+				$descriptif = $row['descriptif'];
+				$texte = $row['texte'];
+				$unseul = $row['unseul'];
+				$obligatoire = $row['obligatoire'];
+				$articles = $row['articles'];
+				$breves = $row['breves'];
+				$rubriques = $row['rubriques'];
+				$syndic = $row['syndic'];
+				$acces_minirezo = $row['minirezo'];
+				$acces_comite = $row['comite'];
+				$acces_forum = $row['forum'];
+				$onfocus ="";
+			}
+		}
+
+	}
+	
 	/*if ($_GET['exec'] == "articles_edit")
 	{
 		$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
@@ -71,7 +114,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	}*/
 
 
-	if (($champ_fin == "titre") || ($champ_fin == "nom_site"))
+	if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type"))
 	{
 			//cas des input
 			$ret="
@@ -234,6 +277,44 @@ else if ($_GET['exec'] == "configuration")
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
 				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_configuration_descriptif_site]').val()+";
+			}
+			$newtab .= "'</multi>');
+		} );
+	});
+	</script>
+        ";
+}
+else if ($_GET['exec'] == "mots_type")
+{
+	$newtab = "        
+	<script type=\"text/javascript\">
+	$(document).ready(function() {
+	     	$('.container-onglets').tabs();
+		$('table.spip_barre').css(\"display\", \"none\");
+		$('input[@name=change_type]').css(\"display\", \"none\");
+		$('textarea[@name=descriptif]').css(\"display\", \"none\");
+		$('textarea[@name=texte]').css(\"display\", \"none\");
+		$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");
+		$('form[textarea]').bind(\"submit\", function(e) { 
+			
+			$('input[@name=change_type]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_document_formulaire_mot_change_type]').val()+";
+			}
+			$newtab .= "'</multi>');";
+			
+			$newtab .= "$('textarea[@name=descriptif]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_mot_descriptif]').val()+";
+			}
+			$newtab .= "'</multi>');";
+
+			$newtab .= "$('textarea[@name=texte]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_mot_texte]').val()+";
 			}
 			$newtab .= "'</multi>');
 		} );
