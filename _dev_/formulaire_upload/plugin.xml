@@ -13,6 +13,8 @@
 	</etat>
 	<description>
 		Permet &#224; chaque r&#233;dacteur d'uploader des documents dans sa bo&#238;te perso ; {cf.} [la zone d'upload->../spip.php?page=upload_zone].
+		
+		<h4><a href="?exec=cfg&amp;cfg=formupload">Configuration</a></h4>
 	</description>
 	<prefix>
 		FormulaireUpload

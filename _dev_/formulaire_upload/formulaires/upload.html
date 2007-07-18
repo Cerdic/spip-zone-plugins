@@ -34,6 +34,13 @@
 		<div style='float:#LANG_RIGHT;width:10px;'><input type="checkbox" name="supprimer[]" value="#ID_DOCUMENT" title="supprimer ce document" /></div>
 	<h4 class="#EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})]</h4>
 	[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF|sinon{<:info_descriptif:>})</div>]
+	
+	[(#CONFIG{formupload/insert_code}|?{' ',''})
+	<div class="insert_code">
+		<strong><:formupload:insert_code:></strong><br>
+		&lt;img#ID_DOCUMENT|left&gt; &lt;img#ID_DOCUMENT|center&gt; &lt;img#ID_DOCUMENT|right&gt;
+	</div>]
+	
 	</div>
 	<br class='nettoyeur' />
 	</div>

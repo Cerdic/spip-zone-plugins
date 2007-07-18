@@ -1,0 +1,40 @@
+[(#REM) titre=Configuration du «&nbsp;formulaire upload&nbsp;»]
+
+<!-- descriptif=
+
+#GET{logo}
+Ce plugin permet d'avoir un formulaire public associant des documents aux auteurs
+
+-->
+
+#CACHE{0}
+
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<br />
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx',''})]
+
+[(#REM) ------------------------ CONFIGURATION DU FORMULAIRE ------------------------ ]
+<fieldset>
+<strong>Afficher le code d'insertion des documents (si on a un autre formualaire pour cr&eacute;er des articles par exemple)</strong>
+	<label>
+		<input type="checkbox" name="insert_code" [checked="(#ENV{insert_code}?{checked})"] id="insert_code" />
+	</label>
+</fieldset>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>
+
+
