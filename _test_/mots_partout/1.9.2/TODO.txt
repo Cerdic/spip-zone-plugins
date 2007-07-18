@@ -1,6 +1,6 @@
-- ajouter des localisations,
+- ajouter des localisations, et les améliorer
 - faire une page pour creer les tables et ajouter une colonne dans spip_groupes_mots:
-   * rendre l'installation actuelle plus interactive (choix des tables dont on a besoint)
+   * rendre l'installation actuelle plus interactive (choix des tables dont on a besoin)
    * rendre l'installation actuelle générique
    * avoir une interface pour mettre des oui/non dans les nouvelles tables spip_groupes_mots
 - traduire l'article sur spip-contrib
@@ -8,3 +8,7 @@
 - trouver une meilleure méthode pour l'authentification
 - revoir la logique du stricte, utiliser HAVING de mysql
 
+Pour l'arborescence : 
+- instalation du champ supplementaire id_parent dans la table spip_groupes_mots
+- arborescence dans le choix (select simple) du groupe de mots sur l'édition d'un mot clef : en cours de réalisation
+- amélioration de l'interface graphique de exec/mots_tous 

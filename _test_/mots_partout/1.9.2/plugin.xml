@@ -8,15 +8,29 @@
 	<auteur>
 	Stephane Laurent (Bill)
 	</auteur>
+	<auteur>
+	Yoann Nogues (Zerax)
+	</auteur>
 	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
 	<version>
-	  0.3
+	  0.4
 	</version>
 	<etat>
 	  test
 	</etat>
 	<description>
 	  Gestion des mots clefs sur tous les &eacute;l&eacute;ments SPIP.
+	  Cette version intégre les mots clefs arborescents. 
+	  Pour l'installation, il faut absolument rajouter un champ id_parent (BIGINT) dans la table spip_groupes_mots.
+	  
+	  Pour l'utilisation dans les squelettes une simple [boucle récursive->http://www.spip.net/fr_article914.html] avec comme critére {id_parent} suffira pour boucler sur les groupes de mots.  
+	  Un exemple :
+	   <BOUCLE_grp_mots(GROUPES_MOTS)>
+		   <BOUCLE_grp_mots_enfants(GROUPES_MOTS){id_parent}>
+			   #TITRE
+			   <BOUCLE_recursive(GROUPES_MOTS)></BOUCLE_recursive>
+		   </BOUCLE_grp_mots_enfants>
+	   </BOUCLE_grp_mots>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::

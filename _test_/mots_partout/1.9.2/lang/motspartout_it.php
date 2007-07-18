@@ -20,7 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'tagmachine' => 'Parole chiave da aggiungere',
 									   'par' => 'nb. risultati',		
 									   'installer' => 'configurare la basa per i parole chiave su',
-									   'toutinstalle' => 'La basa &eacute; gia configurata.'
+									   'toutinstalle' => 'La basa &eacute; gia configurata.',
+									'icone_creation_sous_groupe_mots'=>'generare un nuovo sottogruppo'
 									   );
 
 ?>

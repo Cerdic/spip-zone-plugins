@@ -17,7 +17,8 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type_dist()
 {
-	global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;
+	global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre,$id_parent; //YOANN Rajout du id_parent
+	//YOANN : dans la chasse aux globales je n'ai rien fait ici 
 
 ///////////////////
 //MODIFICATION
@@ -61,6 +62,7 @@ function exec_mots_type_dist()
 ///////////////////
 			$id_groupe = $row['id_groupe'];
 			$type = $row['titre'];
+			$id_parent=$row['id_parent']; //YOANN
 			$titre = typo($type);
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
@@ -133,6 +135,10 @@ function exec_mots_type_dist()
 			$res .= "</textarea>\n";
 	} else
 		  $res .= "<input type='hidden' name='texte' value=\"$texte\" />";
+
+	//YOANN
+    	$res .= "<input type='hidden' name='id_parent' value=\"$id_parent\" />";
+    	//FIN YOANN
 
 	$res .= "<div align='right'><input type='submit' class='fondo' value='"
 	. _T('bouton_valider')

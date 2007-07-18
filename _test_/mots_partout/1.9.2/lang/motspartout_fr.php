@@ -39,6 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'item_mots_cles_association_syndic' => 'aux sites syndiqu&eacute;s',
 
 									   'info_auteurs_lies_mot' => 'Les auteurs li&eacute;s &agrave; ce mot clef',
+//YOANN
+										'icone_creation_sous_groupe_mots'=>'Cr&eacute;er un sous groupe de mot-cl&eacute;s'
+										//FIN YOANN
 									   );
 
 ?>

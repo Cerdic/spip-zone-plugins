@@ -303,6 +303,11 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 
 global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
 
+//Yoann
+if(!$table) $table="articles"; //nous évite d'avoir des plantages 
+//TODO a tester en enlevant ca 
+//FIN YOANN
+
 	if ($les_mots) {
 		$nombre_mots_associes = count($les_mots);
 		$les_mots = join($les_mots, ",");
@@ -385,7 +390,14 @@ function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='')
 	$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY type, titre");
 
 	$n = spip_num_rows($result);
-	if (!$n) return '';
+	if (!$n) {
+	//YOANN MODIFICATION
+		//dans le cas ou on a pas de mots clefs associes au groupe (principe de l'arborescence)
+		//on va prendre les sous-groupe comme etant signe d'affichage
+	$cpt =spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_groupes_mots WHERE id_parent=$id_groupe"));
+	if(!$cpt['n'])	return '';
+	//FIN YOANN
+	}
 
 	$titre = textebrut(typo($row['titre']));
 	$titre_groupe = entites_html($titre);
@@ -429,9 +441,43 @@ function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='')
 				textebrut(typo($row['titre'])) .
 				"</option>";
 		}
+		//YOANN : on va rajouter dans le select les sous-groupes ainsi que leurs mots clefs
+		$res.=select_sous_menu_groupe($id_groupe,$table);
+        	//FIN YOANN
+
 		$res .= "</select>&nbsp;";
 		return array($res, _T('bouton_choisir'));
 	}
 
 }
+
+//YOANN
+function select_sous_menu_groupe($id_groupe,$table="articles",$niveau=1){
+
+ global $menu,$spip_lang,$connect_statut,$cond_id_groupes_vus,$id_objet,$table_id,$url_base,$objet;
+
+        //boucle sur les sous groupes
+		$result_sous_groupes = spip_query("SELECT id_groupe,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  ".($cond_id_groupes_vus?" OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))":"").") AND id_parent=".$id_groupe." ORDER BY multi");
+		
+
+		 while ($row = spip_fetch_array($result_sous_groupes)) {
+		     $res .= "\n<option value='" .$row['id_groupe'] .
+				"'>".str_repeat("&nbsp;&nbsp;",$niveau) .
+				textebrut(typo($row['titre'])) .
+				"</option>";
+				//BOUCLES sur les mots de chaque sous groupe
+				$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =".$row['id_groupe']." ORDER BY type, titre");
+
+				while($row2 = spip_fetch_array($result)) {
+    			     $res .= "\n<option value='" .$row2['id_mot'] .
+    				"'>".str_repeat("&nbsp;&nbsp;",$niveau)."&nbsp;-&gt;" .
+    				textebrut(typo($row2['titre'])) .
+    				"</option>";
+                }
+
+				$res.=select_sous_menu_groupe($row['id_groupe'],$table,$niveau+1);
+		 }
+        return $res;
+}
+//FIN YOANN
 ?>

@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'item_mots_cles_association_rubriques' => 'sections',
 									   'item_mots_cles_association_breves' => 'news items',
 									   'item_mots_cles_association_syndic' => 'syndicated web sites',
+									   'icone_creation_sous_groupe_mots'=>'create a new sub-group'
 									  );
 
 ?>

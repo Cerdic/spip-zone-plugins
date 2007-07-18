@@ -23,7 +23,7 @@ function exec_mots_tous_dist()
 ///////////////////
 //MODIFICATION
 ///////////////////
-// liste des types de tables sur lesquels on peut mettre des mots cl�s
+// liste des types de tables sur lesquels on peut mettre des mots clés
 // - ceux du core
 //	$choses= array('articles', 'breves', 'rubriques', 'syndic');
 // - ceux du plugin
@@ -68,11 +68,34 @@ function exec_mots_tous_dist()
 //
 // On boucle d'abord sur les groupes de mots
 //
+	//YOANN
+	//Modif mots clef arbo
+	//va afficher les groupes et leurs sous groupes de mots clefs
+	mots_partout_arbo_affiche_sous_groupe();
+	//FIN YOANN
 
-	$result_groupes = spip_query($q="SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
+	
+	
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
+
+
+	echo fin_gauche(), fin_page();
+}
+
+
+//YOANN
+// http://doc.spip.org/@mots_partout_arbo_affiche_sous_groupe
+function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
+//cette fonction permet d'afficher recursivement les groupes et leurs sous groupes de mots clefs
+    global $conf_mot, $spip_lang, $spip_lang_right, $son_groupe;
+    $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
+
+    $result_groupes = spip_query($q="SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots where id_parent=".$id_groupe." ORDER BY multi");
 
 	while ($row_groupes = spip_fetch_array($result_groupes)) {
 		$id_groupe = $row_groupes['id_groupe'];
+		$id_parent= $row_groupes['id_parent'];
 		$titre_groupe = typo($row_groupes['titre']);
 		$descriptif = $row_groupes['descriptif'];
 		$texte = $row_groupes['texte'];
@@ -94,7 +117,20 @@ function exec_mots_tous_dist()
 		// Afficher le titre du groupe
 		echo "<a id='mots_tous-$id_groupe'></a>";
 
-		debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
+
+		debut_cadre_enfonce("groupe-mot-24.gif",false, '', $titre_groupe);
+		
+		//YOANN
+		//TODO Ajaxiser la partie ouverture et fermeture  ci dessous
+		if($id_parent==0)
+		{ //on n'aura que pour le premier niveau cette possibilité d'ouverture fermeture
+		echo "<a href=\"javascript:;\" onclick=\"$('#bloc-groupe-$id_groupe').toggle()\" >Ouvrir / Fermer</a>";
+		$aff="";
+		if(_request('id_groupe')!=$id_groupe) $aff="style='display:none;'";
+		echo "<div id='bloc-groupe-$id_groupe' $aff >"; //YOANN fermer ouvrir
+		}
+		//FIN YOANN
+
 		// Affichage des options du groupe (types d'elements, permissions...)
 		$res = '';
 
@@ -143,7 +179,7 @@ function exec_mots_tous_dist()
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
-		// Preliminaire: confirmation de suppression d'un mot lie � qqch
+		// Preliminaire: confirmation de suppression d'un mot lie à qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
 			include_spip('inc/grouper_mots');
@@ -167,21 +203,31 @@ function exec_mots_tous_dist()
 			  ">";
 			icone(_T('icone_supprimer_groupe_mots'), redirige_action_auteur('instituer_groupe_mots', "-$id_groupe", "mots_tous"), "groupe-mot-24.gif", "supprimer.gif");
 			echo "</td>";
+
+			// YOANN on permet d'ajouter un sous groupe a n'importe quel groupe
+			echo "<td>";
+			icone(_T('icone_creation_sous_groupe_mots'), generer_url_ecrire("mots_type","new=oui&id_parent=".$id_groupe), "groupe-mot-24.gif", "edit.gif");
+			echo "</td>";
+			//FIN YOANN
+
 			echo "<td>";
 			echo "<div align='$spip_lang_right'>";
 			icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous', "#mots_tous-$id_groupe")), "mot-cle-24.gif", "creer.gif");
 			echo "</div>";
 			echo "</td></tr></table>";
-		}	
+		}
+
+		mots_partout_arbo_affiche_sous_groupe($id_groupe); // 
+
+		if($id_parent==0) echo "</div>"; //YOANN fin du div qui permet de fermer ouvrir un bloc
 
 		fin_cadre_enfonce();
+
 	}
-	
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
-
-	echo fin_gauche(), fin_page();
 }
+//FIN YOANN
+
 
 // http://doc.spip.org/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)

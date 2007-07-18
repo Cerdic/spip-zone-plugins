@@ -43,6 +43,7 @@ function action_instituer_groupe_mots_post($r)
 		$descriptif = (corriger_caracteres($GLOBALS['descriptif']));
 		$obligatoire=$GLOBALS['obligatoire'] ? 'oui' : 'non';
 		$unseul=$GLOBALS['unseul'] ? 'oui' : 'non';
+		$id_parent=$GLOBALS['id_parent']; //YOANN
 		$acces_comite=$GLOBALS['acces_comite'] ? 'oui' : 'non';
 		$acces_forum=$GLOBALS['acces_forum'] ? 'oui' : 'non';
 		$acces_minirezo=$GLOBALS['acces_minirezo'] ? 'oui' : 'non';
@@ -55,12 +56,12 @@ function action_instituer_groupe_mots_post($r)
 		}
 		if ($id_groupe) {	// modif groupe
 			spip_query("UPDATE spip_mots SET type=" . _q($change_type) . " WHERE id_groupe=$id_groupe");
-			spip_query("UPDATE spip_groupes_mots SET titre=" . _q($change_type) . ", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", unseul=" . _q($unseul) . ", obligatoire=" . _q($obligatoire)
+			spip_query("UPDATE spip_groupes_mots SET titre=" . _q($change_type) . ",id_parent="._q($id_parent).", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", unseul=" . _q($unseul) . ", obligatoire=" . _q($obligatoire)
 			.$q.", minirezo="._q($acces_minirezo).", comite="._q($acces_comite).", forum="._q($acces_forum)
 			." WHERE id_groupe=".$id_groupe);
 
 		} else {	// creation groupe
-		  spip_abstract_insert('spip_groupes_mots', "(titre, texte, descriptif, unseul,  obligatoire".$q1.", minirezo, comite, forum)", "(" . _q($change_type) . ", " . _q($texte) . ", " . _q($descriptif) . ", " . _q($unseul) . ", " . _q($obligatoire) . $q2. ", " . _q($acces_minirezo) . ",  " . _q($acces_comite) . ", " . _q($acces_forum) . " )");
+		  spip_abstract_insert('spip_groupes_mots', "(titre,id_parent, texte, descriptif, unseul,  obligatoire".$q1.", minirezo, comite, forum)", "(" . _q($change_type) . ", "._q($id_parent).", " . _q($texte) . ", " . _q($descriptif) . ", " . _q($unseul) . ", " . _q($obligatoire) . $q2. ", " . _q($acces_minirezo) . ",  " . _q($acces_comite) . ", " . _q($acces_forum) . " )");
 		}
 	}
 }
@@ -77,6 +78,7 @@ function action_instituer_groupe_mots_get($table)
 		$q2.=", '"._q(($table==$chose) ? 'oui' : 'non'); 
 	}
 	$id_groupe = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire".$q1.", minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non'".$q2.", 'oui', 'non', 'non'" . ")");
+//YOANN : pas de gestion de l'arborescence a ce niveau 
 
         redirige_par_entete(parametre_url(urldecode(_request('redirect')),
 					  'id_groupe', $id_groupe, '&'));
