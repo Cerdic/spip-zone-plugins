@@ -96,7 +96,63 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		}
 
 	}
-	
+	else if ($_GET['exec'] == "mots_edit")
+	{
+		global
+  		$ajouter_id_article, // attention, ce n'est pas forcement un id d'article
+  		$champs_extra,
+  		$connect_statut,
+  		$descriptif,
+  		$id_groupe,
+  		$id_mot,
+  		$table_id,
+  		$new,
+  		$options,
+  		$redirect,
+  		$spip_display,
+  		$table,
+  		$texte,
+  		$titre,
+  		$titre_mot,
+  		$les_notes;
+
+		$id_groupe = intval($id_groupe);
+ 		$id_mot = intval($id_mot);
+ 		// Secu un peu superfetatoire car seuls les admin generaux les verront;
+ 		// mais si un jour on relache les droits, vaut mieux blinder.
+ 		$table = preg_replace('/\W/','',$table);
+ 		$table_id = preg_replace('/\W/','',$table_id);
+ 		$ajouter_id_article = intval($ajouter_id_article);
+		//
+		// Recupere les donnees
+		//
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
+		 if ($row) {
+			$id_mot = $row['id_mot'];
+			$titre = $row['titre'];
+			$descriptif = $row['descriptif'];
+			$texte = $row['texte'];
+			$extra = $row['extra'];
+			$id_groupe = $row['id_groupe'];
+			$onfocus ='';
+	 	}
+		else {
+			if (!$new OR !autoriser('modifier','groupemots',$id_groupe)) {
+				echo minipres(_T('info_mot_sans_groupe'));
+				exit;
+			}
+			$id_mot = 0;
+
+			if (!$titre_mot = $titre) {
+				$titre = filtrer_entites(_T('texte_nouveau_mot'));
+				$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+			}
+			$res = spip_num_rows(spip_query("SELECT id_groupe FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " LIMIT 1"));
+
+			
+	 }
+
+	}
 	/*if ($_GET['exec'] == "articles_edit")
 	{
 		$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
@@ -113,9 +169,11 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		
 	}*/
 
-
-	if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type"))
+	if (($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
+
+		if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type"))
+		{
 			//cas des input
 			$ret="
 			<div class=\"container-onglets\">
@@ -138,9 +196,9 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			}
         		
 			$ret .= "</div>";
-	}
-	else if (($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))
-	{
+		}
+		else if (($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))
+		{
 			$ret="<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
 			
@@ -161,10 +219,10 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"4\" cols=\"40\">".entites_html(extraire_multi_lang($descriptif, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret.="</div>";
-	}
+		}
 	
-	else if ($champ_fin == "texte")
-	{
+		else if ($champ_fin == "texte")
+		{
 			$ret="<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
 			
@@ -184,9 +242,9 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"15\" cols=\"40\">".entites_html(extraire_multi_lang($texte, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret.="	</div>";
-	}
+		}
     	
-		
+	}		
 	
 
 	return $ret;
@@ -322,7 +380,44 @@ else if ($_GET['exec'] == "mots_type")
 	</script>
         ";
 }
+else if ($_GET['exec'] == "mots_edit")
+{
+	$newtab = "        
+	<script type=\"text/javascript\">
+	$(document).ready(function() {
+	     	$('.container-onglets').tabs();
+		$('table.spip_barre').css(\"display\", \"none\");
+		$('input[@name=titre]').css(\"display\", \"none\");
+		$('textarea[@name=descriptif]').css(\"display\", \"none\");
+		$('textarea[@name=texte]').css(\"display\", \"none\");
+		$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");
+		$('form[textarea]').bind(\"submit\", function(e) { 
+			
+			$('input[@name=titre]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_document_formulaire_mot_titre]').val()+";
+			}
+			$newtab .= "'</multi>');";
+			
+			$newtab .= "$('textarea[@name=descriptif]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_mot_descriptif]').val()+";
+			}
+			$newtab .= "'</multi>');";
 
+			$newtab .= "$('textarea[@name=texte]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_mot_texte]').val()+";
+			}
+			$newtab .= "'</multi>');
+		} );
+	});
+	</script>
+        ";
+}	
 return $newtab.$texte;
 }
 
