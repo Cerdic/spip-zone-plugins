@@ -31,21 +31,23 @@
 		[<br />(#DATE|affdate_court)]
 	</div>
 	<div style='float:#LANG_RIGHT;width:60%;'>
-		<div style='float:#LANG_RIGHT;width:10px;'><input type="checkbox" name="supprimer[]" value="#ID_DOCUMENT" title="supprimer ce document" /></div>
+		<div style='float:#LANG_RIGHT;width:10px;'>
+		<input type="checkbox" name="supprimer[]" value="#ID_DOCUMENT" title="<:formupload:doc_delete:>" />
+		</div>
+	
 	<h4 class="#EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})]</h4>
 	[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF|sinon{<:info_descriptif:>})</div>]
 	
+	</div>
+	<br class='nettoyeur' />
 	[(#CONFIG{formupload/insert_code}|?{' ',''})
 	<div class="insert_code">
 		<strong><:formupload:insert_code:></strong><br>
 		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{' ',''})
-		&lt;img#ID_DOCUMENT|left&gt; &lt;img#ID_DOCUMENT|center&gt; &lt;img#ID_DOCUMENT|right&gt;]
+		<abbr title="<:formupload:img_left:>">&lt;img#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:img_center:>">&lt;img#ID_DOCUMENT|center&gt; <abbr title="<:formupload:img_right:>">&lt;img#ID_DOCUMENT|right&gt;]
 		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{'',' '})
-		&lt;doc#ID_DOCUMENT|left&gt; &lt;doc#ID_DOCUMENT|center&gt; &lt;doc#ID_DOCUMENT|right&gt;]
+		<abbr title="<:formupload:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:doc_right:>&lt;doc#ID_DOCUMENT|right&gt;</abbr>]
 	</div>]
-	
-	</div>
-	<br class='nettoyeur' />
 	</div>
 	</BOUCLE_docs>
 		[<p class="pagination">(#PAGINATION)</p>]
