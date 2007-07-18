@@ -16,15 +16,17 @@
 
 #ENV{debug}
 
-	<fieldset><legend>Vos fichiers</legend>
+	<fieldset><legend><:formupload:yourfiles:></legend>
 
 	<B_docs>
 		[<p class="pagination">(#PAGINATION)</p>]
+		#ANCRE_PAGINATION
 	<BOUCLE_docs(DOCUMENTS)
 	{id_auteur?}{id_article?}{id_breve?}{id_rubrique?}
 	{!par id_document}{pagination 3}>
+	<div style="border:1px solid #ccc;margin-top:8px;margin-bottom:8px;padding:3px">
 	<div class="spip_doc_descriptif" style='float:#LANG_LEFT;width:80px; margin-bottom: 8px; text-align:center;'>
-		[(#LOGO_DOCUMENT|#URL_DOCUMENT||reduire_image{78,0}
+		[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{140,140}|image_recadre{78,78}
 			|inserer_attribut{title,#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]})]
 		[<br />(#DATE|affdate_court)]
 	</div>
@@ -33,8 +35,10 @@
 	<h4 class="#EDIT{titre}">[(#TITRE|sinon{[(#FICHIER|basename|couper{20})]})]</h4>
 	[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF|sinon{<:info_descriptif:>})</div>]
 	</div>
-	<br style='clear: both;' />
+	<br class='nettoyeur' />
+	</div>
 	</BOUCLE_docs>
+		[<p class="pagination">(#PAGINATION)</p>]
 	</B_docs>
 		#PAGINATION
 	<//B_docs>
@@ -44,7 +48,7 @@
 	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
 
 	<div style="margin-top:5px; padding:5px; border-top: dotted gray 1px;">
-		<label>Choisir les fichiers à ajouter&nbsp;:
+		<label for="fichier"><:formupload:choosefiles:>
 		<input type="file" name="fichier" class="forml" />
 		</label>
 	</div>
