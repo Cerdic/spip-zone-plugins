@@ -15,6 +15,8 @@ global $tables_principales;
 global $tables_auxiliaires;
 
 $table_des_tables['abonnements'] = 'abonnements';
+$table_des_tables['auteurs_elargis_abonnement'] = 'auteurs_elargis_abonnements';
+
 
 //-- Table CATEGORIES COTISATION ------------------------------------------
 $spip_abonnements = array(
@@ -33,5 +35,20 @@ $spip_abonnements_key = array(
 $tables_principales['spip_abonnements'] = array(
 		'field' => &$spip_abonnements, 
 		'key' => &$spip_abonnements_key);
+
+//table auteurs_elargis_abonnements
+$spip_auteurs_elargis_abonnements = array(
+						"id_auteur_elargi" 	=> "int(10) unsigned NOT NULL auto_increment",
+						"id_abonnement" 			=> "int(10) unsigned NOT NULL",
+						"date" 				=> "timestamp(14) NOT NULL"
+						);
+
+$spip_auteurs_elargis_abonnements_key = array(
+						"PRIMARY KEY" => "id_auteur_elargi"
+						);	
+
+$tables_principales['`spip_auteurs_elargis_abonnements`'] = array(
+		'field' => &$spip_auteurs_elargis_abonnements, 
+		'key' => &$spip_auteurs_elargis_abonnements_key);
 
 ?>

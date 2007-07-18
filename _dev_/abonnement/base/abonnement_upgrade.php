@@ -10,7 +10,7 @@
 **/
 
 //version actuelle du plugin à changer en cas de maj
-	$GLOBALS['abonnement_base_version'] = 0.1;
+	$GLOBALS['abonnement_base_version'] = 0.2;
 	
 	function abonnement_upgrade(){
 		$version_base = $GLOBALS['abonnement_base_version'];
@@ -26,6 +26,15 @@
 			creer_base();
 			echo "creation des tables spip_abonnements";
 
+			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+		}
+		ecrire_metas();
+		if ($current_version < 0.2){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			echo "Maj 0.2 des tables spip_abonnements";
+			
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
 		}
 		ecrire_metas();
