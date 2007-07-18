@@ -7,7 +7,7 @@
 	</auteur>
 	<lien></lien>
 	<version>
-	0.2
+	0.3
 	</version>
 	<etat>
 	dev
@@ -47,10 +47,7 @@
 		<nom>header_prive</nom>
 		<inclure>extension_multilingue.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>body_prive</nom>
-		<inclure>extension_multilingue.php</inclure>
-	</pipeline>
+	
 	
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

@@ -298,34 +298,29 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 
 function ExtensionMultilingue_header_prive($texte) {
 
-	//inclure librairie pour l'affichage des onglets
-	
-	return $texte."<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        <![endif]-->
-           
-        	<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
-		";
-}
-function ExtensionMultilingue_body_prive($texte) {
 
 $newtab="";
-	
-if (($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
-{
+	if (($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
+	{
 
-	$newtab = "        
-	<script type=\"text/javascript\">
-	$(document).ready(function() {
-	     	$('.container-onglets').tabs();
-		$('table.spip_barre').css(\"display\", \"none\");
-		$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});
-	</script>
-        ";
+		$newtab = " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        	<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		       
+		<script type=\"text/javascript\">
+		$(document).ready(function() {
+		     	$('.container-onglets').tabs();
+			$('table.spip_barre').css(\"display\", \"none\");
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});	
+		</script>";
+	}
+
+	//inclure librairie pour l'affichage des onglets
+	return $texte.$newtab;
 }
 
-return $newtab.$texte;
-}
 
 // http://doc.spip.org/@multi_trad
 function multi_trad_lang ($trads, $langue_souhaitee) {
