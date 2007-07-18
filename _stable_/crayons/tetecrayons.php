@@ -5,6 +5,9 @@
  *  Crayons plugin for spip (c) Fil, toggg 2006-2007 -- licence GPL
  */
 
+# mettre a true dans mes_options pour avoir les crayons non compresses
+@define('_DEBUG_CRAYONS', false);
+
 // Dire rapidement si ca vaut le coup de chercher des droits
 function analyse_droits_rapide_dist() {
     return isset($GLOBALS['auteur_session']['statut']);
@@ -75,6 +78,8 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 	lang_select($GLOBALS['auteur_session']['lang']);
 
 	$jsFile = generer_url_public('crayons.js');
+	if (_DEBUG_CRAYONS)
+		$jsFile = parametre_url($jsFile,'debug_crayons',1);
 	include_spip('inc/filtres'); // rien que pour direction_css() :(
 	$cssFile = direction_css(find_in_path('crayons.css'));
 

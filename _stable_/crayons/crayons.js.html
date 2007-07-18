@@ -3,33 +3,26 @@
 	Charger la librairie crayons et ses addenda
 
 ]
-#CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
+
+[(#ENV**{debug_crayons}|?{
+	#CACHE{0}
+,
+	#CACHE{7*24*3600,cache-client}
+})]
+
 /* cQuery est jQuery, renommee pour eviter tout conflit */
 
-[(#CHEMIN{js/jquery.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''}
-	|replace{'var \$ = cQuery','// dont set dollar'}
-	|compacte_js)]
+[(#CHEMIN{js/jquery.js}|pack_cQuery)]
 
-[(#CHEMIN{js/jquery.dimensions.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''}
-	|compacte_js)]
+[(#CHEMIN{js/jquery.dimensions.js}|pack_cQuery]
 
-[(#CHEMIN{js/form.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''}
-	|compacte_js)]
+[(#CHEMIN{js/form.js}|pack_cQuery)]
 
-[(#CHEMIN{js/crayons.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''}
-	|compacte_js)]
+[(#CHEMIN{js/crayons.js}|pack_cQuery)]
 
-[(#CHEMIN{js/resizehandle.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''}
-	|compacte_js)]
+[(#CHEMIN{js/resizehandle.js}|pack_cQuery)]
 
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
-[(#CHEMIN{js/crayons-fade.js}|spip_file_get_contents
-	|replace{jQuery,cQuery,''}
-	|compacte_js)]
+	[(#CHEMIN{js/crayons-fade.js}|pack_cQuery)]
 ]
