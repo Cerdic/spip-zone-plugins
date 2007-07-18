@@ -194,7 +194,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type") || ($champ_fin == "lien_nom"))
 		{
 			//cas des input
-			$ret="
+			$ret .= "
 			<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
         		for ($i=0; $i<count($langues_choisies); $i++)
@@ -231,7 +231,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		}
 		else if (($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))
 		{
-			$ret="<div class=\"container-onglets\">
+			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
 			
 			for ($i=0; $i<count($langues_choisies); $i++)
@@ -248,15 +248,15 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
 
 				}
-				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"4\" cols=\"40\">".entites_html(extraire_multi_lang($descriptif, $langues_choisies[$i]))."</textarea></div>";
+				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"6\" cols=\"40\">".entites_html(extraire_multi_lang($descriptif, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret.="</div>";
 			$ret .= "<script type=\"text/javascript\">
 				$(document).ready(function() {
-					$('textarea[@name=".$champ_fin."]').css(\"display\", \"none\");";
+					$(\"textarea[@name=".$champ_fin."]\").css(\"display\", \"none\");";
 
 			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				$('textarea[@name=".$champ_fin."]').val('<multi>'+";
+				$(\"textarea[@name=".$champ_fin."]\").val('<multi>'+";
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
 				$ret .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val()+";
@@ -268,7 +268,8 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	
 		else if ($champ_fin == "texte")
 		{
-			$ret="<div class=\"container-onglets\">
+			
+			$ret .= "<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
 			
 			for ($i=0; $i<count($langues_choisies); $i++)
@@ -286,19 +287,20 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				}
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"15\" cols=\"40\">".entites_html(extraire_multi_lang($texte, $langues_choisies[$i]))."</textarea></div>";
         		}
-			$ret.="	</div>";
+			$ret .="</div>";
 			$ret .= "<script type=\"text/javascript\">
 				$(document).ready(function() {
-					$('textarea[@name=".$champ_fin."]').css(\"display\", \"none\");";
+					$(\"textarea[@name=".$champ_fin."]\").css(\"display\", \"none\");";
+
 			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				$('textarea[@name=".$champ_fin."]').val('<multi>'+";
+				$(\"textarea[@name=".$champ_fin."]\").val('<multi>'+";
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
 				$ret .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val()+";
 			}
-			$ret .= "'</multi>')});";
+			$ret .= "'</multi>');});";
 
-			$ret .= "});</script>";
+			$ret .=	"});</script>";
 		}
     	
 	}		
@@ -322,20 +324,57 @@ $newtab="";
 	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 
-		$newtab = " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+		$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
         		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
         		<![endif]-->
            
         	<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
 		       
 		<script type=\"text/javascript\">
-		$(document).ready(function() {
-		     	$('.container-onglets').tabs();
+		$(document).ready(function() {";
+		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_descriptif_typo_partout') == "on"))
+		{
+			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
+		}
+		
+		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_texte_typo_partout') == "on"))
+		{
+			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
+		}
+		if (($_GET['exec'] == "configuration") && (lire_config('typo_partout/configuration_description_typo_partout') == "on"))
+		{
+			$newtab .= "$('textarea[@name=descriptif_site]').css(\"display\", \"none\");	";
+		}
+		if (($_GET['exec'] == "mots_type") && (lire_config('typo_partout/groupesmots_descriptif_typo_partout') == "on"))
+		{
+			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
+		}
+		if (($_GET['exec'] == "mots_type") && (lire_config('typo_partout/groupesmots_texte_typo_partout') == "on"))
+		{
+			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");	";
+		}
+		if (($_GET['exec'] == "mots_edit") && (lire_config('typo_partout/mots_descriptif_typo_partout') == "on"))
+		{
+			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
+		}
+		if (($_GET['exec'] == "mots_edit") && (lire_config('typo_partout/mots_texte_typo_partout') == "on"))
+		{
+			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");	";
+		}
+		if (($_GET['exec'] == "sites_edit") && (lire_config('typo_partout/sites_description_typo_partout') == "on"))
+		{
+			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
+		}
+		
+		    	$newtab .= "$('.container-onglets').tabs();
 			$('table.spip_barre').css(\"display\", \"none\");
-			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});	
-		</script>";
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+		
+		
+		$newtab .= "</script>";
 	}
 
+	
 	//inclure librairie pour l'affichage des onglets
 	return $texte.$newtab;
 }
