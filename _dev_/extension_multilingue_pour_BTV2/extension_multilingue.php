@@ -12,18 +12,67 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	
 	if ($_GET['exec'] == "rubriques_edit")
 	{
-		$id_rubrique = intval($_GET['id_rubrique']);
-		$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
-		if (!$row) exit;
+		global
+	  	$champs_extra,
+	  	$connect_statut,
+	  	$id_parent,
+	  	$id_rubrique,
+	  	$new,
+	  	$options;
 
-		$titre = $row['titre'];
-		
-		$descriptif = $row['descriptif'];
-		$texte = $row['texte'];
-		
+		if ($new == "oui") {
+			$id_rubrique = 0;
+			$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
+			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+			$descriptif = "";
+			$texte = "";
+			$id_parent = intval($id_parent);
 	
-		if ($champ_fin == "titre")
-		{
+			if (!autoriser('creerrubriquedans','rubrique',$id_parent)) {
+				$id_parent = reset($GLOBALS['connect_id_rubrique']);
+			}
+		} else {
+			$id_rubrique = intval($id_rubrique);
+
+			$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
+	
+			if (!$row) exit;
+	
+			$id_parent = $row['id_parent'];
+			$titre = $row['titre'];
+			$descriptif = $row['descriptif'];
+			$texte = $row['texte'];
+			$id_secteur = $row['id_secteur'];
+			$extra = $row["extra"];
+		}
+
+		
+	}
+	if ($_GET['exec'] == "configuration")
+	{
+		$titre = $GLOBALS['meta']["nom_site"];
+		$descriptif = $GLOBALS['meta']["descriptif_site"];
+
+	}
+	/*if ($_GET['exec'] == "articles_edit")
+	{
+		$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
+		$id_article = $row['id_article'];
+		$id_rubrique = $row['id_rubrique'];
+		$surtitre = $row['surtitre'];
+		$titre = $row['titre'];
+		$soustitre = $row['soustitre'];
+		$descriptif = $row['descriptif'];
+		$chapo = $row['chapo'];
+		$texte = $row['texte'];
+		$ps = $row['ps'];
+			
+		
+	}*/
+
+
+	if (($champ_fin == "titre") || ($champ_fin == "nom_site"))
+	{
 			//cas des input
 			$ret="
 			<div class=\"container-onglets\">
@@ -46,9 +95,9 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			}
         		
 			$ret .= "</div>";
-		}
-		else if ($champ_fin == "descriptif")
-		{
+	}
+	else if (($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))
+	{
 			$ret="<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
 			
@@ -69,9 +118,10 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"4\" cols=\"40\">".entites_html(extraire_multi_lang($descriptif, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret.="</div>";
-		}
-		else if ($champ_fin == "texte")
-		{
+	}
+	
+	else if ($champ_fin == "texte")
+	{
 			$ret="<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
 			
@@ -91,10 +141,10 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"15\" cols=\"40\">".entites_html(extraire_multi_lang($texte, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret.="	</div>";
-		}
+	}
     	
 		
-	}
+	
 
 	return $ret;
 
@@ -119,10 +169,12 @@ function ExtensionMultilingue_header_prive($texte) {
 		";
 }
 function ExtensionMultilingue_body_prive($texte) {
+
 $newtab="";
+$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
+	
 if ($_GET['exec'] == "rubriques_edit")
 {	
-	$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	$newtab = "        
 	<script type=\"text/javascript\">
 	$(document).ready(function() {
@@ -133,18 +185,22 @@ if ($_GET['exec'] == "rubriques_edit")
 		$('textarea[@name=texte]').css(\"display\", \"none\");
 		$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");
 		$('form[textarea]').bind(\"submit\", function(e) { 
+			
 			$('input[@name=titre]').val('<multi>'+";
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
 				$newtab .= "'[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_document_formulaire_rubrique_titre]').val()+";
 			}
-			$newtab .= "'</multi>');$('textarea[@name=descriptif]').val('<multi>'+";
+			$newtab .= "'</multi>');";
 			
+			$newtab .= "$('textarea[@name=descriptif]').val('<multi>'+";
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
 				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_rubrique_descriptif]').val()+";
 			}
-			$newtab .= "'</multi>');$('textarea[@name=texte]').val('<multi>'+";
+			$newtab .= "'</multi>');";
+
+			$newtab .= "$('textarea[@name=texte]').val('<multi>'+";
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
 				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_rubrique_texte]').val()+";
@@ -155,6 +211,37 @@ if ($_GET['exec'] == "rubriques_edit")
 	</script>
         ";
 }
+else if ($_GET['exec'] == "configuration")
+{
+	$newtab = "        
+	<script type=\"text/javascript\">
+	$(document).ready(function() {
+	     	$('.container-onglets').tabs();
+		$('table.spip_barre').css(\"display\", \"none\");
+		$('input[@name=nom_site]').css(\"display\", \"none\");
+		$('textarea[@name=descriptif_site]').css(\"display\", \"none\");
+		$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");
+		$('form[textarea]').bind(\"submit\", function(e) { 
+			
+			$('input[@name=nom_site]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_document_formulaire_configuration_nom_site]').val()+";
+			}
+			$newtab .= "'</multi>');";
+			
+			$newtab .= "$('textarea[@name=descriptif_site]').val('<multi>'+";
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$newtab .= "'[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_document_formulaire_configuration_descriptif_site]').val()+";
+			}
+			$newtab .= "'</multi>');
+		} );
+	});
+	</script>
+        ";
+}
+
 return $newtab.$texte;
 }
 
