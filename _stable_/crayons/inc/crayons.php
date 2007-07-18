@@ -282,7 +282,7 @@ function &crayons_get_table($table, &$nom_table) {
 		include_spip('base/serial');
 		include_spip('base/auxiliaires');
 		include_spip('public/parametrer');
-		$try = array( 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
+		$try = array('spip_'.table_objet($table), 'spip_' . $table . 's', $table . 's', 'spip_' . $table, $table);
 		foreach ($catab as $i=>$categ) {
 			foreach ($try as $nom) {
 				if (isset($GLOBALS[$categ][$nom])) {
