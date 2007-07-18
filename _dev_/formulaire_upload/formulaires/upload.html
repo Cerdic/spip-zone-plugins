@@ -26,8 +26,11 @@
 	{!par id_document}{pagination 3}>
 	<div style="border:1px solid #ccc;margin-top:8px;margin-bottom:8px;padding:3px">
 	<div class="spip_doc_descriptif" style='float:#LANG_LEFT;width:80px; margin-bottom: 8px; text-align:center;'>
-		[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{140,140}|image_recadre{78,78}
-			|inserer_attribut{title,#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]})]
+		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{' ',''})[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{140,140}|image_recadre{78,78}
+			|inserer_attribut{title,#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]})]]
+			
+		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{'',' '})[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{78,78}
+			|inserer_attribut{title,#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]})]]
 		[<br />(#DATE|affdate_court)]
 	</div>
 	<div style='float:#LANG_RIGHT;width:60%;'>
