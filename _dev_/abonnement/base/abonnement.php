@@ -15,7 +15,7 @@ global $tables_principales;
 global $tables_auxiliaires;
 
 $table_des_tables['abonnements'] = 'abonnements';
-$table_des_tables['auteurs_elargis_abonnement'] = 'auteurs_elargis_abonnements';
+$table_des_tables['auteurs_elargis_abonnements'] = 'auteurs_elargis_abonnements';
 
 
 //-- Table CATEGORIES COTISATION ------------------------------------------
