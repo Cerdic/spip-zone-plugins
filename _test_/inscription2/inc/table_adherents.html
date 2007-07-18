@@ -107,7 +107,8 @@ $().ready(function() {
 			$critere="$case='$valeur'"; 
 	}else{
 		$critere="a.id_auteur<>'0'"; 
-		if(defined('_DIR_PLUGIN_ABONNEMENT')) $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') " ;	
+		//que les abonnes si le plugin est actif
+		if(defined('_DIR_PLUGIN_ABONNEMENT')) $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') " ;
 		}
 		
 	//pagination
@@ -176,7 +177,7 @@ $().ready(function() {
 	<tr>
 	<?php
 		
-	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'">ID</a></strong></td>';
+	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'">id_auteur</a></strong></td>';
 	if(lire_config('inscription2/nom_table')){
 		echo '<td><strong><a href="'.$url.'&ordre=nom&desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
 		$table_auteurs[] = "a.nom";
@@ -206,18 +207,22 @@ $().ready(function() {
 				echo '<td><strong><a href="'.$url.'&ordre='.$cle.'&desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
 		}
 	}
+	//abonnement
+	if(defined('_DIR_PLUGIN_ABONNEMENT'))
+	echo '<td><a href="#"><strong>Abonnement</strong></a></td>';
 	echo '<td colspan="2" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut&desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
 	echo '<td><strong>'._T('inscription2:supprimer_adherent_red').'</strong></td>';
 	echo '</tr>';
 	
+	$table_auteurs[] = 'b.id';
 	$table_auteurs[] = 'a.id_auteur';
 	$table_auteurs[] = 'a.statut';
 	
 	if(lire_config('inscription2/pays_table'))
-		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
+		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
 			ON b.id_auteur = a.id_auteur LEFT JOIN spip_pays c ON b.pays=c.id  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
 	else 
-		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN spip_auteurs_elargis b 
+		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
 			ON b.id_auteur = a.id_auteur  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
 	$query = spip_query ($query);
 	
@@ -233,7 +238,7 @@ $().ready(function() {
 		 }
 		
 		echo '<tr class="'.$class.'">';
-		
+		$id = $data['id'] ;
 		if(!empty($data['id_auteur']))
 			echo '<td>'.$data['id_auteur'].'</td>';
 		else 
@@ -266,6 +271,12 @@ $().ready(function() {
 					echo '<td> </td>';
 			}
 		}
+		//abonnement
+		if(defined('_DIR_PLUGIN_ABONNEMENT')){
+		$abonnement = spip_fetch_array(spip_query("select a.libelle from `spip_abonnements` a join `spip_auteurs_elargis_abonnements` b where a.id_abonnement=b.id_abonnement and b.id_auteur_elargi='$id'" ));
+		echo '<td>'.$abonnement["libelle"].'</td>';
+		}
+		
 		echo '<td><a href="?exec=editer_adherent&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" title="'._T('inscription2:editer_adherent').'"></a></td>';
 		
 		if($data['statut']=='0minirezo')
