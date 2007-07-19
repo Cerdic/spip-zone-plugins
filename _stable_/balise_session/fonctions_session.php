@@ -11,16 +11,4 @@
 
 include_spip('public/session_balises');
 
-//un filtre un peu fun pour la doc en ligne
-function liste_ul_li($tableau) {
-	$texte = '';
-	if(!empty($tableau))
-		foreach($tableau as $titre => $valeur) {
-			$texte .= "\t<li>".$titre."</li>\n";
-		}
-	return $texte ?
-		"<ul>\n".$texte."</ul>\n"
-		: '';
-}
-
 ?>

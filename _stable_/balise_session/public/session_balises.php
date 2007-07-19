@@ -19,6 +19,23 @@ function balise_SESSION_dist($p) {
 }
 
 //
+// #HTTP_HEADER
+// avec le systeme de gestion d'entetes de ce plugin
+// Ne fonctionne pas sur les INCLURE !
+// #HTTP_HEADER{Content-Type: text/css}
+function balise_HTTP_HEADER($p) {
+	$header = interprete_argument_balise(1,$p);
+	//nettoyer l'encadrement du parametre par des ' ou des "
+	$header = preg_match('/^("|\')?([^"\']*)("|\')?$/', '$2', $header);
+	//split douteux, qui limite l'usage a du texte constant en parametre (pas de filtre ni de balise)
+	//a revoir
+	list($nom, $valeur) = split(': ', $header);
+	$p->entetes[$nom] = $valeur;
+	$p->code = "''";
+	return $p;
+}
+
+//
 // #CACHE
 // avec le systeme de gestion d'entetes de ce plugin
 function balise_CACHE($p) {
