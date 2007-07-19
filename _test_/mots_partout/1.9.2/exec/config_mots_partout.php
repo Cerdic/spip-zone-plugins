@@ -22,11 +22,21 @@ function exec_config_mots_partout() {
 	
 	$table_pref = 'spip';
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
+
+	
 	
 	/************************************************************************/
 	/*MODIFICATION/CREATION des tables*/
 	/************************************************************************/
-
+	//YOANN 
+	//Ajout du champ id_parent si le méta n'est pas défini
+	$mots_partout_arbo=lire_meta('MotsPartout:mots-partout-arbo-installe')?'oui':'non';
+	if($mots_partout_arbo!='oui'){
+		spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `id_parent` bigint(20) NOT NULL DEFAULT '0';");
+		ecrire_meta('MotsPartout:mots-partout-arbo-installe','oui');
+	}
+	
+	//FIN YOANN
 	$type = addslashes($_POST['nom_chose']);
 	$id_chose = $choses_possibles[$type]['id_chose'];
 	$table_principale = $choses_possibles[$type]['table_principale'];

@@ -9,7 +9,8 @@ if (!$tables_installees){
 //  ecrire_metas();
  }
 	
-foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
+//foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
+$choses=array_keys($tables_installees); //YOANN 
 global $choses_possibles;
 //include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
    
