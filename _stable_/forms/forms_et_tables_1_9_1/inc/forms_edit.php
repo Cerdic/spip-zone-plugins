@@ -349,13 +349,6 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 
 		// Modifier un champ
 		$formulaire = "";
-		$formulaire .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-		$formulaire .= $visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ");
-		$formulaire .= "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>";
-		$formulaire .= "<br /></div>";
-		$formulaire .= "(".typo(Forms_nom_type_champ($row['type'])).")\n";
-		$formulaire .= $visible ? debut_block_visible("champ_$champ") : debut_block_invisible("champ_$champ");
-
 		$formulaire .= "<div id='forms_lang_nom_$champ'></div>";
 		
 		$formulaire .= "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
@@ -407,7 +400,24 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 
 		$formulaire .= "</div>";
 		$formulaire .= "</form>";
-		$formulaire .= fin_block();
+		if (version_compare($GLOBALS['spip_version_code'],'1.925','>')){
+			$formulaire = 
+				bouton_block_depliable(typo($row['titre'])." (".typo(Forms_nom_type_champ($row['type'])).")",$visible,"champ_$champ")
+				. debut_block_depliable($visible,"champ_$champ")
+				. $formulaire
+				. fin_block();
+		}
+		else {
+			$formulaire = 
+				"<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;"
+				. ($visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ"))
+				. "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>"
+				. "<br /></div>"
+				. "(".typo(Forms_nom_type_champ($row['type'])).")\n"
+				. ($visible ? debut_block_visible("champ_$champ") : debut_block_invisible("champ_$champ"))
+				. $formulaire
+				. fin_block();
+		}
 
 		if ($ajax && ($champ == $ajax))
 			return $formulaire;

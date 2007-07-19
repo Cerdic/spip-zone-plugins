@@ -83,19 +83,22 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		}
 	}
 
-	#if (spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)))) {
-		$out .= "<br />";
+	$out .= "<br />";
+	if (version_compare($GLOBALS['spiip_version_code'],'1.925','>')){
+		$out .= bouton_block_depliable(_T("forms:apparence_formulaire"),true,"preview_form");			
+		$out .= debut_block_depliable(true,"preview_form");
+	}
+	else {
 		$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 		$out .= bouton_block_invisible("preview_form");
 		$out .= "<strong class='verdana3' style='text-transform: uppercase;'>"
 			._T("forms:apparence_formulaire")."</strong>";
 		$out .= "</div>\n";
-
-		$out .= debut_block_visible("apercu");
-		$out .= _T("forms:info_apparence")."<p>\n";
-		$out .= "<div id='apercu'>$apercu</div>";
-		$out .= fin_block();
-	#}
+		$out .= debut_block_visible("preview_form");
+	}
+	$out .= "<p>" . _T("forms:info_apparence") . "</p>\n";
+	$out .= "<div id='apercu'>$apercu</div>";
+	$out .= fin_block();
 
 	if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
 	$liste = afficher_articles(_T("$prefixei18n:articles_utilisant"),

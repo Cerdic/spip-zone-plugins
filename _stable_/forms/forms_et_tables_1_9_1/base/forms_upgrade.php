@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.34;
+	$GLOBALS['forms_base_version'] = 0.35;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -265,6 +265,11 @@
 			spip_query("ALTER TABLE spip_forms_donnees_champs DROP INDEX champ , ADD UNIQUE champ ( champ ( 128 ) , id_donnee , valeur ( 128 ) )"); 
 			echo "forms update @ 0.34<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.34,'non');
+		}
+		if ($current_version<0.35){
+			spip_query("ALTER TABLE spip_forms ADD arborescent ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER documents");
+			echo "forms update @ 0.35<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.35,'non');
 		}
 		ecrire_metas();
 	}

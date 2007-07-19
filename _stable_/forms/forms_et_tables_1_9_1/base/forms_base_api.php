@@ -13,7 +13,7 @@
 
 /* Operation sur les tables -------------------------------*/
 // creation d'une table a partir de sa structure xml
-// le type est surchargŽ par $type
+// le type est surcharge par $type
 // $unique : ne pas creer la table si une du meme type existe deja
 function Forms_creer_table($structure_xml,$type=NULL, $unique = true, $c=NULL){
 	include_spip('inc/xml');
@@ -130,6 +130,26 @@ function Forms_ordonner_donnee($id_donnee,$rang){
 		Forms_rang_update($id_donnee,$rang);
 }
 
+function Forms_rechercher_donnee($recherche,$id_form=0,$champ=NULL,$sous_ensemble=NULL){
+	$liste = array();
+	$in = "";
+	if (is_array($sous_ensemble)){
+		include_spip('base/abstract_sql');
+		$in = calcul_mysql_in('dc.id_donnee',implode(',',$sous_ensemble));
+	}
+	$res = spip_query(
+	    "SELECT dc.id_donnee FROM spip_forms_donnees_champs AS dc"
+	  . ($id_form?" LEFT JOIN spip_forms_donnees AS d ON dc.id_donnee=d.id_donnee":"")
+	  . " WHERE dc.valeur LIKE "._q($recherche)
+	  . ($id_form?" AND d.id_form="._q($id_form):"")
+	  . ($in?" AND $in":"")
+	  . ($champ?" AND dc.champ="._q($champ):"")
+	);
+	while ($row = spip_fetch_array($res))
+		$liste[] = $row['id_donnee'];
+	return $liste;
+}
+
 function Forms_infos_donnee($id_donnee,$specifiant=true,$linkable=false){
 	list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee,$specifiant,$linkable);
 	if (!count($t) && $specifiant)
@@ -190,8 +210,9 @@ function Forms_delier_donnee($id_donnee,$id_donnee_liee=0,$type_form_lie = ""){
 /* 
  * $id_form : la table
  * $id_parent : la donnee 'parente'
- * position : la reltion avec le parent
- *   FA
+ * position : la relation avec le parent
+ *   fils_cadet, fils_aine, grand_frere, petit_frere, pere
+ * retourne un array($id_donnee,$erreur)
  */
 function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$c=NULL){
 	if (!$id_parent>0){
@@ -202,11 +223,11 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 				spip_log("Insertion impossible dans un arbre pour un fils sans pere dans table $id_form");
 				return array(0,_L("Insertion impossible dans un arbre pour un fils sans pere dans table $id_form"));
 			}
-			// premire insertion
+			// premiere insertion
 				return Forms_creer_donnee($id_form,$c,array('niveau'=>0,'bgch'=>1,'bdte'=>2));
 		}
 		else {
-			// Insertion d'un collatŽral : il faut preciser le 'parent' !
+			// Insertion d'un collateral : il faut preciser le 'parent' !
 			spip_log("Insertion impossible dans un arbre pour un collatŽral sans precision du parent dans table $id_form");
 			return array(0,_L("Insertion impossible dans un arbre pour un collatŽral sans precision du parent dans table $id_form"));
 		}
@@ -224,7 +245,7 @@ function Forms_arbre_inserer_donnee($id_form,$id_parent,$position="fils_cadet",$
 		  // Decalage de l'ensemble colateral droit
 		  spip_query("UPDATE spip_forms_donnees SET bdte=bdte+2 WHERE id_form="._q($id_form)." AND bdte>"._q($rowp['bdte'])." AND bgch<="._q($rowp['bdte']))
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+2,bdte=bdte+2 WHERE id_form="._q($id_form)." AND bgch>"._q($rowp['bdte']))
-			// Decalalage ensemble visŽ vers le bas
+			// Decalalage ensemble vise vers le bas
 		  AND spip_query("UPDATE spip_forms_donnees SET bgch=bgch+1,bdte=bdte+1,niveau=niveau+1 WHERE id_form="._q($id_form)." AND bgch>="._q($rowp['bgch'])." AND bdte<="._q($rowp['bdte']))
 		)
 			// Insertion du nouveau pere
@@ -299,6 +320,61 @@ function Forms_arbre_supprimer_donnee($id_form,$id_donnee,$recursif=true){
 			return true;
 		return false;
 	}
+}
+function Forms_arbre_liste_relations($id_form,$id_parent,$position="enfant"){
+	$liste = array();
+	if ($id_parent){
+		$res = spip_query("SELECT id_donnee,niveau,bgch,bdte FROM spip_forms_donnees WHERE id_donnee="._q($id_parent)." AND id_form="._q($id_form));
+		if (!$row = spip_fetch_array($res)) return $liste;
+		$niveau = $row['niveau'];
+		$bgch = $row['bgch'];
+		$bdte = $row['bdte'];
+		
+		if ($position=='enfant' || $position=='branche') {
+			$res = spip_query( 
+			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+			  . " AND bgch>"._q($bgch)." AND bdte<"._q($bdte)
+			  . ($position=='enfant'?" AND niveau="._q($niveau+1):"")
+			  . " ORDER BY bgch"
+			);
+		}
+		elseif ($position=='grand_frere') {
+			$res = spip_query(
+			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+			  . " AND bdte<"._q($bgch)
+			  . " AND niveau="._q($niveau)
+			  . " ORDER BY bgch"
+			);
+		}
+		elseif ($position=='petit_frere') {
+			$res = spip_query(
+			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+			  . " AND bgch>"._q($bdte)
+			  . " AND niveau="._q($niveau)
+			  . " ORDER BY bgch"
+			);
+		}
+		elseif ($position=='parent' || position=='hierarchie') {
+			$res = spip_query(
+			  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+			  . " AND bgch<"._q($bgch)." AND bdte>"._q($bdte)
+			  . ($position=='parent'?" AND niveau="._q($niveau-1):"")
+			  . " ORDER BY bgch"
+			);
+		}
+
+	}
+	else {
+		if ($position!='enfant' && $position!='branche') return $liste;
+		$res = spip_query(
+		  "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)
+		  . ($position=='enfant'?" AND niveau=1":"")
+		  . " ORDER BY bgch"
+		);
+	}
+	while ($row = spip_fetch_array($res))
+		$liste[] = $row['id_donnee'];
+	return $liste;
 }
 
 ?>

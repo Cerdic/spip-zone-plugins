@@ -347,54 +347,63 @@
 	
 		$s = "";
 		// Ajouter un formulaire
-		$s .= "\n";
-		$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
-	
-		$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
-		$s .= bouton_block_invisible("ajouter_form");
-		$s .= "<strong class='verdana3' style='text-transform: uppercase;'>"
-			._T("forms:article_inserer_un_formulaire")."</strong>";
-		$s .= "</div>\n";
-	
-		$s .= debut_block_invisible("ajouter_form");
-		$s .= "<div class='verdana2'>";
-		$s .= _T("forms:article_inserer_un_formulaire_detail");
-		$s .= "</div>";
+
+		$out = "";
+		$out .= "<div class='verdana2'>";
+		$out .= _T("forms:article_inserer_un_formulaire_detail");
+		$out .= "</div>";
 	
 		$query = "SELECT id_form, titre FROM spip_forms ORDER BY titre";
 		$result = spip_query($query);
 		if (spip_num_rows($result)) {
-			$s .= "<br />\n";
-			$s .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$s .= "<div class='plan-articles'>";
+			$out .= "<br />\n";
+			$out .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			$out .= "<div class='plan-articles'>";
 			while ($row = spip_fetch_array($result)) {
 				$id_form = $row['id_form'];
 				$titre = typo($row['titre']);
 				
 				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode(self()));
-				$s .= "<a href='".$link."'>";
-				$s .= $titre."</a>\n";
-				$s .= "<div class='arial1' style='text-align:$spip_lang_right;color: black; padding-$spip_lang_left: 4px;' "."title=\""._T("forms:article_recopier_raccourci")."\">";
-				$s .= "<strong>&lt;form".$id_form."&gt;</strong>";
-				$s .= "</div>";
+				$out .= "<a href='".$link."'>";
+				$out .= $titre."</a>\n";
+				$out .= "<div class='arial1' style='text-align:$spip_lang_right;color: black; padding-$spip_lang_left: 4px;' "."title=\""._T("forms:article_recopier_raccourci")."\">";
+				$out .= "<strong>&lt;form".$id_form."&gt;</strong>";
+				$out .= "</div>";
 			}
-			$s .= "</div>";
-			$s .= "</div>";
+			$out .= "</div>";
+			$out .= "</div>";
 		}
 	
 		// Creer un formulaire
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
 		if (autoriser('creer','form')) {
-			$s .= "\n<br />";
+			$out .= "\n<br />";
 			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".urlencode(self()));
-			$s .= icone_horizontale(_T("forms:icone_creer_formulaire"),
+			$out .= icone_horizontale(_T("forms:icone_creer_formulaire"),
 				$link, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "creer.gif", false);
 		}
-	
-		$s .= fin_block();
-	
-		$s .= fin_cadre_relief(true);
+		
+		if (version_compare($GLOBALS['spiip_version_code'],'1.925','>')){
+			$s .= cadre_depliable(_DIR_PLUGIN_FORMS."img_pack/form-24.png",_T("forms:article_inserer_un_formulaire"),true,$out,"ajouter_form");
+		}
+		else {
+			$s .= "\n";
+			$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
+		
+			$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
+			$s .= bouton_block_invisible("ajouter_form");
+			$s .= "<strong class='verdana3' style='text-transform: uppercase;'>"
+				._T("forms:article_inserer_un_formulaire")."</strong>";
+			$s .= "</div>\n";
+		
+			$s .= debut_block_invisible("ajouter_form");
+			$s .= $out;
+			$s .= fin_block();
+		
+			$s .= fin_cadre_relief(true);
+		}
+
 		return $s;
 	}
 	

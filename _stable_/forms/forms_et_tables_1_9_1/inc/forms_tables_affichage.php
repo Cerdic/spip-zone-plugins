@@ -171,11 +171,12 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	include_spip('public/assembler');
 	$out = "";
 	if (!$id_form = intval($id_form)) return $out;
+	$res = spip_query("SELECT arborescent,titre FROM spip_forms WHERE id_form="._q($id_form));
+	$row=spip_fetch_array($res);
 	if ($titre_page===false){
-		$res = spip_query("SELECT titre FROM spip_forms WHERE id_form="._q($id_form));
-		$row=spip_fetch_array($res);
 		$titre_page = $row['titre'];
 	}
+	$fond = "fonds/donnees_tous" . ($row['arborescent']=='oui'?'_arbo':'');
 
 	$prefix = forms_prefixi18n($type_form);
 	$defaut_cont = 		array('id_form'=>$id_form,
@@ -251,7 +252,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	$out .=  gros_titre($titre_page,'',false);
 	$out .=  '</div>';
 	
-	$out .=  recuperer_fond("fonds/donnees_tous",$contexte);
+	$out .=  recuperer_fond($fond,$contexte);
 	$out = forms_inserer_crayons($out);
 	
 	$out .=  "</td></tr></table><br />\n";

@@ -32,6 +32,7 @@ $spip_forms = array(
 	"public" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"linkable" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"documents" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+	"arborescent" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	'html_wrap' => "text",
 	"maj" 		=> "TIMESTAMP");
 
