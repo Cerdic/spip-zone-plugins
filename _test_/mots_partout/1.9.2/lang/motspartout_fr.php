@@ -40,7 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 									   'info_auteurs_lies_mot' => 'Les auteurs li&eacute;s &agrave; ce mot clef',
 //YOANN
-										'icone_creation_sous_groupe_mots'=>'Cr&eacute;er un sous groupe de mot-cl&eacute;s'
+									  'icone_creation_sous_groupe_mots'=>'Cr&eacute;er un sous groupe de mot-cl&eacute;s',
+									'choix_mots_clefs'=>'Associer les mots clefs :',
+									'liste_mots_clefs_a_supprimer'=>'Mots clefs d&eacute;j&agrave; associ&eacute;s cocher pour supprimer',
+									'supprimer_mot_clef'=>'cocher et valider pour supprimer le mot clef'
 										//FIN YOANN
 									   );
 

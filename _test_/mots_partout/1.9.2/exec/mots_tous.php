@@ -49,7 +49,7 @@ function exec_mots_tous_dist()
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 	if (autoriser('creer','groupemots')  AND !$conf_mot){
-		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		$res = icone_horizontale(_T('motspartout:icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
 
 		echo bloc_des_raccourcis($res);
 	}
@@ -206,7 +206,7 @@ function mots_partout_arbo_affiche_sous_groupe($id_groupe=0){
 
 			// YOANN on permet d'ajouter un sous groupe a n'importe quel groupe
 			echo "<td>";
-			icone(_T('icone_creation_sous_groupe_mots'), generer_url_ecrire("mots_type","new=oui&id_parent=".$id_groupe), "groupe-mot-24.gif", "edit.gif");
+			icone(_T('motspartout:icone_creation_sous_groupe_mots'), generer_url_ecrire("mots_type","new=oui&id_parent=".$id_groupe), "groupe-mot-24.gif", "edit.gif");
 			echo "</td>";
 			//FIN YOANN
 
