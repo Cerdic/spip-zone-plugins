@@ -1,13 +1,12 @@
 <plugin>
- 	<nom>Balise Session</nom>
-	<auteur>James, licence GNU/GPL</auteur>
-	<version>1.0</version>
-	<etat>stable</etat>
+ 	<nom>Balise #SESSION</nom>
+	<version>1.1</version>
+	<etat>experimental</etat>
 	<description>
-	Introduction d'une balise #SESSION<br />
+	Introduction dun nouveau systeme de gestion des entetes dans le compilateur.<br />
+	Introduction d'une balise #SESSION s'appuyant sur ce dernier.<br />
 	[Page de test autodocument&#233;e->../spip.php?page=session]
 	</description>
-	<lien>http://www.spip-contrib.net/Balise-SESSION</lien>
 	<fonctions>fonctions_session.php</fonctions>
 	<prefix>BaliseSession</prefix>
 	<chemin dir='' />
