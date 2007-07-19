@@ -88,11 +88,27 @@ $().ready(function() {
 		</div>
 	</form>
 	</div>
-	
+	<BOUCLE_mod(SPIP_ABONNEMENTS){id_abonnement=#ENV{id_abonnement}}>
+	<div id="ajouter">
+	<form action="#SELF" method="post">
+		<div>
+		<label>Libell&eacute; :</label><input type="text" value="#LIBELLE" name="abo_libelle"/>
+		</div><div>
+		<label>Dur&eacute;e :</label> <input type="text" value="#DUREE" name="abo_duree"/>
+		</div><div>
+		<label>Montant :</label> <input type="text" value="#MONTANT" name="abo_montant"/>
+		</div><div class="textarea">
+		<label>Commentaire :</label> <textarea name="abo_commentaire">#COMMENTAIRE</textarea>
+		</div><div>
+		<input class="valider" type="submit" name="modifier" value="Modifier"/>			
+		</div>
+	</form>
+	</div>
+	</BOUCLE_mod>
 	
 	<table class="cadre-r">
 	<tr style="background-color : #E0E0E0 ;">
-	<td>ID</td><td>Libelle</td><td>Montant</td><td>Dur&eacute;e</td><td>Commentaire</td><td>Supprimer</td>
+	<td>ID</td><td>Libelle</td><td>Montant</td><td>Dur&eacute;e</td><td>Commentaire</td><td colspan="2">Action</td>
 	</tr>
 	<BOUCLE_abos(SPIP_ABONNEMENTS)>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{'row','even'})]">
@@ -101,6 +117,8 @@ $().ready(function() {
 	<td>#MONTANT</td>
 	<td>#DUREE</td>
 	<td>#COMMENTAIRE</td>
+	<td><a href="[(#SELF|parametre_url{'id_abonnement',#ID_ABONNEMENT})]"><img src="#CHEMIN{/images/edit-12.gif}" title="<:inscription2:editer_adherent:>"></a></td>
+		
 	<td>
 	<a href="[(#SELF|parametre_url{'supprimer_abo',#ID_ABONNEMENT})]" class="confirm">
 	<img src="#CHEMIN{/images/poubelle-12.gif}" title="supprimer"></a>

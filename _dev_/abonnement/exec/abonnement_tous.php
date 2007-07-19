@@ -18,14 +18,24 @@ $abo_libelle = _request('abo_libelle');
 $abo_montant = _request('abo_montant');
 $abo_duree = _request('abo_duree');
 $abo_commentaire = _request('abo_commentaire');
+$id_abonnement = _request('id_abonnement');
 
-if($abo_libelle AND intval($abo_montant) AND intval($abo_duree))
+if($abo_libelle AND intval($abo_montant) AND intval($abo_duree) AND _request('valider'))
 {
-spip_query("INSERT INTO spip_abonnements (libelle,duree,montant,commentaire) VALUES ("._q($abo_libelle).","._q($abo_montant).","._q($abo_duree).","._q($abo_commentaire) .")");
+spip_query("INSERT INTO spip_abonnements (libelle,duree,montant,commentaire) VALUES ("._q($abo_libelle).","._q($abo_duree).","._q($abo_montant).","._q($abo_commentaire) .")");
 include_spip('inc/headers');
 redirige_par_entete(generer_url_ecrire("abonnement_tous"));
 }
 elseif(_request('valider')) echo "erreur : les valeurs ne conviennent pas";
+
+if($abo_libelle AND intval($abo_montant) AND intval($abo_duree) AND _request('modifier'))
+{
+spip_query("UPDATE spip_abonnements SET libelle="._q($abo_libelle).",duree="._q($abo_duree).",montant="._q($abo_montant).",commentaire="._q($abo_commentaire)." WHERE id_abonnement="._q($id_abonnement) );
+include_spip('inc/headers');
+redirige_par_entete(generer_url_ecrire("abonnement_tous"));
+}
+elseif(_request('modifier')) echo "erreur : les valeurs ne conviennent pas n";
+
 
 if(_request('supprimer_abo')){
  spip_query("DELETE FROM spip_abonnements WHERE id_abonnement='"._request('supprimer_abo')."'");
@@ -34,7 +44,7 @@ redirige_par_entete(generer_url_ecrire("abonnement_tous"));
 }
 	debut_page("abonnements", "", "");
 	
-	echo recuperer_fond('inc/abonnement_tous');
+	echo recuperer_fond('inc/abonnement_tous',array("id_abonnement"=>"$id_abonnement"));
 	
 	fin_page();	
 }
