@@ -63,9 +63,7 @@ function calculer_contexte() {
 }
 
 // http://doc.spip.org/@analyse_resultat_skel
-function analyse_resultat_skel($nom, $cache, $corps) {
-	$headers = array();
-
+function analyse_resultat_skel($nom, $cache, $corps, $headers = array()) {
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
 	// note: on essaie d'attrapper aussi certains de ces entetes codes
 	// "a la main" dans les squelettes, mais evidemment sans exhaustivite
@@ -220,7 +218,7 @@ function sql_accepter_forum($id_article) {
 	return $cache[$id_article];
 }
 
-# Determine les parametres d'URL (hors réécriture) et consorts
+# Determine les parametres d'URL (hors rÃ©Ã©criture) et consorts
 # En deduit un contexte disant si la page est une redirection ou 
 # exige un squelette deductible de $fond et du contexte linguistique.
 # Applique alors le squelette sur le contexte et le nom du cache.

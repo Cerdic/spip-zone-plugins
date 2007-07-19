@@ -110,6 +110,7 @@ class Champ {
 	var $id_boucle;
 	var $boucles;
 	var $type_requete;
+	var $entetes = array();	// entetes pour la page
 	var $code;	// code du calcul
 	var $interdire_scripts = true; // false si on est sur de cette balise
 	var $ramasser_miettes = false;

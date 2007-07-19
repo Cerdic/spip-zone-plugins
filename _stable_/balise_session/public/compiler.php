@@ -150,7 +150,7 @@ function calculer_boucle_rec($id_boucle, &$boucles) {
 }
 
 // compil d'une boucle non recursive. 
-// c'est un "while (fetch_sql)" dans le cas général,
+// c'est un "while (fetch_sql)" dans le cas gÃ©nÃ©ral,
 // qu'on essaye d'optimiser un max.
 
 // http://doc.spip.org/@calculer_boucle_nonrec
@@ -456,17 +456,22 @@ function calculer_parties($boucles, $id_boucle) {
 // (qui sera argument d'un Return ou la partie droite d'une affectation).
 
 // http://doc.spip.org/@calculer_liste
-function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
+function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $ramener_entetes = false) {
 	if (!$tableau) return "''";
 	if (!isset($descr['niv'])) $descr['niv'] = 0;
-	$codes = compile_cas($tableau, $descr, $boucles, $id_boucle);
+	list($entetes, $codes) = compile_cas($tableau, $descr, $boucles, $id_boucle);
+	$_entetes = array();
+	foreach($entetes as $nom => $valeur)
+		$_entetes[]= '"'.$nom.'" => "'.$valeur.'"';
+	$entetes = 'array(' . join(', ', $_entetes) . ')';
 	$n = count($codes);
 	if (!$n) return "''";
 	$tab = str_repeat("\t", $descr['niv']);
-	if (_request('var_mode_affiche') != 'validation')
-	  return
-		(($n==1) ? $codes[0] : 
+	if (_request('var_mode_affiche') != 'validation') {
+		$_codes = (($n==1) ? $codes[0] : 
 			 "(" . join (" .\n$tab", $codes) . ")");
+		return $ramener_entetes ? array($entetes, $_codes) : $_codes;
+	}
 	else return "@debug_sequence('$id_boucle', '" .
 	  ($descr['nom']) .
 	  "', " .
@@ -477,7 +482,8 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 
 // http://doc.spip.org/@compile_cas
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
-        $codes = array();
+	$entetes = array();
+	$codes = array();
 	// cas de la boucle recursive
 	if (is_array($id_boucle)) 
 	  $id_boucle = $id_boucle[0];
@@ -575,6 +581,11 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$apres = calculer_liste($p->apres,
 				$descr, $boucles, $id_boucle);
 			$altern = "''";
+
+			//recuperation des entetes
+			if(!empty($p->entetes))
+				$entetes = array_merge($entetes, $p->entetes);
+
 			break;
 
 		default: 
@@ -612,7 +623,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				"\n// $commentaire\n$code" :
 				$code));
 	} // foreach
-	return $codes;
+	return array($entetes, $codes);
 }
 
 // affichage du code produit
@@ -760,7 +771,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 
 	// idem pour la racine
 	$descr['id_mere'] = '';
-	$corps = calculer_liste($racine, $descr, $boucles);
+	list($entetes, $corps) = calculer_liste($racine, $descr, $boucles, '', true);
 
 	// Calcul du corps de toutes les fonctions PHP,
 	// en particulier les requetes SQL et TOTAL_BOUCLE
@@ -812,13 +823,14 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 // Fonction principale du squelette ' . $sourcefile ."
 //
 function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
+	$entetes = ' . $entetes . ';
 	$page = ' .
 	// ATTENTION, le calcul du l'expression $corps affectera $Cache
 	// c'est pourquoi on l'affecte a cette variable auxiliaire
 	// avant de referencer $Cache
 	$corps . ";
 
-	return analyse_resultat_skel('$nom', \$Cache, \$page);
+	return analyse_resultat_skel('$nom', \$Cache, \$page, \$entetes);
 }
 
 ?".">";
