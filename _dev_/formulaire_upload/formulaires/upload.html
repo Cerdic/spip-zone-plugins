@@ -19,7 +19,6 @@
 	<fieldset><legend><:formupload:yourfiles:></legend>
 
 	<B_docs>
-		[<p class="pagination">(#PAGINATION)</p>]
 		#ANCRE_PAGINATION
 	<BOUCLE_docs(DOCUMENTS)
 	{id_auteur?}{id_article?}{id_breve?}{id_rubrique?}
@@ -56,7 +55,7 @@
 	</BOUCLE_docs>
 		[<p class="pagination">(#PAGINATION)</p>]
 	</B_docs>
-		#PAGINATION
+		[<p class="pagination">(#PAGINATION)</p>]
 	<//B_docs>
 
 	[(#REM) Piege a robots spammeurs ]

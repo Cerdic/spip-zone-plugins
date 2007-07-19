@@ -13,6 +13,13 @@
 	#zone-documents table { }
 	.fiche-document { width: 70%; }
 	.logo-document { width: 130px; text-align: center; }
+	
+	.ajaxloading {
+		background-image: url([(#CHEMIN{images/searching.gif}|url_absolue)]);
+		background-repeat:no-repeat;
+		background-position:center center;
+	}
+
 // --></style>
 
 [<script type="text/javascript" src="(#CHEMIN{javascript/jquery.MultiFile.js})"></script>
@@ -46,25 +53,33 @@
 
 <script type="text/javascript"><!--
 
+var load_zone_documents = function() {
+
+	var r = ($(this).attr('href')||'').match(/[?&;]debut_tous=([0-9]+)/);
+	r = r ? r[1] : 0;
+	$('#tous_docs')
+	.addClass('ajaxloading')
+	.css({'opacity': 0.5});
+	$.get(
+		'#URL_PAGE{mini_formulaire_upload}&liste=1&debut_tous='+r,
+		function(c) {
+			$('#tous_docs')
+			.html(
+				$('<iframe>').html(c).find('#tous_docs').html()
+			)
+			.removeClass('ajaxloading')
+			.css({'opacity':1.0});
+			pagination_zone();
+		}
+	);
+	return false;
+};
+
 var pagination_zone = function() {
 	$('#zone-documents')
 	.prev('.pagination')
 	.find('a')
-	.click(function(){
-		var r = $(this).attr('href').match(/[?&;]debut_tous=([0-9]+)/);
-		r = r ? r[1] : 0;
-		$.get(
-			'#URL_PAGE{mini_formulaire_upload}&liste=1&debut_tous='+r,
-			function(c) {
-				$('#tous_docs')
-				.html(
-					$('<iframe>').html(c).find('#tous_docs').html()
-				);
-				pagination_zone();
-			}
-		);
-		return false;
-	});
+	.click(load_zone_documents);
 };
 pagination_zone();
 
@@ -92,7 +107,8 @@ function upload_attach (re) {
 	.ajaxForm({
 		'beforeSubmit': function(formData, jqForm, options){
 			$('#formulaire_upload')
-			.css('opacity',0.2);
+			.addClass('ajaxloading')
+			.css({'opacity': 0.5});
 			return true;
 		},
 		'success': function(e){
@@ -100,8 +116,10 @@ function upload_attach (re) {
 			if (h = $('<iframe><\/iframe>').html(e).find('#formulaire_upload').html()) {
 				$('#formulaire_upload')
 				.html(h)
-				.animate({'opacity':1.0}, 'slow');
+				.removeClass('ajaxloading')
+				.css({'opacity':1.0});
 				upload_attach(true);
+				load_zone_documents(); // recharge la partie du milieu
 			}
 			else
 				alert('bug !');
@@ -122,12 +140,17 @@ function upload_attach (re) {
 	// et la pagination
 	$('#formulaire_upload .pagination a')
 	.click(function(){
-		var r = $(this).attr('href').match(/[?&;]debut_docs=([0-9]+)/);
+		var r = ($(this).attr('href')|'').match(/[?&;]debut_docs=([0-9]+)/);
 		r = r ? r[1] : 0;
+		$('#formulaire_upload')
+		.addClass('ajaxloading')
+		.css({'opacity': 0.5});
 		$.get(
 			'#URL_PAGE{mini_formulaire_upload}&debut_docs='+r,
 			function(c) {
 				$('#formulaire_upload')
+				.removeClass('ajaxloading')
+				.css({'opacity': 1.0})
 				.html(
 					$('<iframe>').html(c).find('#formulaire_upload').html()
 				);
