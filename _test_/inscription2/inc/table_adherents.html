@@ -172,12 +172,11 @@ $().ready(function() {
 	?>
 	
 	</div>
-
+	<form>
 	<table class="cadre-r">
 	<tr>
-	<?php
-		
-	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'">id_auteur</a></strong></td>';
+	<?php	
+	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif" /></a></strong></td>';
 	if(lire_config('inscription2/nom_table')){
 		echo '<td><strong><a href="'.$url.'&ordre=nom&desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
 		$table_auteurs[] = "a.nom";
@@ -210,8 +209,7 @@ $().ready(function() {
 	//abonnement
 	if(defined('_DIR_PLUGIN_ABONNEMENT'))
 	echo '<td><a href="#"><strong>Abonnement</strong></a></td>';
-	echo '<td colspan="2" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut&desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
-	echo '<td><strong>'._T('inscription2:supprimer_adherent_red').'</strong></td>';
+	echo '<td colspan="3" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut&desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
 	echo '</tr>';
 	
 	$table_auteurs[] = 'b.id';
@@ -240,7 +238,7 @@ $().ready(function() {
 		echo '<tr class="'.$class.'">';
 		$id = $data['id'] ;
 		if(!empty($data['id_auteur']))
-			echo '<td>'.$data['id_auteur'].'</td>';
+			echo '<td><a href="?exec=auteur_infos&id_auteur='.$data['id_auteur'].'"><img src='.$url_logo.' title="'._T('inscription2:fiche_adherent').'"></a></td>';
 		else 
 			echo '<td> </td>';
 		
@@ -290,17 +288,18 @@ $().ready(function() {
 		else
 			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/defaut-12.gif"';
 			
-		echo '<td><a href="?exec=auteur_infos&id_auteur='.$data['id_auteur'].'"><img src='.$url_logo.' title="'._T('inscription2:fiche_adherent').'"></a></td>';
+		
 		if($data['statut'] != '0minirezo' and $data['statut'] != '1comite')
 			echo '<td><a href="?exec=inscription2_adherents&id='.$data['id_auteur'].'&act=sup" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" title="'._T('inscription2:supprimer_adherent').'"></a></td>';
 		else 
 			echo '<td><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/interdit-12.gif" title="'._T('inscription2:supprimer_adherent').'"></td>';
+			echo '<td><input type="checkbox" name="check_aut[]" /></td>' ;
 		echo '</tr>';
 	$i++;	
 	}
 	?>
 	</table>	
-
+	</form>
 	<div id="pagination">
 	<?php
 	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a WHERE $critere");
