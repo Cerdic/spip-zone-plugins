@@ -140,7 +140,7 @@ function upload_attach (re) {
 	// et la pagination
 	$('#formulaire_upload .pagination a')
 	.click(function(){
-		var r = ($(this).attr('href')|'').match(/[?&;]debut_docs=([0-9]+)/);
+		var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
 		r = r ? r[1] : 0;
 		$('#formulaire_upload')
 		.addClass('ajaxloading')

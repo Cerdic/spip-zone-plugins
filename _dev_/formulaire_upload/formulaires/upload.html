@@ -25,8 +25,9 @@
 	{!par id_document}{pagination 3}>
 	<div style="border:1px solid #ccc;margin-top:8px;margin-bottom:8px;padding:3px">
 	<div class="spip_doc_descriptif" style='float:#LANG_LEFT;width:80px; margin-bottom: 8px; text-align:center;'>
-	[(#SET{logo,[(#LOGO_DOCUMENT||inserer_attribut{title,#TYPE_DOCUMENT[
-		- (#TAILLE|taille_en_octets)]})]})]
+	[(#SET{logo,[(#LOGO_DOCUMENT|#URL_DOCUMENT
+		|inserer_attribut{title,#TYPE_DOCUMENT[
+			- (#TAILLE|taille_en_octets)]})]})]
 	[(#GET{logo}|extraire_attribut{width}|>{78}|?{
 		[(#SET{logo,[(#GET{logo}|image_reduire{140,140}|image_recadre{78,78})]
 	})]})]
