@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Affichage d'une fen&ecirc;tre flottante</nom>
- 	<version>1.3</version>
+ 	<version>1.4</version>
  	<prefix>FenFlo</prefix>
  	<auteur>[Mathieu Imbert->mailto:mathieu_imbert@hotmail.fr], Arnault Pachot - [OpenStudio->http://www.openstudio.fr], Cyrille Kazis [Kazis &amp; Co->http://www.screencom.com]</auteur>
  	<description>Plugin permettant d'ouvrir une fen&ecirc;tre flottante,
@@ -10,7 +10,12 @@
  	<pipeline>
   		<nom>insert_head</nom>
   		<action>insertion_in_head</action>
-  		<inclure>define_head.php</inclure>
+  		<inclure>fenetre_flottante_define_head.php</inclure>
+ 	</pipeline>
+	<pipeline>
+  		<nom>affichage_final</nom>
+  		<action>affichage_final</action>
+  		<inclure>fenetre_flottante_define_head.php</inclure>
  	</pipeline>
  	
 </plugin>
