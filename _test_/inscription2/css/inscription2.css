@@ -36,13 +36,15 @@ font-size:11px;
 padding:3px;
 }
 
+sup {font-size:60%}
+
 #principal table {clear:right; margin-left:10pt;padding:5px}
 #principal tr, #droite tr { background-color : #E0E0E0 ;}
  { background-color : #E0E0E0 ;}
 #principal tr.row { background:#FFF8DC; }
 #principal tr.even { background:#AFF5DF; }
 
-#principal td, #droite td {padding:3px}
+#principal td, #droite td {padding:3px;text-align:center}
 
 #pagination {margin:10px;font-size:0.7em}
 

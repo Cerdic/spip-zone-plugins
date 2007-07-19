@@ -177,19 +177,27 @@ $().ready(function() {
 	<tr>
 	<?php	
 	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif" /></a></strong></td>';
-	if(lire_config('inscription2/nom_table')){
-		echo '<td><strong><a href="'.$url.'&ordre=nom&desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
-		$table_auteurs[] = "a.nom";
+	
+	if(lire_config('inscription2/sexe_table')){
+		echo '<td><strong><a href="'.$url.'&ordre=sexe&desc='.$desc.'">'._T('inscription2:sexe').'</a></strong></td>';
+		$table_auteurs[] = "b.sexe";
 	}
+	
 	if(lire_config('inscription2/prenom_table')){
 		echo '<td><strong><a href="'.$url.'&ordre=prenom&desc='.$desc.'">'._T('inscription2:prenom').'</a></strong></td>';
 		$table_auteurs[] = "b.prenom";
 	}
+	
+	if(lire_config('inscription2/nom_table')){
+		echo '<td><strong><a href="'.$url.'&ordre=nom&desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
+		$table_auteurs[] = "a.nom";
+	}
+	
 	if(lire_config('inscription2/email_table')){
 		$table_auteurs[] = "a.email";
 	}
 	foreach(lire_config('inscription2') as $cle => $val){
-		if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table'){
+		if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table' and $cle!='sexe_table'){
 			$cle = str_replace("_table", "", $cle);
 			if($cle == 'bio' or $cle == 'statut' or $cle == 'username')
 				if($cle == 'username')
@@ -238,9 +246,25 @@ $().ready(function() {
 		echo '<tr class="'.$class.'">';
 		$id = $data['id'] ;
 		if(!empty($data['id_auteur']))
-			echo '<td><a href="?exec=auteur_infos&id_auteur='.$data['id_auteur'].'"><img src='.$url_logo.' title="'._T('inscription2:fiche_adherent').'"></a></td>';
+			echo '<td><a href="?exec=auteur_infos&id_auteur='.$data['id_auteur'].'"><img src='.$url_logo.' title="'._T('inscription2:fiche_adherent').'" /></a></td>';
 		else 
 			echo '<td> </td>';
+		
+		if(lire_config('inscription2/sexe_table')){
+			if(!empty($data['sexe'])){
+				$civilite = ($data['sexe'] == 'M')? 'M<sup>r</sup>' : 'M<sup>me</sup>' ;
+				echo '<td>'.$civilite.'</td>';
+				}
+			else
+				echo '<td> </td>';
+		}
+		
+		if(lire_config('inscription2/prenom_table')){
+			if(!empty($data['prenom']))
+				echo '<td>'.$data['prenom'].'</td>';
+			else
+				echo '<td> </td>';
+		}
 		
 		if(lire_config('inscription2/nom_table') or lire_config('inscription2/email_table')){
 			if(!empty($data['nom']) and !empty($data['email']))
@@ -252,14 +276,10 @@ $().ready(function() {
 			else
 				echo '<td> </td>';
 		}
-		if(lire_config('inscription2/prenom_table')){
-			if(!empty($data['prenom']))
-				echo '<td>'.$data['prenom'].'</td>';
-			else
-				echo '<td> </td>';
-		}
+		
+		
 		foreach(lire_config('inscription2') as $cle => $val){
-			if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table'){
+			if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table' and $cle!='sexe_table'){
 				$cle = str_replace("_table", "", $cle);
 				if($cle == 'username')
 					$cle = 'login';
