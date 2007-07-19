@@ -10,8 +10,8 @@
 \***************************************************************************/
 
 function balise_SESSION_dist($p) {
-	$p->entetes['X-Session'] = spip_session();
-	
+	$p->entetes['X-Session'] = 'oui';
+
 	if(function_exists('balise_ENV'))
 		return balise_ENV($p, '$GLOBALS["auteur_session"]');
 	else

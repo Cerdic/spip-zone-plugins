@@ -582,7 +582,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				$descr, $boucles, $id_boucle);
 			$altern = "''";
 
-			//recuperation des entetes
+			// recuperation des entetes
 			if(!empty($p->entetes))
 				$entetes = array_merge($entetes, $p->entetes);
 

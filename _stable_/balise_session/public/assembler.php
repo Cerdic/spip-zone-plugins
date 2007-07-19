@@ -134,10 +134,11 @@ function assembler_page ($fond) {
 
 	// Si la page annonce un entete 'X-Session: zz' on ignore le cache si
 	// l'on n'a pas la session 'zz'
-	if (isset($page['entetes'])
-	AND isset($page['entetes']['X-Session'])
+	$utiliser_session = isset($page['entetes'])
+		AND isset($page['entetes']['X-Session']);
+	if ($utiliser_session
 	AND $page['entetes']['X-Session'] != spip_session()) {
-		spip_log('X-Session:'.$page['entetes']['X-Session']);
+		spip_log('X-Session: '.$page['entetes']['X-Session']);
 		$use_cache = 1;
 	}
 
@@ -158,9 +159,12 @@ function assembler_page ($fond) {
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, '', $chemin_cache);
 
-			//ajouter les scripts poue le mettre en cache
+			// ajouter les scripts a mettre en cache
 			$page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
 			$page['insert_js_inline'] = pipeline("insert_js",array("type" => "inline","data" => array()));
+
+			if ($utiliser_session)
+				$page['entetes']['X-Session'] = spip_session();
 
 			if ($chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
@@ -287,15 +291,16 @@ function inclure_page($fond, $contexte_inclus) {
 function spip_session() {
 	static $session;
 
-	if (!isset($session))
-		$session = isset($GLOBALS['auteur_session'])
+	if (!isset($session)) {
+		$session = $GLOBALS['auteur_session']
 			? 'session'
 				.$GLOBALS['auteur_session']['id_auteur']
 				.'_'
 				.$_COOKIE['spip_session']
-			: '';
+			: '0';
+		spip_log('session: '.$session);
+	}
 
-	spip_log('session: '.$session);
 	return $session;
 }
 
