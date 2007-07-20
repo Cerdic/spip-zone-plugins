@@ -26,7 +26,7 @@ function balise_SESSION_dist($p) {
 function balise_HTTP_HEADER($p) {
 	$header = interprete_argument_balise(1,$p);
 	//nettoyer l'encadrement du parametre par des ' ou des "
-	$header = preg_match('/^("|\')?([^"\']*)("|\')?$/', '$2', $header);
+	$header = preg_replace('/^("|\')?([^"\']*)("|\')?$/', '$2', $header);
 	//split douteux, qui limite l'usage a du texte constant en parametre (pas de filtre ni de balise)
 	//a revoir
 	list($nom, $valeur) = split(': ', $header);

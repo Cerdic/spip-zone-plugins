@@ -134,7 +134,7 @@ function calculer_boucle($id_boucle, &$boucles) {
   return $req . $corps 
 	. ($notrace ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
-	.	"\n	\$entetes = array_merge(\$entetes, array(".$_entetes."));"
+//	.	"\n	\$entetes = array_merge(\$entetes, array(".$_entetes."));"
 	.  "\n	return \$t0;";
 }
 

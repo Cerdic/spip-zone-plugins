@@ -72,6 +72,7 @@ class Boucle {
 	// champs pour la construction du corps PHP
 	var $id_table;
 	var $primary;
+//	var $entetes = array();	// cumul des entetes pour la transmission dans la page
 	var $return;
 	var $numrows = false;
 	var $cptrows = false;
