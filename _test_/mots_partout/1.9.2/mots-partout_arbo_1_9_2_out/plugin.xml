@@ -1,0 +1,61 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Mots Partout
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Pierre Andrews (Mortimer)
+	</auteur>
+	<auteur>
+	Stephane Laurent (Bill)
+	</auteur>
+	<auteur>
+	Yoann Nogues (Zerax)
+	</auteur>
+	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
+	<version>
+	  0.4
+	</version>
+	<etat>
+	  test
+	</etat>
+	<description>
+	  Gestion des mots clefs sur tous les &eacute;l&eacute;ments SPIP.
+	  Cette version intégre les mots clefs arborescents. 
+		  
+	  Pour l'utilisation dans les squelettes une simple [boucle récursive->http://www.spip.net/fr_article914.html] avec comme critére {id_parent} suffira pour boucler sur les groupes de mots.  
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	  MotsPartout
+	</prefix>
+	<options>
+	  mots_partout_choses.php
+	</options>
+	<fonctions>
+	  motspartout_fonctions.php
+	</fonctions>
+	<install>
+	 base/motspartout_install.php
+	</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>mots_partout.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouterOnglets</action>
+		<inclure>mots_partout.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>afficherMots</action>
+		<inclure>mots_partout.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
