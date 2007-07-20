@@ -49,7 +49,7 @@ function exec_mots_tous_dist()
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 	if (autoriser('creer','groupemots')  AND !$conf_mot){
-		$res = icone_horizontale(_T('motspartout:icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
+		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
 
 		echo bloc_des_raccourcis($res);
 	}
