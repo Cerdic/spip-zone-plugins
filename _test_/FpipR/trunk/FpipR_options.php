@@ -1,7 +1,8 @@
 <?php
   //
 	//on crée la colonne pour stoquer les frobs
-	$installe = unserialize(lire_meta('FpipR:installe'));
+$installe = unserialize(lire_meta('FpipR:installe'));
+
 	if(!$installe) {
 	  spip_query("ALTER TABLE `".$GLOBALS['table_prefix']."_auteurs` ADD (`flickr_token` TINYTEXT NULL, `flickr_nsid` TINYTEXT NULL);");
 	  ecrire_meta('FpipR:installe',serialize(true)); //histoire de pas faire une recherche dans la base à chaque coup
