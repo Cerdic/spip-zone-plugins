@@ -164,13 +164,12 @@ function valeur_colonne_table_dist($table, $col, $id) {
 	}
 
 	// valeurs SQL
-	if (count($col)) {
-		$s = spip_query(
+	if (count($col)
+	AND $s = spip_query(
 			'SELECT `' . implode($col, '`, `') .
-			'` FROM ' . $nom_table . ' WHERE ' . $where);
-		$t = spip_fetch_array($s);
+			'` FROM ' . $nom_table . ' WHERE ' . $where)
+	AND $t = spip_fetch_array($s))
 		$r = array_merge($r, $t);
-	}
 
 	return $r;
 }
