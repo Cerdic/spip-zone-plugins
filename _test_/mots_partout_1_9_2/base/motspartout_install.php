@@ -18,7 +18,7 @@
 	
 	function motspartout_modifier_tables() {
 		//desinstallation du champ et du meta
-		spip_query("ALTER TABLE spip_groupes_mots DROP id_parent");
+		spip_query("ALTER TABLE `spip_groupes_mots` DROP `id_parent`");
 		effacer_meta('MotsPartout:mots-partout-arbo-installe');
 	}
 	
