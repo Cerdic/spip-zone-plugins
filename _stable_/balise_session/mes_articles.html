@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>Balise #[(#REM)]SESSION utilis&eacute;e dans une boucle</title>
+	<INCLURE{fond=inc-head}>
+</head>
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Balise #[(#REM)]SESSION utilis&eacute;e dans une boucle</div>
+
+	<div id="conteneur">
+
+		<div id="contenu">
+
+			<div class="cartouche">
+				<h1 class="titre">Balise #[(#REM)]SESSION utilis&eacute;e dans une boucle</h1>
+				<div class="chapo">La balise #[(#REM)]SESSION fonctionne comme
+				<a href="http://www.spip.net/fr_article3368.html#config" class="spip_out">
+				#[(#REM)]CONFIG
+				</a>
+				&agrave; ceci pr&egrave;s qu'elle s'appuie sur le tableau associatif <tt>$auteur_session</tt>. Le param&egrave;tre pass&eacute; en argument d&eacute;termine la valeur de session &agrave; afficher. Pour avoir une liste exhaustive des valeurs possible, consultez la doc de la fonction
+				<a href="http://doc.spip.org/@ajouter_session" class="spip_out">
+				ajouter_session
+				</a>
+				</div>
+				<div class="chapo"><a href="#URL_PAGE{session}" class="spip_in">Exemple principal</a></div>
+			</div>
+			
+			<B_mes_articles>
+			<div class="liste-articles">
+				<h2 class="invisible">Exemple avec une boucle</h2>
+				<ol>
+					<BOUCLE_mes_articles(ARTICLES){par date}{inverse}{0,5}>
+					<li>
+						<h3 class="titre">#TITRE</h3>
+						[<small>(#SESSION{id_auteur}|=={1}|?{Cet article est de moi})</small>]
+						<div class="texte">
+							#INTRODUCTION
+						</div>
+						<br class="nettoyeur" />
+					</li>
+					</BOUCLE_mes_articles>
+				</ol>
+			</div>
+			</B_mes_articles>
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<div class="divers">
+				<INCLURE{fond=boite_connexion}>
+			</div>
+
+			<INCLURE{fond=boite_donnees}>
+		</div>
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>

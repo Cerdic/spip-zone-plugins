@@ -134,6 +134,7 @@ function calculer_boucle($id_boucle, &$boucles) {
   return $req . $corps 
 	. ($notrace ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
+	.	"\n	\$entetes = array_merge(\$entetes, array(".$_entetes."));"
 	.  "\n	return \$t0;";
 }
 
@@ -541,7 +542,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$newdescr['niv']++;
 			$code = 'BOUCLE' .
 			  str_replace("-","_", $nom) . $descr['nom'] .
-			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
+			  '($Cache, $Pile, $doublons, $Numrows, $entetes, $SP)';
 			$commentaire= "?$nom";
 			$avant = calculer_liste($p->avant,
 				$newdescr, $boucles, $id_boucle);
@@ -787,7 +788,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
 		$boucles[$id]->return = 
 			"function BOUCLE" . strtr($id,"-","_") . $nom .
-			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
+			'(&$Cache, &$Pile, &$doublons, &$Numrows, &$entetes, $SP) {' .
 			$f($id, $boucles) .
 			"\n}\n\n";
 		if ($GLOBALS['var_mode'] == 'debug')

@@ -22,6 +22,9 @@ Bonjour
 			(#EVAL{_DIR_PLUGIN_CRAYONS}|match{^plugins\/}|?{'',' '})
 			[<div><a href="(#URL_AUTEUR)"><:voir_en_ligne:></a></div>]
 			[<div>(#BIO)</div>]
+			[<:date_dernier_login:>&nbsp;:<br />
+			<div>le (#EN_LIGNE|affdate)[ &agrave; (#EN_LIGNE|heures_minutes)]</div>]
+			[<div>pr&eacute;f&eacute;rences:<br/>(#PREFS*|unserialize|foreach)</div>]
 			[<div><a href="#URL_SITE">(#NOM_SITE)</a></div>]
 		]<br class="nettoyeur" />
 		</div>
