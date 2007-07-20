@@ -9,7 +9,7 @@
 
 	function motspartout_upgrade(){
 		//installation du champ id_parent et du meta concernant l'installation
-		spip_query("ALTER TABLE spip_forms_donnees_champs ADD id_parent bigint(20) "); 
+		spip_query("ALTER TABLE `spip_groupes_mots` ADD `id_parent` BIGINT( 20 ) NOT NULL ;"); 
 		
 		ecrire_meta('MotsPartout:mots-partout-arbo-installe','oui');
 		
@@ -18,7 +18,7 @@
 	
 	function motspartout_modifier_tables() {
 		//desinstallation du champ et du meta
-		spip_query("ALTER TABLE spip_groupes_mots DROP id_parent");
+		spip_query("ALTER TABLE `spip_groupes_mots` DROP `id_parent`");
 		effacer_meta('MotsPartout:mots-partout-arbo-installe');
 	}
 	
