@@ -26,7 +26,7 @@
 				</span>
 				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
 				[<span class='spip_form_label_details'>(#TYPE|forms_label_details)</span>]
-				#SET{type,texte}
+				#SET{type,text}
 				#SET{class,''}
 				[(#TYPE|=={date}|?{' ',''}) #SET{class,date-picker} #SET{date-picker,1}]
 				[(#TYPE|=={password}|?{' ',''}) #SET{type,password}]

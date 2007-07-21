@@ -58,10 +58,12 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 				"</option>\n";
 	}
 
+	if (version_compare($GLOBALS['spip_version_code'],1.925,'>'))
+		$puce = inserer_attribut(puce_statut($statut),'alt','');
+	else 
+		$puce = http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0'");
 	$res .=	"</select>" .
-	" &nbsp; " .
-	http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0'") .
-	"  &nbsp;\n";
+	" &nbsp; $puce &nbsp;\n";
 	if ($rang!==NULL){
 		$res .= "<input name='rang_nouv' size='4' class='fondl' value='$rang' onchange=\"setvisibility('valider_statut', 'visible');\" />";
 	}

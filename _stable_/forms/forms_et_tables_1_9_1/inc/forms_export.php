@@ -74,7 +74,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 	// Forms_formater_ligne_xxx avec xxx le nom du format
 	//
 	$nb_reponses = 0;
-	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS tot FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND confirmation='valide'"));
+	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS tot FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND confirmation='valide' AND statut<>'poubelle'"));
 	if ($row)	$nb_reponses = $row['tot'];
 
 	if (!$id_form || !autoriser('administrer','form',$id_form))
@@ -122,7 +122,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 	$id_donnee = 0;
 	$result = spip_query("SELECT r.id_donnee, r.date,r.url, c.champ, c.valeur ".
 		"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
-		"WHERE id_form="._q($id_form)." AND confirmation='valide' AND c.id_donnee IS NOT NULL ".
+		"WHERE id_form="._q($id_form)." AND confirmation='valide' AND statut<>'poubelle' AND c.id_donnee IS NOT NULL ".
 		"ORDER BY date, r.id_donnee");
 	while ($row = spip_fetch_array($result)) {
 		if ($id_donnee != $row['id_donnee']) {
