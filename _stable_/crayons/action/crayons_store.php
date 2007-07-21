@@ -268,12 +268,18 @@ function crayons_update($id, $colval = array(), $type = '')
 
 	$update = $sep = '';
 	foreach ($colval as $col => $val) {
-		$update .= $sep . $col . '=' . _q($val);
+		$update .= $sep . '`' . $col . '`=' . _q($val);
 		$sep = ', ';
 	}
 
-    return spip_query(
-        'UPDATE ' . $nom_table . ' SET ' . $update . ' WHERE ' . $where);
+	$a = spip_query($q = 
+        'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where);
+
+	spip_log($q);
+	include_spip('inc/invalideur');
+	suivre_invalideur($cond, $modif=true);
+
+	return $a;
 }
 
 //
