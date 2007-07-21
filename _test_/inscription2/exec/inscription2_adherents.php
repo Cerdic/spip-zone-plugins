@@ -21,7 +21,7 @@ function exec_inscription2_adherents() {
 	
 	debut_page(_T('inscription2:gestion_adherents'), "", "");
 	
-	echo recuperer_fond('inc/table_adherents');
+	echo recuperer_fond('inc/table_adherents',array("statut_abonnement"=>_request('statut_abonnement')));
 	
 	fin_page();	
 }

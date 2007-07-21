@@ -1,5 +1,6 @@
 [<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/jqModal_confirm.css}|direction_css)"/>]
 [<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)"/>]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/abonnement.css}|direction_css)"/>]
 
 <script src="#CHEMIN{javascript/jqModal.js}" type="text/javascript"></script>
 <script type="text/javascript">
@@ -73,12 +74,11 @@ $().ready(function() {
 	<div id="tetiere" >
 		<div style="float:right" >
 		<form method="post" action="?exec=inscription2_adherents">
-		<input type="text" name="valeur" onfocus='this.value=""' size="10" value="<:info_rechercher:>">
+		<input class="search_field" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>">
 		<select name="case" id="case">
-			<option value="id">ID</option>
 		<?php
 			foreach(lire_config('inscription2') as $cle => $val){
-				if($val!= '' and ereg("^.+_table$", $cle)){
+				if($val!= '' and $cle!='id_table' and ereg("^.+_table$", $cle)){
 					$cle = str_replace("_table", "", $cle);
 					echo "<option value='$cle'>"._T('inscription2:'.$cle)."</option>";
 				}
@@ -87,6 +87,23 @@ $().ready(function() {
 		</select>
 		<input type="submit" value="<:info_rechercher:>" />
 		</form>
+		<?php //abonnement
+		if(defined('_DIR_PLUGIN_ABONNEMENT')){ ?>
+		<div class="statut_div">
+		<form method="get" action="#SELF" id="statut">
+		[(#SELF|form_hidden)]
+		<select onchange="this.form.submit();" name="statut_abonnement" id="statut_abonnement">
+		<option value=[(#ENV{statut_abonnement}|!={actifs}|?{"'actifs'","'actifs' selected='selected'"})]>actifs</option>
+		<option value=[(#ENV{statut_abonnement}|!={abonnes}|?{"'abonnes'","'abonnes' selected='selected'"})]>abonnes</option>
+		<option value=[(#ENV{statut_abonnement}|!={prospects}|?{"'prospects'","'prospects' selected='selected'"})]>prospects</option>
+		<option value=[(#ENV{statut_abonnement}|!={relance}|?{"'relance'","'relance' selected='selected'"})]>relance</option>
+		<option value=[(#ENV{statut_abonnement}|!={sortis}|?{"'sortis'","'sortis' selected='selected'"})]>sortis</option>
+		<option value=[(#ENV{statut_abonnement}|!={tous}|?{"'tous'","'tous' selected='selected'"})]>Tous les inscrits</option>
+		</select>
+		</form>
+		</div>
+		<?php } ?>
+		
 		</div>
 	<?php
 	include_spip('base/abstract_sql');
@@ -108,7 +125,7 @@ $().ready(function() {
 	}else{
 		$critere="a.id_auteur<>'0'"; 
 		//que les abonnes si le plugin est actif
-		if(defined('_DIR_PLUGIN_ABONNEMENT')) $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') " ;
+		if(defined('_DIR_PLUGIN_ABONNEMENT') AND _request('statut_abonnement') !='tous') $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') " ;
 		}
 		
 	//pagination
@@ -215,15 +232,20 @@ $().ready(function() {
 		}
 	}
 	//abonnement
-	if(defined('_DIR_PLUGIN_ABONNEMENT'))
+	if(defined('_DIR_PLUGIN_ABONNEMENT')){
 	echo '<td><a href="#"><strong>Abonnement</strong></a></td>';
+	echo '<td><a href="#"><strong>&Eacute;ch&eacute;ance</strong></a></td>';
+	$table_auteurs[] = 'b.validite';
+	$table_auteurs[] = 'b.statut_abonnement';
+	}
+	
 	echo '<td colspan="3" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut&desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
 	echo '</tr>';
 	
 	$table_auteurs[] = 'b.id';
 	$table_auteurs[] = 'a.id_auteur';
 	$table_auteurs[] = 'a.statut';
-	
+		
 	if(lire_config('inscription2/pays_table'))
 		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
 			ON b.id_auteur = a.id_auteur LEFT JOIN spip_pays c ON b.pays=c.id  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
@@ -242,6 +264,8 @@ $().ready(function() {
 		 else {
 		 $class='even';
 		 }
+		 //var_dump($data);
+		 if(!empty($data['statut_abonnement'])) $class = $data['statut_abonnement'] ;
 		
 		echo '<tr class="'.$class.'">';
 		$id = $data['id'] ;
@@ -293,6 +317,7 @@ $().ready(function() {
 		if(defined('_DIR_PLUGIN_ABONNEMENT')){
 		$abonnement = spip_fetch_array(spip_query("select a.libelle from `spip_abonnements` a join `spip_auteurs_elargis_abonnements` b where a.id_abonnement=b.id_abonnement and b.id_auteur_elargi='$id'" ));
 		echo '<td>'.$abonnement["libelle"].'</td>';
+		echo '<td>'.$data["validite"].'</td>';
 		}
 		
 		echo '<td><a href="?exec=editer_adherent&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" title="'._T('inscription2:editer_adherent').'"></a></td>';
@@ -320,6 +345,11 @@ $().ready(function() {
 	?>
 	</table>	
 	</form>
+	
+	<div>
+	<p>En bleu : Relanc&eacute; | En rose : A &eacute;ch&eacute;ance | En vert : A jour<br> En brun : D&eacute;sactiv&eacute; | En jaune paille : Prospect | En rouge : les erreurs banquaires</p><p><font color='#9F1C30'><strong> Total des abonnements : 1300 euros <br /> </strong></font><br/><font color='blue'><strong>Nombre d'abonn&eacute;s &agrave; jour : 30 </strong></font></p>
+	</div>
+	
 	<div id="pagination">
 	<?php
 	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a WHERE $critere");

@@ -38,6 +38,13 @@ padding:3px;
 
 sup {font-size:60%}
 
+.search_field{
+width:100px
+}
+#case{
+width:80px
+}
+
 #principal table {clear:right; margin-left:10pt;padding:5px}
 #principal tr, #droite tr { background-color : #E0E0E0 ;}
  { background-color : #E0E0E0 ;}
