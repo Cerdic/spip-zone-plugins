@@ -25,10 +25,23 @@ function critere_tags_dist($idb, &$boucles, $crit) {
 function critere_tag_mode_dist($idb, &$boucles, $crit) {
 }
 
+function critere_machine_tags_dist($idb, &$boucles, $crit) {
+}
+
+function critere_machine_tag_mode_dist($idb, &$boucles, $crit) {
+}
+
 function critere_text_dist($idb, &$boucles, $crit) {
 }
 
 function critere_privacy_filter_dist($idb, &$boucles, $crit) {
+}
+
+
+function critere_save_search_dist($idb, &$boucles, $crit) {
+}
+
+function critere_content_type_dist($idb, &$boucles, $crit) {
 }
 
 function critere_bbox_dist($idb, &$boucles, $crit) {

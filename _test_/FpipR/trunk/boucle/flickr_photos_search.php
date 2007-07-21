@@ -43,7 +43,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   $possible_args = array('user_id','license','upload_date','taken_date');
 
   $possible_criteres = array('tags','tag_mode','text','privacy_filter',
-							 'bbox','accuracy');
+							 'bbox','accuracy','safe_search','content_type','machine_tags','machine_tag_mode');
 
   $possible_extras = array('license', 'owner_name', 'icon_server', 'original_format', 'last_update');
 

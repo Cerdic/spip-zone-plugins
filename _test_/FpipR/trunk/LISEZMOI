@@ -96,6 +96,10 @@ Les criteres suivant sont "special" et prennent leur parametre directement: {{{ 
     * 3 private photos visible to family
     * 4 private photos visible to friends & family
     * 5 completely private photos
+ * {{{ {safe_search} }}} 
+ * {{{ {content_type} }}} 
+ * {{{ {machine_tags} }}} voir http://www.flickr.com/groups/api/discuss/72157594497877875/
+ * {{{ {machine_tag_mode} }}} par defaut 'any'
  * {{{ {bbox} }}} limitation geographique de la recherche, separé par des :, longitude minimum, latitude minimum, longitude max, latitude max
  * {{{ {accuracy} }}}
 

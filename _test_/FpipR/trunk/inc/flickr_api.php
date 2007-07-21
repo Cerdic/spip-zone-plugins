@@ -265,6 +265,10 @@ function flickr_photos_search(
 							  $sort = NULL,
 							  $privacy_filter = NULL,
 							  $extras = NULL,
+							  $safe_search = NULL,
+							  $content_type = NULL,
+							  $machine_tags = NULL,
+							  $machine_tag_mode = NULL,
 							  $bbox = NULL,
 							  $accuracy = NULL,
 							  $auth_token = NULL
@@ -287,6 +291,15 @@ function flickr_photos_search(
 
   if($extras!= NULL) $params['extras'] = "original_format,$extras"; 
   else $params['extras'] = "original_format";
+
+  if($safe_search != NULL) $params['safe_search'] = $safe_search;
+  if($content_type != NULL) $params['content_type'] = $content_type;
+
+  if($machine_tags != NULL) {
+	$params['machine_tags'] = $machine_tags;
+	if($machine_tag_mode != NULL) $params['machine_tag_mode'] = $machine_tag_mode;
+	else $params['machine_tag_mode'] = 'any';
+  }
 
   if($bbox != NULL) $params['bbox'] = $bbox ;
   if($accuracy != NULL) $params['accuracy'] = $accuracy ;
