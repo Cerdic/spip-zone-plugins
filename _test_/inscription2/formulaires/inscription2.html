@@ -18,10 +18,10 @@
 	// validate signup form on submit
 	$("#inscription").validate({
 		rules: {
-			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[3,1000]},
+			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[5,1000]},
 			code_postal: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
 			ville: {[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
 			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
@@ -39,15 +39,15 @@
 			nom: {
 				required:"<:inscription2:champ_obligatoire:>",
 				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
 			prenom:{
 				required:"<:inscription2:champ_obligatoire:>",
 				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
 			username: {
 				required:"<:inscription2:champ_obligatoire:>",
 				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+				rangeLength:"Min 5 Max 20 <:inscription2:caracteres:>"},
 			adresse: {
 				required:"<:inscription2:champ_obligatoire:>",
 				postal:"<:inscription2:chaine_valide:>",

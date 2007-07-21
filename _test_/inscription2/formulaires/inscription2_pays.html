@@ -1,7 +1,7 @@
-<select name="pays" id="pays" class="formo">
+<select name="pays" id="pays" class="formo select">
 	<BOUCLE_pays(SPIP_PAYS){tout}>
 		[<option value="#ID">
-		#PAYS
+		[(#PAYS)]
 		</option>]
-</BOUCLE_pays>
+	</BOUCLE_pays>
 </select>
