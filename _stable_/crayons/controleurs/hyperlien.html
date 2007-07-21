@@ -2,8 +2,12 @@
 
 	Controleur pour le crayon 'hyperlien', uniquement html
 
+	(attention pour les syndic_articles, les champs ne sont
+	pas les memes, il faut donc un autre controleur)
+
 ]
 #CACHE{0}
+
 <BOUCLE_a(AUTEURS){id_auteur}{tous}>
 <fieldset style="#ENV{largeur}px;#ENV{style}"><legend>Hyperlien</legend>
 <label><:form_prop_nom_site:></label> <input class="crayon-active" name="#ENV{name_nom_site}"
