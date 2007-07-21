@@ -50,6 +50,7 @@ function generer_nom_fichier_cache($contexte) {
 		. $_SERVER['HTTP_HOST'] . ' '
 		. $GLOBALS['fond'] . ' '
 		. $GLOBALS['dossier_squelettes'] . ' '
+		. spip_session() . ' '
 		. (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : '')
 	);
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
