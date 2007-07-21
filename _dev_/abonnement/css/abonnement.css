@@ -17,11 +17,14 @@ padding:3px;
 	#ajouter div.textarea {height:auto;padding:5px;}
 	#ajouter .valider {width:80px}
 	
-	tr.prospect { background:#F0DCF4; } 
- 	tr.abonne { background:#DCF3F4; } 
- 	tr.relance1 { background:#AFF5DF; } 
- 	tr.relance2 { background:#AFF5DF; } 
- 	tr.relance3 { background:#AFF5DF; } 
- 	tr.relance4 { background:#AFF5DF; } 
- 	tr.sorti { background:#E6EAC9; } 
- 	tr.erreur_bank { background:#FFF8DC; } 
+	#principal tr.prospect { background-color:#FFF8DC; } 
+ 	#principal tr.abonne { background-color:#AFF5DF; } 
+ 	#principal tr.echeance1 { background-color:#AFF5DF; } 
+ 	#principal tr.echeance2 { background-color:#AFF5DF; } 
+ 	#principal tr.sorti1 { background-color:#AFF5DF; } 
+ 	#principal tr.sorti2 { background-color:#AFF5DF; } 
+ 	#principal tr.sorti { background-color:#E6EAC9; } 
+ 	#principal tr.erreur_bank { background-color:red; } 
+ 	
+ 	#statut_abonnement{width:160px}
+ 	.statut_div{margin:5px 0px;text-align:right}
