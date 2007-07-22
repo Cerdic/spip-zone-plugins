@@ -25,11 +25,12 @@ $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYT
 // La table pour une liste de photos
 //La version du schema de table
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.6';
+$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.7';
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
 															"id_photo"  => "bigint(21) NOT NULL",
 															"user_id" => "varchar(100)", //"47058503995@N01" 
+															"farm" => "int NOT NULL",
 															"secret"=> "varchar(100)", //"a123456"
 															"server"=> "int NOT NULL", //"2"
 															"title"	=> "text DEFAULT '' NOT NULL",
@@ -170,13 +171,14 @@ $GLOBALS['table_des_tables']['flickr_photo_urls'] = 'fpipr_urls';
 //pour les sets
 
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photosets'] = '0.3';
+$GLOBALS['FpipR_versions']['spip_fpipr_photosets'] = '0.4';
 $GLOBALS['FpipR_tables']['spip_fpipr_photosets_field'] = array(
 															   "id_photoset" => "bigint(21) NOT NULL",
 															   "user_id" => 'varchar(100)',
 															   'primary_photo' => "bigint(21) NOT NULL",
 															   "secret"=> "varchar(100)", //"a123456"
 															   "server"=> "int NOT NULL", //"2"
+															   "farm" => "int NOT NULL",
 															   'photos' => 'int',
 															   "title"	=> "text DEFAULT '' NOT NULL",
 															   "description" => "text DEFAULT '' NOT NULL"
@@ -375,7 +377,7 @@ function FpipR_fill_photos_table($photos,$add='') {
   $cnt = 0;
   $query = "DELETE FROM spip_fpipr_photos";
   spip_query($query);
-  $col = '(id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang,added_date';
+  $col = '(id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang,added_date,farm';
 
   if($add)
 	foreach($add as $name=>$val) {
@@ -383,7 +385,7 @@ function FpipR_fill_photos_table($photos,$add='') {
 	}
   foreach($photos as $photo) {
 	$ownername = $photo->ownername?$photo->ownername:$photo->username;
-	$vals = "("._q($photo->id).','._q($photo->owner).','._q($photo->secret).','._q($photo->server).','._q($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','._q($photo->originalformat).','._q($photo->license).','._q(date('Y-m-d H:i:s',$photo->dateupload+0)).','._q($photo->datetaken).','._q($photo->ownername).','._q($photo->iconserver).','._q(date('Y-m-d H:i:s',$photo->lastupdate+0)).','._q($photo->longitude).','._q($photo->latitude).','._q($photo->accuracy).','.$cnt++.','._q(date('Y-m-d H:i:s',$photo->dateadded+0));
+	$vals = "("._q($photo->id).','._q($photo->owner).','._q($photo->secret).','._q($photo->server).','._q($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','._q($photo->originalformat).','._q($photo->license).','._q(date('Y-m-d H:i:s',$photo->dateupload+0)).','._q($photo->datetaken).','._q($photo->ownername).','._q($photo->iconserver).','._q(date('Y-m-d H:i:s',$photo->lastupdate+0)).','._q($photo->longitude).','._q($photo->latitude).','._q($photo->accuracy).','.$cnt++.','._q(date('Y-m-d H:i:s',$photo->dateadded+0)).','.intval($photo->farm);
 	if($add)
 	  foreach($add as $name=>$val) {
 		$vals .= ','._q($val);

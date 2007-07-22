@@ -87,46 +87,6 @@ echo  afficher_articles(_T('fpipr:choisir_un_article'),$requete,'flickr_afficher
   fin_page();
 }
 
-function flickr_afficher_articles_boucle($row)
-{
-	global $connect_id_auteur, $dir_lang, $spip_lang_right;
-  $vals = '';
-
-  $id_article = intval($row['id_article']);
-  $tous_id[] = $id_article;
-  $titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-  $id_rubrique = $row['id_rubrique'];
-  $date = $row['date'];
-  $statut = $row['statut'];
-  if ($lang = $row['lang']) changer_typo($lang);
-
-  // La petite puce de changement de statut
-  $vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
-
-  // Le titre (et la langue)
-  $s = "<div>";
-
-  if (acces_restreint_rubrique($id_rubrique))
-	$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
-
-  $s .= "<a href='" .generer_url_ecrire('articles',"id_article=$id_article")."'$descriptif$dir_lang style=\"display:block;\">";
-	
-  $s .= typo($titre);
-  $s .= "</a>";
-  $s .= "</div>";
-	
-  $vals[] = $s;
-
-  // La date
-  $vals[] = affdate_jourcourt($date);
-	$vals[]='';
-
-  $input .= '<input type="radio" name="id" value="'.$id_article.'"/>';
-
-  $vals[] = $input;
-
-  return $vals;
-}
 
 
 ?>

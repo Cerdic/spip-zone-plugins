@@ -32,7 +32,7 @@ function exec_flickr_choix_photos() {
 	  $page = intval(_request('page'))?intval(_request('page')):1;
 	  $sort = _request('sort')?_request('sort'):'date-posted-desc';
 	  
-	  $photos = flickr_photos_search(40,$page,$row['flickr_nsid'],'','',_request('text_search'),'','','','','',$sort,'','','','',$row['flickr_token']);
+	  $photos = flickr_photos_search(40,$page,$row['flickr_nsid'],'','',_request('text_search'),'','','','','',$sort,'','','','','','','','',$row['flickr_token']);
 		  
 	  
 	  $html = '<input type="hidden" name="flickr_nsid" value="'.$row['flickr_nsid'].'">';

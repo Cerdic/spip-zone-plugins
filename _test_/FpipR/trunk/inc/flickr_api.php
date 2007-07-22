@@ -40,7 +40,7 @@ function flickr_check_error($resp) {
   if($resp['stat'] == 'ok') {
 	return $resp;
   } else if($resp['stat'] == 'fail') {
-	spip_log('Flickr Error: '.$resp['message'].'('.$resp['code'].')');
+ 	spip_log('Flickr Error: '.$resp['message'].'('.$resp['code'].')');
 	return false;
   } else {
 	spip_log('cannot understand response');
@@ -167,7 +167,13 @@ class FlickrPhotoDetails {
    o	original image, either a jpg, gif or png, depending on source format
   */
   function source($size='') {
-	return "http://static.flickr.com/".$this->server."/".$this->id."_".$this->secret.($size?"_$size":'').'.'.(($size=='o')?$this->originalformat:'jpg');
+	$format = 'jpg';
+	$secret = $this->secret;
+	if($size == 'o') {
+	  $secret = $this->originalsecret;
+	  $format = $this->originalformat;
+	  }
+	return "http://".($this->farm?('farm'.$this->farm.'.'):'')."static.flickr.com/".$this->server."/".$this->id."_".$secret.($size?"_$size":'').".$format";
   }
 
 }
@@ -202,9 +208,15 @@ class FlickrPhoto {
    medium, 500 on longest side
    b	large, 1024 on longest side (only exists for very large original images)
    o	original image, either a jpg, gif or png, depending on source format
-  */
+  */ 
   function source($size='') {
-	return "http://static.flickr.com/".$this->server."/".$this->id."_".$this->secret.($size?"_$size":'').'.'.(($size=='o')?$this->originalformat:'jpg');
+	$format = 'jpg';
+	$secret = $this->secret;
+	if($size == 'o') {
+	  $secret = $this->originalsecret;
+	  $format = $this->originalformat;
+	  }
+	return "http://".($this->farm?('farm'.$this->farm.'.'):'')."static.flickr.com/".$this->server."/".$this->id."_".$secret.($size?"_$size":'').".$format";
   }
 
   function url() {
@@ -221,7 +233,7 @@ class FlickrPhotoSet {
   var $photos;
   var $title;
   var $description;
-
+  var $farm = '';
   /*
    s	small square 75x75
    t	thumbnail, 100 on longest side
@@ -230,7 +242,7 @@ class FlickrPhotoSet {
    b	large, 1024 on longest side (only exists for very large original images)
   */
   function logo($size='') {
-	return "http://static.flickr.com/".$this->server."/".$this->primary."_".$this->secret."_$size.jpg";
+	return "http://".($this->farm?('farm'.$this->farm.'.'):'')."static.flickr.com/".$this->server."/".$this->primary."_".$this->secret."_$size.jpg";
   }
 
   function url() {

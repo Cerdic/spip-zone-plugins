@@ -1,6 +1,7 @@
 <?php
   //
 	//on crée la colonne pour stoquer les frobs
+
 $installe = unserialize(lire_meta('FpipR:installe'));
 
 	if(!$installe) {
@@ -16,9 +17,9 @@ function generer_url_document_flickr($id_document, $statut='') {
   $row = @spip_fetch_array(spip_query("SELECT fichier,distant	FROM spip_documents WHERE id_document = $id_document"));
   if ($row) {
 	if ($row['distant'] == 'oui') {
-	  if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$row['fichier'],$matches)) {
-		$id = $matches[2];
-		$secret = $matches[3];
+	  if(preg_match('#http://(farm[0-9].)?static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$row['fichier'],$matches)) {
+		$id = $matches[3];
+		$secret = $matches[4];
 		include_spip('inc/flickr_api');
 		$details = flickr_photos_getInfo($id,$secret);
 		if($details->urls['photopage']) return $details->urls['photopage'];
@@ -36,13 +37,14 @@ function generer_url_document_flickr($id_document, $statut='') {
 
 }
 
-
-if (!_DIR_RESTREINT) {
+//on ne peut plus utiliser ce truc pour avoir l'url de la page flickr comme url_document
+// parce que le modele emb utilise url_document pour inclure l'image.
+/*if (!_DIR_RESTREINT) {
   if (!function_exists('generer_url_document')) {
 	function generer_url_document($id, $stat='')
 	  { return generer_url_document_flickr($id, $stat);}
   }
-}
+  }
 
 function balise_URL_DOCUMENT($p) {
   $_id_document = '';
@@ -58,7 +60,7 @@ function balise_URL_DOCUMENT($p) {
 
   $p->interdire_scripts = false;
   return $p;
-}
+  }*/
 
 /***********************************************************************
  *                       Pour les boucles Flickr                        *
@@ -93,12 +95,12 @@ function FpipR_logo_owner($user_id,$server = '') {
 }
 
 
-function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat='jpg') {
+function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat='jpg',$farm='') {
   if($id_photo) {
 	$w = ($taille=='s')?75:FpipR_taille_photo($id_photo,$taille,'width');
 	$h = ($taille=='s')?75:FpipR_taille_photo($id_photo,$taille,'height');
 	if($server) {
-	  return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'" />';
+	  return '<img src="http://'.($farm?('farm'.$farm.'.'):'').'static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'" />';
 	} else {
 	  $src = FpipR_taille_photo($id_photo,$taille,'source');
 	  return '<img src="'.$src.'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'" />';
@@ -242,14 +244,14 @@ function FpipR_photos_geo_getLocation($id_photo,$location) {
 }
 
 function FpipR_get_flickr_photo_id($fichier) {
-  if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
-		return $matches[2];
+  if(preg_match('#http://(farm[0-9].)?static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
+		return $matches[3];
 	return NULL;
 }
 
 function FpipR_get_flickr_photo_secret($fichier) {
-  if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
-		return $matches[3];
+  if(preg_match('#http://(farm[0-9].)?static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
+		return $matches[4];
   return NULL;
 	
 }
@@ -262,6 +264,64 @@ function FpipR_calcul_argument_page($debut,$pas) {
 	$pas = $pas+$debut-($page-1)*$pas;
   return array($page,$pas>0?intval($pas):100);
 }
+
+//----------------------------------------------------------------------
+// fonction d'affichage pour exec/flickr_bookmarklet_photo.php
+//----------------------------------------------------------------------
+function flickr_afficher_articles_boucle($row)
+{
+	global $connect_id_auteur, $dir_lang, $spip_lang_right;
+  $vals = '';
+
+  $id_article = intval($row['id_article']);
+  $tous_id[] = $id_article;
+  $titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
+  $id_rubrique = $row['id_rubrique'];
+  $date = $row['date'];
+  $statut = $row['statut'];
+  if ($lang = $row['lang']) changer_typo($lang);
+
+  // La petite puce de changement de statut
+  $vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
+
+  // Le titre (et la langue)
+  $s = "<div>";
+
+  if (acces_restreint_rubrique($id_rubrique))
+	$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
+
+  $s .= "<a href='" .generer_url_ecrire('articles',"id_article=$id_article")."'$descriptif$dir_lang style=\"display:block;\">";
+	
+  $s .= typo($titre);
+  $s .= "</a>";
+  $s .= "</div>";
+	
+  $vals[] = $s;
+
+  // La date
+  $vals[] = affdate_jourcourt($date);
+	$vals[]='';
+
+  $input .= '<input type="radio" name="id" value="'.$id_article.'"/>';
+
+  $vals[] = $input;
+
+  
+  if ($options == "avancees") { // Afficher le numero (JMB)
+	$largeurs = array(11, '', 80, 100, 50);
+	$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
+  } else {
+	$largeurs = array(11, '', 100, 100);
+	$styles = array('', 'arial2', 'arial1', 'arial1');
+  }
+  
+  return ($spip_display != 4)
+	? afficher_liste_display_neq4($largeurs, $vals, $styles)
+	: afficher_liste_display_eq4($largeurs, $vals, $styles);
+  
+}
+//----------------------------------------------------------------------
+
 
 
 //======================================================================
@@ -286,4 +346,5 @@ function FpipR_getAuthToken() {
   }
   return NULL;
 }
+
 ?>

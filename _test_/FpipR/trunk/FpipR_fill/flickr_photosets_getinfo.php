@@ -8,8 +8,8 @@ function FpipR_fill_flickr_photosets_getinfo_dist($arguments) {
   $set = flickr_photosets_getInfo($arguments['id_photoset'],$arguments['auth_token']);
 
   spip_abstract_insert('spip_fpipr_photosets',
-					   '(id_photoset,user_id,primary_photo,secret,server,photos,title,description)',
-					   '('._q($set->id).','._q($set->owner).','._q($set->primary).','._q($set->secret).','._q($set->server).','._q($set->photos).','._q($set->title).','._q($set->description).')'
+					   '(id_photoset,user_id,primary_photo,secret,server,photos,title,description,farm)',
+					   '('._q($set->id).','._q($set->owner).','._q($set->primary).','._q($set->secret).','._q($set->server).','._q($set->photos).','._q($set->title).','._q($set->description).','.intval($set->farm).')'
 					   );	
 }
 ?>
