@@ -590,7 +590,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:ville:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="ville" [checked="(#ENV{ville}?{checked})"] onclick="showoblig(this)" id="ville_pro" />
+		<input type="checkbox" name="ville_pro" [checked="(#ENV{ville_pro}?{checked})"] onclick="showoblig(this)" id="ville_pro" />
 	</label>
 	<label style="[(#ENV{ville_pro}|=={on}|?{display: block;, display:none;})]">
 		<input type="checkbox" name="ville_pro_obligatoire" [checked="(#ENV{ville_pro_obligatoire}?{checked})"] id="ville_pro_obligatoire" />
@@ -614,7 +614,7 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:pays:></strong>
 </td><td>
 	<label>
-		<input type="checkbox" name="pays" [checked="(#ENV{pays_pro}?{checked})"] onclick="showoblig(this)" id="pays_pro" />
+		<input type="checkbox" name="pays_pro" [checked="(#ENV{pays_pro}?{checked})"] onclick="showoblig(this)" id="pays_pro" />
 	</label>
 	<label style="[(#ENV{pays_pro}|=={on}|?{display: block;, display:none;})]">
 		<input type="checkbox" name="pays_pro_obligatoire" [checked="(#ENV{pays_pro_obligatoire}?{checked})"] id="pays_pro_obligatoire" />

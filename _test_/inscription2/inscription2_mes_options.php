@@ -24,6 +24,8 @@
 				$spip_auteurs_elargis[$cle] = "datetime DEFAULT '0000-00-00 00:00:00 NOT NULL";
 			elseif($cle == 'pays')
 				$spip_auteurs_elargis[$cle] = "int NOT NULL";
+			elseif($cle == 'pays_pro')
+				$spip_auteurs_elargis[$cle] = "int NOT NULL";
 			else	
 				$spip_auteurs_elargis[$cle] = "text NOT NULL";
 			$var_user[$cle] = ' ';
