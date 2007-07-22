@@ -20,7 +20,7 @@
 	sur l'ensemble des zones de textes : titres, descriptifs et textes.
 
 	<br/>
-	Le fonctionnement est bas&eacute; sur l'utilisation des balises <code><multi></code>.
+	Le fonctionnement est bas&eacute; sur l'utilisation des balises <tt>&lt;multi&gt;</tt>.
 	<br/>
 	<b>Attention :</b> ce plugin n'est pas compatible avec les enluminures pour la BTV2.
 	<br/>
