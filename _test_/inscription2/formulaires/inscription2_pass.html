@@ -35,6 +35,12 @@
 			societe: {[(#CONFIG{inscription2/societe_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
 			secteur:{[(#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
 			fonction: {[(#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
+			adresse_pro: {[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{required: true,}),] rangeLength:[3,1000]},
+			code_postal_pro: {[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
+			ville_pro: {[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,80]},
+			telephone_pro: {[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
+			fax_pro: {[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
+			mobile_pro: {[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
 			divers: {rangeLength:[3,1000]},
 			pays:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''})]}
 		},
@@ -97,6 +103,32 @@
 				required:"<:inscription2:champ_obligatoire:>",
 				chaine:"<:inscription2:chaine_valide:>",
 				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
+			adresse_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				postal:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
+			code_postal_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				postal:"Entrez un code postal valide",
+				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+			ville_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 2 Max 80 <:inscription2:caracteres:>"},
+			pays_pro: {
+				required:"<:inscription2:champ_obligatoire:>"},
+			telephone_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
+			fax_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
+			mobile_pro: {
+				required:"<:inscription2:champ_obligatoire:>",
+				numero:"<:inscription2:numero_valide:>",
+				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
 			divers:{
 				chaine:"<:inscription2:chaine_valide:>",
 				rangeLength:"Min 3 Max 1000 <:inscription2:caracteres:>"}
@@ -248,6 +280,19 @@ select.formo{width:auto; float:left;margin:1px;}
 	<input type="text" name="mobile" id="mobile" class="formo" value="#ENV{mobile}"/>
 </div>]
 
+[(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label><strong><:inscription2:commentaire:></strong></label><br />
+	<textarea name="commentaire" id="commentaire" class="formo">#ENV{commentaire} </textarea>	
+</div>
+]
+</fieldset>
+
+<fieldset>
+<legend>
+	<:inscription2:info_pros:>
+</legend>
+
 [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/profession_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
@@ -272,14 +317,50 @@ select.formo{width:auto; float:left;margin:1px;}
 	<input type="text" name="fonction" id="fonction" class="formo" value="#ENV{fonction}"/>
 </div>
 ]
-[(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label><strong><:inscription2:commentaire:></strong></label><br />
-	<textarea name="commentaire" id="commentaire" class="formo">#ENV{commentaire} </textarea>	
-</div>
-]
 
+[(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong><br /></label>
+	<textarea name="adresse_pro" id="adresse_pro" class="formo">#ENV{adresse_pro}</textarea>
+</div>]
 
+[(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="code_postal_pro"><strong><:inscription2:code_postal:></strong><br /></label>
+	<input type="text" name="code_postal_pro" id="code_postal_pro" class="formo" value="#ENV{code_postal_pro}"/>
+</div>]
+
+[(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="ville_pro"><strong><:inscription2:ville:></strong><br /></label>
+	<input type="text" name="ville_pro" id="ville_pro"  class="formo" value="#ENV{ville_pro}"/>
+</div>]
+
+[(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="pays_pro"><strong><:inscription2:pays:></strong></label><br />
+	<div>
+	<INCLURE{fond=formulaires/inscription2_pays}>
+	</div>
+</div>]
+
+[(#CONFIG{inscription2/telephone_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="telephone_pro"><strong><:inscription2:telephone_pro:></strong><br /></label>
+	<input type="text" name="telephone_pro" id="telephone_pro" class="formo" value="#ENV{telephone_pro}"/>
+</div>]
+
+[(#CONFIG{inscription2/fax_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="fax_pro"><strong><:inscription2:fax_pro:></strong><br /></label>
+	<input type="text" name="fax_pro" id="fax_pro" class="formo" value="#ENV{fax_pro}"/>
+</div>]
+
+[(#CONFIG{inscription2/mobile_pro}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="mobile_pro"><strong><:inscription2:mobile_pro:></strong><br /></label>
+	<input type="text" name="mobile_pro" id="mobile_pro" class="formo" value="#ENV{mobile_pro}"/>
+</div>]
 </fieldset>
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
