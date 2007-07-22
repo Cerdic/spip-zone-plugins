@@ -46,18 +46,13 @@ _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eac
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affichage_final</nom>
-		<action>insertar_mapa</action>
-		<inclure>gis_pipeline.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>header_prive</nom>
 		<action>insertar_head</action>
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>insert_head</nom>
-		<action>insertarp_head</action>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
