@@ -346,9 +346,9 @@ $().ready(function() {
 	</table>	
 	</form>
 	
-	<div>
-	<p>En bleu : Relanc&eacute; | En rose : A &eacute;ch&eacute;ance | En vert : A jour<br> En brun : D&eacute;sactiv&eacute; | En jaune paille : Prospect | En rouge : les erreurs banquaires</p><p><font color='#9F1C30'><strong> Total des abonnements : 1300 euros <br /> </strong></font><br/><font color='blue'><strong>Nombre d'abonn&eacute;s &agrave; jour : 30 </strong></font></p>
-	</div>
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	#INCLURE{fond=inc/pied_abonnement}
+	]
 	
 	<div id="pagination">
 	<?php
