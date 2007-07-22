@@ -57,18 +57,21 @@ function gis_insertar_head($flux){
 // --------------------------------
 // inserta no head da parte PUBLICA
 // --------------------------------
-function gis_insertarp_head($flux){
-	$flux.='
+function gis_affichage_final($flux){
+	if (!strpos($flux, '<div id="map"'))
+		return $flux;
+	
+	$incHead='
 <script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GIS.'googlemap_api/js/customControls.js"></script>';
-	$flux .= '<script language="javascript">
+	$incHead .= '<script language="javascript">
 			$(document).ready(function() {
 				load();
 			});
 			</script>';
-	return $flux;
+	return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
 }
 
 ?>
