@@ -1,0 +1,15 @@
+<div>
+	<p> En jaune paille : Prospect | En vert : A jour | En rose : A &eacute;ch&eacute;ance | En bleu : Relanc&eacute; |<br /> En brun : Sorti  | En rouge : les erreurs banquaires
+	</p>
+	
+<?php
+// TOTAUX
+	$query = spip_query ( "SELECT SUM(b.montant) as somme, COUNT(a.id) as n FROM spip_auteurs_elargis a JOIN spip_abonnements b JOIN spip_auteurs_elargis_abonnements c WHERE a.statut_abonnement ='abonne' AND c.id_auteur_elargi=a.id and c.id_abonnement=b.id_abonnement" );
+	$row=spip_fetch_array($query);
+
+
+	echo "<p><font color='#9F1C30'><strong> Total des abonnements : ".$row['somme']." euros <br /> </strong></font><br/>";
+	echo "<font color='blue'><strong>Nombre d'abonn&eacute;s &agrave; jour : ".$row['n']." </strong></font></p>";
+
+?>
+</div>
