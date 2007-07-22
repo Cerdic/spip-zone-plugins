@@ -191,19 +191,27 @@ $().ready(function() {
 	foreach ($query as $cle => $val){
 		if($cle == 'id' or $cle == 'id_pays')
 			continue;
-		if($cle == 'pays'){
+		// select
+		if($cle == 'pays' or $cle == 'statut_abonnement'){
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>"
 				. "<td><select name='$cle' id='$cle' >";
-
-			include(_DIR_PLUGIN_INSCRIPTION2."inc/pays.php");
-			foreach($liste_pays as $cle=> $val){
+			if($cle == 'pays'){
+				include(_DIR_PLUGIN_INSCRIPTION2."inc/pays.php");
+				foreach($liste_pays as $cle=> $val){
 				if ($cle == $query['id_pays'])
 					echo "<option value='$cle' selected>$val</option>";
 				else 
 					 echo "<option value='$cle'>$val</option>";
-			}
+				}
+			}elseif($cle == 'statut_abonnement'){
+				$statuts_possibles = array('prospect','abonne','relance','sorti');
+				foreach($statuts_possibles as $val_abo){
+					$selected = ($val == $val_abo)?'selected="selected"':'' ;
+					echo "<option value='$val_abo' $selected>$val_abo</option>";
+				}
+			}	
 			echo "</select></td></tr>";
-		}elseif($cle=='publication'){
+		}elseif($cle=='publication'){ // checkbox
 			if ($val == 'on')	
 				$val = 'checked';
 			else
@@ -211,11 +219,11 @@ $().ready(function() {
 			
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
 			echo "<td><input type='checkbox' name='$cle' $val><br /></td><tr/>"; 	
-		}elseif ($cle != 'statut'){
+		}elseif ($cle != 'statut'){ // textarea
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
 			if($cle == 'adresse' OR $cle == 'divers' OR $cle == 'commentaire')
 				echo "<td><textarea name='$cle'>$val</textarea><br /></td><tr/>"; 
-			else
+			else // defaut (text)
 				echo "<td><input type='text' name='$cle' value='$val'><br /></td><tr/>"; 
 		}
 	}
