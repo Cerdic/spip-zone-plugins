@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tags' => 'Etiquettes',
 	'ajouter_photos' => 'Ajouter des photos Flickr',
 	'ajouter_sets' => 'Ajouter des sets de photos Flickr',
-	'autorisation_titre' => 'Authorisation d\'acc&eacute;s &agrave; Flickr',
+	'autorisation_titre' => 'Autorisation d\'acc&eacute;s &agrave; Flickr',
 	'identifie_ok' => 'Vous &ecirc;tes identifi&eacute; avec l\'utilisateur: @user_id@',
 	'identifie_etape1' => 'Veuillez d\'abord autoriser ce plugin sur flickr en cliquant <strong><a target="blank" href="@url@">ici</a></strong><br/>
 	Une nouvelle fen&ecirc;tre sera ouverte, suivez les instructions qui y sont fournis.',
