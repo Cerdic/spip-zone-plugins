@@ -279,13 +279,13 @@ $(document).ready(function() {
 
 [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/profession_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
+	<label for="profession"><strong><:inscription2:profession:></strong></label>
 	<input type="text" name="profession" id="profession" class="formo" value="#ENV{profession}"/>
 </div>]
 
 [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="societe"><strong><:inscription2:societe:></strong><br /></label>
+	<label for="societe"><strong><:inscription2:societe:></strong></label>
 	<input type="text" name="societe" id="societe" class="formo" value="#ENV{societe}"/>
 </div>]
 
@@ -304,21 +304,31 @@ $(document).ready(function() {
 
 [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
 <div class="textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{obligatoire})]">
-	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong><br /></label>
+	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong></label>
 	<textarea name="adresse_pro" id="adresse_pro" class="formo">#ENV{adresse_pro}</textarea>
 </div>]
 
 [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="code_postal_pro"><strong><:inscription2:code_postal:></strong><br /></label>
+	<label for="code_postal_pro"><strong><:inscription2:code_postal:></strong></label>
 	<input type="text" name="code_postal_pro" id="code_postal_pro" class="formo" value="#ENV{code_postal_pro}"/>
 </div>]
 
 [(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="ville_pro"><strong><:inscription2:ville:></strong><br /></label>
+	<label for="ville_pro"><strong><:inscription2:ville:></strong></label>
 	<input type="text" name="ville_pro" id="ville_pro"  class="formo" value="#ENV{ville_pro}"/>
 </div>]
+
+[(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="pays_pro"><strong><:inscription2:pays:></strong></label>
+	<div class="select">
+	<INCLURE{fond=formulaires/inscription2_pays_pro}>
+	</div>
+</div>
+]
+</fieldset>
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
 #SET{afficher_plus, false}
