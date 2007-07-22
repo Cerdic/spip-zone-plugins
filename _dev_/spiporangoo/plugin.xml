@@ -9,7 +9,7 @@
 		<b>Pr&eacute;requis :</b><br/>
 		le plugin Chargeur<br/>
 		<b>Pour commencer l'installtion :</b><br/>
-		Avant activation du plugin, veuillez cliquer sur <a href="../spip.php?action=charger&depot=http://orangoo.com/labs/uploads/&zip=googiespell_v4_0&dest_path=plugins/spiporangoo/&url_retour=ecrire/index.php?exec=admin_plugin">ce lien </a> 
+		Avant activation du plugin, veuillez cliquer sur <a href="../spip.php?action=charger&amp;depot=http://orangoo.com/labs/uploads/&amp;zip=googiespell_v4_0&amp;dest_path=plugins/spiporangoo/&amp;url_retour=ecrire/index.php?exec=admin_plugin">ce lien </a> 
 	</description>
 	<lien>http://www.spip-contrib.net</lien>
 	<prefix>spiporangoo</prefix>
