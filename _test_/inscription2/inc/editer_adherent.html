@@ -184,7 +184,7 @@ $().ready(function() {
 
 
 	
-	echo "<form name='adherent' method='post' action='?exec=editer_adherent&act=val&id=$id'>";
+	echo "<form id='adherent' name='adherent' method='post' action='?exec=editer_adherent&act=val&id=$id'>";
 	echo "<table>";
 		// echo _DIR_PLUGIN_INSCRIPTION2."inc/pays.php";die();
 
@@ -250,7 +250,7 @@ $().ready(function() {
 		echo "</select><br/><a onclick=\"$('#acces').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 	}
 	echo "</table>";
-	echo "<input type='submit' value='Valider'></form>";
+	echo "<div class='submit'><input  type='submit' value='Valider'></div></form>";
 
 	?>
 	</div>
