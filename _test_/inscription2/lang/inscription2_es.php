@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_defaut' => 'Informaciones por defecto',
 'info_defaut_desc' => 'Informaciones obligatorias por defecto',
 'info_perso' => 'Informaciones Personales',
+'info_pros' => '<NEW>Informations professionnelles',
 'general_infos' => '<NEW>Informations G&eacute;n&eacute;rales',
 'info_perso_desc' => 'Informaciones personales que seran solicitadas a los nuevos adherentes del sitio',
 'info_gener' => 'Informaciones Generales',
@@ -131,6 +132,8 @@ El equipo de @nom_site@',
 'html' => 'HTML',
 
 'votre_profil' => '<NEW>Votre profil',
+'contacts_personnels' => '<NEW>Contacts personnels',
+'contacts_pros' => '<NEW>Contacts professionnels',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 

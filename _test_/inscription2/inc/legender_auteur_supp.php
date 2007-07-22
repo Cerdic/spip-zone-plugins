@@ -25,16 +25,16 @@ function inc_legender_auteur_supp_dist($auteur)
 	}
 	
 	if (!$new) {
+		if (autoriser('modifier', 'auteur', $auteur['id_auteur'])) {
 		$corps = legender_auteur_supp_voir($auteur, $redirect);
-	} else
-		$corps = '';
-
-	// Calculer le formulaire general
-	if (autoriser('modifier', 'auteur', $auteur['id_auteur'])) {
-		$corps = legender_auteur_supp_saisir($auteur, $corps, $redirect);
 	} else {
-	
+		$corps = ' ';
 	}
+	
+	}else {
+		$corps = '';
+}
+	
 
 	return $corps;
 }
@@ -265,18 +265,5 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$res .= "</div>\n";
 
 	return $res;
-}
-
-function statut_modifiable_auteur_supp($id_auteur, $auteur)
-{
-	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
-
-// on peut se changer soi-meme
-	return  (($connect_id_auteur == $id_auteur) ||
-// sinon on doit etre admin
-// et pas admin restreint pour changer un autre admin ou creer qq
-	(($connect_statut == "0minirezo") &&
-	($connect_toutes_rubriques OR 
-	($id_auteur AND ($auteur['statut'] != "0minirezo")))));
 }
 ?>

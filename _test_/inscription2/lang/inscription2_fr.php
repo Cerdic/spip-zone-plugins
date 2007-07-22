@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_defaut' => 'Informations par d&eacute;faut',
 'info_defaut_desc' => 'Informations obligatoires par d&eacute;faut',
 'info_perso' => 'Informations personnelles',
+'info_pros' => 'Informations professionnelles',
 'general_infos' => 'Informations G&eacute;n&eacute;rales',
 'info_perso_desc' => 'Informations personnelles qui seront demand&eacute;es aux nouveaux adh&eacute;rents du site',
 'info_gener' => 'Informations G&eacute;n&eacute;rales',
@@ -153,6 +154,8 @@ L\'&eacute;quipe de @nom_site@',
 'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
 
 'votre_profil' => 'Votre profil',
+'contacts_personnels' => 'Contacts personnels',
+'contacts_pros' => 'Contacts professionnels',
 
 'page_confirmation' => 'Page de confirmation de votre inscription'
 

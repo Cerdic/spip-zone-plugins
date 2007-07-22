@@ -1,8 +1,8 @@
 <h1 class="titre"><:inscription2:votre_profil:></h1>
 <BOUCLE_auteurs(AUTEURS){id_auteur}{tout}>
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS){id_auteur}{tout}>
-<div style="padding:10px">
-	[<div class="#_auteurs:EDIT{logo} Buddy" style="float:right;margin:20px;max-width:100px;">(#_auteurs:LOGO_AUTEUR||?{#_auteurs:LOGO_AUTEUR,"<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})</div>]
+
+	<div class="#_auteurs:EDIT{logo} Buddy" style="float:right;">[(#_auteurs:LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#_auteurs:LOGO_AUTEUR||image_reduire{200,0})]]</div>
 	[<p style="margin:10px 0;"><strong><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#_auteurs:NOM</span></span></strong></p>]
 
 	<div class="#_auteurs:EDIT{bio}" style="margin:10px 0">
@@ -24,10 +24,8 @@
 		[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})</span>]
 	[(#GET{adresse}|?{'</span>',''})]
 	</p>
-</div>
 
-<div style="padding:10px">
-	<p><strong><:inscription2:contacts:></strong></p>
+	<p><strong><:inscription2:contacts_personnels:></strong></p>
 	
 	[<span class="#_auteurs:EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#_auteurs:EMAIL">(#_auteurs:EMAIL|?{#_auteurs:EMAIL,<:inscription2:non_renseigne:>})</a></span><br />]
 	
@@ -38,9 +36,12 @@
 		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">(#MOBILE|?{#MOBILE,<:inscription2:mobile:> <:inscription2:non_renseigne:>})</span></span><br />]]
 		[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[<:inscription2:fax:> : <span class="#EDIT{fax} fax">(#FAX|?{#FAX,<:inscription2:fax:> <:inscription2:non_renseigne:>})</span>]]
 	[(#GET{contacts}|?{'</span><br />',''})]
-	
-	
 	<span class="#_auteurs:EDIT{hyperlien}">[<:inscription2:website:> <a href="#_auteurs:URL_SITE" class="url spip_out" rel="me">(#_auteurs:NOM_SITE)</a>]</span>
-</div>
+	
+	<p><strong><:inscription2:contacts_pros:></strong></p>
+	
+	[(#CONFIG{inscription2/societe_fiche_mod}|?{' ',''})[<span class="#EDIT{societe}"><:inscription2:societe:> : <span class="org">(#SOCIETE|?{#SOCIETE,<:inscription2:non_renseignee:>})</span></span><br />]]
+	
 </BOUCLE_auteur_elargi>
 </BOUCLE_auteurs>
+<br class="nettoyeur" />

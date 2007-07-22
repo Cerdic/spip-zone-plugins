@@ -33,7 +33,6 @@ function inscription2_ajouts()
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('auteurs'));
 	}
-	
 
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
 	$fiche = $legender_auteur_supp($auteur, $new, $echec, $redirect);

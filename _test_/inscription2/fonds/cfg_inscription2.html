@@ -366,6 +366,58 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </td>
 </tr><tr>
 <td>
+<tr>
+<td>
+	<strong><:inscription2:commentaire:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="commentaire" [checked="(#ENV{commentaire}?{checked})"] onclick="showoblig(this)" id="commentaire" />
+	</label>
+	<label style="[(#ENV{commentaire}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="commentaire_obligatoire" [checked="(#ENV{commentaire_obligatoire}?{checked})"] id="commentaire_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="commentaire_fiche_mod" onclick = "enadis(this,commentaire_fiche)" [checked="(#ENV{commentaire_fiche_mod}?{checked})"] id="commentaire_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="commentaire_fiche" [checked="(#ENV{commentaire_fiche}?{checked})"] id="commentaire_fiche" [disabled ="(#ENV{commentaire_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="commentaire_table" [checked="(#ENV{commentaire_table}?{checked})"] id="commentaire_table" />
+	</label>
+</td>
+</tr>
+</table>
+<br />
+<small>
+<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
+<strong><span style="color:red">*</span></strong><:inscription2:form_oblig_expl:><br />
+<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
+<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
+<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
+</small>
+</fieldset>
+
+
+<fieldset>
+<legend>
+	<:inscription2:info_pros:>
+</legend>
+<br /><br />
+
+<table>
+<tr>
+<td width='140'/>
+<td width='70'> <:inscription2:form:> </td>
+<td width='70'> <:inscription2:fiche_mod:> </td>
+<td width='70'> <:inscription2:fiche:> </td>
+<td width='70'> <:inscription2:table:> </td>
+</tr><tr>
+<td>
 	<strong><:inscription2:profession:></strong>
 </td><td>
 	<label>
@@ -484,30 +536,6 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 		<input type="checkbox" name="fonction_table" [checked="(#ENV{fonction_table}?{checked})"] id="fonction_table" />
 	</label>
 </td>
-</tr><tr>
-<td>
-	<strong><:inscription2:commentaire:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="commentaire" [checked="(#ENV{commentaire}?{checked})"] onclick="showoblig(this)" id="commentaire" />
-	</label>
-	<label style="[(#ENV{commentaire}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="commentaire_obligatoire" [checked="(#ENV{commentaire_obligatoire}?{checked})"] id="commentaire_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="commentaire_fiche_mod" onclick = "enadis(this,commentaire_fiche)" [checked="(#ENV{commentaire_fiche_mod}?{checked})"] id="commentaire_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="commentaire_fiche" [checked="(#ENV{commentaire_fiche}?{checked})"] id="commentaire_fiche" [disabled ="(#ENV{commentaire_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="commentaire_table" [checked="(#ENV{commentaire_table}?{checked})"] id="commentaire_table" />
-	</label>
-</td>
 </tr>
 </table>
 <br />
@@ -519,6 +547,8 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 <strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
 </small>
 </fieldset>
+
+
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
 <fieldset>
