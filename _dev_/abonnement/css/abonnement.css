@@ -19,10 +19,7 @@ padding:3px;
 	
 	#principal tr.prospect { background-color:#FFF8DC; } 
  	#principal tr.abonne { background-color:#AFF5DF; } 
- 	#principal tr.echeance1 { background-color:#AFF5DF; } 
- 	#principal tr.echeance2 { background-color:#AFF5DF; } 
- 	#principal tr.sorti1 { background-color:#AFF5DF; } 
- 	#principal tr.sorti2 { background-color:#AFF5DF; } 
+ 	#principal tr.relance { background-color:#DDDDFF; } 
  	#principal tr.sorti { background-color:#E6EAC9; } 
  	#principal tr.erreur_bank { background-color:red; } 
  	
