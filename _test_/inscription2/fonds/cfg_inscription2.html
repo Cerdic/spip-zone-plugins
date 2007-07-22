@@ -537,6 +537,175 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	</label>
 </td>
 </tr>
+<tr>
+<td>
+	<strong><:inscription2:adresse_pro:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_pro" [checked="(#ENV{adresse_pro}?{checked})"] onclick="showoblig(this)" id="adresse_pro" />
+	</label>
+	<label style="[(#ENV{adresse_pro}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="adresse_pro_obligatoire" [checked="(#ENV{adresse_pro_obligatoire}?{checked})"] id="adresse_pro_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_pro_fiche_mod" onclick = "enadis(this,adresse_pro_fiche)" [checked="(#ENV{adresse_pro_fiche_mod}?{checked})"] id="adresse_pro_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_pro_fiche" [checked="(#ENV{adresse_pro_fiche}?{checked})"] id="adresse_pro_fiche" [disabled ="(#ENV{adresse_pro_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_pro_table" [checked="(#ENV{adresse_pro_table}?{checked})"] id="adresse_pro_table" />
+	</label>
+</td>
+</tr><tr>
+<td>	
+	<strong><:inscription2:code_postal:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_pro" [checked="(#ENV{code_postal_pro}?{checked})"] onclick="showoblig(this)" id="code_postal_pro" />
+	</label>
+	<label style="[(#ENV{code_postal_pro}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="code_postal_pro_obligatoire" [checked="(#ENV{code_postal_pro_obligatoire}?{checked})"] id="code_postal_pro_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_pro_fiche_mod" onclick = "enadis(this,code_postal_pro_fiche)" [checked="(#ENV{code_postal_pro_fiche_mod}?{checked})"] id="code_postal_pro_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_pro_fiche" [checked="(#ENV{code_postal_pro_fiche}?{checked})"] id="code_postal_pro_fiche" [disabled ="(#ENV{code_postal_pro_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_pro_table" [checked="(#ENV{code_postal_pro_table}?{checked})"] id="code_postal_pro_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:inscription2:ville:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville" [checked="(#ENV{ville}?{checked})"] onclick="showoblig(this)" id="ville_pro" />
+	</label>
+	<label style="[(#ENV{ville_pro}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="ville_pro_obligatoire" [checked="(#ENV{ville_pro_obligatoire}?{checked})"] id="ville_pro_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_pro_fiche_mod" onclick = "enadis(this,ville_pro_fiche)" [checked="(#ENV{ville_pro_fiche_mod}?{checked})"] id="ville_pro_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_pro_fiche" [checked="(#ENV{ville_pro_fiche}?{checked})"] id="ville_pro_fiche" [disabled ="(#ENV{ville_pro_fiche_mod}?{true})"] />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_pro_table" [checked="(#ENV{ville_pro_table}?{checked})"] id="ville_pro_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:inscription2:pays:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="pays" [checked="(#ENV{pays_pro}?{checked})"] onclick="showoblig(this)" id="pays_pro" />
+	</label>
+	<label style="[(#ENV{pays_pro}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="pays_pro_obligatoire" [checked="(#ENV{pays_pro_obligatoire}?{checked})"] id="pays_pro_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="pays_pro_fiche_mod" onclick = "enadis(this,pays_pro_fiche)" [checked="(#ENV{pays_pro_fiche_mod}?{checked})"] id="pays_pro_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="pays_pro_fiche" [checked="(#ENV{pays_pro_fiche}?{checked})"] id="pays_pro_fiche" [disabled ="(#ENV{pays_pro_fiche_mod}?{true})"] />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="pays_pro_table" [checked="(#ENV{pays_pro_table}?{checked})"] id="pays_pro_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:inscription2:telephone_pro:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_pro" [checked="(#ENV{telephone_pro}?{checked})"] onclick="showoblig(this)" id="telephone_pro" />
+	</label>
+	<label style="[(#ENV{telephone_pro}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="telephone_pro_obligatoire" [checked="(#ENV{telephone_pro_obligatoire}?{checked})"] id="telephone_pro_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_pro_fiche_mod" onclick = "enadis(this,telephone_pro_fiche)" [checked="(#ENV{telephone_pro_fiche_mod}?{checked})"] id="telephone_pro_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_pro_fiche" [checked="(#ENV{telephone_pro_fiche}?{checked})"] id="telephone_pro_fiche" [disabled ="(#ENV{telephone_pro_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_pro_table" [checked="(#ENV{telephone_pro_table}?{checked})"] id="telephone_pro_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:inscription2:fax_pro:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_pro" [checked="(#ENV{fax_pro}?{checked})"] onclick="showoblig(this)" id="fax_pro" />
+	</label>
+	<label style="[(#ENV{fax_pro}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="fax_pro_obligatoire" [checked="(#ENV{fax_pro_obligatoire}?{checked})"] id="fax_pro_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_pro_fiche_mod" onclick = "enadis(this,fax_pro_fiche)" [checked="(#ENV{fax_pro_fiche_mod}?{checked})"] id="fax_pro_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_pro_fiche" [checked="(#ENV{fax_pro_fiche}?{checked})"] id="fax_pro_fiche" [disabled ="(#ENV{fax_pro_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_pro_table" [checked="(#ENV{fax_pro_table}?{checked})"] id="fax_pro_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:inscription2:mobile_pro:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_pro" [checked="(#ENV{mobile_pro}?{checked})"] onclick="showoblig(this)" id="mobile_pro" />
+	</label>
+	<label style="[(#ENV{mobile_pro}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="mobile_pro_obligatoire" [checked="(#ENV{mobile_pro_obligatoire}?{checked})"] id="mobile_pro_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_pro_fiche_mod" onclick = "enadis(this,mobile_pro_fiche)" [checked="(#ENV{mobile_pro_fiche_mod}?{checked})"] id="mobile_pro_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_pro_fiche" [checked="(#ENV{mobile_pro_fiche}?{checked})"] id="mobile_pro_fiche" [disabled ="(#ENV{mobile_pro_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_pro_table" [checked="(#ENV{mobile_pro_table}?{checked})"] id="mobile_pro_table" />
+	</label>
+</td>
+</tr>
 </table>
 <br />
 <small>
