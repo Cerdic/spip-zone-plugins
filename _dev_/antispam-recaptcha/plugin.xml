@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Antispam reCAPTCHA</nom>
+	<auteur>
+	f<a href='http://mailhide.recaptcha.net/d?k=011J1_eAAymdlcjwrMhTJB5A==&amp;c=jk9lo41lAeS-0jE0dWpelg==' onclick="window.open(this.href, '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">...</a>@rezo.net
+	</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		fournit un filtre <code>|antispam</code> (fonction <code>filtre_antispam()</code>) pour proteger les emails avec un test de reCAPTCHA
+
+		Principal d&#233;faut : en anglais seulement pour le moment
+
+		A noter : &#224; sa premi&#232;re utilisation, le plugin va chercher tout seul une cl&#233; d'activation sur le site de reCAPTCHA.
+	</description>
+	<lien>http://www.spip-contrib.net/reCAPTCHA</lien>
+	<prefix>reCAPTCHA</prefix>
+
+	<icon>recaptcha.gif</icon>
+
+	<pipeline>
+		<nom>fonctions</nom>
+		<inclure>fonctions_recaptcha.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>
