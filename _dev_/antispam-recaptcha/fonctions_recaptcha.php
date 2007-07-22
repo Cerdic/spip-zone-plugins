@@ -6,6 +6,8 @@
  * Licence GNU/GPL
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // http://recaptcha.googlecode.com/files/recaptcha-php-1.8.zip
 function get_recaptcha_keys($force = false) {
 	if ($force
@@ -34,10 +36,13 @@ function get_recaptcha_keys($force = false) {
 }
 
 function filtre_antispamrecaptcha($email) {
+	if (strpos($email, '@') === false)
+		return;
+
 	if (!$keys = get_recaptcha_keys())
 		return $email;
 
-	require_once 'plugins/_dev_/antispam/recaptcha-php-1.8/recaptchalib.php';
+	require_once _DIR_PLUGIN_RECAPTCHA.'recaptchalib.php';
 	return recaptcha_mailhide_html ($keys['public'], $keys['private'], $email);
 #	return recaptcha_mailhide_url ($keys['public'], $keys['private'], $email);
 }

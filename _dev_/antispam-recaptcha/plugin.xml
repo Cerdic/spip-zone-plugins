@@ -17,9 +17,6 @@
 
 	<icon>recaptcha.gif</icon>
 
-	<pipeline>
-		<nom>fonctions</nom>
-		<inclure>fonctions_recaptcha.php</inclure>
-	</pipeline>
+	<fonctions>fonctions_recaptcha.php</fonctions>
 	<chemin dir='' />
 </plugin>
