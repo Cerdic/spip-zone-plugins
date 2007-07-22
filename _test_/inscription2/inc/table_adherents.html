@@ -240,7 +240,7 @@ $().ready(function() {
 		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
 			ON b.id_auteur = a.id_auteur  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
 	$query = spip_query ($query);
-	
+		
 	$i=0;
 	while ($data = spip_fetch_array($query)) {	
 		
@@ -251,8 +251,19 @@ $().ready(function() {
 		 else {
 		 $class='even';
 		 }
-		 //var_dump($data);
+		 //var_dump($data);die();
 		 if(!empty($data['statut_abonnement'])) $class = $data['statut_abonnement'] ;
+		
+		if($data['statut']=='0minirezo')
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif"';
+		elseif($data['statut']=='1comite')
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/redac-12.gif"';
+		elseif($data['statut']=='6forum')
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/adherent-12.gif"';
+		elseif($data['statut']=='aconfirmer')
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/aconf-12.gif"';
+		else
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/defaut-12.gif"';
 		
 		echo '<tr class="'.$class.'">';
 		$id = $data['id'] ;
@@ -307,19 +318,7 @@ $().ready(function() {
 		echo '<td>'.$data["validite"].'</td>';
 		}
 		
-		echo '<td><a href="?exec=editer_adherent&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" title="'._T('inscription2:editer_adherent').'"></a></td>';
-		
-		if($data['statut']=='0minirezo')
-			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif"';
-		elseif($data['statut']=='1comite')
-			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/redac-12.gif"';
-		elseif($data['statut']=='6forum')
-			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/adherent-12.gif"';
-		elseif($data['statut']=='aconfirmer')
-			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/aconf-12.gif"';
-		else
-			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/defaut-12.gif"';
-			
+		echo '<td><a href="?exec=editer_adherent&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" title="'._T('inscription2:editer_adherent').'"></a></td>';	
 		
 		if($data['statut'] != '0minirezo' and $data['statut'] != '1comite')
 			echo '<td><a href="?exec=inscription2_adherents&id='.$data['id_auteur'].'&act=sup" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" title="'._T('inscription2:supprimer_adherent').'"></a></td>';
