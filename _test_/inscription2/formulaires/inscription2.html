@@ -272,7 +272,7 @@ $(document).ready(function() {
 
 </fieldset>
 
-<fieldset>
+<fieldset class="infos-auteurs">
 <legend>
 	<:inscription2:info_pros:>
 </legend>
@@ -303,7 +303,7 @@ $(document).ready(function() {
 ]
 
 [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
+<div class="textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong><br /></label>
 	<textarea name="adresse_pro" id="adresse_pro" class="formo">#ENV{adresse_pro}</textarea>
 </div>]
