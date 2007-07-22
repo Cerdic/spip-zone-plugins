@@ -1,0 +1,22 @@
+<plugin>
+	<nom>spip orangoo</nom>
+	<auteur>[cam.lafit->http://km.azerttyu.net]</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		Int&eacute;gre un correcteur orthographique pour chaque textarea.
+		<hr/>
+		<b>Pr&eacute;requis :</b><br/>
+		le plugin Chargeur<br/>
+		<b>Pour commencer l'installtion :</b><br/>
+		Avant activation du plugin, veuillez cliquer sur <a href="http://dev.ibat.fr/spip.php?action=charger&depot=http://orangoo.com/labs/uploads/&zip=googiespell_v4_0&dest_path=plugins/spiporangoo/&url_retour=ecrire/index.php?exec=admin_plugin">ce lien </a> 
+	</description>
+	<lien>http://www.spip-contrib.net</lien>
+	<prefix>spiporangoo</prefix>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spiporangoo_head.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>
