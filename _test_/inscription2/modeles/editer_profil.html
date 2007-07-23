@@ -42,6 +42,29 @@
 	
 	[(#CONFIG{inscription2/societe_fiche_mod}|?{' ',''})[<span class="#EDIT{societe}"><:inscription2:societe:> : <span class="org">(#SOCIETE|?{#SOCIETE,<:inscription2:non_renseignee:>})</span></span><br />]]
 	
+	[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})[(#SET{adresse_pro,complet})]]]]]
+	<p>[(#GET{adresse_pro}|?{' ',''})<span class="#EDIT{adressecomplete_pro} org adr">]
+		[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{' ',''})[<span class="street-address">(#ADRESSE_PRO|?{#ADRESSE_PRO,<:inscription2:adresse_pro:> <:inscription2:non_renseignee:>})</span><br />]]
+		[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL_PRO|?{#CODE_POSTAL_PRO,<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
+		[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[<span class="locality">(#VILLE_PRO|?{#VILLE_PRO,<:inscription2:ville:> <:inscription2:non_renseignee:>})</span><br />]]
+		[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})<span class="country-name">]
+			<BOUCLE_r_pro(SPIP_PAYS){id=#PAYS_PRO}{tous}>
+			[(#PAYS|couper{30})]
+			</BOUCLE_r_pro>
+			[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})<:inscription2:pays:> <:inscription2:non_renseigne:>]
+			<//B_r_pro>
+		[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})</span>]
+	[(#GET{adresse_pro}|?{'</span>',''})]
+	</p>
+	
+	[(#REM) Un test pour voir si on a les 3 champs telephone Pros]
+	[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[(#SET{contacts_pro,complet})]]]]
+	[(#GET{contacts_pro}|?{' ',''})<span class="#EDIT{telfax_pro}">]
+		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})<:inscription2:telephone_pro:> : [<span class="#EDIT{telephone_pro} tel">(#TELEPHONE_PRO|?{#TELEPHONE_PRO,<:inscription2:non_renseigne:>})]</span><br />]
+		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|?{' ',''})[<:inscription2:mobile_pro:> : <span class="#EDIT{mobile_pro} fax">(#MOBILE_PRO|?{#MOBILE_PRO,<:inscription2:mobile_pro:> <:inscription2:non_renseigne:>})</span></span><br />]]
+		[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[<:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax">(#FAX_PRO|?{#FAX_PRO,<:inscription2:fax_pro:> <:inscription2:non_renseigne:>})</span>]]
+	[(#GET{contacts_pro}|?{'</span><br />',''})]
+
 </BOUCLE_auteur_elargi>
 </BOUCLE_auteurs>
 <br class="nettoyeur" />

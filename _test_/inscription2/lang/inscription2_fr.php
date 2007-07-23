@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fax' => 'Fax',
 'mobile' => 'Mobile',
 'profession' => 'Profession',
-'societe' => 'Soci&eacute;t&eacute;',
+'societe' => 'Soci&eacute;t&eacute; / Association ...',
 'url_societe' => 'Site soci&eacute;t&eacute;',
 'secteur' => 'Secteur',
 'adresse_pro' => 'Adresse professionnelle',
@@ -160,6 +160,8 @@ L\'&eacute;quipe de @nom_site@',
 'votre_profil' => 'Votre profil',
 'contacts_personnels' => 'Contacts personnels',
 'contacts_pros' => 'Contacts professionnels',
+'votre_adresse' => 'Votre adresse personnelle',
+'votre_adresse_pro' => 'Votre adresse professionnelle',
 
 'page_confirmation' => 'Page de confirmation de votre inscription'
 

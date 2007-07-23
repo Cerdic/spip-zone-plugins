@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fax' => 'Fax',
 'mobile' => 'Mobile',
 'profession' => 'Profession',
-'societe' => 'Company',
+'societe' => 'Company / Non Profit Organization...',
 'url_societe' => '<NEW>Site soci&eacute;t&eacute;',
 'secteur' => 'Sector of activity',
 'adresse_pro' => 'Professionnal address',
@@ -139,6 +139,8 @@ The @nom_site@\'s Team',
 'votre_profil' => 'Your profile',
 'contacts_personnels' => 'Personnal contacts',
 'contacts_pros' => 'Professional contacts',
+'votre_adresse' => 'Your personnal address',
+'votre_adresse_pro' => 'Your professionnal address',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 

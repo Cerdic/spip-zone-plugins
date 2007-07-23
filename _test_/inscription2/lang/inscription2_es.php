@@ -138,6 +138,8 @@ El equipo de @nom_site@',
 'votre_profil' => '<NEW>Votre profil',
 'contacts_personnels' => '<NEW>Contacts personnels',
 'contacts_pros' => '<NEW>Contacts professionnels',
+'votre_adresse' => '<NEW>Votre adresse personnelle',
+'votre_adresse_pro' => '<NEW>Votre adresse professionnelle',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 
