@@ -3,16 +3,16 @@
 	Notifications
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	collectif
+	fil@rezo.net
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	dev
 	</etat>
 	<description>
-		Active les notifications par email de certaines actions
+		Active les notifications par email de certaines actions, notamment des forums et de la messagerie de l'espace priv&#233;.
 	</description>
 	<prefix>
 	Notifications
@@ -22,6 +22,20 @@
 		<nom>pre_edition</nom>
 		<action>pre_edition</action>
 		<inclure>notifications.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>notifications</nom>
+		<!-- action vide pour provoquer l'inclusion de notifications.php -->
+		<action>go</action>
+		<inclure>notifications.php</inclure>
+	</pipeline>
+
+	<icon>notifications.png</icon>
+
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>cron.php</inclure>
 	</pipeline>
 
 </plugin>
