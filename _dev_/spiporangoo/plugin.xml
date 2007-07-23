@@ -1,10 +1,10 @@
 <plugin>
 	<nom>spip orangoo</nom>
-	<auteur>[cam.lafit->http://km.azerttyu.net]</auteur>
+	<auteur>[Amir Salihefendic->http://orangoo.com/spell/], adaptation[cam.lafit->http://km.azerttyu.net]</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>
-		Int&eacute;gre un correcteur orthographique pour chaque textarea.
+		Int&eacute;gre un correcteur orthographique pour chaque zone de texte.
 		<hr/>
 		<b>Pr&eacute;requis :</b><br/>
 		le plugin Chargeur<br/>
@@ -18,5 +18,8 @@
 		<nom>header_prive</nom>
 		<inclure>spiporangoo_head.php</inclure>
 	</pipeline>
+	
+	<necessite id="chargeur" version="[0;]" />
+	
 	<chemin dir='' />
 </plugin>
