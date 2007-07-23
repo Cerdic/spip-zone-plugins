@@ -33,8 +33,8 @@
 	[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[(#SET{contacts,complet})]]]]
 	[(#GET{contacts}|?{' ',''})<span class="#EDIT{telfax}">]
 		[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})<:inscription2:telephone:> : [<span class="#EDIT{telephone} tel">(#TELEPHONE|?{#TELEPHONE,<:inscription2:non_renseigne:>})]</span><br />]
-		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">(#MOBILE|?{#MOBILE,<:inscription2:mobile:> <:inscription2:non_renseigne:>})</span></span><br />]]
-		[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[<:inscription2:fax:> : <span class="#EDIT{fax} fax">(#FAX|?{#FAX,<:inscription2:fax:> <:inscription2:non_renseigne:>})</span>]]
+		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">(#MOBILE|?{#MOBILE,<:inscription2:non_renseigne:>})</span></span><br />]]
+		[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[<:inscription2:fax:> : <span class="#EDIT{fax} fax">(#FAX|?{#FAX,<:inscription2:non_renseigne:>})</span>]]
 	[(#GET{contacts}|?{'</span><br />',''})]
 	<span class="#_auteurs:EDIT{hyperlien}">[<:inscription2:website:> <a href="#_auteurs:URL_SITE" class="url spip_out" rel="me">(#_auteurs:NOM_SITE)</a>]</span>
 	
@@ -61,8 +61,8 @@
 	[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[(#SET{contacts_pro,complet})]]]]
 	[(#GET{contacts_pro}|?{' ',''})<span class="#EDIT{telfax_pro}">]
 		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})<:inscription2:telephone_pro:> : [<span class="#EDIT{telephone_pro} tel">(#TELEPHONE_PRO|?{#TELEPHONE_PRO,<:inscription2:non_renseigne:>})]</span><br />]
-		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|?{' ',''})[<:inscription2:mobile_pro:> : <span class="#EDIT{mobile_pro} fax">(#MOBILE_PRO|?{#MOBILE_PRO,<:inscription2:mobile_pro:> <:inscription2:non_renseigne:>})</span></span><br />]]
-		[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[<:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax">(#FAX_PRO|?{#FAX_PRO,<:inscription2:fax_pro:> <:inscription2:non_renseigne:>})</span>]]
+		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|?{' ',''})[<:inscription2:mobile_pro:> : <span class="#EDIT{mobile_pro} fax">(#MOBILE_PRO|?{#MOBILE_PRO,<:inscription2:non_renseigne:>})</span></span><br />]]
+		[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[<:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax">(#FAX_PRO|?{#FAX_PRO,<:inscription2:non_renseigne:>})</span>]]
 	[(#GET{contacts_pro}|?{'</span><br />',''})]
 
 </BOUCLE_auteur_elargi>
