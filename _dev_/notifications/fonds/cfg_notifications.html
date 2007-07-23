@@ -100,7 +100,6 @@ Les événements suivants peuvent déclencher une notification par email.
 <label>
 <input type="checkbox" name="messagerie" [checked="(#ENV{messagerie}?{checked})"] id="messagerie" />
 <strong>Signaler les nouveaux messages privés</strong>&nbsp;: activer cette option pour que le site envoie une notification lorsqu'un rédacteur n'a pas vu un nouveau message dans sa messagerie. Le système attend 20 minutes avant de notifier le rédacteur, de manière à ne pas spammer un rédacteur déjà en ligne dans l'espace privé.
-	<br /><input type="text" name="moderateurs_signatures" value="[(#ENV{moderateurs_signatures}|entites_html)]" id="moderateurs_signatures" size="60" />
 </label>
 
 </p>
