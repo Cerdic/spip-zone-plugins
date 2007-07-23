@@ -25,7 +25,7 @@
 		tag-machine_fonctions.php
 	</fonctions>
 	<prefix>
-	  tag-machine
+	  tag_machine
 	</prefix>
 	<!--rien d'autre, on fournit juste un inc-->
 </plugin>
