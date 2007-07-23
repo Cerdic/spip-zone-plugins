@@ -1,0 +1,25 @@
+<plugin>
+	<nom>orthogoogle</nom>
+	<auteur>[Amir Salihefendic->http://orangoo.com/spell/], adaptation[cam.lafit->http://km.azerttyu.net]</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		Int&eacute;gre un correcteur orthographique pour chaque zone de texte.
+		<hr/>
+		<b>Pr&eacute;requis :</b><br/>
+		le plugin Chargeur<br/>
+		<b>Pour commencer l'installtion :</b><br/>
+		Avant activation du plugin, veuillez cliquer sur <a href="../spip.php?action=charger&amp;depot=http://orangoo.com/labs/uploads/&amp;zip=googiespell_v4_0&amp;dest_path=plugins/spiporangoo/&amp;url_retour=ecrire/index.php?exec=admin_plugin">ce lien </a> 
+	</description>
+	<lien>http://www.spip-contrib.net</lien>
+	<prefix>orthogoogle</prefix>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>orthogoogle_head.php</inclure>
+	</pipeline>
+	
+	<necessite id="chargeur" version="[0;]" />
+	
+	<chemin dir='' />
+</plugin>
