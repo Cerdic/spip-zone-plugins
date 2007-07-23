@@ -161,7 +161,7 @@ function liste_mots_legender($id_document)
 
 	$retour="<div>";
 	//liste des mots clefs déjà associés
-	$query_mots=spip_query("select spip_mots.id_mot,titre from spip_mots_documents,spip_mots where spip_mots_documents.id_mot=spip_mots.id_mots AND id_document=$id_document");
+	$query_mots=spip_query("select spip_mots.id_mot,titre from spip_mots_documents,spip_mots where spip_mots_documents.id_mot=spip_mots.id_mot AND id_document=$id_document");
 	if(spip_num_rows($query_mots)){
 		$retour.=_T('motspartout:liste_mots_clefs')."<br/>";
 		while ($mot=spip_fetch_array($query_mots)){
