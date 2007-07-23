@@ -38,4 +38,6 @@
 		<inclure>cron.php</inclure>
 	</pipeline>
 
+	<necessite id='spip' version='[1.9259;]' />
+
 </plugin>

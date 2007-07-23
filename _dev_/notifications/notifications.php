@@ -4,7 +4,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ne sert qu'a charger les autres fonctions quand le plugin est appele
-// Pourra servir a modifier une notification : $x = array($quoi, $id, $options)
 function Notifications_go($x) {
 	return $x;
 }
@@ -128,13 +127,11 @@ function notifications_forumprive($quoi, $id_forum) {
 			$tous[] = $r['email_auteur'];
 	}
 
-
 	// 3. Tous les auteurs des messages qui precedent (desactive egalement)
 	// (possibilite exclusive de la possibilite precedente)
 	// TODO: est-ce utile, par rapport au thread ?
 	else if (defined('_SUIVI_FORUMS_REPONSES')
-	AND _SUIVI_FORUMS_REPONSES
-	AND $t['statut'] == 'publie') {
+	AND _SUIVI_FORUMS_REPONSES) {
 		$id_parent = $id_forum;
 		while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
 			$tous[] = $r['email_auteur'];
@@ -154,7 +151,6 @@ function notifications_forumprive($quoi, $id_forum) {
 	//
 	// Envoyer les emails
 	//
-	spip_log($destinataires);
 	foreach (array_keys($destinataires) as $email) {
 		$msg = email_notification_forum($t, $email);
 		envoyer_mail($email, $msg['subject'], $msg['body']);
