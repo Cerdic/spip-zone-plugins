@@ -6,13 +6,16 @@
 	fil@rezo.net
 	</auteur>
 	<version>
-	0.2
+	0.3
 	</version>
 	<etat>
 	dev
 	</etat>
 	<description>
 		Active les notifications par email de certaines actions, notamment des forums et de la messagerie de l'espace priv&#233;.
+
+
+	[Configuration par CFG->./index.php?exec=cfg&amp;cfg=notifications]
 	</description>
 	<prefix>
 	Notifications
@@ -39,5 +42,6 @@
 	</pipeline>
 
 	<necessite id='spip' version='[1.9259;]' />
+	<necessite id='cfg' version='[0;]' />
 
 </plugin>

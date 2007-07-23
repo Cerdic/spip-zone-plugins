@@ -1,0 +1,121 @@
+[(#REM) titre=Configuration du plugin «&nbsp;Notifications»]
+
+[(#REM) presentation= ]
+
+[(#REM) autoriser=configurer ]
+
+
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../notifications.png' alt='Logo rigolo' style="float:#LANG_RIGHT;" />
+})]
+
+<!-- descriptif=
+#GET{logo}
+<h3>Notifications</h3>
+
+<a href="http://www.spip-contrib.net/Notifications" class="spip_out">Cf. documentation</a>
+-->
+
+#CACHE{0}
+
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+
+
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx','R&#233;glage des notifications'})]
+
+Les événements suivants peuvent déclencher une notification par email.
+
+
+[(#REM) ------------------------ FORUMS PUBLICS ------------------------ ]
+<fieldset>
+<legend>
+	Forums publics
+</legend>
+<p>
+<label><input type="checkbox" name="prevenir_auteurs" [checked="(#ENV{prevenir_auteurs}?{checked})"] id="prevenir_auteurs" />
+	<strong>Auteurs</strong>&nbsp;: les auteurs reçoivent les notifications des forums postés sous leurs articles dans le site public.
+</label>
+
+</p>
+
+<p>
+<label><input type="checkbox" name="thread_forum" [checked="(#ENV{thread_forum}?{checked})"] id="thread_forum" />
+	<strong>Fil de discussion</strong>&nbsp;: les participants au même fil de discussion reçoivent les notifications des forums (publics).
+</label>
+
+</p>
+
+
+<p>
+<label>
+	<strong>Modérateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du modérateur des forums publics (ou plusieurs, séparés par des virgules).
+	<br /><input type="text" name="moderateurs_forum" value="[(#ENV{moderateurs_forum}|entites_html)]" id="moderateurs_forum" size="60" />
+</label>
+
+</p>
+
+<p><small>&Agrave; noter : dans le cas des forums modérés à priori, seuls les auteurs ayant le droit de valider les forums sont notifiés lors de l'envoi du forum ; les autres destinataires sont notifiés lors de la validation du message par le modérateur.</small></p>
+
+</fieldset>
+
+
+[(#REM) ------------------------ FORUMS PRIVES ------------------------ ]
+<fieldset>
+<legend>
+	Forums privés
+</legend>
+<p>
+<label><input type="checkbox" name="prevenir_auteurs_prive" [checked="(#ENV{prevenir_auteurs_prive}?{checked})"] id="prevenir_auteurs_prive" />
+	<strong>Auteurs</strong>&nbsp;: les auteurs reçoivent les notifications des forums postés sous leurs articles dans le site privé.
+</label>
+</p>
+
+<p>
+<label><input type="checkbox" name="thread_forum_prive" [checked="(#ENV{thread_forum_prive}?{checked})"] id="thread_forum_prive" />
+	<strong>Fil de discussion</strong>&nbsp;: les participants au même fil de discussion reçoivent les notifications des forums (privés).
+</label>
+
+</p>
+
+
+<p>
+<label>
+	<strong>Modérateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du modérateur des forums privés (ou plusieurs, séparés par des virgules).
+	<br /><input type="text" name="moderateurs_forum_prive" value="[(#ENV{moderateurs_forum_prive}|entites_html)]" id="moderateurs_forum_prive" size="60" />
+</label>
+
+</p>
+</fieldset>
+
+[(#REM) ------------------------ SIGNATURES ------------------------ ]
+<fieldset>
+<legend>
+	Signatures de pétition
+</legend>
+
+<p>
+<label>
+	<strong>Modérateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du modérateur des pétitions (ou plusieurs, séparés par des virgules).
+	<br /><input type="text" name="moderateurs_signatures" value="[(#ENV{moderateurs_signatures}|entites_html)]" id="moderateurs_signatures" size="60" />
+</label>
+
+</p>
+</fieldset>
+
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+
+</form>
+
+
