@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Initialise les reglages sous forme de tableau
 function Notifications_go($x) {
 	if (!is_array($GLOBALS['notifications']
-	= @unserialize($GLOBALS['meta']['notifications']))
+	= @unserialize($GLOBALS['meta']['notifications'])))
 		$GLOBALS['notifications'] = array();
 	return $x;
 }
@@ -112,7 +112,7 @@ function notifications_forumprive($quoi, $id_forum) {
 	}
 
 	// 2. Les moderateurs
-	if ($GLOBALS['notifications']['moderateurs_forum_prive']))
+	if ($GLOBALS['notifications']['moderateurs_forum_prive'])
 	foreach (explode(',', $GLOBALS['notifications']['moderateurs_forum_prive']) as $m) {
 		$tous[] = trim($m);
 	}

@@ -21,6 +21,13 @@ function Notifications_taches_generales_cron($taches_generales){
 // 2) de ne pas notifier un auteur qu'on vient d'ajouter a une discussion,
 //    alors qu'on va peut-etre le supprimer (erreur de choix de destinataire)
 function cron_notifications($time) {
+	if (!is_array($GLOBALS['notifications']
+	= @unserialize($GLOBALS['meta']['notifications'])))
+		$GLOBALS['notifications'] = array();
+
+	if (!$GLOBALS['notifications']['messagerie'])
+		return;
+
 	$s = spip_query("SELECT lien.id_auteur,lien.id_message, message.titre, message.texte, message.date_heure as date, auteur.nom, auteur.email, auteur.en_ligne FROM spip_auteurs_messages AS lien, spip_messages AS message, spip_auteurs AS auteur WHERE lien.id_message = message.id_message AND lien.id_auteur = auteur.id_auteur AND lien.`vu`='non'");
 
 	while ($t = spip_fetch_array($s)) {
