@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
 * Plugin Association
 *
@@ -233,6 +233,15 @@ function association_rediriger_javascript($url) {
 		exit();
 	}
 	
+function association_affiche_milieu($flux) {
+	$exec =  $flux['args']['exec'];
+	if ($exec=='auteur_infos'){
+		include_spip('inc/association_adherents');
+		$id_auteur = $flux['args']['id_auteur'];
+		$flux['data'] .= association_adherents($id_auteur);
+	}
+	return $flux;
+}	
 //Conversion de date
 function association_datefr($date) { 
 	$split = split('-',$date); 
