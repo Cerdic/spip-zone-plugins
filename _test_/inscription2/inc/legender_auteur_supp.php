@@ -66,8 +66,12 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 				$var_user['b.statut_relances'] = '1';
 			elseif($cle == 'pays'){
 				$var_user['c.pays'] = '1';
-				$var_user['c.id as id_pays'] = '1';
-			}else 
+				$var_user['c.id as id_pays'] = '1';}
+			elseif($cle == 'pays_pro'){
+				$var_user['d.pays'] = '1';
+				$var_user['d.pays as pays_pro'] = '1';
+				$var_user['d.id as id_pays_pro'] = '1';}
+			else 
 				$var_user['b.'.$cle] = '1';
 		}elseif($cle=='newsletter' and $val != ''){
 			$aux3 = array();
@@ -80,29 +84,47 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 				$aux4[] = $q;
 		}
 	}
-	
-	if($var_user['c.pays'])
+	if($var_user['c.pays'] && $var_user['d.pays'])
+		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id left join spip_pays d on b.pays_pro=d.id where a.id_auteur= $id");
+	elseif($var_user['c.pays'])
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
 	else
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
+
 	$query = spip_fetch_array($query);
+	
 	if($query['id'] == NULL)
 		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
-
+	
 	foreach ($query as $cle => $val){
-		if($cle == 'id_pays')
+		
+		if(($cle == 'id_pays') || ($cle == 'id_pays_pro'))
 			continue;
 		if($cle == 'pays'){
 			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-				. "<select name='$cle' id='$cle' class='formo'>";
+				. "<select name='$cle' id='$cle' class='formo'>"
+				. "<option value=''>"._T('inscription2:pays')."</option>";
 			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
-			foreach($liste_pays as $cle=> $val){
+			foreach($liste_pays as $cle => $val){
 				if ($cle == $query['id_pays'])
 					$corps_supp .= "<option value='$cle' selected>$val</option>";
 				else 
 					$corps_supp .= "<option value='$cle'>$val</option>";
 			}$corps_supp .= "</select>";
-		}elseif($cle!= 'id_auteur' and $cle != 'statut')
+		}
+		elseif($cle == 'pays_pro'){
+			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
+				. "<select name='$cle' id='$cle' class='formo'>"
+				. "<option value=''>"._T('inscription2:pays')."</option>";
+			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
+			foreach($liste_pays as $cle=> $val){
+				if ($cle == $query['id_pays_pro'])
+					$corps_supp .= "<option value='$cle' selected>$val</option>";
+				else 
+					$corps_supp .= "<option value='$cle'>$val</option>";
+			}$corps_supp .= "</select>";
+		}
+		elseif($cle!= 'id_auteur' and $cle != 'statut')
 		$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
 		. "<input type='text' name='$cle' class='formo' value='$val'><br />"; 
 	}
@@ -132,7 +154,6 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 			true, "", _T("icone_informations_personnelles"))
 		. $corps_supp
 		. fin_cadre_relief(true)
-		. (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur))
 		. "</div>\n" # /serif
 		. "</div>\n"; # /auteur_infos_edit
 
@@ -224,6 +245,10 @@ function legender_auteur_supp_voir($auteur, $redirect)
 				$var_user['b.statut_relances'] = '1';
 			elseif($cle == 'pays')
 				$var_user['c.pays'] = '1';
+			elseif($cle == 'pays_pro'){
+				$var_user['d.pays'] = '1';
+				$var_user['d.pays as pays_pro'] = '1';
+			}
 			else 
 				$var_user['b.'.$cle] = '1';
 		}
@@ -238,29 +263,35 @@ function legender_auteur_supp_voir($auteur, $redirect)
 				$aux4[] = $q;
 		}
 	}
-		
-	if($var_user['c.pays'])
+	if($var_user['c.pays'] && $var_user['d.pays'])
+		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id left join spip_pays d on b.pays_pro=d.id where a.id_auteur= $id");
+
+	elseif($var_user['c.pays'])
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
+
 	else
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
+
 	$query = spip_fetch_array($query);
+	
 	if($query['id_auteur'] == NULL)
 		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
-//Debut de l'affichage des données...
+
+	//Debut de l'affichage des données...
 
 	foreach ($query as $cle => $val){
-		if (strlen($val) >= 1){ $res .= "<strong>"._T('inscription2:'.$cle)." : </strong>" . $val . "<br />"; }
+		if (strlen($val) >= 1){ $res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . $val . "</p>"; }
 	}
 	if($aux4 and $aux3){
 		$res .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
 		. "<select name='news[]' id='news' multiple>";
 		foreach($aux4 as $val){
 			if (in_array($val['id_liste'], $aux3))
-				$res .= "<option value='".$val['id_liste']."' selected>".$val['titre']."</option>";
+				$res .= "<option value='".$val['id_liste']."' selected disabled>".$val['titre']."</option>";
 			else 
-				$res .= "<option value='".$val['id_liste']."'>".$val['titre']."</option>";
+				$res .= "<option value='".$val['id_liste']." disabled'>".$val['titre']."</option>";
 		}
-		$res .= "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
+		$res .= "</select></td></tr>";
 	}
 	
 	$res .= "</div>\n";
