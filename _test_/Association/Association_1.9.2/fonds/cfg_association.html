@@ -14,7 +14,7 @@
 	<!-- Informations sur l'association -->
 	<fieldset>
 		<legend><:asso:config_info_asso:></legend>
-				<label for="nom"><strong><:asso:config_libelle_nom:></strong></label>
+		<label for="nom"><strong><:asso:config_libelle_nom:></strong></label>
 		<input type="text" name="nom" [value="(#ENV{nom})"] id="nom" class='formo'/>
 		<label for="rue"><strong><:asso:config_libelle_rue:></strong></label>
 		<textarea name="rue" id="rue"  class='formo'/>[(#ENV{rue})]</textarea>
@@ -37,29 +37,32 @@
 	<!-- Options du plugin -->
 	<fieldset>
 	<legend><:asso:config_info_plugin:></legend>
-	<label>
-			<input type="checkbox" name="dons" [checked="(#ENV{dons}?{checked})"] id="dons" />
-			<strong><:asso:config_libelle_dons:></strong> 
-		</label>
-		<br />
-		<label>
-			<input type="checkbox" name="ventes" [checked="(#ENV{ventes}?{checked})"] id="ventes" />
-			<strong><:asso:config_libelle_ventes:></strong> 
-		</label>
-		<br />
-		<label>
-			<input type="checkbox" name="comptes" [checked="(#ENV{comptes}?{checked})"] id="comptes" />
-			<strong><:asso:config_libelle_comptes:></strong> 
-		</label>
-		<br />
-		<label>
-			<input type="checkbox" name="activites" [checked="(#ENV{activites}?{checked})"] id="activites" />
-			<strong><:asso:config_libelle_activites:></strong> 
-		</label>
-		<br />
+		<input type="checkbox" name="comptes" [checked="(#ENV{comptes}?{checked})"] id="comptes" />
+		<label><strong><:asso:config_libelle_comptes:></strong></label><br />			
+		<input type="checkbox" name="dons" [checked="(#ENV{dons}?{checked})"] id="dons" />
+		<label><strong><:asso:config_libelle_dons:></strong> </label><br />
+		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
+		<input type="text" name="pc_dons" value="#ENV{pc_dons}" id="pc_dons" /> <br />
+		<input type="checkbox" name="ventes" [checked="(#ENV{ventes}?{checked})"] id="ventes" />
+		<label><strong><:asso:config_libelle_ventes:></strong> </label><br />		
+		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
+		<input type="text" name="pc_ventes" value="#ENV{pc_ventes}" id="pc_ventes" /> <br />
+		<input type="checkbox" name="activites" [checked="(#ENV{activites}?{checked})"] id="activites" />
+		<label><strong><:asso:config_libelle_activites:></strong></label> <br />
+		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
+		<input type="text" name="pc_activites" value="#ENV{pc_activites}" id="pc_activites" /> <br />
 		<label for="indexation"><strong><:asso:config_libelle_indexation:></strong></label>
-		<input type="radio" name="indexation" value="num" [checked="(#ENV{indexation}|=={num}|?{checked})"] id="indexation" /><:asso:config_libelle_id_adherent:>
-		<input type="radio" name="indexation" value="ref" [checked="(#ENV{indexation}|=={ref}|?{checkted})"] id="indexation" /><:asso:config_libelle_id_asso:>
+		<input type="radio" name="indexation" value="id_adherent" [checked="(#ENV{indexation}|=={id_adherent}|?{checked})"] id="indexation" /><:asso:config_libelle_id_adherent:>
+		<input type="radio" name="indexation" value="id_asso" [checked="(#ENV{indexation}|=={id_asso}|?{checkted})"] id="indexation" /><:asso:config_libelle_id_asso:> <br />
+		<label for="secteurs"><strong><:asso:config_libelle_secteurs:></strong></label>
+		<input type="text" name="secteurs" [value="(#ENV{secteurs})"] id="secteurs"  class='formo'/>
+		<B_spip_listes>
+		<label for="spip_listes"><strong><:asso:config_libelle_spip_listes:></strong></label>
+		<select name="spip_liste" id="spip_listes"class='formo'/>
+		<BOUCLE_spip_listes(SPIP_LISTES)>
+		<option value="#ID_LISTE" [selected="(#ENV{spip_liste}|=={id_liste}|?{selected})"]>#TITRE</option>
+		</BOUCLE_spip_listes>
+		
 	</fieldset>
 
 <div><input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" /></div>
