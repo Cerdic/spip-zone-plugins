@@ -216,7 +216,7 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 //echo '<td class ='.$class.'>'.$data["portable"].'</td>';
 //echo '<td class ='.$class.'>'.$data["telephone"].'</td>';
 		echo '<td class ='.$class.' style="text-align:right;">'.$data["id_asso"].'</td>'; //rfrence interne
-		echo '<td class ='.$class.'>'.$data["valeur"].'</td>';
+		echo '<td class ='.$class.'>'.$data["categorie"].'</td>';
 		echo '<td class ='.$class.'>'.association_datefr($data['validite']).'</td>';
 //echo '<td class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
 //echo '<td class ='.$class.'>'.$data["remarques"].'</td>';
@@ -241,7 +241,7 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 				echo '<a href="'.generer_url_ecrire("auteur_infos","id_auteur=".$data['id_auteur']).'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
 			}
 		}
-		else { echo '&nbsp;</td>'; }
+		else { echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/adher-12.gif"></td>'; }
 //echo '<td class ='.$class.'>';
 //if (empty($data["email"])) 
 //{ echo '&nbsp;</td>'; }

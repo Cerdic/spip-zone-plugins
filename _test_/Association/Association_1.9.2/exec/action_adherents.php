@@ -41,7 +41,6 @@ function exec_action_adherents() {
 	$sexe=$_POST['sexe'];
 	$email=$_POST['email'];
 	$rue=addslashes($_POST['rue']);
-	$numero=addslashes($_POST['numero']);
 	$ville=addslashes($_POST['ville']);
 	$cp=$_POST['cp'];
 	$telephone=$_POST['telephone'];
@@ -99,14 +98,21 @@ function exec_action_adherents() {
 			$query = spip_query("SELECT * FROM spip_auteurs WHERE email='$email'");          
 			if (!spip_fetch_array($query))  {   
 				$sql=spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) VALUES ('$nom_inscription', '$email', '$login', '$mdpass', '$statut', '$htpass', '$cookie') ");
-				if ($sql) { echo '<p><strong>'._T('asso:adherent_message_ajout_adherent_suite').'</strong></p>'; }
-			}			
+				if ($sql) { echo '<p><strong>'._T('asso:adherent_message_ajout_adherent_suite').'</strong></p>'; }			
+			}		
+			
 			//on enregistre l'id_auteur
 			$query=spip_query("SELECT * FROM spip_auteurs WHERE email='$email' ");
 			while ($data=spip_fetch_array($query)) {
 				$id_auteur=$data['id_auteur'];
 				$email=$data['email'];
 				spip_query("UPDATE spip_asso_adherents SET id_auteur=$id_auteur  WHERE email='$email' AND email <>'' ");
+				
+				//Inscription spip-listes 1
+				$query=spip_query("SELECT * FROM spip_auteurs_listes WHERE id_auteur='$id_auteur' ");
+				if (!spip_fetch_array($query))  {   
+					spip_query ("INSERT INTO spip_auteurs_listes (id_auteur, id_liste, date_inscription) VALUES ( '$id_auteur', '$id_liste', '1', NOW() ) ");	
+				}
 			}
 			echo '<p>';
 			icone(_T('asso:bouton_retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
