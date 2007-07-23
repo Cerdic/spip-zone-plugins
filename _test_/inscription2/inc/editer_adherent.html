@@ -214,7 +214,7 @@ $().ready(function() {
 			include(_DIR_PLUGIN_INSCRIPTION2."inc/pays.php");
 					echo "<option value=''>"._T('inscription2:pays')."</option>";
 				foreach($liste_pays as $cle=> $val){
-				if ($cle == $query['id_pays'])
+				if ($cle == $query['id_pays_pro'])
 					echo "<option value='$cle' selected>$val</option>";
 				else 
 					 echo "<option value='$cle'>$val</option>";
