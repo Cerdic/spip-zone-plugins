@@ -1,0 +1,19 @@
+[(#REM)
+
+	Vue des mots-clés tags.
+	Nécessite le plugin tag-machine.
+
+]
+#CACHE{0}
+
+<BOUCLE_article(ARTICLES){id_article}{tous}>
+
+	[(#ENV*{tags}|ajouter_etiquettes{#ID_ARTICLE,tags,articles,id_article,true})]
+
+	<B_tags>
+	<div class="#EDIT{tags}">
+		<small>Tags : <BOUCLE_tags(MOTS){id_article}{", "}><a href="#URL_MOT">#TITRE</a></BOUCLE_tags></small>
+	</div>
+	</B_tags>
+
+</BOUCLE_article>
