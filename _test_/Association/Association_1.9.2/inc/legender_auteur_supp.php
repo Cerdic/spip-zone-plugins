@@ -27,58 +27,87 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
 
-
+	if (lire_config('association/indexation')=="id_asso")
+	{$id=$auteur['id_asso'];}
+	else{$id=$auteur['id_adherent'];}
 	$setconnecte = ($connect_id_auteur == $id_auteur);
 
 	$corps_supp = '';
 
 // Le formulaire en lui meme...
 	$corps_supp .= "<b>"._T('asso:adherent_libelle_reference_interne')."</b>"
-	. "<br /><input type='text' name='id_asso' class='formo' value=\"".entites_html($auteur['id_asso'])."\" />\n"
+	. "<input type='text' name='id_asso' class='formo' readonly='true' value='".$id."' />\n"
 	. "<b>"._T('asso:adherent_libelle_nom')."</b>"
-	. "<br /><input type='text' name='nom' class='formo' value=\"".entites_html($auteur['nom'])."\" />\n"
+	. "<input type='text' name='nom' class='formo' value=\"".entites_html($auteur['nom'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_prenom')."</b>"
-	. "<br /><input type='text' name='prenom' class='formo' value=\"".entites_html($auteur['prenom'])."\" />\n"
-	. "<b>"._T('asso:adherent_libelle_sexe')."</b>"
-	. "<br /><input type='text' name='sexe' class='formo' value=\"".entites_html($auteur['sexe'])."\" />\n"
-	. "<b>"._T('asso:adherent_libelle_date_naissance')."</b>"
-	. "<br /><input type='text' name='naissance' class='formo' value=\"".entites_html($auteur['naissance'])."\" />\n"
+	. "<input type='text' name='prenom' class='formo' value=\"".entites_html($auteur['prenom'])."\" />\n"
+	. "<b>"._T('asso:adherent_libelle_sexe')."</b><br />";
+	$corps_supp .= _T('asso:adherent_libelle_homme')."<input type='radio' name='sexe'  value='H'";
+	if ($auteur['sexe']=='H') {$corps_supp.= "checked='checked'";}
+	$corps_supp.= " />\n";
+	$corps_supp .= _T('asso:adherent_libelle_femme')."<input type='radio' name='sexe'  value='F'";
+	if ($auteur['sexe']=='F') {$corps_supp.= "checked='checked'";}
+	$corps_supp.= " />\n";
+	$corps_supp .= "<br /><b>"._T('asso:adherent_libelle_date_naissance')."</b>"
+	. "<input type='text' name='naissance' class='formo' value=\"".entites_html($auteur['naissance'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_fonction')."</b>"
-	. "<br /><input type='text' name='fonction' class='formo' value=\"".entites_html($auteur['fonction'])."\" />\n"	
+	. "<input type='text' name='fonction' class='formo' value=\"".entites_html($auteur['fonction'])."\" />\n"	
 	. "<b>"._T('asso:adherent_libelle_rue')."</b>"
-	. "<br /><textarea name='rue' class='formo'>".entites_html($auteur['rue'])."</textarea>\n"
+	. "<textarea name='rue' class='formo'>".entites_html($auteur['rue'])."</textarea>\n"
 	. "<b>"._T('asso:adherent_libelle_codepostal')."</b>"
-	. "<br /><input type='text' name='cp' class='formo' value=\"".entites_html($auteur['cp'])."\" />\n"
+	. "<input type='text' name='cp' class='formo' value=\"".entites_html($auteur['cp'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_ville')."</b>"
-	. "<br /><input type='text' name='ville' class='formo' value=\"".entites_html($auteur['ville'])."\" />\n"
+	. "<input type='text' name='ville' class='formo' value=\"".entites_html($auteur['ville'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_portable')."</b>"
-	. "<br /><input type='text' name='portable' class='formo' value=\"".entites_html($auteur['portable'])."\" />\n"
+	. "<input type='text' name='portable' class='formo' value=\"".entites_html($auteur['portable'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_telephone')."</b>"
-	. "<br /><input type='text' name='telephone' class='formo' value=\"".entites_html($auteur['telephone'])."\" />\n"
+	. "<input type='text' name='telephone' class='formo' value=\"".entites_html($auteur['telephone'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_profession')."</b>"
 	. "<br /><input type='text' name='profession' class='formo' value=\"".entites_html($auteur['profession'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_societe')."</b>"
-	. "<br /><input type='text' name='societe' class='formo' value=\"".entites_html($auteur['societe'])."\" />\n"
+	. "<input type='text' name='societe' class='formo' value=\"".entites_html($auteur['societe'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_secteur')."</b>"
-	. "<br /><input type='text' name='secteur' class='formo' value=\"".entites_html($auteur['secteur'])."\" />\n"
-	. "<b>"._T('asso:adherent_libelle_accord')."</b>"
-	. "<br /><input type='text' name='publication' class='formo' value=\"".entites_html($auteur['publication'])."\" />\n"
-	. "<b>"._T('asso:adherent_libelle_utilisateur1')."</b>"
-	. "<br /><input type='text' name='utilisateur1' class='formo' value=\"".entites_html($auteur['utilisateur1'])."\" />\n"	
-	. "<b>"._T('asso:adherent_libelle_utilisateur2')."</b>"
-	. "<br /><input type='text' name='utilisateur2' class='formo' value=\"".entites_html($auteur['utilisateur2'])."\" />\n"	
-	. "<b>"._T('asso:adherent_libelle_utilisateur3')."</b>"
-	. "<br /><input type='text' name='utilisateur3' class='formo' value=\"".entites_html($auteur['utilisateur3'])."\" />\n"
+	. "<select type='text' name='secteur' class='formo' />\n";
+	
+	$arr=(lire_config('association/secteurs'));
+	$arr=explode(",", $arr);
+	foreach ($arr as $value){
+	$corps_supp .= "<option value='".$value."'";
+	if ($value==$auteur['secteur']) {$corps_supp.= "selected='selected'";}
+	$corps_supp.= " />".$value."</option>\n";}
+	$corps_supp.= "</select> \n";
+	$corps_supp.= "<b>"._T('asso:adherent_libelle_accord')."</b><br />";
+	$corps_supp .= _T('asso:adherent_libelle_oui')."<input type='radio' name='publication'  value='oui'";
+	if ($auteur['publication']=='oui') {$corps_supp.= "checked='checked'";}
+	$corps_supp.= " />\n";
+	$corps_supp .= _T('asso:adherent_libelle_non')."<input type='radio' name='publication'  value='non'";
+	if ($auteur['publication']=='non') {$corps_supp.= "checked='checked'";}
+	$corps_supp.= " />\n"
+	. "<br /><b>"._T('asso:adherent_libelle_utilisateur1')."</b>"
+	. "<br /><input type='text' name='utilisateur1' class='formo' value=\"".entites_html($auteur['utilisateur1'])."\" />\n"
+	. "<b>"._T('asso:adherent_libelle_utilisateur2')."</b><br />";	
+	$corps_supp.= _T('asso:adherent_libelle_oui')."<input type='radio' name='utilisateur2'  value='oui'";
+	if ($auteur['utilisateur2']=='oui') {$corps_supp.= "checked='checked'";}
+	$corps_supp.= " />\n"
+	. _T('asso:adherent_libelle_non')."<input type='radio' name='utilisateur2'  value='non'";
+	if ($auteur['utilisateur2']=='non') {$corps_supp.= "checked='checked'";}
+	$corps_supp.= " />\n"
+	. "<br /><b>"._T('asso:adherent_libelle_utilisateur3')."</b>"
+	. "<input type='text' name='utilisateur3' class='formo' value=\"".entites_html($auteur['utilisateur3'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_utilisateur4')."</b>"
-	. "<br /><input type='text' name='utilisateur4' class='formo' value=\"".entites_html($auteur['utilisateur4'])."\" />\n"
+	. "<input type='text' name='utilisateur4' class='formo' value=\"".entites_html($auteur['utilisateur4'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_categorie')."</b>"
-	. "<br /><input type='text' name='categorie' class='formo' value=\"".entites_html($auteur['categorie'])."\" />\n"	
-	. "<b>"._T('asso:adherent_libelle_validite')."</b>"
-	. "<br /><input type='text' name='validite' class='formo' value=\"".entites_html($auteur['validite'])."\" />\n"	
-	. "<b>"._T('asso:adherent_libelle_statut')."</b>"
-	. "<br /><input type='text' name='statut' class='formo' value=\"".entites_html($auteur['statut'])."\" />\n"
+	. "<select type='text' name='categorie' class='formo' />\n"
+	. "<option value=''></option>";
+	$query=spip_query( "SELECT * FROM spip_asso_categories ");
+	while ($data=spip_fetch_array($query)) {
+	$corps_supp .= "<option value='".$data['valeur']."'";
+	if ($auteur['categorie']==$data['valeur']) {$corps_supp.= "selected='selected'";}
+	$corps_supp .= "'>".$data['libelle']."</option>";
+	}
+	$corps_supp.= "</select>\n"
 	. "<b>"._T('asso:adherent_libelle_remarques')."</b>"
-	. "<br /><textarea name='remarques' class='formo'>".entites_html($auteur['remarques'])."</textarea>\n";
+	. "<textarea name='remarques' class='formo'>".entites_html($auteur['remarques'])."</textarea>\n";
 
 	$att = " style='float:         "
 	. $GLOBALS['spip_lang_right']
@@ -88,7 +117,7 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 // Affichage du formulaire en Ajax qui reprend ce qu'il y a avant ...
 	return '<div>&nbsp;</div>'
 	. "\n<div class='serif'>"
-	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("asso:coordonnees_sup"))
+	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("asso:adherent_libelle_donnees_adherent"))
 	. ($redirect
 	     ? generer_action_auteur('legender_auteur_supp', $arg, $redirect, $corps_supp)
 	   : ajax_action_post('legender_auteur_supp', $arg, 'auteur_infos_supp', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps_supp, _T('bouton_enregistrer'), $att))
@@ -96,56 +125,76 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 	. '</div>';
 }
 
-// L'affichage des infos supplÃ©mentaires...
+// L'affichage des infos supplémentaires...
 function legender_auteur_supp_voir($auteur, $redirect)
 {
 	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $spip_lang_right ;
 
-// On rÃ©cupÃ¨re ce qui nous intÃ©resse...
-	$nom_famille=$auteur['nom_famille'];
-	$prenom=$auteur['prenom'];
-	$organisation=$auteur['organisation'];
-	$url_organisation=$auteur['url_organisation'];
-	$telephone=$auteur['telephone'];
-	$fax=$auteur['fax'];
-	$adresse=$auteur['adresse'];
-	$codepostal=$auteur['codepostal'];
-	$ville=$auteur['ville'];
-	$pays=$auteur['pays'];
-	$latitude=$auteur['latitude'];
-	$longitude=$auteur["longitude"];
-	$skype = $auteur["skype"];
+// On récupère ce qui nous intéresse...
 	$id_auteur=$auteur['id_auteur'];
+	$id_asso=$auteur['id_asso'];
+	$id_adherent=$auteur['id_adherent'];
+	$nom=$auteur['nom'];
+	$prenom=$auteur['prenom'];
+	$naissance=$auteur['naissance'];
+	$sexe=$auteur['sexe'];
+	$email=$auteur['email'];
+	$rue=$auteur['rue'];
+	$numero=$auteur['numero'];
+	$ville=$auteur['ville'];
+	$cp=$auteur['cp'];
+	$telephone=$auteur['telephone'];
+	$portable=$auteur['portable'];
+	$profession=$auteur['profession'];
+	$societe=$auteur['societe'];
+	$secteur=$auteur['secteur'];
+	$categorie=$auteur['categorie'];
+	$fonction=$auteur['fonction'];
+	$publication=$auteur['publication'];
+	$validite=$auteur['validite'];
+	$utilisateur1=$auteur['utilisateur1'];
+	$utilisateur2=$auteur['utilisateur2'];
+	$utilisateur3=$auteur['utilisateur3'];
+	$utilisateur4=$auteur['utilisateur4'];
+	$remarques=$auteur['remarques'];	
+	$statut=$auteur['statut'];
 
-//Debut de l'affichage des donnÃ©es...
+//Debut de l'affichage des données...
 	$res = debut_cadre_relief("redacteurs-24.gif", true)
 	. "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
 	. "<tr>"
 	. "<td valign='top' width='100%'>"
-	. gros_titre(_T('asso:coordonnees_sup'),'',false)
+	. gros_titre(_T('asso:adherent_libelle_donnees_adherent'),'',false)
 	. "<div>&nbsp;</div>";
 
 // N'affichons que ce qui existe...
-	if ($prenom || $nom) $res .= "<div>";
-	if (strlen($prenom) > 2){ $res .= "$prenom";}
-	if (strlen($nom_famille) > 2){ $res .= " $nom_famille";}
-	if ($prenom || $nom) $res .= "</div>";
-	if ($url_organisation) {
-		if (!$organisation) $organisation = _T('asso:affiche_organisation');
-		$res .= propre(_T('asso:affiche_organisation')." [{{".$organisation."}}->".$url_organisation."]");
+	$res .= "<div>";
+	if ($prenom) {$res .= $prenom." " ;}
+	$res .= $nom."</div>";	
+	if ($fonction){ $res .= "<div>"._T('asso:adherent_libelle_fonction').": ".$fonction."</div>";}
+	if ($id_asso){ $res .= "<div>"._T('asso:adherent_libelle_reference_interne_abrev').": ".$id_asso."</div>";}
+	if ($categorie){ $res .= "<div>"._T('asso:adherent_libelle_categorie').": ".$categorie. "</div>";}
+	if ($validite!='0000-00-00'){ $res .= "<div>"._T('asso:adherent_libelle_validite').": ".$validite. "</div>";}
+	if ($statut){ $res .= "<div>"._T('asso:adherent_libelle_statut').": "._T('asso:adherent_libelle_statut_'.$statut)."</div>";}
+	$res .= "<br />";
+	if ($rue){ $res .= "<div>".$rue."</div>";}
+	if ($cp || $ville){ 
+		$res .= "<div>";
+		if ($cp){ $res .= $cp." ";} if ($ville){ $res .= $ville;}
+		$res .= "</div>";
 	}
-	if ((strlen($organisation) > 2) && !$url_organisation){ $res .= "<div>"._T('asso:affiche_organisation')." $organisation </div>";}
-	if (strlen($telephone) > 2){ $res .= "<div>"._T('asso:affiche_telephone')." $telephone </div>";}
-	if (strlen($fax) > 2){ $res .= "<div>"._T('asso:affiche_fax')." $fax </div>";}
-	if (strlen($skype) > 2){ $res .= "<div>"._T('asso:affiche_skype')." $skype </div><hr />";}
-	if ((strlen($latitude) > 2) || (strlen($longitude) >2)){  $res .= "<div><b>"._T('asso:affiche_coordonnees_geo')."</b></div>";}
-	if (strlen($latitude) > 2){ $res .= "<div>"._T('asso:affiche_latitude')." $latitude </div>";}
-	if (strlen($longitude) > 2){ $res .= "<div>"._T('asso:affiche_longitude')." $longitude </div><hr />";}
-	if ((strlen($adresse) > 2) || (strlen($codepostal) >2) || (strlen($ville) > 2) || (strlen($pays) > 2)){ $res .= "<div><b>"._T('asso:affiche_adresse')."</b></div>";}
-	if (strlen($adresse) > 2){ $res .= "<div> $adresse </div>";}
-	if (strlen($codepostal) > 2){ $res .= "<div> $codepostal ";}
-	if (strlen($ville) > 2){ $res .= "$ville </div>";}
-	if (strlen($pays) > 2){ $res .= "<div>".propre($pays)."</div>";}
+	if ($portable){ $res .= "<div>"._T('asso:adherent_libelle_portable').": ".$portable. "</div>";}
+	if ($telephone){ $res .= "<div>"._T('asso:adherent_libelle_telephone').": ".$telephone."</div>";}
+	$res .="<br />";
+	if ($profession){ $res .= "<div>"._T('asso:adherent_libelle_profession').": ".$profession. "</div>";}
+	if ($societe){ $res .= "<div>"._T('asso:adherent_libelle_societe').": ".$societe. "</div>";}
+	if ($secteur){ $res .= "<div>"._T('asso:adherent_libelle_secteur').": ".$secteur. "</div>";}
+	if ($publication){ $res .= "<div>"._T('asso:adherent_libelle_accord').": ".$publication. "</div>";}	
+	if ($utilisateur1){ $res .= "<div>"._T('asso:adherent_libelle_utilisateur1').": ".$utilisateur1. "</div>";}
+	if ($utilisateur2){ $res .= "<div>"._T('asso:adherent_libelle_utilisateur2').": ".$utilisateur2. "</div>";}
+	if ($utilisateur3){ $res .= "<div>"._T('asso:adherent_libelle_utilisateur3').": ".$utilisateur3. "</div>";}
+	if ($utilisateur4){ $res .= "<div>"._T('asso:adherent_libelle_utilisateur4').": ".$utilisateur4. "</div>";}
+	if ($remarques){ $res .= "<div>"._T('asso:adherent_libelle_remarques').": ".$remarques. "</div>";}
 	$res .= "</td>"
 	.  "<td>";
 

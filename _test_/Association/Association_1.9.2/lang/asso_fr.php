@@ -44,6 +44,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
 	'config_libelle_id_adherent'=>'Automatis&eacute;e',
 	'config_libelle_id_asso'=>'Libre',
+	'config_libelle_num_pc'=>'R&eacute;f. comptable',
+	'config_libelle_secteurs'=>'Secteurs (s&eacute;par&eacute;s par des virgules)',	
+	'config_libelle_spip_listes'=> 'Liste de diffusion par d&eacute;faut (n&eacute;cessite le plugin Spip_listes)',
 	
 # Boutons globaux
 	'bouton_retour' => 'Retour',
@@ -88,6 +91,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_titre_liste_actifs' => 'Tous les membres actifs',
 
 	# Libelle
+	'adherent_libelle_donnees_adherent' => 'Donn&eacute;es Adh&eacute;rent',
 	'adherent_libelle_reference_interne_abrev' => 'R&eacute;f. int.',
 	'adherent_libelle_reference_interne' => 'R&eacute;f&eacute;rence interne',
 	'adherent_libelle_numero' => 'Num&eacute;ro',
