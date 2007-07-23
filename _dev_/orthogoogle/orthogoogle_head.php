@@ -1,6 +1,6 @@
 <?php
 
-	function spiporangoo_header_prive($flux){
+	function orthogoogle_header_prive($flux){
 		
 		//determine le chemin des script à charger
 		$AJS_url = find_in_path('googiespell_v4_0/googiespell/AJS.js');
