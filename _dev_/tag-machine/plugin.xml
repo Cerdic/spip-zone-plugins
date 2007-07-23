@@ -18,6 +18,9 @@
 	  </multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
+	<options>
+		tag-machine_options.php
+	</options>
 	<fonctions>
 		tag-machine_fonctions.php
 	</fonctions>
