@@ -98,11 +98,11 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	
 	foreach ($query as $cle => $val){
 		
-		if(($cle == 'id_pays') || ($cle == 'id_pays_pro'))
+		if(($cle == 'id') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
 			continue;
 		if($cle == 'pays'){
 			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-				. "<select name='$cle' id='$cle' class='formo'>"
+				. "<select name='$cle' id='$cle' class='formo' style='width:auto'>"
 				. "<option value=''>"._T('inscription2:pays')."</option>";
 			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
 			foreach($liste_pays as $cle => $val){
@@ -114,7 +114,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		}
 		elseif($cle == 'pays_pro'){
 			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-				. "<select name='$cle' id='$cle' class='formo'>"
+				. "<select name='$cle' id='$cle' class='formo' style='width:auto'>"
 				. "<option value=''>"._T('inscription2:pays')."</option>";
 			include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
 			foreach($liste_pays as $cle=> $val){

@@ -147,8 +147,12 @@ $().ready(function() {
 				$var_user['b.statut_interne'] = '1';
 			elseif($cle == 'pays'){
 				$var_user['c.pays'] = '1';
-				$var_user['c.id as id_pays'] = '1';
-			}else 
+				$var_user['c.id as id_pays'] = '1';}
+			elseif($cle == 'pays_pro'){
+				$var_user['d.pays'] = '1';
+				$var_user['d.pays as pays_pro'] = '1';
+				$var_user['d.id as id_pays_pro'] = '1';}
+			else
 				$var_user['b.'.$cle] = '1';
 		}
 		elseif($cle=='accesrestreint' and $val != ''){
@@ -172,8 +176,9 @@ $().ready(function() {
 				$aux4[] = $q;
 		}
 	}
-	
-	if($var_user['c.pays'])
+	if($var_user['c.pays'] && $var_user['d.pays'])
+		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id left join spip_pays d on b.pays_pro=d.id where a.id_auteur= $id");
+	elseif($var_user['c.pays'])
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
 	else
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
@@ -189,14 +194,25 @@ $().ready(function() {
 		// echo _DIR_PLUGIN_INSCRIPTION2."inc/pays.php";die();
 
 	foreach ($query as $cle => $val){
-		if($cle == 'id' or $cle == 'id_pays')
+		if($cle == 'id' or $cle == 'id_pays' or $cle == 'id_pays_pro')
 			continue;
 		// select
-		if($cle == 'pays' or $cle == 'statut_abonnement'){
+		if($cle == 'pays' or $cle == 'pays_pro' or $cle == 'statut_abonnement'){
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>"
 				. "<td><select name='$cle' id='$cle' >";
 			if($cle == 'pays'){
 				include(_DIR_PLUGIN_INSCRIPTION2."inc/pays.php");
+					echo "<option value=''>"._T('inscription2:pays')."</option>";
+				foreach($liste_pays as $cle=> $val){
+				if ($cle == $query['id_pays'])
+					echo "<option value='$cle' selected>$val</option>";
+				else 
+					 echo "<option value='$cle'>$val</option>";
+				}
+			}	
+			elseif($cle == 'pays_pro'){
+			include(_DIR_PLUGIN_INSCRIPTION2."inc/pays.php");
+					echo "<option value=''>"._T('inscription2:pays')."</option>";
 				foreach($liste_pays as $cle=> $val){
 				if ($cle == $query['id_pays'])
 					echo "<option value='$cle' selected>$val</option>";
@@ -209,7 +225,7 @@ $().ready(function() {
 					$selected = ($val == $val_abo)?'selected="selected"':'' ;
 					echo "<option value='$val_abo' $selected>$val_abo</option>";
 				}
-			}	
+			}
 			echo "</select></td></tr>";
 		}elseif($cle=='publication'){ // checkbox
 			if ($val == 'on')	
