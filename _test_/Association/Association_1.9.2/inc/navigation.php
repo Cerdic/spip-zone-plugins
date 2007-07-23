@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
 * Plugin Association
 *
@@ -10,8 +10,7 @@
 *  
 **/
 debut_cadre_formulaire();
-$link= generer_url_ecrire('adherents');
-$link1= generer_url_ecrire('ajout_adherent');
+$link1= generer_url_ecrire('adherents');
 $link2= generer_url_ecrire('dons');
 $link3= generer_url_ecrire('edit_relances');
 $link4= generer_url_ecrire('ventes');
@@ -23,11 +22,7 @@ $link6= generer_url_ecrire('comptes');
 echo '<table width="70%" border="0">';
 echo '<tr>';
 echo '<td>';
-icone_horizontale(_T('asso:menu2_titre_gestion_membres'), $link, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' ); 
-echo '</td>';
-
-echo '<td>';
-icone_horizontale(_T('asso:menu2_titre_ajouter_membre'),$link1, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','creer.gif');
+icone_horizontale(_T('asso:menu2_titre_gestion_membres'), $link1, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' ); 
 echo '</td>';
 
 echo '<td>';

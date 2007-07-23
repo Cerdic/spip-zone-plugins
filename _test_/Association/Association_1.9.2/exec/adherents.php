@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
 * Plugin Association
 *
@@ -147,7 +147,7 @@ function exec_adherents() {
 	echo '<td><strong>'._T('asso:adherent_libelle_validite').'</strong></td>';
 	//echo '<td><strong>'._T('asso:adherent_entete_statut_ok').'</strong></td>';
 	//echo '<td><strong>'._T('asso:adherent_entete_notes').'</strong></td>';
-	echo '<td colspan="4" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
+	echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
 	echo '<td><strong>'._T('asso:adherent_entete_supprimer_abrev').'</strong></td>';
 	echo '</tr>';
 
@@ -249,7 +249,6 @@ else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "6
 //echo '<a href="mailto:'.$data["email"].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/mail-12.png" title="'._T('asso:adherent_label_envoyer_courrier').'"></a>';
 //echo '<td class ='.$class.'><input name="cotisation[]" type="checkbox" value='.$id_adherent.'></td>';
 		echo '<td class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
-		echo '<td class ='.$class.'><a href="'.$url_edit_adherent.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
 		echo '<td class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
 		echo '<td class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_adherent'].'></td>';
 
