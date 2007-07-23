@@ -22,8 +22,8 @@ function Agenda_retourne_liste_mots($texte) {
 
 define('_format_heure', '([0-2]\d|\d)?:?([0-5]\d|\d)?');
 define('_format_annee', '([12]\d{3}|\d{2}|\d{1})?');
-define('_format_date1', '([1-9]|\d{2})/([1-9]|\d{2})/?'._format_annee.' ?'._format_heure);
-define('_format_date2', '- ?([1-9]|\d{2})/([1-9]|\d{2})/?'._format_annee);
+define('_format_date1', '([0-3]\d|[0-9]\d)/([0-1]\d|[0-9]\d)/?'._format_annee.' ?'._format_heure);
+define('_format_date2', '- ?([0-3]\d|[0-9]\d)/([0-1]\d|[0-9]\d)/?'._format_annee);
 define('_format_descrip', '" ?([^ ^"][^"]*) ?" ?("([^"]*)")? ?("([^"]*)")? ?((MOTS|REP) ?=.*)?');
 
 function Agenda_compile_une_ligne($s0) {
