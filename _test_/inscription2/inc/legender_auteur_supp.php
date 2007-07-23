@@ -26,7 +26,8 @@ function inc_legender_auteur_supp_dist($auteur)
 	
 	if (!$new) {
 		if (autoriser('modifier', 'auteur', $auteur['id_auteur'])) {
-		$corps = legender_auteur_supp_voir($auteur, $redirect);
+		$auteur_infos_voir_supp = legender_auteur_supp_voir($auteur, $redirect);
+		$corps = legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect);
 	} else {
 		$corps = ' ';
 	}
