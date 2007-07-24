@@ -6,12 +6,10 @@
 #CACHE{0}
 
 <fieldset style="background-color:#fff;">
-<legend>Votre nom complet</legend>
+<legend><:inscription2:votre_nom_complet:></legend>
 <BOUCLE_b(AUTEURS_ELARGIS){id=(#ENV{id_auteurs_elargi})}{tous}>
-<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}>
-<label><:inscription2:nom:></label> <input class="crayon-active" name="#ENV{nom}"
- style="width:#ENV{largeur}px;" value="[(#NOM**|entites_html)]" />
- </BOUCLE_auteur>
+<label><:inscription2:nom_famille:></label> <input class="crayon-active" name="#ENV{nom_famille}"
+ style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
  <br />
  <label><:inscription2:prenom:></label> <input class="crayon-active" name="#ENV{name_prenom}"
  style="width:#ENV{largeur}px;" value="[(#PRENOM**|entites_html)]" />

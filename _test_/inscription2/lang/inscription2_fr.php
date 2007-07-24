@@ -166,6 +166,7 @@ L\'&eacute;quipe de @nom_site@',
 'contacts_pros' => 'Contacts professionnels',
 'votre_adresse' => 'Votre adresse personnelle',
 'votre_adresse_pro' => 'Votre adresse professionnelle',
+'votre_nom_complet' => 'Votre nom complet',
 
 'page_confirmation' => 'Page de confirmation de votre inscription'
 

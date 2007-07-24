@@ -143,6 +143,7 @@ El equipo de @nom_site@',
 'contacts_pros' => '<NEW>Contacts professionnels',
 'votre_adresse' => '<NEW>Votre adresse personnelle',
 'votre_adresse_pro' => '<NEW>Votre adresse professionnelle',
+'votre_nom_complet' => '<NEW>Votre nom complet',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 

@@ -145,6 +145,7 @@ The @nom_site@\'s Team',
 'contacts_pros' => 'Professional contacts',
 'votre_adresse' => 'Your personnal address',
 'votre_adresse_pro' => 'Your professionnal address',
+'votre_nom_complet' => 'Your complete name',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 

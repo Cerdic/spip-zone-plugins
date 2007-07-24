@@ -166,6 +166,7 @@ L\'&eacute;quipe de @nom_site@',
 'contacts_pros' => 'Professionelle Kontakte',
 'votre_adresse' => 'Ihre persönliche Adresse',
 'votre_adresse_pro' => 'Ihre professionelle Adresse',
+'votre_nom_complet' => '<NEW>Votre nom complet',
 
 'page_confirmation' => 'Seite der Bestätigung Ihrer Einschreibung'
 
