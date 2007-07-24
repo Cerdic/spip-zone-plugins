@@ -19,7 +19,7 @@
 		
 		
 		//determine le chemin du proxy pour acceder à google speller
-		$proxy_url = $dir_spell.'sendReq.php';
+		$proxy_url = _DIR_PLUGIN_ORTHOGOOGLE.'sendReq.php';
 		
 		//determine le chemin de la mise en page
 		$css_url = $dir_spell.'googiespell.css';
