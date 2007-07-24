@@ -50,7 +50,7 @@ function inscription2_verifier_base(){
 			}elseif($val!='' and !isset($desc['field'][$cle]) and $cle == 'pays'){
 				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." int NOT NULL");
 				$desc['field'][$cle] = " int NOT NULL";
-			}elseif($val!='' and !isset($desc['field'][$cle])  and $cle != 'statut' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle)){
+			}elseif($val!='' and !isset($desc['field'][$cle])  and $cle != 'statut_nouveau' and $cle != 'nom' and $cle != 'email' and $cle != 'username' and $cle != 'statut_relances'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle)){
 				spip_query("ALTER TABLE ".$table_nom." ADD ".$cle." TEXT NOT NULL");
 				$desc['field'][$cle] = "TEXT NOT NULL";
 			}

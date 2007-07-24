@@ -3,7 +3,8 @@
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS){id_auteur}{tout}>
 
 	<div class="#_auteurs:EDIT{logo} Buddy" style="float:right;">[(#_auteurs:LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#_auteurs:LOGO_AUTEUR||image_reduire{200,0})]]</div>
-	[<p style="margin:10px 0;"><strong><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#_auteurs:NOM</span></span></strong></p>]
+	[<p style="margin:10px 0;"><strong><:inscription2:nom:> <span class="#_auteurs:EDIT{nom}">(#_auteurs:NOM)</span></strong></p>]
+	[<p style="margin:10px 0;"><strong><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></strong></p>]
 
 	<div class="#_auteurs:EDIT{bio}" style="margin:10px 0">
 	[(#BIO|?{#BIO,"..."})]

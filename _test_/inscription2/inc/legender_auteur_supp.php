@@ -57,7 +57,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	$corps_supp = '';
 	$var_user['b.id'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
-		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut'){
+		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
@@ -93,8 +93,10 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 
 	$query = spip_fetch_array($query);
 	
-	if($query['id'] == NULL)
+	if($query['id'] == NULL){
 		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
+		echo "chiotte 2";
+	}
 	
 	foreach ($query as $cle => $val){
 		
@@ -124,7 +126,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 					$corps_supp .= "<option value='$cle'>$val</option>";
 			}$corps_supp .= "</select>";
 		}
-		elseif($cle!= 'id_auteur' and $cle != 'statut')
+		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau')
 		$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
 		. "<input type='text' name='$cle' class='formo' value='$val'><br />"; 
 	}
@@ -236,7 +238,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	
 	$var_user['a.id_auteur'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
-		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut'){
+		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
@@ -274,9 +276,9 @@ function legender_auteur_supp_voir($auteur, $redirect)
 
 	$query = spip_fetch_array($query);
 	
-	if($query['id_auteur'] == NULL)
+	if($query['id_auteur'] == NULL){
 		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
-
+	}
 	//Debut de l'affichage des données...
 
 	foreach ($query as $cle => $val){

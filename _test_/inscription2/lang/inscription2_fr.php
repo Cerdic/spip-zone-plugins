@@ -139,7 +139,7 @@ L\'&eacute;quipe de @nom_site@',
 'texte' => 'Texte', 
 'html' => 'HTML',
 
-'gestion_adherent' => 'Genstion d\'adh&eacute;rents',
+'gestion_adherent' => 'Gestion d\'adh&eacute;rents',
 'configuration' => 'Configuration',
 'ajouter_adherent' => 'Ajouter adh&eacute;rent',
 'liste_adherents' => 'Liste d\'adh&eacute;rents',
