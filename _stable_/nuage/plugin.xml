@@ -1,4 +1,3 @@
-
 <plugin>
 	<version>1.2</version>
 	<nom>Nuage</nom>
@@ -7,9 +6,7 @@
 	<etat>stable</etat>
 	<lien>[Afficher les mots-cl&#233;s en faisant varier la taille de la police->http://www.spip-contrib.net/Nuage-de-mots-cles]</lien>
 	<description>Version plugin avec mod&#232;les et filtres de la contrib nuage de tags.</description>
-	<icon>
-	nuage-64.png
-	</icon>
+	<icon>nuage-64.png</icon>
 	<pipeline>
 		<nom>insert_head</nom> 
 		<inclure>nuage_pipelines_public.php</inclure>
