@@ -21,7 +21,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{par date}{inverse}><item>
 	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>][<link>(#URL_ARTICLE|url_absolue)</link>]<description>&lt;div style='width:200px'&gt;
 			&lt;div id='player'&gt;&lt;/div&gt;
-			&lt;div style='font-size:11px; font-weight:bold'&gt;[(#TITRE|texte_backend)]&lt;/div&gt;
+			&lt;div style='font-size:11px; font-weight:bold'&gt;&lt;a href='[(#URL_ARTICLE|texte_backend)]'&gt;[(#TITRE|texte_backend)]&lt;/a&gt; &lt;/div&gt;
 			&lt;div style='font-size:10px; text-align:left'&gt;[(#CHAPO|texte_backend)] &lt;/div&gt;
 			<BOUCLE_imaxe(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' title='#TITRE' width='#LARGEUR' height='#HAUTEUR'&gt;&lt;img src='[(#URL_DOCUMENT|url_absolue)]' border='0' height='60' alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe>
 			&lt;div style='font-size:10px; margin-bottom:10px'&gt;[(#DATE|date_iso)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='[(#URL_AUTEUR|url_absolue)]'&gt;(#NOM)&lt;/a&gt;]</BOUCLE_autores>&lt;/div&gt;
