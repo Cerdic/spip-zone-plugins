@@ -75,16 +75,21 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	}
 	if($var_user[email] and $aux){
 		$commentaire = message_inscription2($var_user, $mode);
-		if (is_array($commentaire)) 
-			$commentaire = envoyer_inscription2($commentaire);
-		$message = $commentaire ? '' : _T('inscription2:lisez_mail');
+		if (is_array($commentaire)) {
+			$var_user['id_auteur'] = $commentaire['id_auteur'];
+			$commentaire = true;
+			}
+
 	}
 	$var_user['message'] = $message;
 	$var_user['commentaires'] = $commentaire;
 	$var_user['mode'] = $mode;
 	$var_user['self'] = str_replace('&amp;','&',(self()));
-	return array("formulaires/inscription2", $GLOBALS['delais'],
-			$var_user);}
+	
+	return array("formulaires/inscription2_validation", $GLOBALS['delais'],
+			$var_user);
+			
+}
 
 function test_mode_inscription2($mode) {
 	return (($mode == 'redac' AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
@@ -102,11 +107,12 @@ function message_inscription2($var_user, $mode) {
 		return _T('form_forum_access_refuse');
 	
 	if ($row['statut'] == 'aconfirmer'){	// deja inscrit
-		envoyer_inscription2($row);/**RENVOYER MAIL D'INSCRIPTION **/
+		envoyer_inscription2($row['id_auteur']);/**RENVOYER MAIL D'INSCRIPTION **/
 		return _T('inscription2:mail_renvoye');
 	}
 
-	return _T('form_forum_email_deja_enregistre');}
+	return _T('form_forum_email_deja_enregistre');
+}
 
 function inscription2_nouveau($declaration){
 	$declaration = inscription2_test_login($declaration);
@@ -153,28 +159,10 @@ function inscription2_nouveau($declaration){
 	}
 
 	
-	return $declaration;}
-
-function envoyer_inscription2($var_user) {
-	include_spip('inc/mail');
-	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
-	$adresse_site = $GLOBALS['meta']["adresse_site"];
-	$message = _T('inscription2:message_auto')
-			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
-			. _T('inscription2:texte_email_inscription', array(
-			'link_activation' => $adresse_site.'/?page=inscription2_confirmation&id='
-			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=conf', 
-			'link_suppresion' => $adresse_site.'/?page=inscription2_confirmation&id='
-			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=sup',
-			'login' => $var_user['login'], 'nom_site' => $nom_site_spip ));
-
-	if (envoyer_mail($var_user['email'],
-			 "[$nom_site_spip] "._T('inscription2:activation_compte'),
-			 $message))
-		return false;
-	else
-		return _T('inscription2:probleme_email');
+	return $declaration;
 }
+
+
 
 function inscription2_test_login($var_user) {
 	if(!isset($var_user['login']))

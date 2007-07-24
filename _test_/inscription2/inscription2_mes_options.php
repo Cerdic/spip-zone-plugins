@@ -17,7 +17,7 @@
 	$spip_auteurs_elargis['id'] = "int NOT NULL";
 	foreach(lire_config('inscription2') as $cle => $val) {
 		$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
-		if($val!='' and $cle != 'nom' and $cle != 'statut_nouveau' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+		if($val!='' and $cle != 'nom' and $cle != 'statut' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
 			if($cle == 'naissance' )
 				$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 			elseif($cle == 'validite' )
@@ -75,6 +75,35 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 			$qui['statut'] == '6forum'
 			AND $id == $qui['id_auteur'];
 }
+}
+
+
+//email envoye lors de l'inscription
+
+function envoyer_inscription2($id_auteur) {
+	include_spip('inc/mail');
+	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
+	$adresse_site = $GLOBALS['meta']["adresse_site"];
+	
+	$prenom = (lire_config('inscription2/prenom')) ? "b.prenom," : "" ;
+	
+	$var_user=spip_fetch_array(spip_query("select a.nom, $prenom a.id_auteur, a.alea_actuel, a.login, a.email from spip_auteurs a join spip_auteurs_elargis b where a.id_auteur='$id_auteur' and a.id_auteur=b.id_auteur"));
+	
+	$message = _T('inscription2:message_auto')."\n\n"
+			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
+			. _T('inscription2:texte_email_inscription', array(
+			'link_activation' => $adresse_site.'/?page=inscription2_confirmation&id='
+			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=conf', 
+			'link_suppresion' => $adresse_site.'/?page=inscription2_confirmation&id='
+			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=sup',
+			'login' => $var_user['login'], 'nom_site' => $nom_site_spip ));
+
+	if (envoyer_mail($var_user['email'],
+			 "[$nom_site_spip] "._T('inscription2:activation_compte'),
+			 $message))
+		return "ok";
+	else
+		return _T('inscription2:probleme_email');
 }
 
 ?>
