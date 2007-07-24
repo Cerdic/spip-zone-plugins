@@ -17,7 +17,7 @@
 	$spip_auteurs_elargis['id'] = "int NOT NULL";
 	foreach(lire_config('inscription2') as $cle => $val) {
 		$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $cle);
-		if($val!='' and $cle != 'nom' and $cle != 'statut' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
+		if($val!='' and $cle != 'nom' and $cle != 'statut_nouveau' and $cle != 'email' and $cle != 'username' and $cle != 'statut_int'  and $cle != 'accesrestreint' and !ereg("^(categories|zone|newsletter).*$", $cle) ){
 			if($cle == 'naissance' )
 				$spip_auteurs_elargis[$cle] = "DATE DEFAULT '0000-00-00' NOT NULL";
 			elseif($cle == 'validite' )
@@ -48,7 +48,7 @@
 		$query = spip_fetch_array($query);
 		/*var_dump($query);
 		exit;*/
-		//$GLOBALS['auteur_session'] = array_merge($query,$GLOBALS['auteur_session'] );
+		$GLOBALS['auteur_session'] = array_merge($query,$GLOBALS['auteur_session'] );
 		
 	}
 	
