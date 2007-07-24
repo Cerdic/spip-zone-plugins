@@ -16,7 +16,7 @@
 
 	<icon>googiespell.png</icon>
 
-	<necessite id="lib:googiespell" src="http://orangoo.com/labs/uploads/googiespell_v4_0.zip" />
+	<necessite id="lib:googiespell_v4_0" src="http://orangoo.com/labs/uploads/googiespell_v4_0.zip" />
 	
 	<chemin dir='' />
 </plugin>
