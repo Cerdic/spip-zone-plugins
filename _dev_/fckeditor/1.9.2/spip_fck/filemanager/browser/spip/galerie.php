@@ -3,6 +3,7 @@
 	$chemin = "../../../../../../";
 	$cheminEcrire = $chemin."ecrire/";
 	$cheminImages = $chemin."dist/images/";
+	$cheminConfig=$chemin."config/";
 	if (defined("_ECRIRE_INC_VERSION")) return;
 	define("_ECRIRE_INC_VERSION", "1");
 	function spip_connect_db($host, $port, $login, $pass, $db) {
@@ -10,7 +11,7 @@
 		$fck_mysql_link = @mysql_connect($host, $login, $pass);
 		mysql_select_db($db);
 	}
-	include ($cheminEcrire.'inc_connect.php');
+	include ($cheminConfig.'connect.php');
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>

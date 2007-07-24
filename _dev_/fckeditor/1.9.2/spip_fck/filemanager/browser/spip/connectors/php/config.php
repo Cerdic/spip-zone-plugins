@@ -21,6 +21,7 @@
 global $Config ;
 
 $cheminEcrire = "../../../../../../../../ecrire/";
+$cheminConfig="../../../../../../../../config/";
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 function spip_connect_db($host, $port, $login, $pass, $db) {
@@ -28,7 +29,7 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	$fck_mysql_link = @mysql_connect($host, $login, $pass);
 	mysql_select_db($db);
 }
-include ($cheminEcrire.'inc_connect.php');
+	include ($cheminConfig.'connect.php');
 
 // SECURITY: You must explicitelly enable this "connector". (Set it to "true").
 $Config['Enabled'] = true ;
@@ -46,11 +47,10 @@ $Config['Enabled'] = true ;
     $chemin_final .="IMG/";
     $Config['CheminImgSpip'] = $chemin_final;
 
+
 //**************************************************************************************    
 //Décommenter cette ligne pour faire du chemin par défaut, le chemin des images de spip
     $Config['UserFilesPath']=$Config['CheminImgSpip'];
-
-
 
 
 // Fill the following value it you prefer to specify the absolute path for the
