@@ -18,8 +18,8 @@
 		<nom>header_prive</nom>
 		<inclure>orthogoogle_head.php</inclure>
 	</pipeline>
-	
-	<necessite id="chargeur" version="[0;]" />
+
+	<necessite id="lib:googiespell" src="http://orangoo.com/labs/uploads/googiespell_v4_0.zip" />
 	
 	<chemin dir='' />
 </plugin>

@@ -1,20 +1,26 @@
 <?php
 
 	function orthogoogle_header_prive($flux){
-		
-		//determine le chemin des script à charger
-		$AJS_url = find_in_path('googiespell_v4_0/googiespell/AJS.js');
-		$spelljs_url = find_in_path('googiespell_v4_0/googiespell/googiespell.js');
-		$spellmulti_url = find_in_path('googiespell_v4_0/googiespell/googiespell_multiple.js');
-		$cookiejs_url = find_in_path('googiespell_v4_0/googiespell/cookiesupport.js');
-		$dir_spell = find_in_path('googiespell_v4_0/googiespell/');
+
+		// determine le chemin des script à charger
+		$dir_spell = find_lib('googiespell');
+
+		// lib:googiespell manquante
+		if (!$dir_spell)
+			return $flux;
+
+		$AJS_url = find_in_path($dir_spell.'AJS.js');
+
+		$spelljs_url = find_in_path($dir_spell.'googiespell.js');
+		$spellmulti_url = find_in_path($dir_spell.'googiespell_multiple.js');
+		$cookiejs_url = find_in_path($dir_spell.'cookiesupport.js');
 		
 		
 		//determine le chemin du proxy pour acceder à google speller
-		$proxy_url = find_in_path('sendReq.php');
+		$proxy_url = find_in_path($dir_spell.'sendReq.php');
 		
 		//determine le chemin de la mise en page
-		$css_url = find_in_path('googiespell_v4_0/googiespell/googiespell.css');
+		$css_url = find_in_path($dir_spell.'googiespell.css');
 		
 		//insére dans le <head> les appels aux scripts
 		$flux .= '<script type="text/javascript" src="'.$AJS_url.'"></script>
