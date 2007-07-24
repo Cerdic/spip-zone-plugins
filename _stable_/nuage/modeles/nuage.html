@@ -3,4 +3,6 @@
 (#ID_MOT|nuage{#TITRE,#URL_MOT})
 ]<BOUCLE_pop(ARTICLES){id_mot}></BOUCLE_pop>[
 (#ID_MOT|nuage{'','',#TOTAL_BOUCLE})
-]<//B_pop></BOUCLE_tags>[(#REM|sinon{0}|nuage{'','',-1,#GET{expose}})]
+]<//B_pop></BOUCLE_tags>[<ul class="nuage">
+	(#FOREACH{NUAGE,foreach_nuage})
+</ul>]

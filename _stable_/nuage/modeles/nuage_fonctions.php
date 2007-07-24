@@ -1,8 +1,21 @@
 <?php
 
+function balise_NUAGE_dist($p) {
+	$p->interdire_scripts = false;
+	if(function_exists('balise_ENV'))
+		return balise_ENV($p, 'nuage(0, "", "", -1, $Pile["vars"]["expose"])');
+	else
+		return balise_ENV_dist($p, 'nuage(0, "", "", -1, $Pile["vars"]["expose"])');
+	return $p;
+}
+
+function restituer($valeur, $cle = 'url') {
+	return $valeur[$cle];
+}
+
 function nuage($id_mot, $titre = '', $url = '', $poids = -1, $expose = array()){
-	static $nuage;
-	$texte = '';
+	static $nuage = array();
+	$test = array();
 	if($titre and $url){
 		$nuage['titre'][$id_mot] = $titre;
 		$nuage['url'][$id_mot] = $url;
@@ -15,22 +28,23 @@ function nuage($id_mot, $titre = '', $url = '', $poids = -1, $expose = array()){
 		$url = $nuage['url'];
 		$poids = $nuage['poids'];
 		$max = empty($poids)?0:max($poids);
-		if($max>0){
+		if($max>0) {
 			foreach ($titre as $id => $t) {
 				$score = $poids[$id]/$max; # entre 0 et 1
 				if($score > 0.05){
 					$s = ($unite=floor($score += 0.900001)) . '.' . floor(10*($score - $unite));
-					$l = $t.'<span class="frequence"> ('.$poids[$id]."/".$max.")</span>";
-					$class = in_array($id, $expose) ? ' class="on"': '';
-					$texte .= '<li><a rel="tag" href="'.$url[$id].'" style="font-size: '.$s.'em;"'.$class.'>';
-					$texte .= $l.'</a></li>'."\n";
+					$test[$t] = array(
+						'url'   => $url[$id],
+						'poids' => $poids[$id].'/'.$max,
+						'style' => 'font-size: '.$s.'em;',
+						'class' => in_array($id, $expose)
+					);
 				}
 			}
-			$texte = $texte ? '<ul class="nuage">'."\n".$texte."</ul>\n":"";
 			$nuage = array();
 		}
 	}
-	return $texte;
+	return !empty($test) ? $test : '';
 }
 
 ?>
