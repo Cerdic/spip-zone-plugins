@@ -3,51 +3,58 @@
  */
 
 // on dépend de jQuery
-if (typeof jQuery == 'function') {
-	jQuery(document).ready(function(){
-		boutonstexte.tmp = '';
-		boutonstexte.fixedUp = jQuery("img.textsizeup");
-		if (boutonstexte.fixedUp.length) {
-			boutonstexte.fixedUp
-			  .click(function() {boutonstexte.fontBigger();})
-			  .attr({'alt':boutonstexte.txtSizeUp, 'title':boutonstexte.txtSizeUp});
-		} else if (boutonstexte.txtSizeUp) {
-			boutonstexte.tmp +=
-			  '<button class="textsizeup"' +
-			  'onclick="boutonstexte.fontBigger(this);" alt="' +
-			  boutonstexte.txtSizeUp + '" title="' +
-			  boutonstexte.txtSizeUp + '"><img src="' +
-			  boutonstexte.imgPath + '/fontsizeup.png" /></button>';
+if (typeof jQuery == 'function')
+(function($){
+	$(function(){
+
+		var boutons = $('<span class="boutonstexte"></span>');
+
+		if (!$("img.textsizeup").length && boutonstexte.txtSizeUp) {
+			$('<button class="textsizeup"' +
+			  '"><img src="' + boutonstexte.imgPath +
+			  '/fontsizeup.png" /></button>')
+			.appendTo(boutons);
 		}
-		boutonstexte.fixedDown = jQuery("img.textsizedown");
-		if (boutonstexte.fixedDown.length) {
-			boutonstexte.fixedDown
-			  .click(function() {boutonstexte.fontSmaller();})
-			  .attr({'alt':boutonstexte.txtSizeDown, 'title':boutonstexte.txtSizeDown});
-		} else if (boutonstexte.txtSizeDown) {
-			boutonstexte.tmp +=
-			  '<button class="textsizedown"' +
-			  'onclick="boutonstexte.fontSmaller(this);" alt="' +
-			  boutonstexte.txtSizeDown + '" title="' +
-			  boutonstexte.txtSizeDown + '"><img src="' +
-			  boutonstexte.imgPath + '/fontsizedown.png" /></button>';
+		if (!$("img.textsizedown").length && boutonstexte.txtSizeUp) {
+			$('<button class="textsizedown"' +
+			  '"><img src="' + boutonstexte.imgPath +
+			  '/fontsizedown.png" /></button>')
+			.appendTo(boutons);
 		}
-		if (boutonstexte.txtOnly) {
-			boutonstexte.tmp +=
-			  '<button class="textonly"' +
-			  'onclick="boutonstexte.textOnly(this);" alt="' +
-			  boutonstexte.txtOnly + '" title="' +
-			  boutonstexte.txtOnly + '"><img src="' +
-			  boutonstexte.imgPath + '/textonly.png" /></button>';
+		if (!$("img.textonly").length && boutonstexte.txtSizeUp) {
+			$('<button class="textonly"' +
+			  '"><img src="' + boutonstexte.imgPath +
+			  '/textonly.png" /></button>')
+			.appendTo(boutons);
 		}
-		if (boutonstexte.tmp) {
-			jQuery(boutonstexte.selector).before(
-				'<span class="boutonstexte">' + boutonstexte.tmp + '</span>');
+
+		if (boutons.html()) {
+			$(boutonstexte.selector).before(boutons);
 		}
+
+		$("img.textsizeup,button.textsizeup")
+		.click(function(e) {
+			boutonstexte.fontBigger($(this).is('button') ? this : null);
+			e.stopPropagation();
+		})
+		.attr({'alt':boutonstexte.txtSizeUp, 'title':boutonstexte.txtSizeUp});
+
+		$("img.textsizedown,button.textsizedown")
+		.click(function(e) {
+			boutonstexte.fontSmaller($(this).is('button') ? this : null);
+			e.stopPropagation();
+		})
+		.attr({'alt':boutonstexte.txtSizeDown, 'title':boutonstexte.txtSizeDown});
+
+		$("img.textonly,button.textonly")
+		.click(function(e) {
+			boutonstexte.textOnly($(this).is('button') ? this : null);
+			e.stopPropagation();
+		})
+		.attr({'alt':boutonstexte.txtOnly, 'title':boutonstexte.txtOnly});
+
 	});
-} else {
-	alert('boutonstexte a besoin de jQuery !');
-}
+})(jQuery);
 
 // le prototype boutons du contenu
 function boutonsTexte(options)
