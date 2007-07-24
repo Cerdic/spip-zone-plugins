@@ -42,8 +42,8 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 				$var_user['newsletters'] = _request('newsletters');
 				$var_user['`spip_listes_format`'] =_request('format');
 			}
-			elseif(ereg("^statut_rel.*$", $cle))
-				$var_user['statut_relances'] = lire_config('inscription2/statut_rel');
+			elseif(ereg("^statut_int.*$", $cle))
+				$var_user['statut_interne'] = lire_config('inscription2/statut_interne');
 	
 			elseif($cle=='accesrestreint') 
 				$var_user['zones'] = _request('zones');
