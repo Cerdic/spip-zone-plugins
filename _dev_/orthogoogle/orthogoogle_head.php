@@ -3,7 +3,7 @@
 	function orthogoogle_header_prive($flux){
 
 		// determine le chemin des script à charger
-		$dir_spell = find_lib('googiespell_v4_0/googiespell');
+		$dir_spell = find_in_path('lib/googiespell_v4_0/googiespell');
 
 		// lib:googiespell manquante
 		if (!$dir_spell)
