@@ -14,14 +14,14 @@
 //
 //    You should have received a copy of the GNU General Public License
 //    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
-function public_styliser($fond, $id_rubrique, $lang, $contexte) {
+// http://doc.spip.org/@public_styliser_dist
+function public_styliser_dist($fond, $id_rubrique, $lang) {
 	
   // Actuellement tous les squelettes se terminent par .html
   // pour des raisons historiques, ce qui est trompeur
@@ -32,7 +32,7 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 		erreur_squelette(_T('info_erreur_squelette2',
 			array('fichier'=>"'$fond'")),
 			$GLOBALS['dossier_squelettes']);
-		$f = find_in_path("404.$ext");
+		$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
 		return array(substr($f, 0, -strlen(".$ext")),
 			     $ext,
 			     $ext,
@@ -41,32 +41,26 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
-	$trouve = false;
-	$id_rubrique = intval($id_rubrique);
-	$id_rub_init = $id_rubrique;
 
 	// On selectionne, dans l'ordre :
 	// fond=10
 	$f = "$fond=$id_rubrique";
-	if (($id_rubrique > 0) AND ($squel=find_in_path("$f.$ext"))){
+	if (($id_rubrique > 0) AND ($squel=find_in_path("$f.$ext")))
 		$squelette = substr($squel, 0, - strlen(".$ext"));
-		$trouve = true;
-	}	
 	else {
 		// fond-10 fond-<rubriques parentes>
 		while ($id_rubrique > 0) {
 			$f = "$fond-$id_rubrique";
 			if ($squel=find_in_path("$f.$ext")) {
 				$squelette = substr($squel, 0, - strlen(".$ext"));
-				$trouve = true;
 				break;
 			}
 			else
 				$id_rubrique = sql_parent($id_rubrique);
 		}
 	}
-
-	if(!$trouve) {
+    
+    if(!$trouve) {
 		$fonds = unserialize($GLOBALS['meta']['SquelettesMots:fond_pour_groupe']);
 		if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
 		  $trouve = false;
@@ -92,16 +86,15 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 
 	// Affiner par lang
 	if ($lang) {
-		lang_select($lang);
+		$l = lang_select($lang);
 		$f = "$squelette.".$GLOBALS['spip_lang'];
-		lang_dselect();
+		if ($l) lang_select();
 		if (@file_exists("$f.$ext"))
 			$squelette = $f;
 	}
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
 }
-
 
 function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
   $select1 = array('titre');
@@ -122,5 +115,4 @@ function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
   }
   return '';
 }
-
 ?>

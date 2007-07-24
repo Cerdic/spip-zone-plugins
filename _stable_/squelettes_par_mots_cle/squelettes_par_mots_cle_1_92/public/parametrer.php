@@ -54,8 +54,8 @@ function calculer_contexte() {
 			$contexte[$var] = $val;
 	}
 
-	if (isset($GLOBALS['date']))
-		$contexte['date'] = $contexte['date_redac'] = normaliser_date($GLOBALS['date']);
+	if (($a = _request('date')) !== null)
+		$contexte['date'] = $contexte['date_redac'] = normaliser_date($a);
 	else
 		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
 
@@ -75,6 +75,7 @@ function signaler_squelette($contexte)
 	return $signal;
 }
 
+// http://doc.spip.org/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps) {
 	$headers = array();
 
@@ -111,8 +112,7 @@ function sql_rubrique_fond($contexte) {
 		$row = spip_abstract_fetsel(array('lang'),
 					    array('spip_rubriques'),
 					    array("id_rubrique=$id"));
-		if ($row['lang'])
-			$lang = $row['lang'];
+		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array ($id, $lang);
 	}
 
@@ -122,8 +122,7 @@ function sql_rubrique_fond($contexte) {
 			array('spip_breves'), 
 			array("id_breve=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
-		if ($row['lang'])
-			$lang = $row['lang'];
+		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
@@ -136,8 +135,7 @@ function sql_rubrique_fond($contexte) {
 		$row = spip_abstract_fetsel(array('lang'),
 			array('spip_rubriques'),
 			array("id_rubrique='$id_rubrique_fond'"));
-		if ($row['lang'])
-			$lang = $row['lang'];
+		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
@@ -147,8 +145,7 @@ function sql_rubrique_fond($contexte) {
 			array('spip_articles'),
 			array("id_article=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
-		if ($row['lang'])
-			$lang = $row['lang'];
+		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 }
@@ -203,31 +200,7 @@ function sql_rubrique($id_article) {
 	return $id_rubrique['id_rubrique'];
 }
 
-function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
-	$auteurs = "";
-	if ($id_article) {
-		$result_auteurs = spip_abstract_select(
-			array('auteurs.id_auteur', 'auteurs.nom'),
-			array('auteurs' => 'spip_auteurs',
-				'lien' => 'spip_auteurs_articles'), 
-			array("lien.id_article=$id_article",
-				"auteurs.id_auteur=lien.id_auteur"),
-			'',array(),'','', array(),
-			$table, $id_boucle, $serveur);
-
-		while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
-			$nom_auteur = typo($row_auteur['nom']);
-			$url_auteur = generer_url_auteur($row_auteur['id_auteur']);
-			if ($url_auteur) {
-				$auteurs[] = "<a href=\"$url_auteur\">$nom_auteur</a>";
-			} else {
-				$auteurs[] = "$nom_auteur";
-			}
-		}
-	}
-	return (!$auteurs) ? "" : join($auteurs, ", ");
-}
-
+// http://doc.spip.org/@sql_petitions
 function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	$retour = spip_abstract_fetsel(
 		array('texte'),
@@ -260,7 +233,7 @@ function sql_accepter_forum($id_article) {
 	return $cache[$id_article];
 }
 
-# Determine les parametres d'URL (hors rÃ©Ã©criture) et consorts
+# Determine les parametres d'URL (hors réécriture) et consorts
 # En deduit un contexte disant si la page est une redirection ou 
 # exige un squelette deductible de $fond et du contexte linguistique.
 # Applique alors le squelette sur le contexte et le nom du cache.
@@ -333,17 +306,13 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if (!isset($lang))
 		$lang = $GLOBALS['meta']['langue_site'];
 
-	if (!$GLOBALS['forcer_lang']
-	AND $lang <> $GLOBALS['spip_lang']
-	) {
-		lang_select($lang);
-		$lang_select = true;
-	}
+	$select = (!$GLOBALS['forcer_lang'] AND $lang <> $GLOBALS['spip_lang']);
+	if ($select) $select = lang_select($lang);
 
 	$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =
-		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang'], $local);
-	
+		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang']);
+
 	// Charger le squelette en specifiant les langages cibles et source
 	// au cas il faudrait le compiler (source posterieure au resultat)
 	// et appliquer sa fonction principale sur le contexte.
@@ -351,9 +320,19 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	$composer = charger_fonction('composer', 'public');
 
+	// Le debugueur veut afficher le contexte
+	if ($GLOBALS['var_mode'] == 'debug')
+		$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
+
 	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile)){
 		spip_timer($a = 'calcul page '.rand(0,1000));
+		$notes = calculer_notes(); // conserver les notes...
+
 		$page = $fonc(array('cache' => $cache), array($local));
+
+		// ... et les retablir
+		if ($n = calculer_notes()) spip_log("notes ignorees par $fonc: $n");
+		$GLOBALS['les_notes'] = $notes;
 
 		// spip_log: un joli contexte
 		$info = array();
@@ -361,11 +340,13 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 			if($val)
 				$info[] = "$var='$val'";
 		spip_log("calcul ("
-			.spip_timer($a)
+			.($profile = spip_timer($a))
 			.") [$skel] "
 			. join(', ',$info)
 			.' ('.strlen($page['texte']).' octets)'
 		);
+		if ($GLOBALS['var_mode'] == 'debug')
+			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
 
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
 		if (!isset($page['entetes']['X-Spip-Cache']))
@@ -376,12 +357,11 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	if ($GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
-		debug_dumpfile ($page['texte'], $fonc, 'resultat');
+		debug_dumpfile (strlen($page['texte'])?$page['texte']:" ", $fonc, 'resultat');
 	}
 	$page['contexte'] = $local;
 
-	if ($lang_select)
-		lang_dselect();
+	if ($select) lang_select();
 
 	return $page;
 }
