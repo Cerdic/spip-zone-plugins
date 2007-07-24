@@ -36,7 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'table_expl' => ': El campo estar&aacute; presente en la tabla de adherentes (espacio privado)',
 
 'icone_menu_config' => 'Inscripci&oacute;n2',
-'nom' => 'Apellido',
+'nom' => '<MODIF>Pseudo',
+'nom_famille' => 'Apellido',
 'prenom' => 'Nombre',
 'naissance' => 'Fecha de nacimiento',
 'adresse' => 'Direcci&oacute;n',

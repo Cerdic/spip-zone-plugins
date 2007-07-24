@@ -36,7 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'table_expl' => ' : Le champ sera affich&eacute; sur la liste des adh&eacute;rents (espace priv&eacute;)',
 
 'icone_menu_config' => 'Inscription2',
-'nom' => 'Nom',
+'nom' => '<MODIF>Pseudo',
+'nom_famille' => 'Nom',
 'prenom' => 'Pr&eacute;nom',
 'naissance' => 'Date de naissance',
 'adresse' => 'Adresse',

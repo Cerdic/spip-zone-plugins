@@ -48,7 +48,7 @@
 		$query = spip_fetch_array($query);
 		/*var_dump($query);
 		exit;*/
-		$GLOBALS['auteur_session'] = array_merge($query,$GLOBALS['auteur_session'] );
+		//$GLOBALS['auteur_session'] = array_merge($query,$GLOBALS['auteur_session'] );
 		
 	}
 	

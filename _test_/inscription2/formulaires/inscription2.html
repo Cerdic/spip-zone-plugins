@@ -18,8 +18,9 @@
 	// validate signup form on submit
 	$("#inscription").validate({
 		rules: {
-			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			nom_famille: {[(#CONFIG{inscription2/nom_famille}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[5,1000]},
 			code_postal: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
@@ -42,11 +43,15 @@
 			pays:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''})]}
 		},
 		messages: {
-			nom: {
+			nom_famille: {
 				required:"<:inscription2:champ_obligatoire:>",
 				chaine:"<:inscription2:chaine_valide:>",
 				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
 			prenom:{
+				required:"<:inscription2:champ_obligatoire:>",
+				chaine:"<:inscription2:chaine_valide:>",
+				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
+			nom: {
 				required:"<:inscription2:champ_obligatoire:>",
 				chaine:"<:inscription2:chaine_valide:>",
 				rangeLength:"Min 2 Max 20 <:inscription2:caracteres:>"},
@@ -182,16 +187,22 @@ $(document).ready(function() {
 	</div>
 </div>
 ]
-[(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="nom"><strong><:inscription2:nom:></strong></label>
-	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
+[(#CONFIG{inscription2/nom_famille}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="nom_famille"><strong><:inscription2:nom_famille:></strong></label>
+	<input type="text" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" />
 </div>
 ]
 [(#CONFIG{inscription2/prenom}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="prenom"><strong><:inscription2:prenom:></strong></label>
 	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" />
+</div>
+]
+[(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="nom"><strong><:inscription2:nom:></strong></label>
+	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
 </div>
 ]
 [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	

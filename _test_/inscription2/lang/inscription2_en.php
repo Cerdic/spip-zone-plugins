@@ -36,7 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'table_expl' => ' : The field will be displayed on the list of the adherents (private area)',
 
 'icone_menu_config' => 'Inscription2',
-'nom' => 'Name',
+'nom' => '<MODIF>Pseudo',
+'nom_famille' => 'Name',
 'prenom' => 'First name',
 'naissance' => 'Date of birth',
 'adresse' => 'Address',
