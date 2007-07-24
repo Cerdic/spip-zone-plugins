@@ -56,6 +56,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	// Elaborer le formulaire
 	$corps_supp = '';
 	$var_user['b.id'] = '0';
+	$var_user['a.login'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
@@ -100,7 +101,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	
 	foreach ($query as $cle => $val){
 		
-		if(($cle == 'id') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
+		if(($cle == 'id') || ($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email'))
 			continue;
 		if($cle == 'pays'){
 			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
@@ -241,12 +242,13 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
-			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
+			if($cle == 'nom' or $cle == 'email' or $cle == 'login' or $cle == 'id_auteur')
 				$var_user['a.'.$cle] = '0';
 			elseif(ereg("^statut_rel.*$", $cle))
 				$var_user['b.statut_relances'] = '1';
-			elseif($cle == 'pays')
+			elseif($cle == 'pays'){
 				$var_user['c.pays'] = '1';
+			}
 			elseif($cle == 'pays_pro'){
 				$var_user['d.pays'] = '1';
 				$var_user['d.pays as pays_pro'] = '1';
@@ -280,20 +282,19 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
 	}
 	//Debut de l'affichage des données...
-
 	foreach ($query as $cle => $val){
-		if (strlen($val) >= 1){ $res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . $val . "</p>"; }
+		if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'email'))
+			continue;
+		elseif (strlen($val) >= 1){ $res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . $val . "</p>"; }
 	}
 	if($aux4 and $aux3){
 		$res .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
-		. "<select name='news[]' id='news' multiple>";
+		. "<ul>";
 		foreach($aux4 as $val){
 			if (in_array($val['id_liste'], $aux3))
-				$res .= "<option value='".$val['id_liste']."' selected disabled>".$val['titre']."</option>";
-			else 
-				$res .= "<option value='".$val['id_liste']." disabled'>".$val['titre']."</option>";
+				$res .= "<li>".$val['titre']."</li>";
 		}
-		$res .= "</select></td></tr>";
+		$res .= "</ul>";
 	}
 	
 	$res .= "</div>\n";

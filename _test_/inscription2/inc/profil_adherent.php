@@ -69,6 +69,8 @@ include_spip('inc/headers');
 				}else{
 					if( $auteur['b.pays']=="1" and $cle == 'pays')
 						echo '<span class="crayon auteurs_elargi-'.$cle.'-'.$aux['id'].'">'.recuperer_fond('vues/pays', array('pays'=> $val)).'</span></div>'; 
+					elseif( $auteur['b.pays_pro']=="1" and $cle == 'pays_pro')
+						echo '<span class="crayon auteurs_elargi-'.$cle.'-'.$aux['id'].'">'.recuperer_fond('vues/pays', array('pays'=> $val)).'</span></div>'; 
 					elseif($auteur['b.'.$cle]=="1")
 						echo '<span class="crayon auteurs_elargi-'.$cle.'-'.$aux['id'].'">'.sinon($val,'...').'</span></div>';  
 					
