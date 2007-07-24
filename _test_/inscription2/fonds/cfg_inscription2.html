@@ -813,8 +813,8 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 	<strong><:inscription2:statut:></strong><br />
 	<:inscription2:exp_statut:><br />
 	<select name="statut_nouveau" id="statut_nouveau">
-		<option value='6forum'><:inscription2:visiteur:></option>
-		<option value='1comite'><:inscription2:auteur:></option>
+		<option value='6forum' [selected="(#ENV{statut_nouveau}|=={6forum}|?{selected})"]><:inscription2:visiteur:></option>
+		<option value='1comite' [selected="(#ENV{statut_nouveau}|=={1comite}|?{selected})"]><:inscription2:auteur:></option>
 	</select>
 </div>
 <br />
