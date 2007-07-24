@@ -9,6 +9,8 @@
 		if (!$dir_spell)
 			return $flux;
 
+		$dir_spell .= '/';
+
 		$AJS_url = $dir_spell.'AJS.js';
 
 		$spelljs_url = $dir_spell.'googiespell.js';
@@ -45,7 +47,7 @@
 			);
 			chaine = chaine.substr(0,chaine.length-1);
 			//charge le correcteur pour chaque textarea identifié
-		    var googie5 = new GoogieSpellMultiple("'.$dir_spell.'/", "'.$proxy_url.'?lang=");
+		    var googie5 = new GoogieSpellMultiple("'.$dir_spell.'", "'.$proxy_url.'?lang=");
 			googie5.decorateTextareas(chaine);
  		});
 		</script>';
