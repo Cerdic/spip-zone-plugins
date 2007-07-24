@@ -82,7 +82,7 @@ $().ready(function() {
 		
 	if($act=='val'){
 		foreach(lire_config('inscription2') as $cle => $val){
-			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut'){
+			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 				$cle = ereg_replace("^username.*$", "login", $cle);
 				$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 				if($cle == 'nom' or $cle == 'email' or $cle == 'login' )
@@ -138,7 +138,7 @@ $().ready(function() {
 
 		$var_user['b.id'] = '0';
 	foreach(lire_config('inscription2') as $cle => $val){
-		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut'){
+		if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_interne'){
 			$cle = ereg_replace("^username.*$", "login", $cle);
 			$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 			if($cle == 'nom' or $cle == 'email' or $cle == 'login')
@@ -235,7 +235,7 @@ $().ready(function() {
 			
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
 			echo "<td><input type='checkbox' name='$cle' $val><br /></td><tr/>"; 	
-		}elseif ($cle != 'statut'){ // textarea
+		}elseif ($cle != 'statut_nouveau'){ // textarea
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
 			if($cle == 'adresse' OR $cle == 'divers' OR $cle == 'commentaire')
 				echo "<td><textarea name='$cle'>$val</textarea><br /></td><tr/>"; 
