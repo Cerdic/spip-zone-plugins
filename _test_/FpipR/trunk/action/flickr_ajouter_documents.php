@@ -90,13 +90,21 @@ function action_flickr_ajouter_documents() {
 			  $q .=" WHERE id_document=".$doc_row['id_document'];
 			  spip_query($q);
 			  include_spip('inc/plugin');
-			  //ATTENTION TODO, on s'attend a trouver tag-machine dans _dev_, mauvaise idee.
-			  if(in_array('_dev_/tag-machine',liste_plugin_actifs())) {
-				include_spip('inc/tag-machine');
-				foreach($photo_details->tags as $tag) {
-				  if($tag->raw) {
-					$t = new Tag($tag->raw,'FlickrTag');
-					$t->ajouter($doc_row['id_document'],'documents','id_document');
+			  $plugins = liste_plugin_actifs();
+			  if(isset($plugins['TAG_MACHINE'])) {
+				include_spip('inc/tag-machine');  
+				$activer = true;
+				$tag_group = 'FlickrTag';
+				if(function_exists(lire_config)) {
+				  $activer = (lire_config('fpipr/tag_desactiver','')?false:true);
+				  $tag_group = lire_config('fpipr/tag_group','FlickrTag');
+				}
+				if($activer) {
+				  foreach($photo_details->tags as $tag) {
+					if($tag->raw) {
+					  $t = new Tag($tag->raw,$tag_group);
+					  $t->ajouter($doc_row['id_document'],'documents','id_document');
+					}
 				  }
 				}
 			  }

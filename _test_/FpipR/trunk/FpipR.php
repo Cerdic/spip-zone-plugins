@@ -1,6 +1,7 @@
 <?php
 
 function FpipR_affiche_milieu($flux) {
+
   if(function_exists('lire_config')) {
 	$api_key = lire_config('fpipr/api_key','');
 	$api_secret = lire_config('fpipr/api_secret','');

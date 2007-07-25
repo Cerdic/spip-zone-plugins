@@ -1,6 +1,7 @@
 <?php
+
   //
-	//on crée la colonne pour stoquer les frobs
+  //on crée la colonne pour stoquer les frobs
 
 $installe = unserialize(lire_meta('FpipR:installe'));
 
