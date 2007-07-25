@@ -2,7 +2,11 @@
 
 //calcule la signature de la requette
 function flickr_sign($params) {
-  global $FLICKR_SECRET;
+  if(function_exists('lire_config')) {
+	$FLICKR_SECRET = lire_config('fpipr/api_secret','');
+	if(!$FLICKR_SECRET) $FLICKR_SECRET = $GLOBALS['FLICKR_SECRET'];
+  } else 
+	$FLICKR_SECRET = $GLOBALS['FLICKR_SECRET'];
   ksort($params);
   $ret = $FLICKR_SECRET;
   foreach($params as $k => $v) {
@@ -14,7 +18,12 @@ function flickr_sign($params) {
 
 //lance une requette à flickr. $method est le nom de la méthode à appeler (flickr.auth.getToken par exemple) $params est un tableau de paramétres nom => valeur. Retourne le xml renvoye par Flickr 
 function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=false) {
-  global $FLICKR_API_KEY;
+  if(function_exists('lire_config')) {
+	$FLICKR_API_KEY = lire_config('fpipr/api_key','');
+	if(!$FLICKR_API_KEY) $FLICKR_API_KEY = $GLOBALS['FLICKR_API_KEY'];	
+  } else 
+	$FLICKR_API_KEY = $GLOBALS['FLICKR_API_KEY'];
+
   spip_log("Flickr api call: $method.");
   $params['api_key'] = $FLICKR_API_KEY;
   $params['format'] = 'php_serial';
@@ -54,7 +63,12 @@ function flickr_check_error($resp) {
 //======================================================================
 
 function flickr_authenticate_get_frob() {
-  global $FLICKR_API_KEY;
+  if(function_exists('lire_config')) {
+	$FLICKR_API_KEY = lire_config('fpipr/api_key','');
+	if(!$FLICKR_API_KEY) $FLICKR_API_KEY = $GLOBALS['FLICKR_API_KEY'];	
+  } else 
+	$FLICKR_API_KEY = $GLOBALS['FLICKR_API_KEY'];
+
   $frob = flickr_check_error(flickr_api_call('flickr.auth.getFrob',array(),false,true));
   if(isset($frob['frob'])) {
 	$params['api_key'] = $FLICKR_API_KEY;

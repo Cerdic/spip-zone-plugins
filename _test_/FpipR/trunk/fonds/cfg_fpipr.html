@@ -1,0 +1,48 @@
+
+<!-- titre= <:fpipr:cfg_title:> -->
+<!-- descriptif=<:fpipr:cfg_descriptif:> -->
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+
+<fieldset>
+<legend><:fpipr:cfg_api_legend:>:</legend>
+<p><:fpipr:cfg_api_info:>
+<ol>
+<li><a href="http://www.flickr.com/services/api/keys/"><:fpipr:cfg_api_info_1:></a></li>
+<li><:fpipr:cfg_api_info_2:></li>
+<li><:fpipr:cfg_api_info_3:></li>
+</ol>
+</p>
+<label for="api_key"><:fpipr:cfg_api_key:></label>
+<input type="text" name="api_key" value="#ENV{api_key}" id="api_key" />
+<label for="api_secret"><:fpipr:cfg_api_secret:></label>
+<input type="text" name="api_secret" value="#ENV{api_secret}" id="api_secret" />
+</fieldset>
+
+<!--
+<fieldset>
+<legend><:fpipr:cfg_tag_machine_legend:>:</legend>
+<p><:fpipr:cfg_tag_machine_info:></p>
+<input type="checkbox" name="tag_desactiver" [(#ENV{tag_desactiver}|?{'checked="true"',''})] id="tag_desactiver" value="desactiver"/>
+<label for="tag_desactiver"><:fpipr:cfg_tag_machine_desactiver:></label>
+
+<br/>
+<label for="tag_group"><:fpipr:cfg_tag_machine_group:>: </label>
+<B_groupes>
+<select name="tag_group" id="tag_group">
+<option></option>
+<BOUCLE_groupes(GROUPES_MOTS) {par titre}>
+<option [(#ENV{tag_group_select,FlickrTag}|=={#TITRE}|?{'selected="true"'})]>#TITRE</options>
+</BOUCLE_groupes>
+</select>
+</B_groupes>
+<input type="text" name="tag_group" value="#ENV{tag_group}" id="tag_group" />
+<//B_groupes>
+</fieldset>
+</fieldset>
+-->
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>

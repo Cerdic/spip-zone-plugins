@@ -52,7 +52,21 @@ A new window will open, please follow the instructions it will provide.',
 									   'mauvaisop' => "You cannot use the operator @op@ on the criterion @critere@",
 									   'mauvaise_imbrication' => "The loop FLICKR_PHOTO_@boucle@ should only be inside a loop FLICKR_PHOTOS_GETINFO",
 									   'revoke' => 'Revoke Rights',
-									   'revoke_info' => 'You can revoke the rights for this site to connect to you Flickr account by clicking this button and going to <a href="http://flickr.com/services/auth/list.gne">Flickr Authentication List</a>'
+									   'revoke_info' => 'You can revoke the rights for this site to connect to you Flickr account by clicking this button and going to <a href="http://flickr.com/services/auth/list.gne">Flickr Authentication List</a>',
+
+	'cfg_title' => 'FpipR Configuration',
+	'cfg_descriptif' => 'This is the configuration page to set the global settings of the FpipR plugin. When you are done here, remember to go to your author page and set up your personal connection to Flickr.',
+	'cfg_api_legend' => 'Flickr API access',
+									   'cfg_api_info' => 'To use the FpipR plugin, you will need to get an API Key from Flickr. You should:',
+	'cfg_api_info_1' => 'go to the Flickr key registration page',
+	'cfg_api_info_2' => 'create a key of type: "Desktop application".',
+	'cfg_api_info_3' => 'Copy the key and secret provided by Flickr here.',
+	'cfg_api_key' => 'API Key',
+	'cfg_api_secret' => 'API Secret',
+	'cfg_tag_machine_legend' => 'Integration with the site keywords',
+	'cfg_tag_machine_info' => 'If you have installed the plugin <a href="http://files.spip.org/spip-zone/tag-machine.zip">tag-machine</a>, FpipR will be able to add the Flickr photo tags as standard SPIP keywords to the documents you add with this plugin.',
+	'cfg_tag_machine_desactiver' => 'Disable',
+	'cfg_tag_machine_group' => 'Keyword group where to put the Flickr tags'
 );
 
 ?>

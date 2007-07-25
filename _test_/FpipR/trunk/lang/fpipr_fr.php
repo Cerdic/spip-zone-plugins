@@ -50,7 +50,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mauvaisop' => "Vous ne pouvez pas utiliser l'operateur @op@ sur le critere @critere@",
 	'mauvaise_imbrication' => "Une boucle FLICKR_PHOTO_@boucle@ ne peut se trouver que dans une boucle FLICKR_PHOTOS_GETINFO",
 	'revoke' => 'R&eacute;voquer les droits',
-	'revoke_info' => 'Vous pouvez r&eacute;voquer les droits de ce site &agrave; se connecter &agrave; votre compte Flickr en cliquant ce bouton puis en allant sur <a href="http://flickr.com/services/auth/list.gne">Flickr Authentication List</a>'
+	'revoke_info' => 'Vous pouvez r&eacute;voquer les droits de ce site &agrave; se connecter &agrave; votre compte Flickr en cliquant ce bouton puis en allant sur <a href="http://flickr.com/services/auth/list.gne">Flickr Authentication List</a>',
+
+	'cfg_title' => 'Configuration FpipR',
+	'cfg_descriptif' => 'Sur cette page, vous pouvez configurer les options globales du plugin FpipR.<br/> N\'oubliez pas ensuite de faire la configuration personelle dans votre fiche d\'auteur',
+	'cfg_api_legend' => 'Acc&eacute;s API Flickr',
+	'cfg_api_info' => 'Pour utiliser le plugin FpipR, vous devez d\'abord obtenir une clef chez Flickr. pour cela:',
+	'cfg_api_info_1' => 'rendez vous sur le formulaire d\'inscription',
+	'cfg_api_info_2' => 'demandez une clef de type: "Desktop application".',
+	'cfg_api_info_3' => 'copiez la clef et le secret que Flickr vous donne ici.',
+	'cfg_api_key' => 'Clef de l\'API',
+	'cfg_api_secret' => 'Secret',
+	'cfg_tag_machine_legend' => 'Int&eacute;gration avec les mots clefs',
+	'cfg_tag_machine_info' => 'Si vous avez install&eacute; le plugin <a href="http://files.spip.org/spip-zone/tag-machine.zip">tag-machine</a>, le plugin FpipR pourra ajouter automatiquement les tags Flickr comme mots clefs aux documents que vous ajout&eacute;s avec ce plugin.',
+	'cfg_tag_machine_desactiver' => 'D&eacute;sactiver',
+	'cfg_tag_machine_group' => 'Groupe de mots clefs pour les tags Flickr'
 );
 
 ?>

@@ -1,7 +1,16 @@
 <?php
 
 function FpipR_affiche_milieu($flux) {
-  if(!isset($GLOBALS['FLICKR_API_KEY']) && !isset($GLOBALS['FLICKR_SECRET'])) return $flux;
+  if(function_exists('lire_config')) {
+	$api_key = lire_config('fpipr/api_key','');
+	$api_secret = lire_config('fpipr/api_secret','');
+	if(!$api_key) $api_key = $GLOBALS['FLICKR_API_KEY'];
+	if(!$api_secret) $api_secret = $GLOBALS['FLICKR_SECRET'];
+  } else {
+	$api_key = $GLOBALS['FLICKR_API_KEY'];
+	$api_secret = $GLOBALS['FLICKR_SECRET'];
+  }
+  if(!isset($api_key) && !isset($api_secret)) return $flux;
 
   if($flux['args']['exec'] == 'auteur_infos') { 
 		global $table_prefix, $connect_id_auteur;
@@ -9,9 +18,8 @@ function FpipR_affiche_milieu($flux) {
 		include_spip('base/abstract_sql');
 	
 		if($connect_id_auteur == $flux['args']['id_auteur']) {
-	
 		  include_spip('inc/presentation');
-	
+
 		  $html = '<div>&nbsp;</div>';
 		  $html .= '<div style="margin-top: 14px;" class="cadre-r">
 	<div style="position: relative;">
@@ -22,8 +30,7 @@ function FpipR_affiche_milieu($flux) {
 	<div style="overflow: hidden;" class="cadre-padding">';
 		  $html .= '<h3>'._T('fpipr:autorisation_titre').'</h3>';
 		  include_spip('inc/flickr_api');
-	
-	
+		
 		  $from = array('spip_auteurs');
 		  $select = array('flickr_token','flickr_nsid');
 		  $where = array('id_auteur='.$flux['args']['id_auteur']);
@@ -63,7 +70,15 @@ function FpipR_affiche_milieu($flux) {
 
 function FpipR_affiche_gauche($flux) {
   global $connect_id_auteur;
-  if(!isset($GLOBALS['FLICKR_API_KEY']) && !isset($GLOBALS['FLICKR_SECRET'])) return $flux;
+
+  if(function_exists('lire_config')) {
+	$api_key = lire_config('fpipr/api_key',$GLOBALS['FLICKR_API_KEY']);
+	$api_secret = lire_config('fpipr/api_secret',$GLOBALS['FLICKR_SECRET']);
+  } else {
+	$api_key = $GLOBALS['FLICKR_API_KEY'];
+	$api_secret = $GLOBALS['FLICKR_SECRET'];
+  }
+  if(!isset($api_key) && !isset($api_secret)) return $flux;
 
   //Verifier les droits des auteurs
   if((($flux['args']['exec'] == 'articles') && ($GLOBALS['meta']["documents_articles"] != 'non')) || (($flux['args']['exec'] == 'naviguer')&& ($GLOBALS['meta']["documents_rubriques"] != 'non')) || (($flux['args']['exec'] == 'breves_edit')&& ($GLOBALS['meta']["documents_breves"] != 'non'))) {

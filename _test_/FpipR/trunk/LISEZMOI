@@ -19,26 +19,15 @@ On peut utiliser cette fonction pour faire un article à propos d'une photo, ou d
  1. suivez les instructions pour vous identifier sur Flickr
  1. vous pouvez ensuite aller sur un de vos articles/rubriques et cliquer sur le liens dans la colonne de gauche pour choisir des images de flickr.
 
-= Clef Flickr =
+= Configuration =
 
-'''ATTENTION''' avant de pouvoir utiliser ce plugin, vous devez obtenir une clef chez flickr pour votre site. Pour cela:
- 1. rendez vous sur:
-http://www.flickr.com/services/api/keys/
- 1. demandez une clef de type: Desktop application.
- 1. copiez la clef et le secret que Flickr vous donne
- 1. dans votre fichier config/mes_options.php, ajoutez:
-{{{
-<?php
-$GLOBALS['FLICKR_API_KEY'] = "VOTRE_CLEF_FLICKR";
-$GLOBALS['FLICKR_SECRET'] = "VOTRE_SECRET";
-?>
-}}}
-
+Le plugin ne marchera pas tant que vous ne l'aurez pas configuré. Pour cela, il vous faut installer le plugin config, ensuite rendez vous sur:
+ecrire/?exec=cfg&cfg=fpipr
 
 = Telechargement =
 
 la version 0.1 est dispo en '''TEST''' ici:
-http://trac.rezo.net/files/spip-zone/FpipR_1_9_1.zip
+http://trac.rezo.net/files/spip-zone/FpipR_svn.zip
 
 ----------------
 
