@@ -25,11 +25,11 @@ if(!function_exists('icone_inline')) {
 // http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type_dist()
 {
-	$id_groupe= intval(_request('id_groupe'));
+	global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;
 
-	if (!$id_groupe) {
-
-	  $type = $titre = filtrer_entites(_T('titre_nouveau_groupe'));
+	if ($new == "oui") {
+	  $id_groupe = 0;
+	  $type = filtrer_entites(_T('titre_nouveau_groupe'));
 	  $onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	  $ancien_type = '';
 	  $unseul = 'non';
@@ -41,12 +41,11 @@ function exec_mots_type_dist()
 	  $acces_minirezo = 'oui';
 	  $acces_comite = 'oui';
 	  $acces_forum = 'non';
-	  $row = array();
 	} else {
-
+		$id_groupe= intval($id_groupe);
 		$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
 
-		if ($row = spip_fetch_array($result_groupes)) {
+		while($row = spip_fetch_array($result_groupes)) {
 			$id_groupe = $row['id_groupe'];
 			$type = $row['titre'];
 			$titre = typo($type);
@@ -68,14 +67,7 @@ function exec_mots_type_dist()
 			$onfocus ="";
 		}
 	}
-	
-	if (($id_groupe AND !$row) OR
-	    !autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	}
-	
+
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
@@ -86,14 +78,20 @@ function exec_mots_type_dist()
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
 	debut_droite();
-	
+
+	if ($connect_statut != "0minirezo") {
+		echo "<h3>"._T('avis_non_acces_page')."</h3>";
+		exit;
+	}
+
+
 	$type = entites_html(rawurldecode($type));
 
-	$res = debut_cadre_relief("", true)
+	$res = debut_cadre_relief("groupe-mot-24.gif", true)
 	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
 	. "<tr>"
 	. "<td  align='right' valign='top'><br />"
-	. icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "groupe-mot-24.gif", "rien.gif")
+	. icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif")
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
 	. "<td style='width: 100%' valign='top'>"
@@ -105,22 +103,30 @@ function exec_mots_type_dist()
 	. "<b>"._T('info_changer_nom_groupe')."</b><br />\n"
 	. "<input type='text' size='40' class='formo' name='change_type' value=\"$type\" $onfocus />\n";
 		
-	$res .= "<br /><b>"._T('texte_descriptif_rapide')
-	  . "</b><br />"
-	  . "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
-	  . entites_html($descriptif)
-	  . "</textarea>\n";
+	if ($options == 'avancees' OR $descriptif) {
+			$res .= "<br /><b>"._T('texte_descriptif_rapide')
+			. "</b><br />"
+			. "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
+			. entites_html($descriptif)
+			. "</textarea>\n";
+	} else
+			$res .= "<input type='hidden' name='descriptif' value=\"$descriptif\" />";
 
-	$res .= "<br /><b>"._T('info_texte_explicatif')."</b><br />";
-	$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
-	$res .= entites_html($texte);
-	$res .= "</textarea>\n";
+	if ($options == 'avancees' OR $texte) {
+			$res .= "<br /><b>"._T('info_texte_explicatif')."</b><br />";
+			$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
+			$res .= entites_html($texte);
+			$res .= "</textarea>\n";
+	} else
+		  $res .= "<input type='hidden' name='texte' value=\"$texte\" />";
 
 	$res .= "<div style='text-align: right'><input type='submit' class='fondo' value='"
 	. _T('bouton_valider')
 	. "' /></div>"
 	. fin_cadre_formulaire(true)
 	. "</div>"
+	. "</td></tr></table>"
+	. fin_cadre_relief(true)
 	. "<br />\n<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
 	. "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>"
@@ -201,22 +207,14 @@ function exec_mots_type_dist()
 	. _T('bouton_valider')
 	. "' /></div>"
 	.  fin_cadre_formulaire(true)
-	. "</div>"
-	. "</td></tr></table>"
-	. fin_cadre_relief(true)
-	;
+	. "</div>";
+
+	$res .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+
 
 	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $res),
-	pipeline('affiche_milieu',
-		array('args' => array(
-			'exec' => 'mots_type',
-			'id_groupe' => $id_groupe
-		),
-		'data'=>'')
-	),
-	fin_gauche(),
-	fin_page();
-
+		fin_gauche(),
+		fin_page();
 }
 
 ?>

@@ -28,11 +28,10 @@ if(!function_exists('icone_inline')) {
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
-	global $spip_lang, $spip_lang_left, $spip_lang_right;
+	global $spip_lang, $spip_lang_left, $spip_lang_right, $son_groupe;
 	global $evenements, $pim_agenda;
 
 	$conf_mot = intval(_request('conf_mot'));
-	$son_groupe = intval(_request('son_groupe'));
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -107,12 +106,12 @@ function exec_mots_tous_dist()
 		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
  		echo "<span class='verdana1 spip_x-small'>", $res, "</span>";
-		if (strlen($descriptif)) {
-			echo "<div style='border: 1px dashed #aaa; background-color: #fff;' class='verdana1 spip_x-small '>", propre("{{"._T('info_descriptif')."}} ".$descriptif), "&nbsp; </div>";
+		if ($descriptif) {
+			echo "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; </div>";
 		}
 
 		if (strlen($texte)>0){
-			echo "<div class='verdana1 spip_small'>", propre($texte), "</div>";
+			echo "<span class='verdana1 spip_small'>", propre($texte), "</span>";
 		}
 
 		//
@@ -124,7 +123,7 @@ function exec_mots_tous_dist()
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
-		// Preliminaire: confirmation de suppression d'un mot lie a qqch
+		// Preliminaire : confirmation de suppression d'un mot lie a qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
 			include_spip('inc/grouper_mots');

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2007                                                *
+ *  Copyright (c) 2001-2006                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -19,34 +19,22 @@ include_spip('base/abstract_sql');
 function action_instituer_groupe_mots_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	$securiser_action();
 
-	if (preg_match(",^([a-zA-Z_]\w+)$,", $arg, $r)) 
-	  action_instituer_groupe_mots_get($arg);
-	elseif (!preg_match(",^(-?\d+)$,", $arg, $r)) {
+	$arg = _request('arg');
+
+	if (!preg_match(",^(-?\d+)$,", $arg, $r)) {
 		 spip_log("action_instituer_groupe_mots_dist $arg pas compris");
-	} else action_instituer_groupe_mots_post($r[1]);
+	} else action_instituer_groupe_mots_post($r);
 }
 
 
 // http://doc.spip.org/@action_instituer_groupe_mots_post
-function action_instituer_groupe_mots_post($id_groupe)
+function action_instituer_groupe_mots_post($r)
 {
+	global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $descriptif, $id_groupe, $obligatoire, $rubriques, $syndic, $evenements, $pim_agenda, $texte, $unseul;
 
-	$evenements = _request('evenements');
-	$pim_agenda = _request('pim_agenda');
-	$acces_comite = _request('acces_comite');
-	$acces_forum = _request('acces_forum');
-	$acces_minirezo = _request('acces_minirezo');
-	$articles = _request('articles');
-	$breves = _request('breves');
-	$change_type = _request('change_type');
-	$descriptif = _request('descriptif');
-	$obligatoire = _request('obligatoire');
-	$rubriques = _request('rubriques');
-	$syndic = _request('syndic');
-	$texte = _request('texte');
-	$unseul = _request('unseul');
+	$id_groupe = $r[1];
 
 	if ($id_groupe < 0){
 		spip_query("DELETE FROM spip_groupes_mots WHERE id_groupe=" . (0- $id_groupe));
@@ -65,17 +53,4 @@ function action_instituer_groupe_mots_post($id_groupe)
 		}
 	}
 }
-
-
-// http://doc.spip.org/@action_instituer_groupe_mots_get
-function action_instituer_groupe_mots_get($table)
-{
-	$titre = _T('info_mot_sans_groupe');
-
-	$id_groupe = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, evenements, minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'non', 'oui', 'non', 'non'" . ")");
-
-        redirige_par_entete(parametre_url(urldecode(_request('redirect')),
-					  'id_groupe', $id_groupe, '&'));
-}
-
 ?>
