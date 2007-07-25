@@ -1,0 +1,23 @@
+[(#REM) Un admin restreint ne peut agir que sur les zones auxquelles il appartient (excepté sur les admins) et excepté lui-mÍme pour éviter de se retirer d'une zone par erreur]
+[(#ENV{editable}|=={1}|?{#SET{editable,true}})]
+<B_zones>
+<div class='liste'>
+	<div class="pagination">#PAGINATION</div>
+	<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>
+		<BOUCLE_zones(ZONES){id_auteur ?}{id_rubrique ?}{pagination 15}>
+		<tr class="tr_liste">
+		<td style="width: 25px;" class="arial11"><a href="[(#VAL{acces_restreint_edit}|generer_url_ecrire|parametre_url{id_zone}|parametre_url{retour,[(#SELF|url_absolue)]})]"><img src="#CHEMIN{img_pack/restreint-16.png}" alt="" border="0" height="16" width="16"></a>
+		</td>
+		<td class="arial2"><a href="[(#VAL{acces_restreint_edit}|generer_url_ecrire|parametre_url{id_zone}|parametre_url{retour,[(#SELF|url_absolue)]})]">#TITRE</a>
+		</td>
+		<td class="arial2">&nbsp;
+		[(#GET{editable}|=={true}|?{' '})
+		</td>
+		<td class="arial1"><a href="[(#SELF|url_absolue|parametre_url{add_zone,''}|parametre_url{supp_zone,''}|parametre_url{supp_zone,#ID_ZONE}|parametre_url{'#zone'})]"><:accesrestreint:info_retirer_zone:><img src="[(#CHEMIN{images/croix-rouge.gif})]" alt="X" align="middle" border="0" height="7" width="7"></a>
+		</td>]
+		</tr>
+		</BOUCLE_zones>
+	</table>
+</div>
+</B_zones>
+<//B_zones>

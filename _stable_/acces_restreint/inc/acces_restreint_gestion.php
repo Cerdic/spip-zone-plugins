@@ -287,53 +287,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$result = spip_query($query);
 	
 		if (spip_num_rows($result) > 0) {
-			$out .= "<div class='liste'>";
-			$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
-		
-			$ifond=0;
-				
+
 			$tableau= '';
-			while ($row = spip_fetch_array($result)) {
-				$vals = '';
-			
-				$id_zone = $row['id_zone'];
-				$titre_zone = $row['titre'];
-				$descriptif_zone = $row['descriptif'];
-
-				if ($ifond==0){
-					$ifond=1;
-					$couleur="#FFFFFF";
-				}else{
-					$ifond=0;
-					$couleur="#EDF3FE";
-				}
-		
-				$url = "href='" . generer_url_ecrire('acces_restreint_edit', "id_zone=$id_zone&retour=".rawurlencode(generer_url_ecrire($url_base, "$id_table=$id_objet#zones"))) . "'";
-	
-				$vals[] = "<a $url>" . http_img_pack("../"._DIR_PLUGIN_ACCESRESTREINT.'/img_pack/restreint-16.png', "", "width='16' height='16' border='0'") ."</a>";
-
-				$s = "<a $url>".typo($titre_zone)."</a>";
-				$vals[] = $s;
-		
-				$vals[] = "";
-		
+			while ($row = spip_fetch_array($result)) {		
 				// Un admin restreint ne peut agir que sur les zones auxquelles il appartient (excepté sur les admins) et excepté lui-même pour éviter de se retirer d'une zone par erreur
 				if($flag_editable && ($connect_toutes_rubriques || (AccesRestreint_test_appartenance_zone_auteur($id_zone, $connect_id_auteur) && autoriser('modifier', 'auteur', $id_auteur ) && $id_connect_auteur!=$id_auteur))){
-				  $s = "<a href='" . generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=$id_zone#zones") . "'>"._T('accesrestreint:info_retirer_zone')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</a>";
-					$vals[] = $s;
+					$editable = true;
 				}
-				else $vals[]= "";
-
-				$tableau[] = $vals;
-		
 				$les_zones[] = $id_zone;
 			}
-		
-			$largeurs = array('25', '', '', '');
-			$styles = array('arial11', 'arial2', 'arial2', 'arial1');
-			$out .= afficher_liste($largeurs, $tableau, $styles);
-		
-			$out .= "</table></div>";
+			include_spip('public/assembler');
+			$contexte = array($id_table => $id_objet,'lang'=>$lang, 'editable'=>$editable);
+			$out .= recuperer_fond('fond/liste_zone_auteurs', $contexte);
 		}
 	
 		if ($les_zones) {
@@ -364,7 +329,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				$out .= "<a href='". generer_url_ecrire($url_base, "$id_table=$id_objet&add_zone=-1#zones"). "'>"._T('accesrestreint:info_ajouter_zones')."</a>";
 
 			if ($nombre_zones_associes > 3) {
-				$out .= "<br /><a href='". generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=-1#zones"). "'>"._T('accesrestreint:info_retirer_zones'). http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</a>";
+				$out .= " - <a href='". generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=-1#zones"). "'>"._T('accesrestreint:info_retirer_zones'). http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</a>";
 			}
 			
 				$out .= "</div><br />\n";
