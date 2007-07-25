@@ -44,7 +44,6 @@ if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
 			default:
 				break;
 		}
-
 		return $flux;
 	}
 

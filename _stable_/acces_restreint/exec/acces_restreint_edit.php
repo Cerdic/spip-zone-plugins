@@ -11,7 +11,9 @@ include_spip('inc/acces_restreint_gestion');
 function exec_acces_restreint_edit(){
 	global $couleur_claire;
 	global $spip_lang_right;
-	global $new;
+	
+	$new = _request('new');
+	
 	include_ecrire('inc_presentation');
 
 	$id_zone = intval($_GET['id_zone']);
