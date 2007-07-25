@@ -16,6 +16,9 @@
 
 
   /*Les nouvelles colonne de l'auteur*/
+
+$GLOBALS['FpipR_versions']['spip_auteurs'] = '0.1';
+
 include_spip('base/serial');
 $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_nsid'] = "TINYTEXT DEFAULT NULL";
 $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYTEXT DEFAULT NULL";

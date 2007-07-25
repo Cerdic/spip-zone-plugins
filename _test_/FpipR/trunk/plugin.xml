@@ -43,6 +43,7 @@
   <fonctions>
 	FpipR_fonctions.php
   </fonctions>
+  <install>base/FpipR_upgrade.php</install>
   <necessite id='cfg' version='[1.0.3;]' />
   <necessite id='SPIP' version='[1.9207;]' />
 </plugin>
