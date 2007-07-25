@@ -4,12 +4,13 @@
   </nom>
   <auteur>	<!-- Auteur du plugin -->
 	Pierre Andrews (mortimer.pa@free.fr)
+	logo par IZO (http://izo.aucuneid.com/)
   </auteur>
   <version>
 	0.3
   </version>
   <etat>
-	test
+  stable
   </etat>
   <description>
 	<multi>
