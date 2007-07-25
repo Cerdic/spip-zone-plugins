@@ -36,7 +36,7 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 
 // Le formulaire en lui meme...
 	$corps_supp .= "<b>"._T('asso:adherent_libelle_reference_interne')."</b>"
-	. "<input type='text' name='id_asso' class='formo' readonly='true' value='".$id."' />\n"
+	. "<input type='text' name='id_asso' class='formo' value='".$id."' />\n"
 	. "<b>"._T('asso:adherent_libelle_nom')."</b>"
 	. "<input type='text' name='nom' class='formo' value=\"".entites_html($auteur['nom'])."\" />\n"
 	. "<b>"._T('asso:adherent_libelle_prenom')."</b>"

@@ -36,8 +36,17 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 	$cp=_request('cp');
 	$ville=_request('ville');
 	$telephone=_request('telephone');
+	$portable=_request('portable');
 	$categorie=_request('categorie');
 	$commentaire=_request('commentaire');
+	$publication=_request('publication');
+	$naissance=_request('naissance');
+	$profession=_request('profession');
+	$societe=_request('societe');
+	$utilisateur1=_request('utilisateur1');
+	$utilisateur2=_request('utilisateur2');
+	$utilisateur3=_request('utilisateur3');
+	$utilisateur4=_request('utilisateur4');
 	$bouton=_request('bouton');
 	
 	//echo "le bouton -> $bouton " ;
@@ -76,8 +85,8 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 		envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 		
 		//on enregistre les données dans la table
-		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, categorie, statut, remarques, creation) 
-		VALUES ("._q($nom).", "._q($prenom).",  "._q($mail).",  "._q($rue).", "._q($cp).", "._q($ville).", "._q($telephone).", "._q($categorie).", "._q(prospect).", "._q($commentaire).", NOW() ) ");	
+		spip_query ( " INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, portable, categorie, statut, remarques, publication, naissance, profession, societe, utilisateur1, utilisateur2, utilisateur3, utilisateur4,creation) 
+		VALUES ("._q($nom).", "._q($prenom).",  "._q($mail).",  "._q($rue).", "._q($cp).", "._q($ville).", "._q($telephone).", "._q($portable).", "._q($categorie).", "._q(prospect).", "._q($commentaire).", "._q($publication).", "._q($naissance).", "._q($profession).", "._q($societe).", "._q($utilisateur1).", "._q($utilisateur2).", "._q($utilisateur3).", "._q($utilisateur4).", NOW() ) ");	
 		
 		/*
 		//dire merci		
@@ -170,17 +179,27 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 					array(
 						'formulaires/formulaire_adherent_previsu',0,
 						array(
-							'nom'		=> $nom,
-							'prenom'	=> $prenom,
-							'sexe'		=> $sexe ,
-							'mail'		=> $mail,
-							'rue'		=> $rue,
-							'cp'		=> $cp,
-							'ville'		=> $ville,
-							'telephone'=> $telephone,
-							'categorie'	=> $categorie,
+							'nom'			=> $nom,
+							'prenom'		=> $prenom,
+							'sexe'			=> $sexe ,
+							'mail'			=> $mail,
+							'rue'			=> $rue,
+							'cp'			=> $cp,
+							'ville'			=> $ville,
+							'telephone'	=> $telephone,
+							'portable' 		=> $portable,
+							'categorie'		=> $categorie,
 							'commentaire'=> $commentaire,
-							'bouton'	=> "Valider",
+							'naissance' 	=> $naissance,
+							'profession' 	=> $profession,
+							'societe' 		=> $societe,
+							'utilisateur1' 	=> $utilisateur1,
+							'utilisateur2' 	=> $utilisateur2,
+							'utilisateur3' 	=> $utilisateur3,
+							'utilisateur4' 	=> $utilisateur4,
+							'secteur'		=> $secteur,
+							'publication'	=> $publication,
+							'bouton'		=> "Valider",
 							'erreur_email' => $erreur_email,
 							'erreur_nom' => $erreur_nom,
 							'erreur_prenom' => $erreur_prenom,
@@ -217,13 +236,10 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 						)
 					),
 					false
-				);
-				
-			}
-			
+				);	
+			}			
 		}
 	}		
-	
 	
 	//formulaire d'adhesion
 	return array (
@@ -236,7 +252,17 @@ function balise_FORMULAIRE_ADHERENT_dyn() {
 			'cp'		=> $cp,
 			'ville'		=> $ville,
 			'telephone'=> $telephone,
+			'portable'	=> $portable,
 			'commentaire'=> $commentaire
+			'naissance' 	=> $naissance,
+			'profession' 	=> $profession,
+			'societe' 		=> $societe,
+			'utilisateur1' 	=> $utilisateur1,
+			'utilisateur2' 	=> $utilisateur2,
+			'utilisateur3' 	=> $utilisateur3,
+			'utilisateur4' 	=> $utilisateur4,
+			'secteur'		=> $secteur,
+			'publication'	=> $publication,
 			)
 		);
 	

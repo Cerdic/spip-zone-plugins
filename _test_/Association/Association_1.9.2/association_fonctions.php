@@ -3,7 +3,7 @@
 * Plugin Association
 *
 * Copyright (c) 2007
-* Bernard Blazin & FranÃ§ois de Montlivault
+* Bernard Blazin & François de Montlivault
 * http://www.plugandspip.com 
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 * Pour plus de details voir le fichier COPYING.txt.
@@ -134,29 +134,56 @@ $tables_principales['spip_asso_banques']= array(
 'key' => array("PRIMARY KEY" => "id_banque")
 );	
 
-$tables_principales['spip_asso_activites']= array(
-	'field' => array(
-					"id_activite"		=> "bigint(20) NOT NULL auto_increment",
-					"id_evenement"	=> "bigint(20) NOT NULL",
-					"nom"				=> "text NOT NULL",
-					"id_adherent"		=> "bigint(20) NOT NULL",
-					"membres"		=> "text NOT NULL",
-					"non_membres"	=> "text NOT NULL",
-					"inscrits"			=> "int(11) NOT NULL default '0'",
-					"date"				=> "date NOT NULL default '0000-00-00'",
-					"telephone"		=> "text NOT NULL",
-					"adresse"			=> "text NOT NULL",
-					"email"			=> "text NOT NULL",
-					"commentaire"	=> "text NOT NULL",
-					"montant"			=> "float NOT NULL default '0'",
-					"date_paiement"	=> "date NOT NULL default '0000-00-00'",
-					"statut"			=> "text NOT NULL",
-					),
-					
-	'key' => array("PRIMARY KEY" => "id_activite")
-);	
+	$tables_principales['spip_asso_activites']= array(
+		'field' => array(
+			"id_activite"		=> "bigint(20) NOT NULL auto_increment",
+			"id_evenement"	=> "bigint(20) NOT NULL",
+			"nom"				=> "text NOT NULL",
+			"id_adherent"		=> "bigint(20) NOT NULL",
+			"membres"		=> "text NOT NULL",
+			"non_membres"	=> "text NOT NULL",
+			"inscrits"			=> "int(11) NOT NULL default '0'",
+			"date"				=> "date NOT NULL default '0000-00-00'",
+			"telephone"		=> "text NOT NULL",
+			"adresse"			=> "text NOT NULL",
+			"email"			=> "text NOT NULL",
+			"commentaire"	=> "text NOT NULL",
+			"montant"			=> "float NOT NULL default '0'",
+			"date_paiement"	=> "date NOT NULL default '0000-00-00'",
+			"statut"			=> "text NOT NULL",
+			),		
+		'key' => array("PRIMARY KEY" => "id_activite")
+	);
+	
+	$tables_principales['spip_asso_ressources']= array(
+		'field' => array(
+			"id_ressource"		=> "bigint(20) NOT NULL auto_increment",
+			"code" 				=> "text NOT NULL",
+			"intitule" 				=> "text NOT NULL",
+			"date_acquisition" 	=> "date NOT NULL default '0000-00-00'",
+			"id_achat" 			=> "tinyint(4) NOT NULL default '0'",
+			"pu" 					=> "float NOT NULL default '0'",
+			"statut"				=> "text NOT NULL",
+			"commentaire" 		=> "text NOT NULL"
+			),		
+		'key' => array("PRIMARY KEY" => "id_ressource")
+	);	
 
-//
+	$tables_principales['spip_asso_prets']= array(
+		'field' => array(
+			"id_pret"					=> "bigint(20) NOT NULL auto_increment",
+			"date_sortie" 			=> "date NOT NULL default '0000-00-00'",
+			"duree"					=> "int(11) NOT NULL default '0'",
+			"date_retour" 			=> "date NOT NULL default '0000-00-00'",
+			"statut"					=> "text NOT NULL",
+			"id_emprunteur" 			=> "text NOT NULL",
+			"commentaire_sortie" 	=> "text NOT NULL",
+			"commentaire_retour" 	=> "text NOT NULL"
+			),		
+		'key' => array("PRIMARY KEY" => "id_pret")
+	);	
+	
+	//
 // <BOUCLE(ADHERENTS)>
 //
 function boucle_ASSO_ADHERENTS($id_boucle, &$boucles) {
@@ -195,35 +222,53 @@ function boucle_ASSO_COMPTES($id_boucle, &$boucles) {
 //
 // <BOUCLE(BANQUES)>
 //
-function boucle_ASSO_banqueS($id_boucle, &$boucles) {
+function boucle_ASSO_BANQUES($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
         $boucle->from[$id_table] =  "spip_asso_banques";  
         return calculer_boucle($id_boucle, $boucles);
 }
 
-//
-// <BOUCLE(CATEGORIES)>
-//
-function boucle_ASSO_CATEGORIES($id_boucle, &$boucles) {
+	//
+	// <BOUCLE(CATEGORIES)>
+	//
+	function boucle_ASSO_CATEGORIES($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
         $boucle->from[$id_table] =  "spip_asso_categories";  
         return calculer_boucle($id_boucle, $boucles);
-}
+	}
 
-//
-// <BOUCLE(ACTIVITES)>
-//
-function boucle_ASSO_ACTIVITES($id_boucle, &$boucles) {
+	//
+	// <BOUCLE(ACTIVITES)>
+	//
+	function boucle_ASSO_ACTIVITES($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
         $boucle->from[$id_table] =  "spip_asso_activites";  
         return calculer_boucle($id_boucle, $boucles);
-}
+	}
 
-	// Page blanche //include_spip('base/association');
-	//include_spip('inc/plugin');
+	//
+	// <BOUCLE(RESSOURCES)>
+	//
+	function boucle_ASSO_RESSOURCES($id_boucle, &$boucles) {
+        $boucle = &$boucles[$id_boucle];
+        $id_table = $boucle->id_table;
+        $boucle->from[$id_table] =  "spip_asso_ressources";  
+        return calculer_boucle($id_boucle, $boucles);
+	}
+	
+	//
+	// <BOUCLE(PRETS)>
+	//
+	function boucle_ASSO_PRETS($id_boucle, &$boucles) {
+        $boucle = &$boucles[$id_boucle];
+        $id_table = $boucle->id_table;
+        $boucle->from[$id_table] =  "spip_asso_prets";  
+        return calculer_boucle($id_boucle, $boucles);
+	}
+	
 function association_header_prive($flux){
 	$flux .= '<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('association.css')).'" />';
 		return $flux;

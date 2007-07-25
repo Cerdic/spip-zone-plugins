@@ -51,6 +51,10 @@
 		<label><strong><:asso:config_libelle_activites:></strong></label> <br />
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
 		<input type="text" name="pc_activites" value="#ENV{pc_activites}" id="pc_activites" /> <br />
+		<input type="checkbox" name="prets" [checked="(#ENV{prets}?{checked})"] id="prets" />
+		<label><strong><:asso:config_libelle_prets:></strong> </label><br />		
+		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
+		<input type="text" name="pc_prets" value="#ENV{pc_prets}" id="pc_prets" /> <br />
 		<label for="indexation"><strong><:asso:config_libelle_indexation:></strong></label>
 		<input type="radio" name="indexation" value="id_adherent" [checked="(#ENV{indexation}|=={id_adherent}|?{checked})"] id="indexation" /><:asso:config_libelle_id_adherent:>
 		<input type="radio" name="indexation" value="id_asso" [checked="(#ENV{indexation}|=={id_asso}|?{checkted})"] id="indexation" /><:asso:config_libelle_id_asso:> <br />

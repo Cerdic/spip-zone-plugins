@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 /**
 * Plugin Association
 *
 * Copyright (c) 2007
-* Bernard Blazin & François de Montlivault
+* Bernard Blazin & Fran�ois de Montlivault
 * http://www.plugandspip.com 
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 * Pour plus de details voir le fichier COPYING.txt.

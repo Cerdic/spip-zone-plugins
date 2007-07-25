@@ -1,43 +1,44 @@
 <?php
-/**
-* Plugin Association
-*
-* Copyright (c) 2007
-* Bernard Blazin & François de Montlivault
-* http://www.plugandspip.com 
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-* Pour plus de details voir le fichier COPYING.txt.
-*  
-**/
+	/**
+	* Plugin Association
+	*
+	* Copyright (c) 2007
+	* Bernard Blazin & François de Montlivault
+	* http://www.plugandspip.com 
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	* Pour plus de details voir le fichier COPYING.txt.
+	*  
+	**/
 
-// Declaration des tables evenements
+	// Declaration des tables evenements
 
-include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
+	include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
+	
+	global $tables_principales;
+	global $tables_auxiliaires;
 
-global $tables_principales;
-global $tables_auxiliaires;
+	//-- Table CATEGORIES COTISATION ------------------------------------------
+	$spip_asso_categories = array(
+		"id_categorie" 	=> "int(10) unsigned NOT NULL auto_increment",
+		"valeur" 			=> "tinytext NOT NULL",
+		"libelle" 			=> "text NOT NULL",
+		"duree" 			=> "text NOT NULL",
+		"cotisation" 		=> "float NOT NULL default '0'",
+		"commentaires" 	=> "text NOT NULL",
+		"maj" 				=> "timestamp(14) NOT NULL"
+	);
 
-//-- Table CATEGORIES COTISATION ------------------------------------------
-$spip_asso_categories = array(
-						"id_categorie" 	=> "int(10) unsigned NOT NULL auto_increment",
-						"valeur" 			=> "tinytext NOT NULL",
-						"libelle" 			=> "text NOT NULL",
-						"duree" 			=> "text NOT NULL",
-						"cotisation" 		=> "float NOT NULL default '0'",
-						"commentaires" 	=> "text NOT NULL",
-						"maj" 				=> "timestamp(14) NOT NULL"
-						);
+	$spip_asso_categories_key = array(
+		"PRIMARY KEY" => "id_categorie"
+	);	
 
-$spip_asso_categories_key = array(
-						"PRIMARY KEY" => "id_categorie"
-						);	
-
-$tables_principales['spip_asso_categories'] = array(
+	$tables_principales['spip_asso_categories'] = array(
 		'field' => &$spip_asso_categories, 
-		'key' => &$spip_asso_categories_key);
+		'key' => &$spip_asso_categories_key
+	);
 
-//-- Table ADHERENTS ------------------------------------------
-$spip_asso_adherents = array(
+	//-- Table ADHERENTS ------------------------------------------
+	$spip_asso_adherents = array(
 						"id_adherent" 	=> "BIGINT(21) NOT NULL AUTO_INCREMENT",
 						"nom" 			=> "TEXT NOT NULL ",
 						"prenom" 			=> "TEXT NOT NULL ",
@@ -131,102 +132,128 @@ $tables_principales['spip_asso_ventes'] = array(
 		'field' => &$spip_asso_ventes, 
 		'key' => &$spip_asso_ventes_key);
 	
-//-- Table COMPTES ------------------------------------------
-$spip_asso_comptes = array(
-						"id_compte" 	=> "bigint(21) NOT NULL auto_increment",
-						"date" 		=> "date default NULL",
-						"recette" 		=> "float NOT NULL default '0'",
-						"depense" 	=> "float NOT NULL default '0'",
-						"justification" => "text",
-						"imputation" 	=> "text",
-						"journal" 		=> "tinytext",
-						"id_journal" 	=> "int(11) NOT NULL default '0'",
-						"maj" 			=> "timestamp(14) NOT NULL"
-					);						
-$spip_asso_comptes_key = array(
-						"PRIMARY KEY" => "id_compte"
-						);
-
-$tables_principales['spip_asso_comptes'] = array(
+	//-- Table COMPTES ------------------------------------------
+	$spip_asso_comptes = array(
+		"id_compte" 	=> "bigint(21) NOT NULL auto_increment",
+		"date" 		=> "date default NULL",
+		"recette" 		=> "float NOT NULL default '0'",
+		"depense" 	=> "float NOT NULL default '0'",
+		"justification" => "text",
+		"imputation" 	=> "text",
+		"journal" 		=> "tinytext",
+		"id_journal" 	=> "int(11) NOT NULL default '0'",
+		"maj" 			=> "timestamp(14) NOT NULL"
+	);						
+	$spip_asso_comptes_key = array(
+		"PRIMARY KEY" => "id_compte"
+	);
+	$tables_principales['spip_asso_comptes'] = array(
 		'field' => &$spip_asso_comptes, 
-		'key' => &$spip_asso_comptes_key);
+		'key' => &$spip_asso_comptes_key
+	);
 
-//-- Table FINANCIERS ------------------------------------------
-$spip_asso_financiers = array(
-						"id_financier" 	=> "int(11) NOT NULL auto_increment",
-						"code" 			=> "text NOT NULL",
-						"intitule" 			=> "text NOT NULL",
-						"reference" 		=> "text NOT NULL",
-						"solde" 			=> "float NOT NULL default '0'",
-						"commentaire" 	=> "text NOT NULL",
-						"maj" 				=> "timestamp(14) NOT NULL"
-					);						
-$spip_asso_financiers_key = array(
-						"PRIMARY KEY" => "id_financier"
-						);
-
-$tables_principales['spip_asso_financiers'] = array(
+	//-- Table FINANCIERS ------------------------------------------
+	$spip_asso_financiers = array(
+		"id_financier" 	=> "int(11) NOT NULL auto_increment",
+		"code" 			=> "text NOT NULL",
+		"intitule" 			=> "text NOT NULL",
+		"reference" 		=> "text NOT NULL",
+		"solde" 			=> "float NOT NULL default '0'",
+		"commentaire" 	=> "text NOT NULL",
+		"maj" 				=> "timestamp(14) NOT NULL"
+	);						
+	$spip_asso_financiers_key = array(
+		"PRIMARY KEY" => "id_financier"
+	);
+	$tables_principales['spip_asso_financiers'] = array(
 		'field' => &$spip_asso_financiers, 
-		'key' => &$spip_asso_financiers_key);
+		'key' => &$spip_asso_financiers_key
+	);
 
-//-- Table LIVRES ------------------------------------------
-$spip_asso_livres = array(
-					"id_livre"		=> "tinyint(4) NOT NULL auto_increment",
-					"valeur"		=> "text NOT NULL",
-					"libelle"		=> "text NOT NULL",
-					"maj"			=> " timestamp(14) NOT NULL"
-					);						
-$spip_asso_livres_key = array(
-						"PRIMARY KEY" => "id_livre"
-						);
+	//-- Table RESSOURCES ------------------------------------------
+	$spip_asso_ressources = array(
+		"id_ressource"		=> "bigint(20) NOT NULL auto_increment",
+		"code" 				=> "text NOT NULL",
+		"intitule" 				=> "text NOT NULL",
+		"date_acquisition"	=> "date NOT NULL default '0000-00-00'",
+		"id_achat" 			=> "tinyint(4) NOT NULL default '0'",
+		"pu" 					=> "float NOT NULL default '0'",
+		"statut"				=> "text NOT NULL",
+		"commentaire" 		=> "text NOT NULL",
+		"maj" 					=> "timestamp(14) NOT NULL"
+	);		
+	$spip_asso_ressources_key = array(
+		"PRIMARY KEY" => "id_ressource"
+	);
+	$tables_principales['spip_asso_ressources'] = array(
+		'field' => &$spip_asso_ressources, 
+		'key' => &$spip_asso_ressources_key
+	);
 
-$tables_principales['spip_asso_livres'] = array(
-		'field' => &$spip_asso_livres, 
-		'key' => &$spip_asso_livres_key);
-		
-//-- Table ACTIVITES ------------------------------------------
-$spip_asso_activites = array(
-					"id_activite"		=> "bigint(20) NOT NULL auto_increment",
-					"id_evenement"	=> "bigint(20) NOT NULL",
-					"nom"				=> "text NOT NULL",
-					"id_adherent"		=> "bigint(20) NOT NULL",
-					"accompagne"	=> "text NOT NULL",
-					"inscrits"			=> "int(11) NOT NULL default '0'",
-					"date"				=> "date NOT NULL default '0000-00-00'",
-					"telephone"		=> "text NOT NULL",
-					"adresse"			=> "text NOT NULL",
-					"email"			=> "text NOT NULL",
-					"commentaire"	=> "text NOT NULL",
-					"montant"			=> "float NOT NULL default '0'",
-					"date_paiement"	=> "date NOT NULL default '0000-00-00'",
-					"statut"			=> "text NOT NULL",
-					"maj"				=> "timestamp(14) NOT NULL"
-					);						
-$spip_asso_activites_key = array(
-						"PRIMARY KEY" => "id_activite"
-						);
-
-$tables_principales['spip_asso_activites'] = array(
+	//-- Table PRETS ------------------------------------------
+	$spip_asso_ressources = array(
+		"id_pret"					=> "bigint(20) NOT NULL auto_increment",
+		"date_sortie" 			=> "date NOT NULL default '0000-00-00'",
+		"duree"					=> "int(11) NOT NULL default '0'",
+		"date_retour" 			=> "date NOT NULL default '0000-00-00'",
+		"id_emprunteur" 			=> "text NOT NULL",
+		"statut"					=> "text NOT NULL",
+		"commentaire_sortie" 	=> "text NOT NULL",
+		"commentaire_retour" 	=> "text NOT NULL",
+		"maj" 						=> "timestamp(14) NOT NULL"
+	);		
+	$spip_asso_ressources_key = array(
+		"PRIMARY KEY" => "id_pret"
+	);
+	$tables_principales['spip_asso_prets'] = array(
+		'field' => &$spip_asso_prets, 
+		'key' => &$spip_asso_prets_key
+	);
+	
+	//-- Table ACTIVITES ------------------------------------------
+	$spip_asso_activites = array(
+		"id_activite"		=> "bigint(20) NOT NULL auto_increment",
+		"id_evenement"	=> "bigint(20) NOT NULL",
+		"nom"				=> "text NOT NULL",
+		"id_adherent"		=> "bigint(20) NOT NULL",
+		"accompagne"	=> "text NOT NULL",
+		"inscrits"			=> "int(11) NOT NULL default '0'",
+		"date"				=> "date NOT NULL default '0000-00-00'",
+		"telephone"		=> "text NOT NULL",
+		"adresse"			=> "text NOT NULL",
+		"email"			=> "text NOT NULL",
+		"commentaire"	=> "text NOT NULL",
+		"montant"			=> "float NOT NULL default '0'",
+		"date_paiement"	=> "date NOT NULL default '0000-00-00'",
+		"statut"			=> "text NOT NULL",
+		"maj"				=> "timestamp(14) NOT NULL"
+	);						
+	$spip_asso_activites_key = array(
+		"PRIMARY KEY" => "id_activite"
+	);
+	$tables_principales['spip_asso_activites'] = array(
 		'field' => &$spip_asso_activites, 
-		'key' => &$spip_asso_activites_key);
+		'key' => &$spip_asso_activites_key
+	);
 
-//-- Relations ----------------------------------------------------
+	//-- Relations ----------------------------------------------------
 
-//global $tables_jointures;
-//	$tables_jointures['spip_adherents'][]= 'bienfaiteurs';
-//	$tables_jointures['spip_bienfaiteurs'][]= 'adherents';
+	global $tables_jointures;
+	$tables_jointures['spip_asso_ressources'][]= 'asso_prets';
+	$tables_jointures['spip_asso_prets'][]= 'asso_ressources';
 //	$tables_jointures['spip_ventes'][]= 'banque';
 //	$tables_jointures['spip_banque'][]= 'ventes';
 
-//-- Table des tables ----------------------------------------------------
+	//-- Table des tables ----------------------------------------------------
 
-global $table_des_tables;
+	global $table_des_tables;
 	$table_des_tables['asso_adherents'] = 'asso_adherents';
 	$table_des_tables['asso_bienfaiteurs'] = 'asso_bienfaiteurs';
 	$table_des_tables['asso_ventes'] = 'asso_ventes';
 	$table_des_tables['asso_comptes'] = 'asso_comptes';
 	$table_des_tables['asso_categories'] = 'asso_categories';
      $table_des_tables['asso_financiers'] = 'asso_financiers';
-	$table_des_tables['asso_livres'] = 'asso_livres';
+	$table_des_tables['asso_ressources'] = 'asso_ressources';
+	$table_des_tables['asso_prets'] = 'asso_prets';
 	$table_des_tables['asso_activites'] = 'asso_activites';
 ?>

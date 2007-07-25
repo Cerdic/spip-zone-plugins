@@ -75,6 +75,9 @@ Le bureau de l\'association.
 
 Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique 
 	',
+	'message_adhesion_webmaster' =>'
+	
+	',
 	'profil_de_lassociation' => 'Profil de l\'association',
 	
 # Adherents
