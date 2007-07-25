@@ -20,8 +20,8 @@
 
 global $Config ;
 
-$cheminEcrire = "../../../../../../../../ecrire/";
-$cheminConfig="../../../../../../../../config/";
+$cheminEcrire ="../../../../../../ecrire/";
+	
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 function spip_connect_db($host, $port, $login, $pass, $db) {
@@ -29,7 +29,11 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	$fck_mysql_link = @mysql_connect($host, $login, $pass);
 	mysql_select_db($db);
 }
-	include ($cheminConfig.'connect.php');
+// Pour charger le bon fichier de connexion selon la version
+@include('../../../../../../../../config/connect.php');
+@include('../../../../../../../../ecrire/inc_connect.php');
+
+
 
 // SECURITY: You must explicitelly enable this "connector". (Set it to "true").
 $Config['Enabled'] = true ;

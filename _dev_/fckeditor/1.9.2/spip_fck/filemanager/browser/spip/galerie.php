@@ -1,9 +1,8 @@
 <?php
 
-	$chemin = "../../../../../../";
-	$cheminEcrire = $chemin."ecrire/";
-	$cheminImages = $chemin."dist/images/";
-	$cheminConfig=$chemin."config/";
+	$cheminSpip = "../../../../../../";
+	$cheminEcrire = $cheminSpip."ecrire/";
+	$cheminImages = $cheminSpip."dist/images/";
 	if (defined("_ECRIRE_INC_VERSION")) return;
 	define("_ECRIRE_INC_VERSION", "1");
 	function spip_connect_db($host, $port, $login, $pass, $db) {
@@ -11,11 +10,15 @@
 		$fck_mysql_link = @mysql_connect($host, $login, $pass);
 		mysql_select_db($db);
 	}
-	include ($cheminConfig.'connect.php');
+	
+// Pour charger le bon fichier de connexion selon la version
+@include('../../../../../../../../config/connect.php');
+@include('../../../../../../../../ecrire/inc_connect.php');
+
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="<?php echo $chemin; ?>spip.php?page=style_prive&amp;couleur_claire=C0CAD4&amp;couleur_foncee=85909A&amp;ltr=left" >
+		<link rel="stylesheet" type="text/css" href="<?php echo $cheminSpip; ?>spip.php?page=style_prive&amp;couleur_claire=C0CAD4&amp;couleur_foncee=85909A&amp;ltr=left" >
 		<script type='text/javascript'><!--
 			var admin = 0;
 			var stat = 1;

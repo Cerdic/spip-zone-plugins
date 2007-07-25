@@ -5,11 +5,26 @@
       <br />Logo [Everaldo Coelho->http://www.everaldo.com]
    </auteur>
 	<version>1.7</version>
-	<etat>test</etat>
+	<etat><!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	stable</etat>
 	<lien>Aide compl&#232;te sur [Electropol->http://electropol.free.fr]</lien>
 	<icon>images/edit.png</icon>	
-	<prefix>fckeditor</prefix>	
-	
+		<!-- prefixe des fonctions, filtres et fichers de votre plugin :
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : fckeditor_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+    <prefix>fckeditor</prefix>	
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<!-- pipeline qui permet de modifier les pages publiques html issues du cache ou du calcul avant leur envoi au navigateur
+		il permet de modifier n'importe quoi, mais est execute a chaque fois et ne profite pas du cache
+		il est donc a reserver pour des plugins qui ne sont pas utilises en production de preference
+		-->
+		<nom>header_prive</nom> 
+		<action>header_prive</action>
+		<inclure>fckeditor_pipelines.php</inclure>
+	</pipeline>	
 	
 <description>
 {{Edition WYSIWYG avec FCKeditor}}
@@ -19,7 +34,8 @@
 <u>Fin de l'installation et mise &agrave; jour :</u>
 -* -Vous devez avoir install&#233; et valid&#233; le plugin {{Chargeur}}
 -* -Pour finir d'installer FCKEditor vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=fckeditor&amp;dest_path=plugins/fckeditor] pour t&#233;l&#233;charger automatiquement la derni&#232;re version valid&#233;e pour ce plugin de FCKEditor. 
--* -Pour utiliser Geshi (coloration syntaxique), vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=geshi&amp;dest_path=plugins/fckeditor/spip_fck/plugins/coloration] pour ajouter le module correspondant. 
+-* -Pour utiliser Geshi (coloration syntaxique), vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=geshi&amp;dest_path=plugins/fckeditor/spip_fck/plugins/coloration] pour ajouter le module correspondant.
+Attention : Ces fonctions ne marchent pas bien et ne sont l&agrave; qu'&agrave; titre exp&#233;rimental. 
 
 <u>Caract&#233;ristiques :</u>
 -* - Edition des articles et des br&#232;ves,
@@ -49,10 +65,4 @@
 -* - De nombreux boutons peuvent &#234;tre jug&#233;s inutiles (voire dangereux) par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez les deux FCKConfig.ToolbarSets (BarreArticle et BarreBr&#232;ve). 
 </description>
 	
-	
-	<pipeline>
-		<nom>header_prive</nom> 
-		<action>header_prive</action>
-		<inclure>fckeditor_pipelines.php</inclure>
-	</pipeline>
 </plugin>
