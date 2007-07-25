@@ -741,7 +741,9 @@ Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site
 </small>
 </fieldset>
 
+[(#REM) ------------------------ GEOLOCALISATION? ------------------------ ]
 
+[(#CONFIG{plugin/GEOMAP/version}|?{' ', ''})<INCLURE{fond=fonds/inscription2_geoloc}>]
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
 <fieldset>

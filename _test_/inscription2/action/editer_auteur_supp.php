@@ -40,12 +40,13 @@ function action_editer_auteur_supp_post($r){
 		list($tout, $id_auteur, $ajouter_id_article,$x,$s) = $r;
 
 		foreach(lire_config('inscription2') as $cle => $val){
-			echo $cle;
 			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle)){
 				$cle = ereg_replace("^username.*$", "login", $cle);
 				$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 				if($cle == 'nom' or $cle == 'email' or $cle == 'login')
 					$var_user['a.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
+				elseif($cle == 'statut_nouveau'){
+				}
 				elseif(ereg("^statut_rel.*$", $cle))
 					$var_user['b.statut_relances'] =  '`statut_relances` = \''.$_POST['statut_relances'].'\'';
 				else

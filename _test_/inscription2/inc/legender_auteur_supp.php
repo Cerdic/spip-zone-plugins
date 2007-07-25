@@ -101,9 +101,10 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 	
 	foreach ($query as $cle => $val){
 		
-		if(($cle == 'id') || ($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email'))
-			continue;
-		if($cle == 'pays'){
+		if(($cle == 'id') || ($cle == 'id_pays') || ($cle == 'id_pays_pro') ||  ($cle == 'login') || ($cle == 'nom') || ($cle == 'email')){
+			$corps_supp .= "<input type='hidden' id='$cle' name='$cle' value='$val'>";
+		}
+		elseif($cle == 'pays'){
 			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
 				. "<select name='$cle' id='$cle' class='formo' style='width:auto'>"
 				. "<option value=''>"._T('inscription2:pays')."</option>";
@@ -127,9 +128,17 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 					$corps_supp .= "<option value='$cle'>$val</option>";
 			}$corps_supp .= "</select>";
 		}
+		elseif ($cle == 'latitude'){
+			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
+				$corps_supp .= "<br /><div class='geomap' id='map'> </div><br />";
+				$corps_supp .= $geomap_append_moveend_map("map",'latitude','longitude',$query['latitude'],$query['longitude'], NULL,NULL,true);
+			}
+			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
+			. "<input type='text' id='$cle' name='$cle' class='formo' value='$val'><br />";
+		}
 		elseif($cle!= 'id_auteur' and $cle != 'statut_nouveau')
 		$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
-		. "<input type='text' name='$cle' class='formo' value='$val'><br />"; 
+		. "<input type='text' id='$cle' name='$cle' class='formo' value='$val'><br />"; 
 	}
 	if($news){
 		$corps_supp .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
