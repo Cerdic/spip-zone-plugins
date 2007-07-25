@@ -1,6 +1,8 @@
 #SET{expose,#ARRAY{0}}<BOUCLE_expose(MOTS){id_article}>[(#GET{expose}|array_push{#ID_MOT}|vide)]</BOUCLE_expose>
 <BOUCLE_tags(MOTS){id_groupe==^((#ENV{id,.*}))$}>[
-(#ID_MOT|nuage_pop{#TITRE,#URL_MOT})
+(#ID_MOT|nuage{#TITRE,#URL_MOT})
 ]<BOUCLE_pop(ARTICLES){id_mot}{par popularite}{inverse}{0,200}>[
-(#ID_MOT|nuage_pop{'','',#POPULARITE_ABSOLUE})
-]</BOUCLE_pop></BOUCLE_tags>[(#REM|sinon{0}|nuage_pop{'','',-1,#GET{expose}})]
+(#ID_MOT|nuage{'','',#POPULARITE_ABSOLUE})
+]</BOUCLE_pop></BOUCLE_tags>[<ul class="nuage">
+	(#FOREACH{NUAGE,foreach_nuage_pop})
+</ul>]
