@@ -9,7 +9,7 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 [(#REM) icone=images/fontsizeup.png]
 #CACHE{0}
 
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 <fieldset><legend><:boutonstexte:textes_icones:></legend>
 <p>
@@ -57,8 +57,10 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 <p>Si vide, reviendront au d&eacute;faut</p>
 </fieldset>
 
-<input type="submit" name="_cfg_ok" value="<:OK:>" />
-<input type="reset" value="<:Reset:>" />
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
 </form>
 
