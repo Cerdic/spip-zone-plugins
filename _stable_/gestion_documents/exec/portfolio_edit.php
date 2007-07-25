@@ -314,7 +314,7 @@ function exec_portfolio_edit(){
 			}
 
 			// test de la balise alt
-			$montexte = "<img$id_search>";
+			$montexte = isset($GLOBALS['gestion_doc_img_test'])?str_replace('%d',$id_search,$GLOBALS['gestion_doc_img_test']):"<img$id_search>";
 			$montexte = propre($montexte);
 			$altgood = false;
 			if (NULL !== ($alt = extraire_attribut($montexte,'alt'))) {
