@@ -91,11 +91,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_auto' => '(ceci est un message automatique)',
 'texte_email_inscription' =>   'Vous avez demand&eacute; &agrave; participer &agrave; notre site @nom_site@. 
 Vous &ecirc;tes actuellement sur le point de finir votre inscription. Il vous suffit de cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
+
 @link_activation@
 
 Votre login est&nbsp;: @login@
 
-Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.\n
+Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.
+
 @link_suppresion@
 
 Merci de votre confiance.
@@ -104,10 +106,10 @@ L\'6eacute;quipe de @nom_site@',
 'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
 'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
-'texte_email_confirmation' => 'Votre compte vient d\'&ecirc;tre activ&eacute;, vous pouvez d&egrave;s maintenant vous connecter &agrave; notre site en utilisant vos identifiants personnels.\n
+'texte_email_confirmation' => 'Votre compte vient d\'&ecirc;tre activ&eacute;, vous pouvez d&egrave;s maintenant vous connecter &agrave; notre site en utilisant vos identifiants personnels.
 
 Votre login est&nbsp;: @login@
-et votre mot de passe vous venez de le saisir.
+et vous venez choisir votre mot de passe.
 
 Merci de Votre Confiance
 
