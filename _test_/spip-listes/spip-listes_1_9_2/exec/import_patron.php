@@ -90,7 +90,6 @@ function exec_import_patron(){
 	echo "</div>";
 	
 	echo "</body></html>";
-		 
 }	
 
 ?>

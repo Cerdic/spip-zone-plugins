@@ -29,6 +29,7 @@ function exec_abonne_edit(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $connect_id_auteur;
+	
 	$id_auteur = _request('id_auteur');
 	$confirm = _request('confirm');
 	$suppr_auteur = _request('suppr_auteur');

@@ -31,8 +31,11 @@ function exec_import_export(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $connect_id_auteur;
-	global $type,$list_abo;
-	global $new, $etape;
+	global $type;
+
+	$list_abo= _request('list_abo');
+	$etape= _request('etape');
+	$new= _request('new');
 
 	$nomsite=lire_meta("nom_site"); 
 	$urlsite=lire_meta("adresse_site"); 
@@ -157,19 +160,19 @@ function exec_import_export(){
 	return $login;
 	}
 
-	$format = $GLOBALS['suppl_abo'];
+	$format = _request('suppl_abo');
 
 
 	// import form
 	echo debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:importer'));
-
 	switch ($etape) {
 		case "2" :
 	{
 
 		if (!$insert_file) $insert_file = $_FILES["insert_file"]["tmp_name"] ;
 		if ($insert_file && $insert_file != "none") {		
-		  $import_file = _DIR_TMP."import_email.txt";	
+		  $import_file = _DIR_TMP."import_email.txt";
+		  
       $ok = @copy($insert_file,$import_file); // a terme utiliser la fonction de spip: deplacer_fichier_upload (inc/getdocument) ?
       if (!$ok) $ok = @move_uploaded_file($insert_file,$import_file);
                 	  
@@ -183,7 +186,7 @@ function exec_import_export(){
 				$new_abonne = 0;
 
 				for($i=0;$i<sizeof($liste); $i++) {
-          $tmp_log = "\n<br style='clear:both'/>";				  
+					$tmp_log = "\n<br style='clear:both'/>";				  
 
 					/* Ajouter un nouvel enregistrement dans la table */
 					$liste[$i]=trim($liste[$i]);
@@ -204,7 +207,7 @@ function exec_import_export(){
 							$htpass = generer_htpass($pass);
 							$statut = "6forum" ;
 							$cookie = creer_uniqid();
-							$format_abo = _q($GLOBALS['suppl_abo']) ;
+							$format_abo = _q(_request('suppl_abo'));
 							$resulta = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription));
 
 							if ($row = spip_fetch_array($resulta)) {
@@ -243,37 +246,33 @@ function exec_import_export(){
 								$statut = $row['statut'];
 								$nom = $row['nom'];
 								$mel = $row['email'];
-
 							// on abonne l'auteur aux listes
 								if(is_array($list_abo)){
 									reset($list_abo);
 									while( list(,$val) = each($list_abo) ){										 
-										 //$tmp_log .= "liste $val ";
-										 $result = spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($val));
+										//$tmp_log .= "liste $val ";
+										$result = spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($val));
 
-										 if($GLOBALS['suppl_abo'] !='non')
-											           spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($val).")");										 	
+										if(_request('suppl_abo') !='non')
+											spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($val).")");										 	
 										 
 									}																				 
 									$new_abonne++;
 								}else{
-								if($GLOBALS['suppl_abo'] =='non'){
+								if(_request('suppl_abo') =='non'){
 									$result=spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_auteur="._q($id_auteur)); 
 									$tmp_log .= "<strong>"._T('spiplistes:desabo')."</strong>";
 								}
 								}
 							}
 						} else {
-
 							$tmp_log .= _T('spiplistes:erreur_import').$ligne_nb.": ";
 							$tmp_log .= "<span style='color:red;margin-bottom:5px'>".$liste[$i]." : </span>";
 						}//email valide
-						
-            echo $tmp_log;
+						echo $tmp_log;
 					}//listei
 
 				}// for
-
 				unlink($import_file);				
 				echo "<div style='margin:10px 0'><strong>"._T('spiplistes:adresses_importees').": </strong> $new_abonne</div>\n";
 			}// move et file
@@ -281,6 +280,7 @@ function exec_import_export(){
 		} // insert
 		else echo "<br /><br /><center><strong>"._T('spiplistes:erreur')."</strong></center>";
 		echo "<a href='?exec=import_export'>["._T('spiplistes:retour_link')."]</a>";
+		echo "</div>";
 	}
 	break ;
 
@@ -344,7 +344,7 @@ function exec_import_export(){
 		--> ";
 
 	echo "<h5>"._T('spiplistes:importer_fichier')."</h5>";
-	echo "<input type=file name=\"insert_file\" /><br /><br />";
+	echo "<input type=\"file\" name=\"insert_file\" /><br /><br />";
 	echo "<input type=\"hidden\" name=\"mode\" value=\"inout\" />";
 	echo "<input type=\"hidden\" name=\"import\" value=\"oui\" />";
 	echo "</div>" ;
@@ -356,7 +356,7 @@ function exec_import_export(){
 	/**************/
 
 	echo "</fieldset></div>"; 
-	echo fin_cadre_relief();
+
 
 	// import form end
 
@@ -383,7 +383,7 @@ function exec_import_export(){
 		echo "</form>\n";
 		echo fin_cadre_relief();
 	}
-	
+		echo fin_cadre_relief();
 	// export end //
 
 	// MODE INOUT FIN --------------------------------------------------------------
