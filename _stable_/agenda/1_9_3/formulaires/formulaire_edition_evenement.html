@@ -1,0 +1,115 @@
+<a name='evenement#ID_EVENEMENT'></a>
+<form method='post' action='#ENV{self}#evenement#ID_EVENEMENT'>
+	<div>
+	[(#ENV{self}|form_hidden)]
+	[<input type='hidden' name='id_evenemnt' value='(#ENV{id_evenemnt})' />]
+	<input type='hidden' name='#ENV{evenement_action}' value='1' />
+	
+	</div>
+<fieldset class='agenda-visu-evenement' id='agenda-visu-evenement'>
+<div class='agenda-visu-evenement-bouton-fermer'>
+<a href='[(#ENV{self}|parametre_url{id_evenement,''})]'
+onclick="$('#agenda-visu-evenement').hide();
+$('#afficher_horaire_debut_evenement').hide();
+$('#afficher_horaire_fin_evenement').hide();
+cal_repetitions.hide();
+return false;"><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' style='border:none;'></a>
+</div>
+<legend>[(#ENV{id_evenement}|?{<:agenda:titre_cadre_modifier_evenement:>,<:agenda:titre_cadre_ajouter_evenement:>})]</legend>
+
+[(#REM) TITRE]
+<span class='titre-titre'>
+	<label for="evenement_titre"><:agenda:evenement_titre:></label>
+	[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|table_valeur{evenement_titre}|?{' ',''})obligatoire_oublie]'>
+		(#ENV**{obligatoire}|table_valeur{evenement_titre}|?{<:agenda:info_obligatoire:>,''})</span>]
+</span>
+<span class='titre-visu'>
+	<input type='text' name='evenement_titre' id='evenement_titre' value="[(#ENV**{valeurs}|table_valeur{evenement_titre,''}|entites_html)]" 
+		class='[(#ENV**{obligatoire}|table_valeur{evenement_titre}|?{forml,formo})][(#ENV**{erreur}|table_valeur{evenement_titre}|?{' ',''}) champ_obli_oubli]' 
+		onfocus="this.className='[(#ENV**{obligatoire}|table_valeur{evenement_titre}|=={oui}|?{forml,formo})]-focus'" 
+		onblur="this.className='[(#ENV**{obligatoire}|table_valeur{evenement_titre}|=={oui}|?{forml,formo})]'" />
+</span>
+[(#REM) LIEU]
+<span class='lieu-titre'>
+	<label for="evenement_lieu"><:agenda:evenement_lieu:></label>
+	[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|table_valeur{evenement_lieu}|?{' ',''})obligatoire_oublie]'>
+		(#ENV**{obligatoire}|table_valeur{evenement_lieu}|?{<:agenda:info_obligatoire:>,''})</span>]
+</span>
+<span class='lieu-visu'>
+	<input type='text' name='evenement_lieu' id='evenement_lieu' value="[(#ENV**{valeurs}|table_valeur{evenement_lieu,''}|entites_html)]" 
+		class='[(#ENV**{obligatoire}|table_valeur{evenement_lieu}|?{forml,formo})][(#ENV**{erreur}|table_valeur{evenement_lieu}|?{' ',''}) champ_obli_oubli]' 
+		onfocus="this.className='[(#ENV**{obligatoire}|table_valeur{evenement_lieu}|=={oui}|?{forml,formo})]-focus'" 
+		onblur="this.className='[(#ENV**{obligatoire}|table_valeur{evenement_lieu}|=={oui}|?{forml,formo})]'" />
+</span>
+
+[(#REM) HORAIRE]
+<span class='horaire-titre'>
+	<label for="evenement_lieu"><:agenda:evenement_horaire:></label>
+	<input type='checkbox' name='evenement_horaire' id='evenement_horaire' value='oui' [(#ENV**{valeurs}|table_valeur{evenement_horaire,''}|=={oui}|?{' ',''})checked='checked']
+		onClick="if ($('#evenement_horaire')[0].checked==true) { $('#afficher_horaire_debut_evenement').show();
+$('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_evenement').hide();$('#afficher_horaire_fin_evenement').hide();}" />
+</span>
+
+[(#REM) DATES]
+<span class='date-titre'><:agenda:evenement_date:></span>
+<span class='date-visu'>
+<:agenda:evenement_date_de:>
+[(#ENV**{valeurs}|table_valeur{date_evenement_debut}|WCalendar_controller{'_evenement_debut'})]
+<span class='agenda_visible_au_chargement' id='afficher_horaire_debut_evenement'>
+<:agenda:evenement_date_a_immediat:>
+[(#ENV**{valeurs}|table_valeur{date_evenement_debut}|Agenda_heure_selector{'_debut'})]
+</span>
+<br/>
+<:agenda:evenement_date_au:>
+[(#ENV**{valeurs}|table_valeur{date_evenement_fin}|WCalendar_controller{'_evenement_fin'})]
+<span class='agenda_visible_au_chargement' id='afficher_horaire_fin_evenement'>
+<:agenda:evenement_date_a_immediat:>
+[(#ENV**{valeurs}|table_valeur{date_evenement_fin}|Agenda_heure_selector{'_fin'})]
+</span>
+</span>
+
+[(#REM) DESCRIPTIF]
+<span class='descriptif-titre'>
+	<label for="evenement_descriptif"><:agenda:evenement_descriptif:></label>
+	[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|table_valeur{evenement_descriptif}|?{' ',''})obligatoire_oublie]'>
+		(#ENV**{obligatoire}|table_valeur{evenement_descriptif}|?{<:agenda:info_obligatoire:>,''})</span>]
+</span>
+<span class='descriptif-visu'>
+	<textarea name='evenement_descriptif' id='evenement_descriptif'  
+		class='[(#ENV**{obligatoire}|table_valeur{evenement_descriptif}|?{forml,formo})][(#ENV**{erreur}|table_valeur{evenement_descriptif}|?{' ',''}) champ_obli_oubli]' 
+		onfocus="this.className='[(#ENV**{obligatoire}|table_valeur{evenement_descriptif}|=={oui}|?{forml,formo})]-focus'" 
+		onblur="this.className='[(#ENV**{obligatoire}|table_valeur{evenement_descriptif}|=={oui}|?{forml,formo})]'" 
+		rows='3' >[(#ENV**{valeurs}|table_valeur{evenement_descriptif,''}|entites_html)]</textarea>
+</span>
+
+[(#REM) MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
+	donne un select ]
+<span class='agenda_mots_cles'>
+<BOUCLE_groupes(GROUPES_MOTS){evenements='oui'}>
+	<select name='evenement_groupe_mot_select_#ID_GROUPE[]' class='fondl verdana1 agenda_mot_cle_select'[
+	(#UNSEUL|=={'oui'}|?{'',' '}) multiple='multiple' size='4']>
+	[<option value='x' style='font-variant: small-caps;' [
+	(#UNSEUL|=={'oui'}|?{'',' '}) disabled='disabled']>(#TITRE|supprimer_numero)</option>]
+	<BOUCLE_mots(MOTS){id_groupe}>
+		<option value='#ID_MOT'
+		[(#ID_MOT|in_any{[(#ENV**{valeurs}|table_valeur{mots})],''})selected='selected']>#TITRE</option>
+	</BOUCLE_mots>
+	</select>
+</BOUCLE_groupes>
+</span>
+<script type='text/javascript' src='#CHEMIN{img_pack/multiselect.js}'></script>
+<span class='repetitions-calendrier' id='repetitions-calendrier'>
+[(#ENV**{valeurs}|table_valeur{repetitions}|WCalendar_statique_controller{'_repetitions'})]
+</span>
+
+<div class='edition-bouton' style='text-align:#LANG_RIGHT'>
+[(#ENV{evenement_action}|=={'evenement_modif'}|?{' ',''})
+<div style='float:#LANG_LEFT'>
+<input type='submit' name='supp_evenement' value='<:agenda:bouton_supprimer:>' class="fondl" />
+</div>
+]
+<input type='submit' name='cancel' value='<:agenda:bouton_annuler:>' class="fondl" />
+<input type='submit' name='ajouter' value='[(#ENV{evenement_action}|=={'evenement_modif'}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' class='fondo spip_boutons' onclick='javascript:getSelectedDate_repetitions()'>
+</div>
+</fieldset>
+</form>

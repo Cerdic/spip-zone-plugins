@@ -1,0 +1,7 @@
+<BOUCLE_mois(EVENEMENTS)
+	{agendafull date_debut,date_fin, mois, #ENV{annee}, #ENV{mois}}
+>[(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,#TITRE,#DESCRIPTIF,#LIEU,#URL_ARTICLE,
+		calendrier-couleur[(#ID_SECTEUR|
+			modulo{14,1})]})]</BOUCLE_mois>[(#DATE|
+	Agenda_affiche_full{<:aucun_article:>, 'mois'}
+)]<//B_mois>

@@ -1,0 +1,20 @@
+#HTTP_HEADER{content-type:text/calendar}
+BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+X-WR-CALNAME;VALUE=TEXT:<BOUCLE_article (ARTICLES) {id_article}>[(#TITRE|filtrer_ical)] </BOUCLE_article>[[(#NOM_SITE_SPIP|filtrer_ical)]]
+X-WR-RELCALID:#URL_SITE_SPIP
+
+<BOUCLE_evemnt (EVENEMENTS) {id_article ?}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)]
+UID:evenement#ID_EVENEMENT @ #URL_SITE_SPIP
+DTSTAMP:[(#DATE_DEBUT|date_ical)]
+DTSTART:[(#DATE_DEBUT|date_ical)]
+DTEND:[(#DATE_FIN|date_ical)]
+<B_article2>CATEGORIES:<BOUCLE_article2 (ARTICLES) {id_article=#ID_ARTICLE}>[(#TITRE|filtrer_ical)]</BOUCLE_article2>
+DESCRIPTION:[(#DESCRIPTIF|filtrer_ical)]\n[<:lieu:>(#LIEU|filtrer_ical)]
+STATUS:CONFIRMED
+END:VEVENT
+</BOUCLE_evemnt>
+
+END:VCALENDAR
