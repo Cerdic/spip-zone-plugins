@@ -16,8 +16,8 @@ class cfg_formulaire
 	var $sto = null;
 // les options de creation de cet objet
 	var $optsto = array();
-// le "faire" de autoriser($faire), par defaut, autoriser_defaut_dist(): que les admins complets
-	var $autoriser = 'defaut';
+// le "faire" de autoriser($faire), par defaut, autoriser_configurer_dist()
+	var $autoriser = 'configurer';
 // la config est-elle permise ?
 	var $_permise = false;
 // en cas de refus, un message informatif [(#REM) refus=...]

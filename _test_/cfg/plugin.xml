@@ -6,21 +6,30 @@
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
-	1.0.3
+	1.0.4
 	</version>
 	<etat>
 	stable
 	</etat>
 	<description>
-_ Ce plugin permet de g&#233;rer des configurations pour des plugins ou autres.
-_ Les valeurs pour une configuration sont compress&#233;es dans un seul enregistrement de la table spip_meta.
+Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
+
+Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
+
+<!--
+
+(infos developpeurs, cf. documentation)
+
+Il est utilisé Les valeurs pour une configuration donn&#233;e sont compress&#233;es dans un seul enregistrement de la table spip_meta.
 _ La seule d&#233;finition n&#233;cessaire pour une configuration xxx est un fonds/cfg_xxx.html (xxx &#233;tant la cl&#233; de l'enregistrement meta).
 _ L'appel du formulaire se fait ensuite par {ecrire/exec=cfg&amp;cfg=xxx}
 _ Il fournit une balise #CONFIG &#233;tendue comme #CONFIG&#123;xxx/nom_valeur&#125; pour les squelettes, on peut avoir autant de {{/}} que d&eacute;sir&eacute; (stockage arborescent). Arguments suppl&eacute;mentaires optionnels: le 2&egrave;me: valeur d&#233;faut et le 3&egrave;me: bool&eacute;en indiquant de s&eacute;rialiser le r&eacute;sultat si tableau, mettre '' pour ne pas s&eacute;rialiser.
 _ La fonction correspondante {{lire_config($cfg='', $defaut=null, $serialize=false)}} est fournie pour le php, attention, en php le d&eacute;faut pour serialize est faux alors qu'il est vrai pour la balise des squelettes.
+
+-->
 	</description>
 	<lien>
-	[Documentation sur contrib->http://www.spip-contrib.net/?article1605]
+	[Documentation->http://www.spip-contrib.net/?article1605]
 	</lien>
 	<prefix>
 	cfg
@@ -36,4 +45,11 @@ _ La fonction correspondante {{lire_config($cfg='', $defaut=null, $serialize=fal
 		<nom>header_prive</nom>
 		<inclure>cfg_pipeline.php</inclure>
 	</pipeline>
+
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouter_onglets</action>
+		<inclure>cfg_ajouter_onglet.php</inclure>
+	</pipeline>
+
 </plugin>

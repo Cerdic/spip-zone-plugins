@@ -1,4 +1,6 @@
-[(#REM) titre=Configuration du plugin «&nbsp;Autorit&#233;&nbsp;»]
+[(#REM) titre=«&nbsp;Autorit&#233;&nbsp;»]
+
+[(#REM) icone=illuminati-24.gif]
 
 [(#REM) presentation= ]
 
@@ -36,18 +38,12 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 #CACHE{0}
 
 
-<:titre_page_config_fonctions|gros_titre{'',''}:>
-
-[(#REM|sinon{configuration}|barre_onglets{cfg_autorite})]
-
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 
 
 [(#REM) ------------------------ AFFICHER LES ERREURS ------------------------ ]
 [(#CONFIG{autorite_erreurs}|?{#CONFIG{autorite_erreurs}|unserialize|count|>{0}|?{' '}})
-
-	<br />
 
 	[(#REM|debut_boite_alerte)]
 	<strong><:avis_attention:></strong> Les autorisations suivantes sont d&#233;j&#224; d&#233;finies par ailleurs&nbsp;:
@@ -61,6 +57,8 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 
 	[(#REM|fin_boite_alerte)]
 
+	<br />
+
 ]
 
 [
@@ -69,9 +67,10 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 		avec votre version de SPIP&nbsp;:
 			<ul><li>(#REM|autorite_erreurs_version)</li></ul>
 	[(#REM|fin_boite_alerte)]
-]
 
-<br />
+
+	<br />
+]
 
 [(#REM|debut_cadre_trait_couleur{1,'xxx','R&#233;glage des autorisations'})]
 
@@ -388,5 +387,3 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
 </form>
-
-

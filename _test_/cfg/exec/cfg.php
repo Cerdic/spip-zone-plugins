@@ -8,10 +8,12 @@
  */
 // la fonction appelee par le core, une simple "factory" de la classe cfg
 
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
 function exec_cfg_dist($class = null)
 {
-include_spip("inc/presentation");
-
 	// classe standard ?
 	if (((!$class && ($class = 'cfg')) || $class == 'cfg') && !class_exists($class)) {
 	    class cfg extends cfg_dist { }
@@ -31,6 +33,7 @@ include_spip("inc/presentation");
 	}
 
 	$config->traiter();
+
 	echo $config->sortie();
 
 	return;
@@ -66,8 +69,18 @@ class cfg_dist extends cfg_formulaire
 			exit;
 		}
 
+		include_spip("inc/presentation");
+
 		$debut = $this->debut_page();
 
+		// Page appellee sans formulaire valable
+		if (!$formulaire) {
+			$formulaire = 
+			"<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' />\n";
+			$formulaire .= _L("<h3>Choisissez le module &#224; configurer.</h3>");
+		}
+		
+		else
 		// Mettre un cadre_trait_couleur autour du formulaire, sauf si demande
 		// express de ne pas le faire
 		if ($this->presentation == 'auto') {
@@ -125,16 +138,88 @@ class cfg_dist extends cfg_formulaire
 	function debut_page()
 	{
 		include_spip('inc/presentation');
+		$nom = _request('cfg'); // this->xxx
 
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		
-		return $commencer_page($this->boite, 'cfg', $this->nom) .
-		
-			debut_gauche("accueil", true) .
-		
-			debut_boite_info(true) .
-			propre($this->descriptif) .
-			fin_boite_info(true) .
+	pipeline('exec_init',array('args'=>array('exec'=>'cfg'),'data'=>''));
+
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page($this->boite, 'cfg', $this->nom);
+	
+	echo "<br /><br /><br />\n";
+
+	gros_titre(sinon($this->titre, _L('Configuration des modules')));
+
+	echo  barre_onglets("configuration", "cfg");
+	
+	// Faire la liste des ŽlŽments qui ont un cfg ; ca peut etre des plugins
+	// mais aussi des squelettes ou n'importe quoi
+	$liste = array();
+	foreach (creer_chemin() as $dir) {
+		if (basename($dir) != 'cfg')
+			$liste =
+				array_merge($liste, preg_files($dir.'fonds/', '/cfg_.*html$'));
+	}
+
+	if ($liste) {
+		$l = array();
+		foreach($liste as $cfg) {
+			$fonds = substr(basename($cfg,'.html'),4);
+			$l[$fonds] = $cfg;
+		}
+		ksort($l);
+		$res = debut_onglet();
+
+		$n = 0;
+		foreach($l as $fonds => $cfg) {
+			$url = generer_url_ecrire(_request('exec'), 'cfg='.$fonds);
+			$path = dirname(dirname($cfg));
+
+			// On va chercher la config cible
+			// et on regarde ses donnees pour faire l'onglet
+			$tmp = & new cfg($fonds, $fonds,'');
+			if ($tmp->autoriser()) {
+				if ($tmp->titre)
+					$titre = $tmp->titre;
+				else
+					$titre = $fonds;
+				$icone = '';
+				if ($tmp->icone)
+					$icone = $path.'/'.$tmp->icone;
+				else if (file_exists($path.'/plugin.xml'))
+					$icone = 'plugin-24.gif';
+				$actif = ($fonds == _request('cfg'));
+
+				$res .= onglet($titre, $url, 'cfg', $actif, $icone);
+
+				// Faire des lignes s'il y en a plus de 6
+				if (!(++$n%6))
+					$res .= fin_onglet().debut_onglet();
+			}
+		}
+		$res .= fin_onglet();
+
+		echo $res;
+	}
+
+
+	debut_gauche();
+
+
+
+	if ($nom)
+		echo	debut_boite_info(true) .
+		propre($this->descriptif) .
+		fin_boite_info(true);
+
+
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
+
+
+
+
+		echo
 		
 			($this->message ? 
 				debut_boite_info(true) .
@@ -144,14 +229,14 @@ class cfg_dist extends cfg_formulaire
 		
 			$this->lier() .
 		
-			debut_droite("", true) .
-			
-			($this->titre ? gros_titre($this->titre, '', false) : '');
-	}
+			debut_droite("", true);
+		}
 
 	function fin_page()
 	{
 		return fin_gauche() . fin_page();
 	}
 }
+
+
 ?>

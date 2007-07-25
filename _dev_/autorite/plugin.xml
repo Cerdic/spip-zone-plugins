@@ -33,13 +33,6 @@
 	<prefix>
 		  Autorite
 	</prefix>
-	<necessite id='cfg' version='[1.0.2;]' />
-
-
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouter_onglets</action>
-		<inclure>autorite_ajouter_onglets.php</inclure>
-	</pipeline>
+	<necessite id='cfg' version='[1.0.4;]' />
 
 </plugin>
