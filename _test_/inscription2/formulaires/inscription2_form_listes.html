@@ -1,18 +1,10 @@
-<div>
+<div id="newsletter" style="width:33%;margin:auto">
 #SET{selected,#CONFIG{inscription2/newsletters,'',''}}
-<select name="newsletters[]" multiple="multiple" size="5" id="newsletters" class="formo">
-	<BOUCLE_listes(LISTES){tout}>
-		[<option value="#ID_LISTE" (#ID_LISTE|in_array{#GET{selected}})>
+ <input name="format" id="format" value="html"  type="hidden" />
+	<BOUCLE_listes(LISTES){statut=liste}>
+		<label>
+		<input style="width:15px" type="checkbox" name="newsletters[]" value="#ID_LISTE" [(#ID_LISTE|in_array{#GET{selected}}) checked="checked"]>
 		#TITRE
-		</option>]
+		</label>
 	</BOUCLE_listes>
-</select><br />
-</div>
-<div>
-	<strong><:inscription2:format:></strong><br />
-	<:inscription2:expl_format:>
-	<select name="format" id="format" class="formo">
-		<option value = "texte"><:inscription2:texte:></option>
-		<option value = "html"><:inscription2:html:></option>
-	</select>
 </div>

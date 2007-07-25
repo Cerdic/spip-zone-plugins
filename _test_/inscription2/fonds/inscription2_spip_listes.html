@@ -1,8 +1,10 @@
 #SET{selected,#CONFIG{inscription2/newsletters,'',''}}
-<select name="newsletters[]" multiple="multiple" size="5" id="newsletters">
+<B_listes>
+<select name="newsletters[]" multiple="multiple" size="[(#TOTAL_BOUCLE|plus{1})]" id="newsletters">
 <BOUCLE_listes(LISTES){statut=liste}>
 	<option value="#ID_LISTE"[(#ID_LISTE|in_array{#GET{selected}}|?{ selected="selected"})]>
 	#TITRE
 	</option>
 </BOUCLE_listes>
 </select>
+</B_listes>

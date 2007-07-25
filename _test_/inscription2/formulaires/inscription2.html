@@ -373,8 +373,6 @@ $(document).ready(function() {
 	<strong><:inscription2:newsletter:></strong>
 	<p><:inscription2:exp_newsletter:></p>
 	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
-	<p><small><:inscription2:select_listes:>
-	<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small></p>
 </div>
 ]
 [(#CONFIG{inscription2/categorie}|=={on}|?{' ', ''})
