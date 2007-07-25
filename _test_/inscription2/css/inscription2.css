@@ -43,6 +43,8 @@ width:200px;
 .submit{margin: 10px 0px 10px 300px}
 #adherent div.submit input {width:auto;}
 
+#adherent input.checkbox {width:15px}
+
 sup {font-size:60%}
 
 .search_field{
