@@ -13,9 +13,13 @@ function balise_FORMULAIRE_INSCRIPTION2_stat($args, $filtres) {
 		$mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? 'redac' : 'forum'; 
 	if(!test_mode_inscription2($mode))
 		return '';
-	else return array($mode);}
+	else return array($mode);
+	
+	}
 
 function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
+	//var_dump(lire_config('inscription2'));
+	
 	if (!test_mode_inscription2($mode)) 
 		return _T('pass_rien_a_faire_ici');
 	//recuperer les infos inserées par le visiteur
@@ -73,7 +77,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 		if(!$aux)
 			$message = _T('inscription2:mail_non_domaine');
 	}
-	if($var_user[email] and $aux){
+	if($var_user['email'] and $aux){
 		$commentaire = message_inscription2($var_user, $mode);
 		if (is_array($commentaire)) {
 			$var_user['id_auteur'] = $commentaire['id_auteur'];
@@ -86,9 +90,11 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	$var_user['mode'] = $mode;
 	$var_user['self'] = str_replace('&amp;','&',(self()));
 	
-	return array("formulaires/inscription2_validation", $GLOBALS['delais'],
-			$var_user);
-			
+	if($var_user['email']){
+	return array("formulaires/inscription2_validation", $GLOBALS['delais'],$var_user);
+	}else{
+	return array("formulaires/inscription2", $GLOBALS['delais'],$var_user);
+	}		
 }
 
 function test_mode_inscription2($mode) {
