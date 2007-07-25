@@ -34,7 +34,16 @@ $GLOBALS['spip_pipeline']['forms_pre_edition_donnee'] = '';
 
 #affichage des donnees
 $GLOBALS['spip_pipeline']['forms_calcule_valeur_en_clair'] = '';
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
+	
+if (version_compare($GLOBALS['spip_version_code'],'1.92','<')){
+	function inc_safehtml($t) {
+		include_spip('inc/forms_safehtml_191');
+		if (function_exists('inc_safehtml_dist'))
+			return inc_safehtml_dist($t);
+		return $t;
+	}
+}
 function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type=='form' OR $type=='donnee'){
 		if ($faire=='administrer'){
