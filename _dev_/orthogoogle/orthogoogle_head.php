@@ -4,9 +4,13 @@
 
 		// determine le chemin des script à charger
 		$dir_spell = find_in_path('lib/googiespell_v4_0/googiespell');
-
+		
 		// lib:googiespell manquante
 		if (!$dir_spell)
+			return $flux;
+
+		// si aucun champ à traiter
+		if (!lire_config('orthogoogle'))
 			return $flux;
 
 		$dir_spell .= '/';
@@ -31,21 +35,23 @@
 		<script type="text/javascript" src="'.$cookiejs_url.'"></script>
 		<link href="'.$css_url.'" rel="stylesheet" type="text/css" />';
 	
+		//definit la chaine des champs autorisés à la correction (obtenu par cfg)
+		$chaine = "";
+		
+		//parcours les infos sauvées, si l'état "on" alors corrigeable
+		foreach(lire_config('orthogoogle') as $key => $champ) {
+			if ($champ = "on") {
+				$chaine .= $key.","; 	
+			}
+		}
+		//supprime la , finale
+		$chaine = substr($chaine,0,strlen($chaine)-1);
+		
 		//applique le correcteur orthographique à chaque textarea trouvé
 		$flux .='<script type="text/javascript">
+		//'.$chaine.'
 		$(document).ready(function() {
-	        $("textarea").addClass("textarea"); // affecte la classe textarea
-			//recherche les textarea présent dans la page
-			var chaine = "";
-			$("textarea").each(function(i){
-					if ($(this).attr(\'id\')) {
-						chaine += $(this).attr(\'id\') + ",";							 
-					} else {
-						//$(this).attr(\'id\',$(this).attr(\'name\'));
-					}					
-			}
-			);
-			chaine = chaine.substr(0,chaine.length-1);
+			var chaine = "'.$chaine.'";
 			//charge le correcteur pour chaque textarea identifié
 		    var googie5 = new GoogieSpellMultiple("'.$dir_spell.'", "'.$proxy_url.'?lang=");
 			googie5.decorateTextareas(chaine);
@@ -55,5 +61,7 @@
 		return $flux;
 	
 	}
-
+	
 ?>
+
+

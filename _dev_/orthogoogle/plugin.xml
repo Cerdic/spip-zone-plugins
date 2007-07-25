@@ -16,6 +16,8 @@
 
 	<icon>googiespell.png</icon>
 
+	<install>base/orthogoogle_install.php</install>
+	
 	<necessite id="cfg" version="[1.0.4;]" />
 	<necessite id="lib:googiespell_v4_0" src="http://orangoo.com/labs/uploads/googiespell_v4_0.zip" />
 	

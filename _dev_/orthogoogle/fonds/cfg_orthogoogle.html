@@ -5,28 +5,42 @@
 [(#REM) descriptif=
 <h4>Configuration d'orhtogoogle</h4>
 Permet de spécifier les champs pouvant être corrigés.<br />
-<br /><a href="http://www.spip-contrib.net" class="spip_out">Documentation compléte</a>
+<br /><a href="http://www.spip-contrib.net" class="spip_out">Documentation complï¿½te</a>
 ]
 [(#REM) titre=configuration OrthoGoogle]
 
 
 <fieldset><legend>Partie Privée</legend>
-   <h5> Page article </h5>
-   <p>
-   	<label>Texte :</label>
-	<input type="checkbox" name="texte" [checked="(#ENV{texte})"] />
-   </p>
-   <p>
-   	<label>PS :</label>
-	<input type="checkbox" name="ps" [checked="(#ENV{ps})"] />
-   </p>
-
-   <h5> Page forum </h5>
-   <label>Forum :</label>
-   <input type="checkbox" name="forum" [checked="(#ENV{forum})"] />
+	<div>
+		<h5> Page article </h5>
+		<p>
+			<label>Descriptif :</label>
+			<input type="checkbox" name="descriptif" id="descriptif" [checked="(#ENV{descriptif})"] />
+		</p>
+		<p>
+			<label>Chapeau :</label>
+			<input type="checkbox" name="chapo" id="chapo" [checked="(#ENV{chapo})"] />
+		</p>
+		<p>
+			<label>Texte :</label>
+			<input type="checkbox" name="texte" id="texte" [checked="(#ENV{texte})"] />
+		</p>
+		<p>
+			<label>PS :</label>
+			<input type="checkbox" name="ps" id="ps" [checked="(#ENV{ps})"] />
+		</p>
+	</div>
+	<div>
+		<h5> Page forum </h5>
+		<p>
+			<label>Forum :</label>
+			<input type="checkbox" name="texte" id="texte" [checked="(#ENV{texte})"] />
+		</p>
+   </div>
 </fieldset>
 
 <fieldset><legend>Partie Publique</legend>
+   
    <label>Activer</label>
    <input type="checkbox" name="publique" [checked="(#ENV{publique})"] />
 </fieldset>
