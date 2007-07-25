@@ -14,14 +14,9 @@
 		<inclure>orthogoogle_head.php</inclure>
 	</pipeline>
 
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<inclure>orthogoogle_boutons.php</inclure>
-	</pipeline>
-		
 	<icon>googiespell.png</icon>
 
-	<necessite id="cfg" version="[1.0.3;]" />
+	<necessite id="cfg" version="[1.0.4;]" />
 	<necessite id="lib:googiespell_v4_0" src="http://orangoo.com/labs/uploads/googiespell_v4_0.zip" />
 	
 	<chemin dir='' />
