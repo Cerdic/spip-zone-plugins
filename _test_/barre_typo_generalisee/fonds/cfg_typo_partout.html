@@ -1,54 +1,59 @@
 #CACHE{0}
 [(#REM) titre=Barre Typographique G&eacute;n&eacute;ralis&eacute;e]
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
+[(#REM) icone=logo_btg.gif]
+<!-- descriptif=
+<p><b>Attention : </b>en fonction de vos squelettes, veillez à n'activer les nouvelles barres typographiques que sur des champs pour lesquels l'utilisation des raccourcis n'engendrera pas d'erreur xhtml.</p>
+<p>En cas de doute, activez simplement la barre typographique sur les descriptifs et les textes (champs marqués d'une astérisque).</p>
+-->
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
  
-      	<p><b>Attention : </b>en fonction de vos squelettes, veillez &agrave n'activer les nouvelles barres typographiques que sur des champs pour lesquels l'utilisation des raccourcis n'engendrera pas d'erreur xhtml.
-	</p><p>En cas de doute, activez simplement la barre typographique sur les descriptifs et les textes (champs marqués d'une astérisque).
-	</p>
-	 <br/>
-     	<p><i>Activer la barre typographique sur :</i></p>
-	
-	<p>Articles (sur-titre): <input type="checkbox" name="articles_surtitre_typo_partout" [checked="(#CONFIG{typo_partout/articles_surtitre_typo_partout})"]>
-	<br/>Articles (titre) : <input type="checkbox" name="articles_titre_typo_partout" [checked="(#CONFIG{typo_partout/articles_titre_typo_partout})"]>
-	<br/>Articles (sous-titre) : <input type="checkbox" name="articles_soustitre_typo_partout" [checked="(#CONFIG{typo_partout/articles_soustitre_typo_partout})"]>
-	<br/>Articles (descriptif)* : <input type="checkbox" name="articles_descriptif_typo_partout" [checked="(#CONFIG{typo_partout/articles_descriptif_typo_partout})"]>
-	<br/>Articles (chapeau)* : <input type="checkbox" name="articles_chapo_typo_partout" [checked="(#CONFIG{typo_partout/articles_chapo_typo_partout})"]>
-	<br/>Articles (texte) : toujours pr&eacute;sente.</p>
-	<br/>Articles (post-scriptum) : <input type="checkbox" name="articles_ps_typo_partout" [checked="(#CONFIG{typo_partout/articles_ps_typo_partout})"]>
-	
-	<br/>
-	<br/>Rubriques (titre) : <input type="checkbox" name="rubriques_titre_typo_partout" [checked="(#CONFIG{typo_partout/rubriques_titre_typo_partout})"]>
-	<br/>Rubriques (descriptif)* : <input type="checkbox" name="rubriques_descriptif_typo_partout" [checked="(#CONFIG{typo_partout/rubriques_descriptif_typo_partout})"]>
-	<br/>Rubriques (texte)* : <input type="checkbox" name="rubriques_texte_typo_partout" [checked="(#CONFIG{typo_partout/rubriques_texte_typo_partout})"]>
-	
-	<br/>
-	<br/>Groupes de mots clefs (nom) : <input type="checkbox" name="groupesmots_nom_typo_partout" [checked="(#CONFIG{typo_partout/groupesmots_nom_typo_partout})"]>
-	<br/>Groupes de mots clefs (descriptif)* : <input type="checkbox" name="groupesmots_descriptif_typo_partout" [checked="(#CONFIG{typo_partout/groupesmots_descriptif_typo_partout})"]>
-	<br/>Groupes de mots clefs (texte)* : <input type="checkbox" name="groupesmots_texte_typo_partout" [checked="(#CONFIG{typo_partout/groupesmots_texte_typo_partout})"]>
-	
-	<br/>
-	<br/>Mots clefs (nom) : <input type="checkbox" name="mots_nom_typo_partout" [checked="(#CONFIG{typo_partout/mots_nom_typo_partout})"]>
-	<br/>Mots clefs (descriptif)* : <input type="checkbox" name="mots_descriptif_typo_partout" [checked="(#CONFIG{typo_partout/mots_descriptif_typo_partout})"]>
-	<br/>Mots clefs (texte)* : <input type="checkbox" name="mots_texte_typo_partout" [checked="(#CONFIG{typo_partout/mots_texte_typo_partout})"]>
+     	<p>Activer la barre typographique sur :</p>
 
-	<br/>
-	<br/>Sites r&eacute;f&eacute;renc&eacute;s (nom du site) : <input type="checkbox" name="sites_nom_typo_partout" [checked="(#CONFIG{typo_partout/sites_nom_typo_partout})"]>
-	<br/>Sites r&eacute;f&eacute;renc&eacute;s (description du site)* : <input type="checkbox" name="sites_description_typo_partout" [checked="(#CONFIG{typo_partout/sites_description_typo_partout})"]>
+<fieldset><legend><:articles:></legend>	
+	<label>Articles (sur-titre): <input type="checkbox" name="articles_surtitre_typo_partout" [checked="(#CONFIG{typo_partout/articles_surtitre_typo_partout})"] /></label>
+	<br />Articles (titre) : <input type="checkbox" name="articles_titre_typo_partout" [checked="(#CONFIG{typo_partout/articles_titre_typo_partout})"] />
+	<br />Articles (sous-titre) : <input type="checkbox" name="articles_soustitre_typo_partout" [checked="(#CONFIG{typo_partout/articles_soustitre_typo_partout})"] />
+	<br />Articles (descriptif)* : <input type="checkbox" name="articles_descriptif_typo_partout" [checked="(#CONFIG{typo_partout/articles_descriptif_typo_partout})"] />
+	<br />Articles (chapeau)* : <input type="checkbox" name="articles_chapo_typo_partout" [checked="(#CONFIG{typo_partout/articles_chapo_typo_partout})"] />
+	<br />Articles (texte) : toujours pr&eacute;sente.
+	<br />Articles (post-scriptum) : <input type="checkbox" name="articles_ps_typo_partout" [checked="(#CONFIG{typo_partout/articles_ps_typo_partout})"] />
+</fieldset>	
+<fieldset><legend><:rubriques:></legend>	
+	Rubriques (titre) : <input type="checkbox" name="rubriques_titre_typo_partout" [checked="(#CONFIG{typo_partout/rubriques_titre_typo_partout})"] />
+	<br />Rubriques (descriptif)* : <input type="checkbox" name="rubriques_descriptif_typo_partout" [checked="(#CONFIG{typo_partout/rubriques_descriptif_typo_partout})"] />
+	<br />Rubriques (texte)* : <input type="checkbox" name="rubriques_texte_typo_partout" [checked="(#CONFIG{typo_partout/rubriques_texte_typo_partout})"] />
+</fieldset>	
+<fieldset><legend><:Groupes:></legend>	
+	Groupes de mots clefs (nom) : <input type="checkbox" name="groupesmots_nom_typo_partout" [checked="(#CONFIG{typo_partout/groupesmots_nom_typo_partout})"] />
+	<br />Groupes de mots clefs (descriptif)* : <input type="checkbox" name="groupesmots_descriptif_typo_partout" [checked="(#CONFIG{typo_partout/groupesmots_descriptif_typo_partout})"] />
+	<br />Groupes de mots clefs (texte)* : <input type="checkbox" name="groupesmots_texte_typo_partout" [checked="(#CONFIG{typo_partout/groupesmots_texte_typo_partout})"] />
+</fieldset>	
+<fieldset><legend><:mots_cles:></legend>	
+	Mots clefs (nom) : <input type="checkbox" name="mots_nom_typo_partout" [checked="(#CONFIG{typo_partout/mots_nom_typo_partout})"] />
+	<br />Mots clefs (descriptif)* : <input type="checkbox" name="mots_descriptif_typo_partout" [checked="(#CONFIG{typo_partout/mots_descriptif_typo_partout})"] />
+	<br />Mots clefs (texte)* : <input type="checkbox" name="mots_texte_typo_partout" [checked="(#CONFIG{typo_partout/mots_texte_typo_partout})"] />
+</fieldset>	
+<fieldset><legend><:sites:></legend>	
+	Sites r&eacute;f&eacute;renc&eacute;s (nom du site) : <input type="checkbox" name="sites_nom_typo_partout" [checked="(#CONFIG{typo_partout/sites_nom_typo_partout})"] />
+	<br />Sites r&eacute;f&eacute;renc&eacute;s (description du site)* : <input type="checkbox" name="sites_description_typo_partout" [checked="(#CONFIG{typo_partout/sites_description_typo_partout})"] />
+</fieldset>	
+<fieldset><legend><:breves:></legend>	
+	Br&egrave;ves (titre) : <input type="checkbox" name="breves_titre_typo_partout" [checked="(#CONFIG{typo_partout/breves_titre_typo_partout})"] />
+	<br />Br&egrave;ves (texte) : toujours pr&eacute;sente.
+	<br />Br&egrave;ves (titre lien) : <input type="checkbox" name="breves_lien_typo_partout" [checked="(#CONFIG{typo_partout/breves_lien_typo_partout})"] />
+</fieldset>	
+<fieldset><legend><:configuration_site:></legend>	
+	Configuration (nom du site) : <input type="checkbox" name="configuration_nom_typo_partout" [checked="(#CONFIG{typo_partout/configuration_nom_typo_partout})"] />
+	<br />Configuration (description du site)* : <input type="checkbox" name="configuration_description_typo_partout" [checked="(#CONFIG{typo_partout/configuration_description_typo_partout})"] />
+</fieldset>	
+<fieldset><legend><:auteurs:></legend>	
+	Auteurs (signature) : <input type="checkbox" name="auteurs_signature_typo_partout" [checked="(#CONFIG{typo_partout/auteurs_signature_typo_partout})"] />
+	<br />Auteurs (qui êtes vous)* : <input type="checkbox" name="auteurs_quietesvous_typo_partout" [checked="(#CONFIG{typo_partout/auteurs_quietesvous_typo_partout})"] />
+</fieldset>	
 	
-	<br/>
-	<br/>Br&egrave;ves (titre) : <input type="checkbox" name="breves_titre_typo_partout" [checked="(#CONFIG{typo_partout/breves_titre_typo_partout})"]>
-	<br/>Br&egrave;ves (texte) : toujours pr&eacute;sente.
-	<br/>Br&egrave;ves (titre lien) : <input type="checkbox" name="breves_lien_typo_partout" [checked="(#CONFIG{typo_partout/breves_lien_typo_partout})"]>
-	
-	<br/>
-	<br/>Configuration (nom du site) : <input type="checkbox" name="configuration_nom_typo_partout" [checked="(#CONFIG{typo_partout/configuration_nom_typo_partout})"]>
-	<br/>Configuration (description du site)* : <input type="checkbox" name="configuration_description_typo_partout" [checked="(#CONFIG{typo_partout/configuration_description_typo_partout})"]>
-	
-	<br/>
-	<br/>Auteurs (signature) : <input type="checkbox" name="auteurs_signature_typo_partout" [checked="(#CONFIG{typo_partout/auteurs_signature_typo_partout})"]>
-	<br/>Auteurs (qui êtes vous)* : <input type="checkbox" name="auteurs_quietesvous_typo_partout" [checked="(#CONFIG{typo_partout/auteurs_quietesvous_typo_partout})"]></p>
-	
-	<input type="submit" name="_cfg_ok" value="<:OK:>" />
-	<input type="reset" value="<:Reset:>" />
-	<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+<div>
+	<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+	<input type="reset" value="<:reset:>" class="fondo" />
+	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+</div>
 </form>
