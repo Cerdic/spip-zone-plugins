@@ -34,7 +34,7 @@
 		$cookiejs_url = $dir_spell.'cookiesupport.js';
 		
 		
-		//determine le chemin du proxy pour acceder à google speller
+		//determine le chemin du proxy pour acceder �google speller
 		$proxy_url = _DIR_PLUGIN_ORTHOGOOGLE.'sendReq.php';
 		
 		//determine le chemin de la mise en page
@@ -50,7 +50,7 @@
 		//definit la chaine des champs autorisés à la correction (obtenu par cfg)
 		$chaine = "";
 		
-		//parcours les infos sauvées, si l'état "on" alors corrigeable
+		//parcours les infos sauv�es, si l'�tat "on" alors corrigeable
 		foreach(lire_config('orthogoogle') as $key => $champ) {
 			if ($champ = "on") {
 				$chaine .= $key.","; 	
@@ -59,14 +59,21 @@
 		//supprime la , finale
 		$chaine = substr($chaine,0,strlen($chaine)-1);
 		
-		//applique le correcteur orthographique à chaque textarea trouvé
+		//applique le correcteur orthographique � chaque textarea defini dans cfg
 		$flux .='<script type="text/javascript">
-		//'.$chaine.'
 		$(document).ready(function() {
 			var chaine = "'.$chaine.'";
 			//charge le correcteur pour chaque textarea identifié
-		    var googie5 = new GoogieSpellMultiple("'.$dir_spell.'", "'.$proxy_url.'?lang=");
-			googie5.decorateTextareas(chaine);
+		    var googie = new GoogieSpellMultiple("'.$dir_spell.'", "'.$proxy_url.'?lang=");
+			//var googie = new GoogieSpell("'.$dir_spell.'", "'.$proxy_url.'?lang=");
+			//traduit les messages
+			googie.lang_chck_spell = "'._T("orthogoogle:lang_chck_spell").'";
+			googie.lang_rsm_edt = "'._T("orthogoogle:lang_rsm_edt").'";
+			googie.lang_close = "'._T("orthogoogle:lang_close").'";
+			googie.lang_no_error_found = "'._T("orthogoogle:lang_no_error_found").'";
+			googie.lang_revert = "'._T("orthogoogle:lang_revert").'";
+			//definit les champs orthogooglisable			
+			googie.decorateTextareas(chaine);
  		});
 		</script>';
 		
