@@ -202,11 +202,11 @@ function exec_gerer_courrier(){
 			echo "<h3>"._T('spiplistes:sans_envoi')."</h3>" ;
 		}
 		if ($statut == 'redac' && !$pret_envoi) {
-			echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'><b>"._T('spiplistes:message_en_cours')." <br />"._T('spiplistes:modif_envoi')."</b></font>";
+			echo "<span style='font-size:120%;color:red;font-weight:bold'>"._T('spiplistes:message_en_cours')." <br />"._T('spiplistes:modif_envoi')."</span>";
 		}
 		
 		if ($statut == 'ready' && $pret_envoi) {
-			echo "<span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
+			echo "<span style='font-size:120%;color:red'>
 			<b>"._T('spiplistes:message_presque_envoye')."</b></span><br /> "._T('spiplistes:a_destination').$destinataire."<br />"._T('spiplistes:confirme_envoi');
 			echo "<form action='?exec=gerer_courrier&id_message=".$id_message."' method='post'>";
 			echo "<div style='text-align:center'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo' /></div>";
@@ -216,16 +216,16 @@ function exec_gerer_courrier(){
 		if ($statut == 'encour'){
 			if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
 				echo "<div style='float:right'>";
-				icone (_T('icone_supprimer_message'), generer_url_ecrire('spip_listes','detruire_message='.$id_message), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
+				echo icone (_T('icone_supprimer_message'), generer_url_ecrire('spip_listes','detruire_message='.$id_message), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 				echo "</div>";
 			}
-			echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
+			echo "<p><span style='font-size:120%;color:red'>
 			<b>"._T('spiplistes:envoi_program')."</b></span><br /> "._T('spiplistes:a_destination').$destinataire."<br /><br />
 			<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a></p>";
 		}
 		
 		if ($statut == 'publie')  {
-			echo "<span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
+			echo "<span style='font-size:120%;color:red'>
 			<b>"._T('spiplistes:message_arch')."</b></span>";
 			echo "<ul>";
 			echo "<li>"._T('spiplistes:envoyer_a').$destinataire."</li>";
@@ -250,20 +250,19 @@ function exec_gerer_courrier(){
 		if($statut != 'encour' AND $statut != 'publie' AND $statut != 'ready')
 			$texte = spiplistes_propre($texte);
 		
-		echo "<div style='margin-top:20px;border: 1px solid $la_couleur; background-color: $couleur_fond; padding: 5px;'>"; // debut cadre de couleur
+		echo "<div style='margin-top:20px;border: 1px solid $la_couleur; background-color: $couleur_fond; padding: 5px;' class='cadre cadre-r'>"; // debut cadre de couleur
 		//debut_cadre_relief("messagerie-24.gif");
 		echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td width=100%>";
 		if ($statut=="redac" OR $statut=="ready") {
-			echo "<div style='float:right'>";
-			icone (_T('spiplistes:bouton_modifier'),generer_url_ecrire('courrier_edit','id_message='.$id_message), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
+			echo "<div style='float:right; margin:10px'>";
+			echo icone (_T('spiplistes:bouton_modifier'),generer_url_ecrire('courrier_edit','id_message='.$id_message), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
 			echo "</div>";
 		}
 		
-		echo "<span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:$la_couleur'><b>$le_type</b></span><br />";
-		echo "<span style='font-family:Verdana,Arial,Sans,sans-serif'><h3>$titre</h3></span>";
-		
-		echo "<br /><font face='Georgia,Garamond,Times,serif' size=3>";
+		echo "<span style='font-size:120%;color:$la_couleur'><b>$le_type</b></span><br />";
+		echo "<h3>$titre</h3>";
+		echo "<br class='nettoyeur' />";
 		echo debut_boite_info();
 		echo _T('spiplistes:version_html')." <a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_message)."\" title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n";
 		echo "<iframe src=\"?exec=courrier_preview&id_message=$id_message\" width=\"100%\" height=\"500\"></iframe>\n";
@@ -286,7 +285,7 @@ function exec_gerer_courrier(){
 		echo "</textarea><p>\n";
 		
 		echo fin_boite_info();
-		echo "</font><br />";
+		echo "<br />";
 		
 		if($statut=="redac" OR $statut=="ready"){
 			//envoi de test 
@@ -326,7 +325,7 @@ function exec_gerer_courrier(){
 		echo "</td></tr></table>";
 		if($statut != 'publie'){
 			echo "<div style='margin:auto;margin-top:10px'>";
-			icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
+			echo icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 			echo "</div>";
 		}
 		echo "</div>"; // fin du cadre de couleur
