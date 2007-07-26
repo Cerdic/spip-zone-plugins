@@ -24,7 +24,6 @@ and the [introduction article on spip-contrib->http://www.spip-contrib.net/Le-pl
   </description>
   <lien>
 	[Introduction->http://www.spip-contrib.net/Le-plugin-FpipR]
-	[Configuration->./?exec=cfg&cfg=fpipr]
   </lien>
   <prefix> 
 	FpipR
