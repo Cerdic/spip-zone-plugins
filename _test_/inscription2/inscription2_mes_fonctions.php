@@ -41,4 +41,11 @@ function inscription2_verifier_tables(){
 	
 }
 
+function n_to_br($texte){
+	
+	$texte = str_replace("\n", "<br />", $texte);
+	return $texte;
+	
+}
+
 ?>
