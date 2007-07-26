@@ -6,7 +6,7 @@
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
-	1.0.4
+	1.0.5
 	</version>
 	<etat>
 	stable
@@ -49,7 +49,7 @@ _ La fonction correspondante {{lire_config($cfg='', $defaut=null, $serialize=fal
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<action>ajouter_onglets</action>
-		<inclure>cfg_ajouter_onglet.php</inclure>
+		<inclure>cfg_pipeline.php</inclure>
 	</pipeline>
 
 </plugin>

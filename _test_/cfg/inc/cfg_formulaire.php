@@ -63,8 +63,10 @@ class cfg_formulaire
 
 		// pre-analyser le formulaire
 		if ($vue) {
-			$this->message .= $this->set_vue($vue);
+			$erreur = $this->set_vue($vue);
+			$this->message .= $erreur;
 		}
+
 		$this->_permise = $this->autoriser();
 		
 		if (_request('_cfg_affiche')) {
@@ -239,6 +241,10 @@ class cfg_formulaire
 	*/
 	function formulaire($contexte = array())
 	{
+
+		if (!find_in_path('fonds/cfg_' . $this->vue . '.html'))
+			return '';
+
 		include_spip('inc/securiser_action');
 	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->vue;
 		$contexte['_cfg_'] =
@@ -251,8 +257,10 @@ class cfg_formulaire
 		    '&hash=' .  calculer_action_auteur('-' . $arg);
 		include_spip('inc/presentation'); // offrir les fonctions d'espace prive
 		include_spip('public/assembler');
+
 		$return = recuperer_fond('fonds/cfg_' . $this->vue,
 			$this->val ? array_merge($contexte, $this->val) : $contexte);
+
 
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
 		$this->rempar = array(array());

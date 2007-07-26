@@ -40,6 +40,7 @@ function exec_cfg_dist($class = null)
 }
 
 include_spip('inc/cfg_formulaire');
+include_spip('inc/cfg');
 
 // la classe cfg represente une page de configuration
 class cfg_dist extends cfg_formulaire
@@ -150,23 +151,9 @@ class cfg_dist extends cfg_formulaire
 	gros_titre(sinon($this->titre, _L('Configuration des modules')));
 
 	echo  barre_onglets("configuration", "cfg");
-	
-	// Faire la liste des ŽlŽments qui ont un cfg ; ca peut etre des plugins
-	// mais aussi des squelettes ou n'importe quoi
-	$liste = array();
-	foreach (creer_chemin() as $dir) {
-		if (basename($dir) != 'cfg')
-			$liste =
-				array_merge($liste, preg_files($dir.'fonds/', '/cfg_.*html$'));
-	}
 
-	if ($liste) {
-		$l = array();
-		foreach($liste as $cfg) {
-			$fonds = substr(basename($cfg,'.html'),4);
-			$l[$fonds] = $cfg;
-		}
-		ksort($l);
+
+	if ($l = liste_cfg()) {
 		$res = debut_onglet();
 
 		$n = 0;
@@ -177,7 +164,7 @@ class cfg_dist extends cfg_formulaire
 			// On va chercher la config cible
 			// et on regarde ses donnees pour faire l'onglet
 			$tmp = & new cfg($fonds, $fonds,'');
-			if ($tmp->autoriser()) {
+			if ($tmp->_permise) {
 				if ($tmp->titre)
 					$titre = $tmp->titre;
 				else
@@ -187,6 +174,8 @@ class cfg_dist extends cfg_formulaire
 					$icone = $path.'/'.$tmp->icone;
 				else if (file_exists($path.'/plugin.xml'))
 					$icone = 'plugin-24.gif';
+				else
+					$icone = _DIR_PLUGIN_CFG.'cfg-doc-22.png';
 				$actif = ($fonds == _request('cfg'));
 
 				$res .= onglet($titre, $url, 'cfg', $actif, $icone);
