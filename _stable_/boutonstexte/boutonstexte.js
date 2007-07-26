@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  boutonstexte.js (c) toggg http://toggg.com 2006 -- licence LGPL
  */
 
