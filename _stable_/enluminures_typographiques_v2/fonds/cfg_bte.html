@@ -1,10 +1,15 @@
-#CACHE{0}
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-
-[(#REM) descriptif=
+[(#REM) titre=Enluminures Typo]
+[(#REM) icone=img_pack/e.gif]
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../img_pack/moinecopiste.gif' width='59' height='85' alt='Logo Enluminures Typographiques' style="float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+#GET{logo}
 <h4>Configuration de la Barre Typographique Enlumin&eacute;e</h4>
-]
-[(#REM) titre=Barre Typographique Enlumin&eacute;e]
+-->
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 <fieldset><legend><:enlumtypo:cfg_puces:></legend>
 	<label for="sc_puces">Remplacement des fauses puces de SPIP (- en début de ligneà par de vraies listes à puces (-* en début de ligne)&nbsp;:</label>
@@ -70,4 +75,3 @@
 <input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
 </div>
 </form>
-
