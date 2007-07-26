@@ -5,7 +5,7 @@
  *
  * Auteur :
  * Nicolas Hoizey
- * © 2007 - Distribue sous licence GNU/GPL
+ * ï¿½ 2007 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -71,14 +71,5 @@ function lienscontenus_header_prive($flux)
 	// On ajoute une CSS pour le back-office
 	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_LIENSCONTENUS.'/css/styles.css" />';
 	return $flux;
-}
-
-function lienscontenus_ajouter_onglets($flux){
-    if ($GLOBALS['connect_statut'] == '0minirezo' && $GLOBALS['connect_toutes_rubriques']) {
-        if ($flux['args'] == 'configuration') {
-            $flux['data']['lienscontenus']= new Bouton(_DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif', _T('lienscontenus:configuration_liens_contenus'), generer_url_ecrire('config_lienscontenus'));
-        }
-    }
-    return $flux;
 }
 ?>
