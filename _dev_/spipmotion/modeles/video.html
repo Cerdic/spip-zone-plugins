@@ -1,11 +1,15 @@
 <BOUCLE_tous (DOCUMENTS spip_types_documents) {id_document=#ENV{id_video}}>
+
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok' style='[float:(#ENV{align}|match{left|right})];max-width:320px'>
 [(#EXTENSION|=={flv}|?{' '})
-<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
-style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
+<dt>
 <object data="#CHEMIN{flash/flvplayer.swf}?autoStart=false&amp;file=/[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER" width='[(#ENV{largeur}|?{#ENV{largeur},"320"})]' height='[(#ENV{hauteur}|?{#ENV{hauteur},"260"})]' type="application/x-shockwave-flash">
 <param name='movie' value='#CHEMIN{flash/flvplayer.swf}?autoStart=false&amp;file=/[(#DISTANT|=={non}|?{#EVAL{_DIR_RACINE}})]#FICHIER' />
 [(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
-<param name='wmode' value='transparent' />
-</object>
-[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>]
+<param name='wmode' value='transparent' /></object>
+</dt>[
+<dt class='#EDIT{titre} spip_doc_titre'><strong>(#TITRE)</strong></dt>][
+<dd class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]<br class="nettoyeur" /></dd>]]
+</dl>
+
 </BOUCLE_tous>
