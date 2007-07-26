@@ -15,7 +15,7 @@
 	function exec_ressources(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page('Ressources', "", "");
+		debut_page(_T('asso:ressources_titre_liste_ressources'), "", "");
 		
 		$url_ressources = generer_url_ecrire('ressources');
 		$url_edit_ressource=generer_url_ecrire('edit_ressource');
@@ -25,24 +25,23 @@
 		debut_gauche();
 		
 		debut_boite_info();
-		echo '<p> Vous pouvez g&eacute;rer ici les diff&eacute;rentes ressources pr&ecirc;t&eacute;es aux membres (livres, mat&eacute;riels, ...)<br />
-		La puce indique la disponibilit&eacute; des diff&eacute;rentes ressources</p>';
+		echo '<p>'._T('asso:ressources_info').'</p>';
 		fin_boite_info();
 		
 		debut_raccourcis();
-		icone_horizontale('Ajouter une ressource', generer_url_ecrire('edit_ressource','action=ajoute'),'../'._DIR_PLUGIN_ASSOCIATION.'/fiche-perso-24.gif','cree.gif');	
+		icone_horizontale(_T('asso:ressources_nav_ajouter'), generer_url_ecrire('edit_ressource','action=ajoute'),'../'._DIR_PLUGIN_ASSOCIATION.'/fiche-perso-24.gif','cree.gif');	
 		fin_raccourcis();
 		
 		debut_droite();
-		debut_cadre_relief(  "", false, "", $titre = 'RESSOURCES');
+		debut_cadre_relief(  "", false, "", $titre = _T('asso:ressources_titre_liste_ressources'));
 		
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 		echo "<tr bgcolor='#DBE1C5'>";
 		echo '<td>&nbsp;</td>';
-		echo '<td><strong>Ressource</strong></td>';
-		echo '<td><strong>Code</strong></td>';
-		echo '<td><strong>Montant</strong></td>';
-		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
+		echo '<td><strong>'._T('asso:ressources_entete_intitule').'</strong></td>';
+		echo '<td><strong>'._T('asso:ressources_entete_code').'</strong></td>';
+		echo '<td><strong>'._T('asso:ressources_entete_montant').'</strong></td>';
+		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:entete_action').'</strong></td>';
 		echo'  </tr>';
 		$query = spip_query ( "SELECT * FROM spip_asso_ressources ORDER BY id_ressource" ) ;
 		while ($data = spip_fetch_array($query)) {
@@ -58,9 +57,9 @@
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['code'].'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['pu'], 2, ',', ' ').'</td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:ressource_label_prets').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_ressources.'&action=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer la ressource"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&action=modifie&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier la ressource"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:prets_nav_gerer').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_ressources.'&action=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&action=modifie&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

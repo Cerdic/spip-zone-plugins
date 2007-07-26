@@ -172,8 +172,7 @@ function exec_adherents() {
 		$id_adherent=$data['id_adherent'];
 
 		switch($data['statut'])	{
-			case "echu":
-				$class= "impair";
+			case "echu": $class= "impair";
 				break;
 			case "ok":
 				$class="valide";

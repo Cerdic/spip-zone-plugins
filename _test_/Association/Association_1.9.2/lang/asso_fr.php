@@ -1,64 +1,68 @@
 <?php
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+	// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS[$GLOBALS['idx_lang']] = array(
-
-# Titres globaux
-	'titre_gestion_pour_association' => 'Gestion pour Association',
-	'titre_relance' => 'Renouvellement de votre cotisation',
-	'titre_menu_gestion_association' => 'Gestion Association',
-	'titre_page_config' => 'Configuration du plugin',
-	
-# Navigation
-	'menu2_titre_gestion_membres' => 'Gestion des membres',
-	'menu2_titre_ajouter_membre' => 'Ajouter un membre',
-	'menu2_titre_ajouter_abonne' => 'Ajouter un abonn&eacute;',
-	'menu2_titre_relances_cotisations' => 'Relances des cotisations',
-	'menu2_titre_relances_abo' => 'Relances',
-	'menu2_titre_gestion_dons' => 'Gestion des dons',
-	'menu2_titre_ventes_asso' => 'Ventes associatives',
-	'menu2_titre_ventes_abo' => 'Ventes',
-	'abonnements' => 'Abonnements',
-	'menu2_titre_gestion_activites' => 'Gestion des activit&eacute;s',
-	'menu2_titre_livres_comptes' => 'Livres de comptes',
-
- #Configuration
- 	'config_libelle_nom' => 'Nom',
-	'config_libelle_email' => 'Adresse courriel',
-	'config_libelle_adresse' => 'Adresse',
-	'config_libelle_rue' => 'Rue',
-	'config_libelle_num_rue' => 'N&deg;',
-	'config_libelle_ville' => 'Ville',
-	'config_libelle_codepostal' => 'Code Postal',
-	'config_libelle_telephone' => 'T&eacute;l&eacute;phone',
-	'config_libelle_siret' => 'N&deg; SIRET',
-	'config_libelle_declaration' => 'N&deg; de d&eacute;claration',
-	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
-	'config_info_asso' => 'Donn&eacute;es de l\'association',
-	'config_info_plugin' => 'Options du plugin',
-	'config_libelle_dons'=> 'Gestion des dons et colis',
-	'config_libelle_ventes'=> 'Gestion des ventes associatives',
-	'config_libelle_comptes'=> 'Gestion comptable',
-	'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
-	'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
-	'config_libelle_id_adherent'=>'Automatis&eacute;e',
-	'config_libelle_id_asso'=>'Libre',
-	'config_libelle_num_pc'=>'R&eacute;f. comptable',
-	'config_libelle_secteurs'=>'Secteurs (s&eacute;par&eacute;s par des virgules)',	
-	'config_libelle_spip_listes'=> 'Liste de diffusion par d&eacute;faut (n&eacute;cessite le plugin Spip_listes)',
-	
-# Boutons globaux
-	'bouton_retour' => 'Retour',
-	'bouton_confirmer' => 'Confirmer',
-	'bouton_modifier' => 'Modifier',
-	'bouton_envoyer' => 'Envoyer',
-	'bouton_soumettre' => 'Soumettre',
-	'bouton_supprimer' => 'Supprimer',
+	$GLOBALS[$GLOBALS['idx_lang']] = array(
+		
+		# Titres globaux
+			'titre_gestion_pour_association' => 'Gestion pour Association',
+			'titre_relance' => 'Renouvellement de votre cotisation',
+			'titre_menu_gestion_association' => 'Gestion Association',
+			'titre_page_config' => 'Configuration du plugin',
+		
+		# Navigation
+			'menu2_titre_gestion_membres' => 'Gestion des membres',
+			'menu2_titre_ajouter_membre' => 'Ajouter un membre',
+			'menu2_titre_ajouter_abonne' => 'Ajouter un abonn&eacute;',
+			'menu2_titre_relances_cotisations' => 'Relances des cotisations',
+			'menu2_titre_relances_abo' => 'Relances',
+			'menu2_titre_gestion_dons' => 'Gestion des dons',
+			'menu2_titre_ventes_asso' => 'Ventes associatives',
+			'menu2_titre_ventes_abo' => 'Ventes',
+			'abonnements' => 'Abonnements',
+			'menu2_titre_gestion_activites' => 'Gestion des activit&eacute;s',
+			'menu2_titre_livres_comptes' => 'Livres de comptes',
+		
+		#Configuration
+			'config_libelle_nom' => 'Nom',
+			'config_libelle_email' => 'Adresse courriel',
+			'config_libelle_adresse' => 'Adresse',
+			'config_libelle_rue' => 'Rue',
+			'config_libelle_num_rue' => 'N&deg;',
+			'config_libelle_ville' => 'Ville',
+			'config_libelle_codepostal' => 'Code Postal',
+			'config_libelle_telephone' => 'T&eacute;l&eacute;phone',
+			'config_libelle_siret' => 'N&deg; SIRET',
+			'config_libelle_declaration' => 'N&deg; de d&eacute;claration',
+			'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
+			'config_info_asso' => 'Donn&eacute;es de l\'association',
+			'config_info_plugin' => 'Options du plugin',
+			'config_libelle_dons'=> 'Gestion des dons et colis',
+			'config_libelle_ventes'=> 'Gestion des ventes associatives',
+			'config_libelle_comptes'=> 'Gestion comptable',
+			'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
+			'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
+			'config_libelle_id_adherent'=>'Automatis&eacute;e',
+			'config_libelle_id_asso'=>'Libre',
+			'config_libelle_num_pc'=>'R&eacute;f. comptable',
+			'config_libelle_secteurs'=>'Secteurs (s&eacute;par&eacute;s par des virgules)',	
+			'config_libelle_spip_listes'=> 'Liste de diffusion par d&eacute;faut (n&eacute;cessite le plugin Spip_listes)',
+		
+		# Entetes globales
+			'entete_id' => 'ID',
+			'entete_action' => 'Action',
+		
+		# Boutons globaux
+			'bouton_retour' => 'Retour',
+			'bouton_confirmer' => 'Confirmer',
+			'bouton_modifie' => 'Modifier',
+			'bouton_ajoute' => 'Ajouter',
+			'bouton_envoyer' => 'Envoyer',
+			'bouton_soumettre' => 'Soumettre',
+			'bouton_supprimer' => 'Supprimer',
 	
 	'categories_de_cotisations' => 'Cat&eacute;gories de cotisations',
 	'configuration' => 'Configuration',
-	'effacer_les_tables' => 'Effacer les tables',
 	'gestion_association' => 'Gestion d\'une Association',
 	'gestion_des_banques' => 'Gestion des banques',
 	'gestion_de_lassoc' => 'Gestion de l\'association',
@@ -295,12 +299,82 @@ Commentaire: @commentaire@
 	'date_du_jour' => 'Nous sommes le '.date('d/m/Y'),
 	'date_du_jour_heure' => 'Nous sommes le '.date('d/m/Y').' et il est '.date('H:i'),
 	
-	#Votre association
-	'votre_asso' => 'Votre association',
-	'president' => 'President',
-	'votre_equipe' => 'Votre &eacute;quipe',
-	'donnees_perso' => 'Donn&eacute;es Personnelles',
-	'donnees_internes' => 'Donn&eacute;es Internes'
-	
-);
+	# Ressources
+		
+		#Messages
+		'ressources_info' => 'Vous pouvez g&eacute;rer ici les diff&eacute;rentes ressources pr&ecirc;t&eacute;es aux membres (livres, mat&eacute;riels, ...)<br />La puce indique la disponibilit&eacute; des diff&eacute;rentes ressources',
+		'ressources_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer l\'article n&deg; @id_ressource@ !',
+		
+		# Titres
+			'ressources_titre_gestion_ressources' => 'Gestion des ressources',
+			'ressources_titre_edition_ressources' => 'Edition de ressource',
+			'ressources_titre_suppression_ressources' => 'Suppression de ressource',
+			'ressources_titre_liste_ressources' => 'Liste des ressources',
+		
+		# En-tete
+			'ressources_entete_intitule' => 'Article',
+			'ressources_entete_code' => 'Code',
+			'ressources_entete_montant' => 'Montant',
+		
+		# Navigation
+			'ressources_nav_gestion_' => 'Gestion des ressources',
+			'ressources_nav_ajouter' => 'Ajouter une ressource',
+			'ressources_nav_supprimer' => 'Supprimer la ressource',
+			'ressources_nav_editer' => 'Editer la ressource',	
+		
+		# Libelle
+			'ressources_num' => 'RESSOURCE N&deg;',
+			'ressources_libelle_code' => 'Code',
+			'ressources_libelle_intitule' => 'Article',	
+			'ressources_libelle_date_acquisition' => 'Date d\'acquisition (AAAA-MM-JJ)',
+			'ressources_libelle_prix_location' => 'Prix de la location (en euros)',
+			'ressources_libelle_statut' => 'Statut',
+			'ressources_libelle_statut_ok' => 'Libre',
+			'ressources_libelle_statut_reserve' => 'R&eacute;serv&eacute;',
+			'ressources_libelle_statut_suspendu' => 'En suspend',
+			'ressources_libelle_statut_sorti' => 'D&eacute;saffect&eacute;',
+			'ressources_libelle_commentaires' => 'Commentaires',
+		
+		# Prêts
+			
+			#Messages
+				'prets_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer la r&eacute;servation n&deg; @id_pret@ !',
+			
+			# Titres
+				'prets_titre_gestion_prets' => 'Gestion des r&eacute;servations',
+				'prets_titre_edition_prets' => 'Edition de r&eacute;servation',
+				'prets_titre_suppression_prets' => 'Suppression de r&eacute;servation',
+				'prets_titre_liste_reservations' => 'Liste des r&eacute;servations',
+			
+			# En-tete
+				'prets_entete_date_sortie' => 'Date sortie',
+				'prets_entete_nom' => 'Nom',
+				'prets_entete_duree' => 'Dur&eacute;e',
+				'prets_entete_date_retour' => 'Date retour',
+				'prets_entete_reservation' => 'R&eacute;servation',
+				'prets_entete_retour' => 'Restitution',
+			
+			# Navigation
+				'prets_nav_gerer' => 'G&eacute;rer les r&eacute;servations',
+				'prets_nav_ajouter' => 'Ajouter une r&eacute;servation',
+				'prets_nav_annuler' => 'Annuler la r&eacute;servation',
+				'prets_nav_editer' => 'Editer la r&eacute;servation',	
+			
+			# Libelle
+				'prets_libelle_date_sortie' => 'Date de sortie',
+				'prets_libelle_duree' => 'Dur&eacute;e',
+				'prets_libelle_num_emprunteur' => 'N&deg; de l\'emprunteur',
+				'prets_libelle_commentaires' => 'Commentaires',
+				'prets_libelle_date_retour' => 'Date de retour',
+				'prets_libelle_montant' => 'Montant (en euros)',
+				'prets_libelle_mode_paiement' => 'Mode de paiement',
+			
+		#Votre association
+			'votre_asso' => 'Votre association',
+			'president' => 'President',
+			'votre_equipe' => 'Votre &eacute;quipe',
+			'donnees_perso' => 'Donn&eacute;es Personnelles',
+			'donnees_internes' => 'Donn&eacute;es Internes'
+		
+	);
 ?>

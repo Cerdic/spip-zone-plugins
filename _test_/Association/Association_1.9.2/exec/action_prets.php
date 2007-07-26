@@ -18,7 +18,7 @@
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$action=$_REQUEST['action'];
 		$id_pret=$_REQUEST['id_pret'];
-		$id_ressource=$_POST['id_ressource'];
+		$id_ressource=$_REQUEST['id_ressource'];
 		$date_sortie=$_POST['date_sortie'];
 		$duree=$_POST['duree'];
 		$date_retour=$_POST['date_retour'];
@@ -37,20 +37,30 @@
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
-			debut_page(_T('Prets'), "", "");
+			debut_page(_T('asso:prets_titre_suppression_prets'), "", "");
 			
 			debut_gauche();
 			
 			debut_boite_info();
-			echo '<p>';
-			icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/calculatrice.gif','rien.gif' );
-			echo '</p>';
+			$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource'" ) ;
+			while ($data = spip_fetch_array($query)) {
+				$statut=$data['statut'];
+				echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:ressources_num').'<br />';
+				echo '<span class="spip_xx-large">'.$data['id_ressource'].'</span></div>';
+				echo '<p>'._T('asso:ressources_libelle_code').': '.$data['code'].'<br />';
+				echo $data['intitule'];
+				echo '</p>';
+			}
 			fin_boite_info();
+			
+			debut_raccourcis();
+			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
+			fin_raccourcis();
 			
 			debut_droite();
 			
-			debut_cadre_relief(  "", false, "", $titre = _T('Effacer une r&eacute;servation'));
-			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer la r&eacute;servation n&deg;'.$id_pret.' !</strong></p>';
+			debut_cadre_relief(  "", false, "", $titre = _T('asso:prets_titre_suppression_prets'));
+			echo '<p><strong>'._T('asso:prets_danger_suppression',array('id_pret' => $id_pret)).'</strong></p>';
 			echo '<form action="'.$url_action_prets.'&action=drop"  method="post">';
 			echo '<input type=hidden name="id_pret" value="'.$id_pret.'">';
 			echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
