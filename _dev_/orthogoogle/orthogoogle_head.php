@@ -9,6 +9,9 @@
 		if (!$dir_spell)
 			return $flux;
 
+		// si page de configuration, on ne charge rien
+		//if configuration OrthoGoogle
+		
 		// si aucun champ à traiter
 		if (!lire_config('orthogoogle'))
 			return $flux;
