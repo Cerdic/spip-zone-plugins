@@ -7,9 +7,16 @@ Pour l'instant on se contente de la video ... on verra plus tard pour le reste..
 ]
 
 #CACHE{0}
-
 <form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-
+<?php
+	$f = substr(sprintf('%o', fileperms(_DIR_PLUGIN_SPIPMOTION.'script_bash/spipmotion.sh')), -4);
+	if ($f == 777) {
+	}
+	else{
+		?><div style="color:red"><:spipmotion:verifier_droits:></div><?php
+	}
+	@unlink(_DIR_PLUGIN_SPIPMOTION.'script_bash/spipmotion.sh');
+?>
 <br />
 
 [(#REM|debut_cadre_trait_couleur{1,"xxx",""})]
@@ -123,9 +130,6 @@ if(boxName.checked){
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
 -->
 </div>
-
-
-[(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
 </form>
 
