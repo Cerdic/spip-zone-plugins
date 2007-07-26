@@ -1,6 +1,15 @@
+#SET{checked,#CONFIG{inscription2/newsletter,'',''}}
 #SET{selected,#CONFIG{inscription2/newsletters,'',''}}
+<div>
+<label>
+	<input type="checkbox" name="newsletter" onclick="showhide(this, '#news')" [(#GET{checked}|=={on}|?{checked="checked"})] id="newsletter" />
+	<strong><:inscription2:newsletter:></strong> 
+</label>
+
+<label id="news" style="[(#GET{checked}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_listes:><br />
 <B_listes>
-<select name="newsletters[]" multiple="multiple" [size="(#TOTAL_BOUCLE|plus{1})"] id="newsletters">
+<select name="newsletters[]" multiple="multiple" size="[(#TOTAL_BOUCLE|<{6}|?{ [(#TOTAL_BOUCLE|plus{1})] , 5 })]" id="newsletters">
 <BOUCLE_listes(LISTES){statut=liste}>
 	<option value="#ID_LISTE"[(#ID_LISTE|in_array{#GET{selected}}|?{ selected="selected"})]>
 	#TITRE
@@ -8,3 +17,7 @@
 </BOUCLE_listes>
 </select>
 </B_listes>
+<small><br /><:inscription2:select_listes:><br />
+<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small><br />
+</label>
+</div>

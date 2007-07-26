@@ -1,0 +1,28 @@
+#SET{statut_abonnement,#CONFIG{inscription2/statut_abonnement,'',''}}
+#SET{validite,#CONFIG{inscription2/validite,'',''}}
+
+<fieldset>
+<legend>
+	Abonnement
+</legend>
+<p>
+<:inscription2:info_internes_desc:>
+<br />
+<label>
+	<input type="checkbox" name="validite" [checked="(#GET{validite}|?{checked})"] id="validite" />
+	<strong><:inscription2:validite:></strong><br />
+	<:inscription2:exp_validite:>
+</label>
+<br /><br />
+
+<div>
+<span>
+	<strong>Statut d'abonnement</strong><br />
+	Ici le statut de l'abonn&eacute; (prospect/abonn&eacute;/relance/sorti)<br/>
+</span>
+<span>
+	<input type="text" name="statut_abonnement" id="statut_abo" value="#GET{statut_abonnement}">
+</span>
+</div>
+<br />
+</fieldset>
