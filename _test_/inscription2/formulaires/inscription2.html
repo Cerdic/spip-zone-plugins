@@ -169,6 +169,12 @@ $(document).ready(function() {
 	#INCLURE{fond=formulaires/abonnement_liste}	
 ]
 
+
+[(#CONFIG{inscription2/categorie}|=={on}|?{' ', ''})
+	#INCLURE{fond=formulaires/inscription2_form_asso}
+]
+
+
 <fieldset class="infos-auteurs">
 <legend>
 	<:inscription2:info_perso:>
@@ -349,25 +355,6 @@ $(document).ready(function() {
 </fieldset>
 ]
 
-[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
-#SET{afficher_plus, false}
-[(#CONFIG{inscription2/publication}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/categorie}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
-[(#CONFIG{inscription2/domaines}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
-
-[(#GET{afficher_plus}|=={true}|?{' ', ''})
-<fieldset class="infos-auteurs">
-<legend>
-	<:inscription2:general_infos:>
-</legend>
-
-[(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
-<div>
-	<strong><:inscription2:publication:></strong>
-	<input type="checkbox" style="display:inline;float:none;width:15px" name="publication" id="publication" value="#ENV{publication}" />
-</div>
-]
 [(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})
 <div class="grand_select">
 	<strong><:inscription2:newsletter:></strong>
@@ -375,14 +362,14 @@ $(document).ready(function() {
 	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
 </div>
 ]
-[(#CONFIG{inscription2/categorie}|=={on}|?{' ', ''})
-<div class="grand_select">
-	<label><strong><:inscription2:categorie:></strong></label>
-	<div class="select">
-	[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
-	</div>
+
+[(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
+<div>
+	<strong><:inscription2:publication:></strong>
+	<input type="checkbox" style="display:inline;float:none;width:15px" name="publication" id="publication" value="#ENV{publication}" />
 </div>
 ]
+
 <?php
 	include(find_in_path("inc/domaines.php"));
 	if(sizeof($domaine)>0){
@@ -398,8 +385,9 @@ $(document).ready(function() {
 				</div>]';
 	}
 ?>
-</fieldset>
-]
+
+
+
 <p style="text-align:right"><input type="submit" value="<:bouton_valider:>" /></p>
 
 </form>

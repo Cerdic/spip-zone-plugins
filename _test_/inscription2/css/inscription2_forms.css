@@ -1,4 +1,5 @@
 .infos-auteurs > div{height:35px;clear:both;padding:5px}
+div.inscription2 > div{height:auto;clear:both;padding:5px;margin-bottom:10px}
 .infos-auteurs input, .select , textarea{display:block;float:right;width:250px}
 .infos-auteurs label{display:block;float:left}
 .infos-auteurs > div.textarea {height:70px;clear:both;padding:5px}
@@ -7,3 +8,5 @@
 .obligatoire label{color:#a40000}
 div.error{background-color:#ffe2e2}
 label.error{font-size:0.9em;color:red;display:block;clear:both}
+.inscription2{font-size:85%}
+div.inscription2 fieldset {margin-bottom:10px}
