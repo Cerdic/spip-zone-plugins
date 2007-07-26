@@ -1,33 +1,37 @@
 <?php
-/**
-* Plugin Association
-*
-* Copyright (c) 2007
-* Bernard Blazin & François de Montlivault
-* http://www.plugandspip.com 
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-* Pour plus de details voir le fichier COPYING.txt.
-*  
-**/
-include_spip('inc/presentation');
-include_spip('inc/gestion_base');
-
-function exec_association() {
-	global $connect_statut, $connect_toutes_rubriques;
-
-	if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
-		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
-		echo _T('avis_non_acces_page');
-		fin_page();
-		exit;
-	}
+	/**
+	* Plugin Association
+	*
+	* Copyright (c) 2007
+	* Bernard Blazin & François de Montlivault
+	* http://www.plugandspip.com 
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	* Pour plus de details voir le fichier COPYING.txt.
+	*  
+	**/
 	
-	association_verifier_base();		
-
-	debut_page(_T('asso:association'), "naviguer", "association");
-
-	$url_edit_adherent = generer_url_ecrire('edit_adherent');
-
+	include_spip('inc/presentation');
+	include_spip('inc/gestion_base');
+	include_spip ('inc/navigation_modules');
+	
+	function exec_association() {
+		global $connect_statut, $connect_toutes_rubriques;
+		
+		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
+			debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+			echo _T('avis_non_acces_page');
+			fin_page();
+			exit;
+		}
+		
+		association_verifier_base();		
+		
+		debut_page(_T('asso:association'), "naviguer", "association");
+		
+		$url_edit_adherent = generer_url_ecrire('edit_adherent');
+		
+		association_onglets();
+		
 	debut_gauche();
      debut_boite_info();
      echo propre(_T('asso:info_doc'));  	

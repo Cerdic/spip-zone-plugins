@@ -11,6 +11,7 @@
 	**/
 	
 	include_spip('inc/presentation');
+	include_spip ('inc/navigation_modules');
 	
 	function exec_edit_ressource(){
 		global $connect_statut, $connect_toutes_rubriques;
@@ -18,7 +19,9 @@
 		debut_page(_T('asso:ressources_titre_edition_ressources'), "", "");
 		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$url_retour = $_SERVER['HTTP_REFERER'];
-			
+		
+		association_onglets();
+		
 		debut_gauche();
 		
 		debut_boite_info();

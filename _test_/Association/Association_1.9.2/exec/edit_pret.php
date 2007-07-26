@@ -11,6 +11,7 @@
 	**/
 	
 	include_spip('inc/presentation');
+	include_spip ('inc/navigation_modules');
 	
 	function exec_edit_pret(){
 		global $connect_statut, $connect_toutes_rubriques;
@@ -34,7 +35,9 @@
 			$commentaire_sortie=$data['commentaire_sortie'];
 			$commentaire_retour=$data['commentaire_retour'];
 		}	
-		
+			
+		association_onglets();
+			
 		debut_gauche();
 		
 		debut_boite_info();
@@ -52,10 +55,6 @@
 		debut_raccourcis();
 		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
 		fin_raccourcis();
-		
-		if ($connect_statut == '0minirezo') {
-		include_spip ('inc/navigation');
-		}
 		
 		debut_droite();
 		

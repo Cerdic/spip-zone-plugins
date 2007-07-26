@@ -11,6 +11,7 @@
 	**/
 	
 	include_spip('inc/presentation');
+	include_spip ('inc/navigation_modules');
 	
 	function exec_ressources(){
 		global $connect_statut, $connect_toutes_rubriques;
@@ -21,6 +22,8 @@
 		$url_edit_ressource=generer_url_ecrire('edit_ressource');
 		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$url_prets=generer_url_ecrire('prets');
+		
+		association_onglets();
 		
 		debut_gauche();
 		

@@ -1,17 +1,19 @@
 <?php
-/**
-* Plugin Association
-*
-* Copyright (c) 2007
-* Bernard Blazin & François de Montlivault
-* http://www.plugandspip.com 
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-* Pour plus de details voir le fichier COPYING.txt.
-*  
-**/
-include_spip('inc/presentation');
+	/**
+	* Plugin Association
+	*
+	* Copyright (c) 2007
+	* Bernard Blazin & François de Montlivault
+	* http://www.plugandspip.com 
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	* Pour plus de details voir le fichier COPYING.txt.
+	*  
+	**/
+	
+	include_spip('inc/presentation');
 
-function exec_adherents() {
+	
+	function exec_adherents() {
 
 	global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 
@@ -29,7 +31,7 @@ function exec_adherents() {
 	$url_action_adherents = generer_url_ecrire('action_adherents');
 	$url_pdf_adherents = generer_url_ecrire('pdf_adherents');
 	
-	include_spip ('inc/navigation');
+			include_spip ('inc/navigation');
 
 	debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_liste_actifs'));
 	debut_boite_info();

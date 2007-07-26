@@ -12,17 +12,13 @@
 		
 		# Navigation
 			'menu2_titre_gestion_membres' => 'Gestion des membres',
-			'menu2_titre_ajouter_membre' => 'Ajouter un membre',
-			'menu2_titre_ajouter_abonne' => 'Ajouter un abonn&eacute;',
 			'menu2_titre_relances_cotisations' => 'Relances des cotisations',
-			'menu2_titre_relances_abo' => 'Relances',
 			'menu2_titre_gestion_dons' => 'Gestion des dons',
 			'menu2_titre_ventes_asso' => 'Ventes associatives',
-			'menu2_titre_ventes_abo' => 'Ventes',
-			'abonnements' => 'Abonnements',
 			'menu2_titre_gestion_activites' => 'Gestion des activit&eacute;s',
 			'menu2_titre_livres_comptes' => 'Livres de comptes',
-		
+			'menu2_titre_gestion_prets' => 'Gestion des pr&ecirc;ts',
+			
 		#Configuration
 			'config_libelle_nom' => 'Nom',
 			'config_libelle_email' => 'Adresse courriel',

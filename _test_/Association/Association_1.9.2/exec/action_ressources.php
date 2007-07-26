@@ -11,7 +11,8 @@
 	**/
 
 	include_spip('inc/presentation');
-
+	include_spip ('inc/navigation_modules');
+	
 	function exec_action_ressources(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
@@ -34,6 +35,8 @@
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
 			debut_page(_T('asso:ressources_titre_suppression_ressources'), "", "");
+			
+			association_onglets();
 			
 			debut_gauche();
 			

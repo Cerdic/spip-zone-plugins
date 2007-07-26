@@ -11,7 +11,8 @@
 	**/
 
 	include_spip('inc/presentation');
-
+	include_spip ('inc/navigation_modules');
+	
 	function exec_action_prets(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
@@ -38,6 +39,8 @@
 			$url_retour = $_SERVER['HTTP_REFERER'];
 			
 			debut_page(_T('asso:prets_titre_suppression_prets'), "", "");
+			
+			association_onglets();
 			
 			debut_gauche();
 			

@@ -11,6 +11,7 @@
 	**/
 	
 	include_spip('inc/presentation');
+	include_spip ('inc/navigation_modules');
 	
 	function exec_prets(){
 		global $connect_statut, $connect_toutes_rubriques;
@@ -21,6 +22,8 @@
 		$url_edit_pret=generer_url_ecrire('edit_pret');
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$id_ressource=$_REQUEST['id'];
+		
+		association_onglets();
 		
 		debut_gauche();
 		
