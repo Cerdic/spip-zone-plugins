@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  boutonstexte.js (c) toggg http://toggg.com 2006 -- licence LGPL
  */
 
@@ -15,13 +15,13 @@ if (typeof jQuery == 'function')
 			  '/fontsizeup.png" /></button>')
 			.appendTo(boutons);
 		}
-		if (!$("img.textsizedown").length && boutonstexte.txtSizeUp) {
+		if (!$("img.textsizedown").length && boutonstexte.txtSizeDown) {
 			$('<button class="textsizedown"' +
 			  '"><img src="' + boutonstexte.imgPath +
 			  '/fontsizedown.png" /></button>')
 			.appendTo(boutons);
 		}
-		if (!$("img.textonly").length && boutonstexte.txtSizeUp) {
+		if (!$("img.textonly").length && boutonstexte.txtOnly) {
 			$('<button class="textonly"' +
 			  '"><img src="' + boutonstexte.imgPath +
 			  '/textonly.png" /></button>')
@@ -48,7 +48,7 @@ if (typeof jQuery == 'function')
 
 		$("img.textonly,button.textonly")
 		.click(function(e) {
-			boutonstexte.textOnly($(this).is('button') ? this : null);
+			boutonstexte.texteOnly($(this).is('button') ? this : null);
 			e.stopPropagation();
 		})
 		.attr({'alt':boutonstexte.txtOnly, 'title':boutonstexte.txtOnly});
@@ -65,7 +65,7 @@ function boutonsTexte(options)
         this[opt] = options[opt];
     }
 }
-boutonsTexte.prototype.textOnly = function(elt)
+boutonsTexte.prototype.texteOnly = function(elt)
 {
 	var that = this;
 	var texte = jQuery(elt).parent().next();
