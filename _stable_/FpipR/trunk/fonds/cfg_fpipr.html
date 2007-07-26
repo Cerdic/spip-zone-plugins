@@ -31,9 +31,8 @@
 <label for="tag_group"><:fpipr:cfg_tag_machine_group:>: </label>
 <B_groupes>
 <select name="tag_group" id="tag_group">
-<option></option>
 <BOUCLE_groupes(GROUPES_MOTS) {par titre}>
-<option [(#ENV{tag_group_select,FlickrTag}|=={#TITRE}|?{'selected="true"'})]>#TITRE</options>
+<option [(#ENV{tag_group,FlickrTag}|=={#TITRE}|?{'selected="true"'})]>#TITRE</options>
 </BOUCLE_groupes>
 </select>
 </B_groupes>
