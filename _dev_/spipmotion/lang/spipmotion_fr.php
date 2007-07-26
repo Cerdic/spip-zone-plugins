@@ -1,7 +1,7 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'titre' => 'Gestion de SPIPmotion',
+	'titre' => 'SPIPmotion',
 	'titrepage' => 'SPIPmotion : Publication ais&eacute;e de vid&eacute;os sur internet',
 	'gros_titre' => 'SPIPmotion : Publication ais&eacute;e de vid&eacute;os sur internet',
 	'chemin_executable' => 'Chemin de l\'ex&eacute;cutable FFmpeg sur le serveur :',
@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_selectionner_fichier_encoder' => 'Vous pouvez encoder un des fichiers suivants',
 	'info_selectionner_video' => 'Vous pouvez insérer une des vid&eacute;os suivantes :',
 	'bouton_encoder' => 'Encoder',
+	'bouton_encoder_videos' => 'VID&Eacute;OS &Agrave; ENCODER',
 	'zzzz' => 'zzzz'
 );
 ?>
