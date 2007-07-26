@@ -10,8 +10,17 @@
 			return $flux;
 
 		// si page de configuration, on ne charge rien
-		//if configuration OrthoGoogle
+		//parse le flux en tant qu'xml
+		$doc = new DOMDocument;
+		$doc->loadHTML($flux);
+
+		//charge une action xpath		
+		$xpath = new DOMXPath($doc);
+		$res=$xpath->query('/html/head/title[contains(.,"OrthoGoogle")]');
 		
+		if ($res->length > 0)
+			return $flux;
+
 		// si aucun champ à traiter
 		if (!lire_config('orthogoogle'))
 			return $flux;

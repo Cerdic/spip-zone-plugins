@@ -2,8 +2,8 @@
 	function orthogoogle_install($action){
 		switch ($action){
 		case 'test':
-			//Contrôle du plugin à chaque chargement de la page d'administration
-			//ecrire_meta('orthogoogle','a:1:{s:5:"texte";}');
+			//rien à faire donc tout va bien 
+			return true;
 			break;
 		case 'install':
 			//Appel de la fonction d'installation. Lors du clic sur l'icône depuis le panel.
@@ -11,11 +11,15 @@
 			if(!lire_config('orthogoogle')){
 				//par défaut juste le champ d'id text_area est corrigeable
 				ecrire_meta('orthogoogle','a:1:{s:9:"text_area";s:2:"on";}');		
-			}			
+			}
+			//quoiqu'il arrive c'est ok
+			return true;			
 			break;
 		case 'uninstall':
 			//Appel de la fonction de suppression
 			effacer_meta('orthogoogle');
+			//tout s'est deroulé comme il faut
+			return true;
 			break;
 		}
 	}
