@@ -184,8 +184,12 @@ $().ready(function() {
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
 	$query = spip_fetch_array($query);
 	
-	if($query['id'] == NULL)
-			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)");
+	if($query['id'] == NULL){
+		$query2 = spip_query("select id from spip_auteurs_elargis where id_auteur = $id");
+		$query2 = spip_fetch_array($query2);
+		if($query2['id'] == NULL)
+			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)"); //source de pbs
+	}
 
 
 	
