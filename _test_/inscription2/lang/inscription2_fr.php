@@ -24,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
 
+'admin_modifier_auteur_supp' => 'Informations suppl&eacute;mentaires',
+
 'form' => 'Formulaire',
 'fiche' => 'Fiche',
 'fiche_mod' => 'Modifiable',
