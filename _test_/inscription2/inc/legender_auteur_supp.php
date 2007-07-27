@@ -211,9 +211,9 @@ function legender_auteur_supp_voir($auteur, $redirect)
 
 		if (_request('edit_supp') == 'oui') {
 			$clic = _T('icone_retour');
-			$retour = _T('inscription:admin_modifier_auteur_supp');
+			$retour = _T('inscription2:admin_modifier_auteur_supp');
 		} else {
-			$clic = _T('inscription:admin_modifier_auteur_supp');
+			$clic = _T('inscription2:admin_modifier_auteur_supp');
 			$retour = _T('icone_retour');
 		}
 
