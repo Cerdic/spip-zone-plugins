@@ -58,7 +58,7 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 				"</option>\n";
 	}
 
-	if (version_compare($GLOBALS['spip_version_code'],1.925,'>'))
+	if (version_compare($GLOBALS['spip_version_code'],'1.9250','>'))
 		$puce = inserer_attribut(puce_statut($statut),'alt','');
 	else 
 		$puce = http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0'");

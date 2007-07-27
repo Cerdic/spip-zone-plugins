@@ -400,7 +400,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 
 		$formulaire .= "</div>";
 		$formulaire .= "</form>";
-		if (version_compare($GLOBALS['spip_version_code'],'1.925','>')){
+		if (version_compare($GLOBALS['spip_version_code'],'1.9250','>')){
 			$formulaire = 
 				bouton_block_depliable(typo($row['titre'])." (".typo(Forms_nom_type_champ($row['type'])).")",$visible,"champ_$champ")
 				. debut_block_depliable($visible,"champ_$champ")

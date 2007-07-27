@@ -384,7 +384,7 @@
 				$link, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "creer.gif", false);
 		}
 		
-		if (version_compare($GLOBALS['spiip_version_code'],'1.925','>')){
+		if (version_compare($GLOBALS['spiip_version_code'],'1.9250','>')){
 			$s .= cadre_depliable(_DIR_PLUGIN_FORMS."img_pack/form-24.png",_T("forms:article_inserer_un_formulaire"),true,$out,"ajouter_form");
 		}
 		else {

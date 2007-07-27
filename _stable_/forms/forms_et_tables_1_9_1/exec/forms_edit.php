@@ -84,7 +84,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	}
 
 	$out .= "<br />";
-	if (version_compare($GLOBALS['spiip_version_code'],'1.925','>')){
+	if (version_compare($GLOBALS['spiip_version_code'],'1.9250','>')){
 		$out .= bouton_block_depliable(_T("forms:apparence_formulaire"),true,"preview_form");			
 		$out .= debut_block_depliable(true,"preview_form");
 	}
