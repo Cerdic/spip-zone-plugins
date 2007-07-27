@@ -58,17 +58,22 @@ function inc_encoder_videos_dist($v) {
 		(intval($v['id']) .'/' .intval($v['id_document']) . "/".$v['mode'].'/'.$v['type']),
 		(!test_espace_prive())?$v['script']:generer_url_ecrire($v['script'], $v['args'], true),
 		"$iframe$debut$res$dir_ftp$distant$fin",
-		" method='post' enctype='multipart/form-data' class='form_upload'");
+		" method='post' enctype='multipart/form-data' class='form_encode'");
 		
 	if ($v['cadre']) {
 		$debut_cadre = 'debut_cadre_'.$v['cadre'];
 		$fin_cadre = 'fin_cadre_'.$v['cadre'];
-		$res = $debut_cadre($v['icone'], true, $v['fonction'], $v['titre'])
-			. $res
-			. $fin_cadre(true);
+		$res1 = $debut_cadre($v['icone'], true, $v['fonction'], $v['titre']);
+		if ($dir_ftp){
+			$res = $res;
+		}
+		else{
+		$res = _T('spipmotion:info_installer_encoder_ftp');
+		}
+			$res1 .= $res . $fin_cadre(true);
 	}
 	
-	return "\n<div class='joindre'>".$res."</div>\n";
+	return "\n<div class='joindre'>".$res1."</div>\n";
 }
 
 //
@@ -85,7 +90,6 @@ function texte_encoder_manuel_videos($dir, $inclus = '', $mode = 'videos') {
 		if (ereg("\.([^.]+)$", $f, $match)) {
 			$ext = strtolower($match[1]);
 			if (!isset($exts[$ext])) {
-				if ($ext == 'jpeg') $ext = 'jpg'; # cf. corriger_extension dans inc/getdocument
 				if (spip_abstract_fetsel('extension', 'spip_types_documents', "extension='$ext'" . (!$inclus ? '':  " AND inclus='$inclus'")))
 					$exts[$ext] = 'oui';
 				else $exts[$ext] = 'non';
@@ -119,7 +123,9 @@ function texte_encoder_manuel_videos($dir, $inclus = '', $mode = 'videos') {
 	} 
 
 	$texte = join('', $texte_upload);
-
+	if (!$texte) {
+		
+	}
 	return $texte;
 }
 
@@ -133,18 +139,18 @@ function afficher_transferer_encoder_videos($texte_upload, $dir)
 			_T('spipmotion:info_installer_encoder_ftp', $doc).
 			"</div>";
 		}
-	else {  return
-		"\n<div style='color: #505050;'>"
+	else {  
+	$jsfunction = '$("#encodage").css("opacity",0.5).html("'._T("spipmotion:encodage_en_cours").'");';
+	return
+		"<div style='color: #505050;' id='encodage'><div id='encodage_txt'>"
 		._T('spipmotion:info_selectionner_fichier_encoder', $doc)
-		."&nbsp;:<br />\n" .
-		"\n<select name='chemin' size='1' class='fondl'>" .
+		."&nbsp;:<br /></div>\n" .
+		"\n<select name='chemin' id='chemin_encodage' size='1' class='fondl'>" .
 		$texte_upload .
 		"\n</select>" .
-		"\n<div align='".
+		"\n</div><div align='".
 		$GLOBALS['spip_lang_right'] .
-		"'><input name='sousaction3' type='submit' value='" .
-		_T('spipmotion:bouton_encoder').
-		"' class='fondo' /></div>" .
+		"'><input  name='sousaction3' type='submit' value='"._T('spipmotion:bouton_encoder')."' class='fondo' />" .
 		"</div>\n";
 	}
 }

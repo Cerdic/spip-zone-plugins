@@ -15,13 +15,12 @@ include_spip('inc/date');
 include_spip('inc/documents');
 include_spip('base/abstract_sql');
 
-function spipmotion_afficher_insertion_videos($id_article) {
+function inc_spipmotion_dist($id_article) {
 	global $connect_id_auteur, $connect_statut;
 	$id_article = _request('id_article');
 
-	$s = "";
 	// Ajouter le formulaire d'ajout de videos
-	$s .= afficher_videos_colonne($id_article, 'article', true);
+	$s = afficher_videos_colonne($id_article, 'article', true);
 	return $s;
 }
 
@@ -31,8 +30,8 @@ function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
 	// il faut avoir les droits de modif sur l'article pour pouvoir uploader !
 	if (!autoriser('joindredocument',$type,$id))
 		return "";
-
-	include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_documents_colonne depuis un squelette
+		
+	include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_videos_colonne depuis un squelette
 	// seuls cas connus : article, breve ou rubrique
 	if ($script==NULL){
 		$script = $type.'s_edit';
@@ -61,7 +60,7 @@ function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
 	$joindre_videos = charger_fonction('joindre_videos', 'inc');
 
 	// Ajouter nouveau document
-	$ret .= "<br /><br /><div id='videos'></div>\n<div id='portfolio_videos'></div>\n";
+	$ret .= "<br /><div id='video_form'><div id='videos'></div>\n<div id='portfolio_videos'></div>\n";
 	if (!isset($GLOBALS['meta']["documents_$type"]) OR $GLOBALS['meta']["documents_$type"]!='non') {
 		$ret .= $joindre_videos(array(
 			'cadre' => 'enfonce',
@@ -91,18 +90,9 @@ function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
 			'type' => $type,
 			'ancre' => '',
 			'id_document' => 0,
-			'iframe_script' => generer_url_ecrire("documents_colonne","id=$id&type=$type",true)
+			'iframe_script' => generer_url_ecrire("documents_colonne_video","id=$id&type=$type",true)
 		));
 	}
-
-/*
-			$titre_cadre = _T('spipmotion:bouton_ajouter_videos');
-			$ret .= debut_cadre_enfonce("doc-24.gif", true, "creer.gif", $titre_cadre);
-			$ret .= $encoder_videos($script, "id_$type=$id", $id, "", 'videos',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
-			$ret .= $joindre_videos($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'videos',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
-			$ret .= fin_cadre_enfonce(true);
-*/
-
 
 		// Afficher les videos lies
 		$ret .= "<div id='liste_documents_videos'>\n";
@@ -112,7 +102,7 @@ function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
 			$deplier = $id_document_actif==$id_document;
 			$ret .= afficher_case_document_videos($doc, $id, $script, $type, $deplier);
 		}
-		$ret .= "</div>";
+		$ret .= "</div></div>";
 	
   if (test_espace_prive()){
 	$ret .= "<script src='"._DIR_PLUGIN_SPIPMOTION."/javascript/async_encode.js' type='text/javascript'></script>\n";
@@ -122,10 +112,44 @@ function afficher_videos_colonne($id, $type="article", $flag_modif = true) {
 	</script>
 EOF;
 }
-
 	return $ret;
 	
 }
+
+function afficher_videos_joindre($id, $type="article", $flag_modif = true) {
+
+	include_spip('inc/presentation'); // pour l'aide quand on appelle afficher_videos_colonne depuis un squelette
+	// seuls cas connus : article, breve ou rubrique
+	if ($script==NULL){
+		$script = $type.'s_edit';
+		if (!test_espace_prive())
+			$script = parametre_url(self(),"show_videos",'');
+	}
+	$id_document_actif = _request('show_videos');
+
+	$joindre_videos = charger_fonction('joindre_videos', 'inc');
+
+	// Ajouter nouveau document
+	if (!isset($GLOBALS['meta']["documents_$type"]) OR $GLOBALS['meta']["documents_$type"]!='non') {
+		$ret = $joindre_videos(array(
+			'cadre' => 'enfonce',
+			'icone' => 'doc-24.gif',
+			'fonction' => 'creer.gif',
+			'titre' => _T('spipmotion:bouton_ajouter_videos'),
+			'script' => $script,
+			'args' => "id_$type=$id",
+			'id' => $id,
+			'intitule' => _T('info_telecharger'),
+			'mode' => 'videos',
+			'type' => $type,
+			'ancre' => '',
+			'id_document' => 0,
+			'iframe_script' => generer_url_ecrire("documents_colonne","id=$id&type=$type",true)
+		));
+	}
+	return $ret;
+}
+
 //
 // Affiche le raccourci <doc123|left>
 // et l'insere quand on le clique
@@ -195,18 +219,6 @@ function afficher_case_document_videos($id_document, $id, $script, $type, $depli
 	$ret = "";
 	if (!$mode) {
 		if ($options == "avancees") {
-			# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
-			switch ($id_type) {
-				case 1:
-					$document['extension'] = "jpg";
-					break;
-				case 2:
-					$document['extension'] = "png";
-					break;
-				case 3:
-					$document['extension'] = "gif";
-					break;
-			}
 
 		$ret .= "<a id='document$id_document' name='document$id_document'></a>\n";
 		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),30));
@@ -269,7 +281,7 @@ function afficher_case_document_videos($id_document, $id, $script, $type, $depli
 		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
 		//
 		$raccourci_doc = "<div style='padding:2px;'>
-		<font size='1' face='arial,helvetica,sans-serif'>";
+		<span style='font-family:arial,helvetica,sans-serif'>";
 		if (strlen($descriptif) > 0 OR strlen($titre) > 0)
 			$doc = 'doc';
 		else
@@ -282,7 +294,7 @@ function afficher_case_document_videos($id_document, $id, $script, $type, $depli
 		} else {
 			$raccourci_doc .= affiche_raccourci_doc_videos($doc, $id_document, '');
 		}
-		$raccourci_doc .= "</font></div>\n";
+		$raccourci_doc .= "</span></div>\n";
 
 		//
 		// Afficher un apercu (pour les images)

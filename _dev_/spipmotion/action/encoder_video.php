@@ -26,7 +26,6 @@ function action_encoder_video_dist(){
 		$redirect = urldecode(_request('redirect'));
 		return;
 	}
-
 	list(, $id, $id_document, $mode, $type) = $r;
 	$actifs = array();
 	$redirect = action_encoder_video_sous_action($id, $id_document, $mode, $type, $actifs);
@@ -113,8 +112,20 @@ function inc_encoder_video3_dist($path, $mode, $type, $id, $id_document,$hash, $
 					);
 	  }
 	}
+	return encoder_video($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect);
+}
+
+function encoder_video($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
+{
 	$encodage = charger_fonction('encodage', 'inc');
-	return $encodage($files);
+
+	foreach ($files as $arg) {
+		$x = $encodage($arg['tmp_name'], $arg['name'], $type, $id, $mode, $id_document, $actifs);
+	}
+	// un invalideur a la hussarde qui doit marcher au moins pour article, breve, rubrique
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_$type/$id'");
+	return $x;
 }
 
 ?>

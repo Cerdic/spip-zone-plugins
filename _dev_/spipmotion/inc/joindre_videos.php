@@ -63,12 +63,17 @@ function inc_joindre_videos_dist($v) {
 	if ($v['cadre']) {
 		$debut_cadre = 'debut_cadre_'.$v['cadre'];
 		$fin_cadre = 'fin_cadre_'.$v['cadre'];
-		$res = $debut_cadre($v['icone'], true, $v['fonction'], $v['titre'])
-			. $res
-			. $fin_cadre(true);
+		$res1 = $debut_cadre($v['icone'], true, $v['fonction'], $v['titre']);
+		if ($dir_ftp){
+			$res = $res;
+		}
+		else{
+		$res = _T('spipmotion:info_installer_encoder_ftp');
+		}
+			$res1 .= $res . $fin_cadre(true);
 	}
 	
-	return "\n<div class='joindre'>".$res."</div>\n";
+	return "\n<div id='joindre_video'><div class='joindre'>".$res1."</div></div>\n";
 }
 
 //
