@@ -1,0 +1,11 @@
+<plugin>
+	<nom>Table des Mati&#232;res</nom>
+	<version>1.0</version>
+	<prefix>TableMatieres</prefix>
+	<options>tdm_options.php</options>
+	<fonctions>table_matieres.php</fonctions>
+	<auteur>James (c)2007 - Licence GNU/GPL</auteur>
+	<description>Introduit une ancre translitter&#233;e pour chaque intertitre du champ #TEXTE des ARTICLES,
+	ainsi qu'une balise #TABLE_MATIERES associ&#233;e &#224; placer, bien s&#251;r, dans une boucle ARTICLES.</description>
+	<etat>test</etat>
+</plugin>
