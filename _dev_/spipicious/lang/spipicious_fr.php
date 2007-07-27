@@ -22,6 +22,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // W
   'waiting' => 'recherche de vos tags',
   
+  'administrateurs' => 'Les administrateurs',
+  'redacteurs' => 'Les r&eacute;dacteurs',
+  'visiteurs' => 'Les visiteurs',
+  'types_utilisateurs' => 'Qui a acc&egrave;s au formulaire ?',
+  'nom_groupe_tag' => 'Groupe de mots cl&eacute; associ&eacute;',
+  'waiting' => 'recherche de vos tags',
+  
 
  
 );

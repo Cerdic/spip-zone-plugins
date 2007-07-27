@@ -30,16 +30,20 @@ function spipicious_affichage_final($page){
 			jQuery(this)
 			.Autocomplete({
 				'source': '$urlselecteur'+'\x26id_article='+id_article+'\x26id_groupe='+id_groupe,
-				'delay': 300,
+				'delay': 200,
 				'autofill': false,
 				'helperClass': "autocompleter",
 				'selectClass': "selectAutocompleter",
 				'minchars': 2,
 				'mustMatch': true,
+				'inputWidth': true,
 				'cacheLength': 20,
 				'multiple' : true,
-				'multipleSeparator' : ",",
+				'multipleSeparator' : "; ",
 				fx : {type: "fade", duration: 400},
+				'onShow' : function(suggestionBox, suggestionIframe) {
+					jQuery('.autocompleter, .selectAutocompleter').fadeTo(300,0.8);
+				},
 				'onSelect': 
 				function(li) {
 					if (li.id > 0) {
@@ -48,6 +52,7 @@ function spipicious_affichage_final($page){
 					}
 				}
 			});
+			jQuery('.autocompleter, .selectAutocompleter').css('opacity',0.7);
 		});
 	}
 	jQuery(document).ready(appliquer_selecteur_cherche_mot);
