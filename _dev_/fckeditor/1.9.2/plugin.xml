@@ -9,7 +9,7 @@
 	stable</etat>
 	<lien>Aide compl&#232;te sur [Electropol->http://electropol.free.fr]</lien>
 	<icon>images/edit.png</icon>	
-		<!-- prefixe des fonctions, filtres et fichers de votre plugin :
+		<!-- préfixe des fonctions, filtres et fichers de votre plugin :
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : fckeditor_ma_fonction() par exemple)
 		C'est par ailleurs conseille pour les noms de fichier
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
@@ -30,13 +30,13 @@
 {{Edition WYSIWYG avec FCKeditor}}
 
 <br /><br />
-
+<!--
 <u>Fin de l'installation et mise &agrave; jour :</u>
 -* -Vous devez avoir install&#233; et valid&#233; le plugin {{Chargeur}}
 -* -Pour finir d'installer FCKEditor vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=fckeditor&amp;dest_path=plugins/fckeditor] pour t&#233;l&#233;charger automatiquement la derni&#232;re version valid&#233;e pour ce plugin de FCKEditor. 
 -* -Pour utiliser Geshi (coloration syntaxique), vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=geshi&amp;dest_path=plugins/fckeditor/spip_fck/plugins/coloration] pour ajouter le module correspondant.
 Attention : Ces fonctions ne marchent pas bien et ne sont l&agrave; qu'&agrave; titre exp&#233;rimental. 
-
+-->
 <u>Caract&#233;ristiques :</u>
 -* - Edition des articles et des br&#232;ves,
 -* - Seule la zone &laquo;texte&raquo; est &#233;ditable,
