@@ -389,7 +389,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe="._q($id_groupe)." ORDER BY titre");
 		while ($row2 = spip_fetch_array($res2,SPIP_ASSOC)){
 			$id_mot = $row2['id_mot'];
-			$titre = $row2['titre'];
+			$titre = typo($row2['titre']);
 			$select .= my_sel($id_mot, "&nbsp;&nbsp;&nbsp;$titre", in_array($id_mot,$id_mot_select)?$id_mot:0);
 			$nb_mots++;
 		}
