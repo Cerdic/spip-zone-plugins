@@ -21,7 +21,7 @@ _ &#169; 2006 - Licence GPL
 
 	Pour d&#233;finir la rubrique et/ou le site, aller dessus dans l'interface d'admin et cliquer selectionnez-le dans le cadre blanc situ&#233; en bas &#224; gauche (ou en haut a droite si vous &#232;tes en &#233;cran large)
 
-	Une page de test (<code>?page=acronymes_voir</code>) boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#232;tude de votre base.
+	Une page de test ([spip.php?page=acronymes_voir->../spip.php?page=acronymes_voir]) boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#232;tude de votre base.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
@@ -50,5 +50,5 @@ _ &#169; 2006 - Licence GPL
 		<inclure>acronymes_config.php</inclure>
 	</pipeline>
 	<necessite id="forms" version="[0.301;]" />
-	<chemin dir='' type='prive' />
+	<chemin dir='' type='public' />
 </plugin>
