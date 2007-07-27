@@ -1,0 +1,23 @@
+#CACHE{0}
+
+[(#REM) descriptif= 
+<h4>Le plugin archive</h4>
+Rappel sur comment l'utiliser.<br />
+<br /><a href="http://www.spip-contrib.net/Plugin-archive" class="spip_out">Documentation compléte</a>
+]
+[(#REM) titre=configuration Plugin Archive]
+
+<h4> Version en cours : <?php echo $GLOBALS['meta']['archive_version'] ?> </h4> 
+
+<h4> Les articles archivés </h4>
+
+<B_archive>
+<ul>
+	<BOUCLE_archive(ARTICLES) {archive seulement}>
+	<li>
+		<a href="?exec=articles&id_article=#ID_ARTICLE	">voir</a> <b>#TITRE</b> (archivé le [(#DATE|jour)]/[(#DATE|mois)]/[(#DATE|annee)])
+	</li>
+	</BOUCLE_archive>
+</ul>
+</B_archive>
+

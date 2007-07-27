@@ -5,7 +5,7 @@ include_spip('base/abstract_sql');
 //configure la base spip et les metas
 function archive_install($action){
 	//version en cours
-	$archive_version = 0.5;
+	$archive_version = 0.6;
 	
    switch ($action){
        case 'test':
