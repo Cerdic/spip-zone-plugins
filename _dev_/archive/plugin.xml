@@ -1,10 +1,11 @@
 <plugin>
 	<nom>Archive</nom>
-	<version>0.4</version>
+	<version>0.5</version>
 	<prefix>archive</prefix>
 	<etat>dev</etat>
 	<auteur>Camille Lafitte [contact->mailto:cam.lafit@zerttyu.net]
 _ [mon site->http://km.azerttyu.net]</auteur>
+	<icon>archive.jpg</icon>
 	<description>
 		Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL.<br /> Pensez &agrave; utiliser le crit&egrave;re <b>{archive}</b> ou bien <b>archive seulement</b>
 	</description>
@@ -20,8 +21,5 @@ _ [mon site->http://km.azerttyu.net]</auteur>
 		<action>execution</action>
 		<inclure>archive.php</inclure>
 	</pipeline>	
-	 <pipeline>
-    <nom>ajouter_boutons</nom>
-    <inclure>archive_boutons.php</inclure>
- </pipeline>
+	<install>base/archive_install.php</install>
 </plugin>
