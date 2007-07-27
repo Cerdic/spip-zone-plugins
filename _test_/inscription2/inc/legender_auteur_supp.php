@@ -141,6 +141,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		. "<input type='text' id='$cle' name='$cle' class='formo' value='$val'><br />"; 
 	}
 	if($news){
+		if ($aux4){
 		$corps_supp .= "<strong>"._T('inscription2:newsletter')."</strong><br />"
 		. "<select name='news[]' id='news' multiple>";
 		foreach($aux4 as $val){
@@ -150,6 +151,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 				$corps_supp .= "<option value='".$val['id_liste']."'>".$val['titre']."</option>";
 		}
 		$corps_supp .= "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
+		}
 	}
 		$corps_supp .= "\n<br />";
 
