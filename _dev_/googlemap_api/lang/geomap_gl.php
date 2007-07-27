@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //elementos do formulario para editar as coordenadas
 'clave_engadida' => 'Clave engadida: ',
 'conseguir' => '(conseguir)',
+'configuration' => '<NEW>Configuration',
 );
 
 ?>

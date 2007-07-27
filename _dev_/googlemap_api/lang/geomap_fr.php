@@ -8,7 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //elements de formulaire pour editer les coordonnees
 'clave_engadida' => 'Clef ajout&eacute;e: ',
 'conseguir' => '(obtenir)',
-'default_geoloc' => 'Position par d&eacute;faut des cartes :'
+'default_geoloc' => 'Position par d&eacute;faut des cartes :',
+'configuration' => '<NEW>Configuration',
 );
 
 ?>

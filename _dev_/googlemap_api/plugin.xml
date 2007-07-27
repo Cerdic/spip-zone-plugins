@@ -24,5 +24,10 @@ _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eac
  <install>geomap_install.php</install>
  <fonctions>public/geomap_balises.php</fonctions>
  <prefix>geomap</prefix>
+ <pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>geomap_pipeline.php</inclure>
+	</pipeline>
  <chemin dir='' />
 </plugin>
