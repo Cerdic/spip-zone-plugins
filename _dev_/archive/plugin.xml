@@ -22,4 +22,7 @@ _ [mon site->http://km.azerttyu.net]</auteur>
 		<inclure>archive.php</inclure>
 	</pipeline>	
 	<install>base/archive_install.php</install>
+	
+	<necessite id="cfg" version="[1.0.4;]" />
+	
 </plugin>
