@@ -1,7 +1,1 @@
-<BOUCLE_nuage(MOTS){id_article}>[
-(#ID_MOT|nuage{#TITRE,#URL_MOT})
-]<BOUCLE_pop(ARTICLES){id_mot}></BOUCLE_pop>[
-(#ID_MOT|nuage{'','',#TOTAL_BOUCLE})
-]<//B_pop></BOUCLE_nuage>[<ul class="nuage">
-	(#FOREACH{NUAGE,foreach_nuage})
-</ul>]
+[(#INCLURE{fond=modeles/nuage}{env})]
