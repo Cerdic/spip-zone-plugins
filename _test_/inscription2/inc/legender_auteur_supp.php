@@ -130,7 +130,7 @@ function legender_auteur_supp_saisir($auteur, $auteur_infos_voir_supp, $redirect
 		}
 		elseif ($cle == 'latitude'){
 			if ($geomap_append_moveend_map = charger_fonction('geomap_append_clicable_map','inc',true)){
-				$corps_supp .= "<br /><div class='geomap' id='map'> </div><br />";
+				$corps_supp .= "<br /><div class='geomap' id='map' style='width:100%;height:350px'> </div><br />";
 				$corps_supp .= $geomap_append_moveend_map("map",'latitude','longitude',$query['latitude'],$query['longitude'], NULL,NULL,true);
 			}
 			$corps_supp .= "<strong>"._T('inscription2:'.$cle)."</strong><br />"
