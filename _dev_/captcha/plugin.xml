@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Captcha
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ Bernard Blazin
+_ &copy; 2007 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	dev
+	</etat>
+	
+	<description>
+Permet l'insertion d'une balise #CAPTCHA qui permet l'insert d'un Captcha visuel protégeant l'acces a vos forums
+	</description>
+	<lien>http://www.spip-contrib.net/Balise-CAPTCHA</lien> <!-- URI de documentation -->
+	
+	<prefix> 
+	captcha
+	</prefix>
+	
+</plugin>
