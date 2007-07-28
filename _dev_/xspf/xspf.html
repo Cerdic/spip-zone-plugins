@@ -1,50 +1,1 @@
-#CACHE{0}[(#HTTP_HEADER{Content-type: application/xspf+xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
-<playlist version="1" xmlns="http://xspf.org/ns/0/">
-<title>[(#NOM_SITE_SPIP|translitteration)]
-#ENV{id_secteur}
-<BOUCLE_SEC(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_SEC>
-<BOUCLE_RUB(RUBRIQUES){id_rubrique=[(#ENV{id_rubrique}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_RUB>
-<BOUCLE_ART(ARTICLES){id_article=[(#ENV{id_article}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_ART>
-<BOUCLE_DOC(DOCUMENTS){id_document=[(#ENV{id_document}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_DOC>
-</title>
-
-<B_rubsecteur>
-    <trackList>
-	<BOUCLE_rubsecteur(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>
-			#ID_RUBRIQUE
-			<BOUCLE_docsrubsecteur(DOCUMENTS){id_rubrique}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>
-			#ID_RUBRIQUE
-			<track>
-  			<location>[(#URL_DOCUMENT|url_absolue)]</location>
-			<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>
-			<annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>
-			</track>
-			</BOUCLE_docsrubsecteur>
-	</BOUCLE_rubsecteur>
-	<BOUCLE_artsecteur(ARTICLES){id_secteur}>
-			<BOUCLE_docsartsecteur(DOCUMENTS){id_article}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>
-			#ID_ARTICLE
-			<track>
-  			<location>[(#URL_DOCUMENT|url_absolue)]</location>
-			<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>
-			<annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>
-			</track>
-			</BOUCLE_docsartsecteur>
-	</BOUCLE_artsecteur>
-    </trackList>
-</B_rubsecteur>
-
-<B_docs>
-    <trackList>
-<BOUCLE_docs(DOCUMENTS){id_article ?}{id_rubrique ?}{id_document ?}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>
-	<track>
-    <location>[(#URL_DOCUMENT|url_absolue)]</location>
-    <image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>
-    <annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>
-    </track>
-</BOUCLE_docs>
-    </trackList>
-</B_docs>
-
-<//B_secteur>
-</playlist>
+#CACHE{0}[(#HTTP_HEADER{Content-type: application/xspf+xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?><playlist version="1" xmlns="http://xspf.org/ns/0/"><title>[(#NOM_SITE_SPIP|translitteration)]#ENV{id_secteur}<BOUCLE_SEC(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_SEC><BOUCLE_RUB(RUBRIQUES){id_rubrique=[(#ENV{id_rubrique}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_RUB><BOUCLE_ART(ARTICLES){id_article=[(#ENV{id_article}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_ART><BOUCLE_DOC(DOCUMENTS){id_document=[(#ENV{id_document}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_DOC></title><B_rubsecteur>    <trackList>	<BOUCLE_rubsecteur(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>			#ID_RUBRIQUE			<BOUCLE_docsrubsecteur(DOCUMENTS){id_rubrique}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>			#ID_RUBRIQUE			<track>  			<location>[(#URL_DOCUMENT|url_absolue)]</location>			<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>			<annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>			</track>			</BOUCLE_docsrubsecteur>	</BOUCLE_rubsecteur>	<BOUCLE_artsecteur(ARTICLES){id_secteur}>			<BOUCLE_docsartsecteur(DOCUMENTS){id_article}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>			#ID_ARTICLE			<track>  			<location>[(#URL_DOCUMENT|url_absolue)]</location>			<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>			<annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>			</track>			</BOUCLE_docsartsecteur>	</BOUCLE_artsecteur>    </trackList></B_rubsecteur><B_docs>    <trackList><BOUCLE_docs(DOCUMENTS){id_article ?}{id_rubrique ?}{id_document ?}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>	<track>	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>    <location>[(#URL_DOCUMENT|url_absolue)]</location>    <image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>    <annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>    </track></BOUCLE_docs>    </trackList></B_docs></playlist>
