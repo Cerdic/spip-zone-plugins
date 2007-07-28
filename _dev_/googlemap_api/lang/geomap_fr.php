@@ -9,7 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'clave_engadida' => 'Clef ajout&eacute;e: ',
 'conseguir' => '(obtenir)',
 'default_geoloc' => 'Position par d&eacute;faut des cartes :',
-'configuration' => '<NEW>Configuration',
+'configuration' => 'Configuration',
+'miseajour' => 'Mise &agrave; jour'
 );
 
 ?>

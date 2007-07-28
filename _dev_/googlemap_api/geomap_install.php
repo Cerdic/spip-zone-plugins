@@ -11,19 +11,26 @@
 
 	include_spip('inc/meta');
 	
-	function geomap_upgrade($nom_meta_base_version,$version_cible){
+	$GLOBALS['geomap_version'] = 0.1;
+	
+	function geomap_verifier_base(){
+		$version_base = $GLOBALS['geomap_version'];
 		$current_version = 0.0;
-		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-				|| ((!version_compare($current_version = $GLOBALS['meta'][$nom_meta_base_version],$version_cible,'=')))) {
-			
-			if ($current_version==0.0){
-				ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
-			}
-			ecrire_metas();
+		if (   (!isset($GLOBALS['meta']['geomap_version']) )
+				|| (($current_version = $GLOBALS['meta']['geomap_version'])!=$version_base)){
+			effacer_meta("geomap_base_version");
+			ecrire_meta('geomap_version',$current_version=$version_base,'non');
+		}
+		if ($current_version<0.1){
+			effacer_meta("geomap_base_version");
+			ecrire_meta('geomap_version',$current_version=0.1,'non');
+			echo _T('geomap:miseajour') $current_version;
+		}	
+		ecrire_metas();
 		}
 	}
 	
-	function geomap_vider_tables($nom_meta_base_version) {
+	function geomap_vider_tables() {
 		effacer_meta("geomap_googlemapkey");
 		effacer_meta("geomap_default_lat");
 		effacer_meta("geomap_default_lonx");
@@ -32,4 +39,18 @@
 		ecrire_metas();
 	}
 
+	function geomap_install($action){
+	$version_base = $GLOBALS['geomap_base_version'];
+		switch ($action){
+			case 'test':
+				return (isset($GLOBALS['meta']['geomap_version']) 
+				  AND ($GLOBALS['meta']['geomap_version']>=$version_base));
+				break;
+			case 'install':
+				geomap_verifier_base();
+				break;
+			case 'uninstall':
+				geomap_vider_tables();
+				break;
+	}
 ?>
