@@ -23,17 +23,11 @@ source PHP, afin d'avoir un code lisible en sortie.
 
 == Gestion des droits==
 
-
 Declarer le comptable et lui donner l'acces exclusif en validation des ecritures
 
 == Comptes ==
 - Ajouter une fonction de transfert de compte à compte (opération diverse)
 - Actions combinees (ventes, dons, activites + compte): prevoir l'operation inverse en suppression
-- Développer un plan comptable complet dans spip_asso_banques (à renommer spip_asso_plan)
-
-== ID membres ==
-Dans la config, faire le choix entre une gestion par l'ID (numérotation incrémentielle) ou par l'id_asso (codification libre): c'est utile pour la recherche et les enregistrements comptables
-
 
 *** Gros Travaux ***
 
@@ -44,12 +38,11 @@ Evacuation des champs inutilisés
 En cours.
 - Activites OK
 - Adherents OK
+- Prêts OK
 
 ==Requetes SQL==
-- Utiliser la fonction _q($variable) plutot que les addslashes
-		$var = "toto";
-		echo _q($var); // prints 'toto'
-		echo addslashes($var); // prints toto
+- Utiliser la fonction _q($variable) plutot que les addslashes (spip 1.9.2)
+		En cours
 
 - Il faudrait egalement faire un _q sur tous les elements recuperes de $_POST
 		ou _$GET ou $_REQUEST, afin d'eviter les erreurs SQL generes avec les
@@ -60,19 +53,12 @@ En cours.
 
 *** Architecture ***
 
-== Configuration ==
-
-Passer par le plugin cfg (spip 1.9.2)
-
 == Spip_listes 1.9.2 ==
 Ajouter l'inscription aux listes de diffusion
 
 *** Suggestions ***
 
-== Saisie adhérents ==
-A passer par l'interface privée
-
-== Logo activites==
+== Logos ==
 A changer
 
 == Format des dates ==
@@ -83,9 +69,3 @@ et que les anglais puissent saisir une date en anglais
 == Devises ==
 Il serait pratique aussi que l'on puisse utiliser la devise de chaque pays
 dans l'internationalisation. (euro, dollar, livre, etc).
-
-== Creer_login == 
-Fabrication du login a discuter
-
-==
-

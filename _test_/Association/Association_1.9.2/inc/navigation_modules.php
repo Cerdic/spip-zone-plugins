@@ -38,11 +38,11 @@
 		if (lire_config("association/activites")) {
 			echo onglet(_T('asso:menu2_titre_gestion_activites'), $link5, '', 'Activites', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
 		}
-		if (lire_config("association/comptes")) {
-			echo onglet(_T('asso:menu2_titre_livres_comptes'), $link6, '', 'Comptes', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
-		}
 		if (lire_config("association/prets")) {
 			echo onglet(_T('asso:menu2_titre_gestion_prets'), $link7, '', 'Prets', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
+		}
+		if (lire_config("association/comptes")) {
+			echo onglet(_T('asso:menu2_titre_livres_comptes'), $link6, '', 'Comptes', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
 		}
 		
 		echo fin_onglet();

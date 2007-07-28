@@ -1,138 +1,130 @@
 <?php
-/**
-* Plugin Association
-*
-* Copyright (c) 2007
-* Bernard Blazin & François de Montlivault
-* http://www.plugandspip.com 
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-* Pour plus de details voir le fichier COPYING.txt.
-*  
-**/
+	/**
+	* Plugin Association
+	*
+	* Copyright (c) 2007
+	* Bernard Blazin & François de Montlivault
+	* http://www.plugandspip.com 
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	* Pour plus de details voir le fichier COPYING.txt.
+	*  
+	**/
 
-// Boucles SPIP-listes
-global $tables_principales;
+	// Boucles SPIP-listes
+	global $tables_principales;
 
-//Ensuite, donner le format des tables ajoutées. Par exemple :
-$tables_principales['spip_asso_adherents']= array(
-'field' => array(
- 						"id_adherent" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
-						"nom" => "TEXT NOT NULL ",
-						"prenom" => "TEXT NOT NULL ",
-						"sexe" => "TINYTEXT NOT NULL",
-						"fonction" => "TEXT",
-						"email" => "TINYTEXT NOT NULL",
-						"validite" => "DATE NOT NULL DEFAULT '0000-00-00' ",
-						"numero" => "TEXT NOT NULL",
-						"rue" => "TEXT NOT NULL ",
-						"cp" => "TEXT NOT NULL ",
-						"ville" => "TEXT NOT NULL ",
-						"telephone" => "TINYTEXT",
-						"portable" => "TINYTEXT",
-						"montant" => "TEXT NOT NULL",
-						"date" => "DATE NOT NULL DEFAULT '0000-00-00'",
-						"divers" => "TEXT",
-						"remarques" => "TEXT",
-						"statut" => "TINYTEXT",
-						"vignette" => "TINYTEXT",
-						"relance" => "tinyint(4) NOT NULL default '0' ",
-						"id_auteur" => "int(11) default NULL",
-						"id_asso" => "text NOT NULL",
-						"categorie" => "text NOT NULL",
-						"naissance" => "date NOT NULL default '0000-00-00'",
-						"profession" => "text NOT NULL",
-						"societe" => "text NOT NULL",
-						"identifiant" => "text NOT NULL",
-						"passe" => "text NOT NULL",
-						"creation" => "date NOT NULL default '0000-00-00'",
-						"maj" => "timestamp(14) NOT NULL",
-						"utilisateur1" => "text NOT NULL",
-						"utilisateur2" => "text NOT NULL",
-						"utilisateur3" => "text NOT NULL",
-						"utilisateur4" => "text NOT NULL",
-						"secteur"	=> "text NOT NULL",
-						"publication"	=> "text NOT NULL",
-						),
-'key' => array("PRIMARY KEY" => "id_adherent")
-);
+	//Ensuite, donner le format des tables ajoutées. Par exemple :
+	$tables_principales['spip_asso_adherents']= array(
+		'field' => array(
+ 			"id_adherent" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
+			"nom" => "TEXT NOT NULL ",
+			"prenom" => "TEXT NOT NULL ",
+			"sexe" => "TINYTEXT NOT NULL",
+			"fonction" => "TEXT",
+			"email" => "TINYTEXT NOT NULL",
+			"validite" => "DATE NOT NULL DEFAULT '0000-00-00' ",
+			"rue" => "TEXT NOT NULL ",
+			"cp" => "TEXT NOT NULL ",
+			"ville" => "TEXT NOT NULL ",
+			"telephone" => "TINYTEXT",
+			"portable" => "TINYTEXT",
+			"montant" => "TEXT NOT NULL",
+			"date" => "DATE NOT NULL DEFAULT '0000-00-00'",
+			"remarques" => "TEXT",
+			"statut" => "TINYTEXT",
+			"id_auteur" => "int(11) default NULL",
+			"id_asso" => "text NOT NULL",
+			"categorie" => "text NOT NULL",
+			"naissance" => "date NOT NULL default '0000-00-00'",
+			"profession" => "text NOT NULL",
+			"societe" => "text NOT NULL",
+			"creation" => "date NOT NULL default '0000-00-00'",
+			"maj" => "timestamp(14) NOT NULL",
+			"utilisateur1" => "text NOT NULL",
+			"utilisateur2" => "text NOT NULL",
+			"utilisateur3" => "text NOT NULL",
+			"utilisateur4" => "text NOT NULL",
+			"secteur"	=> "text NOT NULL",
+			"publication"	=> "text NOT NULL",
+		),
+		'key' => array("PRIMARY KEY" => "id_adherent")
+	);
 
-$tables_principales['spip_asso_dons']= array(
- 'field' => array(
-						"id_don" 			=> "bigint(21) NOT NULL auto_increment",
-						"date_don" 		=> "date NOT NULL default '0000-00-00'",
-						"bienfaiteur" 		=> "text NOT NULL",
-						"id_adherent" 	=> "int(11) NOT NULL default '0'",
-						"argent" 			=> "tinytext",
-						"colis" 			=> "text",
-						"valeur" 			=> "text NOT NULL",
-						"contrepartie" 	=> "tinytext",
-						"commentaire" 	=> " text",
-						"maj" 				=> "timestamp(14) NOT NULL",
-						),
-'key' => array("PRIMARY KEY" => "id_don")
-);
+	$tables_principales['spip_asso_dons']= array(
+		'field' => array(
+			"id_don" 			=> "bigint(21) NOT NULL auto_increment",
+			"date_don" 		=> "date NOT NULL default '0000-00-00'",
+			"bienfaiteur" 		=> "text NOT NULL",
+			"id_adherent" 	=> "int(11) NOT NULL default '0'",
+			"argent" 			=> "tinytext",
+			"colis" 			=> "text",
+			"valeur" 			=> "text NOT NULL",
+			"contrepartie" 	=> "tinytext",
+			"commentaire" 	=> " text",
+			"maj" 				=> "timestamp(14) NOT NULL",
+		),
+		'key' => array("PRIMARY KEY" => "id_don")
+	);
 
-$tables_principales['spip_asso_ventes']= array(
- 'field' => array(
-						"id_vente" 		=> "BIGINT(21) AUTO_INCREMENT",
-						"article"			=> "TINYTEXT NOT NULL",
-						"code"			=> "TEXT NOT NULL",
-						"acheteur" 		=> "TINYTEXT NOT NULL",
-						"quantite" 		=> "TINYTEXT NOT NULL",
-						"date_vente"		 => "DATE NOT NULL DEFAULT '0000-00-00'",
-						"date_envoi" 		=> "DATE DEFAULT '0000-00-00'",
-						"don" 				=> "TINYTEXT",
-						"prix_vente" 		=> "TINYTEXT",
-						"frais_envoi" 		=> "float NOT NULL default '0'",
-						"commentaire" 	=> "TEXT",
-						"maj" 				=> "timestamp(14) NOT NULL",
-						),
-					
-'key' => array("PRIMARY KEY" => "id_vente")
-);
+	$tables_principales['spip_asso_ventes']= array(
+		'field' => array(
+			"id_vente" 		=> "BIGINT(21) AUTO_INCREMENT",
+			"article"			=> "TINYTEXT NOT NULL",
+			"code"			=> "TEXT NOT NULL",
+			"acheteur" 		=> "TINYTEXT NOT NULL",
+			"quantite" 		=> "TINYTEXT NOT NULL",
+			"date_vente"		 => "DATE NOT NULL DEFAULT '0000-00-00'",
+			"date_envoi" 		=> "DATE DEFAULT '0000-00-00'",
+			"don" 				=> "TINYTEXT",
+			"prix_vente" 		=> "TINYTEXT",
+			"frais_envoi" 		=> "float NOT NULL default '0'",
+			"commentaire" 	=> "TEXT",
+			"maj" 				=> "timestamp(14) NOT NULL",
+		),
+		'key' => array("PRIMARY KEY" => "id_vente")
+	);
 
-$tables_principales['spip_asso_comptes']= array(
-'field' => array(
-						"id_compte" 	=> "bigint(21) NOT NULL auto_increment",
-						"date" 		=> "date default NULL",
-						"recette" 		=> "float NOT NULL default '0'",
-						"depense"	=> "float NOT NULL default '0'",
-						"justification" => "text",
-						"imputation" 	=> "text",
-						"journal" 		=> "tinytext",
-						"id_journal" 	=> "int(11) NOT NULL default '0'",
-						"valide"		=> "text NOT NULL", 
-						),
-					
-'key' => array("PRIMARY KEY" => "id_compte")
-);
+	$tables_principales['spip_asso_comptes']= array(
+		'field' => array(
+			"id_compte" 	=> "bigint(21) NOT NULL auto_increment",
+			"date" 		=> "date default NULL",
+			"recette" 		=> "float NOT NULL default '0'",
+			"depense"	=> "float NOT NULL default '0'",
+			"justification" => "text",
+			"imputation" 	=> "text",
+			"journal" 		=> "tinytext",
+			"id_journal" 	=> "int(11) NOT NULL default '0'",
+			"valide"		=> "text NOT NULL", 
+		),
+		'key' => array("PRIMARY KEY" => "id_compte")
+	);
 
-$tables_principales['spip_asso_categories']= array(
- 'field' => array(
-						"id_categorie" 	=> "int(10) unsigned NOT NULL auto_increment",
-						"valeur" 			=> "varchar(30) NOT NULL default",
-						"libelle" 			=> "text NOT NULL",
-						"duree" 			=> "text NOT NULL",
-						"cotisation" 		=> "float NOT NULL default '0'",
-						"commentaires" 	=> " text NOT NULL",					
-						),
-					
-'key' => array("PRIMARY KEY" => "id_categorie")	
-);
-								
-$tables_principales['spip_asso_banques']= array(
- 'field' => array(
-						"id_banque" 	=> "int(11) NOT NULL auto_increment",
-						"valeur" 			=> "text NOT NULL",
-						"intitule" 			=> "text NOT NULL",
-						"reference" 		=> "text NOT NULL",
-						"solde" 			=> "float NOT NULL default '0'",
-						"date"				=> "date NOT NULL",
-						"commentaire" 	=> "text NOT NULL",
-						),
-					
-'key' => array("PRIMARY KEY" => "id_banque")
-);	
+	$tables_principales['spip_asso_categories']= array(
+		'field' => array(
+			"id_categorie" 	=> "int(10) unsigned NOT NULL auto_increment",
+			"valeur" 			=> "varchar(30) NOT NULL default",
+			"libelle" 			=> "text NOT NULL",
+			"duree" 			=> "text NOT NULL",
+			"cotisation" 		=> "float NOT NULL default '0'",
+			"commentaires" 	=> " text NOT NULL",					
+		),
+		'key' => array("PRIMARY KEY" => "id_categorie")	
+	);
+
+	$tables_principales['spip_asso_plan']= array(
+		'field' => array(
+			"id_banque" 			=> "int(11) NOT NULL auto_increment",
+			"code" 				=> "text NOT NULL",
+			"intitule" 				=> "text NOT NULL",
+			"classe" 				=> "text NOT NULL",
+			"reference" 			=> "text NOT NULL",
+			"solde_anterieur" 	=> "float NOT NULL default '0'",
+			"date_anterieure"	=> "date NOT NULL",
+			"actif" 				=> "text NOT NULL",
+			"commentaire" 		=> "text NOT NULL",
+		),
+		'key' => array("PRIMARY KEY" => "id_plan")
+	);	
 
 	$tables_principales['spip_asso_activites']= array(
 		'field' => array(
@@ -211,7 +203,7 @@ function boucle_ASSO_VENTES($id_boucle, &$boucles) {
         return calculer_boucle($id_boucle, $boucles);
 }
 //
-// <BOUCLE(BANQUE)>
+// <BOUCLE(COMPTES)>
 //
 function boucle_ASSO_COMPTES($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
@@ -220,12 +212,12 @@ function boucle_ASSO_COMPTES($id_boucle, &$boucles) {
         return calculer_boucle($id_boucle, $boucles);
 }
 //
-// <BOUCLE(BANQUES)>
+// <BOUCLE(PLAN)>
 //
-function boucle_ASSO_BANQUES($id_boucle, &$boucles) {
+function boucle_ASSO_PLAN($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
-        $boucle->from[$id_table] =  "spip_asso_banques";  
+        $boucle->from[$id_table] =  "spip_asso_plan";  
         return calculer_boucle($id_boucle, $boucles);
 }
 

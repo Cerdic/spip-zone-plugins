@@ -39,7 +39,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
-				spip_query("INSERT INTO spip_asso_profil (nom) VALUES ('')");
 				ecrire_meta('asso_base_version',$current_version=$version_base);
 			}
 			
@@ -52,12 +51,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				spip_query("CREATE TABLE spip_asso_dons (id_don bigint(21) NOT NULL auto_increment, date_don date NOT NULL default '0000-00-00',   bienfaiteur text NOT NULL, id_adherent int(11) NOT NULL default '0', argent tinytext, colis text, valeur text NOT NULL, contrepartie tinytext, commentaire text, maj timestamp(14) NOT NULL, PRIMARY KEY  (id_don) ) TYPE=MyISAM AUTO_INCREMENT=1");
 				spip_query("DROP TABLE spip_asso_bienfaiteurs");
 				spip_query("DROP TABLE spip_asso_financiers");			
-//				spip_query("RENAME TABLE spip_asso_financiers TO spip_asso_banques");
-//				spip_query("ALTER TABLE spip_asso_banques CHANGE id_financier id_banque, ADD date date NOT NULL AFTER solde");
 				spip_query("INSERT INTO spip_asso_banques (code) VALUES ('caisse')");
-				spip_query("CREATE TABLE spip_asso_livres (id_livre tinyint(4) NOT NULL auto_increment, valeur text NOT NULL, libelle text NOT NULL, maj timestamp(14) NOT NULL, PRIMARY KEY  (id_livre) ) TYPE=MyISAM AUTO_INCREMENT=1");
-				spip_query("INSERT INTO spip_asso_livres (valeur, libelle) VALUES ('cotisation', 'Cotisations'), ('vente', 'Ventes'), ('don', 'Dons'), ('achat', 'Achats'), ('divers', 'Divers'), ('activite', 'Activités')");
-				spip_query("ALTER TABLE spip_asso_profil ADD dons text NOT NULL AFTER mail, ADD ventes text NOT NULL, ADD comptes text NOT NULL, ADD activites text NOT NULL ");
 				spip_query("UPDATE spip_asso_profil SET dons='oui', ventes='oui' ,comptes='oui' WHERE id_profil=1");
 				ecrire_meta('asso_base_version',$current_version=0.30);
 			}	
@@ -68,13 +62,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 			}
 			
 			if ($current_version<0.50){
-				spip_query("ALTER TABLE spip_asso_profil ADD indexation TEXT NOT NULL AFTER mail ");
 				spip_query("ALTER TABLE spip_asso_activites ADD membres TEXT NOT NULL AFTER accompagne, ADD non_membres TEXT NOT NULL AFTER membres ");
 				ecrire_meta('asso_base_version',$current_version=0.50);
 			}
 			
 			if ($current_version<0.60){
 				spip_query("DROP TABLE spip_asso_profil  ");
+				spip_query("ALTER TABLE spip_asso_banques CHANGE id_banque id_plan, CHANGE solde solde_anterieur, CHANGE date date_anterieure, ADD classe text NOT NULL AFTER intitule");
+				spip_query("RENAME TABLE spip_asso_banques TO spip_asso_plan");
 				ecrire_meta('asso_base_version',$current_version=0.60);
 			}		
 			
@@ -89,7 +84,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		spip_query("DROP TABLE spip_asso_activites");
 		spip_query("DROP TABLE spip_asso_comptes");
 		spip_query("DROP TABLE spip_asso_categories");
-		spip_query("DROP TABLE spip_asso_banques");
+		spip_query("DROP TABLE spip_asso_plan");
 		effacer_meta('asso_base_version');
 		ecrire_metas();
 	}

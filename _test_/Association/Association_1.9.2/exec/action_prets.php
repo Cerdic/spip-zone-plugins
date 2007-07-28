@@ -45,6 +45,8 @@
 			debut_gauche();
 			
 			debut_boite_info();
+			echo association_date_du_jour();	
+			
 			$query = spip_query ( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource'" ) ;
 			while ($data = spip_fetch_array($query)) {
 				$statut=$data['statut'];
@@ -57,7 +59,7 @@
 			fin_boite_info();
 			
 			debut_raccourcis();
-			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
+			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/EuroOff.gif'.gif","cree.gif");	
 			fin_raccourcis();
 			
 			debut_droite();

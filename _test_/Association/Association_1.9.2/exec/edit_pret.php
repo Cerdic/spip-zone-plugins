@@ -60,9 +60,6 @@
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:prets_titre_edition_prets'));
 		
-
-		
-		
 		$query = spip_query( "SELECT * FROM spip_asso_ressources WHERE id_ressource='$id_ressource' ");
 		while($data = spip_fetch_array($query)) {
 			$statut=$data['statut']; 

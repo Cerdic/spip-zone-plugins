@@ -152,22 +152,24 @@ $tables_principales['spip_asso_ventes'] = array(
 		'key' => &$spip_asso_comptes_key
 	);
 
-	//-- Table FINANCIERS ------------------------------------------
-	$spip_asso_financiers = array(
-		"id_financier" 	=> "int(11) NOT NULL auto_increment",
-		"code" 			=> "text NOT NULL",
-		"intitule" 			=> "text NOT NULL",
-		"reference" 		=> "text NOT NULL",
-		"solde" 			=> "float NOT NULL default '0'",
-		"commentaire" 	=> "text NOT NULL",
-		"maj" 				=> "timestamp(14) NOT NULL"
+	//-- Table PLAN COMPTABLE ------------------------------------------
+	$spip_asso_plan = array(
+		"id_plan" 				=> "int(11) NOT NULL auto_increment",
+		"code" 				=> "text NOT NULL",
+		"intitule" 				=> "text NOT NULL",
+		"classe"				=>"text NOT NULL",
+		"reference" 			=> "text NOT NULL",
+		"solde_anterieur"	=> "float NOT NULL default '0'",
+		"date_anterieure"	=> "date NOT NULL default '0000-00-00'",
+		"commentaire" 		=> "text NOT NULL",
+		"maj" 					=> "timestamp(14) NOT NULL"
 	);						
-	$spip_asso_financiers_key = array(
-		"PRIMARY KEY" => "id_financier"
+	$spip_asso_plan_key = array(
+		"PRIMARY KEY" => "id_plan"
 	);
-	$tables_principales['spip_asso_financiers'] = array(
-		'field' => &$spip_asso_financiers, 
-		'key' => &$spip_asso_financiers_key
+	$tables_principales['spip_asso_plan'] = array(
+		'field' => &$spip_asso_plan, 
+		'key' => &$spip_asso_fplan_key
 	);
 
 	//-- Table RESSOURCES ------------------------------------------
@@ -252,7 +254,7 @@ $tables_principales['spip_asso_ventes'] = array(
 	$table_des_tables['asso_ventes'] = 'asso_ventes';
 	$table_des_tables['asso_comptes'] = 'asso_comptes';
 	$table_des_tables['asso_categories'] = 'asso_categories';
-     $table_des_tables['asso_financiers'] = 'asso_financiers';
+     $table_des_tables['asso_plan'] = 'asso_plan';
 	$table_des_tables['asso_ressources'] = 'asso_ressources';
 	$table_des_tables['asso_prets'] = 'asso_prets';
 	$table_des_tables['asso_activites'] = 'asso_activites';
