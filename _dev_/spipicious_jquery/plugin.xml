@@ -7,12 +7,22 @@ _ &#169; 2007 - Licence GPL
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>
-Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) sur les articles de SPIP.
-_ N&#233;cessite le plugin s&#233;lecteur g&#233;n&#233;rique
+<multi>
+[fr]Permet aux visiteurs authentifi&#233;s d'ajouter des tags (mots-cl&#233;s) sur les articles de SPIP.
+_ N&#233;cessite le plugin "s&#233;lecteur g&#233;n&#233;rique"
 _ N&#233;cessite le plugin CFG
 _ Les mots-cl&#233;s sont ajout&#233;s dans un groupe configurable (par d&#233;faut '{{- tags -}}')
+_ Icone de [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/projects/microformats-icons/]
 <h4><a href="?exec=cfg&amp;cfg=spipicious">Configuration</a></h4>
+[en]Help authenticated users to add keywords/tags to articles from the public area.
+_ Need the "Generic selector" plugin
+_ Need the "CFG" plugin
+_ Keywords are added to a group we can configure ('{{- tags -}}' by default)
+_ Icon from [Wolfgang Bartelme and Chris Messina->http://www.factorycity.net/projects/microformats-icons/] for the [microformats project->http://microformats.org/wiki/]
+<h4><a href="?exec=cfg&amp;cfg=spipicious">Configuration</a></h4>
+</multi>
 	</description>
+	<icon>images/icon-rel-tag.png</icon>
 	<lien>http://kent1.sklunk.net/spip.php?article97</lien>
 	<prefix>spipicious</prefix>
 	<install>base/spipicious_upgrade.php</install>
@@ -21,6 +31,6 @@ _ Les mots-cl&#233;s sont ajout&#233;s dans un groupe configurable (par d&#233;f
 		<inclure>spipicious_head.php</inclure>
 	</pipeline>
 	<necessite id="SelecteurGenerique" version="[0.1;]" />
-	<necessite id='cfg' version='[1.0.2;]' />
+	<necessite id='cfg' version='[1.0.4;]' />
 	<chemin dir='' />
 </plugin>
