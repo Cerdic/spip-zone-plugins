@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'identification' => 'Identificaci&oacute;n',
-'identif_explique' => 'Pueden indentificarse, pero no es obligatorio. Estas opciones añaden simplemente el nombre y otra informaci&oacute;n como el correo electr&oacute;nico, el n&uacute;mero de tel&eacute;fono, etc..., tras su art&iacute;culo.',
+'identif_explique' => 'Puedes indentificarte, pero no es obligatorio. Estas opciones añaden simplemente tu nombre y otra informaci&oacute;n como el correo electr&oacute;nico, el n&uacute;mero de tel&eacute;fono, etc..., tras tu art&iacute;culo.',
 'image_inclusion' => 'Im&aacute;gen (para la inclusi&oacute;n directa dentro del art&iacute;culo)',
 'installer' => 'Instalar las tablas de openPublishing',
 'info_version' => 'Versi&oacute;n instalada : ',
@@ -131,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'publier_agenda' => 'Publicar como breve en la Agenda',
 
 // R
-'redigez_article' => 'Redactar su art&iacute;culo',
+'redigez_article' => 'Redacta tu art&iacute;culo',
 'renvoi_explique' => 'Los textos de retorno son las pequeñas frases que el plugin muestra cuando una publicaci&oacute;n fue satisfactoria o  bien terminada por un abandono (las balizas HTML est&aacute;n permitidas).',
 'renvoi_explique2' => 'Las redirecciones permiten redirigir al usuario a una p&aacute;gina espec&iacute;fica (del tipo "/spip.php?page=sommaire").',
 'renvoi_gestion' => 'Gesti&oacute;n de los retornos',
@@ -156,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'suprimmer_op' => 'Eliminar openPublishing',
 
 // T
-'telecharger_document' => 'Subir documento',
+'telecharger_document' => 'Subir un archivo',
 'titre_minuscule' => 'Post-tratamiento de t&iacute;tulo',
 'titre_impo_minuscule' => 'Los t&iacute;tulos se imponen en min&uacute;scula',
 'titre_non_minuscule' => 'Los t&iacute;tulos pueden utilizar may&uacute;sculas',
