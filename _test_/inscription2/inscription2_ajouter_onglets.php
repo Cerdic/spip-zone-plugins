@@ -88,12 +88,13 @@ EOS;
 }
 
 function Inscription2_header_prive($texte){
-
+	global $auteur_session, $spip_display, $spip_lang;
+	$couleurs = charger_fonction('couleurs', 'inc');
+	$paramcss = 'ltr='. $GLOBALS['spip_lang_left'] . '&'. $couleurs($auteur_session['prefs']['couleur']);
+	$css = generer_url_public('jquery.tabs_prive', $paramcss);
 	$js = find_in_path('javascript/jquery.tabs.pack.js');
-	$css = find_in_path('css/jquery.tabs_prive.css');
-
-    $texte .= "<script type='text/javascript' src='$js'></script><link rel='stylesheet' type='text/css' href='$css' />";
 	
+    $texte .= "<link rel='stylesheet' type='text/css' href='$css' /> <script type='text/javascript' src='$js'>";
 	return $texte;
 }
 				

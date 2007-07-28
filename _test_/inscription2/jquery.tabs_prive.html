@@ -1,3 +1,24 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
 /* Caution! Ensure accessibility in print and other media types... */
 @media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
     .tabs-hide {
@@ -27,7 +48,7 @@
     float: left;
     margin: 0 0 0 2px;
     min-width: 84px; /* be nice to Opera */
-    border:1px solid #666666;
+    border:1px solid #GET{foncee};
 }
 .tabs-nav a, .tabs-nav a span {
     display: block;
@@ -36,7 +57,7 @@
     position: relative;
     z-index: 2;
     padding: 0;
-    color: #85909A;
+    color: #GET{foncee};
     font-weight: bold;
     line-height: 1.2;
     text-align: center;
@@ -45,7 +66,7 @@
 }
 .tabs-nav .tabs-selected a {
     color: #fff;
-    background-color:#85909A;
+    background-color:#GET{foncee};
 }
 .tabs-nav .tabs-selected a, .tabs-nav a:hover, .tabs-nav a:focus, .tabs-nav a:active {
     outline: 0; /* prevent dotted border in Firefox */
@@ -78,7 +99,7 @@
     opacity: .4;
 }
 .tabs-container {
-    padding: 1em 8px;
+    padding: 1em 0;
     background: #fff; /* declare background color for container to avoid distorted fonts in IE while fading */
 }
 .tabs-loading em {
