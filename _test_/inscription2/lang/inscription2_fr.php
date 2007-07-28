@@ -22,6 +22,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'select_listes' => '(vous pouvez s&#233;lectionner plusieurs secteurs avec la touche shift)',
 'deselect_listes' => '> tout d&#233;s&eacute;lectionner',
 
+//Geolocalisation
+'geoloc' => 'G&eacute;olocalisation',
+
 'inserez_infos' => 'Veuillez saisir les informations demand&eacute;es',
 
 'admin_modifier_auteur_supp' => 'Informations suppl&eacute;mentaires',

@@ -204,7 +204,6 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		$new = true;
 	}
 
-
 	// Bouton "modifier" ?
 	if (autoriser('modifier', 'auteur', $id_auteur)) {
 		$res .= "<span id='bouton_modifier_auteur_supp'>";
