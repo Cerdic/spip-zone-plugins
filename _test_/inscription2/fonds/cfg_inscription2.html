@@ -114,8 +114,8 @@ $(document).ready(function() {
 
 <div id="fragment-3">
 
-[(#CONFIG{plugin/GEOMAP/version}|?{' ', ''})<INCLURE{fond=fonds/inscription2_geoloc}>]
-
+[(#CONFIG{plugin/GEOMAP/version}|?{' '}) <INCLURE{fond=fonds/inscription2_geoloc}>]
+[(#CONFIG{plugin/GEOMAP/version}|?{'',<p><:inscription2:geomap_obligatoire:></p>})]
 </div>
 
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]

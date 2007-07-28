@@ -74,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'divers' => 'any other business',
 'latitude' => 'Latitude',
 'longitude' => 'Longitude',
+'geomap_obligatoire' => 'To use the geolocalization datas for the people, you need to install the GoogleMapApi plugin',
 'exp_divers' => 'Field which will be proposed to the visitors under the name of comment',
 'categorie' => 'Category of contribution',
 'exp_categorie' => 'Drop-down list of the categories from the table \'spip_asso_categories\' so that the user chooses one of them',

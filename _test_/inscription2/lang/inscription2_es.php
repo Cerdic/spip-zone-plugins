@@ -72,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'divers' => 'Varios',
 'latitude' => '<NEW>Latitude',
 'longitude' => '<NEW>Longitude',
+'geomap_obligatoire' => '<NEW>Pour utiliser les donn&eacute;es de g&eacute;olocalisation des personnes, il est n&eacute;cessaire d\'installer le plugin GoogleMapApi...',
 'exp_divers' => 'Campo que sera propuesto con el nombre de comentario',
 'categorie' => 'Categoria de cotisaci&oacute;n',
 'exp_categorie' => 'Lista de categor&iacute;as de la tabla \'spip_asso_categories\' que se propondr&aacute;n a los nuevos adherentes.',
