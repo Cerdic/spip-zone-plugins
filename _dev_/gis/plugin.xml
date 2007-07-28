@@ -66,5 +66,5 @@ _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eac
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id='geomap' version='[0.1.0;]' />
+	<necessite id='geomap' version='[0.2;]' />
 </plugin>
