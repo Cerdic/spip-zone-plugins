@@ -5,3 +5,4 @@ id_continent;Nom;code ONU;Latitude;Longitude;Zoom
 4;<multi>[fr]Asie[en]Asia[es]Asia</multi>;142;40.313043;92.109375;3
 5;<multi>[fr]Europe[es]Europa</multi>;150;50.847;20.742;4
 6;<multi>[fr]Océanie[en]Oceania[es]Oceania</multi>;9;-28.304381;145.371094;4
+7;<multi>[fr]Antarctique[en]Antarctica</multi>;;;;
