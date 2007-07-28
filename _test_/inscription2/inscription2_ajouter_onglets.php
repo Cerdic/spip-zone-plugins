@@ -46,7 +46,7 @@ function Inscription2_affiche_milieu($flux){
 	}
 	else{
 	switch($flux['args']['exec']) {	
-		case 'auteur_infos':
+			case 'auteur_infos':
 				include_spip('inc/inscription2_gestion');
 				$id_auteur = $flux['args']['id_auteur'];
 				$flux['data'] .= inscription2_ajouts($id_auteur);
@@ -86,4 +86,15 @@ EOS;
 	return substr_replace($page, $incHead, strpos($page, '</head>'), 0);
 
 }
+
+function Inscription2_header_prive($texte){
+
+	$js = find_in_path('javascript/jquery.tabs.pack.js');
+	$css = find_in_path('css/jquery.tabs_prive.css');
+
+    $texte .= "<script type='text/javascript' src='$js'></script><link rel='stylesheet' type='text/css' href='$css' />";
+	
+	return $texte;
+}
+				
 ?>

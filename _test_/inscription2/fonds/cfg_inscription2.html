@@ -9,6 +9,12 @@
 
 #CACHE{0}
 
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#container-1').tabs({ fxAutoHeight: true, fxFade: true, fxSpeed: 'fast' });
+});
+</script>
+
 <form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 <br />
@@ -79,666 +85,41 @@
 
 </fieldset>
 
-<fieldset>
-<legend>
-	<:inscription2:info_perso:>
-</legend>
-<:inscription2:info_perso_desc:>
-<br /><br />
 
-<table>
-<tr>
-<td width='140'/>
-<td width='70'> <:inscription2:form:> </td>
-<td width='70'> <:inscription2:fiche_mod:> </td>
-<td width='70'> <:inscription2:fiche:> </td>
-<td width='70'> <:inscription2:table:> </td>
-</tr><tr>
-<td>
-	<strong><:inscription2:nom_famille:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="nom_famille" [checked="(#ENV{nom_famille}?{checked})"] onclick="showoblig(this)" id="nom_famille" />
-	</label>
-	<label style="[(#ENV{nom_famille}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="nom_famille_obligatoire" [checked="(#ENV{nom_famille_obligatoire}?{checked})"] id="nom_famille_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="nom_famille_fiche_mod" onclick = "enadis(this,nom_famille_fiche)" [checked="(#ENV{nom_famille_fiche_mod}?{checked})"] id="nom_famille_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="nom_famille_fiche" [checked="(#ENV{nom_famille_fiche}?{checked})"] id="nom_famille_fiche" [disabled ="(#ENV{nom_famille_fiche_mod}?{true})"] />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="nom_famille_table" [checked="(#ENV{nom_famille_table}?{checked})"] id="nom_famille_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:prenom:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="prenom" [checked="(#ENV{prenom}?{checked})"] onclick="showoblig(this)" id="prenom" />
-	</label>
-	<label style="[(#ENV{prenom}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="prenom_obligatoire" [checked="(#ENV{prenom_obligatoire}?{checked})"] id="prenom_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="prenom_fiche_mod" onclick = "enadis(this,prenom_fiche)" [checked="(#ENV{prenom_fiche_mod}?{checked})"] id="prenom_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="prenom_fiche" [checked="(#ENV{prenom_fiche}?{checked})"] id="prenom_fiche" [disabled ="(#ENV{prenom_fiche_mod}?{true})"] />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="prenom_table" [checked="(#ENV{prenom_table}?{checked})"] id="prenom_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:username:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="username" [checked="(#ENV{username}?{checked})"] onclick="showoblig(this)" id="username" />
-	</label>
-	<label style="[(#ENV{username}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="username_obligatoire" [checked="(#ENV{username_obligatoire}?{checked})"] id="username_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="username_fiche_mod" onclick = "enadis(this,username_fiche)" [checked="(#ENV{username_fiche_mod}?{checked})"] id="username_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="username_fiche" [checked="(#ENV{username_fiche}?{checked})"] id="username_fiche" [disabled ="(#ENV{username_fiche_mod}?{true})"] />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="username_table" [checked="(#ENV{username_table}?{checked})"] id="username_table" />
-	</label>
-</td>
-</tr><tr>	
-<td>
-	<strong><:inscription2:naissance:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="naissance" [checked="(#ENV{naissance}?{checked})"] onclick="showoblig(this)" id="naissance" />
-	</label>
-	<label style="[(#ENV{naissance}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="naissance_obligatoire" [checked="(#ENV{naissance_obligatoire}?{checked})"] id="naissance_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="naissance_fiche_mod" onclick = "enadis(this,naissance_fiche)" [checked="(#ENV{naissance_fiche_mod}?{checked})"] id="naissance_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="naissance_fiche" [checked="(#ENV{naissance_fiche}?{checked})"] id="naissance_fiche" [disabled ="(#ENV{naissance_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="naissance_table" [checked="(#ENV{naissance_table}?{checked})"] id="naissance_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:sexe:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="sexe" [checked="(#ENV{sexe}?{checked})"] onclick="showoblig(this)" id="sexe" />
-	</label>
-	<label style="[(#ENV{sexe}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="sexe_obligatoire" [checked="(#ENV{sexe_obligatoire}?{checked})"] id="sexe_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="sexe_fiche_mod" onclick = "enadis(this,sexe_fiche)" [checked="(#ENV{sexe_fiche_mod}?{checked})"] id="sexe_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="sexe_fiche" [checked="(#ENV{sexe_fiche}?{checked})"] id="sexe_fiche" [disabled ="(#ENV{sexe_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="sexe_table" [checked="(#ENV{sexe_table}?{checked})"] id="sexe_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:adresse:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="adresse" [checked="(#ENV{adresse}?{checked})"] onclick="showoblig(this)" id="adresse" />
-	</label>
-	<label style="[(#ENV{adresse}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="adresse_obligatoire" [checked="(#ENV{adresse_obligatoire}?{checked})"] id="adresse_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="adresse_fiche_mod" onclick = "enadis(this,adresse_fiche)" [checked="(#ENV{adresse_fiche_mod}?{checked})"] id="adresse_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="adresse_fiche" [checked="(#ENV{adresse_fiche}?{checked})"] id="adresse_fiche" [disabled ="(#ENV{adresse_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="adresse_table" [checked="(#ENV{adresse_table}?{checked})"] id="adresse_table" />
-	</label>
-</td>
-</tr><tr>
-<td>	
-	<strong><:inscription2:code_postal:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="code_postal" [checked="(#ENV{code_postal}?{checked})"] onclick="showoblig(this)" id="code_postal" />
-	</label>
-	<label style="[(#ENV{code_postal}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="code_postal_obligatoire" [checked="(#ENV{code_postal_obligatoire}?{checked})"] id="code_postal_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="code_postal_fiche_mod" onclick = "enadis(this,code_postal_fiche)" [checked="(#ENV{code_postal_fiche_mod}?{checked})"] id="code_postal_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="code_postal_fiche" [checked="(#ENV{code_postal_fiche}?{checked})"] id="code_postal_fiche" [disabled ="(#ENV{code_postal_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="code_postal_table" [checked="(#ENV{code_postal_table}?{checked})"] id="code_postal_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:ville:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="ville" [checked="(#ENV{ville}?{checked})"] onclick="showoblig(this)" id="ville" />
-	</label>
-	<label style="[(#ENV{ville}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="ville_obligatoire" [checked="(#ENV{ville_obligatoire}?{checked})"] id="ville_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="ville_fiche_mod" onclick = "enadis(this,ville_fiche)" [checked="(#ENV{ville_fiche_mod}?{checked})"] id="ville_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="ville_fiche" [checked="(#ENV{ville_fiche}?{checked})"] id="ville_fiche" [disabled ="(#ENV{ville_fiche_mod}?{true})"] />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="ville_table" [checked="(#ENV{ville_table}?{checked})"] id="ville_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:pays:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="pays" [checked="(#ENV{pays}?{checked})"] onclick="showoblig(this)" id="pays" />
-	</label>
-	<label style="[(#ENV{pays}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="pays_obligatoire" [checked="(#ENV{pays_obligatoire}?{checked})"] id="pays_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="pays_fiche_mod" onclick = "enadis(this,pays_fiche)" [checked="(#ENV{pays_fiche_mod}?{checked})"] id="pays_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="pays_fiche" [checked="(#ENV{pays_fiche}?{checked})"] id="pays_fiche" [disabled ="(#ENV{pays_fiche_mod}?{true})"] />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="pays_table" [checked="(#ENV{pays_table}?{checked})"] id="pays_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:telephone:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="telephone" [checked="(#ENV{telephone}?{checked})"] onclick="showoblig(this)" id="telephone" />
-	</label>
-	<label style="[(#ENV{telephone}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="telephone_obligatoire" [checked="(#ENV{telephone_obligatoire}?{checked})"] id="telephone_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="telephone_fiche_mod" onclick = "enadis(this,telephone_fiche)" [checked="(#ENV{telephone_fiche_mod}?{checked})"] id="telephone_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="telephone_fiche" [checked="(#ENV{telephone_fiche}?{checked})"] id="telephone_fiche" [disabled ="(#ENV{telephone_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="telephone_table" [checked="(#ENV{telephone_table}?{checked})"] id="telephone_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:fax:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="fax" [checked="(#ENV{fax}?{checked})"] onclick="showoblig(this)" id="fax" />
-	</label>
-	<label style="[(#ENV{fax}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="fax_obligatoire" [checked="(#ENV{fax_obligatoire}?{checked})"] id="fax_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fax_fiche_mod" onclick = "enadis(this,fax_fiche)" [checked="(#ENV{fax_fiche_mod}?{checked})"] id="fax_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fax_fiche" [checked="(#ENV{fax_fiche}?{checked})"] id="fax_fiche" [disabled ="(#ENV{fax_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fax_table" [checked="(#ENV{fax_table}?{checked})"] id="fax_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:mobile:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="mobile" [checked="(#ENV{mobile}?{checked})"] onclick="showoblig(this)" id="mobile" />
-	</label>
-	<label style="[(#ENV{mobile}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="mobile_obligatoire" [checked="(#ENV{mobile_obligatoire}?{checked})"] id="mobile_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="mobile_fiche_mod" onclick = "enadis(this,mobile_fiche)" [checked="(#ENV{mobile_fiche_mod}?{checked})"] id="mobile_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="mobile_fiche" [checked="(#ENV{mobile_fiche}?{checked})"] id="mobile_fiche" [disabled ="(#ENV{mobile_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="mobile_table" [checked="(#ENV{mobile_table}?{checked})"] id="mobile_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-<tr>
-<td>
-	<strong><:inscription2:commentaire:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="commentaire" [checked="(#ENV{commentaire}?{checked})"] onclick="showoblig(this)" id="commentaire" />
-	</label>
-	<label style="[(#ENV{commentaire}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="commentaire_obligatoire" [checked="(#ENV{commentaire_obligatoire}?{checked})"] id="commentaire_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="commentaire_fiche_mod" onclick = "enadis(this,commentaire_fiche)" [checked="(#ENV{commentaire_fiche_mod}?{checked})"] id="commentaire_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="commentaire_fiche" [checked="(#ENV{commentaire_fiche}?{checked})"] id="commentaire_fiche" [disabled ="(#ENV{commentaire_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="commentaire_table" [checked="(#ENV{commentaire_table}?{checked})"] id="commentaire_table" />
-	</label>
-</td>
-</tr>
-</table>
-<br />
-<small>
-<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
-<strong><span style="color:red">*</span></strong><:inscription2:form_oblig_expl:><br />
-<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
-<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
-<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
-</small>
-</fieldset>
+<div id="container-1">
+	<ul>
+		<li><a href="#fragment-1"><span>Perso</span></a></li>
+		<li><a href="#fragment-2"><span>Pro</span></a></li>
+		<li><a href="#fragment-3"><span>Geo</span></a></li>
+		<li><a href="#fragment-4"><span>Option</span></a></li>
+	</ul>
 
+<div id="fragment-1">
 
-<fieldset>
-<legend>
-	<:inscription2:info_pros:>
-</legend>
-<br /><br />
+[(#REM) ------------------------ INFORMATIONS PERSONNELLES? ------------------------ ]
 
-<table>
-<tr>
-<td width='140'/>
-<td width='70'> <:inscription2:form:> </td>
-<td width='70'> <:inscription2:fiche_mod:> </td>
-<td width='70'> <:inscription2:fiche:> </td>
-<td width='70'> <:inscription2:table:> </td>
-</tr><tr>
-<td>
-	<strong><:inscription2:profession:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="profession" [checked="(#ENV{profession}?{checked})"] onclick="showoblig(this)" id="profession" />
-	</label>
-	<label style="[(#ENV{profession}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="profession_obligatoire" [checked="(#ENV{profession_obligatoire}?{checked})"] id="profession_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="profession_fiche_mod" onclick = "enadis(this,profession_fiche)" [checked="(#ENV{profession_fiche_mod}?{checked})"] id="profession_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="profession_fiche" [checked="(#ENV{profession_fiche}?{checked})"] id="profession_fiche" [disabled ="(#ENV{profession_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="profession_table" [checked="(#ENV{profession_table}?{checked})"] id="profession_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:societe:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="societe" [checked="(#ENV{societe}?{checked})"] onclick="showoblig(this)" id="societe" />
-	</label>
-	<label style="[(#ENV{societe}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="societe_obligatoire" [checked="(#ENV{societe_obligatoire}?{checked})"] id="societe_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="societe_fiche_mod" onclick = "enadis(this,societe_fiche)" [checked="(#ENV{societe_fiche_mod}?{checked})"] id="societe_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="societe_fiche" [checked="(#ENV{societe_fiche}?{checked})"] id="societe_fiche" [disabled ="(#ENV{societe_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="societe_table" [checked="(#ENV{societe_table}?{checked})"] id="societe_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:url_societe:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="url_societe" [checked="(#ENV{url_societe}?{checked})"] onclick="showoblig(this)" id="url_societe" />
-	</label>
-	<label style="[(#ENV{url_societe}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="url_societe_obligatoire" [checked="(#ENV{url_societe_obligatoire}?{checked})"] id="url_societe_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="url_societe_fiche_mod" onclick = "enadis(this,url_societe_fiche)" [checked="(#ENV{url_societe_fiche_mod}?{checked})"] id="url_societe_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="url_societe_fiche" [checked="(#ENV{url_societe_fiche}?{checked})"] id="url_societe_fiche" [disabled ="(#ENV{url_societe_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="url_societe_table" [checked="(#ENV{url_societe_table}?{checked})"] id="url_societe_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:secteur:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="secteur" [checked="(#ENV{secteur}?{checked})"] onclick="showoblig(this)" id="secteur" />
-	</label>
-	<label style="[(#ENV{secteur}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="secteur_obligatoire" [checked="(#ENV{secteur_obligatoire}?{checked})"] id="secteur_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="secteur_fiche_mod" onclick = "enadis(this,secteur_fiche)" [checked="(#ENV{secteur_fiche_mod}?{checked})"] id="secteur_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="secteur_fiche" [checked="(#ENV{secteur_fiche}?{checked})"] id="secteur_fiche" [disabled ="(#ENV{secteur_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="secteur_table" [checked="(#ENV{secteur_table}?{checked})"] id="secteur_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:fonction:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="fonction" [checked="(#ENV{fonction}?{checked})"] onclick="showoblig(this)" id="fonction" />
-	</label>
-	<label style="[(#ENV{fonction}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="fonction_obligatoire" [checked="(#ENV{fonction_obligatoire}?{checked})"] id="fonction_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fonction_fiche_mod" onclick = "enadis(this,fonction_fiche)" [checked="(#ENV{fonction_fiche_mod}?{checked})"] id="fonction_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fonction_fiche" [checked="(#ENV{fonction_fiche}?{checked})"] id="fonction_fiche" [disabled ="(#ENV{fonction_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fonction_table" [checked="(#ENV{fonction_table}?{checked})"] id="fonction_table" />
-	</label>
-</td>
-</tr>
-<tr>
-<td>
-	<strong><:inscription2:adresse_pro:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="adresse_pro" [checked="(#ENV{adresse_pro}?{checked})"] onclick="showoblig(this)" id="adresse_pro" />
-	</label>
-	<label style="[(#ENV{adresse_pro}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="adresse_pro_obligatoire" [checked="(#ENV{adresse_pro_obligatoire}?{checked})"] id="adresse_pro_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="adresse_pro_fiche_mod" onclick = "enadis(this,adresse_pro_fiche)" [checked="(#ENV{adresse_pro_fiche_mod}?{checked})"] id="adresse_pro_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="adresse_pro_fiche" [checked="(#ENV{adresse_pro_fiche}?{checked})"] id="adresse_pro_fiche" [disabled ="(#ENV{adresse_pro_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="adresse_pro_table" [checked="(#ENV{adresse_pro_table}?{checked})"] id="adresse_pro_table" />
-	</label>
-</td>
-</tr><tr>
-<td>	
-	<strong><:inscription2:code_postal:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="code_postal_pro" [checked="(#ENV{code_postal_pro}?{checked})"] onclick="showoblig(this)" id="code_postal_pro" />
-	</label>
-	<label style="[(#ENV{code_postal_pro}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="code_postal_pro_obligatoire" [checked="(#ENV{code_postal_pro_obligatoire}?{checked})"] id="code_postal_pro_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="code_postal_pro_fiche_mod" onclick = "enadis(this,code_postal_pro_fiche)" [checked="(#ENV{code_postal_pro_fiche_mod}?{checked})"] id="code_postal_pro_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="code_postal_pro_fiche" [checked="(#ENV{code_postal_pro_fiche}?{checked})"] id="code_postal_pro_fiche" [disabled ="(#ENV{code_postal_pro_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="code_postal_pro_table" [checked="(#ENV{code_postal_pro_table}?{checked})"] id="code_postal_pro_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:ville:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="ville_pro" [checked="(#ENV{ville_pro}?{checked})"] onclick="showoblig(this)" id="ville_pro" />
-	</label>
-	<label style="[(#ENV{ville_pro}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="ville_pro_obligatoire" [checked="(#ENV{ville_pro_obligatoire}?{checked})"] id="ville_pro_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="ville_pro_fiche_mod" onclick = "enadis(this,ville_pro_fiche)" [checked="(#ENV{ville_pro_fiche_mod}?{checked})"] id="ville_pro_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="ville_pro_fiche" [checked="(#ENV{ville_pro_fiche}?{checked})"] id="ville_pro_fiche" [disabled ="(#ENV{ville_pro_fiche_mod}?{true})"] />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="ville_pro_table" [checked="(#ENV{ville_pro_table}?{checked})"] id="ville_pro_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:pays:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="pays_pro" [checked="(#ENV{pays_pro}?{checked})"] onclick="showoblig(this)" id="pays_pro" />
-	</label>
-	<label style="[(#ENV{pays_pro}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="pays_pro_obligatoire" [checked="(#ENV{pays_pro_obligatoire}?{checked})"] id="pays_pro_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="pays_pro_fiche_mod" onclick = "enadis(this,pays_pro_fiche)" [checked="(#ENV{pays_pro_fiche_mod}?{checked})"] id="pays_pro_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="pays_pro_fiche" [checked="(#ENV{pays_pro_fiche}?{checked})"] id="pays_pro_fiche" [disabled ="(#ENV{pays_pro_fiche_mod}?{true})"] />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="pays_pro_table" [checked="(#ENV{pays_pro_table}?{checked})"] id="pays_pro_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:telephone_pro:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="telephone_pro" [checked="(#ENV{telephone_pro}?{checked})"] onclick="showoblig(this)" id="telephone_pro" />
-	</label>
-	<label style="[(#ENV{telephone_pro}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="telephone_pro_obligatoire" [checked="(#ENV{telephone_pro_obligatoire}?{checked})"] id="telephone_pro_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="telephone_pro_fiche_mod" onclick = "enadis(this,telephone_pro_fiche)" [checked="(#ENV{telephone_pro_fiche_mod}?{checked})"] id="telephone_pro_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="telephone_pro_fiche" [checked="(#ENV{telephone_pro_fiche}?{checked})"] id="telephone_pro_fiche" [disabled ="(#ENV{telephone_pro_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="telephone_pro_table" [checked="(#ENV{telephone_pro_table}?{checked})"] id="telephone_pro_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:fax_pro:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="fax_pro" [checked="(#ENV{fax_pro}?{checked})"] onclick="showoblig(this)" id="fax_pro" />
-	</label>
-	<label style="[(#ENV{fax_pro}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="fax_pro_obligatoire" [checked="(#ENV{fax_pro_obligatoire}?{checked})"] id="fax_pro_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fax_pro_fiche_mod" onclick = "enadis(this,fax_pro_fiche)" [checked="(#ENV{fax_pro_fiche_mod}?{checked})"] id="fax_pro_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fax_pro_fiche" [checked="(#ENV{fax_pro_fiche}?{checked})"] id="fax_pro_fiche" [disabled ="(#ENV{fax_pro_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="fax_pro_table" [checked="(#ENV{fax_pro_table}?{checked})"] id="fax_pro_table" />
-	</label>
-</td>
-</tr><tr>
-<td>
-	<strong><:inscription2:mobile_pro:></strong>
-</td><td>
-	<label>
-		<input type="checkbox" name="mobile_pro" [checked="(#ENV{mobile_pro}?{checked})"] onclick="showoblig(this)" id="mobile_pro" />
-	</label>
-	<label style="[(#ENV{mobile_pro}|=={on}|?{display: block;, display:none;})]">
-		<input type="checkbox" name="mobile_pro_obligatoire" [checked="(#ENV{mobile_pro_obligatoire}?{checked})"] id="mobile_pro_obligatoire" />
-		<span style="color:red">*</span>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="mobile_pro_fiche_mod" onclick = "enadis(this,mobile_pro_fiche)" [checked="(#ENV{mobile_pro_fiche_mod}?{checked})"] id="mobile_pro_fiche_mod" />
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="mobile_pro_fiche" [checked="(#ENV{mobile_pro_fiche}?{checked})"] id="mobile_pro_fiche" [disabled ="(#ENV{mobile_pro_fiche_mod}?{true})"]/>
-	</label>
-</td><td>
-	<label>
-		<input type="checkbox" name="mobile_pro_table" [checked="(#ENV{mobile_pro_table}?{checked})"] id="mobile_pro_table" />
-	</label>
-</td>
-</tr>
-</table>
-<br />
-<small>
-<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
-<strong><span style="color:red">*</span></strong><:inscription2:form_oblig_expl:><br />
-<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
-<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
-<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
-</small>
-</fieldset>
+<INCLURE{fond=fonds/inscription2_infos_persos}>
+
+</div>
+
+[(#REM) ------------------------ INFORMATIONS PROFESSIONNELLES? ------------------------ ]
+
+<div id="fragment-2">
+
+<INCLURE{fond=fonds/inscription2_infos_pros}>
+
+</div>
 
 [(#REM) ------------------------ GEOLOCALISATION? ------------------------ ]
 
+<div id="fragment-3">
+
 [(#CONFIG{plugin/GEOMAP/version}|?{' ', ''})<INCLURE{fond=fonds/inscription2_geoloc}>]
 
+</div>
+
 [(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
+<div id="fragment-4">
 <fieldset>
 <legend>
 	<:inscription2:info_gener:>
@@ -803,7 +184,7 @@
 	<:inscription2:exp_statut_rel:><br/>
 </span>
 <span>
-	<input type="text" name="statut_interne" id="statut_interne" style="[(#ENV{statut_int}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_interne}">
+	<input type="text" name="statut_interne" id="statut_interne" style="[(#ENV{statut_int}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_interne}" />
 </span>
 </div>
 
@@ -813,13 +194,22 @@
 ]
 </fieldset>
 
-
 [<div style="margin:5px 0px">(#CONFIG{plugin/ABONNEMENT}|?{' ', ''})
  <INCLURE{fond=fonds/inscription2_abonnement}>
  </div>
 ]
+</div>
 
+<br />
+<small>
+<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
+<strong><span style="color:red">*</span></strong><:inscription2:form_oblig_expl:><br />
+<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
+<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
+<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
+</small>
 
+</div>
 [(#REM) Code jQuery plier/deplier les listes ]
 <script type="text/javascript"><!--
 function showhide(boxName, boxNom) {
