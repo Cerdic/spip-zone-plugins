@@ -36,11 +36,6 @@ _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eac
  <prefix>gis</prefix>
 	
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>gis_pipeline.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>affiche_droite</nom>
 		<action>affiche_droite</action>
 		<inclure>gis_pipeline.php</inclure>
