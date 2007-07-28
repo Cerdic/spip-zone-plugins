@@ -63,7 +63,7 @@
 	'gestion_des_banques' => 'Gestion des banques',
 	'gestion_de_lassoc' => 'Gestion de l\'association',
 	'ID' => 'ID',
-	'info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons et des ventes associatives, et tenir une livre de comptes.</p>',
+	'info_doc' => '<p>Ce plugin vous permet de g&eacute;rer une petite association en ligne.</p> <p>Vous pouvez ainsi  visualiser, ajouter et modifier des membres actifs, lancer des mails de masse pour les relances de cotisations, g&eacute;rer des dons, des ventes associatives, des inscriptions aux activit&eacute;s, des pr&ecirc;ts de mat&eacute;riels et autres ressources, et tenir une livre de comptes.</p>',
 	'message_relance' => '
 Bonjour,
 		
@@ -95,10 +95,10 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 
 	# Libelle
 	'adherent_libelle_donnees_adherent' => 'Donn&eacute;es Adh&eacute;rent',
-	'adherent_libelle_reference_interne_abrev' => 'R&eacute;f. int.',
+	'adherent_libelle_id_asso' => 'R&eacute;f. int.',
 	'adherent_libelle_reference_interne' => 'R&eacute;f&eacute;rence interne',
 	'adherent_libelle_numero' => 'Num&eacute;ro',
-	'adherent_libelle_id' => 'ID',
+	'adherent_libelle_id_adherent' => 'ID',
 	'adherent_libelle_photo' => 'Photo',
 	'adherent_libelle_nom' => 'Nom',
 	'adherent_libelle_prenom' => 'Pr&eacute;nom',
@@ -184,20 +184,21 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_label_modifier_membre' => 'Modifier membre',
 	'adherent_label_voir_membre' => 'Voir le membre',
 
-	# Message
-	'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
-	'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
-	'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
-	'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
-	'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
-	'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
-	# Liste
-	'adherent_liste_legende' => 'En bleu : Relanc&eacute; | En rose : A &eacute;ch&eacute;ance | En vert : A jour<br> En brun : D&eacute;sactiv&eacute; | En jaune paille : Prospect',
-	'adherent_liste_nombre_adherents' => 'Nombre d\'adh&eacute;rents : @total@',
-	'adherent_liste_total_cotisations' => 'Total des cotisations : @total@ &euro;',
-
-# Activites
- # Titres
+		# Message
+			'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
+			'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
+			'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
+			'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
+			'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
+			'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
+		
+		# Liste
+			'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br>En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',
+			'adherent_liste_nombre_adherents' => 'Nombre d\'adh&eacute;rents : @total@',
+			'adherent_liste_total_cotisations' => 'Total des cotisations : @total@ &euro;',
+		
+	# Activites
+		# Titres
 	'activite_titre_action_sur_inscriptions' => 'Action sur les inscriptions',
 	'activite_titre_mise_a_jour_inscriptions' => 'Mise &agrave; jour des inscriptions',
 	'activite_titre_ajouter_inscriptions' => 'Ajouter des inscriptions',

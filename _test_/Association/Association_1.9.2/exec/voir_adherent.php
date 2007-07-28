@@ -1,44 +1,48 @@
 ﻿<?php
-/**
-* Plugin Association
-*
-* Copyright (c) 2007
-* Bernard Blazin & François de Montlivault
-* http://www.plugandspip.com 
-* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-* Pour plus de details voir le fichier COPYING.txt.
-*  
-**/
+	/**
+	* Plugin Association
+	*
+	* Copyright (c) 2007
+	* Bernard Blazin & François de Montlivault
+	* http://www.plugandspip.com 
+	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	* Pour plus de details voir le fichier COPYING.txt.
+	*  
+	**/
 
-include_spip('inc/presentation');
-
-function exec_voir_adherent(){
-	global $connect_statut, $connect_toutes_rubriques;
-
-	debut_page(_T('asso:titre_gestion_pour_association'), "", "");
-
-// LES URL'S
-	$url_asso = generer_url_ecrire('association');
-	$url_edit_compte = generer_url_ecrire('edit_compte');
-	$url_edit_activite = generer_url_ecrire('edit_activite');
-
-	include_spip ('inc/navigation');
-
-	debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_fiche_signaletique'));
-	debut_boite_info();
+	include_spip('inc/presentation');
+	include_spip ('inc/navigation_modules');
 	
-//LE MENU
-	print association_date_du_jour();
-
-
-// FICHE SIGNALETIQUE 	
-	$id_adherent = $_GET['id'];
-	$query=spip_query( "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent' ");
+	function exec_voir_adherent(){
+		global $connect_statut, $connect_toutes_rubriques;
+		
+		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		
+		// LES URL'S
+		$url_asso = generer_url_ecrire('association');
+		$url_edit_compte = generer_url_ecrire('edit_compte');
+		$url_edit_activite = generer_url_ecrire('edit_activite');
+		
+		association_onglets();
+		
+		debut_gauche();
+		
+		debut_boite_info();
+		print association_date_du_jour();	
+		fin_boite_info();
+		
+		debut_droite();
+		
+		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_fiche_signaletique'));
 	
-	echo '<fieldset><legend>'._T('asso:adherent_titre_fiche_signaletique_id',array('id' => $id_adherent)).'</legend>';
-	echo '<table width="70%">';	
-	while($data = spip_fetch_array($query)) {
-		$id_asso=$data['id_asso'];
+		// FICHE SIGNALETIQUE 	
+		$id_adherent = $_GET['id'];
+		$query=spip_query( "SELECT * FROM spip_asso_adherents where id_adherent='$id_adherent' ");
+		
+		echo '<fieldset><legend>'._T('asso:adherent_titre_fiche_signaletique_id',array('id' => $id_adherent)).'</legend>';
+		echo '<table width=100%>';	
+		while($data = spip_fetch_array($query)) {
+			$id_asso=$data['id_asso'];
 		echo '<tr> ';
 		echo '<td>'._T('asso:adherent_libelle_reference_interne').' :</td>';
 		echo '<td><strong>'.$id_asso.'</strong></td>';
@@ -142,7 +146,7 @@ function exec_voir_adherent(){
 
 // FICHE HISTORIQUE 	
 	echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
-	echo '<table width="70%" border="0">';
+	echo '<table width=100%>';
 	echo '<tr bgcolor="silver">';
 	echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id').'</strong></td>';
 	echo '<td><strong>'._T('asso:adherent_entete_date').'</strong></td>';
@@ -177,7 +181,7 @@ function exec_voir_adherent(){
 
 // FICHE ACTIVITES	
 	echo '<fieldset><legend>'._T('asso:adherent_titre_historique_activites').'</legend>';
-	echo '<table width="70%" border="0">';
+	echo '<table width=100%>';
 	echo '<tr bgcolor="silver">';
 	echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id').'</strong></td>';
 	echo '<td><strong>'._T('asso:adherent_entete_date').'</strong></td>';
@@ -192,32 +196,30 @@ function exec_voir_adherent(){
 	//$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=$id_adherent ORDER BY date DESC" );
 	//$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
 
-	while ($data = spip_fetch_array($query)) {
-		$class= "pair";
-		$id_evenement=$data['id_evenement'];
-
-		echo '<td class ='.$class.' style="text-align:right;">'.$data['id_activite'].'</td>';
-
-		$sql = spip_query ("SELECT * FROM spip_evenements WHERE id_evenement=$id_evenement" );
-		while ($evenement = spip_fetch_array($sql)) {
-			$date = substr($evenement['date_debut'],0,10);
-			echo '<td class ='.$class.'>'.association_datefr($date).'</td>';
-			echo '<td class ='.$class.'>'.$evenement['titre'].'</td>';
-			echo '<td class ='.$class.'>'.$evenement['lieu'].'</td>';
+		while ($data = spip_fetch_array($query)) {
+			$class= "pair";
+			$id_evenement=$data['id_evenement'];
+			
+			echo '<td class ='.$class.' style="text-align:right;">'.$data['id_activite'].'</td>';
+			
+			$sql = spip_query ("SELECT * FROM spip_evenements WHERE id_evenement=$id_evenement" );
+			while ($evenement = spip_fetch_array($sql)) {
+				$date = substr($evenement['date_debut'],0,10);
+				echo '<td class ='.$class.'>'.association_datefr($date).'</td>';
+				echo '<td class ='.$class.'>'.$evenement['titre'].'</td>';
+				echo '<td class ='.$class.'>'.$evenement['lieu'].'</td>';
+			}
+			echo '<td class ='.$class.' style="text-align:right;">'.$data['inscrits'].'</td>';
+			echo '<td class ='.$class.'>'.$data['statut'].'</td>';
+			echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_bouton_maj_inscription').'"></a></td>';
+			echo '</tr>';
 		}
-		echo '<td class ='.$class.' style="text-align:right;">'.$data['inscrits'].'</td>';
-		echo '<td class ='.$class.'>'.$data['statut'].'</td>';
-		echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_activite.'&id='.$data['id_activite'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_bouton_maj_inscription').'"></a></td>';
-		echo '</tr>';
-	}
-	echo '</table>';
-	echo '</fieldset>';
-// ON FERME TOUT
-	fin_boite_info();
+		echo '</table>';
+		echo '</fieldset>';
 	  
-	fin_cadre_relief();
-
-	fin_page();
-} 
+		fin_cadre_relief();
+	
+		fin_page();
+	} 
 ?>
 

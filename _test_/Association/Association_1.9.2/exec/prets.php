@@ -49,7 +49,7 @@
 			icone_horizontale(_T('asso:bouton_retour'), generer_url_ecrire("ressources","id=$id_ressource"), _DIR_PLUGIN_ASSOCIATION."/img_pack/livredor.png","rien.gif");	
 			fin_raccourcis();
 		}	
-
+		
 		debut_droite();
 		debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));
 		
