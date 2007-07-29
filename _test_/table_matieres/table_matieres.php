@@ -47,7 +47,12 @@ function TableMatieres_Callback($matches) {
 }
 
 function TableMatieres_AjouterAncres($texte) {
-	return preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte);
+	$texte = echappe_html($texte, 'TDM', true, ',<(code|cadre)'
+			.'(\s[^>]*)?'
+			.'>(.*)</\1>,UimsS');
+	$texte = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte);
+	$texte = echappe_retour($texte, 'TDM');
+	return $texte;
 }
 
 function TableMatieres_LienRetour($texte, $affiche_table = false) {
