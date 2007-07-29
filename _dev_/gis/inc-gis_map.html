@@ -10,8 +10,8 @@
 	#SET{latitude,#ENV{latit,#LAT}}
 	#SET{lonxitude,#ENV{lonxit,#LONX}}
 	</BOUCLE_centrado>
-	#SET{latitude,#ENV{latit,42.94}}
-	#SET{lonxitude,#ENV{lonxit,-8.228}}
+	#SET{latitude,#ENV{latit,#CONFIG**{geomap_default_lat,0}}}
+	#SET{lonxitude,#ENV{lonxit,#CONFIG**{geomap_default_lonx,0}}}
 	<//B_centrado>
 	function load() {
 		if (GBrowserIsCompatible()) {
@@ -20,7 +20,7 @@
     		map.addControl(new mapTypeControl());
 			map.addControl(new mapZoomControl());
 			map.addControl(new mapMoveControl());
-    		map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,7}, G_SATELLITE_MAP);
+    		map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, G_SATELLITE_MAP);
     		center = map.getCenter();
     		map.enableDoubleClickZoom();
     		map.enableContinuousZoom();
