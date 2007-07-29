@@ -1,0 +1,41 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Compteurs de visites graphiques
+	</nom>
+	<auteur>
+    Olivier Gautier, &eacute;quipe de d&eacute;veloppement Eva-WEB.
+    <br/>Cette <span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dc:type">cr&eacute;ation</span> est mise &agrave;  disposition sous un <a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/">contrat Creative Commons</a>.
+    <br />&nbsp;<br /><div style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/fr/88x31.png"/></a></div>
+	</auteur>
+	<version>
+	0.2
+	</version>
+    <version_base>0.1</version_base>
+	<etat>
+	stable
+	</etat>
+	<icon>img_pack/CompteurGraphique.gif</icon>
+    <description>
+- Syst&egrave;me de cr&eacute;ation et d'affichage de compteurs de visite
+- Documentation sur le <a href="http://www.eva-web.edres74.ac-grenoble.fr/spip.php?article33">Site EVA-web</a> ou <a href="http://www.spip-contrib.net/Plugin-Compteur-Graphique">Site SPIP-Contrib</a>
+    </description>
+    <prefix>
+    CompteurGraphique
+    </prefix>
+    <options> <!-- fichier charge a chaque hit --> 
+    CompteurGraphique_mes_options.php
+    </options>
+    <install>CompteurGraphique_install.php</install>
+    <pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>AjouterBouton</action>
+		<inclure>CompteurGraphique_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>affiche_gauche</nom>
+        <action>AfficheGauche</action>
+        <inclure>CompteurGraphique_pipeline.php</inclure>
+    </pipeline>
+    <necessite id='SPIP' version='[1.9259;]' />
+    <necessite id="lib:compteurgraphique_pack" src="http://www.ac-rouen.fr/evaweb/files/compteurgraphique_pack.zip" />
+</plugin>

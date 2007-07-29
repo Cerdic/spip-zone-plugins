@@ -1,0 +1,22 @@
+﻿#CACHE{0}
+
+[(#REM) Compteur de visite ]
+    
+    [(#REM) C'est dans la balise ci-dessous que l'image est générée et que le code html pour l'afficher est renvoyé sous la forme de la variable $CompteurGraphique ]
+    #COMPTEURGRAPHIQUE
+
+
+    <?php if (isset($CompteurGraphique)) {?>
+                
+    [(#REM) Code html conditionnel ou balises SPIP à insérer avant l'image du compteur ]
+
+    [(#REM) Fin du code conditionnel à insérer avant l'image du compteur ]
+                
+    <?php echo $CompteurGraphique; ?>
+                
+    [(#REM) Code html conditionnel ou balises SPIP à insérer après l'image du compteur ]
+
+    [(#REM) Fin du code conditionnel à insérer après l'image du compteur ]
+                
+    <?php }?>
+[(#REM) Fin du compteur de visite ]
