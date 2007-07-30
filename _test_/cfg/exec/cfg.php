@@ -3,7 +3,7 @@
  * Plugin cfg : ecrire/?exec=cfg&cfg=xxxx
  *
  * Auteur : bertrand@toggg.com
- * © 2007 - Distribue sous licence LGPL
+ * ï¿½ 2007 - Distribue sous licence LGPL
  *
  */
 // la fonction appelee par le core, une simple "factory" de la classe cfg
@@ -190,23 +190,16 @@ class cfg_dist extends cfg_formulaire
 		echo $res;
 	}
 
-
 	debut_gauche();
-
-
 
 	if ($nom)
 		echo	debut_boite_info(true) .
 		propre($this->descriptif) .
 		fin_boite_info(true);
 
-
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
-
-
-
 
 		echo
 		
@@ -226,6 +219,5 @@ class cfg_dist extends cfg_formulaire
 		return fin_gauche() . fin_page();
 	}
 }
-
 
 ?>
