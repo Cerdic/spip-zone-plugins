@@ -1,58 +1,1 @@
-#CACHE{0}
-[(#REM) titre=xspf]
-[(#REM) icone=_img/xifish_icone.gif]
-[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../_img/xifish.gif' width='64' height='64' alt='xifish' style="float:#LANG_RIGHT;" /> })]
-<div style="padding:3px; position:absolute; position:fixed !important;
-right:15px; top:400px !important; width:195px; height:195px; border: 0px;
-overflow:hidden;	-moz-border-radius:8px;">
-<div id="picker"></div></div>
-<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]
-<!-- descriptif= [(#GET{logo})]
-<h4>Configuration du plugin xspf</h4>
-<p>Ici vous pouvez configurer les diff&eacute;rents types d&rsquo;affichage pour chaque lecteur.</p>
-<p><strong>Lecteurs de <a href="http://musicplayer.sourceforge.net/">XSPF Web Music Player</a></strong>
-- <a href="#msc"> Music Player</a>
-- <a href="#slim"> Slim Player</a>
-- <a href="#but"> Button Player</a></p>
-</p>
-<p><strong>Lecteurs de <a href="http://www.jeroenwijering.com/">Jeroen Wijering</a></strong>
-- <a href="#mpl"> Media Player</a>
-- <a href="#rotator"> Rotator</a>
-- <a href="#flp"> Flash Video Player</a></p>
-<p><small>Attention, la licence de ces trois lecteurs est semi-commerciale, c&rsquo;est pourquoi ils ne sont pas inclus dans cette contribution. 
-Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.</small>
-</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>
--->
-		
-[(#REM) titre=XSPF plugin]
-		
-
-[(#REM) ------------- MUSICPLAYER / SLIMPLAYER / BUTTONPLAYER --------------- ]
-
-<INCLURE{fond=fonds/xspf_musicplayer}>
-
-
-	<fieldset>
-		<legend><a name="mpl"></a>Configuration g&eacute;n&eacute;rale pour les players de Jeroen Wijering</legend>
-		<p><label><strong><:xspf:jwlogo:></strong><br/>
-			<input type="text" name="jwlogo" id="jwlogo" value="#ENV{jwlogo}" /> URL <br /><small><:xspf:desc_jwlogo:></small>
-		</label></p>
-	</fieldset>
-	
-[(#REM) ------------------------ JW MEDIAPLAYER ------------------------ ]
-
-<INCLURE{fond=fonds/xspf_jw_mediaplayer}>
-
-[(#REM) ------------------------ JW ROTATOR ------------------------ ]
-
-<INCLURE{fond=fonds/xspf_jw_rotator}>
-
-[(#REM) ------------------------ JW FLVPLAYER ------------------------ ]
-
-<INCLURE{fond=fonds/xspf_jw_flvplayer}>
-
-	<input type="submit" name="_cfg_ok" value="<:xspf:OK:>" />
-	<input type="submit" name="_cfg_delete" value="<:xspf:Supprimer:>" />
-
-</form>
+#CACHE{0}[(#REM) titre=xspf][(#REM) icone=_img/xifish_icone.gif][(#SET{logo, <img src='#DOSSIER_SQUELETTE/../_img/xifish.gif' width='64' height='64' alt='xifish' style="float:#LANG_RIGHT;" /> })]<form method="post" action="#SELF">[(#ENV{_cfg_}|form_hidden)]<!-- descriptif= [(#GET{logo})]<h4>Configuration du plugin xspf</h4><p>Ici vous pouvez configurer les diff&eacute;rents types d&rsquo;affichage pour chaque lecteur.</p><p><strong>Lecteurs de <a href="http://musicplayer.sourceforge.net/">XSPF Web Music Player</a></strong>- <a href="#msc"> Music Player</a>- <a href="#slim"> Slim Player</a>- <a href="#but"> Button Player</a></p></p><p><strong>Lecteurs de <a href="http://www.jeroenwijering.com/">Jeroen Wijering</a></strong>- <a href="#mpl"> Media Player</a>- <a href="#rotator"> Rotator</a>- <a href="#flp"> Flash Video Player</a></p><p><small>Attention, la licence de ces trois lecteurs est semi-commerciale, c&rsquo;est pourquoi ils ne sont pas inclus dans cette contribution. Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons &ecirc;tre tenus responsables du non-respect de ces licences.</small></p>En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>-->		[(#REM) titre=XSPF plugin]		[(#REM) ------------- MUSICPLAYER / SLIMPLAYER / BUTTONPLAYER --------------- ]<INCLURE{fond=fonds/xspf_musicplayer}>	<fieldset>		<legend><a name="mpl"></a>Configuration g&eacute;n&eacute;rale pour les players de Jeroen Wijering</legend>		<p><label><strong><:xspf:jwlogo:></strong><br/>			<input type="text" name="jwlogo" id="jwlogo" value="#ENV{jwlogo}" /> URL <br /><small><:xspf:desc_jwlogo:></small>		</label></p>	</fieldset>	[(#REM) ------------------------ JW MEDIAPLAYER ------------------------ ]<INCLURE{fond=fonds/xspf_jw_mediaplayer}>[(#REM) ------------------------ JW ROTATOR ------------------------ ]<INCLURE{fond=fonds/xspf_jw_rotator}>[(#REM) ------------------------ JW FLVPLAYER ------------------------ ]<INCLURE{fond=fonds/xspf_jw_flvplayer}>	<input type="submit" name="_cfg_ok" value="<:xspf:OK:>" />	<input type="submit" name="_cfg_delete" value="<:xspf:Supprimer:>" /></form>
