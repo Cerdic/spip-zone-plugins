@@ -1,0 +1,127 @@
+	<fieldset>
+		<legend><a name="flp"></a>Configuration de flash video player</legend>
+		<p><label><strong><:xspf:size_anim:></strong><br/>
+			<p><:xspf:width:>&nbsp;<input type="text" name="flpwidth" id="flpwidth" value="#CONFIG{xspf/flpwidth}" /><br /><small><:xspf:desc_width:></small></p>
+			<p><:xspf:height:>&nbsp;<input type="text" name="flpheigth" id="flpheigth" value="#CONFIG{xspf/flpheigth}" /><br /><small><:xspf:desc_height:></small></p>
+		</label></p>
+		<p><label><strong><:xspf:display_size:></strong>
+			<p><:xspf:displaywidth:>&nbsp;<input type="text" name="flpdisplaywidth" id="flpdisplaywidth" value="#CONFIG{xspf/flpdisplaywidth}" /><br /><small><:xspf:desc_displaywidth:></small></p>
+			<p><:xspf:displayheight:>&nbsp;<input type="text" name="flpdisplayheight" id="flpdisplayheight" value="#CONFIG{xspf/flpdisplayheight}" /><br /><small><:xspf:desc_displayheight:></small></p>
+		</label></p>
+		<p><label><strong><:xspf:color_anim:></strong>
+			<p><:xspf:backcolor:>&nbsp;<input type="text" name="flpbackcolor" id="flpbackcolor" value="[(#CONFIG{xspf/flpbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_backcolor:></small></p>
+			<p><:xspf:frontcolor:>&nbsp;<input type="text" name="flpfrontcolor" id="flpfrontcolor" value="[(#CONFIG{xspf/flpfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_frontcolor:></small></p>
+			<p><:xspf:lightcolor:>&nbsp;<input type="text" name="flplightcolor" id="flplightcolor" value="[(#CONFIG{xspf/flplightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" /><br /><small><:xspf:desc_lightcolor:></small></p>
+		</label></p>
+				
+		<label for="flprepeat"><strong><:xspf:repeat:></strong></label>
+		<select name="flprepeat">
+			<option [(#CONFIG{xspf/flprepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flprepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#CONFIG{xspf/flprepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>	
+		</select><br /><small><:xspf:desc_jwrepeat:></small>
+		
+		<br /><br /><label for="flpautostart"><strong><:xspf:autostart:></strong></label>
+		<select name="flpautostart">
+			<option [(#CONFIG{xspf/flpautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#CONFIG{xspf/flpautostart}|=={mute}|?{selected="selected",''})] value="mute"><:xspf:mute:></option>
+		</select><br /><small><:xspf:desc_autostart:>Lecture automatique au chargement de la playlist</small>
+		
+		<p><label><strong><:xspf:bufferlength:></strong><br/>
+			<input type="text" name="bufferlength" id="bufferlength" value="#CONFIG{xspf/bufferlength}" /> <:number:> <br /><small><:xspf:desc_bufferlength:></small>
+		</label></p>
+		
+		<p><label><strong><:xspf:captions:></strong><br/>
+			<input type="text" name="captions" id="captions" value="#CONFIG{xspf/captions}" /> URL <br /><small><:xspf:desc_captions:></small>
+		</label></p>
+		
+		<label for="usecaptions"><strong><:xspf:usecaptions:></strong>
+		<select name="usecaptions">
+			<option [(#CONFIG{xspf/usecaptions}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/usecaptions}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select></label>&nbsp;&nbsp;<small><:xspf:desc_usecaptions:></small>
+				
+		<br /><br /><label for="flpautoscroll"><strong><:xspf:autoscroll:></strong>
+		<select name="flpautoscroll">
+			<option [(#CONFIG{xspf/flpautoscroll}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpautoscroll}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select>&nbsp;&nbsp;<small><:xspf:desc_autoscroll:></small>
+		</label>
+		
+		<br /><br /><label for="flpoverstretch"><strong><:xspf:overstretch:></strong>
+		<select name="flpoverstretch">
+			<option [(#CONFIG{xspf/flpoverstretch}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpoverstretch}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#CONFIG{xspf/flpoverstretch}|=={fit}|?{selected="selected",''})] value="fit"><:xspf:fit:></option>
+			<option [(#CONFIG{xspf/flpoverstretch}|=={none}|?{selected="selected",''})] value="none"><:xspf:none:></option>
+		</select><br /><small><:xspf:desc_overstretch:></small></label>
+		
+		<br /><br /><label for="flpshowdigits"><strong><:xspf:showdigits:></strong>
+		<select name="flpshowdigits">
+			<option [(#CONFIG{xspf/flpshowdigits}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpshowdigits}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#CONFIG{xspf/flpshowdigits}|=={total}|?{selected="selected",''})] value="total"><:xspf:total:></option>	
+		</select><br /><small><:xspf:desc_showdigits:></small></label>
+		
+		<br /><br /><label for="flpshowvolume"><strong><:xspf:showvolume:></strong>
+		<select name="flpshowvolume">
+			<option [(#CONFIG{xspf/flpshowvolume}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpshowvolume}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select><br /><small><:xspf:desc_showvolume:></small></label>
+		
+		<br /><br /><label for="flpshowicons"><strong><:xspf:showicons:></strong>
+		<select name="flpshowicons">
+			<option [(#CONFIG{xspf/flpshowicons}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpshowicons}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select><br /><small><:xspf:desc_showicons:></small></label>
+		
+		<br /><br /><label for="flpshuffle"><strong><:xspf:shuffle:></strong>
+		<select name="flpshuffle">
+			<option [(#CONFIG{xspf/flpshuffle}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpshuffle}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select><br /><small><:xspf:desc_shuffle:></small></label>
+		
+		<br /><br /><label for="flpallowfullscreen"><strong><:xspf:allowfullscreen:></strong>
+		<select name="flpallowfullscreen">
+			<option [(#CONFIG{xspf/flpallowfullscreen}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpallowfullscreen}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select><br /><small><:xspf:desc_allowfullscreen:></small></label>
+		
+		<br /><br /><label for="flpthumbs"><strong><:xspf:thumbsinplaylist:></strong>
+		<select name="flpthumbs">
+			<option [(#CONFIG{xspf/flpthumbs}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpthumbs}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select><br /><small><:xspf:desc_thumbsinplaylist:></small></label>
+		
+		<br /><br /><label for="flpshowdownload"><strong><:xspf:showdownload:></strong>
+		<select name="flpshowdownload">
+			<option [(#CONFIG{xspf/flpshowdownload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpshowdownload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select></label>&nbsp;&nbsp;<small><:xspf:desc_showdownload:></small>
+		
+		<p><label><strong><:xspf:link:></strong>
+			<input type="text" name="flplink" id="flplink" value="#CONFIG{xspf/flplink}" /> URL <br /><small><:xspf:desc_link:></small>
+		</label><p/>
+		
+		<p><label><strong><:xspf:linktarget:></strong><br/>
+			<input type="text" name="flplinktarget" id="flplinktarget" value="#CONFIG{xspf/flplinktarget}" /> frame <br /><small><:xspf:desc_linktarget:></small>
+		</label></p>
+		
+		<label for="flplinkfromdisplay"><strong><:xspf:linkfromdisplay:></strong>
+		<select name="flplinkfromdisplay">
+			<option [(#CONFIG{xspf/flplinkfromdisplay}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flplinkfromdisplay}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select></label>&nbsp;&nbsp;<small><:xspf:desc_linkfromdisplay:></small>
+		
+		<p><label><strong><:xspf:audio:></strong><br/>
+			<input type="text" name="flpaudio" id="flpaudio" value="#CONFIG{xspf/flpaudio}" /> URL <br /><small><:xspf:desc_audio:></small>
+		</label></p>
+		
+		<label for="flpuseaudio"><strong><:xspf:useaudio:></strong>
+		<select name="flpuseaudio">
+			<option [(#CONFIG{xspf/flpuseaudio}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/flpuseaudio}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select></label>&nbsp;&nbsp;<small><:xspf:desc_useaudio:></small>
+		
+	</fieldset>
