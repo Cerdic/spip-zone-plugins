@@ -1,0 +1,46 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Paris-Beyrouth - PBCharts
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[ARNO*->http://www.paris-beyrouth.org] &copy; 2006. Documentation sur <a href="http://www.paris-beyrouth.org">Paris-Beyrouth</a>.<br />
+	Utilise les animations Flash [XML/SWF Charts &copy;2004-2007 maani.us->http://www.maani.us/xml_charts/index.php?menu=License]. Les animations peuvent &ecirc;tre utilis&eacute;es gratuitement&nbsp;; mais pour supprimer le lien vers le site de maani.us, vous devez acheter une licence.
+	</auteur>
+	<version>
+	1.0
+	</version>
+	<etat>
+	stable
+	</etat>
+	<icon>
+	imgs/logo.png
+	</icon>
+	<description>
+	<multi>
+		<p><strong>This plugin allows direct use of charts defined by  <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</strong></p>
+		<p>Create a table with SPIP's shortcuts (by using vertical bars - pipes), then put this table between these pseudo-tags:</p>
+		<p><pre>&lt;chart type="Column"&gt; ... &lt;/chart&gt;</pre></p>
+		<p>The chart's type (in this example: "Column") will be selected in the types allowed by <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</p>
+	[fr]
+		<p><strong>Ce plugin permet l'affichage de graphiques en Flash tels que d&eacute;finis par <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</strong></p>
+		<p>Codez un tableau avec les raccourcis SPIP habituels (en utilisant les barres verticales), puis encadrez votre tableau des mentions:</p>
+		<p><pre>&lt;chart type="Column"&gt; ... &lt;/chart&gt;</pre></p>
+		<p>Le type de graphique (dans l'exemple: "Column") peut &ecirc;tre choisi parmi tous les types autoris&eacute;s par <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</p>
+	</multi>
+	</description>
+	<prefix> 
+	pb_charts
+	</prefix>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<action>traiter_charts</action>
+		<inclure>pb_charts_actions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>retablir_script</action>
+		<inclure>pb_charts_actions.php</inclure>
+	</pipeline>
+
+</plugin>
+
