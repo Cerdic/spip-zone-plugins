@@ -1,14 +1,5 @@
 <?php
 
-define("_LG_ANCRE", 35);
-define("_RETOUR_TDM", '<a href="#tdm"><img src="' .
-	find_in_path('images/tdm.png') . 
-	'" alt="' .
-	_T('tdm:retour_table_matiere') .
-	'" title="' .
-	_T('tdm:retour_table_matiere') .
-	'" /></a>');
-
 function TableMatieres_Table($url = '', $titre = '') {
 	static $table = array();
 	if($url == '') return $table;
@@ -52,8 +43,8 @@ function TableMatieres_AjouterAncres($texte) {
 	if($premier_passage == false) {
 		$premier_passage = true;
 		$texte = echappe_html($texte, 'TDM', true, ',<(code|cadre)'
-				.'(\s[^>]*)?'
-				.'>(.*)</\1>,UimsS');
+			. '(\s[^>]*)?'
+			. '>(.*)</\1>,UimsS');
 		$texte = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte);
 		$texte_ancre = echappe_retour($texte, 'TDM');
 	}
