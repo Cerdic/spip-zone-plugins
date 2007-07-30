@@ -1,0 +1,66 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Paris-Beyrouth: compteur de visites
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[ARNO*->http://www.paris-beyrouth.org] &copy; 2006-2007
+	</auteur>
+	<version>
+	0.6
+	</version>
+	<icon>imgs/grande-icone.png</icon>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Ce plugin enrichit le comptage des visites et g&egrave;re la g&eacute;olocalisation. Fonctionnalit&eacute;s&nbsp;:
+	<ul>
+	<li>r&eacute;cup&eacute;ration automatique de la base gratuite de correspondances entre les adresses IP et les pays chez <a href="http://www.maxmind.com">Maxmind</a> (distribu&eacute;e sous LGPL)&nbsp;;</li>
+	<li>comptage des visites, des visites &laquo;&nbsp;utiles&nbsp;&raquo; (c'est-&agrave;-dire plus d'une page vue), des pages vues et des pages vues utiles&nbsp;;</li>
+	<li>comptage des visites par pays (g&eacute;olocalisation)&nbsp;;</li>
+	<li>comptage des visites par squelette.</li>
+	</ul>
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	mes_options_pb_visites.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	mes_fonctions_pb_visites.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	pb_visites
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	<!-- Les deux pipeline suivant inserent des boutons et sous boutons. dans le menu
+	principal de l'interface d'admin
+	-->
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>sauver_infos</action>
+		<inclure>pb_visites.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<action>ajouter_cron</action>
+		<inclure>pb_visites.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>pb_traiter_visites</action>
+		<inclure>pb_visites.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>pb_visites_bouton.php</inclure>
+	</pipeline>
+	<!-- D'autres pipeline sont dispo ici : http://www.spip-contrib.net/SPIP-1-9-Les-Plugin -->
+	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
+
