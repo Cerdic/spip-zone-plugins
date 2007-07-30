@@ -25,17 +25,20 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 <script type='text/javascript' src='#CHEMIN{farbtastic.js}'></script>
 <script type='text/javascript' charset='utf-8'>
 	$(document).ready(function() {
-		var f = $.farbtastic('#picker');
-		var p = $('#picker').css('opacity', 0.25);
+		$('.picker').css('opacity', 0.25);
 		var selected;
 		$('.colorwell')
-			.each(function () { f.linkTo(this); $(this).css('opacity', 0.75);})
+			.each(function () { 
+				var pick = $(this).parent().parent().children('.picker');
+				$.farbtastic(pick).linkTo(this);$(this).css('opacity', 0.75);})
+				
 			.focus(function() {
 				if (selected) {
 					$(selected).css('opacity', 0.75).removeClass('colorwell-selected');
 				}
-				f.linkTo(this);
-				p.css('opacity', 1);
+				var pick = $(this).parent().parent().children('.picker');
+				$.farbtastic(pick).linkTo(this);
+				pick.css('opacity', 1);
 				$(selected = this).css('opacity', 1).addClass('colorwell-selected');
 		});
 	});
