@@ -21,12 +21,6 @@
 	<li>comptage des visites par squelette.</li>
 	</ul>
 	</description>
-	<options> <!-- fichier charge a chaque hit -->
-	mes_options_pb_visites.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	mes_fonctions_pb_visites.php
-	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
