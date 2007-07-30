@@ -52,9 +52,12 @@ function TableMatieres_AjouterAncres($texte) {
 }
 
 function TableMatieres_LienRetour($texte, $affiche_table = false) {
+	$_RETOUR_TDM = preg_replace(',<img,i',
+	'<img alt="'._T('tdm:retour_table_matiere').'" title="'._T('tdm:retour_table_matiere').'"',
+	_RETOUR_TDM);
 	return $affiche_table ?
 		recuperer_fond('modeles/table_matieres') :
-		preg_replace('/@@RETOUR_TDM@@/S', _RETOUR_TDM, $texte);
+		preg_replace('/@@RETOUR_TDM@@/S', $_RETOUR_TDM, $texte);
 }
 
 function balise_TABLE_MATIERES_dist($p) {
