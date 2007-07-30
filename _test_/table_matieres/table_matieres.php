@@ -42,7 +42,7 @@ function TableMatieres_AjouterAncres($texte) {
 	static $texte_ancre;
 	if($premier_passage == false) {
 		$premier_passage = true;
-		$texte = echappe_html($texte, 'TDM', true, ',<(code|cadre)'
+		$texte = echappe_html($texte, 'TDM', true, ',<(code|cadre|math)'
 			. '(\s[^>]*)?'
 			. '>(.*)</\1>,UimsS');
 		$texte = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte);
