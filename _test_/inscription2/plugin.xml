@@ -45,8 +45,4 @@
 		<nom>affiche_milieu</nom>
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>
-		<pipeline>
-		<nom>header_prive</nom>
-		<inclure>inscription2_ajouter_onglets.php</inclure>
-	</pipeline>
 </plugin>
