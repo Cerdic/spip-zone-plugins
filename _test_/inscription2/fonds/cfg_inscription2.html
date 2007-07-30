@@ -12,11 +12,20 @@
 <script type="text/javascript">
 /*jQuery tabs*/
 $(document).ready(function() {
-	$('#container-1').tabs({ fxAutoHeight: true, fxFade: true, fxSpeed: 'fast', onClick:function(a,b,c){
-	d = $('#legend') ;
-	$(b).append(d);
-	} });
+	$('#container-1').tabs({ fxAutoHeight: true, fxFade: true, fxSpeed: 'fast', onShow:legend_it });
+   	d = $('#legend') ;
+    $('#fragment-1').append(d);
 });
+
+
+
+function legend_it(a,b,c){
+	d = $('#legend') ;
+	console.log($(a).attr('href'));
+	if( $(a).attr('href') != '#fragment-4')
+	$(b).append(d);
+	}
+
 </script>
 
 <form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
