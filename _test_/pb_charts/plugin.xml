@@ -28,6 +28,7 @@
 		<p>Le type de graphique (dans l'exemple: "Column") peut &ecirc;tre choisi parmi tous les types autoris&eacute;s par <a href="http://www.maani.us/xml_charts/">XML/SWF Charts</a>.</p>
 	</multi>
 	</description>
+	<lien>http://www.paris-beyrouth.org/Le-plugin-PB-Charts</lien> <!-- URI de documentation -->
 	<prefix> 
 	pb_charts
 	</prefix>
