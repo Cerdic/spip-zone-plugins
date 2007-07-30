@@ -99,7 +99,7 @@ function Inscription2_header_prive($texte){
 	}
 	$js = find_in_path('javascript/jquery.tabs.pack.js');
 	
-    $texte .= "<link rel='stylesheet' type='text/css' href='$css' /> <script type='text/javascript' src='$js'>";
+    $texte .= "<link rel='stylesheet' type='text/css' href='$css' /> <script type='text/javascript' src='$js'></script>";
 	return $texte;
 }
 				
