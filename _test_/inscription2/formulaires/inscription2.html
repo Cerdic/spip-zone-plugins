@@ -22,7 +22,7 @@
 ]
 
 
-[(#CONFIG{inscription2/categorie}|=={on}|?{' ', ''})
+[(#EVAL{defined('_DIR_PLUGIN_ASSOCIATION')}|?{' ',''})
 	#INCLURE{fond=formulaires/inscription2_form_asso}
 ]
 
