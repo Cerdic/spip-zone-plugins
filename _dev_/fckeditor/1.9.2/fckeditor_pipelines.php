@@ -70,7 +70,26 @@ function fckeditor_header_prive($flux) {
 			oFCKeditor.ReplaceTextarea();
 		';
 	}	
-	if(!empty($code)) {
+	if($exec=='rubriques_edit') {
+		
+		$code='
+			
+			$("#texte").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"BreveToggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("#texte").val()+"</textarea></div>");
+			$(".spip_barre").before("<input type=\"button\" value=\"'._T("fckeditor:texte_editeur_avance").'\" id=\"fckeditor_switch\" onclick=\"RubriqueToggle()\" />");
+			$("#texte").css("display", "none");
+			$("#fckeditor_switch").css("display", "none");
+			$(document.forms["formulaire"]).bind("submit", BrevePrepareSave);
+			$(".spip_barre").css("display", "none");
+
+			var oFCKeditor = new FCKeditor(\'fckeditor_data\' , "100%", "300", "Spip") ;
+			oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/fckeditor/" ;
+			oFCKeditor.Config["CustomConfigurationsPath"] = "'._DIR_PLUGIN_ABS_FCKEDITOR.'/spip_fck/fckconfig.php?path='._DIR_PLUGIN_ABS_FCKEDITOR.'&" + ( new Date() * 1 ) ;
+			oFCKeditor.Config[ "AutoDetectLanguage" ] = false ;
+			oFCKeditor.Config[ "DefaultLanguage" ] = "'.$langue.'" ;
+         oFCKeditor.ToolbarSet = "BarreRubrique";			
+			oFCKeditor.ReplaceTextarea();
+		';
+	}	if(!empty($code)) {
 		$code='
 			<script type="text/javascript" src="'._DIR_PLUGIN_FCKEDITOR.'fckeditor/fckeditor.js"></script>
 			<script type="text/javascript" src="'._DIR_PLUGIN_FCKEDITOR.'spip_fck/switch.js"></script>

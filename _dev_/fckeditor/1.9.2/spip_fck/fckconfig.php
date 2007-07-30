@@ -15,7 +15,6 @@
 	 FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
     FCKConfig.Plugins.Add( "tablecommands", null, "' . $_GET['path'] . '/fckeditor/editor/plugins/" ) ;		
     FCKConfig.Plugins.Add( "notebasdepage", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
-    //FCKConfig.Plugins.Add( "geshighlighter", "en,nl,fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
     FCKConfig.Plugins.Add( "coloration", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
 		
 		
@@ -54,6 +53,22 @@
 			["FitWindow","-","About","HelpPanel"]
 		] ;
 
+		FCKConfig.ToolbarSets["BarreRubrique"] = [
+			["Source","-","Save","NewPage","Preview","-","Templates"],
+			["Undo","Redo","-","Find","Replace","-","SelectAll","RemoveFormat"],
+			["Cut","Copy","Paste","PasteText","PasteWord","-","Print","SpellCheck"],
+			"/",
+			["Bold","Italic","Underline","StrikeThrough","-","Subscript","Superscript"],
+			["OrderedList","UnorderedList","-","Outdent","Indent"],
+			["JustifyLeft","JustifyCenter","JustifyRight","JustifyFull"],
+			["Link","Unlink","Anchor"],
+			"/",
+			["Style","FontFormat","FontName","FontSize"],
+			["Image","Table","Rule","Smiley","SpecialChar"],
+			["TextColor","BGColor"],
+			["FitWindow","-","About","HelpPanel"]
+		] ;
+		
 		// The following value defines which File Browser connector and Quick Upload 
 		// "uploader" to use. It is valid for the default implementaion and it is here
 		// just to make this configuration file cleaner. 
