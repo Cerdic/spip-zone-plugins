@@ -1,20 +1,20 @@
 	<fieldset>
 		<legend><a name="flp"></a>Configuration de flash video player</legend>
-		<p><label><strong><:xspf:size_anim:></strong><br/>
-			<p><:xspf:width:>&nbsp;<input type="text" name="flpwidth" id="flpwidth" value="#CONFIG{xspf/flpwidth}" /><br /><small><:xspf:desc_width:></small></p>
-			<p><:xspf:height:>&nbsp;<input type="text" name="flpheigth" id="flpheigth" value="#CONFIG{xspf/flpheigth}" /><br /><small><:xspf:desc_height:></small></p>
+		<p><label><strong><:xspf:size_anim:></strong>
+			<p><:xspf:width:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="flpwidth" id="flpwidth" value="#CONFIG{xspf/flpwidth}" /><br /><small><:xspf:desc_width:></small></p>
+			<p><:xspf:height:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" id="flpheigth" value="#CONFIG{xspf/flpheigth}" /><br /><small><:xspf:desc_height:></small></p>
 		</label></p>
 		<p><label><strong><:xspf:display_size:></strong>
-			<p><:xspf:displaywidth:>&nbsp;<input type="text" name="flpdisplaywidth" id="flpdisplaywidth" value="#CONFIG{xspf/flpdisplaywidth}" /><br /><small><:xspf:desc_displaywidth:></small></p>
-			<p><:xspf:displayheight:>&nbsp;<input type="text" name="flpdisplayheight" id="flpdisplayheight" value="#CONFIG{xspf/flpdisplayheight}" /><br /><small><:xspf:desc_displayheight:></small></p>
+			<p><:xspf:displaywidth:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="flpdisplaywidth" id="flpdisplaywidth" value="#CONFIG{xspf/flpdisplaywidth}" /><br /><small><:xspf:desc_displaywidth:></small></p>
+			<p><:xspf:displayheight:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="flpdisplayheight" id="flpdisplayheight" value="#CONFIG{xspf/flpdisplayheight}" /><br /><small><:xspf:desc_displayheight:></small></p>
 		</label></p>
 		
 		<div id="picker2" class="picker" style="float:right; padding:3px;"></div>
 				
 		<p><label><strong><:xspf:color_anim:></strong>
-			<p><:xspf:backcolor:>&nbsp;<input type="text" name="flpbackcolor" id="flpbackcolor" value="[(#CONFIG{xspf/flpbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_backcolor:></small></p>
-			<p><:xspf:frontcolor:>&nbsp;<input type="text" name="flpfrontcolor" id="flpfrontcolor" value="[(#CONFIG{xspf/flpfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_frontcolor:></small></p>
-			<p><:xspf:lightcolor:>&nbsp;<input type="text" name="flplightcolor" id="flplightcolor" value="[(#CONFIG{xspf/flplightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" /><br /><small><:xspf:desc_lightcolor:></small></p>
+			<p><:xspf:backcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="flpbackcolor" id="flpbackcolor" value="[(#CONFIG{xspf/flpbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_backcolor:></small></p>
+			<p><:xspf:frontcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="flpfrontcolor" id="flpfrontcolor" value="[(#CONFIG{xspf/flpfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_frontcolor:></small></p>
+			<p><:xspf:lightcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="flplightcolor" id="flplightcolor" value="[(#CONFIG{xspf/flplightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" /><br /><small><:xspf:desc_lightcolor:></small></p>
 		</label></p>
 				
 		<label for="flprepeat"><strong><:xspf:repeat:></strong></label>
@@ -32,11 +32,11 @@
 		</select><br /><small><:xspf:desc_autostart:>Lecture automatique au chargement de la playlist</small>
 		
 		<p><label><strong><:xspf:bufferlength:></strong><br/>
-			<input type="text" name="bufferlength" id="bufferlength" value="#CONFIG{xspf/bufferlength}" /> <:number:> <br /><small><:xspf:desc_bufferlength:></small>
+			<input type="text" class="forml" style="width:4em;display:inline" name="bufferlength" id="bufferlength" value="#CONFIG{xspf/bufferlength}" /> <:number:> <br /><small><:xspf:desc_bufferlength:></small>
 		</label></p>
 		
 		<p><label><strong><:xspf:captions:></strong><br/>
-			<input type="text" name="captions" id="captions" value="#CONFIG{xspf/captions}" /> URL <br /><small><:xspf:desc_captions:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="captions" id="captions" value="#CONFIG{xspf/captions}" /> URL <br /><small><:xspf:desc_captions:></small>
 		</label></p>
 		
 		<label for="usecaptions"><strong><:xspf:usecaptions:></strong>
@@ -104,11 +104,11 @@
 		</select></label>&nbsp;&nbsp;<small><:xspf:desc_showdownload:></small>
 		
 		<p><label><strong><:xspf:link:></strong>
-			<input type="text" name="flplink" id="flplink" value="#CONFIG{xspf/flplink}" /> URL <br /><small><:xspf:desc_link:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="flplink" id="flplink" value="#CONFIG{xspf/flplink}" /> URL <br /><small><:xspf:desc_link:></small>
 		</label><p/>
 		
 		<p><label><strong><:xspf:linktarget:></strong><br/>
-			<input type="text" name="flplinktarget" id="flplinktarget" value="#CONFIG{xspf/flplinktarget}" /> frame <br /><small><:xspf:desc_linktarget:></small>
+			<input type="text" class="forml" style="width:4em;display:inline" name="flplinktarget" id="flplinktarget" value="#CONFIG{xspf/flplinktarget}" /> frame <br /><small><:xspf:desc_linktarget:></small>
 		</label></p>
 		
 		<label for="flplinkfromdisplay"><strong><:xspf:linkfromdisplay:></strong>
@@ -118,7 +118,7 @@
 		</select></label>&nbsp;&nbsp;<small><:xspf:desc_linkfromdisplay:></small>
 		
 		<p><label><strong><:xspf:audio:></strong><br/>
-			<input type="text" name="flpaudio" id="flpaudio" value="#CONFIG{xspf/flpaudio}" /> URL <br /><small><:xspf:desc_audio:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="flpaudio" id="flpaudio" value="#CONFIG{xspf/flpaudio}" /> URL <br /><small><:xspf:desc_audio:></small>
 		</label></p>
 		
 		<label for="flpuseaudio"><strong><:xspf:useaudio:></strong>

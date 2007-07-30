@@ -1,20 +1,20 @@
 	<fieldset>
 		<legend><a name="rotator"></a>Configuration de rotator</legend>
 		<p><label><strong><:xspf:size_anim:></strong><br/>
-			<p><:xspf:width:>&nbsp;<input type="text" name="rotwidth" id="rotwidth" value="#CONFIG{xspf/rotwidth}" /><br /><small><:xspf:desc_width:></small></p>
-			<p><:xspf:height:>&nbsp;<input type="text" name="rotheigth" id="rotheigth" value="#CONFIG{xspf/rotheigth}" /><br /><small><:xspf:desc_height:></small></p>
+			<p><:xspf:width:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="rotwidth" id="rotwidth" value="#CONFIG{xspf/rotwidth}" /><br /><small><:xspf:desc_width:></small></p>
+			<p><:xspf:height:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="rotheigth" id="rotheigth" value="#CONFIG{xspf/rotheigth}" /><br /><small><:xspf:desc_height:></small></p>
 		</label></p>
 		<p><label><strong><:xspf:display_size:></strong>
-			<p><:xspf:displaywidth:>&nbsp;<input type="text" name="rotdisplaywidth" id="rotdisplaywidth" value="#CONFIG{xspf/rotdisplaywidth}" /><br /><small><:xspf:desc_displaywidth:></small></p>
-			<p><:xspf:displayheight:>&nbsp;<input type="text" name="rotdisplayheight" id="rotdisplayheight" value="#CONFIG{xspf/rotdisplayheight}" /><br /><small><:xspf:desc_displayheight:></small></p>
+			<p><:xspf:displaywidth:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="rotdisplaywidth" id="rotdisplaywidth" value="#CONFIG{xspf/rotdisplaywidth}" /><br /><small><:xspf:desc_displaywidth:></small></p>
+			<p><:xspf:displayheight:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="rotdisplayheight" id="rotdisplayheight" value="#CONFIG{xspf/rotdisplayheight}" /><br /><small><:xspf:desc_displayheight:></small></p>
 		</label></p>
 		
 		<div id="picker3" class="picker" style="float:right; padding:3px;"></div>
 				
 		<p><label><strong><:xspf:color_anim:></strong>
-			<p><:xspf:backcolor:>&nbsp;<input type="text" name="rotbackcolor" id="rotbackcolor" value="[(#CONFIG{xspf/rotbackcolor}|sinon{#FFFFFF})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_backcolor:></small></p>
-			<p><:xspf:frontcolor:>&nbsp;<input type="text" name="rotfrontcolor" id="rotfrontcolor" value="[(#CONFIG{xspf/rotfrontcolor}|sinon{#000000})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_frontcolor:></small></p>
-			<p><:xspf:lightcolor:>&nbsp;<input type="text" name="rotlightcolor" id="rotlightcolor" value="[(#CONFIG{xspf/rotlightcolor}|sinon{#CC0000})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_lightcolor:></small></p>
+			<p><:xspf:backcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="rotbackcolor" id="rotbackcolor" value="[(#CONFIG{xspf/rotbackcolor}|sinon{#FFFFFF})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_backcolor:></small></p>
+			<p><:xspf:frontcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="rotfrontcolor" id="rotfrontcolor" value="[(#CONFIG{xspf/rotfrontcolor}|sinon{#000000})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_frontcolor:></small></p>
+			<p><:xspf:lightcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="rotlightcolor" id="rotlightcolor" value="[(#CONFIG{xspf/rotlightcolor}|sinon{#CC0000})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_lightcolor:></small></p>
 		</label></p>
 		
 		<label for="rotrotate"><strong><:rotatetime:></strong>
@@ -96,11 +96,11 @@
 		</label><p/>
 		
 		<p><label><strong><:xspf:link:></strong>
-			<input type="text" name="rotlink" id="rotlink" value="#CONFIG{xspf/rotlink}" /> URL <br /><small><:xspf:desc_link:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="rotlink" id="rotlink" value="#CONFIG{xspf/rotlink}" /> URL <br /><small><:xspf:desc_link:></small>
 		</label><p/>
 		
 		<p><label><strong><:xspf:linktarget:></strong><br/>
-			<input type="text" name="rotlinktarget" id="rotlinktarget" value="#CONFIG{xspf/rotlinktarget}" /> frame <br /><small><:xspf:desc_linktarget:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="rotlinktarget" id="rotlinktarget" value="#CONFIG{xspf/rotlinktarget}" /> frame <br /><small><:xspf:desc_linktarget:></small>
 		</label></p>
 		
 		<br /><br /><label for="rotlinkfromdisplay"><strong><:xspf:linkfromdisplay:></strong>
@@ -111,7 +111,7 @@
 		</label>
 		
 		<p><label><strong><:xspf:audio:></strong><br/>
-			<input type="text" name="rotaudio" id="rotaudio" value="#CONFIG{xspf/rotaudio}" /> URL <br /><small><:xspf:desc_audio:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="rotaudio" id="rotaudio" value="#CONFIG{xspf/rotaudio}" /> URL <br /><small><:xspf:desc_audio:></small>
 		</label></p>
 		
 		<br /><br /><label for="rotuseaudio"><strong><:xspf:useaudio:></strong>

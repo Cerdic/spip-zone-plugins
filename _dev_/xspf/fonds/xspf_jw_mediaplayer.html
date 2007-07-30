@@ -2,24 +2,23 @@
 		<legend>Configuration de mediaplayer</legend>
 		
 		<p><label><strong><:xspf:size_anim:></strong><br/>
-			<p><:xspf:width:>&nbsp;<input type="text" name="mplwidth" id="mplwidth" value="#CONFIG{xspf/mplwidth}" /><br /><small><:xspf:desc_width:></small></p>
-			<p><:xspf:height:>&nbsp;<input type="text" name="mplheigth" id="mplheigth" value="#CONFIG{xspf/mplheigth}" /><br /><small><:xspf:desc_height:></small></p>
+			<p><:xspf:width:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mplwidth" id="mplwidth" value="#CONFIG{xspf/mplwidth}" />&nbsp;px<br /><small><:xspf:desc_width:></small></p>
+			<p><:xspf:height:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mplheigth" id="mplheigth" value="#CONFIG{xspf/mplheigth}" />&nbsp;px<br /><small><:xspf:desc_height:></small></p>
 		</label></p>
 		
 		<p><label><strong><:xspf:display_size:></strong>
-			<p><:xspf:displaywidth:>&nbsp;<input type="text" name="mpldisplaywidth" id="mpldisplaywidth" value="#CONFIG{xspf/mpldisplaywidth}" /><br /><small><:xspf:desc_displaywidth:></small></p>
-			<p><:xspf:displayheight:>&nbsp;<input type="text" name="mpldisplayheight" id="mpldisplayheight" value="#CONFIG{xspf/mpldisplayheight}" /><br /><small><:xspf:desc_displayheight:></small></p>
+			<p><:xspf:displaywidth:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mpldisplaywidth" id="mpldisplaywidth" value="#CONFIG{xspf/mpldisplaywidth}" />&nbsp;px<br /><small><:xspf:desc_displaywidth:></small></p>
+			<p><:xspf:displayheight:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mpldisplayheight" id="mpldisplayheight" value="#CONFIG{xspf/mpldisplayheight}" />&nbsp;px<br /><small><:xspf:desc_displayheight:></small></p>
 		</label></p>
 		
 		<div id="picker1" class="picker" style="float:right; padding:3px;"></div>
 	
 		<p><label><strong><:xspf:color_anim:></strong>
-			<p><:xspf:backcolor:>&nbsp;<input type="text" class="formo" name="mplbackcolor" id="mplbackcolor" value="[(#CONFIG{xspf/mplbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" /> <br /><small><:xspf:desc_backcolor:></small></p>
-			<p><:xspf:frontcolor:>&nbsp;<input type="text" name="mplfrontcolor" id="mplfrontcolor" value="[(#CONFIG{xspf/mplfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_frontcolor:></small></p>
-			<p><:xspf:lightcolor:>&nbsp;<input type="text" name="mpllightcolor" id="mpllightcolor" value="[(#CONFIG{xspf/mpllightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" /><br /><small><:xspf:desc_lightcolor:></small></p>
+			<p><:xspf:backcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="mplbackcolor" id="mplbackcolor" value="[(#CONFIG{xspf/mplbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" /> <br /><small><:xspf:desc_backcolor:></small></p>
+			<p><:xspf:frontcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="mplfrontcolor" id="mplfrontcolor" value="[(#CONFIG{xspf/mplfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_frontcolor:></small></p>
+			<p><:xspf:lightcolor:>&nbsp;<input type="text" class="forml" style="width:100px;display:inline" name="mpllightcolor" id="mpllightcolor" value="[(#CONFIG{xspf/mpllightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" /><br /><small><:xspf:desc_lightcolor:></small></p>
 		</label></p>
 		
-				
 		<label for="mplrepeat"><strong><:xspf:repeat:></strong>
 		<select name="mplrepeat">
 			<option [(#CONFIG{xspf/mplrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
@@ -99,11 +98,11 @@
 		</label><p/>
 		
 		<p><label><strong><:xspf:link:></strong>
-			<input type="text" name="mpllink" id="mpllink" value="#CONFIG{xspf/mpllink}" /> URL <br /><small><:xspf:desc_link:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="mpllink" id="mpllink" value="#CONFIG{xspf/mpllink}" /> URL <br /><small><:xspf:desc_link:></small>
 		</label><p/>
 		
 		<p><label><strong><:xspf:linktarget:></strong><br/>
-			<input type="text" name="mpllinktarget" id="mpllinktarget" value="#CONFIG{xspf/mpllinktarget}" /> frame <br /><small><:xspf:desc_linktarget:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="mpllinktarget" id="mpllinktarget" value="#CONFIG{xspf/mpllinktarget}" /> frame <br /><small><:xspf:desc_linktarget:></small>
 		</label></p>
 		
 		<label for="mpllinkfromdisplay"><strong><:xspf:linkfromdisplay:></strong>
@@ -114,7 +113,7 @@
 		</label>
 		
 		<p><label><strong><:xspf:audio:></strong><br/>
-			<input type="text" name="mplaudio" id="mplaudio" value="#CONFIG{xspf/mplaudio}" /> URL <br /><small><:xspf:desc_audio:></small>
+			<input type="text" class="forml" style="width:200px;display:inline" name="mplaudio" id="mplaudio" value="#CONFIG{xspf/mplaudio}" /> URL <br /><small><:xspf:desc_audio:></small>
 		</label></p>
 		
 		<label for="mpluseaudio"><strong><:xspf:useaudio:></strong>
