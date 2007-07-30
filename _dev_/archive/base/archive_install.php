@@ -1,11 +1,14 @@
 <?php
 
 include_spip('base/abstract_sql');
+include_spip('inc/plugin');
 
 //configure la base spip et les metas
 function archive_install($action){
 	//version en cours
-	$archive_version = 0.6;
+	//recupére les informations de plugin.xml
+	$infos = plugin_get_infos('Archive');
+	$archive_version = $infos['version'];
 	
    switch ($action){
        case 'test':
