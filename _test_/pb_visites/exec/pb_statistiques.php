@@ -979,7 +979,6 @@ function afficher_duree($duree) {
 }
 
 
-$GLOBALS["largeur_charts"] = 480;
 
 // Carte du monde
 
@@ -1223,6 +1222,135 @@ $GLOBALS["largeur_charts"] = 480;
 	echo "</table>";
 
 
+
+// 8 DERNIERS JOURS
+
+$GLOBALS["largeur_charts"] = 240;
+$GLOBALS["hauteur_charts"] = 180;
+
+
+
+	if ($pb_charts) {
+
+		if ($le_pays) {
+			$table = "spip_pb_visites_pays";
+			$where = "pays='$le_pays'";		
+		} else {
+			$table = "spip_pb_visites";
+			$table_ref = "spip_referers";
+			$where = "0=0";
+		}
+		$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites, visites_utiles, pages_vues, pages_vues_utiles, duree FROM $table WHERE $where ORDER BY date DESC LIMIT 0, 8");
+
+		$visites = array();
+		$pages_vues = array();
+		$pv_visites = array();
+		$duree = array();
+		while ($row = spip_fetch_array($result)) {
+			$date = $row["date_unix"];
+			$visites["$date"] = $row["visites"];
+			$pages_vues["$date"] = $row["pages_vues"];
+			if ($row["visites"] > 0) $pv_visites["$date"] = $row["pages_vues"] / $row["visites"];
+			if ($row["visites_utiles"] > 0) $duree["$date"] = ($row["duree"] / $row["visites_utiles"]) / 60;
+		}
+
+		ksort($visites);
+		$log = $visites;
+		foreach ($log as $key => $value) {
+
+			$ce_jour = date("d", $key);
+			$afficher = $ce_jour;
+		
+			$ligne0 .= "|$afficher";
+			$ligne1 .= "|".($value);
+		
+		}
+		
+		$ligne0 = "|$ligne0|\n";
+		$ligne1 = "|Visites$ligne1|\n";
+		
+		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"column\">\n$ligne0$ligne1\n</chart>")."</div>";
+	
+		$ligne0 = "";
+		$ligne1 = "";
+		$ligne2 = "";
+
+
+
+		ksort($pages_vues);
+		$log = $pages_vues;
+		foreach ($log as $key => $value) {
+
+			$ce_jour = date("d", $key);
+			$afficher = $ce_jour;
+		
+			$ligne0 .= "|$afficher";
+			$ligne1 .= "|".($value);
+		
+		}
+		
+		$ligne0 = "|$ligne0|\n";
+		$ligne1 = "|Pages vues$ligne1|\n";
+		
+		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"column\">\n$ligne0$ligne1\n</chart>")."</div>";
+	
+		$ligne0 = "";
+		$ligne1 = "";
+		$ligne2 = "";
+
+
+
+		ksort($pv_visites);
+		$log = $pv_visites;
+		foreach ($log as $key => $value) {
+
+			$ce_jour = date("d", $key);
+			$afficher = $ce_jour;
+		
+			$ligne0 .= "|$afficher";
+			$ligne1 .= "|".($value);
+		
+		}
+		
+		$ligne0 = "|$ligne0|\n";
+		$ligne1 = "|PV / V$ligne1|\n";
+		
+		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"column\">\n$ligne0$ligne1\n</chart>")."</div>";
+	
+		$ligne0 = "";
+		$ligne1 = "";
+		$ligne2 = "";
+
+
+
+
+		ksort($duree);
+		$log = $duree;
+		foreach ($log as $key => $value) {
+
+			$ce_jour = date("d", $key);
+			$afficher = $ce_jour;
+		
+			$ligne0 .= "|$afficher";
+			$ligne1 .= "|".($value);
+		
+		}
+		
+		$ligne0 = "|$ligne0|\n";
+		$ligne1 = "|Durée / V (min)$ligne1|\n";
+		
+		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"column\">\n$ligne0$ligne1\n</chart>")."</div>";
+	
+		$ligne0 = "";
+		$ligne1 = "";
+		$ligne2 = "";
+
+		echo "<div style='clear: left;'></div>";
+	}
+	
+
+$GLOBALS["largeur_charts"] = 480;
+$GLOBALS["hauteur_charts"] = 300;
 
 
 
