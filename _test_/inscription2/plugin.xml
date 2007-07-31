@@ -12,7 +12,7 @@
 		test
 	</etat>
 	<description>
-		Inscription au site personnalis&eacute; ajout des champs complemmentaires
+		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires
 		<h4><a href="?exec=cfg&amp;cfg=inscription2">Configuration</a></h4>
 	</description>
 	<icon>images/inscription2.png</icon>
