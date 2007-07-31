@@ -4,6 +4,8 @@
 // Traducido al español, JSJ septiembre 2006
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+'aide_contextuelle'=>'Ayuda contextual',
+'activer_barre_typo'=>'Activar la barra tipogr&acute;fica',
 'adresse_invalide'=>"Esta direcci&oacute;n de correo no es v&eacute;lida.",
 'ajouter_champ' => "A&ntilde;adir un campo",
 'ajouter_champ_type' => "Crear un campo de tipo&nbsp;:",
@@ -18,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'boite_info' => "Haga clic sobre un formulario para modificarlo o verlo antes de eliminarlo.",
 
+'champ_table_jointure_type' => "Tipo de tabla para los junturas",
 'champ_type_ligne'=>"l&iacute;nea de texto",
 'champ_type_texte'=>"texto",
 'champ_type_url'=>"direcci&oacute;n del sitio Web",
@@ -26,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'champ_type_multiple'=>"opci&oacute;n m&uacute;ltiple",
 'champ_type_fichier'=>"archivo a subir (upload)",
 'champ_type_mot'=>"palabras clave",
+'champ_type_joint'=>'juntura con otra tabla',
 'champ_type_separateur'=>"Nuevo bloque de preguntas",
 'champ_type_textestatique'=>"Mensaje de explicaci&oacute;n",
 'champ_email_details'=>"Por favor, escriba una direcci&oacute;n de correo v&aacute;lida (como minombre@proveedor.com).",
@@ -42,27 +46,49 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'changer_choix_unique' => "Cambiar a elecci&oacute;n &uacute;nica",
 'choisir_email' => "Elegir el email en funci&oacute;n de",
 'confirmer_reponse' => "Confirmar la respuesta por mail con:",
+'confirm_supprimer_champ' => 'Est&aacute;s de acuerdo con suprimir el campo \'@champ@\' ?',
+'confirm_supprimer_donnee' => 'Est&aacute;s de acuerdo con  suprimir el dato \'@donnee@\' ?',
+'confirm_vider_table' => 'Est&aacute;s de acuerdo con vaciar el contenido de la tabla \'@table@\' ?',
+'confirmer_reponse' => "Enviar un email de acuse de recibo a :",
 'csv_classique' => "CSV cl&aacute;sico (,)",
 'csv_excel' => "CSV para Excel (;)",
 'csv_tab' => "CSV con tabulaciones",
 
 'date' => "Fecha",
+'date_invalide' => "El formato de la fecha es inv&aacute;lido",
 'dupliquer' => "Duplicar",
+'donnees_modifiable'=>"Datos modificables por el usuario.",
+'donnees_multiple'=>"Permitir m&uacute;ltiples respuestas.",
+'donnees_nonmodifiable'=>"Datos no modificables por el usuario.",
+'donnees_nonmultiple'=>"Respuesta &uacute;nica.",
+'donnees_pub'=>"Datos públicos. Los datos registrados serán accesibles a los visitantes del sitio",
+'donnees_prot'=>"Datos privados. Los datos registrados s&oacute;lo serán accesibles desde la interfáz privada.",
 
 'echec_upload'=>"Ha fallado la transferencia del archivo.",
+'editer'=>'Editar',
 'edit_champ_obligatoire' => 'es obligatorio rellenar este campo',
 'email_independant' => 'Email independiente de la respuesta',
+'exporter'=>'Exportar',
 'exporter_article' => 'Exportar a un art&iacute;culo',
 
 'fichier_trop_gros'=>"Este archivo es demasiado grande.",
 'fichier_type_interdit'=>"Este tipo de archivo est&aacute; prohibido.",
 'form_erreur' => "Error&nbsp;:",
+'formulaire' => "Formulario",
 'format_fichier' => "Formato del fichero&nbsp;:",
 'formulaire_aller' => "Ir al formulario ",
 'formulaires_sondages' => "Formularios y encuestas",
 'formulaires_copie' => "Copia de @nom@", 
+'format_liste_ou_radio' => 'Formato de la lista',
+'format_liste' => 'desplegable',
+'format_radio' => 'botones tipo radio',
+'html_wrapper'=> 'Encapsular los campos dentro del código html',
 
+'icone_ajouter_donnees' => "Añadir respuestas",
+'info_articles_lies_donnee' => 'Los artículos vinculados',
 'icone_creer_formulaire' => "Crear un nuevo formulario",
+'icone_creer_table' => "Crear un nuevo formulario",
+'importer_form' => "Importar un formulario",
 'info_apparence' => "He aqu&iacute; una previsualizaci&oacute;n del formulario tal como aparecer&aacute; a los visitantes del sitio p&uacute;blico.",
 'info_champs_formulaire' => "Aqu&iacute; se crean y modifican los campos que luego podr&aacute;n rellenar los visitantes.",
 'info_obligatoire_02' => '[Obligatorio]',
@@ -71,6 +97,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_supprimer_formulaire_reponses' => "Hay respuestas a este formulario. ¿Desea realmente eliminarlo?",
 
 'liste_choix' => "Lista de las opciones propuestas",
+'lien_retirer_donnee_liee' =>"Retirar el vínculo",
+'lien_retirer_donnee_liante' =>"Retirar el vínculo",
+'lier_articles' => "Permitir asociar los datos a los artículos",
+'lier_documents' => "Permitir adjuntar documentos a los datos",
+
+'moderation_donnees' => 'Validar los datos antes de la publicación :',
+'modifiable_donnees'=>"Datos modificables desde el espacio público:",
+'multiple_donnees'=>"Introducción de los datos desde el espacio público:",
 
 'nombre_reponses'=>"@nombre@ respuestas",
 'nouveau_champ' => "Nuevo campo",
@@ -78,10 +112,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveau_formulaire' => "Nuevo formulario ",
 
 'page'=>"P&aacute;gina",
-'pas_mail_confirmation'=>"No hay mail de confirmaci&oacute;n",
+'pas_mail_confirmation'=>"No hay email de confirmaci&oacute;n",
 'probleme_technique'=>"Problema t&eacute;cnico. Su respuesta no ha podido ser tomada en cuenta.",
 'probleme_technique_upload'=>"Problema t&eacute;cnico. Ha fallado la transferencia del archivo.",
+'publication_donnees' => 'Publicación de datos',
 
+'rang' => 'Fila',
 'remplir_un_champ'=>"Por favor, complete al menos un campo.",
 'reponse_enregistree'=>"Su respuesta ha sido registrada.",
 'resultats' => 'Resultados: ',
@@ -89,13 +125,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reponse_depuis' => 'Desde la p&aacute;gina ', 
 'reponse_envoyee' => 'Respuesta enviada el ',
 'reponse_envoyee_a' => 'a', 
+'reponse_retrovez' => "Encuentre esta respuesta en la interfaz de administración :",
 'reponses' => 'respuestas',
 
 'site_introuvable'=>"No se ha encontrado este sitio.",
-'sondage'=>"Encuesta",
 'sondage_non'=>" Este formulario  no es una encuesta",
-'sondage_pub'=>"Este formulario es una encuesta p&uacute;blica. Los resultados ser&aacute;n accessibles para los visitantes del sitio.",
-'sondage_prot'=>"Este formulario es un encuesta protegida. Los resultados no ser&aacute;n accessibles mas que en la parte privada del sitio.",
+'sondage_oui'=>"Este formulario es una encuesta.",
+'sondage_deja_repondu'=>"Ud. ya ha respondido a esta encuesta.",
 'suivi_formulaire' => "Seguimiento del formulario ",
 'suivi_formulaires' => "Seguimiento de los formularios",
 'suivi_reponses' => "Seguimiento de las respuestas",
@@ -103,21 +139,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'supprimer_choix' => "suprimir esta opci&oacute;n",
 'supprimer_formulaire' => "Suprimir este formulario ",
 'supprimer_reponse' => "Suprimir esta respuesta",
+'supprimer' => 'Suprimir',
 
+
+'tables'=> 'Tablas',
 'taille_max' => "Tama&ntilde;o m&aacute;ximo (en kb)",
 'telecharger' => "Descargar",
 'telecharger_reponses' => " Descargar las respuestas",
 'titre_formulaire' => "T&iacute;tulo del formulario ",
 'total_votes' => "Total de votos",
 'tous_formulaires' => "Todos los formularios",
+'toutes_tables' => "Todas las tablas",
 'tous_sondages_proteges' => "Todas las encuestas protegidas",
 'tous_sondages_public' => "Todas las encuestas p&uacute;blicas",
+'tous_sondages' => "Todas las encuestas",
+'type_form'=>"Tipo de formulario",
+
+
 
 'valider'=>"Aceptar",
 
+'vider' => 'Vaciar',
 'voir_resultats'=>"Ver los resultados",
 'verif_web' => "comprobar la existencia del sitio Web",
 'voir_article'=>"Ver el art&iacute;culo",
+
 
 );
 
