@@ -75,7 +75,7 @@ cs_log("[#$rand]  -- lecture metas");
 	}
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$cs_metas_pipelines = unserialize($GLOBALS['meta']['tweaks_pipelines']);
-cs_log("[#$rand]  -- cs_metas_pipelines = ".join(', ',array_keys($cs_metas_pipelines)));
+cs_log("[#$rand]  -- cs_metas_pipelines = ".is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):'');
 		$actifs = unserialize($GLOBALS['meta']['tweaks_actifs']);
 		// definition des constantes attestant qu'un outil est bien actif : define('_CS_monoutil', 'oui');
 		foreach($actifs as $nom=>$actif) if($actif['actif']) define('_CS_'.$nom, 'oui');
