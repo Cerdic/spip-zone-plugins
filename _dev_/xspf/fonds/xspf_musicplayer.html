@@ -1,27 +1,27 @@
 	<fieldset>
 		<legend><a name="msc"></a>Configuration de musicplayer</legend>
-		<p><strong><:xspf:size_anim:></strong><br/>
-			<p><label><:xspf:width:></label><input type="text" class="forml" style="width:4em;display:inline" name="mscwidth" id="mscwidth" value="#CONFIG{xspf/mscwidth}" />&nbsp;px</p>
-			<p><label><:xspf:height:></label><input type="text" class="forml" style="width:4em;display:inline" name="mscheigth" id="mscheigth" value="#CONFIG{xspf/mscheigth}" />&nbsp;px</p>
-		</p>
+		
+		<p><strong><:xspf:size_anim:></strong></p>
+		<label><:xspf:width:></label><input type="text" class="forml" style="width:4em;display:inline" name="mscwidth" id="mscwidth" value="#CONFIG{xspf/mscwidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:width:>">?</a><br />
+		<label><:xspf:height:></label><input type="text" class="forml" style="width:4em;display:inline" name="mscheigth" id="mscheigth" value="#CONFIG{xspf/mscheigth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:height:>">?</a><br />
 				
-		<label for="mscrepeat"><strong><:xspf:repeat:></strong>
+		<br /><label for="mscrepeat"><strong><:xspf:repeat:></strong></label>
 		<select name="mscrepeat">
 			<option [(#CONFIG{xspf/mscrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mscrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_repeat:></small>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:repeat:> - <:xspf:desc_repeat:>">?</a>
 		
 		<br /><br /><label for="mscautostart"><strong><:xspf:autostart:></strong>
 		<select name="mscautostart">
 			<option [(#CONFIG{xspf/mscautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mscautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_autostart:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autostart:> - <:xspf:desc_autostart:>">?</a>
 		
 		<br /><br /><label for="mscautoload"><strong><:xspf:autoload:></strong>
 		<select name="mscautoload">
 			<option [(#CONFIG{xspf/mscautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
 			<option [(#CONFIG{xspf/mscautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_autoload:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autoload:> - <:xspf:desc_autoload:>">?</a>
 		
 	</fieldset>
 	
@@ -29,26 +29,26 @@
 		<legend><a name="slim"></a>Configuration de slimplayer</legend>
 		
 		<p><label><strong><:xspf:size_anim:></strong><br/>
-			<:xspf:width:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="slimwidth" id="slimwidth" value="#CONFIG{xspf/slimwidth}" />&nbsp;px 
+			<:xspf:width:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="slimwidth" id="slimwidth" value="#CONFIG{xspf/slimwidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:width:>">?</a>
 		</label></p>
 		
 		<label for="slimrepeat"><strong><:xspf:repeat:></strong>
 		<select name="slimrepeat">
 			<option [(#CONFIG{xspf/slimrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/slimrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_repeat:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:repeat:> - <:xspf:desc_repeat:>">?</a>
 		
 		<br /><br /><label for="slimautostart"><strong><:xspf:autostart:></strong>
 		<select name="slimautostart">
 			<option [(#CONFIG{xspf/slimautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/slimautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select</label>>&nbsp;&nbsp;<small><:xspf:desc_autostart:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autostart:> - <:xspf:desc_autostart:>">?</a>
 		
 		<br /><br /><label for="slimautoload"><strong><:xspf:autoload:></strong>
 		<select name="slimautoload">
 			<option [(#CONFIG{xspf/slimautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
 			<option [(#CONFIG{xspf/slimautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_autoload:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autoload:> - <:xspf:desc_autoload:>">?</a>
 		
 	</fieldset>
 	
@@ -59,18 +59,18 @@
 		<select name="butrepeat">
 			<option [(#CONFIG{xspf/butrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/butrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_repeat:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:repeat:> - <:xspf:desc_repeat:>">?</a>
 		
 		<br /><br /><label for="butautostart"><strong><:xspf:autostart:></strong>
 		<select name="butautostart">
 			<option [(#CONFIG{xspf/butautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/butautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_autostart:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autostart:> - <:xspf:desc_autostart:>">?</a>
 		
 		<br /><br /><label for="butautoload"><strong><:xspf:autoload:></strong>
 		<select name="butautoload">
 			<option [(#CONFIG{xspf/butautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
 			<option [(#CONFIG{xspf/butautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_autoload:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autoload:> - <:xspf:desc_autoload:>">?</a>
 		
 	</fieldset>

@@ -1,22 +1,20 @@
 	<fieldset>
 		<legend>Configuration de mediaplayer</legend>
 		
-		<p><label><strong><:xspf:size_anim:></strong><br/>
-			<p><:xspf:width:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mplwidth" id="mplwidth" value="#CONFIG{xspf/mplwidth}" />&nbsp;px<br /><small><:xspf:desc_width:></small></p>
-			<p><:xspf:height:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mplheigth" id="mplheigth" value="#CONFIG{xspf/mplheigth}" />&nbsp;px<br /><small><:xspf:desc_height:></small></p>
-		</label></p>
+		<p><strong><:xspf:size_anim:></strong></p>
+		<label><:xspf:width:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mplwidth" id="mplwidth" value="#CONFIG{xspf/mplwidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:width:> - <:xspf:desc_width:>">?</a><br />
+		<label><:xspf:height:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mplheigth" id="mplheigth" value="#CONFIG{xspf/mplheigth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:height:> - <:xspf:desc_height:>">?</a><br />
 		
-		<p><label><strong><:xspf:display_size:></strong>
-			<p><:xspf:displaywidth:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mpldisplaywidth" id="mpldisplaywidth" value="#CONFIG{xspf/mpldisplaywidth}" />&nbsp;px<br /><small><:xspf:desc_displaywidth:></small></p>
-			<p><:xspf:displayheight:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mpldisplayheight" id="mpldisplayheight" value="#CONFIG{xspf/mpldisplayheight}" />&nbsp;px<br /><small><:xspf:desc_displayheight:></small></p>
-		</label></p>
+		<p><strong><:xspf:display_size:></strong></p>
+		<label><:xspf:displaywidth:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mpldisplaywidth" id="mpldisplaywidth" value="#CONFIG{xspf/mpldisplaywidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:displaywidth:> - <:xspf:desc_displaywidth:>">?</a><br />
+		<label><:xspf:displayheight:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mpldisplayheight" id="mpldisplayheight" value="#CONFIG{xspf/mpldisplayheight}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:displayheight:> - <:xspf:desc_displayheight:>">?</a><br />
 		
-		<div class="picker" style="float:right; padding:3px;"></div>
+		<div class="picker" style="float:right;padding:3px;"></div>
 	
 		<p><strong><:xspf:color_anim:></strong></p>
-		<label><:xspf:backcolor:></label><input type="text" class="forml colorwell" style="width:100px;display:inline" name="mplbackcolor" id="mplbackcolor" value="[(#CONFIG{xspf/mplbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" /> <br /><small><:xspf:desc_backcolor:></small><br />
-		<label><:xspf:frontcolor:></label><input type="text" class="forml colorwell" style="width:100px;display:inline" name="mplfrontcolor" id="mplfrontcolor" value="[(#CONFIG{xspf/mplfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" /><br /><small><:xspf:desc_frontcolor:></small><br />
-		<label><:xspf:lightcolor:></label><input type="text" class="forml colorwell" style="width:100px;display:inline" name="mpllightcolor" id="mpllightcolor" value="[(#CONFIG{xspf/mpllightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" /><br /><small><:xspf:desc_lightcolor:></small><br />
+		<label><:xspf:backcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="mplbackcolor" id="mplbackcolor" value="[(#CONFIG{xspf/mplbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>">?</a><br />
+		<label><:xspf:frontcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="mplfrontcolor" id="mplfrontcolor" value="[(#CONFIG{xspf/mplfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>">?</a><br />
+		<label><:xspf:lightcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="mpllightcolor" id="mpllightcolor" value="[(#CONFIG{xspf/mpllightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>">?</a><br />
 		
 		
 		<label for="mplrepeat"><strong><:xspf:repeat:></strong>
@@ -24,20 +22,20 @@
 			<option [(#CONFIG{xspf/mplrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mplrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 			<option [(#CONFIG{xspf/mplrepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>	
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_jwrepeat:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:repeat:> - <:xspf:desc_jwrepeat:>">?</a>
 
 		<br /><br /><label for="mplautostart"><strong><:xspf:autostart:></strong>
 		<select name="mplautostart">
 			<option [(#CONFIG{xspf/mplautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mplautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 			<option [(#CONFIG{xspf/mplautostart}|=={mute}|?{selected="selected",''})] value="mute"><:xspf:mute:></option>	
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_autostart:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autostart:> - <:xspf:desc_autostart:>">?</a>
 		
 		<br /><br /><label for="mplautoscroll"><strong><:xspf:autoscroll:></strong>
 		<select name="mplautoscroll">
 			<option [(#CONFIG{xspf/mplautoscroll}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mplautoscroll}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_autoscroll:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autoscroll:> - <:xspf:desc_autoscroll:>">?</a>
 
 		<br /><br /><label for="mploverstretch"><strong><:xspf:overstretch:></strong>
 		<select name="mploverstretch">
@@ -45,82 +43,81 @@
 			<option [(#CONFIG{xspf/mploverstretch}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mploverstretch}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 			<option [(#CONFIG{xspf/mploverstretch}|=={fit}|?{selected="selected",''})] value="fit"><:xspf:fit:></option>	
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_overstretch:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:overstretch:> - <:xspf:desc_overstretch:>">?</a>
 		
 		<br /><br /><label for="mplshowdigits"><strong><:xspf:showdigits:></strong>
 		<select name="mplshowdigits">
 			<option [(#CONFIG{xspf/mplshowdigits}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 			<option [(#CONFIG{xspf/mplshowdigits}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mplshowdigits}|=={total}|?{selected="selected",''})] value="total"><:xspf:total:></option>	
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_showdigits:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:showdigits:> - <:xspf:desc_showdigits:>">?</a>
 		
 		<br /><br /><label for="mplshowvolume"><strong><:xspf:showvolume:></strong>
 		<select name="mplshowvolume">
 			<option [(#CONFIG{xspf/mplshowvolume}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 			<option [(#CONFIG{xspf/mplshowvolume}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-		</select></label>&nbsp;&nbsp;<small><:xspf:desc_showvolume:></small>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:showvolume:> - <:xspf:desc_showvolume:>">?</a>
 		
 		<br /><br /><label for="mplshoweq"><strong><:xspf:showeq:></strong></label>
 		<select name="mplshoweq">
 			<option [(#CONFIG{xspf/mplshoweq}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mplshoweq}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select>&nbsp;&nbsp;<small><:xspf:desc_showeq:></small>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:showeq:> - <:xspf:desc_showeq:>">?</a>
 		
 		<br /><br /><label for="mplshowicons"><strong><:xspf:showicons:></strong></label>
 		<select name="mplshowicons">
 			<option [(#CONFIG{xspf/mplshowicons}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 			<option [(#CONFIG{xspf/mplshowicons}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-		</select>&nbsp;&nbsp;<small><:xspf:desc_showicons:></small>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:showicons:> - <:xspf:desc_showicons:>">?</a>
 		
 		<br /><br /><label for="mplshuffle"><strong><:xspf:shuffle:></strong></label>
 		<select name="mplshuffle">
 			<option [(#CONFIG{xspf/mplshuffle}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mplshuffle}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select>&nbsp;&nbsp;<small><:xspf:desc_shuffle:></small>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:shuffle:> - <:xspf:desc_shuffle:>">?</a>
 		
 		<br /><br /><label for="mplallowfullscreen"><strong><:xspf:allowfullscreen:></strong></label>
 		<select name="mplallowfullscreen">
 			<option [(#CONFIG{xspf/mplallowfullscreen}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 			<option [(#CONFIG{xspf/mplallowfullscreen}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-		</select>&nbsp;&nbsp;<small><:xspf:desc_allowfullscreen:></small>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:allowfullscreen:> - <:xspf:desc_allowfullscreen:>">?</a>
 		
 		<br /><br /><label for="mplthumbs"><strong><:xspf:thumbsinplaylist:></strong></label>
 		<select name="mplthumbs">
 			<option [(#CONFIG{xspf/mplthumbs}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 			<option [(#CONFIG{xspf/mplthumbs}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
-		</select>&nbsp;&nbsp;<small><:xspf:desc_thumbsinplaylist:></small>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:thumbsinplaylist:> - <:xspf:desc_thumbsinplaylist:>">?</a>
 		
 		<br /><br /><label for="mplshowdownload"><strong><:xspf:showdownload:></strong>
 		<select name="mplshowdownload">
 			<option [(#CONFIG{xspf/mplshowdownload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mplshowdownload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select>&nbsp;&nbsp;<small><:xspf:desc_showdownload:></small>
-		</label><p/>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:showdownload:> - <:xspf:desc_showdownload:>">?</a>
+		</label>
 		
 		<p><label><strong><:xspf:link:></strong>
-			<input type="text" class="forml" style="width:200px;display:inline" name="mpllink" id="mpllink" value="#CONFIG{xspf/mpllink}" /> URL <br /><small><:xspf:desc_link:></small>
-		</label><p/>
+			<input type="text" class="forml" style="width:200px;display:inline" name="mpllink" id="mpllink" value="#CONFIG{xspf/mpllink}" /> URL <a href="#" title="<:xspf:link:> - <:xspf:desc_link:>">?</a>
+		</label></p>
 		
-		<p><label><strong><:xspf:linktarget:></strong><br/>
-			<input type="text" class="forml" style="width:200px;display:inline" name="mpllinktarget" id="mpllinktarget" value="#CONFIG{xspf/mpllinktarget}" /> frame <br /><small><:xspf:desc_linktarget:></small>
+		<p><label><strong><:xspf:linktarget:></strong>
+			<input type="text" class="forml" style="width:200px;display:inline" name="mpllinktarget" id="mpllinktarget" value="#CONFIG{xspf/mpllinktarget}" /> frame <a href="#" title="<:xspf:linktarget:> - <:xspf:desc_linktarget:>">?</a>
 		</label></p>
 		
 		<label for="mpllinkfromdisplay"><strong><:xspf:linkfromdisplay:></strong>
 		<select name="mpllinkfromdisplay">
 			<option [(#CONFIG{xspf/mpllinkfromdisplay}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mpllinkfromdisplay}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select>&nbsp;&nbsp;<small><:xspf:desc_linkfromdisplay:></small>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:linkfromdisplay:> - <:xspf:desc_linkfromdisplay:>">?</a>
 		</label>
 		
-		<p><label><strong><:xspf:audio:></strong><br/>
-			<input type="text" class="forml" style="width:200px;display:inline" name="mplaudio" id="mplaudio" value="#CONFIG{xspf/mplaudio}" /> URL <br /><small><:xspf:desc_audio:></small>
+		<p><label><strong><:xspf:audio:></strong>
+			<input type="text" class="forml" style="width:200px;display:inline" name="mplaudio" id="mplaudio" value="#CONFIG{xspf/mplaudio}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:audio:> - <:xspf:desc_audio:>">?</a>
 		</label></p>
 		
 		<label for="mpluseaudio"><strong><:xspf:useaudio:></strong>
 		<select name="mpluseaudio">
 			<option [(#CONFIG{xspf/mpluseaudio}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/mpluseaudio}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
-		</select>&nbsp;&nbsp;<small><:xspf:desc_useaudio:></small>
-		</label>
+		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:useaudio:> - <:xspf:desc_useaudio:>">?</a>
 		
 	</fieldset>
