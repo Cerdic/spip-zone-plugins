@@ -1,1 +1,123 @@
-	<fieldset>		<legend><a name="rotator"></a>Configuration de rotator</legend>				<p><strong><:xspf:size_anim:></strong></p>		<label><:xspf:width:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="rotwidth" id="rotwidth" value="#CONFIG{xspf/rotwidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:width:> - <:xspf:desc_width:>">?</a><br />		<label><:xspf:height:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="rotheigth" id="rotheigth" value="#CONFIG{xspf/rotheigth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:height:> - <:xspf:desc_height:>">?</a><br />		<p><strong><:xspf:display_size:></strong></p>		<label><:xspf:displaywidth:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="rotdisplaywidth" id="rotdisplaywidth" value="#CONFIG{xspf/rotdisplaywidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:displaywidth:> - <:xspf:desc_displaywidth:>">?</a><br />		<label><:xspf:displayheight:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="rotdisplayheight" id="rotdisplayheight" value="#CONFIG{xspf/rotdisplayheight}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:displayheight:> - <:xspf:desc_displayheight:>">?</a><br />				<div class="picker" style="float:right; padding:3px;"></div>						<p><strong><:xspf:color_anim:></strong></p>		<label><:xspf:backcolor:></label>&nbsp;<input type="text" class="colorwell" style="width:100px;display:inline" name="rotbackcolor" id="rotbackcolor" value="[(#CONFIG{xspf/rotbackcolor}|sinon{#FFFFFF})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>">?</a><br />		<label><:xspf:frontcolor:></label>&nbsp;<input type="text" class="colorwell" style="width:100px;display:inline" name="rotfrontcolor" id="rotfrontcolor" value="[(#CONFIG{xspf/rotfrontcolor}|sinon{#000000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>">?</a><br />		<label><:xspf:lightcolor:></label>&nbsp;<input type="text" class="colorwell" style="width:100px;display:inline" name="rotlightcolor" id="rotlightcolor" value="[(#CONFIG{xspf/rotlightcolor}|sinon{#CC0000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>">?</a><br />				<br /><label for="rotrotate"><strong><:rotatetime:></strong>		<select name="rotrotate">			<option [(#CONFIG{xspf/rotrotate}|=={10}|?{selected="selected",''})] value="10">10</option>			<option [(#CONFIG{xspf/rotrotate}|=={2}|?{selected="selected",''})] value="2">2</option>			<option [(#CONFIG{xspf/rotrotate}|=={3}|?{selected="selected",''})] value="3">3</option>			<option [(#CONFIG{xspf/rotrotate}|=={4}|?{selected="selected",''})] value="4">4</option>				<option [(#CONFIG{xspf/rotrotate}|=={5}|?{selected="selected",''})] value="5">5</option>			<option [(#CONFIG{xspf/rotrotate}|=={6}|?{selected="selected",''})] value="6">6</option>			<option [(#CONFIG{xspf/rotrotate}|=={7}|?{selected="selected",''})] value="7">7</option>			<option [(#CONFIG{xspf/rotrotate}|=={8}|?{selected="selected",''})] value="8">8</option>			<option [(#CONFIG{xspf/rotrotate}|=={9}|?{selected="selected",''})] value="9">9</option>			<option [(#CONFIG{xspf/rotrotate}|=={11}|?{selected="selected",''})] value="11">11</option>			<option [(#CONFIG{xspf/rotrotate}|=={12}|?{selected="selected",''})] value="12">12</option>			<option [(#CONFIG{xspf/rotrotate}|=={13}|?{selected="selected",''})] value="13">13</option>			<option [(#CONFIG{xspf/rotrotate}|=={14}|?{selected="selected",''})] value="14">14</option>				<option [(#CONFIG{xspf/rotrotate}|=={15}|?{selected="selected",''})] value="15">15</option>			<option [(#CONFIG{xspf/rotrotate}|=={16}|?{selected="selected",''})] value="16">16</option>			<option [(#CONFIG{xspf/rotrotate}|=={17}|?{selected="selected",''})] value="17">17</option>			<option [(#CONFIG{xspf/rotrotate}|=={18}|?{selected="selected",''})] value="18">18</option>			<option [(#CONFIG{xspf/rotrotate}|=={19}|?{selected="selected",''})] value="19">19</option>			<option [(#CONFIG{xspf/rotrotate}|=={20}|?{selected="selected",''})] value="20">20</option>		</select></label>		&nbsp;&nbsp;<a href="#" title="<:rotatetime:> - <:xspf:desc_rotatetime:>">?</a>				<br /><br /><label for="rottransition"><strong><:xspf:transition:></strong></label>		<select name="rottransition">			<option [(#CONFIG{xspf/rottransition}|=={fade}|?{selected="selected",''})]value="fade">Fade</option>			<option [(#CONFIG{xspf/rottransition}|=={bgfade}|?{selected="selected",''})]value="bgfade">BgFade</option>			<option [(#CONFIG{xspf/rottransition}|=={fluids}|?{selected="selected",''})] value="fluids">Fluids</option>				<option [(#CONFIG{xspf/rottransition}|=={blocks}|?{selected="selected",''})] value="blocks">Blocks</option>			<option [(#CONFIG{xspf/rottransition}|=={bubbles}|?{selected="selected",''})]value="circles">Bubbles</option>			<option [(#CONFIG{xspf/rottransition}|=={lines}|?{selected="selected",''})]value="lines">Lines</option>			<option [(#CONFIG{xspf/rottransition}|=={slowfade}|?{selected="selected",''})]value="slowfade">Slowfade</option>			<option [(#CONFIG{xspf/rottransition}|=={circles}|?{selected="selected",''})]value="circles">Circles</option>			<option [(#CONFIG{xspf/rottransition}|=={random}|?{selected="selected",''})]value="random">Random</option>		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:transition:> - <:xspf:desc_transition:>">?</a>				<br /><br /><label for="rotoverstretch"><strong><:xspf:overstretch:></strong></label>		<select name="rotoverstretch">			<option [(#CONFIG{xspf/rotoverstretch}|=={none}|?{selected="selected",''})] value="none"><:xspf:none:></option>			<option [(#CONFIG{xspf/rotoverstretch}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>			<option [(#CONFIG{xspf/rotoverstretch}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>			<option [(#CONFIG{xspf/rotoverstretch}|=={fit}|?{selected="selected",''})] value="fit"><:xspf:fit:></option>			</select>&nbsp;&nbsp;<a href="#" title="<:xspf:overstretch:> - <:xspf:desc_overstretch:>">?</a>				<br /><br /><label for="rotshownavigation"><strong><:xspf:shownavigation:></strong></label>		<select name="rotshownavigation">			<option [(#CONFIG{xspf/rotshownavigation}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>			<option [(#CONFIG{xspf/rotshownavigation}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:shownavigation:> - <:xspf:desc_shownavigation:>">?</a>				<br /><br /><label for="rotshuffle"><strong><:xspf:shuffle:></strong></label>		<select name="rotshuffle">			<option [(#CONFIG{xspf/rotshuffle}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>			<option [(#CONFIG{xspf/rotshuffle}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:shuffle:> - <:xspf:desc_shuffle:>">?</a>				<br /><br /><label for="rotrepeat"><strong><:xspf:repeat:></strong></label>		<select name="rotrepeat">			<option [(#CONFIG{xspf/rotrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>			<option [(#CONFIG{xspf/rotrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>			<option [(#CONFIG{xspf/rotrepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>			</select>&nbsp;&nbsp;<a href="#" title="<:xspf:repeat:> - <:xspf:desc_jwrepeat:>">?</a>				<br /><br /><label for="rotwmode"><strong><:xspf:wmode:></strong></label>		<select name="rotwmode">			<option [(#CONFIG{xspf/rotwmode}|=={window}|?{selected="selected",''})] value="window">window</option>			<option [(#CONFIG{xspf/rotwmode}|=={transparent}|?{selected="selected",''})] value="transparent">transparent</option>			<option [(#CONFIG{xspf/rotwmode}|=={opaque}|?{selected="selected",''})] value="opaque">opaque</option>			</select>&nbsp;&nbsp;<a href="#" title="<:xspf:wmode:> - <:xspf:desc_wmode:>">?</a>				<br /><br /><label for="rotshowdownload"><strong><:xspf:showdownload:></strong>		<select name="rotshowdownload">			<option [(#CONFIG{xspf/rotshowdownload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>			<option [(#CONFIG{xspf/rotshowdownload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:showdownload:> - <:xspf:desc_showdownload:>">?</a>		</label>				<p><label><strong><:xspf:link:></strong>			<input type="text" class="forml" style="width:200px;display:inline" name="rotlink" id="rotlink" value="#CONFIG{xspf/rotlink}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:link:> - <:xspf:desc_link:>">?</a>		</label></p>				<p><label><strong><:xspf:linktarget:></strong>			<input type="text" class="forml" style="width:200px;display:inline" name="rotlinktarget" id="rotlinktarget" value="#CONFIG{xspf/rotlinktarget}" /> frame&nbsp;&nbsp;<a href="#" title="<:xspf:linktarget:> - <:xspf:desc_linktarget:>">?</a>		</label></p>				<label for="rotlinkfromdisplay"><strong><:xspf:linkfromdisplay:></strong>		<select name="rotlinkfromdisplay">			<option [(#CONFIG{xspf/rotlinkfromdisplay}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>			<option [(#CONFIG{xspf/rotlinkfromdisplay}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:linkfromdisplay:> - <:xspf:desc_linkfromdisplay:>">?</a>		</label>				<p><label><strong><:xspf:audio:></strong>			<input type="text" class="forml" style="width:200px;display:inline" name="rotaudio" id="rotaudio" value="#CONFIG{xspf/rotaudio}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:audio:> - <:xspf:desc_audio:>">?</a>		</label></p>				<label for="rotuseaudio"><strong><:xspf:useaudio:></strong>		<select name="rotuseaudio">			<option [(#CONFIG{xspf/rotuseaudio}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>			<option [(#CONFIG{xspf/rotuseaudio}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:useaudio:> - <:xspf:desc_useaudio:>">?</a>		</label>	</fieldset>
+	<fieldset>
+		<legend><a name="rotator"></a>Configuration de rotator</legend>
+		
+		<p><strong><:xspf:size_anim:></strong></p>
+		<label><:xspf:width:></label>&nbsp;<input type="text" name="rotwidth" class="forml" style="width:4em;display:inline" id="rotwidth" value="#CONFIG{xspf/rotwidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:width:> - <:xspf:desc_width:>">?</a><br />
+		<label><:xspf:height:></label>&nbsp;<input type="text" name="rotheigth" class="forml" style="width:4em;display:inline" id="rotheigth" value="#CONFIG{xspf/rotheigth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:height:> - <:xspf:desc_height:>">?</a><br />
+
+		<p><strong><:xspf:display_size:></strong></p>
+		<label><:xspf:displaywidth:></label>&nbsp;<input type="text" name="rotdisplaywidth" class="forml" style="width:4em;display:inline" id="rotdisplaywidth" value="#CONFIG{xspf/rotdisplaywidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:displaywidth:> - <:xspf:desc_displaywidth:>">?</a><br />
+		<label><:xspf:displayheight:></label>&nbsp;<input type="text" name="rotdisplayheight" class="forml" style="width:4em;display:inline" id="rotdisplayheight" value="#CONFIG{xspf/rotdisplayheight}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:displayheight:> - <:xspf:desc_displayheight:>">?</a><br />
+		
+		<div class="picker" style="float:right; padding:3px;"></div>
+				
+		<p><strong><:xspf:color_anim:></strong></p>
+		<label><:xspf:backcolor:></label>&nbsp;<input type="text" name="rotbackcolor" class="colorwell" style="width:100px;display:inline" id="rotbackcolor" value="[(#CONFIG{xspf/rotbackcolor}|sinon{#FFFFFF})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>">?</a><br />
+		<label><:xspf:frontcolor:></label>&nbsp;<input type="text" name="rotfrontcolor" class="colorwell" style="width:100px;display:inline" id="rotfrontcolor" value="[(#CONFIG{xspf/rotfrontcolor}|sinon{#000000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>">?</a><br />
+		<label><:xspf:lightcolor:></label>&nbsp;<input type="text" name="rotlightcolor" class="colorwell" style="width:100px;display:inline" id="rotlightcolor" value="[(#CONFIG{xspf/rotlightcolor}|sinon{#CC0000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>">?</a><br />
+		
+		<br /><label for="rotrotate"><strong><:rotatetime:></strong>
+		<select name="rotrotate">
+			<option [(#CONFIG{xspf/rotrotate}|=={10}|?{selected="selected",''})] value="10">10</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={2}|?{selected="selected",''})] value="2">2</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={3}|?{selected="selected",''})] value="3">3</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={4}|?{selected="selected",''})] value="4">4</option>	
+			<option [(#CONFIG{xspf/rotrotate}|=={5}|?{selected="selected",''})] value="5">5</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={6}|?{selected="selected",''})] value="6">6</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={7}|?{selected="selected",''})] value="7">7</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={8}|?{selected="selected",''})] value="8">8</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={9}|?{selected="selected",''})] value="9">9</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={11}|?{selected="selected",''})] value="11">11</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={12}|?{selected="selected",''})] value="12">12</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={13}|?{selected="selected",''})] value="13">13</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={14}|?{selected="selected",''})] value="14">14</option>	
+			<option [(#CONFIG{xspf/rotrotate}|=={15}|?{selected="selected",''})] value="15">15</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={16}|?{selected="selected",''})] value="16">16</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={17}|?{selected="selected",''})] value="17">17</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={18}|?{selected="selected",''})] value="18">18</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={19}|?{selected="selected",''})] value="19">19</option>
+			<option [(#CONFIG{xspf/rotrotate}|=={20}|?{selected="selected",''})] value="20">20</option>
+		</select></label>
+		&nbsp;&nbsp;<a href="#" title="<:rotatetime:> - <:xspf:desc_rotatetime:>">?</a>
+		
+		<br /><br /><label for="rottransition"><strong><:xspf:transition:></strong></label>
+		<select name="rottransition">
+			<option [(#CONFIG{xspf/rottransition}|=={fade}|?{selected="selected",''})]value="fade">Fade</option>
+			<option [(#CONFIG{xspf/rottransition}|=={bgfade}|?{selected="selected",''})]value="bgfade">BgFade</option>
+			<option [(#CONFIG{xspf/rottransition}|=={fluids}|?{selected="selected",''})] value="fluids">Fluids</option>	
+			<option [(#CONFIG{xspf/rottransition}|=={blocks}|?{selected="selected",''})] value="blocks">Blocks</option>
+			<option [(#CONFIG{xspf/rottransition}|=={bubbles}|?{selected="selected",''})]value="circles">Bubbles</option>
+			<option [(#CONFIG{xspf/rottransition}|=={lines}|?{selected="selected",''})]value="lines">Lines</option>
+			<option [(#CONFIG{xspf/rottransition}|=={slowfade}|?{selected="selected",''})]value="slowfade">Slowfade</option>
+			<option [(#CONFIG{xspf/rottransition}|=={circles}|?{selected="selected",''})]value="circles">Circles</option>
+			<option [(#CONFIG{xspf/rottransition}|=={random}|?{selected="selected",''})]value="random">Random</option>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:transition:> - <:xspf:desc_transition:>">?</a>
+		
+		<br /><br /><label for="rotoverstretch"><strong><:xspf:overstretch:></strong></label>
+		<select name="rotoverstretch">
+			<option [(#CONFIG{xspf/rotoverstretch}|=={none}|?{selected="selected",''})] value="none"><:xspf:none:></option>
+			<option [(#CONFIG{xspf/rotoverstretch}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/rotoverstretch}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#CONFIG{xspf/rotoverstretch}|=={fit}|?{selected="selected",''})] value="fit"><:xspf:fit:></option>	
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:overstretch:> - <:xspf:desc_overstretch:>">?</a>
+		
+		<br /><br /><label for="rotshownavigation"><strong><:xspf:shownavigation:></strong></label>
+		<select name="rotshownavigation">
+			<option [(#CONFIG{xspf/rotshownavigation}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/rotshownavigation}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:shownavigation:> - <:xspf:desc_shownavigation:>">?</a>
+		
+		<br /><br /><label for="rotshuffle"><strong><:xspf:shuffle:></strong></label>
+		<select name="rotshuffle">
+			<option [(#CONFIG{xspf/rotshuffle}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/rotshuffle}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:shuffle:> - <:xspf:desc_shuffle:>">?</a>
+		
+		<br /><br /><label for="rotrepeat"><strong><:xspf:repeat:></strong></label>
+		<select name="rotrepeat">
+			<option [(#CONFIG{xspf/rotrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/rotrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			<option [(#CONFIG{xspf/rotrepeat}|=={list}|?{selected="selected",''})] value="list"><:xspf:list:></option>	
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:repeat:> - <:xspf:desc_jwrepeat:>">?</a>
+		
+		<br /><br /><label for="rotwmode"><strong><:xspf:wmode:></strong></label>
+		<select name="rotwmode">
+			<option [(#CONFIG{xspf/rotwmode}|=={window}|?{selected="selected",''})] value="window">window</option>
+			<option [(#CONFIG{xspf/rotwmode}|=={transparent}|?{selected="selected",''})] value="transparent">transparent</option>
+			<option [(#CONFIG{xspf/rotwmode}|=={opaque}|?{selected="selected",''})] value="opaque">opaque</option>	
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:wmode:> - <:xspf:desc_wmode:>">?</a>
+		
+		<br /><br /><label for="rotshowdownload"><strong><:xspf:showdownload:></strong>
+		<select name="rotshowdownload">
+			<option [(#CONFIG{xspf/rotshowdownload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/rotshowdownload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:showdownload:> - <:xspf:desc_showdownload:>">?</a>
+		</label>
+		
+		<p><label><strong><:xspf:link:></strong>
+			<input type="text" name="rotlink" class="forml" style="width:200px;display:inline" id="rotlink" value="#CONFIG{xspf/rotlink}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:link:> - <:xspf:desc_link:>">?</a>
+		</label></p>
+		
+		<p><label><strong><:xspf:linktarget:></strong>
+			<input type="text" name="rotlinktarget" class="forml" style="width:200px;display:inline" id="rotlinktarget" value="#CONFIG{xspf/rotlinktarget}" /> frame&nbsp;&nbsp;<a href="#" title="<:xspf:linktarget:> - <:xspf:desc_linktarget:>">?</a>
+		</label></p>
+		
+		<label for="rotlinkfromdisplay"><strong><:xspf:linkfromdisplay:></strong>
+		<select name="rotlinkfromdisplay">
+			<option [(#CONFIG{xspf/rotlinkfromdisplay}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/rotlinkfromdisplay}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:linkfromdisplay:> - <:xspf:desc_linkfromdisplay:>">?</a>
+		</label>
+		
+		<p><label><strong><:xspf:audio:></strong>
+			<input type="text" name="rotaudio" class="forml" style="width:200px;display:inline" id="rotaudio" value="#CONFIG{xspf/rotaudio}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:audio:> - <:xspf:desc_audio:>">?</a>
+		</label></p>
+		
+		<label for="rotuseaudio"><strong><:xspf:useaudio:></strong>
+		<select name="rotuseaudio">
+			<option [(#CONFIG{xspf/rotuseaudio}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/rotuseaudio}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:useaudio:> - <:xspf:desc_useaudio:>">?</a>
+		</label>
+
+	</fieldset>

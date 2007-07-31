@@ -2,19 +2,19 @@
 		<legend><a name="flp"></a>Configuration de flash video player</legend>
 		
 		<p><strong><:xspf:size_anim:></strong></p>
-		<label><:xspf:width:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="flpwidth" id="flpwidth" value="#CONFIG{xspf/flpwidth}" />&nbsp;&nbsp;<a href="#" title="<:xspf:width:> - <:xspf:desc_width:>">?</a><br />
-		<label><:xspf:height:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" id="flpheigth" value="#CONFIG{xspf/flpheigth}" />&nbsp;&nbsp;<a href="#" title="<:xspf:height:> - <:xspf:desc_height:>">?</a><br />
+		<label><:xspf:width:></label>&nbsp;<input type="text" name="flpwidth" class="forml" style="width:4em;display:inline" id="flpwidth" value="#CONFIG{xspf/flpwidth}" />&nbsp;&nbsp;<a href="#" title="<:xspf:width:> - <:xspf:desc_width:>">?</a><br />
+		<label><:xspf:height:></label>&nbsp;<input type="text" name="flpheigth" class="forml" style="width:4em;display:inline" id="flpheigth" value="#CONFIG{xspf/flpheigth}" />&nbsp;&nbsp;<a href="#" title="<:xspf:height:> - <:xspf:desc_height:>">?</a><br />
 		
 		<p><strong><:xspf:display_size:></strong></p>
-		<label><:xspf:displaywidth:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="flpdisplaywidth" id="flpdisplaywidth" value="#CONFIG{xspf/flpdisplaywidth}" />&nbsp;&nbsp;<a href="#" title="<:xspf:width:> - <:xspf:desc_displaywidth:>">?</a><br />
-		<label><:xspf:displayheight:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="flpdisplayheight" id="flpdisplayheight" value="#CONFIG{xspf/flpdisplayheight}" />&nbsp;&nbsp;<a href="#" title="<:xspf:height:> - <:xspf:desc_displayheight:>">?</a><br />
+		<label><:xspf:displaywidth:></label>&nbsp;<input type="text" name="flpdisplaywidth" class="forml" style="width:4em;display:inline" id="flpdisplaywidth" value="#CONFIG{xspf/flpdisplaywidth}" />&nbsp;&nbsp;<a href="#" title="<:xspf:width:> - <:xspf:desc_displaywidth:>">?</a><br />
+		<label><:xspf:displayheight:></label>&nbsp;<input type="text" name="flpdisplayheight" class="forml" style="width:4em;display:inline" id="flpdisplayheight" value="#CONFIG{xspf/flpdisplayheight}" />&nbsp;&nbsp;<a href="#" title="<:xspf:height:> - <:xspf:desc_displayheight:>">?</a><br />
 		
 		<div class="picker" style="float:right; padding:3px;"></div>
 				
 		<p><strong><:xspf:color_anim:></strong></p>
-		<label><:xspf:backcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="flpbackcolor" id="flpbackcolor" value="[(#CONFIG{xspf/flpbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>">?</a><br />
-		<label><:xspf:frontcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="flpfrontcolor" id="flpfrontcolor" value="[(#CONFIG{xspf/flpfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>">?</a><br />
-		<label><:xspf:lightcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="flplightcolor" id="flplightcolor" value="[(#CONFIG{xspf/flplightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>">?</a><br />
+		<label><:xspf:backcolor:></label><input type="text" name="flpbackcolor" class="colorwell" style="width:100px;display:inline" id="flpbackcolor" value="[(#CONFIG{xspf/flpbackcolor}|sinon{#000000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>">?</a><br />
+		<label><:xspf:frontcolor:></label><input type="text" name="flpfrontcolor" class="colorwell" style="width:100px;display:inline" id="flpfrontcolor" value="[(#CONFIG{xspf/flpfrontcolor}|sinon{#CCCCCC})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>">?</a><br />
+		<label><:xspf:lightcolor:></label><input type="text" name="flplightcolor" class="colorwell" style="width:100px;display:inline" id="flplightcolor" value="[(#CONFIG{xspf/flplightcolor}|sinon{#996600})]"  class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>">?</a><br />
 				
 		<label for="flprepeat"><strong><:xspf:repeat:></strong></label>
 		<select name="flprepeat">
@@ -31,11 +31,11 @@
 		</select>&nbsp;&nbsp;<a href="#" title="<:xspf:autostart:>; <:xspf:desc_autostart:>">?</a>
 		
 		<p><label><strong><:xspf:bufferlength:></strong><br/>
-			<input type="text" class="forml" style="width:4em;display:inline" name="bufferlength" id="bufferlength" value="#CONFIG{xspf/bufferlength}" /> <:number:>&nbsp;&nbsp;<a href="#" title="<:xspf:bufferlength:> - <:xspf:desc_bufferlength:>">?</a>
+			<input type="text" name="bufferlength" class="forml" style="width:4em;display:inline" id="bufferlength" value="#CONFIG{xspf/bufferlength}" /> <:number:>&nbsp;&nbsp;<a href="#" title="<:xspf:bufferlength:> - <:xspf:desc_bufferlength:>">?</a>
 		</label></p>
 		
 		<p><label><strong><:xspf:captions:></strong><br/>
-			<input type="text" class="forml" style="width:200px;display:inline" name="captions" id="captions" value="#CONFIG{xspf/captions}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:captions:> - <:xspf:desc_captions:>">?</a>
+			<input type="text" name="captions" class="forml" style="width:200px;display:inline" id="captions" value="#CONFIG{xspf/captions}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:captions:> - <:xspf:desc_captions:>">?</a>
 		</label></p>
 		
 		<label for="usecaptions"><strong><:xspf:usecaptions:></strong>
@@ -103,11 +103,11 @@
 		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:showdownload:> - <:xspf:desc_showdownload:>">?</a>
 		
 		<p><label><strong><:xspf:link:></strong>
-			<input type="text" class="forml" style="width:200px;display:inline" name="flplink" id="flplink" value="#CONFIG{xspf/flplink}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:link:> - <:xspf:desc_link:>">?</a>
+			<input type="text" name="flplink" class="forml" style="width:200px;display:inline" id="flplink" value="#CONFIG{xspf/flplink}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:link:> - <:xspf:desc_link:>">?</a>
 		</label></p>
 		
 		<p><label><strong><:xspf:linktarget:></strong>
-			<input type="text" class="forml" style="width:4em;display:inline" name="flplinktarget" id="flplinktarget" value="#CONFIG{xspf/flplinktarget}" /> frame&nbsp;&nbsp;<a href="#" title="<:xspf:linktarget:> - <:xspf:desc_linktarget:>">?</a>
+			<input type="text" name="flplinktarget" class="forml" style="width:4em;display:inline" id="flplinktarget" value="#CONFIG{xspf/flplinktarget}" /> frame&nbsp;&nbsp;<a href="#" title="<:xspf:linktarget:> - <:xspf:desc_linktarget:>">?</a>
 		</label></p>
 		
 		<label for="flplinkfromdisplay"><strong><:xspf:linkfromdisplay:></strong>
@@ -117,7 +117,7 @@
 		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:linkfromdisplay:> - <:xspf:desc_linkfromdisplay:>">?</a>
 		
 		<p><label><strong><:xspf:audio:></strong>
-			<input type="text" class="forml" style="width:200px;display:inline" name="flpaudio" id="flpaudio" value="#CONFIG{xspf/flpaudio}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:audio:> - <:xspf:desc_audio:>">?</a>
+			<input type="text" name="flpaudio" class="forml" style="width:200px;display:inline" id="flpaudio" value="#CONFIG{xspf/flpaudio}" /> URL&nbsp;&nbsp;<a href="#" title="<:xspf:audio:> - <:xspf:desc_audio:>">?</a>
 		</label></p>
 		
 		<label for="flpuseaudio"><strong><:xspf:useaudio:></strong>
