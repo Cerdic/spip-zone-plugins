@@ -1,7 +1,7 @@
 <plugin>
 	<nom>orthogoogle</nom>
 	<auteur>[Amir Salihefendic->http://orangoo.com/spell/], adaptation[cam.lafit->http://km.azerttyu.net]</auteur>
-	<version>0.2</version>
+	<version>0.3</version>
 	<etat>dev</etat>
 	<description>
 		Int&eacute;gre le correcteur orthographique de Google pour chaque zone de texte.
