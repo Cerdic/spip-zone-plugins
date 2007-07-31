@@ -1,1 +1,46 @@
-.farbtastic {  position: relative;}.farbtastic * {  position: absolute;  cursor: crosshair;}.farbtastic, .farbtastic .wheel {  width: 195px;  height: 195px;}.farbtastic .color, .farbtastic .overlay {  top: 47px;  left: 47px;  width: 101px;  height: 101px;}.farbtastic .wheel {  background: url(_img/wheel.png) no-repeat;  width: 195px;  height: 195px;}.farbtastic .overlay {  background: url(_img/mask.png) no-repeat;}.farbtastic .marker {  width: 17px;  height: 17px;  margin: -8px 0 0 -8px;  overflow: hidden;   background: url(_img/marker.png) no-repeat;}
+.farbtastic {
+  position: relative;
+}
+.farbtastic * {
+  position: absolute;
+  cursor: crosshair;
+}
+.farbtastic, .farbtastic .wheel {
+  width: 195px;
+  height: 195px;
+}
+.farbtastic .color, .farbtastic .overlay {
+  top: 47px;
+  left: 47px;
+  width: 101px;
+  height: 101px;
+}
+.farbtastic .wheel {
+  background: url(_img/wheel.png) no-repeat;
+  width: 195px;
+  height: 195px;
+}
+.farbtastic .overlay {
+  background: url(_img/mask.png) no-repeat;
+}
+.farbtastic .marker {
+  width: 17px;
+  height: 17px;
+  margin: -8px 0 0 -8px;
+  overflow: hidden; 
+  background: url(_img/marker.png) no-repeat;
+}
+
+.colorwell {
+	border: 2px solid #fff; width: 6em; text-align: center; cursor: pointer; 
+background-color:#E4E4E4;
+background-position:center bottom;
+border:1px solid #C0CAD4;
+display:block;
+float:none;
+font-size:12px;
+padding:3px;
+width:100%;
+	}
+
+body .colorwell-selected {border: 2px solid #000;font-weight: bold;}
