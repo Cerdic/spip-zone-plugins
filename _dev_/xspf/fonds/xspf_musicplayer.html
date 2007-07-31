@@ -2,8 +2,8 @@
 		<legend><a name="msc"></a>Configuration de musicplayer</legend>
 		
 		<p><strong><:xspf:size_anim:></strong></p>
-		<label><:xspf:width:></label><input type="text" class="forml" style="width:4em;display:inline" name="mscwidth" id="mscwidth" value="#CONFIG{xspf/mscwidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:width:>">?</a><br />
-		<label><:xspf:height:></label><input type="text" class="forml" style="width:4em;display:inline" name="mscheigth" id="mscheigth" value="#CONFIG{xspf/mscheigth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:height:>">?</a><br />
+		<label><:xspf:width:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mscwidth" id="mscwidth" value="#CONFIG{xspf/mscwidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:width:>">?</a><br />
+		<label><:xspf:height:></label>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="mscheigth" id="mscheigth" value="#CONFIG{xspf/mscheigth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:height:>">?</a><br />
 				
 		<br /><label for="mscrepeat"><strong><:xspf:repeat:></strong></label>
 		<select name="mscrepeat">
@@ -28,9 +28,9 @@
 	<fieldset>
 		<legend><a name="slim"></a>Configuration de slimplayer</legend>
 		
-		<p><label><strong><:xspf:size_anim:></strong><br/>
+		<p><label><strong><:xspf:size_anim:></strong></p>
 			<:xspf:width:>&nbsp;<input type="text" class="forml" style="width:4em;display:inline" name="slimwidth" id="slimwidth" value="#CONFIG{xspf/slimwidth}" />&nbsp;px&nbsp;&nbsp;<a href="#" title="<:xspf:width:>">?</a>
-		</label></p>
+		</label>
 		
 		<label for="slimrepeat"><strong><:xspf:repeat:></strong>
 		<select name="slimrepeat">
@@ -55,7 +55,7 @@
 	<fieldset>
 		<legend><a name="but"></a>Configuration de buttonplayer</legend>
 		
-		<label for="butrepeat"><strong><:xspf:repeat:></strong>
+		<br /><label for="butrepeat"><strong><:xspf:repeat:></strong>
 		<select name="butrepeat">
 			<option [(#CONFIG{xspf/butrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
 			<option [(#CONFIG{xspf/butrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>

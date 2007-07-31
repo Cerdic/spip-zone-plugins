@@ -12,11 +12,11 @@
 		<div class="picker" style="float:right; padding:3px;"></div>
 				
 		<p><strong><:xspf:color_anim:></strong></p>
-		<label><:xspf:backcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="rotbackcolor" id="rotbackcolor" value="[(#CONFIG{xspf/rotbackcolor}|sinon{#FFFFFF})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>">?</a><br />
-		<label><:xspf:frontcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="rotfrontcolor" id="rotfrontcolor" value="[(#CONFIG{xspf/rotfrontcolor}|sinon{#000000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>">?</a><br />
-		<label><:xspf:lightcolor:></label><input type="text" class="colorwell" style="width:100px;display:inline" name="rotlightcolor" id="rotlightcolor" value="[(#CONFIG{xspf/rotlightcolor}|sinon{#CC0000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>">?</a><br />
+		<label><:xspf:backcolor:></label>&nbsp;<input type="text" class="colorwell" style="width:100px;display:inline" name="rotbackcolor" id="rotbackcolor" value="[(#CONFIG{xspf/rotbackcolor}|sinon{#FFFFFF})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:backcolor:> - <:xspf:desc_backcolor:>">?</a><br />
+		<label><:xspf:frontcolor:></label>&nbsp;<input type="text" class="colorwell" style="width:100px;display:inline" name="rotfrontcolor" id="rotfrontcolor" value="[(#CONFIG{xspf/rotfrontcolor}|sinon{#000000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:frontcolor:> - <:xspf:desc_frontcolor:>">?</a><br />
+		<label><:xspf:lightcolor:></label>&nbsp;<input type="text" class="colorwell" style="width:100px;display:inline" name="rotlightcolor" id="rotlightcolor" value="[(#CONFIG{xspf/rotlightcolor}|sinon{#CC0000})]" class="colorwell" maxlength="7" />&nbsp;&nbsp;<a href="#" title="<:xspf:lightcolor:> - <:xspf:desc_lightcolor:>">?</a><br />
 		
-		<label for="rotrotate"><strong><:rotatetime:></strong>
+		<br /><label for="rotrotate"><strong><:rotatetime:></strong>
 		<select name="rotrotate">
 			<option [(#CONFIG{xspf/rotrotate}|=={10}|?{selected="selected",''})] value="10">10</option>
 			<option [(#CONFIG{xspf/rotrotate}|=={2}|?{selected="selected",''})] value="2">2</option>
