@@ -2,12 +2,13 @@
 	<nom> <!-- Nom du plugin -->
 	Importer massivement des documents distants
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Maïeul Rouquette (maieulrouquette @ tele2.fr)
+	<auteur>
+_ 1.0: Maïeul Rouquette (maieulrouquette @ tele2.fr)
+_ 1.1: BobCaTT (bobcatt CHEZ menfin POINT net)
 _ &#169; 2007 - Licence GPL
 	</auteur>
 	<version>
-	1.0
+	1.1
 	</version>
 	<etat>
 	test
@@ -16,9 +17,8 @@ _ &#169; 2007 - Licence GPL
 	Plugin charg&#233; d'importer massivement des documents distants. A partir de la [page suivante->./?exec=documents_distants] 
 	N&#233;c&#233;ssite SPIp 1.9.2
 	</description>
-	
 
-	<prefix> 
+	<prefix>
 	documents_distants
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->

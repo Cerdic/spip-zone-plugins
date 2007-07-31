@@ -2,18 +2,19 @@
 <form method="post" name="documents_distants" action="#SELF">
 	
 	<label for="document"><:documentsdistants:explicatif:></label>
-	<textarea name='documents' rows='40' cols='80'>#ENV{documents}</textarea>
+	<textarea name='documents' rows='30' cols='80'>#ENV{documents}</textarea>
 	
 	<br />
 		<label><:documentsdistants:attribuer:>
 		<select  name='type_lien'>
-		[(#CONFIG{documents_article}|=={oui}|?{<option [(#ENV{type_lien}|=={articles}|?{selected="selected"})] value="articles"><:info_article:></option>})]
-		[(#CONFIG{documents_rubrique}|=={oui}|?{<option [(#ENV{type_lien}|=={rubriques}|?{selected="selected"})] value="rubriques"><:info_rubriques:></option>})]
+		[(#CONFIG{documents_article}|=={oui}|?{<option [(#ENV{type_lien}|=={article}|?{selected="selected"})] value="article"><:info_articles:></option>})]
+		[(#CONFIG{documents_rubrique}|=={oui}|?{<option [(#ENV{type_lien}|=={rubrique}|?{selected="selected"})] value="rubrique"><:info_rubriques:></option>})]
 		
 	</label>
 	
 	<label><:id:><input [value="(#ENV{id})"] type="texte" name="id" /></label>
-	<label><input type="checkbox" name="retour[]" value="oui" [(#ENV{retour}|?{checked="checked"})]/><:documentsdistants:retourner:></label>	
+	<label><input type="checkbox" name="vignette" value="oui" [(#ENV{vignette}|=={oui}|?{checked="checked"})] title="<:documentsdistants:alt_vignette:>"/><:documentsdistants:vignette:></label>
+	<label><input type="checkbox" name="retour" value="oui" [(#ENV{retour}|=={oui}|?{checked="checked"})]/><:documentsdistants:retourner:></label>	
 	<input type="submit" name="valider" value="<:bouton_enregistrer:>" />
 	
 </form>
