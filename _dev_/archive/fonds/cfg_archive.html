@@ -11,13 +11,23 @@ Rappel sur comment l'utiliser.<br />
 
 <h4> Les articles archivés </h4>
 
-<B_archive>
-<ul>
-	<BOUCLE_archive(ARTICLES) {archive seulement}>
-	<li>
-		<a href="?exec=articles&id_article=#ID_ARTICLE	">voir</a> <b>#TITRE</b> (archivé le [(#DATE|jour)]/[(#DATE|mois)]/[(#DATE|annee)])
-	</li>
-	</BOUCLE_archive>
-</ul>
-</B_archive>
+[(#REM) determine les articles archivés]
+<BOUCLE_test(ARTICLES) {archive seulement}>
 
+<B_rubrique>
+<ul>
+<BOUCLE_rubrique(RUBRIQUES) {unique} {id_rubrique}>
+	<li>#TITRE</li>
+	<B_archive>
+	<ul>
+		<BOUCLE_archive(ARTICLES) {id_rubrique} {archive seulement}>
+		<li>
+		<a href="?exec=articles&id_article=#ID_ARTICLE	"><b>#TITRE</b></a> (archivé le [(#ARCHIVE_DATE|jour)]/[(#ARCHIVE_DATE|mois)]/[(#ARCHIVE_DATE|annee)])
+		</li>
+		</BOUCLE_archive>
+	</ul>
+	</B_archive>
+</BOUCLE_rubrique>
+</ul>
+</B_rubrique>
+</BOUCLE_test>
