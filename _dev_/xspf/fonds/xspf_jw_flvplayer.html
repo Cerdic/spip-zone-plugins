@@ -1,3 +1,4 @@
+[(#CHEMIN{lib/jw_flv_player/flvplayer.swf}|?{' ',''})
 	<fieldset>
 		<legend><a name="flp"></a>Configuration de flash video player</legend>
 		
@@ -126,4 +127,22 @@
 			<option [(#CONFIG{xspf/flpuseaudio}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:useaudio:> - <:xspf:desc_useaudio:>">?</a>
 		
-	</fieldset>
+	</fieldset>]
+	
+[(#CHEMIN{lib/jw_flv_player/flvplayer.swf}|?{'',' '})
+<?php
+
+if ($GLOBALS['spip_version_code']>1.9258){
+	include_spip('inc/actions');
+	echo redirige_action_auteur('charger_plugin',lib,'self()','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_flv_player.zip' />"."<input type='submit' class='formo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
+}else {
+?>
+Placer un texte ici avec peut être une photo + lien sur la page du site de Jeroen
+
+++
+
+<?php
+}
+
+?>
+]
