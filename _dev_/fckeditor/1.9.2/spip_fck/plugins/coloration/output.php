@@ -14,7 +14,7 @@ switch ($_POST['lines'])
             $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
        break;
        case "2" : 
-            $geshi->enable_line_numbers(GESHI_FANCY_LINE_NUMBERS,5);
+            $geshi->enable_line_numbers(GESHI_FANCY_LINE_NUMBERS,$_POST['interligne']);
        break;
 }       
 

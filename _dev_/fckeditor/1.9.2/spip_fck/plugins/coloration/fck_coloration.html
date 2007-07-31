@@ -79,9 +79,10 @@
             var lang    = form.langage.value;
             var showlines   = form.numligne.value ? form.numligne.value : '';
             var tabulation   = form.tabulation.value ? form.tabulation.value : '';
-            var premnum   = form.premnum.value ? form.premnum.value : '';            
+            var premnum   = form.premnum.value ? form.premnum.value : '';   
+             var interligne  = form.interligne.value ? form.interligne.value : '';          
             
-            qstr = 'source=' + escape(source) + '&lang=' + lang + '&lines=' + showlines + '&tabulation=' + tabulation+ '&premnum=' + premnum;  // NOTE: no '?' before querystring
+            qstr = 'source=' + escape(source) + '&lang=' + lang + '&lines=' + showlines + '&tabulation=' + tabulation+ '&premnum=' + premnum +'&interligne='+interligne;  // NOTE: no '?' before querystring
             return qstr;
         }
           //-->
@@ -189,36 +190,39 @@
                   <option value="xpp">xpp</option>
                   <option value="z80">z80</option>
                 </select></td>
-    			      <td rowspan="4" width="48%">
+    			      <td rowspan="4" width="25%">
                     <div id="wait" style="float: right; width: 200px; display: none;">
               		  	<span fckLang="ColorationPatience">Patience...</span>
               		</div>
               	</td>
     		</tr>
     		<tr>
-    			<td width="51%">
-                <span fckLang="ColorationTabulation">Taille de la tabulation </span>
+    			<td width="74%">
+                <span fckLang="ColorationTabulation">Taille tabulation </span>
                 <input type="text" name="tabulation" size="1" id="tabulation" value="2">
     			</td>
     		</tr>
     		<tr>
-    			<td width="51%">
+    			<td width="74%">
                 <span fckLang="ColorationPremiernumero">premier numéro</span>
                 <input type="text" name="premnum" size="1" id="premnum" value="1">
            
                  <select name="numligne" id="numligne" style="width: 100px;">
-                  <option value="1"><span fckLang="ColorationNumeroNormaux">normaux</span></option>
-                  <option value="2" selected><span fckLang="ColorationNumeroColore">colorés</span></option>
-                  <option value="0"><span fckLang="ColorationPasDeNumero">sans</span></option>
+                  <option value="1" fckLang="ColorationNumeroNormaux">normaux</option>
+                  <option value="2" selected fckLang="ColorationNumeroColore">colorés</option>
+                  <option value="0" fckLang="ColorationPasDeNumero">sans</option>
                  </select> 
+                 <span fckLang="ColorationInterLigne">interligne </span>
+                 <input type="text" name="interligne" size="1" id="interligne" value="5">
+                 
           </td>
           <tr>
-            <td width="51%">
+            <td width="74%">
                 &nbsp;
             </td>
           </tr>  
     		 <tr>
-          	<td width="51%">
+          	<td width="74%">
                 <a target="_blank" href="http://qbnz.com/highlighter/license.php">
                 <span fckLang="ColorationTxtLicence">Geshi est sous licence GPL</span></a><br>
 				    <a target="_blank" href="http://qbnz.com/highlighter/index.php">

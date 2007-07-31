@@ -14,5 +14,6 @@ FCKLang.ColorationPremiernumero = 'Premier numéro de ligne : ';
 FCKLang.ColorationTxtAdresse = 'Le site officiel de Geshi.'; 
 FCKLang.ColorationTxtLicence = 'Geshi est sous licence GPL.';
 FCKLang.ColorationNumeroNormaux = 'Normaux'; 
-FCKLang.ColorationNumeroColore = 'Ligne colorées'; 
+FCKLang.ColorationNumeroColore = 'Lignes colorées'; 
 FCKLang.ColorationPasDeNumero = 'Pas de numéro';  
+FCKLang.ColorationInterLigne = 'Interligne :'; 
