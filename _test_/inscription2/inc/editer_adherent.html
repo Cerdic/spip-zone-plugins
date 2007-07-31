@@ -240,7 +240,7 @@ $().ready(function() {
 				$val ='';
 			
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
-			echo "<td><input type=\"checkbox\" name=\"$cle\" $val><br /></td><tr/>"; 	
+			echo "<td><input type=\"checkbox\" name=\"$cle\" $val class=\"checkbox\"><br /></td><tr/>"; 	
 		}elseif ($cle != 'statut_nouveau'){ // textarea
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
 			if($cle == 'adresse' OR $cle == 'divers' OR $cle == 'commentaire')
