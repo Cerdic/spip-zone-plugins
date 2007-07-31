@@ -16,6 +16,7 @@ Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configurat
 
 Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
 
+Utilisation de [jquery.tabs de Klaus Hartl->http://www.stilbuero.de/2006/05/13/accessible-unobtrusive-javascript-tabs-with-jquery/]
 <!--
 
 (infos developpeurs, cf. documentation)

@@ -34,7 +34,12 @@ function cfg_header_prive($texte) {
 			$css = generer_url_public('jquery.tabs_prive');
 		}
 		$js = find_in_path('javascript/jquery.tabs.pack.js');
-		$texte.= "<link rel='stylesheet' type='text/css' href='" . _DIR_PLUGIN_CFG . "css/cfg.css' /><link rel='stylesheet' type='text/css' href='$css' /> <script type='text/javascript' src='$js'></script>" . "\n";
+		$texte.= "<link rel='stylesheet' type='text/css' href='" . _DIR_PLUGIN_CFG . "css/cfg.css' />
+			<link rel='stylesheet' type='text/css' href='$css' />
+			<!--[if lte IE 7]>
+			<link rel='stylesheet' href='" . _DIR_PLUGIN_CFG . "css/jquery.tabs-ie.css' type='text/css' media='projection, screen'>
+			<![endif]-->
+			<script type='text/javascript' src='$js'></script>" . "\n";
 	return $texte;
 }
 ?>
