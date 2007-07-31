@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Archive</nom>
-	<version>0.61</version>
+	<version>0.62</version>
 	<prefix>archive</prefix>
 	<etat>dev</etat>
 	<auteur>Camille Lafitte [contact->mailto:cam.lafit@zerttyu.net]
