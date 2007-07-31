@@ -32,16 +32,16 @@
             var locarray = myloc.split("/");
             delete locarray[(locarray.length-1)];
             var arraytext = locarray.join("/");
-            xmlhttpPost(arraytext+'/geshi/output.php');
+            xmlhttpPost(arraytext+'output.php');
         }
         
         //retour du résultat        
         function updatepage(str) 
         {
-        //str = str.replace(/a/g,'zzzaaazzz'); ça ça marche
-           // str = str.replace(/a/g,'zzzaaazzz');
-var reg = new RegExp("\{", "i");
-res = str.replace(reg, "repzjtrrz  az arzo ");
+            //Balisage des accolades pour que spip les ignores       
+           //alert (str);
+            str = str.replace(/&#123;/g,'<code>&#123;</code>');//{
+            str = str.replace(/&#125;/g,'<code>&#125;</code>');//}
             FCK.InsertHtml(str);
         }
         
@@ -77,11 +77,11 @@ res = str.replace(reg, "repzjtrrz  az arzo ");
             var form    = document.forms['f1'];
             var source  = form.codesource.value;
             var lang    = form.langage.value;
-            var showlines   = form.numligne.checked ? form.numligne.value : '';
-            var largtab   = form.tabulation.value ? form.tabulation.value : '';
+            var showlines   = form.numligne.value ? form.numligne.value : '';
+            var tabulation   = form.tabulation.value ? form.tabulation.value : '';
             var premnum   = form.premnum.value ? form.premnum.value : '';            
             
-            qstr = 'source=' + escape(source) + '&lang=' + lang + '&lines=' + showlines + '&largtab=' + largtab+ '&premnum=' + premnum;  // NOTE: no '?' before querystring
+            qstr = 'source=' + escape(source) + '&lang=' + lang + '&lines=' + showlines + '&tabulation=' + tabulation+ '&premnum=' + premnum;  // NOTE: no '?' before querystring
             return qstr;
         }
           //-->
@@ -205,13 +205,26 @@ res = str.replace(reg, "repzjtrrz  az arzo ");
     			<td width="51%">
                 <span fckLang="ColorationPremiernumero">premier numéro</span>
                 <input type="text" name="premnum" size="1" id="premnum" value="1">
-           </td>     
-    		</tr>
-    		<tr>
-    			<td width="51%">
-                <input type="checkbox" name="numligne" id="numligne" value="1" />
-                <span fckLang="ColorationNumerodeLigne">Numéro de ligne</span>
+           
+                 <select name="numligne" id="numligne" style="width: 100px;">
+                  <option value="1"><span fckLang="ColorationNumeroNormaux">normaux</span></option>
+                  <option value="2" selected><span fckLang="ColorationNumeroColore">colorés</span></option>
+                  <option value="0"><span fckLang="ColorationPasDeNumero">sans</span></option>
+                 </select> 
           </td>
+          <tr>
+            <td width="51%">
+                &nbsp;
+            </td>
+          </tr>  
+    		 <tr>
+          	<td width="51%">
+                <a target="_blank" href="http://qbnz.com/highlighter/license.php">
+                <span fckLang="ColorationTxtLicence">Geshi est sous licence GPL</span></a><br>
+				    <a target="_blank" href="http://qbnz.com/highlighter/index.php">
+                <span fckLang="ColorationTxtAdresse">Site officiel</span></a>
+            </td>
+    		</tr>
     		</tr>		
     	</table>
     </form>   

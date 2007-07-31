@@ -19,7 +19,7 @@ FCKToolbarItems.RegisterItem( 'coloration', ocolorationItem ) ;
 // Création de l'objet.
 var FCKcolorations = new Object() ;
 
-// Ajouter une note de bas de page.
+// Ajouter .
 FCKcolorations.Add = function( name )
 {
 	var oSpan = FCK.CreateElement( 'SPAN' ) ;
@@ -68,7 +68,7 @@ FCKcolorations.OnDoubleClick = function( span )
 
 FCK.RegisterDoubleClickHandler( FCKcolorations.OnDoubleClick, 'SPAN' ) ;
 
-// Vérifie si notedebasdepage est déjà ouvert.
+// Vérifie si déjà ouvert.
 FCKcolorations.Exist = function( name )
 {
 	var aSpans = FCK.EditorDocument.getElementsByTagName( 'SPAN' ) ;

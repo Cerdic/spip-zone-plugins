@@ -16,11 +16,11 @@
     FCKConfig.Plugins.Add( "tablecommands", null, "' . $_GET['path'] . '/fckeditor/editor/plugins/" ) ;		
     FCKConfig.Plugins.Add( "notebasdepage", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
     FCKConfig.Plugins.Add( "coloration", "fr","' . $_GET['path'] . '/spip_fck/plugins/" ) ;
-		
+    FCKConfig.Plugins.Add( "geshighlighter", "en,nl","' . $_GET['path'] . '/fckeditor/editor/plugins/" ) ;		
 		
     
 		FCKConfig.ToolbarSets["BarreArticle"] = [
-      	["Source","-","Save","NewPage","Preview","-","Templates"],
+      	["Source","-","NewPage","Preview","-","Templates","RtHighlight"],
       	["Cut","Copy","Paste","PasteText","PasteWord","-","Print","SpellCheck"],
       	["Undo","Redo","-","Find","Replace","-","SelectAll","RemoveFormat"],
       	["Form","Checkbox","Radio","TextField","Textarea","Select","Button","ImageButton","HiddenField"],
@@ -38,7 +38,7 @@
       ] ;
       
 		FCKConfig.ToolbarSets["BarreBreve"] = [
-			["Source","-","Save","NewPage","Preview","-","Templates"],
+			["Source","-","NewPage","Preview","-","Templates"],
 			["Undo","Redo","-","Find","Replace","-","SelectAll","RemoveFormat"],
 			["Cut","Copy","Paste","PasteText","PasteWord","-","Print","SpellCheck"],
 			"/",
@@ -54,7 +54,7 @@
 		] ;
 
 		FCKConfig.ToolbarSets["BarreRubrique"] = [
-			["Source","-","Save","NewPage","Preview","-","Templates"],
+			["Source","-","NewPage","Preview","-","Templates"],
 			["Undo","Redo","-","Find","Replace","-","SelectAll","RemoveFormat"],
 			["Cut","Copy","Paste","PasteText","PasteWord","-","Print","SpellCheck"],
 			"/",
@@ -64,7 +64,7 @@
 			["Link","Unlink","Anchor"],
 			"/",
 			["Style","FontFormat","FontName","FontSize"],
-			["Image","Table","Rule","Smiley","SpecialChar"],
+			["Image","Rule","Smiley","SpecialChar"],
 			["TextColor","BGColor"],
 			["FitWindow","-","About","HelpPanel"]
 		] ;
