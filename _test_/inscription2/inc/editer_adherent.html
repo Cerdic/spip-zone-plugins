@@ -80,17 +80,17 @@ $().ready(function() {
 	if(!isset($id))
 		return _T('inscription2:erreur');
 		
-	if($act=='val'){
+	if($act=='val' AND _request('nom') ){
 		foreach(lire_config('inscription2') as $cle => $val){
 			if($val!='' and !ereg("^(accesrestreint|categories|zone|news).*$", $cle) and $cle != 'statut_nouveau'){
 				$cle = ereg_replace("^username.*$", "login", $cle);
 				$cle = ereg_replace("_(obligatoire|fiche|table).*$", "", $cle);
 				if($cle == 'nom' or $cle == 'email' or $cle == 'login' )
-					$var_user['a.'.$cle] =  '`'.$cle.'` = \''.$_POST[$cle].'\'';
+					$var_user['a.'.$cle] =  '`'.$cle.'` = '._q(_request($cle));
 				elseif(ereg("^statut_int.*$", $cle))
-					$var_user['b.statut_interne'] =  '`statut_interne` = \''.$_POST['statut_interne'].'\'';
+					$var_user['b.statut_interne'] =  '`statut_interne` = '._q(_request('statut_interne'));
 				else
-					$var_user['b.'.$cle] =  'b.`'.$cle.'` = \''.$_POST[$cle].'\'';
+					$var_user['b.'.$cle] =  'b.`'.$cle.'` = '._q(_request($cle));
 			}
 			elseif ($val!='' and $cle == 'accesrestreint'){
 				$aux = spip_query("select id_zone from spip_zones_auteurs where id_auteur = $id");
@@ -130,6 +130,8 @@ $().ready(function() {
 				}
 			}
 		}
+		spip_log($var_user);		
+		if($var_user['a.nom'])
 		$q1 = spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id'");
 		if($q1)
 			$message = "adherent mis à jour";
@@ -203,31 +205,31 @@ $().ready(function() {
 		// select
 		if($cle == 'pays' or $cle == 'pays_pro' or $cle == 'statut_abonnement'){
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>"
-				. "<td><select name='$cle' id='$cle' >";
+				. "<td><select name=\"$cle\" id=\"$cle\" >";
 			if($cle == 'pays'){
 				include(_DIR_PLUGIN_INSCRIPTION2."inc/pays.php");
-					echo "<option value=''>"._T('inscription2:pays')."</option>";
+					echo "<option value=\"\">"._T('inscription2:pays')."</option>";
 				foreach($liste_pays as $cle=> $val){
 				if ($cle == $query['id_pays'])
-					echo "<option value='$cle' selected>$val</option>";
+					echo "<option value=\"$cle\" selected>".entites_html($val)."</option>";
 				else 
-					 echo "<option value='$cle'>$val</option>";
+					 echo "<option value=\"$cle\">".entites_html($val)."</option>";
 				}
 			}	
 			elseif($cle == 'pays_pro'){
 			include(_DIR_PLUGIN_INSCRIPTION2."inc/pays.php");
-					echo "<option value=''>"._T('inscription2:pays')."</option>";
+					echo "<option value=\"\">"._T('inscription2:pays')."</option>";
 				foreach($liste_pays as $cle=> $val){
 				if ($cle == $query['id_pays_pro'])
-					echo "<option value='$cle' selected>$val</option>";
+					echo "<option value=\"$cle\" selected>".entites_html($val)."</option>";
 				else 
-					 echo "<option value='$cle'>$val</option>";
+					 echo "<option value=\"$cle\">".entites_html($val)."</option>";
 				}
 			}elseif($cle == 'statut_abonnement'){
 				$statuts_possibles = array('prospect','abonne','relance','sorti');
 				foreach($statuts_possibles as $val_abo){
 					$selected = ($val == $val_abo)?'selected="selected"':'' ;
-					echo "<option value='$val_abo' $selected>$val_abo</option>";
+					echo "<option value=\"$val_abo\" $selected>".entites_html($val_abo)."</option>";
 				}
 			}
 			echo "</select></td></tr>";
@@ -238,13 +240,13 @@ $().ready(function() {
 				$val ='';
 			
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
-			echo "<td><input type='checkbox' name='$cle' $val><br /></td><tr/>"; 	
+			echo "<td><input type=\"checkbox\" name=\"$cle\" $val><br /></td><tr/>"; 	
 		}elseif ($cle != 'statut_nouveau'){ // textarea
 			echo "<tr><td><strong>"._T('inscription2:'.$cle)."</strong></td>";
 			if($cle == 'adresse' OR $cle == 'divers' OR $cle == 'commentaire')
-				echo "<td><textarea name='$cle'>$val</textarea><br /></td><tr/>"; 
+				echo "<td><textarea name=\"$cle\">".entites_html($val)."</textarea><br /></td><tr/>"; 
 			else // defaut (text)
-				echo "<td><input type='text' name='$cle' value='$val'><br /></td><tr/>"; 
+				echo "<td><input type=\"text\" name=\"$cle\" value=\"".entites_html($val)."\"><br /></td><tr/>"; 
 		}
 	}
 	if($news){
@@ -252,9 +254,9 @@ $().ready(function() {
 		echo "<select name='news[]' id='news' multiple>";
 		foreach($aux4 as $val){
 			if (in_array($val['id_liste'], $aux3))
-				echo "<option value='".$val['id_liste']."' selected>".$val['titre']."</option>";
+				echo "<option value=\"".$val['id_liste']."\" selected>".entites_html($val['titre'])."</option>";
 			else 
-				echo "<option value='".$val['id_liste']."'>".$val['titre']."</option>";
+				echo "<option value=\"".$val['id_liste']."\">".entites_html($val['titre'])."</option>";
 		}
 		echo "</select><br/><a onclick=\"$('#news').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 	}
@@ -263,9 +265,9 @@ $().ready(function() {
 		echo "<select name='acces[]' id='acces' multiple>";
 		foreach($aux2 as $val){
 			if (in_array($val['id_zone'], $aux1))
-				echo "<option value='".$val['id_zone']."' selected>".$val['titre']."</option>";
+				echo "<option value=\"".$val['id_zone']."\" selected>".entites_html($val['titre'])."</option>";
 			else 
-				echo "<option value='".$val['id_zone']."'>".$val['titre']."</option>";
+				echo "<option value=\"".$val['id_zone']."\">".entites_html($val['titre'])."</option>";
 		}
 		echo "</select><br/><a onclick=\"$('#acces').find('option').attr('selected', false);\">"._T('inscription2:deselect_listes')."</a> </small><br /></td></tr>";
 	}
