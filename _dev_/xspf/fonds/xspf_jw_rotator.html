@@ -124,19 +124,14 @@
 	</fieldset>]
 	
 [(#CHEMIN{lib/jw_image_rotator/imagerotator.swf}|?{'',' '})
-<?php
 
-if ($GLOBALS['spip_version_code']>1.9258){
+[(#CONFIG{version_installee}|>={1.941}|?{' ',''})
+<?php
 	include_spip('inc/actions');
 	echo redirige_action_auteur('charger_plugin',lib,'','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_image_rotator.zip' />"."<input type='submit' class='formo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
-}else {
-?>
-Placer un texte ici avec peut être une photo + lien sur la page du site de Jeroen
+?>]
 
-++
-
-<?php
-}
-
-?>
+[(#CONFIG{version_installee}|<={1.941}|?{'',' '})
+MESSAGE POUR DIRE D INSTALLER LE PLAYER DANS LIB
+]
 ]

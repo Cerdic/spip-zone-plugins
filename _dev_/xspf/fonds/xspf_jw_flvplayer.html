@@ -128,21 +128,16 @@
 		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:useaudio:> - <:xspf:desc_useaudio:>">?</a>
 		
 	</fieldset>]
-	
+
 [(#CHEMIN{lib/jw_flv_player/flvplayer.swf}|?{'',' '})
-<?php
 
-if ($GLOBALS['spip_version_code']>1.9258){
+[(#CONFIG{version_installee}|>={1.941}|?{' ',''})
+<?php
 	include_spip('inc/actions');
-	echo redirige_action_auteur('charger_plugin',lib,'self()','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_flv_player.zip' />"."<input type='submit' class='formo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
-}else {
-?>
-Placer un texte ici avec peut être une photo + lien sur la page du site de Jeroen
+	echo redirige_action_auteur('charger_plugin',lib,'','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_flv_player.zip' />"."<input type='submit' class='formo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
+?>]
 
-++
-
-<?php
-}
-
-?>
+[(#CONFIG{version_installee}|<={1.941}|?{'',' '})
+MESSAGE POUR DIRE D INSTALLER LE PLAYER DANS LIB
+]
 ]
