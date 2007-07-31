@@ -61,8 +61,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'donnees_multiple'=>"Permitir m&uacute;ltiples respuestas.",
 'donnees_nonmodifiable'=>"Datos no modificables por el usuario.",
 'donnees_nonmultiple'=>"Respuesta &uacute;nica.",
-'donnees_pub'=>"Datos públicos. Los datos registrados serán accesibles a los visitantes del sitio",
-'donnees_prot'=>"Datos privados. Los datos registrados s&oacute;lo serán accesibles desde la interfáz privada.",
+'donnees_pub'=>"Datos p&uacute;blicos. Los datos registrados ser&aacute;n accesibles a los visitantes del sitio",
+'donnees_prot'=>"Datos privados. Los datos registrados s&oacute;lo ser&aacute;n accesibles desde la interf&aacute;z privada.",
 
 'echec_upload'=>"Ha fallado la transferencia del archivo.",
 'editer'=>'Editar',
@@ -82,10 +82,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'format_liste_ou_radio' => 'Formato de la lista',
 'format_liste' => 'desplegable',
 'format_radio' => 'botones tipo radio',
-'html_wrapper'=> 'Encapsular los campos dentro del código html',
+'html_wrapper'=> 'Encapsular los campos dentro del c&oacute;digo html',
 
 'icone_ajouter_donnees' => "Añadir respuestas",
-'info_articles_lies_donnee' => 'Los artículos vinculados',
+'info_articles_lies_donnee' => 'Los art&iacute;culos vinculados',
 'icone_creer_formulaire' => "Crear un nuevo formulario",
 'icone_creer_table' => "Crear un nuevo formulario",
 'importer_form' => "Importar un formulario",
@@ -97,14 +97,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_supprimer_formulaire_reponses' => "Hay respuestas a este formulario. ¿Desea realmente eliminarlo?",
 
 'liste_choix' => "Lista de las opciones propuestas",
-'lien_retirer_donnee_liee' =>"Retirar el vínculo",
-'lien_retirer_donnee_liante' =>"Retirar el vínculo",
-'lier_articles' => "Permitir asociar los datos a los artículos",
+'lien_retirer_donnee_liee' =>"Retirar el v&iacute;nculo",
+'lien_retirer_donnee_liante' =>"Retirar el v&iacute;nculo",
+'lier_articles' => "Permitir asociar los datos a los art&iacute;culos",
 'lier_documents' => "Permitir adjuntar documentos a los datos",
 
-'moderation_donnees' => 'Validar los datos antes de la publicación :',
-'modifiable_donnees'=>"Datos modificables desde el espacio público:",
-'multiple_donnees'=>"Introducción de los datos desde el espacio público:",
+'moderation_donnees' => 'Validar los datos antes de la publicaci&oacute;n :',
+'modifiable_donnees'=>"Datos modificables desde el espacio p&uacute;blico:",
+'multiple_donnees'=>"Introducci&oacute;n de los datos desde el espacio p&uacute;blico:",
 
 'nombre_reponses'=>"@nombre@ respuestas",
 'nouveau_champ' => "Nuevo campo",
@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_mail_confirmation'=>"No hay email de confirmaci&oacute;n",
 'probleme_technique'=>"Problema t&eacute;cnico. Su respuesta no ha podido ser tomada en cuenta.",
 'probleme_technique_upload'=>"Problema t&eacute;cnico. Ha fallado la transferencia del archivo.",
-'publication_donnees' => 'Publicación de datos',
+'publication_donnees' => 'Publicaci&oacute;n de datos',
 
 'rang' => 'Fila',
 'remplir_un_champ'=>"Por favor, complete al menos un campo.",
@@ -125,7 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reponse_depuis' => 'Desde la p&aacute;gina ', 
 'reponse_envoyee' => 'Respuesta enviada el ',
 'reponse_envoyee_a' => 'a', 
-'reponse_retrovez' => "Encuentre esta respuesta en la interfaz de administración :",
+'reponse_retrovez' => "Encuentre esta respuesta en la interfaz de administraci&oacute;n :",
 'reponses' => 'respuestas',
 
 'site_introuvable'=>"No se ha encontrado este sitio.",
