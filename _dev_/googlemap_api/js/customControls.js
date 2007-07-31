@@ -27,7 +27,7 @@ mapTypeControl.prototype.initialize = function(map) {
 		map.setMapType(G_MAP_TYPE);
 	});
 	var typeMapImg = document.createElement("img");
-	typeMapImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlMap." + images_extension;
+	typeMapImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlMap." + images_extension;
 	typeMapImg.style.cursor = "pointer";
 	typeMapImg.style.position = "absolute";
 	typeMapImg.style.left= "0px";
@@ -38,7 +38,7 @@ mapTypeControl.prototype.initialize = function(map) {
 		map.setMapType(G_SATELLITE_TYPE);
 	});
 	var typeSatImg = document.createElement("img");
-	typeSatImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlSat." + images_extension;
+	typeSatImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlSat." + images_extension;
 	typeSatImg.style.cursor = "pointer";
 	typeSatImg.style.position = "absolute";
 	typeSatImg.style.left= "49px";
@@ -49,7 +49,7 @@ mapTypeControl.prototype.initialize = function(map) {
 		map.setMapType(G_HYBRID_TYPE);
 	});
 	var typeHybImg = document.createElement("img");
-	typeHybImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlHyb." + images_extension;
+	typeHybImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlHyb." + images_extension;
 	typeHybImg.style.cursor = "pointer";
 	typeHybImg.style.position = "absolute";
 	typeHybImg.style.left= "115px";
@@ -78,12 +78,12 @@ mapZoomControl.prototype.initialize = function(map) {
 	zoomIn.style.position = "absolute";
 	zoomIn.style.top= "0px";
 	GEvent.addDomListener(zoomIn, "click", function() {
-		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
+		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
 		map.zoomIn();
-		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomSel." + images_extension;
+		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomSel." + images_extension;
 	});
 	var zoomInImg = document.createElement("img");
-	zoomInImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomIn." + images_extension;
+	zoomInImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomIn." + images_extension;
 	zoomInImg.style.cursor = "pointer";
 	zoomIn.appendChild(zoomInImg);
 	container.appendChild(zoomIn);
@@ -93,15 +93,15 @@ mapZoomControl.prototype.initialize = function(map) {
 	for(var i=0; i < 18; i++){
 		notchDiv[i] = document.createElement("div");
 		GEvent.addDomListener(notchDiv[i], "click", function() {
-			this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
+			this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
 			map.setZoom(17 - this.zoom);
-			this.firstChild.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomSel." + images_extension;
+			this.firstChild.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomSel." + images_extension;
 		});
 		notchDiv[i].zoom = i;
 		notchDiv[i].style.position = "absolute";
 		notchDiv[i].style.top= 9 + (i*9) + "px";
 		notchImg[i] = document.createElement("img");
-		notchImg[i].src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
+		notchImg[i].src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
 		notchImg[i].style.cursor = "pointer";
 		notchDiv[i].appendChild(notchImg[i]);
 		container.appendChild(notchDiv[i]);
@@ -111,12 +111,12 @@ mapZoomControl.prototype.initialize = function(map) {
 	zoomOut.style.position = "absolute";
 	zoomOut.style.top= "179px";
 	GEvent.addDomListener(zoomOut, "click", function() {
-		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
+		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomNotch." + images_extension;
 		map.zoomOut();
-		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomSel." + images_extension;
+		this.parentNode.childNodes[18 - map.getZoom()].firstChild.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomSel." + images_extension;
 	});
 	var zoomOutImg = document.createElement("img");
-	zoomOutImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlZoomOut." + images_extension;
+	zoomOutImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlZoomOut." + images_extension;
 	zoomOutImg.style.cursor = "pointer";
 	zoomOut.appendChild(zoomOutImg);
 	container.appendChild(zoomOut);
@@ -139,7 +139,7 @@ mapMoveControl.prototype.initialize = function(map) {
 	var mapMoveMap = document.createElement("div");
     		
 	var mapMoveImgUL = document.createElement("img");
-	mapMoveImgUL.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlTopLeft." + images_extension;
+	mapMoveImgUL.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlTopLeft." + images_extension;
 	mapMoveImgUL.style.position = "absolute";
 	mapMoveImgUL.style.left= "7px";
 	mapMoveMap.appendChild(mapMoveImgUL);
@@ -151,13 +151,13 @@ mapMoveControl.prototype.initialize = function(map) {
 		pan(north);
 	});
 	var butomUpImg = document.createElement("img");
-	butomUpImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlTop." + images_extension;
+	butomUpImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlTop." + images_extension;
 	butomUpImg.style.cursor = "pointer";
 	butomUpDiv.appendChild(butomUpImg);
 	mapMoveMap.appendChild(butomUpDiv);
       		
 	var mapMoveImgUR = document.createElement("img");
-	mapMoveImgUR.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlTopRight." + images_extension;
+	mapMoveImgUR.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlTopRight." + images_extension;
 	mapMoveImgUR.style.position = "absolute";
 	mapMoveImgUR.style.left= "43px";
 	mapMoveMap.appendChild(mapMoveImgUR);
@@ -170,7 +170,7 @@ mapMoveControl.prototype.initialize = function(map) {
 		pan(east);
 	});
 	var butomRightImg = document.createElement("img");
-	butomRightImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlRight." + images_extension;
+	butomRightImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlRight." + images_extension;
 	butomRightImg.style.cursor = "pointer";
 	butomRightDiv.appendChild(butomRightImg);
 	mapMoveMap.appendChild(butomRightDiv);
@@ -183,7 +183,7 @@ mapMoveControl.prototype.initialize = function(map) {
 		map.panTo(center);
 	});
 	var butomCenterImg = document.createElement("img");
-	butomCenterImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlCenter." + images_extension;
+	butomCenterImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlCenter." + images_extension;
 	butomCenterImg.style.cursor = "pointer";
 	butomCenterDiv.appendChild(butomCenterImg);
 	mapMoveMap.appendChild(butomCenterDiv);
@@ -196,13 +196,13 @@ mapMoveControl.prototype.initialize = function(map) {
 		pan(west);
 	});
 	var butomLeftImg = document.createElement("img");
-	butomLeftImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlLeft." + images_extension;
+	butomLeftImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlLeft." + images_extension;
 	butomLeftImg.style.cursor = "pointer";
 	butomLeftDiv.appendChild(butomLeftImg);
 	mapMoveMap.appendChild(butomLeftDiv);
       		
 	var mapMoveImgDL = document.createElement("img");
-	mapMoveImgDL.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlBotLeft." + images_extension;
+	mapMoveImgDL.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlBotLeft." + images_extension;
 	mapMoveImgDL.style.position = "absolute";
 	mapMoveImgDL.style.top= "36px";
 	mapMoveImgDL.style.left= "7px";
@@ -216,13 +216,13 @@ mapMoveControl.prototype.initialize = function(map) {
 		pan(south);
 	});
 	var butomDownImg = document.createElement("img");
-	butomDownImg.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlBot." + images_extension;
+	butomDownImg.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlBot." + images_extension;
 	butomDownImg.style.cursor = "pointer";
 	butomDownDiv.appendChild(butomDownImg);
 	mapMoveMap.appendChild(butomDownDiv);
       		
 	var mapMoveImgDR = document.createElement("img");
-	mapMoveImgDR.src = URLbase + "plugins/gis/googlemap_api/img_pack/" + images_folder + "/ctlBotRight." + images_extension;
+	mapMoveImgDR.src = URLbase + "plugins/googlemap_api/img_pack/" + images_folder + "/ctlBotRight." + images_extension;
 	mapMoveImgDR.style.position = "absolute";
 	mapMoveImgDR.style.left= "43px";
 	mapMoveImgDR.style.top= "36px";
