@@ -1,0 +1,7 @@
+<BOUCLE_max(MOTS){popularite article}{id_groupe?}{!par popularite_relative}{0,1}>#SET{max,#POPULARITE_RELATIVE}</BOUCLE_max>
+<ul class="nuage">
+<BOUCLE_tags(MOTS){popularite article}{id_groupe?}>
+<span class="frequence">(#POPULARITE_RELATIVE/#GET{max})</span>
+<li><a rel="tag" href="#URL_MOT" class="nuage[(#POPULARITE_RELATIVE|nuage_note{#GET{max},10})]">#TITRE</a></li>
+</BOUCLE_tags>
+</ul>

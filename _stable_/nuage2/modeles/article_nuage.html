@@ -1,0 +1,7 @@
+<BOUCLE_max(MOTS){frequence article}{id_article?}{!par frequence}{0,1}>#SET{max,#FREQUENCE}</BOUCLE_max>
+<ul class="nuage">
+<BOUCLE_tags(MOTS){frequence article}{id_article?}>
+<span class="frequence">(#FREQUENCE/#GET{max})</span>
+<li><a rel="tag" href="#URL_MOT" class="nuage[(#FREQUENCE|nuage_note{#GET{max},10})]">#TITRE</a></li>
+</BOUCLE_tags>
+</ul>

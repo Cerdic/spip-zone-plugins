@@ -1,0 +1,19 @@
+
+<plugin>
+	<version>0.9</version>
+	<nom>Nuage</nom>
+	<prefix>nuage</prefix>
+	<auteur>(c)2007 Bill(stephane<at>rezo.net). Licence GNU/GPL</auteur>
+	<etat>test</etat>
+	<lien>Afficher les mots-cl&#233;s en faisant varier la taille de la police</lien>
+	<description></description>
+	<icon>
+	nuage.png
+	</icon>
+	<fonctions>nuage_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<inclure>nuage_options.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>
