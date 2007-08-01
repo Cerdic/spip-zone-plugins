@@ -15,7 +15,7 @@ function critere_frequence($idb, &$boucles, $crit){
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
 	$boucle->select[]= 'COUNT('.$type_id.') AS frequence';
 	$boucle->from['freq']="spip_'.$type_requete.'_".$type."s";
-	$boucle->where[]= array("'='", "'".$id_table."'", "'".$type_id."'");
+	$boucle->where[]= array("'='", "'".$id_table."'", "'freq.".$boucle->primary."'");
 	$boucle->group[]=$id_table;
 	if ($op)
 		$boucle->having[]= array("'".$op."'", "'frequence'",$op_val);
@@ -37,7 +37,7 @@ function critere_popularite($idb, &$boucles, $crit){
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
 	$boucle->select[]= 'SUM('.$type_id.') AS popularite_relative';
 	$boucle->from['pop']="spip_'.$type_requete.'_".$type."s";
-	$boucle->where[]= array("'='", "'".$id_table."'", "'".$type_id."'");
+	$boucle->where[]= array("'='", "'".$id_table."'", "'pop.".$boucle->primary."'");
 	$boucle->group[]=$id_table;
 	if ($op)
 		$boucle->having[]= array("'".$op."'", "'popularite_relative'",$op_val);
@@ -59,7 +59,7 @@ function critere_frequence_branche($idb, &$boucles, $crit){
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
 	$boucle->select[]= 'COUNT('.$type_id.') AS frequence';
 	$boucle->from['freq']="spip_'.$type_requete.'_".$type."s";
-	$boucle->where[]= array("'='", "'".$id_table."'", "'".$type_id."'");
+	$boucle->where[]= array("'='", "'".$id_table."'", "'freq.".$boucle->primary."'");
 	$boucle->from['lf']="spip_".$type."s";
 	$boucle->where[]= array("'='", "'".$type_id."'", "'lf.id_".$type."'");
 	$boucle->group[]=$id_table;
@@ -92,7 +92,7 @@ function critere_popularite_branche($idb, &$boucles, $crit){
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
 	$boucle->select[]= 'SUM('.$type_id.') AS popularite_relative';
 	$boucle->from['pop']="spip_'.$type_requete.'_".$type."s";
-	$boucle->where[]= array("'='", "'".$id_table."'", "'".$type_id."'");
+	$boucle->where[]= array("'='", "'".$id_table."'", "'freq.".$boucle->primary."'");
 	$boucle->group[]=$id_table;
 	if ($op)
 		$boucle->having[]= array("'".$op."'", "'popularite_relative'",$op_val);

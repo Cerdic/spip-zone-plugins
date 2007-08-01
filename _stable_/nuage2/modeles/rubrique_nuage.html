@@ -1,7 +1,14 @@
-<BOUCLE_max(MOTS){frequence_branche article}{!par frequence}{0,1}>#SET{max,#FREQUENCE}</BOUCLE_max>
+[
+(#REM) Noter la frequence maxi
+]<BOUCLE_max(MOTS){frequence_branche article}{!par frequence}{0,1}>#SET{max,#FREQUENCE}</BOUCLE_max>[
+(#REM) afficher le nuage
+]<B_tags>
 <ul class="nuage">
-<BOUCLE_tags(MOTS){frequence_branche article}>
-<span class="frequence">(#FREQUENCE/#GET{max})</span>
-<li><a rel="tag" href="#URL_MOT" class="nuage[(#FREQUENCE|nuage_note{#GET{max},10})]">#TITRE</a></li>
+<BOUCLE_tags(MOTS){frequence_branche article}{frequence>0}{par num titre,titre}>
+ <li>
+  <span class="frequence">(#FREQUENCE/#GET{max})</span>
+  <a rel="tag" href="#URL_MOT" class="nuage[(#FREQUENCE|nuage_note{#GET{max},10})]">#TITRE</a>
+ </li>
 </BOUCLE_tags>
 </ul>
+</B_tags>
