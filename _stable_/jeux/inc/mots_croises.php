@@ -164,7 +164,7 @@ function jeux_listes_compacte($texte, $alpha) {
 	return implode(' ', $tableau2);
 }
 
-// definitions des mots croisés
+// definitions des mots croises
 function affichage_definitions($horizontal, $vertical) {
  if (jeux_config('compact')) return 
  		'<p><strong>'._T('motscroises:horizontalement').'&nbsp;</strong>'
@@ -183,8 +183,9 @@ function jeux_mots_croises($texte, $indexJeux) {
 	$horizontal = $vertical = $solution = $html = false;
 	$titre = _T('motscroises:titre');
 	
-  // parcourir tous les #SEPARATEURS
+    // parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('mots_croises', $texte);
+	// configuration par defaut
 	jeux_config_init("
 		solution=oui	// Afficher la solution ?
 		fondnoir=noir	// couleur des cases noires

@@ -314,6 +314,7 @@ function jeux_qcm($texte, $indexJeux) {
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('qcm', $texte);
+  // configuration par defaut
   jeux_config_init("
 	trou=auto	// taille du trou affiche en cas de proposition unique
 	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction

@@ -103,6 +103,7 @@ function jeux_trous($texte, $indexJeux) {
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('trous', $texte); 
+  // configuration par defaut
   jeux_config_init("
 	taille=auto	// taille des trous
 	indices=oui	// afficher les indices ?

@@ -84,6 +84,7 @@ function jeux_pendu($texte, $indexJeux) {
   
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('pendu', $texte);
+  // configuration par defaut
   jeux_config_init("
 	pendu=1		// dessin du pendu a utiliser dans : /jeux/img/pendu?
 	regle=non	// Afficher la regle du jeu ?

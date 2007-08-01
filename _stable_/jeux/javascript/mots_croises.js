@@ -1,17 +1,17 @@
-// déplacement dans la grille
+// deplacement dans la grille
 var sens_grille='';
-// sens de l'écriture : 'rtl' ou 'ltl'
+// sens de l'ecriture : 'rtl' ou 'ltl'
 var sens_curseur = ($('html').attr('dir') == 'rtl')?'w-resize':'e-resize';
 
-// dès que le DOM est prêt...
+// des que le DOM est pret...
 $(document).ready(function(){
- // vérification de la présence d'une grille	
+ // verification de la presence d'une grille	
  if ($('table.jeux_grille').length) {
-	// sens d'écriture basculé à 'h' (horizontal)
+	// sens d'ecriture bascule a 'h' (horizontal)
 	changeDeDirection();
 	// gestion du clavier par function clavierPourJeux()
 	$('table.jeux_grille tr td input').bind('keypress', clavierPourJeux);
-	// définition du bouton droit de la souris pour changer le sens de déplacement dans la grille
+	// definition du bouton droit de la souris pour changer le sens de deplacement dans la grille
 	if ((jQuery.browser.safari) | (jQuery.browser.Konqueror))
 		$('form.jeux_grille').bind('contextmenu', changeDeDirection);
 	else

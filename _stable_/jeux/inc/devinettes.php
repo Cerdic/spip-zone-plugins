@@ -78,6 +78,7 @@ function jeux_devinettes($texte, $indexJeux) {
   
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('devinettes', $texte);
+  // configuration par defaut
   jeux_config_init("
 	reponse=oui	// Afficher la reponse ?
 	taille=10	// taille de la police utilisée
