@@ -1,0 +1,36 @@
+<plugin>
+	<nom>Balise #PLUGIN</nom>
+	<auteur>SarkASmeL &#169; 2007 - Distribu&#233; sous licence GNU/LGPL</auteur>
+	<version>0.1</version>
+	<etat>experimental</etat>
+	
+	<description>
+Ajoute une balise {{<code>#PLUGIN{PREFIX,INFO}</code>}}.
+<br /><br />
+Cette balise permet de r&eacute;cup&eacute;rer certaines informations
+statiques d&eacute;finies dans plugin.xml ainsi que le statut d'activation du plugin.
+<br /><br />
+-* {{PREFIX}} : pr&eacute;fixe du plugin recherch&eacute; d&eacute;fini dans le champ <code><prefix></prefix></code> du fichier plugin.xml (non case sensitive)
+-* {{INFO}} : peut prendre l'une des valeurs suivantes (non case sensitive):
+-** NOM: format&eacute; avec propre
+-** VERSION: 
+-** AUTEUR: format&eacute; avec propre
+-** ICON: uniquement le nom du fichier
+-** DESCRIPTION: format&eacute;e avec propre
+-** LIEN: format&eacute; suivant qu'il est interne ou externe
+-** ETAT: le texte multilangue
+-** EST_ACTIF: 1 pour actif, 0 pour inactif. EST_ACTIF est la valeur retourn&eacute; par d&eacute;faut si INFO est omis
+-** TOUT: le tableau s&eacute;rialis&eacute; de toutes les informations du plugin
+<br />
+----
+<p>{{ {Remarque} }}: {si un plugin de pr&eacute;fixe p1 est install&eacute; dans deux r&eacute;pertoires r1 et r2 alors les informations retourn&eacute;es
+concerneront le plugin actif parmi r1 et r2. Si tous deux sont inactifs, le plugin de r&eacute;pertoire r2 sera utilis&eacute;}</p>
+	</description>
+	<lien>[Documentation->http://www.spip-contrib.net/Plugin-xml]</lien>
+	
+	<prefix>BalisePlugin</prefix>
+	<icon></icon>
+	<chemin dir='' />
+	
+	<fonctions>baliseplugin_fonctions.php</fonctions>
+</plugin>
