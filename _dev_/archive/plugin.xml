@@ -3,20 +3,15 @@
 	<version>0.63</version>
 	<prefix>archive</prefix>
 	<etat>dev</etat>
-	<auteur>Camille Lafitte [contact->mailto:cam.lafit@zerttyu.net]
-_ [mon site->http://km.azerttyu.net]</auteur>
+	<auteur>Camille Lafitte _ Licence GPL _ [un site->http://km.azerttyu.net]</auteur>
 	<icon>archive.jpg</icon>
 	<description>
 		Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL.<br /> Pensez &agrave; utiliser le crit&egrave;re <b>{archive}</b> ou bien <b>archive seulement</b>
 	</description>
 	<lien>[->http://www.spip-contrib.net/Plugin-Archive]</lien>
 	<fonctions>
-		public/archive_boucles.php
+		archive_fonctions.php
 	</fonctions>
-	<fonctions>
-		public/archive_criteres.php
-	</fonctions>
-
 	<options>
 		archive_options.php
 	</options>

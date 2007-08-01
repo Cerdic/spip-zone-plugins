@@ -7,8 +7,9 @@ function critere_archive_dist($idb, &$boucles, $crit) {
 
 	$boucle->modificateur['criteres']['archive'] = true;
 
-    //reduit le critére à la boucle articles uniquement
+//reduit le critére à la boucle articles uniquement
     if ($boucle->type_requete == 'articles') {
+        spip_log('seulement','archive');
         //recherche la valeur de x dans {critere x}
         //si x vaut "seulement" alors on indique uniquement les articles archivés
         if ($crit->param[0][0]->texte == "seulement") {

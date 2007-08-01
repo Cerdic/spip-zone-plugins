@@ -1,33 +1,33 @@
-#CACHE{0}
-
-[(#REM) descriptif= 
-<h4>Le plugin archive</h4>
-Rappel sur comment l'utiliser.<br />
-<br /><a href="http://www.spip-contrib.net/Plugin-archive" class="spip_out">Documentation compléte</a>
-]
-[(#REM) titre=configuration Plugin Archive]
-
-<h4> Version en cours : <?php echo $GLOBALS['meta']['archive_version'] ?> </h4> 
-
-<h4> Les articles archivés </h4>
-
-[(#REM) determine les articles archivés]
-<BOUCLE_test(ARTICLES) {archive seulement}>
-
-<B_rubrique>
-<ul>
-<BOUCLE_rubrique(RUBRIQUES) {unique} {id_rubrique}>
-	<li>#TITRE</li>
-	<B_archive>
-	<ul>
-		<BOUCLE_archive(ARTICLES) {id_rubrique} {archive seulement}>
-		<li>
-		<a href="?exec=articles&id_article=#ID_ARTICLE	"><b>#TITRE</b></a> (archivé le [(#ARCHIVE_DATE|jour)]/[(#ARCHIVE_DATE|mois)]/[(#ARCHIVE_DATE|annee)])
-		</li>
-		</BOUCLE_archive>
-	</ul>
-	</B_archive>
-</BOUCLE_rubrique>
-</ul>
-</B_rubrique>
-</BOUCLE_test>
+#CACHE{0}
+
+[(#REM) descriptif=
+<h4>Le plugin archive</h4>
+Rappel sur comment l'utiliser.<br />
+<br /><a href="http://www.spip-contrib.net/Plugin-archive" class="spip_out">Documentation compléte</a>
+]
+[(#REM) titre=configuration Plugin Archive]
+
+<h4> Version en cours : <?php echo $GLOBALS['meta']['archive_version'] ?> </h4>
+
+<h4> Les articles archivés </h4>
+
+[(#REM) determine les articles archivés]
+<BOUCLE_test(ARTICLES) {archive seulement}>
+
+<B_rubrique>
+<ul>
+<BOUCLE_rubrique(RUBRIQUES) {unique} {id_rubrique}>
+	<li>#TITRE</li>
+	<B_archive>
+	<ul>
+		<BOUCLE_archive(ARTICLES) {id_rubrique} {archive seulement}>
+		<li>
+		<a href="?exec=articles&id_article=#ID_ARTICLE	"><b>#TITRE</b></a> (archivé le [(#ARCHIVE_DATE|jour)]/[(#ARCHIVE_DATE|mois)]/[(#ARCHIVE_DATE|annee)])
+		</li>
+		</BOUCLE_archive>
+	</ul>
+	</B_archive>
+</BOUCLE_rubrique>
+</ul>
+</B_rubrique>
+</BOUCLE_test>
