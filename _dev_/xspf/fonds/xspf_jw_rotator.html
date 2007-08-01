@@ -126,9 +126,10 @@
 [(#CHEMIN{lib/jw_image_rotator/imagerotator.swf}|?{'',' '})
 
 [(#CONFIG{version_installee}|>={1.941}|?{' ',''})
+<:xspf:jw_rotator:>
 <?php
 	include_spip('inc/actions');
-	echo redirige_action_auteur('charger_plugin',lib,'','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_image_rotator.zip' />"."<input type='submit' class='formo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
+	echo redirige_action_auteur('charger_plugin',lib,'','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_image_rotator.zip' />"."<input type='submit' class='fondo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
 ?>]
 
 [(#CONFIG{version_installee}|<={1.941}|?{'',' '})

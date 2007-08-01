@@ -78,3 +78,8 @@
 		</select></label>&nbsp;&nbsp;<a href="#" title="<:xspf:autoload:> - <:xspf:desc_autoload:>">?</a>
 		
 	</fieldset>
+	[(#CONFIG{version_installee}|>={1.941}|?{' ',''})
+<?php
+	include_spip('inc/actions');
+	echo redirige_action_auteur('charger_plugin',lib,'','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_flv_player.zip' />"."<input type='hidden' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
+?>]

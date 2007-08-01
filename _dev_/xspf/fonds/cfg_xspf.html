@@ -19,6 +19,7 @@ Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons
 </p>
 En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>
 -->
+
 [(#REM) titre=XSPF plugin]
 
 <link rel="stylesheet" href="#CHEMIN{javascript/jquery.tooltip.css}" />
@@ -79,33 +80,33 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 <div id="container-1">
 	<ul>
 		<li><a href="#fragment-1"><span>MUSICPLAYER</span></a></li>
-		<li><a href="#fragment-2"><span>JW MEDIAPLAYER</span></a></li>
-		<li><a href="#fragment-3"><span>JW ROTATOR</span></a></li>
+		<li><a href="#fragment-2"><span>JW ROTATOR</span></a></li>
+		<li><a href="#fragment-3"><span>JW MEDIAPLAYER</span></a></li>
 		<li><a href="#fragment-4"><span>JW FLVPLAYER</span></a></li>
 	</ul>
 
 	[(#REM) ------------- MUSICPLAYER / SLIMPLAYER / BUTTONPLAYER --------------- ]
 
 	<div id="fragment-1">
-		#INCLURE{fond=fonds/xspf_musicplayer}
-	</div>
-
-	[(#REM) ------------------------ JW MEDIAPLAYER ------------------------ ]
-
-	<div id="fragment-2">
-		#INCLURE{fond=fonds/xspf_jw_mediaplayer}
+		<INCLURE{fond=fonds/xspf_musicplayer}>
 	</div>
 
 	[(#REM) ------------------------ JW ROTATOR ------------------------ ]
 
+	<div id="fragment-2">
+		<INCLURE{fond=fonds/xspf_jw_rotator}>
+	</div>
+	
+	[(#REM) ------------------------ JW MEDIAPLAYER ------------------------ ]
+
 	<div id="fragment-3">
-		#INCLURE{fond=fonds/xspf_jw_rotator}
+		<INCLURE{fond=fonds/xspf_jw_mediaplayer}>
 	</div>
 
 	[(#REM) ------------------------ JW FLVPLAYER ------------------------ ]
 
 	<div id="fragment-4">
-		#INCLURE{fond=fonds/xspf_jw_flvplayer}
+		<INCLURE{fond=fonds/xspf_jw_flvplayer}>
 	</div>
 
 </div>
