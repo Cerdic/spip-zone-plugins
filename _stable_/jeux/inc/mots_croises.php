@@ -51,7 +51,7 @@ function lettre_grille($chiffre) {
 
 // affiche la grille de mot croises, avec la solution au cas ou
 function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
-	global $jeux_couleurs;
+	$jeux_couleurs = _request('jeux_couleurs');
 	
 	// les variables de la grille
 	$hauteur = sizeof($tableau_grille);
@@ -89,11 +89,12 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 					$grille .= "\t\t<td$class>$cellule</td>\n" ;
 				else {
 					$name = 'GR'.$indexJeux.'x'.$colonne.'x'.$ligne;
+					$valeur = _request($name);
 					$grille .= "\t\t<td$class><label for=\"$name\">"
 						. _T('jeux:ligne_n',Array('n'=>lettre_grille($ligne))).';'
 						. _T('jeux:colonne_n',Array('n'=>$colonne)).'</label>'
 						. '<input type="text" maxlength="1" '
-						. ((isset($GLOBALS[$name]) and $GLOBALS[$name]!='')? 'value="'.$GLOBALS[$name]:'')
+						. ((isset($valeur) and $valeur!='')? 'value="'.$valeur:'')
 						.'" name="'.$name.'" id="'.$name.'" />'
 						. "</td>\n" ;
 				}
@@ -127,7 +128,7 @@ function comparaison_grille($tableau_grille, $indexJeux) {
         foreach ($contenu_ligne as $colonne =>$cellule) {
             //compare les valeurs du tableau PHP avec les variables POST
 			if ($cellule!='*') {
-				$input = trim($GLOBALS['GR'.$indexJeux.'x'.($colonne+1).'x'.($ligne+1)]);
+				$input = trim(_request('GR'.$indexJeux.'x'.($colonne+1).'x'.($ligne+1)));
 	            if ($input=='') $vides++;
     	         elseif (strtoupper($input)!=strtoupper($cellule)) $erreurs++;
 			}	
@@ -138,7 +139,7 @@ function comparaison_grille($tableau_grille, $indexJeux) {
 
 // renvoie le nombre d'erreurs et de cases vides
 function calcul_erreurs_grille($solution, $indexJeux) {
-	if ($GLOBALS["bouton_envoi_$indexJeux"] == '') return '';
+	if (_request("bouton_envoi_$indexJeux") == '') return '';
 	else {
 	  list($nbr_erreurs, $nbr_vides) = comparaison_grille($solution, $indexJeux); 
 	  return '<p class="jeux_erreur">'
@@ -199,13 +200,13 @@ function jeux_mots_croises($texte, $indexJeux) {
 	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_grille($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
-
+	$affiche_solution = _request('affiche_solution_'.$indexJeux);
 	return 	'<div class="mots_croises">'
 			. calcul_erreurs_grille($solution, $indexJeux)
 			. affichage_grille_mc($solution, $indexJeux)
 			. affichage_definitions($horizontal, $vertical)
 	// solution
-			. (($GLOBALS['affiche_solution_'.$indexJeux][0] == 1)? affichage_grille_mc($solution, $indexJeux, true) : '')
+			. (($affiche_solution[0] == 1)? affichage_grille_mc($solution, $indexJeux, true) : '')
 			. '</div><br class="jeux_nettoyeur"/>';
 }
 ?>
