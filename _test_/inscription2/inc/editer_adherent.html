@@ -74,7 +74,7 @@ $().ready(function() {
 	<h2><strong><:inscription2:gestion_adherents:></strong></h2>
 	
 	<?php
-		$id = _request('id');
+	$id = _request('id');
 	$act = _request('act');
 
 	if(!isset($id))
@@ -130,6 +130,13 @@ $().ready(function() {
 				}
 			}
 		}
+		
+		
+		if(_request('abonnement') and _request('id_auteur_elargi')){
+		spip_query("delete from spip_auteurs_elargis_abonnements where id_auteur_elargi ='"._request('id_auteur_elargi')."'"); //source de pbs
+		spip_query("INSERT INTO spip_auteurs_elargis_abonnements (id_abonnement, id_auteur_elargi) values ('"._request('abonnement')."','"._request('id_auteur_elargi')."') ");
+		}
+		
 		spip_log($var_user);		
 		if($var_user['a.nom'])
 		$q1 = spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id'");
@@ -190,7 +197,7 @@ $().ready(function() {
 		$query2 = spip_query("select id from spip_auteurs_elargis where id_auteur = $id");
 		$query2 = spip_fetch_array($query2);
 		if($query2['id'] == NULL)
-			$id_elargi =spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)"); //source de pbs
+			$id_elargi = spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)"); //source de pbs
 	}
 
 
@@ -225,12 +232,24 @@ $().ready(function() {
 				else 
 					 echo "<option value=\"$cle\">".entites_html($val)."</option>";
 				}
-			}elseif($cle == 'statut_abonnement'){
+			}elseif($cle == 'statut_abonnement'){ //plugin abonnment
 				$statuts_possibles = array('prospect','abonne','relance','sorti');
 				foreach($statuts_possibles as $val_abo){
 					$selected = ($val == $val_abo)?'selected="selected"':'' ;
 					echo "<option value=\"$val_abo\" $selected>".entites_html($val_abo)."</option>";
 				}
+			$mon_abo = spip_fetch_array(spip_query("select ab.id_abonnement, b.id from spip_auteurs_elargis_abonnements ab, spip_auteurs_elargis b where b.id_auteur='$id' AND ab.id_auteur_elargi = b.id"));
+			$query_abo="select id_abonnement, libelle from spip_abonnements";
+			$result_abo = spip_query($query_abo);
+				if(spip_num_rows($result_abo) > 0){
+				echo "</select></td></tr>";
+				echo "<tr><td><input type=\"hidden\" name=\"id_auteur_elargi\" value=\"".$mon_abo['id']."\" ><strong>"._T('Abonnement')."</strong></td><td><select name=\"abonnement\" id=\"abonnement\" >";
+					while($row_abo = spip_fetch_array($result_abo)){										
+					$selected = ($mon_abo['id_abonnement'] == $row_abo['id_abonnement'])?'selected="selected"':'' ;
+					echo "<option value=\"".$row_abo['id_abonnement']."\" $selected>".entites_html($row_abo['libelle'])."</option>";
+					}
+				}
+			
 			}
 			echo "</select></td></tr>";
 		}elseif($cle=='publication'){ // checkbox
