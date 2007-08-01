@@ -346,7 +346,7 @@ $().ready(function() {
 	
 	<div id="pagination">
 	<?php
-	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a WHERE $critere");
+	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a , spip_auteurs_elargis b WHERE $critere");
 	$query = spip_fetch_array($query);
 	$nombre_selection = $query['COUNT(*)'];
 	$pages=intval($nombre_selection/$max_par_page) + 1;
