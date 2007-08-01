@@ -35,8 +35,6 @@
 				spip_query("DROP TABLE spip_gis_config");
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.2");
 			}
-			ecrire_metas();
-			
 			if (version_compare($current_version,"0.1.3","<")){
 				spip_query("CREATE TABLE `spip_gis_mots` (
 					`id_gis` bigint(21) NOT NULL auto_increment,
@@ -46,7 +44,15 @@
 					`zoom` tinyint(4) default NULL,
 					PRIMARY KEY  (`id_gis`)
 				)");
+				ecrire_meta($nom_meta_base_version,$current_version="0.1.3");
 			}
+			if (version_compare($current_version,"0.1.4","<")){
+				$res = spip_query("SELECT * FROM spip_types_documents WHERE extension='kml'");
+				if (!$row = spip_fetch_array($res))
+					spip_query("INSERT INTO `spip_types_documents` ( `id_type` , `titre` , `descriptif` , `extension` , `mime_type` , `inclus` , `upload` , `maj` )    VALUES ('', 'Google Earth Placemark', '', 'kml', 'application/vnd.google-earth.kml+xml kml', 'non', 'oui', NOW( ));");
+				ecrire_meta($nom_meta_base_version,$current_version="0.1.4");
+			}
+			ecrire_metas();
 		}
 	}
 	
