@@ -9,7 +9,7 @@ function archive_install($action){
 	//recupére les informations de plugin.xml
 	$infos = plugin_get_infos('Archive');
 	$archive_version = $infos['version'];
-	
+
    switch ($action){
        case 'test':
            //Contrôle du plugin à chaque chargement de la page d'administration
@@ -36,7 +36,7 @@ function archive_install($action){
 }
 
 //configure la base spip
-function archive_installer($archive_version) {	
+function archive_installer($archive_version) {
 	//recupere les champs de spip_articles
 	$desc = spip_abstract_showtable("spip_articles", '', true);
 	//ajoute le champ archive si champ inexistant
@@ -47,6 +47,19 @@ function archive_installer($archive_version) {
 	if (!isset($desc['field']['archive_date'])){
 			spip_query("ALTER TABLE spip_articles ADD `archive_date` DATETIME AFTER `archive`");
 	}
+
+	//recupere les champs de spip_rubriques
+	$desc = spip_abstract_showtable("spip_rubriques", '', true);
+	//ajoute le champ archive si champ inexistant
+	if (!isset($desc['field']['archive'])){
+			spip_query("ALTER TABLE spip_rubriques ADD `archive` BOOL AFTER `statut`");
+	}
+	//ajoute le champ archive_date si champ inexistant
+	if (!isset($desc['field']['archive_date'])){
+			spip_query("ALTER TABLE spip_rubriques ADD `archive_date` DATETIME AFTER `archive`");
+	}
+
+
 	//on précise que le plugin est initialisé donc base de donnée modifiée
 	ecrire_meta('archive_version',$archive_version);
 	//regenere le cache des metas
@@ -54,20 +67,32 @@ function archive_installer($archive_version) {
 	//retourne que tout ok
 	$ok = true;
 
+        return $ok;
 }
 
 
 //supprime les données de la base spip
 function archive_uninstaller() {
 
-	//ajoute le champ archive si le plugin n'est pas initialise
-	$desc = spip_abstract_showtable("spip_articles", '', true);
+	//nettoie les champs de spip_articles
+        $desc = spip_abstract_showtable("spip_articles", '', true);
 	if (isset($desc['field']['archive'])){
 			spip_query("ALTER TABLE spip_articles DROP `archive`");
 	}
 	if (isset($desc['field']['archive_date'])){
 			spip_query("ALTER TABLE spip_articles DROP `archive_date`");
 	}
+
+	//supprime les champs de spip_rubriques
+	$desc = spip_abstract_showtable("spip_rubriques", '', true);
+	if (isset($desc['field']['archive'])){
+			spip_query("ALTER TABLE spip_rubriques DROP `archive`");
+	}
+	if (isset($desc['field']['archive_date'])){
+			spip_query("ALTER TABLE spip_rubriques DROP `archive_date`");
+	}
+
+
 	//on précise que le plugin est initialisé donc base de donnée modifiée
 	effacer_meta('archive_version');
 	//regenere le cache des metas
