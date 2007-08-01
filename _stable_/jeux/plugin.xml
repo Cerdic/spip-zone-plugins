@@ -76,4 +76,5 @@ Aide : [->http://www.spip-contrib.net/Des-jeux-dans-vos-articles]
 		<inclure>jeux_pipelines.php</inclure>
 		<action>affichage_final</action>
 	</pipeline>	
+	<install>base/jeux_upgrade.php</install>
 </plugin>
