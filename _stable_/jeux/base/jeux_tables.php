@@ -5,7 +5,7 @@ include_spip('base/serial'); // pour eviter une reinit posterieure des tables mo
 
 global $tables_principales;
 $jeux = array(
-	'id_jeu'	=>'bigint(21) NOT NULL',
+	'id_jeu'	=>'bigint(21) NOT NULL AUTO INCREMENT',
 	'date'		=>"datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 	'contenu'	=>'text NOT NULL',
 	'divers'	=>'text NOT NULL'
@@ -26,4 +26,6 @@ $tables_principales['spip_jeux']=
 	array('field' => $jeux, 'key' => $jeux_key);
 $tables_principales['spip_jeux_resultats']=
 	array('field' => $jeux_resultats, 'key' => $jeux_resultats_key);
+
+$table_des_traitements['CONTENU'][]= 'propre(%s)';
 ?>

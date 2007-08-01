@@ -3,7 +3,7 @@ function jeux_install($install){
 	switch($install){
 		case 'install' :
 			jeux_verifier_base();
-			echo "spip";
+			
 			break;
 				};	
 	}
