@@ -1,6 +1,6 @@
-[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/jqModal_confirm.css}|direction_css)"/>]
-[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)"/>]
-[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/abonnement.css}|direction_css)"/>]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/jqModal_confirm.css}|direction_css)" />]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)" />]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/abonnement.css}|direction_css)" />]
 
 <script src="#CHEMIN{javascript/jqModal.js}" type="text/javascript"></script>
 <script type="text/javascript">
@@ -45,25 +45,28 @@ $().ready(function() {
 	debut_boite_info();
 	?>
 	<div class='raccourcis'>
+
 		<strong><:inscription2:raccourcis:></strong>
 		<ul>
 			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
-			<li><a href="?exec=cfg&cfg=inscription2"><:inscription2:configuration:></a></li>
-			<li><a class ="confirm" href="?exec=inscription2_adherents&act=net"><:inscription2:nettoyer_tables:></a></li>
+			<li><a href="?exec=cfg&amp;cfg=inscription2"><:inscription2:configuration:></a></li>
+			<li><a class ="confirm" href="?exec=inscription2_adherents&amp;act=net"><:inscription2:nettoyer_tables:></a></li>
 		
 		</ul>
 	</div>
+
 	<?php
 	fin_boite_info();
 	?>
 	
 	<div class="legend">
 		
-		<img src="#CHEMIN{'images/admin-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:admin:><br/>
-		<img src="#CHEMIN{'images/redac-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:auteur:><br/>
-		<img src="#CHEMIN{'images/adherent-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:adherent:><br/>
-		<img src="#CHEMIN{'images/aconf-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:a_confirmer:><br/>
-		<img src="#CHEMIN{'images/defaut-12.gif'}" title="<:inscription2:fiche_adherent:>"> <:inscription2:autre:><br/>
+		<img src="#CHEMIN{'images/admin-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:admin:><br />
+		<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:><br />
+		<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:adherent:><br />
+		<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:><br />
+
+		<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:autre:><br />
 		
 	</div>
 	
@@ -74,7 +77,8 @@ $().ready(function() {
 	<div id="tetiere" >
 		<div style="float:right" >
 		<form method="post" action="?exec=inscription2_adherents">
-		<input class="search_field" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>">
+
+		<input class="search_field" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>" />
 		<select name="case" id="case">
 		<?php
 			foreach(lire_config('inscription2') as $cle => $val){
@@ -92,6 +96,7 @@ $().ready(function() {
 		]
 		
 		</div>
+
 	<?php
 	include_spip('base/abstract_sql');
 	
@@ -176,24 +181,24 @@ $().ready(function() {
 	?>
 	
 	</div>
-	<form>
+	<form method="post" action="#">
 	<table class="cadre-r">
 	<tr>
 	<?php	
-	echo '<td><strong><a href="'.$url.'&ordre=id_auteur&desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif" /></a></strong></td>';
+	echo '<td><strong><a href="'.$url.'&amp;ordre=id_auteur&amp;desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif" /></a></strong></td>';
 	
 	if(lire_config('inscription2/sexe_table')){
-		echo '<td><strong><a href="'.$url.'&ordre=sexe&desc='.$desc.'">'._T('inscription2:sexe').'</a></strong></td>';
+		echo '<td><strong><a href="'.$url.'&amp;ordre=sexe&amp;desc='.$desc.'">'._T('inscription2:sexe').'</a></strong></td>';
 		$table_auteurs[] = "b.sexe";
 	}
 	
 	if(lire_config('inscription2/prenom_table')){
-		echo '<td><strong><a href="'.$url.'&ordre=prenom&desc='.$desc.'">'._T('inscription2:prenom').'</a></strong></td>';
+		echo '<td><strong><a href="'.$url.'&amp;ordre=prenom&amp;desc='.$desc.'">'._T('inscription2:prenom').'</a></strong></td>';
 		$table_auteurs[] = "b.prenom";
 	}
 	
 	if(lire_config('inscription2/nom_table')){
-		echo '<td><strong><a href="'.$url.'&ordre=nom&desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
+		echo '<td><strong><a href="'.$url.'&amp;ordre=nom&amp;desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
 		$table_auteurs[] = "a.nom";
 	}
 	
@@ -215,9 +220,9 @@ $().ready(function() {
 			else
 				$table_auteurs[] = "b.".$cle;
 			if($cle =='username')
-				echo '<td><strong><a href="'.$url.'&ordre=login&desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
+				echo '<td><strong><a href="'.$url.'&amp;ordre=login&amp;desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
 			else
-				echo '<td><strong><a href="'.$url.'&ordre='.$cle.'&desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
+				echo '<td><strong><a href="'.$url.'&amp;ordre='.$cle.'&amp;desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
 		}
 	}
 	//abonnement
@@ -228,7 +233,7 @@ $().ready(function() {
 	$table_auteurs[] = 'b.statut_abonnement';
 	}
 	
-	echo '<td colspan="3" style="text-align:center;"><strong><a href="'.$url.'&ordre=statut&desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
+	echo '<td colspan="3" style="text-align:center;"><strong><a href="'.$url.'&amp;ordre=statut&amp;desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
 	echo '</tr>';
 	
 	$table_auteurs[] = 'b.id';
@@ -276,7 +281,7 @@ $().ready(function() {
 		echo '<tr class="'.$class.'">';
 		$id = $data['id'] ;
 		if(!empty($data['id_auteur']))
-			echo '<td><a href="?exec=auteur_infos&id_auteur='.$data['id_auteur'].'"><img src='.$url_logo.' title="'._T('inscription2:fiche_adherent').'" /></a></td>';
+			echo '<td><a href="?exec=auteur_infos&amp;id_auteur='.$data['id_auteur'].'"><img src='.$url_logo.' alt="'._T('inscription2:fiche_adherent').'" /></a></td>';
 		else 
 			echo '<td> </td>';
 		
@@ -326,12 +331,12 @@ $().ready(function() {
 		echo '<td>'.$data["validite"].'</td>';
 		}
 		
-		echo '<td><a href="?exec=editer_adherent&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" title="'._T('inscription2:editer_adherent').'"></a></td>';	
+		echo '<td><a href="?exec=editer_adherent&amp;id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" alt="'._T('inscription2:editer_adherent').'" /></a></td>';	
 		
 		if($data['statut'] != '0minirezo' and $data['statut'] != '1comite')
-			echo '<td><a href="?exec=inscription2_adherents&id='.$data['id_auteur'].'&act=sup" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" title="'._T('inscription2:supprimer_adherent').'"></a></td>';
+			echo '<td><a href="?exec=inscription2_adherents&amp;id='.$data['id_auteur'].'&amp;act=sup" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" alt="'._T('inscription2:supprimer_adherent').'" /></a></td>';
 		else 
-			echo '<td><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/interdit-12.gif" title="'._T('inscription2:supprimer_adherent').'"></td>';
+			echo '<td><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/interdit-12.gif" alt="'._T('inscription2:supprimer_adherent').'" /></td>';
 			echo '<td><input type="checkbox" name="check_aut[]" /></td>' ;
 		echo '</tr>';
 	$i++;	
@@ -339,6 +344,7 @@ $().ready(function() {
 	?>
 	</table>	
 	</form>
+
 	
 	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
 	#INCLURE{fond=inc/pied_abonnement}
@@ -346,7 +352,7 @@ $().ready(function() {
 	
 	<div id="pagination">
 	<?php
-	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a , spip_auteurs_elargis b WHERE $critere");
+	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a, spip_auteurs_elargis b WHERE $critere");
 	$query = spip_fetch_array($query);
 	$nombre_selection = $query['COUNT(*)'];
 	$pages=intval($nombre_selection/$max_par_page) + 1;
@@ -372,6 +378,7 @@ $().ready(function() {
 
 
 <!-- Confirm Dialog -->
+
 <div class="jqmConfirm" id="confirm">
 
 	<div id="ex3b" class="jqmConfirmWindow">
@@ -383,6 +390,7 @@ $().ready(function() {
 	<p class="jqmConfirmMsg"></p>
 	<:inscription2:confirmation:>
 	</div>
+
   
 	<input type="submit" value="no" />
 	<input type="submit" value="yes" /> 
