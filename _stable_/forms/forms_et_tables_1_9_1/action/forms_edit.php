@@ -228,8 +228,12 @@ function action_forms_edit(){
 	$arg = _request('arg');
 	$hash = _request('hash');
 	$id_auteur = $auteur_session['id_auteur'];
-	$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
-	//$redirect = parametre_url($redirect,'var_ajaxcharset',''); // si le redirect sert, pas d'ajax !
+	
+	if (_request('var_ajaxcharset'))
+		$redirect = parametre_url(_request('redirect'),'var_ajaxcharset',''); // si le redirect sert, pas d'ajax !
+	else
+		$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
+		
 	if ($redirect==NULL) $redirect="";
 	if (!include_spip("inc/securiser_action"))
 		include_spip("inc/actions");
@@ -245,8 +249,15 @@ function action_forms_edit(){
 			if ($redirect && $ajout_choix) $redirect = parametre_url($redirect,"ajout_choix",$ajout_choix);
 		}
 	}
-	if ($redirect)
+	
+	//if ($redirect)
+	//	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+		
+	if (_request('var_ajaxcharset'))
+		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)), true);
+	else
 		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+		
 }
 
 ?>
