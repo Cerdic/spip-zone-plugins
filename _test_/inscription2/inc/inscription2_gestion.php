@@ -30,8 +30,9 @@ function inscription2_ajouts()
 	$auteur = spip_fetch_array($s);
 
 	if (!$auteur AND !$new) {
-		include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('auteurs'));
+		spip_abstract_insert($nom_table, "(id_auteur)", "($id_auteur)");
+		$s = spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur");
+		$auteur = spip_fetch_array($s);
 	}
 
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
