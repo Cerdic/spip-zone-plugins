@@ -92,7 +92,7 @@ $().ready(function() {
 		<input type="submit" value="<:info_rechercher:>" />
 		</form>
 		[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-		#INCLURE{fond=inc/statuts_forms}
+			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})] } )]
 		]
 		
 		</div>
@@ -180,7 +180,8 @@ $().ready(function() {
 				else
 					echo "<a href='".parametre_url($url,'debut',$val)."'>$key</a> ";
 			}
-	
+		echo "<a href='[(#SELF|parametre_url{debut,''})]'> tous</a> ";
+
 	?>
 	
 	</div>
@@ -368,7 +369,7 @@ $().ready(function() {
 				echo '<strong>'.$position.' </strong>';
 			}
 			else {
-				echo '<a href="'.generer_url_ecrire("inscription2_adherents","debut=$position&ordre=$ordre").'">'.$position.'</a> ';
+				echo "<a href='[(#SELF|parametre_url{debut,''})&amp;debut=$position]'>".$position."</a> ";
 			}
 		}
 	}	
