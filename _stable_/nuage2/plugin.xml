@@ -1,9 +1,8 @@
-
 <plugin>
 	<version>1.0</version>
 	<nom>Nuage</nom>
 	<prefix>nuage</prefix>
-	<auteur>(c)2007 Bill(stephane<at>rezo.net). Licence GNU/GPL</auteur>
+	<auteur>(c)2007 Bill(stephane (at) rezo.net). Licence GNU/GPL</auteur>
 	<etat>stable</etat>
 	<lien>Afficher les mots-cl&#233;s en faisant varier la taille de la police</lien>
 	<description>
