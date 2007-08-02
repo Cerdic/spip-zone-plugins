@@ -139,16 +139,19 @@ $().ready(function() {
 		$desc = 'ASC';
 	else
 		$desc = 'DESC';
-	
-
+                
 	//$url = $url.'&debut='.$debut;
 	
 	//supprimer un auteur
 	if(!empty($id) and $act=='sup'){
 		spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
-		spip_query("DELETE FROM spip_zones_auteurs WHERE id_auteur='$id'");
-		spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
+                
+                if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
+                    spip_query("DELETE FROM spip_zones_auteurs WHERE id_auteur='$id'");
+
+                if(defined('_DIR_PLUGIN_SPIPLISTES'))
+                    spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
 	}
 
 	//nettoyer la table
