@@ -33,11 +33,15 @@ function critere_popularite($idb, &$boucles, $crit){
 		$op_val=$r[3];
 	}
 	$type_id = 'pop.id_'.$type;
+	$pop = 'lf.popularite';
 	$type_requete = $boucle->type_requete;
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
-	$boucle->select[]= 'SUM('.$type_id.') AS popularite_relative';
+	$pop_max=max(1 , 0 + $GLOBALS['meta']['popularite_max']);
+	$boucle->select[]= 'CEIL(SUM('.$pop.'*100/'.$pop_max.')) AS popularite_relative';
 	$boucle->from['pop']="spip_'.$type_requete.'_".$type."s";
 	$boucle->where[]= array("'='", "'".$id_table."'", "'pop.".$boucle->primary."'");
+	$boucle->from['lf']="spip_".$type."s";
+	$boucle->where[]= array("'='", "'".$type_id."'", "'lf.id_".$type."'");
 	$boucle->group[]=$id_table;
 	if ($op)
 		$boucle->having[]= array("'".$op."'", "'popularite_relative'",$op_val);
@@ -54,12 +58,12 @@ function critere_frequence_branche($idb, &$boucles, $crit){
 		$op=$r[2];
 		$op_val=$r[3];
 	}
-	$type_id = 'freq.id_'.$type;
+	$type_id = 'freqb.id_'.$type;
 	$type_requete = $boucle->type_requete;
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
 	$boucle->select[]= 'COUNT('.$type_id.') AS frequence';
-	$boucle->from['freq']="spip_'.$type_requete.'_".$type."s";
-	$boucle->where[]= array("'='", "'".$id_table."'", "'freq.".$boucle->primary."'");
+	$boucle->from['freqb']="spip_'.$type_requete.'_".$type."s";
+	$boucle->where[]= array("'='", "'".$id_table."'", "'freqb.".$boucle->primary."'");
 	$boucle->from['lf']="spip_".$type."s";
 	$boucle->where[]= array("'='", "'".$type_id."'", "'lf.id_".$type."'");
 	$boucle->group[]=$id_table;
@@ -88,11 +92,15 @@ function critere_popularite_branche($idb, &$boucles, $crit){
 		$op_val=$r[3];
 	}
 	$type_id = 'pop.id_'.$type;
+	$pop = 'lf.popularite';
 	$type_requete = $boucle->type_requete;
 	$id_table = $boucle->id_table . '.' . $boucle->primary;
-	$boucle->select[]= 'SUM('.$type_id.') AS popularite_relative';
+	$pop_max=max(1 , 0 + $GLOBALS['meta']['popularite_max']);
+	$boucle->select[]= 'CEIL(SUM('.$pop.'*100/'.$pop_max.')) AS popularite_relative';
 	$boucle->from['pop']="spip_'.$type_requete.'_".$type."s";
-	$boucle->where[]= array("'='", "'".$id_table."'", "'freq.".$boucle->primary."'");
+	$boucle->where[]= array("'='", "'".$id_table."'", "'pop.".$boucle->primary."'");
+	$boucle->from['lf']="spip_".$type."s";
+	$boucle->where[]= array("'='", "'".$type_id."'", "'lf.id_".$type."'");
 	$boucle->group[]=$id_table;
 	if ($op)
 		$boucle->having[]= array("'".$op."'", "'popularite_relative'",$op_val);
