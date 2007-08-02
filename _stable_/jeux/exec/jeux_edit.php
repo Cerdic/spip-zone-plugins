@@ -17,7 +17,7 @@ function exec_jeux_edit(){
 	if ($valider)
 		{
 		$id_jeu = jeux_ajouter_jeu($contenu,$id_jeu);
-		 include_spip('inc/headers');	 redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu));
+		 include_spip('inc/headers');	 redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu,true));
 		
 		}
 		
