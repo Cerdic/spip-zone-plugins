@@ -77,7 +77,7 @@ $().ready(function() {
 	<div id="tetiere" >
 		<div style="float:right" >
 		<form method="post" action="?exec=inscription2_adherents">
-
+		[(#SELF|form_hidden)]
 		<input class="search_field" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>" />
 		<select name="case" id="case">
 		<?php
