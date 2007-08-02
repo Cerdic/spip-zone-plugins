@@ -103,7 +103,13 @@ function jeux_liste_mots_min($texte) {
 }
 
 // retourne la boite de score
-function jeux_afficher_score($score, $total) {
+function jeux_afficher_score($score, $total,$id_jeu=false) {
+	if ($id_jeu){
+		
+		include_spip('base/jeux_ajouter_resultat');
+		jeux_ajouter_resulat($id_jeu,$resultat);
+		}
+	
 	return '<center><div class="jeux_score">'._T('jeux:score')
 	  			. "&nbsp;$score&nbsp;/&nbsp;".$total.'<br>'
 				. ($score==$total?_T('jeux:bravo'):'').'</div></center>';

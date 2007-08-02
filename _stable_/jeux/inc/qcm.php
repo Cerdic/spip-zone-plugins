@@ -308,6 +308,7 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
 function jeux_qcm($texte, $indexJeux) {
   // initialisation  
   global $qcms, $qcm_score;
+ 
   $qcms = array(); $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
   $titre = $horizontal = $vertical = $solution = $html = false;
@@ -338,14 +339,16 @@ function jeux_qcm($texte, $indexJeux) {
 
   // reinserer les qcms mis en forme
   $texte = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
-
+	
   // calcul des extremes
   $tete = '<div class="jeux_cadre qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
+  $id_jeu = _request('id_jeu');
+  echo $auteur_session;
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= jeux_form_debut('qcm', $indexJeux);
 	$pied = '<br /><div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
   } else {
-      $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'])
+      $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'],$id_jeu)
   			. jeux_bouton_reinitialiser();
   }
   
