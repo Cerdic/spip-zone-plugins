@@ -47,7 +47,11 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 	
 			elseif($cle=='accesrestreint') 
 				$var_user['zones'] = _request('zones');
-
+			
+			elseif(ereg("^statut_abonnement.*$", $cle)){
+				$var_user['statut_abonnement'] = lire_config('inscription2/statut_abonnement');
+				$var_user['abonnement'] =  _request('abonnement');
+			}
 			else
 				$var_user[$cle] = _request($cle);
 		}
@@ -67,7 +71,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 		if(!$aux)
 			$message = _T('inscription2:mail_non_domaine');
 	}
-	if($var_user[email] and $aux){
+	if($var_user['email'] and $aux){
 		$commentaire = message_inscription2_pass($var_user, $mode);
 		if (is_array($commentaire)) 
 			$commentaire = envoyer_inscription2_pass($commentaire);
@@ -102,7 +106,7 @@ function inscription2_nouveau_pass($declaration){
 
 	//insertion des données ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
-		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone')
+		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone' or $cle =='abonnement')
 			continue;
 		if ($cle == 'email' or $cle == 'nom' or $cle == 'bio' or $cle == 'statut' or $cle == 'login' or $cle =='pass')
 			$auteurs[$cle] = $val;
@@ -133,7 +137,13 @@ function inscription2_nouveau_pass($declaration){
 	
 	$n = spip_abstract_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	
-	return $declaration;}
+	if(isset($declaration['abonnement'])){
+		$value = $declaration['abonnement'] ;	
+			spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('$n', '$value')");
+	}
+	
+	return $declaration;
+}
 
 function envoyer_inscription2_pass($var_user) {
 	include_spip('inc/mail');

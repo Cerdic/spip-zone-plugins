@@ -1,156 +1,12 @@
 #CACHE{0}
-
-<script src="#CHEMIN{javascript/jquery.validate.js}" type="text/javascript"></script>
 <script language="javascript" src="#CHEMIN{javascript/md5.js}"></script>
-<script type="text/javascript">
-/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
-	
-	jQuery.validator.addMethod("chaine", function(value, element) {
-		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.сзаийвкофы ]+$/.test(value);
-	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
 
-	jQuery.validator.addMethod("postal", function(value, element) {
-		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z0-9\- ]+$/.test(value);
-	}, "<:inscription2:champ_obligatoire:>, <:inscription2:cp_valide:>");
-	
-	jQuery.validator.addMethod("numero", function(value, element) {
-		return !jQuery.validator.methods.required(value, element) || /^[0-9\. \-]+$/.test(value);
-	}, "<:inscription2:champ_obligatoire:>, <:inscription2:numero_valide:>");
-	
-	$().ready(function() {
-	// validate signup form on submit
-	$("#inscription").validate({
-		rules: {
-			nom_famille: {[(#CONFIG{inscription2/nom_famille}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,20]},
-			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[3,1000]},
-			code_postal: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
-			ville: {[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,80]},
-			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
-			telephone: {[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
-			fax: {[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
-			mobile: {[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
-			profession: {[(#CONFIG{inscription2/profession_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
-			societe: {[(#CONFIG{inscription2/societe_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,30]},
-			secteur:{[(#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
-			fonction: {[(#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[3,50]},
-			adresse_pro: {[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{required: true,}),] rangeLength:[3,1000]},
-			code_postal_pro: {[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
-			ville_pro: {[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,80]},
-			telephone_pro: {[(#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
-			fax_pro: {[(#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
-			mobile_pro: {[(#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
-			divers: {rangeLength:[3,1000]},
-			pays:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''})]}
-		},
-		messages: {
-			nom_famille: {
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
-			prenom:{
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
-			nom: {
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
-			username: {
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
-			adresse: {
-				required:"<:inscription2:champ_obligatoire:>",
-				postal:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
-			code_postal: {
-				required:"<:inscription2:champ_obligatoire:>",
-				postal:"Entrez un code postal valide",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
-			ville: {
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 2 Max 80 <:inscription2:caracteres:>"},
-			pays: {
-				required:"<:inscription2:champ_obligatoire:>"},
-			email: {
-				required:"<:inscription2:champ_obligatoire:>",
-				email:"<:inscription2:email_valide:>",
-				rangeLength:"Min 5 Max 30 <:inscription2:caracteres:>"},
-			telephone: {
-				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
-			fax: {
-				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
-			mobile: {
-				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
-			profession: {
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 30 <:inscription2:caracteres:>"},
-			societe: {
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 30 <:inscription2:caracteres:>"},
-			secteur:{
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
-			fonction: {
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 50 <:inscription2:caracteres:>"},
-			adresse_pro: {
-				required:"<:inscription2:champ_obligatoire:>",
-				postal:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
-			code_postal_pro: {
-				required:"<:inscription2:champ_obligatoire:>",
-				postal:"Entrez un code postal valide",
-				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
-			ville_pro: {
-				required:"<:inscription2:champ_obligatoire:>",
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 2 Max 80 <:inscription2:caracteres:>"},
-			pays_pro: {
-				required:"<:inscription2:champ_obligatoire:>"},
-			telephone_pro: {
-				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
-			fax_pro: {
-				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
-			mobile_pro: {
-				required:"<:inscription2:champ_obligatoire:>",
-				numero:"<:inscription2:numero_valide:>",
-				rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
-			divers:{
-				chaine:"<:inscription2:chaine_valide:>",
-				rangeLength:"Min 3 Max 1000 <:inscription2:caracteres:>"}
-		}
-	});
+[(#REM) ------------------------ VALIDATION JAVASCRIPT jquery-plugin-validation ------------------------ ]
+<script src="#CHEMIN{javascript/jquery.validate.js}" type="text/javascript"></script>
+#INCLURE{fond=formulaires/inscription2_validation.js}
+<link rel="stylesheet" type="text/css" href="#CHEMIN{css/inscription2_forms.css}">
 
-	// propose username by combining first- and lastname
-	$("#username").focus(function() {
-		var prenom = $("#prenom").val();
-		var nom = $("#nom").val();
-		if(prenom && nom && !this.value) {
-			this.value = prenom + "." + nom;
-		}
-	});
-	
-});
-
+<script language="javascript">
 function cryptage() {
     if(document.inscription.pass1.value == document.inscription.pass2.value){
 		str = document.inscription.pass1.value;
@@ -163,27 +19,31 @@ function cryptage() {
 	}
   }
 </script>
-<style>
-.infos-auteurs > div{height:35px;clear:both;padding:5px}
-.infos-auteurs label{display:block;float:left}
-.inscription2 h2 {margin:10px 0px}
-.inscription2 div {margin:10px 0px; float: none;clear:both}
- div.error{background-color:#ffe2e2}
-label.error{font-size:0.7em;color:red;display:block;clear:both}
-select.formo{width:auto; float:left;margin:1px;}
-</style>
 
 [<div>(#ENV*{message})</div>]
-
 
 [<div style="color:red; font-style:bold;">(#ENV*{commentaires}|=={1}|?{'',' '}) #ENV*{commentaires} </div>]
 
 <div class="inscription2" [style="(#ENV{commentaires}|=={1}|?{display: block;, display:none;})"]>
 
+<h2><:inscription2:formulaire_inscription:></h2>
+
 <form method="post" action="#SELF" name="inscription" id="inscription">
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
-<fieldset>
+
+
+[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	#INCLURE{fond=formulaires/abonnement_liste}	
+]
+
+
+[(#EVAL{defined('_DIR_PLUGIN_ASSOCIATION')}|?{' ',''})
+	#INCLURE{fond=formulaires/inscription2_form_asso}
+]
+
+
+<fieldset class="infos-auteurs">
 <legend>
 	<:inscription2:info_perso:>
 </legend>
@@ -192,29 +52,39 @@ select.formo{width:auto; float:left;margin:1px;}
 <:inscription2:inserez_infos:>
 </div>
 
+[(#CONFIG{inscription2/sexe}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label><strong><:inscription2:sexe:></strong></label>
+	<div class="select">
+	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="M" /> <:inscription2:masculin:>
+	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="F" /> <:inscription2:feminin:>
+	</div>
+</div>
+]
 [(#CONFIG{inscription2/nom_famille}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="nom_famille"><strong><:inscription2:nom:></strong></label><br />
-	<input type="text" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" class="formo"/>
+	<label for="nom_famille"><strong><:inscription2:nom_famille:></strong></label>
+	<input type="text" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" />
 </div>
 ]
 [(#CONFIG{inscription2/prenom}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="prenom"><strong><:inscription2:prenom:></strong></label><br />
-	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" class="formo"/>
+	<label for="prenom"><strong><:inscription2:prenom:></strong></label>
+	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" />
 </div>
 ]
 [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="nom"><strong><:inscription2:nom:></strong></label><br />
-	<input type="text" name="nom" id="nom" value="#ENV{nom}" class="formo"/>
+	<label for="nom"><strong><:inscription2:nom:></strong></label>
+	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
 </div>
 ]
 [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="username"><strong><:inscription2:username:></strong></label><br />
-	<input type="text" name="username" id="username" value="#ENV{login}" class="formo"/>
-</div>]
+	<label for="username"><strong><:inscription2:username:></strong></label>
+	<input type="text" name="username" id="username" value="#ENV{login}" />
+</div>
+]
 
 <div class="obligatoire">
 	<label for="pass1"><strong><:pass_choix_pass:></strong><br />
@@ -241,78 +111,93 @@ select.formo{width:auto; float:left;margin:1px;}
 	</div>
 </div>]
 
-[(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="adresse"><strong><:inscription2:adresse:></strong><br /></label>
-	<textarea name="adresse" id="adresse" class="formo">#ENV{adresse}</textarea>
-</div>]
+[(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})	
+<div class="textarea[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})]">
+	<label for="adresse"><strong><:inscription2:adresse:></strong></label>
+	<textarea name="adresse" id="adresse" value="#ENV{adresse}"></textarea>
+</div>
+]
 
-[(#CONFIG{inscription2/code_postal}|=={on}|?{' ', ''})
+[(#CONFIG{inscription2/code_postal}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="code_postal"><strong><:inscription2:code_postal:></strong><br /></label>
-	<input type="text" name="code_postal" id="code_postal" class="formo" value="#ENV{code_postal}"/>
-</div>]
+	<label for="code_postal"><strong><:inscription2:code_postal:></strong></label>
+	<input type="text" name="code_postal" id="code_postal" value="#ENV{code_postal}" />
+</div>
+]
 
-[(#CONFIG{inscription2/ville}|=={on}|?{' ', ''})
+[(#CONFIG{inscription2/ville}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/ville_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="ville"><strong><:inscription2:ville:></strong><br /></label>
-	<input type="text" name="ville" id="ville"  class="formo" value="#ENV{ville}"/>
-</div>]
+	<label for="ville"><strong><:inscription2:ville:></strong></label>
+	<input type="text" name="ville" id="ville" value="#ENV{ville}" />
+</div>
+]
 
 [(#CONFIG{inscription2/pays}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/pays_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="pays"><strong><:inscription2:pays:></strong></label><br />
-	<div>
+	<label for="pays"><strong><:inscription2:pays:></strong></label>
 	<INCLURE{fond=formulaires/inscription2_pays}>
-	</div>
-</div>]
-
-[(#CONFIG{inscription2/email}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="email"><strong><:inscription2:email:></strong></label><br />
-	<input type="text" name="email" id="email" class="formo" value="#ENV{email}"/>
-</div>]
-
-[(#CONFIG{inscription2/telephone}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="telephone"><strong><:inscription2:telephone:></strong><br /></label>
-	<input type="text" name="telephone" id="telephone" class="formo" value="#ENV{telephone}"/>
-</div>]
-
-[(#CONFIG{inscription2/fax}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/fax_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="fax"><strong><:inscription2:fax:></strong><br /></label>
-	<input type="text" name="fax" id="fax" class="formo" value="#ENV{fax}"/>
-</div>]
-
-[(#CONFIG{inscription2/mobile}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="mobile"><strong><:inscription2:mobile:></strong><br /></label>
-	<input type="text" name="mobile" id="mobile" class="formo" value="#ENV{mobile}"/>
-</div>]
-
-[(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label><strong><:inscription2:commentaire:></strong></label><br />
-	<textarea name="commentaire" id="commentaire" class="formo">#ENV{commentaire} </textarea>	
 </div>
 ]
+
+[(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="email"><strong><:inscription2:email:></strong></label>
+	<input type="text" name="email" id="email" value="#ENV{email}" />
+</div>
+]
+[(#CONFIG{inscription2/telephone}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="telephone"><strong><:inscription2:telephone:></strong></label>
+	<input type="text" name="telephone" id="telephone" value="#ENV{telephone}" />
+</div>
+]
+[(#CONFIG{inscription2/fax}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/fax_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="fax"><strong><:inscription2:fax:></strong></label>
+	<input type="text" name="fax" id="fax" value="#ENV{fax}" />
+</div>
+]
+[(#CONFIG{inscription2/mobile}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="mobile"><strong><:inscription2:mobile:></strong></label>
+	<input type="text" name="mobile" id="mobile" value="#ENV{mobile}" />
+</div>
+]
+
+[(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
+<div class="grand_select[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
+	<label><strong><:inscription2:commentaire:></strong></label>
+	<textarea name="commentaire" id="commentaire">#ENV{divers}</textarea>	
+</div>
+]
+
 </fieldset>
 
-<fieldset>
+#SET{afficher_plus, false}
+[(#CONFIG{inscription2/profession}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/societe}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+[(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''}) #SET{afficher_plus, true} ]
+
+[(#GET{afficher_plus}|=={true}|?{' ', ''})
+<fieldset class="infos-auteurs">
 <legend>
 	<:inscription2:info_pros:>
 </legend>
 
 [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/profession_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="profession"><strong><:inscription2:profession:></strong><br /></label>
+	<label for="profession"><strong><:inscription2:profession:></strong></label>
 	<input type="text" name="profession" id="profession" class="formo" value="#ENV{profession}"/>
 </div>]
 
 [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="societe"><strong><:inscription2:societe:></strong><br /></label>
+	<label for="societe"><strong><:inscription2:societe:></strong></label>
 	<input type="text" name="societe" id="societe" class="formo" value="#ENV{societe}"/>
 </div>]
 
@@ -330,117 +215,49 @@ select.formo{width:auto; float:left;margin:1px;}
 ]
 
 [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong><br /></label>
+<div class="textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{obligatoire})]">
+	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong></label>
 	<textarea name="adresse_pro" id="adresse_pro" class="formo">#ENV{adresse_pro}</textarea>
 </div>]
 
 [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="code_postal_pro"><strong><:inscription2:code_postal:></strong><br /></label>
+	<label for="code_postal_pro"><strong><:inscription2:code_postal:></strong></label>
 	<input type="text" name="code_postal_pro" id="code_postal_pro" class="formo" value="#ENV{code_postal_pro}"/>
 </div>]
 
 [(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="ville_pro"><strong><:inscription2:ville:></strong><br /></label>
+	<label for="ville_pro"><strong><:inscription2:ville:></strong></label>
 	<input type="text" name="ville_pro" id="ville_pro"  class="formo" value="#ENV{ville_pro}"/>
 </div>]
 
 [(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="pays_pro"><strong><:inscription2:pays:></strong></label><br />
-	<div>
+	<label for="pays_pro"><strong><:inscription2:pays:></strong></label>
 	<INCLURE{fond=formulaires/inscription2_pays_pro}>
-	</div>
-</div>]
-
-[(#CONFIG{inscription2/telephone_pro}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/telephone_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="telephone_pro"><strong><:inscription2:telephone_pro:></strong><br /></label>
-	<input type="text" name="telephone_pro" id="telephone_pro" class="formo" value="#ENV{telephone_pro}"/>
-</div>]
-
-[(#CONFIG{inscription2/fax_pro}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/fax_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="fax_pro"><strong><:inscription2:fax_pro:></strong><br /></label>
-	<input type="text" name="fax_pro" id="fax_pro" class="formo" value="#ENV{fax_pro}"/>
-</div>]
-
-[(#CONFIG{inscription2/mobile_pro}|=={on}|?{' ', ''})
-<div[ (#CONFIG{inscription2/mobile_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="mobile_pro"><strong><:inscription2:mobile_pro:></strong><br /></label>
-	<input type="text" name="mobile_pro" id="mobile_pro" class="formo" value="#ENV{mobile_pro}"/>
-</div>]
-</fieldset>
-
-[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
-<fieldset>
-<legend>
-	<:inscription2:general_infos:>
-</legend>
-<br />
-
-[(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
-<div >
-	<label><strong><:inscription2:divers:></strong></label><br />
-	<textarea name="divers" id="divers" class="formo">#ENV{divers}</textarea>	
 </div>
 ]
+</fieldset>
+]
+
+[(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})
+	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
+]
+
 [(#CONFIG{inscription2/publication}|=={on}|?{' ', ''})
 <div>
 	<strong><:inscription2:publication:></strong>
-	<input type="checkbox" style="display:inline;float:none;width:15px" class="formo" name="publication" id="publication" value="#ENV{publication}" />
-</div>
-]
-[(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})
-<div class="grand_select">
-	<strong><:inscription2:newsletter:></strong>
-	<p><:inscription2:exp_newsletter:></p>
-	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
-	<p><small><:inscription2:select_listes:>
-	<a onclick="$('#newsletters').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small></p>
-</div>
-]
-[(#CONFIG{inscription2/categorie}|=={on}|?{' ', ''})
-<div class="grand_select">
-	<label><strong><:inscription2:categorie:></strong></label>
-	<div class="select">
-	[(#CONFIG{plugin/ASSOCIATION}|?{' ', ''}) <INCLURE{fond=formulaires/inscription2_form_asso}>]
-	</div>
-</div>
-]
-[(#CONFIG{inscription2/accesrestreint}|=={on}|?{' ', ''})
-<div id="zones">
-	<label><strong><:inscription2:accesrestreint:></strong></label>
-	<p><:inscription2:choisir_zones:></p>
-	[(#CONFIG{plugin/ACCESRESTREINT}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_acces}>]
-	<p><small><:inscription2:select_listes:>
-	<a onclick="$('#zones').find('option').attr('selected', false);"><:inscription2:deselect_listes:></a> </small></p>
+	<input type="checkbox" style="display:inline;float:none;width:15px" name="publication" id="publication" value="#ENV{publication}" />
 </div>
 ]
 
-
-<?php
-	include(find_in_path("inc/domaines.php"));
-	if(sizeof($domaine)>0){
-		echo '	[(#CONFIG{inscription2/domaines}|=={on}|?{' ', ''})
-				<div  class="grand_select">
-				<p><strong><:inscription2:domaine:></strong></p>
-				<:inscription2:choix_domaine:>
-				<select id="domaines" name="domaines" class="formo">';
-		foreach($domaine as $cle => $value)
-				echo '<option value= '.$cle.'>'.$cle.'</option>';
-		echo '	</select>
-				
-				</div>]';
-	}
-?>
+[(#CONFIG{inscription2/domaines}|=={on}|?{' ', ''})
+	#INCLURE{fond=formulaires/inscription2_form_domaines}	
+]
 
 
-</fieldset>
-
-<p><input onClick="cryptage();" type="submit" value="<:bouton_valider:>" /></p>
+<p style="text-align:right"><input type="submit" onClick="cryptage();" value="<:bouton_valider:>" /></p>
 
 </form>
 </div>
