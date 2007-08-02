@@ -47,8 +47,14 @@ function exec_import_patron(){
 		$patron_version_texte = true ;
 		$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_patron);
 	}
-	$texte_patron = recuperer_fond('patrons/'.$patron, $contexte_patron);
-	//$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
+	// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
+	// sont sous forme privee : spip.php?action=redirect&.... horrible !
+	// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
+	//$texte_patron = recuperer_fond('patrons/'.$patron, $contexte_patron);
+	$url = generer_url_public('patron_switch','',true);
+	foreach ($contexte_patron as $k=>$v)
+		$url = parametre_url($url,$k,$v,'&');
+	$texte_patron = recuperer_page($url) ;		
 			
 	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
 	
