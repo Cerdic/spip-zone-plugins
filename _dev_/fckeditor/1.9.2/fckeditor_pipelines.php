@@ -34,7 +34,7 @@ function fckeditor_header_prive($flux) {
 	
 		$code='
 			
-			$("textarea[@name=texte]").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"Toggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("#text_area").val()+"</textarea></div>");
+			$("textarea[@name=texte]").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"Toggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("textarea[@name=texte]").val()+"</textarea></div>");
 			$(".spip_barre").before("<input type=\"button\" value=\"'._T("fckeditor:texte_editeur_avance").'\" id=\"fckeditor_switch\" onclick=\"Toggle()\" />");
 			$("textarea[@name=texte]").css("display", "none");
 			$("#fckeditor_switch").css("display", "none");
@@ -54,7 +54,7 @@ function fckeditor_header_prive($flux) {
 		
 		$code='
 			
-			$("textarea[@name=texte]").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"Toggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("#texte").val()+"</textarea></div>");
+			$("textarea[@name=texte]").after("<div id=\"fckeditor_div\"><input id=\"_BtnSwitchTextarea\" type=\"button\" value=\"'._T("fckeditor:texte_editeur_standard").'\" onclick=\"Toggle()\" /><textarea id=\"fckeditor_data\" cols=\"40\" rows=\"20\">"+$("textarea[@name=texte]").val()+"</textarea></div>");
 			$(".spip_barre").before("<input type=\"button\" value=\"'._T("fckeditor:texte_editeur_avance").'\" id=\"fckeditor_switch\" onclick=\"Toggle()\" />");
 			$("textarea[@name=texte]").css("display", "none");
 			$("#fckeditor_switch").css("display", "none");

@@ -4,7 +4,7 @@
       <br />Distribu&eacute; sous licence GNU/GPL
       <br />Logo [Everaldo Coelho->http://www.everaldo.com]
    </auteur>
-	<version>1.701</version>
+	<version>1.702</version>
 	<etat><!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	stable</etat>
 	<lien>Aide compl&#232;te sur [Electropol->http://electropol.free.fr]</lien>
@@ -50,11 +50,10 @@ Attention : Ces fonctions ne marchent pas bien et ne sont l&agrave; qu'&agrave; 
 - Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs, 
 - Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP,
 - Le plugin doit &#234;tre install&#233; dans la racine du r&#233;pertoire plugin de spip,
-- Le plugin n'est pas compatible avec le plugin "Barre Typo Enlumin&#233;e pour 1.9.1 et suivantes" (apparition de multiples boutons).
+- Le plugin n'est, &agrave; priori, pas compatible avec les plugins qui modifient les barres d'&#233;ditions (apparition de multiples boutons).
 
 <br />{{Info :}}<br />
-- De nombreux boutons peuvent &#234;tre jug&#233;s inutiles (voire dangereux) par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez les deux FCKConfig.ToolbarSets (BarreArticle, BarreBr&#232;ve et BarreRubrique),
-- Pour obtenir la barre spip et le bouton de retour, il est n&#233;c&#233;ssaire  d'installer barre typo partout ou barre typo rubriques.
+- De nombreux boutons peuvent &#234;tre jug&#233;s inutiles (voire dangereux) par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez FCKConfig.ToolbarSets (BarreArticle, BarreBreve et BarreRubrique),
  
 </description>
 	
