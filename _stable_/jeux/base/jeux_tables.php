@@ -26,5 +26,7 @@ $tables_principales['spip_jeux']=
 $tables_principales['spip_jeux_resultats']=
 	array('field' => $jeux_resultats, 'key' => $jeux_resultats_key);
 
+global  $table_des_traitements;
 $table_des_traitements['CONTENU'][]= 'propre(%s)';
+
 ?>
