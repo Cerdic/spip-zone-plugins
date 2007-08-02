@@ -1,8 +1,8 @@
 Fait :
 
 -- Le bug de document long est corrigé (suppression du découpage) par contre c'est fait à l'arrache en imposant une partie de mon fichier editer_articles.php
--- Téléchargement des modules FCKEditor et Geshi aprés installation du plugin.
-
+-- insertion dans les breves et les rubriques.
+-- Bug d'accés à la bdd (dans galerie et config),
 ----------------------------------------------------------------------------------------------------------------------------
 
 à revoir pour 1.9.2 de Valérian :
@@ -12,13 +12,15 @@ Fait :
 -----------------------------------------------------------------------------------------------------------------------------
 
 Il reste :
-
--- Ajouter un lien pour charger chargeur,
--- Retrouver le dossier d'installation du plugin,
--- Faire un plugin de base qui permet l'installation totale,
+-- Réintégré la possibilité de gestion de fichier par le filemanager,
+-- Intégrer la barre dans les forums,
+-- 1.9.3 utiliser les fonctions de gestion de plugin et faire la config cfg.
+-- Téléchargement des modules FCKEditor et Geshi aprés installation du plugin (finalement pas opérationnel).
+-- Ajouter un lien pour charger chargeur (pas dans la 1.9.3),
+-- Faire un plugin de base qui permet l'installation totale (reporté à la 1.9.3),
 
 -- Permettre l'accés conjointement aux répertoires userfile et img de spip,
--- Corriger le bug d'accés à la bdd (dans galerie et config),
+
 -- Supprimer le découpage de document long plus proprement (impossible ???),
 -- Voir le bug de taille pour les petits écran sous firefox.
 
