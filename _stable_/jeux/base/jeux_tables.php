@@ -3,10 +3,10 @@
 global $table_des_tables;
 global $tables_principales;
 include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
-
+global $tables_jointures;
 
 $table_des_tables['jeux'] = 'jeux';
-
+$table_des_tables['jeux_resultats'] = 'jeux_resultats';
 $jeux = array(
 	'id_jeu'	=>'bigint(21) NOT NULL',
 	'date'		=>"timestamp",
