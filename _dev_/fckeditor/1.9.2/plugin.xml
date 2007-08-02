@@ -27,7 +27,7 @@
 	</pipeline>	
 	
 <description>
-{{Edition WYSIWYG avec FCKeditor}}
+{{{Edition WYSIWYG avec FCKeditor}}}
 
 <br /><br />
 <!--
@@ -37,32 +37,24 @@
 -* -Pour utiliser Geshi (coloration syntaxique), vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=geshi&amp;dest_path=plugins/fckeditor/spip_fck/plugins/coloration] pour ajouter le module correspondant.
 Attention : Ces fonctions ne marchent pas bien et ne sont l&agrave; qu'&agrave; titre exp&#233;rimental. 
 -->
-<u>Caract&#233;ristiques :</u>
--* - Edition des articles, des br&#232;ves et des rubriques,
--* - Seule la zone &laquo;texte&raquo; est &#233;ditable,
--* - Propose un bouton pour passer de l'&#233;diteur FCKEditor &agrave; l'&#233;diteur SPIP,
--* - G&#233;n&#232;re du HTML,
--* - Ajout d'une aide &#224; l'utilisation en fran&#231;ais,
--* - Possibilit&#233; de lier et d'ins&#233;rer des fichiers et images envoy&#233;s par SPIP,
--* - Int&#233;gration du plugin d'&#233;dition de tableau,
--* - Cr&#233;ation du plugin &laquo;Notes de bas de page&raquo; &#224; partir de &laquo;placeholder&raquo;,
--* - Suppression du d&#233;coupage de texte long,
--* - Coloration syntaxique du code (Geshi).
+<br />{{Caract&#233;ristiques :}}<br />
+- Edition des articles, des br&#232;ves et des rubriques,
+- Propose un bouton pour passer de l'&#233;diteur FCKEditor &agrave; l'&#233;diteur SPIP,
+- G&#233;n&#232;re du HTML,
+- Possibilit&#233; de lier et d'ins&#233;rer des fichiers et images envoy&#233;s par SPIP,
+- Suppression du d&#233;coupage de texte long,
+- Coloration syntaxique du code (Geshi).
 
-<u>Limitations :</u>
--* - Ne pas mixer pour un m&ecirc;me article l'&eacute;dition WYSIWYG et le code SPIP,
--* - Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs, 
--* - Il est possible de d&eacute;sactiver ces fonctionnalit&eacute;s &agrave; l'aide des fichiers de configuration,
--* - Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP,
--* - Le plugin doit &#234;tre install&#233; dans la racine du r&#233;pertoire plugin de spip,
--* - Le plugin n'est pas compatible avec le plugin "Barre Typo Enlumin&#233;e pour 1.9.1 et suivantes" (apparition de multiples boutons).
+<br />{{Limitations :}}<br />
+- Ne pas mixer pour un m&ecirc;me article l'&eacute;dition WYSIWYG et le code SPIP,
+- Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs, 
+- Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP,
+- Le plugin doit &#234;tre install&#233; dans la racine du r&#233;pertoire plugin de spip,
+- Le plugin n'est pas compatible avec le plugin "Barre Typo Enlumin&#233;e pour 1.9.1 et suivantes" (apparition de multiples boutons).
 
-<u>Attention :</u>
--* - Le plugin passe FCKEditor dans la langue de l'utilisateur de SPIP.
-
-<u>Info :</u>
--* - De nombreux boutons peuvent &#234;tre jug&#233;s inutiles (voire dangereux) par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez les deux FCKConfig.ToolbarSets (BarreArticle, BarreBr&#232;ve et BarreRubrique),
--* - Pour obtenir la barre spip et le bouton de retour, il est n&#233;c&#233;ssaire  d'installer barre typo partout ou barre typo rubriques.
+<br />{{Info :}}<br />
+- De nombreux boutons peuvent &#234;tre jug&#233;s inutiles (voire dangereux) par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez les deux FCKConfig.ToolbarSets (BarreArticle, BarreBr&#232;ve et BarreRubrique),
+- Pour obtenir la barre spip et le bouton de retour, il est n&#233;c&#233;ssaire  d'installer barre typo partout ou barre typo rubriques.
  
 </description>
 	
