@@ -1,13 +1,16 @@
 <?
 //déclaration des tables du plugin jeux //
-
+global $table_des_tables;
+global $tables_principales;
 include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 
-global $tables_principales;
+
+$table_des_tables['jeux'] = 'jeux';
+
 $jeux = array(
 	'id_jeu'	=>'bigint(21) NOT NULL',
 	'date'		=>"timestamp",
-	'contenu'	=>'text NOT NULL',
+	'contenu'	=>'text NOT NULL'
 	);
 
 $jeux_key = array(
@@ -22,11 +25,12 @@ $jeux_resultats_key=array('KEY id_jeu'	=>'id_jeu',
 	'KEY id_auteur'	=>'id_auteur');
 
 $tables_principales['spip_jeux']=
-	array('field' => $jeux, 'key' => $jeux_key);
+	array('field' => &$jeux, 'key' => &$jeux_key);
 $tables_principales['spip_jeux_resultats']=
-	array('field' => $jeux_resultats, 'key' => $jeux_resultats_key);
+	array('field' => &$jeux_resultats, 'key' => &$jeux_resultats_key);
 
-global  $table_des_traitements;
+
+global $table_des_traitements;
 $table_des_traitements['CONTENU'][]= 'propre(%s)';
 
 ?>

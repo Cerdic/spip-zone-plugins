@@ -9,6 +9,19 @@
 // filtre qui evite d'afficher le resultat obtenu par certains plugins
 // grace aux espions : <!-- PLUGIN-DEBUT --> et <!-- PLUGIN-FIN -->
 // ou : <!-- PLUGIN-DEBUT-#xxxx --> et <!-- PLUGIN-FIN-#xxxx --> ou xxxx est le numero d'identification du plugin.
+
+include_spip('base/jeux_tables');
+function boucle_JEUX($id_boucle, &$boucles) {
+        $boucle = &$boucles[$id_boucle];
+        $id_table = $boucle->id_table;
+        
+        $boucle->from[] =  "spip_jeux AS $id_table";
+        //$boucle->where[] = "type='nl'";
+        //$boucle->where[] = array("'='","'type'","'\"nl\"'"); 
+        return calculer_boucle($id_boucle, $boucles);
+}
+
+
 if (!function_exists("pas_de_plugin")) {	
  function pas_de_plugin($texte){
 		return preg_replace(",<!--\s*PLUGIN-DEBUT(-#[0-9]*)?.*<!--\s*PLUGIN-FIN\\1?\s*-->,UimsS", '', $texte);

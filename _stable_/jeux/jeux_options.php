@@ -5,5 +5,5 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
 #---------------------------------------------------#
-
+include_spip('base/jeux_tables');
 ?>
