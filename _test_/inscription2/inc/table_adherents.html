@@ -353,9 +353,10 @@ $().ready(function() {
 	#INCLURE{fond=inc/pied_abonnement}
 	]
 	
+	
 	<div id="pagination">
-	<?php
-	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a, spip_auteurs_elargis b WHERE $critere");
+	<?php	
+	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a, spip_auteurs_elargis b WHERE a.id_auteur = b.id_auteur AND $critere");
 	$query = spip_fetch_array($query);
 	$nombre_selection = $query['COUNT(*)'];
 	$pages=intval($nombre_selection/$max_par_page) + 1;
