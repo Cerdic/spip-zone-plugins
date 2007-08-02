@@ -5,10 +5,9 @@ include_spip('base/serial'); // pour eviter une reinit posterieure des tables mo
 
 global $tables_principales;
 $jeux = array(
-	'id_jeu'	=>'bigint(21) NOT NULL AUTO INCREMENT',
-	'date'		=>"datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+	'id_jeu'	=>'bigint(21) NOT NULL',
+	'date'		=>"timestamp",
 	'contenu'	=>'text NOT NULL',
-	'divers'	=>'text NOT NULL'
 	);
 
 $jeux_key = array(
@@ -16,7 +15,7 @@ $jeux_key = array(
 $jeux_resultats = array(
 	'id_jeu'		=> 'bigint(21) NOT NULL',
 	'id_auteur'		=> 'bigint(21) NOT NULL',
-	'date'			=>	"datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+	'date'			=>	"timestamp",
 	'score_court'	=>	'int(12)',
 	'score_long'	=>	'text NOT NULL');
 $jeux_resultats_key=array('KEY id_jeu'	=>'id_jeu',
