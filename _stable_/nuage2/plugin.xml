@@ -6,7 +6,20 @@
 	<auteur>(c)2007 Bill(stephane<at>rezo.net). Licence GNU/GPL</auteur>
 	<etat>stable</etat>
 	<lien>Afficher les mots-cl&#233;s en faisant varier la taille de la police</lien>
-	<description></description>
+	<description>
+	Plusieurs modeles disponibles :
+	- article_nuage : affiche les mots cles de l'article la taille variant en fonction de 
+	la frequence des mots dans les articles du site
+	- rubrique_nuage : affiche les mots cles des articles de la branche, la taille variant
+	 en fonction de la frequence des mots dans les articles de cette branche
+	- nuage_popularite : affiche les mots cles du site (ou d'un groupe), la taille variant
+	 en fonction de sa popularite relative (somme des popularitedes articles ayant ce mot)
+	
+	La feuille de style est personnalisable (nuage_style.css.html), en particulier la taille
+	des mots : une classe nuageN etant affectee en fonction de la "note" (par defaut de 1 a 10)
+	
+	Les modeles sont personnalisable et exploitent 3 nouveaux criteres et leurs balises associees
+	</description>
 	<icon>
 	nuage.png
 	</icon>
