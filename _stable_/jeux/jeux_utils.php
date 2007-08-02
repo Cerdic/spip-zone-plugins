@@ -192,8 +192,8 @@ function jeux_form_debut($name, $indexJeux, $class="", $method="post", $action="
 	/*if (strlen($action))*/ $action=" action=\"$action#JEU$indexJeux\"";
 	return "\n<form".$name.$class.$method.$action." >\n"
 		."<input type=\"hidden\" name=\"debut_index_jeux\" value=\"{$GLOBALS['debut_index_jeux']}\">\n"
-		."<input type=\"hidden\" name=\"index_jeux\" value=$indexJeux>\n"
-		."<input type=\"hidden\" name=\"var_correction_$indexJeux\" value=1>\n";
+		."<input type=\"hidden\" name=\"index_jeux\" value='$indexJeux'>\n"
+		."<input type=\"hidden\" name=\"var_correction_$indexJeux\" value='1'>\n";
 }
 function jeux_form_fin() {
 	return "\n</form>\n";
