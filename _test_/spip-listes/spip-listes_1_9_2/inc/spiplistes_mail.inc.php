@@ -5,9 +5,9 @@
 
 	class phpMail extends PHPMailer {
 
-		function phpMail($email, $objet, $message_html, $message_texte) {
+		function phpMail($email, $objet, $message_html, $message_texte, $charset) {
 		
-			$charset = $GLOBALS['meta']['charset'];
+			//$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
 					
 			//$this->From		= lire_meta('email_webmaster');
 			$this->FromName	=  $GLOBALS['meta']['nom_site'];

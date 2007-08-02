@@ -132,14 +132,14 @@ if ($message_pile > 0){
 		$pied_page = unicode2charset(charset2unicode($pied_page),$GLOBALS['meta']['spiplistes_charset_envoi']);
 	}
 	
-	$email_a_envoyer['texte'] = new phpMail('', $objet, '',$page_); 
+	$email_a_envoyer['texte'] = new phpMail('', $objet, '',$page_, $GLOBALS['meta']['spiplistes_charset_envoi']);
 	$email_a_envoyer['texte']->From = $from ; 
 	$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
 	$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$from); 
 	$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
 	$email_a_envoyer['texte']->SMTPKeepAlive = true;
 	
-	$email_a_envoyer['html'] = new phpMail('', $objet, $pageh, $page_); 
+	$email_a_envoyer['html'] = new phpMail('', $objet, $pageh, $page_, $GLOBALS['meta']['spiplistes_charset_envoi']);
 	$email_a_envoyer['html']->From = $from ; 
 	$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$from); 
 	$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
