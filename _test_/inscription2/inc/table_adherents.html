@@ -65,7 +65,6 @@ $().ready(function() {
 		<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:><br />
 		<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:adherent:><br />
 		<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:><br />
-
 		<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:autre:><br />
 		
 	</div>
@@ -117,7 +116,7 @@ $().ready(function() {
 	}else{
 		$critere="a.id_auteur<>'0'"; 
 		//que les abonnes si le plugin est actif
-		if(defined('_DIR_PLUGIN_ABONNEMENT') AND _request('statut_abonnement') !='tous') $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') " ;
+		if(defined('_DIR_PLUGIN_ABONNEMENT') AND _request('statut_abonnement') !='tous') $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') [AND b.statut_abonnement='(#ENV{statut_abonnement})']" ;
 		}
 		
 	//pagination
