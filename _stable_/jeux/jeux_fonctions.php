@@ -23,4 +23,10 @@ function pas_de_balise_jeux($texte){
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 $GLOBALS['cs_introduire'][] = 'pas_de_balise_jeux';
 
+// ajoute une identifiant dans le forme, correspondant au jeu
+function ajoute_id_jeu($texte,$id_jeu){
+	$texte = str_replace('</form>',"<input type='hidden' value='".$id_jeu."'/>\n</form>",$texte);
+	return $texte;
+;}
+
 ?>
