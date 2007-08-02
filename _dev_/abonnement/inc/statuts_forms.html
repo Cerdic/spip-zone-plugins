@@ -1,12 +1,12 @@
 <div class="statut_div">
-		<form method="get" action="#SELF" id="statut">
-		[(#SELF|form_hidden)]
+		<form method="get" action="#" id="statut">
+		[(#SELF|parametre_url{statut_abonnement,''}|form_hidden)]
 		<select onchange="this.form.submit();" name="statut_abonnement" id="statut_abonnement">
-		<option value=[(#ENV{statut_abonnement}|!={actifs}|?{"'actifs'","'actifs' selected='selected'"})]>actifs</option>
-		<option value=[(#ENV{statut_abonnement}|!={abonnes}|?{"'abonnes'","'abonnes' selected='selected'"})]>abonnes</option>
-		<option value=[(#ENV{statut_abonnement}|!={prospects}|?{"'prospects'","'prospects' selected='selected'"})]>prospects</option>
+		<option value=[(#ENV{statut_abonnement}|!={actif}|?{"'actif'","'actif' selected='selected'"})]>actifs</option>
+		<option value=[(#ENV{statut_abonnement}|!={abonne}|?{"'abonne'","'abonne' selected='selected'"})]>abonnes</option>
+		<option value=[(#ENV{statut_abonnement}|!={prospect}|?{"'prospect'","'prospect' selected='selected'"})]>prospects</option>
 		<option value=[(#ENV{statut_abonnement}|!={relance}|?{"'relance'","'relance' selected='selected'"})]>relance</option>
-		<option value=[(#ENV{statut_abonnement}|!={sortis}|?{"'sortis'","'sortis' selected='selected'"})]>sortis</option>
+		<option value=[(#ENV{statut_abonnement}|!={sorti}|?{"'sorti'","'sorti' selected='selected'"})]>sortis</option>
 		<option value=[(#ENV{statut_abonnement}|!={tous}|?{"'tous'","'tous' selected='selected'"})]>Tous les inscrits</option>
 		</select>
 		</form>
