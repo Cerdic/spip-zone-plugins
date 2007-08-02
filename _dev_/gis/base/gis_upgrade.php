@@ -28,7 +28,7 @@
 			}
 			if (version_compare($current_version,"0.1.2","<")){
 				$key = "";
-				$res = spip_query("SELECT * FROM spip_gis_config WHERE name='googlemapkey'");
+				$res = spip_query("SELECT name, value FROM spip_gis_config WHERE name='googlemapkey'");
 				if ($row = spip_fetch_array($res))
 					$key = $row['value'];
 				ecrire_meta('geomap_googlemapkey',$key);
@@ -47,9 +47,9 @@
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.3");
 			}
 			if (version_compare($current_version,"0.1.4","<")){
-				$res = spip_query("SELECT * FROM spip_types_documents WHERE extension='kml'");
+				$res = spip_query("SELECT extension FROM spip_types_documents WHERE extension='kml'");
 				if (!$row = spip_fetch_array($res))
-					spip_query("INSERT INTO `spip_types_documents` ( `id_type` , `titre` , `descriptif` , `extension` , `mime_type` , `inclus` , `upload` , `maj` )    VALUES ('', 'Google Earth Placemark', '', 'kml', 'application/vnd.google-earth.kml+xml kml', 'non', 'oui', NOW( ));");
+					spip_query("INSERT INTO `spip_types_documents` ( `id_type` , `titre` , `descriptif` , `extension` , `mime_type` , `inclus` , `upload` , `maj` )    VALUES ('', 'Google Earth Placemark', '', 'kml', 'application/vnd.google-earth.kml+xml', 'non', 'oui', NOW( ));");
 				ecrire_meta($nom_meta_base_version,$current_version="0.1.4");
 			}
 			ecrire_metas();

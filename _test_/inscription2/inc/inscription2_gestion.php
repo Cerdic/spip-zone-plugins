@@ -26,12 +26,12 @@ function inscription2_ajouts()
 	$echec = _request('echec');
 	$new = _request('new');
 
-	$s = spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur");
+	$s = spip_query("SELECT id_auteur FROM ".$nom_table." WHERE id_auteur=$id_auteur");
 	$auteur = spip_fetch_array($s);
 
 	if (!$auteur AND !$new) {
 		spip_abstract_insert($nom_table, "(id_auteur)", "($id_auteur)");
-		$s = spip_query("SELECT * FROM ".$nom_table." WHERE id_auteur=$id_auteur");
+		$s = spip_query("SELECT id_auteur FROM ".$nom_table." WHERE id_auteur=$id_auteur");
 		$auteur = spip_fetch_array($s);
 	}
 

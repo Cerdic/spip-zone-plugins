@@ -58,9 +58,9 @@ $tables_principales['spip_gis_mots'] = array(
 	);
 //------------------------------------------------------	
 //on ajoute les kml à la table spip_types_documents  --------------------------------------
-$res = spip_query("SELECT * FROM spip_types_documents WHERE extension='kml'");
+$res = spip_query("SELECT extension FROM spip_types_documents WHERE extension='kml'");
 if (!$row = spip_fetch_array($res))
-	spip_query("INSERT INTO `spip_types_documents` ( `id_type` , `titre` , `descriptif` , `extension` , `mime_type` , `inclus` , `upload` , `maj` )    VALUES ('', 'Google Earth Placemark', '', 'kml', 'application/vnd.google-earth.kml+xml kml', 'non', 'oui', NOW( ));");
+	spip_query("INSERT INTO `spip_types_documents` ( `id_type` , `titre` , `descriptif` , `extension` , `mime_type` , `inclus` , `upload` , `maj` )    VALUES ('', 'Google Earth Placemark', '', 'kml', 'application/vnd.google-earth.kml+xml', 'non', 'oui', NOW( ));");
 
 //-- Relaci—ns ----------------------------------------------------
 global $table_des_tables;
