@@ -92,7 +92,7 @@ $().ready(function() {
 		<input type="submit" value="<:info_rechercher:>" />
 		</form>
 		[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})] } )]
+			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})]} )]
 		]
 		
 		</div>
