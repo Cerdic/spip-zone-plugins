@@ -47,7 +47,7 @@ function exec_jeux_edit(){
 }
 
 function jeux_ajouter_jeu($contenu,$id_jeu){
-	include_spip('inc/utils');
+	
 	
 	if (!$id_jeu) {
 		spip_query("INSERT into spip_jeux (contenu) VALUES('<jeux>".$contenu."</jeux>')");	
@@ -55,7 +55,7 @@ function jeux_ajouter_jeu($contenu,$id_jeu){
 				}
 	
 	else 		{
-		spip_query('REPLACE into spip_jeux (id_jeu,contenu) VALUES ('.$id_jeu.',"<jeux>'.$contenu.'")');
+		spip_query('REPLACE into spip_jeux (id_jeu,contenu) VALUES ('.$id_jeu.',"<jeux>'.$contenu.'</jeux>")');
 		
 		}
 	return $id_jeu;
