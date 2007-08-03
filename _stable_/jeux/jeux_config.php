@@ -1,10 +1,14 @@
 <?php
 #---------------------------------------------------#
-#  Plugin  : jeux                                   #
+#  Plugin  : Jeux                                   #
 #  Auteur  : Patrice Vanneufville, 2006             #
+#  Gestion des scores : Maieul Rouquette, 2007      #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
-#---------------------------------------------------#
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
+
 # exemples de jeux avec les mots :
 # http://www.cc-concarneaucornouaille.fr/net_bibli/portail/jouer%20avec%20les%20mots.htm
 # http://d.ch.free.fr/index.html
