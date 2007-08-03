@@ -23,7 +23,7 @@ function exec_jeux_voir(){
 			
 	debut_gauche();
 	
-	//edition du jeu
+	// edition du jeu
 	debut_boite_info();
 	echo icone_horizontale(_T('jeux:modifier_jeu',array('id'=>$id_jeu)),generer_url_ecrire('jeux_edit','id_jeu='.$id_jeu),find_in_path('img/jeux-48.png'));
 	
@@ -41,7 +41,7 @@ function exec_jeux_voir(){
 	echo _T('jeux:explication_jeu');
 	fin_cadre_relief();
 	
-	//lien vers les résultats
+	// lien vers les resultats
 	debut_cadre_relief();
 	echo "<a href=".generer_url_ecrire('jeux_resultat','id_jeu='.$id_jeu).">"._T("jeux:voir_resultats")."</a>";
 	fin_cadre_relief();

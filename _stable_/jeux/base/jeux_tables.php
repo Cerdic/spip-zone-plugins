@@ -1,5 +1,6 @@
 <?
-//déclaration des tables du plugin jeux //
+
+// declaration des tables du plugin jeux //
 global $table_des_tables;
 global $tables_principales;
 include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
