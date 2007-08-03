@@ -19,7 +19,7 @@
 	<label>
 		<input type="checkbox" name="nom_famille" [checked="(#CONFIG{inscription2/nom_famille}?{checked})"] onclick="showoblig(this)" id="nom_famille" />
 	</label>
-	<label style="[(#CONFIG{inscription2/nom_famille}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/nom_famille}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="nom_famille_obligatoire" [checked="(#CONFIG{inscription2/nom_famille_obligatoire}?{checked})"] id="nom_famille_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -43,7 +43,7 @@
 	<label>
 		<input type="checkbox" name="prenom" [checked="(#CONFIG{inscription2/prenom}?{checked})"] onclick="showoblig(this)" id="prenom" />
 	</label>
-	<label style="[(#CONFIG{inscription2/prenom}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/prenom}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="prenom_obligatoire" [checked="(#CONFIG{inscription2/prenom_obligatoire}?{checked})"] id="prenom_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -67,7 +67,7 @@
 	<label>
 		<input type="checkbox" name="username" [checked="(#CONFIG{inscription2/username}?{checked})"] onclick="showoblig(this)" id="username" />
 	</label>
-	<label style="[(#CONFIG{inscription2/username}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/username}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="username_obligatoire" [checked="(#CONFIG{inscription2/username_obligatoire}?{checked})"] id="username_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -91,7 +91,7 @@
 	<label>
 		<input type="checkbox" name="naissance" [checked="(#CONFIG{inscription2/naissance}?{checked})"] onclick="showoblig(this)" id="naissance" />
 	</label>
-	<label style="[(#CONFIG{inscription2/naissance}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/naissance}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="naissance_obligatoire" [checked="(#CONFIG{inscription2/naissance_obligatoire}?{checked})"] id="naissance_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -115,7 +115,7 @@
 	<label>
 		<input type="checkbox" name="sexe" [checked="(#CONFIG{inscription2/sexe}?{checked})"] onclick="showoblig(this)" id="sexe" />
 	</label>
-	<label style="[(#CONFIG{inscription2/sexe}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/sexe}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="sexe_obligatoire" [checked="(#CONFIG{inscription2/sexe_obligatoire}?{checked})"] id="sexe_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -139,7 +139,7 @@
 	<label>
 		<input type="checkbox" name="adresse" [checked="(#CONFIG{inscription2/adresse}?{checked})"] onclick="showoblig(this)" id="adresse" />
 	</label>
-	<label style="[(#CONFIG{inscription2/adresse}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/adresse}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="adresse_obligatoire" [checked="(#CONFIG{inscription2/adresse_obligatoire}?{checked})"] id="adresse_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -163,7 +163,7 @@
 	<label>
 		<input type="checkbox" name="code_postal" [checked="(#CONFIG{inscription2/code_postal}?{checked})"] onclick="showoblig(this)" id="code_postal" />
 	</label>
-	<label style="[(#CONFIG{inscription2/code_postal}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/code_postal}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="code_postal_obligatoire" [checked="(#CONFIG{inscription2/code_postal_obligatoire}?{checked})"] id="code_postal_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -187,7 +187,7 @@
 	<label>
 		<input type="checkbox" name="ville" [checked="(#CONFIG{inscription2/ville}?{checked})"] onclick="showoblig(this)" id="ville" />
 	</label>
-	<label style="[(#CONFIG{inscription2/ville}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/ville}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="ville_obligatoire" [checked="(#CONFIG{inscription2/ville_obligatoire}?{checked})"] id="ville_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -211,7 +211,7 @@
 	<label>
 		<input type="checkbox" name="pays" [checked="(#CONFIG{inscription2/pays}?{checked})"] onclick="showoblig(this)" id="pays" />
 	</label>
-	<label style="[(#CONFIG{inscription2/pays}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/pays}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="pays_obligatoire" [checked="(#CONFIG{inscription2/pays_obligatoire}?{checked})"] id="pays_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -235,7 +235,7 @@
 	<label>
 		<input type="checkbox" name="telephone" [checked="(#CONFIG{inscription2/telephone}?{checked})"] onclick="showoblig(this)" id="telephone" />
 	</label>
-	<label style="[(#CONFIG{inscription2/telephone}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/telephone}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="telephone_obligatoire" [checked="(#CONFIG{inscription2/telephone_obligatoire}?{checked})"] id="telephone_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -259,7 +259,7 @@
 	<label>
 		<input type="checkbox" name="fax" [checked="(#CONFIG{inscription2/fax}?{checked})"] onclick="showoblig(this)" id="fax" />
 	</label>
-	<label style="[(#CONFIG{inscription2/fax}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/fax}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="fax_obligatoire" [checked="(#CONFIG{inscription2/fax_obligatoire}?{checked})"] id="fax_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -283,7 +283,7 @@
 	<label>
 		<input type="checkbox" name="mobile" [checked="(#CONFIG{inscription2/mobile}?{checked})"] onclick="showoblig(this)" id="mobile" />
 	</label>
-	<label style="[(#CONFIG{inscription2/mobile}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/mobile}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="mobile_obligatoire" [checked="(#CONFIG{inscription2/mobile_obligatoire}?{checked})"] id="mobile_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
@@ -309,7 +309,7 @@
 	<label>
 		<input type="checkbox" name="commentaire" [checked="(#CONFIG{inscription2/commentaire}?{checked})"] onclick="showoblig(this)" id="commentaire" />
 	</label>
-	<label style="[(#CONFIG{inscription2/commentaire}|=={on}|?{display: block;, display:none;})]">
+	<label style="[(#CONFIG{inscription2/commentaire}|=={on}|?{display: inline;, display:none;})]">
 		<input type="checkbox" name="commentaire_obligatoire" [checked="(#CONFIG{inscription2/commentaire_obligatoire}?{checked})"] id="commentaire_obligatoire" />
 		<span style="color:red">*</span>
 	</label>
