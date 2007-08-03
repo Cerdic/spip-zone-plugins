@@ -11,12 +11,13 @@ function exec_jeux_edit(){
 	$contenu = _request('contenu');
 	$nouveau = _request('nouveau');
 	$id_jeu	 = _request('id_jeu');
-	
+	$enregistrer_resultat = _request('enregistrer_resultat');
 
 	
 	if ($valider)
 		{
-		$id_jeu = jeux_ajouter_jeu($contenu,$id_jeu);
+		echo $id_jeu;
+		$id_jeu = jeux_ajouter_jeu($contenu,$enregistrer_resultat,$id_jeu);
 		 include_spip('inc/headers');	 redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu,true));
 		
 		}
@@ -43,22 +44,32 @@ function exec_jeux_edit(){
 	echo strip_tags($contenu['contenu']);
 	
 	echo " </textarea>";
-	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' />";
+	
+	
+	debut_cadre_relief();
+	echo "<label><span class='titrem'>"._T('jeux:enregistrer_resultat');
+	echo '<br /></span><select class="formo" name="enregistrer_resultat"><option value="oui">'._T('oui').'</option><option value="non">'._T('non').'</option></select>';
+	echo '</label>';
+	fin_cadre_relief();
+	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></p>";
+	
+	
 	echo "</form>";
 		
 	echo fin_cadre_formulaire(),fin_gauche(), fin_page();
 }
 
-function jeux_ajouter_jeu($contenu,$id_jeu){
+function jeux_ajouter_jeu($contenu,$enregistrer_resultat,$id_jeu=false){
 	
 	
 	if (!$id_jeu) {
-		spip_query("INSERT into spip_jeux (contenu) VALUES('<jeux>".$contenu."</jeux>')");	
+		
+		spip_query("INSERT into spip_jeux (contenu,enregistrer_resultat) VALUES('<jeux>".$contenu."</jeux>','".$enregistrer_resultat."')");	
 		$id_jeu = mysql_insert_id();		
 				}
 	
 	else 		{
-		spip_query('REPLACE into spip_jeux (id_jeu,contenu) VALUES ('.$id_jeu.',"<jeux>'.$contenu.'</jeux>")');
+		spip_query('REPLACE into spip_jeux (id_jeu,contenu,enregistrer_resultat) VALUES ('.$id_jeu.',"<jeux>'.$contenu.'</jeux>","'.$enregistrer_resultat.'")');
 		
 		}
 	return $id_jeu;
