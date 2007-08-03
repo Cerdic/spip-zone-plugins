@@ -6,7 +6,7 @@
 		</tr></thead>
 <BOUCLE_jeux(JEUX)>
 <tr class ="tr_liste">
-	<td><a href="?exec=jeux_voir&id_jeu=#ID_JEUX">#ID_JEUX</a></td>
+	<td><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
 	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
 	<td><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats>#TOTAL_BOUCLE<//B_resultats></td>
 </tr>
