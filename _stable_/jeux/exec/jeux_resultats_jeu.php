@@ -19,7 +19,9 @@ function exec_jeux_resultats_jeu(){
 	debut_gauche();
 	
 	
-	
+	debut_boite_info();
+	echo icone_horizontale(_T('jeux:voir_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeux-48.png'));
+	fin_boite_info();
 	
 	
 		
@@ -27,8 +29,9 @@ function exec_jeux_resultats_jeu(){
 	creer_colonne_droite();
 	debut_droite();
 	debut_cadre_relief();
-	gros_titre(_T("jeux:resultats_jeu",array('id'=>$id_jeu)));
 	
+	echo gros_titre(_T("jeux:resultats_jeu",array('id'=>$id_jeu)));
+	echo "<div class='nettoyeur'></div>";
 	include_spip('public/assembler');
 	debut_cadre('liste');
 	echo recuperer_fond('fond/resultats_jeu_detail',array('id_jeu'=>$id_jeu));
