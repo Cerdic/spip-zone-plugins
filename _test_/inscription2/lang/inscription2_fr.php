@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'table_expl' => ' : Le champ sera affich&eacute; sur la liste des adh&eacute;rents (espace priv&eacute;)',
 
 'icone_menu_config' => 'Inscription2',
-'nom' => 'Pseudo',
+'nom' => 'Nom d\'utilisateur',
 'nom_famille' => 'Nom',
 'prenom' => 'Pr&eacute;nom',
 'naissance' => 'Date de naissance',
@@ -111,6 +111,7 @@ Merci de votre confiance.
 L\'6eacute;quipe de @nom_site@',
 'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
+'demande_password' => 'Votre mot de passe&nbsp;:',
 'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
 'texte_email_confirmation' => 'Votre compte vient d\'&ecirc;tre activ&eacute;, vous pouvez d&egrave;s maintenant vous connecter &agrave; notre site en utilisant vos identifiants personnels.
 
@@ -145,7 +146,7 @@ L\'&eacute;quipe de @nom_site@',
 'choix_domaine' => 'Veuillez choisir votre domaine',
 'mail_non_domaine' => 'L\'adresse email que vous avez donn&eacute;e n\'appartient pas au domaine que vous avez indiqu&eacute; veuillez essayer &agrave; nouveau',
 'format' => 'Format',
-'expl_format' => 'Veuillez choisir le format que vous pr&eacute;f&eacute;rez pour recevoir les emails des listes de diffusion',
+'expl_format' => 'Format de reception pour les emails des listes de diffusion',
 'texte' => 'Texte', 
 'html' => 'HTML',
 
