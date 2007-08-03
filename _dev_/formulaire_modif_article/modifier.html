@@ -1,0 +1,160 @@
+#CACHE{0}
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>MODIFIER : [(#TITRE|supprimer_numero|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|texte_backend|textebrut)" />]
+	<INCLURE{fond=inc-head_article}{self=#SELF}{id_article}{id_rubrique}>
+<style type="text/css"><!--
+	#zone-documents td { vertical-align: top; font-size:small;}
+	#zone-documents td { border-top: dotted gray 1px;  padding-top: 5px; padding-bottom:8px; }
+
+	#zone-documents table { }
+	.fiche-document { width: 70%; }
+	.logo-document { width: 130px; text-align: center; }
+	
+	.ajaxloading {
+		background-image: url([(#CHEMIN{images/searching.gif}|url_absolue)]);
+		background-repeat:no-repeat;
+		background-position:center center;
+	}
+
+// --></style>
+
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.MultiFile.js})"></script>]
+</head>
+
+<body class="page_article">
+<INCLURE{fond=login_bas}{id_article}>
+
+<INCLURE{fond=inc-top}{id_article}>
+
+<INCLURE{fond=inc-logo}>
+
+<div id="page">
+	<INCLURE{fond=inc-menu_top}{self=#SELF}{id_rubrique}>
+
+	<div id="conteneur">
+		<div id="navigation-gauche">
+		<div class="menu_droite_boite">
+		
+		<div class="title menu-titre-gauche menu-titre-gauche#ID_SECTEUR">AIDE</div>
+		<div class="surrubrique">&nbsp;</div>
+		<div class="content content#ID_SECTEUR">
+		Texte de l'aide
+		<div class="sousrubrique">&nbsp;</div>
+		</div>
+		</div>
+		
+		</div>
+		
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+			<BOUCLE_rubparent(HIERARCHIE){id_article}{1,1}>
+			<h2 class="surrubrique">[(#TITRE|supprimer_numero)]</h2>
+			<div class="surrubrique">&nbsp;</div>
+			</BOUCLE_rubparent>
+
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="[(#SESSION{statut}|=={0minirezo}|?{' ',''})#EDIT{titre}] titre">[(#TITRE|supprimer_numero)]</h1>
+				
+				<div style="padding:20px 20px 20px 20px" class="texteglobal">
+	
+				<div class="textecontent">
+				[(#FORMULAIRE_MODIF_ARTICLE)]				
+				</div>
+
+			</div>
+			<br class="nettoyeur" />
+			</div>
+		[(#REM) Menu de navigation lateral]
+
+<BOUCLE_article(ARTICLES){id_article}>
+	<div id="navigation">
+		#FORMULAIRE_UPLOAD
+	</div>
+</BOUCLE_article>
+
+<script type='text/javascript'><!--
+if (window.jQuery && jQuery.fn.ajaxForm) {
+function upload_attach (re) {
+	jQuery('#formulaire_upload>form')
+
+	// changer l'action : pas indispensable mais permet d'eviter la lenteur du
+	// recalcul total de la page, qui provoque en plus un rechargement
+	// des javascripts etc. dans l'iframe.
+	.attr('action', '[(#URL_PAGE{mini_formulaire_upload_article})]&id_article=#ID_ARTICLE')
+
+	.ajaxForm({
+		'beforeSubmit': function(formData, jqForm, options){
+			$('#formulaire_upload')
+			.addClass('ajaxloading')
+			.css({'opacity': 0.5});
+			return true;
+		},
+		'success': function(e){
+			var h;
+			if (h = $('<iframe><\/iframe>').html(e).find('#formulaire_upload').html()) {
+				$('#formulaire_upload')
+				.html(h)
+				.removeClass('ajaxloading')
+				.css({'opacity':1.0});
+				upload_attach(true);
+			}
+			else
+				alert('bug !');
+		}
+	});
+
+	// si on reattache les evenements, remettre les crayons
+	if (re && window.cQuery){
+		cQuery("#formulaire_upload .crayon:lt(1000)").initcrayon();
+	}
+	
+	// idem pour thickbox si on l'a
+	if (re && TB_init){
+		jQuery(init_f);
+	}
+	
+	// si multifile est la, on l'utilise (trop bien)
+	if (jQuery.fn.MultiFile)
+	$('#formulaire_upload>form input[@type=file]').MultiFile({
+		max: 5,
+		STRING: {'remove': 'x', 'selected': '$file'}
+	});
+
+	// et la pagination
+	$('#formulaire_upload .pagination a')
+	.click(function(){
+		var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
+		r = r ? r[1] : 0;
+		$('#formulaire_upload')
+		.addClass('ajaxloading')
+		.css({'opacity': 0.5});
+		$.get(
+			'[(#URL_PAGE{mini_formulaire_upload_article})]&id_article=#ID_ARTICLE&debut_docs='+r,
+			function(c) {
+				$('#formulaire_upload')
+				.removeClass('ajaxloading')
+				.css({'opacity': 1.0})
+				.html(
+					$('<iframe>').html(c).find('#formulaire_upload').html()
+				);
+				upload_attach(true);
+			}
+		);
+		return false;
+	});
+
+};
+upload_attach(false);
+}
+// --></script>
+
+		</div>
+	<br class="nettoyeur" />
+</div>
+</body>
+</html>
+</BOUCLE_article_principal>

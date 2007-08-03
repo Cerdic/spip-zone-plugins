@@ -1,0 +1,23 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Formulaire Modifier Article
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+	Quentin Drouet
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Formulaire de modification d'articles depuis l'espace public...
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction-->
+	<prefix>
+	formulaire_modif_article
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>

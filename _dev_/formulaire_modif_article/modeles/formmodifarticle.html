@@ -1,0 +1,112 @@
+#CACHE{0}
+<script type="text/javascript">//<![CDATA[
+	Date.format = 'yyyy-mm-dd';
+	$(function(){
+		$('.datepicker').datePicker({clickInput:true});
+		$('#datedebut').bind(
+			'dpClosed',
+				function(e, selectedDates){
+					var d = selectedDates[0];
+					if (d) {
+						$('#datefin').dpSetStartDate(d.addDays(1).asString());
+					}
+				}
+		);
+		$('#datefin').bind(
+			'dpClosed',
+				function(e, selectedDates){
+					var d = selectedDates[0];
+					if (d) {
+						$('#datedebut').dpSetEndDate(d.addDays(-1).asString());
+					}
+				}
+		);
+	});
+
+function verifierdate2(){
+	if ($('#datefin').val() == ""){
+		$('#datefin').val($('#datedebut').val());
+	}
+}
+
+function showdatefin(){
+	if (($('#datefin').val() == "") || ($('#datefin').val() < $('#datedebut').val())) {
+		$('#datefin').val($('#datedebut').val());
+	}
+	$('#formulaire_article .cache').fadeIn();
+	$('#formulaire_article .anticache').fadeOut();
+}
+
+function removedatefin(){
+	$('#formulaire_article .cache').fadeOut();
+	$('#formulaire_article .anticache').fadeIn();
+	$('#datefin').val('');
+}
+
+function set_form_value(inputid, value){
+	$('#'+inputid+'').val(''+value+'');
+}
+
+function set_select_value(inputid){
+	document.forms.lieu.elements[inputid].options.selectedIndex = 0;
+}
+
+function renverseStrDate(sIn) { //1ere procedure renverse date
+	var sOut = "";
+	// : 01346789
+	//-->67893401
+	sOut = sIn.charAt(6) + sIn.charAt(7) + sIn.charAt(8)+ sIn.charAt(9) + "-" + sIn.charAt(0)+ sIn.charAt(1) + "-" + sIn.charAt(3)+ sIn.charAt(4);
+	return(sOut);
+}
+
+function whichdatebegin(){
+	selectionne = $('#datedebut').val();
+	return selectionne;
+}
+
+function whichdateend(){
+	selectionne = $('#datefin').val();
+	return selectionne;
+}
+
+function whichRegion(){
+	for (i=0; i<document.forms['lieu'].elements['toutesregions'].options.length; i++) {
+		if (document.forms['lieu'].elements['toutesregions'].options[i].selected) {
+		selectionne = document.forms['lieu'].elements['toutesregions'].options[i].value;
+		}
+	}
+	return selectionne;
+}
+
+function showresults(formulaire){
+
+	var datebegin = whichdatebegin();
+	var datedebut = datebegin;
+	var dateend = whichdateend();
+	var datefin = dateend;
+
+	var region = whichRegion();
+	
+	var toutesregions = document.getElementById("toutesregions");
+
+	if (datebegin == ""){
+		$('#blogger').empty().load('[(#URL_PAGE{ajax-customregion})]&region='+region+'');
+	}
+	if (datebegin != ""){
+		$('#blogger').empty().load('[(#URL_PAGE{ajax-customdateregion})]&date_debut='+datebegin+'&date_fin='+dateend+'&region='+region+'');
+	}
+}
+
+$(document).ready(function() {
+	$('.cache').hide();
+	if ($('#datedebut').val() != $('#datefin').val()) {
+		$('#autoriserdate').attr({checked :"checked"});
+		showdatefin();
+	}
+});
+//]]>/*
+</script>
+
+<BOUCLE_proposer (RUBRIQUES) {id_rubrique=#ENV{id_formarticle}}>
+<div>#FORMULAIRE_ARTICLE</div>
+</BOUCLE_proposer>

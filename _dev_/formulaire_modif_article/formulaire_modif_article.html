@@ -1,0 +1,32 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_modif_article">
+<form action="#formulaire_modif_article" method="post" id="formulaire_modif_article">
+[(#ENV*{previsu})]
+	<input type="hidden" name="article" value="[(#ENV**{id_article})]" />
+
+<fieldset style="background-color:#fff">
+	<legend><:votre_texte:></legend>
+	<div>
+		<br />Vous ne pouvez modifier votre titre pour des raisons de fonctionnement de l'ensemble du site.
+		<br />S'il est vraiment n&eacute;cessaire de le modifier, vous pouvez contacter l'&eacute;quipe de <a href="#URL_AUTEUR{224}">LX5</a>.
+
+		<br /><br />
+
+		<label><:texte_sous_titre:></label>
+		<input class="forml" type="text" id="soustitre" name="soustitre" value="[(#ENV*{soustitre})]" size="50" />
+			
+		<br /><br />
+
+		<label><:info_chapeau:></label>
+		<textarea id="chapo" name="chapo" class="forml" rows="8" cols="40">[(#ENV*{chapo})]</textarea>
+		
+		<br /><br />
+		
+		<label><:info_texte:></label>
+        [(#ENV*{texte}|barre_textarea{25,40})]
+	</div>
+</fieldset>
+<p class="spip_bouton"><input type="submit" name="previsualiser" value="<:previsualiser:>" /></p>
+<br class="nettoyeur" />
+</form>
+</div>
