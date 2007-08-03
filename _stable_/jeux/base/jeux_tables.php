@@ -10,18 +10,23 @@ $table_des_tables['jeux_resultats'] = 'jeux_resultats';
 $jeux = array(
 	'id_jeu'	=>'bigint(21) NOT NULL',
 	'date'		=>"timestamp",
-	'contenu'	=>'text NOT NULL'
+	'contenu'	=>'text NOT NULL',
+	'statut'	=>"varchar(10) DEFAULT '0' NOT NULL",
+	'enregistrer_resultat'=>'enum ("oui","non")'
+	
 	);
 
 $jeux_key = array(
 	'PRIMARY KEY'	=>'id_jeu');
 $jeux_resultats = array(
+	'id_resultat'	=>'bigint(21) NOT NULL',
 	'id_jeu'		=> 'bigint(21) NOT NULL',
 	'id_auteur'		=> 'bigint(21) NOT NULL',
 	'date'			=>	"timestamp",
 	'score_court'	=>	'int(12)',
 	'score_long'	=>	'text NOT NULL');
-$jeux_resultats_key=array('KEY id_jeu'	=>'id_jeu',
+$jeux_resultats_key=array('PRIMARY KEY' =>'id_resultat',
+'KEY id_jeu'	=>'id_jeu',
 	'KEY id_auteur'	=>'id_auteur');
 
 $tables_principales['spip_jeux']=
