@@ -68,7 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_resultats'	=>'G&eacute;rer les r&eacute;sultats',
 'voir_resultats'	=>'Voir les r&eacute;sultats',
 'enregistrer_resultat' =>'Enregistrer les r&eacute;sultats ?',
-'retourner_jeu'		=>'Retourner au jeu'
+'retourner_jeu'		=>'Retourner au jeu',
+'gerer_resultats_jeu' =>'G&eacute;rer les r&eacute;sultats du jeu numéro @id@',
+'confirmation_supprimer_tout' => '&Ecirc;tes vous réellement sûr de vouloir supprimer tout les résultats ?',
+'supprimer_tout_confirm'	=>'Confimer la suppression de tout les r&eacute;sultats',
+'explication_supprimer_tout'=>'Vous pouvez supprimer tout les r&eacute;sultats ... attention, ils seront irrécupérables (niark,niark,niark)',
+'supprimer_tout'			=>'Supprimer tout les r&eacute;sultats'
 );
 
 
