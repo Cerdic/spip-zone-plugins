@@ -23,8 +23,8 @@ $jeux_resultats = array(
 	'id_jeu'		=> 'bigint(21) NOT NULL',
 	'id_auteur'		=> 'bigint(21) NOT NULL',
 	'date'			=>	"timestamp",
-	'score_court'	=>	'int(12)',
-	'score_long'	=>	'text NOT NULL');
+	'resultat_court'	=>	'int(12)',
+	'resultat_long'	=>	'text NOT NULL');
 $jeux_resultats_key=array('PRIMARY KEY' =>'id_resultat',
 'KEY id_jeu'	=>'id_jeu',
 	'KEY id_auteur'	=>'id_auteur');

@@ -107,7 +107,7 @@ function jeux_afficher_score($score, $total,$id_jeu=false) {
 	if ($id_jeu){
 		
 		include_spip('base/jeux_ajouter_resultat');
-		jeux_ajouter_resulat($id_jeu,$resultat);
+		jeux_ajouter_resulat($id_jeu,$score);
 		}
 	
 	return '<center><div class="jeux_score">'._T('jeux:score')
