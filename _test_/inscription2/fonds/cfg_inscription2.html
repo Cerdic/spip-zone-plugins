@@ -12,7 +12,7 @@
 <script type="text/javascript">
 /*jQuery tabs*/
 $(document).ready(function() {
-	$('#container-1').tabs({ fxAutoHeight: true, fxFade: true, fxSpeed: 'fast', onShow:legend_it });
+	$('#container-1').tabs({  onShow:legend_it });
    	d = $('#legend') ;
     $('#fragment-1').append(d);
 });
@@ -239,10 +239,10 @@ else
 <script type="text/javascript"><!--
 function showoblig(boxName) {
 if(boxName.checked){
-	$(boxName).parent().next('label').show(250);
+	$(boxName).parent().next('label').slideDown('slow');
 }
 else 
-	$(boxName).parent().next('label').toggle(250);
+	$(boxName).parent().next('label').slideUp('slow');
 	$(boxName).parent().next('label').find('input[@type=checkbox]').eq(0).attr({ checked: ''});
 }
 // --></script>
