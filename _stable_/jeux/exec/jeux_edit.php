@@ -64,12 +64,12 @@ function jeux_ajouter_jeu($contenu,$enregistrer_resultat,$id_jeu=false){
 	
 	if (!$id_jeu) {
 		
-		spip_query("INSERT into spip_jeux (contenu,enregistrer_resultat) VALUES('<jeux>".$contenu."</jeux>','".$enregistrer_resultat."')");	
+		spip_query("INSERT into spip_jeux (statut,contenu,enregistrer_resultat) VALUES('publie','<jeux>".$contenu."</jeux>','".$enregistrer_resultat."')");	
 		$id_jeu = mysql_insert_id();		
 				}
 	
 	else 		{
-		spip_query('REPLACE into spip_jeux (id_jeu,contenu,enregistrer_resultat) VALUES ('.$id_jeu.',"<jeux>'.$contenu.'</jeux>","'.$enregistrer_resultat.'")');
+		spip_query('REPLACE into spip_jeux (id_jeu,statut,contenu,enregistrer_resultat) VALUES ('.$id_jeu.',"publie","<jeux>'.$contenu.'</jeux>","'.$enregistrer_resultat.'")');
 		
 		}
 	return $id_jeu;

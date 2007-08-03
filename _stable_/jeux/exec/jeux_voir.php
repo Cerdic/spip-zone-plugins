@@ -25,9 +25,17 @@ function exec_jeux_voir(){
 	
 	//edition du jeu
 	debut_boite_info();
+	echo icone_horizontale(_T('jeux:modifier_jeu',array('id'=>$id_jeu)),generer_url_ecrire('jeux_edit','id_jeu='.$id_jeu),find_in_path('img/jeux-48.png'));
+	
+	echo icone_horizontale(_T('jeux:voir_resultats'),generer_url_ecrire('jeux_resultats_jeu','id_jeu='.$id_jeu),find_in_path('img/jeux-48.png'));
+	fin_boite_info();
+	
+	
+	debut_boite_info();
 	echo _T("jeux:jeu_numero",array('id'=>$id_jeu));
 	echo "<br /><strong>"._t("jeux:derniere_modif")."</strong><br />".affdate($date).' '.heures($date).":".minutes($date);
 	fin_boite_info();
+	
 	
 	debut_cadre_relief();
 	echo _T('jeux:explication_jeu');
