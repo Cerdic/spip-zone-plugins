@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //espace privé
 'jeu_numero' 	=>'Jeu numéro @id@',
+'jeu_numero_court' 	=>'Jeu numéro',
 'resultats'		=>'Résultats',
 'nouveau_jeu'	=>'Nouveau jeu',
 'explication_jeu'=>'Vous pouvez insérer des jeux selon la syntaxe décrite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la documentation</a>.<br /> Il est toutefois inutile de mettre les balises &lt;jeux>et&lt;/jeux>',
@@ -60,7 +61,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'voir_resultats'	=>'Voir les résultats',
 'resultats_jeu'		=>'Résultats du jeu numéro @id@',
 'pas_de_jeu'		=>"Désolé, ce jeu n'existe pas",
-'voir_jeu'			=>'Voir le jeu'
+'voir_jeu'			=>'Voir le jeu',
+'jeux_tous'			=>'Tout les jeux',
+'nb_resultats'		=>'Nombre de résultats',
+'gerer_resultats'	=>'Gérer les résultats'
 );
 
 
