@@ -57,7 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'modifier_jeu'	=>'Modifier le jeu numéro @id@',
 'resultat_auteur' =>'Résultat de @nom@',
 'derniere_modif'	=>'Dernières modification',
-'voir_resultats'	=>'Voir les résultats'
+'voir_resultats'	=>'Voir les résultats',
+'resultats_jeu'		=>'Résultats du jeu numéro @id@',
+'pas_de_jeu'		=>"Désolé, ce jeu n'existe pas"
 );
 
 
