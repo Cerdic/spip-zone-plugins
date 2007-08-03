@@ -239,10 +239,10 @@ else
 <script type="text/javascript"><!--
 function showoblig(boxName) {
 if(boxName.checked){
-	$(boxName).parent().next('label').toggle();
+	$(boxName).parent().next('label').show(250);
 }
 else 
-	$(boxName).parent().next('label').toggle();
+	$(boxName).parent().next('label').toggle(250);
 	$(boxName).parent().next('label').find('input[@type=checkbox]').eq(0).attr({ checked: ''});
 }
 // --></script>
