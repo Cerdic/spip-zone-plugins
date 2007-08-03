@@ -4,6 +4,5 @@ function jeux_supprimer_tout_jeu($id_jeu){
 	}
 function jeux_supprimer_tout_auteur($id_auteur){
 	spip_query('DELETE FROM spip_jeux_resultats WHERE id_auteur='.$id_auteur);
-	echo "spip";
 	}
 ?>
