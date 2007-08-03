@@ -1,1 +1,84 @@
-<fieldset>		<legend><:xspf:conf_msc:></legend>				<p><strong><:xspf:size_anim:></strong></p>		<label for="mscwidth"><a href="#mscwidth" title="<:xspf:width:>"><:xspf:width:></a></label>&nbsp;		<input type="text" name="mscwidth" class="forml" style="width:4em;display:inline" id="mscwidth" value="#CONFIG{xspf/mscwidth}" />&nbsp;<i>px</i>&nbsp;&nbsp;		<label for="mscheigth"><a href="#mscheigth" title="<:xspf:height:>"><:xspf:height:></a></label>&nbsp;		<input type="text" name="mscheigth" class="forml" style="width:4em;display:inline" id="mscheigth" value="#CONFIG{xspf/mscheigth}" />&nbsp;<i>px</i>						<p><strong><:xspf:opt_lec:></strong></p>		<p>			<label for="mscrepeat"><a href="#mscrepeat" title="<:xspf:repeat:> - <:xspf:desc_repeat:>"><:xspf:repeat:></a></label>			<select name="mscrepeat" id="mscrepeat">				<option [(#CONFIG{xspf/mscrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>				<option [(#CONFIG{xspf/mscrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>			</select>&nbsp;&nbsp;						<label for="mscautostart"><a href="#mscautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>			<select name="mscautostart" id="mscautostart">				<option [(#CONFIG{xspf/mscautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>				<option [(#CONFIG{xspf/mscautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>			</select>		</p>					<label for="mscautoload"><a href="#mscautoload" title="<:xspf:autoload:> - <:xspf:desc_autoload:>"><:xspf:autoload:></a></label>		<select name="mscautoload" id="mscautoload">			<option [(#CONFIG{xspf/mscautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>				<option [(#CONFIG{xspf/mscautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>		</select>	</fieldset>		<fieldset>		<legend><:xspf:conf_slim:></legend>				<p><strong><:xspf:size_anim:></strong></p>		<label for="slimwidth"><a href="#slimwidth" title="<:xspf:width:>"><:xspf:width:></a></label>&nbsp;		<input type="text" name="slimwidth" class="forml" style="width:4em;display:inline" id="slimwidth" value="#CONFIG{xspf/slimwidth}" />&nbsp;<i>px</i>					<p><strong><:xspf:opt_lec:></strong></p>		<p>			<label for="slimrepeat"><a href="#slimrepeat" title="<:xspf:repeat:> - <:xspf:desc_repeat:>"><:xspf:repeat:></a></label>			<select name="slimrepeat" id="slimrepeat">				<option [(#CONFIG{xspf/slimrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>				<option [(#CONFIG{xspf/slimrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>			</select>&nbsp;&nbsp;						<label for="slimautostart"><a href="#slimautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>			<select name="slimautostart" id="slimautostart">				<option [(#CONFIG{xspf/slimautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>				<option [(#CONFIG{xspf/slimautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>			</select>		</p>		<label for="slimautoload"><a href="#slimautoload" title="<:xspf:autoload:> - <:xspf:desc_autoload:>"><:xspf:autoload:></a></label>		<select name="slimautoload" id="slimautoload">			<option [(#CONFIG{xspf/slimautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>				<option [(#CONFIG{xspf/slimautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>		</select>			</fieldset>		<fieldset>		<legend><:xspf:conf_but:></legend>		<p><strong><:xspf:opt_lec:></strong></p>		<p>			<label for="butrepeat"><a href="#butrepeat" title="<:xspf:repeat:> - <:xspf:desc_repeat:>"><:xspf:repeat:></a></label>			<select name="butrepeat" id="butrepeat">				<option [(#CONFIG{xspf/butrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>				<option [(#CONFIG{xspf/butrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>			</select>&nbsp;&nbsp;						<label for="butautostart"><a href="#butautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>			<select name="butautostart" id="butautostart">				<option [(#CONFIG{xspf/butautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>				<option [(#CONFIG{xspf/butautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>			</select>		</p>		<label for="butautoload"><a href="#butautoload" title="<:xspf:autoload:> - <:xspf:desc_autoload:>"><:xspf:autoload:></a></label>		<select name="butautoload" id="butautoload">			<option [(#CONFIG{xspf/butautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>				<option [(#CONFIG{xspf/butautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>		</select>			</fieldset>		[(#CONFIG{version_installee}|>={1.941}|?{' ',''})<?php	include_spip('inc/actions');	echo redirige_action_auteur('charger_plugin',lib,'','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_flv_player.zip' />"."<input type='hidden' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");?>]
+<fieldset>
+		<legend><:xspf:conf_msc:></legend>
+		
+		<p><strong><:xspf:size_anim:></strong></p>
+		<label for="mscwidth"><a href="#mscwidth" title="<:xspf:width:>"><:xspf:width:></a></label>&nbsp;
+		<input type="text" name="mscwidth" class="forml" style="width:4em;display:inline" id="mscwidth" value="#CONFIG{xspf/mscwidth}" />&nbsp;<i>px</i>&nbsp;&nbsp;
+		<label for="mscheigth"><a href="#mscheigth" title="<:xspf:height:>"><:xspf:height:></a></label>&nbsp;
+		<input type="text" name="mscheigth" class="forml" style="width:4em;display:inline" id="mscheigth" value="#CONFIG{xspf/mscheigth}" />&nbsp;<i>px</i>
+				
+		<p><strong><:xspf:opt_lec:></strong></p>
+		<p>
+			<label for="mscrepeat"><a href="#mscrepeat" title="<:xspf:repeat:> - <:xspf:desc_repeat:>"><:xspf:repeat:></a></label>
+			<select name="mscrepeat" id="mscrepeat">
+				<option [(#CONFIG{xspf/mscrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+				<option [(#CONFIG{xspf/mscrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			</select>&nbsp;&nbsp;
+			
+			<label for="mscautostart"><a href="#mscautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>
+			<select name="mscautostart" id="mscautostart">
+				<option [(#CONFIG{xspf/mscautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+				<option [(#CONFIG{xspf/mscautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			</select>
+		</p>
+			
+		<label for="mscautoload"><a href="#mscautoload" title="<:xspf:autoload:> - <:xspf:desc_autoload:>"><:xspf:autoload:></a></label>
+		<select name="mscautoload" id="mscautoload">
+			<option [(#CONFIG{xspf/mscautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
+			<option [(#CONFIG{xspf/mscautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+		</select>
+	</fieldset>
+	
+	<fieldset>
+		<legend><:xspf:conf_slim:></legend>
+		
+		<p><strong><:xspf:size_anim:></strong></p>
+		<label for="slimwidth"><a href="#slimwidth" title="<:xspf:width:>"><:xspf:width:></a></label>&nbsp;
+		<input type="text" name="slimwidth" class="forml" style="width:4em;display:inline" id="slimwidth" value="#CONFIG{xspf/slimwidth}" />&nbsp;<i>px</i>
+		
+	
+		<p><strong><:xspf:opt_lec:></strong></p>
+		<p>
+			<label for="slimrepeat"><a href="#slimrepeat" title="<:xspf:repeat:> - <:xspf:desc_repeat:>"><:xspf:repeat:></a></label>
+			<select name="slimrepeat" id="slimrepeat">
+				<option [(#CONFIG{xspf/slimrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+				<option [(#CONFIG{xspf/slimrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			</select>&nbsp;&nbsp;
+			
+			<label for="slimautostart"><a href="#slimautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>
+			<select name="slimautostart" id="slimautostart">
+				<option [(#CONFIG{xspf/slimautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+				<option [(#CONFIG{xspf/slimautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			</select>
+		</p>
+		<label for="slimautoload"><a href="#slimautoload" title="<:xspf:autoload:> - <:xspf:desc_autoload:>"><:xspf:autoload:></a></label>
+		<select name="slimautoload" id="slimautoload">
+			<option [(#CONFIG{xspf/slimautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
+			<option [(#CONFIG{xspf/slimautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+		</select>
+		
+	</fieldset>
+	
+	<fieldset>
+		<legend><:xspf:conf_but:></legend>
+		<p><strong><:xspf:opt_lec:></strong></p>
+		<p>
+			<label for="butrepeat"><a href="#butrepeat" title="<:xspf:repeat:> - <:xspf:desc_repeat:>"><:xspf:repeat:></a></label>
+			<select name="butrepeat" id="butrepeat">
+				<option [(#CONFIG{xspf/butrepeat}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+				<option [(#CONFIG{xspf/butrepeat}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			</select>&nbsp;&nbsp;
+			
+			<label for="butautostart"><a href="#butautostart" title="<:xspf:autostart:> - <:xspf:desc_autostart:>"><:xspf:autostart:></a></label>
+			<select name="butautostart" id="butautostart">
+				<option [(#CONFIG{xspf/butautostart}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+				<option [(#CONFIG{xspf/butautostart}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
+			</select>
+		</p>
+		<label for="butautoload"><a href="#butautoload" title="<:xspf:autoload:> - <:xspf:desc_autoload:>"><:xspf:autoload:></a></label>
+		<select name="butautoload" id="butautoload">
+			<option [(#CONFIG{xspf/butautoload}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>	
+			<option [(#CONFIG{xspf/butautoload}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+		</select>
+		
+	</fieldset>
