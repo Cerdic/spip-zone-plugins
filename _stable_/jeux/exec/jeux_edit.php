@@ -23,8 +23,8 @@ function exec_jeux_edit(){
 		
 	
 	// Admin SPIP-Listes
-	$nouveau ? debut_page(_T('jeux:nouveau_jeu')) : debut_page(_T('jeux:modifier_jeu'));
-	$nouveau ? gros_titre(_T('jeux:nouveau_jeu')) : gros_titre(_T('jeux:modifier_jeu'));
+	$nouveau ? debut_page(_T('jeux:nouveau_jeu')) : debut_page(_T('jeux:modifier_jeu',array('id'=>$id_jeu)));
+	
 	$contenu = spip_fetch_array(spip_query("SELECT contenu FROM spip_jeux WHERE id_jeu =".$id_jeu));
 	
 	debut_gauche();
@@ -33,7 +33,10 @@ function exec_jeux_edit(){
 	echo fin_cadre_relief();
 	creer_colonne_droite();
 	debut_droite();
+	$nouveau ? gros_titre(_T('jeux:nouveau_jeu')) : gros_titre(_T('jeux:modifier_jeu',array('id'=>$id_jeu)));
+	
 	debut_cadre_formulaire();
+	
 	echo "<form method='post'  name='jeux_edit'>
 	<textarea  name='contenu'  class='formo' rows='20' cols='40'>";
 	

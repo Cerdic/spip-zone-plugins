@@ -49,6 +49,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_spip'	=> "Cette version de Spip ne vous permet pas de jouer &agrave; ce jeu !",
 'erreur_scripts'	=> "Scripts d&eacute;sactiv&eacute;s : vous ne pouvez pas jouer &agrave; ce jeu ici !",
 
+//espace privé
+'jeu_numero' 	=>'Jeu numéro @id@',
+'resultats'		=>'Résultats',
+'nouveau_jeu'	=>'Nouveau jeu',
+'explication_jeu'=>'Vous pouvez insérer des jeux selon la syntaxe décrite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la documentation</a>.<br /> Il est toutefois inutile de mettre les balises &lt;jeux>et&lt;/jeux>',
+'modifier_jeu'	=>'Modifier le jeu numéro @id@',
+'resultat_auteur' =>'Résultat de @nom@',
+'derniere_modif'	=>'Dernières modification',
+'voir_resultats'	=>'Voir les résultats'
 );
 
 

@@ -26,7 +26,7 @@ function exec_jeux_voir(){
 	//edition du jeu
 	debut_boite_info();
 	echo _T("jeux:jeu_numero",array('id'=>$id_jeu));
-	echo "<br /><strong>"._t("jeux:derniere_modif")."</strong><br />".affdate($date).heures($date)." : ".minutes($date);
+	echo "<br /><strong>"._t("jeux:derniere_modif")."</strong><br />".affdate($date).' '.heures($date).":".minutes($date);
 	fin_boite_info();
 	
 	debut_cadre_relief();
