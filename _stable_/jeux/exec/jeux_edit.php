@@ -31,6 +31,13 @@ function exec_jeux_edit(){
 	
 	
 	debut_gauche();
+	debut_boite_info();
+	echo icone_horizontale(_T('jeux:retourner_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeux-48.png'));
+	
+	
+	fin_boite_info();
+
+	
 	echo debut_cadre_relief();
 	echo _T('jeux:explication_jeu');
 	echo fin_cadre_relief();

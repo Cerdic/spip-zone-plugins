@@ -66,7 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nb_resultats'		=>'Nombre de résultats',
 'gerer_resultats'	=>'Gérer les résultats',
 'voir_resultats'	=>'Voir les résultats',
-'enregistrer_resultat' =>'Enregistrer les résultats ?'
+'enregistrer_resultat' =>'Enregistrer les résultats ?',
+'retourner_jeu'		=>'Retourner au jeu'
 );
 
 
