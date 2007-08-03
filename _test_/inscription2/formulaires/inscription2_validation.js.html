@@ -24,7 +24,7 @@
 			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[5,1000]},
 			code_postal: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
 			ville: {[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
-			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,30]},
+			email: {[(#CONFIG{inscription2/email}|=={on}|?{required: true,}),]email:true, rangeLength:[5,80]},
 			telephone: {[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
 			fax: {[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
 			mobile: {[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,25]},
