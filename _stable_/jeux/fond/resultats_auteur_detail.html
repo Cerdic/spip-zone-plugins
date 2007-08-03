@@ -1,0 +1,15 @@
+<B_resultats>
+<table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'><tr class="titrem">
+			<th><:jeux:jeu_numero:></th>
+			<th><:date:></th>
+			<th><:jeux:resultats:></th>
+		</tr></thead>
+<BOUCLE_resultats(JEUX_RESULTATS) {id_auteur} {!par date}>
+<tr class ="tr_liste">
+	<td>#ID_JEU</td>
+	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
+	<td>#RESULTATS</td>
+</tr>
+</BOUCLE_resultats>
+</table>
+</B_resultats>
