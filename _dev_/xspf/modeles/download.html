@@ -1,6 +1,5 @@
-[#SET{player,#ENV{player}}]
 
-[(#GET{player}|=={flvplayer})
+[(#ENV{player}|=={flvplayer}|?{' '})
 <:xspf:jw_flv_player:>
 
 <?php
@@ -8,14 +7,14 @@
 	echo redirige_action_auteur('charger_plugin',lib,'','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_flv_player.zip' />"."<input type='submit' class='fondo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
 ?>]
 
-[(#GET{player}|=={rotator})
+[(#ENV{player}|=={rotator}|?{' '})
 <:xspf:jw_rotator:>
 <?php
 	include_spip('inc/actions');
 	echo redirige_action_auteur('charger_plugin',lib,'','',"<input type='hidden' name='url_zip_plugin' value='http://www.jeroenwijering.com/upload/jw_image_rotator.zip' />"."<input type='submit' class='fondo' name='ok' value='"._T('bouton_telecharger')."' />","\nmethod='post'");
 ?>]
 
-[(#GET{player}|=={mediaplayer})
+[(#ENV{player}|=={mediaplayer}|?{' '})
 <:xspf:jw_media_player:>
 <?php
 	include_spip('inc/actions');
