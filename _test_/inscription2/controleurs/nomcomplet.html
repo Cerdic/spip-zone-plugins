@@ -8,7 +8,7 @@
 <fieldset style="background-color:#fff;">
 <legend><:inscription2:votre_nom_complet:></legend>
 <BOUCLE_b(AUTEURS_ELARGIS){id=(#ENV{id_auteurs_elargi})}{tous}>
-<label><:inscription2:nom_famille:></label> <input class="crayon-active" name="#ENV{nom_famille}"
+<label><:inscription2:nom_famille:></label> <input class="crayon-active" name="#ENV{name_nom_famille}"
  style="width:#ENV{largeur}px;" value="[(#NOM_FAMILLE**|entites_html)]" />
  <br />
  <label><:inscription2:prenom:></label> <input class="crayon-active" name="#ENV{name_prenom}"
