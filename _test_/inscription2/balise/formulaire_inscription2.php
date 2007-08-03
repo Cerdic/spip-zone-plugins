@@ -91,7 +91,11 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	$var_user['self'] = str_replace('&amp;','&',(self()));
 	
 	if($var_user['email']){
-	return array("formulaires/inscription2_validation", $GLOBALS['delais'],$var_user);
+		if(defined('_DIR_PLUGIN_ABONNEMENT'))
+			return array("formulaires/abonnement_validation", $GLOBALS['delais'],$var_user);
+			
+		return array("formulaires/inscription2_validation", $GLOBALS['delais'],$var_user);
+	
 	}else{
 	return array("formulaires/inscription2", $GLOBALS['delais'],$var_user);
 	}		
