@@ -80,10 +80,16 @@ $().ready(function() {
 		<input class="search_field" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>" />
 		<select name="case" id="case">
 		<?php
+			$case=_request('case');
 			foreach(lire_config('inscription2') as $cle => $val){
 				if($val!= '' and $cle!='id_table' and ereg("^.+_table$", $cle)){
 					$cle = str_replace("_table", "", $cle);
-					echo "<option value='$cle'>"._T('inscription2:'.$cle)."</option>";
+					if ($cle == $case){
+						echo "<option value='$cle' selected>"._T('inscription2:'.$cle)."</option>";
+					}
+					else{
+						echo "<option value='$cle'>"._T('inscription2:'.$cle)."</option>";					
+					}
 				}
 			}
 		?>

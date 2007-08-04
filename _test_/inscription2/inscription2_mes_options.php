@@ -9,6 +9,7 @@
 	if(_request('exec')=='cfg' and _request('cfg')=='inscription2'){
 		include_spip('inscription2_mes_fonctions');
 		inscription2_verifier_tables();
+		spip_log('verification des tables');
 	}
 	$GLOBALS['table_des_tables']['auteurs_elargis'] = 'auteurs_elargis';
 	global $tables_principales;
