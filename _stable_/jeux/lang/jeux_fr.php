@@ -76,7 +76,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'supprimer_tout'			=>'Supprimer tout les r&eacute;sultats',
 'gerer_resultats_auteur'	=>'G&eacute;rer les r&eacute;sultats de @nom@',
 'retourner_auteur'			=>"Retourner &agrave; l'auteur",
-'gerer_resultats_tout' 		=>'G&eacute;rer les résultats de tout les jeux'
+'gerer_resultats_tout' 		=>'G&eacute;rer les résultats de tout les jeux',
+'jeux'						=>'Jeux'
 );
 
 

@@ -12,7 +12,6 @@
 
 include_spip('jeux_config');
 include_spip('jeux_utils');
-
 // tableau de parametres exploitables par les plugins
 global $jeux_config;
 
