@@ -9,8 +9,9 @@ function exec_jeux_gerer_resultats(){
 	//les boutons ... le pire ennemi des ados parait-il
 	$supprimer_tout = _request('supprimer_tout');
 	$supprimer_tout_confirm = _request('supprimer_tout_confirm');
-	($supprimer_tout_confirm) ? $bouton = 'supprimer_tout_confirm' : $bouton = 'supprimer_tout' ;
 	
+	($supprimer_tout_confirm) ? $bouton = 'supprimer_tout_confirm' : $bouton ='';
+	($bouton == '' and $supprimer_tout) ? $bouton='supprimer_tout' : $bouton =$bouton;
 	
 	$id_jeu 	= _request('id_jeu');
 	if ($id_jeu) {gerer_resultat_jeux($id_jeu,$bouton);}
