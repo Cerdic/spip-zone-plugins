@@ -134,7 +134,6 @@ function calculer_boucle($id_boucle, &$boucles) {
   return $req . $corps 
 	. ($notrace ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
-//	.	"\n	\$entetes = array_merge(\$entetes, array(".$_entetes."));"
 	.  "\n	return \$t0;";
 }
 
@@ -151,7 +150,7 @@ function calculer_boucle_rec($id_boucle, &$boucles) {
 }
 
 // compil d'une boucle non recursive. 
-// c'est un "while (fetch_sql)" dans le cas gÃ©nÃ©ral,
+// c'est un "while (fetch_sql)" dans le cas général,
 // qu'on essaye d'optimiser un max.
 
 // http://doc.spip.org/@calculer_boucle_nonrec
@@ -457,22 +456,17 @@ function calculer_parties($boucles, $id_boucle) {
 // (qui sera argument d'un Return ou la partie droite d'une affectation).
 
 // http://doc.spip.org/@calculer_liste
-function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $ramener_entetes = false) {
+function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
 	if (!isset($descr['niv'])) $descr['niv'] = 0;
-	list($entetes, $codes) = compile_cas($tableau, $descr, $boucles, $id_boucle);
-	$_entetes = array();
-	foreach($entetes as $nom => $valeur)
-		$_entetes[]= '"'.$nom.'" => "'.$valeur.'"';
-	$entetes = 'array(' . join(', ', $_entetes) . ')';
+	$codes = compile_cas($tableau, $descr, $boucles, $id_boucle);
 	$n = count($codes);
 	if (!$n) return "''";
 	$tab = str_repeat("\t", $descr['niv']);
-	if (_request('var_mode_affiche') != 'validation') {
-		$_codes = (($n==1) ? $codes[0] : 
+	if (_request('var_mode_affiche') != 'validation')
+	  return
+		(($n==1) ? $codes[0] : 
 			 "(" . join (" .\n$tab", $codes) . ")");
-		return $ramener_entetes ? array($entetes, $_codes) : $_codes;
-	}
 	else return "@debug_sequence('$id_boucle', '" .
 	  ($descr['nom']) .
 	  "', " .
@@ -483,8 +477,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $ramener_ent
 
 // http://doc.spip.org/@compile_cas
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
-	$entetes = array();
-	$codes = array();
+        $codes = array();
 	// cas de la boucle recursive
 	if (is_array($id_boucle)) 
 	  $id_boucle = $id_boucle[0];
@@ -542,7 +535,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$newdescr['niv']++;
 			$code = 'BOUCLE' .
 			  str_replace("-","_", $nom) . $descr['nom'] .
-			  '($Cache, $Pile, $doublons, $Numrows, $entetes, $SP)';
+			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 			$commentaire= "?$nom";
 			$avant = calculer_liste($p->avant,
 				$newdescr, $boucles, $id_boucle);
@@ -582,11 +575,6 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$apres = calculer_liste($p->apres,
 				$descr, $boucles, $id_boucle);
 			$altern = "''";
-
-			// recuperation des entetes
-			if(!empty($p->entetes))
-				$entetes = array_merge($entetes, $p->entetes);
-
 			break;
 
 		default: 
@@ -624,7 +612,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				"\n// $commentaire\n$code" :
 				$code));
 	} // foreach
-	return array($entetes, $codes);
+	return $codes;
 }
 
 // affichage du code produit
@@ -772,7 +760,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 
 	// idem pour la racine
 	$descr['id_mere'] = '';
-	list($entetes, $corps) = calculer_liste($racine, $descr, $boucles, '', true);
+	$corps = calculer_liste($racine, $descr, $boucles);
 
 	// Calcul du corps de toutes les fonctions PHP,
 	// en particulier les requetes SQL et TOTAL_BOUCLE
@@ -788,7 +776,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
 		$boucles[$id]->return = 
 			"function BOUCLE" . strtr($id,"-","_") . $nom .
-			'(&$Cache, &$Pile, &$doublons, &$Numrows, &$entetes, $SP) {' .
+			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 			$f($id, $boucles) .
 			"\n}\n\n";
 		if ($GLOBALS['var_mode'] == 'debug')
@@ -810,6 +798,10 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		.preg_replace(',\.html$,', '', $sourcefile)
 		."] $nom.php");
 
+	$session = $GLOBALS['squelettes_a_sessions'][$descr['nom']]
+		? "'<'.'?php header(\\'X-Spip-Session: ' . spip_session() . '\\'); ?'.'>'."
+		: '';
+
 	$code = "<"."?php
 /*
  * Squelette : $sourcefile
@@ -824,14 +816,14 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 // Fonction principale du squelette ' . $sourcefile ."
 //
 function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
-	$entetes = ' . $entetes . ';
 	$page = ' .
+	$session .
 	// ATTENTION, le calcul du l'expression $corps affectera $Cache
 	// c'est pourquoi on l'affecte a cette variable auxiliaire
 	// avant de referencer $Cache
 	$corps . ";
 
-	return analyse_resultat_skel('$nom', \$Cache, \$page, \$entetes);
+	return analyse_resultat_skel('$nom', \$Cache, \$page);
 }
 
 ?".">";

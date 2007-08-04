@@ -132,15 +132,7 @@ function assembler_page ($fond) {
 		}
 	}
 
-	// Si la page annonce un entete 'X-Session: zz' on ignore le cache si
-	// l'on n'a pas la session 'zz'
-	$utiliser_session = isset($page['entetes'])
-		AND isset($page['entetes']['X-Session']);
-	if ($utiliser_session
-	AND $page['entetes']['X-Session'] != spip_session()) {
-		spip_log('X-Session: '.$page['entetes']['X-Session']);
-		$use_cache = 1;
-	}
+	// Si la page annonce un entete 'X-Session: zz' on ignore le cache si	// l'on n'a pas la session 'zz'	if (isset($page['entetes'])	AND isset($page['entetes']['X-Session'])	AND $page['entetes']['X-Session'] != spip_session()) {		spip_log('X-Session:'.$page['entetes']['X-Session']);		$use_cache = 1;	}
 
 	// Si requete HEAD ou Last-modified compatible, ignorer le texte
 	// et pas de content-type (pour contrer le bouton admin de inc-public)
@@ -159,12 +151,9 @@ function assembler_page ($fond) {
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, '', $chemin_cache);
 
-			// ajouter les scripts a mettre en cache
+			//ajouter les scripts poue le mettre en cache
 			$page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
 			$page['insert_js_inline'] = pipeline("insert_js",array("type" => "inline","data" => array()));
-
-			if ($utiliser_session)
-				$page['entetes']['X-Session'] = spip_session();
 
 			if ($chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
@@ -282,27 +271,6 @@ function inclure_page($fond, $contexte_inclus) {
 	return $page;
 }
 
-// Renvoie une chaine qui decrit la session courante pour savoir si on peut
-// utiliser un cache enregistre pour cette session.
-// Par convention cette chaine ne doit pas contenir de caracteres [^0-9A-Za-z]
-// Attention on ne peut *pas* inferer id_auteur a partir de la session, qui
-// pourrait etre une chaine arbitraire -- ce n'est pas le cas pour l'instant
-// http://doc.spip.org/@spip_session
-function spip_session() {
-	static $session;
-
-	if (!isset($session)) {
-		$session = $GLOBALS['auteur_session']
-			? 'session'
-				.$GLOBALS['auteur_session']['id_auteur']
-				.'_'
-				.$_COOKIE['spip_session']
-			: '0';
-		spip_log('session: '.$session);
-	}
-
-	return $session;
-}
 
 # Attention, un appel explicite a cette fonction suppose certains include
 # (voir l'exemple de spip_inscription et spip_pass)
@@ -688,5 +656,7 @@ function inclure_modele($type, $id, $params, $lien) {
 	$compteur--;
 	return $retour;
 }
+
+// Renvoie une chaine qui decrit la session courante pour savoir si on peut// utiliser un cache enregistre pour cette session.// Par convention cette chaine ne doit pas contenir de caracteres [^0-9A-Za-z]// Attention on ne peut *pas* inferer id_auteur a partir de la session, qui// pourrait etre une chaine arbitraire -- ce n'est pas le cas pour l'instant// http://doc.spip.org/@spip_sessionfunction spip_session() {	static $session;	if (!isset($session))		$session = isset($GLOBALS['auteur_session'])			? 'session'				.$GLOBALS['auteur_session']['id_auteur']				.'_'				.$_COOKIE['spip_session']			: '';	spip_log('session: '.$session);	return $session;}
 
 ?>
