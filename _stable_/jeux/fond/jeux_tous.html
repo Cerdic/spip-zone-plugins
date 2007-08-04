@@ -4,7 +4,8 @@
 			<th><:jeux:derniere_modif:></th>
 			<th><:jeux:nb_resultats:></th>
 		</tr></thead>
-<BOUCLE_jeux(JEUX)>
+#PAGINATION
+<BOUCLE_jeux(JEUX){! par date}{pagination 30}>
 <tr class ="tr_liste">
 	<td><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
 	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>

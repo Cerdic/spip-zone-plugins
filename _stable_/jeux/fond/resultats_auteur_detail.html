@@ -4,7 +4,8 @@
 			<th><:date:></th>
 			<th><:jeux:resultats:></th>
 		</tr></thead>
-<BOUCLE_resultats(JEUX_RESULTATS) {id_auteur} {!par date}>
+#PAGINATION
+<BOUCLE_resultats(JEUX_RESULTATS) {id_auteur} {! par date}{pagination 30}>
 <tr class ="tr_liste">
 	<td><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
 	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>

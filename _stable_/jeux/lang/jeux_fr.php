@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_jeu'=>'Vous pouvez ins&eacute;rer des jeux selon la syntaxe d&eacute;crite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la documentation</a>.<br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
 'modifier_jeu'	=>'Modifier le jeu num&eacute;ro @id@',
 'resultat_auteur' =>'R&eacute;sultat de @nom@',
-'derniere_modif'	=>'Derni&egrave;&egrave;res modification',
+'derniere_modif'	=>'Derni&egrave;re modification',
 'voir_resultats'	=>'Voir les r&eacute;sultats',
 'resultats_jeu'		=>'R&eacute;sultats du jeu num&eacute;ro @id@',
 'pas_de_jeu'		=>"D&eacute;sol&eacute;, ce jeu n'existe pas",
