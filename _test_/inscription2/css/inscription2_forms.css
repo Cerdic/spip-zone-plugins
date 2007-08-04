@@ -1,7 +1,7 @@
 .infos-auteurs > div{height:35px;clear:both;padding:5px}
 div.inscription2 > div{height:auto;clear:both;padding:5px;margin-bottom:10px}
 .infos-auteurs input, .select , textarea{display:block;float:right;width:250px}
-.infos-auteurs label{display:block;float:left}
+.infos-auteurs label{display:block;float:left;width:180px}
 .infos-auteurs > div.textarea {height:70px;clear:both;padding:5px}
 .infos-auteurs > div.grand_select {height:auto;margin-bottom:15px;clear:both;padding:5px}
 .inscription2 h2 {margin:10px 0px}
