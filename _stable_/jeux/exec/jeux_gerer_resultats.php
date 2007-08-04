@@ -14,14 +14,49 @@ function exec_jeux_gerer_resultats(){
 	($bouton == '' and $supprimer_tout) ? $bouton='supprimer_tout' : $bouton =$bouton;
 	
 	$id_jeu 	= _request('id_jeu');
-	if ($id_jeu) {gerer_resultat_jeux($id_jeu,$bouton);}
+	if ($id_jeu) {gerer_resultat_jeux($id_jeu,$bouton);
+	return;}
 	
 	$id_auteur  = _request('id_auteur');
-	if ($id_auteur) {gerer_resultat_auteur($id_auteur,$bouton);}
+	if ($id_auteur) {gerer_resultat_auteur($id_auteur,$bouton);
+	$return;
+	}
+	
+	$tous = _request('tous');
+	if ($tous == 'oui') {gerer_resultat_tous($bouton);}
+	}
+function gerer_resultat_tous($bouton){
+	
+	
+	
+	debut_page(_T("jeux:gerer_resultats_tout"));
+			
+	debut_gauche();
+	
+	debut_boite_info();
+	
+	echo icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-48.png'));
+	fin_boite_info();
+	
+	creer_colonne_droite();
+	debut_droite();
+	debut_cadre_relief();
+	gros_titre(_T("jeux:gerer_resultats_tout"));
+	formulaire_suppression($bouton);
+	if ($bouton == 'supprimer_tout_confirm'){
+		include_spip('base/jeux_supprimer');
+		
+		jeux_supprimer_tout_tout();
+		}
+
+	
+	fin_cadre_relief();
+	fin_gauche();
+	fin_page();
 	}
 
+
 function gerer_resultat_auteur($id_auteur,$bouton){
-	$id_auteur 	= _request('id_auteur');
 	
 	$requete	= spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
 	$nom 	= $requete['nom'];

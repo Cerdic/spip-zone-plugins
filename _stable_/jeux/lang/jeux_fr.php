@@ -71,11 +71,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retourner_jeu'		=>'Retourner au jeu',
 'gerer_resultats_jeu' =>'G&eacute;rer les r&eacute;sultats du jeu num&eacute;ro @id@',
 'confirmation_supprimer_tout' => '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir supprimer tous les r&eacute;sultats ?',
-'supprimer_tout_confirm'	=>'Confimer la suppression de tous les r&eacute;sultats',
-'explication_supprimer_tout'=>'Vous pouvez supprimer tous les r&eacute;sultats&hellip; Attention, ils seront irr&eacute;cup&eacute;rables (niark, niark, niark)',
-'supprimer_tout'			=>'Supprimer tous les r&eacute;sultats',
+'supprimer_tout_confirm'	=>'Confimer la suppression de tout les r&eacute;sultats',
+'explication_supprimer_tout'=>'Vous pouvez supprimer tout les r&eacute;sultats&hellip; Attention, ils seront irr&eacute;cup&eacute;rables (niark, niark, niark)',
+'supprimer_tout'			=>'Supprimer tout les r&eacute;sultats',
 'gerer_resultats_auteur'	=>'G&eacute;rer les r&eacute;sultats de @nom@',
-'retourner_auteur'			=>"Retourner &agrave; l'auteur"
+'retourner_auteur'			=>"Retourner &agrave; l'auteur",
+'gerer_resultats_tout' 		=>'G&eacute;rer les résultats de tout les jeux'
 );
 
 
