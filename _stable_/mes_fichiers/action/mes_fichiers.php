@@ -12,14 +12,17 @@ function action_mes_fichiers() {
 	}
 	//vieille methode pour compatiblite ascendante
 	else {	
-		global $connect_statut;		global $connect_toutes_rubriques;		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
+		global $connect_statut;
+		global $connect_toutes_rubriques;
+		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
 			$paspermis = true;
 		}
 	}
 
 	if($paspermis) {
 		include_spip('inc/minipres');
-		echo minipres();		exit;
+		echo minipres();
+		exit;
 	}
 	
 	include_spip('inc/pclzip');
@@ -50,7 +53,7 @@ function action_mes_fichiers() {
 	}
 	spip_log('*** mes_fichiers ***');
 	spip_log($liste);
-	$mes_fichiers = new PclZip(_DIR_TMP . 'mes_fichiers.zip');
+	$mes_fichiers = new PclZip(_DIR_TMP . 'mes_fichiers_'.date("Ymd_Hi").'.zip');
 	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_ADD_PATH, "spip");
 	if ($erreur == 0) {
 		die("Erreur : ".$mes_fichiers->errorInfo(true));
