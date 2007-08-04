@@ -74,7 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'supprimer_tout_confirm'	=>'Confimer la suppression de tous les r&eacute;sultats',
 'explication_supprimer_tout'=>'Vous pouvez supprimer tous les r&eacute;sultats&hellip; Attention, ils seront irr&eacute;cup&eacute;rables (niark, niark, niark)',
 'supprimer_tout'			=>'Supprimer tous les r&eacute;sultats',
-'gerer_resultats_auteur'	=>'G&eacute;rer les r&eacute;sultats de @nom@'
+'gerer_resultats_auteur'	=>'G&eacute;rer les r&eacute;sultats de @nom@',
+'retourner_auteur'			=>"Retourner &agrave; l'auteur"
 );
 
 

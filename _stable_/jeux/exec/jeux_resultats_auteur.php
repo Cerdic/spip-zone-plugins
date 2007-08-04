@@ -13,6 +13,12 @@ function exec_jeux_resultats_auteur(){
 			
 	debut_gauche();
 	
+	debut_boite_info();
+	echo icone_horizontale(_T('jeux:retourner_auteur'),generer_url_ecrire('auteur_info','id_auteur='.$id_jeu),find_in_path('images/auteur-24.gif'));
+	echo icone_horizontale(_T('jeux:gerer_resultats'),generer_url_ecrire('jeux_gerer_resultats','id_auteur='.$id_auteur),find_in_path('img/jeux-48.png'));
+	fin_boite_info();
+
+	
 	creer_colonne_droite();
 	debut_droite();
 	debut_cadre_relief();
