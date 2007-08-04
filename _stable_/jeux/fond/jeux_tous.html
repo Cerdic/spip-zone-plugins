@@ -8,7 +8,7 @@
 <tr class ="tr_liste">
 	<td><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
 	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
-	<td><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats>#TOTAL_BOUCLE<//B_resultats></td>
+	<td><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats><a href="?exec=jeux_resultats_jeu&id_jeu=#ID_JEU">#TOTAL_BOUCLE</a><//B_resultats></td>
 </tr>
 </BOUCLE_jeux>
 </table>
