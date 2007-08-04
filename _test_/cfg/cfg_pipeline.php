@@ -24,7 +24,7 @@ function cfg_ajouter_onglets($flux) {
 // ajoute le css de CFG a l'espace prive
 function cfg_header_prive($texte) {
 	global $auteur_session, $spip_display, $spip_lang;
-	if (_request('exec') == 'cfg')
+	if (_request('exec') == 'cfg'){
 		if ($GLOBALS["spip_version"] >= 1.93) {
 			$couleurs = charger_fonction('couleurs', 'inc');
 			$paramcss = 'ltr='. $GLOBALS['spip_lang_left'] . '&'. $couleurs($auteur_session['prefs']['couleur']);
@@ -40,6 +40,7 @@ function cfg_header_prive($texte) {
 			<link rel='stylesheet' href='" . _DIR_PLUGIN_CFG . "css/jquery.tabs-ie.css' type='text/css' media='projection, screen'>
 			<![endif]-->
 			<script type='text/javascript' src='$js'></script>" . "\n";
+	}
 	return $texte;
 }
 ?>
