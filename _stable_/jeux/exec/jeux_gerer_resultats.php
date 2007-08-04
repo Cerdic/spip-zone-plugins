@@ -67,7 +67,7 @@ function gerer_resultat_auteur($id_auteur,$bouton){
 	
 	debut_boite_info();
 	
-	echo icone_horizontale(_T('jeux:voir_resultats'),generer_url_ecrire('jeux_resultats_auteur','id_auteur='.$id_auteur),find_in_path('img/jeux-laurier.png'));
+	echo icone_horizontale(_T('jeux:voir_resultats'),generer_url_ecrire('jeux_resultats_auteur','id_auteur='.$id_auteur),find_in_path('img/jeu-laurier.png'));
 	fin_boite_info();
 	
 	creer_colonne_droite();
@@ -108,8 +108,8 @@ function gerer_resultat_jeux($id_jeu,$bouton){
 	
 	
 	debut_boite_info();
-	echo icone_horizontale(_T('jeux:voir_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeux-loupe.png'));
-	echo icone_horizontale(_T('jeux:voir_resultats'),generer_url_ecrire('jeux_resultats_jeu','id_jeu='.$id_jeu),find_in_path('img/jeux-laurier.png'));
+	echo icone_horizontale(_T('jeux:voir_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png'));
+	echo icone_horizontale(_T('jeux:voir_resultats'),generer_url_ecrire('jeux_resultats_jeu','id_jeu='.$id_jeu),find_in_path('img/jeu-laurier.png'));
 	fin_boite_info();
 	
 	
