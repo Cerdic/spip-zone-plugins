@@ -136,17 +136,21 @@
 		}
 	});
 
-	// propose username by combining first- and lastname
+	// propose username an name by combining first- and lastname
 	$("#username").focus(function() {
 		var prenom = $("#prenom").val();
-		var nom = $("#nom").val();
+		var nom = $("#nom_famille").val();
 		if(prenom && nom && !this.value) {
 			this.value = prenom + "." + nom;
 		}
 	});
-});
-
-$(document).ready(function() {
+	$("#nom").focus(function() {
+		var prenom = $("#prenom").val();
+		var nom = $("#nom_famille").val();
+		if(prenom && nom && !this.value) {
+			this.value = prenom + " " + nom;
+		}
+	});
 	$('.obligatoire label').append('*');
 });
 </script>

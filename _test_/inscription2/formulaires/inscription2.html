@@ -58,7 +58,7 @@
 </div>
 ]
 [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]>
+<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]">
 	<label for="nom"><strong><:inscription2:nom:></strong></label>
 	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
 </div>
