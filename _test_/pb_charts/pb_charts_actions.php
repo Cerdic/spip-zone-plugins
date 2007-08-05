@@ -208,14 +208,14 @@ function pb_charts_traiter_charts ($texte) {
 				if ($type == "polar") $pref_xml = "<chart_pref grid='circular' />";
 
 				
-				$axis_xml = "<axis_category color='$couleur_texte' size='10'/><axis_ticks major_color='$couleur_texte' minor_color='$couleur_texte' /><axis_value size='10' color='$couleur_texte' /><chart_border color='$couleur_texte' /><legend_label color='$couleur_texte' /><legend_rect size='11' fill_color='$couleur_fond' fill_alpha='40' />";
+				$axis_xml = "<axis_category color='$couleur_texte' size='10'/><axis_ticks major_color='$couleur_texte' minor_color='$couleur_texte' /><axis_value size='10' color='$couleur_texte' /><chart_border color='$couleur_texte' /><legend_label color='$couleur_texte' size='11' /><legend_rect size='11' fill_color='$couleur_fond' fill_alpha='40' />";
 				
 				if ($titre_xml) $hauteur_chart = $hauteur - 100;
-				else $hauteur_chart = $hauteur - 90;
+				else $hauteur_chart = $hauteur - 75;
 				
 				$largeur_chart = $largeur - 50;
 				
-				if (!ereg("pie", $type)) $axis_xml .= "<chart_rect positive_alpha='35' x='45' y='60' width='$largeur_chart' height='$hauteur_chart' positive_color='$couleur_fond' negative_alpha='60' negative_color='$couleur_fond' />";
+				if (!ereg("pie", $type)) $axis_xml .= "<chart_rect positive_alpha='35' x='45' y='45' width='$largeur_chart' height='$hauteur_chart' positive_color='$couleur_fond' negative_alpha='60' negative_color='$couleur_fond' />";
 				
 				if (!ereg("pie", $type)) $axis_xml .= "<chart_value position='cursor' size='11' color='$couleur_texte' alpha='100' />";
 				else  $axis_xml .= "<chart_value size='11' color='$couleur_texte' alpha='100' />";
