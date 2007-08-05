@@ -26,7 +26,7 @@ function exec_jeux_tous(){
 	
 	include_spip('public/assembler');
 	debut_cadre('liste');
-	echo recuperer_fond('fond/jeux_tous');
+	echo recuperer_fond('fond/jeux_tous',array('par'=>_request('par')));
 	fin_cadre();
 	
 	fin_cadre_relief();
