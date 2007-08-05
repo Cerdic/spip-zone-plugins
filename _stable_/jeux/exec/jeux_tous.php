@@ -4,6 +4,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
 function exec_jeux_tous(){
+	$par = _request('par');
+	($par =='') ? $par='date' : $par = $par;
 	
 	debut_page(_T("jeux:jeux_tous"));
 			
@@ -26,7 +28,7 @@ function exec_jeux_tous(){
 	
 	include_spip('public/assembler');
 	debut_cadre('liste');
-	echo recuperer_fond('fond/jeux_tous',array('par'=>_request('par')));
+	echo recuperer_fond('fond/jeux_tous',array('par'=>$par));
 	fin_cadre();
 	
 	fin_cadre_relief();
