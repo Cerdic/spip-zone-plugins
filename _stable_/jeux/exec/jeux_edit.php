@@ -8,10 +8,9 @@ function exec_jeux_edit(){
 	include_spip('inc/utils');
 	
 	$valider = _request('valider');
-	$contenu = _request('contenu');
 	$nouveau = _request('nouveau');
 	$id_jeu	 = _request('id_jeu');
-	$enregistrer_resultat = _request('enregistrer_resultat');
+	
 
 	
 	if ($valider)
@@ -53,7 +52,7 @@ function exec_jeux_edit(){
 	echo "<form method='post'  name='jeux_edit'>
 	<textarea  name='contenu'  class='formo' rows='20' cols='40'>";
 	
-	echo strip_tags($contenu['contenu']);
+	echo strip_tags($contenu);
 	
 	echo " </textarea>";
 	
