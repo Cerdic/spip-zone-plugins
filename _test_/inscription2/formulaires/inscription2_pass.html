@@ -72,38 +72,6 @@ function cryptage() {
 	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" />
 </div>
 ]
-[(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="nom"><strong><:inscription2:nom:></strong></label>
-	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
-</div>
-]
-[(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="username"><strong><:inscription2:username:></strong></label>
-	<input type="text" name="username" id="username" value="#ENV{login}" />
-</div>
-]
-
-	<div>
-	<label for="pass1"><strong><:inscription2:demande_password:></strong></label>
-	<input type='password' name='pass1' id='pass1'>
-	</div>
-	<div>
-	<label for="pass2"><strong><:inscription2:redemande_password:></strong></label>
-	<input type='password' name='pass2' id='pass2'>
-	</div>
-	<input type='password' name='pass' id='pass' style="display:none;">
-	
-<div>
-	<label for='statut'><strong><:inscription2:statut:></strong></label>
-	<select name="statut" id="statut" class="formo select">
-	<option value='0minirezo'><:info_administrateur:></option>
-	<option value='1comite'><:inscription2:auteur:></option>
-	<option value='6forum'><:info_visiteur_1:></option>.
-	<option value='aconfirmer'><:inscription2:aconfirmer:></option>
-	</select>
-</div>
 
 [(#CONFIG{inscription2/naissance}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/naissance_obligatoire}|=={on}|?{class="obligatoire"})]>
@@ -141,12 +109,7 @@ function cryptage() {
 </div>
 ]
 
-[(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="email"><strong><:inscription2:email:></strong></label>
-	<input type="text" name="email" id="email" value="#ENV{email}" />
-</div>
-]
+
 [(#CONFIG{inscription2/telephone}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="telephone"><strong><:inscription2:telephone:></strong></label>
@@ -170,6 +133,47 @@ function cryptage() {
 <div class="grand_select[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
 	<label><strong><:inscription2:commentaire:></strong></label>
 	<textarea name="commentaire" id="commentaire">#ENV{divers}</textarea>	
+</div>
+]
+
+[(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})] style="padding-top:50px;">
+	<label for="nom"><strong><:inscription2:nom:> (<:inscription2:nom_explication:>)</strong></label>
+	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
+</div>
+]
+
+[(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="username"><strong><:inscription2:username:></strong></label>
+	<input type="text" name="username" id="username" value="#ENV{login}" />
+</div>
+]
+
+	<div>
+	<label for="pass1"><strong><:inscription2:demande_password:></strong></label>
+	<input type='password' name='pass1' id='pass1'>
+	</div>
+	<div>
+	<label for="pass2"><strong><:inscription2:redemande_password:></strong></label>
+	<input type='password' name='pass2' id='pass2'>
+	</div>
+	<input type='password' name='pass' id='pass' style="display:none;">
+	
+<div>
+	<label for='statut'><strong><:inscription2:statut:></strong></label>
+	<select name="statut" id="statut" class="formo select">
+	<option value='0minirezo'><:info_administrateur:></option>
+	<option value='1comite'><:inscription2:auteur:></option>
+	<option value='6forum'><:info_visiteur_1:></option>.
+	<option value='aconfirmer'><:inscription2:aconfirmer:></option>
+	</select>
+</div>
+
+[(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="email"><strong><:inscription2:email:></strong></label>
+	<input type="text" name="email" id="email" value="#ENV{email}" />
 </div>
 ]
 
