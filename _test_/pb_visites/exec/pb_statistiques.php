@@ -1211,13 +1211,7 @@ function afficher_duree($duree) {
 				
 				echo "<td>$visites $visites_rel</td><td>$visites_utiles $visites_utiles_rel</td><td>$pages_vues $pages_vues_rel</td><td>$pv_visite</td><td>".afficher_duree($duree_visite)." $duree_visite_rel</td></tr>";			
 			}
-			
-			
-			
-			
-			
 		}
-
 	}
 	echo "</table>";
 
@@ -1243,13 +1237,17 @@ $GLOBALS["hauteur_charts"] = 180;
 		$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites, visites_utiles, pages_vues, pages_vues_utiles, duree FROM $table WHERE $where ORDER BY date DESC LIMIT 0, 8");
 
 		$visites = array();
+		$visites_utiles = array();
 		$pages_vues = array();
+		$pages_vues_utiles = array();
 		$pv_visites = array();
 		$duree = array();
 		while ($row = spip_fetch_array($result)) {
 			$date = $row["date_unix"];
 			$visites["$date"] = $row["visites"];
+			$visites_utiles["$date"] = $row["visites_utiles"];
 			$pages_vues["$date"] = $row["pages_vues"];
+			$pages_vues_utiles["$date"] = $row["pages_vues_utiles"];
 			if ($row["visites"] > 0) $pv_visites["$date"] = $row["pages_vues"] / $row["visites"];
 			if ($row["visites_utiles"] > 0) $duree["$date"] = ($row["duree"] / $row["visites_utiles"]) / 60;
 		}
@@ -1262,14 +1260,16 @@ $GLOBALS["hauteur_charts"] = 180;
 			$afficher = $ce_jour;
 		
 			$ligne0 .= "|$afficher";
-			$ligne1 .= "|".($value);
+			$ligne1 .= "|".($value - $visites_utiles["$key"]);
+			$ligne2 .= "|".($visites_utiles["$key"]);
 		
 		}
 		
 		$ligne0 = "|$ligne0|\n";
 		$ligne1 = "|Visites$ligne1|\n";
+		$ligne2 = "|Visites utiles$ligne2|\n";
 		
-		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"column\">\n$ligne0$ligne1\n</chart>")."</div>";
+		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"stacked column\">\n$ligne0$ligne2$ligne1\n</chart>")."</div>";
 	
 		$ligne0 = "";
 		$ligne1 = "";
@@ -1285,14 +1285,16 @@ $GLOBALS["hauteur_charts"] = 180;
 			$afficher = $ce_jour;
 		
 			$ligne0 .= "|$afficher";
-			$ligne1 .= "|".($value);
+			$ligne1 .= "|".($value - $pages_vues_utiles["$key"]);
+			$ligne2 .= "|".($pages_vues_utiles["$key"]);
 		
 		}
 		
 		$ligne0 = "|$ligne0|\n";
 		$ligne1 = "|Pages vues$ligne1|\n";
-		
-		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"column\">\n$ligne0$ligne1\n</chart>")."</div>";
+		$ligne2 = "|Pages vues utiles$ligne2|\n";
+	
+		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"stacked column\">\n$ligne0$ligne2$ligne1\n</chart>")."</div>";
 	
 		$ligne0 = "";
 		$ligne1 = "";
@@ -1313,7 +1315,7 @@ $GLOBALS["hauteur_charts"] = 180;
 		}
 		
 		$ligne0 = "|$ligne0|\n";
-		$ligne1 = "|PV / V$ligne1|\n";
+		$ligne1 = "|Pages vues par visite$ligne1|\n";
 		
 		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"column\">\n$ligne0$ligne1\n</chart>")."</div>";
 	
@@ -1337,7 +1339,7 @@ $GLOBALS["hauteur_charts"] = 180;
 		}
 		
 		$ligne0 = "|$ligne0|\n";
-		$ligne1 = "|Durée / V (min)$ligne1|\n";
+		$ligne1 = "|Durée par visite (min)$ligne1|\n";
 		
 		echo "<div style='float: left; width: 50%; text-align: center;'>".propre("<chart type=\"column\">\n$ligne0$ligne1\n</chart>")."</div>";
 	
