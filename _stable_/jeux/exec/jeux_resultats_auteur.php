@@ -15,7 +15,7 @@ function exec_jeux_resultats_auteur(){
 	
 	debut_boite_info();
 	echo icone_horizontale(_T('jeux:retourner_auteur'),generer_url_ecrire('auteur_info','id_auteur='.$id_jeu),find_in_path('images/auteur-24.gif'));
-	echo icone_horizontale(_T('jeux:gerer_resultats'),generer_url_ecrire('jeux_gerer_resultats','id_auteur='.$id_auteur),find_in_path('img/jeux-laurier.png'));
+	echo icone_horizontale(_T('jeux:gerer_resultats'),generer_url_ecrire('jeux_gerer_resultats','id_auteur='.$id_auteur),find_in_path('img/jeu-laurier.png'));
 	fin_boite_info();
 
 	
