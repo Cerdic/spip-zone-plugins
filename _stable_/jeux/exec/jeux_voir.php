@@ -31,20 +31,14 @@ function exec_jeux_voir(){
 	fin_boite_info();
 	
 	
-	debut_boite_info();
-	echo _T("jeux:jeu_numero",array('id'=>$id_jeu));
-	echo "<br /><strong>"._t("jeux:derniere_modif")."</strong><br />".affdate($date).' '.heures($date).":".minutes($date);
-	fin_boite_info();
-	
-	
 	debut_cadre_relief();
-	echo _T('jeux:explication_jeu');
+	
+	echo "<strong>"._t("jeux:derniere_modif")."</strong><br />".affdate($date).' '.heures($date).":".minutes($date);
 	fin_cadre_relief();
 	
-	// lien vers les resultats
-	debut_cadre_relief();
-	echo "<a href=".generer_url_ecrire('jeux_resultat','id_jeu='.$id_jeu).">"._T("jeux:voir_resultats")."</a>";
-	fin_cadre_relief();
+	
+		
+	
 	
 	
 	creer_colonne_droite();
