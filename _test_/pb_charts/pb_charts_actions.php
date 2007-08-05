@@ -206,6 +206,7 @@ function pb_charts_traiter_charts ($texte) {
 				$couleurs_xml = "<series_color>".$couleurs_xml."</series_color>";
 				
 				if ($type == "polar") $pref_xml = "<chart_pref grid='circular' />";
+				if ($type == "line" AND count($entrees) > 20) $pref_xml = "<chart_pref point_shape='none'  />";
 
 				
 				$axis_xml = "<axis_category color='$couleur_texte' size='10'/><axis_ticks major_color='$couleur_texte' minor_color='$couleur_texte' /><axis_value size='10' color='$couleur_texte' /><chart_border color='$couleur_texte' /><legend_label color='$couleur_texte' size='11' /><legend_rect size='11' fill_color='$couleur_fond' fill_alpha='40' />";
