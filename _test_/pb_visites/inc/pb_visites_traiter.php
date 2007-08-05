@@ -26,7 +26,7 @@ function compte_fichier_pb_visite($fichier,
 	$duree = $fin - $debut;
 	$duree_min = floor(($duree/60)*100)/100;
 	
-	$pages = count($content) - 3;
+	$pages = count($content) - 4;
 	
 	if (ereg("([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)", $ip, $regs)) {
 		$ip_num = ($regs[1] * 256 * 256 * 256) + ($regs[2] * 256 * 256) + ($regs[3] * 256) + $regs[4] ;
@@ -117,19 +117,22 @@ function pb_traiter_fichier_geo ($fichier) {
 		$row ++;
 		if ($num > 0 AND $row >= $debut*10000 AND $row < ($debut+1)*10000) {
 			if ($data[1]) {
+				$traiter = true;
 				$debut_num_ip = $data[2];
 				$fin_num_ip = $data[3];
 				$code_pays = $data[4];
 				$nom_pays = $data[5];
 			
 				spip_query ("INSERT INTO spip_pb_geoip (debut_num_ip, fin_num_ip, code_pays, nom_pays) VALUES ('$debut_num_ip', '$fin_num_ip', '$code_pays', '$nom_pays')");		
-			} else {
-				rename($fichier, $sauver);
-				@unlink ($fichier);
-				unlink ($etape);
-			}
+			} 
 		}
 	}
+	if (!$traiter OR $debut > 120) {
+		rename($fichier, $sauver);
+		@unlink ($fichier);
+		unlink ($etape);
+	}
+
 	fclose($handle);
 	ecrire_fichier($etape,$debut+1);
 
