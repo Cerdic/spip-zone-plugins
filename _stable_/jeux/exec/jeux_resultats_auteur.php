@@ -5,6 +5,8 @@ include_spip('inc/presentation');
 
 function exec_jeux_resultats_auteur(){
 	$id_auteur 	= _request('id_auteur');
+	$par = _request('par');
+	($par == '') ? $par='resultat_court' : $par = $par;
 	
 	$requete	= spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
 	$nom 	= $requete['nom'];
@@ -26,7 +28,7 @@ function exec_jeux_resultats_auteur(){
 	
 	include_spip('public/assembler');
 	debut_cadre('liste');
-	echo recuperer_fond('fond/resultats_auteur_detail',array('id_auteur'=>$id_auteur));
+	echo recuperer_fond('fond/resultats_auteur_detail',array('id_auteur'=>$id_auteur,'par'=>$par));
 	fin_cadre();
 	
 	fin_cadre_relief();
