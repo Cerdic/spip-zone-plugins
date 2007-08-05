@@ -1,13 +1,13 @@
 <B_resultats>
 <table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'><tr class="titrem">
-			<th><:auteur:></th>
-			<th><:date:></th>
-			<th><:jeux:resultats:></th>
+			<th>[(#ENV{par}|!=={nom}|?{' '})<a href="[(#SELF|parametre_url{par,nom})]">]<:auteur:>[(#ENV{par}|!=={nom}|?{' '})</a>]</th>
+			<th>[(#ENV{par}|!=={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
+			<th>[(#ENV{par}|!=={resultat_court}|?{' '})<a href="[(#SELF|parametre_url{par,resultat_court})]">]<:jeux:resultats:>[(#ENV{par}|!=={resultat_court}|?{' '})</a>]</th>
 		</tr></thead>
 #PAGINATION
-<BOUCLE_resultats(JEUX_RESULTATS) {id_jeu} {! par date}{pagination 30}>
+<BOUCLE_resultats(JEUX_RESULTATS spip_auteurs) {id_jeu} {par #ENV{par}} {inverse #ENV{par}|=={nom}|?{0,1}}{pagination 30}>
 <tr class ="tr_liste">
-	<td><BOUCLE_auteur(AUTEURS){id_auteur}><a href="?exec=jeux_resultats_auteur&id_auteur=#ID_AUTEUR">#NOM</a></BOUCLE_auteur></td>
+	<td><a href="?exec=jeux_resultats_auteur&id_auteur=#ID_AUTEUR">#NOM</a></td>
 	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
 	<td>#RESULTAT_COURT</td>
 </tr>

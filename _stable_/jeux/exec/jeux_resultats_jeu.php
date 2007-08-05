@@ -5,6 +5,8 @@ include_spip('inc/presentation');
 
 function exec_jeux_resultats_jeu(){
 	$id_jeu 	= _request('id_jeu');
+	$par = _request('par');
+	($par == '') ? $par='resultat_court' : $par = $par;
 	
 	$requete	= spip_fetch_array(spip_query("SELECT id_jeu FROM spip_jeux WHERE id_jeu =".$id_jeu));
 	$id_jeu		= $requete['id_jeu'];
@@ -35,7 +37,7 @@ function exec_jeux_resultats_jeu(){
 	echo "<div class='nettoyeur'></div>";
 	include_spip('public/assembler');
 	debut_cadre('liste');
-	echo recuperer_fond('fond/resultats_jeu_detail',array('id_jeu'=>$id_jeu));
+	echo recuperer_fond('fond/resultats_jeu_detail',array('id_jeu'=>$id_jeu,'par'=>$par));
 	fin_cadre();
 	
 	fin_cadre_relief();
