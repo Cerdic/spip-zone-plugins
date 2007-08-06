@@ -2,6 +2,7 @@
 
 function ExtensionMultilingue_BarreTypoEnrichie_toolbox($paramArray) {
 
+
 if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 {
 	$ret="";
@@ -12,39 +13,27 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	
 	if ($_GET['exec'] == "rubriques_edit")
 	{
-		global
-	  	$champs_extra,
-	  	$connect_statut,
-	  	$id_parent,
-	  	$id_rubrique,
-	  	$new,
-	  	$options;
+		
 
 		if ($new == "oui") {
-			$id_rubrique = 0;
 			$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
-			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 			$descriptif = "";
 			$texte = "";
-			$id_parent = intval($id_parent);
-	
-			if (!autoriser('creerrubriquedans','rubrique',$id_parent)) {
-				$id_parent = reset($GLOBALS['connect_id_rubrique']);
-			}
+			
 		} else {
-			$id_rubrique = intval($id_rubrique);
-
-			$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"));
+			
+			$id_rubrique_tmp = intval($_GET['id_rubrique']);
+			$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique_tmp'"));
 	
-			if (!$row) exit;
+			if (!$row) return "";
 	
-			$id_parent = $row['id_parent'];
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
-			$id_secteur = $row['id_secteur'];
-			$extra = $row["extra"];
+			
+			
 		}
+		
 
 		
 	}
@@ -56,138 +45,66 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	}
 	else if ($_GET['exec'] == "mots_type")
 	{
-		global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;
-
+		
 		if ($new == "oui") {
-		  $id_groupe = 0;
-		  $titre = filtrer_entites(_T('titre_nouveau_groupe'));
-		  $onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		  $ancien_type = '';
-		  $unseul = 'non';
-		  $obligatoire = 'non';
-		  $articles = 'oui';
-		  $breves = 'oui';
-		  $rubriques = 'non';
-		  $syndic = 'oui';
-		  $acces_minirezo = 'oui';
-		  $acces_comite = 'oui';
-		  $acces_forum = 'non';
+		  	$titre = filtrer_entites(_T('titre_nouveau_groupe'));
+		  	$descriptif = "";
+			$texte = "";
+		  
 		} else {
-			$id_groupe= intval($id_groupe);
-			$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
+			$id_groupe_tmp= intval($_GET['id_groupe']);
+			$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe_tmp");
 
 			while($row = spip_fetch_array($result_groupes)) {
-				$id_groupe = $row['id_groupe'];
 				$titre = $row['titre'];
-				//$titre = typo($type);
 				$descriptif = $row['descriptif'];
 				$texte = $row['texte'];
-				$unseul = $row['unseul'];
-				$obligatoire = $row['obligatoire'];
-				$articles = $row['articles'];
-				$breves = $row['breves'];
-				$rubriques = $row['rubriques'];
-				$syndic = $row['syndic'];
-				$acces_minirezo = $row['minirezo'];
-				$acces_comite = $row['comite'];
-				$acces_forum = $row['forum'];
-				$onfocus ="";
+				
 			}
 		}
 
 	}
 	else if ($_GET['exec'] == "mots_edit")
 	{
-		global
-  		$ajouter_id_article, // attention, ce n'est pas forcement un id d'article
-  		$champs_extra,
-  		$connect_statut,
-  		$descriptif,
-  		$id_groupe,
-  		$id_mot,
-  		$table_id,
-  		$new,
-  		$options,
-  		$redirect,
-  		$spip_display,
-  		$table,
-  		$texte,
-  		$titre,
-  		$titre_mot,
-  		$les_notes;
+		
 
-		$id_groupe = intval($id_groupe);
- 		$id_mot = intval($id_mot);
- 		// Secu un peu superfetatoire car seuls les admin generaux les verront;
- 		// mais si un jour on relache les droits, vaut mieux blinder.
- 		$table = preg_replace('/\W/','',$table);
- 		$table_id = preg_replace('/\W/','',$table_id);
- 		$ajouter_id_article = intval($ajouter_id_article);
-		//
-		// Recupere les donnees
-		//
-		$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
+		$id_mot_tmp = intval($_GET['id_mot']);
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot='$id_mot_tmp'"));
 		 if ($row) {
-			$id_mot = $row['id_mot'];
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
-			$extra = $row['extra'];
-			$id_groupe = $row['id_groupe'];
-			$onfocus ='';
+			
 	 	}
 		else {
-			if (!$new OR !autoriser('modifier','groupemots',$id_groupe)) {
-				echo minipres(_T('info_mot_sans_groupe'));
-				exit;
-			}
-			$id_mot = 0;
-
-			if (!$titre_mot = $titre) {
-				$titre = filtrer_entites(_T('texte_nouveau_mot'));
-				$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-			}
-			$res = spip_num_rows(spip_query("SELECT id_groupe FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " LIMIT 1"));
-
 			
-	 }
+			$titre = filtrer_entites(_T('texte_nouveau_mot'));
+			$descriptif = "";
+			$texte = "";
+			
+			
+	 	}
 
 	}
 
 	else if ($_GET['exec'] == "sites_edit")
 	{
-		global $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic, $connect_id_rubrique;
-
-		$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic));
+		
+		$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($_GET['id_syndic']) );
 
 		if ($row = spip_fetch_array($result)) {
-			$id_syndic = $row["id_syndic"];
-			$id_rubrique = $row["id_rubrique"];
 			$titre = $row["nom_site"];
-			$url_site = $row["url_site"];
-			$url_syndic = $row["url_syndic"];
 			$descriptif = $row["descriptif"];
-			$syndication = $row["syndication"];
-			$extra=$row["extra"];
+			
+		}
+		else
+		{
+			$titre = "";
+			$descriptif = "";
 		}
 	}
 
-	/*if ($_GET['exec'] == "articles_edit")
-	{
-		$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
-		$id_article = $row['id_article'];
-		$id_rubrique = $row['id_rubrique'];
-		$surtitre = $row['surtitre'];
-		$titre = $row['titre'];
-		$soustitre = $row['soustitre'];
-		$descriptif = $row['descriptif'];
-		$chapo = $row['chapo'];
-		$texte = $row['texte'];
-		$ps = $row['ps'];
-			
-		
-	}*/
-
+	
 	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 
@@ -229,7 +146,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$ret .=	"});</script>";
 				
 		}
-		else if (($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))
+		else if ((($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))  && ($_GET['new'] != "oui"))
 		{
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
@@ -266,7 +183,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$ret .=	"});</script>";
 		}
 	
-		else if ($champ_fin == "texte")
+		else if (($champ_fin == "texte") && ($_GET['new'] != "oui"))
 		{
 			
 			$ret .= "<div class=\"container-onglets\">
@@ -332,12 +249,12 @@ $newtab="";
 		       
 		<script type=\"text/javascript\">
 		$(document).ready(function() {";
-		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_descriptif_typo_partout') == "on"))
+		if (($_GET['exec'] == "rubriques_edit") && ($_GET['new'] != "oui") && (lire_config('typo_partout/rubriques_descriptif_typo_partout') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
 		}
 		
-		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_texte_typo_partout') == "on"))
+		if (($_GET['exec'] == "rubriques_edit") && ($_GET['new'] != "oui") && (lire_config('typo_partout/rubriques_texte_typo_partout') == "on"))
 		{
 			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
 		}
