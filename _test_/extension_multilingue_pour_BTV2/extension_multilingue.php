@@ -146,7 +146,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$ret .=	"});</script>";
 				
 		}
-		else if ((($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))  && ($_GET['new'] != "oui"))
+		else if (($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))
 		{
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
@@ -183,7 +183,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$ret .=	"});</script>";
 		}
 	
-		else if (($champ_fin == "texte") && ($_GET['new'] != "oui"))
+		else if ($champ_fin == "texte")
 		{
 			
 			$ret .= "<div class=\"container-onglets\">
@@ -249,12 +249,12 @@ $newtab="";
 		       
 		<script type=\"text/javascript\">
 		$(document).ready(function() {";
-		if (($_GET['exec'] == "rubriques_edit") && ($_GET['new'] != "oui") && (lire_config('typo_partout/rubriques_descriptif_typo_partout') == "on"))
+		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_descriptif_typo_partout') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
 		}
 		
-		if (($_GET['exec'] == "rubriques_edit") && ($_GET['new'] != "oui") && (lire_config('typo_partout/rubriques_texte_typo_partout') == "on"))
+		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_texte_typo_partout') == "on"))
 		{
 			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
 		}
