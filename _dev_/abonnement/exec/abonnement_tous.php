@@ -16,6 +16,7 @@ function exec_abonnement_tous() {
 	
 $abo_libelle = _request('abo_libelle');
 $abo_montant = _request('abo_montant');
+	$abo_montant = str_replace(',','.',$abo_montant); // On accepte que les points.
 $abo_duree = _request('abo_duree');
 $abo_commentaire = _request('abo_commentaire');
 $id_abonnement = _request('id_abonnement');
@@ -43,9 +44,9 @@ include_spip('inc/headers');
 redirige_par_entete(generer_url_ecrire("abonnement_tous"));
 }
 	debut_page("abonnements", "", "");
-	
+
 	echo recuperer_fond('inc/abonnement_tous',array("id_abonnement"=>"$id_abonnement"));
 	
-	fin_page();	
+	fin_page();
 }
 ?>
