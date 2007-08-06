@@ -1,10 +1,11 @@
 <B_abo>
-<fieldset class="abonnement_liste">
-<legend>Choisir son abonnement</legend>
-<BOUCLE_abo(SPIP_ABONNEMENTS)>
-<div class="un_abo">
-<label>#LIBELLE</label><input type="radio" name="abonnement" value="#ID_ABONNEMENT"/>
-</div>
-</BOUCLE_abo>
-</fieldset>
+    <fieldset class="abonnement_liste">
+    <legend>Choisir son abonnement</legend>
+        <BOUCLE_abo(SPIP_ABONNEMENTS)>
+            <div class="un_abo">
+                <input type="radio" name="abonnement" id="abonnementliste#ID_ABONNEMENT" value="#ID_ABONNEMENT"/>
+                <label for="abonnementliste#ID_ABONNEMENT">#LIBELLE</label>
+            </div>
+        </BOUCLE_abo>
+    </fieldset>
 </B_abo>
