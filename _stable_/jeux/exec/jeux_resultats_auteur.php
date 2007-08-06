@@ -28,7 +28,7 @@ function exec_jeux_resultats_auteur(){
 	
 	include_spip('public/assembler');
 	debut_cadre('liste');
-	echo recuperer_fond('fond/resultats_auteur_detail',array('id_auteur'=>$id_auteur,'par'=>$par));
+	echo recuperer_fond('fonds/resultats_auteur_detail',array('id_auteur'=>$id_auteur,'par'=>$par));
 	fin_cadre();
 	
 	fin_cadre_relief();
