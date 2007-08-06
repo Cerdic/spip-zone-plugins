@@ -1,0 +1,33 @@
+#HTTP_HEADER{Content-Type: text/html}
+<div class="calendrier">
+	<div class="nom_mois">[(#ENV{date}|nom_mois)]&nbsp;[(#ENV{date}|annee)]</div>
+	<div class="jours_debut">
+	<?php
+		$nom_debut = '[(#DATE|affdate{'l'})]';
+		switch ($nom_debut) {
+			case 'Monday' : $jour_debut = 0;
+			break;
+			case 'Tuesday' : $jour_debut = 1;
+			break;
+			case 'Wednesday' : $jour_debut = 2;
+			break;
+			case 'Thursday' : $jour_debut = 3;
+			break;
+			case 'Friday' : $jour_debut = 4;
+			break;
+			case 'Saturday' : $jour_debut = 5;
+			break;
+			case 'Sunday' : $jour_debut = 6;
+			break;
+		}
+		echo $jour_debut;
+	?>
+	</div>
+	<div class="nombre_jours"><?php echo date("t", mktime(0, 0, 0, [(#DATE|affdate{'m'})], [(#DATE|affdate{'d'})], [(#DATE|affdate{'Y'})])); ?></div>
+	<BOUCLE_LesZevenements1(ARTICLES){agenda date, mois, (#DATE|annee), (#DATE|mois)}{","}{par date}>
+	<div id="contenu[(#DATE|jour)]">
+		[<div id="jour[(#DATE|jour)]">(#DATE|jour)</div>]
+		[<div id="info[(#DATE|jour)]">(#TITRE)</div>]
+	</div>
+	</BOUCLE_LesZevenements1>
+</div>

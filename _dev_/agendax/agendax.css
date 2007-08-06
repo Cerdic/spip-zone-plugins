@@ -1,0 +1,66 @@
+		<style type="text/css">
+			DIV.calendrier{
+				width: 188px;
+				background: white;
+			}
+
+			DIV.boite_hors_mois{
+				
+			}
+
+			DIV.corps_calendrier{
+
+			}
+			
+			SPAN.mois_precedent{
+			
+			}
+			
+			SPAN.mois_courant{
+			
+			}
+			
+			SPAN.mois_suivant{
+			
+			}
+			
+			DIV.style_rempli{
+				background-color: #87B300;
+			}
+			
+			DIV.titre_calendrier{
+				text-align: center;
+			}
+			
+			DIV.titre_colone{
+				margin-top: 5px;
+				font-size: 11px;
+				float: left;
+				width: 14%;
+				font-weight: bold;
+				text-align: center;
+			}
+			DIV.boite_dans_mois{
+				border: solid 1px black;
+				height: 20px;
+				
+			}
+			
+			DIV.boite_jour{
+				height: 20px;
+				width: 14%;
+				float: left;
+				text-align: center;
+				background-color: #ccc;
+				
+			}
+			
+			DIV.case_remplie{
+				background-color: red;
+			}
+			
+			DIV.case_pas_remplie{
+				background-color: white;
+			}
+			
+		</style>

@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Agendax
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Sebastien D. ( crowf00t pour les intimes ;-p )
+_ &#169; 2006 - Distribu&eacute; sous licence GPL
+_ Avec le soutient de [Media-Animation->http://www.media-animation.be] 
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	dev
+	</etat>
+	<description>
+	Un bête petit calendrier en ajax
+	</description>
+	<lien>http://www.media-animation.be</lien> <!-- URI de documentation -->
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	Agendax
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
+	ex : template_affichage_final()
+	Le parametre inclure est egalement facultatif, si la fonction est deja chargee en memoire (car presente dans le fichier options par exemple)	-->
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>agendax.php</inclure>
+	</pipeline>
+</plugin>
