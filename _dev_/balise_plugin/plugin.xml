@@ -15,11 +15,11 @@ statiques d&eacute;finies dans plugin.xml ainsi que le statut d'activation du pl
 -** NOM: format&eacute; avec propre
 -** VERSION: 
 -** AUTEUR: format&eacute; avec propre
--** ICON: uniquement le nom du fichier
+-** ICONE: uniquement le nom du fichier
 -** DESCRIPTION: format&eacute;e avec propre
 -** LIEN: format&eacute; suivant qu'il est interne ou externe
 -** ETAT: le texte multilangue
--** EST_ACTIF: 1 pour actif, 0 pour inactif. EST_ACTIF est la valeur retourn&eacute; par d&eacute;faut si INFO est omis
+-** EST_ACTIF: {{oui}} pour actif, {{non}} pour inactif. EST_ACTIF est la valeur retourn&eacute; par d&eacute;faut si INFO est omis
 -** TOUT: le tableau s&eacute;rialis&eacute; de toutes les informations du plugin
 <br />
 ----
