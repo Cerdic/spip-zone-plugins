@@ -25,8 +25,7 @@ function jeux_ajouter_resulat($id_jeu,$resultat,$resultat_detaille=''){
 			}
 		
 		else{
-			echo 'UPDATE spip_jeux_resultats SET resultat_court="'.$resultat.'",resultat_long="'.$resultat_detaille.'" WHERE id_resultat='.$id_resultat;
-		spip_query('UPDATE spip_jeux_resultats SET resultat_court="'.$resultat.'",resultat_long="'.$resultat_detaille.'" WHERE id_resultat='.$id_resultat);
+			spip_query('UPDATE spip_jeux_resultats SET resultat_court="'.$resultat.'",resultat_long="'.$resultat_detaille.'" WHERE id_resultat='.$id_resultat);
 			}
 		
 		}

@@ -78,7 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retourner_auteur'			=>"Retourner &agrave; l'auteur",
 'gerer_resultats_tout' 		=>'G&eacute;rer les r&eacute;sultats de tous les jeux',
 'jeux'						=>'Jeux',
-'ecraser_resultat'			=>'Ecraser les résultats ?' 
+'ecraser_resultat'			=>'Ecraser les résultats ?',
+'configurer_jeux'			=>'Configurer le plugin Jeux'
 );
 
 
