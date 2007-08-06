@@ -21,7 +21,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 			if($cle== 'zones')
 				continue;
 				
-			if($cle== 'statut_int')
+			if($cle== 'statut_int' OR $cle== 'statut_nouveau')
 				continue;
 				
 			elseif($val!='' and $cle == 'username')
@@ -152,6 +152,7 @@ function envoyer_inscription2_pass($var_user) {
 			$message = _T('inscription2:message_auto')
 			. _T('inscription2:email_bonjour', array('nom'=>$var_user['nom']))."\n\n"
 			. _T('inscription2:texte_email_confirmation', array('login'=> $var_user['login'], 'nom_site' => $nom_site_spip));
+
 	if (envoyer_mail($var_user['email'],"[$nom_site_spip] "._T('inscription2:compte_active'), $message))
 		return false;
 	else

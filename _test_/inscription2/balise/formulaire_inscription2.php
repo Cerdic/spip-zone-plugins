@@ -29,7 +29,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 			if($cle== 'zones')
 				continue;
 				
-			if($cle== 'statut_int')
+			if($cle== 'statut_int' OR $cle== 'statut_nouveau')
 				continue;	
 			
 			elseif($val!='' and $cle == 'username')
@@ -50,6 +50,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 				$var_user['newsletters'] = _request('newsletters');
 				$var_user['`spip_listes_format`'] =_request('format');
 			}
+				
 			elseif(ereg("^statut_interne.*$", $cle))
 				$var_user['statut_interne'] = lire_config('inscription2/statut_interne');
 			
