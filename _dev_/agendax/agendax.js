@@ -54,7 +54,7 @@
 							
 							/* On insert les case des jours du mois */
 							for (j=1; j<=nombre_jours; j++) {
-								$(".corps_calendrier").append('<div class="boite_jour" id="jour'+j+'">'+j+'</div>');
+								$(".corps_calendrier").append('<div class="boite_jour" id="jour'+j+'"><a>'+j+'</a></div>');
 							}
 							
 							
@@ -62,8 +62,12 @@
 							for (k=1; k<=31; k++) {
 								if ($("#contenu"+k,event).length > 0){
 									$("#jour"+k).addClass("case_remplie");
+									$("#jour"+k).attr("alt",$("#info"+k,event).text());
+									$("#jour"+k+" a").attr("href",$("#lien"+k,event).text());
+									
 								}else{
 									$("#jour"+k).addClass("case_pas_remplie");
+									$("#jour"+k).remove("a");
 								}
 							}
 							
@@ -73,11 +77,15 @@
 							for (l=1; l<=nombre_case_restante; l++) {
 								$(".corps_calendrier").append('<div class="boite_jour boite_hors_mois"></div>');
 							}
+							
+							/* Et on charge le script qui vas écouter quand on clique sur les flèches */
+							$.getScript($(".chemin_script",event).text());
 						}
 					}
 				);
 				/* On enleve le "sablier" */
 				$(".mois_courant").remove("IMG");
+				
 				
 			}
 			
@@ -88,26 +96,4 @@
 				var mois = date_du_jour.getMonth()+1;
 				
 				remplire_agenda(annee,mois);
-				
-				$("div#agendax div.titre_calendrier span.mois_precedent a").click(function(){
-					mois = mois - 1;
-					if (mois == 0){
-						mois = 12;
-						annee = annee -1;
-					}
-					remplire_agenda(annee,mois);
-					return false;
-					}
-				);
-				
-				$("div#agendax div.titre_calendrier span.mois_suivant a").click(function(){
-					mois = mois + 1;
-					if (mois == 13){
-						mois = 1;
-						annee = annee + 1;
-					}
-					remplire_agenda(annee,mois);
-					return false;
-					}
-				);
 			})

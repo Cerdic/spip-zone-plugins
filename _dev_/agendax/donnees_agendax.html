@@ -1,5 +1,6 @@
 #HTTP_HEADER{Content-Type: text/html}
 <div class="calendrier">
+	<div class="chemin_script">[(#CHEMIN{'charger_agendax.js'})]</div>
 	<div class="nom_mois">[(#ENV{date}|nom_mois)]&nbsp;[(#ENV{date}|annee)]</div>
 	<div class="jours_debut">
 	<?php
@@ -23,11 +24,12 @@
 		echo $jour_debut;
 	?>
 	</div>
-	<div class="nombre_jours"><?php echo date("t", mktime(0, 0, 0, [(#DATE|affdate{'m'})], [(#DATE|affdate{'d'})], [(#DATE|affdate{'Y'})])); ?></div>
-	<BOUCLE_LesZevenements1(ARTICLES){agenda date, mois, (#DATE|annee), (#DATE|mois)}{","}{par date}>
+	<div class="nombre_jours">[(#DATE|affdate{'t'})]</div>
+	<BOUCLE_LesZevenements(ARTICLES){agenda date, mois, (#DATE|annee), (#DATE|mois)}{","}{par date}>
 	<div id="contenu[(#DATE|jour)]">
 		[<div id="jour[(#DATE|jour)]">(#DATE|jour)</div>]
 		[<div id="info[(#DATE|jour)]">(#TITRE)</div>]
+		<div id="lien[(#DATE|jour)]">?page=agenda_jour&date=#DATE</div>
 	</div>
-	</BOUCLE_LesZevenements1>
+	</BOUCLE_LesZevenements>
 </div>
