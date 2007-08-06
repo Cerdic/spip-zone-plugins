@@ -65,7 +65,7 @@ function exec_jeux_edit(){
 	if ($enregistrer_resultat=='item_non') { echo 'selected="selected"' ;} ;
 	
 	
-	echo '>'._T('non').'</option></select>';
+	echo '>'._T('item_non').'</option></select>';
 	echo '</label>';
 	fin_cadre_relief();
 	

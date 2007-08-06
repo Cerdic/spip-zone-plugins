@@ -1,0 +1,15 @@
+<!--titre=<:jeux:configurer_jeux:>-->
+<!-- descriptif=
+<table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table"><tbody><tr><td><a class="cellule-h" href="http://localhost:8888/svnspip/ecrire/?exec=jeux_gerer_resultats&tous=oui"><span class="cell-i"><img alt="Gérer les résultats" src="../plugins/jeux/img/jeu-laurier.png"/></span></a></td><td class="cellule-h-lien"><a class="cellule-h" href="http://localhost:8888/svnspip/ecrire/?exec=jeux_gerer_resultats&tous=oui">Gérer les résultats</a></td></tr></tbody></table>
+-->
+
+<form method="post">
+<label><:jeux:ecraser_resultat:>
+<select name="ecraser_resultat"> 
+<option value="oui"><:item_oui:></input>
+<option value="non" [ (#CONFIG{jeux/ecraser_resultat}|=={non}|?{selected="selected"})]><:item_non:></input>
+</select name="ecraser_resultat">
+</label>
+
+<p align="right"><input class="fondo"  type="submit" name="_cfg_ok" value="<:OK:>" /></p>
+</form>
