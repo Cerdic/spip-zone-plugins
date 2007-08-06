@@ -5,18 +5,25 @@
 	<auteur>	<!-- Auteur du plugin -->
  	Sebastien D. ( crowf00t pour les intimes ;-p )
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
-_ Avec le soutient de [Media-Animation->http://www.media-animation.be] 
 	</auteur>
 	<version> <!-- Version du plugin -->
 	0.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	dev
+	test
 	</etat>
 	<description>
-	Un bête petit calendrier en ajax
+	Un petit calendrier en ajax qui se base sur une seul boucle article (ou autre) avec un critère agenda.
+_ 
+_ Pour qu'il fonctionne, vous devez avoir la balise #INSERT_HEAD dans vos squelettes.
+_ 
+_ Vous pouvez modifier la boucles et les autres choses dans le fichier de données : donnees_agendax.html
+_ 
+_ Pour afficher l'agenda dans vos squelettes, il vous suffit de mettre un "div" avec un id='agendax'. Il y a une <a href="../?page=agendax">Demo ici</a>
+_ 
+_ Pour modifier l'apparence, vous pouvez modifier le fichier des css : agendax.css
 	</description>
-	<lien>http://www.media-animation.be</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net</lien> <!-- URI de documentation -->
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
 		C'est par ailleurs conseille pour les noms de fichier

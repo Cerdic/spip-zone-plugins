@@ -54,7 +54,7 @@
 							
 							/* On insert les case des jours du mois */
 							for (j=1; j<=nombre_jours; j++) {
-								$(".corps_calendrier").append('<div class="boite_jour" id="jour'+j+'"><a>'+j+'</a></div>');
+								$(".corps_calendrier").append('<div class="boite_jour boite_dans_mois" id="jour'+j+'"><a>'+j+'</a></div>');
 							}
 							
 							
