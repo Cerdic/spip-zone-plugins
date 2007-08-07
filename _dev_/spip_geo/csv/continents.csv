@@ -6,5 +6,5 @@ id_continent;Nom;code ONU;Latitude (WGS 84);Longitude (WGS 84);Zoom
 5;<multi>[fr]Europe[es]Europa</multi>;150;50;20;4
 6;<multi>[fr]Océanie[en]Oceania[es]Oceania</multi>;9;-30;150;4
 7;<multi>[fr]Antarctique[en]Antarctica</multi>;;-80;70;3
-3;<multi>[fr]Amérique[en]Americas</multi>;19;0;-70;2
+8;<multi>[fr]Amérique[en]Americas</multi>;19;0;-70;2
 
