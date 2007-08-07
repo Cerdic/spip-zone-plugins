@@ -10,9 +10,8 @@ function TableMatieres_Table($url = '', $titre = '') {
 function TableMatieres_Callback($matches) {
 	static $cId = 0;
 	$cId++;
-	$url = translitteration(corriger_caracteres(
-		supprimer_tags(supprimer_numero(extraire_multi(trim($matches[1]))))
-	));
+	$titre = typo($matches[1]);
+	$url = translitteration($titre);
 	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
 
 	// S'il reste des caracteres non latins, utiliser l'id a la place
@@ -33,7 +32,7 @@ function TableMatieres_Callback($matches) {
 		$url = substr($url, 1);
 		if (strlen($url) < 2) $url = "ancre$cId";
 	}
-	TableMatieres_Table($url, $matches[1]);
+	TableMatieres_Table($url, $titre);
 	return '{{{ ['.$url.'<-] '.$matches[1].' @@RETOUR_TDM@@ }}}';
 }
 
