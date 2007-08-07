@@ -102,6 +102,7 @@ class cfg_formulaire
 		preg_replace_callback('/(\[\(#REM\) ([a-z0-9]\w+)(\*)?=)(.*?)\]/sim',
 					array(&$this, 'post_params'), $this->controldata);
 
+		include_spip('inc/presentation'); // offrir les fonctions d'espace prive
 		include_spip('public/assembler');
 		$fond_compile = recuperer_fond('fonds/cfg_' . $this->vue);
 
@@ -265,7 +266,7 @@ class cfg_formulaire
 		// liste des post-proprietes de l'objet cfg, lues apres recuperer_fond()
 		$this->rempar = array(array());
 		if (preg_match_all('/<!-- [a-z0-9]\w+\*?=/i', $this->controldata, $this->rempar)) {
-/* en réserve au cas ou vraiement pas possible autrement
+/* en reserve au cas ou vraiement pas possible autrement
 			$GLOBALS['_current_cfg'] = &this;
 			$return = preg_replace_callback('/(<!-- (\w+)(\*)?=)(.*?)-->/sim',
 								array(&$GLOBALS['_current_cfg'], 'post_params'), $return);

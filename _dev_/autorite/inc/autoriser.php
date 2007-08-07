@@ -405,10 +405,18 @@ OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_configurer')) {
 function autoriser_configurer($faire, $type, $id, $qui, $opt) {
+	// TODO:
+	// cas particulier : configurer les plugins doit etre bloque
+	// en mode 'webmestre', sinon on pourrait desactiver autorite.
+	// mais comment faire pour ne pas bloquer quelqu'un qui installe
+	// ce plugin alors qu'il est id_auteur > 1 ?
+#	if (in_array($type, array('plugins', 'admin_plugin')))
+#		return autoriser('webmestre');
+
 	if ($GLOBALS['autorite']['configurer'] == 'webmestre')
 		return autoriser('webmestre');
 	else
-		return autoriser(''); // autorisation par defaut
+		return autoriser('x'); // autorisation par defaut
 }
 } else
 	$autorite_erreurs[] = 'autoriser_configurer';

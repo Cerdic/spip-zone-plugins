@@ -1,4 +1,4 @@
-[(#REM) titre=Configuration du plugin &#171;&nbsp;Notifications&nbsp;&#187;]
+[(#REM) titre=Notifications]
 
 [(#REM) presentation= ]
 
@@ -22,11 +22,10 @@
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 
-
-
 [(#REM|debut_cadre_trait_couleur{1,'xxx','R&#233;glage des notifications'})]
 
-Les événements suivants peuvent déclencher une notification par email.
+
+Les &#233;v&#233;nements suivants peuvent d&#233;clencher une notification par email.
 
 
 [(#REM) ------------------------ FORUMS PUBLICS ------------------------ ]
@@ -36,14 +35,14 @@ Les événements suivants peuvent déclencher une notification par email.
 </legend>
 <p>
 <label><input type="checkbox" name="prevenir_auteurs" [checked="(#ENV{prevenir_auteurs}?{checked})"] id="prevenir_auteurs" />
-	<strong>Auteurs</strong>&nbsp;: les auteurs reçoivent les notifications des forums postés sous leurs articles dans le site public.
+	<strong>Auteurs</strong>&nbsp;: les auteurs re&#231;oivent les notifications des forums post&#233;s sous leurs articles dans le site public.
 </label>
 
 </p>
 
 <p>
 <label><input type="checkbox" name="thread_forum" [checked="(#ENV{thread_forum}?{checked})"] id="thread_forum" />
-	<strong>Fil de discussion</strong>&nbsp;: les participants au même fil de discussion reçoivent les notifications des forums (publics).
+	<strong>Fil de discussion</strong>&nbsp;: les participants au m&#234;me fil de discussion re&#231;oivent les notifications des forums (publics).
 </label>
 
 </p>
@@ -51,13 +50,13 @@ Les événements suivants peuvent déclencher une notification par email.
 
 <p>
 <label>
-	<strong>Modérateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du modérateur des forums publics (ou plusieurs, séparés par des virgules).
+	<strong>Mod&#233;rateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du mod&#233;rateur des forums publics (ou plusieurs, s&#233;par&#233;s par des virgules).
 	<br /><input type="text" name="moderateurs_forum" value="[(#ENV{moderateurs_forum}|entites_html)]" id="moderateurs_forum" size="60" />
 </label>
 
 </p>
 
-<p><small>&Agrave; noter : dans le cas des forums modérés à priori, seuls les auteurs ayant le droit de valider les forums sont notifiés lors de l'envoi du forum ; les autres destinataires sont notifiés lors de la validation du message par le modérateur.</small></p>
+<p><small>&Agrave; noter : dans le cas des forums mod&#233;r&#233;s &#224; priori, seuls les auteurs ayant le droit de valider les forums sont notifi&#233;s lors de l'envoi du forum ; les autres destinataires sont notifi&#233;s lors de la validation du message par le mod&#233;rateur.</small></p>
 
 </fieldset>
 
@@ -65,17 +64,17 @@ Les événements suivants peuvent déclencher une notification par email.
 [(#REM) ------------------------ FORUMS PRIVES ------------------------ ]
 <fieldset>
 <legend>
-	Forums privés
+	Forums priv&#233;s
 </legend>
 <p>
 <label><input type="checkbox" name="prevenir_auteurs_prive" [checked="(#ENV{prevenir_auteurs_prive}?{checked})"] id="prevenir_auteurs_prive" />
-	<strong>Auteurs</strong>&nbsp;: les auteurs reçoivent les notifications des forums postés sous leurs articles dans le site privé.
+	<strong>Auteurs</strong>&nbsp;: les auteurs re&#231;oivent les notifications des forums post&#233;s sous leurs articles dans le site priv&#233;.
 </label>
 </p>
 
 <p>
 <label><input type="checkbox" name="thread_forum_prive" [checked="(#ENV{thread_forum_prive}?{checked})"] id="thread_forum_prive" />
-	<strong>Fil de discussion</strong>&nbsp;: les participants au même fil de discussion reçoivent les notifications des forums (privés).
+	<strong>Fil de discussion</strong>&nbsp;: les participants au m&#234;me fil de discussion re&#231;oivent les notifications des forums (priv&#233;s).
 </label>
 
 </p>
@@ -83,7 +82,7 @@ Les événements suivants peuvent déclencher une notification par email.
 
 <p>
 <label>
-	<strong>Modérateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du modérateur des forums privés (ou plusieurs, séparés par des virgules).
+	<strong>Mod&#233;rateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du mod&#233;rateur des forums priv&#233;s (ou plusieurs, s&#233;par&#233;s par des virgules).
 	<br /><input type="text" name="moderateurs_forum_prive" value="[(#ENV{moderateurs_forum_prive}|entites_html)]" id="moderateurs_forum_prive" size="60" />
 </label>
 
@@ -99,7 +98,7 @@ Les événements suivants peuvent déclencher une notification par email.
 <p>
 <label>
 <input type="checkbox" name="messagerie" [checked="(#ENV{messagerie}?{checked})"] id="messagerie" />
-<strong>Signaler les nouveaux messages privés</strong>&nbsp;: activer cette option pour que le site envoie une notification lorsqu'un rédacteur n'a pas vu un nouveau message dans sa messagerie. Le système attend 20 minutes avant de notifier le rédacteur, de manière à ne pas spammer un rédacteur déjà en ligne dans l'espace privé.
+<strong>Signaler les nouveaux messages priv&#233;s</strong>&nbsp;: activer cette option pour que le site envoie une notification lorsqu'un r&#233;dacteur n'a pas vu un nouveau message dans sa messagerie. Le syst&#232;me attend 20 minutes avant de notifier le r&#233;dacteur, de mani&#232;re &#224; ne pas spammer un r&#233;dacteur d&#233;j&#224; en ligne dans l'espace priv&#233;.
 </label>
 
 </p>
@@ -109,12 +108,12 @@ Les événements suivants peuvent déclencher une notification par email.
 [(#REM) ------------------------ SIGNATURES ------------------------ ]
 <fieldset>
 <legend>
-	Signatures de pétition
+	Signatures de p&#233;tition
 </legend>
 
 <p>
 <label>
-	<strong>Modérateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du modérateur des pétitions (ou plusieurs, séparés par des virgules).
+	<strong>Mod&#233;rateur</strong>&nbsp;: indiquez ci-dessous l'adresse email du mod&#233;rateur des p&#233;titions (ou plusieurs, s&#233;par&#233;s par des virgules).
 	<br /><input type="text" name="moderateurs_signatures" value="[(#ENV{moderateurs_signatures}|entites_html)]" id="moderateurs_signatures" size="60" />
 </label>
 
@@ -131,6 +130,8 @@ Les événements suivants peuvent déclencher une notification par email.
 -->
 </div>
 
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
 
 </form>
 
