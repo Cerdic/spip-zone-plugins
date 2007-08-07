@@ -39,8 +39,9 @@ function jeux_verifier_base(){
 				spip_query("ALTER TABLE spip_jeux ADD `nom` text NOT NULL AFTER `date`");
 				// ajout d'un nom par defaut aux jeux existants
 				$res = spip_query ("SELECT id_jeu FROM spip_jeux");
+				$sans = _T('jeux:sans_nom');
 				while ($row = spip_fetch_array($res))
-					spip_query("UPDATE spip_jeux SET nom='Sans nom' WHERE id_jeu=".$row['id_jeu']);
+					spip_query("UPDATE spip_jeux SET nom='$sans' WHERE id_jeu=".$row['id_jeu']);
 			}
 			ecrire_meta('jeux_base_version', $current_version=$version_base, 'non');
 		}
@@ -51,8 +52,9 @@ function jeux_verifier_base(){
 				spip_query("ALTER TABLE spip_jeux ADD `titre` text NOT NULL AFTER `nom`");
 				// ajout d'un titre par defaut aux jeux existants
 				$res = spip_query ("SELECT id_jeu FROM spip_jeux");
+				$sans = _T('jeux:sans_titre');
 				while ($row = spip_fetch_array($res))
-					spip_query("UPDATE spip_jeux SET titre='Sans titre' WHERE id_jeu=".$row['id_jeu']);
+					spip_query("UPDATE spip_jeux SET titre='$sans' WHERE id_jeu=".$row['id_jeu']);
 			}
 			ecrire_meta('agenda_base_version', $current_version=0.11, 'non');
 		}

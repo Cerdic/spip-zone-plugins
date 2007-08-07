@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jeu_numero_court' 	=> 'ID',
 'jeu_type'	=> 'Type',
 'jeu_titre'	=> 'Titre',
+'auteur'	=> 'Auteur',
 
 'nouveau_jeu'	=> 'Nouveau jeu',
 'explication_jeu'=> 'Vous pouvez ins&eacute;rer des jeux selon la syntaxe d&eacute;crite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la&nbsp;documentation</a>.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
@@ -69,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jeu_contenu'		=> 'Contenu du jeu',
 
 'derniere_modif'	=> 'Derni&egrave;re modification',
+'resultat'			=> 'R&eacute;sultat',
 'resultats'			=> 'R&eacute;sultats',
 'resultats_auteur'	=> 'Les r&eacute;sultats de @nom@',
 'resultats_auteur_'	=> "R&eacute;sultats de l&#8217;auteur",
@@ -99,7 +101,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_resultats_tout' 		=> 'G&eacute;rer les r&eacute;sultats de tous les jeux',
 'jeux'						=> 'Jeux',
 'ecraser_resultat'			=> 'Ecraser les r&eacute;sultats ?',
-'configurer_jeux'			=> 'Configurer le plugin Jeux'
+'configurer_jeux'			=> 'Configurer le plugin Jeux',
+
+'sans_titre'	=> 'Sans titre priv&eacute;',
+'sans_nom'	=> 'Sans nom',
 );
 
 

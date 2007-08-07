@@ -33,7 +33,8 @@ function exec_jeux_voir(){
 	debut_droite();
 	debut_cadre_relief();
 	gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$nom)));
-	echo '<div style="font-weight:bold">'.propre($titre).'</div>';
+	$titre = $titre==''?_T('jeux:sans_titre'):propre($titre);
+	echo "<div style='font-weight:bold'>$titre</div><br />";
 	echo propre($contenu);
 
 	fin_cadre_relief();
