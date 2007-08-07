@@ -13,7 +13,7 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	test
 	</etat>
 	<description>
-	Un petit calendrier en ajax qui se base sur une seul boucle article (ou autre) avec un critère agenda.
+	Un petit calendrier en ajax qui se base sur une seul boucle article (ou autre) avec un crit&egrave;re agenda.
 _ 
 _ Pour qu'il fonctionne, vous devez avoir la balise #INSERT_HEAD dans vos squelettes.
 _ 

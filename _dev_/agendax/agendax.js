@@ -13,12 +13,13 @@
 			function remplire_agenda(annee,mois){
 				
 				/*On vide le tout*/
+				
 				$("#agendax").html('');
 				
 				date_jour = annee+"-"+mois+"-01 01:01:01";
 				
 				/* Initialisation du calendrier*/
-				$("#agendax").append('<div class="titre_calendrier"><span class="mois_precedent"><a href="#"><-</a>&nbsp;&nbsp;</span><span class="mois_courant"></span><span class="mois_suivant">&nbsp;&nbsp;<a href="#">-></a></span></div><div class="corps_calendrier"></div><div class="info_evenement"></div>');
+				$("#agendax").append('<div class="titre_calendrier"><span class="mois_precedent"><a href="#"><</a>&nbsp;&nbsp;</span><span class="mois_courant"></span><span class="mois_suivant">&nbsp;&nbsp;<a href="#">></a></span></div><div class="corps_calendrier"></div><div class="info_evenement"></div>');
 				
 				
 				/* Titre des colones */
@@ -48,7 +49,7 @@
 							
 							/* On insert les case vide du debut */
 							for (i=1; i<=nombre_case_vide; i++) {
-								$(".corps_calendrier").append('<div class="boite_jour boite_hors_mois"></div>');
+								$(".corps_calendrier").append('<div class="boite_jour boite_hors_mois">&nbsp;</div>');
 							}
 							
 							
@@ -75,11 +76,15 @@
 							/* On insert les case vide à la fin */
 							nombre_case_restante = eval("42-("+nombre_case_vide+"+"+nombre_jours+")");
 							for (l=1; l<=nombre_case_restante; l++) {
-								$(".corps_calendrier").append('<div class="boite_jour boite_hors_mois"></div>');
+								$(".corps_calendrier").append('<div class="boite_jour boite_hors_mois">&nbsp;</div>');
 							}
+							$(".corps_calendrier").append('<div style="clear: both; height: 1px;">&nbsp;</div>');
+							
+							$("#agendax").css("height",$("#agendax").height());
 							
 							/* Et on charge le script qui vas écouter quand on clique sur les flèches */
 							$.getScript($(".chemin_script",event).text());
+							
 						}
 					}
 				);
