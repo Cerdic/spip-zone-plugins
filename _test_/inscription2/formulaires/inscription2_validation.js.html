@@ -16,7 +16,14 @@
 	$().ready(function() {
 	// validate signup form on submit
 	$("#inscription").validate({
+                errorPlacement: function(error, element) {
+                        error.appendTo( element.parent("div") );
+                },
 		rules: {
+                        [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+                        abonnement:{required: true},
+                        ]
+			sexe:{[(#CONFIG{inscription2/sexe}|=={on}|?{required: true,''})]},
 			nom_famille: {[(#CONFIG{inscription2/nom_famille}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
@@ -42,6 +49,12 @@
 			pays:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''})]}
 		},
 		messages: {
+                        [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+                        abonnement: {
+				required:"<:inscription2:champ_obligatoire:>"},
+                        ]
+                        sexe: {
+				required:"<:inscription2:champ_obligatoire:>"},
 			nom_famille: {
 				required:"<:inscription2:champ_obligatoire:>",
 				chaine:"<:inscription2:chaine_valide:>",
