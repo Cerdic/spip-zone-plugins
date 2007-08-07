@@ -64,27 +64,28 @@ function exec_jeux_edit(){
 	echo "<br /><br /><label><span class='titrem'>"._T('jeux:jeu_contenu');
 	echo "<textarea  name='contenu' class='formo' rows='20' cols='40' style='width:100%;' >",
 		strip_tags($contenu),
-		" </textarea>";
+		'</textarea>';
 	echo '</label>';
 	
 	// enregistrement des resultats
 	echo "<br /><label><span class='titrem'>"._T('jeux:enregistrer_resultat');
 	echo '<br /></span><select class="formo" name="enregistrer_resultat" ><option value="oui">'._T('item_oui').'</option>';
 	echo '<option value="non"';
-	if ($enregistrer_resultat=='item_non') { echo 'selected="selected"' ;} ;
+	if ($enregistrer_resultat=='item_non') { echo 'selected="selected"';}
 	echo '>'._T('item_non').'</option></select>';
 	echo '</label>';
 	fin_cadre_relief();
 	
 	
 	echo "<p align='right'><input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' /></p>";
-	echo "</form>";
+	echo '</form>';
 	echo fin_cadre_formulaire(), fin_gauche(), fin_page();
 }
 
 function jeux_ajouter_jeu($titre,$contenu, $enregistrer_resultat, $id_jeu=false){
 	include_spip('jeux_utils');
-	$nom = _q(jeux_trouver_nom($contenu));
+	$nom = jeux_trouver_nom($contenu);
+	$nom = _q($nom==''?_T('jeux:jeu_vide'):$nom);
 	$titre = _q($titre);
 	$contenu = _q("<jeux>$contenu</jeux>");
 	if (!$id_jeu) {

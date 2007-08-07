@@ -10,6 +10,9 @@ function exec_jeux_voir(){
 	$requete = spip_fetch_array(spip_query("SELECT contenu,id_jeu,nom,titre,date FROM spip_jeux WHERE id_jeu =".$id_jeu));
 	list($contenu, $id_jeu, $nom, $titre, $date) =
 		array($requete['contenu'], $requete['id_jeu'], $requete['nom'], $requete['titre'], $requete['date']);
+	$titre = propre($titre);
+	if($titre=='') $titre = _T('jeux:sans_titre');
+	$contenu = $nom==_T('jeux:jeu_vide')?_T('jeux:introuvable'):propre($contenu);
 	
 	if(!$id_jeu){
 		debut_page(_T("jeux:pas_de_jeu"));
@@ -33,7 +36,6 @@ function exec_jeux_voir(){
 	debut_droite();
 	debut_cadre_relief();
 	gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$nom)));
-	$titre = $titre==''?_T('jeux:sans_titre'):propre($titre);
 	echo "<div style='font-weight:bold'>$titre</div><br />";
 	echo propre($contenu);
 

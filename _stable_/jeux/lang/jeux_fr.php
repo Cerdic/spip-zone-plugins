@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retourner_jeu'		=> 'Retourner au jeu',
 'jeu_titre_prive'	=> 'Titre priv&eacute;',
 'jeu_contenu'		=> 'Contenu du jeu',
+'jeu_vide'			=> 'VIDE',
 
 'derniere_modif'	=> 'Derni&egrave;re modification',
 'resultat'			=> 'R&eacute;sultat',
@@ -75,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'resultats_auteur'	=> 'Les r&eacute;sultats de @nom@',
 'resultats_auteur_'	=> "R&eacute;sultats de l&#8217;auteur",
 'voir_ses_resultats'	=> 'Voir ses r&eacute;sultats',
-'resultats_jeu'		=> 'R&eacute;sultats du jeu num&eacute;ro @id@ (@nom@)',
+'resultats_jeu'		=> 'Les r&eacute;sultats du jeu num&eacute;ro @id@ (@nom@)',
 'resultats_jeu_'		=> 'R&eacute;sultats du jeu',
 'nb_resultats'		=> 'Nombre de r&eacute;sultats',
 'gerer_resultats'	=> 'G&eacute;rer les r&eacute;sultats',
@@ -104,7 +105,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configurer_jeux'			=> 'Configurer le plugin Jeux',
 
 'sans_titre'	=> 'Sans titre priv&eacute;',
-'sans_nom'	=> 'Sans nom',
+'sans_nom'		=> 'Sans nom',
+'introuvable'	=> 'Aucun jeu dans le contenu !',
 );
 
 
