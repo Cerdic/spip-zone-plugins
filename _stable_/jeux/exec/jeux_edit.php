@@ -81,12 +81,13 @@ function exec_jeux_edit(){
 
 function jeux_ajouter_jeu($contenu, $enregistrer_resultat, $id_jeu=false){
 	include_spip('jeux_utils');
-	$nom = jeux_trouver_nom($contenu);
+	$nom = _q(jeux_trouver_nom($contenu));
+	$contenu = _q("<jeux>$contenu</jeux>");
 	if (!$id_jeu) {
-		spip_query("INSERT into spip_jeux (statut,nom,contenu,enregistrer_resultat) VALUES('publie','$nom','<jeux>$contenu</jeux>','$enregistrer_resultat')");	
+		spip_query("INSERT into spip_jeux (statut,nom,contenu,enregistrer_resultat) VALUES('publie',$nom,$contenu,'$enregistrer_resultat')");	
 		$id_jeu = mysql_insert_id();		
 	} else {
-		spip_query("REPLACE into spip_jeux (id_jeu,statut,nom,contenu,enregistrer_resultat) VALUES ($id_jeu,'publie','$nom','<jeux>$contenu</jeux>','$enregistrer_resultat')");
+		spip_query("REPLACE into spip_jeux (id_jeu,statut,nom,contenu,enregistrer_resultat) VALUES ($id_jeu,'publie',$nom,$contenu,'$enregistrer_resultat')");
 	}
 	return $id_jeu;
 }

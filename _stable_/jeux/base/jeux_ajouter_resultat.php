@@ -13,17 +13,20 @@ function jeux_ajouter_resulat($id_jeu, $resultat, $resultat_detaille=''){
 		$ecraser_resultat = lire_config('jeux/ecraser_resultat');
 	else
 		$ecraser_resultat = 'oui';
-
+	
+	$resultat_detaille = _q($resultat_detaille);
+	$resultat = _q($resultat);
+	
 	if ($ecraser_resultat!='non') {
-		spip_query('INSERT into spip_jeux_resultats (id_jeu,id_auteur,resultat_court,resultat_long) VALUES ('.$id_jeu.','.$id_auteur.',"'.$resultat.'","'.$resultat_detaille.'")'); 
+		spip_query("INSERT into spip_jeux_resultats (id_jeu,id_auteur,resultat_court,resultat_long) VALUES ($id_jeu,$id_auteur,$resultat,$resultat_detaille)"); 
 	} else {
-		$requete = spip_fetch_array(spip_query("SELECT id_resultat FROM spip_jeux_resultats WHERE id_jeu =".$id_jeu." and id_auteur=".$id_auteur));
+		$requete = spip_fetch_array(spip_query("SELECT id_resultat FROM spip_jeux_resultats WHERE id_jeu =$id_jeu and id_auteur=$id_auteur"));
 		$id_resultat = $requete['id_resultat'];
 		
 		if (!$id_resultat)
-			spip_query('INSERT into spip_jeux_resultats (id_jeu,id_auteur,resultat_court,resultat_long) VALUES ('.$id_jeu.','.$id_auteur.',"'.$resultat.'","'.$resultat_detaille.'")'); 
+			spip_query("INSERT into spip_jeux_resultats (id_jeu,id_auteur,resultat_court,resultat_long) VALUES ($id_jeu,$id_auteur,$resultat,$resultat_detaille)"); 
 		else
-			spip_query('UPDATE spip_jeux_resultats SET resultat_court="'.$resultat.'",resultat_long="'.$resultat_detaille.'" WHERE id_resultat='.$id_resultat);
+			spip_query("UPDATE spip_jeux_resultats SET resultat_court=$resultat,resultat_long=$resultat_detaille WHERE id_resultat=$id_resultat");
 	}
 }
 ?>
