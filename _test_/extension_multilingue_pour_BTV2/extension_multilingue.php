@@ -15,13 +15,16 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	{
 		
 
-		if ($new == "oui") {
+		
+
+		if ($_GET['new'] == "oui") 
+		{
 			$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
 			$descriptif = "";
 			$texte = "";
-			
-		} else {
-			
+		} 
+		else 
+		{
 			$id_rubrique_tmp = intval($_GET['id_rubrique']);
 			$row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique_tmp'"));
 	
@@ -30,8 +33,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
-			
-			
 		}
 		
 
@@ -46,7 +47,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	else if ($_GET['exec'] == "mots_type")
 	{
 		
-		if ($new == "oui") {
+		if ($_GET['new'] == "oui") {
 		  	$titre = filtrer_entites(_T('titre_nouveau_groupe'));
 		  	$descriptif = "";
 			$texte = "";
@@ -103,10 +104,10 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$descriptif = "";
 		}
 	}
-
 	
 	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
+		
 
 		if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type") || ($champ_fin == "lien_nom"))
 		{
@@ -186,6 +187,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		else if ($champ_fin == "texte")
 		{
 			
+			
 			$ret .= "<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
 			
@@ -229,7 +231,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	}	
 
 	
-	
 }
 
 
@@ -253,7 +254,6 @@ $newtab="";
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
 		}
-		
 		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_texte_typo_partout') == "on"))
 		{
 			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
