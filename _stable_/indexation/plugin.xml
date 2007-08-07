@@ -1,0 +1,81 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	ATTENTION PAS ENCORE FONCTIONNEL !
+	<multi>
+	[fr]Indexation
+	[it]Indicizzazione
+	</multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	<multi>
+	[fr]
+	cedric.morin@yterium.com
+_ pdepaepe et Nicolas Steinmetz pour google_like
+_ Fil pour le panneau admin_index d'origine
+_ SPIP pour le code initial de l'indexation
+_ &#169; 2007 - Distribu&#233; sous licence GNU/GPL
+	[it]
+	cedric.morin@yterium.com
+_ pdepaepe e Nicolas Steinmetz per google_like
+_ Fil per il pannello di amministrazione admin_index originale
+_ SPIP pour le code initial de l'indexation
+_ &#169; 2007 - Distribuito sotto licenza GNU/GPL	
+_ Traduzione italiana a cura di Diego Weisz
+	</multi>
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>
+	[fr]
+_ Plugin d'outils pour la recherche
+_ Indexation du contenu de la base de donn&#233;es
+_ Panneaux de controle admin_index et index_tous
+_ Boucle INDEX
+_ Filtre google_like
+	[it]
+	Strumenti per la ricerca
+_ indicizzazione
+_ Pannello di controllo admin_index e index_tous
+_ Ciclo INDEX
+_ Filtro google_like	
+	</multi>
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	recherche_etendue_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	boucle_indexation.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	recherche_etendue.php
+	</fonctions>
+	<install>inc/indexation_etendue.php</install>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	RechercheEtendue
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>recherche_etendue.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>recherche_etendue_pipeline.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>

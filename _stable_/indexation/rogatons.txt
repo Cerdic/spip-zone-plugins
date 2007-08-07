@@ -1,0 +1,42 @@
+Dans distant.php, apres copie_locale()
+
+
+			// signaler au moteur de recherche qu'il peut reindexer ce doc
+			$id_document = spip_abstract_fetch(spip_query("SELECT id_document FROM spip_documents WHERE fichier=" . _q($source)));
+			$id_document = $id_document['id_document'];
+			if ($id_document) {
+				include_spip('inc/indexation');
+				marquer_indexer('spip_documents', $id_document);
+			}
+
+
+
+
+$spip_index = array(
+ 		"`hash`"	=> "bigint UNSIGNED NOT NULL",
+ 		"points"	=> "int UNSIGNED DEFAULT '0' NOT NULL",
+		"id_objet"	=> "int UNSIGNED NOT NULL",
+		"id_table"	=> "tinyint UNSIGNED NOT NULL"	);
+
+$spip_index_key = array(
+ 		"KEY `hash`"	=> "`hash`",
+		"KEY id_objet"	=> "id_objet",
+		"KEY id_table"	=> "id_table");
+
+$spip_index_dico = array(
+		"`hash`"	=> "bigint UNSIGNED NOT NULL",
+		"dico"		=> "VARCHAR (30)");
+
+$spip_index_dico_key = array(
+		"PRIMARY KEY"	=> "dico");
+
+
+$tables_auxiliaires['spip_index'] = array(
+	'field' => &$spip_index,
+	'key' => &$spip_index_key);
+$tables_auxiliaires['spip_index_dico'] = array(
+	'field' => &$spip_index_dico,
+	'key' => &$spip_index_dico_key);
+
+
+et le champ idx sur 'articles', 'auteurs', 'breves', 'mots', 'rubriques', 'documents', 'syndic', 'forum', 'signatures'
