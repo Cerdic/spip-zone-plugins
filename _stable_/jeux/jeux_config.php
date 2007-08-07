@@ -48,11 +48,16 @@ define('_JEUX_RECUEIL', 'recueil');
 define('_JEUX_PENDU', 'pendu');
 define('_JEUX_DIAG_ECHECS', 'diag_echecs');
 
+// globale stockant les carateristiques d'un jeu :
+//   - les separateurs autorises
+//   - les signatures permettant de reconnaitre un jeu
+//   - le nom du jeu
+global $jeux_caracteristiques;
+$jeux_caracteristiques = array(
 // liste des separateurs autorises dans les jeux.
 // tous les jeux doivent etre listes ci-apres.
 // monjeu est le jeu traite dans le fichier inc/monjeu.php
-global $jeux_separateurs;
-$jeux_separateurs = array(
+ 'SEPARATEURS' => array(
 	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION, _JEUX_CONFIG),
@@ -62,7 +67,7 @@ $jeux_separateurs = array(
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG),
 	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU, _JEUX_CONFIG),
 	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DIAG_ECHECS, _JEUX_CONFIG),
-);
+  ),
 
 // liste des signatures caracteristiques d'un jeu.
 // tous les jeux doivent etre listes ci-apres.
@@ -71,8 +76,7 @@ $jeux_separateurs = array(
 // array(_JEUX_SEPAR_3, _JEUX_SEPAR_4) doit s'interpreter :
 // " le jeu est charge si on trouve _JEUX_SEPAR_3 ou _JEUX_SEPAR_4
 //   a l'interieur de <jeu> et </jeu> "
-global $jeux_signatures;
-$jeux_signatures = array(
+  'SIGNATURES' => array(
 	'sudoku' => array(_JEUX_SUDOKU),
 	'kakuro' => array(_JEUX_KAKURO),
 	'mots_croises' => array(_JEUX_HORIZONTAL, _JEUX_VERTICAL),
@@ -82,6 +86,21 @@ $jeux_signatures = array(
 	'trous' => array(_JEUX_TROU),
 	'pendu' => array(_JEUX_PENDU),
 	'diag_echecs' => array(_JEUX_DIAG_ECHECS),
+  ),
+
+// nom a donner au jeu
+  'NOMS' => array(
+	'sudoku' => _T('sudoku:titre_court'),
+	'kakuro' => _T('kakuro:titre_court'),
+	'mots_croises' => _T('motscroises:titre_court'),
+	'qcm' => _T('qcm:titre_court'),
+	'textes' => _L('Textes'),
+	'devinettes' => _L('Devinettes'),
+	'trous' => _L('Trous'),
+	'pendu' => _T('pendu:titre_court'),
+	'diag_echecs' => _L('Echecs')
+  ),
+
 );
 
 // liste manuelle des css ou js a placer dans le header prive

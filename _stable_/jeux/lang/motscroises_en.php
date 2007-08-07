@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'titre'		=>'Crossword puzzle',
+'titre_court'		=>'Crossword',
 
 'table_summary'		=>'Crossword puzzle with @largeur@ columns and @hauteur@ rows',
 

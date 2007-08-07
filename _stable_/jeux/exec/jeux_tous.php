@@ -13,13 +13,11 @@ function exec_jeux_tous(){
 	
 	
 	debut_boite_info();
-	echo icone_horizontale(_T('jeux:gerer_resultats'),generer_url_ecrire('jeux_gerer_resultats','tous=oui'),find_in_path('img/jeu-laurier.png'));
-	echo icone_horizontale(_T('jeux:configurer_jeux'),generer_url_ecrire('cfg','cfg=jeux'),find_in_path('img/jeu-cfg.png'));
 	echo icone_horizontale(_T('jeux:nouveau_jeu'),generer_url_ecrire('jeux_edit','nouveau=oui'),find_in_path('img/jeu-nouveau.png'));
+	echo icone_horizontale(_T('jeux:configurer_jeux'),generer_url_ecrire('cfg','cfg=jeux'),find_in_path('img/jeu-cfg.png'));
+	echo icone_horizontale(_T('jeux:gerer_resultats'),generer_url_ecrire('jeux_gerer_resultats','tous=oui'),find_in_path('img/jeu-laurier.png'));
 	fin_boite_info();
 	
-	
-		
 	
 	creer_colonne_droite();
 	debut_droite();
@@ -29,7 +27,7 @@ function exec_jeux_tous(){
 	
 	include_spip('public/assembler');
 	debut_cadre('liste');
-	echo recuperer_fond('fonds/jeux_tous',array('par'=>$par));
+	echo recuperer_fond('fonds/jeux_tous', array('par'=>$par));
 	fin_cadre();
 	
 	fin_cadre_relief();

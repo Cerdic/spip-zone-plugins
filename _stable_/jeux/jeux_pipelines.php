@@ -10,7 +10,6 @@
 #  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
 #--------------------------------------------------------------------------#
 
-include_spip('jeux_config');
 include_spip('jeux_utils');
 // tableau de parametres exploitables par les plugins
 global $jeux_config;
@@ -23,8 +22,8 @@ function jeux_pre($chaine, $indexJeux){
 	list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
 	list($chaine, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
 	
-	// ...et decoder le texte obtenu en fonction des signatures
-	$liste = jeux_inclure_et_decoder($chaine, $indexJeux);
+	// ...decoder le texte obtenu en fonction des signatures et inclure le jeu
+	$liste = jeux_liste_des_jeux($chaine, $indexJeux);
 	// calcul des fichiers necessaires pour le header
 	if(count($liste)) {
 		// on oblige qd meme jeux.css et layer.js si un jeu est detecte

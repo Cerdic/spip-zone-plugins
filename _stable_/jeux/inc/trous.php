@@ -130,7 +130,8 @@ function jeux_trous($texte, $indexJeux) {
 	$pied .= '<br /><div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
   } else {
       // On ajoute le score final
-      $pied .= jeux_afficher_score($scoreTROUS, $indexTrou)
+  		$id_jeu = _request('id_jeu');
+        $pied .= jeux_afficher_score($scoreTROUS, $indexTrou, $id_jeu)
   			. jeux_bouton_recommencer();
   }
   

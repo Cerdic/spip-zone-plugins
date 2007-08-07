@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'titre'		=>'Grille de mots-crois&eacute;s',
+'titre_court'		=>'Mots-crois&eacute;s',
 
 'table_summary'		=>'Grille de mots-crois&eacute;s de @largeur@ colonnes sur @hauteur@ lignes',
 

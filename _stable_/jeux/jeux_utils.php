@@ -9,6 +9,8 @@
 #  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
 #--------------------------------------------------------------------------#
 
+include_spip('jeux_config');
+
 // sacree compatibilite...
 if ($GLOBALS['spip_version_code']<1.92) {
 	define(_DIR_VAR, _DIR_IMG);
@@ -58,10 +60,10 @@ function jeux_config_reset() {
 // splitte le texte du jeu avec les separateurs concernes
 // et traite les parametres de config
 function jeux_split_texte($jeu, &$texte) {
-  global $jeux_separateurs;
+  global $jeux_caracteristiques;
   jeux_config_reset();
   $texte = '['._JEUX_TEXTE.']'.trim($texte).' ';
-  $expr = '/(\['.join('\]|\[', $jeux_separateurs[$jeu]).'\])/';
+  $expr = '/(\['.join('\]|\[', $jeux_caracteristiques['SEPARATEURS'][$jeu]).'\])/';
   $tableau = preg_split($expr, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);
 //  foreach($tableau as $i => $valeur) $tableau[$i] = preg_replace('/^\[(.*)\]$/', '\\1', trim($valeur));
   foreach($tableau as $i => $valeur) if (($i & 1) && preg_match('/^\[(.*)\]$/', trim($valeur), $reg)) {
@@ -136,20 +138,28 @@ function jeux_include_jeu($jeu, &$texte, $indexJeux) {
 	if (function_exists($fonc)) $texte = $fonc($texte, $indexJeux);
 }	
 
-// inclut et decode les jeux, si le module inc/lejeu.php est present
-// retourne la liste des jeux trouves
-function jeux_inclure_et_decoder(&$texte, $indexJeux) {
-	global $jeux_signatures;
+// decode les jeux, si le module inc/lejeu.php est present
+// retourne la liste des jeux trouves et inclut la bibliotheque si $indexJeux existe
+function jeux_liste_des_jeux(&$texte, $indexJeux=NULL) {
+	global $jeux_caracteristiques;
 	$liste = array();
-	foreach($jeux_signatures as $jeu=>$signatures) {
+	foreach($jeux_caracteristiques['SIGNATURES'] as $jeu=>$signatures) {
 		$ok = false;
 		foreach($signatures as $s) $ok |= (strpos($texte, "[$s]")!==false);
 		if ($ok) { 
-		 jeux_include_jeu($jeu, $texte, $indexJeux);
+		 if ($indexJeux) jeux_include_jeu($jeu, $texte, $indexJeux);
 		 $liste[]=$jeu;
 		}
 	}
 	return array_unique($liste);
+}
+
+function jeux_trouver_nom($texte) {
+	global $jeux_caracteristiques;
+	$liste = jeux_liste_des_jeux($texte);
+	foreach($liste as $i=>$jeu)
+		$liste[$i]=$jeux_caracteristiques['NOMS'][$jeu];
+	return join(', ', $liste);
 }
 
 // pour placer des commentaires

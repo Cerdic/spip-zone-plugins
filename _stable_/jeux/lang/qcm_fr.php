@@ -5,6 +5,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'qcm_titre' => "Voici un QCM",
+'titre' => "Questionnaire &agrave; Choix Multiples",
+'titre_court' => "QCM",
 
 );
 

@@ -1,16 +1,21 @@
 <B_resultats>
-<table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'><tr class="titrem">
-			<th>[(#ENV{par}|!=={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
-			<th>[(#ENV{par}|!=={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
-			<th>[(#ENV{par}|!=={resultat_court}|?{' '})<a href="[(#SELF|parametre_url{par,resultat_court})]">]<:jeux:resultats:>[(#ENV{par}|!=={resultat_court}|?{' '})</a>]</th>
-		</tr></thead>
+<table  class='arial2' cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
+<tr class="titrem" style="text-align:center">
+	<th>[(#ENV{par}|!=={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
+	<th>[(#ENV{par}|!={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_type:>[(#ENV{par}|!={id_jeu}|?{' '})</a>]</th>
+	<th>[(#ENV{par}|!=={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
+	<th>[(#ENV{par}|!=={resultat_court}|?{' '})<a href="[(#SELF|parametre_url{par,resultat_court})]">]<:jeux:resultats:>[(#ENV{par}|!=={resultat_court}|?{' '})</a>]</th>
+</tr></thead>
 #PAGINATION
 <BOUCLE_resultats(JEUX_RESULTATS) {id_auteur} {par #ENV{par}}{inverse #ENV{par}|=={id_jeu}|?{0,1}}{pagination 30}>
 <tr class ="tr_liste">
-	<td><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
-	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
-	<td>#RESULTAT_COURT</td>
+	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
+	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU"><BOUCLE_jeu(JEUX){id_jeu==#ID_JEU}>#NOM</BOUCLE_jeu></a></td>
+	<td style="text-align:center">[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
+	<td style="text-align:center">#RESULTAT_COURT</td>
 </tr>
 </BOUCLE_resultats>
 </table>
 </B_resultats>
+<br/><:jeux:aucun_resultat:>
+<//B_resultats>
