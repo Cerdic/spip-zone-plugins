@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Des jeux dans vos articles</nom>
 	<etat>test</etat>
-	<version>0.6.0</version>
+	<version>1.0.0</version>
 	<icon>img/jeux-48.png</icon>
 	<auteur>
 [Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net], novembre 2006
@@ -14,21 +14,19 @@ _ Mots crois&#233;s : Ma&#239;eul ROUQUETTE
 _ Diagrammes d'&#233;checs : Fran&#231;ois SCHREUER
 	</auteur>
 	<description>
-Des jeux avec Spip !
+Des jeux avec SPIP !
 ----
 Voici pour vous la possibilit&#233; d'ins&#233;rer dans vos articles des mots crois&#233;s, des sudokus, des devinettes, des blagues, des po&#233;sies, des QCM, des exercices &#224; trous, etc.
 
 Mettez une touche &#233;ducative et ludique &#224; votre site !
 
-Un exemple : 
-<quote><code><jeux>
-        [titre]
-        La devinette du jour
-        [devinette]
-        Comment appelle t-on un patron de la nouvelle &#233;conomie ?
-        [reponse]
-        Un e-responsable
-</jeux></code></quote>
+Deux solutions :
+- Des jeux cod&#233;s en clair dans les articles entre les balises &#60;jeux&#62; et &#60;/jeux&#62;.
+- Des jeux cod&#233;s dans l'espace priv&#233; et accessibles gr&#226;ce au mod&#232;le &#60;jeuXX&#62; o&#249; XX est l'identifiant du jeu.
+
+L'enregistrement et la gestion des scores n'est possible qu'en utilisant la seconde solution.
+
+Syntaxe compl&#232;te : [->http://www.spip-contrib.net/Des-jeux-dans-vos-articles].
 
 Ce plugin fonctionne de fa&#231;on optimale sur les squelettes disposant de la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
 
@@ -36,12 +34,9 @@ _ Si vous avez une version de Spip inf&#233;rieure ou &#233;gale &#224; {{1.9.1}
 _ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&#233;es sur votre server.
 _ Ce plugin est encore en &#233;volution, proc&#233;dez r&#233;guli&#232;rement &#224; vos mises &#224; jours.
   
-{{Important}} : afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (sommaires, rubriques, backends, ...), pensez bien :
-
--* soit &#224; placer une {{introduction}} dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
--* soit &#224; remplir le {{descriptif}} de l'article.
-
-Aide : [->http://www.spip-contrib.net/Des-jeux-dans-vos-articles]
+Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'affichage des solutions dans les sommaires, rubriques, backends, etc.), pensez bien :
+- soit &#224; placer une {{introduction}} dans votre article entre les balises &#60;intro&#62; et &#60;/intro&#62;,
+- soit &#224; remplir le {{descriptif}} de l'article.
 	</description>
 	<lien>[->http://www.spip-contrib.net/Des-jeux-dans-vos-articles]</lien> <!-- URI de documentation -->
 	<fonctions>jeux_fonctions.php</fonctions>
