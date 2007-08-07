@@ -53,10 +53,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'jeu_numero' 	=> 'Jeu num&eacute;ro @id@ (@nom@)',
 'jeu_numero_court' 	=> 'ID',
-'jeu_type' 	=> 'Type',
+'jeu_type'	=> 'Type',
+'jeu_titre'	=> 'Titre',
 
 'nouveau_jeu'	=> 'Nouveau jeu',
-'explication_jeu'=> 'Vous pouvez ins&eacute;rer des jeux selon la syntaxe d&eacute;crite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la documentation</a>.<br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
+'explication_jeu'=> 'Vous pouvez ins&eacute;rer des jeux selon la syntaxe d&eacute;crite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la&nbsp;documentation</a>.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
 'modifier_jeu'	=> 'Modifier le jeu num&eacute;ro @id@ (@nom@)',
 'jeu_court'	=> 'Jeu n&deg;@id@ (@nom@)',
 'modifier_ce_jeu'	=> 'Modifier ce jeu',
@@ -64,6 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'voir_jeu'			=> 'Voir le jeu',
 'jeux_tous'			=> 'Liste des jeux',
 'retourner_jeu'		=> 'Retourner au jeu',
+'jeu_titre_prive'	=> 'Titre priv&eacute;',
+'jeu_contenu'		=> 'Contenu du jeu',
 
 'derniere_modif'	=> 'Derni&egrave;re modification',
 'resultats'			=> 'R&eacute;sultats',

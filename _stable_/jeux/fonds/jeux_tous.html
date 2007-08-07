@@ -3,6 +3,7 @@
 <tr class="titrem" style="text-align:center">
 	<th>[(#ENV{par}|!={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!={id_jeu}|?{' '})</a>]</th>
 	<th>[(#ENV{par}|!={nom}|?{' '})<a href="[(#SELF|parametre_url{par,nom})]">]<:jeux:jeu_type:>[(#ENV{par}|!={nom}|?{' '})</a>]</th>
+	<th><:jeux:jeu_titre:></th>
 	<th>[(#ENV{par}|!={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]">]<:jeux:derniere_modif:>[(#ENV{par}|!={date}|?{' '})</a>]</th>
 	<th><:jeux:nb_resultats:></th>
 </tr></thead>
@@ -11,6 +12,7 @@
 <tr class ="tr_liste"  style="text-align:center" >
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#NOM</a></td>
+	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TITRE</a></td>
 	<td style="text-align:center">[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
 	<td style="text-align:center"><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats>[(#TOTAL_BOUCLE|!=0|?{' '})<a href="?exec=jeux_resultats_jeu&id_jeu=#ID_JEU">#TOTAL_BOUCLE</a>][(#TOTAL_BOUCLE|!=0|?{' '}|sinon{-})]<//B_resultats></td>
 </tr>
