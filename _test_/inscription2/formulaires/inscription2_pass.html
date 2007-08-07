@@ -54,10 +54,8 @@ function cryptage() {
 [(#CONFIG{inscription2/sexe}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label><strong><:inscription2:sexe:></strong></label>
-	<div class="select">
 	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="M" /> <:inscription2:masculin:>
 	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="F" /> <:inscription2:feminin:>
-	</div>
 </div>
 ]
 [(#CONFIG{inscription2/nom_famille}|=={on}|?{' ', ''})	
