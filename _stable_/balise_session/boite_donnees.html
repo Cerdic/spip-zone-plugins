@@ -1,0 +1,5 @@
+[<div class="syndic">
+	<h2 class="menu-titre">Liste des valeurs qui fonctionnent sur votre site</h2>
+	(#SESSION{statut}|=={0minirezo}|?{' '})
+	[(#SESSION|unserialize|liste_ul_li)]
+</div>]

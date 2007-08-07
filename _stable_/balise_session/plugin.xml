@@ -1,0 +1,14 @@
+<plugin>
+ 	<nom>Balise Session</nom>
+	<auteur>James, licence GNU/GPL</auteur>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>
+	Introduction d'une balise #SESSION<br />
+	[Page de test autodocument&#233;e->../spip.php?page=session]
+	</description>
+	<lien>http://www.spip-contrib.net/Balise-SESSION</lien>
+	<fonctions>fonctions_session.php</fonctions>
+	<prefix>BaliseSession</prefix>
+	<chemin dir='' />
+</plugin>
