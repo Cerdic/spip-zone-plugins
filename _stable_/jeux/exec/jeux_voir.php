@@ -77,7 +77,7 @@ function exec_jeux_voir(){
 	fin_cadre_relief();
 
 	$nb = spip_abstract_countsel("spip_jeux");
-	echo jeux_navigation_pagination($nb, 1, generer_url_ecrire('jeux_voir'), false, 'id_jeu');
+	echo jeux_navigation_pagination($nb);
 
 	fin_gauche();
 	fin_page();
