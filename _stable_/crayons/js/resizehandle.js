@@ -8,6 +8,7 @@ jQuery.fn.resizehandle = function() {
     var me = jQuery(this);
     me.after(
       jQuery('<div class="resizehandle"></div>')
+      .css({height:'16px',width:Math.max(me.width()-4,10)}) // bug MSIE si 100%
       .bind('mousedown', function(e) {
         var h = me.height();
         var y = e.clientY;

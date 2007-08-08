@@ -139,6 +139,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
           .addClass('crayon-has')
           .find('>.crayon-icones')
             .attr('rel','crayon_'+id_crayon);
+          if (jQuery.browser.msie) jQuery(me).css({'zoom':1});
           var pos = jQuery(me).offset({'scroll':false});
           jQuery('<div class="crayon-html" id="crayon_'+id_crayon+'"></div>')
           .css({

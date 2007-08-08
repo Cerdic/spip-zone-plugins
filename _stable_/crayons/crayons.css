@@ -62,6 +62,4 @@ img.crayon-edit, img.crayon-crayon {
 	background:transparent url("images/resizer.png") no-repeat scroll 45%;
 	cursor:s-resize;
 	font-size:0.1em;
-	height:16px;
-	width:100%;
 }
