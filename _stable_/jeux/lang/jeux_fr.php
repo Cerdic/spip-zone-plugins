@@ -63,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'modifier_jeu'	=> 'Modifier le jeu num&eacute;ro @id@ (@nom@)',
 'jeu_court'	=> 'Jeu n&deg;@id@ (@nom@)',
 'modifier_ce_jeu'	=> 'Modifier ce jeu',
-'pas_de_jeu'		=>"D&eacute;sol&eacute;, ce jeu n'existe pas",
 'voir_jeu'			=> 'Voir le jeu',
 'jeux_tous'			=> 'Liste des jeux',
 'retourner_jeu'		=> 'Retourner au jeu',
@@ -111,6 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sans_titre'	=> 'Sans titre priv&eacute;',
 'sans_nom'		=> 'Sans nom',
 'introuvable'	=> 'Aucun jeu dans le contenu !',
+'pas_de_jeu'	=> "D&eacute;sol&eacute;, ce jeu n'existe pas !",
+'pas_d_auteur'	=> "D&eacute;sol&eacute;, cet auteur est inconnu !",
 );
 
 

@@ -14,17 +14,15 @@ function exec_jeux_gerer_resultats(){
 	
 	$id_jeu 	= _request('id_jeu');
 	$id_auteur  = _request('id_auteur');
-//	$tous = _request('tous');
 
 	if ($id_jeu) { gerer_resultat_jeux($id_jeu,$bouton); return; }
 	if ($id_auteur) { gerer_resultats_auteur($id_auteur,$bouton); return; }
-	
-	//if ($tous == 'oui')
+	// ... et par defaut
 	gerer_resultat_tous($bouton);
 }
 
 function gerer_resultat_tous($bouton){
-	
+	// aïe, aïe, on efface tout !
 	if ($bouton == 'supprimer_confirmer'){
 		include_spip('base/jeux_supprimer');
 		jeux_supprimer_tout_tout();
@@ -34,7 +32,6 @@ function gerer_resultat_tous($bouton){
 
 	debut_page(_T("jeux:gerer_resultats_tout"));
 	debut_gauche();
-	
 	boite_infos_accueil();
 	
 	creer_colonne_droite();
@@ -43,30 +40,38 @@ function gerer_resultat_tous($bouton){
 	debut_cadre_relief();
 	gros_titre(_T("jeux:gerer_resultats_tout"));
 	formulaire_suppression($bouton, 'tout');
-	fin_cadre_relief();
 
+	fin_cadre_relief();
 	echo fin_gauche(), fin_page();
 }
 
 function gerer_resultats_auteur($id_auteur, $bouton){
-	
-	$requete	= spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
-	$nom 	= $requete['nom'];
-	// aïe, aïe, on efface tout
+	$requete = spip_fetch_array(spip_query("SELECT id_auteur,nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
+	$nom = $requete['nom'];
+	$id_auteur = $requete['id_auteur'];
+
+	if(!$id_auteur){
+		debut_page(_T("jeux:pas_d_auteur"));
+		gros_titre(_T("jeux:pas_d_auteur"));
+		fin_page();
+		return;
+	}
+
+	// aïe, aïe, on efface tout pour $id_auteur
 	if ($bouton == 'supprimer_confirmer'){
 		include_spip('base/jeux_supprimer');
 		jeux_supprimer_tout_auteur($id_auteur);
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('jeux_resultats_auteur', 'id_auteur='.$id_auteur, true));
 	}
-	
+
 	debut_page(_T("jeux:gerer_resultats_auteur",array('nom'=>$nom)));
-			
+		
 	debut_gauche();
-	
+
 	boite_infos_auteur($id_auteur, $nom);
 	boite_infos_accueil();
-	
+
 	creer_colonne_droite();
 	debut_droite();
 	if ($bouton == 'supprimer_tout') gros_titre(_T("jeux:confirmation"));
@@ -75,17 +80,11 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 	formulaire_suppression($bouton, 'auteur');
 
 	fin_cadre_relief();
-
 	echo fin_gauche(), fin_page();
 }
 
-
-
-
 function gerer_resultat_jeux($id_jeu, $bouton){
-	// determination du bouton enclencher
-	
-	$requete	= spip_fetch_array(spip_query("SELECT id_jeu,nom FROM spip_jeux WHERE id_jeu =".$id_jeu));
+	$requete	= spip_fetch_array(spip_query('SELECT id_jeu,nom FROM spip_jeux WHERE id_jeu ='.$id_jeu));
 	$id_jeu		= $requete['id_jeu'];
 	$nom		= $requete['nom'];
 	if(!$id_jeu){
@@ -94,7 +93,8 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 		fin_page();
 		return;
 	}
-	// aïe, aïe, on efface tout
+
+	// aïe, aïe, on efface tout pour $id_jeu
 	if ($bouton == 'supprimer_confirmer'){
 		include_spip('base/jeux_supprimer');
 		jeux_supprimer_tout_jeu($id_jeu);
@@ -105,7 +105,6 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 	debut_page(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$nom)));
 			
 	debut_gauche();
-	
 	boite_infos_jeu($id_jeu, $nom);
 	boite_infos_accueil();
 

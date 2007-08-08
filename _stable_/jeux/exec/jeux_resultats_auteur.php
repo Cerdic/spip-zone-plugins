@@ -9,9 +9,17 @@ function exec_jeux_resultats_auteur(){
 	$par = _request('par');
 	($par == '') ? $par='resultat_court' : $par = $par;
 	
-	$requete	= spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
-	$nom 	= $requete['nom'];
-	
+	$requete = spip_fetch_array(spip_query("SELECT id_auteur,nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
+	$nom = $requete['nom'];
+	$id_auteur = $requete['id_auteur'];
+
+	if(!$id_auteur){
+		debut_page(_T("jeux:pas_d_auteur"));
+		gros_titre(_T("jeux:pas_d_auteur"));
+		fin_page();
+		return;
+	}
+
 	debut_page(_T("jeux:resultats_auteur",array('nom'=>$nom)));
 			
 	debut_gauche();
