@@ -14,7 +14,7 @@
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#NOM</a></td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TITRE</a></td>
 	<td style="text-align:center">[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
-	<td style="text-align:center"><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats>[(#TOTAL_BOUCLE|!=0|?{' '})<a href="?exec=jeux_resultats_jeu&id_jeu=#ID_JEU">#TOTAL_BOUCLE</a>][(#TOTAL_BOUCLE|!=0|?{' '}|sinon{-})]<//B_resultats></td>
+	<td style="text-align:center"><BOUCLE_resultats(JEUX_RESULTATS){id_jeu}></BOUCLE_resultats>[(#TOTAL_BOUCLE|jeux_lien_jeu{jeux_resultats_jeu,#ID_JEU})]<//B_resultats></td>
 </tr>
 </BOUCLE_jeux>
 </table>

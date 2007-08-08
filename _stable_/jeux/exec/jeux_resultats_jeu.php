@@ -37,12 +37,11 @@ function exec_jeux_resultats_jeu(){
 	include_spip('public/assembler');
 	debut_cadre('liste');
 	echo recuperer_fond('fonds/resultats_jeu_detail', array('id_jeu'=>$id_jeu,'par'=>$par));
-	fin_cadre();
+	fin_cadre('liste');
 	
 	fin_cadre_relief();
-	fin_gauche();
-	fin_page();
-	}
+	echo fin_gauche(), fin_page();
+}
 
 
 ?>

@@ -40,6 +40,7 @@ function exec_jeux_voir(){
 	list($contenu, $id_jeu, $nom, $titre_prive, $date) =
 		array($requete['contenu'], $requete['id_jeu'], $requete['nom'], $requete['titre'], $requete['date']);
 	$titre_prive = propre($titre_prive);
+	include_spip('jeux_utils');
 	$titre_public = jeux_trouver_titre_public($contenu);
 	if($titre_prive=='') $titre_prive = _T('jeux:sans_titre');
 	if($titre_public) {
@@ -77,11 +78,10 @@ function exec_jeux_voir(){
 	fin_cadre_relief();
 
 	$nb = spip_abstract_countsel("spip_jeux");
-	echo jeux_navigation_pagination($nb);
+	if($nb>1) jeux_navigation_pagination($nb);
 
-	fin_gauche();
-	fin_page();
-	}
+	echo fin_gauche(), fin_page();
+}
 
 
 ?>

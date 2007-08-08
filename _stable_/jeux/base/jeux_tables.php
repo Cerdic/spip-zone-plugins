@@ -11,10 +11,12 @@ $table_des_tables['jeux_resultats'] = 'jeux_resultats';
 $jeux = array(
 	'id_jeu'	=> 'bigint(21) NOT NULL',
 	'date'		=> 'timestamp');
-if (isset($GLOBALS['meta']['jeux_base_version']))
-	$jeux = array_merge($jeux, array('nom'	=> 'text NOT NULL'));
-if (isset($GLOBALS['meta']['jeux_base_version']))
-	$jeux = array_merge($jeux, array('titre'	=> 'text NOT NULL'));
+if (isset($GLOBALS['meta']['jeux_base_version'])) {
+	$jeux = array_merge($jeux, array(
+		'nom'	=> 'text NOT NULL',
+		'titre'	=> 'text NOT NULL',
+	));
+}
 $jeux = array_merge($jeux, array(
 	'contenu'	=> 'text NOT NULL',
 	'statut'	=> "varchar(10) DEFAULT '0' NOT NULL",

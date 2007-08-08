@@ -10,25 +10,30 @@
 #--------------------------------------------------------------------------#
 
 include_spip('base/jeux_tables');
+
 function boucle_JEUX($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
-        
         $boucle->from[] =  "spip_jeux AS $id_table";
         //$boucle->where[] = "type='nl'";
         //$boucle->where[] = array("'='","'type'","'\"nl\"'"); 
         return calculer_boucle($id_boucle, $boucles);
 }
+
 function boucle_JEUX_RESULTATS($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
-        
         $boucle->from[] =  "spip_jeux_resultats AS $id_table";
         //$boucle->where[] = "type='nl'";
         //$boucle->where[] = array("'='","'type'","'\"nl\"'"); 
         return calculer_boucle($id_boucle, $boucles);
 }
 
+// filtre retournant un lien cliquable si $nb!=0, sinon un simple tiret
+function jeux_lien_jeu($nb='0', $exec='', $id_jeu=0) {
+	$lien = generer_url_ecrire($exec,'id_jeu='.$id_jeu);
+	return $nb=='0'?'-':"<a href='$lien'>$nb</a>";
+}
 // filtre qui evite d'afficher le resultat obtenu par certains plugins
 // grace aux espions : <!-- PLUGIN-DEBUT --> et <!-- PLUGIN-FIN -->
 // ou : <!-- PLUGIN-DEBUT-#xxxx --> et <!-- PLUGIN-FIN-#xxxx --> ou xxxx est le numero d'identification du plugin.

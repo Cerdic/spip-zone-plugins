@@ -27,11 +27,10 @@ function exec_jeux_resultats_auteur(){
 	include_spip('public/assembler');
 	debut_cadre('liste');
 	echo recuperer_fond('fonds/resultats_auteur_detail',array('id_auteur'=>$id_auteur,'par'=>$par));
-	fin_cadre();
+	fin_cadre('liste');
 	
 	fin_cadre_relief();
-	fin_gauche();
-	fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 

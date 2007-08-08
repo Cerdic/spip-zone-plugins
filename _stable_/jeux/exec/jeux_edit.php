@@ -21,14 +21,12 @@ function exec_jeux_edit(){
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu,true));
 	}
-		
-	
 	
 	$nouveau ? debut_page(_T('jeux:nouveau_jeu')) : debut_page(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$nom)));
 	
 	$requete = spip_fetch_array(spip_query("SELECT enregistrer_resultat,contenu,nom,titre FROM spip_jeux WHERE id_jeu =".$id_jeu));
 	$nom = $requete['nom'];
-	$titre = entites_html($requete['titre']);
+	$titre = $requete['titre']==_T('jeux:sans_titre')?'':entites_html($requete['titre']);
 	$contenu = entites_html(strip_tags($requete['contenu']));
 	$enregistrer_resultat  = $requete['enregistrer_resultat'];
 	
@@ -36,10 +34,8 @@ function exec_jeux_edit(){
 	debut_gauche();
 	debut_boite_info();
 	
-	if ($id_jeu){
-		
+	if ($id_jeu)
 		echo icone_horizontale(_T('jeux:retourner_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png'));
-		}
 	echo icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'));
 	fin_boite_info();
 
@@ -86,7 +82,7 @@ function jeux_ajouter_jeu($titre,$contenu, $enregistrer_resultat, $id_jeu=false)
 	include_spip('jeux_utils');
 	$nom = jeux_trouver_nom($contenu);
 	$nom = _q($nom==''?_T('jeux:jeu_vide'):$nom);
-	$titre = _q($titre);
+	$titre = _q($titre==''?_T('jeux:sans_titre'):$titre);
 	$contenu = _q("<jeux>$contenu</jeux>");
 	if (!$id_jeu) {
 		spip_query("INSERT into spip_jeux (statut,nom,titre,contenu,enregistrer_resultat) VALUES('publie',$nom,$titre,$contenu,'$enregistrer_resultat')");	

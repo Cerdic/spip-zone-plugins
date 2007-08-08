@@ -5,7 +5,7 @@ function jeux_install($install){
 	$version_base = $GLOBALS['jeux_base_version'];
 	switch($install) {
 		case 'test':
-			return isset($GLOBALS['meta']['jeux_base_version']) AND ($GLOBALS['meta']['jeux_base_version']>=$version_base);
+			return false;//isset($GLOBALS['meta']['jeux_base_version']) AND ($GLOBALS['meta']['jeux_base_version']>=$version_base);
 		case 'install':
 			jeux_verifier_base();
 			break;
@@ -43,7 +43,7 @@ function jeux_verifier_base(){
 				while ($row = spip_fetch_array($res))
 					spip_query("UPDATE spip_jeux SET nom='$sans' WHERE id_jeu=".$row['id_jeu']);
 			}
-			ecrire_meta('jeux_base_version', $current_version=$version_base, 'non');
+			ecrire_meta('jeux_base_version', $current_version=0.10, 'non');
 		}
 		if ($current_version<0.11){
 			// ajout du champ 'titre' a la table spip_jeux, si pas deja existant
