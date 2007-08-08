@@ -40,6 +40,7 @@ function exec_jeux_resultats_jeu(){
 	fin_cadre('liste');
 	
 	fin_cadre_relief();
+	echo jeux_navigation_pagination();
 	echo fin_gauche(), fin_page();
 }
 

@@ -4,35 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('exec/inc_boites_infos');
 
-// essai de pagination. A revoir si certains jeux sont mis a la poubelle !
-function jeux_navigation_pagination($num_rows) {
-	$texte = ''; $href = 'jeux_voir'; $tmp_var = 'id_jeu'; $nb_aff = 1;
-	$self = self();
-	$deb_aff = isset($tmp_var) ? intval(_request($tmp_var)) : 0;
-
-	for ($i = 0; $i < $num_rows; $i += $nb_aff){
-		$deb = $i + 1;
-		// Pagination : si on est trop loin, on met des '...'
-		if (abs($deb-$deb_aff)>10) {
-			if ($deb<$deb_aff) {
-				if (!isset($premiere)) { $premiere = '1 ... '; $texte .= $premiere; }
-			} else {
-				$derniere = ' | ... '.$num_rows; $texte .= $derniere; break;
-			}
-		} else {
-			$fin = $i + $nb_aff;
-			if ($fin > $num_rows) $fin = $num_rows;
-			if ($deb > 1) $texte .= " |\n";
-			if ($deb_aff >= $deb AND $deb_aff <= $fin) $texte .= "<b>$deb</b>";
-			else {
-				$script = parametre_url($self, $tmp_var, $deb);
-				$texte .= "<a href=\"$script\">$deb</a>";
-			}
-		}
-	}
-	return $texte;
-}
-
 function exec_jeux_voir(){
 	$id_jeu = _request('id_jeu');
 	
@@ -76,10 +47,7 @@ function exec_jeux_voir(){
 	echo '<br />', $contenu;
 
 	fin_cadre_relief();
-
-	$nb = spip_abstract_countsel("spip_jeux");
-	if($nb>1) jeux_navigation_pagination($nb);
-
+	echo jeux_navigation_pagination();
 	echo fin_gauche(), fin_page();
 }
 

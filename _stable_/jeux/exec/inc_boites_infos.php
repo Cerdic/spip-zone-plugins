@@ -10,6 +10,38 @@ if(!function_exists('spip_abstract_countsel')) {
 	}
 }
 
+// essai de pagination. A virualiser si certains jeux sont mis a la poubelle !
+function jeux_navigation_pagination() {
+	$num_rows = spip_abstract_countsel("spip_jeux");
+	if(!$num_rows) return '';
+	
+	$texte = ''; $href = 'jeux_voir'; $tmp_var = 'id_jeu'; $nb_aff = 1;
+	$self = self();
+	$deb_aff = isset($tmp_var) ? intval(_request($tmp_var)) : 0;
+
+	for ($i = 0; $i < $num_rows; $i += $nb_aff){
+		$deb = $i + 1;
+		// Pagination : si on est trop loin, on met des '...'
+		if (abs($deb-$deb_aff)>10) {
+			if ($deb<$deb_aff) {
+				if (!isset($premiere)) { $premiere = '1 ... '; $texte .= $premiere; }
+			} else {
+				$derniere = ' | ... '.$num_rows; $texte .= $derniere; break;
+			}
+		} else {
+			$fin = $i + $nb_aff;
+			if ($fin > $num_rows) $fin = $num_rows;
+			if ($deb > 1) $texte .= " |\n";
+			if ($deb_aff >= $deb AND $deb_aff <= $fin) $texte .= "<b>$deb</b>";
+			else {
+				$script = parametre_url($self, $tmp_var, $deb);
+				$texte .= "<a href=\"$script\">$deb</a>";
+			}
+		}
+	}
+	return $texte;
+}
+
 function boite_infos_auteur($id_auteur, $nom) {
 	debut_boite_info();
 	echo "<strong>$nom</strong><br />",

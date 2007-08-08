@@ -45,8 +45,7 @@ function gerer_resultat_tous($bouton){
 	formulaire_suppression($bouton, 'tout');
 	fin_cadre_relief();
 
-	fin_gauche();
-	fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 function gerer_resultats_auteur($id_auteur, $bouton){
@@ -77,9 +76,8 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 
 	fin_cadre_relief();
 
-	fin_gauche();
-	fin_page();
-	}
+	echo fin_gauche(), fin_page();
+}
 
 
 
@@ -120,8 +118,7 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 	formulaire_suppression($bouton, 'jeu'); 
 	
 	fin_cadre_relief();
-	fin_gauche();
-	fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 function formulaire_suppression($bouton, $type){
