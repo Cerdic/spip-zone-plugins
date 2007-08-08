@@ -89,6 +89,9 @@ function inscription2_verifier_base(){
 				$desc['field'][$cle]='';
 			}
 		}
+		if (!lire_config('plugin/SPIPLISTES')){
+			spip_query('DROP TABLE spip_auteurs_elargis');
+		}
 		effacer_meta('inscription2');
 		effacer_meta('inscription2_version');
 		ecrire_metas();

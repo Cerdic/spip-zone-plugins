@@ -36,16 +36,13 @@ function inscription2_verifier_tables(){
 		}
 	}
 	$listes = lire_config('plugin/SPIPLISTES');
-	if(isset($listes) and !isset($desc['field']['spip_listes_format']))
+	if($listes and !isset($desc['field']['spip_listes_format']))
 		spip_query("ALTER TABLE `".$table_nom."` ADD `spip_listes_format` VARCHAR( 8 ) DEFAULT 'non' NOT NULL");
-	
 }
 
 function n_to_br($texte){
-	
 	$texte = str_replace("\n", "<br />", $texte);
 	return $texte;
-	
 }
 
 ?>
