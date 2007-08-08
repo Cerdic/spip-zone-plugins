@@ -1,0 +1,28 @@
+<plugin>
+	<nom>
+	Porfolio en innerfade
+	</nom>
+	<auteur>Alexandra
+	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL pour la partie spip
+	</auteur>
+	<version>
+	0.0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<icon>
+	_img/truc.gif
+	</icon>
+	<description>
+Ce plugin fournit des modeles produisant des diaporamas en jquery innerfade
+[Jquery Innerfade->http://medienfreunde.com/lab/innerfade/]
+
+	</description>
+	<lien>
+	[Documentation sur contrib->http://www.spip-contrib.net/]
+	</lien>
+	<prefix>
+	innerfade
+	</prefix>
+</plugin>

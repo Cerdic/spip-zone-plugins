@@ -1,0 +1,41 @@
+[(#REM)
+	Documents en innerfade diaporama
+	Modele SPIP fait par Alexandra Guiderdoni d'apres InnerFade with JQuery http://medienfreunde.com/lab/innerfade/
+	http://medienfreunde.com/stats/getfile.php?id=3 pour recuper le zip le jquery.innerfade.zip
+	<template><article1|innerfade></template>]
+	
+[(#REM)
+	Modele <article1|innerfade> : diaporama avec les images en portfolio
+	#MODELE{article_innerfade}]
+	
+<script language="javascript" type="text/javascript" src="#CHEMIN{js/slideshow.js}"></script>
+<!-- Penser a mettre dans le repertoire squelettes un dossier js avec le script jquery.innerfade.js pour que le modele fonctionne -->
+
+
+
+<!-- pas besoin de jquery puisque c'est natif dans spip desormais <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.js}"></script> -->
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$	('#slideshow').slideshow({
+		timeout: 4000,
+		type: 'random'
+	});
+});
+</script>
+
+
+
+
+<div id="slideshow">
+
+
+
+<BOUCLE_PORFOLIO2(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
+
+
+[(#FICHIER|image_reduire{433,161}|inserer_attribut{alt,slideshow})]
+
+</BOUCLE_PORFOLIO2>	
+
+</div>	

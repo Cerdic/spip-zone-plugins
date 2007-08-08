@@ -1,0 +1,60 @@
+[(#REM)
+	Documents en innerfade diaporama
+	Modele SPIP fait par Alexandra Guiderdoni d'apres InnerFade with JQuery http://medienfreunde.com/lab/innerfade/
+	http://medienfreunde.com/stats/getfile.php?id=3 pour recuper le zip le jquery.innerfade.zip
+	<template><article1|innerfade></template>]
+	
+[(#REM)
+	Modele <article1|innerfade> : diaporama avec les images en portfolio
+	#MODELE{article_innerfade}]
+	
+<script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.innerfade.js}"></script>
+<!-- Penser a mettre dans le repertoire squelettes un dossier js avec le script jquery.innerfade.js pour que le modele fonctionne -->
+
+
+
+<!-- pas besoin de jquery puisque c'est natif dans spip desormais <script language="javascript" type="text/javascript" src="#CHEMIN{js/jquery.js}"></script> -->
+
+<script type="text/javascript">
+ $(document).ready(
+				function(){
+					$('#news').innerfade({
+						animationtype: 'slide',
+						speed: 750,
+						timeout: 2000,
+						type: 'random',
+						containerheight: '1em'
+					});
+					
+					$('ul#portfolio').innerfade({
+						speed: 'slow',
+						timeout: 4000,
+						type: 'sequence',
+						containerheight: '500px'
+						});
+					
+					$('.fade').innerfade({
+						speed: 'slow',
+						timeout: 1000,
+						type: 'sequence',
+						containerheight: '1.5em'
+					});
+
+			});
+			
+</script>
+<ul id="portfolio" style="list-style-type: none ;">
+<BOUCLE_PORFOLIO2(DOCUMENTS){id_article}{mode=document}{extension==jpg|gif|png} {par num titre, date}>
+<li>
+<div class="diapo">
+<img src="[(#URL_DOCUMENT||image_reduire{350,400}|extraire_attribut{src})]" alt=" #TITRE" /> 
+<div class="diapo">
+[<h3>(#TITRE|supprimer_numero)</h3>]
+[(#DESCRIPTIF|paragrapher)]
+</div>
+</div>
+ </li>
+</BOUCLE_PORFOLIO2>	
+</ul>
+
+				
