@@ -154,6 +154,7 @@ function jeux_liste_des_jeux(&$texte, $indexJeux=NULL) {
 	return array_unique($liste);
 }
 
+// retourne les types de jeu trouves dans le $texte
 function jeux_trouver_nom($texte) {
 	global $jeux_caracteristiques;
 	$liste = jeux_liste_des_jeux($texte);
@@ -161,6 +162,18 @@ function jeux_trouver_nom($texte) {
 		$liste[$i]=$jeux_caracteristiques['NOMS'][$jeu];
 	return join(', ', $liste);
 }
+
+// retourne le titre public, si le separateur [titre] est present
+function jeux_trouver_titre_public($texte) {
+  $titre_public = false;
+  // parcourir tous les #SEPARATEURS
+  $tableau = jeux_split_texte('la_totale', $texte);
+  foreach($tableau as $i => $valeur) if ($i & 1) {
+	 if ($valeur==_JEUX_TITRE) $titre_public = $tableau[$i+1];
+  }
+  return $titre_public;
+}
+
 
 // pour placer des commentaires
 function jeux_rem($rem, $index=false, $jeu='') {

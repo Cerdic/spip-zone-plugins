@@ -3,7 +3,7 @@
 <tr class="titrem" style="text-align:center">
 	<th>[(#ENV{par}|!=={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
 	<th>[(#ENV{par}|!={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_type:>[(#ENV{par}|!={id_jeu}|?{' '})</a>]</th>
-	<th><:jeux:jeu_titre:></th>
+	<th><:jeux:jeu_titre_prive:></th>
 	<th>[(#ENV{par}|!=={date}|?{' '})<a href="[(#SELF|parametre_url{par,date})]">]<:date:>[(#ENV{par}|!=={date}|?{' '})</a>]</th>
 	<th>[(#ENV{par}|!=={resultat_court}|?{' '})<a href="[(#SELF|parametre_url{par,resultat_court})]">]<:jeux:resultat:>[(#ENV{par}|!=={resultat_court}|?{' '})</a>]</th>
 </tr></thead>

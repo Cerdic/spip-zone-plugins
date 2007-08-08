@@ -67,6 +67,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jeux_tous'			=> 'Liste des jeux',
 'retourner_jeu'		=> 'Retourner au jeu',
 'jeu_titre_prive'	=> 'Titre priv&eacute;',
+'jeu_titre_public'	=> 'Titre public',
+'jeu_titre_prive_'	=> 'Titre priv&eacute; :',
+'jeu_titre_public_'	=> 'Titre public :',
 'jeu_contenu'		=> 'Contenu du jeu',
 'jeu_vide'			=> 'VIDE',
 

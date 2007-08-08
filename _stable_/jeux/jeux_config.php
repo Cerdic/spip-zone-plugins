@@ -103,6 +103,12 @@ $jeux_caracteristiques = array(
 
 );
 
+// addition de tous les separateurs
+$temp = array();
+foreach($jeux_caracteristiques['SEPARATEURS'] as $sep) $temp=array_merge($temp, $sep);
+$jeux_caracteristiques['SEPARATEURS']['la_totale'] = array_unique($temp);
+unset($temp);
+
 // liste manuelle des css ou js a placer dans le header prive
 // ca peut toujours servir pour les controles...
 // dossiers : jeux/style/ et jeux/javascript/

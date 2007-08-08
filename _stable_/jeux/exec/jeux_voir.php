@@ -8,10 +8,15 @@ function exec_jeux_voir(){
 	$id_jeu = _request('id_jeu');
 	
 	$requete = spip_fetch_array(spip_query("SELECT contenu,id_jeu,nom,titre,date FROM spip_jeux WHERE id_jeu =".$id_jeu));
-	list($contenu, $id_jeu, $nom, $titre, $date) =
+	list($contenu, $id_jeu, $nom, $titre_prive, $date) =
 		array($requete['contenu'], $requete['id_jeu'], $requete['nom'], $requete['titre'], $requete['date']);
-	$titre = propre($titre);
-	if($titre=='') $titre = _T('jeux:sans_titre');
+	$titre_prive = propre($titre_prive);
+	$titre_public = jeux_trouver_titre_public($contenu);
+	if($titre_prive=='') $titre_prive = _T('jeux:sans_titre');
+	if($titre_public) {
+		$titre_prive = _T('jeux:jeu_titre_prive_') . ' ' . $titre_prive;
+		$titre_public = _T('jeux:jeu_titre_public_') . ' ' . $titre_public;
+	}
 	$contenu = $nom==_T('jeux:jeu_vide')?_T('jeux:introuvable'):propre($contenu);
 	
 	if(!$id_jeu){
@@ -36,8 +41,9 @@ function exec_jeux_voir(){
 	debut_droite();
 	debut_cadre_relief();
 	gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$nom)));
-	echo "<div style='font-weight:bold'>$titre</div><br />";
-	echo propre($contenu);
+	echo "<div style='font-weight:bold'>$titre_prive</div>";
+	if($titre_public) echo "<div style='font-weight:bold'>$titre_public</div>";
+	echo '<br />', $contenu;
 
 	fin_cadre_relief();
 	fin_gauche();
