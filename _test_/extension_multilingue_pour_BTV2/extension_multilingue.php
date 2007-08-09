@@ -30,7 +30,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	
 			if (!$row) return "";
 	
-			$titre = $row['titre'];
+			$titre = str_replace("\"","'",$row['titre']);
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
 		}
@@ -57,9 +57,9 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	
 			if (!$row) return "";
 	
-			$surtitre = $row['surtitre'];
-			$titre = $row['titre'];
-			$soustitre = $row['soustitre'];
+			$surtitre = str_replace("\"","'",$row['surtitre']);
+			$titre = str_replace("\"","'",$row['titre']);
+			$soustitre = str_replace("\"","'",$row['soustitre']);
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
 			$chapo = $row['chapo'];
@@ -82,15 +82,15 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	
 			if (!$row) return "";
 	
-			$titre = $row['titre'];
+			$titre = str_replace("\"","'",$row['titre']);
 			$texte = $row['texte'];
-			$lien_titre = $row['lien_titre'];
+			$lien_titre = str_replace("\"","'",$row['lien_titre']);
 			
 		}
 	}
 	else if ($_GET['exec'] == "configuration")
 	{
-		$titre = $GLOBALS['meta']["nom_site"];
+		$titre = str_replace("\"","'",$GLOBALS['meta']["nom_site"]);
 		$descriptif = $GLOBALS['meta']["descriptif_site"];
 
 	}
@@ -107,7 +107,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe_tmp");
 
 			while($row = spip_fetch_array($result_groupes)) {
-				$titre = $row['titre'];
+				$titre = str_replace("\"","'",$row['titre']);
 				$descriptif = $row['descriptif'];
 				$texte = $row['texte'];
 				
@@ -122,7 +122,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		$id_mot_tmp = intval($_GET['id_mot']);
 		$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot='$id_mot_tmp'"));
 		 if ($row) {
-			$titre = $row['titre'];
+			$titre = str_replace("\"","'",$row['titre']);
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
 			
@@ -144,7 +144,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($_GET['id_syndic']) );
 
 		if ($row = spip_fetch_array($result)) {
-			$titre = $row["nom_site"];
+			$titre = str_replace("\"","'",$row["nom_site"]);
 			$descriptif = $row["descriptif"];
 			
 		}
