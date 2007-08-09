@@ -175,7 +175,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				";
 			}
 			
-			$ret .= "$('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>');});";
+			$ret .= "if (valeur".$champ_fin." != '') $('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('input[@name=".$champ_fin."]').val('');});";
 			
 			$ret .=	"});</script>";
 	
@@ -218,7 +218,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				";
 			}
 			
-			$ret .= "$('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>');});";
+			$ret .= "if (valeur".$champ_fin." != '') $('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('textarea[@name=".$champ_fin."]').val('');});";
 			
 			$ret .=	"});</script>";
 
@@ -262,7 +262,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				";
 			}
 			
-			$ret .= "$('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>');});";
+			$ret .= "if (valeur".$champ_fin." != '') $('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('textarea[@name=".$champ_fin."]').val('');});";
 			
 			$ret .=	"});</script>";
 
@@ -303,7 +303,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				";
 			}
 			
-			$ret .= "$('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>');});";
+			$ret .= "if (valeur".$champ_fin." != '') $('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('input[@name=".$champ_fin."]').val('');});";
 			
 			$ret .=	"});</script>";
 
@@ -346,7 +346,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				";
 			}
 			
-			$ret .= "$('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>');});";
+			$ret .= "if (valeur".$champ_fin." != '') $('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('input[@name=".$champ_fin."]').val('');});";
 			
 			$ret .=	"});</script>";
 
@@ -389,7 +389,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				";
 			}
 			
-			$ret .= "$('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>');});";
+			$ret .= "if (valeur".$champ_fin." != '') $('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('input[@name=".$champ_fin."]').val('');});";
 			
 			$ret .=	"});</script>";
 			$ret .= "
@@ -430,7 +430,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				";
 			}
 			
-			$ret .= "$('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>');});";
+			$ret .= "if (valeur".$champ_fin." != '') $('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('textarea[@name=".$champ_fin."]').val('');});";
 			
 			$ret .=	"});</script>";
 
@@ -471,7 +471,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				";
 			}
 			
-			$ret .= "$('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>');});";
+			$ret .= "if (valeur".$champ_fin." != '') $('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('textarea[@name=".$champ_fin."]').val('');});";
 			
 			$ret .=	"});</script>";
 
@@ -541,6 +541,18 @@ $newtab="";
 		if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_descriptif_typo_partout') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");";	
+		}
+		if ($_GET['exec'] == "articles_edit")
+		{
+			$newtab .= "$('textarea[@id=texte1]').css(\"display\", \"none\");$('textarea[@id=texte1]').val('');";
+			$newtab .= "$('textarea[@id=texte2]').css(\"display\", \"none\");$('textarea[@id=texte2]').val('');";
+			$newtab .= "$('textarea[@id=texte3]').css(\"display\", \"none\");$('textarea[@id=texte3]').val('');";
+			$newtab .= "$('textarea[@id=texte4]').css(\"display\", \"none\");$('textarea[@id=texte4]').css(\"display\", \"none\");$('textarea[@id=texte4]').val('');";
+			$newtab .= "$('textarea[@id=texte5]').css(\"display\", \"none\");$('textarea[@id=texte5]').val('');";
+			$newtab .= "$('textarea[@id=texte6]').css(\"display\", \"none\");$('textarea[@id=texte6]').val('');";
+			$newtab .= "$('textarea[@id=texte7]').css(\"display\", \"none\");$('textarea[@id=texte7]').val('');";
+			$newtab .= "$('textarea[@id=texte8]').css(\"display\", \"none\");$('textarea[@id=texte8]').val('');";
+			$newtab .= "$('textarea[@id=texte9]').css(\"display\", \"none\");$('textarea[@id=texte9]').val('');";
 		}
 		if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_chapo_typo_partout') == "on"))
 		{
