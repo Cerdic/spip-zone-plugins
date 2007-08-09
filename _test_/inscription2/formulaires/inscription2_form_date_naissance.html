@@ -1,11 +1,11 @@
-<select name="jour" id="jour">
+<select name="jour" id="jour" class="forml">
 	<?php
 	for ($i=1;$i<=31;$i++)
 		echo "<option>$i</option>\n";
 	?>
 	</select> 
 	
-	<select name="mois" id="mois">
+	<select name="mois" id="mois" class="forml">
 	<option value='01'><:inscription2:janvier:></option>
 	<option value='02'><:inscription2:fevrier:></option>
 	<option value='03'><:inscription2:mars:></option>
@@ -20,7 +20,7 @@
 	<option value='12'><:inscription2:decembre:></option>
 	</select>
 	
-	<select name="annee" id="annee">
+	<select name="annee" id="annee" class="forml">
 	<?php
 	$today_year=date('Y');
 	for ($i=$today_year;$i>=$today_year-100;$i--)

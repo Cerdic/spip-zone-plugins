@@ -49,12 +49,14 @@
 <div[ (#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="nom_famille"><strong><:inscription2:nom_famille:></strong></label>
 	<input type="text" class="forml" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" />
+	<br class="nettoyeur" />
 </div>
 ]
 [(#CONFIG{inscription2/prenom}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="prenom"><strong><:inscription2:prenom:></strong></label>
 	<input type="text" class="forml" name="prenom" id="prenom" value="#ENV{prenom}" />
+	<br class="nettoyeur" />
 </div>
 ]
 
@@ -70,6 +72,7 @@
 <div class="textarea[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse"><strong><:inscription2:adresse:></strong></label>
 	<textarea name="adresse" class="forml" id="adresse" value="#ENV{adresse}"></textarea>
+	<br class="nettoyeur" />
 </div>
 ]
 
@@ -77,6 +80,7 @@
 <div[ (#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="code_postal"><strong><:inscription2:code_postal:></strong></label>
 	<input type="text" class="forml" name="code_postal" id="code_postal" value="#ENV{code_postal}" />
+	<br class="nettoyeur" />
 </div>
 ]
 
@@ -84,6 +88,7 @@
 <div[ (#CONFIG{inscription2/ville_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="ville"><strong><:inscription2:ville:></strong></label>
 	<input type="text" class="forml" name="ville" id="ville" value="#ENV{ville}" />
+	<br class="nettoyeur" />
 </div>
 ]
 
@@ -91,6 +96,7 @@
 <div[ (#CONFIG{inscription2/pays_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="pays"><strong><:inscription2:pays:></strong></label>
 	<INCLURE{fond=formulaires/inscription2_pays}>
+	<br class="nettoyeur" />
 </div>
 ]
 
@@ -99,18 +105,21 @@
 <div[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="telephone"><strong><:inscription2:telephone:></strong></label>
 	<input type="text" class="forml" name="telephone" id="telephone" value="#ENV{telephone}" />
+	<br class="nettoyeur" />
 </div>
 ]
 [(#CONFIG{inscription2/fax}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/fax_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="fax"><strong><:inscription2:fax:></strong></label>
 	<input type="text" class="forml" name="fax" id="fax" value="#ENV{fax}" />
+	<br class="nettoyeur" />
 </div>
 ]
 [(#CONFIG{inscription2/mobile}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="mobile"><strong><:inscription2:mobile:></strong></label>
 	<input type="text" class="forml" name="mobile" id="mobile" value="#ENV{mobile}" />
+	<br class="nettoyeur" />
 </div>
 ]
 
@@ -118,6 +127,7 @@
 <div class="grand_select[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
 	<label><strong><:inscription2:commentaire:></strong></label>
 	<textarea name="commentaire" class="forml" id="commentaire">#ENV{divers}</textarea>	
+	<br class="nettoyeur" />
 </div>
 ]
 
@@ -125,12 +135,14 @@
 <div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})] style="padding-top:50px;">
 	<label for="nom"><strong><:inscription2:nom:> (<:inscription2:nom_explication:>)</strong></label>
 	<input type="text" class="forml" name="nom" id="nom" value="#ENV{nom}" />
+	<br class="nettoyeur" />
 </div>
 ]
 [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="username"><strong><:inscription2:username:></strong></label>
 	<input type="text" class="forml" name="username" id="username" value="#ENV{login}" />
+	<br class="nettoyeur" />
 </div>
 ]
 
@@ -138,6 +150,7 @@
 <div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="email"><strong><:inscription2:email:></strong></label>
 	<input type="text" class="forml" name="email" id="email" value="#ENV{email}" />
+	<br class="nettoyeur" />
 </div>
 ]
 

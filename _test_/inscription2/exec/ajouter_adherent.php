@@ -19,10 +19,10 @@ function exec_ajouter_adherent() {
 		exit;
 	}
 	
-	debut_page(_T('inscription2:gestion_adherents'), "", "");
+	echo debut_page(_T('inscription2:gestion_adherents'), "", "");
 	
 	echo recuperer_fond('inc/nouveau_adherent');
 	
-	fin_page();
+	echo fin_page();
 }
 ?>

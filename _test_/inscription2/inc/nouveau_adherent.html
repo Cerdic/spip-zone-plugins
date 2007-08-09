@@ -1,8 +1,8 @@
 [<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)"/>]
 
 <?php
-	debut_gauche();
-	debut_boite_info();
+	echo debut_gauche();
+	echo debut_boite_info();
 ?>
 <div class="raccourcis">
 	<strong><:inscription2:raccourcis:></strong>
@@ -12,11 +12,12 @@
 	</ul>
 </div>
 <?php
-	fin_boite_info();
-	debut_droite();
-	debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', $return = false, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
+	echo fin_boite_info();
+	echo debut_droite();
+	echo debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', $return = false, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
 ?>
 	#FORMULAIRE_INSCRIPTION2_PASS
 <?php
-	fin_cadre_sous_rub();
+	echo fin_cadre_sous_rub();
+	echo fin_gauche();
 ?>
