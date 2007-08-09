@@ -128,14 +128,14 @@ function typo_partout_insertion_in_body_prive ($texte)
 	if (lire_config('typo_partout/breves_titre_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.breves').find('#barre_typo_breve_titre').insertBefore(\"input[@name=titre]\");
-		$('body.breves').find('#barre_typo_breve_titre').css(\"display\",\"block\");
-		$('body.breves').find('form[textarea]').attr('name', 'formulaire_breve');";
+		$('body.breves').find('#barre_typo_breve_titre').css(\"display\",\"block\");";
+		//$('body.breves').find('form[textarea]').attr('name', 'formulaire_breve');";
 	}
 	if (lire_config('typo_partout/breves_lien_typo_partout') == "on")
 	{
 		$activer_barres .= "$('body.breves').find('#barre_typo_breve_lien').insertBefore(\"input[@name=lien_titre]\");
-		$('body.breves').find('#barre_typo_breve_lien').css(\"display\",\"block\");
-		$('body.breves').find('form[textarea]').attr('name', 'formulaire_breve');";
+		$('body.breves').find('#barre_typo_breve_lien').css(\"display\",\"block\");";
+		//$('body.breves').find('form[textarea]').attr('name', 'formulaire_breve');";
 	}
 	
 	
@@ -269,11 +269,11 @@ function typo_partout_insertion_in_body_prive ($texte)
 	//breves
 	if (($_GET['exec'] == "breves_edit") && (lire_config('typo_partout/breves_titre_typo_partout') == "on"))		
 	{
-		$barre_temporaire .= "<div id=\"barre_typo_breve_titre\" style=\"display: none;\">".afficher_barre('document.formulaire_breve.titre')."</div>";
+		$barre_temporaire .= "<div id=\"barre_typo_breve_titre\" style=\"display: none;\">".afficher_barre('document.formulaire.titre')."</div>";
 	}
 	if (($_GET['exec'] == "breves_edit") && (lire_config('typo_partout/breves_lien_typo_partout') == "on"))		
 	{
-		$barre_temporaire .= "<div id=\"barre_typo_breve_lien\" style=\"display: none;\">".afficher_barre('document.formulaire_breve.lien_titre')."</div>";
+		$barre_temporaire .= "<div id=\"barre_typo_breve_lien\" style=\"display: none;\">".afficher_barre('document.formulaire.lien_titre')."</div>";
 	}
 
 	//auteurs
