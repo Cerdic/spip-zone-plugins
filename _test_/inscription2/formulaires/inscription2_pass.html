@@ -4,7 +4,6 @@
 [(#REM) ------------------------ VALIDATION JAVASCRIPT jquery-plugin-validation ------------------------ ]
 <script src="#CHEMIN{javascript/jquery.validate.js}" type="text/javascript"></script>
 #INCLURE{fond=formulaires/inscription2_validation.js}
-<link rel="stylesheet" type="text/css" href="#CHEMIN{css/inscription2_forms.css}">
 
 <script type="text/javascript">
 function cryptage() {
@@ -54,8 +53,8 @@ function cryptage() {
 [(#CONFIG{inscription2/sexe}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label><strong><:inscription2:sexe:></strong></label>
-	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="M" /> <:inscription2:masculin:>
-	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="F" /> <:inscription2:feminin:>
+	<input name="sexe" style="display:inline;float:none;width:auto" type="radio" value="M" /> <:inscription2:masculin:>
+	<input name="sexe" style="display:inline;float:none;width:auto" type="radio" value="F" /> <:inscription2:feminin:>
 </div>
 ]
 [(#CONFIG{inscription2/nom_famille}|=={on}|?{' ', ''})	

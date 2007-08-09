@@ -28,6 +28,10 @@
 		inscription2_mes_fonctions.php
 	</fonctions>
 	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inscription2_ajouter_onglets.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>

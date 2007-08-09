@@ -16,6 +16,14 @@ function Inscription2_ajouter_boutons($boutons_admin){
 	return $boutons_admin;
 }
 
+function Inscription2_header_prive($flux){
+	if (_request('exec')=='ajouter_adherent'){
+		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_INSCRIPTION2."css/inscription2_forms.css' type='text/css' media='all' />\n";
+		$flux .= "<link rel='stylesheet' href='".direction_css(_DIR_PLUGIN_INSCRIPTION2."css/inscription2.css")."' type='text/css' media='all' />\n";
+	}
+	return $flux;
+}
+
 function Inscription2_affiche_milieu($flux){
 	if ($GLOBALS['spip_version_code']<=1.9256){
 		switch($flux['args']['exec']) {	
