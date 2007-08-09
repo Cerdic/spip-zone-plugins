@@ -40,8 +40,8 @@
 <div[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label><strong><:inscription2:sexe:></strong></label>
 	<div class="select">
-	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="M" /> <:inscription2:masculin:>
-	<input name="sexe" style="display:inline;float:none;width:10px" type="radio" value="F" /> <:inscription2:feminin:>
+	<input name="sexe" style="display:inline;float:none;width:auto" type="radio" value="M" /> <:inscription2:masculin:>
+	<input name="sexe" style="display:inline;float:none;width:auto" type="radio" value="F" /> <:inscription2:feminin:>
 	</div>
 </div>
 ]
@@ -71,7 +71,7 @@
 [(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})	
 <div class="textarea[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse"><strong><:inscription2:adresse:></strong></label>
-	<textarea name="adresse" class="forml" id="adresse" value="#ENV{adresse}"></textarea>
+	<textarea name="adresse" class="forml" id="adresse">#ENV{adresse}</textarea>
 	<br class="nettoyeur" />
 </div>
 ]
@@ -175,50 +175,58 @@
 [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/profession_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="profession"><strong><:inscription2:profession:></strong></label>
-	<input type="text" class="forml" name="profession" id="profession" class="formo" value="#ENV{profession}"/>
+	<input type="text" class="forml" name="profession" id="profession" value="#ENV{profession}"/>
+	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="societe"><strong><:inscription2:societe:></strong></label>
-	<input type="text" class="forml" name="societe" id="societe" class="formo" value="#ENV{societe}"/>
+	<input type="text" class="forml" name="societe" id="societe" value="#ENV{societe}"/>
+	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="secteur"><strong><:inscription2:secteur:></strong></label>
-	<input type="text" class="forml" name="secteur" id="secteur" class="formo" value="#ENV{secteur}"/>
+	<input type="text" class="forml" name="secteur" id="secteur" value="#ENV{secteur}"/>
+	<br class="nettoyeur" />
 </div>
 ]
 [(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="fonction"><strong><:inscription2:fonction:></strong></label>
-	<input type="text" class="forml" name="fonction" id="fonction" class="formo" value="#ENV{fonction}"/>
+	<input type="text" class="forml" name="fonction" id="fonction" value="#ENV{fonction}"/>
+	<br class="nettoyeur" />
 </div>
 ]
 
 [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
 <div class="textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong></label>
-	<textarea name="adresse_pro" class="forml" id="adresse_pro" class="formo">#ENV{adresse_pro}</textarea>
+	<textarea name="adresse_pro" class="forml" id="adresse_pro">#ENV{adresse_pro}</textarea>
+	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="code_postal_pro"><strong><:inscription2:code_postal:></strong></label>
-	<input type="text" class="forml" name="code_postal_pro" id="code_postal_pro" class="formo" value="#ENV{code_postal_pro}"/>
+	<input type="text" class="forml" name="code_postal_pro" id="code_postal_pro" value="#ENV{code_postal_pro}"/>
+	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="ville_pro"><strong><:inscription2:ville:></strong></label>
-	<input type="text" class="forml" name="ville_pro" id="ville_pro"  class="formo" value="#ENV{ville_pro}"/>
+	<input type="text" class="forml" name="ville_pro" id="ville_pro" value="#ENV{ville_pro}"/>
+	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/pays_pro}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="pays_pro"><strong><:inscription2:pays:></strong></label>
 	<INCLURE{fond=formulaires/inscription2_pays_pro}>
+	<br class="nettoyeur" />
 </div>
 ]
 </fieldset>
@@ -232,6 +240,7 @@
 <div>
 	<strong><:inscription2:publication:></strong>
 	<input type="checkbox" style="display:inline;float:none;width:15px" name="publication" id="publication" value="#ENV{publication}" />
+	<br class="nettoyeur" />
 </div>
 ]
 

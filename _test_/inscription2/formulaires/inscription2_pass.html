@@ -27,7 +27,7 @@ function cryptage() {
 <div class="inscription2" [style="(#ENV{commentaires}|=={1}|?{display: block;, display:none;})"]>
 
 
-<form method="post" action="#SELF" name="inscription" id="inscription">
+<form method="post" action="#SELF" name="inscription" id="inscription" class="formulaire_spip">
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 
@@ -61,14 +61,14 @@ function cryptage() {
 [(#CONFIG{inscription2/nom_famille}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="nom_famille"><strong><:inscription2:nom_famille:></strong></label>
-	<input type="text" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" />
+	<input type="text" class="forml" name="nom_famille" id="nom_famille" value="#ENV{nom_famille}" />
 	<br class="nettoyeur" />
 </div>
 ]
 [(#CONFIG{inscription2/prenom}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="prenom"><strong><:inscription2:prenom:></strong></label>
-	<input type="text" name="prenom" id="prenom" value="#ENV{prenom}" />
+	<input type="text" class="forml" name="prenom" id="prenom" value="#ENV{prenom}" />
 	<br class="nettoyeur" />
 </div>
 ]
@@ -93,7 +93,7 @@ function cryptage() {
 [(#CONFIG{inscription2/code_postal}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="code_postal"><strong><:inscription2:code_postal:></strong></label>
-	<input type="text" name="code_postal" id="code_postal" value="#ENV{code_postal}" />
+	<input type="text" class="forml" name="code_postal" id="code_postal" value="#ENV{code_postal}" />
 	<br class="nettoyeur" />
 </div>
 ]
@@ -101,7 +101,7 @@ function cryptage() {
 [(#CONFIG{inscription2/ville}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/ville_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="ville"><strong><:inscription2:ville:></strong></label>
-	<input type="text" name="ville" id="ville" value="#ENV{ville}" />
+	<input type="text" class="forml" name="ville" id="ville" value="#ENV{ville}" />
 	<br class="nettoyeur" />
 </div>
 ]
@@ -118,21 +118,21 @@ function cryptage() {
 [(#CONFIG{inscription2/telephone}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="telephone"><strong><:inscription2:telephone:></strong></label>
-	<input type="text" name="telephone" id="telephone" value="#ENV{telephone}" />
+	<input type="text" class="forml" name="telephone" id="telephone" value="#ENV{telephone}" />
 	<br class="nettoyeur" />
 </div>
 ]
 [(#CONFIG{inscription2/fax}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/fax_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="fax"><strong><:inscription2:fax:></strong></label>
-	<input type="text" name="fax" id="fax" value="#ENV{fax}" />
+	<input type="text" class="forml" name="fax" id="fax" value="#ENV{fax}" />
 	<br class="nettoyeur" />	
 </div>
 ]
 [(#CONFIG{inscription2/mobile}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="mobile"><strong><:inscription2:mobile:></strong></label>
-	<input type="text" name="mobile" id="mobile" value="#ENV{mobile}" />
+	<input type="text" class="forml" name="mobile" id="mobile" value="#ENV{mobile}" />
 	<br class="nettoyeur" />
 </div>
 ]
@@ -140,7 +140,7 @@ function cryptage() {
 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
 <div class="grand_select[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
 	<label><strong><:inscription2:commentaire:></strong></label>
-	<textarea name="commentaire" id="commentaire">#ENV{divers}</textarea>
+	<textarea name="commentaire" class="forml" id="commentaire">#ENV{divers}</textarea>
 	<br class="nettoyeur" />
 </div>
 ]
@@ -148,7 +148,7 @@ function cryptage() {
 [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})] style="padding-top:50px;">
 	<label for="nom"><strong><:inscription2:nom:> (<:inscription2:nom_explication:>)</strong></label>
-	<input type="text" name="nom" id="nom" value="#ENV{nom}" />
+	<input type="text" class="forml" name="nom" id="nom" value="#ENV{nom}" />
 	<br class="nettoyeur" />
 </div>
 ]
@@ -156,25 +156,25 @@ function cryptage() {
 [(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="username"><strong><:inscription2:username:></strong></label>
-	<input type="text" name="username" id="username" value="#ENV{login}" />
+	<input type="text" class="forml" name="username" id="username" value="#ENV{login}" />
 	<br class="nettoyeur" />
 </div>
 ]
 
 	<div>
 	<label for="pass1"><strong><:inscription2:demande_password:></strong></label>
-	<input type='password' name='pass1' id='pass1' />
+	<input type='password' class="forml" name='pass1' id='pass1' />
 	<br class="nettoyeur" />
 	</div>
 	<div>
 	<label for="pass2"><strong><:inscription2:redemande_password:></strong></label>
-	<input type='password' name='pass2' id='pass2' />
+	<input type='password' class="forml" name='pass2' id='pass2' />
 	<br class="nettoyeur" />
 	</div>
 	<input type='password' name='pass' id='pass' style="display:none;" />
 <div>
 	<label for='statut'><strong><:inscription2:statut:></strong></label>
-	<select name="statut" id="statut" class="formo select">
+	<select name="statut" id="statut" class="forml select">
 	<option value='0minirezo'><:info_administrateur:></option>
 	<option value='1comite'><:inscription2:auteur:></option>
 	<option value='6forum'><:info_visiteur_1:></option>
@@ -185,7 +185,7 @@ function cryptage() {
 [(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
 <div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="email"><strong><:inscription2:email:></strong></label>
-	<input type="text" name="email" id="email" value="#ENV{email}" />
+	<input type="text" class="forml" name="email" id="email" value="#ENV{email}" />
 	<br class="nettoyeur" />
 </div>
 ]
@@ -211,28 +211,28 @@ function cryptage() {
 [(#CONFIG{inscription2/profession}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/profession_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="profession"><strong><:inscription2:profession:></strong></label>
-	<input type="text" name="profession" id="profession" class="formo" value="#ENV{profession}"/>
+	<input type="text" class="forml" name="profession" id="profession" class="forml" value="#ENV{profession}"/>
 	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/societe}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/societe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="societe"><strong><:inscription2:societe:></strong></label>
-	<input type="text" name="societe" id="societe" class="formo" value="#ENV{societe}"/>
+	<input type="text" class="forml" name="societe" id="societe" value="#ENV{societe}"/>
 	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/secteur}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/secteur_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="secteur"><strong><:inscription2:secteur:></strong></label>
-	<input type="text" name="secteur" id="secteur" class="formo" value="#ENV{secteur}"/>
+	<input type="text" class="forml" name="secteur" id="secteur" value="#ENV{secteur}"/>
 	<br class="nettoyeur" />
 </div>
 ]
 [(#CONFIG{inscription2/fonction}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/fonction_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="fonction"><strong><:inscription2:fonction:></strong></label>
-	<input type="text" name="fonction" id="fonction" class="formo" value="#ENV{fonction}"/>
+	<input type="text" class="forml" name="fonction" id="fonction" value="#ENV{fonction}"/>
 	<br class="nettoyeur" />
 </div>
 ]
@@ -240,21 +240,21 @@ function cryptage() {
 [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
 <div class="textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong></label>
-	<textarea name="adresse_pro" id="adresse_pro" class="formo">#ENV{adresse_pro}</textarea>
+	<textarea name="adresse_pro" id="adresse_pro" class="forml">#ENV{adresse_pro}</textarea>
 	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/code_postal_pro}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="code_postal_pro"><strong><:inscription2:code_postal:></strong></label>
-	<input type="text" name="code_postal_pro" id="code_postal_pro" class="formo" value="#ENV{code_postal_pro}"/>
+	<input type="text" class="forml" name="code_postal_pro" id="code_postal_pro" value="#ENV{code_postal_pro}"/>
 	<br class="nettoyeur" />
 </div>]
 
 [(#CONFIG{inscription2/ville_pro}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label for="ville_pro"><strong><:inscription2:ville:></strong></label>
-	<input type="text" name="ville_pro" id="ville_pro"  class="formo" value="#ENV{ville_pro}"/>
+	<input type="text" name="ville_pro" id="ville_pro" class="forml" value="#ENV{ville_pro}"/>
 	<br class="nettoyeur" />
 </div>]
 
@@ -285,7 +285,9 @@ function cryptage() {
 ]
 
 
-<p class="spip_bouton"><input type="submit" onClick="cryptage();" value="<:bouton_valider:>" /></p>
+<p class="spip_bouton">
+	<input type="submit" onclick="cryptage();" value="<:bouton_valider:>" />
+</p>
 
 </form>
 </div>
