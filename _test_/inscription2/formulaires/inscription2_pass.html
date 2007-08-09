@@ -79,9 +79,9 @@ function cryptage() {
 </div>]
 
 [(#CONFIG{inscription2/adresse}|=={on}|?{' ', ''})	
-<div class="textarea[ (#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})]">
+<div [class="(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{obligatoire})"]>
 	<label for="adresse"><strong><:inscription2:adresse:></strong></label>
-	<textarea name="adresse" id="adresse">#ENV{adresse}</textarea>
+	<textarea name="adresse" id="adresse" class="forml" style="float:right;">#ENV{adresse}</textarea>
 	<br class="nettoyeur" />
 </div>
 ]
@@ -136,7 +136,7 @@ function cryptage() {
 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
 <div class="grand_select[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
 	<label><strong><:inscription2:commentaire:></strong></label>
-	<textarea name="commentaire" class="forml" id="commentaire">#ENV{divers}</textarea>
+	<textarea name="commentaire" class="forml" style="float:right;" id="commentaire">#ENV{divers}</textarea>
 	<br class="nettoyeur" />
 </div>
 ]
@@ -236,7 +236,7 @@ function cryptage() {
 [(#CONFIG{inscription2/adresse_pro}|=={on}|?{' ', ''})
 <div class="textarea[ (#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{obligatoire})]">
 	<label for="adresse_pro"><strong><:inscription2:adresse_pro:></strong></label>
-	<textarea name="adresse_pro" id="adresse_pro" class="forml">#ENV{adresse_pro}</textarea>
+	<textarea name="adresse_pro" id="adresse_pro" class="forml" style="float:right;">#ENV{adresse_pro}</textarea>
 	<br class="nettoyeur" />
 </div>]
 
