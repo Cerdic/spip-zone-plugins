@@ -17,7 +17,7 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 _ 
 _ Pour qu'il fonctionne, vous devez avoir la balise #INSERT_HEAD dans vos squelettes.
 _ 
-_ Vous pouvez modifier la boucles et les autres choses dans le fichier de données : donnees_agendax.html
+_ Vous pouvez modifier la boucle et les autres choses dans le fichier de données : donnees_agendax.html
 _ 
 _ Pour afficher l'agenda dans vos squelettes, il vous suffit de mettre un "div" avec un id='agendax'. Il y a une <a href="../?page=agendax">Demo ici</a>
 _ 

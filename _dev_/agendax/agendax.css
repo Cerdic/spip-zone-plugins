@@ -50,3 +50,7 @@ DIV.case_remplie{
 DIV.case_pas_remplie{
 	
 }
+
+DIV.info_evenement{
+	display: none;
+}
