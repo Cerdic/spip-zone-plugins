@@ -1,9 +1,9 @@
 <select name="jour" id="jour" class="forml" style="width:auto;display:inline;">
 	<?php
 	for ($i=1;$i<=31;$i++)
-		echo "<option>$i</option>\n";
+		echo "<option value='$i'>$i</option>\n";
 	?>
-</select> 
+</select>
 	
 <select name="mois" id="mois" class="forml" style="width:auto;display:inline;">
 	<option value='01'><:inscription2:janvier:></option>
@@ -23,7 +23,7 @@
 <select name="annee" id="annee" class="forml" style="width:auto;display:inline;">
 	<?php
 	$today_year=date('Y');
-	for ($i=$today_year;$i>=$today_year-100;$i--)
-		echo "<option>$i</option>\n";
+	for ($i=$today_year;$today_year-100<=$i;$i--)
+		echo "<option value='$i'>$i</option>\n";
 	?>
-</select> 
+</select>

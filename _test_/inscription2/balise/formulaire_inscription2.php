@@ -14,8 +14,7 @@ function balise_FORMULAIRE_INSCRIPTION2_stat($args, $filtres) {
 	if(!test_mode_inscription2($mode))
 		return '';
 	else return array($mode);
-	
-	}
+}
 
 function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 	//var_dump(lire_config('inscription2'));
@@ -169,11 +168,8 @@ function inscription2_nouveau($declaration){
 			spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('$n', '$value')");
 	}
 
-	
 	return $declaration;
 }
-
-
 
 function inscription2_test_login($var_user) {
 	if(!isset($var_user['login']))
