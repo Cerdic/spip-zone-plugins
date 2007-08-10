@@ -1,0 +1,281 @@
+<fieldset>
+<legend>
+	<:echoppe:info_livraison:>
+</legend>
+<br /><br />
+
+<table>
+<tr>
+<td width='140'/>
+<td width='70'> <:inscription2:form:> </td>
+<td width='70'> <:inscription2:fiche_mod:> </td>
+<td width='70'> <:inscription2:fiche:> </td>
+<td width='70'> <:inscription2:table:> </td>
+</tr><tr>
+<td>
+	<strong><:echoppe:nom_livraison:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_livraison" [checked="(#CONFIG{inscription2/nom_livraison}?{checked})"] onclick="showoblig(this)" id="nom_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/nom_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="nom_livraison_obligatoire" [checked="(#CONFIG{inscription2/nom_livraison_obligatoire}?{checked})"] id="nom_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_livraison_fiche_mod" onclick = "enadis(this,nom_livraison_fiche)" [checked="(#CONFIG{inscription2/nom_livraison_fiche_mod}?{checked})"] id="nom_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_livraison_fiche" [checked="(#CONFIG{inscription2/nom_livraison_fiche}?{checked})"] id="nom_livraison_fiche" [disabled ="(#CONFIG{inscription2/nom_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_livraison_table" [checked="(#CONFIG{inscription2/nom_livraison_table}?{checked})"] id="nom_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:echoppe:prenom_livraison:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="prenom_livraison" [checked="(#CONFIG{inscription2/nom_livraison}?{checked})"] onclick="showoblig(this)" id="prenom_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/prenom_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="prenom_livraison_obligatoire" [checked="(#CONFIG{inscription2/prenom_livraison_obligatoire}?{checked})"] id="prenom_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="prenom_livraison_fiche_mod" onclick = "enadis(this,prenom_livraison_fiche)" [checked="(#CONFIG{inscription2/prenom_livraison_fiche_mod}?{checked})"] id="prenom_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="prenom_livraison_fiche" [checked="(#CONFIG{inscription2/prenom_livraison_fiche}?{checked})"] id="prenom_livraison_fiche" [disabled ="(#CONFIG{inscription2/prenom_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="prenom_livraison_table" [checked="(#CONFIG{inscription2/prenom_livraison_table}?{checked})"] id="prenom_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:echoppe:societe_livraison:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="societe_livraison" [checked="(#CONFIG{inscription2/societe_livraison}?{checked})"] onclick="showoblig(this)" id="societe_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/societe_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="societe_livraison_obligatoire" [checked="(#CONFIG{inscription2/societe_livraison_obligatoire}?{checked})"] id="societe_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="societe_livraison_fiche_mod" onclick = "enadis(this,societe_livraison_fiche)" [checked="(#CONFIG{inscription2/societe_livraison_fiche_mod}?{checked})"] id="societe_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="societe_livraison_fiche" [checked="(#CONFIG{inscription2/societe_livraison_fiche}?{checked})"] id="societe_livraison_fiche" [disabled ="(#CONFIG{inscription2/societe_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="societe_livraison_table" [checked="(#CONFIG{inscription2/societe_livraison_table}?{checked})"] id="societe_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:echoppe:fonction:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="fonction" [checked="(#CONFIG{inscription2/fonction}?{checked})"] onclick="showoblig(this)" id="fonction" />
+	</label>
+	<label style="[(#CONFIG{inscription2/fonction}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="fonction_obligatoire" [checked="(#CONFIG{inscription2/fonction_obligatoire}?{checked})"] id="fonction_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fonction_fiche_mod" onclick = "enadis(this,fonction_fiche)" [checked="(#CONFIG{inscription2/fonction_fiche_mod}?{checked})"] id="fonction_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fonction_fiche" [checked="(#CONFIG{inscription2/fonction_fiche}?{checked})"] id="fonction_fiche" [disabled ="(#CONFIG{inscription2/fonction_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fonction_table" [checked="(#CONFIG{inscription2/fonction_table}?{checked})"] id="fonction_table" />
+	</label>
+</td>
+</tr>
+<tr>
+<td>
+	<strong><:echoppe:adresse_livraison:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_livraison" [checked="(#CONFIG{inscription2/adresse_livraison}?{checked})"] onclick="showoblig(this)" id="adresse_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/adresse_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="adresse_livraison_obligatoire" [checked="(#CONFIG{inscription2/adresse_livraison_obligatoire}?{checked})"] id="adresse_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_livraison_fiche_mod" onclick = "enadis(this,adresse_livraison_fiche)" [checked="(#CONFIG{inscription2/adresse_livraison_fiche_mod}?{checked})"] id="adresse_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_livraison_fiche" [checked="(#CONFIG{inscription2/adresse_livraison_fiche}?{checked})"] id="adresse_livraison_fiche" [disabled ="(#CONFIG{inscription2/adresse_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="adresse_livraison_table" [checked="(#CONFIG{inscription2/adresse_livraison_table}?{checked})"] id="adresse_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>	
+	<strong><:echoppe:code_postal:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_livraison" [checked="(#CONFIG{inscription2/code_postal_livraison}?{checked})"] onclick="showoblig(this)" id="code_postal_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/code_postal_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="code_postal_livraison_obligatoire" [checked="(#CONFIG{inscription2/code_postal_livraison_obligatoire}?{checked})"] id="code_postal_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_livraison_fiche_mod" onclick = "enadis(this,code_postal_livraison_fiche)" [checked="(#CONFIG{inscription2/code_postal_livraison_fiche_mod}?{checked})"] id="code_postal_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_livraison_fiche" [checked="(#CONFIG{inscription2/code_postal_livraison_fiche}?{checked})"] id="code_postal_livraison_fiche" [disabled ="(#CONFIG{inscription2/code_postal_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="code_postal_livraison_table" [checked="(#CONFIG{inscription2/code_postal_livraison_table}?{checked})"] id="code_postal_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:echoppe:ville:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_livraison" [checked="(#CONFIG{inscription2/ville_livraison}?{checked})"] onclick="showoblig(this)" id="ville_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/ville_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="ville_livraison_obligatoire" [checked="(#CONFIG{inscription2/ville_livraison_obligatoire}?{checked})"] id="ville_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_livraison_fiche_mod" onclick = "enadis(this,ville_livraison_fiche)" [checked="(#CONFIG{inscription2/ville_livraison_fiche_mod}?{checked})"] id="ville_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_livraison_fiche" [checked="(#CONFIG{inscription2/ville_livraison_fiche}?{checked})"] id="ville_livraison_fiche" [disabled ="(#CONFIG{inscription2/ville_livraison_fiche_mod}?{true})"] />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="ville_livraison_table" [checked="(#CONFIG{inscription2/ville_livraison_table}?{checked})"] id="ville_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:echoppe:pays:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="pays_livraison" [checked="(#CONFIG{inscription2/pays_livraison}?{checked})"] onclick="showoblig(this)" id="pays_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/pays_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="pays_livraison_obligatoire" [checked="(#CONFIG{inscription2/pays_livraison_obligatoire}?{checked})"] id="pays_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="pays_livraison_fiche_mod" onclick = "enadis(this,pays_livraison_fiche)" [checked="(#CONFIG{inscription2/pays_livraison_fiche_mod}?{checked})"] id="pays_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="pays_livraison_fiche" [checked="(#CONFIG{inscription2/pays_livraison_fiche}?{checked})"] id="pays_livraison_fiche" [disabled ="(#CONFIG{inscription2/pays_livraison_fiche_mod}?{true})"] />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="pays_livraison_table" [checked="(#CONFIG{inscription2/pays_livraison_table}?{checked})"] id="pays_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:echoppe:telephone_livraison:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_livraison" [checked="(#CONFIG{inscription2/telephone_livraison}?{checked})"] onclick="showoblig(this)" id="telephone_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/telephone_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="telephone_livraison_obligatoire" [checked="(#CONFIG{inscription2/telephone_livraison_obligatoire}?{checked})"] id="telephone_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_livraison_fiche_mod" onclick = "enadis(this,telephone_livraison_fiche)" [checked="(#CONFIG{inscription2/telephone_livraison_fiche_mod}?{checked})"] id="telephone_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_livraison_fiche" [checked="(#CONFIG{inscription2/telephone_livraison_fiche}?{checked})"] id="telephone_livraison_fiche" [disabled ="(#CONFIG{inscription2/telephone_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="telephone_livraison_table" [checked="(#CONFIG{inscription2/telephone_livraison_table}?{checked})"] id="telephone_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:echoppe:fax_livraison:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_livraison" [checked="(#CONFIG{inscription2/fax_livraison}?{checked})"] onclick="showoblig(this)" id="fax_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/fax_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="fax_livraison_obligatoire" [checked="(#CONFIG{inscription2/fax_livraison_obligatoire}?{checked})"] id="fax_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_livraison_fiche_mod" onclick = "enadis(this,fax_livraison_fiche)" [checked="(#CONFIG{inscription2/fax_livraison_fiche_mod}?{checked})"] id="fax_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_livraison_fiche" [checked="(#CONFIG{inscription2/fax_livraison_fiche}?{checked})"] id="fax_livraison_fiche" [disabled ="(#CONFIG{inscription2/fax_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="fax_livraison_table" [checked="(#CONFIG{inscription2/fax_livraison_table}?{checked})"] id="fax_livraison_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:echoppe:mobile_livraison:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_livraison" [checked="(#CONFIG{inscription2/mobile_livraison}?{checked})"] onclick="showoblig(this)" id="mobile_livraison" />
+	</label>
+	<label style="[(#CONFIG{inscription2/mobile_livraison}|=={on}|?{display: block;, display:none;})]">
+		<input type="checkbox" name="mobile_livraison_obligatoire" [checked="(#CONFIG{inscription2/mobile_livraison_obligatoire}?{checked})"] id="mobile_livraison_obligatoire" />
+		<span style="color:red">*</span>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_livraison_fiche_mod" onclick = "enadis(this,mobile_livraison_fiche)" [checked="(#CONFIG{inscription2/mobile_livraison_fiche_mod}?{checked})"] id="mobile_livraison_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_livraison_fiche" [checked="(#CONFIG{inscription2/mobile_livraison_fiche}?{checked})"] id="mobile_livraison_fiche" [disabled ="(#CONFIG{inscription2/mobile_livraison_fiche_mod}?{true})"]/>
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="mobile_livraison_table" [checked="(#CONFIG{inscription2/mobile_livraison_table}?{checked})"] id="mobile_livraison_table" />
+	</label>
+</td>
+</tr>
+</table>
+</fieldset>

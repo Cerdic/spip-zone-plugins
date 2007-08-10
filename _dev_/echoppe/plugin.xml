@@ -1,0 +1,28 @@
+<plugin>
+	<nom>
+		&Eacute;choppe
+	</nom>
+	<auteur>
+		&copy; 2007 - Distribu&eacute; sous licence GNU/LGPL
+	</auteur>
+	<version>
+		0.1
+	</version>
+	<etat>
+		dev
+	</etat>
+	<description>
+		Un projet de boutique g&eacute;n&eacute;raliste pour spip
+	</description>
+	<icon></icon>
+	<prefix>
+		  echoppe
+	</prefix>
+	<necessite id='cfg' version='[1.0.6;]' />
+	<necessite id='Inscription2' version='[0.2;]' />
+	<install></install>
+	<options>
+	</options>
+	<fonctions>
+	</fonctions>
+</plugin>
