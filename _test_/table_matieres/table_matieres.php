@@ -7,8 +7,15 @@ function TableMatieres_Table($url = '', $titre = '') {
 	return '';
 }
 
-function TableMatieres_Callback($matches) {
+function TableMatieres_BalisePresente($test = false) {
+	static $flag = false;
+	if($test) $flag = $test;
+	return $flag;
+}
+
+function TableMatieres_Callback($matches, $retour_cId = false) {
 	static $cId = 0;
+	if($retour_cId) return $cId;
 	$cId++;
 	$titre = typo($matches[1]);
 	$url = translitteration($titre);
@@ -54,9 +61,13 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 	$_RETOUR_TDM = preg_replace(',<img,i',
 	'<img alt="'._T('tdm:retour_table_matiere').'" title="'._T('tdm:retour_table_matiere').'"',
 	_RETOUR_TDM);
+	$_table = recuperer_fond('modeles/table_matieres');
 	return $affiche_table ?
-		recuperer_fond('modeles/table_matieres') :
-		preg_replace('/@@RETOUR_TDM@@/S', $_RETOUR_TDM, $texte);
+		$_table :
+		((TableMatieres_BalisePresente() ?
+			'' :
+			'<div class="encart">'.$_table.'</div>') .
+		preg_replace('/@@RETOUR_TDM@@/S', $_RETOUR_TDM, $texte));
 }
 
 function balise_TABLE_MATIERES_dist($p) {
@@ -71,8 +82,10 @@ function balise_TABLE_MATIERES_dist($p) {
 		erreur_squelette(_T('tdm:zbug_champ_tdm_hors_boucle_articles'), $p->id_boucle);
 		$p->code = "''";
 	} else {
-		$_texte = champ_sql('texte', $p);
-		$p->code = "$_texte";
+		if(TableMatieres_BalisePresente(true)) {
+			$_texte = champ_sql('texte', $p);
+			$p->code = "$_texte";
+		}
 	}
 	return $p;
 }
