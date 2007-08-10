@@ -1,0 +1,67 @@
+#SET{afficher_plus_livraison, false}
+[(#CONFIG{inscription2/nom_livraison}|=={on}|?{' ', ''}) #SET{afficher_plus_livraison, true} ]
+[(#CONFIG{inscription2/prenom_livraison}|=={on}|?{' ', ''}) #SET{afficher_plus_livraison, true} ]
+[(#CONFIG{inscription2/societe_livraison}|=={on}|?{' ', ''}) #SET{afficher_plus_livraison, true} ]
+[(#CONFIG{inscription2/adresse_livraison}|=={on}|?{' ', ''}) #SET{afficher_plus_livraison, true} ]
+[(#CONFIG{inscription2/code_postal_livraison}|=={on}|?{' ', ''}) #SET{afficher_plus_livraison, true} ]
+[(#CONFIG{inscription2/ville_livraison}|=={on}|?{' ', ''}) #SET{afficher_plus_livraison, true} ]
+[(#CONFIG{inscription2/pays_livraison}|=={on}|?{' ', ''}) #SET{afficher_plus_livraison, true} ]
+
+[(#GET{afficher_plus_livraison}|=={true}|?{' ', ''})
+<fieldset class="infos-auteurs">
+<legend>
+	<:echoppe:coord_livraison:>
+</legend>
+
+[(#CONFIG{inscription2/nom_livraison}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/nom_livraison_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="nom_livraison"><:inscription2:nom_famille:></label>
+	<input type="text" class="forml" name="nom_livraison" id="nom_livraison" value="#ENV{nom_livraison}" />
+	<br class="nettoyeur" />
+</div>
+]
+[(#CONFIG{inscription2/prenom_livraison}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/prenom_livraison_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="prenom_livraison"><:inscription2:prenom:></label>
+	<input type="text" class="forml" name="prenom_livraison" id="prenom_livraison" value="#ENV{prenom_livraison}" />
+	<br class="nettoyeur" />
+</div>
+]
+
+[(#CONFIG{inscription2/societe_livraison}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/societe_livraison_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="societe_livraison"><:inscription2:societe:></label>
+	<input type="text" class="forml" name="societe_livraison" id="societe_livraison" value="#ENV{societe_livraison}"/>
+	<br class="nettoyeur" />
+</div>]
+
+[(#CONFIG{inscription2/adresse_livraison}|=={on}|?{' ', ''})
+<div class="textarea[ (#CONFIG{inscription2/adresse_livraison_obligatoire}|=={on}|?{obligatoire})]">
+	<label for="adresse_livraison"><:echoppe:adresse_livraison:></label>
+	<textarea name="adresse_livraison" class="forml" id="adresse_livraison">#ENV{adresse_livraison}</textarea>
+	<br class="nettoyeur" />
+</div>]
+
+[(#CONFIG{inscription2/code_postal_livraison}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/code_postal_livraison_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="code_postal_livraison"><:inscription2:code_postal:></label>
+	<input type="text" class="forml" name="code_postal_livraison" id="code_postal_livraison" value="#ENV{code_postal_livraison}"/>
+	<br class="nettoyeur" />
+</div>]
+
+[(#CONFIG{inscription2/ville_livraison}|=={on}|?{' ', ''})
+<div[ (#CONFIG{inscription2/ville_livraison_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="ville_livraison"><:inscription2:ville:></label>
+	<input type="text" class="forml" name="ville_livraison" id="ville_livraison" value="#ENV{ville_livraison}"/>
+	<br class="nettoyeur" />
+</div>]
+
+[(#CONFIG{inscription2/pays_livraison}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/pays_livraison_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="pays_livraison"><:inscription2:pays:></label>
+	<INCLURE{fond=formulaires/inscription2_pays_livraison}>
+	<br class="nettoyeur" />
+</div>
+]
+</fieldset>
+]
