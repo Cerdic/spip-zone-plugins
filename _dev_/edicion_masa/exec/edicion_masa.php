@@ -197,6 +197,8 @@ echo _T('edicion:Seccion') . "<br />";
 		echo "</div></noscript></div>\n";
 		echo "</form>\n";
 */
+//tipo input text
+/*
 	if (!strlen($id_rubrique)) {
 		$seccion_aff = _T('edicion:ingrese_seccion');
 		$onfocus = " onfocus=\"this.value='';\"";
@@ -204,12 +206,16 @@ echo _T('edicion:Seccion') . "<br />";
 
 	$onfocus = '<input type="text" size="10" value="'.$seccion_aff.'" name="id_rubrique" class="spip_recherche" accesskey="r"' . $onfocus . ' />';
 	echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("edicion_masa", $onfocus, " method='get'")."</div>";
+*/
+	echo "<form action='./' method='get'><input type='hidden' name='exec' value='edicion_masa'><input type='text' class='spip_recherche' name='id_rubrique' value='' size='10'/></form>";
 
 
 
 
 //filtro por busqueda
 	echo _T('edicion:busqueda') . "<br />";
+
+/*	
 	if (!strlen($recherche)) {
 		$recherche_aff = _T('info_rechercher');
 		$onfocus = " onfocus=\"this.value='';\"";
@@ -217,18 +223,25 @@ echo _T('edicion:Seccion') . "<br />";
 
 	$onfocus = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />';
 	echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("edicion_masa", $onfocus, " method='get'")."</div>";
+*/
+
+	echo "<form action='./' method='get'><input type='hidden' name='exec' value='edicion_masa'><input type='text' class='spip_recherche' name='recherche' value='' size='10'/></form>";
+
 
 
 //filtro por mot
 	echo _T('edicion:por_mot') . "<br />";
-	if (!strlen($id_mot)) {
+
+/*	if (!strlen($id_mot)) {
 		$ingrese_mot = _T('edicion:ingrese_mot');
 		$onfocus = " onfocus=\"this.value='';\"";
 	} else $onfocus = '';
 
 	$onfocus = '<input type="text" size="10" value="'.$ingrese_mot.'" name="id_mot" class="spip_recherche" accesskey="m"' . $onfocus . ' />';
 	echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("edicion_masa", $onfocus, " method='get'")."</div>";
+*/
 
+	echo "<form action='./' method='get'><input type='hidden' name='exec' value='edicion_masa'><input type='text' class='spip_recherche' name='id_mot' value='' size='10'/></form>";
 
 
 		fin_raccourcis();
