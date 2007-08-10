@@ -23,7 +23,7 @@ function TableMatieres_Callback($matches) {
 		$url = '';
 		foreach ($mots as $mot) {
 			if (!$mot) continue;
-			$url2 = $url.'-'.$mot;
+			$url2 = $url._SEP_ANCRE.$mot;
 			if (strlen($url2) > _LG_ANCRE) {
 				break;
 			}

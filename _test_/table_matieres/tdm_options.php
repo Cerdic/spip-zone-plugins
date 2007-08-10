@@ -1,6 +1,7 @@
 <?php
 
 define("_LG_ANCRE", 35);
+define("_SEP_ANCRE", '-');
 define("_RETOUR_TDM", '<a href="#tdm"><img src="' .
 	find_in_path('images/tdm.png') . 
 	'" /></a>');
