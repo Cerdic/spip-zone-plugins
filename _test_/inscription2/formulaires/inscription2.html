@@ -232,6 +232,10 @@
 </fieldset>
 ]
 
+[(#CONFIG{plugin/ECHOPPE}|?{' ', ''})
+	<INCLURE{fond=formulaires/inscription2_echoppe_livraison}>
+]
+
 [(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})
 	[(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})<INCLURE{fond=formulaires/inscription2_form_listes}>]
 ]
