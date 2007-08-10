@@ -17,14 +17,12 @@ $(document).ready(function() {
     $('#fragment-1').append(d);
 });
 
-
-
 function legend_it(a,b,c){
 	d = $('#legend') ;
 	/*console.log($(a).attr('href'));*/
 	if( $(a).attr('href') != '#fragment-4')
 	$(b).append(d);
-	}
+}
 
 </script>
 
@@ -106,7 +104,10 @@ function legend_it(a,b,c){
 		[(#CONFIG{plugin/GEOMAP/version}|?{' '})
 		<li><a href="#fragment-3"><span>Geo</span></a></li>
 		]
-		<li><a href="#fragment-4"><span>Option</span></a></li>
+		[(#CONFIG{plugin/ECHOPPE/version}|?{' '})
+		<li><a href="#fragment-4"><span>Echoppe</span></a></li>
+		]
+		<li><a href="#fragment-5"><span>Option</span></a></li>
 	</ul>
 
 <div id="fragment-1">
@@ -133,8 +134,14 @@ function legend_it(a,b,c){
 [(#CONFIG{plugin/GEOMAP/version}|?{'',<p><:inscription2:geomap_obligatoire:></p>})]
 </div>
 
-[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
 <div id="fragment-4">
+
+[(#CONFIG{plugin/ECHOPPE/version}|?{' '}) <INCLURE{fond=fonds/inscription2_echoppe}>]
+[(#CONFIG{plugin/ECHOPPE/version}|?{'',<p><:inscription2:echoppe_obligatoire:></p>})]
+</div>
+
+[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
+<div id="fragment-5">
 <fieldset>
 <legend>
 	<:inscription2:info_gener:>
