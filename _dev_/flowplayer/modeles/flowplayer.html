@@ -1,0 +1,46 @@
+[(#REM)Modele SPIP pour le FlowPlayer, lecteur video en Flash OpenSource  
+Home Page : http://www.flowplayer.org
+Demo : http://flowplayer.org/demo
+Documentation http://flowplayer.org/documentation
+Forum : http://sourceforge.net/forum/?group_id=133868
+Blog : http://api.blogs.com/flow/
+]
+
+[(#REM)<flowplayer|id_rubrique=1>, <flowplayer|id_article=2|> etc... ]
+
+<script language="javascript" type="text/javascript" src="#CHEMIN{swfobject.js}"></script>
+<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/ -->
+
+<noscript>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </noscript>
+<!-- alternetive texte pour ceux qui ont le js desactive -->
+
+<div id="flashcontent">
+
+
+<p>You need to have the <a href="http://www.macromedia.com/go/getflashplayer">Flash Player</a> installed and
+		a browser with JavaScript support.</p>
+
+	
+<script type="text/javascript">
+		// <![CDATA[
+
+var fo = new SWFObject("#CHEMIN{FlowPlayer.swf}?config={showPlayListButtons: true, showMenu: true,menuItems:[true, true, true, true, false ], showFullScreenButton: true, playList: [ <B_doc><BOUCLE_doc(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==(jpg|flv|swf)$}{par num titre}{par id_document}{","}>[{ url: '(#URL_DOCUMENT|url_absolue)'} ]</BOUCLE_doc></B_doc> ], loop: true, initialScale: 'orig', autoBuffering: false, useNativeFullScreen: true }", "flowplayer", "100%", "100%", "7", "#ffffff", true); 
+      
+// need this next line for local testing, it's optional if your swf is on the same domain as your html page
+fo.addParam("AllowScriptAccess", "always");
+fo.addParam("allowFullScreen", "true");
+fo.write("flashcontent");
+
+		// ]]>
+	</script>
+
+</div>
+
+<div>
+<B_docjoints>
+<BOUCLE_docjoints(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==(jpg|flv|swf)$}{par num titre}{par id_document}>
+[<b>(#TITRE)</b><br />]
+[(#URL_DOCUMENT|url_absolue)<br />]
+</BOUCLE_docjoints>
+</B_docjoints>
+</div>
