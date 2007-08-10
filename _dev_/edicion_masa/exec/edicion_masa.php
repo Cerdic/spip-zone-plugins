@@ -1,15 +1,14 @@
 <?php
 
 /*
- * gestion_documents
- *
- * interface de gestion des documents
- *
- * Auteur : cedric.morin@yterium.com
- * © 2006 - Distribue sous licence GPL
+ * 
+ * Edicion en Masa. 
+* Edit articles in bulk: state, keys link, section, and so on. 
+ * 
  *
  */
 include_spip('inc/afficher_objets');
+include_spip('inc/presentation');
 
 if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
