@@ -10,8 +10,6 @@
 
 <div class="inscription2" [style="(#ENV{commentaires}|=={1}|?{display: block;, display:none;})"]>
 
-<h2><:inscription2:formulaire_inscription:></h2>
-
 <form method="post" action="#SELF" name="inscription" class="formulaire_spip" id="inscription">
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
@@ -22,6 +20,35 @@
 ]
 
 
+<fieldset class="infos-auteurs">
+<legend>
+	<:inscription2:info_perso:>
+</legend>
+
+[(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})] style="padding-top:50px;">
+	<label for="nom"><:inscription2:nom:> (<:inscription2:nom_explication:>)</label>
+	<input type="text" class="forml" name="nom" id="nom" value="#ENV{nom}" />
+	<br class="nettoyeur" />
+</div>
+]
+[(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="username"><:inscription2:username:></label>
+	<input type="text" class="forml" name="username" id="username" value="#ENV{login}" />
+	<br class="nettoyeur" />
+</div>
+]
+
+[(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="email"><:inscription2:email:></label>
+	<input type="text" class="forml" name="email" id="email" value="#ENV{email}" />
+	<br class="nettoyeur" />
+</div>
+]
+</fieldset>
+
 [(#EVAL{defined('_DIR_PLUGIN_ASSOCIATION')}|?{' ',''})
 	#INCLURE{fond=formulaires/inscription2_form_asso}
 ]
@@ -31,10 +58,6 @@
 <legend>
 	<:inscription2:info_perso:>
 </legend>
-
-<div class="sous-legende">
-<:inscription2:inserez_infos:>
-</div>
 
 [(#CONFIG{inscription2/sexe}|=={on}|?{' ', ''})
 <div[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{class="obligatoire"})]>
@@ -127,29 +150,6 @@
 <div class="grand_select[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
 	<label><:inscription2:commentaire:></label>
 	<textarea name="commentaire" class="forml" id="commentaire">#ENV{divers}</textarea>	
-	<br class="nettoyeur" />
-</div>
-]
-
-[(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})] style="padding-top:50px;">
-	<label for="nom"><:inscription2:nom:> (<:inscription2:nom_explication:>)</label>
-	<input type="text" class="forml" name="nom" id="nom" value="#ENV{nom}" />
-	<br class="nettoyeur" />
-</div>
-]
-[(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="username"><:inscription2:username:></label>
-	<input type="text" class="forml" name="username" id="username" value="#ENV{login}" />
-	<br class="nettoyeur" />
-</div>
-]
-
-[(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="email"><:inscription2:email:></label>
-	<input type="text" class="forml" name="email" id="email" value="#ENV{email}" />
 	<br class="nettoyeur" />
 </div>
 ]
