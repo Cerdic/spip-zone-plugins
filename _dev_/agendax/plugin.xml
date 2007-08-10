@@ -23,7 +23,7 @@ _ Pour afficher l'agenda dans vos squelettes, il vous suffit de mettre un "div" 
 _ 
 _ Pour modifier l'apparence, vous pouvez modifier le fichier des css : agendax.css
 	</description>
-	<lien>http://www.spip-contrib.net</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/?article2377</lien> <!-- URI de documentation -->
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
 		C'est par ailleurs conseille pour les noms de fichier

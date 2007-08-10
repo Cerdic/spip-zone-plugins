@@ -1,11 +1,9 @@
 <plugin>
 	<nom>Mot-crois&#233;s</nom>
 	<etat>stable</etat>
-	<version>3.0 pour Spip 1.9.1 minimum.
-	
-	</version>
-	<auteur>Ma&#239;eul Rouquette - maieulrouquette@tele2.fr
-_ [http://maieul.ouvaton.org->http://maieul.ouvaton.org]
+	<version>3.0	
+	</version> <!-- Version du plugin -->
+	<auteur>Ma&#239;eul Rouquette - maieulrouquette@tele2.fr [->http://maieul.ouvaton.org/]
 _ Patrice Vanneufville - patrice.vanneufville@laposte.net
 	</auteur>
 	<description>Des mots-crois&#233;s avec Spip !
@@ -34,6 +32,8 @@ _ Il n&#233;cessite l'activation du plugin {{jQuery}} ou une version de spip sup
 {{Attention}} : afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (sommaires, rubriques, backends, ...), pensez bien :
 - soit &#224; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
 - soit &#224; remplir le descriptif de l'article.
+
+{{Spip 1.9.1 minimum}}
 	</description>
 	<lien>[->http://www.spip-contrib.net/article1379.html]</lien> <!-- URI de documentation -->
 	<fonctions>mots_croises_fonctions.php</fonctions>

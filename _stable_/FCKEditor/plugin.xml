@@ -1,7 +1,7 @@
 <plugin>
-	<nom>FCKeditor (2.4.2) pour Spip (1.9.1) [V-1.5]</nom>
+	<nom>FCKeditor (2.4.2) pour Spip (1.9.1) version 1.5</nom>
 	<auteur>[Frank SAURET->http://electropol.free.fr], Val&#233;rian &#169; 2007 - Distribu&#233; sous licence GNU/GPL</auteur>
-	<version>1.5 (pour spip 1.9.1)</version>
+	<version>1.5 (pour spip 1.9.1)</version> <!-- Version du plugin -->
 	<etat>dev</etat>
 	<description>
 {{Edition WYSIWYG avec FCKeditor}}
@@ -37,7 +37,7 @@ De même, si vous voulez utiliser geshi vous devez l'ajouter dans le r&#233;pert
 -* - De nombreux boutons peuvent &#234;tre jug&#233;s inutiles par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez les deux FCKConfig.ToolbarSets (BarreArticle et BarreBr&#232;ve). 
 
 	</description>
-	<lien>[http://electropol.free.fr]</lien> <!-- URL de documentation -->
+	<lien>http://electropol.free.fr/spip/spip.php?article8</lien> <!-- URL de documentation -->
 	<prefix>fckeditor2</prefix>
 
 	<pipeline>

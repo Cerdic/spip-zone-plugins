@@ -4,12 +4,11 @@
 	Belles puces
 	</nom>
   <auteur>
-<!-- Auteur du plugin -->J&#233;r&#244;me Combaz - Distribu&#233; sous licence GNU/GPL
+<!-- Auteur du plugin -->[J&#233;r&#244;me Combaz->http://conseil-recherche-innovation.net/le-cri/jerome-combaz] - Distribu&#233; sous licence GNU/GPL
 	</auteur>
-  <lien>http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz</lien>
   <version>
 	0.1
-	</version>
+	</version> <!-- Version du plugin -->
   <etat>
         stable
 	</etat>

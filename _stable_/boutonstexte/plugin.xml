@@ -8,7 +8,7 @@ _ &#169; 2006 - Distribue sous licence LGPL
   </auteur>
   <version>
 	0.3.0
-  </version>
+  </version> <!-- Version du plugin -->
   <etat>
 	stable
   </etat>
@@ -19,10 +19,10 @@ _ Les boutons sont rajout&#233;s avant chaque div de classe texte du contenu si 
 _ La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant ecrire/?exec=cfg&amp;cfg=boutonstexte
 _ Certains &#233;l&#233;ments peuvent &#234;tre forc&#233;s par javascript.
 _ ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
+
+Si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=boutonstexte]
   </description>
-  <lien>[Documentation sur contrib->http://www.spip-contrib.net/?article1474],
-et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=boutonstexte]
-  </lien>
+  <lien>[Documentation sur contrib->http://www.spip-contrib.net/?article1474]</lien> <!-- URI de documentation -->
   <prefix>
 	boutonstexte
   </prefix>
