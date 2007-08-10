@@ -264,6 +264,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2135]",
 [[Largeur du sommaire (9 &agrave; 99 caract&egrave;res) :->%lgr_sommaire%]]",
 	'sommaire:aide' => 'Un article sans sommaire&nbsp;: @interdit@',
 	'sommaire' => 'Sommaire',
+	'sommaire_page' => ',&nbsp;p@page@',
 
 // ---------------------------------------------------------------------------
 	'liens_orphelins:nom' => 'Liens orphelins',

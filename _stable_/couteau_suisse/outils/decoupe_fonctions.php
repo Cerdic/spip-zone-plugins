@@ -49,13 +49,13 @@ function decouper_en_pages_rempl($texte) {
 	$alt = "title=\"$alt\" alt=\"$alt\"";
 	$precedent = '<a href="' . parametre_url($self,'artpage', $artpage - 1) . '">'; 
 	$precedent = $artpage == 1?$images['precedent_off']." $alt />"
-		:$precedent.$images['precedent']."$alt /></a>";
+		:$precedent.$images['precedent']." $alt /></a>";
 	// suivant
 	$alt = _T('cout:page_suivante');
 	$alt = "title=\"$alt\" alt=\"$alt\"";
 	$suivant = '<a href="' . parametre_url($self,'artpage', $artpage + 1) . '">'; 
 	$suivant = ($artpage == $num_pages)?$images['suivant_off']." $alt />"
-		:$suivant.$images['suivant']."$alt /></a>";
+		:$suivant.$images['suivant']." $alt /></a>";
 	// s'il existe plus de trois pages on calcule les liens << et >>
 	if ($num_pages>3) {
 		// debut
@@ -88,9 +88,9 @@ function decouper_en_pages_rempl($texte) {
 
 	// s'il existe plus de trois pages on retourne la pagination << < 1 2 3 4 > >>
 	// sinon une forme simplifiee : < 1 2 3 >
-	$pagination = $num_pages>3?"$debut $precedent $milieu $suivant $fin":"$precedent $milieu $suivant";
-	$pagination1 = "<a name='decoupe_haut' id='decoupe_haut'></a><div class='pagination decoupe_haut'>$pagination</div>";
-	$pagination2 = "<a name='decoupe_bas' id='decoupe_bas'></a><div class='pagination decoupe_bas'>$pagination</div>";
+	$pagination = $num_pages>3?"$debut\n$precedent\n$milieu\n$suivant\n$fin":"$precedent\n$milieu\n$suivant";
+	$pagination1 = "<a name='decoupe_haut' id='decoupe_haut'></a>\n<div class='pagination decoupe_haut'>\n$pagination\n</div>\n";
+	$pagination2 = "<a name='decoupe_bas' id='decoupe_bas'></a>\n<div class='pagination decoupe_bas'>\n$pagination\n</div>\n";
 	$page = trim($pages[$artpage-1]);
 	if (isset($_GET['decoupe_recherche'])) {
 		include_spip('inc/surligne');

@@ -30,7 +30,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
-	$p = $page?",&nbsp;p$page":'';
+	$p = $page?_T('cout:sommaire_page', array('page'=>$page)):'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
 		$ancre = "\n<a id=\"outil_sommaire_$index\" name=id=\"outil_sommaire_$index\"></a>";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
@@ -76,7 +76,7 @@ function sommaire_d_article_rempl($texte) {
 		$fond = "background:transparent url($img) no-repeat scroll left top; border-bottom:thin solid #999999; border-right:1px solid #999999;";
 	}
 
-
+// TODO : un modele html, puis recuperer_fond()
 $sommaire='<a name="outil_sommaire" id="outil_sommaire"></a><div id="outil_sommaire" class="cs_sommaire" style="'.$fond.'"><div style="margin:3pt;"><div style="
 border-bottom:1px dotted silver;
 line-height:1;
