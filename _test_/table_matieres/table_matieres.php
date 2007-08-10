@@ -1,10 +1,15 @@
 <?php
 
-function TableMatieres_Table($url = '', $titre = '') {
+function TableMatieres_Table($url = '', $titre = '', $vider_table = false) {
 	static $table = array();
+	if($vider_table) return ($table = array());
 	if($url == '') return $table;
 	$table[$url] = $titre;
 	return '';
+}
+
+function TableMatieres_ViderTable() {
+	return TableMatieres_Table('', '', true);
 }
 
 function TableMatieres_BalisePresente($test = false) {
@@ -45,15 +50,19 @@ function TableMatieres_Callback($matches, $retour_cId = false) {
 
 function TableMatieres_AjouterAncres($texte) {
 	static $premier_passage = false;
-	static $texte_ancre;
+	static $texte_ancre = '';
+	static $nb_ancre = 0;
 	if($premier_passage == false) {
 		$premier_passage = true;
-		$texte = echappe_html($texte, 'TDM', true, ',<(code|cadre|math)'
+		$texte_ancre = echappe_html($texte, 'TDM', true, ',<(code|cadre|math)'
 			. '(\s[^>]*)?'
 			. '>(.*)</\1>,UimsS');
-		$texte = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte);
-		$texte_ancre = echappe_retour($texte, 'TDM');
+		$texte_ancre = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte_ancre);
+		$texte_ancre = echappe_retour($texte_ancre, 'TDM');
+		$nb_ancres = TableMatieres_Callback('', true);
+		if($nb_ancres < _MIN_ANCRE) TableMatieres_ViderTable();
 	}
+	$texte_ancre = $nb_ancres >= _MIN_ANCRE ? $texte_ancre : $texte;
 	return $texte_ancre;
 }
 
