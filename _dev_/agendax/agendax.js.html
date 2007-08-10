@@ -65,7 +65,7 @@ function remplire_agenda(annee,mois){
 				
 				/* On recherche les jours avec des évènements et on met à jour les cases correspondantes */
 				for (k=1; k<=31; k++) {
-					if ($("#contenu"+k,event).length > 0){
+					if ($("#contenu"+k+":first-child",event).length > 0){
 						$("#jour"+k).addClass(style_rempli);
 						$("#jour"+k).attr("alt",$("#info"+k,event).text());
 						$("#jour"+k+" a").attr("href",$("#lien"+k,event).text());
@@ -82,8 +82,11 @@ function remplire_agenda(annee,mois){
 				for (l=1; l<=nombre_case_restante; l++) {
 					$(".corps_calendrier").append('<div class="boite_jour boite_hors_mois">&nbsp;</div>');
 				}
+				
+				/* Le nettoyeur */
 				$(".corps_calendrier").append('<div style="clear: both; height: 1px;">&nbsp;</div>');
 				
+				/* On fixe la taille de calendrier pour qu'il ne se redimentionne pas à chaque changement */
 				$("#agendax").css("height",$("#agendax").height());
 				
 				/* Et on charge le script qui vas écouter quand on clique sur les flèches */
