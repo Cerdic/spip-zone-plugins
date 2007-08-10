@@ -1,6 +1,6 @@
 <?php
 
-if ($GLOBALS["spip_version"] >= 1.93) {
+if ($GLOBALS["spip_version"] >= 1.93 AND $GLOBALS["auteur_session"]) {
 	$couleurs = charger_fonction('couleurs', 'inc');
 	$var = $couleurs($GLOBALS['auteur_session']['prefs']['couleur']);
 }
