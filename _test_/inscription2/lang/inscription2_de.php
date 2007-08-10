@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_defaut_desc' => 'Informations obligatoires par d&eacute;faut',
 'info_perso' => 'Pers&ouml;nliche Informationen',
 'info_pros' => 'Berufsaufkl&auml;rungen',
+'info_connection' => '<NEW>Informations de connexion',
 'general_infos' => 'Allgemeine Informationen',
 'info_perso_desc' => 'Pers&ouml;nliche Informationen, die von den neuen Mitgliedern des web site verlangt werden',
 'info_gener' => 'Allgemeine Informationen',
