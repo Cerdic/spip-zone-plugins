@@ -17,11 +17,11 @@ function calculer_boucle_avec_frequence($id_boucle, &$boucles) {
 	$max = '$max_frequence'.$boucle->id_boucle;
 	$frequence = '$Pile[$SP][\'frequence'.$boucle->id_boucle.'\']';
 	$code_avant = "\n\t" . $max .' = 0;
-  $PileTemp = array();';
-  $code = "\n\t".'while ($Pile[$SP] = @spip_abstract_fetch($result,"")) {' .
-		$max.' = max('.$max.', '.$frequence.');' .
-    '$PileTemp[] = $Pile[$SP];
-  }
+	$PileTemp = array();';
+	$code = "\n\t".'while ($Pile[$SP] = @spip_abstract_fetch($result,"")) {' . "\n\t\t" .
+		$max.' = max('.$max.', '.$frequence.');' . "\n\t\t" .
+		'$PileTemp[] = $Pile[$SP];
+	}
 
 	while (list(,$Pile[$SP]) = each($PileTemp)) {';
 	$calcul = calculer_boucle($id_boucle, $boucles);
