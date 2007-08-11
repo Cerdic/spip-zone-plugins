@@ -1,6 +1,6 @@
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
 
-<h3>Contacts de livraison</h3>
+<h3><:echoppe:contacts_livraison:></h3>
 
 [(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})[(#SET{adresse_livraison,complet})]]]]]
 	<p>[(#GET{adresse_livraison}|?{' ',''})<span class="#EDIT{adressecompletelivraison} org adr">]

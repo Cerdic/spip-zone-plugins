@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'adresse_livraison' => 'Adresse (livraison)',
 
 // Formulaire profil : controleurs et vues
+'contacts_livraison' => 'Contacts de livraison',
 'vos_contacts_livraison' => 'Vos contacts de livraison',
 'votre_adresse_livraison' => 'Votre adresse de livraison',
 
