@@ -32,7 +32,7 @@
 	[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[(#SET{contacts,complet})]]]]
 	[(#GET{contacts}|?{' ',''})<p><span class="#EDIT{telfax}">]
 		[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})<:inscription2:telephone:> : [<span class="#EDIT{telephone} tel">(#TELEPHONE|?{#TELEPHONE,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})]</span><br />]
-		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">(#MOBILE|?{#MOBILE,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span></span><br />]]
+		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">(#MOBILE|?{#MOBILE,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span><br />]]
 		[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[<:inscription2:fax:> : <span class="#EDIT{fax} fax">(#FAX|?{#FAX,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span>]]
 	[(#GET{contacts}|?{'</span></p>',''})]
 	<span class="#EDIT{hyperlien}">[<:inscription2:website:> <a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>]</span>
@@ -41,10 +41,10 @@
 	<div class="contacts">
 	<h3><:inscription2:contacts_pros:></h3>
 	
-	[(#CONFIG{inscription2/societe_fiche_mod}|?{' ',''})[<p><span class="#EDIT{societe}"><:inscription2:societe:> : <span class="org">(#SOCIETE|?{#SOCIETE,<span class="non_renseigne"><:inscription2:non_renseignee:>})</span></span></p>]]
+	[(#CONFIG{inscription2/societe_fiche_mod}|?{' ',''})[<p><span class="#EDIT{societe}"><:inscription2:societe:> : <span class="org">(#SOCIETE|?{#SOCIETE,<span class="non_renseigne"><:inscription2:non_renseignee:></span>})</span></span></p>]]
 	
 	[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})[(#SET{adresse_pro,complet})]]]]]
-	<p>[(#GET{adresse_pro}|?{' ',''})<span class="#EDIT{adressecomplete_pro} org adr">]
+	[(#GET{adresse_pro}|?{' ',''})<p><span class="#EDIT{adressecomplete_pro} org adr">]
 		[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{' ',''})[<span class="street-address">(#ADRESSE_PRO|?{#ADRESSE_PRO,<span class="non_renseigne"><:inscription2:adresse_pro:> <:inscription2:non_renseignee:></span>})</span><br />]]
 		[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL_PRO|?{#CODE_POSTAL_PRO,<span class="non_renseigne"><:inscription2:code_postal:> <:inscription2:non_renseigne:></span><br />})</span>]]
 		[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[<span class="locality">(#VILLE_PRO|?{#VILLE_PRO,<span class="non_renseigne"><:inscription2:ville:> <:inscription2:non_renseignee:></span>})</span><br />]]
@@ -54,9 +54,8 @@
 			</BOUCLE_r_pro>
 			[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})<:inscription2:pays:> <:inscription2:non_renseigne:>]
 			<//B_r_pro>
-		[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})</span>]
-	[(#GET{adresse_pro}|?{'</span>',''})]
-	</p>
+		[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})</span>]
+	[(#GET{adresse_pro}|?{'</span></p>',''})]
 	
 	[(#REM) Un test pour voir si on a les 3 champs telephone Pros]
 	[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[(#SET{contacts_pro,complet})]]]]
