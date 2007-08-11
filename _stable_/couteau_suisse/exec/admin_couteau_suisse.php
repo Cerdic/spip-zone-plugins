@@ -273,14 +273,14 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	fin_boite_info();
 	$aide_racc = cs_aide_raccourcis();
 	if(strlen($aide_racc)) {
-		echo '<br />';
+//		echo '<br />';
 		debut_boite_info();
 		echo $aide_racc;
 		fin_boite_info();
 	}
 	$aide_pipes = cs_aide_pipelines();
 	if(strlen($aide_pipes)) {
-		echo '<br />';
+//		echo '<br />';
 		debut_boite_info();
 		echo $aide_pipes;
 		fin_boite_info();
