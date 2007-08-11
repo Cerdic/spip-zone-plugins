@@ -180,6 +180,7 @@ L\'&eacute;quipe de @nom_site@',
 'votre_adresse' => 'Votre adresse personnelle',
 'votre_adresse_pro' => 'Votre adresse professionnelle',
 'votre_nom_complet' => 'Votre nom complet',
+'vos_contacts_personnels' => 'Vos contacts personnels',
 
 'page_confirmation' => 'Page de confirmation de votre inscription'
 

@@ -155,6 +155,7 @@ The @nom_site@\'s Team',
 'votre_adresse' => 'Your personnal address',
 'votre_adresse_pro' => 'Your professionnal address',
 'votre_nom_complet' => 'Your complete name',
+'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 

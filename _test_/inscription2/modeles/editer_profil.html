@@ -23,22 +23,22 @@
 	[(#GET{adresse}|?{'</span>',''})]
 	</p>
 
-	<p><strong><:inscription2:contacts_personnels:></strong></p>
+	<h3><:inscription2:contacts_personnels:></h3>
 	
-	[<span class="#EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL|?{#EMAIL,<:inscription2:non_renseigne:>})</a></span><br />]
+	[<p><span class="#EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL|?{#EMAIL,<:inscription2:non_renseigne:>})</a></span></p>]
 	
 	[(#REM) Un test pour voir si on a les 3 champs telephone]
 	[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[(#SET{contacts,complet})]]]]
-	[(#GET{contacts}|?{' ',''})<span class="#EDIT{telfax}">]
+	[(#GET{contacts}|?{' ',''})<p><span class="#EDIT{telfax}">]
 		[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})<:inscription2:telephone:> : [<span class="#EDIT{telephone} tel">(#TELEPHONE|?{#TELEPHONE,<:inscription2:non_renseigne:>})]</span><br />]
 		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">(#MOBILE|?{#MOBILE,<:inscription2:non_renseigne:>})</span></span><br />]]
 		[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[<:inscription2:fax:> : <span class="#EDIT{fax} fax">(#FAX|?{#FAX,<:inscription2:non_renseigne:>})</span>]]
-	[(#GET{contacts}|?{'</span><br />',''})]
+	[(#GET{contacts}|?{'</span></p>',''})]
 	<span class="#EDIT{hyperlien}">[<:inscription2:website:> <a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>]</span>
 	
-	<p><strong><:inscription2:contacts_pros:></strong></p>
+	<h3><:inscription2:contacts_pros:></h3>
 	
-	[(#CONFIG{inscription2/societe_fiche_mod}|?{' ',''})[<span class="#EDIT{societe}"><:inscription2:societe:> : <span class="org">(#SOCIETE|?{#SOCIETE,<:inscription2:non_renseignee:>})</span></span><br />]]
+	[(#CONFIG{inscription2/societe_fiche_mod}|?{' ',''})[<p><span class="#EDIT{societe}"><:inscription2:societe:> : <span class="org">(#SOCIETE|?{#SOCIETE,<:inscription2:non_renseignee:>})</span></span></p>]]
 	
 	[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})[(#SET{adresse_pro,complet})]]]]]
 	<p>[(#GET{adresse_pro}|?{' ',''})<span class="#EDIT{adressecomplete_pro} org adr">]
