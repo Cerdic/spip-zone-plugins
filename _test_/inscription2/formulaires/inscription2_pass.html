@@ -37,6 +37,58 @@ function cryptage() {
 	#INCLURE{fond=formulaires/inscription2_form_asso}
 ]
 
+<fieldset class="infos-auteurs">
+<legend>
+	<:inscription2:info_connection:>
+</legend>
+
+[(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]">
+	<label for="nom"><:inscription2:nom:> (<:inscription2:nom_explication:>)</label>
+	<input type="text" class="forml" name="nom" id="nom" value="#ENV{nom}" />
+	<br class="nettoyeur" />
+</div>
+]
+
+[(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="username"><:inscription2:username:></label>
+	<input type="text" class="forml" name="username" id="username" value="#ENV{login}" />
+	<br class="nettoyeur" />
+</div>
+]
+
+<div>
+	<label for="pass1"><:inscription2:demande_password:></label>
+	<input type='password' class="forml" name='pass1' id='pass1' />
+	<br class="nettoyeur" />
+	</div>
+	<div>
+	<label for="pass2"><:inscription2:redemande_password:></label>
+	<input type='password' class="forml" name='pass2' id='pass2' />
+	<br class="nettoyeur" />
+</div>
+	<input type='password' name='pass' id='pass' style="display:none;" />
+
+<div>
+	<label for='statut'><:inscription2:statut:></label>
+	<select name="statut" id="statut" class="forml select">
+		<option value='0minirezo'><:info_administrateur:></option>
+		<option value='1comite'><:inscription2:auteur:></option>
+		<option value='6forum'><:info_visiteur_1:></option>
+		<option value='aconfirmer'><:inscription2:aconfirmer:></option>
+	</select>
+</div>
+
+[(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
+<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
+	<label for="email"><:inscription2:email:></label>
+	<input type="text" class="forml" name="email" id="email" value="#ENV{email}" />
+	<br class="nettoyeur" />
+</div>
+]
+
+</fieldset>
 
 <fieldset class="infos-auteurs">
 <legend>
@@ -140,53 +192,6 @@ function cryptage() {
 	<br class="nettoyeur" />
 </div>
 ]
-
-[(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})] style="padding-top:50px;">
-	<label for="nom"><:inscription2:nom:> (<:inscription2:nom_explication:>)</label>
-	<input type="text" class="forml" name="nom" id="nom" value="#ENV{nom}" />
-	<br class="nettoyeur" />
-</div>
-]
-
-[(#CONFIG{inscription2/username}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/username_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="username"><:inscription2:username:></label>
-	<input type="text" class="forml" name="username" id="username" value="#ENV{login}" />
-	<br class="nettoyeur" />
-</div>
-]
-
-<div>
-	<label for="pass1"><:inscription2:demande_password:></label>
-	<input type='password' class="forml" name='pass1' id='pass1' />
-	<br class="nettoyeur" />
-	</div>
-	<div>
-	<label for="pass2"><:inscription2:redemande_password:></label>
-	<input type='password' class="forml" name='pass2' id='pass2' />
-	<br class="nettoyeur" />
-</div>
-	<input type='password' name='pass' id='pass' style="display:none;" />
-
-<div>
-	<label for='statut'><:inscription2:statut:></label>
-	<select name="statut" id="statut" class="forml select">
-		<option value='0minirezo'><:info_administrateur:></option>
-		<option value='1comite'><:inscription2:auteur:></option>
-		<option value='6forum'><:info_visiteur_1:></option>
-		<option value='aconfirmer'><:inscription2:aconfirmer:></option>
-	</select>
-</div>
-
-[(#CONFIG{inscription2/email}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/email_obligatoire}|=={on}|?{class="obligatoire"})]>
-	<label for="email"><:inscription2:email:></label>
-	<input type="text" class="forml" name="email" id="email" value="#ENV{email}" />
-	<br class="nettoyeur" />
-</div>
-]
-
 </fieldset>
 
 #SET{afficher_plus, false}
@@ -263,6 +268,10 @@ function cryptage() {
 </div>
 ]
 </fieldset>
+]
+
+[(#CONFIG{plugin/ECHOPPE}|?{' ', ''})
+	<INCLURE{fond=formulaires/inscription2_echoppe_livraison}>
 ]
 
 [(#CONFIG{inscription2/newsletter}|=={on}|?{' ', ''})

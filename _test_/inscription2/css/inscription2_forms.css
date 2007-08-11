@@ -10,3 +10,4 @@ div.error{background-color:#ffe2e2}
 label.error{font-size:0.9em;color:red;display:block;clear:both}
 div.inscription2 fieldset {margin-bottom:10px}
 .infos-auteurs .select{float:right;width:53%;padding:0;margin:0;}
+.select .forml{border:1px solid #C5C5C5}
