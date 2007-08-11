@@ -42,12 +42,14 @@ img.crayon-edit, img.crayon-crayon {
 .formulaire_spip .crayon-active {
 	padding: 1px;
 	border: 1px inset;
+	font: inherit;
 }
 .crayon-html .formulaire_spip {
 	max-width: 703px;
 }
 .crayon-html textarea {
 	overflow: auto;
+	font: inherit;
 }
 .crayon-html {
 	z-index:5000;
