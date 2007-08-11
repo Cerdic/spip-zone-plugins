@@ -66,7 +66,7 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$abo
 			$message = "Un abonn&eacute; vient de valider son abonnement :\n\nNom : ".$abonne['nom_famille']."\nPr&eacute;nom : ".$abonne['prenom']."\n\nAdresse: \n".$abonne['adresse']."\n".$abonne['code_postal']." ".$abonne['ville']." ".$abonne['pays']
 			."\n\nEmail : ".$abonne['email']
 			."\nT&eacute;l&eacute;phone: ".$abonne['telephone']
-			."\n\nAbonnement : ".$abonement['libelle']
+			."\n\nAbonnement : ".$abonnement['libelle']
 			."\n\nCommentaire: ".$abonne['commentaire'];
 			envoyer_mail ( $adresse_expediteur, $sujet, $message, $from = $expediteur, $headers = $entetes );
 			
