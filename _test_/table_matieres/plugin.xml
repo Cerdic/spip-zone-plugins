@@ -7,5 +7,6 @@
 	<auteur>James (c)2007 - Licence GNU/GPL</auteur>
 	<description>Introduit une ancre translitter&#233;e pour chaque intertitre du champ #TEXTE des ARTICLES,
 	ainsi qu'une balise #TABLE_MATIERES (facultative) associ&#233;e &#224; placer, bien s&#251;r, dans une boucle ARTICLES.</description>
-	<etat>test</etat>
+	<etat>stable</etat>
+	<lien>[Documentation sur spip-contrib.net->http://www.spip-contrib.net/Table-des-Matieres]</lien>
 </plugin>

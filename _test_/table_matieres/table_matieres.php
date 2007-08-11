@@ -55,15 +55,18 @@ function TableMatieres_AjouterAncres($texte) {
 	static $nb_ancre = 0;
 	if($premier_passage == false) {
 		$premier_passage = true;
-		$texte_ancre = echappe_html($texte, 'TDM', true, ',<(code|cadre|math)'
-			. '(\s[^>]*)?'
-			. '>(.*)</\1>,UimsS');
+		$texte_ancre = echappe_html($texte, 'TDM');
 		$texte_ancre = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte_ancre);
-		$texte_ancre = echappe_retour($texte_ancre, 'TDM');
 		$nb_ancres = TableMatieres_Callback('', true);
-		if($nb_ancres < _MIN_ANCRE) TableMatieres_ViderTable();
+		if($nb_ancres < _MIN_ANCRE) {
+			TableMatieres_ViderTable();
+			$texte_ancre = propre($texte);
+		}
+		else {
+			$texte_ancre = propre($texte_ancre);
+			$texte_ancre = echappe_retour($texte_ancre, 'TDM');
+		}
 	}
-	$texte_ancre = $nb_ancres >= _MIN_ANCRE ? $texte_ancre : $texte;
 	return $texte_ancre;
 }
 
