@@ -19,10 +19,24 @@
 	
 	[(#REM) Un test pour voir si on a les 3 champs telephone Pros]
 	[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})[(#SET{contacts_livraison,complet})]]]]
+	
 	[(#GET{contacts_livraison}|?{' ',''})<span class="#EDIT{telfaxlivraison}">]
-		[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})<:inscription2:telephone:> : [<span class="#EDIT{telephone_livraison} tel">(#TELEPHONE_LIVRAISON|?{#TELEPHONE_LIVRAISON,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})]</span><br />]
-		[(#CONFIG{inscription2/mobile_livraison_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile_livraison} fax">(#MOBILE_LIVRAISON|?{#MOBILE_LIVRAISON,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span><br />]]
-		[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})[<:inscription2:fax:> : <span class="#EDIT{fax_livraison} fax">(#FAX_LIVRAISON|?{#FAX_LIVRAISON,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span>]]
+	
+		[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})
+			[(#TELEPHONE_LIVRAISON|?{' ',''})<:inscription2:telephone:> : <span class="#EDIT{telephone_livraison} tel">#TELEPHONE_LIVRAISON</span>]
+			[(#TELEPHONE_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:telephone:> : <span class="#EDIT{telephone_livraison} tel"><:inscription2:non_renseigne:></span></span>]
+		<br />]
+		
+		[(#CONFIG{inscription2/mobile_livraison_fiche_mod}|?{' ',''})
+			[(#MOBILE_LIVRAISON|?{' ',''})<:inscription2:mobile:> : <span class="#EDIT{mobile_livraison} cell">#MOBILE_LIVRAISON</span>]
+			[(#MOBILE_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:mobile:> : <span class="#EDIT{mobile_livraison} cell"><:inscription2:non_renseigne:></span></span>]
+		<br />]
+		
+		[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})
+			[(#FAX_LIVRAISON|?{' ',''})<:inscription2:fax:> : <span class="#EDIT{fax_livraison} fax">#FAX_LIVRAISON</span>]
+			[(#FAX_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:fax:> : <span class="#EDIT{fax_livraison} fax"><:inscription2:non_renseigne:></span></span>]
+		]
+	
 	[(#GET{contacts_livraison}|?{'</span><br />',''})]
 </div>
 </BOUCLE_auteur_elargi>
