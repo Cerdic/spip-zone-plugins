@@ -1,12 +1,9 @@
-<h1 class="titre"><:inscription2:votre_profil:></h1>
-<BOUCLE_auteurs(AUTEURS){id_auteur}{tout}>
-<BOUCLE_auteur_elargi(AUTEURS_ELARGIS){id_auteur}{tout}>
+<BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
 
-	<div class="#_auteurs:EDIT{logo} Buddy" style="float:right;">[(#_auteurs:LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#_auteurs:LOGO_AUTEUR||image_reduire{200,0})]]</div>
-	[<p style="margin:10px 0;"><strong><:inscription2:nom:> <span class="#_auteurs:EDIT{nom}">(#_auteurs:NOM)</span></strong></p>]
-	[<p style="margin:10px 0;"><strong><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></strong></p>]
+	<div class="#EDIT{logo} Buddy" style="float:right;">[(#LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#LOGO_AUTEUR||image_reduire{200,0})]]</div>
+	[<h2 style="margin:10px 0;"><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></h2>]
 
-	<div class="#_auteurs:EDIT{bio}" style="margin:10px 0">
+	<div class="#EDIT{bio}" style="margin:10px 0">
 	[(#BIO|?{#BIO,"..."})]
 	</div>
 	[(#REM) Un test pour voir si on a les 4 champs adresse]
@@ -28,7 +25,7 @@
 
 	<p><strong><:inscription2:contacts_personnels:></strong></p>
 	
-	[<span class="#_auteurs:EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#_auteurs:EMAIL">(#_auteurs:EMAIL|?{#_auteurs:EMAIL,<:inscription2:non_renseigne:>})</a></span><br />]
+	[<span class="#EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL|?{#EMAIL,<:inscription2:non_renseigne:>})</a></span><br />]
 	
 	[(#REM) Un test pour voir si on a les 3 champs telephone]
 	[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[(#SET{contacts,complet})]]]]
@@ -37,7 +34,7 @@
 		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">(#MOBILE|?{#MOBILE,<:inscription2:non_renseigne:>})</span></span><br />]]
 		[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[<:inscription2:fax:> : <span class="#EDIT{fax} fax">(#FAX|?{#FAX,<:inscription2:non_renseigne:>})</span>]]
 	[(#GET{contacts}|?{'</span><br />',''})]
-	<span class="#_auteurs:EDIT{hyperlien}">[<:inscription2:website:> <a href="#_auteurs:URL_SITE" class="url spip_out" rel="me">(#_auteurs:NOM_SITE)</a>]</span>
+	<span class="#EDIT{hyperlien}">[<:inscription2:website:> <a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>]</span>
 	
 	<p><strong><:inscription2:contacts_pros:></strong></p>
 	
@@ -66,6 +63,8 @@
 		[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[<:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax">(#FAX_PRO|?{#FAX_PRO,<:inscription2:non_renseigne:>})</span>]]
 	[(#GET{contacts_pro}|?{'</span><br />',''})]
 
+	[(#EVAL{defined('_DIR_PLUGIN_ECHOPPE')}|?{' ',''})
+		[(#INCLURE{fond=modeles/profil_echoppe}{id_auteur})]
+	]
 </BOUCLE_auteur_elargi>
-</BOUCLE_auteurs>
 <br class="nettoyeur" />

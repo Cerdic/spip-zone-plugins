@@ -9,7 +9,7 @@
 	[<span class="postal-code">(#ENV*{code_postal}|typo)</span>]
 	[<span class="locality">(#ENV*{ville}|typo)</span><br />]
 	<span class="country-name">
-		[(#ENV{pays_pro}|?{'',' '})<:inscription2:pays:> <:inscription2:non_renseigne:>]
+		[(#ENV*{pays}|?{'',' '})<:inscription2:pays:> <:inscription2:non_renseigne:>]
 		<BOUCLE_r(SPIP_PAYS){id=#ENV{pays}}>
 		#PAYS
 		</BOUCLE_r>
