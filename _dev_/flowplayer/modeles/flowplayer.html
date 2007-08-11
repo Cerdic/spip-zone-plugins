@@ -24,7 +24,7 @@ Blog : http://api.blogs.com/flow/
 <script type="text/javascript">
 		// <![CDATA[
 
-var fo = new SWFObject("#CHEMIN{FlowPlayer.swf}?config={showPlayListButtons: true, showMenu: true,menuItems:[true, true, true, true, false ], showFullScreenButton: true, playList: [ <B_doc><BOUCLE_doc(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==(jpg|flv|swf)$}{par num titre}{par id_document}{","}>[{ url: '(#URL_DOCUMENT|url_absolue)'} ]</BOUCLE_doc></B_doc> ], loop: true, initialScale: 'orig', autoBuffering: false, useNativeFullScreen: true }", "flowplayer", "100%", "100%", "7", "#ffffff", true); 
+var fo = new SWFObject("#CHEMIN{FlowPlayer.swf}?config={showPlayListButtons: true, showMenu: true,menuItems:[true, true, true, true, false ], showFullScreenButton: true, playList: [ <B_doc><BOUCLE_doc(DOCUMENTS){id_article?}{id_rubrique?}{mode=document}{extension==(jpg|flv|swf)$}{par num titre}{par id_document}{","}>[{ url: '(#URL_DOCUMENT|url_absolue)'} ]</BOUCLE_doc></B_doc> ], loop: true, initialScale: 'orig', autoBuffering: false, useNativeFullScreen: true }", "flowplayer", "420", "240", "7", "#ffffff", true); 
       
 // need this next line for local testing, it's optional if your swf is on the same domain as your html page
 fo.addParam("AllowScriptAccess", "always");
