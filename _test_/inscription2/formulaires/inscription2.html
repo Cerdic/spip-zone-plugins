@@ -26,7 +26,7 @@
 </legend>
 
 [(#CONFIG{inscription2/nom}|=={on}|?{' ', ''})	
-<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})] style="padding-top:50px;">
+<div[ (#CONFIG{inscription2/nom_obligatoire}|=={on}|?{class="obligatoire"})]">
 	<label for="nom"><:inscription2:nom:> (<:inscription2:nom_explication:>)</label>
 	<input type="text" class="forml" name="nom" id="nom" value="#ENV{nom}" />
 	<br class="nettoyeur" />

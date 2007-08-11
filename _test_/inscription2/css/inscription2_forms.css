@@ -1,6 +1,6 @@
 .infos-auteurs > div{clear:both;padding:5px}
 div.inscription2 > div{clear:both;padding:5px;margin-bottom:10px}
-.infos-auteurs input.forml, .select.forml, textarea.forml{display:block;float:right;width:55%}
+.infos-auteurs input.forml, .select.forml, textarea.forml{display:block;float:right;width:53%}
 .infos-auteurs label{display:block;float:left;width:43%;font-weight: bold;}
 .infos-auteurs > div.textarea {clear:both;padding:5px}
 .infos-auteurs > div.grand_select {height:auto;margin-bottom:15px;clear:both;padding:5px}
