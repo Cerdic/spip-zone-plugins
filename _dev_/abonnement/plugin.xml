@@ -17,8 +17,8 @@
 	</description>
 	<lien>http://spip-zone.info/spip.php?page=sommaire_abo</lien> <!-- URI de documentation -->
 	<prefix>abonnement</prefix>
-	<fonctions>
-	</fonctions>
+	<fonctions></fonctions>
+	<options>abonnement_options.php</options>
 	<install>base/abonnement_upgrade.php</install>
 	<pipeline>
 		<nom></nom>

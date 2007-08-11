@@ -7,31 +7,33 @@
 //chdir('..');
 //include('ecrire/inc_version.php');
 
-// la banque renvoie l'identifiant de la transaction (l'id de l'abonne) et un statut de validation (ok, pas ok)
+// la banque renvoie l'identifiant de la transaction (l'id de l'abonne) et un statut de validation pour dire si le paiement est ok ou pas.
 
 // $id_abonne est l'id dans spip_auteurs_elargis
 // $validation_paiement est soit "ok", soit "erreur_bank"
 
-// faire les globales staut paiement et statut abo et date val
 
 function traiter_message_banque($id_abonne,$validation_paiement){
 
 
-$abonne = spip_fetch_array(spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, b.email FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id = b.id_auteur") );
-$abonnement = spip_fetch_array(spip_query("SELECT a.duree, b.montant, c.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur_elargi = '$id_abonne' AND a.id_abonnement = b.id_abonnement") );
+$abonne = spip_fetch_array(spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, b.email FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") );
+$abonnement = spip_fetch_array(spip_query("SELECT a.duree, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur_elargi = '$id_abonne' AND a.id_abonnement = b.id_abonnement") );
 
 $duree = $abonnement['duree'] ;
+$statut_abonnement = ($validation_paiement == "ok")? 'abonne' : 'prospect' ;
 
-// fixer la date de validite et le statut de paiement
-spip_query("UPDATE `spip_auteurs_elargis` SET statut_paiement='$validation_paiement', validite = DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." MONTH) WHERE id='$id_abonne'") ;
+//echo "UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement', validite = DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." MONTH) WHERE id='$id_abonne'" ;
+
+// fixer la date de validite et le statut de paiement, et des zones acces restreint selon l'abonnement a l'occasion
+spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement', validite = DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." MONTH) WHERE id='$id_abonne'") ;
 
 	//envoyer un mail a l'admin et a l'abonne
-	abonnement_envoyer_mails_confirmation($validation_paiement);
+	abonnement_envoyer_mails_confirmation($validation_paiement,$abonne);
 
 }
 
 
-function abonnement_envoyer_mail($validation_paiement,$abonne){
+function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne){
 
 	include_spip('inc/charsets');
 	include_spip('inc/mail');
@@ -65,7 +67,7 @@ function abonnement_envoyer_mail($validation_paiement,$abonne){
 			."\nT&eacute;l&eacute;phone: ".$abonne['telephone']
 			."\n\nAbonnement : ".$abonement['libelle']
 			."\n\nCommentaire: ".$abonne['commentaire'];
-			envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
+			envoyer_mail ( $adresse_expediteur, $sujet, $message, $from = $expediteur, $headers = $entetes );
 			
 			// au demandeur
 			$adresse= $abonne['email'];
@@ -82,7 +84,7 @@ function abonnement_envoyer_mail($validation_paiement,$abonne){
 			."\nT&eacute;l&eacute;phone : ".$abonne['telephone']
 			."\n\nAbonnement : ".$abonnement['libelle']
 			."\n\nCommentaire : ".$abonne['remarques'];
-			envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
+			envoyer_mail ( $adresse_expediteur, $sujet, $message, $from = $expediteur, $headers = $entetes );
 			
 			// au demandeur
 			$adresse= $abonne['email'];
