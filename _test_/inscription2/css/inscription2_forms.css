@@ -1,6 +1,6 @@
 .infos-auteurs > div{clear:both;padding:5px}
 div.inscription2 > div{clear:both;padding:5px;margin-bottom:10px}
-.infos-auteurs input.forml, .select.forml, textarea.forml{display:block;float:right;width:53%}
+.infos-auteurs input.forml, .infos-auteurs textarea.forml{display:block;float:right;width:53%}
 .infos-auteurs label{display:block;float:left;width:43%;font-weight: bold;}
 .infos-auteurs > div.textarea {clear:both;padding:5px}
 .infos-auteurs > div.grand_select {height:auto;margin-bottom:15px;clear:both;padding:5px}
@@ -9,3 +9,4 @@ div.inscription2 > div{clear:both;padding:5px;margin-bottom:10px}
 div.error{background-color:#ffe2e2}
 label.error{font-size:0.9em;color:red;display:block;clear:both}
 div.inscription2 fieldset {margin-bottom:10px}
+.infos-auteurs .select{float:right;width:53%;padding:0;margin:0;}
