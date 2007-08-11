@@ -1,8 +1,10 @@
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
 <div id="profil">
-	<div class="#EDIT{logo} Buddy" style="float:right;">[(#LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#LOGO_AUTEUR||image_reduire{200,0})]]</div>
+
 	[<h2 style="margin:10px 0;"><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></h2>]
 
+	<div class="#EDIT{logo} Buddy">[(#LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#LOGO_AUTEUR||image_reduire{200,0})]]</div>
+	
 	<div class="#EDIT{bio}" style="margin:10px 0">
 	[(#BIO|?{#BIO,"..."})]
 	</div>
@@ -31,10 +33,24 @@
 	[(#REM) Un test pour voir si on a les 3 champs telephone]
 	[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[(#SET{contacts,complet})]]]]
 	[(#GET{contacts}|?{' ',''})<p><span class="#EDIT{telfax}">]
-		[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})<:inscription2:telephone:> : [<span class="#EDIT{telephone} tel">(#TELEPHONE|?{#TELEPHONE,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})]</span><br />]
-		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})[<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">(#MOBILE|?{#MOBILE,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span><br />]]
-		[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[<:inscription2:fax:> : <span class="#EDIT{fax} fax">(#FAX|?{#FAX,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span>]]
+		
+		[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})
+			[(#TELEPHONE|?{' ',''})<:inscription2:telephone:> : <span class="#EDIT{telephone} tel">#TELEPHONE</span>]
+			[(#TELEPHONE|?{'',' '})<span class="non_renseigne"><:inscription2:telephone:> : <span class="#EDIT{telephone} tel"><:inscription2:non_renseigne:></span></span>]
+		<br />]
+		
+		[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})
+			[(#MOBILE|?{' ',''})<:inscription2:mobile:> : <span class="#EDIT{mobile} fax">#MOBILE</span>]
+			[(#MOBILE|?{'',' '})<span class="non_renseigne"><:inscription2:mobile:> : <span class="#EDIT{mobile} fax"><:inscription2:non_renseigne:></span></span>]
+		<br />]
+		
+		[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})
+			[(#FAX|?{' ',''})<:inscription2:fax:> : <span class="#EDIT{fax} fax">#FAX</span>]
+			[(#FAX|?{'',' '})<span class="non_renseigne"><:inscription2:fax:> : <span class="#EDIT{fax} fax"><:inscription2:non_renseigne:></span></span>]
+		]
+
 	[(#GET{contacts}|?{'</span></p>',''})]
+
 	<span class="#EDIT{hyperlien}">[<:inscription2:website:> <a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>]</span>
 	</div>
 
@@ -60,9 +76,22 @@
 	[(#REM) Un test pour voir si on a les 3 champs telephone Pros]
 	[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[(#SET{contacts_pro,complet})]]]]
 	[(#GET{contacts_pro}|?{' ',''})<span class="#EDIT{telfax_pro}">]
-		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})<:inscription2:telephone_pro:> : [<span class="#EDIT{telephone_pro} tel">(#TELEPHONE_PRO|?{#TELEPHONE_PRO,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})]</span><br />]
-		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|?{' ',''})[<:inscription2:mobile_pro:> : <span class="#EDIT{mobile_pro} fax">(#MOBILE_PRO|?{#MOBILE_PRO,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span></span><br />]]
-		[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})[<:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax">(#FAX_PRO|?{#FAX_PRO,<span class="non_renseigne"><:inscription2:non_renseigne:></span>})</span>]]
+		
+		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})
+			[(#TELEPHONE_PRO|?{' ',''})<:inscription2:telephone_pro:> : <span class="#EDIT{telephone_pro} tel">#TELEPHONE_PRO</span>]
+			[(#TELEPHONE_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:telephone_pro:> : <span class="#EDIT{telephone_pro} tel"><:inscription2:non_renseigne:></span></span>]
+		<br />]
+		
+		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|?{' ',''})
+			[(#MOBILE_PRO|?{' ',''})<:inscription2:mobile_pro:> : <span class="#EDIT{mobile_pro} cell">#MOBILE_PRO</span>]
+			[(#MOBILE_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:mobile_pro:> : <span class="#EDIT{mobile_pro} cell"><:inscription2:non_renseigne:></span></span>]
+		<br />]
+		
+		[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})
+			[(#FAX_PRO|?{' ',''})<:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax">#FAX_PRO</span>]
+			[(#FAX_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax"><:inscription2:non_renseigne:></span></span>]
+		]
+		
 	[(#GET{contacts_pro}|?{'</span><br />',''})]
 	</div>
 	
