@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('cout_lancement');
 
 /***********
@@ -10,6 +13,12 @@ cs_log("couteau_suisse_install($action)");
 	include_spip('inc/meta');
 	switch ($action){
 		case 'test':
+			// affichage d'un lien ici, puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
+			if (_request('exec') == 'admin_plugin') {
+				debut_cadre_enfonce();
+				echo icone_horizontale(_T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', true);
+				fin_cadre_enfonce();
+			}
 			return isset($GLOBALS['meta']['tweaks_actifs']);
 			break;
 		case 'install':
@@ -32,13 +41,25 @@ cs_log("couteau_suisse_install($action)");
  * PRIVE *
  *********/
 
+// ajout d'un onglet sur la page de configuration de SPIP
 function couteau_suisse_ajouter_onglets($flux){
-	// si on est admin
-	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"])
-		if ($flux['args']=='configuration')
-			$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), _T('cout:titre'), generer_url_ecrire("admin_couteau_suisse"));
+	// si on est admin...
+	if ($flux['args']=='configuration' && autoriser('configurer'))
+		$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), _T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'));
 	return $flux;
 }
+
+// ajout d'une icone sur la page de configuration des plugins
+// ce code ne sert à rien puisque le pipeline 'affiche_gauche' n'est pas pris en compte dans 'admin_plugin'...
+function couteau_suisse_affiche_gauche($flux){
+/*
+	if (_request('exec') == 'admin_plugin')
+		$flux['data'] .= 
+			icone_horizontale(_T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'), find_in_path('img/couteau-24.gif'), '', true);
+*/
+	return $flux;
+}
+
 
 function couteau_suisse_header_prive($flux){
 	global $cs_metas_pipelines;
@@ -49,6 +70,7 @@ function couteau_suisse_header_prive($flux){
 		else $flux .= "\n<!-- Rien pour le Couteau Suisse -->\n";
 	return $flux;
 }
+
 
 /**********
  * PUBLIC *

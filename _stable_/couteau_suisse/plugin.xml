@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Le Couteau Suisse</nom>
 	<icon>img/couteau-50.gif</icon>
-	<version>1.7.5.6</version>
+	<version>1.7.5.7</version>
 	<auteur>Patrice Vanneufville
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
@@ -57,6 +57,11 @@ Compatibilit&#233; : SPIP version 1.9 minimum.
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>
+		<inclure>cout_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<action>affiche_gauche</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
