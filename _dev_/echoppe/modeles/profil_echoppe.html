@@ -1,8 +1,8 @@
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
-
+<div class="contacts">
 <h3><:echoppe:contacts_livraison:></h3>
 
-[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})[(#SET{adresse_livraison,complet})]]]]]
+	[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})[(#SET{adresse_livraison,complet})]]]]]
 	<p>[(#GET{adresse_livraison}|?{' ',''})<span class="#EDIT{adressecompletelivraison} org adr">]
 		[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[<span class="street-address">(#ADRESSE_LIVRAISON|?{#ADRESSE_LIVRAISON,<:inscription2:adresse_livraison:> <:inscription2:non_renseignee:>})</span><br />]]
 		[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL_LIVRAISON|?{#CODE_POSTAL_LIVRAISON,<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
@@ -24,4 +24,5 @@
 		[(#CONFIG{inscription2/mobile_livraison_fiche_mod}|?{' ',''})[<:inscription2:mobile_livraison:> : <span class="#EDIT{mobile_livraison} fax">(#MOBILE_LIVRAISON|?{#MOBILE_LIVRAISON,<:inscription2:non_renseigne:>})</span></span><br />]]
 		[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})[<:inscription2:fax_livraison:> : <span class="#EDIT{fax_livraison} fax">(#FAX_LIVRAISON|?{#FAX_LIVRAISON,<:inscription2:non_renseigne:>})</span>]]
 	[(#GET{contacts_livraison}|?{'</span><br />',''})]
+</div>
 </BOUCLE_auteur_elargi>
