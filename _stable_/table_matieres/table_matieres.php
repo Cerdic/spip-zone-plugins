@@ -23,7 +23,7 @@ function TableMatieres_Callback($matches, $retour_cId = false) {
 	static $cId = 0;
 	if($retour_cId) return $cId;
 	$cId++;
-	$titre = typo($matches[1]);
+	$titre = supprimer_tags(typo($matches[1]));
 	$url = translitteration($titre);
 	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
 
