@@ -1,15 +1,16 @@
 <?php
 
-function TableMatieres_Table($url = '', $titre = '', $vider_table = false) {
+function TableMatieres_Table($url = '', $titre = '', $cId = 0, $vider_table = false) {
 	static $table = array();
 	if($vider_table) return ($table = array());
 	if($url == '') return $table;
+	$url = array_key_exists($url, $table) ? $url.$cId : $url;
 	$table[$url] = $titre;
-	return '';
+	return $url;
 }
 
 function TableMatieres_ViderTable() {
-	return TableMatieres_Table('', '', true);
+	return TableMatieres_Table('', '', 0, true);
 }
 
 function TableMatieres_BalisePresente($test = false) {
@@ -44,7 +45,7 @@ function TableMatieres_Callback($matches, $retour_cId = false) {
 		$url = substr($url, 1);
 		if (strlen($url) < 2) $url = "ancre$cId";
 	}
-	TableMatieres_Table($url, $titre);
+	$url = TableMatieres_Table($url, $titre, $cId);
 	return '{{{ ['.$url.'<-] '.$matches[1].' @@RETOUR_TDM@@ }}}';
 }
 
