@@ -1,0 +1,21 @@
+[(#REM)
+
+	Controleur pour le crayon 'telfaxlivraison', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS_ELARGIS){id=(#ENV{id_auteurs_elargi})}{tous}>
+<fieldset style="background-color:#fff;">
+<legend><:echoppe:vos_contacts_livraison:></legend>
+<label><:inscription2:telephone:> : </label> <input class="crayon-active" name="#ENV{name_telephone_livraison}"
+ style="width:#ENV{largeur}px;" value="[(#TELEPHONE_LIVRAISON**|entites_html)]" />
+<br />
+<label><:inscription2:mobile:> : </label> <input class="crayon-active" name="#ENV{name_mobile_livraison}"
+ style="width:#ENV{largeur}px;" value="[(#MOBILE_LIVRAISON**|entites_html)]" />
+<br />
+<label><:inscription2:fax:> : </label> <input class="crayon-active" name="#ENV{name_fax_livraison}"
+ style="width:#ENV{largeur}px;" value="[(#FAX_LIVRAISON**|entites_html)]" />
+</fieldset>
+</BOUCLE_a>
+<//B_a>

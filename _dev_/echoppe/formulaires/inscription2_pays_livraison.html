@@ -1,8 +1,10 @@
-<select name="pays_livraison" id="pays_livraison" class="forml select">
+<div class="select">
+<select name="pays_livraison" id="pays_livraison" class="forml">
 	<option value=""><:inscription2:pays:></option>
 	<BOUCLE_pays_livraison(SPIP_PAYS){tout}>
 		[<option value="#ID">
-		[(#PAYS)]
+		(#PAYS)
 		</option>]
 	</BOUCLE_pays_livraison>
 </select>
+</div>

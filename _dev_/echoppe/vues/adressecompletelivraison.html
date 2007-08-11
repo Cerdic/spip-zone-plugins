@@ -1,0 +1,17 @@
+[(#REM)
+
+	Vue pour le crayon 'adressecomplete'
+
+]
+#CACHE{0}
+<span class="#EDIT{adressecompletelivraison} adr">
+	[<span class="street-address">(#ENV*{adresse_livraison}|typo|n_to_br)</span><br />]
+	[<span class="postal-code">(#ENV*{code_postal_livraison}|typo)</span>]
+	[<span class="locality">(#ENV*{ville_livraison}|typo)</span><br />]
+	<span class="country-name">
+		[(#ENV*{pays_livraison}|?{'',' '})<:inscription2:pays:> <:inscription2:non_renseigne:>]
+		<BOUCLE_r(SPIP_PAYS){id=#ENV{pays_livraison}}>
+		#PAYS
+		</BOUCLE_r>
+	</span>
+</span>

@@ -1,0 +1,27 @@
+<BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
+
+<h3>Contacts de livraison</h3>
+
+[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})[(#SET{adresse_livraison,complet})]]]]]
+	<p>[(#GET{adresse_livraison}|?{' ',''})<span class="#EDIT{adressecompletelivraison} org adr">]
+		[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[<span class="street-address">(#ADRESSE_LIVRAISON|?{#ADRESSE_LIVRAISON,<:inscription2:adresse_livraison:> <:inscription2:non_renseignee:>})</span><br />]]
+		[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL_LIVRAISON|?{#CODE_POSTAL_LIVRAISON,<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
+		[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[<span class="locality">(#VILLE_LIVRAISON|?{#VILLE_LIVRAISON,<:inscription2:ville:> <:inscription2:non_renseignee:>})</span><br />]]
+		[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})<span class="country-name">]
+			<BOUCLE_r_livraison(SPIP_PAYS){id=#PAYS_LIVRAISON}{tous}>
+			[(#PAYS|couper{30})]
+			</BOUCLE_r_livraison>
+			[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})<:inscription2:pays:> <:inscription2:non_renseigne:>]
+			<//B_r_livraison>
+		[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})</span>]
+	[(#GET{adresse_livraison}|?{'</span>',''})]
+	</p>
+	
+	[(#REM) Un test pour voir si on a les 3 champs telephone Pros]
+	[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})[(#SET{contacts_livraison,complet})]]]]
+	[(#GET{contacts_livraison}|?{' ',''})<span class="#EDIT{telfaxlivraison}">]
+		[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})<:inscription2:telephone_livraison:> : [<span class="#EDIT{telephone_livraison} tel">(#TELEPHONE_LIVRAISON|?{#TELEPHONE_LIVRAISON,<:inscription2:non_renseigne:>})]</span><br />]
+		[(#CONFIG{inscription2/mobile_livraison_fiche_mod}|?{' ',''})[<:inscription2:mobile_livraison:> : <span class="#EDIT{mobile_livraison} fax">(#MOBILE_LIVRAISON|?{#MOBILE_LIVRAISON,<:inscription2:non_renseigne:>})</span></span><br />]]
+		[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})[<:inscription2:fax_livraison:> : <span class="#EDIT{fax_livraison} fax">(#FAX_LIVRAISON|?{#FAX_LIVRAISON,<:inscription2:non_renseigne:>})</span>]]
+	[(#GET{contacts_livraison}|?{'</span><br />',''})]
+</BOUCLE_auteur_elargi>
