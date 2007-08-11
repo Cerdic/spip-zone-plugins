@@ -32,11 +32,10 @@ function acronymes_traiter_raccourcis($letexte){
 
 /*
  *   +----------------------------------+
- *    Nom du Filtre : ajouter_acronymes
+ *    Nom du Filtre : acronymes_ajouter
  *   +----------------------------------+
- *   Publié le 30/11/2004
- *   Par Thomas Houssin <Thomas point Houssin at gmail.com>
- *   Modifié le 2/08/2005 par Cedric MORIN
+ *   fonction originale publiee le 30/11/2004 par Thomas Houssin <Thomas point Houssin at gmail.com>
+ *
  */
 
 function acronymes_ajouter($chaine,$replacenb=-1)
@@ -64,7 +63,7 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 		  )
 		)
 		return $chaine;
-	$chaine=" ".$chaine;
+	$chaine=" ".acronymes_traiter_raccourcis($chaine);
 
   if ($replacenb!=0)
   {
@@ -120,10 +119,10 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 			{
 				$desc_temp = trim(attribut_html(supprimer_tags($acro_replacements[$key])));
 				$desc_temp = supprimer_tags(str_replace("'","&#039;",$desc_temp));
-				$pattern="{([^\w@\.])(";
+				$pattern="{([^\w@\.]|^)($accro|";
 				for ($i=0;$i<strlen($accro);$i++)
-					$pattern.=$accro{$i}."[\.]?";
-				$pattern.=")(?=[\s.-])}";
+					$pattern.=$accro{$i}."\.";
+				$pattern.="?)(?=([^\w]|\s|&nbsp;|$))}";
 				$acro_patterns[$key] = $pattern;
 				$balise = $acro_balise[$key];
 				$acro_replacements[$key] = "\\1<$balise title='@A@C@R@O@$key@@'>\\2@</$balise>";
@@ -135,8 +134,8 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 			#tri necessaire
 			ksort($acro_patterns);
 			ksort($acro_replacements);
-  	}
 
+  	}
   	if (count($acro_patterns)){
 			// reperage des balises acronym existantes
 			$pattern="{<(?:acronym|abbr)[^>]*>([^<]*)</(?:acronym|abbr)>}";
