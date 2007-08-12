@@ -16,7 +16,7 @@
 function traiter_message_banque($id_abonne,$validation_paiement){
 
 
-$abonne = spip_fetch_array(spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, a.validite, b.email FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") );
+$abonne = spip_fetch_array(spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, a.validite, b.email, b.id_auteur, b.alea_actuel, b.login FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") );
 $abonnement = spip_fetch_array(spip_query("SELECT a.duree, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur_elargi = '$id_abonne' AND a.id_abonnement = b.id_abonnement") );
 
 $duree = $abonnement['duree'] ;
@@ -71,10 +71,20 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$abo
 			envoyer_mail ( $adresse_expediteur, $sujet, $message, $from = $expediteur, $headers = $entetes );
 			
 			// au demandeur
+			$adresse_site = $GLOBALS['meta']["adresse_site"];
 			$adresse= $abonne['email'];
 			$sujet = $sujet_message_ok ;
-			$message= $message_ok."\n\n\n".$nom_expediteur."\r\n";
+			$message= $message_ok."\n\n";
+			
+			$message .=  "Votre identifiant de connexion au site est ".$abonne['login']
+			."\n\nCliquez le lien suivant pour choisir votre mot de passe"
+			."\n".$adresse_site.'/?page=inscription2_confirmation&id='
+			.$abonne['id_auteur'].'&cle='.$abonne['alea_actuel'].'&mode=conf'
+			."\n\n".$nom_expediteur."\r\n";
+			
 			envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
+			envoyer_mail ('booz@rezo.net', $sujet, $message, $from = $expediteur, $headers = $entetes );
+
 	
 	}elseif($validation_paiement == "erreur_bank"){
 	
@@ -92,7 +102,8 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$abo
 			$sujet = $sujet_message_ko ;
 			$message= $message_ko."\n\n\n".$nom_expediteur."\r\n";
 			envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
-	
+			envoyer_mail ('booz@rezo.net', $sujet, $message, $from = $expediteur, $headers = $entetes );
+
 	}
 
 
