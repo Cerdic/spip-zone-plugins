@@ -24,7 +24,7 @@ function exec_flickr_choix_sets() {
   $from = array('spip_auteurs');
   $select = array('flickr_token','flickr_nsid');
   $where = array('id_auteur='.$connect_id_auteur);
-  $row = spip_abstract_fetsel($select,$from,$where);
+  $row = sql_fetsel($select,$from,$where);
   if($row['flickr_nsid'] != '' && $row['flickr_token'] != '') {
 	$check = flickr_auth_checkToken($row['flickr_token']);
 	if($check) {

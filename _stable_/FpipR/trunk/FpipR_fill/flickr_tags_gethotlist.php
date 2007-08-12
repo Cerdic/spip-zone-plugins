@@ -8,7 +8,7 @@ function FpipR_fill_flickr_tags_gethotlist_dist($arguments) {
   $fake_id = 0;
   if($who = $who['hottags']) {
 	foreach($who['tag'] as $t) {
-	  spip_abstract_insert('spip_fpipr_tags',
+	  sql_insert('spip_fpipr_tags',
 						   '(id_tag,score,safe)',
 						   '('._q($fake_id++).','._q($t['score']).','._q($t['_content']).')'
 						   );

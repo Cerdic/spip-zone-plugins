@@ -8,7 +8,7 @@ function FpipR_fill_flickr_photos_getallcontexts_dist($arguments) {
   foreach($contextes as $type => $cont) {
 	if(($type == 'set' || $type == 'pool') && is_array($cont)) 
 	  foreach ($cont as $c) {
-		spip_abstract_insert('spip_fpipr_contextes',
+		sql_insert('spip_fpipr_contextes',
 							 '(id_contexte,title,type,id_photo)',
 							 '('._q($c['id']).','._q($c['title']).','._q($type).','._q($id_photo).')'
 							 );  

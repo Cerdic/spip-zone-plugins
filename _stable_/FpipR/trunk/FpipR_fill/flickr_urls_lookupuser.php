@@ -7,7 +7,7 @@ function FpipR_fill_flickr_urls_lookupuser_dist($arguments) {
   $query = "DELETE FROM spip_fpipr_people";
   spip_query($query);
   if($user = $user['user']) {
-	spip_abstract_insert('spip_fpipr_groups',
+	sql_insert('spip_fpipr_groups',
 						 '(user_id,username)',
 						 '('._q($group['id']).','._q($group['username']['_content']).')'
 						 );

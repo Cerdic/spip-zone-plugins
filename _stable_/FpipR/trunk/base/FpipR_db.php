@@ -362,7 +362,7 @@ function FpipR_make_table($nom) {
 	spip_query("DROP TABLE $nom");
   }
   if(!$created[$nom]) {
-	spip_abstract_create($nom, $champs, $cles, false, false);
+	sql_create($nom, $champs, $cles, false, false);
   }
   $created[$nom] = true;
   ecrire_meta("FpipR_$nom",$GLOBALS['FpipR_versions'][$nom]);
@@ -393,7 +393,7 @@ function FpipR_fill_photos_table($photos,$add='') {
 	  foreach($add as $name=>$val) {
 		$vals .= ','._q($val);
 	  }
-	spip_abstract_insert('spip_fpipr_photos',
+	sql_insert('spip_fpipr_photos',
 						 $col.')',
 						 $vals.")");
   }
@@ -407,7 +407,7 @@ function FpipR_fill_comments_table($comments) {
   $photo_id = _q($comments['photo_id']);
   $photoset_id = _q($comments['photoset_id']);
   foreach($comments['comment'] as $com) {
-	spip_abstract_insert('spip_fpipr_comments',
+	sql_insert('spip_fpipr_comments',
 						 "(id_comment,user_id,authorname,date_create,permalink,texte,id_photo,id_photoset)",
 		
 						 '('._q($com['id']).','._q($com['author']).','._q($com['authorname']).','._q(date('Y-m-d H:i:s',$com['date_create'])).','._q($com['permalink']).','._q($com['_content']).','.$photo_id.','.$photoset_id.')'
@@ -432,7 +432,7 @@ function FpipR_fill_groups_table($groups,$key='groups',$add='') {
 	  foreach($add as $name=>$val) {
 		$vals .= ','._q($val);
 	  }
-	  spip_abstract_insert('spip_fpipr_groups',
+	  sql_insert('spip_fpipr_groups',
 						   $col.')',$vals.')'
 						   );
 	}

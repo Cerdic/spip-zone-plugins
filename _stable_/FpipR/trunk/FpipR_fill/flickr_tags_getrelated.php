@@ -8,7 +8,7 @@ function FpipR_fill_flickr_tags_getrelated_dist($arguments) {
   $fake_id = 0;
   if($who = $who['tags']) {
 	foreach($who['tag'] as $r) {
-	  spip_abstract_insert('spip_fpipr_tags',
+	  sql_insert('spip_fpipr_tags',
 						   '(id_tag,author,safe)',
 						   '('._q($fake_id++).','._q($user_id).','._q($r['_content']).')'
 						   );

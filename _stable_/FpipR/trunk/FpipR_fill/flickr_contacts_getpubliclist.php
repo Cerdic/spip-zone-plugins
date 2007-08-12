@@ -6,7 +6,7 @@ function FpipR_fill_flickr_contacts_getpubliclist_dist($arguments) {
   spip_query($query);
   if($contacts = $contacts['contacts']) {
 	foreach($contacts['contact'] as $c) {
-	  spip_abstract_insert('spip_fpipr_people',
+	  sql_insert('spip_fpipr_people',
 						   '(user_id,username,iconserver,ignored)',
 						   '('._q($c['nsid']).','._q($c['username']).','._q($c['iconserver']).','._q($c['ignored']).')'
 						   );

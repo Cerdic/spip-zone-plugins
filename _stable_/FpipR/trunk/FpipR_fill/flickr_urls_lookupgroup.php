@@ -7,7 +7,7 @@ function FpipR_fill_flickr_urls_lookupgroup_dist($arguments) {
   $query = "DELETE FROM spip_fpipr_groups";
   spip_query($query);
   if($group = $group['group']) {
-	spip_abstract_insert('spip_fpipr_groups',
+	sql_insert('spip_fpipr_groups',
 						 '(id_group,name)',
 						 '('._q($group['id']).','._q($group['groupname']['_content']).')'
 						 );
