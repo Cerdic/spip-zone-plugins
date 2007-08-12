@@ -40,9 +40,39 @@ function inscription2_verifier_tables(){
 		spip_query("ALTER TABLE `".$table_nom."` ADD `spip_listes_format` VARCHAR( 8 ) DEFAULT 'non' NOT NULL");
 }
 
+// Filtres
+
 function n_to_br($texte){
 	$texte = str_replace("\n", "<br />", $texte);
 	return $texte;
+}
+
+function id_pays_to_pays($id_pays){
+$pays = spip_fetch_array(spip_query("select pays from spip_pays where id ='$id_pays'")) ;
+return $pays['pays'] ;
+}
+
+function form_hidden_env($env){
+
+ 	    $hidden = '';
+ 	        foreach(unserialize($env) as $c => $v) {
+ 	            if(!is_array($v)){
+ 	            $hidden .= "\n<input name='" .
+ 	                entites_html($c) .
+ 	                "' value='" . entites_html($v) .
+ 	                "' type='hidden' />\n";
+ 	            }else{
+ 	            foreach($v as $cc => $vv)
+ 	            $hidden .= "\n<input name='" .
+ 	                entites_html($c) .
+ 	                "[]' value='" . entites_html($vv) .
+ 	                "' type='hidden' />\n";
+ 	            }    
+ 	            
+ 	            }    
+ 	   
+ 	    return $hidden;
+
 }
 
 ?>
