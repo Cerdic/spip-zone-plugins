@@ -112,6 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'introuvable'	=> 'Aucun jeu dans le contenu !',
 'pas_de_jeu'	=> "D&eacute;sol&eacute;, ce jeu n'existe pas !",
 'pas_d_auteur'	=> "D&eacute;sol&eacute;, cet auteur est inconnu !",
+'inserer_jeu'	=> "Ins&eacute;rer des jeux",
+'inserer_jeu_explication'	=>"Vous pouvez ins&eacute;rer des jeux en &eacute;crivant &#60;jeuyyy&#62;, o&ugrave; yyy est l'ID du jeu"
 );
 
 

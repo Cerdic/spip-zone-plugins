@@ -97,4 +97,16 @@ function boite_infos_jeux_tous() {
 	fin_boite_info();
 }
 
+function boite_info_jeux_edit(){
+	
+	
+	$r .= icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'','',false) ;
+	$r .= icone_horizontale(_T('jeux:nouveau_jeu'),generer_url_ecrire('jeux_edit','nouveau=oui'),find_in_path('img/jeu-nouveau.png'),'','',false);
+	
+	
+		
+	return $r;
+}
+	
+
 ?>
