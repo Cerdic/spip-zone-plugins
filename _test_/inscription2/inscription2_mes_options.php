@@ -5,12 +5,15 @@
 	include_spip('base/serial');
 	include_spip('base/abstract_sql');
 	
-	// a chaque validation de cfg, verifier l'etat de la table spip_auteurs_elargis	
+	// a chaque validation de cfg, verifier l'etat de la table spip_auteurs_elargis
+	// BoOz : le bug du foreach quand on ajoute un champ est ptet lie a ce code ?	
 	if(_request('exec')=='cfg' and _request('cfg')=='inscription2'){
 		include_spip('inscription2_mes_fonctions');
 		inscription2_verifier_tables();
 		spip_log('verification des tables');
 	}
+	
+	// declaration des tables
 	$GLOBALS['table_des_tables']['auteurs_elargis'] = 'auteurs_elargis';
 	global $tables_principales;
 	$table_nom = "spip_auteurs_elargis";
@@ -43,6 +46,7 @@
 	$tables_principales['spip_auteurs_elargis']  =	array('field' => &$spip_auteurs_elargis, 'key' => &$spip_auteurs_elargis_key);
 	$tables_principales['spip_pays']  =	array('field' => &$spip_pays, 'key' => &$spip_pays_key);
 	
+	// surcharger auteur session, desactivé car ca pete en 193
 	if(is_array($var_user) and isset($GLOBALS['auteur_session']['id_auteur'])){
 		$id = $GLOBALS['auteur_session']['id_auteur'];
 		$query = spip_query("select ".join(', ', array_keys($var_user))." from spip_auteurs_elargis where id_auteur = $id");
