@@ -35,8 +35,12 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 				return propre($descriptif);
 			else if (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
-			else
+			else {
+				// pas de maths dans l'intro...
+				$texte = preg_replace(',<math>.*</math>,imsU', '', $texte);
+				// on coupe proprement...
 				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($chapo."\n\n\n".$texte), round(500*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
+			}
 			break;
 		case 'breves':
 			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(300*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
