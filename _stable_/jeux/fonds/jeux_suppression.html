@@ -1,0 +1,7 @@
+<? if ($auteur_session['statut']=='0minirezo'){ 
+echo "<BOUCLE_resultat(JEUX){id_jeu?}>
+<BOUCLE_2(JEUX_RESULTATS){!par date}{id_jeu}{id_auteur?}>
+[(#ID_AUTEUR|unique{#ID_JEU}|?{#ID_RESULTAT}),]
+</BOUCLE_2>
+</BOUCLE_resultat>";}
+?>
