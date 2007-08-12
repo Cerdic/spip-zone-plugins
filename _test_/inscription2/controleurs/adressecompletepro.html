@@ -1,0 +1,113 @@
+[(#REM)
+
+	Controleur pour le crayon 'adressecompletepro', uniquement html
+	Validation JS pour les champs spécifiés obligatoires
+	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
+
+]
+#CACHE{0}
+<script type="text/javascript">
+/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
+	
+	jQuery.validator.addMethod("chaine", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.ÒÁ‡ËÈ‚ÍÓÙ˚ ]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
+
+	jQuery.validator.addMethod("postal", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:cp_valide:>");
+	
+			var id = cQuery(".auteurs_elargi-adressecompletepro-#ID_AUTEUR").crayon();
+			
+			var validator = $(id).validate({
+			event: "keyup",
+			showErrors: function(errors, errorList) {
+				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
+				$('.crayon-submit').hide();
+				validator.defaultShowErrors();
+			},
+			errorPlacement: function(error, element) {
+				error.appendTo( element.parent("div") );
+			},
+			success: function() {$('.crayon-submit').show();},
+			rules: {
+				#ENV{name_adresse_pro}: {[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{required: true,}),] rangeLength:[10,1000]},
+				#ENV{name_code_postal_pro}: {[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,15]},
+				#ENV{name_ville_pro}: {[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
+				#ENV{name_pays_pro}:{[(#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{required: true,''}),]minValue:1}
+			},
+			messages: {
+				#ENV{name_adresse_pro}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					postal:"<:inscription2:chaine_valide:>",
+					rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
+				#ENV{name_code_postal_pro}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					postal:"Entrez un code postal valide",
+					rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+				#ENV{name_ville_pro}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					chaine:"<:inscription2:chaine_valide:>",
+					rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+				#ENV{name_pays_pro}: {
+					required:"<:inscription2:champ_obligatoire:>"}
+			}
+		});
+
+		function testform(){
+			//On lance le validateur une fois pour vérifier si c est ok - si c'est pas ok on cache le bouton ok
+			if(validator.form() == false){$('.crayon-submit').hide();}
+			else{$('.crayon-submit').show();}
+		}
+		
+	$().ready(function() {
+		testform();
+		$('.obligatoire label').not('.error').append('*');
+	});
+</script>
+
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}>
+	<fieldset style="background-color:#fff;">
+		<legend><:inscription2:votre_adresse_pro:></legend>
+
+		[(#CONFIG{inscription2/adresse_pro}|?{' ',''})	
+		#SET{adresse_pro_obl, false}
+		[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{' ',''})#SET{adresse_pro_obl, true}]
+		[(#GET{adresse_pro_obl}|=={true}|?{<div class="obligatoire">,<div>})]		
+		<label><:inscription2:adresse_pro:></label> 
+		<textarea class="crayon-active" name="#ENV{name_adresse_pro}" style="width:#ENV{largeur}px;" />
+		[(#ADRESSE_PRO**|entites_html)]
+		</textarea>
+		</div>]
+
+		[(#CONFIG{inscription2/code_postal_pro}|?{' ',''})
+		#SET{code_postal_pro_obl, false}
+		[(#CONFIG{inscription2/code_postal_pro_obligatoire}|=={on}|?{' ',''})#SET{code_postal_pro_obl, true}]
+		[(#GET{code_postal_pro_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:code_postal_pro:></label>
+		<input class="crayon-active" name="#ENV{name_code_postal_pro}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL_PRO**|entites_html)]" />
+		</div>]
+
+		[(#CONFIG{inscription2/ville_pro}|?{' ',''})
+		#SET{ville_pro_obligatoire, false}
+		[(#CONFIG{inscription2/ville_pro_obligatoire}|=={on}|?{' ',''}) #SET{ville_pro_obligatoire, true}]
+		[(#GET{ville_pro_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:ville_pro:></label>
+		<input class="crayon-active" name="#ENV{name_ville_pro}" style="width:#ENV{largeur}px;" value="[(#VILLE_PRO**|entites_html)]" />
+		</div>]
+
+		[(#CONFIG{inscription2/pays_pro}|?{' ',''})
+		#SET{pays_pro_obligatoire, false}
+		[(#CONFIG{inscription2/pays_pro_obligatoire}|=={on}|?{' ',''}) #SET{pays_pro_obligatoire, true}]
+		[(#GET{pays_pro_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:pays_pro:></label>
+		#SET{id,#PAYS_PRO}
+		<select class="crayon-active" name="#ENV{name_pays_pro}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}" />
+			[(#INCLURE{fond=controleurs/pays}{id=#GET{id}})]
+		</select>
+		</div>]
+
+	</fieldset>
+	
+</BOUCLE_a>
+<//B_a>

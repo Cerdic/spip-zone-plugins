@@ -1,11 +1,13 @@
 [(#REM)
 
 	Controleur pour le crayon 'adressecomplete', uniquement html
+	Validation JS pour les champs spécifiés obligatoires
+	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
 
 ]
 #CACHE{0}
 
-<BOUCLE_a(AUTEURS_ELARGIS){id=(#ENV{id_auteurs_elargi})}>
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}>
 <script type="text/javascript">
 /* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
 	
@@ -14,10 +16,11 @@
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
 
 	jQuery.validator.addMethod("postal", function(value, element) {
-		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z0-9\- ]+$/.test(value);
+		return !jQuery.validator.methods.required(value, element) || /^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$/.test(value);
 	}, "<:inscription2:champ_obligatoire:>, <:inscription2:cp_valide:>");
 	
-			var validator = $("#adressecomplete#ID_AUTEUR").validate({
+			var id = cQuery(".auteurs_elargi-adressecomplete-#ID_AUTEUR").crayon();
+			var validator = $(id).validate({
 			event: "keyup",
 			showErrors: function(errors, errorList) {
 				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
@@ -54,56 +57,53 @@
 
 		function testform(){
 			//On lance le validateur une fois pour vérifier si c est ok - si c'est pas ok on cache le bouton ok
-			if(validator.form() == false){
-				$('.crayon-submit').hide();
-			}
+			if(validator.form() == false){$('.crayon-submit').hide();}
 			else{$('.crayon-submit').show();}
 		}
 		
 	$().ready(function() {
 		testform();
-		$('.obligatoire label').append('*');
+		$('.obligatoire label').not('.error').append('*');
 	});
 </script>
 
 <fieldset style="background-color:#fff;">
 	<legend><:inscription2:votre_adresse:></legend>
 
+	[(#CONFIG{inscription2/adresse}|?{' ',''})
 	#SET{adresse_obl, false}
 	[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{' ',''})#SET{adresse_obl, true}]
 	[(#GET{adresse_obl}|=={true}|?{<div class="obligatoire">,<div>})]
 		<label><:inscription2:adresse:></label> 
 		<textarea class="crayon-active" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;" />[(#ADRESSE**|entites_html)]</textarea><br />
-	</div>
+	</div>]
 
+	[(#CONFIG{inscription2/code_postal}|?{' ',''})
 	#SET{code_postal_obl, false}
 	[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{' ',''})#SET{code_postal_obl, true}]
 	[(#GET{code_postal_obl}|=={true}|?{<div class="obligatoire">,<div>})]
 		<label><:inscription2:code_postal:></label> 
 		<input class="crayon-active" name="#ENV{name_code_postal}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL**|entites_html)]" />
-		<br />
-	</div>
+	</div>]
 
+	[(#CONFIG{inscription2/ville}|?{' ',''})
 	#SET{ville_obligatoire, false}
 	[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{' ',''}) #SET{ville_obligatoire, true}]
 	[(#GET{ville_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
 		<label><:inscription2:ville:></label> 
 		<input class="crayon-active" name="#ENV{name_ville}" style="width:#ENV{largeur}px;" value="[(#VILLE**|entites_html)]" />
-		<br />
-	</div>
-	
+	</div>]
+
+	[(#CONFIG{inscription2/pays}|?{' ',''})
 	#SET{pays_obligatoire, false}
 	[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{' ',''}) #SET{pays_obligatoire, true}]
 	[(#GET{pays_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
 		<label><:inscription2:pays:></label> 
 		#SET{id,#PAYS}
 		<select class="crayon-active" name="#ENV{name_pays}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}" />
-			<option value=""><:inscription2:pays:></option>
-			<BOUCLE_r(SPIP_PAYS){tous}>
-			<option value="#ID"[(#GET{id}|=={#ID}|?{selected})]>[(#PAYS|couper{30})]</option>
-			</BOUCLE_r>
+			<INCLURE{fond=controleurs/pays}{id=#GET{id}}>
 		</select>
-	</div>
+	</div>]
 	
 </fieldset>
 
