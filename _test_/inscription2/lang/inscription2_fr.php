@@ -181,6 +181,7 @@ L\'&eacute;quipe de @nom_site@',
 'votre_adresse_pro' => 'Votre adresse professionnelle',
 'votre_nom_complet' => 'Votre nom complet',
 'vos_contacts_personnels' => 'Vos contacts personnels',
+'website' => 'Site Internet',
 
 'page_confirmation' => 'Page de confirmation de votre inscription'
 

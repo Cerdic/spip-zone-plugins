@@ -154,6 +154,7 @@ El equipo de @nom_site@',
 'votre_adresse_pro' => '<NEW>Votre adresse professionnelle',
 'votre_nom_complet' => '<NEW>Votre nom complet',
 'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
+'website' => '<NEW>Site Internet',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 

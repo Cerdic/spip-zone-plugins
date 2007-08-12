@@ -1,15 +1,17 @@
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.validate.pack.js}"></script>
 <div id="profil">
 
-	[<h2 style="margin:10px 0;"><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></h2>]
+	[<h2><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></h2>]
 
-	<div class="#EDIT{logo} Buddy">[(#LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#LOGO_AUTEUR||image_reduire{200,0})]]</div>
+	<div class="#_auteur:EDIT{logo} Buddy">[(#LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#LOGO_AUTEUR||image_reduire{200,0})]]</div>
 	
-	<div class="#EDIT{bio}" style="margin:10px 0">
+	<div class="#_auteur:EDIT{bio} profil_bio">
 	[(#BIO|?{#BIO,"..."})]
 	</div>
 	
-	<div class="contacts">
+	<div class="profil_contacts">
 	<h3><:inscription2:contacts_personnels:></h3>
 
 	[(#REM) Un test pour voir si on a les 4 champs adresse]
@@ -28,7 +30,7 @@
 	[(#GET{adresse}|?{'</span>',''})]
 	</p>
 	
-	[<p><span class="#EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL|?{#EMAIL,<:inscription2:non_renseigne:>})</a></span></p>]
+	[<p><span class="#_auteur:EDIT{auteur_email}"><:inscription2:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL|?{#EMAIL,<:inscription2:non_renseigne:>})</a></span></p>]
 	
 	[(#REM) Un test pour voir si on a les 3 champs telephone]
 	[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})[(#SET{contacts,complet})]]]]
@@ -51,10 +53,21 @@
 
 	[(#GET{contacts}|?{'</span></p>',''})]
 
-	<span class="#EDIT{hyperlien}">[<:inscription2:website:> <a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>]</span>
+	[(#URL_SITE|?{' ',''}) 
+		[<p><span class="#_auteur:EDIT{hyperlien}"><:inscription2:website:> : 
+			<a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE)</a>
+		</span></p>]
+	]
+	
+	[(#URL_SITE|?{'',' '})
+		<p><span class="non_renseigne">
+			<span class="#_auteur:EDIT{hyperlien}"><:inscription2:website:> : <:inscription2:non_renseigne:></span>
+		</span></p>
+	]
+	
 	</div>
 
-	<div class="contacts">
+	<div class="profil_contacts">
 	<h3><:inscription2:contacts_pros:></h3>
 	
 	[(#CONFIG{inscription2/societe_fiche_mod}|?{' ',''})[<p><span class="#EDIT{societe}"><:inscription2:societe:> : <span class="org">(#SOCIETE|?{#SOCIETE,<span class="non_renseigne"><:inscription2:non_renseignee:></span>})</span></span></p>]]
@@ -78,18 +91,18 @@
 	[(#GET{contacts_pro}|?{' ',''})<span class="#EDIT{telfax_pro}">]
 		
 		[(#CONFIG{inscription2/telephone_pro_fiche_mod}|?{' ',''})
-			[(#TELEPHONE_PRO|?{' ',''})<:inscription2:telephone_pro:> : <span class="#EDIT{telephone_pro} tel">#TELEPHONE_PRO</span>]
-			[(#TELEPHONE_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:telephone_pro:> : <span class="#EDIT{telephone_pro} tel"><:inscription2:non_renseigne:></span></span>]
+			[(#TELEPHONE_PRO|?{' ',''})<:inscription2:telephone:> : <span class="#EDIT{telephone_pro} tel">#TELEPHONE_PRO</span>]
+			[(#TELEPHONE_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:telephone:> : <span class="#EDIT{telephone_pro} tel"><:inscription2:non_renseigne:></span></span>]
 		<br />]
 		
 		[(#CONFIG{inscription2/mobile_pro_fiche_mod}|?{' ',''})
-			[(#MOBILE_PRO|?{' ',''})<:inscription2:mobile_pro:> : <span class="#EDIT{mobile_pro} cell">#MOBILE_PRO</span>]
-			[(#MOBILE_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:mobile_pro:> : <span class="#EDIT{mobile_pro} cell"><:inscription2:non_renseigne:></span></span>]
+			[(#MOBILE_PRO|?{' ',''})<:inscription2:mobile:> : <span class="#EDIT{mobile_pro} cell">#MOBILE_PRO</span>]
+			[(#MOBILE_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:mobile:> : <span class="#EDIT{mobile_pro} cell"><:inscription2:non_renseigne:></span></span>]
 		<br />]
 		
 		[(#CONFIG{inscription2/fax_pro_fiche_mod}|?{' ',''})
-			[(#FAX_PRO|?{' ',''})<:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax">#FAX_PRO</span>]
-			[(#FAX_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:fax_pro:> : <span class="#EDIT{fax_pro} fax"><:inscription2:non_renseigne:></span></span>]
+			[(#FAX_PRO|?{' ',''})<:inscription2:fax:> : <span class="#EDIT{fax_pro} fax">#FAX_PRO</span>]
+			[(#FAX_PRO|?{'',' '})<span class="non_renseigne"><:inscription2:fax:> : <span class="#EDIT{fax_pro} fax"><:inscription2:non_renseigne:></span></span>]
 		]
 		
 	[(#GET{contacts_pro}|?{'</span><br />',''})]
@@ -100,4 +113,5 @@
 	]
 </div>
 </BOUCLE_auteur_elargi>
+</BOUCLE_auteur>
 <br class="nettoyeur" />

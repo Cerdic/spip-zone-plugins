@@ -177,6 +177,7 @@ L\'&eacute;quipe de @nom_site@',
 'votre_adresse_pro' => 'Ihre professionelle Adresse',
 'votre_nom_complet' => '<NEW>Votre nom complet',
 'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
+'website' => '<NEW>Site Internet',
 
 'page_confirmation' => 'Seite der Bestätigung Ihrer Einschreibung'
 
