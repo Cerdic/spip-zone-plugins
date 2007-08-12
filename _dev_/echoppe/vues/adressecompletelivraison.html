@@ -1,17 +1,19 @@
 [(#REM)
 
-	Vue pour le crayon 'adressecomplete'
+	Vue pour le crayon 'adressecompletelivraison'
 
 ]
 #CACHE{0}
-<span class="#EDIT{adressecompletelivraison} adr">
-	[<span class="street-address">(#ENV*{adresse_livraison}|typo|n_to_br)</span><br />]
-	[<span class="postal-code">(#ENV*{code_postal_livraison}|typo)</span>]
-	[<span class="locality">(#ENV*{ville_livraison}|typo)</span><br />]
-	<span class="country-name">
-		[(#ENV*{pays_livraison}|?{'',' '})<:inscription2:pays:> <:inscription2:non_renseigne:>]
-		<BOUCLE_r(SPIP_PAYS){id=#ENV{pays_livraison}}>
-		#PAYS
-		</BOUCLE_r>
-	</span>
+<span class="#EDIT{adressecompletelivraison} org adr">
+	
+	[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[<span class="street-address">(#ENV*{adresse_livraison}|?{[(#ENV*{adresse_livraison}|typo|n_to_br)],<:inscription2:adresse_livraison:> <:inscription2:non_renseignee:>})</span><br />]]
+	
+	[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[<span class="postal-code">(#ENV*{code_postal_livraison}|?{[(#ENV*{code_postal_livraison}|typo)],<:inscription2:code_postal_livraison:> <:inscription2:non_renseigne:><br />})</span>]]
+	
+	[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[<span class="locality">(#ENV*{ville_livraison}|?{[(#ENV*{ville_livraison}|typo)],<:inscription2:ville_livraison:> <:inscription2:non_renseignee:>})</span><br />]]
+	
+	[(#CONFIG{inscription2/pays_livraison}|?{' ',''})
+		[(#ENV*{pays_livraison}|?{'',' '})<span class="country-name"><:inscription2:pays:> <:inscription2:non_renseigne:></span>]
+		[(#ENV*{pays_livraison}|?{' ',''})<span class="country-name">[(#INCLURE{fond=vues/pays}{id=#ENV*{pays_livraison}})]</span>]
+	]
 </span>

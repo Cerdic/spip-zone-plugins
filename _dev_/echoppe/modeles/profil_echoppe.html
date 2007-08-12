@@ -1,5 +1,5 @@
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS){id_auteur}{tout}>
-<div class="contacts">
+<div class="contacts" id="contacts_livraison">
 <h3><:echoppe:contacts_livraison:></h3>
 
 	[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})[(#SET{adresse_livraison,complet})]]]]]
@@ -17,26 +17,30 @@
 	[(#GET{adresse_livraison}|?{'</span>',''})]
 	</p>
 	
-	[(#REM) Un test pour voir si on a les 3 champs telephone Pros]
-	[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})[(#SET{contacts_livraison,complet})]]]]
+	[(#REM) Un test pour voir si on a un des 3 champs telephone Pros]
+	[(#SET{contacts_livraison,false})]
+	[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{[(#SET{contacts_livraison,true})],''})]
+	[(#CONFIG{inscription2/mobile_livraison_fiche_mod}|?{[(#SET{contacts_livraison,true})],''})]
+	[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{[(#SET{contacts_livraison,true})],''})]
 	
-	[(#GET{contacts_livraison}|?{' ',''})<span class="#EDIT{telfaxlivraison}">]
+	[(#REM) Si on a au moins un des champs on affiche le contrôleur]
+	[(#GET{contacts_livraison}|=={true}|?{' ',''})<span class="#EDIT{telfaxlivraison}">]
 	
 		[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})
-			[(#TELEPHONE_LIVRAISON|?{' ',''})<:inscription2:telephone:> : <span class="#EDIT{telephone_livraison} tel">#TELEPHONE_LIVRAISON</span>]
-			[(#TELEPHONE_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:telephone:> : <span class="#EDIT{telephone_livraison} tel"><:inscription2:non_renseigne:></span></span>]
+			[(#TELEPHONE_LIVRAISON|?{' ',''})<:inscription2:telephone:> : <span class="tel">#TELEPHONE_LIVRAISON</span>]
+			[(#TELEPHONE_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:telephone:> : <span class="tel"><:inscription2:non_renseigne:></span></span>]
 		<br />]
 		
 		[(#CONFIG{inscription2/mobile_livraison_fiche_mod}|?{' ',''})
-			[(#MOBILE_LIVRAISON|?{' ',''})<:inscription2:mobile:> : <span class="#EDIT{mobile_livraison} cell">#MOBILE_LIVRAISON</span>]
-			[(#MOBILE_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:mobile:> : <span class="#EDIT{mobile_livraison} cell"><:inscription2:non_renseigne:></span></span>]
+			[(#MOBILE_LIVRAISON|?{' ',''})<:inscription2:mobile:> : <span class="cell">#MOBILE_LIVRAISON</span>]
+			[(#MOBILE_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:mobile:> : <span class="cell"><:inscription2:non_renseigne:></span></span>]
 		<br />]
 		
 		[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})
-			[(#FAX_LIVRAISON|?{' ',''})<:inscription2:fax:> : <span class="#EDIT{fax_livraison} fax">#FAX_LIVRAISON</span>]
-			[(#FAX_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:fax:> : <span class="#EDIT{fax_livraison} fax"><:inscription2:non_renseigne:></span></span>]
+			[(#FAX_LIVRAISON|?{' ',''})<:inscription2:fax:> : <span class="fax">#FAX_LIVRAISON</span>]
+			[(#FAX_LIVRAISON|?{'',' '})<span class="non_renseigne"><:inscription2:fax:> : <span class="fax"><:inscription2:non_renseigne:></span></span>]
 		]
 	
-	[(#GET{contacts_livraison}|?{'</span><br />',''})]
+	[(#GET{contacts_livraison}|=={true}|?{' ',''})</span>]
 </div>
 </BOUCLE_auteur_elargi>
