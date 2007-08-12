@@ -99,14 +99,20 @@ function boite_infos_jeux_tous() {
 
 function boite_info_jeux_edit(){
 	
-	
+$r .= debut_cadre_relief(find_in_path('img/jeu-voir.png'),true,'',_T('jeux:inserer_jeu'));
+	$r .= "<div>"._T('jeux:inserer_jeu_explication')."</div>";			
 	$r .= icone_horizontale(_T('jeux:jeux_tous'),generer_url_ecrire('jeux_tous'),find_in_path('img/jeux-tous.png'),'','',false) ;
 	$r .= icone_horizontale(_T('jeux:nouveau_jeu'),generer_url_ecrire('jeux_edit','nouveau=oui'),find_in_path('img/jeu-nouveau.png'),'','',false);
-	
-	
-		
+	$r .= fin_cadre_relief(true);	
 	return $r;
 }
-	
+
+
+
+function boite_infos_spip_auteur($id_auteur) {
+	$r = debut_boite_info();	
+	$r .= icone_horizontale(_T('jeux:voir_ses_resultats'),generer_url_ecrire('jeux_resultats_auteur','id_auteur='.$id_auteur),find_in_path('img/jeu-laurier.png'));			
+	$r .= fin_boite_info();
+}	
 
 ?>

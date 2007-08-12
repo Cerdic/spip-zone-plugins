@@ -124,31 +124,40 @@ function jeux_affichage_final($flux) {
 	return str_replace(_JEUX_HEAD2, $header, $flux);
 }
 
-function jeux_affiche_droite($flux){
-		if (in_array($flux['args']['exec'],array('articles_edit','breves_edit','rubriques_edit','mots_edit'))){
-			$r = '';	
-			
-			
-			include_spip('exec/inc_boites_infos');
-			
-			
-			//$r .= debut_cadre_relief(find_in_path('img/jeu-voir.png'),true);
-			
-			
-			$r .= debut_cadre_relief(find_in_path('img/jeu-voir.png'),true,'',_T('jeux:inserer_jeu'));
-			$r .= "<div>"._T('jeux:inserer_jeu_explication')."</div>";
-			
-			$r .= boite_info_jeux_edit();
-			
-			$r .= fin_cadre_relief(true);
-			
-		
-			
-		
-		}
-		$flux['data'] = $r;
-		return $flux;
-	}
 
+
+function jeux_affiche_droite($flux){
+	if (in_array($flux['args']['exec'],array('articles_edit','breves_edit','rubriques_edit','mots_edit'))){
+	include_spip('exec/inc_boites_infos');	
+	$flux['data'] = boite_info_jeux_edit();
+	}
+	
+	if (in_array($flux['args']['exec'],array('auteur_infos'))){
+	include_spip('exec/inc_boites_infos');					
+	$r = boite_infos_spip_auteur($flux['args']['id_auteur']);
+	
+	}
+	
+	return $flux;
+}
+//tout ce que l'on va afficher ˆ gauche (donc affiche_droite, c'est logique non ?)
+function jeux_affiche_droite_edit(){
+			
+		include_spip('exec/inc_boites_infos');	
+
+		$r .= debut_cadre_relief(find_in_path('img/jeu-voir.png'),true,'',_T('jeux:inserer_jeu'));
+		$r .= "<div>"._T('jeux:inserer_jeu_explication')."</div>";			
+		$r .= boite_info_jeux_edit();			
+				
+		
+		return $r;
+}
+
+function jeux_affiche_droite_auteur($id){
+		
+		
+	
+		return $r;
+}
 
 ?>
