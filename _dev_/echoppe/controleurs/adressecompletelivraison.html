@@ -4,27 +4,104 @@
 
 ]
 #CACHE{0}
+<script type="text/javascript">
+/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
+	
+	jQuery.validator.addMethod("chaine", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.ÒÁ‡ËÈ‚ÍÓÙ˚ ]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
+
+	jQuery.validator.addMethod("postal", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z0-9\- ]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:cp_valide:>");
+	
+			var validator = $("#adressecomplete#ID_AUTEUR").validate({
+			event: "keyup",
+			showErrors: function(errors, errorList) {
+				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
+				$('.crayon-submit').hide();
+				validator.defaultShowErrors();
+			},
+			errorPlacement: function(error, element) {
+				error.appendTo( element.parent("div") );
+			},
+			success: function() {$('.crayon-submit').show();},
+			rules: {
+				#ENV{name_adresse_livraison}: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[10,1000]},
+				#ENV{name_code_postal_livraison}: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
+				#ENV{name_ville_livraison}: {[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
+				#ENV{name_pays_livraison}:{[(#CONFIG{inscription2/pays_obligatoire}|=={on}|?{required: true,''}),]minValue:1}
+			},
+			messages: {
+				#ENV{name_adresse_livraison}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					postal:"<:inscription2:chaine_valide:>",
+					rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
+				#ENV{name_code_postal_livraison}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					postal:"Entrez un code postal valide",
+					rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
+				#ENV{name_ville_livraison}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					chaine:"<:inscription2:chaine_valide:>",
+					rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
+				#ENV{name_pays_livraison}: {
+					required:"<:inscription2:champ_obligatoire:>"}
+			}
+		});
+
+		function testform(){
+			//On lance le validateur une fois pour vérifier si c est ok - si c'est pas ok on cache le bouton ok
+			if(validator.form() == false){
+				$('.crayon-submit').hide();
+			}
+			else{$('.crayon-submit').show();}
+		}
+		
+	$().ready(function() {
+		testform();
+		$('.obligatoire label').append('*');
+	});
+</script>
 
 <BOUCLE_a(AUTEURS_ELARGIS){id=(#ENV{id_auteurs_elargi})}>
-<fieldset style="background-color:#fff;">
-<legend><:echoppe:votre_adresse_livraison:></legend>
-<label><:inscription2:adresse:></label> 
-<textarea class="crayon-active" name="#ENV{name_adresse_livraison}" style="width:#ENV{largeur}px;" />[(#ADRESSE_LIVRAISON**|entites_html)]</textarea>
-<br />
-<label><:inscription2:code_postal:></label> <input class="crayon-active" name="#ENV{name_code_postal_livraison}"
- style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL_LIVRAISON**|entites_html)]" />
-<br />
-<label><:inscription2:ville:></label> <input class="crayon-active" name="#ENV{name_ville_livraison}"
- style="width:#ENV{largeur}px;" value="[(#VILLE_LIVRAISON**|entites_html)]" />
- <br />
- <label><:inscription2:pays:></label>
-#SET{id,#PAYS_LIVRAISON}
-<select class="crayon-active" name="#ENV{name_pays_livraison}" style="width:#ENV{largeur}px;#ENV{style}" />
-<option value=""><:inscription2:pays:></option>
-<BOUCLE_r(SPIP_PAYS){tous}>
-<option value="#ID"[(#GET{id}|=={#ID}|?{selected})]>[(#PAYS|couper{30})]</option>
-</BOUCLE_r>
-</select>
-</fieldset>
+	<fieldset style="background-color:#fff;">
+		<legend><:echoppe:votre_adresse_livraison:></legend>
+		
+		#SET{adresse_livraison_obl, false}
+		[(#CONFIG{inscription2/adresse_livraison_obligatoire}|=={on}|?{' ',''})#SET{adresse_livraison_obl, true}]
+		[(#GET{adresse_livraison_obl}|=={true}|?{<div class="obligatoire">,<div>})]		
+		<label><:inscription2:adresse:></label> 
+		<textarea class="crayon-active" name="#ENV{name_adresse_livraison}" style="width:#ENV{largeur}px;" />[(#ADRESSE_LIVRAISON**|entites_html)]</textarea>
+		</div>
+
+		#SET{code_postal_livraison_obl, false}
+		[(#CONFIG{inscription2/code_postal_livraison_obligatoire}|=={on}|?{' ',''})#SET{code_postal_livraison_obl, true}]
+		[(#GET{code_postal_livraison_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:code_postal:></label>
+		<input class="crayon-active" name="#ENV{name_code_postal_livraison}" style="width:#ENV{largeur}px;" value="[(#CODE_POSTAL_LIVRAISON**|entites_html)]" />
+		</div>
+
+		#SET{ville_livraison_obligatoire, false}
+		[(#CONFIG{inscription2/ville_livraison_obligatoire}|=={on}|?{' ',''}) #SET{ville_livraison_obligatoire, true}]
+		[(#GET{ville_livraison_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:ville:></label>
+		<input class="crayon-active" name="#ENV{name_ville_livraison}" style="width:#ENV{largeur}px;" value="[(#VILLE_LIVRAISON**|entites_html)]" />
+		</div>
+
+		#SET{pays_livraison_obligatoire, false}
+		[(#CONFIG{inscription2/pays_livraison_obligatoire}|=={on}|?{' ',''}) #SET{pays_livraison_obligatoire, true}]
+		[(#GET{pays_livraison_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
+		<label><:inscription2:pays:></label>
+		#SET{id,#PAYS_LIVRAISON}
+		<select class="crayon-active" name="#ENV{name_pays_livraison}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}" />
+			<option value=""><:inscription2:pays:></option>
+			<BOUCLE_r(SPIP_PAYS){tous}>
+			<option value="#ID"[(#GET{id}|=={#ID}|?{selected})]>[(#PAYS|couper{30})]</option>
+			</BOUCLE_r>
+		</select>
+		</div>
+	</fieldset>
+	
 </BOUCLE_a>
 <//B_a>
