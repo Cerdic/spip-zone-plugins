@@ -28,7 +28,7 @@ sort($files);
 // Affichage des fichiers et dossiers triés
 echo "<h1>Liste des sites install&eacute;s (".count($files).")</h1>\n<ul>";
 foreach($files as $v) {
-    echo "<li><a href='http://$v'>$v</a></li>\n";
+    echo "<li><a href='http://$v'>$v</a> — <a href='http://$v/ecrire/'>/ecrire/</a> — <a href='http://$v/ecrire/?exec=statistiques_visites'>Statistiques</a></li>\n";
 }
 echo "</ul>";
 ?>
