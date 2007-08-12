@@ -64,6 +64,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 				$var_user[$cle] = _request($cle);
 		}
 	}
+		
 	$aux = true;
 	$commentaire = true;
 	if($var_user['domaines']){
@@ -71,28 +72,45 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 		$var_user['sites'] = $domaine[$var_user['domaines']]['sites'] ;
 		$var_user['zone'] = $domaine[$var_user['domaines']]['zones'] ;
 		foreach($var_user['sites'] as $val)
-			$aux = ($aux or ereg("^.*".$val."$", $var_user[email]));
+			$aux = ($aux or ereg("^.*".$val."$", $var_user['email']));
 		if(!$aux)
 			$aux = empty($var_user['sites']);
 		if(!$aux)
 			$message = _T('inscription2:mail_non_domaine');
 	}
+
+	// etape de validation
+	if(defined('_DIR_PLUGIN_ABONNEMENT')){
+		if($var_user['email'] and ($retour = _request('retour'))){	
+			$commentaire = true;
+			$var_user['commentaires'] = $commentaire;
+			return array("formulaires/inscription2", $GLOBALS['delais'],$var_user);
+		}elseif($var_user['email'] and !($validation = _request('validation'))){	
+			$commentaire = true;
+			$var_user['commentaires'] = $commentaire;
+			return array("formulaires/abonnement_validation", $GLOBALS['delais'],$var_user);
+		}
+	}
+			
+	// enregistrement du nouvel inscrit
 	if($var_user['email'] and $aux){
 		$commentaire = message_inscription2($var_user, $mode);
 		if (is_array($commentaire)) {
 			$var_user['id_auteur'] = $commentaire['id_auteur'];
+			$var_user['id_auteur_elargi'] = $commentaire['id_auteur_elargi'];
 			$commentaire = true;
 			}
-
 	}
+	
 	$var_user['message'] = $message;
 	$var_user['commentaires'] = $commentaire;
 	$var_user['mode'] = $mode;
 	$var_user['self'] = str_replace('&amp;','&',(self()));
 	
 	if($var_user['email']){
-		if(defined('_DIR_PLUGIN_ABONNEMENT'))
-			return array("formulaires/abonnement_validation", $GLOBALS['delais'],$var_user);
+		if(defined('_DIR_PLUGIN_ABONNEMENT')){
+			return array("formulaires/abonnement_paiement", $GLOBALS['delais'],$var_user);
+			}
 			
 		return array("formulaires/inscription2_validation", $GLOBALS['delais'],$var_user);
 	
@@ -162,7 +180,7 @@ function inscription2_nouveau($declaration){
 	}
 	
 	$n = spip_abstract_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
-	
+	$declaration['id_auteur_elargi'] = $n ;
 	if(isset($declaration['abonnement'])){
 		$value = $declaration['abonnement'] ;	
 			spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('$n', '$value')");

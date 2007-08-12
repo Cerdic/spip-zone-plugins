@@ -16,7 +16,7 @@
 
 
 [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-	#INCLURE{fond=formulaires/abonnement_liste}	
+	[(#INCLURE{fond=formulaires/abonnement_liste}{abonnement=[(#ENV{abonnement})]})]	
 ]
 
 
@@ -63,8 +63,8 @@
 <div[ (#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{class="obligatoire"})]>
 	<label><:inscription2:sexe:></label>
 	<div class="select">
-	<input name="sexe" style="display:inline;float:none;width:auto" type="radio" value="M" /> <:inscription2:masculin:>
-	<input name="sexe" style="display:inline;float:none;width:auto" type="radio" value="F" /> <:inscription2:feminin:>
+	<input name="sexe" style="display:inline;float:none;width:auto" type="radio" [(#ENV{sexe}|=={M}|?{'checked="checked"'})] value="M" /> <:inscription2:masculin:>
+	<input name="sexe" style="display:inline;float:none;width:auto" type="radio" [(#ENV{sexe}|=={F}|?{'checked="checked"'})] value="F" /> <:inscription2:feminin:>
 	</div>
 </div>
 ]
@@ -149,7 +149,7 @@
 [(#CONFIG{inscription2/commentaire}|=={on}|?{' ', ''})
 <div class="grand_select[ (#CONFIG{inscription2/commentaire_obligatoire}|=={on}|?{obligatoire})]">
 	<label><:inscription2:commentaire:></label>
-	<textarea name="commentaire" class="forml" id="commentaire">#ENV{divers}</textarea>	
+	<textarea name="commentaire" class="forml" id="commentaire">#ENV{commentaire}</textarea>	
 	<br class="nettoyeur" />
 </div>
 ]
@@ -253,7 +253,7 @@
 ]
 
 
-<p class="spip_bouton"><input class="fondo" type="submit" value="<:bouton_valider:>" /></p>
+<p class="spip_bouton"><input class="fondo" value="<:bouton_valider:>" /></p>
 
 </form>
 </div>
