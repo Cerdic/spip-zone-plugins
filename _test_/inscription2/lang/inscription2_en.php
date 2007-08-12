@@ -149,6 +149,7 @@ The @nom_site@\'s Team',
 'texte' => 'Text', 
 'html' => 'HTML',
 
+//profil
 'votre_profil' => 'Your profile',
 'contacts_personnels' => 'Personnal contacts',
 'contacts_pros' => 'Professional contacts',
@@ -157,6 +158,12 @@ The @nom_site@\'s Team',
 'votre_nom_complet' => 'Your complete name',
 'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
 'website' => 'website',
+
+//validation des champs
+'champ_obligatoire' => '<NEW>Ce champ est obligatoire',
+'chaine_valide' => '<NEW>Veuillez ins&eacute;rer une chaine de caract&egrave;re',
+'cp_valide' => '<NEW>Veuillez ins&eacute;rer un code postal valide',
+'numero_valide' => '<NEW>Veuillez ins&eacute;rer un num&eacute;ro valide',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 

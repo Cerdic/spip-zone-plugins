@@ -174,6 +174,7 @@ L\'&eacute;quipe de @nom_site@',
 'validite' => 'Date de validit&eacute;',
 'exp_validite' => 'Champ utile avec le plugin <strong>ABONNEMENT</strong>, &agrave; cocher s\'il est install&eacute;',
 
+//profil
 'votre_profil' => 'Votre profil',
 'contacts_personnels' => 'Contacts personnels',
 'contacts_pros' => 'Contacts professionnels',
@@ -182,6 +183,12 @@ L\'&eacute;quipe de @nom_site@',
 'votre_nom_complet' => 'Votre nom complet',
 'vos_contacts_personnels' => 'Vos contacts personnels',
 'website' => 'Site Internet',
+
+//validation des champs
+'champ_obligatoire' => 'Ce champ est obligatoire',
+'chaine_valide' => 'Veuillez ins&eacute;rer une chaine de caract&egrave;re',
+'cp_valide' => 'Veuillez ins&eacute;rer un code postal valide',
+'numero_valide' => 'Veuillez ins&eacute;rer un num&eacute;ro valide',
 
 'page_confirmation' => 'Page de confirmation de votre inscription'
 

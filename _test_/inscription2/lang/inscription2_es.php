@@ -147,6 +147,7 @@ El equipo de @nom_site@',
 'texte' => 'Texto', 
 'html' => 'HTML',
 
+//Profil
 'votre_profil' => '<NEW>Votre profil',
 'contacts_personnels' => '<NEW>Contacts personnels',
 'contacts_pros' => '<NEW>Contacts professionnels',
@@ -155,6 +156,12 @@ El equipo de @nom_site@',
 'votre_nom_complet' => '<NEW>Votre nom complet',
 'vos_contacts_personnels' => '<NEW>Vos contacts personnels',
 'website' => '<NEW>Site Internet',
+
+//validation des champs
+'champ_obligatoire' => '<NEW>Ce champ est obligatoire',
+'chaine_valide' => '<NEW>Veuillez ins&eacute;rer une chaine de caract&egrave;re',
+'cp_valide' => '<NEW>Veuillez ins&eacute;rer un code postal valide',
+'numero_valide' => '<NEW>Veuillez ins&eacute;rer un num&eacute;ro valide',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 
