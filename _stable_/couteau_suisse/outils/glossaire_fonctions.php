@@ -7,6 +7,7 @@
 charger_generer_url();  # pour generer_url_mot()
 
 // compatibilite SPIP 1.91
+include_spip('inc/texte');
 if(!function_exists('nettoyer_chapo')) {
 	// Ne pas renvoyer le chapo si article virtuel
 	function nettoyer_chapo($chapo){
