@@ -34,7 +34,7 @@ function jeux_verifier_base(){
 			include_spip('base/abstract_sql');
 			creer_base();
 			// ajout du champ 'nom' a la table spip_jeux, si pas deja existant
-			$desc = spip_abstract_showtable("spip_jeux", '', true);
+			$desc = sql_showtable("spip_jeux", '', true);
 			if (!isset($desc['field']['nom'])){
 				spip_query("ALTER TABLE spip_jeux ADD `nom` text NOT NULL AFTER `date`");
 				// ajout d'un nom par defaut aux jeux existants
@@ -47,7 +47,7 @@ function jeux_verifier_base(){
 		}
 		if ($current_version<0.11){
 			// ajout du champ 'titre' a la table spip_jeux, si pas deja existant
-			$desc = spip_abstract_showtable("spip_jeux", '', true);
+			$desc = sql_showtable("spip_jeux", '', true);
 			if (!isset($desc['field']['titre'])){
 				spip_query("ALTER TABLE spip_jeux ADD `titre` text NOT NULL AFTER `nom`");
 				// ajout d'un titre par defaut aux jeux existants

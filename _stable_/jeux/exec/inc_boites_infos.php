@@ -2,8 +2,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // compatibilite SPIP 1.92
-if(!function_exists('spip_abstract_countsel')) {
-	function spip_abstract_countsel($from = 'spip_jeux', $where = '') {
+if(!function_exists('sql_countsel')) {
+	function sql_countsel($from = 'spip_jeux', $where = '') {
 		if($where!='') $where = ' WHERE '.$where;
 		$r = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from$where"));
 		return $r['n'];
@@ -12,7 +12,7 @@ if(!function_exists('spip_abstract_countsel')) {
 
 // essai de pagination. A virualiser si certains jeux sont mis a la poubelle !
 function jeux_navigation_pagination() {
-	$num_rows = spip_abstract_countsel("spip_jeux");
+	$num_rows = sql_countsel("spip_jeux");
 	if(!$num_rows) return '';
 	
 	$texte = ''; $href = 'jeux_voir'; $tmp_var = 'id_jeu'; $nb_aff = 1;
@@ -54,7 +54,7 @@ function boite_infos_auteur($id_auteur, $nom) {
 
 function boite_infos_jeu($id_jeu, $nom) {
 	debut_boite_info();
-	$nb_res = spip_abstract_countsel('spip_jeux_resultats', 'id_jeu='.$id_jeu);
+	$nb_res = sql_countsel('spip_jeux_resultats', 'id_jeu='.$id_jeu);
 	$nom = _T('jeux:jeu_court',array('id'=>$id_jeu,'nom'=>$nom));
 	echo "<strong>$nom</strong><br />",
 		(_request('exec')=='jeux_voir'?'':
@@ -71,7 +71,7 @@ function boite_infos_jeu($id_jeu, $nom) {
 
 function boite_infos_accueil() {
 	debut_boite_info();
-	$nb_res = spip_abstract_countsel('spip_jeux_resultats');
+	$nb_res = sql_countsel('spip_jeux_resultats');
 	echo 
 		// 'nouveau jeu' uniquement sur la page 'jeux_tous'
 		( _request('exec')!='jeux_tous'?'':
