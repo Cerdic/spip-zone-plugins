@@ -189,6 +189,7 @@ L\'&eacute;quipe de @nom_site@',
 'chaine_valide' => 'Veuillez ins&eacute;rer une chaine de caract&egrave;re',
 'cp_valide' => 'Veuillez ins&eacute;rer un code postal valide',
 'numero_valide' => 'Veuillez ins&eacute;rer un num&eacute;ro valide',
+'caracteres' => 'caract&egrave;res',
 
 'page_confirmation' => 'Page de confirmation de votre inscription'
 

@@ -27,11 +27,11 @@
 			[(#EVAL{defined('_DIR_PLUGIN_ECHOPPE')}|?{' ',''})
 				#INCLURE{fond=javascript/echoppe_inscription_rules}
 			]
-			sexe:{[(#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{required: true,''})]},
+			[(#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{'sexe:required: true,',''})]
 			nom_famille: {[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
-			username: {[(#CONFIG{inscription2/username}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
+			username: {[(#CONFIG{inscription2/username_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			adresse: {[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{required: true,}),] rangeLength:[5,1000]},
 			code_postal: {[(#CONFIG{inscription2/code_postal_obligatoire}|=={on}|?{required: true,}),]postal:true, rangeLength:[3,20]},
 			ville: {[(#CONFIG{inscription2/ville_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,30]},
@@ -57,6 +57,9 @@
 				abonnement: {
 					required:"<:inscription2:champ_obligatoire:>"},
 			]
+			[(#EVAL{defined('_DIR_PLUGIN_ECHOPPE')}|?{' ',''})
+				#INCLURE{fond=javascript/echoppe_inscription_messages}
+			]
 			sexe: {
 				required:"<:inscription2:champ_obligatoire:>"},
 			nom_famille: {
@@ -81,7 +84,7 @@
 				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
 			code_postal: {
 				required:"<:inscription2:champ_obligatoire:>",
-				postal:"Entrez un code postal valide",
+				postal:"<:inscription2:cp_valide:>",
 				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
 			ville: {
 				required:"<:inscription2:champ_obligatoire:>",
@@ -127,7 +130,7 @@
 				rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
 			code_postal_pro: {
 				required:"<:inscription2:champ_obligatoire:>",
-				postal:"Entrez un code postal valide",
+				postal:"<:inscription2:cp_valide:>",
 				rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
 			ville_pro: {
 				required:"<:inscription2:champ_obligatoire:>",

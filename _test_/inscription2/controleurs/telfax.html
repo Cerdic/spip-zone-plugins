@@ -1,21 +1,90 @@
 [(#REM)
 
 	Controleur pour le crayon 'telfax', uniquement html
-
+	Validation JS pour les champs spécifiés obligatoires
+	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
 ]
 #CACHE{0}
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tous}>
+<script type="text/javascript">
+/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
+	
+	jQuery.validator.addMethod("phone", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[0-9|\+][0-9|\s|\.|-]{5,19}$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:telephone_valide:>");
+	
+			var id = cQuery(".auteurs_elargi-telfax-#ID_AUTEUR").crayon();
+			var validator = $(id).validate({
+			event: "keyup",
+			showErrors: function(errors, errorList) {
+				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
+				$('.crayon-submit').hide();
+				validator.defaultShowErrors();
+			},
+			errorPlacement: function(error, element) {
+				error.appendTo( element.parent("div") );
+			},
+			success: function() {$('.crayon-submit').show();},
+			rules: {
+				#ENV{name_telephone}: {[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{required: true,}),]phone:true, rangeLength:[6,20]},
+				#ENV{name_mobile}: {[(#CONFIG{inscription2/mobile_postal_obligatoire}|=={on}|?{required: true,}),]phone:true, rangeLength:[6,20]},
+				#ENV{name_fax}: {[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{required: true,}),]phone:true, rangeLength:[6,20]},
+			},
+			messages: {
+				#ENV{name_telephone}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					phone:"<:inscription2:telephone_valide:>",
+					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
+				#ENV{name_mobile}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					phone:"<:inscription2:telephone_valide:>",
+					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
+				#ENV{name_fax}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					phone:"<:inscription2:telephone_valide:>",
+					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"}
+			}
+		});
 
-<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}{tous}>
+		function testform(){
+			//On lance le validateur une fois pour vérifier si c est ok - si c'est pas ok on cache le bouton ok
+			if(validator.form() == false){$('.crayon-submit').hide();}
+			else{$('.crayon-submit').show();}
+		}
+		
+	$().ready(function() {
+		testform();
+		$('.obligatoire label').not('.error').append('*');
+	});
+</script>
+
 <fieldset style="background-color:#fff;">
-<legend><:inscription2:vos_contacts_personnels:></legend>
-<label><:inscription2:telephone:> : </label> <input class="crayon-active" name="#ENV{name_telephone}"
- style="width:#ENV{largeur}px;" value="[(#TELEPHONE**|entites_html)]" />
-<br />
-<label><:inscription2:mobile:> : </label> <input class="crayon-active" name="#ENV{name_mobile}"
- style="width:#ENV{largeur}px;" value="[(#MOBILE**|entites_html)]" />
-<br />
-<label><:inscription2:fax:> : </label> <input class="crayon-active" name="#ENV{name_fax}"
- style="width:#ENV{largeur}px;" value="[(#FAX**|entites_html)]" />
+	<legend><:inscription2:vos_contacts_personnels:></legend>
+
+	[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})
+	#SET{telephone_obl, false}
+	[(#CONFIG{inscription2/telephone_obligatoire}|=={on}|?{' ',''})#SET{telephone_obl, true}]
+	[(#GET{telephone_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:telephone:> : </label>
+	<input class="crayon-active" name="#ENV{name_telephone}" style="width:#ENV{largeur}px;" value="[(#TELEPHONE**|entites_html)]" />
+	</div>]
+
+	[(#CONFIG{inscription2/mobile_fiche_mod}|?{' ',''})
+	#SET{mobile_obl, false}
+	[(#CONFIG{inscription2/mobile_obligatoire}|=={on}|?{' ',''})#SET{mobile_obl, true}]
+	[(#GET{mobile_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:mobile:> : </label>
+	<input class="crayon-active" name="#ENV{name_mobile}" style="width:#ENV{largeur}px;" value="[(#MOBILE**|entites_html)]" />
+	</div>]
+
+	[(#CONFIG{inscription2/fax_fiche_mod}|?{' ',''})
+	#SET{fax_obl, false}
+	[(#CONFIG{inscription2/fax_obligatoire}|=={on}|?{' ',''})#SET{fax_obl, true}]
+	[(#GET{fax_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:fax:> : </label>
+	<input class="crayon-active" name="#ENV{name_fax}" style="width:#ENV{largeur}px;" value="[(#FAX**|entites_html)]" />
+	</div>]
+	
 </fieldset>
 </BOUCLE_a>
 <//B_a>
