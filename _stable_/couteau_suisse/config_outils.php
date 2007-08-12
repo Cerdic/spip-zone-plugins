@@ -527,6 +527,8 @@ add_outil( array(
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	'traitement:CHAPO:post_propre' => 'cs_glossaire',
+	// Precaution pour les articles virtuels
+	'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
 ));
 
 add_outil( array(

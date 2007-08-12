@@ -6,6 +6,14 @@
 
 charger_generer_url();  # pour generer_url_mot()
 
+// compatibilite SPIP 1.91
+if(!function_exists('nettoyer_chapo')) {
+	// Ne pas renvoyer le chapo si article virtuel
+	function nettoyer_chapo($chapo){
+		return (substr($chapo,0,1) == "=") ? '' : $chapo;
+	}
+}
+
 // Filtre local utilise par le filtre 'cs_imprimer'
 // Cette fonction retire du texte les boites de definition
 function glossaire_imprimer($texte) {
