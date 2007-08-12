@@ -170,7 +170,7 @@ _T('bartypenr:barre_gestion_anc_bulle')
 }
 
 // pour les caracteres
-function afficher_caracteres($champ, $spip_lang, $champhelp) {
+function afficher_caracteres($champ, $spip_lang, $champhelp, $num_barre) {
 
 	// guillemets
 	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
