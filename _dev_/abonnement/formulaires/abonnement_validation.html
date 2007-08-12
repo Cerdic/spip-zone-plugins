@@ -7,12 +7,31 @@
 
 <div>
 [(#ENV*{commentaires}|=={1}|?{' ',''})
-<?php
-$commentaire = envoyer_inscription2('#ENV{id_auteur}');
-$message = ($commentaire != "ok") ? $commentaire : _T('inscription2:lisez_mail');
-echo $message ;
-?>
+
+<div style= "padding-bottom:10px">
+<h2>Confirmation</h2>
+</div>
+		<dl>
+			<dt>Mes donn&eacute;es de correspondance</dt>
+			<dd style="margin-top:5px">[(#ENV{sexe}|=={M}|?{'Monsieur','Madame'} )][ (#ENV{prenom})][ (#ENV{nom_famille})]<dd>
+			<dd>[ (#ENV{adresse})]</dd>
+			<dd>[ (#ENV{code_postal})][ (#ENV{ville})]</dd>
+			<dd>[ (#ENV{pays}|id_pays_to_pays)]</dd>
+			<dd style="margin-top:5px">[<strong>Login :</strong> (#ENV{login})]</dd>
+			<dd>[<strong>Email :</strong> (#ENV{email})]</dd>
+		</dl>
+		
+		<dl>
+			<dt>Mon abonnement</dt>
+			<dd>[ (#ENV{abonnement}|id_abonnement_to_libelle)][ - (#ENV{abonnement}|id_abonnement_to_montant) E]</dd>
+		</dl>
+		
+		
+		<form action="#SELF" method="POST">
+			[(#ENV**|form_hidden_env)]
+			<input type="submit" name="retour" class="spip_bouton" value="Retour" />
+			<input type="submit" name="validation" class="spip_bouton" value="Valider" />	
+		</form>	
+
 ]
 </div>
-
-

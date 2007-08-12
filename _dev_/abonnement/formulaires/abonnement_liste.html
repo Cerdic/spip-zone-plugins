@@ -5,7 +5,7 @@
     <div class="obligatoire">
         <label><strong>Abonnement</strong></label>
         <BOUCLE_abo(SPIP_ABONNEMENTS)>
-                    <br /><input type="radio" name="abonnement"  value="#ID_ABONNEMENT"/> #LIBELLE
+                    <br /><input type="radio" name="abonnement"  [(#ENV{abonnement}|=={#ID_ABONNEMENT}|?{'checked="checked"'})] value="#ID_ABONNEMENT"/> #LIBELLE
         </BOUCLE_abo>
     </div>
     </fieldset>
