@@ -304,7 +304,11 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 
 // ---------------------------------------------------------------------------
 	'no_IP:nom' => "Pas de stockage IP",
-	'no_IP:description' => "D&eacute;sactive le m&eacute;canisme d'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun   num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques   ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).",
+	'no_IP:description' => "D&eacute;sactive le m&eacute;canisme d'enregistrement automatique des adresses IP des visiteurs de votre site par soucis de confidentialit&eacute; : SPIP ne conservera alors plus aucun num&eacute;ro IP, ni temporairement lors des visites (pour g&eacute;rer les statistiques ou alimenter spip.log), ni dans les forums (responsabilit&eacute;).",
+
+// ---------------------------------------------------------------------------
+	'flock:nom' => "Pas de verrouillage de fichiers",
+	'flock:description' => "D&eacute;sactive le syst&egrave;me de verrouillage de fichiers en neutralisant la fonction PHP flock(). Certains h&eacute;bergements posent en effet des probl&egrave;mes graves suite &agrave; un syst&egrave;me de fichiers inadapt&eacute; ou &agrave; un manque de synchronisation. N'activez pas cet outil si votre site fonctionne normalement.",
 
 /*
 // ---------------------------------------------------------------------------

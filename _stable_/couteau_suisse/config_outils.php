@@ -242,6 +242,13 @@ add_outil( array(
 ));
 
 add_outil( array(
+	'id' => 'flock',
+	'code:options' => "define('_SPIP_FLOCK',false);",
+	'categorie' => 'admin',
+	'version-min' => 1.93,
+));
+
+add_outil( array(
 	'id' => 'log_couteau_suisse',
 	'code:options' => "\$GLOBALS['log_couteau_suisse']=true;",
 ));
