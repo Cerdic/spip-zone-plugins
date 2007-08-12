@@ -5,10 +5,14 @@ function boucle_MOTS($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_mots";
 
-	return calculer_boucle_avec_frequence($id_boucle, $boucles);
+	return $boucle->modificateur['frequence'] ?
+		calculer_boucle_avec_frequence($id_boucle, $boucles) :
+		calculer_boucle($id_boucle, $boucles);
 }
 
 function calculer_boucle_avec_frequence($id_boucle, &$boucles) {
+	//compatibilite 1.9.2 et SPIP SVN
+	$spip_abstract_fetch = function_exists('spip_abstract_fetch') ? 'spip_abstract_fetch' : 'sql_fetch';
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_mots";
@@ -18,7 +22,7 @@ function calculer_boucle_avec_frequence($id_boucle, &$boucles) {
 	$frequence = '$Pile[$SP][\'frequence'.$boucle->id_boucle.'\']';
 	$code_avant = "\n\t" . $max .' = 0;
 	$PileTemp = array();';
-	$code = "\n\t".'while ($Pile[$SP] = @spip_abstract_fetch($result,"")) {' . "\n\t\t" .
+	$code = "\n\t".'while ($Pile[$SP] = @'.$spip_abstract_fetch.'($result,"")) {' . "\n\t\t" .
 		$max.' = max('.$max.', '.$frequence.');' . "\n\t\t" .
 		'$PileTemp[] = $Pile[$SP];
 	}
@@ -50,7 +54,7 @@ function critere_frequence_dist($idb, &$boucles, $crit) {
 	//Pour l'instant, un seul parametre
 	while(list(,$p) = each($crit->param)) {
  		$param = calculer_liste($p, array(), $boucles, $parent);
-		$type = preg_match(',^\(?\'(\w+)(\s*)?([!=<>]+)?(\s*)?,', $param, $regs) ? $regs[1] : $boucle->jointures[0];
+ 		$type = preg_match(',^\(?\'(\w+)(\s*)?([!=<>]+)?(\s*)?,', $param, $regs) ? $regs[1] : $boucle->jointures[0];
 		$op = $regs[3] ? $regs[3] : '>=';
 		if($val = $regs[0] ? preg_replace(',' . preg_quote($regs[0]) . ',', '', $param) : 0) {
 			$val = preg_replace(',\'$,', '', $val);
@@ -61,9 +65,8 @@ function critere_frequence_dist($idb, &$boucles, $crit) {
 		if(in_array($_type = $nom.'_'.$type, $boucle->jointures))
 			$criteres[] = array($op, $_type, $val);
 		else {
-      erreur_squelette(_T('zbug_info_erreur_squelette'), _L('frequence '.$type.': jointure inconnue'));
-    }
-
+			erreur_squelette(_T('zbug_info_erreur_squelette'), _L('frequence '.$type.': jointure inconnue'));
+		}
 	}
 	if(empty($criteres)) $criteres[0] = array('>=', $boucle->jointures[0], 0);
 	
