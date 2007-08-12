@@ -58,7 +58,7 @@ function action_mes_fichiers() {
 	if ($erreur == 0) {
 		die("Erreur : ".$mes_fichiers->errorInfo(true));
 	}
-	redirige_par_entete(generer_url_ecrire('admin_tech', 'mes_fichier=sauve_ok', true));
+	redirige_par_entete(generer_url_ecrire('admin_tech', 'mes_fichiers=sauve_ok', true));
 }
 
 ?>
