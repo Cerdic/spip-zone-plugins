@@ -27,7 +27,7 @@
 			[(#EVAL{defined('_DIR_PLUGIN_ECHOPPE')}|?{' ',''})
 				#INCLURE{fond=javascript/echoppe_inscription_rules}
 			]
-			[(#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{'sexe:required: true,',''})]
+			sexe:{[(#CONFIG{inscription2/sexe_obligatoire}|=={on}|?{required: true})]},
 			nom_famille: {[(#CONFIG{inscription2/nom_famille_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			prenom:{[(#CONFIG{inscription2/prenom_obligatoire}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
 			nom: {[(#CONFIG{inscription2/nom}|=={on}|?{required: true,}),]chaine:true, rangeLength:[2,20]},
