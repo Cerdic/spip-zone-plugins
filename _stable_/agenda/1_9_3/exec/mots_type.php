@@ -46,7 +46,7 @@ function exec_mots_type_dist()
 
 		$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
 
-		if ($row = spip_fetch_array($result_groupes)) {
+		if ($row = sql_fetch($result_groupes)) {
 			$id_groupe = $row['id_groupe'];
 			$type = $row['titre'];
 			$titre = typo($type);
@@ -76,16 +76,16 @@ function exec_mots_type_dist()
 		exit;
 	}
 	
-	pipeline('exec_init',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+	pipeline('exec_init',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
 	
-	debut_gauche();
+	echo debut_gauche('', true);
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-	debut_droite();
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
+	echo creer_colonne_droite(true);
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
+	echo debut_droite('', true);
 	
 	$type = entites_html(rawurldecode($type));
 

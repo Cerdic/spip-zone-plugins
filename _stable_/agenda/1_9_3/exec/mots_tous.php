@@ -37,7 +37,7 @@ function exec_mots_tous_dist()
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_mots_tous'), "naviguer", "mots");
-	debut_gauche();
+	echo debut_gauche('', true);
 
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
@@ -49,11 +49,11 @@ function exec_mots_tous_dist()
 	}
 
 
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
-	debut_droite();
+	echo debut_droite('', true);
 
-	gros_titre(_T('titre_mots_tous'));
+	echo gros_titre(_T('titre_mots_tous'),'', false);
 	if (autoriser('creer','groupemots')) {
 	  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
 	}
@@ -63,9 +63,9 @@ function exec_mots_tous_dist()
 // On boucle d'abord sur les groupes de mots
 //
 
-	$result = spip_query("SELECT *, ".spip_abstract_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
+	$result = spip_query("SELECT *, ".sql_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
 
-	while ($row_groupes = spip_fetch_array($result)) {
+	while ($row_groupes = sql_fetch($result)) {
 		$id_groupe = $row_groupes['id_groupe'];
 		$titre_groupe = typo($row_groupes['titre']);
 		$descriptif = $row_groupes['descriptif'];
@@ -87,7 +87,7 @@ function exec_mots_tous_dist()
 		// Afficher le titre du groupe
 		echo "<a id='mots_tous-$id_groupe'></a>";
 
-		debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
+		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
 		$res = '';
 		if ($articles == "oui") $res .= "> "._T('info_articles_2')." &nbsp;&nbsp;";
@@ -119,7 +119,7 @@ function exec_mots_tous_dist()
 		// Afficher les mots-cles du groupe
 		//
 
-		$groupe = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
+		$groupe = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
 		$groupe = $groupe['n'];
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
@@ -153,7 +153,7 @@ function exec_mots_tous_dist()
 			echo "</td></tr></table>";
 		}	
 
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 	}
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
@@ -165,7 +165,7 @@ function exec_mots_tous_dist()
 // http://doc.spip.org/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));
+	$row = sql_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));
 	if (!$row) return ""; // deja detruit (acces concurrent etc)
 
 	$id_mot = $row['id_mot'];
