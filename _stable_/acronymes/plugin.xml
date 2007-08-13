@@ -50,5 +50,5 @@ _ &#169; 2006 - Licence GPL
 		<inclure>acronymes_config.php</inclure>
 	</pipeline>
 	<necessite id="forms" version="[0.301;]" />
-	<chemin dir='' type='public' />
+	<chemin dir='' />
 </plugin>

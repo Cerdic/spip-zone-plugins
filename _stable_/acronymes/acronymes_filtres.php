@@ -1,5 +1,11 @@
 <?php
 // extrait d'un contenu tout ce qui ressemble de pres ou de loin a un acronyme
+// compatibilite 1.9.1
+
+if (!function_exists('_q')){
+	function _q($arg) { return spip_abstract_quote($arg); }
+}
+
 function acronymes_voir($letexte){
   $pattern = '<([a-zA-Zיאטחשûפגמך0-9\. \s"\'_\/\-\+=;,!:@~\(\)\?&#%\n\[\]]+)>';
   $textMatches = preg_split ('/' . $pattern . '/', $letexte);
@@ -89,7 +95,7 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 			}
 			#Recuperation des mots et des definitions dans une rubrique locale
 			if ($id_rubrique_acronymes) {
-		  	$res = spip_query("SELECT titre,descriptif FROM spip_articles WHERE id_rubrique=".spip_abstract_quote($id_rubrique_acronymes));
+		  	$res = spip_query("SELECT titre,descriptif FROM spip_articles WHERE id_rubrique="._q($id_rubrique_acronymes));
 				while($row = spip_fetch_array($res)){
 					$accro=str_replace(".","",$row['titre']);
 					if (!isset($set[$accro])){
@@ -102,7 +108,7 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 			}
 			#Recuperation des mots et des definitions dans un site syndique distant
 			if ($id_syndic_acronymes) {
-		  	$res = spip_query("SELECT titre,descriptif FROM spip_syndic_articles WHERE id_syndic=".spip_abstract_quote($id_syndic_acronymes));
+		  	$res = spip_query("SELECT titre,descriptif FROM spip_syndic_articles WHERE id_syndic="._q($id_syndic_acronymes));
 				while($row = spip_fetch_array($res)){
 					$accro=str_replace(".","",$row['titre']);
 					if (!isset($set[$accro])){
