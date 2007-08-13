@@ -113,7 +113,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_de_jeu'	=> "D&eacute;sol&eacute;, ce jeu n'existe pas !",
 'pas_d_auteur'	=> "D&eacute;sol&eacute;, cet auteur est inconnu !",
 'inserer_jeu'	=> "Ins&eacute;rer des jeux",
-'inserer_jeu_explication'	=>"Vous pouvez ins&eacute;rer des jeux en &eacute;crivant &#60;jeuyyy&#62;, o&ugrave; yyy est l'ID du jeu"
+'inserer_jeu_explication'	=>"Vous pouvez ins&eacute;rer des jeux en &eacute;crivant &#60;jeuyyy&#62;, o&ugrave; yyy est l'ID du jeu",
+
+'compacter_tout_tout'			=> 'Compacter TOUS les r&eacute;sultats',
+'compacter_tout_jeu'		=> 'Compacter TOUS les r&eacute;sultats du jeu',
+'compacter_tout_auteur'		=> "Compacter TOUS les r&eacute;sultats de l&#8217;auteur",
+'explication_compacter_tout'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats des diff&eacute;rents jeux&hellip;, sauf le dernier pour chaque couple jeu/auteur",
+'explication_compacter_jeu'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats de ce jeu &hellip;, sauf le dernier pour chaque auteur",
+'explication_compacter_auteur'=>"Cette commande  efface <i>tous</i> les r&eacute;sultats de cet auteur &hellip;, sauf le dernier pour chaque jeu",
+'confirmation_compacter_tout' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter TOUS les r&eacute;sultats ?',
+'confirmation_compacter_auteur' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de cet auteur ?',
+'confirmation_compacter_jeu' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de ce jeu ?',
+'compacter_confirmer'			=> 'Confirmer le compactage de ces r&eacute;sultats'
+
+
 );
 
 

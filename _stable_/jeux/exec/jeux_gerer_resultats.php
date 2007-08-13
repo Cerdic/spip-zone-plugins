@@ -165,7 +165,7 @@ function formulaire_suppression($bouton, $type){
 			"\n<div style='text-align: center'>",
 			debut_boite_alerte(),
 			"\n<div class='serif'>",
-			"\n<b>"._T('jeux:compacter_tout')."&nbsp;!</b>",
+			"\n<b>"._T('avis_suppression_base')."&nbsp;!</b>",
 			"\n</div>",
 			$res,
 			fin_boite_alerte(),
@@ -187,11 +187,11 @@ function formulaire_suppression($bouton, $type){
 			
 		$res = "<br/><input type='submit' name='compacter_tout' value='"._T('jeux:compacter_tout_'.$type)."' class='fondo' />";
 		echo
-			_T('jeux:explication_supprimer_'.$type),
+			_T('jeux:explication_compacter_'.$type),
 			"\n<div style='text-align: center'>",
 			debut_boite_alerte(),
 			"\n<div class='serif'>",
-			"\n<b>"._T('jeux:compacter_tout')."&nbsp;!</b>",
+			"\n<b>"._T('avis_suppression_base')."&nbsp;!</b>",
 			"\n</div>",
 			$res,
 			fin_boite_alerte(),
