@@ -42,7 +42,12 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode) {
 	}else
 			echo "rien a faire";
 	}else{
-		include_spip('inc/mail');
+		if ($GLOBALS['spip_version_code']>=1.9259){
+			include_spip('inc/acces');
+			include_spip('inc/mail');
+		}
+		else{include_spip('inc/mail');}
+		
 		$htpass = generer_htpass($pass);
 		$statut = lire_config('inscription2/statut_nouveau');
 		spip_query("UPDATE spip_auteurs SET statut = '$statut', pass='$pass', htpass='$htpass', alea_actuel='' WHERE id_auteur = ".$id);
