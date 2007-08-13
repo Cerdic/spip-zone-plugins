@@ -3,11 +3,22 @@ Notice rapide BoOz@rezo.net
 x) Assurez vous d'avoir prealablement intallé les plugins
 		- inscription2
 		- acces restreint
+		- balise session
 
 
 x) Ajouter dans une page achat_unite.html
 
 [(#INCLURE{fond=fonds/achat_unite}{id_article=#ID_ARTICLE})]
+
+
+
+x) Ajouter dans une page profil_complet.html
+
+<INCLURE{fond=inc/profil_adherent}>
+
+<INCLURE{fond=fonds/mes_abonnements}{id_auteur=#SESSION{id_auteur}}>
+
+
 
 
 

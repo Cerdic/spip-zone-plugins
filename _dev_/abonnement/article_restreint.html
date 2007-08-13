@@ -110,13 +110,41 @@ Elle peut etre appellée comme cela depuis article.html
 
 
 			
-			
 			<?php } elseif($auteur_session) { ?>
+			
+			
 			#DEBUT_SURLIGNE
 			[<div class="#EDIT{texte} texte">(#INTRODUCTION)</div>]
 			#FIN_SURLIGNE
 			
 			<h3>Votre abonnement ne vous permet pas d'acc&eacute;der &agrave; cette page</h3>	
+			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+			<p>Vous pouvez vous abonner, ou bien acheter cet article &agrave; l'unit&eacute;</p>
+			<div style="padding:5px;background-color:#F4F1D0">
+				<form action="./?page=commander" method="post">
+				[(#INCLURE{fond=formulaires/abonnement_liste})]	
+				<p style="text-align:right"><input type="submit" value="valider"></p>
+				</form>
+			</div>
+			<div style="padding:5px;background-color:#F4F1D0;margin-top:10px">
+			<form action="./?page=commander" method="post">	
+			<fieldset class="reabonnement">
+		    <legend>Acheter &agrave; l'unit&eacute;</legend>
+		    <input type="radio" checked="checked" id="unite"><label for="unite">#TITRE - 5 euros</label>
+   			<input type="hidden" value="reabo" name="reabo">
+   			<input type="hidden" value="#ID_ARTICLE" name="article">
+   			<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
+   			</fieldset>
+   			<p style="text-align:right"><input type="submit" value="valider"></p>
+   			 </form>	
+			
+			</div>
+			]
+
+			
+			
+			
+			
 			<?php } else{ ?>
 			#DEBUT_SURLIGNE
 			[<div class="#EDIT{texte} texte">(#INTRODUCTION)</div>]
@@ -143,7 +171,7 @@ Elle peut etre appellée comme cela depuis article.html
 				</form>
 			</div>
 			<div style="padding:5px;background-color:#F4F1D0;margin-top:10px">
-			<form action="./?page=achat_unite" method="post">	
+			<form action="./?page=commander" method="post">	
 			<fieldset class="abonnement_liste">
 		    <legend>Acheter &agrave; l'unit&eacute;</legend>
 		    <input type="radio" checked="checked" id="unite"><label for="unite">#TITRE - 5 euros</label>

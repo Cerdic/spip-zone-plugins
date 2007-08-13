@@ -1,0 +1,39 @@
+#CACHE{0}
+
+<h2 style="margin:20px 0px">Acheter cet article</h2>
+
+<BOUCLE_article(ARTICLES){id_article=#ENV{article}}{tout_voir}>
+<h2>#TITRE</h2>
+<small>Publi&eacute; le #DATE par #LESAUTEURS</small>
+<div style="margin:20px 0px">
+<strong>Extrait</strong> : #INTRODUCTION
+</div>
+
+<div>
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
+
+<form action="./?page=commander" method="post">
+[(#INCLURE{fond=formulaires/abonnement_validation}
+{nom_famille=#NOM_FAMILLE}
+{prenom=#PRENOM}
+{sexe=#SEXE}
+{adresse=#ADRESSE}
+{code_postal=#CODE_POSTAL}
+{pays=#PAYS}
+{login=#_auteur:LOGIN}
+{email=#_auteur:EMAIL}
+{option=achat_unite}
+{commentaires=1}
+{reabo=oui}
+{article=#ENV{article}}
+)]
+</form>
+</BOUCLE_auteur_elargi>
+</BOUCLE_auteur>
+</div>
+
+</BOUCLE_article>
+
+
+
