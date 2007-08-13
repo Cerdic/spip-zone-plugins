@@ -124,7 +124,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirmation_compacter_tout' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter TOUS les r&eacute;sultats ?',
 'confirmation_compacter_auteur' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de cet auteur ?',
 'confirmation_compacter_jeu' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de ce jeu ?',
-'compacter_confirmer'			=> 'Confirmer le compactage de ces r&eacute;sultats'
+'compacter_confirmer'			=> 'Confirmer le compactage de ces r&eacute;sultats',
+'statut_jeu'					=>'Statut du jeu : '
 
 
 );

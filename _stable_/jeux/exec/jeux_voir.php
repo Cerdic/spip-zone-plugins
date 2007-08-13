@@ -7,9 +7,9 @@ include_spip('exec/inc_boites_infos');
 function exec_jeux_voir(){
 	$id_jeu = _request('id_jeu');
 	
-	$requete = spip_fetch_array(spip_query("SELECT contenu,id_jeu,nom,titre,date FROM spip_jeux WHERE id_jeu =".$id_jeu));
-	list($contenu, $id_jeu, $nom, $titre_prive, $date) =
-		array($requete['contenu'], $requete['id_jeu'], $requete['nom'], $requete['titre'], $requete['date']);
+	$requete = spip_fetch_array(spip_query("SELECT statut,contenu,id_jeu,nom,titre,date FROM spip_jeux WHERE id_jeu =".$id_jeu));
+	list($statut,$contenu, $id_jeu, $nom, $titre_prive, $date) =
+		array($requete['statut'],$requete['contenu'], $requete['id_jeu'], $requete['nom'], $requete['titre'], $requete['date']);
 	$titre_prive = propre($titre_prive);
 	include_spip('jeux_utils');
 	$titre_public = jeux_trouver_titre_public($contenu);
@@ -27,6 +27,8 @@ function exec_jeux_voir(){
 		return;
 	}
 	
+
+	
 	debut_page(_T("jeux:jeu_numero",array('id'=>$id_jeu,'nom'=>$nom)));
 			
 	debut_gauche();
@@ -41,9 +43,27 @@ function exec_jeux_voir(){
 	creer_colonne_droite();
 	debut_droite();
 	debut_cadre_relief();
-	gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$nom)));
-	echo "<div style='font-weight:bold'>$titre_prive</div>";
-	if($titre_public) echo "<div style='font-weight:bold'>$titre_public</div>";
+	gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$nom)),puce_statut($statut, " style='vertical-align: center'"));
+		
+	if (autoriser('modifierstatut')){// changement de statut
+		if ($statut = _request('statut_modif')){
+			include_spip('base/jeux_modifier_statut');
+			jeu_modifier_statut($id_jeu,$statut);
+		}
+		
+		echo "<div style='font-weight:bold'>$titre_prive</div>";
+		if($titre_public) echo "<div style='font-weight:bold'>$titre_public</div>";
+		debut_cadre_relief();
+		echo "<form method='post' name='statut_edit'>\n";
+		echo "<label><span class='titrem'>"._T('jeux:statut_jeu').'</span>&nbsp;<select name="statut_modif">';
+		echo '<option value="publie">'._T('info_statut_site_2').'</option>';
+		echo '<option value="poubelle"';	
+		echo ($statut=='poubelle')?'selected="selected"':'';
+		echo '>'._T('info_statut_site_4').'</option>';
+		echo "</select></label>&nbsp;<input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' />";
+		echo "</form>";
+		fin_cadre_relief();
+	}
 	echo '<br />', $contenu;
 
 	fin_cadre_relief();

@@ -1,6 +1,7 @@
 <B_jeux>
 <table  class='arial2'cellpadding='2' cellspacing='0' style='width: 100%; border: 0px;'>
 <tr class="titrem" style="text-align:center">
+	<th></th>
 	<th>[(#ENV{par}|!={id_jeu}|?{' '})<a href="[(#SELF|parametre_url{par,id_jeu})]">]<:jeux:jeu_numero_court:>[(#ENV{par}|!={id_jeu}|?{' '})</a>]</th>
 	<th>[(#ENV{par}|!={nom}|?{' '})<a href="[(#SELF|parametre_url{par,nom})]">]<:jeux:jeu_type:>[(#ENV{par}|!={nom}|?{' '})</a>]</th>
 	<th><:jeux:jeu_titre_prive:></th>
@@ -10,6 +11,7 @@
 #PAGINATION 
 <BOUCLE_jeux(JEUX){par #ENV{par,date}}{inverse #ENV{par}|!={id_jeu}|?{1,0}}{pagination 30}>
 <tr class ="tr_liste"  style="text-align:center" >
+	<td>[(#STATUT|puce_statut)]</td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#NOM</a></td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TITRE</a></td>
