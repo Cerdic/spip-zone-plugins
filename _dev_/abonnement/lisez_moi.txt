@@ -1,6 +1,7 @@
 Notice rapide BoOz@rezo.net
 
 x) Assurez vous d'avoir prealablement intallé les plugins
+		- cfg
 		- inscription2
 		- acces restreint
 		- balise session
