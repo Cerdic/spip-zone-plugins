@@ -35,6 +35,15 @@
 		
 		<form action="#SELF" method="POST">
 			[(#ENV**|form_hidden_env)]
+			[(#ENV{reabo}|=={oui}|?{' ',''})
+			<input type="hidden" name="article" value="[(#ENV{article})]" />
+			<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
+			<?php
+			include_spip('inc/acces');
+			$hash = creer_uniqid();
+			?>
+			<input type="hidden" value="<?php echo $hash ?>" name="reachat_valide_hash">
+			]
 			<input type="submit" name="retour" class="spip_bouton" value="Retour" />
 			<input type="submit" name="validation" class="spip_bouton" value="Valider" />	
 		</form>	
