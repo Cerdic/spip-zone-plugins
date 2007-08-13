@@ -148,8 +148,20 @@ function jeux_taches_generales_cron($taches_generales){
 	}
 function cron_jeux_cron($t){
 	include_spip('inc/utils');
-	spip_query('DELETE from spip_jeux WHERE statut="poubelle"');
-	spip_log('suppression jeux poubelle');
+	$sup = '(';
+	$i = 0;
+	$requete = spip_query('SELECT id_jeu from spip_jeux WHERE statut="poubelle"');
+	
+	while ($ligne =spip_fetch_array($requete)){	
+
+		$sup .=($i==0) ?'':',';
+		$sup .=$ligne['id_jeu'];
+		$i++;
+	}
+	$sup.=(')');
+	spip_query('DELETE FROM spip_jeux WHERE `id_jeu` IN '.$sup);
+	spip_query('DELETE FROM spip_jeux_resultats WHERE `id_jeu` IN '.$sup);
+	spip_log('suppression jeux poubelle'.$sup);
 	
 	}
 
