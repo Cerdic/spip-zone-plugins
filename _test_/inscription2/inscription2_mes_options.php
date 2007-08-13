@@ -86,7 +86,9 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 //email envoye lors de l'inscription
 
 function envoyer_inscription2($id_auteur) {
-	include_spip('inc/mail');
+	if ($GLOBALS['spip_version_code']>=1.9259){include_spip('inc/envoyer_mail');}
+	else{include_spip('inc/mail');}
+	
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	
