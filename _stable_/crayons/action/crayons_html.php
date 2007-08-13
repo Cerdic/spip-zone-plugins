@@ -187,7 +187,7 @@ class Crayon {
 	// formulaire standard
 	function formulaire($contexte = array(), $inputAttrs = array()) {
 		include_spip('inc/filtres');
-		return liens_absolus('<form class="formulaire_spip" id="'.$this->modele.$this->id.'" method="post" action="' .
+		return liens_absolus('<form class="formulaire_spip" method="post" action="' .
 			url_absolue(parametre_url(self(),'action', 'crayons_store')) . '" enctype="multipart/form-data">' .
 			$this->code() .
 			$this->input($contexte, $inputAttrs) .
