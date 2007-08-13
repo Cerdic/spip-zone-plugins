@@ -59,7 +59,7 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 				$update_descriptif = $descriptif;
 				$update_lieu = $lieu;
 
-				$id_evenement_new = spip_abstract_insert("spip_evenements",
+				$id_evenement_new = sql_insert("spip_evenements",
 					"(id_evenement_source,maj)",
 					"("._q($id_evenement).",NOW())");
 				if ($id_evenement_new==0)
@@ -112,7 +112,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 	if (($insert || $modif)){
 
 		if ( ($insert) && (!$id_evenement) ){
-			$id_evenement = spip_abstract_insert("spip_evenements",
+			$id_evenement = sql_insert("spip_evenements",
 				"(id_evenement_source,maj)",
 				"('0',NOW())");
 			if ($id_evenement==0){
