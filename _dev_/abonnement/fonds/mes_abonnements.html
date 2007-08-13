@@ -1,0 +1,26 @@
+#CACHE{0}
+
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}>
+
+#_auteur:NOM
+
+#ID , #NOM_FAMILLE
+
+<h2 style="margin:20px 0px">Vos abonnements</h2>
+
+<BOUCLE_abo(ABONNEMENTS){id_auteur_elargi = #ID}>
+#LIBELLE
+</BOUCLE_abo>
+
+<h2 style="margin:20px 0px">Vos articles</h2>
+
+<ul>
+<BOUCLE_articles(spip_auteurs_elargis_articles){id_auteur_elargi = #ID}>
+<li><a href="[(#URL_PAGE{article,id_article=#ID_ARTICLE})]">[(#ID_ARTICLE|id_article_to_titre)]</a></li>
+</BOUCLE_articles>
+</ul>
+
+</BOUCLE_auteur_elargi>
+</BOUCLE_auteur>
+
