@@ -12,7 +12,7 @@
 <tr class ="tr_liste">
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
 <B_jeu>
-<BOUCLE_jeu(JEUX){id_jeu==#ID_JEU}>
+<BOUCLE_jeu(JEUX){statut==refuse|publie}{id_jeu==#ID_JEU}>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#NOM</a></td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TITRE</a></td>
 </BOUCLE_jeu>

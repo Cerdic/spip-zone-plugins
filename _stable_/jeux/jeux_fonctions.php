@@ -14,9 +14,12 @@ include_spip('base/jeux_tables');
 function boucle_JEUX($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
+        $mstatut = $id_table .'.statut';
         $boucle->from[] =  "spip_jeux AS $id_table";
-        //$boucle->where[] = "type='nl'";
-        //$boucle->where[] = array("'='","'type'","'\"nl\"'"); 
+        
+       	if (!($boucle->modificateur['criteres']['statut']))
+        	{$boucle->where[] = array("'='", "'$mstatut'", "'\\'publie\\''");}
+      
         return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -24,8 +27,7 @@ function boucle_JEUX_RESULTATS($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
         $boucle->from[] =  "spip_jeux_resultats AS $id_table";
-        //$boucle->where[] = "type='nl'";
-        //$boucle->where[] = array("'='","'type'","'\"nl\"'"); 
+      
         return calculer_boucle($id_boucle, $boucles);
 }
 

@@ -6,7 +6,7 @@
 		<th style="text-align:center">[(#ENV{par}|!=={resultat_court}|?{' '})<a href="[(#SELF|parametre_url{par,resultat_court})]">]<:jeux:resultat:>[(#ENV{par}|!=={resultat_court}|?{' '})</a>]</th>
 </tr></thead>
 #PAGINATION
-<BOUCLE_resultats(JEUX_RESULTATS spip_auteurs) {id_jeu} {par #ENV{par}} {inverse #ENV{par}|=={nom}|?{0,1}}{pagination 30}>
+<BOUCLE_resultats(JEUX_RESULTATS spip_auteurs) {id_jeu} {par #ENV{par}} {inverse #ENV{par}|=={nom}|?{0,1}}{pagination 30}{statut==refuse|publie}>
 <tr class ="tr_liste">
 	<td><a href="?exec=jeux_resultats_auteur&id_auteur=#ID_AUTEUR">#NOM</a></td>
 	<td>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]</td>
