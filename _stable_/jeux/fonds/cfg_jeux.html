@@ -1,16 +1,18 @@
-<!--titre=<:jeux:configurer_jeux:>-->
+<!-- titre=<:jeux:configurer_jeux:> -->
 <!-- descriptif=
 <table cellpadding="0" style="vertical-align: middle;" class="cellule-h-table">
 <tbody><tr><td><a class="cellule-h" href="./?exec=jeux_gerer_resultats"><span class="cell-i"><img alt="<:jeux:gerer_resultats:>" src="#CHEMIN{img/jeu-laurier.png}"/></span></a></td>
 <td class="cellule-h-lien"><a class="cellule-h" href="./?exec=jeux_gerer_resultats"><:jeux:gerer_resultats:></a></td></tr></tbody></table>
 -->
 
-<form method="post">
+[(#REM) icone=img/jeu-cfg.png]
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
 <label><:jeux:ecraser_resultat:>
 <select name="ecraser_resultat"> 
 <option value="oui"><:item_oui:></input>
 <option value="non" [ (#CONFIG{jeux/ecraser_resultat}|=={non}|?{selected="selected"})]><:item_non:></input>
 </select name="ecraser_resultat">
 </label>
-<p align="right"><input class="fondo"  type="submit" name="_cfg_ok" value="<:OK:>" /></p>
+<p align="right"><input class="fondo"  type="submit" name="_cfg_ok" value="<:valider:>" /></p>
 </form>
