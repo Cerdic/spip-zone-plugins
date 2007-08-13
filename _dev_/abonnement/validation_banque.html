@@ -1,0 +1,17 @@
+<?php
+echo "Cette page simule la reponse de la banque et son traitement<hr />";
+// attention ne gardez pas ca en prod, c pour tester
+
+
+$id_transaction = "#ENV{reference}"; // devrait etre la cle pour chercher les autres infos
+
+$texte_libre = "#ENV{texteLibre}";
+$reponse_banque = "#ENV{reponse_banque}";
+
+list($produit,$id_auteur_elargi,$hash_article) = split("-",$texte_libre) ;
+
+traiter_message_banque($produit,$id_auteur_elargi, $reponse_banque, $hash_article);
+
+?>
+
+<a href="#URL_SITE_SPIP">retour</a>
