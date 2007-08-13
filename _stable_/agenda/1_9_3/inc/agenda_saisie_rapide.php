@@ -136,7 +136,7 @@ function Agenda_verifie_les_mots_clefs($mots_envoyes) {
 	while ($row = spip_fetch_array($res,SPIP_ASSOC)){
 		$id_groupe = $row['id_groupe'];
 		$titre = supprimer_numero($row['titre']);
-		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe=".spip_abstract_quote($id_groupe));
+		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe="._q($id_groupe));
 		while ($row2 = spip_fetch_array($res2,SPIP_ASSOC)){
 			$les_mots_ok[]=array(	'nb'=>0, 'id_mot'=>$row2['id_mot'], 'titre_mot'=> $row2['titre'],
 											'id_groupe'=>$id_groupe, 'titre_groupe'=> $titre,
