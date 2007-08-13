@@ -526,11 +526,11 @@ $newtab="";
 		       
 		<script type=\"text/javascript\">
 		$(document).ready(function() {";
-		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_descriptif_typo_partout') == "on"))
+		if (($_GET['exec'] == "rubriques_edit") && (lire_config('barre_typo_generalisee/rubriques_descriptif_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
 		}
-		if (($_GET['exec'] == "rubriques_edit") && (lire_config('typo_partout/rubriques_texte_typo_partout') == "on"))
+		if (($_GET['exec'] == "rubriques_edit") && (lire_config('barre_typo_generalisee/rubriques_texte_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
 		}
@@ -538,7 +538,7 @@ $newtab="";
 		{
 			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
 		}
-		if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_descriptif_typo_partout') == "on"))
+		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_descriptif_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");";	
 		}
@@ -554,11 +554,11 @@ $newtab="";
 			$newtab .= "$('textarea[@id=texte8]').css(\"display\", \"none\");$('textarea[@id=texte8]').val('');";
 			$newtab .= "$('textarea[@id=texte9]').css(\"display\", \"none\");$('textarea[@id=texte9]').val('');";
 		}
-		if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_chapo_typo_partout') == "on"))
+		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_chapo_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=chapo]').css(\"display\", \"none\");";	
 		}
-		if (($_GET['exec'] == "articles_edit") && (lire_config('typo_partout/articles_ps_typo_partout') == "on"))
+		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_ps_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=ps]').css(\"display\", \"none\");";	
 		}
@@ -566,27 +566,27 @@ $newtab="";
 		{
 			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
 		}
-		if (($_GET['exec'] == "configuration") && (lire_config('typo_partout/configuration_description_typo_partout') == "on"))
+		if (($_GET['exec'] == "configuration") && (lire_config('barre_typo_generalisee/configuration_description_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif_site]').css(\"display\", \"none\");	";
 		}
-		if (($_GET['exec'] == "mots_type") && (lire_config('typo_partout/groupesmots_descriptif_typo_partout') == "on"))
+		if (($_GET['exec'] == "mots_type") && (lire_config('barre_typo_generalisee/groupesmots_descriptif_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
 		}
-		if (($_GET['exec'] == "mots_type") && (lire_config('typo_partout/groupesmots_texte_typo_partout') == "on"))
+		if (($_GET['exec'] == "mots_type") && (lire_config('barre_typo_generalisee/groupesmots_texte_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");	";
 		}
-		if (($_GET['exec'] == "mots_edit") && (lire_config('typo_partout/mots_descriptif_typo_partout') == "on"))
+		if (($_GET['exec'] == "mots_edit") && (lire_config('barre_typo_generalisee/mots_descriptif_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
 		}
-		if (($_GET['exec'] == "mots_edit") && (lire_config('typo_partout/mots_texte_typo_partout') == "on"))
+		if (($_GET['exec'] == "mots_edit") && (lire_config('barre_typo_generalisee/mots_texte_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");	";
 		}
-		if (($_GET['exec'] == "sites_edit") && (lire_config('typo_partout/sites_description_typo_partout') == "on"))
+		if (($_GET['exec'] == "sites_edit") && (lire_config('barre_typo_generalisee/sites_description_barre_typo_generalisee') == "on"))
 		{
 			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
 		}

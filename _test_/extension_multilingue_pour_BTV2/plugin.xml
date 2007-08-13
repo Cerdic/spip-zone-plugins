@@ -47,6 +47,10 @@
 		<nom>header_prive</nom>
 		<inclure>extension_multilingue.php</inclure>
 	</pipeline>
+	<necessite id="CFG" version="[1.0;]" />
+	<necessite id="BarreTypoEnrichie" version="[2.2.0;]" />
+	<necessite id="barre_typo_generalisee" version="[1.2;]" />
+	<necessite id='spip' version='[1.92;]' />
 	
 	
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
