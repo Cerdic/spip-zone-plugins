@@ -7,14 +7,14 @@
  	[OpenStudio->http://www.openstudio.fr] - Licence GPL
 	</auteur>
 	<version>
-	1.1
+	1.2
 	</version>
 	<etat>
-	test
+	stable
 	</etat>
 	<description>
 	Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, sites, mots clefs.. etc...),
-	 [acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=typo_partout] 
+	 [acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=barre_typo_generalisee] 
 	</description>
 	<lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
@@ -23,12 +23,12 @@
 	<pipeline>
   		<nom>body_prive</nom>
   		<action>insertion_in_body_prive</action>
-  		<inclure>typo_partout_define_prive.php</inclure>
+  		<inclure>barre_typo_generalisee_define_prive.php</inclure>
  	</pipeline>
 	<pipeline>
   		<nom>header_prive</nom>
   		<action>insertion_in_head_prive</action>
-  		<inclure>typo_partout_define_prive.php</inclure>
+  		<inclure>barre_typo_generalisee_define_prive.php</inclure>
  	</pipeline>
 	
 
@@ -38,9 +38,11 @@
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<prefix> 
-	typo_partout
+	barre_typo_generalisee
 	</prefix>
-
+	<necessite id="CFG" version="[1.0;]" />
+	<necessite id='spip' version='[1.92;]' />
+	
 
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
