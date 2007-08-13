@@ -140,22 +140,7 @@ function jeux_affiche_droite($flux){
 	
 	return $flux;
 }
-//tout ce que l'on va afficher ˆ gauche (donc affiche_droite, c'est logique non ?)
-function jeux_affiche_droite_edit(){
-			
-		include_spip('exec/inc_boites_infos');	
 
-		$r .= debut_cadre_relief(find_in_path('img/jeu-voir.png'),true,'',_T('jeux:inserer_jeu'));
-		$r .= "<div>"._T('jeux:inserer_jeu_explication')."</div>";			
-		$r .= boite_info_jeux_edit();			
-				
-		
-		return $r;
-}
-
-function jeux_affiche_droite_auteur($id){
-		return $r;
-}
 function jeux_taches_generales_cron($taches_generales){
 	$taches_generales['jeux_cron'] = 10 ;
 	
