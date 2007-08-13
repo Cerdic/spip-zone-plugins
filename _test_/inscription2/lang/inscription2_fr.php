@@ -190,6 +190,9 @@ L\'&eacute;quipe de @nom_site@',
 'cp_valide' => 'Veuillez ins&eacute;rer un code postal valide',
 'numero_valide' => 'Veuillez ins&eacute;rer un num&eacute;ro valide',
 'caracteres' => 'caract&egrave;res',
+'chainenombre' => '(compos&eacute;e de lettres et/ou de chiffres)',
+'chainelettre' => '(compos&eacute;e uniquement de lettres)',
+'email_valide' => 'Veuillez ins&eacute;rer un email valide',
 
 'page_confirmation' => 'Page de confirmation de votre inscription'
 

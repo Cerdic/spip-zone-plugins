@@ -165,6 +165,9 @@ The @nom_site@\'s Team',
 'cp_valide' => '<NEW>Veuillez ins&eacute;rer un code postal valide',
 'numero_valide' => '<NEW>Veuillez ins&eacute;rer un num&eacute;ro valide',
 'caracteres' => '<NEW>caract&egrave;res',
+'chainenombre' => '<NEW>(compos&eacute;e de lettres et/ou de chiffres)',
+'chainelettre' => '<NEW>(compos&eacute;e uniquement de lettres)',
+'email_valide' => '<NEW>Veuillez ins&eacute;rer un email valide',
 
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 
