@@ -43,14 +43,18 @@ function exec_jeux_voir(){
 	creer_colonne_droite();
 	debut_droite();
 	debut_cadre_relief();
-	gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$nom)),puce_statut($statut, " style='vertical-align: center'"));
-		
+	
+	
+	
 	if (autoriser('modifierstatut')){// changement de statut
-		if ($statut = _request('statut_modif')){
-			include_spip('base/jeux_modifier_statut');
-			jeu_modifier_statut($id_jeu,$statut);
-		}
 		
+		if (_request('statut_modif')){
+			
+			include_spip('base/jeux_modifier_statut');
+			jeu_modifier_statut($id_jeu,_request('statut_modif'));
+			$statut=_request('statut_modif');
+		}
+		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$nom)),puce_statut($statut, " style='vertical-align: center'"));
 		echo "<div style='font-weight:bold'>$titre_prive</div>";
 		if($titre_public) echo "<div style='font-weight:bold'>$titre_public</div>";
 		debut_cadre_relief();
@@ -64,6 +68,8 @@ function exec_jeux_voir(){
 		echo "</form>";
 		fin_cadre_relief();
 	}
+	else {
+		gros_titre(_T("jeux:jeu_numero", array('id'=>$id_jeu,'nom'=>$nom)),puce_statut($statut, " style='vertical-align: center'"));}
 	echo '<br />', $contenu;
 
 	fin_cadre_relief();
