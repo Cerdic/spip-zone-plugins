@@ -22,8 +22,14 @@
 		</dl>
 		
 		<dl>
+		[(#ENV{option}|!={achat_unite}|?{' ',''})
 			<dt>Mon abonnement</dt>
 			<dd>[ (#ENV{abonnement}|id_abonnement_to_libelle)][ - (#ENV{abonnement}|id_abonnement_to_montant) E]</dd>
+		]
+		[(#ENV{option}|!={achat_unite}|?{'',' '})
+		<dt>Mon article</dt>
+		<dd>[(#ENV{article}|id_article_to_titre) - 5 euros]</dd>
+		]
 		</dl>
 		
 		

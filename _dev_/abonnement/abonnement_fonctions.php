@@ -10,4 +10,10 @@ $abonnement = spip_fetch_array(spip_query("select montant from spip_abonnements 
 return $abonnement['montant'] ;
 }
 
+function id_article_to_titre($id_article){
+$article = spip_fetch_array(spip_query("select titre from spip_articles where id_article ='$id_article'")) ;
+return $article['titre'] ;
+}
+
+
 ?>

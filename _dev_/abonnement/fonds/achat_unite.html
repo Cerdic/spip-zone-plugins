@@ -1,0 +1,16 @@
+#CACHE{0}
+
+<h2 style="margin:20px 0px">Acheter cet article</h2>
+
+<BOUCLE_article(ARTICLES){id_article=#ENV{id_article}}{tout_voir}>
+<h2>#TITRE</h2>
+<small>Publi&eacute; le #DATE par #LESAUTEURS</small>
+<div style="margin:20px 0px">
+<strong>Extrait</strong> : #INTRODUCTION
+</div>
+
+<div>
+#FORMULAIRE_INSCRIPTION2{forum,achat_unite,#ID_ARTICLE}
+</div>
+
+</BOUCLE_article>
