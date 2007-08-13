@@ -9,14 +9,21 @@ function balise_FORMULAIRE_INSCRIPTION2 ($p) {
 function balise_FORMULAIRE_INSCRIPTION2_stat($args, $filtres) {
 	//initialiser mode d'inscription
 	$mode = $args[0];
+	
+	//utilisation possible #FORMULAIRE_INSCRIPTION2{forum,une_option,#ID_ARTICLE}
+	// on recupere ensuite #ENV{option} et #ENV{article}
+	$option = ($args[1])? $args[1] : '' ;  // sert a passer un argument a la balise
+	$article = ($args[2])? $args[2] : '' ; // passe un id_article a la balise
+	
 	if(!$mode)
 		$mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? 'redac' : 'forum'; 
+	
 	if(!test_mode_inscription2($mode))
 		return '';
-	else return array($mode);
+	else return array($mode,$option,$article);
 }
 
-function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
+function balise_FORMULAIRE_INSCRIPTION2_dyn($mode,$option,$article) {
 	//var_dump(lire_config('inscription2'));
 	
 	if (!test_mode_inscription2($mode)) 
@@ -79,6 +86,9 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 			$message = _T('inscription2:mail_non_domaine');
 	}
 
+	$var_user['option'] = $option;
+	$var_user['article'] = $article;
+
 	// etape de validation
 	if(defined('_DIR_PLUGIN_ABONNEMENT')){
 		if($var_user['email'] and ($retour = _request('retour'))){	
@@ -98,6 +108,9 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode) {
 		if (is_array($commentaire)) {
 			$var_user['id_auteur'] = $commentaire['id_auteur'];
 			$var_user['id_auteur_elargi'] = $commentaire['id_auteur_elargi'];
+				if(defined('_DIR_PLUGIN_ABONNEMENT')) {
+					$var_user['hash_article'] = $commentaire['hash_article'] ;
+				 }
 			$commentaire = true;
 			}
 	}
@@ -148,7 +161,7 @@ function inscription2_nouveau($declaration){
 	$declaration['statut'] = 'aconfirmer';
 	//insertion des données ds la table spip_auteurs
 	foreach($declaration as $cle => $val){
-		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone' or $cle =='abonnement')
+		if($cle == 'newsletters' or $cle == 'zones' or $cle =='sites' or $cle == 'zone' or $cle =='abonnement' or $cle=='option' or $cle=='article')
 			continue;
 		if ($cle == 'email' or $cle == 'nom' or $cle == 'bio' or $cle == 'statut' or $cle == 'login')
 			$auteurs[$cle] = $val;
@@ -170,7 +183,7 @@ function inscription2_nouveau($declaration){
 				(`id_auteur`, `id_liste`, `statut`, `date_inscription`) 
 				VALUES ('$n', '$value', 'valide','$date')");
 	}}
-	if(isset($declaration['zones'])){
+	if(isset($declaration['zones']) && !$declaration['article']){
 		foreach($declaration['zones'] as $value)
 			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
 	}
@@ -181,9 +194,19 @@ function inscription2_nouveau($declaration){
 	
 	$n = spip_abstract_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	$declaration['id_auteur_elargi'] = $n ;
-	if(isset($declaration['abonnement'])){
+	
+	if($declaration['abonnement']){
 		$value = $declaration['abonnement'] ;	
 			spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('$n', '$value')");
+	}
+	
+	if(isset($declaration['article'])){
+		$value = $declaration['article'] ;	
+		include_spip('inc/acces');
+		$hash = creer_uniqid();
+			spip_query("INSERT INTO `spip_auteurs_elargis_articles` (`id_auteur_elargi`, `id_article`, `statut_paiement` , `hash`) VALUES ('$n', '$value', 'a_confirmer','$hash')");
+		$declaration['hash_article'] = $hash ;
+
 	}
 
 	return $declaration;
