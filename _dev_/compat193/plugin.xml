@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Plugin de compatibilit&#233; avec SPIP 1.9.3 SVN 9919 et plus</nom>
+	<auteur>
+	James pour les fonctions (et RealET pour la mise en plugin)
+_ &#169; 2007 - Distribu&#233; sous licence GPL
+	</auteur>
+	<lien></lien>
+	<version>1.9.3</version>
+	<etat>test</etat>
+    <description>
+	SPIP 1.9.3 &agrave; partir de la version 9919 introduit de {{gros}} changements dans le nom de certaines fonctions.
+	
+	Activer ce plugin pour pouvoir utiliser les anciens plugins en attendant qu'ils soient à jour.
+	</description>
+	<prefix>compat9919</prefix>
+	<options> <!-- fichier charge a chaque hit -->
+		compat_9919.php
+	</options>
+	<necessite id="SPIP" version='[1.9259;]' />
+	<chemin dir='' />
+</plugin>
