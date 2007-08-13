@@ -5,7 +5,7 @@ function jeux_install($install){
 	$version_base = $GLOBALS['jeux_base_version'];
 	switch($install) {
 		case 'test':
-			return false;//isset($GLOBALS['meta']['jeux_base_version']) AND ($GLOBALS['meta']['jeux_base_version']>=$version_base);
+			return isset($GLOBALS['meta']['jeux_base_version']) AND ($GLOBALS['meta']['jeux_base_version']>=$version_base);
 		case 'install':
 			jeux_verifier_base();
 			break;
@@ -24,6 +24,9 @@ function jeux_vider_tables() {
 }
 
 function jeux_verifier_base(){
+	// compatibilite SPIP 1.92
+	$showtable = function_exists('sql_showtable')?'sql_showtable':'spip_abstract_showtable';
+	// version de la base de donnee
 	$version_base = $GLOBALS['jeux_base_version'];
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta']['jeux_base_version']) )
@@ -34,7 +37,7 @@ function jeux_verifier_base(){
 			include_spip('base/abstract_sql');
 			creer_base();
 			// ajout du champ 'nom' a la table spip_jeux, si pas deja existant
-			$desc = sql_showtable("spip_jeux", '', true);
+			$desc = $showtable("spip_jeux", '', true);
 			if (!isset($desc['field']['nom'])){
 				spip_query("ALTER TABLE spip_jeux ADD `nom` text NOT NULL AFTER `date`");
 				// ajout d'un nom par defaut aux jeux existants
@@ -47,7 +50,7 @@ function jeux_verifier_base(){
 		}
 		if ($current_version<0.11){
 			// ajout du champ 'titre' a la table spip_jeux, si pas deja existant
-			$desc = sql_showtable("spip_jeux", '', true);
+			$desc = $showtable("spip_jeux", '', true);
 			if (!isset($desc['field']['titre'])){
 				spip_query("ALTER TABLE spip_jeux ADD `titre` text NOT NULL AFTER `nom`");
 				// ajout d'un titre par defaut aux jeux existants
