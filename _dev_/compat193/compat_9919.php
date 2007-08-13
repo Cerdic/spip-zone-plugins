@@ -1,7 +1,7 @@
 <?php
 
-include_spip('inc/filtres');
-if(version_svn_courante(_DIR_RACINE) >= 9919) {
+#include_spip('inc/filtres');
+#if(version_svn_courante(_DIR_RACINE) >= 9919) {
 
   function spip_abstract_serveur($ins_sql, $serveur) {
    	 return sql_serveur($ins_sql, $serveur);
@@ -87,6 +87,6 @@ if(version_svn_courante(_DIR_RACINE) >= 9919) {
     return sql_errno($serveur);
   }
 
-}
+#}
 
 ?>

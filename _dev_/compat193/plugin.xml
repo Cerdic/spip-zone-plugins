@@ -13,9 +13,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	Activer ce plugin pour pouvoir utiliser les anciens plugins en attendant qu'ils soient à jour.
 	</description>
 	<prefix>compat9919</prefix>
-	<options> <!-- fichier charge a chaque hit -->
-		compat_9919.php
-	</options>
+	<options>compat_9919.php</options>
 	<necessite id="SPIP" version='[1.9259;]' />
 	<chemin dir='' />
 </plugin>
