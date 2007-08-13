@@ -5,6 +5,7 @@ include_spip('inc/presentation');
 include_spip('exec/inc_boites_infos');
 
 function exec_jeux_gerer_resultats(){
+	
 	// les boutons ... le pire ennemi des ados parait-il
 	$supprimer_tout = _request('supprimer_tout');
 	$supprimer_confirmer = _request('supprimer_confirmer');
@@ -17,11 +18,13 @@ function exec_jeux_gerer_resultats(){
 	
 	$id_jeu 	= _request('id_jeu');
 	$id_auteur  = _request('id_auteur');
-
-	if ($id_jeu) { gerer_resultat_jeux($id_jeu,$bouton); return; }
-	if ($id_auteur) { gerer_resultats_auteur($id_auteur,$bouton); return; }
+	
+	
+	if ($id_jeu and autoriser('gererresultats')) { gerer_resultat_jeux($id_jeu,$bouton); return; }
+	if ($id_auteur  and autoriser('gererresultats','auteur',$id_auteur)) { gerer_resultats_auteur($id_auteur,$bouton); return; }
 	// ... et par defaut
-	gerer_resultat_tous($bouton);
+	if (autoriser('gererresultats')) {gerer_resultat_tous($bouton); return;}
+	interdit();
 }
 
 function gerer_resultat_tous($bouton){
@@ -202,6 +205,13 @@ function formulaire_suppression($bouton, $type){
 	echo "</form>";
 	
 	fin_cadre_formulaire();
+}
+function interdit(){
+	debut_page(_T('avis_non_acces_page'));
+	debut_gauche();
+	debut_droite();
+	echo _T('avis_non_acces_page');
+	echo fin_gauche(), fin_page();
 }
 
 ?>

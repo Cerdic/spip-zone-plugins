@@ -85,5 +85,6 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 		<action>affiche_droite</action>
 	</pipeline>
 
+
 	<install>base/jeux_upgrade.php</install>
 </plugin>

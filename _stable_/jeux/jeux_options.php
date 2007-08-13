@@ -10,4 +10,5 @@
 #--------------------------------------------------------------------------#
 
 include_spip('base/jeux_tables');
+include_spip('inc/jeux_autoriser');
 ?>
