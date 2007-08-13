@@ -60,10 +60,13 @@ function exec_jeux_voir(){
 		debut_cadre_relief();
 		echo "<form method='post' name='statut_edit'>\n";
 		echo "<label><span class='titrem'>"._T('jeux:statut_jeu').'</span>&nbsp;<select name="statut_modif">';
-		echo '<option value="publie">'._T('info_statut_site_2').'</option>';
+		echo '<option value="publie">'._T('texte_statut_publie').'</option>';
 		echo '<option value="poubelle"';	
 		echo ($statut=='poubelle')?'selected="selected"':'';
-		echo '>'._T('info_statut_site_4').'</option>';
+		echo '>'._T('texte_statut_poubelle').'</option>';
+		echo '<option value="refuse"';	
+		echo ($statut=='refuse')?'selected="selected"':'';
+		echo '>'._T('texte_statut_refuse').'</option>';
 		echo "</select></label>&nbsp;<input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo' />";
 		echo "</form>";
 		fin_cadre_relief();
