@@ -159,9 +159,11 @@ function cron_jeux_cron($t){
 		$i++;
 	}
 	$sup.=(')');
-	spip_query('DELETE FROM spip_jeux WHERE `id_jeu` IN '.$sup);
-	spip_query('DELETE FROM spip_jeux_resultats WHERE `id_jeu` IN '.$sup);
-	spip_log('suppression jeux poubelle'.$sup);
+	if ($sup!='()') {
+		spip_query('DELETE FROM spip_jeux WHERE `id_jeu` IN '.$sup);
+		spip_query('DELETE FROM spip_jeux_resultats WHERE `id_jeu` IN '.$sup);
+		spip_log('suppression jeux poubelle'.$sup);
+		}
 	
 	}
 
