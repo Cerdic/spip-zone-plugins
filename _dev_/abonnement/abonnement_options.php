@@ -139,9 +139,9 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 
 
 function article_visible_par_abonne($id_auteur,$id_article){
-$article_visible = spip_fetch_array(spip_query("SELECT id_article FROM `spip_auteurs_elargis_articles` a, `spip_auteurs_elargis` b, `spip_auteurs` c WHERE c.id_auteur = '$id_auteur' AND b.id_auteur = c.id_auteur AND a.id_auteur_elargi = b.id") );
+$article_visible = spip_fetch_array(spip_query("SELECT a.id_article, a.statut_paiement FROM `spip_auteurs_elargis_articles` a, `spip_auteurs_elargis` b, `spip_auteurs` c WHERE c.id_auteur = '$id_auteur' AND b.id_auteur = c.id_auteur AND a.id_auteur_elargi = b.id AND a.id_article='$id_article'") );
 
-if($article_visible['id_article'] == $id_article) 
+if($article_visible['id_article'] == $id_article AND $article_visible['statut_paiement'] =="ok") 
 	return true ;
 else
 	return false ;	
