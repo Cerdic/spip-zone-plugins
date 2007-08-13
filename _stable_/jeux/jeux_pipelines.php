@@ -154,10 +154,18 @@ function jeux_affiche_droite_edit(){
 }
 
 function jeux_affiche_droite_auteur($id){
-		
-		
-	
 		return $r;
 }
+function jeux_taches_generales_cron($taches_generales){
+	$taches_generales['jeux_cron'] = 10 ;
+	
+	return $taches_generales;
+	}
+function cron_jeux_cron($t){
+	include_spip('inc/utils');
+	spip_query('DELETE from spip_jeux WHERE statut="poubelle"');
+	spip_log('suppression jeux poubelle');
+	
+	}
 
 ?>
