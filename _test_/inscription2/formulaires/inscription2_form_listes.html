@@ -6,7 +6,7 @@
  <input name="format" id="format" value="html"  type="hidden" />
 	<BOUCLE_listes(LISTES){statut=liste}>
 		<label>
-		<input style="width:15px" type="checkbox" name="newsletters[]" value="#ID_LISTE" [(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"] />
+		<input type="checkbox" name="newsletters[]" value="#ID_LISTE" [(#ID_LISTE|in_array{#GET{selected}}|?{' ',''}) checked="checked"] />
 		#TITRE
 		</label>
 	</BOUCLE_listes>
