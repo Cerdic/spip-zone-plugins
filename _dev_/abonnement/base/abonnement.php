@@ -63,7 +63,7 @@ $spip_auteurs_elargis_articles = array(
 						);
 
 $spip_auteurs_elargis_articles_key = array(
-						"PRIMARY KEY" => "id_auteur_elargi"
+						"KEY" => "id_auteur_elargi"
 						);	
 
 $tables_principales['`spip_auteurs_elargis_articles`'] = array(

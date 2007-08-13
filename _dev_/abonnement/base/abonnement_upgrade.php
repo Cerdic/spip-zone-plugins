@@ -10,7 +10,7 @@
 **/
 
 //version actuelle du plugin à changer en cas de maj
-	$GLOBALS['abonnement_base_version'] = 0.3;
+	$GLOBALS['abonnement_base_version'] = 0.4;
 	
 	function abonnement_upgrade(){
 		$version_base = $GLOBALS['abonnement_base_version'];
@@ -49,6 +49,18 @@
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
 		}
 		ecrire_metas();
+		
+		if ($current_version < 0.4){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			// faudrait virer le autoincrement aussi
+			spip_query("ALTER TABLE `spip_auteurs_elargis_articles` ADD INDEX id_auteur_elargi (id_auteur_elargi)");
+			spip_query("ALTER TABLE `spip_auteurs_elargis_articles` DROP PRIMARY KEY");
+			echo "Maj 0.4 des index `spip_auteurs_elargis_articles`";
+			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+		}
+		ecrire_metas();
+
 	}
 	
 	function abonnement_vider_tables() {
