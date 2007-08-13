@@ -194,6 +194,7 @@ L\'&eacute;quipe de @nom_site@',
 'chainelettre' => '(compos&eacute;e uniquement de lettres)',
 'email_valide' => 'Veuillez ins&eacute;rer un email valide',
 
+'titre_confirmation' => 'Confirmation',
 'page_confirmation' => 'Page de confirmation de votre inscription'
 
 );

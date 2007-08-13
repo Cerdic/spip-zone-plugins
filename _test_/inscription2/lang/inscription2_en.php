@@ -169,6 +169,7 @@ The @nom_site@\'s Team',
 'chainelettre' => '<NEW>(compos&eacute;e uniquement de lettres)',
 'email_valide' => '<NEW>Veuillez ins&eacute;rer un email valide',
 
+'titre_confirmation' => 'Confirmation',
 'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
 
 );

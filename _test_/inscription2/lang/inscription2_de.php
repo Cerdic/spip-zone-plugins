@@ -190,6 +190,7 @@ L\'&eacute;quipe de @nom_site@',
 'chainelettre' => '<NEW>(compos&eacute;e uniquement de lettres)',
 'email_valide' => '<NEW>Veuillez ins&eacute;rer un email valide',
 
+'titre_confirmation' => 'Confirmation',
 'page_confirmation' => 'Seite der Bestätigung Ihrer Einschreibung'
 
 );

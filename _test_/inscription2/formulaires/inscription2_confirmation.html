@@ -15,12 +15,15 @@
 // -->
 </script>
 
-<form name='password' method='post' action="#SELF" >
-	<:pass_choix_pass:><br />
-	<input type='password' name='pass1' id='pass1'><br />
-	<:inscription2:redemande_password:><br />
-	<input type='password' name='pass2' id='pass2'>
-	<input type='password' name='pass' id='pass' style="display:none;">
+<form name='password' method='post' action="#SELF" class="formulaire_spip" >
+	<p><label for="pass1"><:pass_choix_pass:></label>
+	<input type='password' class="forml" name='pass1' id='pass1'></p>
 	
-	<input onClick="cryptage();" type="submit" value='<:bouton_valider:>'/>
+	<p><label for="pass2"><:inscription2:redemande_password:></label>
+	<input type='password' class="forml" name='' id='pass2'>
+	<input type='password' name='pass' id='pass' style="display:none;"></p>
+	
+	<p class="spip_bouton">
+		<input onClick="cryptage();" type="submit" value="<:bouton_valider:>" />
+	</p>
 </form>
