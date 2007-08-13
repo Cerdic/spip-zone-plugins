@@ -42,8 +42,6 @@ charger_generer_url(); # pour recuperer_parametres_url
 //
 // http://doc.spip.org/@calculer_contexte
 function calculer_contexte() {
-	global $_GET, $_POST;
-
 	$contexte = array();
 	foreach($_GET as $var => $val) {
 		if (strpos($var, 'var_') !== 0)
@@ -104,12 +102,12 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 // Calcul de la rubrique associee a la requete
 // (selection de squelette specifique par id_rubrique & lang)
 
-// http://doc.spip.org/@sql_rubrique_fond
-function sql_rubrique_fond($contexte) {
+// http://doc.spip.org/@quete_rubrique_fond
+function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_rubrique'])) {
 		$id = intval($contexte['id_rubrique']);
-		$row = spip_abstract_fetsel(array('lang'),
+		$row = sql_fetsel(array('lang'),
 					    array('spip_rubriques'),
 					    array("id_rubrique=$id"));
 		$lang = isset($row['lang']) ? $row['lang'] : '';
@@ -118,7 +116,7 @@ function sql_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_breve'])) {
 		$id = intval($contexte['id_breve']);
-		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
+		$row = sql_fetsel(array('id_rubrique', 'lang'),
 			array('spip_breves'), 
 			array("id_breve=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
@@ -128,11 +126,11 @@ function sql_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_syndic'])) {
 		$id = intval($contexte['id_syndic']);
-		$row = spip_abstract_fetsel(array('id_rubrique'),
+		$row = sql_fetsel(array('id_rubrique'),
 			array('spip_syndic'),
 			array("id_syndic=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
-		$row = spip_abstract_fetsel(array('lang'),
+		$row = sql_fetsel(array('lang'),
 			array('spip_rubriques'),
 			array("id_rubrique='$id_rubrique_fond'"));
 		$lang = isset($row['lang']) ? $row['lang'] : '';
@@ -141,7 +139,7 @@ function sql_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_article'])) {
 		$id = intval($contexte['id_article']);
-		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
+		$row = sql_fetsel(array('id_rubrique', 'lang'),
 			array('spip_articles'),
 			array("id_article=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
@@ -152,9 +150,9 @@ function sql_rubrique_fond($contexte) {
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 
-// http://doc.spip.org/@sql_chapo
-function sql_chapo($id_article) {
-	$chapo= spip_abstract_fetsel(array('chapo'),
+// http://doc.spip.org/@quete_chapo
+function quete_chapo($id_article) {
+	$chapo= sql_fetsel(array('chapo'),
 		array('spip_articles'),
 		array("id_article=".intval($id_article),
 		"statut='publie'"));
@@ -163,12 +161,12 @@ function sql_chapo($id_article) {
 
 # retourne le parent d'une rubrique
 
-// http://doc.spip.org/@sql_parent
-function sql_parent($id_rubrique) {
+// http://doc.spip.org/@quete_parent
+function quete_parent($id_rubrique) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
 
-	$id_parent = spip_abstract_fetsel(array('id_parent'),
+	$id_parent = sql_fetsel(array('id_parent'),
 		array('spip_rubriques'), 
 		array("id_rubrique=" . $id_rubrique));
 
@@ -180,29 +178,29 @@ function sql_parent($id_rubrique) {
 
 # retourne la profondeur d'une rubrique
 
-// http://doc.spip.org/@sql_profondeur
-function sql_profondeur($id) {
+// http://doc.spip.org/@quete_profondeur
+function quete_profondeur($id) {
 	$n = 0;
 	while ($id) {
 		$n++;
-		$id = sql_parent($id);
+		$id = quete_parent($id);
 	}
 	return $n;
 }
 
 # retourne la rubrique d'un article
 
-// http://doc.spip.org/@sql_rubrique
-function sql_rubrique($id_article) {
-	$id_rubrique = spip_abstract_fetsel(array('id_rubrique'),
+// http://doc.spip.org/@quete_rubrique
+function quete_rubrique($id_article) {
+	$id_rubrique = sql_fetsel(array('id_rubrique'),
 			array('spip_articles'),
 			array("id_article=" . intval($id_article)));
 	return $id_rubrique['id_rubrique'];
 }
 
-// http://doc.spip.org/@sql_petitions
-function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
-	$retour = spip_abstract_fetsel(
+// http://doc.spip.org/@quete_petitions
+function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
+	$retour = sql_fetsel(
 		array('texte'),
 		array('spip_petitions'),
 		array("id_article=".intval($id_article)),
@@ -217,14 +215,14 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 }
 
 # retourne le champ 'accepter_forum' d'un article
-// http://doc.spip.org/@sql_accepter_forum
-function sql_accepter_forum($id_article) {
+// http://doc.spip.org/@quete_accepter_forum
+function quete_accepter_forum($id_article) {
 	static $cache = array();
 
 	if (!$id_article) return;
 
 	if (!isset($cache[$id_article])) {
-		$row = spip_abstract_fetsel(array('accepter_forum'),
+		$row = sql_fetsel(array('accepter_forum'),
 			array('spip_articles'),
 			array("id_article=".intval($id_article)));
 		$cache[$id_article] = $row['accepter_forum'];
@@ -276,7 +274,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 		// si le raccourci a un titre il sera pris comme corps du 302
 		if ($fond == 'article'
 		AND $id_article = intval($local['id_article'])) {
-			$m = sql_chapo($id_article);
+			$m = quete_chapo($id_article);
 			if ($m[0]=='=') {
 				include_spip('inc/texte');
 				// les navigateurs pataugent si l'URL est vide
@@ -296,7 +294,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique_fond = 0;
 	// Chercher le fond qui va servir de squelette
-	if ($r = sql_rubrique_fond($local))
+	if ($r = quete_rubrique_fond($local))
 		list($id_rubrique_fond, $lang) = $r;
 
 	// Si inc-urls ou un appel dynamique veut fixer la langue, la recuperer

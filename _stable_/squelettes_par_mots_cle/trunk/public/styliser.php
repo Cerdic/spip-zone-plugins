@@ -56,7 +56,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang) {
 				break;
 			}
 			else
-				$id_rubrique = sql_parent($id_rubrique);
+				$id_rubrique = quete_parent($id_rubrique);
 		}
 	}
     
@@ -104,7 +104,7 @@ function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
 	$where1 = array("$id_table=$id",
 					'mots.id_mot=lien.id_mot',
 					"id_groupe=$id_groupe");
-	$r = spip_abstract_fetch(spip_abstract_select($select1,$from1,$where1));
+	$r = sql_fetch(spip_abstract_select($select1,$from1,$where1));
 	if ($r) {
 	  include_spip("inc/charsets");
 	   include_spip("inc/filtres");
