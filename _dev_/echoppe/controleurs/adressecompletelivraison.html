@@ -11,7 +11,7 @@
 	
 	jQuery.validator.addMethod("chaine", function(value, element) {
 		return !jQuery.validator.methods.required(value, element) || /^[A-Za-z\-\'\.ÒÁ‡ËÈ‚ÍÓÙ˚ ]+$/.test(value);
-	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:>");
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:chaine_valide:> <:inscription2:chainelettre:>");
 
 	jQuery.validator.addMethod("postal", function(value, element) {
 		return !jQuery.validator.methods.required(value, element) || /^[A-Z]{1,2}[-|\s][0-9]{3,6}$|^[0-9]{3,6}$|^[0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$|^[A-Z]{1,2} [0-9|A-Z]{2,5}[-|\s][0-9|A-Z]{2,4}$/.test(value);
@@ -38,15 +38,14 @@
 			messages: {
 				#ENV{name_adresse_livraison}: {
 					required:"<:inscription2:champ_obligatoire:>",
-					postal:"<:inscription2:chaine_valide:>",
 					rangeLength:"Min 10 Max 1000 <:inscription2:caracteres:>"},
 				#ENV{name_code_postal_livraison}: {
 					required:"<:inscription2:champ_obligatoire:>",
-					postal:"Entrez un code postal valide",
+					postal:"<:inscription2:cp_valide:>",
 					rangeLength:"Min 3 Max 20 <:inscription2:caracteres:>"},
 				#ENV{name_ville_livraison}: {
 					required:"<:inscription2:champ_obligatoire:>",
-					chaine:"<:inscription2:chaine_valide:>",
+					chaine:"<:inscription2:chaine_valide:>  <:inscription2:chainelettre:>",
 					rangeLength:"Min 2 Max 30 <:inscription2:caracteres:>"},
 				#ENV{name_pays_livraison}: {
 					required:"<:inscription2:champ_obligatoire:>"}
