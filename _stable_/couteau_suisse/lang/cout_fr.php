@@ -308,7 +308,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 
 // ---------------------------------------------------------------------------
 	'flock:nom' => "Pas de verrouillage de fichiers",
-	'flock:description' => "D&eacute;sactive le syst&egrave;me de verrouillage de fichiers en neutralisant la fonction PHP flock(). Certains h&eacute;bergements posent en effet des probl&egrave;mes graves suite &agrave; un syst&egrave;me de fichiers inadapt&eacute; ou &agrave; un manque de synchronisation. N'activez pas cet outil si votre site fonctionne normalement.",
+	'flock:description' => "D&eacute;sactive le syst&egrave;me de verrouillage de fichiers en neutralisant la fonction PHP {flock()}. Certains h&eacute;bergements posent en effet des probl&egrave;mes graves suite &agrave; un syst&egrave;me de fichiers inadapt&eacute; ou &agrave; un manque de synchronisation. N'activez pas cet outil si votre site fonctionne normalement.",
 
 /*
 // ---------------------------------------------------------------------------

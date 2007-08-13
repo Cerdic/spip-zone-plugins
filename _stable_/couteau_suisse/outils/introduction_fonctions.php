@@ -79,15 +79,26 @@ if (!function_exists('balise_INTRODUCTION')) {
 	function balise_INTRODUCTION($p) {
 		$type = $p->type_requete;
 		$_texte = champ_sql('texte', $p);
-		if ($type == 'articles') {
-		  $_chapo = champ_sql('chapo', $p);
-		  $_descriptif =  champ_sql('descriptif', $p);
-		  $_id = champ_sql('id_article', $p);
-		} else {
-		  $_chapo = "''";
-		  $_descriptif =  "''";
-		  $_id = 0;
-		}
+		$_chapo = "''";
+		$_descriptif =  "''";
+		switch ($type) {
+			case 'articles':
+			  $_chapo = champ_sql('chapo', $p);
+			  $_descriptif =  champ_sql('descriptif', $p);
+			  $_id = champ_sql('id_article', $p);
+			  break;
+			case 'breves':
+			  $_id = champ_sql('id_breve', $p);
+			  break;
+			case 'forums':
+			  $_id = champ_sql('id_forum', $p);
+			  break;
+			case 'rubriques':
+			  $_id = champ_sql('id_rubrique', $p);
+			  break;
+			default:
+			  $_id = 0;
+			}
 	//	$p->code = "calcul_introduction('$type', $_texte, $_chapo, $_descriptif)";
 		$p->code = "cs_introduction('$type', $_texte, $_chapo, $_descriptif, $_id)";
 	
