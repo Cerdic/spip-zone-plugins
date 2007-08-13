@@ -1,0 +1,26 @@
+Notice rapide BoOz@rezo.net
+
+x) Assurez vous d'avoir prealablement intallé les plugins
+		- inscription2
+		- acces restreint
+
+
+x) Ajouter dans une page achat_unite.html
+
+[(#INCLURE{fond=fonds/achat_unite}{id_article=#ID_ARTICLE})]
+
+
+
+x) Mettre pour la page article d'une rubrique en acces restreint
+
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+
+HTML ici
+
+</BOUCLE_article_principal></BOUCLE_article_principal>
+		[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''}) <INCLURE{fond=article_restreint}{id_article}> ] 
+		[(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '}) Cette page n'existe pas ] 
+<//B_article_principal>
+
+
+x) Relooker la page article_restreint.html
