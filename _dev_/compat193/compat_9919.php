@@ -139,6 +139,35 @@
   function sql_calendrier_agenda ($annee, $mois) {
 	return quete_calendrier_agenda ($annee, $mois);
   }
+  
+  //r9918
+  function sql_rubrique_fond($contexte) {
+	return quete_rubrique_fond($contexte);
+  }
+  
+  function sql_chapo($id_article) {
+	return quete_chapo($id_article);
+  }
+  
+  function sql_parent($id_rubrique) {
+	return quete_parent($id_rubrique);
+  }
+  
+  function sql_profondeur($id) {
+	return quete_profondeur($id);
+  }
+  
+  function sql_rubrique($id_article) {
+	return quete_rubrique($id_article);
+  }
+  
+  function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
+	return quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache);
+  }
+  
+  function sql_accepter_forum($id_article) {
+	return quete_accepter_forum($id_article);
+  }
 
 #}
 
