@@ -86,6 +86,59 @@
   function spip_sql_errno($serveur='') {
     return sql_errno($serveur);
   }
+  
+  // r9916
+  function sql_calendrier_mois($annee,$mois,$jour) {
+	return quete_calendrier_mois($annee,$mois,$jour);
+  }
+  
+  function sql_calendrier_semaine($annee,$mois,$jour) {
+	return quete_calendrier_semaine($annee,$mois,$jour);
+  }
+  
+  function sql_calendrier_jour($annee,$mois,$jour) {
+	return quete_calendrier_jour($annee,$mois,$jour);
+  }
+  
+  function sql_calendrier_interval($limites) {
+	return quete_calendrier_interval($limites);
+  }
+  
+  function  sql_calendrier_interval_forums($limites, &$evenements) {
+	return quete_calendrier_interval_forums($limites, &$evenements);
+  }
+  
+  function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
+	return quete_calendrier_interval_articles($avant, $apres, &$evenements);
+  }
+  
+  function sql_calendrier_interval_rubriques($avant, $apres, &$evenements) {
+	return quete_calendrier_interval_rubriques($avant, $apres, &$evenements);
+  }
+  
+  function sql_calendrier_interval_breves($avant, $apres, &$evenements) {
+	return quete_calendrier_interval_breves($avant, $apres, &$evenements);
+  }
+  
+  function sql_calendrier_interval_rv($avant, $apres) {
+	return quete_calendrier_interval_rv($avant, $apres);
+  }
+  
+  function sql_calendrier_taches_annonces () {
+	return quete_calendrier_taches_annonces ();
+  }
+  
+  function sql_calendrier_taches_pb () {
+	return quete_calendrier_taches_pb ();
+  }
+  
+  function sql_calendrier_taches_rv () {
+	return quete_calendrier_taches_rv ();
+  }
+  
+  function sql_calendrier_agenda ($annee, $mois) {
+	return quete_calendrier_agenda ($annee, $mois);
+  }
 
 #}
 
