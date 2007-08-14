@@ -14,7 +14,7 @@
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
 
 [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-	[(#INCLURE{fond=formulaires/abonnement_liste}{abonnement=#ENV{abonnement}}{option=#ENV{option}})]	
+	[(#INCLURE{fond=formulaires/abonnement_liste}{article=#ENV{article}}{abonnement=#ENV{abonnement}}{option=#ENV{option}})]	
 ]
 
 
