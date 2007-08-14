@@ -51,7 +51,7 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode) {
 		$htpass = generer_htpass($pass);
 		$statut = lire_config('inscription2/statut_nouveau');
 		spip_query("UPDATE spip_auteurs SET statut = '$statut', pass='$pass', htpass='$htpass', alea_actuel='' WHERE id_auteur = ".$id);
-		echo "<strong>"._T('pass_nouveau_enregistre')."</strong>";
+		echo "<strong>"._T('pass_nouveau_enregistre')."</strong><p><a href='".$GLOBALS['meta']["adresse_site"]."'>Retour</a></p>";
 		$var_user = spip_query("SELECT nom, email, login FROM spip_auteurs WHERE id_auteur=".$id);
 		$var_user = spip_fetch_array($var_user);
 		if($var_user){
