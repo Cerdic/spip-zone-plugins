@@ -1,21 +1,89 @@
 [(#REM)
 
-	Controleur pour le crayon 'telfaxlivraison', uniquement html
-
+	Controleur pour le crayon 'telfaxpro', uniquement html
+	Validation JS pour les champs spécifiés obligatoires
+	Si les champs ne sont pas activés dans le CFG, ils n'apparaissent pas...
 ]
 #CACHE{0}
+<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=#ENV{id_auteurs_elargi}}{tous}>
+<script type="text/javascript">
+/* http://bassistance.de/jquery-plugins/jquery-plugin-validation/ */
+	
+	jQuery.validator.addMethod("numero", function(value, element) {
+		return !jQuery.validator.methods.required(value, element) || /^[0-9\+\. \-]+$/.test(value);
+	}, "<:inscription2:champ_obligatoire:>, <:inscription2:numero_valide:>");
+	
+			var id = cQuery(".auteurs_elargi-telfaxlivraison-#ID_AUTEUR").crayon();
+			var validator = $(id).validate({
+			event: "keyup",
+			showErrors: function(errors, errorList) {
+				// Si c est pas ok on cache le bouton ok et on affiche les erreurs normales
+				$('.crayon-submit').hide();
+				validator.defaultShowErrors();
+			},
+			errorPlacement: function(error, element) {
+				error.appendTo( element.parent("div") );
+			},
+			success: function() {$('.crayon-submit').show();},
+			rules: {
+				#ENV{name_telephone_livraison}: {[(#CONFIG{inscription2/telephone_livraison_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
+				#ENV{name_mobile_livraison}: {[(#CONFIG{inscription2/mobile_livraison_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
+				#ENV{name_fax_livraison}: {[(#CONFIG{inscription2/fax_livraison_obligatoire}|=={on}|?{required: true,}),]numero:true, rangeLength:[6,20]},
+			},
+			messages: {
+				#ENV{name_telephone_livraison}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					numero:"<:inscription2:numero_valide:>",
+					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
+				#ENV{name_mobile_livraison}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					numero:"<:inscription2:numero_valide:>",
+					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"},
+				#ENV{name_fax_livraison}: {
+					required:"<:inscription2:champ_obligatoire:>",
+					numero:"<:inscription2:numero_valide:>",
+					rangeLength:"Min 6 Max 20 <:inscription2:caracteres:>"}
+			}
+		});
 
-<BOUCLE_a(AUTEURS_ELARGIS){id_auteur=(#ENV{id_auteurs_elargi})}{tous}>
+		function testform(){
+			//On lance le validateur une fois pour vérifier si c est ok - si c'est pas ok on cache le bouton ok
+			if(validator.form() == false){$('.crayon-submit').hide();}
+			else{$('.crayon-submit').show();}
+		}
+		
+	$().ready(function() {
+		testform();
+		$('.obligatoire label').not('.error').append('*');
+	});
+</script>
 <fieldset style="background-color:#fff;">
-<legend><:echoppe:vos_contacts_livraison:></legend>
-<label><:inscription2:telephone:> : </label> <input class="crayon-active" name="#ENV{name_telephone_livraison}"
- style="width:#ENV{largeur}px;" value="[(#TELEPHONE_LIVRAISON**|entites_html)]" />
-<br />
-<label><:inscription2:mobile:> : </label> <input class="crayon-active" name="#ENV{name_mobile_livraison}"
- style="width:#ENV{largeur}px;" value="[(#MOBILE_LIVRAISON**|entites_html)]" />
-<br />
-<label><:inscription2:fax:> : </label> <input class="crayon-active" name="#ENV{name_fax_livraison}"
- style="width:#ENV{largeur}px;" value="[(#FAX_LIVRAISON**|entites_html)]" />
+	<legend><:inscription2:vos_contacts_livraison:></legend>
+
+	[(#CONFIG{inscription2/telephone_livraison_fiche_mod}|?{' ',''})
+	#SET{telephone_livraison_obl, false}
+	[(#CONFIG{inscription2/telephone_livraison_obligatoire}|=={on}|?{' ',''})#SET{telephone_livraison_obl, true}]
+	[(#GET{telephone_livraison_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:telephone:> : </label>
+	<input class="crayon-active" name="#ENV{name_telephone_livraison}" style="width:#ENV{largeur}px;" value="[(#TELEPHONE_LIVRAISON**|entites_html)]" />
+	</div>]
+
+	[(#CONFIG{inscription2/mobile_livraison_fiche_mod}|?{' ',''})
+	#SET{mobile_livraison_obl, false}
+	[(#CONFIG{inscription2/mobile_livraison_obligatoire}|=={on}|?{' ',''})#SET{mobile_livraison_obl, true}]
+	[(#GET{mobile_livraison_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:mobile:> : </label>
+	<input class="crayon-active" name="#ENV{name_mobile_livraison}" style="width:#ENV{largeur}px;" value="[(#MOBILE_LIVRAISON**|entites_html)]" />
+	</div>]
+
+	[(#CONFIG{inscription2/fax_livraison_fiche_mod}|?{' ',''})
+	#SET{fax_livraison_obl, false}
+	[(#CONFIG{inscription2/fax_livraison_obligatoire}|=={on}|?{' ',''})#SET{fax_livraison_obl, true}]
+	[(#GET{fax_livraison_obl}|=={true}|?{<div class="obligatoire">,<div>})]
+	<label><:inscription2:fax:> : </label>
+	<input class="crayon-active" name="#ENV{name_fax_livraison}" style="width:#ENV{largeur}px;" value="[(#FAX_LIVRAISON**|entites_html)]" />
+	</div>]
+	
 </fieldset>
 </BOUCLE_a>
 <//B_a>
