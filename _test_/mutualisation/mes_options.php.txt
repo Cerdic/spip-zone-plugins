@@ -9,10 +9,11 @@
 		redirige_par_entete('http://'.$site.'/');
 	}
 
+	define ('_INSTALL_SERVER_DB', 'mysql');
 	define ('_INSTALL_HOST_DB', 'localhost');
 	define ('_INSTALL_USER_DB', 'loginsql');
 	define ('_INSTALL_PASS_DB', '123456HDJ');
-	define ('_INSTALL_NAME_DB', 'mutu_'.prefixe_mutualisation($site));
+	define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));
 	define ('_INSTALL_TABLE_PREFIX', 'spip');
 
 	demarrer_site($site,
