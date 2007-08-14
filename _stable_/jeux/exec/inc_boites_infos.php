@@ -46,7 +46,7 @@ function jeux_navigation_pagination() {
 			}
 		}
 	}
-	return $texte;
+	return "<div class='verdana3' style='text-align: center;'>$texte</div>";
 }
 
 function boite_infos_auteur($id_auteur, $type_jeu) {
