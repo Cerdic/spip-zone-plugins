@@ -1,6 +1,6 @@
 <?php
 
-// This is a SPIP language file  --  Questo è un file di lingua di  SPIP
+// This is a SPIP language file  --  Questo &egrave; un file di lingua di  SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 

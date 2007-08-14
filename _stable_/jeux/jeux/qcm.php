@@ -15,7 +15,7 @@
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [qcm], [qrm] ou [quiz]
 separateurs optionnels   : [titre], [texte], [config]
-paramètres de configurations par defaut :
+parametres de configurations par defaut :
 	trou=auto	// taille du trou affiche en cas de proposition unique
 	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
 
@@ -29,18 +29,18 @@ Exemple de syntaxe dans l'article :
 	Q Une question bla bla
 	P1 Une proposition 1
 	P2 Une proposition 2
-	P3 Une proposition 3 (la bonne réponse)
-	R3 (la réponse 3 est la bonne !)
+	P3 Une proposition 3 (la bonne reponse)
+	R3 (la reponse 3 est la bonne !)
 	[qcm]
 	Q Une question encore
-	P1.2 Une proposition à 2 points (la bonne réponse)
+	P1.2 Une proposition a 2 points (la bonne reponse)
 	P2 Une proposition 2
 	R1
 	[qcm]
 	Q Une question pour finir
 	P1 Une proposition 1|Un commentaire 1
 	P2 Une proposition 2|Un commentaire 2
-	P3.4 Une proposition à 4 points !|Effectivement !
+	P3.4 Une proposition a 4 points !|Effectivement !
 	P4 Une proposition 4|Un commentaire 4
 	P5 Une proposition 5|Un commentaire 5
 	P6 Une proposition 6|Un commentaire 6
@@ -56,13 +56,13 @@ P mercure venus terre mars jupiter saturne uranus neptune
 
 La liste des mots a placer apres "P" peut accepter 
 les separateurs usuels : 
-	retours à la ligne, tabulations, espaces
+	retours a la ligne, tabulations, espaces
 	virgules, point-virgules, points
 Pour une expression comprenant des espaces, utiliser les 
 guillemets ou le signe + :
 	par ex. : "afin de" est equivalent a : afin+de
 Les minuscules ou majuscules peuvent etre utilisees indifferemment.
-La gestion des points et des précisions est toujours possible :
+La gestion des points et des precisions est toujours possible :
 	P.4 mercure venus terre mars jupiter saturne uranus neptune|saviez-vous que pluton n'est plus une planete ?
 
 */

@@ -2,7 +2,7 @@
 
 #   TODO : ajouter des lettrines
 #          inserer le texte dans un cadre sympa
-#          possibilité d'inérer une image...
+#          possibilite d'inerer une image...
 
 
 #---------------------------------------------------#
@@ -32,8 +32,8 @@ Exemple de syntaxe dans l'article :
 	Venez donc manger les miettes,
 	Les chats n'auront que les os.
 	
-	Messieurs les petits oiseaux sont priés
-	De vider les écuelles,
+	Messieurs les petits oiseaux sont pries
+	De vider les ecuelles,
 	Et mesdames les souris
 	Voudront bien rester chez elles.
 	
@@ -44,7 +44,7 @@ Exemple de syntaxe dans l'article :
 	[auteur]
 	Victor HUGO
 	[recueil]
-	L'art d'être grand père, 1877
+	L'art d'etre grand pere, 1877
 </jeux>
 
 <jeux>
@@ -58,7 +58,7 @@ Exemple de syntaxe dans l'article :
 	[citation]
 	L'amour est aveugle, il faut donc toucher.
 	[auteur]
-	Proverbe brésilien
+	Proverbe bresilien
 </jeux>
 
 */

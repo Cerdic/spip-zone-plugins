@@ -111,7 +111,7 @@ document.getElementById('haut-page').childNodes[2].align='center';
 }
 
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
-// Recherche tous les <!-- JEUX-HEAD (...) --> et incorporation à la place de _JEUX_HEAD2
+// Recherche tous les <!-- JEUX-HEAD (...) --> et incorporation a la place de _JEUX_HEAD2
 // dans <head> des fichiers js et css necessaires.
 function jeux_affichage_final($flux) {
 	preg_match_all(",<!-- JEUX-HEAD-#[0-9]+ '([^>]*)' -->,", $flux, $matches, PREG_SET_ORDER);

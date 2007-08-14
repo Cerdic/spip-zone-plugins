@@ -1,8 +1,6 @@
 <?php
 
-# il s'agit ici de proposer des textes à trous.
-
-# le code de ce fichier php reste encore à ecrire...
+# il s'agit ici de proposer des textes a trous.
 
 #---------------------------------------------------#
 #  Plugin  : jeux                                   #
@@ -18,7 +16,7 @@ Insere un test de closure dans vos articles !
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [texte], [trou]
 separateurs optionnels   : [titre], [config]
-paramètres de configurations par defaut :
+parametres de configurations par defaut :
 	taille=auto	// taille des trous
 	indices=oui	// afficher les indices ?
 
@@ -27,25 +25,25 @@ Exemple de syntaxe dans l'article :
 
 <jeux>
 	[texte]
-	Ceci est un exemple de closure (exercice à trous).
+	Ceci est un exemple de closure (exercice a trous).
 	L'utilisateur doit entrer ses 
 	[trou]
-	réponses 
+	reponses 
 	[texte]
 	dans les espaces vides.
-	Pour chaque mot manquant, plusieurs réponses correctes 
-	peuvent	être acceptées. Par exemple, ce  
+	Pour chaque mot manquant, plusieurs reponses correctes 
+	peuvent	etre acceptees. Par exemple, ce  
 	[trou]
 	trou, vide, blanc
 	[texte]
-	autorise les réponses "trou", "vide" ou "blanc".
+	autorise les reponses "trou", "vide" ou "blanc".
 	[config]
 	indices = oui
 </jeux>
 
 La liste des mots a placer apres [trou] peut accepter 
 les separateurs usuels : 
-	retours à la ligne, tabulations, espaces
+	retours a la ligne, tabulations, espaces
 	virgules, point-virgules, points
 Pour une expression comprenant des espaces, utiliser les 
 guillemets ou le signe + :

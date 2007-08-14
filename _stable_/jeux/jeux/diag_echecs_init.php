@@ -4,16 +4,16 @@
 //$image_size = 35;
 
 /* Couleur des cases "blanches" */
-/* Couleurs prédéfinies : */
+/* Couleurs predefinies : */
 /* white,black,grey,green,blue,brown,lightyellow,lightbrown */
 
-/* Code de la police utilisée pour les coordonnées */
-/* Entier compris entre 1 et 5, à modifier éventuellement */
+/* Code de la police utilisee pour les coordonnees */
+/* Entier compris entre 1 et 5, a modifier eventuellement */
 
 
 global $diag_echecs_globales;
 $diag_echecs_globales = Array(
-  // Codes RGB des couleurs prédéfinies
+  // Codes RGB des couleurs predefinies
 	'hrouge' => array(255,170,170), 
 	'hbleu' => array(101,128,230), 
 	'hvert' => array(51,153,102), 
@@ -55,10 +55,10 @@ function diag_echecs_config_default() {
 		blancs=blanc	// Couleur des cases 'blanches'
 		noirs=brun		// Couleur des cases 'noires'
 		fond=blanc		// Couleur de fond de la page web
-		bordure=2		// Epaisseur de la bordure de l'échiquier, en pixels
-		police=5		// Code de la police utilisée pour les coordonnées (1 à 5)
+		bordure=2		// Epaisseur de la bordure de l'echiquier, en pixels
+		police=5		// Code de la police utilisee pour les coordonnees (1 a 5)
 		flip=non		// Faut-il retourner l'echiquier ?
-		coords=oui		// Afficher les coordonnées ?
+		coords=oui		// Afficher les coordonnees ?
 	", false);
 }
 
@@ -78,17 +78,17 @@ function diag_echecs_config_supplementaire() {
 /*
 Format F.E.N.
 
-FEN correspond à "Forsyth-Edwards Notation". 'est un standard de description d'une position aux échecs. Ce standard utilise la norme ASCII (caractère) pour représenter une position.
+FEN correspond a "Forsyth-Edwards Notation". 'est un standard de description d'une position aux echecs. Ce standard utilise la norme ASCII (caractere) pour representer une position.
 
-Une codification FEN s'identifie par une chaîne de caractères composée de 6 zones séparées par un caractère "espace"
+Une codification FEN s'identifie par une chaine de caracteres composee de 6 zones separees par un caractere "espace"
 
-Exemple (position de départ) :
+Exemple (position de depart) :
 
 rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 
 Zone 1 :
 
-Position des pièces sur l'échiquier et description (format PGN) du contenu de toutes les cases. Les BLANCS en majuscules et les NOIRS en minuscules,
+Position des pieces sur l'echiquier et description (format PGN) du contenu de toutes les cases. Les BLANCS en majuscules et les NOIRS en minuscules,
 
 r ou R = TOUR
 n ou N = CAVALIER
@@ -96,7 +96,7 @@ b ou B = FOU
 k ou K = ROI
 q ou Q = DAME
 p ou P = PION
-une caractère numérique = nombre de cases vides
+une caractere numerique = nombre de cases vides
 un "/" = saut de ligne
 
 Zone 2 :
@@ -106,42 +106,42 @@ b = trait aux NOIRS
 
 Zone 3 :
 
-Possibilité(s) de ROQUE
-K = ROQUE BLANC coté ROI possible
-k = ROQUE NOIR coté ROI possible
-Q= ROQUE BLANC coté DAME possible
-q= ROQUE NOIR coté DAME possible
-- = (TIRET) aucune possibilité de ROQUE (pour les deux camps)
+Possibilite(s) de ROQUE
+K = ROQUE BLANC cote ROI possible
+k = ROQUE NOIR cote ROI possible
+Q= ROQUE BLANC cote DAME possible
+q= ROQUE NOIR cote DAME possible
+- = (TIRET) aucune possibilite de ROQUE (pour les deux camps)
 
 Zone 4 :
 
-Cette zone précise si une "prise en passant" est possible. La zone contient la case de destination de la prise en passant. La zone contient le caractère "-" si le dernier coup n'est pas un pion qui a avancé de deux cases. (exemple : e3)
+Cette zone precise si une "prise en passant" est possible. La zone contient la case de destination de la prise en passant. La zone contient le caractere "-" si le dernier coup n'est pas un pion qui a avance de deux cases. (exemple : e3)
 
 Zone 5 :
 
-Cette zone contient le nombre de demi coups joués depuis le dernier pion joué ou depuis une dernière prise. Cette valeur est utilisée pour la règle de la partie nulle au bout de 50 coups. Si le dernier coup est l'avance d'un pion ou une prise, la valeur de la zone est 0.
+Cette zone contient le nombre de demi coups joues depuis le dernier pion joue ou depuis une derniere prise. Cette valeur est utilisee pour la regle de la partie nulle au bout de 50 coups. Si le dernier coup est l'avance d'un pion ou une prise, la valeur de la zone est 0.
 
 Zone 6 :
 
-Zone contenant le nombre de coups "terminés" incrémenté après chaque coup des noirs.
+Zone contenant le nombre de coups "termines" incremente apres chaque coup des noirs.
 
 Exemples :
 
-FEN pour une position de départ :
+FEN pour une position de depart :
 rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-Après le déplacement des BLANCS 1. e4:
+Apres le deplacement des BLANCS 1. e4:
 rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1
-Après la réponse NOIR 1. ... c5:
+Apres la reponse NOIR 1. ... c5:
 rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2
-Après le coup des BLANCS 2. Nf3:
+Apres le coup des BLANCS 2. Nf3:
 rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2
 
 Pour en savoir plus (en anglais) : http://www.lokasoft.nl/uk/tbapi.htm 
 */
 
 # ----------------------------------------------------------------
-# Pour certaines installation de php-gd il peut être nécessaire
-#   de décommenter la ligne suivante 
+# Pour certaines installation de php-gd il peut etre necessaire
+#   de decommenter la ligne suivante 
 
 # dl("gd.so"); 
 

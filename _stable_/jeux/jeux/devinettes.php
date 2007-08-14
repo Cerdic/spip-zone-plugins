@@ -14,9 +14,9 @@ Insere des devinettes ou charades dans vos articles !
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [devinette] ou [charade]
 separateurs optionnels   : [reponse], [titre], [texte], [config]
-paramètres de configurations par defaut :
+parametres de configurations par defaut :
 	reponse=oui	// Afficher la reponse ?
-	taille=10	// taille de la police utilisée
+	taille=10	// taille de la police utilisee
 attention : module GD obligatoire pour obtenir ses reponses
 affichees a l'envers.
 
@@ -25,21 +25,21 @@ Exemple de syntaxe dans l'article :
 
 <jeux>
 	[devinette]
-	Comment appelle t-on un patron de la nouvelle économie ?
+	Comment appelle t-on un patron de la nouvelle economie ?
 	[reponse]
 	Un e-responsable
 	[devinette]
-	Quel est le point commun entre un contrôleur des impôts et un spermatozoïde ?
+	Quel est le point commun entre un controleur des impots et un spermatozoïde ?
 	[reponse]
-	Tous les 2 ont 1 chance sur 3 millions de devenir un jour un être humain.
+	Tous les 2 ont 1 chance sur 3 millions de devenir un jour un etre humain.
 </jeux>
 <jeux>
 	[titre]
 	Pour les enfants...
 	[charade]
 	Mon premier se dirige quelque part.
-	Mon deuxième est la moitié d'un cheveux.
-	Mon tout vit à la ferme.
+	Mon deuxieme est la moitie d'un cheveux.
+	Mon tout vit a la ferme.
 	[reponse]
 	La vache
 	[config]
@@ -81,7 +81,7 @@ function jeux_devinettes($texte, $indexJeux) {
   // configuration par defaut
   jeux_config_init("
 	reponse=oui	// Afficher la reponse ?
-	taille=10	// taille de la police utilisée
+	taille=10	// taille de la police utilisee
   ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= devinettes_titre($tableau[$i+1]);

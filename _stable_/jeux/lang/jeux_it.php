@@ -1,6 +1,6 @@
 <?php
 
-// This is a SPIP language file  --  Questo è un file di lingua di  SPIP
+// This is a SPIP language file  --  Questo &egrave; un file di lingua di  SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'votre_reponse' => "La tua risposta: ",
 'corriger'		=> 'Controlla',	
 'verifier' 		=> 'Controlla',
-'verifier_validite' 	=> 'Controlla la validità', 
+'verifier_validite' 	=> 'Controlla la validit&agrave;', 
 
 'afficher_solution' 	=>'Visualizza la soluzione',
 'solution'		=>'Soluzione',
@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'rejouer'		=> 'Rejouer',
 'reset'		=> 'Reset',
 
-'grille_valide'		=>'Lo schema è valido',
-'grille_invalide'		=>'Lo schema non è valido',
+'grille_valide'		=>'Lo schema &egrave; valido',
+'grille_invalide'		=>'Lo schema non &egrave; valido',
 'aucune_erreur'		=> 'Nessun errore',
 'une_erreur'		=> 'Un errore',
 'n_erreurs'	=> '@n@ errori',
@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'une_vide'			=> 'Una casella bianca',
 'bravo'				=> "Complimenti!",
 
-'reponseJuste' => "La risposta è esatta",
-'reponseFausse' => "La risposta è sbagliata",
+'reponseJuste' => "La risposta &egrave; esatta",
+'reponseFausse' => "La risposta &egrave; sbagliata",
 'reponseNulle' => "Non hai ancora risposto",
 'bonneReponse' => "The correct answer is:",
 'Correction' => "Correction:",

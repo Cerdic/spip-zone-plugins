@@ -19,11 +19,11 @@ parametres de configurations par defaut :
 	regle=non	// Afficher la regle du jeu ?
 	indices=non // Afficher les premieres et dernieres lettres?
 
-Règles du jeu :
-- Vous devez choisir une lettre à chaque essai.
-- Si la lettre existe dans le mot, elle apparaît à la bonne place.
-- La tête, un bras, une jambe... A chaque erreur, vous êtes un peu plus pendu. 
-- Vous avez droit à 6 erreurs. Bonne chance!
+Regles du jeu :
+- Vous devez choisir une lettre a chaque essai.
+- Si la lettre existe dans le mot, elle apparait a la bonne place.
+- La tete, un bras, une jambe... A chaque erreur, vous etes un peu plus pendu. 
+- Vous avez droit a 6 erreurs. Bonne chance!
 
 Exemple de syntaxe dans l'article :
 -----------------------------------

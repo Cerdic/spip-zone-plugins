@@ -9,7 +9,7 @@
 
 /*
 
-Insere un diagramme de positions d’échecs dans vos articles !
+Insere un diagramme de positions d’echecs dans vos articles !
 -------------------------------------------------------------
  Module base sur les travaux de:
 	 François SCHREUER (plugin)
@@ -23,21 +23,21 @@ separateurs obligatoires : [diag_echecs]
 separateurs optionnels   : [titre], [texte], [config]
 
 Attention :
-- La librairie GD doit être installée sur le serveur.
+- La librairie GD doit etre installee sur le serveur.
 
-La position doit être décrite sous forme de notation FEN, ou bien en utilisant la forme "classique".
+La position doit etre decrite sous forme de notation FEN, ou bien en utilisant la forme "classique".
 Exemples :
 	classique : B:Rg1,Dd1,Ta1,e1,Pa2,f6/N:Rb8,Pa6,f5
 	FEN       : r1bqkbnr/pp2pppp/2n5/2p1P3/3p4/2P2N2/PP1P1PPP/RNBQKB1R
 
-Notation "classique" : la description de la position blanche commence par "B:", celle de la position noire par "N:", et les deux sont séparées par un "/".
-Il est possible de n'indiquer qu'une couleur (B ou N) pour la description. L'ordre dans cette dernière est indifférent.
+Notation "classique" : la description de la position blanche commence par "B:", celle de la position noire par "N:", et les deux sont separees par un "/".
+Il est possible de n'indiquer qu'une couleur (B ou N) pour la description. L'ordre dans cette derniere est indifferent.
 Les majuscules ne sont pas non plus obligatoires
 
 Cases en surbrillance : on peut utiliser "/sv" pour mettre du vert, "/sb" pour du bleu, "/sj" pour du jaune et "/sr" pour du rouge.
-Attention : pour utiliser cette fonctionnalité, il faut obligatoirement utiliser la notation "classique".
+Attention : pour utiliser cette fonctionnalite, il faut obligatoirement utiliser la notation "classique".
 
-Retournement de l'échiquier : C'est automatique en utilisant la notation FEN (et si bien entendu le trait est aux Noirs), sinon il suffit d'ajouter "/r" à la description "classique".
+Retournement de l'echiquier : C'est automatique en utilisant la notation FEN (et si bien entendu le trait est aux Noirs), sinon il suffit d'ajouter "/r" a la description "classique".
 
 Exemples de syntaxe dans l'article :
 ------------------------------------
@@ -63,10 +63,10 @@ Parametres [config] definis par defaut :
 	blancs=blanc	// Couleur des cases 'blanches'
 	noirs=brun		// Couleur des cases 'noires'
 	fond=blanc		// Couleur de fond de la page web
-	bordure=2		// Epaisseur de la bordure de l'échiquier, en pixels
-	police=5		// Code de la police utilisée pour les coordonnées (1 à 5)
+	bordure=2		// Epaisseur de la bordure de l'echiquier, en pixels
+	police=5		// Code de la police utilisee pour les coordonnees (1 a 5)
 	flip=non		// Faut-il retourner l'echiquier ?
-	coords=oui		// Afficher les coordonnées ?
+	coords=oui		// Afficher les coordonnees ?
 
 */
 require("diag_echecs_init.php");
@@ -105,7 +105,7 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	$fichier_dest = sous_repertoire(_DIR_VAR, "cache-jeux") . 'echiq_'.$md5 . jeux_config('img_suffix');
 	list(,,,$size) = @getimagesize($fichier_dest);
 	$image = "<img class=\"no_image_filtrer \" src=\"$fichier_dest\" alt=\"$position\" title=\"$position\" border=\"0\" $size/><br>\n";
-	// pas de recalcul de l'image pendant 12 heures si le fichier existe déjà
+	// pas de recalcul de l'image pendant 12 heures si le fichier existe deja
 	if (file_exists($fichier_dest) 
 			AND ($GLOBALS['var_mode'] != 'recalcul') AND ($GLOBALS['var_mode'] != 'calcul') 
 			AND (time()-@filemtime($fichier_dest) < 12*3600))
@@ -159,9 +159,9 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	  }
 	}
 
-	/* Faut-il envoyer un en-tête (cas d'une image "nue"), ou l'image
-est-elle destinée à être incluse dans une page Web ? Laisser la
-variable à "true" dans le premier cas, la mettre à "false" dans le
+	/* Faut-il envoyer un en-tete (cas d'une image "nue"), ou l'image
+est-elle destinee a etre incluse dans une page Web ? Laisser la
+variable a "true" dans le premier cas, la mettre a "false" dans le
 second */
 	/*	if ($hdr) header(jeux_config('img_header'); */
 	

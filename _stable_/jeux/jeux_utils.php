@@ -133,12 +133,12 @@ function jeux_bouton_recommencer() {
 // ajoute un module jeu a la bibliotheque
 function jeux_include_jeu($jeu, &$texte, $indexJeux) {
 	$fonc = 'jeux_'.$jeu;
-	if (!function_exists($fonc)) include_spip('inc/'.$jeu);
+	if (!function_exists($fonc)) include_spip('jeux/'.$jeu);
 	// on est jamais trop prudent !!
 	if (function_exists($fonc)) $texte = $fonc($texte, $indexJeux);
 }	
 
-// decode les jeux, si le module inc/lejeu.php est present
+// decode les jeux, si le module jeux/lejeu.php est present
 // retourne la liste des jeux trouves et inclut la bibliotheque si $indexJeux existe
 function jeux_liste_des_jeux(&$texte, $indexJeux=NULL) {
 	global $jeux_caracteristiques;

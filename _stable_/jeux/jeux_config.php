@@ -24,7 +24,7 @@ define('_JEUX_HEAD2', "\n<!-- CSS & JS JEUX (AUTO) -->\n");
 
 
 // separateurs utilisables a l'interieur des balises ci-dessus
-// format à utiliser dans la redaction : [separateur]
+// format a utiliser dans la redaction : [separateur]
 define('_JEUX_TITRE', 'titre');		// separateur indiquant le titre du jeu
 define('_JEUX_TEXTE', 'texte');		// separateur indiquant un contenu a garder telquel
 define('_JEUX_CONFIG', 'config');	// separateur permettant de passer des parametres au jeu
@@ -56,7 +56,7 @@ global $jeux_caracteristiques;
 $jeux_caracteristiques = array(
 // liste des separateurs autorises dans les jeux.
 // tous les jeux doivent etre listes ci-apres.
-// monjeu est le jeu traite dans le fichier inc/monjeu.php
+// monjeu est le jeu traite dans le fichier jeux/monjeu.php
  'SEPARATEURS' => array(
 	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION, _JEUX_CONFIG),
@@ -71,7 +71,7 @@ $jeux_caracteristiques = array(
 
 // liste des signatures caracteristiques d'un jeu.
 // tous les jeux doivent etre listes ci-apres.
-// monjeu est le jeu traite dans le fichier inc/monjeu.php
+// monjeu est le jeu traite dans le fichier jeux/monjeu.php
 // exemple :
 // array(_JEUX_SEPAR_3, _JEUX_SEPAR_4) doit s'interpreter :
 // " le jeu est charge si on trouve _JEUX_SEPAR_3 ou _JEUX_SEPAR_4

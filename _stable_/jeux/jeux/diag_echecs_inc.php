@@ -7,7 +7,7 @@ function FEN2classic($fen) {
   $b = "n:";
 
   $fen = explode(" ", $fen);
-  /* FEN complète = 6, abrégée = 1 */
+  /* FEN complete = 6, abregee = 1 */
   if ( count($fen) != 6  && count($fen) != 1 ) {
     die("Erreur dans la syntaxe dans la position FEN (nb de champs = count($fen)) !");
   }
