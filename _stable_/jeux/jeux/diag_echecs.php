@@ -5,8 +5,9 @@
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
-#---------------------------------------------------#
-
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
 /*
 
 Insere un diagramme de positions d’echecs dans vos articles !
@@ -18,7 +19,6 @@ Insere un diagramme de positions d’echecs dans vos articles !
 	 Andrew TEMPLETON (figures)
 -------------------------------------------------------------
 
-balises du plugin : <jeux></jeux>
 separateurs obligatoires : [diag_echecs]
 separateurs optionnels   : [titre], [texte], [config]
 

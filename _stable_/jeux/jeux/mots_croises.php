@@ -4,7 +4,9 @@
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
-#---------------------------------------------------#
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
 /*
 
  Insere une grille de mots croises dans vos articles !
@@ -12,7 +14,6 @@
  Idee originale de Maieul ROUQUETTE
 ------------------------------------------------------
 
-balises du plugin : <jeux></jeux>
 separateurs obligatoires : [horizontal], [vertical], [solution]
 separateurs optionnels   : [titre], [texte], [config]
 parametres de configurations par defaut :

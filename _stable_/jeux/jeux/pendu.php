@@ -5,13 +5,13 @@
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
-#---------------------------------------------------#
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
 /*
-
 Insere un jeu de pendu dans vos articles !
 ------------------------------------------
 
-balises du plugin : <jeux></jeux>
 separateurs obligatoires : [pendu]
 separateurs optionnels   : [titre], [texte], [config]
 parametres de configurations par defaut :

@@ -7,13 +7,14 @@
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
-#---------------------------------------------------#
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
 /*
 
 Insere un test de closure dans vos articles !
 ---------------------------------------------
 
-balises du plugin : <jeux></jeux>
 separateurs obligatoires : [texte], [trou]
 separateurs optionnels   : [titre], [config]
 parametres de configurations par defaut :

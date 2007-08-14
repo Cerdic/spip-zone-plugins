@@ -10,13 +10,14 @@
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
-#---------------------------------------------------#
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
 /*
 
 Insere un texte mis en forme dans vos articles !
 ------------------------------------------------
 
-balises du plugin : <jeux></jeux>
 separateurs obligatoires : [poesie] ou [citation] ou [blague]
 separateurs optionnels   : [titre], [auteur], [recueil]
 
@@ -28,17 +29,7 @@ Exemple de syntaxe dans l'article :
 	Messieurs les petits oiseaux
 	[poesie]
 	Messieurs les petits oiseaux,
-	On vide ici les assiettes ;
-	Venez donc manger les miettes,
-	Les chats n'auront que les os.
-	
-	Messieurs les petits oiseaux sont pries
-	De vider les ecuelles,
-	Et mesdames les souris
-	Voudront bien rester chez elles.
-	
-	C'est le temps des grandes eaux,
-	Le pain est dans la mangeoire,
+	(etc.)
 	Venez donc manger et boire,
 	Messieurs les petits oiseaux.
 	[auteur]
@@ -64,8 +55,8 @@ Exemple de syntaxe dans l'article :
 */
 
 // guillemets simples : “ et ”
-define('_GUILLEMET_OUVRANT', '&#8220;'); 
-define('_GUILLEMET_FERMANT', '&#8221;');
+#define('_GUILLEMET_OUVRANT', '&#8220;'); 
+#define('_GUILLEMET_FERMANT', '&#8221;');
 
 // guillemets doubles : « et »
 define('_GUILLEMET_OUVRANT', '&laquo;');

@@ -10,7 +10,9 @@
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
-#---------------------------------------------------#
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
 /*
 
 Insere un demineur dans vos articles !
@@ -18,7 +20,6 @@ Insere un demineur dans vos articles !
  Idee originale de Bertrand GUGGER
 --------------------------------------
 
-balises du plugin : <jeux></jeux>
 separateurs obligatoires : [demineur]
 separateurs optionnels   : [titre]
 

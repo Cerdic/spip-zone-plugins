@@ -15,7 +15,9 @@ retirer du plateau, par paires.
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
-#---------------------------------------------------#
+#--------------------------------------------------------------------------#
+#  Documentation : http://www.spip-contrib.net/Des-jeux-dans-vos-articles  #
+#--------------------------------------------------------------------------#
 /*
 
 Insere un jeu de Shanghai dans vos articles !
@@ -23,7 +25,6 @@ Insere un jeu de Shanghai dans vos articles !
  Idee originale de Fil
 --------------------------------------------
 
-balises du plugin : <jeux></jeux>
 separateurs obligatoires : [shanghai], euh ?
 separateurs optionnels   : [titre]
 
