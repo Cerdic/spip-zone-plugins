@@ -10,8 +10,15 @@ $reponse_banque = "#ENV{reponse_banque}";
 
 list($produit,$id_auteur_elargi,$hash_article) = split("-",$texte_libre) ;
 
-traiter_message_banque($produit,$id_auteur_elargi, $reponse_banque, $hash_article);
-
+if(traiter_message_banque($produit,$id_auteur_elargi, $reponse_banque, $hash_article)){
+echo "Merci, votre paiement &agrave &eacute;t&eacute; valid&eacute; <br /> Vous allez recevoir un email de confirmation";
+}
+else{
+echo "Ah, pas de chance, votre paiement n'&agrave pas &eacute;t&eacute; valid&eacute; <br /> contactez-nous pour r&eacute;gler ca";
+}
 ?>
-
+<p>
 <a href="#URL_SITE_SPIP">retour</a>
+
+
+</p>

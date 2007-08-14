@@ -38,6 +38,11 @@ spip_query("UPDATE `spip_auteurs_elargis_articles` SET statut_paiement='$validat
 	//envoyer un mail a l'admin et a l'abonne
 	abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit);
 
+if($validation_paiement == "ok")
+return true ;
+else
+return false ;
+
 }
 
 
