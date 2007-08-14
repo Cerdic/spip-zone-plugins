@@ -10,14 +10,21 @@ if(!function_exists('sql_countsel')) {
 	}
 }
 
-// essai de pagination. A virualiser si certains jeux sont mis a la poubelle !
+// Pagination sur les jeux disponibles
 function jeux_navigation_pagination() {
-	$num_rows = sql_countsel("spip_jeux");
-	if(!$num_rows) return '';
-	
-	$texte = ''; $href = 'jeux_voir'; $tmp_var = 'id_jeu'; $nb_aff = 1;
+	$texte = ''; $href = 'jeux_voir'; $nb_aff = 1; $deb_aff = 1;
 	$self = self();
-	$deb_aff = isset($tmp_var) ? intval(_request($tmp_var)) : 0;
+	$id_jeu = intval(_request('id_jeu'));
+
+	// liste des jeux disponibles
+	$q = spip_query("SELECT id_jeu FROM spip_jeux");
+	$ids = array(); $i = 0;
+	while($r = spip_fetch_array($q)) { 
+		$ids[$i++] = $r['id_jeu'];
+		if ($id_jeu==$r['id_jeu']) $deb_aff = $i;
+	}
+	$num_rows = count($ids);
+	if(!$num_rows) return '';
 
 	for ($i = 0; $i < $num_rows; $i += $nb_aff){
 		$deb = $i + 1;
@@ -32,9 +39,9 @@ function jeux_navigation_pagination() {
 			$fin = $i + $nb_aff;
 			if ($fin > $num_rows) $fin = $num_rows;
 			if ($deb > 1) $texte .= " |\n";
-			if ($deb_aff >= $deb AND $deb_aff <= $fin) $texte .= "<b>$deb</b>";
+			if ($deb_aff >= $deb AND $deb_aff <= $fin) $texte .= "<strong>$deb</strong>";
 			else {
-				$script = parametre_url($self, $tmp_var, $deb);
+				$script = parametre_url($self, 'id_jeu', $ids[$i]);
 				$texte .= "<a href=\"$script\">$deb</a>";
 			}
 		}
@@ -42,9 +49,9 @@ function jeux_navigation_pagination() {
 	return $texte;
 }
 
-function boite_infos_auteur($id_auteur, $nom) {
+function boite_infos_auteur($id_auteur, $type_jeu) {
 	debut_boite_info();
-	echo "<strong>$nom</strong><br />",
+	echo "<strong>$type_jeu</strong><br />",
 	icone_horizontale(_T('jeux:infos_auteur'),generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur),find_in_path('images/auteur-24.gif'));
 	
 	if (_request('exec')=='jeux_gerer_resultats')
@@ -55,11 +62,11 @@ function boite_infos_auteur($id_auteur, $nom) {
 	fin_boite_info();
 }
 
-function boite_infos_jeu($id_jeu, $nom) {
+function boite_infos_jeu($id_jeu, $type_jeu) {
 	debut_boite_info();
 	$nb_res = sql_countsel('spip_jeux_resultats', 'id_jeu='.$id_jeu);
-	$nom = _T('jeux:jeu_court',array('id'=>$id_jeu,'nom'=>$nom));
-	echo "<strong>$nom</strong><br />",
+	$type_jeu = _T('jeux:jeu_court',array('id'=>$id_jeu,'nom'=>$type_jeu));
+	echo "<strong>$type_jeu</strong><br />",
 		(_request('exec')=='jeux_voir'?'':
 			icone_horizontale(_T('jeux:voir_jeu'),generer_url_ecrire('jeux_voir','id_jeu='.$id_jeu),find_in_path('img/jeu-loupe.png')) ),
 		(_request('exec')=='jeux_edit'?'':
