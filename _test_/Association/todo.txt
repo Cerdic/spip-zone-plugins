@@ -56,6 +56,11 @@ En cours.
 == Spip_listes 1.9.2 ==
 Ajouter l'inscription aux listes de diffusion
 
+== Inscription2 ==
+Renommer le fichier spip_asso_adherents en spip_auteurs_elargis pour se conformer à la modularité spip
+Renommer les champs communs
+Construire une routine à l'install: créer la rable ou ajouter les champs supplémentaires
+
 *** Suggestions ***
 
 == Logos ==
