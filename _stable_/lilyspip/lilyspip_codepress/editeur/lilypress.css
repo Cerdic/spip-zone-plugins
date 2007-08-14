@@ -1,0 +1,41 @@
+body{
+	padding: 0.2em 0.5em 0.2em 0.5em;
+	text-align:center;
+	font: 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+
+
+h4 {
+	text-align:left;
+	margin-bottom: 0.5em;	
+	font-weight:bold;
+}
+
+textarea{ width:100%}
+
+#preview{
+	padding: 0;
+	margin: 0;
+	width: 610px;
+	height: 200px;
+	border:1px outset #aaa;
+	overflow: auto;
+}
+
+#preview img{
+	padding: 2px;
+	text-align: center; 
+}
+
+#panel{
+	padding-top: 1em;
+	text-align: center;
+}
+
+
+
+
+
+
+

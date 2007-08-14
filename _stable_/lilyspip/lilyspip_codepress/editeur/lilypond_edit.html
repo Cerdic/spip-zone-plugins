@@ -1,0 +1,52 @@
+#CACHE{24*3600}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html lang='#LANG' dir='ltr'>
+  <head>
+    <title>Editeur Lilypond</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<link rel="stylesheet" href="#CHEMIN{editeur/lilypress.css}" type="text/css" media="screen" />
+	
+	<script src="#CHEMIN{editeur/codepress/codepress.js}" type="text/javascript"></script>
+	<script src="#CHEMIN{js/spip_barre.js}" type="text/javascript"></script>
+	<script src="#CHEMIN{editeur/lilypress.js}" type="text/javascript"></script>
+
+	#INSERT_HEAD
+  </head>
+  
+  <body onload="init();">
+  
+  <h4>Code Lilypond : </h4> 
+Choose a template : 
+<button onclick="JavaScript: single_template()">Single Staff</button>
+<button onclick="JavaScript: piano_template()">Piano</button>
+<button onclick="JavaScript: quartet_template()">String Quartet</button>
+<button onclick="JavaScript: vocal_template()">Vocal Ensemble</button>
+
+ <form action="table.html" method="post">
+
+<textarea id='lilycode'  rows=20 cols=80 class='codepress lilypond linenumbers-on' value='' onchange='recupere_code();' >
+  
+</textarea>
+  
+ </form> 
+ 
+<div id='panel'>
+  <button onclick="JavaScript: enregistre()">Enregistrer</button>
+  <button onclick="JavaScript: previsualise('<?php echo($GLOBALS['meta']['lilyspip_server']); ?>','#CHEMIN{editeur/spacer.gif}')">Prévisualiser</button>
+</div>
+
+  <h4>Prévisualisation :</h4> 
+ <br />
+
+
+<div id='preview'>
+
+<img alt="Image indisponible" id="previewField" src="#CHEMIN{editeur/spacer.gif}">
+<br />
+</div>
+
+
+  
+
+  </body>
+</html>
