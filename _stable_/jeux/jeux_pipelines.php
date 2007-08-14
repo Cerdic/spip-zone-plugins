@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 #---------------------------------------------------#
 #  Plugin  : Jeux                                   #
@@ -146,11 +146,14 @@ function jeux_taches_generales_cron($taches_generales){
 	
 	return $taches_generales;
 	}
-function cron_jeux_cron($t){
+function cron_jeux_cron($t,$attente=86400){
+
+	$date = date("YmdHis", time() - $attente);
 	include_spip('inc/utils');
+	
 	$sup = '(';
 	$i = 0;
-	$requete = spip_query('SELECT id_jeu from spip_jeux WHERE statut="poubelle"');
+	$requete = spip_query("SELECT id_jeu from spip_jeux WHERE statut='poubelle' and 'date'<".$date);
 	
 	while ($ligne =spip_fetch_array($requete)){	
 
