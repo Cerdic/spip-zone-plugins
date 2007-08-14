@@ -36,3 +36,8 @@ HTML ici
 
 
 x) Relooker la page article_restreint.html
+
+
+TODO :
+
+Vérifier les index de spip_auteurs_elargis_abonnments et le auto increment
