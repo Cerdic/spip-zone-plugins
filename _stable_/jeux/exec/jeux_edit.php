@@ -10,7 +10,7 @@ function exec_jeux_edit(){
 	$valider = _request('valider');
 	$nouveau = _request('nouveau');
 	$id_jeu	 = _request('id_jeu');
-	$type_jeu	 = request('type_jeu'];
+	$type_jeu = _request('type_jeu'];
 	$titre_prive	 = _request('titre_prive');
 	$contenu = _request('contenu');
 	$enregistrer_resultat = _request('enregistrer_resultat');
