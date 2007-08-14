@@ -48,18 +48,27 @@
 				[(#INCLURE{fond=fonds/reachat_valide}{hash=#ENV{reachat_valide_hash}}{id_auteur}{article=#ENV{article}})]
 			]
 			
+			[(#ENV{reabo_valide_hash}|?{' ',''})
+				[(#INCLURE{fond=fonds/reabo_valide}{hash=#ENV{reabo_valide_hash}}{id_auteur}{abonnement=#ENV{abonnement}})]
+			]
 			
+			[(#ENV{reabo_valide_hash}|?{'',' '})
 			[(#ENV{reachat_valide_hash}|?{'',' '})
 
-				[(#ENV{reabo}|?{' ',''})
+				[(#ENV{reachat}|?{' ',''})
 					[(#INCLURE{fond=fonds/reachat}{id_auteur}{article=#ENV{article}})]
+				]
+
+				[(#ENV{reabo}|?{' ',''})
+					[(#INCLURE{fond=fonds/reabo}{id_auteur}{abonnement=#ENV{abonnement}})]
 				]
 				
 				
 				[(#ENV{reabo}|?{'',' '})
-					[(#INCLURE{fond=fonds/achat_unite}{id_article=#ID_ARTICLE})]
-				]
-			]
+				[(#ENV{reachat}|?{'',' '})
+					[(#INCLURE{fond=fonds/achat_unite}{id_article=#ENV{article}})]
+				]]
+			]]
 		
 		
 		</div><!-- fin contenu -->

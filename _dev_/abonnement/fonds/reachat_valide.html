@@ -15,7 +15,7 @@
 
 <?php
 $value = '#ENV{article}' ;	
-			spip_query("INSERT INTO `spip_auteurs_elargis_articles` (`id_auteur_elargi`, `id_article`, `statut_paiement` , `hash`) VALUES ('#ID', '$value', 'a_confirmer','#ENV{hash}')");
+spip_query("INSERT INTO `spip_auteurs_elargis_articles` (`id_auteur_elargi`, `id_article`, `statut_paiement` , `hash`) VALUES ('#ID', "._q($value).", 'a_confirmer','#ENV{hash}')");
 ?>
 
 [(#INCLURE{fond=formulaires/abonnement_paiement}

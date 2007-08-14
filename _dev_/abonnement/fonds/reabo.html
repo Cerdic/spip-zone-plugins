@@ -1,13 +1,7 @@
 #CACHE{0}
 
-<h2 style="margin:20px 0px">Acheter cet article</h2>
+<h2 style="margin:20px 0px">Abonnement</h2>
 
-<BOUCLE_article(ARTICLES){id_article=#ENV{article}}{tout_voir}>
-<h2>#TITRE</h2>
-<small>Publi&eacute; le #DATE par #LESAUTEURS</small>
-<div style="margin:20px 0px">
-<strong>Extrait</strong> : #INTRODUCTION
-</div>
 
 <div>
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
@@ -23,17 +17,11 @@
 {pays=#PAYS}
 {login=#_auteur:LOGIN}
 {email=#_auteur:EMAIL}
-{option=achat_unite}
+{abonnement=#ENV{abonnement}}
 {commentaires=1}
-{reachat=oui}
-{article=#ENV{article}}
+{reabo=oui}
 )]
 </form>
 </BOUCLE_auteur_elargi>
 </BOUCLE_auteur>
 </div>
-
-</BOUCLE_article>
-
-
-

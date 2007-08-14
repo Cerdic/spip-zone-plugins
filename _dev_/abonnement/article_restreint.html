@@ -123,6 +123,8 @@ Elle peut etre appellée comme cela depuis article.html
 			<div style="padding:5px;background-color:#F4F1D0">
 				<form action="./?page=commander" method="post">
 				[(#INCLURE{fond=formulaires/abonnement_liste})]	
+				<input type="hidden" value="reabo" name="reabo">
+				<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
 				<p style="text-align:right"><input type="submit" value="valider"></p>
 				</form>
 			</div>
@@ -131,7 +133,7 @@ Elle peut etre appellée comme cela depuis article.html
 			<fieldset class="reabonnement">
 		    <legend>Acheter &agrave; l'unit&eacute;</legend>
 		    <input type="radio" checked="checked" id="unite"><label for="unite">#TITRE - 5 euros</label>
-   			<input type="hidden" value="reabo" name="reabo">
+   			<input type="hidden" value="reachat" name="reachat">
    			<input type="hidden" value="#ID_ARTICLE" name="article">
    			<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
    			</fieldset>
