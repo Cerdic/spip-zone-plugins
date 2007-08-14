@@ -2,7 +2,7 @@
 
 // anti-spam un peu brutal : 
 //	1. une liste de mots interdits est consultee
-//	2. si le mot existe dans un des textes de formulaire', 'l'ensemble est reduit a : ''
+//	2. si le mot existe dans un des textes d'un formulaire, on avertit !
 
 // si aucun post ou espace prive, on n'insiste pas !
 if (!count($_POST) || (strpos($_SERVER["PHP_SELF"],'/ecrire') !== false)) return;
@@ -17,7 +17,7 @@ if (!count($_POST) || (strpos($_SERVER["PHP_SELF"],'/ecrire') !== false)) return
 */
 $spam_mots = array(
 	// des liens en dur...
-	'<a\s+href="', '</a>',
+	'<a\s+href=', '</a>',
 	// certains mots...
 	'gorgeous', 'nurses', 'sensored', 'sucking', 'erotic', 'swallowing', 'horny', 'naked',
 	'schoolgirl', 'blowjobs', 'lesbian', 'orgasms', 'superbabes', 'shaving', 'nasty', 'humping', 
@@ -28,7 +28,7 @@ $spam_mots_reg = ',(' . join('|', $spam_mots) . '),i';
 
 // champs de formulaires a visiter
 //    un message en forum : texte, titre, auteur
-//    un message  a un auteur : texte_message_auteur_XX, sujet_message_auteur_XX, email_message_auteur_XX
+//    un message a un auteur : texte_message_auteur_XX, sujet_message_auteur_XX, email_message_auteur_XX
 $spam_POST_reg = ',^(texte|titre|sujet|auteur|email),i';
 
 // on compile $spam_POST en fonction des variables $_POST trouvees
