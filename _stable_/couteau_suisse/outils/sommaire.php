@@ -19,4 +19,5 @@
 function sommaire_raccourcis() {
 	return _T('cout:sommaire:aide', array('interdit' => '<strong>'._sommaire_SANS_SOMMAIRE.'</strong>'));
 }
+
 ?>

@@ -236,6 +236,13 @@ add_outil( array(
 ));
 
 add_outil( array(
+	'id' => 'spam',
+//	'code:options' => "%%radio_suivi_forums3%%",
+	'categorie' => 'admin',
+//	'version-min' => 1.92,
+));
+
+add_outil( array(
 	'id' => 'no_IP',
 	'code:options' => '$ip = substr(md5($ip),0,16);',
 	'categorie' => 'admin',
@@ -357,14 +364,21 @@ add_variable( array(
 	'defaut' => 30,
 	'code:%s>=9 && %s<=99' => "define('_sommaire_NB_CARACTERES', %s);",
 ));
+add_variable( array(
+	'nom' => 'auto_sommaire',
+	'format' => 'nombre',
+	'radio' => array(1 => 'cout:travaux_titre', 0 => 'cout:travaux_nom_site'),
+	'defaut' => 1,
+	'code:%s' => "define('_sommaire_AUTOMATIQUE', %s);",
+));
 add_outil( array(
 	'id' => 'sommaire',
-	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\n%%lgr_sommaire%%",
+	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%\n%%auto_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
 	'code:js' => '$(document).ready(function () { if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',
 	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
-	'traitement:TEXTE:post_propre' => 'sommaire_d_article',
+	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
 	'categorie' => 'typo-corr',
 ));
 

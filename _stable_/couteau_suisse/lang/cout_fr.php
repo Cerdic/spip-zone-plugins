@@ -310,6 +310,11 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 	'flock:nom' => "Pas de verrouillage de fichiers",
 	'flock:description' => "D&eacute;sactive le syst&egrave;me de verrouillage de fichiers en neutralisant la fonction PHP {flock()}. Certains h&eacute;bergements posent en effet des probl&egrave;mes graves suite &agrave; un syst&egrave;me de fichiers inadapt&eacute; ou &agrave; un manque de synchronisation. N'activez pas cet outil si votre site fonctionne normalement.",
 
+// ---------------------------------------------------------------------------
+	'spam:nom' => 'Lutte contre le SPAM',
+	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.',
+	'lutte_spam' => 'Lutte contre le SPAM',
+	'explique_spam' => 'Attention : vous avez utilis&eacute; des balises, des carat&egrave;res ou des mots interdits.<br /><br />Revenez en arri&egrave;re !',
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',

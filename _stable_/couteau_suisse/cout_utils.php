@@ -161,8 +161,8 @@ function is_pipeline_outil($pipe, &$set_pipe) {
 
 // est-ce que $traitement est un traitement ?
 function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises) {
-	if ($ok = preg_match(',^traitement:([A-Z]+):(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t))
-		$set_traitements_utilises[$t[1]][$t[3]][$t[2]][] = $fonction;
+	if ($ok = preg_match(',^traitement:([A-Z]+)(/[a-z]+)?:(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t))
+		$set_traitements_utilises[$t[1]][$t[4]][$t[3]][] = $fonction;
 	elseif ($ok = preg_match(',^traitement:([A-Z]+)$,', $traitement, $t))
 		$set_traitements_utilises[$t[1]][0][] = $fonction;
 	return $ok;

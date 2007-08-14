@@ -14,7 +14,10 @@ $exceptions =
 
 // si ya pas d'exception, on force bloque le site pour travaux
 if (!$exceptions)
-	$_GET['action']="cs_travaux";
+	$_GET['action'] = "cs_travaux";
+
+// nettoyage
+unset($exceptions);
 
 function action_cs_travaux(){
 	include_spip('inc/minipres');

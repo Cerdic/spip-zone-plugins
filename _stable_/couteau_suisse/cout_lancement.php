@@ -133,7 +133,7 @@ cs_log("[#$rand] cs_initialisation($forcer) : Sortie");
 // $fonction est la fonction prevue pour transformer $texte
 // $texte est le texte d'origine
 // si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
-function cs_echappe_balises($balises, $fonction, $texte){
+function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	if(!strlen($texte)) return '';
 	if (!function_exists($fonction)) {
 		spip_log("Erreur - cs_echappe_balises() : $fonction() non definie !");
@@ -142,7 +142,8 @@ function cs_echappe_balises($balises, $fonction, $texte){
 	if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
 	$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
 	include_spip('inc/texte');
-	$texte = echappe_retour($fonction(echappe_html($texte, 'CS', true, $balises)), 'CS');
+	$texte = echappe_html($texte, 'CS', true, $balises);
+	$texte = echappe_retour($arg==NULL?$fonction($texte):$fonction($texte, $arg), 'CS');
 	return $texte;
 }
 

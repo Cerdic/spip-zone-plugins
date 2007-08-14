@@ -9,7 +9,7 @@ define('_sommaire_SANS_FOND', '[!fond]');
 // Exemple : lors d'une impression a l'aide du squelette imprimer.html,
 // remplacer la balise #TEXTE par [(#TEXTE*|propre|cs_imprimer)].
 function sommaire_imprimer($texte) {
-	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE), '', $texte);
+	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE, _sommaire_AVEC_SOMMAIRE), '', $texte);
 }
 
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
@@ -48,13 +48,22 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	return $sommaire;
 }
 
+function sommaire_sommaire($texte) {
+}
+
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
-function sommaire_d_article_rempl($texte) {
-	// s'il n'y a pas de balise <h3> ou si le raccourcis _sommaire_SANS_SOMMAIRE est present dans le texte, alors on laisse tomber
-	if (strpos($texte, '<h3')===false || strpos($texte, _sommaire_SANS_SOMMAIRE)!==false) 
-		return sommaire_imprimer($texte);
+function sommaire_d_article_rempl($texte0, $rempl_texte=true) {
+	$texte = $texte0;
+	// on uniformise les intertitres...
+	$texte = preg_replace(array("/(^|[^{])[{][{][{]/S", "/[}][}][}]($|[^}])/S"), array("\$1<h3>", "</h3>$1"), $texte);
+	// s'il n'y a pas de balise <h3> ou si le sommaire est malvenu, alors on laisse tomber
+	$inserer_sommaire =  defined('_sommaire_AUTOMATIQUE')
+		?strpos($texte, _sommaire_SANS_SOMMAIRE)===false
+		:strpos($texte, _sommaire_AVEC_SOMMAIRE)!==false;
+	if (strpos($texte, '<h3')===false || !$inserer_sommaire) 
+		return $rempl_texte?sommaire_imprimer($texte0):'';
+	// la, on y va...
 	$sommaire = ''; $i = 1; $nbh3 = 0;
-	$texte0 = $texte;
 	// couplage avec l'outil 'decoupe_article'
 	if(defined('_decoupe_SEPARATEUR')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
@@ -90,12 +99,27 @@ list-style-type:none;
 margin:0.3em 0.5em 0.1em 0.7em;
 padding:0pt;">'.$sommaire.'</ul></div></div>';
 
-	return _sommaire_REM.$sommaire._sommaire_REM.$texte;
+	return _sommaire_REM.$sommaire._sommaire_REM.($rempl_texte?$texte:'');
 }
 
-function sommaire_d_article($texte){
-	if (strpos($texte, '<h3')===false) return $texte;
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte);
+function sommaire_d_article($texte, $balise=false){
+	$GLOBALS['balise_cs_sommaire'] = $balise;
+	if (strpos($texte, '<h3')===false || strpos($texte, '{{{')===false) return $balise?'':$texte;
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, $balise);
+}
+
+// Balise #SOMMAIRE
+function balise_CS_SOMMAIRE($p) {
+	$type = $p->type_requete;
+	if ($type == 'articles') {
+		$_texte = champ_sql('texte', $p);
+		$p->code = "sommaire_d_article($_texte, true)";
+	} else {
+		$p->code = "'type:$type'";
+	}
+
+	#$p->interdire_scripts = true;
+	return $p;
 }
 
 ?>
