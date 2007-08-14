@@ -44,7 +44,7 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode) {
 	}else{
 		if ($GLOBALS['spip_version_code']>=1.9259){
 			include_spip('inc/acces');
-			include_spip('inc/mail');
+			include_spip('inc/envoyer_mail');
 		}
 		else{include_spip('inc/mail');}
 		

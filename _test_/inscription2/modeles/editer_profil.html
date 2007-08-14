@@ -3,9 +3,12 @@
 <script type="text/javascript" src="#CHEMIN{javascript/jquery.validate.pack.js}"></script>
 <div id="profil">
 
-	[<h2><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></h2>]
-
+	<h2><span class="#_auteur:EDIT{nom} ">#NOM</span></h2>
+	
+	<div class="profil_contacts" id="contacts_persos">
+	<h3><:inscription2:infos_personnelles:></h3>
 	<div class="#_auteur:EDIT{logo} Buddy">[(#LOGO_AUTEUR||?{" ","<img src='http://www.kde-look.org/usermanager/nopic.png' alt='Avatar' />"})[(#LOGO_AUTEUR||image_reduire{200,0})]]</div>
+	[<p><span class="#EDIT{nomcomplet} fn"><span class="given-name">(#PRENOM|?{#PRENOM,<:inscription2:non_renseigne:>})</span> <span class="family-name">#NOM_FAMILLE</span></span></p>]
 	
 	<div class="#_auteur:EDIT{bio} profil_bio">
 	[(#BIO|?{#BIO,"..."})]
