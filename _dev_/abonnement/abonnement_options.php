@@ -17,7 +17,7 @@
 
 function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_article){
 
-$abonne = spip_fetch_array(spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, a.validite, b.email, b.id_auteur, b.alea_actuel, b.login FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") );
+$abonne = spip_fetch_array(spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, a.validite, b.email, b.id_auteur, b.alea_actuel, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") );
 
 if($produit == "abonnement"){
 $abonnement = spip_fetch_array(spip_query("SELECT a.duree, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur_elargi = '$id_abonne' AND a.id_abonnement = b.id_abonnement") );
@@ -30,13 +30,13 @@ spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnem
 }
 
 if($produit == "article"){
-$article = spip_fetch_array(spip_query("SELECT a.titre FROM `spip_articles` a, `spip_auteurs_elargis_articles` b WHERE b.hash = '$hash_article' AND a.id_article = b.id_article") );
+$article = spip_fetch_array(spip_query("SELECT a.titre, a.id_article FROM `spip_articles` a, `spip_auteurs_elargis_articles` b WHERE b.hash = '$hash_article' AND a.id_article = b.id_article") );
 $libelle = $article['titre'];
 spip_query("UPDATE `spip_auteurs_elargis_articles` SET statut_paiement='$validation_paiement' WHERE hash='$hash_article'") ;
 }
 
 	//envoyer un mail a l'admin et a l'abonne
-	abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit);
+	abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit,$article);
 
 if($validation_paiement == "ok")
 return true ;
@@ -46,7 +46,7 @@ return false ;
 }
 
 
-function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit){
+function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit,$article=''){
 
 	include_spip('inc/charsets');
 	include_spip('inc/mail');
@@ -55,6 +55,7 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 	$adresse_expediteur = lire_config('abonnement/email_envoi');
 	
 	if($produit == "abonnement"){				
+	$sujet= "[".$nom_expediteur."-abo] Nouvel abonn&eacute; : ".$abonne['nom_famille'] ;
 	$sujet_message_ok = lire_config('abonnement/sujet_ok');
 	$sujet_message_ko = lire_config('abonnement/sujet_ko');
 	$message_ok = lire_config('abonnement/texte_ok');
@@ -62,6 +63,7 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 	}
 	
 	if($produit == "article"){				
+	$sujet= "[".$nom_expediteur."-abo] Nouvel achat d'article : ".$abonne['nom_famille'] ;
 	$sujet_message_ok = "Bravo pour votre article" ;
 	$sujet_message_ko = "Pas de chance pour votre article" ;
 	$message_ok = "Votre paiement est accepte" ;
@@ -83,9 +85,8 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 
 	if($validation_paiement == "ok"){
 	
-			$sujet= "[".$nom_expediteur."-abo] Nouvel abonn&eacute; : ".$abonne['nom_famille'] ;
 			//au webmaster
-			$message = "Un abonn&eacute; vient de valider son abonnement :\n\nNom : ".$abonne['nom_famille']."\nPr&eacute;nom : ".$abonne['prenom']."\n\nAdresse: \n".$abonne['adresse']."\n".$abonne['code_postal']." ".$abonne['ville']." ".$abonne['pays']
+			$message = "Une nouvelle transaction a eu lieu :\n\nNom : ".$abonne['nom_famille']."\nPr&eacute;nom : ".$abonne['prenom']."\n\nAdresse: \n".$abonne['adresse']."\n".$abonne['code_postal']." ".$abonne['ville']." ".$abonne['pays']
 			."\n\nEmail : ".$abonne['email']
 			."\nT&eacute;l&eacute;phone: ".$abonne['telephone']
 			."\n\nCommentaire: ".$abonne['commentaire'];
@@ -104,11 +105,24 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$lib
 			$sujet = $sujet_message_ok ;
 			$message= $message_ok."\n\n";
 			
-			$message .=  "Votre identifiant de connexion au site est ".$abonne['login']
+			// envoyer un lien pour choisir son mdp le ca echeant
+			if($abonne['pass'] == ""){
+			$message .=  "Votre identifiant de connexion au site est : ".$abonne['login']
 			."\n\nCliquez le lien suivant pour choisir votre mot de passe"
-			."\n".$adresse_site.'/?page=inscription2_confirmation&id='
-			.$abonne['id_auteur'].'&cle='.$abonne['alea_actuel'].'&mode=conf'
-			."\n\n".$nom_expediteur."\r\n";
+			."\n".$adresse_site."/?page=inscription2_confirmation&id="
+			.$abonne['id_auteur']."&cle=".$abonne['alea_actuel']."&mode=conf";
+			}
+			
+			if($article['titre'] && $abonne['pass'] == "")
+				$message .= "\n\n Vous pourrez ensuite vous connecter et acceder a votre article en suivant ce lien \n\n"
+				.$article['titre']." (".$adresse_site."/?page=article&id_article=".$article['id_article'].")";
+			
+			if($article['titre'] && $abonne['pass'] != "")
+				$message .= "\n\n Vous pouvez acceder a votre article en suivant ce lien \n\n"
+				.$article['titre']." (".$adresse_site."/?page=article&id_article=".$article['id_article'].")";
+			
+				
+			$message .= "\n\n".$nom_expediteur."\r\n";
 			
 			envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
 			envoyer_mail ('booz@rezo.net', $sujet, $message, $from = $expediteur, $headers = $entetes );
