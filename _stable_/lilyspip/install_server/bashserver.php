@@ -52,7 +52,6 @@ function lilypond_enhance($texte,$code_format) {
 	}
 	\paper {
 		ragged-right = ##t
-		indent = 0.0\mm
 	}
 	$texte";
 	}
