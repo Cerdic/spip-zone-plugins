@@ -62,11 +62,10 @@
 				[(#ENV{reabo}|?{' ',''})
 					[(#INCLURE{fond=fonds/reabo}{id_auteur}{abonnement=#ENV{abonnement}})]
 				]
-				
-				
+								
 				[(#ENV{reabo}|?{'',' '})
 				[(#ENV{reachat}|?{'',' '})
-					[(#INCLURE{fond=fonds/achat_unite}{id_article=#ENV{article}})]
+					[(#INCLURE{fond=fonds/achat_unite}{article=#ENV{article}})]
 				]]
 			]]
 		

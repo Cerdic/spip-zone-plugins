@@ -1,3 +1,6 @@
 [(#ENV{option}|!={achat_unite}|?{' ',''})
 	[(#INCLURE{fond=formulaires/liste_abonnements}{abonnement=#ENV{abonnement}}{option=#ENV{option}})]
 ]
+[(#ENV{article}|?{' ',''})
+<input type="hidden" name="article" value="#ENV{article}">
+]

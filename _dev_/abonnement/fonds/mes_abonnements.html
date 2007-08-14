@@ -6,8 +6,10 @@
 
 <B_abo>
 <h2 style="margin:20px 0px">Vos abonnements</h2>
-<BOUCLE_abo(spip_abonnements){id_auteur_elargi = #ID}>
+<BOUCLE_abo(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}>
+<BOUCLE_abo2(spip_abonnements){id_abonnement}>
 #LIBELLE
+</BOUCLE_abo2>
 </BOUCLE_abo>
 
 <B_articles>
