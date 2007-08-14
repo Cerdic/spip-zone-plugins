@@ -237,9 +237,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'spam',
-//	'code:options' => "%%radio_suivi_forums3%%",
 	'categorie' => 'admin',
-//	'version-min' => 1.92,
 ));
 
 add_outil( array(

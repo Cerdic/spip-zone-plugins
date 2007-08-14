@@ -4,8 +4,8 @@
 //	1. une liste de mots interdits est consultee
 //	2. si le mot existe dans un des textes de formulaire', 'l'ensemble est reduit a : ''
 
-// si aucun post, on n'insiste pas !
-if (!count($_POST)) return;
+// si aucun post ou espace prive, on n'insiste pas !
+if (!count($_POST) || (strpos($_SERVER["PHP_SELF"],'/ecrire') !== false)) return;
 
 // tableau des mots interdits
 /*
