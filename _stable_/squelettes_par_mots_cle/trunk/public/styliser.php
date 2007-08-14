@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
 // http://doc.spip.org/@public_styliser_dist
-function public_styliser_dist($fond, $id_rubrique, $lang) {
+function public_styliser_dist($fond, $id_rubrique, $lang, $contexte) {
 	
   // Actuellement tous les squelettes se terminent par .html
   // pour des raisons historiques, ce qui est trompeur
@@ -41,18 +41,23 @@ function public_styliser_dist($fond, $id_rubrique, $lang) {
 
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
-
+	$trouve = false;
+	$id_rubrique = intval($id_rubrique);
+	$id_rub_init = $id_rubrique;
+	
 	// On selectionne, dans l'ordre :
 	// fond=10
 	$f = "$fond=$id_rubrique";
-	if (($id_rubrique > 0) AND ($squel=find_in_path("$f.$ext")))
+	if (($id_rubrique > 0) AND ($squel=find_in_path("$f.$ext"))){
 		$squelette = substr($squel, 0, - strlen(".$ext"));
+		$trouve = true;}
 	else {
 		// fond-10 fond-<rubriques parentes>
 		while ($id_rubrique > 0) {
 			$f = "$fond-$id_rubrique";
 			if ($squel=find_in_path("$f.$ext")) {
 				$squelette = substr($squel, 0, - strlen(".$ext"));
+				$trouve = true;
 				break;
 			}
 			else
@@ -79,6 +84,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang) {
 		  if((!$trouve) && (!$stop) && ($n = sql_mot_squelette($id_rub_init,$id_groupe,'rubriques','id_rubrique',true))) {	
 				if ($squel = find_in_path("$fond-$n.$ext")) {
 				  $squelette = substr($squel, 0, - strlen(".$ext"));
+	
 				}
 		  }
 		}
@@ -104,14 +110,16 @@ function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
 	$where1 = array("$id_table=$id",
 					'mots.id_mot=lien.id_mot',
 					"id_groupe=$id_groupe");
-	$r = sql_fetch(spip_abstract_select($select1,$from1,$where1));
+			
+	$r = sql_fetch(sql_select($select1,$from1,$where1));
+
 	if ($r) {
-	  include_spip("inc/charsets");
-	   include_spip("inc/filtres");
-	  return translitteration(preg_replace('/["\'.\s]/','_',extraire_multi($r['titre'])));	
+		include_spip("inc/charsets");
+		include_spip("inc/filtres");
+		return translitteration(preg_replace('/["\'.\s]/','_',extraire_multi($r['titre'])));	
 	}
 	if(!$recurse) return '';
-	$id = sql_parent($id);
+	$id = quete_parent($id);
   }
   return '';
 }

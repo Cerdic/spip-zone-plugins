@@ -22,9 +22,10 @@ define('_DIR_PLUGIN_CHERCHER_SQUELETTES',(_DIR_PLUGINS.end($p)));
 
 function SquelettesMots_ajouter_onglets($flux) {
   if($flux['args']=='configuration')
-	$flux['data']['config_chercher_squelettes_mots']= new Bouton(
-															 '../'._DIR_PLUGIN_CHERCHER_SQUELETTES.'/spip_death.png', 'Configurer Squelettes Mots',
-																 generer_url_ecrire("config_chercher_squelettes_mots"));
+	$flux['data']['config_chercher_squelettes_mots']= 
+		new Bouton(
+		'../'._DIR_PLUGIN_CHERCHER_SQUELETTES.'/spip_death.png', 'Configurer Squelettes Mots',
+		generer_url_ecrire("config_chercher_squelettes_mots"));
   return $flux;
 }
 

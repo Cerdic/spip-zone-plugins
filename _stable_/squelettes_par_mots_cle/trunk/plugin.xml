@@ -53,6 +53,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	Cos&igrave;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
      </multi>
 	</description>
+	<icon>spip_death.png</icon>
 	<lien>http://www.spip-contrib.net/Choix-des-squelettes-par-mot-clef</lien>
 	<prefix> 
 	  SquelettesMots
@@ -65,6 +66,6 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 		<nom>ajouter_boite_gauche</nom>
 		<inclure>SquelettesMots.php</inclure>
 	</pipeline>
-	<necessite id="spip" version="[1.9207;]" />
+	<necessite id="spip" version="[1.9259;]" />
 	<chemin dir='' />
 </plugin>
