@@ -159,7 +159,7 @@ function jeux_trouver_nom($texte) {
 	global $jeux_caracteristiques;
 	$liste = jeux_liste_des_jeux($texte);
 	foreach($liste as $i=>$jeu)
-		$liste[$i]=$jeux_caracteristiques['NOMS'][$jeu];
+		$liste[$i]=$jeux_caracteristiques['TYPES'][$jeu];
 	return join(', ', $liste);
 }
 

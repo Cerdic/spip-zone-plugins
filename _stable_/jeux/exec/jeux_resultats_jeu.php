@@ -9,30 +9,30 @@ function exec_jeux_resultats_jeu(){
 	$par = _request('par');
 	($par == '') ? $par='resultat_court' : $par = $par;
 	
-	$requete	= spip_fetch_array(spip_query("SELECT id_jeu,nom,titre FROM spip_jeux WHERE id_jeu =".$id_jeu));
+	$requete	= spip_fetch_array(spip_query("SELECT id_jeu,type_jeu,titre_prive FROM spip_jeux WHERE id_jeu =".$id_jeu));
 	$id_jeu		= $requete['id_jeu'];
-	$nom		= $requete['nom'];
-	$titre		= $requete['titre'];
+	$type_jeu		= $requete['type_jeu'];
+	$titre_prive		= $requete['titre_prive'];
 	if(!$id_jeu){
 		debut_page(_T("jeux:pas_de_jeu"));
 		gros_titre(_T("jeux:pas_de_jeu"));
 		fin_page();
 		return;
 		}
-	debut_page(_T("jeux:resultats_jeu",array('id'=>$id_jeu,'nom'=>$nom)));
+	debut_page(_T("jeux:resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
 	debut_gauche();
 	
-	boite_infos_jeu($id_jeu, $nom);
+	boite_infos_jeu($id_jeu, $type_jeu);
 	boite_infos_accueil();
 	
 	creer_colonne_droite();
 	debut_droite();
 	debut_cadre_relief();
 	
-	echo gros_titre(_T("jeux:resultats_jeu", array('id'=>$id_jeu,'nom'=>$nom)));
-	$titre = $titre==''?_T('jeux:sans_titre'):propre($titre);
-	echo "<div style='font-weight:bold'>$titre</div><br />";
+	echo gros_titre(_T("jeux:resultats_jeu", array('id'=>$id_jeu,'nom'=>$type_jeu)));
+	$titre_prive = $titre_prive==''?_T('jeux:sans_titre_prive'):propre($titre_prive);
+	echo "<div style='font-weight:bold'>$titre_prive</div><br />";
 	echo "<div class='nettoyeur'></div>";
 	include_spip('public/assembler');
 	debut_cadre('liste');

@@ -88,8 +88,8 @@ $jeux_caracteristiques = array(
 	'diag_echecs' => array(_JEUX_DIAG_ECHECS),
   ),
 
-// nom a donner au jeu
-  'NOMS' => array(
+// nom court a donner aux jeux
+  'TYPES' => array(
 	'sudoku' => _T('sudoku:titre_court'),
 	'kakuro' => _T('kakuro:titre_court'),
 	'mots_croises' => _T('motscroises:titre_court'),
@@ -116,7 +116,7 @@ global $jeux_header_prive, $jeux_javascript_prive;
 $jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu');
 $jeux_javascript_prive = array('layer', 'pendu', 'mots_croises');
 
-// Codes RGB des couleurs prédéfinies a utiliser pour certains parametres apres la balise [config]
+// Codes RGB des couleurs predefinies a utiliser pour certains parametres apres la balise [config]
 global $jeux_couleurs;
 $jeux_couleurs = Array(
   	// en

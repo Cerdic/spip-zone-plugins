@@ -57,8 +57,8 @@ function gerer_resultat_tous($bouton){
 }
 
 function gerer_resultats_auteur($id_auteur, $bouton){
-	$requete = spip_fetch_array(spip_query("SELECT id_auteur,nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
-	$nom = $requete['nom'];
+	$requete = spip_fetch_array(spip_query("SELECT id_auteur,type_jeu FROM spip_auteurs WHERE id_auteur =".$id_auteur));
+	$type_jeu = $requete['type_jeu'];
 	$id_auteur = $requete['id_auteur'];
 
 	if(!$id_auteur){
@@ -81,18 +81,18 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('jeux_resultats_auteur', 'id_auteur='.$id_auteur, true));
 	}
-	debut_page(_T("jeux:gerer_resultats_auteur",array('nom'=>$nom)));
+	debut_page(_T("jeux:gerer_resultats_auteur",array('nom'=>$type_jeu)));
 		
 	debut_gauche();
 
-	boite_infos_auteur($id_auteur, $nom);
+	boite_infos_auteur($id_auteur, $type_jeu);
 	boite_infos_accueil();
 
 	creer_colonne_droite();
 	debut_droite();
 	if ($bouton == 'supprimer_tout'  or $bouton == 'compacter_tout') gros_titre(_T("jeux:confirmation"));
 	debut_cadre_relief();
-	gros_titre(_T("jeux:gerer_resultats_auteur",array('nom'=>$nom)));
+	gros_titre(_T("jeux:gerer_resultats_auteur",array('nom'=>$type_jeu)));
 	formulaire_suppression($bouton, 'auteur');
 
 	fin_cadre_relief();
@@ -100,9 +100,9 @@ function gerer_resultats_auteur($id_auteur, $bouton){
 }
 
 function gerer_resultat_jeux($id_jeu, $bouton){
-	$requete	= spip_fetch_array(spip_query('SELECT id_jeu,nom FROM spip_jeux WHERE id_jeu ='.$id_jeu));
+	$requete	= spip_fetch_array(spip_query('SELECT id_jeu,type_jeu FROM spip_jeux WHERE id_jeu ='.$id_jeu));
 	$id_jeu		= $requete['id_jeu'];
-	$nom		= $requete['nom'];
+	$type_jeu		= $requete['type_jeu'];
 	if(!$id_jeu){
 		debut_page(_T("jeux:pas_de_jeu"));
 		gros_titre(_T("jeux:pas_de_jeu"));
@@ -125,10 +125,10 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 	}
 
 
-	debut_page(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$nom)));
+	debut_page(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 			
 	debut_gauche();
-	boite_infos_jeu($id_jeu, $nom);
+	boite_infos_jeu($id_jeu, $type_jeu);
 	boite_infos_accueil();
 
 	creer_colonne_droite();
@@ -136,7 +136,7 @@ function gerer_resultat_jeux($id_jeu, $bouton){
 	if ($bouton == 'supprimer_tout' or $bouton == 'compacter_tout') gros_titre(_T("jeux:confirmation"));
 	debut_cadre_relief();
 	
-	echo gros_titre(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$nom)));
+	echo gros_titre(_T("jeux:gerer_resultats_jeu",array('id'=>$id_jeu,'nom'=>$type_jeu)));
 	formulaire_suppression($bouton, 'jeu'); 
 	
 	fin_cadre_relief();

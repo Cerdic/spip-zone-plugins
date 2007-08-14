@@ -13,8 +13,8 @@ $jeux = array(
 	'date'		=> 'timestamp');
 if (isset($GLOBALS['meta']['jeux_base_version'])) {
 	$jeux = array_merge($jeux, array(
-		'nom'	=> 'text NOT NULL',
-		'titre'	=> 'text NOT NULL',
+		'type_jeu'	=> 'text NOT NULL',
+		'titre_prive'	=> 'text NOT NULL',
 	));
 }
 $jeux = array_merge($jeux, array(

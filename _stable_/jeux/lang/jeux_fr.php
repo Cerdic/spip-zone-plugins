@@ -107,8 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ecraser_resultat'			=> 'Ecraser les r&eacute;sultats ?',
 'configurer_jeux'			=> 'Configurer le plugin Jeux',
 
-'sans_titre'	=> 'Sans titre priv&eacute;',
-'sans_nom'		=> 'Sans nom',
+'sans_titre_prive'	=> 'Sans titre priv&eacute;',
+'sans_type'		=> 'Sans type',
 'introuvable'	=> 'Aucun jeu dans le contenu !',
 'pas_de_jeu'	=> "D&eacute;sol&eacute;, ce jeu n'existe pas !",
 'pas_d_auteur'	=> "D&eacute;sol&eacute;, cet auteur est inconnu !",

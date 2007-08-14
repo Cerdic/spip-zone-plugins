@@ -10,24 +10,24 @@ function exec_jeux_edit(){
 	$valider = _request('valider');
 	$nouveau = _request('nouveau');
 	$id_jeu	 = _request('id_jeu');
-	$nom	 = _request('nom');
-	$titre	 = _request('titre');
+	$type_jeu	 = request('type_jeu'];
+	$titre_prive	 = _request('titre_prive');
 	$contenu = _request('contenu');
 	$enregistrer_resultat = _request('enregistrer_resultat');
 
 	
 	if ($valider) {
-		$id_jeu = jeux_ajouter_jeu($titre,$contenu,$enregistrer_resultat,$id_jeu);
+		$id_jeu = jeux_ajouter_jeu($titre_prive,$contenu,$enregistrer_resultat,$id_jeu);
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('jeux_voir', 'id_jeu='.$id_jeu,true));
 	}
 	
-	$nouveau ? debut_page(_T('jeux:nouveau_jeu')) : debut_page(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$nom)));
+	$nouveau ? debut_page(_T('jeux:nouveau_jeu')) : debut_page(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)));
 	
 	if (!$nouveau){
-	$requete = spip_fetch_array(spip_query("SELECT enregistrer_resultat,contenu,nom,titre FROM spip_jeux WHERE id_jeu =".$id_jeu));
-	$nom = $requete['nom'];
-	$titre = $requete['titre']==_T('jeux:sans_titre')?'':entites_html($requete['titre']);
+	$requete = spip_fetch_array(spip_query("SELECT enregistrer_resultat,contenu,type_jeu,titre_prive FROM spip_jeux WHERE id_jeu =".$id_jeu));
+	$type_jeu = $requete['type_jeu'];
+	$titre_prive = $requete['titre_prive']==_T('jeux:sans_titre_prive')?'':entites_html($requete['titre_prive']);
 	$contenu = entites_html(strip_tags($requete['contenu']));
 	$enregistrer_resultat  = $requete['enregistrer_resultat'];
 	}
@@ -46,15 +46,15 @@ function exec_jeux_edit(){
 	echo fin_cadre_relief();
 	creer_colonne_droite();
 	debut_droite();
-	$nouveau ? gros_titre(_T('jeux:nouveau_jeu')) : gros_titre(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$nom)));
+	$nouveau ? gros_titre(_T('jeux:nouveau_jeu')) : gros_titre(_T('jeux:modifier_jeu',array('id'=>$id_jeu,'nom'=>$type_jeu)));
 	
 	debut_cadre_formulaire();
 	echo "<form method='post' name='jeux_edit'>\n";
 	debut_cadre_relief();
 	
-	// titre
+	// titre prive
 	echo "<label><span class='titrem'>"._T('jeux:jeu_titre_prive');
-	echo "<br /></span><input type='text' name='titre' value=\"$titre\" style='width:100%;' />";
+	echo "<br /></span><input type='text' name='titre_prive' value=\"$titre_prive\" style='width:100%;' />";
 	echo '</label>';
 
 	// contenu
@@ -79,17 +79,17 @@ function exec_jeux_edit(){
 	echo fin_cadre_formulaire(), fin_gauche(), fin_page();
 }
 
-function jeux_ajouter_jeu($titre,$contenu, $enregistrer_resultat, $id_jeu=false){
+function jeux_ajouter_jeu($titre_prive,$contenu, $enregistrer_resultat, $id_jeu=false){
 	include_spip('jeux_utils');
-	$nom = jeux_trouver_nom($contenu);
-	$nom = _q($nom==''?_T('jeux:jeu_vide'):$nom);
-	$titre = _q($titre==''?_T('jeux:sans_titre'):$titre);
+	$type_jeu = jeux_trouver_nom($contenu);
+	$type_jeu = _q($type_jeu==''?_T('jeux:jeu_vide'):$type_jeu);
+	$titre_prive = _q($titre_prive==''?_T('jeux:sans_titre_prive'):$titre_prive);
 	$contenu = _q("<jeux>$contenu</jeux>");
 	if (!$id_jeu) {
-		spip_query("INSERT into spip_jeux (statut,nom,titre,contenu,enregistrer_resultat) VALUES('publie',$nom,$titre,$contenu,'$enregistrer_resultat')");	
+		spip_query("INSERT into spip_jeux (statut,type_jeu,titre_prive,contenu,enregistrer_resultat) VALUES('publie',$type_jeu,$titre_prive,$contenu,'$enregistrer_resultat')");	
 		$id_jeu = mysql_insert_id();		
 	} else {
-		spip_query("REPLACE into spip_jeux (id_jeu,statut,nom,titre,contenu,enregistrer_resultat) VALUES ($id_jeu,'publie',$nom,$titre,$contenu,'$enregistrer_resultat')");
+		spip_query("REPLACE into spip_jeux (id_jeu,statut,type_jeu,titre_prive,contenu,enregistrer_resultat) VALUES ($id_jeu,'publie',$type_jeu,$titre_prive,$contenu,'$enregistrer_resultat')");
 	}
 	return $id_jeu;
 }

@@ -15,7 +15,7 @@
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [horizontal], [vertical], [solution]
 separateurs optionnels   : [titre], [texte], [config]
-paramètres de configurations par defaut :
+parametres de configurations par defaut :
 	solution=oui	// Afficher la solution ?
 	fondnoir=noir	// couleur des cases noires
 	compact=non		// Definitions en format compact ?
