@@ -1,0 +1,14 @@
+#CACHE{0}
+<div style="clear:both;text-align:right" class="detail">
+[(#SESSION{id_auteur}|?{' ',''})
+<small>
+<a href="./?page=profil_complet">#SESSION{nom}</a> - 
+<a href="[(#URL_LOGOUT)]">d&eacute;connexion</a>
+</small>
+]
+[(#SESSION{id_auteur}|?{'',' '})
+<small>
+<a href="./?page=inc-connexion">Connexion</a>
+</small>
+]
+</div>
