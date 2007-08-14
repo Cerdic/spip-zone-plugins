@@ -65,6 +65,8 @@
 	
 	function abonnement_vider_tables() {
 		spip_query("DROP TABLE spip_abonnements");
+		spip_query("DROP TABLE spip_auteurs_elargis_abonnements");
+		spip_query("DROP TABLE spip_auteurs_elargis_articles");
 		effacer_meta('abonnement_base_version');
 		ecrire_metas();
 	}

@@ -40,13 +40,13 @@ $tables_principales['spip_abonnements'] = array(
 
 //table auteurs_elargis_abonnements
 $spip_auteurs_elargis_abonnements = array(
-						"id_auteur_elargi" 	=> "int(10) unsigned NOT NULL auto_increment",
+						"id_auteur_elargi" 	=> "int(10) unsigned NOT NULL",
 						"id_abonnement" 			=> "int(10) unsigned NOT NULL",
 						"date" 				=> "timestamp(14) NOT NULL"
 						);
 
 $spip_auteurs_elargis_abonnements_key = array(
-						"PRIMARY KEY" => "id_auteur_elargi"
+						"KEY" => "id_auteur_elargi"
 						);	
 
 $tables_principales['`spip_auteurs_elargis_abonnements`'] = array(
@@ -55,7 +55,7 @@ $tables_principales['`spip_auteurs_elargis_abonnements`'] = array(
 		
 //table auteurs_elargis_articles
 $spip_auteurs_elargis_articles = array(
-						"id_auteur_elargi" 	=> "int(10) unsigned NOT NULL auto_increment",
+						"id_auteur_elargi" 	=> "int(10) unsigned NOT NULL",
 						"id_article" 			=> "int(10) unsigned NOT NULL",
 						"date" 				=> "timestamp(14) NOT NULL",
 						"statut_paiement" 	=> "tinytext NOT NULL",
