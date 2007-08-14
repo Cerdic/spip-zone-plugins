@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Le&nbsp;Couteau&nbsp;Suisse'.</p>"
 		."<p>Documentation : [Le Couteau Suisse->http://www.spip-contrib.net/?article2166]</p>" . $temp['reset'],
-	'raccourcis' => "Raccourcis typographiques actifs&nbsp;:",
+	'raccourcis' => "Raccourcis typographiques actifs du Couteau Suisse&nbsp;:",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
 	'nb_outil' => '@pipe@ : @nb@ outil',
 	'nb_outils' => '@pipe@ : @nb@ outils',
@@ -250,7 +250,7 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 
 	'decoupe:nom' => 'D&eacute;coupe un texte en pages',
 	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.
-_ Cet outil peut &ecirc;tre coupl&eacute; avec {Sommaire en d&eacute;but d'article}.
+_ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.
 _ Plus d'infos : [->http://www.spip-contrib.net/?article2135]",
 	'decoupe:aide' => 'S&eacute;parateur de pages&nbsp;: @sep@',
 	'page_suivante' => 'Page suivante',
@@ -259,10 +259,17 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2135]",
 	'page_fin' => 'Derni&egrave;re page',
 
 // ---------------------------------------------------------------------------
-	'sommaire:nom' => 'Sommaire en d&eacute;but d\'article',
-	'sommaire:description' => "Construit syst&eacute;matiquement un sommaire en d&eacute;but d&rsquo;article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un titre</h3></code> ou raccourci SPIP (intertitres de la forme :<code>{{{Un autre titre}}}</code>). Afin d'&eacute;viter l'insertion automatique du sommaire, il vous suffit de placerla balise <code>[!sommaire]</code> &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article (n&rsquo;importe o&ugrave;).\n\nAttention, le sommaire ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.\n\nCet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.
-[[Largeur du sommaire (9 &agrave; 99 caract&egrave;res) :->%lgr_sommaire%]]",
-	'sommaire:aide' => 'Un article sans sommaire&nbsp;: @interdit@',
+	'sommaire:nom' => 'Un sommaire pour vos articles',
+	'sommaire:description' => "Construit un sommaire pour votre article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un intertitre</h3></code> ou raccourci SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).\n\nVous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :
+[[Largeur du sommaire (9 &agrave; 99) :->%lgr_sommaire% caract&egrave;res]]
+Vous pouvez aussi fixer le comportement du plugin : 
+- Soit il ins&egrave;re syst&eacute;matiquement un sommaire &agrave; chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
+- Soit il ins&egrave;re un sommaire uniquement dans les articles contenant la balise <code>[sommaire]</code>.
+[[Cr&eacute;ation syst&eacute;matique du sommaire :->%auto_sommaire%]]
+Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.
+_ Attention, le sommaire automatique ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
+_ Plus d'infos : [->http://www.spip-contrib.net/?article2378]",
+	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
 	'sommaire' => 'Sommaire',
 	'sommaire_page' => ',&nbsp;p@page@',
 
@@ -314,7 +321,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.',
 	'lutte_spam' => 'Lutte contre le SPAM',
-	'explique_spam' => 'Attention : vous avez utilis&eacute; des balises, des carat&egrave;res ou des mots interdits.<br /><br />Revenez en arri&egrave;re !',
+	'explique_spam' => 'Attention : vous avez utilis&eacute; des balises, des caract&egrave;res ou des mots interdits.<br /><br />Revenez en arri&egrave;re !',
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',

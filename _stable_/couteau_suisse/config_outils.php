@@ -365,7 +365,7 @@ add_variable( array(
 add_variable( array(
 	'nom' => 'auto_sommaire',
 	'format' => 'nombre',
-	'radio' => array(1 => 'cout:travaux_titre', 0 => 'cout:travaux_nom_site'),
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 1,
 	'code:%s' => "define('_sommaire_AUTOMATIQUE', %s);",
 ));
