@@ -382,7 +382,7 @@ add_outil( array(
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
 	'code:js' => '$(document).ready(function () { if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',
-	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
+	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
 	'categorie' => 'typo-corr',

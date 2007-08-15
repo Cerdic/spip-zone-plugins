@@ -16,8 +16,10 @@ function sommaire_imprimer($texte) {
 $GLOBALS['cs_introduire'][] = 'sommaire_imprimer';
 
 // renvoie le sommaire d'une page d'article
+// $page=false reinitialise le compteur interne des ancres
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
-	static $index; if(!$index) $index=0;
+	static $index; if(!$index || $page===false) $index=0;
+	if ($page===false) return;
 	define('_sommaire_NB_CARACTERES', 30);
 	// image de retour au sommaire
 	$titre = _T('cout:sommaire');
@@ -48,20 +50,20 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	return $sommaire;
 }
 
-function sommaire_sommaire($texte) {
-}
-
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
-	$texte = $texte0;
 	// si le sommaire est malvenu ou s'il n'y a pas de balise <h3>, alors on laisse tomber
 	$inserer_sommaire =  defined('_sommaire_AUTOMATIQUE')
-		?strpos($texte, _sommaire_SANS_SOMMAIRE)===false
-		:strpos($texte, _sommaire_AVEC_SOMMAIRE)!==false;
-	if (!$inserer_sommaire || strpos($texte, '<h3')===false) 
+		?strpos($texte0, _sommaire_SANS_SOMMAIRE)===false
+		:strpos($texte0, _sommaire_AVEC_SOMMAIRE)!==false;
+	if (!$inserer_sommaire || strpos($texte0, '<h3')===false) 
 		return $sommaire_seul?'RIEN_1':sommaire_imprimer($texte0);
-	// la, on y va...
+	// on retire les raccourcis du texte
+	$texte = sommaire_imprimer($texte0);
+	// et la, on y va...
 	$sommaire = ''; $i = 1; $nbh3 = 0;
+	// reinitialisation de l'index interne de la fonction
+	sommaire_d_une_page($texte, $nbh3, false);
 	// couplage avec l'outil 'decoupe_article'
 	if(defined('_decoupe_SEPARATEUR')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
@@ -84,8 +86,8 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	}
 
 // TODO : un modele html, puis recuperer_fond()
-$ancre='<a name="outil_sommaire" id="outil_sommaire"></a>';
-$sommaire='<div id="outil_sommaire" class="cs_sommaire" style="'.$fond.'"><div style="margin:3pt;"><div style="
+$ancre = '<a name="outil_sommaire" id="outil_sommaire"></a>';
+$sommaire = '<div id="outil_sommaire" class="cs_sommaire" style="'.$fond.'"><div style="margin:3pt;"><div style="
 border-bottom:1px dotted silver;
 line-height:1;
 position:inherit;
@@ -98,14 +100,18 @@ list-style-type:none;
 margin:0.3em 0.5em 0.1em 0.7em;
 padding:0pt;">'.$sommaire.'</ul></div></div>';
 
-	return $sommaire_seul?$ancre.$sommaire
-		:_sommaire_REM.$ancre.$sommaire._sommaire_REM.($sommaire_seul?'':$texte);
+	// si on ne veut que le sommaire, on renvoie le sommaire
+	// sinon, on n'insere ce sommaire en tete de texte que si la balise #CS_SOMMAIRE n'est pas activee
+	if($sommaire_seul) return $ancre.$sommaire;
+	if(defined('_sommaire_BALISE')) return $texte;
+	return _sommaire_REM.$ancre.$sommaire._sommaire_REM.$texte;
 }
 
 // fonction appelee par le traitement de #TEXTE/articles
 function sommaire_d_article($texte) {
-	// si la balise est pas utilisee ou s'il n'y a aucun intertitre, on ne fait rien
-	if(defined('_sommaire_BALISE') || (strpos($texte, '<h3')===false)) return $texte;
+	// s'il n'y a aucun intertitre, on ne fait rien
+	// si la balise est utilisee, il faut quand meme inserer les ancres de retour
+	if((strpos($texte, '<h3')===false)) return $texte;
 		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, false);
 }
 
