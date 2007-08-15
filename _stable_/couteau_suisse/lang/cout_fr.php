@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // --------------------
 
 	'admin' => "1. Administration",
-	'typo-corr' => "2. Am&eacute;liorations typographiques",
+	'typo-corr' => "2. Am&eacute;liorations des textes",
 	'typo-racc' => "3. Raccourcis typographiques",
 	'public' => "4. Affichage public",
 	'spip' => "5. Balises, filtres, crit&egrave;res",
@@ -260,14 +260,16 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2135]",
 
 // ---------------------------------------------------------------------------
 	'sommaire:nom' => 'Un sommaire pour vos articles',
-	'sommaire:description' => "Construit un sommaire pour votre article afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un intertitre</h3></code> ou raccourci SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).\n\nVous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :
+	'sommaire:description' => "Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un intertitre</h3></code> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).\n\nVous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :
 [[Largeur du sommaire (9 &agrave; 99) :->%lgr_sommaire% caract&egrave;res]]
-Vous pouvez aussi fixer le comportement du plugin : 
-- Soit il ins&egrave;re syst&eacute;matiquement un sommaire &agrave; chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
-- Soit il ins&egrave;re un sommaire uniquement dans les articles contenant la balise <code>[sommaire]</code>.
+Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
+- Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
+- Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
 [[Cr&eacute;ation syst&eacute;matique du sommaire :->%auto_sommaire%]]
-Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.
-_ Attention, le sommaire automatique ne sera pas construit si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
+Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'article automatiquement. Mais vous avez la possibilt&eacute; de placer le sommaire ailleurs qu'en t&ecirc;te de votre article et met &agrave; votre disposition une balise #CS_SOMMAIRE que vous pouvez activer ici :
+[[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]
+Attention, si vous n'activez pas la balise #CS_SOMMAIRE, aucun sommaire automatique ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
+_ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.
 _ Plus d'infos : [->http://www.spip-contrib.net/?article2378]",
 	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
 	'sommaire' => 'Sommaire',

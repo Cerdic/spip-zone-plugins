@@ -52,16 +52,14 @@ function sommaire_sommaire($texte) {
 }
 
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
-function sommaire_d_article_rempl($texte0, $rempl_texte=true) {
+function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	$texte = $texte0;
-	// on uniformise les intertitres...
-	$texte = preg_replace(array("/(^|[^{])[{][{][{]/S", "/[}][}][}]($|[^}])/S"), array("\$1<h3>", "</h3>$1"), $texte);
-	// s'il n'y a pas de balise <h3> ou si le sommaire est malvenu, alors on laisse tomber
+	// si le sommaire est malvenu ou s'il n'y a pas de balise <h3>, alors on laisse tomber
 	$inserer_sommaire =  defined('_sommaire_AUTOMATIQUE')
 		?strpos($texte, _sommaire_SANS_SOMMAIRE)===false
 		:strpos($texte, _sommaire_AVEC_SOMMAIRE)!==false;
-	if (strpos($texte, '<h3')===false || !$inserer_sommaire) 
-		return $rempl_texte?sommaire_imprimer($texte0):'';
+	if (!$inserer_sommaire || strpos($texte, '<h3')===false) 
+		return $sommaire_seul?'RIEN_1':sommaire_imprimer($texte0);
 	// la, on y va...
 	$sommaire = ''; $i = 1; $nbh3 = 0;
 	// couplage avec l'outil 'decoupe_article'
@@ -86,7 +84,8 @@ function sommaire_d_article_rempl($texte0, $rempl_texte=true) {
 	}
 
 // TODO : un modele html, puis recuperer_fond()
-$sommaire='<a name="outil_sommaire" id="outil_sommaire"></a><div id="outil_sommaire" class="cs_sommaire" style="'.$fond.'"><div style="margin:3pt;"><div style="
+$ancre='<a name="outil_sommaire" id="outil_sommaire"></a>';
+$sommaire='<div id="outil_sommaire" class="cs_sommaire" style="'.$fond.'"><div style="margin:3pt;"><div style="
 border-bottom:1px dotted silver;
 line-height:1;
 position:inherit;
@@ -99,27 +98,37 @@ list-style-type:none;
 margin:0.3em 0.5em 0.1em 0.7em;
 padding:0pt;">'.$sommaire.'</ul></div></div>';
 
-	return _sommaire_REM.$sommaire._sommaire_REM.($rempl_texte?$texte:'');
+	return $sommaire_seul?$ancre.$sommaire
+		:_sommaire_REM.$ancre.$sommaire._sommaire_REM.($sommaire_seul?'':$texte);
 }
 
-function sommaire_d_article($texte, $balise=false){
-	$GLOBALS['balise_cs_sommaire'] = $balise;
-	if (strpos($texte, '<h3')===false || strpos($texte, '{{{')===false) return $balise?'':$texte;
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, $balise);
+// fonction appelee par le traitement de #TEXTE/articles
+function sommaire_d_article($texte) {
+	// si la balise est pas utilisee ou s'il n'y a aucun intertitre, on ne fait rien
+	if(defined('_sommaire_BALISE') || (strpos($texte, '<h3')===false)) return $texte;
+		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, false);
 }
 
-// Balise #SOMMAIRE
-function balise_CS_SOMMAIRE($p) {
-	$type = $p->type_requete;
-	if ($type == 'articles') {
-		$_texte = champ_sql('texte', $p);
-		$p->code = "sommaire_d_article($_texte, true)";
-	} else {
-		$p->code = "'type:$type'";
+// fonction appelee par le traitement de #CS_SOMMAIRE
+function sommaire_d_article_balise($texte) {
+	// si la balise n'est pas utilisee ou s'il n'y a aucun intertitre, on ne fait rien
+	if(!defined('_sommaire_BALISE') || (strpos($texte, '<h3')===false)) return '';
+		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, true);
+}
+
+// on veut la balise
+if (defined('_sommaire_BALISE')) {
+	// Balise #CS_SOMMAIRE
+	function balise_CS_SOMMAIRE($p) {
+		$type = $p->type_requete;
+		if ($type == 'articles') {
+			$_texte = champ_sql('texte', $p);
+			$p->code = "$_texte";
+		} else {
+			$p->code = "''";
+		}
+		#$p->interdire_scripts = true;
+		return $p;
 	}
-
-	#$p->interdire_scripts = true;
-	return $p;
 }
-
 ?>

@@ -369,14 +369,22 @@ add_variable( array(
 	'defaut' => 1,
 	'code:%s' => "define('_sommaire_AUTOMATIQUE', %s);",
 ));
+add_variable( array(
+	'nom' => 'balise_sommaire',
+	'format' => 'nombre',
+	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
+	'defaut' => 0,
+	'code:%s' => "define('_sommaire_BALISE', %s);",
+));
 add_outil( array(
 	'id' => 'sommaire',
-	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%\n%%auto_sommaire%%",
+	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%\n%%auto_sommaire%%\n%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
 	'code:js' => '$(document).ready(function () { if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',
 	// inserer : $table_des_traitements['TEXTE'][]= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
+	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
 	'categorie' => 'typo-corr',
 ));
 
