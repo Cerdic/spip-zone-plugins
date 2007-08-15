@@ -43,4 +43,9 @@ function SquelettesMots_ajouter_boite_gauche($arguments) {
   return $arguments;
 }*/
 
+function SquelettesMots_header_prive($texte) {
+  $texte.= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_CHERCHER_SQUELETTES.'/chercher_squelettes_mots.css" />' . "\n";
+  return $texte;
+}
+
 ?>

@@ -19,6 +19,7 @@ Les auteurs n\'ont alors plus qu\'&agrave; associer un mot du groupe &agrave; l\
 									   'groupe' => 'Groupe:',
 									   'type' => 'Type:',
 									   'possibilites' => '@total_actif@ squelette(s).',
-									   'utiliserasquelette' => 'Cet article utilisera le squelette @squelette@'
+									   'utiliserasquelette' => 'Cet article utilisera le squelette @squelette@',
+'avertissement' => 'Attention le squelette @squelette@ n\'existe pas, cette r&egrave;gle ne marchera pas tant que le squelette par d&eacute;faut n\'est pas pr&eacute;sent.'
 );
 ?>

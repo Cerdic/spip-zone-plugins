@@ -27,7 +27,7 @@ function exec_config_chercher_squelettes_mots() {
   include_spip("inc/presentation");
   include_spip ("base/abstract_sql");
 
-  debut_page('&laquo; '._T('squelettesmots:titre_page').' &raquo;', 'configurations', 'mots_partout','',_DIR_PLUGIN_CHERCHER_SQUELETTES.'/chercher_squelettes_mots.css');
+  debut_page('&laquo; '._T('squelettesmots:titre_page').' &raquo;', 'configurations', 'mots_partout');
 
   if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
@@ -103,6 +103,11 @@ function exec_config_chercher_squelettes_mots() {
 	  $index++;
 	  echo '<fieldset class="regle">';
 	  echo '<legend>'._T('squelettesmots:reglei',array('id'=>$index)).'</legend>';
+	  if(!find_in_path($fond.'.html')) {
+		echo '<div class="avertissement">';
+		echo _T('squelettesmots:avertissement',array('squelette'=>'<em>'.$fond.'.html'.'</em>'));
+		echo '</div>';
+	  }
 	  echo '<div class="champs">';
 	  echo "<input type=\"checkbox\" class=\"actif\" name=\"actif[$index]\" checked=\"true\"/>";
 	  echo "<label for=\"fond_$index\" class=\"fond\">"._T('squelettesmots:fond')."</label>";
@@ -185,7 +190,7 @@ function exec_config_chercher_squelettes_mots() {
 	echo '</select>';
 	echo '</fieldset>';
 	
-	echo '<input type="submit" value="'._T('valider').'"/>';
+	echo '<input type="submit" value="'._T('bouton_valider').'"/>';
 	echo '</form>';
   } 
   
