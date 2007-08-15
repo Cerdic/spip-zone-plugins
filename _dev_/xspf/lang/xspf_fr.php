@@ -54,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jwlogo' => 'Logo',
 'desc_jwlogo' => 'Utilisez cette variable flash pour mettre un logo en filigrane dans le bon coin sup&eacute;rieur de l&rsquo;affichage. Tous les formats d&rsquo;image sont support&eacute;s, mais les fichiers png en transparence donnent les meilleurs r&eacute;sultats.',
 'size_anim' => 'Dimensions de l&rsquo;animation',
+'typefichier' => 'Type de fichiers g&eacute;r&eacute;s',
+'desc_typefichier' => 'D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par une virgule (par d&eacute;faut &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
 'display_size' => 'Dimensions de la zone de contenu de l&rsquo;animation',
 'color_anim' => 'Couleurs de l&rsquo;animation',
 

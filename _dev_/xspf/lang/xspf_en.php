@@ -75,6 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'desc_usecaptions'=>'Set this to false to force the captions to hide by default.',
 
 'size_anim' => 'Animation size',
+'typefichier' => '<NEW>Type de fichiers g&eacute;r&eacute;s',
+'desc_typefichier' => '<NEW>D&eacute;fini les types de fichiers pris en compte.<br />Les types doivent &ecirc;tre mentionn&eacute;s par leur extension et s&eacute;par&eacute;s par une virgule (par d&eacute;faut &laquo;flv,swf,mp3,jpg,png,gif&raquo;)',
 'display_size' => 'Display size',
 'color_anim' => 'Animation colors',
 'rotatetime' => 'rotatetime',
