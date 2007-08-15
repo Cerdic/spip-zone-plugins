@@ -50,11 +50,9 @@ function TableMatieres_Callback($matches, $retour_cId = false) {
 }
 
 function TableMatieres_AjouterAncres($texte) {
-	static $premier_passage = false;
-	static $texte_ancre = '';
-	static $nb_ancre = 0;
-	if($premier_passage == false) {
-		$premier_passage = true;
+	static $textes = array();
+	$md5 = md5($texte);
+	if(!$textes[$md5]) {
 		$texte_ancre = echappe_html($texte, 'TDM');
 		$texte_ancre = preg_replace_callback("/{{{(.*)}}}/UmsS", 'TableMatieres_Callback', $texte_ancre);
 		$nb_ancres = TableMatieres_Callback('', true);
@@ -66,8 +64,9 @@ function TableMatieres_AjouterAncres($texte) {
 			$texte_ancre = propre($texte_ancre);
 			$texte_ancre = echappe_retour($texte_ancre, 'TDM');
 		}
+		$textes[$md5] = $texte_ancre;
 	}
-	return $texte_ancre;
+	return $textes[$md5];
 }
 
 function TableMatieres_LienRetour($texte, $affiche_table = false) {
@@ -77,7 +76,7 @@ function TableMatieres_LienRetour($texte, $affiche_table = false) {
 	$_table = recuperer_fond('modeles/table_matieres');
 	return $affiche_table ?
 		$_table :
-		((TableMatieres_BalisePresente() ?
+		((TableMatieres_BalisePresente() ? //calcul :)
 			'' :
 			'<div class="encart">'.$_table.'</div>') .
 		preg_replace('/@@RETOUR_TDM@@/S', $_RETOUR_TDM, $texte));
@@ -95,7 +94,7 @@ function balise_TABLE_MATIERES_dist($p) {
 		erreur_squelette(_T('tdm:zbug_champ_tdm_hors_boucle_articles'), $p->id_boucle);
 		$p->code = "''";
 	} else {
-		if(TableMatieres_BalisePresente(true)) {
+		if(TableMatieres_BalisePresente(true)) { //REcalcul :(
 			$_texte = champ_sql('texte', $p);
 			$p->code = "$_texte";
 		}
