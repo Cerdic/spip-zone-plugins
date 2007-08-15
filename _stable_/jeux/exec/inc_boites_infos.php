@@ -24,7 +24,7 @@ function jeux_navigation_pagination() {
 		if ($id_jeu==$r['id_jeu']) $deb_aff = $i;
 	}
 	$num_rows = count($ids);
-	if(!$num_rows) return '';
+	if($num_rows<2) return '';
 
 	for ($i = 0; $i < $num_rows; $i += $nb_aff){
 		$deb = $i + 1;
