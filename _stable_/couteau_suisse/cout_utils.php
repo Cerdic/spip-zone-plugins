@@ -161,9 +161,10 @@ function is_pipeline_outil($pipe, &$set_pipe) {
 
 // est-ce que $traitement est un traitement ?
 function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises) {
-	if ($ok = preg_match(',^traitement:([A-Z_]+)(/[a-z]+)?:(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t))
-		$set_traitements_utilises[$t[1]][$t[4]][$t[3]][] = $fonction;
-	elseif ($ok = preg_match(',^traitement:([A-Z]+)$,', $traitement, $t))
+	if ($ok = preg_match(',^traitement:([A-Z_]+)/?([a-z]+)?:(pre|post)_([a-zA-Z0-9_-]+)$,', $traitement, $t)) {
+		if(!strlen($t[2])) $t[2] = 0;
+		$set_traitements_utilises[$t[1]][$t[2]][$t[4]][$t[3]][] = $fonction;
+	} elseif ($ok = preg_match(',^traitement:([A-Z]+)$,', $traitement, $t))
 		$set_traitements_utilises[$t[1]][0][] = $fonction;
 	return $ok;
 }
@@ -299,17 +300,20 @@ function cs_initialise_includes() {
 	$infos_pipelines['code_fonctions'][] = "\n// Filtre du Couteau Suisse qui rend un document imprimable\nfunction cs_imprimer(\$texte) {\n" 
 			.join("\n", $temp_filtre_imprimer)."\n\treturn \$texte;\n}";
 	// mise en code des traitements trouves
-	foreach($traitements_utilises as $b=>$balise){
-		foreach($balise as $f=>$fonction) {
-			if ($f===0)	$traitements_utilises[$b][$f] = $fonction[0].'(';
-			else {
-				$pre = isset($fonction['pre'])?join('(', $fonction['pre']).'(':'';
-				$post = isset($fonction['post'])?join('(', $fonction['post']).'(':'';
-				$traitements_utilises[$b][$f] = $post.$f.'('.$pre;
+	foreach($traitements_utilises as $b=>$balise) {
+		foreach($balise as $p=>$precision) {
+			foreach($precision as $f=>$fonction)  {
+				if ($f===0)	$traitements_utilises[$b][$p][$f] = $fonction[0].'(';
+				else {
+					$pre = isset($fonction['pre'])?join('(', $fonction['pre']).'(':'';
+					$post = isset($fonction['post'])?join('(', $fonction['post']).'(':'';
+					$traitements_utilises[$b][$p][$f] = $post.$f.'('.$pre;
+				}
 			}
+			$temp = "\$GLOBALS['table_des_traitements']['$b'][" . ($p=='0'?'':"'$p'") . "]='" . join('(', $traitements_utilises[$b][$p]).'%s';
+			$traitements_utilises[$b][$p] = $temp . str_repeat(')', substr_count($temp, '(')) . "';";
 		}
-		$temp = "\$GLOBALS['table_des_traitements']['$b'][]='" . join('(', $traitements_utilises[$b]).'%s';
-		$traitements_utilises[$b] = $temp . str_repeat(')', substr_count($temp, '(')) . "';";
+		$traitements_utilises[$b] = join("\n", $traitements_utilises[$b]);		
 	}
 	$infos_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
