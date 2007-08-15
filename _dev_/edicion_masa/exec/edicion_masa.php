@@ -41,7 +41,7 @@ function exec_edicion_masa(){
 	global $connect_statut,  $connect_id_auteur;
 	//global $modif;
 	
-	include_spip ("inc/presentation2");
+	include_spip ("inc/presentation");
 	include_spip ('inc/indexation');
 	include_spip ("inc/logos");
 	include_spip ("inc/session");
