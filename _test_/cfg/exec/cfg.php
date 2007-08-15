@@ -148,7 +148,7 @@ class cfg_dist extends cfg_formulaire
 	
 	echo "<br /><br /><br />\n";
 
-	gros_titre(sinon($this->titre, _L('Configuration des modules')));
+	echo gros_titre(sinon($this->titre, _L('Configuration des modules')), '', false);
 
 	echo  barre_onglets("configuration", "cfg");
 
@@ -190,7 +190,7 @@ class cfg_dist extends cfg_formulaire
 		echo $res;
 	}
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	if ($nom)
 		echo	debut_boite_info(true) .
@@ -198,7 +198,7 @@ class cfg_dist extends cfg_formulaire
 		fin_boite_info(true);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'cfg'),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'cfg'),'data'=>''));
 
 		echo
