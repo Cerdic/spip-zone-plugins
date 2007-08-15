@@ -73,7 +73,8 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 			$texte = join(_decoupe_SEPARATEUR, $pages);
 		}
 	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
-	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) return $texte0;
+	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) 
+		return $sommaire_seul?'':sommaire_imprimer($texte0);
 
 	// on traite l'image de fond
 	$img = find_in_path('img/sommaire/coin.gif');
