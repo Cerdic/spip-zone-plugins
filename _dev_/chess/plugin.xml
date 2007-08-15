@@ -1,0 +1,37 @@
+<plugin>
+	<nom>
+	<multi>
+	[en]Chess
+	[fr]Echecs
+	</multi>
+	</nom>
+	<auteur>
+	S&eacute;bastien Boureux, Jacques Bouthier, <br />
+  original script Alf Magne Kalleland owner of DHTMLGoodies
+	</auteur>
+	<version>
+	0.5
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+Ce plugin est destin&eacute; &agrave; lire des parties d&#39;&eacute;checs grace des fichiers PGN.<br />
+Il suffit de d&#39;ins&eacute;rer la balise <code> <chess+numero article></code> et de t&eacute;l&eacute;charger les documents pgn.
+	</description>
+	<prefix>
+	chess
+	</prefix>
+	<fonctions>chess_fonctions.php</fonctions>
+	<pipeline>
+	  <nom>insert_head</nom>
+	  <inclure>chess_fonctions.php</inclure>
+	  <action>insert_head</action>
+  </pipeline>
+  
+  <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+        <nom>header_prive</nom>
+        <inclure>chess_fonctions.php</inclure>
+    </pipeline>
+</plugin>

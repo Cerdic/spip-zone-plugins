@@ -1,0 +1,40 @@
+<?php
+
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+'titre' => 'Echec et Mat',
+'liste_details' => 'D&eacute;tails',
+'liste_parties' => 'Parties',
+'liste_fichiers_pgn' => 'Fichiers PGN',
+'pgn_dispo' => 'Fichiers PGN disponibles:',
+'parties_voir' => 'Voir',
+'parties_blanc' => 'Blanc',
+'parties_noir' => 'Noir',
+'parties_resultat' => 'Res.',
+'details_jouer' => 'Jouer',
+'details_stop' => 'Stop',
+'details_info' => 'Informations',
+'details_options' => 'Contr&ocirc;les...',
+'details_options_inverser' => 'Retourner',
+'details_options_lecture' => 'Lors de la lecture automatique, s&apos;il y a un commentaire:',
+'details_options_lecture_arret' => ' arr&ecirc;ter la lecture.',
+'details_options_lecture_continuer' => ' continuer la lecture au bout de ',
+'details_options_lecture_contsec' => ' secondes <strong>(Par d&eacute;faut : 3)</strong>',
+'details_options_pieces' => 'Mod&egrave;le des pi&egrave;ces de l&apos;&eacute;chiquier :',
+'details_options_taille' => 'Dimension du plateau',
+'details_options_taille_petit' => 'Petit',
+'details_options_taille_moyen' => 'Moyen',
+'details_options_taille_grand' => 'Grand',
+'details_options_habillage' => 'Habillage des pi&egrave;ces',
+'details_options_vitesse' => 'Vitesse de lecture automatique : un coup toutes les ',
+'details_options_vitsec' => 'secondes <strong>(Par d&eacute;faut : 0.1)</strong>',
+'details_info_blanc' => 'Blanc:',
+'details_info_noir' => 'Noir:',
+'details_info_resultat' => 'Resultat:',
+'details_info_evennement' => 'Evenement:',
+'details_info_date' => 'Date:',
+'details_info_round'=> 'Ronde:',
+'erreur_config' => '<strong>L&apos;affichage de ce plugins n&eacute;cessite une validation des options, <a href=ecrire/?exec=cfg&amp;cfg=chess >cliquez ici</a> pour acc&eacute;der &agrave; l&apos;interface de gestion.</strong>',
+);
+?>

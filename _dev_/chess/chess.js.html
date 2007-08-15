@@ -1,0 +1,11 @@
+[(#REM)
+ 	
+ 	        Charger la librairie chess
+ 	
+ 	]
+ 	#CACHE{7*24*3600,cache-client}
+ 	#HTTP_HEADER{'Content-Type: text/javascript'}
+ 	
+ 	[(#CHEMIN{js/chess.js}|spip_file_get_contents)]
+	[(#CHEMIN{js/ajax.js}|spip_file_get_contents)]
+	[(#CHEMIN{js/scroll-table.js}|spip_file_get_contents)]

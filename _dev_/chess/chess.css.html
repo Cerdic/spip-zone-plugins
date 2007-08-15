@@ -1,0 +1,360 @@
+[ (#REM) Feuille de style de la version texte
+	Nous utilisons un squelette afin de traiter l'orientation du texte
+]
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+/* Css rules for board with adjustables pixel squares */
+.ChessBoardInner[(#CONFIG{chess/taille})]{	/* The actual chess board div */
+	width:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px; /* largueur de 8 carreaux de taille variable */
+	height:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px; /* hauteur de 8 carreaux de taille variable */
+	border:1px solid #000;
+	top:0px;
+}
+
+.ChessBoard[(#CONFIG{chess/taille})]{	/* Chess board for adjustables pixel squares - total size of board including labels around the board (A-H,1-8) */ 
+	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille})])})]px;
+	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille})])})]px;
+	padding:0px;
+
+}
+.ChessPiece[(#CONFIG{chess/taille})]{	/* adjustables pixel chess pieces */
+	width:[(#CONFIG{chess/taille})]px;
+	height:[(#CONFIG{chess/taille})]px;
+}
+
+.ChessBoardLabel{	/* Labels A-F, 1-8 around chess board */
+	font-weight:bold;
+	font-family:Trebuchet MS;
+	font-size:0.9em;
+}
+
+/* The labels around the board are assigned to class "ChessBoardLabel ChessBoardLabel<size>", so the two rules above will be combined */
+
+.ChessMoveIndicator{	/* Square indicating where the last piece moved from and to */
+	border:3px solid red;
+}
+
+a.ActiveInlineChessMove{	/* How to highlight active chess move in the inline list of moves */
+	color:white;
+	background-color:#333;
+}
+/* principaux blocs de positionnement */
+
+
+  #mainContainer{
+	width:[(#EVAL{330 + (8 * [(#CONFIG{chess/taille})])})]px;
+	border: 1px gray solid; 
+/*	background-color:#2f5e80; */	
+ }
+ 
+#boardContainer{
+	padding-left:4px;
+	padding-top:10px;
+	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille})])})]px;
+	height:auto;
+	float:left;
+}
+
+#board {
+	width:[(#EVAL{15 + (8 * [(#CONFIG{chess/taille})])})]px;
+	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille})])})]px;
+	float:left;*/
+}
+
+#rightColumn{
+	width:290px;
+	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille})])})]px;
+	float:left;
+	position:relative;
+	margin-top:4px;
+}
+
+#gameListContainer{
+	width:290px;
+	height:[(#EVAL{20 + (8 * [(#CONFIG{chess/taille})])})]px;
+	background-repeat:no-repeat;
+	padding-top:10px;
+	padding-left:2px;
+	margin-left:5px;
+}
+
+/* fin des principaux blocs de positionnement*/
+
+/* encore des styles "généraux" */
+
+
+.ActiveTableChessMove{	/* How to highlight active chess move in the list of moves - "Table view" */
+	color:white;
+	background-color:#333;
+}
+span.InlineChessComment{
+	font-style:normal;
+	color:#00F;
+	display:block;
+	clear:both;
+	font-size:0.8em;
+}
+
+.ActiveGameInTable{	/* Active game in list of games - table */
+	font-weight:bold;
+	background-color:#6666ff;
+	color:#FFF;
+}
+.ActiveGameInTable a{ /* A tag inside active game in gamelist table */
+	color:#FFF;
+}
+
+.GameListOddRow{	/* List of games - odd rows in table */
+	background-color:#ffffff;
+}
+.GameListEvenRow{	/* List of games - even row in table */
+	background-color:#ccccff;
+}
+
+.InlineChessVariationBlock{
+	color:#777;
+	display:block;
+}
+.InlineChessVariationBlock a{
+	color:#777;
+}
+a.ActiveInlineVariationChessMove{
+	color:white;
+	background-color:#00F;	
+}
+
+/* ========================================================================== */
+/*					Partie de code pour la mise en forme globale					      */
+/* ========================================================================== */
+
+#divMoves{
+	clear:both;
+	font-size:0.9em;
+	font-style:italic;
+	width:290px;
+	height:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px;
+	overflow:auto;
+	background-color:#FFF;
+	margin-top:10px;
+	padding:5px;
+	border:1px solid #000;
+}
+
+#divMoves a{
+	text-decoration:none;
+}
+a{
+	color:#363636;
+	text-decoration:underline;
+}
+/* ========================================================================== */
+/* Les flèches, jouer, stop retourner			      */
+/* ========================================================================== */
+
+ #buttons{
+	margin-left:13px;
+	background-color:#ccccff;
+  width:auto;
+} 
+
+/* remplacer input par fleche pour éviter les conflits avec les boites de saisie "input" d'autres pages de spip */
+
+.fleche {
+	width:20px;
+	border:0;
+	background-color:#ccccff;
+	margin:0px;
+	padding:2px;
+	float:left;
+	font-size:0.8em;
+}
+.jouer{
+	width:45px;
+	border:0;
+	background-color:#ccccff;
+	margin:0px;
+	padding:2px;
+	float:left;
+	font-size:0.8em;
+}
+.flip{
+	width:65px;
+	border:0;
+	background-color:#ccccff;
+	margin:0px;
+	padding:2px;
+	float:left;
+	font-size:0.8em;
+}
+/* ========================================================================== */
+/* Paramétrer le cartouche du bas avec noms, prénoms élo etc...			      */
+/* ========================================================================== */
+#details_white {color:blue;}
+#details_white_elo {color:blue;}
+#details_black {color:blue;}
+#details_black_elo {color:blue;}
+#details_result {color:blue;}
+#details_event {color:blue;}
+#details_date {color:blue;}
+#details_round {color:blue;}
+
+.infos {
+font-size:0.8em;
+font-weight:bold;
+margin-left:13px;
+clear:left;
+}
+
+
+  
+
+#players{
+  margin-top:5px;
+	text-align:center;
+	clear:both;
+	font-size:[(#CONFIG{chess/taille|=={30}|?{'1.1','1.3'})]em;
+	font-weight:bold;
+	height:[(#CONFIG{chess/taille|=={30}|?{'24','30'})]px;
+	width:100%;
+	color:#00000;
+}
+
+#moveTab{
+	display:none;
+}
+#gameList{
+  margin-top:10px;
+	width:290px;
+	height:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px;
+}
+#tabs{
+	width:290px;
+	left:2px;
+	text-align:center;
+}
+  #tabs div{
+	float:left; 
+	margin-left:5px;
+	background-repeat:no-repeat;
+	width:80px; 
+	height:15px;
+	font-size:0.8em;
+	text-align:left;
+	line-height:25px;
+}
+#tabs div span{
+	font-weight:bold;
+	display:block;
+}
+#scrollDivGames{
+	overflow: auto; 
+	width: 290px; 
+	height: auto;  /* hauteur auto pour essayer d'adapter la boite */
+	border-left: 1px gray solid; 
+	border-bottom: 1px gray solid;
+	padding:0px;
+	margin: 0px;
+	background-color:#FFF
+}
+ table,tr,td{
+	vertical-align:top;
+}  
+#pgnList{
+	display:none;
+}
+ #divListOfPgns{	/* Box where the actual pgn links are located */
+	width: 290px; 
+	height:[(#EVAL{8 * [(#CONFIG{chess/taille})]})]px;
+	background-color:#FFF;
+	margin-top:15px;
+} 
+
+.tabDetails{
+	padding:2px;
+	text-align:center;
+	width:40px;
+	margin-right:3px;
+	font-size:0.8em;
+	float:left;
+	border:1px solid #000;
+	border-bottom:0px;
+	position:relative;
+}
+
+.tabDetailsActive{
+	background-color:#FFF;
+  width:40px;	
+}
+.tabDetailsInactive{
+	background-color:#CCC;
+	border-bottom:1px solid #000;
+	position:relative;
+	top:-1px;
+	margin-top:2px;
+	height:16px;
+	width:40px;
+}
+
+#gameDetails td{
+	font-size:12px;
+	width:120px;
+}
+  td.tableWidget_headerCell{
+  font-type:strong;
+	background-color:#ccccff;
+	color:#ffffff;
+	border:1px solid ;	
+}
+div.widget_tableDiv{
+	border:1px solid #444;
+}
+div.ChessMoveIndicator{
+	border:3px solid #F9F340;
+	opacity:0.5;
+	filter:alpha(opacity=50);
+}
+
+div.ChessBoardInner[(#CONFIG{chess/taille})]{
+	border:1px solid #70472a;
+	border-left:1px solid #54351f;
+	border-bottom:1px solid #54351f;
+}
+
+/*===========================================================================*/
+/*  Insertion du fichier scroll-table.css pour insérer des variables  */
+/*============================================================================*/
+
+.widget_tableDiv, .tableWidget tbody{
+	background-color:#FFF;
+}
+.tableWidget{
+	font-family:arial;
+	font-size:12px;	
+}
+/* End layout CSS */	
+.widget_tableDiv {
+	border:1px solid #ACA899;	/* Border around entire widget */
+	overflow:scroll;
+	overflow-y:scroll;
+	overflow:-moz-scrollbars-vertical;
+	height:[(#EVAL{20 + 8 * [(#CONFIG{chess/taille})]})]px;
+}
+html>body div.widget_tableDiv {
+	overflow: hidden;
+}
+.tableWidget thead{
+  font-weight:bold;
+	position:relative;
+}
+.tableWidget thead tr{
+	position:relative;
+	top:0px;
+	bottom:0px;
+}
+.tableWidget .scrollingContent{
+	overflow-y:scroll;
+	overflow:-moz-scrollbars-vertical;
+	width:100%;
+}

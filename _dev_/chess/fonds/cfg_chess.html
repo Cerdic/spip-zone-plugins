@@ -1,0 +1,64 @@
+[(#REM) titre=Voir une partie d'Echecs]
+
+[(#REM) icone=logo_chess.gif]
+
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../images/logo_chess_45.png' width='45' height='45' alt='Logo Echec et Mat' style="float:#LANG_RIGHT;" />
+})]
+
+<!-- descriptif=
+
+#GET{logo}
+<h4>
+Configuration du plugin Chess
+</h4>
+Certains param&egrave;tres &agrave; modifier pour rendre l'interface plus adapt&eacute;e au site.<br />
+<hr>
+S&eacute;lectionnez le type de boucle pour que la liste des fichiers concerne<br />
+- l&apos;article XX,<br />
+- la rubrique XX,<br />
+- le site entier.
+-->
+
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+
+<fieldset><legend><:chess:details_options:></legend>
+  <p>
+  <label><:chess:details_options_taille:></label>
+  <select name="taille">
+    <option value="30" [(#ENV{taille}|=={"30"}|?{selected="selected",''})]><:chess:details_options_taille_petit:> - 30x30</option>
+    <option value="45" [(#ENV{taille}|=={"45"}|?{selected="selected",''})]><:chess:details_options_taille_moyen:> - 45x45</option>
+    <option value="60" [(#ENV{taille}|=={"60"}|?{selected="selected",''})]><:chess:details_options_taille_grand:> - 60x60</option>
+  </select>
+  </p>
+  <p>
+  <label><:chess:details_options_vitesse:></label>
+  <label><input type="text" name="vitesse" value="[(#ENV{vitesse, 0.1})]" size="3" /> <:chess:details_options_vitsec:></label>
+  </p>
+    <p>
+  <label><:chess:details_options_pieces:></label>
+  <select name="pieces">
+    <option value="alpha" [(#ENV{pieces}|=={"alpha"}|?{selected="selected",''})]>alpha</option>
+    <option value="cases" [(#ENV{pieces}|=={"cases"}|?{selected="selected",''})]>cases</option>
+    <option value="leipzig" [(#ENV{pieces}|=={"leipzig"}|?{selected="selected",''})]>leipzig</option>
+    <option value="merida" [(#ENV{pieces}|=={"merida"}|?{selected="selected",''})]>merida</option>
+    <option value="motif" [(#ENV{pieces}|=={"motif"}|?{selected="selected",''})]>motif</option>
+    <option value="smart" [(#ENV{pieces}|=={"smart"}|?{selected="selected",''})]>smart</option>
+    <option value="traveler" [(#ENV{pieces}|=={"traveler"}|?{selected="selected",''})]>traveler</option>
+  </select>
+  </p>
+  <p>
+  <label><:chess:details_options_lecture:></label><br />
+	<input type="radio" name="arreter" value=true [(#ENV{arreter}|=={true}|?{checked,''})]><:chess:details_options_lecture_arret:><br />
+	<input type="radio" name="arreter" value=false [(#ENV{arreter}|=={false}|?{checked,''})]><:chess:details_options_lecture_continuer:><input type="text" name="delai" value="[(#ENV{delai, 3})]" size="3" /><:chess:details_options_lecture_contsec:></label>
+  </p>
+</fieldset>
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
