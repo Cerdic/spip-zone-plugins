@@ -9,13 +9,23 @@
  */
 
 
+
+
+
+
 if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 	define('_DIR_PLUGIN_GESTIONDOCUMENTS',(_DIR_PLUGINS.end($p)));
 }
 
 
+
+
+
+
 // Fonction appelee dans une boucle, calculer les invariants au premier appel.
+
+
 
 // http://doc.spip.org/@inc_formater_article_dist
 function inc_formater_article($row){
@@ -114,34 +124,6 @@ function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
 charger_generer_url();
 
 
-function inc_afficher_objets($type, $titre_table,$requete,$formater=''){
-	if ($afficher = charger_fonction("afficher_{$type}s",'inc',true)){
-		return $afficher($titre_table,$requete,$formater);
-	}
-
-	if (($GLOBALS['meta']['multi_rubriques'] == 'oui'
-	     AND (!isset($GLOBALS['id_rubrique'])))
-	OR $GLOBALS['meta']['multi_articles'] == 'oui') {
-		$afficher_langue = true;
-
-		if (isset($GLOBALS['langue_rubrique'])) $langue_defaut = $GLOBALS['langue_rubrique'];
-		else $langue_defaut = $GLOBALS['meta']['langue_site'];
-	} else $afficher_langue = $langue_defaut = '';
-
-	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-
-	if ($affrub) $largeurs = array('7', '', '', '', '188', '38');
-	else $largeurs = array('7','', '', '', '100', '38');
-	$styles = array('arial11', 'arial11', 'arial1', 'arial1', 'arial1 centered', 'arial1');
-
-	$arg = array( $afficher_langue, $affrub, $langue_defaut);
-	if (!function_exists($fonction_ligne = "afficher_{$type}s_boucle")){
-		$fonction_ligne = "afficher_objet_boucle";
-		$arg = array($type,id_table_objet($type),$afficher_langue, $affrub, $langue_defaut);
-	}
-	return affiche_tranche_bandeau($requete, icone_table($type), 'toile_foncee', "ligne_blanche", $tmp_var, $titre_table, false, $largeurs, $styles, $fonction_ligne, $arg);
-}
-
 
 
 function exec_edicion_masa(){
@@ -153,7 +135,7 @@ function exec_edicion_masa(){
 	include_spip ('inc/indexation');
 	include_spip ("inc/logos");
 	include_spip ("inc/session");
-	include_spip ("inc/afficher_objets");
+
 
 
 	//
@@ -447,7 +429,16 @@ if($_POST['enviar']==_T('edicion:cambiar_statut') ){
 
 echo "<form name=\"lista\" id=\"lista\" action=\"?exec=edicion_masa\" method=\"post\">";
 echo "<input type=\"checkbox\" onclick=\"checkAll(document.getElementById('lista'));\" />"._T("edicion:invertir");
-echo inc_afficher_objets('article',_T('edicion:listado'),array("FROM" =>"spip_articles AS articles", "WHERE" => $where, 'ORDER BY' => "articles.date DESC"));
+
+
+
+//echo "<p>";
+echo afficher_articles(_T('edicion:listado'), array("FROM" =>"spip_articles AS articles", "WHERE" => $where, 'ORDER BY' => "articles.date DESC"));
+//echo "</p>";
+
+
+
+//echo afficher_objets('article',_T('edicion:listado'),array("FROM" =>"spip_articles AS articles", "WHERE" => $where, 'ORDER BY' => "articles.date DESC"));
 
 
 
