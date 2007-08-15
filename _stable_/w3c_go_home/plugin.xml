@@ -29,4 +29,9 @@
 		<inclure>w3cgh_pipeline.php</inclure>
 	</pipeline>
 	<chemin dir='' />
+	<bouton id='w3c_go_home' parent='configuration'>
+		<icone>images/xml-valid-24.png</icone>
+		<titre>Valider le site</titre>
+		<url>w3c_go_home</url> <!-- facultatif, par defaut prendre l'id comme nom d'exec pour faire ?exec=xx -->
+	</bouton>
 </plugin>
