@@ -62,5 +62,22 @@ function xspf_header_prive($texte) {
 	}
 	return $texte;
 }
-?>
 
+// Le pipeline affichage_final, execute a chaque hit sur toute la page
+function xspf_affichage_final($page) {
+
+    // on regarde rapidement si la page a des classes player
+    if (strpos($page, 'class="player"')===FALSE)
+        return $page;
+
+    // Si oui on ajoute le js de swfobject
+    $jsFile = find_in_path('javascript/swfobject.js');
+
+	$head = "<script src='$jsFile' type='text/javascript'></script>";
+
+	$pos_head = strpos($page, '</head>');
+
+	return substr_replace($page, $head, $pos_head, 0);
+}
+
+?>

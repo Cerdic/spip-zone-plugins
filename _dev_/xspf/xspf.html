@@ -1,4 +1,67 @@
-#CACHE{0}[(#HTTP_HEADER{Content-type: application/xspf+xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?><playlist version="1" xmlns="http://xspf.org/ns/0/">[(#REM) -------------------- Il faut tout laisser sur une ligne, sinon VLC ne parvient pas à tout lire s'il y a un saut  de ligne ----------------]	<title>[(#NOM_SITE_SPIP|translitteration)]<BOUCLE_art(ARTICLES){id_article}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_art><BOUCLE_rub(RUBRIQUES){id_rubrique}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_rub><BOUCLE_doc(DOCUMENTS){id_document}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_doc><BOUCLE_SEC(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_SEC>	</title>[(#REM) -------------------- Cette boucle est fonctionnelle. Elle accepte des id's d'articles, de rubriques, de documents, de breves ou de mots-clés----------------]	<B_docs>	<trackList>[(#REM) -------------------- Pour jw uniquement ----------------]		
-		[(#ENV{prerolllocation}|!={''}|?{' ',''})		<track>			<location>#ENV{prerolllocation}.flv</location>			<info>#ENV{prerolllink}</info>			<album>preroll</album>		</track>]
-[(#REM) -------------------- Boucle générale de génération des listes de lecture xspf ----------------]	<BOUCLE_docs(DOCUMENTS){id_article ?}{id_rubrique ?}{id_document ?}{id_breve ?}{id_mot ?}{mode=document}{extension==#ENV{type,.}}{par num titre}{par titre}{par id_document}>		<track>			<location>[(#URL_DOCUMENT|url_absolue)]</location>			[<image>(#LOGO_DOCUMENT||extraire_attribut{src}|match{dist/vignettes}|?{#LOGO_ARTICLE_RUBRIQUE||sinon{#LOGO_BREVE_RUBRIQUE}||sinon{#LOGO_SITE_SPIP},#LOGO_DOCUMENT}|extraire_attribut{src}|url_absolue)</image>]	[(#REM) -------------------- Pour jw ----------------]			<title>[(#TITRE|supprimer_numero|texte_backend|sinon{#FICHIER}|replace{'IMG/',''}|texte_backend)]</title>	[(#REM) -------------------- Pour musicplayer ----------------]			<annotation>[(#TITRE|supprimer_numero|translitteration|sinon{#FICHIER}|replace{'IMG/',''}|texte_backend)]</annotation>			[(#ENV{creator}|!={''}|?{' ',''})<creator>#ENV{creator}</creator>]		</track>	</BOUCLE_docs>[(#REM) -------------------- Pour jw uniquement ----------------]	
-		[(#ENV{postrolllocation}|!={''}|?{' ',''})		<track>			<location>#ENV{postrolllocation}.flv</location>			<info>#ENV{postrolllink}</info>			<album>postroll</album>		</track>]	</trackList>	</B_docs>[(#REM) -------------------- Les deux boucles qui suivent sont en cours de développement. Elles devraient à terme permettre de sortir la liste des documents associés à des articles ET à des rubriques par branche (c-à-d y compris dans l'ensemble des sous-rubriques contenue dans la rubrique sélectionnée)Apparemment la piste engagée n'est pas bonne n'hésitez pas à modifier les lignes ci-dessous, cela n'affectera en rien le fonctionnement du plugin----------------]<B_rubsecteur>	<trackList>	<BOUCLE_rubsecteur(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>		#ID_RUBRIQUE		<BOUCLE_docsrubsecteur(DOCUMENTS){id_rubrique}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>		#ID_RUBRIQUE		<track>			<location>[(#URL_DOCUMENT|url_absolue)]</location>			<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>			<annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>		</track>		</BOUCLE_docsrubsecteur>	</BOUCLE_rubsecteur>	<BOUCLE_artsecteur(ARTICLES){id_secteur}>		<BOUCLE_docsartsecteur(DOCUMENTS){id_article}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>		#ID_ARTICLE		<track>			<location>[(#URL_DOCUMENT|url_absolue)]</location>			<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>			<annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>			<creator>[(#TITRE|supprimer_numero|texte_backend)]</creator>		</track>		</BOUCLE_docsartsecteur>	</BOUCLE_artsecteur>	</trackList>	</B_rubsecteur></playlist>
+#CACHE{0}[(#HTTP_HEADER{Content-type: application/xspf+xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+[(#REM) -------------------- Il faut tout laisser sur une ligne, sinon VLC ne parvient pas à tout lire s'il y a un saut  de ligne ----------------]
+	<title>[(#NOM_SITE_SPIP|translitteration)]<BOUCLE_art(ARTICLES){id_article}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_art><BOUCLE_rub(RUBRIQUES){id_rubrique}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_rub><BOUCLE_doc(DOCUMENTS){id_document}>[: (#TITRE|supprimer_numero|texte_backend)]</BOUCLE_doc><BOUCLE_SEC(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>[: (#TITRE|translitteration)]</BOUCLE_SEC>
+	</title>
+[(#REM) -------------------- Cette boucle est fonctionnelle. Elle accepte des id's d'articles, de rubriques, de documents, de breves ou de mots-clés----------------]
+	<B_docs>
+	<trackList>
+[(#REM) -------------------- Pour jw uniquement ----------------]		
+		[(#ENV{prerolllocation}|!={''}|?{' ',''})
+		<track>
+			<location>#ENV{prerolllocation}.flv</location>
+			<info>#ENV{prerolllink}</info>
+			<album>preroll</album>
+		</track>]
+[(#REM) -------------------- Boucle générale de génération des listes de lecture xspf ----------------]
+	<BOUCLE_docs(DOCUMENTS){id_article ?}{id_rubrique ?}{id_document ?}{id_breve ?}{id_mot ?}{mode=document}{extension==#ENV{type,.}}{par num titre}{par titre}{par id_document}>
+		<track>
+			<location>[(#URL_DOCUMENT|url_absolue)]</location>
+			[<image>(#LOGO_DOCUMENT||extraire_attribut{src}|match{dist/vignettes}|?{#LOGO_ARTICLE_RUBRIQUE||sinon{#LOGO_BREVE_RUBRIQUE}||sinon{#LOGO_SITE_SPIP},#LOGO_DOCUMENT}|extraire_attribut{src}|url_absolue)</image>]
+	[(#REM) -------------------- Pour jw ----------------]
+			<title>[(#TITRE|supprimer_numero|texte_backend|sinon{#FICHIER}|replace{'IMG/',''}|texte_backend)]</title>
+	[(#REM) -------------------- Pour musicplayer ----------------]
+			<annotation>[(#TITRE|supprimer_numero|translitteration|sinon{#FICHIER}|replace{'IMG/',''}|texte_backend)]</annotation>
+			[(#ENV{creator}|!={''}|?{' ',''})<creator>#ENV{creator}</creator>]
+		</track>
+	</BOUCLE_docs>
+[(#REM) -------------------- Pour jw uniquement ----------------]	
+		[(#ENV{postrolllocation}|!={''}|?{' ',''})
+		<track>
+			<location>#ENV{postrolllocation}.flv</location>
+			<info>#ENV{postrolllink}</info>
+			<album>postroll</album>
+		</track>]
+	</trackList>
+	</B_docs>
+
+[(#REM) -------------------- Les deux boucles qui suivent sont en cours de développement. Elles devraient à terme permettre de sortir la liste des documents associés à des articles ET à des rubriques par branche 
+(c-à-d y compris dans l'ensemble des sous-rubriques contenue dans la rubrique sélectionnée)
+Apparemment la piste engagée n'est pas bonne n'hésitez pas à modifier les lignes ci-dessous, cela n'affectera en rien le fonctionnement du plugin----------------]
+<B_rubsecteur>
+	<trackList>
+	<BOUCLE_rubsecteur(RUBRIQUES){id_secteur=[(#ENV{id_secteur}|sinon{-1})]}>
+		#ID_RUBRIQUE
+		<BOUCLE_docsrubsecteur(DOCUMENTS){id_rubrique}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>
+		#ID_RUBRIQUE
+		<track>
+			<location>[(#URL_DOCUMENT|url_absolue)]</location>
+			<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>
+			<annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>
+		</track>
+		</BOUCLE_docsrubsecteur>
+	</BOUCLE_rubsecteur>
+	<BOUCLE_artsecteur(ARTICLES){id_secteur}>
+		<BOUCLE_docsartsecteur(DOCUMENTS){id_article}{mode=document}{extension==#ENV{type,.}}{par num titre}{par id_document}>
+		#ID_ARTICLE
+		<track>
+			<location>[(#URL_DOCUMENT|url_absolue)]</location>
+			<image>[(#LOGO_DOCUMENT||extraire_attribut{src}|sinon{[(#GET{img_defaut})]}|url_absolue)]</image>
+			<annotation>[(#TITRE|supprimer_numero|texte_backend)]</annotation>
+			<creator>[(#TITRE|supprimer_numero|texte_backend)]</creator>
+		</track>
+		</BOUCLE_docsartsecteur>
+	</BOUCLE_artsecteur>
+	</trackList>
+	</B_rubsecteur>
+</playlist>
