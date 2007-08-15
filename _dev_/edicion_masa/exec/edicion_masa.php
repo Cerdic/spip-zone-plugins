@@ -282,6 +282,8 @@ if(_request(id_rubrique)){
 
 }
 if(_request(recherche)){
+/*ver!!!*/
+
 	$where = "id_rubrique='"._request(id_rubrique)."'";
 }
 
@@ -503,6 +505,10 @@ echo "</tr>";
 echo "</table></div>";
 
 echo "</form>";
+
+
+	fin_page();
+	exit;
 
 }
 
