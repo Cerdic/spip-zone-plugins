@@ -14,13 +14,13 @@ Une r&egrave;gle sp&eacute;cifie:
 Les squelettes seront alors nomm&eacute;s {{fond-mot.html}}. Le plugin va d\'abord chercher pour un squelette qui correspond &agrave; un mot clef attach&eacute; &agrave; l\'&eacute;l&eacute;ment et s\'il n\'en trouve pas, il cherchera un squelette qui correspond &agrave; un des mots clefs d\'une des rubriques parentes.
 
 Les auteurs n\'ont alors plus qu\'&agrave; associer un mot du groupe &agrave; l\'&eacute;l&eacute;ment.',
-		
 	'reglei' => 'R&egrave;gle @id@',
 	'nouvelle_regle' => 'Nouvelle r&egrave;gle',
 	'fond' => 'Fond:',
 	'groupe' => 'Groupe:',
 	'type' => 'Type:',
 	'possibilites' => '@total_actif@ squelette(s).',
-	'utiliserasquelette' => 'Cet article utilisera le squelette @squelette@'
+	'utiliserasquelette' => 'Cet article utilisera le squelette @squelette@',
+'avertissement' => 'Attention le squelette @squelette@ n\'existe pas, cette r&egrave;gle ne marchera pas tant que le squelette par d&eacute;faut n\'est pas pr&eacute;sent.'
 );
 ?>

@@ -14,12 +14,13 @@ A rule specify:
 The templates will then be named {{fond-keyword.html}}. The plugin search first for a template that match a keyword associated to the element. If not found (and if applicable), the plugin then search for a template matching a keyword associated to one of the subsuming section.
 
 The author then only have to add a keyword from the right group to select the template used.',
+									   'reglei' => 'rule @id@',
+									   'nouvelle_regle' => 'new rule',
+									   'fond' => 'Fond:',
+									   'groupe' => 'Group:',
+									   'type' => 'Type:',
+									   'possibilites' => '@total_actif@ template(s) availlable.',
+									   'avertissement' => 'The template @squelette@ doesn\'t exist. This rule will not work properly if the default template is not present.'
 
-	'reglei' => 'rule @id@',
-	'nouvelle_regle' => 'new rule',
-	'fond' => 'Fond:',
-	'groupe' => 'Group:',
-	'type' => 'Type:',
-	'possibilites' => '@total_actif@ template(s) availlable.'
 );
 ?>
