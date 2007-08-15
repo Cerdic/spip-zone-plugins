@@ -71,6 +71,12 @@
 		
 		fin_boite_info();	
 		
+		debut_raccourcis();
+		echo '<p>';
+		icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), generer_url_ecrire('edit_relances'),  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
+		echo '</p>';
+		fin_raccourcis();
+		
 		debut_droite();
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_liste_actifs'));		

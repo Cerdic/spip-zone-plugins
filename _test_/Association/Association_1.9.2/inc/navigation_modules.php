@@ -21,14 +21,12 @@
 		
 		$link1= generer_url_ecrire('adherents');
 		$link2= generer_url_ecrire('dons');
-		$link3= generer_url_ecrire('edit_relances');
 		$link4= generer_url_ecrire('ventes');
 		$link5= generer_url_ecrire('activites');
 		$link6= generer_url_ecrire('comptes');
 		$link7= generer_url_ecrire('ressources');
 		
-		echo onglet(_T('asso:menu2_titre_gestion_membres'), $link1, '', 'Membres', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' ); 
-		echo onglet(_T('asso:menu2_titre_relances_cotisations'), $link3, '', 'Cotisations',  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
+		echo onglet(_T('asso:menu2_titre_gestion_membres'), $link1, '', 'Membres', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );  
 		if (lire_config("association/dons")) {
 			echo onglet(_T('asso:menu2_titre_gestion_dons'), $link2, '', 'Dons', '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/bienfaiteur.png','rien.gif' ); 
 		}

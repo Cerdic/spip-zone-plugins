@@ -87,10 +87,13 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_titre_ajout_adherent' => 'Ajout d\'adh&eacute;rent',
 	'adherent_titre_ajouter_membre_actif' => 'Ajouter des membres actifs',
 	'adherent_titre_ajouter_membre' => 'Ajouter un membre',
-	'adherent_titre_fiche_signaletique' => 'Fiche signal&eacute;tique membre',
+	'adherent_titre_historique_membre' => 'Historique membre',
 	'adherent_titre_fiche_signaletique_id' => 'Fiche signal&eacute;tique #@id@',
 	'adherent_titre_historique_cotisations' => 'Historique des cotisations',
 	'adherent_titre_historique_activites' => 'Historique des activit&eacute;s',
+	'adherent_titre_historique_ventes' => 'Historique des ventes',
+	'adherent_titre_historique_dons' => 'Historique des dons',
+	'adherent_titre_historique_prets' => 'Historique des pr&ecirc;ts',
 	'adherent_titre_liste_actifs' => 'Tous les membres actifs',
 
 	# Libelle
