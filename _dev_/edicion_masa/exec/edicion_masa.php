@@ -7,8 +7,7 @@
  * 
  *
  */
-include_spip('inc/afficher_objets');
-include_spip('inc/presentation');
+
 
 if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
@@ -124,12 +123,14 @@ function exec_edicion_masa(){
 	include_spip('inc/indexation');
 	include_spip ("inc/logos");
 	include_spip ("inc/session");
+	include_spip("inc/afficher_objets");
+
 
 	//
 	// Recupere les donnees
 	//
 
-	debut_page(_T("edicion:tous_docs"), "documents", "documents");
+	debut_page(_T("edicion:edicion_masa"), "documents", "documents");
 	debut_gauche();
 
 
