@@ -5,7 +5,7 @@ function validateur_apinc_dist($action, $url= ""){
 	
 	switch ($action){
 		case 'infos':
-			return "<a href='http://validateur-accessibilite.apinc.org/'>Validateur Accessibili&eacute; apinc</a>";
+			return "<a href='http://validateur-accessibilite.apinc.org/'>Validateur Accessibilit&eacute; apinc</a>";
 			break;
 		case 'test':
 			// validation accessibilite
