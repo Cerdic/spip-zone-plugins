@@ -135,6 +135,16 @@
 			<option [(#CONFIG{xspf/mpluseaudio}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>
 		</select>
 		
+		<p><strong><:xspf:opt_javascript:></strong></p>
+		<label><a href="#mplenablejs" title="<:xspf:enablejs:> - <:xspf:desc_enablejs:>"><:xspf:enablejs:></a></label>&nbsp;
+		<select name="mplenablejs" id="mplenablejs">
+			<option [(#CONFIG{xspf/mplenablejs}|=={false}|?{selected="selected",''})]value="false"><:xspf:false:></option>
+			<option [(#CONFIG{xspf/mplenablejs}|=={true}|?{selected="selected",''})]value="true"><:xspf:true:></option>&nbsp;&nbsp;
+		</select>		
+			
+		<label for="mpljavascriptid"><a href="#mpljavascriptid" title="<:xspf:javascriptid:> - <:xspf:desc_javascriptid:>"><:xspf:javascriptid:></a></label>&nbsp;
+		<input type="text" name="mpljavascriptid" class="forml" style="width:200px;display:inline" id="mpljavascriptid" value="#CONFIG{xspf/mpljavascriptid}" />
+				
 	</fieldset>]
 	
 [(#CHEMIN{lib/jw_media_player/mediaplayer.swf}|?{'',' '})
