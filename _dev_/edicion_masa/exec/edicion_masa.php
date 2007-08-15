@@ -429,10 +429,10 @@ echo "<input type=\"checkbox\" onclick=\"checkAll(document.getElementById('lista
 
 
 //echo "<p>";
-//afficher_articles(_T('edicion:listado'), array("FROM" =>"spip_articles AS articles", "WHERE" => $where, 'ORDER BY' => "articles.date DESC"));
+afficher_articles(_T('edicion:listado'), array("FROM" =>"spip_articles AS articles", "WHERE" => $where, 'ORDER BY' => "articles.date DESC"));
 //echo "</p>";
 
-echo afficher_objets('article',_T('edicion:listado'),array("FROM" =>"spip_articles AS articles", "WHERE" => $where, 'ORDER BY' => "articles.date DESC"));
+//echo afficher_objets('article',_T('edicion:listado'),array("FROM" =>"spip_articles AS articles", "WHERE" => $where, 'ORDER BY' => "articles.date DESC"));
 
 
 
