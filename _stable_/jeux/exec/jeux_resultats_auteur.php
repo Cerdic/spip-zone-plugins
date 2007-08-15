@@ -9,8 +9,8 @@ function exec_jeux_resultats_auteur(){
 	$par = _request('par');
 	($par == '') ? $par='resultat_court' : $par = $par;
 	
-	$requete = spip_fetch_array(spip_query("SELECT id_auteur,type_jeu FROM spip_auteurs WHERE id_auteur =".$id_auteur));
-	$type_jeu = $requete['type_jeu'];
+	$requete = spip_fetch_array(spip_query("SELECT id_auteur,nom FROM spip_auteurs WHERE id_auteur =".$id_auteur));
+	$nom = $requete['nom'];
 	$id_auteur = $requete['id_auteur'];
 
 	if(!$id_auteur){
@@ -20,17 +20,17 @@ function exec_jeux_resultats_auteur(){
 		return;
 	}
 
-	debut_page(_T("jeux:resultats_auteur",array('nom'=>$type_jeu)));
+	debut_page(_T("jeux:resultats_auteur",array('nom'=>$nom)));
 			
 	debut_gauche();
 	
-	boite_infos_auteur($id_auteur, $type_jeu);
+	boite_infos_auteur($id_auteur, $nom);
 	boite_infos_accueil();
 	
 	creer_colonne_droite();
 	debut_droite();
 	debut_cadre_relief();
-	gros_titre(_T("jeux:resultats_auteur",array('nom'=>$type_jeu)));
+	gros_titre(_T("jeux:resultats_auteur",array('nom'=>$nom)));
 	
 	include_spip('public/assembler');
 	debut_cadre('liste');

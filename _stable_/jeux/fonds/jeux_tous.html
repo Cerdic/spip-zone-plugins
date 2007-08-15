@@ -11,7 +11,7 @@
 #PAGINATION 
 <BOUCLE_jeux(JEUX){par #ENV{par,date}}{inverse #ENV{par}|!={id_jeu}|?{1,0}}{pagination 30}{statut==refuse|publie}>
 <tr class ="tr_liste"  style="text-align:center" >
-	<td>[(#STATUT|puce_statut)]</td>
+	<td>[(#STATUT|puce_statut|puce_compat192)]</td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#ID_JEU</a></td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TYPE_JEU</a></td>
 	<td style="text-align:center"><a href="?exec=jeux_voir&id_jeu=#ID_JEU">#TITRE_PRIVE</a></td>
