@@ -2,7 +2,6 @@
 
 function ExtensionMultilingue_BarreTypoEnrichie_toolbox($paramArray) {
 
-
 if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 {
 	$ret="";
@@ -13,10 +12,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	
 	if ($_GET['exec'] == "rubriques_edit")
 	{
-		
-
-		
-
 		if ($_GET['new'] == "oui") 
 		{
 			$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
@@ -34,9 +29,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$descriptif = $row['descriptif'];
 			$texte = $row['texte'];
 		}
-		
-
-		
 	}
 	else if (($_GET['exec'] == "articles_edit") && (lire_config('ExtensionMultilingue/multiarticles_ExtensionMultilingue') == "on"))
 	{
@@ -161,24 +153,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 
 		if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type") || ($champ_fin == "lien_nom"))
 		{
-			//cas des input
-			$ret .= "<script type=\"text/javascript\">
-				$(document).ready(function() {
-					$('input[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				var valeur".$champ_fin."='';
-			";
-			
-			for ($i=0; $i<count($langues_choisies); $i++)
-			{
-				$ret .= "if ($('input[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
-				";
-			}
-			
-			$ret .= "if (valeur".$champ_fin." != '') $('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('input[@name=".$champ_fin."]').val('');});";
-			
-			$ret .=	"});</script>";
-	
 			$ret .= "
 			<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
@@ -205,23 +179,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		}
 		else if (($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))
 		{
-			$ret .= "<script type=\"text/javascript\">
-				$(document).ready(function() {
-					$('textarea[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				var valeur".$champ_fin."='';
-			";
-			
-			for ($i=0; $i<count($langues_choisies); $i++)
-			{
-				$ret .= "if ($('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
-				";
-			}
-			
-			$ret .= "if (valeur".$champ_fin." != '') $('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('textarea[@name=".$champ_fin."]').val('');});";
-			
-			$ret .=	"});</script>";
-
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
 			
@@ -249,23 +206,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		{
 			
 			
-			$ret .= "<script type=\"text/javascript\">
-				$(document).ready(function() {
-					$('textarea[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				var valeur".$champ_fin."='';
-			";
-			
-			for ($i=0; $i<count($langues_choisies); $i++)
-			{
-				$ret .= "if ($('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
-				";
-			}
-			
-			$ret .= "if (valeur".$champ_fin." != '') $('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('textarea[@name=".$champ_fin."]').val('');});";
-			
-			$ret .=	"});</script>";
-
 			$ret .= "<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
 			
@@ -289,24 +229,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		}
 		else if ($champ_fin == "surtitre")
 		{
-			//cas des input
-			$ret .= "<script type=\"text/javascript\">
-				$(document).ready(function() {
-					$('input[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				var valeur".$champ_fin."='';
-			";
-			
-			for ($i=0; $i<count($langues_choisies); $i++)
-			{
-				$ret .= "if ($('input[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
-				";
-			}
-			
-			$ret .= "if (valeur".$champ_fin." != '') $('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('input[@name=".$champ_fin."]').val('');});";
-			
-			$ret .=	"});</script>";
-
 			$ret .= "
 			<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
@@ -332,24 +254,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		}
 		else if ($champ_fin == "soustitre")
 		{
-			//cas des input
-			$ret .= "<script type=\"text/javascript\">
-				$(document).ready(function() {
-					$('input[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				var valeur".$champ_fin."='';
-			";
-			
-			for ($i=0; $i<count($langues_choisies); $i++)
-			{
-				$ret .= "if ($('input[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
-				";
-			}
-			
-			$ret .= "if (valeur".$champ_fin." != '') $('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('input[@name=".$champ_fin."]').val('');});";
-			
-			$ret .=	"});</script>";
-
 			$ret .= "
 			<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
@@ -375,23 +279,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		}
 		else if ($champ_fin == "lien_titre")
 		{
-			//cas des input
-			$ret .= "<script type=\"text/javascript\">
-				$(document).ready(function() {
-					$('input[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				var valeur".$champ_fin."='';
-			";
 			
-			for ($i=0; $i<count($langues_choisies); $i++)
-			{
-				$ret .= "if ($('input[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('input[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
-				";
-			}
-			
-			$ret .= "if (valeur".$champ_fin." != '') $('input[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('input[@name=".$champ_fin."]').val('');});";
-			
-			$ret .=	"});</script>";
 			$ret .= "
 			<div class=\"container-onglets\">
         		<ul class=\"tabs-nav\">";
@@ -417,23 +305,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		}
 		else if ($champ_fin == "chapo")
 		{
-			$ret .= "<script type=\"text/javascript\">
-				$(document).ready(function() {
-					$('textarea[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				var valeur".$champ_fin."='';
-			";
-			
-			for ($i=0; $i<count($langues_choisies); $i++)
-			{
-				$ret .= "if ($('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
-				";
-			}
-			
-			$ret .= "if (valeur".$champ_fin." != '') $('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('textarea[@name=".$champ_fin."]').val('');});";
-			
-			$ret .=	"});</script>";
-
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
 			
@@ -458,23 +329,6 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 		}
 		else if ($champ_fin == "ps")
 		{
-			$ret .= "<script type=\"text/javascript\">
-				$(document).ready(function() {
-					$('textarea[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$ret .= "$('form[textarea]').bind(\"submit\", function(e) { 
-				var valeur".$champ_fin."='';
-			";
-			
-			for ($i=0; $i<count($langues_choisies); $i++)
-			{
-				$ret .= "if ($('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('textarea[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
-				";
-			}
-			
-			$ret .= "if (valeur".$champ_fin." != '') $('textarea[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('textarea[@name=".$champ_fin."]').val('');});";
-			
-			$ret .=	"});</script>";
-
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
 			
@@ -513,7 +367,8 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 
 function ExtensionMultilingue_header_prive($texte) {
 
-
+$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
+	
 $newtab="";
 	if (($_GET['exec'] == "sites_edit") || (($_GET['exec'] == "articles_edit") && (lire_config('ExtensionMultilingue/multiarticles_ExtensionMultilingue') == "on")) || (($_GET['exec'] == "breves_edit") && (lire_config('ExtensionMultilingue/multibreves_ExtensionMultilingue') == "on")) || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
@@ -526,24 +381,43 @@ $newtab="";
 		       
 		<script type=\"text/javascript\">
 		$(document).ready(function() {";
+		
+		//cas de l'édition des rubriques
+		if (($_GET['exec'] == "rubriques_edit") && (lire_config('barre_typo_generalisee/rubriques_titre_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.titre", $langues_choisies, "input");
+		}
 		if (($_GET['exec'] == "rubriques_edit") && (lire_config('barre_typo_generalisee/rubriques_descriptif_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
 		}
 		if (($_GET['exec'] == "rubriques_edit") && (lire_config('barre_typo_generalisee/rubriques_texte_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");	
 		}
-		if (($_GET['exec'] == "articles_edit"))
+		
+		//cas de l'édition des articles
+		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_surtitre_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.surtitre", $langues_choisies, "input");
+		}
+		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_titre_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.titre", $langues_choisies, "input");
+		}
+		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_soustitre_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.soustitre", $langues_choisies, "input");
 		}
 		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_descriptif_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");";	
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
 		}
-		if ($_GET['exec'] == "articles_edit")
+		if (($_GET['exec'] == "articles_edit"))
 		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");		
+			
+			//on annule le découpage des textes trop longs fait par SPIP
 			$newtab .= "$('textarea[@id=texte1]').css(\"display\", \"none\");$('textarea[@id=texte1]').val('');";
 			$newtab .= "$('textarea[@id=texte2]').css(\"display\", \"none\");$('textarea[@id=texte2]').val('');";
 			$newtab .= "$('textarea[@id=texte3]').css(\"display\", \"none\");$('textarea[@id=texte3]').val('');";
@@ -553,42 +427,77 @@ $newtab="";
 			$newtab .= "$('textarea[@id=texte7]').css(\"display\", \"none\");$('textarea[@id=texte7]').val('');";
 			$newtab .= "$('textarea[@id=texte8]').css(\"display\", \"none\");$('textarea[@id=texte8]').val('');";
 			$newtab .= "$('textarea[@id=texte9]').css(\"display\", \"none\");$('textarea[@id=texte9]').val('');";
+			
 		}
 		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_chapo_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=chapo]').css(\"display\", \"none\");";	
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.chapo", $langues_choisies, "textarea");	
 		}
 		if (($_GET['exec'] == "articles_edit") && (lire_config('barre_typo_generalisee/articles_ps_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=ps]').css(\"display\", \"none\");";	
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.ps", $langues_choisies, "textarea");	
+		}
+		
+		//cas de l'édition des brèves
+		if (($_GET['exec'] == "breves_edit") && (lire_config('barre_typo_generalisee/breves_titre_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.titre", $langues_choisies, "input");
 		}
 		if (($_GET['exec'] == "breves_edit"))
 		{
-			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");";	
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");	
+		}
+		if (($_GET['exec'] == "breves_edit") && (lire_config('barre_typo_generalisee/breves_lien_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.lien_titre", $langues_choisies, "input");
+		}
+		
+		//cas de lédition de la configuration
+		if (($_GET['exec'] == "configuration") && (lire_config('barre_typo_generalisee/configuration_nom_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.nom_site", $langues_choisies, "input");
 		}
 		if (($_GET['exec'] == "configuration") && (lire_config('barre_typo_generalisee/configuration_description_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=descriptif_site]').css(\"display\", \"none\");	";
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif_site", $langues_choisies, "textarea");
+		}
+		
+		//cas de l'édition des groupes de mots clefs
+		if (($_GET['exec'] == "mots_type") && (lire_config('barre_typo_generalisee/groupesmots_nom_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.change_type", $langues_choisies, "input");
 		}
 		if (($_GET['exec'] == "mots_type") && (lire_config('barre_typo_generalisee/groupesmots_descriptif_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
 		}
 		if (($_GET['exec'] == "mots_type") && (lire_config('barre_typo_generalisee/groupesmots_texte_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");	";
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");
+		}
+		
+		//cas de l'édition des mots clefs
+		if (($_GET['exec'] == "mots_edit") && (lire_config('barre_typo_generalisee/mots_nom_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.titre", $langues_choisies, "input");
 		}
 		if (($_GET['exec'] == "mots_edit") && (lire_config('barre_typo_generalisee/mots_descriptif_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
 		}
 		if (($_GET['exec'] == "mots_edit") && (lire_config('barre_typo_generalisee/mots_texte_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=texte]').css(\"display\", \"none\");	";
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");
+		}
+		
+		//cas de l'édition des sites référencés
+		if (($_GET['exec'] == "sites_edit") && (lire_config('barre_typo_generalisee/sites_nom_barre_typo_generalisee') == "on"))
+		{
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.nom_site", $langues_choisies, "input");
 		}
 		if (($_GET['exec'] == "sites_edit") && (lire_config('barre_typo_generalisee/sites_description_barre_typo_generalisee') == "on"))
 		{
-			$newtab .= "$('textarea[@name=descriptif]').css(\"display\", \"none\");	";
+			$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
 		}
 		
 		    	$newtab .= "$('.container-onglets').tabs();
@@ -652,5 +561,24 @@ function extension_multilingue_extraire_multi_lang ($letexte, $langue_souhaitee)
 	return $letexte;
 }
 
+function calculer_actions_head_multilingues ($champ, $langues_choisies, $typedechamp)
+{
+	$nom_champ = str_replace(".", "_", $champ);
+	$champ_fin = substr($champ, strrpos($champ, ".") + 1);
 
+	$resultat = "$('".$typedechamp."[@name=descriptif]').css(\"display\", \"none\");	";
+			$resultat .= "$('".$typedechamp."[@name=".$champ_fin."]').css(\"display\", \"none\");";
+			$resultat .= "$('form[textarea]').bind(\"submit\", function(e) { 
+				var valeur".$champ_fin."='';
+			";
+			
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$resultat .= "if ($('".$typedechamp."[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('".$typedechamp."[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
+				";
+			}
+			
+			$resultat .= "if (valeur".$champ_fin." != '') $('".$typedechamp."[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('".$typedechamp."[@name=".$champ_fin."]').val('');});";
+			return $resultat;
+}
 ?>
