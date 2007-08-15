@@ -57,7 +57,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 		?strpos($texte0, _sommaire_SANS_SOMMAIRE)===false
 		:strpos($texte0, _sommaire_AVEC_SOMMAIRE)!==false;
 	if (!$inserer_sommaire || strpos($texte0, '<h3')===false) 
-		return $sommaire_seul?'RIEN_1':sommaire_imprimer($texte0);
+		return $sommaire_seul?'':sommaire_imprimer($texte0);
 	// on retire les raccourcis du texte
 	$texte = sommaire_imprimer($texte0);
 	// et la, on y va...
@@ -75,10 +75,10 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
 	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) return $texte0;
 
+	// on traite l'image de fond
 	$img = find_in_path('img/sommaire/coin.gif');
-	$sansfond = !$img || strpos($texte, _sommaire_SANS_FOND)!==false;
+	$sansfond = !$img || strpos($texte0, _sommaire_SANS_FOND)!==false;
 	if ($sansfond) {
-		$texte = str_replace(_sommaire_SANS_FOND, '', $texte);
 		$fond = 'background-color:white; border:thin solid gray;';
 	} else {
 		$img = cs_htmlpath($img);
