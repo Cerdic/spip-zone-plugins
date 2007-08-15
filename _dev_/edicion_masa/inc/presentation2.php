@@ -2851,7 +2851,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 // Fonction pour la messagerie et la page d'accueil
 
 // http://doc.spip.org/@http_calendrier_rv
-function http_calendrier_rv_2($messages, $type) {
+function http_calendrier_rv($messages, $type) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
 	$total = '';

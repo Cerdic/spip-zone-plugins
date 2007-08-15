@@ -22,15 +22,6 @@ if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
 
 
 
-
-// Fonction appelee dans une boucle, calculer les invariants au premier appel.
-
-
-
-
-
-
-
 function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
   $query = ($conteneur?"conteneur=$conteneur&":"")
 		.($id_type?"id_type=$id_type&":"")
@@ -50,7 +41,7 @@ function exec_edicion_masa(){
 	global $connect_statut,  $connect_id_auteur;
 	//global $modif;
 	
-	include_spip ("inc/presentation");
+	include_spip ("inc/presentation2");
 	include_spip ('inc/indexation');
 	include_spip ("inc/logos");
 	include_spip ("inc/session");
