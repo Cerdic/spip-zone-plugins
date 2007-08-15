@@ -47,7 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ingrese_mot' => 'Ingrese ID palabra clave',
 	'ingrese_seccion' => 'Ingrese ID seccion',
 	'mostrar_todos' => 'Mostrar Todos',
-	'listado' => 'Listado'
+	'listado' => 'Listado',
+	'edicion_masa' => 'Edici&oacute;n en Masa'
 
 );
 ?>
