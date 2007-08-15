@@ -100,10 +100,10 @@ foreach ($essais as $i => $spec) {
 		}
 	}
 	$s[1] .= '<dt>&#035;' . $tst1 . '</dt><dd>' .
-		(is_array($att[1]) ? serialize($att[1]) : $att[1]) .
+		(is_array($att[1]) ? (!empty($att[1]) ? serialize($att[1]) : '') : $att[1]) .
 		'</dd><dd>#' . $tst1 . "</dd>\n";
 	$s[2] .= '<dt>&#035;' . $tst2 . '</dt><dd>' .
-		(is_array($att[2]) ? serialize($att[2]) : $att[2]) .
+		(is_array($att[2]) ? (!empty($att[2]) ? serialize($att[2]) : '') : $att[2]) .
 		'</dd><dd>#' . $tst2 . "</dd>\n";
 }
 $s[1] .= '</dl>';
@@ -125,6 +125,7 @@ function test_bal($bali, $skel, $contexte = array())
 for ($i = 1; $i < 3; ++$i) {
 	$s[$i] = test_bal($bal . $i, $s[$i]);
 	$count = count($r[$i]);
+
 	if (preg_match_all(',<dt>([^<]*)</dt><dd>([^<]*)</dd><dd>([^<]*)</dd>,ms',
 			$s[$i], $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $regs) {
