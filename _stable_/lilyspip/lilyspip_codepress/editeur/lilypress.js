@@ -1,28 +1,25 @@
 ﻿/***********TEMPLATES*******************/
 
-function single_template(){
-	lilycode.setCode('melody = \\relative c\' { \n\t\\clef treble \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta4 b c d \n\t} \n\n\\score { \n\t\\new Staff \\melody \n\t\\layout {} \n\t\\midi {} \n\t}','lilypond');
-	//pour activer la coloration syntaxique
-	lilycode.editor.syntaxHighlight('init'); 
-}
+	function single_template(){
+		lilycode.setCode('melody = \\relative c\' { \n\t\\clef treble \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta4 b c d \n\t} \n\n\\score { \n\t\\new Staff \\melody \n\t\\layout {} \n\t\\midi {} \n\t}','lilypond');
+		//pour activer la coloration syntaxique
+		lilycode.editor.syntaxHighlight('init'); 
+	}
     
-function piano_template(){
-	lilycode.setCode('upper = \\relative c\'\' { \n\t\\clef treble \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta b c d \n\t} \n\nlower = \\relative c { \n\t\\clef bass \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta2 c \n\t} \n\n\\score { \n\t\\new PianoStaff << \n\t\t\\new Staff = "upper" \\upper \n\t\t\\new Staff = "lower" \\lower \n\t>> \n\t\\layout {} \n\t\\midi {} \n\t}','lilypond');
-	//pour activer la coloration syntaxique
-	lilycode.editor.syntaxHighlight('init'); 
-}
+	function piano_template(){
+		lilycode.setCode('upper = \\relative c\'\' { \n\t\\clef treble \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta b c d \n\t} \n\nlower = \\relative c { \n\t\\clef bass \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta2 c \n\t} \n\n\\score { \n\t\\new PianoStaff << \n\t\t\\new Staff = "upper" \\upper \n\t\t\\new Staff = "lower" \\lower \n\t>> \n\t\\layout {} \n\t\\midi {} \n\t}','lilypond');
+		lilycode.editor.syntaxHighlight('init'); 
+	}
 
-function quartet_template(){
-	lilycode.setCode('global = { \n\t\\time 4/4 \n\t\\key c \\major \n\t} \n\nviolinOne = \\new Voice { \\relative c\'\'{ \n\t\\set Staff.instrumentName = "Violin 1 " \n\n\tc2 d e1 \\bar "|." \n\t}} \n\nviolinTwo = \\new Voice { \\relative c\'\'{ \n\t\\set Staff.instrumentName = "Violin 2 " \n\n\tg2 f e1 \\bar "|." \n\t}} \n\nviola = \\new Voice { \\relative c\' { \\set Staff.instrumentName = "Viola " \n\t\\clef alto \n\n\te2 d c1 \\bar "|." \n\t}} \n\ncello = \\new Voice { \\relative c\' { \\set Staff.instrumentName = "Cello " \n\t\\clef bass \n\n\tc2 b a1 \\bar "|." \n\t}} \n\n\\score { \n\t\\new StaffGroup << \n\t\t\\new Staff << \\global \\violinOne >> \n\t\t\\new Staff << \\global \\violinTwo >> \n\t\t\\new Staff << \\global \\viola >> \n\t\t\\new Staff << \\global \\cello >> \n\t>> \n\t\\layout {} \n\t\\midi {}\n\t}','lilypond');
-	//pour activer la coloration syntaxique
-	lilycode.editor.syntaxHighlight('init'); 
-}
+	function quartet_template(){
+		lilycode.setCode('global = { \n\t\\time 4/4 \n\t\\key c \\major \n\t} \n\nviolinOne = \\new Voice { \\relative c\'\'{ \n\t\\set Staff.instrumentName = "Violin 1 " \n\n\tc2 d e1 \\bar "|." \n\t}} \n\nviolinTwo = \\new Voice { \\relative c\'\'{ \n\t\\set Staff.instrumentName = "Violin 2 " \n\n\tg2 f e1 \\bar "|." \n\t}} \n\nviola = \\new Voice { \\relative c\' { \\set Staff.instrumentName = "Viola " \n\t\\clef alto \n\n\te2 d c1 \\bar "|." \n\t}} \n\ncello = \\new Voice { \\relative c\' { \\set Staff.instrumentName = "Cello " \n\t\\clef bass \n\n\tc2 b a1 \\bar "|." \n\t}} \n\n\\score { \n\t\\new StaffGroup << \n\t\t\\new Staff << \\global \\violinOne >> \n\t\t\\new Staff << \\global \\violinTwo >> \n\t\t\\new Staff << \\global \\viola >> \n\t\t\\new Staff << \\global \\cello >> \n\t>> \n\t\\layout {} \n\t\\midi {}\n\t}','lilypond');
+		lilycode.editor.syntaxHighlight('init'); 
+	}
 
-function vocal_template(){
-	lilycode.setCode('','lilypond');
-	//pour activer la coloration syntaxique
-	lilycode.editor.syntaxHighlight('init'); 
-}
+	function vocal_template(){
+		lilycode.setCode('','lilypond');
+		lilycode.editor.syntaxHighlight('init'); 
+	}
     
     
   
@@ -30,7 +27,7 @@ function vocal_template(){
 /********INITIALISATION**************/ 
   
 	
-		function selection(zone){
+	function selection(zone){
 		this.s1 = "";
 		this.s2 = "";
 		this.s3 = "";
@@ -73,61 +70,65 @@ function vocal_template(){
 			return this.s2;
 		}
 		
-		function existe() {return (this.s2!="")} //indique si un tableau SPIP a été sélectionné
+		function existe() {return (this.s2!="")} //indique si le code lilypond a été sélectionné
 	}
-	var ancien_tableau;
-
-
-		
+	
+	
+	
+	var ancien_code;
 	
 	function init(){
 		   
-		ancien_tableau = new selection(top.opener.zone_selection);
-	theSelection = top.opener.document.getElementById("text_area").value;
+		ancien_code = new selection(top.opener.zone_selection);
+		theSelection = top.opener.document.getElementById("text_area").value;
 	
-		if (ancien_tableau.existe()) {
-			//document.write(ancien_tableau.recup_code());
-			/* document.getElementById("lilycode").value = ancien_tableau.recup_code() ;	//récupération du titre du tableau
-			*/
-			    lilycode.setCode(ancien_tableau.recup_code(),'lilypond') ;
-			    //pour activer la coloration syntaxique
-			    lilycode.editor.syntaxHighlight('init'); 
-			
-		}
-
-		
+		if (ancien_code.existe()) {
+			    lilycode.setCode(ancien_code.recup_code(),'lilypond') ;
+			    lilycode.editor.syntaxHighlight('init');		
+		}	
 	}
 	
-    function d(s){debug.innerHTML+=s;}
+	function d(s){debug.innerHTML+=s;}
  
     
 
-/****génération du code SPIP du tableau ******/
+/****GENERATION DU CODE LILYPOND ******/
     
-function recupere_code(){
-	lilycode.setCode('toto','lilypond') ;
-	CodePress.run();
-}
+// l'id du cadre contenant la previsualisation
+	var outImage="previewField";
+
+	function previsualise(adrserver,adrimagevide){
+
+		var source=adrserver+'?code='+escape(lilycode.getCode())+'&format=png' ;
+		var field=document.getElementById(outImage);
+ 
+		// affichage de l'image vide en attendant le chargement de la partition
+		field.src=adrimagevide;
+ 
+		globalPic=new Image();
+		globalPic.src=source; 
+		field.src=globalPic.src;
+	}
     
     
-     function construit_code_lilypond(){
+	function construit_code_lilypond(){
 	      
-    	var le_code = lilycode.getCode();
-    	var texte="";
+		var le_code = lilycode.getCode();
+		var texte="";
     	
-	texte += "\n<lilypond> \n" + le_code +  "\n<\/lilypond> \n"
+		texte += "\n<lilypond> \n" + le_code +  "\n<\/lilypond> \n"
 	
-	return texte;	
-    }
+		return texte;	
+	}
 	
-    /**********LES FONCTIONS DE CREATION DE L'INTERFACE**********/
+ 
 
 	function enregistre(){
-		if (ancien_tableau.existe()) {
+		if (ancien_code.existe()) {
 			if ((clientVer >= 4) && is_ie && is_win) {
 				top.opener.document.selection.createRange().text = construit_code_lilypond();
 			} else {
-				top.opener.zone_selection.value = ancien_tableau.s1 + construit_code_lilypond() + ancien_tableau.s3;
+				top.opener.zone_selection.value = ancien_code.s1 + construit_code_lilypond() + ancien_code.s3;
 			}
 		} else { //insertion d'un nouveau tableau
 			if (top.opener.zone_selection.createTextRange && top.opener.zone_selection.caretPos) { //IE
@@ -135,34 +136,15 @@ function recupere_code(){
 				caretPos.text = caretPos.text + construit_code_lilypond();
 				top.opener.zone_selection.focus();
 			} else {
-				top.opener.zone_selection.value = ancien_tableau.s1 + construit_code_lilypond() + ancien_tableau.s3;
+				top.opener.zone_selection.value = ancien_code.s1 + construit_code_lilypond() + ancien_code.s3;
 			}
 		}
 		window.close();		
 	}
 	
 	
-	 
-
 
 	
 	
-
-// l'id du cadre contenant la previsualisation
-var outImage="previewField";
-
-function previsualise(adrserver,adrimagevide){
-
-	var source=adrserver+'?code='+escape(lilycode.getCode())+'&format=png' ;
-	var field=document.getElementById(outImage);
- 
-	// affichage de l'image vide en attendant le chargement de la partition
-	field.src=adrimagevide;
- 
-	globalPic=new Image();
-	globalPic.src=source; 
-	field.src=globalPic.src;
-
-}
 
 
