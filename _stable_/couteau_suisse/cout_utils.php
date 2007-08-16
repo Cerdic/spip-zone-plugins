@@ -329,17 +329,20 @@ function cs_initialise_includes() {
 
 // retire les guillemets extremes s'il y en a
 function cs_retire_guillemets($valeur) {
-	$valeur = trim($valeur);
-	if (preg_match(',^\'(.*)\'$,ms', trim($valeur), $matches)) $valeur = str_replace("\'","'",$matches[1]);
-	elseif (preg_match(',^"(.*)"$,ms', trim($valeur), $matches)) $valeur = str_replace('\"','"',$matches[1]);
+	if (preg_match(',^\'(.*)\'$,ms', trim($valeur), $matches)) 
+		return str_replace("\'", "'", $matches[1]);
+	if (preg_match(',^"(.*)"$,ms', trim($valeur), $matches))
+		return str_replace('\"', '"', $matches[1]);
 	return $valeur;
 }
 
 // met en forme une valeur dans le stype php
 function cs_php_format($valeur, $is_chaine = true) {
 	$valeur = cs_retire_guillemets($valeur);
-//	return $is_chaine?'"'.str_replace('"', '\"', $valeur).'"':$valeur;
-	return $is_chaine?"'".str_replace("'", "\\'", $valeur)."'":$valeur;
+	if(!strlen($valeur)) return $is_chaine?"''":0;
+	if(!$is_chaine) return $valeur;
+	$valeur = str_replace("\\", "\\\\", $valeur);
+	return "'".str_replace("'", "\\'", $valeur)."'";
 }
 
 // retourne le code compile d'une variable en fonction de sa valeur
