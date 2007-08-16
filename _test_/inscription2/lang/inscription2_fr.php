@@ -2,7 +2,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-//page de affichage de la configuration du plugin
+//page de l affichage de la configuration du plugin
 'conf_plugin' => 'Configuration Inscription2',
 'conf_plugin_page' => 'Configuration stock&eacute;e du plugin Inscription2',
 'description_page' => 'Ici vous pouvez v&eacute;rifier vos choix de configuration tels qu\'ils sont stock&eacute;s', 

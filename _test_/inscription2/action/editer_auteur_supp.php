@@ -96,12 +96,18 @@ function action_editer_auteur_supp_post($r){
 		// if (!$n) die('UPDATE FAILED '. $id_auteur .'');
 
 	// il faudrait rajouter OR $echec mais il y a conflit avec Ajax
-
-	// Si on modifie la fiche auteur, reindexer
-	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_spip("inc/indexation");
-		marquer_indexer('spip_auteurs', $id_auteur);
-	}
+	
+	// Notifications, gestion des revisions, reindexation...
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs_elargis',
+				'id_objet' => $id_auteur
+			),
+			'data' => $auteur
+		)
+	);
+	
 	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
 
