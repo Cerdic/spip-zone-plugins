@@ -17,9 +17,6 @@
 	 [acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=barre_typo_generalisee] 
 	</description>
 	<lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-
-	</options>
 	<pipeline>
   		<nom>body_prive</nom>
   		<action>insertion_in_body_prive</action>
