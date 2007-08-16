@@ -6,7 +6,7 @@
 	</multi>
 	</nom>
 	<auteur>
-	S&eacute;bastien Boureux, Jacques Bouthier, <br />
+	S&#233;bastien Boureux, Jacques Bouthier, <br />
   original script Alf Magne Kalleland owner of DHTMLGoodies
 	</auteur>
 	<version>
@@ -16,8 +16,9 @@
 	dev
 	</etat>
 	<description>
-Ce plugin est destin&eacute; &agrave; lire des parties d&#39;&eacute;checs grace des fichiers PGN.<br />
-Il suffit de d&#39;ins&eacute;rer la balise <code> <chess+numero article></code> et de t&eacute;l&eacute;charger les documents pgn.
+Ce plugin est destin&#233; &#224; lire des parties d&#39;&#233;checs grace des fichiers PGN.
+_{{Ce plugin n&#233;cessite le plugin CFG version 1.0.6 ou plus}}<br />
+Il suffit de d&#39;ins&#233;rer la balise &#139;code&#155; &#139;chessXX&#155;&#139;/code&#155; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
 	</description>
 	<prefix>
 	chess
@@ -34,4 +35,5 @@ Il suffit de d&#39;ins&eacute;rer la balise <code> <chess+numero article></code>
         <nom>header_prive</nom>
         <inclure>chess_fonctions.php</inclure>
     </pipeline>
+	<necessite id="CFG" version="[1.0.6;]" />
 </plugin>
