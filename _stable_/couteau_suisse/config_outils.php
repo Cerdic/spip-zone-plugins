@@ -53,7 +53,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'dossier_squelettes',
-	'code:options' => "%%dossier_squelettes%%",
+	'code:options' => '%%dossier_squelettes%%',
 	'categorie' => 'admin',
 ));
 
