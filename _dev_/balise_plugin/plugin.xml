@@ -1,30 +1,29 @@
 <plugin>
 	<nom>Balise #PLUGIN</nom>
 	<auteur>SarkASmeL &#169; 2007 - Distribu&#233; sous licence GNU/LGPL</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>experimental</etat>
 	
 	<description>
-Ajoute une balise {{<code>#PLUGIN{PREFIX,INFO}</code>}}.
+Ajoute une balise {{<code>#PLUGIN{PREFIX,INFO}</code>}}. Compatible avec SPIP 1.9.2, cette balise sera inclus dans la prochaine version de SPIP.
 <br /><br />
-Cette balise permet de r&eacute;cup&eacute;rer certaines informations
-statiques d&eacute;finies dans plugin.xml ainsi que le statut d'activation du plugin.
+Cette balise permet, pour les plugins actifs, de r&eacute;cup&eacute;rer certaines informations
+statiques d&eacute;finies dans plugin.xml ainsi que le statut d'activation du plugin. Ces informations sont fournies brutes 
+et doivent &ecirc;tre format&eacute;es le cas &eacute;ch&eacute;ant.
 <br /><br />
--* {{PREFIX}} : pr&eacute;fixe du plugin recherch&eacute; d&eacute;fini dans le champ <code><prefix></prefix></code> du fichier plugin.xml (non case sensitive)
--* {{INFO}} : peut prendre l'une des valeurs suivantes (non case sensitive):
--** NOM: format&eacute; avec propre
--** VERSION: 
--** AUTEUR: format&eacute; avec propre
--** ICONE: uniquement le nom du fichier
--** DESCRIPTION: format&eacute;e avec propre
--** LIEN: format&eacute; suivant qu'il est interne ou externe
--** ETAT: le texte multilangue
--** EST_ACTIF: {{oui}} pour actif, {{non}} pour inactif. EST_ACTIF est la valeur retourn&eacute; par d&eacute;faut si INFO est omis
--** TOUT: le tableau s&eacute;rialis&eacute; de toutes les informations du plugin
+-* {{PREFIX}} : pr&eacute;fixe du plugin recherch&eacute; d&eacute;fini dans le champ <code><prefix></prefix></code> du fichier plugin.xml (non case-sensitive)
+-* {{INFO}} : peut prendre l'une des valeurs suivantes (non case-sensitive):
+-** NOM: info brute &agrave; formater avec propre
+-** VERSION: info brute, formatage inutile
+-** AUTEUR: info brute &agrave; formater avec propre
+-** ICON: uniquement le nom du fichier
+-** DESCRIPTION: info brute &agrave; formater avec propre
+-** LIEN: info brute &agrave; formater avec formate_lien_plugin
+-** ETAT: info brute &agrave; formater avec formate_etat_plugin pour obtenir le texte multilangue
+-** EST_ACTIF: {{1}} pour actif, {{0}} pour inactif. EST_ACTIF est la valeur retourn&eacute; par d&eacute;faut si INFO est omis
 <br />
 ----
-<p>{{ {Remarque} }}: {si un plugin de pr&eacute;fixe p1 est install&eacute; dans deux r&eacute;pertoires r1 et r2 alors les informations retourn&eacute;es
-concerneront le plugin actif parmi r1 et r2. Si tous deux sont inactifs, le plugin de r&eacute;pertoire r2 sera utilis&eacute;}</p>
+<p>{{ {Remarque 1} }}: {si PREFIX est absent la balise renvoie le tableau s&eacute;rialis&eacute; des informations de tous les plugins actifs</p>
 	</description>
 	<lien>[Documentation->http://www.spip-contrib.net/Plugin-xml]</lien>
 	
