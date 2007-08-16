@@ -2,8 +2,11 @@
 <div class="contacts" id="contacts_livraison">
 <h3><:echoppe:contacts_livraison:></h3>
 
-	[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})[(#SET{adresse_livraison,complet})]]]]]
-	<p>[(#GET{adresse_livraison}|?{' ',''})<span class="#EDIT{adressecompletelivraison} org adr">]
+	[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{#SET{adresse_livraison,complet},''})]
+	[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{#SET{adresse_livraison,complet},''})]
+	[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{#SET{adresse_livraison,complet},''})]
+	[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{#SET{adresse_livraison,complet},''})]
+	<p>[(#GET{adresse_livraison}|=={complet}|?{' ',''})<span class="#EDIT{adressecompletelivraison} adr">]
 		[(#CONFIG{inscription2/adresse_livraison_fiche_mod}|?{' ',''})[<span class="street-address">(#ADRESSE_LIVRAISON|?{#ADRESSE_LIVRAISON,<span class="non_renseigne"><:inscription2:adresse_livraison:> <:inscription2:non_renseignee:></span>})</span><br />]]
 		[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL_LIVRAISON|?{#CODE_POSTAL_LIVRAISON,<span class="non_renseigne"><:inscription2:code_postal:> <:inscription2:non_renseigne:></span><br />})</span>]]
 		[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[<span class="locality">(#VILLE_LIVRAISON|?{#VILLE_LIVRAISON,<span class="non_renseigne"><:inscription2:ville:> <:inscription2:non_renseignee:></span>})</span><br />]]
