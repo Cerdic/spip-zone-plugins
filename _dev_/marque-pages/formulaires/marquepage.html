@@ -1,0 +1,43 @@
+#CACHE{0}
+
+<div class="formulaire_spip"  id="formulaire_marquepage">
+	<h2><:marquepages:ajouter:></h2>
+	[<p class="reponse_formulaire">
+		(#ENV*{message_erreur})
+		
+		[(#REM) Si c'est une erreur d'autorisation, on propose de s'identifier]
+		[(#ENV*{proposer_login}|?{' '})
+			#LOGIN_PUBLIC
+			
+			[(#REM) Si la personne est déjà connecté (avec un compte non-autorisé) on propose la déconnexion]
+			[(#SESSION{id_auteur}|?{' ',''})
+				<br /><a href="#URL_LOGOUT"><:marquepages:se_deconnecter:></a>
+			]
+		]
+	</p>]
+	[<p class="reponse_formulaire">(#ENV*{message_ok})</p>]
+	
+	[(#REM) Si c'est ok ou qu'il y a erreur d'autorisation, on affiche pas le formulaire]
+	
+	[(#ENV*{proposer_login}|?{'',' '})
+		[(#ENV*{message_ok}|?{'',' '})
+			<form action="#ENV{self}#formulaire_marquepage" method="post">
+				<fieldset>
+					<p><label for="mp_url"><:marquepages:url:></label></p>
+					<p><input type="text" class="forml" id="mp_url" name="mp_url" value="#ENV{mp_url}" /></p>
+					
+					<p><label for="mp_titre"><:marquepages:titre:></label></p>
+					<p><input type="text" class="forml" id="mp_titre" name="mp_titre" value="#ENV{mp_titre}" size="60" /></p>
+					
+					<p><label for="mp_descritpion"><:marquepages:description:></label></p>
+					<p><input type="text" class="forml" id="mp_description" name="mp_description" value="#ENV{mp_description}" /></p>
+					
+					<p><label for="mp_etiquettes"><:marquepages:etiquettes:></label></p>
+					<p><input type="text" class="forml" id="mp_etiquettes" name="mp_etiquettes" value="#ENV{mp_etiquettes}" /></p>
+					
+					<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
+				</fieldset>
+			</form>
+		]
+	]
+</div>

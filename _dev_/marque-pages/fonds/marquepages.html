@@ -1,0 +1,58 @@
+[(#REM)
+
+	Ce fond va afficher les sites référencés suivant diverses options
+	id_rub :
+		une ou plusieurs rubriques, si aucune ça affiche tout mais il
+		vaut mieux créer une rubrique dédiée
+	id_aut :
+		restreindre aux marque-pages d'un auteur en particulier (ou de
+		plusieurs mais c'est peu utilisé...)
+		
+	Ce fond utilise la balise #SESSION, il faut donc l'insclure avec 
+	session.php (voir la doc du plugin "balise session")
+
+]
+
+<BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_auteur==^((#ENV{id_aut,.*}))$}>
+<BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
+<dl class="xfolkentry">
+	<dt class="#_bookmarks:EDIT{titre}">
+		<a href="#_site:URL_SITE" class="taggedlink" rel="nofollow">#_bookmarks:TITRE</a>
+	</dt>
+	[<dd class="description #_bookmarks:EDIT{texte}">
+		(#_bookmarks:TEXTE)
+	</dd>]
+	<dd class="meta">
+		[<:marquepages:poste_le:> (#_bookmarks:DATE|affdate{j-m-Y}), ]
+		
+		<B_auteur>
+			<:marquepages:par:>
+		<BOUCLE_auteur(AUTEURS){id_auteur=#_bookmarks:ID_AUTEUR}>
+			<a href="#URL_AUTEUR"><BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:vous:>,#PRENOM #NOM_FAMILLE})]</BOUCLE_elargi></a>
+			<BOUCLE_autres(FORUMS){id_syndic=#_bookmarks:ID_SYNDIC}{statut=prive}{plat}> </BOUCLE_autres>
+				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:>]
+			</B_autres>
+		</BOUCLE_auteur>
+		
+		<B_tags>
+			<br /><:marquepages:avec_etiquettes:> :
+		<BOUCLE_tags(MOTS){id_forum=#_bookmarks:ID_FORUM}{", "}>
+			<a rel="tag" href="#URL_MOT">#TITRE</a>
+		</BOUCLE_tags>
+		
+		[(#SESSION{id_auteur}|?{' '})
+		<ul class="actions">
+			[(#SESSION{id_auteur}|!={#_bookmarks:ID_AUTEUR}|?{' '})
+				<li><a><:marquepages:copier:></a></li>
+			]
+			[(#_bookmarks:ID_FORUM|marquepages_autoriser_supprimer|?{' '})
+				<li><a href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_bookmarks:ID_FORUM&r=[(#SELF|rawurlencode)]"><:marquepages:supprimer:></a></li>
+			]
+		</ul>
+		]
+	</dd>
+</dl>
+</BOUCLE_site>
+</BOUCLE_bookmarks>
+	<:marquepages:aucun_marquepages:>
+<//B_bookmarks>
