@@ -4,27 +4,26 @@
 //	1. une liste de mots interdits est consultee
 //	2. si le mot existe dans un des textes d'un formulaire, on avertit !
 
-// si $_POST est rempli et si l'espace n'est pas prive, on continue !
+// traitement anti-spam uniquement si $_POST est rempli et si l'espace n'est pas prive
 if (count($_POST) && (strpos($_SERVER["PHP_SELF"],'/ecrire') === false)) {
 
 	// tableau des mots interdits
 	/*
 	 ATTENTION :
-	  1. ce sont des portions de texte, sans delimitateur particulier : 
-		 si vous mettez 'asses' alors 'tasses' sera un mot interdit aussi !
-	  2. ces mots sont integralement injectes dans une expression reguliere.
-		 si vous ne savez pas ce que c'est, utilisez uniquement des lettres ou des chiffres !
+	  	ce sont des portions de texte, sans delimitateur particulier : 
+		si vous mettez 'asses' alors 'tasses' sera un mot interdit aussi !
 	*/
 	$spam_mots = array(
 		// des liens en dur...
-		'<a\s+href=', '</a>',
+		'<a href=', '</a>',
 		// certains mots...
 		'gorgeous', 'nurses', 'sensored', 'sucking', 'erotic', 'swallowing', 'horny', 'naked',
 		'schoolgirl', 'blowjobs', 'lesbian', 'orgasms', 'superbabes', 'shaving', 'nasty', 'humping', 
 		'beauties', 'tortured', 'gagged', 'pumping', 'hardcore', 'upskirt', 'miniskirt', 'biracial',
 		'climaxing', 'bondage', 'ejakulation', 'fucking',
 	);
-	$spam_mots_reg = ',(' . join('|', $spam_mots) . '),i';
+	foreach($spam_mots as $i=>$mot) $spam_mots[i] = preg_quote($mot,',');
+	$spam_mots = ',(' . join('|', $spam_mots) . '),i';
 	
 	// champs de formulaires a visiter
 	//    un message en forum : texte, titre, auteur
@@ -38,11 +37,11 @@ if (count($_POST) && (strpos($_SERVER["PHP_SELF"],'/ecrire') === false)) {
 	
 	// boucle de censure
 	foreach ($spam_POST_compile as $var) 
-		if (preg_match($spam_mots_reg, $_POST[$var]))
+		if (preg_match($spam_mots, $_POST[$var]))
 			$_GET['action'] = "cs_spam";
 	
 	// nettoyage
-	unset($spam_mots, $spam_mots_reg, $spam_POST_reg, $spam_POST_compile);
+	unset($spam_mots, $spam_POST_reg, $spam_POST_compile);
 	
 	function action_cs_spam(){
 		include_spip('inc/minipres');
