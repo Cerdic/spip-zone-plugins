@@ -18,11 +18,10 @@
 	<h3><:inscription2:contacts_personnels:></h3>
 
 	[(#REM) Un test pour voir si on a les 4 champs adresse]
-	[(#CONFIG{inscription2/adresse_fiche_mod}|?{' ',''})
-		[(#CONFIG{inscription2/code_postal_fiche_mod}|?{' ',''})
-			[(#CONFIG{inscription2/ville_fiche_mod}|?{' ',''})
-				[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})
-					[(#SET{adresse,complet})]]]]]
+	[(#CONFIG{inscription2/adresse_fiche_mod}|?{#SET{adresse,complet},''})]
+	[(#CONFIG{inscription2/code_postal_fiche_mod}|?{#SET{adresse,complet},''})]
+	[(#CONFIG{inscription2/ville_fiche_mod}|?{#SET{adresse,complet},''})]
+	[(#CONFIG{inscription2/pays_fiche_mod}|?{#SET{adresse,complet},''})]
 	<p>[(#GET{adresse}|=={complet}|?{' ',''})<span class="#EDIT{adressecomplete} adr">]
 		[(#CONFIG{inscription2/adresse_fiche_mod}|?{' ',''})[<span class="street-address">(#ADRESSE|?{#ADRESSE,<:inscription2:adresse:> <:inscription2:non_renseignee:>})</span><br />]]
 		[(#CONFIG{inscription2/code_postal_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL|?{#CODE_POSTAL,<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
