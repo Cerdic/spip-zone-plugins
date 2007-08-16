@@ -82,4 +82,10 @@ function TriMots_boite_tri_mots($id,$objet,$id_objet,$retour) {
    return '';
 }
 
+
+function TriMots_header_prive($texte) {
+  $texte.= '<link rel="stylesheet" type="text/css" href="' ._DIR_PLUGIN_TRI_MOTS. '/tri_mots.css" />' . "\n";
+  return $texte;
+}
+
 ?>

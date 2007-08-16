@@ -47,7 +47,7 @@ function exec_tri_mots() {
   include_spip("inc/presentation");
   include_spip("base/abstract_sql");
 
-  debut_page('&laquo; '._T('trimots:titre_page',array('objets'=>_T("public:$table"))).' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
+  debut_page('&laquo; '._T('trimots:titre_page',array('objets'=>_T("public:$table"))).' &raquo;', 'documents', 'mots');
    
   if(!verifier_admin()) {
 	echo "<strong>"._T('avis_acces_interdit')."</strong>";
