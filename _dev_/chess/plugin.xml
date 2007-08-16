@@ -18,7 +18,7 @@
 	<description>
 Ce plugin est destin&#233; &#224; lire des parties d&#39;&#233;checs grace &agrave; des fichiers PGN.
 _ {{Ce plugin n&#233;cessite le plugin CFG version 1.0.6 ou plus}}<br />
-_ Il suffit de d&#39;ins&#233;rer la balise <code> <chessXX></code> o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
+_ Il suffit de d&#39;ins&#233;rer la balise &#60;chessXX&#62; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
 _ Documentation sur [Spip&#212;Toulouse->http://www.spipotoulouse.org/spip.php?article9]
 	</description>
 	<lien>http://www.spipotoulouse.org/spip.php?article9</lien>
