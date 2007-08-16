@@ -44,7 +44,6 @@
 	[(#CONFIG{inscription2/telephone_fiche_mod}|?{[(#SET{contacts,true})],''})]
 	[(#CONFIG{inscription2/mobile_fiche_mod}|?{[(#SET{contacts,true})],''})]
 	[(#CONFIG{inscription2/fax_fiche_mod}|?{[(#SET{contacts,true})],''})]
-	
 	[(#GET{contacts}|=={true}|?{' ',''})<p><span class="#EDIT{telfax}">]
 		
 		[(#CONFIG{inscription2/telephone_fiche_mod}|?{' ',''})
@@ -83,8 +82,11 @@
 	
 	[(#CONFIG{inscription2/societe_fiche_mod}|?{' ',''})[<p><span class="#EDIT{societe}"><:inscription2:societe:> : <span class="org">(#SOCIETE|?{#SOCIETE,<span class="non_renseigne"><:inscription2:non_renseignee:></span>})</span></span></p>]]
 	
-	[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})[(#SET{adresse_pro,complet})]]]]]
-	[(#GET{adresse_pro}|?{' ',''})<p><span class="#EDIT{adressecomplete_pro} org adr">]
+	[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{#SET{adresse_pro,complet},''})]
+	[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{#SET{adresse_pro,complet},''})]
+	[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{#SET{adresse_pro,complet},''})]
+	[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{#SET{adresse_pro,complet},''})]
+	[(#GET{adresse_pro}|=={complet}|?{' ',''})<p><span class="#EDIT{adressecomplete_pro} org adr">]
 		[(#CONFIG{inscription2/adresse_pro_fiche_mod}|?{' ',''})[<span class="street-address">(#ADRESSE_PRO|?{#ADRESSE_PRO,<span class="non_renseigne"><:inscription2:adresse_pro:> <:inscription2:non_renseignee:></span>})</span><br />]]
 		[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL_PRO|?{#CODE_POSTAL_PRO,<span class="non_renseigne"><:inscription2:code_postal:> <:inscription2:non_renseigne:></span><br />})</span>]]
 		[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[<span class="locality">(#VILLE_PRO|?{#VILLE_PRO,<span class="non_renseigne"><:inscription2:ville:> <:inscription2:non_renseignee:></span>})</span><br />]]
