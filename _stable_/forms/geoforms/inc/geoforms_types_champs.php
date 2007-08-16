@@ -73,7 +73,10 @@ function geoforms_forms_input_champs($flux){
 	static $vu=array();
 	$type = $flux['args']['type'];
 	if (in_array($type,array('geox','geoy','geoz'))
-	  AND ((_DIR_RESTREINT AND $GLOBALS['geoforms_public']!=false) OR _request('exec')!=='forms_edit')
+	  AND (
+		(_DIR_RESTREINT AND $GLOBALS['geoforms_public']!=false) 
+		OR (!_DIR_RESTREINT AND _request('exec')!=='forms_edit')
+		)
 	  ) {
 		$id_form = $flux['args']['id_form'];
 		$champ = $flux['args']['champ'];
