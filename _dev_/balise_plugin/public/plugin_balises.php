@@ -14,6 +14,7 @@ function balise_PLUGIN_dist($p) {
 	$type_info = isset($type_info) ? str_replace('\'', '"', $type_info) : '"est_actif"';
 
 	$p->code = 'calcul_info_plugin('.$plugin.', '.$type_info.')';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
