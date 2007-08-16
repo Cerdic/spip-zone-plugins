@@ -10,7 +10,7 @@
   original script Alf Magne Kalleland owner of DHTMLGoodies
 	</auteur>
 	<version>
-	0.5
+	0.6
 	</version>
 	<etat>
 	dev
@@ -18,8 +18,10 @@
 	<description>
 Ce plugin est destin&#233; &#224; lire des parties d&#39;&#233;checs grace des fichiers PGN.
 _{{Ce plugin n&#233;cessite le plugin CFG version 1.0.6 ou plus}}<br />
-Il suffit de d&#39;ins&#233;rer la balise &#139;code&#155; &#139;chessXX&#155;&#139;/code&#155; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
+_Il suffit de d&#39;ins&#233;rer la balise &#139;code&#155; &#139;chessXX&#155;&#139;/code&#155; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
+_Documentation sur [Spip&#212;Toulouse->http://www.spipotoulouse.org/spip.php?article9]
 	</description>
+	<lien>http://www.spipotoulouse.org/spip.php?article9</lien>
 	<prefix>
 	chess
 	</prefix>
@@ -35,5 +37,5 @@ Il suffit de d&#39;ins&#233;rer la balise &#139;code&#155; &#139;chessXX&#155;&#
         <nom>header_prive</nom>
         <inclure>chess_fonctions.php</inclure>
     </pipeline>
-	<necessite id="CFG" version="[1.0.6;]" />
+	<necessite id="cfg" version="[1.0.6;]" />
 </plugin>
