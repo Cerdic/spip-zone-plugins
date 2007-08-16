@@ -2,13 +2,12 @@
 // =======================================================================================================================================
 // Balise : #PLUGIN
 // =======================================================================================================================================
-// Auteur: Smellup
+// Auteur: SarkASmeL, James
 // Fonction : retourne une info d'un plugin donne
 // =======================================================================================================================================
 //
-include_spip('inc/plugin');
 
-function balise_PLUGIN($p) {
+function balise_PLUGIN_dist($p) {
 	$plugin = interprete_argument_balise(1,$p);
 	$plugin = isset($plugin) ? str_replace('\'', '"', $plugin) : '""';
 	$type_info = interprete_argument_balise(2,$p);
