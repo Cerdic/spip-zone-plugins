@@ -157,7 +157,7 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 	'smileys_dispos' => 'Frimousses disponibles :',
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.[[Dossier(s) &agrave; utiliser :->%dossier_squelettes%]]",
+	'dossier_squelettes:description' => "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. Vous pouvez inscrire plusieurs dossiers en les s&eacute;parant par les deux points <html>&laquo;&nbsp;:&nbsp;&raquo;</html>. En laissant vide la case qui suit (ou en tapant &quot;dist&quot;), c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.[[Dossier(s) &agrave; utiliser :->%dossier_squelettes%]]",
 
 	'chatons:nom' => 'Chatons',
 	'chatons:description' => 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <code>:nom</code>.
