@@ -6,23 +6,23 @@
 <script type="text/javascript">
 /* Overriding Javascript's Alert Dialog */
 function confirm(msg,callback) {
-  $('#confirm')
-    .jqmShow()
-    .find('p.jqmConfirmMsg')
-      .html(msg)
-    .end()
-    .find(':submit:visible')
-      .click(function(){
-        if(this.value == 'yes')
-          (typeof callback == 'string') ?
-            window.location.href = callback :
-            callback;
-        $('#confirm').jqmHide();
-      });
+	$('#confirm')
+		.jqmShow()
+		.find('p.jqmConfirmMsg')
+		.html(msg)
+		.end()
+		.find(':submit:visible')
+		.click(function(){
+			if(this.value == 'yes')
+				(typeof callback == 'string') ?
+				window.location.href = callback :
+				callback;
+			$('#confirm').jqmHide();
+		});
 }
 
 // trigger a confirm whenever links of class alert are pressed.
-$().ready(function() {
+	$().ready(function() {
   $('#confirm').jqm({overlay: 88, modal: true, trigger: false});
   
   // trigger a confirm whenever links of class alert are pressed.
@@ -33,6 +33,8 @@ $().ready(function() {
 });
 </script>
 
+<h1><:inscription2:liste_adherents:></h1>
+
 <div id="conteneur">
 
 <div id="menu">
@@ -42,7 +44,7 @@ $().ready(function() {
 	]
 
 	<?php
-	debut_boite_info();
+	echo debut_boite_info();
 	?>
 	<div class='raccourcis'>
 
@@ -56,7 +58,7 @@ $().ready(function() {
 	</div>
 
 	<?php
-	fin_boite_info();
+	echo fin_boite_info();
 	?>
 	
 	<div class="legend">
@@ -72,13 +74,12 @@ $().ready(function() {
 </div>	
 
 <div id="principal">
-	<h2><strong><:inscription2:liste_adherents:></strong></h2>
 	<div id="tetiere" >
 		<div style="float:right" >
 		<form method="post" action="?exec=inscription2_adherents">
 		[(#SELF|form_hidden)]
-		<input class="search_field" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>" />
-		<select name="case" id="case">
+		<input class="search_field fondl" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>" />
+		<select name="case" id="case" class="fondl" style="padding:2px">
 		<?php
 			$case=_request('case');
 			foreach(lire_config('inscription2') as $cle => $val){
@@ -94,7 +95,7 @@ $().ready(function() {
 			}
 		?>
 		</select>
-		<input type="submit" value="<:info_rechercher:>" />
+		<input type="submit" class="fondo" value="<:info_rechercher:>" />
 		</form>
 		[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
 			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})]} )]
@@ -194,7 +195,7 @@ $().ready(function() {
 	<table class="cadre-r">
 	<tr>
 	<?php	
-	echo '<td><strong><a href="'.$url.'&amp;ordre=id_auteur&amp;desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif" /></a></strong></td>';
+	echo '<td><strong><a href="'.$url.'&amp;ordre=id_auteur&amp;desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'images/admin-12.gif" alt="admin" /></a></strong></td>';
 	
 	
 	if(lire_config('inscription2/nom_table')){
