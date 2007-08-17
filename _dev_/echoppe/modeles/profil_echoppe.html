@@ -11,7 +11,7 @@
 		[(#CONFIG{inscription2/code_postal_livraison_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL_LIVRAISON|?{#CODE_POSTAL_LIVRAISON,<span class="non_renseigne"><:inscription2:code_postal:> <:inscription2:non_renseigne:></span><br />})</span>]]
 		[(#CONFIG{inscription2/ville_livraison_fiche_mod}|?{' ',''})[<span class="locality">(#VILLE_LIVRAISON|?{#VILLE_LIVRAISON,<span class="non_renseigne"><:inscription2:ville:> <:inscription2:non_renseignee:></span>})</span><br />]]
 		[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})<span class="country-name">]
-			<BOUCLE_r_livraison(SPIP_PAYS){id=#PAYS_LIVRAISON}{tous}>
+			<BOUCLE_r_livraison(SPIP_GEO_PAYS){id_pays=#PAYS_LIVRAISON}{tous}>
 			[(#PAYS|couper{30})]
 			</BOUCLE_r_livraison>
 			[(#CONFIG{inscription2/pays_livraison_fiche_mod}|?{' ',''})<span class="non_renseigne"><:inscription2:pays:> <:inscription2:non_renseigne:></span>]
