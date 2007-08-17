@@ -1,38 +1,38 @@
-id_pays;id_continent;Nom;Code ISO;Latitude (WGS 84);Longitude (WGS 84);Indicatif téléphonique
+@id_pays;id_continent;Nom;Code ISO;Latitude (WGS 84);Longitude (WGS 84);Indicatif tÃ©lÃ©phonique
 1;4;Afghanistan;AF;33;65;93
 2;1;Afrique du Sud;ZA;-29;24;27
-3;5;Åland;AX;60.2;20.0;
+3;5;Ã…land;AX;60.2;20.0;
 4;5;Albanie;AL;41;20;355
-5;1;Algérie;DZ;28;3;213
+5;1;AlgÃ©rie;DZ;28;3;213
 6;5;Allemagne;DE;51;10;49
 7;5;Andorre;AD;42.5;1.5;376
 8;1;Angola;AO;-13;19;244
 9;2;Anguilla;AI;18.2;-63.1;1
 10;7;Antarctique;AQ;-85;60;
 11;2;Antigua-et-Barbuda;AG;17;-61;1
-12;2;Antilles néerlandaises;AN;12;-68;599
+12;2;Antilles nÃ©erlandaises;AN;12;-68;599
 13;4;Arabie saoudite;SA;25;45;966
 14;3;Argentine;AR;-34;-64;54
-15;5;Arménie;AM;40;45;374
+15;5;ArmÃ©nie;AM;40;45;374
 16;3;Aruba;AW;12.5;-70.0;297
 18;6;Australie;AU;-27;133;61
 19;5;Autriche;AT;47;14;43
-20;5;Azerbaïdjan;AZ;40.5;47.5;994
+20;5;AzerbaÃ¯djan;AZ;40.5;47.5;994
 21;2;Bahamas;BS;24;-77;1
-22;4;Bahreïn;BH;26.0;50.55;973
+22;4;BahreÃ¯n;BH;26.0;50.55;973
 23;4;Bangladesh;BD;24;90;880
 24;2;Barbade;BB;13.1667;-59.5333;1
 25;5;Belgique;BE;50.8;4;32
 26;2;Belize;BZ;17.2500;-88.7500;501
-27;1;Bénin;BJ;9;2;229
+27;1;BÃ©nin;BJ;9;2;229
 28;2;Bermudes;BM;32.3333;-64.7500;1
 29;4;Bhoutan;BT;27.5000;90.5000;975
-30;5;Biélorussie;BY;53;28;375
+30;5;BiÃ©lorussie;BY;53;28;375
 31;4;Birmanie;MM;21;96;95
 32;3;Bolivie;BO;-17;-65;591
-33;5;Bosnie-Herzégovine;BA;44;18;387
+33;5;Bosnie-HerzÃ©govine;BA;44;18;387
 34;1;Botswana;BW;-22;24;267
-35;3;Brésil;BR;-10;-55;55
+35;3;BrÃ©sil;BR;-10;-55;55
 36;4;Brunei;BN;4.5000;114.6667;673
 37;5;Bulgarie;BG;43;25;359
 38;1;Burkina Faso;BF;13;-2;226
@@ -49,71 +49,71 @@ id_pays;id_continent;Nom;Code ISO;Latitude (WGS 84);Longitude (WGS 84);Indicatif
 49;1;Comores;KM;-12;44;269
 50;1;Congo-Brazzaville;CG;-1;15;242
 51;1;Congo-Kinshasa;CD;-3;23;243
-52;4;Corée du Nord;KP;40;127;850
-53;4;Corée du Sud;KR;37;127.5000;82
+52;4;CorÃ©e du Nord;KP;40;127;850
+53;4;CorÃ©e du Sud;KR;37;127.5000;82
 54;2;Costa Rica;CR;10;-84;506
-55;1;Côte d'Ivoire;CI;8;-5;225
+55;1;CÃ´te d'Ivoire;CI;8;-5;225
 56;5;Croatie;HR;45;16;385
 57;2;Cuba;CU;22;-80;53
 58;5;Danemark;DK;56;10;45
 59;1;Djibouti;DJ;11.5000;43;253
 60;2;Dominique;DM;15.4;-61.3;1
-61;1;Égypte;EG;27;30;20
-62;4;Émirats arabes unis;AE;24;54;971
-63;3;Équateur;EC;-2;-77.5000;593
-64;1;Érythrée;ER;15;39;291
+61;1;Ã‰gypte;EG;27;30;20
+62;4;Ã‰mirats arabes unis;AE;24;54;971
+63;3;Ã‰quateur;EC;-2;-77.5000;593
+64;1;Ã‰rythrÃ©e;ER;15;39;291
 65;5;Espagne;ES;40;-4;34
 66;5;Estonie;EE;59;26;372
-67;2;États-Unis;US;38;-97;1
-68;1;Éthiopie;ET;8;38;251
+67;2;Ã‰tats-Unis;US;38;-97;1
+68;1;Ã‰thiopie;ET;8;38;251
 69;6;Fidji;FJ;-18;175;679
 70;5;Finlande;FI;64;26;358
 71;5;France;FR;46;2;33
 72;1;Gabon;GA;-1;11.7500;241
 73;1;Gambie;GM;13.4667;-16.5667;220
-74;5;Géorgie;GE;42;43;995
-75;7;Géorgie du Sud et les îles Sandwich du Sud;GS;-54;-37;
+74;5;GÃ©orgie;GE;42;43;995
+75;7;GÃ©orgie du Sud et les Ã®les Sandwich du Sud;GS;-54;-37;
 76;1;Ghana;GH;8;-2;233
 77;1;Gibraltar;GI;36.1833;-5.3667;350
-78;5;Grèce;GR;39;22;302
+78;5;GrÃ¨ce;GR;39;22;302
 79;2;Grenade;GD;12.1167;-61.6667;1
 80;2;Groenland;GL;72;-40;299
 81;2;Guadeloupe;GP;16.2500;-61.5833;590
 82;6;Guam;GU;13.4667;144.7833;1
 83;3;Guatemala;GT;15;-90;502
 84;5;Guernesey;GG;49.5;-2.5;
-85;1;Guinée;GN;11;-10;224
-86;1;Guinée équatoriale;GQ;2;10;240
-87;1;Guinée-Bissau;GW;12;-15;245
+85;1;GuinÃ©e;GN;11;-10;224
+86;1;GuinÃ©e Ã©quatoriale;GQ;2;10;240
+87;1;GuinÃ©e-Bissau;GW;12;-15;245
 88;3;Guyana;GY;5;-59;592
 89;3;Guyane;GF;4;-53;594
-90;2;Haïti;HT;19;-72.4167;509
+90;2;HaÃ¯ti;HT;19;-72.4167;509
 91;2;Honduras;HN;15;-87;504
 92;4;Hong Kong;HK;22.2500;114.1667;852
 93;5;Hongrie;HU;47;20;36
-94;7;Île Bouvet;BV;-54.4;3.4;
-95;6;Île Christmas;CX;-10.5000;105.6667;672
-96;5;Île de Man;IM;54.2;-4.5;
-97;2;Îles Caïmanes;KY;19.5;-80.5;1
-98;4;Îles Cocos;CC;-12;97;
-99;6;Îles Cook;CK;-21.2333;-159.7667;682
-100;5;Îles Féroé;FO;62;-7;298
-101;3;Îles Malouines (Falkland);FK;-51.7500;-59;500
-102;6;Îles Mariannes du Nord;MP;15.2000;145.7500;1
-103;6;Îles mineures éloignées des États-Unis;UM;15;-170;
-104;6;Îles Salomon;SB;-8;159;677
-105;2;Îles Turques et Caïques;TC;21.7500;-71.5833;1
-106;2;Îles Vierges américaines;VI;18.3333;-64.8333;1
-107;2;Îles Vierges britanniques;VG;18.5000;-64.5000;1
+94;7;ÃŽle Bouvet;BV;-54.4;3.4;
+95;6;ÃŽle Christmas;CX;-10.5000;105.6667;672
+96;5;ÃŽle de Man;IM;54.2;-4.5;
+97;2;ÃŽles CaÃ¯manes;KY;19.5;-80.5;1
+98;4;ÃŽles Cocos;CC;-12;97;
+99;6;ÃŽles Cook;CK;-21.2333;-159.7667;682
+100;5;ÃŽles FÃ©roÃ©;FO;62;-7;298
+101;3;ÃŽles Malouines (Falkland);FK;-51.7500;-59;500
+102;6;ÃŽles Mariannes du Nord;MP;15.2000;145.7500;1
+103;6;ÃŽles mineures Ã©loignÃ©es des Ã‰tats-Unis;UM;15;-170;
+104;6;ÃŽles Salomon;SB;-8;159;677
+105;2;ÃŽles Turques et CaÃ¯ques;TC;21.7500;-71.5833;1
+106;2;ÃŽles Vierges amÃ©ricaines;VI;18.3333;-64.8333;1
+107;2;ÃŽles Vierges britanniques;VG;18.5000;-64.5000;1
 108;4;Inde;IN;20;77;91
-109;4;Indonésie;ID;-5;120;62
+109;4;IndonÃ©sie;ID;-5;120;62
 110;4;Irak;IQ;33;44;964
 111;4;Iran;IR;32;53;98
 112;5;Irlande;IE;53;-8;353
 113;5;Islande;IS;65;-18;354
-114;4;Israël;IL;31.5000;34.7500;972
+114;4;IsraÃ«l;IL;31.5000;34.7500;972
 115;5;Italie;IT;42.8333;12.8333;39
-116;2;Jamaïque;JM;18.2500;-77.5000;1
+116;2;JamaÃ¯que;JM;18.2500;-77.5000;1
 117;4;Japon;JP;36;138;81
 118;5;Jersey;JE;49.2;-2.1;
 119;4;Jordanie;JO;31;36;962
@@ -121,18 +121,18 @@ id_pays;id_continent;Nom;Code ISO;Latitude (WGS 84);Longitude (WGS 84);Indicatif
 121;1;Kenya;KE;1;38;254
 122;4;Kirghizstan;KG;41;75;997
 123;6;Kiribati;KI;1.4167;173;686
-124;4;Koweït;KW;29.5000;45.7500;965
+124;4;KoweÃ¯t;KW;29.5000;45.7500;965
 125;4;Laos;LA;18;105;856
 126;1;Lesotho;LS;-29.5000;28.5000;266
 127;5;Lettonie;LV;57;25;371
 128;4;Liban;LB;33.8333;35.8333;961
-129;1;Libéria;LR;6.5000;-9.5000;231
+129;1;LibÃ©ria;LR;6.5000;-9.5000;231
 130;1;Libye;LY;25;17;218
 131;5;Liechtenstein;LI;47.1667;9.5333;423
 132;5;Lituanie;LT;56;24;370
 133;5;Luxembourg;LU;49.7500;6.1667;352
 134;4;Macao;MO;22.1667;113.5500;853
-135;5;Macédoine;MK;42;22;389
+135;5;MacÃ©doine;MK;42;22;389
 136;1;Madagascar;MG;-20;47;261
 137;4;Malaisie;MY;3;113;60
 138;1;Malawi;MW;-13.5000;34;265
@@ -146,100 +146,100 @@ id_pays;id_continent;Nom;Code ISO;Latitude (WGS 84);Longitude (WGS 84);Indicatif
 146;1;Mauritanie;MR;20;-12;222
 147;1;Mayotte;YT;-12.8333;45.1667;269
 148;2;Mexique;MX;23;-102;52
-149;6;Micronésie;FM;7;158;691
+149;6;MicronÃ©sie;FM;7;158;691
 150;5;Moldavie;MD;47;29;373
 151;5;Monaco;MC;43.7333;7.4000;377
 152;4;Mongolie;MN;46;105;976
-153;5;Monténégro;ME;42.779275;19.231567;382
+153;5;MontÃ©nÃ©gro;ME;42.779275;19.231567;382
 154;2;Montserrat;MS;16.7500;-62.2000;1
 155;1;Mozambique;MZ;-18;35;258
 156;1;Namibie;NA;-22;17;264
 157;6;Nauru;NR;-0.5333;166.9167;674
-158;4;Népal;NP;28;84;977
+158;4;NÃ©pal;NP;28;84;977
 159;2;Nicaragua;NI;13;-85;505
 160;1;Niger;NE;16;8;227
 161;1;Nigeria;NG;10;8;234
-162;6;Niué;NU;-19.0333;-169.8667;683
+162;6;NiuÃ©;NU;-19.0333;-169.8667;683
 163;6;Norfolk;NF;-29;168;
-164;5;Norvège;NO;62;10;47
-165;6;Nouvelle-Calédonie;NC;-21.5000;165.5000;687
-166;6;Nouvelle-Zélande;NZ;-41;174;64
+164;5;NorvÃ¨ge;NO;62;10;47
+165;6;Nouvelle-CalÃ©donie;NC;-21.5000;165.5000;687
+166;6;Nouvelle-ZÃ©lande;NZ;-41;174;64
 167;4;Oman;OM;21;57;968
 168;1;Ouganda;UG;1;32;256
-169;4;Ouzbékistan;UZ;41;64;998
+169;4;OuzbÃ©kistan;UZ;41;64;998
 170;4;Pakistan;PK;30;70;92
 171;6;Palaos;PW;7.5000;134.5000;680
 172;4;Palestine;PS;32;35.2500;970
-173;2;Panamá;PA;9;-80;507
-174;6;Papouasie-Nouvelle-Guinée;PG;-6;147;675
+173;2;PanamÃ¡;PA;9;-80;507
+174;6;Papouasie-Nouvelle-GuinÃ©e;PG;-6;147;675
 175;3;Paraguay;PY;-23;-58;595
 176;5;Pays-Bas;NL;52;5;31
-177;3;Pérou;PE;-10;-76;51
+177;3;PÃ©rou;PE;-10;-76;51
 178;4;Philippines;PH;13;122;63
 179;6;Pitcairn;PN;-25;-130;
 180;5;Pologne;PL;52;20;48
-181;6;Polynésie française;PF;-15;-140;689
+181;6;PolynÃ©sie franÃ§aise;PF;-15;-140;689
 182;2;Porto Rico;PR;18.2500;-66.5000;1
 183;5;Portugal;PT;40;-8;351
 184;4;Qatar;QA;25;51;974
-185;2;République dominicaine;DO;19;-70.6667;1
-186;5;République tchèque;CZ;50;16;420
-187;1;Réunion;RE;-21.1000;55.6000;262
+185;2;RÃ©publique dominicaine;DO;19;-70.6667;1
+186;5;RÃ©publique tchÃ¨que;CZ;50;16;420
+187;1;RÃ©union;RE;-21.1000;55.6000;262
 188;5;Roumanie;RO;46;25;40
 189;5;Royaume-Uni;GB;54;-2;44
 190;5;Russie;RU;60;100;7
 191;1;Rwanda;RW;-2;30;250
 192;1;Sahara occidental;EH;24;-13;
-193;2;Saint-Christophe-et-Niévès;KN;17.3333;-62.7500;1
-194;1;Sainte-Hélène, île;SH;-15.9333;-5.7000;290
+193;2;Saint-Christophe-et-NiÃ©vÃ¨s;KN;17.3333;-62.7500;1
+194;1;Sainte-HÃ©lÃ¨ne, Ã®le;SH;-15.9333;-5.7000;290
 195;2;Sainte-Lucie;LC;13.8833;-61.1333;1
 196;5;Saint-Marin;SM;43.7667;12.4167;378
 197;2;Saint-Pierre-et-Miquelon;PM;46.8333;-56.3333;508
 198;2;Saint-Vincent-et-les Grenadines;VC;13.2500;-61.2000;1
 199;2;Salvador;SV;13.8333;-88.9167;503
 200;6;Samoa;WS;-13.5833;-172.3333;685
-201;6;Samoa américaines;AS;-14.3333;-170;684
-202;1;São Tomé-et-Principe;ST;1;7;239
-203;1;Sénégal;SN;14;-14;221
+201;6;Samoa amÃ©ricaines;AS;-14.3333;-170;684
+202;1;SÃ£o TomÃ©-et-Principe;ST;1;7;239
+203;1;SÃ©nÃ©gal;SN;14;-14;221
 204;5;Serbie;RS;442;21;381
 205;1;Seychelles;SC;-4;55;248
 206;1;Sierra Leone;SL;8;-12;232
 207;4;Singapour;SG;1.3667;103.8000;65
 208;5;Slovaquie;SK;49;19;421
-209;5;Slovénie;SI;46;15;386
+209;5;SlovÃ©nie;SI;46;15;386
 210;1;Somalie;SO;10;49;252
 211;1;Soudan;SD;15;30;249
 212;4;Sri Lanka;LK;7;81;94
-213;5;Suède;SE;62;15;46
+213;5;SuÃ¨de;SE;62;15;46
 214;5;Suisse;CH;47;8;41
 215;3;Suriname;SR;4;-56;597
-216;5;Svalbard et île Jan Mayen;SJ;77;14;
+216;5;Svalbard et Ã®le Jan Mayen;SJ;77;14;
 217;1;Swaziland;SZ;-26.5000;31.5000;268
 218;4;Syrie;SY;35;38;963
 219;4;Tadjikistan;TJ;39;71;992
-220;4;Taïwan;TW;23.5000;121;886
+220;4;TaÃ¯wan;TW;23.5000;121;886
 221;1;Tanzanie;TZ;-6;35;255
 222;1;Tchad;TD;15;19;235
-223;7;Terres australes et antarctiques françaises;TF;-50;70;
-224;4;Territoire britannique de l'océan Indien;IO;-6;72;246
-225;6;Territoires extérieurs de l'Australie;HM;-53.1000;72.5167;
-226;4;Thaïlande;TH;15;100;66
+223;7;Terres australes et antarctiques franÃ§aises;TF;-50;70;
+224;4;Territoire britannique de l'ocÃ©an Indien;IO;-6;72;246
+225;6;Territoires extÃ©rieurs de l'Australie;HM;-53.1000;72.5167;
+226;4;ThaÃ¯lande;TH;15;100;66
 227;4;Timor oriental;TL;-9;125;670
 228;1;Togo;TG;8;1.1667;228
 229;6;Tokelau;TK;-9;-172;690
 230;6;Tonga;TO;-20;-175;676
-231;3;Trinité-et-Tobago;TT;11;-61;1
+231;3;TrinitÃ©-et-Tobago;TT;11;-61;1
 232;1;Tunisie;TN;34;9;216
-233;4;Turkménistan;TM;40;60;993
+233;4;TurkmÃ©nistan;TM;40;60;993
 234;5;Turquie;TR;39;35;90
 235;6;Tuvalu;TV;-8;178;688
 236;5;Ukraine;UA;49;32;380
 237;3;Uruguay;UY;-33;-56;598
 238;6;Vanuatu;VU;-16;167;678
 239;5;Vatican;VA;41.9000;12.4500;379,39
-240;3;Vénézuela;VE;8;-66;58
-241;4;Viêt Nam;VN;16;106;84
+240;3;VÃ©nÃ©zuela;VE;8;-66;58
+241;4;ViÃªt Nam;VN;16;106;84
 242;6;Wallis-et-Futuna;WF;-14;-176;681
-243;4;Yémen;YE;15;48;967
+243;4;YÃ©men;YE;15;48;967
 244;1;Zambie;ZM;-15;30;260
 245;1;Zimbabwe;ZW;-20;30;263

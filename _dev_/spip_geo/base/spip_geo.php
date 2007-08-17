@@ -18,7 +18,7 @@ global $tables_auxiliaires;
 
 $spip_geo_continent = array(
 	"id_continent" 	=> "SMALLINT NOT NULL",
-	"nom" 	=> "varchar(255) NOT NULL",
+	"continent" 	=> "varchar(255) NOT NULL",
 	"code_onu" 	=> "SMALLINT NOT NULL",
 	"latitude" 	=> "text",
 	"longitude" 	=> "text",
@@ -31,7 +31,7 @@ $spip_geo_continent_key = array(
 $spip_geo_pays = array(
 	"id_pays" 	=> "SMALLINT NOT NULL",
 	"id_continent" 	=> "SMALLINT NOT NULL",
-	"nom" 	=> "varchar(255) NOT NULL",
+	"pays" 	=> "varchar(255) NOT NULL",
 	"code_iso" => "text",
 	"latitude" 	=> "text",
 	"longitude" 	=> "text",
@@ -47,7 +47,7 @@ $spip_geo_ville = array(
 	"id_ville" 	=> "int NOT NULL",
 	"id_continent" 	=> "SMALLINT NOT NULL",
 	"id_pays" 	=> "SMALLINT NOT NULL",
-	"nom" 	=> "varchar(255) NOT NULL",
+	"ville" 	=> "varchar(255) NOT NULL",
 	"latitude" 	=> "text",
 	"longitude" => "text",
 	"zoom" 	=> "text",

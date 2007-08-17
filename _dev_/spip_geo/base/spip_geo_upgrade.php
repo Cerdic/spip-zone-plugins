@@ -18,9 +18,15 @@
 		if (   (isset($GLOBALS['meta']['spip_geo_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['spip_geo_base_version'])==$version_base))
 			return;
-
-		include_spip('base/spip_geo');
+			
 		if ($current_version==0.0){
+			$table_pays = "spip_geo_pays";
+			$descpays = spip_abstract_showtable($table_pays, '', false);
+			if(isset($descpays['field']['pays'])){
+				echo 'virage de la table spip_geo_pays';
+				spip_query("DROP TABLE spip_geo_pays");
+			}
+			include_spip('base/spip_geo');
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			include_spip('inc/import_origine');
@@ -35,7 +41,9 @@
 	
 	function spip_geo_vider_tables() {
 		spip_query("DROP TABLE spip_geo_continent");
-		spip_query("DROP TABLE spip_geo_pays");
+		if(!$GLOBALS['meta']['inscription2_version']){
+			spip_query("DROP TABLE spip_geo_pays");
+		}
 		spip_query("DROP TABLE spip_geo_ville");
 		effacer_meta('spip_geo_base_version');
 		ecrire_metas();
