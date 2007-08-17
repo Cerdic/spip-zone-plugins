@@ -12,10 +12,13 @@
  */
 
 // Crayons sur les donnes
-function forms_donnee_valeur_colonne_table($table,$champ,$id_donnee){
+function forms_donnee_valeur_colonne_table($table,$champs,$id_donnee){
 	include_spip("inc/forms");
-	$valeurs = Forms_valeurs($id_donnee,NULL,$champ);
-	return isset($valeurs[$champ]) ? $valeurs : false;
+
+	$vals = array();
+	foreach($champs as $champ)
+		$vals = array_merge($vals,Forms_valeurs($id_donnee,NULL,$champ));
+	return $vals;
 }
 function forms_donnee_revision($id_donnee,$c=NULL){
 	include_spip('inc/forms');
@@ -27,7 +30,7 @@ function forms_champ_valeur_colonne_table($table,$champ,$id){
 	$form_champ = $id[1];
 	
 	if (!preg_match(',^\w+$,',$champ)
-	OR !$res = spip_query("SELECT $champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($form_champ))
+	OR !$res = spip_query("SELECT $champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ IN (".implode(',',array_map('_q',$form_champ)).")")
 	OR !$row = spip_fetch_array($res))
 		return false;
 
