@@ -58,6 +58,11 @@ function pmv_log(pmv_site, pmv_url, pmv_pname, pmv_vars)
 	src += '&flash='+pmv_fla+'&director='+pmv_dir+'&quicktime='+pmv_qt+'&realplayer='+pmv_rea;
 	src += '&pdf='+pmv_pdf+'&windowsmedia='+pmv_wma+'&java='+pmv_jav+'&ref='+escape(rtu);
 
-	pmv_do.writeln('<img src="'+src+'" alt="phpMyVisites" style="border:0" width="1" height="1" class="logophpmv" />');
+	if (jQuery)
+		$(document).ready(function(){
+			$('body').append('<img src="'+src+'" alt="phpMyVisites" style="border:0" width="1" height="1" class="logophpmv" />');
+		});
+	else
+		pmv_do.writeln('<img src="'+src+'" alt="phpMyVisites" style="border:0" width="1" height="1" class="logophpmv" />');
 }
 pmv_log(phpmyvisitesSite, phpmyvisitesURL, pagename, a_vars);
