@@ -127,30 +127,66 @@ function Corbeille_affiche_ligne($titre,$url,$total_table){
  *@return neant
  */  
 function Corbeille_affiche($page){
-  		//charge les paramètres
-		global $corbeille_param;
-		//initialise les variables
-		$totaux = array();
-			
-		//Calcul du nombre d'objets effaçable
-		foreach($corbeille_param as $type_doc => $objet) {
-			$totaux[$type_doc] = Corbeille_compte_elements_vider($type_doc);
-			$totaux["tout"] += $totaux[$type_doc];
+	//charge les paramètres
+	global $corbeille_param;
+	//initialise les variables
+	$totaux = array();
+		
+	//Calcul du nombre d'objets effaçable
+	foreach($corbeille_param as $type_doc => $objet) {
+		$totaux[$type_doc] = Corbeille_compte_elements_vider($type_doc);
+		$totaux["tout"] += $totaux[$type_doc];
+	}
+
+	//types de documents geres par la corbeille
+	echo "<strong>"._T('corbeille:choix_doc')."</strong><br/>";
+	echo "<style type='text/css'>div a.corbeille {display:block;border:3px solid #f00;padding: 5px;margin-right:5px} div a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
+
+	//parcours les totaux et genere une ligne de résulat par type d'objet
+	foreach($totaux as $key => $total) {
+		//ignore tout car pas de paramètre déclaré dans inc_param
+		if ($key != "tout") {
+			Corbeille_affiche_ligne($corbeille_param[$key]["libelle_court"],generer_url_ecrire($page,"type_doc=".$key),$total);
 		}
- 	
-		//types de documents geres par la corbeille
-		echo "<strong>"._T('corbeille:choix_doc')."</strong><br/>";
-		echo "<style type='text/css'>div a.corbeille {display:block;border:3px solid #f00;padding: 5px;margin-right:5px} div a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
+	}
+	// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
 	
-		//parcours les totaux et genere une ligne de résulat par type d'objet
-		foreach($totaux as $key => $total) {
-			//ignore tout car pas de paramètre déclaré dans inc_param
-			if ($key != "tout") {
-				Corbeille_affiche_ligne($corbeille_param[$key]["libelle_court"],generer_url_ecrire($page,"type_doc=".$key),$total);
-			}
-		}
-		// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
+	// Affichage des documents à supprimer
+	$nb = Corbeille_documents_compte() + 0;
+	if($nb > 1)
+		Corbeille_affiche_ligne(_T('corbeille:fichiers'),generer_url_ecrire($page,"type_doc=documents"),$nb);
+	else
+		Corbeille_affiche_ligne(_T('corbeille:fichier'),generer_url_ecrire($page,"type_doc=documents"),$nb);
 }
+
+/**
+Gestion des documents
+Compte le nombre de documents sans lien
+Avec ni un article ni une brève ni une rubrique
+MAIS ne gère pas le cas du document dont l'article a été supprimé mais est toujours présent dans un autre article
+De plus nécessite MySQL 4.1 à cause des SubSelect
+*/
+function corbeille_documents_compte()
+	{
+	$requete_documents = "SELECT COUNT(*) AS nbElt FROM spip_documents where id_document NOT IN (SELECT id_document from spip_documents_articles) AND  id_document NOT IN (SELECT id_document from spip_documents_breves) AND  id_document NOT IN (SELECT id_document from spip_documents_rubriques)";
+		
+	$total = 0;
+	if ($row = spip_fetch_array(spip_query($requete_documents))) $total = $row['nbElt'];
+	return $total;
+	}
+
+/**
+Gestion des documents
+Efface un fichier
+*/
+function Corbeille_documents_effacement($id, $fichier)
+	{
+	$requete = "DELETE FROM spip_documents WHERE id_document=$id";
+	spip_query($requete);
+	
+	if(file_exists( '../' . $fichier))
+		unlink('../' . $fichier);;
+	}
 
 
 /**  semble non utilisé jusqu'à present */

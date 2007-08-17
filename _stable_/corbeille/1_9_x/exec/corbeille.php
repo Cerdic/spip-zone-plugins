@@ -42,7 +42,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 	debut_page(_T('corbeille:corbeille'));
 
 	if ($connect_statut == "0minirezo") {
-		$page = "corbeille";	
+		$page = "corbeille";
 
 		if (empty($debut)) $debut = 0;
 		//si type_act non nul tous les éléments effaçable le sont. 
@@ -53,8 +53,8 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 			}
 			$debut=0;$type_act=0;
 		}
-		//si un type_doc est spécifié alors recherche des éléments
-		if (! empty($type_doc)) {
+		//si un type_doc est spécifié alors recherche des éléments (sauf pour le cas des documents)
+		if (! empty($type_doc) && $type_doc != 'documents') {
 			//charge les paramètres propre à l'objet demandé (breves, articles, auteurs, ...)
 			$statut = $corbeille_param[$type_doc]["statut"];
 			$titre = $corbeille_param[$type_doc]["titre"];
@@ -70,7 +70,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
       $log_efface = "";            
       if ($operation == "effacer") {
 	      //suppression des documents demandés
-	      $log_efface = "<div style='background:#eee;border:1px solid #999;padding:5px;margin:0 0 5px 0' class='verdana2'>";
+	      $log_efface = '<div style="background:#eee;border:1px solid #999;padding:5px;margin:0 0 5px 0" class="verdana2">';
         $log_efface .= _T("corbeille:doc_effaces");
 				if (count($effacer) == 0) $log_efface .= _T("corbeille:aucun");
 				else {
@@ -146,24 +146,25 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					echo "<td style='text-align:left;'>"._T("corbeille:parution")."</td>";
 					echo "</tr>\n\n";
 
-					//affichage des 10 documents supprimables
-					while($row=spip_fetch_array($result)) {
-						
-						$id_document=$row[$id];
-						$date_heure=$row[$temps];
-						$titre=$row[$titre];
+				//affichage des 10 documents supprimables
+				while($row=spip_fetch_array($result)) {
+					
+					$id_document=$row[$id];
+					$date_heure=$row[$temps];
+					$restitre=$row[$titre];
 
-						if ($compteur%2) $couleur="#FFFFFF";
-						            else $couleur="#EEEEEE";
-						$compteur++;
+					if ($compteur%2) $couleur="#FFFFFF";
+								else $couleur="#EEEEEE";
+					$compteur++;
 
-						echo "<tr style='background:$couleur;'>";
-						echo "<td style='width:5%;'><input type='checkbox' name='effacer[]' value='$id_document'' /></td>";
-						echo "<td class='verdana2' style='width:70%;'>";
-						if (! empty($page_voir)) {
-                echo "<a href='".generer_url_ecrire($page_voir[0],$page_voir[1]."=$id_document")."'>".typo($titre)."</a>";
-            } else {
-                /* version 1: avec bloc dépliant
+					echo "<tr style='background:$couleur;'>";
+					echo "<td style='width:5%;'><input type='checkbox' name='effacer[]' value='$id_document'' /></td>";
+					echo "<td class='verdana2' style='width:70%;'>";
+					
+					if (! empty($page_voir)) {
+						echo "<a href='".generer_url_ecrire($page_voir[0],$page_voir[1]."=$id_document")."'>".typo($restitre)."</a>";
+					} else {
+           	     /* version 1: avec bloc dépliant
                 echo typo($titre);
                 echo "<br />".bouton_block_invisible("for_".$id_document)._T('corbeille:voir_detail');
                 echo debut_block_invisible("for_".$id_document);
@@ -176,7 +177,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
                 if ($type_doc == "signatures") $detail = recupere_signature_detail($id_document);
                                           else $detail = recupere_forum_detail($id_document);
                 echo "<div id='for_$id_document' style='position:absolute;background:".$GLOBALS["couleur_claire"].";padding:5px;margin:0 0 0 350px;width: 350px;' class='invisible_au_chargement'>$detail</div>";
-                echo "<a href='#' onmouseover=\"changestyle('for_$id_document', 'visibility', 'visible');\" onmouseout=\"changestyle('for_$id_document', 'visibility', 'hidden');\">".typo($titre)."</a>";                
+                echo "<a href='#' onmouseover=\"changestyle('for_$id_document', 'visibility', 'visible');\" onmouseout=\"changestyle('for_$id_document', 'visibility', 'hidden');\">".typo($restitre)."</a>";                
             }
 						echo "</td>";
 						echo "<td class='verdana2' style='width:25%;'>".affdate($date_heure)."</td>";
@@ -184,7 +185,102 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					}
 					echo "</table><br /><input type='submit' value='"._T("corbeille:effacer")."' /></form>\n\n";
 				}
-			} else { // empty doc: affichage simple	
+			
+		} elseif ($type_doc == 'documents') { // type_doc = documents
+			// Si on doit en effacer quelques un
+			$log_efface = '';
+			if ($operation == "effacer")
+				{
+				//suppression des documents demand&eacute;s
+				$log_efface = '<div style="background:#eee;border:1px solid #999;padding:5px;margin:0 0 5px 0" class="verdana2">';
+				$log_efface .= _T("corbeille:doc_effaces");
+				if (count($effacer) == 0) $log_efface .= _T("corbeille:aucun");
+				else
+					{
+					$log_efface .= "<ul>";
+					//rappelle les éléments supprimés
+					foreach($effacer as $i => $id_doc) {
+						$req2 = "SELECT fichier FROM spip_documents WHERE id_document=$id_doc";
+						$result2 = spip_query($req2);
+						$row2 = spip_fetch_array($result2, SPIP_NUM);
+						$log_efface .= "<li>" . $row2[0];
+						$log_efface .= "</li>\n";
+						// supprime les objets selectionnés
+						Corbeille_documents_effacement($id_doc, $row2[0]);
+					}
+					$log_efface .= "</ul>";
+				}
+				$log_efface .= "</div>\n";
+			}
+			
+			debut_gauche();	
+			debut_boite_info();
+			echo propre(_T('corbeille:readme'));  	
+			fin_boite_info();
+			
+			echo "<br />";
+			debut_boite_info();
+			$page = "corbeille";
+			Corbeille_affiche($page);
+			fin_boite_info();
+			
+			debut_droite();
+			gros_titre(_T('corbeille:corbeille'));
+			
+			echo $log_efface;
+			
+			// affichage de ceux qui restent :
+			echo _T('corbeille:fichier_touslesfichiers') . " :<br />" . _T('corbeille:fichiers_info') . "<br />";
+			echo '<div style="border:1px solid #999999;font-size:10px;padding:2px;" class="verdana2">';
+			
+			echo '<span style="color:#FF0000">'._T('info_avertissement').' :</span><br />'.
+			_T('corbeille:fichier_avertissement') . '.</span></div>';
+			
+			$total = corbeille_documents_compte();
+			
+			$requete = 'SELECT id_document, fichier, titre FROM spip_documents WHERE id_document NOT IN (SELECT id_document from spip_documents_articles) AND id_document NOT IN (SELECT id_document from spip_documents_breves) AND  id_document NOT IN (SELECT id_document from spip_documents_rubriques) ORDER BY fichier';
+				
+			$result=spip_query($requete);
+		
+			if (spip_num_rows($result) == 0)
+				echo _T("corbeille:aucun");
+			else
+				{
+				
+				echo "<form action='".generer_url_ecrire($page)."&amp;type_doc=$type_doc' method='post' name='corb'>\n";
+				echo "<input type='hidden' name='operation' value='effacer' />\n";
+				echo "<input type='hidden' name='type_doc' value='$type_doc' />\n";
+				echo "<table style='text-align:center;border:0px;width:100%;background:none;' CELLPADDING=3 CELLSPACING=0 WIDTH=100%>";
+				echo "<tr>";
+				echo "<td style='text-align:left;'><input type='checkbox' value='0' name='checkmaster' onclick='checkAll();' /></td>";
+				echo "<td style='text-align:left;'>Fichier</td>";
+				echo "<td style='text-align:left;'>Titre</td>";
+				echo "</tr>\n\n";
+	
+				$compteur = 0;
+				//affichage des xx documents supprimables
+				while($row=spip_fetch_array($result))
+					{
+					$id_document =$row['id_document'];
+					$fichier=$row['fichier'];
+					$titre=$row['titre'];
+	
+					if ($compteur%2) $couleur="#FFFFFF";
+								else $couleur="#EEEEEE";
+					$compteur++;
+	
+					echo "<tr style='background:$couleur;'>";
+					echo "<td style='width:5%;'><input type='checkbox' name='effacer[]' value='$id_document'' /></td>";
+					echo "<td class='verdana2' style='width:70%;'>";
+					echo $fichier;
+					echo "</td>";
+					echo "<td class='verdana2' style='width:25%;'>".typo($titre)."</td>";
+					echo "</tr>\n";
+					}
+				echo "</table><br /><input type='submit' value='"._T("corbeille:effacer")."' /></form>\n\n";
+				}
+				
+		} else { // empty doc: affichage simple	
 			   // HTML output
 			   debut_gauche();	
       	 debut_boite_info();
@@ -202,7 +298,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
          echo "<p>"._T('corbeille:choix_doc')."</p>";
         			   
 			}
-	}
+	} // 0minirezo
 	else 
 		echo "<strong>"._T("ecrire:avis_acces_interdit")."</strong>";
 
