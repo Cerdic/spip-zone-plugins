@@ -105,6 +105,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'gerer_resultats_tout' 		=> 'G&eacute;rer les r&eacute;sultats de tous les jeux',
 'jeux'						=> 'Jeux',
 'ecraser_resultat'			=> 'Ecraser les r&eacute;sultats ?',
+'dernier_resultat'			=> 'Garder le dernier r&eacute;sultat',
+'meilleur_resultat'			=> 'Garder le meilleur r&eacute;sultat',
 'configurer_jeux'			=> 'Configurer le plugin Jeux',
 
 'sans_titre_prive'	=> 'Sans titre priv&eacute;',
@@ -126,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirmation_compacter_jeu' 	=> '&Ecirc;tes vous r&eacute;ellement s&ucirc;r de vouloir compacter les r&eacute;sultats de ce jeu ?',
 'compacter_confirmer'			=> 'Confirmer le compactage de ces r&eacute;sultats',
 'statut_jeu'					=>'Statut du jeu : '
+
 
 
 );

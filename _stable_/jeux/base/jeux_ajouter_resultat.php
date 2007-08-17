@@ -12,7 +12,7 @@ function jeux_ajouter_resulat($id_jeu, $resultat, $resultat_detaille=''){
 	if (function_exists('lire_config')) 
 		$ecraser_resultat = lire_config('jeux/ecraser_resultat');
 	else
-		$ecraser_resultat = 'oui';
+		$ecraser_resultat = 'dernier_resultat';
 	
 	$resultat_detaille = _q($resultat_detaille);
 	$resultat = _q($resultat);
@@ -21,10 +21,10 @@ function jeux_ajouter_resulat($id_jeu, $resultat, $resultat_detaille=''){
 		spip_query("INSERT into spip_jeux_resultats (id_jeu,id_auteur,resultat_court,resultat_long) VALUES ($id_jeu,$id_auteur,$resultat,$resultat_detaille)"); 
 		
 	} else {
-		$requete = spip_fetch_array(spip_query("SELECT id_resultat FROM spip_jeux_resultats WHERE id_jeu =$id_jeu and id_auteur=$id_auteur"));
+		$requete = spip_fetch_array(spip_query("SELECT resultat_court, id_resultat FROM spip_jeux_resultats WHERE id_jeu =$id_jeu and id_auteur=$id_auteur"));
 		$id_resultat = $requete['id_resultat'];
 		
-		if (!$id_resultat)
+		if (!$id_resultat and ($ecraser_resultat=='dernier_resultat' or ($ecraser_resultat=='meilleur_resultat' and $requete['resultat_court']<$resultat_court)))
 			spip_query("INSERT into spip_jeux_resultats (id_jeu,id_auteur,resultat_court,resultat_long) VALUES ($id_jeu,$id_auteur,$resultat,$resultat_detaille)"); 
 		else
 			spip_query("UPDATE spip_jeux_resultats SET resultat_court=$resultat,resultat_long=$resultat_detaille WHERE id_resultat=$id_resultat");

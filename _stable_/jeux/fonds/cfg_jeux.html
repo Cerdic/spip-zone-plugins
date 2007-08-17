@@ -10,8 +10,9 @@
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 <label><:jeux:ecraser_resultat:>
 <select name="ecraser_resultat"> 
-<option value="oui"><:item_oui:></input>
-<option value="non" [ (#CONFIG{jeux/ecraser_resultat}|=={non}|?{selected="selected"})]><:item_non:></input>
+<option value="non"><:item_non:></option>
+<option value="dernier_resultat"[ (#CONFIG{jeux/ecraser_resultat}|=={dernier_resultat}|?{selected="selected"})]><:jeux:dernier_resultat:></option>
+<option value="meilleur_resultat" [ (#CONFIG{jeux/ecraser_resultat}|=={meilleur_resultat}|?{selected="selected"})]><:jeux:meilleur_resultat:></option>
 </select name="ecraser_resultat">
 </label>
 <p align="right"><input class="fondo"  type="submit" name="_cfg_ok" value="<:valider:>" /></p>
