@@ -22,12 +22,13 @@
 	[(#CONFIG{inscription2/code_postal_fiche_mod}|?{#SET{adresse,complet},''})]
 	[(#CONFIG{inscription2/ville_fiche_mod}|?{#SET{adresse,complet},''})]
 	[(#CONFIG{inscription2/pays_fiche_mod}|?{#SET{adresse,complet},''})]
+	
 	<p>[(#GET{adresse}|=={complet}|?{' ',''})<span class="#EDIT{adressecomplete} adr">]
 		[(#CONFIG{inscription2/adresse_fiche_mod}|?{' ',''})[<span class="street-address">(#ADRESSE|?{#ADRESSE,<:inscription2:adresse:> <:inscription2:non_renseignee:>})</span><br />]]
 		[(#CONFIG{inscription2/code_postal_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL|?{#CODE_POSTAL,<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
 		[(#CONFIG{inscription2/ville_fiche_mod}|?{' ',''})[<span class="locality">(#VILLE|?{#VILLE,<:inscription2:ville:> <:inscription2:non_renseignee:>})</span><br />]]
 		[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})<span class="country-name">]
-			<BOUCLE_r(SPIP_PAYS){id=#PAYS}{tous}>
+			<BOUCLE_r(SPIP_GEO_PAYS){id_pays=#PAYS}{tous}>
 			[(#PAYS|couper{30})]
 			</BOUCLE_r>
 			[(#CONFIG{inscription2/pays_fiche_mod}|?{' ',''})<:inscription2:pays:> <:inscription2:non_renseigne:>]
@@ -91,7 +92,7 @@
 		[(#CONFIG{inscription2/code_postal_pro_fiche_mod}|?{' ',''})[<span class="postal-code">(#CODE_POSTAL_PRO|?{#CODE_POSTAL_PRO,<span class="non_renseigne"><:inscription2:code_postal:> <:inscription2:non_renseigne:></span><br />})</span>]]
 		[(#CONFIG{inscription2/ville_pro_fiche_mod}|?{' ',''})[<span class="locality">(#VILLE_PRO|?{#VILLE_PRO,<span class="non_renseigne"><:inscription2:ville:> <:inscription2:non_renseignee:></span>})</span><br />]]
 		[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})<span class="country-name">]
-			<BOUCLE_r_pro(SPIP_PAYS){id=#PAYS_PRO}{tous}>
+			<BOUCLE_r_pro(SPIP_GEO_PAYS){id_pays=#PAYS_PRO}{tous}>
 			[(#PAYS|couper{30})]
 			</BOUCLE_r_pro>
 			[(#CONFIG{inscription2/pays_pro_fiche_mod}|?{' ',''})<:inscription2:pays:> <:inscription2:non_renseigne:>]

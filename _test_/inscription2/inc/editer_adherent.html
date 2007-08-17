@@ -159,11 +159,11 @@ $().ready(function() {
 				$var_user['b.statut_interne'] = '1';
 			elseif($cle == 'pays'){
 				$var_user['c.pays'] = '1';
-				$var_user['c.id as id_pays'] = '1';}
+				$var_user['c.id_pays as id_pays'] = '1';}
 			elseif($cle == 'pays_pro'){
 				$var_user['d.pays'] = '1';
 				$var_user['d.pays as pays_pro'] = '1';
-				$var_user['d.id as id_pays_pro'] = '1';}
+				$var_user['d.id_pays as id_pays_pro'] = '1';}
 			else
 				$var_user['b.'.$cle] = '1';
 		}
@@ -189,9 +189,9 @@ $().ready(function() {
 		}
 	}
 	if($var_user['c.pays'] && $var_user['d.pays'])
-		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id left join spip_pays d on b.pays_pro=d.id where a.id_auteur= $id");
+		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays where a.id_auteur= $id");
 	elseif($var_user['c.pays'])
-		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_pays c on b.pays=c.id where a.id_auteur= $id");
+		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays where a.id_auteur= $id");
 	else
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
 	$query = spip_fetch_array($query);
