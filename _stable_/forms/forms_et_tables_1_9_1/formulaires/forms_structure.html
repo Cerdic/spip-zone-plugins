@@ -1,4 +1,5 @@
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
+<div [style='(#ENV{style,''})']>
 #SET{fieldset,#ENV{champ,''}|?{0,1}} #SET{need_fieldset,1} #SET{date-picker,0}
 [(#ENV{affiche_sondage})
 <fieldset><legend>#TITRE</legend>
@@ -97,4 +98,5 @@ $('div.spip_forms input.forml').bind('blur',function(){$(this).removeClass('form
 	$('input.date-picker').datePicker({startDate:'01/01/1900'});
 ]
 //--></script>
+</div>
 </BOUCLE_form>
