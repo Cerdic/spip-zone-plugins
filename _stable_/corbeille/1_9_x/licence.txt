@@ -4,13 +4,13 @@ web amateur : http://www.japanim.net/
 web technique : http://spip.japanim.net/
 
 Ce programme est un logiciel libre ; vous pouvez le redistribuer et/ou le modifier
-conformément aux dispositions de la Licence Publique Générale GNU, telle que publiée
-par la Free Software Foundation ; version 2 de la licence, ou encore (à votre choix) toute version ultérieure.
+conformÃ©ment aux dispositions de la Licence Publique GÃ©nÃ©rale GNU, telle que publiÃ©e
+par la Free Software Foundation ; version 2 de la licence, ou encore (Ã  votre choix) toute version ultÃ©rieure.
 
-Ce programme est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE ;
-sans même la garantie implicite de COMMERCIALISATION ou D'ADAPTATION A UN OBJET PARTICULIER.
-Pour plus de détail, voir la Licence Publique Générale GNU .
+Ce programme est distribuÃ© dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE ;
+sans mÃªme la garantie implicite de COMMERCIALISATION ou D'ADAPTATION A UN OBJET PARTICULIER.
+Pour plus de dÃ©tail, voir la Licence Publique GÃ©nÃ©rale GNU .
 
-Vous devez avoir reçu un exemplaire de la Licence Publique Générale GNU en même temps que ce programme ;
-si ce n'est pas le cas, écrivez à la Free Software Foundation Inc., 675 Mass Ave, Cambridge, MA 02139, Etats-Unis. 
+Vous devez avoir reÃ§u un exemplaire de la Licence Publique GÃ©nÃ©rale GNU en mÃªme temps que ce programme ;
+si ce n'est pas le cas, Ã©crivez Ã  la Free Software Foundation Inc., 675 Mass Ave, Cambridge, MA 02139, Etats-Unis. 
 

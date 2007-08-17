@@ -1,7 +1,7 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP -- Esto es un fichero de idioma de SPIP
-// Traducido al español, JSJ septiembre 2006, octubre 06
+// Traducido al espaÃ±ol, JSJ septiembre 2006, octubre 06
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   
@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'doc_effaces' => 'Documentos borrados:',
   'ecrit' => " ha escrito: ", 
   'effacer' => "Borrar", 
-  'erreur' => ": ¡ error !",
+  'erreur' => ": Â¡ error !",
   
   'messages_tous_pri' => "Todos los mensajes del foro de administradores en la papelera: ",
   'messages_tous_pub' => "Todos los mensajes del foro en la papelera: ", 
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // S
   'signe' => " ha firmado mediante: ",
-  'souci' => " ¡problema grave! ", 
+  'souci' => " problema grave! ", 
 
   // T
   'titre' => "T&iacute;tulo", 

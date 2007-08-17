@@ -3,16 +3,16 @@ _______________I
 
 Se pueden suprimir los siguientes tipos de documentos:
 - breves rechazados
-- artículos en la papelera
+- artÃ¬culos en la papelera
 - mensajes suprimidos de los foros
 - autores eliminados
-- firmas de petición rechazadas
+- firmas de peticÃ¬on rechazadas
 
-La eliminación suprime el documento de la base de datos,
-pero NO limpia el caché en disco duro NI la indexación en la base de datos creada por el motor de búsqueda.
-Es recomendable vaciar el caché del servidor y reindexar el sitio periódicamente (cada mes, cada 2 meses o 6 meses por ejemplo)
+La eliminaciÃ³n suprime el documento de la base de datos,
+pero NO limpia el cachÃ© en disco duro NI la indexaciÃ³n en la base de datos creada por el motor de bÃºsqueda.
+Es recomendable vaciar el cachÃ© del servidor y reindexar el sitio periÃ³dicamente (cada mes, cada 2 meses o 6 meses por ejemplo)
 
-Pendiente de añadir: se admiten sugerencias
+Pendiente de aÃ±adir: se admiten sugerencias
 
 Matthieu ONFRAY
 email : silicium@japanim.net

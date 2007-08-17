@@ -1,7 +1,7 @@
 <?php
 
 /**
- * definition du plugin "corbeille" version "classe statique"
+ * d√©finition du plugin "corbeille" version "classe statique"
  * utilisee comme espace de nommage
  */
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -12,8 +12,8 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 /* public static */
 /**
  * Corbeille_ajouterBoutons() ajoute un lien au panneau d'administration
- * @param $boutons_admin flux html de la barre de menu dans la partie privée
- * @ return flux html édité     
+ * @param $boutons_admin flux html de la barre de menu dans la partie priv√©e
+ * @ return flux html √©dit√©     
  */
 function Corbeille_ajouterBoutons($boutons_admin) {
 	// si on est admin
@@ -30,9 +30,9 @@ function Corbeille_ajouterBoutons($boutons_admin) {
 /* public static */
 
 /**
- *Corbeille_effacement() supprime les elements selectionnés par l'utilisateur
- * @param $type_doc nom de l'objet spip défini dans inc_param.php @see inc_param.php
- * @param $tabid tableau des id à supprimer, optionnel si tout les éléments sont supprimés
+ *Corbeille_effacement() supprime les elements selectionn√©s par l'utilisateur
+ * @param $type_doc nom de l'objet spip d√©fini dans inc_param.php @see inc_param.php
+ * @param $tabid tableau des id √† supprimer, optionnel si tout les √©l√©ments sont supprim√©s
  *      
  * @return neant  
  */  
@@ -50,20 +50,20 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 	if ($total == 0) {
 		echo "$table vide <br />";
 	} else {
-		//determine les index des éléments à supprimer
+		//determine les index des √©l√©ments √† supprimer
 		if (is_null($tabid)) {
-			//recupére les identifiants des objets à supprimer
+			//recup√®re les identifiants des objets √† supprimer
 			$req = "SELECT $index FROM $table WHERE statut='$statut'";			
 			$result = spip_query($req);
 			while ($row = spip_fetch_array($result)) {
 				$tabid[] = $row[$index];
 			}
 		}
-		//supprime les élements défini par la liste des index
+		//supprime les √©lements d√©fini par la liste des index
 		foreach($tabid as $id) {
 			$req = "DELETE FROM $table WHERE statut='$statut' AND $index = $id";
 			$result = spip_query($req);
-			//suppresion des elements liés	
+			//suppresion des elements li√©s	
 			if ($table_liee) {
 				foreach($table_liee as $unetable) {
 					$req = "DELETE FROM $unetable WHERE $index = $id";
@@ -76,7 +76,7 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
  
 /**
  *Corbeille_icone_poubelle() affiche l'icone poubelle (vide ou pleine)
- * @param $total_table nb d'eléments supprimable pour un objet donné
+ * @param $total_table nb d'el√©ments supprimable pour un objet donn√©
  */
 function Corbeille_icone_poubelle($total_table) {
 	if (empty($total_table)) {
@@ -87,9 +87,9 @@ function Corbeille_icone_poubelle($total_table) {
 }
 
 /**
- *Corbeille_compte_elements_vider() compte le nombre d'element supprimable pour un objet donné
+ *Corbeille_compte_elements_vider() compte le nombre d'element supprimable pour un objet donn√©
  * @param $type_doc 
- * @return $total , nb d'élements supprimable  
+ * @return $total , nb d'√©lements supprimable  
 */
 function Corbeille_compte_elements_vider($type_doc) {
 	global $corbeille_param;
@@ -106,7 +106,7 @@ function Corbeille_compte_elements_vider($type_doc) {
   
 /**
  *Corbeille_affiche_ligne() affiche une ligne par objet dans le menu de gauche
- *@param $titre libelle à afficher dans le menu
+ *@param $titre libelle √† afficher dans le menu
  *@param $url url de la page de gestion de l'objet
  *@param $total_table nb d'element supprimable
  *
@@ -127,7 +127,7 @@ function Corbeille_affiche_ligne($titre,$url,$total_table){
  *@return neant
  */  
 function Corbeille_affiche($page){
-  		//charge les paramétres
+  		//charge les param√®tres
 		global $corbeille_param;
 		//initialise les variables
 		$totaux = array();
@@ -142,9 +142,9 @@ function Corbeille_affiche($page){
 		echo "<strong>"._T('corbeille:choix_doc')."</strong><br/>";
 		echo "<style type='text/css'>div a.corbeille {display:block;border:3px solid #f00;padding: 5px;margin-right:5px} div a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
 	
-		//parcours les totaux et genere une ligne de résulat par type d'objet
+		//parcours les totaux et genere une ligne de r√©sulat par type d'objet
 		foreach($totaux as $key => $total) {
-			//ignore tout car pas de paramétre déclaré dans inc_param
+			//ignore tout car pas de param√®tre d√©clar√© dans inc_param
 			if ($key != "tout") {
 				Corbeille_affiche_ligne($corbeille_param[$key]["libelle_court"],generer_url_ecrire($page,"type_doc=".$key),$total);
 			}
@@ -153,7 +153,7 @@ function Corbeille_affiche($page){
 }
 
 
-/**  semble non utilisé jusqu'à present */
+/**  semble non utilis√© jusqu'√† present */
 // recupere les details du forum
 function recupere_forum_detail($id_document){
   $str = "";	

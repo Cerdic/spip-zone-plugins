@@ -7,7 +7,7 @@ include(dirname(__FILE__).'/../inc_param.php');
 //
 // Corbeille
 /** 
- *exec_corbeille() function principale d'éxécution de l'administration du plugin
+ *exec_corbeille() function principale d'ex√©cution de l'administration du plugin
  */ 
 function exec_corbeille(){
   global $type_doc;
@@ -15,9 +15,9 @@ function exec_corbeille(){
   global $connect_statut;
   global $operation;
   global $debut;
-  global $effacer; //array des id des objets à effacer
+  global $effacer; //array des id des objets √† effacer
   include_spip("inc/presentation");
-  //charge les paramètres de conf
+  //charge les param√®tres de conf
   global $corbeille_param;
 
 
@@ -45,17 +45,17 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 		$page = "corbeille";	
 
 		if (empty($debut)) $debut = 0;
-		//si type_act non nul tous les éléments effaçable le sont. 
+		//si type_act non nul tous les √©l√©ments effa√ßable le sont. 
 		if (! empty($type_act)) {
-			//pour chacun des objets declarés dans inc_param la fonction effacement est appellée
+			//pour chacun des objets declar√©s dans inc_param la fonction effacement est appell√©e
 			foreach($corbeille_param as $key => $objet) {
-				Corbeille_effacement($key); //indique l'objet à vider
+				Corbeille_effacement($key); //indique l'objet √† vider
 			}
 			$debut=0;$type_act=0;
 		}
-		//si un type_doc est spécifié alors recherche des éléments
+		//si un type_doc est sp√©cifi√© alors recherche des √©l√©ments
 		if (! empty($type_doc)) {
-			//charge les paramètres propre à l'objet demandé (breves, articles, auteurs, ...)
+			//charge les param√®tres propre √† l'objet demand√© (breves, articles, auteurs, ...)
 			$statut = $corbeille_param[$type_doc]["statut"];
 			$titre = $corbeille_param[$type_doc]["titre"];
 			$table = $corbeille_param[$type_doc]["table"];
@@ -69,13 +69,13 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 	    
       $log_efface = "";            
       if ($operation == "effacer") {
-	      //suppression des documents demandés
+	      //suppression des documents demand√©s
 	      $log_efface = "<div style='background:#eee;border:1px solid #999;padding:5px;margin:0 0 5px 0' class='verdana2'>";
         $log_efface .= _T("corbeille:doc_effaces");
 				if (count($effacer) == 0) $log_efface .= _T("corbeille:aucun");
 				else {
 					$log_efface .= "<ul>";
-					//rappelle les éléments supprimés
+					//rappelle les √©l√©ments supprim√©s
 					foreach($effacer as $i => $id_doc) {
 						$req2 = "SELECT $titre FROM $table WHERE $id=$id_doc";
 						$result2 = spip_query($req2);
@@ -84,7 +84,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 						$log_efface .= "</li>\n";
 					}
 					$log_efface .= "</ul>";
-					//supprime les objets selectionnés
+					//supprime les objets selectionn√©s
 					Corbeille_effacement($type_doc, $effacer);
 				}
 				$log_efface .= "</div>\n";
@@ -108,7 +108,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
         echo $log_efface;
 				echo $libelle;
 				
-				//affichage des documents mis a la corbeille et de type doc type                        
+				//affichage des documents mis √† la corbeille et de type doc type                        
 				$req_corbeille = "select COUNT(*) as nbElt from $table WHERE statut like '$statut'";
 				$result_corbeille = spip_query($req_corbeille);
 				$total = 0;
@@ -117,7 +117,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 
 				echo "<br /><br />";
 				
-				//on affiche les docs 10 par 10 : creation des liens vers suivants/precedents
+				//on affiche les docs 10 par 10 : cr√©ation des liens vers suivants/precedents
 				if ($total > 10) {
 					echo "<div style='text-align:center'>";
 					for ($i = 0; $i < $total; $i = $i + 10){
@@ -163,7 +163,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 						if (! empty($page_voir)) {
                 echo "<a href='".generer_url_ecrire($page_voir[0],$page_voir[1]."=$id_document")."'>".typo($titre)."</a>";
             } else {
-                /* version 1: avec bloc dépliant
+                /* version 1: avec bloc d√©pliant
                 echo typo($titre);
                 echo "<br />".bouton_block_invisible("for_".$id_document)._T('corbeille:voir_detail');
                 echo debut_block_invisible("for_".$id_document);

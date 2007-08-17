@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   'articles_tous' => "Tous les articles dans la corbeille :",
   'aucun' => "Aucun",
-	'auteurs_tous' => "Tous les auteurs dans la corbeille :",
+  'auteurs_tous' => "Tous les auteurs dans la corbeille :",
   
   'breves_toutes' => "Toutes les br&egrave;ves dans la corbeille :",
 	

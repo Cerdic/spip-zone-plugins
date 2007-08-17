@@ -1,20 +1,20 @@
 <?php
 /**
  *\file inc_param.php
- * Paramtre de configuration de la corbeille
- * "nom de l'objet spip" => array ("statut" => nom du statut dans la base de donnŽes (bdd),
- * 									"titre" => nom du champ retournŽ dans le listing,
+ * ParamÃ¨tre de configuration de la corbeille
+ * "nom de l'objet spip" => array ("statut" => nom du statut dans la base de donnÃ©es (bdd),
+ * 									"titre" => nom du champ retournÃ© dans le listing,
  * 									"table" => nom de la table spip dans la bdd,
  * 									"id" => clef primaire dans la table,
- * 									"temps" => aucune idŽe ˆ quoi a peut servir,
- * 									"page_voir" => parametres pour voir le dŽtail d'un objet
+ * 									"temps" => aucune idÃ©e Ã  quoi Ã§a peut servir,
+ * 									"page_voir" => parametres pour voir le dÃ©tail d'un objet
  * 									"libelle" => texte long dans la partie droite de l'affichage,
  * 									"libelle_court" => texte court dans le menu gauche,
- * 									"tablelie"  => tableau des tables spip ˆ vider en meme temps    )  
+ * 									"tablelie"  => tableau des tables spip Ã  vider en meme temps    )  
  *
  */  
 
-/* DŽclaration des paramtres de configuration */
+/* DÃ©claration des paramÃ¨tres de configuration */
 global $corbeille_param;
 $corbeille_param = array (
 	"signatures"=> 		array(	"statut" => "poubelle", 
