@@ -147,7 +147,7 @@ function sedna_utils(){
 
 			// Si le cookie n'est pas a jour, on l'update sur le brouteur
 			if ($lus <> $_COOKIE['sedna_lu']) {
-
+				include_spip('inc/cookie');
 				spip_setcookie('sedna_lu', $lus,
 					time()+365*24*3600);
 					$_COOKIE['sedna_lu'] = $lus;
