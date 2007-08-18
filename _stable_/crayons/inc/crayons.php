@@ -12,6 +12,13 @@ function valeur_champ_logo($table, $id, $champ) {
 	return $on ? filemtime($on[0]) : false;
 }
 
+// Idem : si un doc est demande, on renvoie la date du doc
+function valeur_champ_document($table, $id, $champ) {
+	$s = spip_query("SELECT date FROM spip_documents WHERE id_document="._q($id));
+	if ($t = spip_fetch_array($s))
+		return $t['date'];
+}
+
 // cette fonction de revision recoit le fichier upload a passer en logo
 // en reference : le nom du widget, pour aller chercher d'autres donnees
 // (ex: supprimer)
@@ -65,6 +72,72 @@ function logo_revision($id, $file, $type, $ref) {
 
 	return true;
 }
+
+
+// cette fonction de revision recoit le fichier upload a passer en document
+function document_revision($id, $file, $type, $ref) {
+	include_spip('inc/documents');
+	include_spip('inc/getdocument');
+
+	$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($id));
+	if (!$t = spip_fetch_array($s))
+		return false;
+
+	// Chargement d'un nouveau doc ?
+	if ($file['document']) {
+		define('FILE_UPLOAD', true); // message pour json_export :(
+
+
+		spip_log($file['document']);
+
+		$nom_envoye = $file['document']['name'];
+		$source = $file['document']['tmp_name'];
+		preg_match(",\.([^.]+)$,", $nom_envoye, $match);
+		$ext = /*corriger_extension*/(strtolower($match[1])); // TODO : mime-type
+
+		spip_log(array($nom_envoye, $source, $ext));
+
+		// Pour l'instant, on ne gere que les documents de meme type
+		// TODO: autoriser a chager d'extension
+		if ($ext != $t['extension'])
+			return false;
+
+		if (!$fichier = copier_document($ext, $nom_envoye, $source))
+			return false;
+
+		spip_log($fichier);
+
+		$size_image = @getimagesize($fichier);
+		$largeur = intval($size_image[0]);
+		$hauteur = intval($size_image[1]);
+
+		// supprimer l'ancien document
+		// sauf si il etait distant
+		if ($t['distant'] != 'oui'
+		AND file_exists(get_spip_doc($t['fichier'])))
+			supprimer_fichier(get_spip_doc($t['fichier']));
+
+		// inserer les nouvelles donnees
+		$c = array(
+			'fichier' => set_spip_doc($fichier),
+			'taille' => filesize($fichier),
+			'date' => date("Y-m-d H:i:s"),
+			'largeur' => $largeur,
+			'hauteur' => $hauteur
+		);
+
+		include_spip('inc/modifier');
+		modifier_contenu('document', $id,
+		array(
+			'champs' => array('fichier', 'taille', 'date', 'largeur', 'hauteur')
+		),
+		$c);
+
+	}
+
+	return true;
+}
+
 
 function colonne_table($table, $col) {
 	$nom_table = '';
