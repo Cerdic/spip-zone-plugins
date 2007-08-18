@@ -9,10 +9,9 @@
  Permite introducir un punto de google map &oacute; editar un artigo dende a parte privada.
 _ Este plugin engade duas taboas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_config}}
 _ A p�xina de probas do plugin � [www.spip.escoitar.org->http://www.spip.escoitar.org]
- [es]{{Can you translate it again please? See the french version}} Plugin para insertar un Googlemaps en un sitio SPIP.
-_ Permite introducir un punto de google maps en la edici&oacute;n de un art&iacute;culo desde la parte privada.
-_ Este plugin a&tilde;ade dos nuevas tablas en la base de datos. Una llamada {{spip_gis}} y otra llamada {{spip_gis_config}}
-_ La p�gina de pruebas del plugin es [www.spip.escoitar.org->http://www.spip.escoitar.org]
+ [es] Plugin para configurar la API Googlemaps en la parte privada de tu sitio SPIP.
+_ Permite utilizar la API con varios plugins (Gis, GeoForms...).
+_ Una pa&tilde;gina de pruebas del plugin en [www.spip.escoitar.org->http://www.spip.escoitar.org]
  [fr]Plugin pour configurer l'API Googlemaps dans la partie priv&eacute;e de votre site SPIP.
 _ Permet d'utiliser l'API avec plusieurs plugins (Gis, Geoforms...).
  [en]Plugin to configure the Googlemap's API in the private area of you spip website.
