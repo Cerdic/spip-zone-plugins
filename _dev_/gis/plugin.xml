@@ -14,11 +14,10 @@
 _ Este plugin engade duas taboas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_config}}
 _ A p�xina de probas do plugin � [->http://www.spip.escoitar.org/]
 _ [documentacion->http://www.escoitar.org/documentacion/spip.php?article175]
- [es]{{Can you translate it again please? See the french version}}Plugin para insertar un Googlemaps en un sitio SPIP.
-_ Permite introducir un punto de google maps en la edici&oacute;n de un art&iacute;culo desde la parte privada.
-_ Este plugin a&tilde;ade dos nuevas tablas en la base de datos. Una llamada {{spip_gis}} y otra llamada {{spip_gis_config}}
-_ La p�gina de pruebas del plugin es [->http://www.spip.escoitar.org/]
-_ [documentacion->http://www.escoitar.org/documentacion/spip.php?article176]
+ [es]Este plugin, acoplado al plugin Google Map API, permite visualizar mapas GoogleMaps en las p&aacute;ginas p&uacute;blicas del sitio. Los art&iacute;culos y las palabras claves del sitio pueden ser geolocalizadas por marcadores en los mapas. 
+_ Este plugin introduce dos tablas en la base de datos, una denominada {{spip_gis}} et l'autre {{spip_gis_mots}}
+_ P&aacute;gina de pruebas: [->http://www.spip.escoitar.org/]
+_ Documentaci&oacute;n: [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
 [fr]Ce plugin, coupl&eacute; au plugin Google Map API permet d'afficher des cartes GoogleMaps sur les pages publiques du site. Les articles et mots-cl&eacute;s du site peuvent &ecirc;tre g&eacute;olocalis&eacute;s par des marqueurs sur les cartes.
 _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eacute;e {{spip_gis}} et l'autre {{spip_gis_mots}}
 _ page de test [->http://www.spip.escoitar.org/] 
