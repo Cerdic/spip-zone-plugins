@@ -76,8 +76,6 @@ function logo_revision($id, $file, $type, $ref) {
 
 // cette fonction de revision recoit le fichier upload a passer en document
 function document_revision($id, $file, $type, $ref) {
-	include_spip('inc/documents');
-	include_spip('inc/getdocument');
 
 	$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($id));
 	if (!$t = spip_fetch_array($s))
@@ -85,57 +83,40 @@ function document_revision($id, $file, $type, $ref) {
 
 	// Chargement d'un nouveau doc ?
 	if ($file['document']) {
-		define('FILE_UPLOAD', true); // message pour json_export :(
 
+		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+		$arg = $file['document'];
+		check_upload_error($arg['error']);
+		$x = $ajouter_documents($arg['tmp_name'], $arg['name'], 
+			'article', 0, 'document', null, $actifs);
 
-		spip_log($file['document']);
+		// $actifs contient l'id_document nouvellement cree
+		// on recopie les donnees interessantes dans l'ancien
+		if ($id_new = array_pop($actifs)
+		AND $s = spip_query("SELECT fichier, taille, largeur, hauteur, extension, distant FROM spip_documents
+			WHERE id_document="._q($id_new))
+		AND $new = spip_fetch_array($s)) {
+			define('FILE_UPLOAD', true); // message pour json_export :(
+			include_spip('inc/modifier');
+			modifier_contenu('document', $id,
+				array('champs' => array_keys($new)),
+				$new);
 
-		$nom_envoye = $file['document']['name'];
-		$source = $file['document']['tmp_name'];
-		preg_match(",\.([^.]+)$,", $nom_envoye, $match);
-		$ext = /*corriger_extension*/(strtolower($match[1])); // TODO : mime-type
+			// supprimer l'ancien document (sauf s'il etait distant)
+			if ($t['distant'] != 'oui'
+			AND file_exists(get_spip_doc($t['fichier'])))
+				supprimer_fichier(get_spip_doc($t['fichier']));
 
-		spip_log(array($nom_envoye, $source, $ext));
+			// Effacer la ligne temporaire de spip_document
+			spip_query("DELETE FROM spip_documents WHERE id_document="._q($id_new));
 
-		// Pour l'instant, on ne gere que les documents de meme type
-		// TODO: autoriser a chager d'extension
-		if ($ext != $t['extension'])
-			return false;
+			// oublier id_document temporaire (ca marche chez moi, sinon bof)
+			spip_query("ALTER TABLE spip_documents AUTO_INCREMENT="._q($id_new));
 
-		if (!$fichier = copier_document($ext, $nom_envoye, $source))
-			return false;
-
-		spip_log($fichier);
-
-		$size_image = @getimagesize($fichier);
-		$largeur = intval($size_image[0]);
-		$hauteur = intval($size_image[1]);
-
-		// supprimer l'ancien document
-		// sauf si il etait distant
-		if ($t['distant'] != 'oui'
-		AND file_exists(get_spip_doc($t['fichier'])))
-			supprimer_fichier(get_spip_doc($t['fichier']));
-
-		// inserer les nouvelles donnees
-		$c = array(
-			'fichier' => set_spip_doc($fichier),
-			'taille' => filesize($fichier),
-			'date' => date("Y-m-d H:i:s"),
-			'largeur' => $largeur,
-			'hauteur' => $hauteur
-		);
-
-		include_spip('inc/modifier');
-		modifier_contenu('document', $id,
-		array(
-			'champs' => array('fichier', 'taille', 'date', 'largeur', 'hauteur')
-		),
-		$c);
-
+			return true;
+		}
 	}
 
-	return true;
 }
 
 
