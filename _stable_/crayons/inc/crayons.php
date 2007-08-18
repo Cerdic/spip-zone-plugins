@@ -97,6 +97,14 @@ function document_revision($id, $file, $type, $ref) {
 			WHERE id_document="._q($id_new))
 		AND $new = spip_fetch_array($s)) {
 			define('FILE_UPLOAD', true); // message pour json_export :(
+
+			// Une vignette doit rester une image
+			if ($t['mode'] == 'vignette'
+			AND !in_array($new['extension'], array('jpg', 'gif', 'png')))
+				return false;
+
+			// Maintenant on est bon, on recopie les nouvelles donnees
+			// dans l'ancienne ligne spip_documents
 			include_spip('inc/modifier');
 			modifier_contenu('document', $id,
 				array('champs' => array_keys($new)),

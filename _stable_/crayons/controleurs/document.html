@@ -10,6 +10,8 @@
 
 <BOUCLE_d(DOCUMENTS){id_document}>
 
+#MODE
+
 [(#SET{image,[<img src="(#LOGO_DOCUMENT||extraire_attribut{src})" />]})]
 
 <fieldset[ style="(#ENV{style});"]>
@@ -29,8 +31,8 @@
 
 </legend>
 
-<input class="crayon-active" name="#ENV{name_document}" type="file"
-onchange="if (this.value && false && !this.value.match(/\.(#EXTENSION)$/i)) { alert('Il faut choisir un #EXTENSION :-)'); this.value=''; }; var q=cQuery('##ENV{name_document}_supprimer').parent(); this.value ? q.hide() : q.show();" />
+<input class="crayon-active" name="#ENV{name_document}" type="file"[
+onchange="(#MODE|=={vignette}|?{' '})if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('Il faut choisir une image :-)'); this.value=''; };"] />
 
 </fieldset>
 
