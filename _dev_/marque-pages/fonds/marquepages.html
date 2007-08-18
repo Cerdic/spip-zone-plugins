@@ -28,7 +28,13 @@
 		<B_auteur>
 			<:marquepages:par:>
 		<BOUCLE_auteur(AUTEURS){id_auteur=#_bookmarks:ID_AUTEUR}>
-			<a href="#URL_AUTEUR"><BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:vous:>,#PRENOM #NOM_FAMILLE})]</BOUCLE_elargi></a>
+			<a href="#URL_AUTEUR">
+				<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
+				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' ',<:marquepages:vous:>})
+				[(#CONFIG{plugin/INSCRIPTION2/version}|?{' ',#_auteur:NOM})[(#PRENOM|?{#PRENOM})] [(#NOM_FAMILLE|?{#NOM_FAMILLE,#_auteur:NOM})]]
+				]
+				</BOUCLE_elargi>
+			</a>
 			<BOUCLE_autres(FORUMS){id_syndic=#_bookmarks:ID_SYNDIC}{statut=prive}{plat}> </BOUCLE_autres>
 				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:>]
 			</B_autres>
