@@ -97,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'conf_msc' => 'Configuration de musicplayer',
 'conf_slim' => 'Configuration de slimplayer',
 'conf_but' => 'Configuration de buttonplayer',
+'wmode' => 'Param&egrave;tre flash Wmode',
 'jw_logo' => 'Configuration g&eacute;n&eacute;rale pour les lecteurs de Jeroen Wijering',
 'opt_avancees' => 'Options avanc&eacute;es',
 'prerolllocation' =>'Emplacement preroll',

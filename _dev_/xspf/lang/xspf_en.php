@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'conf_msc' => 'Musicplayer settings',
 'conf_slim' => 'Slimplayer settings',
 'conf_but' => 'Buttonplayer settings',
+'wmode' => '<NEW>Param&egrave;tre flash Wmode',
 'jw_logo' => 'General setting for Jeroen Wijering\'s players',
 'opt_avancees' => 'Advanced settings',
 'prerolllocation' =>'preroll location',

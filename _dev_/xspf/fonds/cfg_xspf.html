@@ -27,7 +27,13 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 [(#REM) titre=XSPF plugin]
 
 <fieldset>
-	<legend><:xspf:jw_logo:></legend>
+	<h4><:xspf:wmode:></h4>
+	<label for="wmode">Wmode</label>
+	<select name="wmode" id="wmode" class="fondl">
+		<option value="transparent"[(#ENV*{wmode}|=={transparent}|?{selected,''})]>transparent</option>
+		<option value="opaque"[(#ENV*{wmode}|=={opaque}|?{selected,''})]>opaque</option>
+	</select>
+	<h4><:xspf:jw_logo:></h4>
 	<label for="jwlogo"><a href="#" title="<:xspf:jwlogo:> - <:xspf:desc_jwlogo:>"><:xspf:jwlogo:></a></label>
 	<input type="text" name="jwlogo" class="forml" style="width:200px;display:inline" id="jwlogo" value="#ENV{jwlogo}" /> <i>URL</i>
 </fieldset>

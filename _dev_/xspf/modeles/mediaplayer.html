@@ -86,6 +86,7 @@ Plusieurs methodes d'insertion :
   [(#SET{objet_val,[(#ENV{id_mediaplayer})]})]
 ]
 
+[(#SET{wmode,#ENV{wmode,#CONFIG{xspf/wmode}|sinon{transparent}}})]
 [(#SET{type,#ENV{type,#CONFIG{xspf/mpltypefichier}|sinon{flv,swf,mp3,jpg,png,gif}}})]
 
 [(#SET{width,#ENV{width,#CONFIG{xspf/mplwidth}|sinon{320}}})]
@@ -143,6 +144,7 @@ Get the Flash Player</a> to see this player.
 
 	var s1 = new SWFObject("#CHEMIN{lib/jw_media_player/mediaplayer.swf}","mediaplayer","#GET{width}","#GET{height}","7");
 	s1.addParam("allowfullscreen","#GET{allowfullscreen}");
+	s1.addParam("wmode","#GET{wmode}");
 	s1.addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,#GET{type},'&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s1.addVariable("backcolor","#GET{backcolor}");
 	s1.addVariable("frontcolor","#GET{frontcolor}");

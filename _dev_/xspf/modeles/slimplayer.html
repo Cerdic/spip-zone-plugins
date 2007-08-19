@@ -47,6 +47,8 @@
   [(#SET{objet_val,[(#ENV{id_slimplayer})]})]
 ]
 
+[(#SET{wmode,#ENV{wmode,#CONFIG{xspf/wmode}|sinon{transparent}}})]
+
 [(#SET{width,#ENV{width,#CONFIG{xspf/slimwidth}|sinon{320}}})]
 [(#SET{height,#ENV{height,20}})]
 [(#SET{repeat,#ENV{repeat,#CONFIG{xspf/slimrepeat}|sinon{false}}})]
@@ -68,6 +70,7 @@ Get the Flash Player</a> to see this player.
 <script type="text/javascript">
 // <![CDATA[
 	var s1 = new SWFObject("#CHEMIN{swf/xspf_player_slim.swf}","slimplayer","#GET{width}","#GET{height}","7");
+	s1.addParam("wmode","#GET{wmode}");
 	s1.addVariable("playlist_url",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,mp3,'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s1.addVariable("autoload","#GET{autoload}");
 	s1.addVariable("autoplay","#GET{autoplay}");

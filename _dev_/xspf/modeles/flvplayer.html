@@ -81,6 +81,8 @@
   [(#SET{objet_val,[(#ENV{id_flvplayer})]})]
 ] 
 
+[(#SET{wmode,#ENV{wmode,#CONFIG{xspf/wmode}|sinon{transparent}}})]
+
 [(#SET{width,#ENV{width,#CONFIG{xspf/flpwidth}|sinon{320}}})]
 [(#SET{height,#ENV{height,#CONFIG{xspf/flpheigth}|sinon{240}}})]
 [(#SET{displaywidth,#ENV{displaywidth,#CONFIG{xspf/flpdisplaywidth}|sinon{#GET{width}}}})]
@@ -133,6 +135,7 @@ Get the Flash Player</a> to see this player.
 	var s1 = new SWFObject("#CHEMIN{lib/jw_flv_player/flvplayer.swf}","flvplayer","#GET{width}","#GET{height}","7");
 	s1.addVariable("file",encodeURIComponent("[(#ENV{domaine,#URL_PAGE{xspf}}|url_absolue|parametre_url{type,'jpg|png|gif|mp3|flv|swf','&'}|parametre_url{prerolllocation,[(#GET{prerolllocation})],'&'}|parametre_url{postrolllocation,[(#GET{postrolllocation})],'&'}|parametre_url{prerolllink,[(#GET{prerolllink})],'&'}|parametre_url{postrolllink,[(#GET{postrolllink})],'&'}|parametre_url{creator,[(#ENV{creator})],'&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
 	s1.addParam("allowfullscreen","#GET{allowfullscreen}");
+	s1.addParam("wmode","#GET{wmode}");
 	s1.addParam("menu","true");
 	s1.addVariable("image","url");
 	s1.addVariable("backcolor","#GET{backcolor}");
