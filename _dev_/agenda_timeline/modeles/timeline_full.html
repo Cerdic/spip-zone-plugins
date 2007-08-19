@@ -50,6 +50,7 @@ $(function (){
 	var eventSource = new Timeline.DefaultEventSource();
 	var bandInfos = [
 		Timeline.createBandInfo({
+			timeZone: [(#CONFIG{Agendatimeline/band1_timezone}|?{#CONFIG{Agendatimeline/band1_timezone},0})],
 			eventSource: eventSource,
 			date: "[(#GET{band1_date})]",
 			showEventText: [(#CONFIG{Agendatimeline/band1_show_texte}|?{#CONFIG{Agendatimeline/band1_show_texte},true})],
@@ -61,6 +62,7 @@ $(function (){
 		}),
 
 		Timeline.createBandInfo({
+			timeZone: [(#CONFIG{Agendatimeline/band2_timezone}|?{#CONFIG{Agendatimeline/band2_timezone},0})],
 			eventSource: eventSource,
 			date: "[(#GET{band2_date})]",
 			showEventText: [(#CONFIG{Agendatimeline/band2_show_texte}|?{#CONFIG{Agendatimeline/band2_show_texte},false})],

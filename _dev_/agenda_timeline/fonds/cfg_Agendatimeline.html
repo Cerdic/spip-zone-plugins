@@ -46,13 +46,40 @@ else
 </legend>
 <h4><:agendatimeline:bande1:></h4>
 <p>
+	<label for="band1_timezone"><:agendatimeline:duree_timeline:>
+	<select name="band1_timezone" id="band1_timezone" class="fondl">
+		<option value="-10"[ (#ENV{band1_timezone}|=={-10}|?{selected,''})]>-10</option>
+		<option value="-9"[ (#ENV{band1_timezone}|=={-9}|?{selected,''})]>-9</option>
+		<option value="-8"[ (#ENV{band1_timezone}|=={-8}|?{selected,''})]>-8</option>
+		<option value="-7"[ (#ENV{band1_timezone}|=={-7}|?{selected,''})]>-7</option>
+		<option value="-6"[ (#ENV{band1_timezone}|=={-6}|?{selected,''})]>-6</option>
+		<option value="-5"[ (#ENV{band1_timezone}|=={-5}|?{selected,''})]>-5</option>
+		<option value="-4"[ (#ENV{band1_timezone}|=={-4}|?{selected,''})]>-4</option>
+		<option value="-3"[ (#ENV{band1_timezone}|=={-3}|?{selected,''})]>-3</option>
+		<option value="-2"[ (#ENV{band1_timezone}|=={-2}|?{selected,''})]>-2</option>
+		<option value="-1"[ (#ENV{band1_timezone}|=={-1}|?{selected,''})]>-1</option>
+		<option value="0"[ (#ENV{band1_timezone}|=={0}|?{selected,''})][ (#ENV{band1_timezone}|?{'',selected})]>0 (GMT)</option>
+		<option value="+1"[ (#ENV{band1_timezone}|=={+1}|?{selected,''})]>+1</option>
+		<option value="+2"[ (#ENV{band1_timezone}|=={+2}|?{selected,''})]>+2</option>
+		<option value="+3"[ (#ENV{band1_timezone}|=={+3}|?{selected,''})]>+3</option>
+		<option value="+4"[ (#ENV{band1_timezone}|=={+4}|?{selected,''})]>+4</option>
+		<option value="+5"[ (#ENV{band1_timezone}|=={+5}|?{selected,''})]>+5</option>
+		<option value="+6"[ (#ENV{band1_timezone}|=={+6}|?{selected,''})]>+6</option>
+		<option value="+7"[ (#ENV{band1_timezone}|=={+7}|?{selected,''})]>+7</option>
+		<option value="+8"[ (#ENV{band1_timezone}|=={+8}|?{selected,''})]>+8</option>
+		<option value="+9"[ (#ENV{band1_timezone}|=={+9}|?{selected,''})]>+9</option>
+		<option value="+10"[ (#ENV{band1_timezone}|=={+10}|?{selected,''})]>+10</option>
+	</select>
+	</label>
+</p>
+<p>
 	<label for="band1_duree"><:agendatimeline:duree_timeline:>
 	<select name="band1_duree" id="band1_duree" class="fondl">
 		<option value="HOUR"[ (#ENV{band1_duree}|=={HOUR}|?{selected,''})]><:agendatimeline:duree_heure:></option>
 		<option value="DAY"[ (#ENV{band1_duree}|=={DAY}|?{selected,''})]><:agendatimeline:duree_jour:></option>
 		<option value="WEEK"[ (#ENV{band1_duree}|=={WEEK}|?{selected,''})]><:agendatimeline:duree_semaine:></option>
 		<option value="MONTH"[ (#ENV{band1_duree}|=={MONTH}|?{selected,''})]><:agendatimeline:duree_mois:></option>
-		<option value="YEAR"[ (#ENV{band1_duree}|=={YEAR}|?{selected,''})]><:agendatimeline:duree_annee:></option>	
+		<option value="YEAR"[ (#ENV{band1_duree}|=={YEAR}|?{selected,''})]><:agendatimeline:duree_annee:></option>
 	</select>
 	</label>
 </p>
@@ -100,6 +127,37 @@ else
 </p>
 
 <h4><:agendatimeline:bande2:></h4>
+<p>
+	<label for="band2_timezone"><:agendatimeline:duree_timeline:>
+	<select name="band2_timezone" id="band2_timezone" class="fondl">
+		<option value="-12"[ (#ENV{band2_timezone}|=={-12}|?{selected,''})]>-12</option>
+		<option value="-11"[ (#ENV{band2_timezone}|=={-11}|?{selected,''})]>-11</option>
+		<option value="-10"[ (#ENV{band2_timezone}|=={-10}|?{selected,''})]>-10</option>
+		<option value="-9"[ (#ENV{band2_timezone}|=={-9}|?{selected,''})]>-9</option>
+		<option value="-8"[ (#ENV{band2_timezone}|=={-8}|?{selected,''})]>-8</option>
+		<option value="-7"[ (#ENV{band2_timezone}|=={-7}|?{selected,''})]>-7</option>
+		<option value="-6"[ (#ENV{band2_timezone}|=={-6}|?{selected,''})]>-6</option>
+		<option value="-5"[ (#ENV{band2_timezone}|=={-5}|?{selected,''})]>-5</option>
+		<option value="-4"[ (#ENV{band2_timezone}|=={-4}|?{selected,''})]>-4</option>
+		<option value="-3"[ (#ENV{band2_timezone}|=={-3}|?{selected,''})]>-3</option>
+		<option value="-2"[ (#ENV{band2_timezone}|=={-2}|?{selected,''})]>-2</option>
+		<option value="-1"[ (#ENV{band2_timezone}|=={-1}|?{selected,''})]>-1</option>
+		<option value="0"[ (#ENV{band2_timezone}|=={0}|?{selected,''})][ (#ENV{band2_timezone}|?{'',selected})]>0 (GMT)</option>
+		<option value="+1"[ (#ENV{band2_timezone}|=={+1}|?{selected,''})]>+1</option>
+		<option value="+2"[ (#ENV{band2_timezone}|=={+2}|?{selected,''})]>+2</option>
+		<option value="+3"[ (#ENV{band2_timezone}|=={+3}|?{selected,''})]>+3</option>
+		<option value="+4"[ (#ENV{band2_timezone}|=={+4}|?{selected,''})]>+4</option>
+		<option value="+5"[ (#ENV{band2_timezone}|=={+5}|?{selected,''})]>+5</option>
+		<option value="+6"[ (#ENV{band2_timezone}|=={+6}|?{selected,''})]>+6</option>
+		<option value="+7"[ (#ENV{band2_timezone}|=={+7}|?{selected,''})]>+7</option>
+		<option value="+8"[ (#ENV{band2_timezone}|=={+8}|?{selected,''})]>+8</option>
+		<option value="+9"[ (#ENV{band2_timezone}|=={+9}|?{selected,''})]>+9</option>
+		<option value="+10"[ (#ENV{band2_timezone}|=={+10}|?{selected,''})]>+10</option>
+		<option value="+11"[ (#ENV{band2_timezone}|=={+11}|?{selected,''})]>+11</option>
+		<option value="+12"[ (#ENV{band2_timezone}|=={+12}|?{selected,''})]>+12</option>
+	</select>
+	</label>
+</p>
 <p>
 	<label for="band2_duree"><:agendatimeline:duree_timeline:>
 	<select name="band2_duree" id="band2_duree" class="fondl">
