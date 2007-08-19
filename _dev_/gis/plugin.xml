@@ -22,6 +22,10 @@ _ Documentaci&oacute;n: [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
 _ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eacute;e {{spip_gis}} et l'autre {{spip_gis_mots}}
 _ page de test [->http://www.spip.escoitar.org/] 
 _ Documentation : [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
+[en]This plugin, associated with Google Map API plugin enables GoogleMaps' display on public site's pages. Articles and keywords can be geo-localised with marks on maps.
+_ This plugin adds two talbes to the database, one named {{spip_gis}} and the other {{spip_gis_mots}}.
+_ Test page: [->http://www.spip.escoitar.org/] 
+_ Documentation: [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
  </multi>
  </description>
  
