@@ -1,0 +1,28 @@
+#CACHE{3600}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+
+<data>
+	<BOUCLE_evt(EVENEMENTS){id_article ?}{id_mot ?}{tout}>
+	<event
+		[(#HORAIRE|=={oui}|?{' ',''})
+		start="[(#DATE_DEBUT|affdate{'M d Y H:i:s'})]"
+		[(#DATE_FIN|=={#DATE_DEBUT}|?{'',' '}) end="[(#DATE_FIN|affdate{'M d Y H:i:s'})]" isDuration="true" ]
+		][(#HORAIRE|=={non}|?{' ',''})
+		start="[(#DATE_DEBUT|affdate{'M d Y 00:00:00'})]"
+		[(#DATE_FIN|affdate{'M d Y'}|=={[(#DATE_DEBUT|affdate{'M d Y'})]}|?{'',' '}) end="[(#DATE_FIN|affdate{'M d Y 00:00:00'})]" isDuration="true" ]
+		]
+		title="[(#TITRE|supprimer_numero|texte_backend)]" <BOUCLE_publie(ARTICLES){id_article}{statut=publie}>link="[(#URL_ARTICLE|parametre_url{id_evenement,#_evt:ID_EVENEMENT})]"</BOUCLE_publie> <BOUCLE_mot(MOTS){id_evenement}{0,1}>[color="(#DESCRIPTIF*)"]</BOUCLE_mot>>
+		&lt;b&gt;[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})]&lt;/b&gt;
+		<BOUCLE_detail(ARTICLES){id_article}>
+		<BOUCLE_detail_lang(ARTICLES){traduction}{lang}>
+		[(#_evt:DESCRIPTIF|?{' '})[&lt;br/&gt;(#_evt:DESCRIPTIF|texte_backend)]]
+		[(#_evt:DESCRIPTIF|?{'',' '})[(#CHAPO|?{' '})[&lt;br/&gt;(#CHAPO|couper{400}|propre|texte_backend)]][(#CHAPO|?{'',' '})[&lt;br/&gt;(#INTRODUCTION|texte_backend)]]]
+		</BOUCLE_detail_lang>
+		</B_detail_lang>
+		[(#_evt:DESCRIPTIF|?{' '})[&lt;br/&gt;(#_evt:DESCRIPTIF|texte_backend)]]
+		[(#_evt:DESCRIPTIF|?{'',' '})[(#CHAPO|?{' '})[&lt;br/&gt;(#CHAPO|couper{400}|propre|texte_backend)]][(#CHAPO|?{'',' '})[&lt;br/&gt;(#INTRODUCTION|texte_backend)]]]
+		<//B_detail_lang>
+		</BOUCLE_detail>
+	</event>
+	</BOUCLE_evt>
+</data>

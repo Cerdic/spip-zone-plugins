@@ -1,0 +1,84 @@
+[(#REM)
+
+	Modele pour le plugin Timeline pour agenda
+	
+]
+
+[(#REM) On vérifies les evenements que l'on souhaite afficher, si pas present, on affiche tous les evenements]
+[(#ENV{rubrique}|?{' ',''}) 
+	[(#SET{objet_spip,id_rubrique})]
+	[(#SET{objet_val,[(#ENV{rubrique})]})]
+]
+[(#ENV{mot}|?{' ',''}) 
+  [(#SET{objet_spip,id_mot})]
+  [(#SET{objet_val,[(#ENV{mot})]})]
+]
+[(#ENV{breve}|?{' ',''}) 
+  [(#SET{objet_spip,id_breve})]
+  [(#SET{objet_val,[(#ENV{breve})]})]
+]
+[(#ENV{article}|?{' ',''}) 
+  [(#SET{objet_spip,id_article})]
+  [(#SET{objet_val,[(#ENV{article})]})]
+]
+
+[(#SET{band1_date,[(#ENV{band1_date}|?{#ENV{band1_date},[(#CONFIG{Agendatimeline/band1_date}|sinon{[(#ENV{date}|affdate{M d Y H:00:00}) GMT]})]})]})]
+
+[(#SET{band2_date,[(#ENV{band2_date}|?{#ENV{band2_date},[(#CONFIG{Agendatimeline/band2_date}|sinon{[(#ENV{date}|affdate{M d Y H:00:00}) GMT]})]})]})]
+
+[(#SET{hauteur,[(#ENV{hauteur}|?{#ENV{hauteur},#CONFIG{Agendatimeline/hauteur}})]})]
+[(#SET{largeur,[(#ENV{largeur}|?{#ENV{largeur},#CONFIG{Agendatimeline/largeur}})]})]
+[(#SET{csstimeline,[(#ENV{csstimeline}|?{#ENV{csstimeline},#CONFIG{Agendatimeline/csstimeline}})]})]
+
+[(#SET{band1_duree,[(#ENV{band1_duree}|?{#ENV{band1_duree},#CONFIG{Agendatimeline/band1_duree}})]})]
+[(#SET{band1_largeur_duree,[(#ENV{band1_largeur_duree}|?{#ENV{band1_largeur_duree},#CONFIG{Agendatimeline/band1_largeur_duree}})]})]
+[(#SET{band1_hauteur,[(#ENV{band1_hauteur}|?{#ENV{band1_hauteur},#CONFIG{Agendatimeline/band1_hauteur}})]})]
+
+[(#SET{band2_duree,[(#ENV{band2_duree}|?{#ENV{band2_duree},#CONFIG{Agendatimeline/band2_duree}})]})]
+[(#SET{band2_largeur_duree,[(#ENV{band2_largeur_duree}|?{#ENV{band2_largeur_duree},#CONFIG{Agendatimeline/band2_largeur_duree}})]})]
+[(#SET{band2_hauteur,[(#ENV{band2_hauteur}|?{#ENV{band2_hauteur},#CONFIG{Agendatimeline/band2_hauteur}})]})]
+
+<script type="text/javascript">
+var tl;
+
+$(function (){
+	var theme = Timeline.ClassicTheme.create();
+/*	theme.event.label.width = 150*/; // px
+// 	theme.event.bubble.width = 200;
+	theme.event.bubble.height = 160;
+
+	var eventSource = new Timeline.DefaultEventSource();
+	var bandInfos = [
+		Timeline.createBandInfo({
+			eventSource: eventSource,
+			date: "[(#GET{band1_date})]",
+			showEventText: [(#CONFIG{Agendatimeline/band1_show_texte}|?{#CONFIG{Agendatimeline/band1_show_texte},true})],
+			[(#CONFIG{Agendatimeline/band1_trackheight}|?{' ',''})trackHeight: #CONFIG{Agendatimeline/band1_trackheight},]
+			[(#CONFIG{Agendatimeline/band1_trackgap}|?{' ',''})trackGap: #CONFIG{Agendatimeline/band1_trackgap},]
+			width: "[(#GET{band1_hauteur,60})]%",
+			intervalUnit: Timeline.DateTime.[(#GET{band1_duree,MONTH})],
+			intervalPixels: [(#GET{band1_largeur_duree,300})]
+		}),
+
+		Timeline.createBandInfo({
+			eventSource: eventSource,
+			date: "[(#GET{band2_date})]",
+			showEventText: [(#CONFIG{Agendatimeline/band2_show_texte}|?{#CONFIG{Agendatimeline/band2_show_texte},false})],
+			[(#CONFIG{Agendatimeline/band2_trackheight}|?{' ',''})trackHeight: #CONFIG{Agendatimeline/band2_trackheight},]
+			[(#CONFIG{Agendatimeline/band2_trackgap}|?{' ',''})trackGap: #CONFIG{Agendatimeline/band2_trackgap},]
+			width: "[(#GET{band2_hauteur,40})]%",
+			intervalUnit: Timeline.DateTime.[(#GET{band2_duree,Year})],
+			intervalPixels: [(#GET{band2_largeur_duree,1100})]
+		})
+	];
+
+	[(#CONFIG{Agendatimeline/bandes_synchro}|=={on}|?{' ',''})]
+	bandInfos[1].syncWith = 0;
+	bandInfos[1].highlight = true;
+	Timeline.loadXML("[(#URL_PAGE{backend_agenda_timeline}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]", function(xml, url) { eventSource.loadXML(xml, url); });
+	tl = Timeline.create(document.getElementById("timeline[(#ENV{id_timeline_full})]"), bandInfos);
+});
+
+</script>
+
+<div id="timeline[(#ENV{id_timeline_full})]" class="timeline" style="[height:(#GET{hauteur}|?{#GET{hauteur},'300px'});][width:(#GET{largeur}|?{#GET{largeur},'100%'});][(#GET{csstimeline});]"></div>

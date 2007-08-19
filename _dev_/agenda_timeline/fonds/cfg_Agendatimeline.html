@@ -1,0 +1,163 @@
+[(#REM) titre=Agenda Timeline]
+
+<!-- descriptif= Timeline pour le plugin Agenda 
+-->
+
+#CACHE{0}
+
+<script type="text/javascript"><!--
+function showhide(boxName, boxNom) {
+if(boxName.checked){
+	$(boxNom).slideDown('slow');
+}
+else 
+	$(boxNom).slideUp('slow');
+}
+// --></script>
+
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+
+<fieldset>
+<legend>
+	<:agendatimeline:design_timeline:>
+</legend>
+<p>
+	<label for="largeur"><:agendatimeline:largeur_timeline:>
+	<input type="text" name="largeur" id="largeur" class="fondl" value="[(#ENV*{largeur}|sinon{100%})]" />
+	</label>
+</p>
+<p>
+	<label for="hauteur"><:agendatimeline:hauteur_timeline:>
+	<input type="text" name="hauteur" id="hauteur" class="fondl" value="[(#ENV*{hauteur}|sinon{300px})]" />
+	</label>
+</p>
+<p>
+	<label for="csstimeline"><:agendatimeline:css_timeline:>
+	<input type="text" name="csstimeline" id="csstimeline"value="[(#ENV*{csstimeline})]" class="fondl" />
+	</label>
+</p>
+</fieldset>
+
+<fieldset>
+<legend>
+	<:agendatimeline:design_bandes:>
+</legend>
+<h4><:agendatimeline:bande1:></h4>
+<p>
+	<label for="band1_duree"><:agendatimeline:duree_timeline:>
+	<select name="band1_duree" id="band1_duree" class="fondl">
+		<option value="HOUR"[ (#ENV{band1_duree}|=={HOUR}|?{selected,''})]><:agendatimeline:duree_heure:></option>
+		<option value="DAY"[ (#ENV{band1_duree}|=={DAY}|?{selected,''})]><:agendatimeline:duree_jour:></option>
+		<option value="WEEK"[ (#ENV{band1_duree}|=={WEEK}|?{selected,''})]><:agendatimeline:duree_semaine:></option>
+		<option value="MONTH"[ (#ENV{band1_duree}|=={MONTH}|?{selected,''})]><:agendatimeline:duree_mois:></option>
+		<option value="YEAR"[ (#ENV{band1_duree}|=={YEAR}|?{selected,''})]><:agendatimeline:duree_annee:></option>	
+	</select>
+	</label>
+</p>
+<p>
+	<label for="band1_date"><:agendatimeline:date_debut_timeline:>
+	<input type="text" name="band1_date" id="band1_date" class="fondl" value="[(#ENV*{band1_date})]" />
+	</label>
+</p>
+<p>
+<p>
+	<label for="band1_largeur_duree"><:agendatimeline:largeur_duree_timeline:>
+	<input type="text" name="band1_largeur_duree" id="band1_largeur_duree" class="fondl" value="[(#ENV*{band1_largeur_duree}|sinon{300})]" />
+	</label>
+</p>
+<p>
+	<label for="band1_hauteur"><:agendatimeline:hauteur_duree_timeline:>
+	<input type="text" name="band1_hauteur" id="band1_hauteur" class="fondl" value="[(#ENV*{band1_hauteur}|sinon{60})]" />
+	</label>
+</p>
+<p>
+	<label for="band1_show_texte"><:agendatimeline:show_text_timeline:>
+	<select name="band1_show_texte" id="band1_show_texte" class="fondl">
+		<option value="true"[ (#ENV{band1_show_texte}|=={true}|?{selected,''})]>true</option>
+		<option value="false"[ (#ENV{band1_show_texte}|=={false}|?{selected,''})]>false</option>
+	</select>
+	</label>
+</p>
+<p>
+	<label for="band1_trackheight"><:agendatimeline:trackheight_timeline:>
+	<input type="text" name="band1_trackheight" id="band1_trackheight" class="fondl" value="[(#ENV*{band1_trackheight})]" />
+	</label>
+</p>
+<p>
+	<label for="band1_trackgap"><:agendatimeline:track_gap_timeline:>
+	<input type="text" name="band1_trackgap" id="band1_trackgap" class="fondl" value="[(#ENV*{band1_trackgap})]" />
+	</label>
+</p>
+<p>
+	<label for="band1_show_texte"><:agendatimeline:show_text_timeline:>
+	<select name="band1_show_texte" id="band1_show_texte" class="fondl">
+		<option value="true"[ (#ENV{band1_show_texte}|=={true}|?{selected,''})]>true</option>
+		<option value="false"[ (#ENV{band1_show_texte}|=={false}|?{selected,''})]>false</option>
+	</select>
+	</label>
+</p>
+
+<h4><:agendatimeline:bande2:></h4>
+<p>
+	<label for="band2_duree"><:agendatimeline:duree_timeline:>
+	<select name="band2_duree" id="band2_duree" class="fondl">
+		<option value="HOUR"[ (#ENV{band2_duree}|=={HOUR}|?{selected,''})]><:agendatimeline:duree_heure:></option>
+		<option value="DAY"[ (#ENV{band2_duree}|=={DAY}|?{selected,''})]><:agendatimeline:duree_jour:></option>
+		<option value="WEEK"[ (#ENV{band2_duree}|=={WEEK}|?{selected,''})]><:agendatimeline:duree_semaine:></option>
+		<option value="MONTH"[ (#ENV{band2_duree}|=={MONTH}|?{selected,''})]><:agendatimeline:duree_mois:></option>
+		<option value="YEAR"[ (#ENV{band2_duree}|=={YEAR}|?{selected,''})]><:agendatimeline:duree_annee:></option
+	</select>
+	</label>
+</p>
+<p>
+	<label for="band2_date"><:agendatimeline:date_debut_timeline:>
+	<input type="text" name="band2_date" id="band2_date" class="fondl" value="[(#ENV*{band2_date})]" />
+	</label>
+</p>
+<p>
+	<label for="band2_largeur_duree"><:agendatimeline:largeur_duree_timeline:>
+	<input type="text" name="band2_largeur_duree" id="band2_largeur_duree" class="fondl" value="[(#ENV*{band2_largeur_duree}|sinon{300})]" />
+	</label>
+</p>
+<p>
+	<label for="band2_hauteur"><:agendatimeline:hauteur_duree_timeline:>
+	<input type="text" name="band2_hauteur" id="band2_hauteur" class="fondl" value="[(#ENV*{band2_hauteur}|sinon{40})]" />
+	</label>
+</p>
+<p>
+	<label for="band2_trackheight"><:agendatimeline:trackheight_timeline:>
+	<input type="text" name="band2_trackheight" id="band2_trackheight" class="fondl" value="[(#ENV*{band2_trackheight}|sinon{0.5})]" />
+	</label>
+</p>
+<p>
+	<label for="band2_trackgap"><:agendatimeline:track_gap_timeline:>
+	<input type="text" name="band2_trackgap" id="band2_trackgap" class="fondl" value="[(#ENV*{band2_trackgap}|sinon{0.2})]" />
+	</label>
+</p>
+<p>
+	<label for="band2_show_texte"><:agendatimeline:show_text_timeline:>
+	<select name="band2_show_texte" id="band2_show_texte" class="fondl">
+		<option value="true"[ (#ENV{band2_show_texte}|=={true}|?{selected,''})]>true</option>
+		<option value="false"[ (#ENV{band2_show_texte}|=={false}|?{selected,''})]>false</option>
+	</select>
+	</label>
+</p>
+</fieldset>
+
+<fieldset>
+<legend>
+	<:agendatimeline:autres_options:>
+</legend>
+<p>
+	<label for="bandes_synchro"><:agendatimeline:bandes_synchros:>
+		<input type="checkbox" name="bandes_synchro" id="bandes_synchro" class="fondl" [(#ENV*{bandes_synchro}|=={on}|?{checked})]" />
+	</label>
+</p>
+
+</fieldset>
+
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+
+</form>

@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Timeline pour le plugin Agenda
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Quentin Drouet
+	[kent1.info->http://www.kent1.info]
+_ &copy; 2006 - Licence GPL
+	</auteur>http://kent1.sklunk.net/spip.php?article70
+	<lien>http://kent1.sklunk.net/spip.php?article70</lien>
+	<version>
+	0.1
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	Timeline pour l'Agenda Evenementiel
+_ {{Ce plugin necessite le plugin Widget Calendar et le plugin Agenda}}</description>
+	<lien>http://www.spip-contrib.net/article1396.html</lien>
+	<prefix>Agendatimeline</prefix>
+	<necessite id='cfg' version='[1.0.6;]' />
+	<necessite id="WCalendar" version="[0.11;]" />
+	<necessite id='Agenda' version='[0.14;]' />
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>timeline.php</inclure>
+	</pipeline>
+</plugin>
