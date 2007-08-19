@@ -1,0 +1,13 @@
+<div id="search">
+	<form action="[(#ENV{lien})]" method="get">
+		[(#ENV{lien}|form_hidden)]
+		<h2><label for="q"><:info_rechercher:></label></h2>
+		<p class="field">
+		<input name="recherche" id="q" type="text" size="10" value="[(#ENV{recherche}|sinon{<:un_seul_mot:>})]" 
+			onfocus='if (this.value == "<:un_seul_mot:>") { this.value = ""; }'
+			onblur='if (this.value == "") { this.value = "<:un_seul_mot:>"; }'
+		accesskey="4" />
+		<input type="submit" class="submit" value="<:oksearch:>" />
+		</p>
+	</form>
+</div>

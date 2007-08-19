@@ -1,0 +1,101 @@
+<div id="sidebar">
+
+	[(#CALENDRIER_MINI{[(#ENV{self})]})]
+	
+	#FORMULAIRE_RECHERCHE
+
+	<B_a_retenir>
+	<div id="selection">
+		<h2><:selection:></h2>
+		<ul>
+			<BOUCLE_a_retenir(ARTICLES){id_secteur}{titre_mot=selection}{par date}{inverse}>
+			<li>[(#ID_ARTICLE|choixsiegal{#ENV|{id_article},<strong>,''})]
+				<a href="#URL_ARTICLE">#TITRE</a>
+			[(#ID_ARTICLE|choixsiegal{#ENV|{id_article},</strong>,''})]</li>
+			</BOUCLE_a_retenir>
+		</ul>
+	</div>
+	</B_a_retenir>
+
+	<B_languages>
+	<div id="languages">
+		<h2><:langues:></h2>
+		<ul>
+			<BOUCLE_languages(ARTICLES){id_secteur}{par lang}>
+			[<li>[(#LANG|choixsiegal{#ENV{lang},<strong>,''})]
+				<a href="[(#ENV{self}|parametre_url{lang,#LANG})]">(#LANG|unique)</a>
+			[(#LANG|choixsiegal{#ENV{lang},</strong>,''})]</li>]
+			</BOUCLE_languages>
+		</ul>
+	</div>
+	</B_languages>
+
+	<B_categories>
+	<div id="categories">
+		<h2><:categories:></h2>
+		<ul>
+			<BOUCLE_categories(RUBRIQUES){id_secteur}{id_parent=#ENV{id_secteur}}{par num titre}>
+			<li>
+			[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},<strong>,''})]
+				<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+			[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},</strong>,''})]
+			<B_souscategories>
+			<ul>
+				<BOUCLE_souscategories(RUBRIQUES){id_parent}{par num titre}>
+				<li>[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},<strong>,''})]
+					<small><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></small>
+				[(#ID_RUBRIQUE|choixsiegal{#ENV{id_rubrique},</strong>,''})]</li>
+				<B_souscategoriesrecursives><li>
+				<BOUCLE_souscategoriesrecursives(BOUCLE_souscategories)></BOUCLE_souscategoriesrecursives>
+				</li></B_souscategoriesrecursives>
+				</BOUCLE_souscategories>
+			</ul>
+			</B_souscategories>
+			</li>
+			</BOUCLE_categories>
+		</ul>
+	</div>
+	</B_categories>
+
+	<B_chrono>
+	<div id="archives">
+		<h2><:archives:></h2>
+		<ul>
+			<BOUCLE_chrono(ARTICLES){id_secteur}{par date}{inverse}>
+			[<li>[(#DATE|affdate{'Y_m'}|choixsiegal{[(#ENV{date}|affdate{'Y_m'})],<strong>,''})]
+				<a href="[(#ENV{self}|parametre_url{archives,[(#DATE|affdate{'Y-m'})]})]">(#DATE|affdate_mois_annee|unique)</a>
+				[(#DATE|affdate{'Y_m'}|choixsiegal{[(#ENV{date}|affdate{'Y_m'})],</strong>,''})]</li>]
+			</BOUCLE_chrono>
+		</ul>
+	</div>
+	</B_chrono>
+
+	<B_links>
+	<div id="links">
+		<h2><:liens:></h2>
+		<ul>
+			<BOUCLE_links(SITES){id_secteur}{par date}{inverse}>
+			<li><a href="#URL_SITE"<BOUCLE_mot_lang(MOTS){id_syndic}> hreflang="#TITRE"</BOUCLE_mot_lang>[ title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#NOM_SITE*)]</a>
+			<B_syndic>
+			<ul>
+				<BOUCLE_syndic(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,5}>
+				[<li><small><a href="(#URL_ARTICLE|unique{urls})">#TITRE</a></small></li>]
+				</BOUCLE_syndic>
+			</ul>
+			</B_syndic>
+			</li>
+			</BOUCLE_links>
+		</ul>
+	</div>
+	</B_links>
+		
+	<div id="syndicate">
+		<h2><:syndication:></h2>
+		<ul>
+			[<li><a href="(#ENV{id_secteur}|generer_url_rss)"><:fil_rss:></a></li>]
+			[<li><a href="(#ENV{id_secteur}|generer_url_rss|parametre_url{type,co})"><:fil_rss_commentaires:></a></li>]
+			[<li><a href="(#ENV{id_secteur}|generer_url_atom)"><:fil_atom:></a></li>]
+			[<li><a href="(#ENV{id_secteur}|generer_url_atom|parametre_url{type,co})"><:fil_atom_commentaires:></a></li>]
+		</ul>
+	</div>
+</div>
