@@ -1,5 +1,5 @@
 <B_liste>
-[<p><:resultat_recherche:> <em>(#RECHERCHE|entites_html)</em></p>]
+[<p><:spipclear:resultat_recherche:> <em>(#RECHERCHE|entites_html)</em></p>]
 [<div>(#PAGINATION)</div>]
 <BOUCLE_liste(ARTICLES){id_secteur}{recherche}{par points}{pagination 15}>
 <div class="post">
@@ -10,7 +10,7 @@
 
 	<p class="post-info">
 	<B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}>#NOM</BOUCLE_auteurs>,
-	[(#DATE|affdate_long)] <:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
+	[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
 	<span>::</span>
 	<BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_categorie>
 	</p>
@@ -22,19 +22,19 @@
 	[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
 
 	<p class="post-info-co">
-	<a href="#URL_ARTICLE#co" title="<:commentaires_pour:> : [(#TITRE|textebrut|entites_html)]">
+	<a href="#URL_ARTICLE#co" title="<:spipclear:commentaires_pour:> : [(#TITRE|textebrut|entites_html)]">
 		<BOUCLE_commentaires(FORUMS){id_article}{plat}> </BOUCLE_commentaires>
-		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|=={1}|?{<:commentaire:>,<:commentaires:>})]
-		</B_commentaires><:aucun_commentaire:><//B_commentaires>
+		#TOTAL_BOUCLE [(#TOTAL_BOUCLE|=={1}|?{<:spipclear:commentaire:>,<:spipclear:commentaires:>})]
+		</B_commentaires><:spipclear:aucun_commentaire:><//B_commentaires>
 	</a>
 	</p>
 </div>
 </BOUCLE_liste>
 [<div>(#PAGINATION)</div>]
 </B_liste>
-[<div class="error"><strong><:titre_erreur:></strong>
-	<p><:texte_erreur1:>
+[<div class="error"><strong><:spipclear:titre_erreur:></strong>
+	<p><:spipclear:texte_erreur1:>
 	<em>(#RECHERCHE|entites_html)</em>
-	<:texte_erreur2:></p>
+	<:spipclear:texte_erreur2:></p>
 </div>]
 <//B_liste>

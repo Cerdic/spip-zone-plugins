@@ -55,11 +55,11 @@
 	}
 
 	//
-	// Themes de blog
+	// Themes de blog : INUTILE AVEC CFG
 	//
-	function theme($id_secteur) {
-		return $GLOBALS['scEstUnBlog'][$id_secteur];
-	}
+// 	function theme($id_secteur) {
+// 		return $GLOBALS['scEstUnBlog'][$id_secteur];
+// 	}
 
 	function affdate_long($date) {
 		return affdate_base($date, 'nom_jour').' '.affdate_base($date, 'entier');

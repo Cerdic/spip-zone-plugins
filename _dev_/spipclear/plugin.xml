@@ -1,0 +1,15 @@
+<plugin>
+	<nom>SpipClear</nom>
+	<auteur>James, Ben et SarkASmeL
+_ &#169; 2007 - Licence GNU/GPL</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<prefix>SpipClear</prefix>
+	<description>SpipClear est concu pour transformer un secteur en blog ou carnet web.
+Pour cela, il s'inspire de DotClear, un syst&egrave;me de gestion de blog d&eacute;velopp&eacute; en php par Neokraft.net.
+Il est n&eacute;cessaire de cr&eacute;er, a minima, les pages sommaire, article-x et rubrique-x pour activer le blog sur le secteur choisi.
+<br /><br />SpipClear n&eacute;cessite au minimum Spip 1.9.2 et demande aussi l'activation du plugin minical.
+	</description>
+	<lien>http://www.spip-contrib.net/Spip-Clear</lien>
+	<fonctions>spipclear_fonctions.php</fonctions>
+</plugin>

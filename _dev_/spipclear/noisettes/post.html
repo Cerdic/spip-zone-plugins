@@ -1,0 +1,50 @@
+<BOUCLE_article(ARTICLES){id_article}>
+[(#LOGO_ARTICLE|right|liens_absolus)]
+<h2 class="post-title">#TITRE</h2>
+<p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}>#NOM</BOUCLE_auteurs>,</B_auteurs>
+[(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
+<span>::</span> <BOUCLE_categorie(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></BOUCLE_categorie>
+<span>::</span>#DEBUT_SURLIGNE<a href="#URL_SITE_SPIP/#URL_ARTICLE" title="<:spipclear:permalink_pour:> : [(#TITRE|textebrut|entites_html)]">##ID_ARTICLE</a>#FIN_SURLIGNE
+<span>::</span><a href="[(#ID_ARTICLE|generer_url_rss{article}|parametre_url{type,co})]" title="<:spipclear:rss_pour:> : [(#TITRE|textebrut|entites_html)]">rss</a>
+</p>
+
+[<div class="post-chapo">
+	#DEBUT_SURLIGNE(#CHAPO|appliquer_hreflang)#FIN_SURLIGNE
+</div>]
+[<div class="post-content" lang="#LANG">
+	#DEBUT_SURLIGNE(#TEXTE|appliquer_hreflang|reduire_image{450})#FIN_SURLIGNE
+	<br style="clear: both;" />
+	[<div>#DEBUT_SURLIGNE(#NOTES|appliquer_hreflang)#FIN_SURLIGNE</div>]
+	[<div><strong><:voir_en_ligne:></strong> : <a href="(#URL_SITE)">#NOM_SITE</a></div>]
+</div>]
+
+<div id="comments">
+	<h3 id="co"><:spipclear:commentaires|ucfirst:></h3>
+	<BOUCLE_commentaires_article(FORUMS){id_article}{par date}>
+	<p id="forum#ID_FORUM" class="comment-info">
+	<span class="comment-number"><a href="#URL_FORUM">#COMPTEUR_BOUCLE.</a></span>
+	[(#DATE|nom_jour)] [(#DATE|affdate)] <:spipclear:attime:>
+	[(#DATE|heures)]:[(#DATE|minutes)],
+	[<:par_auteur:>
+	<strong>(#NOM)</strong>]<BOUCLE_le_boss(AUTEURS){id_auteur}{statut=0minirezo}>
+	[(#REM) Feuilles de styles spipclear indexees par le theme choisie ]
+	[(#CONFIG{spipclear/choix_theme}|?{'',' '})
+		[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+	]
+	[
+	<img src="(#CHEMIN{[(#GET{chemin_theme})]images/boss.gif})"
+	alt="<:spipclear:boss:>"
+	title="<:spipclear:boss:>" />
+	]</BOUCLE_le_boss>[ <span>::</span> <a href="(#URL_SITE)">[(#NOM_SITE|sinon{<:spipclear:site_comment:>})]</a>]</p>
+							
+	<blockquote[(#ID_ARTICLE|me{#ID_AUTEUR}|?{' ',''})class="me"]>
+		[<strong>(#TITRE)</strong><br />]
+		[(#TEXTE|liens_absolus)]
+	</blockquote>
+	</BOUCLE_commentaires_article>
+	<:spipclear:aucun_commentaire:>
+	<//B_commentaires_article>
+	<h3 id="reponse"><:spipclear:ajouter_commentaire:></h3>
+	[(#FORMULAIRE_FORUM)][(#PARAMETRES_FORUM|?{'',<:spipclear:commentaires_fermes:>})]
+</div>
+</BOUCLE_article>

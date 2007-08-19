@@ -1,5 +1,0 @@
-<BOUCLE_meta_titre(RUBRIQUES){id_secteur}{id_parent=0}>[
-<meta name="DC.title" content="(#TITRE|textebrut)" />
-]</BOUCLE_meta_titre>
-
-<title><BOUCLE_post(ARTICLES){id_article}>[(#TITRE|textebrut)]</BOUCLE_post> - </B_post><BOUCLE_cat(RUBRIQUES){id_rubrique}{id_secteur}{id_parent!=0}>[(#TITRE|textebrut)]</BOUCLE_cat> - </B_cat>[(#ENV|{archives}|affdate_mois_annee) - ][(#SC_CUSTOM_TITLE|textebrut) - ]<BOUCLE_home(RUBRIQUES){id_secteur}{id_parent=0}>[(#TITRE|textebrut)]</BOUCLE_home></title>

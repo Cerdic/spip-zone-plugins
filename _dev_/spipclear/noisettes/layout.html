@@ -1,0 +1,63 @@
+[(#CHARSET|doctype)]
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+		<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+		<INCLURE{fond=noisettes/headlinks}{delais=7200}{id_article}{id_rubrique}{id_secteur}>
+		[<link rel="alternate" type="application/rss+xml" title="RSS" href="(#ID_SECTEUR|generer_url_rss)" />]
+		[<link rel="alternate" type="application/xml" title="Atom" href="(#ID_SECTEUR|generer_url_atom)" />]
+		<INCLURE{fond=noisettes/title}{delais=7200}{id_article}{id_rubrique}{id_secteur}{archives}>
+		[(#REM) Feuille de style par defaut pour le code genere par SPIP ]
+		<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
+
+		[(#REM) Feuilles de styles spipclear indexees par le theme choisie ]
+		[(#CONFIG{spipclear/choix_theme}|?{'',' '})
+			[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
+		]
+		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]styles/layout.css})" media="screen" />]
+		[(#CONFIG{spipclear/navigation_gauche}|=={1}|?{
+			[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]styles/layout-gauche.css})" media="screen" />]
+		})]
+		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]styles/style.css})" media="screen" />]
+		[<link rel="shortcut icon" href="(#CHEMIN{[(#GET{chemin_theme})]images/favicon.ico})" />]
+		#INSERT_HEAD
+	</head>
+
+	<body>
+		<div id="page">
+			<div id="top">
+				[(#FORMULAIRE_ADMIN)]
+				<BOUCLE_titre(RUBRIQUES){id_secteur}{id_parent=0}>
+				[<h1>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|inserer_attribut{alt,#TITRE}|inserer_attribut{title,#TITRE}|sinon{<a href="#URL_RUBRIQUE">#TITRE</a>})</h1>]
+				</BOUCLE_titre>
+				[(#SPIP_CRON)]
+			</div>
+			
+			<p id="prelude">
+				<a href="#main"><:spipclear:go_main:></a> |
+				<a href="#sidebar"><:spipclear:go_sidebar:></a> |
+				<a href="#search"><:spipclear:go_search:></a>
+			</p>
+
+			<div id="main">
+				<div id="content">
+					[(#RECHERCHE|?{'',' '})
+						[(#ENV{id_article}|?{'',' '})
+						<INCLURE{fond=noisettes/list}{id_rubrique}{archives}{debut_liste}{home}{self}>
+						]
+					]
+					[(#RECHERCHE|?{' ',''})
+					<INCLURE{fond=noisettes/search}{id_secteur}{recherche}{debut_liste}>]
+					[(#ENV{id_article}|?{' ',''})<INCLURE{fond=noisettes/post}{id_article}>]
+				</div>
+			</div>
+
+			[(#SET{url,[(#ENV{id_secteur}|generer_url_rubrique)]})]
+			<INCLURE{fond=noisettes/sidebar}{self=#GET{url}}{id_secteur}{id_rubrique}{id_article}{date=#ENV{archives,#ENV{date}}}{archives=#ENV{archives,#ENV{date}}}{recherche}>
+
+			<p id="footer"><:spipclear:credits:>, <a href="#URL_SITE_SPIP/"><:spipclear:hebergement:> #NOM_SITE_SPIP</a></p>
+			
+		</div>
+
+	</body>
+</html>

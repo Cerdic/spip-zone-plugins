@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_lien' => 'No link',
 'aucun_trackback' => 'No trackback',
 
+//B
+'boss' => 'Administrator',
+
 //C
 'calendrier' => 'Calendar',
 'categorie' => 'Category',
@@ -38,9 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'de' => 'of',
 
 //E
-'titre_erreur' => 'Error :',
-'texte_erreur1' => 'The search for',
-'texte_erreur2' => 'give no result.',
 
 //F
 'fil_rss' => 'rss feed',
@@ -78,10 +78,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndication' => 'Syndication',
 
 //T
+'texte_erreur1' => 'The search for',
+'texte_erreur2' => 'give no result.',
+'titre_erreur' => 'Error :',
 'trackback' => 'trackback',
 'trackbacks' => 'trackbacks',
 'trackbacks_pour_faire' => 'To do a trackback for this post',
 'trackbacks_fermes' => 'The trackbacks for this post are closed.',
+
+//U
+'un_seul_mot' => 'only one word',
 
 );
 

@@ -6,7 +6,7 @@
 
 	<B_a_retenir>
 	<div id="selection">
-		<h2><:selection:></h2>
+		<h2><:spipclear:selection:></h2>
 		<ul>
 			<BOUCLE_a_retenir(ARTICLES){id_secteur}{titre_mot=selection}{par date}{inverse}>
 			<li>[(#ID_ARTICLE|choixsiegal{#ENV|{id_article},<strong>,''})]
@@ -19,7 +19,7 @@
 
 	<B_languages>
 	<div id="languages">
-		<h2><:langues:></h2>
+		<h2><:spipclear:langues:></h2>
 		<ul>
 			<BOUCLE_languages(ARTICLES){id_secteur}{par lang}>
 			[<li>[(#LANG|choixsiegal{#ENV{lang},<strong>,''})]
@@ -32,7 +32,7 @@
 
 	<B_categories>
 	<div id="categories">
-		<h2><:categories:></h2>
+		<h2><:spipclear:categories:></h2>
 		<ul>
 			<BOUCLE_categories(RUBRIQUES){id_secteur}{id_parent=#ENV{id_secteur}}{par num titre}>
 			<li>
@@ -59,7 +59,7 @@
 
 	<B_chrono>
 	<div id="archives">
-		<h2><:archives:></h2>
+		<h2><:spipclear:archives:></h2>
 		<ul>
 			<BOUCLE_chrono(ARTICLES){id_secteur}{par date}{inverse}>
 			[<li>[(#DATE|affdate{'Y_m'}|choixsiegal{[(#ENV{date}|affdate{'Y_m'})],<strong>,''})]
@@ -72,7 +72,7 @@
 
 	<B_links>
 	<div id="links">
-		<h2><:liens:></h2>
+		<h2><:spipclear:liens:></h2>
 		<ul>
 			<BOUCLE_links(SITES){id_secteur}{par date}{inverse}>
 			<li><a href="#URL_SITE"<BOUCLE_mot_lang(MOTS){id_syndic}> hreflang="#TITRE"</BOUCLE_mot_lang>[ title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#NOM_SITE*)]</a>
@@ -90,12 +90,12 @@
 	</B_links>
 		
 	<div id="syndicate">
-		<h2><:syndication:></h2>
+		<h2><:spipclear:syndication:></h2>
 		<ul>
-			[<li><a href="(#ENV{id_secteur}|generer_url_rss)"><:fil_rss:></a></li>]
-			[<li><a href="(#ENV{id_secteur}|generer_url_rss|parametre_url{type,co})"><:fil_rss_commentaires:></a></li>]
-			[<li><a href="(#ENV{id_secteur}|generer_url_atom)"><:fil_atom:></a></li>]
-			[<li><a href="(#ENV{id_secteur}|generer_url_atom|parametre_url{type,co})"><:fil_atom_commentaires:></a></li>]
+			[<li><a href="(#ENV{id_secteur}|generer_url_rss)"><:spipclear:fil_rss:></a></li>]
+			[<li><a href="(#ENV{id_secteur}|generer_url_rss|parametre_url{type,co})"><:spipclear:fil_rss_commentaires:></a></li>]
+			[<li><a href="(#ENV{id_secteur}|generer_url_atom)"><:spipclear:fil_atom:></a></li>]
+			[<li><a href="(#ENV{id_secteur}|generer_url_atom|parametre_url{type,co})"><:spipclear:fil_atom_commentaires:></a></li>]
 		</ul>
 	</div>
 </div>

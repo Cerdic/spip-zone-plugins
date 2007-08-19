@@ -1,0 +1,54 @@
+[(#REM) descriptif=
+<h4>
+Configuration du plugin SpipClear.
+</h4>
+<a href="http://www.spip-contrib.net/Spip-Clears" class="spip_out">Documentation sur contrib</a>
+]
+
+[(#REM) titre=SpipClear]
+[(#REM) icone=images/spipclear.png]
+
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend><:spipclear:legend_layout:></legend>
+	<p><:spipclear:info_navigation:></p>
+	<p>
+		<label>
+			<input type="radio" name="navigation_gauche" value="0"[ (#ENV{navigation_gauche}|=={0}|?{checked="checked",''})] />
+			<:spipclear:label_navigation_droite:>
+		</label>
+		<br />
+		<label>
+			<input type="radio" name="navigation_gauche" value="1"[ (#ENV{navigation_gauche}|=={1}|?{checked="checked",''})] />
+			<:spipclear:label_navigation_gauche:>
+		</label>
+	</p>
+</fieldset>
+
+<fieldset><legend><:spipclear:legend_theme:></legend>
+	<p><:spipclear:info_choix_theme:></p>
+	<p>
+		<label>
+			<input type="radio" name="choix_theme" value="0"[ (#ENV{choix_theme}|=={0}|?{checked="checked",''})] />
+			<:spipclear:label_theme_defaut:>
+		</label>
+		<br />
+		<label>
+			<input type="radio" name="choix_theme" value="1"[ (#ENV{choix_theme}|=={1}|?{checked="checked",''})] />
+			<:spipclear:label_theme_perso:>
+		</label>
+	</p>
+    [(#ENV{choix_theme}|!={0}|?{
+		<p>
+			<label><:spipclear:label_nom_theme:><br />
+				<input type="text" name="nom_theme" value="[(#ENV{nom_theme})]" size="32" />
+			</label>
+		</p>}
+    )]
+</fieldset>
+
+<input class="fondo" style="float:right;" type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
+</form>
+
