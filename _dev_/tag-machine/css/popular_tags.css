@@ -1,0 +1,6 @@
+#popularTags {line-height:1.2em }
+#suggestions {margin:3px }
+#popularTags span { background-color: #cccccc; cursor: pointer; margin:2px }
+#suggestions span { cursor: pointer; margin:2px }
+#popularTags span.selected { background-color: yellow; }
+#popularTags span.auto { background-color: #ccffcc; }
