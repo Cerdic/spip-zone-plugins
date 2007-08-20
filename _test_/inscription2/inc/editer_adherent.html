@@ -134,17 +134,17 @@ $().ready(function() {
 			}
 		}
 		
-		
 		if(_request('abonnement') and _request('id_auteur_elargi')){
+                echo "test";
 		spip_query("delete from spip_auteurs_elargis_abonnements where id_auteur_elargi ='"._request('id_auteur_elargi')."'"); //source de pbs
 		spip_query("INSERT INTO spip_auteurs_elargis_abonnements (id_abonnement, id_auteur_elargi) values ('"._request('abonnement')."','"._request('id_auteur_elargi')."') ");
 		}
-		
 		spip_log($var_user);		
 		if($var_user['a.nom'])
-		$q1 = spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id'");
+                    $q1 = spip_query("update spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur=b.id_auteur set ".join(', ', $var_user)." where a.`id_auteur`='$id'");
 		if($q1)
-			$message = "adherent mis à jour";
+		    $message = "adherent mis à jour";
+
 	}
 
 
@@ -158,11 +158,11 @@ $().ready(function() {
 			elseif(ereg("^statut_int.*$", $cle))
 				$var_user['b.statut_interne'] = '1';
 			elseif($cle == 'pays'){
-				$var_user['c.pays'] = '1';
+				$var_user['c.id_pays'] = '1';
 				$var_user['c.id_pays as id_pays'] = '1';}
 			elseif($cle == 'pays_pro'){
-				$var_user['d.pays'] = '1';
-				$var_user['d.pays as pays_pro'] = '1';
+				$var_user['d.id_pays'] = '1';
+				$var_user['d.id_pays as pays_pro'] = '1';
 				$var_user['d.id_pays as id_pays_pro'] = '1';}
 			else
 				$var_user['b.'.$cle] = '1';
@@ -188,9 +188,9 @@ $().ready(function() {
 				$aux4[] = $q;
 		}
 	}
-	if($var_user['c.pays'] && $var_user['d.pays'])
+	if($var_user['c.id_pays'] && $var_user['d.id_pays'])
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays where a.id_auteur= $id");
-	elseif($var_user['c.pays'])
+	elseif($var_user['c.id_pays'])
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur left join spip_geo_pays c on b.pays=c.id_pays where a.id_auteur= $id");
 	else
 		$query = spip_query('select '.join(', ', array_keys($var_user))." from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur where a.id_auteur= $id");
@@ -218,8 +218,8 @@ $().ready(function() {
 				include(_DIR_PLUGIN_INSCRIPTION2."inc/pays.php");
 					echo "<option value=\"\">"._T('inscription2:pays')."</option>";
 				foreach($liste_pays as $cle=> $val){
-				if ($cle == $query['id_pays'])
-					echo "<option value=\"$cle\" selected>".entites_html($val)."</option>";
+				if ($cle == $query['pays'])
+					echo "<option value=\"$cle\" selected='selected'>".entites_html($val)."</option>";
 				else 
 					 echo "<option value=\"$cle\">".entites_html($val)."</option>";
 				}
@@ -229,7 +229,7 @@ $().ready(function() {
 					echo "<option value=\"\">"._T('inscription2:pays')."</option>";
 				foreach($liste_pays as $cle=> $val){
 				if ($cle == $query['id_pays_pro'])
-					echo "<option value=\"$cle\" selected>".entites_html($val)."</option>";
+					echo "<option value=\"$cle\" selected='selected'>".entites_html($val)."</option>";
 				else 
 					 echo "<option value=\"$cle\">".entites_html($val)."</option>";
 				}
@@ -245,7 +245,8 @@ $().ready(function() {
 				if(spip_num_rows($result_abo) > 0){
 				echo "</select></td></tr>";
 				echo "<tr><td><input type=\"hidden\" name=\"id_auteur_elargi\" value=\"".$mon_abo['id']."\" /><strong>"._T('Abonnement')."</strong></td><td><select name=\"abonnement\" id=\"abonnement\" >";
-					while($row_abo = spip_fetch_array($result_abo)){										
+					while($row_abo = spip_fetch_array($result_abo)){
+                                        echo $mon_abo['id_abonnement'];
 					$selected = ($mon_abo['id_abonnement'] == $row_abo['id_abonnement'])?'selected="selected"':'' ;
 					echo "<option value=\"".$row_abo['id_abonnement']."\" $selected>".entites_html($row_abo['libelle'])."</option>";
 					}

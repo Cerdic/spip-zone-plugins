@@ -226,7 +226,7 @@ function confirm(msg,callback) {
 				else				
 					$table_auteurs[] = "a.".$cle;
 			elseif($cle == 'pays')
-				$table_auteurs[] = "c.pays";
+				$table_auteurs[] = "c.id_pays";
 			elseif($cle == 'pays_pro')
 				$table_auteurs[] = "d.pays as pays_pro";
 			else
@@ -252,12 +252,14 @@ function confirm(msg,callback) {
 	$table_auteurs[] = 'a.id_auteur';
 	$table_auteurs[] = 'a.statut';
 		
-	if(lire_config('inscription2/pays_table') && lire_config('inscription2/pays_pro_table'))
+	if(lire_config('inscription2/pays_table') && lire_config('inscription2/pays_pro_table')) {
 		$query = "SELECT ".join(", ",$table_auteurs)." 
 			FROM spip_auteurs a 
 			LEFT JOIN `spip_auteurs_elargis` b ON b.id_auteur = a.id_auteur
 			left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays
 			WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
+                        echo $query;
+                        }
 	elseif(lire_config('inscription2/pays_table'))
 		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
 			ON b.id_auteur = a.id_auteur LEFT JOIN spip_geo_pays c ON b.pays=c.id_pays  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
