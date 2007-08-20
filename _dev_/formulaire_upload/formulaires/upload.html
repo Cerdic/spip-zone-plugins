@@ -65,7 +65,7 @@
 
 	<div style="margin-top:5px; padding:5px; border-top: dotted gray 1px;">
 		<label for="fichier"><:formupload:choosefiles:>
-		<input type="file" name="fichier" class="forml" />
+		<input type="file" name="fichier" class="forml"[ accept="(#CONFIG{formupload/files_accepted})"][ maxlength="(#CONFIG{formupload/files_number})"] />
 		</label>
 	</div>
 

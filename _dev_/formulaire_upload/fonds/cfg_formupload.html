@@ -11,11 +11,20 @@ Ce plugin permet d'avoir un formulaire public associant des documents aux auteur
 
 [(#REM) ------------------------ CONFIGURATION DU FORMULAIRE ------------------------ ]
 
-<label><input type="checkbox" name="insert_code" [checked="(#ENV{insert_code}?{checked})"] id="insert_code" />
+<p><label><input type="checkbox" name="insert_code" [checked="(#ENV{insert_code}?{checked})"] id="insert_code" />
 <strong>Afficher le code d'insertion des documents</strong>
 <br />(si on a un autre formulaire pour cr&eacute;er des articles par exemple)
-</label>
+</label></p>
 
+<p><label><input type="text" name="files_accepted" [value="(#ENV*{files_accepted}|?{#ENV*{files_accepted,''}})"] id="files_accepted" class="fondl" />
+<strong>Types de fichiers accept&eacute;s</strong>
+<br />Mettre les extensions s&eacute;par&eacute;es par des pipes ex: pdf|txt|odt ou gif|jpg|png
+</label></p>
+
+<p><label><input type="text" name="files_number" [value="(#ENV*{files_number}|?{#ENV*{files_number,''}})"] id="files_numbre" class="fondl" />
+<strong>Nombre de fichiers accept&eacute;s lors de l'upload multiple</strong>
+<br />L'utilisateur ne pourra uploader que ce nombre de fichiers au maximum
+</label></p>
 
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
