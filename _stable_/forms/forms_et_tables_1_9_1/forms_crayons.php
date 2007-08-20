@@ -16,8 +16,12 @@ function forms_donnee_valeur_colonne_table($table,$champs,$id_donnee){
 	include_spip("inc/forms");
 
 	$vals = array();
-	foreach($champs as $champ)
-		$vals = array_merge($vals,Forms_valeurs($id_donnee,NULL,$champ));
+	foreach($champs as $champ){
+		$valeur = Forms_valeurs($id_donnee,NULL,$champ);
+		if (!count($valeur))
+			$valeur = array($champ => '');
+		$vals = array_merge($vals,$valeur);
+	}
 	return $vals;
 }
 function forms_donnee_revision($id_donnee,$c=NULL){
