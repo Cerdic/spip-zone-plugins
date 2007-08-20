@@ -1,4 +1,12 @@
 <?php
+/*
+ * Plugin marque-pages
+ * Outils pour gérer un (ou plusieurs) système de marque-pages partagés
+ * 
+ * Auteur : Vincent Finkelstein
+ * Distribué sous licence GPL
+ * 
+ */
 
 // Teste si on a le droit d'ajouter un marque-page
 function marquepages_autoriser_creer($id_rubrique){
@@ -113,8 +121,36 @@ function marquepages_supprimer($id_forum){
 	// Si on a pas l'autorisation on quitte
 	if(!marquepages_autoriser_supprimer($id_forum))
 		return false;
-	else		
-		return spip_query("delete from spip_forum where id_forum=$id_forum");
+	else{
+		
+		$r = spip_abstract_fetsel(
+			array('id_syndic'),
+			array('spip_forum'),
+			array('id_forum=' . intval($id_forum))
+		);
+		$id_syndic = $r['id_syndic'];
+		
+		// on supprime déjà le marque-page
+		$tout_va_bien = spip_query("delete from spip_forum where id_forum=" . intval($id_forum) . " or id_parent=" . intval($id_forum));
+		
+		if ($tout_va_bien){
+			
+			// si ya plus de marque-page sur le site, on le supprime aussi
+			$r = spip_abstract_fetsel(
+				array('titre'),
+				array('spip_forum'),
+				array('id_syndic=' . intval($id_syndic))
+			);
+			
+			if (!$r['titre']){
+				$tout_va_bien = spip_query("delete from spip_syndic where id_syndic=" . intval($id_syndic));
+			}
+			
+		}
+		
+		return $tout_va_bien;
+		
+	}
 	
 }
 

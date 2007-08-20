@@ -7,13 +7,17 @@
 	id_aut :
 		restreindre aux marque-pages d'un auteur en particulier (ou de
 		plusieurs mais c'est peu utilisé...)
+	id_site :
+		si on veut "l'historique" des marque-pages d'un site
+	id_mp :
+		si on veut sortir un marque-page particulier
 		
 	Ce fond utilise la balise #SESSION, il faut donc l'insclure avec 
 	session.php (voir la doc du plugin "balise session")
 
 ]
 
-<BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_auteur==^((#ENV{id_aut,.*}))$}>
+<BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_mp,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}>
 <BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
 <dl class="xfolkentry [(#SESSION{id_auteur}|=={#_bookmarks:ID_AUTEUR}|?{#_bookmarks:EDIT{marquepage}})]">
 	<dt>
