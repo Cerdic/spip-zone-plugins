@@ -1,0 +1,57 @@
+[(#REM)
+
+	Vue d'un marque-page
+	Reproduit l'affichage comme dans le fond
+
+]
+#CACHE{0}
+
+<BOUCLE_marquepage(FORUMS){id_forum}{statut=prive}>
+[(#REM on ajout les mots-clés)]
+[(#ENV*{tags}|ajouter_etiquettes{#ID_FORUM,tags,forum,id_forum,true})]
+<BOUCLE_site(SITES){id_syndic}>
+<dl class="xfolkentry #_marquepage:EDIT{marquepage}">
+	<dt>
+		<a href="#_site:URL_SITE" class="taggedlink" rel="nofollow">#_marquepage:TITRE</a>
+	</dt>
+	[<dd class="description">
+		(#_marquepage:TEXTE)
+	</dd>]
+	<dd class="meta">
+		[<:marquepages:poste_le:> (#_marquepage:DATE|affdate{j-m-Y}), ]
+		
+		<B_auteur>
+			<:marquepages:par:>
+		<BOUCLE_auteur(AUTEURS){id_auteur=#_marquepage:ID_AUTEUR}>
+			<a href="#URL_AUTEUR">
+				<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
+				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' ',<:marquepages:vous:>})
+				[(#CONFIG{plugin/INSCRIPTION2/version}|?{' ',#_auteur:NOM})[(#PRENOM|?{#PRENOM})] [(#NOM_FAMILLE|?{#NOM_FAMILLE,#_auteur:NOM})]]
+				]
+				</BOUCLE_elargi>
+			</a>
+			<BOUCLE_autres(FORUMS){id_syndic=#_marquepage:ID_SYNDIC}{statut=prive}{plat}> </BOUCLE_autres>
+				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:>]
+			</B_autres>
+		</BOUCLE_auteur>
+		
+		<B_tags>
+			<br /><:marquepages:avec_etiquettes:> :
+		<BOUCLE_tags(MOTS){type=tags}{id_forum=#_marquepage:ID_FORUM}{", "}>
+			<a rel="tag" href="#URL_MOT">#TITRE</a>
+		</BOUCLE_tags>
+		
+		[(#SESSION{id_auteur}|?{' '})
+		<ul class="actions">
+			[(#SESSION{id_auteur}|!={#_marquepage:ID_AUTEUR}|?{' '})
+				<li><a><:marquepages:copier:></a></li>
+			]
+			[(#_marquepage:ID_FORUM|marquepages_autoriser_supprimer|?{' '})
+				<li><a href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_marquepage:ID_FORUM&r=[(#SELF|rawurlencode)]"><:marquepages:supprimer:></a></li>
+			]
+		</ul>
+		]
+	</dd>
+</dl>
+</BOUCLE_site>
+</BOUCLE_marquepage>

@@ -17,10 +17,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Pour le formulaire de saisi
 'ajouter' => 'Ajouter un marque-page',
+'modifier' => 'Modifier un marque-page',
 'url' => 'Adresse',
 'titre' => 'Titre',
 'description' => 'Description',
 'etiquettes' => '&Eacute;tiquettes',
+'etiquettes_populaires' => '&Eacute;tiquettes populaires',
 'pas_le_droit' => 'Vous n\'avez pas le droit d\'ajouter un marque-page. Veuillez vous connectez avec un compte autoris&eacute;.',
 'se_deconnecter' => 'D&eacute;connectez-vous en cliquant ici.',
 'enregistre' => 'Votre marque-page a bien &eacute;t&eacute; enregistr&eacute;.'

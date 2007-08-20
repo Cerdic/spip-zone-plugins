@@ -15,11 +15,11 @@
 
 <BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_auteur==^((#ENV{id_aut,.*}))$}>
 <BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
-<dl class="xfolkentry">
-	<dt class="#_bookmarks:EDIT{titre}">
+<dl class="xfolkentry [(#SESSION{id_auteur}|=={#_bookmarks:ID_AUTEUR}|?{#_bookmarks:EDIT{marquepage}})]">
+	<dt>
 		<a href="#_site:URL_SITE" class="taggedlink" rel="nofollow">#_bookmarks:TITRE</a>
 	</dt>
-	[<dd class="description #_bookmarks:EDIT{texte}">
+	[<dd class="description">
 		(#_bookmarks:TEXTE)
 	</dd>]
 	<dd class="meta">
@@ -30,7 +30,8 @@
 		<BOUCLE_auteur(AUTEURS){id_auteur=#_bookmarks:ID_AUTEUR}>
 			<a href="#URL_AUTEUR">
 				<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
-				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' ',<:marquepages:vous:>})
+				[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:vous:>})]
+				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' '})
 				[(#CONFIG{plugin/INSCRIPTION2/version}|?{' ',#_auteur:NOM})[(#PRENOM|?{#PRENOM})] [(#NOM_FAMILLE|?{#NOM_FAMILLE,#_auteur:NOM})]]
 				]
 				</BOUCLE_elargi>
@@ -42,7 +43,7 @@
 		
 		<B_tags>
 			<br /><:marquepages:avec_etiquettes:> :
-		<BOUCLE_tags(MOTS){id_forum=#_bookmarks:ID_FORUM}{", "}>
+		<BOUCLE_tags(MOTS){type=tags}{id_forum=#_bookmarks:ID_FORUM}{", "}>
 			<a rel="tag" href="#URL_MOT">#TITRE</a>
 		</BOUCLE_tags>
 		

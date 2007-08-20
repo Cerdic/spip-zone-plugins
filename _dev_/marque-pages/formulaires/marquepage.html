@@ -17,8 +17,10 @@
 	</p>]
 	[<p class="reponse_formulaire">(#ENV*{message_ok})</p>]
 	
-	[(#REM) Si c'est ok ou qu'il y a erreur d'autorisation, on affiche pas le formulaire]
+	[(#REM) On met les mots en mémoire parce qu'on peut pas faire de boucle en dessous]
+	#SET{tags,#ARRAY{0}}<BOUCLE_tags(MOTS){type=tags}>[(#GET{tags}|array_push{<span>#TITRE*</span>}|vide)]</BOUCLE_tags>
 	
+	[(#REM) Si c'est ok ou qu'il y a erreur d'autorisation, on affiche pas le formulaire]
 	[(#ENV*{proposer_login}|?{'',' '})
 		[(#ENV*{message_ok}|?{'',' '})
 			<form action="#ENV{self}#formulaire_marquepage" method="post">
@@ -33,7 +35,27 @@
 					<p><input type="text" class="forml" id="mp_description" name="mp_description" value="#ENV{mp_description}" /></p>
 					
 					<p><label for="mp_etiquettes"><:marquepages:etiquettes:></label></p>
-					<p><input type="text" class="forml" id="mp_etiquettes" name="mp_etiquettes" value="#ENV{mp_etiquettes}" /></p>
+					<p><input type="text" class="forml" id="tags" name="mp_etiquettes" value="#ENV{mp_etiquettes}" /></p>
+					
+					[(#REM)
+
+						La liste des tags, dans des gentils < span >
+						Idealement le addtag(this) serait ajoute par
+						la fonction loadpopular ci-dessous
+
+					]
+					<style type='text/css'>@import url("#CHEMIN{css/popular_tags.css}");</style>
+					<div id='popularTags' style="font-size:10px;">
+					<div><:marquepages:etiquettes_populaires:></div>
+					[(#GET{tags}|?{' '}|join{#GET{tags}})]
+					</div>
+					
+					[(#REM)
+
+						Code partiellement copie du genial scuttle ; 
+
+					]
+					<script src="#CHEMIN{javascript/popular_tags.js}"></script>
 					
 					<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
 				</fieldset>
