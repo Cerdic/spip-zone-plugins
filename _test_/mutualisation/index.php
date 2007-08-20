@@ -1,3 +1,12 @@
+<?php
+	chdir('..');
+	require 'ecrire/inc_version.php';
+
+	// pas admin ? passe ton chemin (ce script est un vilain trou de securite)
+	if ( ($auteur_session['statut'] != '0minirezo') and ( $_SERVER["REMOTE_ADDR"]!='127.0.0.1'))
+		die('pas admin !');
+	chdir('sites');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr" dir="ltr">
 <head>
