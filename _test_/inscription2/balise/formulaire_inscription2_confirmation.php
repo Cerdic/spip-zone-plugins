@@ -22,25 +22,25 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode) {
 	$pass = _request('pass');
 	
 	if($id != '' and $mode != '' and $cle != '' and $pass == ''){
-			$n = confirmation_inscription2($id, $mode, $cle);
-			if ($n == 'pass'){			
+		$n = confirmation_inscription2($id, $mode, $cle);
+		if ($n == 'pass'){			
+
+		return inclure_balise_dynamique(
+			array("formulaires/inscription2_confirmation", 0,
+			array(
+				'id' => $id,
+				'mode' => $mode,
+				'cle' => $cle,
+				'pass' => $pass,
+			)
+		), false);
 	
-			return inclure_balise_dynamique(
-				array("formulaires/inscription2_confirmation", 0,
-				array(
-					'id' => $id,
-					'mode' => $mode,
-					'cle' => $cle,
-					'pass' => $pass,
-				)
-			), false);
-		
-		}elseif($n == 'sup'){
-				spip_query("DELETE FROM spip_auteurs WHERE id_auteur = '$id'");
-				spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur = '$id'");
-				echo "<strong>"._T('inscription2:suppression_faite')."</strong>";
-		}else
-				echo "rien a faire";
+	}elseif($n == 'sup'){
+			spip_query("DELETE FROM spip_auteurs WHERE id_auteur = '$id'");
+			spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur = '$id'");
+			echo "<strong>"._T('inscription2:suppression_faite')."</strong>";
+	}else
+			echo "rien a faire";
 	}else{
 		if ($GLOBALS['spip_version_code']>=1.9259){
 			include_spip('inc/acces');
