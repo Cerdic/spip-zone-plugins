@@ -880,15 +880,15 @@ function exec_pb_statistiques()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "statistiques");
 	echo "<br /><br />";
-	gros_titre(_T('titre_liens_entrants'));
+	echo gros_titre(_T('titre_liens_entrants'),'', false);
 	echo barre_onglets("statistiques", "referers");
 
-	debut_gauche();
-	debut_boite_info();
+	echo debut_gauche('', true);
+	echo debut_boite_info(true);
 	echo "<p style='text-align: left' style='font-size:small;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
-	fin_boite_info();
+	echo fin_boite_info(true);
 	
-	debut_droite();
+	echo debut_droite('', true);
 
 }
 else {
@@ -900,11 +900,11 @@ else {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_visites').$pourarticle, "statistiques_visites", "statistiques");
 	echo "<br /><br />";
-	gros_titre(_T('titre_evolution_visite').$pourarticle."<html>".aide("confstat")."</html>");
+	echo gros_titre(_T('titre_evolution_visite').$pourarticle."<html>".aide("confstat")."</html>", "", false);
 //	barre_onglets("statistiques", "evolution");
 	if ($titre) gros_titre($titre);
 
-	debut_gauche();
+	echo debut_gauche("", true);
 
 
 
@@ -938,7 +938,7 @@ else {
 
 
 
-	debut_droite();
+	echo debut_droite("", true);
  }
 
 include_spip("inc/plugin");

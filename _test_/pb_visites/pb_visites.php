@@ -109,7 +109,9 @@ function pb_visites_logs_visites () {
 
 function pb_visites_sauver_infos ($texte) {
 	if ( strstr($texte, "<html") ) {
-		pb_visites_logs_visites();
+		if($GLOBALS["auteur_session"]["statut"] != "0minirezo") { // Ne pas compter les admins (sinon, durees de visites enormes...)
+			pb_visites_logs_visites();
+		}
 	}
 	return $texte;
 }
