@@ -41,13 +41,13 @@ function exec_clevermail_subscribers_detail() {
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 
-	debut_gauche();
+	echo debut_gauche('', true);
 		include_spip("inc/clevermail_menu");
 
-	debut_droite();
+	echo debut_droite('', true);
 
 	debut_cadre_relief();
-		echo gros_titre('CleverMail Administration');
+		echo gros_titre('CleverMail Administration', '', '');
 	fin_cadre_relief();
 
 	debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png');
@@ -85,7 +85,7 @@ function exec_clevermail_subscribers_detail() {
 		}
 
 	fin_cadre_relief();
-		icone_horizontale(_T('clevermail:supprimer_abonne_base'), generer_url_ecrire("clevermail_subscribers_detail","lst_id=0&sub_id=".$sub_id), '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png', 'supprimer.gif');
+		echo icone_horizontale(_T('clevermail:supprimer_abonne_base'), generer_url_ecrire("clevermail_subscribers_detail","lst_id=0&sub_id=".$sub_id), '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png', 'supprimer.gif', '', true);
 
 	fin_page();
 }

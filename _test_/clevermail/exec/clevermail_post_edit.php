@@ -49,12 +49,12 @@ function exec_clevermail_post_edit() {
 	}
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
-		debut_gauche();
+		echo debut_gauche('', true);
         	include_spip("inc/clevermail_menu");
 
-		debut_droite();
+		echo debut_droite('', true);
 			debut_cadre_relief();
-				echo gros_titre('CleverMail Administration');
+				echo gros_titre('CleverMail Administration', '', '');
 			fin_cadre_relief();
 
 			debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/new.png');
@@ -83,10 +83,10 @@ function exec_clevermail_post_edit() {
 				<form action="<?php echo generer_url_ecrire('clevermail_post_edit',''); ?>" method="post">
 				<input type="hidden" name="pst_id" value="<?=$post['pst_id']?>" />
         		<input type="hidden" name="lst_id" value="<?=$post['lst_id']?>" />
-				<?php debut_cadre_formulaire(); ?>
+				<?php echo debut_cadre_formulaire('', true); ?>
 					<label><?php echo _T('clevermail:sujet_message') ?> :</label>
 					<input type="text" name="pst_subject" value="<?=$post['pst_subject']?>" size="50" maxlength="255" class="formo" />
-				<?php fin_cadre_formulaire(); ?>
+				<?php echo fin_cadre_formulaire(true); ?>
 				<br />
 				<div style="text-align: right">
 					<input type="submit" value="<?=($post['pst_id'] == -1 ? _T('clevermail:creer') : _T('clevermail:modifier_submit'))?>" class="fondo"  />

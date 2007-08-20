@@ -14,17 +14,17 @@ function exec_clevermail_subscribers_new() {
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 
-	debut_gauche();
+	echo debut_gauche('', true);
 		include_spip("inc/clevermail_menu");
 		echo '<br />';
 		debut_cadre_relief();
 			echo '<strong>CSV Format :</strong><br />';
 			echo 'user@example.com<br />user2@example.com';
 		fin_cadre_relief();
-	debut_droite();
+	echo debut_droite('', true);
 
 	debut_cadre_relief();
-		echo gros_titre('CleverMail Administration');
+		echo gros_titre('CleverMail Administration', '', '');
 	fin_cadre_relief();
 
 	debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png');
@@ -105,7 +105,7 @@ function exec_clevermail_subscribers_new() {
 		}
 ?>
 		<form enctype="multipart/form-data" action="<?php echo generer_url_ecrire('clevermail_subscribers_new',''); ?>" method="post">
-		<?php debut_cadre_formulaire() ?>
+		<?php echo debut_cadre_formulaire('', true) ?>
 			<label><?php echo _T('clevermail:a_partir_csv') ?></label>
 			<input type="file" name="cm_file" class="formo" /><br />
 
@@ -126,7 +126,7 @@ function exec_clevermail_subscribers_new() {
 	        <label for="html" class="verdana1">HTML</label>
 	        <input type="radio" name="cm_mode" value="0" id="txt" />
 	        <label for="txt" class="verdana1">Text</label>
-		<?php fin_cadre_formulaire() ?>
+		<?php echo fin_cadre_formulaire(true) ?>
 			<br />
 			<div style="text-align: right">
 				<input type="submit" value="<?php echo _T('clevermail:importer') ?>" class="fondo"  />

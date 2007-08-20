@@ -17,7 +17,7 @@ function exec_clevermail_posts() {
 	}
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
-		debut_gauche();
+		echo debut_gauche('', true);
         	include_spip("inc/clevermail_menu");
 
         	$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts p, cm_posts_queued q WHERE p.pst_id = q.pst_id AND p.lst_id=".$_GET['lst_id']));
@@ -28,9 +28,9 @@ function exec_clevermail_posts() {
 				fin_cadre_relief();
 			}
 
-		debut_droite();
+		echo debut_droite('', true);
 			debut_cadre_relief();
-				echo gros_titre('CleverMail Administration');
+				echo gros_titre('CleverMail Administration', '', '');
 			fin_cadre_relief();
 
 			$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$_GET['lst_id']));
@@ -43,7 +43,7 @@ function exec_clevermail_posts() {
 
 				    $posts = spip_query("SELECT * FROM cm_posts WHERE lst_id=".$_GET['lst_id']." AND pst_date_sent = 0 ORDER BY pst_date_create DESC");
 					while ($post = spip_fetch_array($posts)) {
-						debut_cadre_formulaire();
+						echo debut_cadre_formulaire('', true);
 						echo '<h4>'.$post['pst_subject'].'</h4>';
 
 						echo '<p>';
@@ -59,7 +59,7 @@ function exec_clevermail_posts() {
 				        echo '| <a href="'.generer_url_ecrire("clevermail_posts","lst_id=".$post['lst_id']."&pst_id=".$post['pst_id']).'">'._T('clevermail:supprimer').'</a> ';
 						echo '| <a href="'.generer_url_ecrire("clevermail_post_queue","pst_id=".$post['pst_id']).'">'._T('clevermail:envoyer').'</a>';
 
-				   		fin_cadre_formulaire();
+				   		echo fin_cadre_formulaire(true);
 				   		echo '<br />';
 					}
 				fin_cadre_relief();
@@ -78,7 +78,7 @@ function exec_clevermail_posts() {
 					    $postInfo['sent'] = $postInfo['sent']['nb'];
 					    $postInfo['queued'] = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts_queued WHERE pst_id = ".$post['pst_id']));
 					    $postInfo['queued'] =  $postInfo['queued']['nb'];
-					    debut_cadre_formulaire();
+					    echo debut_cadre_formulaire('', true);
 						echo '<h4>'.$post['pst_subject'].'</h4>';
 
 						echo '<p>';
@@ -94,7 +94,7 @@ function exec_clevermail_posts() {
 						echo '<a href="'.generer_url_ecrire("clevermail_post","pst_id=".$post['pst_id']."&mode=text").'" target="_blank">'._T('clevermail:apercu').' TXT</a> ';
 						echo '| <a href="'.generer_url_ecrire("clevermail_post","pst_id=".$post['pst_id']."&mode=html").'" target="_blank">'._T('clevermail:apercu').' HTML</a>';
 
-						fin_cadre_formulaire();
+						echo fin_cadre_formulaire(true);
 				   		echo '<br />';
 	    			}
 				fin_cadre_relief();
@@ -108,7 +108,7 @@ function exec_clevermail_posts() {
 
 				    $posts = spip_query("SELECT * FROM cm_posts WHERE pst_date_sent!=0 AND lst_id=".$_GET['lst_id']);
 					while ($post = spip_fetch_array($posts)) {
-					    debut_cadre_formulaire();
+					    echo debut_cadre_formulaire('', true);
 						echo '<h4>'.$post['pst_subject'].'</h4>';
 
 						echo '<p>';
@@ -120,14 +120,14 @@ function exec_clevermail_posts() {
 						echo '<a href="'.generer_url_ecrire("clevermail_post","pst_id=".$post['pst_id']."&mode=text").'" target="_blank">'._T('clevermail:apercu').' TXT</a> ';
 						echo '| <a href="'.generer_url_ecrire("clevermail_post","pst_id=".$post['pst_id']."&mode=html").'" target="_blank">'._T('clevermail:apercu').' HTML</a>';
 
-						fin_cadre_formulaire();
+						echo fin_cadre_formulaire(true);
 				   		echo '<br />';
 	    			}
 				fin_cadre_relief();
 			}
 
 
-			icone_horizontale(_T('clevermail:creer_nouveau_message'), generer_url_ecrire("clevermail_post_edit","pst_id=-1&lst_id=".$_GET['lst_id']), '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/new.png', 'creer.gif');
+			echo icone_horizontale(_T('clevermail:creer_nouveau_message'), generer_url_ecrire("clevermail_post_edit","pst_id=-1&lst_id=".$_GET['lst_id']), '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/new.png', 'creer.gif', '', true);
 	fin_page();
 }
 ?>

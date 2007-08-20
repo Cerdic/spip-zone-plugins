@@ -27,12 +27,12 @@ function exec_clevermail_lists_remove() {
 	}
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
-		debut_gauche();
+		echo debut_gauche('', true);
         	include_spip("inc/clevermail_menu");
 
-		debut_droite();
+		echo debut_droite('', true);
 			debut_cadre_relief();
-				echo gros_titre('CleverMail Administration');
+				echo gros_titre('CleverMail Administration', '', '');
 			fin_cadre_relief();
 
 			debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/lettre-24.png');

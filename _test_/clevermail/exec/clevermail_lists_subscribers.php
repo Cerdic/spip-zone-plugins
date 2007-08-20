@@ -47,14 +47,14 @@ function exec_clevermail_lists_subscribers() {
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 
-		debut_gauche();
+		echo debut_gauche('', true);
 			include_spip("inc/clevermail_menu");
 			echo '<br />';
 			include_spip("inc/clevermail_search");
-		debut_droite();
+		echo debut_droite('', true);
 
 		debut_cadre_relief();
-			echo gros_titre('CleverMail Administration');
+			echo gros_titre('CleverMail Administration', '', '');
 		fin_cadre_relief();
 
 		echo '<form name="subscribers" action="'.generer_url_ecrire('clevermail_lists_subscribers','').'" method="post">'."\n";
@@ -68,7 +68,7 @@ function exec_clevermail_lists_subscribers() {
 		fin_cadre_relief();
 
 		echo '<input type="hidden" name="remove" value="1" />'."\n";
-		icone_horizontale(_T('clevermail:desabonner_abonnes'), 'javascript:if(confirm("'._T('clevermail:confirme_desabonnement_multiple_lettre').'")){checkbox2input(document.subscribers,"sub_id",document.subscribers.sub_ids);document.subscribers.submit();}', '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonnes.png', 'supprimer.gif');
+		echo icone_horizontale(_T('clevermail:desabonner_abonnes'), 'javascript:if(confirm("'._T('clevermail:confirme_desabonnement_multiple_lettre').'")){checkbox2input(document.subscribers,"sub_id",document.subscribers.sub_ids);document.subscribers.submit();}', '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonnes.png', 'supprimer.gif', '', true);
 		echo '</form>'."\n";
 
 	fin_page();

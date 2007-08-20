@@ -66,7 +66,7 @@ function exec_clevermail_lists_edit() {
 	}
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
-		debut_gauche();
+		echo debut_gauche('', true);
         	include_spip("inc/clevermail_menu");
 			echo '<br />';
 			debut_cadre_relief();
@@ -78,9 +78,9 @@ function exec_clevermail_lists_edit() {
 				echo '@@URL_CONFIRMATION@@<br />';
 				echo '@@URL_DESINSCRIPTION@@<br />';
 			fin_cadre_relief();
-		debut_droite();
+		echo debut_droite('', true);
 			debut_cadre_relief();
-				echo gros_titre('CleverMail Administration');
+				echo gros_titre('CleverMail Administration', '', '');
 			fin_cadre_relief();
 
 			debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/lettre-24.png');
@@ -119,7 +119,7 @@ function exec_clevermail_lists_edit() {
 				if (is_array($list)) {
 ?>
 					<form action="<?php echo generer_url_ecrire('clevermail_lists_edit',''); ?>" method="post">
-				        <?php debut_cadre_formulaire() ?>
+				        <?php echo debut_cadre_formulaire('', true) ?>
 				        	<h4><?php echo _T('clevermail:configuration_generale') ?></h4>
 				       		<input type="hidden" name="lst_id" value="<?=$list['lst_id']?>" />
 
@@ -150,9 +150,9 @@ function exec_clevermail_lists_edit() {
 
 				            <input type="checkbox" value="1" name="lst_subject_tag" <?=($list['lst_subject_tag'] == 1 ? 'checked="checked"' : '')?>/>
 				            <label><?php echo _T('clevermail:prefixer_messages') ?></label>
-				        <?php fin_cadre_formulaire() ?>
+				        <?php echo fin_cadre_formulaire(true) ?>
 						<br />
-						<?php debut_cadre_formulaire() ?>
+						<?php echo debut_cadre_formulaire('', true) ?>
 					        <h4><?php echo _T('clevermail:confirmation_inscription') ?></h4>
 
 					        <label><?php echo _T('clevermail:sujet') ?> :</label>
@@ -160,9 +160,9 @@ function exec_clevermail_lists_edit() {
 
 					        <label><?php echo _T('clevermail:description') ?> :</label>
 					        <textarea name="lst_subscribe_text" cols="50" rows="10" wrap="virtual" class="formo"><?=$list['lst_subscribe_text']?></textarea>
-						<?php fin_cadre_formulaire() ?>
+						<?php echo fin_cadre_formulaire(true) ?>
 						<br />
-						<?php debut_cadre_formulaire() ?>
+						<?php echo debut_cadre_formulaire('', true) ?>
 					        <h4><?php echo _T('clevermail:confirmation_desinscription') ?></h4>
 
 					        <label><?php echo _T('clevermail:sujet') ?> :</label>
@@ -170,15 +170,15 @@ function exec_clevermail_lists_edit() {
 
 					        <label><?php echo _T('clevermail:description') ?> :</label>
 							<textarea name="lst_unsubscribe_text" cols="50" rows="10" wrap="virtual" class="formo"><?=$list['lst_unsubscribe_text']?></textarea>
-						<?php fin_cadre_formulaire() ?>
+						<?php echo fin_cadre_formulaire(true) ?>
 						<br />
-						<?php debut_cadre_formulaire() ?>
+						<?php echo debut_cadre_formulaire('', true) ?>
 							<h4><?php echo _T('clevermail:url_templates') ?></strong></h4>
 							<label><?php echo _T('clevermail:version_html') ?> :</label>
 					        <input type="text" name="lst_url_html" value="<?=$list['lst_url_html']?>" size="50" maxlength="255" class="formo" /><br />
 					        <label><?php echo _T('clevermail:version_txt') ?> :</label>
 					        <input type="text" name="lst_url_text" value="<?=$list['lst_url_text']?>" size="50" maxlength="255" class="formo" />
-						<?php fin_cadre_formulaire() ?>
+						<?php echo fin_cadre_formulaire(true) ?>
 						<br />
 						<div style="text-align: right">
 							<input type="reset" value="<?php echo _T('clevermail:annuler') ?>" class="fondo" />
