@@ -11,9 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'et' => 'et',
 'autres' => 'autre(s)',
 'vous' => 'vous',
-'editer' => '&eacute;diter',
-'supprimer' => 'supprimer',
-'copier' => 'copier',
+'supprimer' => 'Supprimer',
+'copier' => 'Copier',
+'confirmer' => 'Confirmer ?',
+'oui' => 'oui',
+'non' => 'non',
 
 // Pour le formulaire de saisi
 'ajouter' => 'Ajouter un marque-page',

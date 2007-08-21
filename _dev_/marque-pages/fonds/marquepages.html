@@ -9,15 +9,63 @@
 		plusieurs mais c'est peu utilisé...)
 	id_site :
 		si on veut "l'historique" des marque-pages d'un site
-	id_mp :
+	id_marquepage :
 		si on veut sortir un marque-page particulier
+	referer=true :
+		cas très particulier, utilisé dans la vue pour dire que
+		la vraie adresse de la page n'est pas #SELF mais le referer
 		
 	Ce fond utilise la balise #SESSION, il faut donc l'insclure avec 
 	session.php (voir la doc du plugin "balise session")
 
 ]
 
-<BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_mp,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}>
+<?php $referer = $_SERVER["HTTP_REFERER"]; ?>
+
+<script type="text/javascript">
+	function confirmer(quoi){
+		
+		$(quoi).click(function(){
+			
+			// On crée la question de confirmation
+			var question = $("<span></span>")
+				.addClass("confirmation")
+				.append('<:marquepages:confirmer:>&nbsp;')
+				.append($("<a><:marquepages:oui:></a>")
+					.addClass("oui")
+					.attr("href", $(this).attr("href"))
+				)
+				.append("&nbsp;")
+				.append($("<a><:marquepages:non:></a>")
+					.addClass("non")
+					.attr("href", "")
+					.click(function(){
+						$(quoi).css("display", "inline");
+						$(this).parent().remove();
+						return false;
+					})
+				);
+			
+			// On échange l'action et la confirmation
+			$(this)
+				.css("display", "none")
+				.parent().append(question);
+			
+			// On annule le lien par défaut
+			return false;
+			
+		});
+		
+	}
+	
+	$(document).ready(function() {
+		
+		confirmer("a.confirmer");
+		
+	});
+</script>
+
+<BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_marquepage,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}>
 <BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
 <dl class="xfolkentry [(#SESSION{id_auteur}|=={#_bookmarks:ID_AUTEUR}|?{#_bookmarks:EDIT{marquepage}})]">
 	<dt>
@@ -57,7 +105,7 @@
 				<li><a><:marquepages:copier:></a></li>
 			]
 			[(#_bookmarks:ID_FORUM|marquepages_autoriser_supprimer|?{' '})
-				<li><a href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_bookmarks:ID_FORUM&r=[(#SELF|rawurlencode)]"><:marquepages:supprimer:></a></li>
+				<li><a class="confirmer" href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_bookmarks:ID_FORUM&r=[<?php echo rawurlencode($referer); ?>(#ENV{referer}|?{' '})][[(#SELF|rawurlencode)](#ENV{referer}|?{'',' '})]"><:marquepages:supprimer:></a></li>
 			]
 		</ul>
 		]
