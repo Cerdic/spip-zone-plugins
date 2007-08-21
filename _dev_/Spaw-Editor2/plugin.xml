@@ -1,0 +1,33 @@
+<plugin>
+	<nom>SPAW Editor v.2 Plugin (Wysiwyg)</nom>
+	<auteur>Mehdi Cherifi (superyms) - Net Studio &#169; 2007 - Distribu&eacute; sous licence GPL</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+	{{Edition WYSIWYG avec SPAW Editor 2}}<br /><br />
+	Ce plugin (pour SPIP 1.9.2+) permet d'utiliser SPAW Editor V2 comme editeur wysisyg dans l'espace prive de SPIP, ceci est une excellente alternative a l'editeur de SPIP ou bien aux autres éditeurs (FCKeditor, Tinymce, ...).
+	<br />
+	SPAW Editor est un remplacement du textarea traditionnel par un éditeur plus complet, avec support des CSS, tables, polices et styles, ajout/suppression d’éléments multimédia (images, autre. Il supporte aussi le copier / coller depuis les autres applications, et nettoye à la volée le code HTML qui lui est fourni (en provenance de Word, c’est une bonne chose !). Il est gratuit, sous licence GPL, et payant pour les autres utilisations. Il dispose aussi d’une version française, ainsi que d’une version PHP.
+	</description>
+	<lien>Net Studio : http://www.netstudio-dz.com<br />
+	SPAw editor 2: http://www.solmetra.com/en/disp.php/en_products/en_spaw/en_spaw_intro</lien>
+	<prefix>spaw-editor2</prefix>
+	<options>
+	spaw2_options.php
+	</options>
+	<pipeline>
+		<nom>affiche_droite</nom> 
+		<action>affiche_droite</action>
+		<inclure>spaw2_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom> 
+		<action>header_prive</action>
+		<inclure>spaw2_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom> 
+		<action>pre_propre</action>
+		<inclure>spaw2_pre_propre.php</inclure>
+	</pipeline>
+</plugin>
