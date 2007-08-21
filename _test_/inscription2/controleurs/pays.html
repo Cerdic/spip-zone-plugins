@@ -1,5 +1,5 @@
 #CACHE{0}
 <option value=""><:inscription2:pays:></option>
 <BOUCLE_r(SPIP_GEO_PAYS){tous}>
-<option value="#ID_PAYS"[(#ENV{id}|=={#ID_PAYS}|?{selected})]>[(#NOM|couper{30})]</option>
+<option value="#ID_PAYS"[(#ENV{id}|=={#ID_PAYS}|?{selected})]>[(#PAYS|couper{30})]</option>
 </BOUCLE_r>

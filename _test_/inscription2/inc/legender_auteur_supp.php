@@ -261,8 +261,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 			}
 			elseif($cle == 'pays_pro'){
 				$var_user['d.pays'] = '1';
-				$var_user['d.pays as pays_pro'] = '1';
-			}
+				$var_user['d.pays as pays_pro'] = '1';}
 			else 
 				$var_user['b.'.$cle] = '1';
 		}
@@ -293,7 +292,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	}
 	//Debut de l'affichage des données...
 	foreach ($query as $cle => $val){
-		if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'email'))
+		if(($cle == 'id_auteur') || ($cle == 'login') || ($cle == 'nom') || ($cle == 'email') || ($cle == 'id_pays') || ($cle == 'id_pays_pro'))
 			continue;
 		elseif (strlen($val) >= 1){ $res .= "<p><strong>"._T('inscription2:'.$cle)." : </strong>" . $val . "</p>"; }
 	}

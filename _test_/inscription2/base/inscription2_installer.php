@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['inscription2_version'] = 0.6;
+$GLOBALS['inscription2_version'] = 0.61;
 
 function inscription2_upgrade(){
 	
@@ -112,6 +112,19 @@ function inscription2_upgrade(){
 		
 		echo "Inscription2 update @ 0.6<br/>Spip_pays devient spip_geo_pays homogeneite avec spip_geo";
 		ecrire_meta('inscription2_version',$current_version=0.6);
+	}
+		// Si la version installee est inferieur a O.6 on fait l homogeneisation avec spip_geo
+	if ($current_version<0.61){
+		include_spip('base/abstract_sql');
+		$table_pays = "spip_geo_pays";
+		$descpays = spip_abstract_showtable($table_pays, '', false);;
+		
+		if((isset($descpays['field']['nom'])) && (!isset($descpays['field']['pays']))){
+			spip_query("ALTER TABLE spip_geo_pays CHANGE nom pays varchar(255) NOT NULL");
+		}
+		
+		echo "Inscription2 update @ 0.61<br/>On retablit le champs pays sur la table pays et pas nom";
+		ecrire_meta('inscription2_version',$current_version=0.61);
 	}
 	ecrire_metas();
 }

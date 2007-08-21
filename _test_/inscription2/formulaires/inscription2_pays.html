@@ -3,7 +3,7 @@
 	<option value=""><:inscription2:pays:></option>
 	<BOUCLE_pays(SPIP_GEO_PAYS){tout}>
 		[<option value="#ID_PAYS"[(#ID_PAYS|=={#ENV{pays}}|?{' selected="selected"',''})]>
-		(#NOM)
+		(#PAYS)
 		</option>]
 	</BOUCLE_pays>
 </select>
