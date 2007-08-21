@@ -362,9 +362,9 @@ if(_request(recherche)){
 	$where = "id_rubrique='"._request(id_rubrique)."'";
 }
 
-if(_request(id_mot)){
+if($_GET['id_mot']){
 
-	$where = "id_article IN (SELECT id_article FROM spip_mots_articles WHERE id_mot="._request(id_mot).")";
+	$where = "id_article IN (SELECT id_article FROM spip_mots_articles WHERE id_mot=".$_GET['id_mot'].")";
 
 }
 
