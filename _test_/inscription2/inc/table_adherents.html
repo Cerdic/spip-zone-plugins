@@ -258,14 +258,14 @@ function confirm(msg,callback) {
 			LEFT JOIN `spip_auteurs_elargis` b ON b.id_auteur = a.id_auteur
 			left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays
 			WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
-                        echo $query;
-                        }
+		}
 	elseif(lire_config('inscription2/pays_table'))
 		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
 			ON b.id_auteur = a.id_auteur LEFT JOIN spip_geo_pays c ON b.pays=c.id_pays  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
-	else 
+	else
 		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
 			ON b.id_auteur = a.id_auteur  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
+	
 	$query = spip_query ($query);
 		
 	$i=0;

@@ -48,7 +48,7 @@ function n_to_br($texte){
 }
 
 function id_pays_to_pays($id_pays){
-$pays = spip_fetch_array(spip_query("select pays from spip_geo_pays where id ='$id_pays'")) ;
+$pays = spip_fetch_array(spip_query("select pays from spip_geo_pays where id_pays ='$id_pays'")) ;
 return $pays['pays'] ;
 }
 
