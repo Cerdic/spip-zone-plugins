@@ -25,30 +25,54 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous' => 'Todos',
 	'tous2' => 'Todas',
 	'editar_masa'  => 'Editar en masa',
-	'elija_seccion' => 'Elija Secci&oacute;n',
+	'elija_seccion' => 'Filtrar por secci&oacute;n',
 	'cambiar_a_seccion' => 'Cambiar a la secci&oacute;n',
 	'Listado' => 'Listado',
 	'cambiar_mot' => 'Palabras clave',
 	'cambiar_seccion' => 'Cambiar seccion',
 	'cambiar_statut' => 'Cambiar estado',
+	'cambiar_fecha' => 'Cambiar fecha',
+	'cambios_fecha' => 'articulo cambios la fecha a',
 	'filtrar' => 'Filtrar por',
-	'invertir' => 'Invertir',
+	'invertir' => 'Invertir selecci&oacute;n',
 	'cambiando_articulos' => 'articulos cambiados a la secci&oacute;n',
 	'cambiando_articulos_statut' => 'articulos cambiados de estado',
-	'asociados_articulos' => 'articulos asociados a la palabra clave',
-	'quitados_articulos' => 'articulos desvinculados de la palabra clave',
+	'asociados_articulos' => 'articulos asociados',
+	'desasociados_articulos' => 'articulos asociados',
+	'a_palabra' => 'a la palabra clave',
+	'al_autor' => 'al autor o autora',
+
+	'quitados_articulos' => 'articulos desvinculados',
+
+
+	'de_palabra' => ' de la palabra clave',
+	'de_autor' => 'del autor o autora',
+
+
 	'ningun_articulo' => 'Ningun articulo seleccionado',
 	'seccion_invalida' => 'Seccion invalida',
 	'mot_invalida' => 'Palabra clave invalida',
 	'mot_asociar' => 'Asociar',
 	'mot_quitar' => 'Quitar',
+	'autor_asociar' => 'Asociar autor',
+	'autor_quitar' => 'Quitar autor',
+	'autor_invalido' => 'Autor o Autora inv&aacute;lido',
 	'busqueda' => 'Busqueda',
 	'por_mot' => 'Por palabra clave',
 	'ingrese_mot' => 'Ingrese ID palabra clave',
 	'ingrese_seccion' => 'Ingrese ID seccion',
 	'mostrar_todos' => 'Mostrar Todos',
 	'listado' => 'Listado',
-	'edicion_masa' => 'Edici&oacute;n en Masa'
+	'edicion_masa' => 'Edici&oacute;n en Masa',
+	'estado' => 'Estado',
+	'elija_estado' => 'Filtrar por estado',
+	'elija_mot' => 'Filtrar por palabra',
+	'elija_autor' => 'Filtrar por autor/a',
+	'editar_seleccion' => 'Editar selecci&oacute;n',
+	'autor' => 'Autor o autora',
+
+	'redac_anterior' => 'Redacci&oacute;n anterior',
+	'redac_anterior_mas' => 'Editar la fecha de redacci&oacute;n anterior de estos articulos'
 
 );
 ?>

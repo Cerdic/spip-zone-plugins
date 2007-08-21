@@ -43,10 +43,13 @@ function checkAll(form)
 {
 	for (i = 0, n = form.elements.length; i < n; i++) {
 		if(form.elements[i].type == \"checkbox\") {
+		if(form.elements[i].name != \"redac_anterior\"){
+
 			if(form.elements[i].checked == true)
 				form.elements[i].checked = false;
 			else
 				form.elements[i].checked = true;
+		}
 		}
 	}
 }
