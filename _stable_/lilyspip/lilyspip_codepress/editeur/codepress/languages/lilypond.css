@@ -1,17 +1,16 @@
 /*
  * CodePress color styles for LilyPond syntax highlighting
  */
-commented, commented rest, commented duration, commented quoted, commented quoted duration, commented function, commented bloc, commented mark, commented function, commented grob, commented context, commented id, commented poly, commented command, commented identifier {color:#EF952C;font-weight:normal;font-size:small;} /* comments */
-quoted, quoted rest, quoted duration, quoted grob, quoted id, quoted command, quoted context, quoted mark {color:#EF0ED5;} /* names etc */
-rest, grob {color:#AF2B9A;} /* rests */
-endline {background-color:red;font-size:3px;margin-left:2px;} /* end of lines*/
-bloc {color:#000080;} /* blocs */
-mark {color:#3FBBFF} /*markup commands*/
-function, identifier, function id, identifier id, function rest, identifier rest {color:#3398CF;font-weight:bold;} /*music functions and identifiers*/
-command, command id {color:#00465F;font-weight:bold;} /*commands*/
-context, context rest, context id {color:green;font-weight:bold;} /*contexts, engravers, interfaces*/
-duration {color:red;font-weight:normal;} /* digits */
-poly {color:#800000;} /* polyphony */
-id, id rest {color:#A083AF;}
-scheme, scheme rest, scheme grob, scheme id {background-color:#CFD3FF}
+ 
+big, big i, big b, big strong, big ins, big cite, big em, big ins, big s, big i, big a {color:#EF952C;font-weight:normal;font-size:small;} /* comments */
+i , i b, i em, i ins, i s  {color:#EF0ED5;} /* names etc */
+u {background-color:red;font-size:3px;margin-left:2px;} /* end of lines*/
+em {color:#000080;} /* blocs */
+strong {color:#3FBBFF} /*markup commands*/
+ins {color:#3398CF;font-weight:bold;} /*music functions and identifiers*/
+cite {color:#447c44;font-weight:bold;} /*commands*/
+span {color:green;font-weight:bold;} /*contexts, engravers, interfaces*/
+s {color:red;font-weight:normal;} /* digits */
+span {color:#800000;} /* polyphony */
+a  {background-color:#CFD3FF}
 

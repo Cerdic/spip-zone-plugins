@@ -7,7 +7,7 @@
 	}
     
 	function piano_template(){
-		lilycode.setCode('upper = \\relative c\'\' { \n\t\\clef treble \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta b c d \n\t} \n\nlower = \\relative c { \n\t\\clef bass \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta2 c \n\t} \n\n\\score { \n\t\\new PianoStaff << \n\t\t\\new Staff = "upper" \\upper \n\t\t\\new Staff = "lower" \\lower \n\t>> \n\t\\layout {} \n\t\\midi {} \n\t}','lilypond');
+		lilycode.setCode('voiceup = \\relative c\'\' { \n\t\\clef treble \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta b c d \n\t} \n\nvoicelow = \\relative c { \n\t\\clef bass \n\t\\key c \\major \n\t\\time 4/4 \n\n\ta2 c \n\t} \n\n\\score { \n\t\\new PianoStaff << \n\t\t\\new Staff = "voiceup" \\voiceup \n\t\t\\new Staff = "voicelow" \\voicelow \n\t>> \n\t\\layout {} \n\t\\midi {} \n\t}','lilypond');
 		lilycode.editor.syntaxHighlight('init'); 
 	}
 
@@ -17,7 +17,7 @@
 	}
 
 	function vocal_template(){
-		lilycode.setCode('','lilypond');
+		lilycode.setCode('global = { \n\t\\key c \\major \n\t\\time 4/4 \n\t} \n\nsopMusic = \\relative c\'\' { \n\tc4 c c8[( b)] c4 \n\t} \n\nsopWords = \\lyricmode { \n\thi hi hi hi \n\t} \n\naltoMusic = \\relative c\' { \n\te4 f d e \n\t} \n\naltoWords = \\lyricmode { \n\tha ha ha ha \n\t} \n\ntenorMusic = \\relative c\' { \n\tg4 a f g \n\t} \n\ntenorWords = \\lyricmode { \n\thu hu hu hu \n\t} \n\nbassMusic = \\relative c { \n\tc4 c g c \n\t} \n\nbassWords = \\lyricmode { \n\tho ho ho ho \n\t} \n\n\\score { \n\t\\new ChoirStaff << \n\t\t\\new Lyrics = sopranos { s1 } \n\t\t\\new Staff = women << \n\t\t\t\\new Voice = "sopranos" { \\voiceOne << \\global \\sopMusic >> } \n\t\t\t\\new Voice = "altos" { \\voiceTwo << \\global \\altoMusic >> } \n\t\t\t>> \n\t\t\\new Lyrics = "altos" { s1 } \n\t\t\\new Lyrics = "tenors" { s1 } \n\t\t\\new Staff = men << \n\t\t\t\\clef bass \n\t\t\t\\new Voice = "tenors" { \\voiceOne <<\\global \\tenorMusic >> } \n\t\t\t\\new Voice = "basses" { \\voiceTwo <<\\global \\bassMusic >> } \n\t\t\t>> \n\t\t\\new Lyrics = basses { s1 } \n\t\t\\context Lyrics = sopranos \\lyricsto sopranos \\sopWords \n\t\t\\context Lyrics = altos \\lyricsto altos \\altoWords \n\t\t\\context Lyrics = tenors \\lyricsto tenors \\tenorWords \n\t\t\\context Lyrics = basses \\lyricsto basses \\bassWords \n\t\t>> \n\n\t\\layout { \n\t\t\\context { \n\t\t\\Staff \\override VerticalAxisGroup #\'minimum-Y-extent = #\'(-3 . 3)\n\t\t}\n\t}\n}','lilypond');
 		lilycode.editor.syntaxHighlight('init'); 
 	}
     
@@ -67,7 +67,9 @@
 
 	
 		function recup_code(){
-			return this.s2;
+			//pour supprimer les balises lilypond selectionnées
+			code = (this.s2).replace(/<\/*lilypond>\s*/gi,'');
+			return code;
 		}
 		
 		function existe() {return (this.s2!="")} //indique si le code lilypond a été sélectionné
@@ -80,12 +82,13 @@
 	function init(){
 		   
 		ancien_code = new selection(top.opener.zone_selection);
-		theSelection = top.opener.document.getElementById("text_area").value;
-	
+			
 		if (ancien_code.existe()) {
 			    lilycode.setCode(ancien_code.recup_code(),'lilypond') ;
-			    lilycode.editor.syntaxHighlight('init');		
-		}	
+			    lilycode.editor.syntaxHighlight('init');
+		}
+		
+		
 	}
 	
 	function d(s){debug.innerHTML+=s;}
@@ -121,6 +124,7 @@
 		return texte;	
 	}
 	
+		
  
 
 	function enregistre(){

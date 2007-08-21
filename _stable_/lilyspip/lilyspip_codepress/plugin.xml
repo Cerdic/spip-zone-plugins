@@ -11,7 +11,7 @@ _ Lilypond css for Codepress : Valentin Villenave
 	1.2
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	dev
+	test
 	</etat>
 	<description>
 	Ins&eacute;rer des notations musicales en utilisant Lilypond : http://lilypond.org/web/index

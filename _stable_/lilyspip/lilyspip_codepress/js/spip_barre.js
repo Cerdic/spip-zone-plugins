@@ -5,12 +5,6 @@
 // Startup variables
 var theSelection = false;
 
-// Variables globales
-var currentTimeout;
-
-
-
-
 // Check for Browser & Platform for PC & IE specific bits
 // More details from: http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
@@ -67,6 +61,15 @@ function barre_raccourci(debut,fin,champ) {
 	}
 }
 
+function barre_demande(debut,milieu,fin,affich,champ) {
+	var inserer = prompt(affich);
+
+	if (inserer != null) {
+		if (inserer == "") {inserer = "xxx"; }
+
+		barre_raccourci(debut, milieu+inserer+fin, champ);
+	}
+}
 
 function barre_inserer(text,champ) {
 	var txtarea = champ;
@@ -84,7 +87,37 @@ function barre_inserer(text,champ) {
 }
 
 
-
+// D'apres Nicolas Hoizey 
+function barre_tableau(toolbarfield)
+{
+	var txtarea = toolbarfield;
+	txtarea.focus();
+	var cols = prompt("Nombre de colonnes du tableau :", "");
+	var rows = prompt("Nombre de lignes du tableau :", "");
+	if (cols != null && rows != null) {
+		var tbl = '';
+		var ligne = '|';
+		var entete = '|';
+		for(i = 0; i < cols; i++) {
+			ligne = ligne + ' valeur |';
+			entete = entete + ' {{entete}} |';
+		}
+		for (i = 0; i < rows; i++) {
+			tbl = tbl + ligne + '\n';
+		}
+		if (confirm('Voulez vous ajouter une ligne d\'en-tête ?')) {
+			tbl = entete + '\n' + tbl;
+		}
+		if ((clientVer >= 4) && is_ie && is_win) {
+			var str = document.selection.createRange().text;
+			var sel = document.selection.createRange();
+			sel.text = str + '\n\n' + tbl + '\n\n';
+		} else {
+			mozWrap(txtarea, '', "\n\n" + tbl + "\n\n");
+		}
+	}
+	return;
+}
 
 
 
@@ -95,22 +128,22 @@ function helpline(help, champ) {
 
 
 function setCaretToEnd (input) {
-	setSelectionRange(input, input.value.length, input.value.length);
+  setSelectionRange(input, input.value.length, input.value.length);
 }
 
 
 function setSelectionRange(input, selectionStart, selectionEnd) {
-	if (input.setSelectionRange) {
-		input.focus();
-		input.setSelectionRange(selectionStart, selectionEnd);
-	}
-	else if (input.createTextRange) {
-		var range = input.createTextRange();
-		range.collapse(true);
-		range.moveEnd('character', selectionEnd);
-		range.moveStart('character', selectionStart);
-		range.select();
-	}
+  if (input.setSelectionRange) {
+    input.focus();
+    input.setSelectionRange(selectionStart, selectionEnd);
+  }
+  else if (input.createTextRange) {
+    var range = input.createTextRange();
+    range.collapse(true);
+    range.moveEnd('character', selectionEnd);
+    range.moveStart('character', selectionStart);
+    range.select();
+  }
 }
 
 // From http://www.massless.org/mozedit/
@@ -142,18 +175,18 @@ function mozWrap(txtarea, open, close)
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
-	MajPreview();
+	
 	return;
 }
 
 // Insert at Claret position. Code from
 // http://www.faqts.com/knowledge_base/view.phtml/aid/1052/fid/130
-function storeCaret (textEl) {
-	if (textEl.createTextRange) 
-		textEl.caretPos = document.selection.createRange().duplicate();
-}
+     function storeCaret (textEl) {
+       if (textEl.createTextRange) 
+         textEl.caretPos = document.selection.createRange().duplicate();
+     }
 
-//insere un tableau courcy michael ec49.org/sitenkit2/
+//insere le code lilypond via Codepress
 var zone_selection;
 function barre_lilypond(champs_de_texte, cheminediteur){
 	zone_selection = champs_de_texte;
