@@ -11,10 +11,6 @@
 include_spip("inc/presentation");
 
 function exec_clevermail_index() {
-	// Vérification que les tables ont déjà été créées
-	if (!isset($GLOBALS['meta']['clevermail_base_version']) || $GLOBALS['meta']['clevermail_base_version']<=0.0) {
-		clevermail_creer_tables();
-	}
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 		echo debut_gauche('', true);
