@@ -106,7 +106,7 @@ function exec_clevermail_posts() {
 					echo '<h3>'._T('clevermail:messages_envoyes').' : '.$list['lst_name'].'</h3>';
 					echo '<p>'._T('clevermail:messages_envoyes_text').' :</p>';
 
-				    $posts = spip_query("SELECT * FROM cm_posts WHERE pst_date_sent!=0 AND lst_id=".$_GET['lst_id']);
+				    $posts = spip_query("SELECT * FROM cm_posts p WHERE p.pst_date_sent!=0 AND p.lst_id=".$_GET['lst_id']." ORDER BY p.pst_date_sent DESC");
 					while ($post = spip_fetch_array($posts)) {
 					    echo debut_cadre_formulaire('', true);
 						echo '<h4>'.$post['pst_subject'].'</h4>';
