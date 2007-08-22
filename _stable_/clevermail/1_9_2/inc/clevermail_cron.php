@@ -10,12 +10,7 @@
 
 include_spip('phpmailer/class.phpmailer');
 
-function cron_clevermail_cron() {
-	// Si on ne passe pas par queue process on affiche ce qu'il se passe dans les logs
-	if (!isset($verbose)) {
-		$verbose = 'no';
-	}
-
+function cron_clevermail_cron($verbose = 'no') {
 	$cm_send_number = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_SEND_NUMBER'"));
 	$queued = spip_query("SELECT * FROM cm_posts_queued ORDER BY psq_date LIMIT 0,".$cm_send_number['set_value']);
 	while ($message = spip_fetch_array($queued)) {

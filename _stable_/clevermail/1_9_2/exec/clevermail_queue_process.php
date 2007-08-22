@@ -10,7 +10,7 @@
 
 function exec_clevermail_queue_process() {
 	include_spip('inc/clevermail_cron');
-	$verbose = 'yes';
-	cron_clevermail_cron();
+	// On force l'envoi en affichant une trace
+	cron_clevermail_cron('yes');
 }
 ?>
