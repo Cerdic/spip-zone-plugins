@@ -1,7 +1,7 @@
 <plugin>
 	<nom>CleverMail</nom>
 	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com]</auteur>
-	<version>0.93</version>
+	<version>0.94</version>
 	<etat>test</etat>
 	<description>Gestion de lettres d'information bas&#233; sur CleverMail</description>
 	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>

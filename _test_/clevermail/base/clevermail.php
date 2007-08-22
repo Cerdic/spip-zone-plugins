@@ -97,7 +97,7 @@ $spip_cm_settings = array(
 );
 
 $spip_cm_settings_key = array(
-	"PRIMARY KEY" => "set_name"
+	//"PRIMARY KEY" => "set_name"
 );
 
 $spip_cm_subscribers = array(
@@ -151,7 +151,6 @@ $tables_principales['cm_settings'] = array(
   'field' => &$spip_cm_settings,
   'key' => &$spip_cm_settings_key
 );
-
 
 $tables_principales['cm_subscribers'] = array(
   'field' => &$spip_cm_subscribers,
