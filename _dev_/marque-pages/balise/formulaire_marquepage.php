@@ -27,6 +27,7 @@ function balise_FORMULAIRE_MARQUEPAGE_dyn($id_rubrique) {
 	include_spip('inc/marquepages_api');
 	
 	// On récupère les éléments du formulaire
+	$submit	= _request('mp_valider');
 	$titre	= _request('mp_titre');
 	$url 	= _request('mp_url');
 	$desc 	= _request('mp_description');
@@ -42,7 +43,7 @@ function balise_FORMULAIRE_MARQUEPAGE_dyn($id_rubrique) {
 	else $proposer_login = false;
 	
 	// Si le formulaire a été rempli
-	if ($titre) {
+	if ($submit) {
 		
 		// Si tout va, on intègre à la base de données
 		if (($message_erreur = marquepages_test_parametres($url, $titre, $desc, $tags, $id_rubrique)) == ''){

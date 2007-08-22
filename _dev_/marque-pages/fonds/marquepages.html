@@ -11,9 +11,9 @@
 		si on veut "l'historique" des marque-pages d'un site
 	id_marquepage :
 		si on veut sortir un marque-page particulier
-	referer=true :
-		cas très particulier, utilisé dans la vue pour dire que
-		la vraie adresse de la page n'est pas #SELF mais le referer
+	referer :
+		cas très particulier, utilisé dans la vue pour donner la vraie
+		adresse de la page qui n'est pas #SELF mais le referer
 		
 	Ce fond utilise la balise #SESSION, il faut donc l'insclure avec 
 	session.php (voir la doc du plugin "balise session")
@@ -65,6 +65,14 @@
 	});
 </script>
 
+[(#REM) On récupère la vraie adresse de la page]
+[(#ENV{referer}|?{' ',''})
+	#SET{vraie_adresse,#ENV{referer}}
+]
+[(#ENV{referer}|?{'',' '})
+	#SET{vraie_adresse,#SELF}
+]
+
 <BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_marquepage,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}>
 <BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
 <dl class="xfolkentry [(#SESSION{id_auteur}|=={#_bookmarks:ID_AUTEUR}|?{#_bookmarks:EDIT{marquepage}})]">
@@ -105,7 +113,7 @@
 				<li><a><:marquepages:copier:></a></li>
 			]
 			[(#_bookmarks:ID_FORUM|marquepages_autoriser_supprimer|?{' '})
-				<li><a class="confirmer" href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_bookmarks:ID_FORUM&r=[<?php echo rawurlencode($referer); ?>(#ENV{referer}|?{' '})][[(#SELF|rawurlencode)](#ENV{referer}|?{'',' '})]"><:marquepages:supprimer:></a></li>
+				<li><a class="confirmer" href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_bookmarks:ID_FORUM&r=[(#GET{vraie_adresse}|replace{&amp;,&}|rawurlencode)]"><:marquepages:supprimer:></a></li>
 			]
 		</ul>
 		]
