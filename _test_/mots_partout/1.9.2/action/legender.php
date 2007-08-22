@@ -78,8 +78,10 @@ function action_legender_post($r)
 	//et la on va ajouter les mots clefs des documents
 	$tab_mots=array();
 	$tab_mots=_request('id_mots_on');
-	foreach ($tab_mots as $id_mot){
-		spip_query("REPLACE spip_mots_documents SET id_mot=" . _q($id_mot) . ", id_document=$id_document ");
+	if(!empty($tab_mots)) {
+		foreach ($tab_mots as $id_mot){
+			spip_query("REPLACE spip_mots_documents SET id_mot=" . _q($id_mot) . ", id_document=$id_document ");
+		}
 	}
 	//FIN YOANN
 
