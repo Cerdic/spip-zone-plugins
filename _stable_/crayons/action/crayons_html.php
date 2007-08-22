@@ -223,6 +223,7 @@ class Crayon {
 		$contexte['key'] = $this->key;
 		$contexte['largeur'] = $this->largeur;
 		$contexte['hauteur'] = $this->hauteur;
+		$contexte['self'] = _request('self');
 		foreach ($this->texts as $champ => $val) {
 			$contexte['name_' . $champ] = 'content_' . $this->key . '_' . $champ;
 		}

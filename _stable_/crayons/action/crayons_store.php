@@ -229,6 +229,7 @@ function vues_dist($type, $modele, $id, $content){
 		    'id_' . $type => $id,
 		    'champ' => $modele,
 		    'class' => _request('class'),
+		    'self' => _request('self'),
 		    'lang' => $GLOBALS['spip_lang']
 		);
 		$contexte = array_merge($contexte, $content);
