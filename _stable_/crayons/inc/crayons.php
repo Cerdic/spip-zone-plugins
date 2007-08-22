@@ -75,17 +75,32 @@ function logo_revision($id, $file, $type, $ref) {
 
 
 // cette fonction de revision recoit le fichier upload a passer en document
-function document_revision($id, $file, $type, $ref) {
+function document_fichier_revision($id, $data, $type, $ref) {
 
 	$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($id));
 	if (!$t = spip_fetch_array($s))
 		return false;
 
+	/*
+	// Envoi d'une URL de document distant ?
+	// TODO: verifier l'extension distante, sinon tout explose
+	if ($data['fichier']
+	AND preg_match(',^(https?|ftp)://.+,', $data['fichier'])) {
+		include_spip('inc/modifier');
+		modifier_contenu('document', $id,
+			array('champs' => array('fichier', 'distant')),
+			array('fichier' => $data['fichier'], 'distant' => 'oui')
+		);
+		return true;
+	}
+	else
+	*/
+
 	// Chargement d'un nouveau doc ?
-	if ($file['document']) {
+	if ($data['document']) {
 
 		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-		$arg = $file['document'];
+		$arg = $data['document'];
 		check_upload_error($arg['error']);
 		$x = $ajouter_documents($arg['tmp_name'], $arg['name'], 
 			'article', 0, 'document', null, $actifs);

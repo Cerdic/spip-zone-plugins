@@ -32,6 +32,15 @@
 <input class="crayon-active" name="#ENV{name_document}" type="file"[
 onchange="(#MODE|=={vignette}|?{' '})if (this.value && !this.value.match(/\.(png|jpeg|jpg|gif)$/i)) { alert('Il faut choisir une image :-)'); this.value=''; };"] />
 
+[(#REM)
+
+TODO: document distant (cf. document_fichier_revision dans inc/crayons)
+
+<br />
+<input class="crayon-active" name="#ENV{name_fichier}" type="text" value="#FICHIER" />
+
+]
+
 </fieldset>
 
 </BOUCLE_d>
