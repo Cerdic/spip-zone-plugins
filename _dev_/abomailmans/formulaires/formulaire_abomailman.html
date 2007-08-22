@@ -1,0 +1,26 @@
+[(#ENV**{message})]
+<B_listes>
+	<form action="#SELF" method="post"  name="abomailman_listes" id="abomailmansListes">
+		<fieldset>
+			<legend><b>Abonnement aux listes de diffusion et de discussions</b></legend>
+				<label for="nom"><:abomailmans:nom:><br />
+					<input name="nom" id="nom" type="text" class="inp" /><br />
+				</label>
+				<br />
+				<label for="prenom"><:abomailmans:prenom:><br />
+					<input name="prenom" id="prenom" type="text" class="inp" /><br />
+				</label>
+				<br />
+				<label for="email"><:abomailmans:email_abonnement:><br />
+					<input name="email" id="email" type="text" class="inp" />
+				</label>
+				<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}>
+					<br /><br /><label ><b>#TITRE</b><br />
+					[<i>(#DESCRIPTIF)</i><br />]
+						[(#EMAIL|abomailman_checkbox) <:abomailmans:je_m_abonne:> #EMAIL]
+					</label>
+				</BOUCLE_listes><br /><br />
+				<input name="abonnement" type="submit" value="Je m'abonne" class="inp" />
+		</fieldset>
+	</form>
+</B_listes>

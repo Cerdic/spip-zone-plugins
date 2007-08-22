@@ -1,0 +1,221 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html}
+[(#REM)
+/**********************************************************
+* Ce squelette pour Abomailmains
+* Attention a :                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+* Inspire du plugin Spip-Listes
+***********************************************************/
+<style>
+/* CSS Document */
+body {
+	margin-top:5px;
+	background: #fff;
+	font: 1em 'Trebuchet MS',Arial, Helvetica, sans-serif;
+	color:#000000;}
+
+a {
+	text-decoration:none;
+	color:#000000;}
+
+a:hover {
+	color: #FF0000;
+	text-decoration: underline;}
+
+/* Espaceur de blocs */
+.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
+
+a img {
+	border:0;}
+
+
+
+p.spip {
+	margin:0 0 1em 0 !important;
+	padding:0 !important;}
+
+h3.spip {
+	font-size:1em !important;
+	font-weight:bold !important;
+	margin:1em 0 0 0 !important;}
+
+
+.header {
+	padding:.8em;
+	background-color:#E00000;}
+
+.LogoPCF {
+	position: relative;
+	display: inline;
+	margin: 22px 0 0 30px;
+	padding: 0;
+	float: left;}
+
+.NomSite {
+	text-align:left;
+	margin:0 0 0 30px;
+	padding:0;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#FFF;}
+
+.NomSite a {
+	color:#FFF;}
+
+.NomSite a:hover {
+	color:#FFFF00;}
+
+
+.liberezvous {
+	padding:5px;
+	background-color:#FFFFFF;
+	border:1px solid #E00000;
+	text-align:center;
+	margin-bottom:5px;
+}
+
+.BandoSite{
+	position: relative;
+	top: 4px;
+	padding:0;
+	margin: 0 15px 0 15px;
+	float:left;
+	z-index: 0;}
+
+.container{
+	margin:1em 2em 2em 1em;
+	padding-bottom:.2em;
+	text-align:center;}
+
+.liste {
+	width:500px;
+	text-align:left;}
+
+.logo {
+	float:left;
+	margin:12px 0.5em 0 0;}
+
+
+
+
+p > a, b > a {
+	text-decoration:underline !important;
+	color:#E00000;}
+
+p > a:hover, b > a:hover {
+	font-style: italic !important;}
+
+p {
+	font-size:12px;
+	color:#000000;
+	line-height:14px;
+	text-align:justify;
+	margin:12px 0 2em 0;}
+
+
+.ligne {
+	border-bottom:1px solid #E00000;
+	margin-bottom:1em;}
+
+.Suite_02 {
+	float:right;
+	font-size:12px;
+	background-image:url(#URL_SITE_SPIP/squelettes/icono/fl_o.gif);
+	background-repeat:no-repeat;
+	padding:0 0 0 15px;
+	margin:.5em 0 0 0;}
+
+.Suite_02 a {
+	color:#E00000;}
+
+.logo {
+	float:left;
+	margin:12px 0.5em 0 0;}
+
+
+h3 {
+	font-weight:normal;
+	font-size:12px;
+	margin:0;
+	padding:0;
+	color:#000000;}
+
+h2 {
+	font-weight:normal;
+	font-size:15px;
+	margin:0;
+	padding:0;
+	color:#000000;}
+
+h4 {
+	font-size:12px;
+	margin:1.5em 2em 0 1.5em;
+	text-transform: uppercase;}
+.date{
+	
+	background-color:#eeeeee;
+	padding:0.2em;
+	font-style:italic;}
+
+
+
+</style>
+
+
+<div class="header">
+	<a href="#URL_SITE_SPIP"><img src="#URL_SITE_SPIP/squelettes/icono/logo.gif" alt="Parti Communiste Français" class="LogoPCF"></a>		
+	<div class="BandoSite">[(#LOGO_SITE_SPIP||liens_absolus|reduire_image{405,0})]</div>
+	<br class="nettoyeur" />
+	<div class="NomSite">[(#NOM_SITE_SPIP)][&nbsp;|&nbsp;(#DESCRIPTIF_SITE_SPIP)]</div>
+	<br class="nettoyeur" />
+</div>
+<br />
+<table border="0" cellspacing="0" cellpadding="0" class="liste" align="center">
+  <tr>
+    <td>
+		<h2>#ENV{sujet}</h2>
+		<p><b>#ENV{message}</b></p>
+		<div class="ligne">&nbsp;</div>
+
+		<B_articlesDate>
+			<BOUCLE_articlesDate(ARTICLES){age_relatif< 0}{id_rubrique ?}{id_mot ?}{par date}{inverse}>
+				<!-- Affiche logo si pas vidéo -->
+				<BOUCLE_agenda(MOTS){titre=AGENDA}{id_article}>#SET{type, agenda}</BOUCLE_agenda>
+				<!-- SI agenda -->
+				[(#GET{type}|!={'agenda'}|?{'',' '})
+					[<div class="jour">[(#DATE_REDAC|nom_jour)] (#DATE_REDAC|affdate_jourcourt)[ - (#DATE_REDAC|affdate{'H:i'})]</div>]
+				]
+				[<h3>(#SURTITRE|textebrut|supprimer_numero) :</h3>]
+				 <h2>[(#TITRE|textebrut|supprimer_numero)]</h2>
+				[(#LOGO_ARTICLE||reduire_image{300, 0}|liens_absolus|inserer_attribut{class,logo})]
+				[<p><b>(#CHAPO|liens_absolus)</b></p>] 
+				<!-- SI PAS agenda -->
+				[(#GET{type}|=={'agenda'}|?{'',' '})<p class="date">[(#DATE|affdate)]</p>]
+				<a href="[(#URL_ARTICLE|url_absolue)]" class="Suite_02">Lire l'article</a>
+				<br class="nettoyeur" />
+				<div class="ligne">&nbsp;</div>
+			</BOUCLE_articlesDate>
+		</B_articlesDate>
+
+
+		<//B_articlesDate>
+	</td>
+  </tr>
+</table>
+<div class="header">
+<div class="liberezvous"><a href="http://www.framasoft.net/rubrique2.html" target="_blank"><img src="#URL_SITE_SPIP/squelettes/icono/Liberez-vous_Bleu_Ptt.gif" class="LogoPCF"></a>	<br class="nettoyeur" /></div>
+
+</div>
+
+
+
+
+
+
+
