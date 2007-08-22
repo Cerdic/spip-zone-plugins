@@ -28,7 +28,8 @@ function exec_clevermail_post() {
 				$text = $post['pst_text'];
 				echo wordwrap($text, 70);
 			} else {
-				echo $post['pst_html'];
+				include_spip('inc/filtres');
+				echo liens_absolus($post['pst_html'],url_de_base());
 			}
 		} else {
 		    echo 'Invalid post identifier.';
