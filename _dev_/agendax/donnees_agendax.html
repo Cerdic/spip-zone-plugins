@@ -25,11 +25,11 @@
 	?>
 	</div>
 	<div class="nombre_jours">[(#DATE|affdate{'t'})]</div>
-	<BOUCLE_LesZevenements(ARTICLES){agenda date, mois, (#DATE|annee), (#DATE|mois)}{","}{par date}>
-	<div id="contenu[(#DATE|jour)]">
-		[<div id="jour[(#DATE|jour)]">(#DATE|jour)</div>]
-		[<div id="info[(#DATE|jour)]">(#TITRE)</div>]
-		<div id="lien[(#DATE|jour)]">?page=agenda_jour&date=#DATE</div>
+	<BOUCLE_LesZevenements(ARTICLES){agenda date, mois, (#DATE|annee), (#DATE|mois)}{par date}>
+	<div id="contenu[(#DATE|affdate{'j'})]">
+		[<div id="jour[(#DATE|affdate{'j'})]">(#DATE|affdate{'d'})</div>]
+		[<div id="info[(#DATE|affdate{'j'})]">(#TITRE)</div>]
+		<div id="lien[(#DATE|affdate{'j'})]">?page=agendax_view&amp;date=#DATE</div>
 	</div>
 	</BOUCLE_LesZevenements>
 </div>
