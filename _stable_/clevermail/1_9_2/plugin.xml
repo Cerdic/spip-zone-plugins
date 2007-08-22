@@ -1,8 +1,8 @@
 <plugin>
-	<nom>CleverMail</nom>
+	<nom>CleverMail pour 1.9.2</nom>
 	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com]</auteur>
-	<version>0.94</version>
-	<etat>test</etat>
+	<version>1.0</version>
+	<etat>stable</etat>
 	<description>Gestion de lettres d'information bas&#233; sur CleverMail</description>
 	<lien>[Documentation->http://www.clever-age.com/veille/blog/plugin-clevermail-pour-spip-pour-une-gestion-simple-de-lettres-d-informations.html]</lien>
 	<install>base/clevermail_init.php</install>
