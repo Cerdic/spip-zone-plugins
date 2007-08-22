@@ -87,6 +87,7 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 		'imgPath' => dirname(find_in_path('images/crayon.png')),
 		'droits' => $droits,
 		'dir_racine' => _DIR_RACINE,
+		'self' => self('&'),
 		'txt' => array(
 			'error' => _U('crayons:svp_copier_coller'),
 			'sauvegarder' => $wdgcfg['msgAbandon'] ? _U('crayons:sauvegarder') : ''

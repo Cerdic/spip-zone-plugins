@@ -258,7 +258,7 @@ function var2js($var) {
         case is_null($var) :
             return 'null';
         case is_string($var) :
-            return '"' . addcslashes($var, "\"\\\n\r") . '"';
+            return '"' . str_replace('&', '\x26', addcslashes($var, "\"\\\n\r")) . '"';
         case is_bool($var) :
             return $var ? 'true' : 'false';
         case is_scalar($var) :

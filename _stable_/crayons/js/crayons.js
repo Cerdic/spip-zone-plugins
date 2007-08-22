@@ -110,7 +110,8 @@ jQuery.fn.opencrayon = function(evt, percent) {
         'font-family': jQuery(this).css('fontFamily'),
         'font-weight': jQuery(this).css('fontWeight'),
         'line-height': jQuery(this).css('lineHeight'),
-        'background-color': jQuery(this).css('backgroundColor')
+        'background-color': jQuery(this).css('backgroundColor'),
+        'self': configCrayons.self
       };
       if (params['background-color'] == 'transparent'
       || params['background-color'] == 'rgba(0, 0, 0, 0)') {
@@ -123,9 +124,10 @@ jQuery.fn.opencrayon = function(evt, percent) {
             params['background-color'] = bg;
         });
       }
-      jQuery.getJSON(configCrayons.url_crayons_html,
+      jQuery.post(configCrayons.url_crayons_html,
         params,
         function (c) {
+          eval('c = '+c); // JSON
           jQuery(me)
           .find("img.crayon-searching")
             .remove();
@@ -193,6 +195,10 @@ jQuery.fn.activatecrayon = function(percent) {
     var crayon = jQuery(this).crayon();
     crayon
     .find('form')
+      .append(
+        jQuery('<input />')
+        .attr({'type':'hidden','name':'self','value':configCrayons.self})
+      )
       .ajaxForm({"dataType":"json",
       "success": function(d) {
         me

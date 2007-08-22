@@ -162,11 +162,11 @@ class Crayon {
 	// dimensions indicatives
 	function dimension() {
 		// largeur du crayon
-		$this->largeur = min(max(intval($_GET['w']),
+		$this->largeur = min(max(intval(_request('w')),
 					$this->largeurMini), $this->largeurMaxi);
 		// hauteur maxi d'un textarea selon wh: window height
-		$maxheight = min(max(intval($_GET['wh']) - 50, 400), $this->hauteurMaxi);
-		$this->hauteur = min(max(intval($_GET['h']), $this->hauteurMini), $maxheight);
+		$maxheight = min(max(intval(_request('wh')) - 50, 400), $this->hauteurMaxi);
+		$this->hauteur = min(max(intval(_request('h')), $this->hauteurMini), $maxheight);
 	}
 
 	// recuperer les elements de style
@@ -338,7 +338,7 @@ function action_crayons_html_dist() {
 	// on affiche le formulaire demande
 	include_spip('inc/crayons');
 	lang_select($GLOBALS['auteur_session']['lang']);
-	$return = affiche_controleur($_GET['class']);
+	$return = affiche_controleur(_request('class'));
 
 	echo var2js($return);
 	exit;
