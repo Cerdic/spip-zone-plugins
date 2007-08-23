@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // la fonction retire_cache() de inc/invalideur
 //
 // http://doc.spip.org/@generer_nom_fichier_cache
-function generer_nom_fichier_cache($contexte, $use_cache = 0) {
+function generer_nom_fichier_cache($contexte) {
 
 	if ($contexte === NULL) {
 		$fichier_requete = nettoyer_uri();
@@ -50,7 +50,6 @@ function generer_nom_fichier_cache($contexte, $use_cache = 0) {
 		. $_SERVER['HTTP_HOST'] . ' '
 		. $GLOBALS['fond'] . ' '
 		. $GLOBALS['dossier_squelettes'] . ' '
-		. (substr($use_cache, 0, 7) == 'session' ? $use_cache . ' ' : '')
 		. (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : '')
 	);
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
@@ -144,7 +143,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
 		foreach (preg_files($dircache,'[.]txt$') as $f) {
 			if (time() - (@file_exists($f)?@filemtime($f):0) > $duree)
-				@unlink($f);
+				spip_unlink($f);
 		}
 	}
 }
@@ -184,7 +183,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		return;
 	}
 
-	$chemin_cache = generer_nom_fichier_cache($contexte, $use_cache);
+	$chemin_cache = generer_nom_fichier_cache($contexte);
 	if ($GLOBALS['flag_gz'] AND @file_exists(_DIR_CACHE.$chemin_cache.'.gz'))
 		$chemin_cache .= '.gz';
 
