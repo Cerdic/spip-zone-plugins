@@ -1,0 +1,9 @@
+<plugin>
+	<nom>balise #TITRE_PARENT</nom>
+	<version>1.0</version>
+	<prefix>TitreParent</prefix>
+	<fonctions>titre_parent.php</fonctions>
+	<etat>stable</etat>
+	<icon>titre_parent.png</icon>
+	<lien>http://www.spip-contrib.net/balise-TITRE-PARENT</lien>
+</plugin>

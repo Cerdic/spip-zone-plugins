@@ -1,0 +1,5 @@
+<BOUCLE_rub(RUBRIQUES){0,1}>
+<BOUCLE_art(ARTICLES){id_rubrique}{0,1}>
+[(#_rub:TITRE|=={#TITRE_PARENT}|?{OK,Erreur balise TITRE_PARENT})]
+</BOUCLE_art>
+</BOUCLE_rub>
