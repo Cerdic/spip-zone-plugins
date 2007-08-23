@@ -29,7 +29,7 @@ function exec_clevermail_post() {
 				echo wordwrap($text, 70);
 			} else {
 				include_spip('inc/filtres');
-				echo liens_absolus($post['pst_html'],url_de_base());
+				echo liens_absolus($post['pst_html'],dirname($list['lst_url_html']));
 			}
 		} else {
 		    echo 'Invalid post identifier.';
