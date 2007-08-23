@@ -51,6 +51,11 @@ function genie_clevermail_cron($verbose = 'no') {
 			$template['@@DESCRIPTION@@'] = $list['lst_comment'];
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
 			$template['@@EMAIL@@'] = $to;
+
+			// corrige le lien de désinscription
+			$template[dirname($list['lst_url_html']).'/@@URL_DESINSCRIPTION@@'] = '@@URL_DESINSCRIPTION@@';
+			$template[dirname($list['lst_url_txt']).'/@@URL_DESINSCRIPTION@@'] = '@@URL_DESINSCRIPTION@@';
+
 			$template['@@URL_DESINSCRIPTION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_rm&id='.$subscription['lsr_id'];
 			reset($template);
 			while (list($templateFrom, $templateTo) = each($template)) {
