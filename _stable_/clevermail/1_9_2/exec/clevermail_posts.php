@@ -13,7 +13,7 @@ include_spip("inc/presentation");
 function exec_clevermail_posts() {
 
 	if($_GET['pst_id']>0 AND $_GET['lst_id']>0) {
-		spip_query("DELETE FROM cm_posts WHERE pst_id = ".$_GET['pst_id']." AND lst_id= ".$_GET['lst_id']);
+		spip_query("DELETE FROM cm_posts WHERE pst_id = "._q($_GET['pst_id'])." AND lst_id= "._q($_GET['lst_id']));
 	}
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
@@ -35,13 +35,13 @@ function exec_clevermail_posts() {
 
 			$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$_GET['lst_id']));
 
-			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts WHERE lst_id=".$_GET['lst_id']." AND pst_date_sent = 0"));
+			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts WHERE lst_id="._q($_GET['lst_id'])." AND pst_date_sent = 0"));
 			if ($result['nb'] > 0) {
 				debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/new.png');
 					echo '<h3>'._T('clevermail:nouveaux_messages').' : '.$list['lst_name'].'</h3>';
 					echo '<p>'._T('clevermail:nouveaux_messages_text').' :</p>';
 
-				    $posts = spip_query("SELECT * FROM cm_posts WHERE lst_id=".$_GET['lst_id']." AND pst_date_sent = 0 ORDER BY pst_date_create DESC");
+				    $posts = spip_query("SELECT * FROM cm_posts WHERE lst_id="._q($_GET['lst_id'])." AND pst_date_sent = 0 ORDER BY pst_date_create DESC");
 					while ($post = spip_fetch_array($posts)) {
 						echo debut_cadre_formulaire('', true);
 						echo '<h4>'.$post['pst_subject'].'</h4>';
@@ -65,7 +65,7 @@ function exec_clevermail_posts() {
 				fin_cadre_relief();
 			}
 
-			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts p, cm_posts_queued q WHERE p.pst_id = q.pst_id AND p.lst_id=".$_GET['lst_id']));
+			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts p, cm_posts_queued q WHERE p.pst_id = q.pst_id AND p.lst_id="._q($_GET['lst_id'])));
 			if ($result['nb'] > 0) {
 				debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/queue.png');
 					echo '<h3>'._T('clevermail:messages_attentes').' : '.$list['lst_name'].'</h3>';
@@ -100,13 +100,13 @@ function exec_clevermail_posts() {
 				fin_cadre_relief();
 			}
 
-			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts WHERE pst_date_sent!=0 AND lst_id=".$_GET['lst_id']));
+			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts WHERE pst_date_sent!=0 AND lst_id="._q($_GET['lst_id'])));
 			if ($result['nb'] > 0) {
 				debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/sent.png');
 					echo '<h3>'._T('clevermail:messages_envoyes').' : '.$list['lst_name'].'</h3>';
 					echo '<p>'._T('clevermail:messages_envoyes_text').' :</p>';
 
-				    $posts = spip_query("SELECT * FROM cm_posts p WHERE p.pst_date_sent!=0 AND p.lst_id=".$_GET['lst_id']." ORDER BY p.pst_date_sent DESC");
+				    $posts = spip_query("SELECT * FROM cm_posts p WHERE p.pst_date_sent!=0 AND p.lst_id="._q($_GET['lst_id'])." ORDER BY p.pst_date_sent DESC");
 					while ($post = spip_fetch_array($posts)) {
 					    echo debut_cadre_formulaire('', true);
 						echo '<h4>'.$post['pst_subject'].'</h4>';
@@ -119,6 +119,7 @@ function exec_clevermail_posts() {
 						echo _T('clevermail:actions').' : ';
 						echo '<a href="'.generer_url_ecrire("clevermail_post","pst_id=".$post['pst_id']."&mode=text").'" target="_blank">'._T('clevermail:apercu').' TXT</a> ';
 						echo '| <a href="'.generer_url_ecrire("clevermail_post","pst_id=".$post['pst_id']."&mode=html").'" target="_blank">'._T('clevermail:apercu').' HTML</a>';
+						echo '| <a href="'.generer_url_ecrire("clevermail_posts","lst_id=".$post['lst_id']."&pst_id=".$post['pst_id']).'">'._T('clevermail:supprimer').'</a> ';
 
 						echo fin_cadre_formulaire(true);
 				   		echo '<br />';
