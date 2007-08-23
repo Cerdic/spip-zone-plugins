@@ -19,8 +19,8 @@ function exec_clevermail_post_edit() {
 			$post['pst_subject'] = addslashes($post['pst_subject']);
 
 			$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$post['lst_id']));
-			$post['pst_html'] = liens_absolus(recuperer_page($list['lst_url_html']),dirname($list['lst_url_html']));
-			$post['pst_text'] = wordwrap(liens_absolus(recuperer_page($list['lst_url_text']),dirname($list['lst_url_text'])), 70);
+			$post['pst_html'] = addslashes(liens_absolus(recuperer_page($list['lst_url_html']),dirname($list['lst_url_html'])));
+			$post['pst_text'] = addslashes(wordwrap(liens_absolus(recuperer_page($list['lst_url_text']),dirname($list['lst_url_text'])), 70));
 
 			if ($post['pst_id'] == -1) {
 				spip_query("INSERT INTO cm_posts
