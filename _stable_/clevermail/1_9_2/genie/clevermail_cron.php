@@ -42,7 +42,6 @@ function genie_clevermail_cron($verbose = 'no') {
 			// message content
 			$text = $post['pst_text'];
 			$text = str_replace("(\r\n|\n|\n)", CM_NEWLINE, $text);
-			$text = wordwrap($text, 70, CM_NEWLINE);
 
 			$html = $post['pst_html'];
 			$html = str_replace("(\r\n|\n|\n)", CM_NEWLINE, $html);
@@ -61,10 +60,10 @@ function genie_clevermail_cron($verbose = 'no') {
 
 			if ($mode == 'text') {
 				$mail->IsHTML(false);
-				$mail->Body    = $list['lst_url_text'];
+				$mail->Body    = $text;
 			} else {
 				$mail->IsHTML(true);
-				$mail->Body    = $list['lst_url_html'];
+				$mail->Body    = $html;
 				$mail->AltBody = $text;
 			}
 
