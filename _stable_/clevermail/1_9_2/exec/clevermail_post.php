@@ -24,11 +24,10 @@ function exec_clevermail_post() {
 		$post = spip_fetch_array(spip_query("SELECT * FROM cm_posts WHERE pst_id = ".$_GET['pst_id']));
 		if (is_array($post)) {
 			$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$post['lst_id']));
-			include_spip('inc/filtres');
 			if ($mode == 'text') {
-				echo wordwrap(liens_absolus($post['pst_text'],dirname($list['lst_url_text'])), 70);
+				echo $post['pst_text'];
 			} else {
-				echo liens_absolus($post['pst_html'],dirname($list['lst_url_html']));
+				echo $post['pst_html'];
 			}
 		} else {
 		    echo 'Invalid post identifier.';
