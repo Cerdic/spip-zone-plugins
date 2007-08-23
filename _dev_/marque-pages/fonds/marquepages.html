@@ -1,26 +1,31 @@
 [(#REM)
 
-	Ce fond va afficher les sites référencés suivant diverses options
+	Paramètres obligatoires
+	=======================
+	self :
+		ce paramètre est obligatoire, sinon le cache n'est pas bon
+	
+	Filtres
+	=======
 	id_rub :
-		une ou plusieurs rubriques, si aucune ça affiche tout mais il
-		vaut mieux créer une rubrique dédiée
+		les marque-pages de quelle rubrique ?
 	id_aut :
-		restreindre aux marque-pages d'un auteur en particulier (ou de
-		plusieurs mais c'est peu utilisé...)
+		restreindre aux marque-pages d'un auteur en particulier
 	id_site :
 		si on veut "l'historique" des marque-pages d'un site
 	id_marquepage :
 		si on veut sortir un marque-page particulier
-	referer :
-		cas très particulier, utilisé dans la vue pour donner la vraie
-		adresse de la page qui n'est pas #SELF mais le referer
 		
-	Ce fond utilise la balise #SESSION, il faut donc l'insclure avec 
-	session.php (voir la doc du plugin "balise session")
+	Ce fond utilise la balise #SESSION, il faut donc l'inclure avec 
+	session.php.
+	
+	Exemple :
+	<INCLURE(session.php){fond=fonds/marquepages}{self=#SELF}{id_rub=1}{id_aut=#ID_AUTEUR}
 
 ]
 
 <script type="text/javascript">
+	// Fonction pour confirmer un lien (et pas autre chose)
 	function confirmer(quoi){
 		
 		$(quoi).click(function(){
@@ -38,8 +43,8 @@
 					.addClass("non")
 					.attr("href", "")
 					.click(function(){
-						$(quoi).css("display", "inline");
 						$(this).parent().remove();
+						$(quoi).css("display", "inline");
 						return false;
 					})
 				);
@@ -62,14 +67,6 @@
 		
 	});
 </script>
-
-[(#REM) On récupère la vraie adresse de la page]
-[(#ENV{referer}|?{' ',''})
-	#SET{vraie_adresse,#ENV{referer}}
-]
-[(#ENV{referer}|?{'',' '})
-	#SET{vraie_adresse,#SELF}
-]
 
 <BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_marquepage,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}>
 <BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
@@ -108,10 +105,10 @@
 		[(#SESSION{id_auteur}|?{' '})
 		<ul class="actions">
 			[(#SESSION{id_auteur}|!={#_bookmarks:ID_AUTEUR}|?{' '})
-				<li><a><:marquepages:copier:></a></li>
+				<li><a href="[(#URL_PAGE{marquepages_ajouter}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{mp_url,#_site:URL_SITE}|parametre_url{mp_titre,#_bookmarks:TITRE}|parametre_url{retour,#ENV{self}})]"><:marquepages:copier:></a></li>
 			]
 			[(#_bookmarks:ID_FORUM|marquepages_autoriser_supprimer|?{' '})
-				<li><a class="confirmer" href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_bookmarks:ID_FORUM&r=[(#GET{vraie_adresse}|replace{&amp;,&}|rawurlencode)]"><:marquepages:supprimer:></a></li>
+				<li><a class="confirmer" href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_bookmarks:ID_FORUM&r=[(#ENV{self}|replace{&amp;,&}|rawurlencode)]"><:marquepages:supprimer:></a></li>
 			]
 		</ul>
 		]

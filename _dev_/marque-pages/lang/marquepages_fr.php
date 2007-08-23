@@ -27,7 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'etiquettes_populaires' => '&Eacute;tiquettes populaires',
 'pas_le_droit' => 'Vous n\'avez pas le droit d\'ajouter un marque-page. Veuillez vous connectez avec un compte autoris&eacute;.',
 'se_deconnecter' => 'Vous pouvez vous d&eacute;connecter en cliquant ici.',
-'enregistre' => 'Votre marque-page a bien &eacute;t&eacute; enregistr&eacute;.'
+'enregistre' => 'Votre marque-page a bien &eacute;t&eacute; enregistr&eacute;.',
+'revenir' => 'Revenir d\'o&ugrave; vous venez',
+'nouveau' => 'Ajouter un nouveau marque-page'
 
 );
 

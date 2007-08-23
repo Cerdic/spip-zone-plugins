@@ -22,6 +22,7 @@ function marquepages_autoriser_supprimer($id_forum){
 	
 	// On dit que si on a le droit de modifier un MP, alors on a le droit de le supprimer
 	global $auteur_session;
+	include_spip('inc/autoriser');
 	return autoriser('modifier', 'forum', intval($id_forum), $auteur_session, NULL);
 	
 }

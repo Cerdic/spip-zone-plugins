@@ -32,6 +32,7 @@ function balise_FORMULAIRE_MARQUEPAGE_dyn($id_rubrique) {
 	$url 	= _request('mp_url');
 	$desc 	= _request('mp_description');
 	$tags 	= _request('mp_etiquettes');
+	$retour	= rawurldecode(_request('retour'));
 	
 	// Si on a pas le droit, faut proposer le login
 	if (!marquepages_autoriser_creer($id_rubrique)){
@@ -60,7 +61,16 @@ function balise_FORMULAIRE_MARQUEPAGE_dyn($id_rubrique) {
         'formulaires/marquepage', 
         0, 
         array(
-        	'self' => str_replace('&amp;', '&', self()),
+        	'self' => 	parametre_url(
+							parametre_url(
+								parametre_url(
+									parametre_url(
+										str_replace('&amp;', '&', self())
+									,'mp_url', '')
+								, 'mp_titre', '')
+							, 'mp_description', '')
+						, 'mp_etiquettes', ''),
+        	'retour' => str_replace('&amp;', '&', $retour),
         	'message_ok' => $message_ok,
 			'message_erreur' => $message_erreur,
 			'proposer_login' => $proposer_login, 
