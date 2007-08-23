@@ -130,10 +130,10 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 			AND autorisation_wiki_visiteur($qui, $r['id_secteur'])
 		)
 		OR (
-			in_array($qui['statut'], array('0minirezo', '1comite'))
+			in_array($qui['statut'],$GLOBALS['autorite']['auteur_mod_article'])
 			AND (
 				$GLOBALS['autorite']['auteur_mod_article']
-				OR in_array($r['statut'], array('prop','prepa', 'poubelle'))
+				OR in_array($r['statut'], array('publie','prop','prepa', 'poubelle'))
 			)
 			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		)
