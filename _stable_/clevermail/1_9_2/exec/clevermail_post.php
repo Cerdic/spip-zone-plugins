@@ -1,7 +1,7 @@
 <?php
 	/**
 	 *
-	 * CleverMail : plugin de gestion de lettres d'information basé sur CleverMail
+	 * CleverMail : plugin de gestion de lettres d'information basï¿½ sur CleverMail
 	 * Author : Thomas Beaumanoir
 	 * Clever Age <http://www.clever-age.com>
 	 * Copyright (c) 2006 - Distribue sous licence GNU/GPL
@@ -26,7 +26,7 @@ function exec_clevermail_post() {
 			$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$post['lst_id']));
 			include_spip('inc/filtres');
 			if ($mode == 'text') {
-				echo liens_absolus(wordwrap($post['pst_text'], 70),dirname($list['lst_url_text']));
+				echo wordwrap(liens_absolus($post['pst_text'],dirname($list['lst_url_text'])), 70);
 			} else {
 				echo liens_absolus($post['pst_html'],dirname($list['lst_url_html']));
 			}
