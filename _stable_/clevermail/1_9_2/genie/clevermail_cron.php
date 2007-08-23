@@ -63,7 +63,6 @@ function genie_clevermail_cron($verbose = 'no') {
 				$mail->IsHTML(false);
 				$mail->Body    = $list['lst_url_text'];
 			} else {
-				include_spip('inc/filtres');
 				$mail->IsHTML(true);
 				$mail->Body    = $list['lst_url_html'];
 				$mail->AltBody = $text;
