@@ -3,7 +3,6 @@
 	<version>1.0</version>
 	<prefix>TitreParent</prefix>
 	<fonctions>titre_parent.php</fonctions>
-	<options>tp_options.php</options>
 	<etat>stable</etat>
 	<icon>images/titre_parent.png</icon>
 	<lien>http://www.spip-contrib.net/balise-TITRE-PARENT</lien>
