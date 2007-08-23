@@ -795,6 +795,10 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		.preg_replace(',\.html$,', '', $sourcefile)
 		."] $nom.php");
 
+	$session = $GLOBALS['squelettes_a_sessions'][$descr['nom']] ?
+		"'<'.'?php header(\\'X-Session:' . spip_session() . '\\'); ?'.'>'." :
+		'';
+
 	$code = "<"."?php
 /*
  * Squelette : $sourcefile
@@ -810,6 +814,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 //
 function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
 	$page = ' .
+	$session .
 	// ATTENTION, le calcul du l'expression $corps affectera $Cache
 	// c'est pourquoi on l'affecte a cette variable auxiliaire
 	// avant de referencer $Cache

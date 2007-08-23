@@ -99,6 +99,15 @@ function cache_valide(&$page, $date) {
 		return 1;
 	}
 
+	// Si la page annonce un entete 'X-Session: zz' on ignore le cache si
+	// l'on n'a pas la session 'zz'
+	if (isset($page['entetes'])
+	AND isset($page['entetes']['X-Session'])
+	AND $page['entetes']['X-Session'] != spip_session()) {
+		spip_log('X-Session: \''.$page['entetes']['X-Session'] . '\' != \''.spip_session().'\'');
+		return 1;
+	}
+
 	// Sinon comparer l'age du fichier a sa duree de cache
 	$duree = intval($page['entetes']['X-Spip-Cache']);
 	if ($duree == 0)  #CACHE{0}
