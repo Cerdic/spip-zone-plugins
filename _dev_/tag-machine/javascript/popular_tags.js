@@ -113,7 +113,7 @@ function loadpopular() {
 			populartags[i].className = 'selected';
 		}
 	}
-	document.onkeydown = document.onkeypress = document.onkeyup = handler ;
+	taglist.onkeydown = taglist.onkeypress = taglist.onkeyup = handler ;
 }
 
 
@@ -129,48 +129,58 @@ function handler(event) { var e=(event||window.event) //w3||ie
 		}
 	}
 	
+	// Quand on appuie sur TAB
 	if (e.type == 'keypress' && e.keyCode == 9) {
 		e.preventDefault();
 		
-		susu=document.getElementById('suggestions').getElementsByTagName('span');
-		document.write(susu.tosource());
-		susu[0] = addtag ;
+		var susu;
+		if(susu = document.getElementById('suggestions')){
+			susu = susu.getElementsByTagName('span');
+			//taglist.value += susu.toSource();
+			susu[0] = addtag ;
+		}
 	}
-		
+	
+	// Quand on appuie sur ESPACE
 	if (e.type == 'keypress' && e.keyCode == 32) {
 		//effacer les suggestions
-		var tab_sug = document.getElementById('suggestions') ;
-		tab_sug.innerHTML='&nbsp;';
+		var tab_sug;
+		if(tab_sug = document.getElementById('suggestions')) tab_sug.innerHTML='&nbsp;';
 	}
 		
+	// Quand on relache une touche
 	if (e.type == 'keyup') {
 		//effacer les suggestions
-		var tab_sug = document.getElementById('suggestions') ;
-		tab_sug.innerHTML='&nbsp;';
+		var tab_sug;
+		if(tab_sug = document.getElementById('suggestions')) tab_sug.innerHTML='&nbsp;';
 		
 		var saisie = tags.pop() ;
 		
-		var is_text = new RegExp('^[A-Za-z0-9 ÉÈÊÀÁÂÄÇÌÍÎÏÑÓÒÔÖÚÙÛÜ-]+$', 'gi');
-		var re = new RegExp('^'+saisie+'[A-Za-z0-9 ÉÈÊÀÁÂÄÇÌÍÎÏÑÓÒÔÖÚÙÛÜ-]+$' , 'gi');
-		
-		if(saisie.match(is_text)){
-			var i = 1 ;
-			for (var j = 0; j < pop.length; j++) {
-				//trouver les tags
-				var tag_c = pop[j].innerHTML;
-				if (tag_c.match(re) ) {
-					pop[j].className = 'auto';
-					
-					//afficher des suggestions 
-					var suggestion = document.createElement('span');
-					suggestion.id = 'span'+i ;
-					var titre = document.createTextNode(tag_c);
-					document.getElementById('suggestions').appendChild(suggestion);	
-					
-					document.getElementById('span'+i).appendChild(titre);		
-					
-					suggestion['onmousedown'] = addtag;
-					i=i+1;
+		if (saisie){
+			var is_text = new RegExp('^[A-Za-z0-9 ÉÈÊÀÁÂÄÇÌÍÎÏÑÓÒÔÖÚÙÛÜ-]+$', 'gi');
+			var re = new RegExp('^'+saisie+'[A-Za-z0-9 ÉÈÊÀÁÂÄÇÌÍÎÏÑÓÒÔÖÚÙÛÜ-]+$' , 'gi');
+			
+			if(saisie.match(is_text)){
+				var i = 1 ;
+				for (var j = 0; j < pop.length; j++) {
+					//trouver les tags
+					var tag_c = pop[j].innerHTML;
+					if (tag_c.match(re) ) {
+						pop[j].className = 'auto';
+						
+						//afficher des suggestions 
+						if (document.getElementById('suggestions')){
+							var suggestion = document.createElement('span');
+							suggestion.id = 'span'+i ;
+							var titre = document.createTextNode(tag_c);
+							document.getElementById('suggestions').appendChild(suggestion);	
+							
+							document.getElementById('span'+i).appendChild(titre);		
+							
+							suggestion['onmousedown'] = addtag;
+							i=i+1;
+						}
+					}
 				}
 			}
 		}
