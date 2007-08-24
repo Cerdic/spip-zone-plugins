@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * P.I.M Agenda
+ * Gestion d'un agenda collaboratif
+ *
+ * Auteur :
+ * Cedric Morin, Notre-ville.net
+ * (c) 2005,2007 - Distribue sous licence GNU/GPL
+ *
+ */
+
 // {branche ?}
 // http://www.spip.net/@branche
 function critere_branche($idb, &$boucles, $crit) {

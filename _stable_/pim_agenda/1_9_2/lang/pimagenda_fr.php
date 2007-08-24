@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * P.I.M Agenda
+ * Gestion d'un agenda collaboratif
+ *
+ * Auteur :
+ * Cedric Morin, Notre-ville.net
+ * (c) 2005,2007 - Distribue sous licence GNU/GPL
+ *
+ */
+
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -37,6 +47,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_sur_l_agenda' => "Sur l'agenda",
 'icone_creer_evenement' => 'Cr&eacute;er un nouveau Rendez-vous',
 'evenement_sans_titre' => '(sans titre)',
+
+
+'info_retirer_groupe' => 'Retirer de ce groupe',
+'titre_groupes_acces' => 'Groupes d\'appartenance',
+'titre_ajouter_groupe' => 'Ajouter au groupe :',
+'selectionner_un_groupe' => 'Selectionner un groupe',
+'info_auteurs_lies_groupe' => 'Auteurs dans ce groupe',
+'creer_groupe' => 'Creer un groupe',
+'modifier_groupe' => 'Modifier ce groupe'
+
 );
 
 

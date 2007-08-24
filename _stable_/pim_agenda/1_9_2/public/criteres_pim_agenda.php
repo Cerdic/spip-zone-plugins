@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * P.I.M Agenda
+ * Gestion d'un agenda collaboratif
+ *
+ * Auteur :
+ * Cedric Morin, Notre-ville.net
+ * (c) 2005,2007 - Distribue sous licence GNU/GPL
+ *
+ */
+
 function critere_pim_agenda_actif_dist($idb, &$boucles, $crit){
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];

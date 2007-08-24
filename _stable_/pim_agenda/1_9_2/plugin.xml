@@ -8,7 +8,7 @@
 _ &#169; 2006 - Licence GPL
 	</auteur>
 	<version>0.11</version>
-	<version_base>0.10</version_base>
+	<version_base>0.11</version_base>
 	<etat>stable</etat>
 	<description>
 	Gestion des Informations Personnelles : Agenda
@@ -32,9 +32,17 @@ _	{{Ce plugin n&#233;cessite le plugin Widget Calendar}}
 	</prefix>
 	<pipeline>
 	<nom>affiche_droite</nom>
-	<action>affiche_droite_auteurs_edit</action>
-	<inclure>inc/pim_agenda_gestion.php</inclure>
+	<inclure>inc/pim_agenda_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+	<nom>affiche_milieu</nom>
+	<inclure>inc/pim_agenda_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+	<nom>affiche_gauche</nom>
+	<inclure>inc/pim_agenda_pipeline.php</inclure>
 	</pipeline>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 
+	
 </plugin>

@@ -1,4 +1,15 @@
 <?php
+
+/*
+ * P.I.M Agenda
+ * Gestion d'un agenda collaboratif
+ *
+ * Auteur :
+ * Cedric Morin, Notre-ville.net
+ * (c) 2005,2007 - Distribue sous licence GNU/GPL
+ *
+ */
+
 /**
  * Fichier de filtres communs au plugin Agenda et PIM_agenda
  *

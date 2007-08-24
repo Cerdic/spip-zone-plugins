@@ -1,14 +1,15 @@
 <?php
 
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2006                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
+/*
+ * P.I.M Agenda
+ * Gestion d'un agenda collaboratif
+ *
+ * Auteur :
+ * Cedric Morin, Notre-ville.net
+ * (c) 2005,2007 - Distribue sous licence GNU/GPL
+ *
+ */
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/agenda_filtres');

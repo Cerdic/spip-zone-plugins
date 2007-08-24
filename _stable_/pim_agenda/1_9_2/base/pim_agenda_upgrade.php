@@ -1,4 +1,14 @@
 <?php
+
+/*
+ * P.I.M Agenda
+ * Gestion d'un agenda collaboratif
+ *
+ * Auteur :
+ * Cedric Morin, Notre-ville.net
+ * (c) 2005,2007 - Distribue sous licence GNU/GPL
+ *
+ */
 	function PIMAgenda_upgrade($nom_meta_base_version,$version_cible){
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
@@ -15,6 +25,13 @@
 					spip_query("ALTER TABLE spip_groupes_mots ADD pim_agenda VARCHAR(3) NOT NULL AFTER syndic");
 				}
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+			}
+			if (version_compare($current_version,'0.11','<')){
+				include_spip('base/create');
+				include_spip('base/abstract_sql');
+				creer_base();
+				ecrire_meta($nom_meta_base_version,$current_version='0.11','non');
+				echo 'upgrade PIM Agenda@0.11';
 			}
 	
 			ecrire_metas();

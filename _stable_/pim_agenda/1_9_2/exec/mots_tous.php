@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/actions');
 include_spip('inc/agenda_gestion');
-include_spip('inc/pim_agenda_gestion');
 
 // compatibilite avec SPIP 1.92
 if(!function_exists('icone_inline')) {
