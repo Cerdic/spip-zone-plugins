@@ -9,6 +9,15 @@
 	==========
 	pagination :
 		de combien en combien on affiche (par défaut c'est 20)
+	tri :
+		comment on tri ?
+		deux choix : titre ou date (par défaut c'est date)
+		si c'est date, ça met en date inverse automatiquement sauf si
+		on précise explicitement le sens
+	senstri :
+		pour expliciter le sens du tri
+		0 : normal
+		1 : inversé
 	
 	Filtres
 	=======
@@ -28,6 +37,12 @@
 	<INCLURE(session.php){fond=fonds/marquepages}{self=#SELF}{id_rub=1}{id_aut=#ID_AUTEUR}{pagination=5}
 
 ]
+
+[(#REM) Calcul du tri]
+[(#ENV{tri}|?{#SET{tri,#ENV{tri}},#SET{tri,date}})]
+[(#GET{tri}|=={date}|?{#SET{sens,1},#SET{sens,0}})]
+[(#ENV{senstri}|match{^(0|1)$}|?{#SET{sens,#ENV{senstri}}})]
+
 
 <script type="text/javascript">
 	// Fonction pour confirmer un lien (et pas autre chose)
@@ -79,7 +94,7 @@
 <B_marquepages>
 #ANCRE_PAGINATION
 [<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
-<BOUCLE_marquepages(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_marquepage,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}{pagination #ENV{pagination,20}}>
+<BOUCLE_marquepages(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_marquepage,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}{pagination #ENV{pagination,20}}{par #GET{tri}}{inverse #GET{sens}}>
 <BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
 <dl class="xfolkentry [(#SESSION{id_auteur}|=={#_marquepages:ID_AUTEUR}|?{#_marquepages:EDIT{marquepage}})]">
 	<dt>
