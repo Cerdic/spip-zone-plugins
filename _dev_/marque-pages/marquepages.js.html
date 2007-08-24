@@ -1,0 +1,38 @@
+// Fonction pour confirmer UN LIEN (et pas autre chose)
+function confirmer(quoi){
+	
+	$(quoi).click(function(){
+		
+		var ce_lien = $(this);
+		var display = ce_lien.css("display");
+		
+		// On crée la question de confirmation
+		var question = $("<span></span>")
+			.addClass("confirmation")
+			.append('<:marquepages:confirmer:>&nbsp;')
+			.append($("<a><:marquepages:oui:></a>")
+				.addClass("oui")
+				.attr("href", $(this).attr("href"))
+			)
+			.append("&nbsp;")
+			.append($("<a><:marquepages:non:></a>")
+				.addClass("non")
+				.attr("href", "")
+				.click(function(){
+					$(this).parent().remove();
+					ce_lien.css("display", display);
+					return false;
+				})
+			);
+		
+		// On échange l'action et la confirmation
+		$(this)
+			.css("display", "none")
+			.parent().append(question);
+		
+		// On annule le lien par défaut
+		return false;
+		
+	});
+	
+}

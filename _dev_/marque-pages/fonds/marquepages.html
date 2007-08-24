@@ -44,53 +44,6 @@
 [(#ENV{senstri}|match{^(0|1)$}|?{#SET{sens,#ENV{senstri}}})]
 
 
-<script type="text/javascript">
-	// Fonction pour confirmer un lien (et pas autre chose)
-	function confirmer(quoi){
-		
-		$(quoi).click(function(){
-			
-			var ce_lien = $(this);
-			var display = ce_lien.css("display");
-			
-			// On crée la question de confirmation
-			var question = $("<span></span>")
-				.addClass("confirmation")
-				.append('<:marquepages:confirmer:>&nbsp;')
-				.append($("<a><:marquepages:oui:></a>")
-					.addClass("oui")
-					.attr("href", $(this).attr("href"))
-				)
-				.append("&nbsp;")
-				.append($("<a><:marquepages:non:></a>")
-					.addClass("non")
-					.attr("href", "")
-					.click(function(){
-						$(this).parent().remove();
-						ce_lien.css("display", display);
-						return false;
-					})
-				);
-			
-			// On échange l'action et la confirmation
-			$(this)
-				.css("display", "none")
-				.parent().append(question);
-			
-			// On annule le lien par défaut
-			return false;
-			
-		});
-		
-	}
-	
-	$(document).ready(function() {
-		
-		confirmer("a.confirmer");
-		
-	});
-</script>
-
 <B_marquepages>
 #ANCRE_PAGINATION
 [<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
@@ -138,6 +91,13 @@
 </dl>
 </BOUCLE_site>
 </BOUCLE_marquepages>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		confirmer("a.confirmer");
+		
+	});
+</script>
 </B_marquepages>
 <p class="spip"><:marquepages:aucun_marquepages:></p>
 <//B_marquepages>

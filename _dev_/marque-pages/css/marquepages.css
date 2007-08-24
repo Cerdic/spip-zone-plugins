@@ -1,0 +1,59 @@
+/* Le bloc du marque-page */
+dl.xfolkentry{
+	margin:1em 0 0 0;
+	padding:0;
+	border-bottom:1px solid #ddd;
+}
+
+/* Le titre du marque-page */
+dl.xfolkentry dt{
+	margin:0;
+	padding:0;
+	font-size:1em;
+	font-weight:bold;
+}
+dl.xfolkentry dt a{
+	color:#CCCC66;
+	text-decoration:none;
+}
+dl.xfolkentry dt a:hover{
+	text-decoration:underline;
+}
+
+/* Les infos du marque-page */
+dl.xfolkentry dd{
+	margin:0;
+	padding:0;
+	font-size:0.8em;
+}
+dl.xfolkentry dd.meta{
+	color:#aaa;
+}
+dl.xfolkentry dd.meta a{
+	color:#604A7F;
+	text-decoration:none;
+}
+dl.xfolkentry dd.meta a:hover{
+	text-decoration:underline;
+}
+
+/* Les boutons d'actions */
+dl.xfolkentry dd.meta ul.actions{
+	list-style:none;
+	text-align:right;
+}
+dl.xfolkentry dd.meta ul.actions li{
+	margin:0 0 0 1em;
+	display:inline;
+}
+dl.xfolkentry dd.meta ul.actions li a{
+	color:#cc6;
+	padding:0.1em;
+	font-weight:bold;
+	text-transform:lowercase;
+}
+
+/* Demande de confirmation */
+span.confirmation{ color:red; }
+span.confirmation a{ color:#444; }
+span.confirmation a:hover{ color:green; }

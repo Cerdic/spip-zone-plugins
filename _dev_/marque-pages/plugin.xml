@@ -9,7 +9,7 @@
 		0.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-		experimental
+		dev
 	</etat>
 	<description>
 		Des outils pour d&eacute;velopper un syst&egrave;me de marque-pages en ligne, du style Scuttle.
@@ -25,4 +25,8 @@
 	<fonctions>
 		marquepages_fonctions.php
 	</fonctions>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<inclure>marquepages_pipelines.php</inclure>
+	</pipeline>
 </plugin>
