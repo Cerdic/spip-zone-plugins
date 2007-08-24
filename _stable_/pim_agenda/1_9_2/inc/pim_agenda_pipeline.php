@@ -82,7 +82,7 @@ function PIMAgenda_affiche_gauche($flux){
 				$res = icone_horizontale(_T('pimagenda:creer_groupe'), generer_url_ecrire("auteurs_groupe_edit","new=oui"), _DIR_PLUGIN_PIMAGENDA."img_pack/groupes-24.gif", "creer.gif",false);
 				$flux['data'] .= $res;
 			}
-			if ($id_groupe=_request('id_groupe') && autoriser('modifier','groupe',$id_groupe)) {
+			if (($id_groupe=_request('id_groupe')) && autoriser('modifier','groupe',$id_groupe)) {
 				$res = icone_horizontale(_T('pimagenda:modifier_groupe'), generer_url_ecrire("auteurs_groupe_edit","id_groupe=$id_groupe&retour=".urlencode(self())), _DIR_PLUGIN_PIMAGENDA."img_pack/groupes-24.gif", "edit.gif",false);
 				$flux['data'] .= $res;
 			}
