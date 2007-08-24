@@ -1,0 +1,50 @@
+#CACHE{7200}
+<BOUCLE_rubrique_principale(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title><:marquepages:titre_marquepages:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="<:marquepages:ajouter:>" />
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_marquepages">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE)</a>] &gt; <:marquepages:titre_marquepages:></div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : le formulaire d'ajout de marque-pages ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				<h1 class="titre"><:marquepages:titre_marquepages:></h1>
+			</div>
+			
+			<p class="spip_bouton"><a href="[(#URL_PAGE{marquepages_ajouter}|parametre_url{id_rubrique,1}|parametre_url{retour,#SELF})]"><:marquepages:ajouter:></a> #PUCE</p>
+			<INCLURE(session.php){fond=fonds/marquepages}{self=#SELF}{id_rub=#ID_RUBRIQUE}>
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_rubrique_principale>

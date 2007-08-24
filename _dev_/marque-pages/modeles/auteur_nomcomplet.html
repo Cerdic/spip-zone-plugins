@@ -1,0 +1,29 @@
+[(#REM)
+	
+	Affiche le nom complet d'un auteur si ya Inscription2
+	Affiche le nom classique sinon
+	
+	Faut appeler comme ça dans un article :
+		<auteur43|nomcomplet>
+	Faut appeler comme ça dans un squelette :
+		#MODELE{auteur_nomcomplet}{id=43}
+	
+]
+
+<BOUCLE_auteur(AUTEURS){id_auteur=(#ENV{id})}>
+	<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
+		#SET{nom_complet,#ARRAY{0}}
+		[(#PRENOM|?{' '})
+			[(#GET{nom_complet}|array_push{#PRENOM}|vide)]
+		]
+		[(#NOM_FAMILLE|?{' ',''})
+			[(#GET{nom_complet}|array_push{#NOM_FAMILLE}|vide)]
+		]
+		[(#NOM_FAMILLE|?{'',' '})
+			[(#GET{nom_complet}|array_push{#_auteur:NOM}|vide)]
+		]
+	</BOUCLE_elargi>
+		#SET{nom_complet,#ARRAY{#NOM}}
+	<//B_elargi>
+</BOUCLE_auteur>
+[(#GET{nom_complet}|?{' '}|join{#GET{nom_complet}})]

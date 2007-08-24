@@ -88,24 +88,10 @@
 		<BOUCLE_auteur(AUTEURS){id_auteur=#_bookmarks:ID_AUTEUR}>
 			<a href="#URL_AUTEUR">
 				[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:vous:>})]
-				<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
-					#SET{nom_complet,#ARRAY{0}}
-					[(#PRENOM|?{' '})
-						[(#GET{nom_complet}|array_push{#PRENOM}|vide)]
-					]
-					[(#NOM_FAMILLE|?{' ',''})
-						[(#GET{nom_complet}|array_push{#NOM_FAMILLE}|vide)]
-					]
-					[(#NOM_FAMILLE|?{'',' '})
-						[(#GET{nom_complet}|array_push{#_auteur:NOM}|vide)]
-					]
-				</BOUCLE_elargi>
-					#SET{nom_complet,#ARRAY{#NOM}}
-				<//B_elargi>
-				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' '})[(#GET{nom_complet}|?{' '}|join{#GET{nom_complet}})]]
+				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' '})[(#MODELE{auteur_nomcomplet}{id=#ID_AUTEUR})]]
 			</a>
 			<BOUCLE_autres(FORUMS){id_syndic=#_bookmarks:ID_SYNDIC}{statut=prive}{plat}> </BOUCLE_autres>
-				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:>]
+				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})<a href="[(#URL_PAGE{marquepages_historique}|parametre_url{id_syndic,#ID_SYNDIC})]">[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:></a>]
 			</B_autres>
 		</BOUCLE_auteur>
 		

@@ -22,14 +22,15 @@
 	
 	[(#REM)
 
-		La liste des tags, dans des gentils < span >
+		La liste des tags, dans des gentils <span>
 		Idealement le addtag(this) serait ajoute par
 		la fonction loadpopular ci-dessous
 
 	]
+	<style type='text/css'>@import url("#CHEMIN{css/popular_tags.css}");</style>
 	<div id='popularTags' style="font-size:10px;">
 	<div><:marquepages:etiquettes_populaires:></div>
-	<BOUCLE_tags(MOTS){type=tags}{par titre}><span>#TITRE*</span></BOUCLE_tags>
+	<BOUCLE_tags(MOTS){type=tags}{par titre}{" "}><span>#TITRE*</span></BOUCLE_tags>
 	</div>
 	
 	[(#REM)

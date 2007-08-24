@@ -4,6 +4,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Pour l'affichage
 'titre_marquepages' => 'Marque-pages',
+'historique' => 'Historique d\'un site',
 'aucun_marquepages' => 'Il n\'y a pas de marque-pages.',
 'avec_etiquettes' => 'avec les &eacute;tiquettes',
 'poste_le' => 'post&eacute; le',
