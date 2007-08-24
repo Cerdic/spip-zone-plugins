@@ -81,21 +81,18 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 	Droits des auteurs
 </legend>
 <p>
-<label for="auteur_mod_article">
-	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur (ou visiteurs si vous utilisez un plugin type Openpublishing, uniquement avec crayons) peut modifier les articles publi&#233;s dont il est l'auteur (et, par cons&#233;quent, mod&#233;rer le forum et la p&#233;tition associ&#233;s).
+
+<label><input type="checkbox" name="auteur_mod_article" [checked="(#ENV{auteur_mod_article}?{checked})"] id="auteur_mod_article" /> 
+	<strong>Auteur modifie article</strong>&nbsp;: chaque r&#233;dacteur peut modifier les articles publi&#233;s dont il est l'auteur (et, par cons&#233;quent, mod&#233;rer le forum et la p&#233;tition associ&#233;s).
+	<br />
+	<i>N.&nbsp;B.&nbsp;: cette option s'applique aussi aux visiteurs enregistr&#233;s, s'ils sont auteurs et si une interface sp&#233;cifique est pr&#233;vue.</i>
 </label>
-<br />
-
-#SET{redacteur_selected,#CONFIG{autorite/auteur_mod_article,'',''}}
-#SET{1comite,'1comite'}
-#SET{6forum,'6forum'}
-<select name="auteur_mod_article[]" multiple="multiple" size="2" id="auteur_mod_article">
-	<option value="0minirezo" style="display:none" selected="selected">Administrateurs</option>
-	<option value="1comite"[(#GET{1comite}|in_array{#GET{redacteur_selected}}|?{' selected="selected"'})] >R&#233;dacteurs</option>
-	<option value="6forum"[(#GET{6forum}|in_array{#GET{redacteur_selected}}|?{' selected="selected"'})] >Visiteurs</option>
-</select>
 
 <br />
+
+<br />
+
+
 <small>
 <label><input type="checkbox" name="auteur_modere_forum" [checked="(#ENV{auteur_modere_forum}|?{checked})"] [(#ENV{auteur_mod_article}|?{' disabled="disabled"'})]
 />
@@ -123,8 +120,6 @@ Cette page de configuration est r&#233;serv&#233;e au webmestre du site&nbsp;: &
 			.attr('disabled', on ? 'disabled' : '')
 		.end();
 	})
-	if ($('#espace_wiki option[@selected]').length == 0)
-		$('#espace_wiki_qui').hide();
 // --></script>
 
 

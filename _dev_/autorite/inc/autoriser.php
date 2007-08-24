@@ -130,14 +130,17 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 			AND autorisation_wiki_visiteur($qui, $r['id_secteur'])
 		)
 		OR (
-			in_array($qui['statut'],$GLOBALS['autorite']['auteur_mod_article'])
-			AND (
-				$GLOBALS['autorite']['auteur_mod_article']
-				OR in_array($r['statut'], array('publie','prop','prepa', 'poubelle'))
-			)
+			// auteur autorise a modifier son article
+			// (sauf si l'article est refuse ou l'auteur mis a la poubelle)
+			$GLOBALS['autorite']['auteur_mod_article']
+			AND in_array($qui['statut'],
+				array('0minirezo', '1comite', '6forum'))
+			AND in_array($r['statut'],
+				array('publie', 'prop', 'prepa', 'poubelle'))
 			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		)
 		OR (
+			// un redacteur peut-il modifier un article propose ?
 			$GLOBALS['autorite']['redacteur_mod_article']
 			AND in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND $r['statut']=='prop'
