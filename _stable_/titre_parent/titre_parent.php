@@ -19,6 +19,7 @@ function balise_TITRE_PARENT_dist($p) {
 
 // Positionner les filtres standards en recopiant ceux de #TITRE
 // attention, ca ne positionne pas la langue_typo (mais tant pis)
+include_spip('public/interfaces');
 global $table_des_traitements;
 if (!isset($table_des_traitements['TITRE_PARENT'])) {
 	$table_des_traitements['TITRE_PARENT'] = $table_des_traitements['TITRE'];
