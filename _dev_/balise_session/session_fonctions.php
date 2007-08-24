@@ -1,7 +1,7 @@
 <?php
 
 function balise_SESSION_dist($p) {
-	$GLOBALS['squelettes_a_sessions'][$p->descr['nom']] = true;
+	$p->descr['session'] = true;
 
 	$f = function_exists('balise_ENV')
 		? 'balise_ENV'
@@ -10,5 +10,6 @@ function balise_SESSION_dist($p) {
 	$p = $f($p, '$GLOBALS["auteur_session"]');
 	return $p;
 }
+
 
 ?>

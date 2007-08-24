@@ -101,10 +101,10 @@ function cache_valide(&$page, $date) {
 
 	// Si la page annonce un entete 'X-Session: zz' on ignore le cache si
 	// l'on n'a pas la session 'zz'
-	if (isset($page['entetes'])
-	AND isset($page['entetes']['X-Session'])
-	AND $page['entetes']['X-Session'] != spip_session()) {
-		spip_log('X-Session: \''.$page['entetes']['X-Session'] . '\' != \''.spip_session().'\'');
+	if (isset($page['invalideurs'])
+	AND isset($page['invalideurs']['session'])
+	AND $page['invalideurs']['session'] != spip_session()) {
+		spip_log('X-Session: \''.$page['invalideurs']['session'] . '\' != \''.spip_session().'\'');
 		return 1;
 	}
 
