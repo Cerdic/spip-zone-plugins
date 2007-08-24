@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'confirmer' => '&Ecirc;tes-vous s&ucirc;r ?',
 'oui' => 'oui',
 'non' => 'non',
+'de' => 'de',
 
 // Pour le formulaire de saisi
 'ajouter' => 'Ajouter un marque-page',

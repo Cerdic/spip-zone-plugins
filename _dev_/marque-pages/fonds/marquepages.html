@@ -30,6 +30,9 @@
 		
 		$(quoi).click(function(){
 			
+			var ce_lien = $(this);
+			var display = ce_lien.css("display");
+			
 			// On crée la question de confirmation
 			var question = $("<span></span>")
 				.addClass("confirmation")
@@ -44,7 +47,7 @@
 					.attr("href", "")
 					.click(function(){
 						$(this).parent().remove();
-						$(quoi).css("display", "inline");
+						ce_lien.css("display", display);
 						return false;
 					})
 				);
@@ -84,12 +87,22 @@
 			<:marquepages:par:>
 		<BOUCLE_auteur(AUTEURS){id_auteur=#_bookmarks:ID_AUTEUR}>
 			<a href="#URL_AUTEUR">
-				<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
 				[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:vous:>})]
-				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' '})
-				[(#CONFIG{plugin/INSCRIPTION2/version}|?{' ',#_auteur:NOM})[(#PRENOM|?{#PRENOM})] [(#NOM_FAMILLE|?{#NOM_FAMILLE,#_auteur:NOM})]]
-				]
+				<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
+					#SET{nom_complet,#ARRAY{0}}
+					[(#PRENOM|?{' '})
+						[(#GET{nom_complet}|array_push{#PRENOM}|vide)]
+					]
+					[(#NOM_FAMILLE|?{' ',''})
+						[(#GET{nom_complet}|array_push{#NOM_FAMILLE}|vide)]
+					]
+					[(#NOM_FAMILLE|?{'',' '})
+						[(#GET{nom_complet}|array_push{#_auteur:NOM}|vide)]
+					]
 				</BOUCLE_elargi>
+					#SET{nom_complet,#ARRAY{#NOM}}
+				<//B_elargi>
+				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' '})[(#GET{nom_complet}|?{' '}|join{#GET{nom_complet}})]]
 			</a>
 			<BOUCLE_autres(FORUMS){id_syndic=#_bookmarks:ID_SYNDIC}{statut=prive}{plat}> </BOUCLE_autres>
 				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:>]
@@ -116,5 +129,5 @@
 </dl>
 </BOUCLE_site>
 </BOUCLE_bookmarks>
-	<:marquepages:aucun_marquepages:>
+<p class="spip"><:marquepages:aucun_marquepages:></p>
 <//B_bookmarks>
