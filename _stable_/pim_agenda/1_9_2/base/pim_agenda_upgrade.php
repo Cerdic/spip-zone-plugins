@@ -33,7 +33,12 @@
 				ecrire_meta($nom_meta_base_version,$current_version='0.11','non');
 				echo 'upgrade PIM Agenda@0.11';
 			}
-	
+			if (version_compare($current_version,'0.12','<')){
+				spip_query("ALTER TABLE spip_groupes_auteurs RENAME spip_auteurs_groupes");
+				ecrire_meta($nom_meta_base_version,$current_version='0.12','non');
+				echo 'upgrade PIM Agenda@0.12';
+			}
+
 			ecrire_metas();
 		}
 

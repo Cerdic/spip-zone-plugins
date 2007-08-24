@@ -18,7 +18,7 @@ function PIMAgenda_cree_groupe(){
 		/*if ($id_groupe && _request('auto_attribue_droits')=='oui'){
 			global $connect_id_auteur;
 			if (autoriser('modifier','groupe'))
-				spip_abstract_insert('spip_groupes_auteurs', "(id_groupe,id_auteur)", "($id_groupe,$connect_id_auteur)");
+				spip_abstract_insert('spip_auteurs_groupes', "(id_groupe,id_auteur)", "($id_groupe,$connect_id_auteur)");
 		}*/
 		return $id_groupe;
 	} 
@@ -28,7 +28,7 @@ function PIMAgenda_supprimer_groupe(){
 	$id_groupe = intval(_request('supp_groupe'));
 	if ($id_groupe){
 		spip_query("DELETE FROM spip_groupes WHERE id_groupe='$id_groupe'");
-		spip_query("DELETE FROM spip_groupes_auteurs WHERE id_groupe='$id_groupe'");
+		spip_query("DELETE FROM spip_auteurs_groupes WHERE id_groupe='$id_groupe'");
 	}
 	return 0;
 }
@@ -54,7 +54,7 @@ function PIMAgenda_liste_contenu_groupe_auteur($id_groupe) {
 	$liste_auteurs=array();
 	$id_groupe = intval($id_groupe);
 	// liste des rubriques directement liees a la groupe
-	$s = spip_query("SELECT id_auteur FROM spip_groupes_auteurs WHERE id_groupe=$id_groupe");
+	$s = spip_query("SELECT id_auteur FROM spip_auteurs_groupes WHERE id_groupe=$id_groupe");
 	while ($row=spip_fetch_array($s))
 		$liste_auteurs[] = $row['id_auteur'];
 	return $liste_auteurs;
@@ -231,7 +231,7 @@ function PIMAgenda_formulaire_groupes($table, $id_objet, $nouv_groupe, $supp_gro
 		if($connect_toutes_rubriques ){
 			$query = "SELECT * FROM spip_groupes AS z WHERE z.id_groupe NOT IN ($les_groupes) ORDER BY z.titre";
 		} else {
-			$query = "SELECT * FROM spip_groupes AS z JOIN spip_groupes_auteurs AS za ON z.id_groupe=za.id_groupe WHERE za.id_auteur=$connect_id_auteur AND z.id_groupe NOT IN ($les_groupes) ORDER BY titre";
+			$query = "SELECT * FROM spip_groupes AS z JOIN spip_auteurs_groupes AS za ON z.id_groupe=za.id_groupe WHERE za.id_auteur=$connect_id_auteur AND z.id_groupe NOT IN ($les_groupes) ORDER BY titre";
 		}
 
 		$result = spip_query($query);

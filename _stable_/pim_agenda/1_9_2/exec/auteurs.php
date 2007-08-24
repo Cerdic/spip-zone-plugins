@@ -303,7 +303,7 @@ default:
  							FROM spip_auteurs as aut
  							LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur
  							LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article) "
-              .($groupe?"JOIN spip_groupes_auteurs AS g ON g.id_auteur=aut.id_auteur ":"")
+              .($groupe?"JOIN spip_auteurs_groupes AS g ON g.id_auteur=aut.id_auteur ":"")
  							."WHERE	$sql_visible
               GROUP BY aut.id_auteur
               ORDER BY $sql_order");

@@ -106,13 +106,13 @@ function exec_auteurs_groupe_edit(){
 
 
 	// Selecteur d'auteurs sympathique
-	if ($GLOBALS['spip_version_code'] >= 1.9253) {
+	if ($GLOBALS['spip_version_code'] >= 1.9207) {
 		$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 		echo $editer_auteurs('groupe', $id_groupe, $flag_editable=true, _request('cherche_auteur'), _request('ids'));
 	}
 	// Vieux SPIP
 	else {
-		echo AccesRestreint_afficher_auteurs('<b>' . _T('pimagenda:info_auteurs_lies_groupe') . '</b>', array("FROM" => 'spip_auteurs AS auteurs, spip_groupes_auteurs AS lien', 'WHERE' => "lien.id_groupe='$id_groupe' AND lien.id_auteur=auteurs.id_auteur", 'ORDER BY' => "auteurs.nom DESC"));
+		echo AccesRestreint_afficher_auteurs('<b>' . _T('pimagenda:info_auteurs_lies_groupe') . '</b>', array("FROM" => 'spip_auteurs AS auteurs, spip_auteurs_groupes AS lien', 'WHERE' => "lien.id_groupe='$id_groupe' AND lien.id_auteur=auteurs.id_auteur", 'ORDER BY' => "auteurs.nom DESC"));
 	}
 
 

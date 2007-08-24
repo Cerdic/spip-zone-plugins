@@ -107,17 +107,17 @@ $tables_principales['spip_groupes'] = array(
 	'field' => &$spip_groupes,
 	'key' => &$spip_groupes_key);
 
-$spip_groupes_auteurs = array(
+$spip_auteurs_groupes = array(
 	"id_groupe" 	=> "bigint(21) NOT NULL",
 	"id_auteur" 	=> "bigint(21) NOT NULL");
 
-$spip_groupes_auteurs_key = array(
+$spip_auteurs_groupes_key = array(
 	"KEY id_groupe" 	=> "id_groupe",
 	"KEY id_auteur" => "id_auteur");
 
-$tables_auxiliaires['spip_groupes_auteurs'] = array(
-	'field' => &$spip_groupes_auteurs,
-	'key' => &$spip_groupes_auteurs_key);
+$tables_auxiliaires['spip_auteurs_groupes'] = array(
+	'field' => &$spip_auteurs_groupes,
+	'key' => &$spip_auteurs_groupes_key);
 
 //-- Jointures ----------------------------------------------------
 global $tables_jointures;
@@ -125,8 +125,8 @@ $tables_jointures['spip_articles'][]= 'pim_agenda';
 $tables_jointures['spip_pim_agenda'][] = 'articles';
 $tables_jointures['spip_mots'][]= 'mots_pim_agenda';
 $tables_jointures['spip_pim_agenda'][] = 'mots_pim_agenda';
-$tables_jointures['spip_auteurs'][] = 'groupes_auteurs';
-$tables_jointures['spip_groupes']['id_auteur'] = 'groupes_auteurs';
+$tables_jointures['spip_auteurs'][] = 'auteurs_groupes';
+$tables_jointures['spip_groupes']['id_auteur'] = 'auteurs_groupes';
 
 global $exceptions_des_tables;
 $exceptions_des_tables['pim_agenda']['id_rubrique']=array('spip_articles', 'id_rubrique');
@@ -145,7 +145,7 @@ $table_des_tables['mots_pim_agenda']='mots_pim_agenda';
 $table_des_tables['pim_agenda_auteurs']='pim_agenda_auteurs';
 $table_des_tables['pim_agenda_invites']='pim_agenda_invites';
 $table_des_tables['groupes']='groupes';
-$table_des_tables['groupes_auteurs']='groupes_auteurs';
+$table_des_tables['auteurs_groupes']='auteurs_groupes';
 
 
 // Extension de la table des groupes de mots cles
