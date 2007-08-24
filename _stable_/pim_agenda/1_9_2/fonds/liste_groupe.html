@@ -1,0 +1,18 @@
+<style><!--
+#liste_groupes {list-style:none;padding:0;margin:0;}
+#liste_groupes li ul {list-style:none;padding:0 0 0 10px;margin:0;}
+#liste_groupes li ul li {margin:0;}
+#liste_groupes li ul li.selected {background:#eee;}
+#liste_groupes li ul li.tous {margin-top:5px;}
+// --></style>
+<ul id='liste_groupes'><li>Groupes
+<B_groupes>
+[<p class='pagination'>(#PAGINATION)</p>]<ul style='list-type:none;'>
+<BOUCLE_groupes(GROUPES)>
+<li class='#EXPOSE{selected,''}'><a href='#URL_ECRIRE{auteurs,id_groupe=#ID_GROUPE}' title='[(#DESCRIPTIF|attribut_html|couper{80})]'>#TITRE</a></li>
+</BOUCLE_groupes>
+<li class='tous'><a href='#URL_ECRIRE{auteurs}' title='<:tous:>'>Tous les auteurs</a></li>
+</ul>
+</B_groupes>
+</li>
+</ul>
