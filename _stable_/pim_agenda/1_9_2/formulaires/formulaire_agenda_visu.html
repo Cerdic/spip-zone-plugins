@@ -1,0 +1,119 @@
+<div class='agenda-visu-evenement'>
+	<BOUCLE_article_lie(ARTICLES){id_article=#ENV{ajouter_id_article}}>
+		<div class='article-evenement'>
+		<a href='#URL_ARTICLE'>#TITRE</a>
+		</div>
+	</BOUCLE_article_lie>
+	
+	<div class='agenda-visu-evenement-bouton-fermer'>
+  <a href='#ENV{retour_agenda}'><img src='#CHEMIN{'img_pack/croix.png'}' width='12' height='12' style='border:none;'></a>
+  </div>
+
+	<form name='edition_evenement' action='#ENV{url}' method='post'>
+	<input type='hidden' name='redirect' value='#ENV{url}' />
+
+	[<input type='hidden' name='id_agenda' value='(#ENV{id_agenda})' />]
+	<input type='hidden' name='#ENV{evenement_action}' value='1' />
+
+	[(#REM) TYPE]
+	<div class='type-evenement'>
+		<select name='type_eve' class='fondl verdana1 agenda_type_select'>
+		<option value='reunion'[(#ENV{type}|=={reunion}?{' ',''}) selected='selected']><:pimagenda:libele_type_reunion:></option>
+		<option value='rendez-vous'[(#ENV{type}|=={rendez-vous}?{' ',''}) selected='selected']><:pimagenda:libele_type_rendez_vous:></option>
+		<option value='evenement'[(#ENV{type}|=={evenement}?{' ',''}) selected='selected']><:pimagenda:libele_type_evenement:></option>
+		<option value='anniversaire'[(#ENV{type}|=={anniversaire}?{' ',''}) selected='selected']><:pimagenda:libele_type_anniversaire:></option>
+		<option value='rappel'[(#ENV{type}|=={rappel}?{' ',''}) selected='selected']><:pimagenda:libele_type_rappel:></option>
+	  </select>
+
+		[(#REM) PRIVE]
+	  <input type='checkbox' name='prive' [(#ENV{prive}|=={oui}|?{' ',''}) checked='checked'] />&nbsp;<:pimagenda:libele_prive:>
+
+		[(#REM) CRAYON]
+	  <input type='checkbox' name='crayon' [(#ENV{crayon}|=={oui}|?{' ',''}) checked='checked'] />&nbsp;<:pimagenda:libele_crayon:>
+	</div>
+	
+	[(#REM) TITRE]
+	<div class='titre-titre'><:pimagenda:evenement_titre:></div>
+	<div class='titre-visu'>
+	<input type='text' name='evenement_titre' value="#ENV{titre}" style='width:100%;' />
+	</div>
+
+	[(#REM) LIEU]
+	<div class='lieu-titre'><:pimagenda:evenement_lieu:></div>
+	<div class='lieu-visu'>
+	<input type='text' name='evenement_lieu' value="#ENV{lieu}" style='width:100%;' />
+	</div>
+
+	[(#REM) DATES]
+	<div class='date-titre'><:pimagenda:evenement_date:></div>
+	<div class='date-visu'>
+	<:pimagenda:evenement_date_de:>
+	[(#ENV{date_debut}|WCalendar_controller{'_evenement_debut'})]
+	<span class='agenda_visible_au_chargement' id='afficher_horaire_debut_evenement'>
+	<:pimagenda:evenement_date_a:>
+	[(#ENV{date_debut}|PIMAgenda_heure_selector{'_debut'})]
+	</span>
+	<br/>
+	<:pimagenda:evenement_date_au:>
+	[(#ENV{date_fin}|WCalendar_controller{'_evenement_fin'})]
+	<span class='agenda_visible_au_chargement' id='afficher_horaire_fin_evenement'>
+	<:pimagenda:evenement_date_a:>
+	[(#ENV{date_fin}|PIMAgenda_heure_selector{'_fin'})]
+	</span>
+	</div>
+	
+	[(#REM) DESCRIPTIF]
+	<div class='descriptif-titre'><:pimagenda:evenement_descriptif:></div>
+	<div class='descriptif-visu'>
+	<textarea name='evenement_descriptif' style='width:100%;' rows='3'>#ENV{descriptif}</textarea>
+	</div>
+
+	[(#REM) MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
+		donne un select ]
+	<div class='agenda_mots_cles'>
+	<BOUCLE_groupes(GROUPES_MOTS){pim_agenda='oui'}>
+		<select name='evenement_groupe_mot_select_#ID_GROUPE' class='fondl verdana1 agenda_mot_cle_select'[
+		(#UNSEUL|=={'oui'}|?{'',' '}) multiple='multiple' size='4']>
+		[<option value='x' style='font-variant: small-caps;' [
+		(#UNSEUL|=={'oui'}|?{'',' '}) disabled='disabled']>(#TITRE|supprimer_numero)</option>]
+		<BOUCLE_mots(MOTS){id_groupe}>
+			<option value='#ID_MOT'
+			<BOUCLE_selected(PIM_AGENDA){id_agenda=#ENV{id_agenda}}{id_mot}{0,1}>selected='selected'
+			</BOUCLE_selected> >#TITRE</option>
+		</BOUCLE_mots>
+		</select>
+	</BOUCLE_groupes>
+	</div>
+
+	[(#REM) ORGANISATEUR ]
+	<div class='auteur-titre'><:pimagenda:organisateur_descriptif:></div>
+	<div class='auteur-visu'>
+	<select name='id_organisateur' class='fondl verdana1 agenda_auteur_select' size='6'>
+		<BOUCLE_orga(AUTEURS SPIP_PIM_AGENDA_AUTEURS){id_agenda}{doublons organisateur}>
+		<option value='#ID_AUTEUR' selected='selected'>#NOM</option>
+		</BOUCLE_orga>
+		<BOUCLE_orga2(AUTEURS){doublons organisateur}>
+		<option value='#ID_AUTEUR'>#NOM</option>
+		</BOUCLE_orga2>
+	</select>
+	</div>
+	[(#REM) INVITES ]
+	<div class='invites-titre'><:pimagenda:invites_descriptif:></div>
+	<div class='invites-visu'>
+	<select name='id_invites[]' class='fondl verdana1 agenda_auteur_select' size='6' multiple='multiple'>
+		<BOUCLE_invit(AUTEURS SPIP_PIM_AGENDA_INVITES){id_agenda}{doublons invites}>
+		<option value='#ID_AUTEUR' selected='selected'>#NOM</option>
+		</BOUCLE_invit>
+		<BOUCLE_invit2(AUTEURS){doublons invites}>
+		<option value='#ID_AUTEUR'>#NOM</option>
+		</BOUCLE_invit2>
+	</select>
+	</div>
+	<script type='text/javascript' src='#CHEMIN{img_pack/multiselect.js}'></script>
+	
+  <div class='edition-bouton' style='text-align:#LANG_RIGHT'>
+  <input type='submit' name='submit' value='<:pimagenda:bouton_annuler:>' class="fondl" />
+	<input type='submit' name='ajouter' value='[(#ENV{evenement_action}|=={'evenement_modif'}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' class='fondo spip_boutons'>
+  </div>
+	</form>
+</div>

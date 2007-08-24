@@ -1,0 +1,40 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	PIM Agenda pour SPIP 1.9.2
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ &#169; 2006 - Licence GPL
+	</auteur>
+	<version>0.11</version>
+	<version_base>0.10</version_base>
+	<etat>stable</etat>
+	<description>
+	Gestion des Informations Personnelles : Agenda
+_	{{Ce plugin n&#233;cessite le plugin Widget Calendar}}
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<install>base/pim_agenda_upgrade.php</install>
+	<options> <!-- fichier charge a chaque hit -->
+	pim_agenda_mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	pim_agenda_mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	PIMAgenda
+	</prefix>
+	<pipeline>
+	<nom>affiche_droite</nom>
+	<action>affiche_droite_auteurs_edit</action>
+	<inclure>inc/pim_agenda_gestion.php</inclure>
+	</pipeline>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+
+</plugin>
