@@ -21,7 +21,7 @@
 			</p>]
 			[<p class="reponse_formulaire">
 				(#ENV*{message_ok})
-				<br /><a href="#ENV{self}#formulaire_marquepage"><:marquepages:nouveau:>.</a>
+				<br /><a href="[(#ENV{self}|parametre_url{var_mode,recalcul})]#formulaire_marquepage"><:marquepages:nouveau:>.</a>
 			</p>]
 			
 			[(#REM) Si c'est ok ou qu'il y a erreur d'autorisation, on affiche pas le formulaire]

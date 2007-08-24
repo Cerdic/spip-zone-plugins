@@ -8,7 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_marquepages' => 'Il n\'y a pas de marque-pages.',
 'avec_etiquettes' => 'avec les &eacute;tiquettes',
 'poste_le' => 'post&eacute; le',
-'par' => 'par',
 'et' => 'et',
 'autres' => 'autre(s)',
 'vous' => 'vous',

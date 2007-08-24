@@ -4,6 +4,11 @@
 	=======================
 	self :
 		ce paramètre est obligatoire, sinon le cache n'est pas bon
+		
+	Paramètres
+	==========
+	pagination :
+		de combien en combien on affiche (par défaut c'est 20)
 	
 	Filtres
 	=======
@@ -20,7 +25,7 @@
 	session.php.
 	
 	Exemple :
-	<INCLURE(session.php){fond=fonds/marquepages}{self=#SELF}{id_rub=1}{id_aut=#ID_AUTEUR}
+	<INCLURE(session.php){fond=fonds/marquepages}{self=#SELF}{id_rub=1}{id_aut=#ID_AUTEUR}{pagination=5}
 
 ]
 
@@ -71,49 +76,53 @@
 	});
 </script>
 
-<BOUCLE_bookmarks(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_marquepage,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}>
+<B_marquepages>
+#ANCRE_PAGINATION
+[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+<BOUCLE_marquepages(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_marquepage,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}{pagination #ENV{pagination,20}}>
 <BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
-<dl class="xfolkentry [(#SESSION{id_auteur}|=={#_bookmarks:ID_AUTEUR}|?{#_bookmarks:EDIT{marquepage}})]">
+<dl class="xfolkentry [(#SESSION{id_auteur}|=={#_marquepages:ID_AUTEUR}|?{#_marquepages:EDIT{marquepage}})]">
 	<dt>
-		<a href="#_site:URL_SITE" class="taggedlink" rel="nofollow">#_bookmarks:TITRE</a>
+		<a href="#_site:URL_SITE" class="taggedlink" rel="nofollow">#_marquepages:TITRE</a>
 	</dt>
 	[<dd class="description">
-		(#_bookmarks:TEXTE)
+		(#_marquepages:TEXTE)
 	</dd>]
 	<dd class="meta">
-		[<:marquepages:poste_le:> (#_bookmarks:DATE|affdate{j-m-Y}), ]
+		[<:marquepages:poste_le:> (#_marquepages:DATE|affdate{j-m-Y}), ]
 		
 		<B_auteur>
-			<:marquepages:par:>
-		<BOUCLE_auteur(AUTEURS){id_auteur=#_bookmarks:ID_AUTEUR}>
+			<:par_auteur:>
+		<BOUCLE_auteur(AUTEURS){id_auteur=#_marquepages:ID_AUTEUR}>
 			<a href="#URL_AUTEUR">
 				[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:vous:>})]
 				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' '})[(#MODELE{auteur_nomcomplet}{id=#ID_AUTEUR})]]
 			</a>
-			<BOUCLE_autres(FORUMS){id_syndic=#_bookmarks:ID_SYNDIC}{statut=prive}{plat}> </BOUCLE_autres>
+			<BOUCLE_autres(FORUMS){id_syndic=#_marquepages:ID_SYNDIC}{statut=prive}{plat}> </BOUCLE_autres>
 				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})<a href="[(#URL_PAGE{marquepages_historique}|parametre_url{id_syndic,#ID_SYNDIC})]">[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:></a>]
 			</B_autres>
 		</BOUCLE_auteur>
 		
 		<B_tags>
 			<br /><:marquepages:avec_etiquettes:> :
-		<BOUCLE_tags(MOTS){type=tags}{id_forum=#_bookmarks:ID_FORUM}{", "}>
+		<BOUCLE_tags(MOTS){type=tags}{id_forum=#_marquepages:ID_FORUM}{", "}>
 			<a rel="tag" href="#URL_MOT">#TITRE</a>
 		</BOUCLE_tags>
 		
 		[(#SESSION{id_auteur}|?{' '})
 		<ul class="actions">
-			[(#SESSION{id_auteur}|!={#_bookmarks:ID_AUTEUR}|?{' '})
-				<li><a href="[(#URL_PAGE{marquepages_ajouter}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{mp_url,#_site:URL_SITE}|parametre_url{mp_titre,#_bookmarks:TITRE}|parametre_url{retour,#ENV{self}})]"><:marquepages:copier:></a></li>
+			[(#SESSION{id_auteur}|!={#_marquepages:ID_AUTEUR}|?{' '})
+				<li><a href="[(#URL_PAGE{marquepages_ajouter}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{mp_url,#_site:URL_SITE}|parametre_url{mp_titre,#_marquepages:TITRE}|parametre_url{retour,#ENV{self}})]"><:marquepages:copier:></a></li>
 			]
-			[(#_bookmarks:ID_FORUM|marquepages_autoriser_supprimer|?{' '})
-				<li><a class="confirmer" href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_bookmarks:ID_FORUM&r=[(#ENV{self}|replace{&amp;,&}|rawurlencode)]"><:marquepages:supprimer:></a></li>
+			[(#_marquepages:ID_FORUM|marquepages_autoriser_supprimer|?{' '})
+				<li><a class="confirmer" href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_marquepages:ID_FORUM&r=[(#ENV{self}|replace{&amp;,&}|rawurlencode)]"><:marquepages:supprimer:></a></li>
 			]
 		</ul>
 		]
 	</dd>
 </dl>
 </BOUCLE_site>
-</BOUCLE_bookmarks>
+</BOUCLE_marquepages>
+</B_marquepages>
 <p class="spip"><:marquepages:aucun_marquepages:></p>
-<//B_bookmarks>
+<//B_marquepages>
