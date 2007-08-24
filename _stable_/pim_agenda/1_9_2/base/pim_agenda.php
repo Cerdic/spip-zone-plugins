@@ -121,9 +121,9 @@ $spip_groupes_mots = array(
 		"breves"	=> "varchar(3) NOT NULL",
 		"rubriques"	=> "varchar(3) NOT NULL",
 		"syndic"	=> "varchar(3) NOT NULL");
-if (isset($GLOBALS['meta']['agenda_base_version']))
+if (defined('_DIR_PLUGIN_AGENDA'))
 	$spip_groupes_mots = array_merge($spip_groupes_mots,array("evenements"	=> "varchar(3) NOT NULL"));
-if (isset($GLOBALS['meta']['pim_agenda_base_version']))
+if (defined('_DIR_PLUGIN_PIMAGENDA'))
 	$spip_groupes_mots = array_merge($spip_groupes_mots,array("pim_agenda"	=> "varchar(3) NOT NULL"));
 $spip_groupes_mots = array_merge($spip_groupes_mots,array(
 		"minirezo"	=> "varchar(3) NOT NULL",
