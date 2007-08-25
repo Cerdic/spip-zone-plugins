@@ -168,6 +168,10 @@
   function sql_accepter_forum($id_article) {
 	return quete_accepter_forum($id_article);
   }
+  
+  function trouver_def_table($nom, &$boucle) {
+	return trouver_table($nom, &$boucle);
+  }
 
 #}
 
