@@ -215,7 +215,8 @@ function vues_dist($type, $modele, $id, $content){
 	// la regler histoire d'avoir la bonne typo dans le propre()
 	// NB: ceci n'a d'impact que sur le "par defaut" en bas
 	if (colonne_table($type, 'lang')) {
-		lang_select($a = array_pop(valeur_colonne_table($type, 'lang', $id)));
+		$b = valeur_colonne_table($type, 'lang', $id);
+		lang_select($a = array_pop($b));
 	} else {
 		lang_select($a = $GLOBALS['meta']['langue_site']);
 	}
