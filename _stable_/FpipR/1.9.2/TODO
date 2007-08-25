@@ -1,0 +1,105 @@
+Les methodes pour modifier les photos, à passer en formulaire
+
+favorites
+
+    * flickr.favorites.add
+    * flickr.favorites.remove
+
+groups.pools
+
+    * flickr.groups.pools.add
+    * flickr.groups.pools.remove
+
+photos
+
+    * flickr.photos.addTags
+    * flickr.photos.delete
+    * flickr.photos.removeTag
+    * flickr.photos.setDates
+    * flickr.photos.setMeta
+    * flickr.photos.setPerms
+    * flickr.photos.setTags
+
+photos.comments
+
+    * flickr.photos.comments.addComment
+    * flickr.photos.comments.deleteComment
+    * flickr.photos.comments.editComment
+
+photos.geo
+
+    * flickr.photos.geo.removeLocation
+    * flickr.photos.geo.setLocation
+    * flickr.photos.geo.setPerms
+
+photos.licenses
+
+    * flickr.photos.licenses.setLicense
+
+photos.notes
+
+    * flickr.photos.notes.add
+    * flickr.photos.notes.delete
+    * flickr.photos.notes.edit
+
+photos.transform
+
+    * flickr.photos.transform.rotate
+
+photos.upload
+
+    * flickr.photos.upload.checkTickets
+
+photosets
+
+    * flickr.photosets.addPhoto
+    * flickr.photosets.create
+    * flickr.photosets.delete
+    * flickr.photosets.editMeta
+    * flickr.photosets.editPhotos
+    * flickr.photosets.orderSets
+    * flickr.photosets.removePhoto
+
+photosets.comments
+
+    * flickr.photosets.comments.addComment
+    * flickr.photosets.comments.deleteComment
+    * flickr.photosets.comments.editComment
+
+
+----------
+Les methodes qui ne m'interessent pas trop
+
+blogs
+
+    A flickr.blogs.getList
+
+groups
+
+    * flickr.groups.browse
+    * flickr.groups.search
+
+people
+
+    * flickr.people.findByEmail
+    * flickr.people.findByUsername
+    * flickr.people.getPublicPhotos
+    * flickr.people.getUploadStatus
+
+photos
+
+    * flickr.photos.getCounts
+    * flickr.photos.getSizes
+
+photos.geo
+
+    * flickr.photos.geo.getPerms
+
+photos.licenses
+
+    * flickr.photos.licenses.getInfo
+
+---------
+
+
+

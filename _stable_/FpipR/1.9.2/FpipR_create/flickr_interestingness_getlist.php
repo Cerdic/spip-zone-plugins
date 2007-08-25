@@ -1,0 +1,6 @@
+<?php
+
+function FpipR_create_flickr_interestingness_getlist_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+?>

@@ -1,0 +1,23 @@
+#CACHE{24*3600}
+<html>
+<head>
+#INSERT_HEAD
+<title>
+BOUCLE Flickr
+</title>
+</head>
+<BOUCLE_pag(FLICKR_PHOTOS_SEARCH) {pagination} {tags spip}>
+#LOGO_PHOTO{s}
+</BOUCLE_pag>
+#PAGINATION_FLICKR
+</B_pag>
+rien
+<//B_pag>
+
+<hr>
+<BOUCLE_part(FLICKR_PHOTOS_SEARCH) {2,10} {tags spip}>
+#LOGO_PHOTO{s}
+</BOUCLE_part>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<plugin>
+  <nom> <!-- Nom du plugin -->
+	FpipR
+  </nom>
+  <auteur>	<!-- Auteur du plugin -->
+	Pierre Andrews (mortimer.pa@free.fr)
+	logo par IZO (http://izo.aucuneid.com/)
+  </auteur>
+  <version>
+	0.3
+  </version>
+  <etat>
+  stable
+  </etat>
+  <description>
+	<multi>
+	  [fr] associer des photos et sets Flickr.com &#224; vos articles et rubriques. voir le fichier lisezmoi
+	  et l'[article d'inroduction sur spip-contrib->http://www.spip-contrib.net/Le-plugin-FpipR].
+	  _ La version 0.2 ajoute des boucles pour acceder &#224; l'API Flickr depuis vos squelettes.
+	  [en] add photos and sets from your Flickr.com account to articles and sections. see the lisezmoi file
+and the [introduction article on spip-contrib->http://www.spip-contrib.net/Le-plugin-FpipR].
+	  _ version 0.2 introduces SPIP loops to access Flickr's API from your templates.
+	</multi>
+  </description>
+  <lien>
+	[Introduction->http://www.spip-contrib.net/Le-plugin-FpipR]
+  </lien>
+  <prefix> 
+	FpipR
+  </prefix>
+  <icon>
+	FpipR.png
+  </icon>
+  <pipeline>
+	<nom>affiche_milieu</nom>
+	<inclure>FpipR.php</inclure>
+  </pipeline>
+  <pipeline>
+	<nom>affiche_gauche</nom>
+	<inclure>FpipR.php</inclure>
+  </pipeline>
+  <options>
+	FpipR_options.php
+  </options>
+  <fonctions>
+	FpipR_fonctions.php
+  </fonctions>
+  <install>base/FpipR_upgrade.php</install>
+  <necessite id='cfg' version='[1.0.3;]' />
+  <necessite id='SPIP' version='[1.9207;]' />
+  <necessite id='tag_machine' version='[0.1;]' />
+</plugin>
