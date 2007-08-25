@@ -30,7 +30,8 @@ function demarrer_site($site = '', $options = array()) {
 			'code' => 'ecureuil', // code d'activation par defaut
 			'table_prefix' => false,
 			'cookie_prefix' => false,
-			'repertoire' => 'sites'
+			'repertoire' => 'sites',
+			'utiliser_panel' => false
 		),
 		$options
 	);
@@ -40,7 +41,7 @@ function demarrer_site($site = '', $options = array()) {
 	if ($options['table_prefix'])
 		$GLOBALS['table_prefix'] = prefixe_mutualisation($site);
 
-	if ($options['creer_user_base']) {
+	if (($options['creer_user_base']) AND (!$options['utiliser_panel'])) {
 		define('_INSTALL_USER_DB', _INSTALL_NAME_DB);
 		define('_INSTALL_PASS_DB',
 			substr(md5(
@@ -49,6 +50,31 @@ function demarrer_site($site = '', $options = array()) {
 				. _INSTALL_USER_DB # un autre truc variable
 			), 0, 8)
 		);
+	}
+	
+	if ($options['utiliser_panel']) {
+		
+		// Voir http://www.spip-contrib.net/Service-d-hebergement-mutualise
+				
+		// On cherche en BD si le site est enregistre et on recupere
+		// password et code d'activation
+
+		$link = @mysql_connect(_INSTALL_PANEL_HOST_DB,_INSTALL_PANEL_USER_DB,_INSTALL_PANEL_PASS_DB);
+		@mysql_select_db(_INSTALL_PANEL_NAME_DB);
+		$result=@mysql_query("SELECT * FROM "._INSTALL_PANEL_NAME_TABLE." WHERE "._INSTALL_PANEL_FIELD_SITE."='$site'");
+		if (mysql_num_rows($result)>0) {
+			$data = mysql_fetch_assoc($result);
+			$options['code'] =$data[_INSTALL_PANEL_FIELD_CODE];
+			define ('_INSTALL_NAME_DB',_INSTALL_NAME_DB);
+			define ('_INSTALL_USER_DB',_INSTALL_NAME_DB);
+			define ('_INSTALL_PASS_DB',$data[_INSTALL_PANEL_FIELD_PASS]);
+		}
+		else {
+			echo ('<h2>Erreur 404 : page inexistante</h2>');
+			exit;
+	
+		}
+
 	}
 
 	$adr_site = $options['repertoire'].'/' . $site . '/';
