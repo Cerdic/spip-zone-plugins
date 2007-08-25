@@ -165,6 +165,9 @@ class cfg_dist extends cfg_formulaire
 			// et on regarde ses donnees pour faire l'onglet
 			$tmp = & new cfg($fonds, $fonds,'');
 			if ($tmp->_permise) {
+				// Faire des lignes s'il y en a effectivement plus de 6
+				if (!($n%6) && ($n>0))
+					$res .= fin_onglet().debut_onglet();
 				if ($tmp->titre)
 					$titre = $tmp->titre;
 				else
@@ -181,8 +184,7 @@ class cfg_dist extends cfg_formulaire
 				$res .= onglet($titre, $url, 'cfg', $actif, $icone);
 
 				// Faire des lignes s'il y en a plus de 6
-				if (!(++$n%6))
-					$res .= fin_onglet().debut_onglet();
+				$n++;
 			}
 		}
 		$res .= fin_onglet();
