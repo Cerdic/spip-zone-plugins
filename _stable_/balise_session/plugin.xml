@@ -10,5 +10,5 @@
 	<lien>http://www.spip-contrib.net/Balise-SESSION</lien>
 	<fonctions>fonctions_session.php</fonctions>
 	<prefix>BaliseSession</prefix>
-	<chemin dir='' />
+	<necessite version="[;1.9301)" />
 </plugin>
