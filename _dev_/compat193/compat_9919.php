@@ -170,7 +170,36 @@
   }
   
   function trouver_def_table($nom, &$boucle) {
-	return trouver_table($nom, &$boucle);
+	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql; 
+ 
+	$nom_table = $nom; 
+	$s = $boucle->sql_serveur; 
+	if (!$s) { 
+		$s = 'localhost'; 
+		if (in_array($nom, $table_des_tables)) 
+			$nom_table = 'spip_' . $nom; 
+		} 
+	$desc = $tables_des_serveurs_sql[$s]; 
+
+
+	if (isset($desc[$nom_table])) 
+		return array($nom_table, $desc[$nom_table]); 
+
+	include_spip('base/auxiliaires'); 
+	$nom_table = 'spip_' . $nom; 
+	if ($desc = $tables_auxiliaires[$nom_table]) 
+		return array($nom_table, $desc); 
+
+	if ($desc = sql_showtable($nom, $boucle->sql_serveur)) 
+		if (isset($desc['field'])) { 
+			// faudrait aussi prevoir le cas du serveur externe 
+			$tables_principales[$nom] = $desc; 
+			return array($nom, $desc); 
+		} 
+	erreur_squelette(_T('zbug_table_inconnue', array('table' => $nom)), 
+	$boucle->id_boucle); 
+
+	return false;
   }
 
 #}
