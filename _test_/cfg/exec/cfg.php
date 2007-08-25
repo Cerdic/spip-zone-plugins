@@ -77,7 +77,7 @@ class cfg_dist extends cfg_formulaire
 		// Page appellee sans formulaire valable
 		if (!$formulaire) {
 			$formulaire = 
-			"<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' />\n";
+			"<img src='"._DIR_PLUGIN_CFG.'cfg.png'."' style='float:right' alt='' />\n";
 			$formulaire .= _L("<h3>Choisissez le module &#224; configurer.</h3>");
 		}
 		
