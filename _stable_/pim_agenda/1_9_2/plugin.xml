@@ -42,6 +42,11 @@ _	{{Ce plugin n&#233;cessite le plugin Widget Calendar}}
 	<nom>affiche_gauche</nom>
 	<inclure>inc/pim_agenda_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>agenda_rendu_evenement</nom>
+		<action>rendu_evenement</action>
+		<inclure>inc/pim_agenda_pipeline.php</inclure>
+	</pipeline>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 
 	

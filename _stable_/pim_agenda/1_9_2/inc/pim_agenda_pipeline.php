@@ -97,4 +97,48 @@ function PIMAgenda_affiche_gauche($flux){
 	return $flux;
 }
 
+function PIMAgenda_rendu_boite($titre,$descriptif,$lieu,$type='ics'){
+	$texte = "<span class='calendrier-verdana10'><span  style='font-weight: bold;'>";
+	$texte .= wordwrap($sum=typo($titre),15)."</span>";
+	/*$texte .= "<span class='survol'>";
+	$texte .= "<strong>$sum</strong><br />";
+	$texte .= $lieu ? propre($lieu).'<br />':'';
+	$texte .= propre($descriptif);
+	$texte .= "</span>";*/
+	if ($type=='ics'){	
+		$texte .= (strlen($lieu.$descriptif)?"<hr/>":"").$lieu.(strlen($lieu)?"<br/>":"");
+		$texte .= $descriptif;
+	}
+	$texte .= "</span>";
+
+	return $texte;
+}
+function PIMAgenda_rendu_evenement($flux) {
+	global $couleur_claire;
+	$evenement = $flux['args']['evenement'];
+	$url = $evenement['URL']; 
+	$texte = PIMAgenda_rendu_boite($evenement['SUMMARY'],$evenement['DESCRIPTION'],$evenement['LOCATION'],$flux['args']['type']);
+	if (is_string($url)) {
+		if (_DIR_RESTREINT && preg_match(',id_agenda=([0-9]*),',$url,$regs)) {
+			$args = explode('?',$url);
+			$args = end($args);
+			$urljs = generer_url_public('pim_agenda_formulaire',$args);
+			$texte = "<a href='".quote_amp($url)."' onclick=\"$('#formulaire_agenda').load('$urljs');return false;\">$texte</a>"; 
+		}
+		else {
+			$texte = http_href(quote_amp($url), $texte, '', '', '', '');
+		}
+	}
+	else if (is_array($url))
+		$texte = ajax_action_auteur(
+			$url['action'], $url['id'], $url['script'], 
+			isset($url['args'])?$url['args']:'', 
+			array($texte,""),
+			isset($url['args_ajax'])?$url['args_ajax']:'', 
+			isset($url['fct_ajax'])?$url['fct_ajax']:'');
+	
+	$flux['data'] = $texte;
+	return $flux;
+}
+
 ?>

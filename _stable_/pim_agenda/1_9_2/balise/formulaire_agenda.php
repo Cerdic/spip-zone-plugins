@@ -69,12 +69,13 @@ $ajouter_mot, $afficher_texte, $url_param_retour)
 		$retour_agenda = parametre_url(self(),'neweven','');
 		$retour_agenda = parametre_url($retour_agenda,'ndate','');
 		$retour_agenda = parametre_url($retour_agenda,'var_mode','');
-		$retour_agenda = parametre_url($retour_agenda,'id_agenda','');
 		$retour_agenda = parametre_url($retour_agenda,'id_organisateur','');
 		$retour_agenda = parametre_url($retour_agenda,'id_invites','');
 		$retour_agenda = str_replace("&amp;","&",$retour_agenda);
+		$retour_agenda = parametre_url($retour_agenda,'id_agenda','');
 	}
-	$script = self();
+	$script = _request('script')?_request('script'):self();
+	$script = parametre_url($script,'id_agenda','');
 	$script = parametre_url($script,'neweven','');
 	$script = parametre_url($script,'edit','');
 	$script = parametre_url($script,'date','');
