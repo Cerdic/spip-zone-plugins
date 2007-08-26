@@ -20,7 +20,7 @@
 	function load() {
 		if (GBrowserIsCompatible()) {
 			// facelo mapa
-			map = new GMap2(document.getElementById("map"));
+			map = new GMap2(document.getElementById("map#ENV{id_carte_gis}"));
     		map.addControl(new mapTypeControl());
 			map.addControl(new mapZoomControl());
 			map.addControl(new mapMoveControl());
