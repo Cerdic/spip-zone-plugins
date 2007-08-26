@@ -7,6 +7,6 @@
 [(#SET{id_rubrique,#ENV{id_rubrique,#GET{rub2}}})]
 
 [(#INCLURE{fond=inc-gis_map}{id_rubrique=#GET{id_rubrique}}{id_mot}{id_auteur}
-{recherche}{id_article}{zoom}{latit}{lonxit})]
+{recherche}{id_article}{zoom}{type}{latit}{lonxit})]
 
 <div id="map" style="[width: (#GET{width});][height:(#GET{height});]"></div>

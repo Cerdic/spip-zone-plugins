@@ -48,7 +48,7 @@ function gis_insertar_head($flux){
 // inserta no head da parte PUBLICA
 // --------------------------------
 function gis_affichage_final($flux){
-    if ((strpos($flux, '<div id="map"') == true) or (strpos($flux, '<div id="formMap"') == true)){
+    if ((strpos($flux, '<div id="map') == true) or (strpos($flux, '<div id="formMap') == true)){
 	
 		$incHead='
 		<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>
@@ -58,6 +58,9 @@ function gis_affichage_final($flux){
         $incHead .= '<script type="text/javascript">
                 $(document).ready(function() {
                     load();
+                });
+                $(document).unload(function(){
+                	Gunload();
                 });
                 </script>';
         return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
