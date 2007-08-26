@@ -98,7 +98,7 @@ $spip_forms_donnees_pim_agenda = array(
 
 $spip_forms_donnees_pim_agenda_key = array(
 	"KEY id_donnee" 	=> "id_donnee",
-	"KEY id_agenda" => "id_pim_agenda");
+	"KEY id_agenda" => "id_agenda");
 	
 $tables_auxiliaires['spip_forms_donnees_pim_agenda'] = array(
 	'field' => &$spip_forms_donnees_pim_agenda,
