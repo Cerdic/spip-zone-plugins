@@ -33,9 +33,9 @@
 			$url = 'http://'.$v.'/';
 		$page .= "<tr>
 			<td>$v</td>
-			<td><a href='$url'>$nom_site</a></td>
-			<td><a href='$url/ecrire/'>ecrire/</a></td>
-			<td><a href='$url/ecrire/?exec=statistiques_visites'>stats</a></td>
+			<td><a href='${url}'>$nom_site</a></td>
+			<td><a href='${url}ecrire/'>ecrire/</a></td>
+			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>stats</a></td>
 			</tr>\n";
 	}
 	$page .= "</table>";
