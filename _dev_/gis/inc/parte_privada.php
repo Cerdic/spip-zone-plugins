@@ -12,7 +12,7 @@ include_spip('base/abstract_sql');
  
 function gis_cambiar_coord($id_article) {
 	global $spip_lang_left, $spip_lang_right;
-	global $id_article;
+	$id_article = _request(id_article);
 	
 	$glat = NULL;
 	$glonx = NULL;
@@ -80,7 +80,7 @@ function gis_mot_groupe($id_groupe){
 }*/
 function gis_mots($id_mot) {
 	global $spip_lang_left, $spip_lang_right;
-	global $id_mot;
+	$id_mot = _request(id_mot);
 	
 	$glat = NULL;
 	$glonx = NULL;
