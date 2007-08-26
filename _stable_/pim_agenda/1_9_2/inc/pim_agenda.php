@@ -10,6 +10,48 @@
  *
  */
 
+function PIMAgenda_detailler_agenda($id_agenda, $complet= false ){
+	$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda="._q($id_agenda));
+	if (!$row = spip_fetch_array($res)) return false;
+	if ($complet){
+		$res = spip_query("SELECT id_mot FROM spip_mots_pim_agenda WHERE id_agenda="._q($id_agenda));
+		while ($row2 = spip_fetch_array($res))
+			$row['mots'][] = $row2['id_mot'];
+
+		$res = spip_query("SELECT id_auteur FROM spip_pim_agenda_auteurs WHERE id_agenda="._q($id_agenda));
+		while ($row2 = spip_fetch_array($res))
+			$row['auteurs'][] = $row2['id_auteur'];
+			
+		$res = spip_query("SELECT id_auteur FROM spip_pim_agenda_invites WHERE id_agenda="._q($id_agenda));
+		while ($row2 = spip_fetch_array($res))
+			$row['invites'][] = $row2['id_auteur'];
+		
+		$res = spip_query("SELECT id_groupe FROM spip_pim_agenda_groupes_invites WHERE id_agenda="._q($id_agenda));
+		while ($row2 = spip_fetch_array($res))
+			$row['groupes_invites'][] = $row2['id_groupe'];
+			
+		$res = spip_query("SELECT id_donnee FROM spip_forms_donnees_pim_agenda WHERE id_agenda="._q($id_agenda));
+		while ($row2 = spip_fetch_array($res))
+			$row['donnees'][] = $row2['id_donnee'];
+	}
+
+	return $row;
+}
+
+function PIMAgenda_supprimer_agenda($id_agenda){
+	spip_log("suppression de l'agenda $id_agenda par ".$GLOBALS['auteur_session']['id_auteur'],'pimagenda');
+	if ($row = detailler_agenda($id_agenda, true)){
+		spip_query("DELETE FROM spip_mots_pim_agenda WHERE id_agenda="._q($id_agenda));
+		spip_query("DELETE FROM spip_pim_agenda_auteurs WHERE id_agenda="._q($id_agenda));
+		spip_query("DELETE FROM spip_pim_agenda_invites WHERE id_agenda="._q($id_agenda));
+		spip_query("DELETE FROM spip_pim_agenda_groupes_invites WHERE id_agenda="._q($id_agenda));
+		spip_query("DELETE FROM spip_forms_donnees_pim_agenda WHERE id_agenda="._q($id_agenda));
+		spip_query("DELETE FROM spip_pim_agenda WHERE id_agenda="._q($id_agenda));
+	}
+	$notifier_pim_agenda = charger_fonction('notifier_pim_agenda','inc');
+	$notifier_pim_agenda('supprimer',$id_agenda,$row, "");
+}
+
 function PIMAgenda_cree_groupe(){
 	$titre = _q(_request('titre'));
 	$descriptif = _q(_request('descriptif'));
@@ -52,9 +94,13 @@ function PIMAgenda_enregistrer_groupe(){
 // liste des auteurs contenus dans un groupe
 function PIMAgenda_liste_contenu_groupe_auteur($id_groupe) {
 	$liste_auteurs=array();
+	if (is_array($id_groupe)){
+		$in_groupe = calcul_mysql_in('id_groupe',join(',',array_map('intval',$id_groupe)));
+	}
+	else $in_groupe = "id_groupe="._q($id_groupe);
 	$id_groupe = intval($id_groupe);
 	// liste des rubriques directement liees a la groupe
-	$s = spip_query("SELECT id_auteur FROM spip_auteurs_groupes WHERE id_groupe=$id_groupe");
+	$s = spip_query("SELECT id_auteur FROM spip_auteurs_groupes WHERE $in_groupe");
 	while ($row=spip_fetch_array($s))
 		$liste_auteurs[] = $row['id_auteur'];
 	return $liste_auteurs;

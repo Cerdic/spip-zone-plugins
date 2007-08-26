@@ -13,14 +13,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/meta');
-include_spip('inc/session');
-include_spip('inc/acces');
 include_spip('inc/texte');
-include_spip('inc/lang');
-include_spip('inc/mail');
-include_spip('inc/forum');
-include_spip('base/abstract_sql');
-spip_connect();
+include_spip('inc/pim_agenda');
 
 charger_generer_url();
 
@@ -90,9 +84,6 @@ $ajouter_mot, $afficher_texte, $url_param_retour)
 	include_spip('inc/autoriser');
 	$droits_modif = autoriser('modifier','pimagenda',$id_agenda);
 
-	//var_dump("SELECT * FROM spip_pim_agenda_auteurs WHERE id_agenda=".spip_abstract_quote($id_agenda)." AND id_auteur=".spip_abstract_quote($id_auteur));
-	//var_dump($droits_modif);
-
 	// au premier appel (pas de Post-var nommee "retour_forum")
 	// memoriser evntuellement l'URL de retour pour y revenir apres
 	// envoi du message ; aux appels suivants, reconduire la valeur.
@@ -137,16 +128,16 @@ $ajouter_mot, $afficher_texte, $url_param_retour)
 					return;
 				}
 		 	}
-		 	modifier_agenda($id_agenda);
+		 	modifier_agenda($id_agenda, $script);
 			$evenement_action = 'evenement_modif';
 		}
 		else if ($supp_evenement){
-			supprimer_agenda($id_agenda);
+			PIMAgenda_supprimer_agenda($id_agenda);
 			$evenement_action = '';
 		}
 	}
 	if ($evenement_action && $evenement_action!='evenement_insert')
-		if (!$row = detailler_agenda($id_agenda))
+		if (!$row = PIMAgenda_detailler_agenda($id_agenda))
 			return false;
 
 	// pour la chaine de hidden
@@ -175,27 +166,10 @@ $ajouter_mot, $afficher_texte, $url_param_retour)
 		return false;
 }
 
-function detailler_agenda($id_agenda){
-	$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda="._q($id_agenda));
-	if (!$row = spip_fetch_array($res)) return false;
-	// detailler orga, invite, mots, tables...	
-	return $row;
-}
-
-function supprimer_agenda($id_agenda){
-	$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda="._q($id_agenda));
-	if ($row = spip_fetch_array($res)){
-		spip_query("DELETE FROM spip_mots_pim_agenda WHERE id_agenda"._q($id_agenda));
-		spip_query("DELETE FROM spip_pim_agenda_auteurs WHERE id_agenda"._q($id_agenda));
-		spip_query("DELETE FROM spip_pim_agenda_invites WHERE id_agenda"._q($id_agenda));
-		spip_query("DELETE FROM spip_pim_agenda_groupes_invites WHERE id_agenda"._q($id_agenda));
-		spip_query("DELETE FROM spip_pim_agenda WHERE id_agenda"._q($id_agenda));
-	}
-	//notifier_agenda('supprimer',$id_agenda,$row);
-}
-
-function modifier_agenda($id_agenda){
-	// memoriser l'ancienne valeur pour la notification
+function modifier_agenda($id_agenda, $script){
+	spip_log("modification de l'agenda $id_agenda par ".$GLOBALS['auteur_session']['id_auteur'],'pimagenda');
+	// memoriser les anciennes valeurs pour la notification
+	$row_prev = PIMAgenda_detailler_agenda($id_agenda, true);
 
 	// Recuperer le message a previsualiser
 	$type = _request('type_eve');
@@ -311,54 +285,10 @@ function modifier_agenda($id_agenda){
 		foreach($lien_donnees as $id_donnee){
 			if (!spip_fetch_array(spip_query("SELECT * FROM spip_forms_donnees_pim_agenda WHERE id_agenda="._q($id_agenda)." AND id_donnee="._q($id_donnee))))
 				spip_query("INSERT INTO spip_forms_donnees_pim_agenda (id_agenda,id_donnee) VALUES ("._q($id_agenda).","._q($id_donnee).")");
-		}	
+		}
+
+	$notifier_pim_agenda = charger_fonction('notifier_pim_agenda','inc');
+	$notifier_pim_agenda('modifier',$id_agenda,$row_prev, $script);
 }
 
-function notifier_agenda($action, $id_agenda, $before){
-	// Envoi des messages d'invitation par messagerie interne et mail
-	$envoi=false;
-	$message_titre=_T('pimagenda:texte_agenda');
-	$message_auteur=$id_organisateur;
-	$message_date_heure=date("Y-m-d H:i:s");
-	$redirect_url = parametre_url($script,'id_agenda',$id_agenda);
-	$message_texte="Vous &ecirc;tes invit&eacute;s le <a href='$redirect_url'>".date("d-m-Y",$st_date_deb)." &agrave; ".date("H:i",$st_date_deb)."</a> (dur&eacute;e ".date("H:i",$st_date_fin-$st_date_deb).")";
-	if ($modif){
-		if ($st_date_deb!=($st_last=strtotime($row_anc['date_debut']))){
-			$envoi=true;
-			$message_texte="L'invitation du ".date("d-m-Y",$st_last)." &agrave; ".date("H:i",$st_last)." a &eacute;t&eacute; deplac&eacute;e le <a href='$redirect_url'>".date("d-m-Y",$st_date_deb)." &agrave; ".date("H:i",$st_date_deb)."</a> (dur&eacute;e ".date("H:i",$st_date_fin-$st_date_deb).")";
-		}
-		else if ($st_date_fin!=($st_last=strtotime($row_anc['date_fin']))){
-			$envoi=true;
-			$message_texte="La dur&eacute;e de l'invitation du <a href='$redirect_url'>".date("d-m-Y",$st_date_deb)." &agrave; ".date("H:i",$st_date_deb)."</a> a &eacute;t&eacute; modifi&eacute;e (nouvelle dur&eacute;e ".date("H:i",$st_date_fin-$st_date_deb).")";
-		}
-	}
-	if ( ($modif && $envoi) || ($insert)){
-		$id_message = spip_abstract_insert("spip_messages",
-				"(titre,texte,type,date_heure,date_fin,rv,statut,id_auteur,maj)",
-				"(".spip_abstract_quote($message_titre).",".spip_abstract_quote($message_texte).",'normal','$message_date_heure','$message_date_heure','non','publie',$message_auteur,NOW())");
-
-		$head="From: agenda@".$_SERVER["HTTP_HOST"]."\n";
-		$message_texte = supprimer_tags($message_texte) . "\n".url_absolue($redirect_url);
-		include_spip('inc/charset');
-		$trans_tbl = get_html_translation_table (HTML_ENTITIES);
-		$trans_tbl = array_flip ($trans_tbl);
-		// mettre le texte dans un charset acceptable
-		$mess_iso = unicode2charset(charset2unicode($message_texte),'iso-8859-1');
-		// regler les entites si il en reste
-		$mess_iso = strtr($mess_iso, $trans_tbl);
-		
-		if ($id_message!=0 && is_array($id_invites) && count($id_invites)){
-			foreach($id_invites as $value){
-				$id_dest=spip_abstract_quote($value);
-				spip_query("INSERT INTO spip_auteurs_messages (id_message, id_auteur, vu) VALUES ($id_message, $id_dest,'non');");
-				if ($row=spip_fetch_array(spip_query("SELECT email FROM spip_auteurs WHERE id_auteur=$id_dest"))){
-					if ($row['email']){
-						mail($row['email'],$message_titre,$mess_iso,$head);
-						#spip_log("mail: Dest:".$row['email']." $head Sujet:$message_titre $mess_iso");
-					}
-				}
-			}
-		}
-	}
-}
 ?>

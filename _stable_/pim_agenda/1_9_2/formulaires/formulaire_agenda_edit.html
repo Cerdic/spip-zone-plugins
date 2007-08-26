@@ -140,7 +140,9 @@ return false;"><img src='#CHEMIN{'img_pack/croix.png'}' width='12' height='12' s
   [(#ENV{modif_auth}|?{' '})
 	  [(#ENV{evenement_action}|=={'evenement_modif'}|?{' ',''})
 	  <div style='float:#LANG_LEFT'>
-	  <input type='submit' name='supp_evenement' value='<:pimagenda:bouton_supprimer:>' class="fondl" />
+	  <input type='submit' name='supp_evenement' value='<:pimagenda:bouton_supprimer:>' class="fondl" 
+		onclick="return confirm('&Ecirc;tes vous s&ucirc;r de vouloir supprimer cet ev&egrave;nement ?');"
+		/>
 	  </div>
 	  ]
   ]
