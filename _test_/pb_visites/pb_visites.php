@@ -1,45 +1,5 @@
 <?php
 
-/*
- * qui_fait_rien
- *
- * Le plugin qui fait rien, mais qui le fait bien.
- *
- * Pour bien tout comprendre... Lisez tranquillement les commentaires
- * de ce plugin.
- *
- * Auteur : Aurélien Requiem
- * © 2006 - Distribue sous licence GPL
- *
- */
-
-
-/*
- * SUPPORT MULTILINGUE
- * Comme le plugin 'spip-lettre', ce plugin est multilingue, c'est a dire qu'il
- * est capable de s'adapter à la langue de l'interface d'administration.
- * Pour ce faire et tout au long du code, les données texte sont appelées par
- * la fonction _T(''). Les fichiers de traduction sont dans lang/
- */
-
-
-/*
- * #################################################################
- * Dans ce bloc, toutes les fonctions utilisées et appelées par SPIP 
- *
- */
-
-/* 
- * Chaque fonction appelée par SPIP doit commencer avec le bon <prefix>. Dans 
- * notre cas, 'images_interface'
- * Cette fonction permet l'ajout d'un bouton dans le bandeau d'administration.
- * mais cette manipulation n'est pas très propre car telquel, le menu ne
- * disparaitra pas automatiquement. Pour se faire, il faut qui spip appelle
- * 'QuiFaitRien_remplacerJs' definit dans plugin.xml
- * Ce problèeme a été remonté aux developpeurs SPIP (v1.9.0)
-*/
-
-
 function pb_visites_logs_visites () {
 
 	// Rejet des robots (qui sont pourtant des humains comme les autres)

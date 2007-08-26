@@ -9,6 +9,9 @@
 function compte_fichier_pb_visite($fichier,
 &$visites, &$visites_a, &$referers, &$referers_a, &$articles) {
 
+	include ("inc/vieilles_defs");
+
+
 	// Noter la visite du site (article 0)
 	$visites ++;
 
