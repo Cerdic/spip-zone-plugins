@@ -21,20 +21,20 @@
 	
 	Filtres
 	=======
-	id_rub :
+	id_rubrique :
 		les marque-pages de quelle rubrique ?
-	id_aut :
+	id_auteur :
 		restreindre aux marque-pages d'un auteur en particulier
-	id_site :
+	id_syndic :
 		si on veut "l'historique" des marque-pages d'un site
-	id_marquepage :
+	id_forum :
 		si on veut sortir un marque-page particulier
 		
 	Ce fond utilise la balise #SESSION, il faut donc l'inclure avec 
 	session.php.
 	
 	Exemple :
-	<INCLURE(session.php){fond=fonds/marquepages}{self=#SELF}{id_rub=1}{id_aut=#ID_AUTEUR}{pagination=5}
+	<INCLURE(session.php){fond=fonds/marquepages}{self=#SELF}{id_rubrique=1}{id_auteur=#ID_AUTEUR}{pagination=5}{tri=titre}
 
 ]
 
@@ -47,8 +47,8 @@
 <B_marquepages>
 #ANCRE_PAGINATION
 [<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
-<BOUCLE_marquepages(FORUMS){id_syndic!=0}{statut=prive}{id_forum==^((#ENV{id_marquepage,.*}))$}{id_syndic==^((#ENV{id_site,.*}))$}{id_auteur==^((#ENV{id_aut,.*}))$}{pagination #ENV{pagination,20}}{par #GET{tri}}{inverse #GET{sens}}>
-<BOUCLE_site(SITES){id_syndic}{id_rubrique==^((#ENV{id_rub,.*}))$}>
+<BOUCLE_marquepages(FORUMS){id_syndic!=0}{statut=prive}{id_forum?}{id_syndic?}{id_auteur?}{pagination #ENV{pagination,20}}{par #GET{tri}}{inverse #GET{sens}}>
+<BOUCLE_site(SITES){id_syndic}{id_rubrique?}>
 <dl class="xfolkentry [(#SESSION{id_auteur}|=={#_marquepages:ID_AUTEUR}|?{#_marquepages:EDIT{marquepage}})]">
 	<dt>
 		<a href="#_site:URL_SITE" class="taggedlink" rel="nofollow">#_marquepages:TITRE</a>
