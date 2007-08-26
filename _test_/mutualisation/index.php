@@ -21,7 +21,18 @@
 
 	$titre = _L(count($sites).' '.'sites mutualis&#233;s');
 
-	$page = "<table>";
+	$page = "<table>
+	<thead>
+		<tr>
+			<td>Domaine</td>
+			<td>Nom site</td>
+			<td>ecrire</td>
+			<td>Stats</td>
+		</tr>
+	</thead>
+	<tbody>";
+
+	$nsite = 1;
 	foreach ($sites as $v) {
 		if (lire_fichier('sites/'.$v.'/tmp/meta_cache.txt', $meta)
 		AND is_array($meta = @unserialize($meta))
@@ -31,16 +42,28 @@
 		}
 		else
 			$url = 'http://'.$v.'/';
-		$page .= "<tr>
+		$page .= "<tr class='tr". $nsite % 2 ."'>
 			<td>$v</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
 			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>stats</a></td>
 			</tr>\n";
+		$nsite++;
 	}
-	$page .= "</table>";
+	$page .= "</tbody></table>";
 
 	$page = minipres($titre, $page);
+	
+	$page = str_replace('</head>', '
+		<style type="text/css">
+		tr {vertical-align:top;}
+		.tr0 {background-color:#ddded5}
+		thead tr {font-weight:bold;background-color:#333;color:#fff;}
+		td {text-align:left;}
+		#minipres{width:50em;}
+		</style>
+		</head>
+		', $page);
 
 	echo str_replace('<head>', '<head>
 		<base href="'.url_absolue(str_repeat('../', $profondeur)).'" />', $page);
