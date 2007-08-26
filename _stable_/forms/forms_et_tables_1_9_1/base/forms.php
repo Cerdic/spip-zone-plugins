@@ -191,6 +191,19 @@ $spip_forms_donnees_donnees_key = array(
 $tables_auxiliaires['spip_forms_donnees_donnees'] = array(
 	'field' => &$spip_forms_donnees_donnees,
 	'key' => &$spip_forms_donnees_donnees_key);
+	
+$spip_forms_donnees_auteurs = array(
+	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"id_auteur" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_forms_donnees_auteurs_key = array(
+	"KEY id_donnee" 	=> "id_donnee",
+	"KEY id_auteur" => "id_auteur");
+
+$tables_auxiliaires['spip_forms_donnees_auteurs'] = array(
+	'field' => &$spip_forms_donnees_auteurs,
+	'key' => &$spip_forms_donnees_auteurs_key);
+
 
 $spip_documents_donnees = array(
 		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
@@ -208,9 +221,11 @@ global $tables_jointures;
 $tables_jointures['spip_articles'][] = 'forms_articles';
 $tables_jointures['spip_forms'][] = 'forms_articles';
 $tables_jointures['spip_articles'][] = 'forms_donnees_articles';
+$tables_jointures['spip_auteurs'][] = 'forms_donnees_auteurs';
 $tables_jointures['spip_rubriques'][] = 'forms_donnees_rubriques';
 $tables_jointures['spip_forms_donnees'][] = 'forms_donnees_articles';
 $tables_jointures['spip_forms_donnees'][] = 'forms_donnees_rubriques';
+$tables_jointures['spip_forms_donnees'][] = 'forms_donnees_auteurs';
 $tables_jointures['spip_forms_donnees'][] = 'documents_donnees';
 $tables_jointures['spip_forms_donnees'][] = 'forms';
 $tables_jointures['spip_documents'][] = 'documents_donnees';
@@ -223,6 +238,7 @@ $table_des_tables['forms_donnees']='forms_donnees';
 $table_des_tables['forms_donnees_champs']='forms_donnees_champs';
 $table_des_tables['forms_articles']='forms_articles';
 $table_des_tables['forms_donnees_articles']='forms_donnees_articles';
+$table_des_tables['forms_donnees_auteurs']='forms_donnees_auteurs';
 $table_des_tables['forms_donnees_rubriques']='forms_donnees_rubriques';
 $table_des_tables['documents_donnees']='documents_donnees';
 $table_des_tables['forms_donnees_donnees']='forms_donnees_donnees';

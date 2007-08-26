@@ -45,6 +45,16 @@
 				$flux['data'] .= "</div>";
 			}
 		}
+		if ($exec=='auteur_infos'){
+			include_spip('base/forms_base_api');
+			if (count(Forms_liste_tables('table'))){
+				$id_auteur = $flux['args']['id_auteur'];
+				$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
+				$flux['data'] .= "<div id='forms_lier_donnees'>";
+				$flux['data'] .= $forms_lier_donnees('auteur',$id_auteur, $exec);
+				$flux['data'] .= "</div>";
+			}
+		}
 		return $flux;
 	}
 	

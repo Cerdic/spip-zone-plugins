@@ -1513,7 +1513,7 @@ function propre($letexte) {
 	if (!$letexte) return $letexte;
 
 	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
-	$letexte = echappe_html($letexte);
+//	$letexte = echappe_html($letexte);
 
 	// Traiter le texte
 	$letexte = traiter_raccourcis($letexte);
