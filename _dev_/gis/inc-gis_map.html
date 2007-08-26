@@ -13,6 +13,10 @@
 	#SET{latitude,#ENV{latit,#CONFIG**{geomap_default_lat,0}}}
 	#SET{lonxitude,#ENV{lonxit,#CONFIG**{geomap_default_lonx,0}}}
 	<//B_centrado>
+	[(#ENV{type}|=={'satellite'}|?{#SET{type,G_SATELLITE_MAP},''})]
+	[(#ENV{type}|=={'carte'}|?{#SET{type,G_NORMAL_MAP},''})]
+	[(#ENV{type}|=={'hybride'}|?{#SET{type,G_HYBRID_MAP},''})]
+	[(#ENV{type}|=={''}|?{#SET{type,G_SATELLITE_MAP},''})]
 	function load() {
 		if (GBrowserIsCompatible()) {
 			// facelo mapa
@@ -20,7 +24,7 @@
     		map.addControl(new mapTypeControl());
 			map.addControl(new mapZoomControl());
 			map.addControl(new mapMoveControl());
-    		map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, G_SATELLITE_MAP);
+    		map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, #GET{type});
     		center = map.getCenter();
     		map.enableDoubleClickZoom();
     		map.enableContinuousZoom();
