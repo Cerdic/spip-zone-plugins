@@ -21,7 +21,7 @@ function action_flickr_ajouter_documents() {
 	$from = array('spip_auteurs');
 	$select = array('flickr_token','flickr_nsid');
 	$where = array('id_auteur='.$id_auteur);
-	$row = sql_fetsel($select,$from,$where);
+	$row = spip_abstract_fetsel($select,$from,$where);
 	$photos = array();
 	if($row['flickr_nsid'] != '' && $row['flickr_token'] != '') {
 	  $set = _request('set');
@@ -42,7 +42,7 @@ function action_flickr_ajouter_documents() {
 	  foreach($photos as $info) {
 		list($id_photo,$secret) = split('@#@',$info);
 		$id_photo= intval($id_photo);
-		$photo_sizes = flickr_photos_getSizes($id_photo,$row['auth_topen']);
+		$photo_sizes = flickr_photos_getSizes($id_photo,$row['auth_token']);
 		if($photo_sizes) {
 		  $url = '';
 		  $width = '';
@@ -67,7 +67,7 @@ function action_flickr_ajouter_documents() {
 			$width = $width_m;
 			$height = $height_m;
 		  }
-		  $cnt =sql_fetsel(array('id_document'),array('spip_documents'),array("fichier='$url'","distant='oui'"));
+		  $cnt =spip_abstract_fetsel(array('id_document'),array('spip_documents'),array("fichier='$url'","distant='oui'"));
 		  if(!$cnt) {
 			$empty = array();
 			$photo_details = flickr_photos_getInfo($id_photo,$secret,$row['auth_token']);
@@ -77,7 +77,7 @@ function action_flickr_ajouter_documents() {
 			$from = array('spip_documents');
 			$select = array('id_document');
 			$where = array("distant='oui'","fichier='$url'","maj >= '$date'","maj <= '$date2'");
-			$doc_row = sql_fetsel($select,$from,$where);
+			$doc_row = spip_abstract_fetsel($select,$from,$where);
 			if($doc_row['id_document']) {
 			  global $table_prefix;
 			  $title = $photo_details->title;
@@ -110,9 +110,9 @@ function action_flickr_ajouter_documents() {
 			  }
 			}
 		  } else {
-			$link =sql_fetsel(array('id_document,id_article'),array('spip_documents_'.$type.'s'),array("id_$type=$id","id_document=".$cnt['id_document']));
+			$link =spip_abstract_fetsel(array('id_document,id_article'),array('spip_documents_'.$type.'s'),array("id_$type=$id","id_document=".$cnt['id_document']));
 			if(!$link) {
-			  sql_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
+			  spip_abstract_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
 			}
 		  }
 		}
