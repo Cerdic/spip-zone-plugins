@@ -42,7 +42,7 @@ function action_flickr_ajouter_documents() {
 	  foreach($photos as $info) {
 		list($id_photo,$secret) = split('@#@',$info);
 		$id_photo= intval($id_photo);
-		$photo_sizes = flickr_photos_getSizes($id_photo,$row['auth_topen']);
+		$photo_sizes = flickr_photos_getSizes($id_photo,$row['auth_token']);
 		if($photo_sizes) {
 		  $url = '';
 		  $width = '';
