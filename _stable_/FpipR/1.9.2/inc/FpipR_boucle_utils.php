@@ -131,10 +131,19 @@ function FpipR_utils_search_extras($boucle,$id_table,$possible_extras) {
 
 function FpipR_utils_calcul_limit(&$boucle) {
   //on calcul le nombre de page d'apres {0,10}
-  $deubt=0;$pas=1;
+  $debut=0;$pas=1;
   if($boucle->limit) {
-	list($debut,$pas) = split(',',$boucle->limit);
-	$boucle->limit = ($debut%$pas).','.$pas;
+	if(strpos($boucle->limit,"\$GLOBALS") >= 0) {	
+  $tmp = str_replace("\"","",$boucle->limit);
+
+	  $tmp = str_replace("&quot;","\"",$tmp);
+	  $tmp = str_replace(".","",$tmp);
+	  list($debut,$pas) = split(',',$tmp);
+	  $boucle->limit = '('.($debut."%".$pas).').\',\'.intval('.$pas.')';
+	} else {	
+	  list($debut,$pas) = split(',',$boucle->limit);
+	  $boucle->limit = ($debut%$pas).','.$pas;
+	}
   } else {
 	$debut = $boucle->partie;
 	$pas = $boucle->total_parties;
