@@ -35,7 +35,7 @@ function gis_insertar_head($flux){
 		$flux .= '<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>';
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
 		if ((_request('exec')=='articles'))
-			$flux .= '<script language="javascript">
+			$flux .= '<script type="text/javascript">
 		$(document).ready(function() {
 			$(\'#cadroFormulario\').hide()
 		});
@@ -55,7 +55,7 @@ function gis_affichage_final($flux){
 		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
 		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>
 		<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
-        $incHead .= '<script language="javascript">
+        $incHead .= '<script type="text/javascript">
                 $(document).ready(function() {
                     load();
                 });
