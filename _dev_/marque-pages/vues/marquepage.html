@@ -9,7 +9,4 @@
 [(#REM) on ajoute les mots-clés]
 [(#ENV*{tags}|ajouter_etiquettes{#ENV{id_forum},tags,forum,id_forum,true})]
 
-<INCLURE(session.php){fond=fonds/marquepages}{self=(#ENV{self})}{id_marquepage=(#ENV{id_forum})}>
-
-[(#REM) à cause de l'ajax, il faut de nouveau assigner l'évènement]
-
+<INCLURE(session.php){fond=fonds/marquepages}{self=#ENV{self}}{id_forum#ENV{id_forum}}>
