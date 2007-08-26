@@ -171,12 +171,62 @@ function PIMAgenda_affiche_evenements($texte){
 	$id_auteur = 0;
 	if (is_array($auteur_session))
 		$id_auteur = $auteur_session['id_auteur'];
-	if($id_auteur){
-		// tous les evenements organises par le visiteur logge
+	if (!($id_donnee=intval(_request('id_donnee')))){
+		if($id_auteur){
+			// tous les evenements organises par le visiteur logge
+			$res = spip_query("SELECT * 
+									FROM spip_pim_agenda AS agenda
+						 			JOIN spip_pim_agenda_auteurs ON agenda.id_agenda=spip_pim_agenda_auteurs.id_agenda 
+								 WHERE spip_pim_agenda_auteurs.id_auteur=$id_auteur
+								 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin') 
+								 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
+								 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
+								 ORDER BY agenda.date_debut;");
+			while ($row = spip_fetch_array($res)){
+				PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_concerne, false);
+				$visu_evenements[$row['id_agenda']]=1;
+			}
+		
+			// tous les evenements auxquels le visiteur logge est invite
+			$res = spip_query("SELECT * 
+									FROM spip_pim_agenda AS agenda
+						 			JOIN spip_pim_agenda_invites ON agenda.id_agenda=spip_pim_agenda_invites.id_agenda 
+								 WHERE spip_pim_agenda_invites.id_auteur=$id_auteur
+								 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin')
+								 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
+								 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
+								 ORDER BY agenda.date_debut;");
+			while ($row = spip_fetch_array($res)){
+				if (!isset($visu_evenements[$row['id_agenda']])){
+					PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_concerne);
+					$visu_evenements[$row['id_agenda']]=1;
+				}
+			}
+			// TBD : tous les evenements publies pour le visiteur logge
+			// en attendant : tous les evenements restants, non prives
+			$res = spip_query("SELECT * 
+									FROM spip_pim_agenda AS agenda
+						 			JOIN spip_pim_agenda_auteurs AS auteur ON agenda.id_agenda=auteur.id_agenda 
+								 WHERE auteur.id_auteur!=$id_auteur
+								 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin')
+								 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
+								 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
+								 	 AND agenda.prive!='oui'
+								 ORDER BY agenda.date_debut;");
+			while ($row = spip_fetch_array($res)){
+				if (!isset($visu_evenements[$row['id_agenda']])){
+					PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_info);
+					$visu_evenements[$row['id_agenda']]=1;
+				}
+			}
+		}
+	}
+	else {
+		// tous les evenements non prives lies a la donnee demandee
 		$res = spip_query("SELECT * 
 								FROM spip_pim_agenda AS agenda
-					 LEFT JOIN spip_pim_agenda_auteurs ON agenda.id_agenda=spip_pim_agenda_auteurs.id_agenda 
-							 WHERE spip_pim_agenda_auteurs.id_auteur=$id_auteur
+					 			JOIN spip_forms_donnees_pim_agenda ON agenda.id_agenda=spip_forms_donnees_pim_agenda.id_agenda 
+							 WHERE spip_forms_donnees_pim_agenda.id_donnee=$id_donnee
 							 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin') 
 							 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
 							 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
@@ -184,41 +234,7 @@ function PIMAgenda_affiche_evenements($texte){
 		while ($row = spip_fetch_array($res)){
 			PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_concerne, false);
 			$visu_evenements[$row['id_agenda']]=1;
-		}
-	
-		// tous les evenements auxquels le visiteur logge est invite
-		$res = spip_query("SELECT * 
-								FROM spip_pim_agenda AS agenda
-					 LEFT JOIN spip_pim_agenda_invites ON agenda.id_agenda=spip_pim_agenda_invites.id_agenda 
-							 WHERE spip_pim_agenda_invites.id_auteur=$id_auteur
-							 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin')
-							 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
-							 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
-							 ORDER BY agenda.date_debut;");
-		while ($row = spip_fetch_array($res)){
-			if (!isset($visu_evenements[$row['id_agenda']])){
-				PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_concerne);
-				$visu_evenements[$row['id_agenda']]=1;
-			}
-		}
-	
-		// TBD : tous les evenements publies pour le visiteur logge
-		// en attendant : tous les evenements restants, non prives
-		$res = spip_query("SELECT * 
-								FROM spip_pim_agenda AS agenda
-					 LEFT JOIN spip_pim_agenda_auteurs AS auteur ON agenda.id_agenda=auteur.id_agenda 
-							 WHERE auteur.id_auteur!=$id_auteur
-							 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin')
-							 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
-							 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
-							 	 AND agenda.prive!='oui'
-							 ORDER BY agenda.date_debut;");
-		while ($row = spip_fetch_array($res)){
-			if (!isset($visu_evenements[$row['id_agenda']])){
-				PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_info);
-				$visu_evenements[$row['id_agenda']]=1;
-			}
-		}
+		}		
 	}
 	
 	global $spip_ecran;
