@@ -38,6 +38,13 @@
 				ecrire_meta($nom_meta_base_version,$current_version='0.12','non');
 				echo 'upgrade PIM Agenda@0.12';
 			}
+			if (version_compare($current_version,'0.13','<')){
+				include_spip('base/create');
+				include_spip('base/abstract_sql');
+				creer_base();
+				ecrire_meta($nom_meta_base_version,$current_version='0.13','non');
+				echo 'upgrade PIM Agenda@0.13';
+			}
 
 			ecrire_metas();
 		}

@@ -97,43 +97,22 @@ return false;"><img src='#CHEMIN{'img_pack/croix.png'}' width='12' height='12' s
 		</select>
 	</BOUCLE_groupes>
 	</div>
-
-	<script type='text/javascript'><!--
-	function ajoute_auteur(node,id_auteur,name){
-		var cible = $(node).parent().parent().parent().children('.liste_auteurs');
-		var virgule = cible.children().length ?"<span class='virgule'>, </span>":"";
-		var html = "<span class='auteur' id='"+name+id_auteur+"'><input type='hidden' name='"+name+"[]' value='"+id_auteur+"' />"
-			+virgule+$(node).html()
-			+'<a href="#" onclick="return remove_auteur(this);">'
-			+"<img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' />"
-			+"</a>"
-		+"</span>";
-		cible.append(html);
-		return false;
-	}
-	function remove_auteur(node){
-		var cible=$(node).parent();
-		var liste=cible.parent();
-		cible.remove();
-		liste = liste.children('span.auteur');
-		if (liste.length) liste.eq(0).children('span.virgule').remove();
-		return false;
-	}
-	//-->	</script>
 	[(#REM) ORGANISATEUR ]
 	<div class='champ champ_organisateur'>
 		<label for='auteur-titre'><a href='#' 
 		onclick="$(this).parent().siblings('.selecteur_auteur').toggle();return false;"
 		><img src='#EVAL{_DIR_IMG_PACK}/noeud_plus.gif' width='16' height='16' /></a><:pimagenda:organisateur_descriptif:> :</label>
-		<div class='liste_auteurs'>
-		<BOUCLE_orga(AUTEURS spip_pim_agenda_auteurs){pim_agenda_actif}{tout}{id_agenda=#ENV{id_agenda}}><span 
-		class='auteur' id='orga_A#ID_AUTEUR'><input type='hidden' name='orga_A[]' value='#ID_AUTEUR' 
-			/>[(#COMPTEUR_BOUCLE|>{0}|?{<span class='virgule'>, </span>})]#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
+		<div class='liste_elts'>
+		<BOUCLE_orga(AUTEURS spip_pim_agenda_auteurs){tout}{id_agenda=#ENV{id_agenda}}><span 
+		class='elt' id='orga_A#ID_AUTEUR'><input type='hidden' name='orga_A[]' value='#ID_AUTEUR' 
+			/>[(#COMPTEUR_BOUCLE|>{1}|?{'<span class="virgule">, </span>'})]#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
 			/></a></span></BOUCLE_orga>
-		<BOUCLE_orgabis(AUTEURS){pim_agenda_actif}{tout}{id_auteur=#ENV{id_auteur}}><span 
-		class='auteur' id='orga_A#ID_AUTEUR'><input type='hidden' name='organisateur[]' value='#ID_AUTEUR' 
-			/>#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
-			/></a></span></BOUCLE_orgabis><//B_orga></div>
+			[(#REM) mettre l'auteur en cours comme orga par defaut si aucun orga ...]
+			<BOUCLE_orgabis(AUTEURS){tout}{id_auteur=#ENV{id_auteur}}><span 
+			class='elt' id='orga_A#ID_AUTEUR'><input type='hidden' name='orga_A[]' value='#ID_AUTEUR' 
+				/>#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
+				/></a></span></BOUCLE_orgabis>
+		<//B_orga></div>
 		<div class='selecteur_auteur'>[(#INCLURE{fond=formulaires/selecteur_auteurs_groupes}{categorie=orga})]</div>
 	</div>
 
@@ -142,14 +121,21 @@ return false;"><img src='#CHEMIN{'img_pack/croix.png'}' width='12' height='12' s
 		<label for='invite-titre'><a href='#' 
 		onclick="$(this).parent().siblings('.selecteur_auteur').toggle();return false;"
 		><img src='#EVAL{_DIR_IMG_PACK}/noeud_plus.gif' width='16' height='16' /></a><:pimagenda:invites_descriptif:> :</label>
-		<div class='liste_auteurs'>
-			<BOUCLE_invit(AUTEURS spip_pim_agenda_invites){pim_agenda_actif}{tout}{id_agenda=#ENV{id_agenda}}><span 
-			class='auteur' id='invite_A#ID_AUTEUR'><input type='hidden' name='invite_A[]' value='#ID_AUTEUR' 
-				/>[(#COMPTEUR_BOUCLE|>{0}|?{<span class='virgule'>, </span>})]#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
-				/></a></span></BOUCLE_invit></div>
+		<div class='liste_elts'>#SET{cpt,0}
+			<BOUCLE_invit(AUTEURS spip_pim_agenda_invites){tout}{id_agenda=#ENV{id_agenda}}><span #SET{cpt,#GET{cpt}|plus{1}} 
+			class='elt' id='invite_A#ID_AUTEUR'><input type='hidden' name='invite_A[]' value='#ID_AUTEUR' 
+				/>[(#GET{cpt}|>{1}|?{'<span class="virgule">, </span>'})]#NOM<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
+				/></a></span></BOUCLE_invit><BOUCLE_invitg(GROUPES){id_agenda=#ENV{id_agenda}}><span #SET{cpt,#GET{cpt}|plus{1}} 
+			class='elt' id='invite_G#ID_GROUPE'><input type='hidden' name='invite_G[]' value='#ID_GROUPE' 
+				/>[(#GET{cpt}|>{1}|?{'<span class="virgule">, </span>'})][#TITRE]<a href='#' onclick="return remove_auteur(this);"><img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' 
+				/></a></span></BOUCLE_invitg></div>
 		<div class='selecteur_auteur'>[(#INCLURE{fond=formulaires/selecteur_auteurs_groupes}{categorie=invite})]</div>
 	</div>
 	
+	[(#REM) Tables ]
+	[(#INCLURE{fond=formulaires/agenda_connexions_tables}{id_agenda=#ENV{id_agenda}})]
+	
+	<div class='nettoyeur'></div>
   <div class='edition-bouton' style='text-align:#LANG_RIGHT'>
   [(#ENV{modif_auth}|?{' '})
 	  [(#ENV{evenement_action}|=={'evenement_modif'}|?{' ',''})
@@ -165,3 +151,25 @@ return false;"><img src='#CHEMIN{'img_pack/croix.png'}' width='12' height='12' s
   </div>
 	</form>
 </div>
+<script type='text/javascript'><!--
+function ajoute_auteur(node,id_auteur,name){
+	var cible = $(node).parent().parent().parent().children('.liste_elts');
+	var virgule = cible.children().length ?"<span class='virgule'>, </span>":"";
+	var html = "<span class='elt' id='"+name+id_auteur+"'><input type='hidden' name='"+name+"[]' value='"+id_auteur+"' />"
+		+virgule+$(node).html()
+		+'<a href="#" onclick="return remove_auteur(this);">'
+		+"<img class='remove' src='#EVAL{_DIR_IMG_PACK}croix-rouge.gif' width='7' height='7' />"
+		+"</a>"
+	+"</span>";
+	cible.append(html);
+	return false;
+}
+function remove_auteur(node){
+	var cible=$(node).parent();
+	var liste=cible.parent();
+	cible.remove();
+	liste = liste.children('span.elt');
+	if (liste.length) liste.eq(0).children('span.virgule').remove();
+	return false;
+}
+//-->	</script>

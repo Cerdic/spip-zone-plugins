@@ -81,6 +81,29 @@ $tables_principales['spip_pim_agenda_invites']['key'] = array (
 "KEY id_auteur" => "id_auteur"
 );
 
+$tables_principales['spip_pim_agenda_groupes_invites']['field'] = array (
+"id_agenda" => "bigint(21) DEFAULT '0' NOT NULL",
+"id_groupe" => "bigint(21) DEFAULT '0' NOT NULL"
+);
+
+$tables_principales['spip_pim_agenda_groupes_invites']['key'] = array (
+"KEY id_agenda" => "id_agenda",
+"KEY id_groupe" => "id_groupe"
+);
+
+//-- Table de relations FORMS_DONNEES_PIM_AGENDA ----------------------
+$spip_forms_donnees_pim_agenda = array(
+	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"id_agenda" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_forms_donnees_pim_agenda_key = array(
+	"KEY id_donnee" 	=> "id_donnee",
+	"KEY id_agenda" => "id_pim_agenda");
+	
+$tables_auxiliaires['spip_forms_donnees_pim_agenda'] = array(
+	'field' => &$spip_forms_donnees_pim_agenda,
+	'key' => &$spip_forms_donnees_pim_agenda_key);
+
 //-- Table de relations PIM_AGENDA_PUBLIES ----------------------
 /*$tables_principales['spip_pim_agenda_publies']['field'] = array (
 "id_publie" => "bigint(21) DEFAULT '0' NOT NULL",
@@ -127,6 +150,10 @@ $tables_jointures['spip_mots'][]= 'mots_pim_agenda';
 $tables_jointures['spip_pim_agenda'][] = 'mots_pim_agenda';
 $tables_jointures['spip_auteurs'][] = 'auteurs_groupes';
 $tables_jointures['spip_groupes']['id_auteur'] = 'auteurs_groupes';
+$tables_jointures['spip_groupes'][] = 'pim_agenda_groupes_invites';
+$tables_jointures['spip_pim_agenda'][] = 'pim_agenda_groupes_invites';
+$tables_jointures['spip_pim_agenda'][] = 'forms_donnees_pim_agenda';
+$tables_jointures['spip_forms_donnees'][] = 'forms_donnees_pim_agenda';
 
 global $exceptions_des_tables;
 $exceptions_des_tables['pim_agenda']['id_rubrique']=array('spip_articles', 'id_rubrique');
@@ -146,6 +173,7 @@ $table_des_tables['pim_agenda_auteurs']='pim_agenda_auteurs';
 $table_des_tables['pim_agenda_invites']='pim_agenda_invites';
 $table_des_tables['groupes']='groupes';
 $table_des_tables['auteurs_groupes']='auteurs_groupes';
+$table_des_tables['pim_agenda_groupes_invites']='pim_agenda_groupes_invites';
 
 
 // Extension de la table des groupes de mots cles

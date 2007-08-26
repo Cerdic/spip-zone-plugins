@@ -84,7 +84,7 @@ function PIMAgenda_formulaire_groupes($table, $id_objet, $nouv_groupe, $supp_gro
 		$url_base = ($GLOBALS['spip_version_code']>1.92)?"auteur_infos":"auteurs_edit";
 	}
 
-	list($nombre_groupes) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_groupes AS groupes, spip_groupes_$table AS lien WHERE lien.$id_table=$id_objet AND groupes.id_groupe=lien.id_groupe"),SPIP_NUM);
+	list($nombre_groupes) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_groupes AS groupes, spip_{$table}_groupes AS lien WHERE lien.$id_table=$id_objet AND groupes.id_groupe=lien.id_groupe"),SPIP_NUM);
 
 	$out .= "<a name='groupes'></a>";
 	if ($flag_editable){
@@ -107,10 +107,10 @@ function PIMAgenda_formulaire_groupes($table, $id_objet, $nouv_groupe, $supp_gro
 	//
 	if ($nouveaux_groupes && $flag_editable) {
 		while ((list(,$nouv_groupe) = each($nouveaux_groupes)) AND $nouv_groupe!='x') {
-			$query = "SELECT * FROM spip_groupes_$table WHERE id_groupe=$nouv_groupe AND $id_table=$id_objet";
+			$query = "SELECT * FROM spip_{$table}_groupes WHERE id_groupe=$nouv_groupe AND $id_table=$id_objet";
 			$result = spip_query($query);
 			if (!spip_num_rows($result)) {
-				$query = "INSERT INTO spip_groupes_$table (id_groupe,$id_table) VALUES ($nouv_groupe, $id_objet)";
+				$query = "INSERT INTO spip_{$table}_groupes (id_groupe,$id_table) VALUES ($nouv_groupe, $id_objet)";
 				$result = spip_query($query);
 			}
 		}
@@ -122,7 +122,7 @@ function PIMAgenda_formulaire_groupes($table, $id_objet, $nouv_groupe, $supp_gro
 			$groupes_supp = "";
 		else
 			$groupes_supp = " AND id_groupe=$supp_groupe";
-		$query = "DELETE FROM spip_groupes_$table WHERE $id_table=$id_objet $groupes_supp";
+		$query = "DELETE FROM spip_{$table}_groupes WHERE $id_table=$id_objet $groupes_supp";
 
 		$result = spip_query($query);
 		$reindexer = true;
@@ -134,7 +134,7 @@ function PIMAgenda_formulaire_groupes($table, $id_objet, $nouv_groupe, $supp_gro
 
 	unset($les_groupes);
 
-	$query = "SELECT groupes.* FROM spip_groupes AS groupes, spip_groupes_$table AS lien WHERE lien.$id_table=$id_objet AND groupes.id_groupe=lien.id_groupe ORDER BY groupes.titre";
+	$query = "SELECT groupes.* FROM spip_groupes AS groupes, spip_{$table}_groupes AS lien WHERE lien.$id_table=$id_objet AND groupes.id_groupe=lien.id_groupe ORDER BY groupes.titre";
 	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {

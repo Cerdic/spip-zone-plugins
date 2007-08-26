@@ -15,4 +15,12 @@ if (!defined('_DIR_PLUGIN_PIMAGENDA')){
 	define('_DIR_PLUGIN_PIMAGENDA',(_DIR_PLUGINS.end($p)));
 }
 include_spip('base/pim_agenda');
+function autoriser_pimagenda_modifier($faire, $quoi, $id, $qui, $opt) {
+	if ($qui['statut'] == '0minirezo' && !$qui['restreint']) return true;
+	$res = spip_query("SELECT id_auteur FROM spip_pim_agenda_auteurs WHERE id_agenda="._q($id)." AND id_auteur="._q($qui['id_auteur']));
+	if (spip_fetch_array($res))
+		return true;
+	return false;
+}
+
 ?>
