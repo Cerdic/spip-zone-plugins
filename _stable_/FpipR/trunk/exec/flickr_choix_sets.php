@@ -74,10 +74,10 @@ function exec_flickr_choix_sets() {
 	  include_spip('base/abstract_sql');
 	  global $table_prefix;
 	  spip_query("UPDATE ".$table_prefix."_auteurs SET flickr_nsid = '', flickr_token = '' WHERE id_auteur=$connect_id_auteur");
-	  echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur)));
+	  echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteur_infos','id_auteur='.$connect_id_auteur)));
 	}
   } else {
-	echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur)));
+	echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteur_infos','id_auteur='.$connect_id_auteur)));
   }
   echo '<br/>';
   if(_request('type') == 'article') {
