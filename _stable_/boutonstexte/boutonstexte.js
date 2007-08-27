@@ -91,8 +91,20 @@ boutonsTexte.prototype.fontBigger = function(elt)
 	var that = this;
 	var work = elt ? jQuery(elt).parent().next() : jQuery(this.selector);
 	work.each(function(){
-		var m = jQuery(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
-		this.style.fontSize = (that.rate * parseFloat(m[1])) + m[2];
+		// avec IE : 
+		// passer par un wrapper dans le .texte car le texte peut avoir
+		// un font-size:small qu'on ne peut multiplier brutalement
+		wrap = jQuery(this);
+		if (jQuery.browser.msie) {
+			var wrap=jQuery(this).children('.fontwrap');
+			if (!wrap.length) {
+				jQuery(this).html("<span class='fontwrap' style='font-size:100%'>"
+					+jQuery(this).html()+"</span>");
+				var wrap=jQuery(this).children('.fontwrap');
+			}
+		}
+		var m = wrap.css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
+		wrap.css('fontSize', (that.rate * parseFloat(m[1])) + m[2]);
 	});
 }
 boutonsTexte.prototype.fontSmaller = function(elt)
@@ -100,8 +112,20 @@ boutonsTexte.prototype.fontSmaller = function(elt)
 	var that = this;
 	var work = elt ? jQuery(elt).parent().next() : jQuery(this.selector);
 	work.each(function(){
-		var m = jQuery(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
-		this.style.fontSize = (parseFloat(m[1]) / that.rate) + m[2];
+		// avec IE : 
+		// passer par un wrapper dans le .texte car le texte peut avoir
+		// un font-size:small qu'on ne peut multiplier brutalement
+		wrap = jQuery(this);
+		if (jQuery.browser.msie) {
+			var wrap=jQuery(this).children('.fontwrap');
+			if (!wrap.length) {
+				jQuery(this).html("<span class='fontwrap' style='font-size:100%'>"
+					+jQuery(this).html()+"</span>");
+				var wrap=jQuery(this).children('.fontwrap');
+			}
+		}
+		var m = wrap.css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
+		wrap.css('fontSize' , (parseFloat(m[1]) / that.rate) + m[2]);
 	});
 }
 
