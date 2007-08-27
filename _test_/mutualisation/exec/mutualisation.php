@@ -1,21 +1,29 @@
 <?php
 
-	// remonter l'arborescence jusqu'a trouver la racine du site
-	$profondeur=0;
-	while (!file_exists('ecrire/inc_version.php')
-	AND $profondeur++ < 4)
-		chdir('..');
-	require 'ecrire/inc_version.php';
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function exec_mutualisation_dist() {
+	global $auteur_session;
+
 	include_spip('inc/minipres');
 	include_spip('inc/filtres');
 
-	// pas admin ? passe ton chemin (ce script est un vilain trou de securite)
+	// pas admin ? passe ton chemin
 	if ( ($auteur_session['statut'] != '0minirezo') and ( $_SERVER["REMOTE_ADDR"]!='127.0.0.1'))
 		die('pas admin !');
 
+	// Dans quel site sommes-nous ?
+	$notre_spip = basename(dirname(_DIR_TMP));
+
+	// Si ce n'est pas un site maitre, le dire
+	if (defined('_SITES_ADMIN_MUTUALISATION')
+	AND !in_array($notre_spip, explode(',',_SITES_ADMIN_MUTUALISATION))) {
+		die (_L("Pour acceder a cette page d'admin, veuillez inscrire @site@ dans la constante _SITES_ADMIN_MUTUALISATION", array('site' => $notre_spip)));
+	}
+
 	$sites = array();
-	foreach(preg_files('sites', '.*/config/connect.php') as $s) {
-		$sites[] = preg_replace(',^sites/(.*)/config/connect.php,', '\1', $s);
+	foreach(preg_files('../sites/', '.*/config/connect.php') as $s) {
+		$sites[] = preg_replace(',^\.\./sites/(.*)/config/connect.php,', '\1', $s);
 	}
 	sort($sites);
 
@@ -34,16 +42,19 @@
 
 	$nsite = 1;
 	foreach ($sites as $v) {
-		if (lire_fichier('sites/'.$v.'/tmp/meta_cache.txt', $meta)
+		if (lire_fichier(_DIR_RACINE.'sites/'.$v.'/tmp/meta_cache.txt', $meta)
 		AND is_array($meta = @unserialize($meta))
 		AND $url = $meta['adresse_site']) {
 			$url .= '/';
 			$nom_site = sinon($meta['nom_site'], $v);
+			$erreur = '';
 		}
-		else
+		else {
 			$url = 'http://'.$v.'/';
+			$erreur = ' (erreur!)';
+		}
 		$page .= "<tr class='tr". $nsite % 2 ."'>
-			<td>$v</td>
+			<td>$v$erreur</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
 			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>stats</a></td>
@@ -65,7 +76,7 @@
 		</head>
 		', $page);
 
-	echo str_replace('<head>', '<head>
-		<base href="'.url_absolue(str_repeat('../', $profondeur)).'" />', $page);
+	echo $page;
+}
 
 ?>

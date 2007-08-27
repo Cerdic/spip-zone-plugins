@@ -16,6 +16,10 @@
 	define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));
 	define ('_INSTALL_TABLE_PREFIX', 'spip');
 
+	// inscrire ici le nom du site d'administration du tableau de bord
+	// de la mutualisation (ou plusieurs, separes par des virgules)
+	define ('_SITES_ADMIN_MUTUALISATION', 'www.scriibe.net');
+
 	demarrer_site($site,
 		array(
 			'creer_site' => true,
