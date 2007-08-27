@@ -47,6 +47,6 @@ and the [introduction article on spip-contrib->http://www.spip-contrib.net/Le-pl
   </fonctions>
   <install>base/FpipR_upgrade.php</install>
   <necessite id='cfg' version='[1.0.3;]' />
-  <necessite id='SPIP' version='[1.9207;]' />
+  <necessite id='SPIP' version='[1.9206;]' />
   <necessite id='tag_machine' version='[0.1;]' />
 </plugin>
