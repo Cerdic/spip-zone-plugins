@@ -59,9 +59,6 @@ function gis_affichage_final($flux){
                 $(document).unload(function(){
                 	Gunload();
                 });
-                $(document).unload(function(){
-                	Gunload();
-                });
                 </script>';
         return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
     } else {
