@@ -4,8 +4,8 @@
 	}
 	//<![CDATA[
 	URLbase = "#URL_SITE_SPIP/";
-	var map;
-	var markerManager;
+	var map#ENV{id_carte_gis};
+	var markerManager#ENV{id_carte_gis};
 	<BOUCLE_centrado(GIS){id_article?}{id_rubrique ?}{0,1}>
 	#SET{latitude,#ENV{latit,#LAT}}
 	#SET{lonxitude,#ENV{lonxit,#LONX}}
@@ -17,18 +17,18 @@
 	[(#ENV{type}|=={'carte'}|?{#SET{type,G_NORMAL_MAP},''})]
 	[(#ENV{type}|=={'hybride'}|?{#SET{type,G_HYBRID_MAP},''})]
 	[(#ENV{type}|=={''}|?{#SET{type,G_SATELLITE_MAP},''})]
-	function load() {
+	function load#ENV{id_carte_gis}() {
 		if (GBrowserIsCompatible()) {
 			// facelo mapa
-			map = new GMap2(document.getElementById("map#ENV{id_carte_gis}"));
-    		map.addControl(new mapTypeControl());
-			map.addControl(new mapZoomControl());
-			map.addControl(new mapMoveControl());
-    		map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, #GET{type});
-    		center = map.getCenter();
-    		map.enableDoubleClickZoom();
-    		map.enableContinuousZoom();
-    		markerManager = new GMarkerManager(map);
+			map#ENV{id_carte_gis} = new GMap2(document.getElementById("map#ENV{id_carte_gis}"));
+    		map#ENV{id_carte_gis}.addControl(new mapTypeControl());
+			map#ENV{id_carte_gis}.addControl(new mapZoomControl());
+			map#ENV{id_carte_gis}.addControl(new mapMoveControl());
+    		map#ENV{id_carte_gis}.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, #GET{type});
+    		center = map#ENV{id_carte_gis}.getCenter();
+    		map#ENV{id_carte_gis}.enableDoubleClickZoom();
+    		map#ENV{id_carte_gis}.enableContinuousZoom();
+    		markerManager#ENV{id_carte_gis} = new GMarkerManager(map#ENV{id_carte_gis});
 			<BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>
 			[(#ENV{id_article}|=={''}|?{'',
 			var kml = new GGeoXml("#URL_SITE_SPIP/#URL_DOCUMENT");
@@ -43,18 +43,21 @@
 			</BOUCLE_kml_rub>
 			<//B_kml_art>
   			//leemo-lo documento dos marcadores
-       			$.get('[(#URL_PAGE{rss-gis})]', {[id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml){
+       			$.get('[(#URL_PAGE{rss-gis})]', {[id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml#ENV{id_carte_gis}){
     				//xml almacena en un objeto xml los datos recogidos del documento leido
-    				$("item", xml).each(function(item){
-    					/*primero buscamos dentro del objeto xml almacenado en xml todos los nodos "item", el contenido de cada nodo "item" del documento xml
-    					se almacena en la variable xmlItem (*en la variable item se almacena la posicion del "item" actual en el array de items y asi podemos
-    					recorrerlos con facilidad)*/
-    					var xmlItem = xml.documentElement.getElementsByTagName("item")[item];
-   						agregarMarcador(xmlItem, 0);
+    				$("item", xml#ENV{id_carte_gis}).each(function(item#ENV{id_carte_gis}){;
+    					var xmlItem#ENV{id_carte_gis} = xml#ENV{id_carte_gis}.documentElement.getElementsByTagName("item")[item#ENV{id_carte_gis}];
+    					
+   						agregarMarcador(xmlItem#ENV{id_carte_gis}, 0, 0, markerManager#ENV{id_carte_gis});
+   						
 					});
-					markerManager.refresh();
+					markerManager#ENV{id_carte_gis}.refresh();
    				});
+   				
    			}
 		}
+		$(document).ready(function(){
+			load#ENV{id_carte_gis}();
+		})
 	//]]>
 	</script>

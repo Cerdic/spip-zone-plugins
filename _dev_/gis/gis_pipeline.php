@@ -56,8 +56,8 @@ function gis_affichage_final($flux){
 		<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>
 		<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
         $incHead .= '<script type="text/javascript">
-                $(document).ready(function() {
-                    load();
+                $(document).unload(function(){
+                	Gunload();
                 });
                 $(document).unload(function(){
                 	Gunload();
