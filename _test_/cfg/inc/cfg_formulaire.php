@@ -107,7 +107,7 @@ class cfg_formulaire
 		$fond_compile = recuperer_fond('fonds/cfg_' . $this->vue);
 
 		if (!preg_match_all(
-		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
+		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio|hidden)") name="(\w+)(\[\])?"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?( multiple=)?[^>]*?>#ims',
 						$fond_compile, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
