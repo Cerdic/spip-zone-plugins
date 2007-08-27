@@ -18,11 +18,17 @@ $abo_libelle = _request('abo_libelle');
 $abo_montant = _request('abo_montant');
 	$abo_montant = str_replace(',','.',$abo_montant); // On accepte que les points.
 $abo_duree = _request('abo_duree');
+$abo_unitee = _request('abo_unitee');
 $abo_commentaire = _request('abo_commentaire');
 $id_abonnement = _request('id_abonnement');
 
 if($abo_libelle AND ( intval($abo_montant) OR $abo_montant == '0' )  AND intval($abo_duree) AND _request('valider'))
 {
+	if($abo_unitee=='mois') {
+		$abo_duree = $abo_duree*30;
+	} else if($abo_unitee=='annee') {
+		$abo_duree = $abo_duree*365;
+	}
 spip_query("INSERT INTO spip_abonnements (libelle,duree,montant,commentaire) VALUES ("._q($abo_libelle).","._q($abo_duree).","._q($abo_montant).","._q($abo_commentaire) .")");
 include_spip('inc/headers');
 redirige_par_entete(generer_url_ecrire("abonnement_tous"));
@@ -31,6 +37,11 @@ elseif(_request('valider')) echo "erreur : les valeurs ne conviennent pas";
 
 if($abo_libelle AND ( intval($abo_montant) OR $abo_montant == '0' ) AND intval($abo_duree) AND _request('modifier'))
 {
+	if($abo_unitee=='mois') {
+		$abo_duree = $abo_duree*30;
+	} else if($abo_unitee=='annee') {
+		$abo_duree = $abo_duree*365;
+	}
 spip_query("UPDATE spip_abonnements SET libelle="._q($abo_libelle).",duree="._q($abo_duree).",montant="._q($abo_montant).",commentaire="._q($abo_commentaire)." WHERE id_abonnement="._q($id_abonnement) );
 include_spip('inc/headers');
 redirige_par_entete(generer_url_ecrire("abonnement_tous"));
