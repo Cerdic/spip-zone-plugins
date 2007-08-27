@@ -22,7 +22,7 @@ function spip_thelia_appeler_moteur_thelia($texte)
 
 	include_once("fonctions/substitutions.php");
 
-	if ($version_thelia == "1_3_2Pre1")
+	if (($version_thelia == "1_3_2Pre1") || ($version_thelia == "1_3_1"))
 	{
 		include_once("fonctions/filtres.php");
 	}
@@ -39,7 +39,7 @@ function spip_thelia_appeler_moteur_thelia($texte)
 	include_once("classes/Promo.class.php");
 	include_once("classes/Perso.class.php");
 	include_once("classes/Smtp.class.php");
-	if ($version_thelia == "1_3_2Pre1")
+	if (($version_thelia == "1_3_2Pre1") || ($version_thelia == "1_3_1"))
 	{
 		include_once("classes/Cache.class.php");
 	
@@ -149,7 +149,10 @@ function analyse($res){
 	if(!isset($securise)) $securise=0;
 	if(!isset($transport)) $transport=0;
 	if(!isset($panier)) $panier=0;
-	if(!isset($vpaiement)) $vpaiement=0;	
+	if (($version_thelia == "1_2_2")||($version_thelia == "1_3_1"))
+	{
+		if(!isset($vpaiement)) $vpaiement=0;	
+	}
 	if(!isset($pageret)) $pageret=0;	
 	if(!isset($reset)) $reset=0;	
 
@@ -239,11 +242,19 @@ function analyse($res){
 	if(!isset($_REQUEST['motdepasse'])) $motdepasse=""; else $motdepasse=$_REQUEST['motdepasse'];	
 	if(!isset($_REQUEST['adresse'])) $adresse=""; else $adresse=$_REQUEST['adresse'];	
 	if(!isset($_REQUEST['id_rubrique'])) $id_rubrique=""; else $id_rubrique=$_REQUEST['id_rubrique'];	
-	if(!isset($_REQUEST['id_dossier'])) $id_dossier=""; else $id_dossier=$_REQUEST['id_dossier'];	
+	if ($version_thelia == "1_3_2Pre1")
+	{
+		if(!isset($_REQUEST['id_dossier'])) $id_dossier=""; else $id_dossier=$_REQUEST['id_dossier'];	
+	}
 	if(!isset($_REQUEST['page'])) $page=""; else $page=$_REQUEST['page'];	
 	if(!isset($_REQUEST['totbloc'])) $totbloc=""; else $totbloc=$_REQUEST['totbloc'];	
 	if(!isset($_REQUEST['id_contenu'])) $id_contenu=""; else $id_contenu=$_REQUEST['id_contenu'];	
 	if(!isset($_REQUEST['caracdisp'])) $caracdisp=""; else $caracdisp=$_REQUEST['caracdisp'];	
+	
+	if ($version_thelia == "1_3_1")
+	{
+		if(!isset($_REQUEST['rt75'])) $rt75=""; else $rt75=$_REQUEST['rt75'];	
+	}
 	if(!isset($_REQUEST['reforig'])) $reforig=""; else $reforig=$_REQUEST['reforig'];	
 	
 		if(!isset($_REQUEST['motcle'])) $motcle=""; else $motcle=$_REQUEST['motcle'];	
@@ -362,7 +373,7 @@ function analyse($res){
 	// VŽrif panier
 	if($panier && ! $_SESSION["navig"]->panier->nbart) { header("Location: index.php"); exit; } 
 	
-    	if ($version_thelia == "1_2_2")
+    	if (($version_thelia == "1_2_2") || ($version_thelia == "1_3_1"))
 	{
 		// Paiement
 		if($vpaiement && ! strstr( $_SESSION["navig"]->urlprec, "paiement.php")) header("Location: index.php");
@@ -370,7 +381,6 @@ function analyse($res){
 	else
 	{
 		// fonctions à éxecuter avant le moteur
-	modules_fonction("pre");
 		modules_fonction("pre");
 	}
 	// chargement du squelette	
@@ -421,23 +431,24 @@ function analyse($res){
 	
 		if($parsephp == 1){
     	
-		$res=str_replace('<'.'?php','<'.'?',$res);
+			$res=str_replace('<'.'?php','<'.'?',$res);
     	
-		$res='?'.'>'.trim($res).'<'.'?';
+			$res='?'.'>'.trim($res).'<'.'?';
     	
-		$res = eval($res);
-	}
+			$res = eval($res);
+		}
 	
     
-		$res = filtres($res);
+		if ($version_thelia == "1_3_2Pre1")
+		{
+			$res = filtres($res);
 
+			// inclusions des plugins filtres
 	
-		// inclusions des plugins filtres
-	
-		modules_fonction("post");
-	
-	
-		echo $res;
+			modules_fonction("post");
+		}
+			echo $res;
+		
 	}
 	
 	// Reset de la commande
