@@ -1,7 +1,6 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/extra_plus');
 include_spip('inc/autoriser');
 
 function action_spiplistes_changer_statut_abonne_dist()
@@ -20,7 +19,6 @@ function action_spiplistes_changer_statut_abonne_dist()
 		if (autoriser('statutabonement','auteur',$id_auteur))
 		if(($statut=='html') OR ($statut=='texte') OR ($statut=='non')){
 		spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`="._q($statut)." WHERE `id_auteur`=$id_auteur");		
-		//var_dump($abo);die("coucou");
 		}
 	}
 	if ($action=='listeabo'){
@@ -31,11 +29,11 @@ function action_spiplistes_changer_statut_abonne_dist()
 			$result=spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($id_liste));
 			$result=spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($id_liste).")");
 			//attribuer un format de reception si besoin (ancien auteur)
-			$extra_format=get_extra($id_auteur,"auteur");
-			if(!$extra_format["abo"]){
-				$extra_format["abo"] = "html";
-				set_extra($id_auteur,$extra,'auteur');
+			$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`='$id_auteur'")) ;		
+			if(!$abo){
+			$ok = spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`='html' WHERE id_auteur="._q($id_auteur));
 			}
+									
 		}
 	}
 	if ($action=='listedesabo'){
