@@ -24,8 +24,8 @@
 	$page = "<table>
 	<thead>
 		<tr>
-			<td>Domaine</td>
-			<td>Nom site</td>
+			<td>Site</td>
+			<td>Nom</td>
 			<td>ecrire</td>
 			<td>Stats</td>
 		</tr>
