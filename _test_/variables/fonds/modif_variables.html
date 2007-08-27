@@ -1,0 +1,97 @@
+<:variables:vars_desc:>
+
+<br /><br />
+
+
+<form name="formulario" method="post" action="#SELF" onSubmit="return confirmation()">
+
+	<div>
+		[(#ENV{_cfg_}|form_hidden)]
+				</div>
+	
+	<fieldset>
+		<legend>
+			<:variables:liste_vars:>
+		</legend>
+
+
+<?php
+	foreach (lire_config('variables') as $clef => $val) {
+	
+		// on lit les infos sur les variables et on stocke tout dans un tablea à 2 dimensions
+		list ($name, $id) = split('____',$clef);
+		
+		if ($clef != 'compteur') {
+			$vars[$id][$name] = $val;
+		}
+	}
+	
+	$noElts =  true ;
+	// on construit maintenant 	les blocs de chauqe variable
+	if (count($vars) > 0) {
+		foreach ($vars as $key => $val) {
+
+			if ( $val['desact'] != 'true') {
+				$noElts = false;
+?>
+				<div class="cadre-e-noir" style="margin-top: 14px;">
+					<div class="cadre-e">
+						<div style="position: relative;">
+							<div style="position: absolute; top: -16px; left: 10px;">
+								<img src="../dist/images/auteur-24.gif" alt="">
+							</div>
+							<div class="cadre-titre" style="margin: 0px; padding-left: 38px;">
+								<img id="trianglevariable-<?=$key?>" src="../dist/images/deplierhaut.gif" alt="Déplier" title="Déplier" class="swap-couche" onclick="swap_couche('variable-<?=$key?>','','../dist/images/',0);">
+								<?=$val['name']?>&nbsp;&nbsp;
+							</div>
+						</div>
+						<div class="cadre-padding" style="overflow: hidden;">
+							<div id="Layervariable-<?=$key?>" style="display: none;">
+								<!-- nom de la variable -->
+								<label><:variables:name_var:></label>
+								<input type="text" name="name____<?=$key?>" value="<?=$val['name']?>" size="50">
+								<br>
+					
+								<!-- nom de la variable -->
+								<label><:variables:value_var:></label>
+								<input type="text" name="value____<?=$key?>" value="<?=$val['value']?>" size="50">
+								<br>
+					
+								<!-- descriptif de la variable -->
+								<label><:variables:descriptif_var:></label>
+								<textarea name="descriptif____<?=$key?>" cols="50" rows="5"><?=$val['descriptif']?></textarea>
+								<br>
+								<div style="float:#LANG_RIGHT; margin: 3px;">
+									<input type="button" id="label_<?=$key?>" onclick="changeValue('<?=$key?>')" value="<:variables:desac_var:>" class="fondo">&nbsp;&nbsp;
+									<input type="hidden" name="desact____<?=$key?>" id="desact____<?=$key?>" value="false">
+									<input type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+								</div>
+								<div style="clear: both;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+<?php
+			}
+		}
+	} 
+	
+	if ($noElts) {
+?>	
+			<br><div align="center"><:variables:no_elts:></div>
+<?php		
+	}
+?>
+
+
+			
+			
+</fieldset>
+
+	<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+	<br/><br/>
+	Si vous souhaitez <strong>effacer toutes les variables</strong>, vous pouvez cliquer sur le bouton suivant (Attention, cette action est irréversible !!).
+	<input type="submit" name="_cfg_delete" value="Réinitialiser" class="fondo" onClick="initActive();"/>
+
+</form>

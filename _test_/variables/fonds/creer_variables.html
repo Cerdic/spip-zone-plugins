@@ -1,0 +1,59 @@
+<:variables:vars_desc:>
+
+<?php
+	$compteur = '#CONFIG{variables/compteur}';
+	
+	if ($compteur == '') {
+		$compteur = 0;
+	} else {
+		$compteur++;
+	}
+?>
+
+
+
+<form name="formulario" method="post" action="#SELF" onSubmit="return creation(this, '<?=$compteur?>')">
+
+	<div>
+		[(#ENV{_cfg_}|form_hidden)]
+	</div>
+	
+	<fieldset>
+		<legend>
+			<:variables:create_vars:>
+		</legend>
+	
+	
+		<div>
+			<label>
+				<:variables:name_var:>
+			</label>
+			<br>
+			<input type="text" name="name____<?=$compteur?>" size="50">
+			<br> <strong><:variables:attention:></strong>
+			<br><br>
+			
+			<label>
+				<:variables:value_var:>
+			</label>
+			<br>
+			<input type="text" name="value____<?=$compteur?>" size="50">
+			
+			<br><br>
+			
+			<label>
+				<:variables:descriptif_var:>
+			</label>
+			<br>
+			<textarea name="descriptif____<?=$compteur?>" cols="50" rows="5"></textarea>
+			
+		</div>
+		
+		<input type="hidden" name="desact____<?=$compteur?>" value="false">
+		<input type="hidden" name="compteur" value="<?= $compteur ?>">
+		
+	</fieldset>
+
+	<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+</form>
+<br><br>

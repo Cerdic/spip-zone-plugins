@@ -1,0 +1,132 @@
+﻿[(#REM) titre=Les variables]
+[(#REM) boite=Gestion des variables]
+[(#REM) icone=images/variables_icone.png]
+[(#REM) liens*=crayons]
+[(#REM) liens*=tables]
+
+
+[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../images/variables.png' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
+
+<!-- descriptif= 
+	[(#GET{logo})] Ce plugin permet de gérer des variables supplémentaires dans la table spip_meta.<br><br>
+-->
+<?php
+	$creation = ($_GET['srub'] != 'desact');
+?>
+
+
+#CACHE{0}
+
+<script type="text/javascript">
+
+	var initialisation = false;
+	
+	function changeValue(id) {
+		
+		var elt = document.getElementById('desact____'+id);
+		if (elt.value == 'true') {
+			document.getElementById('desact____'+id).value = 'false';
+			document.getElementById('label_' + id).value = '<:variables:desac_var:>';
+		} else {
+			document.getElementById('desact____'+id).value = 'true';
+			document.getElementById('label_' + id).value = '<:variables:ac_var:>';
+		}
+	
+	}
+	
+	
+	function confirmation() {
+		if (initialisation) {
+			var response = confirm('Etes-vous sûr de vouloir effacer toutes les variables (attention, cette action est irréversible !!) ? ');
+			if (response) {
+				return true;
+			}
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function initActive() {
+		initialisation = true;
+	}
+	
+	
+	function creation(oForm,id) {
+	
+		if (oForm['name____'+id].value == '') {
+			alert('Veuillez saisir un nom pour la variable.');
+		
+			return false;
+		}
+		
+		return true;
+	}
+
+</script>
+
+
+
+	<?php
+		if ($creation) {
+	?>
+		Si vous voulez voir les variables désactivées, <a href="#URL_SITE_SPIP/ecrire/?exec=cfg&cfg=variables&srub=desact">cliquez ici</a>
+		
+	<?php
+		} else {
+	?>
+		Si vous voulez créer ou modifier des variables, <a href="#URL_SITE_SPIP/ecrire/?exec=cfg&cfg=variables&srub=modif">cliquez ici</a>
+	<?php
+		}
+	?>
+<br><br>
+
+<div id="container-1">
+	<?php
+		if ($creation) {
+	?>
+		<ul class="tabs-nav">
+			<li class="<?= (_request('srub') == 'modif' || _request('srub') == '') ? 'tabs-selected' : '' ?>"><a href="#URL_SITE_SPIP/ecrire/?exec=cfg&cfg=variables&srub=modif"><span>Modifier</span></a></li>
+			<li class="<?= (_request('srub') == 'creer') ? 'tabs-selected' : '' ?>"><a href="#URL_SITE_SPIP/ecrire/?exec=cfg&cfg=variables&srub=creer"><span>Créer</span></a></li>
+		</ul>
+	<?php
+		}
+	?>
+	<br>
+	
+	<div id="fragment-1">
+		<?php
+			if (_request('srub') == 'modif' || _request('srub') == '') {
+		?>
+				<INCLURE{fond=fonds/modif_variables}{_cfg_=#ENV{_cfg_}}>
+		<?php
+			}
+		?>
+	</div>
+	
+	<div id="fragment-2">
+		<?php
+			if (_request('srub') == 'creer') {
+		?>
+				<INCLURE{fond=fonds/creer_variables}{_cfg_=#ENV{_cfg_}}>
+		<?php
+			}
+		?>
+	</div>
+	
+	
+	<div id="fragment-2">
+		<?php
+			if (_request('srub') == 'desact') {
+		?>
+				<INCLURE{fond=fonds/desact_variables}{_cfg_=#ENV{_cfg_}}>
+		<?php
+			}
+		?>
+	</div>
+	
+	
+</div>
+
+
+
