@@ -7,4 +7,4 @@
 [(#CONFIG**{geomap_googlemapkey,''}|?{' '})
 #SET{cache,http://maps.google.com/maps?file=api&v=2&key=#CONFIG**{geomap_googlemapkey}}
 [(#GET{cache}|recuperer_page|compacte_js)]]
-[(#INCLURE{js/geomap.js}|compacte_js)]
+[(#INCLURE{js/geomap.js})]

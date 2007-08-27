@@ -45,7 +45,7 @@ function creaMarcador(point, html, icon, son) {
 	return marcador;
 }
 
-function agregarMarcador (xmlItem, minZoom,  maxZoom) {
+function agregarMarcador (xmlItem, minZoom,  maxZoom, idmanager) {
 	//almacenamos en distintas variables la informacion contenida nen los chilNodes de cada item-marcador do xml
 	var xmlLat = $("geo_lat",xmlItem);
 	var xmlLng = $("geo_long",xmlItem);
@@ -75,17 +75,20 @@ function agregarMarcador (xmlItem, minZoom,  maxZoom) {
 			
 		// creamos el marcador con los datos almacenados en las variables
 		var marcador = creaMarcador(point, html, icono_categoria, son);
-		
 		// recollemos a informacion que sexa necesaria en distintos arrays, usando como identificador a id do artigo
 		marcadores[id] = marcador;
 		contidosHTML[id] = html;
 		URLsons[id] = son;
-    		
 		//engadimos o marcador ao markerManager antes "map.addOverlay(marker);"
 		if (maxZoom) {
-			markerManager.addMarker(marcador, minZoom,  maxZoom);
-		} else {
-			markerManager.addMarker(marcador, minZoom);
+			if(idmanager){
+				idmanager.addMarker(marcador, minZoom,  maxZoom);
+			}
+			else{
+				markerManager.addMarker(marcador, minZoom,  maxZoom);
+			}
+		} else if (idmanager){
+			idmanager.addMarker(marcador, minZoom);
 		}
 	}	
 }
