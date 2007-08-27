@@ -12,15 +12,6 @@ function exec_mutualisation_dist() {
 	if ( ($auteur_session['statut'] != '0minirezo') and ( $_SERVER["REMOTE_ADDR"]!='127.0.0.1'))
 		die('pas admin !');
 
-	// Dans quel site sommes-nous ?
-	$notre_spip = basename(dirname(_DIR_TMP));
-
-	// Si ce n'est pas un site maitre, le dire
-	if (defined('_SITES_ADMIN_MUTUALISATION')
-	AND !in_array($notre_spip, explode(',',_SITES_ADMIN_MUTUALISATION))) {
-		die (_L("Pour acceder a cette page d'admin, veuillez inscrire @site@ dans la constante _SITES_ADMIN_MUTUALISATION", array('site' => $notre_spip)));
-	}
-
 	$sites = array();
 	foreach(preg_files('../sites/', '.*/config/connect.php') as $s) {
 		$sites[] = preg_replace(',^\.\./sites/(.*)/config/connect.php,', '\1', $s);

@@ -105,6 +105,15 @@ function demarrer_site($site = '', $options = array()) {
 		($e . _NOM_TEMPORAIRES_ACCESSIBLES)
 	);
 
+	// Ajouter le chemin vers l'exec=mutualisation pour le site maitre
+	// et seulement pour lui (pour en mettre plusieurs, les separer par
+	// des virgules).
+	if (_request('exec') === 'mutualisation') {
+		if (!defined('_SITES_ADMIN_MUTUALISATION')
+		OR in_array($site, explode(',',_SITES_ADMIN_MUTUALISATION))) {
+			_chemin(dirname(__FILE__));
+		}
+	}
 }
 
 // Cette fonction cree un prefixe acceptable par MySQL a partir du nom

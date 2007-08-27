@@ -18,6 +18,8 @@
 
 	// inscrire ici le nom du site d'administration du tableau de bord
 	// de la mutualisation (ou plusieurs, separes par des virgules)
+	// Si le site maitre n'est pas dans sites mais a la racine, mettre '';
+	// pour autoriser tous les sites, ne pas definir la constante
 	define ('_SITES_ADMIN_MUTUALISATION', 'www.scriibe.net');
 
 	demarrer_site($site,
