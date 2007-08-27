@@ -6,10 +6,10 @@
 		&#169; Fil 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.1
+		0.2
 	</version>
 	<etat>
-		dev
+		test
 	</etat>
 	<description>
 		Ce plugin contient quelques fonctions facilitant la mutualisation de sites : notamment <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> et <code>mutualiser_creer()</code>.
