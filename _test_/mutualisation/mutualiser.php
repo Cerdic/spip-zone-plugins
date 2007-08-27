@@ -113,6 +113,13 @@ function demarrer_site($site = '', $options = array()) {
 		OR in_array($site, explode(',',_SITES_ADMIN_MUTUALISATION))) {
 			_chemin(dirname(__FILE__));
 		}
+
+		// Si un upgrade est demande dans le site fils, et securise par md5
+		// depuis le panneau de controle, le faire directement
+		if (_request('upgrade') == 'oui') {
+			require dirname(__FILE__).'/mutualiser_upgrade.php';
+			mutualiser_upgrade();
+		}
 	}
 }
 

@@ -38,7 +38,12 @@ function exec_mutualisation_dist() {
 		AND $url = $meta['adresse_site']) {
 			$url .= '/';
 			$nom_site = sinon($meta['nom_site'], $v);
-			$erreur = '';
+
+			// S'il faut upgrader, creer un bouton qui permettra
+			// de faire la mise a jour directement depuis le site maitre
+			// Pour cela, on cree un bouton avec un secret, que mutualiser.php
+			// va intercepter (pas terrible ?)
+			$erreur = test_upgrade_site($meta);
 		}
 		else {
 			$url = 'http://'.$v.'/';
@@ -68,6 +73,23 @@ function exec_mutualisation_dist() {
 		', $page);
 
 	echo $page;
+}
+
+
+function test_upgrade_site($meta) {
+	if ($GLOBALS['spip_version']
+	!= str_replace(',','.',$meta['version_installee'])) {
+		$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
+		$secret = md5($secret);
+		return <<<EOF
+<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post'>
+<input type='hidden' name='secret' value='$secret' />
+<input type='hidden' name='exec' value='mutualisation' />
+<input type='hidden' name='upgrade' value='oui' />
+<input type='submit' value='upgrade site' />
+</form>
+EOF;
+	}
 }
 
 ?>
