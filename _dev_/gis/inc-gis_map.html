@@ -47,8 +47,8 @@
     				//xml almacena en un objeto xml los datos recogidos del documento leido
     				$("item", xml#ENV{id_carte_gis}).each(function(item#ENV{id_carte_gis}){;
     					var xmlItem#ENV{id_carte_gis} = xml#ENV{id_carte_gis}.documentElement.getElementsByTagName("item")[item#ENV{id_carte_gis}];
-    					
-   						agregarMarcador(xmlItem#ENV{id_carte_gis}, 0, 0, markerManager#ENV{id_carte_gis});
+    					var idmap = #ENV{id_carte_gis};
+   						agregarMarcador(xmlItem#ENV{id_carte_gis}, 0, 0, idmap);
    						
 					});
 					markerManager#ENV{id_carte_gis}.refresh();
