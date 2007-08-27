@@ -12,9 +12,8 @@ function boucle_FLICKR_GROUPS_POOLS_GETPHOTOS_dist($id_boucle, &$boucles) {
 
   $possible_extras = array('license', 'owner_name', 'icon_server', 'original_format', 'last_update');
 
-  $arguments = FpipR_utils_search_args_extras($boucle,$id_table,$possible_args,$possible_extras);
-
-  $arguments = array($arguments,FpipR_utils_search_criteres($boucle,$possible_criteres,$boucles,$id_boucle));
+  $arguments = array_merge(FpipR_utils_search_args_extras($boucle,$id_table,$possible_args,$possible_extras),
+FpipR_utils_search_criteres($boucle,$possible_criteres,$boucles,$id_boucle));
 
   $boucle->hash = FpipR_utils_calculer_hash('flickr.groups.pools.getPhotos',$arguments,$boucle);
   return calculer_boucle($id_boucle, $boucles); 
