@@ -3,14 +3,14 @@
 
 function spip_thelia_appeler_moteur_thelia($texte)
 {
-	?>
-<?php
-foreach ($_POST as $key => $value) $$key = $value;
-foreach ($_GET as $key => $value) $$key = $value;
-?>
-<?php
+	if (!function_exists('lire_config')) {
+		return ("Erreur : plugin CFG non install&eacute;".$texte);
+	}		
+	foreach ($_POST as $key => $value) $$key = $value;
+	foreach ($_GET as $key => $value) $$key = $value;
 	
-	$version_thelia = "1.3";
+	$version_thelia = lire_config('spip_thelia/version_thelia_spip_thelia', "1_3_2Pre1");
+
 	
 	include_once("classes/Navigation.class.php");
 
@@ -20,10 +20,9 @@ foreach ($_GET as $key => $value) $$key = $value;
 	
 	/* Le fichier html associé au php ( fond ) est parsé afin de subsituer les informations au bon endroit */
 
-	//include_once("fonctions/boucles.php");
 	include_once("fonctions/substitutions.php");
 
-	if ($version_thelia == "1.3")
+	if ($version_thelia == "1_3_2Pre1")
 	{
 		include_once("fonctions/filtres.php");
 	}
@@ -40,7 +39,7 @@ foreach ($_GET as $key => $value) $$key = $value;
 	include_once("classes/Promo.class.php");
 	include_once("classes/Perso.class.php");
 	include_once("classes/Smtp.class.php");
-	if ($version_thelia == "1.3")
+	if ($version_thelia == "1_3_2Pre1")
 	{
 		include_once("classes/Cache.class.php");
 	
@@ -51,15 +50,11 @@ foreach ($_GET as $key => $value) $$key = $value;
 	include_once("classes/Produitdesc.class.php");
 	include_once("fonctions/parseur.php");
 	include_once("fonctions/fonctsajax.php");
-	if ($version_thelia == "1.2")
+	if ($version_thelia == "1_2_2")
 	{
 		include_once("client/fonctperso/perso.php");
-		include_once(_DIR_PLUGINS."plugin-thelia/boucles-thelia.php");
 	}
-	else
-	{
-		include_once(_DIR_PLUGINS."plugin-thelia/boucles-thelia-1.3.php");
-	}
+	include_once(_DIR_PLUGINS."plugin-thelia/boucles-thelia-".$version_thelia.".php");
 	
 $racine = $id_rubrique;
 $pageret=1;
@@ -70,7 +65,9 @@ $pageret=1;
 	        include_once("lib/JSON.php");
     
 function analyse($res){
-	if ($version_thelia == "1.2")
+	$version_thelia = lire_config('spip_thelia/version_thelia_spip_thelia', '1_3_2Pre1');
+
+	if ($version_thelia == "1_2_2")
 	{
 		global $formulaire, $sajax;
 	}
@@ -86,7 +83,7 @@ function analyse($res){
 	
 
 	// traitement dans le cas d'un formulaire
-	if ($version_thelia == "1.2")
+	if ($version_thelia == "1_2_2")
 	{
 		if($formulaire) $res = traitement_formulaire($res);
 	}
@@ -138,7 +135,7 @@ function analyse($res){
 	if(!isset($lang)) $lang="";
 	if(!isset($affilie)) $affilie="";
 
-	if ($version_thelia == "1.2")
+	if ($version_thelia == "1_2_2")
 	{
 		if(!isset($action)) $action="";
 	}
@@ -156,7 +153,7 @@ function analyse($res){
 	if(!isset($pageret)) $pageret=0;	
 	if(!isset($reset)) $reset=0;	
 
-	if ($version_thelia == "1.2")
+	if ($version_thelia == "1_2_2")
 	{
 		if(!isset($entreprise)) $entreprise="";	
 		if(!isset($parrain)) $parrain="";	
@@ -279,7 +276,7 @@ function analyse($res){
 	// Page retour
 	if($_SERVER['QUERY_STRING']) $qpt="?"; else $qpt="";
 	
-	if ($version_thelia == "1.2")
+	if ($version_thelia == "1_2_2")
 	{
 		if($pageret &&  ! $securise && isset($_SERVER['HTTP_REFERER'])) $_SESSION["navig"]->urlpageret = $_SERVER['HTTP_REFERER']; 
 		else if($pageret) $_SESSION["navig"]->urlpageret =  $_SERVER['PHP_SELF'] . $qpt . $_SERVER['QUERY_STRING'];
@@ -301,7 +298,7 @@ function analyse($res){
 	
 	// Actions
 
-	if ($version_thelia == "1.2")
+	if ($version_thelia == "1_2_2")
 	{
 		switch($action){
 		case 'ajouter' : ajouter($ref); break;
@@ -365,7 +362,7 @@ function analyse($res){
 	// Vérif panier
 	if($panier && ! $_SESSION["navig"]->panier->nbart) { header("Location: index.php"); exit; } 
 	
-    	if ($version_thelia == "1.2")
+    	if ($version_thelia == "1_2_2")
 	{
 		// Paiement
 		if($vpaiement && ! strstr( $_SESSION["navig"]->urlprec, "paiement.php")) header("Location: index.php");
@@ -393,7 +390,7 @@ function analyse($res){
 	// inclusion
 	$res = inclusion(explode("\n", $res));
 		
-	if ($version_thelia == "1.2")
+	if ($version_thelia == "1_2_2")
 	{
 		// Résultat envoyé au navigateur
 

@@ -1,0 +1,23 @@
+#CACHE{0}
+[(#REM) titre=Plugin Th&eacute;lia]
+[(#REM) icone=logo_thelia.gif]
+<!-- descriptif=
+<p>
+</p>
+-->
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+	<p></p>
+	<fieldset><legend>Version de Th&eacute;lia :</legend>	
+		<select name="version_thelia_spip_thelia">
+			<option value="1_2_2" [(#CONFIG{spip_thelia/version_thelia_spip_thelia}|=={"1_2_2"}|?{selected="selected",})]>1.2.2</option>		
+			<option value="1_3_1" [(#CONFIG{spip_thelia/version_thelia_spip_thelia}|=={"1_3_1"}|?{selected="selected",})]>1.3.1</option>		
+			<option value="1_3_2Pre1" [(#CONFIG{spip_thelia/version_thelia_spip_thelia}|=={"1_3_2Pre1"}|?{selected="selected",})]>1.3.2Pre1</option>		
+		</select>
+	</fieldset>
+	
+	<div>
+		<input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
+		<input type="reset" value="<:reset:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="fondo" />
+	</div>
+</form>
