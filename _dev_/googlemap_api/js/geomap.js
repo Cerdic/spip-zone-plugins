@@ -27,10 +27,11 @@ function extraerID(url){
 	return url;
 }
 
-function creaMarcador(point, html, icon, son) {
+function creaMarcador(point, html, icon, son, idmap) {
 	//creamos un obxecto GMarker e o gradamos nunha variable
 	var marcador = new GMarker(point, icon);
 	//engadimos un evento para que ao pulsar no marcador se abra a ventana co html indicado
+		var map = eval('map'+idmap);
 	GEvent.addListener(marcador, "click", function() {
 		marcador.openInfoWindowHtml(html);
 		//cando se abre a ventana do marcador executamos as seguintes intsruccions
@@ -45,12 +46,12 @@ function creaMarcador(point, html, icon, son) {
 	return marcador;
 }
 
-function agregarMarcador (xmlItem, minZoom,  maxZoom, idmanager) {
+function agregarMarcador (xmlItem, minZoom, maxZoom, idmanager) {
 	//almacenamos en distintas variables la informacion contenida nen los chilNodes de cada item-marcador do xml
 	var xmlLat = $("geo_lat",xmlItem);
 	var xmlLng = $("geo_long",xmlItem);
 	var xmlSon = $("enclosure",xmlItem);
-
+	var marker = eval('markerManager'+idmanager);
 	if ((xmlLat.length == 0) || (xmlLng.length == 0)) return;
 	else {
 		var lat = parseFloat(xmlLat.text());
@@ -74,21 +75,21 @@ function agregarMarcador (xmlItem, minZoom,  maxZoom, idmanager) {
 		icono_categoria.infoWindowAnchor = new GPoint(5, 1);
 			
 		// creamos el marcador con los datos almacenados en las variables
-		var marcador = creaMarcador(point, html, icono_categoria, son);
+		var marcador = creaMarcador(point, html, icono_categoria, son, idmanager);
 		// recollemos a informacion que sexa necesaria en distintos arrays, usando como identificador a id do artigo
 		marcadores[id] = marcador;
 		contidosHTML[id] = html;
 		URLsons[id] = son;
 		//engadimos o marcador ao markerManager antes "map.addOverlay(marker);"
 		if (maxZoom) {
-			if(idmanager){
-				idmanager.addMarker(marcador, minZoom,  maxZoom);
+			if(marker){
+				marker.addMarker(marcador, minZoom,  maxZoom);
 			}
 			else{
 				markerManager.addMarker(marcador, minZoom,  maxZoom);
 			}
-		} else if (idmanager){
-			idmanager.addMarker(marcador, minZoom);
+		} else if (marker){
+			eval(marker).addMarker(marcador, minZoom);
 		}
 	}	
 }
