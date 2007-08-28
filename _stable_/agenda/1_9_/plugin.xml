@@ -1,0 +1,62 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Agenda pour SPIP 1.9.2
+	</nom>
+	<icon>img_pack/agenda-48.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN 	[notre-ville.net->http://www.notre-ville.net]
+_ patrice.vanneufville@laposte.net pour la saisie rapide
+_ &#169; 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.14
+	</version>
+	<etat>stable</etat>
+	<description>
+	Agenda Ev&#233;nementiel
+_ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
+	</description>
+	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	agenda_mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	agenda_mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix>
+	Agenda
+	</prefix>
+	<install>base/agenda_upgrade.php</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>exec_init</nom>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>agenda_rendu_evenement</nom>
+		<action>rendu_evenement</action>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+	</pipeline>
+	<necessite id="WCalendar" version="[0.11;]" />
+	<chemin dir='' />
+</plugin>
