@@ -55,18 +55,22 @@ function inc_notifier_pim_agenda_dist($action, $id_agenda, $row_anc, $script){
 		$message_suppr = "Votre participation &agrave; la r&eacute;nion du ".date("d-m-Y",$st_date_deb)." &agrave; ".date("H:i",$st_date_deb)." (dur&eacute;e ".date("H:i",$st_date_fin-$st_date_deb).") n'est plus necessaire.";
 	
 	// invitations annullees
-	$annulations = array_diff($liste_invites_old,$liste_invites_new);
-	spip_log("notification de l'agenda $id_agenda : annulations:".serialize($annulations),'pimagenda');
-	notifier_envoi_message($message_titre,$message_auteur,$message_date_heure,"",$redirect_url,$annulations);
+	if (is_array($liste_invites_old) && count($liste_invites_old)){
+		$annulations = array_diff($liste_invites_old,$liste_invites_new);
+		spip_log("notification de l'agenda $id_agenda : annulations:".serialize($annulations),'pimagenda');
+		notifier_envoi_message($message_titre,$message_auteur,$message_date_heure,"",$redirect_url,$annulations);
+	}
 	// invitations nouvelles
-	$nouveaux = array_diff($liste_invites_new,$liste_invites_old);
-	spip_log("notification de l'agenda $id_agenda : nouveaux:".serialize($nouveaux),'pimagenda');
-	notifier_envoi_message($message_titre,$message_auteur,$message_date_heure,$message_new,$redirect_url,$nouveaux);
+	if (is_array($liste_invites_new) && count($liste_invites_new)){
+		$nouveaux = array_diff($liste_invites_new,$liste_invites_old);
+		spip_log("notification de l'agenda $id_agenda : nouveaux:".serialize($nouveaux),'pimagenda');
+		notifier_envoi_message($message_titre,$message_auteur,$message_date_heure,$message_new,$redirect_url,$nouveaux);
 	// invitations modifiees
-	if ($message_modif) {
-		$modifs = array_diff($liste_invites_new,$nouveaux);
-		spip_log("notification de l'agenda $id_agenda : modifs:".serialize($modifs),'pimagenda');
-		notifier_envoi_message($message_titre,$message_auteur,$message_date_heure,$message_modif,$redirect_url,$modifs);
+		if ($message_modif) {
+			$modifs = array_diff($liste_invites_new,$nouveaux);
+			spip_log("notification de l'agenda $id_agenda : modifs:".serialize($modifs),'pimagenda');
+			notifier_envoi_message($message_titre,$message_auteur,$message_date_heure,$message_modif,$redirect_url,$modifs);
+		}
 	}
 }
 

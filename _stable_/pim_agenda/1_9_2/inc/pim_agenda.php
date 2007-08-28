@@ -14,22 +14,27 @@ function PIMAgenda_detailler_agenda($id_agenda, $complet= false ){
 	$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda="._q($id_agenda));
 	if (!$row = spip_fetch_array($res)) return false;
 	if ($complet){
+		$row['mots'] = array();
 		$res = spip_query("SELECT id_mot FROM spip_mots_pim_agenda WHERE id_agenda="._q($id_agenda));
 		while ($row2 = spip_fetch_array($res))
 			$row['mots'][] = $row2['id_mot'];
 
+		$row['auteurs'] = array();
 		$res = spip_query("SELECT id_auteur FROM spip_pim_agenda_auteurs WHERE id_agenda="._q($id_agenda));
 		while ($row2 = spip_fetch_array($res))
 			$row['auteurs'][] = $row2['id_auteur'];
 			
+		$row['invites'] = array();
 		$res = spip_query("SELECT id_auteur FROM spip_pim_agenda_invites WHERE id_agenda="._q($id_agenda));
 		while ($row2 = spip_fetch_array($res))
 			$row['invites'][] = $row2['id_auteur'];
 		
+		$row['groupes_invites'] = array();
 		$res = spip_query("SELECT id_groupe FROM spip_pim_agenda_groupes_invites WHERE id_agenda="._q($id_agenda));
 		while ($row2 = spip_fetch_array($res))
 			$row['groupes_invites'][] = $row2['id_groupe'];
 			
+		$row['donnees'] = array();
 		$res = spip_query("SELECT id_donnee FROM spip_forms_donnees_pim_agenda WHERE id_agenda="._q($id_agenda));
 		while ($row2 = spip_fetch_array($res))
 			$row['donnees'][] = $row2['id_donnee'];
@@ -40,7 +45,7 @@ function PIMAgenda_detailler_agenda($id_agenda, $complet= false ){
 
 function PIMAgenda_supprimer_agenda($id_agenda){
 	spip_log("suppression de l'agenda $id_agenda par ".$GLOBALS['auteur_session']['id_auteur'],'pimagenda');
-	if ($row = detailler_agenda($id_agenda, true)){
+	if ($row = PIMAgenda_detailler_agenda($id_agenda, true)){
 		spip_query("DELETE FROM spip_mots_pim_agenda WHERE id_agenda="._q($id_agenda));
 		spip_query("DELETE FROM spip_pim_agenda_auteurs WHERE id_agenda="._q($id_agenda));
 		spip_query("DELETE FROM spip_pim_agenda_invites WHERE id_agenda="._q($id_agenda));
