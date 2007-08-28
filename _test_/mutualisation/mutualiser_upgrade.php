@@ -26,10 +26,18 @@ function mutualiser_upgrade() {
 	$base('upgrade',false);
 	lire_metas();
 	$new = $GLOBALS['meta']['version_installee'];
-	echo minipres(_T('titre_page_upgrade'),
-		_L('La base de donn&#233;es a &#233;t&#233; mise &#224; jour de @old@ vers @new@',
-			array('old' => $old, 'new' => $new))
-	);
+	if ($old == $new
+	OR $new != $GLOBALS['spip_version']) {
+		echo minipres(_T('titre_page_upgrade'),
+			_L('Erreur de mise &#224; jour de @old@ vers @new@',
+				array('old' => $old, 'new' => $new))
+		);
+	} else {
+		echo minipres(_T('titre_page_upgrade'),
+			_L('La base de donn&#233;es a &#233;t&#233; mise &#224; jour de @old@ vers @new@',
+				array('old' => $old, 'new' => $new))
+		);
+		// TODO : vider tmp
 	exit;
 }
 
