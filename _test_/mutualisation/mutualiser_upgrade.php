@@ -38,6 +38,7 @@ function mutualiser_upgrade() {
 				array('old' => $old, 'new' => $new))
 		);
 		// TODO : vider tmp
+	}
 	exit;
 }
 
