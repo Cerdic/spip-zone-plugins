@@ -37,7 +37,10 @@ function mutualiser_upgrade() {
 			_L('La base de donn&#233;es a &#233;t&#233; mise &#224; jour de @old@ vers @new@',
 				array('old' => $old, 'new' => $new))
 		);
-		// TODO : vider tmp
+		// vider tmp et recreer tmp/meta_cache.txt
+		include_spip('inc/invalideur');
+		purger_repertoire(_DIR_TMP);
+		ecrire_metas();
 	}
 	exit;
 }
