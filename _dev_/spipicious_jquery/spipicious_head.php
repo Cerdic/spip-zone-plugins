@@ -2,12 +2,12 @@
 
 function spipicious_affichage_final($page){
 
-	if (!strpos($page, 'form_spipicious_ajax'))
+	if (!strpos($page, 'formulaire_spipicious_ajax'))
 		return $page;
 
 	$iautocompleter = find_in_path('javascript/iautocompleter.js');
 	$autocompletecss = find_in_path('jquery.autocomplete.css');
-	$urlselecteur = parametre_url(generer_url_ecrire('selecteur_generique','quoi=tag'),id_article, $id_article, '\\x26');
+	$urlselecteur = parametre_url(generer_url_public('selecteurs_tags'),id_article, $id_article, '\\x26');
 
     $incHead = <<<EOS
 		<script type='text/javascript' src='$iautocompleter'></script>
@@ -39,7 +39,7 @@ function spipicious_affichage_final($page){
 				'inputWidth': true,
 				'cacheLength': 20,
 				'multiple' : true,
-				'multipleSeparator' : "; ",
+				'multipleSeparator' : ";",
 				fx : {type: "fade", duration: 400},
 				'onShow' : function(suggestionBox, suggestionIframe) {
 					jQuery('.autocompleter, .selectAutocompleter').fadeTo(300,0.8);

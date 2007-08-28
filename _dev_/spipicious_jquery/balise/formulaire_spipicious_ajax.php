@@ -44,12 +44,37 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_document,$id_rubrique,$id_for
 	$type_groupe_tags = _request('type_groupe');
 	$add_tags = _request('add_tags');
 	
-	if ($add_tags && $auteur_id){
+	// supprimer des documents ?
+	if (is_array(_request('supprimer_mot')))
+	foreach (_request('supprimer_mot') as $supprimer) {
+		if ($supprimer = intval($supprimer)
+		AND $s = spip_query("SELECT * FROM spip_spipicious WHERE id_auteur="._q($auteur_id)." AND id_${type}="._q($id)." AND id_mot="._q($supprimer))
+		AND $t = spip_fetch_array($s)) {
+			spip_query("DELETE FROM spip_spipicious WHERE id_auteur='$auteur_id' AND id_${type}="._q($id)." AND id_mot="._q($supprimer)); // on efface le mot associŽ a l'auteur sur l'objet
+			spip_log("suppression spipiciousmot (id_$type=$id) id_mot=".$supprimer, 'spipicious');
+			$newquery = spip_query("SELECT * FROM spip_spipicious WHERE id_${type}="._q($id)." AND id_mot="._q($supprimer));
+			$t = spip_fetch_array($newquery);
+			if (!$t){
+				spip_query("DELETE FROM spip_mots WHERE id_mot="._q($supprimer)); // on efface le mot si il n'est plus associŽ ˆ rien
+				spip_log("suppression spip_mot non utilise id_mot=".$supprimer, 'spipicious');
+			}
+			else {
+				spip_log("mot toujours utilise : id_mot=".$supprimer, 'spipicious');
+			}
+			$invalider = true;
+		}
+	}
 	
-	spip_query("DELETE FROM spip_spipicious WHERE id_auteur='$auteur_id' AND id_$type='$id' "); // on efface les anciens triplets de cet auteur sur cet article 
+	if ($invalider) {
+		include_spip('inc/invalideur');
+		suivre_invalideur("0",true);
+		spip_log('invalider', 'spipicious');
+	}
+	
+	if ($add_tags && $auteur_id){
 
 	if ($tags && $auteur_id) {
-		$tableau_tags = explode(",",$tags);
+		$tableau_tags = explode(";",$tags);
 		if (is_array($tableau_tags)) {
 			$position = 0;
 			$tag_analysed = array();
@@ -93,10 +118,14 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_document,$id_rubrique,$id_for
 	}
 	else{
 		return array('formulaires/formulaire_spipicious_ajax', 0,
-			array('id' => $id,
+			array_merge($ids,
+			array(
+				'url' => $script, # ce sur quoi on fait le action='...'
+				'id' => $id,
 				'auteur_id' => $auteur_id,
 				'type' => $type,
-		));
+		))
+		);
 	}
 	
 }
