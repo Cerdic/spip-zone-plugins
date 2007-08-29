@@ -5,10 +5,8 @@
 </div>
 <div class='groupes'>
 	<BOUCLE_groupes(GROUPES){par titre}>
-		<a href='#' onclick="return ajoute_auteur(this,'#ID_GROUPE','#ENV{categorie}_G');">[#TITRE]
-		<span class='groupe_auteurs'>
-			<B_auteurs>(<BOUCLE_auteurs(AUTEURS){tout}{par nom}{id_groupe}{':'}>#NOM</BOUCLE_auteurs>)</B_auteurs>
-		</span>
-		</a>
+		<a href='#' onclick="return ajoute_auteur(this,'#ID_GROUPE','#ENV{categorie}_G');">[#TITRE<span class='groupe_auteurs'>
+			: <BOUCLE_auteursg(AUTEURS){tout}{par nom}{id_groupe}{', '}>#NOM</BOUCLE_auteursg>
+		</span>]</a>
 	</BOUCLE_groupes>
 </div>
