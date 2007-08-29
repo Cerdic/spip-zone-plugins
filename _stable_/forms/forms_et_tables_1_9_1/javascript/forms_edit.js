@@ -88,7 +88,7 @@ jQuery.fn.ajaxAction = function() {
 			}
 			});
 	});
-	if ((jQuery.fn.jquery[2]>0) || (jQuery.fn.jquery[0]>1))
+	if ((jQuery.fn.jquery.substr(2,1)>0) || (jQuery.fn.jquery.substr(0,1)>1))
 		$('.antifocus').one('focus',function(){ this.value='';$(this).removeClass('antifocus'); } );
 	else
 		$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );
