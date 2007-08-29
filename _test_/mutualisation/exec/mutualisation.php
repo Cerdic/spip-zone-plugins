@@ -20,7 +20,13 @@ function exec_mutualisation_dist() {
 
 	$titre = _L(count($sites).' '.'sites mutualis&#233;s');
 
-	$page = "<table>
+	$page = '';
+	
+	$page .= '<div style="text-align:right">'._T('version')
+		. ' ' . $GLOBALS['spip_version'].'</div>';
+
+
+	$page .= "<table>
 	<thead>
 		<tr>
 			<td>Site</td>
@@ -38,6 +44,11 @@ function exec_mutualisation_dist() {
 		AND $url = $meta['adresse_site']) {
 			$url .= '/';
 			$nom_site = sinon($meta['nom_site'], $v);
+			$stats = intval($meta['popularite_total']);
+			if ($plugins = @unserialize($meta['plugin']))
+				$plugins = strtolower(join(', ', array_keys($plugins)));
+			else
+				$plugins = '';
 
 			// S'il faut upgrader, creer un bouton qui permettra
 			// de faire la mise a jour directement depuis le site maitre
@@ -53,7 +64,8 @@ function exec_mutualisation_dist() {
 			<td>$v$erreur</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
-			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>stats</a></td>
+			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
+			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>plugins</a>: ${plugins}</td>
 			</tr>\n";
 		$nsite++;
 	}
