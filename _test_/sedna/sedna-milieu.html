@@ -1,17 +1,16 @@
-
 [(#REM)
 	Pour la boucle principale, on se base
 	sur le microformat hAtom (voir le projet hBones)
 	<http://microformats.org/wiki/hatom>
 ]
-#SET{sites,#ARRAY{0,0}}
 <BOUCLE_sites(SITES){par nom_site}{syndication!=non}{id_rubrique?}{id_mot?}>
-[(#GET{sites}|array_push{#ID_SYNDIC}|vide)]
+[(#SET{sites,[(#GET{sites}|concat{-#ID_SYNDIC})]})]
 <?php
 	$GLOBALS['nom_site_#ID_SYNDIC'] = '[(#NOM_SITE|texte_script)]';
 	$GLOBALS['url_site_#ID_SYNDIC'] = '[(#URL_SITE|abs_url|texte_script)]';
 ?>
 </BOUCLE_sites>
+[(#SET{sites,[(#EVAL{"'-'"}|explode{#GET{sites}}|array_filter)]})]
 <B_syndic>
 
 
