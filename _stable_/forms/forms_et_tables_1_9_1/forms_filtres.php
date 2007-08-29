@@ -48,9 +48,9 @@
 	function Forms_post_edition($flux){
 		if ($flux['args']['table']!='spip_articles') return $flux;
 		$id_article = intval($flux['args']['id_objet']);
-		if (count($flux['data'])>=count($flux['args']['champs'])/2) // edition complete a priori
-			spip_query("DELETE FROM spip_forms_articles WHERE id_article=$id_article");
-		if (count($forms = Forms_trouve_liens(implode(' ',$flux['data']))))
+		$res = spip_query("SELECT * FROM spip_articles WHERE id_article="._q($id_article));
+		spip_query("DELETE FROM spip_forms_articles WHERE id_article=$id_article");
+		if ($row = spip_fetch_array($res) && (count($forms = Forms_trouve_liens(implode(' ',$row)))))
 			spip_query("INSERT INTO spip_forms_articles (id_article, id_form) ".
 				"VALUES ($id_article, ".join("), ($id_article, ", $forms).")");
 		return $flux;
