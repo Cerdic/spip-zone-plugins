@@ -3,11 +3,11 @@
 <div class='spip_forms form_#ID_FORM'>
 
 <div class='spip_descriptif'>#DESCRIPTIF</div>
-[(#TYPE_FORM|=={sondage-public}|?{' ',''})
+[(#TYPE_FORM|=={sondage}|?{' ',''}) [(#PUBLIC|=={oui}|?{' '})
 		<a href='[(#URL_PAGE{sondage}|parametre_url{id_form,#ID_FORM})]' class='spip_in resultats_sondage'
 		 target="spip_sondage" onclick="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, resizable=yes, width=450, height=300'); return false;" 
 		 onkeypress="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes,resizable=yes, width=450, height=300'); return false;"><:forms:voir_resultats:></a>
-]
+]]
 [<p class='spip_form_ok'>(#ENV{formok})
 	[(#TYPE_FORM|=={sondage}|?{' ',''})	<a href='[(#ENV{self}|parametre_url{'resultats',#ID_FORM}|ancre_url{form#ID_FORM})]'><:forms:voir_resultats:></a>]
 	[<span class='spip_form_ok_confirmation'>(#ENV{reponse})</span>]
