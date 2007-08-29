@@ -32,7 +32,8 @@ function exec_mutualisation_dist() {
 			<td>Site</td>
 			<td>Nom</td>
 			<td>ecrire</td>
-			<td>Stats</td>
+			<td title='Popularit&eacute; totale du site'>Stats</td>
+			<td>Plugins</td>
 		</tr>
 	</thead>
 	<tbody>";
@@ -48,24 +49,25 @@ function exec_mutualisation_dist() {
 			if ($plugins = @unserialize($meta['plugin']))
 				$plugins = strtolower(join(', ', array_keys($plugins)));
 			else
-				$plugins = '';
+				$plugins = 'Plugins';
 
 			// S'il faut upgrader, creer un bouton qui permettra
 			// de faire la mise a jour directement depuis le site maitre
 			// Pour cela, on cree un bouton avec un secret, que mutualiser.php
 			// va intercepter (pas terrible ?)
 			$erreur = test_upgrade_site($meta);
+			$version_installee = ' ('.$meta['version_installee'].')';
 		}
 		else {
 			$url = 'http://'.$v.'/';
 			$erreur = ' (erreur!)';
 		}
 		$page .= "<tr class='tr". $nsite % 2 ."'>
-			<td>$v$erreur</td>
+			<td>$v$version_installee$erreur</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
 			<td><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
-			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>plugins</a>: ${plugins}</td>
+			<td><a href='${url}ecrire/index.php?exec=admin_plugin'>${plugins}</a></td>
 			</tr>\n";
 		$nsite++;
 	}
