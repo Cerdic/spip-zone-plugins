@@ -12,8 +12,8 @@
 	}
 	
 // Pour charger le bon fichier de connexion selon la version
-@include('../../../../../../../../config/connect.php');
-@include('../../../../../../../../ecrire/inc_connect.php');
+@include($cheminSpip.'config/connect.php');
+@include($cheminSpip.'ecrire/inc_connect.php');
 
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
