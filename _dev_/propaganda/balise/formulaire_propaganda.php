@@ -19,63 +19,83 @@ function balise_FORMULAIRE_PROPAGANDA_stat($args, $filtres) {
 }
 
 function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
-include_spip('inc/mail');
-
-	global $REMOTE_ADDR, $afficher_texte, $_COOKIE, $_POST;
-
+	include_spip('inc/mail');
+	charger_generer_url();
+	
 	$destinataire = _request('email_destinataire');
-	$sujet = _request('sujet_message_auteur');
-	$adres = _request('email_message_auteur');
+	$titre = _request('sujet');
 	$texte = _request('texte_message_auteur');
 	$auteur =_request('auteur');
-	$nom_expediteur = _request('nom_expediteur');
-	$url_carte = _request('url_carte');
+	$document_carte = _request('document_carte');
+	$url = parametre_url(generer_url_public('carte'),'id_document',$document_carte);
 
 	$previsualiser= _request('previsualiser');
 	$valider= _request('valider');
-	
-	$previsu = '';
-	$bouton= '';
 
+	$type = lire_config('propaganda/droit_envoi');
+	
+	if ($type == "non") {
+		if (!$GLOBALS["auteur_session"]) {
+			return array('formulaires/login_forum', 0,
+					array('inscription' => generer_url_public('identifiants'),
+						'oubli' => generer_url_public('', 'action=pass')));
+		} else {
+		// forcer ces valeurs
+			$nom_expediteur = $GLOBALS['auteur_session']['nom'];
+			$adresse = $GLOBALS['auteur_session']['email'];
+			$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+		}
+	}
+
+	if (($type == "oui") || !$type) {
+		$nom_expediteur = $GLOBALS['auteur_session']['nom'] ? $GLOBALS['auteur_session']['nom'] : _request('nom_expediteur');
+		$adresse = $GLOBALS['auteur_session']['email'] ? $GLOBALS['auteur_session']['email'] : _request('email_expediteur');
+		$id_auteur = $GLOBALS['auteur_session']['id_auteur']? $GLOBALS['auteur_session']['id_auteur'] : 0;
+	}
 	// doit-on envoyer le mail ?
 	if ($valider)
 {
-		$texte2 = ""._T('bonjour')."\n\n$nom_expediteur ($adres) "._T('pense_a_vous_carte')." "._T('avec_message')."\n\n";
-		$texte2 .= $texte;
-		$texte2 .= "\n\n"._T('consulter_carte')." \n"._T('adresse_carte')."$url_carte\n\n"._T('soin_de_vous')."\n\nSklunk.net";
+		$texte2 = ""._T('propaganda:bonjour')."\n\n$nom_expediteur ($adresse) "._T('propaganda:untel_envoi_carte')."\n\n";
+		$texte2 .= "\n"._T('propaganda:consulter_carte')." \n$url\n\n"._T('propaganda:merci_de_visite')."\n";
 		$texte2 .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi(lire_meta('nom_site')))." (".lire_meta('adresse_site')."/) --\n";
-		$sujet2 = "[SKLUNK.NET] - ";
-		$sujet2 .= $sujet;
-		$sujet2 = utf8_decode($sujet2);
-		envoyer_mail($destinataire, $sujet2, $texte2, $adres,
+		
+		$titre2 = "[".supprimer_tags(extraire_multi(lire_meta('nom_site')))."] - ";
+		$titre2 .= $titre;
+		$titre2 = utf8_decode($titre2);
+		envoyer_mail($destinataire, $titre2, $texte2, $adresse,
 				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
+				
+		spip_query("INSERT INTO spip_propaganda (id_auteur, id_document, titre, texte, email_destinataire, hash, confidentiel) VALUES ('$id_auteur', '$document_carte', "._q($titre).", "._q($texte).", "._q($destinataire).", '$hash', '$confidentiel')");
 		return _T('form_prop_message_envoye');
+		
 	}
 	
 	else{
 		if($previsualiser)
 		{
 
-		if (!$adres){$erreur .= _T('form_indiquer_email');}
+		if (!$adresse){$erreur .= _T('form_indiquer_email');}
 		else if (!$nom_expediteur){$erreur .= _T('form_indiquer_nom');}
 		else if (!$destinataire){$erreur .= _T('form_indiquer_destinataire');}
-		else if (strlen($sujet) < 3){$erreur .= _T('forum_attention_trois_caracteres');}
-		else if (!email_valide($adres)){$erreur .= _T('info_email_invalide');}
-		else if (!$url_carte){$erreur .= _T('form_carte_invalide');}
+		else if (strlen($titre) < 3){$erreur .= _T('forum_attention_trois_caracteres');}
+		else if (!email_valide($adresse)){$erreur .= _T('info_email_invalide');}
+		else if (!$document_carte){$erreur .= _T('propaganda:choisissez_carte');}
 		if(!$erreur){$bouton= _T('form_prop_confirmer_envoi');}
 
 
 		$previsu = inclure_balise_dynamique(
 			array(
-				'formulaire_propaganda_previsu',
+				'formulaires/formulaire_propaganda_previsu',
 				0,
 			array(
-				'mail' => $adres,
+				'url' => $url,
+				'id_article' => $id_article,
+				'mail' => $adresse,
 				'nom_expediteur' => $nom_expediteur,
 				'destinataire' => $destinataire,
-				'sujet' => $sujet,
+				'titre' => $titre,
 				'texte' => $texte,
-				'url_carte' => $url_carte,
+				'document_carte' => $document_carte,
 				'erreur' => $erreur,
 				'bouton' => $bouton,
 				)
@@ -85,15 +105,16 @@ include_spip('inc/mail');
 				"<\\1no-f\\2", $previsu);
 		}
 	return 
-		array('formulaire_propaganda', 0,
+		array('formulaires/formulaire_propaganda', 0,
 			array(
-			'mail' => $adres,
+			'id_article' => $id_article,
+			'mail' => $adresse,
 			'nom_expediteur' => $nom_expediteur,
 			'previsu' => $previsu,
 			'destinataire' => $destinataire,
-			'sujet' => $sujet,
+			'titre' => $titre,
 			'texte' => $texte,
-			'url_carte' => $url_carte,
+			'document_carte' => $document_carte,
 			)
 		);
 	}

@@ -21,7 +21,8 @@ $spip_propaganda = array(
 	"texte" => "text",
 	"email_destinataire" => "text",
 	"hash" => "varchar(255) NOT NULL",
-	"confidentiel" => "varchar(255) NOT NULL"
+	"confidentiel" => "varchar(255) NOT NULL",
+	"maj"	=> "TIMESTAMP"
 	);
 	
 $spip_propaganda_key = array(
