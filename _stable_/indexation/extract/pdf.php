@@ -13,12 +13,10 @@
 // http://doc.spip.org/@extracteur_pdf
 function extracteur_pdf($fichier, &$charset) {
 
-	/* methode tout PHP
+#	/* methode tout PHP
 		$pdf = new Format_PDF;
-		$texte = $pdf->extraire_texte($fichier);
-		echo $texte;
-		exit;
-	*/
+		return $pdf->extraire_texte($fichier);
+/*
 
 	$charset = 'iso-8859-1';
 
@@ -31,6 +29,8 @@ function extracteur_pdf($fichier, &$charset) {
 	# l'option "-enc utf-8" peut echouer ... dommage !
 	@exec('pdftotext '.escapeshellarg($fichier).' -', $r, $e);
 	if (!$e) return @join(' ', $r);
+
+*/
 }
 
 // Sait-on extraire ce format ?
