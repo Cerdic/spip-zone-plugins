@@ -15,7 +15,7 @@
 	<description>Indexation du contenu pour acc&#233;l&#233;rer le moteur de recherche</description>
 	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
-	indexation_options.php
+	recherche_etendue_options.php
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	</fonctions>
