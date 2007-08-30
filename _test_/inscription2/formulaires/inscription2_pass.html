@@ -73,10 +73,10 @@ function cryptage() {
 <div>
 	<label for='statut'><:inscription2:statut:></label>
 	<select name="statut" id="statut" class="forml select">
-		<option value='0minirezo'><:info_administrateur:></option>
-		<option value='1comite'><:inscription2:auteur:></option>
-		<option value='6forum'><:info_visiteur_1:></option>
-		<option value='aconfirmer'><:inscription2:aconfirmer:></option>
+		<option value='0minirezo'[ (#CONFIG{inscription2/statut_nouveau}|=={0minirezo}|?{' ',''})selected="selected"]><:info_administrateur:></option>
+		<option value='1comite'[ (#CONFIG{inscription2/statut_nouveau}|=={1comite}|?{' ',''})selected="selected"]><:inscription2:auteur:></option>
+		<option value='6forum'[ (#CONFIG{inscription2/statut_nouveau}|=={6forum}|?{' ',''})selected="selected"]><:info_visiteur_1:></option>
+		<option value='aconfirmer'[ (#CONFIG{inscription2/statut_nouveau}|=={aconfirmer}|?{' ',''})selected="selected"]><:inscription2:aconfirmer:></option>
 	</select>
 </div>
 
