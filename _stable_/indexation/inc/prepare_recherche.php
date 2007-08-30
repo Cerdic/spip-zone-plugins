@@ -32,10 +32,10 @@ function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='a
 
 		$points = array();
 
-		$s = spip_query($q = "SELECT id,type, MATCH (texte) AGAINST ("._q($recherche).") + MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE) AS points FROM spip_indexation WHERE MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE)");
+		$s = spip_query($q = "SELECT id,type, MATCH (texte) AGAINST ("._q($recherche).") + 10*MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE) AS points FROM spip_indexation WHERE MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE)");
 
 		while ($t = sql_fetch($s)) {
-			$points[$t['type']][$t['id']] = ceil(100*$t['points']);
+			$points[$t['type']][$t['id']] = ceil(10*$t['points']);
 		}
 
 		# calculer le {id_article IN()} et le {... as points}
