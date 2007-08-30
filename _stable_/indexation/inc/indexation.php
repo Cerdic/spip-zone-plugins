@@ -125,7 +125,7 @@ function deja_indexe($table, $id_objet) {
 // http://doc.spip.org/@indexer_objet
 function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
-	global $index, $mots, $translitteration_complexe;
+	global $index, $mots;
 	global $INDEX_elements_objet;
 	global $INDEX_objet_associes;
 
@@ -157,13 +157,6 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	$row = sql_fetch($result);
 	if (!$row) return;
 
-	// translitteration complexe ?
-	if (!$lang = $row['lang']) $lang = $GLOBALS['meta']['langue_site'];
-	if ($lang == 'de' OR $lang=='vi') {
-		$translitteration_complexe = 1;
-		spip_log ('-> translitteration complexe');
-	} else $translitteration_complexe = 0;
-
 	if (isset($INDEX_elements_objet[$table])){
 
 		// Cas tres particulier du forum :
@@ -190,12 +183,8 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 					$thread.=','.$t['id_forum'];
 			}
 
-			// 3. marquer le thread comme "en cours d'indexation"
-			spip_log("-> indexation thread $thread");
-			spip_query("UPDATE spip_forum SET idx='idx' WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
-
 			// 4. Indexer le thread
-			$s = spip_query("SELECT * FROM spip_forum WHERE id_forum IN ($thread) AND idx!='non'");
+			$s = spip_query("SELECT * FROM spip_forum WHERE id_forum IN ($thread) AND statut='publie'");
 			while ($row = sql_fetch($s)) {
 		    indexer_les_champs($row,$INDEX_elements_objet[$table],1,$min_long);
 		    if (isset($INDEX_objet_associes[$table]))
@@ -203,9 +192,6 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 						indexer_elements_associes($table, $id_objet, $quoi, $poids, $min_long);
 				break;
 			}
-
-			// 5. marquer le thread comme "indexe"
-			spip_query("UPDATE spip_forum SET idx='oui' WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
 
 			// 6. Changer l'id_objet en id_forum de la racine du thread
 			$id_objet = $id_forum;
@@ -273,6 +259,8 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		$limit = $nombre_indexations;
 		if (isset($INDEX_iteration_nb_maxi[$table]))
 			$limit = min($limit,$INDEX_iteration_nb_maxi[$table]);
+
+$limit = 1000;
 
 		// indexer en priorite les 1 (a reindexer), ensuite les 0
 		// (statut d'indexation inconnu), enfin les 2 (ceux dont
@@ -511,14 +499,34 @@ if ($reindex)
 	creer_liste_indexation();
 
 
+// Renvoie la liste des "mots" d'un texte (ou d'une requete adressee au moteur)
+// http://doc.spip.org/@mots_indexation
+function nettoyer_texte_indexation($texte) {
+	include_spip('inc/charsets');
+	include_spip('inc/texte');
+
+	// Recuperer les parametres des modeles
+	$texte = traiter_modeles($texte, true);
+
+	// Supprimer les tags HTML
+	$texte = preg_replace(',<.*>,Ums',' ',$texte);
+
+	// Supprimer les caracteres de ponctuation, les guillemets...
+	$e = "],:;*\"!\r\n\t\\/)}{[|@<>$%'`?\~.^(";
+	$texte = strtr($texte, $e, preg_replace('/./', ' ', $e));
+
+	return preg_replace('/\s{2,}/msS', ' ', $texte);
+}
+
+
 // http://doc.spip.org/@indexer_chaine
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
-	global $translitteration_complexe;
 
-	// Point d'entree pour traiter le texte avant indexation 
+	// Point d'entree pour traiter le texte avant indexation
+	$texte = nettoyer_texte_indexation($texte);
 	$texte = pipeline('pre_indexation', $texte);
-	$mots = trim($mots.' ** '.$texte);
+	$mots = trim($mots.' * '.$texte);
 }
 
 // http://doc.spip.org/@indexer_les_champs
@@ -585,21 +593,22 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $
  	}
 }
 
+
 // API pour l'espace prive pour marquer un objet d'une table a reindexer
 // http://doc.spip.org/@marquer_indexer
-function marquer_indexer ($table, $id_objet) {
-	if (!isset($GLOBALS['INDEX_elements_objet'][$table]))
-		return;
-	spip_log ("demande indexation $table id=$id_objet");
-	$type = id_index_table($table);
-	spip_query("UPDATE spip_indexation SET idx=1 WHERE id=$id_objet AND type=$type AND idx!=-1");
-}
+function Indexation_post_edition ($x) {
+	$table = $x['args']['table'];
 
-// A garder pour compatibilite bouton memo...
-// http://doc.spip.org/@indexer_article
-function indexer_article($id_article) {
-	marquer_indexer('spip_articles', $id_article);
-}
+	if (isset($GLOBALS['INDEX_elements_objet'][$table])) {
+		spip_log ("demande indexation $table id=$id_objet");
+		$type = id_index_table($table);
+		$id_objet = $x['args']['id_objet'];
+		spip_query($q = "UPDATE spip_indexation SET idx=1 WHERE id=$id_objet AND type=$type AND idx!=-1");
 
+		spip_log($q);
+	}
+
+	return $x;
+}
 
 ?>

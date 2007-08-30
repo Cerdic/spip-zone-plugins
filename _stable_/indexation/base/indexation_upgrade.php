@@ -9,6 +9,9 @@ function Indexation_upgrade($nom_meta_base_version,$version_cible) {
 	include_spip('base/abstract_sql');
 	creer_base();
 
+	// Ajouter l'INDEX FULLTEXT de MySQL.
+	spip_query("CREATE FULLTEXT INDEX texte ON spip_indexation (texte)");
+
 	ecrire_meta($nom_meta_base_version, $version_cible, 'non');
 	ecrire_metas();
 }
