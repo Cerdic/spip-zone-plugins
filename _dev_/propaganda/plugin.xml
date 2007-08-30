@@ -1,0 +1,13 @@
+<plugin>
+ <nom>propaganda</nom>
+ <icon></icon>
+ <version>0.1</version>
+ <etat>dev</etat>
+ <auteur>[kent1->http://kent1.sklunk.net], Dani</auteur>
+ <description>
+ Carte postale numeriques via spip
+ </description>
+ <lien>http://wiki.bellinux.org/index.php/SPIP-postal</lien>
+ <prefix>propaganda</prefix>
+ <chemin dir='' />
+</plugin>
