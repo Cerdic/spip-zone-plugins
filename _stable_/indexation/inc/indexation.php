@@ -139,7 +139,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
 	if (!$id_objet) return;
 	if (!$forcer_reset AND deja_indexe($table, $id_objet)) {
-		spip_log ("$table $id_objet deja indexe");
+		#spip_log ("$table $id_objet deja indexe");
 		return;
 	}
 
@@ -148,7 +148,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
 	include_spip('inc/texte');
 
-	spip_log("indexation $table $id_objet");
+	#spip_log("indexation $table $id_objet");
 	$index = '';
 	$mots = '';
 
@@ -162,40 +162,18 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 		// Cas tres particulier du forum :
 		// on indexe le thread comme un tout
 		if ($table=='spip_forum') {
-
-			// 1. chercher la racine du thread
-			$id_forum = $id_objet;
-			while ($row['id_parent']) {
-				$id_forum = $row['id_parent'];
-				$s = spip_query("SELECT id_forum,id_parent FROM spip_forum WHERE id_forum=$id_forum");
-				$row = sql_fetch($s);
-			}
-
-			// 2. chercher tous les forums du thread
-			// (attention le forum de depart $id_objet n'appartient pas forcement
-			// a son propre thread car il peut etre le fils d'un forum non 'publie')
-			$thread="$id_forum";
-			$fini = false;
-			while (!$fini) {
-				$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($thread) AND id_forum NOT IN ($thread) AND statut='publie'");
-				if (spip_num_rows($s) == 0) $fini = true;
-				while ($t = sql_fetch($s))
-					$thread.=','.$t['id_forum'];
-			}
-
-			// 4. Indexer le thread
-			$s = spip_query("SELECT * FROM spip_forum WHERE id_forum IN ($thread) AND statut='publie'");
+			$s = spip_query("SELECT * FROM spip_forum WHERE id_thread = $id_objet AND statut='publie'");
 			while ($row = sql_fetch($s)) {
-		    indexer_les_champs($row,$INDEX_elements_objet[$table],1,$min_long);
-		    if (isset($INDEX_objet_associes[$table]))
-		      foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
-						indexer_elements_associes($table, $id_objet, $quoi, $poids, $min_long);
-				break;
+				indexer_les_champs($row,
+					$INDEX_elements_objet[$table],1,$min_long);
+				if (isset($INDEX_objet_associes[$table]))
+				foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
+					indexer_elements_associes($table, $id_objet, $quoi, $poids, $min_long);
 			}
+		}
 
-			// 6. Changer l'id_objet en id_forum de la racine du thread
-			$id_objet = $id_forum;
-		} else {
+		// Autres objets
+		else {
 			indexer_les_champs($row,$INDEX_elements_objet[$table],1,$min_long);
 			if (isset($INDEX_objet_associes[$table]))
 				foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
@@ -222,7 +200,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 #	sql_replace('spip_indexation', SET idx=3, titre='xxx', texte='xx' WHERE id=$id_objet AND type=$id_table");
 	spip_query($q = 'REPLACE spip_indexation (id, type, titre, texte, meta, date, idx) VALUES '
 		. '('._q($id_objet).', '._q($id_table).', "titre", '._q(trim($mots)).', "meta", "2001-01-01", 3)');
-	spip_log($q);
+	#spip_log($q);
 
 }
 
@@ -254,24 +232,28 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 	foreach (liste_index_tables() as $cle => $table) {
 
 		$table_primary = primary_index_table($table);
+		// les forums sont indexes par thread !
+		if ($table == 'spip_forum')
+			$table_primary = 'id_thread';
+
 		$critere = critere_indexation($table);
 
 		$limit = $nombre_indexations;
 		if (isset($INDEX_iteration_nb_maxi[$table]))
 			$limit = min($limit,$INDEX_iteration_nb_maxi[$table]);
 
-$limit = 1000;
+$limit = 10;
 
 		// indexer en priorite les 1 (a reindexer), ensuite les 0
 		// (statut d'indexation inconnu), enfin les 2 (ceux dont
 		// l'indexation a precedemment echoue, p. ex. a cause d'un timeout)
 		foreach (array(1, 0, 2) as $mode) {
 			$s = spip_query($q = "SELECT a.$table_primary AS n, id,idx FROM $table AS a LEFT JOIN spip_indexation AS l ON (a.$table_primary = l.id AND l.type=$cle) WHERE (id IS NULL OR idx=$mode) AND $critere LIMIT $limit");
-			spip_log($q);
+			#spip_log($q);
 			while ($t = sql_fetch($s)) {
 				$vu[$table] .= $t['n'].", ";
 				indexer_objet($table, $t['n'], $mode);
-				spip_log($t);
+				#spip_log($t);
 			}
 			if ($vu[$table]) break;
 		}
@@ -565,6 +547,11 @@ function indexer_les_champs(&$row,&$index_desc,$ponderation = 1, $min_long=3){
 function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $min_long=3) {
 	global $INDEX_elements_associes, $tables_jointures, $tables_auxiliaires, $tables_principales;
 
+	// pour table_jointures
+	include_spip('base/serial');
+	include_spip('base/auxiliaires');
+	include_spip('public/interfaces');
+
 	if (isset($INDEX_elements_associes[$table_associe])){
 		$table_abreg = preg_replace("{^spip_}","",$table);
 		$col_id = primary_index_table($table);
@@ -584,10 +571,10 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur, $
 			$select="assoc.$col_id_as";
 			foreach(array_keys($INDEX_elements_associes[$table_associe]) as $quoi)
 				$select.=',assoc.' . $quoi;
-			$r = spip_query("SELECT $select FROM $table_associe AS assoc,	spip_$table_rel AS lien	WHERE lien.$col_id=$id_objet AND assoc.$col_id_as=lien.$col_id_as");
-
-			while ($row = spip_abstract_fetch($r)) {
-				indexer_les_champs($row,$INDEX_elements_associes[$table_associe],$valeur);
+			$r = spip_query($q = "SELECT $select FROM $table_associe AS assoc,	spip_$table_rel AS lien WHERE lien.$col_id=$id_objet AND assoc.$col_id_as=lien.$col_id_as");
+			while ($row = sql_fetch($r)) {
+				indexer_les_champs($row,
+					$INDEX_elements_associes[$table_associe],$valeur);
 			}
 		}
  	}
@@ -605,7 +592,7 @@ function Indexation_post_edition ($x) {
 		$id_objet = $x['args']['id_objet'];
 		spip_query($q = "UPDATE spip_indexation SET idx=1 WHERE id=$id_objet AND type=$type AND idx!=-1");
 
-		spip_log($q);
+		#spip_log($q);
 	}
 
 	return $x;
