@@ -12,8 +12,14 @@
 	<etat>
 	dev
 	</etat>
-	<description>Indexation du contenu pour acc&#233;l&#233;rer le moteur de recherche ; exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL</description>
-	<lien></lien> <!-- URI de documentation -->
+	<description>
+	Indexation du contenu pour acc&#233;l&#233;rer le moteur de recherche
+	<ul>
+	<li>exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]</li>
+	<li>Avec ses {extracteurs}, ce plugin permet d'indexer les fichiers PDF etc.</li>
+	</ul>
+	</description>
+	<lien>http://www.spip-contrib.net/Le-plugin-Indexation</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 		indexation_options.php
 	</options>
