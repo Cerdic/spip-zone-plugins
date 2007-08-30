@@ -1,5 +1,5 @@
 <plugin>
- <nom>propaganda</nom>
+ <nom>Propaganda</nom>
  <icon></icon>
  <version>0.1</version>
  <etat>dev</etat>
@@ -8,6 +8,8 @@
  Carte postale numeriques via spip
  </description>
  <lien>http://wiki.bellinux.org/index.php/SPIP-postal</lien>
+ <install>base/propaganda_upgrade.php</install>
+ 
  <prefix>propaganda</prefix>
  <chemin dir='' />
 </plugin>
