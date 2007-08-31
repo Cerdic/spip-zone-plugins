@@ -242,7 +242,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		if (isset($INDEX_iteration_nb_maxi[$table]))
 			$limit = min($limit,$INDEX_iteration_nb_maxi[$table]);
 
-$limit = 10;
+#$limit = 10;
 
 		// indexer en priorite les 1 (a reindexer), ensuite les 0
 		// (statut d'indexation inconnu), enfin les 2 (ceux dont
@@ -325,7 +325,9 @@ function update_index_tables(){
 				&&($id_autres<254) ){
 			// on utilise abstract_showtable car cela permet d'activer l'indexation
 			// en ajoutant simplement le champ idx, sans toucher au core
-			$desc = spip_abstract_showtable($new_table, '', true);
+## ne fonctionne plus dans ce nouveau modele d'indexation
+##			$desc = spip_abstract_showtable($new_table, '', true);
+##
 			if (isset($desc['field']['idx'])){
 			  // la table a un champ idx pour gerer l'indexation
 			  if ( 	(isset($rev_old_liste_tables[$new_table]))
@@ -435,8 +437,9 @@ if (!$INDEX_critere_indexation){
 	$INDEX_critere_indexation['spip_breves']="statut='publie'";
 	$INDEX_critere_indexation['spip_rubriques']="statut='publie'";
 	$INDEX_critere_indexation['spip_syndic']="statut='publie'";
-	$INDEX_critere_indexation['spip_forum']="statut='publie'";
 	$INDEX_critere_indexation['spip_signatures']="statut='publie'";
+	// Forums : on indexe par thread, a partir du pied
+	$INDEX_critere_indexation['spip_forum']="statut='publie' AND id_parent=0";
 	ecrire_meta('INDEX_critere_indexation',serialize($INDEX_critere_indexation));
 	ecrire_metas();
 	$reindex = true;

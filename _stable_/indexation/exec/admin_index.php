@@ -17,7 +17,7 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+define('_SIGNALER_ECHOS', false); // horrible :p
 //include_spip('inc/indexation'); inclus dans le corps de la fonction pour resetter les meta si besoin
 //include_spip('inc/indexation_etendue');
 include_spip('inc/presentation');
@@ -29,7 +29,7 @@ function jauge($couleur,$pixels) {
 
 function exec_admin_index_dist()
 {
-	global $connect_statut, $connect_toutes_rubriques, $couleur_claire, $forcer_indexation, $forcer_reindexation, $mise_a_jour, $purger;
+	global $connect_statut, $connect_toutes_rubriques, $couleur_claire;
 
 	$INDEX_elements_objet = array();
 	if (isset($GLOBALS['meta']['INDEX_elements_objet']))
@@ -48,7 +48,6 @@ function exec_admin_index_dist()
 	icone_horizontale (_T('rechercheetendue:vocabulaire_indexe'),  generer_url_ecrire("index_tous"), "../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_book-alt.gif");
 	echo "</p>";
 	
-	icone_horizontale (_T('rechercheetendue:indexation_a_jour'), generer_url_ecrire("admin_index", "mise_a_jour=oui"), "cache-24.gif");
 	icone_horizontale (_T('rechercheetendue:indexation_forcer'), generer_url_ecrire("admin_index", "forcer_indexation=20"), "../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_exec.gif");
 	icone_horizontale (_T('rechercheetendue:indexation_relancer'), generer_url_ecrire("admin_index", "forcer_indexation=oui"), "../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_exec.gif");
 	echo "<div style='width: 100%; border-top: solid 1px white;background: url(".http_wrapper('rayures-danger.png').");'>";
@@ -83,21 +82,21 @@ function exec_admin_index_dist()
 		RechercheEtendue_verifier_base();
 	
 	
-	if ($forcer_indexation = intval($forcer_indexation))
+	if ($forcer_indexation = intval(_request('forcer_indexation')))
 		effectuer_une_indexation ($forcer_indexation);
 	
-	if ($forcer_reindexation == 'oui')
+	if (_request('forcer_reindexation') == 'oui')
 		creer_liste_indexation();
 	
-	if ($purger == 'oui') {
-		purger_index();
+	if (_request('purger') == 'oui') {
+		spip_query("DELETE FROM spip_syndication");
 		creer_liste_indexation();
 	}
 	
 	$liste_tables = array();
 	$icone_type = array();
 	update_index_tables();
-	update_index_tables_sql_from_meta();
+	#update_index_tables_sql_from_meta();  // ??
 	$liste_tables = liste_index_tables();
 	asort($liste_tables);
 	
@@ -115,27 +114,18 @@ function exec_admin_index_dist()
 
 	// graphe des objets indexes
 	foreach($liste_tables as $table){
-		$table_index = 'spip_index';
 		$critere = critere_indexation($table);
 		$id_table = id_index_table($table);
 		$col_id = primary_index_table($table);
 	
-		// mise a jour des idx='' en fonction du contenu de la table d'indexation
-		if ($mise_a_jour) {
-			$vus='';
-			$s = spip_query("SELECT DISTINCT(id_objet) FROM $table_index WHERE id_table=$id_table");
-			while ($t = spip_fetch_array($s,SPIP_NUM))
-				$vus.=','.$t[0];
-			if ($vus)
-				spip_query("UPDATE $table SET idx='oui' WHERE $col_id IN (0$vus) AND $critere AND idx=''");
-		}
-	
 		// 
-		$s = spip_query("SELECT idx,COUNT(*) FROM $table WHERE $critere GROUP BY idx");
-		while ($t = spip_fetch_array($s,SPIP_NUM)) {
-			$indexes[$table][$t[0]] = $t[1];
-			$index_total[$table] += $t[1];
-		}
+		$index_total[$table] = sql_countsel($table, array($critere));
+		$indexes[$table]['oui'] = sql_countsel('spip_indexation', array('type='.$id_table));
+
+		$indexes[$table]['non'] = $index_total[$table] - $indexes[$table]['oui'];
+;
+
+
 	}
 	
 	debut_cadre_relief();
