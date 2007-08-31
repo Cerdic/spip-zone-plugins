@@ -1,7 +1,7 @@
 <?php
 
 /**
- * définition du plugin "corbeille" version "classe statique"
+ * definition du plugin "corbeille" version "classe statique"
  * utilisee comme espace de nommage
  */
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -12,8 +12,8 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 /* public static */
 /**
  * Corbeille_ajouterBoutons() ajoute un lien au panneau d'administration
- * @param $boutons_admin flux html de la barre de menu dans la partie privée
- * @ return flux html édité     
+ * @param $boutons_admin flux html de la barre de menu dans la partie prive
+ * @ return flux html dit     
  */
 function Corbeille_ajouterBoutons($boutons_admin) {
 	// si on est admin
@@ -30,9 +30,9 @@ function Corbeille_ajouterBoutons($boutons_admin) {
 /* public static */
 
 /**
- *Corbeille_effacement() supprime les elements selectionnés par l'utilisateur
- * @param $type_doc nom de l'objet spip défini dans inc_param.php @see inc_param.php
- * @param $tabid tableau des id à supprimer, optionnel si tout les éléments sont supprimés
+ *Corbeille_effacement() supprime les elements selectionns par l'utilisateur
+ * @param $type_doc nom de l'objet spip dfini dans inc_param.php @see inc_param.php
+ * @param $tabid tableau des id  supprimer, optionnel si tout les lments sont supprims
  *      
  * @return neant  
  */  
@@ -50,20 +50,20 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
 	if ($total == 0) {
 		echo "$table vide <br />";
 	} else {
-		//determine les index des éléments à supprimer
+		//determine les index des lments  supprimer
 		if (is_null($tabid)) {
-			//recupère les identifiants des objets à supprimer
+			//recupre les identifiants des objets  supprimer
 			$req = "SELECT $index FROM $table WHERE statut='$statut'";			
 			$result = spip_query($req);
 			while ($row = spip_fetch_array($result)) {
 				$tabid[] = $row[$index];
 			}
 		}
-		//supprime les élements défini par la liste des index
+		//supprime les lements dfini par la liste des index
 		foreach($tabid as $id) {
 			$req = "DELETE FROM $table WHERE statut='$statut' AND $index = $id";
 			$result = spip_query($req);
-			//suppresion des elements liés	
+			//suppresion des elements lis	
 			if ($table_liee) {
 				foreach($table_liee as $unetable) {
 					$req = "DELETE FROM $unetable WHERE $index = $id";
@@ -76,7 +76,7 @@ function Corbeille_effacement($type_doc, $tabid=NULL) {
  
 /**
  *Corbeille_icone_poubelle() affiche l'icone poubelle (vide ou pleine)
- * @param $total_table nb d'eléments supprimable pour un objet donné
+ * @param $total_table nb d'elments supprimable pour un objet donn
  */
 function Corbeille_icone_poubelle($total_table) {
 	if (empty($total_table)) {
@@ -87,9 +87,9 @@ function Corbeille_icone_poubelle($total_table) {
 }
 
 /**
- *Corbeille_compte_elements_vider() compte le nombre d'element supprimable pour un objet donné
+ *Corbeille_compte_elements_vider() compte le nombre d'element supprimable pour un objet donn
  * @param $type_doc 
- * @return $total , nb d'élements supprimable  
+ * @return $total , nb d'lements supprimable  
 */
 function Corbeille_compte_elements_vider($type_doc) {
 	global $corbeille_param;
@@ -106,7 +106,7 @@ function Corbeille_compte_elements_vider($type_doc) {
   
 /**
  *Corbeille_affiche_ligne() affiche une ligne par objet dans le menu de gauche
- *@param $titre libelle à afficher dans le menu
+ *@param $titre libelle  afficher dans le menu
  *@param $url url de la page de gestion de l'objet
  *@param $total_table nb d'element supprimable
  *
@@ -127,69 +127,33 @@ function Corbeille_affiche_ligne($titre,$url,$total_table){
  *@return neant
  */  
 function Corbeille_affiche($page){
-	//charge les paramètres
-	global $corbeille_param;
-	//initialise les variables
-	$totaux = array();
-		
-	//Calcul du nombre d'objets effaçable
-	foreach($corbeille_param as $type_doc => $objet) {
-		$totaux[$type_doc] = Corbeille_compte_elements_vider($type_doc);
-		$totaux["tout"] += $totaux[$type_doc];
-	}
-
-	//types de documents geres par la corbeille
-	echo "<strong>"._T('corbeille:choix_doc')."</strong><br/>";
-	echo "<style type='text/css'>div a.corbeille {display:block;border:3px solid #f00;padding: 5px;margin-right:5px} div a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
-
-	//parcours les totaux et genere une ligne de résulat par type d'objet
-	foreach($totaux as $key => $total) {
-		//ignore tout car pas de paramètre déclaré dans inc_param
-		if ($key != "tout") {
-			Corbeille_affiche_ligne($corbeille_param[$key]["libelle_court"],generer_url_ecrire($page,"type_doc=".$key),$total);
+  		//charge les paramtres
+		global $corbeille_param;
+		//initialise les variables
+		$totaux = array();
+			
+		//Calcul du nombre d'objets effaÃ§able
+		foreach($corbeille_param as $type_doc => $objet) {
+			$totaux[$type_doc] = Corbeille_compte_elements_vider($type_doc);
+			$totaux["tout"] += $totaux[$type_doc];
 		}
-	}
-	// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
+ 	
+		//types de documents geres par la corbeille
+		echo "<strong>"._T('corbeille:choix_doc')."</strong><br/>";
+		echo "<style type='text/css'>div a.corbeille {display:block;border:3px solid #f00;padding: 5px;margin-right:5px} div a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
 	
-	// Affichage des documents à supprimer
-	$nb = Corbeille_documents_compte() + 0;
-	if($nb > 1)
-		Corbeille_affiche_ligne(_T('corbeille:fichiers'),generer_url_ecrire($page,"type_doc=documents"),$nb);
-	else
-		Corbeille_affiche_ligne(_T('corbeille:fichier'),generer_url_ecrire($page,"type_doc=documents"),$nb);
+		//parcours les totaux et genere une ligne de rsulat par type d'objet
+		foreach($totaux as $key => $total) {
+			//ignore tout car pas de paramtre dclar dans inc_param
+			if ($key != "tout") {
+				Corbeille_affiche_ligne($corbeille_param[$key]["libelle_court"],generer_url_ecrire($page,"type_doc=".$key),$total);
+			}
+		}
+		// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
 }
 
-/**
-Gestion des documents
-Compte le nombre de documents sans lien
-Avec ni un article ni une brève ni une rubrique
-MAIS ne gère pas le cas du document dont l'article a été supprimé mais est toujours présent dans un autre article
-De plus nécessite MySQL 4.1 à cause des SubSelect
-*/
-function corbeille_documents_compte()
-	{
-	$requete_documents = "SELECT COUNT(*) AS nbElt FROM spip_documents where id_document NOT IN (SELECT id_document from spip_documents_articles) AND  id_document NOT IN (SELECT id_document from spip_documents_breves) AND  id_document NOT IN (SELECT id_document from spip_documents_rubriques)";
-		
-	$total = 0;
-	if ($row = spip_fetch_array(spip_query($requete_documents))) $total = $row['nbElt'];
-	return $total;
-	}
 
-/**
-Gestion des documents
-Efface un fichier
-*/
-function Corbeille_documents_effacement($id, $fichier)
-	{
-	$requete = "DELETE FROM spip_documents WHERE id_document=$id";
-	spip_query($requete);
-	
-	if(file_exists( '../' . $fichier))
-		unlink('../' . $fichier);;
-	}
-
-
-/**  semble non utilisé jusqu'à present */
+/**  semble non utilis jusqu' present */
 // recupere les details du forum
 function recupere_forum_detail($id_document){
   $str = "";	

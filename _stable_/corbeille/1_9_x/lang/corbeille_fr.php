@@ -3,37 +3,26 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	// A
-	'articles_tous' => "Tous les articles dans la corbeille :",
-	'aucun' => "Aucun",
+  
+  'articles_tous' => "Tous les articles dans la corbeille :",
+  'aucun' => "Aucun",
 	'auteurs_tous' => "Tous les auteurs dans la corbeille :",
-
-	// B
-	'breves_toutes' => "Toutes les br&egrave;ves dans la corbeille :",
+  
+  'breves_toutes' => "Toutes les br&egrave;ves dans la corbeille :",
 	
 	// C
-	'corbeille'=>'Corbeille',
-	'choix_doc'=>'Choisissez le type de documents &agrave; afficher', 
+  'corbeille'=>'Corbeille',
+  'choix_doc'=>'Choisissez le type de documents &agrave; afficher', 
   
-	// D
-	'doc_effaces' => 'Documents effac&eacute;s :',
-
-	// E
+  // D
+  'doc_effaces' => 'Documents effac&eacute;s :',
+ 	
  	'ecrit' => " a &eacute;crit :",
 	'effacer' => "Effacer",
  	'erreur' => " : erreur !",
  	
-	// F
-	'fichier' => 'Fichier',
-	'fichiers' => 'Fichiers',
-	'fichier_touslesfichiers' => 'Tous les fichiers',
-	'fichiers_info' => 'Il s\'agit de fichiers joints r&eacute;f&eacute;renc&eacute;s dans la base mais vers lesquels aucun article, br&egrave;ve ou rubrique ne pointe.',
- 	'fichier_avertissement' => 'Cet outil ne tient compte que des liens enregistr&eacute;s dans la base de donn&eacute;es, si vous avez faites des liens dans le texte d\'un article avec un document joint, n\'utilisez surtout pas cet outil',
-	
-	// I
 	'icone_syndic' => "Sites syndiqu&eacute;s",
 	
-	// M
 	'messages_tous_pri' => "Tous les messages du forum des administrateurs dans la corbeille :", 
  	'messages_tous_pub' => "Tous les messages du forum dans la corbeille :",
  

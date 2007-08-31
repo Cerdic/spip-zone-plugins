@@ -1,7 +1,7 @@
 <?php
 /**
  *\file inc_param.php
- * Paramètre de configuration de la corbeille
+ * Paramétre de configuration de la corbeille
  * "nom de l'objet spip" => array ("statut" => nom du statut dans la base de données (bdd),
  * 									"titre" => nom du champ retourné dans le listing,
  * 									"table" => nom de la table spip dans la bdd,
@@ -14,7 +14,7 @@
  *
  */  
 
-/* Déclaration des paramètres de configuration */
+/* Déclaration des paramétres de configuration */
 global $corbeille_param;
 $corbeille_param = array (
 	"signatures"=> 		array(	"statut" => "poubelle", 

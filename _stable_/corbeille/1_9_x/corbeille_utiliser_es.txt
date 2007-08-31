@@ -3,10 +3,10 @@ _______________I
 
 Se pueden suprimir los siguientes tipos de documentos:
 - breves rechazados
-- artìculos en la papelera
+- artículos en la papelera
 - mensajes suprimidos de los foros
 - autores eliminados
-- firmas de peticìon rechazadas
+- firmas de petición rechazadas
 
 La eliminación suprime el documento de la base de datos,
 pero NO limpia el caché en disco duro NI la indexación en la base de datos creada por el motor de búsqueda.

@@ -23,13 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacer' => 'Erase',
   'erreur' => 'Error',
   
-	// F
-	'fichier' => 'File',
-	'fichiers' => 'Files',
-	'fichier_touslesfichiers' => 'All files',
-	'fichiers_info' => 'They are files referenced in the database with no article, news or section pointing on it.',
- 	'fichier_avertissement' => 'This tool only search information about files link into the database, if you have referenced a file into the text of an article, do not use it.',
-	
   // I  
   'icone_syndic' => "Syndicated sites",
 

@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // S
   'signe' => " ha firmado mediante: ",
-  'souci' => " problema grave! ", 
+  'souci' => " ¡problema grave! ", 
 
   // T
   'titre' => "T&iacute;tulo", 
