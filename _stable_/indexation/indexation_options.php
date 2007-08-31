@@ -2,10 +2,14 @@
 
 // Un cron toutes les 5 minutes
 function Indexation_taches_generales_cron($taches_generales){
-	$taches_generales['indexation'] = 1; //300;
+	$taches_generales['indexation'] = 300;
 	return $taches_generales;
 }
 
-// include_spip('googlelike');
+// Tester la disponibilite de la methode FULLTEXT
+function Indexation_test_fulltext() {
+	// TODO
+	return true;
+}
 
 ?>

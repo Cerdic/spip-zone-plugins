@@ -1,5 +1,52 @@
 <?php
 
+function Indexation_sql_like($recherche) {
+	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
+	if (preg_quote($recherche, '/') == $recherche) {
+		$methode = 'LIKE';
+		$q = _q(
+			"%"
+			. str_replace(array('%','_'), array('\%', '\_'), $recherche)
+			. "%"
+		);
+	} else {
+		$methode = 'REGEXP';
+		$q = _q($recherche);
+	}
+
+	return "texte $methode $q";
+}
+
+function Indexation_recherche_sql($recherche) {
+
+	// Methode FULLTEXT si disponible
+	if (Indexation_test_fulltext()) {
+		$points = array();
+		$s = spip_query($q = "SELECT id,type, MATCH (texte) AGAINST ("._q($recherche).") + 10*MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE) AS points FROM spip_indexation WHERE MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE)");
+		while ($t = sql_fetch($s))
+			$points[$t['type']][$t['id']] = ceil(10*$t['points']);
+	}
+
+	// Methode alternative LIKE / REGEXP
+	// On ne peut pas utiliser inc/rechercher car l'API
+	// ne comprend ni spip_indexation (elle ajoute un s)
+	// ni la cle primaire sur (id,type)
+	else {
+		$requete['SELECT'] = array('id', 'type');
+		$requete['FROM'] = array('spip_indexation');
+		$requete['WHERE'] = array(Indexation_sql_like($recherche));
+		
+		$s = sql_select (
+			$requete['SELECT'], $requete['FROM'], $requete['WHERE']
+		);
+
+		while ($t = sql_fetch($s))
+			$points[$t['type']][$t['id']] ++;
+	}
+
+	return $points;
+}
+
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
 function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='articles',$nom_table='spip_articles', $cond=false) {
@@ -30,13 +77,7 @@ function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='a
 
 		spip_timer('fulltext');
 
-		$points = array();
-
-		$s = spip_query($q = "SELECT id,type, MATCH (texte) AGAINST ("._q($recherche).") + 10*MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE) AS points FROM spip_indexation WHERE MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE)");
-
-		while ($t = sql_fetch($s)) {
-			$points[$t['type']][$t['id']] = ceil(10*$t['points']);
-		}
+		$points = Indexation_recherche_sql($recherche);
 
 		# calculer le {id_article IN()} et le {... as points}
 		include_spip('inc/indexation');

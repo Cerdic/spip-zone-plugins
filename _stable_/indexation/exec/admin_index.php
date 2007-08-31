@@ -22,9 +22,13 @@ define('_SIGNALER_ECHOS', false); // horrible :p
 //include_spip('inc/indexation_etendue');
 include_spip('inc/presentation');
 
-function jauge($couleur,$pixels) {
-	if ($pixels)
-	  echo http_img_pack("jauge-$couleur.gif", $couleur, "height='10' width='$pixels'");
+function jauge($couleur,$pixels, $title = null) {
+	if ($pixels) {
+	  $p = http_img_pack("jauge-$couleur.gif", $couleur, "height='10' width='$pixels'");
+	  if (isset($title))
+	  	$p = inserer_attribut($p, 'title', $title);
+	  echo $p;
+	}
 }
 
 function exec_admin_index_dist()
@@ -44,12 +48,12 @@ function exec_admin_index_dist()
 	fin_boite_info();
 	
 	debut_raccourcis();
-	echo "<p>";
-	icone_horizontale (_T('rechercheetendue:vocabulaire_indexe'),  generer_url_ecrire("index_tous"), "../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_book-alt.gif");
-	echo "</p>";
+#	echo "<p>";
+#	icone_horizontale (_T('rechercheetendue:vocabulaire_indexe'),  generer_url_ecrire("index_tous"), "../"._DIR_PLUGIN_INDEXATION."/img_pack/stock_book-alt.gif");
+#	echo "</p>";
 	
-	icone_horizontale (_T('rechercheetendue:indexation_forcer'), generer_url_ecrire("admin_index", "forcer_indexation=20"), "../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_exec.gif");
-	icone_horizontale (_T('rechercheetendue:indexation_relancer'), generer_url_ecrire("admin_index", "forcer_indexation=oui"), "../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_exec.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_forcer'), generer_url_ecrire("admin_index", "forcer_indexation=20"), "../"._DIR_PLUGIN_INDEXATION."/img_pack/stock_exec.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_relancer'), generer_url_ecrire("admin_index", "forcer_indexation=oui"), "../"._DIR_PLUGIN_INDEXATION."/img_pack/stock_exec.gif");
 	echo "<div style='width: 100%; border-top: solid 1px white;background: url(".http_wrapper('rayures-danger.png').");'>";
 	icone_horizontale (_T('rechercheetendue:indexation_purger'), generer_url_ecrire("admin_index", "purger=oui"), "effacer-cache-24.gif");
 	icone_horizontale (_T('rechercheetendue:indexation_resetter'), generer_url_ecrire("admin_index", "resetmeta=oui"), "effacer-cache-24.gif");
@@ -117,15 +121,20 @@ function exec_admin_index_dist()
 		$critere = critere_indexation($table);
 		$id_table = id_index_table($table);
 		$col_id = primary_index_table($table);
-	
-		// 
+
+		// Compter le total
 		$index_total[$table] = sql_countsel($table, array($critere));
-		$indexes[$table]['oui'] = sql_countsel('spip_indexation', array('type='.$id_table));
 
-		$indexes[$table]['non'] = $index_total[$table] - $indexes[$table]['oui'];
-;
+		// Compter les indexes OK
+		$indexes[$table]['oui'] = sql_countsel('spip_indexation', array('type='.$id_table.' AND idx=3'));
 
+		// Compter les indexes TODO
+		$indexes[$table]['bof'] = sql_countsel('spip_indexation', array('type='.$id_table.' AND idx<3'));
 
+		// Les non indexes
+		$indexes[$table]['non'] = $index_total[$table]
+			- $indexes[$table]['oui']
+			- $indexes[$table]['bof'];
 	}
 	
 	debut_cadre_relief();
@@ -147,9 +156,12 @@ function exec_admin_index_dist()
 		if (isset($INDEX_elements_objet[$table])){
 			if ($index_total[$table]>0) {
 				if ($index_total[$table]>0) {
-					jauge('rouge', $a = floor(300*$indexes[$table]['non']/$index_total[$table]));
-					jauge('vert', $b = ceil(300*$indexes[$table]['oui']/$index_total[$table]));
-					jauge('fond', 300-$a-$b);
+					jauge('rouge', $a = floor(300*$indexes[$table]['non']/$index_total[$table]), _L('non index&#233;'));
+					jauge('jaune', $b = ceil(300*$indexes[$table]['bof']/$index_total[$table]),
+					_L('&#224; r&#233;indexer'));
+					jauge('vert', $c = ceil(300*$indexes[$table]['oui']/$index_total[$table]),
+					_L('index&#233;'));
+					jauge('fond', 300-$a-$b-$c);
 				}
 			}
 			else{
@@ -162,13 +174,7 @@ function exec_admin_index_dist()
 		echo "</td><td>";
 		if ($index_total[$table]>0) {
 			echo "<span style='font:arial,helvetica,sans-serif;font-size:small;'>";
-			if (($n = $indexes[$table]['oui'])!='')
-			  echo $n;
-			else
-			  echo '0';
-			echo "/" . $index_total[$table];
-			if (($n = $indexes[$table]['non'])!='')
-				echo "[-" . $indexes[$table]['non'] . "]";
+			echo intval($indexes[$table]['oui']) . "/" . $index_total[$table];
 			echo "</span>";
 		}
 		echo "</td></tr>\n";

@@ -75,7 +75,7 @@ function exec_index_tous_dist()
 
 	debut_raccourcis();
 	echo "<p>";
-	icone_horizontale (_T('rechercheetendue:indexation_statut'), generer_url_ecrire("admin_index"), "../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_index.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_statut'), generer_url_ecrire("admin_index"), "../"._DIR_PLUGIN_INDEXATION."/img_pack/stock_index.gif");
 	echo "</p>";
 
 	icone_horizontale (_T('rechercheetendue:tout'), generer_url_ecrire("index_tous"), "tout-site-24.gif");
