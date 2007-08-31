@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'votre_carte' => 'Su postal:',
 'emmetteur' => 'Remitente:',
 'destinataire' => 'Destinatari@(s) :',
+'send_ecard' => '<NEW>Send an E-card',
 
 'xxx' => 'xxx'
 

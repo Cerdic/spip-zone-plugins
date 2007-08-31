@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //CFG
 'droit_envoi' => 'Qui a le droit d\'envoyer une carte',
 'autoriser_tout_le_monde' => 'Autoriser tout visiteur du site &agrave; envoyer une carte',
-'autoriser_uniquement_inscrits' => 'Exiger des visiteurs qu'ils s'inscrivent dans le site et s'authentifient pour envoyer une carte',
+'autoriser_uniquement_inscrits' => 'Exiger des visiteurs qu\'ils s\'inscrivent dans le site et s\'authentifient pour envoyer une carte',
 
 //Formulaire
 'bonjour' => 'Bonjour,',
@@ -20,6 +20,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'votre_carte' => 'Votre carte :',
 'emmetteur' => 'Emmetteur :',
 'destinataire' => 'Destinataire(s) :',
+'send_ecard' => 'Envoyer une carte &eacute;lectronique',
+
+//carte.html
+'emmetteur_envoi' => 'vous a fait parvenir cette carte &eacute;lectronique',
+'credits' => 'Cr&eacute;dits iconographiques : ',
+'son_message' => 'Son message accompagnant cette carte',
 
 'xxx' => 'xxx'
 
