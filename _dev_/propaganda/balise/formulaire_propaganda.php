@@ -1,5 +1,15 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP propaganda, plugin SPIP d'envoi de carte postale électronique     *
+ *                                                                         *
+ *  Copyright (c) 2007                                                     *
+ *  Quentin Drouet, Daniel Viñar Ulriksen                                  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip ("inc/texte");
 
@@ -27,7 +37,7 @@ function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
 	$texte = _request('texte_message_auteur');
 	$auteur =_request('auteur');
 	$document_carte = _request('document_carte');
-	$url = parametre_url(generer_url_public('carte'),'id_document',$document_carte);
+//	$url = parametre_url(generer_url_public('carte'),'id_document',$document_carte);
 
 	$previsualiser= _request('previsualiser');
 	$valider= _request('valider');
@@ -53,10 +63,18 @@ function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur']? $GLOBALS['auteur_session']['id_auteur'] : 0;
 	}
 	// doit-on envoyer le mail ?
-	if ($valider)
-{
+	if ($valider) {
+
+		spip_query("INSERT INTO spip_propaganda (id_auteur, id_document, titre, texte, email_destinataire, hash, confidentiel) VALUES ('$id_auteur', '$document_carte', "._q($titre).", "._q($texte).", "._q($destinataire).", '$hash', '$confidentiel')");
+		$id_propaganda = mysql_insert_id();
+
+		$url = parametre_url(generer_url_public('carte'),'id_propaganda',$id_propaganda);
+
+
 		$texte2 = ""._T('propaganda:bonjour')."\n\n$nom_expediteur ($adresse) "._T('propaganda:untel_envoi_carte')."\n\n";
-		$texte2 .= "\n"._T('propaganda:consulter_carte')." \n$url\n\n"._T('propaganda:merci_de_visite')."\n";
+		$texte2 .= "\n"._T('propaganda:consulter_carte')." \n$url\n\n";
+		$texte2 .= _T('propaganda:son_message')."\n\n".$texte."\n\n";
+		$texte2 .= "----------------\n$url\n\n"._T('propaganda:merci_de_visite')."\n";
 		$texte2 .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi(lire_meta('nom_site')))." (".lire_meta('adresse_site')."/) --\n";
 		
 		$titre2 = "[".supprimer_tags(extraire_multi(lire_meta('nom_site')))."] - ";
@@ -65,7 +83,6 @@ function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
 		envoyer_mail($destinataire, $titre2, $texte2, $adresse,
 				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
 				
-		spip_query("INSERT INTO spip_propaganda (id_auteur, id_document, titre, texte, email_destinataire, hash, confidentiel) VALUES ('$id_auteur', '$document_carte', "._q($titre).", "._q($texte).", "._q($destinataire).", '$hash', '$confidentiel')");
 		return _T('form_prop_message_envoye');
 		
 	}
