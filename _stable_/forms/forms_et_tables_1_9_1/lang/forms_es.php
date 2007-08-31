@@ -163,7 +163,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'voir_resultats'=>"Ver los resultados",
 'verif_web' => "comprobar la existencia del sitio Web",
 'vider' => 'Vaciar',
-'voir_article'=>"Ver el art&iacute;culo",
+'voir_article'=>"Ver el art&iacute;culo"
 
 
 );
