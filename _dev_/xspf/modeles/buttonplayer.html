@@ -74,7 +74,11 @@ Get the Flash Player</a> to see this player.
 	s1.addVariable("autoload","#GET{autoload}");
 	s1.addVariable("autoplay","#GET{autoplay}");
 	s1.addVariable("repeat_playlist","#GET{repeat}");
-	s1.write("buttonplayer[(#GET{objet_spip})]#ENV{id}");
+	
+	$(document).ready(function() {
+		s1.write("buttonplayer[(#GET{objet_spip})]#ENV{id}");
+	});
+
 // ]]>
 </script>
 </div>

@@ -165,7 +165,10 @@ Get the Flash Player</a> to see this player.
 	s1.addVariable("linktarget","#GET{linktarget}");
 	[(#GET{captions}|!={''}|?{'s1.addVariable("captions","#GET{captions}");',''})]
 	s1.addVariable("usecaptions","#GET{usecaptions}");
-	s1.write("flvplayer[(#GET{objet_spip})]#ENV{id}");
+
+	$(document).ready(function() {
+		s1.write("flvplayer[(#GET{objet_spip})]#ENV{id}");
+	});
 // ]]>
 </script>
 

@@ -142,7 +142,11 @@ Get the Flash Player</a> to see this player.
 	s1.addVariable("linkfromdisplay","#GET{linkfromdisplay}");
 	s1.addVariable("linktarget","#GET{linktarget}");	
 	s1.addParam('menu','true');
-	s1.write("rotator[(#GET{objet_spip})]#ENV{id}");
+	
+	$(document).ready(function() {
+		s1.write("rotator[(#GET{objet_spip})]#ENV{id}");
+	});
+
 // ]]>
 </script>
 

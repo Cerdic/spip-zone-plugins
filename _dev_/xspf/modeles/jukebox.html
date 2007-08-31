@@ -137,7 +137,11 @@ var s1 = new SWFObject("[(#CHEMIN{lib/jukebox/xspf_jukebox.swf})]", "jukebox", "
 // 	s1.addVariable("useId3","#GET{useId3}");
 //	s1.addVariable("volume_level","#GET{volume_level}");
 	s1.addParam("wmode", "#GET{wmode}");
-	s1.write("jukebox[(#GET{objet_spip})]#ENV{id}");
+	
+	$(document).ready(function() {
+		s1.write("jukebox[(#GET{objet_spip})]#ENV{id}");
+	});
+
 // ]]>
 </script>
 

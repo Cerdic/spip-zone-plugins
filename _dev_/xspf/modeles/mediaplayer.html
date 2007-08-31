@@ -174,7 +174,10 @@ Get the Flash Player</a> to see this player.
 	[(#GET{link}|!={''}|?{'s1.addVariable("link","#GET{link}");',''})]
 	s1.addVariable("linkfromdisplay","#GET{linkfromdisplay}");
 	s1.addVariable("linktarget","#GET{linktarget}");	
-	s1.write("mediaplayer[(#GET{objet_spip})][(#GET{objet_val})]");
+	
+	$(document).ready(function() {
+		s1.write("mediaplayer[(#GET{objet_spip})][(#GET{objet_val})]");
+	});
 // ]]>
 </script>
 
