@@ -1,4 +1,4 @@
-<BOUCLE_expose(MOTS){id_article}>[(#GET{expose}|push{#ID_MOT}|vide)]</BOUCLE_expose>
+#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article}>[(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})]</BOUCLE_expose>
 <BOUCLE_tags(MOTS){type ?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}>[
 (#ID_MOT|nuage{#TITRE,#URL_MOT})
 ]<BOUCLE_pop(ARTICLES){id_mot}></BOUCLE_pop>[

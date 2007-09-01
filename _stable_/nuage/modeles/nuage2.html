@@ -1,4 +1,4 @@
-<BOUCLE_expose(MOTS){id_article}>[(#GET{expose}|push{#ID_MOT}|vide)]</BOUCLE_expose>
+#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article}>[(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})]</BOUCLE_expose>
 <B_mots>
 <ul class="nuage">
 	<BOUCLE_mots(MOTS){frequence}{type?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}>[(#SET{score,[(#FREQUENCE|div{#MAX_FREQUENCE})]})][
