@@ -76,8 +76,15 @@ function critere_frequence_dist($idb, &$boucles, $crit) {
 	foreach($criteres as $critere) {
 		$frequence = $boucle->modificateur['frequence'] = "frequence".$idb;
 		list($op, $type, $val) = $critere;
-		$nom = $table_des_tables[$type];
-		list($table, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+		//compatibilite SVN et 1.9.2
+		if(function_exists('trouver_def_table')) {
+			$nom = $table_des_tables[$type];
+			list($table, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+		}
+		else {
+			$desc = trouver_table($type, $boucle);
+			$table = $desc['table'];
+		}
 		/*Ajouter ici un test et produire une erreur si table non trouvee*/
 		$ids = $desc['key']['PRIMARY KEY'];
 		foreach(split(',', $ids) as $_id)

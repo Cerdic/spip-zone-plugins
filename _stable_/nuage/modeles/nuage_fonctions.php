@@ -10,10 +10,6 @@ function balise_NUAGE_dist($p) {
 	return $p;
 }
 
-function restituer($valeur, $cle = 'url') {
-	return interdire_scripts(entites_html($valeur[$cle]));
-}
-
 function filtre_calculer_nuage_dist($titres, $urls, $poids, $expose) {
   $resultat = array();
   $max = empty($poids)?0:max($poids);
@@ -26,7 +22,7 @@ function filtre_calculer_nuage_dist($titres, $urls, $poids, $expose) {
           'url'   => $urls[$id],
           'poids' => $poids[$id].'/'.$max,
           'style' => 'font-size: '.$s.'em;',
-          'class' => in_array($id, $expose)
+          'class' => filtre_find($expose, $id)
         );
       }
     }
