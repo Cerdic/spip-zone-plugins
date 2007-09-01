@@ -30,7 +30,7 @@
 				#SET{type,text}
 				#SET{class,''}
 				[(#TYPE|=={date}|?{' ',''}) #SET{class,date-picker} #SET{date-picker,1}]
-				[(#TYPE|=={password}|?{' ',''}) #SET{type,password}]
+				[(#TYPE|=={password}|?{' ',''}) #SET{type,password} #SET{afficher,0}]
 				[(#TYPE|=={texte}|?{' ',''}) #SET{afficher,0}
 					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},input-#ID_FORM-#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{' ',#ENV{crayon_active,''},' ',#ENV**{erreur}|forms_valeur{#CHAMP}|?{champ_obli_oubli}})],'',#EXTRA_INFO})]
 				]
@@ -61,6 +61,22 @@
 				})]
 				[(#GET{input}|forms_input_champs{#ID_FORM,#TYPE,#CHAMP,#EXTRA_INFO,#OBLIGATOIRE,#ENV**})]
 				]
+				[(#TYPE|=={password}|?{' ',''})
+					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]' id='input-#ID_FORM-#CHAMP' value=""
+						class='[(#GET{class})] [(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						size='40' />
+					[(#EXTRA_INFO|=={oui}|?{' '})
+					<span class='nettoyeur'> </span></div><div class='spip_form_champ #CHAMP'>
+					<span class='spip_form_label'><:forms:confirmer_password:>
+						[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''})obligatoire_oublie]'>
+						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>] :
+					</span>
+					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]_confirm' id='input-#ID_FORM-#CHAMP-confirm' value="" 
+							class='[(#GET{class})] [(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+							size='40' />
+					]
+				]
+
 				[<span class='erreur'>(#ENV**{erreur}|forms_valeur{#CHAMP})</span>]
 				<span class='nettoyeur'> </span>
 			]

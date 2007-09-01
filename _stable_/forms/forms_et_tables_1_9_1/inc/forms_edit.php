@@ -268,6 +268,12 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<input type='text' name='taille_champ' value='$taille' id='taille_$champ' class='fondo verdana2'>\n";
 		$out .= "<br />\n";
 	}
+	if ($type == 'password') {
+		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_confirmer_pass' value='oui' id='confirmer_pass_$champ'$checked> ";
+		$out .= "<label for='confirmer_pass_$champ'>"._T("forms:confirmer_champ_password")."</label>";
+		$out .= "<br />\n";
+	}
 
 	return pipeline('forms_bloc_edition_champ',
 		array(

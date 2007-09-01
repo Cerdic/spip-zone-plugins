@@ -58,6 +58,8 @@ function Forms_update_edition_champ($id_form,$champ) {
 		if ($type=='select'){
 			$extra_info = _request('format_liste');
 		}
+		if ($type == 'password')
+			if ($champ_confirmer_pass=_request('champ_confirmer_pass')) $extra_info = $champ_confirmer_pass;
 		$extra_info = pipeline('forms_update_edition_champ',array('args'=>array('row'=>$row),'data'=>$extra_info));
 		spip_query("UPDATE spip_forms_champs SET extra_info="._q($extra_info)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 		if ($type == 'select' || $type == 'multiple') {

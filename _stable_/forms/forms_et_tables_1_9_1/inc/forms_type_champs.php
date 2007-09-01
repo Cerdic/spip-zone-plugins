@@ -118,7 +118,8 @@
 			// verifier la presence des champs obligatoires	
 			if (($val===NULL || !strlen($val)) && ($infos['obligatoire'] == 'oui'))
 				// Cas particulier de l'upload de fichier : on ne force pas à uploader à nouveau un fichier si celui-ci est existant
-				if (( ($type == 'fichier') && ($val==NULL) && (Forms_valeurs($id_donnee,$id_form,$champ)!=NULL) ));
+				// Cas particulier des password : on ne force pas a donner un nouveau mot de passe si existe deja
+				if (( (in_array($type,array('fichier','password'))) && ($val==NULL) && (Forms_valeurs($id_donnee,$id_form,$champ)!=NULL) ));
 					else $erreur[$champ] = _T("forms:champ_necessaire");
 		}
 
@@ -160,7 +161,7 @@
 					}
 				}
 				if ($type == 'url') {
-					if ($row['extra_info'] == 'oui') {
+					if ($infos['extra_info'] == 'oui') {
 						include_spip("inc/sites");
 						if (!recuperer_page($val)) {
 							$erreur[$champ] = _T("forms:site_introuvable");
@@ -171,7 +172,7 @@
 					if (!$taille = $_FILES[$champ]['size']) {
 						$erreur[$champ] = _T("forms:echec_upload");
 					}
-					else if ($row['extra_info'] && $taille > ($row['extra_info'] * 1024)) {
+					else if ($infos['extra_info'] && $taille > ($infos['extra_info'] * 1024)) {
 					$erreur[$champ] = _T("forms:fichier_trop_gros");
 					}
 					else if (!Forms_type_fichier_autorise($_FILES[$champ]['name'])) {
@@ -186,6 +187,18 @@
 					foreach($val as $v)
 						if (strlen($v) && !isset($infos['choix'][$v])) // le formulaire renvoie toujours au moins une reponse vide sur les multiple
 							$erreur[$champ] = _T("forms:donnee_inattendue");
+				}
+				if ($type=='password'){
+					if ($infos['extra_info']=='oui'){
+						if ($GLOBALS['spip_version_code']<1.92)
+							$val_confirm = _request("{$champ}_confirm");
+						else
+							$val_confirm = _request("{$champ}_confirm", $c);
+						if ($val!=$val_confirm)
+							$erreur[$champ] = _T("info_passes_identiques");
+					}
+					if (strlen($val)<6 and strlen($val))
+						$erreur[$champ] = _T("info_passe_trop_court");
 				}
 				if (isset($GLOBALS['forms_types_champs_etendus'][$type])){
 					$match = $GLOBALS['forms_types_champs_etendus'][$type]['match'];

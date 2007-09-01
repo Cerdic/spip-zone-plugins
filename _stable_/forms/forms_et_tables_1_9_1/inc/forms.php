@@ -457,7 +457,8 @@
 			}
 			else
 				$val = isset($c[$champ])?$c[$champ]:NULL;
-			if ($val!==NULL){
+			if ($val!==NULL 
+				AND (($infos['type']!=='password') OR strlen($val))){
 				$valeurs[$champ] = $val;
 				$champs[$champ] = $infos;
 			}
