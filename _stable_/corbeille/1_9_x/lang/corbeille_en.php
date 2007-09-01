@@ -39,8 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'readme' => 'This page allows the {{permanent deletion}} of documents sent to the recycle bin. You may leave documents in the recycle bin as long as you wish. It\'s {{up to you}} to put out the rubbish.',
   
   // S
-  'signe' => " signed with:",
-	'souci' => 'Fatal Error!',
+'signe' => " signed with:",
+'souci' => 'Fatal Error!',
+'syndic_tous' => "All syndications in the recycle bin:",
 
   // T
   'titre' => 'Title',

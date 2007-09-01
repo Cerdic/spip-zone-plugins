@@ -23,9 +23,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  	
 	'icone_syndic' => "Sites syndiqu&eacute;s",
 	
+  //M
 	'messages_tous_pri' => "Tous les messages du forum des administrateurs dans la corbeille :", 
  	'messages_tous_pub' => "Tous les messages du forum dans la corbeille :",
- 
+
+  //P
  	'parution' => "Parution",
  	'petition' => "la p&eacute;tition :",
 	'petitions_toutes' => "Toutes les p&eacute;titions dans la corbeille :",
@@ -35,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   'signe' => " a sign&eacute; via :",
   'souci' => "souci grave !",
+  'syndic_tous' => "Toutes les syndications dans la corbeille :",
   
   'titre' => "Titre",
   

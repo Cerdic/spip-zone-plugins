@@ -23,7 +23,7 @@ $corbeille_param = array (
 								"id" => "id_signature",
 								"temps" => "date_time",
 								"page_voir" => array("signatures",'id_document'),
-								"libelle" => _L("Toutes les p&eacute;titions dans la corbeille :"),
+								"libelle" => _T("corbeille:petitions_toutes"),
 								"libelle_court" => strtolower(_T('lien_petitions')),
 								),
 	"breves"=>	 		array(	"statut" => "refuse", 
@@ -32,7 +32,7 @@ $corbeille_param = array (
 								"id" => "id_breve",
 								"temps" => "date_heure",
 								"page_voir" => array("breves_voir",'id_breve'),
-								"libelle" => _L("Toutes les br&egrave;ves dans la corbeille :"),
+								"libelle" => _T("corbeille:breves_toutes"),
 								"libelle_court" => _T('icone_breves')
 								),
 	"articles"=>	 	array(	"statut" => "poubelle",
@@ -42,7 +42,7 @@ $corbeille_param = array (
 								"id" => "id_article",
 								"temps" => "date",
 								"page_voir" => array("articles",'id_article'),
-								"libelle" => _L("Tous les articles dans la corbeille :"),
+								"libelle" => _T("corbeille:articles_tous"),
 								"libelle_court" => _T('icone_articles')
 								),
 	"forums_publics"=>	array(	"statut" => "off",
@@ -50,7 +50,7 @@ $corbeille_param = array (
 								"table" => "spip_forum",
 								"id" => "id_forum",
 								"temps" => "date_heure",
-								"libelle" => _L("Tous les messages du forum dans la corbeille :"),
+								"libelle" => _T("corbeille:messages_tous_pub"),
 								"libelle_court" => _T('titre_forum')
 								),
 	"forums_prives"=>	array(	"statut" => "privoff",
@@ -58,7 +58,7 @@ $corbeille_param = array (
 								"table" => "spip_forum",
 								"id" => "id_forum",
 								"temps" => "date_heure",
-								"libelle" => _L("Tous les messages du forum dans la corbeille :"),
+								"libelle" => _T("corbeille:messages_tous_pri"),
 								"libelle_court" => _T('icone_forum_administrateur')
 								),
 	"auteurs" =>		array(	"statut" => "5poubelle",
@@ -67,7 +67,7 @@ $corbeille_param = array (
 								"id"=>"id_auteur",
 								"temps" => "maj",
 								"page_voir" => array("auteurs_edit",'id_auteur'),
-								"libelle" => _L("Tous les auteurs dans la corbeille :"),
+								"libelle" => _T("corbeille:auteurs_tous"),
 								"libelle_court" => _T('icone_auteurs')
 								),					
 	"syndic" =>			array(	"statut" => "refuse",
@@ -77,7 +77,7 @@ $corbeille_param = array (
 								"id"=>"id_syndic",
 								"temps" => "maj",
 								"page_voir" => array("sites",'id_syndic'),
-								"libelle" => _L("Tous les syndications dans la corbeille :"),
+								"libelle" => _T("corbeille:syndic_tous"),
 								"libelle_court" => _T('titre_syndication')
 								)	
 	);
