@@ -30,7 +30,7 @@ function inscription2_upgrade(){
 		spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, id_auteur bigint NOT NULL, INDEX id_auteur (id_auteur) );");
 	
 		//ajout des index
-		$desc = spip_abstract_showtable($table_nom, '', false);
+		$desc = sql_showtable($table_nom, '', false);
 		
 		if(is_array($desc) and $desc['key']['PRIMARY KEY']!='id'){
 			spip_query("ALTER TABLE ".$table_nom." DROP PRIMARY KEY");
@@ -101,7 +101,7 @@ function inscription2_upgrade(){
 		include_spip('base/abstract_sql');
 		include(_DIR_PLUGIN_INSCRIPTION2."/inc/pays.php");
 		$table_pays = "spip_geo_pays";
-		$descpays = spip_abstract_showtable($table_pays, '', false);
+		$descpays = sql_showtable($table_pays, '', false);
 		
 		spip_query("DROP TABLE spip_pays");
 		spip_query("CREATE TABLE spip_geo_pays (id_pays SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY, nom varchar(255) NOT NULL );");
@@ -117,7 +117,7 @@ function inscription2_upgrade(){
 	if ($current_version<0.61){
 		include_spip('base/abstract_sql');
 		$table_pays = "spip_geo_pays";
-		$descpays = spip_abstract_showtable($table_pays, '', false);;
+		$descpays = sql_showtable($table_pays, '', false);;
 		
 		if((isset($descpays['field']['nom'])) && (!isset($descpays['field']['pays']))){
 			spip_query("ALTER TABLE spip_geo_pays CHANGE nom pays varchar(255) NOT NULL");
@@ -134,7 +134,7 @@ function inscription2_upgrade(){
 	function inscription2_vider_tables() {
 		include_spip('base/abstract_sql');
 		//supprime la table spip_auteurs_ajouts
-		$desc = spip_abstract_showtable('spip_auteurs_elargis', '', true);
+		$desc = sql_showtable('spip_auteurs_elargis', '', true);
 		foreach(lire_config('inscription2') as $cle => $val){
 			if(isset($desc['field'][$cle])	and $cle != 'id' and $cle != 'id_auteur' and $cle != 'spip_listes_format'){
 				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);
