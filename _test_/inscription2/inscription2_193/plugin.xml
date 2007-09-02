@@ -19,7 +19,8 @@
 	<prefix>
 		  Inscription2
 	</prefix>
-	<necessite id='cfg' version='[1.0.6;]' />
+	<necessite id="cfg" version="[1.0.7;]" />
+	<necessite id="SPIP" version='[1.9262;]' />
 	<install>base/inscription2_installer.php</install>
 	<options>
 		inscription2_mes_options.php
@@ -49,4 +50,5 @@
 		<nom>affiche_milieu</nom>
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>
+	<chemin dir='' />
 </plugin>
