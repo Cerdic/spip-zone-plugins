@@ -716,7 +716,7 @@ jQuery.extend({
 		else if ( elem.tagName ) {
 
 			if ( value != undefined ) elem.setAttribute( name, value );
-			if ( jQuery.browser.msie && /href|src/.test(name) ) // && !jQuery.isXMLDoc(elem) ) 
+			if ( jQuery.browser.msie && /href|src/.test(name) && !jQuery.isXMLDoc(elem) ) 
 				return elem.getAttribute( name, 2 );
 			return elem.getAttribute( name );
 
