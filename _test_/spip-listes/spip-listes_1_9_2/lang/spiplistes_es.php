@@ -189,7 +189,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 
 //N
 'nb_abonnes_plur' => ' inscripciones',
-'nb_abonnes_sing' => ' inscripxi&oacute;n',
+'nb_abonnes_sing' => ' inscripci&oacute;n',
 'nbre_abonnes' => 'N&uacute;mero de inscripciones: ',
 'nom' => 'Nombre de usuari@',
 'nombre_lot' => 'N&uacute;mero de env&iacute;os por lote',
