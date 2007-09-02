@@ -77,6 +77,7 @@ function exec_mutualisation_dist() {
 	
 	$page = str_replace('</head>', '
 		<style type="text/css">
+		a {color:#5a3463;}
 		tr {vertical-align:top;}
 		.tr0 {background-color:#ddded5}
 		thead tr {font-weight:bold;background-color:#333;color:#fff;}
