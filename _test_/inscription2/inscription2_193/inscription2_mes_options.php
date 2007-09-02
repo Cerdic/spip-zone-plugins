@@ -1,4 +1,8 @@
 <?php
+	// en attendant l'intervention corrective de real3t
+	define('_SIGNALER_ECHOS', false); // horrible
+	
+	
 	/**Plugin Inscription 2 avec CFG **/
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('cfg_options');
