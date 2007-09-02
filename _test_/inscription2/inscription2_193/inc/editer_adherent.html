@@ -34,7 +34,7 @@ $().ready(function() {
 
 <?php 
 	echo gros_titre(_T('inscription2:gestion_adherent'),'','');
-	echo debut_gauche(); 
+	echo debut_gauche('',true); 
 ?>
 
 <div id="menu">
@@ -44,7 +44,7 @@ $().ready(function() {
 	]
 
 	<?php
-	debut_boite_info();
+	echo debut_boite_info(true);
 	?>
 	<div class='raccourcis'>
 		<strong><:inscription2:raccourcis:></strong>
@@ -56,7 +56,7 @@ $().ready(function() {
 		</ul>
 	</div>
 	<?php
-	fin_boite_info();
+	echo fin_boite_info(true);
 	?>
 	
 	<div class="legend">
@@ -71,7 +71,7 @@ $().ready(function() {
 	
 </div>
 <?php 
-	echo debut_droite();
+	echo debut_droite('',true);
 ?>
 
 <div id="droite">

@@ -1,6 +1,6 @@
 <?php
-	// en attendant l'intervention corrective de real3t
-	define('_SIGNALER_ECHOS', false); // horrible
+	// en attendant l'intervention corrective de la p**e du gouvernement
+	#define('_SIGNALER_ECHOS', false); // horrible
 	
 	
 	/**Plugin Inscription 2 avec CFG **/

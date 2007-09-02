@@ -1,6 +1,6 @@
 <?php
-	echo debut_gauche();
-	echo debut_boite_info();
+	echo debut_gauche('',true);
+	echo debut_boite_info(true);
 ?>
 <div class="raccourcis">
 	<strong><:inscription2:raccourcis:></strong>
@@ -10,12 +10,12 @@
 	</ul>
 </div>
 <?php
-	echo fin_boite_info();
-	echo debut_droite();
-	echo debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', $return = false, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
+	echo fin_boite_info(true);
+	echo debut_droite('',true);
+	echo debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', true, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
 ?>
 	#FORMULAIRE_INSCRIPTION2_PASS
 <?php
-	echo fin_cadre_sous_rub();
-	echo fin_gauche();
+	echo fin_cadre_sous_rub(true);
+	echo fin_gauche(true);
 ?>
