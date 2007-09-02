@@ -51,7 +51,12 @@
 
 	- align : left|center|right,center	
 	]
-	
+
+[(#ENV{donnee}|?{' ',''}) 
+  [(#SET{objet_spip,id_donnee})]
+  [(#SET{objet_val,[(#ENV{donnee})]})]
+]
+
 [(#ENV{rubrique}|?{' ',''}) 
   [(#SET{objet_spip,id_rubrique})]
   [(#SET{objet_val,[(#ENV{rubrique})]})]

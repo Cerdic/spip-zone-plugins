@@ -14,7 +14,7 @@
 			<album>preroll</album>
 		</track>]
 [(#REM) -------------------- Boucle générale de génération des listes de lecture xspf ----------------]
-	<BOUCLE_docs(DOCUMENTS){id_article ?}{id_rubrique ?}{id_document ?}{id_breve ?}{id_mot ?}{mode=document}{extension==#ENV{type,.}}{par num titre}{par titre}{par id_document}>
+	<BOUCLE_docs(DOCUMENTS){id_article ?}{id_rubrique ?}{id_document ?}{id_breve ?}{id_mot ?}{id_donnee ?}{mode=document}{extension==#ENV{type,.}}{par num titre}{par titre}{par id_document}>
 		<track>
 			<location>[(#URL_DOCUMENT|url_absolue)]</location>
 			[<image>(#LOGO_DOCUMENT||extraire_attribut{src}|match{dist/vignettes}|?{#LOGO_ARTICLE_RUBRIQUE||sinon{#LOGO_BREVE_RUBRIQUE}||sinon{#LOGO_SITE_SPIP},#LOGO_DOCUMENT}|extraire_attribut{src}|url_absolue)</image>]
