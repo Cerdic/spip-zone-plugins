@@ -1,7 +1,5 @@
 <?php
 
-include_spip('modeles/nuage_fonctions.php');
-
 function filtre_calculer_nuage($titres, $urls, $poids, $expose) {
   $resultat = array();
   $max = empty($poids)?0:max($poids);
@@ -13,8 +11,8 @@ function filtre_calculer_nuage($titres, $urls, $poids, $expose) {
       $resultat[$t] = array(
         'url'   => $urls[$id],
         'poids' => ($poids[$id]?$poids[$id]:"0")."/".$max,
-        'style' => $s,
-        'class' => in_array($id, $expose)
+        'taille' => $s,
+        'expose' => filtre_find($expose, $id)
       );
     }
   }

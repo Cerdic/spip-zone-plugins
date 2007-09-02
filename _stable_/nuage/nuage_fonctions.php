@@ -47,4 +47,8 @@ function filtre_nuage_dist($id_mot, $titre = '', $url = '', $poids = -1, $expose
 	return !empty($retour) ? $retour : '';
 }
 
+//la gestion du critere {frequence}
+include_spip('frequence_fonctions');
+
+
 ?>
