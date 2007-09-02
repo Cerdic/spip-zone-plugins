@@ -1,4 +1,6 @@
 <?php
+	// Puisque ce plugin n'est pas destine (pour l'instant) a abandonner la compatibilite avec 1.9.1
+	define('_SIGNALER_ECHOS', false); // horrible      
 // fichier charge a chaque hit
 	global $cs_metas_pipelines;
 
