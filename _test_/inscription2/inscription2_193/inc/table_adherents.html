@@ -150,6 +150,11 @@ function confirm(msg,callback) {
 	
 	//supprimer un auteur
 	if(!empty($id) and $act=='sup'){
+		$row = spip_fetch_array(spip_query("select statut from spip_auteurs where id_auteur='$id'"));
+		
+		if($row['statut'] !='0minirezo' and $row['statut'] !='1commite')
+			spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
+
 		spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur='$id'");
 		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
                 
