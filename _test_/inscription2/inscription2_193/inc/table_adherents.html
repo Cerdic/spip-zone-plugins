@@ -1,0 +1,413 @@
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/jqModal_confirm.css}|direction_css)" />]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)" />]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/abonnement.css}|direction_css)" />]
+
+<script src="#CHEMIN{javascript/jqModal.js}" type="text/javascript"></script>
+<script type="text/javascript">
+/* Overriding Javascript's Alert Dialog */
+function confirm(msg,callback) {
+	$('#confirm')
+		.jqmShow()
+		.find('p.jqmConfirmMsg')
+		.html(msg)
+		.end()
+		.find(':submit:visible')
+		.click(function(){
+			if(this.value == 'yes')
+				(typeof callback == 'string') ?
+				window.location.href = callback :
+				callback;
+			$('#confirm').jqmHide();
+		});
+}
+
+// trigger a confirm whenever links of class alert are pressed.
+	$().ready(function() {
+  $('#confirm').jqm({overlay: 88, modal: true, trigger: false});
+  
+  // trigger a confirm whenever links of class alert are pressed.
+  $('a.confirm').click(function() { 
+    confirm('',this.href); 
+    return false;
+  });
+});
+</script>
+
+<h1><:inscription2:liste_adherents:></h1>
+
+<div id="conteneur">
+
+<div id="menu">
+		
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	#INCLURE{fond=inc/menu_abonnement}	
+	]
+
+	<?php
+	echo debut_boite_info();
+	?>
+	<div class='raccourcis'>
+
+		<strong><:inscription2:raccourcis:></strong>
+		<ul>
+			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
+			<li><a href="?exec=cfg&amp;cfg=inscription2"><:inscription2:configuration:></a></li>
+			<li><a class ="confirm" href="?exec=inscription2_adherents&amp;act=net"><:inscription2:nettoyer_tables:></a></li>
+		
+		</ul>
+	</div>
+
+	<?php
+	echo fin_boite_info();
+	?>
+	
+	<div class="legend">
+		
+		<img src="#CHEMIN{'images/admin-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:admin:><br />
+		<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:><br />
+		<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:adherent:><br />
+		<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:><br />
+		<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:autre:><br />
+		
+	</div>
+	
+</div>	
+
+<div id="principal">
+	<div id="tetiere" >
+		<div style="float:right" >
+		<form method="post" action="?exec=inscription2_adherents">
+		[(#SELF|form_hidden)]
+		<input class="search_field fondl" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>" />
+		<select name="case" id="case" class="fondl" style="padding:2px">
+		<?php
+			$case=_request('case');
+			foreach(lire_config('inscription2') as $cle => $val){
+				if($val!= '' and $cle!='id_table' and ereg("^.+_table$", $cle)){
+					$cle = str_replace("_table", "", $cle);
+					if ($cle == $case){
+						echo "<option value='$cle' selected>"._T('inscription2:'.$cle)."</option>";
+					}
+					else{
+						echo "<option value='$cle'>"._T('inscription2:'.$cle)."</option>";					
+					}
+				}
+			}
+		?>
+		</select>
+		<input type="submit" class="fondo" value="<:info_rechercher:>" />
+		</form>
+		[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})]} )]
+		]
+		
+		</div>
+
+	<?php
+	include_spip('base/abstract_sql');
+	
+	$url = "?exec=inscription2_adherents";
+	//supprimer un auteur ou nettoyer 
+	$id=_request('id');
+	$act=_request('act');
+	
+	//rechercher
+	$valeur=_request('valeur');
+	$case=_request('case');
+	if($case == 'username') $case = 'login';
+	if (isset($valeur)) {
+		if($case=='id'){
+			$critere="a.id_auteur='$valeur'";
+		}else
+			$critere="$case='$valeur'"; 
+	}else{
+		$critere="a.id_auteur<>'0'"; 
+		//que les abonnes si le plugin est actif
+		if(defined('_DIR_PLUGIN_ABONNEMENT') AND _request('statut_abonnement') !='tous') $critere = $critere." AND b.statut_abonnement IN ('prospect','sorti','abonne','relance') [AND b.statut_abonnement='(#ENV{statut_abonnement})']" ;
+		}
+		
+	//pagination
+	$max_par_page=30;
+	$debut=_request('debut');
+	if (empty($debut)) 
+		$debut=0; 
+	
+	//ordre
+	$ordre =_request('ordre');
+	$desc = _request('desc');
+	
+	if(empty($ordre))
+		$ordre = 'id_auteur '.$desc;
+	else
+		$ordre .= ' '.$desc;
+	
+	if($desc=='DESC')
+		$desc = 'ASC';
+	else
+		$desc = 'DESC';
+                
+	//$url = $url.'&debut='.$debut;
+	
+	//supprimer un auteur
+	if(!empty($id) and $act=='sup'){
+		spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur='$id'");
+		spip_query("DELETE FROM spip_auteurs_elargis WHERE id_auteur='$id'");
+                
+                if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
+                    spip_query("DELETE FROM spip_zones_auteurs WHERE id_auteur='$id'");
+
+                if(defined('_DIR_PLUGIN_SPIPLISTES'))
+                    spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
+	}
+
+	//nettoyer la table
+	if($act=='net'){
+		$desc = spip_abstract_showtable('spip_auteurs_elargis', '', true);
+		foreach($desc['field'] as $cle =>$val){
+			if(!(lire_config('inscription2/'.$cle) or lire_config('inscription2/'.$cle.'_fiche') 
+				or lire_config('inscription2/'.$cle.'_fiche_mod') or lire_config('inscription2/'.$cle.'_table')) 
+				and $cle != 'id' and $cle != 'id_auteur' and $cle != 'spip_listes_format')
+				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);
+		}
+	}
+
+	$lettre = array();
+		$qlettre = spip_query(
+	'select distinct upper(left(a.nom,1)) l, count(*) from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur group by l order by l');
+		$count = 0;
+		while ($rlettre = spip_fetch_array($qlettre, SPIP_NUM)) {
+			$lettre[$rlettre[0]] = $count;
+			$count += intval($rlettre[1]);
+		}
+
+	foreach ($lettre as $key => $val) {
+				if ($val == $debut)
+					echo "<b>$key</b> ";
+				else
+					echo "<a href='".parametre_url($url,'debut',$val)."'>$key</a> ";
+			}
+		echo "<a href='[(#SELF|parametre_url{debut,''})]'> tous</a> ";
+
+	?>
+	
+	</div>
+	<form method="post" action="#">
+	<table class="cadre-r">
+	<tr>
+	<?php	
+	echo '<td><strong><a href="'.$url.'&amp;ordre=id_auteur&amp;desc='.$desc.'"> <img src="'._DIR_PLUGIN_INSCRIPTION2.'images/admin-12.gif" alt="admin" /></a></strong></td>';
+	
+	
+	if(lire_config('inscription2/nom_table')){
+		echo '<td><strong><a href="'.$url.'&amp;ordre=nom&amp;desc='.$desc.'">'._T('inscription2:nom').'</a></strong></td>';
+		$table_auteurs[] = "a.nom";
+	}
+	
+	if(lire_config('inscription2/email_table')){
+		$table_auteurs[] = "a.email";
+	}
+	
+		if(lire_config('inscription2/sexe_table')){
+		echo '<td><strong><a href="'.$url.'&amp;ordre=sexe&amp;desc='.$desc.'">'._T('inscription2:sexe').'</a></strong></td>';
+		$table_auteurs[] = "b.sexe";
+	}
+	
+	if(lire_config('inscription2/prenom_table')){
+		echo '<td><strong><a href="'.$url.'&amp;ordre=prenom&amp;desc='.$desc.'">'._T('inscription2:prenom').'</a></strong></td>';
+		$table_auteurs[] = "b.prenom";
+	}
+	
+	foreach(lire_config('inscription2') as $cle => $val){
+		if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table' and $cle!='sexe_table'){
+			$cle = str_replace("_table", "", $cle);
+			if($cle == 'bio' or $cle == 'statut' or $cle == 'username')
+				if($cle == 'username')
+					$table_auteurs[] = "a.login";
+				else				
+					$table_auteurs[] = "a.".$cle;
+			elseif($cle == 'pays')
+				$table_auteurs[] = "c.pays";
+			elseif($cle == 'pays_pro')
+				$table_auteurs[] = "d.pays as pays_pro";
+			else
+				$table_auteurs[] = "b.".$cle;
+			if($cle =='username')
+				echo '<td><strong><a href="'.$url.'&amp;ordre=login&amp;desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
+			else
+				echo '<td><strong><a href="'.$url.'&amp;ordre='.$cle.'&amp;desc='.$desc.'">'._T('inscription2:'.$cle).'</a></strong></td>';
+		}
+	}
+	//abonnement
+	if(defined('_DIR_PLUGIN_ABONNEMENT')){
+	echo '<td><a href="#"><strong>Abonnement</strong></a></td>';
+	echo '<td><a href="#"><strong>&Eacute;ch&eacute;ance</strong></a></td>';
+	$table_auteurs[] = 'b.validite';
+	$table_auteurs[] = 'b.statut_abonnement';
+	}
+	
+	echo '<td colspan="3" style="text-align:center;"><strong><a href="'.$url.'&amp;ordre=statut&amp;desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
+	echo '</tr>';
+	
+	$table_auteurs[] = 'b.id';
+	$table_auteurs[] = 'a.id_auteur';
+	$table_auteurs[] = 'a.statut';
+		
+	if(lire_config('inscription2/pays_table') && lire_config('inscription2/pays_pro_table')) {
+		$query = "SELECT ".join(", ",$table_auteurs)." 
+			FROM spip_auteurs a 
+			LEFT JOIN `spip_auteurs_elargis` b ON b.id_auteur = a.id_auteur
+			left join spip_geo_pays c on b.pays=c.id_pays left join spip_geo_pays d on b.pays_pro=d.id_pays
+			WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
+		}
+	elseif(lire_config('inscription2/pays_table'))
+		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
+			ON b.id_auteur = a.id_auteur LEFT JOIN spip_geo_pays c ON b.pays=c.id_pays  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
+	else
+		$query = "SELECT ".join(", ",$table_auteurs)." FROM spip_auteurs a LEFT JOIN `spip_auteurs_elargis` b 
+			ON b.id_auteur = a.id_auteur  WHERE $critere ORDER BY $ordre LIMIT $debut,$max_par_page";
+	
+	$query = spip_query ($query);
+		
+	$i=0;
+	while ($data = spip_fetch_array($query)) {	
+		
+		//switch statut
+		if($i%2 == 0){
+		 $class='row';
+		 } 
+		 else {
+		 $class='even';
+		 }
+		 //var_dump($data);die();
+		 if(!empty($data['statut_abonnement'])) $class = $data['statut_abonnement'] ;
+		
+		if($data['statut']=='0minirezo')
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif"';
+		elseif($data['statut']=='1comite')
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/redac-12.gif"';
+		elseif($data['statut']=='6forum')
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/adherent-12.gif"';
+		elseif($data['statut']=='aconfirmer')
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/aconf-12.gif"';
+		else
+			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/defaut-12.gif"';
+		
+		echo '<tr class="'.$class.'">';
+		$id = $data['id'] ;
+		if(!empty($data['id_auteur']))
+			echo '<td><a href="?exec=auteur_infos&amp;id_auteur='.$data['id_auteur'].'"><img src='.$url_logo.' alt="'._T('inscription2:fiche_adherent').'" /></a></td>';
+		else 
+			echo '<td> </td>';
+		
+		
+		if(lire_config('inscription2/nom_table') or lire_config('inscription2/email_table')){
+			if(!empty($data['nom']) and !empty($data['email']))
+				echo '<td><a href="mailto:'.$data['email'].'">'.$data['nom'].'</a></td>';
+			elseif(!empty($data['nom']))
+				echo '<td>'.$data['nom'].'</td>';
+			elseif(!empty($data['email']))
+				echo '<td><a href="mailto:'.$data['email'].'">'.$data['email'].'</a></td>';
+			else
+				echo '<td> </td>';
+		}
+		
+		if(lire_config('inscription2/sexe_table')){
+			if(!empty($data['sexe'])){
+				$civilite = ($data['sexe'] == 'M')? 'M<sup>r</sup>' : 'M<sup>me</sup>' ;
+				echo '<td>'.$civilite.'</td>';
+				}
+			else
+				echo '<td> </td>';
+		}
+		
+		if(lire_config('inscription2/prenom_table')){
+			if(!empty($data['prenom']))
+				echo '<td>'.$data['prenom'].'</td>';
+			else
+				echo '<td> </td>';
+		}
+		
+		foreach(lire_config('inscription2') as $cle => $val){
+			if($val!= '' and ereg("^.+_table$", $cle) and $cle!='nom_table' and $cle!='prenom_table' and $cle!='email_table' and $cle!='sexe_table'){
+				$cle = str_replace("_table", "", $cle);
+				if($cle == 'username')
+					$cle = 'login';
+				if(!empty($data[$cle]))
+					echo '<td>'.$data[$cle].'</td>';
+				else 
+					echo '<td> </td>';
+			}
+		}
+		//abonnement
+		if(defined('_DIR_PLUGIN_ABONNEMENT')){
+		$abonnement = spip_fetch_array(spip_query("select a.libelle from `spip_abonnements` a join `spip_auteurs_elargis_abonnements` b where a.id_abonnement=b.id_abonnement and b.id_auteur_elargi='$id'" ));
+		echo '<td>'.$abonnement["libelle"].'</td>';
+		echo '<td>'.$data["validite"].'</td>';
+		}
+		
+		echo '<td><a href="?exec=editer_adherent&amp;id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" alt="'._T('inscription2:editer_adherent').'" /></a></td>';	
+		
+		if($data['statut'] != '0minirezo' and $data['statut'] != '1comite')
+			echo '<td><a href="?exec=inscription2_adherents&amp;id='.$data['id_auteur'].'&amp;act=sup" class="confirm"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/poubelle-12.gif" alt="'._T('inscription2:supprimer_adherent').'" /></a></td>';
+		else 
+			echo '<td><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/interdit-12.gif" alt="'._T('inscription2:supprimer_adherent').'" /></td>';
+			echo '<td><input type="checkbox" name="check_aut[]" /></td>' ;
+		echo '</tr>';
+	$i++;	
+	}
+	?>
+	</table>	
+	</form>
+
+	
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	#INCLURE{fond=inc/pied_abonnement}
+	]
+	
+	
+	<div id="pagination">
+	<?php	
+	$query = spip_query("SELECT COUNT(*) FROM spip_auteurs a, spip_auteurs_elargis b WHERE a.id_auteur = b.id_auteur AND $critere");
+	$query = spip_fetch_array($query);
+	$nombre_selection = $query['COUNT(*)'];
+	$pages=intval($nombre_selection/$max_par_page) + 1;
+
+	if ($pages != 1)	{
+		for ($i=0;$i<$pages;$i++)	{ 
+			$position= $i * $max_par_page;
+			if ($position == $debut)	{
+				echo '<strong>'.$position.' </strong>';
+			}
+			else {
+				echo "<a href='[(#SELF|parametre_url{debut,''})&amp;debut=$position]'>".$position."</a> ";
+			}
+		}
+	}	
+	
+	?>
+	</div>
+
+</div>
+
+</div>
+
+
+<!-- Confirm Dialog -->
+
+<div class="jqmConfirm" id="confirm">
+
+	<div id="ex3b" class="jqmConfirmWindow">
+    <div class="jqmConfirmTitle clearfix">
+    <h1>Confirmation </h1><a href="#" class="jqmClose"><em>Close</em></a>
+	</div>
+  
+	<div class="jqmConfirmContent">
+	<p class="jqmConfirmMsg"></p>
+	<:inscription2:confirmation:>
+	</div>
+
+  
+	<input type="submit" value="no" />
+	<input type="submit" value="yes" /> 
+	</div>
+</div>

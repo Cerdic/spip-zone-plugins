@@ -1,0 +1,10 @@
+<div class="select">
+<select name="pays" id="pays" class="forml">
+	<option value=""><:inscription2:pays:></option>
+	<BOUCLE_pays(SPIP_GEO_PAYS){tout}>
+		[<option value="#ID_PAYS"[(#ID_PAYS|=={#ENV{pays}}|?{' selected="selected"',''})]>
+		(#PAYS)
+		</option>]
+	</BOUCLE_pays>
+</select>
+</div>

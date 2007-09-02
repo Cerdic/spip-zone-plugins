@@ -1,0 +1,24 @@
+[(#CONFIG{inscription2/categorie}|=={on}|?{' ', ''})
+<fieldset class="infos-auteurs">
+<legend>
+	Choisir sa cat&eacute;gorie de cotisation
+</legend>
+
+<div class="grand_select">
+	<label><strong><:inscription2:categorie:></strong></label>
+	<div class="select">
+	
+#SET{selected,#CONFIG{inscription2/categories,'',''}}
+<select name="categories" id="categories" class="formo select">
+		<option value='0'>-</option>
+	<BOUCLE_categories(SPIP_ASSO_CATEGORIES){tout}>
+		[<option value="#ID_CATEGORIE" (#ID_CATEGORIE|in_array{#GET{selected}})>
+		#LIBELLE
+		</option>]
+</BOUCLE_categories>
+</select>
+
+	</div>
+</div>
+</fieldset>
+]

@@ -1,0 +1,19 @@
+[(#REM)
+
+	Vue pour le crayon 'adressecomplete'
+
+]
+#CACHE{0}
+<span class="#EDIT{adressecomplete} adr">
+	
+	[(#CONFIG{inscription2/adresse_fiche_mod}|?{' ',''})[<span class="street-address">(#ENV*{adresse}|?{[(#ENV*{adresse}|typo|n_to_br)],<:inscription2:adresse:> <:inscription2:non_renseignee:>})</span><br />]]
+	
+	[(#CONFIG{inscription2/code_postal_fiche_mod}|?{' ',''})[<span class="postal-code">(#ENV*{code_postal}|?{[(#ENV*{code_postal}|typo)],<:inscription2:code_postal:> <:inscription2:non_renseigne:><br />})</span>]]
+	
+	[(#CONFIG{inscription2/ville_fiche_mod}|?{' ',''})[<span class="locality">(#ENV*{ville}|?{[(#ENV*{ville}|typo)],<:inscription2:ville:> <:inscription2:non_renseignee:>})</span><br />]]
+	
+	[(#CONFIG{inscription2/pays}|?{' ',''})
+		[(#ENV*{pays}|?{'',' '})<span class="country-name"><:inscription2:pays:> <:inscription2:non_renseigne:></span>]
+		[(#ENV*{pays}|?{' ',''})<span class="country-name">[(#INCLURE{fond=vues/pays}{id=#ENV*{pays}})]</span>]
+	]
+</span>

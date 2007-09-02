@@ -1,0 +1,28 @@
+#SET{selected,#CONFIG{inscription2/zones,'',''}}
+#SET{checked,#CONFIG{inscription2/accesrestreint,'',''}}
+
+<div>
+<label>
+	<input type="checkbox" name="accesrestreint" onclick="showhide(this, '#zones')" [(#GET{checked}|?{#CONFIG{plugin/ACCESRESTREINT}|?{checked="checked"}})] id="accesrestreint" />
+	<strong><:inscription2:accesrestreint:></strong> 
+</label>
+
+<label for="zones" style="[(#GET{checked}|=={on}|?{display: block;, display:none;})]">
+<:inscription2:choisir_zones:>
+</label>
+<br />
+
+<B_zones>
+<select name="zones[]" multiple="multiple" size="[(#TOTAL_BOUCLE|<{6}|?{ [(#TOTAL_BOUCLE|plus{1})] , 5 })]"  id="zones">
+<BOUCLE_zones(Spip_zones){tout}>
+	<option value="#ID_ZONE"[(#ID_ZONE|in_array{#GET{selected}}|?{ selected="selected"})]>
+	#TITRE
+	</option>
+</BOUCLE_zones>
+</select>
+</B_zones>
+<//B_zones>
+
+<small><br /><:inscription2:select_listes:><br />
+<a href="#" onclick="$('#zones').find('option').attr('selected', false);return false;"><:inscription2:deselect_listes:></a> </small><br />
+</div>

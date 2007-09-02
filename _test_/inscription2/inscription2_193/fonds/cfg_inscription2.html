@@ -1,0 +1,280 @@
+[(#REM) titre=Inscription2]
+[(#REM) icone=images/inscription2_icone.png]
+
+[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../images/Inscription2.PNG' width='64' height='64' alt='Hand writing' style="float:#LANG_RIGHT;" /> })]
+
+<!-- descriptif= [(#GET{logo})] Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site,vous pouvez choisir ici les champs suppl&eacute;mentaires
+
+<a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a> -->
+
+#CACHE{0}
+
+<script type="text/javascript">
+/*jQuery tabs*/
+$(document).ready(function() {
+	$('#container-1').tabs({  onShow:legend_it });
+   	d = $('#legend') ;
+    $('#fragment-1').append(d);
+});
+
+function legend_it(a,b,c){
+	d = $('#legend') ;
+	/*console.log($(a).attr('href'));*/
+	if( $(a).attr('href') != '#fragment-5')
+	$(b).append(d);
+}
+
+</script>
+
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<br />
+
+[(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
+<fieldset>
+<legend>
+	<:inscription2:info_defaut:>
+</legend>
+<p>
+	<:inscription2:info_defaut_desc:>
+<br /><br />
+<table>
+<tr>
+<td width='140'/>
+<td width='70'> <:inscription2:form:> </td>
+<td width='70'> <:inscription2:fiche_mod:> </td>
+<td width='70'> <:inscription2:fiche:> </td>
+<td width='70'> <:inscription2:table:> </td>
+</tr><tr>
+<td>
+	<strong><:inscription2:nom:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom" checked="checked" id="nom" onclick="alert('par defaut');return false;" />
+	</label>
+	<label style="display:none;">
+		<input type="checkbox" name="nom_obligatoire" checked="checked" id="nom_obligatoire" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_fiche_mod" onclick="enadis(this,nom_fiche)" [checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_fiche" [checked="(#ENV{nom_fiche}?{checked})"] id="nom_fiche" [disabled ="(#ENV{nom_fiche_mod}?{true})"] />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="nom_table" [checked="(#ENV{nom_table}?{checked})"] id="nom_table" />
+	</label>
+</td>
+</tr><tr>
+<td>
+	<strong><:inscription2:email:></strong>
+</td><td>
+	<label>
+		<input type="checkbox" name="email" checked="checked" id="email" onclick="alert('par defaut');return false;"/>
+	</label>
+	<label style="display:none;">
+		<input type="checkbox" name="email_obligatoire" checked="checked" id="email_obligatoire" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="email_fiche_mod" onclick = "enadis(this,email_fiche)" [checked="(#ENV{email_fiche_mod}?{checked})"] id="email_fiche_mod" />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="email_fiche" [checked="(#ENV{email_fiche}?{checked})"] id="email_fiche" [disabled ="(#ENV{email_fiche_mod}?{true})"] />
+	</label>
+</td><td>
+	<label>
+		<input type="checkbox" name="email_table" [checked="(#ENV{email_table}?{checked})"] id="email_table" />
+	</label>
+</td>
+</tr>
+</table>
+
+</fieldset>
+
+
+<div id="container-1">
+	<ul>
+		<li><a href="#fragment-1"><span>Perso</span></a></li>
+		<li><a href="#fragment-2"><span>Pro</span></a></li>
+		[(#CONFIG{plugin/GEOMAP/version}|?{' '})
+		<li><a href="#fragment-3"><span>Geo</span></a></li>
+		]
+		[(#CONFIG{plugin/ECHOPPE/version}|?{' '})
+		<li><a href="#fragment-4"><span>Echoppe</span></a></li>
+		]
+		<li><a href="#fragment-5"><span>Options</span></a></li>
+	</ul>
+
+<div id="fragment-1">
+
+[(#REM) ------------------------ INFORMATIONS PERSONNELLES? ------------------------ ]
+
+<INCLURE{fond=fonds/inscription2_infos_persos}>
+
+</div>
+
+[(#REM) ------------------------ INFORMATIONS PROFESSIONNELLES? ------------------------ ]
+
+<div id="fragment-2">
+
+<INCLURE{fond=fonds/inscription2_infos_pros}>
+
+</div>
+
+[(#REM) ------------------------ GEOLOCALISATION? ------------------------ ]
+
+<div id="fragment-3">
+
+[(#CONFIG{plugin/GEOMAP/version}|?{' '}) <INCLURE{fond=fonds/inscription2_geoloc}>]
+
+</div>
+
+<div id="fragment-4">
+
+[(#CONFIG{plugin/ECHOPPE/version}|?{' '}) <INCLURE{fond=fonds/inscription2_echoppe}>]
+</div>
+
+[(#REM) ------------------------ OPTIONS DES AUTEURS ------------------------ ]
+<div id="fragment-5">
+<fieldset>
+<legend>
+	<:inscription2:info_gener:>
+</legend>
+
+<:inscription2:info_gener_desc:>
+[<div style="margin:5px 0px">(#CONFIG{plugin/SPIPLISTES}|?{' ', ''})
+ <INCLURE{fond=fonds/inscription2_spip_listes}>
+</div> 
+]
+[<div style="margin:5px 0px">(#CONFIG{plugin/ASSOCIATION}|?{' ', ''})
+ <INCLURE{fond=fonds/inscription2_association}>
+</div>
+]
+<br /><br />
+<label>
+	<input type="checkbox" name="publication" [checked="(#ENV{publication}?{checked})"] id="publication" />
+	<strong><:inscription2:publication:></strong><br />
+	<:inscription2:exp_publication:>
+</label>
+<br /><br />
+<label>
+	<input type="checkbox" name="domaines" onclick="showhide(this, '#expl')" [(#ENV{domaines}|?{checked="checked"})] id="domaines" />
+	<strong><:inscription2:exp_domaines:></strong> <br />
+	<span id="expl" style="[(#ENV{domaines}|=={on}|?{display: block;, display:none;})]"><:inscription2:exp_domaines2:></span>
+</label>
+</fieldset>
+
+<fieldset>
+<legend>
+	<:inscription2:info_internes:>
+</legend>
+<p>
+<:inscription2:info_internes_desc:>
+<br /><br />
+<label>
+	<input type="checkbox" name="divers" [checked="(#ENV{divers}?{checked})"] id="divers" />
+	<strong><:inscription2:divers:></strong><br />
+	<:inscription2:exp_divers:>
+</label>
+<br /><br />
+<div>
+	<strong><:inscription2:statut:></strong><br />
+	<:inscription2:exp_statut:><br />
+	<select name="statut_nouveau" id="statut_nouveau">
+		<option value='6forum' [selected="(#ENV{statut_nouveau}|=={6forum}|?{selected})"]><:inscription2:visiteur:></option>
+		<option value='1comite' [selected="(#ENV{statut_nouveau}|=={1comite}|?{selected})"]><:inscription2:auteur:></option>
+	</select>
+</div>
+<br /><br />
+<div>
+<label>
+	<input type="checkbox" name="creation" [checked="(#ENV{creation}?{checked})"] id="creation" />
+	<strong><:inscription2:creation:></strong>
+</label>
+</div>
+<br /><br />
+<div>
+<span>
+	<input type="checkbox" name="statut_int" onclick="showhide(this, '#statut_interne')" [checked="(#ENV{statut_int}?{checked})"] id="statut_int" />
+	<strong><:inscription2:statut_rel:></strong><br />
+	<:inscription2:exp_statut_rel:><br/>
+</span>
+<span>
+	<input type="text" name="statut_interne" id="statut_interne" style="[(#ENV{statut_int}|=={on}|?{display: block;, display:none;})]" value="#ENV{statut_interne}" />
+</span>
+</div>
+
+[<div style="margin:5px 0px">(#CONFIG{plugin/ACCESRESTREINT}|?{' ', ''})
+<INCLURE{fond=fonds/inscription2_acces_restreint}>
+</div>
+]
+</fieldset>
+
+[<div style="margin:5px 0px">(#CONFIG{plugin/ABONNEMENT}|?{' ', ''})
+ <INCLURE{fond=fonds/inscription2_abonnement}>
+ </div>
+]
+</div>
+
+<br />
+<small id="legend">
+<strong><:inscription2:form:></strong><:inscription2:form_expl:><br />
+<strong><span style="color:red">*</span></strong><:inscription2:form_oblig_expl:><br />
+<strong><:inscription2:fiche_mod:></strong><:inscription2:fiche_mod_expl:><br />
+<strong><:inscription2:fiche:></strong><:inscription2:fiche_expl:><br />
+<strong><:inscription2:table:></strong><:inscription2:table_expl:><br />
+</small>
+
+</div>
+[(#REM) Code jQuery plier/deplier les listes ]
+<script type="text/javascript"><!--
+function showhide(boxName, boxNom) {
+if(boxName.checked){
+	$(boxNom).slideDown('slow');
+}
+else 
+	$(boxNom).slideUp('slow');
+}
+// --></script>
+
+<script type="text/javascript"><!--
+function showoblig(boxName) {
+if(boxName.checked){
+	$(boxName).parent().next('label').slideDown('slow');
+}
+else 
+	$(boxName).parent().next('label').slideUp('slow');
+	$(boxName).parent().next('label').find('input[@type=checkbox]').eq(0).attr({ checked: ''});
+}
+// --></script>
+
+<script type="text/javascript"><!--
+function enadis(boxName, boxNom) {
+if(boxName.checked){
+	boxNom.disabled = true;
+	boxNom.checked = false;
+}else 
+	boxNom.disabled = false;
+}
+// pour plus tard quand le nom et l'email seront forcés dans l'enregistrement meme si pas dans cfg
+//$(document).ready(function(){ 
+//$('#nom').attr('disabled','disabled');
+//$('#email').attr('disabled','disabled');
+//});
+// --></script>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" class="fondo" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
+-->
+</div>
+
+</form>

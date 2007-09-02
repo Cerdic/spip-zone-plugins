@@ -1,0 +1,67 @@
+#conteneur {
+margin-top : 15pt; 
+margin-left : 15pt; 
+font-size: 8pt;
+width:100%;
+}
+
+#menu  {
+float:left;
+width:150pt;
+text-align: left; 
+}
+
+.raccourcis {margin-top:5px;padding:5px}
+
+.legend {padding-left : 50px}
+
+.raccourcis ul {
+list-style-type:none;
+padding-left : 40px;
+}
+.raccourcis li {
+margin-top:5px
+}
+ 
+#principal {margin:0% 2% 2% 23%}
+
+#tetiere{margin:10px 0px;height:40px}
+
+input, select, textarea {
+float:none;
+font-family:Verdana,Arial,Sans,sans-serif;
+font-size:11px;
+padding:3px;
+}
+
+#adherent input, #adherent select, #adherent textarea{
+width:200px;
+}
+
+.submit{margin: 10px 0px 10px 300px}
+#adherent div.submit input {width:auto;}
+
+#adherent input.checkbox {width:15px}
+
+sup {font-size:60%}
+
+.search_field{
+width:100px
+}
+#case{
+width:80px
+}
+
+#principal table {clear:right; margin-left:10pt;padding:5px}
+#principal tr, #droite tr { background-color : #E0E0E0 ;}
+ { background-color : #E0E0E0 ;}
+#principal tr.row { background:#FFF8DC; }
+#principal tr.even { background:#AFF5DF; }
+
+#principal td, #droite td {padding:3px;text-align:center}
+
+#pagination {margin:10px;font-size:0.7em}
+
+a:hover{font-weight:bold;}
+	
+.cadre-info {margin-bottom:10px}
