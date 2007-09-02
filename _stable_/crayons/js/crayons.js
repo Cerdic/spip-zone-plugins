@@ -196,8 +196,8 @@ jQuery.fn.activatecrayon = function(percent) {
     crayon
     .find('form')
       .append(
-        jQuery('<input />')
-        .attr({'type':'hidden','name':'self','value':configCrayons.self})
+        jQuery('<input type="hidden" name="self" />')
+        .attr('value',configCrayons.self)
       )
       .ajaxForm({"dataType":"json",
       "success": function(d) {
