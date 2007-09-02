@@ -1,10 +1,10 @@
 <plugin>
   <nom>
-	Boutons dans le Texte
+	<multi>[fr]Boutons dans le Texte[en]Buttons in the text[ar]&#1578;&#1603;&#1576;&#1610;&#1585; &#1608;&#1578;&#1589;&#1594;&#1610;&#1585;</multi>
   </nom>
   <auteur>
 	bertrand Gugger [->http://toggg.com/]
-_ &#169; 2006 - Distribue sous licence LGPL
+_ &#169; 2006 - <multi>[fr]Distribue sous licence LGPL[en]Distributed under LGPL license[ar]&#1605;&#1608;&#1586;&#1593; &#1576;&#1578;&#1585;&#1582;&#1610;&#1589; LGPL</multi>
   </auteur>
   <version>
 	0.3.0
@@ -13,16 +13,15 @@ _ &#169; 2006 - Distribue sous licence LGPL
 	stable
   </etat>
   <description>
-Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police
-_ Les boutons sont rajout&#233;s avant chaque div de classe texte du contenu si ils ne sont pas d&#233;j&#224; pr&#233;sents dans la page
-(images de classe textsizeup , textsizedown ou textonly)
-_ La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant ecrire/?exec=cfg&amp;cfg=boutonstexte
-_ Certains &#233;l&#233;ments peuvent &#234;tre forc&#233;s par javascript.
-_ ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
+<multi>[fr]Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police[en]Adds buttons to display text such as enlarge/reduce font point size[ar]&#1610;&#1590;&#1610;&#1601; &#1575;&#1586;&#1575;&#1585; &#1578;&#1603;&#1576;&#1610;&#1585; &#1608;&#1578;&#1589;&#1594;&#1610;&#1585; &#1575;&#1604;&#1582;&#1591; &#1601;&#1610; &#1606;&#1589; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;</multi>
+_ <multi>[fr]Les boutons sont rajout&#233;s avant chaque div de classe texte du contenu si ils ne sont pas d&#233;j&#224; pr&#233;sents dans la page (images de classe textsizeup , textsizedown ou textonly)[en]Buttons are added before each texte class div of the content if they are not already on the page (images under textsizeup, textsizedown or textonly classes)[ar]&#1575;&#1604;&#1575;&#1586;&#1585;&#1575;&#1585; &#1578;&#1592;&#1607;&#1585; &#1602;&#1576;&#1604; &#1603;&#1604; &#1593;&#1604;&#1575;&#1605;&#1577; div &#1605;&#1606; &#1589;&#1606;&#1601; texte &#1601;&#1610; &#1575;&#1604;&#1606;&#1589; &#1575;&#1584;&#1575; &#1604;&#1605; &#1578;&#1603;&#1606; &#1605;&#1608;&#1580;&#1608;&#1583;&#1577; &#1587;&#1575;&#1576;&#1602;&#1575;&#1611; (&#1589;&#1608;&#1585; &#1605;&#1606; &#1589;&#1606;&#1601; textsizeup &#1608;textsizedown &#1608;textonly &#1604;&#1604;&#1606;&#1589; &#1601;&#1602;&#1591;)</multi>
+_ <multi>[fr]La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant[en]Optional configuration could be achieved by installing the cfg plugin and loading [ar]&#1610;&#1605;&#1603;&#1606; &#1578;&#1606;&#1601;&#1610;&#1584; &#1575;&#1604;&#1575;&#1593;&#1583;&#1575;&#1583;&#1575;&#1604;&#1575;&#1582;&#1578;&#1610;&#1575;&#1585;&#1610; &#1576;&#1578;&#1579;&#1576;&#1610;&#1578; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; cfg &#1608;&#1576;&#1578;&#1581;&#1605;&#1610;&#1604; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577; </multi> ecrire/?exec=cfg&amp;cfg=boutonstexte
+_ <multi>[fr]Certains &#233;l&#233;ments peuvent &#234;tre forc&#233;s par javascript.[en]Some elements can be forced through javascript[ar]&#1610;&#1605;&#1603;&#1606; &#1601;&#1585;&#1590; &#1576;&#1593;&#1590; &#1575;&#1604;&#1593;&#1606;&#1575;&#1589;&#1585; &#1576;&#1608;&#1575;&#1587;&#1591;&#1577; &#1580;&#1575;&#1601;&#1575;&#1587;&#1603;&#1585;&#1610;&#1576;&#1578;.</multi>
+_ <multi>[fr]ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes[en]WARNING: Requires jQuery and the tag <code>#INSERT_HEAD</code> in the templates.[ar]&#1578;&#1606;&#1576;&#1610;&#1607;: &#1610;&#1578;&#1591;&#1604;&#1576; jQuery &#1608;&#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1577; <code>#INSERT_HEAD</code> &#1601;&#1610; &#1575;&#1604;&#1589;&#1601;&#1581;&#1575;&#1578; &#1575;&#1604;&#1606;&#1605;&#1608;&#1584;&#1580;&#1610;&#1577;</multi>
 
-Si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=boutonstexte]
+<multi>[fr]Si vous avez cfg[en]If you have cfg[ar]&#1575;&#1584;&#1575; &#1603;&#1575;&#1606; &#1593;&#1606;&#1583;&#1603; cfg</multi>: [<multi>[fr]Configuration[ar]&#1575;&#1604;&#1575;&#1593;&#1583;&#1575;&#1583;</multi>->.?exec=cfg&amp;cfg=boutonstexte]
   </description>
-  <lien>[Documentation sur contrib->http://www.spip-contrib.net/?article1474]</lien> <!-- URI de documentation -->
+  <lien>[<multi>[fr]Documentation sur[ar]&#1575;&#1604;&#1578;&#1608;&#1579;&#1610;&#1602; &#1601;&#1610; &#1605;&#1608;&#1602;&#1593;</multi> contrib->http://www.spip-contrib.net/?article1474]</lien> <!-- URI de documentation -->
   <prefix>
 	boutonstexte
   </prefix>
