@@ -171,7 +171,7 @@ function inscription2_nouveau($declaration){
 	//insertion des données dans la table spip_auteurs
 	$declaration['alea_actuel'] = rand(1,99999);
 	$auteurs['alea_actuel']=$declaration['alea_actuel'];
-	$n = spip_abstract_insert('spip_auteurs', ('(' .join(',',array_keys($auteurs)).')'), ("(" .join(", ",array_map('_q', $auteurs)) .")"));
+	$n = sql_insert('spip_auteurs', ('(' .join(',',array_keys($auteurs)).')'), ("(" .join(", ",array_map('_q', $auteurs)) .")"));
 	$declaration['id_auteur'] = $n;
 	$elargis['id_auteur'] = $n;
 	$date = date('Y-m-d');
@@ -192,7 +192,7 @@ function inscription2_nouveau($declaration){
 			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('$n', '$value')");
 	}
 	
-	$n = spip_abstract_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
+	$n = sql_insert('`spip_auteurs_elargis`', ('(' .join(',',array_keys($elargis)).')'), ("(" .join(", ",array_map('_q', $elargis)) .")"));
 	$declaration['id_auteur_elargi'] = $n ;
 	
 	if($declaration['abonnement']){
