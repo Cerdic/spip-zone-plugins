@@ -82,6 +82,8 @@ function exec_mutualisation_dist() {
 		thead tr {font-weight:bold;background-color:#333;color:#fff;}
 		td {text-align:left;}
 		#minipres{width:50em;}
+		.upgrade {text-align: center; padding:1em .5em;}
+		.upgrade input { border: 2px solid red;color:red; background-color:#fff; font-weight:bold;}
 		</style>
 		</head>
 		', $page);
@@ -96,11 +98,13 @@ function test_upgrade_site($meta) {
 		$secret = $meta['version_installee'].'-'.$meta['alea_ephemere'];
 		$secret = md5($secret);
 		return <<<EOF
-<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post'>
+<form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade'>
+<div>
 <input type='hidden' name='secret' value='$secret' />
 <input type='hidden' name='exec' value='mutualisation' />
 <input type='hidden' name='upgrade' value='oui' />
-<input type='submit' value='upgrade site' />
+<input type='submit' value='Upgrade site' />
+</div>
 </form>
 EOF;
 	}
