@@ -1,14 +1,14 @@
-img.crayon-img-changed {
+em.crayon-img-changed {
 	display: none;
 }
-.crayon-changed img.crayon-img-changed {
-	display: inline;
+.crayon-changed em.crayon-img-changed {
+	display: block;
 }
-.crayon-changed img.crayon-crayon {
+.crayon-changed em.crayon-crayon {
 	display: none;
 }
-img.crayon-edit, img.crayon-crayon {
-	visibility: hidden;
+em.crayon-edit, em.crayon-crayon {
+	display: none;
 }
 .crayon-boutons, .crayon-searching {
 	float: right;
@@ -21,18 +21,43 @@ img.crayon-edit, img.crayon-crayon {
 }
 .crayon-icones {
 	float: right;
-	width: 65px;
+	width: 0px;
 	position: relative;
-}
-.crayon-icones span {
-	position:absolute;
-	right:0px;
+	top:0; left:0;
 	z-index:4999;
 }
-.crayon-edit, .crayon-crayon, .crayon-img-changed {
+.crayon-icones span,.crayon-icones em {
+	position:absolute;
+	left:0px;
+}
+em.crayon-edit, em.crayon-crayon, em.crayon-img-changed {
 	cursor: pointer;
 	border:0;
 } 
+
+/* definition des icones */
+.crayon-icones em.crayon-crayon {
+	background: url(images/crayon20.png) no-repeat;
+	height: 20px;
+	width: 20px;
+}
+.crayon-icones em.crayon-searching {
+	background: url(images/searching.gif) no-repeat;
+	height: 13px;
+	width: 13px;
+}
+.crayon-icones em.crayon-edit {
+	background: url(images/edit.png) no-repeat;
+	height: 20px;
+	width: 20px;
+}
+.crayon-icones em.crayon-img-changed {
+	background: url(images/changed.png) no-repeat;
+	height: 20px;
+	width: 20px;
+}
+
+
 .formulaire_spip .crayon-active {
 	padding: 1px;
 	border: 1px inset;

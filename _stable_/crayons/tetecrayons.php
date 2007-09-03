@@ -94,19 +94,15 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 		),
 		'img' => array(
 			'searching' => array(
-				'file' => 'searching.gif',
 				'txt' => _U('crayons:veuillez_patienter')
 			),
 			'crayon' => array(
-				'file' => 'crayon20.png',
 				'txt' => _U('crayons:editer')
 			),
 			'edit' => array(
-				'file' => 'edit.png',
 				'txt' => _U('crayons:editer_tout')
 			),
 			'img-changed' => array(
-				'file' => 'changed.png',
 				'txt' => _U('crayons:deja_modifie')
 			)
 		),

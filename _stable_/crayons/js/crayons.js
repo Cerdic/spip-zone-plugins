@@ -7,9 +7,9 @@ function cfgCrayons(options)
 {
   this.url_crayons_html = options['dir_racine']+'spip.php?action=crayons_html';
   this.img = {
-    'searching':{'file':'searching.gif','txt':'En attente du serveur ...'},
-    'edit':{'file':'crayon.png','txt':'Editer'},
-    'img-changed':{'file':'changed.png','txt':'Deja modifie'}
+    'searching':{'txt':'En attente du serveur ...'},
+    'edit':{'txt':'Editer'},
+    'img-changed':{'txt':'Deja modifie'}
   };
   this.txt = {
   };
@@ -19,9 +19,11 @@ function cfgCrayons(options)
 };
 
 cfgCrayons.prototype.mkimg = function(what, extra) {
-  return '<img class="crayon-' + what +
+  return '<em class="crayon-'+what+'" title="'+ this.img[what].txt + (extra ? extra : '') + '"></em>';
+/*  return '<img class="crayon-' + what +
     '" src="' + this.imgPath + '/' + this.img[what].file +
-    '" title="' + this.img[what].txt + (extra ? extra : '') + '" />';
+    '" title="' + this.img[what].txt + (extra ? extra : '') + ' /">';
+*/
 };
 
 cfgCrayons.prototype.iconclick = function(c) {
@@ -92,7 +94,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
     // sinon charger le formulaire
     else {
       // sauf si je suis deja en train de le charger (lock)
-      if (jQuery(this).find("img.crayon-searching").length) {
+      if (jQuery(this).find("em.crayon-searching").length) {
         return;
       }
       jQuery(this)
@@ -129,7 +131,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
         function (c) {
           eval('c = '+c); // JSON
           jQuery(me)
-          .find("img.crayon-searching")
+          .find("em.crayon-searching")
             .remove();
           if (c.$erreur) {
             uniAlert(c.$erreur);
@@ -202,7 +204,7 @@ jQuery.fn.activatecrayon = function(percent) {
       .ajaxForm({"dataType":"json",
       "success": function(d) {
         me
-        .find("img.crayon-searching")
+        .find("em.crayon-searching")
           .remove();
         if (d.$erreur > '') {
           if (d.$annuler) {
@@ -379,14 +381,14 @@ jQuery.fn.initcrayon = function(){
       jQuery(this)
       .addClass('crayon-hover')
       .find('>span.crayon-icones')
-        .find('>span>img.crayon-crayon,>span>img.crayon-edit')
-          .css('visibility','visible');
+        .find('>span>em.crayon-crayon,>span>em.crayon-edit')
+          .show();//'visibility','visible');
     },function(){
       jQuery(this)
       .removeClass('crayon-hover')
       .find('>span.crayon-icones')
-        .find('>span>img.crayon-crayon,>span>img.crayon-edit')       
-          .css('visibility','hidden');
+        .find('>span>em.crayon-crayon,>span>em.crayon-edit')
+          .hide();//('visibility','hidden');
     }
   );
 
