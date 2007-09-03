@@ -47,6 +47,17 @@ function filtre_nuage_dist($id_mot, $titre = '', $url = '', $poids = -1, $expose
 	return !empty($retour) ? $retour : '';
 }
 
+//compat SPIP 1.9.2
+function push($array, $val) {
+	if($array == '' OR !array_push($array, $val)) return '';
+	return $array;
+}
+
+function find($array, $val) {
+	return ($array != '' AND in_array($val, $array));
+}
+
+
 //la gestion du critere {frequence}
 include_spip('frequence_fonctions');
 
