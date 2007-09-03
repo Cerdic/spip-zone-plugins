@@ -34,7 +34,6 @@ img.crayon-edit, img.crayon-crayon {
 	position:absolute;
 	right:0px;
 	z-index:4999;
-	border:1px solid red;
 }
 .crayon-edit, .crayon-crayon, .crayon-img-changed {
 	cursor: pointer;
