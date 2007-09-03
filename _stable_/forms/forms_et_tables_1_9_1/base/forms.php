@@ -50,6 +50,7 @@ $formschamp_field = array(
 		"rang" => "bigint(21) NOT NULL",
 		"titre" => "text",
 		"type" => "varchar(100)",
+		"taille" => "bigint(21) NOT NULL",
 		"obligatoire" => "varchar(3)",
 		"extra_info" => "text", // une info supplementaire par champ a utiliser librement ex : type mot->id_groupe, type url->verif, type fichier -> taille
 		'specifiant' => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",

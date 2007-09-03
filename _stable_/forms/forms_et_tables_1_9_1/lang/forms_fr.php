@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'champ_type_ligne'=>"Ligne de texte",
 'champ_type_texte'=>"Texte",
 'champ_type_date'=>"Date",
+'champ_type_numerique' => 'Num&eacute;rique',
+'champ_type_monnaie' => 'Mon&eacute;taire',
 'champ_type_url'=>"Adresse de site Web",
 'champ_type_email'=>"Adresse e-mail",
 'champ_type_select'=>"Choix unique",
@@ -113,12 +115,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'moderation_donnees' => 'Valider les donn&eacute;es avant publication :',
 'modifiable_donnees'=>"Donn&eacute;s modifiables dans l'espace public&nbsp;:",
+'monnaie_euro' => 'Euro (&euro;)',
 'multiple_donnees'=>"Saisie des donn&eacute;es dans l'espace public&nbsp;:",
+'monetaire_invalide' => "Champ mon&eacute;taire invalide",
 
 'nombre_reponses'=>"@nombre@ donn&eacute;es",
 'nouveau_champ' => "Nouveau champ",
 'nouveau_choix' => "Nouveau choix",
 'nouveau_formulaire' => "Nouveau formulaire",
+'numerique_invalide' => "Champ num&eacute;rique invalide",
+'nb_decimales' => 'Nombre de d&eacute;cimales',
 
 'page'=>"Page",
 'pas_mail_confirmation'=>"Pas de mail confirmation",
@@ -164,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'type_form'=>"Type de formulaire",
 
 'une_reponse'=>"une donn&eacute;e",
-
+'unite_monetaire' => "Unit&eacute; mon&eacute;taire",
 'valider'=>"Valider",
 'verif_web' => "v&eacute;rifier l'existence du site Web",
 'vider' => 'Vider',

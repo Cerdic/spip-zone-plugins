@@ -18,6 +18,8 @@ div.liste { clear:both;width:auto; }
 .donnees th.header {padding-left: 15px;background: url(img_pack/header-bg.png) no-repeat left bottom;	}
 .donnees th.headerSortUp {padding-left: 15px;background: url(img_pack/header-asc.png) no-repeat left bottom;	}
 .donnees th.headerSortDown {padding-left: 15px;background: url(img_pack/header-desc.png) no-repeat left bottom;}
+
+.donnees td .numerique {width:100%; text-align:right;display:block;}
 #sorting div {
 	font-weight: bold;
 }

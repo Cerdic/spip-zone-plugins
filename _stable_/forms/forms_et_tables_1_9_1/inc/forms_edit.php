@@ -185,6 +185,21 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<label for='barre_typo_$champ'>"._T("forms:activer_barre_typo")."</label>";
 		$out .= "<br />\n";
 	}
+	if ($type == 'monnaie') {
+		$unite = $row['extra_info'];
+		$out .= "<label for='unite_monetaire_$champ'>"._T("forms:unite_monetaire")."</label> :";
+		$out .= " &nbsp;<select name='unite_monetaire' id='unite_monetaire_$champ' class='fondo verdana2'>\n";
+		$out .= "<option value='euro'".($unite=='euro'?"selected='selected'":"").">"._T("forms:monnaie_euro")."</option>\n";
+		$out .= "</select>";
+		$out .= "<br />\n";
+	}
+	if (($type == 'num')||($type == 'monnaie')) {
+		$deci = $row['taille'];
+		if (!$deci) $deci = 0;
+		$out .= "<label for='decimales_$champ'>"._T("forms:nb_decimales")."</label> : ";
+		$out .= "<input type='text' name='taille_champ' value='$deci' id='decimales_$champ' class='fondo verdana2'>\n";
+		$out .= "<br />\n";		
+	}
 	if ($type == 'url') {
 		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
 		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_verif' value='oui' id='verif_$champ'$checked> ";

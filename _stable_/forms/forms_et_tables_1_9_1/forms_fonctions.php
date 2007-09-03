@@ -96,40 +96,55 @@
 		$rendu = 'typo';
 		if ($ok) {
 			$t = $structure[$id_form][$champ]['type'];
-			if ($t == 'select' OR $t == 'multiple'){
-				if (!isset($structure[$id_form][$champ]['choix'][$valeur])){
-					$res = spip_query("SELECT choix,titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
-					while ($row = spip_fetch_array($res))
-						$structure[$id_form][$champ]['choix'][$row['choix']] = $row['titre'];
-				}
-				if (isset($structure[$id_form][$champ]['choix'][$valeur]))
-					$valeur = $structure[$id_form][$champ]['choix'][$valeur];
-			}
-			elseif ($t == 'mot'){
-				if (!isset($mots_s[$valeur])){
-					$res = spip_query("SELECT titre FROM spip_mots WHERE id_mot="._q($valeur));
-					if ($row = spip_fetch_array($res)) $mots_s[$valeur] = $row['titre'];
-					else $mots_s[$valeur] = $valeur;
-				}
-				$valeur = $mots_s[$valeur];
-			}
-			elseif ($t == 'password'){
-				$rendu = "";
-				$valeur="******"; # ne jamais afficher en clair un password, si on veut vraiment le faire on utilise l'etoile sur le champ
-			}
-			elseif ($t == 'url'){
-				$rendu = "calculer_url";
-			}
-			elseif ($t == 'texte')
-				$rendu = 'propre';
-			elseif (!in_array($t,array('ligne','separateur','textestatique'))){
-				if (!isset($GLOBALS['forms_types_champs_etendus']))
-					include_spip('inc/forms_type_champs');
+			switch ($t) {
+				case 'select':
+				case 'multiple':
+					if (!isset($structure[$id_form][$champ]['choix'][$valeur])){
+						$res = spip_query("SELECT choix,titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
+						while ($row = spip_fetch_array($res))
+							$structure[$id_form][$champ]['choix'][$row['choix']] = $row['titre'];
+					}
+					if (isset($structure[$id_form][$champ]['choix'][$valeur]))
+						$valeur = $structure[$id_form][$champ]['choix'][$valeur];
+					break;
+				case 'mot':
+					if (!isset($mots_s[$valeur])){
+						$res = spip_query("SELECT titre FROM spip_mots WHERE id_mot="._q($valeur));
+						if ($row = spip_fetch_array($res)) $mots_s[$valeur] = $row['titre'];
+						else $mots_s[$valeur] = $valeur;
+					}
+					$valeur = $mots_s[$valeur];
+					break;
+				case 'password':
+					$rendu = "";
+					$valeur="******"; # ne jamais afficher en clair un password, si on veut vraiment le faire on utilise l'etoile sur le champ
+					break;
+				case 'url':
+					$rendu = "calculer_url";
+					break;
+				case 'num':
+				case 'monnaie':
+					if (!$etoile) {
+						$valeur = sprintf("%.".$structure[$id_form][$champ]['taille']."f",$valeur).($t=='monnaie'?"~&euro;":"");
+						$valeur = "<span class='numerique'>$valeur</span>";
+					}
+					break;
+				case 'texte':
+					$rendu = 'propre';
+					break;
+				case 'ligne':
+				case 'separateur':
+				case 'textestatique':
+					break;
+				default :
+					if (!isset($GLOBALS['forms_types_champs_etendus']))
+						include_spip('inc/forms_type_champs');
 					if (isset($GLOBALS['forms_types_champs_etendus'][$t])
 					  && isset($GLOBALS['forms_types_champs_etendus'][$t]['formate'])
 					)
 						foreach($GLOBALS['forms_types_champs_etendus'][$t]['formate'] as $formate)
 							$valeur = preg_replace($formate['match'],$formate['replace'],$valeur);
+					break;
 			}
 			if (!$etoile AND $rendu)
 				include_spip('inc/texte');

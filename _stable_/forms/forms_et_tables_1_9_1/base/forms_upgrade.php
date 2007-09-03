@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.36;
+	$GLOBALS['forms_base_version'] = 0.37;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -277,6 +277,11 @@
 			creer_base();
 			echo "forms update @ 0.36<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.36,'non');
+		}
+		if ($current_version<0.37){
+			spip_query("ALTER TABLE spip_forms_champs ADD taille bigint(21) NOT NULL NULL AFTER type");
+			echo "forms update @ 0.37<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.37,'non');
 		}
 		ecrire_metas();
 	}

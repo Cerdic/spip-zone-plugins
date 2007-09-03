@@ -42,6 +42,8 @@ function Forms_update_edition_champ($id_form,$champ) {
 		$extra_info = "";
 		if ($type == 'texte')
 			if ($champ_barre_typo=_request('champ_barre_typo')) $extra_info = $champ_barre_typo;
+		if ($type == 'monnaie')
+			if ($unite=_request('unite_monetaire')!==NULL) $extra_info = $unite;
 		if ($type == 'url')
 			if ($champ_verif=_request('champ_verif')) $extra_info = $champ_verif;
 		if ($type == 'mot') {
@@ -111,6 +113,7 @@ function Forms_update($id_form){
 	$champ_specifiant = _request('champ_specifiant');
 	$champ_listable_admin = _request('champ_listable_admin');
 	$champ_listable = _request('champ_listable');
+	$taille_champ = _request('taille_champ');
 	$aide_champ = _request('aide_champ');
 	$wrap_champ = _request('wrap_champ');
 	$supp_choix = _request('supp_choix');
@@ -194,6 +197,7 @@ function Forms_update($id_form){
 						.", specifiant="._q($champ_specifiant)
 						.", listable="._q($champ_listable).", listable_admin="._q($champ_listable_admin)
 						.", public="._q($champ_public)
+						.($taille_champ!==NULL?", taille="._q($taille_champ):"")
 						.", aide="._q($aide_champ).", html_wrap="._q($wrap_champ)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 					Forms_update_edition_champ($id_form, $champ);
 					// switch select to multi ou inversement, apres avoir fait les mises a jour
