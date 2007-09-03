@@ -26,7 +26,7 @@ function refresh_apercu(r){
 	$('#apercu').html(r);
 }
 jQuery.fn.ajaxWait = function() {
-	$(this).prepend("<div>"+ajax_image_searching+"</div>");
+	$(this).prepend("<br class='nettoyeur' /><div>"+ajax_image_searching+"</div>");
 	return this;
 }
 
@@ -72,8 +72,24 @@ jQuery.fn.ajaxAction = function() {
 		$(redir).val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
 		$(redir).after("<input type='hidden' name='var_ajaxcharset' value='"+ajaxcharset+"' />");
 		$(this).ajaxForm({"target":'#'+idtarget, 
+		/* jquery >=1.1.3 */
+			"success":
+			function(){
+				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
+				if (idtarget!='proprietes')
+					$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(data){ $('#proprietes').html(data).ajaxAction(); });
+				$('#'+idtarget).ajaxAction();
+				if($('#'+idtarget).is('.forms_champs')) forms_init_multi($('#'+idtarget).parent());
+				if($('#'+idtarget).is('#champs')) forms_init_lang();
+			},
+			"beforeSubmit":
+			function(param,form){
+				forms_multi_submit.apply(form[0],[param]);
+				$('#'+idtarget+',#apercu_gauche').ajaxWait();
+			},
+		/* jquery < 1.1.3 */
 			"after":
-			function(){ 
+			function(){
 				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
 				if (idtarget!='proprietes')
 					$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(data){ $('#proprietes').html(data).ajaxAction(); });
@@ -82,9 +98,9 @@ jQuery.fn.ajaxAction = function() {
 				if($('#'+idtarget).is('#champs')) forms_init_lang();
 			},
 			"before":
-			function(param,form){ 
+			function(param,form){
 				forms_multi_submit.apply(form[0],[param]);
-				$('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");
+				$('#'+idtarget+',#apercu_gauche').ajaxWait();
 			}
 			});
 	});
@@ -162,7 +178,7 @@ $(document).ready(function(){
 		$('#proprietes').ajaxAction();
 	}
 	else{
-		if ((jQuery.fn.jquery[2]>0) || (jQuery.fn.jquery[0]>1))
+		if ((jQuery.fn.jquery.substr(2,1)>0) || (jQuery.fn.jquery.substr(0,1)>1))
 			$('.antifocus').one('focus',function(){ this.value='';$(this).removeClass('antifocus'); } );
 		else
 			$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );
