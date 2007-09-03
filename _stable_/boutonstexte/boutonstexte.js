@@ -10,21 +10,15 @@ if (typeof jQuery == 'function')
 		var boutons = $('<span class="boutonstexte"></span>');
 
 		if (!$("img.textsizeup").length && boutonstexte.txtSizeUp) {
-			$('<button class="textsizeup"' +
-			  '"><img src="' + boutonstexte.imgPath +
-			  '/fontsizeup.png" /></button>')
+			$('<button class="textsizeup"/>')
 			.appendTo(boutons);
 		}
 		if (!$("img.textsizedown").length && boutonstexte.txtSizeDown) {
-			$('<button class="textsizedown"' +
-			  '"><img src="' + boutonstexte.imgPath +
-			  '/fontsizedown.png" /></button>')
+			$('<button class="textsizedown" />')
 			.appendTo(boutons);
 		}
 		if (!$("img.textonly").length && boutonstexte.txtOnly) {
-			$('<button class="textonly"' +
-			  '"><img src="' + boutonstexte.imgPath +
-			  '/textonly.png" /></button>')
+			$('<button class="textonly" />')
 			.appendTo(boutons);
 		}
 

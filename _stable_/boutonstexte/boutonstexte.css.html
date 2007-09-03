@@ -7,7 +7,7 @@
 
 /* boutonstexte.css */
 .boutonstexte {
-	float : right;
+	float: right;
 }
 .boutonstexte button {
 	position:relative;
@@ -22,9 +22,22 @@
 .boutonstexte button:hover {
 	border: 1px red solid;
 }
-.boutonstexte button img {
-	behavior:url(win_png.htc);
+.boutonstexte button.textonly {
+	background: url(#CHEMIN{images/textonly.png}) no-repeat;
+	height: 17px;
+	width: 17px;
 }
+.boutonstexte button.textsizedown {
+	background: url(#CHEMIN{images/fontsizedown.png}) no-repeat;
+	height: 17px;
+	width: 17px;
+}
+.boutonstexte button.textsizeup {
+	background: url(#CHEMIN{images/fontsizeup.png}) no-repeat;
+	height: 17px;
+	width: 17px;
+}
+
 
 div.onlytext {
 	text-align: [(#LANG_DIR|choixsiegal{ltr,left,right})];
