@@ -10,12 +10,6 @@ img.crayon-img-changed {
 img.crayon-edit, img.crayon-crayon {
 	visibility: hidden;
 }
-
-.crayon-hover  span  span  img.crayon-edit,
-.crayon-hover  span  span  img.crayon-crayon {
-	visibility: visible;
-}
-
 .crayon-boutons, .crayon-searching {
 	float: right;
 }

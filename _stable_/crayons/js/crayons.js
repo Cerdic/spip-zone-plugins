@@ -376,9 +376,17 @@ jQuery.fn.initcrayon = function(){
   // :hover pour MSIE
   this.hover(
     function(){
-      jQuery(this).addClass('crayon-hover');
+      jQuery(this)
+      .addClass('crayon-hover')
+      .find('>span.crayon-icones')
+        .find('>span>img.crayon-crayon,>span>img.crayon-edit')
+          .css('visibility','visible');
     },function(){
-      jQuery(this).removeClass('crayon-hover');
+      jQuery(this)
+      .removeClass('crayon-hover')
+      .find('>span.crayon-icones')
+        .find('>span>img.crayon-crayon,>span>img.crayon-edit')       
+          .css('visibility','hidden');
     }
   );
 
@@ -395,7 +403,7 @@ jQuery.fn.initcrayons = function(){
 };
 
 // demarrage
-$(document).ready(function() {
+jQuery.fn.crayonsstart = function() {
   if (!configCrayons.droits) return;
   id_crayon = 0; // global
 
@@ -425,4 +433,6 @@ $(document).ready(function() {
     jQuery('.crayon-has')
     .hidecrayon();
   });
-});
+};
+
+jQuery(document).ready(jQuery.fn.crayonsstart);
