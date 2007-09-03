@@ -168,7 +168,8 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table
 		if (!strlen($recherche)){
 			$res = spip_query("SELECT d.id_donnee FROM spip_forms_donnees AS d
 			  JOIN spip_forms AS f ON f.id_form=d.id_form
-			  WHERE d.statut!='poubelle' AND f.type_form="._q($type_table)." AND $in GROUP BY d.id_donnee $limit");
+			  WHERE d.statut!='poubelle' AND f.type_form="._q($type_table)." AND $in 
+			  GROUP BY d.id_donnee ORDER BY f.id_form $limit");
 		}
 		else {
 			$res = spip_query($s = "SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
@@ -181,7 +182,8 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table
 				JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
 				JOIN spip_forms AS f ON d.id_form = f.id_form
 				WHERE d.statut!='poubelle' AND f.type_form="
-				._q($type_table)." AND $in AND valeur LIKE "._q("%$recherche%")." GROUP BY c.id_donnee $limit");
+				._q($type_table)." AND $in AND valeur LIKE "._q("%$recherche%")
+				."GROUP BY c.id_donnee ORDER BY f.id_form,d.id_donnee $limit");
 			}
 		}
 		while ($row = spip_fetch_array($res)){
