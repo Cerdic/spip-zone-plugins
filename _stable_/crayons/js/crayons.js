@@ -395,7 +395,7 @@ jQuery.fn.initcrayons = function(){
 };
 
 // demarrage
-jQuery(document).ready(function() {
+$(document).ready(function() {
   if (!configCrayons.droits) return;
   id_crayon = 0; // global
 

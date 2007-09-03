@@ -9,6 +9,7 @@ function pack_cQuery($chemin) {
 	$flux = spip_file_get_contents($chemin);
 	$flux = str_replace('jQuery', 'cQuery', $flux);
 	$flux = str_replace('var $ = cQuery','// dont set dollar', $flux);
+	$flux = str_replace('window.$ = cQuery','// dont set dollar', $flux);
 
 	if (!strlen($flux)
 	OR _request('debug_crayons'))
