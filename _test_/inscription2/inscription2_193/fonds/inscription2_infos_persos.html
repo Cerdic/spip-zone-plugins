@@ -7,11 +7,11 @@
 
 <table>
 <tr>
-<td width='140'/>
-<td width='70'> <:inscription2:form:> </td>
-<td width='70'> <:inscription2:fiche_mod:> </td>
-<td width='70'> <:inscription2:fiche:> </td>
-<td width='70'> <:inscription2:table:> </td>
+<td style='width:140px' />
+<td style='width:70px'> <:inscription2:form:> </td>
+<td style='width:70px'> <:inscription2:fiche_mod:> </td>
+<td style='width:70px'> <:inscription2:fiche:> </td>
+<td style='width:70px'> <:inscription2:table:> </td>
 </tr><tr>
 <td>
 	<strong><:inscription2:nom_famille:></strong>
@@ -29,7 +29,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="nom_famille_fiche" [checked="(#CONFIG{inscription2/nom_famille_fiche}?{checked})"] id="nom_famille_fiche" [disabled ="(#CONFIG{inscription2/nom_famille_fiche_mod}?{true})"] />
+		<input type="checkbox" name="nom_famille_fiche" [checked="(#CONFIG{inscription2/nom_famille_fiche}?{checked})"] id="nom_famille_fiche" [disabled ="(#CONFIG{inscription2/nom_famille_fiche_mod}?{disabled})"] />
 	</label>
 </td><td>
 	<label>
@@ -53,7 +53,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="prenom_fiche" [checked="(#CONFIG{inscription2/prenom_fiche}?{checked})"] id="prenom_fiche" [disabled ="(#CONFIG{inscription2/prenom_fiche_mod}?{true})"] />
+		<input type="checkbox" name="prenom_fiche" [checked="(#CONFIG{inscription2/prenom_fiche}?{checked})"] id="prenom_fiche" [disabled ="(#CONFIG{inscription2/prenom_fiche_mod}?{disabled})"] />
 	</label>
 </td><td>
 	<label>
@@ -77,7 +77,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="username_fiche" [checked="(#CONFIG{inscription2/username_fiche}?{checked})"] id="username_fiche" [disabled ="(#CONFIG{inscription2/username_fiche_mod}?{true})"] />
+		<input type="checkbox" name="username_fiche" [checked="(#CONFIG{inscription2/username_fiche}?{checked})"] id="username_fiche" [disabled ="(#CONFIG{inscription2/username_fiche_mod}?{disabled})"] />
 	</label>
 </td><td>
 	<label>
@@ -101,7 +101,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="naissance_fiche" [checked="(#CONFIG{inscription2/naissance_fiche}?{checked})"] id="naissance_fiche" [disabled ="(#CONFIG{inscription2/naissance_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="naissance_fiche" [checked="(#CONFIG{inscription2/naissance_fiche}?{checked})"] id="naissance_fiche" [disabled ="(#CONFIG{inscription2/naissance_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
@@ -125,7 +125,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="sexe_fiche" [checked="(#CONFIG{inscription2/sexe_fiche}?{checked})"] id="sexe_fiche" [disabled ="(#CONFIG{inscription2/sexe_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="sexe_fiche" [checked="(#CONFIG{inscription2/sexe_fiche}?{checked})"] id="sexe_fiche" [disabled ="(#CONFIG{inscription2/sexe_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
@@ -149,7 +149,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="adresse_fiche" [checked="(#CONFIG{inscription2/adresse_fiche}?{checked})"] id="adresse_fiche" [disabled ="(#CONFIG{inscription2/adresse_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="adresse_fiche" [checked="(#CONFIG{inscription2/adresse_fiche}?{checked})"] id="adresse_fiche" [disabled ="(#CONFIG{inscription2/adresse_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
@@ -173,7 +173,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="code_postal_fiche" [checked="(#CONFIG{inscription2/code_postal_fiche}?{checked})"] id="code_postal_fiche" [disabled ="(#CONFIG{inscription2/code_postal_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="code_postal_fiche" [checked="(#CONFIG{inscription2/code_postal_fiche}?{checked})"] id="code_postal_fiche" [disabled ="(#CONFIG{inscription2/code_postal_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
@@ -197,7 +197,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="ville_fiche" [checked="(#CONFIG{inscription2/ville_fiche}?{checked})"] id="ville_fiche" [disabled ="(#CONFIG{inscription2/ville_fiche_mod}?{true})"] />
+		<input type="checkbox" name="ville_fiche" [checked="(#CONFIG{inscription2/ville_fiche}?{checked})"] id="ville_fiche" [disabled ="(#CONFIG{inscription2/ville_fiche_mod}?{disabled})"] />
 	</label>
 </td><td>
 	<label>
@@ -221,7 +221,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="pays_fiche" [checked="(#CONFIG{inscription2/pays_fiche}?{checked})"] id="pays_fiche" [disabled ="(#CONFIG{inscription2/pays_fiche_mod}?{true})"] />
+		<input type="checkbox" name="pays_fiche" [checked="(#CONFIG{inscription2/pays_fiche}?{checked})"] id="pays_fiche" [disabled ="(#CONFIG{inscription2/pays_fiche_mod}?{disabled})"] />
 	</label>
 </td><td>
 	<label>
@@ -245,7 +245,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="telephone_fiche" [checked="(#CONFIG{inscription2/telephone_fiche}?{checked})"] id="telephone_fiche" [disabled ="(#CONFIG{inscription2/telephone_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="telephone_fiche" [checked="(#CONFIG{inscription2/telephone_fiche}?{checked})"] id="telephone_fiche" [disabled ="(#CONFIG{inscription2/telephone_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
@@ -269,7 +269,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="fax_fiche" [checked="(#CONFIG{inscription2/fax_fiche}?{checked})"] id="fax_fiche" [disabled ="(#CONFIG{inscription2/fax_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="fax_fiche" [checked="(#CONFIG{inscription2/fax_fiche}?{checked})"] id="fax_fiche" [disabled ="(#CONFIG{inscription2/fax_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
@@ -293,15 +293,14 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="mobile_fiche" [checked="(#CONFIG{inscription2/mobile_fiche}?{checked})"] id="mobile_fiche" [disabled ="(#CONFIG{inscription2/mobile_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="mobile_fiche" [checked="(#CONFIG{inscription2/mobile_fiche}?{checked})"] id="mobile_fiche" [disabled ="(#CONFIG{inscription2/mobile_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
 		<input type="checkbox" name="mobile_table" [checked="(#CONFIG{inscription2/mobile_table}?{checked})"] id="mobile_table" />
 	</label>
 </td>
-</tr><tr>
-<td>
+</tr>
 <tr>
 <td>
 	<strong><:inscription2:commentaire:></strong>
@@ -319,7 +318,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="commentaire_fiche" [checked="(#CONFIG{inscription2/commentaire_fiche}?{checked})"] id="commentaire_fiche" [disabled ="(#CONFIG{inscription2/commentaire_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="commentaire_fiche" [checked="(#CONFIG{inscription2/commentaire_fiche}?{checked})"] id="commentaire_fiche" [disabled ="(#CONFIG{inscription2/commentaire_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>

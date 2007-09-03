@@ -6,11 +6,11 @@
 
 <table>
 <tr>
-<td width='140'/>
-<td width='70'> <:inscription2:form:> </td>
-<td width='70'> <:inscription2:fiche_mod:> </td>
-<td width='70'> <:inscription2:fiche:> </td>
-<td width='70'> <:inscription2:table:> </td>
+<td style='width:140px' />
+<td style='width:70px'> <:inscription2:form:> </td>
+<td style='width:70px'> <:inscription2:fiche_mod:> </td>
+<td style='width:70px'> <:inscription2:fiche:> </td>
+<td style='width:70px'> <:inscription2:table:> </td>
 </tr><tr>
 <td>
 	<strong><:inscription2:latitude:></strong>
@@ -28,7 +28,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="latitude_fiche" [checked="(#CONFIG{inscription2/latitude_fiche}?{checked})"] id="latitude_fiche" [disabled ="(#CONFIG{inscription2/latitude_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="latitude_fiche" [checked="(#CONFIG{inscription2/latitude_fiche}?{checked})"] id="latitude_fiche" [disabled ="(#CONFIG{inscription2/latitude_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
@@ -52,7 +52,7 @@
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="longitude_fiche" [checked="(#CONFIG{inscription2/longitude_fiche}?{checked})"] id="longitude_fiche" [disabled ="(#CONFIG{inscription2/longitude_fiche_mod}?{true})"]/>
+		<input type="checkbox" name="longitude_fiche" [checked="(#CONFIG{inscription2/longitude_fiche}?{checked})"] id="longitude_fiche" [disabled ="(#CONFIG{inscription2/longitude_fiche_mod}?{disabled})"]/>
 	</label>
 </td><td>
 	<label>
