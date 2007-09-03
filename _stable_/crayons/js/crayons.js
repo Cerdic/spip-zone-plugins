@@ -434,5 +434,3 @@ jQuery.fn.crayonsstart = function() {
     .hidecrayon();
   });
 };
-
-jQuery(document).ready(jQuery.fn.crayonsstart);
