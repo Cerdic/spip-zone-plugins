@@ -7,7 +7,7 @@
 [(#SET{sites,[(#GET{sites}|concat{-#ID_SYNDIC})]})]
 <?php
 	$GLOBALS['nom_site_#ID_SYNDIC'] = '[(#NOM_SITE|texte_script)]';
-	$GLOBALS['url_site_#ID_SYNDIC'] = '[(#URL_SITE|abs_url|texte_script)]';
+	$GLOBALS['url_site_#ID_SYNDIC'] = '[(#URL_SITE|url_absolue|texte_script)]';
 ?>
 </BOUCLE_sites>
 [(#SET{sites,[(#EVAL{"'-'"}|explode{#GET{sites}}|array_filter)]})]

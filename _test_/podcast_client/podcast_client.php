@@ -16,46 +16,48 @@
 // recupere les donnees du point d'entree 'post_syndication'
 //
 
-  
 	function PodcastClient_podcast_client() {
 		PodcastClient_verifier_table_documents_syndic();
 	
 		list($le_lien, $id_syndic, $data) = func_get_arg(0);
 		//print_r($data);
 		//mettre les documents dans un tableau
-		
+
 		// trouver des enclosures (podcast)
 		$enclosure = $data['enclosures'] ;
 		// href et type sont obligatoires
 			if (($enc_regs_url = extraire_attribut($enclosure,'href')
 			AND $enc_regs_type = extraire_attribut($enclosure,'type'))) {
 				$url  = substr(urldecode($enc_regs_url), 0,255);
-				$data['enc_enclosure']['url'] = addslashes(abs_url($url, $le_lien));
+				$data['enc_enclosure']['url'] = addslashes(url_absolue($url, $le_lien));
 				$data['enc_enclosure']['type'] = trim($enc_regs_type) ;
 				$data['enc_enclosure']['length'] = extraire_attribut($enclosure,'length') ;
 				if(!$data['enc_enclosure']['type']) $data['enc_enclosure']['type'] = substr($url, -3);
 			}
-			
+
 		$data['enclosures_all'][] = $data['enc_enclosure'] ;	
-		
+
 		// trouver une image dans le descriptif (flickr)
+
 		// <img src="http://farm1.static.flickr.com/209/465887020_320ee68662_m.jpg" width="180" height="240" alt="Apéro Belleville 19/7/04" style="border: 1px solid #ddd;" />
 		$enclosure = $data['descriptif'] ;
 			if (($enc_regs_url = extraire_attribut($enclosure,'src'))) {
 				$url  = substr(urldecode($enc_regs_url), 0,255);
 				//var_dump($url);
+
 				$ext = substr($url, -3);
 				if(preg_match("/(jpg|gif|png)/",$ext)){
-				$data['enc_image']['url'] = addslashes(abs_url($url, $le_lien));
+				$data['enc_image']['url'] = addslashes(url_absolue($url, $le_lien));
 				$data['enc_image']['type'] = $ext ;
+
 				}
 			}
 			
 		$data['enclosures_all'][] = $data['enc_image'] ;
-		
-		
+
 		//trouver un flv chez  dailymotion ou une image chez flickr
 		# <media:content url="http://www.dailymotion.com/get/14/80x60/flv/3088827.flv?key=733d92b170af04321c5d108635a6d94512c133a.flv" type="video/x-flv" duration="215" width="80" height="60"/>
+
 		# <media:content url="http://farm1.static.flickr.com/169/465892205_c6232dab5f_o.jpg" type="image/jpeg" height="1920" width="2560"/>
 		//echo $item ;
 		if (preg_match(',(<media:content[^>]*>),i',
@@ -67,39 +69,36 @@
 			$data['enc_media']['height'] = extraire_attribut($go, 'height');
 			$data['enc_media']['type'] = trim(extraire_attribut($go,'type'));
 		}
-		
+
 		// trouver une vignette miniature du media
 		// <media:thumbnail url="http://static-02.dailymotion.com/dyn/preview/320x240/2084714.jpg?20070218160100" height="240" width="320"/>	
+
 		// <media:thumbnail url="http://farm1.static.flickr.com/169/465892205_c22c43b50d_s.jpg" height="75" width="75"/>		
 		if (preg_match(',(<media:thumbnail[^>]+\/>),i',
 		$data['item'], $match)) {
 			$go=str_replace('media:thumbnail','mediathumbnail',$match[1]);
 			$data['enc_thumbnail']['url'] = extraire_attribut($go, 'url');
 			$data['enc_thumbnail']['type'] = 'jpg';
-		
 		}
-		
-		
+
 		// si le media est un flv, on prend le flv et aussi la miniature (a terme la mettre dans la vignette du doc distant spip)
 		if($data['enc_media']['type'] == 'video/x-flv'){	
 			$data['enclosures_all'][] = $data['enc_media'] ;
 			$data['enclosures_all'][] = $data['enc_thumbnail'] ;
 		}
-		
-		//var_dump($data['item']);var_dump($data['descriptif']);var_dump($data['enclosures_all']);die("coucou");
-		
+
+//var_dump($data['item']);var_dump($data['descriptif']);var_dump($data['enclosures_all']);die("coucou");
+
 		/**/
-		
 		PodcastClient_traiter_les_enclosures_rss($data['enclosures_all'],$id_syndic,$le_lien);
-		
-		
+
 		return func_get_arg(0); # remettre les infos dans le pipeline
 	}
-	
+
 	function PodcastClient_delete_podcast_client() {
 		spip_query("DROP TABLE spip_documents_syndic");
 	}
-	
+
 	//
 	// Verifie que la table spip_documents_syndic existe, sinon la creer
 	//
@@ -111,8 +110,7 @@
             creer_base();
 		}
 	}
-	
-	
+
 	//
 	// Inserer les references aux fichiers joints
 	// presentes sous la forme microformat <a rel="enclosure">
