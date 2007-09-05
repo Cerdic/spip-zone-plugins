@@ -38,7 +38,7 @@ function traitement_jq_admin(&$ENV) {
 		$version= (string)$xml['version'];
 		$ajouts= $modifs= $supprs= 0;
 		
-		$ENV['message']="Mise a jour vers la version $version<br/>\n";
+		$ENV['message']="Mise a jour vers la version $version\n";
 
 		// lister les langues destination
 		$langues= array();
