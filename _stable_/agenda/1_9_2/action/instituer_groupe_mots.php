@@ -23,7 +23,9 @@ function action_instituer_groupe_mots_dist()
 
 	$arg = _request('arg');
 
-	if (!preg_match(",^(-?\d+)$,", $arg, $r)) {
+	if (preg_match(",^([a-zA-Z_]\w+)$,", $arg, $r)) 
+	  action_instituer_groupe_mots_get($arg);
+	elseif (!preg_match(",^(-?\d+)$,", $arg, $r)) {
 		 spip_log("action_instituer_groupe_mots_dist $arg pas compris");
 	} else action_instituer_groupe_mots_post($r);
 }
@@ -56,8 +58,8 @@ function action_instituer_groupe_mots_post($r)
 			. (defined('_DIR_PLUGIN_AGENDA')?" evenements,":"") 
 			. (defined('_DIR_PLUGIN_PIMAGENDA')?" pim_agenda,":"") 
 		  ." minirezo, comite, forum)", "(" . _q($change_type) . ", " . _q($texte) . " , " . _q($descriptif) . " , " . _q($unseul) . " , " . _q($obligatoire) . " , " . _q($articles) . " ," . _q($breves) . " , " . _q($rubriques) . " , " . _q($syndic) . " , " 
-			. (defined('_DIR_PLUGIN_AGENDA')?_q(_request('evenements')):"") 
-			. (defined('_DIR_PLUGIN_PIMAGENDA')?_q(_request('pim_agenda')):"") 
+			. (defined('_DIR_PLUGIN_AGENDA')?_q(_request('evenements')). " , ":"") 
+			. (defined('_DIR_PLUGIN_PIMAGENDA')?_q(_request('pim_agenda')). " , ":"") 
 		  . _q($acces_minirezo) . " ,  " . _q($acces_comite) . " , " . _q($acces_forum) . " )");
 		}
 	}
