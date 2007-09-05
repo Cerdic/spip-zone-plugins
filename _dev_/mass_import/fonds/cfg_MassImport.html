@@ -1,0 +1,42 @@
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+
+[(#REM) titre=Mass Import]
+
+[(#REM) descriptif=
+Configurer les r&eacute;glages par d&eacute;faut de Mass Import
+]
+
+
+<fieldset><legend>Rubrique destination par défaut</legend>
+  <label>La rubrique par défaut dans lequel on importe les données si celle ci n'est pas spécifiée par l'utilisateur</label>
+  <br />
+  <select name="id_rub_def_massimport">
+    <BOUCLE_secteurs(RUBRIQUES) {racine}{par num titre, titre}>
+      <option value="#ID_RUBRIQUE"[ (#CONFIG{MassImport/id_rub_def_massimport}|=={#ID_RUBRIQUE}|?{selected="selected" style="font-weight:bold",''})]>&nbsp;&nbsp;<strong>#TITRE</strong></option>
+      <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+        <option value="#ID_RUBRIQUE"[ (#CONFIG{MassImport/id_rub_def_massimport}|=={#ID_RUBRIQUE}|?{selected="selected"  style="font-weight:bold",''})]>&nbsp;&nbsp;......#TITRE</option>
+        <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+      </BOUCLE_rubriques>
+    </BOUCLE_secteurs>
+  </select>
+</fieldset>
+
+<fieldset><legend>Auteur responsable des imports</legend> 
+  Choisir l'auteur par défaut à utiliser<br />
+  <select name="id_auteur_def_massimport">
+    <option value=""[ (#CONFIG{MassImport/id_auteur_def_massimport}|=={#ID_AUTEUR}|?{selected="selected" style="font-weight:bold",' style="font-style:italic;"'})] >(aucun utiliser l'auteur identifié)<option>
+    <BOUCLE_author(AUTEURS){par nom}{tout}>
+    <option value="#ID_AUTEUR"[ (#CONFIG{MassImport/id_auteur_def_massimport}|=={#ID_AUTEUR}|?{selected="selected" style="font-weight:bold",''})]><strong>#NOM</strong></option>
+    </BOUCLE_author>
+  </select>
+</fieldset>
+
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+

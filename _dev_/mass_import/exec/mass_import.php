@@ -13,18 +13,22 @@ function exec_mass_import(){
 	
 	
 	//-----------------------------------------
-  //  Parametres  (FIXME: creer un fichier options)
+  //  Parametres  (gerer la plugin cfg (merci toggg)
   //-----------------------------------------
-  // La rubrique par defaut dans lequel on importe les données si celle ci n'est pas spécifiée par l'utilisateur
-  define ("ID_RUBRIQUE_PAR_DEFAUT","1");
-  
-  // ID de l'auteur responsable des imports sinon on prendra celui de l'utilisateur identifié
-  define ("ID_AUTEUR_PAR_DEFAUT","1");
-  define ("UTILISER_AUTEUR_PAR_DEFAUT","0"); // 0 ou 1
+  if (function_exists(lire_config)) {
+  	 $id_rub_def_massimport =  lire_config('MassImport/id_rub_def_massimport');
+	   $id_auteur_def_massimport =  lire_config('MassImport/id_auteur_def_massimport');
+	   if ($id_auteur_def_massimport=="") $using_auteur_def = 0;
+                                   else $using_auteur_def = 1; 
+	} else {  // pas de cfg, on force les valeurs
+	   $id_rub_def_massimport = "1";
+	   $id_auteur_def_massimport = "1";
+	   $using_auteur_def = 0;
+  }
   
   // -----------------------------------------
 
-	  
+	 
 	debut_page(_T('massimport:page_mass_import'));
 	
 	echo "<br /><br /><br />";
@@ -32,7 +36,8 @@ function exec_mass_import(){
 	debut_gauche();
 	
 	debut_boite_info();
-	echo propre(_T('massimport:info_page'));	
+	echo propre(_T('massimport:info_page'));
+  if (function_exists(lire_config)) echo propre('<br /><br /><a href="?exec=cfg&cfg=MassImport">configuration</a>');	
 	fin_boite_info();
 	
 	debut_droite();
@@ -42,12 +47,12 @@ function exec_mass_import(){
 		exit;
 	}
 	
-	// données recus ?
+	// données recus ?	
 	if (_request('mass_import')) {
 	  // traitement des données du formulaire
 	  debut_cadre_relief();
-    if (UTILISER_AUTEUR_PAR_DEFAUT) $auteur_import_id = ID_AUTEUR_PAR_DEFAUT;
-					                     else $auteur_import_id = $auteur_session['id_auteur'];
+    if ($using_auteur_def) $auteur_import_id = $id_auteur_def_massimport;
+					            else $auteur_import_id = $auteur_session['id_auteur'];
 					                     
 		$txt = _request('txt');
 		$sep_art  = _request('sep_art');
@@ -96,7 +101,7 @@ function exec_mass_import(){
 	  // pas de donnees, on affiche le formulaire d'import
 	  debut_cadre_relief();
 	  echo "<form method='post'><input type='hidden' name='mass_import' value='1' />\n";
-		echo "<br /><input type='text' size='8' name='rub' value='".ID_RUBRIQUE_PAR_DEFAUT."' /> "._T('massimport:rub_num');
+		echo "<br /><input type='text' size='8' name='rub' value='".$id_rub_def_massimport."' /> "._T('massimport:rub_num');
 		echo "<br /><input type='text' size='8' name='sep_title' value='$$$' /> "._T('massimport:sep_art');
 		echo "<br /><input type='text' size='8' name='sep_art' value='***' /> "._T('massimport:sep_interart');		
 		echo "<br /><strong>"._T('massimport:statut')."</strong>\n";
