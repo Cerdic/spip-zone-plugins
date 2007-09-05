@@ -22,7 +22,10 @@ function Indexation_recherche_sql($recherche) {
 	// Methode FULLTEXT si disponible
 	if (Indexation_test_fulltext()) {
 		$points = array();
-		$s = spip_query($q = "SELECT id,type, MATCH (texte) AGAINST ("._q($recherche).") + 10*MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE) AS points FROM spip_indexation WHERE MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE)");
+		if ($recherche)
+			$s = spip_query($q = "SELECT id,type, MATCH (texte) AGAINST ("._q($recherche).") + 10*MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE) AS points FROM spip_indexation WHERE MATCH (texte) AGAINST ("._q($recherche)." IN BOOLEAN MODE)");
+		else
+			$s = spip_query($q = "SELECT id,type,0 AS points FROM spip_indexation WHERE 0=1");
 		while ($t = sql_fetch($s))
 			$points[$t['type']][$t['id']] = ceil(10*$t['points']);
 	}
@@ -59,17 +62,21 @@ function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='a
 		$recherche = $GLOBALS['recherche'];
 
 	// traiter le cas {recherche?}
-	if ($cond AND !strlen($recherche))
-		return array("''" /* as points */, /* where */ '1');
+	if (!strlen($recherche))
+		return $cond
+			? array("''" /* as points */, /* where */ '1')
+			: array("''" /* as points */, /* where */ '0');
 
 	// Premier passage : chercher eventuel un cache des donnees sur le disque
 	if (!isset($cache[$recherche])) {
 		$dircache = sous_repertoire(_DIR_CACHE,'rech3');
 		$fcache[$recherche] =
 			$dircache . substr(md5($recherche),0,10).'.txt';
-		if (false && lire_fichier($fcache[$recherche], $contenu))
+		if (lire_fichier($fcache[$recherche], $contenu))
 			$cache[$recherche] = @unserialize($contenu);
 	}
+
+	include_spip('inc/indexation');
 
 	// si on n'a pas encore traite les donnees dans une boucle precedente
 	if (!is_array($cache[$recherche])) {
@@ -80,7 +87,6 @@ function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='a
 		$points = Indexation_recherche_sql($recherche);
 
 		# calculer le {id_article IN()} et le {... as points}
-		include_spip('inc/indexation');
 		$liste_index_tables = liste_index_tables();
 		foreach ($points as $type => $scores) {
 		if ($table = $liste_index_tables[$type]) {
