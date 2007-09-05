@@ -145,7 +145,7 @@ function exec_forms_reponses(){
 		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png");
 
 		$link=parametre_url(self(),'supp_reponse', $id_donnee);
-		icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "supprimer.gif", "right");
+		echo icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "supprimer.gif", "right");
 		
 		if ($id_article_export!=0){
 			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id_article_export)));
@@ -153,10 +153,10 @@ function exec_forms_reponses(){
 				$id_article_export = 0;
 		}
 		if ($id_article_export==0){
-			icone(_T("forms:exporter_article"), generer_action_auteur('forms_exporte_reponse_article',"$id_donnee",self()),"article-24.gif", "creer.gif", "right");
+			echo icone(_T("forms:exporter_article"), generer_action_auteur('forms_exporte_reponse_article',"$id_donnee",self()),"article-24.gif", "creer.gif", "right");
 		}
 		else 
-			icone(_T("forms:voir_article"), generer_url_ecrire('articles',"id_article=".$row['id_article_export']),"article-24.gif", "", "right");
+			echo icone(_T("forms:voir_article"), generer_url_ecrire('articles',"id_article=".$row['id_article_export']),"article-24.gif", "", "right");
 		
 
 		echo _T("forms:reponse_envoyee").affdate($date)."<br />\n";

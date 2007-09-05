@@ -24,7 +24,6 @@ function exec_forms_tous(){
 	debut_gauche();
 	debut_boite_info();
 	echo _T("forms:boite_info");
-	echo "<p>";
 	fin_boite_info();
 	
 	creer_colonne_droite();
@@ -47,10 +46,10 @@ function exec_forms_tous(){
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 	if (autoriser('creer','form')) {
-		echo "<div align='right'>";
+		echo "<div style='text-align:right'>";
 		$link=generer_url_ecrire('forms_edit', 'new=oui');
 		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-		icone(_T("forms:icone_creer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "creer.gif");
+		echo icone(_T("forms:icone_creer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "creer.gif");
 		echo "</div>";
 	}
 	

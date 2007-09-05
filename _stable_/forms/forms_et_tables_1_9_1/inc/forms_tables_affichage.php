@@ -134,7 +134,6 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type){
 	debut_gauche();
 	debut_boite_info();
 	echo _T("forms:boite_info");
-	echo "<p>";
 	fin_boite_info();
 	
 	creer_colonne_droite();
@@ -332,7 +331,6 @@ function affichage_donnee_edit($type_form){
 				generer_url_ecrire("csvimport_import","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-importer-24.png", "rien.gif",false);
 		}
 	}
-	echo "<p>";
 	fin_boite_info();
 	
  	$res = spip_query("SELECT documents FROM spip_forms WHERE id_form="._q($id_form));

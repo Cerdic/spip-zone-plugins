@@ -116,7 +116,7 @@ function exec_forms_telecharger(){
 	if ($retour) {
 		echo "<br />\n";
 		echo "<div align='$spip_lang_right'>";
-		icone(_T('icone_retour'), $retour, $icone, "rien.gif");
+		echo icone(_T('icone_retour'), $retour, $icone, "rien.gif");
 		echo "</div>\n";
 	}
 	if ($GLOBALS['spip_version_code']>=1.9203)

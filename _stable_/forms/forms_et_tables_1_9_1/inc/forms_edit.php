@@ -637,7 +637,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= " &nbsp;<textarea name='html_wrap' id='wrap'  class='verdana2' style='width:90%;height:3em;' >".
 	entites_html($row['html_wrap'])."</textarea><br />\n";
 		
-	$out .= "<div align='right'>";
+	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 
 	$out .= "</form>";

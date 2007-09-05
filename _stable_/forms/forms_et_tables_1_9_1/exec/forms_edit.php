@@ -23,7 +23,7 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 			$out .= _T("$prefixei18n:info_supprimer_formulaire_reponses")."</p>\n";
 	}
 	else{
-		$out .= "<p>";
+		$out .= "<br />";
 		$out .= _T("$prefixei18n:info_supprimer_formulaire")."</p>\n";
 	}
 	$link = generer_action_auteur('forms_supprime',"$id_form",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
