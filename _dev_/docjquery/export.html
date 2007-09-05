@@ -1,6 +1,6 @@
 #HTTP_HEADER{Content-type: application/xml}<?xml version='1.0' encoding='#CHARSET'?>
 [<?xml-stylesheet type="text/xsl" href="[(#URL_SITE_SPIP|parametre_url{page,docs.xsl,&}|parametre_url{lang,#LANG,&})]"?>(#FORMAT|=={xml}|?{'',' '})]
-<docs version='1.1.1' lang='#LANG'>
+<docs version='#CONFIG{docjq/version}' lang='#LANG'>
 <BOUCLE_trad(DOCJQ){lang=#LANG}>
 <!-- #ID -->
 <BOUCLE_xml(XML){texte=#XML**}{racine}>

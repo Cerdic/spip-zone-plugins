@@ -35,7 +35,10 @@ function traitement_jq_admin(&$ENV) {
 
 		include_spip("base/abstract_sql");
 
-		$ENV['message']='';
+		$version= (string)$xml['version'];
+		$ajouts= $modifs= $supprs= 0;
+		
+		$ENV['message']="Mise a jour vers la version $version<br/>\n";
 
 		// lister les langues destination
 		$langues= array();
@@ -135,6 +138,9 @@ function traitement_jq_admin(&$ENV) {
 		}
 
 		$ENV['message'].= "FIN : $ajouts ajouts, $modifs modifs et $supprs suppressions\n";
+		include_spip('inc/meta');
+		ecrire_meta('docjq', serialize(array('version' => $version)));
+		ecrire_metas();
 		break;
 
 	default:
