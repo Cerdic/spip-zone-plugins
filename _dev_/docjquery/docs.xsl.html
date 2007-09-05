@@ -1,0 +1,107 @@
+#HTTP_HEADER{Content-type: text/xml}<?xml version="1.0" encoding="#CHARSET"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/*">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<title>jQuery Docs - <xsl:value-of select="/docs/@version"/> API - [(#LANG|traduire_nom_langue)]</title>
+	<link rel="stylesheet" href="http://jquery.com/api/style/style.css"/>
+	<script src="http://jquery.com/dist/jquery.js"></script>
+	<script src="http://jquery.com/api/js/tooltip.js"></script>
+	<script src="http://jquery.com/api/js/pager.js"></script>
+	<script src="http://jquery.com/api/js/doc.js"></script>
+	<script>
+	var types = {<:docjq:les_types:>};
+	</script>
+</head>
+<body>
+	<h1>jQuery Docs - <xsl:value-of select="/docs/@version"/> API - [(#LANG|traduire_nom_langue)]</h1>
+	<p class='raw'><B_l><:docjq:autres_versions:> :
+	<BOUCLE_l(DOCJQ){fusion lang}{", "}{lang!=#LANG}><a href='[(#URL_SITE_SPIP|parametre_url{page,export}|parametre_url{lang,#LANG})]'>[(#LANG|traduire_nom_langue)]</a></BOUCLE_l>
+	</B_l>[(#LANG|=={en}|?{'', ' '}) (<a href='[(#URL_SITE_SPIP|parametre_url{page,jq_admin})]'><:docjq:comment_traduire:></a>)]</p>
+	<ul id="docs">
+		<xsl:for-each select="method[not(@private)]">
+			<xsl:sort select="translate(@name,'$.','')"/>
+			<xsl:sort select="count(params)"/>
+			<li>
+				<xsl:if test="@docjq_ref!='0'">
+				<a title='modifier {@docjq_id}' href='[(#URL_SITE_SPIP|parametre_url{page,jq_trads})]&amp;id={@docjq_id}&amp;lang=#LANG'>
+				<img alt='modifier {@docjq_id}' border='0'>
+					<xsl:attribute name='src'>
+					<xsl:choose>
+						<xsl:when test="@docjq_state='new'">#CHEMIN{rouge.png}</xsl:when>
+						<xsl:when test="@docjq_state='trv'">#CHEMIN{orange.png}</xsl:when>
+						<xsl:when test="@docjq_state='ok'">#CHEMIN{vert.png}</xsl:when>
+					</xsl:choose>
+					</xsl:attribute>
+				</img>
+				</a>
+				</xsl:if>
+				<span class='type'><span class='tooltip'><xsl:value-of select="@type"/></span></span>
+				<span class='fn'>
+					<a href='#{@name}' class='name' title=''><xsl:value-of select="@name"/></a>
+						<xsl:if test="not(@property)">(
+							<xsl:for-each select="params">
+								<span class='arg-type tooltip'><xsl:value-of select="@type"/></span><xsl:text> </xsl:text>
+								<span class='arg-name tooltip' title='{desc}'><xsl:value-of select="@name"/></span>
+								<xsl:if test="position() != last()">
+									<xsl:if test="@any"> or </xsl:if>
+									<xsl:if test="not(@any)">, </xsl:if>
+								</xsl:if>
+							</xsl:for-each>
+						 )</xsl:if>
+				</span> returns <span class='tooltip'><xsl:value-of select="@type"/></span>
+				<div class='short'>
+					<xsl:value-of select="@short"/>
+				</div>
+				<div class='more'>
+					<div class='desc'>
+						<xsl:for-each select="desc">
+							<xsl:call-template name="break" />
+						</xsl:for-each>
+					</div>
+					<xsl:for-each select="examples">
+						<div class='example'>
+							<h5>Example:</h5>
+							<xsl:if test="desc">
+								<p><xsl:value-of select="desc"/></p>
+							</xsl:if>
+							<pre><xsl:value-of select="code"/></pre>
+							<xsl:if test="before">
+								<b>HTML:</b>
+								<pre><xsl:value-of select="before"/></pre>
+							</xsl:if>
+							<xsl:if test="result">
+								<b>Result:</b>
+								<pre><xsl:value-of select="result"/></pre>
+							</xsl:if>
+						</div>
+					</xsl:for-each>
+				</div>
+			</li>
+		</xsl:for-each>
+	</ul>
+
+	<p class="raw"><a href="[(#URL_SITE_SPIP|parametre_url{page,export})]&amp;format=xml&amp;lang=#LANG"><:raw_data:></a></p>
+</body>
+</html>
+</xsl:template>
+
+<xsl:template name="break">
+		<xsl:param name="text" select="." />
+		<xsl:choose>
+			<xsl:when test="contains($text, '&#xa;&#xa;')">
+				<xsl:value-of select="substring-before($text, '&#xa;&#xa;')" />
+				<br /><br />
+				<xsl:call-template name="break">
+					<xsl:with-param name="text"	select="substring-after($text, '&#xa;&#xa;')" />
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$text" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+</xsl:stylesheet>

@@ -1,0 +1,100 @@
+#CACHE{0}#TRAITEMENT{ttm/jq_admin}<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:docjq:les_traductions:></div>
+
+	<div id="conteneur">
+		<div id="contenu">
+		[<h2 style='color:red;'>(#ENV{message}|nl2br)</h2>]
+
+		<B_l>
+		Langues actuellement en base :
+		<BOUCLE_l(DOCJQ){fusion lang}{", "}>[(#LANG|traduire_nom_langue)]</BOUCLE_l>
+		<br/>
+		</B_l>
+
+		<BOUCLE_s(SESSION){!anonymous}>
+
+		<form name='update' action='#SELF' method='get'>
+		<fieldset>
+			<legend>mettre à jour les données de référence</legend>
+			<input type='hidden' name='page' value='jq_admin'/>
+			<input type='hidden' name='quoi' value='update'/>
+			<label for='xmlref'>source du fichier xml de référence :</label>
+			<input type='text' name='xmlref' id='xmlref' size='40' value='[(#ENV{xmlref}|sinon{http://jquery.com/api/data/jquery-docs-xml.xml})]'/>
+			<input type='submit' value='mettre a jour'/>
+		</fieldset>
+		</form>
+
+		<BOUCLE_s2(SESSION){admin}>
+		<form name='new' action='#SELF' method='get'>
+		<fieldset>
+			<legend>intégrer une nouvelle langue :</legend>
+			<input type='hidden' name='page' value='jq_admin'/>
+			<input type='hidden' name='quoi' value='new'/>
+			<label for='new_lang'>abbréviation de la langue à créer :
+			<select name='lang' id='new_lang'>
+			[(#VAL**{'lang'}|liste_options_langues)]
+			</select>
+			<input type='submit' value='créer'/>
+			<p>Attention : il faut alors créer un fichier docjq_<i>xx</i>.php</p>
+		</fieldset>
+		</form>
+		</BOUCLE_s2>
+
+		<form name='trad' action='#SELF' method='get'>
+		<fieldset>
+			<legend>accéder à l'interface de traduction :</legend>
+			<input type='hidden' name='page' value='jq_trads'/>
+			<label for='trad_lang'>langue destination :</label>
+			<INCLURE{fond=jq_menutrad}{name=lang}{id=trad_lang}{lang}>
+			<input type='submit' value='voir'/>
+		</fieldset>
+		</form>
+
+		<form name='export' action='#SELF' method='get'>
+		<fieldset>
+			<legend>exporter la documentation :</legend>
+			<input type='hidden' name='page' value='export'/>
+			<label for='export_lang'>langue destination :</label>
+			<INCLURE{fond=jq_menutrad}{name=lang}{id=export_lang}{lang}>
+			<input type='submit' value='voir'/>
+		</fieldset>
+		</form>
+
+		</BOUCLE_s>
+		Pour accéder à la partie admin, il faut être connecté avec un compte administrateur
+		#LOGIN_PUBLIC
+		<//B_s>
+		</div>
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+
+			[(#REM) Inscription au site ]
+			#FORMULAIRE_INSCRIPTION
+
+		</div><!-- fin navigation -->
+	</div>
+</div>
+
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</body>
+</html>

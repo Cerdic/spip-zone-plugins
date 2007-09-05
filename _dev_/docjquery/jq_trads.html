@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+	<link rel="stylesheet" href="#CHEMIN{docjquery.css}"/>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="[(#URL_SITE_SPIP|parametre_url{page,jq_admin})]"><:docjq:les_traductions:></a> &gt; <:docjq:traduire_en:> [(#LANG|traduire_nom_langue)]</div>
+
+	<div id="conteneur">
+
+	<p><:docjq:visu_traduction_en:> [(#LG|traduire_nom_langue)]</p>
+<BOUCLE_session(SESSION){anonymous}>
+	<p><:docjq:s_identifier:></p>
+	#LOGIN_PUBLIC
+</BOUCLE_session>
+	<p><:docjq:identifie:></p>
+	<script src="#CHEMIN{jquery.jeditable.js}"></script>
+	<script src="#CHEMIN{docjquery.js}"></script>
+<//B_session>
+
+<BOUCLE_total(DOCJQ){lang=#LANG}></BOUCLE_total>#SET{total,#TOTAL_BOUCLE}<//B_total>
+<BOUCLE_totalvert(DOCJQ){lang=#LANG}{etat=ok}></BOUCLE_totalvert>#SET{totalvert,#TOTAL_BOUCLE}<//B_totalvert>
+<BOUCLE_totalorange(DOCJQ){lang=#LANG}{etat=trv}></BOUCLE_totalorange>#SET{totalorange,#TOTAL_BOUCLE}<//B_totalorange>
+<BOUCLE_totalrouge(DOCJQ){lang=#LANG}{etat=new}></BOUCLE_totalrouge>#SET{totalrouge,#TOTAL_BOUCLE}<//B_totalrouge>
+
+Voir :
+<ul>
+	<li><a href='[(#SELF|parametre_url{etat,''}|parametre_url{id,''})]'><:docjq:tout:></a> (#GET{total})</li>
+	<li><a href='[(#SELF|parametre_url{etat,new}|parametre_url{id,''})]'><img src='#CHEMIN{rouge.png}'/> <:docjq:que_rouge:></a> (#GET{totalrouge})</li>
+	<li><a href='[(#SELF|parametre_url{etat,trv}|parametre_url{id,''})]'><img src='#CHEMIN{orange.png}'/> <:docjq:que_orange:></a> (#GET{totalorange})</li>
+	<li><a href='[(#SELF|parametre_url{etat,ok}|parametre_url{id,''})]'><img src='#CHEMIN{vert.png}'/> <:docjq:que_vert:></a> (#GET{totalvert})</li>
+	<li><a href='[(#SELF|parametre_url{page,export}|parametre_url{id,''}|parametre_url{etat,''})]'><:docjq:export:></a></li>
+</ul>
+
+
+<B_trad>
+#PAGINATION
+<ul id="docs">
+<BOUCLE_trad(DOCJQ){lang=#LANG}{par nom}{pagination 10}{etat?}{id?}>
+	<li> #COMPTEUR_BOUCLE
+		<div class='orig' id='#REFERENCE' rel='#ID'>
+		<BOUCLE_orig(DOCJQ){id=#REFERENCE}>
+		<INCLURE{fond=jq_trad}{xml}{id}>
+		</BOUCLE_orig>
+		</div>
+
+		<div class='trad' rel='#ID'>
+		<div id='etat_#ID' class='etat'>[(#ETAT|barre_etat{#ID})]</div>
+		<INCLURE{fond=jq_trad}{xml}{id}>
+		</div>
+	</li>
+</BOUCLE_trad>
+</ul>
+#PAGINATION
+</B_trad>
+	</div><!-- fin conteneur -->
+
+</div><!-- fin page -->
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</body>
+</html>

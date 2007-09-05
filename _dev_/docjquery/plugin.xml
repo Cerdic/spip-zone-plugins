@@ -1,0 +1,15 @@
+<plugin>
+	<nom>docJQuery</nom>
+	<auteur>Pif</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		Tentative d'aide a la traduction de la doc jquery
+	</description>
+
+	<options>docjq_options.php</options>
+	<fonctions>docjq_fonctions.php</fonctions>
+	<install>docjq_install.php</install>
+
+	<prefix>docjq</prefix>
+</plugin>

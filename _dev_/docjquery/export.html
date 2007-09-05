@@ -1,0 +1,13 @@
+#HTTP_HEADER{Content-type: application/xml}<?xml version='1.0' encoding='#CHARSET'?>
+[<?xml-stylesheet type="text/xsl" href="[(#URL_SITE_SPIP|parametre_url{page,docs.xsl,&}|parametre_url{lang,#LANG,&})]"?>(#FORMAT|=={xml}|?{'',' '})]
+<docs version='1.1.1' lang='#LANG'>
+<BOUCLE_trad(DOCJQ){lang=#LANG}>
+<!-- #ID -->
+<BOUCLE_xml(XML){texte=#XML**}{racine}>
+<#NOEUD[ (#ATTRIBUTS)]
+ docjq_id="#ID" docjq_ref="#REFERENCE" docjq_state="#ETAT"><BOUCLE_xml2(XML){xml}{id_parent}>
+	<#NOEUD[ (#ATTRIBUTS)]><BOUCLE_rec(boucle_xml2)></BOUCLE_rec></#NOEUD></BOUCLE_xml2>#TEXTE*<//B_xml2>
+</#NOEUD>
+</BOUCLE_xml>
+</BOUCLE_trad>
+</docs>

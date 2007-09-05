@@ -1,0 +1,7 @@
+<B_l>
+	<select id='#ID' name='#NAME'>
+<BOUCLE_l(DOCJQ){fusion lang}{", "}{lang!=en}>
+		<option value='#LANG'[(#ENV{lang}|=={#LANG}|?{ selected,''})]>[(#LANG|traduire_nom_langue)]</option>
+</BOUCLE_l>
+	</select>
+</B_l>
