@@ -258,7 +258,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	return $out;
 }
 
-function affichage_donnees_tous($type_form,$c){
+function affichage_donnees_tous($type_form,$c=NULL){
   include_spip("inc/presentation");
   $id_form = _request('id_form', $c);
 	if (!autoriser('voir','donnee',0,null,array('id_form'=>$id_form,'type_form'=>$type_form))) {
