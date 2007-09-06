@@ -198,6 +198,17 @@ function quete_rubrique($id_article) {
 	return $id_rubrique['id_rubrique'];
 }
 
+# retourne le fichier d'un document
+
+// http://doc.spip.org/@quete_fichier
+function quete_fichier($id_document, $serveur) {
+	$r = sql_fetsel(array('fichier'),
+			array('spip_documents'),
+			array("id_document=" . intval($id_document)),
+			'',array(),'','','', '', '', $serveur);
+	return $r['fichier'];
+}
+
 // http://doc.spip.org/@quete_petitions
 function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	$retour = sql_fetsel(
@@ -231,9 +242,49 @@ function quete_accepter_forum($id_article) {
 	return $cache[$id_article];
 }
 
-# Determine les parametres d'URL (hors réécriture) et consorts
+
+// recuperer une meta sur un site distant (en local il y a plus simple)
+// http://doc.spip.org/@quete_meta
+function quete_meta($nom, $serveur) {
+	$r = sql_fetsel("valeur", "spip_meta", "nom=" . _q($nom), '','','','','','','',$serveur);
+	return $r['valeur'];
+}
+
+// Produit les appels aux fonctions generer_url parametrees par $type_urls
+// demandees par les balise #URL_xxx
+// Si ces balises sont rencontrees dans une boucle de base distante
+// on produit le generer_url std faute de connaitre le $type_urls distant
+// et sous reserve que cette base distante est geree par SPIP.
+// Autrement cette balise est vue comme un champ normal dans cette base.
+
+// http://doc.spip.org/@generer_generer_url
+function generer_generer_url($type, $p)
+{
+	$_id = interprete_argument_balise(1,$p);
+
+	if (!$_id) $_id = champ_sql('id_' . $type, $p);
+
+	if ($s = $p->id_boucle) $s = $p->boucles[$s]->sql_serveur;
+
+	if (!$s)
+		return "generer_url_$type($_id)";
+	elseif ($GLOBALS['type_des_serveurs'][$s] != 'spip')
+		return calculer_champ($p);
+	else {
+		$u = "quete_meta('adresse_site', '$s')";
+		if ($type != 'document')
+			return "$u . '?page=$type&amp;id_$type=' . " . $_id;
+		else {
+			$f = "$_id . '&amp;file=' . quete_fichier($_id,'$s')";
+			return "$u . '?action=acceder_document&amp;arg=' .$f";
+		}
+	}
+}
+
+
+# Determine les parametres d'URL (hors reecriture) et consorts
 # En deduit un contexte disant si la page est une redirection ou 
-# exige un squelette deductible de $fond et du contexte linguistique.
+# exige un squelette deductible de $fond et du contexte de langue.
 # Applique alors le squelette sur le contexte et le nom du cache.
 # Retourne un tableau ainsi construit
 # 'texte' => la page calculee
@@ -246,28 +297,37 @@ function quete_accepter_forum($id_article) {
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
 // http://doc.spip.org/@public_parametrer_dist
-function public_parametrer_dist($fond, $local='', $cache='')  {
+function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	// verifier que la fonction assembler est bien chargee (cf. #608)
 	$assembler = charger_fonction('assembler', 'public');
-
+	// et toujours charger les fonctions de generation d'URL.
+	$renommer_urls= charger_fonction($GLOBALS['type_urls'], 'urls', true);
 	// distinguer le premier appel des appels par inclusion
 	if (!is_array($local)) {
-		global $contexte;
+		include_spip('inc/filtres'); // pour normaliser_date
+			
 		// ATTENTION, gestion des URLs personnalises (propre etc):
 		// 1. $contexte est global car cette fonction le modifie.
 		// 2. $fond est passe par reference, pour la meme raison
 		// Bref,  les URL dites propres ont une implementation sale.
 		// Interdit de nettoyer, faut assumer l'histoire.
-		include_spip('inc/filtres'); // pour normaliser_date
+		global $contexte;
 		$contexte = calculer_contexte();
-		if (function_exists("recuperer_parametres_url")) {
-			recuperer_parametres_url($fond, nettoyer_uri());
+		if (!$renommer_urls) {
+			// compatibilite < 1.9.3
+			charger_generer_url();
+			if (function_exists('recuperer_parametres_url'))
+				$renommer_urls = 'recuperer_parametres_url';
+		}
+		if ($renommer_urls) {
+			$renommer_urls($fond, nettoyer_uri());
 			// remettre les globales (bouton "Modifier cet article" etc)
 			foreach ($contexte as $var=>$val) {
 				if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;
 			}
 		}
 		$local = $contexte;
+
 
 		// si le champ chapo commence par '=' c'est une redirection.
 		// avec un eventuel raccourci Spip
@@ -322,7 +382,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if ($GLOBALS['var_mode'] == 'debug')
 		$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
 
-	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile)){
+	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile, $connect)){
 		spip_timer($a = 'calcul page '.rand(0,1000));
 		$notes = calculer_notes(); // conserver les notes...
 
