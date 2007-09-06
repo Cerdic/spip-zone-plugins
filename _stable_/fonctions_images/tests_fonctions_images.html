@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>#NOM_SITE_SPIP</title>
+<style type="text/css">
+body{
+	margin:0.5em;	
+}
+h1{
+	font-size:120%;
+}
+dl{
+	font-size:90%;
+}
+dt{
+	font-weight:bold;
+	color:#222;
+	border-bottom:1px solid #ccc;
+	margin-top:2em;
+	margin-bottom:0.5em;
+}
+dd{
+	border-left:1px solid #ccc;
+	padding-left:2em;
+	padding-top:0.3em;
+	margin-left:2em;
+}
+code{
+	color:#cc6600;	
+}
+dd + code {padding-top:1em;}
+</style>
+</head>
+<body>
+<h1>Tests du plugin fonctions d'images</h1>
+
+<p>Liste des filtres, avec quelques exemples.<br />
+Le code <code>[(# CHEMIN{img/souci.jpg}|en_image)]</code> peut être 
+remplacé par <code>[(# FICHIER)]</code> dans une boucle document.
+</p>
+
+
+<dl>
+
+<dt>en_image</dt>
+<dd>convertit une adresse d'image en balise img pour
+	&ecirc;tre utilis&eacute;e dans les fonctions de traitement d'image de spip</dd>
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image)]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image)]</dd>	
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_sepia{14579c})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image|image_sepia{14579c})]</dd>
+
+
+<dt>couleur_chroma</dt>
+<dd>Donne une couleur dans la roue chromatique 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Une-palette-de-couleurs">
+Une palette de couleurs</a>)</dd>
+<dd><code>#[(# CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_chroma{3/6})]</code></dd>
+<dd>#[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_chroma{3/6})]</dd>
+
+
+<dt>couleur_saturer</dt>
+<dd> (De)sature une couleur</a></dd>
+<dd><code>#[(# CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{1.3})]</code></dd>
+<dd>#[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{1.3})]</dd>
+<dd><code>#[(# CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.7})]</code></dd>
+<dd>#[(#CHEMIN{img/souci.jpg}|en_image|couleur_extraire|couleur_saturer{0.7})]</dd>
+
+
+<dt>image_saturer</dt>
+<dd> (De)sature une image 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/De-saturer-une-image-en-passant-en">
+D&eacute;saturer une image</a>)</dd>
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_saturer{1.5})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image|image_saturer{1.5})]</dd>
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_saturer{0.5})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image|image_saturer{0.5})]</dd>
+
+
+<dt>image_niveaux_gris_auto</dt>
+<dd> Correction automatique des niveaux 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Corriger-les-niveaux-des-images">
+Corriger les niveaux des images</a>)</dd>
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_niveaux_gris_auto)]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image|image_niveaux_gris_auto)]</dd>
+
+
+<dt>image_podpod</dt>
+<dd> Rempli par la couleur indiqu&eacute;e (dd5500) la plage de niveau 
+de gris compris entre les 2 param&egrave;tres suivants (100 et 255) 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Creer-automatiquement-une">
+Créer automatiquement une publicité podPod</a>)</dd>
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_podpod{dd5500,100,255})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image|image_podpod{dd5500,100,255})]</dd>
+
+
+<dt>image_courbe</dt>
+<dd> Changer les courbes de niveau d'une image 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Modifier-les-courbes-d-une-image">
+Modifier les courbes d'une image</a>)</dd>
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 62=30, 193=220})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 62=30, 193=220})]</dd>	
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 0=255, 100=0})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 0=255, 100=0})]</dd>	
+<dd><code>[(# CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 1=255, 100=1})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|en_image|image_courbe{rvb, 1=255, 100=1})]</dd>
+
+
+<dt>image_float</dt>
+<dd>Faire un texte qui &eacute;pouse une image 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Un-habillage-irregulier-2">
+Un habillage irrégulier</a>)</dd>
+<dd><code>[(# CHEMIN{img/decoupe.png}|en_image|image_float{left,10,ffffff})]</code></dd>
+<dd>
+<p>
+[(#CHEMIN{img/decoupe.png}|en_image|image_float{left,10,ffffff})]
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus ut 
+nunc eget ante ornare nonummy. Ut arcu. Duis tincidunt tincidunt quam. 
+In elementum blandit odio. Nullam ultrices. Nulla sem augue, mollis id, 
+vulputate eget, ullamcorper ultrices, purus. Aenean porttitor odio at 
+mauris. Mauris quis enim vitae purus dictum ultricies. Proin pharetra 
+lectus auctor lacus. Quisque at sem ac lectus ornare vehicula. Nunc pulvinar, 
+leo ut tristique auctor, felis diam gravida neque, consectetuer cursus sem 
+nisl ut enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+Donec justo. Aliquam erat volutpat. Sed vel enim nec tellus suscipit 
+imperdiet. Maecenas sagittis, dolor id tincidunt suscipit, orci tortor 
+fermentum mi, id varius dolor nisi quis lectus. Quisque ante sem, molestie 
+a, euismod sed, tempus sit amet, mauris. Integer vel ante eget urna sagittis 
+consectetuer. Quisque ullamcorper convallis velit.
+
+Ut porta. Quisque euismod. Cras adipiscing, tellus id vestibulum ultrices, 
+leo erat auctor diam, vitae aliquam libero orci ac augue. Fusce vel dui. 
+Sed eleifend est ac mauris. Nam in leo. In hac habitasse platea dictumst. 
+Suspendisse hendrerit nisl at orci. Curabitur condimentum. Proin scelerisque. 
+Nunc eros.
+</p>
+</dd>	
+
+
+<dt>image_contour_alpha</dt>
+<dd>Tracer des contours d'une image 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Tracer-les-contours-de">
+Tracer les contours de transparence</a>)</dd>
+<dd><code>[(# NOM_SITE_SPIP|image_typo|image_contour_alpha{ff0000,2})]</code></dd>
+<dd>[(#NOM_SITE_SPIP|image_typo{taille=30, padding=5}|image_contour_alpha{ff0000,2})]</dd>
+<dd><code>[(# CHEMIN{img/decoupe.png}|en_image|image_contour_alpha{ff0000,2})]</code></dd>
+<dd>[(#CHEMIN{img/decoupe.png}|en_image|image_contour_alpha{ff0000,2})]</dd>	
+
+
+
+<dt>image_sincity</dt>
+<dd>D&eacute;saturation contrast&eacute;e + accentuation du rouge 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Welcome-to-Spip-City">
+Welcome to Spip-City</a>)</dd>
+<dd><code>[(# CHEMIN{img/souci.jpg}|image_sincity)]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|image_sincity)]</dd>	
+
+
+
+<dt>image_estampage_alpha</dt>
+<dd>R&eacute;aliser des estampages 
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Des-titres-en-relief">
+Des titres en relief</a>)</dd>
+<dd><code>[(# NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}<br />
+		|image_masque{[(# NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}<br />
+ 		|image_flou{2}|image_estampage_alpha{1,1.5}<br />
+ 		|extraire_attribut{src})],top=-1,left=-1})]</code></dd>
+<dd>[(#NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}
+		|image_masque{[(#NOM_SITE_SPIP|image_typo{couleur=8cc42a,taille=40,padding=4}
+ 		|image_flou{2}|image_estampage_alpha{1,1.5}
+ 		|extraire_attribut{src})],top=-1,left=-1})]</dd>	
+
+
+</dl>
+
+</body>
+</html>

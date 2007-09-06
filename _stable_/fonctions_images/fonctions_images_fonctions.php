@@ -527,8 +527,7 @@ function image_float ($img, $align, $margin=10) {
 	$ret .= "<div style='position: relative; float: $align; width: 0px; height: 0px;'><img src='$im' class='format_png' alt='' style='position: absolute; $align: 0px;' /></div>";
 
 	if ($creer) {
-		include_spip('inc/logos'); // bicoz presence reduire_image
-		$nouveau = image_valeurs_trans(reduire_image($im, 0, $precision),"");
+		$nouveau = image_valeurs_trans(image_reduire($im, 0, $precision),"");
 		$im_n = $nouveau["fichier"];
 		$x_i = $nouveau["largeur"];
 		$y_i = $nouveau["hauteur"];

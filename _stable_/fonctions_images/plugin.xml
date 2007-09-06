@@ -8,60 +8,23 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<version>0.1</version>
 	<etat>stable</etat>
     <description>
-Fournit des fonctions pour le traitement des images.
+Fournit des filtres pour le traitement des images, essentiellement 
+extraits du site [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 
-{{{quelques filtres}}}
+Une page de test permet de voir <a href="../?page=tests_fonctions_images">les filtres en action</a> une fois le plugin activé :
 
-{{en_image :}} convertit une adresse d'image en balise img pour
-	&ecirc;tre utilis&eacute;e dans les fonctions de traitement d'image de spip
--*  <code>#CHEMIN{fichier}|en_image|image_sepia{14579c}</code>
+{{Filtres propos&eacute;s :}}
+- en_image
+- couleur_chroma
+- couleur_saturer
+- image_estampage_alpha
+- image_saturer
+- image_niveaux_gris_auto
+- image_podpod
+- image_courbe
+- image_float
+- image_contour_alpha
 	
-{{[couleur_chroma->http://www.paris-beyrouth.org/Une-palette-de-couleurs] :}} donne une couleur dans la roue chromatique
--*  <code>#[(#FICHIER|couleur_extraire|couleur_chroma{3/6})]</code>
-	
-{{couleur_saturer :}} (de)sature une couleur
--*  <code>#[(#FICHIER|couleur_extraire|couleur_saturer{1.3})]</code>
-		
-	
-{{[image_estampage_alpha->http://www.paris-beyrouth.org/Des-titres-en-relief] :}} permet de r&eacute;aliser des estampage.
--* 	<code>[(#TITRE
- 	|image_typo{police=stencil.ttf,couleur=8cc42a,taille=40,padding=4}
- 	|image_masque{
- 		[(#TITRE|image_typo{police=stencil.ttf,couleur=8cc42a,taille=40,padding=4}
- 		|image_flou{2}|image_estampage_alpha{1,1.5}
- 		|extraire_attribut{src})],top=-1,left=-1})]</code>
-		
-{{[image_saturer->http://www.paris-beyrouth.org/De-saturer-une-image-en-passant-en] :}} (de)sature une image
--* 	<code>[(#FICHIER|image_saturer{1.5})] </code>
-	
-	
-{{[image_niveaux_gris_auto->http://www.paris-beyrouth.org/Corriger-les-niveaux-des-images] :}} Correction automatique des niveaux.
--* 	<code>[(#FICHIER|image_niveaux_gris_auto|image_reduire{400})]</code>
-
-
-{{[image_podpod->http://www.paris-beyrouth.org/Creer-automatiquement-une] :}} Inexpliquable !
--* 	<code>[(#FICHIER|reduire_image{600}|image_podpod{ffffff,180,255}|reduire_image{300})]</code>
-
-
-{{[image_courbe->http://www.paris-beyrouth.org/Modifier-les-courbes-d-une-image] :}} Changer les courbes de niveau d'une image.
--* <code>[(#FICHIER
-	|reduire_image{400}
-	|image_courbe{rvb, 62=30, 193=220})]</code>
-	
-	
-{{[image_float->http://www.paris-beyrouth.org/Modifier-les-courbes-d-une-image] :}} Faire un texte qui &nbsp;pouse une image
--* <code>[(#FICHIER
-	|reduire_image{400}
-	|image_courbe{rvb, 62=30, 193=220})]</code>
-	
-	
-{{[image_contour_alpha->http://www.paris-beyrouth.org/Tracer-les-contours-de] :}} Tracer des contours d'une image
--* <code>[(#TITRE|image_typo|image_contour_alpha{ff0000,2})]</code>
-
-
-{{[image_sincity->http://www.paris-beyrouth.org/Welcome-to-Spip-City] :}} Tracer des contours d'une image
--* <code>[(#FICHIER|reduire_image{400}|image_sincity)]</code>
-		
 	</description>
 	<prefix>Fonctions_images</prefix>
     <fonctions>fonctions_images_fonctions.php</fonctions>
