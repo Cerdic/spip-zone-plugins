@@ -4,7 +4,7 @@
 [(#EXTRA_INFO|=={liste}|?{' ',''})
 <select name='#ENV{name,#CHAMP}' id='input-#ID_FORM-#CHAMP' 
 	class='[(#ENV{crayon_active,''}) ][(#OBLIGATOIRE|=={oui}|?{fondl,fondo})]'>
-	<option value=''></option>]
+	<option value=''>#ENV{titre_select,''}</option>]
 [(#EXTRA_INFO|=={liste}|?{'',' '})<ul class='spip_form_choix_unique[ (#ENV{crayon_active,''})]'>]
 	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
 [(#EXTRA_INFO|=={liste}|?{' ',''})
