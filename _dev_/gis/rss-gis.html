@@ -9,7 +9,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 
 <channel>
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
-	<link>#URL_SITE_SPIP/</link>
+	<link>[(#URL_SITE_SPIP)/]</link>
 	<description>[(#DESCRIPTIF_SITE_SPIP|texte_backend)]</description>
     <itunes:category text="Music"/>
     <itunes:owner>
@@ -21,10 +21,10 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{par date}{inverse}><item>
 	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>][<link>(#URL_ARTICLE|url_absolue)</link>]<description>&lt;div style='width:200px'&gt;
 			&lt;div id='player'&gt;&lt;/div&gt;
-			&lt;div style='font-size:11px; font-weight:bold'&gt;&lt;a href='[(#URL_ARTICLE|texte_backend)]'&gt;[(#TITRE|texte_backend)]&lt;/a&gt; &lt;/div&gt;
+			&lt;div style='font-size:11px; font-weight:bold'&gt;&lt;a href='[(#URL_ARTICLE|url_absolue|texte_backend)]'&gt;[(#TITRE|texte_backend)]&lt;/a&gt; &lt;/div&gt;
 			&lt;div style='font-size:10px; text-align:left'&gt;[(#CHAPO|texte_backend)] &lt;/div&gt;
-			<BOUCLE_imaxe(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' title='#TITRE' width='#LARGEUR' height='#HAUTEUR'&gt;&lt;img src='[(#URL_DOCUMENT|url_absolue)]' border='0' height='60' alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe>
-			&lt;div style='font-size:10px; margin-bottom:10px'&gt;[(#DATE|date_iso)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='[(#URL_AUTEUR|url_absolue)]'&gt;(#NOM)&lt;/a&gt;]</BOUCLE_autores>&lt;/div&gt;
-			&lt;/div&gt;</description>[<dc:date>(#DATE|date_iso)</dc:date>]<BOUCLE_gis(GIS){id_article}><geo_lat>#LAT</geo_lat><geo_long>#LONX</geo_long></BOUCLE_gis><BOUCLE_mp3(DOCUMENTS){id_article}{mode=document}{extension=mp3}{0,1}><enclosure url="[(#URL_DOCUMENT|url_absolue)]" length="#TAILLE" type="audio/mpeg" /></BOUCLE_mp3><B_tags1><geo_icon><BOUCLE_tags1(MOTS){id_article}{type=marker_icon}>[#URL_SITE_SPIP/IMG/(#LOGO_MOT|fichier)]</BOUCLE_tags1></geo_icon></B_tags1><B_tags><dc:subject><BOUCLE_tags(MOTS){id_article}>#TITRE</BOUCLE_tags></dc:subject></B_tags>[<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>][<itunes:summary>(#DESCRIPTIF|couper{80})</itunes:summary>]<itunes:duration>00:00:00</itunes:duration><BOUCLE_img(DOCUMENTS){id_article}{mode=document}{extension==jpg|png|gif}{0,1}>[<itunes:image href="(#URL_DOCUMENT|url_absolue)" />]</BOUCLE_img>[<dc:language>(#LANG)</dc:language>][<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]</item></BOUCLE_un_article>
+			<BOUCLE_imaxe(DOCUMENTS){id_article}{extension==jpg|png|gif}{0,1}>&lt;a href='[(#URL_DOCUMENT|url_absolue)]' [title='(#TITRE|texte_backend)'] width='#LARGEUR' height='#HAUTEUR'&gt;&lt;img src='[(#URL_DOCUMENT|url_absolue)]' border='0' height='60' alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe>
+			&lt;div style='font-size:10px; margin-bottom:10px'&gt;[(#DATE|date_iso)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> &lt;a href='[(#URL_AUTEUR|url_absolue)]'&gt;(#NOM|texte_backend)&lt;/a&gt;]</BOUCLE_autores>&lt;/div&gt;
+			&lt;/div&gt;</description>[<dc:date>(#DATE|date_iso)</dc:date>]<BOUCLE_gis(GIS){id_article}><geo_lat>#LAT</geo_lat><geo_long>#LONX</geo_long></BOUCLE_gis><BOUCLE_mp3(DOCUMENTS){id_article}{mode=document}{extension=mp3}{0,1}><enclosure url="[(#URL_DOCUMENT|url_absolue)]" length="#TAILLE" type="audio/mpeg" /></BOUCLE_mp3><B_tags1><geo_icon><BOUCLE_tags1(MOTS){id_article}{type=marker_icon}>[#URL_SITE_SPIP/IMG/(#LOGO_MOT|fichier)]</BOUCLE_tags1></geo_icon></B_tags1><B_tags><dc:subject><BOUCLE_tags(MOTS){id_article}>[(#TITRE|texte_backend)]</BOUCLE_tags></dc:subject></B_tags>[<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>][<itunes:summary>(#DESCRIPTIF|texte_backend|couper{80})</itunes:summary>]<itunes:duration>00:00:00</itunes:duration><BOUCLE_img(DOCUMENTS){id_article}{mode=document}{extension==jpg|png|gif}{0,1}>[<itunes:image href="(#URL_DOCUMENT|url_absolue)" />]</BOUCLE_img>[<dc:language>(#LANG)</dc:language>][<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]</item></BOUCLE_un_article>
 </channel>
 </rss>
