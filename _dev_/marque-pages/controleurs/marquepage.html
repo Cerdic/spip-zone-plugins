@@ -9,13 +9,13 @@
 <fieldset[ style="(#ENV{style})"]>
 	<legend><:marquepages:modifier:></legend>
 	
-	<p><label for="mp_titre"><:marquepages:titre:></label></p>
+	<p><label for="titre"><:marquepages:titre:></label></p>
 	<p><input type="text" class="crayon-active" id="titre" name="#ENV{name_titre}" style="width:#ENV{largeur}px;" value="[(#TITRE**|entites_html)]" size="60" /></p>
 	
-	<p><label for="mp_descritpion"><:marquepages:description:></label></p>
+	<p><label for="texte"><:marquepages:description:></label></p>
 	<p><input type="text" class="crayon-active" id="texte" name="#ENV{name_texte}" style="width:#ENV{largeur}px;" value="[(#TEXTE**|entites_html)]" /></p>
 	
-	<p><label for="mp_etiquettes"><:marquepages:etiquettes:></label></p>
+	<p><label for="tags"><:marquepages:etiquettes:></label></p>
 	<p><input type="text" class="crayon-active" id="tags" name="#ENV{name_tags}" autocomplete="on" style="width:#ENV{largeur}px; font-size:10px;"
 		value="<BOUCLE_m(MOTS){type=tags}{id_forum}{" "}>[(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})][(#TITRE*|entites_html)][(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})]</BOUCLE_m>" />
 	</p>

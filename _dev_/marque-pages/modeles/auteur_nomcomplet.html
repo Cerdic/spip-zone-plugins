@@ -3,10 +3,13 @@
 	Affiche le nom complet d'un auteur si ya Inscription2
 	Affiche le nom classique sinon
 	
+	On peut rajouter url=oui dans les paramètres pour que le nom pointe
+	vers la page de l'auteur.
+	
 	Faut appeler comme ça dans un article :
-		<auteur43|nomcomplet>
+		<auteur43|nomcomplet|url=oui>
 	Faut appeler comme ça dans un squelette :
-		#MODELE{auteur_nomcomplet}{id=43}
+		[(#MODELE{auteur_nomcomplet}{id=43}{url=oui})]
 	
 ]
 
@@ -25,5 +28,5 @@
 	</BOUCLE_elargi>
 		#SET{nom_complet,#ARRAY{#NOM}}
 	<//B_elargi>
+[(#ENV{url}|=={oui}|?{<a href="#URL_AUTEUR">})][(#GET{nom_complet}|?{' '}|join{#GET{nom_complet}})][(#ENV{url}|=={oui}|?{</a>})]
 </BOUCLE_auteur>
-[(#GET{nom_complet}|?{' '}|join{#GET{nom_complet}})]

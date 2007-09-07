@@ -6,14 +6,14 @@
  		RastaPopoulos - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-		0.1
+		0.2
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 		dev
 	</etat>
 	<description>
 		Des outils pour d&eacute;velopper un syst&egrave;me de marque-pages en ligne, du style Scuttle.
-		<br />N&eacute;cessite les plugins crayons, tag-machine et balise session
+		<br />N&eacute;cessite les plugins crayons, tag-machine et balise session.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 

@@ -38,7 +38,7 @@ function balise_FORMULAIRE_MARQUEPAGE_dyn($id_rubrique) {
 	if (!marquepages_autoriser_creer($id_rubrique)){
 		
 		$proposer_login = true;
-		$message_erreur = marquepages_test_parametres($url, $titre, $desc, $tags, $id_rubrique);
+		$message_erreur = _T('marquepages:pas_le_droit');
 		
 	}
 	else $proposer_login = false;
@@ -49,8 +49,9 @@ function balise_FORMULAIRE_MARQUEPAGE_dyn($id_rubrique) {
 		// Si tout va, on intègre à la base de données
 		if (($message_erreur = marquepages_test_parametres($url, $titre, $desc, $tags, $id_rubrique)) == ''){
 			
-			marquepages_ajouter($url, $titre, $desc, $tags, $id_rubrique);
-			$message_ok = _T('marquepages:enregistre');
+			$ok = marquepages_ajouter($url, $titre, $desc, $tags, $id_rubrique);
+			if ($ok != 0) $message_ok = _T('marquepages:enregistre');
+			else $message_erreur = "Error with the database.";
 			
 		}
 	

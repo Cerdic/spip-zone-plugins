@@ -84,8 +84,6 @@ function marquepages_existe($url, $id_rubrique=0){
 // Ajoute un marque-page, retourne 0 si ça marche pas
 function marquepages_ajouter($url, $titre, $description, $tags, $id_rubrique){
 	
-	$id_forum = 0;
-	
 	// Si jamais qqn utilise la fonction sans les tests avant
 	if (marquepages_test_parametres($url, $titre, $description, $tags, $id_rubrique) == ''){
 		
@@ -111,7 +109,7 @@ function marquepages_ajouter($url, $titre, $description, $tags, $id_rubrique){
 		
 	}
 	
-	return $id_forum;
+	return $id_forum ? $id_forum : 0;
 	
 }
 

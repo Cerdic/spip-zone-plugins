@@ -1,9 +1,14 @@
 #CACHE{7200}
 
 [(#REM) On teste si on a passé un auteur ]
-<BOUCLE_auteur_principal(AUTEURS){login}>
+<BOUCLE_auteur_principal(AUTEURS){login?}{id_auteur?}{0,2}>
 	#SET{auteur,#ID_AUTEUR}
 </BOUCLE_auteur_principal>
+	[(#REM) Si ça sort plus d'un auteur c'est qu'il n'y a ni login ni id_auteur ]
+	[(#TOTAL_BOUCLE|>{1}|?{' '})
+		#SET{auteur,""}
+	]
+</B_auteur_principal>
 	#SET{auteur,""}
 <//B_auteur_principal>
 
@@ -45,19 +50,11 @@
 			[(#REM) Menu de navigation par rubriques ]
 			<INCLURE{fond=inc-rubriques}{id_rubrique}>
 			
-			[(#REM) Autres auteurs ]
-			<B_autres_auteurs>
-			<div class="forums">
-				#ANCRE_PAGINATION
-				<h2 class="menu-titre"><:info_auteurs:></h2>
-				[<p class="pagination">(#PAGINATION)</p>]
-				<ul>
-					<BOUCLE_autres_auteurs(AUTEURS) {par nom} {pagination 20}>
-					<li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]><span class="#EDIT{nom}">[(#NOM)]</span></a></li>
-					</BOUCLE_autres_auteurs>
-				</ul>
-			</div>
-			</B_autres_auteurs>
+			[(#REM) Tags ]
+			[<div class="divers">
+				<h2 class="menu-titre"><:marquepages:etiquettes_populaires:></h2>
+				(#MODELE{nuage2_forum}{type=tags})
+			</div>]
 
 		</div><!-- fin navigation -->
 
