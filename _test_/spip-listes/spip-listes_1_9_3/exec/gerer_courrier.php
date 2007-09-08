@@ -136,7 +136,7 @@ function exec_gerer_courrier(){
 		
 			spip_log("test ? ->".$test."idliste->$id_liste");
 			if(intval($id_liste) OR ($id_liste==0 AND $test!='oui') )
-				remplir_liste_envois($id_message,$id_liste) ;
+				spiplistes_remplir_liste_envois($id_message,$id_liste) ;
 		}
 	}
 

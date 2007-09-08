@@ -19,22 +19,51 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
-// API a enrichir
+// API v0.2
 
-// ajouter les abonnes d'une liste a un envoi
-function remplir_liste_envois($id_courrier,$id_liste){
+include_spip ("inc/utils");
+include_spip ("inc/filtres");    /* email_valide() */
+include_spip ("inc/acces");      /* creer_uniqid() */
+
+/* function privee
+ * multi_queries mysql n'est pas en mesure de le faire en natif :-(
+ * A tranformer le jour où mysql gerera correctement le multi_query
+ * Et a transformer en transanction quand spip utilisera innodb ou autre table transactionnelle
+ * @param $queries : requetes separees par des ';'
+ */
+function __exec_multi_queries($queries) {
+	$queries = trim($queries);
+	if (substr($queries, -1, 1) == ';') {
+		$queries = substr($queries, 0, strlen($queries)-1);
+	}
+	$_queries = split(';', $queries);
+	while( list(,$val) = each($_queries)) {
+		spip_query($val);
+	}
+}
+
+/*
+ * Ajouter les abonnes d'une liste a un envoi
+ * @param : $id_courrier : reference d'un envoi
+ * @param $id_liste : refernce d'une liste
+ */
+function spiplistes_remplir_liste_envois($id_courrier,$id_liste){
 	if($id_liste==0)
 		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs ORDER BY id_auteur ASC");
 	else
-		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste="._q($id_liste));
+		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste=".
+							   _q($id_liste));
 	
 	while($row_ = spip_fetch_array($result_m)) {
 		$id_abo = $row_['id_auteur'];
-		spip_query("INSERT INTO spip_auteurs_courriers (id_auteur,id_courrier,statut,maj) VALUES ("._q($id_abo).","._q($id_courrier).",'a_envoyer', NOW()) ");
+		spip_query("INSERT INTO spip_auteurs_courriers (id_auteur,id_courrier,statut,maj) VALUES (".
+				   _q($id_abo).","._q($id_courrier).",'a_envoyer', NOW()) ");
 	}
-	$res = spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_courriers WHERE id_courrier="._q($id_courrier)." AND statut='a_envoyer'");
+	$res = spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_courriers WHERE id_courrier=".
+					  _q($id_courrier)." AND statut='a_envoyer'");
 	if ($row = spip_fetch_array($res))
-		spip_query("UPDATE spip_courriers SET total_abonnes="._q($row['n'])." WHERE id_courrier="._q($id_courrier)); 
+		spip_query("UPDATE spip_courriers SET total_abonnes=".
+				   _q($row['n'])." WHERE id_courrier="._q($id_courrier));
 }
 
 // Nombre d'abonnes a une liste

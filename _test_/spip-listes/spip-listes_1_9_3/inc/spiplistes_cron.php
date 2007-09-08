@@ -96,7 +96,7 @@ function cron_spiplistes_cron($t){
 					$id_message_bg = spip_insert_id();
 					
 					//generer la pile d'envoi
-					 remplir_liste_envois($id_message_bg,$id_liste_bg);
+					 spiplistes_remplir_liste_envois($id_message_bg,$id_liste_bg);
 					spip_log("remplir courrier $id_message_bg, liste : $id_liste_bg");
 				} else {
 					spip_log("envoi mail nouveautes : pas de nouveautes ->$taille");
