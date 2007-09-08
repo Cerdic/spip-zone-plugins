@@ -1,13 +1,12 @@
 <?php
-	// en attendant l'intervention corrective de la p**e du gouvernement
-	#define('_SIGNALER_ECHOS', false); // horrible
-	
-	
 	/**Plugin Inscription 2 avec CFG **/
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('cfg_options');
 	include_spip('base/serial');
 	include_spip('base/abstract_sql');
+	
+	//verifier qu'on a bien cfg
+	if(!function_exists('lire_config')) die("Installez cfg voyons !");
 	
 	// a chaque validation de cfg, verifier l'etat de la table spip_auteurs_elargis
 	// BoOz : le bug du foreach quand on ajoute un champ est ptet lie a ce code ?	
@@ -50,14 +49,14 @@
 	$tables_principales['spip_geo_pays']  =	array('field' => &$spip_geo_pays, 'key' => &$spip_geo_pays_key);
 	
 	// surcharger auteur session, desactivé car ca pete en 193
+	/*
 	if(is_array($var_user) and isset($GLOBALS['auteur_session']['id_auteur'])){
 		$id = $GLOBALS['auteur_session']['id_auteur'];
 		$query = spip_query("select ".join(', ', array_keys($var_user))." from spip_auteurs_elargis where id_auteur = $id");
 		$query = spip_fetch_array($query);
-		/*var_dump($query);
-		exit;*/
-		//$GLOBALS['auteur_session'] = array_merge($query,$GLOBALS['auteur_session'] );
-		
+		exit;
+		$GLOBALS['auteur_session'] = array_merge($query,$GLOBALS['auteur_session'] );
+	*/	
 	}
 	
 # autoriser les visiteurs a modifier leurs infos

@@ -117,7 +117,7 @@ function inscription2_upgrade(){
 	if ($current_version<0.61){
 		include_spip('base/abstract_sql');
 		$table_pays = "spip_geo_pays";
-		$descpays = spip_abstract_showtable($table_pays, '', false);;
+		$descpays = spip_abstract_showtable($table_pays, '', false);
 		
 		if((isset($descpays['field']['nom'])) && (!isset($descpays['field']['pays']))){
 			spip_query("ALTER TABLE spip_geo_pays CHANGE nom pays varchar(255) NOT NULL");
