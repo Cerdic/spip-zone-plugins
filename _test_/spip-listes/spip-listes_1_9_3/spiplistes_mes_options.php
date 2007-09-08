@@ -3,6 +3,10 @@
 //nombre de processus d'envoi simultanes
 @define('_SPIP_LISTE_SEND_THREADS',1);
 
+// virer les echo, a reprendre plus tard correctement
+// avis aux spécialistes !!
+define('_SIGNALER_ECHOS', false); // horrible 
+
 function spiplistes_log($texte){
 	spip_log($texte,'spiplistes');
 }
