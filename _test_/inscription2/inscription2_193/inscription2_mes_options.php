@@ -8,6 +8,8 @@
 	//verifier qu'on a bien cfg
 	if(!function_exists('lire_config')) die("Installez cfg voyons !");
 	
+	#define('_SIGNALER_ECHOS', false); // horrible
+	
 	// a chaque validation de cfg, verifier l'etat de la table spip_auteurs_elargis
 	// BoOz : le bug du foreach quand on ajoute un champ est ptet lie a ce code ?	
 	if(_request('exec')=='cfg' and _request('cfg')=='inscription2'){
