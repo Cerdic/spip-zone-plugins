@@ -6,22 +6,24 @@ function critere_branche($idb, &$boucles, $crit) {
   global $table_des_tables;
   $not = $crit->not;
   $boucle = &$boucles[$idb];
-  $type = $boucle->type_requete;
+
   $nom = $table_des_tables[$type];
   if ($boucle->id_table!='evenements' && $boucle->id_table!='pim_agenda')
   	critere_branche_dist($idb, $boucles, $crit);
-  else{
+  else {
 		$arg = calculer_argument_precedent($idb, 'id_rubrique', $boucles);
 		$champ = 'id_rubrique';
 
-    $type = $boucle->type_requete;
-    $nom = $table_des_tables[$type];
-    list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+		$type = $boucle->type_requete;
+		$desc = trouver_table($type, $boucle);
+		//Seulement si necessaire
+		if (!array_key_exists('id_rubrique', $desc['field'])) {
+			$cle = trouver_champ_exterieur('id_rubrique', $boucle->jointures, $boucle);
+			if ($cle)
+				$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
+		}
 
-    $cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
-    if ($cle) 
-      $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
-    if ($cle) $t = "L$cle";
+     if ($cle) $t = "L$cle";
 		// faire la jointure sur id_rubrique
 		
 		$c = "calcul_mysql_in('" .
