@@ -137,9 +137,9 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 		//proba subir imaxe
 		if ((isset($_FILES['commentimg'])) AND ($_FILES['commentimg']['error'] == "0")) {
     		$freshfile = $_FILES['commentimg'];
-    		move_uploaded_file($freshfile['tmp_name'], "/web/htdocs/www.vhplab.net/home/web/plugins/gis/upload_form/".$freshfile['name']) OR die ("<p>Error!</p>");
-			inc_ajouter_documents_dist ("/web/htdocs/www.vhplab.net/home/web/plugins/gis/upload_form/".$freshfile['name'], $freshfile['name'], 'article', $id_novo_article , 'document', $id_document, $documents_actifs);
-			unlink ("/web/htdocs/www.vhplab.net/home/web/plugins/gis/upload_form/".$freshfile['name']);
+    		move_uploaded_file($freshfile['tmp_name'], _DIR_PLUGIN_GIS."upload_form/".$freshfile['name']) OR die ("<p>Error!</p>");
+			inc_ajouter_documents_dist (_DIR_PLUGIN_GIS."upload_form/".$freshfile['name'], $freshfile['name'], 'article', $id_novo_article , 'document', $id_document, $documents_actifs);
+			unlink (_DIR_PLUGIN_GIS."upload_form/".$freshfile['name']);
 		} else {
 			echo "no fai nada coa imaxe";
 		}
@@ -148,9 +148,9 @@ function balise_FORMULAIRE_GIS_dyn($id_rubrique) {
 		if ((isset($_FILES['commentsound'])) AND ($_FILES['commentsound']['error'] == "0")) {
     		$freshfile = $_FILES['commentsound'];
     		echo $freshfile['tmp_name'];
-    		move_uploaded_file($freshfile['tmp_name'], "/web/htdocs/www.vhplab.net/home/web/plugins/gis/upload_form/".$freshfile['name']) OR die ("<p>Error!</p>");
-			inc_ajouter_documents_dist ("/web/htdocs/www.vhplab.net/home/web/plugins/gis/upload_form/".$freshfile['name'], $freshfile['name'], 'article', $id_novo_article , 'document', $id_document, $documents_actifs);
-			unlink ("/web/htdocs/www.vhplab.net/home/web/plugins/gis/upload_form/".$freshfile['name']);
+    		move_uploaded_file($freshfile['tmp_name'], _DIR_PLUGIN_GIS."upload_form/".$freshfile['name']) OR die ("<p>Error!</p>");
+			inc_ajouter_documents_dist (_DIR_PLUGIN_GIS."upload_form/".$freshfile['name'], $freshfile['name'], 'article', $id_novo_article , 'document', $id_document, $documents_actifs);
+			unlink (_DIR_PLUGIN_GIS."upload_form/".$freshfile['name']);
 		} else {
 			echo "no fai nada co son";
 		}
