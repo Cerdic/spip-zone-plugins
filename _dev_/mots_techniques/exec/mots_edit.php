@@ -20,19 +20,22 @@ function exec_mots_edit()
 {
 	global $spip_lang_right;
 // attention, ajouter_id_article n'est pas forcement un id d'article
-global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_groupe,  $id_mot, $table_id, $new, $redirect, $spip_display, $table, $texte, $titre, $titre_mot, $les_notes;
+global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 
- $id_groupe = intval($id_groupe);
- $id_mot = intval($id_mot);
+ $id_groupe = intval(_request('id_groupe'));
+ $id_mot = intval(_request('id_mot'));
+ $new = _request('new');
  // Secu un peu superfetatoire car seuls les admin generaux les verront;
  // mais si un jour on relache les droits, vaut mieux blinder.
- $table = preg_replace('/\W/','',$table);
- $table_id = preg_replace('/\W/','',$table_id);
- $ajouter_id_article = intval($ajouter_id_article);
+ $table = preg_replace('/\W/','',_request('table'));
+ $table_id = preg_replace('/\W/','', _request('table_id'));
+ $titre = _request('titre');
+ $redirect = _request('redirect');
+ $ajouter_id_article = intval(_request('ajouter_id_article'));
 //
 // Recupere les donnees
 //
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
+	$row = sql_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
 	 if ($row) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = $row['titre'];
@@ -42,18 +45,18 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		$id_groupe = $row['id_groupe'];
 		$onfocus ='';
 	 } else {
-		if (!$new OR !autoriser('modifier','groupemots',$id_groupe)) {
+		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_mot_sans_groupe'));
 			exit;
 		}
 		$id_mot = 0;
-
+		$descriptif = $texte = '';
 		if (!$titre_mot = $titre) {
 			$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
 			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		}
-		$res = spip_num_rows(spip_query("SELECT id_groupe FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " LIMIT 1"));
+		$res = sql_countsel('spip_groupes_mots', ($table ? "$table='oui'" : ''));
 
 		if (!$res) {
 		  // cas pathologique: 
@@ -87,12 +90,12 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		.  "<br /><span class='spip_xx-large'>"
 		.  $id_mot
 		.  '</span></div>';
-		$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false);
+		$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false, false);
 		$out .= fin_boite_info(true);
 
 		// Logos du mot-clef
 
-		if (autoriser('modifier','groupemots',$id_groupe) AND ($spip_display != 4)) {
+		if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe)) AND ($spip_display != 4)) {
 			$iconifier = charger_fonction('iconifier', 'inc');
 			$out .= $iconifier('id_mot', $id_mot, 'mots_edit');
 		}
@@ -169,9 +172,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 
 	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
-	if (autoriser('modifier','groupemots',$id_groupe)){
-
-		$out .= debut_cadre_formulaire('',true);
+	if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))){
 
 		$res = "<div class='serif'>";
 
@@ -179,21 +180,21 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		$descriptif = entites_html($descriptif);
 		$texte = entites_html($texte);
 		
-		$res .= "<b>"._T('info_titre_mot_cle')."</b> "._T('info_obligatoire_02');
+		$res .= "<label for='titre'><b>"._T('info_titre_mot_cle')."</b></label> "._T('info_obligatoire_02');
 		$res .= aide ("mots");
 
-		$res .= "<br /><input type='text' name='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus />";
+		$res .= "<br /><input type='text' name='titre' id='titre' class='formo' value=\"$titre_mot\" size='40' $onfocus />";
 
 		$res .= determine_groupe_mots($table, $id_groupe);
 
 
-		$res .= "<b>"._T('texte_descriptif_rapide')."</b><br />";
-		$res .= "<textarea name='descriptif' class='forml' rows='4' cols='40'>";
+		$res .= "<label for='descriptif'><b>"._T('texte_descriptif_rapide')."</b></label><br />";
+		$res .= "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>";
 		$res .= $descriptif;
 		$res .= "</textarea><br />\n";
 
-		$res .= "<b>"._T('info_texte_explicatif')."</b><br />";
-		$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
+		$res .= "<label for='texte'><b>"._T('info_texte_explicatif')."</b></label><br />";
+		$res .= "<textarea name='texte' id='texte' rows='8' class='forml' cols='40'>";
 		$res .= $texte;
 		$res .= "</textarea><br />";
 
@@ -212,9 +213,9 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 			$redirect = rawurldecode($redirect);
 		$arg = !$table ? $id_mot : "$id_mot,$ajouter_id_article,$table,$table_id";
 
-		$out .= generer_action_auteur("instituer_mot", $arg, _DIR_RESTREINT_ABS . $redirect, $res);
-
-		$out .= fin_cadre_formulaire(true);
+		$out .= debut_cadre_formulaire('',true)
+			. generer_action_auteur("instituer_mot", $arg, _DIR_RESTREINT_ABS . $redirect, $res, " method='post'")
+			. fin_cadre_formulaire(true);
 	}
 
 	echo $out, fin_gauche(), fin_page();
@@ -228,8 +229,8 @@ function determine_groupe_mots($table, $id_groupe) {
 
 	if (spip_num_rows($q)>1) {
 
-		$res = " &nbsp; <select name='id_groupe' class='fondl'>\n";
-		while ($row = spip_fetch_array($q)){
+		$res = " &nbsp; <select name='id_groupe' id='id_groupe' class='fondl'>\n";
+		while ($row = sql_fetch($q)){
 			$groupe = $row['id_groupe'];
 			$titre_groupe = texte_backend(supprimer_tags(typo($row['titre'])));
 			$res .=  "<option".mySel($groupe, $id_groupe).">$titre_groupe</option>\n";
@@ -238,9 +239,9 @@ function determine_groupe_mots($table, $id_groupe) {
 	} else {
 	  // pas de menu si un seul groupe 
 	  // (et on est sur qu'il y en a un grace au redirect preventif)
-		$row = spip_fetch_array($q);
+		$row = sql_fetch($q);
 		$res = $row['titre']
-		. "<br /><input type='hidden' name='id_groupe' value='".$row['id_groupe']."' />";
+		. "<br /><input type='hidden' name='id_groupe' id='id_groupe' value='".$row['id_groupe']."' />";
 	}
 
 	return _T('info_dans_groupe')

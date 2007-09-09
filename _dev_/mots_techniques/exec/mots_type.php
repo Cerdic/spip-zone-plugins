@@ -17,11 +17,11 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type()
 {
-	global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;
+	$id_groupe= intval(_request('id_groupe'));
 
-	if ($new == "oui") {
-	  $id_groupe = 0;
-	  $type = filtrer_entites(_T('titre_nouveau_groupe'));
+	if (!$id_groupe) {
+
+	  $type = $titre = filtrer_entites(_T('titre_nouveau_groupe'));
 	  $onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	  $ancien_type = '';
 	  $unseul = 'non';
@@ -34,11 +34,12 @@ function exec_mots_type()
 	  $acces_comite = 'oui';
 	  $acces_forum = 'non';
 	  $technique = '';
+	  $row = array();
 	} else {
-		$id_groupe= intval($id_groupe);
+
 		$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
 
-		while($row = spip_fetch_array($result_groupes)) {
+		if ($row = sql_fetch($result_groupes)) {
 			$id_groupe = $row['id_groupe'];
 			$type = $row['titre'];
 			$titre = typo($type);
@@ -58,22 +59,23 @@ function exec_mots_type()
 		}
 	}
 
+	if (($id_groupe AND !$row) OR
+	    !autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
+	}
+	
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
 	
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
-	debut_droite();
-
-	if (!autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
-		echo "<h3>"._T('avis_non_acces_page')."</h3>";
-		exit;
-	}
-
+	echo debut_droite('', true);
 
 	$type = entites_html(rawurldecode($type));
 
@@ -90,17 +92,17 @@ function exec_mots_type()
 	. aide("motsgroupes")
 	. "<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
-	. "<b>"._T('info_changer_nom_groupe')."</b><br />\n"
-	. "<input type='text' size='40' class='formo' name='change_type' value=\"$type\" $onfocus />\n";
+	. "<label for='change_type'><b>"._T('info_changer_nom_groupe')."</b></label><br />\n"
+	. "<input type='text' size='40' class='formo' name='change_type' id='change_type' value=\"$type\" $onfocus />\n";
 		
-	$res .= "<br /><b>"._T('texte_descriptif_rapide')
-	  . "</b><br />"
-	  . "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
+	$res .= "<br /><label for='descriptif'><b>"._T('texte_descriptif_rapide')
+	  . "</b></label><br />"
+	  . "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>"
 	  . entites_html($descriptif)
 	  . "</textarea>\n";
 
-	$res .= "<br /><b>"._T('info_texte_explicatif')."</b><br />";
-	$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
+	$res .= "<br /><label for='texte'><b>"._T('info_texte_explicatif')."</b><label><br />";
+	$res .= "<textarea name='texte' id='texte' rows='8' class='forml' cols='40'>";
 	$res .= entites_html($texte);
 	$res .= "</textarea>\n";
 
@@ -109,8 +111,6 @@ function exec_mots_type()
 	. "' /></div>"
 	. fin_cadre_formulaire(true)
 	. "</div>"
-	. "</td></tr></table>"
-	. fin_cadre_relief(true)
 	. "<br />\n<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
 	. "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>"
@@ -187,7 +187,10 @@ function exec_mots_type()
 	. _T('bouton_valider')
 	. "' /></div>"
 	.  fin_cadre_formulaire(true)
-	. "</div>";
+	. "</div>"	
+	. "</td></tr></table>"
+	. fin_cadre_relief(true)
+	;
 
 	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $res),
 	pipeline('affiche_milieu',

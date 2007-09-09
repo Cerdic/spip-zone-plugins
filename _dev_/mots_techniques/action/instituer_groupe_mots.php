@@ -24,17 +24,28 @@ function action_instituer_groupe_mots()
 	if (preg_match(",^([a-zA-Z_]\w+)$,", $arg, $r)) 
 	  action_instituer_groupe_mots_get($arg);
 	elseif (!preg_match(",^(-?\d+)$,", $arg, $r)) {
-		 spip_log("action_instituer_groupe_mots $arg pas compris");
-	} else action_instituer_groupe_mots_post($r);
+		 spip_log("action_instituer_groupe_mots_dist $arg pas compris");
+	} else action_instituer_groupe_mots_post($r[1]);
 }
 
 
 // http://doc.spip.org/@action_instituer_groupe_mots_post
-function action_instituer_groupe_mots_post($r)
+function action_instituer_groupe_mots_post($id_groupe)
 {
-	global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $descriptif, $id_groupe, $obligatoire, $rubriques, $syndic, $texte, $unseul, $technique, $affiche_formulaire;
-
-	$id_groupe = $r[1];
+	$acces_comite = _request('acces_comite');
+	$acces_forum = _request('acces_forum');
+	$acces_minirezo = _request('acces_minirezo');
+	$articles = _request('articles');
+	$breves = _request('breves');
+	$change_type = _request('change_type');
+	$descriptif = _request('descriptif');
+	$obligatoire = _request('obligatoire');
+	$rubriques = _request('rubriques');
+	$syndic = _request('syndic');
+	$texte = _request('texte');
+	$unseul = _request('unseul');
+	$technique = _request('technique');
+	$affiche_formulaire = _request('affiche_formulaire');
 
 	if ($id_groupe < 0){
 		spip_query("DELETE FROM spip_groupes_mots WHERE id_groupe=" . (0- $id_groupe));
@@ -49,7 +60,7 @@ function action_instituer_groupe_mots_post($r)
 			spip_query("UPDATE spip_groupes_mots SET titre=" . _q($change_type) . ", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", unseul=" . _q($unseul) . ", obligatoire=" . _q($obligatoire) . ", articles=" . _q($articles) . ", breves=" . _q($breves) . ", rubriques=" . _q($rubriques) . ", syndic=" . _q($syndic) . ",	minirezo=" . _q($acces_minirezo) . ", comite=" . _q($acces_comite) . ", forum=" . _q($acces_forum) .", technique=" . _q($technique) .", affiche_formulaire=" . _q($affiche_formulaire) . " WHERE id_groupe=$id_groupe");
 
 		} else {	// creation groupe
-		  spip_abstract_insert('spip_groupes_mots', "(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum, technique, affiche_formulaire)", "(" . _q($change_type) . ", " . _q($texte) . " , " . _q($descriptif) . " , " . _q($unseul) . " , " . _q($obligatoire) . " , " . _q($articles) . " ," . _q($breves) . " , " . _q($rubriques) . " , " . _q($syndic) . " , " . _q($acces_minirezo) . " ,  " . _q($acces_comite) . " , " . _q($acces_forum) . " , " . _q($technique) . " , " . _q($affiche_formulaire) . " )");
+		  sql_insert('spip_groupes_mots', "(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum, technique, affiche_formulaire)", "(" . _q($change_type) . ", " . _q($texte) . " , " . _q($descriptif) . " , " . _q($unseul) . " , " . _q($obligatoire) . " , " . _q($articles) . " ," . _q($breves) . " , " . _q($rubriques) . " , " . _q($syndic) . " , " . _q($acces_minirezo) . " ,  " . _q($acces_comite) . " , " . _q($acces_forum) . " , " . _q($technique) . " , " . _q($affiche_formulaire) . " )");
 		}
 	}
 }
@@ -60,7 +71,7 @@ function action_instituer_groupe_mots_get($table)
 {
 	$titre = _T('info_mot_sans_groupe');
 
-	$id_groupe = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'oui', 'non', 'non'" . ")");
+	$id_groupe = sql_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'oui', 'non', 'non'" . ")");
 
         redirige_par_entete(parametre_url(urldecode(_request('redirect')),
 					  'id_groupe', $id_groupe, '&'));

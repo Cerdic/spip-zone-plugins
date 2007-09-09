@@ -12,7 +12,13 @@ function boucle_MOTS($id_boucle, &$boucles) {
 		$boucle->where[]= array("'='", "'groupes.id_groupe'", "'$id_table.id_groupe'");
 		$boucle->where[]= array("'='", "'groupes.technique'", "'\"\"'");
 	}
-
+	
+	// Restreindre aux mots cles techniques
+	if (isset($boucle->modificateur['criteres']['technique'])) {
+		$boucle->from["groupes"] =  "spip_groupes_mots";
+		$boucle->where[]= array("'='", "'groupes.id_groupe'", "'$id_table.id_groupe'");
+		$boucle->where[]= array("'='", "'groupes.technique'", $boucle->modificateur['criteres']['technique']);
+	}
 	return calculer_boucle($id_boucle, $boucles); 
 }
 

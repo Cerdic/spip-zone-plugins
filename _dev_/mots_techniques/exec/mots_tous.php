@@ -18,14 +18,15 @@ include_spip('inc/actions');
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous()
 {
-	global $spip_lang, $spip_lang_left, $spip_lang_right, $son_groupe;
+	global $spip_lang, $spip_lang_left, $spip_lang_right;
 
 	$conf_mot = intval(_request('conf_mot'));
+	$son_groupe = intval(_request('son_groupe'));
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_mots_tous'), "naviguer", "mots");
-	debut_gauche();
+	echo debut_gauche('', true);
 
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
@@ -37,11 +38,11 @@ function exec_mots_tous()
 	}
 
 
-	creer_colonne_droite();
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
-	debut_droite();
+	echo debut_droite('', true);
 
-	gros_titre(_T('titre_mots_tous'));
+	echo gros_titre(_T('titre_mots_tous'),'', false);
 	if (autoriser('creer','groupemots')) {
 	  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
 	}
@@ -51,9 +52,9 @@ function exec_mots_tous()
 // On boucle d'abord sur les groupes de mots (non techniques ou technique='oui')
 //
 
-	$result_groupes = spip_query($q="SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE technique='oui' OR technique='' ORDER BY technique, multi");
-
-	while ($row_groupes = spip_fetch_array($result_groupes)) {
+	$result = spip_query("SELECT *, ".sql_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE technique='oui' OR technique='' ORDER BY technique, multi");
+	
+	while ($row_groupes = sql_fetch($result)) {
 		$id_groupe = $row_groupes['id_groupe'];
 		$titre_groupe = typo($row_groupes['titre']);
 		$descriptif = $row_groupes['descriptif'];
@@ -72,7 +73,7 @@ function exec_mots_tous()
 		// Afficher le titre du groupe
 		echo "<a id='mots_tous-$id_groupe'></a>";
 
-		debut_cadre_enfonce($technique=='oui'?"mot-technique-24.png":"groupe-mot-24.gif", false, '', $titre_groupe);
+		echo debut_cadre_enfonce($technique=='oui'?"mot-technique-24.png":"groupe-mot-24.gif", true, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
 		$res = '';
 		if ($articles == "oui") $res .= "> "._T('info_articles_2')." &nbsp;&nbsp;";
@@ -90,19 +91,19 @@ function exec_mots_tous()
 		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
  		echo "<span class='verdana1 spip_x-small'>", $res, "</span>";
-		if ($descriptif) {
-			echo "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; </div>";
+		if (strlen($descriptif)) {
+			echo "<div style='border: 1px dashed #aaa; background-color: #fff;' class='verdana1 spip_x-small '>", propre("{{"._T('info_descriptif')."}} ".$descriptif), "&nbsp; </div>";
 		}
 
 		if (strlen($texte)>0){
-			echo "<span class='verdana1 spip_small'>", propre($texte), "</span>";
+			echo "<div class='verdana1 spip_small'>", propre($texte), "</div>";
 		}
 
 		//
 		// Afficher les mots-cles du groupe
 		//
-
-		$groupe = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
+		
+		$groupe = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
 		$groupe = $groupe['n'];
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
@@ -136,7 +137,7 @@ function exec_mots_tous()
 			echo "</td></tr></table>";
 		}	
 
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 	}
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
@@ -148,7 +149,7 @@ function exec_mots_tous()
 // http://doc.spip.org/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));
+	$row = sql_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));
 	if (!$row) return ""; // deja detruit (acces concurrent etc)
 
 	$id_mot = $row['id_mot'];
@@ -196,5 +197,4 @@ function confirmer_mot ($conf_mot, $son_groupe, $total)
 	. "</div>"
 	. fin_boite_info(true);
 }
-
 ?>
