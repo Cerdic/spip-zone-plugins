@@ -30,6 +30,10 @@
 	<p>
 	<:spiplistes:nouveaute_intro:>  <a href="#URL_SITE_SPIP" style="color: #f60;">#NOM_SITE_SPIP</a> [(#ENV{date}|date_depuis)]
 	</p>
+	
+	<h2>#ENV{sujet}</h2>
+	<p><b>#ENV{message}</b></p>
+	
 (#DATE_MODIF_SITE|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})
 ]
 

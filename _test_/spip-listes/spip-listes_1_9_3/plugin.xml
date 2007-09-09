@@ -15,6 +15,12 @@
 		<action>ajouterBoutons</action>
 		<inclure>spiplistes_boutons.php</inclure>
 	</pipeline>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spiplistes_boutons.php</inclure>
+	</pipeline>
+	
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>

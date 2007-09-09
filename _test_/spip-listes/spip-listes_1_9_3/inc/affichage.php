@@ -112,7 +112,7 @@ function spip_listes_raccourcis(){
 	echo debut_raccourcis(_DIR_PLUGIN_SPIPLISTES."img_pack/mailer_config.gif");
 	
 	if ($connect_statut == "0minirezo") {
-		icone_horizontale(_T('spiplistes:Nouveau_courrier'), generer_url_ecrire("courrier_edit","new=oui&type=nl"), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail_send.gif");
+		icone_horizontale(_T('spiplistes:Nouveau_courrier'), generer_url_ecrire("sl_courrier_rediger","new=oui&type=nl"), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail_send.gif");
 // 		echo "</a>"; // bug icone_horizontale()
 		echo "<br />" ;
 		echo "<br />" ;
@@ -342,6 +342,40 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 
 	return $en_liste;
 
+}
+
+// adapté de abomailman ()
+// MaZiaR - NetAktiv
+// tech@netaktiv.com
+ 
+
+// Afficher l'arbo
+function  spiplistes_arbo_rubriques($id_rubrique,  $rslt_id_rubrique="") {
+	global $ran;
+	$ran ++;
+	
+	$marge="&nbsp;&nbsp;&nbsp;|";
+	for ($g=0;$g<$ran;$g++) {
+		if (($ran-1)==0) {
+			$marge="&bull;";
+		}
+		else {
+			$marge .="-"; 
+		}
+	}
+	$marge .="&nbsp;";
+
+	$rqt_rubriques = spip_query ("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_parent='".$id_rubrique."'");
+	while ($row = spip_fetch_array($rqt_rubriques)) {
+		$id_rubrique = $row['id_rubrique'];
+		$id_parent = $row['id_parent'];
+		$titre = $row['titre'];
+		$arbo .="<option value='".$id_rubrique."'>" . $marge  . supprimer_numero (typo($titre)) . "</option>";
+		$arbo .= spiplistes_arbo_rubriques($id_rubrique,   $rslt_id_parent);
+	}
+	
+	return $arbo;
+	
 }
 
 
