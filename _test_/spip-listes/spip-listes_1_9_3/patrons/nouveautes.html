@@ -51,7 +51,7 @@
 	
 	 <B_articles>
 	 <h2 class="titre" style="background: #EEE;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;"><:info_articles:></h2> 
-	 <BOUCLE_articles(ARTICLES){age_relatif<0}{par date}{inverse}>
+	 <BOUCLE_articles(ARTICLES){id_rubrique ?}{id_mot ?}{age_relatif<0}{par date}{inverse}>
 	 [<h3 style="font-size: 1.27em;font-weight: bold;color: #000;">(#TITRE|supprimer_numero)</h3>]
 	 <span style="font-size:.8em">[(#DATE|affdate)], <:par_auteur:>  #LESAUTEURS</span>
 	 <div  style="margin-top: 5px;margin-bottom: 2em;border: 1px solid #ccc;padding: 0.9em;font-size: 0.82em;line-height: 1.4em;" >
