@@ -1,4 +1,8 @@
 <?php
+include_spip('public/criteres_motspartout'); //définition du critere branchemot
+include_spip('inc/grouper_mots_motspartout'); // pour faire fonctionner le critere branchemot
+//(on passe pas par composer car on n'y faisait que que cet include
+
 global $tables_jointures,$tables_auxiliaires,$exceptions_des_jointures;
 
 
