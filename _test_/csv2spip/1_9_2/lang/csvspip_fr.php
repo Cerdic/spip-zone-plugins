@@ -129,7 +129,7 @@
 			'suppr_visit' => '<strong>visiteurs</strong> absents : ',
 			'help_suppr_redac' => '(pour IACA, cela correspond à une "bascule année" des élèves/profs d\'un établissement)', // Pas de suppression automatique des administrateurs de rubriques !<br>
 			'suprr_articles' => 'Supprimer les articles des auteurs effacés :',
-			'transfert_archive' => 'Transférer les articles supprimés dans une rubrique d\'archives: ',
+			'transfert_archive' => 'Transférer les articles des auteurs supprimés dans une rubrique d\'archives: ',
 			'nom_rubrique_archives' => 'Nom de la rubrique d\'archives : ',
 			'choix_parent_archive' => 'Rubrique parent de la rubrique d\'archives :',
 			'racine_site' => 'racine du site',

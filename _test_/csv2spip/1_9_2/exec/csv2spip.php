@@ -51,19 +51,19 @@ function exec_csv2spip() {
 				 
 			// le plugin acces_groupes est il installé/activé ?
 					 $plugin_accesgroupes = 0;
+/*
 					 $sql11 = spip_query("SELECT valeur FROM spip_meta WHERE nom = 'plugin' LIMIT 1");
     			 $result11 = spip_fetch_array($sql11);
     			 $ch_meta = $result11['valeur'];
     			 $Tch_meta = explode(',', $ch_meta);
 					 if (in_array('acces_groupes', $Tch_meta)) {			
-/*
+*/
     		// version compatible >= 1.9.2... nettement plus sure : on teste la présence de la constante chemin_du_plugin 
 				// et non pas le nom du dossier de plugin stocké dans spip_meta
-					 if (defined(_DIR_PLUGIN_ACCESGROUPES)) {					 		 
-*/
+					 if (defined('_DIR_PLUGIN_ACCESGROUPES')) {					 		 
 							 $plugin_accesgroupes = 1;
 					 }			
-				 
+
 			// début affichage
          debut_page(_T('csvspip:csv2spip'));
          echo "\r\n<style type=\"text/css\">				 
@@ -78,6 +78,9 @@ function exec_csv2spip() {
         					display: block;
         					padding: 10px;
         			}
+							\r\n.Tpetit {
+									font-size: 75%;
+							}
 					    \r\n</style>";
          echo "<br />";
          gros_titre(_T('csvspip:titre_page'));
@@ -289,13 +292,14 @@ function exec_csv2spip() {
     							 $cree_rub_adm_defaut = 1;
     						}
 						}
+//print '<br>$cree_rub_adm_defaut	= '.$cree_rub_adm_defaut;
 					// création de la rubrique par défaut
 						if ($cree_rub_adm_defaut == 1) {
     					 $date_rub_defaut = date("Y-m-j H:i:s");
     					 $Tch_rub_defaut = explode(',', $_POST['rub_parent_admin_defaut']);
     					 $rubrique_parent_defaut = $Tch_rub_defaut[0];
     					 $secteur_defaut = $Tch_rub_defaut[1];
-  			 			 $rubrique_defaut = ($_POST['rub_admin_defaut'] != '' ? $_POST['rub_admin_defaut'] : _T('csvspip:nom_rub_admin_defaut') ); 
+  			 			 $rubrique_defaut = ($_POST['rub_admin_defaut'] != '' ? $_POST['rub_admin_defaut'] : _T('csvspip:nom_rub_admin_defaut') );
   						 $sq21 = spip_query("SELECT COUNT(*) AS rub_existe FROM $Trubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
   						 $rows21 = spip_fetch_array($sq21);
   						 if ($rows21['rub_existe'] < 1) {
@@ -310,7 +314,11 @@ function exec_csv2spip() {
 											 $id_rub_admin_defaut = mysql_insert_id();
         				  }
 							 }
-							 
+							 else {
+							 			$sql1001 = spip_query("SELECT id_rubrique FROM $Trubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
+										$rows1001 = spip_fetch_array($sql1001);
+										$id_rub_admin_defaut = $rows1001['id_rubrique'];
+							 }
 						}
 				}
 
@@ -610,8 +618,8 @@ function exec_csv2spip() {
     				
     		// si archivage, récup de l'id de la rubrique archive + si nécessaire, créer la rubrique				 		
     						if ($_POST['supprimer_articles'] != 1 AND $_POST['archivage'] != 0) {
-    							 $supprimer_articlesr = 1;
-    							 $supprimer_articlesa = 1;
+    							 $supprimer_articlesr = 0;
+    							 $supprimer_articlesa = 0;
     							 $archivager =1;
     							 $archivagea = 1;
     							 
@@ -705,11 +713,16 @@ function exec_csv2spip() {
         						// traitement éventuel des articles de l'auteur à supprimer
         										 		$sql757 = spip_query("SELECT COUNT(*) AS nb_articles_auteur FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
         												$data757 = spip_fetch_array($sql757);
+//print '<br><br>id_auteur = '.$id_auteur_ec;
+//print '<br>nb_articles_auteur = '.$data757['nb_articles_auteur'];
+//print '<br>$supprimer_articlesr = '.$supprimer_articlesr;
+//print '<br>$archivager = '.$archivager;
         												if ($data757['nb_articles_auteur'] > 0) {
             												if ($supprimer_articlesr != 1) {
                 												if ($archivager != 0) {
-        																	 $sql612 = spip_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
+        																	 $sql612 = spip_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = $id_auteur_ec");
                 													 if (spip_num_rows($sql612) > 0) {
+//print '<br>départ UPDATE';
                 													 		while ($data612 = spip_fetch_array($sql612)) {
                 																		$id_article_ec = $data612['id_article'];
         																						spip_query("UPDATE $Tarticles SET id_rubrique = '$id_rub_archivesR', id_secteur = '$id_sect_parent_archivesR' WHERE id_article = '$id_article_ec' LIMIT 1");
@@ -723,6 +736,7 @@ function exec_csv2spip() {
             												}
             												else {
             														 $sql756 = spip_query("SELECT id_article FROM $Tauteurs_articles WHERE id_auteur = '$id_auteur_ec'");
+//print '<br>départ DELETE';
             														 while ($data756 = spip_fetch_array($sql756)) {
             														 			 $id_article_a_effac = $data756['id_article'];
             																	 spip_query("DELETE FROM $Tarticles WHERE id_article = '$id_article_a_effac' LIMIT 1");
@@ -1127,19 +1141,17 @@ function exec_csv2spip() {
 						 while ($data54 = spip_fetch_array($sql54)) {
 						 			 $login_adm_ec = strtolower($data54['nom']);
 									 $id_adm_ec = $data54['id_spip'];
-									 if ($_POST['rub_prof'] == 1 AND $data54['ss_groupe'] != '') {
-//    									 if ($data54['ss_groupe'] != '') {
+									 if ($_POST['rub_prof'] == 1) {
+    									 if ($data54['ss_groupe'] != '') {
 											 		$ss_grpe_ec = $data54['ss_groupe'];
       									  $sql55 = spip_query("SELECT id_rubrique FROM $Trubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
       									  $data55 = spip_fetch_array($sql55);
       									  $id_rubrique_adm_ec = $data55['id_rubrique'];									 		
-//											 }
-//											 else {
-//											 			$id_rubrique_adm_ec = $id_rub_admin_defaut;
-//											 }
-									 }
-									 else {
-									 			$id_rubrique_adm_ec = $id_rub_admin_defaut;
+											 }
+											 else {
+											 			$id_rubrique_adm_ec = $id_rub_admin_defaut;
+														$ss_grpe_ec = '';
+											 }
 									 }
 									 $sql57 = spip_query("SELECT COUNT(*) AS existe_adm_rub FROM $Tauteurs_rubriques WHERE id_auteur = '$id_adm_ec' AND id_rubrique = '$id_rubrique_adm_ec' LIMIT 1");
 									 $data57 = spip_fetch_array($sql57);
@@ -1415,7 +1427,7 @@ echo "</script>";
 			 
 			 debut_cadre_trait_couleur("fiche-perso-24.gif", false, "", _T('csvspip:titre_help')); 
 		// inclure le fichier help de la langue
-//			 include(_DIR_PLUGIN_CSV2SPIP.'lang/csvspip_help_'.$GLOBALS['langue_site'].'.php');
+			 include(_DIR_PLUGIN_CSV2SPIP.'lang/csvspip_help_'.$GLOBALS['langue_site'].'.php');
 			 echo "<a href=\""._DIR_PLUGIN_CSV2SPIP."csv2spip_modele.csv\">csv2spip_modele.csv</a>";
 //			 print '<br>globals renvoie :<br>';
 //			 print $GLOBALS['langue_site'];
@@ -1427,7 +1439,7 @@ echo "</script>";
 		
 //		fin_droite();
 				
-		echo fin_page();
+		fin_page();
 }
 		 
 		 

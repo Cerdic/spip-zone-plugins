@@ -4,55 +4,55 @@
 */
 ?>
 
-Ce fichier sera fabriqué à partir du fichier d'extraction des comptes de IACA ou d'un fichier CSV équivalent.
-<h3>Format du fichier CSV utilisé :</h3> 
-Un fichier CSV (Common Separator Value) correspond à un fichier tableur enregistré au format texte. 
-Chaque ligne de ce fichier correspond à une ligne du tableur, les données des cellules de cette ligne étant séparées
-par un séparateur (ici c'est le ";"). On peut donc fabriquer un tel fichier avec n'importe quel tableur (OOo Calc par ex)
-en sélectionnant le format .csv ou .txt comme format d'enregistrement. Vu qu'il s'agit d'un format texte, il est également 
-possible de le créer/modifier avec un simple éditeur de texte (bloc-note par ex).<br>
+Ce fichier sera g&eacute;n&eacute;ralement obtenu &agrave; partir d'une extraction de comptes &agrave; partir d'une base non-SPIP existante (membres d'une association par ex.) 
+<span class="Tpetit">Pour IACA : fichier d'extraction des comptes</span>.
+<h3>Format du fichier CSV utilis&eacute; :</h3> 
+Un fichier CSV (Common Separator Value) correspond &agrave; un fichier tableur enregistr&eacute; au format texte. 
+Chaque ligne de ce fichier correspond &agrave; une ligne du tableur, les donn&eacute;es des cellules de cette ligne &eacute;tant s&eacute;par&eacute;es
+par un s&eacute;parateur (ici c'est le ";"). On peut donc fabriquer un tel fichier avec n'importe quel tableur (OOo Calc par ex)
+en s&eacute;lectionnant le format .csv ou .txt comme format d'enregistrement. Vu qu'il s'agit d'un format texte, il est &eacute;galement 
+possible de le cr&eacute;er/modifier avec un simple &eacute;diteur de texte (bloc-note par ex).<br>
 <br>
-A partir de la version 2.2 il FAUT ajouter une <strong>ligne en tête du fichier</strong> qui permet de repérer les données de chaque colonne. 
-Les noms de champs qui doivent apparaître dans cette première ligne sont les suivants : 
+A partir de la version 2.2 il FAUT ajouter une <strong>ligne en t&ecirc;te du fichier</strong> qui permet de rep&eacute;rer les donn&eacute;es de chaque colonne. 
+Les noms de champs qui doivent appara&icirc;tre dans cette premi&egrave;re ligne sont les suivants : 
 <br>
 <strong>"login";"prenom";"groupe";"ss_groupe";"pass";"email";"pseudo_spip"</strong>
 <br>
-L'utilisation de cette première ligne permet de pouvoir mettre les colonnes dans n'importe quel ordre dans votre fichier CSV, la moulinette fonctionnera quand même.
+L'utilisation de cette premi&egrave;re ligne permet de pouvoir mettre les colonnes dans n'importe quel ordre dans votre fichier CSV, la moulinette fonctionnera quand m&ecirc;me.
 
 <ul>
-<li><strong>Détails des 7 colonnes</strong> :
+<li><strong>D&eacute;tails des 7 colonnes</strong> :
 		<ul>
-				<li>"<strong>login</strong>" = obligatoire (le login dans spip). Attention : le login est sensible à la casse (Majuscules/minuscules).</li>
+				<li>"<strong>login</strong>" = obligatoire (le login dans spip). Attention : le login est sensible &agrave; la casse (Majuscules/minuscules).</li>
 				<li>"<strong>prenom</strong>" : facultatif
-				<li>"<strong>groupe</strong>" =  le groupe principal de chaque utilisateur  ("PROFS" ou "ELEVES" pour IACA). 
-						 Ce champ permet de séparer les utilisateurs qui seront rédateurs (groupe ELEVES par défaut mais REDACTEUR sera plus adapté si vous n'avez pas de contraintes liées à l'import d'un fichier venant d'une autre application) 
-						 de ceux qui seront administrateurs de rubriques (groupe PROFS par défaut). 
-						 Si ce champs est vide, les utilisateurs seront rédacteurs.</li>
-				<li>"<strong>ss_groupe</strong>" :
+				<li>"<strong>groupe</strong>" =  le groupe principal de chaque utilisateur  <span class="Tpetit">("PROFS" ou "ELEVES" pour IACA)</span>. 
+						 Ce champ permet de s&eacute;parer les utilisateurs qui seront r&eacute;dateurs (groupe REDACTEURS par d&eacute;faut) 
+						 de ceux qui seront administrateurs de rubriques (groupe ADMINS par d&eacute;faut). 
+						 Si ce champs est vide, les utilisateurs seront r&eacute;dacteurs.</li>
+				<li>"<strong>ss_groupe</strong>" : facultatif
 						<ul>
-								<li> pour les élèves = la classe (facultatif)</li>
-								<li>pour les administrateurs c'est le nom de la rubrique qu'ils administreront. 
-										Sous IACA : la discipline pour les profs. 
-										Ce champ est obligatoire si on veut la création automatique des rubriques par sous-groupe et que les membres du sous-groupe en soient administrateurs</li>
+								<li> pour les r&eacute;dacteurs : n'est utile que si l'on utilise le plugin "<strong>acc&egrave;s_groupe</strong></span>" <span class="Tpetit">(pour IACA = la classe)</span></li>
+								<li>pour les administrateurs c'est le nom de la rubrique qu'ils administreront <span class="Tpetit">(pour IACA : la discipline pour les profs)</span>. 
+										Ce champ est obligatoire si on veut la cr&eacute;ation automatique des rubriques par sous-groupe et que les membres du sous-groupe en soient administrateurs</li>
 						</ul>
 				</li>								
 				<li>"<strong>pass</strong>" : obligatoire. Si ce champ est vide, <strong>le mot de passe sera le login</strong> de l'utilisateur</li>
-				<li>"<strong>pseudo_spip</strong>" : facultatif, permet de spécifier un nom d'auteur SPIP différent de celui composé automatiquement par "prénom NOM"</li>
-				<li>"<strong>email</strong>" : facultatif, nécessaire si on souhaite que les utilisateurs aient leur mail déclaré dans SPIP</li>
+				<li>"<strong>pseudo_spip</strong>" : facultatif, permet de sp&eacute;cifier un nom d'auteur SPIP diff&eacute;rent de celui compos&eacute; automatiquement par "pr&eacute;nom NOM"</li>
+				<li>"<strong>email</strong>" : facultatif, n&eacute;cessaire si on souhaite que les utilisateurs aient leur mail d&eacute;clar&eacute; dans SPIP</li>
 		</ul>
 </li>
-<li>séparateur de champ: ; (point-virgule)</li>
-<li>valeurs encadrées par des " (guillemets doubles) 
-		(vous n'êtes pas obligé d'encadrer les valeurs par des " mais si vous voulez éviter les problèmes, c'est plus sûr...)</li>
-<li>séparateur de ligne: \r\n (sauts de lignes utilisé par OOo Calc par défaut) sous Windows, \n sous Linux 
-		(dans les 2 cas c'est le séparateur standard du système, à priori vous n'avez pas à vous en soucier)
+<li>s&eacute;parateur de champ: ; (point-virgule)</li>
+<li>valeurs encadr&eacute;es par des " (guillemets doubles) 
+		(vous n'&ecirc;tes pas oblig&eacute; d'encadrer les valeurs par des " mais si vous voulez &eacute;viter les probl&egrave;mes, c'est plus sûr...)</li>
+<li>s&eacute;parateur de ligne: \r\n (sauts de lignes utilis&eacute; par OOo Calc par d&eacute;faut) sous Windows, \n sous Linux 
+		(dans les 2 cas c'est le s&eacute;parateur standard du syst&egrave;me, &agrave; priori vous n'avez pas &agrave; vous en soucier)
 </ul>
 <h3>Remarques :</h3>
-On suppose que la gestion des doublons de noms est assurée par IACA : si vous créez le fichier csv à la main, vous devrez vous assurer que chaque utilisateur à un nom unique !<br>
-Si les profs ne sont pas regroupés par discipline dans IACA (en tant que sous-groupes) il faudra éditer le fichier avec un tableur (OOo Calc par ex)
-pour ajouter celles-ci dans la colonne sous-groupe. En revanche, si les groupes de disciplines sont générés par IACA, il faudra éditer 
-le fichier et faire un "Rechercher / Remplacer" pour supprimer les préfixes "D_" qui précèdent chaque nom de groupe de profs afin d'éviter que les
-rubriques de disciplines dans le SPIP n'aient ce préfixe.
+On suppose que la gestion des doublons de noms est faite en amont : si vous cr&eacute;ez le fichier csv &agrave; la main, vous devrez vous assurer que chaque utilisateur &agrave; un nom unique ! <span class="Tpetit">(automatique pour extraction de comptes &agrave; partir de IACA)</span><br />
+<br /><span class="Tpetit"><strong>Sp&eacute;cifique IACA</strong> : si les profs ne sont pas regroup&eacute;s par discipline dans IACA (en tant que sous-groupes) il faudra &eacute;diter le fichier avec un tableur (OOo Calc par ex)
+pour ajouter celles-ci dans la colonne sous-groupe. En revanche, si les groupes de disciplines sont g&eacute;n&eacute;r&eacute;s par IACA, il faudra &eacute;diter 
+le fichier et faire un "Rechercher / Remplacer" pour supprimer les pr&eacute;fixes "D_" qui pr&eacute;c&egrave;dent chaque nom de groupe de profs afin d'&eacute;viter que les
+rubriques de disciplines dans le SPIP n'aient ce pr&eacute;fixe.</span>
 
 <h3>Mod&egrave;le de fichier CSV :</h3>
 
