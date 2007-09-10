@@ -234,7 +234,7 @@ function valeur_colonne_table_dist($table, $col, $id) {
 
 	// valeurs non SQL
 	foreach ($col as $champ) {
-		if (function_exists($f = 'valeur_champ_'.$champ)) {
+		if (function_exists($f = 'valeur_champ_'.$table.'_'.$champ) OR function_exists($f = 'valeur_champ_'.$champ)) {
 			$r[$champ] = $f($table, $id, $champ);
 			$col = array_diff($col, array($champ));
 		}
