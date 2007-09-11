@@ -6,6 +6,7 @@ ul.nuage {
 ul.nuage li {
 	display: inline;
 	white-space: nowrap;
+	line-height:2em;
 }
 ul.nuage span.frequence {
 	display: block;
