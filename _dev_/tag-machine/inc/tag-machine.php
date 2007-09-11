@@ -389,7 +389,8 @@ class ListeTags {
 		spip_query("DELETE FROM spip_mots_$nom_objet WHERE $id_objet=$id AND id_mot IN (".join(',',$motsaeffacer).")");
 	  }
 	  foreach($this->tags as $mot) {
-		$mot->ajouter($id,$nom_objet,$id_objet);
+	  	if (trim($mot->titre) != "")
+			$mot->ajouter($id,$nom_objet,$id_objet);
 	  }
 	}
   }

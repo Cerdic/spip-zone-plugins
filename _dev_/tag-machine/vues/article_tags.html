@@ -11,7 +11,7 @@
 	[(#ENV*{tags}|ajouter_etiquettes{#ID_ARTICLE,tags,articles,id_article,true})]
 
 	<div class="#EDIT{tags}">
-		<small>Tags : <BOUCLE_tags(MOTS){id_article}{", "}><a href="#URL_MOT">#TITRE</a></BOUCLE_tags>aucun tag pour cet article<//B_tags></small>
+		<small>Tags : <BOUCLE_tags(MOTS){type=tags}{id_article}{", "}><a href="#URL_MOT">#TITRE</a></BOUCLE_tags>aucun tag pour cet article<//B_tags></small>
 	</div>
 
 </BOUCLE_article>
