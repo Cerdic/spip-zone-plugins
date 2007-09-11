@@ -35,25 +35,44 @@
 	
 	function Forms_affiche_milieu($flux) {
 		$exec =  $flux['args']['exec'];
-		if ($exec=='articles'){
-			include_spip('base/forms_base_api');
-			if (count(Forms_liste_tables('table'))){
-				$id_article = $flux['args']['id_article'];
-				$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
-				$flux['data'] .= "<div id='forms_lier_donnees'>";
-				$flux['data'] .= $forms_lier_donnees('article',$id_article, $exec);
-				$flux['data'] .= "</div>";
-			}
-		}
-		if ($exec=='auteur_infos'){
-			include_spip('base/forms_base_api');
-			if (count(Forms_liste_tables('table'))){
-				$id_auteur = $flux['args']['id_auteur'];
-				$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
-				$flux['data'] .= "<div id='forms_lier_donnees'>";
-				$flux['data'] .= $forms_lier_donnees('auteur',$id_auteur, $exec);
-				$flux['data'] .= "</div>";
-			}
+		$config = unserialize(isset($GLOBALS['meta']['forms_et_tables'])?$GLOBALS['meta']['forms_et_tables']:"");
+		switch ($exec){
+			case 'articles' :
+				if (isset($config['associer_donnees_articles']) AND $config['associer_donnees_articles']) {
+					include_spip('base/forms_base_api');
+					if (count(Forms_liste_tables('table'))){
+						$id_article = $flux['args']['id_article'];
+						$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
+						$flux['data'] .= "<div id='forms_lier_donnees'>";
+						$flux['data'] .= $forms_lier_donnees('article',$id_article, $exec);
+						$flux['data'] .= "</div>";
+					}
+				}
+				break;
+			case 'naviguer':
+				if (isset($config['associer_donnees_rubriques']) AND $config['associer_donnees_rubriques']) {
+					include_spip('base/forms_base_api');
+					if (count(Forms_liste_tables('table'))){
+						$id_rubrique = $flux['args']['id_rubrique'];
+						$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
+						$flux['data'] .= "<div id='forms_lier_donnees'>";
+						$flux['data'] .= $forms_lier_donnees('rubrique',$id_rubrique, $exec);
+						$flux['data'] .= "</div>";
+					}
+				}
+				break;
+			case 'auteur_infos':
+				if (isset($config['associer_donnees_auteurs']) AND $config['associer_donnees_auteurs']) {
+					include_spip('base/forms_base_api');
+					if (count(Forms_liste_tables('table'))){
+						$id_auteur = $flux['args']['id_auteur'];
+						$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
+						$flux['data'] .= "<div id='forms_lier_donnees'>";
+						$flux['data'] .= $forms_lier_donnees('auteur',$id_auteur, $exec);
+						$flux['data'] .= "</div>";
+					}
+				}
+				break;
 		}
 		return $flux;
 	}

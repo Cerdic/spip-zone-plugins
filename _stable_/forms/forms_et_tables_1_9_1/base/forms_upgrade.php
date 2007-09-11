@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.37;
+	$GLOBALS['forms_base_version'] = 0.38;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -68,6 +68,7 @@
 			else {
 				creer_base();
 				ecrire_meta('forms_base_version',$current_version=$version_base);
+				ecrire_meta('forms_et_tables',serialize(array('associer_donnees_articles'=>0,'associer_donnees_rubriques'=>0,'associer_donnees_auteurs'=>0)));
 			}
 		}
 		if ($current_version<0.11){
@@ -282,6 +283,11 @@
 			spip_query("ALTER TABLE spip_forms_champs ADD taille bigint(21) NOT NULL NULL AFTER type");
 			echo "forms update @ 0.37<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.37,'non');
+		}
+		if ($current_version<0.38){
+			ecrire_meta('forms_et_tables',serialize(array('associer_donnees_articles'=>1,'associer_donnees_rubriques'=>0,'associer_donnees_auteurs'=>0)));
+			echo "forms update @ 0.38<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.38,'non');			
 		}
 		ecrire_metas();
 	}

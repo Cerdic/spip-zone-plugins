@@ -49,6 +49,12 @@ function Forms_creer_table($structure_xml,$type=NULL, $unique = true, $c=NULL){
 
 function Forms_liste_tables($type){
 	static $liste = array();
+	if (is_array($type) && count($type)) {
+		$l = array();
+		foreach($type as $t)
+			$l = array_merge($l,Forms_liste_tables($t));
+		return $l;
+	}
 	if (!isset($liste[$type])){
 		$liste[$type] = array();
 		$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type));

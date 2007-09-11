@@ -21,6 +21,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'boite_info' => "Cliquez sur les icones pour voir les donn&eacute;es associ&eacute;es a un formulaire, l'editer, le dupliquer, l'exporter, vider les donn&eacute;es ou le supprimer.",
 
+'cfg_associer_donnees' => 'Associer les donn&eacute;es des tables',
+'cfg_associer_donnees_articles' => 'Permettre d\'associer les donnees aux articles :',
+'cfg_associer_donnees_rubriques' => 'Permettre d\'associer les donnees aux rubriques :',
+'cfg_associer_donnees_auteurs' => 'Permettre d\'associer les donnees aux auteurs :',
+'cfg_activer' => 'Oui',
+'cfg_desactiver' => 'Non',
+
 'champ_descendre' => "descendre",
 'champ_email_details'=>"Veuillez entrer une adresse e-mail valide (de type vous@fournisseur.com).",
 'champ_table_jointure_type' => "Type de table pour les jointures",
