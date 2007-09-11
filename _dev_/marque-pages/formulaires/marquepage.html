@@ -2,9 +2,6 @@
 
 <div class="formulaire_spip"  id="formulaire_marquepage">	
 	
-	[(#REM) On met les mots en mémoire parce qu'on peut pas faire de boucle dans les balises]
-	#SET{tags,#ARRAY{0}}<BOUCLE_tags(MOTS){type=tags}>[(#GET{tags}|array_push{<span>#TITRE*</span>}|vide)]</BOUCLE_tags>
-	
 	<form action="#ENV{self}#formulaire_marquepage" method="post">
 		<fieldset>
 			
@@ -44,10 +41,9 @@
 						Idealement le addtag(this) serait ajoute par
 						la fonction loadpopular ci-dessous
 					]
-					<style type='text/css'>@import url("#CHEMIN{css/popular_tags.css}");</style>
 					<div id='popularTags' style="font-size:10px;">
 					<div><:marquepages:etiquettes_populaires:></div>
-					[(#GET{tags}|?{' '}|join{#GET{tags}})]
+					[(#MODELE{forum_popular_tags}{type=tags})]
 					</div>
 					
 					[(#REM) Code partiellement copie du genial scuttle ]

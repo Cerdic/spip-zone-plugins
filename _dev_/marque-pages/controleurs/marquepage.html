@@ -30,7 +30,7 @@
 	<style type='text/css'>@import url("#CHEMIN{css/popular_tags.css}");</style>
 	<div id='popularTags' style="font-size:10px;">
 	<div><:marquepages:etiquettes_populaires:></div>
-	<BOUCLE_tags(MOTS){type=tags}{par titre}{" "}><span>#TITRE*</span></BOUCLE_tags>
+	[(#MODELE{forum_popular_tags}{type=tags})]
 	</div>
 	
 	[(#REM)
