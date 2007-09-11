@@ -1,13 +1,14 @@
+(function($){
 /*
  * resizehandle.js (c) Fil 2007, plugin pour jQuery
  * @ http://www.jquery.info/spip.php?article44
  * Distribue sous licence GNU/LGPL et MIT
  */
-jQuery.fn.resizehandle = function() {
+$.fn.resizehandle = function() {
   return this.each(function() {
-    var me = jQuery(this);
+    var me = $(this);
     me.after(
-      jQuery('<div class="resizehandle"></div>')
+      $('<div class="resizehandle"></div>')
       .css({height:'16px',width:Math.max(me.width()-4,10)}) // bug MSIE si 100%
       .bind('mousedown', function(e) {
         var h = me.height();
@@ -17,14 +18,15 @@ jQuery.fn.resizehandle = function() {
           .height(Math.max(20, e.clientY + h - y));
         };
         var upHandler = function(e) {
-          jQuery('html')
+          $('html')
           .unbind('mousemove',moveHandler)
           .unbind('mouseup',upHandler);
         };
-        jQuery('html')
+        $('html')
         .bind('mousemove', moveHandler)
         .bind('mouseup', upHandler);
       })
     );
   });
 };
+})(jQuery);

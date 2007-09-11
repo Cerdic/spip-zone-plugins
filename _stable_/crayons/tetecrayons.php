@@ -115,7 +115,7 @@ function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page'
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript"><!--
-    var configCrayons = new cfgCrayons({$config});
+    var configCrayons = new cQuery.prototype.cfgCrayons({$config});
     ( window.jQuery ? jQuery : cQuery )(document).ready(cQuery.fn.crayonsstart);
     // cQuery.ready() plante le jQuery.ready() sous MSIE
 //-->

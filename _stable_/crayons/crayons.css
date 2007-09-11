@@ -21,7 +21,8 @@ em.crayon-edit, em.crayon-crayon {
 }
 .crayon-icones {
 	float: right;
-	width: 0px;
+	width: 20px;
+	text-align: right;
 	position: relative;
 	top:0; left:0;
 	z-index:4999;
