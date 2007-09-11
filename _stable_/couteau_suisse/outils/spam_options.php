@@ -5,7 +5,12 @@
 //	2. si le mot existe dans un des textes d'un formulaire, on avertit !
 
 // traitement anti-spam uniquement si $_POST est rempli et si l'espace n'est pas prive
-if (count($_POST) && (strpos($_SERVER["PHP_SELF"],'/ecrire') === false)) {
+if ( count($_POST) 
+	// espace prive en clair dans l'url
+	&& (strpos($_SERVER['PHP_SELF'],'/ecrire') === false) 
+	// cas des actions
+	&& !isset($_POST['action'])
+	) {
 
 	// tableau des mots interdits
 	/*
