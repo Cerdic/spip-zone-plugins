@@ -590,9 +590,9 @@ function Indexation_post_edition ($x) {
 	$table = $x['args']['table'];
 
 	if (isset($GLOBALS['INDEX_elements_objet'][$table])) {
-		spip_log ("demande indexation $table id=$id_objet");
 		$type = id_index_table($table);
 		$id_objet = $x['args']['id_objet'];
+		spip_log ("demande de reindexation $table id=$id_objet");
 		spip_query($q = "UPDATE spip_indexation SET idx=1 WHERE id=$id_objet AND type=$type AND idx!=-1");
 
 		#spip_log($q);

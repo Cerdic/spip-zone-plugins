@@ -24,6 +24,7 @@
 		indexation_options.php
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalcul de page -->
+		indexation_fonctions.php
 	</fonctions>
 	<prefix>
 	Indexation
