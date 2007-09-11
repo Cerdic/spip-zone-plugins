@@ -26,8 +26,8 @@
 
 	]
 	<div id='popularTags'>
-	<BOUCLE_tags(MOTS){type=tags}{par titre}><span>#TITRE*</span>
-	</BOUCLE_tags>
+	<div><:tag-machine:etiquettes_populaires:> :</div>
+	<BOUCLE_tags(MOTS){type=tags}{par titre}{0,50}><span>#TITRE*</span></BOUCLE_tags>
 	</div>
 	
 	[(#REM)

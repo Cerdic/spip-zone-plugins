@@ -2,5 +2,5 @@
 #suggestions {margin:3px }
 #popularTags span { background-color: #cccccc; cursor: pointer; margin:2px }
 #suggestions span { cursor: pointer; margin:2px; background-color:#ccc; }
-#popularTags span.selected { background-color: yellow; }
+#popularTags span.selected { background-color: #F8F87C; }
 #popularTags span.auto { background-color: #ccffcc; }
