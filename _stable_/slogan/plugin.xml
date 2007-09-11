@@ -1,0 +1,11 @@
+<plugin>
+	<nom>SLOGAN</nom>
+	<auteur>Mehdi Cherifi (superyms) - Net Studio (http://www.netstudio-dz.com) &#169; 2007 - Distribu&eacute; sous licence GPL</auteur>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<description>
+	{{Ajouter balise #SLOGAN_SITE_SPIP}}<br /><br />
+	Ce plugin vous permet d'ajouter une balise indépendante propre au site spip : #SLOGAN_SITE_SPIP.</description>
+	<lien>http://www.spip-contrib.net/spip.php?article2417</lien>
+	<prefix>slogan</prefix>
+	</plugin>
