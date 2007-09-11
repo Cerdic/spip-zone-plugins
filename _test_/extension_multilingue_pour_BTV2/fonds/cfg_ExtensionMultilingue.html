@@ -2,19 +2,19 @@
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
 [(#REM) descriptif=
-<h4>Configuration de l'extension multilingue pour BTV2</h4>
+<h4><:barremulti:barre_multi_titre:></h4>
 ]
 [(#REM) titre=Extension Multilingue]
 
 
-<p>Langues (s&eacute;par&eacute;es par des virgules)<br/>
+<p><:barremulti:barre_multi_langues:><br/>
 <input type="text" name="langues_ExtensionMultilingue" value="[(#CONFIG{ExtensionMultilingue/langues_ExtensionMultilingue}|sinon{'fr,en,de'})]"></p>
 
-<p>Afficher la barre typo sur les titres : <input type="checkbox" name="typotitres_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typotitres_ExtensionMultilingue})"]>
-<br/>Afficher la barre typo sur les descriptifs : <input type="checkbox" name="typodescriptifs_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typodescriptifs_ExtensionMultilingue})"]>
-<br/>Afficher la barre typo sur les textes : <input type="checkbox" name="typotextes_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typotextes_ExtensionMultilingue})"]>
-<br/>Activer le multilinguisme sur les articles : <input type="checkbox" name="multiarticles_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/multiarticles_ExtensionMultilingue})"]>
-<br/>Activer le multilinguisme sur les breves : <input type="checkbox" name="multibreves_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/multibreves_ExtensionMultilingue})"]>
+<p><:barremulti:barre_multi_affiche_titres:> : <input type="checkbox" name="typotitres_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typotitres_ExtensionMultilingue})"]>
+<br/><:barremulti:barre_multi_affiche_descriptifs:> : <input type="checkbox" name="typodescriptifs_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typodescriptifs_ExtensionMultilingue})"]>
+<br/><:barremulti:barre_multi_affiche_textes:> : <input type="checkbox" name="typotextes_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/typotextes_ExtensionMultilingue})"]>
+<br/><:barremulti:barre_multi_activer_articles:> : <input type="checkbox" name="multiarticles_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/multiarticles_ExtensionMultilingue})"]>
+<br/><:barremulti:barre_multi_activer_breves:> : <input type="checkbox" name="multibreves_ExtensionMultilingue" [checked="(#CONFIG{ExtensionMultilingue/multibreves_ExtensionMultilingue})"]>
 </p>	
 <input type="submit" name="_cfg_ok" value="<:oK:>" class="fondo" />
 <input type="reset" value="<:reset:>" class="fondo" />
