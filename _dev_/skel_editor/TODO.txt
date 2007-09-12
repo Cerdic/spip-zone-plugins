@@ -2,15 +2,16 @@
 TODO plugin skel_editor
 ---------------------------------------------
 
-- vérifier la sécurité: ne pas pouvoir éditer d'autres fichiers que ceux du squelettes
 - vérifier l'encodage
+- gérer les droits en ecriture (CHMOD, utiliser la methophore du verrou) ?
+- télécharger l'ensemble du squelette en .zip ?
 
 extras possibles:
 ... documentation des boucles
 ... preview "live"
 
 des commentaires ?
-http://www.spip-contrib.net/spikini/PagePrincipale?wiki=EditeurSquelette
+http://www.spip-contrib.net/Plugin-editeur-de-squelettes-Skel
 
 
 ---------------------------------------------
