@@ -99,7 +99,7 @@
 	[(#GET{pays_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
 		<label><:inscription2:pays:></label> 
 		#SET{id,#PAYS}
-		<select class="crayon-active" name="#ENV{name_pays}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}" />
+		<select class="crayon-active" name="#ENV{name_pays}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}">
 			<INCLURE{fond=controleurs/pays}{id=#GET{id}}>
 		</select>
 	</div>]
