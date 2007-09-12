@@ -71,6 +71,7 @@ function action_instituer_groupe_mots_post($id_groupe)
 			. (defined('_DIR_PLUGIN_AGENDA')?_q(_request('evenements')). " , ":"") 
 			. (defined('_DIR_PLUGIN_PIMAGENDA')?_q(_request('pim_agenda')). " , ":"") 
 		  . _q($acces_minirezo) . " ,  " . _q($acces_comite) . " , " . _q($acces_forum) . " )");
+		}
 	}
 }
 
