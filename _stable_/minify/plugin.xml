@@ -1,17 +1,15 @@
 <plugin>
-  <nom>minify</nom>
-  <auteur>Copyright (c) 2007 Ryan Grove <ryan@wonko.com>
+	<nom>minify</nom>
+	<auteur>Copyright (c) 2007 Ryan Grove <ryan@wonko.com>
 _ adaptation a SPIP par Cedric Morin [yterium.com->http://www.yterium.com] </auteur>
-  <version>0.1</version>
-  <etat>test</etat>
-  <description>Compacter javascript &amp; css
-_ syntaxe : 
-[(#ARRAY{
-1,javascript/jquery.js,
-2,javascript/form.js}|minify_compcte)]
-_ lorsque le nom de fichier n'est pas explicite sur le type, il est possible de passer js ou css en argument du filtre</description>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Compacter javascript &amp; css
+_ syntaxe : cf le fichier jquery.html joint
+_ lorsque le nom de fichier n'est pas explicite sur le type, il est possible de passer js ou css en argument du filtre
 _ {{Necessite PHP 5.2.1 selon l'auteur de minify}} (teste avec succes en 5.1.6)
+	</description>
 	<lien>http://code.google.com/p/minify/</lien> <!-- URI de documentation -->
 	<fonctions>minify_fonctions.php</fonctions>
-  <prefix>minify</prefix>
+	<prefix>minify</prefix>
 </plugin>
