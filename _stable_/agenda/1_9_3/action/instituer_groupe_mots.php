@@ -68,8 +68,8 @@ function action_instituer_groupe_mots_post($id_groupe)
 			. (defined('_DIR_PLUGIN_AGENDA')?" evenements,":"") 
 			. (defined('_DIR_PLUGIN_PIMAGENDA')?" pim_agenda,":"") 
 		  ." minirezo, comite, forum)", "(" . _q($change_type) . ", " . _q($texte) . " , " . _q($descriptif) . " , " . _q($unseul) . " , " . _q($obligatoire) . " , " . _q($articles) . " ," . _q($breves) . " , " . _q($rubriques) . " , " . _q($syndic) . " , " 
-			. (defined('_DIR_PLUGIN_AGENDA')?_q(_request('evenements')):"") 
-			. (defined('_DIR_PLUGIN_PIMAGENDA')?_q(_request('pim_agenda')):"") 
+			. (defined('_DIR_PLUGIN_AGENDA')?_q(_request('evenements')). " , ":"") 
+			. (defined('_DIR_PLUGIN_PIMAGENDA')?_q(_request('pim_agenda')). " , ":"") 
 		  . _q($acces_minirezo) . " ,  " . _q($acces_comite) . " , " . _q($acces_forum) . " )");
 	}
 }
