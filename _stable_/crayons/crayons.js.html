@@ -33,6 +33,9 @@
 2,js/jquery.dimensions.js,
 3,js/jquery.form.js,
 4,js/crayons.js,
-5,js/resizehandle.js
-6,[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{js/crayons-fade.js})]}|minify_compacte|jQuery2cQuery)]
+5,js/resizehandle.js}|minify_compacte|jQuery2cQuery)]
+[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
+	[(#ARRAY{1,js/crayons-fade.js}|minify_compacte|jQuery2cQuery)]
+]
+
 ]
