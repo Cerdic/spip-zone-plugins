@@ -13,7 +13,7 @@ _ &#169; 2005-2007 - Distribu&#233; sous licence GPL
 - A tester et affiner le format d'import (csv ? microfiche ? xml ?)
 - Voir le fichier {test.txt} pour la syntaxe de la microfiche
   </description>
-	<lien>[Documentation->http://www.spip-contrib.net/Importer-en-masse-des-articles] et si vous avez le plugin cfg: [Configuration->.?exec=cfg&cfg=MassImport]  </lien> <!-- URI de documentation -->
+	<lien>[Documentation->http://www.spip-contrib.net/Importer-en-masse-des-articles] et si vous avez le plugin cfg: [Configuration->.?exec=cfg&amp;cfg=MassImport]  </lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalcul -->
