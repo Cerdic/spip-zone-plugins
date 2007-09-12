@@ -1,6 +1,6 @@
 <plugin>
 	<nom>minify</nom>
-	<auteur>Copyright (c) 2007 Ryan Grove <ryan@wonko.com>
+	<auteur>Copyright (c) 2007 Ryan Grove &lt;ryan@wonko.com&gt;
 _ adaptation a SPIP par Cedric Morin [yterium.com->http://www.yterium.com] </auteur>
 	<version>0.1</version>
 	<etat>test</etat>
