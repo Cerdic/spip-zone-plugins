@@ -74,7 +74,7 @@
 		[(#CONFIG{inscription2/adresse_pro_obligatoire}|=={on}|?{' ',''})#SET{adresse_pro_obl, true}]
 		[(#GET{adresse_pro_obl}|=={true}|?{<div class="obligatoire">,<div>})]		
 		<label><:inscription2:adresse_pro:></label> 
-		<textarea class="crayon-active" name="#ENV{name_adresse_pro}" style="width:#ENV{largeur}px;" />
+		<textarea class="crayon-active" name="#ENV{name_adresse_pro}" style="width:#ENV{largeur}px;">
 		[(#ADRESSE_PRO**|entites_html)]
 		</textarea>
 		</div>]
@@ -101,7 +101,7 @@
 		[(#GET{pays_pro_obligatoire}|=={true}|?{<div class="obligatoire">,<div>})]
 		<label><:inscription2:pays_pro:></label>
 		#SET{id,#PAYS_PRO}
-		<select class="crayon-active" name="#ENV{name_pays_pro}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}" />
+		<select class="crayon-active" name="#ENV{name_pays_pro}" onchange="testform()" style="width:#ENV{largeur}px;#ENV{style}">
 			[(#INCLURE{fond=controleurs/pays}{id=#GET{id}})]
 		</select>
 		</div>]

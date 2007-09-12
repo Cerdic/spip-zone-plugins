@@ -74,7 +74,7 @@
 	[(#CONFIG{inscription2/adresse_obligatoire}|=={on}|?{' ',''})#SET{adresse_obl, true}]
 	[(#GET{adresse_obl}|=={true}|?{<div class="obligatoire">,<div>})]
 		<label><:inscription2:adresse:></label> 
-		<textarea class="crayon-active" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;" />[(#ADRESSE**|entites_html)]</textarea><br />
+		<textarea class="crayon-active" name="#ENV{name_adresse}" style="width:#ENV{largeur}px;">[(#ADRESSE**|entites_html)]</textarea><br />
 	</div>]
 
 	[(#CONFIG{inscription2/code_postal_fiche_mod}|?{' ',''})
