@@ -56,8 +56,7 @@
 		$query = spip_fetch_array($query);
 		exit;
 		$GLOBALS['auteur_session'] = array_merge($query,$GLOBALS['auteur_session'] );
-	*/	
-	}
+	}*/
 	
 # autoriser les visiteurs a modifier leurs infos
 #define ('_DEBUG_AUTORISER', true);
