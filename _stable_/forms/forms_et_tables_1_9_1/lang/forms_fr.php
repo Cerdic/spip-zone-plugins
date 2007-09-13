@@ -27,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_associer_donnees_auteurs' => 'Permettre d\'associer les donnees aux auteurs :',
 'cfg_activer' => 'Oui',
 'cfg_desactiver' => 'Non',
+'cfg_inserer_head' => 'Insertion dans le &lt;head&gt;',
+'cfg_inserer_head_texte' => 'Inserer automatiquement les appels aux fichiers suivants dans la section &lt;head&gt; des pages du site (recommand&eacute;) :',
 
 'champ_descendre' => "descendre",
 'champ_email_details'=>"Veuillez entrer une adresse e-mail valide (de type vous@fournisseur.com).",

@@ -30,6 +30,24 @@
 
 </fieldset>
 
+[(#REM) ------------------------ insertion dans le head ------------------------ ]
+<fieldset>
+<legend>
+	<:forms:cfg_inserer_head:>
+</legend>
+<p><:forms:cfg_inserer_head_texte:><br />
+<ul>
+<li>#CHEMIN{spip_forms.css}</li>
+<li>#CHEMIN{donnee_voir.css}</li>
+<li>#CHEMIN{donnees_tous.css}</li>
+<li>#EVAL{_DIR_PLUGIN_FORMS}img_pack/date_picker.css</li>
+<li>#EVAL{_DIR_PLUGIN_FORMS}img_pack/jtip.css</li>
+</ul>
+<input type="radio" name="inserer_head" value="1" [checked="(#ENV{inserer_head,1}?{checked,''})"] id="inserer_head_1" />
+<label for='inserer_head_1'><:forms:cfg_activer:></label><br/>
+<input type="radio" name="inserer_head" value="0" [checked="(#ENV{inserer_head,1}?{'',checked})"] id="inserer_head_0" />
+<label for='inserer_head_0'><:forms:cfg_desactiver:></label>
+</p>
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />

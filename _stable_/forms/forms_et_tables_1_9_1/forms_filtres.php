@@ -14,15 +14,18 @@
 	include_spip("inc/forms");
 
 	function Forms_insert_head($flux){
-		if ($GLOBALS['spip_version_code']<1.9207) {
-			$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
-			$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnee_voir.css')."' type='text/css' media='all' />\n";
-			$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnees_tous.css')."' type='text/css' media='all' />\n";
-			$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
-			$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
+		$config = unserialize(isset($GLOBALS['meta']['forms_et_tables'])?$GLOBALS['meta']['forms_et_tables']:"");
+		if (!isset($config['inserer_head']) OR $config['inserer_head']) {
+			if ($GLOBALS['spip_version_code']<1.9207) {
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnee_voir.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnees_tous.css')."' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
+				$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
+			}
+			else 
+				$flux .= "<link rel='stylesheet' href='".generer_url_public('forms_styles.css')."' type='text/css' media='all' />\n";
 		}
-		else 
-			$flux .= "<link rel='stylesheet' href='".generer_url_public('forms_styles.css')."' type='text/css' media='all' />\n";
 		return $flux;
 	}
 	
