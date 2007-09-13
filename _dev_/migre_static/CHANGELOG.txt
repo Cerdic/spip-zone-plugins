@@ -1,0 +1,26 @@
+migre_static (0.4)
+ * Added pipelines
+ * More internationalization [english language added]
+ * Added headers
+ * Checked links
+ * introduced cfg compatibility
+
+migre_static (0.3)
+ * Created lang structure
+ * severe bugs corrections
+ * Added secondary form for HTML marks
+
+ -- Chryjs <chryjs@free.fr>  Wed,  5 Sep 2007 14:00:00 +0200
+
+migre_static (0.2)
+ * Created plugin structure : exec, action, inc
+ * Splitted into 2 steps: 1st the form, 2nd the action
+
+ -- Chryjs <chryjs@free.fr>  Tue,  4 Sep 2007 13:45:00 +0200
+
+
+migre_static (0.1)
+ * initial release
+ * Create the plugin structure based on Beurk contribution. See :
+
+ -- Chryjs <chryjs@free.fr>  Mon,  3 Sep 2007 13:00:00 +0200

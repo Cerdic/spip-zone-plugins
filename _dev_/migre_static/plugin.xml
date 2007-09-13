@@ -1,0 +1,44 @@
+<plugin>
+	<nom>
+		<multi>
+		[fr]Migre statique : Migrer un site statique vers SPIP
+		[en]Migrate static ! Import a static website into SPIP
+		</multi>
+	</nom>
+	<auteur>
+		<multi>
+		[fr]Chryjs (chryjs.at.free.fr) et Beurt
+_ &copy; 2006-2007 - Licence GNU/GPL
+		[en]Chryjs (chryjs.at.free.fr) and Beurt
+_ &copy; 2006-2007 - Licence GNU/GPL
+		</multi>
+	</auteur>
+	<version>
+		0.3
+	</version>
+	<etat>
+		dev
+	</etat>
+	<description>
+		<multi>
+		[fr]R&eacute;cup&eacute;rer des pages HTML pour les int&eacute;grer dans Spip est fastidieux, surtout quand on veut migrer un site statique entier vers ce gestionnaire dynamique de site web. Face &agrave; ce probl&egrave;me, j'ai du d&eacute;velopper un outil pour m'y aider qui prend la forme d'un squelette.
+_ [D&eacute;monstration sur votre site->.?page=migre_static_demo)
+_ et si vous avez cfg : [Configuration->.?exec=cfg&cfg=migre_static]
+		[en]Import HTML pages to make them working inside SPIP can be a hard work, moreover if you need to import all your old website. Migrate static is designed to help you in this process.
+_ [Preview on your website->.?page=migre_static_demo]
+_ and if cfg plugin is installed: [Configuration->.?exec=cfg&cfg=migre_static]
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Faire-migrer-un-site-statique-vers</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<icon></icon> <!-- [fr] icone du plugin [en] plugin icon -->
+
+	<fonctions></fonctions>
+	<prefix>migre_static</prefix>
+	<install>base/migre_static_init.php</install>
+
+	<pipeline>
+		<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
+		<action>affiche_droite</action> <!-- [fr] migre_static fonction [en] migre_static function -->
+		<inclure>migre_static_pipelines.php</inclure>
+	</pipeline>
+</plugin>

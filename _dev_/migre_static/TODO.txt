@@ -1,0 +1,10 @@
+Migre_static todolist
+---------------------
+
+ * checking security
+ * checking requirement for each include function (performance)
+ * performance improvement
+ * optimize the form
+ * more documentation
+ * cfg plugin compat
+ * Adding migre_static_log function
