@@ -12,7 +12,7 @@
 })]
 
 /* cQuery est jQuery, renommee pour eviter tout conflit */
-[(#EVAL{_DIR_PLUGIN_MINIFY}|?{'',' '})
+
 [(#CHEMIN{js/jquery.js}|pack_cQuery)]
 
 [(#CHEMIN{js/jquery.dimensions.js}|pack_cQuery)]
@@ -25,17 +25,4 @@
 
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
 	[(#CHEMIN{js/crayons-fade.js}|pack_cQuery)]
-]
-]
-[(#EVAL{_DIR_PLUGIN_MINIFY}|?{' '})
-[(#ARRAY{
-1,js/jquery.js,
-2,js/jquery.dimensions.js,
-3,js/jquery.form.js,
-4,js/crayons.js,
-5,js/resizehandle.js}|minify_compacte|jQuery2cQuery)]
-[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
-	[(#ARRAY{1,js/crayons-fade.js}|minify_compacte|jQuery2cQuery)]
-]
-
 ]
