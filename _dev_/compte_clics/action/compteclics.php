@@ -24,8 +24,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_compteclics() {
-	$id_syndic = _request('id_syndic');
-	$id_syndic_article = _request('id_syndic_article');
+	$id_syndic = intval(_request('id_syndic'));
+	$id_syndic_article = intval(_request('id_syndic_article'));
 
 	// [fr] Soit un identifiant de syndication soit d article syndique
 	// [en] Either a syndication id or a syndicated article
@@ -43,13 +43,11 @@ function action_compteclics() {
 	// [fr] Sinon on renvoie un message d'erreur
 	// [en] Else error message
 	else {
-		print("Erreur : aucun site ne correspond &agrave; la requ&ecirc;te");
-		exit;
+		echo "<strong>"._T('compteclics:err_no_site')."</strong>"; exit;
 	}
 
 	if (spip_num_rows($r) == 0) {
-		print("Erreur : aucun site ne correspond &agrave; la requ&ecirc;te");
-	exit;
+		echo "<strong>"._T('compteclics:err_no_site')."</strong>"; exit;
 	}
 
 	$remote_addr=$_SERVER["REMOTE_ADDR"]; 

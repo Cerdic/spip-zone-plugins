@@ -22,12 +22,10 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-//
-// Génération du lien allant vers le compteur de liens
-//
+// [fr] Filtres generant le lien allant vers le compteur de liens
+// [en] Filters providing the clic counter
 function compteur_clic_site($id_syndic=0) {
 	if (!empty($id_syndic)) {
-//		return "./spip.php?page=clic&amp;id_syndic=".$id_syndic;
 		return generer_url_action("compteclics","id_syndic=".$id_syndic,true);
 	}
 	else {
@@ -39,8 +37,7 @@ function compteur_clic_site($id_syndic=0) {
 
 function compteur_clic_site_article($id_syndic_article=0) {
 	if (!empty($id_syndic_article)) {
-//		return "./spip.php?page=clic&amp;id_syndic_article=".$id_syndic_article;
-		return generer_url_action("compteclics","id_syndic_article=".$id_syndic,true);
+		return generer_url_action("compteclics","id_syndic_article=".$id_syndic_article,true);
 	}
 	else {
 		$r = spip_query_db("SELECT url FROM spip_syndic_articles WHERE id_syndic_article='$id_syndic_article' LIMIT 1");

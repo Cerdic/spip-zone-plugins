@@ -2,6 +2,8 @@ compte_clics (0.5)
  * brand new plugin name changed from clic to compte_clics
  * move the dirty html page to action structure
  * code cleanup
+ * Added languages files
+ * Corrected few bugs
 
  -- Chryjs <chryjs@free.fr>  Thu,  13 Sep 2007 20:00:00 +0200
 

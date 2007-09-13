@@ -3,3 +3,5 @@ clic todolist
 
  * performance improvement
  * adapt sql queries -> virtualize
+ * trying to provide only one filter function for both...
+ * limit the clics increase for mad guys :)
