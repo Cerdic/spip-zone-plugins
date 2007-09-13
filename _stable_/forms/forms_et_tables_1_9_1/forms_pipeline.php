@@ -57,11 +57,11 @@
 				$liste_type = (isset($GLOBALS['forms_type_associer']['rubrique'])?$GLOBALS['forms_type_associer']['rubrique']:array());
 				if (isset($config['associer_donnees_rubriques']) AND $config['associer_donnees_rubriques'])
 					$liste_type = array_merge($liste_type,array('table'));
-				if (count($liste_type)){
+				$id_rubrique = $flux['args']['id_rubrique'];
+				if (count($liste_type) && $id_rubrique){
 					include_spip('base/forms_base_api');
 					foreach($liste_type as $type)
 						if (count(Forms_liste_tables($type))){
-							$id_rubrique = $flux['args']['id_rubrique'];
 							$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
 							$flux['data'] .= "<div id='forms_lier_donnees'>";
 							$flux['data'] .= $forms_lier_donnees('rubrique',$id_rubrique, $exec, false, $type);

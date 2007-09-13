@@ -47,9 +47,12 @@
 	// ou #LESVALEURS{separateur,nomduchamp}
 	// recuperer les valeurs mises en forme d'un champ d'une donne d'une table
 	function balise_LESVALEURS_dist ($p) {
-		$_separateur = interprete_argument_balise(1,$p);
-		if (!$_champ = interprete_argument_balise(2,$p))
+		if ($_separateur = interprete_argument_balise(2,$p))
+			$_champ = interprete_argument_balise(1,$p);
+		else {
+			$_separateur = interprete_argument_balise(1,$p);
 			$_champ = champ_sql('champ', $p);  // indispensable
+		}
 		
 		$type = $p->type_requete;
 		$_id_donnee = champ_sql('id_donnee', $p); // indispensable
