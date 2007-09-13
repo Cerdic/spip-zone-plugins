@@ -5,13 +5,6 @@
 // pour compatibilite avec SPIP < [9717]
 //
 
-function jQuery2cQuery($flux){
-	$flux = str_replace('jQuery', 'cQuery', $flux);
-	$flux = str_replace('var $=cQuery','', $flux);
-	$flux = str_replace('window.$=cQuery','', $flux);
-	return $flux;
-}
-
 function pack_cQuery($chemin) {
 	$flux = spip_file_get_contents($chemin);
 	$flux = str_replace('jQuery', 'cQuery', $flux);
