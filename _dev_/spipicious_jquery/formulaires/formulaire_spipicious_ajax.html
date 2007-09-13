@@ -1,15 +1,11 @@
 [(#SET{groupe_mot,#CONFIG{spipicious/groupe_mot}})]
 
-	<form action="#ENV{url}#formulaire_upload" method="post" id="formulaire_spipicious_ajax" class="formulaire_spip">
+	<form action="#ENV{url}#formulaire_spipicious_ajax" method="post" id="formulaire_spipicious_ajax" class="formulaire_spip">
 		<fieldset>
 		<legend><:spipicious:add_tags:></legend>
-
-		<BOUCLE_mots(SPIP_SPIPICIOUS mots){id_auteur=#SESSION{id_auteur}}{id_article}>
-		<label>#TITRE <input type="checkbox" name="supprimer_mot[]" value="#ID_MOT" /></label><br />
-		</BOUCLE_mots>
-		<BOUCLE_mots2(SPIP_SPIPICIOUS mots){id_auteur=#SESSION{id_auteur}}{id_document}>
-		<label>#TITRE <input type="checkbox" name="supprimer_mot[]" value="#ID_MOT" /></label><br />
-		</BOUCLE_mots2>
+		
+		[(#ENV{id_document}|?{' '})[(#MODELE{spipicious_del_document}{id_document})]]
+		[(#ENV{id_document}|?{''}|sinon{[(#MODELE{spipicious_del_article}{id_article})]})]
 		
 <BOUCLE_groupes(GROUPES_MOTS){titre == #GET{groupe_mot}}>
 		<input type="hidden" id="select_groupe" name="select_groupe" value="#ID_GROUPE" />

@@ -44,7 +44,7 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_document,$id_rubrique,$id_for
 	$type_groupe_tags = _request('type_groupe');
 	$add_tags = _request('add_tags');
 	
-	// supprimer des documents ?
+	// supprimer des mots ?
 	if (is_array(_request('supprimer_mot')))
 	foreach (_request('supprimer_mot') as $supprimer) {
 		if ($supprimer = intval($supprimer)
@@ -52,7 +52,7 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_document,$id_rubrique,$id_for
 		AND $t = spip_fetch_array($s)) {
 			spip_query("DELETE FROM spip_spipicious WHERE id_auteur='$auteur_id' AND id_${type}="._q($id)." AND id_mot="._q($supprimer)); // on efface le mot associŽ a l'auteur sur l'objet
 			spip_log("suppression spipiciousmot (id_$type=$id) id_mot=".$supprimer, 'spipicious');
-			$newquery = spip_query("SELECT * FROM spip_spipicious WHERE id_${type}="._q($id)." AND id_mot="._q($supprimer));
+			$newquery = spip_query("SELECT * FROM spip_spipicious WHERE id_mot="._q($supprimer));
 			$t = spip_fetch_array($newquery);
 			if (!$t){
 				spip_query("DELETE FROM spip_mots WHERE id_mot="._q($supprimer)); // on efface le mot si il n'est plus associŽ ˆ rien
@@ -124,6 +124,7 @@ function balise_FORMULAIRE_SPIPICIOUS_AJAX_dyn($id_document,$id_rubrique,$id_for
 				'id' => $id,
 				'auteur_id' => $auteur_id,
 				'type' => $type,
+				'id_document' => $id_document,
 		))
 		);
 	}
