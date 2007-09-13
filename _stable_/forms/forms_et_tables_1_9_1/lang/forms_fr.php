@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'icone_ajouter_donnees' => "Ajouter des r&eacute;ponses",
 'info_articles_lies_donnee' => 'Les articles li&eacute;s',
+'info_rubriques_liees_donnee' => 'Les rubriques li&eacute;es',
 'icone_creer_formulaire' => "Cr&eacute;er un nouveau formulaire",
 'icone_creer_table' => "Cr&eacute;er un nouveau formulaire",
 'importer_form' => "Importer un formulaire",

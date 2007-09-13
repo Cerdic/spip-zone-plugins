@@ -374,11 +374,21 @@ function affichage_donnee_edit($type_form){
 	echo "<div class='verdana2'>$formulaire</div>";
 	
 	if ($id_donnee) {
+
 		if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
 		$liste = afficher_articles(_T("forms:info_articles_lies_donnee"),
 			array('FROM' => 'spip_articles AS articles, spip_forms_donnees_articles AS lien',
-			'WHERE' => "lien.id_article=articles.id_article AND id_donnee="._q($id_donnee)." AND statut!='poubelle'",
+			'WHERE' => "lien.id_article=articles.id_article AND lien.id_donnee="._q($id_donnee)." AND articles.statut!='poubelle'",
 			'ORDER BY' => "titre"));
+		$liste .= afficher_rubriques(_T("forms:info_rubriques_liees_donnee"),
+			array('FROM' => 'spip_rubriques AS rubriques, spip_forms_donnees_rubriques AS lien',
+			'WHERE' => "lien.id_rubrique=rubriques.id_rubrique AND lien.id_donnee="._q($id_donnee)." AND rubriques.statut!='poubelle'",
+			'ORDER BY' => "titre"));
+		/*include_spip('exec/recherche'); // pfff
+		$liste .= afficher_auteurs(_T("forms:info_auteurs_lies_donnee"),
+			array('FROM' => 'spip_auteurs AS auteurs, spip_forms_donnees_auteurs AS lien',
+			'WHERE' => "lien.id_auteur=auteurs.id_auteur AND lien.id_donnee="._q($id_donnee)." AND auteurs.statut!='poubelle'",
+			'ORDER BY' => "titre"));*/
 		if ($GLOBALS['spip_version_code']<1.92) {
 			$liste = ob_get_contents();
 			ob_end_clean();

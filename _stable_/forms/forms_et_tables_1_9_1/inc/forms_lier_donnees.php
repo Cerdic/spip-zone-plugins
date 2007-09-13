@@ -16,11 +16,12 @@ include_spip("inc/layer");
 include_spip("base/forms");
 include_spip("inc/forms");
 
-function inc_forms_lier_donnees($type, $id, $script, $deplie=false){
+function inc_forms_lier_donnees($type, $id, $script, $deplie=false, $type_table = NULL){
   global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
 
-	$type_table = forms_type_table_lier($type, $id);
+	if ($type_table===NULL)
+		$type_table = forms_type_table_lier($type, $id);
 	$prefixi18n = forms_prefixi18n($type_table);
 	$lesdonnees = array();
 	//
