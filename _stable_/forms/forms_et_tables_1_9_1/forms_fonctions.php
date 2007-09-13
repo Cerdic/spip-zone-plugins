@@ -76,7 +76,11 @@
 		}
 		return $out;
 	}
-
+	
+	function forms_format_monnaie($valeur,$decimales,$unite=true){
+		return sprintf("%.{$decimales}f",$valeur).($unite?"~&euro;":"");
+	}
+	
 	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form, $etoile=false){
 		static $structure=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
@@ -126,7 +130,7 @@
 				case 'num':
 				case 'monnaie':
 					if (!$etoile) {
-						$valeur = sprintf("%.".$structure[$id_form][$champ]['taille']."f",$valeur).($t=='monnaie'?"~&euro;":"");
+						$valeur = forms_format_monnaie($valeur,$structure[$id_form][$champ]['taille'],$t=='monnaie');
 						$valeur = "<span class='numerique'>$valeur</span>";
 					}
 					break;
