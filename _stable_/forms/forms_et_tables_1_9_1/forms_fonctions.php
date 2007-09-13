@@ -96,6 +96,7 @@
 		$rendu = 'typo';
 		if ($ok) {
 			$t = $structure[$id_form][$champ]['type'];
+
 			switch ($t) {
 				case 'select':
 				case 'multiple':
@@ -146,6 +147,7 @@
 							$valeur = preg_replace($formate['match'],$formate['replace'],$valeur);
 					break;
 			}
+
 			if (!$etoile AND $rendu)
 				include_spip('inc/texte');
 			$valeur = pipeline('forms_calcule_valeur_en_clair',

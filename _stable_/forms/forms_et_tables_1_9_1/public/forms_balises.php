@@ -53,8 +53,16 @@
 			$_separateur = interprete_argument_balise(1,$p);
 			$_champ = champ_sql('champ', $p);  // indispensable
 		}
-		
+
+		// recuperer la boucle forms_xx englobante
 		$type = $p->type_requete;
+		$idb = $p->id_boucle;
+		$boucles = $p->boucles;
+		$i =0;
+	  while ((strncmp($type,'forms_',6)!==0) && ($idb !='') && $i++<100) {
+			$idb = $boucles[$idb]->id_parent;
+	  	$type = $boucles[$idb]->type_requete;
+		}
 		$_id_donnee = champ_sql('id_donnee', $p); // indispensable
 		$_id_form = champ_sql('id_form', $p); 
 		if (!$_id_form) $_id_form = '0';// facultatif
