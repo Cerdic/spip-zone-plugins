@@ -14,7 +14,7 @@ _ &copy; 2007 - Licence GNU/GPL
 		</multi>
 	</auteur>
 	<version>
-		0.4
+		0.5
 	</version>
 	<etat>
 		dev
@@ -30,7 +30,7 @@ _ [Preview on your website->../spip.php?page=clic_demo]
 	<lien>http://www.spip-contrib.net/spip.php?page=article&amp;id_article=2410</lien> <!-- URI de documentation -->
 	<icon></icon> <!-- icone du plugin -->
 
-	<fonctions>clic_fonctions.php</fonctions>
-	<prefix>clic</prefix>
-	<install>base/clic_init.php</install>
+	<fonctions>compteclics_fonctions.php</fonctions>
+	<prefix>compteclics</prefix>
+	<install>base/compteclics_init.php</install>
 </plugin>
