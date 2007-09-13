@@ -1,0 +1,8 @@
+clic todolist
+-------------
+
+ * checking security for clic.html redirection
+ * checking rules for each include function
+ * performance improvement
+ * adapt sql queries -> virtualize
+ * find a brand new plugin name

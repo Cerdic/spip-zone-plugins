@@ -1,0 +1,21 @@
+clic (0.4)
+ * added counter for syndicated articles too any clic increments boths counters
+
+ -- Chryjs <chryjs@free.fr>  Wed,  29 Aug 2007 15:00:00 +0200
+
+clic (0.3)
+ * severe bugs corrections
+
+ -- Chryjs <chryjs@free.fr>  Wed,  29 Aug 2007 14:00:00 +0200
+
+clic (0.2)
+ * clics functions and operations : Added filters ands other twicks
+
+ -- Chryjs <chryjs@free.fr>  Wed,  29 Aug 2007 13:45:00 +0200
+
+
+clic (0.1)
+ * initial release
+ * Create the plugin structure and wrote the install/desinstall methods.
+
+ -- Chryjs <chryjs@free.fr>  Wed,  29 Aug 2007 13:00:00 +0200

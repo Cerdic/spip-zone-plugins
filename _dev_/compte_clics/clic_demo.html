@@ -1,0 +1,59 @@
+#CACHE{0}
+[(#REM) Compteur de clics pour spip (c) Chryjs 2007 ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>Exemple #[(#REM)]TOTAL_CLICS</title>
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_PAGE{clic_demo}">Exemple #[(#REM)]TOTAL_CLICS</a></div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : derniers articles publies ]
+		<div id="contenu">
+
+<B_compteur_clics_site>
+<ul>
+	<BOUCLE_compteur_clics_site(SITES){tout}{par clic_compteur}{inverse}{0,10}>
+	<li><a href="[(#ID_SYNDIC|compteur_clic_site)]">#NOM_SITE</a>[ - (#TOTAL_CLICS) visites]
+		<B_syndic>
+		<ul>
+			<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {par date}{inverse} {0,3}>
+			<li><a href="[(#ID_SYNDIC_ARTICLE|compteur_clic_site_article)]" class="spip_out">#TITRE</a>[ - (#_syndic:TOTAL_CLICS) visites]
+			</li>
+			</BOUCLE_syndic>
+		</ul>
+		</B_syndic>
+	</li>
+	</BOUCLE_compteur_clics_site>
+</ul>
+</B_compteur_clics_site>
+<multi>
+[fr]Vous devez avoir au moins un site publié dans Spip pour voir et tester la démonstration
+[en]You need at least one published website within Spip to use this demo
+</multi>
+<//B_compteur_clics_site>
+
+
+			<br class="nettoyeur" />
+
+		</div><!-- fin contenu -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>
