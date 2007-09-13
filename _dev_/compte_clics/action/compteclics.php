@@ -24,6 +24,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_compteclics() {
+	verifier_visiteur(); // securite...
 	$id_syndic = intval(_request('id_syndic'));
 	$id_syndic_article = intval(_request('id_syndic_article'));
 
@@ -40,8 +41,8 @@ function action_compteclics() {
 		// [en] increase the counter related to the syndicated article
 		if (spip_num_rows($r)<>0) spip_query("UPDATE LOW_PRIORITY spip_syndic_articles SET clic_compteur = clic_compteur + 1 WHERE id_syndic_article='$id_syndic_article' LIMIT 1");
 	}
-	// [fr] Sinon on renvoie un message d'erreur
-	// [en] Else error message
+	// [fr] Sinon on envoie un message d'erreur
+	// [en] Else show the error message
 	else {
 		echo "<strong>"._T('compteclics:err_no_site')."</strong>"; exit;
 	}
@@ -66,3 +67,5 @@ function action_compteclics() {
 	// [en] Last the redirect to the URI
 	header("Location:$o[url]");
 }
+
+?>

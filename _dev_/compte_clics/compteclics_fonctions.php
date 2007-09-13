@@ -25,6 +25,7 @@
 // [fr] Filtres generant le lien allant vers le compteur de liens
 // [en] Filters providing the clic counter
 function compteur_clic_site($id_syndic=0) {
+	$id_syndic=intval($id_syndic);
 	if (!empty($id_syndic)) {
 		return generer_url_action("compteclics","id_syndic=".$id_syndic,true);
 	}
@@ -36,6 +37,7 @@ function compteur_clic_site($id_syndic=0) {
 }
 
 function compteur_clic_site_article($id_syndic_article=0) {
+	$id_syndic_article=intval($id_syndic_article);
 	if (!empty($id_syndic_article)) {
 		return generer_url_action("compteclics","id_syndic_article=".$id_syndic_article,true);
 	}

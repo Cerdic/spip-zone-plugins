@@ -4,6 +4,8 @@ compte_clics (0.5)
  * code cleanup
  * Added languages files
  * Corrected few bugs
+ * security improvement
+ * Demo page internationalization
 
  -- Chryjs <chryjs@free.fr>  Thu,  13 Sep 2007 20:00:00 +0200
 

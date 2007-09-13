@@ -1,11 +1,26 @@
 <?php
-/* Balise #TOTAL_CLICS
-   Auteur chryjs (c) 2007
-   Basé sur http://www.spip-contrib.net/Compter-les-clics-sur-les-liens
-   et http://www.plugandspip.com/spip.php?article37
-   Plugin pour spip 1.9.2
-   Licence GNU/GPL
-*/
+#------------------------------------------------------------------------#
+#  Plugin  : compte_clics - Licence : GPL                                #
+#  File    : compteclics_init : installation/desinstallation du plugin   #
+#  Authors : Chryjs, 2007 +                                              #
+#  based on: http://www.spip-contrib.net/Compter-les-clics-sur-les-liens #
+#  and     : http://www.plugandspip.com/spip.php?article37               #
+#  Contact : chryjs¡@!free¡.!fr                                          #
+#------------------------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 
 function clic_install($action)
 {
@@ -27,7 +42,6 @@ switch ($action) {
 	spip_query("ALTER TABLE spip_syndic DROP COLUMN clic_compteur_derniere_ip");
 	spip_query("ALTER TABLE spip_syndic DROP COLUMN clic_compteur_temps");
 	spip_query("ALTER TABLE spip_syndic_articles DROP COLUMN clic_compteur");
-//	echo "<br> Fin de la désinstallation de compte clics <br>";
 	break;
  }
 } /* clic_install */
