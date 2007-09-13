@@ -44,9 +44,10 @@ function Agenda_taches_generales_cron($taches_generales){
 function exec_calendrier()
 {
 	$mode = _request('mode');
+	$type = _request('type');
 	if ($mode=='editorial'){
 		include_spip('exec/calendrier');
-	  global $type, $css;
+	  global $css;
 	// icones standards, fonction de la direction de la langue
 	
 	  global $bleu, $vert, $jaune, $spip_lang_rtl;
