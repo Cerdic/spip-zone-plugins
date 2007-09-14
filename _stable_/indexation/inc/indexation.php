@@ -144,6 +144,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	}
 
 	// marquer "en cours d'indexation"
+	spip_log('indexation '.$table  .' ' . $id_objet , 'indexation');
 	spip_query("UPDATE spip_indexation SET idx=1 WHERE type="._q($id_table)." AND idx="._q($id_objet));
 
 	include_spip('inc/texte');
@@ -316,6 +317,7 @@ function update_index_tables(){
 	$liste_tables[7]='spip_rubriques';
 	$liste_tables[8]='spip_signatures';
 	$liste_tables[9]='spip_syndic';
+	$liste_tables[10]='spip_syndic_articles';
 
 	// detection des nouvelles tables
 	$id_autres = 100;
