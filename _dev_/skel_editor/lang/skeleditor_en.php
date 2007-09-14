@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // E  
   'editer_skel'=>'Edit the template',
+  'editer_skel_debug' =>'Edit the template (debug mode)',
   'effacer'=>"delete",
   'effacer_confirme'=>'Do you really want to delete this file ?',
   'erreur_ouverture_fichier'=>"error: can not open the file",
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_droits'=>"error: can not create the file. please check the template direction rights",
   'erreur_overwrite'=>"error: this file already exists",
   'erreur_sansgene'=>'Error: unauthorized action',
+  'erreur_parsing'=>'Fatal error while parsing the BOUCLES',
   
   // F
   'fichier'=>"file",

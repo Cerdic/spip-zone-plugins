@@ -13,12 +13,13 @@
 	  Skeleton Herausgeber
 	</multi>
 	</nom>
+	<icon>img_pack/logo_skeleditor.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
  	[erational->http://www.erational.org] et [karim belkacem->http://www.glums.com]
-_ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
+_ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.1
+	0.11
 	</version>
 	<etat>
 	test
@@ -37,7 +38,7 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	  Im privaten Raum erlaubt Herausgeber die Aktenskelette 
 	</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>[Documentation->http://www.spip-contrib.net/Editeur-de-squelettes-Skel-editor]</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction sur le mode Rien:: ainsi les fonctions hors espace de nommage ne peuvent etre appelees ce parametre est obligatoire et doit etre non vide -->
 	<prefix> 
 	SkelEditor

@@ -2,13 +2,17 @@
 TODO plugin skel_editor
 ---------------------------------------------
 
+a faire:
+----------------------------
 - vérifier l'encodage
-- gérer les droits en ecriture (CHMOD, utiliser la methophore du verrou) ?
-- télécharger l'ensemble du squelette en .zip ?
 
-extras possibles:
-... documentation des boucles
-... preview "live"
+ajout de fonctionnalités:
+----------------------------
+- gérer les droits en ecriture (CHMOD, utiliser la metaphore du verrou) ?
+- télécharger l'ensemble du squelette en .zip ?
+- fonction renommer / déplacer ?
+- documentation des boucles
+- preview "live"
 
 des commentaires ?
 http://www.spip-contrib.net/Plugin-editeur-de-squelettes-Skel

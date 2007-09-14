@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // E  
   'editer_skel'=>'Editer le squelette',
+  'editer_skel_debug' =>'Editer le squelette (mode debug)',
   'effacer'=>"effacer",
   'effacer_confirme'=>'Voulez vous vraiment effacer ce fichier ?',
   'erreur_ouverture_fichier'=>"erreur: impossible d\'ouvrir le fichier",
@@ -18,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_droits'=>"erreur: impossible de cr&eacute;er le fichier. V&eacute;rifier les droits en &eacute;critutre de votre r&eacute;pertoire squelette",
   'erreur_overwrite'=>"erreur: ce fichier existe d&eacute;j&agrave;",
   'erreur_sansgene'=>'Erreur: action non autoris&eacute;e',
+  'erreur_parsing'=>'Erreur fatale lors de l\'analyse des boucles',
   
   // F
   'fichier'=>"fichier",
