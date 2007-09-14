@@ -391,7 +391,7 @@ if (!$INDEX_elements_objet) {
 	$INDEX_elements_objet['spip_mots'] = array('titre'=>8,'descriptif'=>5,'texte'=>1,'extra|unserialize_join'=>1);
 	$INDEX_elements_objet['spip_signatures'] = array('nom_email'=>array(2,2),'ad_email'=>2,'nom_site'=>2,'url_site'=>1,'message'=>1);
 	$INDEX_elements_objet['spip_syndic'] = array('nom_site'=>50,'descriptif'=>30,'url_site|contenu_page_accueil'=>1);
-	$INDEX_elements_objet['spip_syndic_articles'] = array('titre'=>5);
+	$INDEX_elements_objet['spip_syndic_articles'] = array('titre'=>5, 'lesauteurs'=>1, 'descriptif'=>1, 'tags'=>1);
 	$INDEX_elements_objet['spip_forum'] = array('titre'=>3,'texte'=>2,'auteur'=>array(2,2),'email_auteur'=>2,'nom_site'=>2,'url_site'=>1);
 	$INDEX_elements_objet['spip_documents'] = array('titre'=>20,'descriptif'=>10,'fichier'=>1);
 	ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
