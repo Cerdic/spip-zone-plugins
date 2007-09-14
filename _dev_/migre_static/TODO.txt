@@ -8,3 +8,5 @@ Migre_static todolist
  * more documentation
  * cfg plugin compat
  * Adding migre_static_log function
+ * better ul/ol filters
+

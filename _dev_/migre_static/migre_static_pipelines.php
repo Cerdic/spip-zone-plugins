@@ -1,8 +1,11 @@
 <?php
-//    migre_static plugin : pipelines functions
-//
-//    Copy (c) Chryjs.at.free.dot.fr 2007
-//
+#-----------------------------------------------------#
+#  Plugin  : migre_static - Licence : GPL             #
+#  File    : migre_static_pipelines - pipelines       #
+#  Authors : Chryjs, 2007 - Beurt, 2006               #
+#  Contact : chryjs¡@!free¡.!fr                       #
+#-----------------------------------------------------#
+
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
 //    the Free Software Foundation; either version 2 of the License, or any later version.
@@ -30,7 +33,6 @@ function migre_static_ajouter_boutons() {
 // [fr] Ne semble pas fonctionner donc inutilise (a supprimer)
 // [en] Doesn t seems to work... Left unused (To be removed)
 }
-
 
 function migre_static_affiche_droite($flux) {
 // [fr] Peut etre ajouter un controle d acces

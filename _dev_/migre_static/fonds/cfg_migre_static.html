@@ -1,0 +1,13 @@
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+<select name="id_migre_static">
+<BOUCLE_rubriques(RUBRIQUES){par titre}>
+<option value="#ID_RUBRIQUE">#ID_RUBRIQUE . #TITRE</option>
+</BOUCLE_rubriques>
+</select>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+
