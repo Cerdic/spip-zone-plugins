@@ -76,31 +76,12 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) 
 		return $sommaire_seul?'':sommaire_imprimer($texte0);
 
-	// on traite l'image de fond
-	$img = find_in_path('img/sommaire/coin.gif');
-	$sansfond = !$img || strpos($texte0, _sommaire_SANS_FOND)!==false;
-	if ($sansfond) {
-		$fond = 'background-color:white; border:thin solid gray;';
-	} else {
-		$img = cs_htmlpath($img);
-		$fond = "background:transparent url($img) no-repeat scroll left top; border-bottom:thin solid #999999; border-right:1px solid #999999;";
-	}
+	// calcul du sommaire en recuperant le fond qui va bien
+	$fond = strpos($texte0, _sommaire_SANS_FOND)!==false ?2:1;
+	include_spip('public/assembler');
+	$sommaire = recuperer_fond('fonds/sommaire'.$fond, array('sommaire'=>$sommaire));
 
-// TODO : un modele html, puis recuperer_fond()
-$ancre = '<a name="outil_sommaire" id="outil_sommaire"></a>';
-$sommaire = '<div id="outil_sommaire" class="cs_sommaire" style="'.$fond.'"><div style="margin:3pt;"><div style="
-border-bottom:1px dotted silver;
-line-height:1;
-position:inherit;
-font-weight:bold;'.($sansfond?'':'margin-left:15px;').'
-text-align:center;">'._T('cout:sommaire').'</div>
-<ul style="font-size:84%;
-list-style-image:none;
-list-style-position:outside;
-list-style-type:none;
-margin:0.3em 0.5em 0.1em 0.7em;
-padding:0pt;">'.$sommaire.'</ul></div></div>';
-
+	$ancre = '<a name="outil_sommaire" id="outil_sommaire"></a>';
 	// si on ne veut que le sommaire, on renvoie le sommaire
 	// sinon, on n'insere ce sommaire en tete de texte que si la balise #CS_SOMMAIRE n'est pas activee
 	if($sommaire_seul) return $ancre.$sommaire;
