@@ -136,6 +136,7 @@ EOH;
 // #EDIT{ps} pour appeler le crayon ps ;
 // si cette fonction est absente, balise_EDIT_dist() met a vide
 function balise_EDIT($p) {
+
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	// #EDIT hors boucle ? ne rien faire
 	if (!$type = $p->boucles[$i_boucle]->type_requete) {
@@ -143,6 +144,12 @@ function balise_EDIT($p) {
 		$p->interdire_scripts = false;
 		return $p;
 	}
+
+	// crayon sur une base distante 'nua:article-intro-5'
+	// on ne sait pas encore les gerer, mais au moins on les detecte
+	if ($distant = $p->boucles[$i_boucle]->sql_serveur)
+		$type = "$distant:$type";
+
 	// le compilateur 1.9.2 ne calcule pas primary pour les tables secondaires
 	if (!($primary = $p->boucles[$i_boucle]->primary)) {
 		list($nom, $desc) = trouver_def_table(
