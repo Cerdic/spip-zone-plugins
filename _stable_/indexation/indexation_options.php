@@ -2,7 +2,7 @@
 
 // Un cron toutes les 5 minutes
 function Indexation_taches_generales_cron($taches_generales){
-	$taches_generales['indexation'] = 5;
+	$taches_generales['indexation'] = 300;
 	return $taches_generales;
 }
 
