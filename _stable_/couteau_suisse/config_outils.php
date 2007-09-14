@@ -348,7 +348,7 @@ if (isset(\$_GET['var_recherche'])) {
 div.pagination img { border:none; margin:0pt; padding:0pt; }",
 	// inserer : $table_des_traitements['TEXTE'][]= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'cs_decoupe',
-	// inserer : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
+	// sans oublier les articles : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
 	'pipeline:affichage_final' => 'decoupe_affichage_final',
 	'categorie' => 'typo-racc',
@@ -548,6 +548,9 @@ add_outil( array(
 	'code:options' => '%%glossaire_limite%%',
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
+	// sans oublier les articles...
+	'traitement:TEXTE/articles:post_propre' => 'cs_glossaire',
+	// et le chapo des articles...
 	'traitement:CHAPO:post_propre' => 'cs_glossaire',
 	// Precaution pour les articles virtuels
 	'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
