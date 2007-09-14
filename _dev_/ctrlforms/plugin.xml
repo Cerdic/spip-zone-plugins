@@ -1,0 +1,38 @@
+<plugin>
+	<nom>Controle de champ pour plugin form & table</nom>
+	<icon>img_pack/form-24.png</icon>
+	<auteur>Dom Rom</auteur>
+	<version>0.1.0.0</version>
+	<etat>dev</etat>
+	<description>Ajout d'une fonctionnalit&eacute; de controle de champ pour le plugin Forms&amp;tables
+	</description>
+	<lien>http://</lien>
+	<prefix>ctrlforms</prefix>
+	<necessite id='forms' version='[0.301;]' />
+	<chemin dir='' />
+	<fonctions>public/ctrlforms_balises.php</fonctions>
+	<pipeline>
+		<nom>forms_types_champs</nom>
+		<inclure>inc/ctrlforms_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_bloc_edition_champ</nom>
+		<inclure>inc/ctrlforms_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_input_champs</nom>
+		<inclure>inc/ctrlforms_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_ajoute_styles</nom>
+		<inclure>inc/ctrlforms_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_update_edition_champ</nom>
+		<inclure>inc/ctrlforms_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_pre_edition_donnee</nom>
+		<inclure>inc/ctrlforms_types_champs.php</inclure>
+	</pipeline>
+</plugin>
