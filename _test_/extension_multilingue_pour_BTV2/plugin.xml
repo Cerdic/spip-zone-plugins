@@ -1,9 +1,12 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Barre typographique multilingue (Extension multilingue pour la barre typographique V2)
+	<multi>
+		[fr]Barre typographique multilingue (Extension multilingue pour la barre typographique V2)
+		[en]Multilingual typographical bar (Multilingual extension for the typographical bar V2)
+	</multi>
 	</nom>
 	<auteur><!-- Auteur du plugin -->
-	<br/>Distribu&#233; sous licence GNU/GPL - &copy; (2007) [Kazis &amp; Co->http://www.screencom.com] 
+	<br/><multi>[fr]Distribu&#233; sous licence[en]licence</multi> GNU/GPL - &copy; (2007) [Kazis &amp; Co->http://www.screencom.com] 
 	</auteur>
 	<lien></lien>
 	<version>
@@ -13,7 +16,7 @@
 	test
 	</etat>
 	<description>
-	Ajoute des fonctions de multiliguisme &agrave; la barre typographique V2. 
+	<multi>[fr]Ajoute des fonctions de multiliguisme &agrave; la barre typographique V2. 
 	
 	<br/>En utilisation conjointe avec la Barre Typographique G&eacute;n&eacute;ralis&eacute;e, ce plugin vous permettra d'utiliser
 	facilement les fonctions de multilinguisme 
@@ -25,6 +28,17 @@
 	<b>Attention :</b> ce plugin n'est pas compatible avec les enluminures pour la BTV2.
 	<br/>
 	[Acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]
+	[en]Add multilingual functionalities to the typographical bar V2 
+	
+	<br/>Used with the generalized typographical bar, this plugin offers to easily use multilingualism on every textareas, such as titles, descriptions, and texts.
+
+	<br/>
+	It is based on the use of <tt>&lt;multi&gt;</tt> tags.
+	<br/>
+	<b>Please note that this plugin is not yet compliant to "enluminures" for BTV2</b>.
+	<br/>
+	[Control panel access with cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]
+	</multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
