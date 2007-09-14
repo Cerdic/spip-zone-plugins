@@ -1,0 +1,33 @@
+<plugin>
+	<nom>FTCaptcha</nom>
+	<icon>img/securite-32.gif</icon>
+	<auteur>Dom Rom</auteur>
+	<version>0.1.0.0</version>
+	<etat>dev</etat>
+	<description>
+	Ajout d'un captcha pour le plugin Forms et tables
+	Cliquez ici pour configurer [ecrire/?exec=cfg&cfg=captcha->./?exec=cfg&cfg=captcha]
+        Adaptation de [->http://www.atelierphp5.com/un-captcha-accessible.html]
+	</description>
+	<lien>http://</lien>
+	<prefix>ftcaptcha</prefix>
+	<install>base/ftcaptcha_install.php</install>
+	<necessite id='forms' version='[0.000;]' />
+	<chemin dir='' />
+	<pipeline>
+		<nom>forms_types_champs</nom>
+		<inclure>inc/ftcaptcha_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_bloc_edition_champ</nom>
+		<inclure>inc/ftcaptcha_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_input_champs</nom>
+		<inclure>inc/ftcaptcha_types_champs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>forms_update_edition_champ</nom>
+		<inclure>inc/ftcaptcha_types_champs.php</inclure>
+	</pipeline>
+</plugin>
