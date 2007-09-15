@@ -44,38 +44,38 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 		$erreur = '';
 		$cm_sub = 'null';
 		if (ereg("^[^@ ]+@[^@ ]+\.[^@. ]+$", $address)) {
-			$result = spip_fetch_array(spip_query("SELECT sub_id FROM cm_subscribers WHERE sub_email='".$address."'"));
+			$result = spip_fetch_array(spip_query("SELECT sub_id FROM cm_subscribers WHERE sub_email='"._q($address)."'"));
 			$recId = $result['sub_id'];
 			if (!$recId) {
 				// Nouvelle adresse e-mail
-				spip_query("INSERT INTO cm_subscribers (sub_id, sub_email, sub_profile) VALUES ('', '".$address."', '')");
+				spip_query("INSERT INTO cm_subscribers (sub_id, sub_email, sub_profile) VALUES ('', '"._q($address)."', '')");
 				$recId = spip_insert_id();
-				spip_query("UPDATE cm_subscribers SET sub_profile = '".md5($recId.'#'.$address.'#'.time())."' WHERE sub_id='".$recId."'");
+				spip_query("UPDATE cm_subscribers SET sub_profile = '".md5($recId.'#'._q($address).'#'.time())."' WHERE sub_id='"._q($recId)."'");
 			}
-			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists_subscribers WHERE lst_id = ".$listId." AND sub_id = ".$recId));
+			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists_subscribers WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));
 			if ($result['nb'] == 1) {
 				// Inscription à cette liste déjà présente
 				// On met à jour pour éventuellement changer le mode
-				spip_query("UPDATE cm_lists_subscribers SET lsr_mode=".$mode." WHERE lst_id = ".$listId." AND sub_id = ".$recId);
+				spip_query("UPDATE cm_lists_subscribers SET lsr_mode="._q($mode)." WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId));
 				$cm_sub = _T('clevermail:deja_inscrit');
 			} else {
-				$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$listId));
+				$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = "._q($listId)));
 				switch($list['lst_moderation']) {
 					case 'open':
 						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
-						spip_query("INSERT INTO cm_lists_subscribers (lst_id, sub_id, lsr_mode, lsr_id) VALUES (".$listId.", ".$recId.", ".$mode.", '$actionId')");
+						spip_query("INSERT INTO cm_lists_subscribers (lst_id, sub_id, lsr_mode, lsr_id) VALUES ("._q($listId).", "._q($recId).", "._q($mode).", '$actionId')");
 						$cm_sub = _T('clevermail:inscription_validee');
 					break;
 
 					case 'email':
 						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
-						$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_pending WHERE lst_id = ".$listId." AND sub_id = ".$recId));
+						$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_pending WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));
 						if ($result['nb'] == 0) {
-							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES (".$listId.", ".$recId.", 'subscribe', ".$mode.", ".time().", '".$actionId."')");
+							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES ("._q($listId).", "._q($recId).", 'subscribe', "._q($mode).", ".time().", '"._q($actionId)."')");
 						}
 
 						// Composition du message de demande de confirmation
-						$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id=".$listId));
+						$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id="._q($listId)));
 						$subject = ((int)$list['lst_subject_tag'] == 1 ? '['.$list['lst_name'].'] ' : '').$list['lst_subscribe_subject'];
 						$template = array();
 						$template['@@NOM_LETTRE@@'] = $list['lst_name'];
@@ -108,13 +108,13 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 
 					case 'mod':
 						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
-						$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_pending WHERE lst_id = ".$listId." AND sub_id = ".$recId));
+						$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_pending WHERE lst_id = "._q($listId)." AND sub_id = "._q($recId)));
 						if ($result['nb'] == 0) {
-							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES (".$listId.", ".$recId.", 'subscribe', ".$mode.", ".time().", '".$actionId."')");
+							spip_query("INSERT INTO cm_pending (lst_id, sub_id, pnd_action, pnd_mode, pnd_action_date, pnd_action_id) VALUES ("._q($listId).", "._q($recId).", 'subscribe', "._q($mode).", ".time().", '"._q($actionId)."')");
 						}
 
 						// Composition du message de demande de confirmation au moderateur
-						$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id=".$listId));
+						$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id="._q($listId)));
 						$subject = ((int)$list['lst_subject_tag'] == 1 ? '['.$list['lst_name'].'] ' : '').$list['lst_subscribe_subject'];
 						$template = array();
 						$template['@@NOM_LETTRE@@'] = $list['lst_name'];
