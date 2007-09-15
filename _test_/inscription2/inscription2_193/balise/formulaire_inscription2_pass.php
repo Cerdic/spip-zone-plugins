@@ -46,7 +46,7 @@ function balise_FORMULAIRE_INSCRIPTION2_PASS_dyn($mode) {
 				$var_user['statut_interne'] = lire_config('inscription2/statut_interne');
 	
 			elseif($cle=='accesrestreint') 
-				$var_user['zones'] = _request('zones');
+				$var_user['zones'] = lire_config('inscription2/zones');
 			
 			elseif(ereg("^statut_abonnement.*$", $cle)){
 				$var_user['statut_abonnement'] = lire_config('inscription2/statut_abonnement');
