@@ -119,7 +119,6 @@ function TypoEnluminee_pre_propre($texte) {
 		/* 20 */ 	$chercher_raccourcis[]="/\([rR]\)/S";
 		/* 21 */ 	$chercher_raccourcis[]="/\([tT][mM]\)/S";
 		/* 22 */ 	$chercher_raccourcis[]="/\.\.\./S";
-		/* 23 */	$chercher_raccourcis[]="/\[([^|?][^][]*)\|((?:[^][](?!->))*)\]/S";
 
 		/*  1 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
 		/*  2 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
@@ -145,7 +144,6 @@ function TypoEnluminee_pre_propre($texte) {
 		/* 20 */	$remplacer_raccourcis[]="&reg;";
 		/* 21 */	$remplacer_raccourcis[]="&trade;";
 		/* 22 */	$remplacer_raccourcis[]="&hellip;";
-		/* 23 */	$remplacer_raccourcis[]="@@acro@@$2@@$1@@acro@@";
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
