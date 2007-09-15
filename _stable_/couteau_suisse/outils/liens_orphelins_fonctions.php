@@ -1,7 +1,6 @@
 <?php
 
 // traiter_raccourcis_propre() introduit sous SPIP 1.93
-echo $GLOBALS['spip_version_code'],'-',$GLOBALS['spip_version'];
 if ($GLOBALS['spip_version_code']<1.9262) {
 	define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 	function traiter_raccourcis_propre($letexte) {
