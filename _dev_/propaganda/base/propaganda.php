@@ -20,6 +20,7 @@ $spip_propaganda = array(
 	"titre" => "varchar(255) NOT NULL",
 	"texte" => "text",
 	"email_destinataire" => "text",
+	"nom_destinataire" => "text",
 	"hash" => "varchar(255) NOT NULL",
 	"confidentiel" => "varchar(255) NOT NULL",
 	"maj"	=> "TIMESTAMP"
@@ -42,7 +43,7 @@ $tables_principales['spip_propaganda'] = array(
 	'joint' => &$spip_propaganda_join
 	);
 
-//-- Relaci—ns ----------------------------------------------------
+//-- Relacitions ----------------------------------------------------
 global $table_des_tables;
 $table_des_tables['propaganda']='propaganda';
 

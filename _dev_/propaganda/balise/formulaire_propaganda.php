@@ -33,11 +33,11 @@ function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
 	charger_generer_url();
 	
 	$destinataire = _request('email_destinataire');
+	$nom_destinataire = _request('nom_destinataire');
 	$titre = _request('sujet');
 	$texte = _request('texte_message_auteur');
 	$auteur =_request('auteur');
 	$document_carte = _request('document_carte');
-//	$url = parametre_url(generer_url_public('carte'),'id_document',$document_carte);
 
 	$previsualiser= _request('previsualiser');
 	$valider= _request('valider');
@@ -65,13 +65,13 @@ function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
 	// doit-on envoyer le mail ?
 	if ($valider) {
 
-		spip_query("INSERT INTO spip_propaganda (id_auteur, id_document, titre, texte, email_destinataire, hash, confidentiel) VALUES ('$id_auteur', '$document_carte', "._q($titre).", "._q($texte).", "._q($destinataire).", '$hash', '$confidentiel')");
+		spip_query("INSERT INTO spip_propaganda (id_auteur, id_document, titre, texte, email_destinataire, nom_destinataire, hash, confidentiel) VALUES ('$id_auteur', '$document_carte', "._q($titre).", "._q($texte).", "._q($destinataire).", "._q($nom_destinataire).", '$hash', '$confidentiel')");
 		$id_propaganda = mysql_insert_id();
 
 		$url = parametre_url(generer_url_public('carte'),'id_propaganda',$id_propaganda);
 
 
-		$texte2 = ""._T('propaganda:bonjour')."\n\n$nom_expediteur ($adresse) "._T('propaganda:untel_envoi_carte')."\n\n";
+		$texte2 = ""._T('propaganda:bonjour')." $nom_destinataire".",\n\n$nom_expediteur ($adresse) "._T('propaganda:untel_envoi_carte')."\n\n";
 		$texte2 .= "\n"._T('propaganda:consulter_carte')." \n$url\n\n";
 		$texte2 .= _T('propaganda:son_message')."\n\n".$texte."\n\n";
 		$texte2 .= "----------------\n$url\n\n"._T('propaganda:merci_de_visite')."\n";
@@ -80,10 +80,15 @@ function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
 		$titre2 = "[".supprimer_tags(extraire_multi(lire_meta('nom_site')))."] - ";
 		$titre2 .= $titre;
 		$titre2 = utf8_decode($titre2);
-		envoyer_mail($destinataire, $titre2, $texte2, $adresse,
-				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
-				
-		return _T('form_prop_message_envoye');
+		envoyer_mail($destinataire, $titre2, $texte2, $nom_expediteur.' <'.$adresse.'>',
+					"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
+
+		$msg_envoye =  _T('propaganda:carte_envoyee');
+		$msg_envoye .= ' - <a class="nouvel_envoi" href="';
+		$msg_envoye .= generer_url_article($id_article);
+		$msg_envoye .= '">'._T('propaganda:envoi_nouvelle_carte').'</a>';
+		
+		return $msg_envoye;
 		
 	}
 	
@@ -104,17 +109,18 @@ function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
 			array(
 				'formulaires/formulaire_propaganda_previsu',
 				0,
-			array(
-				'url' => $url,
-				'id_article' => $id_article,
-				'mail' => $adresse,
-				'nom_expediteur' => $nom_expediteur,
-				'destinataire' => $destinataire,
-				'titre' => $titre,
-				'texte' => $texte,
-				'document_carte' => $document_carte,
-				'erreur' => $erreur,
-				'bouton' => $bouton,
+				array(
+					'url' => $url,
+					'id_article' => $id_article,
+					'mail' => $adresse,
+					'nom_expediteur' => $nom_expediteur,
+					'destinataire' => $destinataire,
+					'nom_destinataire' => $nom_destinataire,
+					'titre' => $titre,
+					'texte' => $texte,
+					'document_carte' => $document_carte,
+					'erreur' => $erreur,
+					'bouton' => $bouton,
 				)
 			),
 			false);
@@ -129,6 +135,7 @@ function balise_FORMULAIRE_PROPAGANDA_dyn($id_article) {
 			'nom_expediteur' => $nom_expediteur,
 			'previsu' => $previsu,
 			'destinataire' => $destinataire,
+			'nom_destinataire' => $nom_destinataire,
 			'titre' => $titre,
 			'texte' => $texte,
 			'document_carte' => $document_carte,

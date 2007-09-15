@@ -23,7 +23,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'destinataire' => 'Recipient(s) :',
 'send_ecard' => 'Send an E-card',
 
+// retour formulaire 
+'carte_envoyee' => 'Postcard sent',
+'envoi_nouvelle_carte' => 'Send another postcard',
+
+//carte.html
+'emmetteur_envoi' => 'sends you this e-postcard',
+'credits' => 'Graphical credits: ',
+'son_message' => 'Her message within the postcard',
+
 'xxx' => 'xxx'
+
 
 );
 

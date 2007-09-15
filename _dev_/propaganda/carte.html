@@ -1,0 +1,68 @@
+#CACHE{86400}
+<BOUCLE_carte_postale_principal(SPIP_PROPAGANDA) {id_propaganda}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<BOUCLE_document_hierarchie(DOCUMENTS) {id_document}>
+	<BOUCLE_article_hierarchie(ARTICLES) {id_document}>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+	</BOUCLE_article_hierarchie>
+	</BOUCLE_document_hierarchie>
+
+	<div id="conteneur">
+		#DEBUT_SURLIGNE
+		<BOUCLE_article_carte_postale(ARTICLES) {id_document}>
+		[<div class="ps"><div class="#EDIT{ps}">(#PS)</div></div>]
+		</BOUCLE_article_carte_postale>				
+
+		<div id="cartepostale" style="margin-top: 2em; border-style: solid; border-color: #000000; border-width:1px; width:90%; min-width:800px; min-height:500px;">
+			<div style="margin: 1em; border-right-style: solid; border-right-width:2px; border-right-color:black; float:left"> 
+				<BOUCLE_document_carte_postale(DOCUMENTS) {id_document}>
+				[<a href="#URL_DOCUMENT">(#FICHIER|image_reduire{500}) </a>]
+				
+				<br class="nettoyeur" />
+				[<div class="#EDIT{texte} texte">(#TITRE)</div>]
+				[<div class="#EDIT{texte} texte">(#DESCRIPTIF)</div>]
+				</BOUCLE_document_carte_postale>
+				
+			</div>
+			<BOUCLE_logo_carte_postale(ARTICLES) {id_document}>
+			[<div style="float:right; width:20%">(#LOGO_ARTICLE|right|#URL_ARTICLE)</div><br style="clear:right" />]
+			</BOUCLE_logo_carte_postale>				
+
+			<BOUCLE_expediteur(AUTEURS){id_auteur}>
+			<h3>De: <a href="#URL_AUTEUR ">#NOM</a></h3> 
+			[<small><a href="(#URL_SITE)">#NOM_SITE</a></small>] 
+			</BOUCLE_expediteur>
+			<h3>A: #NOM_DESTINATAIRE</h3>  
+			<h3>#TITRE</h3>  
+			#TEXTE  
+			<br class="nettoyeur"/>
+		</div>
+	<BOUCLE_article_envoi(ARTICLES){id_document}>
+	<h1><a href="#URL_ARTICLE"><:propaganda:envoi_nouvelle_carte:></a></h1>
+	</BOUCLE_article_envoi>
+			[(#REM) Contenu principal : contenu de l'article ]
+
+	#FIN_SURLIGNE
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_carte_postale_principal>
