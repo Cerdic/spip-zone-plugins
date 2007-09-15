@@ -165,7 +165,7 @@ function is_traitements_outil($traitement, $fonction, &$set_traitements_utilises
 		if(!strlen($t[2])) $t[2] = 0;
 		$set_traitements_utilises[$t[1]][$t[2]][$t[4]][$t[3]][] = $fonction;
 	} elseif ($ok = preg_match(',^traitement:([A-Z]+)$,', $traitement, $t))
-		$set_traitements_utilises[$t[1]][0][] = $fonction;
+		$set_traitements_utilises[$t[1]][0][0][] = $fonction;
 	return $ok;
 }
 
@@ -303,7 +303,7 @@ function cs_initialise_includes() {
 	foreach($traitements_utilises as $b=>$balise) {
 		foreach($balise as $p=>$precision) {
 			foreach($precision as $f=>$fonction)  {
-				if ($f===0)	$traitements_utilises[$b][$p][$f] = $fonction[0].'(';
+				if ($f===0)	$traitements_utilises[$b][$p][$f] = join("(", array_reverse($fonction)).'(';
 				else {
 					$pre = isset($fonction['pre'])?join('(', $fonction['pre']).'(':'';
 					$post = isset($fonction['post'])?join('(', $fonction['post']).'(':'';

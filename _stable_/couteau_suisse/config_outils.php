@@ -507,11 +507,13 @@ add_variable( array(
 	'defaut' => 0,
 	'code:%s' => '$GLOBALS["liens_orphelins_etendu"]=true;',
 ));
+// attention : liens_orphelins doit etre place avant mailcrypt
 add_outil( array(
 	'id' => 'liens_orphelins',
 	'categorie'	 => 'typo-corr',
 	'code:options' => '%%liens_orphelins%%',
-	'pipeline:pre_propre' => 'liens_orphelins',
+	'pipeline:pre_propre' => 'liens_orphelins_pipeline',
+	'traitement:EMAIL' => 'traiter_raccourcis_propre(liens_orphelins',
 ));
 
 add_outil( array(
@@ -556,13 +558,15 @@ add_outil( array(
 	'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
 ));
 
+// attention : mailcrypt doit etre place apres liens_orphelins
 add_outil( array(
 	'id' => 'mailcrypt',
 	'auteur' 	 => 'Alexis Roussel, Paolo',
 	'categorie'	 => 'typo-corr',
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
 	'code:js' => "function lien(ad){ return 'mail' + 'to:' + ad.replace(/\.\..+t\.\./,'@'); }",
-));
+	'traitement:EMAIL' => 'mailcrypt',
+)); 
 
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
