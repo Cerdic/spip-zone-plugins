@@ -28,7 +28,7 @@ _ [Preview on your website->../spip.php?page=clic_demo]
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/spip.php?page=article&amp;id_article=2410</lien> <!-- URI de documentation -->
-	<icon></icon> <!-- icone du plugin -->
+	<icon>img/compte_clics_icone_48.png</icon> <!-- icone du plugin -->
 
 	<fonctions>compteclics_fonctions.php</fonctions>
 	<prefix>compteclics</prefix>

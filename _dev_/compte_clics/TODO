@@ -5,3 +5,11 @@ clic todolist
  * adapt sql queries -> virtualize
  * trying to provide only one filter function for both...
  * limit the clics increase for mad guys :)
+
+
+-* Une page d'administration disponible dans l'espace privé, permettant d'initialiser les compteurs, de suivre les clics,
+-* Une historisation des totaux,
+-* Un filtre unique,
+-* Un filtrage pour les "clic-eurs fous"
+-* Un filtre pour ne pas prendre en compte les clics de l'administrateur
+
