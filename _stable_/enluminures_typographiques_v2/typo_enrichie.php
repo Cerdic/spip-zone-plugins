@@ -33,117 +33,122 @@
 	*/
 
 function TypoEnluminee_pre_propre($texte) {
-	// remplace les fausses listes a puce par de vraies
-	// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
-	// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
-	if (!function_exists('lire_config')) {
-		global $barre_typo_pas_de_fausses_puces;
-	} else {
-		if (lire_config('bte/puces','Non') == 'Oui') {
-			$barre_typo_pas_de_fausses_puces = true;
+	static $chercher_raccourcis=NULL;
+	static $remplacer_raccourcis=NULL;
+	
+	if ($chercher_raccourcis===NULL) {
+		// remplace les fausses listes a puce par de vraies
+		// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
+		// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
+		if (!function_exists('lire_config')) {
+			global $barre_typo_pas_de_fausses_puces;
 		} else {
-			$barre_typo_pas_de_fausses_puces = false;
+			if (lire_config('bte/puces','Non') == 'Oui') {
+				$barre_typo_pas_de_fausses_puces = true;
+			} else {
+				$barre_typo_pas_de_fausses_puces = false;
+			}
 		}
-	}
-
-	if ($barre_typo_pas_de_fausses_puces === true) {
-		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
-	}
-
-	// tous les elements block doivent etre introduits ici
-	// pour etre pris en charge par paragrapher
-
-	// Definition des differents intertitres possibles, si pas deja definies
-	if (!function_exists('lire_config')) {
-		tester_variable('debut_intertitre', '<h3 class="spip">');
-		tester_variable('fin_intertitre', '</h3>');
-		tester_variable('debut_intertitre_2', '<h4 class="spip">');
-		tester_variable('fin_intertitre_2', '</h4>');
-		tester_variable('debut_intertitre_3', '<h5 class="spip">');
-		tester_variable('fin_intertitre_3', '</h5>');
-		tester_variable('debut_intertitre_4', '<h6 class="spip">');
-		tester_variable('fin_intertitre_4', '</h6>');
-		tester_variable('debut_intertitre_5', '<strong class="spip titraille5">');
-		tester_variable('fin_intertitre_5', '</strong>');
-	} else {
-		tester_variable('debut_intertitre', lire_config('bte/titraille1open','<h3 class="spip">'));
-		tester_variable('fin_intertitre', lire_config('bte/titraille1close','</h3>'));
-		tester_variable('debut_intertitre_2', lire_config('bte/titraille2open','<h4 class="spip">'));
-		tester_variable('fin_intertitre_2', lire_config('bte/titraille2close','</h4>'));
-		tester_variable('debut_intertitre_3', lire_config('bte/titraille3open','<h5 class="spip">'));
-		tester_variable('fin_intertitre_3', lire_config('bte/titraille3close','</h5>'));
-		tester_variable('debut_intertitre_4', lire_config('bte/titraille4open','<h6 class="spip">'));
-		tester_variable('fin_intertitre_4', lire_config('bte/titraille4close','</h6>'));
-		tester_variable('debut_intertitre_5', lire_config('bte/titraille5open','<strong class="spip titraille5">'));
-		tester_variable('fin_intertitre_5', lire_config('bte/titraille5close','</strong>'));
-	}
-
-	tester_variable('toujours_paragrapher', false);
-
-	global $debut_intertitre, $fin_intertitre;
-	global $debut_intertitre_2, $fin_intertitre_2;
-	global $debut_intertitre_3, $fin_intertitre_3;
-	global $debut_intertitre_4, $fin_intertitre_4;
-	global $debut_intertitre_5, $fin_intertitre_5;
-
-	$chercher_raccourcis=array();
-	$remplacer_raccourcis=array();
-	global $BarreTypoEnrichie;
-	if (is_array($BarreTypoEnrichie))
-		foreach($BarreTypoEnrichie as $item) {
-			$chercher_raccourcis[]=$item['chercher'];					
-			$remplacer_raccourcis[]=$item['remplacer'];					
+	
+		if ($barre_typo_pas_de_fausses_puces === true) {
+			$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 		}
-
-		/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]/S";
-		/* 2 */ 	$chercher_raccourcis[]="/[}][}][}]($|[^}])/S";
-		/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])\{1\{/S";
-		/* 4 */ 	$chercher_raccourcis[]="/\}1\}($|[^}])/S";
-		/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])\{2\{/S";
-		/* 6 */ 	$chercher_raccourcis[]="/\}2\}($|[^}])/S";
-		/* 7 */ 	$chercher_raccourcis[]="/(^|[^{])\{3\{/S";
-		/* 8 */ 	$chercher_raccourcis[]="/\}3\}($|[^}])/S";
-		/* 9 */ 	$chercher_raccourcis[]="/(^|[^{])\{4\{/S";
-		/* 10 */ 	$chercher_raccourcis[]="/\}4\}($|[^}])/S";
-		/* 9b */ 	$chercher_raccourcis[]="/(^|[^{])\{5\{/S";
-		/* 10b */ 	$chercher_raccourcis[]="/\}5\}($|[^}])/S";
-		/* 11 */ 	$chercher_raccourcis[]="/\{(ง|ยง)\{/S"; # ยง Pour gerer l'unicode aussi !
-		/* 12 */ 	$chercher_raccourcis[]="/\}(ง|ยง)\}/S";
-		/* 13 */ 	$chercher_raccourcis[]="/<-->/S";
-		/* 14 */ 	$chercher_raccourcis[]="/-->/S";
-		/* 15 */ 	$chercher_raccourcis[]="/<--/S";
-		/* 16 */ 	$chercher_raccourcis[]="/<==>/S";
-		/* 17 */ 	$chercher_raccourcis[]="/==>/S";
-		/* 18 */ 	$chercher_raccourcis[]="/<==/S";
-		/* 19 */ 	$chercher_raccourcis[]="/\([cC]\)/S";
-		/* 20 */ 	$chercher_raccourcis[]="/\([rR]\)/S";
-		/* 21 */ 	$chercher_raccourcis[]="/\([tT][mM]\)/S";
-		/* 22 */ 	$chercher_raccourcis[]="/\.\.\./S";
-
-		/*  1 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
-		/*  2 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
-		/*  3 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
-		/*  4 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
-		/*  5 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_2";
-		/*  6 */	$remplacer_raccourcis[]="$fin_intertitre_2\n\n\$1";
-		/*  7 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_3";
-		/*  8 */	$remplacer_raccourcis[]="$fin_intertitre_3\n\n\$1";
-		/*  9 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_4";
-		/* 10 */	$remplacer_raccourcis[]="$fin_intertitre_4\n\n\$1";
-		/* 9b */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_5";
-		/* 10b */	$remplacer_raccourcis[]="$fin_intertitre_5\n\n\$1";
-		/* 11 */	$remplacer_raccourcis[]="<span style=\"font-variant: small-caps\">";
-		/* 12 */	$remplacer_raccourcis[]="</span>";
-		/* 13 */	$remplacer_raccourcis[]="&harr;";
-		/* 14 */	$remplacer_raccourcis[]="&rarr;";
-		/* 15 */	$remplacer_raccourcis[]="&larr;";
-		/* 16 */	$remplacer_raccourcis[]="&hArr;";
-		/* 17 */	$remplacer_raccourcis[]="&rArr;";
-		/* 18 */	$remplacer_raccourcis[]="&lArr;";
-		/* 19 */	$remplacer_raccourcis[]="&copy;";
-		/* 20 */	$remplacer_raccourcis[]="&reg;";
-		/* 21 */	$remplacer_raccourcis[]="&trade;";
-		/* 22 */	$remplacer_raccourcis[]="&hellip;";
+	
+		// tous les elements block doivent etre introduits ici
+		// pour etre pris en charge par paragrapher
+	
+		// Definition des differents intertitres possibles, si pas deja definies
+		if (!function_exists('lire_config')) {
+			tester_variable('debut_intertitre', '<h3 class="spip">');
+			tester_variable('fin_intertitre', '</h3>');
+			tester_variable('debut_intertitre_2', '<h4 class="spip">');
+			tester_variable('fin_intertitre_2', '</h4>');
+			tester_variable('debut_intertitre_3', '<h5 class="spip">');
+			tester_variable('fin_intertitre_3', '</h5>');
+			tester_variable('debut_intertitre_4', '<h6 class="spip">');
+			tester_variable('fin_intertitre_4', '</h6>');
+			tester_variable('debut_intertitre_5', '<strong class="spip titraille5">');
+			tester_variable('fin_intertitre_5', '</strong>');
+		} else {
+			tester_variable('debut_intertitre', lire_config('bte/titraille1open','<h3 class="spip">'));
+			tester_variable('fin_intertitre', lire_config('bte/titraille1close','</h3>'));
+			tester_variable('debut_intertitre_2', lire_config('bte/titraille2open','<h4 class="spip">'));
+			tester_variable('fin_intertitre_2', lire_config('bte/titraille2close','</h4>'));
+			tester_variable('debut_intertitre_3', lire_config('bte/titraille3open','<h5 class="spip">'));
+			tester_variable('fin_intertitre_3', lire_config('bte/titraille3close','</h5>'));
+			tester_variable('debut_intertitre_4', lire_config('bte/titraille4open','<h6 class="spip">'));
+			tester_variable('fin_intertitre_4', lire_config('bte/titraille4close','</h6>'));
+			tester_variable('debut_intertitre_5', lire_config('bte/titraille5open','<strong class="spip titraille5">'));
+			tester_variable('fin_intertitre_5', lire_config('bte/titraille5close','</strong>'));
+		}
+	
+		tester_variable('toujours_paragrapher', false);
+	
+		global $debut_intertitre, $fin_intertitre;
+		global $debut_intertitre_2, $fin_intertitre_2;
+		global $debut_intertitre_3, $fin_intertitre_3;
+		global $debut_intertitre_4, $fin_intertitre_4;
+		global $debut_intertitre_5, $fin_intertitre_5;
+	
+		$chercher_raccourcis=array();
+		$remplacer_raccourcis=array();
+		global $BarreTypoEnrichie;
+		if (is_array($BarreTypoEnrichie))
+			foreach($BarreTypoEnrichie as $item) {
+				$chercher_raccourcis[]=$item['chercher'];					
+				$remplacer_raccourcis[]=$item['remplacer'];					
+			}
+	
+			/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]/S";
+			/* 2 */ 	$chercher_raccourcis[]="/[}][}][}]($|[^}])/S";
+			/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])\{1\{/S";
+			/* 4 */ 	$chercher_raccourcis[]="/\}1\}($|[^}])/S";
+			/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])\{2\{/S";
+			/* 6 */ 	$chercher_raccourcis[]="/\}2\}($|[^}])/S";
+			/* 7 */ 	$chercher_raccourcis[]="/(^|[^{])\{3\{/S";
+			/* 8 */ 	$chercher_raccourcis[]="/\}3\}($|[^}])/S";
+			/* 9 */ 	$chercher_raccourcis[]="/(^|[^{])\{4\{/S";
+			/* 10 */ 	$chercher_raccourcis[]="/\}4\}($|[^}])/S";
+			/* 9b */ 	$chercher_raccourcis[]="/(^|[^{])\{5\{/S";
+			/* 10b */ 	$chercher_raccourcis[]="/\}5\}($|[^}])/S";
+			/* 11 */ 	$chercher_raccourcis[]="/\{(ง|ยง)\{/S"; # ยง Pour gerer l'unicode aussi !
+			/* 12 */ 	$chercher_raccourcis[]="/\}(ง|ยง)\}/S";
+			/* 13 */ 	$chercher_raccourcis[]="/<-->/S";
+			/* 14 */ 	$chercher_raccourcis[]="/-->/S";
+			/* 15 */ 	$chercher_raccourcis[]="/<--/S";
+			/* 16 */ 	$chercher_raccourcis[]="/<==>/S";
+			/* 17 */ 	$chercher_raccourcis[]="/==>/S";
+			/* 18 */ 	$chercher_raccourcis[]="/<==/S";
+			/* 19 */ 	$chercher_raccourcis[]="/\([cC]\)/S";
+			/* 20 */ 	$chercher_raccourcis[]="/\([rR]\)/S";
+			/* 21 */ 	$chercher_raccourcis[]="/\([tT][mM]\)/S";
+			/* 22 */ 	$chercher_raccourcis[]="/\.\.\./S";
+	
+			/*  1 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
+			/*  2 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
+			/*  3 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
+			/*  4 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
+			/*  5 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_2";
+			/*  6 */	$remplacer_raccourcis[]="$fin_intertitre_2\n\n\$1";
+			/*  7 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_3";
+			/*  8 */	$remplacer_raccourcis[]="$fin_intertitre_3\n\n\$1";
+			/*  9 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_4";
+			/* 10 */	$remplacer_raccourcis[]="$fin_intertitre_4\n\n\$1";
+			/* 9b */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_5";
+			/* 10b */	$remplacer_raccourcis[]="$fin_intertitre_5\n\n\$1";
+			/* 11 */	$remplacer_raccourcis[]="<span style=\"font-variant: small-caps\">";
+			/* 12 */	$remplacer_raccourcis[]="</span>";
+			/* 13 */	$remplacer_raccourcis[]="&harr;";
+			/* 14 */	$remplacer_raccourcis[]="&rarr;";
+			/* 15 */	$remplacer_raccourcis[]="&larr;";
+			/* 16 */	$remplacer_raccourcis[]="&hArr;";
+			/* 17 */	$remplacer_raccourcis[]="&rArr;";
+			/* 18 */	$remplacer_raccourcis[]="&lArr;";
+			/* 19 */	$remplacer_raccourcis[]="&copy;";
+			/* 20 */	$remplacer_raccourcis[]="&reg;";
+			/* 21 */	$remplacer_raccourcis[]="&trade;";
+			/* 22 */	$remplacer_raccourcis[]="&hellip;";
+	}
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
@@ -155,52 +160,41 @@ function TypoEnluminee_pre_propre($texte) {
 }
 
 function TypoEnluminee_post_propre($texte) {
+	static $cherche1 = NULL;
+	static $remplace1 = NULL;
 
-	# Le remplacement des intertitres de premier niveau a deja ete effectue dans inc/texte.php
+	if ($cherche1===NULL) {
+		# Le remplacement des intertitres de premier niveau a deja ete effectue dans inc/texte.php
+		$cherche1 = array();
+		$remplace1 = array();
+		global $BarreTypoEnrichieBlocs;
+		if (is_array($BarreTypoEnrichieBlocs))
+			foreach($BarreTypoEnrichieBlocs as $item) {
+				$cherche1[]=$item['chercher'];					
+				$remplace1[]=$item['remplacer'];					
+			}
+	
+		$cherche1[] = /* 15 */ 	",\[/(.*)/\],Ums";
+		$cherche1[] = /* 17 */ 	",\[\|(.*)\|\],Ums";
+		$cherche1[] = /* 19 */ 	",\[\((.*)\)\],Ums";
+		$cherche1[] = /* 21 */ 	"/\[\*\*/S";
+		$cherche1[] = /* 21b */ 	"/\[\*/S";
+		$cherche1[] = /* 22 */	"/\*\]/S";
+		$cherche1[] = /* 23 */ 	"/\[\^/S";
+		$cherche1[] = /* 24 */	"/\^\]/S";
+		$cherche1[] = /* 40 */	"/@@acro@@([^@]*)@@([^@]*)@@acro@@/S";
+	
+		$remplace1[] = /* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>";
+		$remplace1[] = /* 17 */ 	"<div class=\"spip\" style=\"text-align:center;\">$1</div>";
+		$remplace1[] = /* 19 */ 	"<div class=\"texteencadre-spip spip\">$1</div>";
+		$remplace1[] = /* 21 */ 	"<strong class=\"caractencadre2-spip spip\">";
+		$remplace1[] = /* 21b */ 	"<strong class=\"caractencadre-spip spip\">";
+		$remplace1[] = /* 22 */	"</strong>";
+		$remplace1[] = /* 23 */ 	"<sup>";
+		$remplace1[] = /* 24 */	"</sup>";
+		$remplace1[] = /* 40 */	"<acronym title='$1' class='spip_acronym spip'>$2</acronym>";
+	}
 
-	# Intertitre de deuxieme niveau
-	/*global $debut_intertitre_2, $fin_intertitre_2;
-	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_2@@', $debut_intertitre_2, $texte);
-	$texte = ereg_replace('@@SPIP_fin_intertitre_2@@[[:space:]]*(</p>)?', $fin_intertitre_2, $texte);*/
-
-	# Intertitre de troisieme niveau
-	/*global $debut_intertitre_3, $fin_intertitre_3;
-	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_3@@', $debut_intertitre_3, $texte);
-	$texte = ereg_replace('@@SPIP_fin_intertitre_3@@[[:space:]]*(</p>)?', $fin_intertitre_3, $texte);*/
-
-	# Intertitre de quatrieme niveau
-	/*global $debut_intertitre_4, $fin_intertitre_4;
-	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_4@@', $debut_intertitre_4, $texte);
-	$texte = ereg_replace('@@SPIP_fin_intertitre_4@@[[:space:]]*(</p>)?', $fin_intertitre_4, $texte);*/
-
-	# Intertitre de cinquieme niveau
-	/*global $debut_intertitre_5, $fin_intertitre_5;
-	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_5@@', $debut_intertitre_5, $texte);
-	$texte = ereg_replace('@@SPIP_fin_intertitre_5@@[[:space:]]*(</p>)?', $fin_intertitre_5, $texte);*/
-
-	$cherche1 = array(
-		/* 15 */ 	",\[/(.*)/\],Ums",
-		/* 17 */ 	",\[\|(.*)\|\],Ums",
-		/* 19 */ 	",\[\((.*)\)\],Ums",
-		/* 21 */ 	"/\[\*\*/S",
-		/* 21b */ 	"/\[\*/S",
-		/* 22 */	"/\*\]/S",
-		/* 23 */ 	"/\[\^/S",
-		/* 24 */	"/\^\]/S",
-		/* 40 */	"/@@acro@@([^@]*)@@([^@]*)@@acro@@/S"
-	);
-
-	$remplace1 = array(
-		/* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>",
-		/* 17 */ 	"<div class=\"spip\" style=\"text-align:center;\">$1</div>",
-		/* 19 */ 	"<div class=\"texteencadre-spip spip\">$1</div>",
-		/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
-		/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
-		/* 22 */	"</strong>",
-		/* 23 */ 	"<sup>",
-		/* 24 */	"</sup>",
-		/* 40 */	"<acronym title='$1' class='spip_acronym spip'>$2</acronym>"
-	);
 	$texte = preg_replace($cherche1, $remplace1, $texte);
 	$texte = paragrapher($texte,$GLOBALS['toujours_paragrapher']); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
 	return $texte;
