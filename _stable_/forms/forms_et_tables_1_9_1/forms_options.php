@@ -31,6 +31,8 @@ $GLOBALS['spip_pipeline']['forms_input_champs'] = '';
 $GLOBALS['spip_pipeline']['forms_ajoute_styles'] = '';
 #modification des donnees apres saisie du formulaire
 $GLOBALS['spip_pipeline']['forms_pre_edition_donnee'] = '';
+$GLOBALS['spip_pipeline']['forms_valide_conformite_champ'] = '';
+
 
 #affichage des donnees
 $GLOBALS['spip_pipeline']['forms_calcule_valeur_en_clair'] = '';

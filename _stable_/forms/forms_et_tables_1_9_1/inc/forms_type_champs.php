@@ -138,6 +138,7 @@
 			include_spip("inc/forms");
 			$structure = Forms_structure($id_form);
 		}
+
 		foreach($structure as $champ=>$infos){
 			$type = $infos['type'];
 			if ($GLOBALS['spip_version_code']<1.92)
@@ -218,6 +219,15 @@
 					if (strlen($match) && !preg_match($match,$val))
 						$erreur[$champ] = _T("forms:champs_perso_invalide");
 				}
+				$erreur = pipeline('forms_valide_conformite_champ',array(
+					'args'=>array(
+						'champ'=>$champ,
+						'type'=>$type,
+						'infos'=>$infos,
+						'val'=>$val
+					),
+					'data'=>$erreur)
+				);
 			}
 		}
 		return $erreur;
