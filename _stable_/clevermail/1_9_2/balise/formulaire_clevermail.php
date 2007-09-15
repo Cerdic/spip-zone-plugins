@@ -8,6 +8,8 @@
 	 *
 	 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
 include_spip('phpmailer/class.phpmailer');
 
 function balise_FORMULAIRE_CLEVERMAIL ($p) {
