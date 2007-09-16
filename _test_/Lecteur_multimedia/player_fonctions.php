@@ -5,31 +5,40 @@ if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 	define('_DIR_PLUGIN_PLAYER',(_DIR_PLUGINS.end($p)."/"));
 }
 
-function Player_insert_head($flux){
-	$flux .= '<script type="text/javascript">var musicplayerurl="'._DIR_PLUGIN_PLAYER.'eraplayer_playlist.swf"</script>';
-	//par malchance, firefox2 fait peter jQuery si on le combine avec aflax, on revoit donc la copie.
-	//$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'AFLAX/aflax.js"></script>';
-	//$flux .= '<script type="text/javascript">var aflax = new AFLAX("'._DIR_PLUGIN_PLAYER.'AFLAX/aflax.swf");</script>';
+function Player_head(){
+	$flux = "";
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.js"></script>';
-	$flux .= '<script type="text/javascript"> 
-	soundManager.url = "'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.swf";
-	soundManager.consoleOnly = true;
-  	soundManager.debugMode = false; 
-	</script>';
-
+	$flux .= '<script type="text/javascript"><!--'
+	. 'var musicplayerurl="'._DIR_PLUGIN_PLAYER.'eraplayer_playlist.swf";'
+	. 'soundManager.url = "'._DIR_PLUGIN_PLAYER.'soundmanager/soundmanager2.swf";'
+	. 'soundManager.consoleOnly = true;'
+  . 'soundManager.debugMode = false;'
+	. '</script>';
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
-	$flux .= '<script type="text/javascript">
-	<!-- 
+	$flux .= '<script type="text/javascript"><!--
 	$(document).ready(function(){
-	soundManager.onload = function() {  
-  // soundManager is initialised, ready to use. Create a sound for this demo page.
- // soundManager.createSound("aDrumSound", "'._DIR_PLUGIN_PLAYER.'soundmanager/mpc/audio/SPLASH_1.mp3");
-  }
-	//Player_init("'._DIR_PLUGIN_PLAYER.'soundmanager/mpc/audio/AMB_SN13.mp3");
-	});
+	soundManager.onload = function() {'
+  //.  "//soundManager is initialised, ready to use. Create a sound for this demo page.\n"
+ 	//.  'soundManager.createSound("aDrumSound", "'._DIR_PLUGIN_PLAYER.'soundmanager/mpc/audio/SPLASH_1.mp3");'
+  . '}'
+	// . 'Player_init("'._DIR_PLUGIN_PLAYER.'soundmanager/mpc/audio/AMB_SN13.mp3");'
+	. '});
 	// --></script>';
-
 	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_PLAYER.'player.css" type="text/css" media="projection, screen, tv" />';
+	return $flux;
+}
+function Player_insert_head($flux){
+	if (!defined('_PLAYER_AFFICHAGE_FINAL') OR !_PLAYER_AFFICHAGE_FINAL)
+		$flux .= Player_head();
+	return $flux;
+}
+function Player_affichage_final($flux){
+	if (defined('_PLAYER_AFFICHAGE_FINAL') AND _PLAYER_AFFICHAGE_FINAL){
+		// inserer le head seulement si presente d'un rel='enclosure'
+		if ((strpos($flux,'rel="enclosure"')!==FALSE)){
+			$flux = str_replace('</head>',Player_head().'</head>',$flux);
+		}
+	}
 	return $flux;
 }
 
