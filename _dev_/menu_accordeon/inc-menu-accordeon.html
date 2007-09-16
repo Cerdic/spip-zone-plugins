@@ -1,7 +1,7 @@
 <div class="rubriques">
 <h2 class="menu-titre"><:rubriques:></h2>
 <ul id="listmenu">
-<li><a href="#URL_SITE_SPIP"[ class="(#ENV{id_rubrique}|?{'','on'})"]><:accueil_site:></a>
+<li><a href="#URL_SITE_SPIP/"[ class="(#ENV{id_rubrique}|?{'','on'})"]><:accueil_site:></a>
 [(#ENV{id_rubrique}|?{' ',''})<INCLURE {fond=inc-menu-accordeon-#CONFIG{menu-accordeon/type,rub}} {id_rubrique}>]
 [(#ENV{id_rubrique}|?{'',' '})<INCLURE {fond=inc-menu-accordeon-#CONFIG{menu-accordeon/type,rub}} >]
 </ul>
