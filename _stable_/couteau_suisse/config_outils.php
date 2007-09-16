@@ -28,8 +28,12 @@ add_variable( array(
 	'code:%s' => "\$fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
 if (!in_array(\$fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';",
 ));
-	// ici on a besoin d'une case input. La variable est : quota_cache
-	// a la toute premiere activation de l'outil, la valeur sera : $GLOBALS['quota_cache']
+add_variable( array(
+	'nom' => 'duree_cache',
+	'format' => 'nombre',
+	'defaut' => "24", // 1 jour
+	'code' => "define('_DUREE_CACHE_DEFAUT', %s*3600);",
+));
 add_variable( array(
 	'nom' => 'quota_cache',
 	'format' => 'nombre',
@@ -38,9 +42,8 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'SPIP_cache',
-	'code:options' => "%%radio_desactive_cache3%%\n%%quota_cache%%",
+	'code:options' => "%%radio_desactive_cache3%%\n%%quota_cache%%\n%%duree_cache%%",
 	'categorie' => 'admin',
-		'auteur' => '[C&eacute;dric MORIN->mailto:cedric.morin@yterium.com] (d&eacute;sactivation)'
 ));
 
 	// ici on a besoin d'une case input. La variable est : dossier_squelettes
@@ -547,7 +550,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'glossaire',
 	'categorie'	 => 'typo-corr',
-	'code:options' => '%%glossaire_limite%%',
+	'code:options' => "%%glossaire_limite%%",
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	// sans oublier les articles...
