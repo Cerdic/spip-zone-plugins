@@ -25,6 +25,7 @@ $spip_abonnements = array(
 						"id_abonnement" 	=> "int(10) unsigned NOT NULL auto_increment",
 						"libelle" 			=> "text NOT NULL",
 						"duree" 			=> "text NOT NULL",
+						"periode" 			=> "text NOT NULL",
 						"montant" 		=> "float NOT NULL default '0'",
 						"commentaire" 	=> "text NOT NULL",
 						"maj" 				=> "timestamp(14) NOT NULL"

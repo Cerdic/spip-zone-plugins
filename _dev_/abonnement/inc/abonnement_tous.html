@@ -80,10 +80,9 @@ $().ready(function() {
 		</div><div>
 		<label>Dur&eacute;e :</label> <input type="text" value="" name="abo_duree"/>
 		</div><div>
-		<label>Unit&eacute;e :</label>  <select name="abo_unitee">
-                                                    <option value="jour">Jours</option>
-                                                    <option value="mois">Mois</option>
-                                                    <option value="annee">Ann&eacute;e</option>
+		<label>P&eacute;riode :</label>  <select name="abo_unitee">
+                                                    <option value="jours">Jours</option>
+                                                    <option value="mois" selected="selected">Mois</option>
                                                 </select>
 		</div><div>
 		<label>Montant :</label> <input type="text" value="" name="abo_montant"/>
@@ -100,15 +99,21 @@ $().ready(function() {
 	<form action="#SELF" method="post">
 		<div>
 		<label>Libell&eacute; :</label><input type="text" value="#LIBELLE" name="abo_libelle"/>
-		</div><div>
+		</div>
+		
+
+		<div>
 		<label>Dur&eacute;e :</label> <input type="text" value="#DUREE" name="abo_duree"/>
-		</div><div>
-		<label>Unit&eacute;e :</label>  <select name="abo_unitee">
-                                                    <option value="jour" selected="selected">Jours</option>
-                                                    <option value="mois">Mois</option>
-                                                    <option value="annee">Ann&eacute;e</option>
-                                                </select>
-		</div><div>
+		</div>
+		
+		<div>
+		<label>P&eacute;riode :</label>  <select name="abo_unitee">
+                                                    <option value="jours">Jours</option>
+                                                    <option value="mois" selected="selected">Mois</option>
+                                         </select>
+		</div>
+		
+		<div>
 		<label>Montant :</label> <input type="text" value="#MONTANT" name="abo_montant"/>
 		</div><div class="textarea">
 		<label>Commentaire :</label> <textarea name="abo_commentaire">#COMMENTAIRE</textarea>
@@ -121,14 +126,15 @@ $().ready(function() {
 	
 	<table class="cadre-r">
 	<tr style="background-color : #E0E0E0 ;">
-	<td>ID</td><td>Libelle</td><td>Montant</td><td>Dur&eacute;e</td><td>Commentaire</td><td colspan="2">Action</td>
+	<td>ID</td><td>Libelle</td><td>Montant</td><td>Dur&eacute;e</td><td>P&eacute;riode</td><td>Commentaire</td><td colspan="2">Action</td>
 	</tr>
 	<BOUCLE_abos(SPIP_ABONNEMENTS)>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{'row','even'})]">
 	<td>#ID_ABONNEMENT</td>
 	<td>#LIBELLE</td>
 	<td>#MONTANT</td>
-	<td>#DUREE jours</td>
+	<td>#DUREE</td>
+	<td>#PERIODE</td>
 	<td>#COMMENTAIRE</td>
 	<td><a href="[(#SELF|parametre_url{'id_abonnement',#ID_ABONNEMENT})]"><img src="#CHEMIN{/images/edit-12.gif}" title="<:inscription2:editer_adherent:>"></a></td>
 		
