@@ -249,14 +249,7 @@ function exec_import_export(){
 							// on abonne l'auteur aux listes
 								if(is_array($list_abo)){
 									reset($list_abo);
-									while( list(,$val) = each($list_abo) ){										 
-										//$tmp_log .= "liste $val ";
-										$result = spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($val));
-
-										if(_request('suppl_abo') !='non')
-											spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($val).")");										 	
-										 
-									}																				 
+									spiplistes_ajout_auteur_aux_listes($id_auteur, $list_abo, 'non-change', 'valide');
 									$new_abonne++;
 								}else{
 								if(_request('suppl_abo') =='non'){

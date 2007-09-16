@@ -227,7 +227,7 @@ function spiplistes_idauteur_depuis_email($email) {
 }
 
 /* inscription directe - import 
- * @param $type_abo = 'html' ou 'texte'
+ * @param $type_abo = 'html' ou 'texte' ou 'non-change'
  * @param $statut = 'valide' ou 'a_valider'
  */
 function spiplistes_ajout_auteur_aux_listes($id_auteur, $ids_liste, $type_abo, $statut) {
@@ -236,7 +236,8 @@ function spiplistes_ajout_auteur_aux_listes($id_auteur, $ids_liste, $type_abo, $
   if ($statut != 'valide')
 	$statut = 'a_valider';
 
-  spiplistes_MaJ_auteur_elargi($id_auteur, $type_abo);
+  if ($type_abo != 'non-change')
+	  spiplistes_MaJ_auteur_elargi($id_auteur, $type_abo);
   
   if(!is_array($ids_liste)){
 	$ids_liste = array($ids_liste);
