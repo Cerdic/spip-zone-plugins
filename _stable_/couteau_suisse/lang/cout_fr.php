@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'SPIP_cache:nom' => 'SPIP et le cache&hellip;',
 	'SPIP_cache:description' => "#PUCE Par d&eacute;faut, SPIP calcule toutes les pages publiques et les place dans le cache afin d'en acc&eacute;l&eacute;rer la consultation. D&eacute;sactiver temporairement le cache peut aider au d&eacute;veloppement du site.[[D&eacute;sactiver le cache :->%radio_desactive_cache3%]]"
 		. "#PUCE Le cache occupe un certain espace disque et SPIP peut en limiter l'importance. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.[[Valeur du quota :->%quota_cache% Mo]]"
-		. "#PUCE Si la balise #CACHE n'est pas trouv&eacute;e, SPIP consid&egrave;re par d&eacute;faut que le cache d'une page a une dur&eacute;e de vie de 24 heures. Vous pouvez  ici modifier cette valeur.[[Dur&eacute;e du cache :->%duree_cache% heures]]",
+		. "#PUCE Si la balise #CACHE n'est pas trouv&eacute;e dans vos squelettes, SPIP consid&egrave;re par d&eacute;faut que le cache d'une page a une dur&eacute;e de vie de 24 heures. Vous pouvez ici modifier cette valeur.[[Dur&eacute;e du cache :->%duree_cache% heures]]",
 
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
 	'supprimer_numero:description' => "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.<br />Voici la syntaxe &agrave; utiliser dans le cadre d'un site multilingue : <code>1. <multi>My Title[fr]Mon Titre[de]Mein Titel</multi></code><br />Attention, cette fonctionnalit&eacute; ne sera pas prise en compte si votre squelette utilise les balises &eacute;toil&eacute;es : <code>#TITRE*</code> ou <code>#NOM*</code>",
@@ -305,7 +305,8 @@ _ Merci de votre compr&eacute;hension.",
 	
 // ---------------------------------------------------------------------------
 	'glossaire:nom' => 'Glossaire interne',
-	'glossaire:description' => "Gestion d'un glossaire interne li&#233; &#224; un groupe de mots-cl&#233;s nomm&#233; &laquo;&nbsp;Glossaire&nbsp;&raquo;. Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[Nombre maximal de liens par mot :->%glossaire_limite%]]
+	'glossaire:description' => "#PUCE Gestion d&rsquo;un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c&rsquo;est le groupe &quot;Glossaire&quot; qui sera utilis&eacute;.[[Groupe(s) utilis&eacute;(s) :->%glossaire_groupes%]]"
+		. "#PUCE Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[Nombre maximal de liens cr&#233;&#233;s :->%glossaire_limite% par mot-cl&#233;]]
 _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 
 // ---------------------------------------------------------------------------

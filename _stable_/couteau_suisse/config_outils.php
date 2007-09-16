@@ -542,6 +542,12 @@ add_outil( array(
 ));
 
 add_variable( array(
+	'nom' => 'glossaire_groupes',
+	'format' => 'chaine',
+	'defaut' => "Glossaire",
+	'code' => "\$GLOBALS['glossaire_groupes']=%s;",
+));
+add_variable( array(
 	'nom' => 'glossaire_limite',
 	'format' => 'nombre',
 	'defaut' => 0,
@@ -550,7 +556,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'glossaire',
 	'categorie'	 => 'typo-corr',
-	'code:options' => "%%glossaire_limite%%",
+	'code:options' => "%%glossaire_limite%%\n%%glossaire_groupes%%",
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	// sans oublier les articles...

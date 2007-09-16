@@ -6,6 +6,17 @@
 
 charger_generer_url();  # pour generer_url_mot()
 
+// on calcule ici la globale $GLOBALS['glossaire_groupes_type']
+$groupes = trim($GLOBALS['glossaire_groupes']);
+if(!strlen($groupes)) $groupes = _q('Glossaire');
+	else {
+		$groupes = explode(':', $groupes);
+		foreach($groupes as $i=>$g) $groupes[$i] = _q(trim($g));
+		$groupes = join(" OR type=", $groupes);
+	}
+$GLOBALS['glossaire_groupes_type'] = 'type=' . $groupes;
+unset($groupes);
+
 // compatibilite SPIP 1.91
 include_spip('inc/texte');
 if(!function_exists('nettoyer_chapo')) {
@@ -28,7 +39,7 @@ function glossaire_echappe_balises_callback($matches) {
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
-	$r = spip_query("SELECT id_mot, titre, texte FROM spip_mots WHERE type='Glossaire'");
+	$r = spip_query("SELECT id_mot, titre, texte FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type']);
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	while($mot = spip_fetch_array($r)) if ($mot['id_mot']<>$GLOBALS['id_mot'] && preg_match(",(\W)($mot[titre])(\W),i", $texte)) {
 //		$table[$mot[id_mot]] = "<abbr title=\"$mot[texte]\">$mot[titre]</abbr>";
