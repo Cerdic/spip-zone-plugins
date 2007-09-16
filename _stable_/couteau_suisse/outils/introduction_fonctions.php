@@ -41,18 +41,22 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 				// on coupe proprement...
 				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($chapo."\n\n\n".$texte), round(500*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
 			}
+			$racc = 'article';
 			break;
 		case 'breves':
 			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(300*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
+			$racc = 'breve';
 			break;
 		case 'forums':
 			$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
+			$racc = 'forum';
 			break;
 		case 'rubriques':
 			if (strlen($descriptif))
 				return propre($descriptif);
 			else
 				$result = PtoBR(propre(supprimer_tags($couper(cs_introduire($texte), round(600*_INTRODUCTION_LGR/100), _INTRODUCTION_CODE))));
+			$racc = 'rubrique';
 			break;
 	}
 	// si les points de suite ont ete ajoutes
@@ -65,8 +69,8 @@ function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 		// si les points de suite sont cliquables
 		if ($id && _INTRODUCTION_LIEN == 1) {
 			if (substr($intro_suite, 0, 6) == '<br />') 
-				$intro_suite = propre("<br />[".substr($intro_suite, 6)."->art$id]");
-				else $intro_suite = propre("&nbsp;[{$intro_suite}->art$id]");
+				$intro_suite = propre("<br />[".substr($intro_suite, 6)."->$racc$id]");
+				else $intro_suite = propre("&nbsp;[{$intro_suite}->$racc$id]");
 		}
 		$GLOBALS['toujours_paragrapher'] = $mem; 
 		$result = str_replace(_INTRODUCTION_CODE, $intro_suite, $result);
