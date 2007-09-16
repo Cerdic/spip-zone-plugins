@@ -4,6 +4,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('cout_lancement');
 
+// Compatibilite des autorisations pour SPIP 1.91
+if ($GLOBALS['spip_version_code']<1.92) {
+	function autoriser() {
+		return $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
+	}
+}
+
 /***********
  * INSTALL *
  ***********/
