@@ -96,7 +96,7 @@ function jeux_pendu($texte, $indexJeux) {
   jeux_config_init($images, false);
   $i=1; $c=0; $js2=false;
   $extremes = jeux_config('indices')?'true':'false'; // Affiche-t-on les lettres extremes?
-  $js="\n\tExtremes[$indexJeux]=$extremes;\n\tPaths[$indexJeux]='$path';\n\tImages[$indexJeux]=new Array(\n\t";
+  $js="\n\tpendu_Extremes[$indexJeux]=$extremes;\n\tpendu_Paths[$indexJeux]='$path';\n\tpendu_Images[$indexJeux]=new Array(\n\t";
   while(jeux_config($i)) {
     $images = preg_split('/\s*,\s*/', jeux_config($i++));
 	$j=1; 
@@ -104,13 +104,13 @@ function jeux_pendu($texte, $indexJeux) {
 	$c = max($x, count($images));
   } $i-=2;
   jeux_config_set('nb_images',$c);
-  $js .= join(",\n\t",$js2) . "\n\t);\n\tnb_Images[$indexJeux]=$c;\n\tnb_Pendus[$indexJeux]=$i;";
+  $js .= join(",\n\t",$js2) . "\n\t);\n\tnb_pendu_Images[$indexJeux]=$c;\n\tnb_Pendus[$indexJeux]=$i;";
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= pendu_titre($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_PENDU) $mots = jeux_liste_mots_maj($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
   }
-  $js .= "\n\tMots[$indexJeux]=new Array('".join("','",$mots)."');";
+  $js .= "\n\tpendu_Mots[$indexJeux]=new Array('".join("','",$mots)."');";
   $html .= pendu_pendu($js, $indexJeux);
   return jeux_form_debut('pendu', $indexJeux).$html.jeux_form_fin();
 }
