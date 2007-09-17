@@ -13,7 +13,7 @@
 	
 ]
 
-<BOUCLE_auteur(AUTEURS){id_auteur=(#ENV{id})}>
+<BOUCLE_auteur(AUTEURS){tous}{id_auteur=(#ENV{id})}>
 	<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
 		#SET{nom_complet,#ARRAY{0}}
 		[(#PRENOM|?{' '})
