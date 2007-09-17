@@ -146,7 +146,7 @@ $spip_forms_articles = array(
 	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_forms_articles_key = array(
-	"KEY id_form" 	=> "id_form",
+	"PRIMARY KEY" 	=> "id_form, id_article",
 	"KEY id_article" => "id_article");
 
 $tables_auxiliaires['spip_forms_articles'] = array(
@@ -159,7 +159,7 @@ $spip_forms_donnees_articles = array(
 	"article_ref" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_forms_donnees_articles_key = array(
-	"KEY id_donnee" 	=> "id_donnee",
+	"PRIMARY KEY" 	=> "id_donnee, id_article",
 	"KEY id_article" => "id_article");
 
 $tables_auxiliaires['spip_forms_donnees_articles'] = array(
@@ -172,7 +172,7 @@ $spip_forms_donnees_rubriques = array(
 	"id_rubrique" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_forms_donnees_rubriques_key = array(
-	"KEY id_donnee" 	=> "id_donnee",
+	"PRIMARY KEY" 	=> "id_donnee, id_rubrique",
 	"KEY id_rubrique" => "id_rubrique");
 
 $tables_auxiliaires['spip_forms_donnees_rubriques'] = array(
@@ -186,7 +186,7 @@ $spip_forms_donnees_donnees = array(
 	"id_donnee_liee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL"	);
 
 $spip_forms_donnees_donnees_key = array(
-	"KEY id_donnee" 	=> "id_donnee",
+	"PRIMARY KEY" 	=> "id_donnee, id_donnee_liee",
 	"KEY id_donnee_liee" => "id_donnee_liee");
 
 $tables_auxiliaires['spip_forms_donnees_donnees'] = array(
@@ -198,7 +198,7 @@ $spip_forms_donnees_auteurs = array(
 	"id_auteur" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_forms_donnees_auteurs_key = array(
-	"KEY id_donnee" 	=> "id_donnee",
+	"PRIMARY KEY" 	=> "id_donnee, id_auteur",
 	"KEY id_auteur" => "id_auteur");
 
 $tables_auxiliaires['spip_forms_donnees_auteurs'] = array(
@@ -236,13 +236,6 @@ $table_des_tables['forms']='forms';
 $table_des_tables['forms_champs'] = 'forms_champs';
 $table_des_tables['forms_champs_choix'] = 'forms_champs_choix';
 $table_des_tables['forms_donnees']='forms_donnees';
-$table_des_tables['forms_donnees_champs']='forms_donnees_champs';
-$table_des_tables['forms_articles']='forms_articles';
-$table_des_tables['forms_donnees_articles']='forms_donnees_articles';
-$table_des_tables['forms_donnees_auteurs']='forms_donnees_auteurs';
-$table_des_tables['forms_donnees_rubriques']='forms_donnees_rubriques';
-$table_des_tables['documents_donnees']='documents_donnees';
-$table_des_tables['forms_donnees_donnees']='forms_donnees_donnees';
 
 global  $exceptions_des_jointures;
 $exceptions_des_jointures['type_form'] = array('spip_forms', 'type_form');
