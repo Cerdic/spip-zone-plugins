@@ -289,6 +289,21 @@
 			echo "forms update @ 0.38<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.38,'non');			
 		}
+		if ($current_version<0.39){
+			spip_query("ALTER TABLE `spip_forms_articles` DROP INDEX `id_form`");
+			spip_query("ALTER TABLE `spip_forms_articles` ADD PRIMARY KEY ( `id_form` , `id_article` )");
+			spip_query("ALTER TABLE `forms_donnees_articles` DROP INDEX `id_donnee`");
+			spip_query("ALTER TABLE `forms_donnees_articles` ADD PRIMARY KEY ( `id_donnee` , `id_article` )");
+			spip_query("ALTER TABLE `spip_forms_rubriques` DROP INDEX `id_donnee`");
+			spip_query("ALTER TABLE `spip_forms_rubriques` ADD PRIMARY KEY ( `id_donnee` , `id_rubrique` )");
+			spip_query("ALTER TABLE `forms_donnees_donnees` DROP INDEX `id_donnee`");
+			spip_query("ALTER TABLE `forms_donnees_donnees` ADD PRIMARY KEY ( `id_donnee` , `id_donnee_liee` )");
+			spip_query("ALTER TABLE `forms_donnees_auteurs` DROP INDEX `id_donnee`");
+			spip_query("ALTER TABLE `forms_donnees_auteurs` ADD PRIMARY KEY ( `id_donnee` , `id_auteur` )");
+			echo "forms update @ 0.39<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.39,'non');
+		}
+
 		ecrire_metas();
 	}
 	
