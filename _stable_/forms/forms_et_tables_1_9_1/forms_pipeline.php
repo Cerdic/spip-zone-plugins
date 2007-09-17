@@ -17,6 +17,8 @@
 	}
 
 	function Forms_ajouter_boutons($boutons_admin) {
+		if ($GLOBALS['spip_version_code']<1.92)
+			include_spip('inc/autoriser_compat');
 		if (autoriser('administrer','form',0)) {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
