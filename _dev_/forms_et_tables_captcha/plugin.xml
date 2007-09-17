@@ -6,7 +6,7 @@
 	<etat>dev</etat>
 	<description>
 	Ajout d'un captcha pour le plugin Forms et tables
-	Cliquez ici pour configurer [ecrire/?exec=cfg&cfg=captcha->./?exec=cfg&cfg=captcha]
+	Cliquez ici pour configurer [ecrire/?exec=cfg&amp;cfg=captcha->./?exec=cfg&amp;cfg=captcha]
         Adaptation de [->http://www.atelierphp5.com/un-captcha-accessible.html]
 	</description>
 	<lien>http://</lien>
