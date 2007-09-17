@@ -12,12 +12,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_CAPTCHA2',(_DIR_PLUGINS.end($p)));
-
 //
 // surcharge des balises FORMULAIRE_SITE pour integrer le captcha
 // 
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));   // surcharge plugin
+define('_DIR_PLUGIN_CAPTCHA2',(_DIR_PLUGINS.end($p))); // surcharge plugin
+
 
 // Le contexte indique dans quelle rubrique le visiteur peut proposer le site
 
@@ -44,12 +44,12 @@ function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 
 // http://doc.spip.org/@balise_FORMULAIRE_SITE_dyn
 function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
-  session_start();
+  session_start();                                           // surcharge plugin
 
 	if ($nom = _request('nom_site')) {
 	  // Captcha
-	  if (_request('captcha2')!=$_SESSION['captcha2']) 
-	    $message_erreur = _T("captcha2:erreur_captcha");
+	  if (_request('captcha2')!=$_SESSION['captcha2'])         // surcharge plugin
+	    $message_erreur = _T("captcha2:erreur_captcha");       // surcharge plugin
 
 		// Tester le nom du site
 		if (strlen ($nom) < 2)
@@ -78,8 +78,8 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 			'message_erreur' => $message_erreur,
 			'nom_site' => $nom,
 			'url_site' => $url ? $url : 'http://',
-			'descriptif_site' => $desc,			
-			'url_plugin' => _DIR_PLUGIN_CAPTCHA2
+			'descriptif_site' => $desc,			                   
+			'url_plugin' => _DIR_PLUGIN_CAPTCHA2               // surcharge plugin
 		)
 	);
 

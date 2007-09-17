@@ -15,10 +15,9 @@
 	  <input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" value="#ENV{url_site}" size="30" /></p>
 	<p><label for="description_site"><:form_prop_description:></label>
 	  <textarea class="forml" name="description_site" id="description_site" rows="5" cols="40">#ENV{descriptif_site}</textarea></p>
-  <!-- captcha2 --><p><label for="captcha">Captcha</label>
-	<p><img id="imgCaptcha" src="#ENV{url_plugin}/create_image.php?uri=#ENV{self}&amp;format=jpg" /></p> 
-	<input type="text" class="forml" name="captcha2" id="captcha2" value="" size="10" />
-  </p>
+  <!-- captcha2 --><p><label for="captcha2">Captcha</label>
+  <br /><img id="imgCaptcha" src="#ENV{url_plugin}/create_image.php?uri=#ENV{self}&amp;format=jpg" alt="captcha" /><br /> 
+	<input type="text" class="forml" name="captcha2" id="captcha2" value="" size="10" /></p>
   <p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>	
 	</fieldset>
 </form>

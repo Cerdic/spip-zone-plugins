@@ -15,10 +15,9 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/GPL
 	</etat>
 	
 	<description>
-   Surcharge les formulaires de SPIP pour leur ajoutant des [Captchas->http://fr.wikipedia.org/wiki/Captcha] pour limiter le spam
+   Surcharge les formulaires de SPIP en leur ajoutant des [Captchas->http://fr.wikipedia.org/wiki/Captcha] pour limiter le spam
    
-Pour l'instant seul {{#FORMULAIRE_SITE}} est surcharg&eacute;,
-_ les autres &agrave; venir bientot ....
+Pour l'instant seuls {{#FORMULAIRE_FORUM}},{{#FORMULAIRE_SITE}} sont disponibles. Les autres formulaires &agrave; venir bientot ....
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	
