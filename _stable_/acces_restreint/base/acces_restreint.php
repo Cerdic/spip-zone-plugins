@@ -31,7 +31,7 @@ $spip_zones_auteurs = array(
 	"id_auteur" 	=> "bigint(21) NOT NULL");
 
 $spip_zones_auteurs_key = array(
-	"KEY id_zone" 	=> "id_zone",
+	"PRIMARY KEY" 	=> "id_zone, id_auteur",
 	"KEY id_auteur" => "id_auteur");
 
 $tables_auxiliaires['spip_zones_auteurs'] = array(
@@ -43,7 +43,7 @@ $spip_zones_rubriques = array(
 	"id_rubrique" 	=> "bigint(21) NOT NULL");
 
 $spip_zones_rubriques_key = array(
-	"KEY id_zone" 	=> "id_zone",
+	"PRIMARY KEY" 	=> "id_zone, id_rubrique",
 	"KEY id_rubrique" => "id_rubrique");
 
 $tables_auxiliaires['spip_zones_rubriques'] = array(
@@ -54,7 +54,7 @@ $tables_auxiliaires['spip_zones_rubriques'] = array(
 
 global $tables_jointures;
 $tables_jointures['spip_auteurs'][] = 'zones_auteurs';
-$tables_jointures['spip_zones']['id_auteur'] = 'zones_auteurs';
+$tables_jointures['spip_zones'][] = 'zones_auteurs';
 
 $tables_jointures['spip_rubriques'][] = 'zones_rubriques';
 $tables_jointures['spip_zones'][] = 'zones_rubriques';
@@ -63,7 +63,5 @@ $tables_jointures['spip_zones'][] = 'zones_rubriques';
 
 global $table_des_tables;
 $table_des_tables['zones']='zones';
-$table_des_tables['zones_rubriques']='zones_rubriques';
-$table_des_tables['zones_auteurs']='zones_auteurs';
 
 ?>
