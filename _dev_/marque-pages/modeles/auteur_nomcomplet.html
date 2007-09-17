@@ -17,13 +17,13 @@
 	<BOUCLE_elargi(AUTEURS_ELARGIS){id_auteur}>
 		#SET{nom_complet,#ARRAY{0}}
 		[(#PRENOM|?{' '})
-			[(#GET{nom_complet}|array_push{#PRENOM}|vide)]
+			[(#SET{nom_complet,[(#GET{nom_complet}|push{#PRENOM})]})]
 		]
 		[(#NOM_FAMILLE|?{' ',''})
-			[(#GET{nom_complet}|array_push{#NOM_FAMILLE}|vide)]
+			[(#SET{nom_complet,[(#GET{nom_complet}|push{#NOM_FAMILLE})]})]
 		]
 		[(#NOM_FAMILLE|?{'',' '})
-			[(#GET{nom_complet}|array_push{#_auteur:NOM}|vide)]
+			[(#SET{nom_complet,[(#GET{nom_complet}|push{#_auteur:NOM})]})]
 		]
 	</BOUCLE_elargi>
 		#SET{nom_complet,#ARRAY{#NOM}}
