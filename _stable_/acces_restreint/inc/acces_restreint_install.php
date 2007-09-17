@@ -35,7 +35,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				echo "AccesRestreint@0.2<br />";
 				ecrire_meta($nom_meta_base_version,$current_version=0.2,'non');
 			}
-			if ($current_version<0.3	){
+			if ($current_version<0.3){
 				spip_query("ALTER TABLE `zones_auteurs` DROP INDEX `id_zone`");
 				spip_query("ALTER TABLE `zones_auteurs` ADD PRIMARY KEY ( `id_zone` , `id_auteur` )");
 				spip_query("ALTER TABLE `zones_rubriques` DROP INDEX `id_zone`");
