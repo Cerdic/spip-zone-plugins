@@ -35,7 +35,8 @@
 <legend>
 	<:forms:cfg_inserer_head:>
 </legend>
-<p><:forms:cfg_inserer_head_texte:><br />
+<p><:forms:cfg_inserer_head_texte:></p>
+<div>
 <ul>
 <li>#CHEMIN{spip_forms.css}</li>
 <li>#CHEMIN{donnee_voir.css}</li>
@@ -47,9 +48,10 @@
 <label for='inserer_head_1'><:forms:cfg_activer:></label><br/>
 <input type="radio" name="inserer_head" value="0" [checked="(#ENV{inserer_head,1}?{'',checked})"] id="inserer_head_0" />
 <label for='inserer_head_0'><:forms:cfg_desactiver:></label>
-</p>
+</div>
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
 </div>
+</fieldset>
 </form>
