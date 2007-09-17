@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Captcha 2
+	</nom>
+	<icon>img/logo_captcha2.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+ 	[erational->http://www.erational.org] 
+_ &#169; 2007 - Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	dev
+	</etat>
+	
+	<description>
+   Surcharge les formulaires de SPIP pour leur ajoutant des [Captchas->http://fr.wikipedia.org/wiki/Captcha] pour limiter le spam
+   
+Pour l'instant seul {{#FORMULAIRE_SITE}} est surcharg&eacute;,
+_ les autres &agrave; venir bientot ....
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	
+	<prefix> 
+	captcha2
+	</prefix>
+	
+</plugin>
