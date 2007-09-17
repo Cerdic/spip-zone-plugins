@@ -59,7 +59,7 @@
 		
 		<B_auteur>
 			<:par_auteur:>
-		<BOUCLE_auteur(AUTEURS){id_auteur=#_marquepages:ID_AUTEUR}>
+		<BOUCLE_auteur(AUTEURS){tous}{id_auteur=#_marquepages:ID_AUTEUR}>
 			<a href="#URL_AUTEUR">
 				[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:marquepages:vous:>})]
 				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' '})[(#MODELE{auteur_nomcomplet}{id=#ID_AUTEUR})]]
