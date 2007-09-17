@@ -1,0 +1,123 @@
+[(#REM)<!-- D�but de 'texte + forum' par defaut 1er page ou si il y a textforum=1 dans l'url 
+	appel par INCLURE { fond=inc-walma_txtforum}{id_article}{repondre}{id_forum}>
+-->]
+
+
+ <BOUCLE_article_txt(ARTICLES){id_article}{lang_select=non}>
+
+[(#REM) si au moins il y a du texte ou si forum est activé] 
+	[(#TEXTE|?{
+	<div class="ajoutextforum">
+	,
+	[(#PARAMETRES_FORUM|?{<div class="ajoutextforum">})]
+	})]
+
+[(#REM)<!--par defaut si pas textforum bouton forum galerie si forum activ�-->]
+			[(#PARAMETRES_FORUM|?{'  ',''})
+			 <a href="[(#SELF|parametre_url{repondre,'oui'}|parametre_url{id_forum,#ID_FORUM})]#form" class="boutonforum">
+			  <:repondre_article:></a><br class="nettoyeur" />] 
+			 
+	[(#REM)<!-- Titre et Texte de l'article si texte existe-->]
+	[(#TEXTE|?{
+			[<img src="(#LOGO_ARTICLE||image_reduire{200}|extraire_attribut{src})" [height="(#LOGO_ARTICLE||image_reduire{200}|hauteur)"] [width="(#LOGO_ARTICLE||image_reduire{200}|largeur)"] alt="[(#TITRE|supprimer_numero)]" class="logoarticle" />]
+			<div class="cartouche">
+				[<h2>(#SURTITRE)</h2>]
+				[<h1 class="titre">(#TITRE|supprimer_numero)</h1>]
+				[<h2>(#SOUSTITRE)</h2>]
+			</div>
+		<div class="texte">
+		[<div class="chapo">(#CHAPO)</div>]
+		[(#TEXTE|reduire_image{400}|justifier)]
+		[<div class="ps">(#PS)</div>]
+		[<div class="notes">(#NOTES)</div>]
+		</div>
+	,''} )]
+
+	
+ <BOUCLE_article_testforum(ARTICLES){accepter_forum!=non}{id_article}{lang_select=non}>
+[(#REM)<!-- Debut Forum de la galerie si non désactivé via l'article-->]
+<B_forums>
+
+<div class="forumgalerie"><!--ensemble des threads --> 
+	<BOUCLE_forums(FORUMS){id_article}{par date}{inverse}>
+		  <div class="thread"><!--thread fond gris-->
+		  <div class="guillemet">&ldquo;</div>
+			  <div class="topthread"> 
+			  <a name="forum#ID_FORUM" id="forum#ID_FORUM"></a>
+			  <strong>[(#TITRE|supprimer_numero)]</strong>
+			  <span>[ (#DATE|affdate)][ (#DATE|heures)H][(#DATE|minutes)]
+			  		<BOUCLE_auturs(AUTEURS){nom=#NOM}>
+					<a href="#URL_AUTEUR">[  (#NOM)]</a>
+					</BOUCLE_auturs>
+					</B_auturs>
+					[  (#NOM)] 
+					<//B_auturs>
+
+			  [ <cite><a href="(#URL_SITE)">#NOM_SITE</a>]</cite></span>
+			  </div>
+		  	<div class="topthreadtxt">#TEXTE</div>
+					<B_forums_fils>
+								<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+									 <div class="fil"><!--fil du thread--> 
+									 	<div class="topfil"> 
+										   <a name="forum#ID_FORUM" id="forum#ID_FORUM"></a>
+										  <strong>[(#TITRE|supprimer_numero)]</strong> 
+										 	<span>[ Le (#DATE|affdate)][ (#DATE|heures)H][(#DATE|minutes)]
+					<BOUCLE_auteurs(AUTEURS){nom=#NOM}>
+					<a href="#URL_AUTEUR">[  (#NOM)]</a>
+					</BOUCLE_auteurs>
+					</B_auteurs>
+					[  (#NOM)] 
+					<//B_auteurs>
+											
+										   	[ <cite><a href="(#URL_SITE)">#NOM_SITE</a>]</cite></span>
+									 	</div>
+									 <div class="filtxt">#TEXTE</div>
+									 </div> 
+														<BOUCLE_forums_boucle(boucle_forums_fils)></BOUCLE_forums_boucle> 
+								</BOUCLE_forums_fils>  
+					</B_forums_fils>
+					
+					[(#REM) <!-- spip mismo <a href="[(#PARAMETRES_FORUM{url_reponse_forum})]"-->] 
+					<!-- #ID_FORUM-->
+					<div class="reponse"><a href="[(#SELF|parametre_url{repondre,'oui'}|parametre_url{id_forum,#ID_FORUM})]#form"><:repondre_message:></a></div>
+				</div><!--fin du thread--> 
+	</BOUCLE_forums>
+</div><!--fin ensemble des threads--> 
+</B_forums>
+ </BOUCLE_article_testforum>
+
+[(#REM)<!--formulaire si dans url il y a repondre-->]
+[(#ENV{repondre}|?{' ',''})
+<div class="formforum" id="form">[(#FORMULAIRE_FORUM{#SELF|parametre_url{id_forum,#ENV{id_forum}}})]</div>]
+ 
+
+[(#REM)<!-- Fin Forum de la galerie -->]
+	</div>
+	
+	
+</BOUCLE_article_txt>
+ 
+[(#REM)]<!-- Fin de l'ajout texte de l'article+forum <:info_pas_de_forum:>-->
+ 
+<BOUCLE_totalforums(FORUMS){id_article}{par date} {inverse}>
+</BOUCLE_totalforums> 
+
+[(#REM)<!--si article et javascript d�sactiv�, pour �conomiser le rechargement de 'texte + forum' � chaque image, on les propose via un lien-->] 
+[(#ENV{id_article}|?{
+	[(#ENV{'textforum'}|=={x}|?{
+	
+			[(#_totalforums:TOTAL_BOUCLE|>{0}|?{
+			<!-- il y a des messages dans ce cas on affiche le bouton voir plus-->
+			<div class="ajoutextforum">
+			<a href="[(#SELF|parametre_url{'textforum',1})]" class="boutonforum" style="position:relative; float:right;">
+			  <:walma:more_info:></a>
+			</div><br class="clearw" />
+			,
+			[(#REM)<!--sinon test si forum activ�-->] 
+			[(#PARAMETRES_FORUM|?{'  ',''}) 
+			<div class="ajoutextforum"><a href="[(#SELF|parametre_url{repondre,'oui'}|parametre_url{id_forum,#ID_FORUM})]#form" class="boutonforum">
+ 			<:repondre_article:></a></div><br class="clearw" />] 
+			})] 
+	,<!--donc on est sur la page accueil de la galerie-->})] 
+,<!--on a pas article dans url on affiche rien-->})]

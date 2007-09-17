@@ -1,0 +1,55 @@
+[<!--(#REM) permet de ne pas afficher les boutons de recalcul-->]#HTTP_HEADER{Content-Type: text/html;  charset=#CHARSET}
+[(#REM)<!--Les SET quelmode et dim se finissent par les jeux par defaut au cas ou cfg ne soit pas actif-->]
+[(#SET{quelmode,[(#ENV{mode,#CONFIG{walma/walma_mode,droite}})]})]
+[(#SET{dim,#CONFIG{walma/walma_dim,800}})]
+[(#SET{dimvign,[(#EVAL{[(#GET{dim})]*12.4/100}|round)]})]
+[(#SET{paramuri,[(#SELF|parametre_url{'mode',''}|parametre_url{id_document,''}|parametre_url{'diapo',''}|parametre_url{'textforum',''}|parametre_url{'recherche',#RECHERCHE})]})]
+[<!--(#REM)  on tri les documents par id_article lorsque plusieurs articles sont affiches sinon par titre-->]
+[(#SET{queltri,[(#ENV{id_article}|?{'titre','id_article'})]})]
+[<!--(#REM)  on recup l'array des articles -->]
+[(#SET{arrayarticles,#ENV**{arrayarts}})]
+[(#SET{arraywalma,[(#NOOP|arrayarticles{#ENV{id_article},#ENV{id_rubrique}})]})]
+[(#GET{arrayarticles}|=={''}|?{[(#SET{arrayarticles,#GET{arraywalma}})]})]
+ 
+[<!--(#REM) si aucun resultat renvoye on dit bonsoir)-->]
+		[<a href="#SELF" onclick='history.back()' id="noresult">
+		  (#GET{arrayarticles}|=={''}|?{<strong>#RECHERCHE</strong><br/> <:walma:no_result:>})
+		</a>]
+		
+[<!--(#REM) lors du mode mosaic la pagination des vignettes sera de 60 en 60,  sinon on demande une pagination de 6 en 6, si mode image on vide l'array ce qui �vite le calcul des vignettes-->]
+<B_total>
+	[(#SET{maximum,[(#_total:TOTAL_BOUCLE|<={60}|?{#_total:TOTAL_BOUCLE,60})]})]
+	#SET{combien,#GET{quelmode}|=={mosaic}|?{#GET{maximum},6}}
+	[(#ENV{mode}|=={image}|?{[(#SET{arrayarticles,''})]})]
+<BOUCLE_total(DOCUMENTS){id_article IN #GET{arrayarticles}}{recherche?}{mode=document}{extension IN png,jpg,gif}>
+</BOUCLE_total>
+	
+<B_vignettes>
+		<div class="compteurvignettes">
+		[(#PAGINATION{walma}|sinon{ #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:walma:images:>,<:walma:image:>})]})]
+		</div>
+<ul id="blocjs">
+	<BOUCLE_vignettes(DOCUMENTS documents_articles){id_article IN #GET{arrayarticles}}{par #GET{queltri}}{recherche?}{mode=document}{extension IN png,jpg,gif}{pagination #GET{combien}}>
+		<li [(#ENV{debut_image}|!={''}|?{[(#ENV{debut_image}|=={#EVAL{#COMPTEUR_BOUCLE-1}}|?{class="vigneton"})]})]>
+			<a id="#EVAL{#COMPTEUR_BOUCLE-1}"
+			href="[(#GET{paramuri}|parametre_url{id_document,#ID_DOCUMENT}|parametre_url{portfolio,#ID_ARTICLE}|parametre_url{'mode',[(#GET{quelmode}|=={mosaic}|?{"image",[(#GET{quelmode})]})]}|parametre_url{'debut_image',#EVAL{#COMPTEUR_BOUCLE-1}})]"
+			title="[(#TITRE|supprimer_numero|couper{80}|texte_backend)]">
+			<img src="[(#FICHIER|image_reduire{[(#GET{dimvign})]}|extraire_attribut{src}|url_absolue)]"
+			width="[(#FICHIER|image_reduire{[(#GET{dimvign})]}|largeur)]px"
+			[(#REM) <!--evite explosion image si la reduction n a pas ete calculee correctement sinon on met bien le height, style supp pour joli texte-->]
+			[(#FICHIER|image_reduire{[(#GET{dimvign})],[(#GET{dimvign})]}|hauteur|>{[(#GET{dimvign})]}|?{
+			style="width:[(#GET{dimvign})]px; 
+			[(#HAUTEUR|>={#LARGEUR}|?{[margin-bottom:(#EVAL{[(#GET{dimvign})]*7/100})px;]})]"
+			,
+			height="[(#FICHIER|image_reduire{[(#GET{dimvign})]}|hauteur)]px"
+			style="[(#HAUTEUR|>={#LARGEUR}|?{[margin-bottom:(#EVAL{[(#GET{dimvign})]*7/100})px;]})]"
+			})]
+			alt="#TITRE"  />
+			</a>
+			<span>[(#TITRE|supprimer_numero)]</span>
+			<cite>#URL_DOCUMENT</cite>
+		</li>
+	</BOUCLE_vignettes>
+</ul>
+		<br class="nettoyeur" />
+</B_vignettes>

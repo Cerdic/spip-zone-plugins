@@ -1,0 +1,44 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Walma_cfg
+	</nom>
+	<auteur>
+	contact-elastick.net
+	<multi> 
+	[fr]&copy;  2007 - Distribu&eacute; sous licence GNU/LGPL 
+	[en]distributed under GNU/GPL licence 
+	</multi> 
+	</auteur> 
+<version> 
+3.5
+</version>
+<icon>images/walma.png</icon>
+	<etat>
+		test
+	</etat>
+	<description>
+		<h4>Galeries photographiques param&eacute;trables</h4>
+		
+Walma cr&eacute;&eacute;e des galeries &agrave; partir des images jointes &agrave; vos articles ou lors d'une recherche.
+
+_ Il suffit ensuite de se rendre sur [?page=walma->../?page=walma]
+
+_ le plugin [CFG->http://files.spip.org/spip-zone/cfg.zip] est nécessaire pour [configurer walma->../ecrire/?exec=cfg&amp;cfg=walma]
+
+_ Explications et forum voir [->http://elastick.net/?id_article=51]
+	</description>
+	<lien>http://www.spip-contrib.net/Presentation-de-Walma</lien>
+	<prefix>
+walma
+	</prefix>
+	<recommande id="cfg" version='[1.0.5;]' src="http://files.spip.org/spip-zone/cfg.zip" />
+	<fonctions>
+		walma_fonctions.php
+	</fonctions>
+	<pipeline>
+		<nom>header_prive</nom>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
+</plugin>

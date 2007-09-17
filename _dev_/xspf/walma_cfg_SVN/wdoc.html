@@ -1,0 +1,41 @@
+[<!--(#REM) permet de ne pas afficher les boutons de recalcul-->]#HTTP_HEADER{Content-Type: text/html;  charset=#CHARSET}
+[(#REM)<!--Les SET quelmode et dim se finissent par les jeux par defaut au cas ou cfg ne soit pas actif-->]
+[(#SET{quelmode,[(#ENV{mode,#CONFIG{walma/walma_mode,droite}})]})]
+[(#SET{dim,#CONFIG{walma/walma_dim,800}})]
+[(#SET{hte_image,[(#EVAL{[(#GET{dim})]*50/100}|round)]})]
+[(#SET{large_image,[(#EVAL{[(#GET{dim})]*61.2/100}|round)]})]
+[<!--(#REM)  on tri les documents par id_article lorsque plusieurs articles sont affiches sinon par titre-->]
+[(#SET{queltri,[(#ENV{id_article}|?{'titre','id_article'})]})]
+[<!--(#REM)  on recup l'array des articles -->]
+[(#SET{arrayarticles,#ENV**{arrayarts}})]
+[(#SET{arraywalma,[(#NOOP|arrayarticles{#ENV{id_article},#ENV{id_rubrique}})]})]
+[(#GET{arrayarticles}|=={''}|?{[(#SET{arrayarticles,#GET{arraywalma}})]})]
+
+	<B_image>
+	[<div class="compteurimage" [style="(#GET{quelmode}|=={image}|?{display:block;})"]>
+	(#PAGINATION{walma}|sinon{ #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:walma:images:>,<:walma:image:>})]})
+	</div>]
+<!--juste pour démarrer thickbox! <a type="image/jpeg" />-->
+	<BOUCLE_image(DOCUMENTS documents_articles){id_article IN #GET{arrayarticles}}{par #GET{queltri}}{recherche?}{mode=document}{extension IN png,jpg,gif}{pagination 1}>
+	<dl><dd>
+		<a href="#URL_DOCUMENT" title="#TITRE">
+		<img src="[(#FICHIER|image_reduire{[(#GET{large_image})],[(#GET{hte_image})]}|extraire_attribut{src}|url_absolue)]" alt='[(#TITRE|supprimer_numero)]'
+		width='[(#FICHIER|image_reduire{[(#GET{large_image})],[(#GET{hte_image})]}|largeur)]px' 
+		[(#REM) <!--si la reduction n'a pas ete calculee correctement sinon on met bien le height -->]
+		[(#FICHIER|image_reduire{[(#GET{large_image})],[(#GET{hte_image})]}|hauteur|>{[(#GET{hte_image})]}|?{
+		style="width:[(#GET{large_image})]px",
+		height='[(#FICHIER|image_reduire{[(#GET{large_image})],[(#GET{hte_image})]}|hauteur)]px'
+		})]
+		/>
+		</a>		
+<!--lien retour sur les articles/galeries d'origines]-->[(#ENV{id_article}|=={''}|?{
+							 <span><:info_portfolio:> :
+							[<a href="[(#URL_PAGE{walma}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{'mode',#ENV{mode}})]">
+							 (#ID_ARTICLE|titre_depuis_id{article}|supprimer_numero)</a>]</span>
+							})]
+		 
+		</dd>
+		<dt class="#EDIT{titre}">[(#TITRE|supprimer_numero)]&nbsp;</dt>
+		<dd class="decrire #EDIT{descriptif}">[(#DESCRIPTIF)]&nbsp;</dd>
+	</dl>
+	</BOUCLE_image>

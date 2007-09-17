@@ -1,0 +1,38 @@
+#CACHE{#ENV{cache,86400}}
+[(#REM)
+	Barre de navigation, ouverte sur la hierarchie courante.
+	avec walma cfg on indique quelles rubriques on souhaite voir dans le menu.
+	Il suffit de garder ce principe pour inclure un autre genre de menu!
+]
+
+#SET{toutes,#ARRAY}
+<BOUCLE_rmul(RUBRIQUES){racine}{par num titre, titre}>
+#SET{toutes,#GET{toutes}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_RUBRIQUE}}}
+</BOUCLE_rmul>
+[(#CONFIG{walma/menu_toutsite}|?{' ',''}) [(#SET{arrayrub,[(#GET{toutes})]})] ]
+[(#CONFIG{walma/menu_onlywalma}|?{' ',''}) [(#SET{arrayrub,[(#CONFIG{walma/espace_walma,[(#GET{toutes})],''})]})] ]
+
+[(#SET{arraycfg,[(#CONFIG{walma/espace_walma,' ',''})]})]
+
+
+<B_rubriques>
+<div class="rubriques" id="wmenu">
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES){id_rubrique IN #GET{arrayrub}}>
+		<li>
+		<BOUCLE_art(ARTICLES){id_rubrique}{id_rubrique IN #GET{arraycfg}}{'<br />'}>
+		<a href="?page=walma&id_article=#ID_ARTICLE" style="font-size:0.8em; color:#fff">#TITRE</a>
+		</BOUCLE_art>
+			<a href="#URL_RUBRIQUE"[ class="rubriq(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+			<B_sous_rubriques>
+			<ul style="margin-left:0.5em;">
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose>
+					<li><a href="#URL_RUBRIQUE"[ class="rubriq(#EXPOSE)"]>[(#TITRE|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>	</li>
+				</B_test_expose></BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+		</li>
+	</BOUCLE_rubriques>
+	</ul>
+</div>
+</B_rubriques>

@@ -1,0 +1,332 @@
+<!-- descriptif=
+<h2>Plugin Walma</h2>
+<img src='#CHEMIN{images/walma.png}' width='117' height='72' alt='Logo walma' style="margin:0 auto;" />
+<br class="nettoyeur" />
+Cette page vous permet de configurer et de modifier l'habillage de walma.<br /><br />
+<a href="http://www.spip-contrib.net/Presentation-de-Walma" class="spip_out">Cf. documentation</a>
+<br />
+Voir la css g&eacute;n&eacute;r&eacute;e <a href="../?page=walmacss">../?page=walmacss</a><br />
+Voir walma g&eacute;n&eacute;r&eacute;e <a href="../?page=walma">../?page=walma</a>
+-->
+
+
+[(#REM) titre=Walma]
+[(#REM) icone=images/walma-mini.png]
+
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+
+[(#CONFIG{creer_preview}|=={non}|?{
+[(#REM) ------------------------ AVANT TOUT ------------------------ ]
+<fieldset>
+<legend>
+	Avant tout
+</legend>
+[<a href="(#NOOP|generer_url_ecrire)?exec=config_fonctions">Vous devez activer la cr&eacute;ation de vignettes!</a>]
+</fieldset>
+})]
+
+[(#REM) ------------------------ CHOISIR LE MODE ------------------------ ]
+<fieldset>
+<legend>
+	Choisir le mode d'affichage
+</legend>
+
+
+<p>
+<label><strong>Mode:</strong> Vignettes &agrave; droite, &agrave; gauche ou en mosa&Iuml;c. 
+<br />Le visiteur garde le choix de l'affichage.
+<br />
+<select name="walma_mode">
+	<option value="droite">Mode vignettes sur la droite (par defaut)</option>
+	<option value="gauche"[ selected="(#ENV{walma_mode}|=={gauche}|?{selected})"]>Mode vignettes sur la gauche</option>
+	<option value="mosaic"[ selected="(#ENV{walma_mode}|=={mosaic}|?{selected})"]>Mode vignettes en mosa&Iuml;c</option>
+</select>
+</label>
+</p>
+
+</fieldset>
+
+
+[(#REM) --------------------  DIMENSION DE WALMA  -------------------------]
+<fieldset>
+	<legend>Dimension</legend>
+	
+
+[(#REM)
+	 Choisissez la taille d'affichage du bloc de la galerie
+]
+	<p>
+	<form><strong>Dimension d'affichage en pixels</strong>
+	<br />
+	<select name="walma_dim">
+	<option value="800"[ selected="(#ENV{walma_dim}|=={800}|?{selected})"]>800 pixels (valeur par d&eacute;faut)</option>
+	<option value="700"[ selected="(#ENV{walma_dim}|=={700}|?{selected})"]>700 pixels</option>
+	<option value="600"[ selected="(#ENV{walma_dim}|=={600}|?{selected})"]>600 pixels</option>
+	</select>
+
+	</p>
+
+
+</fieldset>
+
+[(#REM) ------------------------ LOOK DE WALMA ------------------------ ]
+<fieldset>
+<legend>
+	Choisissez les couleurs de la galerie
+</legend>
+ 
+[(#CHEMIN{javascript/farbtastic/farbtastic.css}|=={''}?{
+<em>Vous pouvez installer <a href="http://acko.net/dev/farbtastic">farbtastic</a> dans un dossier javascript/farbtastic pour visualiser les couleurs.</em>
+,
+<div id="picker" style="float: right;"></div>
+})]
+
+<div id="test" class="callback">
+<p>
+<label><strong>Couleur de la page:</strong></label>
+<input type="text" name="walma_colorpage" class="colorwell"
+value="[(#ENV{walma_colorpage}|sinon{#ffffff})]" size='10'/>
+</p>
+</div>
+<hr />
+<p>
+<label><strong>Le bloc walma:</strong></label>
+<input type="text" name="walma_colorwalma" class="colorwell" value="[(#ENV{walma_colorwalma}|sinon{#dadada})]" size='10'  />
+</p>
+
+<p>
+<label><strong>Les carres vignettes:</strong></label>
+<input type="text" name="walma_colorvigns" class="colorwell" value="[(#ENV{walma_colorvigns}|sinon{#ffffff})]" size='10'  />
+</p>
+
+<p>
+<label><strong>Entete et pied de walma:</strong></label>
+<input type="text" name="walma_colortetepied" class="colorwell" value="[(#ENV{walma_colortetepied}|sinon{#ffffff})]" size='10'  />
+</p>
+
+<p>
+<label><strong>Couleur des bordures:</strong></label>
+<input type="text" name="walma_colorbords" class="colorwell" value="[(#ENV{walma_colorbords}|sinon{#666666})]" size='10'  />
+</p>
+
+<p>
+<label><strong>Couleur du texte:</strong></label>
+<input type="text" name="walma_colortxt" class="colorwell" value="[(#ENV{walma_colortxt}|sinon{#000000})]" size='10'  />
+</p>
+
+<p>
+<label><strong>Couleur des liens:</strong></label>
+<input type="text" name="walma_colorlink" class="colorwell" 
+ value="[(#ENV{walma_colorlink}|sinon{#999999})]" size='10'  />
+</p>
+
+</fieldset>
+
+[(#REM) ------------------------ SECTEUR WALMA ------------------------ ]
+<fieldset>
+<legend>
+	Secteur walma
+</legend>
+
+<p>
+<label>
+Choisissez ci-dessous un secteur pour la recherche walma ou pour le menu,
+<!--<br />Ne marche pas encore=tous les articles sous ce secteur seront transform&eacute;s en galeries walma.-->
+
+<br />
+
+#SET{selected,#CONFIG{walma/espace_walma,'',''}}
+<select name="espace_walma[]" multiple="multiple" size="5" id="espace_walma">
+<BOUCLE_rmul(RUBRIQUES){racine}{tout}{par num titre, titre}>
+	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#GET{selected}}|?{' selected="selected"'})]>
+	#TITRE
+	</option>
+</BOUCLE_rmul>
+</select>
+
+
+<small><br />(vous pouvez s&eacute;lectionner plusieurs secteurs avec la touche shift)
+<br /><a onclick="$('#espace_walma').find('option').attr('selected', false).end().trigger('change');">x</a> tout d&eacute;selectionner</small>
+
+</label>
+</p>
+[(#REM) array des articles a utiliser dans walma ]
+style="display:none;"
+<select name="walma_articles[]" multiple="multiple" id="walma_articles" >
+<BOUCLE_espart(ARTICLES){id_secteur IN #GET{selected}}{par id_article}>
+	<option value="#ID_ARTICLE" selected="selected">
+	#ID_ARTICLE
+	</option>
+</BOUCLE_espart>
+</select>
+
+</fieldset>
+
+
+[(#REM) ------------------------ AUTORISER LA RECHERCHE WALMA ------------------------ ] 
+[<!-- (#REM) on cherche � savoir si la recherche est active dans cfg #CONFIG{walma/walma_search} -->]
+<fieldset>
+<legend>
+	Recherche avec Walma
+</legend>
+Permettre de reconstituer des galeries 	&agrave; partir d'une recherche<br />
+[(#CONFIG{activer_moteur}|=={non}|?{
+[<a href="(#NOOP|generer_url_ecrire)?exec=config_fonctions#configurer-indexeur">Activez d'abbord le moteur de recherche!</a><br />]
+,
+
+
+	<strong>Sur l'ensemble du site</strong>&nbsp;: La recherche s'effectue sur tous les documents images du site
+
+	<strong>Uniquement sur un ou des secteurs</strong>&nbsp;: La recherche s'effectue sur les documents images issus du ou des secteur choisi(s) dans Secteurs walma.</label>
+
+ 
+<select name="walma_search">
+	<option value=""[ selected="(#ENV{walma_search}|?{'',selected})"]>Aucune recherche</option>
+	<option value="walma_searchall"[ selected="(#ENV{walma_search}|=={walma_searchall}|?{selected})"]>Sur l'ensemble du site</option>
+	<option value="walma_searchstrict"[ selected="(#ENV{walma_search}|=={walma_searchstrict}|?{selected})"]>Uniquement sur un ou des secteurs</option>
+</select>
+	
+})]
+</fieldset>
+
+
+
+
+
+
+[(#REM) ------------------------ AJOUTER DES NOISETTES ------------------------ ]
+<fieldset>
+<legend>Ajouter des noisettes 	&agrave; la galerie walma</legend>
+
+<input type="checkbox" name="titrelogo_walma" [checked="(#ENV{titrelogo_walma}|?{checked})"] id="titrelogo_walma" />
+<label><strong>Inclure titre et logo du site</strong>&nbsp;: <em>inc-titrelogo.html</em></label>
+
+<br />
+<input type="checkbox" name="filariane_walma" [checked="(#ENV{filariane_walma}|?{checked})"] id="filariane_walma" />
+<label><strong>Inclure un fil d'Ariane</strong>&nbsp;: Chemin de navigation remontant jusqu'&agrave; l'accueil. <em>inc-filariane.html</em></label>
+
+
+<p>
+<label><strong>Inclure un menu:</strong> <em>inc-menurub.html</em></label>
+<select name="walma_menu" id="walma_menu">
+	<option value="0" >Pas de menu (par defaut)</option>
+	<option value="menugauche"[ selected="(#ENV{walma_menu}|=={menugauche}|?{selected})"]>Menu positionn&eacute; &agrave; gauche</option>
+	<option value="menudroite"[ selected="(#ENV{walma_menu}|=={menudroite}|?{selected})"]>Menu positionn&eacute; &agrave; droite</option>
+	<option value="menuhaut"[ selected="(#ENV{walma_menu}|=={menuhaut}|?{selected})"]>Menu positionn&eacute; en haut</option>
+</select>
+</p>
+<!--<small> <a onclick="$('#walma_menu').find('option').attr('selected', false).end().trigger('change');">x</a> tout d&eacute;selectionner</small>-->
+
+<p id="quelmenu">
+<input type="checkbox" name="menu_toutsite" [checked="(#ENV{menu_toutsite}?{checked})"] id="menu_toutsite" />
+<label><strong>Menu complet</strong>&nbsp;: Le menu permet d'acc&eacute;der &agrave; toutes les rubriques du site</label>
+
+<br />
+
+<input type="checkbox" name="menu_onlywalma" [checked="(#ENV{menu_onlywalma}|?{checked})"] id="menu_onlywalma" />
+<label><strong>Menu restreint</strong>&nbsp;: Le menu permet de naviguer uniquement dans les rubriques du ou des secteur choisi(s) dans Espace walma.</label>
+</p>
+
+<input type="checkbox" name="walma_forum" [checked="(#ENV{walma_forum}|?{checked})"] id="walma_forum" />
+<label><strong>Inclure texte et forum de l'article </strong> (n&eacute;cessite l'activation des forums SPIP) <em>inc-walma_txtforum.html</em></label>
+<br />
+
+<input type="checkbox" name="walma_upok" [checked="(#ENV{walma_upok}|?{checked})"] id="walma_upok" />
+<label><strong>Inclure une boite d'ajout de documents</strong> Pour &eacute;largir les droits des redacteurs/visiteurs sur un secteur voir le plugin autorit&eacute; <em>inc-walma_upload.html</em></label>
+<br />
+
+
+<input type="checkbox" name="walma_pied" [checked="(#ENV{walma_pied}|?{checked})"] id="walma_pied" />
+<label><strong>Inclure le pied de page </strong>  <em>inc-pied.html</em></label>
+</fieldset>
+
+[(#REM) Code jQuery des menus walma ; plier/deplier les options ]
+<script type="text/javascript"><!--
+	$('#walma_menu').bind('change', function() {
+		if (this.value)
+			$('#quelmenu:hidden').slideDown('slow');
+		else
+			$('#quelmenu:visible').slideUp('slow');
+	})
+	//if ($('#walma_menu option[@selected]').val()='')
+		$('#quelmenu').hide();
+// --></script>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+
+</div>
+
+
+</form>
+
+
+
+
+
+[(#REM) ------------------------ PREVISUALISATION ------------------------ ]
+</div></div></div></div>
+<br class="nettoyeur">
+
+
+
+<div style="font-size:0.8em">
+
+<br />
+
+[(#SET{rubforarti,[(#CONFIG{walma/walma_articles,' ',''})]})]
+[(#SET{arrayrubri,[(#CONFIG{walma/espace_walma,' ',''})]})]
+<!--si le squelette secteur n'est pas demand&eacute;, on vide l'array, la boucle des rubriques devient inop&eacute;rante-->
+[(#CONFIG{walma/sklrub_walma}|?{'',' '})
+[(#SET{arrayrubri,' '})]
+]
+
+<!--<B_arti>
+
+	<h4>REDIRECTIONS:</h4>
+	<ul style="text-align:left;"> 
+	Les articles choisis pour walma sont
+	<  BOUCLE_arti(ARTICLES){id_article IN #GET{rubforarti}}{par num titre, titre}>
+<BOUCLE_arti(ARTICLES){id_article IN #GET{rubforarti}}{par num titre, titre}>
+ <li><a href="#URL_ARTICLE">#TITRE</a></li>
+#ID_ARTICLE
+[(# ID_ARTICLE|virtualwalma{#URL_SITE_SPIP/?page=walma&id_article=#ID_ARTICLE})]
+[(#REM)$virtualiser($id_article, $virtuel, "articles", "id_article=$id_article")]
+
+	</BOUCLE_arti>
+	</ul>
+</B_arti>
+
+<B_rubri>
+	<ul style="text-align:left;"> 
+	Le(s) rubrique(s) avec squelettes pour walma sont
+	<BOUCLE_rubri(RUBRIQUES){id_secteur IN #GET{arrayrubri}}{par num titre, titre}>
+	<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+	</BOUCLE_rubri>
+	</ul>
+</B_rubri>
+-->
+</div>
+
+[(#REM) test pour recuperer les articles qui contiennent plus de 5 documents-images sur l'ensemble du site?
+ici un seul car unique ne fonctionne pas dans cfg]
+#SET{pluscinq,#ARRAY}
+<BOUCLE_maxdocun(DOCUMENTS_ARTICLES){par id_article}>
+<BOUCLE_max(DOCUMENTS){id_article}{mode=document}{extension==(png|jpg|gif)$}>
+</BOUCLE_max>
+[(#TOTAL_BOUCLE|>{5}|?{ 
+[(#SET{pluscinq,[(#GET{pluscinq}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}})]})]
+})]
+</B_max>
+</BOUCLE_maxdocun>
+
+
+<INCLURE{fond=walma}{mode=#ENV{mode}}{cache=0}>
+
+

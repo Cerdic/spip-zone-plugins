@@ -1,0 +1,22 @@
+#CACHE{#ENV{cache,86400}}
+<div id="titrelogosite">
+
+[(#REM) Afficher le logo ou le titre du site ]
+
+<a rel="start" href="#URL_SITE_SPIP/">
+[(#LOGO_SITE_SPIP||?{
+
+<img src="[(#LOGO_SITE_SPIP|image_reduire{200,150}|extraire_attribut{src}|url_absolue)]"
+height='[(#LOGO_SITE_SPIP|image_reduire{200,150}|hauteur)]' 
+width='[(#LOGO_SITE_SPIP|image_reduire{200,150}|largeur)]' 
+alt='Image de Demo walma' 
+title="Le plus difficile est de ne rien faire" 
+/>
+	,
+
+	<span>#NOM_SITE_SPIP</span>
+})]
+</a>
+
+<br class="nettoyeur" />
+</div>
