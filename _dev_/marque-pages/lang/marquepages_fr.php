@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Pour le formulaire de saisi
 'ajouter' => 'Ajouter un marque-page',
+'a' => '&agrave;',
 'modifier' => 'Modifier un marque-page',
 'url' => 'Adresse',
 'titre' => 'Titre',
