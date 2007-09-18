@@ -110,8 +110,8 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
 
 	'decoration:nom' => 'D&eacute;coration',
-	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Utilisation :{$temp['decoration']}
-_ Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
+	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Exemples d'utilisation :{$temp['decoration']}
+_ Plus d'infos : [->http://www.spip-contrib.net/?article2427]",
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
 
 // ---------------------------------------------------------------------------
@@ -126,12 +126,11 @@ Idem pour changer le fond, si l'option ci-dessous le permet :
 -* <code>Lorem ipsum [fond rouge]dolor[/fond rouge] sit amet</code>
 -* <code>Lorem ipsum [bg red]dolor[/bg red] sit amet</code>.
 
-Quelle que soit la couleur, la balise fermante peut aussi &ecirc;tre : <code>[/couleur]</code> ou <code>[/color]</code>, et <code>[/fond]</code> ou <code>[/bg]</code>.
-_ Un exemple de balises imbriqu&eacute;es : <code>[fond jaune]Lorem ipsum [rouge]dolor[/couleur] sit amet[/fond]</code>.
-
 [[Permettre les fonds :->%couleurs_fonds%]]
 [[Set &agrave; utiliser :->%set_couleurs%]][[->%couleurs_perso%]]
-{$temp['note']}Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).",
+{$temp['note']}Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).
+
+Plus d'infos : [->http://www.spip-contrib.net/?article2427]",
 	'couleurs:aide' => 'Mise en couleurs : <strong>[couleur]texte[/couleur]</strong>@fond@ avec <strong>couleur</strong> = @liste@',
 	'couleurs_fonds' => ', <strong>[fond&nbsp;couleur]texte[/couleur]</strong>, <strong>[bg&nbsp;couleur]texte[/couleur]</strong>',
 	'toutes_couleurs' => "Les 36 couleurs des styles css :" . $temp['couleurs'],
