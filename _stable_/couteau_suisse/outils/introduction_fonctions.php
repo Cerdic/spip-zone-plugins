@@ -14,7 +14,25 @@ if ($GLOBALS['spip_version_code']<1.925) {
 		return $texte;
 	}
 }
-
+// compatibilite avec SPIP 1.93 : la balise a fortement change !! >> TODO
+// la fonction couper_intro a disparu.
+// voir function filtre_introduction_dist
+if ($GLOBALS['spip_version_code']>=1.9262) {
+	$GLOBALS['cs_couper_intro'] = 'couper_intro3';
+	function couper_intro3($texte, $long, $suite) {
+		$texte = extraire_multi(preg_replace(",(</?)intro>,i", "\\1intro>", $texte)); // minuscules
+		$intro = '';
+		while ($fin = strpos($texte, "</intro>")) {
+			$zone = substr($texte, 0, $fin);
+			$texte = substr($texte, $fin + strlen("</intro>"));
+			if ($deb = strpos($zone, "<intro>") OR substr($zone, 0, 7) == "<intro>")
+				$zone = substr($zone, $deb + 7);
+			$intro .= $zone;
+		}
+		$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte);
+		return PtoBR(traiter_raccourcis(preg_replace(',([|]\s*)+,S', '; ', couper($texte, $long, _INTRODUCTION_CODE))));
+	}
+}
 // fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
 function cs_introduire($texte) {
 	$liste = array_unique($GLOBALS['cs_introduire']);
