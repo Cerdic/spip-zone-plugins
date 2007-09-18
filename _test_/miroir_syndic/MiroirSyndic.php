@@ -6,7 +6,12 @@
 //
 //    `spip_articles`.url_site = `spip_syndic_articles`.url
 //
-// (c) Fil 2006 - Licence GNU/GPL
+// (c) Fil 2006-2007 - Licence GNU/GPL
+
+
+# TODO:
+# ALTER TABLE spip_articles ADD INDEX url_site (url_site);
+# ALTER TABLE spip_syndic_articles ADD INDEX url (url);
 
 // Ajoute notre fonction dans un cron
 function MiroirSyndic_ajouter_cron($taches) {
@@ -14,13 +19,10 @@ function MiroirSyndic_ajouter_cron($taches) {
 	return $taches;
 }
 
-function cron_miroir_syndic($t) {
-	if ($nombre = MiroirSyndic_miroir()) {
-		include_spip('inc/rubriques');
-		calculer_rubriques();
-		propager_les_secteurs();
-	}
-
+function genie_miroir_syndic($t) {
+#spip_log('miroir de syndication = '.$t, 'syndic');
+	$nombre = MiroirSyndic_miroir();
+#spip_log('miroir de syndication : '.$nombre, 'syndic');
 	return $nombre;
 }
 
@@ -31,11 +33,15 @@ function MiroirSyndic_creer_article($t) {
 	$lang = $GLOBALS['spip_lang'];
 	lang_dselect();
 
-	$id_article = spip_abstract_insert('spip_articles',
+#spip_log('insert', 'syndic');
+
+	$id_article = sql_insert('spip_articles',
 		'(id_rubrique, id_secteur, statut, url_site, lang)',
 		"(".$t['id_rubrique'].", ".$t['id_secteur'].",
 		'publie', '".addslashes($t['url'])."', '$lang')"
 	);
+#spip_log($id_article, 'syndic');
+
 
 	return $id_article;
 }
@@ -56,7 +62,7 @@ function MiroirSyndic_regler_rubrique($t) {
 	}
 
 	if ($nom_rub) {
-		#spip_log("rubrique '$nom_rub'");
+		#spip_log("rubrique '$nom_rub'", 'syndic');
 		$r = creer_rubrique_nommee($nom_rub, $t['id_rubrique']);
 		spip_query("UPDATE spip_articles SET
 		id_rubrique=$r WHERE id_article=".$t['id_article']);
@@ -82,20 +88,25 @@ function MiroirSyndic_miroir() {
 	$q = "
 	SELECT s.*, a.id_article AS id_article, src.nom_site as nom_site,
 		src.id_rubrique AS id_rubrique, src.id_secteur AS id_secteur
-	FROM spip_syndic AS src,
-		spip_syndic_articles AS s
+	FROM spip_syndic_articles AS s
 		LEFT JOIN spip_articles AS a
 		ON s.url = a.url_site
-	WHERE s.id_syndic = src.id_syndic
-		AND src.statut='publie'
+		LEFT JOIN spip_syndic AS src
+		ON s.id_syndic = src.id_syndic
+	WHERE
+		src.statut='publie'
 		AND s.statut='publie'
 		AND (a.id_article IS NULL OR s.maj > a.maj)
 	ORDER BY maj DESC LIMIT 200";
 
-	$s = spip_query($q);
+#spip_log($q, 'syndic');
 
-	while ($t = spip_fetch_array($s)) {
+	$s = spip_query($q);
+#spip_log($s, 'syndic');
+
+	while ($t = sql_fetch($s)) {
 		$nombre ++;
+#spip_log($t, 'syndic');
 		if (
 			!isset($GLOBALS['mode_rubrique_miroir_disallow'][$t['id_secteur']])
 			AND (
@@ -117,13 +128,15 @@ function MiroirSyndic_miroir() {
 				date = '".$t['date']."',
 				surtitre = '".addslashes($t['lesauteurs'])."',
 				chapo = '".addslashes($t['descriptif'])."',
-				soustitre = '".addslashes($t['tags'])."'
+				soustitre = '".addslashes($t['tags'])."',
+				maj=NOW()
 				WHERE id_article=".$t['id_article']);
 		}
 
+#spip_log($q, 'syndic');
 	}
 
-	spip_log('miroir de '.$nombre.' articles syndiques');
+	spip_log('miroir de '.intval($nombre).' articles syndiques', 'syndic');
 	return $nombre;
 }
 
@@ -132,6 +145,7 @@ function MiroirSyndic_miroir() {
 
 // creer_rubrique_nommee('/truc/machin/chose') a partir de id_rubrique
 // et avec la langue $lang
+include_spip('inc/rubriques');
 if(!function_exists('creer_rubrique_nommee')) {
 function creer_rubrique_nommee($titre, $id_parent=0) {
 
