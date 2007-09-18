@@ -348,7 +348,7 @@ if (isset(\$_GET['var_recherche'])) {
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
 }",
 	'code:css' => "div.pagination {display:block; text-align:center; }
-div.pagination img { border:none; margin:0pt; padding:0pt; }",
+div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	// inserer : $table_des_traitements['TEXTE'][]= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'cs_decoupe',
 	// sans oublier les articles : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
@@ -385,7 +385,7 @@ add_outil( array(
 	'id' => 'sommaire',
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%\n%%auto_sommaire%%\n%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
-	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
+	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;} h3 a img {border:0pt none;}",
 	'code:js' => '$(document).ready(function () { if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
