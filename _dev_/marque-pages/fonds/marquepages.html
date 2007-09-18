@@ -7,6 +7,10 @@
 		
 	Paramètres
 	==========
+	historique :
+		le nom du squelette d'historique
+	ajout :
+		le nom du squelette d'ajout
 	pagination :
 		de combien en combien on affiche (par défaut c'est 20)
 	tri :
@@ -65,7 +69,7 @@
 				[(#SESSION{id_auteur}|!={#ID_AUTEUR}|?{' '})[(#MODELE{auteur_nomcomplet}{id=#ID_AUTEUR})]]
 			</a>
 			<BOUCLE_autres(FORUMS){id_syndic=#_marquepages:ID_SYNDIC}{statut=prive}{plat}> </BOUCLE_autres>
-				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})<a href="[(#URL_PAGE{marquepages_historique}|parametre_url{id_syndic,#ID_SYNDIC})]">[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:></a>]
+				[<:marquepages:et:> (#TOTAL_BOUCLE|moins{1}|!={0}|?{' ',''})<a href="[(#URL_PAGE{#ENV{historique,marquepages_historique}}|parametre_url{id_syndic,#ID_SYNDIC})]">[(#TOTAL_BOUCLE|moins{1})] <:marquepages:autres:></a>]
 			</B_autres>
 		</BOUCLE_auteur>
 		
@@ -78,7 +82,7 @@
 		[(#SESSION{id_auteur}|?{' '})
 		<ul class="actions">
 			[(#SESSION{id_auteur}|!={#_marquepages:ID_AUTEUR}|?{' '})
-				<li><a href="[(#URL_PAGE{marquepages_ajouter}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{mp_url,#_site:URL_SITE}|parametre_url{mp_titre,#_marquepages:TITRE}|parametre_url{retour,#ENV{self}})]"><:marquepages:copier:></a></li>
+				<li><a href="[(#URL_PAGE{#ENV{ajout,marquepages_ajouter}}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{mp_url,#_site:URL_SITE}|parametre_url{mp_titre,#_marquepages:TITRE}|parametre_url{retour,#ENV{self}})]"><:marquepages:copier:></a></li>
 			]
 			[(#_marquepages:ID_FORUM|marquepages_autoriser_supprimer|?{' '})
 				<li><a class="confirmer" href="#URL_SITE_SPIP/spip.php?action=marquepages_supprimer&id=#_marquepages:ID_FORUM&r=[(#ENV{self}|replace{&amp;,&}|rawurlencode)]"><:marquepages:supprimer:></a></li>
