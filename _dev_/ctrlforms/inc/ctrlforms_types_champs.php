@@ -101,4 +101,17 @@ function ctrlforms_forms_input_champs($flux){
 	return $flux;
 }
 
+function ctrlforms_forms_valide_conformite_champ($flux){
+    $type = $flux['args']['type'];
+    $info = $flux['args']['info'];
+    $extrainfo = $infos['extra_info'];
+    $champ = $flux['args']['champ'];
+    $erreur=$flux['data'];
+    if ($type == 'ctrlpass') {
+					if($extrainfo){
+						if( _request($extrainfo)!=_request($champ)) $erreur[$champ] = 'Le contenu des deux champs est diff&eacute;rent.';
+					}
+			}
+    return $erreur;
+}
 ?>

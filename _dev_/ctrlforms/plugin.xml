@@ -35,4 +35,9 @@
 		<nom>forms_pre_edition_donnee</nom>
 		<inclure>inc/ctrlforms_types_champs.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>forms_valide_conformite_champ</nom>
+		<inclure>inc/ctrlforms_types_champs.php</inclure>
+	</pipeline>
+
 </plugin>
