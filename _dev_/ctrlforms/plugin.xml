@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Controle de champ pour plugin form & table</nom>
+	<nom>Controle de champ pour plugin form &amp; table</nom>
 	<icon>img_pack/form-24.png</icon>
 	<auteur>Dom Rom</auteur>
 	<version>0.1.0.0</version>
