@@ -103,11 +103,9 @@ function decouper_en_pages_rempl($texte) {
 // supprime les notes devenues orphelines
 function decoupe_notes_orphelines(&$texte) {
 	if($GLOBALS['les_notes']=='') return;
-//	if strpos(($GLOBALS['les_notes'], "spip_note")===false) return;
 	$notes = $GLOBALS['les_notes'];
-	global $ouvre_note;
 	tester_variable('ouvre_note', '[');
-	$ouvre = str_replace('[', '\[', $ouvre_note);
+	$ouvre = preg_quote($GLOBALS['ouvre_note']);
 	$appel = "<p[^>]*>$ouvre<a [^>]*name=\"nb([0-9]+)\" class=\"spip_note\" [^>]+>[^<]+</a>.*?</p>";
 	preg_match_all(",$appel,", $GLOBALS['les_notes'], $tableau);
 	for($i=0;$i<count($tableau[0]);$i++) {
