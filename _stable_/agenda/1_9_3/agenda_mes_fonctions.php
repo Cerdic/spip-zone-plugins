@@ -19,10 +19,9 @@ function Agenda_heure_selector($date,$suffixe){
 function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_evenements";
+	$mstatut = $id_table .'.statut';
 
-	$statut = $boucle->modificateur['criteres']['statut'];
-	if (!$statut) {
+	if (!isset($boucle->modificateur['criteres']['statut'])) {
 	// Restreindre aux elements publies
 		// Si pas de lien avec un article, selectionner
 		// uniquement les auteurs d'un article publie
@@ -31,7 +30,7 @@ function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
 			AND (!isset($boucle->lien) OR !$boucle->lien) AND (!isset($boucle->tout) OR !$boucle->tout)) {
 				$boucle->from["articles"] =  "spip_articles";
 				$boucle->where[]= array("'='", "'articles.id_article'", "'$id_table.id_article'");
-				$boucle->where[]= array("'='", "'articles.statut'", "'\"publie\"'");
+				$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 				$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;  
 			}
 	}
