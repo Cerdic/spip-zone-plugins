@@ -268,12 +268,13 @@ function check_file_allowed($file,$files_editable,$new = false) {
 	return false;
 }
 
+// recupere le chemin du squelette a editer: dist ? plugin squelette ou squelettes ?
 function get_spip_path(){
 	static $path_a = array();
 	static $c = '';
 
 	// on calcule le chemin si le nombre de plugins a change
-	if ($c != count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes']) {
+	if ($c != count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes']) {	
 		$c = count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes'];
 	
 		// Chemin standard depuis l'espace public
@@ -282,17 +283,24 @@ function get_spip_path(){
 			_DIR_RACINE.'dist/:'.
 			_DIR_RACINE.'formulaires/:'.
 			_DIR_RESTREINT;
+			
+    // Ajouter dist/
+		$path = _DIR_RACINE.'dist/:' . $path;
 
-		// Ajouter les repertoires des plugins
+		// Ajouter les repertoires des plugins 
+    /*	solution trop globale: il faut ajouter seulement les plugins de type "squelettes"
 		if ($GLOBALS['plugins'])
 			$path = _DIR_PLUGINS
 				. join(':'._DIR_PLUGINS, $GLOBALS['plugins'])
 				. ':' . $path;
-
+		*/	
+    if (count(get_plugin_squelette())>0) 
+        $path = join(':', get_plugin_squelette()).':'.$path;
+    
 		// Ajouter squelettes/
 		if (@is_dir(_DIR_RACINE.'squelettes'))
 			$path = _DIR_RACINE.'squelettes/:' . $path;
-			
+		
 		// Et le(s) dossier(s) des squelettes nommes
 		if ($GLOBALS['dossier_squelettes'])
 			foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
@@ -306,9 +314,25 @@ function get_spip_path(){
 				$dir .= "/";
 			$path_a[] = $dir;
 		}
+				
 	}
 	return $path_a;
 }
+
+// recupere les plugins de type squelette
+function get_plugin_squelette() {
+  // alternative 1: liste des plugins squelettes manuelle (blip, sarka, ...?)
+  // alternative 2: on scanne les plugins: si article.html et sommaire.html present ? sans doute un plugin squelette 
+  $plugin_squelette = array();
+	if ($GLOBALS['plugins']) {
+	   foreach($GLOBALS['plugins'] as $k) {	    
+	       if (@is_file(_DIR_PLUGINS."$k/article.html")&&@is_file(_DIR_PLUGINS."$k/sommaire.html")) 
+                                                            $plugin_squelette[] = _DIR_PLUGINS.$k."/";        
+     }
+  }
+  return $plugin_squelette;
+}
+
 function parse_path($dir,$extensions){
 	$pattern = "\.(".implode("|",$extensions).")$";
 	$liste = preg_files($dir, $pattern);
@@ -348,7 +372,7 @@ function exec_skeleditor(){
 	
 	// globals 
   $dossier_squelettes = reset(get_spip_path());
-	
+  	
 	if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){  // utile ?
 		// chargement optimise precompile
 		include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");     	
@@ -470,7 +494,7 @@ function exec_skeleditor(){
 	debut_page(_T("skeleditor:editer_skel"), "naviguer", "plugin");	
   debut_gauche();
 	debut_boite_info();
-	echo "<p>"._T("skeleditor:skeleditor_description")."</p>\n";	
+	echo "<p>"._T("skeleditor:skeleditor_description")."</p>\n";
 	echo _T("skeleditor:skeleditor_dossier")." <strong>$dossier_squelettes</strong><br />";
 	echo show_skel_file($files_editable,$file_name,$img_extension);
 	fin_boite_info();
