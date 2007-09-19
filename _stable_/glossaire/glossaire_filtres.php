@@ -10,6 +10,7 @@
  */
 
 function glossaire_ajouter($chaine,$replacenb=-1){
+	if (defined(_GLOSSAIRE_AUTO) && !_GLOSSAIRE_AUTO) return $chaine;
 	static $patterns=array();
 	static $replace_1=array();
 	static $replace_2=array();
@@ -47,7 +48,7 @@ function glossaire_ajouter($chaine,$replacenb=-1){
 			foreach($ids as $id) {
 				$desc_temp = trim(attribut_html($replace_1[$id]));
 				//$nom = trim(attribut_html($patterns[$id]));
-				$patterns[$id]="/([^\w@\.])(".preg_quote($patterns[$id]).")(?=[\s.-])/";
+				$patterns[$id]="/([^\w@\.])(".preg_quote($patterns[$id],'/').")(?=[\s.-])/";
 				$url = generer_url_public('glossaire',"id_donnee=$id");
 				$replace_1[$id] = "\\1<a href='$url' title='@D@E@F@$id@@' class='spip_glossaire'>\\2@</a@>";
 				$replace_2["@D@E@F@$id@@"] = $desc_temp;
