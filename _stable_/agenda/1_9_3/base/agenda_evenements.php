@@ -68,7 +68,6 @@ $table_date['evenements'] = 'date_debut';
 // 'spip_' dans l'index de $tables_principales
 global $table_des_tables;
 $table_des_tables['evenements']='evenements';
-$table_des_tables['mots_evenements']='mots_evenements';
 
 
 
