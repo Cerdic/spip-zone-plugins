@@ -1,24 +1,28 @@
 <?php
 
+include_spip('inc/filtres');
+if(version_svn_courante(_DIR_RACINE) >= 9919) {
+	include_spip('base/compat193');
+}
 include_spip('base/abstract_sql');
 include_spip('inc/plugin');
 
 //configure la base spip et les metas
 function archive_install($action){
 	//version en cours
-	//recupére les informations de plugin.xml
+	//recup‚re les informations de plugin.xml
 	$infos = plugin_get_infos('Archive');
 	$archive_version = $infos['version'];
 
    switch ($action){
        case 'test':
-           //Contrôle du plugin à chaque chargement de la page d'administration
-           // doit retourner true si le plugin est proprement installé et à jour, false sinon
+           //Contr“le du plugin … chaque chargement de la page d'administration
+           // doit retourner true si le plugin est proprement install‚ et … jour, false sinon
 		   if ((!isset($GLOBALS['meta']['archive_version'])) || $GLOBALS['meta']['archive_version'] < $archive_version) {
-			   //lance la mise à jour
+			   //lance la mise … jour
 			   return archive_installer($archive_version);
 		   } else {
-			   //on est à jour
+			   //on est … jour
 			   return true;
 		   }
        break;
@@ -66,12 +70,12 @@ function archive_installer($archive_version) {
 	ecrire_metas();
 	//retourne que tout ok
 	$ok = true;
-
+    return $ok;
         return $ok;
 }
 
 
-//supprime les données de la base spip
+//supprime les donn‚es de la base spip
 function archive_uninstaller() {
 
 	//nettoie les champs de spip_articles
@@ -102,5 +106,4 @@ function archive_uninstaller() {
 
 	return $ok;
 }
-
 ?>

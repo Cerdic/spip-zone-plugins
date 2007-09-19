@@ -1,27 +1,33 @@
-<plugin>
-	<nom>Archive</nom>
-	<version>0.63</version>
-	<prefix>archive</prefix>
-	<etat>dev</etat>
-	<auteur>Camille Lafitte _ Licence GPL _ [un site->http://km.azerttyu.net]</auteur>
-	<icon>archive.jpg</icon>
-	<description>
-		Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL.<br /> Pensez &agrave; utiliser le crit&egrave;re <b>{archive}</b> ou bien <b>archive seulement</b>
-	</description>
-	<lien>[->http://www.spip-contrib.net/Plugin-Archive]</lien>
-	<fonctions>
-		archive_fonctions.php
-	</fonctions>
-	<options>
-		archive_options.php
-	</options>
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<action>execution</action>
-		<inclure>archive.php</inclure>
-	</pipeline>
-	<install>base/archive_install.php</install>
-
-	<necessite id="cfg" version="[1.0.4;]" />
-
-</plugin>
+<plugin>
+	<nom>Archive</nom>
+	<version>0.64</version>
+	<prefix>archive</prefix>
+
+	<etat>dev</etat>
+	<auteur>Camille Lafitte _ Licence GPL _ [un site->http://km.azerttyu.net]</auteur>
+	<icon>archive.jpg</icon>
+
+	<description>
+		Ce plugin ajoute le statut <b>archive</b> aux articles. Il est distribu&eacute; sous licence GNU/GPL.<br /> Pensez &agrave; utiliser le crit&egrave;re <b>{archive}</b> ou bien <b>archive seulement</b>
+	</description>
+	
+	<lien>[->http://www.spip-contrib.net/Plugin-Archive]</lien>
+
+	<fonctions>
+		archive_fonctions.php
+	</fonctions>
+
+	<options>
+		archive_options.php
+	</options>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>execution</action>
+		<inclure>archive.php</inclure>
+	</pipeline>
+
+	<install>base/archive_install.php</install>
+
+	<necessite id="cfg" version="[1.0.4;]" />
+</plugin>
