@@ -96,38 +96,25 @@ function decouper_en_pages_rempl($texte) {
 		include_spip('inc/surligne');
 		$page = surligner_mots($page, $_GET['decoupe_recherche']);
 	}
+	decoupe_notes_orphelines($page);
 	return $sommaire.$pagination1.$page.$pagination2;
 }
 
-// meme chose que la fonction precedente, mais pour les notes
-function decouper_en_pages_rempl_notes($texte) {
-	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
-	// au cas ou on ne veuille pas de decoupe
-	if ($_GET['artpage']=='print') return decoupe_imprimer($texte);
-
-	// traitement des pages
-	$pages = explode(_decoupe_SEPARATEUR, $texte);
-	$num_pages = count($pages);
-	if ($num_pages == 1) return $texte;
-	$artpage = max(intval($_GET['artpage']), 1);
-	$artpage = min($artpage, $num_pages);
-
-	return trim($pages[$artpage-1]);
-}
-
 // supprime les notes devenues orphelines
-function decoupe_affichage_final($texte){
-	if (strpos($texte, "spip_note")===false) return $texte;
+function decoupe_notes_orphelines(&$texte) {
+	if($GLOBALS['les_notes']=='') return;
+//	if strpos(($GLOBALS['les_notes'], "spip_note")===false) return;
+	$notes = $GLOBALS['les_notes'];
 	global $ouvre_note;
 	tester_variable('ouvre_note', '[');
-	$ouvre_note = str_replace('[', '\[', $ouvre_note);
-	$appel = "<p[^>]*>$ouvre_note<a [^>]*name=\"nb([0-9]+)\" class=\"spip_note\" [^>]+>[^<]+</a>.*?</p>";
-	preg_match_all(",$appel,", $texte,$tableau);
+	$ouvre = str_replace('[', '\[', $ouvre_note);
+	$appel = "<p[^>]*>$ouvre<a [^>]*name=\"nb([0-9]+)\" class=\"spip_note\" [^>]+>[^<]+</a>.*?</p>";
+	preg_match_all(",$appel,", $GLOBALS['les_notes'], $tableau);
 	for($i=0;$i<count($tableau[0]);$i++) {
 		if (!preg_match(",<a href=\"#nb{$tableau[1][$i]}\",",$texte)) 
-			$texte = str_replace($tableau[0][$i], '', $texte);
+			$notes = str_replace($tableau[0][$i], '', $notes);
 	}
-	return $texte;
+	$GLOBALS['les_notes'] = trim($notes);
 }
 
 function cs_decoupe($texte){

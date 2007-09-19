@@ -353,7 +353,6 @@ div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	'traitement:TEXTE:post_propre' => 'cs_decoupe',
 	// sans oublier les articles : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
-	'pipeline:affichage_final' => 'decoupe_affichage_final',
 	'categorie' => 'typo-racc',
 ));
 
