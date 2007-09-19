@@ -45,7 +45,7 @@ define('ADMINISTRATOR_MAIL', 'auto-mailer@phpmyvisites.net'); // mail that appea
 define('CACHE_RSS_LIFETIME', 3600); // lifetime of the rss syndication file cache
 define('CACHE_MAIL_LIFETIME', 3600); // lifetime of the mail file cache
 define('PHP_VERSION_NEEDED', '4.3'); // version of php needed for phpmyvisites to work correctly
-define('MEMORY_LIMIT', 16); // good value for memory limit
+define('MEMORY_LIMIT', 32); // good value for memory limit
 define('DEFAULT_MODULE', 'view_visits'); // name of the default module loaded
 define('COOKIE_PMVLOG_NAME', 'pmv_ck_'); // cookie name for log
 define('COOKIE_NAME_VIEW', 'pmv_ck_view_conf'); // cookie name for stats view
