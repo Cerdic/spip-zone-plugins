@@ -40,7 +40,7 @@ if (!function_exists('syndication_en_erreur')){
 		// un peu trop rapide, ca... le compilateur exige mieux
 		$boucle->hash = '
 		// RECHERCHE
-		if ($r = addslashes($GLOBALS["recherche"]))
+		if ($r = addslashes($Pile[0]["recherche"]))
 			$s = "(syndic_articles.descriptif LIKE \'%$r%\'
 				OR syndic_articles.titre LIKE \'%$r%\'
 				OR syndic_articles.url LIKE \'%$r%\'
