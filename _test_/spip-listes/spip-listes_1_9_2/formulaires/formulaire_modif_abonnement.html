@@ -37,10 +37,10 @@
 <//B_listes>
 [(#ENV{formulaire_affiche}|?{' ',''})
  <div style="text-align: left;"> 
-				 <strong>Format :</strong><br> 
-				 <input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio"><:html:><br> 
-				 <input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio"><:texte:><br> 
-				 <input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked=checked',''})] value="non" type="radio"><:desabonnement:><br> 
+				 <strong>Format :</strong><br/> 
+				 <input name="suppl_abo" id="formathtml" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio"><label for="formathtml"><:html:></label><br/> 
+				 <input name="suppl_abo" id="formattexte" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio"><label for="formattexte"><:texte:></label><br/> 
+				 <input name="suppl_abo" id="formatnon" [(#ENV{format}|=={non}|?{'checked=checked',''})] value="non" type="radio"><label for="formatnon"><:desabonnement:></label><br/> 
 				 </div> 
 	<input style="margin-top:3px" type='submit' name='Valider' value='<:spiplistes:abonnement_bouton:>' />
 	<input type="hidden" name="d"  value="[(#ENV{d})]"  />
