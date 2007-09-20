@@ -40,7 +40,7 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>player_config_fonctions.php</inclure>
+		<inclure>player_fonctions.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
