@@ -1,11 +1,23 @@
 <?php
 
+include_spip("inc/plugin_globales_lib");
+
 //nombre de processus d'envoi simultanes
 @define('_SPIP_LISTE_SEND_THREADS',1);
 
 // virer les echo, a reprendre plus tard correctement
 // avis aux spécialistes !!
 define('_SIGNALER_ECHOS', false); // horrible 
+
+define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
+
+define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
+
+// charsets:
+// charsets autorisés :
+define("_SPIPLISTES_CHARSETS_ALLOWED", "iso-8859-1;iso-8859-9;iso-8859-6;iso-8859-15;utf-8");
+define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
+define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
 
 function spiplistes_log($texte){
 	spip_log($texte,'spiplistes');

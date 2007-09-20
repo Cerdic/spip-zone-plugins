@@ -300,6 +300,14 @@ function spiplistes_valide_listes_depuis_cookie($cookie) {
   }
 }
 
+// termine la page (à employer qd droits insuffisants)
+function spiplistes_terminer_page_non_authorisee ($return = true) {
+	$result = "<p><strong>"._T('spiplistes:acces_a_la_page')."</strong></p>";
+	if($return) return($result);
+	else echo($result);
+}
+
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
