@@ -57,6 +57,7 @@ function form_hidden_env($env){
  	    $hidden = '';
  	        foreach(unserialize($env) as $c => $v) {
  	            if(!is_array($v)){
+ 	           if($c !="fond")
  	            $hidden .= "\n<input name='" .
  	                entites_html($c) .
  	                "' value='" . entites_html($v) .
