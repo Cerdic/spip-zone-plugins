@@ -23,6 +23,7 @@
 	
 	<pipeline>
 		<nom>taches_generales_cron</nom>
+		<inclure>genie/spiplistes_cron.php</inclure>
 	</pipeline>
 	<chemin dir='' />
 </plugin>
