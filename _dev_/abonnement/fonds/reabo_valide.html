@@ -6,6 +6,7 @@
 
 <?php
 $value = '#ENV{abonnement}' ;	
+// mieux vaudrait maj la date et ne pas effacer un viel abonnement
 spip_query("DELETE FROM `spip_auteurs_elargis_abonnements` WHERE id_auteur_elargi='#ID' AND id_abonnement="._q($value));
 spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('#ID', "._q($value).")");
 

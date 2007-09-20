@@ -1,0 +1,11 @@
+[(#REM)
+	dire si on connecté ou pas ]
+
+#CACHE{0}
+
+[(#SESSION{id_auteur}|?{'',' '})
+			<div class="formulaire_spip formulaire_inscription">
+[(#LOGIN_PUBLIC|spip.php?page=sommaire)]
+			</div>
+]
+

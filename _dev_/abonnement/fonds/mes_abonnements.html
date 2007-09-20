@@ -1,11 +1,10 @@
 #CACHE{0}
 
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{validite > #ENV{date}}>
-
-
 <B_abo>
-<h2 style="margin:20px 0px">Vos abonnements</h2>
+<h2 style="margin:20px 0px">Votre abonnement</h2>
 <BOUCLE_abo(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}>
 <BOUCLE_abo2(spip_abonnements){id_abonnement}>
 #LIBELLE - &eacute;ch&eacute;ance le [(#_abo:VALIDITE|affdate)]
@@ -20,8 +19,11 @@
 							<p style="text-align:right"><input type="submit" value="valider"></p>
 							</form>
 </div>
-<//B_abo>			
+<//B_abo>	
+		
+</BOUCLE_auteur_elargi>
 
+<BOUCLE_auteur_elargi_(AUTEURS_ELARGIS auteurs){id_auteur}>
 <B_articles>
 <h2 style="margin:20px 0px">Vos articles</h2>
 <ul>
@@ -30,7 +32,9 @@
 </BOUCLE_articles>
 </ul>
 </B_articles>
+</BOUCLE_auteur_elargi_>
 
-</BOUCLE_auteur_elargi>
+<//B_auteur_elargi>
+
 </BOUCLE_auteur>
 

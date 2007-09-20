@@ -49,7 +49,6 @@
 			include_spip('inc/acces');
 			$hash = creer_uniqid();
 			?>
-			<input type="hidden" value="<?php echo $hash ?>" name="reachat_valide_hash" />
 			<input type="hidden" name="abonnement" value="[(#ENV{abonnement})]" />
 			<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur" />
 			<input type="hidden" value="<?php echo $hash ?>" name="reabo_valide_hash" />
