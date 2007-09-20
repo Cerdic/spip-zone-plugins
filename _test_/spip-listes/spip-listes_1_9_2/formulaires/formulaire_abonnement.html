@@ -53,7 +53,7 @@ texte d'inscription en tant que visiteur
 [(#ENV{mode_login}|?{' ',''})
 	<form action="#SELF#spip-listes" method="post">
 ]
-		<a name="spip-listes"></a>
+		<div><a name="spip-listes"></a></div>
 		<BOUCLE_liste(LISTES) {statut=liste} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
 			[<fieldset style="margin-bottom:1em;">
 			[<legend style="font-weight:bold;">(#TITRE)</legend>]
@@ -74,7 +74,7 @@ texte d'inscription en tant que visiteur
 				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
-				<label><input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_LISTE" />#TITRE</a></label></div>]
+				<label><input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_LISTE" />#TITRE</label></div>]
 		</BOUCLE_listes>
 		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
 		</B_listes>
@@ -93,12 +93,12 @@ texte d'inscription en tant que visiteur
 			<div style="margin-top:5px"><label for="mail_inscription_" style="font-weight:bold;"><:form_pet_votre_email:></label></div>
 			<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" id="mail_inscription_" value="" size="30" />
 			<div>
-			<input name="desabo" id="suppl_abo_oui" value="non" checked type="radio" />
+			<input name="desabo" id="suppl_abo_oui" value="non" checked="checked" type="radio" />
 			<label for="suppl_abo_oui"><:spiplistes:abonnement_0:></label>
 			</div>
 			<div>
 			<input name="desabo" id="desabo" value="oui" type="radio" />
-				<label for="suppl_abo_non"><:spiplistes:desabonnement:></label>
+				<label for="desabo"><:spiplistes:desabonnement:></label>
 			</div>
 		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" value="<:bouton_valider:>" /></div>
 		</div></fieldset></form>]
