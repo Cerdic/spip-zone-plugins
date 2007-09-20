@@ -136,10 +136,13 @@ function confirm(msg,callback) {
 	$ordre =_request('ordre');
 	$desc = _request('desc');
 	
-	if(empty($ordre))
+	if(empty($ordre)){
 		$ordre = 'id_auteur '.$desc;
-	else
+			//plutot trier par maj (a creer) 
+			if(defined('_DIR_PLUGIN_ABONNEMENT') AND lire_config('inscription2/creation') ) $ordre = 'creation DESC';
+	}else{
 		$ordre .= ' '.$desc;
+	}
 	
 	if($desc=='DESC')
 		$desc = 'ASC';
