@@ -52,7 +52,7 @@ function Indexation_recherche_sql($recherche) {
 
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
-function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='articles',$nom_table='spip_articles', $cond=false) {
+function inc_prepare_recherche($recherche, $table='articles', $cond=false) {
 	static $cache = array();
 	static $fcache = array();
 
@@ -89,11 +89,10 @@ function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='a
 		# calculer le {id_article IN()} et le {... as points}
 		$liste_index_tables = liste_index_tables();
 		foreach ($points as $type => $scores) {
-		if ($table = $liste_index_tables[$type]) {
-			$primary = id_table_objet(preg_replace(',^spip_|s$,', '', $table)); // eurk
-
+		if ($ttable = $liste_index_tables[$type]) {
+			$primary = id_table_objet($ttable);
 			if (!count($scores)) {
-				$cache[$recherche][$type] = array("''", '0');
+				$cache[$recherche][$ttable] = array("''", '0');
 			} else {
 				$listes_ids = array();
 				$select = '0';
@@ -104,7 +103,7 @@ function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='a
 					calcul_mysql_in($primary, substr($liste_ids, 1))
 					.") ";
 
-				$cache[$recherche][$type] = array($select,
+				$cache[$recherche][$ttable] = array($select,
 					'('.calcul_mysql_in($primary, array_keys($scores)).')'
 					);
 			}
@@ -117,9 +116,7 @@ function inc_prepare_recherche($recherche, $primary = 'id_article', $id_table='a
 		// purger le petit cache
 		nettoyer_petit_cache('rech3', 300);
 	}
-
-	$type = id_index_table($nom_table);
-	return $cache[$recherche][$type];
+	return $cache[$recherche]['spip_'.$table];
 }
 
 
