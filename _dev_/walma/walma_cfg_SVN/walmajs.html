@@ -28,7 +28,6 @@ return mylink;
 }
 
 function liensvignette(){
-
 	$("#blocjs a")
 	.click(function() {
 		$("#blocjs a").parent("li").removeClass('vigneton');
@@ -121,7 +120,10 @@ $('.ico')
 					.css({'opacity':1.0});
 			});
 	}
-	   return false;
+/*en attendant on revient sauvagement au diaporama php...*/
+	if (select!="icodiapo"){
+		return false;
+	}
 });
 
 	  
@@ -138,23 +140,6 @@ $(".vignettes").hide();
 $(".largeimage").addClass('limageimage');
 $(".compteurimage").show();
   });
-
-  $("#icodiapo")
-  .click(function() {
-$(".largeimage").attr('id', 'diaporama_innerfade');
-$(".forinner").show();
-$("#diaporama_innerfade").css('background','orange');
-/*						 
-$("#diaporama_innerfade").innerfade({
-		animationtype: 'fade',
-		speed: 3000, 
-		timeout: 2000, 
-		type: 'sequence', 
-		containerheight: '400px' });
-		*/
- 
-$(this).addClass('icodiapoon');
-});
   
 $("#icogauche")
   .click(function() {
