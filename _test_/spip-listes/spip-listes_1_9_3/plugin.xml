@@ -9,7 +9,7 @@
 	<fonctions>spiplistes_mes_fonctions.php</fonctions>
 	<prefix>spiplistes</prefix>
 	<install>base/spiplistes_upgrade.php</install>
-	<lien>[Documentation->../plugins/spip-listes_1_9_2/docs/__installation_fr.txt]</lien>
+	<lien>[Documentation->../plugins/spip-listes_1_9_3/docs/__installation_fr.txt]</lien>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
