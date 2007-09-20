@@ -1,263 +1,176 @@
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
-#HTTP_HEADER{Vary: Accept-Encoding}
-#CACHE{#ENV{cache,3600*100}}
-/*CSS walma 
-	Ce squelette CSS definit le style de Walma.
-	Configuration dynamique avec cfg sur
-	/ecrire/?exec=cfg&cfg=walma
-	Rendu du css sur
-	spip.php?page=walma_cssconfig 
-*/
+#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
 
-[(#REM)/*JEU des couleurs*/]
-#SET{colorpage,#CONFIG{walma/walma_colorpage,#ffffff}}
-#SET{colorwalma,#CONFIG{walma/walma_colorwalma,#dadada}}
-#SET{colorvigns,#CONFIG{walma/walma_colorvigns,#fff}}
-#SET{colortetepied,#CONFIG{walma/walma_colortetepied,#fff}}
-#SET{colortxt,#CONFIG{walma/walma_colortxt,#000}}
-#SET{colorlink,#CONFIG{walma/walma_colorlink,#999}}
-#SET{colorbords,#CONFIG{walma/walma_colorbords,#666}}
+/*javascript pour walma*/
+var selected;
+var select='[ico(#ENV{mode,#CONFIG{walma/walma_mode,droite}})]';
+var oldselect;
 
-
-[(#REM)/*JEU pour le mode (disposition d'affichage) la dimension de walma, le menu inclus? */]
-/*explorer met tout en cache et ne tient pas compte des variables... grrrr*/
-/* [(#SET{quelmode,[(#ENV{mode,#CONFIG{walma/walma_mode,droite}})]})] */
-[(#SET{dim,#CONFIG{walma/walma_dim,800}})]
-[(#SET{minhauteur,[(#EVAL{[(#GET{dim})]*53/100})]})]
-[(#SET{dimvign,[(#EVAL{[(#GET{dim})]*15/100})]})]
-[(#SET{large_image,[(#EVAL{[(#GET{dim})]*61.2/100})]})]
-#SET{configmenu,#CONFIG{walma/walma_menu}}
-
-
-
-[(#REM)/*Le body, sinon pour la démo un div spécifique*/]
-.wbody{
-	font-family:Arial, Helvetica, sans-serif; margin:0;
-	clear:both; width:100%; height:auto; text-align:center; font-size:80%;
-	background-color:#GET{colorpage}; 
-	[color:#(#GET{colorpage}|couleur_extreme|couleur_inverser);] /*noir ou blanc suivant intensite*/
-}
-.wbody a{
-	text-decoration:none;
-	[color:#(#GET{colorpage}|couleur_foncer_si_claire|couleur_eclaircir_si_foncee);] 
-}
-/* Espaceur de blocs */
-.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
-
-#wariane, #titrelogosite{
-	margin:0 auto; text-align:left; width:90%;
-}
-
-#titrelogosite span{
-	font-size:200%;
-}
-
-.wencadre{
-	 margin:0 auto; 
-	padding:1em 0 1em 0;
-/*necessaire pour ajouter un menu*/	
-[(#GET{configmenu}|?{
-	[width:(#EVAL{[(#GET{dim})]+200})px;],
-	[width:(#EVAL{[(#GET{dim})]+2})px;]
-})]
-}
-
-.blocwalma{
-	position:relative;
-	text-align:left;
-	margin: 0 auto;
-	[color:(#GET{colortxt});]	
-	[float:(#GET{configmenu}|=={'menugauche'}|?{'right'});]
-	[float:(#GET{configmenu}|=={'menudroite'}|?{'left'});]
-	[width:(#GET{dim})px;]
-	[border: 1px solid (#GET{colorbords});]
-	[background:(#GET{colorwalma});]  
-	/*url("#CHEMIN{skins/fond.jpg}") */;
-}
-
-[(#CONFIG{walma/walma_skin}|?{' ',''})
-/*ajoutera un skin @import skin.css */
-#hmilieu{position:absolute; left:60px; top:-20px;}
-#cg{position:absolute; left:-10px; top:54px;}
-#hg{position:absolute; left:-10px; top:-20px;}
-#hd{position:absolute; left:430px; top:-20px;}
-
-#bmilieu{position:absolute; left:60px; top:330px;}
-#cd{position:absolute; left:430px; top:54px;}
-#bg{position:absolute; left:-10px; top:330px;}
-#bd{position:absolute; left:430px; top:330px;}
+var reinitcrayon = function() {
+[(#EVAL{defined('_DIR_PLUGIN_CRAYONS')}|?{' '})
+ $(".crayon-active, .crayon-boutons").remove(); 
+	if (cQuery && configCrayons.droits) {
+	   cQuery(".largeimage .crayon:lt(1000), inside").filter(configCrayons.droits).initcrayon();
+	}
 ]
-
-.hautwalma {
-	color:#666; height:18px; padding-left:5px; padding-right:5px; font-size:12px;
-	[border-bottom:1px solid (#GET{colorbords});]
-	[background-color:(#GET{colortetepied});]
-}
-
-/*les boutons des modes*/
-.ico {display:block;cursor:pointer; float:left; font-size:8px; width:9px; margin:3px 5px 2px 2px; text-align:center; border:1px solid #dadada;
-[background-color:(#GET{colortetepied});] 
-}
-a:hover.ico{border-color:#999;}
-a:hover.icomosaic{background-color:#999;}
-.icomosaic{background-color:#dadada;}
-.icomosaicon, a:hover.icomosaicon {background-color:#FF9900; border-color:#FF9900;}
-.icogauche {border-left-width:4px;}
-.icodroite {border-right-width:4px;}
-a.icodiapo{font-family: Verdana, Tahoma, Geneva, sans-serif; }
-a:hover.icodiapo {color:#111}
-a.icodiapoon{font-family: Verdana, Tahoma, Geneva, sans-serif; text-decoration:blink; cursor:wait; }
-.icoff{border-color:#dadada; [background-color:(#GET{colortetepied});] }
-.icoon, a:hover.icoon {border-color:#FF9900;}
-.grandw, .grandwon{font-weight:bold; color:#dadada; font-size:14px; float:left;}
-a.grandwon{color:#FF9900;}
-
-.figerhauteurmin{
-	width:1px; float:left;
-	[height:(#GET{minhauteur})px;]
-}
-
-/*les compteurs vignettes et image*/
-.compteurvignettes, .compteurimage{
-	width:110px; height:16px; text-align:center; margin:0 auto; font-size:11px;  white-space:nowrap;
-	font-family: Arial, Verdana, Tahoma, Geneva, sans-serif;
-	[background-color:(#GET{colortetepied});]
-	[border:1px solid (#GET{colorbords});]
-}
-.compteurimage{margin:10px auto;  margin-bottom:2px; display:none;}
-
-.compteurvignettes a, .compteurimage a{
-	display:block; color:#666; float:left; font-family: Arial, Verdana, Tahoma, Geneva, sans-serif;
-}
-#go, #back{
-	color:#FFCC00; font-weight:bold; 
-}
-#centrecompt{
-	width:86px;
-}
-#go{
-	float:right;
-}
-
-/* les vignettes*/
-.vignettes{}
-.vignsimage{display:none;}
-.vignsdroite{width:32%; padding:12px 1.8% 0% 0%; float:right;}
-.vignsgauche{width:32%; padding:12px 0% 0% 2.2%; float:left;}
-.vignsmosaic{width:95%; padding:12px 1% 3% 3%; float:left; }
-.vignettes ul{margin:0 auto; padding:0; float:left;}
-
-.vignettes li{
-	list-style-type:none; float:left; text-align:center; margin:2px;
-	[background-color:(#GET{colorvigns});]
-	[height:(#GET{dimvign})px;]
-	[width:(#GET{dimvign})px;]
-	overflow:hidden;
-}
-li.vigneton{background:#F4F4F4;}
-.vignettes span{
-	width:80%; display:block; font-size:10px; margin:0 auto;
-}
-.vignettes img {
-	border:none;
-	[margin-top:(#EVAL{[(#GET{dimvign})]*8/100})px;]
-}
-.vignettes cite{display:none;}
-
-/* l'image */
-.largeimage{
-	width:63%; text-align:center; position:relative; margin:0; margin-top:32px;
-}
-.limageimage{float:none; margin:0 auto; margin-bottom:30px;}
-.limagedroite{float:right; margin-right:1.5%;}
-.limagegauche{float:left; margin-left:1%;}
-.limagemosaic{display:none}
-
-.largeimage dd, .largeimage p, .largeimage img, .largeimage dl{
-	   margin:0; padding:0; border:none;
-}
-dd.decrire { width: #GET{large_image}px; margin:0 auto}
-
-.largeimage dt{
-	font-weight:bold;
-}
-
-.largeimage dd span{
-	font-size:0.8em; display:block;
-}
-
-.largeimage dd span a{
-	text-decoration:underline;
 }
 
 
-[(#GET{configmenu}|?{' ',''})
-/*Si on a demande un menu*/
-#wmenu { 
-	[width:(#GET{configmenu}|=={'menuhaut'}|?{100%,180px});]
-	[border: 1px solid (#GET{colorbords});]
-	[float:(#GET{configmenu}|=={'menugauche'}|?{left,right});]
-	[float:(#GET{configmenu}|=={'menuhaut'}|?{none});]
-	line-height:1.5em;
-background-color:red;
-}
-#wmenu ul {
-	list-style-type:none; margin:0; padding:0; text-align:left;
-	[border-top: 1px solid (#GET{walma/walma_colorbords});]
-}
-#wmenu li {
-	[display:(#GET{configmenu}|=={'menuhaut'}|?{inline});]
-}
-a.rubriqon{color:[(#GET{colorpage}|couleur_extreme)]; text-decoration:underline; }
-]
-
-.baswalma{
-	color:#666; clear:both;  font-size:10px; height:17px;
-	[border-top:1px solid (#GET{colorbords});]
-	[background-color:(#GET{colortetepied});]
+function remplacement(e, parquoi){
+		var lien=e.substring(e.lastIndexOf("/"));
+		var aremplacer = lien.substring(0,lien.indexOf("&"));
+		if(aremplacer==''){aremplacer=lien;}
+		artrub="[&id_article=(#ENV{id_article})][&id_rubrique=(#ENV{id_rubrique})]";
+		if(!lien.match(artrub)){
+		parquoi=parquoi+artrub;
+		}
+		mylink=e.replace(aremplacer, parquoi);
+return mylink;
 }
 
-.baswalma a{
-	color:#GET{colorlink};
+function liensvignette(){
+
+	$("#blocjs a")
+	.click(function() {
+		$("#blocjs a").parent("li").removeClass('vigneton');
+			if(select=="icomosaic"){
+			$(".vignettes").hide();
+			$(".largeimage").show().addClass('limageimage');
+			$(".compteurimage").show();
+			}
+		
+		$(this).parent("li").addClass('vigneton');
+		mylink=remplacement(this.href,"?page=wdoc");  
+			$(".largeimage")
+			.css({'opacity': 0.5})
+			.load(mylink,function(){ 
+					reinitcrayon();
+					appelimage();
+					$(".largeimage")
+					.css({'opacity': 1.0});
+			});
+	return false;
+	});
 }
 
-/*la recherche*/
-.recherchewalma{
-	margin:0; padding:0; width:70px; float:left; 
+function appelimage(){
+	$(".compteurimage a")
+	.click(function() { 
+	  if(!this.href.match("&mode=image")){
+		this.href=this.href+"&mode=image";
+		} 
+		mylink=remplacement(this.href,"?page=wdoc");
+			$(".largeimage")
+			.css({'opacity': 0.5})
+			.load(mylink,function(){
+					$(".compteurimage").show();
+					reinitcrayon();
+					appelimage();
+					$(".largeimage")
+					.css({'opacity': 1.0});
+			});
+	return false;
+	});	
 }
-.recherchewalma input{
-	margin:0; padding:0; font-size:10px;
+
+function appelvignettes(){
+	$(".compteurvignettes a")
+	.click(function() { 
+		 mylink=remplacement(this.href,"?page=wvign");
+			$(".vignettes")
+			.css({'opacity': 0.5})
+			.load(mylink,function(){ 
+					appelvignettes();
+					liensvignette();
+					$(".vignettes")
+					.css({'opacity':1.0});
+			});
+    	return false;
+	});
 }
-#noresult{position:absolute; width:90%; top:20%; left:20%; font-size:200%}
 
 
-#copid{
-	float:right; padding:2px;
-}
+$(document).ready(function () { 
+ 
+$('.ico')
+	.click(function() {
+		oldselect=select;
+		$(".compteurimage").hide(); 
+		$('.ico').removeClass('icoon');
+		$("#icomosaic").removeClass('icomosaicon');
+		$("#icodiapo").removeClass('icodiapoon');
+		$(".vignettes").removeClass('vignsgauche').removeClass('vignsdroite').removeClass('vignsmosaic').show();
+		$(".largeimage").removeClass('limagedroite').removeClass('limagegauche').removeClass('limageimage').show();
+		
+		$("#diaporama_innerfade").css('background','green');
+		$(".forinner").hide();
+		
+      	   $(selected = this).addClass('icoon');
+	   select=selected.id;
 
-[(#CONFIG{walma/walma_forum}|?{' ',''})
-/* si on a demande le forum de la galerie */
-.ajoutextforum{margin-bottom:1em; margin-top:2em; margin-top:3em; font-size:1.2em; text-align:left; color:#555;}
-.formforum {width:400px; margin:0 auto; font-size:0.8em;}
-.forumgalerie {width:80%; margin:0 auto;}
-.boutonforum{ float:right;text-align:center; top:-5px; right:-5px; width:140px; display:block; padding: 0.2em; text-decoration:none; color:#777; background-color:#f9f9f9; }
-.reponse a{ text-decoration:none; color:#0099CC; }
-.forumgalerie span{color:#666666; font-size:0.9em;}
-.thread{position:relative; font-family:Verdana, Arial, Helvetica, sans-serif; background-color:#e9e9e9; padding:1em; padding-top:0;  text-align:left; margin:1em;}
-.thread, .boutonforum{ font-size:0.7em;  border: 1px solid #C6DDDC; border-bottom: 1px solid #ABD6CC; -moz-border-radius: 1em;}
-.guillemet{ font-size:10em; font-family:Garamond; position:absolute; top:-30px; left:-5px; color:#3399CC;}
-.fil{ background-color:#fff; border:1px dashed #dadada; margin:0.8em 2em 0.8em 2em;}
-.topfil{border-bottom:1px dashed #dadada; background-color:#f9f9f9; padding:0.5em;  }
-.filtxt{background-color:#fff;  margin-bottom:0.8em; padding:0.5em 1em 0.5em 1em; }
-.reponse{text-align:right;}
-.topthread{padding:0.8em; padding-left:0; margin-left:4em;}
-.topthreadtxt, .forumgalerie blockquote{ border:1px solid #ccc; background-color:#fff;  margin-bottom:0.8em; padding:0.5em 1em 0.5em 1em; }
-.topthreadtxt{margin:0em 2em 0.8em 2em;}
-]
+//on recharge les vignettes seulement dans certaines conditions
+  fromto= oldselect+" " +select;
+  if((oldselect!=select)&&fromto!=("icogauche icodroite")&& fromto!=("icodroite icogauche")&& fromto!=("icogauche icoimage")&& fromto!=("icodroite icoimage"))
+  	{
+			mylink=remplacement(this.href,"?page=wvign");
+			$(".vignettes")
+			.css({'opacity': 0.5})
+			.load(mylink,function(){ 
+					appelvignettes();
+					liensvignette();
+					$(".vignettes")
+					.css({'opacity':1.0});
+			});
+	}
+	   return false;
+});
 
-/*
-#diaporama_innerfade a, #diaporama_innerfade dl {display:block; width:100%; text-align:center;}
-#diaporama_innerfade a img {border:none;}
-*/
-#telecharge{position:relative; width:200px; background-color:#DADADA}
-#pied img{margin-top:1em; border:none;}
+	  
+$("#icomosaic")
+  .click(function() {
+$(".largeimage").hide();
+$(".vignettes").addClass('vignsmosaic');
+$(this).addClass('icomosaicon');
+  });
+
+$("#icoimage,#icodiapo")
+  .click(function() {
+$(".vignettes").hide();
+$(".largeimage").addClass('limageimage');
+$(".compteurimage").show();
+  });
+
+  $("#icodiapo")
+  .click(function() {
+$(".largeimage").attr('id', 'diaporama_innerfade');
+$(".forinner").show();
+$("#diaporama_innerfade").css('background','orange');
+/*						 
+$("#diaporama_innerfade").innerfade({
+		animationtype: 'fade',
+		speed: 3000, 
+		timeout: 2000, 
+		type: 'sequence', 
+		containerheight: '400px' });
+		*/
+ 
+$(this).addClass('icodiapoon');
+});
+  
+$("#icogauche")
+  .click(function() {
+$(".vignettes").addClass('vignsgauche');
+$(".largeimage").addClass('limagegauche');
+  });
+
+$("#icodroite")
+  .click(function() {
+$(".vignettes").addClass('vignsdroite');
+$(".largeimage").addClass('limagedroite');
+  });
+
+appelvignettes();
+appelimage();
+liensvignette();
+
+});

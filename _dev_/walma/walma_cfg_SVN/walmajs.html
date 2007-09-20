@@ -5,7 +5,6 @@
 var selected;
 var select='[ico(#ENV{mode,#CONFIG{walma/walma_mode,droite}})]';
 var oldselect;
-var dothickbox = "[(#EVAL{defined('_DIR_PLUGIN_THICKBOX1')}|?{' '})oui]";
 
 var reinitcrayon = function() {
 [(#EVAL{defined('_DIR_PLUGIN_CRAYONS')}|?{' '})
@@ -15,7 +14,6 @@ var reinitcrayon = function() {
 	}
 ]
 }
-
 
 function remplacement(e, parquoi){
 		var lien=e.substring(e.lastIndexOf("/"));
@@ -30,19 +28,6 @@ return mylink;
 }
 
 function liensvignette(){
-  if((select=="icomosaic")&&(dothickbox=="oui")){
-/*ThickBox? = creer liens direct et relancer */
-	 $("#blocjs li a") 
-	  .each(function(i){
-		$(this).attr("href", $(this).parent("li").find("cite").html()); 
-		$(this).addClass('thickbox');
-		});
-imageArray='';
-imageArray=[];
-setTimeout(init_f,300);
- 
-	}else{
-//alert("thickbox non actif");
 
 	$("#blocjs a")
 	.click(function() {
@@ -65,7 +50,6 @@ setTimeout(init_f,300);
 			});
 	return false;
 	});
-  }
 }
 
 function appelimage(){

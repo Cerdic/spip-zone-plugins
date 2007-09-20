@@ -15,7 +15,7 @@
 	[<div class="compteurimage" [style="(#GET{quelmode}|=={image}|?{display:block;})"]>
 	(#PAGINATION{walma}|sinon{ #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{<:walma:images:>,<:walma:image:>})]})
 	</div>]
-<!--juste pour démarrer thickbox! <a type="image/jpeg" />-->
+
 	<BOUCLE_image(DOCUMENTS documents_articles){id_article IN #GET{arrayarticles}}{par #GET{queltri}}{recherche?}{mode=document}{extension IN png,jpg,gif}{pagination 1}>
 	<dl><dd>
 		<a href="#URL_DOCUMENT" title="#TITRE">
