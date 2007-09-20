@@ -1,9 +1,11 @@
-	<script type="text/javascript">
+<script type="text/javascript">
 	if (document.namespaces) { // only needed in IE
-     document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
+		document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
 	}
 	//<![CDATA[
-	URLbase = "#URL_SITE_SPIP/";
+	URLbase = "[(#CHEMIN{plugins}|url_absolue)]";
+	var idmap = "";
+	var numero = 1;
 	var map#ENV{id_carte_gis};
 	var markerManager#ENV{id_carte_gis};
 	<BOUCLE_centrado(GIS){id_article?}{id_rubrique ?}{0,1}>
@@ -21,14 +23,14 @@
 		if (GBrowserIsCompatible()) {
 			// facelo mapa
 			map#ENV{id_carte_gis} = new GMap2(document.getElementById("map#ENV{id_carte_gis}"));
-    		map#ENV{id_carte_gis}.addControl(new mapTypeControl());
+			map#ENV{id_carte_gis}.addControl(new mapTypeControl());
 			map#ENV{id_carte_gis}.addControl(new mapZoomControl());
 			map#ENV{id_carte_gis}.addControl(new mapMoveControl());
-    		map#ENV{id_carte_gis}.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, #GET{type});
-    		center = map#ENV{id_carte_gis}.getCenter();
-    		map#ENV{id_carte_gis}.enableDoubleClickZoom();
-    		map#ENV{id_carte_gis}.enableContinuousZoom();
-    		markerManager#ENV{id_carte_gis} = new GMarkerManager(map#ENV{id_carte_gis});
+			map#ENV{id_carte_gis}.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, #GET{type});
+			center = map#ENV{id_carte_gis}.getCenter();
+			map#ENV{id_carte_gis}.enableDoubleClickZoom();
+			map#ENV{id_carte_gis}.enableContinuousZoom();
+			markerManager#ENV{id_carte_gis} = new GMarkerManager(map#ENV{id_carte_gis});
 			<BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>
 			[(#ENV{id_article}|=={''}|?{'',
 			var kml = new GGeoXml("#URL_SITE_SPIP/#URL_DOCUMENT");
@@ -42,17 +44,18 @@
 			})]
 			</BOUCLE_kml_rub>
 			<//B_kml_art>
-  			//leemo-lo documento dos marcadores
+			//leemo-lo documento dos marcadores
        			$.get('[(#URL_PAGE{rss-gis})]', {[id_rubrique:(#ID_RUBRIQUE)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)]}, function(xml#ENV{id_carte_gis}){
     				//xml almacena en un objeto xml los datos recogidos del documento leido
-    				$("item", xml#ENV{id_carte_gis}).each(function(item#ENV{id_carte_gis}){;
+    				$("item", xml#ENV{id_carte_gis}).each(function(item#ENV{id_carte_gis}){
     					var xmlItem#ENV{id_carte_gis} = xml#ENV{id_carte_gis}.documentElement.getElementsByTagName("item")[item#ENV{id_carte_gis}];
     					[(#ENV{id_carte_gis}|?{' ',''})
     					var idmap = #ENV{id_carte_gis};]
-   						agregarMarcador(xmlItem#ENV{id_carte_gis}, 0, 0, idmap);
+    					agregarMarcador(xmlItem#ENV{id_carte_gis}, idmap, 1, 10);
 					});
 					markerManager#ENV{id_carte_gis}.refresh();
    				});
+   				
    				
    			}
 		}
