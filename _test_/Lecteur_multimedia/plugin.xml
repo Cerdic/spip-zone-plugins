@@ -36,6 +36,7 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 	</pipeline>
 	<pipeline>
 		<nom>affichage_final</nom>
+		<inclure>player_config_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
