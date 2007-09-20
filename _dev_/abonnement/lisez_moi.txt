@@ -17,9 +17,16 @@ x) Ajouter dans une page abonnement_complet.html
 
 			<?php if($auteur_session) { ?>
 
+			
+
 			<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+			
+			<INCLURE(inc/profil_adherent.php){id_auteur}> 
+			<INCLURE{fond=fonds/mes_abonnements}{id_auteur}>
+			
 			<BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{tout}{validite > #ENV{date}}>
 			<BOUCLE_abo(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}>
+						
 			<BOUCLE_abo2(spip_abonnements){id_abonnement}>
 			Vous êtes déja abonné :
 			<p>
@@ -48,15 +55,6 @@ x) Ajouter dans une page abonnement_complet.html
 
 
 
-x) Ajouter dans une page profil_complet.html
-
-<INCLURE(inc/profil_adherent.php){id_auteur}> 
-
-<INCLURE{fond=fonds/mes_abonnements}{id_auteur=#SESSION{id_auteur}}>
-
-
-
-
 
 x) Mettre pour la page article d'une rubrique en acces restreint
 
@@ -75,4 +73,5 @@ x) Relooker la page article_restreint.html
 
 TODO :
 
-Vérifier les index de spip_auteurs_elargis_abonnments et le auto increment
+Vérifier les index de spip_auteurs_elargis_abonnements et le auto increment
+faire porter la date de validite et le prix payé par auteurs_largis_abonnement
