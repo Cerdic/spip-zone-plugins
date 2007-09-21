@@ -22,73 +22,38 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/affichage');
-
-
 function exec_listes_toutes(){
 	
+	include_spip('inc/presentation');
+	include_spip('inc/affichage');
+	
 	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $connect_id_auteur;
 
-	$nomsite=lire_meta("nom_site"); 
-	$urlsite=lire_meta("adresse_site"); 
+//////////
+// PAGE CONTENU
+//////////
+
+	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
-	// Admin SPIP-Listes
-	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
-	
-	if (!function_exists('spip_listes_onglets')){
-		echo(_T('spiplistes:erreur_install'));     
-		echo fin_page();
-		exit;
+	// la gestion des abonnés est réservée aux admins 
+	if($connect_statut != "0minirezo") {
+		die (spiplistes_terminer_page_non_authorisee() . fin_page());
 	}
 	
-	if ($connect_statut != "0minirezo" ) {
-		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-		echo fin_page();
-		exit;
-	}
-	
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
-	$statut_auteur=$statut;
 	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
-	}
 	
 	debut_gauche();
-	
 	spip_listes_raccourcis();
-	
 	creer_colonne_droite();
-	
 	debut_droite("messagerie");
-
 	
 	// MODE LISTES: afficher les listes --------------------------------------------
 	
-	/*
-	debut_cadre_relief('forum-interne-24.gif');
-	
-	echo _T('spiplistes:nb_abonnes')."$nb_abonnes<p>";
-	echo "<p>";
-	fin_cadre_relief();
-	*/
-	
-	echo "<p>";
-	
-	//
-	// Afficher tableau de listes
-	//
-	
-	
-	//
-	// lettres d'infos
-	//
-	
-	
-	echo spiplistes_afficher_en_liste(_T('spiplistes:listes_internes'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'listes', 'inact', '', 'position') ;
-	echo spiplistes_afficher_en_liste(_T('spiplistes:liste_diff_publiques'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'listes', 'liste', '', 'position') ;
-	echo spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'listes', 'poublist', '', 'position') ;
+	echo(
+		spiplistes_afficher_en_liste(_T('spiplistes:listes_internes'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif', 'listes', 'inact', '', 'position')
+		. spiplistes_afficher_en_liste(_T('spiplistes:liste_diff_publiques'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif', 'listes', 'liste', '', 'position')
+		. spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif', 'listes', 'poublist', '', 'position')
+		);
 	
 	
 	// MODE EDIT LISTES FIN --------------------------------------------------------
