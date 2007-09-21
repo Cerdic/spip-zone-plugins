@@ -14,7 +14,7 @@ function action_spiplistes_changer_statut_abonne_dist() {
 	$redirect = urldecode(_request('redirect'));
 
 	$arg = explode('-',$arg);
-	$id_auteur = $arg[0];
+	$id_auteur = intval($arg[0]);
 	$action = $arg[1];
 	
 	if ($action=='format'){
@@ -29,7 +29,7 @@ function action_spiplistes_changer_statut_abonne_dist() {
 				else {
 					spip_query("INSERT INTO spip_auteurs_elargis (id_auteur,`spip_listes_format`) VALUES ("._q($id_auteur).","._q($statut).")");
 				}
-				spiplistes_log("FORMAT ID_AUTEUR #$id_auteur changed to $statut by ID_AUTEUR #$id_auteur");	
+				spiplistes_log("FORMAT ID_AUTEUR #$id_auteur changed to $statut by ID_AUTEUR #$connect_id_auteur");	
 			}
 		}
 	}
@@ -43,10 +43,10 @@ function action_spiplistes_changer_statut_abonne_dist() {
 			//attribuer un format de reception si besoin (ancien auteur)
 			$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`='$id_auteur'")) ;		
 			if(!$abo){
-			$ok = spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`='html' WHERE id_auteur="._q($id_auteur));
+				$ok = spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`='html' WHERE id_auteur="._q($id_auteur));
 			}
-									
 		}
+		spiplistes_log("SUBSCRIBE ID_AUTEUR #$id_auteur to ID_LISTE #$id_liste by ID_AUTEUR #$connect_id_auteur");	
 	}
 	if ($action=='listedesabo'){
 		if ($id_liste = $arg[2])
