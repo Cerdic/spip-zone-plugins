@@ -5,10 +5,8 @@
  <etat>dev</etat>
  <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>
  <description>
- <multi>{{Can you translate it again please? See the french version}} Plugin para insertar un google map na parte privada e na parte publica de SPIP. 
- Permite introducir un punto de google map &oacute; editar un artigo dende a parte privada.
-_ Este plugin engade duas taboas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_config}}
-_ A p�xina de probas do plugin � [www.spip.escoitar.org->http://www.spip.escoitar.org]
+ <multi>[gl]Plugin para configurar a API Googlemaps na parte privada do teu sitio SPIP.
+_ Permite empregar a API con vaios plugins (Gis, GeoForms...).
  [es] Plugin para configurar la API Googlemaps en la parte privada de tu sitio SPIP.
 _ Permite utilizar la API con varios plugins (Gis, GeoForms...).
 _ Una pa&tilde;gina de pruebas del plugin en [www.spip.escoitar.org->http://www.spip.escoitar.org]
