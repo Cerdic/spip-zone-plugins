@@ -27,11 +27,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip("inc/migre"); // [fr] Charge les fonctions de migre_static [en] Loads migre_static functions
+include_spip('base/abstract_sql');
+include_spip('inc/rubriques');
+
+global $migre_meta;
+
 function action_migre_action() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
 	$id_rubrique = intval($arg);
+
+	migre_check_var($id_rubrique);
 
 	// [fr] compatibilite ascendante
 	// [en] backward compatibility
@@ -69,9 +77,7 @@ function migre_action_presentation_haut($id_rubrique,$titre) {
 }
 
 function migre_pages($id_rubrique) {
-	include_spip('base/abstract_sql');
-	include_spip('inc/rubriques');
-	include_spip("inc/migre"); // [fr] Charge liste des balises [en] Loads HTML marks
+global $migre_meta, $dir_lang;
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
@@ -80,26 +86,34 @@ function migre_pages($id_rubrique) {
 		$id_rubrique = $row['id_rubrique'];
 	}
 
-	$listepages=_request('listepages'); // html_entity_decode ??
+//	$listepages=_request('listepages'); // html_entity_decode ??
+	$listepages=$migre_meta['migre_liste_pages'];
 	$dochtml=get_list_of_pages($listepages);
+
 	// [fr] Récup des URIs du site statique et traitement
 	// [en] Get all URIs and process them
+	$res_list= "\n<div $dir_lang style='width:98%;height:4em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>" ;
+
 	$res="";
 	while(list ($key, $migre_uri) = each ($dochtml))
 	{
+		$res_list .= $migre_uri."<br />";
 		$res .= debut_cadre_relief('article-24.gif',true,'',
 			_T('migre:processing_page')." <a href='$migre_uri'>".$migre_uri."</a>");
 		$res .= migre_infos_page($migre_uri,$id_rubrique);
 		$res .= fin_cadre_relief(true);
 	 };
 	$res .= _T('migre:migre_fini');
-	return $res;
+	$res_list.= "<br style='clear: both;' />\n</div>\n";
+	return $res_list.$res;
 }
 
+// ------------------------------------------------------------------------------
 // [fr] Recupere les infos de la page web, et traite son contenu
 // [fr] apres l'avoir telechargee
+// ------------------------------------------------------------------------------
 function migre_infos_page($adresse,$id_rubrique) {
-global $dir_lang;
+global $dir_lang, $migre_meta;
 	$auteur=$GLOBALS['auteur_session']['id_auteur'];	// [fr] id_auteur de tous les articles récupérés dans Spip
 	$res = "";
 
@@ -165,26 +179,30 @@ global $dir_lang;
 
 	// [fr] Si ce n est pas un test : integration de l'article dans SPIP
 	// [en] If it s not a test, load into SPIP
-	$migretest = _request('migretest');
-	$id_mot = _request('id_mot');
+//	$migretest = _request('migretest');
+	$migretest = $migre_meta['migre_test'];
+//	$id_mot = _request('migreid_mot');
+	$id_mot = $migre_meta['migre_id_mot'];
 
-	if ($migretest!="test")
+	if (!$migretest)
 	{
 		$res .= _T('migre:page_title').$titre."<br>\n";
 		$res .= migre_cree_article($titre,$body,$adresse,$id_rubrique,$auteur,$id_mot,$lang);
 	}
 	else
 	{
-		$res .= _T('migre:article_affiche_par_spip')."<br>\n";
-		$res .= "\n<div $dir_lang style='width:95%;height:8em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".propre($body)."<br style='clear: both;' />\n</div>\n";
-		$res .= _T('migre:article_edite_dans_spip')."<br>\n";
-		$res .= "\n<div $dir_lang style='width:95%;height:8em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".nl2br($body)."<br style='clear: both;' />\n</div>\n";
+		$res .= "\n<div $dir_lang style='float:left;width:48%;text-align:center;'>"._T('migre:article_affiche_par_spip')."\n</div>\n";
+		$res .= "\n<div $dir_lang style='float:left;width:48%;text-align:center;'>"._T('migre:article_edite_par_spip')."\n</div>\n<br />\n";
+		$res .= "\n<div $dir_lang style='float:left;width:48%;height:6em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".propre($body)."<br style='clear: both;' />\n</div>\n";
+		$res .= "\n<div $dir_lang style='float:left;width:48%;height:6em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".nl2br($body)."<br style='clear: both;' />\n</div>\n";
 	}
 
 	return $res;
 }
 
+// ------------------------------------------------------------------------------
 // [fr] met le contenu de <title></title> dans une chaîne
+// ------------------------------------------------------------------------------
 function migre_chercher_titre($ascruter)
 {
 	preg_match("/(<title>)(.*?)(<\/title>)/i",$ascruter, $recherche);
@@ -192,9 +210,12 @@ function migre_chercher_titre($ascruter)
 	return $titre;
 }
 
+// ------------------------------------------------------------------------------
 // [fr] met le contenu de <body></body> dans une chaîne
+// ------------------------------------------------------------------------------
 function migre_chercher_body ($ascruter)
 {
+global $migre_meta;
 	// [fr] Extraction du corps de la page
 	// [en] Extract the body
 	preg_match('/(<body.*>)(.*)(<\/body>)/iUs',$ascruter, $extraction);
@@ -202,8 +223,10 @@ function migre_chercher_body ($ascruter)
 
 	// [fr] Extraction d une sous partie du corps
 	// [en] Extracts a sub part of the body
-	$bcentredebut = transcoder_page(_request('bcentredebut'));
-	$bcentrefin  = transcoder_page(_request('bcentrefin'));
+//	$bcentredebut = transcoder_page(_request('bcentredebut'));
+	$bcentredebut = transcoder_page($migre_meta['migre_bcentredebut']);
+//	$bcentrefin  = transcoder_page(_request('bcentrefin'));
+	$bcentrefin  = transcoder_page($migre_meta['migre_bcentrefin']);
 
 	if (!empty($bcentredebut) AND !empty($bcentrefin))
 	{
@@ -216,20 +239,30 @@ function migre_chercher_body ($ascruter)
 }
 
 function migre_filtrer_body($contenu) {
-	include_spip("inc/migre"); // [fr] Charge liste des balises [en] Loads HTML marks
-	$htos=get_list_htos();
+global $migre_meta;
+
+//	$htos=get_list_htos();
 
 /* rajouts fwn */
 	$contenu=preg_replace('/(<span[ ]class\=\"code\">)(.*)(<\/span><br>)/iUs',"\r<code>\$2</code>\r",$contenu);
 	$contenu=preg_replace('/(<span[ ]class\=\"titre1-nb\">)(.*)(<\/span><span[ ]class\=\"titre1\">)(.*)(<\/span>)/iUs',"<h1>\$2\$4</h1>",$contenu);
 /* fin rajouts speciaux fwn */
 
+/*
 	if (count($htos)>0) {
 		reset($htos);
 		while ( list($key,$val) = each($htos) ) {
 			$filtre=transcoder_page(_request($key.'-filtre'));
 			$conv=preg_replace('/\\\r/iUs',"\r",transcoder_page(_request($key.'-htos'))); // [fr] peut etre vide [en] empty value allowed
 			if (!empty($filtre)) $contenu=preg_replace($filtre,$conv,$contenu);
+		}
+	}
+*/
+
+	if (count($migre_meta['migre_htos'])>0) {
+		reset($migre_meta['migre_htos']);
+		while ( list($key,$val) = each($migre_meta['migre_htos']) ) {
+			if (!empty($migre_meta['migre_htos'][$key]['filtre'])) $contenu=preg_replace($migre_meta['migre_htos'][$key]['filtre'],$migre_meta['migre_htos'][$key]['spip'],$contenu);
 		}
 	}
 
@@ -415,119 +448,32 @@ function migre_nettoie_html ($anetoyer)
 	return $res;
 }
 
-/*
-// [fr] decodage utf8 extrait de : http://fr.php.net/html_entity_decode
-// [en] decode utf8 function from :  http://www.php.net/html_entity_decode
-function migre_html_entity_decode($string)
-{
-	if ($GLOBALS['meta']['charset'] == 'utf-8')
-	{
-		// [fr] Site SPIP en utf-8
-		// [en] SPIP Website using UTF-8
+function migre_check_var($id_rubrique) {
+global $migre_meta;
 
-		$ver = explode( '.', PHP_VERSION );
-		$ver_num = $ver[0] . $ver[1] . $ver[2];
-		if ( $ver_num < 500 )
-		{
-			// [fr] PHP v4 : eviter erreur cannot yet handle MBCS in html_entity_decode
-			// [en] PHP r4 : avoid error cannot yet handle MBCS in html_entity_decode
-			return html_entity_decode_utf8($string);
-		}
-		else
-		{
-			// [fr] PHP v 5 ou ulterieur
-			return html_entity_decode($string,ENT_COMPAT,'UTF-8');
+	$migre_meta=array();
+	$migre_meta['migre_id_rubrique']=$id_rubrique;
+	$migre_meta['migre_id_mot']= _request('migreid_mot');
+	$migre_meta['migre_liste_pages']=_request('listepages');
+	$migre_meta['migre_test']= _request('migretest');
+	$migre_meta['migre_bcentredebut'] = _request('bcentredebut');
+	$migre_meta['migre_bcentrefin'] = _request('bcentrefin');
+	$migre_meta['migre_htos'] = array();
+	$htos=get_list_htos();
+	if (count($htos)>0) {
+		reset($htos);
+		while ( list($key,$val) = each($htos) ) {
+			$filtre=transcoder_page(_request($key.'-filtre'));
+			$conv=preg_replace('/\\\r/iUs',"\r",transcoder_page(_request($key.'-htos'))); // [fr] peut etre vide [en] empty value allowed
+			$migre_meta['migre_htos'][$key]['filtre']=$filtre;
+			$migre_meta['migre_htos'][$key]['spip']=$conv;
 		}
 	}
-	else
-	{
-		// [fr] Site SPIP en iso "classique"
-		// [en] SPIP website using iso
-		return html_entity_decode($string);
+	if ($migre_meta!= $GLOBALS['meta']['migre_static']) {
+		include_spip('inc/meta');
+		ecrire_meta('migre_static', serialize($migre_meta));
+		ecrire_metas();
 	}
 }
-
-function html_entity_decode_utf8($string)
-{
-    static $trans_tbl;
-
-    // replace numeric entities
-    $string = preg_replace('~&#x([0-9a-f]+);~ei', 'code2utf(hexdec("\\1"))', $string);
-    $string = preg_replace('~&#([0-9]+);~e', 'code2utf(\\1)', $string);
-
-    // replace literal entities
-    if (!isset($trans_tbl))
-    {
-        $trans_tbl = array();
-
-        foreach (get_html_translation_table(HTML_ENTITIES) as $val=>$key)
-            $trans_tbl[$key] = utf8_encode($val);
-    }
-
-    // [fr] Ajout d un traitement pour elements oublies dans la fonction fournie
-    // [en] added missing chars - dont know why ... but that's fine !
-    for ($i = 224; $i <= 254; $i++) {
-     $c=chr($i); $trans_tbl[$c] = utf8_encode($c);
-    }
-
-    return strtr($string, $trans_tbl);
-}
-
-function code2utf($number)
-{
-        if ($number < 0)
-            return FALSE;
-
-        if ($number < 128)
-            return chr($number);
-
-        // Removing / Replacing Windows Illegals Characters
-        if ($number < 160)
-        {
-                if ($number==128) $number=8364;
-            elseif ($number==129) $number=160; // (Rayo:) #129 using no relevant sign, thus, mapped to the saved-space #160
-            elseif ($number==130) $number=8218;
-            elseif ($number==131) $number=402;
-            elseif ($number==132) $number=8222;
-            elseif ($number==133) $number=8230;
-            elseif ($number==134) $number=8224;
-            elseif ($number==135) $number=8225;
-            elseif ($number==136) $number=710;
-            elseif ($number==137) $number=8240;
-            elseif ($number==138) $number=352;
-            elseif ($number==139) $number=8249;
-            elseif ($number==140) $number=338;
-            elseif ($number==141) $number=160; // (Rayo:) #129 using no relevant sign, thus, mapped to the saved-space #160
-            elseif ($number==142) $number=381;
-            elseif ($number==143) $number=160; // (Rayo:) #129 using no relevant sign, thus, mapped to the saved-space #160
-            elseif ($number==144) $number=160; // (Rayo:) #129 using no relevant sign, thus, mapped to the saved-space #160
-            elseif ($number==145) $number=8216;
-            elseif ($number==146) $number=8217;
-            elseif ($number==147) $number=8220;
-            elseif ($number==148) $number=8221;
-            elseif ($number==149) $number=8226;
-            elseif ($number==150) $number=8211;
-            elseif ($number==151) $number=8212;
-            elseif ($number==152) $number=732;
-            elseif ($number==153) $number=8482;
-            elseif ($number==154) $number=353;
-            elseif ($number==155) $number=8250;
-            elseif ($number==156) $number=339;
-            elseif ($number==157) $number=160; // (Rayo:) #129 using no relevant sign, thus, mapped to the saved-space #160
-            elseif ($number==158) $number=382;
-            elseif ($number==159) $number=376;
-        } //if
-       
-        if ($number < 2048)
-            return chr(($number >> 6) + 192) . chr(($number & 63) + 128);
-        if ($number < 65536)
-            return chr(($number >> 12) + 224) . chr((($number >> 6) & 63) + 128) . chr(($number & 63) + 128);
-        if ($number < 2097152)
-            return chr(($number >> 18) + 240) . chr((($number >> 12) & 63) + 128) . chr((($number >> 6) & 63) + 128) . chr(($number & 63) + 128);
-       
-       
-        return FALSE;
-} //code2utf()
-*/
 
 ?>

@@ -29,6 +29,8 @@
 // * [en] Restricted access, SPIP plugin * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip("inc/migre"); // [fr] Charge liste des balises [en] Loads HTML marks
+include_spip("inc/editer_article");
 
 // [fr] compatibilite spip 1.9
 // [en] SPIP 1.9 compatibility
@@ -55,7 +57,11 @@ function afficher_migre_formulaire($id_rubrique) {
 	// [fr] initialisations
 	// [en] initialize
 	$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
-	$row['id_rubrique'] = $id_rubrique;
+	if (!isset($GLOBALS['meta']['migre_static'])) migre_static_init_metas() ;
+
+	// [fr] La conf pre-existante domine
+	// [en] Pre-existing config leads
+	$row['id_rubrique'] = (!empty($GLOBALS['migre_static']['migre_id_rubrique'])) ? $GLOBALS['migre_static']['migre_id_rubrique'] : $id_rubrique;
 	if (!$row['id_rubrique']) {
 		if ($connect_id_rubrique)
 			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0];
@@ -128,24 +134,29 @@ function migre_presentation($id_rubrique,$titre) {
 }
 
 function migre_formulaire($row=array()) {
-	include_spip("inc/editer_article");
 	$aider = charger_fonction('aider', 'inc');
 	$config = "";
 	$id_rubrique = $row['id_rubrique'];
 	$id_secteur = $row['id_secteur'];
+	$valeur_url= (!empty($GLOBALS['migre_static']['migre_liste_pages'])) ? $GLOBALS['migre_static']['migre_liste_pages'] : _T('migre:liste_des_pages') ;
+	$valeur_test= (!empty($GLOBALS['migre_static']['migre_test'])) ? $GLOBALS['migre_static']['migre_test'] : "checked" ;
 	$form= "\n".
 		editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider) .
 		"\n<p><b>" .
 		_T('migre:choix_mot_cle') .
-		"</b>\n<br>" ._T('migre:sous_choix_mot_cle') .
+		"</b>\n<br>" ._T('migre:sous_choix_mot_cle') ."<br />".
 		choisir_un_mot($id_rubrique) ."</p>".
 		"\n<p><b>" .  _T('migre:choix_url_listepages') .  "</b>\n<br>" . _T('migre:sous_choix_url_listepages') .
 		"<br />\n<input type='text' name='listepages' class='forml' ".
-		" value=\"" . _T('migre:liste_des_pages') . "\" size='128' /></p>" .
+		" value=\"" . $valeur_url .
+		"\" size='128' /></p>" .
 		"\n<p><b>" .  _T('migre:choix_test') .  "</b>" .
 		"\n<br>" .  _T('migre:sous_choix_test') .
-		"\n<input type='checkbox' name='migretest' value='test' id='migretest' checked='checked' class='check' /></p>" .
-		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_valider') . "' /></div>" .
+		"\n<input type='checkbox' name='migretest' id='migretest' checked='".$valeur_test .
+		"' class='check' /></p>" .
+		"<div align='right'><input class='fondo' type='submit' value='" .
+		_T('bouton_valider') .
+		"' /></div>" .
 		formulaire_liste_balise()  ;
 
 	return generer_action_auteur("migre_action", $id_rubrique, $retour, $form, " method='post' name='formulaire'");
@@ -153,16 +164,17 @@ function migre_formulaire($row=array()) {
 
 // [fr] A ameliorer -> selection d un mot cle global pour tous les articles migres
 function choisir_un_mot($id_rubrique) {
-	$res.="\n<select name='id_mot' class='fondl spip_xx-small' style='width:90px;'>\n";
+	$res.="\n<select name='migreid_mot[]' multiple='multiple' size='10' id='id_mot' style='width:300px;'>\n";
 	// [fr] Rend possible de ne pas choisir un mot cle
 	// [en] Allows not to select a keyword
-	$res.="<option value='0'>".typo("----")."</option>\n";
-	$result = spip_query("SELECT mots.id_mot, mots.titre FROM spip_mots AS mots, spip_groupes_mots AS groupe WHERE mots.id_groupe=groupe.id_groupe AND groupe.articles='oui' ORDER BY mots.titre");
+//	$res.="<option value='0'>".typo("----")."</option>\n";
+	$result = spip_query("SELECT mots.id_mot, mots.titre FROM spip_mots AS mots, spip_groupes_mots AS groupe WHERE mots.id_groupe=groupe.id_groupe AND groupe.articles='oui' ORDER BY mots.id_mot");
 	if (spip_num_rows($result) > 0) {
 		while ($row = spip_fetch_array($result)) {
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
-			$res.="<option value='".$row['id_mot']."'>".typo($row['titre'])."</option>\n";
+			$valeur_select = (is_array($GLOBALS['migre_static']['migre_id_mot']) AND in_array($id_mot,$GLOBALS['migre_static']['migre_id_mot']) ) ? " selected='selected' " : "" ;
+			$res.="<option value='".$row['id_mot']."' ".$valeur_select ."> ".$id_mot.". ".typo($row['titre'])."</option>\n";
 		}
 	}
 	$res.="</select>\n" ;
@@ -172,8 +184,12 @@ function choisir_un_mot($id_rubrique) {
 // [fr] Produit un formulaire avec une liste de balises HTML et leur eventuelle conversion
 // [en] Provides a form showing a list of HTML marks and their translation
 function formulaire_liste_balise() {
-include_spip("inc/migre"); // [fr] Charge liste des balises [en] Loads HTML marks
-	$htos=get_list_htos();
+	if ($GLOBALS['migre_static'] AND is_array($GLOBALS['migre_static']['migre_htos'])) {
+		$htos=$GLOBALS['migre_static']['migre_htos'];
+	}
+	else {
+		$htos=get_list_htos();
+	}
 
 	$res  = debut_cadre_relief("",true);
 	$res .= bouton_block_invisible('migrefiltre') . "<b class='arial2'>". _T('migre:choix_balises')."</b>" ;

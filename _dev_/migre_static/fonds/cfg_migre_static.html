@@ -1,13 +1,105 @@
-#CACHE{0}
+[(#REM) titre=&#171;<:migre_static:titre_migre_formulaire:>&#187;]
+[(#REM) icone=img/migre.png]
+[(#REM) presentation= ]
+[(#REM) rediriger=1]
+[(#REM) autoriser=webmestre ]
+[(#SET{logo,
+<img src='#DOSSIER_SQUELETTE/../img/migre.png' width='64' height='64' alt='migre_static' style="float:#LANG_RIGHT;" />
+})]
 
-<form method="post">[(#ENV{_cfg_}|form_hidden)]
-<select name="id_migre_static">
-<BOUCLE_rubriques(RUBRIQUES){par titre}>
-<option value="#ID_RUBRIQUE">#ID_RUBRIQUE . #TITRE</option>
+[(#REM) descriptif=
+Descriptif de migre_static
+<:migre_static:titre_migre_formulaire:>
+]
+
+
+#CACHE{0}
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx','R&eacute;glages pour la migration'})]
+[(#REM) ------------------------ RUBRIQUE D IMPORTATION ------------------------ ]
+
+<fieldset>
+<legend>
+	Choix de la rubrique
+</legend>
+<p>
+<label>
+<select name="migre_id_rubrique">
+<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}>
+<option value="#ID_RUBRIQUE"[ selected="(#ENV{migre_id_rubrique}|=={#ID_RUBRIQUE}|?{selected})"]>#ID_RUBRIQUE . #TITRE</option>
 </BOUCLE_rubriques>
 </select>
-<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	<br />
+	<i>C'est dans cette rubrique que les articles seront importes<:migre_static:titre_migre_formulaire:></i>
+</label>
+</p>
+</fieldset>
+
+[(#REM) ---------------------- CHOIX DU MOT CLE -------------------- ]
+<fieldset>
+<legend>
+	Choix du mot cle
+</legend>
+<p>
+<label>
+Choisissez ci-dessous une liste de mot-cles a associer aux articles importes
+<br />
+#SET{selected,#CONFIG{migre_static/migre_id_mot,'',''}}
+<select name="migre_id_mot[]" multiple="multiple" size="5" id="migre_id_mot">
+	<!-- <option value="0">-------</option> -->
+<BOUCLE_mots(MOTS){par id_mot}>
+	<option value="#ID_MOT"[(#ID_MOT|in_array{#GET{selected}}|?{' selected="selected"'})]>
+	#ID_MOT . #TITRE
+	</option>
+</BOUCLE_mots>
+</select>
+<small><br />(vous pouvez s&#233;lectionner plusieurs mot cle avec les touches shift ou ctrl)
+<br /><a onclick="$('#migre_id_mot').find('option').attr('selected', false).end().trigger('change');">x</a> tout d&#233;selectionner</small>
+
+</label>
+</p>
+</fieldset>
+
+[(#REM) ---------------------- URL LISTE -------------------- ]
+<fieldset>
+<legend>
+	URL de la liste des pages
+</legend>
+<p>
+<label>
+	<input type="text" name="migre_liste_pages" value="#ENV{migre_liste_pages}" /> <!--size='75'-->
+	<br />
+	<i>C'est l'url de la liste des pages <:choix_url_liste_pages:></i>
+</label>
+</p>
+</fieldset>
+
+[(#REM) ---------------------- MIGRATION A BLANC / EFFECTIVE -------------------- ]
+<fieldset>
+<legend>
+	Choix du type de migration
+</legend>
+<p>
+<label>
+	<input type="checkbox" name="migre_test" [checked="(#ENV{migre_test}|?{checked})"] />
+	<br />
+	<i>Migration de test ?</i>
+</label>
+</p>
+</fieldset>
+
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
 <input type="reset" value="<:Reset:>" />
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+-->
+</div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
 </form>
 
