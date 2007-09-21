@@ -136,4 +136,7 @@ function get_table_id($table) {
 	}
 	return array(false, false);
 }
+
+// signaler le pipeline de notification
+$GLOBALS['spip_pipeline']['cfg_post_edition'] = "";
 ?>

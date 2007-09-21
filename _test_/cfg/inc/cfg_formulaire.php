@@ -156,19 +156,19 @@ class cfg_formulaire
 			$this->message .= ($msg = $ok ? _L('config_supprimee') : _L('erreur_suppression'))
 								. ' <b>' . $this->nom_config() . '</b>';
 			$this->log($msg);
-			return;
 		}
-		if (($this->message = $this->controle())) {
-			return;
+		else if (($this->message = $this->controle())) {
 		}
-		if (!$this->log_modif) {
+		else if (!$this->log_modif) {
 			$this->message .= _L('pas_de_changement') . ' <b>' . $this->nom_config() . '</b>';
-			return;
 		}
-		$ok = $this->sto->modifier();
-		$this->message .= ($msg = $ok ? _L('config_enregistree') : _L('erreur_enregistrement'))
-							. ' <b>' . $this->nom_config() . '</b>';
-		$this->log($msg . ' ' . $this->log_modif);
+		else {
+			$ok = $this->sto->modifier();
+			$this->message .= ($msg = $ok ? _L('config_enregistree') : _L('erreur_enregistrement'))
+								. ' <b>' . $this->nom_config() . '</b>';
+			$this->log($msg . ' ' . $this->log_modif);
+		}
+		$this->message = pipeline('cfg_post_edition',array('args'=>array('nom_config'=>$this->nom_config()),'data'=>$this->message));
 	}
 
 	function traiter()
