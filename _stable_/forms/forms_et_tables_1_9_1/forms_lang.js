@@ -16,7 +16,7 @@ function forms_init_lang() {
 		forms_menu_lang.append($("<a>").html("["+this+"]").css(this==forms_def_lang?forms_css_cur_link:forms_css_link)[0]);
 	});
 	//store all the fields forms
-	forms_forms = $("div.forms_champs form",forms_root);alert(forms_forms);
+	forms_forms = $("div.forms_champs form",forms_root);
 	//create menu lang for the global form
 	forms_make_menu_lang(forms_containers);
 	//init fields
@@ -51,7 +51,7 @@ function forms_change_lang(el,container,target) {
 }
 
 function forms_init_multi(target) {
-	if (!forms_forms || !forms_container) return;
+	if (!forms_forms || !forms_containers) return;
 	//Update the list of form if this is an update
 	if(target) forms_forms.add($("div.forms_champs form",target).get());
 	forms_fields = {};
