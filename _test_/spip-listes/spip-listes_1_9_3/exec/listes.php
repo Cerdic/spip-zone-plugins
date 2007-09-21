@@ -21,24 +21,38 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/mots');
-include_spip('inc/lang');
-include_spip('inc/affichage');
-include_spip('base/spip-listes');
-
 function exec_listes_dist(){
 
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $connect_id_auteur;
-	global $spip_lang_left,$spip_lang_right;
+	include_spip('inc/presentation');
+	include_spip('inc/mots');
+	include_spip('inc/lang');
+	include_spip('inc/affichage');
+	include_spip('base/spip-listes');
+	
+	global $connect_statut
+		, $connect_toutes_rubriques
+		, $connect_id_auteur
+		, $spip_lang_left,$spip_lang_right
+		;
 
-	$new = _request('new');
-	$id_liste = _request('id_liste');
-	$titre = _request('titre');
-	$texte = _request('texte');
-	$pied_page = _request('pied_page');
+	// initialise les variables postées par le formulaire
+	foreach(array(
+		'new'	// nouvelle liste si 'oui'
+		, 'id_liste'// si modif dans l'éditeur
+		, 'titre', 'texte', 'pied_page', 'changer_lang', 'statut_nouv' // modif ou new
+		, 'jour', 'mois', 'annee', 'heure', 'minute'
+		) as $key) {
+		$$key = _request($key);
+	}
+	foreach(array('id_liste') as $key) {
+		$$key = intval($$key);
+	}
+	foreach(array('titre', 'texte', 'pied_page') as $key) {
+		$$key = trim($$key);
+	}
+
+	$lang = (!empty($changer_lang)) ? $changer_lang : $GLOBALS['spip_lang'] ;
+	
 	//on peut plus ajouter un auteur la c buggue
 	//global $flag_auteur;
 	$creer_auteur = _request('creer_auteur');
@@ -59,35 +73,17 @@ function exec_listes_dist(){
 	
 	$debut = _request('debut');
  
- 	$ok_nouveau_statut  = _request('ok_nouveau_statut');
-	$statut_nouv = _request('statut_nouv');
- 
 	$nomsite=lire_meta("nom_site"); 
 	$urlsite=lire_meta("adresse_site"); 
 
- 
-	// Admin SPIP-Listes
-	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
-
-	if ($connect_statut != "0minirezo" ) {
-		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-		echo fin_page();
-		exit;
-	}
-
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
-		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
-	}
-
-	// Creer une liste -----------------------------------------
+	//////////////////////////////////////////////////////
+	// Creer une liste
 	////
-
 	if ($id_liste==0) {
 		if ($new=='oui') {
 			if ($titre=='') $titre = _T('spiplistes:liste_sans_titre');
 	
-			spip_query("INSERT INTO spip_listes (statut, date, lang) VALUES ('inact', NOW(),"._q($langue_new).")");
+			spip_query("INSERT INTO spip_listes (statut, date, lang) VALUES ('"._SPIPLISTES_PRIVATE_LIST."', NOW(),"._q($langue).")");
 			$id_liste = spip_insert_id();
 			//Auteur de la liste (moderateur)
 			spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste = "._q($id_liste));
@@ -96,115 +92,85 @@ function exec_listes_dist(){
 			spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste = "._q($id_liste).")");
 			spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
 		} 
+		// supprime l'id pour éviter de passer en mode modif
+		unset($id_liste);
 	}
-
-	debut_gauche();
-	echo debut_boite_info();
-
-	echo '<div align="center">
-	<font face="Verdana,Arial,Sans,sans-serif" size="1"><b>'._T('spiplistes:liste_numero').'&nbsp;:</b></font>
-	<br><font face="Verdana,Arial,Sans,sans-serif" size="6"><b>'.$id_liste.'</b></font>
-	</div>';
-
-	echo fin_boite_info();
-	spip_listes_raccourcis();
-	creer_colonne_droite();
-
-	debut_droite("messagerie");
 
 	//////////////////////////////////////////////////////
-	// Determiner les droits d'edition de la liste
-	//
-
-	$result = spip_query("SELECT statut, titre, maj FROM spip_listes WHERE id_liste="._q($id_liste));
-	if ($row = spip_fetch_array($result)) {
-		$statut_article = $row['statut'];
-		$titre_article = $row['titre'];
-		$maj = $row['maj'];
-	}
-	else {
-		$statut_article = '';
-	}
-
-	$result_auteur = spip_query("SELECT * FROM spip_auteurs_mod_listes WHERE id_liste="._q($id_liste)." AND id_auteur="._q($connect_id_auteur));
-
-	//
-	// Droits mieux structure que ca ?
-	//
-
-	$flag_auteur=true;
-	$flag_editable = ($flag_auteur AND ($statut_article == 'inact' OR $statut_article == 'liste' OR $statut_article == 'poublist'));
-
-	//
-	// Appliquer les modifications sur la liste
-	//
-
-	$ok_nouveau_statut = false;
-
-	//Modifier le statut de la liste
-	if ($statut_nouv) {
-		if ($flag_auteur) {
-		     //il faut etre admin et abonn�pour modifer une liste
-			if ($statut_nouv == 'liste' AND $statut_article == 'inact')
-				$ok_nouveau_statut = true;
-			else if ($statut_nouv == 'inact' AND $statut_article == 'poublist')
-				$ok_nouveau_statut = true;
-			else if ($statut_nouv == 'poublist' AND $statut_article == 'inact')
-				$ok_nouveau_statut = true;
-			else if ($statut_nouv == 'poublist' AND $statut_article == 'liste')
-				$ok_nouveau_statut = true;
-			else if ($statut_nouv == 'inact' AND $statut_article == 'liste')
-				$ok_nouveau_statut = true;
-			else if ($statut_nouv == 'liste' AND $statut_article == 'poublist')
-				$ok_nouveau_statut = true;
-		}
-		if ($ok_nouveau_statut)
-			$result = spip_query("UPDATE spip_listes SET statut="._q($statut_nouv)." WHERE id_liste="._q($id_liste));
-	}
-
-	//modifier la date
-	if ($jour=intval(_request('jour')) && $flag_editable) {
-		$mois = intval(_request('mois'));
-		if (($annee=intval(_request('annee'))) == "0000") $mois = "00";
-		if ($mois == "00") $jour = "00";
-		$result = spip_query("UPDATE spip_listes SET date='$annee-$mois-$jour' WHERE id_liste="._q($id_liste));
-	}
-
-	// Enregistrer les modifs sur la liste
-
-	if ($titre && !$ajout_forum && $flag_editable) {
-		$titre = corriger_caracteres($titre);
-		$descriptif = corriger_caracteres($descriptif);
-		$texte = corriger_caracteres($texte);
-		$pied_page = corriger_caracteres($pied_page);
-		
-		$result = spip_query("UPDATE spip_listes SET titre="._q($titre).",descriptif="._q($descriptif).",texte="._q($texte).",pied_page="._q($pied_page)." WHERE id_liste="._q($id_liste));
-		// afficher le nouveau titre dans la barre de fenetre
-		$titre_article = $titre;
-	}
-
-	if($changer_lang)
-		$result = spip_query("UPDATE spip_listes SET lang="._q($changer_lang)." WHERE id_liste="._q($id_liste));
-
-	// prendre en compte les modifs sur le message auto
-	if($Valider_auto){
-		if($auto == "oui"){
-			$result = spip_query("UPDATE spip_listes SET message_auto='oui' WHERE id_liste="._q($id_liste));
-			if($maj=="0000-00-00 00:00:00"){
-				$result = spip_query("UPDATE spip_listes SET maj=NOW() WHERE id_liste="._q($id_liste));
+	// Modifier une liste (retour d'éditeur)
+	////
+	if($id_liste > 0) {
+		$id_mod_list = 
+			(($row = spip_fetch_array(spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes WHERE id_liste="._q($id_liste)." LIMIT 1")))
+			&& $row['id_auteur'])
+			? $row['id_auteur']
+			: false
+			;
+		// les supers-admins et le moderateur seuls peuvent modifier la liste
+		if(($connect_toutes_rubriques) || ($id_mod_list > 0)) {
+			$sql_query = "";
+			// récupère les données de la liste actuelle pour optimiser l'update
+			if($row = spip_fetch_array(spip_query("SELECT statut, titre, maj FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1"))) {
+				foreach(array('statut','titre','maj') as $key) {
+					$current_liste[$key] = $row[$key];
+				}
 			}
-		}
-		elseif ($auto == "non"){
-			$result = spip_query("UPDATE spip_listes SET message_auto='non', maj='0000-00-00 00:00:00' WHERE id_liste="._q($id_liste));
-		}
-		if(email_valide($email_envoi)){
-			$result = spip_query("UPDATE spip_listes SET email_envoi="._q($email_envoi)." WHERE id_liste="._q($id_liste));
-		}
-		if(($changer_extra == "oui") AND ($auto == "oui") ){
-			$result = spip_query("UPDATE spip_listes SET patron="._q($patron).", periode="._q($periode).", titre_message="._q($sujet_message)." WHERE id_liste="._q($id_liste));
-			if($envoyer_direct){
-				$majnouv = (time() - ($periode * 3600*24));
-				$result = spip_query("UPDATE spip_listes SET maj=FROM_UNIXTIME($majnouv), periode="._q($periode)." WHERE id_liste="._q($id_liste));
+			
+			if(in_array($statut_nouv, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut_nouv!=$current_liste['statut'])) {
+				$sql_query .= " statut='$statut_nouv',";
+			}
+			
+			//modifier la date (à venir, ne figure pas dans cette version ???)
+			if ($jour) {
+				$mois = intval(_request('mois'));
+				if (($annee=intval(_request('annee'))) == "0000") $mois = "00";
+				if ($mois == "00") $jour = "00";
+				$result = spip_query("UPDATE spip_listes SET date='$annee-$mois-$jour' WHERE id_liste="._q($id_liste));
+			}
+
+			// Enregistrer les modifs sur la liste
+		
+			if ($titre && !$ajout_forum && $flag_editable) {
+				$titre = corriger_caracteres($titre);
+				$descriptif = corriger_caracteres($descriptif);
+				$texte = corriger_caracteres($texte);
+				$pied_page = corriger_caracteres($pied_page);
+				
+				$result = spip_query("UPDATE spip_listes SET titre="._q($titre).",descriptif="._q($descriptif).",texte="._q($texte).",pied_page="._q($pied_page)." WHERE id_liste="._q($id_liste));
+				// afficher le nouveau titre dans la barre de fenetre
+				$titre_article = $titre;
+			}
+		
+			if($changer_lang) // à revoir aussi
+				$result = spip_query("UPDATE spip_listes SET lang="._q($changer_lang)." WHERE id_liste="._q($id_liste));
+		
+			// prendre en compte les modifs sur le message auto // à revoir aussi
+			if($Valider_auto){
+				if($auto == "oui"){
+					$result = spip_query("UPDATE spip_listes SET message_auto='oui' WHERE id_liste="._q($id_liste));
+					if($maj=="0000-00-00 00:00:00"){
+						$result = spip_query("UPDATE spip_listes SET maj=NOW() WHERE id_liste="._q($id_liste));
+					}
+				}
+				elseif ($auto == "non"){
+					$result = spip_query("UPDATE spip_listes SET message_auto='non', maj='0000-00-00 00:00:00' WHERE id_liste="._q($id_liste));
+				}
+				if(email_valide($email_envoi)){
+					$result = spip_query("UPDATE spip_listes SET email_envoi="._q($email_envoi)." WHERE id_liste="._q($id_liste));
+				}
+				if(($changer_extra == "oui") AND ($auto == "oui") ){
+					$result = spip_query("UPDATE spip_listes SET patron="._q($patron).", periode="._q($periode).", titre_message="._q($sujet_message)." WHERE id_liste="._q($id_liste));
+					if($envoyer_direct){
+						$majnouv = (time() - ($periode * 3600*24));
+						$result = spip_query("UPDATE spip_listes SET maj=FROM_UNIXTIME($majnouv), periode="._q($periode)." WHERE id_liste="._q($id_liste));
+					}
+				}
+			}
+		
+			$sql_query = rtrim($sql_query, ",");
+			
+			if(!empty($sql_query)) {
+				spip_query("UPDATE spip_listes SET $sql_query WHERE id_liste=$id_liste LIMIT 1");
 			}
 		}
 	}
@@ -230,6 +196,32 @@ function exec_listes_dist(){
 		$patron = $row["patron"];
 		$lang = $row["lang"];
 	}
+
+//////////
+// PAGE CONTENU
+//////////
+
+	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+
+	// la gestion des listes de courriers est réservée aux admins 
+	if($connect_statut != "0minirezo") {
+		die (spiplistes_terminer_page_non_authorisee() . fin_page());
+	}
+	
+	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+
+	debut_gauche();
+	echo (
+		debut_boite_info(true)
+		. '<div align="center">
+	<font face="Verdana,Arial,Sans,sans-serif" size="1"><strong>'._T('spiplistes:liste_numero').'&nbsp;:</strong></font>
+	<br><font face="Verdana,Arial,Sans,sans-serif" size="6"><strong>'.$id_liste.'</strong></font>
+	</div>'
+		. fin_boite_info()
+	);
+	spip_listes_raccourcis();
+	creer_colonne_droite();
+	debut_droite("messagerie");
 
 	changer_typo('','liste'.$id_liste);
 
@@ -291,7 +283,7 @@ function exec_listes_dist(){
 		echo "<input type='hidden' name='exec' value='listes' />";
 		echo "<input type='hidden' name='id_liste' value='$id_liste' />";
 
-		echo "<b>"._T('spiplistes:Cette_liste_est').": </b> ";
+		echo "<strong>"._T('spiplistes:Cette_liste_est').": </strong> ";
 		
 		echo "<select name='statut_nouv' size='1' class='fondl' onChange='change_bouton(this)'>";
 		echo "<option" . mySel("inact", $statut_article) ." style='background-color: white'>"._T('spiplistes:statut_interne')."\n";
@@ -358,16 +350,16 @@ function exec_listes_dist(){
 			echo "<h2>"._T('spiplistes:date_act')."</h2>" ;
 		echo "<h3> "._T('spiplistes:sujet_courrier_auto').$titre_message."</h3>";
 		echo _T('spiplistes:env_esquel')." <em>".$patron."</em> " ;
-		echo "<br />"._T('spiplistes:Tous_les')."  <b>".$periode."</b>  "._T('info_jours') ;
+		echo "<br />"._T('spiplistes:Tous_les')."  <strong>".$periode."</strong>  "._T('info_jours') ;
 		
 		$dernier_envoi =  strtotime($maj_nouv)  ;
 		$sablier = (time() - $dernier_envoi) ;
 			
 		$proch = round(  (( (24*3600*$periode) - $sablier) / (3600*24)) ) ;
 		$last = round(  ($sablier / (3600*24)) ) ;
-		echo "<br />"._T('spiplistes:dernier_envoi')." <b>$last</b> "._T('spiplistes:jours')."<br />";
+		echo "<br />"._T('spiplistes:dernier_envoi')." <strong>$last</strong> "._T('spiplistes:jours')."<br />";
 		if($proch != 0) {
-			echo "<br />"._T('spiplistes:prochain_envoi_prevu_dans')."<b>$proch</b> "._T('spiplistes:jours')."<br />";
+			echo "<br />"._T('spiplistes:prochain_envoi_prevu_dans')."<strong>$proch</strong> "._T('spiplistes:jours')."<br />";
 		}
 		else {
 			echo "<br />"._T('spiplistes:prochain_envoi_aujd')."<br />";
@@ -381,9 +373,9 @@ function exec_listes_dist(){
 	echo "<input type='radio' name='auto' value='oui' id='auto_oui' "
 	 . $checked
 	 ." onchange=\"jQuery('#auto_oui_detail').show();\" />";
-	echo $checked?"<b>":"";
+	echo $checked?"<strong>":"";
 	echo "<label for='auto_oui'>"._T('spiplistes:prog_env')."</label>";
-	echo $checked?"</b>":"";
+	echo $checked?"</strong>":"";
 	echo "<input type='hidden' name='changer_extra' value='oui'>";
 	echo "<div id='auto_oui_detail'>";
 	
@@ -417,9 +409,9 @@ function exec_listes_dist(){
 	echo "<br /><input type='radio' name='auto' value='non' id='auto_non' "
 	 . $checked
 	 ." onchange=\"jQuery('#auto_oui_detail').hide();\" />";
-	echo $checked?"<b>":"";
+	echo $checked?"<strong>":"";
 	echo " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> ";
-	echo $checked?"</b>":"";
+	echo $checked?"</strong>":"";
 	if ($message_auto=='non')
 		echo "<script type='text/javascript'><!--
 		jQuery('#auto_oui_detail').hide();

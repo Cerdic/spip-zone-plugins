@@ -13,6 +13,12 @@ define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 
 define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
 
+define("_SPIPLISTES_PUBLIC_LIST", "liste");
+define("_SPIPLISTES_PRIVATE_LIST", "inact");
+define("_SPIPLISTES_TRASH_LIST", "poublist");
+// statuts des listes tels qu'affichées en liste 
+define("_SPIPLISTES_LISTES_STATUTS", _SPIPLISTES_PRIVATE_LIST.";"._SPIPLISTES_PUBLIC_LIST.";"._SPIPLISTES_TRASH_LIST);
+
 // charsets:
 // charsets autorisés :
 define("_SPIPLISTES_CHARSETS_ALLOWED", "iso-8859-1;iso-8859-9;iso-8859-6;iso-8859-15;utf-8");
