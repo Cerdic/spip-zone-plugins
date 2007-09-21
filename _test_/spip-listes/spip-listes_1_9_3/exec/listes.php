@@ -39,7 +39,8 @@ function exec_listes_dist(){
 	foreach(array(
 		'new'	// nouvelle liste si 'oui'
 		, 'id_liste'// si modif dans l'éditeur
-		, 'titre', 'texte', 'pied_page', 'changer_lang', 'statut_nouv' // modif ou new
+		, 'titre', 'texte' // modif ou new renvoyés par l'éditeur
+		, 'pied_page', 'changer_lang', 'statut_nouv', 'btn_modifier_replyto', 'email_envoi', 'btn_modifier_diffusion' // modif ou new
 		, 'jour', 'mois', 'annee', 'heure', 'minute'
 		) as $key) {
 		$$key = _request($key);
@@ -65,7 +66,6 @@ function exec_listes_dist(){
 	$Valider_auto = _request('Valider_auto');
 	$auto = _request('auto');
 	$changer_extra = _request('changer_extra');
-	$email_envoi = _request('email_envoi');
 	$patron = _request('patron');
 	$periode = _request('periode');
 	$sujet_message = _request('sujet_message');
@@ -76,30 +76,30 @@ function exec_listes_dist(){
 	$nomsite=lire_meta("nom_site"); 
 	$urlsite=lire_meta("adresse_site"); 
 
+	if ($id_liste==0) {
 	//////////////////////////////////////////////////////
 	// Creer une liste
 	////
-	if ($id_liste==0) {
 		if ($new=='oui') {
 			if ($titre=='') $titre = _T('spiplistes:liste_sans_titre');
 	
-			spip_query("INSERT INTO spip_listes (statut, date, lang) VALUES ('"._SPIPLISTES_PRIVATE_LIST."', NOW(),"._q($langue).")");
+			spip_query("INSERT INTO spip_listes (statut, date, lang, titre, texte) 
+				VALUES ('"._SPIPLISTES_PRIVATE_LIST."', NOW(),"._q($langue).","._q($titre).","._q($texte).")");
 			$id_liste = spip_insert_id();
 			//Auteur de la liste (moderateur)
 			spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste = "._q($id_liste));
 			spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
 			//abonner le moderateur a sa liste
-			spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste = "._q($id_liste).")");
+			spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste = "._q($id_liste));
 			spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
 		} 
+		spiplistes_log("LISTE ID #$id_liste added by ID_AUTEUR #$connect_id_auteur");
 		// supprime l'id pour éviter de passer en mode modif
-		unset($id_liste);
 	}
-
+	else if($id_liste > 0) {
 	//////////////////////////////////////////////////////
 	// Modifier une liste (retour d'éditeur)
 	////
-	if($id_liste > 0) {
 		$id_mod_list = 
 			(($row = spip_fetch_array(spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes WHERE id_liste="._q($id_liste)." LIMIT 1")))
 			&& $row['id_auteur'])
@@ -107,7 +107,8 @@ function exec_listes_dist(){
 			: false
 			;
 		// les supers-admins et le moderateur seuls peuvent modifier la liste
-		if(($connect_toutes_rubriques) || ($id_mod_list > 0)) {
+		$flag_editable = (($connect_toutes_rubriques) || ($id_mod_list > 0));
+		if($flag_editable) {
 			$sql_query = "";
 			// récupère les données de la liste actuelle pour optimiser l'update
 			if($row = spip_fetch_array(spip_query("SELECT statut, titre, maj FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1"))) {
@@ -118,6 +119,11 @@ function exec_listes_dist(){
 			
 			if(in_array($statut_nouv, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut_nouv!=$current_liste['statut'])) {
 				$sql_query .= " statut='$statut_nouv',";
+			}
+			
+			// Modifier l'adresse email 
+			if($btn_modifier_replyto && email_valide($email_envoi) && ($email_envoi!=$current_liste['email_envoi'])) {
+				$sql_query .= " email_envoi="._q($email_envoi).",";
 			}
 			
 			//modifier la date (à venir, ne figure pas dans cette version ???)
@@ -155,9 +161,7 @@ function exec_listes_dist(){
 				elseif ($auto == "non"){
 					$result = spip_query("UPDATE spip_listes SET message_auto='non', maj='0000-00-00 00:00:00' WHERE id_liste="._q($id_liste));
 				}
-				if(email_valide($email_envoi)){
-					$result = spip_query("UPDATE spip_listes SET email_envoi="._q($email_envoi)." WHERE id_liste="._q($id_liste));
-				}
+
 				if(($changer_extra == "oui") AND ($auto == "oui") ){
 					$result = spip_query("UPDATE spip_listes SET patron="._q($patron).", periode="._q($periode).", titre_message="._q($sujet_message)." WHERE id_liste="._q($id_liste));
 					if($envoyer_direct){
@@ -176,25 +180,54 @@ function exec_listes_dist(){
 	}
 
 	//
-	// Lire la liste
-	//
+	// Recharge les données la liste
+	$result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1");
 
-	$result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste));
+	if($row = spip_fetch_array($result)) {
+		foreach(array(
+		// initialise les variables du résultat SQL
+			'id_liste', 'titre', 'texte'
+			, 'titre_message', 'pied_page', 'date', 'statut', 'maj'
+			, 'email_envoi', 'message_auto', 'periode', 'patron', 'lang'
+			) as $key) {
+			$$key = $row[$key];
+		}
+	}
 
-	if ($row = spip_fetch_array($result)) {
-		$id_liste = $row["id_liste"];
-		$titre = $row["titre"];
-		$titre_message = $row["titre_message"];
-		$pied_page = $row["pied_page"];
-		$texte = $row["texte"];
-		$date = $row["date"];
-		$statut_article = $row["statut"];
-		$maj_nouv = $row["maj"];
-		$email_envoi=$row["email_envoi"];
-		$message_auto = $row["message_auto"];
-		$periode = $row["periode"];
-		$patron = $row["patron"];
-		$lang = $row["lang"];
+	$nb_abonnes = spiplistes_nb_abonnes_count ($id_liste);
+
+	// préparation des boutons 
+	if($flag_editable) {
+		// Propose de modifier la liste 
+		$gros_bouton_modifier = 
+			($connect_toutes_rubriques)
+			? icone (
+				_T('spiplistes:Modifier_cette_liste') // légende bouton
+				, generer_url_ecrire('liste_edit','id_liste='.$id_liste) // lien
+				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif" // image du fond
+				, "edit.gif" // image de la fonction. Ici, le crayon
+				, '' // alignement
+				, false // pas echo, demande retour
+				)
+			: ""
+			;
+		// Propose de supprimer la liste 
+		$gros_bouton_supprimer = 
+			($connect_toutes_rubriques)
+			// Conserve les archives postées
+			? icone (
+					_T('spiplistes:Supprimer_cette_liste')
+					, generer_url_ecrire('listes', "btn_supprimer_liste=$id_liste&id_liste=$id_liste")
+					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
+					, ""
+					, "right"
+					, false
+					)
+			: ""
+			;
+	}
+	else {
+		$gros_bouton_modifier = $gros_bouton_supprimer = "";
 	}
 
 //////////
@@ -225,231 +258,216 @@ function exec_listes_dist(){
 
 	changer_typo('','liste'.$id_liste);
 
-	echo debut_cadre_relief();
-	echo "<center>";
+	$page_result = "";
 
-	//
-	// Titre, surtitre, sous-titre
-	//
+	$page_result .= ""
+		. debut_cadre_relief("", true)
+		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
+		. "<tr><td valign='top'>\n"
+		. gros_titre(spiplistes_bullet_titre_liste($titre, $statut, true)." ".$titre, '', false)
+		. "</td>"
+		. "<td rowspan='2'>"
+		// le gros bouton modifier si besoin
+		. $gros_bouton_modifier
+		. "</td></tr>\n"
+		. "<tr><td width='100%'>\n"
+		. "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaa; ' class='verdana1 spip_small'>\n"
+		. propre($texte."~")
+		. "</div>\n"
+		. "</td>\n"
+		. "</tr></table>\n"
+		;
 
-	if($statut == 'liste') $logo_statut = 'puce-verte.gif';
-	if($statut == 'inact') $logo_statut = 'puce-blanche.gif';
-	if($statut == 'poublist') $logo_statut = 'puce-blanche.gif';
-
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-	echo "<tr width='100%'><td width='100%' valign='top'>";
-
-	gros_titre($titre, $logo_statut);
-
-	echo "<div style='margin:10px 0px 10px 0px'>";
-	echo justifier(propre($texte));
-	echo "</div>";
 	
-	echo "</td>";
-
-	if ($flag_editable) {
-		echo "<td><img src='"._DIR_IMG_PACK."rien.gif' width='5'></td>\n";
-		echo "<td align='center'>";
-		echo listes_edit_presentation($id_liste);
-		echo "</td>";
-	}
-	echo "</tr></table>\n";
-
-	echo fin_cadre_relief();
-
 	//////////////////////////////////////////////////////
 	// Modifier le statut de la liste
 	//
-
-	echo "
+	$page_result .= ""
+		. "
 	<script type='text/javascript'><!--
+	var alerter_modif_statut = false;
 	function change_bouton(selObj){
 		var selection=selObj.options[selObj.selectedIndex].value;
-		if (selection=='liste'){
-			document.statut.src='"._DIR_IMG_PACK."puce-verte.gif';
-		}
-		if (selection=='inact'){
-			document.statut.src='"._DIR_IMG_PACK."puce-blanche.gif';
-		}
-		if (selection=='poublist'){
-			document.statut.src='"._DIR_IMG_PACK."puce-poubelle.gif';
+		switch(selection) {
+			case '"._SPIPLISTES_PRIVATE_LIST."':
+				if(!alerter_modif_statut) { 
+					alert('".__texte_html_2_iso(_T('spiplistes:Attention_modifie_liste_abonnes'), $GLOBALS['meta']['charset'], true)."'); 
+					alerter_modif_statut=true; 
+				}
+				document.img_statut.src='".spiplistes_items_get_item("puce", _SPIPLISTES_PRIVATE_LIST)."';
+				break;
+			case '"._SPIPLISTES_PUBLIC_LIST."':
+				document.img_statut.src='".spiplistes_items_get_item("puce", _SPIPLISTES_PUBLIC_LIST)."';
+				break;
+			case '"._SPIPLISTES_TRASH_LIST."':
+				document.img_statut.src='".spiplistes_items_get_item("puce", _SPIPLISTES_TRASH_LIST)."';
+				break;
 		}
 	}
-	// --></script>";
+	// --></script>"
+		;
 
+	// tous les admins ont la possibilité de modifier le statut
 	if ($connect_statut == '0minirezo' ) {
-		echo debut_cadre_relief("racine-site-24.gif");
-		echo "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='get'>";
-		echo "<input type='hidden' name='exec' value='listes' />";
-		echo "<input type='hidden' name='id_liste' value='$id_liste' />";
+		$page_result .= ""
+			//. debut_cadre_relief("racine-site-24.gif", true)
+			. debut_cadre_relief("racine-site-24.gif", true, '', _T('spiplistes:Diffusion').__plugin_aide("diffusion"))
+			. "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='get'>"
+			. "<input type='hidden' name='exec' value='listes' />"
+			. "<input type='hidden' name='id_liste' value='$id_liste' />"
+			. "<strong>"._T('spiplistes:Cette_liste_est').": </strong> "
+			. 	spiplistes_bullet_titre_liste($titre, $statut, true, 'img_statut')
+			. "<select name='statut_nouv' size='1' class='fondl' onChange='change_bouton(this)'>"
+			. "<option" . mySel(_SPIPLISTES_PRIVATE_LIST, $statut_article) ." style='background-color: white'>"._T('spiplistes:statut_interne')."\n"
+			. "<option" . mySel(_SPIPLISTES_PUBLIC_LIST, $statut_article) . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."\n"
+			. "<option" . mySel(_SPIPLISTES_TRASH_LIST, $statut_article) . " style='background:url("._DIR_IMG_PACK."rayures-sup.gif)'>"._T('texte_statut_poubelle')."\n"
+			. "</select>"
+			. " \n"
+			. "<input type='submit' name='Modifier' value='"._T('bouton_modifier')."' class='fondo' />"
+			. aide ("artstatut")
+			. "<div style='margin:10px 0px 10px 0px'>"
+			. menu_langues('changer_lang', $lang , _T('spiplistes:langue'),'', '')
+			. "</div>"
+			//regler email d'envoi de la liste
+			.	( 
+				($id_liste)
+				? "<input type='hidden' name='id_liste' value='$id_liste' />"
+				: "<input type='hidden' name='new' value='$new' />"
+				)
+			. "</form>"
+			. fin_cadre_relief(true)
+			;
 
-		echo "<strong>"._T('spiplistes:Cette_liste_est').": </strong> ";
-		
-		echo "<select name='statut_nouv' size='1' class='fondl' onChange='change_bouton(this)'>";
-		echo "<option" . mySel("inact", $statut_article) ." style='background-color: white'>"._T('spiplistes:statut_interne')."\n";
-		echo "<option" . mySel("liste", $statut_article) . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."\n";
-		echo "<option" . mySel("poublist", $statut_article) . " style='background:url("._DIR_IMG_PACK."rayures-sup.gif)'>"._T('texte_statut_poubelle')."\n";
-		
-		echo "</select>";
-		echo " \n";
-		
-		if ($statut_article=='liste') {
-			echo "<img src='"._DIR_IMG_PACK."/puce-verte.gif' alt='' width='13' height='14' border='0' name='statut'>";
-		}
-		elseif ($statut_article=='inact') {
-			echo "<img src='"._DIR_IMG_PACK."/puce-blanche.gif' alt='' width='13' height='14' border='0' name='statut'>";
-		}
-		elseif ($statut_article == 'poublist') {
-			echo "<img src='"._DIR_IMG_PACK."/puce-poubelle.gif' alt='' width='13' height='14' border='0' name='statut'>";
-		}
-		echo " \n";
-		
-		echo "<input type='submit' name='Modifier' value='"._T('bouton_modifier')."' class='fondo' />";
-		echo aide ("artstatut");
-		echo "</form>";	
-		
-		echo "<div style='margin:10px 0px 10px 0px'>";
-		echo menu_langues('changer_lang', $lang , _T('spiplistes:langue'),'', '');
-		echo "</div>";
-		
-		//regler email d'envoi de la liste
-		echo "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='post'>";
-				
+			//
+			// Formulaire adresse email pour le reply-to
 		$email_defaut = entites_html(lire_meta("email_webmaster"));
 		$email_envoi = (email_valide($email_envoi)) ? $email_envoi : $email_defaut ;
+		$page_result .= ""
+			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').__plugin_aide("replyto"))
+			. "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='post'>\n"
+			. "<p class='verdana2'>\n"
+			. _T('spiplistes:adresse_mail_retour')."<br />\n"
+			. "<blockquote class='verdana2'><em>"._T('spiplistes:adresse')."</em></blockquote></p>\n"
+			. "<div style='text-align:center'>\n"
+			. "<input type='text' name='email_envoi' value=\"".$email_envoi."\" size='40' class='fondl' /></div>\n"
+			. ($id_liste ? "<input type='hidden' name='id_liste' value='$id_liste' />" : "")
+			. "<div style='text-align:right;'><input type='submit' name='btn_modifier_replyto' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+			. "</form>\n"
+			. fin_cadre_relief(true)
+			;
 		
-		echo "<strong>";
-		echo _T('spiplistes:retour')."</strong><br />";
-		
-		echo "<p>"._T('spiplistes:adresse')."</p>";
-		echo "<input type='text' name='email_envoi' value=\"".$email_envoi."\" size='20' class='fondl' />&nbsp;";
-				
-		if($id_liste)
-			echo "<input type='hidden' name='id_liste' value='$id_liste' />";
-		if($new)
-			echo "<input type='hidden' name='new' value='$new' />";
-		echo "<input type='submit' name='Valider_auto' value='"._T('bouton_valider')."' class='fondo' />";
-				
-		echo "</form>";
-				
-		echo fin_cadre_relief();
-	}
-
-	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES."img_pack/stock_timer.gif");
-	echo "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='post'>";
-	 
-	// programmer un courrier automatique
-	echo "<h3>"._T('spiplistes:program')."</h3>";
-
-	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
-	echo "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>";
-	if ($message_auto != "oui")
-		echo _T('spiplistes:non_program');
-	else {
-		if(($changer_extra == "oui") AND ($auto == "oui") )
-			echo "<h2>"._T('spiplistes:date_act')."</h2>" ;
-		echo "<h3> "._T('spiplistes:sujet_courrier_auto').$titre_message."</h3>";
-		echo _T('spiplistes:env_esquel')." <em>".$patron."</em> " ;
-		echo "<br />"._T('spiplistes:Tous_les')."  <strong>".$periode."</strong>  "._T('info_jours') ;
-		
-		$dernier_envoi =  strtotime($maj_nouv)  ;
-		$sablier = (time() - $dernier_envoi) ;
-			
-		$proch = round(  (( (24*3600*$periode) - $sablier) / (3600*24)) ) ;
-		$last = round(  ($sablier / (3600*24)) ) ;
-		echo "<br />"._T('spiplistes:dernier_envoi')." <strong>$last</strong> "._T('spiplistes:jours')."<br />";
-		if($proch != 0) {
-			echo "<br />"._T('spiplistes:prochain_envoi_prevu_dans')."<strong>$proch</strong> "._T('spiplistes:jours')."<br />";
-		}
+		// programmer un courrier automatique
+		$auto_checked = ($message_auto=='oui')?"checked='checked'":"";
+		$page_result .= ""
+			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide("temporiser"))
+			. "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='post'>"
+			. "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">"
+			. "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>"
+			;
+		if ($message_auto != "oui")
+			$page_result .= _T('spiplistes:non_program');
 		else {
-			echo "<br />"._T('spiplistes:prochain_envoi_aujd')."<br />";
+			$dernier_envoi =  strtotime($maj_nouv)  ;
+			$sablier = (time() - $dernier_envoi) ;
+			$proch = round(  (( (24*3600*$periode) - $sablier) / (3600*24)) ) ;
+			$last = round(  ($sablier / (3600*24)) ) ;
+			if(($changer_extra == "oui") && ($auto == "oui")) {
+				$page_result .= "<h2>"._T('spiplistes:date_act')."</h2>";
+			}
+			$page_result .= ""
+				. "<h3>"._T('spiplistes:sujet_courrier_auto').$titre_message."</h3>"
+				. _T('spiplistes:env_esquel')." <em>".$patron."</em> "
+				. "<br />"._T('spiplistes:Tous_les')."  <strong>".$periode."</strong>  "._T('info_jours')
+				. "<br />"._T('spiplistes:dernier_envoi')." <strong>$last</strong> "._T('spiplistes:jours')."<br />"
+				;
+			if($proch != 0) {
+				$page_result .= "<br />"._T('spiplistes:prochain_envoi_prevu_dans')."<strong>$proch</strong> "._T('spiplistes:jours')."<br />";
+			}
+			else {
+				$page_result .= "<br />"._T('spiplistes:prochain_envoi_aujd')."<br />";
+			}
 		}
-	}
-
-	echo "</td></tr>";
-	echo "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>";
-
-	$checked = ($message_auto=='oui')?"checked='checked'":"";
-	echo "<input type='radio' name='auto' value='oui' id='auto_oui' "
-	 . $checked
-	 ." onchange=\"jQuery('#auto_oui_detail').show();\" />";
-	echo $checked?"<strong>":"";
-	echo "<label for='auto_oui'>"._T('spiplistes:prog_env')."</label>";
-	echo $checked?"</strong>":"";
-	echo "<input type='hidden' name='changer_extra' value='oui'>";
-	echo "<div id='auto_oui_detail'>";
-	
-	$sujet_message = ($titre_message=='') ? $titre." "._T('zxml_de')." ".$nomsite : $titre_message ;
-	
-	echo "<ul style='list-style-type:none;'>";
-	echo "<li>"._T('spiplistes:message_sujet').": <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl' /> </li>" ;
-	echo "<li>"._T('spiplistes:squel');
-	
-	
-	$liste_patrons = find_all_in_path("patrons/","[.]html$");
-	echo "<select name='patron'>";
-	foreach($liste_patrons as $titre_option) {
-		$titre_option = basename($titre_option,".html");
-		$selected ="";
-		if ($patron == $titre_option)
-			$selected = "selected='selected";
-		echo "<option ".$selected." value='".$titre_option."'>".$titre_option."</option>\n";
-	}
-	echo "</select>";
-	
-	echo "</li>";
-
-	echo "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl' /> "._T('info_jours')."</li>" ;
-
-	if(!$envoyer_direct)
-		echo " <li><input type='checkbox' class='checkbox' name='envoyer_direct' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>";
-
-	echo "</ul></div>";
-	$checked = ($message_auto=='non')?"checked='checked'":"";
-	echo "<br /><input type='radio' name='auto' value='non' id='auto_non' "
-	 . $checked
-	 ." onchange=\"jQuery('#auto_oui_detail').hide();\" />";
-	echo $checked?"<strong>":"";
-	echo " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> ";
-	echo $checked?"</strong>":"";
-	if ($message_auto=='non')
-		echo "<script type='text/javascript'><!--
+		$sujet_message = ($titre_message=='') ? $titre." "._T('zxml_de')." ".$nomsite : $titre_message ;
+		$page_result .= ""
+			. "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>"
+			. "<input type='radio' name='auto' value='oui' id='auto_oui' "
+			. $auto_checked
+			. " onchange=\"jQuery('#auto_oui_detail').show();\" />"
+			. ($auto_checked?"<strong>":"")
+			. "<label for='auto_oui'>"._T('spiplistes:prog_env')."</label>"
+			. ($auto_checked?"</strong>":"")
+			. "<input type='hidden' name='changer_extra' value='oui'>"
+			. "<div id='auto_oui_detail'>"
+			. "<ul style='list-style-type:none;'>"
+			. "<li>"._T('spiplistes:message_sujet').": <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl' /> </li>"
+			. "<li>"._T('spiplistes:squel')
+			;
+		$liste_patrons = find_all_in_path("patrons/","[.]html$");
+		$page_result .= "<select name='patron'>";
+		foreach($liste_patrons as $titre_option) {
+			$titre_option = basename($titre_option,".html");
+			$selected ="";
+			if ($patron == $titre_option)
+				$selected = "selected='selected";
+			$page_result .= "<option ".$selected." value='".$titre_option."'>".$titre_option."</option>\n";
+		}
+		$page_result .= ""
+			. "</select>"
+			. "</li>"
+			. "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl' /> "._T('info_jours')."</li>"
+			.	(
+				(!$envoyer_direct)
+				? " <li><input type='checkbox' class='checkbox' name='envoyer_direct' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>"
+				: ""
+				)
+			. "</ul></div>"
+			;
+		$checked = ($message_auto=='non')?"checked='checked'":"";
+		$page_result .= ""
+			. "<br /><input type='radio' name='auto' value='non' id='auto_non' "
+			. $checked
+			. " onchange=\"jQuery('#auto_oui_detail').hide();\" />"
+			. ($checked?"<strong>":"")
+			. " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> "
+			. ($checked?"</strong>":"")
+			.	(
+				($message_auto=='non')
+				? "<script type='text/javascript'><!--
 		jQuery('#auto_oui_detail').hide();
-		--></script>";
+		--></script>"
+				: ""
+				)
+			. "</td></tr>\n"
+			. "<tr><td style='text-align:$spip_lang_right;'>"
+			. 	(
+				($id_liste)
+				? "<input type='hidden' name='id_liste' value='$id_liste' />"
+				: ""
+				)
+			.	(
+				($new)
+				? "<input type='hidden' name='new' value='$new' />"
+				: ""
+				)
+			. "<input type='submit' name='Valider_auto' value='"._T('bouton_valider')."' class='fondo' />"
+			. "</td></tr>"
+			. "</table>\n"
+			. "</form>"
+			. fin_cadre_relief(true)
+			;
+	} // end if ($connect_statut == '0minirezo' )
 	
-	echo "</td></tr>\n";
+	$page_result .= ""
+		. fin_cadre_relief(true)
+		;
+		
+	echo($page_result);
 	
-	echo "<tr><td style='text-align:$spip_lang_right;'>";
-	if($id_liste)
-		echo "<input type='hidden' name='id_liste' value='$id_liste' />";
-	if($new)
-		echo "<input type='hidden' name='new' value='$new' />";
-	echo "<input type='submit' name='Valider_auto' value='"._T('bouton_valider')."' class='fondo' />";
-	echo "</td></tr>";
-	echo "</table>\n";
-	
-	echo "</form>";
 
-	echo fin_cadre_relief();
-
-	//
+	//////////////////////////
 	// Liste des abonnes
-	//
-
-	//
 	// Appliquer les modifications sur les abonnes
-	//
-
 	echo "<a name='auteurs'></a>";
-
-	//
-	// Afficher les abonnes
-	//
-
-	//
-	// Liste des abonnes a la liste
-	//
-
 	$editer_auteurs = charger_fonction('editer_auteurs','inc');
 	echo $editer_auteurs('liste',$id_liste,$flag_editable, _request('cherche_auteur'),_request('ids'), 
 		_T('spiplistes:abon'),

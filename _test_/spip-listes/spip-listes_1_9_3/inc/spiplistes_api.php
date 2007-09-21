@@ -312,6 +312,40 @@ function spiplistes_terminer_page_non_authorisee ($return = true) {
 }
 
 
+// returne nombre d'abonnes a une liste
+function spiplistes_nb_abonnes_count ($id_liste) {
+	$r = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_listes WHERE id_liste="._q($id_liste)." LIMIT 1"));
+	$r = ($r && $r['n']) ? $r['n'] : 0;
+	return ($r);
+}
+
+// retourne la puce qui va bien 
+function spiplistes_bullet_titre_liste ($titre, $statut, $return=false, $id=false) {
+	$result = $img = "";
+	$img = spiplistes_items_get_item('puce', $statut);
+	$alt = spiplistes_items_get_item('alt', $statut);
+	if($img) {
+		$result = "<img src='$img' alt='$alt' ".(!empty($id) ? "id='$id'" : "")." border='0' />\n";
+	}
+	if($return) return($result);
+	else echo($result);
+}
+
+// renvoie un élément de définition courriers/listes (icone, puce, alternate text, etc.)
+// voir spsiplites_mes_options, tableau $spiplistes_items
+function spiplistes_items_get_item($item, $statut) {
+	global $spiplistes_items;
+
+	if(isset($spiplistes_items[$statut]) 
+		&& isset($spiplistes_items[$statut][$item])
+	) {
+		return ($spiplistes_items[$statut][$item]);
+	}
+	else {
+		return($spiplistes_items['default'][$item]);
+	}
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
