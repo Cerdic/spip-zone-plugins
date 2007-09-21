@@ -145,6 +145,9 @@ function cs_les_tests() {
 		);
 	test_outil($a, 'Test sur : cs_canonicalize()');
 
+	// charger mes_fonctions, utile pour les filtres ou certains outils
+	include_spip('public/parametrer');
+
 	// test de typo_exposants()
 	$textes = array(
 		"Pr Paul, Dr Jules, Prs Pierre &amp; Paul, Drs Pierre &amp; Paul, Pr&eacute;-St-Gervais ou Dr&eacute;",
