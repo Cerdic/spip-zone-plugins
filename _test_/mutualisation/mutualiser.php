@@ -36,6 +36,8 @@ function demarrer_site($site = '', $options = array()) {
 		$options
 	);
 
+	$GLOBALS['mutualisation_dir']=$options['repertoire'];
+	
 	if ($options['cookie_prefix'])
 		$GLOBALS['cookie_prefix'] = prefixe_mutualisation($site);
 	if ($options['table_prefix'])

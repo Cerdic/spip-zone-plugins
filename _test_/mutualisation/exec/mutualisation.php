@@ -13,8 +13,8 @@ function exec_mutualisation_dist() {
 		die('pas admin !');
 
 	$sites = array();
-	foreach(preg_files('../sites/', '.*/config/connect.php') as $s) {
-		$sites[] = preg_replace(',^\.\./sites/(.*)/config/connect.php,', '\1', $s);
+	foreach(preg_files('../'.$GLOBALS['mutualisation_dir'].'/', '.*/config/connect.php') as $s) {
+		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
 	}
 	sort($sites);
 
@@ -40,7 +40,7 @@ function exec_mutualisation_dist() {
 
 	$nsite = 1;
 	foreach ($sites as $v) {
-		if (lire_fichier(_DIR_RACINE.'sites/'.$v.'/tmp/meta_cache.txt', $meta)
+		if (lire_fichier(_DIR_RACINE.$GLOBALS['mutualisation_dir'].'/'.$v.'/tmp/meta_cache.txt', $meta)
 		AND is_array($meta = @unserialize($meta))
 		AND $url = $meta['adresse_site']) {
 			$url .= '/';
