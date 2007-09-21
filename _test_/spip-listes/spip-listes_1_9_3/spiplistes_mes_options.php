@@ -85,6 +85,110 @@ $GLOBALS['spiplistes_version'] = "SPIP-listes 1.9.1";
 if($spiplistes_v >= 1.92)
 $GLOBALS['spiplistes_version'] = "SPIP-listes $spiplistes_v";
 
+/* CP: tableau issu de SPIP-Listes-V (à nettoyer en fin d'optimisation)
+	Tableau des objets de navigations dans l'espace privé
+*/
+$spiplistes_items = array(
+	// les courriers
+	'redac' => array(
+		'puce' => _DIR_IMG_PACK."puce-blanche.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_brouillon-24.png'
+		, 'alt' => _T('spiplistes:message_en_cours')
+		, 'nav_t' => _T('spiplistes:En_redaction') // nav_t = titre dans naviguer rapide (boite gauche)
+		, 'tab_t' => _T('spiplistes:Courriers_en_cours_de_redaction') // tab_t = titre du tableau dans spip_listes
+		, 'desc' => "" // description
+	)
+	, 'ready' => array(
+		'puce' => _DIR_IMG_PACK."puce-orange.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_brouillon-24.png'
+		, 'alt' => _T('spiplistes:message_redac')
+		, 'nav_t' => _T('spiplistes:Prets_a_envoi')
+		, 'tab_t' => _T('spiplistes:Courriers_prets_a_etre_envoye')
+		, 'desc' => ""
+		)
+	, 'encour' => array(
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce_verte_encour.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_encour-24.png'
+		, 'alt' => _T('spiplistes:message_en_cours')
+		, 'nav_t' => _T('spiplistes:En_cours')
+		, 'tab_t' => _T('spiplistes:aff_encours')
+		, 'desc' => ""
+		)
+	, 'publie' => array(
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-grise.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_publie-24.png'
+		, 'alt' => _T('spiplistes:message_arch')
+		, 'nav_t' => _T('spiplistes:Publies')
+		, 'tab_t' => _T('spiplistes:Courriers_publies')
+		, 'desc' => ""
+		)
+	, 'stop' => array(
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-stop.png"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_stop-24.png'
+		, 'alt' => _T('spiplistes:Envoi_abandonne')
+		, 'nav_t' => _T('spiplistes:Stoppes')
+		, 'tab_t' => _T('spiplistes:Courriers_stope')
+		, 'desc' => ""
+		)
+	, 'vide' => array(
+		'puce' => _DIR_IMG_PACK."puce-rouge.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_vide-24.png'
+		, 'alt' => _T('spiplistes:Envoi_abandonne')
+		, 'nav_t' => _T('spiplistes:Vides')
+		, 'tab_t' => _T('spiplistes:Courriers_vides')
+		, 'desc' => ""
+		)
+	, 'ignore' => array(
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-inconnu.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'
+		, 'alt' => _T('spiplistes:Envoi_abandonne')
+		, 'nav_t' => _T('spiplistes:Sans_destinataire')
+		, 'tab_t' => _T('spiplistes:Courriers_sans_destinataire')
+		, 'desc' => ""
+		)
+	// les listes
+	, _SPIPLISTES_PRIVATE_LIST  => array(
+		'puce' => _DIR_IMG_PACK."puce-rouge.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+		, 'alt' => _T('spiplistes:Liste_prive')
+		, 'nav_t' => _T('spiplistes:Listes_privees')
+		, 'tab_t' => _T('spiplistes:Listes_diffusion_interne')
+		, 'desc' => _T('spiplistes:Listes_diffusion_interne_desc')
+		)
+	, _SPIPLISTES_PUBLIC_LIST => array(
+		'puce' => _DIR_IMG_PACK."puce-verte.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+		, 'alt' => _T('spiplistes:Liste_publique')
+		, 'nav_t' => _T('spiplistes:Listes_publiques')
+		, 'tab_t' => _T('spiplistes:Listes_diffusion_publique')
+		, 'desc' => _T('spiplistes:Listes_diffusion_publique_desc')
+		)
+	, _SPIPLISTES_MONTHLY_LIST => array(
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-bleue.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+		, 'alt' => _T('spiplistes:Liste_mensuelle')
+		, 'nav_t' => _T('spiplistes:Publiques_mensuelles')
+		, 'tab_t' => _T('spiplistes:Listes_diffusion_mensuelle')
+		, 'desc' => _T('spiplistes:Listes_diffusion_mensuelle_desc')
+		)
+	, _SPIPLISTES_TRASH_LIST => array(
+		'puce' => _DIR_IMG_PACK."puce-poubelle.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+		, 'alt' => _T('spiplistes:Listes_suspendues')
+		, 'nav_t' => _T('spiplistes:Listes_suspendues')
+		, 'tab_t' => _T('spiplistes:Listes_diffusion_suspendue')
+		, 'desc' => _T('spiplistes:Listes_diffusion_suspendue_desc')
+		)
+	// l'inconnu ???
+	, 'default' => array(
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-inconnu.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'
+		, 'alt' => _T('spiplistes:Inconnu')
+		, 'nav_t' => _T('spiplistes:Inconnu')
+		, 'tab_t' => _T('spiplistes:Inconnu')
+		, 'desc' => ""
+		)
+	);
 
 include_spip('inc/options_spip_listes');
 ?>
