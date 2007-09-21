@@ -3,6 +3,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// Configuration / CFG
+'config_migre_descriptif' => 'Configuration de la migration d\'un site',
+'choix_mot_cle_selection' => '<br />(vous pouvez s&#233;lectionner plusieurs mot-clefs avec les touches shift ou ctrl)<br /><a onclick="$(\'#migre_id_mot\').find(\'option\').attr(\'selected\', false).end().trigger(\'change\');">x</a> tout d&#233;selectionner.',
+'config_choix_test' => 'Choix du type de migration',
+'config_choix_rubrique' => 'Choix de la rubrique',
+'choix_rubrique_selection' => 'C\'est dans la rubrique choisie que les articles seront import&eacute;s',
+
 // Formulaire
 'titre_migre_formulaire' => 'Migration d\'un site statique',
 'sur_titre_migre_formulaire' => 'Saisie des informations',
@@ -24,38 +31,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_balises_filtre' => 'Filtre de s&eacute;lection',
 'choix_balises_htos' => 'Conversion &eacute;ventuelle',
 
-'choix_balises_prem' => 'Balise &agrave; filtrer en premier',
-'sous_choix_balises_prem' => '<br>Laisser vide si inutile',
-
-'choix_balises_br' => 'BR',
-'sous_choix_balises_br' => ' ',
+'choix_balises_prem' => 'Premier filtre',
+'choix_balises_comment' => 'commentaires',
+'choix_balises_script' => 'script/style',
+'choix_balises_italique' => 'I',
+'choix_balises_bold' => 'B',
+'choix_balises_h' => 'Hn',
+'choix_balises_tr' => 'TR',
 'choix_balises_thtd' => 'TH TD',
-'sous_choix_balises_thtd' => ' ',
+'choix_balises_br' => 'BR',
 'choix_balises_tbody' => 'TBODY',
-'sous_choix_balises_tbody' => ' ',
 'choix_balises_table' => 'TABLE',
-'sous_choix_balises_table' => ' ',
 'choix_balises_font' => 'FONT',
-'sous_choix_balises_font' => ' ',
 'choix_balises_span' => 'SPAN',
-'sous_choix_balises_span' => ' ',
 'choix_balises_ulol' => 'UL OL',
-'sous_choix_balises_ulol' => ' ',
 'choix_balises_blockquote' => 'BLOCKQUOTE',
-'sous_choix_balises_blockquote' => ' ',
 'choix_balises_div' => 'DIV',
-'sous_choix_balises_div' => ' ',
 'choix_balises_hr' => 'HR',
-'sous_choix_balises_hr' => ' ',
 'choix_balises_bull' => '&amp;BULL;',
-'sous_choix_balises_bull' => ' ',
-'choix_balises_comment' => '&lt;!-- xxx --&gt;',
-'sous_choix_balises_comment' => ' ',
+'choix_balises_li' => 'LI',
+'choix_balises_slashli' => '/LI',
 'choix_balises_nbsp' => '&amp;NBSP;',
-'sous_choix_balises_nbsp' => ' ',
-'choix_balises_dern' => 'Balise &agrave; filtrer en dernier',
-'sous_choix_balises_dern' => '<br />Laisser vide si inutile',
-
+'choix_balises_slashtrtd' => '/T[RHD]',
+'choix_balises_p' => 'P',
+'choix_balises_dern' => 'Dernier filtre',
 
 // Action
 
@@ -71,6 +70,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'update_article_id' => 'Mise &agrave; jour de l\'article num&eacute;ro : ',
 'insert_article_titre' => ' avec le titre : ',
 'migre_fini' => 'Fin des traitements de migration',
+'article_affiche_par_spip' => 'Article affich&eacute; par SPIP',
+'article_edite_par_spip' => 'Article edit&eacute; par SPIP',
+
 
 // Inutilisee
 'err_liste_pages_vide' => '<strong>Erreur: La liste des pages est vide.</strong> Ce plugin r&eacute;cup&egrave;re une liste d\'adresses internet (URLs) contenues dans la page web http://www.mondomaine.com/la_liste_des_pages.html. Ce fichier doit contenir une suite de liens hypertexte vers les pages à importer dans spip, sous la forme &gt;a href="http://www.mondomaine.com/page_a_importer_1.html"&lt;Titre dans spip&gt;/a&lt;',

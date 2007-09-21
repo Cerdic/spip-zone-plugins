@@ -2,15 +2,12 @@ Migre_static todolist
 ---------------------
 
  * checking security
- * checking requirement for each include function (performance)
  * performance improvement
  * optimize the form
  * more documentation
- * cfg plugin compat
  * Adding migre_static_log function
  * better ul/ol filters
 
--* stockage des paramètres de la migration (lorsqu'on passe d'un import à blanc vers une migration réelle, ne pas tout re-saisir)
 -* affichage du lien vers les articles créés lors d'un import réel
 -* réduction de l'affichage des parties affichées et traitées (seulement les N premières lignes, les N premières pages) lors d'un import à blanc
 -* la possibilité d'indiquer la rubrique d'import dans la liste sous la forme <rubriquexxx> par blocs

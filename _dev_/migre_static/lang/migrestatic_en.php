@@ -3,6 +3,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+// Configuration / CFG
+'config_migre_descriptif' => 'Website migration config',
+'choix_mot_cle_selection' => '<br />(You can select some keywords  with shift or ctrl)<br /><a onclick="$(\'#migre_id_mot\').find(\'option\').attr(\'selected\', false).end().trigger(\'change\');">x</a> unselect all.',
+'config_choix_test' => 'Choose your migration type (full or test)',
+'config_choix_rubrique' => 'Choose the rubrique',
+'choix_rubrique_selection' => 'The imported articles will be moved in this selected rubrique',
+
 // Formulaire
 'titre_migre_formulaire' => 'Migration of a static website',
 'sur_titre_migre_formulaire' => 'Type in infos',
@@ -24,37 +31,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_balises_filtre' => 'Selection filter',
 'choix_balises_htos' => 'Converted tag',
 
-'choix_balises_prem' => 'First tag to be filtered',
-'sous_choix_balises_prem' => '<br />Leave empty if useless',
+'choix_balises_prem' => 'First filter',
 
-'choix_balises_br' => 'BR',
-'sous_choix_balises_br' => ' ',
-'choix_balises_thtd' => 'TH TD',
-'sous_choix_balises_thtd' => ' ',
-'choix_balises_tbody' => 'TBODY',
-'sous_choix_balises_tbody' => ' ',
-'choix_balises_table' => 'TABLE',
-'sous_choix_balises_table' => ' ',
-'choix_balises_font' => 'FONT',
-'sous_choix_balises_font' => ' ',
-'choix_balises_span' => 'SPAN',
-'sous_choix_balises_span' => ' ',
-'choix_balises_ulol' => 'UL OL',
-'sous_choix_balises_ulol' => ' ',
-'choix_balises_blockquote' => 'BLOCKQUOTE',
-'sous_choix_balises_blockquote' => ' ',
-'choix_balises_div' => 'DIV',
-'sous_choix_balises_div' => ' ',
-'choix_balises_hr' => 'HR',
-'sous_choix_balises_hr' => ' ',
-'choix_balises_bull' => '&amp;BULL;',
-'sous_choix_balises_bull' => ' ',
 'choix_balises_comment' => '&lt;!-- comments --&gt;',
-'sous_choix_balises_comment' => ' ',
+'choix_balises_script' => 'script/style',
+'choix_balises_italique' => 'I',
+'choix_balises_bold' => 'B',
+'choix_balises_h' => 'Hn',
+'choix_balises_tr' => 'TR',
+'choix_balises_thtd' => 'TH TD',
+'choix_balises_br' => 'BR',
+'choix_balises_tbody' => 'TBODY',
+'choix_balises_table' => 'TABLE',
+'choix_balises_font' => 'FONT',
+'choix_balises_span' => 'SPAN',
+'choix_balises_ulol' => 'UL OL',
+'choix_balises_blockquote' => 'BLOCKQUOTE',
+'choix_balises_div' => 'DIV',
+'choix_balises_hr' => 'HR',
+'choix_balises_bull' => '&amp;BULL;',
+'choix_balises_li' => 'LI',
+'choix_balises_slashli' => '/LI',
 'choix_balises_nbsp' => '&amp;NBSP;',
-'sous_choix_balises_nbsp' => ' ',
-'choix_balises_dern' => 'Least tag to filter',
-'sous_choix_balises_dern' => '<br />Leave empty if useless',
+'choix_balises_slashtrtd' => '/T[RHD]',
+'choix_balises_p' => 'P',
+'choix_balises_dern' => 'Last filter',
 
 
 // Action
@@ -71,6 +72,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'update_article_id' => 'Updating article n#: ',
 'insert_article_titre' => ' with this title: ',
 'migre_fini' => 'End of all migration process',
+'article_affiche_par_spip' => 'Article as shown by SPIP',
+'article_edite_par_spip' => 'Article edited by SPIP',
 
 // Inutilisee
 'err_liste_pages_vide' => '<strong>Error: The page list seems empty.</strong> This plugin download an URL list using the page http://www.example.com/the_page_list.html. A line, blank or tab separated list of URIs to import should be listed in this file.',

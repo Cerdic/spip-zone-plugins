@@ -32,7 +32,7 @@ global $migre_meta;
 	$migre_meta=array();
 	$migre_meta['migre_id_rubrique']= "";
 	$migre_meta['migre_id_mot']= "";
-	$migre_meta['migre_liste_pages']= _T('migre:liste_des_pages'); // from lang file
+	$migre_meta['migre_liste_pages']= _T('migrestatic:liste_des_pages'); // from lang file
 	$migre_meta['migre_test']= "checked";
 	$migre_meta['migre_bcentredebut'] = "&lt;.{3,5}NAME.*index.{3,5}&gt;";
 	$migre_meta['migre_bcentrefin'] = "&lt;.{3,5}END.*index.*&gt;";

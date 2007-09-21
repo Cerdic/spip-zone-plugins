@@ -1,3 +1,14 @@
+migre_static (0.6)
+ * Many corrected bugs
+ * Simplified forms
+ * Added CFG config page
+ * Use of spip metas
+ * Reduced the size of the displayed result
+ * Drop dead code
+
+ -- Chryjs <chryjs@free.fr>  Fri,  21 Sep 2007 16:30:00 +0200
+
+
 migre_static (0.5)
  * Few improvements from http://www.spip-contrib.net/Le-bouton-memo
  * More copyright checks : you _must_ own the site to import the pages !

@@ -29,12 +29,12 @@ if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
 	define('_DIR_PLUGIN_ACCESRESTREINT',(_DIR_PLUGINS.end($p)));
 }
 
-function migre_static_ajouter_boutons() {
+function migrestatic_ajouter_boutons() {
 // [fr] Ne semble pas fonctionner donc inutilise (a supprimer)
 // [en] Doesn t seems to work... Left unused (To be removed)
 }
 
-function migre_static_affiche_droite($flux) {
+function migrestatic_affiche_droite($flux) {
 // [fr] Peut etre ajouter un controle d acces
 // [fr] On accede a la migration de pages vers de nouveaux articles uniquement au sein d une rubrique
 // [en] Todo : maybe add access control
@@ -47,9 +47,9 @@ function migre_static_affiche_droite($flux) {
 		$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
 		$flux['data'] .= "<tr><td><a href='$url_lien' class='cellule-h'><span class='cell-i'>" ;
 		$flux['data'] .= "<img src='"._DIR_IMG_PACK ."article-24.gif' width='24' alt='";
-		$flux['data'] .= _T('migre:sur_titre_migre_formulaire') . "' /></span></a></td>\n" ;
+		$flux['data'] .= _T('migrestatic:sur_titre_migre_formulaire') . "' /></span></a></td>\n" ;
 		$flux['data'] .= "<td class='cellule-h-lien'><a href='$url_lien' class='cellule-h'>" ;
-		$flux['data'] .= _T('migre:sur_titre_migre_formulaire') . "</a></td></tr></table>\n</div>\n" ;
+		$flux['data'] .= _T('migrestatic:sur_titre_migre_formulaire') . "</a></td></tr></table>\n</div>\n" ;
 		$flux['data'] .= fin_cadre_relief(true);
 	}
 	return $flux;

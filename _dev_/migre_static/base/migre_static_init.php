@@ -22,7 +22,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip("inc/migre"); // [fr] Charge les fonctions de migre_static [en] Loads migre_static functions
 
-function migre_static_install($action)
+function migrestatic_install($action)
 {
 switch ($action) {
  case 'test' : /* test pour savoir si les actions sont nécessaires */
@@ -39,7 +39,7 @@ switch ($action) {
 
 /* rend disponible l'icone de désinstallation */
 /* ca doit certainement permettre d'effacer les fichiers et autres */
-function migre_static_uninstall(){
+function migrestatic_uninstall(){
 }
 
 ?>
