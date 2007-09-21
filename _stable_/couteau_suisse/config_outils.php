@@ -515,7 +515,7 @@ add_outil( array(
 	'categorie'	 => 'typo-corr',
 	'code:options' => '%%liens_orphelins%%',
 	'pipeline:pre_propre' => 'liens_orphelins_pipeline',
-	'traitement:EMAIL' => 'traiter_raccourcis_propre(liens_orphelins',
+	'traitement:EMAIL' => 'expanser_liens(liens_orphelins',
 ));
 
 add_outil( array(
@@ -572,7 +572,7 @@ add_outil( array(
 	'auteur' 	 => 'Alexis Roussel, Paolo',
 	'categorie'	 => 'typo-corr',
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
-	'code:js' => "function lien(ad){ return 'mail' + 'to:' + ad.replace(/\.\..+t\.\./,'@'); }",
+	'code:js' => "function lien(ad){ return 'mai' + 'lto:' + ad.replace(/\.\..+t\.\./,'@'); }",
 	'traitement:EMAIL' => 'mailcrypt',
 )); 
 

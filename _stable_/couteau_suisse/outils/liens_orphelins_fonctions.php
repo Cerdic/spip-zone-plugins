@@ -1,9 +1,9 @@
 <?php
 
-// traiter_raccourcis_propre() introduit sous SPIP 1.93
+// expanser_liens() introduit sous SPIP 1.93
 if ($GLOBALS['spip_version_code']<1.9262) {
 	define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
-	function traiter_raccourcis_propre($letexte) {
+	function expanser_liens($letexte) {
 		$inserts = array();
 		if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
 			$i = 0;
@@ -64,6 +64,11 @@ function liens_orphelins($texte){
 	   $texte = preg_replace(",\b(news:[{$autorises}]*[{$autorisesfin}]),", "[->$1]", $texte);
 	   $texte = preg_replace(",\b(mailto:)?([{$autorises}]*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?[{$autorises}]*)?),", "[$2->mailto:$2]", $texte);
 	}
+
+// SPIP 1.93 ne repasse plus les liens semble-t-il !?
+// TODO >> voir si ca reste necessaire :
+if ($GLOBALS['spip_version_code']>=1.9262) $texte=expanser_liens($texte);
+
 	return echappe_retour($texte, 'LIENS');
 }
 
