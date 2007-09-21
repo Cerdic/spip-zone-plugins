@@ -33,8 +33,8 @@ Vous pourrez alors confirmer la modification de votre abonnement.',
 'abonnement_texte_mail'=>'Indiquez ci-dessous l\'adresse email sous laquelle vous vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. 
 Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modification de votre abonnement.',
 'abonner' => 's\'abonner',
-'abonnes_liste_int' => '<br />Abonn&eacute;s aux listes internes : ',
-'abonnes_liste_pub' => '<p>Abonn&eacute;s aux listes publiques : ',
+'abonnes_liste_int' => 'Abonn&eacute;s aux listes internes : ',
+'abonnes_liste_pub' => 'Abonn&eacute;s aux listes publiques : ',
 'actualiser' => 'Actualiser',
 'a_destination' => '&agrave; destination de ',
 'adresse' => 'Indiquez ici l\'adresse &agrave; utiliser pour les retours de mails (&agrave; d&eacute;faut, l\'adresse du webmestre sera utilis&eacute;e comme adresse de retour) :',
@@ -49,7 +49,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'alerte_modif' => '<b>Apr&egrave;s l\'affichage de votre courrier, vous pourrez en modifier le contenu</b>',
 'annuler_envoi' => 'Annuler l\'envoi',
 'article_entier' => 'Lire l\'article entier',
-
+'abonnes_titre' => 'Abonn&eacute;s',
 
 //B
 
@@ -65,6 +65,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'choix_defini' => 'Pas de choix d&eacute;finis.\n',
 'Configuration' => 'Configuration',
 'courriers' => 'Courriers',
+'chercher_un_auteur' => "Chercher un auteur",
 
 //D
 'dans_jours' => 'dans',
@@ -287,6 +288,7 @@ et de recevoir les lettres d\'informations.',
 'erreur_import' => 'Le fichier d\'import pr&eacute;sente une erreur &agrave; la ligne ',
 
 'format_date' => 'Y/m/d',
+'format_aucun' => "Aucun",
 
 'html' => 'HTML',
 
@@ -332,6 +334,8 @@ et de recevoir les lettres d\'informations.',
 'remplir_tout' => 'Tous les champs doivent &ecirc;tre remplis',
 'repartition' => 'R&eacute;partition',
 'retour_link' => 'Retour',
+'repartition_abonnes' => "R&eacute;partition des abonn&eacute;s",
+'repartition_formats' => "R&eacute;partition des formats",
 
 'sans_envoi' => 'Attention, l\'adresse email de test que vous avez fournie ne correspond &agrave; aucun abonn&eacute;, <br />l\'envoi ne peut se faire, veuillez reprendre la proc&eacute;dure<br /><br />',
 'squel' => 'Patron : &nbsp;',

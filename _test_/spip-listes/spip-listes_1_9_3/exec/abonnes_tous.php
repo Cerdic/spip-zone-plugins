@@ -21,35 +21,29 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/mots');
-include_spip('inc/affichage');
+function exec_abonnes_tous () {
 
+	include_spip('inc/presentation');
+	include_spip('inc/mots');
+	include_spip('inc/affichage');
 
-function exec_abonnes_tous(){
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $connect_id_auteur;
-	$type = _request('type');
-	$new = _request('new');
-	$id_auteur = _request('id_auteur');
-	
-	$options = 'avancees' ;
-	
-	$nomsite=lire_meta("nom_site"); 
-	$urlsite=lire_meta("adresse_site"); 
-	
-	// Admin SPIP-Listes
-	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
-	
-	if ($connect_statut != "0minirezo" ) {
-		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-		echo fin_page();
-		exit;
+	global $connect_statut
+		, $connect_toutes_rubriques
+		, $connect_id_auteur
+		;
+
+//////////
+// PAGE CONTENU
+//////////
+
+	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+
+	// la gestion des abonnés est réservée aux admins 
+	if($connect_statut != "0minirezo") {
+		die (spiplistes_terminer_page_non_authorisee() . fin_page());
 	}
 	
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur))
-		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
 	spip_listes_raccourcis();
@@ -67,13 +61,13 @@ function exec_abonnes_tous(){
 	  'SELECT listes.statut, COUNT(abonnements.id_auteur)
 	   FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste)
 	   GROUP BY listes.statut');
-	$nb_abonnes = array();
+	$nb_abonnes = array('liste'=>0, 'inact'=>0);
 	while ($row = spip_fetch_array($result_pile, SPIP_NUM)) {
 		$nb_abonnes[$row[0]] = intval($row[1]);
 	}
 
 	//evaluer les formats de tous les auteurs + compter tous les auteurs
-	$result = spip_query('SELECT `spip_listes_format` , COUNT(`spip_listes_format`) FROM `spip_auteurs_elargis` GROUP BY `spip_listes_format`');
+	$result = spip_query("SELECT `spip_listes_format`, COUNT(`spip_listes_format`) FROM spip_auteurs_elargis GROUP BY `spip_listes_format`");
 	$nb_inscrits = 0;
 
 	//repartition des formats
@@ -87,43 +81,65 @@ function exec_abonnes_tous(){
 		}
 	}
 	
-	//Total des auteurs qui ont un format html ou texte
-	$total_abo = $cmpt['html'] + $cmpt['texte'] ;
-	
-	
 	//Total des auteurs qui ne sont pas abonnes a une liste
-	$abonnes = spip_query("select a.id_auteur, count(d.id_liste) from spip_auteurs a  
-	      left join spip_auteurs_listes d on a.id_auteur =  
-	          d.id_auteur group by a.id_auteur having count(d.id_liste) = 0;"); 
-	$nb_abonnes_auc = spip_num_rows($abonnes);
-	
-	echo debut_cadre_relief('forum-interne-24.gif');
+	$abonnes_a_rien = spip_query(
+		"SELECT a.id_auteur, COUNT(d.id_liste) FROM spip_auteurs AS a  
+	      LEFT JOIN spip_auteurs_listes AS d ON a.id_auteur =  d.id_auteur GROUP BY a.id_auteur HAVING COUNT(d.id_liste) = 0;"
+		); 
+	$nb_abonnes_a_rien = spip_num_rows($abonnes_a_rien);
 
-	echo"<div>";
-	echo"<div style='float:right;width:150px'>";
-	echo "<b>"._T('spiplistes:repartition')."</b>  <br /><b>"._T('spiplistes:html')."</b> : {$cmpt['html']} <br /><b>"._T('spiplistes:texte')."</b> : {$cmpt['texte']} <br /><b>"._T('spiplistes:desabonnes')."</b> : {$cmpt['non']}";
-	echo"</div>";
-	
 	$total = $cmpt['html'] + $cmpt['texte'] + $cmpt['non']; // ?
-	
-	echo _T('spiplistes:nbre_abonnes'). $total_abo .
-	  _T('spiplistes:abonnes_liste_pub') . $nb_abonnes['liste'] .
-	  _T('spiplistes:abonnes_liste_int') . $nb_abonnes['inact'] .
-	 "<br />". _T('spiplistes:abonne_aucune_liste') . " : ". ($nb_abonnes_auc - $cmpt['non']) . "</p>";
-	
-	echo"</div>";
-	
-	$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' LIMIT 2");
-	if (spip_num_rows($result) > 1) {
-		echo "<form action='?exec=abonnes_tous' METHOD='post'>";
-		echo "<div align=center>\n";
-		echo "<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />";
-		echo " <input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' />";
-		echo "</div></form>";
+
+	$page_result = ""
+		. debut_cadre_trait_couleur("forum-interne-24.gif", true)
+		//. bandeau_titre_boite2(_T('spiplistes:abonnes_titre'), "", "white", "black", false)
+		. bandeau_titre_boite2(_T('spiplistes:abonnes_titre'), "", "", "black", false)
+		. "<div class='verdana2' style='position:relative;margin:1ex;height:5em;'>"
+		// bloc de gauche. Répartition des abonnés.
+		. "<div style='position:absolute;top:0;left:0;width:250px;' id='info_abo'>"
+		. "<p style='margin:0;'>"._T('spiplistes:repartition_abonnes')." : </p>"
+		. "<ul style='margin:0;padding:0 1ex;list-style: none;'>"
+		// Total des abonnés qui ont un format html ou texte
+		//. "<li>- "._T('spiplistes:nbre_abonnes') . ($cmpt['html'] + $cmpt['texte']) . "</li>"
+		// Total des abonnés listes publiques
+		. "<li>- "._T('spiplistes:abonnes_liste_pub') . $nb_abonnes['liste'] . "</li>"
+		// Total des abonnés listes privées (internes)
+		. "<li>- "._T('spiplistes:abonnes_liste_int') . $nb_abonnes['inact'] . "</li>"
+	 	. "<li>- ". _T('spiplistes:abonne_aucune_liste') . " : ". ($nb_abonnes_a_rien - $cmpt['non']) . "</li>"
+		. "</ul>"
+		. "</div>\n"
+		// bloc de droite. Répartition des formats.
+		. "<div style='position:absolute;top:0;right:0;width:180px;' id='info_fmt'>\n"
+		. "<p style='margin:0;'>"._T('spiplistes:repartition_formats')." : </p>\n"
+		. "<ul style='margin:0;padding:0 1ex;list-style: none;'>"
+		. "<li>- "._T('spiplistes:html')." : {$cmpt['html']}</li>"
+		. "<li>- "._T('spiplistes:texte')." : {$cmpt['texte']}</li>"
+		. "<li>- "._T('spiplistes:format_aucun')." : {$cmpt['non']}</li>"
+		. "</ul>"
+		. "</div>\n"
+		// fin des infos
+		. "</div>\n"
+		;
+
+	// formulaire de recherche si plus de 10 auteurs dans la base
+	$row = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS nb FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' LIMIT 11"));
+	if ($row['nb'] > 10) {
+		$page_result .= ""
+			. "<form action='?exec=abonnes_tous' method='post' style='margin:0.5ex;border-top:1px solid black;padding:0.5ex 1ex 0;' class='verdana2'>"
+			. "<div style='text-align:center;'>\n"
+			. "<label for='chercher_un_auteur' style='display:none;'>"._T('spiplistes:chercher_un_auteur')." : </label>"
+			. "<input type='text' title='"._T('spiplistes:chercher_un_auteur')."' name='cherche_auteur' id='chercher_un_auteur' class='fondl' value='' size='20' />"
+			. " <input type='submit' title='"._T('spiplistes:chercher_un_auteur')."' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' />"
+			. "</div></form>\n"
+			;
 	}
 	
-	echo fin_cadre_relief();
+	$page_result .= ""
+		. fin_cadre_trait_couleur(true)
+		;
 	
+	echo ($page_result);
+
 	// auteur
 	
 	$retour = generer_url_ecrire("abonnes_tous");
@@ -141,6 +157,7 @@ function exec_abonnes_tous(){
 	$sql_sel = '';
 	
 	// tri
+	// CP: switch à revoir, 3 cases ne servent à rien. Peut-être ajouter 'format' ?
 	switch ($tri) {
 		case 'nombre':
 			$sql_order = ' ORDER BY compteur DESC, unom';
@@ -150,10 +167,12 @@ function exec_abonnes_tous(){
 		case 'statut':
 			$sql_order = ' ORDER BY statut, login = "", unom';
 			$type_requete = 'auteur';
+			$sql_visible = " aut.statut!='5poubelle'";
 			break;
 		case 'nom':
 			$sql_order = ' ORDER BY unom';
 			$type_requete = 'auteur';
+			$sql_visible = " aut.statut!='5poubelle'";
 			break;
 		case 'email':
 			$sql_order = ' ORDER BY LOWER(email)';
