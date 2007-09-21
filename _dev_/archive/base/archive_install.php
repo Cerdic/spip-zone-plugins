@@ -17,7 +17,7 @@ function archive_install($action){
        case 'test':
            //Contr“le du plugin … chaque chargement de la page d'administration
            // doit retourner true si le plugin est proprement install‚ et … jour, false sinon
-		   if ((!isset($GLOBALS['meta']['archive_version'])) || $GLOBALS['meta']['archive_version'] < $archive_version) {
+		   if ((!isset($GLOBALS['meta']['archive_version'])) || version_compare($GLOBALS['meta']['archive_version'],$archive_version,"<")) {
 			   //lance la mise … jour
 			   return archive_installer($archive_version);
 		   } else {

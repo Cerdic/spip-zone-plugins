@@ -46,11 +46,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		$n = spip_query($sql);
 		if (!$n) die('UPDATE');
 		//met à jour les index de la table articles
-		//if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip('inc/indexation');
+		include_spip('inc/indexation');
+		//en 193 l'indexation est sortie du core, du coup on teste l'existance de l'indexation avant d'indexer
+		if ($GLOBALS['meta']['activer_moteur'] == 'oui' && function_exists('marquer_indexer')) {
 			marquer_indexer($spip_table, $id_objet);
-		//}
-		ecrire_acces();
+		}
 	}
 
 	//relance la page appelante

@@ -10,16 +10,16 @@ Rappel sur comment l'utiliser.<br />
 
 <h4> Les articles archiv&eacute;s </h4>
 [(#REM) determine les articles archivés]
-<BOUCLE_test(ARTICLES) {archive seulement}>
+<BOUCLE_test(ARTICLES) {archive seulement}  {statut IN prop,prepa,publie,refuse,poubelle}>
 	<B_rubrique>
 		<ul>
 	<BOUCLE_rubrique(RUBRIQUES) {unique} {id_rubrique}>
 		<li>#TITRE</li>
 		<B_archive>
 			<ul>
-		<BOUCLE_archive(ARTICLES) {id_rubrique} {archive seulement}>
+		<BOUCLE_archive(ARTICLES) {id_rubrique} {archive seulement} {statut IN prop,prepa,publie,refuse,poubelle}>
 			<li>
-				<a href="?exec=articles&id_article=#ID_ARTICLE	"><b>#TITRE</b></a> (archivé le [(#ARCHIVE_DATE|jour)]/[(#ARCHIVE_DATE|mois)]/[(#ARCHIVE_DATE|annee)])
+				<a href="?exec=articles&id_article=#ID_ARTICLE	"><b>#TITRE</b></a> -#STATUT- (archivé le [(#ARCHIVE_DATE|jour)]/[(#ARCHIVE_DATE|mois)]/[(#ARCHIVE_DATE|annee)])
 			</li>
 		</BOUCLE_archive>
 			</ul>
