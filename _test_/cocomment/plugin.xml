@@ -1,0 +1,25 @@
+<plugin>
+	<nom>
+	  CoComment
+	</nom>
+	<auteur>
+	  Pierre Andrews (Mortimer)
+_ &#169; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat> 
+	test
+	</etat>
+	<description>
+	  <multi> [en] [cocomment.com->http://www.cocomment.com] integration to the forum forms. [fr] Integration de [cocomment.com->http://www.cocomment.com] au formulaire de forum.</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-coComment</lien> 
+	<fonctions> 
+	cocomment_fonctions.php
+	</fonctions>
+	<prefix> 
+	cocomment
+	</prefix>
+</plugin>
