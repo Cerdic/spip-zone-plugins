@@ -466,8 +466,9 @@ function exec_listes_dist(){
 	
 	////
 	// MODE EDIT LISTE FIN ---------------------------------------------------------
-	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
-	echo fin_gauche(), fin_page();
+
+	echo __plugin_html_signature(true), fin_gauche(), fin_page();
+
 }
 
 function listes_edit_presentation($id_liste){

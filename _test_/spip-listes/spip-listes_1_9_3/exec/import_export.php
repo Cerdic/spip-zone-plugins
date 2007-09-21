@@ -381,9 +381,7 @@ function exec_import_export(){
 
 	// MODE INOUT FIN --------------------------------------------------------------
 
-	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."</p>" ;
-
-	echo fin_gauche(), fin_page();
+	echo __plugin_html_signature(true), fin_gauche(), fin_page();
 
 }
 
