@@ -19,9 +19,8 @@ define("_SPIPLISTES_CHARSETS_ALLOWED", "iso-8859-1;iso-8859-9;iso-8859-6;iso-885
 define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
 define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
 
-function spiplistes_log($texte){
-	spip_log($texte,'spiplistes');
-}
+// les formats d'envoi autorisés, ou non pour pseudo-désabonné
+define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;none");
 
 //Balises Spip-listes
 

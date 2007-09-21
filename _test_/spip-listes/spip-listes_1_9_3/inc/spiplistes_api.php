@@ -25,6 +25,10 @@ include_spip ("inc/utils");
 include_spip ("inc/filtres");    /* email_valide() */
 include_spip ("inc/acces");      /* creer_uniqid() */
 
+function spiplistes_log($texte){
+	spip_log($texte,'spiplistes');
+}
+
 /* function privee
  * multi_queries mysql n'est pas en mesure de le faire en natif :-(
  * A tranformer le jour où mysql gerera correctement le multi_query
