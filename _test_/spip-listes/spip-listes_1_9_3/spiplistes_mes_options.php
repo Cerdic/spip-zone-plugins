@@ -20,7 +20,7 @@ define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
 define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
 
 // les formats d'envoi autorisés, ou non pour pseudo-désabonné
-define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;none");
+define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
 
 //Balises Spip-listes
 
