@@ -22,67 +22,61 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/barre');
-include_spip('inc/affichage');
-include_spip('base/spip-listes');
-
-
 function exec_liste_edit(){
+
+	include_spip('inc/presentation');
+	include_spip('inc/barre');
+	include_spip('inc/affichage');
+	include_spip('base/spip-listes');
 	
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $connect_id_auteur;
+	global $connect_statut
+		, $connect_toutes_rubriques
+		, $connect_id_auteur
+		;
 	
-	$new = _request('new');
-	$id_liste = _request('id_liste');
-	$titre = _request('titre');
-	$texte = _request('texte');
-	 
-	$nomsite=lire_meta("nom_site"); 
-	$urlsite=lire_meta("adresse_site"); 
-	 
-	// Admin SPIP-Listes
-	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
-	
-	if (!autoriser('modifier','liste',$id_liste)) {
-		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-		echo fin_page();
-		exit;
+	// initialise les variables postées par le formulaire
+	foreach(array(
+		'new'	// nouvelle liste si 'oui'
+		, 'id_liste'// si modif dans l'éditeur
+		, 'titre', 'texte'
+		) as $key) {
+		$$key = _request($key);
+	}
+	foreach(array('id_liste') as $key) {
+		$$key = intval($$key);
+	}
+
+//////////
+// PAGE CONTENU
+//////////
+
+	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+
+	// la gestion des listes de courriers est réservée aux admins 
+	if($connect_statut != "0minirezo") {
+		die (spiplistes_terminer_page_non_authorisee() . fin_page());
 	}
 	
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
-		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
-	}
-	
+	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+
 	debut_gauche();
-	
 	spip_listes_raccourcis();
-	
 	creer_colonne_droite();
-	
 	debut_droite("messagerie");
 	
 	// MODE CREER_LISTE: ajout liste------------------------------------------------
 	
-	$articles_descriptif = lire_meta("articles_descriptif");
-	$articles_redac = lire_meta("articles_redac");
-	$articles_mots = lire_meta("articles_mots");
-	$articles_modif = lire_meta("articles_modif");
-	
 	// securite
-	$id_liste = intval($id_liste);
-	$lier_trad = intval($lier_trad);
+	$lier_trad = intval($lier_trad); // ?? semble attaché à rien
 	unset ($flag_editable);
 	
 	//
 	// Creation de l'objet article
 	//
 	
-	if ($id_liste) {
+	if($id_liste > 0) {
 		// Recuperer les donnees de l'article
-		$result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste));
+		$result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1");
 	
 		if ($row = spip_fetch_array($result)) {
 			$titre = $row["titre"];
@@ -106,6 +100,8 @@ function exec_liste_edit(){
 		$flag_editable = true;
 	}
 	
+	// CP: id_docment n'existe nulle part !?
+	// Rahh, ravage du copié/collé ?
 	if ($id_liste && $id_document) {
 		$result_doc = spip_query("SELECT * FROM spip_documents_articles WHERE id_document="._q($id_document)." AND id_liste"._q($id_liste));
 		$flag_document_editable = (spip_num_rows($result_doc) > 0);
@@ -114,6 +110,7 @@ function exec_liste_edit(){
 	}
 	
 	// a quoi ca sert ca ?
+	// $GLOBALS['modif_document'] n'existe pas dans SPIP 192c
 	$modif_document = $GLOBALS['modif_document'];
 	if ($modif_document == 'oui' AND $flag_document_editable) {
 		$titre_document = corriger_caracteres($titre_document);
