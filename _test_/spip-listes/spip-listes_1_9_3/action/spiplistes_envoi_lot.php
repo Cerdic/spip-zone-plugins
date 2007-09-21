@@ -10,6 +10,7 @@ function action_spiplistes_envoi_lot_dist()
 	//changer de statut
 	// envoi d'un lot par la meleuse
 	include_spip('inc/spiplistes_meleuse');
+	spiplistes_meleuse();
 	
 	// compter les mail restant a envoyer pour l'affichage
 	$res = spip_query("SELECT COUNT(a.id_auteur) AS n FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='encour'");

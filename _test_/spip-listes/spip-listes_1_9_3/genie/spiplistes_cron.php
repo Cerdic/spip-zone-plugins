@@ -120,8 +120,10 @@ function cron_spiplistes_cron($t){
 	// Envoi d'un mail automatique ?
 	$result_pile = spip_query("SELECT COUNT(id_courrier) AS n FROM spip_courriers WHERE statut='encour'");
 	if (($row = spip_fetch_array($result_pile)) && $row['n']){
+	
 		spip_log("appel meleuse");
 		include_spip('inc/spiplistes_meleuse');
+		spiplistes_meleuse();
 		
 		$result_pile = spip_query("SELECT COUNT(id_courrier) AS n FROM spip_courriers WHERE statut='encour'");
 		if (($row = spip_fetch_array($result_pile)) && $row['n']){
