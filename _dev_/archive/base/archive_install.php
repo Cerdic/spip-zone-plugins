@@ -1,11 +1,10 @@
 <?php
 
-include_spip('inc/filtres');
-if(version_svn_courante(_DIR_RACINE) >= 9919) {
-	include_spip('base/compat193');
-}
-include_spip('base/abstract_sql');
+include_spip('base/abstract_sql');	//fonctions d'acces sql
 include_spip('inc/plugin');
+
+include_spip('base/compat193');		//cr‚‚ … la vol‚ les fonctions sql pour 192
+
 
 //configure la base spip et les metas
 function archive_install($action){
@@ -42,7 +41,7 @@ function archive_install($action){
 //configure la base spip
 function archive_installer($archive_version) {
 	//recupere les champs de spip_articles
-	$desc = spip_abstract_showtable("spip_articles", '', true);
+	$desc = sql_showtable("spip_articles", '', true);
 	//ajoute le champ archive si champ inexistant
 	if (!isset($desc['field']['archive'])){
 			spip_query("ALTER TABLE spip_articles ADD `archive` BOOL AFTER `statut`");
@@ -53,7 +52,7 @@ function archive_installer($archive_version) {
 	}
 
 	//recupere les champs de spip_rubriques
-	$desc = spip_abstract_showtable("spip_rubriques", '', true);
+	$desc = sql_showtable("spip_rubriques", '', true);
 	//ajoute le champ archive si champ inexistant
 	if (!isset($desc['field']['archive'])){
 			spip_query("ALTER TABLE spip_rubriques ADD `archive` BOOL AFTER `statut`");
@@ -79,7 +78,7 @@ function archive_installer($archive_version) {
 function archive_uninstaller() {
 
 	//nettoie les champs de spip_articles
-        $desc = spip_abstract_showtable("spip_articles", '', true);
+    $desc = sql_showtable("spip_articles", '', true);
 	if (isset($desc['field']['archive'])){
 			spip_query("ALTER TABLE spip_articles DROP `archive`");
 	}
@@ -88,7 +87,7 @@ function archive_uninstaller() {
 	}
 
 	//supprime les champs de spip_rubriques
-	$desc = spip_abstract_showtable("spip_rubriques", '', true);
+	$desc = sql_showtable("spip_rubriques", '', true);
 	if (isset($desc['field']['archive'])){
 			spip_query("ALTER TABLE spip_rubriques DROP `archive`");
 	}

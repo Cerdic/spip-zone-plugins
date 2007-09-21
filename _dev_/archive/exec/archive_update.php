@@ -44,7 +44,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 		//execute la requete de mise à jour
 		$n = spip_query($sql);
-			if (!$n) die('UPDATE');
+		if (!$n) die('UPDATE');
 		//met à jour les index de la table articles
 		//if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip('inc/indexation');

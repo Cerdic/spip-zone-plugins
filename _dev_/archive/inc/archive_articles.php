@@ -8,6 +8,9 @@ include_spip('inc/layer');          // for spip layer functions
 include_spip('inc/utils');          // for _request function
 include_spip('inc/plugin');         // xml function
 
+include_spip('base/abstract_sql');	//fonctions d'acces sql
+include_spip('base/compat193');		//cr‚‚ … la voler les fonctions sql pour 192
+
 //ajoute un div de selection archive oui/non
 function archive_ajout_option($id_article) {
 	//ne fait rien si le plugin n'est pas initialisé ie n'a pas de version
@@ -17,7 +20,7 @@ function archive_ajout_option($id_article) {
 	}
 
 	//determine si l'artice est archivé ou non
-	$array_archive = spip_fetch_array(spip_query("SELECT archive FROM spip_articles WHERE id_article=$id_article"));
+	$array_archive = sql_fetch(spip_query("SELECT archive FROM spip_articles WHERE id_article=$id_article"));
 	$archive = $array_archive['archive'];
 
 	//genere le div à inserer dans le flux

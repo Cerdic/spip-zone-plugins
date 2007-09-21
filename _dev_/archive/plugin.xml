@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Archive</nom>
-	<version>0.64</version>
+	<version>0.642</version>
 	<prefix>archive</prefix>
 
 	<etat>dev</etat>
