@@ -52,7 +52,7 @@ function cron_notifications($time) {
 		// Chercher les forums les plus recents de ce message, pour afficher
 		// des extraits
 		$body =  _T('form_forum_message_auto')."\n\n";
-		$body .= "* " . textebrut(propre(couper_intro(
+		$body .= "* " . textebrut(propre(couper(
 				$t['titre']."<p>".$t['texte'], 700)))."\n\n";
 
 		$f = spip_query("SELECT titre,texte FROM spip_forum"
@@ -60,7 +60,7 @@ function cron_notifications($time) {
 			." AND UNIX_TIMESTAMP(date_heure) > "._q($time));
 		while ($ff = spip_fetch_array($f)) {
 			$body .= "----\n"
-				.textebrut(propre(couper_intro(
+				.textebrut(propre(couper(
 					"** ".$ff['titre']."<p>".$ff['texte'], 700)))."\n\n";
 		}
 
