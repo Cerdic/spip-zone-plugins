@@ -39,7 +39,7 @@
 	<fieldset>
 	<legend><:form_pet_message_commentaire:></legend>
 	<p><label for="titre"><:forum_titre:></label>
-	<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
+	<input type="text" class="forml" name="titre" id="titre_#ENV{uniq_id}"[ value="(#ENV{titre})"] size="40" /></p>
 
 	<label><:forum_texte:></label>
 	<p><small><:info_creation_paragraphe:></small></p>
@@ -50,22 +50,22 @@
 	<legend><:forum_lien_hyper:></legend>
 	<p><:forum_page_url:></p>
 	<p><label for="nom_site"><:forum_titre:></label>
-	<input type="text" class="forml" name="nom_site" id="nom_site" size="40" value="#ENV{nom_site}" /></p>
+	<input type="text" class="forml" name="nom_site" id="nom_site_#ENV{uniq_id}" size="40" value="#ENV{nom_site}" /></p>
 	<p><label for="url_site"><:forum_url:></label>
-	<input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
+	<input type="text" class="forml" name="url_site" id="url_site_#ENV{uniq_id}" style="text-align: left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
 	</fieldset>
 
 	<fieldset>
 	<legend><:forum_qui_etes_vous:></legend>
 	<p><label for="auteur"><:forum_votre_nom:></label>
-	<input type="text" class="forml" name="auteur" id="auteur" value="#ENV{auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	<input type="text" class="forml" name="auteur" id="auteur_#ENV{uniq_id}" value="#ENV{auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
 	<p><label for="email_auteur"><:forum_votre_email:></label>
-	<input type="text" class="forml" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	<input type="text" class="forml" name="email_auteur" id="email_auteur_#ENV{uniq_id}" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
 	</fieldset>
 
 	[(#REM) Piege a robots spammeurs ]
 	<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>
-	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
+	<input type="text" name="nobot" id="nobot_#ENV{uniq_id}" value="#ENV{nobot}" size="10" /></p>
 
 	<p class="spip_bouton"><input type="submit" value="<:forum_voir_avant:>" /></p>
 ]
@@ -108,13 +108,13 @@ coco =
      sitetitle     : "6v8 - Production Of My Mind",
      pageurl       : "[(#GET{lien}|url_absolue)]",
      pagetitle     : "#GET{titre}",
-     author        : "#ENV{auteur}",
+     authorID        : "auteur_#ENV{uniq_id}",
      formID        : "form_formulaire_forum_#ENV{uniq_id}",
      textareaID    : "message_#ENV{uniq_id}",
      buttonID      : "confirmer_forum"
 }
 </script>
-<script id="cocomment-fetchlet" src="http://www.cocomment.com/js/enabler.js" type="text/javascript">
+<script id="cocomment-fetchlet_#ENV{uniq_id}" src="http://www.cocomment.com/js/enabler.js" type="text/javascript">
 // this activates coComment
 </script>
 ]
