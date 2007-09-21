@@ -7,7 +7,7 @@
 Ce plugin (pour SPIP 1.9.2+) permet d'identifier les langues pr&eacute;f&eacute;r&eacute;es configur&eacute;es par l'internaute dans son navigateur et de lui proposer automatiquement la langue la plus pertinente dans un site multilingue ayant un secteur par langue.
 Ce m&eacute;canisme suppose qu'il n'y a pas de page sommaire particuli&egrave;re, les pages d'accueil localis&eacute;es &eacute;tant des pages de secteurs.
 
-Utilisez la balise <code>#LANGUE_PREFEREE_REDIRECTION</code> dans <code>sommaire.html</code>, &agrave; l'exclusion de tout autre code, pour que l'internaute soit redirig&eacute; automatiquement vers le secteur qu'il est le plus susceptible de comprendre, selon la configuration de langue de son navigateur.
+Utilisez la balise <code>#LANGUE_PREFEREE_SECTEUR_REDIRECTION</code> dans <code>sommaire.html</code>, &agrave; l'exclusion de tout autre code, pour que l'internaute soit redirig&eacute; automatiquement vers le secteur qu'il est le plus susceptible de comprendre, selon la configuration de langue de son navigateur.
 Si aucune langue disponible n'est compatible avec les choix configur&eacute;s dans le navigateur, la langue par d&eacute;faut du site est choisie.
 Si cette langue n'est utilis&eacute;e par aucun secteur (!!!), le premier secteur trouv&eacute; est choisi.
 
