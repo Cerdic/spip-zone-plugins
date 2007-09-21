@@ -9,11 +9,10 @@
  <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>
 
  <description>
- <multi>[gl]{{Can you translate it again please? See the french version}}Plugin para insertar un google map na parte privada e na parte publica de SPIP. 
- Permite introducir un punto de google map &oacute; editar un artigo dende a parte privada.
-_ Este plugin engade duas taboas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_config}}
-_ A p�xina de probas do plugin � [->http://www.spip.escoitar.org/]
-_ [documentacion->http://www.escoitar.org/documentacion/spip.php?article175]
+ <multi>[gl] Este plugin, xunto co plugin Google Map API, permite visualizar mapas GoogleMaps nas p&aacute;xinas p&uacute;blicas do sitio. Os artigos e as palabras chaves do sitio poden ser xeocalizadas por marcadores nos mapas.
+_ Este plugin engade duas t&aacute;boas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_mots}}
+_ A p&aacute;xina de probas do plugin &eacute; [->http://www.spip.escoitar.org/]
+_ Documentacion: [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
  [es]Este plugin, acoplado al plugin Google Map API, permite visualizar mapas GoogleMaps en las p&aacute;ginas p&uacute;blicas del sitio. Los art&iacute;culos y las palabras claves del sitio pueden ser geolocalizadas por marcadores en los mapas. 
 _ Este plugin introduce dos tablas en la base de datos, una denominada {{spip_gis}} et l'autre {{spip_gis_mots}}
 _ P&aacute;gina de pruebas: [->http://www.spip.escoitar.org/]
