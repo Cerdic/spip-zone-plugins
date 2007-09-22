@@ -19,7 +19,8 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
 /******************************************************************************************/
 // $LastChangedRevision$
-// $Revision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

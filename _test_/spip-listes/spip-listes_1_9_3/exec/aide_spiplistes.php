@@ -22,10 +22,12 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
 // adaptation de aide_index.php
 //syslog_trace("exec/aide_spiplistes.php: <<");
-// $LastChangedRevision$
-// $Revision$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

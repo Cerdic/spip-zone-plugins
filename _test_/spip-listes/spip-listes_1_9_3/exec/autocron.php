@@ -1,6 +1,7 @@
 <?php
 // $LastChangedRevision$
-// $Revision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
