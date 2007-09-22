@@ -32,6 +32,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
+	// calcul de la page
 	$p = $page?_T('cout:sommaire_page', array('page'=>$page)):'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
 		$ancre = "\n<a id=\"outil_sommaire_$index\" name=id=\"outil_sommaire_$index\"></a>";
@@ -65,7 +66,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// reinitialisation de l'index interne de la fonction
 	sommaire_d_une_page($texte, $nbh3, false);
 	// couplage avec l'outil 'decoupe_article'
-	if(defined('_decoupe_SEPARATEUR')) {
+	if(defined('_decoupe_SEPARATEUR') && ($_GET['artpage']!='print')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
 		if (count($pages) == 1) $sommaire = sommaire_d_une_page($texte, $nbh3);
 		else {
