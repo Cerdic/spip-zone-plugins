@@ -24,58 +24,57 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/barre');
-include_spip('inc/affichage');
-include_spip('base/spip-listes');
-
 function exec_gerer_courrier(){
 
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $connect_id_auteur;
+	include_spip('inc/presentation');
+	include_spip('inc/barre');
+	include_spip('inc/affichage');
+	include_spip('base/spip-listes');
 
-	$type = _request('type');
-	$new = _request('new');
-	$id_message = _request('id_message');
-	$modifier_message = _request('modifier_message');
-	$titre = _request('titre');
-	$texte = _request('texte');
+	global $connect_statut
+		, $connect_toutes_rubriques
+		, $connect_id_auteur
+		;
 
-	$envoi_test = _request('envoi_test');
-	$change_statut = _request('change_statut');
-	$supp_dest = _request('supp_dest');
-	$envoi = _request('envoi');
-	$adresse_test = _request('adresse_test');
-	$choisir_dest = _request('choisir_dest');
-	$destinataire = _request('destinataire');
-
-	$nomsite=lire_meta("nom_site"); 
-	$urlsite=lire_meta("adresse_site"); 
-
-	// Admin SPIP-Listes
-	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
-
-	if ($connect_statut != "0minirezo" ) {
-		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-		echo fin_page();
-		exit;
+	// initialise les variables postées par le formulaire
+	foreach(array(
+		'type'
+		, 'new'
+		, 'id_message' // devrait être id_courrier. A corriger dans les autres scripts et supprimer ici.
+		, 'id_courrier'
+		, 'modifier_message'
+		, 'titre', 'texte'
+		, 'envoi_test', 'change_statut', 'supp_dest', 'envoi', 'adresse_test', 'choisir_dest', 'destinataire'
+		) as $key) {
+		$$key = _request($key);
 	}
-
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
-		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	foreach(array('id_message','id_courrier') as $key) {
+		$$key = intval($$key);
 	}
+	if($id_message>0) $id_courrier = $id_message;
+
+//////////
+// PAGE CONTENU
+//////////
+
+	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+
+	// la gestion des listes de courriers est réservée aux admins 
+	if($connect_statut != "0minirezo") {
+		die (spiplistes_terminer_page_non_authorisee() . fin_page());
+	}
+	
+	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 
 	debut_gauche();
 	spip_listes_raccourcis();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 
-	// MODE COURRIER: Affichage d'un courrier---------------------------------------
+	// GERER COURRIER: Affichage d'un courrier---------------------------------------
 
 	//Ajouter le destinataire  si on le connait 
-	$result = spip_query("SELECT id_liste, texte, email_test FROM spip_courriers WHERE id_courrier="._q($id_message));
+	$result = spip_query("SELECT id_liste, texte, email_test FROM spip_courriers WHERE id_courrier="._q($id_courrier));
 
 	while($row = spip_fetch_array($result)) {
 		$id_liste = $row["id_liste"] ;
@@ -91,13 +90,13 @@ function exec_gerer_courrier(){
 				}
 				else{
 					//definir adresse email de test
-					spip_query("UPDATE spip_courriers SET email_test="._q($adresse_test).", total_abonnes=1 WHERE id_courrier="._q($id_message));
+					spip_query("UPDATE spip_courriers SET email_test="._q($adresse_test).", total_abonnes=1 WHERE id_courrier="._q($id_courrier));
 					$change_statut = "ready";
 				}
 			}
 			//definir liste d envoi	
 			if(intval($destinataire)){
-				spip_query("UPDATE spip_courriers SET id_liste="._q($destinataire)." WHERE id_courrier="._q($id_message));
+				spip_query("UPDATE spip_courriers SET id_liste="._q($destinataire)." WHERE id_courrier="._q($id_courrier));
 				//passer le mail en pret a l envoi
 				$change_statut = "ready";
 			}
@@ -108,45 +107,45 @@ function exec_gerer_courrier(){
 		}
 	}
 
-	if(intval($id_message)){
+	if(intval($id_courrier)){
 		if ($modifier_message == "oui")
-			spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte)." WHERE id_courrier="._q($id_message));	
+			spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte)." WHERE id_courrier="._q($id_courrier));	
 		
 		if ($change_statut) {
-			spip_query("UPDATE spip_courriers SET statut="._q($change_statut)." WHERE id_courrier="._q($id_message));
+			spip_query("UPDATE spip_courriers SET statut="._q($change_statut)." WHERE id_courrier="._q($id_courrier));
 			if($change_statut == "ready"){
 				//enregistrer le texte propre dans la base pour envoi
-				$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_message));
+				$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_courrier));
 				
 				while($row = spip_fetch_array($result_m)) {
 					$titre = $row['titre'];
 					$texte = $row['texte'];
 				}
 				$texte = spiplistes_propre($texte);
-				spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte)." WHERE id_courrier="._q($id_message));
+				spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte)." WHERE id_courrier="._q($id_courrier));
 			}
 			
 			if($change_statut == 'publie'){
 				// si on annule un envoi, effacer les abonnes en attente
-				spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier="._q($id_message));
+				spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier="._q($id_courrier));
 			}
 		}
 		
 		// A securiser ?
 		if ($envoi) {
-			spip_query("UPDATE spip_courriers SET statut='encour' WHERE id_courrier="._q($id_message));
-			spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier="._q($id_message));
+			spip_query("UPDATE spip_courriers SET statut='encour' WHERE id_courrier="._q($id_courrier));
+			spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier="._q($id_courrier));
 		
 			spip_log("test ? ->".$test."idliste->$id_liste");
 			if(intval($id_liste) OR ($id_liste==0 AND $test!='oui') )
-				spiplistes_remplir_liste_envois($id_message,$id_liste) ;
+				spiplistes_remplir_liste_envois($id_courrier,$id_liste) ;
 		}
 	}
 
 	//le message
-	$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_message));
+	$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_courrier));
 	while($row = spip_fetch_array($result_m)) {
-		$id_message = $row['id_courrier'];
+		$id_courrier = $row['id_courrier'];
 		$id_liste = $row['id_liste'];
 		$email_test = $row['email_test'];
 		
@@ -211,7 +210,7 @@ function exec_gerer_courrier(){
 		if ($statut == 'ready' && $pret_envoi) {
 			echo "<span style='font-size:120%;color:red'>
 			<b>"._T('spiplistes:message_presque_envoye')."</b></span><br /> "._T('spiplistes:a_destination').$destinataire."<br />"._T('spiplistes:confirme_envoi');
-			echo "<form action='?exec=gerer_courrier&id_message=".$id_message."' method='post'>";
+			echo "<form action='?exec=gerer_courrier&id_courrier=".$id_courrier."' method='post'>";
 			echo "<div style='text-align:center'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo' /></div>";
 			echo "</form>";
 		}
@@ -219,7 +218,7 @@ function exec_gerer_courrier(){
 		if ($statut == 'encour'){
 			if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
 				echo "<div style='float:right'>";
-				echo icone (_T('icone_supprimer_message'), generer_url_ecrire('spip_listes','detruire_message='.$id_message), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
+				echo icone (_T('icone_supprimer_message'), generer_url_ecrire('spip_listes','detruire_message='.$id_courrier), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 				echo "</div>";
 			}
 			echo "<p><span style='font-size:120%;color:red'>
@@ -259,7 +258,7 @@ function exec_gerer_courrier(){
 		echo "<tr><td width=100%>";
 		if ($statut=="redac" OR $statut=="ready") {
 			echo "<div style='float:right; margin:10px'>";
-			echo icone (_T('spiplistes:bouton_modifier'),generer_url_ecrire('courrier_edit','id_message='.$id_message), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
+			echo icone (_T('spiplistes:bouton_modifier'),generer_url_ecrire('courrier_edit','id_message='.$id_courrier), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
 			echo "</div>";
 		}
 		
@@ -267,8 +266,8 @@ function exec_gerer_courrier(){
 		echo "<h3>$titre</h3>";
 		echo "<br class='nettoyeur' />";
 		echo debut_boite_info();
-		echo _T('spiplistes:version_html')." <a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_message)."\" title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n";
-		echo "<iframe src=\"?exec=courrier_preview&id_message=$id_message\" width=\"100%\" height=\"500\"></iframe>\n";
+		echo _T('spiplistes:version_html')." <a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_courrier)."\" title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n";
+		echo "<iframe src=\"?exec=courrier_preview&id_message=$id_courrier\" width=\"100%\" height=\"500\"></iframe>\n";
 		echo fin_boite_info();    
 		echo "<p>";
 		echo debut_boite_info();
@@ -292,7 +291,7 @@ function exec_gerer_courrier(){
 		
 		if($statut=="redac" OR $statut=="ready"){
 			//envoi de test 
-			echo "<form action='".generer_url_ecrire('gerer_courrier','id_message='.$id_message)."' method='post'>";
+			echo "<form action='".generer_url_ecrire('gerer_courrier','id_message='.$id_courrier)."' method='post'>";
 			echo debut_boite_info();
 			echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
 			if(!$pret_envoi){
@@ -328,13 +327,15 @@ function exec_gerer_courrier(){
 		echo "</td></tr></table>";
 		if($statut != 'publie'){
 			echo "<div style='margin:auto;margin-top:10px'>";
-			echo icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
+			echo icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_courrier, _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 			echo "</div>";
 		}
 		echo "</div>"; // fin du cadre de couleur
 		
 	}//while		
 
+	// GERER COURRIER: FIN DE PAGE
+	
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();
 }
 /******************************************************************************************/
