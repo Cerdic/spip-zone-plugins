@@ -24,19 +24,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/barre');
-include_spip('inc/affichage');
-include_spip('base/spip-listes');
-include_spip('public/assembler');
-
-
-
 function exec_sl_courrier_rediger(){
 
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $connect_id_auteur;
+	include_spip('inc/presentation');
+	include_spip('inc/barre');
+	include_spip('inc/affichage');
+	include_spip('base/spip-listes');
+	include_spip('public/assembler');
+
+	global $connect_statut
+	, $connect_toutes_rubriques
+	, $connect_id_auteur
+	;
+	
 	$type = _request('type');
 	$id_courrier = _request('id_message');
 
