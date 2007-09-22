@@ -4,7 +4,12 @@ include_spip('base/abstract_sql');
 function confirmation_inscription2($id, $mode, $cle){
 	$q = spip_query("SELECT statut, alea_actuel FROM spip_auteurs WHERE id_auteur = '$id'");
 	$q = spip_fetch_array($q);
-	if($q['statut'] == 'aconfirmer' and $mode == 'conf' and $cle ==  $q['alea_actuel']){
+	$statuts_autorises = array(
+	"aconfirmer",
+	"6forum"
+	);
+	
+	if(in_array($q['statut'],$statuts_autorises) and $mode == 'conf' and $cle ==  $q['alea_actuel']){
 		return 'pass';
 	}elseif($q['statut'] == 'aconfirmer' and $mode == 'sup' and $cle ==  $q['alea_actuel']){
 		return 'sup';
