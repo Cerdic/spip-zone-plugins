@@ -33,16 +33,16 @@ function exec_sl_courrier_rediger(){
 	include_spip('public/assembler');
 
 	global $connect_statut
-	, $connect_toutes_rubriques
-	, $connect_id_auteur
-	;
+		, $connect_toutes_rubriques
+		, $connect_id_auteur
+		;
 	
 	$type = _request('type');
 	$id_courrier = _request('id_message');
 
-	$nomsite=lire_meta("nom_site"); 
-	$urlsite=lire_meta("adresse_site"); 
-
+	/* Crée le courrier par simple appel de la page. Pas bon.
+		Doit être validé par exec/gerer_courrier
+	*/
 	if (_request('new') == "oui") { 
 		$statut = 'redac'; 
 		$type = 'nl'; 
@@ -50,27 +50,7 @@ function exec_sl_courrier_rediger(){
 		$id_courrier = spip_insert_id(); 
 	}
 
-	// Admin SPIP-Listes
-	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
-
-	if ($connect_statut != "0minirezo" ) {
-		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-		echo fin_page();
-		exit;
-	}
-
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
-		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
-	}
-
-	debut_gauche();
-	spip_listes_raccourcis();
-	creer_colonne_droite();
-
-	debut_droite("messagerie");
-
-	// MODE EDIT: Redaction d'un courrier ------------------------------------------
+	// COURRIER REDIGER: Redaction d'un courrier ------------------------------------------
 
 	$result = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_courrier));
 	if ($row = spip_fetch_array($result)) {
@@ -84,6 +64,24 @@ function exec_sl_courrier_rediger(){
 		if (!($expediteur == $connect_id_auteur OR ($type == 'nl' AND $connect_statut == '0minirezo'))) 
 			die();
 	}
+
+//////////
+// PAGE CONTENU
+//////////
+
+	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+
+	// la création d'un courrier est réservée aux admins 
+	if($connect_statut != "0minirezo") {
+		die (spiplistes_terminer_page_non_authorisee() . fin_page());
+	}
+
+	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	
+	debut_gauche();
+	spip_listes_raccourcis();
+	creer_colonne_droite();
+	debut_droite("messagerie");
 
 	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
 
@@ -102,7 +100,7 @@ function exec_sl_courrier_rediger(){
 		echo "<div id=\"ajax-loader\" align=\"right\"><img src=\""._DIR_PLUGIN_SPIPLISTES. "/img_pack/ajax_indicator.gif\" /></div>";
 		echo "<div class='verdana2' id='envoyer'>";
 	
-		echo "<form method='POST' action='./?exec=sl_courrier_previsu' style='border: 0px; margin: 0px;' id='template' name='template'>";
+		echo "<form method='post' action='./?exec=sl_courrier_previsu' style='border: 0px; margin: 0px;' id='template' name='template'>";
 		echo "<input name=\"id_courrier\" id=\"id_courrier\" type=\"hidden\" value=\"$id_courrier\" /><br /><br /><br />\n";
 
 		echo "<br/><strong><label for='template'>"._T("Choisir un patron")."</label></strong><br/>";
@@ -194,7 +192,7 @@ function exec_sl_courrier_rediger(){
 	
 	
 	
-	// MODE EDIT FIN ---------------------------------------------------------------
+	// COURRIER REDIGER: FIN ---------------------------------------------------------------
 
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();
 
