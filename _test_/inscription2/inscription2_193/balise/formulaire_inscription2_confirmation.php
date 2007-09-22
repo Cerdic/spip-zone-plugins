@@ -57,10 +57,10 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode) {
 		if($var_user){
 			$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 			$adresse_site = $GLOBALS['meta']["adresse_site"];
-			$message = _T('inscription2:message_auto')
+			$message = _T('inscription2:message_auto')."\n\n" 
 			. _T('inscription2:email_bonjour', array('nom'=>$var_user['nom']))."\n\n"
 			. _T('inscription2:texte_email_confirmation', array('login'=> $var_user['login'], 'nom_site' => $nom_site_spip));
-			if (envoyer_mail($var_user['email'],"[$nom_site_spip] "._T('inscription2:compte_active'), $message))
+			if (envoyer_mail($var_user['email'],"[$nom_site_spip] "._T('inscription2:compte_active',array('nom_site' => $nom_site_spip)), $message))
 				return;
 			else
 				return _T('inscription2:probleme_email');

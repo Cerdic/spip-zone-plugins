@@ -89,7 +89,7 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 
 //email envoye lors de l'inscription
 
-function envoyer_inscription2($id_auteur) {
+function envoyer_inscription2($id_auteur,$mode="inscription") {
 	if ($GLOBALS['spip_version_code']>=1.9259){include_spip('inc/envoyer_mail');}
 	else{include_spip('inc/mail');}
 	
@@ -100,6 +100,13 @@ function envoyer_inscription2($id_auteur) {
 	
 	$var_user=spip_fetch_array(spip_query("select a.nom, $prenom a.id_auteur, a.alea_actuel, a.login, a.email from spip_auteurs a join spip_auteurs_elargis b where a.id_auteur='$id_auteur' and a.id_auteur=b.id_auteur"));
 	
+	if($var_user['alea_actuel']==''){ 
+ 		$var_user['alea_actuel'] = rand(1,99999); 
+ 	    spip_query("UPDATE spip_auteurs SET alea_actuel='".$var_user['alea_actuel']."' WHERE id_auteur = ".$id_auteur); 
+      } 
+ 	
+ 	if($mode="inscription"){ 
+	
 	$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
 			. _T('inscription2:texte_email_inscription', array(
@@ -108,9 +115,27 @@ function envoyer_inscription2($id_auteur) {
 			'link_suppresion' => $adresse_site.'/?page=inscription2_confirmation&id='
 			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=sup',
 			'login' => $var_user['login'], 'nom_site' => $nom_site_spip ));
-
+			
+		$sujet = "[$nom_site_spip] "._T('inscription2:activation_compte'); 
+	}
+	
+	if($mode="rappel_mdp"){ 
+ 	
+ 	$message = _T('inscription2:message_auto')."\n\n" 
+ 	. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n" 
+ 	. _T('Rappel de votre mot de passe')."\n\n" 
+ 	. _T('Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant')."\n\n" 
+ 	
+ 	. $adresse_site."/?page=inscription2_confirmation&id=" 
+ 	. $var_user['id_auteur']."&cle=".$var_user['alea_actuel']."&mode=conf"."\n\n" 
+ 	. _T('inscription2:Rappel : votre login est : ') . $var_user['login'] ; 
+ 	$sujet = "[$nom_site_spip] "._T('Rappel de votre mot de passe'); 
+ 	} 
+	
+	
+	
 	if (envoyer_mail($var_user['email'],
-			 "[$nom_site_spip] "._T('inscription2:activation_compte'),
+			$sujet,
 			 $message))
 		return "ok";
 	else

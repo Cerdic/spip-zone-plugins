@@ -110,20 +110,20 @@ Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire par
 
 Merci de votre confiance.
 
-L\'&eacute;quipe de @nom_site@',
+L\'6eacute;quipe de @nom_site@',
 'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
 'demande_password' => 'Votre mot de passe&nbsp;:',
 'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:',
-'texte_email_confirmation' => 'Votre compte vient d\'&ecirc;tre activ&eacute;, vous pouvez d&egrave;s maintenant vous connecter &agrave; notre site en utilisant vos identifiants personnels.
+'texte_email_confirmation' => 'Votre compte est actif, vous pouvez d&egrave;s maintenant vous connecter au site en utilisant vos identifiants personnels.
 
 Votre login est&nbsp;: @login@
 et vous venez choisir votre mot de passe.
 
-Merci de Votre Confiance
+Merci de votre confiance
 
 L\'&eacute;quipe de @nom_site@',
-'compte_active' => 'Votre compte a &eacute;t&eacute; activ&eacute;',
+'compte_active' => 'Votre compte sur @nom_site@',
 'suppression_faite' => 'la suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;',
 
 'janvier' => 'janvier',
