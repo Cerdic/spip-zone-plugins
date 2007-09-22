@@ -75,21 +75,16 @@ function exec_liste_edit(){
 	///////////////////////////////
 	// Modification de la liste transmise
 	//
-		// Recuperer les donnees de l'article
-		$result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1");
+		$sql_select = "titre,lang,pied_page,texte,date,statut";
+		$sql_result = spip_query("SELECT ".$sql_select." FROM spip_listes WHERE id_liste=$id_liste LIMIT 1");
 	
-		if ($row = spip_fetch_array($result)) {
-			$titre = $row["titre"];
-			$lang = $row["lang"];
-			$pied_page = $row["pied_page"];
-			$texte = $row["texte"];
-			$date = $row["date"];
-			$statut = $row['statut'];
-				
-			$result_auteur = spip_query("SELECT * FROM spip_auteurs_listes WHERE id_liste="._q($id_liste)." AND id_auteur="._q($connect_id_auteur));
-			$flag_auteur = (spip_num_rows($result_auteur) > 0);
-	
-			$flag_editable = autoriser('modifier','liste',$id_liste);
+		if ($row = spip_fetch_array($sql_result)) {
+			foreach(explode(",", $sql_select) as $key) {
+				$$key = $row[$key];
+			}
+			$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
+			// supers-adins et moderateur seuls ont droit de modfier la liste
+			$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
 		}
 	} 
 	elseif ($new=='oui') {

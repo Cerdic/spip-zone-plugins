@@ -19,6 +19,7 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
+// $Revision$
 // API v0.2
 
 include_spip ("inc/utils");
@@ -344,6 +345,17 @@ function spiplistes_items_get_item($item, $statut) {
 	else {
 		return($spiplistes_items['default'][$item]);
 	}
+}
+
+// renvoie ID du moderateur de la liste
+function spiplistes_mod_listes_get_id_auteur($id_liste) {
+	$result = false;
+	$id_liste = intval($id_liste);
+	if($id_liste>0) {
+		$result = spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes WHERE id_liste=$id_liste LIMIT 1");
+		$result = (($row = spip_fetch_array($result)) && ($row['id_auteur'] > 0)) ? $row['id_auteur'] : false;
+	}
+	return($result);
 }
 
 /******************************************************************************************/
