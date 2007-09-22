@@ -7,11 +7,12 @@ function cron_abonnement_cron($t){
 		spip_log("cron abonnement","abonnement");
 		
 		// fermer les zones aux echus
-
+		// attention s'il y en a beaucoup
+		
 	$result = spip_query("
-	SELECT id_auteur FROM spip_auteurs_elargis a, spip_auteurs_elargis_abonnements b
+	SELECT a.id_auteur FROM spip_auteurs_elargis a, spip_zones_auteurs b
 	WHERE
-	a.id = b.id_auteur_elargi
+	a.id_auteur = b.id_auteur
 	and a.validite <> '0000-00-00 00:00:00' 
 	and a.validite < NOW()
 	");
