@@ -2,28 +2,46 @@
 
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 
-<BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}{validite > #ENV{date}}>
+<BOUCLE_auteur_elargi_valide(AUTEURS_ELARGIS auteurs){id_auteur}{validite > #ENV{date}}>
 <B_abo>
 <h2 style="margin:20px 0px">Votre abonnement</h2>
 <BOUCLE_abo(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}>
 <BOUCLE_abo2(spip_abonnements){id_abonnement}>
 #LIBELLE - &eacute;ch&eacute;ance le [(#_abo:VALIDITE|affdate)]
 </BOUCLE_abo2>
-</BOUCLE_abo>
-
-<div style="padding:5px;background-color:#F4F1D0">
-							<form action="./?page=commander" method="post">
-							[(#INCLURE{fond=formulaires/abonnement_liste}{abonnement=1})]	
-							<input type="hidden" value="reabo" name="reabo">
-							<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
-							<p style="text-align:right"><input type="submit" value="valider"></p>
-							</form>
-</div>
-<//B_abo>	
-		
-</BOUCLE_auteur_elargi>
+</BOUCLE_abo>		
+</BOUCLE_auteur_elargi_valide>
 
 <BOUCLE_auteur_elargi_(AUTEURS_ELARGIS auteurs){id_auteur}>
+
+
+<B_abo_echu>
+<div style="margin:20px 0px;padding:10px;background-color:#FFE2E2">
+<p>
+Votre abonnement
+<BOUCLE_abo_echu(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}>
+<BOUCLE_abo2_echu(spip_abonnements){id_abonnement}>
+#SET{id_abo,#ID_ABONNEMENT}
+<i>#LIBELLE</i>  est arriv&eacute; &agrave; &eacute;ch&eacute;ance le [(#_abo_echu:VALIDITE|affdate)]
+</p>
+<p>
+Vous pouvez le renouveller ou bien choisir une autre formule ci-dessous.
+</p>
+</BOUCLE_abo2_echu>
+</BOUCLE_abo_echu>
+</div>
+
+<div style="padding:5px;background-color:#F4F1D0;margin:10px 0px">
+	<form action="./?page=commander" method="post">
+	[(#INCLURE{fond=formulaires/abonnement_liste}{abonnement=#GET{id_abo}})]	
+	<input type="hidden" value="reabo" name="reabo">
+	<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur">
+	<p style="text-align:right"><input type="submit" value="valider"></p>
+	</form>
+</div>
+
+
+
 <B_articles>
 <h2 style="margin:20px 0px">Vos articles</h2>
 <ul>
@@ -34,7 +52,7 @@
 </B_articles>
 </BOUCLE_auteur_elargi_>
 
-<//B_auteur_elargi>
+<//B_auteur_elargi_valide>
 
 </BOUCLE_auteur>
 

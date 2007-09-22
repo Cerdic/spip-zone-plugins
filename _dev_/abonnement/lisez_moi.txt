@@ -13,7 +13,7 @@ x) ajouter dans inc-entete en dessous de #FORMULAIRE_RECHERCHE
 
 <INCLURE{fond=fonds/inc-entree_profil}>
 
-x) Ajouter dans une page _abonnement avec un #CACHE{0}
+x) Ajouter dans une page _abonnement_ avec un #CACHE{0}
 
 			<?php if($auteur_session) { ?>
 

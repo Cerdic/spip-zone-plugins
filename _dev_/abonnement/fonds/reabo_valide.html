@@ -7,13 +7,15 @@
 <?php
 $value = '#ENV{abonnement}' ;	
 // mieux vaudrait maj la date et ne pas effacer un viel abonnement
-spip_query("DELETE FROM `spip_auteurs_elargis_abonnements` WHERE id_auteur_elargi='#ID' AND id_abonnement="._q($value));
+spip_query("DELETE FROM `spip_auteurs_elargis_abonnements` WHERE id_auteur_elargi='#ID'");
+spip_query("DELETE FROM `spip_zones_auteurs` WHERE id_auteur='#_auteur:ID_AUTEUR'");
+
 spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('#ID', "._q($value).")");
 
 $var_user['zones'] = lire_config('inscription2/zones');
 if(is_array($var_user['zones'])){
 		foreach($var_user['zones'] as $value)
-			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('#_auteur:ID_AUTEUR', '$value')");
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`) VALUES ('#_auteur:ID_AUTEUR', '$value')");
 	}
 ?>
 
