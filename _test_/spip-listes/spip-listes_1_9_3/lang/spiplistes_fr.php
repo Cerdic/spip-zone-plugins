@@ -148,6 +148,7 @@ et de recevoir les lettres d\'informations.',
 'lot_suivant' => 'Provoquer l\'envoi du lot suivant',
 'lieu' => 'Localisation',
 'lettre_d_information' => 'Lettre d\'information',
+'liste_des_abonnes' => "Liste des abonn&eacute;s",
 
 //M
 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format',

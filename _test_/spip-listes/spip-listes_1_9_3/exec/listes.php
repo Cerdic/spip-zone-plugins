@@ -18,6 +18,7 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, �ats-Unis.                   */
 /******************************************************************************************/
+// $Revision$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -54,14 +55,7 @@ function exec_listes_dist(){
 
 	$lang = (!empty($changer_lang)) ? $changer_lang : $GLOBALS['spip_lang'] ;
 	
-	//on peut plus ajouter un auteur la c buggue
-	//global $flag_auteur;
-	$creer_auteur = _request('creer_auteur');
-	//global $ajout_auteur;
-	$supp_auteur = _request('supp_auteur');
 	$cherche_auteur = _request('cherche_auteur');
-	//global $nouv_auteur;
-	$changer_lang = _request('changer_lang');
 	
 	$Valider_auto = _request('Valider_auto');
 	$auto = _request('auto');
@@ -100,19 +94,16 @@ function exec_listes_dist(){
 	//////////////////////////////////////////////////////
 	// Modifier une liste (retour d'éditeur)
 	////
-		$id_mod_list = 
-			(($row = spip_fetch_array(spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes WHERE id_liste="._q($id_liste)." LIMIT 1")))
-			&& $row['id_auteur'])
-			? $row['id_auteur']
-			: false
-			;
 		// les supers-admins et le moderateur seuls peuvent modifier la liste
-		$flag_editable = (($connect_toutes_rubriques) || ($id_mod_list > 0));
+		$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
+		$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
+
 		if($flag_editable) {
 			$sql_query = "";
 			// récupère les données de la liste actuelle pour optimiser l'update
-			if($row = spip_fetch_array(spip_query("SELECT statut, titre, maj FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1"))) {
-				foreach(array('statut','titre','maj') as $key) {
+			$sql_select = "statut,titre,maj";
+			if($row = spip_fetch_array(spip_query("SELECT ".$sql_select." FROM spip_listes WHERE id_liste=$id_liste LIMIT 1"))) {
+				foreach(explode(",", $sql_select) as $key) {
 					$current_liste[$key] = $row[$key];
 				}
 			}
@@ -126,7 +117,7 @@ function exec_listes_dist(){
 				$sql_query .= " email_envoi="._q($email_envoi).",";
 			}
 			
-			//modifier la date (à venir, ne figure pas dans cette version ???)
+			//modifier la date (à venir, ne figure pas dans cette version CP:20070922)
 			if ($jour) {
 				$mois = intval(_request('mois'));
 				if (($annee=intval(_request('annee'))) == "0000") $mois = "00";
@@ -462,11 +453,11 @@ function exec_listes_dist(){
 	// Appliquer les modifications sur les abonnes
 	echo "<a name='auteurs'></a>";
 	$editer_auteurs = charger_fonction('editer_auteurs','inc');
-	echo $editer_auteurs('liste',$id_liste,$flag_editable, _request('cherche_auteur'),_request('ids'), 
-		_T('spiplistes:abon'),
+	echo $editer_auteurs('liste', $id_liste, $flag_editable, _request('cherche_auteur'), _request('ids'), 
+		_T('spiplistes:liste_des_abonnes'),
 		'listes',
 		'abonne_edit');
-	
+
 	////
 	// MODE EDIT LISTE FIN ---------------------------------------------------------
 
