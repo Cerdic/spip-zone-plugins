@@ -244,14 +244,7 @@ function exec_listes_dist(){
 	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 
 	debut_gauche();
-	echo (
-		debut_boite_info(true)
-		. '<div align="center">
-	<font face="Verdana,Arial,Sans,sans-serif" size="1"><strong>'._T('spiplistes:liste_numero').'&nbsp;:</strong></font>
-	<br><font face="Verdana,Arial,Sans,sans-serif" size="6"><strong>'.$id_liste.'</strong></font>
-	</div>'
-		. fin_boite_info()
-	);
+	spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, false);
 	spip_listes_raccourcis();
 	creer_colonne_droite();
 	debut_droite("messagerie");

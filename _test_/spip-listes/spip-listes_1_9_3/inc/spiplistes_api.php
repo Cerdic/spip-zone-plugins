@@ -358,6 +358,25 @@ function spiplistes_mod_listes_get_id_auteur($id_liste) {
 	return($result);
 }
 
+// boite information avec juste titre et id
+// A placer dans cadre gauche (ex.: exec/listes)
+function spiplistes_boite_info_id ($titre, $id, $return = true) {
+	$result = "";
+	if($id) {
+		$result = 
+			debut_boite_info(true)
+			. "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
+			.  _T($titre)
+			. "<br /><span class='spip_xx-large'>"
+			. $id
+			. "</span></div>"
+			. fin_boite_info(true)
+			. "<br />"
+		;
+	}
+	if($return) return($result);
+	else echo($result);
+}
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
