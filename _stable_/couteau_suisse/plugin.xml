@@ -13,7 +13,7 @@ R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelle
 
 Chacun de ces outils peut &#234;tre activ&#233; ou non par l'utilisateur sur la page d'administration du plugin et g&#233;rer un certain nombre de variables : cliquer sur {{Configuration}}, puis choisir l'onglet {{Le Couteau Suisse}}.
 
-Les cat&#233;gories disponibles sont : Administration, Nouveaux raccourcis typographiques, Corrections typographiques, Affichage public, Balises, filtres, crit&#232;res, etc.
+Les cat&#233;gories disponibles sont : Administration, Am&#233;liorations typographiques, Raccourcis typographiques, Affichage public, Balises, filtres, crit&#232;res.
 
 N'h&#233;sitez pas &#224; consulter les articles de documentation du plugin publi&#233;s sur [Spip-Contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse]
 

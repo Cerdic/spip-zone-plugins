@@ -1,7 +1,7 @@
 <?php
 
-define('_mailcrypt_AROBASE', '..&aring;t..'); // tip visible onMouseOver
-define('_mailcrypt_MAIL', '['.ucfirst(_T('email')).']'); // affichage par defaut d'un lien mail sans texte
+@define('_mailcrypt_AROBASE', '..&aring;t..'); // tip visible onMouseOver
+@define('_mailcrypt_MAIL', '['.ucfirst(_T('email')).']'); // affichage par defaut d'un lien mail sans texte
 
 function mailcrypt($texte) {
 	if (strpos($texte, '@')===false) return $texte;

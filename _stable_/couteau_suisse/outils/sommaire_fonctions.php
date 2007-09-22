@@ -1,7 +1,7 @@
 <?php
 
-define('_sommaire_NB_TITRES_MINI', 2);
-define('_sommaire_SANS_FOND', '[!fond]');
+@define('_sommaire_NB_TITRES_MINI', 2);
+@define('_sommaire_SANS_FOND', '[!fond]');
 
 // TODO : ajouter un fichier css pour le sommaire
 
@@ -26,7 +26,7 @@ $GLOBALS['cs_introduire'][] = 'sommaire_retire_raccourcis';
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index || $page===false) $index=0;
 	if ($page===false) return;
-	define('_sommaire_NB_CARACTERES', 30);
+	@define('_sommaire_NB_CARACTERES', 30);
 	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
 	if($_GET['cs']!='print') {
 		$titre = _T('cout:sommaire');

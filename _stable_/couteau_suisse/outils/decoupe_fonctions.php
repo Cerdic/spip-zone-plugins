@@ -1,5 +1,5 @@
 <?php
-define('_decoupe_NB_CARACTERES', 60);
+@define('_decoupe_NB_CARACTERES', 60);
 
 // desactive pour l'instant. utiliser le parametre d'url : cs=print
 /*
@@ -21,7 +21,7 @@ function decouper_en_pages_rempl($texte) {
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// au cas ou on ne veuille pas de decoupe, on remplace les '++++' par un filet.
 	if ($_GET['cs']=='print') {
-		define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
+		@define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
 		return str_replace(_decoupe_SEPARATEUR, _decoupe_FILET, $texte);
 	}
 	// recherche du sommaire s'il existe

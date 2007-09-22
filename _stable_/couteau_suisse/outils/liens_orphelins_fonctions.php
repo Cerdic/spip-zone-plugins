@@ -2,7 +2,7 @@
 
 // expanser_liens() introduit sous SPIP 1.93
 if ($GLOBALS['spip_version_code']<1.9262) {
-	define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
+	@define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 	function expanser_liens($letexte) {
 		$inserts = array();
 		if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {

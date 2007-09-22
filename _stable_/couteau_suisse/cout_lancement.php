@@ -55,6 +55,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 }
 
 // lit ecrit les metas et initialise $cs_metas_pipelines
+// cette fonction est appellee par cout_options a chaque hit de la page
 function cs_initialisation($forcer=false) {
 	global $cs_metas_pipelines;
 	$rand = rand();

@@ -1,6 +1,6 @@
 <?php
 
-define('_INTRODUCTION_CODE', '@@CS_SUITE@@');
+@define('_INTRODUCTION_CODE', '@@CS_SUITE@@');
 
 // compatibilite avec SPIP 1.92 et anterieurs
 $GLOBALS['cs_couper_intro'] = 'couper_intro';
@@ -42,8 +42,8 @@ function cs_introduire($texte) {
 }
 
 function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
-	define('_INTRODUCTION_SUITE', '&nbsp;(...)');
-	define('_INTRODUCTION_LGR', 100);
+	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
+	@define('_INTRODUCTION_LGR', 100);
 	$couper = $GLOBALS['cs_couper_intro'];
 	switch ($type) {
 		case 'articles':
