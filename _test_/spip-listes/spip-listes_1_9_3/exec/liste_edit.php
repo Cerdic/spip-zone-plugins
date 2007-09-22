@@ -19,6 +19,7 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 
+// $Revision$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -70,11 +71,10 @@ function exec_liste_edit(){
 	$lier_trad = intval($lier_trad); // ?? semble attaché à rien
 	unset ($flag_editable);
 	
-	//
-	// Creation de l'objet article
-	//
-	
 	if($id_liste > 0) {
+	///////////////////////////////
+	// Modification de la liste transmise
+	//
 		// Recuperer les donnees de l'article
 		$result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 1");
 	
@@ -93,35 +93,15 @@ function exec_liste_edit(){
 		}
 	} 
 	elseif ($new=='oui') {
-	
-		// titre par defaut
+	///////////////////////////////
+	// Creation de la liste
+	//
 		$titre = filtrer_entites(_T('spiplistes:Nouvelle_liste_de_diffusion'));
+		$texte = "";
 		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		$flag_editable = true;
 	}
-	
-	// CP: id_docment n'existe nulle part !?
-	// Rahh, ravage du copié/collé ?
-	if ($id_liste && $id_document) {
-		$result_doc = spip_query("SELECT * FROM spip_documents_articles WHERE id_document="._q($id_document)." AND id_liste"._q($id_liste));
-		$flag_document_editable = (spip_num_rows($result_doc) > 0);
-	} else {
-		$flag_document_editable = false;
-	}
-	
-	// a quoi ca sert ca ?
-	// $GLOBALS['modif_document'] n'existe pas dans SPIP 192c
-	$modif_document = $GLOBALS['modif_document'];
-	if ($modif_document == 'oui' AND $flag_document_editable) {
-		$titre_document = corriger_caracteres($titre_document);
-		$descriptif_document = corriger_caracteres($descriptif_document);
-		$query = "UPDATE spip_documents SET titre="._q($titre_document).", descriptif="._q($descriptif_document);
-		if ($largeur_document AND $hauteur_document) 
-			$query .= ", largeur="._q($largeur_document).', hauteur='._q($hauteur_document);
-		$query .= " WHERE id_document="._q($id_document);
-		spip_query($query);
-	}
-	
+		
 	echo debut_cadre_formulaire();
 
 	
