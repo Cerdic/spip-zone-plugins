@@ -6,7 +6,7 @@
 	  BoOz (booz@rezo.net)
 	</auteur>
 	<version>
-	0.3
+	0.5
 	</version>
 	<etat>
 	test
@@ -21,9 +21,10 @@
 	<fonctions>abonnement_fonctions.php</fonctions>
 	<install>base/abonnement_upgrade.php</install>
 	<pipeline>
-		<nom></nom>
+		<nom>taches_generales_cron</nom>
 		<inclure></inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="inscription2" version="[0.2;]" /> 
+	<necessite id="inscription2" version="[0.2;]" />
+	<necessite id="spiplistes" version="[1.9;]" /> 
 </plugin>
