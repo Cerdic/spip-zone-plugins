@@ -25,6 +25,23 @@ define("_SPIPLISTES_CHARSETS_ALLOWED", "iso-8859-1;iso-8859-9;iso-8859-6;iso-885
 define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
 define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
 
+define("_SPIPLISTES_EXEC__PREFIX", "spiplistes_");
+define("_SPIPLISTES_EXEC_ABONNE_EDIT", "abonne_edit");
+define("_SPIPLISTES_EXEC_ABONNES_LISTE", "abonnes_tous");
+define("_SPIPLISTES_EXEC_AIDE", "aide_spiplistes");
+define("_SPIPLISTES_EXEC_AUTOCRON", "autocron");
+define("_SPIPLISTES_EXEC_CONFIGURE", "config");
+define("_SPIPLISTES_EXEC_COURRIER_EDIT", "courrier_edit");
+define("_SPIPLISTES_EXEC_COURRIER_MODIF", "gerer_courrier");
+define("_SPIPLISTES_EXEC_COURRIER_PREVUE", "sl_courrier_previsu");
+define("_SPIPLISTES_EXEC_COURRIER_REDAC", "sl_courrier_rediger");
+define("_SPIPLISTES_EXEC_COURRIERS_LISTE", "spip_listes");
+define("_SPIPLISTES_EXEC_IMPORT_EXPORT", "import_export");
+define("_SPIPLISTES_EXEC_IMPORT_PATRON", "import_patron");
+define("_SPIPLISTES_EXEC_LISTE_EDIT", "liste_edit");
+define("_SPIPLISTES_EXEC_LISTE_VUE", "listes");
+define("_SPIPLISTES_EXEC_LISTES_LISTE", "listes_toutes");
+
 // les formats d'envoi autorisés, ou non pour pseudo-désabonné
 define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
 
