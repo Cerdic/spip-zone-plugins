@@ -2,13 +2,14 @@
 	<nom> <!-- Nom du plugin -->
 	Coloriage du squelette dist
 	</nom>
+	<icon>img_pack/icon.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	[erational->http://www.erational.org]
-_ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
-_ Le module de choix de couleur par [knallgrau->http://www.knallgrau.at/code/colorpicker] sous licence MIT
+_ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
+_ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtastic] sous licence GPL
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	experimental
@@ -16,7 +17,8 @@ _ Le module de choix de couleur par [knallgrau->http://www.knallgrau.at/code/col
 	<description>
 		<multi>
 	[fr] Permet de modifier les couleurs de l'habillage par d&#233;faut (squelette dist) du site SPIP via une interface graphique sans &#224; avoir &#224; &#233;diter le code
-  <p>A tester avec firefox... bug etrange sur IE</p> 
+  
+  A debugger sous IE  
 	</multi>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
@@ -32,7 +34,14 @@ _ Le module de choix de couleur par [knallgrau->http://www.knallgrau.at/code/col
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>coloriagedist_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>coloriagedist_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>

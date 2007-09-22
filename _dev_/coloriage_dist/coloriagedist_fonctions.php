@@ -1,7 +1,7 @@
 <?php
-
 //
-// ajout bouton 
+// ajout bouton
+// 
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_COLORIAGEDIST',(_DIR_PLUGINS.end($p)));
  
@@ -21,15 +21,15 @@ function coloriagedist_ajouterBoutons($boutons_admin) {
 // functions
 //
 function coloriagedist_insert_head($flux){
-  $flux .= "<link rel='stylesheet' type='text/css' href='"._DIR_PLUGIN_COLORIAGEDIST."colorpicker/colorPicker.css'>\n";
-  $flux .= "<link rel='stylesheet' type='text/css' href='spip.php?page=css_coloriage'>\n";
-  $flux .= "<script src='"._DIR_PLUGIN_COLORIAGEDIST."colorpicker/lib/prototype.js' type=\"text/javascript\"></script>\n";
-  $flux .= "<script src='"._DIR_PLUGIN_COLORIAGEDIST."colorpicker/scriptaculous/scriptaculous.js' type=\"text/javascript\"></script>\n";
-  $flux .= "<script src='"._DIR_PLUGIN_COLORIAGEDIST."colorpicker/yahoo.color.js' type=\"text/javascript\"></script>\n";
-  $flux .= "<script src='"._DIR_PLUGIN_COLORIAGEDIST."colorpicker/colorPicker.js' type=\"text/javascript\"></script>\n";  
-	return $flux;
+  $flux .= "<link rel='stylesheet' type='text/css' href='?page=css_coloriage' />\n";   
+  return $flux;
 }
 
+function coloriagedist_header_prive($flux){
+  $flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('farbtastic/farbtastic.css'))."' />\n";     
+  $flux .= "<script src='".url_absolue(find_in_path('farbtastic/farbtastic.js'))."' type=\"text/javascript\"></script>\n";
+  $flux .= "<script src='".url_absolue(find_in_path('farbtastic/farbtastic_go.js'))."' type=\"text/javascript\"></script>\n";
+	return $flux;
+
+}
 ?>
-
-
