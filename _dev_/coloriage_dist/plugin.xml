@@ -17,8 +17,6 @@ _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtas
 	<description>
 		<multi>
 	[fr] Permet de modifier les couleurs de l'habillage par d&#233;faut (squelette dist) du site SPIP via une interface graphique sans &#224; avoir &#224; &#233;diter le code
-  
-  A debugger sous IE  
 	</multi>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction

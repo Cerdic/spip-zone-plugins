@@ -51,15 +51,10 @@ function exec_coloriagedist(){
     			ecrire_metas();    		
     	}	  
 	  }
-	  if ($flag) { 	// bourrin: on vide tout le cache
-      // FIXME : supprimer uniquement trouver le fichier squelette CSS, cf inc/invalideur
-	   	supprime_invalideurs(); 
-      purger_repertoire(_DIR_CACHE, 0);
-      /* ... trouver comment supprimer uniquement spip.php?page=css du cache ??
-     include_spip('public/cacher');
-     $item = array("page"=>"css_coloriage");
-     echo generer_nom_fichier_cache($item);
-     */ 
+	  if ($flag) { 	
+      // FIXME : supprimer uniquement trouver le fichier squelette CSS, cf inc/invalideur	   	
+      //purger_repertoire(_DIR_CACHE, 0); // bourrin: on vide tout le cache
+       suivre_invalideur("page LIKE '%css_coloriage'"); // syntaxte correcte ? 
     }
 	
 	  // HTML output 
@@ -81,10 +76,10 @@ function exec_coloriagedist(){
     foreach ($css_data as $css_part=>$val) {
            // search existing value, if not init
            if (!isset($GLOBALS['meta'][$css_part])) {	
-          			ecrire_meta($css_part, '#FF6600'); // i luv orange ;)
+          			ecrire_meta($css_part, '#FF6600'); 
           			ecrire_metas();     
            } 	
-           $value =  $GLOBALS['meta'][$css_part]; 
+           $value =  $GLOBALS['meta'][$css_part];  // FIXME: economisez les meta en utilisant plugin cfg ? 
                       
            // display
            $str1 .= "<label for='$css_part'>"._T("coloriagedist:$css_part")."</label><br />\n";
