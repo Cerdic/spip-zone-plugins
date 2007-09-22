@@ -110,7 +110,7 @@ Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire par
 
 Merci de votre confiance.
 
-L\'6eacute;quipe de @nom_site@',
+L\'&eacute;quipe de @nom_site@',
 'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
 'demande_password' => 'Votre mot de passe&nbsp;:',
