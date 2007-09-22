@@ -17,18 +17,21 @@
 
 function traiter_message_banque($produit,$id_abonne,$validation_paiement,$hash_article){
 
-$abonne = spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, a.validite, b.email, b.id_auteur, b.alea_actuel, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") ;
+$abonne_res = spip_query("SELECT a.nom_famille, a.prenom, a.adresse, a.code_postal, a.ville, a.pays, a.telephone, a.commentaire, a.validite, b.email, b.id_auteur, b.alea_actuel, b.login , b.pass FROM `spip_auteurs_elargis` a, `spip_auteurs` b WHERE a.id='$id_abonne' AND a.id_auteur = b.id_auteur") ;
 
-while($row = spip_fetch_array($abonne)){
+while($row = spip_fetch_array($abonne_res)){
 $abonne = $row ;
 }
 
 
 if($produit == "abonnement"){
-$abonnement = spip_fetch_array(spip_query("SELECT a.duree, a.periode, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur_elargi = '$id_abonne' AND a.id_abonnement = b.id_abonnement") );
+$abonnement_res = spip_query("SELECT a.duree, a.periode, a.montant, a.libelle FROM `spip_abonnements` a, `spip_auteurs_elargis_abonnements` b WHERE b.id_auteur_elargi = '$id_abonne' AND a.id_abonnement = b.id_abonnement") ;
+
+while($abonnement = spip_fetch_array($abonnement_res)){
 $libelle = $abonnement['libelle'];
 $duree = $abonnement['duree'] ;
 $periode = $abonnement['periode'] ;
+}
 
 $statut_abonnement = ($validation_paiement == "ok")? 'abonne' : 'prospect' ;
 
