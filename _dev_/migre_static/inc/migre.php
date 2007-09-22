@@ -43,6 +43,7 @@ global $migre_meta;
 		ecrire_metas();
 		$GLOBALS['migre_static'] = @unserialize($GLOBALS['meta']['migre_static']);
 	}
+	$migre_meta['migre_cs_decoupe']= "checked";
 }
 
 // [fr] Supprimer les metas du plugin (desinstallation)

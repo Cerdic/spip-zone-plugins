@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_choix_test' => 'Choose your migration type (full or test)',
 'config_choix_rubrique' => 'Choose the rubrique',
 'choix_rubrique_selection' => 'The imported articles will be moved in this selected rubrique',
+'config_cs_decoupe' => 'Splitting article pages with COUTEAU_SUISSE Decoupe',
+'sous_choix_cs_decoupe' => 'Checking this box will add the "++++" to split your article pages',
 
 // Formulaire
 'titre_migre_formulaire' => 'Migration of a static website',

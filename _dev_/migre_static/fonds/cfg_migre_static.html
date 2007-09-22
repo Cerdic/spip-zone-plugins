@@ -72,6 +72,32 @@
 </p>
 </fieldset>
 
+<?php
+include_spip("inc/plugin");
+$plug=liste_plugin_actifs();
+if (is_array($plug) AND array_key_exists("COUTEAU_SUISSE",$plug) AND isset($GLOBALS['meta']['cs_decoupe'])) {
+?>
+[(#REM) ---------------------- UTILISATION DE CS_DECOUPE -------------------- ]
+<fieldset>
+<legend><:migrestatic:config_cs_decoupe:></legend>
+<p>
+<label>
+	<input type="checkbox" name="migre_cs_decoupe" [checked="(#ENV{migre_cs_decoupe}|?{checked})"] />
+	<i><:migrestatic:sous_choix_cs_decoupe:></i>
+</label>
+</p>
+</fieldset>
+
+<?php
+}
+else
+{
+?>
+	<input type='hidden' name='migre_cs_decoupe' [value='(#ENV{migre_cs_decoupe}|?{checked})'] />
+<?php
+}
+?>
+
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />

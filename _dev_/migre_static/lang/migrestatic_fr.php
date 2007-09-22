@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_choix_test' => 'Choix du type de migration',
 'config_choix_rubrique' => 'Choix de la rubrique',
 'choix_rubrique_selection' => 'C\'est dans la rubrique choisie que les articles seront import&eacute;s',
+'config_cs_decoupe' => "D&eacute;coupage des articles avec le Couteau Suisse - D&eacute;coupe",
+'sous_choix_cs_decoupe' => "Si la case est coch&eacute;e, des '++++' seront ajout&eacute;s dans les articles pour les d&eacute;couper en pages",
 
 // Formulaire
 'titre_migre_formulaire' => 'Migration d\'un site statique',

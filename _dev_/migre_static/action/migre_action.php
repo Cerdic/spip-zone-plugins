@@ -30,6 +30,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip("inc/migre"); // [fr] Charge les fonctions de migre_static [en] Loads migre_static functions
 include_spip('base/abstract_sql');
 include_spip('inc/rubriques');
+include_spip('inc/charsets');
 
 global $migre_meta;
 
@@ -101,13 +102,15 @@ global $migre_meta, $dir_lang;
 	$res_list= "\n<div $dir_lang style='width:98%;height:4em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>" ;
 
 	$res="";
-	while(list ($key, $migre_uri) = each ($dochtml))
+	$i=0;
+	while(list ($key, $migre_uri) = each ($dochtml) )
 	{
-		$res_list .= $migre_uri."<br />";
+		$res_list .= "<a href='$migre_uri'>".$migre_uri."</a><br />";
 		$res .= debut_cadre_relief('article-24.gif',true,'',
 			_T('migrestatic:processing_page')." <a href='$migre_uri'>".$migre_uri."</a>");
 		$res .= migre_infos_page($migre_uri,$id_rubrique);
 		$res .= fin_cadre_relief(true);
+		if ($migre_meta['migre_test'] AND $i>5) break; else $i++; // [fr] On ne teste que les 5 premieres pages [en] Test only first 5 pages
 	 };
 	$res .= _T('migrestatic:migre_fini');
 	$res_list.= "<br style='clear: both;' />\n</div>\n";
@@ -180,19 +183,14 @@ global $dir_lang, $migre_meta;
 	$body=migre_filtrer_body($body);
 	$body=migre_nettoie_url($body,$adresse);
 	$body=migre_html_to_spip($body);
-//	$body=migre_html_entity_decode($body); // [fr] convertir les accents [en] convert special chars
-
 
 	// [fr] Si ce n est pas un test : integration de l'article dans SPIP
 	// [en] If it s not a test, load into SPIP
-//	$migretest = _request('migretest');
 	$migretest = $migre_meta['migre_test'];
-//	$id_mot = _request('migreid_mot');
 	$id_mot = $migre_meta['migre_id_mot'];
 
 	if (!$migretest)
 	{
-		$res .= _T('migrestatic:page_title').$titre."<br>\n";
 		$res .= migre_cree_article($titre,$body,$adresse,$id_rubrique,$auteur,$id_mot,$lang);
 	}
 	else
@@ -299,6 +297,8 @@ function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lan
 
 	if (!empty($id_article))
 	{
+		spip_log('migre_static : insert article #'.$id_article);
+
 		// auteur
 		$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $auteur . ", " . $id_article . ")";
 		$result = spip_query($sql);
@@ -315,7 +315,7 @@ function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lan
 			}
 		}
 
-		return _T($t_mess) . $id_article. _T('migrestatic:insert_article_titre') . $titre ;
+		return _T($t_mess) . $id_article. _T('migrestatic:insert_article_titre') . "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>". $titre ."</a>" ;
 	}
 	else
 	{
@@ -399,7 +399,7 @@ function InternetCombineURL($absolute,$relative)
 // ------------------------------------------------------------------------------
 function migre_html_to_spip($texte)
 {
-//	if (isset($GLOBALS['meta']['cs_decoupe'])) echo "";
+global $migre_meta;
 
 	$texte=preg_replace('/<a[ ]name=\"(.*)\".*>(.*)<\/a>/iUs',"[\$1<-]",$texte);
 	$texte=preg_replace('/<a.+href=\"(.*)\".*>(.*)<\/a>/iUs',"[\$2->\$1]",$texte);
@@ -412,7 +412,7 @@ function migre_html_to_spip($texte)
 	$texte = preg_replace(",\n[|].+?[|].+?[|].+,", "\\0|\r", $texte);
 
 	// retablir les gras
-	$texte = preg_replace(",@@b@@(.*)@@/b@@,Uims","<b>\\1</b>",$texte);
+	$texte = preg_replace(",@@b@@(.*)@@/b@@,Uims","{{\\1}}",$texte);
 	$texte = preg_replace(",@@/?b@@,"," ",$texte);
 
 	$texte = preg_replace ('/<p>/i', "", $texte); // on enleve les balises <p> non fermées - nettoyage
@@ -436,6 +436,16 @@ function migre_html_to_spip($texte)
 	$texte = preg_replace ('/-\*\s*[\n\r]/is', "-* ", $texte); // on supprime les sous éléments vides
 	$texte = preg_replace ('/\{(.*)[\n\r]+(.*)\}/Us', "{\$1 \$2}", $texte); // on supprime les retours à la ligne à l'intérieur des titres
 	$texte = preg_replace ('/[\n\r]{2,}/i', "\n", $texte); // on supprime les dernieres lignes multiples
+
+	include_spip("inc/plugin");
+	$plug=liste_plugin_actifs();
+	if ( is_array($plug) 
+		AND array_key_exists("COUTEAU_SUISSE",$plug)
+		AND isset($GLOBALS['meta']['cs_decoupe'])
+		AND $migre_meta['migre_cs_decoupe'] )
+	{
+		$texte = preg_replace ('/\{\{\{/s',"\n++++\n{{{",$texte);
+	}
 
 	return $texte;
 }
@@ -485,6 +495,7 @@ global $migre_meta;
 			$migre_meta['migre_htos'][$key]['spip']=$conv;
 		}
 	}
+	$migre_meta['migre_cs_decoupe']= _request('form_migre_cs_decoupe');
 	if ($migre_meta!= $GLOBALS['meta']['migre_static']) {
 		include_spip('inc/meta');
 		ecrire_meta('migre_static', serialize($migre_meta));

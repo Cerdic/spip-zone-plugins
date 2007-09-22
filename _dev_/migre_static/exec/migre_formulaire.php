@@ -236,6 +236,18 @@ function formulaire_liste_balise() {
 		}
 		$res .="</table>";
 	}
+
+	include_spip("inc/plugin");
+	$plug=liste_plugin_actifs();
+	if ( is_array($plug) 
+		AND array_key_exists("COUTEAU_SUISSE",$plug)
+		AND isset($GLOBALS['meta']['cs_decoupe']) )
+	{
+		$valeur_cs_decoupe= (!empty($GLOBALS['migre_static']['migre_cs_decoupe'])) ? $GLOBALS['migre_static']['migre_cs_decoupe'] : "checked" ;
+		$res.= "\n<p><b>" .  _T('migrestatic:config_cs_decoupe') .  "</b><br />" ._T('migrestatic:sous_choix_cs_decoupe');
+		$res.= "\n<input type='checkbox' name='form_migre_cs_decoupe' id='form_migre_cs_decoupe' checked='".$valeur_cs_decoupe . "' class='check' />" ;
+	}
+
 	$res .="\n<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_valider') . "' /></div>" ;
 	$res .= fin_block();
 	$res .= fin_cadre_relief(true);

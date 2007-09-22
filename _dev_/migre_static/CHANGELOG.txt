@@ -1,3 +1,10 @@
+migre_static (0.7)
+ * Add links to imported articles
+ * Add usage of cs_decoupe and set it optionnal
+ * Limit test import to first 5 pages (useless to go far away ?)
+
+ -- Chryjs <chryjs@free.fr>  Sat,  22 Sep 2007 16:00:00 +0200
+
 migre_static (0.6)
  * Many corrected bugs
  * Simplified forms

@@ -1,15 +1,9 @@
 Migre_static todolist
 ---------------------
 
- * checking security
- * performance improvement
- * optimize the form
- * more documentation
- * Adding migre_static_log function
- * better ul/ol filters
-
--* affichage du lien vers les articles créés lors d'un import réel
--* réduction de l'affichage des parties affichées et traitées (seulement les N premières lignes, les N premières pages) lors d'un import à blanc
+-* checking security
+-* performance improvement
+-* better ul/ol filters
 -* la possibilité d'indiquer la rubrique d'import dans la liste sous la forme <rubriquexxx> par blocs
 -* de même la possibilité d'indiquer le mot clé dans la liste
 -* la possibilité de forcer la langue
