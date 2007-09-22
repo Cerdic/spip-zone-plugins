@@ -7,6 +7,9 @@
 	// pour forcer les logs du plugin, outil actif ou non :
 	// $GLOBALS['forcer_log_couteau_suisse'] = true;
 
+	// alias pour passer en mode impression
+	if($_GET['page']=='print') $_GET['cs']='print';
+	
 	// on active tout de suite les logs, si l'outil est actif.
 	$GLOBALS['log_couteau_suisse'] = (strpos($GLOBALS['meta']['tweaks_actifs'], 'log_couteau_suisse') !== false || $GLOBALS['forcer_log_couteau_suisse']);
 

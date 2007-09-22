@@ -24,12 +24,16 @@ function couleurs_installe() {
 cs_log("couleurs_installe()");
 
 	$couleurs = array(
-		array('noir', 'rouge', 'marron', 'vert', 'vert olive', 'bleu marine', 'violet', 'gris', 'argent', 'vert clair', 'bleu', 'fuchia', 'bleu clair', 
-		'blanc', 'bleu azur', 'beige', 'brun', 'bleu violet', 'brun clair', 'rose clair', 'vert fonce', 'orange fonce', 'mauve fonce', 'bleu ciel', 'or', 
-		'ivoire', 'orange', 'lavande', 'rose', 'prune', 'saumon', 'neige', 'turquoise', 'jaune paille', 'jaune'),
-		array('black', 'red', 'maroon', 'green', 'olive', 'navy', 'purple', 'gray', 'silver', 'chartreuse', 'blue', 'fuchsia', 'aqua', 
-		'white', 'azure', 'bisque', 'brown', 'blueviolet', 'chocolate', 'cornsilk', 'darkgreen', 'darkorange', 'darkorchid', 'deepskyblue', 'gold', 
-		'ivory', 'orange', 'lavender', 'pink', 'plum', 'salmon', 'snow', 'turquoise', 'wheat', 'yellow') );
+		array('noir', 'rouge', 'marron', 'vert', 'vert olive', 'bleu marine',
+		'violet', 'gris', 'argent', 'vert clair', 'bleu', 'fuchia', 'bleu clair', 
+		'blanc', 'bleu azur', 'beige', 'brun', 'bleu violet', 'brun clair', 'rose clair', 
+		'vert fonce', 'orange fonce', 'mauve fonce', 'bleu ciel', 'or', 'ivoire', 'orange',
+		'lavande', 'rose', 'prune', 'saumon', 'neige', 'turquoise', 'jaune paille', 'jaune'),
+		array('black', 'red', 'maroon', 'green', 'olive', 'navy',
+		'purple', 'gray', 'silver', 'chartreuse', 'blue', 'fuchsia', 'aqua', 
+		'white', 'azure', 'bisque', 'brown', 'blueviolet', 'chocolate', 'cornsilk',
+		'darkgreen', 'darkorange', 'darkorchid', 'deepskyblue', 'gold', 'ivory', 'orange',
+		'lavender', 'pink', 'plum', 'salmon', 'snow', 'turquoise', 'wheat', 'yellow') );
 	foreach ($couleurs[0] as $c=>$val) $couleurs[2][$val] = $couleurs[1][$c];
 
 	$perso = trim(_COULEURS_PERSO);

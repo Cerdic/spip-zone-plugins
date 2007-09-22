@@ -5,15 +5,21 @@ define('_sommaire_SANS_FOND', '[!fond]');
 
 // TODO : ajouter un fichier css pour le sommaire
 
+// desactive pour l'instant. utiliser le parametre d'url : cs=print
+/*
 // Filtre local utilise par le filtre 'cs_imprimer' afin d'eviter la decoupe
 // Exemple : lors d'une impression a l'aide du squelette imprimer.html,
-// remplacer la balise #TEXTE par [(#TEXTE*|propre|cs_imprimer)].
+// remplacer la balise #TEXTE par [(#TEXTE*|cs_imprimer|propre)].
 function sommaire_imprimer($texte) {
-	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE, _sommaire_AVEC_SOMMAIRE), '', $texte);
+	return sommaire_d_article($texte);
 }
+*/
 
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
-$GLOBALS['cs_introduire'][] = 'sommaire_imprimer';
+function sommaire_retire_raccourcis($texte) {
+	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE, _sommaire_AVEC_SOMMAIRE), '', $texte);
+}
+$GLOBALS['cs_introduire'][] = 'sommaire_retire_raccourcis';
 
 // renvoie le sommaire d'une page d'article
 // $page=false reinitialise le compteur interne des ancres
@@ -21,13 +27,14 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	static $index; if(!$index || $page===false) $index=0;
 	if ($page===false) return;
 	define('_sommaire_NB_CARACTERES', 30);
-	// image de retour au sommaire
-	$titre = _T('cout:sommaire');
-	$img = 'spip_out.gif';
-	$path = dirname(find_in_path(($GLOBALS['spip_version']<1.92?"img_pack/":"images/").$img));
-	list(,,,$size) = @getimagesize("$path/$img");
-	$haut = "<img class=\"no_image_filtrer\" alt=\"$titre\" title=\"$titre\" src=\"".cs_htmlpath($path)."/$img\" $size/>";
-	$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\">$haut</a> ";
+	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
+	if($_GET['cs']!='print') {
+		$titre = _T('cout:sommaire');
+		$img = 'spip_out.gif';
+		$path = dirname(find_in_path(($GLOBALS['spip_version']<1.92?"img_pack/":"images/").$img));
+		$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\" style=\"background:transparent url($path/$img) no-repeat scroll left center;
+color:#000099; padding-left:12px; text-decoration:none;\"></a>";
+	} else $haut = '';
 	// traitement des titres <h3>
 	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
 	$nbh3 += count($regs[0]);
@@ -58,15 +65,15 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 		?strpos($texte0, _sommaire_SANS_SOMMAIRE)===false
 		:strpos($texte0, _sommaire_AVEC_SOMMAIRE)!==false;
 	if (!$inserer_sommaire || strpos($texte0, '<h3')===false) 
-		return $sommaire_seul?'':sommaire_imprimer($texte0);
+		return $sommaire_seul?'':sommaire_retire_raccourcis($texte0);
 	// on retire les raccourcis du texte
-	$texte = sommaire_imprimer($texte0);
+	$texte = sommaire_retire_raccourcis($texte0);
 	// et la, on y va...
 	$sommaire = ''; $i = 1; $nbh3 = 0;
 	// reinitialisation de l'index interne de la fonction
 	sommaire_d_une_page($texte, $nbh3, false);
 	// couplage avec l'outil 'decoupe_article'
-	if(defined('_decoupe_SEPARATEUR') && ($_GET['artpage']!='print')) {
+	if(defined('_decoupe_SEPARATEUR') && ($_GET['cs']!='print')) {
 		$pages = explode(_decoupe_SEPARATEUR, $texte);
 		if (count($pages) == 1) $sommaire = sommaire_d_une_page($texte, $nbh3);
 		else {
@@ -75,7 +82,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 		}
 	} else $sommaire = sommaire_d_une_page($texte, $nbh3);
 	if(!strlen($sommaire) || $nbh3<_sommaire_NB_TITRES_MINI) 
-		return $sommaire_seul?'':sommaire_imprimer($texte0);
+		return $sommaire_seul?'':sommaire_retire_raccourcis($texte0);
 
 	// calcul du sommaire en recuperant le fond qui va bien
 	$fond = strpos($texte0, _sommaire_SANS_FOND)!==false ?2:1;

@@ -26,12 +26,14 @@ if(!function_exists('nettoyer_chapo')) {
 	}
 }
 
+// desactive pour l'instant. utiliser le parametre d'url : cs=print
+/*
 // Filtre local utilise par le filtre 'cs_imprimer'
 // Cette fonction retire du texte les boites de definition
 function glossaire_imprimer($texte) {
 	return preg_replace(',<span class="gl_d[td]">.*?</span>,', '', $texte);
 }
-
+*/
 function glossaire_echappe_balises_callback($matches) {
  return cs_code_echappement($matches[1], 'GLOSS');
 }

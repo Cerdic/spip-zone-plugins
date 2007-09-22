@@ -280,13 +280,15 @@ function cs_initialise_includes() {
 				$infos_pipelines['code_options'][] = $temp;
 			if ($temp=cs_lire_fichier_php("outils/{$inc}_fonctions.php")) {
 				$infos_pipelines['code_fonctions'][] = $temp;
-				// existe-t-il un filtre 'monoutil_imprimer' ?
+// desactive pour l'instant. utiliser le parametre d'url : cs=print
+/*				// existe-t-il un filtre 'monoutil_imprimer' ?
 				$f = $inc.'_imprimer';
 				if (($f)) {
 					// prise en compte du filtre 'monoutil_imprimer' par le filtre du plugin : 'cs_imprimer'
 					// ce filtre rend un texte imprimable (utilise par le sommaire ou la decoupe en page)
 					$temp_filtre_imprimer[] = "\tif (function_exists('$f')) \$texte = $f(\$texte);";
 				}
+*/
 			}
 		}
 	}
@@ -297,8 +299,9 @@ function cs_initialise_includes() {
 	if (count($temp_js))
 		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
 			.join("\n", $temp_js)."\n// --></script>";
-	$infos_pipelines['code_fonctions'][] = "\n// Filtre du Couteau Suisse qui rend un document imprimable\nfunction cs_imprimer(\$texte) {\n" 
-			.join("\n", $temp_filtre_imprimer)."\n\treturn \$texte;\n}";
+// desactive pour l'instant. utiliser le parametre d'url : cs=print
+/*	$infos_pipelines['code_fonctions'][] = "\n// Filtre du Couteau Suisse qui rend un document imprimable\nfunction cs_imprimer(\$texte) {\n" 
+			.join("\n", $temp_filtre_imprimer)."\n\treturn \$texte;\n}"; */
 	// mise en code des traitements trouves
 	foreach($traitements_utilises as $b=>$balise) {
 		foreach($balise as $p=>$precision) {
