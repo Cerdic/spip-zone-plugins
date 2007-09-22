@@ -300,7 +300,7 @@ function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lan
 		spip_log('migre_static : insert article #'.$id_article);
 
 		// auteur
-		$sql = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $auteur . ", " . $id_article . ")";
+		$sql = "REPLACE INTO spip_auteurs_articles (id_auteur, id_article) VALUES (" . $auteur . ", " . $id_article . ")";
 		$result = spip_query($sql);
 
 		if (!empty($id_mot) AND is_array($id_mot))
@@ -309,7 +309,7 @@ function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lan
 			reset($id_mot);
 			while (list($key,$val)=each($id_mot)) {
 				if (!empty($val)) {
-					$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $val . ", " . $id_article . ")";
+					$sql = "REPLACE INTO spip_mots_articles (id_mot, id_article) VALUES (" . $val . ", " . $id_article . ")";
 					$result = spip_query($sql);
 				}
 			}
