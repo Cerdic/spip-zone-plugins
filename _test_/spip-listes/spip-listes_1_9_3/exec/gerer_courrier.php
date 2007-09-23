@@ -69,6 +69,7 @@ function exec_gerer_courrier(){
 	debut_gauche();
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
+	spiplistes_boite_info_spiplistes();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 

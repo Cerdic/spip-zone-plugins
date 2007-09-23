@@ -240,6 +240,7 @@ function exec_listes_dist(){
 	spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, false);
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
+	spiplistes_boite_info_spiplistes();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 

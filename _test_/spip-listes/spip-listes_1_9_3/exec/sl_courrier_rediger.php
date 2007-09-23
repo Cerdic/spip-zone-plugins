@@ -80,6 +80,7 @@ function exec_sl_courrier_rediger(){
 	
 	debut_gauche();
 	spiplistes_boite_raccourcis();
+	spiplistes_boite_info_spiplistes();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 

@@ -173,6 +173,18 @@ function spiplistes_boite_raccourcis ($return = false) {
 	else echo($result);
 }
 
+function spiplistes_boite_info_spiplistes($return=false) {
+	$result = ""
+		// colonne gauche boite info
+		. "<br />"
+		. debut_boite_info(true)
+		. _T('spiplistes:_aide')
+		. fin_boite_info(true)
+		;
+	if($return) return($result);
+	else echo($result);
+}
+
 /**
 * spiplistes_afficher_en_liste
 *
