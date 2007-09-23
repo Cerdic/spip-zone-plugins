@@ -120,7 +120,7 @@ function spip_listes_raccourcis(){
 		echo "<br />" ;
 		echo "<br />" ;
 		
-		icone_horizontale(_T('spiplistes:Nouvelle_liste_de_diffusion'), generer_url_ecrire("liste_edit","new=oui"), _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
+		icone_horizontale(_T('spiplistes:Nouvelle_liste_de_diffusion'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,"new=oui"), _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
 // 		echo "</a>"; // bug icone_horizontale()
 		icone_horizontale(_T('spiplistes:import_export'), generer_url_ecrire("import_export"), _DIR_PLUGIN_SPIPLISTES."img_pack/listes_inout.png");
 // 		echo "</a>"; // bug icone_horizontale()

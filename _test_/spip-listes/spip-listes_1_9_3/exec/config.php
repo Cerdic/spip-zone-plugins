@@ -24,13 +24,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/distant');
-include_spip('inc/affichage');
-include_spip('inc/meta');
-include_spip('inc/config');
-
 function exec_config () {
+
+	include_spip('inc/presentation');
+	include_spip('inc/distant');
+	include_spip('inc/affichage');
+	include_spip('inc/meta');
+	include_spip('inc/config');
 
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -88,21 +88,16 @@ function exec_config () {
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
 	// la configuration spiplistes est réservée aux supers-admins 
-	if(!(($connect_statut == "0minirezo") && ($connect_id_auteur))) {
+	if(!(($connect_statut == "0minirezo") && ($connect_toutes_rubriques))) {
 		die (spiplistes_terminer_page_non_authorisee() . fin_page());
 	}
 
-	// CP: A voir + tard, à la bascule de cette page dans la bonne rubrique
-	//echo "<br /><br /><br />\n";
-	//gros_titre(_T('titre_page_config_contenu'));
-	//echo barre_onglets("configuration", "spiplistes");
-
-	// CP: si bascule en rubrique configure, retirer ligne suivante
-	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	echo "<br /><br /><br />\n";
+	gros_titre(_T('titre_page_config_contenu'));
+	echo barre_onglets("configuration", "spiplistes");
 
 	debut_gauche();
 	__plugin_boite_meta_info();
-	spip_listes_raccourcis();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 

@@ -196,7 +196,7 @@ function exec_listes_dist(){
 			($connect_toutes_rubriques)
 			? icone (
 				_T('spiplistes:Modifier_cette_liste') // légende bouton
-				, generer_url_ecrire('liste_edit','id_liste='.$id_liste) // lien
+				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'id_liste='.$id_liste) // lien
 				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif" // image du fond
 				, "edit.gif" // image de la fonction. Ici, le crayon
 				, '' // alignement
@@ -468,7 +468,7 @@ function exec_listes_dist(){
 }
 
 function listes_edit_presentation($id_liste){
-	return icone(_T('spiplistes:modifier_liste'), generer_url_ecrire("liste_edit","id_liste=$id_liste"),_DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif", "edit.gif");
+	return icone(_T('spiplistes:modifier_liste'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,"id_liste=$id_liste"),_DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif", "edit.gif");
 }
 
 /******************************************************************************************/

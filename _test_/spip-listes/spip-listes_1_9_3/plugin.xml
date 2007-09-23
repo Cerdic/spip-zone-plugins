@@ -17,6 +17,11 @@
 	</pipeline>
 	
 	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/spiplistes_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+
+	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>spiplistes_boutons.php</inclure>
 	</pipeline>
