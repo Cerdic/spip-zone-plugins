@@ -31,6 +31,7 @@ while($abonnement = spip_fetch_array($abonnement_res)){
 $libelle = $abonnement['libelle'];
 $duree = $abonnement['duree'] ;
 $periode = $abonnement['periode'] ;
+$montant = $abonnement['montant'] ;
 }
 
 $statut_abonnement = ($validation_paiement == "ok")? 'abonne' : 'prospect' ;
@@ -41,8 +42,9 @@ $validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".
 $validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".$duree." MONTH)" : "'".$abonne['validite']."'" ;
 }
 
-// fixer la date de validite et le statut de paiement, et des zones acces restreint selon l'abonnement a l'occasion
-spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement', validite = $validite WHERE id='$id_abonne'") ;
+// fixer la date de validite et le statut de paiement, (et des zones acces restreint selon l'abonnement a l'occasion)
+spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'") ;
+spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant' WHERE id_auteur_elargi='$id_abonne'") ;
 }
 
 if($produit == "article"){

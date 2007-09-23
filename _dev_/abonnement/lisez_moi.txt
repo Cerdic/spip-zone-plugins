@@ -58,4 +58,3 @@ x) Rendez-vous sur la page spip.php?page=_abonnement_ pour utiliser le plugin
 TODO :
 
 Vérifier les index de spip_auteurs_elargis_abonnements et le auto increment
-faire porter la date de validite et le prix payé par auteurs_largis_abonnement

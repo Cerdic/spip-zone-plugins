@@ -10,11 +10,12 @@ function cron_abonnement_cron($t){
 	// attention s'il y en a beaucoup
 		
 	$result = spip_query("
-	SELECT a.id_auteur FROM spip_auteurs_elargis a, spip_zones_auteurs b
+	SELECT a.id_auteur FROM spip_auteurs_elargis a, spip_zones_auteurs b, spip_auteurs_elargis_abonnements c
 	WHERE
 	a.id_auteur = b.id_auteur
-	and a.validite <> '0000-00-00 00:00:00' 
-	and a.validite < NOW()
+	and a.id = c.id_auteur_elargi
+	and c.validite <> '0000-00-00 00:00:00' 
+	and c.validite < NOW()
 	");
 		
 		while($row = spip_fetch_array($result)){
@@ -59,15 +60,15 @@ function cron_abonnement_cron($t){
 		a.id = b.id_auteur_elargi
 		and a.id_auteur = c.id_auteur
 		and b.id_abonnement = '$id_abonnement'
-		and a.validite <> '0000-00-00 00:00:00'
-		and a.validite < $validite
+		and b.validite <> '0000-00-00 00:00:00'
+		and b.validite < $validite
 		");
 		
 			while($row_abo = spip_fetch_array($result_abo)){
 			$id_auteur = $row_abo['id_auteur'] ;
 			$email_abonne = $row_abo['email'] ;
 	
-			spip_log($email_abonne."(".$id_auteur.") est a relancer\n","abonnement";
+			spip_log($email_abonne."(".$id_auteur.") est a relancer\n","abonnement");
 			spip_log($sujet_relance,"abonnement") ;
 					
 			envoyer_mail ( $email_abonne , $sujet_relance, $texte_relance, $adresse_expediteur);

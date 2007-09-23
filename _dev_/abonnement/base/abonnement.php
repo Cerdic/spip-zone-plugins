@@ -43,7 +43,9 @@ $tables_principales['spip_abonnements'] = array(
 $spip_auteurs_elargis_abonnements = array(
 						"id_auteur_elargi" 	=> "int(10) unsigned NOT NULL",
 						"id_abonnement" 			=> "int(10) unsigned NOT NULL",
-						"date" 				=> "timestamp(14) NOT NULL"
+						"date" 				=> "timestamp(14) NOT NULL",
+						"validite" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+						"montant" => "int(10) unsigned NOT NULL"
 						);
 
 $spip_auteurs_elargis_abonnements_key = array(
