@@ -67,6 +67,7 @@ function exec_gerer_courrier(){
 	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 
 	debut_gauche();
+	spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, false);
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
 	spiplistes_boite_info_spiplistes();

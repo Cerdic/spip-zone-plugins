@@ -68,6 +68,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Configuration' => 'Configuration',
 'courriers' => 'Courriers',
 'chercher_un_auteur' => "Chercher un auteur",
+'Courrier_numero_:' => "Courrier num&eacute;ro :",
+
 
 //D
 'dans_jours' => 'dans',
@@ -307,7 +309,7 @@ et de recevoir les lettres d\'informations.',
 'listes_internes' => 'Listes de diffusion internes<br /><i>Au moment de l\'envoi d\'un courrier, ces listes sont propos&eacute;es parmi les destinataires</i>',
 'listes_poubelle' => 'Vos listes de diffusion &agrave; la poubelle',
 'lock' => 'Lock actif : ',
-'liste_numero' => 'LISTE NUM&Eacute;RO',
+'Liste_numero_:' => 'Liste num&eacute;ro :',
 
 'mail_a_envoyer' => 'Nombre de mails &agrave; envoyer : ',
 'mail_tache_courante' => 'Mails envoy&eacute;s pour la t&acirc;che courante : ',

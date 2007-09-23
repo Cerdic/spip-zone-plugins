@@ -365,8 +365,8 @@ function spiplistes_boite_info_id ($titre, $id, $return = true) {
 	if($id) {
 		$result = 
 			debut_boite_info(true)
-			. "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
-			.  _T($titre)
+			. "\n<div style='font-weight: bold; text-align: center; text-transform: uppercase;' class='verdana1 spip_xx-small'>"
+			.  $titre
 			. "<br /><span class='spip_xx-large'>"
 			. $id
 			. "</span></div>"
