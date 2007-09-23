@@ -325,6 +325,11 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.',
 	'lutte_spam' => 'Lutte contre le SPAM',
 	'explique_spam' => 'Attention : vous avez utilis&eacute; des balises, des caract&egrave;res ou des mots interdits.<br /><br />Revenez en arri&egrave;re !',
+
+// ---------------------------------------------------------------------------
+	'liens_en_clair:nom' => 'Liens en clair',
+	'liens_en_clair:description' => "Met &agrave; votre disposition le filtre : 'liens_en_clair'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre 'cs=print' dans l'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.",
+
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',

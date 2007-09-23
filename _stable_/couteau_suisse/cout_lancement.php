@@ -79,7 +79,7 @@ cs_log("[#$rand]  -- lecture metas");
 cs_log("[#$rand]  -- cs_metas_pipelines = ".is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):'');
 		$actifs = unserialize($GLOBALS['meta']['tweaks_actifs']);
 		// definition des constantes attestant qu'un outil est bien actif : define('_CS_monoutil', 'oui');
-		foreach($actifs as $nom=>$actif) if($actif['actif']) define('_CS_'.$nom, 'oui');
+		foreach($actifs as $nom=>$actif) if($actif['actif']) @define('_CS_'.$nom, 'oui');
 cs_log("[#$rand]  -- ".(is_array($actifs)?count($actifs):0).' outils(s) actif(s)'.(is_array($actifs)?" = ".join(', ',array_keys($actifs)):''));
 cs_log("[#$rand] ".($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sortie car les metas sont présents"));
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.

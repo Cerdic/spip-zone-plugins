@@ -1,5 +1,9 @@
 <?php
 
+// chiffres, lettres, 20 caracteres speciaux autorises dans les urls
+@define('_liens_orphelins_AUTORISE', '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9');
+@define('_liens_orphelins_AUTORISE_FIN', '\#\$\&\'\*\+\-\/\=\^\_\`\|\~a-zA-Z0-9');
+
 // expanser_liens() introduit sous SPIP 1.93
 if ($GLOBALS['spip_version_code']<1.9262) {
 	@define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
@@ -41,9 +45,9 @@ function liens_orphelins($texte){
 	// encore ici, on s'en va si pas de point...
 	if (strpos($texte, '.')===false) return echappe_retour($texte, 'LIENS');
 
-	// chiffres, lettres, 20 caracteres speciaux autorises dans les urls
-	$autorises =  '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9';
-	$autorisesfin = '\#\$\&\'\*\+\-\/\=\^\_\`\|\~a-zA-Z0-9';
+	// chiffres, lettres, caracteres speciaux autorises dans les urls
+	$autorises = _liens_orphelins_AUTORISE;
+	$autorisesfin = _liens_orphelins_AUTORISE_FIN;
 
    // trouve : protocole://qqchose
    $texte = preg_replace(",([a-zA-Z]+://[{$autorises}:@]*[{$autorisesfin}]),", "@@LO1@@$1@@LO2@@", $texte);

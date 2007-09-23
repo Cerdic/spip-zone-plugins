@@ -30,9 +30,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
 	if($_GET['cs']!='print') {
 		$titre = _T('cout:sommaire');
-		$img = 'spip_out.gif';
-		$path = dirname(find_in_path(($GLOBALS['spip_version']<1.92?"img_pack/":"images/").$img));
-		$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\" style=\"background:transparent url($path/$img) no-repeat scroll left center;
+		$path = find_in_path($GLOBALS['spip_version']<1.92?"img_pack/spip_out.gif":"images/spip_out.gif");
+		$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\" style=\"background:transparent url($path) no-repeat scroll left center;
 color:#000099; padding-left:12px; text-decoration:none;\"></a>";
 	} else $haut = '';
 	// traitement des titres <h3>

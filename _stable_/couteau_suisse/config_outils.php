@@ -576,6 +576,13 @@ add_outil( array(
 	'traitement:EMAIL' => 'mailcrypt',
 )); 
 
+// attention : liens_en_clair doit etre place apres tous les outils traitant des liens
+add_outil( array(
+	'id' => 'liens_en_clair',
+	'categorie'	 => 'spip',
+	'pipeline:post_propre' => 'liens_en_clair_post_propre',
+)); 
+
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
 // http://www.spip-contrib.net/Citations
