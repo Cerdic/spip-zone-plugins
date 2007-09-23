@@ -114,7 +114,7 @@ function exec_config () {
 	// Mode d'inscription des visiteurs
 	$page_result .= ""
 		. debut_cadre_trait_couleur("redacteurs-24.gif", true, "", _T('spiplistes:mode_inscription'))
-		. "<form action='".generer_url_ecrire('config')."' method='post'>\n"
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
 		. "<p class='verdana2'>\n"
 		. "<input type='radio' name='abonnement_config' value='simple' $checked1 id='statut_simple' />\n"
 		. "<label for='statut_simple'>"._T('spiplistes:abonnement_simple')."</label>"
@@ -140,7 +140,7 @@ function exec_config () {
 
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true, "", _T('spiplistes:email_envoi'))
-		. "<form action='".generer_url_ecrire('config')."' method='post'>\n"
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
 		//
 		// adresse email de retour (reply-to)
 		. debut_cadre_relief("", true, "", _T('spiplistes:adresse_envoi'))
@@ -228,7 +228,7 @@ function exec_config () {
 			. "</div>"
 			. fin_cadre_relief(true)
 		:
-			"<a href='".generer_url_ecrire('config','logs=oui#logs')."'>Logs</a>"
+			"<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE,'logs=oui#logs')."'>Logs</a>"
 		;
 	
 	// Fin de la page
