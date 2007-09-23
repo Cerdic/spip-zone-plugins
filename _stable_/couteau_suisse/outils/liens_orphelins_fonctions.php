@@ -65,9 +65,8 @@ function liens_orphelins($texte){
 	   $texte = preg_replace(",\b(mailto:)?([{$autorises}]*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?[{$autorises}]*)?),", "[$2->mailto:$2]", $texte);
 	}
 
-// SPIP 1.93 ne repasse plus les liens semble-t-il !?
-// TODO >> voir si ca reste necessaire :
-if ($GLOBALS['spip_version_code']>=1.9262) $texte=expanser_liens($texte);
+	// SPIP 1.93 ne repasse plus les liens : ils sont deja expanses
+	if ($GLOBALS['spip_version_code']>=1.9262) $texte=expanser_liens($texte);
 
 	return echappe_retour($texte, 'LIENS');
 }
