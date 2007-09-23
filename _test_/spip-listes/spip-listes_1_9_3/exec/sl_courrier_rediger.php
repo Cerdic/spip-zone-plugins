@@ -79,7 +79,7 @@ function exec_sl_courrier_rediger(){
 	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
-	spip_listes_raccourcis();
+	spiplistes_boite_raccourcis();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 

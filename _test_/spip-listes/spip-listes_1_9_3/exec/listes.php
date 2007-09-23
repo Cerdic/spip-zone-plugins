@@ -238,7 +238,8 @@ function exec_listes_dist(){
 
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, false);
-	spip_listes_raccourcis();
+	spiplistes_boite_raccourcis();
+	boite_autocron();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 

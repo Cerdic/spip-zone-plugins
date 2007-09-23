@@ -58,7 +58,7 @@ function exec_abonne_edit(){
 	}
 	
 	debut_gauche();
-	spip_listes_raccourcis();
+	spiplistes_boite_raccourcis();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 	

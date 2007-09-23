@@ -140,6 +140,71 @@ function spip_listes_raccourcis(){
 	echo fin_boite_info();
 }
 
+// From SPIP-Listes-V: CP:20070923
+function spiplistes_debut_raccourcis ($titre = "", $raccourcis = true, $return = false) {
+  
+  $result = ""
+  	. ($raccourcis ? creer_colonne_droite('', true) : "")
+	. debut_cadre_enfonce('', true)
+	. "<span class='verdana2' style='font-size:80%;text-transform: uppercase;font-weight:bold;'>$titre</span>"
+	. "<br />"
+	;
+	if($return) return($result);
+	else echo($result);
+}
+
+// From SPIP-Listes-V: CP:20070923
+function spiplistes_fin_raccourcis ($return = false) {
+	$result = ""
+		. fin_cadre_enfonce(true)
+		;
+	if($return) return($result);
+	else echo($result);
+}
+
+// From SPIP-Listes-V: CP:20070923
+function spiplistes_boite_raccourcis ($return = false) {
+	global $connect_statut;
+	
+	$result = ""
+		// Les raccourcis
+		. spiplistes_debut_raccourcis(_T('titre_cadre_raccourcis'), true)
+		. "<ul class='verdana2' style='list-style: none;padding:1ex;margin:0;'>\n"
+		. "<li>"
+		. icone_horizontale(
+			_T('spiplistes:Nouveau_courrier')
+			, generer_url_ecrire("courrier_edit","new=oui&type=nl")
+			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_mail_send.gif"
+			,""
+			,false
+			)
+		. "</li>\n"
+		. "<li>"
+		. icone_horizontale(
+			_T('spiplistes:Nouvelle_liste_de_diffusion')
+			, generer_url_ecrire("liste_edit","new=oui")
+			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif"
+			,""
+			,false
+			)
+		. "</li>\n"
+		. "<li>"
+		. icone_horizontale(
+			_T('spiplistes:import_export')
+			, generer_url_ecrire("import_export")
+			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."listes_inout.png"
+			,""
+			,false
+			)
+		. "</li>\n"
+		. "</ul>\n"
+		. spiplistes_fin_raccourcis(true)
+		;
+	
+	if($return) return($result);
+	else echo($result);
+}
+
 /**
 * spiplistes_afficher_en_liste
 *

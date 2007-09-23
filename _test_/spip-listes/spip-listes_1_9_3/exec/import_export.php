@@ -135,7 +135,7 @@ function exec_import_export(){
 
 	debut_gauche();
 
-	spip_listes_raccourcis();
+	spiplistes_boite_raccourcis();
 
 	creer_colonne_droite();
 
