@@ -260,7 +260,7 @@ e ricevere le newsletter.',
 'autorisation_inscription' => 'SPIP-Listes ha appena attivato l\'autorizzazione di iscriversi ai visitatori del sito',
 'spip_listes_nb_abonnes_liste' => ' Abbonati',
 'choisir' => 'Scegli',
-'choisir_cette' => 'Scegli questa Newsletter',
+'Choisir_cette_liste' => 'Scegli questa Newsletter',
 'confirme_envoi' => 'Si prega di confermare l\'invio',
 
 'date_act' => 'Dati aggiornati',
@@ -334,7 +334,7 @@ e ricevere le newsletter.',
 'repartition' => 'Distribuzione',
 'retour_link' => 'Indietro',
 
-'sans_envoi' => 'Attenzione, l\'indirizzo email di prova che avete fornito non corrisponde ad alcun abbonato, <br />non &egrave; possibile effettuare l\'invio, &egrave; necessario ripetere la procedura<br /><br />',
+'Erreur_Adresse_email_inconnue' => 'Attenzione, l\'indirizzo email di prova che avete fornito non corrisponde ad alcun abbonato, <br />non &egrave; possibile effettuare l\'invio, &egrave; necessario ripetere la procedura<br /><br />',
 'squel' => 'Modello: &nbsp;',
 'statut_interne' => 'Interna',
 'statut_publique' => 'Pubblica',
@@ -366,7 +366,7 @@ e ricevere le newsletter.',
 'confirmation_listes_multiples_1' => 'Siete iscritti alle newsletter del sito ',
 'confirmation_listes_multiples_2' => 'Avete scelto di ricevere i messaggi indirizzati alle Newsletter seguenti:',
 
-'erreur_adresse' => 'Errore: l\'indirizzo email fornito non &egrave; valido',
+'Erreur_Adresse_email_invalide' => 'Errore: l\'indirizzo email fornito non &egrave; valido',
 
 'infos_liste' => 'Informazioni su questa Newsletter',
 

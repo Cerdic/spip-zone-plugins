@@ -13,6 +13,11 @@ define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 
 define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
 
+define("_SPIPLISTES_STATUT_REDAC", "redac");
+define("_SPIPLISTES_STATUT_READY", "ready");
+define("_SPIPLISTES_STATUT_ENCOURS", "encour");
+define("_SPIPLISTES_STATUT_PUBLIE", "publie");
+
 define("_SPIPLISTES_PUBLIC_LIST", "liste");
 define("_SPIPLISTES_PRIVATE_LIST", "inact");
 define("_SPIPLISTES_TRASH_LIST", "poublist");
@@ -107,7 +112,7 @@ $GLOBALS['spiplistes_version'] = "SPIP-listes $spiplistes_v";
 */
 $spiplistes_items = array(
 	// les courriers
-	'redac' => array(
+	_SPIPLISTES_STATUT_REDAC => array(
 		'puce' => _DIR_IMG_PACK."puce-blanche.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_brouillon-24.png'
 		, 'alt' => _T('spiplistes:message_en_cours')
@@ -115,7 +120,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_en_cours_de_redaction') // tab_t = titre du tableau dans spip_listes
 		, 'desc' => "" // description
 	)
-	, 'ready' => array(
+	, _SPIPLISTES_STATUT_READY => array(
 		'puce' => _DIR_IMG_PACK."puce-orange.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_brouillon-24.png'
 		, 'alt' => _T('spiplistes:message_redac')
@@ -123,7 +128,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Courriers_prets_a_etre_envoye')
 		, 'desc' => ""
 		)
-	, 'encour' => array(
+	, _SPIPLISTES_STATUT_ENCOURS => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce_verte_encour.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_encour-24.png'
 		, 'alt' => _T('spiplistes:message_en_cours')
@@ -131,7 +136,7 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:aff_encours')
 		, 'desc' => ""
 		)
-	, 'publie' => array(
+	, _SPIPLISTES_STATUT_PUBLIE => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-grise.gif"
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_publie-24.png'
 		, 'alt' => _T('spiplistes:message_arch')

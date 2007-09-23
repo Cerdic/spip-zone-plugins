@@ -69,7 +69,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'courriers' => 'Courriers',
 'chercher_un_auteur' => "Chercher un auteur",
 'Courrier_numero_:' => "Courrier num&eacute;ro :",
-
+'Creer_un_courrier_:' => "Cr&eacute;er un courrier :",
 
 //D
 'dans_jours' => 'dans',
@@ -106,6 +106,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'erreur_install' => '<h3>erreur: spip-listes est mal install&eacute;!</h3>',
 'erreur_install2' => '<p>V&eacute;rifier les &eacute;tapes d\'installation, notamment si vous avez bien renomm&eacute;<i>mes_options.txt</i> en <i>mes_options.php</i>.</p>',
 'exporter' => 'Exporter la liste d\'abonn&eacute;s',
+'Erreur_liste_vide' => "Erreur: cette liste n'a pas d'abonn&eacute;s.",
 
 //F
 'faq' => 'FAQ',
@@ -185,6 +186,7 @@ et de recevoir les lettres d\'informations.',
 'moderateurs' => 'Mod&eacute;rateur(s)',
 'modifier' => 'Modifier',
 'mis_a_jour' => 'Mis &agrave; jour',
+'Modifier_un_courrier_:' => "Modifier un courrier :",
 
 //n
 'nb_abonnes_plur' => ' abonn&eacute;s',
@@ -267,8 +269,9 @@ et de recevoir les lettres d\'informations.',
 'autorisation_inscription' => 'SPIP-listes vient d\'activer l\'autorisation de s\'inscrire aux visiteurs du site',
 
 'choisir' => 'Choisir',
-'choisir_cette' => 'Choisir cette liste',
+'Choisir_cette_liste' => 'Choisir cette liste',
 'confirme_envoi' => 'Veuillez confirmer l\'envoi',
+'Charger_un_patron' => "Charger un patron",
 
 'date_act' => 'Donn&eacute;es actualis&eacute;es',
 'date_ref' => 'Date de r&eacute;f&eacute;rence',
@@ -292,6 +295,7 @@ et de recevoir les lettres d\'informations.',
 'envoyer_a' => 'Envoi vers ',
 'erreur' => 'Erreur',
 'erreur_import' => 'Le fichier d\'import pr&eacute;sente une erreur &agrave; la ligne ',
+'Erreur_courrier_titre_vide' => "Erreur: votre courrier n'a pas de titre.",
 
 'format_date' => 'Y/m/d',
 'format_aucun' => "Aucun",
@@ -343,7 +347,7 @@ et de recevoir les lettres d\'informations.',
 'repartition_abonnes' => "R&eacute;partition des abonn&eacute;s",
 'repartition_formats' => "R&eacute;partition des formats",
 
-'sans_envoi' => 'Attention, l\'adresse email de test que vous avez fournie ne correspond &agrave; aucun abonn&eacute;, <br />l\'envoi ne peut se faire, veuillez reprendre la proc&eacute;dure<br /><br />',
+'Erreur_Adresse_email_inconnue' => 'Attention, l\'adresse email de test que vous avez fournie ne correspond &agrave; aucun abonn&eacute;, <br />l\'envoi ne peut se faire, veuillez reprendre la proc&eacute;dure<br /><br />',
 'squel' => 'Patron : &nbsp;',
 'statut_interne' => 'Interne',
 'statut_publique' => 'Publique',
@@ -375,7 +379,7 @@ et de recevoir les lettres d\'informations.',
 'confirmation_listes_multiples_1' => 'Vous &ecirc;tes abonn&eacute; aux listes d\'informations du site ',
 'confirmation_listes_multiples_2' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes :',
 
-'erreur_adresse' => 'Erreur, l\'adresse email que vous avez fournie n\'est pas valide',
+'Erreur_Adresse_email_invalide' => 'Erreur: l\'adresse email que vous avez fournie n\'est pas valide',
 
 'infos_liste' => 'Informations sur cette liste',
 

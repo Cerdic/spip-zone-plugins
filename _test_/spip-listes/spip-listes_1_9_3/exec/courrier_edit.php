@@ -22,104 +22,111 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+/*
+	Formulaire de création de courrier
+*/
 
-include_spip('inc/presentation');
-include_spip('inc/barre');
-include_spip('inc/affichage');
-include_spip('base/spip-listes');
-include_spip('public/assembler');
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_courrier_edit(){
 
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $connect_id_auteur;
+	include_spip('inc/presentation');
+	include_spip('inc/barre');
+	include_spip('inc/affichage');
+	include_spip('inc/spiplistes_api');
+	include_spip('public/assembler');
+
+	global $connect_statut
+		, $connect_toutes_rubriques
+		, $connect_id_auteur
+		, $spip_ecran
+		;
+		
 	$type = _request('type');
-	$id_courrier = _request('id_message');
+	$id_courrier = intval(_request('id_courrier'));
 
-	$nomsite=lire_meta("nom_site"); 
-	$urlsite=lire_meta("adresse_site"); 
-
-	if (_request('new') == "oui") { 
-		$statut = 'redac'; 
-		$type = 'nl'; 
-		$result = spip_query("INSERT INTO spip_courriers (titre, date, statut, type, id_auteur) VALUES ("._q(_T('texte_nouveau_message')).", NOW(),"._q($statut).","._q($type).","._q($connect_id_auteur).")"); 
-		$id_courrier = spip_insert_id(); 
+	if($id_courrier > 0) {
+		// Edition /modification d'un courrier
+		$sql_select = "titre,texte,type,statut,id_auteur";
+		$result = spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1");
+		if ($row = spip_fetch_array($result)) {
+			foreach(explode(",", $sql_select) as $key) {
+				$$key = $row[$key];
+			}
+			$titre = entites_html($titre);
+			$texte = entites_html($texte);
+		}
+	}
+	else {
+		// si pas de ID courrier, c'est une création
+		$statut = _SPIPLISTES_STATUT_REDAC; 
+		$type = 'nl';
+		$new = 'oui';
+		$titre = _T('spiplistes:Nouveau_courrier');
 	}
 
-	// Admin SPIP-Listes
-	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+//////////
+// PAGE CONTENU
+//////////
 
-	if ($connect_statut != "0minirezo" ) {
-		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-		echo fin_page();
-		exit;
-	}
+	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
-		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	// l'édition du courrier est réservée aux super-admins 
+	// ou à l'admin créateur du courrier
+	if(!(
+		($connect_statut == "0minirezo")
+		&& ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur))
+		)) {
+		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
+	
+	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 
 	debut_gauche();
+	spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, false);
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_info_spiplistes();
 	creer_colonne_droite();
-
 	debut_droite("messagerie");
 
-	// MODE EDIT: Redaction d'un courrier ------------------------------------------
+	debut_cadre_formulaire();
 
-	$result = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_courrier));
-	if ($row = spip_fetch_array($result)) {
-		$id_courrier = $row['id_courrier'];
-		$date_heure = $row["date"];
-		$titre = entites_html($row["titre"]);
-		$texte = entites_html($row["texte"]);
-		$type = $row["type"];
-		$statut = $row["statut"];
-		$expediteur = $row["id_auteur"];
-		if (!($expediteur == $connect_id_auteur OR ($type == 'nl' AND $connect_statut == '0minirezo'))) 
-			die();
-	}
+	$page_result .= ""
+		. "<a name='haut_block' id='haut_block'></a>"
+		. "<p>".($id_courrier ? _T('spiplistes:Modifier_un_courrier_:') : _T('spiplistes:Creer_un_courrier_:') )."<br />\n"
+		. "<span style='font-size:150%;font-weight:bold;color:gray;'>$titre</span></p>\n"
+		. "<hr />\n"
+		. "<span style='font-size:80%;font-weight:bold;color:gray;'>"._T('spiplistes:alerte_edit')."</span><br />\n"
+		. "<br />\n"
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
+	   . "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_REDAC,"id_message=$id_courrier")."'>"._T('spiplistes:Generer')."</a>"
+		. fin_cadre_relief(true)
+		. "<br />"
+		//
+		. "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_courrier=$id_courrier")."' method='post' name='formulaire'>"
+		. "<input type='hidden' name='modifier_message' value=\"oui\" />"
+		. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
+		. _T('spiplistes:sujet_courrier')
+		. "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' />"
+		. "<br />"
+		. "<br />"
+		. _T('spiplistes:texte_courrier')
+		. aide ("raccourcis")
+		. "<br />"
+		. afficher_barre('document.formulaire.texte')
+		. "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>"
+		. $texte
+		. "</textarea>\n"
+		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />" : "")
+		. "<p align='right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />"
+		. "</form>"
+		;
+	
+	echo($page_result);
 
-	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
-
-	echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><b>$le_type</b></span></p>";
-	echo "<p style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;'>"._T('vous pouvez modifier le HTML de ce courrier ou bien le regenerer')."</p><br /><br />";
-
-	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_insert-slide.gif');
-
-   echo "<a href='./?exec=sl_courrier_rediger&id_message=$id_courrier'>Regenerer</a>" ;
-
-	echo fin_cadre_relief();
-
-	echo "<br />";
-
-	echo "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_message=$id_courrier")."' method='post' name='choppe_patron-1'>";
-	echo "<input type='hidden' name='modifier_message' value=\"oui\" />";
-	echo "<input type='hidden' name='id_message' value=\"$id_courrier\" />";
-	if(!intval($id_courrier))
-		echo "<input type='hidden' name='new' value=\"oui\" />";
-
-	echo _T('spiplistes:sujet_courrier');
-
-	echo "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' />";
-	echo "<br />";
-	echo "<br />";
-	echo _T('spiplistes:texte_courrier');
-	echo aide ("raccourcis");
-	echo "<br />";
-	echo afficher_barre('document.formulaire.texte');
-	echo "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>";
-	echo $texte;
-	echo "</textarea>\n";
-
-	echo "<p align='right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
-	echo "</form>";
-
-	// MODE EDIT FIN ---------------------------------------------------------------
+	fin_cadre_formulaire();
+	
+	// COURRIER EDIT FIN ---------------------------------------------------------------
 
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();
 	

@@ -212,7 +212,7 @@ As persoas inscritas recibir&aacute;n un login e un contrasinal que lles permiti
 
 
 'choisir' => 'Seleccionar',
-'choisir_cette' => 'Envialo a esta lista',
+'Choisir_cette_liste' => 'Envialo a esta lista',
 'confirme_envoi' => 'Para confirmar o seu env&iacute;o vai ata o final.',
 
 'date_act' => 'Datos actualizados',
@@ -282,7 +282,7 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 'repartition' => 'Distribuci&oacute;n',
 'retour_link' => 'Volver',
 
-'sans_envoi' => 'La direcci&oacute;n de correo que escribiches non corresponde con ningunha inscripci&oacute;n, <br />Non pode facerse o env&iacute;o, int&eacute;ntao otra vez<br /><br />',
+'Erreur_Adresse_email_inconnue' => 'La direcci&oacute;n de correo que escribiches non corresponde con ningunha inscripci&oacute;n, <br />Non pode facerse o env&iacute;o, int&eacute;ntao otra vez<br /><br />',
 'squel' => 'gu&iacute;a: &nbsp;',
 'statut_interne' => 'Interna',
 'statut_publique' => 'P&uacute;blica',
@@ -313,7 +313,7 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 'confirmation_listes_multiples_1' => 'Est&aacute;s inscri@ nas listas deste sitio ',
 'confirmation_listes_multiples_2' => 'Seleccionaches recibir as mensaxes das seguintes listas:',
 
-'erreur_adresse' => 'Erro, a direcci&oacute;n que escribiches no &eacute; v&aacute;lida',
+'Erreur_Adresse_email_invalide' => 'Erro, a direcci&oacute;n que escribiches no &eacute; v&aacute;lida',
 
 'infos_liste' => 'Informaci&oacute;n sobre esta lista',
 

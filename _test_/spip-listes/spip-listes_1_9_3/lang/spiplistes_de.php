@@ -192,7 +192,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'autorisation_inscription' => 'SPIP-Listes hat die Anmeldefunktion f&uuml;r Besucher der Website aktiviert.',
 
 'choisir' => 'Ausw&auml;hlen',
-'choisir_cette' => 'Diese Liste ausw&auml;hlen',
+'Choisir_cette_liste' => 'Diese Liste ausw&auml;hlen',
 'confirme_envoi' => 'Bitte best&auml;tigen Sie den Versand',
 
 'date_act' => 'Daten aktualisiert',
@@ -263,7 +263,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'repartition' => 'Verteilung',
 'retour_link' => 'Zur&uuml;ck',
 
-'sans_envoi' => 'Achtung, die angegebene E-Mail entspricht keinem Abonnenten<br />der Versand kann nicht ausgef&uuml;hrt werden. Bitte wiederholen Sie den Vorgang<br /><br />',
+'Erreur_Adresse_email_inconnue' => 'Achtung, die angegebene E-Mail entspricht keinem Abonnenten<br />der Versand kann nicht ausgef&uuml;hrt werden. Bitte wiederholen Sie den Vorgang<br /><br />',
 'squel' => 'Vorlage: &nbsp;',
 'statut_interne' => 'Intern',
 'statut_publique' => '&ouml;ffentlich',
@@ -296,7 +296,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'confirmation_listes_multiples_1' => 'Sie haben die Newsletter der Website abonniert ',
 'confirmation_listes_multiples_2' => 'Sie haben folgende Listen abonniert:',
 
-'erreur_adresse' => 'Fehler: Sie haben eine ung&uuml;ltige E-Mail Adresse angegeben',
+'Erreur_Adresse_email_invalide' => 'Fehler: Sie haben eine ung&uuml;ltige E-Mail Adresse angegeben',
 
 'infos_liste' => 'Informationen &uuml;ber diese Liste',
 

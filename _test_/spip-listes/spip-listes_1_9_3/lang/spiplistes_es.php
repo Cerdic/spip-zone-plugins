@@ -273,7 +273,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 
 
 'choisir' => 'Seleccionar',
-'choisir_cette' => 'Enviarlo a este grupo',
+'Choisir_cette_liste' => 'Enviarlo a este grupo',
 'confirme_envoi' => 'Para confirmar el env&iacute;o ve hasta el final.',
 
 'date_act' => 'Datos actualizados',
@@ -343,7 +343,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'repartition' => 'Distribuci&oacute;n',
 'retour_link' => 'Volver',
 
-'sans_envoi' => 'La direcci&oacute;n de correo que has escrito no corresponde con ninguna inscripci&oacute;n, <br />No puede hacerse el env&iacute;o, int&eacute;ntalo otra vez<br /><br />',
+'Erreur_Adresse_email_inconnue' => 'La direcci&oacute;n de correo que has escrito no corresponde con ninguna inscripci&oacute;n, <br />No puede hacerse el env&iacute;o, int&eacute;ntalo otra vez<br /><br />',
 'squel' => 'Plantilla: &nbsp;',
 'statut_interne' => 'Interna',
 'statut_publique' => 'P&uacute;blica',
@@ -374,7 +374,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'confirmation_listes_multiples_1' => 'Est&aacute;s inscri@ en los boletines informativos de este sitio ',
 'confirmation_listes_multiples_2' => 'Has seleccionado recibir los mensajes de los siguientes boletines informativos:',
 
-'erreur_adresse' => 'Error, la direcci&oacute;n que has escrito no es v&aacute;lida',
+'Erreur_Adresse_email_invalide' => 'Error, la direcci&oacute;n que has escrito no es v&aacute;lida',
 
 'infos_liste' => 'Informaci&oacute;n sobre este bolet&iacute;n informativo',
 

@@ -256,7 +256,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'autorisation_inscription' => 'SPIP-Lists has now activated visitor sign-up. ',
 
 'choisir' => 'Choose',
-'choisir_cette' => 'Choose this list',
+'Choisir_cette_liste' => 'Choose this list',
 'confirme_envoi' => 'Please confirm',
 
 'date_act' => 'Data has been saved',
@@ -329,7 +329,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'repartition' => 'Distribution',
 'retour_link' => 'Back',
 
-'sans_envoi' => 'Note, there is no such e-mail address on the subscribers list, <br /> no message could be sent. Please retry<br /><br />',
+'Erreur_Adresse_email_inconnue' => 'Note, there is no such e-mail address on the subscribers list, <br /> no message could be sent. Please retry<br /><br />',
 'squel' => 'Stencil (patron) : &nbsp;',
 'statut_interne' => 'Internal',
 'statut_publique' => 'Public',
@@ -362,7 +362,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'confirmation_listes_multiples_1' => 'You have been subscribed to the following newsletters ',
 'confirmation_listes_multiples_2' => 'You have chosen to receive the newsletters sent to the following mailinglists:',
 
-'erreur_adresse' => 'Error, the e-mail address you is not valid',
+'Erreur_Adresse_email_invalide' => 'Error, the e-mail address you is not valid',
 
 'infos_liste' => 'Information on this list',
 
