@@ -328,7 +328,7 @@ _ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
 
 // ---------------------------------------------------------------------------
 	'liens_en_clair:nom' => 'Liens en clair',
-	'liens_en_clair:description' => "Met &agrave; votre disposition le filtre : 'liens_en_clair'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre 'cs=print' dans l'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.",
+	'liens_en_clair:description' => "Met &agrave; votre disposition le filtre : 'liens_en_clair'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre 'cs=print' ou 'page=print' dans l'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.",
 
 /*
 // ---------------------------------------------------------------------------
