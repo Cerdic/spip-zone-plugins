@@ -112,7 +112,7 @@ function exec_abonne_edit(){
 			
 				echo debut_cadre_relief("$logo");
 				
-				echo"<form action='?exec=abonne_edit' method='post'>";
+				echo"<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT)."' method='post'>";
 				
 				$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
 		//var_dump($abo);die("coucou");

@@ -330,7 +330,7 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 			 ON lien.id_liste=listes.id_liste 
 			 WHERE lien.id_auteur='._q($id_auteur).' AND (listes.statut ="liste" OR listes.statut ="inact") 
 			 ORDER BY listes.date DESC';
-			$retour = 'abonne_edit';
+			$retour = _SPIPLISTES_EXEC_ABONNE_EDIT;
 			$param = '&id_auteur='.$id_auteur;
 			break;
 	}
@@ -452,8 +452,8 @@ function spiplistes_cherche_auteur(){
 			$nom_auteur = $row['nom'];
 			$email_auteur = $row['email'];
 			$bio_auteur = $row['bio'];
-			
-			echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3><a href=\"?exec=abonne_edit&id_auteur=$id_auteur\">".typo($nom_auteur)."</a></font></b>";
+
+			echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3><a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT, "id_auteur=$id_auteur")."\">".typo($nom_auteur)."</a></font></b>";
 			echo " | $email_auteur";
 			echo "</font>\n";
 		}
@@ -478,7 +478,7 @@ function spiplistes_cherche_auteur(){
 				echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3>".typo($nom_auteur)."</font></b>";
 				if ($email_auteur)
 					echo " ($email_auteur)";
-				echo " | <a href=\"".generer_url_ecrire("abonne_edit","id_auteur=$id_auteur")."\">"._T('spiplistes:choisir')."</a>";
+				echo " | <a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT,"id_auteur=$id_auteur")."\">"._T('spiplistes:choisir')."</a>";
 				if (trim($bio_auteur))
 					echo "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n";
 				echo "</font><p>\n";

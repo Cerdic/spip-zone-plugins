@@ -458,7 +458,7 @@ function exec_listes_dist(){
 	echo $editer_auteurs('liste', $id_liste, $flag_editable, _request('cherche_auteur'), _request('ids'), 
 		_T('spiplistes:liste_des_abonnes'),
 		'listes',
-		'abonne_edit');
+		_SPIPLISTES_EXEC_ABONNE_EDIT);
 
 	////
 	// MODE EDIT LISTE FIN ---------------------------------------------------------
