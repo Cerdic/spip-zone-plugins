@@ -28,7 +28,7 @@
 	[<:par_auteur:>
 	<strong>(#NOM)</strong>]<BOUCLE_le_boss(AUTEURS){id_auteur}{statut=0minirezo}>
 	[(#REM) Feuilles de styles spipclear indexees par le theme choisie ]
-	[(#CONFIG{spipclear/choix_theme}|?{'',' '})
+	[(#CONFIG{spipclear/choix_theme}|?{' ',''})
 		[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
 	]
 	[
