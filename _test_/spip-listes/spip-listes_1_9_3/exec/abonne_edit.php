@@ -147,7 +147,7 @@ function exec_abonne_edit(){
 	echo spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
 
 	if ($statut == '6forum'){
-		$retour = generer_url_ecrire('abonnes_tous');
+		$retour = generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE);
 		$action = generer_action_auteur('spiplistes_supprimer_abonne',$id_auteur,$retour);
 		echo debut_cadre_relief("$logo");
 		echo "<h3>"._T('spiplistes:supprime_contact')."</h3>";

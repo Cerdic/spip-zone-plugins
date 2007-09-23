@@ -13,7 +13,7 @@
 
 // $LastChangedRevision$
 // $LastChangedBy$
-// $LastChangedDate: 2007-09-22 18:27:40 +0200 (sam., 22 sept. 2007) $
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

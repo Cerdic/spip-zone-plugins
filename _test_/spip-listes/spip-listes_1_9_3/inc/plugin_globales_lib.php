@@ -1,6 +1,9 @@
 <?php
-// SPIP-Listes-V :: $Id$
+// SPIP-Listes-V :: $Id: plugin_globales_lib.php 15368 2007-09-20 16:35:54Z paladin@quesaco.org $
 // Christian PAULUS : http://www.quesaco.org/ (c) 2007
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -385,7 +388,7 @@ function __array_values_in_keys($array) {
 } // __array_values_in_keys()
 
 // petit bouton aide à placer à droite du titre de bloc
-function __plugin_aide ($aide='', $return=true) {
+function __plugin_aide ($fichier_exec_aide, $aide='', $return=true) {
 	include_spip('inc/minipres');
 	global $spip_lang
 		, $spip_lang_rtl
@@ -396,7 +399,7 @@ function __plugin_aide ($aide='', $return=true) {
 	$t = _T('titre_image_aide');
 	$result = ""
 	. "\n&nbsp;&nbsp;<a class='aide'\nhref='"
-	. generer_url_ecrire("aide_spiplistes", "var_lang=$spip_lang")
+	. generer_url_ecrire($fichier_exec_aide, "var_lang=$spip_lang")
 	. (
 		(!empty($aide)) 
 		? "#$aide" 

@@ -112,7 +112,7 @@ function exec_sl_courrier_previsu(){
 		// si confirmation
 	
 	
-	echo "<form id='choppe_patron-1' action='".generer_url_ecrire("gerer_courrier","id_message=$id_courrier")."' method='post' name='choppe_patron-1'>";
+	echo "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_message=$id_courrier")."' method='post' name='choppe_patron-1'>";
 	echo "<input type='hidden' name='modifier_message' value=\"oui\" />";
 	echo "<input type='hidden' name='id_message' value=\"$id_message\" />";
 	if(!intval($id_courrier))

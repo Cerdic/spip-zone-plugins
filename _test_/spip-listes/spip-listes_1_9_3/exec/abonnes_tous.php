@@ -130,7 +130,7 @@ function exec_abonnes_tous () {
 	$row = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS nb FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' LIMIT 11"));
 	if ($row['nb'] > 10) {
 		$page_result .= ""
-			. "<form action='?exec=abonnes_tous' method='post' style='margin:0.5ex;border-top:1px solid black;padding:0.5ex 1ex 0;' class='verdana2'>"
+			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)."' method='post' style='margin:0.5ex;border-top:1px solid black;padding:0.5ex 1ex 0;' class='verdana2'>"
 			. "<div style='text-align:center;'>\n"
 			. "<label for='chercher_un_auteur' style='display:none;'>"._T('spiplistes:chercher_un_auteur')." : </label>"
 			. "<input type='text' title='"._T('spiplistes:chercher_un_auteur')."' name='cherche_auteur' id='chercher_un_auteur' class='fondl' value='' size='20' />"
@@ -147,7 +147,7 @@ function exec_abonnes_tous () {
 
 	// auteur
 	
-	$retour = generer_url_ecrire("abonnes_tous");
+	$retour = generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE);
 	
 	$tri = _request('tri') ? _request('tri') : 'nom';
 	$retour = parametre_url($retour,"tri",$tri);
@@ -214,7 +214,7 @@ function exec_abonnes_tous () {
 		GROUP BY aut.id_auteur
 		$sql_order";
 
-	spiplistes_afficher_auteurs($query, generer_url_ecrire('abonnes_tous'));
+	spiplistes_afficher_auteurs($query, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE));
 
 	// MODE STATUT FIN -------------------------------------------------------------
 	

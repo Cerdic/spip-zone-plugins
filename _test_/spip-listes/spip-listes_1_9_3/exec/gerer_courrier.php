@@ -189,7 +189,7 @@ function exec_gerer_courrier(){
 		elseif(intval($id_liste) !=0){
 			$query_ = spip_query ("SELECT * FROM spip_listes WHERE id_liste = "._q($id_liste));
 			$row = spip_fetch_array($query_);
-			$destinataire = 'la liste : <a href="'.generer_url_ecrire('listes','id_liste='.$id_liste).'">'.$row['titre'].'</a>';
+			$destinataire = 'la liste : <a href="'.generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,'id_liste='.$id_liste).'">'.$row['titre'].'</a>';
 			//ajouter le nombre d'inscrits
 			// ici
 			$pret_envoi=true;
@@ -212,7 +212,7 @@ function exec_gerer_courrier(){
 		if ($statut == 'ready' && $pret_envoi) {
 			echo "<span style='font-size:120%;color:red'>
 			<b>"._T('spiplistes:message_presque_envoye')."</b></span><br /> "._T('spiplistes:a_destination').$destinataire."<br />"._T('spiplistes:confirme_envoi');
-			echo "<form action='?exec=gerer_courrier&id_courrier=".$id_courrier."' method='post'>";
+			echo "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_courrier=$id_courrier")."' method='post'>";
 			echo "<div style='text-align:center'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo' /></div>";
 			echo "</form>";
 		}
@@ -220,7 +220,7 @@ function exec_gerer_courrier(){
 		if ($statut == 'encour'){
 			if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
 				echo "<div style='float:right'>";
-				echo icone (_T('icone_supprimer_message'), generer_url_ecrire('spip_listes','detruire_message='.$id_courrier), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
+				echo icone (_T('icone_supprimer_message'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,'detruire_message='.$id_courrier), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 				echo "</div>";
 			}
 			echo "<p><span style='font-size:120%;color:red'>
@@ -260,7 +260,7 @@ function exec_gerer_courrier(){
 		echo "<tr><td width=100%>";
 		if ($statut=="redac" OR $statut=="ready") {
 			echo "<div style='float:right; margin:10px'>";
-			echo icone (_T('spiplistes:bouton_modifier'),generer_url_ecrire('courrier_edit','id_message='.$id_courrier), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
+			echo icone (_T('spiplistes:bouton_modifier'),generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'id_message='.$id_courrier), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
 			echo "</div>";
 		}
 		
@@ -293,7 +293,7 @@ function exec_gerer_courrier(){
 		
 		if($statut=="redac" OR $statut=="ready"){
 			//envoi de test 
-			echo "<form action='".generer_url_ecrire('gerer_courrier','id_message='.$id_courrier)."' method='post'>";
+			echo "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,'id_message='.$id_courrier)."' method='post'>";
 			echo debut_boite_info();
 			echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
 			if(!$pret_envoi){

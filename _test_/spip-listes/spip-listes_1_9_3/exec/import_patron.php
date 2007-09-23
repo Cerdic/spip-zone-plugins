@@ -84,9 +84,9 @@ function exec_import_patron(){
   
   echo menu_langues('changer_lang', $lang , '<strong>Langue :</strong>&nbsp;','', generer_url_ecrire('import_patron','id_message='.$id_message.'&patron='.$patron.'&date='.$date ) );
 
-	echo "<br /><form action='?exec=courrier_edit&id_message=$id_message' method='post'>\n";	
+	echo "<br /><form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT, "id_message=$id_message")."' method='post'>\n";	
 	echo "<input type='submit' name='Valider' value='"._T('spiplistes:confirmer')."' class='fondo'>\n";	
-	echo "<a href='?exec=courrier_edit&id_message=$id_message'>"._T('spiplistes:retour_link')."</a><br />\n";
+	echo "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT, "id_message=$id_message")."'>"._T('spiplistes:retour_link')."</a><br />\n";
 	echo "</form>";
 	echo "</div>";
 	echo "<div style='text-align:left;margin-right:250px;border-right:2px outset #000000'>";

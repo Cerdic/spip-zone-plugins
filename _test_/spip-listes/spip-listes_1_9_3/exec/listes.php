@@ -210,7 +210,7 @@ function exec_listes_dist(){
 			// Conserve les archives postées
 			? icone (
 					_T('spiplistes:Supprimer_cette_liste')
-					, generer_url_ecrire('listes', "btn_supprimer_liste=$id_liste&id_liste=$id_liste")
+					, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE, "btn_supprimer_liste=$id_liste&id_liste=$id_liste")
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
 					, ""
 					, "right"
@@ -299,8 +299,8 @@ function exec_listes_dist(){
 	if ($connect_statut == '0minirezo' ) {
 		$page_result .= ""
 			//. debut_cadre_relief("racine-site-24.gif", true)
-			. debut_cadre_relief("racine-site-24.gif", true, '', _T('spiplistes:Diffusion').__plugin_aide("diffusion"))
-			. "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='get'>"
+			. debut_cadre_relief("racine-site-24.gif", true, '', _T('spiplistes:Diffusion').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "diffusion"))
+			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='get'>"
 			. "<input type='hidden' name='exec' value='listes' />"
 			. "<input type='hidden' name='id_liste' value='$id_liste' />"
 			. "<strong>"._T('spiplistes:Cette_liste_est').": </strong> "
@@ -331,8 +331,8 @@ function exec_listes_dist(){
 		$email_defaut = entites_html(lire_meta("email_webmaster"));
 		$email_envoi = (email_valide($email_envoi)) ? $email_envoi : $email_defaut ;
 		$page_result .= ""
-			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').__plugin_aide("replyto"))
-			. "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='post'>\n"
+			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "replyto"))
+			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='post'>\n"
 			. "<p class='verdana2'>\n"
 			. _T('spiplistes:adresse_mail_retour')."<br />\n"
 			. "<blockquote class='verdana2'><em>"._T('spiplistes:adresse')."</em></blockquote></p>\n"
@@ -347,8 +347,8 @@ function exec_listes_dist(){
 		// programmer un courrier automatique
 		$auto_checked = ($message_auto=='oui')?"checked='checked'":"";
 		$page_result .= ""
-			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide("temporiser"))
-			. "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='post'>"
+			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
+			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='post'>"
 			. "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">"
 			. "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>"
 			;

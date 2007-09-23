@@ -27,9 +27,9 @@ function spip_listes_onglets($rubrique, $onglet){
 	
 	echo debut_onglet();
 	if ($rubrique == "messagerie"){
-		echo onglet(_T('spiplistes:Historique_des_envois'), generer_url_ecrire("spip_listes"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/stock_hyperlink-mail-and-news-24.gif");
-		echo onglet(_T('spiplistes:Listes_de_diffusion'), generer_url_ecrire("listes_toutes"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
-		echo onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire("abonnes_tous"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/addressbook-24.gif");
+		echo onglet(_T('spiplistes:Historique_des_envois'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/stock_hyperlink-mail-and-news-24.gif");
+		echo onglet(_T('spiplistes:Listes_de_diffusion'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
+		echo onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/addressbook-24.gif");
 	}
 	echo fin_onglet();
 }
@@ -66,8 +66,8 @@ function spiplistes_boite_autocron(){
 		
 		for ($i=0;$i<_SPIP_LISTE_SEND_THREADS;$i++)
 			echo "<span id='proc$i' class='processus' name='$href'></span>";
-		if (_request('exec')=='spip_listes')
-			echo "<a href='".generer_url_ecrire('spip_listes')."' id='redirect_after'></a>";
+		if (_request('exec')==_SPIPLISTES_EXEC_COURRIERS_LISTE)
+			echo "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)."' id='redirect_after'></a>";
 		echo "</div>";
 		
 		echo "<script><!--
@@ -101,7 +101,7 @@ function spiplistes_boite_autocron(){
 		});
 		//--></script>";
 		echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
-		echo "<p align='center'><a href='".generer_url_ecrire('gerer_courrier','change_statut=publie&id_message='.$id_mess)."'>["._T('annuler')."]</a></p>";
+		echo "<p align='center'><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,'change_statut=publie&id_message='.$id_mess)."'>["._T('annuler')."]</a></p>";
 		echo fin_boite_info();
 	}
 	//echo ' <div style="background-image: url(\''. generer_url_action('cron','&var='.time()).'\');"> </div> ';
@@ -141,7 +141,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 		. "<li>"
 		. icone_horizontale(
 			_T('spiplistes:Nouveau_courrier')
-			, generer_url_ecrire("courrier_edit","new=oui&type=nl")
+			, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'new=oui&type=nl')
 			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_mail_send.gif"
 			,""
 			,false
@@ -150,7 +150,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 		. "<li>"
 		. icone_horizontale(
 			_T('spiplistes:Nouvelle_liste_de_diffusion')
-			, generer_url_ecrire("liste_edit","new=oui")
+			, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'new=oui')
 			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif"
 			,""
 			,false
@@ -159,7 +159,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 		. "<li>"
 		. icone_horizontale(
 			_T('spiplistes:import_export')
-			, generer_url_ecrire("import_export")
+			, generer_url_ecrire('import_export')
 			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."listes_inout.png"
 			,""
 			,false
@@ -299,7 +299,7 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 			default:
 				$id_row	= $row['id_courrier'];			
 				$nb_emails_envoyes	= $row['nb_emails_envoyes'];
-				$url_row	= generer_url_ecrire('gerer_courrier', 'id_message='.$id_row);
+				$url_row	= generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF, 'id_message='.$id_row);
 		}
 		
 		$en_liste.= "<tr class='tr_liste'>\n";
@@ -360,13 +360,13 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 			FROM spip_listes
 			WHERE statut='._q($statut).' '.$clause_where.'
 			ORDER BY date DESC';
-			$retour = 'listes_toutes';
+			$retour = _SPIPLISTES_EXEC_LISTES_LISTE;
 			break;
 		case "messages":
 			$requete_total = 'SELECT id_courrier
 			FROM spip_courriers
 			WHERE type='._q($type).' AND statut='._q($statut);
-			$retour = 'spip_listes';
+			$retour = _SPIPLISTES_EXEC_COURRIERS_LISTE;
 			break;
 		case "abonnements":
 			$requete_total = 'SELECT listes.id_liste, listes.titre, listes.statut, listes.date, lien.id_auteur,lien.id_liste 

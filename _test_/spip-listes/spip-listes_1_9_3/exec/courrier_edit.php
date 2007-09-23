@@ -97,7 +97,7 @@ function exec_courrier_edit(){
 
 	echo "<br />";
 
-	echo "<form id='choppe_patron-1' action='".generer_url_ecrire("gerer_courrier","id_message=$id_courrier")."' method='post' name='choppe_patron-1'>";
+	echo "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_message=$id_courrier")."' method='post' name='choppe_patron-1'>";
 	echo "<input type='hidden' name='modifier_message' value=\"oui\" />";
 	echo "<input type='hidden' name='id_message' value=\"$id_courrier\" />";
 	if(!intval($id_courrier))
