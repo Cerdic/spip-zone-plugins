@@ -40,13 +40,25 @@ Configuration du plugin SpipClear.
 			<:spipclear:label_theme_perso:>
 		</label>
 	</p>
-    [(#ENV{choix_theme}|!={0}|?{
-		<p>
-			<label><:spipclear:label_nom_theme:><br />
-				<input type="text" name="nom_theme" value="[(#ENV{nom_theme})]" size="32" />
-			</label>
-		</p>}
-    )]
+	<script type="text/javascript">
+	//<![CDATA[
+		$(document).ready(function() {
+			[(#ENV{choix_theme}|!={1}|?{$("#bloc_nom_theme").hide();})]
+			$("input[@name='choix_theme']").change(function() {
+				if ($("input[@name='choix_theme']:checked").val() == 1)
+					$("#bloc_nom_theme").show();
+				else
+					$("#bloc_nom_theme").hide();
+				$(this).blur();
+			});	
+		});
+	//]]>
+	</script>
+	<p id="bloc_nom_theme">
+		<label><:spipclear:label_nom_theme:><br />
+			<input type="text" name="nom_theme" value="[(#ENV{nom_theme})]" size="32" />
+		</label>
+	</p>
 </fieldset>
 
 <input class="fondo" style="float:right;" type="submit" name="_cfg_ok" value="<:bouton_valider:>" />
