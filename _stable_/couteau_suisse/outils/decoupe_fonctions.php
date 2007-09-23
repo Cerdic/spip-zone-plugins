@@ -83,9 +83,9 @@ function decouper_en_pages_rempl($texte) {
 			$milieu[] = "<span style=\"color: lightgrey; font-weight: bold; text-decoration: underline;\">$i</span>";
 		} else {
 			// isoler la premiere ligne non vide de chaque page pour l'attribut title
-			$page = trim(safehtml(/*cs_imprimer*/($pages[$i-1])));
-			$title = preg_split("/[\r\n]+/", $page, 2);
-			$title = attribut_html(propre(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
+			$page = supprimer_tags(safehtml(cs_introduire($pages[$i-1])));
+			$title = preg_split("/[\r\n]+/", trim($page), 2);
+			$title = attribut_html(/*propre*/(couper($title[0], _decoupe_NB_CARACTERES)));//.' (...)';
 			$milieu[] = '<a href="' . parametre_url($self,'artpage', $i) . "\" title=\"$title\">$i</a>";
 		}
 	}

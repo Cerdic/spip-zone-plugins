@@ -12,6 +12,13 @@ if ($GLOBALS['spip_version_code']<1.92) {
 	global $cs_metas_pipelines;
 // liste de filtres qui sert a la balise #INTRODUCTION
 	$GLOBALS['cs_introduire'] = array();
+// fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
+	function cs_introduire($texte) {
+		$liste = array_unique($GLOBALS['cs_introduire']);
+		foreach($liste as $f)
+			if (function_exists($f)) $texte = $f($texte);
+		return $texte;
+	}
 	
 	// inclusion des fonctions pre-compilees
 	cs_log("appel de cout_fonctions : strlen=" . strlen($cs_metas_pipelines['fonctions']));

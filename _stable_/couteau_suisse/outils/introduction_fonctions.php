@@ -33,13 +33,6 @@ if ($GLOBALS['spip_version_code']>=1.9262) {
 		return PtoBR(traiter_raccourcis(preg_replace(',([|]\s*)+,S', '; ', couper($texte, $long, _INTRODUCTION_CODE))));
 	}
 }
-// fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
-function cs_introduire($texte) {
-	$liste = array_unique($GLOBALS['cs_introduire']);
-	foreach($liste as $f)
-		if (function_exists($f)) $texte = $f($texte);
-	return $texte;
-}
 
 function cs_introduction($type, $texte, $chapo, $descriptif, $id) {
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
