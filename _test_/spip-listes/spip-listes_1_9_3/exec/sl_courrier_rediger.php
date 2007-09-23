@@ -73,7 +73,7 @@ function exec_sl_courrier_rediger(){
 
 	// la création d'un courrier est réservée aux admins 
 	if($connect_statut != "0minirezo") {
-		die (spiplistes_terminer_page_non_authorisee() . fin_page());
+		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
 	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));

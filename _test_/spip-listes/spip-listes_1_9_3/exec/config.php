@@ -89,7 +89,7 @@ function exec_config () {
 
 	// la configuration spiplistes est réservée aux supers-admins 
 	if(!(($connect_statut == "0minirezo") && ($connect_toutes_rubriques))) {
-		die (spiplistes_terminer_page_non_authorisee() . fin_page());
+		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
 	echo "<br /><br /><br />\n";

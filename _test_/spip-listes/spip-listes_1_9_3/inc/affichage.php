@@ -35,7 +35,7 @@ function spip_listes_onglets($rubrique, $onglet){
 }
 
 
-function boite_autocron(){
+function spiplistes_boite_autocron(){
 	@define('_SPIP_LISTE_SEND_THREADS',1);
 	include_spip('genie/spiplistes_cron');
 	if (cron_spiplistes_cron(0)) return; // rien a faire
@@ -106,38 +106,6 @@ function boite_autocron(){
 	}
 	//echo ' <div style="background-image: url(\''. generer_url_action('cron','&var='.time()).'\');"> </div> ';
 	//spip_log("spip_listes :  autocron");	
-}
-
-function spip_listes_raccourcis(){
-	global  $connect_statut;
-	
-	// debut des racourcis
-	echo debut_raccourcis(_DIR_PLUGIN_SPIPLISTES."img_pack/mailer_config.gif");
-	
-	if ($connect_statut == "0minirezo") {
-		icone_horizontale(_T('spiplistes:Nouveau_courrier'), generer_url_ecrire("sl_courrier_rediger","new=oui&type=nl"), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail_send.gif");
-// 		echo "</a>"; // bug icone_horizontale()
-		echo "<br />" ;
-		echo "<br />" ;
-		
-		icone_horizontale(_T('spiplistes:Nouvelle_liste_de_diffusion'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,"new=oui"), _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
-// 		echo "</a>"; // bug icone_horizontale()
-		icone_horizontale(_T('spiplistes:import_export'), generer_url_ecrire("import_export"), _DIR_PLUGIN_SPIPLISTES."img_pack/listes_inout.png");
-// 		echo "</a>"; // bug icone_horizontale()
-		
-		icone_horizontale(_T('spiplistes:Configuration'), generer_url_ecrire("config"),_DIR_PLUGIN_SPIPLISTES."img_pack/mailer_config.gif");
-// 		echo "</a>"; // bug icone_horizontale()
-	}
-	echo fin_raccourcis();
-
-	//Afficher la console d'envoi ?
-	boite_autocron();
-	
-	// colonne gauche boite info
-	echo "<br />" ;
-	echo debut_boite_info();
-	echo _T('spiplistes:_aide');
-	echo fin_boite_info();
 }
 
 // From SPIP-Listes-V: CP:20070923

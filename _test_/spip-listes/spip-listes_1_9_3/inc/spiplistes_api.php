@@ -306,7 +306,7 @@ function spiplistes_valide_listes_depuis_cookie($cookie) {
 }
 
 // termine la page (à employer qd droits insuffisants)
-function spiplistes_terminer_page_non_authorisee ($return = true) {
+function spiplistes_terminer_page_non_autorisee ($return = true) {
 	$result = "<p><strong>"._T('spiplistes:acces_a_la_page')."</strong></p>";
 	if($return) return($result);
 	else echo($result);

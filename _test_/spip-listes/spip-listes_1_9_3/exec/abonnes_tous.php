@@ -43,14 +43,14 @@ function exec_abonnes_tous () {
 
 	// la gestion des abonnés est réservée aux admins 
 	if($connect_statut != "0minirezo") {
-		die (spiplistes_terminer_page_non_authorisee() . fin_page());
+		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
 	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
 	spiplistes_boite_raccourcis();
-	boite_autocron();
+	spiplistes_boite_autocron();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 	

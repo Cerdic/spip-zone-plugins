@@ -231,7 +231,7 @@ function exec_listes_dist(){
 
 	// la gestion des listes de courriers est réservée aux admins 
 	if($connect_statut != "0minirezo") {
-		die (spiplistes_terminer_page_non_authorisee() . fin_page());
+		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
 	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
@@ -239,7 +239,7 @@ function exec_listes_dist(){
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, false);
 	spiplistes_boite_raccourcis();
-	boite_autocron();
+	spiplistes_boite_autocron();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 
