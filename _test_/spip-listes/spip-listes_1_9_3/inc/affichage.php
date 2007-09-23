@@ -37,7 +37,7 @@ function spip_listes_onglets($rubrique, $onglet){
 
 function boite_autocron(){
 	@define('_SPIP_LISTE_SEND_THREADS',1);
-	include_spip('inc/spiplistes_cron');
+	include_spip('genie/spiplistes_cron');
 	if (cron_spiplistes_cron(0)) return; // rien a faire
 	
 	$res = spip_query("SELECT COUNT(a.id_auteur) AS n FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='encour'");
