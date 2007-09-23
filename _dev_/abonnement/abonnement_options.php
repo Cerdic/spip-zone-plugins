@@ -43,7 +43,7 @@ $validite = ($validation_paiement == "ok") ? "DATE_ADD(CURRENT_DATE, INTERVAL ".
 }
 
 // fixer la date de validite et le statut de paiement, (et des zones acces restreint selon l'abonnement a l'occasion)
-spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'") ;
+spip_query("UPDATE `spip_auteurs_elargis` SET statut_abonnement='$statut_abonnement', statut_paiement='$validation_paiement'  WHERE id='$id_abonne'") ;
 spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET validite = $validite, montant = '$montant' WHERE id_auteur_elargi='$id_abonne'") ;
 }
 
