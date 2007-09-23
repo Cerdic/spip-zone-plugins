@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function cron_abonnement_cron($t){
 
 // ---------------------------------------------------------------------------------------------
@@ -31,7 +34,7 @@ function cron_abonnement_cron($t){
 	// 1 après l'échéance traité ici.
 	// ne pas envoyer plusieurs fois le meme message (flaguer un peu)
 	
-	include_spip('inc/mail');
+
 	
 	$result = spip_query("
 	SELECT libelle, id_abonnement, periode FROM spip_abonnements 
@@ -55,24 +58,30 @@ function cron_abonnement_cron($t){
 		$adresse_expediteur = lire_config("abonnement_relances/email_envoi") ;
 
 		$result_abo = spip_query("
-		SELECT a.id_auteur, c.email FROM spip_auteurs_elargis a, spip_auteurs_elargis_abonnements b, spip_auteurs c
+		SELECT a.id_auteur, a.id, c.email FROM spip_auteurs_elargis a, spip_auteurs_elargis_abonnements b, spip_auteurs c
 		WHERE
 		a.id = b.id_auteur_elargi
 		and a.id_auteur = c.id_auteur
 		and b.id_abonnement = '$id_abonnement'
 		and b.validite <> '0000-00-00 00:00:00'
 		and b.validite < $validite
+		and b.stade_relance < 4
 		");
 		
 			while($row_abo = spip_fetch_array($result_abo)){
 			$id_auteur = $row_abo['id_auteur'] ;
 			$email_abonne = $row_abo['email'] ;
+			$id_auteur_elargi = $row_abo['id'] ;
 	
 			spip_log($email_abonne."(".$id_auteur.") est a relancer\n","abonnement");
 			spip_log($sujet_relance,"abonnement") ;
-					
-			envoyer_mail ( $email_abonne , $sujet_relance, $texte_relance, $adresse_expediteur);
-	
+			
+			include_spip('inc/mail'); // bizarre le mail n'a pas l'air de partir...
+			if(envoyer_mail($email_abonne, $sujet_relance, $texte_relance, $adresse_expediteur)){
+				spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET stade_relance = 4 WHERE id_auteur_elargi = '$id_auteur_elargi'");
+			spip_log("relance faite","abonnement") ;
+			}
+
 			}
 
 
