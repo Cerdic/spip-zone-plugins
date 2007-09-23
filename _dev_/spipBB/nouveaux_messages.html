@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--eliminer les forums des rubriques et articles appartenant aux autres secteurs -->
+<BOUCLE_contexte(RUBRIQUES){id_rubrique}>
+<BOUCLE_secteurs(RUBRIQUES){exclus}{racine}>
+<BOUCLE_supp(RUBRIQUES){id_secteur}>
+        <BOUCLE_supp2(FORUMS){id_rubrique}{plat}{doublons}>
+        </BOUCLE_supp2>
+</BOUCLE_supp>
+<BOUCLE_supp3(ARTICLES){id_secteur}>
+        <BOUCLE_supp4(FORUMS){id_article}{plat}{doublons}>
+		</BOUCLE_supp4>
+</BOUCLE_supp3>
+<BOUCLE_supp5(BREVES){id_secteur}>
+        <BOUCLE_supp6(FORUMS){id_article}{plat}{doublons}>
+		</BOUCLE_supp6>
+</BOUCLE_supp5>
+</BOUCLE_secteurs>
+</BOUCLE_contexte>
+
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)] - <:spipbb:messages_nouveaux:></title>
+	<INCLURE{fond=inc-forum-head}>
+</head>
+
+<body id="nouvmsgfor" dir="#LANG_DIR">
+
+<a name="haut"></a>
+
+<div id="contenant"> <!-- Section contenant la page -->
+
+<INCLURE{fond=entete_BB}{id_rubrique}>
+
+	<div id="corps"> <!-- Section contenant les données -->
+	<p class="nav"><a  href="rubrique#ID_RUBRIQUE"><:titre_forum:></a></p>
+
+	<B_forums_liens>
+	<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+	<table summary="nouveaux_messages" class="spipforum">
+		<thead>
+		<tr> 
+			<th colspan="2"><:titre_forum:></th>
+			<th><:spipbb:sujets:></th>
+			<th><:spipbb:sujet_auteur:></th>
+			<th><:spipbb:messages:></th>
+			<th><:spipbb:messages_derniers:></th>
+		</tr>
+		</thead>
+
+		<BOUCLE_forums_liens(FORUMS){doublons}{plat}{par date}{inverse}{age<15}{pagination 20}> 
+			<?php
+				$ze_titre = '[(#TITRE|texte_script)]' ;
+				$ze_titre = ereg_replace( "> ", "", $ze_titre );
+			
+			$closed='non'; 
+			?>
+			<BOUCLE_fo(FORUMS){id_thread}>
+				<?php 
+					$id_sujet='[(#ID_FORUM|texte_script)]'; 
+					$titre_sujet='[(#TITRE|texte_script)]';
+					$auteur_sujet='<B_auteurpa><BOUCLE_auteurpa(AUTEURS){id_auteur}{tout}><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique='.$ze_sect_art.'">#NOM</a></BOUCLE_auteurpa></B_auteurpa><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurpa>';
+				?>
+				<BOUCLE_ArticleForum(ARTICLES){id_article}>
+					<?php 
+						$titre_forum='[(#TITRE|texte_script)]';
+					?>
+				</BOUCLE_ArticleForum>
+				
+				
+				<BOUCLE_sujet_ferme(FORUMS){id_thread}{plat}>
+						<BOUCLE_ferme(FORUMS){id_forum}{titre_mot=Fermé}>
+					    <?php $closed='[(#ID_FORUM|texte_script)]'; ?>
+				       </BOUCLE_ferme>
+				</BOUCLE_sujet_ferme>
+				<?php 
+					$reponse_forum=#TOTAL_BOUCLE-1;
+				?>
+			 </B_sujet_ferme>				
+				
+			</BOUCLE_fo>
+						
+			<tr>
+				<td class="etatsuj normpost">
+					<span>&nbsp;</span>
+				</td> 
+				<td class="titre"><a href="#URL_FORUM"><?php echo $titre_forum ?></a></td>
+				<td class="titresuj"><?php $titre_sujet = ereg_replace( "> ", "", $titre_sujet ); ?><a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet ?>"><?php echo $titre_sujet ?></a></td>
+				<td class="autpost"><?php echo $auteur_sujet; ?></td>
+				<td class="msgpost"><?php echo $reponse_forum;?></td>
+				<td class="dermsg"><a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet?>#forum#ID_FORUM"><?php echo $ze_titre ?></a><br/>[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)<br/>] <:par_auteur:> <B_auteurp><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>">#NOM</a></BOUCLE_auteurp></B_auteurp><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurp> <a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet?>#forum#ID_FORUM">[<img src="(#CHEMIN{themes/defaut/img/icon_latest_reply.png})" border="0" alt="<:spipbb:messages_voir_dernier:>" title="<:spipbb:messages_voir_dernier:>" />]</a></td>
+			</tr>
+			
+			
+		</BOUCLE_forums_liens>
+		</table>
+
+		
+		[<div class="pagination"> <!-- Section présentant la pagination -->
+			<div class="page">
+			(#PAGINATION)
+			</div>
+		</div>]
+	</B_forums_liens>
+		
+	</div> <!--Fin de section Corps-->
+
+	
+	
+<INCLURE{fond=pied_BB}{id_rubrique}>
+
+</div> <!-- Fin de la section contenant -->
+
+</body>
+</html>

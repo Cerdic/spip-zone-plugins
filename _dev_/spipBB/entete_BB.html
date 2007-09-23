@@ -1,0 +1,69 @@
+[(#REM) personnaliser! ICI il faut définir le numero de votre rubrique de forum!]
+[(#SET{secteur,[(#ID_SECTEUR|sinon{#CONFIG{spipbb/spipbb_id_rubrique}})]})]
+
+<div id="entete"><!-- La section d'en-tete -->
+	<BOUCLE_secteur(RUBRIQUES){id_rubrique=#GET{secteur}}>
+	[(#LOGO_RUBRIQUE|fichier||?{
+		[<style>
+		<!-- //
+		div.logofor a {
+			background-image:url(IMG/(#LOGO_RUBRIQUE|fichier) );[
+			width:(#LOGO_RUBRIQUE||largeur)px;]
+		}
+		// -->
+		</style>]
+	})]
+	<div class="logofor"> <!-- le secteur du titre et de la description -->
+		<a style="font-size:30px;font-weight:bold" href="#URL_RUBRIQUE">
+		#NOM_SITE_SPIP
+		</a>[
+		<br />(#DESCRIPTIF|sinon{"&nbsp;"})
+	]</div> 
+	</BOUCLE_secteur>
+
+	<div class="actionfor" > <!-- Le secteur des actions -->
+		<ul> 
+			[<li class="recherche">
+			<a href="(#URL_PAGE{recherche_forum}|parametre_url{id_rubrique,#GET{secteur}})">
+			<:info_rechercher:>
+			</a>
+			</li>]
+			[<li class="membre">
+			<a href="(#URL_PAGE{membres_liste}|parametre_url{id_rubrique,#GET{secteur}})">
+			<:spipbb:membres_liste:>
+			</a>
+			</li>]
+			<?php if(!$GLOBALS['auteur_session']) { ?>
+			[<li class="enreg">
+			<a href="(#URL_PAGE{inscriptionBB}|parametre_url{id_rubrique,#GET{secteur}}|parametre_url{mode,forum}|parametre_url{focus,nom_inscription})">
+			<:spipbb:sinscrire:>
+			</a>
+			</li>]
+			[<li class="login">
+			<a href="(#URL_PAGE{connexion}|parametre_url{id_rubrique,#GET{secteur}})">
+			<:spipbb:login:>
+			</a>
+			</li>]
+			<?php } else { ?>
+			[<li class="profil">
+			<a href="(#URL_PAGE{profile}|parametre_url{id_rubrique,#GET{secteur}})">
+			<:spipbb:membres_profil:>
+			</a>
+			</li>]
+			<li class="login">
+			<a href="#URL_LOGOUT">
+			<:spipbb:logout:> [<?php echo $GLOBALS['auteur_session']['nom']; ?>]
+			</a>
+			</li>
+			<?php } ?>
+			<li>		
+			[(#ENV{id_rubrique}|?{' ',''})<a title="<:spipbb:retour_site:>" href="#URL_SITE_SPIP/"><:spipbb:retour:></a> ]
+			[(#ENV{id_article}|?{' ',''})<a title="<:spipbb:retour_forum:>" href="#URL_RUBRIQUE{#GET{secteur}}"><:spipbb:retour:></a> ]
+			<BOUCLE_m(FORUMS){id_forum}>
+			<a title="<:spipbb:retour_forum:>" href="#URL_ARTICLE"><:spipbb:retour:></a> 
+			</BOUCLE_m>
+			</li>
+		</ul>
+	</div>
+
+</div>

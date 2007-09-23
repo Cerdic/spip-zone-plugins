@@ -1,0 +1,75 @@
+[(#REM) il faudrait chercher dans quel secteur y a  le plus de forums? car pas de rubrique = erreur...]
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)] - [<:spipbb:recherch:>] </title>
+ 	<INCLURE{fond=inc-forum-head}>
+</head>
+
+<body id="recherforum" dir="#LANG_DIR">
+
+<a name="haut"></a>
+<div id="contenant"> <!-- Section contenant la page -->
+
+<INCLURE{fond=entete_BB}{id_rubrique}>
+
+	<div id="corps"> <!-- Section contenant les données -->
+
+		#MODELE{spipbb_chemindefer}
+
+		<div class="rechliste">
+		<form action="./" method="GET">
+			<ul class="recherche">
+				<li class="titre">
+				<:info_rechercher:>
+				</li>
+				<li class="rechtitre">
+				<:spipbb:recherche_titre:>&nbsp;:<br/>
+				<span><:spipbb:recherche_texte:></span>
+				</li>
+				<li class="rechoption">
+				<input type="text" class="post" name="recherche" size="30" />
+				</li>
+			</ul>
+
+			<ul class="recherche">
+				<li class="titre">
+				<:spipbb:recherche_options:>
+				</li>
+				<li class="rechtitre">
+				<:titre_forum:>:
+				</li>
+				<B_forum>
+				<li class="rechoption">
+				<select class="post" name="id_article">
+					<OPTION VALUE="0">
+					<:spipbb:tous_forums:>
+					</OPTION>
+					<BOUCLE_forum(ARTICLES){branche}{par num titre}>
+					<OPTION VALUE="#ID_ARTICLE">
+					[(#TITRE)]
+					</OPTION>
+					</BOUCLE_forum>
+				</select>
+				</li>
+				</B_forum>
+			</ul>
+
+			<p>
+			<input type="hidden" value="resultats_forum" name="page" />
+			<input type="hidden" value="#ID_RUBRIQUE" name="id_rubrique" />
+			<input class="liteoption" type="submit" value="<:spipbb:recherch:>" name="submit"/>
+			</p>
+		</form>
+		</div><!-- Fin de la section rechliste -->
+
+	</div><!-- Fin de la section Corps -->
+
+<INCLURE{fond=pied_BB}{id_rubrique}>
+
+</div> <!-- Fin de la section contenant -->
+
+</body>
+</html> 
+</BOUCLE_rubrique>

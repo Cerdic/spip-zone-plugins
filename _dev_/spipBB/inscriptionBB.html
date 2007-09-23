@@ -1,0 +1,45 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)] - <:inscription:> </title>
+	<INCLURE{fond=inc-forum-head}>
+</head>
+
+<body id="forumsect" dir="#LANG_DIR">
+	<a name="haut"></a>
+	<div id="contenant"> <!-- Section contenant tout le reste -->
+
+		<INCLURE{fond=entete_BB}{id_rubrique}>
+
+		<div id="corps"> <!-- Section contenant les informations -->
+
+			[(#MODELE{spipbb_chemindefer}{id_rubrique})]
+
+		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+		<table class="spipforum">
+			<tr class="titre">
+			   <th><:spipbb:enregistrement:></th>
+			</tr>
+	
+	
+				<tr  class="auteur row2"> 
+				      <td class="numaut"><:spipbb:champsobli:></td>
+				</tr>
+				<tr  class="auteur row1"> 
+				      <td class="numaut" style="text-align:<?php echo $spip_lang_left; ?>">
+					  <INCLURE{fond=formulaire_inscription}>
+					  </td>
+				</tr>
+				
+	</table>
+	
+	
+</div> <!-- Fin de la section "corps" -->
+	
+
+<INCLURE{fond=pied_BB}{id_rubrique}>
+
+</div><!-- fin de la Section contenant -->
+</body>
+</html> 

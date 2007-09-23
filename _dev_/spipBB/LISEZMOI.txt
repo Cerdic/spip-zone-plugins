@@ -1,0 +1,13 @@
+Pour le moment (23 9 2007) ce plugin est en dev donc inutilisable ou a vos risques et perils...
+
+Tout est importe au depart de _squelettes_/forum_spipBB/dev/ 
+
+Credits : james@rezo.net touti@free.fr et als (voir les entetes de fichiers et de fonctions).
+
+Requiert: le plugin CFG
+
+Fonctionnalites :
+-* Une installation simplifiee qui rend operationnel le forum immediatement A CONDITION de choisir le numero de forum dans la configuration
+-* A priori le mode de fonctionnement choisi risque de rendre spipbb incompatible avec le plugin squelettes_par_mots_cle -> a faire evoluer. Voir si on peut surcharger la fonction public_styliser pour uniquement prendre en compte la partie concernant spipbb (voir commentaires) pour que les squelettes soient chargés en priorité avant le traitement normal (dist).
+
+

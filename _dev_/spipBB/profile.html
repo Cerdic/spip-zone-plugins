@@ -1,0 +1,260 @@
+#CACHE{0}
+<?php
+// La ligne suivante permet d'intercepter si le formulaire vient d'être validé, auquel cas on redirige vers la page d'affichage des éléments en la mettant à jour
+if ($redirect==oui) {
+	echo "<meta http-equiv='refresh' content='0; url=spip.php?page=profile&id_auteur=$id_auteur&id_rubrique=$id_rubrique&var_mode=recalcul'>";
+}
+
+if (!$auteur_session){ //Si pas logge, on affiche le formulaire de login'
+?> 
+<INCLURE{connexion}{id_rubrique}>
+<?php exit; }
+ 
+ // permet la zolie mise en page comme dans l'espace admin
+$spip_display=1;
+
+include("ecrire/inc/presentation.php"); //encore pour les cadres
+$statut=$auteur_session['statut'];
+$id_auteur_session=$auteur_session['id_auteur'];
+$auteur=unserialize(get_auteur_infos($id_auteur_session));
+//Si admin ou rédacteur, renvoie sur la page de gestion de leurs infos dans l'espace privé
+//if ($statut=="0minirezo" OR $statut=="1comite") {
+//	 header("Location: ./ecrire/?exec=auteurs_edit&amp;id_auteur=$id_auteur_session");
+//	 }
+
+// Début du script repris et simplifié de ecrire/exec/auteur_infos.php
+//
+// Modification (et creation si besoin)
+//
+if ($modif) { 
+	if ($nom)	// pas de nom vide
+		$auteur['nom'] = corriger_caracteres($nom);
+
+
+	// changement de pass, a securiser en jaja ?
+	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip') {
+		if ($new_pass != $new_pass2)
+			$echec .= "<p>"._T('info_passes_identiques');
+		else if ($new_pass AND strlen($new_pass) < 6)
+			$echec .= "<p>"._T('info_passe_trop_court');
+		else {
+			$modif_login = true;
+			$auteur['new_pass'] = $new_pass;
+		}
+	}
+
+
+	if ($modif_login) {
+		include_ecrire('/inc/session.php');
+		zap_sessions ($auteur['id_auteur'], true);
+		if ($id_auteur_session == $auteur['id_auteur'])
+			supprimer_session($GLOBALS['spip_session']);
+	}
+
+
+	// variables sans probleme
+	$auteur['bio'] = corriger_caracteres($bio);
+	$auteur['pgp'] = corriger_caracteres($pgp);
+	$auteur['nom_site'] = corriger_caracteres($nom_site_auteur); // attention mix avec $nom_site_spip ;(
+	$auteur['url_site'] = vider_url($url_site);
+
+	if ($new_pass) {
+		$htpass = generer_htpass($new_pass);
+		$alea_actuel = creer_uniqid();
+		$alea_futur = creer_uniqid();
+		$pass = md5($alea_actuel.$new_pass);
+		$query_pass = " pass='$pass', htpass='$htpass', alea_actuel='$alea_actuel', alea_futur='$alea_futur', ";
+		effacer_low_sec($auteur['id_auteur']);
+	} else
+		$query_pass = '';
+
+	// recoller les champs du extra
+	if ($champs_extra) {
+		include_spip("inc/extra");
+		$extra = extra_recup_saisie("auteurs");
+		$add_extra = ", extra = '".addslashes($extra)."'";
+	} else
+		$add_extra = '';
+
+	// l'entrer dans la base
+	if (!$echec) {
+		if (!$auteur['id_auteur']) { // creation si pas d'id
+			spip_query("INSERT INTO spip_auteurs (nom) VALUES ('temp')");
+			$auteur['id_auteur'] = spip_insert_id();
+			$id_auteur = $auteur['id_auteur'];
+
+		}
+
+		$query = "UPDATE spip_auteurs SET $query_pass
+			nom='".addslashes($auteur['nom'])."',
+			login='".addslashes($auteur['login'])."',
+			bio='".addslashes($auteur['bio'])."',
+			email='".addslashes($auteur['email'])."',
+			nom_site='".addslashes($auteur['nom_site'])."',
+			url_site='".addslashes($auteur['url_site'])."',
+			pgp='".addslashes($auteur['pgp'])."',
+			statut='".addslashes($auteur['statut'])."'
+			$add_extra
+			WHERE id_auteur=".$auteur['id_auteur'];
+		spip_query($query) OR die($query);
+	}
+	
+	// Subtilité, spip passe avant le php, donc la page est créée avant la mise à jour, donc l'avatar n'est pas à jour si on ne recharge pas la page !
+if(!echec){header("Location: spip.php?page=profile&id_auteur=$id_auteur_session&id_rubrique=$id_rubrique");}
+}	
+	
+//Si visiteur (et vérification de la correspondance des $id_auteurs) afficher la page.
+if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) { 
+?>
+
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+  <BOUCLE_auteur_principal(AUTEURS){id_auteur}{tout}>
+  <html lang="#LANG">
+  <head>
+  <title><:spipbb:profil:> #NOM</title>
+  <INCLURE{fond=inc-forum-head}>
+  </head>
+  
+<body id="profilmod" dir="#LANG_DIR">
+<div id="contenant"> <!-- Section contenant la page -->
+
+	<INCLURE{fond=entete_BB}{id_rubrique}>
+
+	<div id="corps"><!-- Section contenant les données -->
+		
+		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+
+		[(#MODELE{spipbb_chemindefer}{id_rubrique})]
+
+		<div id="detail"> <!-- Section pour mise en forme spécifique des informations d'un utilisateur -->
+ 			<h2><:spipbb:profil:> #NOM</h2>
+			[<div id="avatar"> <!--Section de l'avatar-->
+				<h3><:spipbb:avatar:></h3>
+				<p>[(#NOM|spipbb_afficher_avatar{''})] <br /><img src="(#EXTRA|avatar)" /></p> 
+				
+			</div>]
+			<div id="information"> <!-- Section  des informations -->
+			<h3><:spipbb:paramprofil:></h3>
+ <?php if ($echec){
+	debut_cadre_relief();
+	echo '<img src="img_pack/warning.png" alt="'._T('spipbb:info_avertissement').'" width="48" height="48" align="left">';
+	echo "<font color='red'>$echec <p>"._T('spipbb:info_recommencer')."</font>";
+	fin_cadre_relief();
+	echo "<p>";
+}
+  debut_cadre_formulaire();
+  echo "<FORM ACTION='spip.php?page=profile' METHOD='post'>";
+  echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
+  echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";
+  echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"oui\">";   
+  echo "<INPUT TYPE='Hidden' NAME='modif' VALUE=\"1\">";
+ 			
+ //
+  // Infos personnelles
+  //
+  echo "<div class='serif'>";
+  	debut_cadre_relief("ecrire/img_pack/fiche-perso-24.png");
+  	echo _T('spipbb:titre_cadre_signature_obligatoire'); 
+  	echo "("._T('spipbb:entree_nom_pseudo').")<br/>";
+  	echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40'><P>";
+	echo "<b>"._T('spipbb:entree_adresse_email')."</b>";
+	if ($statut == "0minirezo") {
+		echo "<br/><INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";}
+	else {
+		echo "&nbsp;: <tt>".$auteur['email']."</tt>";
+		echo "<br>("._T('spipbb:info_reserve_admin').")\n";
+		echo "<P>"; }
+	echo "<b>"._T('spipbb:entree_infos_perso')."</b><br/>";
+	echo "("._T('spipbb:entree_biographie').")<br/>";
+	echo "<textarea name='bio' class='forml' rows='4' cols='40' wrap=soft>";
+	echo entites_html($auteur['bio']);
+	echo "</textarea>\n";
+	if ($champs_extra) {
+		include_spip("inc/extra");
+		extra_saisie($auteur['extra'], 'auteurs', 'inscription'); }
+		fin_cadre_relief();
+		echo "<p>";
+        
+  	if ($options == "avancees") {
+  		debut_cadre_relief("cadenas-24.png");
+	  	echo "<b>"._T('spipbb:entree_cle_pgp')."</b><br/>";
+	  	echo "<textarea name='pgp' class='forml' rows='4' cols='40' wrap=soft>";
+	  	echo entites_html($auteur['pgp']);
+	  	echo "</textarea>\n";
+	  	fin_cadre_relief();
+	  	echo "<p>"; }
+	else {
+		echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\">"; }
+	
+	debut_cadre_relief("site-24.png");
+	echo "<b>"._T('spipbb:entree_nom_site')."</b><br/>";
+	echo "<input type='text' name='nom_site_auteur' class='forml' value=\"".entites_html($auteur['nom_site'])."\" size='40'><p>\n";
+	echo "<b>"._T('spipbb:entree_url')."</b><br/>";
+  	echo "<input type='text' name='url_site' class='forml' value=\"".entites_html($auteur['url_site'])."\" size='40'>\n";
+  	fin_cadre_relief();
+  	echo "<p>";
+
+	// le visiteur ne peut éditer son login et mais peut éditer son pass, modifier les valeurs selon les besoins  
+		$edit_login = false;
+		$edit_pass = true;
+	// Je présume que c'est pour éviter de modifier ses coordonnées en cas d'utilisation d'un ldap
+	if ($auteur[source] != 'spip') {
+		$edit_login = false;
+		$edit_pass = false; }
+
+	debut_cadre_relief("base-24.png");
+	// Avertissement en cas de modifs de ses propres donnees
+	if ($edit_login OR $edit_pass) {
+	debut_cadre_enfonce();
+	echo '<img src="ecrire/img_pack/warning.png" alt="'._T('spipbb:info_avertissement').'" width="48" height="48" align="right">';
+	echo "<b>"._T('spipbb:texte_login_precaution')."</b>\n";
+	fin_cadre_enfonce();
+	echo "<p>"; }
+  
+	// Un redacteur n'a pas le droit de modifier son login !
+	if ($edit_login) {
+		echo "<B>"._T('spipbb:item_login')."</B> ";
+		echo "<font color='red'>("._T('spipbb:texte_plus_trois_car').")</font> :<br/>";
+		echo "<input type='text' name='login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40'><p>\n"; }
+	else {
+		echo "<fieldset style='padding:5'><legend><b>"._T('spipbb:item_login')."</b><br/></legend><br/><b>".$auteur['login']."</b> ";
+		echo "<i> ("._T('spipbb:info_non_modifiable').")</i><p>"; }
+  
+	// On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
+	if ($edit_pass) {
+		echo "<b>"._T('pass_nouveau_pass')."</b> ";
+		echo "<font color='red'>("._T('spipbb:info_plus_cinq_car').")</font> :<br/>";
+		echo "<input type='password' name='new_pass' class='formo' value=\"\" size='40'><br/>\n";
+		echo _T('spipbb:info_confirmer_passe')."<BR>";
+		echo "<input type='password' name='new_pass2' class='formo' value=\"\" SIZE='40'><P>\n"; }
+	fin_cadre_relief();
+	echo "<p>";
+	
+	echo "<div align='center'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
+  
+echo "</div>";
+echo "</form>";
+fin_cadre_formulaire(); ?>
+			</div> <!-- Fin de la section des informations -->
+			
+			<div id="communication"> <!--Section contenant les éléments de communication-->
+				<!-- On garde cette section pour l'instant au cas où on en est besoin. La page est exactement sur le même modèle que la page profil_BB -->
+				<!-- A savoir qu'elle est utile dans la mise en forme par css spipbblike -->
+			</div>
+			
+		</div><!-- Fin de la section détail -->
+		
+	</div><!-- Fin de la section Corps -->
+	
+<INCLURE{fond=pied_BB}{id_rubrique}>
+
+</div> <!-- Fin de la section contenant -->
+</body>
+</html>
+</BOUCLE_auteur_principal>
+<:aucun_auteur:>
+<//B_auteur_principal>
+<?php
+} else header("Location: spip.php?page=profile&id_auteur=$id_auteur_session&id_rubrique=$id_rubrique"); // Ca c'est si un p'tit malin essaye d'éditer le profile d'un autre...
+?>

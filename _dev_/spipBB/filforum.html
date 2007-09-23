@@ -1,0 +1,61 @@
+#CACHE{86400}
+<BOUCLE_article_principal(ARTICLES) {id_article}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-forum-head}>
+</head>
+
+<body id="artforum" dir="#LANG_DIR">
+<!-- On regarde si le forum n'est pas fermé-->
+<?php $forumferme=0 ?>
+<BOUCLE_etat(ARTICLES){id_article}{titre_mot=Fermé}><?php $forumferme=1 ?></BOUCLE_etat>
+
+<a name="haut"></a>
+
+<div id="contenant"> <!-- Section contenant la page -->
+
+<INCLURE{fond=entete_BB}{id_article}>
+
+	<div id="corps"> <!-- Section contenant les données -->
+	<h2>#TITRE</h2>
+        	<?php if($forumferme==0){ ?>
+		<ul class="actionforum">
+			<li class="poster">[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>">&nbsp;<span><:spipbb:sujet_nouveau:></span></a>]</li>
+	   </ul>
+	   <?php } ?>
+
+		#MODELE{spipbb_chemindefer}
+
+		<?php $tableau = array(); //permet de stocker les pieds de discussion ?>
+		
+
+[(#MODELE{spipbb_liste_sujets})]
+
+		<ul class="actionforum">
+	 		<?php if($forumferme==0){ ?>
+	 		<li class="poster">[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>"><span><:spipbb:sujet_nouveau:></span>&nbsp;</a>]</li>
+	 		<?php } ?>	
+		 </ul>
+
+		#MODELE{spipbb_chemindefer}
+
+		<?php if ($etat=='0minirezo'){?><!-- Modération pour les admin  -->
+		<ul class="actionadm">
+			<li class="admsurveiller"><a title="<:spipbb:admsurveiller_forum:>"><span><:spipbb:admsurveiller_forum:></span>&nbsp;</a></li>
+			<li class="admeffacer"><a href='./ecrire/?exec=controle_forum&amp;id_article=#ID_ARTICLE' title="<:spipbb:admeffacer_forum:>"><span><:spipbb:admeffacer_forum:></span>&nbsp;</a></li>
+			<li class="admbouger"><a href='./ecrire/?exec=articles_edit&amp;id_article=#ID_ARTICLE' title="<:spipbb:admbouger_forum:>"><span><:spipbb:admbouger_forum:></span>&nbsp;</a></li>
+			<li class="admclore"><a href='./ecrire/?exec=articles&amp;id_article=#ID_ARTICLE' title="<:spipbb:admclore_forum:>"><span><:spipbb:admclore_forum:></span>&nbsp;</a></li>
+			<li class="admseparer"><a title="<:spipbb:admseparer_forum:>"><span><:spipbb:admseparer_forum:></span>&nbsp;</a></li>	
+		</ul>
+		<?php } ?>
+
+	</div> <!-- Fin de la section "corps" -->
+
+<INCLURE{fond=pied_BB}{id_article}>
+
+</div><!-- fin de la Section contenant -->
+</body>
+</html>
+</BOUCLE_article_principal>

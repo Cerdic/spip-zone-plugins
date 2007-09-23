@@ -1,0 +1,134 @@
+#CACHE{7200}
+<BOUCLE_sujet_principal(FORUMS){id_forum}{doublons}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head> 
+	<title>[(#NOM_SITE_SPIP|textebrut)] <:poster_message:></title>
+	<INCLURE{fond=inc-forum-head}>
+</head> 
+
+<body id="voirsujet" dir="#LANG_DIR">
+
+<a name="haut"></a>
+
+	<div id="contenant"> <!-- Section contenant tout le reste -->
+
+		<INCLURE{fond=entete_BB}{id_article}>
+
+		<div id="corps"> <!-- Section contenant les informations -->
+
+			<h2><a href="#SELF">#TITRE</a></h2>
+
+			[(#MODELE{spipbb_chemindefer}{id_article})]
+
+		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+
+		<ul class="actionforum">
+			<li class="poster"><BOUCLE_forum_pere(ARTICLES){id_article}><?php $id_article='[(#ID_ARTICLE|texte_script)]'; ?>[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>"><span><:spipbb:sujet_nouveau:></span>&nbsp;</a>]</BOUCLE_forum_pere></li>
+			<li class="repondre">[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:messages_repondre:>"><span><:spipbb:messages_repondre:></span>&nbsp;</a>]</li>	
+		</ul>
+		<p class="nav"><BOUCLE_article_cdf(ARTICLES){id_article}>
+		<BOUCLE_chemindefer(HIERARCHIE){id_article}{0,1}{" -&gt; "}><a href="#URL_RUBRIQUE" >[(#TITRE)]</a></BOUCLE_chemindefer> -&gt; 
+		<a href="#URL_ARTICLE">[(#TITRE)]</a></BOUCLE_article_cdf></p>
+		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+		<table class="spipforum">
+			<thead>
+			<tr class="row1">
+				<th class="tautvs"><:spipbb:sujet_auteur:></th>
+		  		<th class="tmsgvs"><:spipbb:messages:></th>
+			</tr>
+			</thead>
+			<tr class="row1">
+				<td  class="autvs" id="forum#ID_FORUM"><B_auteurp><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><p><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM<br/>[(#NOM|spipbb_afficher_avatar)]</a></p>
+				</BOUCLE_auteurp>
+				<BOUCLE_modo2(AUTEURS){id_article}>[<p>(#ID_AUTEUR|=={#_auteurp:ID_AUTEUR}|?{'(<:spipbb:moderateurs:>)',''})</p>]</BOUCLE_modo2>
+				</B_auteurp><p><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a></p><//B_auteurp></td>
+  				<td class="tabvs">
+		        		<ul class="actionvs">
+		        			<?php if($sujet_clos==0){ ?>
+		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
+		        			<?php } ?>
+		        			<!-- Modération pour les admin --><?php if ($etat=='0minirezo'){?>
+		        			<li class="effacervs"><a href='./ecrire/?exec=controle_forum&amp;id_article=<?php echo $id_article ; ?>' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>
+		        			<li class="ipvs"><a title="IP: #IP"><span>IP: #IP</span>&nbsp;</a></li>
+		        			<!--Fin Modération pour les admin--><?php }?>
+		        		</ul>
+					<ul class="titrevs">
+	        				<li class="tdatevs"><:spipbb:message_date:>: [(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]</li>
+	        				<li class="ttitrevs"><:spipbb:message_sujet:>: #TITRE</li>
+	        			</ul>
+					<div class="txtvs">
+						[(#TEXTE)]
+					</div>
+				</td>
+			</tr>
+			<tr class="row1"> 
+				<td class="retourvs"><a href="#top"><:spipbb:revenir_haut:></a></td>
+				<td class="videvs">&nbsp;</td>
+			</tr>
+
+			<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{doublons}>
+			<thead>
+			<tr class="row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+				<th class="salontitre" colspan="2"><H3>&nbsp;</H3></th>
+
+			</tr>
+			</thead>
+			<tr class="row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
+				<td  class="autvs" id="forum#ID_FORUM"><B_auteurpr><BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}><p><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM<br/>[(#NOM|spipbb_afficher_avatar)]</a></p>
+				</BOUCLE_auteurpr>
+				<BOUCLE_modo3(AUTEURS){id_article}>[<p>(#ID_AUTEUR|=={#_auteurpcr:ID_AUTEUR}|?{'(<:spipbb:moderateurs:>)',''})</p>]</BOUCLE_modo3>
+				</B_auteurpr><p><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a></p><//B_auteurpr></td>
+  				<td class="tabvs">
+		        		<ul class="actionvs">
+		        			<?php if($sujet_clos==0){ ?>
+		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
+		        			<?php } ?>
+		        			<!-- Modération pour les admin --><?php if ($etat=='0minirezo'){?>
+		        			<li class="effacervs"><a href='./ecrire/?exec=controle_forum&id_article=<?php echo $id_article ; ?>' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>
+		        			<li class="ipvs"><a title="IP: #IP"><span>IP: #IP</span>&nbsp;</a></li>
+		        			<!--Fin Modération pour les admin--><?php }?>
+		        		</ul>
+					<ul class="titrevs">
+	        				<li class="tdatevs"><:spipbb:message_date:>: [(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]</li>
+	        				<li class="ttitrevs"><:spipbb:message_sujet:>: #TITRE</li>
+	        			</ul>
+					<div class="txtvs">
+						[(#TEXTE)]
+					</div>
+				</td>
+			</tr>
+			<tr class="row[(#COMPTEUR_BOUCLE|alterner{2,1})]"> 
+				<td class="retourvs"><a href="#top"><:spipbb:revenir_haut:></a></td>
+				<td class="videvs">&nbsp;</td>
+			</tr>
+
+			</BOUCLE_posts>
+		</table><!--Fin table spipforum-->
+
+		<?php if($sujet_clos==0){ ?>		
+		<ul class="actionforum">
+			<li class="poster"><BOUCLE_forum_pere2(ARTICLES){id_article}><?php $id_article='[(#ID_ARTICLE|texte_script)]'; ?>[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>"><span><:spipbb:sujet_nouveau:></span>&nbsp;</a>]</BOUCLE_forum_pere2></li>
+			<li class="repondre">[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:messages_repondre:>"><span><:spipbb:messages_repondre:></span>&nbsp;</a>]</li>	
+		</ul>
+		<?php } ?>
+		<?php if ($etat=='0minirezo'){?><!-- Modération pour les admin  -->
+		<ul class="actionadm">
+			<li class="admsurveiller"><a title="<:spipbb:admsurveiller:>"><span><:spipbb:admsurveiller:></span>&nbsp;</a></li>
+			<li class="admeffacer"><a href='./ecrire/?exec=controle_forum&id_article=#ID_ARTICLE' title="<:spipbb:admeffacer:>"><span><:spipbb:admeffacer:></span>&nbsp;</a></li>
+			<li class="admbouger"><a title="<:spipbb:admbouger:>"><span><:spipbb:admbouger:></span>&nbsp;</a></li>
+			<li class="admclore"><a href="spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]" title="<:spipbb:admclore:>"><span><:spipbb:admclore:></span>&nbsp;</a></li>
+			<li class="admseparer"><a title="<:spipbb:admseparer:>"><span><:spipbb:admseparer:></span>&nbsp;</a></li>	
+		</ul>
+		<?php } ?>
+		
+			[(#MODELE{spipbb_chemindefer}{id_article})]
+
+	</div> <!-- Fin de la section "corps" -->
+
+	<INCLURE{fond=pied_BB}{id_forum}>
+
+</div><!-- fin de la Section contenant -->
+</body>
+</html>
+</BOUCLE_sujet_principal>

@@ -1,0 +1,122 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head> 
+	<title>[(#NOM_SITE_SPIP|textebrut)] <:poster_message:></title>
+	<INCLURE{fond=inc-forum-head}>
+</head> 
+
+<body id="posterfor" dir="#LANG_DIR">
+
+<?php $closed='' ?>
+
+<!-- Avant de répondre on récupère l'ID du sujet de la discussion 
+et on regarde si le sujet ou une réponse cloture la discussion.
+Attention que cette boucle vaut son pesant de cachouettes ;o))
+-->
+
+<BOUCLE_fo(FORUMS){id_forum}>
+
+<BOUCLE_remonte(FORUMS){id_enfant}>
+<BOUCLE_remonte_rec(boucle_remonte)> </BOUCLE_remonte_rec>
+</BOUCLE_remonte>
+
+<?php $id_sujet='[(#ID_FORUM|texte_script)]'; ?>
+
+<BOUCLE_sujet_ferme(FORUMS){id_forum}{titre_mot=Fermé}>
+<?php $closed='[(#ID_FORUM|texte_script)]'; ?>
+</BOUCLE_sujet_ferme>
+
+<BOUCLE_reponse(FORUMS){id_parent}>
+
+<BOUCLE_reponse_ferme(FORUMS){id_forum}{titre_mot=Fermé}>
+<?php $closed='[(#ID_FORUM|texte_script)]'; ?>
+</BOUCLE_reponse_ferme>
+
+<BOUCLE_descends_rec(boucle_reponse)> </BOUCLE_descends_rec>
+</BOUCLE_reponse>
+
+<//B_sujet_ferme>
+
+<//B_remonte>
+</BOUCLE_fo>
+
+<!-- on vous avait prévenu ;o)) -->
+
+<!-- Maintenant on regarde si l'article/forum est fermé -->
+<?php $forumferme=0 ?>
+<BOUCLE_etat(ARTICLES){id_article}{titre_mot=Fermé}>
+<?php $forumferme=1 ?>
+</BOUCLE_etat> 
+
+<a name="haut"></a>
+<div id="contenant"> <!-- Section contenant la page -->
+
+	<INCLURE{fond=entete_BB}{id_article}>
+
+	<div id="corps"> <!-- Section contenant les données -->
+		[(#MODELE{spipbb_chemindefer}{id_article}{id_rubrique})]
+		
+		<!-- Si la discussion contient un message fermant -->
+		<?php if($closed!=''){?>
+		<div class="prec">
+			<h2><:spipbb:sujet_clos_titre:></h2>
+			<h3><:spipbb:sujet_clos_texte:></h3>
+			<p><:spipbb:raison:> <a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet?>#forum<?php echo $closed?>"><:spipbb:click:></a></p>
+		</div>
+		<hr/>
+		<?php } elseif($forumferme==1) { ?>
+		<div class="prec">
+			<h2><:spipbb:forum_ferme:></h2>
+			<h3><:spipbb:forum_ferme_texte:></h3>
+		</div>
+		<hr/>
+		<?php } else { ?>
+
+		<!-- Si rien ne cloture la discussion on envoi la suite -->
+		<!--  Contenu : texte du message auquel on répond -->
+		<BOUCLE_forum_parent(FORUMS){id_forum}>
+		<div class="prec">
+			<h2><:spipbb:reponse:></h2>
+			<h3><a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet?>#forum#ID_FORUM">#TITRE</a> <:par_auteur:> <B_auteurp><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique=#ID_RUBRIQUE})]">#NOM</a></BOUCLE_auteurp></B_auteurp><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurp></h3>
+			<p>[<:spipbb:le:> (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</p>
+			[(#TEXTE|justifier)]
+		</div>
+		<hr/>
+		<!-- si le forum a un parent, on ne peut pas faire une annonce -->
+		[(#ID_FORUM|pas_afficher_mots_clefs)]    
+		</BOUCLE_forum_parent>
+		<!-- si le forum n'a pas de parent, afficher tous les mots clés -->
+		[(#ID_FORUM|afficher_mots_clefs)]
+		<//B_forum_parent>
+		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+	      <table class="spipforum">
+	      		<thead>
+        		<tr> 
+          			<th colspan=2><:poster_message:></th>
+        		</tr>
+        		</thead>
+        		<tr> 
+          			<td class="postsmiley">&nbsp;</td>
+          			<td class="postformulaire"> 
+          			<div class="tailformulaire">
+          			<!-- Ce div est là pour pallier l'illogisme qui fait que selon l'avancement dans le post on se trouve un coup avec .spip_encadrer autour de form et un coup l'inverse -->
+          			<!-- Donc c'est lui qu'il faut dimmensionner et éventuellement centrer -->
+				#FORMULAIRE_FORUM
+				</div>
+          			</td>
+        		</tr>
+      		</table>
+ <?php } ?>
+	</div> <!-- Fin de la section "corps" -->
+
+<INCLURE{fond=pied_BB}{id_article}{id_forum}>
+</div><!-- fin de la Section contenant -->
+
+
+</body>
+
+
+</html>
+
+
