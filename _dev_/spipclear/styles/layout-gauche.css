@@ -18,3 +18,10 @@
 	margin: 0 0 0 30px;
 	padding: 1ex 1em;
 }
+
+#content .day-date{
+	padding-right: 20px;
+	margin-right: -25px;
+	background: transparent url(../images/day-date_right.png) no-repeat right center;
+	text-align: right;
+}
