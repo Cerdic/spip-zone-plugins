@@ -572,7 +572,7 @@ add_outil( array(
 	'auteur' 	 => 'Alexis Roussel, Paolo',
 	'categorie'	 => 'typo-corr',
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
-	'code:js' => "function lien(ad){ return 'mai' + 'lto:' + ad.replace(/\.\..+t\.\./,'@'); }",
+	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a +'@'+b; }",
 	'traitement:EMAIL' => 'mailcrypt',
 )); 
 

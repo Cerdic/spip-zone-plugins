@@ -15,8 +15,9 @@ function mailcrypt($texte) {
 	if (strpos($texte, '@')===false) return $texte;
 	
 	// liens HTML
+	$lien = '$1' . _mailcrypt_AROBASE_JS . '$2';
 	$texte = preg_replace(",[\"\']mailto:([^@\"']+)@([^\"']+)[\"\'],", 
-		'"#" title="$1' . _mailcrypt_AROBASE_JS . '$2" onclick="location.href=lien(this.title); return false;"', $texte);
+		'"#" title="'.$lien.'" onclick="location.href=lancerlien(\'$1\',\'$2\'); return false;"', $texte);
 	if (strpos($texte, '@')===false) return $texte;
 
 	// nettoyage total, on ne sait jamais...
