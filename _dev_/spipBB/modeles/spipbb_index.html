@@ -1,0 +1,47 @@
+<BOUCLE_rubrique_principal(RUBRIQUES){id_secteur}{id_parent=0}>
+
+	<B_categories>
+	<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+	<table summary="index" class="spipforum">
+		<thead>
+		<tr>
+			<th colspan="2" class="tforum"><:titre_forum:></th>
+			<th class="tsujets"><:phpbb:sujets:></th>
+			<th class="tmsg"><:phpbb:messages:></th>
+			<th class="tdermsg"><:phpbb:messages_derniers:></th>
+		</tr>
+		</thead>
+	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
+		<tr class="salon">
+			<td colspan="2" class="salontitre">[<h2><a href="#URL_RUBRIQUE">(#TITRE)</a></h2>]</td>
+			<td colspan="3" class="salonreste">&nbsp;</td>
+		</tr>
+		<tbody[ id="salon(#ID_RUBRIQUE)"]>
+	<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
+		<tr class="forumligne">
+			<td class="etatfor[ (#ACCEPTER_FORUM|=={non}|?{fermefor,ouvfor})]">
+				<span>
+				[(#ACCEPTER_FORUM|=={non}|?{<:phpbb:forum_ferme:>,<:titre_forum:>})]
+				</span>
+			</td>
+			<td class="titre">
+				[<h3><a href="#URL_ARTICLE">(#TITRE)</a></h3>]
+				[(#DESCRIPTIF)<br/>]
+			</td>
+			<BOUCLE_sujets(FORUMS){id_article}{doublons sujets}></BOUCLE_sujets>
+			<td class="msgsuj">#TOTAL_BOUCLE</td>
+			<//B_sujets>
+			<BOUCLE_messages(FORUMS){id_article}{plat}{doublons sujets}></BOUCLE_messages>
+			<td class="msgpost">#TOTAL_BOUCLE</td>
+			<//B_messages>
+			<td class="dermsg">
+			#MODELE{spipbb_dernier_message} 
+			</td>
+		</tr>
+	</BOUCLE_forums>
+		</tbody>
+	</BOUCLE_categories>
+	</table>
+	</B_categories>
+
+</BOUCLE_rubrique_principal>

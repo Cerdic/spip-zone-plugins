@@ -1,0 +1,53 @@
+<!-- descriptif=<:spipbb:config_spipbb:>
+-->
+
+<!-- titre=<:spipbb:titre_spipbb:> -->
+
+#CACHE{0}
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx','SpipBB'})]
+[(#REM) ------------------------ RUBRIQUE/SECTEUR CONTENANT LES FORUMS ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:config_choix_rubrique:></legend>
+<p>
+<label>
+<select name="spipbb_id_rubrique">
+<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}>
+<option value="#ID_RUBRIQUE"[ selected="(#ENV{spipbb_id_rubrique}|=={#ID_RUBRIQUE}|?{selected})"]>#ID_RUBRIQUE . #TITRE</option>
+</BOUCLE_rubriques>
+</select>
+	<br />
+	<i><:spipbb:choix_rubrique_selection:></i>
+</label>
+</p>
+</fieldset>
+[(#REM) ------------------------ SQUELETTES ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:config_choix_squelettes:></legend>
+<p>
+<label>
+</select>
+	<:spipbb:squelette_groupeforum:><input type="text" name="spipbb_squelette_groupeforum" value="[(#ENV{spipbb_squelette_groupeforum})]" size='20' /><br />
+	<:spipbb:squelette_filforum:><input type="text" name="spipbb_squelette_filforum" value="[(#ENV{spipbb_squelette_filforum})]" size='20' /><br />
+	<i><:spipbb:choix_squelettes:></i>
+</label>
+</p>
+</fieldset>
+
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+-->
+</div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>
+

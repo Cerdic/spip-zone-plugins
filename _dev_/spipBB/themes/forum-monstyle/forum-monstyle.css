@@ -1,0 +1,81 @@
+/*BANDEAU DU HAUT*/
+.fondbleu{background-image:url(bandoforum/tramebleutop.gif); height:92px; width:98%; margin:0 auto;}
+.logotele{height:92px; width:100%; margin:0 auto;  background-image:url(bandoforum/teleplaisance-logo.gif); background-repeat:no-repeat; background-position:30px;}
+.logodroite{height:92px; background-image:url(bandoforum/bandobleuright.gif); background-repeat:no-repeat; background-position:right;}
+.liensite{position:absolute; /*border:1px solid green;*/ left:4%; height:90px; width:250px;}
+
+
+/* The register, login, search etc links at the top of the page */
+.mainmenu {white-space:nowrap; height:42px; font-size:11px; color:#000000; width:98%; margin:0 auto; background-image:url(bandoforum/bando_icones-forum.gif); background-repeat:repeat x;}
+.mainmenu a	{text-decoration:none; color:#000000;  }
+.mainmenu a:hover{ text-decoration:underline; color:#DD6900; }
+.mainmenu img {border:none; padding:0; padding-left:3px; padding-right:3px; margin:0;}
+
+#linknewmessages { margin-top:12px; margin-left:5px; text-align:left; float:left;}
+.actionfor ul{ margin-right:5px;  text-align:right; float:right; width:70%; }
+/*
+
+.recherche{border:1px solid red; margin:0;}
+.membre{border:1px solid red; margin:0;}
+.profil{border:1px solid red;margin:0; }
+.login{border:1px solid red; margin:0;}
+#corps{border:1px solid orange;}
+.nav{border:1px solid black;}
+*/
+#entete{border:none; }
+#corps h2{display:none;}
+hr .clr{border:50px solid orange; color:#CC3300; display:none;}
+
+
+/*page profile*/
+.field textarea {float:left; width: 200px ; margin-right: 50px ; border-left:2px solid #FFCC33; border-top:2px solid #FF9900;}
+.field input {margin:2px; border-left:2px solid #FFCC33; border-top:2px solid #FF9900; float:left; width:200px; margin-right:50px;}
+.field label {margin:4px; border-bottom:1px solid #ffffff; float:left; width: 250px; font-weight:bold; margin-left:50px;}
+.commentairemail {height:20px; font-size:10px; float:left; width:400px; margin-left:50px;}
+.commentaire {font-size:10px; float:left; width:250px; margin-left:50px;}
+.field{font-size:11px; border: none; width:600px; margin:0 auto; border:1px dotted #000000;}
+.logpass{clear:both; padding:10px; border:1px solid #000000; width:400px; margin:0 auto; background:url(ecrire/img_pack/warning.gif); background-repeat:no-repeat; background-position:350px 20px;}
+.logpass label{margin:4px; font-weight:bold; width:380px; border:none;}
+
+
+/*page accueil forum*/
+.forumline	{ background-color: #FFFFFF; /*border: 2px #DFDBE2 solid; border: medium solid #6495ed;*/
+border-collapse: collapse;
+width: 95%; margin:0 auto; text-align:left;}
+ 
+th.forumline  {
+/*border: thin solid #6495ed;*/
+}
+.forumline td {
+/*border: thin solid #6495ed;*/
+}
+
+.forumparent{background-color:#006699; height:30px; color:#FFCC00; font-size:13px;}
+.forumparent a, .forumparent a:visited {color:#FFCC00; font-weight:bold;}
+.forumparent span ,.divsousr span {color:#FFFFFF; font-size:10px; font-weight:normal;}
+
+.sousrubrique {background-color:#3B8AB2; border-top:1px solid #006699; height:30px; vertical-align:middle;}
+.divsousr {float:left; color:#ffffff; font-size:10px; font-weight:normal; vertical-align:middle;}
+.divsousrub {float:left; text-align:center; width:30px; margin:0; padding:0; margin-right:10px; vertical-align:middle;}
+.imgrub{}
+.dossier{border:0px; padding:0; margin:0 auto;}
+.sipaslogo{background-color:#ffffff; border:1px solid #666666; width:18px; height:16px; margin:0;}
+.divsousr , .divsousr a , .divsousr a:visited, .divsousr a:link{color:#FFCC00; font-size:11px; font-weight:bold;}
+
+.tdicone{padding: 2px; height:18px;  margin:0; border:0; padding:0; background-color:#ffffff; text-align:center; width:18px;}
+.iconemessage {margin:0 auto; border:0; padding:0px;  padding-right:5px; padding-top:3px;}
+.tdegradone{margin:0; padding:0; border-left:0; background-color:#FFFBF1;}
+.tdegratwo{margin:0; padding:0; border-left:0; background-color:#E6F2F8;}
+td.rowpicone {
+ 		text-align:center;
+		background-color:#FFFFFF;
+		background-image: url(img/cellpic2.png);
+		background-repeat: repeat-y;
+}
+td.rowpictwo {
+ 		text-align:center;
+		background-color:#FFFFFF;
+		background-image: url(img/cellpic180.png);
+		background-repeat: repeat-y;
+		background-position:left;
+}

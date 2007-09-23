@@ -1,0 +1,19 @@
+<BOUCLE_recup_rubrique(ARTICLES){id_article}>
+[(#SET{id_rubrique,#ID_SECTEUR})]
+</BOUCLE_recup_rubrique>
+<BOUCLE_dernier_message(FORUMS){id_article}{plat}{par date}{inverse}{0,1}>
+[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)<br	/>]
+<:par_auteur:>
+<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{id_rubrique}})]">#NOM</a>
+</BOUCLE_auteurp>
+<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:phpbb:anonyme:>})]</a>
+<//B_auteurp> 
+<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_THREAD})]#forum#ID_FORUM"
+	class="adermsg"
+	title="<:phpbb:messages_voir_dernier:>">
+	&nbsp;<span>(<:phpbb:messages_voir_dernier:>)</span>
+</a>
+</BOUCLE_dernier_message>
+-
+<//B_dernier_message>

@@ -1,0 +1,79 @@
+<B_messages>
+[<div class="pagination"> <!-- Section présentant la pagination -->
+	<div class="navigapage"> <!-- Section de la liste de page -->
+		<p class="nav">(#PAGINATION)</p>
+	</div>
+</div>]
+
+<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+<table summary="topics" class="spipforum">
+	<thead>
+	<tr> 
+		<th colspan="2" class="tsujet"><:phpbb:sujets:></th>
+		<th class="tmsg"><:phpbb:messages:></th>
+		<th class="tsujaut"><:phpbb:sujet_auteur:></th>
+		<th class="tdermsg"><:phpbb:messages_derniers:></th>
+	</tr>
+	</thead>
+
+<BOUCLE_messages(FORUMS){id_article}{par date_thread}{inverse}{pagination 25}> 
+
+	<!-- BEGIN topicrow -->
+	<tr> 
+		<td class='etatsuj normpost'>&nbsp;<span><:message:></span>&nbsp;</td>
+		<td class="titre" id="forum#ID_FORUM">
+			<BOUCLE_sujet(FORUMS){id_thread}>
+			[<a href="(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})">
+			#TITRE
+			</a>]
+			</BOUCLE_sujet>
+		</td>
+		<td class="msgpost">
+			<BOUCLE_reponses(FORUMS){id_thread}{plat}{exclus}></BOUCLE_reponses>
+			#TOTAL_BOUCLE
+			<//B_reponses>
+		</td>
+		<td class="autpost"><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM</a></BOUCLE_auteurp><a href="mailto:[(#EMAIL|antispam)]">
+		[(#NOM|sinon{<:phpbb:anonyme:>})]</a><//B_auteurp></td>
+		<td class="dermsg">
+		<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>
+			[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]<br />
+			<:par_auteur:><B_auteurpr><BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
+			<a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM</a>
+			</BOUCLE_auteurpr></B_auteurpr>
+			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:phpbb:anonyme:>})]</a>
+			<//B_auteurpr> 
+			<a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_forum?>#forum#ID_FORUM"class="adermsg" title="<:phpbb:messages_voir_dernier:>">
+			&nbsp;<span>(<:phpbb:messages_voir_dernier:>)</span></a>
+		</BOUCLE_dernier_message> - <//B_dernier_message>
+		</td>
+	</tr>
+	<!-- END topicrow -->
+	</BOUCLE_messages>
+
+</table><!--Fin table spipforum-->
+
+[<div class="pagination"> <!-- Section présentant la pagination -->
+	<div class="navigapage"> <!-- Section de la liste de page -->
+		<p class="nav">(#PAGINATION)</p>
+	</div>
+</div>]
+</B_messages>
+
+<!-- BEGIN switch_no_topics -->
+<table class="spipforum">
+	<thead>
+	<tr> 
+		<th colspan="2" class="tsujet"><:phpbb:sujets:></th>
+		<th class="tmsg"><:phpbb:messages:></th>
+		<th class="tsujaut"><:phpbb:sujet_auteur:></th>
+		<th class="tdermsg"><:phpbb:messages_derniers:></th>
+	</tr>
+	</thead>
+	<tr> 
+		<td class="nopost" colspan="5"><:phpbb:sujets_aucun:></td>
+	</tr>
+</table><!--Fin table spipforum-->
+<!-- END switch_no_topics -->
+
+<//B_messages>
