@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html lang='#LANG' dir='ltr'>
   <head>
-    <title>Editeur Lilypond</title>
+    <title><:lilyspip:editeur:></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 	<link rel="stylesheet" href="#CHEMIN{editeur/lilypress.css}" type="text/css" media="screen" />
 	
@@ -15,12 +15,12 @@
   
   <body onload="init();">
   
-  <h4>Code Lilypond : </h4> 
-Choose a template : 
-<button onclick="JavaScript: single_template()">Single Staff</button>
-<button onclick="JavaScript: piano_template()">Piano</button>
-<button onclick="JavaScript: quartet_template()">String Quartet</button>
-<button onclick="JavaScript: vocal_template()">Vocal Ensemble</button>
+  <h4><:lilyspip:code_lilypond:> :</h4> 
+<:lilyspip:modeles:> : 
+<button onclick="JavaScript: single_template()"><:lilyspip:portee_simple:></button>
+<button onclick="JavaScript: piano_template()"><:lilyspip:piano:></button>
+<button onclick="JavaScript: quartet_template()"><:lilyspip:quatuor:></button>
+<button onclick="JavaScript: vocal_template()"><:lilyspip:vocal:></button>
 
  <form action="table.html" method="post">
 
@@ -31,17 +31,17 @@ Choose a template :
  </form> 
  
 <div id='panel'>
-  <button onclick="JavaScript: enregistre()">Enregistrer</button>
-  <button onclick="JavaScript: previsualise('<?php echo($GLOBALS['meta']['lilyspip_server']); ?>','#CHEMIN{editeur/spacer.gif}')">Prévisualiser</button>
+  <button onclick="JavaScript: enregistre()"><:lilyspip:enregistrer:></button>
+  <button onclick="JavaScript: previsualise('<?php echo($GLOBALS['meta']['lilyspip_server']); ?>','#CHEMIN{editeur/spacer.gif}')"><:lilyspip:previsualiser:></button>
 </div>
 
-  <h4>Prévisualisation :</h4> 
+  <h4><:lilyspip:previsualisation:> : </h4> 
  <br />
 
 
 <div id='preview'>
 
-<img alt="Image indisponible" id="previewField" src="#CHEMIN{editeur/spacer.gif}">
+<img alt="<:lilyspip:code_invalide:>" id="previewField" src="#CHEMIN{editeur/spacer.gif}">
 <br />
 </div>
 

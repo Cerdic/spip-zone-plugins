@@ -4,7 +4,7 @@
  
 big, big i, big b, big strong, big ins, big cite, big em, big ins, big s, big i, big a {color:#EF952C;font-weight:normal;font-size:small;} /* comments */
 i , i b, i em, i ins, i s  {color:#EF0ED5;} /* names etc */
-u {background-color:red;font-size:3px;margin-left:2px;} /* end of lines*/
+u {display:inline;border-bottom:solid 1px red;height:5px;width:5px;padding:1px;margin-left:2px;position:relative;bottom:6px;} /* end of lines*/
 em {color:#000080;} /* blocs */
 strong {color:#3FBBFF} /*markup commands*/
 ins {color:#3398CF;font-weight:bold;} /*music functions and identifiers*/
