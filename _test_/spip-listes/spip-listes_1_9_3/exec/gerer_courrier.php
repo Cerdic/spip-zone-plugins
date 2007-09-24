@@ -177,23 +177,60 @@ function exec_gerer_courrier(){
 			$message_erreur .= __boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
 		}
 	}
-	
-	// Propose de supprimer le courrier si droits et statut nécessaires
-	$gros_bouton_supprimer = 
-		(($statut != _SPIPLISTES_STATUT_PUBLIE) && ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur)))
-		?	"<div style='margin-top:1ex;'>"
-			. icone (
-				_T('spiplistes:Supprimer_ce_courrier')
-				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE, "btn_supprimer_courrier=$id_courrier")
-				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
-				, ""
-				, "right"
-				, false
-				)
-			. "</div>\n"
-		: ""
-		;
 
+	
+	//////////////////////////////////////////////////////
+	// préparation des boutons si droits
+	$gros_bouton_modifier = $gros_bouton_supprimer = "";
+	if(($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur))) {
+		if(($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY)) {
+			// Le courrier peut-être modifié si en préparation 
+			$gros_bouton_modifier = 
+				icone (
+					_T('spiplistes:Modifier_ce_courrier') // légende bouton
+					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'id_courrier='.$id_courrier) // lien
+					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_mail.gif" // image du fond
+					, "edit.gif" // image de la fonction. Ici, le crayon
+					, '' // alignement
+					, false // pas echo, demande retour
+					)
+				;
+		}
+		if($statut != _SPIPLISTES_STATUT_PUBLIE) {
+			// Le courrier peut-être supprimé s'il n'a pas été publié
+			$gros_bouton_supprimer = 
+				"<div style='margin-top:1ex;'>"
+				. icone (
+					_T('spiplistes:Supprimer_ce_courrier')
+					, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE, "btn_supprimer_courrier=$id_courrier")
+					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
+					, ""
+					, "right"
+					, false
+					)
+				. "</div>\n"
+				;
+		}
+	}
+
+	//////////////////////////////////////////////////////
+	// recharge le courrier pour édition
+	if($id_courrier > 0) {
+		$sql_select = "id_liste,email_test,date,titre,texte,message_texte,type,statut,id_auteur"
+			. ",total_abonnes,nb_emails_envoyes,nb_emails_echec,nb_emails_non_envoyes,nb_emails_texte,nb_emails_html"
+			. "date_debut_envoi,date_fin_envoi";
+		if($row = spip_fetch_array(spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_courrier)." LIMIT 1"))) {
+			foreach(explode(",", $sql_select) as $key) {
+				$$key = $row[$key];
+			}
+			foreach(array('id_liste','id_auteur',total_abonnes,nb_emails_envoyes,nb_emails_echec,nb_emails_non_envoyes,nb_emails_texte,nb_emails_html) as $key) {
+				$$key = intval($$key);
+			}
+			foreach(array('titre') as $key) {
+				$$key = typo($$key);
+			}
+		}
+	}
 	
 //////////
 // PAGE CONTENU
@@ -218,34 +255,12 @@ function exec_gerer_courrier(){
 
 	/////////////////////
 	
-	$page_result = "";
+	$page_result = $message_erreur;
 
 	//le message
-	$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_courrier));
-	if($row = spip_fetch_array($result_m)) {
-		$id_courrier = $row['id_courrier'];
-		$id_liste = $row['id_liste'];
-		$email_test = $row['email_test'];
-		
-		$date_heure = $row["date"];
-		$titre = typo($row["titre"]);
-		$texte = $row["texte"];
-		$message_texte = $row["message_texte"];
-		$type = $row["type"];
-		$statut = $row["statut"];
-		$expediteur = $row['id_auteur'];		
-		
+	if($id_courrier > 0) {
 		$le_type = _T('spiplistes:message_type');
 		$la_couleur = "red";
-		
-		$total_abonnes = $row["total_abonnes"];
-		$nb_emails_envoyes = $row["nb_emails_envoyes"];
-		$nb_emails_echec = $row["nb_emails_echec"];
-		$nb_emails_non_envoyes = $row["nb_emails_non_envoyes"];
-		$nb_emails_texte = $row["nb_emails_texte"];
-		$nb_emails_html = $row["nb_emails_html"];
-		$debut_envoi = $row["date_debut_envoi"];
-		$fin_envoi = $row["date_fin_envoi"];
 		
 		//trouver un destinataire
 		$destinataire = ''; //secu
@@ -256,9 +271,6 @@ function exec_gerer_courrier(){
 			if(email_valide($destinataire)){				
 				$destinataire = "l'email de test : ".$destinataire ;
 				$pret_envoi=true;
-			}
-			else{
-				$erreur_mail == 'oui';
 			}
 		}
 		
@@ -275,12 +287,12 @@ function exec_gerer_courrier(){
 			$pret_envoi=true;
 		}
 	
-		echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail_send.gif');
-		//echo "tklo $destinataire, $email_test , $id_liste";
+		$page_result .= ""
+			. debut_cadre_relief(spiplistes_items_get_item('icon', $statut), true)
+			;
+		echo($page_result);
+		$page_result="";
 		
-		if($erreur_mail){
-			echo "<h3>"._T('spiplistes:sans_envoi')."</h3>" ;
-		}
 		if ($statut == 'redac' && !$pret_envoi) {
 			echo "<span style='font-size:120%;color:red;font-weight:bold'>"._T('spiplistes:message_en_cours')." <br />"._T('spiplistes:modif_envoi')."</span>";
 		}
@@ -294,7 +306,7 @@ function exec_gerer_courrier(){
 		}
 		
 		if ($statut == 'encour'){
-			if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
+			if ($id_auteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
 				echo "<div style='float:right'>";
 				echo icone (_T('icone_supprimer_message'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,'detruire_message='.$id_courrier), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 				echo "</div>";
@@ -309,10 +321,10 @@ function exec_gerer_courrier(){
 			<b>"._T('spiplistes:message_arch')."</b></span>";
 			echo "<ul>";
 			echo "<li>"._T('spiplistes:envoyer_a').$destinataire."</li>";
-			echo "<li>"._T('spiplistes:envoi_date').$date_heure."</li>";
+			echo "<li>"._T('spiplistes:envoi_date').$date."</li>";
 			echo "<ul>";
-			echo "<li>"._T('spiplistes:envoi_debut').$debut_envoi."</li>";
-			echo "<li>"._T('spiplistes:envoi_fin').$fin_envoi."</li>";
+			echo "<li>"._T('spiplistes:envoi_debut').$date_debut_envoi."</li>";
+			echo "<li>"._T('spiplistes:envoi_fin').$date_fin_envoi."</li>";
 			echo "</ul>";
 			echo "<li>"._T('spiplistes:nbre_abonnes').$total_abonnes."</li>";
 			echo "<ul>";
@@ -334,11 +346,9 @@ function exec_gerer_courrier(){
 		//debut_cadre_relief("messagerie-24.gif");
 		echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td width=100%>";
-		if ($statut=="redac" OR $statut=="ready") {
-			echo "<div style='float:right; margin:10px'>";
-			echo icone (_T('spiplistes:bouton_modifier'),generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'id_courrier='.$id_courrier), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
-			echo "</div>";
-		}
+		echo "<div style='float:right; margin:10px'>";
+		echo $gros_bouton_modifier;
+		echo "</div>";
 		
 		echo "<span style='font-size:120%;color:$la_couleur'><b>$le_type</b></span><br />";
 		echo "<h3>$titre</h3>";

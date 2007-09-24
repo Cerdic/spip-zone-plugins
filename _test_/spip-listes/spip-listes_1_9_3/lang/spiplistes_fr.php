@@ -188,6 +188,7 @@ et de recevoir les lettres d\'informations.',
 'modifier' => 'Modifier',
 'mis_a_jour' => 'Mis &agrave; jour',
 'Modifier_un_courrier_:' => "Modifier un courrier :",
+'Modifier_ce_courrier' => "Modifier ce courrier",
 
 //n
 'nb_abonnes_plur' => ' abonn&eacute;s',
