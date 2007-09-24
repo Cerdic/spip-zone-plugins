@@ -4,7 +4,6 @@ include_spip('base/mots_techniques');
 function boucle_MOTS($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_mots";
 	
 	// Restreindre aux mots cles non techniques
 	if (!isset($boucle->modificateur['criteres']['technique']) && 
@@ -24,7 +23,6 @@ function boucle_MOTS($id_boucle, &$boucles) {
 function boucle_GROUPES_MOTS($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_groupes_mots";
 	$mtechnique = $id_table .'.technique';
 
 	// Restreindre aux mots cles non techniques

@@ -163,12 +163,13 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	$les_mots = array();
 	$id_groupes_vus = array();
 	$groupes_vus = array();
+	$flag_tous = 0;
 	$result = spip_query("SELECT mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
-	if (spip_num_rows($result) > 0) {
+	if (sql_count($result) > 0) {
 	
 		$tableau= array();
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
-		$cletech = http_img_pack("../"._DIR_PLUGIN_MOTS_TECHNIQUES."/images/mot-technique-16.png", "", "width='16' height='16'");
+		$cletech = http_img_pack(_DIR_RACINE._DIR_PLUGIN_MOTS_TECHNIQUES."/images/mot-technique-16.png", "", "width='16' height='16'");
 		$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
 		while ($row = sql_fetch($result)) {
 
@@ -187,9 +188,13 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			if (autoriser('modifier', 'groupemots', $id_groupe))
 				$type_mot = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
 
-			$flag_groupe = ($flag_editable
-			AND editer_mot_droits('id_groupe', "id_groupe = $id_groupe"));
-				
+			if (!$flag_editable)
+				$flag_groupe = false;
+			else {
+			  $flag_groupe = sql_fetch(editer_mot_droits('COUNT(*) AS n', "id_groupe = $id_groupe"));
+			  $flag_groupe = $flag_groupe['n'];
+			}
+			
 			// On n'affiche que les mots cles tels que affiche_formulaire==oui
 			if ($row_groupe['affiche_formulaire'] == 'oui') {
 				$id_groupes_vus[] = $id_groupe;
@@ -208,6 +213,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 
 				if ($flag_editable){
 					if ($flag_groupe) {
+						$flag_tous++;
 						$s =  _T('info_retirer_mot')
 						. "&nbsp;"
 						. http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
@@ -232,7 +238,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	} else $res ='';
 
 	if ($flag_editable)
-	  $res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet);
+	  $res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet, $flag_tous);
 
 	return $res;
 }
@@ -267,23 +273,22 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 
 // http://doc.spip.org/@formulaire_mots_cles
-function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
+function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet, $flag_tous) {
 	global  $spip_lang, $spip_lang_right;
 
 	if ($les_mots) {
-		$nombre_mots_associes = count($les_mots);
 		$les_mots = join($les_mots, ",");
 	} else {
 		$les_mots = "0";
-		$nombre_mots_associes = 0;
 	}
 	$cond_id_groupes_vus = "0";
 	if ($id_groupes_vus) $cond_id_groupes_vus = join(",",$id_groupes_vus);
 	
-	$nb_groupes = spip_num_rows(editer_mot_droits('*', "$table = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus) AND affiche_formulaire='oui'"));
-
+	$nb_groupes = sql_fetch(editer_mot_droits('count(*) AS n', "$table = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus) AND affiche_formulaire='oui'"));
+	$nb_groupes = $nb_groupes['n'];
+	
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
-	if ($nombre_mots_associes > 3) {
+	if ($flag_tous >= 3) {
 		$res .= "<div style='text-align: right' class='arial1'>"
 		  . ajax_action_auteur('editer_mot', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
 		. "</div><br />\n";
