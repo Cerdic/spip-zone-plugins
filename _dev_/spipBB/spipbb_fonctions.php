@@ -10,7 +10,7 @@
  *
  * Essai de realisation d un filtre quelstatut
 */
-
+/*
 function spipbb_quelstatut($nom='',$id='') {
 global $table_prefix;
 
@@ -33,21 +33,21 @@ global $table_prefix;
 	}
 	return  '';
 }
-
+*/
 
 /*
  *   +----------------------------------+
  *    Nom du Filtre :    get_auteur_infos
  *   +----------------------------------+
- *    Date : lundi 23 février 2004
+ *    Date : lundi 23 f�vrier 2004
  *    Auteur :  Nikau (luchier@nerim.fr)
  *   +-------------------------------------+
  *    Fonctions de ce filtre :
  *    Cette fonction permet d'obtenir toutes les infos 
  *    d'un auteur avec son nom ou son id_auteur
  *    ATTENTION !! cette fonction ne s'utilise pas de       
- *    façon classique !! voir explication dans la contrib'
- *    Fonction utilisée également dans la fonction
+ *    fa�on classique !! voir explication dans la contrib'
+ *    Fonction utilis�e �galement dans la fonction
  *    'afficher_avatar'
  *   +-------------------------------------+ 
  *  
@@ -55,29 +55,29 @@ global $table_prefix;
  * reportez-vous au forum de l'article :
  * http://www.spip-contrib.net/article.php3?id_article=261
 */
+// profile.html + afficher_avatar
 function spipbb_get_auteur_infos($id='', $nom='') {
-if ($id) $query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id";
-if ($nom) $query = "SELECT * FROM spip_auteurs WHERE nom='$nom'";
-$result = spip_query($query);
+	if ($id) $query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id";
+	if ($nom) $query = "SELECT * FROM spip_auteurs WHERE nom='$nom'";
+	$result = spip_query($query);
 
-if ($row = spip_fetch_array($result)) {
-$row=serialize($row);
+	if ($row = spip_fetch_array($result)) {
+		$row=serialize($row);
+	}
+	return $row;
 }
-return $row;
-}
-
 
 /*
  *   +----------------------------------+
  *    Nom du Filtre :    afficher_avatar
  *   +----------------------------------+
- *    Date : lundi 23 février 2004
+ *    Date : lundi 23 f�vrier 2004
  *    Auteur :  Nikau (luchier@nerim.fr)
  *   +-------------------------------------+
  *    Fonctions de ce filtre :
  *    Cette fonction permet d'afficher 
  *    l'avatar d'un auteur.
- *    On peut passer une classe CSS pour régler        
+ *    On peut passer une classe CSS pour r�gler
  *    l'affichage
  *    EXEMPLE :
  *    [(#NOM|afficher_avatar{''})] ou
@@ -88,86 +88,85 @@ return $row;
  * reportez-vous au forum de l'article :
  * http://www.uzine.net/spip_contrib/article.php3?id_article=261
 */
+// voirsujet
 function spipbb_afficher_avatar($nom, $classe='') {
-if ($classe!='') $insert=" class=\"$classe\""; else $insert="";
-
-$infos=unserialize(get_auteur_infos('', $nom));
-$fichier = '';
-
-if ($infos['statut']=="0minirezo" OR $infos[statut]=="1comite") {
-  $racine="auton$infos[id_auteur]";
-	if (file_exists("IMG/$racine.png")) {
-		$fichier = "$racine.png";
+	if ($classe!='') $insert=" class=\"$classe\""; else $insert="";
+	
+	$infos=unserialize(spipbb_get_auteur_infos('', $nom));
+	$fichier = '';
+	
+	if ($infos['statut']=="0minirezo" OR $infos[statut]=="1comite") {
+		$racine="auton$infos[id_auteur]";
+		if (file_exists("IMG/$racine.gif")) {
+			$fichier = "$racine.gif";
+		}
+		else if (file_exists("IMG/$racine.jpg")) {
+			$fichier = "$racine.jpg";
 		}
 		else if (file_exists("IMG/$racine.png")) {
-				 $fichier = "$racine.png";
-				 }
-		else if (file_exists("IMG/$racine.png")) {
-				 $fichier = "$racine.png";
+			$fichier = "$racine.png";
 		}
-          if($fichier!= '' ){
-          $retour="<img".$insert." src=\"IMG/$fichier\" alt=\"avatar de $nom\">";
-          }
+	    
+		if($fichier!= '' ){
+			$retour="<img".$insert." src=\"IMG/$fichier\" alt=\"avatar\" />";
+		}
 	}
 	else {
-	if ($infos['statut']=="6forum") {
-	$infos=unserialize(get_auteur_infos('', $nom));
-$source=unserialize($infos[extra]);
-$source_extra=$source[avatar];
-if(isset($source_extra))
-$retour="<img".$insert."  src=\"".$source_extra."\" alt=\"Avatar de $nom\">";
+		if ($infos['statut']=="6forum") {
+			$infos=unserialize(spipbb_get_auteur_infos('', $nom));
+			$source=unserialize($infos[extra]);
+			$source_extra=$source[avatar];
+			if(isset($source_extra))
+				$retour="<img".$insert."  src=\"".$source_extra."\" alt=\"Avatar\" />";
+		}
+	}
+	return $retour;
 }
-}
-return $retour;
-}
-
-
 
 /*
  *   +----------------------------------+
  *    Nom des Filtres :  afficher_mots_clefs et pas_afficher_mots_clefs
  *   +----------------------------------+
- *    Date : lundi 25 février 2004
+ *    Date : lundi 25 fevrier 2004
  *    Auteur :  Nikau (luchier@nerim.fr)
  *   +-------------------------------------+
  *    Fonctions de ce filtre :
- *    Permet d'afficher ou non les mots clefs pour 
+ *    Permet d'afficher ou non les mots clefs pour
  *    les forums selon le statut de l'auteur du message
  *    EXEMPLE :
  *    [(#ID_FORUM|afficher_mots_clefs] ou
  *     [(#ID_FORUM|pas_afficher_mots_clefs]
- *   !! Adaptez les numéros (10 et 11) à vos numeros de groupe de mots clés !!
+ *   !! Adaptez les numeros (10 et 11) à vos numeros de groupe de mots cles !!
  *   +-------------------------------------+ 
  *  
  * Pour toute suggestion, remarque, proposition d'ajout
  * reportez-vous au forum de l'article :
  * http://spip-contrib.net/article.php3?id_article=421
 */
+// poster
 function spipbb_afficher_mots_clefs($texte) {
-// 3 à changer par le num du Groupe "Type de sujets"
-// 4 à changer par le num du Groupe de mot clé "Modération"
-if (($GLOBALS['auteur_session']['statut']=='0minirezo') OR ($GLOBALS['auteur_session']['statut']=='1comite'))
-{
-$GLOBALS['afficher_groupe'][]=3;
-$GLOBALS['afficher_groupe'][]=4;
-}
-else {
-$GLOBALS['afficher_groupe'][]=0; 
-}
-}
+// 3 a changer par le num du Groupe "Type de sujets"
+// 4 a changer par le num du Groupe de mot cle "Moderation"
+	if (($GLOBALS['auteur_session']['statut']=='0minirezo') OR ($GLOBALS['auteur_session']['statut']=='1comite'))
+	{
+		$GLOBALS['afficher_groupe'][]=3; //$GLOBALS['spipbb']['spipbb_id_mot_annonce']
+		$GLOBALS['afficher_groupe'][]=4; //$GLOBALS['spipbb']['spipbb_id_mot_ferme']
+	}
+	else {
+		$GLOBALS['afficher_groupe'][]=0; 
+	}
+} // afficher_mots_clefs
 
-// 4 à changer par le num du Groupe de mot clé "Modération"
+// 4 a changer par le num du Groupe de mot cle "Moderation"
 function spipbb_pas_afficher_mots_clefs($texte) {
-if (($GLOBALS['auteur_session']['statut']=='0minirezo'))
-{
-$GLOBALS['afficher_groupe'][]=4;
-}
-else{
-$GLOBALS['afficher_groupe'][]=0;
-}
-}
-
-
+	if (($GLOBALS['auteur_session']['statut']=='0minirezo'))
+	{
+		$GLOBALS['afficher_groupe'][]=4; //$GLOBALS['spipbb']['spipbb_id_mot_ferme']
+	}
+	else {
+		$GLOBALS['afficher_groupe'][]=0;
+	}
+} //pas_afficher_mots_clefs
 
 /*
  *   +---------------------------------------------+
@@ -182,30 +181,21 @@ $GLOBALS['afficher_groupe'][]=0;
  *     Appelez le dans vos squellette tout simplement
  *     par : [(#ID_AUTEUR|nb_messages)]
  *   +---------------------------------------------+
- *  
+ *
  * Pour toute suggestion, remarque, proposition d'ajout
  * reportez-vous au forum de l'article :
  * http://www.uzine.net/spip_contrib/
  *
  */
+// membres_liste profil_bb
 function spipbb_nb_messages($id_auteur){
-
 global $table_prefix;
-$query = "SELECT auteur FROM ".$table_prefix."_forum WHERE id_auteur=$id_auteur";
-$nb_mess = "";
-
-$result_auteurs = spip_query($query);
-$nb_mess = spip_num_rows($result_auteurs);
-
-		return $nb_mess;
-		
-		
-}
-
-// FIN du nb_message
-
-
-
+	$query = "SELECT auteur FROM ".$table_prefix."_forum WHERE id_auteur=$id_auteur";
+	$nb_mess = "";
+	$result_auteurs = spip_query($query);
+	$nb_mess = spip_num_rows($result_auteurs);
+	return $nb_mess;
+} // nb_messages
 
 /*
  *   +----------------------------------+
@@ -215,30 +205,28 @@ $nb_mess = spip_num_rows($result_auteurs);
  *    Auteur :  BoOz
  *   +-------------------------------------+
  *    Fonctions de ce filtre :
- *     affiche le texte à citer    
- *   +-------------------------------------+ 
+ *     affiche le texte a citer
+ *   +-------------------------------------+
  *  
  * Pour toute suggestion, remarque, proposition d'ajout
  * reportez-vous au forum de l'article :
 */
-
+/*
 function spipbb_barre_forum_citer($texte, $lan)
 {
 	include_ecrire('inc/layer');
 
-if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
-	if($GLOBALS['citer']){
+	if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
+		if($GLOBALS['citer']){
 
-	$id_citation = $GLOBALS['id_forum'] ;
-	$query = "SELECT * FROM spip_forum WHERE id_forum=$id_citation";
-    $result = spip_query($query);
-    $row = spip_fetch_array($result);
-//ajout de la citation
-
-$texte="\{\{$row[auteur] $lan:}}\n\n<quote>\n$row[texte]\n</quote>\n";
-
+			$id_citation = $GLOBALS['id_forum'] ;
+			$query = "SELECT * FROM spip_forum WHERE id_forum=$id_citation";
+			$result = spip_query($query);
+			$row = spip_fetch_array($result);
+			//ajout de la citation
+			$texte="\{\{$row[auteur] $lan:}}\n\n<quote>\n$row[texte]\n</quote>\n";
+		}
 	}
-}
 
 	if (!$GLOBALS['browser_barre'])
 		return "<textarea name='texte' rows='12' class='forml' cols='40'>$texte</textarea>";
@@ -246,13 +234,7 @@ $texte="\{\{$row[auteur] $lan:}}\n\n<quote>\n$row[texte]\n</quote>\n";
 	$num_formulaire++;
 	include_spip('inc/barre');
 	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", true) .
-	  "
-<textarea name='texte' rows='12' class='forml' cols='40'
-id='formulaire_$num_formulaire'
-onselect='storeCaret(this);'
-onclick='storeCaret(this);'
-onkeyup='storeCaret(this);'
-ondbclick='storeCaret(this);'>$texte</textarea>";
-}
-
+	  "<textarea name='texte' rows='12' class='forml' cols='40' id='formulaire_$num_formulaire' onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);' ondbclick='storeCaret(this);'>$texte</textarea>";
+} // barre_forum_citer
+*/
 ?>

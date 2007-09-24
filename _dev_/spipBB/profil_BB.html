@@ -20,7 +20,7 @@
 	
 	<div id="corps"> <!-- Section contenant les informations -->
 	<h2><:spipbb:contact:></h2>	
-		<div id="detail"> <!-- Section particulière pour la mise en forme des détails d'un membre -->
+		<div id="detail"> <!-- Section particuliere pour la mise en forme des details d'un membre -->
 		
 			<h2><:spipbb:voirprofil:> #NOM</h2>
 			
@@ -29,31 +29,31 @@
 				<p>[(#NOM|spipbb_afficher_avatar{''})]</p>
 			</div>
 			
-			<div id="information"> <!-- Section d'affichage des informations génériques -->
+			<div id="information"> <!-- Section d'affichage des informations generiques -->
 				<h3><:spipbb:tout_apropos:> #NOM</h3>
 				<ul class="detmem">
 					<!--<li class="date"><:spipbb:date:> :<span> - </span></li>-->
-					<li class="msg"><:spipbb:messages:> : <span>[(#ID_AUTEUR|nb_messages)]</span></li>
+					<li class="msg"><:spipbb:messages:> : <span>[(#ID_AUTEUR|spipbb_nb_messages)]</span></li>
 					
 					[<li class="site"><:spipbb:site:> : <a href="(#URL_SITE)" title="#NOM_SITE"><span>#NOM_SITE</span></a></li>]
 					[<li class="bio"><:spipbb:bio:> :<br /><span>(#BIO)</span></li>]
 				</ul>
 			</div>
 			
-			<div id="communication"> <!-- Section contenant les éléments de communication -->
+			<div id="communication"> <!-- Section contenant les elements de communication -->
 				<h3><:spipbb:contact:> #NOM</h3>
 				<ul class="detmem">
 				<li id="ecrire"><:spipbb:luiecrire:> :#FORMULAIRE_ECRIRE_AUTEUR</li>
-				<?php if ($GLOBALS['auteur_session'] AND $statmem!="Membre" AND $statut!="6forum"){ echo '<li class="pm"><:spipbb:mp:> :&nbsp;<a href="ecrire/?exec=message_edit&new=oui&amp;type=normal&amp;dest=#ID_AUTEUR" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span> </a></li>'; } ?><!-- l'espace derrière le span est important : ça permet au style spipbblike de fonctionner sous IE -->
+				<?php if ($GLOBALS['auteur_session'] AND $statmem!="Membre" AND $statut!="6forum"){ echo '<li class="pm"><:spipbb:mp:> :&nbsp;<a href="ecrire/?exec=message_edit&new=oui&amp;type=normal&amp;dest=#ID_AUTEUR" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span> </a></li>'; } ?><!-- l'espace derriere le span est important : ca permet au style spipbblike de fonctionner sous IE -->
 				</ul>
 			</div>
 			
-		</div> <!-- Fin de la section détail -->
+		</div> <!-- Fin de la section detail -->
 	</div><!-- Fin de la section corps -->
 	
 <INCLURE{fond=pied_BB}{id_rubrique}>
 
 </div> <!-- Fin de la section contenant -->
 </body>
-</html> 
+</html>
 </BOUCLE_profilbb>

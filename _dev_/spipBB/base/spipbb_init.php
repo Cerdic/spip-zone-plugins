@@ -26,6 +26,7 @@ function spipbb_install($action)
 {
 switch ($action) {
  case 'test' : /* test pour savoir si les actions sont nécessaires */
+	spipbb_init_metas();
 	return isset($GLOBALS['meta']['spipbb']);
 	break;
  case 'install' :

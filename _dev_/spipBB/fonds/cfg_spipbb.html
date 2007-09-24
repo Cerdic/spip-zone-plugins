@@ -23,6 +23,36 @@
 </label>
 </p>
 </fieldset>
+
+[(#REM) ------------------------ GROUPE DE MOTS ASSOCIES A SPIPBB ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:config_choix_mots:></legend>
+<p>
+<label>
+<select name="spipbb_id_groupe_mot">
+<BOUCLE_mots(GROUPES_MOTS){par id_groupe}>
+<option value="#ID_GROUPE"[ selected="(#ENV{spipbb_id_groupe_mot}|=={#ID_GROUPE}|?{selected})"]>#ID_GROUPE . #TITRE</option>
+</BOUCLE_mots>
+</select>#ENV{spipbb_id_groupe_mot}
+<select name="spipbb_id_mot_ferme">
+<BOUCLE_mot_ferme(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
+<option value="#ID_MOT"[ selected="(#ENV{spipbb_id_mot_ferme}|=={#ID_MOT}|?{selected})"]>#ID_MOT . #TITRE</option>
+</BOUCLE_mot_ferme>
+</select>
+<select name="spipbb_id_mot_annonce">
+<BOUCLE_mot_annonce(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
+<option value="#ID_MOT"[ selected="(#ENV{spipbb_id_mot_annonce}|=={#ID_MOT}|?{selected})"]>#ID_MOT . #TITRE</option>
+</BOUCLE_mot_annonce>
+</select>
+
+	<br />
+	<i><:spipbb:choix_mots_selection:></i>
+</label>
+</p>
+</fieldset>
+
+
 [(#REM) ------------------------ SQUELETTES ------------------------ ]
 
 <fieldset>

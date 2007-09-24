@@ -20,6 +20,22 @@ function spipbb_init_metas($id_rubrique=0) {
 	$spipbb_meta['spipbb_squelette_groupeforum']= "groupeforum";
 	$spipbb_meta['spipbb_squelette_filforum']= "filforum";
 
+	// les mots cles specifiques
+	$row = spip_fetch_array(spip_query("SELECT id_groupe FROM spip_groupes_mots WHERE titre='spipbb' LIMIT 1"));
+print_r($row);
+	$spipbb_meta['spipbb_id_groupe_mot']=intval($row['id_groupe']);
+	if (empty($spipbb_meta['spipbb_id_groupe_mot'])) $spipbb_meta = spipbb_creer_groupe_mot($spipbb_meta);
+	else {
+		$row = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='ferme' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
+		$spipbb_meta['spipbb_id_mot_ferme']=intval($row['id_mot']);
+		$row = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='annonce' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
+		$spipbb_meta['spipbb_id_mot_annonce']=intval($row['id_mot']);
+	}
+
+	// chemin icones et smileys ?
+
+	// final - sauver
+
 	if ($spipbb_meta!= $GLOBALS['meta']['spipbb']) {
 		include_spip('inc/meta');
 		ecrire_meta('spipbb', serialize($spipbb_meta));
@@ -39,6 +55,17 @@ function spipbb_delete_metas() {
 		ecrire_metas();
 		spip_log('spipbb : delete_metas OK');
 	}
+}
+
+function spipbb_creer_groupe_mot($l_meta) {
+	$res = spip_query("INSERT INTO spip_groupes_mots SET titre='spipbb'");
+	$l_meta['spipbb_id_groupe_mot']= spip_insert_id();
+	$res = spip_query("INSERT INTO spip_mots SET titre='ferme', id_groupe='".$l_meta['spipbb_id_groupe_mot']."'");
+	$l_meta['spipbb_id_mot_ferme'] = spip_insert_id();
+	$res = spip_query("INSERT INTO spip_mots SET titre='annonce', id_groupe='".$l_meta['spipbb_id_groupe_mot']."'");
+	$l_meta['spipbb_id_mot_annonce'] = spip_insert_id();
+
+	return $l_meta;
 }
 
 ?>

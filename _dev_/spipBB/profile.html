@@ -1,6 +1,6 @@
 #CACHE{0}
 <?php
-// La ligne suivante permet d'intercepter si le formulaire vient d'être validé, auquel cas on redirige vers la page d'affichage des éléments en la mettant à jour
+// La ligne suivante permet d'intercepter si le formulaire vient d'etre valide, auquel cas on redirige vers la page d'affichage des elements en la mettant a jour
 if ($redirect==oui) {
 	echo "<meta http-equiv='refresh' content='0; url=spip.php?page=profile&id_auteur=$id_auteur&id_rubrique=$id_rubrique&var_mode=recalcul'>";
 }
@@ -16,13 +16,13 @@ $spip_display=1;
 include("ecrire/inc/presentation.php"); //encore pour les cadres
 $statut=$auteur_session['statut'];
 $id_auteur_session=$auteur_session['id_auteur'];
-$auteur=unserialize(get_auteur_infos($id_auteur_session));
+$auteur=unserialize(spipbb_get_auteur_infos($id_auteur_session));
 //Si admin ou rédacteur, renvoie sur la page de gestion de leurs infos dans l'espace privé
 //if ($statut=="0minirezo" OR $statut=="1comite") {
 //	 header("Location: ./ecrire/?exec=auteurs_edit&amp;id_auteur=$id_auteur_session");
 //	 }
 
-// Début du script repris et simplifié de ecrire/exec/auteur_infos.php
+// Debut du script repris et simplifie de ecrire/exec/auteur_infos.php
 //
 // Modification (et creation si besoin)
 //
