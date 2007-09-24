@@ -370,7 +370,7 @@ function exec_import_export(){
 			$titre = $row['titre'];
 			if ($nb_listes==1) $checked = " checked='checked'";
 			else $checked = "";
-			echo "<input type=\"radio\" name=\"export_id\" value=\"".$id_liste."\"$checked />$titre <small>".spip_listes_nb_abonnes_liste($id_liste)."</small><br />\n";
+			echo "<input type=\"radio\" name=\"export_id\" value=\"".$id_liste."\"$checked />$titre <small>".spiplistes_nb_abonnes_liste_str_get($id_liste)."</small><br />\n";
 		}
 		echo "<input type=\"radio\" name=\"export_id\"value=\"abo_sans_liste\"$checked /><strong>"._T('spiplistes:abonne_aucune_liste')."</strong> <br />\n";
 		echo "<input type=\"radio\" name=\"export_id\"value=\"desabo\"$checked /><strong>"._T('spiplistes:desabonnes')."</strong><br />\n"; 

@@ -124,7 +124,25 @@ function exec_spip_listes() {
 		, $connect_id_auteur
 		, $supp_dest
 		;
+
+	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
+	if ($detruire_message = intval(_request('detruire_message'))) {
+		spip_query("DELETE FROM spip_courriers WHERE id_courrier="._q($detruire_message));
+		// A priori, 2 reliquats anciennes versions
+		//spip_query("DELETE FROM spip_auteurs_messages WHERE id_message="._q($detruire_message));
+		//spip_query("DELETE FROM spip_forum WHERE id_message="._q($detruire_message));
+		// supprime de la queue d'envois
+		spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$detruire_message");
+	}
 	
+	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
+	if ($btn_arreter_envoi = intval(_request('btn_arreter_envoi'))) {
+		// demande arreter envoi du courrier encour
+		spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_STOPE."' WHERE id_courrier=$btn_arreter_envoi LIMIT 1");
+		// supprime de la queue d'envois
+		spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$btn_arreter_envoi");
+	}
+
 //////////
 // PAGE CONTENU
 //////////
@@ -146,12 +164,6 @@ function exec_spip_listes() {
 	debut_droite("messagerie");
 	
 	// MODE HISTORIQUE: Historique des envois --------------------------------------
-	
-	if ($detruire_message = _request('detruire_message')) {
-		spip_query("DELETE FROM spip_courriers WHERE id_courrier="._q($detruire_message));
-		spip_query("DELETE FROM spip_auteurs_messages WHERE id_message="._q($detruire_message));
-		spip_query("DELETE FROM spip_forum WHERE id_message="._q($detruire_message));
-	}
 	
 	$page_result = ""
 		. spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'), _DIR_PLUGIN_SPIPLISTES.'img_pack/24_send-receive.gif', 'messages', 'encour', '', 'position')

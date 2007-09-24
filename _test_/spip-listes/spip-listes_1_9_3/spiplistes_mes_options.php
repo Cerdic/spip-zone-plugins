@@ -17,6 +17,7 @@ define("_SPIPLISTES_STATUT_REDAC", "redac");
 define("_SPIPLISTES_STATUT_READY", "ready");
 define("_SPIPLISTES_STATUT_ENCOURS", "encour");
 define("_SPIPLISTES_STATUT_PUBLIE", "publie");
+define("_SPIPLISTES_STATUT_STOPE", "stope");
 
 define("_SPIPLISTES_PUBLIC_LIST", "liste");
 define("_SPIPLISTES_PRIVATE_LIST", "inact");

@@ -72,12 +72,16 @@ function spiplistes_remplir_liste_envois($id_courrier,$id_liste){
 				   _q($row['n'])." WHERE id_courrier="._q($id_courrier));
 }
 
-// Nombre d'abonnes a une liste
-function spip_listes_nb_abonnes_liste($id_liste){
-	$row = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS n ".
-									   "FROM spip_auteurs_listes WHERE id_liste=$id_liste"));
-	$nb_abo = ( $row['n'] >1)?  $row['n']." abonn&eacute;s" :  $row['n']." abonn&eacute;";
-	return "(".$nb_abo.")";
+// Nombre d'abonnes a une liste, chaine html
+function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false) {
+	$result = "";
+	if(($id_liste > 0) && ($nb_abos == false)) {
+		$nb_abos = spiplistes_nb_abonnes_count($id_liste);
+	}
+	if($nb_abos) {
+		$result = "(" . $nb_abos . (($nb_abos > 1) ?  _T('spiplistes:nb_abonnes_plur') : _T('spiplistes:nb_abonnes_sing')) . ")";
+	}
+	return ($result);
 }
 
 
