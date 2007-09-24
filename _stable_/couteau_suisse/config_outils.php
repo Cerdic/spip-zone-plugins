@@ -572,7 +572,11 @@ add_outil( array(
 	'auteur' 	 => 'Alexis Roussel, Paolo',
 	'categorie'	 => 'typo-corr',
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
-	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a +'@'+b; }",
+	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a+'@'+b; }"
+		// jQuery pour remplacer l'arobase image par l'arobase texte
+		. "$(document).ready(function(){ $('.spancrypt').after('&#64;'); $('.spancrypt').remove(); });",
+	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
+		. ') no-repeat scroll left center; color:#000099; padding-left:12px; text-decoration:none;"}',
 	'traitement:EMAIL' => 'mailcrypt',
 )); 
 
