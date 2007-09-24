@@ -238,6 +238,7 @@ et de recevoir les lettres d\'informations.',
 'sujet_clos_titre' => 'Sujet Clos',
 'sujet_clos_texte' => 'Ce sujet est clos, vous ne pouvez pas y poster.',
 'sur_liste' => 'sur la liste',
+'Supprimer_ce_courrier' => "Supprimer ce courrier",
  
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',

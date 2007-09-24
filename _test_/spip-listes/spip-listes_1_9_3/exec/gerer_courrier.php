@@ -173,6 +173,23 @@ function exec_gerer_courrier(){
 		}
 	}
 	
+	// Propose de supprimer le courrier si droits et statut nécessaires
+	$gros_bouton_supprimer = 
+		(($statut != _SPIPLISTES_STATUT_PUBLIE) && ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur)))
+		?	"<div style='margin-top:1ex;'>"
+			. icone (
+				_T('spiplistes:Supprimer_ce_courrier')
+				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE, "btn_supprimer_courrier=$id_courrier")
+				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
+				, ""
+				, "right"
+				, false
+				)
+			. "</div>\n"
+		: ""
+		;
+
+	
 //////////
 // PAGE CONTENU
 //////////
@@ -380,12 +397,9 @@ function exec_gerer_courrier(){
 		echo "</form>";
 
 		echo "</td></tr></table>";
-		if($statut != 'publie'){
-			echo "<div style='margin:auto;margin-top:10px'>";
-			echo icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_courrier, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
-			echo "</div>";
-		}
 		echo "</div>"; // fin du cadre de couleur
+		
+		echo $gros_bouton_supprimer;
 		
 	}//while		
 
