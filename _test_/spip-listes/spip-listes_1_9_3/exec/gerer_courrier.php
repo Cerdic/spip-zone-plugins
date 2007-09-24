@@ -282,10 +282,6 @@ function exec_gerer_courrier(){
 			// ici
 			$pret_envoi=true;
 		}
-		elseif( ($statut == 'ready' OR $statut == 'encour') && $id_liste == 0){
-			$destinataire = _T('spiplistes:abonees');
-			$pret_envoi=true;
-		}
 	
 		$page_result .= ""
 			. debut_cadre_relief(spiplistes_items_get_item('icon', $statut), true)
@@ -293,32 +289,32 @@ function exec_gerer_courrier(){
 		echo($page_result);
 		$page_result="";
 		
-		if ($statut == 'redac' && !$pret_envoi) {
+		if ($statut == _SPIPLISTES_STATUT_REDAC && !$pret_envoi) {
 			echo "<span style='font-size:120%;color:red;font-weight:bold'>"._T('spiplistes:message_en_cours')." <br />"._T('spiplistes:modif_envoi')."</span>";
 		}
 		
-		if ($statut == 'ready' && $pret_envoi) {
+		if ($statut == _SPIPLISTES_STATUT_READY && $pret_envoi) {
 			echo "<span style='font-size:120%;color:red'>
-			<b>"._T('spiplistes:message_presque_envoye')."</b></span><br /> "._T('spiplistes:a_destination').$destinataire."<br />"._T('spiplistes:confirme_envoi');
+			<strong>"._T('spiplistes:message_presque_envoye')."</strong></span><br /> "._T('spiplistes:a_destination').$destinataire."<br />"._T('spiplistes:confirme_envoi');
 			echo "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_courrier=$id_courrier")."' method='post'>";
 			echo "<div style='text-align:center'><input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:envoyer')."' class='fondo' /></div>";
 			echo "</form>";
 		}
 		
-		if ($statut == 'encour'){
+		if ($statut == _SPIPLISTES_STATUT_ENCOURS){
 			if ($id_auteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
 				echo "<div style='float:right'>";
 				echo icone (_T('icone_supprimer_message'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,'detruire_message='.$id_courrier), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 				echo "</div>";
 			}
 			echo "<p><span style='font-size:120%;color:red'>
-			<b>"._T('spiplistes:envoi_program')."</b></span><br /> "._T('spiplistes:a_destination').$destinataire."<br /><br />
+			<strong>"._T('spiplistes:envoi_program')."</strong></span><br /> "._T('spiplistes:a_destination').$destinataire."<br /><br />
 			<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a></p>";
 		}
 		
-		if ($statut == 'publie')  {
+		if ($statut == _SPIPLISTES_STATUT_PUBLIE)  {
 			echo "<span style='font-size:120%;color:red'>
-			<b>"._T('spiplistes:message_arch')."</b></span>";
+			<strong>"._T('spiplistes:message_arch')."</strong></span>";
 			echo "<ul>";
 			echo "<li>"._T('spiplistes:envoyer_a').$destinataire."</li>";
 			echo "<li>"._T('spiplistes:envoi_date').$date."</li>";
@@ -350,7 +346,7 @@ function exec_gerer_courrier(){
 		echo $gros_bouton_modifier;
 		echo "</div>";
 		
-		echo "<span style='font-size:120%;color:$la_couleur'><b>$le_type</b></span><br />";
+		echo "<span style='font-size:120%;color:$la_couleur'><strong>$le_type</strong></span><br />";
 		echo "<h3>$titre</h3>";
 		echo "<br class='nettoyeur' />";
 		echo debut_boite_info();
@@ -377,13 +373,17 @@ function exec_gerer_courrier(){
 		echo fin_boite_info();
 		echo "<br />";
 		
-		if($statut=="redac" OR $statut=="ready"){
-			//envoi de test 
-			echo "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,'id_courrier='.$id_courrier)."' method='post'>";
-			echo debut_boite_info();
-			echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
+		if(($statut==_SPIPLISTES_STATUT_REDAC) || ($statut==_SPIPLISTES_STATUT_READY)) {
+		// propose l'envoi test 
+			$page_result =""
+				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF, "id_courrier=$id_courrier")."' method='post'>"
+				. debut_boite_info(true)
+				. "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>"
+				;
+			// le form est étrangement découpé. A revoir.
+			echo($page_result);
 			if(!$pret_envoi){
-				echo "<b>"._T('spiplistes:envoi')."</b><p style='font-familly : Georgia,Garamond,Times,serif'>"._T('spiplistes:envoi_texte')."</p>";
+				echo "<strong>"._T('spiplistes:envoi')."</strong><p style='font-familly : Georgia,Garamond,Times,serif'>"._T('spiplistes:envoi_texte')."</p>";
 				echo debut_cadre_enfonce();
 				echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
 				echo "<div style='float:right'><input type='submit' name='btn_envoi_test' value='"._T('spiplistes:email_tester')."' class='fondo'  /></div>";
