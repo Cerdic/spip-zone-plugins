@@ -18,9 +18,9 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-
-// $Revision$
-// API v0.2
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 include_spip ("inc/utils");
 include_spip ("inc/filtres");    /* email_valide() */
@@ -378,7 +378,7 @@ function spiplistes_boite_info_id ($titre, $id, $return = true) {
 	else echo($result);
 }
 
-// CP:20070924
+// renvoie liste des patrons en excluant les sous-versions (texte, lang)
 function spiplistes_liste_des_patrons ($chemin) {
 	$liste_patrons = find_all_in_path($chemin, "[.]html$");
 	$result = array();

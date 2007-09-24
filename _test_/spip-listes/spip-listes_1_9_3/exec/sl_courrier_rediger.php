@@ -93,10 +93,12 @@ function exec_sl_courrier_rediger(){
 		. "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><strong>$le_type</strong></span></p>"
 		. "<p class='verdana2' style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;'>"._T('spiplistes:alerte_edit')."</p>"
 		. "<br /><br />"
-		. "<div id=\"ajax-loader\" align=\"right\"><img src=\""._DIR_PLUGIN_SPIPLISTES. "/img_pack/ajax_indicator.gif\" /></div>"
+		. "<div id=\"ajax-loader\" align=\"right\"><img src=\""._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif\" /></div>"
 		. "<div class='verdana2' id='envoyer'>"
-		. "<form method='post' action='./?exec=sl_courrier_previsu' style='border: 0px; margin: 0px;' id='template' name='template'>"
-		. "<input name=\"id_courrier\" id=\"id_courrier\" type=\"hidden\" value=\"$id_courrier\" /><br /><br /><br />\n"
+		
+		. "<form method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE)."'"
+		.		" style='border: 0px; margin: 0px;' id='template' name='template'>"
+		. "<input name=\"id_courrier\" id=\"id_courrier\" type=\"hidden\" value=\"$id_courrier\" />\n"
 		. "<br/><strong><label for='template'>"._T("Choisir un patron")."</label></strong><br/>"
 		. "<select name='template' class='formo'>"
 		;
@@ -105,80 +107,66 @@ function exec_sl_courrier_rediger(){
 	}
 	$page_result .= "</select><br />";
 		
-	echo($page_result);	
-	$page_result = "";
-			
-		echo "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />";
-	echo '<script src="'.url_absolue(find_in_path('javascript/datepicker.js')).'" type="text/javascript"></script>';
-	echo '<script src="'.url_absolue(find_in_path('javascript/jquery-dom.js')).'" type="text/javascript"></script>';
-
-	echo "\n\n<script type=\"text/javascript\"><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
-	  . unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
-	  . " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script> ";
-	
-	echo "<div style=\"float:right;width:50%\"><label for=\"lang\">Langue du courrier</label><br />\n";
-		echo "<input name=\"lang\" /></div>\n";
-	
-	
- 		echo "<label for=\"date\">Contenu a partir de cette date</label><br />\n";
-		echo "<input name=\"date\" id=\"date\" class=\"date-picker\"  /><br /><br /><br />\n";
-
-
-
-		echo "<strong><label for='sujet'>"._T("Et lister les articles de la rubrique")."</label></strong>";
-		echo "<br />";
-		
-		echo "<select name=\"id_rubrique\"  CLASS='formo'>";
-		echo "<option value=\"\"></option>";
-		echo spiplistes_arbo_rubriques(0);
-		echo "</select><br />";
-
-
-		echo "<strong><label for='sujet'>"._T("Et lister les articles du mot cl&eacute;")."</label></strong>";
-		echo "<br />";
-		
-		echo "<select name=\"id_mot\"  CLASS='formo'>";
-		echo "<option value=\"\"></option>";
-		$rqt_gmc = spip_query ("SELECT id_groupe, titre FROM spip_groupes_mots WHERE articles='oui'");
-		while ($row = spip_fetch_array($rqt_gmc)) {
+	$page_result .= ""
+		. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />"
+		. '<script src="'.url_absolue(find_in_path('javascript/datepicker.js')).'" type="text/javascript"></script>'
+		. '<script src="'.url_absolue(find_in_path('javascript/jquery-dom.js')).'" type="text/javascript"></script>'
+		. "\n\n<script type=\"text/javascript\"><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
+		. unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
+		. " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script> "
+		. "<div style=\"float:right;width:50%\"><label for=\"lang\">Langue du courrier</label><br />\n"
+		. "<input name=\"lang\" /></div>\n"
+		. "<label for=\"date\">Contenu a partir de cette date</label><br />\n"
+		. "<input name=\"date\" id=\"date\" class=\"date-picker\"  /><br /><br /><br />\n"
+		. "<strong><label for='sujet'>"._T("Et lister les articles de la rubrique")."</label></strong>"
+		. "<br />"
+		. "<select name=\"id_rubrique\"  CLASS='formo'>"
+		. "<option value=\"\"></option>"
+		. spiplistes_arbo_rubriques(0)
+		. "</select><br />"
+		//
+		// sélecteur des mots-clés
+		. "<strong><label for='sujet'>"._T("Et lister les articles du mot cl&eacute;")."</label></strong>"
+		. "<br />"
+		. "<select name=\"id_mot\"  CLASS='formo'>"
+		. "<option value=\"\"></option>"
+		;
+	$rqt_gmc = spip_query ("SELECT id_groupe, titre FROM spip_groupes_mots WHERE articles='oui'");
+	while ($row = spip_fetch_array($rqt_gmc)) {
 		$id_groupe = $row['id_groupe'];
 		$titre = $row['titre'];
-			echo "<option value='' disabled=\"disabled\">". supprimer_numero (typo($titre)) . "</option>";
-
-			$rqt_mc = spip_query ("SELECT id_mot, titre FROM spip_mots WHERE id_groupe='".$id_groupe."'");
-
-			while ($row = spip_fetch_array($rqt_mc)) {
-				$id_mot = $row['id_mot'];
-				$titre = $row['titre'];
-				echo "<option value='".$id_mot ."'>--". supprimer_numero (typo($titre)) . "</option>";
-			}
-		
+		$page_result .= "<option value='' disabled=\"disabled\">". supprimer_numero (typo($titre)) . "</option>";
+		$rqt_mc = spip_query ("SELECT id_mot, titre FROM spip_mots WHERE id_groupe='".$id_groupe."'");
+		while ($row = spip_fetch_array($rqt_mc)) {
+			$id_mot = $row['id_mot'];
+			$titre = $row['titre'];
+			$page_result .= "<option value='".$id_mot ."'>--". supprimer_numero (typo($titre)) . "</option>";
 		}
-		echo "</select><br />";
-
-		echo "<strong><label for='sujet'>"._T("Sujet du courrier")."</label></strong> "._T('info_obligatoire_02');
-		echo "<br />";
-		
-		echo "<input type='text' name='sujet' id='sujet' CLASS='formo' value=\"\" size='40'$js_titre /><br />\n";
-
-		echo "<strong><label for='message'>"._T("Introduction &agrave; votre courrier, avant le contenu issu du site")."</label></strong>";
-		echo aide ("raccourcis");
-		echo "<br />";
-		echo afficher_barre('document.template.message');
-		echo "<textarea id='text_area' name='message' ".$GLOBALS['browser_caret']." class='formo' rows='5' cols='40' wrap=soft>";
-		echo '' ;
-		echo "</textarea>\n";
-		echo "<div align='right'>";
-		echo "<input type='submit' name='Valider' value='"._T('Apercu')."' class='fondo'></div>\n";
-		echo "</form>";
-		echo "</div>\n";
+	}
+	$page_result .= ""
+		. "</select><br />"
+		//
+		// champ du titre (sujet du courrier)
+		. "<strong><label for='sujet'>"._T("Sujet du courrier")."</label></strong> "._T('info_obligatoire_02')
+		. "<br />"
+		. "<input type='text' name='sujet' id='sujet' CLASS='formo' value=\"\" size='40'$js_titre /><br />\n"
+		. "<strong><label for='message'>"._T("Introduction &agrave; votre courrier, avant le contenu issu du site")."</label></strong>"
+		. "<br />"
+		. afficher_barre('document.template.message')
+		. "<textarea id='text_area' name='message' ".$GLOBALS['browser_caret']." class='formo' rows='5' cols='40' wrap=soft>"
+		. ''
+		. "</textarea>\n"
+		. "<p class='verdana2' style='text-align:right;'>"
+		. "<input type='submit' name='Valider' value='"._T('Apercu')."' class='fondo' /></div>\n"
+		. "</form>"
+		. "</div>\n"
+		. fin_cadre_formulaire(true)
+		// 
+		// le bloc pour aperçu
+		. "<div id='apercu'></div>"
+		;
 	
-
-	fin_cadre_formulaire();
-		
-		echo "<div id='apercu'></div>";
-	
-	
+	echo($page_result);
 	
 	// COURRIER REDIGER: FIN ---------------------------------------------------------------
 
