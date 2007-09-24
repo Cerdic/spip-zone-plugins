@@ -15,7 +15,7 @@ function critere_branche($idb, &$boucles, $crit) {
 		$champ = 'id_rubrique';
 
 		$type = $boucle->type_requete;
-		$desc = trouver_table($type, $boucle);
+		$desc = trouver_table($type);
 		//Seulement si necessaire
 		if (!array_key_exists('id_rubrique', $desc['field'])) {
 			$cle = trouver_champ_exterieur('id_rubrique', $boucle->jointures, $boucle);
