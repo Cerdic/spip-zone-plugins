@@ -72,6 +72,9 @@ function exec_gerer_courrier(){
 	
 	$page_result = $message_erreur = "";
 
+	//////////////////////////////////////////////////////
+	// Modification de courrier
+	////
 	// effectue les modifications demandées si retour local ou retour editeur
 	if($id_courrier > 0) {
 		// charge le courrier demandé
@@ -150,7 +153,6 @@ function exec_gerer_courrier(){
 		
 		// FIN DES MODIFICATIONS
 
-
 		// Ok. recharge les données pour compléter le formulaire
 		$sql_select = "titre,texte,email_test,statut";
 		if($row = spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1"))) {
@@ -159,6 +161,9 @@ function exec_gerer_courrier(){
 			}
 		}
 	} // end if($id_courrier > 0)
+	//////////////////////////////////////////////////////
+	// Nouveau courrier
+	////
 	else if($new == 'oui') {
 	// retour éditeur. Création du courrier
 		if(!empty($titre)) {
@@ -213,10 +218,11 @@ function exec_gerer_courrier(){
 
 	/////////////////////
 	
+	$page_result = "";
 
 	//le message
 	$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_courrier));
-	while($row = spip_fetch_array($result_m)) {
+	if($row = spip_fetch_array($result_m)) {
 		$id_courrier = $row['id_courrier'];
 		$id_liste = $row['id_liste'];
 		$email_test = $row['email_test'];
@@ -399,10 +405,19 @@ function exec_gerer_courrier(){
 		echo "</td></tr></table>";
 		echo "</div>"; // fin du cadre de couleur
 		
-		echo $gros_bouton_supprimer;
+		$page_result .= ""
+			. $gros_bouton_supprimer
+			;
 		
-	}//while		
+	} // end if
+	else {
+		$page_result .= ""
+			. __boite_alerte (_T('spiplistes:Erreur_courrier_introuvable'), true)
+			;
+	}
 
+	echo($page_result);
+	
 	// GERER COURRIER: FIN DE PAGE
 	
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();

@@ -85,41 +85,28 @@ function exec_sl_courrier_rediger(){
 	debut_droite("messagerie");
 
 	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
+	$liste_patrons = spiplistes_liste_des_patrons("patrons/");
 
-	echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><b>$le_type</b></span></p>";
-	echo "<p style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;'>"._T('spiplistes:alerte_edit')."</p><br /><br />";
-
-	echo debut_cadre_formulaire(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_insert-slide.gif');
-
-	
-	// adapté de abomailman ()
-	// MaZiaR - NetAktiv
-	// tech@netaktiv.com
-
-	
-	$liste_patrons = find_all_in_path("patrons/","[.]html$");
-		echo "<div id=\"ajax-loader\" align=\"right\"><img src=\""._DIR_PLUGIN_SPIPLISTES. "/img_pack/ajax_indicator.gif\" /></div>";
-		echo "<div class='verdana2' id='envoyer'>";
-	
-		echo "<form method='post' action='./?exec=sl_courrier_previsu' style='border: 0px; margin: 0px;' id='template' name='template'>";
-		echo "<input name=\"id_courrier\" id=\"id_courrier\" type=\"hidden\" value=\"$id_courrier\" /><br /><br /><br />\n";
-
-		echo "<br/><strong><label for='template'>"._T("Choisir un patron")."</label></strong><br/>";
-		echo "<select name='template'  CLASS='formo'>";
+	// Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
+	$page_result = ""
+		. debut_cadre_formulaire(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_insert-slide.gif', true)
+		. "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><strong>$le_type</strong></span></p>"
+		. "<p class='verdana2' style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;'>"._T('spiplistes:alerte_edit')."</p>"
+		. "<br /><br />"
+		. "<div id=\"ajax-loader\" align=\"right\"><img src=\""._DIR_PLUGIN_SPIPLISTES. "/img_pack/ajax_indicator.gif\" /></div>"
+		. "<div class='verdana2' id='envoyer'>"
+		. "<form method='post' action='./?exec=sl_courrier_previsu' style='border: 0px; margin: 0px;' id='template' name='template'>"
+		. "<input name=\"id_courrier\" id=\"id_courrier\" type=\"hidden\" value=\"$id_courrier\" /><br /><br /><br />\n"
+		. "<br/><strong><label for='template'>"._T("Choisir un patron")."</label></strong><br/>"
+		. "<select name='template' class='formo'>"
+		;
+	foreach($liste_patrons as $titre_option) {
+		$page_result .= "<option value='".$titre_option."'>".$titre_option."</option>\n";
+	}
+	$page_result .= "</select><br />";
 		
-		foreach($liste_patrons as $key => $val) {
-			if(ereg("_texte",$val)) unset ($liste_patrons[$key]) ;
-		}
-
-		
-		foreach($liste_patrons as $titre_option) {
-			$titre_option = basename($titre_option,".html");		
-			echo "<option value='".$titre_option."'>".$titre_option."</option>\n";
-		}
-		echo "</select><br />";
-		
-		
-		
+	echo($page_result);	
+	$page_result = "";
 			
 		echo "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />";
 	echo '<script src="'.url_absolue(find_in_path('javascript/datepicker.js')).'" type="text/javascript"></script>';

@@ -377,6 +377,23 @@ function spiplistes_boite_info_id ($titre, $id, $return = true) {
 	if($return) return($result);
 	else echo($result);
 }
+
+// CP:20070924
+function spiplistes_liste_des_patrons ($chemin) {
+	$liste_patrons = find_all_in_path($chemin, "[.]html$");
+	$result = array();
+	foreach($liste_patrons as $key => $value) {
+		if (
+			!ereg("_[a-z][a-z].html$", $value)
+			&& !ereg("_texte.html$", $value)
+			&& !ereg("_[a-z][a-z]_texte.html$", $value)
+			) {
+			$result[] = basename($value, ".html");
+		}
+	}
+	return($result);
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */

@@ -89,9 +89,9 @@ function exec_courrier_edit(){
 	creer_colonne_droite();
 	debut_droite("messagerie");
 
-	debut_cadre_formulaire();
 
 	$page_result .= ""
+		. debut_cadre_formulaire('', true)
 		. "<a name='haut_block' id='haut_block'></a>"
 		. "<p>".($id_courrier ? _T('spiplistes:Modifier_un_courrier_:') : _T('spiplistes:Creer_un_courrier_:') )."<br />\n"
 		. "<span style='font-size:150%;font-weight:bold;color:gray;'>$titre</span></p>\n"
@@ -120,12 +120,11 @@ function exec_courrier_edit(){
 		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />" : "")
 		. "<p align='right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />"
 		. "</form>"
+		. fin_cadre_formulaire(true)
 		;
 	
 	echo($page_result);
 
-	fin_cadre_formulaire();
-	
 	// COURRIER EDIT FIN ---------------------------------------------------------------
 
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();
