@@ -4,7 +4,6 @@
 // <BOUCLE(ARTICLES)>
 // modifie le comportement de la boucle article en fonction de {archive}
 function boucle_ARTICLES($id_boucle, &$boucles) {
-        echo 'boucle';
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$marchive = $id_table .'.archive';
