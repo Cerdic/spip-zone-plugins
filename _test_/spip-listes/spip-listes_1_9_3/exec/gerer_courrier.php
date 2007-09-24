@@ -198,8 +198,9 @@ function exec_gerer_courrier(){
 		$gros_bouton_arreter_envoi = ""
 		;
 	if(($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur))) {
+		
 		if(($statut == _SPIPLISTES_STATUT_REDAC) || ($statut == _SPIPLISTES_STATUT_READY)) {
-			// Le courrier peut-être modifié si en préparation 
+		// Le courrier peut-être modifié si en préparation 
 			$gros_bouton_modifier = 
 				icone (
 					_T('spiplistes:Modifier_ce_courrier') // légende bouton
@@ -211,8 +212,9 @@ function exec_gerer_courrier(){
 					)
 				;
 		}
+		
 		if($statut != _SPIPLISTES_STATUT_PUBLIE) {
-			// Le courrier peut-être supprimé s'il n'a pas été publié
+		// Le courrier peut-être supprimé s'il n'a pas été publié
 			$gros_bouton_supprimer = 
 				"<div style='margin-top:1ex;'>"
 				. icone (
@@ -226,7 +228,9 @@ function exec_gerer_courrier(){
 				. "</div>\n"
 				;
 		}
+	
 		if($statut == _SPIPLISTES_STATUT_ENCOURS) {
+		// L'envoi d'un courrier en cours peut être stoppé
 			$gros_bouton_arreter_envoi = 
 				icone (
 					_T('spiplistes:Arreter_envoi')
@@ -283,84 +287,99 @@ function exec_gerer_courrier(){
 	debut_droite("messagerie");
 
 	/////////////////////
-	
-	$page_result = $message_erreur;
-
-	//le message
+	// prépare le message statut du courrier
 	if($id_courrier > 0) {
 		$le_type = _T('spiplistes:message_type');
 		$la_couleur = "red";
 		
-		$page_result .= ""
+		$str_statut_courrier = "";
+		switch($statut) {
+			case _SPIPLISTES_STATUT_REDAC:
+				$str_statut_courrier = _T('spiplistes:message_en_cours')."<br />"._T('spiplistes:modif_envoi');
+				break;
+			case _SPIPLISTES_STATUT_READY:
+				if($pret_envoi) {
+					$str_statut_courrier = ""
+						. "<p class='verdana2'>"._T('spiplistes:message_presque_envoye') . "<br /> "
+						._T('spiplistes:a_destination').$str_destinataire . "<br />"
+						._T('spiplistes:confirme_envoi')
+						. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_courrier=$id_courrier")."' method='post'>"
+						. "<p style='text-align:center'><input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:envoyer')."' class='fondo' /></p>"
+						. "</form>"
+						;
+				}
+				break;
+			case _SPIPLISTES_STATUT_ENCOURS:
+				$str_statut_courrier = ""
+					. _T('spiplistes:envoi_program')."<br />"._T('spiplistes:a_destination').$str_destinataire."<br /><br />"
+					. "<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a>"
+					;
+				break;
+			case _SPIPLISTES_STATUT_PUBLIE:
+				$str_statut_courrier = ""
+					. "<span>"
+					. "<strong>"._T('spiplistes:message_arch')."</strong></span>"
+					. "<ul>"
+					. " <li>"._T('spiplistes:envoyer_a').$str_destinataire."</li>"
+					. " <li>"._T('spiplistes:envoi_date').$date."</li>"
+					. " <ul>"
+					. "  <li>"._T('spiplistes:envoi_debut').$date_debut_envoi."</li>"
+					. "  <li>"._T('spiplistes:envoi_fin').$date_fin_envoi."</li>"
+					. " </ul>"
+					. " <li>"._T('spiplistes:nbre_abonnes').$total_abonnes."</li>"
+					. " <ul>"
+					. "  <li>"._T('spiplistes:format_html').$nb_emails_html."</li>"
+					. "  <li>"._T('spiplistes:format_texte').$nb_emails_texte."</li>"
+					. "  <li>"._T('spiplistes:desabonnes').": ".$nb_emails_non_envoyes."</li>"
+					. " </ul>"
+					. " <li>"._T('spiplistes:erreur_envoi').$nb_emails_echec."</li>"
+					. "</ul>"
+					;
+		}
+		if(!empty($str_statut_courrier)) {
+			$str_statut_courrier = "<div class='verdana2'>".$str_statut_courrier."</div>";
+		}
+		
+	/////////////////////
+	// construction du ventre
+		$page_result = ""
+			. $message_erreur
 			. debut_cadre_relief(spiplistes_items_get_item('icon', $statut), true)
-			.	(
-				($statut == _SPIPLISTES_STATUT_REDAC && !$pret_envoi)
-				? "<p class='verdana2'>"._T('spiplistes:message_en_cours')."<br />"._T('spiplistes:modif_envoi')."</p>"
-				: ""
-				)
-			.	(
-				($statut == _SPIPLISTES_STATUT_READY && $pret_envoi)
-					// demande confirmer envoi 
-				?	"<p class='verdana2'>"._T('spiplistes:message_presque_envoye') . "<br /> "
-					._T('spiplistes:a_destination').$str_destinataire . "<br />"
-					._T('spiplistes:confirme_envoi')
-					. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_courrier=$id_courrier")."' method='post'>"
-					. "<p style='text-align:center'><input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:envoyer')."' class='fondo' /></p>"
-					. "</form>"
-				: ""
-				)
+			. "<table width='100%'  border='0' cellspacing='0' cellpadding='0'>"
+			. "<tr>"
+			. "<td>".gros_titre($titre, spiplistes_items_get_item('puce', $statut), false)."</td>"
+			. "<td rowspan='2'>".$gros_bouton_modifier."</td>"
+			. "</tr>"
+			. "<tr> "
+			. "<td>$str_statut_courrier</td>"
+			. "</tr>"
+			. "</table>"
 			. $gros_bouton_arreter_envoi
+			//
+			// boite courrier au format html
+			. debut_cadre_couleur_foncee('', true)
+			. _T('spiplistes:version_html')." <a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_courrier)."\" title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n"
+			. "<iframe style='background-color:#fff;' src=\"?exec=courrier_preview&id_message=$id_courrier\" width=\"100%\" height=\"500\"></iframe>\n"
+			. fin_cadre_couleur_foncee(true)
+			//
+			// fin de la boite
+			. fin_cadre_relief(true)
 			;
+// la suite demain
+
 		echo($page_result);
-		$page_result="";
 		
-		if ($statut == _SPIPLISTES_STATUT_ENCOURS){
-			echo "<p><span style='font-size:120%;color:red'>
-			<strong>"._T('spiplistes:envoi_program')."</strong></span><br /> "._T('spiplistes:a_destination').$str_destinataire."<br /><br />
-			<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a></p>";
-		}
+		$page_result = "";
 		
-		if ($statut == _SPIPLISTES_STATUT_PUBLIE)  {
-			echo "<span style='font-size:120%;color:red'>
-			<strong>"._T('spiplistes:message_arch')."</strong></span>";
-			echo "<ul>";
-			echo "<li>"._T('spiplistes:envoyer_a').$str_destinataire."</li>";
-			echo "<li>"._T('spiplistes:envoi_date').$date."</li>";
-			echo "<ul>";
-			echo "<li>"._T('spiplistes:envoi_debut').$date_debut_envoi."</li>";
-			echo "<li>"._T('spiplistes:envoi_fin').$date_fin_envoi."</li>";
-			echo "</ul>";
-			echo "<li>"._T('spiplistes:nbre_abonnes').$total_abonnes."</li>";
-			echo "<ul>";
-			echo "<li>"._T('spiplistes:format_html').$nb_emails_html."</li>";
-			echo "<li>"._T('spiplistes:format_texte').$nb_emails_texte."</li>";
-			echo "<li>"._T('spiplistes:desabonnes').": ".$nb_emails_non_envoyes."</li>";
-			echo "</ul>";
-			echo "<li>"._T('spiplistes:erreur_envoi').$nb_emails_echec."</li>";
-			echo "</ul>";
-		}
-		
-		echo fin_cadre_relief();
 		
 		$texte_original = $texte;
 		if($statut != 'encour' AND $statut != 'publie' AND $statut != 'ready')
 			$texte = spiplistes_propre($texte);
 		
 		echo "<div style='margin-top:20px;border: 1px solid $la_couleur; background-color: $couleur_fond; padding: 5px;' class='cadre cadre-r'>"; // debut cadre de couleur
-		//debut_cadre_relief("messagerie-24.gif");
 		echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td width=100%>";
-		echo "<div style='float:right; margin:10px'>";
-		echo $gros_bouton_modifier;
-		echo "</div>";
-		
 		echo "<span style='font-size:120%;color:$la_couleur'><strong>$le_type</strong></span><br />";
-		echo "<h3>$titre</h3>";
-		echo "<br class='nettoyeur' />";
-		echo debut_boite_info();
-		echo _T('spiplistes:version_html')." <a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_courrier)."\" title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n";
-		echo "<iframe src=\"?exec=courrier_preview&id_message=$id_courrier\" width=\"100%\" height=\"500\"></iframe>\n";
-		echo fin_boite_info();    
 		echo "<p>";
 		echo debut_boite_info();
 		
