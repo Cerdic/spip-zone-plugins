@@ -143,6 +143,7 @@ et de recevoir les lettres d\'informations.',
 
 //L
 'langue' => '<strong>Langue :</strong>&nbsp;',
+'Langue_du_courrier_:' => "Langue du courrier :",
 'lire' => 'Lire',
 'Listes_de_diffusion' => 'Listes de diffusion',
 'log' => 'Logs',

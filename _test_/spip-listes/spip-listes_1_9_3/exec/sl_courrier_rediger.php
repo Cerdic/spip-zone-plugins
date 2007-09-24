@@ -114,13 +114,23 @@ function exec_sl_courrier_rediger(){
 		. "\n\n<script type=\"text/javascript\"><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
 		. unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
 		. " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script> "
-		. "<div style=\"float:right;width:50%\"><label for=\"lang\">Langue du courrier</label><br />\n"
-		. "<input name=\"lang\" /></div>\n"
+		//
+		// sélecteur de langues
+		. "<div style='float:right;width:50%;'>"
+		. "<label for='lang'>"._T('spiplistes:Langue_du_courrier_:')."</label><br />\n"
+		. "<select name='lang'  class='fondo' id='lang'>\n"
+		. liste_options_langues('changer_lang')
+		. "</select>\n"
+		. "</div>\n"
+		//
+		// la date
 		. "<label for=\"date\">Contenu a partir de cette date</label><br />\n"
 		. "<input name=\"date\" id=\"date\" class=\"date-picker\"  /><br /><br /><br />\n"
 		. "<strong><label for='sujet'>"._T("Et lister les articles de la rubrique")."</label></strong>"
 		. "<br />"
-		. "<select name=\"id_rubrique\"  CLASS='formo'>"
+		//
+		// sélecteur de rubriques
+		. "<select name=\"id_rubrique\"  class='formo'>"
 		. "<option value=\"\"></option>"
 		. spiplistes_arbo_rubriques(0)
 		. "</select><br />"
