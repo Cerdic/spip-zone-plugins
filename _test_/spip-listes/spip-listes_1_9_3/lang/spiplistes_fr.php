@@ -70,6 +70,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'chercher_un_auteur' => "Chercher un auteur",
 'Courrier_numero_:' => "Courrier num&eacute;ro :",
 'Creer_un_courrier_:' => "Cr&eacute;er un courrier :",
+'Choix_non_defini' => 'Pas de choix d&eacute;fini.',
 
 //D
 'dans_jours' => 'dans',
@@ -87,7 +88,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'desabonnement_confirm'=>'Vous &ecirc;tes sur le point de r&eacute;silier votre abonnement &agrave; la lettre d\'information',
 'date_depuis'=>'depuis @delai@', 
 'discussion_intro' => 'Bonjour, <br />Voici les discussions d&eacute;marr&eacute;es sur le site',
-
+'Destination' => "Destination",
 
 //E
 'email' => 'E-mail',

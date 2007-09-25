@@ -23,8 +23,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function spiplistes_meleuse() {
 
+	include_spip('inc/spiplistes_api');
+
 	spiplistes_log("CRON: meleuse() <<"); // pour DEBUG
-	
+
+//return(true); // pour debug
+
 	include_spip('inc/meta');
 	include_spip('inc/texte');
 	include_spip('inc/filtres');

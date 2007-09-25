@@ -40,7 +40,8 @@ function spiplistes_boite_autocron(){
 	include_spip('genie/spiplistes_cron');
 	if (cron_spiplistes_cron(0)) return; // rien a faire
 	
-	$res = spip_query("SELECT COUNT(a.id_auteur) AS n FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='encour'");
+	$res = spip_query("SELECT COUNT(a.id_auteur) AS n 
+		FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='"._SPIPLISTES_STATUT_ENCOURS."'");
 	$n = 0;
 	if ($row = spip_fetch_array($res))
 		$n = $row['n'];
@@ -101,7 +102,7 @@ function spiplistes_boite_autocron(){
 		});
 		//--></script>";
 		echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
-		echo "<p align='center'><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,'change_statut=publie&id_message='.$id_mess)."'>["._T('annuler')."]</a></p>";
+		echo "<p align='center'><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,'change_statut=publie&id_courrier='.$id_mess)."'>["._T('annuler')."]</a></p>";
 		echo fin_boite_info();
 	}
 	//echo ' <div style="background-image: url(\''. generer_url_action('cron','&var='.time()).'\');"> </div> ';

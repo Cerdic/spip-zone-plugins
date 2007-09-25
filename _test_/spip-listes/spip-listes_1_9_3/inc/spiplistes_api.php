@@ -72,6 +72,18 @@ function spiplistes_remplir_liste_envois($id_courrier,$id_liste){
 				   _q($row['n'])." WHERE id_courrier="._q($id_courrier));
 }
 
+/*
+	Supprime les abonnes d'une liste à un envoi
+*/
+function spiplistes_supprime_liste_envois($id_courrier) {
+	$result = false;
+	$id_courrier = intval($id_courrier);
+	if($id_courrier > 0) {
+		$result = spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$id_courrier");
+	}
+	return($result);
+}
+
 // Nombre d'abonnes a une liste, chaine html
 function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false) {
 	$result = "";
