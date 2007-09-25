@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_poesie' => 'stile poetico',
 
 'barre_avances' => 'Allineamento&nbsp;!',
-'barre_boutonsavances' => 'Formattazione supplementare, utilizzare con moderazione e discernimento&nbsp;!'
+'barre_boutonsavances' => 'Formattazione supplementare, utilizzare con moderazione e discernimento&nbsp;!',
 
 'cfg_puces' => 'Traitement des puces',
 'cfg_titraille' => 'Titraille',
