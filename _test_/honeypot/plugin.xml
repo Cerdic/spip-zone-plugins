@@ -12,6 +12,7 @@
   <etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
   </etat>
+  	<icon>honeypot.png</icon>
   <description>
 	<multi>
 	[fr]Ajouter des liens vers votre honeypot dans vos page. Necessite l'installation pr&eacute;alable du [project honeypot->http://projecthoneypot.org].
