@@ -385,7 +385,7 @@ add_outil( array(
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%\n%%auto_sommaire%%\n%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
-	'code:js' => '$(document).ready(function () { if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',
+	'code:js' => '$(document).ready(function(){ if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
@@ -420,7 +420,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'SPIP_liens',
 	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe%%",
-	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function () { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
+	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function(){ $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 	'categorie' => 'public',
 ));
 
@@ -574,7 +574,7 @@ add_outil( array(
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
 	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a+'@'+b; }"
 		// jQuery pour remplacer l'arobase image par l'arobase texte
-		. "$(document).ready(function(){ $('.spancrypt').after('&#64;'); $('.spancrypt').remove(); });",
+		. "\n\$(document).ready(function(){ \$('span.spancrypt').after('<span>&#6'+'4;</span>'); \$('span.spancrypt').remove(); });",
 	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
 		. ') no-repeat scroll left center; color:#000099; padding-left:12px; text-decoration:none;"}',
 	'traitement:EMAIL' => 'mailcrypt',
