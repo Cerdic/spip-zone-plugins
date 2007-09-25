@@ -1,0 +1,30 @@
+<plugin>
+  <nom> <!-- Nom du plugin -->
+	<multi>[fr] Projet Pot de Miel [en]Project Honey Pot</multi>
+  </nom>
+  <auteur>	<!-- Auteur du plugin -->
+	Pierre Andrews (mortimer)
+	_ &#169; 2006 - Distribu&eacute; sous licence GPL
+  </auteur>
+  <version> <!-- Version du plugin -->
+	0.1
+  </version>
+  <etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	test
+  </etat>
+  <description>
+	<mutli>[fr]Ajouter des liens vers votre honeypot dans vos page. Necessite l'installation pr&eacute;alable du [project honeypot->http://projecthoneypot.org].[en] Automatically generate trap links to your site honeypot in your SPIP templates. You will first need to install a honeypot from [project honeypot->http://projecthoneypot.org].</multi>
+  </description>
+  <lien>[Documentation & Configuration->./?exec=cfg&cfg=fpipr]</lien> <!-- URI de documentation -->
+  <prefix> 
+	honeypot
+  </prefix>	
+  <pipeline>
+	<nom>insert_head</nom>
+	<inclure>honeypot_pipeline.php</inclure>
+  </pipeline>
+  <options>
+	honeypot_options.php
+  </options>
+  <necessite id='cfg' version='[1.0.3;]' />
+</plugin>
