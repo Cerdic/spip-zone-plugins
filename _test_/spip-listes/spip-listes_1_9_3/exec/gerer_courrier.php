@@ -410,7 +410,7 @@ function exec_gerer_courrier(){
 			// boite courrier au format texte seul
 			. debut_cadre_couleur('', true)
 			. _T('spiplistes:version_texte')." <a href='#' title='$alt_message_texte'><small>(?)</small></a><br />"
-			. "<textarea name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
+			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
 			. $message_texte
 			. "</textarea>\n"
 			. fin_cadre_couleur(true)
