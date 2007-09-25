@@ -37,22 +37,6 @@ function TypoEnluminee_pre_propre($texte) {
 	static $remplacer_raccourcis=NULL;
 	
 	if ($chercher_raccourcis===NULL) {
-		// remplace les fausses listes a puce par de vraies
-		// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
-		// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
-		if (!function_exists('lire_config')) {
-			global $barre_typo_pas_de_fausses_puces;
-		} else {
-			if (lire_config('bte/puces','Non') == 'Oui') {
-				$barre_typo_pas_de_fausses_puces = true;
-			} else {
-				$barre_typo_pas_de_fausses_puces = false;
-			}
-		}
-	
-		if ($barre_typo_pas_de_fausses_puces === true) {
-			$texte =  preg_replace('/^-\s+/m','-* ',$texte);
-		}
 	
 		// tous les elements block doivent etre introduits ici
 		// pour etre pris en charge par paragrapher
@@ -95,8 +79,8 @@ function TypoEnluminee_pre_propre($texte) {
 		global $BarreTypoEnrichie;
 		if (is_array($BarreTypoEnrichie))
 			foreach($BarreTypoEnrichie as $item) {
-				$chercher_raccourcis[]=$item['chercher'];					
-				$remplacer_raccourcis[]=$item['remplacer'];					
+				$chercher_raccourcis[]=$item['chercher'];
+				$remplacer_raccourcis[]=$item['remplacer'];	
 			}
 	
 			/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]/S";
@@ -170,8 +154,8 @@ function TypoEnluminee_post_propre($texte) {
 		global $BarreTypoEnrichieBlocs;
 		if (is_array($BarreTypoEnrichieBlocs))
 			foreach($BarreTypoEnrichieBlocs as $item) {
-				$cherche1[]=$item['chercher'];					
-				$remplace1[]=$item['remplacer'];					
+				$cherche1[]=$item['chercher'];
+				$remplace1[]=$item['remplacer'];
 			}
 	
 		$cherche1[] = /* 15 */ 	",\[/(.*)/\],Ums";
@@ -204,6 +188,24 @@ function TypoEnluminee_post_propre($texte) {
 function TypoEnluminee_pre_typo($texte) {
 	if ($GLOBALS['barre_typo_pas_de_fork_typo'] === true)
 		return $texte;
+	
+	// remplace les fausses listes a puce par de vraies
+	// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
+	// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
+	if (!function_exists('lire_config')) {
+		global $barre_typo_pas_de_fausses_puces;
+	} else {
+		if (lire_config('bte/puces','Non') == 'Oui') {
+			$barre_typo_pas_de_fausses_puces = true;
+		} else {
+			$barre_typo_pas_de_fausses_puces = false;
+		}
+	}
+
+	if ($barre_typo_pas_de_fausses_puces === true) {
+		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
+	}
+	
 	$chercher_raccourcis = array(
 		/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
 		/* 10 */	"/(?<![}\d])[}](?![}\d])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
