@@ -190,6 +190,8 @@ et de recevoir les lettres d\'informations.',
 'mis_a_jour' => 'Mis &agrave; jour',
 'Modifier_un_courrier_:' => "Modifier un courrier :",
 'Modifier_ce_courrier' => "Modifier ce courrier",
+'Mode_simulation' => "Mode simulation",
+'Simuler_les_envois' => "Simuler les envois de courriers",
 
 //n
 'nb_abonnes_plur' => ' abonn&eacute;s',

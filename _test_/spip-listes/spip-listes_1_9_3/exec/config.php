@@ -52,12 +52,17 @@ function exec_config () {
 		, 'spiplistes_charset_envoi'
 		);
 	
+	$keys_opts_param_valider = array(
+		'opt_simuler_envoi' // demande à la méleuse de simuler l'envoi du courrier
+		);
+			
 	// initialise les variables postées par le formulaire
 	foreach(array_merge(
 		array(
 			'abonnement_valider', 'abonnement_config', 'param_reinitialise', 'param_valider'
 		)
-		, $keys_param_valider) as $key) {
+		, $keys_param_valider
+		, $keys_opts_param_valider) as $key) {
 		$$key = _request($key);
 	}
 
@@ -72,14 +77,33 @@ function exec_config () {
 		foreach($keys_param_valider as $key) {
 			if(($key != 'email_defaut') || email_valide($email_defaut)) {
 				ecrire_meta($key, $$key);
-				$doit_ecrire_metas = true;
 			}
 		}
+		$metas_p = 'spiplistes_preferences';
+		foreach($keys_opts_param_valider as $key) {
+			if(!empty($$key)) {
+				if(!isset($GLOBALS['meta'][$metas_p])) {
+					$GLOBALS['meta'][$metas_p] = array();
+				}
+				__plugin_ecrire_s_meta ($key, $$key, $metas_p);
+			} 
+			else {
+				__plugin_ecrire_s_meta ($key, null, $metas_p);
+			}
+		}
+		$doit_ecrire_metas = true;
 	}
-	
+		
 	if($doit_ecrire_metas) {
 		ecrire_metas();
 	}
+
+	// Paramétrages des envois
+	$adresse_defaut = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
+	$mailer_smtp = (isset($GLOBALS['meta']['mailer_smtp']) && ($GLOBALS['meta']['mailer_smtp']=='oui')) ? "oui" : "non";
+	$smtp_port = (isset($GLOBALS['meta']['smtp_port']) && (!empty($GLOBALS['meta']['smtp_port']))) ? $GLOBALS['meta']['smtp_port'] : "25";
+	$smtp_server = (isset($GLOBALS['meta']['smtp_server']) && (!empty($GLOBALS['meta']['smtp_server']))) ? $GLOBALS['meta']['smtp_server'] : "localhost";
+	$smtp_sender = (email_valide($GLOBALS['meta']['smtp_sender'])) ? $GLOBALS['meta']['smtp_sender'] : $GLOBALS['meta']['email_webmaster'];
 
 //////////
 // PAGE CONTENU
@@ -104,20 +128,20 @@ function exec_config () {
 
 	$page_result = "";
 
+	//////////////////////////////////////////////////////
+	// Boite Mode d'inscription des visiteurs
 	$checked1 = $checked2 = "";
 	($GLOBALS['meta']['abonnement_config'] == 'simple') ? $checked1 = "checked='checked'"  : $checked2 = "checked='checked'" ;
-
-	// Mode d'inscription des visiteurs
 	$page_result .= ""
 		. debut_cadre_trait_couleur("redacteurs-24.gif", true, "", _T('spiplistes:mode_inscription'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
 		. "<p class='verdana2'>\n"
 		. "<input type='radio' name='abonnement_config' value='simple' $checked1 id='statut_simple' />\n"
-		. "<label for='statut_simple'>"._T('spiplistes:abonnement_simple')."</label>"
+		. "<label for='statut_simple'>"._T('spiplistes:abonnement_simple')."</label>\n"
 		. "</p>\n"
-		. "<p class='verdana2'>"
+		. "<p class='verdana2'>\n"
 		. "<input type='radio' name='abonnement_config' value='membre' $checked2 id='statut_membre' />\n"
-		. "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces')."</label>"
+		. "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces')."</label>\n"
 		. "</p>\n"
 		. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
 		. "<label for='abonnement_valider' style='display:none;'>"._T('bouton_valider')."</label>\n"
@@ -127,13 +151,8 @@ function exec_config () {
 		. fin_cadre_trait_couleur(true)
 		;
 
-	// Paramétrages des envois
-	$adresse_defaut = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
-	$mailer_smtp = (isset($GLOBALS['meta']['mailer_smtp']) && ($GLOBALS['meta']['mailer_smtp']=='oui')) ? "oui" : "non";
-	$smtp_port = (isset($GLOBALS['meta']['smtp_port']) && (!empty($GLOBALS['meta']['smtp_port']))) ? $GLOBALS['meta']['smtp_port'] : "25";
-	$smtp_server = (isset($GLOBALS['meta']['smtp_server']) && (!empty($GLOBALS['meta']['smtp_server']))) ? $GLOBALS['meta']['smtp_server'] : "localhost";
-	$smtp_sender = (email_valide($GLOBALS['meta']['smtp_sender'])) ? $GLOBALS['meta']['smtp_sender'] : $GLOBALS['meta']['email_webmaster'];
-
+	//////////////////////////////////////////////////////
+	// Boite paramètrage envoi du courrier
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true, "", _T('spiplistes:email_envoi'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
@@ -165,15 +184,15 @@ function exec_config () {
 		. "<li>"._T('spiplistes:spip_ident')." : "
 		. bouton_radio("smtp_identification", "oui", _T('item_oui'), $smtp_identification == "oui", "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
 		. "&nbsp;"
-		. bouton_radio("smtp_identification", "non", _T('item_non'), $smtp_identification == "non", "changeVisible(this.checked, 'smtp-auth', 'none', 'block');")."</li>"
+		. bouton_radio("smtp_identification", "non", _T('item_non'), $smtp_identification == "non", "changeVisible(this.checked, 'smtp-auth', 'none', 'block');")."</li>\n"
 		. "<div id='smtp-auth' style='display:".(($smtp_identification == "oui") ? "block;" : "none;" )."'>\n"
 		. "<ul class='verdana2' style='list-style: none;'>\n"
 		. "<li>"
-			. "<label for='smtp_login'>"._T('item_login')." : </label>"
+			. "<label for='smtp_login'>"._T('item_login')." : </label>\n"
 			. "<input type='text' id='smtp_login' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' class='fondl' />\n"
 		. "</li>\n"
 		. "<li>"
-			. "<label for='smtp_pass'>"._T('entree_passe_ldap')." : </label>"
+			. "<label for='smtp_pass'>"._T('entree_passe_ldap')." : </label>\n"
 			. "<input type='password' id='smtp_pass' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' class='fondl' />\n"
 		. "</li>\n"
 		. "</ul>\n"
@@ -194,6 +213,16 @@ function exec_config () {
 			__array_values_in_keys(explode(";", _SPIPLISTES_CHARSETS_ALLOWED)), $GLOBALS['meta']['spiplistes_charset_envoi']
 				, 'spiplistes_charset_envoi', 'spiplistes_charset_envoi'
 				, 1, '', 'fondo', _T('spiplistes:Jeu_de_caracteres')." : ", '', 'verdana2')
+		. fin_cadre_relief(true)
+		;
+	
+	// option simulation des envois
+	$checked = (__plugin_lire_s_meta('opt_simuler_envoi', 'spiplistes_preferences')) ? "checked='checked'" : "";
+	spip_log("## $selected");
+	$page_result .= ""
+		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_simulation'))
+   	. "<input class='fondo' type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' $checked />\n"
+   	. "<label class='verdana2' for='opt_simuler_envoi'>"._T('spiplistes:Simuler_les_envois')."</label>\n"
 		. fin_cadre_relief(true)
 		//
 		// Boutons de reinit/reset/validation
@@ -220,11 +249,11 @@ function exec_config () {
 			. "<a name='logs'></a>"
 			. debut_cadre_relief("", true, "", "Logs")
 			. "<div style='width:98%;overflow:auto'>"
-			. "<pre>".spiplistes_console_lit_log("spiplistes")."</pre>"
-			. "</div>"
+			. "<pre>".spiplistes_console_lit_log("spiplistes")."</pre>\n"
+			. "</div>\n"
 			. fin_cadre_relief(true)
 		:
-			"<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE,'logs=oui#logs')."'>Logs</a>"
+			"<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE,'logs=oui#logs')."'>Logs</a>\n"
 		;
 	
 	// Fin de la page

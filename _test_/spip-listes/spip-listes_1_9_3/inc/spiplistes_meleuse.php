@@ -37,6 +37,8 @@ function spiplistes_meleuse() {
 	include_spip('spiplistes_boutons');
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 	
+	$opt_simuler_envoi = __plugin_lire_s_meta('opt_simuler_envoi', 'spiplistes_preferences');
+
 	// Trouver un message a envoyer 
 	$result_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1");
 	$message_pile = spip_num_rows($result_pile);
@@ -228,8 +230,9 @@ function spiplistes_meleuse() {
 							$email_a_envoyer[$format_abo]->Body = $body;
 							$email_a_envoyer[$format_abo]->SetAddress($email,$nom_auteur);
 	
+							$envoi_ok =  $opt_simuler_envoi ? true : $email_a_envoyer[$format_abo]->send();
 							
-							if ($email_a_envoyer[$format_abo]->send()) {
+							if ($envoi_ok) {
 								spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur="._q($id_auteur)." AND id_courrier="._q($id_courrier));				
 								$str_temp .= "  [OK]";
 								$nb_emails_envoyes++;

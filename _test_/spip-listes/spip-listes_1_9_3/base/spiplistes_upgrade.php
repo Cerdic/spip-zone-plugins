@@ -18,6 +18,9 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 	//version actuelle du plugin à changer en cas de maj
 	$GLOBALS['spiplistes_version'] = 1.98;
@@ -298,6 +301,7 @@
 		spip_query("DROP TABLE spip_auteurs_mod_listes");
 		effacer_meta('spiplistes_version');
 		effacer_meta('spiplistes_charset_envoi');
+		effacer_meta('spiplistes_preferences');
 		effacer_meta('spiplistes_lots');
 		effacer_meta('abonnement_config');
 		ecrire_metas();
