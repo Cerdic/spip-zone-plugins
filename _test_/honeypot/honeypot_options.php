@@ -20,16 +20,19 @@
 /*Cette balise genere une phrase avec des mots aleatoires*/
 function balise_HONEYPOT_RANDOM($p) {
 	if (!$arg = interprete_argument_balise(1,$p) ) {
-		$arg = 5;
+		$arg = "'5'";
 	}
-	if($arg <= 0)
-	  $arg =5;
-	$p->code='honeypot_random('.intval($arg).')';
+	if (!$sep = interprete_argument_balise(2,$p) ) {
+		$sep = ' ';
+	}
+	$p->code='honeypot_random('.$arg.','.$sep.')';
   return $p;
   }
 
 /*generation d'une phrase aleatoire a partir de la table index de SPIP.*/
-function honeypot_random($arg=5) {
+function honeypot_random($arg=5,$sep=' ') {
+  $arg = intval($arg);
+  if($arg <= 0) $arg = 5;
   srand(time());
   $limit =  (rand()%$arg)+1;
   $rez = spip_abstract_select(array('dico'), #SELECT
@@ -41,7 +44,7 @@ function honeypot_random($arg=5) {
 					   );
   $texte = '';
   while($row = spip_abstract_fetch($rez)) {
-	$texte.= $row['dico'].' ';
+	$texte.= $row['dico'].$sep;
   }
   if(count($texte) <= 0) $texte = 'paper copy and fax';
   return $texte;
