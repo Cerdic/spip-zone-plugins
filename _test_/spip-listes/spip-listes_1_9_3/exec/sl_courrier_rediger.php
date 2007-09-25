@@ -37,32 +37,27 @@ function exec_sl_courrier_rediger(){
 		, $connect_id_auteur
 		;
 	
-	$type = _request('type');
-	$id_courrier = _request('id_message');
-
-	/* Crée le courrier par simple appel de la page. Pas bon.
-		Doit être validé par exec/gerer_courrier
-	*/
-	if (_request('new') == "oui") { 
-		$statut = 'redac'; 
-		$type = 'nl'; 
-		$result = spip_query("INSERT INTO spip_courriers (titre, date, statut, type, id_auteur) VALUES ("._q(_T('texte_nouveau_message')).", NOW(),"._q($statut).","._q($type).","._q($connect_id_auteur).")"); 
-		$id_courrier = spip_insert_id(); 
-	}
+	$id_courrier = intval(_request('id_courrier'));
 
 	// COURRIER REDIGER: Redaction d'un courrier ------------------------------------------
 
-	$result = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_courrier));
-	if ($row = spip_fetch_array($result)) {
-		$id_courrier = $row['id_courrier'];
-		$date_heure = $row["date"];
-		$titre = entites_html($row["titre"]);
-		$texte = entites_html($row["texte"]);
-		$type = $row["type"];
-		$statut = $row["statut"];
-		$expediteur = $row["id_auteur"];
-		if (!($expediteur == $connect_id_auteur OR ($type == 'nl' AND $connect_statut == '0minirezo'))) 
-			die();
+	if($id_courrier > 0) {
+		// edition courrier existant
+		$result = spip_query("SELECT * FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1");
+		if ($row = spip_fetch_array($result)) {
+			$id_courrier = $row['id_courrier'];
+			$date_heure = $row["date"];
+			$titre = entites_html($row["titre"]);
+			$texte = entites_html($row["texte"]);
+			$type = $row["type"];
+			$statut = $row["statut"];
+			$id_auteur = $row["id_auteur"];
+		}
+	}
+	else {
+		// nouveau courrier
+		$statut = _SPIPLISTES_STATUT_REDAC; 
+		$type = 'nl'; 
 	}
 
 //////////
@@ -71,8 +66,8 @@ function exec_sl_courrier_rediger(){
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
-	// la création d'un courrier est réservée aux admins 
-	if($connect_statut != "0minirezo") {
+	// la création d'un courrier est réservée aux admins ou à l'auteur du courrier
+	if(($connect_statut != "0minirezo") || ($id_auteur && ($id_auteur != $connect_id_auteur))) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
