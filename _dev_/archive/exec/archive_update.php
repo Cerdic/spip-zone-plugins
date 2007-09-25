@@ -51,6 +51,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui' && function_exists('marquer_indexer')) {
 			marquer_indexer($spip_table, $id_objet);
 		}
+		
+		//vide le cache
+		//issu de ecrire/action/purger.php ('case cache')
+		include_spip('inc/invalideur');
+		supprime_invalideurs();
+		spip_unlink(_CACHE_RUBRIQUES);
+		purger_repertoire(_DIR_CACHE);
 	}
 
 	//relance la page appelante
