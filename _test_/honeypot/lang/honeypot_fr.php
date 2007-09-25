@@ -31,9 +31,9 @@ Visitez une fois ce fichier sur votre serveur avec votre navigateur. Suivez les 
 </p>
 <hr/>
 <p>
-Une fois le pot de miel activ&eacute;, vous devez placer des liens \"pi&egrave;ges\" pour les crawlers venant sur votre site. Ce plugin va simplifier cette tache en fournissant une balise <code>#HONEYPOT</code> &agrave; placer dans vos squelettes et qui g&eacute;n&eacute;rera les liens comme il faut. 
+Une fois le pot de miel activ&eacute;, vous devez placer des liens \"pi&egrave;ges\" pour les crawlers venant sur votre site. Ce plugin va simplifier cette tache en fournissant une balise <code>#HONEYPOT</code> &agrave; placer dans vos squelettes et qui g&eacute;n&egrave;rera les liens comme il faut. 
 </p><p>
-Il vous faut juste indiquer au plugin quel est le nom de votre fichier pot de miel avec le champ de configuration suivant. Ensuite, placer la balise <code>#HONEYPOT</code> dans vos squelettes. Si vous utilisez le squelette par d&eacute;faut de SPIP, le plugin fournis d&eacute;j&agrave; un remplacement du squelette du pied de page et vous n'avez rien &agrave; faire.</p>",
+Si vous utilisez le squelette par d&eacute;faut de SPIP, le plugin fournis d&eacute;j&agrave; un remplacement du squelette du pied de page (dist/inc-pied.html) et vous n'avez rien &agrave; faire. Sinon, vous devez placer la balise #HONEYPOT quelque part dans vos squelettes personalis&eacute;s de fa&ccedil;on &agrave; ce qu'elle apparaisse sur le plus de page possible (par exemple, un squelette de pied de page, de menu, etc...).</p>",
 'cfg_hpfile' => 'Nom du fichier pot de miel (sans le <em>.php</em>) : '
 
 );
