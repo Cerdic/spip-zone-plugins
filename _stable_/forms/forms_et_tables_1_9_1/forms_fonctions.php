@@ -78,7 +78,7 @@
 	}
 	
 	function forms_format_monnaie($valeur,$decimales,$unite=true){
-		return sprintf("%.{$decimales}f",$valeur).($unite?"~&euro;":"");
+		return sprintf("%.{$decimales}f",$valeur).($unite?"~EUR":"");
 	}
 	
 	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form, $etoile=false){
