@@ -23,7 +23,7 @@ function balise_HONEYPOT_RANDOM($p) {
 		$arg = "'5'";
 	}
 	if (!$sep = interprete_argument_balise(2,$p) ) {
-		$sep = ' ';
+		$sep = "' '";
 	}
 	$p->code='honeypot_random('.$arg.','.$sep.')';
   return $p;
