@@ -46,6 +46,7 @@ function spiplistes_boite_autocron(){
 	if ($row = spip_fetch_array($res))
 		$n = $row['n'];
 
+	// CP-20070925: if à revoir. pas normal de forcer.
 	if(true or $n > 0 ){
 		echo "<br />";
 		echo debut_boite_info();

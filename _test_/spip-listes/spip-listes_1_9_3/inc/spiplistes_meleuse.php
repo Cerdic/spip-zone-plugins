@@ -27,8 +27,6 @@ function spiplistes_meleuse() {
 
 	spiplistes_log("CRON: meleuse() <<"); // pour DEBUG
 
-//return(true); // pour debug
-
 	include_spip('inc/meta');
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
@@ -58,13 +56,14 @@ function spiplistes_meleuse() {
 		$id_liste = $row["id_liste"];
 		$email_test = $row["email_test"];
 		
-		$nb_emails_envoyes = 0;
 		$total_abonnes = $row["total_abonnes"];
 		
-		$nb_emails_echec = 0;
-		$nb_emails_non_envoyes = 0;
-		$nb_emails['texte'] = 0;
-		$nb_emails['html'] = 0;
+		$nb_emails_envoyes =
+			$nb_emails_echec = 
+			$nb_emails_non_envoyes = 
+			$nb_emails['texte'] = 
+			$nb_emails['html'] = 0
+			;
 	
 		$debut_envoi = $row["date_debut_envoi"];
 	

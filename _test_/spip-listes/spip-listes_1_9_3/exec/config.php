@@ -218,7 +218,6 @@ function exec_config () {
 	
 	// option simulation des envois
 	$checked = (__plugin_lire_s_meta('opt_simuler_envoi', 'spiplistes_preferences')) ? "checked='checked'" : "";
-	spip_log("## $selected");
 	$page_result .= ""
 		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_simulation'))
    	. "<input class='fondo' type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' $checked />\n"
