@@ -221,6 +221,8 @@
 				}
 				$erreur = pipeline('forms_valide_conformite_champ',array(
 					'args'=>array(
+						'id_form'=>$id_form,
+						'id_donnee'=>$id_donnee,
 						'champ'=>$champ,
 						'type'=>$type,
 						'infos'=>$infos,
