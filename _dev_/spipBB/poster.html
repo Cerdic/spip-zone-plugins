@@ -80,7 +80,7 @@ Attention que cette boucle vaut son pesant de cachouettes ;o))
 			<h2><:spipbb:reponse:></h2>
 			<h3><a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet?>#forum#ID_FORUM">#TITRE</a> <:par_auteur:> <B_auteurp><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique=#ID_RUBRIQUE})]">#NOM</a></BOUCLE_auteurp></B_auteurp><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurp></h3>
 			<p>[<:spipbb:le:> (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</p>
-			[(#TEXTE|justifier)]
+			[(#TEXTE|spipbb_chatons|justifier)]
 		</div>
 		<hr/>
 		<!-- si le forum a un parent, on ne peut pas faire une annonce -->
@@ -97,7 +97,7 @@ Attention que cette boucle vaut son pesant de cachouettes ;o))
         		</tr>
         		</thead>
         		<tr> 
-          			<td class="postsmiley">&nbsp;</td>
+          			<td class="postsmiley"><INCLURE{fond=inc_tableau_smileys}{id_article}></td>
           			<td class="postformulaire"> 
           			<div class="tailformulaire">
           			<!-- Ce div est là pour pallier l'illogisme qui fait que selon l'avancement dans le post on se trouve un coup avec .spip_encadrer autour de form et un coup l'inverse -->

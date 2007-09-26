@@ -2,6 +2,37 @@
 
 /*
  *   +----------------------------------+
+ *    Nom du Filtre :    Chatons
+ *   +----------------------------------+
+ *    Date : lundi 25 Septembre 2007
+ *    Auteur :  Gurdil
+ *   +-------------------------------------+
+ *    Fonctions de ce filtre :
+ *    Cette fonction permet d'afficher des smileys 
+ *    ou chatons.
+ *   +-------------------------------------+ 
+*/
+
+function spipbb_chatons($texte) {
+    $path = dirname(find_in_path('../../plugins/spipBB/chatons/test'));
+	$liste = $chatons = array();
+	$dossier=opendir($path);
+	while ($image = readdir($dossier)) {
+		if (preg_match(',^([a-z][a-z0-9_-]*)\.(png|gif|jpg),', $image, $reg)) { 
+			$chatons[0][] = ':'.$reg[1];
+			$liste[] = '<strong>:'.$reg[1].'</strong>';	
+			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
+			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"plugins/spipbb/chatons/$reg[1].$reg[2]\" $size/>";
+		}
+	}
+
+	if (strpos($texte, ':')===false) return $texte;
+	$chatons_rempl = $chatons;
+	return str_replace($chatons_rempl[0], $chatons_rempl[1], $texte);
+}
+
+/*
+ *   +----------------------------------+
  *    Nom du Filtre :    quelstatut
  *   +----------------------------------+
  *    Date : 1 fevrier 2007
@@ -237,4 +268,38 @@ function spipbb_barre_forum_citer($texte, $lan)
 	  "<textarea name='texte' rows='12' class='forml' cols='40' id='formulaire_$num_formulaire' onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);' ondbclick='storeCaret(this);'>$texte</textarea>";
 } // barre_forum_citer
 */
+
+/*
+ *   +----------------------------------+
+ *    Nom du Filtre :    citation                                            
+ *   +----------------------------------+
+ *    BASE : ... Date : vendredi 11 novembre 2006 - Auteur :  BoOz
+ *    
+ *    MODIF .. SCOTY .. 29/10/06 .. -> spip 1.9.1/2 
+ *   +-------------------------------------+
+ *    Fonctions de ce filtre :
+ *     affiche le texte à citer    
+ *   +-------------------------------------+ 
+ *  
+ * Pour toute suggestion, remarque, proposition d'ajout
+ * reportez-vous au forum de l'article :
+ * http://www.spip-contrib.net/Pagination,663
+*/
+
+function barre_forum_citer($texte, $lan, $rows, $cols, $lang='') {
+	if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
+		if(_request('citer')=='oui'){
+			$id_citation = _request('id_forum') ;
+			$query = "SELECT auteur, texte FROM spip_forum WHERE id_forum=$id_citation";
+		    $result = spip_query($query);
+		    $row = spip_fetch_array($result);
+		    $aut_cite=$row['auteur'];
+		    $text_cite=$row['texte'];
+		    
+			//ajout de la citation
+			$texte="{{ $aut_cite $lan }}\n<quote>\n$text_cite</quote>\n";
+		}
+	}
+	return barre_textarea($texte, $rows, $cols, $lang);
+}
 ?>
