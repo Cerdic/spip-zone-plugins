@@ -18,6 +18,9 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 include_spip('inc/spiplistes_api');
 
@@ -38,16 +41,27 @@ function spip_listes_onglets($rubrique, $onglet){
 function spiplistes_boite_autocron(){
 	@define('_SPIP_LISTE_SEND_THREADS',1);
 	include_spip('genie/spiplistes_cron');
-	if (cron_spiplistes_cron(0)) return; // rien a faire
+	if (cron_spiplistes_cron($time)) return; // rien a faire
 	
+	// initialise les options
+	foreach(array('opt_simuler_envoi') as $key) {
+		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+	}
+
+/*
 	$res = spip_query("SELECT COUNT(a.id_auteur) AS n 
 		FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='"._SPIPLISTES_STATUT_ENCOURS."'");
 	$n = 0;
+*/
+	$res = spip_query("SELECT SUM(c.total_abonnes) AS n 
+		FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='"._SPIPLISTES_STATUT_ENCOURS."'");
 	if ($row = spip_fetch_array($res))
-		$n = $row['n'];
+		$n = intval($row['n']);
+spiplistes_log("AUTOCRON nb courries prets envoi $n") ; // debug
 
 	// CP-20070925: if à revoir. pas normal de forcer.
-	if(true or $n > 0 ){
+	//if(true or $n > 0 ){
+	if($n > 0) {
 		echo "<br />";
 		echo debut_boite_info();
 		//echo "<script type='text/javascript' src='".find_in_path('javascript/autocron.js')."'></script>";
@@ -55,15 +69,21 @@ function spiplistes_boite_autocron(){
 		echo "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>";
 		echo "<div style='padding : 10px;text-align:center'><img src='"._DIR_PLUGIN_SPIPLISTES."img_pack/48_import.gif'></div>";
 		
-		$total = $n;
-		$res2 = spip_query("SELECT SUM(total_abonnes) AS total FROM spip_courriers WHERE statut='encour'");
-		$row2 = spip_fetch_array($res2);
-		$total = $row2['total'];
 		echo "<div id='meleuse'>";
-		echo "<p align='center' id='envoi_statut'>"._T('spiplistes:envoi_en_cours')." "
-		  . "<strong id='envois_restants'>$n</strong>/<span id='envois_total'>$total</span> (<span id='envois_restant_pourcent'>"
-		  . round($n/$total*100)."</span>%)</p>";
-		 
+		if($total = spiplistes_nb_courriers_en_cours()) {
+			echo ""
+				. "<p align='center' id='envoi_statut'>"._T('spiplistes:envoi_en_cours')." "
+				. "<strong id='envois_restants'>$n</strong>/<span id='envois_total'>$total</span> (<span id='envois_restant_pourcent'>"
+				. round($n/$total*100)."</span>%)</p>"
+				;
+		}
+		
+		echo(
+			($opt_simuler_envoi) 
+			? "<div style='color:white;background-color:red;text-align:center;line-height:1.4em;'>"._T('spiplistes:Mode_simulation')."</div>\n" 
+			: ""
+		);
+		
 		$href = generer_action_auteur('spiplistes_envoi_lot','envoyer');
 		
 		for ($i=0;$i<_SPIP_LISTE_SEND_THREADS;$i++)

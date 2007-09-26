@@ -96,6 +96,19 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false) {
 	return ($result);
 }
 
+function spiplistes_nb_courriers_en_cours() {
+	$n =
+		(($row = spip_fetch_array(spip_query(
+			"SELECT SUM(total_abonnes) AS n 
+				FROM spip_courriers 
+				WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."'"
+				)))
+			&& $row['n'])
+		? intval($row['n'])
+		: 0
+		;
+	return($n);
+}
 
 //taille d'une chaine sans saut de lignes ni espaces
 function spip_listes_strlen($out){

@@ -18,9 +18,17 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+	// Prend dans le panier des courriers (spip_courriers) les encours
+	// - formate le titre, texte pour l'envoi
+	// la queue (spip_auteurs_courriers) a été remplie par cron_spiplistes_cron()
+	// se sert de la queue pour ventiler les envois par lots
+	
 function spiplistes_meleuse() {
 
 	include_spip('inc/spiplistes_api');
@@ -41,6 +49,8 @@ function spiplistes_meleuse() {
 	}
 
 	// Trouver un message a envoyer 
+	// à revoir. Ne devrait se baser que sur la queue des envois préparée par cron_spiplistes_cron()
+	// et donc lister les courriers à envoyer à partir de cette queue.
 	$sql_select = "titre,texte,message_texte,type,id_courrier,id_liste,email_test,total_abonnes,date_debut_envoi";
 	if($row = spip_fetch_array(
 		spip_query("SELECT $sql_select FROM spip_courriers WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."' ORDER BY date ASC LIMIT 1")
@@ -167,6 +177,7 @@ function spiplistes_meleuse() {
 		$email_a_envoyer['html']->SMTPKeepAlive = true;
 	
 		spiplistes_log(_T('spiplistes:email_reponse').$from."\n"._T('spiplistes:contacts')." : ".$total_abonnes) ;
+		
 		if($total_abonnes){
 	
 			spiplistes_log(_T('spiplistes:message'). $titre);
@@ -192,7 +203,7 @@ function spiplistes_meleuse() {
 			$liste_abonnes = spip_num_rows($result_inscrits);
 			if($liste_abonnes > 0){
 	
-				// ne sert qu'a laffichage
+				// ne sert qu'a l affichage
 				$debut = $nb_emails_envoyes + $nb_emails_non_envoyes ; // ??
 				spiplistes_log("envois effectues : ".$debut.", pas : ".$limit.", nb:".$liste_abonnes) ;	
 	#	spip_timer();
@@ -202,8 +213,8 @@ function spiplistes_meleuse() {
 					$id_auteur = $row2['id_auteur'] ;
 	
 					//indiquer eventuellement le debut de l'envoi
-					if($date_debut_envoi=="0000-00-00 00:00:00" AND $test !='oui') {
-						spip_query("UPDATE spip_courriers SET date_debut_envoi=NOW() WHERE id_courrier="._q($id_courrier)); 
+					if(!$date_debut_envoi) {
+						spip_query("UPDATE spip_courriers SET date_debut_envoi=NOW() WHERE id_courrier="._q($id_courrier)." LIMIT 1"); 
 						$date_debut_envoi = true; // ne pas faire 20 update au premier lot :)
 					}
 			
@@ -217,8 +228,6 @@ function spiplistes_meleuse() {
 					$str_temp .= $nom_auteur."(".$format_abo.") - $email";
 					$total=$total+1;
 					unset ($cookie);
-	
-					
 	
 					if ( ($format_abo == 'texte') 
 					  OR ($format_abo == 'html') ) {

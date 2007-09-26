@@ -37,28 +37,6 @@ function spiplistes_afficher_pile_messages(){
 			spiplistes_install('install');
 	}
 	
-	// initialise les variables postées par formulaire
-	foreach(array(
-		'btn_confirmer_envoi', 'id_courrier', 'id_liste' // (formulaire gerer) confirmer envoi
-		) as $key) {
-		$$key = _request($key);
-	}
-	foreach(array('id_courrier','id_liste') as $key) {
-		$$key = intval($$key);
-	}
-
-	if($btn_confirmer_envoi 
-		&& ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur))
-		) {
-		spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ENCOURS."' WHERE id_courrier=$id_courrier LIMIT 1");
-		if($id_liste > 0) {
-			spiplistes_supprime_liste_envois($id_courrier);
-			// passe le courrier à la méleuse
-			spiplistes_remplir_liste_envois($id_courrier,$id_liste);
-			spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
-		}
-	}
-
 	$list = spip_query ("SELECT * FROM spip_listes WHERE message_auto='oui' ");
 	$message_pile = spip_num_rows($list);
 	if ($message_pile == 0) {
@@ -140,12 +118,33 @@ function exec_spip_listes() {
 	include_spip ('inc/mots');
 	include_spip ('inc/documents');
 	
-	
 	global $connect_statut
 		, $connect_toutes_rubriques
 		, $connect_id_auteur
 		, $supp_dest
 		;
+
+	// initialise les variables postées par formulaire
+	foreach(array(
+		'btn_confirmer_envoi', 'id_courrier', 'id_liste' // (formulaire gerer) confirmer envoi
+		) as $key) {
+		$$key = _request($key);
+	}
+	foreach(array('id_courrier','id_liste') as $key) {
+		$$key = intval($$key);
+	}
+
+	if($btn_confirmer_envoi 
+		&& ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur))
+		) {
+		spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ENCOURS."' WHERE id_courrier=$id_courrier LIMIT 1");
+		if($id_liste > 0) {
+			spiplistes_supprime_liste_envois($id_courrier);
+			// passe le courrier à la méleuse
+			spiplistes_remplir_liste_envois($id_courrier,$id_liste);
+			spiplistes_log("SEND ID_COURRIER #$id_courrier ON ID_LISTE #$id_liste BY ID_AUTEUR #$connect_id_auteur");
+		}
+	}
 
 	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
 	if ($detruire_message = intval(_request('detruire_message'))) {

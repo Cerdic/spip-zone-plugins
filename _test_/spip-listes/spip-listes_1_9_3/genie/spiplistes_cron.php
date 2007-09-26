@@ -19,52 +19,52 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.                   */
 /******************************************************************************************/
+// $LastChangedRevision: 15426 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2007-09-22 18:27:40 +0200 (sam., 22 sept. 2007) $
 
-function cron_spiplistes_cron($t){
+	// Appelé en tache de fond (CRON)
+	
+	// - Verifie toutes les listes auto==oui publiques et privées
+	// - créé le courrier pour la méleuse dans spip_courriers
+	// - determine les dates prochain envoi si periode > 0
+	// - si periode < 0, repasse la liste en dormeuse
 
-	$nomsite = $GLOBALS['meta']['nom_site'];
-	
-	// ---------------------------------------------------------------------------------------------
-	// Taches de fond
-	
-	//
-	// Envoi du mail quoi de neuf
-	//
-	
+function cron_spiplistes_cron ($last_time) {
+
 	include_spip('inc/spiplistes_api');
 
 	spiplistes_log("CRON: cron_spiplistes_cron() <<"); // pour DEBUG
 		
-	$time = time();
+	$current_time = time();
 
-	// Verifier toutes les listes et determiner les dates d'envoi
-	
-	$list_bg = spip_query ("SELECT * FROM spip_listes 
+	// peut-etre optimisé en demandant directement les listes à la bonne date
+	$listes_privees_et_publiques = spip_query ("SELECT * FROM spip_listes 
 		WHERE statut = '"._SPIPLISTES_PUBLIC_LIST."' OR statut = '"._SPIPLISTES_PRIVATE_LIST."'");
 	
-	while($row = spip_fetch_array($list_bg)) {
+	while($row = spip_fetch_array($listes_privees_et_publiques)) {
 	
 		$id_liste = $row['id_liste'] ;
-		$titre_bg = $row['titre'] ;
+		$titre = $row['titre'] ;
 		$titre_message = $row['titre_message'] ;
 		$last_maj_bg = strtotime($row["maj"]);
-		$auto_bg =  $row["message_auto"];
-		$periode_bg = intval($row["periode"]);
+		$message_auto =  $row["message_auto"];
+		$periode = intval($row["periode"]);
 	
+		$id_auteur =spiplistes_mod_listes_get_id_auteur($id_liste);
 		
-		$temps = $time - $last_maj_bg ;
-		$top = 3600 * 24 * $periode_bg ;
+		$temps = $current_time - $last_maj_bg ;
+		$top = 3600 * 24 * $periode ;
 		
-		if ( ($auto_bg == 'oui') 
-			// AND ($periode_bg > 0)  // envoyer maintenant doit passer !
-			AND ( $temps > $top) ) {
+		if(($message_auto == 'oui') && ($temps > $top)) {
+		
 			spiplistes_log("CRON: la liste $id_liste demande un envoi"); // pour DEBUG
 			//squelette du patron
 			$patron = $row["patron"] ;
 			$lang = $row["lang"];
-			spiplistes_log("CRON: --> $lang"); // pour DEBUG
+			spiplistes_log("CRON: lang == $lang"); // pour DEBUG
 			//Maj de la date d'envoi
-			spip_query("UPDATE spip_listes SET maj=NOW() WHERE id_liste="._q($id_liste)); 
+			spip_query("UPDATE spip_listes SET maj=NOW() WHERE id_liste="._q($id_liste)." LIMIT 1"); 
 	
 		
 			// preparation mail
@@ -76,53 +76,48 @@ function cron_spiplistes_cron($t){
 			$texte_patron_bg = recuperer_fond('patrons/'.$patron, $contexte_patron);
 		 	//$texte_patron_bg = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
 			
-			$titre_patron_bg = ($titre_message =="") ? $titre_bg." de ".$nomsite : $titre_message;
-			$titre_bg = $titre_patron_bg;
+			$titre_patron_bg = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
+			$titre = $titre_patron_bg;
 			
-			spiplistes_log("CRON: Message choppe titre == $titre_bg"); // pour DEBUG
+			spiplistes_log("CRON: Message choppe titre == $titre"); // pour DEBUG
 	
-			// ne pas envoyer des textes de moins de 10 caracteres
 			include_spip('inc/spiplistes_api');
 			$taille = strlen(spip_listes_strlen(version_texte($texte_patron_bg))) ;
 			spiplistes_log("CRON: taille == $taille"); // pour DEBUG
 	
+			// ne pas envoyer des textes de moins de 10 caracteres
 			if ( $taille > 10 ) {
 
 				include_spip('inc/filtres');
 				$texte_patron_bg = liens_absolus($texte_patron_bg);
-				// si un mail a pu etre genere, on l'ajoute a la pile d'envoi
-				$type_bg = 'auto';
-				$statut_bg = 'encour';
-				
+
 				// creer le courrier
 				$result = spip_query("INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur, id_liste) 
-					VALUES ("._q($titre_bg).","._q($texte_patron_bg).", NOW(),"._q($statut_bg).","._q($type_bg).", '1',$id_liste)");
+					VALUES ("._q($titre).","._q($texte_patron_bg).", NOW(),'"._SPIPLISTES_STATUT_ENCOURS."','"._SPIPLISTES_TYPE_LISTEAUTO."'
+					, $id_auteur, $id_liste)");
 				
 				$id_message_bg = spip_insert_id();
 				
-				//generer la pile d'envoi
-				spiplistes_remplir_liste_envois($id_message_bg,$id_liste);
+				//generer la pile d'envoi (spip_auteurs_courriers)
+				spiplistes_remplir_liste_envois($id_message_bg, $id_liste);
 				spiplistes_log("CRON: remplir courrier $id_message_bg, liste : $id_liste"); // pour DEBUG
 			} 
 			else {
-			
+				// contenu du courrier vide
 				spiplistes_log("CRON: envoi mail nouveautes : pas de nouveautes, taille == $taille"); // pour DEBUG
 				
 				// pas de période ? c'est un envoyer_maintenant. Le repasse en auto non
-				if(!$periode_bg) {
+				if(!$periode) {
 					spip_query("UPDATE spip_listes SET message_auto='non' WHERE id_liste=$id_liste LIMIT 1"); 
 				}
 				
-				$type_bg = 'auto';
-				$statut_bg = 'publie';
-
 				$result = spip_query("INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur, id_liste) 
 				 VALUES ("._q(_L("Pas d'envoi"))
 				 .","._q(_L("aucune nouveaut&eacute;, le mail automatique n'a pas &eacute;t&eacute; envoy&eacute;"))
-				 .", NOW(),"._q($statut_bg).","._q($type_bg).", '1' ,$id_liste )");
+				 .", NOW(), '"._SPIPLISTES_STATUT_PUBLIE."', '"._SPIPLISTES_TYPE_LISTEAUTO."' , $id_auteur, $id_liste)");
 				$id_message_bg = spip_insert_id();
 		
-			} // y'a du neuf
+			} 
 		} // c'est l'heure
 	
 	}// fin du test nb listes
@@ -137,13 +132,12 @@ function cron_spiplistes_cron($t){
 		include_spip('inc/spiplistes_meleuse');
 		spiplistes_meleuse();
 		
-		$result_pile = spip_query("SELECT COUNT(id_courrier) AS n FROM spip_courriers WHERE statut='encour'");
-		if (($row = spip_fetch_array($result_pile)) && $row['n']){
-			spip_log("spiplistes cron : il reste des courriers a envoyer !");
-			return (0 - $t);
+		if(spiplistes_nb_courriers_en_cours() > 0){
+			spiplistes_log("CRON: il reste des courriers a envoyer !"); // pour DEBUG
+			return (0 - $last_time);
 		}
 	}
-	return 1; 
+	return ($last_time); 
 }
 
 /******************************************************************************************/

@@ -84,6 +84,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 	</div>",
 
 //D
+'_de_' => " de ",
 'dans_jours' => 'dans',
 'definir_squel' => 'Choisir le mod&egrave;le de courrier &agrave; pr&eacute;visualiser',
 'definir_squel_choix' => 'A la r&eacute;daction d\'un nouveau courrier, SPIP-Listes vous permet de charger un patron. En appuyant sur un bouton, vous chargez dans le corps du courrier le contenu d\'un des squelettes du repertoire <b>/patrons</b> (situ&eacute; &agrave; la racine de votre site Spip). <p><b>Vous pouvez &eacute;diter et modifier ces squelettes selon vos go&ucirc;ts.</b></p> <ul><li>Ces squelettes peuvent contenir du code HTML classique</li>
