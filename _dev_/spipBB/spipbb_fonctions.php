@@ -4,8 +4,11 @@
  *   +----------------------------------+
  *    Nom du Filtre :    Chatons
  *   +----------------------------------+
- *    Date : lundi 25 Septembre 2007
+ *    Date : lundi 24 Septembre 2007
  *    Auteur :  Gurdil
+ *   +-------------------------------------+
+ *    Correction : chryjs le 26/9/7
+ *     utilisation de find_in_path avec plugin
  *   +-------------------------------------+
  *    Fonctions de ce filtre :
  *    Cette fonction permet d'afficher des smileys 
@@ -14,13 +17,13 @@
 */
 
 function spipbb_chatons($texte) {
-    $path = dirname(find_in_path('../../plugins/spipBB/chatons/test'));
+    $path = dirname(find_in_path('chatons/test'));
 	$liste = $chatons = array();
 	$dossier=opendir($path);
 	while ($image = readdir($dossier)) {
 		if (preg_match(',^([a-z][a-z0-9_-]*)\.(png|gif|jpg),', $image, $reg)) { 
 			$chatons[0][] = ':'.$reg[1];
-			$liste[] = '<strong>:'.$reg[1].'</strong>';	
+			$liste[] = '<strong>:'.$reg[1].'</strong>';
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
 			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"plugins/spipBB/chatons/$reg[1].$reg[2]\" $size/>";
 		}
