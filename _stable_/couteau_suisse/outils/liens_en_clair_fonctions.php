@@ -22,7 +22,7 @@ function liens_en_clair_callback($matches) {
 function liens_en_clair($texte) {
 	if (strpos($texte, 'href')===false) return $texte;
 	// recherche de tous les liens : <a href="??">
-	$texte = preg_replace_callback(',<a[^>]+href="([^"]+)"[^>]*>(.*)</a>,Ums', 'liens_en_clair_callback', $texte);
+	$texte = preg_replace_callback(',<a[^>]+href="([^"]+)"[^>]*>(.*)</a>,Umsi', 'liens_en_clair_callback', $texte);
 	return $texte;
 }
 
