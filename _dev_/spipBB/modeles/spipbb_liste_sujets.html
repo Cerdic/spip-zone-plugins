@@ -9,10 +9,10 @@
 <table summary="topics" class="spipforum">
 	<thead>
 	<tr> 
-		<th colspan="2" class="tsujet"><:phpbb:sujets:></th>
-		<th class="tmsg"><:phpbb:messages:></th>
-		<th class="tsujaut"><:phpbb:sujet_auteur:></th>
-		<th class="tdermsg"><:phpbb:messages_derniers:></th>
+		<th colspan="2" class="tsujet"><:spipbb:sujets:></th>
+		<th class="tmsg"><:spipbb:messages:></th>
+		<th class="tsujaut"><:spipbb:sujet_auteur:></th>
+		<th class="tdermsg"><:spipbb:messages_derniers:></th>
 	</tr>
 	</thead>
 
@@ -34,17 +34,17 @@
 			<//B_reponses>
 		</td>
 		<td class="autpost"><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM</a></BOUCLE_auteurp><a href="mailto:[(#EMAIL|antispam)]">
-		[(#NOM|sinon{<:phpbb:anonyme:>})]</a><//B_auteurp></td>
+		[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurp></td>
 		<td class="dermsg">
 		<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>
 			[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]<br />
 			<:par_auteur:><B_auteurpr><BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
 			<a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM</a>
 			</BOUCLE_auteurpr></B_auteurpr>
-			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:phpbb:anonyme:>})]</a>
+			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
 			<//B_auteurpr> 
-			<a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_forum?>#forum#ID_FORUM"class="adermsg" title="<:phpbb:messages_voir_dernier:>">
-			&nbsp;<span>(<:phpbb:messages_voir_dernier:>)</span></a>
+			<a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_forum?>#forum#ID_FORUM"class="adermsg" title="<:spipbb:messages_voir_dernier:>">
+			&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span></a>
 		</BOUCLE_dernier_message> - <//B_dernier_message>
 		</td>
 	</tr>
@@ -64,14 +64,14 @@
 <table class="spipforum">
 	<thead>
 	<tr> 
-		<th colspan="2" class="tsujet"><:phpbb:sujets:></th>
-		<th class="tmsg"><:phpbb:messages:></th>
-		<th class="tsujaut"><:phpbb:sujet_auteur:></th>
-		<th class="tdermsg"><:phpbb:messages_derniers:></th>
+		<th colspan="2" class="tsujet"><:spipbb:sujets:></th>
+		<th class="tmsg"><:spipbb:messages:></th>
+		<th class="tsujaut"><:spipbb:sujet_auteur:></th>
+		<th class="tdermsg"><:spipbb:messages_derniers:></th>
 	</tr>
 	</thead>
 	<tr> 
-		<td class="nopost" colspan="5"><:phpbb:sujets_aucun:></td>
+		<td class="nopost" colspan="5"><:spipbb:sujets_aucun:></td>
 	</tr>
 </table><!--Fin table spipforum-->
 <!-- END switch_no_topics -->

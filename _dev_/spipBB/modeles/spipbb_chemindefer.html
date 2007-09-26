@@ -1,31 +1,22 @@
 <B_cdf>
-<p class="nav">
+<div class="nav">
 <BOUCLE_cdf(ARTICLES){id_article}>
-<BOUCLE_secteur(RUBRIQUES){id_secteur}{id_parent=0}>
-<a href="#URL_RUBRIQUE" class="nav">
-[(#TITRE)]
-</a>
-</BOUCLE_secteur>
--&gt;
-<a class="nav" href="#URL_ARTICLE">
-[(#TITRE)]
-</a>
+	<BOUCLE_secteur(RUBRIQUES){id_secteur}{id_parent=0}>
+	<a href="#URL_RUBRIQUE" class="nav">[(#TITRE)]</a>
+	</BOUCLE_secteur>
+	-&gt; <a class="nav" href="#URL_ARTICLE">[(#TITRE)]</a>
 </BOUCLE_cdf>
-</p>
-</B_cdf><B_cdf2>
-<p class="nav">
+</div>
+</B_cdf>
+<B_cdf2>
+<div class="nav">
 <BOUCLE_cdf2(RUBRIQUES){id_rubrique}>
-<BOUCLE_secteur2(RUBRIQUES){id_secteur}{id_parent=0}>
-<a href="#URL_RUBRIQUE" class="nav">
-[(#TITRE)]
-</a>
-</BOUCLE_secteur2>
-<BOUCLE_secteur3(RUBRIQUES){id_rubrique}{id_parent!=0}>
--&gt;
-<a class="nav" href="#URL_RUBRIQUE">
-[(#TITRE)]
-</a>
-</BOUCLE_secteur3>
+	<BOUCLE_secteur2(RUBRIQUES){id_secteur}{id_parent=0}>
+	<a href="#URL_RUBRIQUE" class="nav">[(#TITRE)]</a>
+	</BOUCLE_secteur2>
+	<BOUCLE_secteur3(RUBRIQUES){id_rubrique}{id_parent!=0}>
+	-&gt; <a class="nav" href="#URL_RUBRIQUE">[(#TITRE)]</a>
+	</BOUCLE_secteur3>
 </BOUCLE_cdf2>
-</p>
+</div>
 </B_cdf2>

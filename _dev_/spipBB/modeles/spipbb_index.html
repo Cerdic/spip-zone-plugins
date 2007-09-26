@@ -6,9 +6,9 @@
 		<thead>
 		<tr>
 			<th colspan="2" class="tforum"><:titre_forum:></th>
-			<th class="tsujets"><:phpbb:sujets:></th>
-			<th class="tmsg"><:phpbb:messages:></th>
-			<th class="tdermsg"><:phpbb:messages_derniers:></th>
+			<th class="tsujets"><:spipbb:sujets:></th>
+			<th class="tmsg"><:spipbb:messages:></th>
+			<th class="tdermsg"><:spipbb:messages_derniers:></th>
 		</tr>
 		</thead>
 	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
@@ -21,7 +21,7 @@
 		<tr class="forumligne">
 			<td class="etatfor[ (#ACCEPTER_FORUM|=={non}|?{fermefor,ouvfor})]">
 				<span>
-				[(#ACCEPTER_FORUM|=={non}|?{<:phpbb:forum_ferme:>,<:titre_forum:>})]
+				[(#ACCEPTER_FORUM|=={non}|?{<:spipbb:forum_ferme:>,<:titre_forum:>})]
 				</span>
 			</td>
 			<td class="titre">

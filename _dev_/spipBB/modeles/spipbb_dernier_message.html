@@ -7,12 +7,12 @@
 <BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 <a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{id_rubrique}})]">#NOM</a>
 </BOUCLE_auteurp>
-<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:phpbb:anonyme:>})]</a>
+<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
 <//B_auteurp> 
 <a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_THREAD})]#forum#ID_FORUM"
 	class="adermsg"
-	title="<:phpbb:messages_voir_dernier:>">
-	&nbsp;<span>(<:phpbb:messages_voir_dernier:>)</span>
+	title="<:spipbb:messages_voir_dernier:>">
+	&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span>
 </a>
 </BOUCLE_dernier_message>
 -
