@@ -44,7 +44,11 @@
 				<h3><:spipbb:contact:> #NOM</h3>
 				<ul class="detmem">
 				<li id="ecrire"><:spipbb:luiecrire:> :#FORMULAIRE_ECRIRE_AUTEUR</li>
-				<?php if ($GLOBALS['auteur_session'] AND $statmem!="Membre" AND $statut!="6forum"){ echo '<li class="pm"><:spipbb:mp:> :&nbsp;<a href="ecrire/?exec=message_edit&new=oui&amp;type=normal&amp;dest=#ID_AUTEUR" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span> </a></li>'; } ?><!-- l'espace derriere le span est important : ca permet au style spipbblike de fonctionner sous IE -->
+				<?php 
+		if ($GLOBALS['auteur_session'] AND $statmem!="<:phpbb:membre:>" AND $statut!="6forum"){
+		
+		echo '<li class="pm"><:phpbb:mp:> :&nbsp;<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:phpbb:envmp:>"><span><:phpbb:envmp:></span> </a></li>'; } 
+        ?><!-- l'espace derriere le span est important : ca permet au style spipbblike de fonctionner sous IE -->
 				</ul>
 			</div>
 			

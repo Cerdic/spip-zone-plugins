@@ -46,7 +46,11 @@
 				      <td class="numaut">#ID_AUTEUR</td>
 				      <td class="nomaut"><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>"><span>#NOM</span></a></td>
 				      <td class="statutaut"><span><?php echo $statmem ?></span></td>
-				      <td class="pm"><?php if ($GLOBALS['auteur_session'] AND $statmem!="<:spipbb:membre:>" AND $statut!="6forum"){ echo '<a href="ecrire/?exec=message_edit&new=oui&type=normaldest=#ID_AUTEUR" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span></a>'; } ?></td>
+				      <td class="pm">
+                                        <?php 
+                        echo '<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:phpbb:envmp:>"><span><:phpbb:envmp:></span></a>';
+                    ?>
+                                        </td>
 				      <td class="email"><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>#ecrire" title="<:spipbb:email:>"><span><:spipbb:email:></span></a></td>
 				      <td class="dateaut">-</td>
 				      <td class="msgaut">[(#ID_AUTEUR|spipbb_nb_messages)]</td>
