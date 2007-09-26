@@ -65,9 +65,9 @@
 					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]' id='input-#ID_FORM-#CHAMP' value=""
 						class='[(#GET{class})] [(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
-					[(#EXTRA_INFO|=={oui}|?{' '})
+					[(#EXTRA_INFO|strlen|?{' '})
 					<span class='nettoyeur'> </span></div><div class='spip_form_champ #CHAMP'>
-					<span class='spip_form_label'><:forms:confirmer_password:>
+					<span class='spip_form_label'>[(#EXTRA_INFO|typo)]
 						[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''})obligatoire_oublie]'>
 						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>] :
 					</span>

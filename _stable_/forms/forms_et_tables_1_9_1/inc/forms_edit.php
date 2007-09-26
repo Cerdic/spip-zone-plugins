@@ -284,9 +284,8 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<br />\n";
 	}
 	if ($type == 'password') {
-		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
-		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_confirmer_pass' value='oui' id='confirmer_pass_$champ'$checked> ";
-		$out .= "<label for='confirmer_pass_$champ'>"._T("forms:confirmer_champ_password")."</label>";
+		$out .= "<label for='confirmer_pass_$champ'>"._T("forms:confirmer_champ_password")."</label> : ";
+		$out .= "<input type='text' name='champ_confirmer_pass' value='$extra_info' id='confirmer_pass_$champ' class='fondo verdana2'>\n";
 		$out .= "<br />\n";
 	}
 

@@ -202,7 +202,7 @@
 								$erreur[$champ] = _T("forms:donnee_inattendue");
 						break;
 					case 'password':
-						if ($infos['extra_info']=='oui'){
+						if (strlen($infos['extra_info'])){
 							if ($GLOBALS['spip_version_code']<1.92)
 								$val_confirm = _request("{$champ}_confirm");
 							else
