@@ -180,8 +180,9 @@ div#communication .forml { width: 95%; }
 /* Taille et position de la zone de login */
 div.login { width: 98%; margin: auto; margin-top: 1em; }
 div.login .spip_encadrer { width: 450px; margin: auto; border: none; }
-div.login p { margin: 0; padding: 0; padding-top: 3px; padding-left: 0.5em; text-align: center; border-bottom: 1px solid; color: #FFFFFF; }
+div.login p { margin: 0; padding: 0; padding-top: 3px; padding-left: 0.5em; padding-bottom:5px; text-align: center; border-bottom: 1px solid; color: #FFFFFF; }
 div.login .forml { width: 150px; }
+div.login p a {color: #FFFFFF; text-decoration:none;}
 
 /*Taille et position de la zone de pagination */
 /* et des sections pour le numéro de page et la liste des pages */
