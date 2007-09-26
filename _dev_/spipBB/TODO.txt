@@ -7,5 +7,6 @@ Todo-list pour spipbb
 -* améliorer l'"administration" des forums (interface privee)
 -* nettoyer les squelettes
 -* utilisation des idees utilisees dans Gafospip
+-* compter les visites sur les messages
 -* j'en oublie sûrement
 
