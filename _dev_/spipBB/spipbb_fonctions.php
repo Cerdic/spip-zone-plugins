@@ -22,7 +22,7 @@ function spipbb_chatons($texte) {
 			$chatons[0][] = ':'.$reg[1];
 			$liste[] = '<strong>:'.$reg[1].'</strong>';	
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
-			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"plugins/spipbb/chatons/$reg[1].$reg[2]\" $size/>";
+			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"plugins/spipBB/chatons/$reg[1].$reg[2]\" $size/>";
 		}
 	}
 
