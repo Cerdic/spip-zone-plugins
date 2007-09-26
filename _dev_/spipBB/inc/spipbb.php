@@ -22,7 +22,6 @@ function spipbb_init_metas($id_rubrique=0) {
 
 	// les mots cles specifiques
 	$row = spip_fetch_array(spip_query("SELECT id_groupe FROM spip_groupes_mots WHERE titre='spipbb' LIMIT 1"));
-print_r($row);
 	$spipbb_meta['spipbb_id_groupe_mot']=intval($row['id_groupe']);
 	if (empty($spipbb_meta['spipbb_id_groupe_mot'])) $spipbb_meta = spipbb_creer_groupe_mot($spipbb_meta);
 	else {

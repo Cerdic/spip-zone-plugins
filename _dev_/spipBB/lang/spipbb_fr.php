@@ -70,6 +70,13 @@ par <a href=http://spipbb.spip-zone.info/>la spipbb-team</a>',
 'credits_bis3' => 'Adapt&eacute; pour, et, Inspir&eacute; par, le traitement des Forums de :<br>',
 'credits_bis4' => '(James, BoOz, Nikau et Miss Mopi).',
 'creer_forum' => 'Cr&eacute;er Nouveau Forum',
+'config_spipbb' => 'Configuration de base de spipBB pour permettre le fonctionnement des forums avec ce plugin.',
+'config_choix_rubrique' => 'Choisir la rubrique contenant les forums spipBB',
+'choix_rubrique_selection' => 'S&eacute;lectionner un secteur qui sera la base de vos forums. Dedans, chaque sous-rubrique sera un groupe de forums, chaque article publi&eacute; ouvrira un forum.',
+'config_choix_mots' => 'Choisir le groupe de mot-cl&eacute;s',
+'choix_mots_selection' => 'Le groupe de mot doit contenir deux mot-clefs. Normalement, le plugin les a cr&eacute;&eacute; au moment de son installation. SpipBB utilise en g&eacute;n&eacute;ral les mots {ferme} et {annonce}, mais vous pouvez en choisir d\'autres.',
+'config_choix_squelettes' => 'Choisir les squelettes utilis&eacute;s',
+'choix_squelettes' => 'Vous pouvez en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
 
 //D
 'dans_forum' => 'dans le forum',
@@ -223,6 +230,8 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'sujet_verifie' => 'V&eacute;rifier ce sujet',
 'sujet_visites' => 'Visites',
 'sur' => ' sur ',
+'squelette_filforum' => 'Base de squelette pour les fils de discussions :',
+'squelette_groupeforum' => 'Base de squelette pour les groupes de discussions :',
 
 
 //T
@@ -234,6 +243,7 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'toutes_categories' => 'Toutes les cat&eacute;gories',
 'tout_apropos' => 'Tout &agrave; propos de',
 'total_messages' => 'Total messages',
+'titre_spipbb' => 'SpipBB',
 
 //V
 'visites_jour' => 'Visites aujourd\'hui',

@@ -3,7 +3,7 @@
 		SpipBB
 	</nom>
 	<auteur>
-		Credits : james james@tezo.net touti touti@free.fr
+		Credits : james (james@tezo.net) touti (touti@free.fr)
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version>
@@ -20,4 +20,11 @@ _ si vous avez cfg : [Configuration->.?exec=cfg&amp;cfg=spipbb] &agrave; visiter
 	<options>spipbb_options.php</options>
 	<install>base/spipbb_init.php</install>
 	<prefix>spipbb</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="cfg" version="[1.0.0;]" />
+	<chemin dir='' type='prive' />
+
 </plugin>

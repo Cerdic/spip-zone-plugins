@@ -1,8 +1,6 @@
 <!-- descriptif=<:spipbb:config_spipbb:>
 -->
 
-<!-- titre=<:spipbb:titre_spipbb:> -->
-
 #CACHE{0}
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
@@ -14,7 +12,7 @@
 <p>
 <label>
 <select name="spipbb_id_rubrique">
-<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}>
+<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}{racine}>
 <option value="#ID_RUBRIQUE"[ selected="(#ENV{spipbb_id_rubrique}|=={#ID_RUBRIQUE}|?{selected})"]>#ID_RUBRIQUE . #TITRE</option>
 </BOUCLE_rubriques>
 </select>
@@ -34,7 +32,7 @@
 <BOUCLE_mots(GROUPES_MOTS){par id_groupe}>
 <option value="#ID_GROUPE"[ selected="(#ENV{spipbb_id_groupe_mot}|=={#ID_GROUPE}|?{selected})"]>#ID_GROUPE . #TITRE</option>
 </BOUCLE_mots>
-</select>#ENV{spipbb_id_groupe_mot}
+</select>
 <select name="spipbb_id_mot_ferme">
 <BOUCLE_mot_ferme(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
 <option value="#ID_MOT"[ selected="(#ENV{spipbb_id_mot_ferme}|=={#ID_MOT}|?{selected})"]>#ID_MOT . #TITRE</option>
@@ -60,8 +58,8 @@
 <p>
 <label>
 </select>
-	<:spipbb:squelette_groupeforum:><input type="text" name="spipbb_squelette_groupeforum" value="[(#ENV{spipbb_squelette_groupeforum})]" size='20' /><br />
-	<:spipbb:squelette_filforum:><input type="text" name="spipbb_squelette_filforum" value="[(#ENV{spipbb_squelette_filforum})]" size='20' /><br />
+	<:spipbb:squelette_groupeforum:><br /><input type="text" name="spipbb_squelette_groupeforum" value="[(#ENV{spipbb_squelette_groupeforum})]" size='20' /><br />
+	<:spipbb:squelette_filforum:><br /><input type="text" name="spipbb_squelette_filforum" value="[(#ENV{spipbb_squelette_filforum})]" size='20' /><br />
 	<i><:spipbb:choix_squelettes:></i>
 </label>
 </p>
