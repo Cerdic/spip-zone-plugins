@@ -122,7 +122,7 @@ function exec_sl_courrier_previsu(){
 		echo "<input type=\"hidden\" name=\"texte\" value=\"".htmlspecialchars($texte)."\">";
 		echo "<input type=\"hidden\" name=\"date\" value=\"".$date."\">";
 
-		echo "<div style='background-color:white;margin-top:5px;width:500px'>" ;
+		echo "<div style='background-color:white;margin-top:5px;width:600px;margin:auto'>" ;
 		
 		echo liens_absolus($texte).$message_erreur."";
 		

@@ -168,7 +168,7 @@ function exec_sl_courrier_rediger(){
 		. fin_cadre_formulaire(true)
 		// 
 		// le bloc pour aperçu
-		. "<div id='apercu'></div>"
+		. "<div id='apercu' style='clear:both;tex-align:center'></div>"
 		;
 	
 	echo($page_result);
