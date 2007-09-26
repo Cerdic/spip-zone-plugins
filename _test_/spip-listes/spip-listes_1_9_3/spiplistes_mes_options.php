@@ -218,6 +218,7 @@ $spiplistes_items = array(
 		, 'desc' => ""
 		)
 	);
-
+	
+include_spip('base/spip-listes');
 include_spip('inc/options_spip_listes');
 ?>

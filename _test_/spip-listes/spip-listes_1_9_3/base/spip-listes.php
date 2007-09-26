@@ -139,6 +139,6 @@
 	$tables_jointures['spip_auteurs'][]= 'auteurs_listes';
 	$tables_jointures['spip_auteurs'][]= 'listes';
 	$tables_jointures['spip_auteurs'][]= 'courriers';
+	$tables_jointures['spip_auteurs']['id_liste']= 'auteurs_listes';
 	
-
 ?>
