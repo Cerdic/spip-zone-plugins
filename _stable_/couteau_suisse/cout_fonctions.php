@@ -31,4 +31,14 @@ if ($GLOBALS['spip_version_code']<1.92) {
 cs_log(' -- appel mes_fonctions achevé par eval()... cs_fonctions = '.intval($GLOBALS['cs_fonctions']));
 	}
 */
+
+// Filtre creant un lien <a> sur un texte
+// Exemple d'utilisation : [(#EMAIL*|cs_lien{#NOM})]
+function cs_lien($lien, $texte='') {
+	$mem = $GLOBALS['toujours_paragrapher'];
+	$GLOBALS['toujours_paragrapher'] = false;
+	$lien = propre("[{$texte}->{$lien}]");
+	$GLOBALS['toujours_paragrapher'] = $mem;
+	return $lien;
+}
 ?>
