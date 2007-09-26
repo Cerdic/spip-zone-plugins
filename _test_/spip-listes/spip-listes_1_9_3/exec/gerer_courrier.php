@@ -316,9 +316,11 @@ function exec_gerer_courrier(){
 					. $str_destinataire . "<br />"
 					._T('spiplistes:confirme_envoi')
 					// formulaire de confirmation envoi
-					. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_courrier=$id_courrier")."' method='post'>"
+					. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,"id_courrier=$id_courrier")."' method='post'>"
 					. "<p style='text-align:center;'>"
-					. "<input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:envoyer')."' class='fondo' />"
+					. "<input type='hidden' name='id_liste' value='$id_liste' />"
+					. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
+					. "<input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' />"
 					. "</p>"
 					. "</form>"
 					;

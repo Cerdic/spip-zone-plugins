@@ -1,0 +1,57 @@
+#CACHE{86400}
+<BOUCLE_courrier_principal(COURRIERS) {id_courrier}>
+[(#REM)
+	// SPIP-Listes-V :: $Id: courrier.html,v 1.1 2007/09/05 20:50:38 cpaulus Exp $
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+</head>
+<body class="page_article">
+<div id="page">
+
+	<div id="conteneur">
+	
+		<div id="contenu">
+		<h1>#TITRE</h1>
+		#TEXTE
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+			[(#REM) Articles dans la meme rubrique ]
+			<B_articles_rubrique>
+			<div class="breves">
+				<h2 class="menu-titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+				<ul>
+					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_articles_rubrique>
+				</ul>
+			</div>
+			</B_articles_rubrique>
+
+			[(#REM) Menu de navigation mots-cles ]
+			#MODELE{article_mots}
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}>
+
+	<p style="text-align:center"><a href='#URL_SITE_SPIP'><:pass_retour_public:></a></p>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_courrier_principal>

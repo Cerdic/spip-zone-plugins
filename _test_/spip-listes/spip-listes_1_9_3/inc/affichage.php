@@ -144,8 +144,8 @@ function spiplistes_boite_raccourcis ($return = false) {
 		. icone_horizontale(
 			_T('spiplistes:Nouveau_courrier')
 			, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'new=oui&type=nl')
-			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_mail_send.gif"
-			,""
+			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_brouillon-24.png"
+			,"creer.gif"
 			,false
 			)
 		. "</li>\n"
@@ -154,7 +154,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 			_T('spiplistes:Nouvelle_liste_de_diffusion')
 			, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'new=oui')
 			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif"
-			,""
+			,"creer.gif"
 			,false
 			)
 		. "</li>\n"

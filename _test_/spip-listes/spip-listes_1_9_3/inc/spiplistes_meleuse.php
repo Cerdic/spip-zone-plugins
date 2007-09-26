@@ -35,7 +35,10 @@ function spiplistes_meleuse() {
 	include_spip('spiplistes_boutons');
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 	
-	$opt_simuler_envoi = __plugin_lire_s_meta('opt_simuler_envoi', 'spiplistes_preferences');
+	// initialise les options
+	foreach(array('opt_simuler_envoi','opt_lien_en_tete_courrier') as $key) {
+		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+	}
 
 	// Trouver un message a envoyer 
 	$result_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1");
@@ -108,7 +111,7 @@ function spiplistes_meleuse() {
 		$nomsite = $GLOBALS['meta']['nom_site'];
 		$urlsite = $GLOBALS['meta']['adresse_site'];
 			
-		// email emmeteur
+		// email emetteur
 		$email_webmaster = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
 		$from = email_valide($email_liste) ? $email_liste : $email_webmaster;
 	
@@ -119,6 +122,15 @@ function spiplistes_meleuse() {
 		if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
 			$objet = strtr($objet, $remplacements);
 			$texte = strtr($texte, $remplacements);
+		}
+		
+		if($opt_lien_en_tete_courrier) {
+			$texte = ""
+				. _T('spiplistes:Complement_lien_de_tete'
+					, array('liencourrier'=>generer_url_public('courrier', "id_courrier=$id_courrier"), 'nomsite'=>$nomsite)
+					)
+				. $texte
+				;
 		}
 		
 		// on prepare le debut de la version html

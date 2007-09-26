@@ -71,6 +71,17 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Courrier_numero_:' => "Courrier num&eacute;ro :",
 'Creer_un_courrier_:' => "Cr&eacute;er un courrier :",
 'Choix_non_defini' => 'Pas de choix d&eacute;fini.',
+'Complement_des_courriers' => "Compl&eacute;ment des courriers",
+'Complement_lien_en_tete' => "Lien sur le courrier", 
+'Complement_ajouter_lien_en_tete' => "Ajouter un lien en en-t&ecirc;te du courrier", 
+'Complement_lien_en_tete_desc' => "Cette option vous permet de rajouter en t&ecirc;te du courrier HTML envoy&eacute; le lien 
+   du courrier original pr&eacute;sent sur votre site.",
+'Complement_lien_de_tete' => "<div style='font-size=75%;padding:0 1ex;background-color:#ffc;text-align:center;'>
+	<div>Ce courrier est au format HTML.</div>
+	<div>Si vous rencontrez 
+   des difficult&eacute;s &agrave; le lire ici, <a href='@liencourrier@'>vous pouvez 
+   consulter l'original sur le site @nomsite@</a>.</div>
+	</div>",
 
 //D
 'dans_jours' => 'dans',
@@ -108,6 +119,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'erreur_install2' => '<p>V&eacute;rifier les &eacute;tapes d\'installation, notamment si vous avez bien renomm&eacute;<i>mes_options.txt</i> en <i>mes_options.php</i>.</p>',
 'exporter' => 'Exporter la liste d\'abonn&eacute;s',
 'Erreur_liste_vide' => "Erreur: cette liste n'a pas d'abonn&eacute;s.",
+'Envoi_des_courriers' => "Envoi des courriers",
+'Envoyer_ce_courrier' => "Envoyer ce courrier",
 
 //F
 'faq' => 'FAQ',

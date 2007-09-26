@@ -39,6 +39,10 @@ function exec_config () {
 		, $spip_lang_right
 		;
 	
+	$keys_complement_courrier = array(
+		'opt_lien_en_tete_courrier'
+		);
+
 	$keys_param_valider = array(
 		'email_defaut'
 		, 'smtp_server'
@@ -59,8 +63,11 @@ function exec_config () {
 	// initialise les variables postées par le formulaire
 	foreach(array_merge(
 		array(
-			'abonnement_valider', 'abonnement_config', 'param_reinitialise', 'param_valider'
+			'abonnement_valider', 'abonnement_config', 'param_reinitialise'
+			, 'btn_complement_courrier'
+			, 'btn_param_valider'
 		)
+		, $keys_complement_courrier
 		, $keys_param_valider
 		, $keys_opts_param_valider) as $key) {
 		$$key = _request($key);
@@ -73,7 +80,23 @@ function exec_config () {
 		$doit_ecrire_metas = true;
 	}
 
-	if($param_valider) {
+	if($btn_complement_courrier) {
+		$metas_p = 'spiplistes_preferences';
+		foreach($keys_complement_courrier as $key) {
+			if(!empty($$key)) {
+				if(!isset($GLOBALS['meta'][$metas_p])) {
+					$GLOBALS['meta'][$metas_p] = array();
+				}
+				__plugin_ecrire_s_meta ($key, $$key, $metas_p);
+			} 
+			else {
+				__plugin_ecrire_s_meta ($key, null, $metas_p);
+			}
+		}
+		$doit_ecrire_metas = true;
+	}
+	
+	if($btn_param_valider) {
 		foreach($keys_param_valider as $key) {
 			if(($key != 'email_defaut') || email_valide($email_defaut)) {
 				ecrire_meta($key, $$key);
@@ -152,9 +175,31 @@ function exec_config () {
 		;
 
 	//////////////////////////////////////////////////////
-	// Boite paramètrage envoi du courrier
+	// Boite parametrage complément du courrier
 	$page_result .= ""
-		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true, "", _T('spiplistes:email_envoi'))
+		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, "", _T('spiplistes:Complement_des_courriers'))
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+		//
+		// ajout du renvoi de tete
+		. debut_cadre_relief("", true, "", _T('spiplistes:Complement_lien_en_tete'))
+		. "<p class='verdana2'>"._T('spiplistes:Complement_lien_en_tete_desc')."</p>"
+   	. "<input type='checkbox' name='opt_lien_en_tete_courrier' value='oui' id='opt_lien_en_tete_courrier' "
+			. ((__plugin_lire_s_meta('opt_lien_en_tete_courrier', 'spiplistes_preferences')) ? "checked='checked'" : "")
+			. " />\n"
+   	. "<label class='verdana2' for='opt_lien_en_tete_courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete')."</label>\n"
+		. fin_cadre_relief(true)
+		. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
+		. "<label for='btn_complement_courrier' style='display:none;'>"._T('bouton_valider')."</label>\n"
+		. "<input type='submit' id='btn_complement_courrier' name='btn_complement_courrier' value='"._T('bouton_valider')."' class='fondo' />\n"
+		. "</p>\n"
+		. "</form>\n"
+		. fin_cadre_trait_couleur(true)
+		;
+
+	//////////////////////////////////////////////////////
+	// Boite parametrage envoi du courrier
+	$page_result .= ""
+		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true, "", _T('spiplistes:Envoi_des_courriers'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
 		//
 		// adresse email de retour (reply-to)
@@ -220,7 +265,7 @@ function exec_config () {
 	$checked = (__plugin_lire_s_meta('opt_simuler_envoi', 'spiplistes_preferences')) ? "checked='checked'" : "";
 	$page_result .= ""
 		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_simulation'))
-   	. "<input class='fondo' type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' $checked />\n"
+   	. "<input type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' $checked />\n"
    	. "<label class='verdana2' for='opt_simuler_envoi'>"._T('spiplistes:Simuler_les_envois')."</label>\n"
 		. fin_cadre_relief(true)
 		//
@@ -233,7 +278,7 @@ function exec_config () {
 		. "<label for='p_reset' style='display:none;'>"._T('spiplistes:Retablir')."</label>\n"
 		. "<input type='reset' name='param_reset' value='"._T('spiplistes:Retablir')."' class='fondo' id='p_reset' class='fondo' style='display:inline' />&nbsp;"
 		. "<label for='p_valid' style='display:none;'>"._T('bouton_valider')."</label>\n"
-		. "<input type='submit' name='param_valider' value='"._T('bouton_valider')."' class='fondo' style='display:inline' />\n"
+		. "<input type='submit' name='btn_param_valider' value='"._T('bouton_valider')."' class='fondo' style='display:inline' />\n"
 		. "</p>\n"
 		//
 		. "</form>\n"
