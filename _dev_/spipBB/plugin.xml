@@ -17,7 +17,7 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 _ si vous avez cfg : [Configuration->.?exec=cfg&amp;cfg=spipbb] &agrave; visiter pour s&eacute;lectionner la rubrique qui contient les forums, vous pourrez (ce n'est pas n&eacute;cessaire) y changer le nom des squelettes utilis&eacute;s
 	</description>
 	<fonctions>spipbb_fonctions.php</fonctions>
-	<!--options>spipbb_options.php</options-->
+	<options>spipbb_options.php</options>
 	<install>base/spipbb_init.php</install>
 	<prefix>spipbb</prefix>
 </plugin>
