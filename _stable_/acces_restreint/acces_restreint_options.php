@@ -7,6 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/acces_restreint');
 include_spip('inc/acces_restreint');
 
+$GLOBALS['spip_pipeline']['AccesRestreint_liste_zones_autorisees']='';
 
 // Pipeline : calculer les zones autorisees, sous la forme '1,2,3'
 // TODO : avec un petit cache pour eviter de solliciter la base de donnees
