@@ -32,7 +32,7 @@ function spiplistes_meleuse() {
 	include_spip('inc/filtres');
 	include_spip('inc/acces');
 	
-	include_spip('spiplistes_boutons');
+	include_spip('spiplistes_boutons'); // pourquoi ici ?
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 	
 	// initialise les options
@@ -41,26 +41,22 @@ function spiplistes_meleuse() {
 	}
 
 	// Trouver un message a envoyer 
-	$result_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1");
-	$message_pile = spip_num_rows($result_pile);
+	$sql_select = "titre,texte,message_texte,type,id_courrier,id_liste,email_test,total_abonnes,date_debut_envoi";
+	if($row = spip_fetch_array(
+		spip_query("SELECT $sql_select FROM spip_courriers WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."' ORDER BY date ASC LIMIT 1")
+		)) {
 	
-	if ($message_pile > 0){
-	
-		// Message
-		$row = spip_fetch_array($result_pile);
-		$titre = typo($row["titre"]);
-		$texte = $row["texte"];
+		foreach(explode(",", $sql_select) as $key) {
+			$$key = $row[$key];
+		}
+		foreach(array('id_courrier','id_liste','total_abonnes') as $key) {
+			$$key = intval($$key);
+		}
+		$titre = typo($titre);
 		$texte = stripslashes($texte);
-		$message_texte = $row["message_texte"];
+		$message_texte = stripslashes($message_texte);
 		
-		
-		$type = $row["type"];
-		$id_courrier = $row["id_courrier"];
-		$id_liste = $row["id_liste"];
-		$email_test = $row["email_test"];
-		
-		$total_abonnes = $row["total_abonnes"];
-		
+		$nb_emails = array();
 		$nb_emails_envoyes =
 			$nb_emails_echec = 
 			$nb_emails_non_envoyes = 
@@ -68,11 +64,12 @@ function spiplistes_meleuse() {
 			$nb_emails['html'] = 0
 			;
 	
-		$debut_envoi = $row["date_debut_envoi"];
-	
 		$pied_page = "" ;
-		$pied_page = pied_de_page_liste($id_liste) ;
-		$lang = spiplistes_langue_liste($id_liste);
+		
+		if($id_liste > 0) {
+			$pied_page = pied_de_page_liste($id_liste);
+			$lang = spiplistes_langue_liste($id_liste);
+		}
 		
 		if($lang != '') $GLOBALS['spip_lang'] = $lang ;
 		
@@ -205,9 +202,9 @@ function spiplistes_meleuse() {
 					$id_auteur = $row2['id_auteur'] ;
 	
 					//indiquer eventuellement le debut de l'envoi
-					if($debut_envoi=="0000-00-00 00:00:00" AND $test !='oui') {
+					if($date_debut_envoi=="0000-00-00 00:00:00" AND $test !='oui') {
 						spip_query("UPDATE spip_courriers SET date_debut_envoi=NOW() WHERE id_courrier="._q($id_courrier)); 
-						$debut_envoi = true; // ne pas faire 20 update au premier lot :)
+						$date_debut_envoi = true; // ne pas faire 20 update au premier lot :)
 					}
 			
 					$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
