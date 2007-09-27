@@ -589,7 +589,7 @@ add_outil( array(
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
 	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a+'@'+b; }"
 		// jQuery pour remplacer l'arobase image par l'arobase texte
-		. "\n\$(document).ready(function(){ \$('span.spancrypt').after('<span>&#6'+'4;</span>'); \$('span.spancrypt').remove(); });",
+		. "\n\$(document).ready(function(){ \$('span.spancrypt').after('<span>&#6'+'4;<\/span>'); \$('span.spancrypt').remove(); });",
 	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
 		. ') no-repeat scroll left center; color:#000099; padding-left:12px; text-decoration:none;"}',
 	'traitement:EMAIL' => 'mailcrypt',
