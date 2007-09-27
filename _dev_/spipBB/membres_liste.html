@@ -48,7 +48,8 @@
 				      <td class="statutaut"><span><?php echo $statmem ?></span></td>
 				      <td class="pm">
                                         <?php 
-                        echo '<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:phpbb:envmp:>"><span><:phpbb:envmp:></span></a>';
+                        $id_auteur= $auteur_session['id_auteur'];
+                         echo '<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:phpbb:envmp:>"><span><:phpbb:envmp:></span></a>';
                     ?>
                                         </td>
 				      <td class="email"><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>#ecrire" title="<:spipbb:email:>"><span><:spipbb:email:></span></a></td>
