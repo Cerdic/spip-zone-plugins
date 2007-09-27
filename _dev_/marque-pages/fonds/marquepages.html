@@ -48,6 +48,7 @@
 <B_marquepages>
 #ANCRE_PAGINATION
 [<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+<div class="resultats">
 <BOUCLE_marquepages(FORUMS){id_syndic!=0}{statut=prive}{id_forum?}{id_syndic?}{id_auteur?}{pagination #ENV{pagination,20}}{par #GET{tri}}{inverse #GET{sens}}>
 <BOUCLE_site(SITES){id_syndic}{id_rubrique==^(#ENV{id_rubrique,.*})$}>
 <div class="[(#SESSION{id_auteur}|=={#_marquepages:ID_AUTEUR}|?{#_marquepages:EDIT{marquepage}})]">
@@ -94,6 +95,7 @@
 </div>
 </BOUCLE_site>
 </BOUCLE_marquepages>
+</div>
 <script type="text/javascript">
 	$(document).ready(function() {
 		

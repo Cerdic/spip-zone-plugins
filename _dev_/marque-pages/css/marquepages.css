@@ -1,7 +1,8 @@
 /* Le bloc du marque-page */
 dl.xfolkentry{
+	clear:both;
 	margin:1em 0 0 0;
-	padding:0;
+	padding:0 0 1em 0;
 	border-bottom:1px solid #ddd;
 }
 
@@ -13,11 +14,7 @@ dl.xfolkentry dt{
 	font-weight:bold;
 }
 dl.xfolkentry dt a{
-	color:#CCCC66;
-	text-decoration:none;
-}
-dl.xfolkentry dt a:hover{
-	text-decoration:underline;
+	color:#cc6;
 }
 
 /* Les infos du marque-page */
@@ -29,24 +26,19 @@ dl.xfolkentry dd{
 dl.xfolkentry dd.meta{
 	color:#aaa;
 }
-dl.xfolkentry dd.meta a{
-	color:#604A7F;
-	text-decoration:none;
-}
-dl.xfolkentry dd.meta a:hover{
-	text-decoration:underline;
-}
 
 /* Les boutons d'actions */
-dl.xfolkentry dd.meta ul.actions{
+dl.xfolkentry ul.actions{
+	float:right;
+	width:auto;
 	list-style:none;
 	text-align:right;
 }
-dl.xfolkentry dd.meta ul.actions li{
+dl.xfolkentry ul.actions li{
 	margin:0 0 0 1em;
 	display:inline;
 }
-dl.xfolkentry dd.meta ul.actions li a{
+dl.xfolkentry ul.actions a{
 	color:#cc6;
 	padding:0.1em;
 	font-weight:bold;
@@ -54,6 +46,6 @@ dl.xfolkentry dd.meta ul.actions li a{
 }
 
 /* Demande de confirmation */
-span.confirmation{ color:red; }
-span.confirmation a{ color:#444; }
-span.confirmation a:hover{ color:green; }
+dl.xfolkentry ul.actions span.confirmation{ color:red; }
+dl.xfolkentry ul.actions span.confirmation a{ color:#444; }
+dl.xfolkentry ul.actions span.confirmation a:hover{ color:green; }
