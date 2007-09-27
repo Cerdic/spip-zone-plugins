@@ -15,7 +15,7 @@ _ #PUCE {{propres-qs}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot
 
 // un peu de code : ne pas toucher !
 $temp['couleurs'] = '<br /><span style="font-weight:normal; font-size:85%;"><span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert&nbsp;olive</span>, <span style="background-color:navy; color:white;">navy/bleu&nbsp;marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert&nbsp;clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu&nbsp;clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu&nbsp;azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu&nbsp;violet</span>, <span style="background-color:chocolate;">chocolate/brun&nbsp;clair</span>, <span style="background-color:cornsilk;">cornsilk/rose&nbsp;clair</span>, <span style="background-color:darkgreen;">darkgreen/vert&nbsp;fonce</span>, <span style="background-color:darkorange;">darkorange/orange&nbsp;fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve&nbsp;fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu&nbsp;ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune&nbsp;paille</span>, <span style="background-color:yellow;">yellow/jaune</span></span><span style="font-size:50%;"><br />&nbsp;</span>';
-$temp['jQuery'] = "<p>" . ($GLOBALS['spip_version_code']<1.92?$temp['jQuery1']:$temp['jQuery2']) . "</p>";
+$temp['jQuery'] = '<p>' . ($GLOBALS['spip_version_code']<1.92?$temp['jQuery1']:$temp['jQuery2']) . '</p>';
 //$temp['reset'] = $GLOBALS['spip_version_code']<1.92?'<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>':'';
 $temp['reset'] = '<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>';
 $temp['decoration'] = "{&lt;sc&gt;}Lorem ipsum dolor sit amet{&lt;/sc&gt;}
@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Le Couteau Suisse',
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Le&nbsp;Couteau&nbsp;Suisse'.</p>"
-		."<p>Documentation : [Le Couteau Suisse->http://www.spip-contrib.net/?article2166]</p>" . $temp['reset'],
+		."<p>Lien de documentation : [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>" . $temp['reset'],
 	'raccourcis' => "Raccourcis typographiques actifs du Couteau Suisse&nbsp;:",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
 	'nb_outil' => '@pipe@ : @nb@ outil',
@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vars_modifiees' => 'Merci, les donn&eacute;es ont &eacute;t&eacute; modifi&eacute;es',
 	'variable_vide' => '(Vide)',
 	'detail_outil' => 'En jeu :',
+	'contrib' => "Plus d'infos : [->http://www.spip-contrib.net/?article@id@]",
 	'liste_outils' => 'Liste des outils du Couteau Suisse',
 	'presente_outils' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
 	'par_defaut' => 'Par d&eacute;faut',
@@ -93,8 +94,7 @@ _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion 
 _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein.",
 
 	'orientation:nom' => 'Orientation des images',
-	'orientation:description' => "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.
-_ Plus d'infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
+	'orientation:description' => "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.",
 
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
 	'desactiver_flash:description' => 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.'
@@ -110,8 +110,7 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
 
 	'decoration:nom' => 'D&eacute;coration',
-	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Exemples d'utilisation :{$temp['decoration']}
-_ Plus d'infos : [->http://www.spip-contrib.net/?article2427]",
+	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Exemples d'utilisation :{$temp['decoration']}",
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
 
 // ---------------------------------------------------------------------------
@@ -128,9 +127,7 @@ Idem pour changer le fond, si l'option ci-dessous le permet :
 
 [[Permettre les fonds :->%couleurs_fonds%]]
 [[Set &agrave; utiliser :->%set_couleurs%]][[->%couleurs_perso%]]
-{$temp['note']}Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).
-
-Plus d'infos : [->http://www.spip-contrib.net/?article2427]",
+{$temp['note']}Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).",
 	'couleurs:aide' => 'Mise en couleurs : <strong>[couleur]texte[/couleur]</strong>@fond@ avec <strong>couleur</strong> = @liste@',
 	'couleurs_fonds' => ', <strong>[fond&nbsp;couleur]texte[/couleur]</strong>, <strong>[bg&nbsp;couleur]texte[/couleur]</strong>',
 	'toutes_couleurs' => "Les 36 couleurs des styles css :" . $temp['couleurs'],
@@ -140,18 +137,15 @@ Plus d'infos : [->http://www.spip-contrib.net/?article2427]",
 // ---------------------------------------------------------------------------
 	'typo_exposants:nom' => 'Exposants typographiques',
 	'typo_exposants:description' => "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
-_ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).
-_ Plus d'infos : [->http://www.spip-contrib.net/?article1564]",
+_ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).",
 
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
 	'filets_sep:description' =>  "Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de Spip.
-_ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.
-_ Plus d'infos : [->http://www.spip-contrib.net/?article1563]",
+_ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.",
 	'filets_sep:aide' => 'Filets de S&eacute;paration&nbsp;: <strong>__i__</strong> o&ugrave; <strong>i</strong> est un nombre.<br />Autres filets disponibles : @liste@',
 
 	'smileys:nom' => 'Smileys',
 	'smileys:description' => "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
-_ Plus d'infos : [->http://www.spip-contrib.net/?article1561]
 _ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 	'smileys:aide' => 'Smileys : @liste@',
 	'smileys_dispos' => 'Frimousses disponibles :',
@@ -250,8 +244,7 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 
 	'decoupe:nom' => 'D&eacute;coupe un texte en pages',
 	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.
-_ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.
-_ Plus d'infos : [->http://www.spip-contrib.net/?article2135]",
+_ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.",
 	'decoupe:aide' => 'S&eacute;parateur de pages&nbsp;: @sep@',
 	'page_suivante' => 'Page suivante',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
@@ -269,8 +262,7 @@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation 
 Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'article automatiquement. Mais vous avez la possibilt&eacute; de placer le sommaire ailleurs qu'en t&ecirc;te de votre article et met &agrave; votre disposition une balise #CS_SOMMAIRE que vous pouvez activer ici :
 [[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]
 Attention, si vous n'activez pas la balise #CS_SOMMAIRE, aucun sommaire automatique ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
-_ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.
-_ Plus d'infos : [->http://www.spip-contrib.net/?article2378]",
+_ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.",
 	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
 	'sommaire' => 'Sommaire',
 	'sommaire_page' => ',&nbsp;p@page@',
@@ -305,8 +297,7 @@ _ Merci de votre compr&eacute;hension.",
 // ---------------------------------------------------------------------------
 	'glossaire:nom' => 'Glossaire interne',
 	'glossaire:description' => "#PUCE Gestion d&rsquo;un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c&rsquo;est le groupe &quot;Glossaire&quot; qui sera utilis&eacute;.[[Groupe(s) utilis&eacute;(s) :->%glossaire_groupes%]]"
-		. "#PUCE Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[Nombre maximal de liens cr&#233;&#233;s :->%glossaire_limite% par mot-cl&#233;]]
-_ Plus d'infos : [->http://www.spip-contrib.net/?article2206]",
+		. "#PUCE Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[Nombre maximal de liens cr&#233;&#233;s :->%glossaire_limite% par mot-cl&#233;]]",
 
 // ---------------------------------------------------------------------------
 	'mailcrypt:nom' => 'MailCrypt',

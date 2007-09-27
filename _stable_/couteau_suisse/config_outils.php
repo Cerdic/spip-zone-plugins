@@ -4,7 +4,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.spip-contrib.net/?article1554   #
+#  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 
 //-----------------------------------------------------------------------------//
@@ -342,6 +342,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'decoupe',
+	'contrib'	=> 2135,
 	'code:options' => "define('_decoupe_SEPARATEUR', '++++');
 if (isset(\$_GET['var_recherche'])) {
 	include_spip('inc/headers');
@@ -382,6 +383,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'sommaire',
+	'contrib'	=> 2378,
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%\n%%auto_sommaire%%\n%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
@@ -419,9 +421,10 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'SPIP_liens',
+	'categorie' => 'public',
+	'contrib'	=> 2443,
 	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe%%",
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function(){ $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
-	'categorie' => 'public',
 ));
 
 //-----------------------------------------------------------------------------//
@@ -444,6 +447,7 @@ add_outil( array(
 add_outil( array(
 	'id' => 'decoration',
 	'auteur' 	 => '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
+	'contrib'	=> 2427,
 	'categorie'	 => 'typo-racc',
 	'pipeline:pre_typo' => 'decoration_pre_typo',
 ));
@@ -474,6 +478,7 @@ add_outil( array(
 	'id' => 'couleurs',
 	'auteur' 	 => 'Aur&eacute;lien PIERARD (id&eacute;e originale)',
 	'categorie'	 => 'typo-racc',
+	'contrib'	=> 2427,
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
 	'code:options' => "%%couleurs_fonds%% %%set_couleurs%%\n%%couleurs_perso%%",
 	'code:fonctions' => "// aide le Couteau Suisse a calculer la balise #INTRODUCTION
@@ -491,6 +496,7 @@ add_outil( array(
 	'id' => 'typo_exposants',
 	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'categorie'	 => 'typo-corr',
+	'contrib'	=> 1564,
 	'pipeline:post_typo' => 'typo_exposants',
 	'code:css' => 'sup.typo_exposants { font-size:75%; font-variant:normal; vertical-align:super; }',
 ));
@@ -513,6 +519,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'liens_orphelins',
 	'categorie'	 => 'typo-corr',
+	'contrib'	=> 2443,
 	'code:options' => '%%liens_orphelins%%',
 	'pipeline:pre_propre' => 'liens_orphelins_pipeline',
 	'traitement:EMAIL' => 'expanser_liens(liens_orphelins',
@@ -522,6 +529,7 @@ add_outil( array(
 	'id' => 'filets_sep',
 	'auteur' 	 => 'FredoMkb',
 	'categorie'	 => 'typo-racc',
+	'contrib'	=> 1563,
 	'pipeline:pre_typo' => 'filets_sep',
 ));
 
@@ -529,6 +537,7 @@ add_outil( array(
 	'id' => 'smileys',
 	'auteur' 	 => 'Sylvain',
 	'categorie'	 => 'typo-corr',
+	'contrib'	=> 1561,
 	'code:css' => "table.cs_smileys td {text-align:center; font-size:90%; font-weight:bold;}",
 	'pipeline:pre_typo' => 'cs_smileys_pre_typo',
 ));
@@ -554,7 +563,8 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'glossaire',
-	'categorie'	 => 'typo-corr',
+	'categorie'	=> 'typo-corr',
+	'contrib'	=> 2206,
 	'code:options' => "%%glossaire_limite%%\n%%glossaire_groupes%%",
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
@@ -569,8 +579,9 @@ add_outil( array(
 // attention : mailcrypt doit etre place apres liens_orphelins
 add_outil( array(
 	'id' => 'mailcrypt',
-	'auteur' 	 => 'Alexis Roussel, Paolo',
-	'categorie'	 => 'typo-corr',
+	'categorie'	=> 'typo-corr',
+	'auteur' 	=> 'Alexis Roussel, Paolo',
+	'contrib'	=> 2443,
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
 	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a+'@'+b; }"
 		// jQuery pour remplacer l'arobase image par l'arobase texte
@@ -584,6 +595,7 @@ add_outil( array(
 add_outil( array(
 	'id' => 'liens_en_clair',
 	'categorie'	 => 'spip',
+	'contrib'	=> 2443,
 	'pipeline:post_propre' => 'liens_en_clair_post_propre',
 )); 
 
