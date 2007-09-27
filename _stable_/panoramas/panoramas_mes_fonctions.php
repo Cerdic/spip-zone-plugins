@@ -175,21 +175,11 @@ min-height: ".$height."px;
 	
 }
 </style>
-<script src=\""._DIR_PLUGINS."/panoramas//squelettes//x.js\" type=\"text/javascript\"></script>
 <script type=\"text/javascript\">
 	var  mode_auto$id, aller_gauche$id, aller_droite$id, panorama$id, largeur_image$id, image1$id, image2$id, tableau_image_js_div$id, zone_image_js_div$id, decalage_x$id, refresh$id, arret$id;
 	function init$id()
 	{
-		image1$id =  xGetElementById(\"image1$id\");
-		image2$id =  xGetElementById(\"image2$id\");
 		
-		tableau_image_js_div$id = xGetElementById(\"tableau_image_js_div$id\");
-		zone_image_js_div$id = xGetElementById(\"zone_image_js_div$id\");
-		
-
-		xShow(zone_image_js_div$id);
-  		xShow(tableau_image_js_div$id);
-	
 		setLargeurImage$id($width);
 		setPanorama$id($type_360);
 		mode_auto$id  = 1;
@@ -211,42 +201,55 @@ min-height: ".$height."px;
 	function deplace_gauche$id() 
 	{
 			mode_auto$id =0;
-			if (xLeft(tableau_image_js_div$id) >= 0)
+			var val_left = $(\"#tableau_image_js_div$id\").css(\"left\");
+			val_left = parseInt(val_left);
+	
+			if (val_left >= 0)
 			{
 				if (panorama$id == 1)
 				{
-					xLeft(tableau_image_js_div$id, -largeur_image$id);
+					$(\"#tableau_image_js_div$id\").css(\"left\", \"-\"+largeur_image$id+\"px\");
+				
 				}
 			}
 			else
 			{
-				xMoveTo(tableau_image_js_div$id, xLeft(tableau_image_js_div$id) + 5, 0);
+				val_left = parseInt(val_left) + 5;
+				$(\"#tableau_image_js_div$id\").css(\"left\", val_left+\"px\");
+
 			}
 			refresh$id = setTimeout(\"deplace_gauche$id()\",5);
 		
 	}
 	function deplace_droite$id() 
 	{
-		
-			mode_auto$id =0;
 			
+			mode_auto$id =0;
+			var val_left = $(\"#tableau_image_js_div$id\").css(\"left\");
+			val_left = parseInt(val_left);
+	
 			if (panorama$id == 1)
 			{
-				if (xLeft(tableau_image_js_div$id) <= -largeur_image$id)
+				
+				if (val_left <= -largeur_image$id)
 				{
 					
-						xLeft(tableau_image_js_div$id, 5);
+						
+					$(\"#tableau_image_js_div$id\").css(\"left\", 5);
+						
 						
 					
 				}
 				else
 				{
-					xMoveTo(tableau_image_js_div$id, xLeft(tableau_image_js_div$id) - 5, 0);
+					val_left = val_left - 5;
+					$(\"#tableau_image_js_div$id\").css(\"left\", val_left+\"px\");
+					
 				}
 			}
 			else
 			{
-				if (xLeft(tableau_image_js_div$id) <= -largeur_image$id+$viewport_width)
+				if (val_left  <= -largeur_image$id+$viewport_width)
 				{
 					
 					;
@@ -255,7 +258,8 @@ min-height: ".$height."px;
 				}
 				else
 				{
-					xMoveTo(tableau_image_js_div$id, xLeft(tableau_image_js_div$id) - 5, 0);
+					val_left = val_left - 5;
+					$(\"#tableau_image_js_div$id\").css(\"left\", val_left+\"px\");
 				}
 
 			}
@@ -268,11 +272,14 @@ min-height: ".$height."px;
 		
 		if (mode_auto$id  == 1)
 		{	
-			if (xLeft(tableau_image_js_div$id) >= 0)
+			var val_left = $(\"#tableau_image_js_div$id\").css(\"left\");
+			val_left = parseInt(val_left);
+	
+			if (val_left >= 0)
 			{
 				if (panorama$id == 1)
 				{
-					xLeft(tableau_image_js_div$id, -largeur_image$id);
+					$(\"#tableau_image_js_div$id\").css(\"left\", \"-\"+largeur_image$id+\"px\");
 					refresh$id = setTimeout(\"deplace_gauche_auto$id()\",50);
 				}
 				else
@@ -282,7 +289,8 @@ min-height: ".$height."px;
 			}
 			else
 			{
-				xMoveTo(tableau_image_js_div$id, xLeft(tableau_image_js_div$id) + 1, 0);
+				val_left = val_left + 1;
+				$(\"#tableau_image_js_div$id\").css(\"left\", val_left+\"px\");
 				refresh$id = setTimeout(\"deplace_gauche_auto$id()\",50);
 			}
 			
@@ -292,27 +300,33 @@ min-height: ".$height."px;
 
 	function deplace_droite_auto$id() 
 	{
-		
 		if (mode_auto$id  == 1)
 		{	
+			var val_left = $(\"#tableau_image_js_div$id\").css(\"left\");
+			val_left = parseInt(val_left);
+	
+
 			if (panorama$id == 1)
 			{
-				if (xLeft(tableau_image_js_div$id) <= -largeur_image$id)
+				if (val_left <= -largeur_image$id)
 				{
 					
-						xLeft(tableau_image_js_div$id, 0);
+							$(\"#tableau_image_js_div$id\").css(\"left\", 0);
+					
 						
 					
 				}
 				else
 				{
-					xMoveTo(tableau_image_js_div$id, xLeft(tableau_image_js_div$id) - 1, 0);
+						val_left = val_left - 1;
+					$(\"#tableau_image_js_div$id\").css(\"left\", val_left+\"px\");
+
 				}
 				refresh$id = setTimeout(\"deplace_droite_auto$id()\",50);
 			}
 			else
 			{
-				if (xLeft(tableau_image_js_div$id) <= -largeur_image$id+$viewport_width)
+			if (val_left <= -largeur_image$id+$viewport_width)
 				{
 					
 					refresh$id = setTimeout(\"deplace_gauche_auto$id()\",50);
@@ -321,7 +335,8 @@ min-height: ".$height."px;
 				}
 				else
 				{
-					xMoveTo(tableau_image_js_div$id, xLeft(tableau_image_js_div$id) - 1, 0);
+					val_left = val_left - 1;
+					$(\"#tableau_image_js_div$id\").css(\"left\", val_left+\"px\");
 					refresh$id = setTimeout(\"deplace_droite_auto$id()\",50);
 				}
 
@@ -380,25 +395,9 @@ $newstr = "
 </div>
 </div>
 ";
-	//echo("<br/>appel");
 	$chaine = str_replace($total, $newstr, $chaine);
 	$chaine = preg_replace('/<head>/Ums', "<head>".$header, $chaine);
-	//$chaine = preg_replace('/<body/Ums', "<body onload=\"init$id();\"", $chaine);
-	$chaine = preg_replace('/<\/body>/Ums', "<script type=\"text/javascript\">
-function addLoadEvent(func) {
-   var oldonload = window.onload;
-   if (typeof window.onload != \"function\") {
-      window.onload = func;
-   } else {
-      window.onload = function() {
-         if (oldonload) {
-           oldonload();
-         }
-         func;
-      };
-   }
-}
-addLoadEvent(init$id());</script></body>", $chaine);
+	$chaine = preg_replace('/<\/body>/Ums', "<script type=\"text/javascript\">$(document).ready(function(){init$id();});</script></body>", $chaine);
 	}
 	}
 	}
