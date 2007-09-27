@@ -1,0 +1,5 @@
+- ajouter un systeme de regles configurables pour le filtrage
+- ajouter des niveaux sur l'age et le niveau de threat
+- traductions de 403.html?
+- option pour logguer les gens
+- option pour avoir une white liste

@@ -20,10 +20,10 @@
 
   //see http://projecthoneypot.org/httpbl_api.php
 
-define('HTTPBL_SEARCHENGINE', 0);
-define('HTTPBL_SUSPICIOUS', 1);
-define('HTTPBL_HARVESTER', 2);
-define('HTTPBL_COMMENT_SPAMMER',4);
+define('_HTTPBL_SEARCHENGINE', 0);
+define('_HTTPBL_SUSPICIOUS', 1);
+define('_HTTPBL_HARVESTER', 2);
+define('_HTTPBL_COMMENT_SPAMMER',4);
 
 //original idea from
 // http://planetozh.com/blog/my-projects/honey-pot-httpbl-simple-php-script/
@@ -34,24 +34,24 @@ function httpbl_test($ip,$apikey) {
 
 	if ($result[0] == 127) {
 		// query successful !
-	  return array('age'=>$result[1],
-				   'threat'=> $result[2],
-				   'type' => $result[3]);
+	  return array('age'=> intval($result[1]),
+				   'threat'=> intval($result[2]),
+				   'type' => intval($result[3]));
 	}
 	return '';
 }
 
 function httpbl_is_searchengine($info) {
-  return $info['type'] & HTTPBL_SEARCHENGINE;
+  return $info['type'] & _HTTPBL_SEARCHENGINE;
 }
 function httpbl_is_suspicious($info) {
-  return $info['type'] & HTTPBL_SUSPICIOUS;
+  return $info['type'] & _HTTPBL_SUSPICIOUS;
 }
 function httpbl_is_harvester($info) {
-  return $info['type'] & HTTPBL_HARVESTER;
+  return $info['type'] & _HTTPBL_HARVESTER;
 }
 function httpbl_is_comment_spammer($info) {
-  return $info['type'] & HTTPBL_COMMENT_SPAMMER;
+  return $info['type'] & _HTTPBL_COMMENT_SPAMMER;
 }
 
 

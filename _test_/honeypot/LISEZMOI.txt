@@ -1,0 +1,7 @@
+Projet Pot de Miel
+
+cette partie du projet marche, on peut configurer un pot de miel sur son site. Suivre les instructions sur la page de configuration.
+
+Project Liste Noire
+
+partie en implementation, on pourra à terme offrir une page 403 venant du squelette fonds/403.html aux visiteurs indésirables (spammeur, faucheurs, etc...). Le filtrage est fait sur la base de http:BL (http://projecthoneypot.org/httpbl_configure.php) et demande d'avoir une clef d'accées (gratuite quand on installe un pot de miel sur son site, recommandé) fournie par P.H.Pot.

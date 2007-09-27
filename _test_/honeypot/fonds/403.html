@@ -1,0 +1,27 @@
+#CACHE{0}
+<html>
+<head>
+<title>403 Access Forbiden</title>
+</head>
+#INSERT_HEAD
+<body>
+<h1>403 Access Forbiden</h1>
+
+<p>
+It looks like you have raised an alarm on our server and that your IP address ([(#ENV{ip})]) has been classified as [(#ENV{type})] with a threat level of [(#ENV{threat})].
+</p>
+
+<p>
+You can see the report from the Honey Pot Project about your IP here:
+<a href="http://projecthoneypot.org/search_ip.php?ip=#ENV{ip}&submit_form=Search">#ENV{ip}&nbsp;Address Inspector</a>.
+</p>
+
+<p>
+<small>
+Because of your IP being classified as #ENV{level}, we have logged your visit in our system.
+</small>
+</p>
+
+#HONEYPOT
+</body>
+</html>

@@ -19,7 +19,7 @@
 	[en] Automatically generate trap links to your site honeypot in your SPIP templates. You will first need to install a honeypot from [project honeypot->http://projecthoneypot.org].
 	</multi>
   </description>
-  <lien>[Documentation &amp; Configuration->./?exec=cfg&amp;cfg=honeypot]</lien> <!-- URI de documentation -->
+  <lien>[Documentation &amp; Configuration->./?exec=cfg&cfg=honeypot]</lien> <!-- URI de documentation -->
   <prefix> 
 	honeypot
   </prefix>	
@@ -29,6 +29,9 @@
   </pipeline>
   <options>
 	honeypot_options.php
+  </options>
+  <options>
+	honeypot_httpbl_options.php
   </options>
   <necessite id='cfg' version='[1.0.3;]' />
 </plugin>
