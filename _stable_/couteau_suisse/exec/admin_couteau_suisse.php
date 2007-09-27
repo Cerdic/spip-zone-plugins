@@ -386,6 +386,7 @@ function ligne_outil($outil, &$js, $afficher){
 		else $p = $afficher?debut_block_visible($pliage_id):debut_block_invisible($pliage_id);
 	$p .= "\n<div class='detail_outil'>";
 	$p .= $outil['description'];
+	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T($GLOBALS['spip_version_code']<1.92?'cout:jquery1':'cout:jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
 	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('cout:contrib', array('id'=>$outil['contrib'])) . '</p>';
 	$s .= propre($p) . '<hr style="margin:6pt 0 0 0;"/><div style="font-size:85%;">' . _T('cout:detail_outil').' ';

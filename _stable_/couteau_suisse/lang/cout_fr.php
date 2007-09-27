@@ -3,8 +3,6 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 // quelques chaines temporaires a traduire
-$temp['jQuery1'] = "{{Attention}} : cette fonctionnalit&eacute; n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.";
-$temp['jQuery2'] = "Cette fonctionnalit&eacute;  utilise la librairie {jQuery}.";
 $temp['reset'] = 'R&eacute;initialisation des outils';
 $temp['type_urls'] = "#PUCE {{page}} : la valeur par d&eacute;faut pour SPIP v1.9 : <code>/spip.php?article123</code>.
 _ #PUCE {{html}} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
@@ -15,7 +13,6 @@ _ #PUCE {{propres-qs}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot
 
 // un peu de code : ne pas toucher !
 $temp['couleurs'] = '<br /><span style="font-weight:normal; font-size:85%;"><span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert&nbsp;olive</span>, <span style="background-color:navy; color:white;">navy/bleu&nbsp;marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert&nbsp;clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu&nbsp;clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu&nbsp;azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu&nbsp;violet</span>, <span style="background-color:chocolate;">chocolate/brun&nbsp;clair</span>, <span style="background-color:cornsilk;">cornsilk/rose&nbsp;clair</span>, <span style="background-color:darkgreen;">darkgreen/vert&nbsp;fonce</span>, <span style="background-color:darkorange;">darkorange/orange&nbsp;fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve&nbsp;fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu&nbsp;ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune&nbsp;paille</span>, <span style="background-color:yellow;">yellow/jaune</span></span><span style="font-size:50%;"><br />&nbsp;</span>';
-$temp['jQuery'] = '<p>' . ($GLOBALS['spip_version_code']<1.92?$temp['jQuery1']:$temp['jQuery2']) . '</p>';
 //$temp['reset'] = $GLOBALS['spip_version_code']<1.92?'<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>':'';
 $temp['reset'] = '<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>';
 $temp['decoration'] = "{&lt;sc&gt;}Lorem ipsum dolor sit amet{&lt;/sc&gt;}
@@ -54,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_outils' => 'Liste des outils du Couteau Suisse',
 	'presente_outils' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
 	'par_defaut' => 'Par d&eacute;faut',
+	'jquery1' => "{{Attention}} : cette fonctionnalit&eacute; n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.",
+	'jquery2' => "Cette fonctionnalit&eacute;  utilise la librairie {jQuery}.",
 	'erreur:nom' => 'Erreur !',
 	'erreur:description' => "id manquant dans la d&eacute;finition de l'outil !",
 	'erreur:version' => 'indisponible dans cette version de SPIP.',
@@ -97,8 +96,7 @@ _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du 
 	'orientation:description' => "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.",
 
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
-	'desactiver_flash:description' => 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.'
-		. $temp['jQuery'],
+	'desactiver_flash:description' => 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.',
 
 	'toutmulti:nom' => 'Blocs multilingues',
 	'toutmulti:description' => "Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
@@ -215,7 +213,7 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 
 	'SPIP_liens:nom' => 'SPIP et les liens&hellip;',
 	'SPIP_liens:description' => "#PUCE Tous les liens du site s'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target=&quot;_blank&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
-		. $temp['jQuery'] . /*"<br />Lien de test : [Google->http://www.google.com]".*/ "[[Utiliser des liens externes :->%radio_target_blank3%]]"
+		. "[[Utiliser des liens externes :->%radio_target_blank3%]]"
 		. "#PUCE SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l&rsquo;encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[Lien vers le glossaire :->%url_glossaire_externe%]]",
 
 	'forum_lgrmaxi:nom' => 'Taille des forums',
@@ -280,7 +278,7 @@ Vous pouvez choisir le type de remplacement :
 
 // ---------------------------------------------------------------------------
 	'auteur_forum:nom' => "Pas de forums anonymes",
-	'auteur_forum:description' => "Incite tous les auteurs de messages publics &agrave; remplir (d'au moins d'une lettre !) le champ &laquo;"._T('forum_votre_nom')."&raquo; afin d'&eacute;viter les contributions totalement anonymes." . $temp['jQuery'],
+	'auteur_forum:description' => "Incite tous les auteurs de messages publics &agrave; remplir (d'au moins d'une lettre !) le champ &laquo;"._T('forum_votre_nom')."&raquo; afin d'&eacute;viter les contributions totalement anonymes.",
 	'nom_forum' => 'Merci de sp&eacute;cifier votre nom !',
 
 // ---------------------------------------------------------------------------

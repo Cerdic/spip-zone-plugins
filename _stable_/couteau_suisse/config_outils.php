@@ -218,6 +218,7 @@ add_outil( array(
 add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'admin',
+	'jquery'	=> 'oui',
 	'code:options' => "define('_FORUM_OBLIGE_AUTEUR', 'oui');",
 	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
 ));
@@ -403,6 +404,7 @@ add_outil( array(
 	'id' => 'desactiver_flash',
 	'auteur' 	 => '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'categorie'	 => 'public',
+	'jquery'	=> 'oui',
 	'pipeline:affichage_final' => 'InhibeFlash_affichage_final',
 ));
 
@@ -423,6 +425,7 @@ add_outil( array(
 	'id' => 'SPIP_liens',
 	'categorie' => 'public',
 	'contrib'	=> 2443,
+	'jquery'	=> 'oui',
 	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe%%",
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function(){ $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 ));
@@ -582,6 +585,7 @@ add_outil( array(
 	'categorie'	=> 'typo-corr',
 	'auteur' 	=> 'Alexis Roussel, Paolo',
 	'contrib'	=> 2443,
+	'jquery'	=> 'oui',
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
 	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a+'@'+b; }"
 		// jQuery pour remplacer l'arobase image par l'arobase texte
