@@ -20,13 +20,8 @@ _ &copy; 2007 - Licence GPL
 	<options> <!-- fichier charge a chaque hit -->
 
 	</options>
-	<fonctions>panoramas_mes_fonctions.php</fonctions>
 	
 	
-	<pipeline>
-  		<nom>affichage_final</nom>
-  		<inclure>panoramas_mes_fonctions.php</inclure>
- 	</pipeline>
 	
 	
 
