@@ -6,72 +6,16 @@
 ]
 
 
-<style type="text/css">
-#zone_js_div[(#ID_DOCUMENT)] {
-	position: relative; 
-	top: 0px;
-	left: 0px; 
-	overflow: hidden;
-	width: [(#ENV{largeur}|?{#ENV{largeur}, 400})]px; 
-	height: auto !important;
-	height: [(#HAUTEUR)]px;
-	min-height: [(#HAUTEUR)]px;
-	z-index: 0;
-}
-#tableau_image_js_div[(#ID_DOCUMENT)] {
-	position: relative; 
-	top: 0px;
-	left: 0px;
-	z-index: 40;
-}
-#zone_image_js_div[(#ID_DOCUMENT)] {
-	position: relative; 
-	top: 0px;
-	left: 0px; 
-	width: [(#ENV{largeur}|?{#ENV{largeur}, 400})]px;
-	height: [(#HAUTEUR)]px; 
-	overflow: hidden;
-	z-index: 30;
-	
-}
-#zone_aller_gauche_js_div[(#ID_DOCUMENT)] {
-	position: absolute;
-	margin-top: [(#HAUTEUR|div{2}|moins{35})]px;
-	padding-left: 10px; 
-	width: 70px; 
-	height: 70px; 
-	z-index: 99;
-}
-#zone_aller_droite_js_div[(#ID_DOCUMENT)] {
-	position: absolute;
-	margin-top: [(#HAUTEUR|div{2}|moins{35})]px;
-	padding-left: [(#ENV{largeur}|?{#ENV{largeur}, 400}|moins{80})]px; 
-	width: 70px; 
-	height: 70px;
-	z-index: 98; 
-}
-
-#zone_attente_js_div[(#ID_DOCUMENT)]{
-	
-	position: absolute;
-	margin-top: 100px;
-	margin-left: 50px; 
-	z-index: 0;
-	font-size: 12px;
-	
-}
-</style>
-
 <div id="zone_js_div[(#ID_DOCUMENT)]">
 	<div id="zone_aller_gauche_js_div[(#ID_DOCUMENT)]" class="zone_aller_gauche_js_div[(#ID_DOCUMENT)]">
 		<a href="#">
-			<img id="aller_gauche[(#ID_DOCUMENT)]" src="#CHEMIN{squelettes/aller_gauche.png}" class="format_png" alt="fleche gauche"/>
+			<img id="aller_gauche[(#ID_DOCUMENT)]" src="#CHEMIN{squelettes/aller_gauche.png}" class="format_png" alt="fleche gauche" width="70px" height="67px" />
 
 		</a>
 	</div>
 	<div id="zone_aller_droite_js_div[(#ID_DOCUMENT)]" class="zone_aller_droite_js_div[(#ID_DOCUMENT)]">
 		<a href="#">
-			<img id="aller_droite[(#ID_DOCUMENT)]" src="#CHEMIN{squelettes/aller_droite.png}" class="format_png" alt="fleche droite"/>
+			<img id="aller_droite[(#ID_DOCUMENT)]" src="#CHEMIN{squelettes/aller_droite.png}" class="format_png" alt="fleche droite" width="70px" height="67px" />
 		</a>
 	</div>
 	<div id="zone_attente_js_div[(#ID_DOCUMENT)]" class="zone_attente_js_div[(#ID_DOCUMENT)]">
@@ -247,8 +191,13 @@
 		$(document).ready(function(){
 
 			
-			
-		
+			$("#zone_js_div[(#ID_DOCUMENT)]").css({position: "relative", top: "0px", left: "0px", overflow: "hidden", width: "[(#ENV{largeur}|?{#ENV{largeur}, 400})]px", height: "auto !important", height: "[(#HAUTEUR)]px", "min-height": "[(#HAUTEUR)]px", "z-index": 0});
+			$("#tableau_image_js_div[(#ID_DOCUMENT)]").css({position: "relative", top: "0px", left: "0px", "z-index": 40});		
+			$("#zone_image_js_div[(#ID_DOCUMENT)]").css({position: "relative", top: "0px", left: "0px", width: "[(#ENV{largeur}|?{#ENV{largeur}, 400})]px", height: "[(#HAUTEUR)]px", overflow: "hidden", "z-index": 30});
+			$("#zone_aller_gauche_js_div[(#ID_DOCUMENT)]").css({position: "absolute", "margin-top": "[(#HAUTEUR|div{2}|moins{35})]px", "padding-left": "10px", width: "70px", height: "70px", "z-index": 99});
+			$("#zone_aller_droite_js_div[(#ID_DOCUMENT)]").css({position: "absolute", "margin-top": "[(#HAUTEUR|div{2}|moins{35})]px", "padding-left": "[(#ENV{largeur}|?{#ENV{largeur}, 400}|moins{80})]px", width: "70px", height: "70px", "z-index": 98});
+			$("#zone_attente_js_div[(#ID_DOCUMENT)]").css({position: "absolute", "margin-top": "100px", "margin-left": "50px", "z-index": 0, "font-size": "12px"});	
+
 			init[(#ID_DOCUMENT)]();
 			$("#zone_aller_droite_js_div[(#ID_DOCUMENT)] a").bind('mouseover',
 				function() {
