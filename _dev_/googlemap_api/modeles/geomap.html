@@ -1,4 +1,4 @@
-<div id="#ENV{id,'geomap'}" class='geomap'></div>
+<div id="[(#ENV{id,'geomap'}|?{[(#ENV{id,'geomap'})],#ENV{'Spip','geomap'}})]" class='geomap'></div>
 #GEOMAP_INIT
 <script type="text/javascript">
 	//<![CDATA[
@@ -13,7 +13,7 @@
 		function() {
     		if (GBrowserIsCompatible()) {
     			// facelo mapa
-    			map = new GMap2(document.getElementById("#ENV{id,'geomap'}"));
+    			map = new GMap2(document.getElementById("[(#ENV{id,'geomap'}|?{[(#ENV{id,'geomap'})],#ENV{'Spip','geomap'}})]"));
     			map.addControl(new GLargeMapControl());
     			map.addControl(new GMapTypeControl());
     			map.setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #GET{zoom}, G_MAP_TYPE);
