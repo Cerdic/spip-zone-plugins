@@ -163,8 +163,9 @@ class cfg_dist extends cfg_formulaire
 
 			// On va chercher la config cible
 			// et on regarde ses donnees pour faire l'onglet
+			// seulement si l'onglet doit etre affiche
 			$tmp = & new cfg($fonds, $fonds,'');
-			if ($tmp->_permise) {
+			if ($tmp->_permise && $tmp->onglet=='oui') {
 				// Faire des lignes s'il y en a effectivement plus de 6
 				if (!($n%6) && ($n>0))
 					$res .= fin_onglet().debut_onglet();

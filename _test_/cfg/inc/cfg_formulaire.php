@@ -35,6 +35,9 @@ class cfg_formulaire
 	var $descriptif = '';
 // cfg doit-il encadrer le formulaire tout seul ?
 	var $presentation = 'auto';
+// cfg doit-il afficher un lien vers le fond sous forme d'onglet
+// dans la page ?exec=cfg
+	var $onglet = 'oui'; 
 // compte-rendu des mises a jour, vide == pas d'erreur
 	var $message = '';
 // liens optionnels sur des sous-config [(#REM) liens*=xxx]
