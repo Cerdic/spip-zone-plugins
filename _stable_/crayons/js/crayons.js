@@ -201,8 +201,9 @@ $.fn.activatecrayon = function(percent) {
         $('<input type="hidden" name="self" />')
         .attr('value',configCrayons.self)
       )
-      .ajaxForm({"dataType":"json",
+      .ajaxForm({
       "success": function(d) {
+        eval('d = '+d); // JSON
         me
         .find("em.crayon-searching")
           .remove();
