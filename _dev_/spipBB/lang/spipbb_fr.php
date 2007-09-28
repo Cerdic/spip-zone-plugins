@@ -48,7 +48,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admbouger_forum' => 'Bouger ce forum',
 'admeffacer_forum' => 'Supprimer ce forum',
 'admseparer_forum' => 'Diviser ce forum',
-'article_forum' => ' Article / Forum<br>',
+'article_forum' => ' Article / Forum<br />',
 'aucun' => 'aucun !',
 
 // B
@@ -62,12 +62,12 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'connecte' => 'Une fois connect&eacute;, vous pouvez modifer votre mot de passe ou vos informations personnelles &agrave; l\'adresse ',
 'contact' => 'Contact',
 'courrier' => '<p>Apr&egrave;s l\'&eacute;tape d\'enregistrement, votre identifiant personnel vous parviendra rapidement par courrier &eacute;lectronique.</p>',
-'credits'=>'R&eacute;alis&eacute; avec <a href=http://www.spip.net class=copyright>SPIP</a> : 2004-2006<br/>
-<a href=http://www.spip-contrib.net/spipBB>spipBB 1.0a1</a> 
-par <a href=http://spipbb.spip-zone.info/>la spipbb-team</a>',
+'credits'=>'R&eacute;alis&eacute; avec <a href="http://www.spip.net/" class="copyright">SPIP</a> : 2004-2006<br />
+<a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> 
+par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a>',
 'credits_bis1' => 'GAFoSPIP v. ',
 'credits_bis2' => 'Ao&ucirc;t 2005',
-'credits_bis3' => 'Adapt&eacute; pour, et, Inspir&eacute; par, le traitement des Forums de :<br>',
+'credits_bis3' => 'Adapt&eacute; pour, et, Inspir&eacute; par, le traitement des Forums de :<br />',
 'credits_bis4' => '(James, BoOz, Nikau et Miss Mopi).',
 'creer_forum' => 'Cr&eacute;er Nouveau Forum',
 'config_spipbb' => 'Configuration de base de spipBB pour permettre le fonctionnement des forums avec ce plugin.',
@@ -82,7 +82,7 @@ par <a href=http://spipbb.spip-zone.info/>la spipbb-team</a>',
 'dans_forum' => 'dans le forum',
 'date' => 'Inscrit le',
 'deja_enregistree' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e<p><a href=\'spip.php?page=formulaire_oubli\'>[ Mot de passe oubli&eacute; ]</a></p>',
-'dernier' => '&nbsp;Dernier<br>',
+'dernier' => '&nbsp;Dernier<br />',
 
 //E
 'ecrirea' => 'Ecrire Email &agrave;',
@@ -105,7 +105,7 @@ par <a href=http://spipbb.spip-zone.info/>la spipbb-team</a>',
 'fil_alerte' => 'Il n\'est pas possible de s\'abonner &agrave; ce fil',
 'fil_annonce' => 'Transformer ce fil en Annonce',
 'fil_deplace' => 'D&eacute;placer ce fil',
-'fil_sujet' => ' Pied de fil / Sujet<br>',
+'fil_sujet' => ' Pied de fil / Sujet<br />',
 'forum_deplace' => 'D&eacute;plac&eacute; depuis le Forum ...',
 'forum_ferme' => 'Ce forum est d&eacute;sactiv&eacute;',
 'forum_ferme_texte' => 'Ce forum est d&eacute;sactiv&eacute;. Vous ne pouvez plus y poster.',
@@ -114,7 +114,7 @@ par <a href=http://spipbb.spip-zone.info/>la spipbb-team</a>',
 'forum_vers' => 'Vers le Forum ...',
 
 //G
-'gaf_titre' => 'GAFoSPIP<br>Gestion Alternative des Forums',
+'gaf_titre' => 'GAFoSPIP<br />Gestion Alternative des Forums',
 
 //H
 'haut_page' => 'Haut de page',
@@ -141,7 +141,7 @@ par <a href=http://spipbb.spip-zone.info/>la spipbb-team</a>',
 'luiecrire' => 'Lui &eacute;crire',
 
 //M
-'maintenance' => 'N\'oubliez pas d\'enlever<br>\"Fermeture pour maintenance\",<br>
+'maintenance' => 'N\'oubliez pas d\'enlever<br />\"Fermeture pour maintenance\",<br />
 				sur les Forums concern&eacute;s.',
 'maintenance_ferme' => 'Ferm&eacute; pour maintenance',
 'membre' => 'Membre',
@@ -176,7 +176,7 @@ par <a href=http://spipbb.spip-zone.info/>la spipbb-team</a>',
 'poste_refuse' => 'Posts refus&eacute;s, &agrave; effacer !',
 'poste_reponse' => ' Post / R&eacute;ponse',
 'poste_valide' => 'Post(s) &agrave; valider ...',
-'pour_maintenance' => '"</b><br>pour MAINTENANCE.<br>"',
+'pour_maintenance' => '"</b><br />pour MAINTENANCE.<br />"',
 'profil' => 'Profil de',
 'paramprofil' => 'Modifier vos param&egrave;tres',
 
@@ -201,7 +201,7 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'retour_site' => 'Retour &agrave; l\'accueil du site',
 'retour_forum' => 'Retour &agrave; l\'accueil du forum',
 'revenir_haut' => 'Revenir en haut de la page',
-'rubrique_secteur'=> ' Rubrique Secteur<br>',
+'rubrique_secteur'=> ' Rubrique Secteur<br />',
 
 //S
 'sabonner'=> 'S\'abonner &agrave; ce fil',
@@ -212,11 +212,11 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'selection_efface'=> 'Effacer la s&eacute;lection .. ',
 'sinscrire'=> 's\'enregistrer',
 'site' => 'Site web',
-'sousrub_salon'=> ' Sous-rubrique / Salon<br>',
+'sousrub_salon'=> ' Sous-rubrique / Salon<br />',
 'statut' => 'Statut',
 'sujet' => 'Sujet&nbsp;',
 'sujets' => 'Sujets',
-'sujet_ajout' => 'Ajouter un sujet au forum :<br>&nbsp;&nbsp;..&nbsp;',
+'sujet_ajout' => 'Ajouter un sujet au forum :<br />&nbsp;&nbsp;..&nbsp;',
 'sujet_annonce' => 'Sujet Annonce',
 'sujets_aucun' => 'Pas de sujet dans ce forum pour l\'instant',
 'sujet_auteur' => 'Auteur',
@@ -237,8 +237,8 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 //T
 'texte_login_precaution' => 'Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
 	Utilisez ce formulaire avec pr&eacute;caution...',
-'texte_repondre' => 'R&eacute;pondre &agrave; :<br>&nbsp;&nbsp;..&nbsp;',
-'titre_cadre_signature_obligatoire' => '<B>Signature</B> [Obligatoire]<BR>',
+'texte_repondre' => 'R&eacute;pondre &agrave; :<br />&nbsp;&nbsp;..&nbsp;',
+'titre_cadre_signature_obligatoire' => '<B>Signature</B> [Obligatoire]<br />',
 'tous_forums' => 'Tous les forums',
 'toutes_categories' => 'Toutes les cat&eacute;gories',
 'tout_apropos' => 'Tout &agrave; propos de',

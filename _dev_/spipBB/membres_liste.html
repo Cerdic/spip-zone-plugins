@@ -20,6 +20,8 @@
 			[(#MODELE{spipbb_chemindefer}{id_rubrique})]
 
 		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+		<B_auteur_principal>
+		<div class="pagination">#PAGINATION</div>
 		<table summary="membres" class="spipforum">
 			<tr class="titre">
 			   <th>#</th>
@@ -34,8 +36,6 @@
 	
 		<!-- Début de calcul des lignes de membres -->
 			<?php $ligne=1; ?>
-			<B_auteur_principal>
-			<div class="pagination">#PAGINATION</div>
 			<BOUCLE_auteur_principal(AUTEURS){tout}{par id_auteur}{inverse}{pagination 30}>
 			<!-- Ici on relève le statut de l'auteur -->
 			<BOUCLE_statadm(AUTEURS){id_auteur}{statut=="0minirezo"}{tout}> </BOUCLE_statadm><?php $statmem='<:titre_image_administrateur:>' ?></B_statadm>

@@ -54,7 +54,7 @@ The e-mail address will be used only to confirm the details of your registration
 'connecte' => 'Once you are connected, you will be able to modify your password or your personal information at the address ',
 'contact' => 'Contact',
 'courrier' => '<p>Once registered, you personal identifier will be sent to you as soon as possible by e-mail.</p>',
-'credits'=>'Developed with <a href=http://www.spip.net class=copyright>SPIP</a>: 2004-2005<br/><a http://www.spip-contrib.net/Un-squelette-de-forum-8-4-CSS>spipBB 0.9 CSS</a> by <a href=http://www.laprise.org/>James aka Kliké</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nadège aka Miss Mopi</a> (logos from Stéphane)',
+'credits'=>'Developed with <a href="http://www.spip.net/" class="copyright">SPIP</a>: 2004-2005<br/><a http://www.spip-contrib.net/Un-squelette-de-forum-8-4-CSS>spipBB 0.9 CSS</a> by <a href=http://www.laprise.org/>James aka Kliké</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nadège aka Miss Mopi</a> (logos from Stéphane)',
 'credits_bis1' => 'GAFoSPIP v. ',
 'credits_bis2' => 'August 2005',
 'credits_bis3' => 'Adapted for, and, Inspired from, Forums management of:<br>',
