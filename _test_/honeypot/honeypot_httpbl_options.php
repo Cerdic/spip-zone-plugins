@@ -24,7 +24,7 @@ if((_DIR_RACINE =='') && lire_config('honeypot/httpbl/apikey')) {
   //$info = httpbl_test('127.1.40.1',lire_config('honeypot/httpbl/apikey'));
   $config = lire_config('honeypot/httpbl');
   if($info) {
-	if(min(intval($config['type'.$info['type'].'_threat'],255)) <=  $info['threat']){
+	if(min(intval($config['type'.$info['type'].'_threat']),255) <=  $info['threat']){
 	  if($config['type'.$info['type'].'_filter'] == 'bloquer'){
 		include_spip('inc/headers');
 		http_status(403);
@@ -40,6 +40,7 @@ if((_DIR_RACINE =='') && lire_config('honeypot/httpbl/apikey')) {
 		exit();
 	  } else if($config['type'.$info['type'].'_filter'] == 'tohoneypot') {
 		include_spip('inc/headers');
+		//log pour l'instant, TODO faire mieux
 		spip_log("envoyer vers le pot de miel ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
 		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'.lire_config('honeypot/hpfile').'.php');
 	  }

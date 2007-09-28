@@ -148,6 +148,11 @@ Plugin HoneyPot, configuration http:BL
 
 </fieldset>
 
+<fieldset>
+<label for="remplacement_email"><:honeypothttpbl:cfg_remplacement_email:></label>
+<input type="text" name="remplacement_email" id="remplacement_email" value="#ENV{remplacement_email,NOSPAM}"/>
+</fieldset>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
 

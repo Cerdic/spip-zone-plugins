@@ -33,5 +33,11 @@
   <options>
 	honeypot_httpbl_options.php
   </options>
+  <pipeline>
+	<nom>affichage_final</nom> 
+	<action>affichage_final</action>
+	<inclure>httpbl_pipeline.php</inclure>
+  </pipeline>	
+
   <necessite id='cfg' version='[1.0.3;]' />
 </plugin>

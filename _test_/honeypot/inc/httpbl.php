@@ -28,18 +28,29 @@ define('_HTTPBL_COMMENT_SPAMMER',4);
 //original idea from
 // http://planetozh.com/blog/my-projects/honey-pot-httpbl-simple-php-script/
 function httpbl_test($ip,$apikey) {
+  static $cache=array();
+  if($cache[$ip]) {
+	$raw = $cache[$ip];
+  } else {
 	$query = $apikey . '.' . implode('.', array_reverse(explode ('.', $ip ))) . '.dnsbl.httpbl.org';
 	$raw = gethostbyname($query);
+	$cache[$ip] = $raw;
+  }
+
+  return httpbl_parseraw($raw);
+}
+
+function httpbl_parseraw($raw){
 	$result = explode( '.', $raw);
 
-	if ($result[0] == 127) {
+	if (intval($result[0]) == 127) {
 		// query successful !
 	  return array('age'=> intval($result[1]),
 				   'threat'=> intval($result[2]),
 				   'type' => intval($result[3]),
 				   'raw' => $raw);
 	}
-	return '';
+	return NULL;
 }
 
 function httpbl_is_searchengine($info) {
