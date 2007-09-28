@@ -12,11 +12,11 @@
 		</tr>
 		</thead>
 	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
+		<tbody[ id="salon(#ID_RUBRIQUE)"]>
 		<tr class="salon">
 			<td colspan="2" class="salontitre">[<h2><a href="#URL_RUBRIQUE">(#TITRE)</a></h2>]</td>
 			<td colspan="3" class="salonreste">&nbsp;</td>
 		</tr>
-		<tbody[ id="salon(#ID_RUBRIQUE)"]>
 	<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
 		<tr class="forumligne">
 			<td class="etatfor[ (#ACCEPTER_FORUM|=={non}|?{fermefor,ouvfor})]">
