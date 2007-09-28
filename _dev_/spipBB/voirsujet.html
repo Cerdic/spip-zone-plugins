@@ -44,7 +44,9 @@
                                 })]</a></p>
 				</BOUCLE_auteurp>
 				<BOUCLE_modo2(AUTEURS){id_article}>[<p>(#ID_AUTEUR|=={#_auteurp:ID_AUTEUR}|?{'(<:spipbb:moderateurs:>)',''})</p>]</BOUCLE_modo2>
-				</B_auteurp><p><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a></p><//B_auteurp></td>
+				</B_auteurp><p><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a></p>[(#LOGO_AUTEUR||reduire_image{150,150}|sinon{ 
+                                        [(#NOM|spipbb_afficher_avatar{''})]  
+                                        })]<//B_auteurp></td>
   				<td class="tabvs">
 		        		<ul class="actionvs">
 		        			<?php if($sujet_clos==0){ ?>
@@ -61,10 +63,14 @@
 	        			</ul>
 					<div class="txtvs">
 						[(#TEXTE|spipbb_chatons)]
+                                                <B_auteurp2>
                                                 <BOUCLE_auteurp2(AUTEURS){id_auteur}{tout}>
-                                                <hr>
-                                                [(#EXTRA|extra{signature}|entites_html)]
                                                 </BOUCLE_auteurp2>
+                                                 </B_auteurp2>
+                                                  <hr />
+                                                 [(#EXTRA|extra{signature}|entites_html)]
+                                                 <//B_auteurp2>
+                                                 
 					</div>
 				</td>
 			</tr>
@@ -84,7 +90,9 @@
                                 })]</a></p>
 				</BOUCLE_auteurpr>
 				<BOUCLE_modo3(AUTEURS){id_article}>[<p>(#ID_AUTEUR|=={#_auteurpcr:ID_AUTEUR}|?{'(<:spipbb:moderateurs:>)',''})</p>]</BOUCLE_modo3>
-				</B_auteurpr><p><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a></p><//B_auteurpr></td>
+				</B_auteurpr><p><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a></p>[(#LOGO_AUTEUR||reduire_image{150,150}|sinon{ 
+                                        [(#NOM|spipbb_afficher_avatar{''})]  
+                                        })]<//B_auteurpr></td>
   				<td class="tabvs">
 		        		<ul class="actionvs">
 		        			<?php if($sujet_clos==0){ ?>

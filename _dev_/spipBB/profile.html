@@ -204,7 +204,7 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
     if ($statut=="6forum" OR $statut=="1comite"){ // ça c'est que pour ceux qui ont pas accès à leur page d'auteur dans l'admin
         echo "<b><:spipbb:url_avatar:> :</b><br><input name=\"suppl_avatar\" class=\"forml\" value=\"[(#EXTRA|extra{avatar}|propre)]\" size=\"40\" type=\"text\"><br>";
     }
-    echo "<b><:spipbb:signature:> :</b><br><textarea name=\"suppl_signature\" class=\"forml\" rows=\"5\" cols=\"40\">[(#EXTRA|extra{Numero_ICQ}|propre)]</textarea>";
+    echo "<b><:spipbb:signature:> :</b><br><textarea name=\"suppl_signature\" class=\"forml\" rows=\"5\" cols=\"40\">[(#EXTRA|extra{signature}|propre)]</textarea>";
 
 	// le visiteur ne peut Ã©diter son login et mais peut Ã©diter son pass, modifier les valeurs selon les besoins  
 		$edit_login = false;
