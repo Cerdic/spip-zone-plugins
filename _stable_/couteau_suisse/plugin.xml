@@ -27,7 +27,7 @@ Compatibilit&#233; : SPIP version 1.9 minimum.
 	cout_fonctions.php
 	</fonctions>
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin :
-		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : tweak_spip_ma_fonction() par exemple)
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : couteau_suisse_ma_fonction() par exemple)
 		C'est par ailleurs conseille pour les noms de fichier
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
