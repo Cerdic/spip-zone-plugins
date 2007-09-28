@@ -34,17 +34,11 @@ function honeypot_random($arg=5,$sep=' ') {
   $arg = intval($arg);
   if($arg <= 0) $arg = 5;
   srand(time());
-  $limit =  (rand()%$arg)+1;
-  $rez = spip_abstract_select(array('dico'), #SELECT
-					   array('spip_index_dico'), #FROM
-					   array("dico REGEXP '^[a-zA-Z]+$'"), #WHERE
-					   array(), #GROUPBY 
-					   array("RAND()"), #ORDERBY
-							 "0,$limit" #LIMIT
-					   );
+  $random = array('There','is','some','debate','regarding','tiramisu','origin','as','there','is','no','documented','mention','of','the','dessert','before','1983','In','1998','Fernando','and','Tina','Raris','similarly','claimed','that','the','dessert','is','a','recent','invention','They','point','out','that','while','the','recipes','and','histories','of','other','layered','desserts','are','very','similar','the','first','documented','mention','of','tiramisu','in','a','published','work','appears','in','a','Greek','cookbook','Backing','up','this','story','the','authors','recalled','an','article','that','tiramisu','was','created','in','1971','in','Treviso');
   $texte = '';
-  while($row = spip_abstract_fetch($rez)) {
-	$texte.= $row['dico'].$sep;
+  for($i=0;$i<$arg;$i++) {
+	$r = rand()%count($random);
+	$texte .= $random[$r].$sep;
   }
   if(count($texte) <= 0) $texte = 'paper copy and fax';
   return $texte;
