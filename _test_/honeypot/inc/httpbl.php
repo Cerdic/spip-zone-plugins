@@ -42,7 +42,7 @@ function httpbl_test($ip,$apikey) {
 }
 
 function httpbl_is_searchengine($info) {
-  return $info['type'] & _HTTPBL_SEARCHENGINE;
+  return $info['type'] == 0;
 }
 function httpbl_is_suspicious($info) {
   return $info['type'] & _HTTPBL_SUSPICIOUS;
