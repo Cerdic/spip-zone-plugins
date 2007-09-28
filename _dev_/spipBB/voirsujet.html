@@ -68,12 +68,10 @@
 			</tr>
 
 			<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{doublons}>
-			<thead>
 			<tr class="row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
-				<th class="salontitre" colspan="2"><H3>&nbsp;</H3></th>
+				<th class="salontitre" colspan="2"><h3>&nbsp;</h3></th>
 
 			</tr>
-			</thead>
 			<tr class="row[(#COMPTEUR_BOUCLE|alterner{2,1})]">
 				<td  class="autvs" id="forum#ID_FORUM"><B_auteurpr><BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}><p><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM<br/>[(#NOM|spipbb_afficher_avatar)]</a></p>
 				</BOUCLE_auteurpr>
@@ -82,7 +80,7 @@
   				<td class="tabvs">
 		        		<ul class="actionvs">
 		        			<?php if($sujet_clos==0){ ?>
-		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
+		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&amp;citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
 		        			<?php } ?>
 		        			<!-- Modération pour les admin --><?php if ($GLOBALS['auteur_session']['statut']=='0minirezo'){?>
 		        			<li class="effacervs"><a href='./ecrire/?exec=controle_forum&amp;id_article=<?php echo $id_article ; ?>' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>
