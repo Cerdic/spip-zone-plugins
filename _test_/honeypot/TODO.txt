@@ -1,5 +1,8 @@
-- ajouter un systeme de regles configurables pour le filtrage
+- terminer le systeme de regles pour le filtrage:
+* cacher les emails
+* cacher les forums
+* redirection honeypot
 - ajouter des niveaux sur l'age et le niveau de threat
 - traductions de 403.html?
-- option pour logguer les gens
+- option pour logguer les blockages
 - option pour avoir une white liste

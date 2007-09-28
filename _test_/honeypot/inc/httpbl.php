@@ -29,14 +29,15 @@ define('_HTTPBL_COMMENT_SPAMMER',4);
 // http://planetozh.com/blog/my-projects/honey-pot-httpbl-simple-php-script/
 function httpbl_test($ip,$apikey) {
 	$query = $apikey . '.' . implode('.', array_reverse(explode ('.', $ip ))) . '.dnsbl.httpbl.org';
-	
-	$result = explode( '.', gethostbyname($query));
+	$raw = gethostbyname($query);
+	$result = explode( '.', $raw);
 
 	if ($result[0] == 127) {
 		// query successful !
 	  return array('age'=> intval($result[1]),
 				   'threat'=> intval($result[2]),
-				   'type' => intval($result[3]));
+				   'type' => intval($result[3]),
+				   'raw' => $raw);
 	}
 	return '';
 }
