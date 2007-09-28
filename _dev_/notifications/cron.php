@@ -82,4 +82,9 @@ function cron_notifications($time) {
 		return 1;
 }
 
+// en 1.9.3 c'est genie_ et pas cron_ (pfff)
+function genie_notifications($time) {
+	return cron_notifications($time);
+}
+
 ?>
