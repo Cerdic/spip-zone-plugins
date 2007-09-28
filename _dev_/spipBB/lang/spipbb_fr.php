@@ -31,6 +31,14 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 
 'champsobli'=>'Les champs marqu&eacute;s d\'un * sont obligatoires.',
 
+'interet'=>'Centres d\'int&eacute;r&ecirc;t',
+'loisirs'=>'Loisirs',
+'numero_icq'=>'Contacts chat (ICQ, Skype, etc... )',
+'url_avatar'=>'Url de votre avatar',
+'signature'=>'Signature',
+
+
+
 // A
 'abo' => 'Abonnements&nbsp;',
 'aecrit' => 'a &eacute;crit ',

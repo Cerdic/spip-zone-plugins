@@ -70,6 +70,7 @@ if ($modif) {
 
 	// recoller les champs du extra
 	if ($champs_extra) {
+        include_spip('inc/presentation');
 		include_spip("inc/extra");
 		$extra = extra_recup_saisie("auteurs");
 		$add_extra = ", extra = '".addslashes($extra)."'";
@@ -131,8 +132,9 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
  			<h2><:spipbb:profil:> #NOM</h2>
 			[<div id="avatar"> <!--Section de l'avatar-->
 				<h3><:spipbb:avatar:></h3>
-				<p>[(#NOM|spipbb_afficher_avatar{''})] <br /><img src="(#EXTRA|avatar)" /></p> 
-				
+                                (#LOGO_AUTEUR||reduire_image{150,150}|sinon{ 
+                                        [(#NOM|spipbb_afficher_avatar{''})]  
+                                })
 			</div>]
 			<div id="information"> <!-- Section  des informations -->
 			<h3><:spipbb:paramprofil:></h3>
@@ -194,6 +196,15 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
   	echo "<input type='text' name='url_site' class='forml' value=\"".entites_html($auteur['url_site'])."\" size='40'>\n";
   	fin_cadre_relief();
   	echo "<p>";
+    
+    echo "<b><:spipbb:lieu:> :</b><br><input name=\"suppl_Localisation\" class=\"forml\" value=\"[(#EXTRA|extra{Localisation}|propre)]\" size=\"40\" type=\"text\"><br>";
+    echo "<b><:spipbb:interet:> :</b><br><input name=\"suppl_Emploi\" class=\"forml\" value=\"[(#EXTRA|extra{Emploi}|propre)]\" size=\"40\" type=\"text\"><br>";
+    echo "<b><:spipbb:loisirs:> :</b><br><input name=\"suppl_Loisirs\" class=\"forml\" value=\"[(#EXTRA|extra{Loisirs}|propre)]\" size=\"40\" type=\"text\"><br>";
+    echo "<b><:spipbb:numero_icq:> :</b><br><input name=\"suppl_Numero_ICQ\" class=\"forml\" value=\"[(#EXTRA|extra{Numero_ICQ}|propre)]\" size=\"40\" type=\"text\"><br>";
+    if ($statut=="6forum" OR $statut=="1comite"){ // ça c'est que pour ceux qui ont pas accès à leur page d'auteur dans l'admin
+        echo "<b><:spipbb:url_avatar:> :</b><br><input name=\"suppl_avatar\" class=\"forml\" value=\"[(#EXTRA|extra{avatar}|propre)]\" size=\"40\" type=\"text\"><br>";
+    }
+    echo "<b><:spipbb:signature:> :</b><br><textarea name=\"suppl_signature\" class=\"forml\" rows=\"5\" cols=\"40\">[(#EXTRA|extra{Numero_ICQ}|propre)]</textarea>";
 
 	// le visiteur ne peut Ã©diter son login et mais peut Ã©diter son pass, modifier les valeurs selon les besoins  
 		$edit_login = false;

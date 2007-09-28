@@ -24,10 +24,12 @@
 		
 			<h2><:spipbb:voirprofil:> #NOM</h2>
 			
-			<div id="avatar"> <!-- Section d'affichage des avatars -->
+			[<div id="avatar"> <!-- Section d'affichage des avatars -->
 				<h3><:spipbb:avatar:></h3>
-				<p>[(#NOM|spipbb_afficher_avatar{''})]</p>
-			</div>
+                                (#LOGO_AUTEUR||reduire_image{150,150}|sinon{ 
+                                        [(#NOM|spipbb_afficher_avatar{''})]  
+                                })
+			</div>]
 			
 			<div id="information"> <!-- Section d'affichage des informations generiques -->
 				<h3><:spipbb:tout_apropos:> #NOM</h3>
@@ -37,6 +39,11 @@
 					
 					[<li class="site"><:spipbb:site:> : <a href="(#URL_SITE)" title="#NOM_SITE"><span>#NOM_SITE</span></a></li>]
 					[<li class="bio"><:spipbb:bio:> :<br /><span>(#BIO)</span></li>]
+                                        <br />
+                                        [<li class="site"><:phpbb:lieu:> : (#EXTRA|extra{Localisation}|propre)</li>]
+                                        [<li class="site"><:phpbb:Emploi:> : (#EXTRA|extra{Emploi}|propre)</li>]
+                                        [<li class="site"><:phpbb:Loisirs:> : (#EXTRA|extra{Loisirs}|propre)</li>]
+                                        [<li class="site"><:phpbb:Numero_ICQ:> : (#EXTRA|extra{Numero_ICQ})</li>]
 				</ul>
 			</div>
 			
