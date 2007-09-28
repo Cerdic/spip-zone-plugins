@@ -26,19 +26,28 @@ function archive_ajout_option($id_article) {
 	//genere le div à inserer dans le flux
 	$flux = "";
 	$flux .= debut_cadre('r');
-		$flux .= '<form action="'.generer_url_ecrire("archive_update", "archive_action=update&objet_nature=article&id_objet=".$id_article."&etat_precedent=".$archive).'" method="post">';
+		$flux .= '<form action="'.generer_url_ecrire("archive_update", "objet_nature=article&id_objet=".$id_article).'" method="post">';
 			$flux .= "Article archiv&eacute; : ";
-			$flux .= bouton_radio("archiver", true,"oui",$archive,"setvisibility('valider_archive', 'visible');");
-			$flux .= bouton_radio("archiver", false,"non",!$archive,"setvisibility('valider_archive', 'visible');");
+			$flux .= bouton_radio("archiver", true,"oui",$archive,"
+				if ($(this).attr('CHECKED')== 'CHECKED') {
+					$('#valider_archive').css('visibility','hidden');
+				} else {
+					$('#valider_archive').css('visibility','visible');
+				};"
+			);
+			$flux .= bouton_radio("archiver", false,"non",!$archive,"
+				if ($(this).attr('CHECKED') == 'CHECKED') {
+					$('#valider_archive').css('visibility','hidden'); 
+				} else {
+					$('#valider_archive').css('visibility','visible'); 
+				};"
+			);
 			$flux .= "<span id=\"valider_archive\" class=\"visible_au_chargement\">";
 			$flux .= "<input type=\"submit\" class=\"fondo\" value=\"Valider\"/>";
 			$flux .= "</span>";
 		$flux .= "</form>";
 	$flux .= fin_cadre('r');
 
-	//$flux .="<div style=\"height: 5px;\"></div>";
-	//$flux .= fin_cadre_formulaire();
-	// retourne le flux mis à jour
 	return $flux;
 }
 ?>
