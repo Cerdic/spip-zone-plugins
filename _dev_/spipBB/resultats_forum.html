@@ -69,7 +69,7 @@ secteurs-->
         				$closed='non'; 
 								
 				<BOUCLE_reponsesalt(FORUMS){id_thread}{plat}> 
-					<BOUCLE_reponse_fermealt(FORUMS){id_forum}{titre_mot=Fermé}>
+					<BOUCLE_reponse_fermealt(FORUMS){id_forum}{titre_mot=ferme}>
 						$closed='[(#ID_FORUM|texte_script)]'; 
 					</BOUCLE_reponse_fermealt>
 				</BOUCLE_reponsesalt>
@@ -152,7 +152,7 @@ secteurs-->
         				$closed='non'; 
 								
 				<BOUCLE_reponsesalt2(FORUMS){id_thread}{plat}> 
-					<BOUCLE_reponse_fermealt2(FORUMS){id_forum}{titre_mot=Fermé}>
+					<BOUCLE_reponse_fermealt2(FORUMS){id_forum}{titre_mot=ferme}>
 						$closed='[(#ID_FORUM|texte_script)]'; 
 					</BOUCLE_reponse_fermealt2>
 				</BOUCLE_reponsesalt2>

@@ -72,7 +72,7 @@
 			</tr>
 		<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
 			<tr class="forumligne">
-				<B_etat><BOUCLE_etat(ARTICLES){id_article}{titre_mot=Fermé}><td class="etatfor fermfor"><span><:spipbb:forum_ferme:></BOUCLE_etat></B_etat><td class="etatfor ouvfor"><span><:titre_forum:><//B_etat></span></td>
+				<B_etat><BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}><td class="etatfor fermfor"><span><:spipbb:forum_ferme:></BOUCLE_etat></B_etat><td class="etatfor ouvfor"><span><:titre_forum:><//B_etat></span></td>
 				<td class="titre">[<h3><a title="<:spipbb:voir_evolution:>" href="ecrire/?exec=statistiques_visites&amp;id_article=#ID_ARTICLE">(#TITRE)</a></h3><br/>]
 				<!-- Ici les Modérateurs --></td>
 			

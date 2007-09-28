@@ -23,13 +23,13 @@ Attention que cette boucle vaut son pesant de cachouettes ;o))
 
 <?php $id_sujet='[(#ID_FORUM|texte_script)]'; ?>
 
-<BOUCLE_sujet_ferme(FORUMS){id_forum}{titre_mot=Fermé}>
+<BOUCLE_sujet_ferme(FORUMS){id_forum}{titre_mot=ferme}>
 <?php $closed='[(#ID_FORUM|texte_script)]'; ?>
 </BOUCLE_sujet_ferme>
 
 <BOUCLE_reponse(FORUMS){id_parent}>
 
-<BOUCLE_reponse_ferme(FORUMS){id_forum}{titre_mot=Fermé}>
+<BOUCLE_reponse_ferme(FORUMS){id_forum}{titre_mot=ferme}>
 <?php $closed='[(#ID_FORUM|texte_script)]'; ?>
 </BOUCLE_reponse_ferme>
 
@@ -45,7 +45,7 @@ Attention que cette boucle vaut son pesant de cachouettes ;o))
 
 <!-- Maintenant on regarde si l'article/forum est fermé -->
 <?php $forumferme=0 ?>
-<BOUCLE_etat(ARTICLES){id_article}{titre_mot=Fermé}>
+<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}>
 <?php $forumferme=1 ?>
 </BOUCLE_etat> 
 

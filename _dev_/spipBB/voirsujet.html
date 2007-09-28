@@ -48,7 +48,7 @@
 		        			<?php if($sujet_clos==0){ ?>
 		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
 		        			<?php } ?>
-		        			<!-- Modération pour les admin --><?php if ($etat=='0minirezo'){?>
+		        			<!-- Modération pour les admin --><?php if ($GLOBALS['auteur_session']['statut']=='0minirezo'){?>
 		        			<li class="effacervs"><a href='./ecrire/?exec=controle_forum&amp;id_article=<?php echo $id_article ; ?>' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>
 		        			<li class="ipvs"><a title="IP: #IP"><span>IP: #IP</span>&nbsp;</a></li>
 		        			<!--Fin Modération pour les admin--><?php }?>
@@ -84,7 +84,7 @@
 		        			<?php if($sujet_clos==0){ ?>
 		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
 		        			<?php } ?>
-		        			<!-- Modération pour les admin --><?php if ($etat=='0minirezo'){?>
+		        			<!-- Modération pour les admin --><?php if ($GLOBALS['auteur_session']['statut']=='0minirezo'){?>
 		        			<li class="effacervs"><a href='./ecrire/?exec=controle_forum&id_article=<?php echo $id_article ; ?>' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>
 		        			<li class="ipvs"><a title="IP: #IP"><span>IP: #IP</span>&nbsp;</a></li>
 		        			<!--Fin Modération pour les admin--><?php }?>
@@ -112,7 +112,7 @@
 			<li class="repondre">[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:messages_repondre:>"><span><:spipbb:messages_repondre:></span>&nbsp;</a>]</li>	
 		</ul>
 		<?php } ?>
-		<?php if ($etat=='0minirezo'){?><!-- Modération pour les admin  -->
+		<?php if ($GLOBALS['auteur_session']['statut']=='0minirezo'){?><!-- Modération pour les admin  -->
 		<ul class="actionadm">
 			<li class="admsurveiller"><a title="<:spipbb:admsurveiller:>"><span><:spipbb:admsurveiller:></span>&nbsp;</a></li>
 			<li class="admeffacer"><a href='./ecrire/?exec=controle_forum&id_article=#ID_ARTICLE' title="<:spipbb:admeffacer:>"><span><:spipbb:admeffacer:></span>&nbsp;</a></li>
