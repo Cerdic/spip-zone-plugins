@@ -19,7 +19,7 @@
 		#MODELE{spipbb_chemindefer}
 
 		<div class="rechliste">
-		<form action="./" method="GET">
+		<form action="./" method="get">
 			<ul class="recherche">
 				<li class="titre">
 				<:info_rechercher:>
@@ -43,13 +43,13 @@
 				<B_forum>
 				<li class="rechoption">
 				<select class="post" name="id_article">
-					<OPTION VALUE="0">
+					<option value="0">
 					<:spipbb:tous_forums:>
-					</OPTION>
+					</option>
 					<BOUCLE_forum(ARTICLES){branche}{par num titre}>
-					<OPTION VALUE="#ID_ARTICLE">
+					<option value="#ID_ARTICLE">
 					[(#TITRE)]
-					</OPTION>
+					</option>
 					</BOUCLE_forum>
 				</select>
 				</li>
