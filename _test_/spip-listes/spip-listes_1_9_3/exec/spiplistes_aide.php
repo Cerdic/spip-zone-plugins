@@ -26,8 +26,10 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+	include_spip('inc/spiplistes_api');
+
 // adaptation de aide_index.php
-syslog_trace(_SPIPLISTES_EXEC_AIDE." <<");
+spiplistes_log(_SPIPLISTES_EXEC_AIDE." <<");
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -47,9 +49,9 @@ function exec_spiplistes_aide () {
 		changer_langue($var_lang);
 	}
 		
-	$fichier_aide_spiplistes = is_readable($f = _DIR_PLUGIN_SPIPLISTES . "docs/aide-".$var_lang."_spiplistes.html")
+	$fichier_aide_spiplistes = is_readable($f = _DIR_PLUGIN_SPIPLISTES . "docs/"._SPIPLISTES_EXEC_PREFIX."aide_".$var_lang."html")
 		? $f
-		: _DIR_PLUGIN_SPIPLISTES . "docs/aide-fr_spiplistes.html"
+		: _DIR_PLUGIN_SPIPLISTES . "docs/"._SPIPLISTES_EXEC_PREFIX."aide_fr.html"
 		;
 
 	if($content = @file_get_contents($fichier_aide_spiplistes)) {

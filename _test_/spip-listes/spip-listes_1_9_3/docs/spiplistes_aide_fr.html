@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Original From $Id: aide-fr_spiplistes.html,v 1.15 2007/09/13 17:11:05 cpaulus Exp $ -->
+<!--
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+-->
+<head>
+<title>Documentation %spiplistes_name% [%spiplistes_version%]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Window-target" content="_blank" />
+<style type="text/css">
+<!--
+body {
+	font-family: "Myriad Web Pro", Verdana, Arial, Helvetica, sans-serif;
+	font-size:90%;
+}
+h1 {
+	color: #333333;
+}
+h1 span {
+	display:block;
+	color: #fff;
+	background: #666;
+	font-size: 40%;
+	line-height:1.4em;
+	padding:0 1ex;
+	font-style: normal;
+	font-weight: normal;
+}
+p {
+	margin:0.5em 4em;
+	padding:0;
+}
+ul {
+	list-style: square;
+	margin:0;
+	padding:0.75em 4em;
+}
+li {
+	margin: 0.5em 0;
+}
+.avertissement {
+	color: #FFFFFF;
+	background: #FF0000;
+	padding:1ex;
+}
+img {
+	border:0;
+	display:block;
+	margin:0 auto;
+}
+-->
+</style>
+</head>
+
+<body>
+<h1>%spiplistes_name%
+<span>Plugin %spiplistes_name% version %spiplistes_version% - Mise à jour documentation: $Date$EndDate</span></h1>
+<ul>
+   <li><a href="#presentation">Pr&eacute;sentation</a></li>
+   <li><a href="#avertissements">Avertissements</a></li>
+   <li><a href="#configuration">Configuration</a></li>
+   <li><a href="#simulation">Activation des envois de courriers (mode simulation)</a></li>
+   <li><a href="#acces_gestion">Acc&eacute;der &agrave; la gestion du courrier</a></li>
+   <li><a href="#testeremail">Tester l'envoi du courrier</a></li>
+   <li><a href="#forcerliste">Forcer un abonnement pour une liste</a></li>
+   <li><a href="#configureliste">Configurer une liste de diffusion</a></li>
+   <li><a href="#temporiser">Temporiser un courrier, une liste de diffusion</a></li>
+   <li><a href="#diffmensuelle">Mensualiser une liste de diffusion</a></li>
+   <li><a href="#abo_fiche_auteur">Abonnement par la fiche auteur</a></li>
+   <li><a href="#forcerabos">Forcer tous les abonnements</a></li>
+   <li><a href="#desactiverv">D&eacute;sactiver <strong>%spiplistes_name%</strong></a></li>
+   <li><a href="#desinstallerv">D&eacute;sinstaller <strong>%spiplistes_name%</strong></a></li>
+   <li><a href="#liens">Liens compl&eacute;mentaires</a></li>
+</ul>
+<h2><a name="presentation" id="presentation"></a>Pr&eacute;sentation</h2>
+<p><strong>%spiplistes_name%</strong> est un plugin pour SPIP permettant la gestion 
+   de courriers au sein d'un groupe de travail. </p>
+<p>%_aide%</p>
+<p>Cette page vous pr&eacute;sente les principales fonctionnalit&eacute;s de <strong>%spiplistes_name%</strong>. 
+   Cette documentation n'est pas exhaustive, la plupart des actions sont comment&eacute;es 
+   dans l'interface de gestion de <strong>%spiplistes_name%</strong>. </p>
+<p>La derni&egrave;re version de <strong>%spiplistes_name%</strong> est disponible 
+   <a href="http://www.quesaco.org/SPIP-Listes-V-plugin-SPIP-de">sur Quesaco.org</a>.</p>
+<h2><a name="configuration" id="configuration"></a>Configuration</h2>
+<p>La page de configuration de <strong>%spiplistes_name%</strong> est accessible 
+   par le bouton du m&ecirc;me nom :</p>
+<p><img src="../img_docs/2007-09-05_185434.png" width="126" height="90" /></p>
+<p><img src="../img_docs/2007-09-05_185228.png" width="549" height="43" /></p>
+<p>Cette page vous permet de configurer :</p>
+<ul>
+   <li>Le mode d'inscription des visiteurs ;</li>
+   <li>Le mode de transfert du courrier, la taille du paquet d'envoi, le code 
+      des caract&egrave;res utilis&eacute;s pour l'envoi.</li>
+</ul>
+<p>Vous pouvez &eacute;galement <a href="#forcerabos">forcer ici tous les abonnements</a>.</p>
+<p>&nbsp;</p>
+<h2><a name="simulation" id="simulation"></a>Activation des envois de courriers 
+   (mode simulation)</h2>
+<p>Par d&eacute;faut, &agrave; l'installation de <strong>%spiplistes_name%</strong>, 
+   l'envoi de courriers est simul&eacute; afin de vous permettre de valider le 
+   bon fonctionnement de l'outil.</p>
+<p>Lorsque vous aurez r&eacute;alis&eacute; tous les tests n&eacute;cessaires, 
+   vous pouvez activer les envois de courriers en validant <strong>Activer les 
+   envois de courriers</strong> dans le menu de configuration de <strong>%spiplistes_name%</strong>.</p>
+<h2><a name="avertissements" id="avertissements"></a>Avertissements</h2>
+<p class="avertissement">N&#8217;installez pas <strong>%spiplistes_name%</strong> 
+   en production sans l&#8217;avoir test&eacute; et valid&eacute; correctement.</p>
+<p class="avertissement"><strong>%spiplistes_name%</strong> est diffus&eacute; 
+   gratuitement sous license GPL, sans aucune garantie de bon fonctionnement. 
+   Vous &ecirc;tes seul responsable de l&#8217;installation et de la mise en &#339;uvre 
+   de <strong>%spiplistes_name%</strong> sur votre site.</p>
+<h2><a name="acces_gestion" id="acces_gestion"></a>Acc&eacute;der &agrave; la 
+   gestion du courrier</h2>
+<p>Vous devez &ecirc;tre <em>administrateur</em> pour pouvoir acc&eacute;der &agrave; 
+   la gestion du courrier.</p>
+<p>Apr&egrave;s avoir activ&eacute; le plugin, s&eacute;lectionnez dans le menu 
+   <strong>Edition</strong> le sous-menu <strong>Listes de diffusion</strong> 
+   :</p>
+<p><img src="../img_docs/2007-09-05_181124.png" alt="Sous-menu Edition/Lettres d'information" width="180" height="119" /> 
+</p>
+<p>Trois onglets apparaissent, ainsi qu'une bo&icirc;te de raccourcis. L'ensemble 
+   vous permet de g&eacute;rer le courrier :</p>
+<p><img src="../img_docs/2007-09-05_181420.png" alt="Les onglets du plugin" width="487" height="43" /></p>
+<p><img src="../img_docs/2007-09-02_194435.png" alt="Les raccourcis du plugin" width="217" height="157" /></p>
+<h2><a name="configureliste" id="configureliste"></a>Configurer une liste de diffusion<a name="diffusion" id="diffusion"></a></h2>
+<p>La diffusion : une liste peut &ecirc;tre priv&eacute;e ou publique. L'inscription 
+   &agrave; une liste priv&eacute;e n'est pas visible dans l'espace public. <a name="replyto" id="replyto"></a></p>
+<p>Le champ de r&eacute;ponse (reply-to) est transmis lors de la diffusion. Il 
+   correspond &agrave; l'adresse email de retour. Lorsque votre correspondant 
+   r&eacute;pondra &agrave; votre mail, sa r&eacute;ponse sera envoy&eacute;e 
+   &agrave; cette adresse.</p>
+<h2><a name="temporiser" id="temporiser"></a>Temporiser un courrier, une liste 
+   de diffusion</h2>
+<p>Les courriers peuvent exceptionnellement &ecirc;tre envoy&eacute;s &agrave; 
+   une date pr&eacute;cise. Il suffit d'indiquer la date d'envoi souhait&eacute; 
+   dans le formulaire du courrier concern&eacute;.</p>
+<p><img src="../img_docs/2007-09-05_184833.png" width="493" height="66" /></p>
+<p>Mais les courriers ne peuvent pas &ecirc;tre param&eacute;tr&eacute;s pour 
+   &ecirc;tre envoy&eacute;s p&eacute;riodiquement. Si vous voulez qu'un courrier 
+   puisse &ecirc;tre envoy&eacute; toutes les semaines ou tous les mois, vous 
+   devez le transformer en patron et cr&eacute;er une liste de diffusion.</p>
+<p>Vous pouvez param&eacute;trer l'exp&eacute;dition d'une liste de diffusion 
+   en lui d&eacute;finissant une date de premier envoi, puis une p&eacute;riode 
+   de diffusion &agrave; exprimer en jours.</p>
+<p><img src="../img_docs/2007-09-05_184311.png" width="496" height="314" /></p>
+<p>Si le bouton <strong>Envoyer maintenant</strong> est gris&eacute;, c'est que 
+   la liste ne contient aucun abonn&eacute;.</p>
+<h2><a name="diffmensuelle" id="diffmensuelle"></a>Mensualiser une liste de diffusion</h2>
+<p>Lorsqu'une liste de diffusion publique est correctement param&eacute;tr&eacute;e 
+   (s&eacute;lection d'un patron, liste d'abonn&eacute;s), vous pouvez choisir 
+   pour elle une diffusion p&eacute;riodique mensuelle.</p>
+<p><img src="../img_docs/2007-09-05_182302.png" width="477" height="128" border="1" /></p>
+<p>La liste sera g&eacute;n&eacute;r&eacute;e &agrave; partir du patron. Le courrier 
+   sera exp&eacute;di&eacute; le 1<sup>er</sup> de chaque mois.</p>
+<p>Choisissez bien la date de d&eacute;part du premier envoi. Si vous conservez 
+   la date en cours, un premier envoi sera effectu&eacute; &agrave; cette date, 
+   le prochain aura lieu le 1<sup>er</sup> du mois suivant.</p>
+<p>Si vous transformez une liste p&eacute;riodique en liste publique, elle conserve 
+   ses abonn&eacute;s, mais perd sa date de publication. Il vous faut programmer 
+   &agrave; nouveau un envoi automatique.</p>
+<p>Si vous transformez une liste p&eacute;riodique en liste priv&eacute;e, elle 
+   perd &eacute;galement sa date de publication, mais aussi ses abonn&eacute;s 
+   <em>invit&eacute;s</em>. </p>
+<h2><a name="testeremail" id="testeremail"></a>Tester l'envoi du courrier</h2>
+<p>Lorsque vous avez termin&eacute; la r&eacute;daction de votre courrier, vous 
+   pouvez l'envoyer en test &agrave; un correspond ou vous-m&ecirc;me, en compl&eacute;tant 
+   le champ <strong>email de test</strong> et en le validant par le bouton <strong>Tester 
+   par email</strong> :</p>
+<p><img src="../img_docs/2007-09-05_181643.png" alt="Formulaire envoi de test" width="495" height="124" /></p>
+<p>Cette adresse email doit &ecirc;tre valide. En cas d'erreur, un message vous 
+   alerte.</p>
+<p>Pour tester l'envoi d'une liste de diffusion (chrono), cr&eacute;ez une liste 
+   d'abonn&eacute;s contenant votre adresse email, testez un premier envoi par 
+   l'envoi imm&eacute;diat, puis - si le test correspond &agrave; vos attentes 
+   - modifiez la liste des abonn&eacute;s.</p>
+<h2><a name="forcerliste" id="forcerliste"></a>Forcer un abonnement pour une liste</h2>
+<p>Lors de l'&eacute;dition d'une liste, vous pouvez forcer l'abonnement :</p>
+<ul>
+   <li>des membres invit&eacute;s si cette liste est publique ;</li>
+   <li>de tous les membres sauf les invit&eacute;s si cette liste est priv&eacute;e.</li>
+</ul>
+<p>Lorsqu'une liste publique devient priv&eacute;e, elle perd tous ces membres 
+   invit&eacute;s. Une confirmation vous est demand&eacute;e avant la modification 
+   du statut de cette liste.</p>
+<p>A noter : un membre abonn&eacute; ne re&ccedil;oit pas forc&eacute;ment le 
+   courrier de cette liste. Il faut attendre qu'il confirme lui-m&ecirc;me le 
+   format de r&eacute;ception : <strong>html</strong> ou <strong>texte</strong> 
+   seul.</p>
+<p>Voir aussi : <a href="#forcerabos">Forcer tous les abonnements.</a></p>
+<h2><a name="abo_fiche_auteur" id="abo_fiche_auteur"></a>Abonnement par la fiche 
+   auteur</h2>
+<p>Pour abonner un auteur &agrave; une ou plusieurs listes, cliquez sur l'ic&ocirc;ne 
+   <strong>Auteur</strong> :</p>
+<p><img src="../img_docs/2007-08-18_173539.png" alt="Icone auteurs" width="68" height="92" /></p>
+<p>Dans la liste, s&eacute;lectionnez l'auteur pour faire appara&icirc;tre sa 
+   fiche. En bas de cette fiche se trouve la bo&icirc;te <strong>Abonnement</strong> 
+   :</p>
+<p><img src="../img_docs/2007-08-18_174025.png" alt="Boîte des abonnements" width="515" height="62" /></p>
+<p>Cliquez sur le petit triangle &agrave; gauche du titre de cette bo&icirc;te 
+   pour d&eacute;plier cette bo&icirc;te et laisser appara&icirc;tre la liste 
+   des listes de diffusion publiques disponibles. S&eacute;lectionnez ou d&eacute;s&eacute;lectionnez 
+   les abonnements n&eacute;cessaires et validez.</p>
+<p><img src="../img_docs/2007-08-19_185227.png" alt="Boite abonnement dépliée" width="526" height="312" /></p>
+<p>Validez si besoin le format de r&eacute;ception pour confirmer l'abonnement 
+   (si pas de format de r&eacute;ception valid&eacute;, il n'y a pas d'envoi pour 
+   ce compte).</p>
+<p>Si vous &eacute;ditez une fiche <strong>visiteur</strong>, seules les listes 
+   publiques apparaissent. S'il n'y a pas de listes publiques, la bo&icirc;te 
+   de s&eacute;lection <strong>Abonnement</strong> n'appara&icirc;t pas.</p>
+<h2><a name="forcerabos" id="forcerabos"></a>Forcer tous les abonnements</h2>
+<p>Les super-administrateurs (<em>admins toutes rurbiques</em>) peuvent forcer 
+   les abonnements aux listes, au format html ou texte seul. Ils peuvent &eacute;galement 
+   d&eacute;sactiver tous les abonnements. </p>
+<p>Forcer les abonnements ne veut pas dire <em>abonner</em> les comptes et donc 
+   exp&eacute;dier les courriers programm&eacute;s. Les utilisateurs devront valider 
+   cet abonnement en s&eacute;lectionnant un format de r&eacute;ception, <strong>html</strong> 
+   ou <strong>texte</strong> seul. Si l'utilisateur ne valide pas un format de 
+   r&eacute;ception, il reste abonn&eacute;, mais le courrier ne lui est pas envoy&eacute;.</p>
+<p>Vous pouvez toutefois forcer <em>r&eacute;ellement</em> l'abonnement en s&eacute;lectionnant 
+   le format de r&eacute;ception, <strong>html</strong> ou <strong>texte</strong>, 
+   dans la page du <strong>Suivi des abonnements.</strong></p>
+<p><img src="../img_docs/2007-09-06_085412.png" width="176" height="43" /></p>
+<p>Voir aussi : <a href="#forcerliste">Forcer tous les abonnements pour une liste.</a></p>
+<h2><a name="desactiverv" id="desactiverv"></a>Désactiver <strong>%spiplistes_name%</strong></h2>
+<p>Vous d&eacute;sirez suspendre le plugin sans pour autant supprimer ses donn&eacute;es 
+   ? Rendez-vous dans l'interface de gestion des plugins et cliquez sur la case 
+   &agrave; cocher de <strong>%spiplistes_name%</strong>.</p>
+<p><img src="../img_docs/2007-08-19_072753.png" alt="Cliquez sur la case à cocher pour désactiver le plugin" width="463" height="44" /></p>
+<h2><a name="desinstallerv" id="desinstallerv"></a>D&eacute;sinstaller <strong>%spiplistes_name%</strong></h2>
+<p>Pour d&eacute;sinstaller <strong>%spiplistes_name%</strong>, rendez-vous dans 
+   l'interface de gestion des plugins et cliquez sur l'icone spip-pack (carton 
+   ouvert) qui se trouve &agrave; droite de la ligne concernant <strong>%spiplistes_name%</strong>. 
+   Une confirmation vous est demand&eacute;e (Effacer TOUT), confirmez.</p>
+<p><img src="../img_docs/2007-08-19_073313.png" alt="Cliquez sur le lien pour confirmer la désinstallation" width="465" height="65" /></p>
+<p>Attention: d&eacute;sinstaller <strong>%spiplistes_name%</strong> supprime 
+   les tables de <strong>%spiplistes_name%</strong> dans votre base de donn&eacute;es. 
+   Vous perdez vos courriers et les listes d'abonnement. Si vous d&eacute;sirez 
+   conserver les donn&eacute;es de ces tables dans votre base, s&eacute;lectionnez 
+   plut&ocirc;t la case &agrave; cocher &agrave; gauche de <strong>%spiplistes_name%</strong> 
+   pour <a href="#desactiverv">d&eacute;sactiver le plugin</a>.</p>
+<h2><a name="liens" id="liens"></a>Liens compl&eacute;mentaires</h2>
+<ul>
+   <li><a href="http://www.quesaco.org/SPIP-Listes-V-plugin-SPIP-de">Distribution 
+      officielle de <strong>%spiplistes_name%</strong> sur Quesaco.org</a> ;</li>
+   <li><a href="http://bloog.net/?page=spip-listes">Le site de <strong>SPIP-Listes</strong></a> 
+      qui a largement inspir&eacute; et servi de base &agrave; la cr&eacute;ation 
+      de <strong>%spiplistes_name%</strong> ; </li>
+   <li><a href="http://www.spip-contrib.net/SPIP-Listes">La page consacr&eacute;e 
+      &agrave; SPIP-Listes sur SPIP-contrib</a> ;</li>
+   <li><a href="http://www.spip.net/fr">Le site SPIP, outil de gestion de contenu 
+      (CMS).</a></li>
+</ul>
+</body>
+</html>
