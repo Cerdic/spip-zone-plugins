@@ -25,6 +25,6 @@ _ si vous avez cfg : [Configuration->.?exec=cfg&amp;cfg=spipbb] &agrave; visiter
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.0.0;]" />
-	<chemin dir='' type='prive' />
+	<chemin dir='' />
 
 </plugin>
