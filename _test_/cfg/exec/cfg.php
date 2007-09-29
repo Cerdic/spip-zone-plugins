@@ -3,7 +3,7 @@
  * Plugin cfg : ecrire/?exec=cfg&cfg=xxxx
  *
  * Auteur : bertrand@toggg.com
- * � 2007 - Distribue sous licence LGPL
+ * © 2007 - Distribue sous licence LGPL
  *
  */
 // la fonction appelee par le core, une simple "factory" de la classe cfg
@@ -14,10 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_cfg_dist($class = null)
 {
-	// classe standard ?
-	if (((!$class && ($class = 'cfg')) || $class == 'cfg') && !class_exists($class)) {
-	    class cfg extends cfg_dist { }
-	} 
+	if (!$class || !class_exists($class)) 
+		$class = 'cfg';
 
 	$config = & new $class(
 		($nom = _request('cfg'))? $nom : 'cfg',
@@ -41,6 +39,7 @@ function exec_cfg_dist($class = null)
 
 include_spip('inc/cfg_formulaire');
 include_spip('inc/cfg');
+
 
 // la classe cfg represente une page de configuration
 class cfg_dist extends cfg_formulaire
@@ -222,5 +221,11 @@ class cfg_dist extends cfg_formulaire
 		return fin_gauche() . fin_page();
 	}
 }
+
+
+// classe standard ?
+if (!class_exists('cfg')) {
+	class cfg extends cfg_dist { }
+} 
 
 ?>
