@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_config () {
+function exec_spiplistes_config () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/distant');

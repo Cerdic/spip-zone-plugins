@@ -1,5 +1,5 @@
 <?php
-// SPIP-Listes-V :: $Id: aide_spiplistes.php 15416 2007-09-22 02:51:26Z paladin@quesaco.org $
+// Orginal From SPIP-Listes-V :: $Id: aide_spiplistes.php paladin@quesaco.org $
 /******************************************************************************************/
 /* SPIP-Listes-v est une adaptation de SPIP-Listes.                                       */
 /* Copyright (C) 2007 Christian PAULUS  cpaulus@quesaco.org , http://quesaco.org          */
@@ -27,7 +27,7 @@
 // $LastChangedDate$
 
 // adaptation de aide_index.php
-//syslog_trace("exec/aide_spiplistes.php: <<");
+syslog_trace(_SPIPLISTES_EXEC_AIDE." <<");
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
