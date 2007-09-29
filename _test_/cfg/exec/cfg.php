@@ -3,7 +3,7 @@
  * Plugin cfg : ecrire/?exec=cfg&cfg=xxxx
  *
  * Auteur : bertrand@toggg.com
- * © 2007 - Distribue sous licence LGPL
+ * (c) 2007 - Distribue sous licence LGPL
  *
  */
 // la fonction appelee par le core, une simple "factory" de la classe cfg
