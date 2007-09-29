@@ -38,7 +38,7 @@ function aide_spiplistes_erreur() {
 }
 
 
-function exec_aide_spiplistes () {
+function exec_spiplistes_aide () {
 	global $spip_lang;
 	
 	$var_lang = _request('var_lang');
