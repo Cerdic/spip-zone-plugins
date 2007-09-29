@@ -1,7 +1,7 @@
 <?php
 
 function basefiltrageip_droptables() {
-  spip_query("DROP TABLE IF EXISTS ".$GLOBALS['table_prefix']."_basefiltrageip_whitelist, ".$GLOBALS['table_prefix']."_basefiltrageip_log;");
+  spip_query("DROP TABLE IF EXISTS ".$GLOBALS['table_prefix']."_basefiltrageip_whitelist, ".$GLOBALS['table_prefix']."_basefiltrageip_log, ".$GLOBALS['table_prefix']."_basefiltrageip_reasons;");
 }
 
 function basefiltrageip_doupgrade() {

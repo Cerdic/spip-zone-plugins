@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['basefiltrageip_version'] = 1;
+$GLOBALS['basefiltrageip_version'] = 2;
 
 $spip_basefiltrageip_whitelist = array(
 	"first_ip" 	=> "long NOT NULL",
@@ -20,7 +20,8 @@ $tables_principales['spip_basefiltreageip_whitelist'] = array(
 $spip_basefiltrageip_log = array(
 								 "ip" 	=> "long NOT NULL",
 								 "reason_id" => "int NOT NULL",
-								 "count" => "biginy DEFAULT 0 NOT NULL",
+								 "reason_explanation" => "text DEFAULT ''",
+								 "count" => "bigint DEFAULT 0 NOT NULL",
 								 "firstseen" 		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 								 "lastseen" 		=> "TIMESTAMP");
 
@@ -34,8 +35,8 @@ $tables_principales['spip_basefiltreageip_log'] = array(
 
 
 $spip_basefiltrageip_reasons = array(
-								 "reason_id" => "int NOT NULL",
-								 "reason_string" => "text");
+									 "reason_id" => "int NOT NULL",
+									 "reason_name" => "text");
 
 $spip_basefiltrageip_reasons_key = array(
 						 "PRIMARY KEY" => "reason_id");
