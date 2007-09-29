@@ -8,6 +8,6 @@ On peut maintenant choisir plusieurs options. Les filtages sont:
 - bloquer en envoyant la header 403 et le squelette fonds/403.html
 - rediriger par entete vers le pot de miel configuré
 - cacher les emails
-- cacher les forums (pas implémenté)
-- cacher les deux (pas implémenté)
+- cacher les forums
+- cacher les deux 
 - ne rien faire
