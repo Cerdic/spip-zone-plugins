@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_sl_courrier_rediger(){
+function exec_spiplistes_courrier_rediger () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/barre');
