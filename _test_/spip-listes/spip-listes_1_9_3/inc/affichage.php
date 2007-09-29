@@ -690,7 +690,7 @@ function spiplistes_afficher_auteurs($query, $url){
 		
 		// nom
 		echo '</td><td>';
-		echo "<a href='?exec=abonne_edit&id_auteur=".$row['id_auteur']."'>".typo($row['nom']).'</a>';
+		echo "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT, "id_auteur=".$row['id_auteur'])."'>".typo($row['nom']).'</a>';
 		
 		if ($connect_statut == '0minirezo' AND $row['restreint'])
 		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";

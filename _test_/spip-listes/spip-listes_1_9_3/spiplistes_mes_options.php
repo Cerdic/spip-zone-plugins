@@ -38,7 +38,7 @@ define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
 define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
 
 define("_SPIPLISTES_EXEC_PREFIX", "spiplistes_");
-define("_SPIPLISTES_EXEC_ABONNE_EDIT", "abonne_edit");
+define("_SPIPLISTES_EXEC_ABONNE_EDIT", _SPIPLISTES_EXEC_PREFIX."abonne_edit");
 define("_SPIPLISTES_EXEC_ABONNES_LISTE", "abonnes_tous");
 define("_SPIPLISTES_EXEC_AIDE", _SPIPLISTES_EXEC_PREFIX."aide");
 define("_SPIPLISTES_EXEC_AUTOCRON", "autocron");

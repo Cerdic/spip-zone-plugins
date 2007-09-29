@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/affichage');
 
-function exec_abonne_edit(){
+function exec_spiplistes_abonne_edit(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $connect_id_auteur;
