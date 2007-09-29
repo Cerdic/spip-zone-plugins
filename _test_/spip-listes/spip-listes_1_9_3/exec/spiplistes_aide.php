@@ -41,7 +41,10 @@ function aide_spiplistes_erreur() {
 
 
 function exec_spiplistes_aide () {
+
 	global $spip_lang;
+
+	include_spip('inc/plugin');
 	
 	$var_lang = _request('var_lang');
 	if (!changer_langue($var_lang)) {
@@ -49,6 +52,9 @@ function exec_spiplistes_aide () {
 		changer_langue($var_lang);
 	}
 		
+	$info = plugin_get_infos($plug_file = __plugin_dirname());
+	$nom = typo($info['nom']);
+
 	$fichier_aide_spiplistes = is_readable($f = _DIR_PLUGIN_SPIPLISTES . "docs/"._SPIPLISTES_EXEC_PREFIX."aide_".$var_lang."html")
 		? $f
 		: _DIR_PLUGIN_SPIPLISTES . "docs/"._SPIPLISTES_EXEC_PREFIX."aide_fr.html"
@@ -61,12 +67,12 @@ function exec_spiplistes_aide () {
 		$pattern = array(
 			"/%spiplistes_name%/"
 			,"/%spiplistes_version%/"
-			,'/\$Date:/'
-			,'/\$EndDate/'
+			,'/\$LastChangedDate:/'
+			,'/\$EndLastChangedDate/'
 			,'/%_aide%/'
 			);
 		$replacement = array(
-			__plugin_dirname()
+			$nom
 			, __plugin_meta_version(__plugin_get_real_prefix())
 			, ''
 			, ''
