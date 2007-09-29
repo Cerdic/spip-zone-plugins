@@ -30,7 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 									   'cfg_titre' => 'Restrictions d\'acc&eacute;s par liste noire.',
-									   'cfg_descriptif' => 'Le plugin pot de miel utilise la base de donn&eacute;es fournie par le projet honey pot pour limiter l\'acc&eacute;s aux sites des visiteurs suspicieux. Pour plus d\'information, voir <a href="http://projecthoneypot.org/httpbl_configure.php">la documentation de http:bl</a>. Pour activer cette fonctionalit&eacute;, vous devez d\'abord obtenir une clef d\'acc&eacute;es aupr&egrave;s du projet honey pot.',
+									   'cfg_descriptif' => 'Le plugin pot de miel utilise la base de donn&eacute;es fournie par le projet honey pot pour limiter l\'acc&eacute;s aux sites des visiteurs suspicieux.
+
+ Pour plus d\'information, voir [la documentation de http:bl->http://projecthoneypot.org/httpbl_configure.php].
+
+ Pour activer cette fonctionalit&eacute;, vous devez d\'abord [obtenir une clef d\'acc&eacute;es aupr&egrave;s du projet honey pot->http://www.projecthoneypot.org/httpbl_configure.php].',
 									   'cfg_apikey' => 'Clef fournies par le P.H.Pot: ',
 									   'cfg_sivisiteur' => 'Si le visiteur est consid&eacute;r&eacute; comme un :',
 									   'cfg_bloquer' => 'le bloquer',

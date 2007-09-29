@@ -4,10 +4,10 @@
   </nom>
   <auteur>	<!-- Auteur du plugin -->
 	Pierre Andrews (mortimer)
-	_ &#169; 2006 - Distribu&eacute; sous licence GPL
+_ &#169; 2006 - Distribu&eacute; sous licence GPL
   </auteur>
   <version> <!-- Version du plugin -->
-	0.1
+	0.2
   </version>
   <etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
@@ -16,7 +16,9 @@
   <description>
 	<multi>
 	[fr]Ajouter des liens vers votre honeypot dans vos page. Necessite l'installation pr&eacute;alable du [project honeypot->http://projecthoneypot.org].
+_ Vous pouvez aussi utiliser ce plugin pour limiter l'acc&eacute;s &agrave; votre site pour visiteurs ayant &eacute;t&eacute; classifi&eacute;s douteux par le project honeypot.
 	[en] Automatically generate trap links to your site honeypot in your SPIP templates. You will first need to install a honeypot from [project honeypot->http://projecthoneypot.org].
+_ You can also use this plugin to limit the access to your site for the visitors that have been classified as suspicious by the P.H.Pot project.
 	</multi>
   </description>
   <lien>[Documentation &amp; Configuration->./?exec=cfg&amp;cfg=honeypot]</lien> <!-- URI de documentation -->
@@ -39,5 +41,5 @@
 	<inclure>httpbl_pipeline.php</inclure>
   </pipeline>	
 
-  <necessite id='cfg' version='[1.0.3;]' />
+  <necessite id='cfg' version='[1.0.8;]' />
 </plugin>

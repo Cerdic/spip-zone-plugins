@@ -30,7 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'type7' => 'suspicious & harvester & comment spammer',
 
 									   'cfg_titre' => 'Black List access restrictions',
-									   'cfg_descriptif' => 'The honeypot plugin can use the database provided by the Project Honey Pot to limit the access to the site to suspicious visitors. See <a href="http://projecthoneypot.org/httpbl_configure.php">the HTTP Black List documentation</a> for more information. To be able to use this feature on your site, you first have to get an API key from the project honey pot.',
+									   'cfg_descriptif' => 'The honeypot plugin can use the database provided by the Project Honey Pot to limit the access to the site to suspicious visitors.
+
+ See [the HTTP Black List documentation->http://projecthoneypot.org/httpbl_configure.php] for more information. 
+
+To be able to use this feature on your site, you first have to [get an API key from the project honey pot->http://www.projecthoneypot.org/httpbl_configure.php].',
 									   'cfg_apikey' => 'P.H.Pot provided access key: ',
 									   'cfg_sivisiteur' => 'If the visitor is considered a :',
 									   'cfg_bloquer' => 'refuse access to the site',
