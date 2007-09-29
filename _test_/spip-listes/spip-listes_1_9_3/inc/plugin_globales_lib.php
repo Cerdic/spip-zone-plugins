@@ -16,6 +16,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define("_PGL_PLUGIN_GLOBALES_LIB", true);
 
+// vérifie si le serveur est dans Adresses IP privées de classe C (Private IP addresses)
+// renvoie true si serveur dans classe privée
+function __server_in_private_ip_adresses() {
+	return(preg_match('/^192\.168/', $_SERVER['SERVER_ADDR']));
+}
+
 if(!defined("_PGL_SYSLOG_LAN_IP_ADDRESS")) define("_PGL_SYSLOG_LAN_IP_ADDRESS", "/^192\.168\./");
 if(!defined("_PGL_USE_SYSLOG_UNIX"))  define("_PGL_USE_SYSLOG_UNIX", true);
 

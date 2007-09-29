@@ -82,6 +82,9 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
    des difficult&eacute;s &agrave; le lire ici, <a href='@liencourrier@'>vous pouvez 
    consulter l'original sur le site @nomsite@</a>.</div>
 	</div>",
+'Console' => "Console",
+'Console_syslog_desc' => "Vous &ecirc;tes sur un r&eacute;seau local (@IP_LAN@). Pour plus de facilit&eacute;, vous pouvez activer la console sur syslog au lieu des journaux SPIP.",
+'Console_syslog_texte' => "Activer les journaux syst&egrave;mes (syslog)",
 
 //D
 '_de_' => " de ",

@@ -60,16 +60,23 @@ function exec_config () {
 		'opt_simuler_envoi' // demande à la méleuse de simuler l'envoi du courrier
 		);
 			
+	$keys_console_syslog = array(
+		'opt_console_syslog' // permet d'envoyer le journal sur syslog
+		);
+			
 	// initialise les variables postées par le formulaire
 	foreach(array_merge(
 		array(
 			'abonnement_valider', 'abonnement_config', 'param_reinitialise'
 			, 'btn_complement_courrier'
 			, 'btn_param_valider'
+			, 'btn_console_syslog'
 		)
 		, $keys_complement_courrier
 		, $keys_param_valider
-		, $keys_opts_param_valider) as $key) {
+		, $keys_opts_param_valider
+		, $keys_console_syslog
+		) as $key) {
 		$$key = _request($key);
 	}
 
@@ -117,6 +124,31 @@ function exec_config () {
 		$doit_ecrire_metas = true;
 	}
 		
+	if($btn_console_syslog) {
+		$metas_p = 'spiplistes_preferences';
+		foreach($keys_console_syslog as $key) {
+			if(!empty($$key)) {
+				if(!isset($GLOBALS['meta'][$metas_p])) {
+					$GLOBALS['meta'][$metas_p] = array();
+				}
+				__plugin_ecrire_s_meta ($key, $$key, $metas_p);
+			} 
+			else {
+				__plugin_ecrire_s_meta ($key, null, $metas_p);
+			}
+		}
+		$doit_ecrire_metas = true;
+	}
+	
+	if(!__server_in_private_ip_adresses() 
+		&& __plugin_lire_s_meta ('opt_console_syslog', 'spiplistes_preferences')
+		// si pas sur réseau privé et option syslog validé,
+		// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
+		) {
+		__plugin_ecrire_s_meta ($key, null, $metas_p);
+		$doit_ecrire_metas = true;
+	}
+	
 	if($doit_ecrire_metas) {
 		ecrire_metas();
 	}
@@ -260,7 +292,7 @@ function exec_config () {
 				, 1, '', 'fondo', _T('spiplistes:Jeu_de_caracteres')." : ", '', 'verdana2')
 		. fin_cadre_relief(true)
 		;
-	
+		//
 	// option simulation des envois
 	$checked = (__plugin_lire_s_meta('opt_simuler_envoi', 'spiplistes_preferences')) ? "checked='checked'" : "";
 	$page_result .= ""
@@ -285,7 +317,31 @@ function exec_config () {
 		. fin_cadre_trait_couleur(true)
 		;
 
-	// lien sur logs ou logs
+	//////////////////////////////////////////////////////
+	// Paramétrer la console de debug/logs si sur LAN
+	if(__server_in_private_ip_adresses()) {
+		$page_result .= ""
+			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."console-24.gif", true, "", _T('spiplistes:Console'))
+			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+			//
+			// ajout du renvoi de tete
+			. debut_cadre_relief("", true, "", _T('spiplistes:Console_syslog'))
+			. "<p class='verdana2'>"._T('spiplistes:Console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>"
+			. "<input type='checkbox' name='opt_console_syslog' value='oui' id='opt_console_syslog' "
+				. ((__plugin_lire_s_meta('opt_console_syslog', 'spiplistes_preferences')) ? "checked='checked'" : "")
+				. " />\n"
+			. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:Console_syslog_texte')."</label>\n"
+			. fin_cadre_relief(true)
+			. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
+			. "<label for='btn_console_syslog' style='display:none;'>"._T('bouton_valider')."</label>\n"
+			. "<input type='submit' id='btn_console_syslog' name='btn_console_syslog' value='"._T('bouton_valider')."' class='fondo' />\n"
+			. "</p>\n"
+			. "</form>\n"
+			. fin_cadre_trait_couleur(true)
+			;
+	}
+	
+	// lien sur logs ou affiche logs
 	$page_result .=
 		(_request('logs')=="oui")
 		?
