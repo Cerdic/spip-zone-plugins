@@ -177,8 +177,8 @@ function exec_config () {
 
 	debut_gauche();
 	__plugin_boite_meta_info();
-	spiplistes_boite_info_spiplistes();
 	creer_colonne_droite();
+	spiplistes_boite_info_spiplistes();
 	debut_droite("messagerie");
 
 	$page_result = "";

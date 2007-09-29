@@ -1,11 +1,9 @@
 <?php
-// SPIP-Listes-V :: $Id: plugin_globales_lib.php 15368 2007-09-20 16:35:54Z paladin@quesaco.org $
+// Original From SPIP-Listes-V :: $Id: plugin_globales_lib.php paladin@quesaco.org $
 // Christian PAULUS : http://www.quesaco.org/ (c) 2007
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // librairie de fonctions et defines globales 
 // indépendantes de tout plugin
@@ -13,6 +11,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // toutes les fonctions ici sont préfixées '__' (2 tirets)
 // sauf re-déclaration inc/vieilles_defs.php
 // sauf déclaration des fonctions php5
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define("_PGL_PLUGIN_GLOBALES_LIB", true);
 
