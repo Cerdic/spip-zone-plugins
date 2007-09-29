@@ -28,7 +28,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_courrier_edit(){
+function exec_spiplistes_courrier_edit(){
 
 	include_spip('inc/presentation');
 	include_spip('inc/barre');

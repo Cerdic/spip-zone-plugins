@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_abonnes_tous () {
+function exec_spiplistes_abonnes_tous () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/mots');
