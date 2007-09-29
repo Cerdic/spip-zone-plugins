@@ -36,6 +36,8 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'numero_icq'=>'Contacts chat (ICQ, Skype, etc... )',
 'url_avatar'=>'Url de votre avatar',
 'signature'=>'Signature',
+'droit_editer'=>'vous n\'avez pas les droits suffisants pour &eacute;diter ce message',
+'editer'=>'&eacute;diter',
 
 
 
