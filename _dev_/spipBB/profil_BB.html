@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <BOUCLE_profilbb(AUTEURS){id_auteur}{tout}>
 	<BOUCLE_statadm(AUTEURS){id_auteur}{statut=="0minirezo"}{tout}> </BOUCLE_statadm><?php $statmem='Administrateur' ?></B_statadm>
-	<BOUCLE_statredac1(AUTEURS){id_auteur}{statut=="1comite"}{tout}> </BOUCLE_statredac1><?php $statmem='Rédacteur' ?></B_statredac1>
+	<BOUCLE_statredac1(AUTEURS){id_auteur}{statut=="1comite"}{tout}> </BOUCLE_statredac1><?php $statmem='R&eacute;dacteur' ?></B_statredac1>
 	<BOUCLE_statvisit(AUTEURS){id_auteur}{statut=="6forum"}{tout}> </BOUCLE_statvisit><?php $statmem='Membre' ?></B_statvisit>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -40,10 +40,10 @@
 					[<li class="site"><:spipbb:site:> : <a href="(#URL_SITE)" title="#NOM_SITE"><span>#NOM_SITE</span></a></li>]
 					[<li class="bio"><:spipbb:bio:> :<br /><span>(#BIO)</span></li>]
                                         <br />
-                                        [<li class="site"><:phpbb:lieu:> : (#EXTRA|extra{Localisation}|propre)</li>]
-                                        [<li class="site"><:phpbb:Emploi:> : (#EXTRA|extra{Emploi}|propre)</li>]
-                                        [<li class="site"><:phpbb:Loisirs:> : (#EXTRA|extra{Loisirs}|propre)</li>]
-                                        [<li class="site"><:phpbb:Numero_ICQ:> : (#EXTRA|extra{Numero_ICQ})</li>]
+                                        [<li class="site"><:spipbb:lieu:> : (#EXTRA|extra{Localisation}|propre)</li>]
+                                        [<li class="site"><:spipbb:Emploi:> : (#EXTRA|extra{Emploi}|propre)</li>]
+                                        [<li class="site"><:spipbb:Loisirs:> : (#EXTRA|extra{Loisirs}|propre)</li>]
+                                        [<li class="site"><:spipbb:Numero_ICQ:> : (#EXTRA|extra{Numero_ICQ})</li>]
 				</ul>
 			</div>
 			
@@ -52,9 +52,9 @@
 				<ul class="detmem">
 				<li id="ecrire"><:spipbb:luiecrire:> :#FORMULAIRE_ECRIRE_AUTEUR</li>
 				<?php 
-		if ($GLOBALS['auteur_session'] AND $statmem!="<:phpbb:membre:>" AND $statut!="6forum"){
+		if ($GLOBALS['auteur_session'] AND $statmem!="<:spipbb:membre:>" AND $statut!="6forum"){
 		
-		echo '<li class="pm"><:phpbb:mp:> :&nbsp;<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:phpbb:envmp:>"><span><:phpbb:envmp:></span> </a></li>'; } 
+		echo '<li class="pm"><:spipbb:mp:> :&nbsp;<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span> </a></li>'; } 
         ?><!-- l'espace derriere le span est important : ca permet au style spipbblike de fonctionner sous IE -->
 				</ul>
 			</div>

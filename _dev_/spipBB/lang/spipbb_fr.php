@@ -91,6 +91,7 @@ par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a>',
 'date' => 'Inscrit le',
 'deja_enregistree' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e<p><a href=\'spip.php?page=formulaire_oubli\'>[ Mot de passe oubli&eacute; ]</a></p>',
 'dernier' => '&nbsp;Dernier<br />',
+'dernier_membre' => 'L\'utilisateur enregistr&eacute; le plus r&eacute;cent est',
 
 //E
 'ecrirea' => 'Ecrire Email &agrave;',
@@ -105,7 +106,7 @@ par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a>',
 'entree_url' => 'L\'adresse (URL) de votre site',
 'entree_biographie' => 'Courte biographie en quelques mots.',
 'etplus' => '... et plus ...',
-
+'en_ligne' => 'Qui est en ligne ?',
 
 //F
 'faq' => 'FAQ',
@@ -168,6 +169,7 @@ par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a>',
 'messages_voir_dernier' => 'Voir le dernier message',
 'moderateurs' => 'Mod&eacute;rateur(s)',
 'mp' => 'Message Priv&eacute;',
+'membres_en_ligne' => 'utilisateurs en ligne',
 
 //n
 'nom' => 'Nom d\'utilisateur',
@@ -252,6 +254,8 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'tout_apropos' => 'Tout &agrave; propos de',
 'total_messages' => 'Total messages',
 'titre_spipbb' => 'SpipBB',
+'total_messages_membres' => 'Nos membres ont posté un total de',
+'total_membres' => 'Nous avons',
 
 //V
 'visites_jour' => 'Visites aujourd\'hui',

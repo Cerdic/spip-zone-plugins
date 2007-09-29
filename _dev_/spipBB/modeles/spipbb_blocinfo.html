@@ -1,0 +1,25 @@
+<BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#CONFIG{spipbb/spipbb_id_rubrique}}>
+<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+<table summary="index" class="spipforum">
+		<tbody[ id="salon(#ID_RUBRIQUE)"]>
+		<tr class="salon">
+			<td colspan="2" class="salontitre"><h2><a href="spip.php?page=voir_en_ligne&amp;id_rubrique=#ID_RUBRIQUE"><:spipbb:en_ligne:></a></h2></td>
+		</tr>
+		<tr class="forumligne">
+			<td rowspan="2" class="etatenligne">
+				<span><:titre_forum:></span>
+			</td>
+			<td class="enligne">
+			<B_messages><:spipbb:total_messages_membres:> <BOUCLE_messages(FORUMS){id_secteur}{plat}></BOUCLE_messages>#TOTAL_BOUCLE <:messages:><br /><//B_messages>
+			<B_auteurs><:spipbb:total_membres:> <BOUCLE_auteurs(AUTEURS){tout}></BOUCLE_auteurs>#TOTAL_BOUCLE <:auteurs:><br /><//B_auteurs>
+			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{par maj}{inverse}{0,1}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{id_rubrique}})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
+			</td>
+		</tr>
+		<tr  class="forumligne">
+			<td class="dernmsg"><!-- DATE_SUB(NOW(),INTERVAL 5 MINUTE) -->
+				<B_auteurs_en_ligne><BOUCLE_auteurs_en_ligne(AUTEURS){tout}{en_ligne<=1)}></BOUCLE_auteurs_en_ligne>#TOTAL_BOUCLE <:spipbb:membres_en_ligne:><br /><//B_auteurs_en_ligne>
+			</td>
+		</tr>
+</table>
+</BOUCLE_forum_principal>
+

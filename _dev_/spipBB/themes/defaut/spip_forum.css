@@ -74,13 +74,14 @@ tr.salon td { margin: 0; padding: 0; padding-left: 3px; text-align: left; }
 td.titre, td.titresuj { text-align: left !important; font-weight: bold; }
 td.msgpost, td.msgsuj, td.autpost { width: 75px; }
 td.dateaut, td.msgaut, td.statutaut { width: 80px; }
-td.etatsuj, td.etatfor { width: 50px; height: 25px; }
-td.etatsuj span, td.etatfor span { display: none; }
+td.etatsuj, td.etatfor, td.etatenligne { width: 50px; height: 25px; }
+td.etatsuj span, td.etatfor span, td.etatenligne span  { display: none; }
 td.annpost { background-image: url(img/folder_announce.png); background-repeat: no-repeat; background-position: center; }
 td.normpost { background-image: url(img/folder.png); background-repeat: no-repeat; background-position: center; }
 td.fermpost { background-image: url(img/topic_lock.png); background-repeat: no-repeat; background-position: center; }
 td.ouvfor { background-image: url(img/folder_big.png); background-repeat: no-repeat; background-position: center; }
 td.fermfor { background-image: url(img/folder_lock_big.png); background-repeat: no-repeat; background-position: center; }
+td.etatenligne { background-image: url(img/whosonline.png); background-repeat: no-repeat; background-position: center; }
 td.dermsg { width: 180px; }
 body#nouvmsgfor td.dermsg { background-color: transparent; }
 a.adermsg { height: 9px; padding-left: 18px; background-repeat: no-repeat; background-image: url(img/icon_latest_reply.png); }
@@ -259,8 +260,9 @@ tr.salon td, div#detail h3, div.prec h3, div.login p, table.spipforum h3
 /* Cellule d'avertissement de fermeture d'un forum */
 body#artforum tr.clos { font-weight: bold; font-size: 12px; }
 /* police petite taille */
-td.statutaut, td.dermsg, li.rechtitre span
+td.statutaut, td.dermsg, td.enligne, li.rechtitre span
 { font-size: 10px; }
+td.enligne { text-align: left; }
 /* Copyright et informations de pied de page */
 .copyright
 { font-size: 10px; color: #999999; letter-spacing: -1px;}
