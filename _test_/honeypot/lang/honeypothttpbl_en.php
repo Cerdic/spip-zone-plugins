@@ -39,7 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'cfg_cacheremail' => 'hide email address',
 									   'cfg_cacherforum' => 'hide the forums',
 									   'cfg_cachertout' => 'hide the forums and the email address',
-									   'cfg_minthreat' => 'when the thread is greater than :'
+									   'cfg_minthreat' => 'when the thread is greater than :',
+									   'cfg_remplacement_email' => 'Hide the email addresses by replacing them with: '
 
 									   );
 
