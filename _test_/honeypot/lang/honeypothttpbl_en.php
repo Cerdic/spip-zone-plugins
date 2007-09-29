@@ -40,8 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'cfg_cacherforum' => 'hide the forums',
 									   'cfg_cachertout' => 'hide the forums and the email address',
 									   'cfg_minthreat' => 'when the thread is greater than :',
-									   'cfg_remplacement_email' => 'Hide the email addresses by replacing them with: '
-
+									   'cfg_remplacement_email' => 'Hide the email addresses by replacing them with: ',
+									   'cfg_log' => 'Log detected access :',
+									   'cfg_log_all' => 'All known access type',
+									   'cfg_log_blocked' => 'Only filtered access'
 									   );
 
 ?>

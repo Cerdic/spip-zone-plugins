@@ -40,7 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'cfg_cacherforum' => 'cacher les forums',
 									   'cfg_cachertout' => 'cacher les forums et les adresses emails',
 									   'cfg_minthreat' => 'quand la menace est sup&eacute;rieur &agrave; :',
-									   'cfg_remplacement_email' => 'Cacher les adresse emails en les rempla&ccedil;ant par : '
+									   'cfg_remplacement_email' => 'Cacher les adresse emails en les rempla&ccedil;ant par : ',
+									   'cfg_log' => 'Logguer les acc&eacute;s :',
+									   'cfg_log_all' => 'de tous les types connus',
+									   'cfg_log_blocked' => 'qui sont filtr&eacute;s'
 
 );
 
