@@ -104,7 +104,7 @@ function exec_spiplistes_courrier_previsu(){
   if($patron_version_texte) echo _T('spiplistes:patron_detecte');
   echo _T('spiplistes:date_ref').": $date<br />";
   
-  echo menu_langues('changer_lang', $lang , '<strong>Langue :</strong>&nbsp;','', generer_url_ecrire('import_patron','id_message='.$id_courrier.'&patron='.$patron.'&date='.$date ) );
+  echo menu_langues('changer_lang', $lang , '<strong>Langue :</strong>&nbsp;','', generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_PATRON,'id_message='.$id_courrier.'&patron='.$patron.'&date='.$date ) );
 	echo "</div>";
 */
 

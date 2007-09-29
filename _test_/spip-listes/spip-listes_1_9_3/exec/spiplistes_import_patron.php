@@ -31,7 +31,7 @@ include_spip('inc/meta');
 include_spip('inc/filtres');
 include_spip('inc/lang');
 
-function exec_import_patron(){
+function exec_spiplistes_import_patron(){
 
 	$id_message = _request('id_message');
 	$patron = _request('patron');
@@ -82,7 +82,7 @@ function exec_import_patron(){
   if($patron_version_texte) echo _T('spiplistes:patron_detecte');
   echo _T('spiplistes:date_ref').": $date<br />";
   
-  echo menu_langues('changer_lang', $lang , '<strong>Langue :</strong>&nbsp;','', generer_url_ecrire('import_patron','id_message='.$id_message.'&patron='.$patron.'&date='.$date ) );
+  echo menu_langues('changer_lang', $lang , '<strong>Langue :</strong>&nbsp;','', generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_PATRON,'id_message='.$id_message.'&patron='.$patron.'&date='.$date ) );
 
 	echo "<br /><form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT, "id_message=$id_message")."' method='post'>\n";	
 	echo "<input type='submit' name='Valider' value='"._T('spiplistes:confirmer')."' class='fondo'>\n";	

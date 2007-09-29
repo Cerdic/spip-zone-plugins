@@ -28,7 +28,7 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/affichage');
 
-function exec_import_export(){
+function exec_spiplistes_import_export () {
 
 	global $connect_statut;
 	global $connect_toutes_rubriques;
@@ -274,7 +274,7 @@ function exec_import_export(){
 
 		} // insert
 		else echo "<br /><br /><center><strong>"._T('spiplistes:erreur')."</strong></center>";
-		echo "<a href='?exec=import_export'>["._T('spiplistes:retour_link')."]</a>";
+		echo "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT)."'>["._T('spiplistes:retour_link')."]</a>";
 		echo "</div>";
 	}
 	break ;
@@ -308,14 +308,14 @@ function exec_import_export(){
 		echo "<legend>"._T('spiplistes:abonnement_newsletter')."</legend>";
 		echo _T('spiplistes:importer_preciser');
 		echo "<div style='text-align:left'>" ;
-		echo "<form action='$PHP_SELF?exec=import_export&etape=2' method='post' enctype='multipart/form-data'name='importform'> ";
+		echo "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT, "etape=2")."' method='post' enctype='multipart/form-data'name='importform'> ";
 		while($row = spip_fetch_array($list)) {
 			$id_liste = $row['id_liste'] ;
 			$titre = $row['titre'] ;
 			if ($nb_listes = 1) $ischecked = "";
 			else $ischecked = "checked='checked'";
 			echo "<input type=\"checkbox\" name=\"list_abo[]\" $ischecked value=\"".$id_liste."\" />\n";
-			echo "<a href='?exec=import_export&liste=$id_liste' title='"._T('spiplistes:infos_liste')."'>$titre</a><br />" ;
+			echo "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT, "liste=$id_liste")."' title='"._T('spiplistes:infos_liste')."'>$titre</a><br />" ;
 		}
 		echo "<br />";
 		echo'<strong>Format :</strong><br>';
@@ -364,7 +364,7 @@ function exec_import_export(){
 	$nb_listes = spip_num_rows($list);
 	if ($nb_listes > 0) {
 		echo debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:exporter'));
-		echo "<form action='$PHP_SELF?exec=import_export' method='post'>\n";	 
+		echo "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT)."' method='post'>\n";	 
 		while($row = spip_fetch_array($list)) {
 			$id_liste = $row['id_liste'] ;
 			$titre = $row['titre'];

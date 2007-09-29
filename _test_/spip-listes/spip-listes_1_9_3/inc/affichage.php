@@ -181,7 +181,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 		. "<li>"
 		. icone_horizontale(
 			_T('spiplistes:import_export')
-			, generer_url_ecrire('import_export')
+			, generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT)
 			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."listes_inout.png"
 			,""
 			,false

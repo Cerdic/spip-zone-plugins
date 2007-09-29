@@ -35,7 +35,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	(la meleuse prend en charge les courriers en statut _SPIPLISTES_STATUT_READY)
 	
 */
-function exec_gerer_courrier(){
+function exec_spiplistes_gerer_courrier(){
 
 	include_spip('inc/presentation');
 	include_spip('inc/barre');
