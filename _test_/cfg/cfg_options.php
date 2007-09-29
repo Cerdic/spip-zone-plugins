@@ -137,6 +137,44 @@ function get_table_id($table) {
 	return array(false, false);
 }
 
+
+/*
+ *  cfg_charger_classe(), sur le meme code que charger_fonction()
+ */
+// charge un fichier perso ou, a defaut, standard
+// et retourne si elle existe le nom de la fonction class homonyme ($nom),
+// ou de suffixe _dist
+function cfg_charger_classe($nom, $dossier='inc', $continue=false) {
+
+	if (substr($dossier,-1) != '/') $dossier .= '/';
+
+	if (class_exists($f = $nom))
+		return $f;
+	if (class_exists($g = $f . '_dist'))
+		return $g;
+
+	// Sinon charger le fichier de declaration si plausible
+	if (!preg_match(',^\w+$,', $f))
+		die(htmlspecialchars($nom)." pas autorise");
+
+	// passer en minuscules (cf les balises de formulaires)
+	$inc = include_spip($d = ($dossier . strtolower($nom)));
+
+	if (class_exists($f)) return $f;
+	if (class_exists($g)) return $g;
+	if ($continue) return false;
+
+	// Echec : message d'erreur
+	spip_log("class $nom ($f ou $g) indisponible" .
+		($inc ? "" : " (fichier $d absent)"));
+
+	include_spip('inc/minipres');
+	echo minipres(_T('forum_titre_erreur'),
+		 _T('fichier_introuvable', array('fichier'=> '<b>'.htmlentities($d).'</b>')));
+	exit;
+}
+
+
 // signaler le pipeline de notification
 $GLOBALS['spip_pipeline']['cfg_post_edition'] = "";
 ?>
