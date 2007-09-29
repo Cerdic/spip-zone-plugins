@@ -248,7 +248,7 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'texte_login_precaution' => 'Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
 	Utilisez ce formulaire avec pr&eacute;caution...',
 'texte_repondre' => 'R&eacute;pondre &agrave; :<br />&nbsp;&nbsp;..&nbsp;',
-'titre_cadre_signature_obligatoire' => '<B>Signature</B> [Obligatoire]<br />',
+'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Obligatoire]<br />',
 'tous_forums' => 'Tous les forums',
 'toutes_categories' => 'Toutes les cat&eacute;gories',
 'tout_apropos' => 'Tout &agrave; propos de',

@@ -34,9 +34,9 @@ if ($modif) {
 	// changement de pass, a securiser en jaja ?
 	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip') {
 		if ($new_pass != $new_pass2)
-			$echec .= "<p>"._T('info_passes_identiques');
+			$echec .= "<br />"._T('info_passes_identiques');
 		else if ($new_pass AND strlen($new_pass) < 6)
-			$echec .= "<p>"._T('info_passe_trop_court');
+			$echec .= "<br />"._T('info_passe_trop_court');
 		else {
 			$modif_login = true;
 			$auteur['new_pass'] = $new_pass;
@@ -140,17 +140,17 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 			<h3><:spipbb:paramprofil:></h3>
  <?php if ($echec){
 	debut_cadre_relief();
-	echo '<img src="img_pack/warning.png" alt="'._T('spipbb:info_avertissement').'" width="48" height="48" align="left">';
-	echo "<font color='red'>$echec <p>"._T('spipbb:info_recommencer')."</font>";
+	echo '<img src="'.find_in_path('images/warning.gif').'" alt="'._T('spipbb:info_avertissement').'" width="48" height="48" style="float:left" />';
+	echo "<font color='red'>$echec <br />"._T('spipbb:info_recommencer')."</font>";
 	fin_cadre_relief();
-	echo "<p>";
+	echo "<br />";
 }
   debut_cadre_formulaire();
-  echo "<FORM ACTION='spip.php?page=profile' METHOD='post'>";
-  echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
-  echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";
-  echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"oui\">";   
-  echo "<INPUT TYPE='Hidden' NAME='modif' VALUE=\"1\">";
+  echo "<form action='spip.php?page=profile' method='post'>";
+  echo "<input type='hidden' name='id_auteur' value=\"$id_auteur\" />";
+  echo "<input type='hidden' name='id_rubrique' value=\"$id_rubrique\" />";
+  echo "<input type='hidden' name='redirect' value=\"oui\" />";   
+  echo "<input type='hidden' name='modif' value=\"1\" />";
  			
  //
   // Infos personnelles
@@ -159,52 +159,52 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
   	debut_cadre_relief("ecrire/img_pack/fiche-perso-24.png");
   	echo _T('spipbb:titre_cadre_signature_obligatoire'); 
   	echo "("._T('spipbb:entree_nom_pseudo').")<br/>";
-  	echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40'><P>";
+  	echo "<input type='text' name='nom' class='formo' value=\"".entites_html($auteur['nom'])."\" size='40' /><br />";
 	echo "<b>"._T('spipbb:entree_adresse_email')."</b>";
 	if ($statut == "0minirezo") {
-		echo "<br/><INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";}
+		echo "<br/><input type='text' name='email' class='formo' value=\"".entites_html($auteur['email'])."\" size='40' /><br />\n";}
 	else {
 		echo "&nbsp;: <tt>".$auteur['email']."</tt>";
-		echo "<br>("._T('spipbb:info_reserve_admin').")\n";
-		echo "<P>"; }
+		echo "<br />("._T('spipbb:info_reserve_admin').")\n";
+		echo "<br />"; }
 	echo "<b>"._T('spipbb:entree_infos_perso')."</b><br/>";
 	echo "("._T('spipbb:entree_biographie').")<br/>";
-	echo "<textarea name='bio' class='forml' rows='4' cols='40' wrap=soft>";
+	echo "<textarea name='bio' class='forml' rows='4' cols='40'>";
 	echo entites_html($auteur['bio']);
 	echo "</textarea>\n";
 	if ($champs_extra) {
 		include_spip("inc/extra");
 		extra_saisie($auteur['extra'], 'auteurs', 'inscription'); }
 		fin_cadre_relief();
-		echo "<p>";
+		echo "<br />";
         
   	if ($options == "avancees") {
   		debut_cadre_relief("cadenas-24.png");
 	  	echo "<b>"._T('spipbb:entree_cle_pgp')."</b><br/>";
-	  	echo "<textarea name='pgp' class='forml' rows='4' cols='40' wrap=soft>";
+	  	echo "<textarea name='pgp' class='forml' rows='4' cols='40'>";
 	  	echo entites_html($auteur['pgp']);
 	  	echo "</textarea>\n";
 	  	fin_cadre_relief();
-	  	echo "<p>"; }
+	  	echo "<br />"; }
 	else {
-		echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\">"; }
+		echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\" />"; }
 	
 	debut_cadre_relief("site-24.png");
 	echo "<b>"._T('spipbb:entree_nom_site')."</b><br/>";
-	echo "<input type='text' name='nom_site_auteur' class='forml' value=\"".entites_html($auteur['nom_site'])."\" size='40'><p>\n";
+	echo "<input type='text' name='nom_site_auteur' class='forml' value=\"".entites_html($auteur['nom_site'])."\" size='40' /><br />\n";
 	echo "<b>"._T('spipbb:entree_url')."</b><br/>";
-  	echo "<input type='text' name='url_site' class='forml' value=\"".entites_html($auteur['url_site'])."\" size='40'>\n";
+  	echo "<input type='text' name='url_site' class='forml' value=\"".entites_html($auteur['url_site'])."\" size='40' />\n";
   	fin_cadre_relief();
-  	echo "<p>";
+  	echo "<br />";
     
-    echo "<b><:spipbb:lieu:> :</b><br><input name=\"suppl_Localisation\" class=\"forml\" value=\"[(#EXTRA|extra{Localisation}|propre|entites_html)]\" size=\"40\" type=\"text\"><br>";
-    echo "<b><:spipbb:interet:> :</b><br><input name=\"suppl_Emploi\" class=\"forml\" value=\"[(#EXTRA|extra{Emploi}|propre|entites_html)]\" size=\"40\" type=\"text\"><br>";
-    echo "<b><:spipbb:loisirs:> :</b><br><input name=\"suppl_Loisirs\" class=\"forml\" value=\"[(#EXTRA|extra{Loisirs}|propre|entites_html)]\" size=\"40\" type=\"text\"><br>";
-    echo "<b><:spipbb:numero_icq:> :</b><br><input name=\"suppl_Numero_ICQ\" class=\"forml\" value=\"[(#EXTRA|extra{Numero_ICQ}|propre|entites_html)]\" size=\"40\" type=\"text\"><br>";
+    echo "<b><:spipbb:lieu:> :</b><br /><input name=\"suppl_Localisation\" class=\"forml\" value=\"[(#EXTRA|extra{Localisation}|propre|entites_html)]\" size=\"40\" type=\"text\" /><br />";
+    echo "<b><:spipbb:interet:> :</b><br /><input name=\"suppl_Emploi\" class=\"forml\" value=\"[(#EXTRA|extra{Emploi}|propre|entites_html)]\" size=\"40\" type=\"text\" /><br />";
+    echo "<b><:spipbb:loisirs:> :</b><br /><input name=\"suppl_Loisirs\" class=\"forml\" value=\"[(#EXTRA|extra{Loisirs}|propre|entites_html)]\" size=\"40\" type=\"text\" /><br />";
+    echo "<b><:spipbb:numero_icq:> :</b><br /><input name=\"suppl_Numero_ICQ\" class=\"forml\" value=\"[(#EXTRA|extra{Numero_ICQ}|propre|entites_html)]\" size=\"40\" type=\"text\" /><br />";
     if ($statut=="6forum" OR $statut=="1comite"){ // ça c'est que pour ceux qui ont pas accès à leur page d'auteur dans l'admin
-        echo "<b><:spipbb:url_avatar:> :</b><br><input name=\"suppl_avatar\" class=\"forml\" value=\"[(#EXTRA|extra{avatar}|propre|entites_html)]\" size=\"40\" type=\"text\"><br>";
+        echo "<b><:spipbb:url_avatar:> :</b><br /><input name=\"suppl_avatar\" class=\"forml\" value=\"[(#EXTRA|extra{avatar}|propre|entites_html)]\" size=\"40\" type=\"text\" /><br />";
     }
-    echo "<b><:spipbb:signature:> :</b><br><textarea name=\"suppl_signature\" class=\"forml\" rows=\"5\" cols=\"40\">[(#EXTRA|extra{signature}|entites_html|propre)]</textarea>";
+    echo "<b><:spipbb:signature:> :</b><br /><textarea name=\"suppl_signature\" class=\"forml\" rows=\"5\" cols=\"40\">[(#EXTRA|extra{signature}|entites_html|propre)]</textarea>";
 
 	// le visiteur ne peut Ã©diter son login et mais peut Ã©diter son pass, modifier les valeurs selon les besoins  
 		$edit_login = false;
@@ -218,31 +218,35 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 	// Avertissement en cas de modifs de ses propres donnees
 	if ($edit_login OR $edit_pass) {
 	debut_cadre_enfonce();
-	echo '<img src="ecrire/img_pack/warning.png" alt="'._T('spipbb:info_avertissement').'" width="48" height="48" align="right">';
+	echo '<img src="'.find_in_path('images/warning.gif').'" alt="'._T('spipbb:info_avertissement').'" width="48" height="48" align="right" />';
 	echo "<b>"._T('spipbb:texte_login_precaution')."</b>\n";
 	fin_cadre_enfonce();
-	echo "<p>"; }
+	echo "<br />"; }
   
 	// Un redacteur n'a pas le droit de modifier son login !
 	if ($edit_login) {
-		echo "<B>"._T('spipbb:item_login')."</B> ";
+		echo "<b>"._T('spipbb:item_login')."</b> ";
 		echo "<font color='red'>("._T('spipbb:texte_plus_trois_car').")</font> :<br/>";
-		echo "<input type='text' name='login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40'><p>\n"; }
+		echo "<input type='text' name='login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><br />\n"; }
 	else {
 		echo "<fieldset style='padding:5'><legend><b>"._T('spipbb:item_login')."</b><br/></legend><br/><b>".$auteur['login']."</b> ";
-		echo "<i> ("._T('spipbb:info_non_modifiable').")</i><p>"; }
+		echo "<i> ("._T('spipbb:info_non_modifiable').")</i><br />"; }
   
 	// On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
 	if ($edit_pass) {
 		echo "<b>"._T('pass_nouveau_pass')."</b> ";
 		echo "<font color='red'>("._T('spipbb:info_plus_cinq_car').")</font> :<br/>";
-		echo "<input type='password' name='new_pass' class='formo' value=\"\" size='40'><br/>\n";
-		echo _T('spipbb:info_confirmer_passe')."<BR>";
-		echo "<input type='password' name='new_pass2' class='formo' value=\"\" SIZE='40'><P>\n"; }
+		echo "<input type='password' name='new_pass' class='formo' value=\"\" size='40' /><br/>\n";
+		echo _T('spipbb:info_confirmer_passe')."<br />";
+		echo "<input type='password' name='new_pass2' class='formo' value=\"\" size='40' /><br />\n";
+	}
+	if (!$edit_login) {
+		echo "</fieldset>";
+	}
 	fin_cadre_relief();
-	echo "<p>";
+	echo "<br />";
 	
-	echo "<div align='center'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
+	echo "<div align='center'><input type='submit' class='fondo' name='Valider' value='"._T('bouton_valider')."' /></div>";
   
 echo "</div>";
 echo "</form>";
