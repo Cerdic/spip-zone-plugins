@@ -277,6 +277,7 @@ et de recevoir les lettres d\'informations.',
 'vous_pouvez_egalement' => 'Vous pouvez &eacute;galement',
 'vous_inscrire_auteur' => 'vous inscrire en tant qu\'auteur',
 'voir_discussion' => 'Voir la discussion',
+'Voir_les_journaux_SPIPLISTES' => "Voir les journaux SPIPLISTES",
 
 // ====================== spip_listes.php3 ======================
 'abon' => 'ABONNES',

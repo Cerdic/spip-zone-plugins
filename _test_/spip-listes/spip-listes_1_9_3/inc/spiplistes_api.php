@@ -26,8 +26,12 @@ include_spip ("inc/utils");
 include_spip ("inc/filtres");    /* email_valide() */
 include_spip ("inc/acces");      /* creer_uniqid() */
 
-function spiplistes_log($texte){
-	spip_log($texte,'spiplistes');
+function spiplistes_log($texte) {
+	if(__server_in_private_ip_adresses()
+		&& __plugin_lire_s_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)) {
+		__syslog_trace($texte);
+	}
+	else spip_log($texte, 'spiplistes');
 }
 
 /* function privee

@@ -38,6 +38,8 @@ function exec_config () {
 		, $couleur_foncee
 		, $spip_lang_right
 		;
+
+	spiplistes_log("CONFIGURE ID_AUTEUR #$connect_id_auteur <<");
 	
 	$keys_complement_courrier = array(
 		'opt_lien_en_tete_courrier'
@@ -71,6 +73,7 @@ function exec_config () {
 			, 'btn_complement_courrier'
 			, 'btn_param_valider'
 			, 'btn_console_syslog'
+			, 'voir_logs'
 		)
 		, $keys_complement_courrier
 		, $keys_param_valider
@@ -88,16 +91,15 @@ function exec_config () {
 	}
 
 	if($btn_complement_courrier) {
-		$metas_p = 'spiplistes_preferences';
 		foreach($keys_complement_courrier as $key) {
 			if(!empty($$key)) {
-				if(!isset($GLOBALS['meta'][$metas_p])) {
-					$GLOBALS['meta'][$metas_p] = array();
+				if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
+					$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
 				}
-				__plugin_ecrire_s_meta ($key, $$key, $metas_p);
+				__plugin_ecrire_s_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
 			} 
 			else {
-				__plugin_ecrire_s_meta ($key, null, $metas_p);
+				__plugin_ecrire_s_meta ($key, null, _SPIPLISTES_META_PREFERENCES);
 			}
 		}
 		$doit_ecrire_metas = true;
@@ -109,43 +111,41 @@ function exec_config () {
 				ecrire_meta($key, $$key);
 			}
 		}
-		$metas_p = 'spiplistes_preferences';
 		foreach($keys_opts_param_valider as $key) {
 			if(!empty($$key)) {
-				if(!isset($GLOBALS['meta'][$metas_p])) {
-					$GLOBALS['meta'][$metas_p] = array();
+				if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
+					$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
 				}
-				__plugin_ecrire_s_meta ($key, $$key, $metas_p);
+				__plugin_ecrire_s_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
 			} 
 			else {
-				__plugin_ecrire_s_meta ($key, null, $metas_p);
+				__plugin_ecrire_s_meta ($key, null, _SPIPLISTES_META_PREFERENCES);
 			}
 		}
 		$doit_ecrire_metas = true;
 	}
 		
 	if($btn_console_syslog) {
-		$metas_p = 'spiplistes_preferences';
 		foreach($keys_console_syslog as $key) {
 			if(!empty($$key)) {
-				if(!isset($GLOBALS['meta'][$metas_p])) {
-					$GLOBALS['meta'][$metas_p] = array();
+				if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
+					$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
 				}
-				__plugin_ecrire_s_meta ($key, $$key, $metas_p);
+				__plugin_ecrire_s_meta ($key, $$key, _SPIPLISTES_META_PREFERENCES);
 			} 
 			else {
-				__plugin_ecrire_s_meta ($key, null, $metas_p);
+				__plugin_ecrire_s_meta ($key, null, _SPIPLISTES_META_PREFERENCES);
 			}
 		}
 		$doit_ecrire_metas = true;
 	}
 	
 	if(!__server_in_private_ip_adresses() 
-		&& __plugin_lire_s_meta ('opt_console_syslog', 'spiplistes_preferences')
+		&& __plugin_lire_s_meta ('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)
 		// si pas sur réseau privé et option syslog validé,
 		// retire l'option syslog (cas de copie de base du LAN sur celle du WAN)
 		) {
-		__plugin_ecrire_s_meta ($key, null, $metas_p);
+		__plugin_ecrire_s_meta ($key, null, _SPIPLISTES_META_PREFERENCES);
 		$doit_ecrire_metas = true;
 	}
 	
@@ -216,7 +216,7 @@ function exec_config () {
 		. debut_cadre_relief("", true, "", _T('spiplistes:Complement_lien_en_tete'))
 		. "<p class='verdana2'>"._T('spiplistes:Complement_lien_en_tete_desc')."</p>"
    	. "<input type='checkbox' name='opt_lien_en_tete_courrier' value='oui' id='opt_lien_en_tete_courrier' "
-			. ((__plugin_lire_s_meta('opt_lien_en_tete_courrier', 'spiplistes_preferences')) ? "checked='checked'" : "")
+			. ((__plugin_lire_s_meta('opt_lien_en_tete_courrier', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "")
 			. " />\n"
    	. "<label class='verdana2' for='opt_lien_en_tete_courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete')."</label>\n"
 		. fin_cadre_relief(true)
@@ -294,7 +294,7 @@ function exec_config () {
 		;
 		//
 	// option simulation des envois
-	$checked = (__plugin_lire_s_meta('opt_simuler_envoi', 'spiplistes_preferences')) ? "checked='checked'" : "";
+	$checked = (__plugin_lire_s_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "";
 	$page_result .= ""
 		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_simulation'))
    	. "<input type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' $checked />\n"
@@ -318,43 +318,51 @@ function exec_config () {
 		;
 
 	//////////////////////////////////////////////////////
-	// Paramétrer la console de debug/logs si sur LAN
-	if(__server_in_private_ip_adresses()) {
+	// La console
 		$page_result .= ""
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."console-24.gif", true, "", _T('spiplistes:Console'))
-			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
-			//
-			// ajout du renvoi de tete
-			. debut_cadre_relief("", true, "", _T('spiplistes:Console_syslog'))
-			. "<p class='verdana2'>"._T('spiplistes:Console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>"
-			. "<input type='checkbox' name='opt_console_syslog' value='oui' id='opt_console_syslog' "
-				. ((__plugin_lire_s_meta('opt_console_syslog', 'spiplistes_preferences')) ? "checked='checked'" : "")
-				. " />\n"
-			. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:Console_syslog_texte')."</label>\n"
-			. fin_cadre_relief(true)
-			. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
-			. "<label for='btn_console_syslog' style='display:none;'>"._T('bouton_valider')."</label>\n"
-			. "<input type='submit' id='btn_console_syslog' name='btn_console_syslog' value='"._T('bouton_valider')."' class='fondo' />\n"
-			. "</p>\n"
-			. "</form>\n"
+			;
+		// Paramétrer la console de debug/logs si sur LAN
+		if(__server_in_private_ip_adresses()) {
+			$page_result .= ""
+				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
+				//
+				// ajout du renvoi de tete
+				. debut_cadre_relief("", true, "", _T('spiplistes:Console_syslog'))
+				. "<p class='verdana2'>"._T('spiplistes:Console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>"
+				. "<input type='checkbox' name='opt_console_syslog' value='oui' id='opt_console_syslog' "
+					. ((__plugin_lire_s_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "")
+					. " />\n"
+				. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:Console_syslog_texte')."</label>\n"
+				. fin_cadre_relief(true)
+				. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
+				. "<label for='btn_console_syslog' style='display:none;'>"._T('bouton_valider')."</label>\n"
+				. "<input type='submit' id='btn_console_syslog' name='btn_console_syslog' value='"._T('bouton_valider')."' class='fondo' />\n"
+				. "</p>\n"
+				. "</form>\n"
+				;
+		}
+		// voir les journaux SPIP
+		if(!__plugin_lire_s_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)) {
+		// si syslog non activé, on visualise les journaux de spip
+			// lien sur logs ou affiche logs
+			$page_result .=
+				($voir_logs=="oui")
+				?
+					""
+					. "<a name='logs'></a>"
+					. debut_cadre_relief("", true, "", "Logs")
+					. "<div style='width:98%;overflow:auto'>"
+					. "<pre>".spiplistes_console_lit_log("spiplistes")."</pre>\n"
+					. "</div>\n"
+					. fin_cadre_relief(true)
+				:
+					"<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE,'voir_logs=oui#logs')."'>"._T('spiplistes:Voir_les_journaux_SPIPLISTES')."</a>\n"
+				;
+		}
+		$page_result .= ""
 			. fin_cadre_trait_couleur(true)
 			;
-	}
-	
-	// lien sur logs ou affiche logs
-	$page_result .=
-		(_request('logs')=="oui")
-		?
-			""
-			. "<a name='logs'></a>"
-			. debut_cadre_relief("", true, "", "Logs")
-			. "<div style='width:98%;overflow:auto'>"
-			. "<pre>".spiplistes_console_lit_log("spiplistes")."</pre>\n"
-			. "</div>\n"
-			. fin_cadre_relief(true)
-		:
-			"<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE,'logs=oui#logs')."'>Logs</a>\n"
-		;
 	
 	// Fin de la page
 	echo($page_result);

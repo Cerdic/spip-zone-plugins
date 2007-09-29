@@ -57,6 +57,8 @@ define("_SPIPLISTES_EXEC_LISTES_LISTE", "listes_toutes");
 // les formats d'envoi autorisés, ou non pour pseudo-désabonné
 define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
 
+define("_SPIPLISTES_META_PREFERENCES", 'spiplistes_preferences');
+
 //Balises Spip-listes
 
 function balise_MELEUSE_CRON($p) {

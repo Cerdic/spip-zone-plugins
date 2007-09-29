@@ -28,29 +28,18 @@ if(!defined("_PGL_USE_SYSLOG_UNIX"))  define("_PGL_USE_SYSLOG_UNIX", true);
 // Trace sur syslog
 if(!function_exists('__syslog_trace')) {
 	// trace si serveur sur LAN
-	if(preg_match(_PGL_SYSLOG_LAN_IP_ADDRESS, $_SERVER['HTTP_HOST'])) {
-		if(_PGL_USE_SYSLOG_UNIX) {
-			define_syslog_variables();
-			function __syslog_trace($message, $priority = LOG_WARNING, $tag = "_") {
-				if(empty($tag)) { 
-					$tag = basename ($_SERVER['PHP_SELF']); 
-				}
-				return(
-					openlog ($tag, LOG_PID | LOG_CONS, LOG_USER) 
-						&& syslog ($priority, (string)$message) 
-						&&	closelog()
-				);
+	if(__server_in_private_ip_adresses()) {
+		define_syslog_variables();
+		function __syslog_trace($message, $priority = LOG_WARNING, $tag = "_") {
+			if(empty($tag)) { 
+				$tag = basename ($_SERVER['PHP_SELF']); 
 			}
+			return(
+				openlog ($tag, LOG_PID | LOG_CONS, LOG_USER) 
+					&& syslog ($priority, (string)$message) 
+					&&	closelog()
+			);
 		}
-		else {
-			function __syslog_trace($message, $priority = false, $tag = false) {
-				spip_log("spip_listes :  $message");
-			}
-		}
-	}
-	else {
-		define("_PGL_DEBUG_MODE", false);
-		function __syslog_trace($message, $priority = false, $tag = false) { return(false); }
 	}
 }
 
@@ -59,6 +48,9 @@ if(!function_exists('__syslog_trace')) {
 // pratique en mode debug
 // ne pas utiliser dans version de production
 function __syslog_dump ($p, $tag = '') {
+	
+	if(!__server_in_private_ip_adresses()) return false;
+	
 	if(is_array($p) || is_object($p)) {
 		foreach($p as $k=>$v) {
 			if(is_array($v) || is_object($v)) {
