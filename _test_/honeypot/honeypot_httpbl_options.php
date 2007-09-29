@@ -38,7 +38,7 @@ if((_DIR_RACINE =='') &&
   include_spip('inc/httpbl'); 
   $info = httpbl_test($_SERVER['REMOTE_ADDR'],lire_config('honeypot/httpbl/apikey'));
   //pour le test
-    $info = httpbl_test('127.1.1.0',lire_config('honeypot/httpbl/apikey'));
+  //  $info = httpbl_test('127.1.1.0',lire_config('honeypot/httpbl/apikey'));
   $config = lire_config('honeypot/httpbl');
   if($info) {
 	if(min(intval($config['type'.$info['type'].'_threat']),255) <=  $info['threat']){
