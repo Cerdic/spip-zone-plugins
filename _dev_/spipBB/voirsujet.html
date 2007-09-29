@@ -63,14 +63,7 @@
 	        			</ul>
 					<div class="txtvs">
 						[(#TEXTE|spipbb_chatons)]
-                                                <B_auteurp2>
-                                                <BOUCLE_auteurp2(AUTEURS){id_auteur}{tout}>
-                                                </BOUCLE_auteurp2>
-                                                 </B_auteurp2>
-                                                  <hr />
-                                                 [(#EXTRA|extra{signature}|entites_html)]
-                                                 <//B_auteurp2>
-                                                 
+                                                [<hr />(#NOM|spipbb_afficher_signature{''})]
 					</div>
 				</td>
 			</tr>
@@ -109,10 +102,7 @@
 	        			</ul>
 					<div class="txtvs">
 						[(#TEXTE|spipbb_chatons)]
-                                                <BOUCLE_auteurp2(AUTEURS){id_auteur}{tout}>
-                                                <hr>
-                                                [(#EXTRA|extra{signature}|entites_html)]
-                                                </BOUCLE_auteurp2>
+                                                [<hr />(#NOM|spipbb_afficher_signature{''})]
 					</div>
 				</td>
 			</tr>

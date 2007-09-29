@@ -159,6 +159,49 @@ function spipbb_afficher_avatar($nom, $classe='') {
 
 /*
  *   +----------------------------------+
+ *    Nom du Filtre :    afficher_signature
+ *   +----------------------------------+
+ *    Date : lundi 29 Septembre 2007
+ *    Auteur :  Gurdil (gurdil@free.fr)
+ *   +-------------------------------------+
+ *    Fonctions de ce filtre :
+ *    Cette fonction permet d'afficher 
+ *    la signature d'un auteur.
+ *    On peut passer une classe CSS pour régler
+ *    l'affichage
+ *    EXEMPLE :
+ *    [(#NOM|spipbb_afficher_avatar{''})] ou
+ *     [(#NOM|spipbb_afficher_avatar{'nom_de_la_classe'})]
+ *     On ne paut mettre du code html directement
+ *     pur des raisons de sécurité mais l'on peut
+ *     mettre une image [img]url_de_limage[/img]
+ *     et un lien [a="adresse_du_lien"]Mon site[/a]
+ *   +-------------------------------------+ 
+ *  
+ * Pour toute suggestion, remarque, proposition d'ajout
+ * reportez-vous au forum de l'article :
+ * http://www.uzine.net/spip_contrib/article.php3?id_article=261
+*/
+// voirsujet
+
+function spipbb_afficher_signature($nom, $classe='') {
+	if ($classe!='') $insert=" class=\"$classe\""; else $insert="";
+		
+    $infos=unserialize(spipbb_get_auteur_infos('', $nom));
+    $source=unserialize($infos[extra]);
+    $texte=$source[signature];
+    $texte = entites_html($texte);
+    $texte = preg_replace('#\[img\](.+)\[/img\]#isU', '<img src="$1" alt="signature"/>', $texte);
+    $texte = preg_replace('#\[a="(.+)"\](.+)\[/a\]#isU', '<a href="$1" alt="$2">$2</a>', $texte);
+		
+    if(isset($texte))
+    $retour=$texte;		
+	    
+	return $retour;
+}
+
+/*
+ *   +----------------------------------+
  *    Nom des Filtres :  afficher_mots_clefs et pas_afficher_mots_clefs
  *   +----------------------------------+
  *    Date : lundi 25 fevrier 2004
