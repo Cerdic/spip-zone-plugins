@@ -53,7 +53,8 @@
 		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&amp;citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
 		        			<?php } ?>
 		        			<!-- Modération pour les admin --><?php if ($GLOBALS['auteur_session']['statut']=='0minirezo'){?>
-		        			<li class="effacervs"><a href='./ecrire/?exec=controle_forum&amp;id_article=<?php echo $id_article ; ?>' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>
+		        			<li class="editervs"><a href='spip.php?page=editer&id_forum=#ID_FORUM' title="<:spipbb:editer:>"><span><:spipbb:editer:></span>&nbsp;</a></li>
+                                                <li class="effacervs"><a href='./ecrire/?exec=controle_forum&amp;id_article=<?php echo $id_article ; ?>' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>
 		        			<li class="ipvs"><a title="IP: #IP"><span>IP: #IP</span>&nbsp;</a></li>
 		        			<!--Fin Modération pour les admin--><?php }?>
 		        		</ul>
@@ -92,6 +93,7 @@
 		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&amp;citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
 		        			<?php } ?>
 		        			<!-- Modération pour les admin --><?php if ($GLOBALS['auteur_session']['statut']=='0minirezo'){?>
+                                                <li class="editervs"><a href='spip.php?page=editer&id_forum=#ID_FORUM' title="<:spipbb:editer:>"><span><:spipbb:editer:></span>&nbsp;</a></li>
 		        			<li class="effacervs"><a href='./ecrire/?exec=controle_forum&amp;id_article=<?php echo $id_article ; ?>' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>
 		        			<li class="ipvs"><a title="IP: #IP"><span>IP: #IP</span>&nbsp;</a></li>
 		        			<!--Fin Modération pour les admin--><?php }?>

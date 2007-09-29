@@ -14,7 +14,8 @@ img { border: none; margin: 0; }
 body#forumsect p.nouvmsg { float: right; margin-bottom: 5px; }
 body#forumsect p.nav { float: left; margin-left:10px }
 body#artforum p.nav, body#voirsujet p.nav { float: left; }
-		
+form {font-size:1.4em;}
+
 /* Eléments des formulaires & boutons SPIP */
 a.spip_barre img, .spip_bouton, .spip_encadrer { background-color: transparent; }
 
@@ -113,6 +114,7 @@ ul.actionvs li a:hover { text-decoration: none; }
 ul.actionvs li a span { display: none; }
 li.citervs a { padding-left: 54px !important; background-image: url(img/icon_quote.png); }
 li.effacervs a { background-image: url(img/icon_delete.png); }
+li.editervs a { padding-left: 54px !important; background-image: url(img/icon_edit.png); }
 li.ipvs a { background-image: url(img/icon_ip.png); }
 
 /* Styles de la liste d'actions d'administration */
