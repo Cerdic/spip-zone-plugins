@@ -358,7 +358,16 @@ $(document).ready(function(){';
 	 $ret .= '
 	$('.$champ.').after("<div id=\"article_preview'.$num_barre.'\"></div>");
 	$('.$champ.').before("<div id=\"article_stats'.$num_barre.'\"></div>");
-	$.ajaxTimeout( 5000 );
+	';
+	global $spip_version_code;
+	if (version_compare($spip_version_code,'1.925','<')){
+	 $ret .= '$.ajaxTimeout( 5000 );
+	 '; // jquery < 1.1.4
+	} else {
+	 $ret .= '$.ajaxSetup({timeout: 5000});
+	 '; // a partir de jquery 1.1.4, donc de SPIP 1.9.3
+	}
+	 $ret .= '
 	$('.$champ.').keypress(function() { MajPreview('.$num_barre.',"'.$champ.'") });
 	$('.$champ.').select(function() { MajStats('.$num_barre.',"'.$champ.'") });
 	$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });';
