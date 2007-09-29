@@ -35,7 +35,7 @@ include_spip('inc/lang');
 // MaZiaR - NetAktiv
 // tech@netaktiv.com
 
-function exec_sl_courrier_previsu(){
+function exec_spiplistes_courrier_previsu(){
 
 	$template 		= _request('template');
 	$sujet 			= _request('sujet');

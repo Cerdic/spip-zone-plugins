@@ -13,7 +13,7 @@ $("#ajax-loader").hide();
 	$("#template").submit(function(){
 		var	 data = $('input,textarea,radio,select, checkbox', this).serialize();
 		$.ajax({ type: "POST", 
-					url: "./?exec=sl_courrier_previsu", 
+					url: "./?exec=spiplistes_courrier_previsu", 
 					data: data, 
 					success: function(msg){  $("#apercu").html(msg); }
 			});

@@ -45,7 +45,7 @@ define("_SPIPLISTES_EXEC_AUTOCRON", "autocron");
 define("_SPIPLISTES_EXEC_CONFIGURE", _SPIPLISTES_EXEC_PREFIX."config");
 define("_SPIPLISTES_EXEC_COURRIER_EDIT", "courrier_edit");
 define("_SPIPLISTES_EXEC_COURRIER_MODIF", "gerer_courrier");
-define("_SPIPLISTES_EXEC_COURRIER_PREVUE", "sl_courrier_previsu");
+define("_SPIPLISTES_EXEC_COURRIER_PREVUE", _SPIPLISTES_EXEC_PREFIX."courrier_previsu");
 define("_SPIPLISTES_EXEC_COURRIER_REDAC", "sl_courrier_rediger");
 define("_SPIPLISTES_EXEC_COURRIERS_LISTE", "spip_listes");
 define("_SPIPLISTES_EXEC_IMPORT_EXPORT", "import_export");
