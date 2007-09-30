@@ -1,6 +1,6 @@
 .diapo_menu{border-bottom:2px solid #dadada;padding:3px 0;margin-bottom:2px;}
-#diapo_ico {background-color:#ffffff;}
-#diapo_icones a { 
+.diapo_ico {background-color:#ffffff;}
+.diapo_icones a { 
 	float:right;
 	font-size:8px;
 	width:9px;
@@ -10,30 +10,30 @@
 	border-color:#dadada;
 	text-decoration: none;
 }
-#diapo_icones a:hover, #diapo_icones a.selected { 
+.diapo_icones a:hover, .diapo_icones a.selected { 
 	border:1px solid #006169; 
 	border-color:#006169;
 	text-decoration: none;
 }
-#diapo_icones #diapo_icoleft {
+.diapo_icones a.diapo_icoleft {
 	border-left-width:4px;
 }
-#diapo_icones #diapo_icoright {
+.diapo_icones a.diapo_icoright {
 	border-right-width:4px;
 }
-#diapo_icones #diapo_icocenter{
+.diapo_icones .diapo_icocenter{
 	background-color:#dadada;
 }
-#diapo_icones #diapo_icocenter,
-#diapo_icones #diapo_ico{
+.diapo_icones a.diapo_icocenter,
+.diapo_icones a.diapo_ico{
 	width:12px;
 }
-#diapo_icones #diapo_icocenter.selected,
-#diapo_icones #diapo_icocenter:hover{
+.diapo_icones a.diapo_icocenter.selected,
+.diapo_icones a.diapo_icocenter:hover{
 	background-color:#006169;
 }
 
-#diapo_vignettes {
+.diapo_vignettes {
 	margin-top:5px;
 	position:relative;
 	text-align:center;
@@ -62,16 +62,21 @@
 	width:89px;
 	height:89px;
 }
-#diapo {
+.diaporama {
 	float:left;
 	display:block;
 	position:relative;
-	text-align:center;
+	text-align:left;
 	margin-top:5px;
 }
+.diapo {
+	position:relative;
+	display:inline;
+}
 .diapo_grand {
-	width:712px;
+	width:550px;
 }
 .diapo_petit {
-	width:532px;
+	width:370px;
 }
+.diaporama{position:relative;width:560px;}
