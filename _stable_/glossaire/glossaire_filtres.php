@@ -10,7 +10,7 @@
  */
 
 function glossaire_ajouter($chaine,$replacenb=-1){
-	if (defined(_GLOSSAIRE_AUTO) && !_GLOSSAIRE_AUTO) return $chaine;
+	if (defined('_GLOSSAIRE_AUTO') && !_GLOSSAIRE_AUTO) return $chaine;
 	static $patterns=array();
 	static $replace_1=array();
 	static $replace_2=array();
