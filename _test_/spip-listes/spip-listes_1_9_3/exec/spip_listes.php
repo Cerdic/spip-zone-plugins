@@ -29,7 +29,7 @@ include_spip('inc/affichage');
 include_spip ('base/spip-listes');
 include_spip('inc/plugin');
 
-function spiplistes_afficher_pile_messages(){
+function spiplistes_afficher_pile_messages() {
 	
 	if ($GLOBALS['spip_version_code']<1.9204){
 		include_spip('base/spiplistes_upgrade');
@@ -118,6 +118,10 @@ function exec_spip_listes() {
 	include_spip ('inc/mots');
 	include_spip ('inc/documents');
 	
+	include_spip('inc/spiplistes_api');
+
+	spiplistes_log("spiplistes_afficher_pile_messages() <<", LOG_DEBUG); 	
+
 	global $connect_statut
 		, $connect_toutes_rubriques
 		, $connect_id_auteur

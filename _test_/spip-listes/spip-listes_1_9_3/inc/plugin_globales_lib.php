@@ -29,7 +29,6 @@ if(!defined("_PGL_USE_SYSLOG_UNIX"))  define("_PGL_USE_SYSLOG_UNIX", true);
 if(!function_exists('__syslog_trace')) {
 	// trace si serveur sur LAN
 	if(__server_in_private_ip_adresses()) {
-		define_syslog_variables();
 		function __syslog_trace($message, $priority = LOG_WARNING, $tag = "_") {
 			if(empty($tag)) { 
 				$tag = basename ($_SERVER['PHP_SELF']); 

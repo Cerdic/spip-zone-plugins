@@ -26,12 +26,17 @@ include_spip ("inc/utils");
 include_spip ("inc/filtres");    /* email_valide() */
 include_spip ("inc/acces");      /* creer_uniqid() */
 
-function spiplistes_log($texte) {
+function spiplistes_log($texte, $level = LOG_WARNING) {
 	if(__server_in_private_ip_adresses()
-		&& __plugin_lire_s_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)) {
-		__syslog_trace($texte);
+		&& __plugin_lire_s_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)
+	) {
+		__syslog_trace($texte, $level);
 	}
-	else spip_log($texte, 'spiplistes');
+	else if($level < LOG_DEBUG) {
+		// Taille du log SPIP trop courte
+		// Ne pas envoyer si DEBUG sinon tronque sans cesse
+		spip_log($texte, 'spiplistes');
+	}
 }
 
 /* function privee

@@ -23,7 +23,7 @@
 // $LastChangedBy: paladin@quesaco.org $
 // $LastChangedDate: 2007-09-22 18:27:40 +0200 (sam., 22 sept. 2007) $
 
-	// Appelé en tache de fond (CRON)
+	// Appelé en tache de fond (CRON SPIP)
 	
 	// - Verifie toutes les listes auto==oui publiques et privées
 	// - créé le courrier pour la méleuse dans spip_courriers
@@ -34,7 +34,7 @@ function cron_spiplistes_cron ($last_time) {
 
 	include_spip('inc/spiplistes_api');
 
-	spiplistes_log("CRON: cron_spiplistes_cron() <<"); // pour DEBUG
+	spiplistes_log("CRON: cron_spiplistes_cron() <<", LOG_DEBUG);
 		
 	$current_time = time();
 
