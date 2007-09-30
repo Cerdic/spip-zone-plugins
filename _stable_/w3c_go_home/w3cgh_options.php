@@ -1,6 +1,9 @@
 <?php
 
-$GLOBALS['xhtml'] = 'sax';
+// ne pas demander l'indentation par defaut car cela ralentit le rendu d'un coeff 3
+// ceux qui veulent avoir du html indente doivent le demande explicitement dans leur
+// mes options
+//$GLOBALS['xhtml'] = 'sax';
 
 //$GLOBALS['xml_indent'] = 'sax'; // pour seulement le validateur XML
 //$GLOBALS['xml_validation'] = true; // pour le validateur selon la DTD
