@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_listes_toutes(){
+function exec_spiplistes_listes_toutes(){
 	
 	include_spip('inc/presentation');
 	include_spip('inc/affichage');

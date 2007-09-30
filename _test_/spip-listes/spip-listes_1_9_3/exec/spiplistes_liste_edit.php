@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_liste_edit(){
+function exec_spiplistes_liste_edit(){
 
 	include_spip('inc/presentation');
 	include_spip('inc/barre');
