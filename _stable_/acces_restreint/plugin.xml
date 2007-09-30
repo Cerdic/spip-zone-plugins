@@ -29,12 +29,8 @@ _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultado
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Le-plugin-Acces-Restreint,1420</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	acces_restreint_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul -->
-	acces_restreint.php
-	</fonctions>
+	<options>acces_restreint_options.php</options>
+	<fonctions>acces_restreint.php</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

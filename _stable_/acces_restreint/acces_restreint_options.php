@@ -1,24 +1,27 @@
 <?php
 
 // * Acces restreint, plugin pour SPIP * //
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('base/acces_restreint');
-include_spip('inc/acces_restreint');
-
+// declarer le pipeline pour le core
 $GLOBALS['spip_pipeline']['AccesRestreint_liste_zones_autorisees']='';
 
-// Pipeline : calculer les zones autorisees, sous la forme '1,2,3'
-// TODO : avec un petit cache pour eviter de solliciter la base de donnees
-$GLOBALS['AccesRestreint_zones_autorisees'] =
-	pipeline('AccesRestreint_liste_zones_autorisees', '');
+// Si on n'est pas connecte, aucune autorisation n'est disponible
+// pas la peine de sortir la grosse artillerie
+if (!isset($GLOBALS['auteur_session']['id_auteur'])){
+	$GLOBALS['AccesRestreint_zones_autorisees'] = '';
+}
+else {
+	// Pipeline : calculer les zones autorisees, sous la forme '1,2,3'
+	// TODO : avec un petit cache pour eviter de solliciter la base de donnees
+	$GLOBALS['AccesRestreint_zones_autorisees'] =
+		pipeline('AccesRestreint_liste_zones_autorisees', '');
+}
 
 // Ajouter un marqueur de cache pour le differencier selon les autorisations
 if (!isset($GLOBALS['marqueur'])) $GLOBALS['marqueur'] = '';
 $GLOBALS['marqueur'] .= ":AccesRestreint_zones_autorisees="
 	.$GLOBALS['AccesRestreint_zones_autorisees'];
-
 
 //
 // Autorisations
@@ -26,6 +29,7 @@ $GLOBALS['marqueur'] .= ":AccesRestreint_zones_autorisees="
 
 if(!function_exists('autoriser_rubrique_voir')) {
 function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/acces_restreint');
 	static $rub_exclues;
 	if (!isset($rub_exclues)) {
 		$rub_exclues = AccesRestreint_liste_rubriques_exclues(_DIR_RESTREINT!="");
@@ -36,6 +40,7 @@ function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
 }
 if(!function_exists('autoriser_article_voir')) {
 function autoriser_article_voir($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/acces_restreint');
 	static $art_exclus;
 	if (!isset($art_exclus)) {
 		$art_exclus = AccesRestreint_liste_articles_exclus(_DIR_RESTREINT!="");
@@ -46,6 +51,7 @@ function autoriser_article_voir($faire, $type, $id, $qui, $opt) {
 }
 if(!function_exists('autoriser_breve_voir')) {
 function autoriser_breve_voir($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/acces_restreint');
 	static $breves_exclus;
 	if (!isset($breves_exclus)) {
 		$breves_exclus = AccesRestreint_liste_breves_exclues(_DIR_RESTREINT!="");
@@ -56,6 +62,7 @@ function autoriser_breve_voir($faire, $type, $id, $qui, $opt) {
 }
 if(!function_exists('autoriser_site_voir')) {
 function autoriser_site_voir($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/acces_restreint');
 	static $sites_exclus;
 	if (!isset($sites_exclus)) {
 		$sites_exclus = AccesRestreint_liste_syndic_exclus(_DIR_RESTREINT!="");
@@ -66,6 +73,7 @@ function autoriser_site_voir($faire, $type, $id, $qui, $opt) {
 }
 if(!function_exists('autoriser_evenement_voir')) {
 function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
+	include_spip('inc/acces_restreint');
 	static $evenements_exclus;
 	if (!isset($evenements_exclus)) {
 		$evenements_exclus = AccesRestreint_liste_evenements_exclus(_DIR_RESTREINT!="");

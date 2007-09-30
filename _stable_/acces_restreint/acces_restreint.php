@@ -1,10 +1,12 @@
 <?php
 
 // * Acces restreint, plugin pour SPIP * //
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('base/acces_restreint');
 include_spip('inc/acces_restreint');
+
+//include_spip('inc/acces_restreint');
 
 // {tout_voir}
 function critere_tout_voir_dist($idb, &$boucles, $crit) {
