@@ -143,11 +143,7 @@ function balise_CFG_ARBO($p) {
 	if (!$arg = interprete_argument_balise(1,$p)) {
 		$arg = "''";
 	}
-	$sinon = interprete_argument_balise(2,$p);
-	$serialize = interprete_argument_balise(3,$p);
-	$p->code = 'affiche_arborescence(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . 
-		($serialize ? $serialize : 'true') . ')';
+	$p->code = 'affiche_arborescence(' . $arg . ')';
 	return $p;
 }
 
