@@ -14,10 +14,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 global $spip_version_code;
-if (version_compare($spip_version_code,'1.925','<')){
+if (version_compare(substr($spip_version_code,0,5),'1.925','<')){
 	include_spip('public/styliser192');; // SPIP 1.9.2
 } else { // SPIP 1.9.3
-
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
