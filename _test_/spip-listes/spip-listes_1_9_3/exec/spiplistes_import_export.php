@@ -158,7 +158,6 @@ function exec_spiplistes_import_export(){
 		$page_result .= ""
 			. "</ul>"
 			. fin_cadre_relief(true)
-			. "<br />"
 			//
 			// Sélection du format de réception
 			. debut_cadre_relief("", true, "", _T('spiplistes:Format_de_reception'))

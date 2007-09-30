@@ -13,12 +13,12 @@ dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout cour
    ordinateur.<br />
 Cette liste d'abonn&eacute;s doit &ecirc;tre au format texte seul, une ligne 
    par abonn&eacute;. Chaque ligne doit &ecirc;tre compos&eacute;e ainsi :<br />
-<tt style='display:block;margin:0.2em 0;'>adresse@mail<span style='color:#f66'>[tabulation]</span>login<span style='color:#f66'>[tabulation]</span>nom</tt><br />
-<tt style='color:#f66'>[tabulation]</tt> est un caract&egrave;re de tabulation.<br />
+<tt style='display:block;margin:0.75em 0;background-color:#ccc;border:1px solid #999;padding:1ex;'>adresse@mail<span style='color:#f66'>[tabulation]</span>login<span style='color:#f66'>[tabulation]</span>nom</tt>
+<tt style='color:#f66'>[tabulation]</tt> est un caract&egrave;re de tabulation.<br /><br />
 L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse 
    email ou se login existe dans la base du site, la ligne sera rejet&eacute;e.<br />
 Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
-   &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues de SPIP-Listes).",
+   &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennces versions de SPIP-Listes).",
 
 // A
 'abo_1_lettre' => 'Lettre d\'information',
