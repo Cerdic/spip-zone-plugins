@@ -49,9 +49,19 @@ function cs_rempl_glossaire($texte) {
 		// prudence : on protege TOUTES les balises contenant le mot en question
 		$texte = preg_replace_callback(",(<[^>]*$mot[titre][^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
 		$lien = generer_url_mot($mot['id_mot']);
+/* JS */
+		$definition = nl2br(trim($mot['texte']));
+		$table1[$mot['id_mot']] = "<a name=\"mot$mot[id_mot]\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
+if (defined('_GLOSSAIRE_JS')) {
+		$table2[$mot['id_mot']] = "</span></a>";
+} else {
+		$table2[$mot['id_mot']] = "</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">$definition</span></span></a>";
+}
+/*
 		$table1[$mot['id_mot']] = "<a name=\"mot$mot[id_mot]\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
 		$table2[$mot['id_mot']] = "</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">"
 			. nl2br(trim($mot['texte'])) . "</span></span></a>";
+*/
 		// a chaque mot reconnu, on pose une balise temporaire	
 		$texte = preg_replace(",(\W)($mot[titre])(\W),i", "\\1@@GLOSS\\2#$mot[id_mot]@@\\3", $texte, $limit);
 	}

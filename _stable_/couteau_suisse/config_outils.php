@@ -564,11 +564,18 @@ add_variable( array(
 	'defaut' => 0,
 	'code:%s>0' => "define('_GLOSSAIRE_LIMITE', %s);",
 ));
+add_variable( array(
+	'nom' => 'glossaire_js',
+	'radio' => array(0 => 'cout:glossaire_css', 1 => 'cout:glossaire_js'),
+	'format' => 'nombre',
+	'defaut' => 0,
+	'code:%s' => "define('_GLOSSAIRE_JS', %s);",
+));
 add_outil( array(
 	'id' => 'glossaire',
 	'categorie'	=> 'typo-corr',
 	'contrib'	=> 2206,
-	'code:options' => "%%glossaire_limite%%\n%%glossaire_groupes%%",
+	'code:options' => "%%glossaire_limite%%\n%%glossaire_groupes%%\n%%glossaire_js%%",
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	// sans oublier les articles...
