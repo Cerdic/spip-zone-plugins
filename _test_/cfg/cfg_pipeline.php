@@ -39,7 +39,24 @@ function cfg_header_prive($texte) {
 			<!--[if lte IE 7]>
 			<link rel='stylesheet' href='" . _DIR_PLUGIN_CFG . "css/jquery.tabs-ie.css' type='text/css' media='projection, screen'>
 			<![endif]-->
-			<script type='text/javascript' src='$js'></script>" . "\n";
+			<script type='text/javascript' src='$js'></script>
+			<script type='text/javascript'>
+			$(document).ready(function(){
+				jQuery('.cfg_arbo ul').hide();
+				jQuery('.cfg_arbo h5')
+				.prepend('<b>[+] </b>')
+				.toggle(
+				  function () {
+					$(this).children('b').text('[-] ');
+					$(this).next('ul').show();
+				  },
+				  function () {
+					$(this).children('b').text('[+] ');
+					$(this).next('ul').hide();
+				  })
+			});
+			</script>
+			" . "\n";
 	}
 	return $texte;
 }

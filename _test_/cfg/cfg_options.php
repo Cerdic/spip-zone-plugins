@@ -138,6 +138,52 @@ function get_table_id($table) {
 }
 
 
+
+function balise_CFG_ARBO($p) {
+	if (!$arg = interprete_argument_balise(1,$p)) {
+		$arg = "''";
+	}
+	$sinon = interprete_argument_balise(2,$p);
+	$serialize = interprete_argument_balise(3,$p);
+	$p->code = 'affiche_arborescence(' . $arg . ',' . 
+		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . 
+		($serialize ? $serialize : 'true') . ')';
+	return $p;
+}
+
+function affiche_arborescence($cfg='') {
+	$tableau = lire_config($cfg);
+	if (empty($cfg)) $cfg = 'spip_meta';
+	$sortie = 
+		"<div class='cfg_arbo'>\n" .
+		affiche_sous_arborescence($cfg, $tableau) .
+		"\n</div>\n";
+
+	return $sortie;
+}
+
+function affiche_sous_arborescence($nom, $tableau){
+	$sortie = "\n<h5>$nom</h5>\n";
+	$sortie .= "\n<ul>";
+	if (is_array($tableau)){
+		ksort($tableau);
+		foreach ($tableau as $tab=>$val){
+			if (is_array($val)) 
+				$sortie .= affiche_sous_arborescence($tab, $val);
+			elseif (false !== $v = @unserialize($val))
+				$sortie .= affiche_sous_arborescence($tab, $v);
+			else
+				$sortie .= "<li>$tab = " . htmlentities($val) ."</li>\n";
+			
+		}
+	} else {
+		$sortie .= "<li>$nom = " . htmlentities($tableau) . "</li>";
+	}
+	$sortie .= "</ul>\n";
+	return $sortie;	
+}
+
+
 /*
  *  cfg_charger_classe(), sur le meme code que charger_fonction()
  */
