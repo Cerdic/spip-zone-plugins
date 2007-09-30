@@ -9,6 +9,16 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 '_aide' => '<p>SPIP-Listes permet d\'envoyer un courrier ou des courriers automatiques &agrave; des abonn&eacute;s.</p> <p>Vous pouvez &eacute;crire un texte simple, composer votre courrier en HTML ou appliquer un "patron" &agrave; votre courrier</p>
 <p>Via un formulaire d\'inscription public, les abonn&eacute;s d&eacute;finissent eux-m&ecirc;mes leur statut d\'abonnement, les listes auxquelles ils s\'abonnent et le format
 dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout courrier sera traduit automatiquement en format texte pour les abonn&eacute;s qui en ont fait la demande.</p><p><b>Note :</b><br />L\'envoi des mails peut prendre quelques minutes : les lots partent peu &agrave; peu quand les utilisateurs parcourent le site public. Vous pouvez aussi provoquer manuellement l\'envoi des lots en cliquant sur le lien "suivi des envois" pendant un envoi.</p>',
+'_aide_import' => "Vous pouvez importer ici une liste d'abonn&eacute;s &agrave; partir de votre 
+   ordinateur.<br />
+Cette liste d'abonn&eacute;s doit &ecirc;tre au format texte seul, une ligne 
+   par abonn&eacute;. Chaque ligne doit &ecirc;tre compos&eacute;e ainsi :<br />
+<tt style='display:block;margin:0.2em 0;'>adresse@mail<span style='color:#f66'>[tabulation]</span>login<span style='color:#f66'>[tabulation]</span>nom</tt><br />
+<tt style='color:#f66'>[tabulation]</tt> est un caract&egrave;re de tabulation.<br />
+L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse 
+   email ou se login existe dans la base du site, la ligne sera rejet&eacute;e.<br />
+Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
+   &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues de SPIP-Listes).",
 
 // A
 'abo_1_lettre' => 'Lettre d\'information',
@@ -52,7 +62,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'abonnes_titre' => 'Abonn&eacute;s',
 'adresse_de_reponse' => "Adresse de r&eacute;ponse",
 'adresse_mail_retour' => 'Adresse email du gestionnaire de la liste (reply-to)',
-
+	
 //B
 
 'bouton_listes' => 'Lettres d\'information',
@@ -125,6 +135,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Erreur_liste_vide' => "Erreur: cette liste n'a pas d'abonn&eacute;s.",
 'Envoi_des_courriers' => "Envoi des courriers",
 'Envoyer_ce_courrier' => "Envoyer ce courrier",
+'Exporter_une_liste_d_abonnes' => "Exporter une liste d'abonn&eacute;s",
+'Exporter_une_liste_de_non_abonnes' => "Exporter une liste de non abonn&eacute;s",
 
 //F
 'faq' => 'FAQ',
@@ -136,6 +148,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'format2' => 'Format :',
 'format_html' => 'Format html : ',
 'format_texte' => 'Format texte : ',
+'Format_de_reception_:' => "Format de r&eacute;ception :",
 
 //H
 'Historique_des_envois' => 'Historique des envois',
@@ -172,6 +185,7 @@ et de recevoir les lettres d\'informations.',
 'lettre_d_information' => 'Lettre d\'information',
 'liste_des_abonnes' => "Liste des abonn&eacute;s",
 'Listes_de_diffusion' => 'Listes de diffusion',
+'Liste_de_destination' => "Liste de destination",
 
 //M
 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format',
@@ -231,7 +245,9 @@ et de recevoir les lettres d\'informations.',
 'php_mail' => 'Utiliser la fonction mail() de PHP',
 'poster' => 'Poster un Message',
 'publie' => 'Publi&eacute; le',
-
+'Pas_de_liste_pour_import' => "Vous devez cr&eacute;er au moins une liste de destination afin de pouvoir importer 
+	vos abonn&eacute;s.",
+	
 //R
 'recherche' => 'Rechercher',
 'regulariser' => 'regulariser les desabonnes avec listes...<br />',
@@ -240,6 +256,7 @@ et de recevoir les lettres d\'informations.',
 'reponse_plur' => 'r&eacute;ponses',
 'reponse_sing' => 'r&eacute;ponse',
 'retour' => 'Adresse email du gestionnaire de la liste (reply-to)',
+'Resultat_import' => "R&eacute;sultat import",
 
 //S
 'smtp' => 'Utiliser SMTP',
@@ -261,7 +278,10 @@ et de recevoir les lettres d\'informations.',
 'sujet_clos_texte' => 'Ce sujet est clos, vous ne pouvez pas y poster.',
 'sur_liste' => 'sur la liste',
 'Supprimer_ce_courrier' => "Supprimer ce courrier",
- 
+'Selectionnez_une_liste_pour_import' => "Vous devez s&eacute;lectionner au moins une liste de diffusion pour pouvoir importer 
+	les abonn&eacute;s.",
+'Selectionnez_une_liste_de_destination' => "S&eacute;lectionnez une ou plusieurs listes de destination pour vos abonn&eacute;s.",
+	
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
 'texte_courrier' => '<b>Texte du courrier</b> (HTML autoris&eacute;)',
