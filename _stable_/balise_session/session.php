@@ -23,7 +23,7 @@ if (isset($_GET['fond']))
 
 $tmp_marqueur = $GLOBALS['marqueur'];
 
-if(isset($GLOBALS['auteur_session']) AND is_array($GLOBALS['auteur_session'])) {
+if(isset($GLOBALS['auteur_session']) AND is_array($GLOBALS['auteur_session']) AND isset($GLOBALS['auteur_session']['id_auteur'])) {
 	if(@function_exists('session_start') AND isset($contexte_inclus['session'])){
 		$contexte_inclus['session'] = $contexte_inclus['session'] ?
 			strtoupper($contexte_inclus['session']) :
