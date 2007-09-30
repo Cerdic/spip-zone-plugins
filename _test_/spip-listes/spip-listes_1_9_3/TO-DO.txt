@@ -1,0 +1,8 @@
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+
+TO-DO:
+- Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"

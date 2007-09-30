@@ -33,6 +33,9 @@ if(!function_exists('__syslog_trace')) {
 			if(empty($tag)) { 
 				$tag = basename ($_SERVER['PHP_SELF']); 
 			}
+			else if($priority == LOG_DEBUG) {
+				$tag = "DEBUG: ".$tag; 
+			}
 			return(
 				openlog ($tag, LOG_PID | LOG_CONS, LOG_USER) 
 					&& syslog ($priority, (string)$message) 
