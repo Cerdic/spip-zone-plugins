@@ -63,5 +63,10 @@ $tables_jointures['spip_zones'][] = 'zones_rubriques';
 
 global $table_des_tables;
 $table_des_tables['zones']='zones';
+global $spip_version_code;
+if (version_compare($spip_version_code,'1.9250','<')) {
+	$table_des_tables['zones_rubriques']='zones_rubriques'; 
+	$table_des_tables['zones_auteurs']='zones_auteurs'; 
+}
 
 ?>
