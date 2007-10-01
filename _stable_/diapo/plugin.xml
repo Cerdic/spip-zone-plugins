@@ -6,7 +6,7 @@
 	[bill->spipcarto@gmail.com]
 	</auteur>
 	<version>
-	0.3
+	0.4
 	</version>
 	<etat>
 	stable
@@ -14,16 +14,19 @@
 	<description>
 		modele galerie/diaporama
 	</description>
-	<options> <!-- fichier charge a chaque hit -->
+	<options>
 	diapo_options.php
 	</options>
+	<fonctions>
+	diapo_fonctions.php
+	</fonctions>
 	<pipeline>
   		<nom>insert_head</nom>
-  		<inclure>diapo_fonctions.php</inclure>
+  		<inclure>diapo_pipelines.php</inclure>
   	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>diapo_fonctions.php</inclure>
+		<inclure>diapo_pipelines.php</inclure>
 	</pipeline>
 	<prefix> 
 	diapo

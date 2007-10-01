@@ -1,3 +1,5 @@
+#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
 
 var diapo_on=false;
 var center=true;
@@ -31,23 +33,25 @@ $.fn.diapo_mode = function() {
 			$("#"+mDiapo+" div.diapo img.diapo_grand").show();
 			diapo_on=!diapo_on;
 			center=true;
-			if ($(this).html()=='||')$(this).html('&gt;');
-			else $(this).html('||');
-			diaposlide(8000,mDiapo);
+			if ($(this).html()=='<:diapo:ico_diapo_pause:>')$(this).html('<:diapo:ico_diapo_play:>');
+			else $(this).html('<:diapo:ico_diapo_pause:>');
+			diaposlide(#DIAPO_TEMPS,mDiapo);
 		}else if (mId=="diapo_icoleft selected"){
-			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_left");
-			$("#"+mDiapo+" div.diapo").attr("class","diapo diapo_petit");
-			$("#"+mDiapo+" div.diapo .diapo_grand").hide();
-			$("#"+mDiapo+" div.diapo .diapo_petit").show();
-			$("#"+mDiapo+" .diapo_ico").html('&gt;');
-			diapo_on=false;
-			center=false;
-		}else if (mId=="diapo_icoright selected"){
-			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_right");
+			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_invisible");
 			$("#"+mDiapo+" div.diapo").attr("class","diapo diapo_petit");
 			$("#"+mDiapo+" div.diapo img.diapo_grand").hide();
 			$("#"+mDiapo+" div.diapo img.diapo_petit").show();
-			$("#"+mDiapo+" .diapo_ico").html('&gt;');
+			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_left");
+			$("#"+mDiapo+" .diapo_ico").html('<:diapo:ico_diapo_play:>');
+			diapo_on=false;
+			center=false;
+		}else if (mId=="diapo_icoright selected"){
+			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_invisible");
+			$("#"+mDiapo+" div.diapo").attr("class","diapo diapo_petit");
+			$("#"+mDiapo+" div.diapo img.diapo_grand").hide();
+			$("#"+mDiapo+" div.diapo img.diapo_petit").show();
+			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_right");
+			$("#"+mDiapo+" .diapo_ico").html('<:diapo:ico_diapo_play:>');
 			diapo_on=false;
 			center=false;
 		}else{
@@ -55,7 +59,7 @@ $.fn.diapo_mode = function() {
 			$("#"+mDiapo+" div.diapo").attr("class",'diapo diapo_grand');
 			$("#"+mDiapo+" div.diapo img.diapo_petit").hide();
 			$("#"+mDiapo+" div.diapo img.diapo_grand").show();
-			$("#"+mDiapo+" .diapo_ico").html('&gt;');
+			$("#"+mDiapo+" .diapo_ico").html('<:diapo:ico_diapo_play:>');
 			diapo_on=false;
 			center=true;
 		}

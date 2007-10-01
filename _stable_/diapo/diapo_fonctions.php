@@ -1,14 +1,36 @@
 <?php
-	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_DIAPO',(_DIR_PLUGINS.end($p)));
 
-function diapo_insert_head($flux){
-	$flux .= '<script type="text/javascript" src="'.find_in_path('diapo.js').'"></script>';
-	$flux .= '<link rel="stylesheet" href="'.find_in_path('diapo.css').'" type="text/css" media="all" />';
-	return $flux;
+if (!isset($GLOBALS['diapo_temps']))
+	$GLOBALS['diapo_temps']=8000;
+if (!isset($GLOBALS['diapo_grand']))
+	$GLOBALS['diapo_grand']=560;
+if (!isset($GLOBALS['diapo_vignettes']))
+	$GLOBALS['diapo_vignettes']=8;
+if (!isset($GLOBALS['diapo_vignette']))
+	$GLOBALS['diapo_vignette']=floor($GLOBALS['diapo_grand']/$GLOBALS['diapo_vignettes']-2);
+if (!isset($GLOBALS['diapo_petit']))
+	$GLOBALS['diapo_petit']=floor($GLOBALS['diapo_grand']-($GLOBALS['diapo_grand']/$GLOBALS['diapo_vignettes']*2)-10);
+
+function balise_DIAPO_TEMPS_dist($p) {
+	$p->code = "\$GLOBALS['diapo_temps']";
+	return $p;
 }
-function diapo_header_prive($flux){
-	$flux .= '<link rel="stylesheet" href="'.find_in_path('diapo.css').'" type="text/css" media="all" />';
-	return $flux;
+function balise_DIAPO_GRAND_dist($p) {
+	$p->code = "\$GLOBALS['diapo_grand']";
+	return $p;
 }
+function balise_DIAPO_PETIT_dist($p) {
+	$p->code = "\$GLOBALS['diapo_petit']";
+	return $p;
+}
+function balise_DIAPO_VIGNETTE_dist($p) {
+	$p->code = "\$GLOBALS['diapo_vignette']";
+	return $p;
+}
+function balise_DIAPO_VIGNETTES_dist($p) {
+	$p->code = "\$GLOBALS['diapo_vignettes']";
+	return $p;
+}
+
+
 ?>
