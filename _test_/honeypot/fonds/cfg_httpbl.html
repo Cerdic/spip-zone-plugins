@@ -4,6 +4,8 @@
 [(#REM) casier=httpbl]
 [(#REM) icone=honeypot_24.png]
 [(#REM) onglet=non]
+[(#REM) liens*=honeypot]
+
 
 [(#REM)
 Plugin HoneyPot, configuration http:BL
@@ -30,7 +32,7 @@ Plugin HoneyPot, configuration http:BL
 <input type="text" name="apikey" id="apykey" value="#ENV{apikey}" />
 </fieldset>
 
-<fieldset>
+<fieldset [(#ENV{apikey}|?{'',' '})style="display:none;"]>
 <legend><:honeypothttpbl:cfg_sivisiteur:></legend>
 <ul>
 
@@ -148,17 +150,23 @@ Plugin HoneyPot, configuration http:BL
 
 </fieldset>
 
-<fieldset>
+<fieldset [(#ENV{apikey}|?{'',' '})style="display:none;"]>
 <legend><:honeypothttpbl:cfg_remplacement_email:></legend>
 <input type="text" name="remplacement_email" id="remplacement_email" value="#ENV{remplacement_email,NOSPAM}"/>
 </fieldset>
 
-<fieldset>
+<fieldset [(#ENV{apikey}|?{'',' '})style="display:none;"]>
 <legend><:honeypothttpbl:cfg_log:></legend>
 <select name="loglevel">
 <option value="all" [(#ENV{loglevel}|choixsiegal{all,' ',''})  selected="selected"]><:honeypothttpbl:cfg_log_all:></option>
 <option value="blocked" [(#ENV{loglevel,blocked}|choixsiegal{blocked,' ',''})  selected="selected"]><:honeypothttpbl:cfg_log_blocked:></option>
 </select>
+</fieldset>
+
+<fieldset [(#ENV{apikey}|?{'',' '})style="display:none;"]>
+<legend><:honeypothttpbl:cfg_cache:></legend>
+<label for="cache"><:honeypothttpbl:cfg_cache_doc:></label><br/>
+<input type="text" name="cache" id="cache" value="#ENV{cache,7}"/> <:jours:>
 </fieldset>
 
 <input type="submit" name="_cfg_ok" value="<:OK:>" />

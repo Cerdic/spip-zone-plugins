@@ -47,7 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'cfg_remplacement_email' => 'Cacher les adresse emails en les rempla&ccedil;ant par : ',
 									   'cfg_log' => 'Logguer les acc&eacute;s :',
 									   'cfg_log_all' => 'de tous les types connus',
-									   'cfg_log_blocked' => 'qui sont filtr&eacute;s'
+									   'cfg_log_blocked' => 'qui sont filtr&eacute;s',
+									   'cfg_cache' => 'Dur&eacute;e de cache',
+									   'cfg_cache_doc' => 'les informations &agrave; propos du niveau de risque de chaque visiteur sera gard&eacute; en cache un minimum de temps dans votre base de donn&eacute;es pour ne pas faire de requ&eacute;tes http:BL &agrave; chacune de leur visite.'
 
 );
 

@@ -47,7 +47,9 @@ To be able to use this feature on your site, you first have to [get an API key f
 									   'cfg_remplacement_email' => 'Hide the email addresses by replacing them with: ',
 									   'cfg_log' => 'Log detected access :',
 									   'cfg_log_all' => 'All known access type',
-									   'cfg_log_blocked' => 'Only filtered access'
+									   'cfg_log_blocked' => 'Only filtered access',
+									   'cfg_cache' => 'Cache time to live',
+									   'cfg_cache_doc' => 'A cache of the threat level of each visitor will be kept in the database for a minimum period of time to avoid sending requests to http:BL at every visit.'
 									   );
 
 ?>

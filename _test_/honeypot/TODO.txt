@@ -2,6 +2,5 @@
 - traductions de 403.html?
 - option pour logguer les blockages et statistiques (dans un plugin central?)
 - option pour avoir une white list (dans un plugin central?)
-- systeme de cache pour les IP, pour ne pas faire de query à chaque visite
 
  

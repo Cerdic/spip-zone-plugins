@@ -22,10 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'cfg_titre' => 'Project Honey Pot',
 									   'cfg_descriptif' => "The honeypot project provides a trap for spammer bots and havesters that might visit your web site.
 
-This plugin provides a simple way to integrate trap links to your installed honeypot in your SPIP template. You will need to have previously installed a honeypot provided by [->http://projecthoneypot.org].
+This plugin provides a simple way to integrate trap links to your installed honeypot in your SPIP template. You will need to have previously installed a honeypot provided by {[Project Honey Pot->http://projecthoneypot.org?rf=41080]}.
 
 Once an honeypot installed, you can use this plugin to filter the access to your website on the base of the threat level assessed by the P.H.Pot. To configure this part of the plugin, go to the [httpbl->./?exec=cfg&cfg=httpbl] configuration page.",
-									   'Documentation' => "<p>To start using a honeypot on your website, you first have to create an account with <a href=\"http://projecthoneypot.org\">project honeypot</a>. Follow their instruction to download the honeypot script.
+									   'Documentation' => "<p>To start using a honeypot on your website, you first have to create an account with <a href=\"http://projecthoneypot.org?rf=41080\">Project Honey Pot</a>. Follow their instruction to download the honeypot script.
 </p><p>
 Once you have the archive on your computer, decompress it in some folder and look for a <em>.php</em> file. You will have to send this file to the root folder of your SPIP installation on your server.
 </p><p>

@@ -18,20 +18,12 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*ajoute un style pour cacher les pieges aux visiteurs*/
-function honeypot_insert_head($flux) {
-  $flux .= 	'<style>
-.pluginhp'.lire_config('honeypot/hpfile').' {
-display: none;
-}
-</style>';
-  return $flux;
-}
 
-/*on ajoute la tache au cron*/
-function honeypot_taches_generales_cron($taches) {
-  $taches['httpbl_cron'] = 3600*24*lire_config('honeypot/httpbl/cache',7);
-  return $taches;
+function cron_httpbl_cron($t) {
+  //le cron a une tache simple, effacer tous le cache avant maintenant.
+  spip_query("DELETE FROM spip_honeypot_cache WHERE maj < NOW();");
+
+  return 1;
 }
 
 ?>

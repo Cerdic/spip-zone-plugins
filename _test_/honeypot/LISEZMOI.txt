@@ -2,7 +2,7 @@ Projet Pot de Miel
 
 cette partie du projet marche, on peut configurer un pot de miel sur son site. Suivre les instructions sur la page de configuration.
 
-Project Liste Noire
+Projet Liste Noire http:BL
 
 On peut maintenant choisir plusieurs options. Les filtages sont:
 - bloquer en envoyant la header 403 et le squelette fonds/403.html

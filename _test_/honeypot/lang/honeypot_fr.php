@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Ce plugin permet de facilement integrer les liens vers votre pot de miel dans vos squelettes. 
 
-Pour qu'il marche, il faut absolument avoir install&eacute; le pot de miel fourni par [->http://projecthoneypot.org].
+Pour qu'il marche, il faut absolument avoir install&eacute; le pot de miel fourni par {[Project Honey Pot->http://projecthoneypot.org?rf=41080]}.
 
 Une fois un pot de miel install&eacute;, vous pouvez aussi utiliser ce plugin pour limiter l'acc&eacute;s au site et filtrer les visiteurs qui ont &eacute;t&eacute; pris dans un des pots de miels de P.H.Pot. Pour configurer cette partie du plugin, allez sur la page de configuration [httpbl->./?exec=cfg&cfg=httpbl].",
-									   'documentation' => "<p>Pour commencer &agrave; utiliser un pot de miel sur votre site, vous devez avant tout cr&eacute;er un compte sur le site du <a href=\"http://projecthoneypot.org\">project honeypot</a>. Suivez ensuite les instructions pour t&eacute;lecharger le script que ce projet fournis.
+									   'documentation' => "<p>Pour commencer &agrave; utiliser un pot de miel sur votre site, vous devez avant tout cr&eacute;er un compte sur le site du <a href=\"http://projecthoneypot.org?rf=41080\">Project Honey Pot</a>. Suivez ensuite les instructions pour t&eacute;lecharger le script que ce projet fournis.
 </p><p>
 Une fois t&eacute;l&eacute;charg&eacute;, d&eacute;compresser l'archive Project_Honey_Pot.zip fournie dans un r&eacute;pertoire sur votre ordinateur. Vous y trouverez alors un fichier <em>php</em> qu'il vous faut envoyer &agrave; la racine de votre site SPIP sur le serveur.
 </p><p>

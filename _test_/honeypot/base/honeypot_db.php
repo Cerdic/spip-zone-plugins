@@ -18,20 +18,23 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*ajoute un style pour cacher les pieges aux visiteurs*/
-function honeypot_insert_head($flux) {
-  $flux .= 	'<style>
-.pluginhp'.lire_config('honeypot/hpfile').' {
-display: none;
-}
-</style>';
-  return $flux;
-}
 
-/*on ajoute la tache au cron*/
-function honeypot_taches_generales_cron($taches) {
-  $taches['httpbl_cron'] = 3600*24*lire_config('honeypot/httpbl/cache',7);
-  return $taches;
-}
+$GLOBALS['honeypotdb_version'] = 1;
+
+$spip_honeypot_cache = array(
+							 "ip" 	=> "BIGINT NOT NULL", //stoquage avec ip2long de php pour etre plus leger
+							 "age" 	=> "TINYINT UNSIGNED DEFAULT 0",
+							 "status" 	=> "TINYINT UNSIGNED DEFAULT 0",
+							 "threat" 	=> "TINYINT UNSIGNED DEFAULT 0",
+							 "type" 	=> "TINYINT UNSIGNED DEFAULT 0",
+							 "maj" 		=> "TIMESTAMP NOT NULL");
+
+$spip_honeypot_cache_key = array(
+								 "UNIQUE" => "ip");
+
+global $tables_principales;
+$tables_principales['spip_honeypot_cache'] = array(
+												   'field' => &$spip_honeypot_cache,
+												   'key' => &$spip_honeypot_cache_key);
 
 ?>

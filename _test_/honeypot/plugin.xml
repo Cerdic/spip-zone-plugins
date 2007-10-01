@@ -7,7 +7,7 @@
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
   </auteur>
   <version> <!-- Version du plugin -->
-	0.2
+	0.3
   </version>
   <etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
@@ -15,9 +15,9 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
   	<icon>honeypot.png</icon>
   <description>
 	<multi>
-	[fr]Ajouter des liens vers votre honeypot dans vos page. Necessite l'installation pr&eacute;alable du [project honeypot->http://projecthoneypot.org].
+	[fr]Ajouter des liens vers votre honeypot dans vos page. Necessite l'installation pr&eacute;alable du [Project Honey Pot->http://projecthoneypot.org?rf=41080].
 _ Vous pouvez aussi utiliser ce plugin pour limiter l'acc&eacute;s &agrave; votre site pour visiteurs ayant &eacute;t&eacute; classifi&eacute;s douteux par le project honeypot.
-	[en] Automatically generate trap links to your site honeypot in your SPIP templates. You will first need to install a honeypot from [project honeypot->http://projecthoneypot.org].
+	[en] Automatically generate trap links to your site honeypot in your SPIP templates. You will first need to install a honeypot from [Project Honey Pot->http://projecthoneypot.org?rf=41080].
 _ You can also use this plugin to limit the access to your site for the visitors that have been classified as suspicious by the P.H.Pot project.
 	</multi>
   </description>
@@ -35,11 +35,19 @@ _ You can also use this plugin to limit the access to your site for the visitors
   <options>
 	honeypot_httpbl_options.php
   </options>
+
   <pipeline>
 	<nom>affichage_final</nom> 
 	<action>affichage_final</action>
 	<inclure>httpbl_pipeline.php</inclure>
   </pipeline>	
+  	<pipeline>
+		<nom>taches_generales_cron</nom>
+	<inclure>httpbl_pipeline.php</inclure>
+	</pipeline>
+
+  <install>base/honeypot_upgrade.php</install>
 
   <necessite id='cfg' version='[1.0.8;]' />
+  <necessite id="compat" version='[1.9.3;]' />
 </plugin>
