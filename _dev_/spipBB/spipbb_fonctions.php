@@ -114,8 +114,8 @@ function spipbb_get_auteur_infos($id='', $nom='') {
  *    On peut passer une classe CSS pour régler
  *    l'affichage
  *    EXEMPLE :
- *    [(#NOM|afficher_avatar{''})] ou
- *     [(#NOM|afficher_avatar{'nom_de_la_classe'})]
+ *    [(#ID_AUTEUR|afficher_avatar{''})] ou
+ *     [(#ID_AUTEUR|afficher_avatar{'nom_de_la_classe'})]
  *   +-------------------------------------+ 
  *  
  * Pour toute suggestion, remarque, proposition d'ajout
@@ -123,10 +123,10 @@ function spipbb_get_auteur_infos($id='', $nom='') {
  * http://www.uzine.net/spip_contrib/article.php3?id_article=261
 */
 // voirsujet
-function spipbb_afficher_avatar($nom, $classe='') {
+function spipbb_afficher_avatar($id_auteur, $classe='') {
 	if ($classe!='') $insert=" class=\"$classe\""; else $insert="";
 	
-	$infos=unserialize(spipbb_get_auteur_infos('', $nom));
+	$infos=unserialize(spipbb_get_auteur_infos($id_auteur,''));
 	$fichier = '';
 	
 	if ($infos['statut']=="0minirezo" OR $infos[statut]=="1comite") {
@@ -147,7 +147,7 @@ function spipbb_afficher_avatar($nom, $classe='') {
 	}
 	else {
 		if ($infos['statut']=="6forum") {
-			$infos=unserialize(spipbb_get_auteur_infos('', $nom));
+			$infos=unserialize(spipbb_get_auteur_infos($id_auteur,''));
 			$source=unserialize($infos[extra]);
 			$source_extra=$source[avatar];
 			if(isset($source_extra))
@@ -170,8 +170,8 @@ function spipbb_afficher_avatar($nom, $classe='') {
  *    On peut passer une classe CSS pour régler
  *    l'affichage
  *    EXEMPLE :
- *    [(#NOM|spipbb_afficher_avatar{''})] ou
- *     [(#NOM|spipbb_afficher_avatar{'nom_de_la_classe'})]
+ *    [(#ID_AUTEUR|spipbb_afficher_avatar{''})] ou
+ *     [(#ID_AUTEUR|spipbb_afficher_avatar{'nom_de_la_classe'})]
  *     On ne paut mettre du code html directement
  *     pur des raisons de sécurité mais l'on peut
  *     mettre une image [img]url_de_limage[/img]
@@ -184,10 +184,10 @@ function spipbb_afficher_avatar($nom, $classe='') {
 */
 // voirsujet
 
-function spipbb_afficher_signature($nom, $classe='') {
+function spipbb_afficher_signature($id_auteur, $classe='') {
 	if ($classe!='') $insert=" class=\"$classe\""; else $insert="";
 		
-    $infos=unserialize(spipbb_get_auteur_infos('', $nom));
+    $infos=unserialize(spipbb_get_auteur_infos($id_auteur,''));
     $source=unserialize($infos[extra]);
     $texte=$source[signature];
     $texte = entites_html($texte);
