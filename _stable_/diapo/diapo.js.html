@@ -9,7 +9,7 @@ function diaposlide(timeout,mDiapo){
 		mpage="diapo_img";
 		mid_article=mClass[1];
 		mnum=mClass[2];
-	    $.get("spip.php",
+		$.get("spip.php",
 			{page : mpage, id_article : mid_article, num : mnum},
 			function(txt){
 				debut=txt.indexOf("<!-- debut diapo_img"+mid_article+" -->");
@@ -35,7 +35,7 @@ $.fn.diapo_mode = function() {
 			center=true;
 			if ($(this).html()=='<:diapo:ico_diapo_pause:>')$(this).html('<:diapo:ico_diapo_play:>');
 			else $(this).html('<:diapo:ico_diapo_pause:>');
-			diaposlide(#DIAPO_TEMPS,mDiapo);
+			setTimeout('diaposlide(#DIAPO_TEMPS,mDiapo)', #DIAPO_TEMPS);
 		}else if (mId=="diapo_icoleft selected"){
 			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_invisible");
 			$("#"+mDiapo+" div.diapo").attr("class","diapo diapo_petit");
