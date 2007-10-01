@@ -59,7 +59,7 @@ $.fn.diapo_mode = function() {
 			diapo_on=false;
 			center=true;
 		}
-//		return false;
+		return false;
     });
 };
 $.fn.diapo_pagination = function() {
