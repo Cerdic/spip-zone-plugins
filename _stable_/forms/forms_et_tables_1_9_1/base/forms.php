@@ -238,7 +238,7 @@ $table_des_tables['forms_champs_choix'] = 'forms_champs_choix';
 $table_des_tables['forms_donnees']='forms_donnees';
 
 global $spip_version_code;
-if (version_compare($spip_version_code,'1.925','<')){
+if (version_compare($spip_version_code,'1.9250','<')){
 	$table_des_tables['forms_donnees_champs']='forms_donnees_champs'; 
 	$table_des_tables['forms_articles']='forms_articles'; 
 	$table_des_tables['forms_donnees_articles']='forms_donnees_articles'; 
