@@ -48,22 +48,14 @@ function cs_rempl_glossaire($texte) {
 //		$table[$mot[id_mot]] = "<abbr title=\"$mot[texte]\">$mot[titre]</abbr>";
 		// prudence : on protege TOUTES les balises contenant le mot en question
 		$texte = preg_replace_callback(",(<[^>]*$mot[titre][^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
-		$lien = generer_url_mot($mot['id_mot']);
-/* JS */
+		$lien = generer_url_mot($m = $mot['id_mot']);
 		$definition = nl2br(trim($mot['texte']));
-		$table1[$mot['id_mot']] = "<a name=\"mot$mot[id_mot]\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
-if (defined('_GLOSSAIRE_JS')) {
-		$table2[$mot['id_mot']] = "</span></a>";
-} else {
-		$table2[$mot['id_mot']] = "</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">$definition</span></span></a>";
-}
-/*
-		$table1[$mot['id_mot']] = "<a name=\"mot$mot[id_mot]\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
-		$table2[$mot['id_mot']] = "</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">"
-			. nl2br(trim($mot['texte'])) . "</span></span></a>";
-*/
+		$table1[$m] = "<a name=\"mot$m\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
+		$table2[$m] = defined('_GLOSSAIRE_JS')
+			?'</span><span class="gl_js" title="'.$mot['titre'].'"></span><span title="'.htmlspecialchars($definition).'"></span></a>'
+			:"</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">$definition</span></span></a>";
 		// a chaque mot reconnu, on pose une balise temporaire	
-		$texte = preg_replace(",(\W)($mot[titre])(\W),i", "\\1@@GLOSS\\2#$mot[id_mot]@@\\3", $texte, $limit);
+		$texte = preg_replace(",(\W)($mot[titre])(\W),i", "\\1@@GLOSS\\2#$m@@\\3", $texte, $limit);
 	}
 	// remplacement final des balises posees ci-dessus
 	$texte = preg_replace(",@@GLOSS([^#]+)#([0-9]+)@@,e", '"$table1[\\2]\\1$table2[\\2]"', $texte);

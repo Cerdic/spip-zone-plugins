@@ -26,13 +26,13 @@ add_variable( array(
 	// si la variable est egale a 1, on code...
 	// jquery.js et forms_styles.css restent en cache.
 	'code:%s' => "\$fond = isset(\$GLOBALS['fond'])?\$GLOBALS['fond']:_request('page');
-if (!in_array(\$fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';",
+if (!in_array(\$fond, array('jquery.js','forms_styles.css'))) \$_SERVER['REQUEST_METHOD']='POST';\n",
 ));
 add_variable( array(
 	'nom' => 'duree_cache',
 	'format' => 'nombre',
 	'defaut' => "24", // 1 jour
-	'code' => "define('_DUREE_CACHE_DEFAUT', %s*3600);",
+	'code' => "define('_DUREE_CACHE_DEFAUT', %s*3600);\n",
 ));
 add_variable( array(
 	'nom' => 'quota_cache',
@@ -42,7 +42,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'SPIP_cache',
-	'code:options' => "%%radio_desactive_cache3%%\n%%quota_cache%%\n%%duree_cache%%",
+	'code:options' => "%%radio_desactive_cache3%%%%duree_cache%%%%quota_cache%%",
 	'categorie' => 'admin',
 ));
 
@@ -115,13 +115,13 @@ add_variable( array(
 	'nom' => 'suite_introduction',
 	'format' => 'chaine',
 	'defaut' => '"&nbsp;(...)"',
-	'code' => "define('_INTRODUCTION_SUITE', %s);",
+	'code' => "define('_INTRODUCTION_SUITE', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'lgr_introduction',
 	'format' => 'nombre',
 	'defaut' => 100,
-	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);",
+	'code:%s && %s!=100' => "define('_INTRODUCTION_LGR', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'lien_introduction',
@@ -132,7 +132,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'introduction',
-	'code:options' => "%%lgr_introduction%%\n%%suite_introduction%%\n%%lien_introduction%%",
+	'code:options' => "%%lgr_introduction%%%%suite_introduction%%%%lien_introduction%%",
 	'categorie' => 'spip',
 ));
 
@@ -170,7 +170,7 @@ add_variable( array(
 			'standard' => 'cout:standard', 'propres-qs' => 'cout:propres-qs' ),
 	'radio/ligne' => 4,
 	'defaut' => "strlen(\$GLOBALS['type_urls'])?\$GLOBALS['type_urls']:'page'",
-	'code' => "\$GLOBALS['type_urls']=%s;",
+	'code' => "\$GLOBALS['type_urls']=%s;\n",
 ));
 add_variable( array(
 	'nom' => 'spip_script',
@@ -180,7 +180,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'type_urls',
-	'code:options' => "%%radio_type_urls3%%\n%%spip_script%%",
+	'code:options' => "%%radio_type_urls3%%%%spip_script%%",
 	'categorie' => 'admin',
 ));
 
@@ -302,14 +302,14 @@ add_variable( array(
 	'format' => 'nombre',
 	'radio' => array(0 => 'cout:tous', 1 => 'cout:sauf_admin'),
 	'defaut' => 0,
-	'code' => "define('_en_travaux_ADMIN', %s);",
+	'code' => "define('_en_travaux_ADMIN', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'message_travaux',
 	'format' => 'chaine',
 	'defaut' => "_T('cout:prochainement')",
 	'lignes' => 3,
-	'code' => "define('_en_travaux_MESSAGE', %s);",
+	'code' => "define('_en_travaux_MESSAGE', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'titre_travaux',
@@ -320,7 +320,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'en_travaux',
-	'code:options' => "%%message_travaux%%\n%%admin_travaux%%\n%%titre_travaux%%",
+	'code:options' => "%%message_travaux%%%%admin_travaux%%%%titre_travaux%%",
 	'categorie' => 'admin',
 	'auteur' => '[Arnaud Ventre->ventrea@gmail.com]',
 ));
@@ -366,14 +366,14 @@ add_variable( array(
 	'nom' => 'lgr_sommaire',
 	'format' => 'nombre',
 	'defaut' => 30,
-	'code:%s>=9 && %s<=99' => "define('_sommaire_NB_CARACTERES', %s);",
+	'code:%s>=9 && %s<=99' => "define('_sommaire_NB_CARACTERES', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'auto_sommaire',
 	'format' => 'nombre',
 	'radio' => array(1 => 'item_oui', 0 => 'item_non'),
 	'defaut' => 1,
-	'code:%s' => "define('_sommaire_AUTOMATIQUE', %s);",
+	'code:%s' => "define('_sommaire_AUTOMATIQUE', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'balise_sommaire',
@@ -385,7 +385,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
-	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%\n%%auto_sommaire%%\n%%balise_sommaire%%",
+	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
 	'code:js' => '$(document).ready(function(){ if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none"); });',
@@ -460,7 +460,7 @@ add_variable( array(
 	'format' => 'nombre',
 	'radio' => array(1 => 'item_oui', 0 => 'item_non' ),
 	'defaut' => 1,
-	'code' => "define('_COULEURS_FONDS', %s);",
+	'code' => "define('_COULEURS_FONDS', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'set_couleurs',
@@ -468,7 +468,7 @@ add_variable( array(
 	'radio' => array(0 => 'cout:toutes_couleurs', 1 => 'cout:certaines_couleurs'),
 	'radio/ligne' => 1,
 	'defaut' => 0,
-	'code' => "define('_COULEURS_SET', %s);",
+	'code' => "define('_COULEURS_SET', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'couleurs_perso',
@@ -483,7 +483,7 @@ add_outil( array(
 	'categorie'	 => 'typo-racc',
 	'contrib'	=> 2427,
 	'pipeline:pre_typo' => 'couleurs_pre_typo',
-	'code:options' => "%%couleurs_fonds%% %%set_couleurs%%\n%%couleurs_perso%%",
+	'code:options' => "%%couleurs_fonds%%%%set_couleurs%%%%couleurs_perso%%",
 	'code:fonctions' => "// aide le Couteau Suisse a calculer la balise #INTRODUCTION
 function couleurs_introduire(\$texte) {
 	\$couleurs = unserialize(\$GLOBALS['meta']['cs_couleurs']);
@@ -556,13 +556,13 @@ add_variable( array(
 	'nom' => 'glossaire_groupes',
 	'format' => 'chaine',
 	'defaut' => "Glossaire",
-	'code' => "\$GLOBALS['glossaire_groupes']=%s;",
+	'code' => "\$GLOBALS['glossaire_groupes']=%s;\n",
 ));
 add_variable( array(
 	'nom' => 'glossaire_limite',
 	'format' => 'nombre',
 	'defaut' => 0,
-	'code:%s>0' => "define('_GLOSSAIRE_LIMITE', %s);",
+	'code:%s>0' => "define('_GLOSSAIRE_LIMITE', %s);\n",
 ));
 add_variable( array(
 	'nom' => 'glossaire_js',
@@ -575,7 +575,7 @@ add_outil( array(
 	'id' => 'glossaire',
 	'categorie'	=> 'typo-corr',
 	'contrib'	=> 2206,
-	'code:options' => "%%glossaire_limite%%\n%%glossaire_groupes%%\n%%glossaire_js%%",
+	'code:options' => "%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
 //	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	// sans oublier les articles...

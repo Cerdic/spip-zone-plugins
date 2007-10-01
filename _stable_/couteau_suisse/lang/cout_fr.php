@@ -262,7 +262,7 @@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'a
 Attention, si vous n'activez pas la balise #CS_SOMMAIRE, aucun sommaire automatique ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.",
 	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
-	'sommaire' => 'Sommaire',
+	'sommaire_titre' => 'Sommaire',
 	'sommaire_page' => ',&nbsp;p@page@',
 
 // ---------------------------------------------------------------------------
@@ -295,7 +295,10 @@ _ Merci de votre compr&eacute;hension.",
 // ---------------------------------------------------------------------------
 	'glossaire:nom' => 'Glossaire interne',
 	'glossaire:description' => "#PUCE Gestion d&rsquo;un glossaire interne li&eacute; &agrave; un ou plusieurs groupes de mots-cl&eacute;s. Inscrivez ici le nom des groupes en  les s&eacute;parant par les deux points &laquo;&nbsp;:&nbsp;&raquo;. En laissant vide la case qui  suit (ou en tapant &quot;Glossaire&quot;), c&rsquo;est le groupe &quot;Glossaire&quot; qui sera utilis&eacute;.[[Groupe(s) utilis&eacute;(s) :->%glossaire_groupes%]]"
-		. "#PUCE Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[Nombre maximal de liens cr&#233;&#233;s :->%glossaire_limite% par mot-cl&#233;]]",
+		. "#PUCE Pour chaque mot, vous avez la possibilit&#233; de choisir le nombre maximal de liens cr&#233;&#233;s dans vos textes. Toute valeur nulle ou n&#233;gative implique que tous les mots reconnus seront trait&#233;s. [[Nombre maximal de liens cr&#233;&#233;s :->%glossaire_limite% par mot-cl&#233;]]"
+		. "#PUCE Deux solutions vous sont offertes pour g&#233;n&#233;rer la petite fen&ecirc;tre automatique qui apparait lors du survol de la souris. [[Technique utilis&#233;e:->%glossaire_js%]]",
+	'glossaire_css' => 'Solution CSS',
+	'glossaire_js' => 'Solution Javascript',
 
 // ---------------------------------------------------------------------------
 	'mailcrypt:nom' => 'MailCrypt',
