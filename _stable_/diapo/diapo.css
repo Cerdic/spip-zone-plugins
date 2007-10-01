@@ -39,17 +39,17 @@
 	text-align:center;
 }
 .diapo_vignettes, .diapo_vignettes_center {
-	margin-left:4px;
+	margin-left:2px;
 }
 .diapo_vignettes_right {
 	float:right;
 	display:block;
-	width:180px;
+	width:146px;
 }
 .diapo_vignettes_left {
 	float:left;
 	display:block;
-	width:180px;
+	width:146px;
 }
 .diapo_vignettes_invisible {
 	display:none;
@@ -59,24 +59,30 @@
 	display:block;
 	position:relative;
 	text-align:center;
-	width:89px;
-	height:89px;
+	width:70px;
+	height:70px;
 }
 .diaporama {
-	float:left;
 	display:block;
 	position:relative;
 	text-align:left;
-	margin-top:5px;
+	width:564px;
 }
 .diapo {
+	float:left;
 	position:relative;
-	display:inline;
+	margin-top:5px;
 }
-.diapo_grand {
-	width:550px;
+.diapo h3{
+	font-weight:bold;
 }
-.diapo_petit {
-	width:370px;
+.diapo p{
+	margin:0;
+	font-size:0.8em;
 }
-.diaporama{position:relative;width:560px;}
+div.diapo_grand {
+	width:560px;
+}
+div.diapo_petit {
+	width:410px;
+}

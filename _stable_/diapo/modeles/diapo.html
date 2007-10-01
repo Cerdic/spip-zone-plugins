@@ -2,20 +2,20 @@
 <div id="diapo#ID_ARTICLE" class="diaporama">
 <!-- debut diapo#ID_ARTICLE -->
 <B_docs>
-[(#ANCRE_PAGINATION)]
 <div class="diapo_menu">
 <span class="diapo_icones">
-<a rel="diapo#ID_ARTICLE" class="diapo_ico[ (#ENV{align}|choixsivide{'selected',''})][ (#ENV{align}|choixsiegal{'center','selected',''})]" href="#pagination_docs" title="<:diapo:txt_icodiapo:>">&gt;</a>
-<a rel="diapo#ID_ARTICLE" class="diapo_icoright[ (#ENV{align}|choixsiegal{'right','selected',''})]" href="#pagination_docs" title="<:diapo:txt_icoright:>">&nbsp;</a>
-<a rel="diapo#ID_ARTICLE" class="diapo_icoleft[ (#ENV{align}|choixsiegal{'left','selected',''})]" href="#pagination_docs" title="<:diapo:txt_icoleft:>">&nbsp;</a>
-<a rel="diapo#ID_ARTICLE" class="diapo_icocenter[ (#ENV{align}|choixsiegal{'diapo','selected',''})]" href="#pagination_docs" title="<:diapo:txt_icocenter:>">&nbsp;</a>
+<a rel="diapo#ID_ARTICLE" class="diapo_ico[ (#ENV{align}|choixsivide{'selected',''})][ (#ENV{align}|choixsiegal{'diapo','selected',''})]" href="#pagination#ID_ARTICLE" title="<:diapo:txt_icodiapo:>">&gt;</a>
+<a rel="diapo#ID_ARTICLE" class="diapo_icoright[ (#ENV{align}|choixsiegal{'right','selected',''})]" href="#pagination#ID_ARTICLE" title="<:diapo:txt_icoright:>">&nbsp;</a>
+<a rel="diapo#ID_ARTICLE" class="diapo_icoleft[ (#ENV{align}|choixsiegal{'left','selected',''})]" href="#pagination#ID_ARTICLE" title="<:diapo:txt_icoleft:>">&nbsp;</a>
+<a rel="diapo#ID_ARTICLE" class="diapo_icocenter[ (#ENV{align}|choixsiegal{'diapo','selected',''})]" href="#pagination#ID_ARTICLE" title="<:diapo:txt_icocenter:>">&nbsp;</a>
 </span>
+[(#ANCRE_PAGINATION)]
 [(#PAGINATION)]
 </div>
 <div class="diapo_vignettes[ diapo_vignettes_(#ENV{align})]">
-<BOUCLE_docs(DOCUMENTS){id_article}{pagination 8}{par num titre}>
-[<div class="diapo_vignette"><a rel="diapo#ID_ARTICLE" class="vignette_[(#_art:ID_ARTICLE)]_[(#COMPTEUR_BOUCLE)]" href="[(#SELF|parametre_url{diapo_docs_diapo,[(#COMPTEUR_BOUCLE|moins{1})]})]#pagination_docs"[ title="(#TITRE|couper{80}|texte_backend)"]>
-(#LOGO_DOCUMENT||image_reduire{85}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
+<BOUCLE_docs(DOCUMENTS){id_article}{extension IN png,jpg,gif}{pagination 8 #ID_ARTICLE}{par num titre}>
+[<div class="diapo_vignette"><a rel="diapo#ID_ARTICLE" class="vignette_[(#_art:ID_ARTICLE)]_[(#COMPTEUR_BOUCLE)]" href="[(#SELF|parametre_url{diapo#ID_ARTICLE,[(#COMPTEUR_BOUCLE|moins{1})]})]#pagination#ID_ARTICLE"[ title="(#TITRE|couper{80}|texte_backend)"]>
+(#LOGO_DOCUMENT||image_reduire{68}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
 </a></div>]
 </BOUCLE_docs>
 </div>
@@ -24,28 +24,18 @@
 - critere diapo avec meme pas que pagination 
 - meme nom de boucle + 6 caracteres(_diapo) 
 => il faudrait sans doute surcharger pagination...]
-<BOUCLE_docs_diapo(DOCUMENTS){id_article}{diapo 8}{par num titre}>
+<BOUCLE_docs_diapo(DOCUMENTS){id_article}{extension IN png,jpg,gif}{diapo 8 #ID_ARTICLE}{par num titre}>
 <img class="diapo_loading" style="display:none" src="[(#CHEMIN{'img_pack/loading.gif'})]"/>
 <div class="diapo[ (#ENV{align}|match{right|left}|?{'diapo_petit','diapo_grand'})]">
 <a href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] type="#MIME_TYPE">
-<img class="diapo_petit"[ style="(#ENV{align}|match{right|left}|?{'','display:none'})"] src='[(#FICHIER|image_reduire{548,0}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{370}|hauteur)]' width='[(#FICHIER|image_reduire{370}|largeur)]' alt='[(#TITRE|supprimer_numero|texte_backend)]' />
-<img class="diapo_[(#_art:ID_ARTICLE)]_[(#COMPTEUR_BOUCLE)] diapo_grand"[ style="(#ENV{align}|match{right|left}|?{'display:none',''})"] src='[(#FICHIER|image_reduire{548,0}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{548,0}|hauteur)]' width='[(#FICHIER|image_reduire{548,0}|largeur)]' alt='[(#TITRE|supprimer_numero|sinon{[(#FICHIER|)]})]' />
+<img class="diapo_petit"[ style="(#ENV{align}|match{right|left}|?{'','display:none'})"] src='[(#FICHIER|image_reduire{560,0}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{410,0}|hauteur)]' width='[(#FICHIER|image_reduire{410,0}|largeur)]' alt='[(#TITRE|supprimer_numero|texte_backend)]' />
+<img class="diapo_[(#_art:ID_ARTICLE)]_[(#COMPTEUR_BOUCLE)] diapo_grand"[ style="(#ENV{align}|match{right|left}|?{'display:none',''})"] src='[(#FICHIER|image_reduire{560,0}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{560,0}|hauteur)]' width='[(#FICHIER|image_reduire{560,0}|largeur)]' alt='[(#TITRE|supprimer_numero|sinon{[(#FICHIER|)]})]' />
 </a>
 [<h3>(#TITRE|supprimer_numero)</h3>]
 [<p>(#DESCRIPTIF)</p>]
 </div>
 </BOUCLE_docs_diapo>
-[(#ENV{align}|=={diapo}|?{' ',''})
-<script type="text/javascript">
-$(document).ready(function(){
-	if ($("#diapo#ID_ARTICLE .diapo_ico").attr("class")=="selected")
-		$("#diapo#ID_ARTICLE .diapo_ico").click();
-	$("#diapo#ID_ARTICLE div.diapo_menu a.lien_pagination").attr("rel","diapo#ID_ARTICLE");
-	diapogrand=$("#diapo#ID_ARTICLE .diapo_grand").get(0);
-	if (diapogrand) center=!($("#diapo#ID_ARTICLE .diapo_grand").css("display")=="none");
-});
-</script>
-]
 <!-- fin diapo#ID_ARTICLE -->
+<br style="clear:both;"/>
 </div>
 </BOUCLE_art>

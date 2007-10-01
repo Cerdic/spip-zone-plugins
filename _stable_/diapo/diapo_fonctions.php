@@ -7,4 +7,8 @@ function diapo_insert_head($flux){
 	$flux .= '<link rel="stylesheet" href="'.find_in_path('diapo.css').'" type="text/css" media="all" />';
 	return $flux;
 }
+function diapo_header_prive($flux){
+	$flux .= '<link rel="stylesheet" href="'.find_in_path('diapo.css').'" type="text/css" media="all" />';
+	return $flux;
+}
 ?>
