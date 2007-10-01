@@ -62,6 +62,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'abonnes_titre' => 'Abonn&eacute;s',
 'adresse_de_reponse' => "Adresse de r&eacute;ponse",
 'adresse_mail_retour' => 'Adresse email du gestionnaire de la liste (reply-to)',
+'Attention_action_retire_invites' => "Attention: cette action retire les invit&eacute;s de la liste des abonn&eacute;s.",
 	
 //B
 

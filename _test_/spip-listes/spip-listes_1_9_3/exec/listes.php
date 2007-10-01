@@ -279,7 +279,7 @@ function exec_listes_dist(){
 		switch(selection) {
 			case '"._SPIPLISTES_PRIVATE_LIST."':
 				if(!alerter_modif_statut) { 
-					alert('".__texte_html_2_iso(_T('spiplistes:Attention_modifie_liste_abonnes'), $GLOBALS['meta']['charset'], true)."'); 
+					alert('".__texte_html_2_iso(_T('spiplistes:Attention_action_retire_invites'), $GLOBALS['meta']['charset'], true)."'); 
 					alerter_modif_statut=true; 
 				}
 				document.img_statut.src='".spiplistes_items_get_item("puce", _SPIPLISTES_PRIVATE_LIST)."';
