@@ -104,7 +104,6 @@ function notifier_envoi_message($message_titre,$message_auteur,$message_date_heu
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		$envoyer_mail($email, $message_titre, $message_texte, $from);
 		spip_log("envoyer_mail: $email:$message_titre: $message_texte:$from:",'pimagenda');
-		inc_envoyer_mail_dist()
 	}
 }
 
