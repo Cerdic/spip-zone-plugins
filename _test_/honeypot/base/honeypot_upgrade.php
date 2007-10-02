@@ -25,9 +25,10 @@ function honeypot_droptables() {
 
 function honeypot_doupgrade() {
   include_spip('base/honeypot_db');
-  $installe = unserialize($GLOBALS['meta']['honeypot:installe']);
+  $installe = $GLOBALS['meta']['honeypot:installe'];
   $uptodate = $installe && ($installe == $GLOBALS['honeypotdb_version']);
   if(!$uptodate) {
+	honeypot_droptables();
 	include_spip('base/create');
 	include_spip('base/abstract_sql');
 	creer_base();
