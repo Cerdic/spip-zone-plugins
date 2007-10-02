@@ -14,7 +14,7 @@
 	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
 		<tbody[ id="salon(#ID_RUBRIQUE)"]>
 		<tr class="salon">
-			<td colspan="2" class="salontitre">[<h2><a href="#URL_RUBRIQUE">(#TITRE)</a></h2>]</td>
+			<td colspan="2" class="salontitre">[<h2><a href="#URL_RUBRIQUE">(#TITRE)</a></h2>][<p>(#INTRODUCTION)</p>]</td>
 			<td colspan="3" class="salonreste">&nbsp;</td>
 		</tr>
 	<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
@@ -26,7 +26,8 @@
 			</td>
 			<td class="titre">
 				[<h3><a href="#URL_ARTICLE">(#TITRE)</a></h3>]
-				[(#DESCRIPTIF)<br/>]
+				[<p>(#INTRODUCTION)</p>]
+				[(#MODELE{spipbb_moderateurs}{id_article})]
 			</td>
 			<BOUCLE_sujets(FORUMS){id_article}{doublons sujets}></BOUCLE_sujets>
 			<td class="msgsuj">#TOTAL_BOUCLE</td>

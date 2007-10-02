@@ -73,6 +73,7 @@ table.spipforum td, table.spipforum th { padding: 3px; border: 1px solid; text-a
 tr.salon td { margin: 0; padding: 0; padding-left: 3px; text-align: left; }
 	table.spipforum h2, table.spipforum h3 { margin: 0; padding: 0; }
 td.titre, td.titresuj { text-align: left !important; font-weight: bold; }
+td.enligne, td.dernmsg { text-align: left !important; }
 td.msgpost, td.msgsuj, td.autpost { width: 75px; }
 td.dateaut, td.msgaut, td.statutaut { width: 80px; }
 td.etatsuj, td.etatfor, td.etatenligne { width: 50px; height: 25px; }
@@ -105,6 +106,7 @@ td.autvs p { margin: 0; font-weight: bold; }
 td.retourvs { border-right: none; }
 td.videvs { border-left: none; }
 td.autvs, td.tabvs { vertical-align: top; }
+td.titre p, td.salontitre p { font-weight: normal; }
 
 /* liste des actions du tableau des interventions */
 ul.actionvs { margin: 0; padding: 0; float: right; margin-bottom: 7px; font-size: 18px; }
