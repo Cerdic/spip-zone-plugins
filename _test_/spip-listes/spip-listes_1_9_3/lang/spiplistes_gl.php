@@ -266,7 +266,7 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 'nb_abonnes' => 'Nas listas: ',
 'nb_inscrits' => 'No sitio:  ',
 'nb_listes' => 'Entre todas as listas: ',
-'non_program' => 'Non hai env&iacute;os programados para esta lista.',
+'Pas_de_courrier_auto_programme' => 'Non hai env&iacute;os programados para esta lista.',
 'nouvelle_abonne' => 'A seguinte inscripci&oacute;n foi engadida &aacute; lista',
 
 'pas_acces' => 'Non tes acceso permitido a esta p&aacute;xina.',

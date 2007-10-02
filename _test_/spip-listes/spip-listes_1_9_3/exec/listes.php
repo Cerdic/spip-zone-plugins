@@ -31,6 +31,7 @@ function exec_listes_dist(){
 	include_spip('inc/lang');
 	include_spip('inc/affichage');
 	include_spip('base/spip-listes');
+	include_spip('inc/spiplistes_dater_envoi');
 	
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -44,11 +45,13 @@ function exec_listes_dist(){
 		, 'id_liste'// si modif dans l'éditeur
 		, 'titre', 'texte' // modif ou new renvoyés par l'éditeur
 		, 'pied_page', 'changer_lang', 'statut_nouv', 'btn_modifier_replyto', 'email_envoi', 'btn_modifier_diffusion' // modif ou new
-		, 'jour', 'mois', 'annee', 'heure', 'minute'
+		// boite courriers auto
+		, 'btn_courrier_auto', 'patron', 'periode', 'envoyer_direct'
+			, 'jour', 'mois', 'annee', 'heure', 'minute'
 		) as $key) {
 		$$key = _request($key);
 	}
-	foreach(array('id_liste') as $key) {
+	foreach(array('id_liste', 'periode') as $key) {
 		$$key = intval($$key);
 	}
 	foreach(array('titre', 'texte', 'pied_page') as $key) {
@@ -59,13 +62,9 @@ function exec_listes_dist(){
 	
 	$cherche_auteur = _request('cherche_auteur');
 	
-	$Valider_auto = _request('Valider_auto');
 	$auto = _request('auto');
 	$changer_extra = _request('changer_extra');
-	$patron = _request('patron');
-	$periode = _request('periode');
 	$sujet_message = _request('sujet_message');
-	$envoyer_direct = _request('envoyer_direct');
 	
 	$debut = _request('debut');
  
@@ -144,15 +143,15 @@ function exec_listes_dist(){
 				$result = spip_query("UPDATE spip_listes SET lang="._q($changer_lang)." WHERE id_liste="._q($id_liste));
 		
 			// prendre en compte les modifs sur le message auto // à revoir aussi
-			if($Valider_auto){
+			if($btn_courrier_auto){
 				if($auto == "oui"){
 					$result = spip_query("UPDATE spip_listes SET message_auto='oui' WHERE id_liste="._q($id_liste));
-					if($maj=="0000-00-00 00:00:00"){
+					if($maj==_SPIPLISTES_ZERO_TIME_DATE){
 						$result = spip_query("UPDATE spip_listes SET maj=NOW() WHERE id_liste="._q($id_liste));
 					}
 				}
 				elseif ($auto == "non"){
-					$result = spip_query("UPDATE spip_listes SET message_auto='non', maj='0000-00-00 00:00:00' WHERE id_liste="._q($id_liste));
+					$result = spip_query("UPDATE spip_listes SET message_auto='non', maj='"._SPIPLISTES_ZERO_TIME_DATE."' WHERE id_liste="._q($id_liste));
 				}
 
 				if(($changer_extra == "oui") AND ($auto == "oui") ){
@@ -297,9 +296,16 @@ function exec_listes_dist(){
 
 	// tous les admins ont la possibilité de modifier le statut
 	if ($connect_statut == '0minirezo' ) {
+
+		$email_defaut = entites_html(lire_meta("email_webmaster"));
+		$email_envoi = (email_valide($email_envoi)) ? $email_envoi : $email_defaut ;
+
 		$page_result .= ""
 			//. debut_cadre_relief("racine-site-24.gif", true)
 			. debut_cadre_relief("racine-site-24.gif", true, '', _T('spiplistes:Diffusion').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "diffusion"))
+			//
+			////////////////////////////
+			// Formulaire diffusion
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='get'>"
 			. "<input type='hidden' name='exec' value='listes' />"
 			. "<input type='hidden' name='id_liste' value='$id_liste' />"
@@ -324,13 +330,9 @@ function exec_listes_dist(){
 				)
 			. "</form>"
 			. fin_cadre_relief(true)
-			;
-
 			//
+			////////////////////////////
 			// Formulaire adresse email pour le reply-to
-		$email_defaut = entites_html(lire_meta("email_webmaster"));
-		$email_envoi = (email_valide($email_envoi)) ? $email_envoi : $email_defaut ;
-		$page_result .= ""
 			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "replyto"))
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='post'>\n"
 			. "<p class='verdana2'>\n"
@@ -342,19 +344,34 @@ function exec_listes_dist(){
 			. "<div style='text-align:right;'><input type='submit' name='btn_modifier_replyto' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
 			. "</form>\n"
 			. fin_cadre_relief(true)
-			;
-		
-		// programmer un courrier automatique
-		$auto_checked = ($message_auto=='oui')?"checked='checked'":"";
-		$page_result .= ""
+			//
+			////////////////////////////
+			// Formulaire programmer un courrier automatique
 			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='post'>"
-			. "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">"
+			. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>"
 			. "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>"
 			;
 		if ($message_auto != "oui")
-			$page_result .= _T('spiplistes:non_program');
+			$page_result .= _T('spiplistes:Pas_de_courrier_auto_programme');
 		else {
+			$page_result .=
+				// petite ligne d'info si envoi programmé
+				"<p class='verdana2'>"._T('spiplistes:sujet_courrier_auto')."<br />\n"
+				. "<span class='spip_large'> ".$titre_message."</span></p>\n"
+				. "<p class='verdana2'>"
+				.	(
+						($statut == _SPIPLISTES_MONTHLY_LIST)
+						?	"<strong>" . _T('spiplistes:Liste_diffusee_le_premier_de_chaque_mois') . "</strong>"
+						:	(
+							($periode > 0)
+							? _T('spiplistes:Tous_les')."  <strong>".$periode."</strong>  "._T('info_jours')
+							: "<strong>"._T('spiplistes:Pas_de_periodicite')."</strong><br />"._T('spiplistes:Ce_courrier_ne_sera_envoye_qu_une_fois')
+							)
+					)
+				. "</p>\n"
+				;
+			// toute cette partie à revoir (en cours, CP20071002)
 			$dernier_envoi =  strtotime($maj_nouv)  ;
 			$sablier = (time() - $dernier_envoi) ;
 			$proch = round(  (( (24*3600*$periode) - $sablier) / (3600*24)) ) ;
@@ -375,11 +392,12 @@ function exec_listes_dist(){
 				$page_result .= "<br />"._T('spiplistes:prochain_envoi_aujd')."<br />";
 			}
 		}
-		$sujet_message = ($titre_message=='') ? $titre." "._T('zxml_de')." ".$nomsite : $titre_message ;
+		$sujet_message = ($titre_message=='') ? $titre." "._T('spiplistes:_de_')." ".$nomsite : $titre_message ;
+		$date_debut_envoi = ($maj && ($maj != _SPIPLISTES_ZERO_TIME_DATE)) ? $maj : __mysql_date_time(time());
 		$page_result .= ""
 			. "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>"
 			. "<input type='radio' name='auto' value='oui' id='auto_oui' "
-			. $auto_checked
+			. ($auto_checked = ($message_auto=='oui' ? "checked='checked'" : ""))
 			. " onchange=\"jQuery('#auto_oui_detail').show();\" />"
 			. ($auto_checked?"<strong>":"")
 			. "<label for='auto_oui'>"._T('spiplistes:prog_env')."</label>"
@@ -389,20 +407,14 @@ function exec_listes_dist(){
 			. "<ul style='list-style-type:none;'>"
 			. "<li>"._T('spiplistes:message_sujet').": <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl' /> </li>"
 			. "<li>"._T('spiplistes:squel')
-			;
-		$liste_patrons = find_all_in_path("patrons/","[.]html$");
-		$page_result .= "<select name='patron'>";
-		foreach($liste_patrons as $titre_option) {
-			$titre_option = basename($titre_option,".html");
-			$selected ="";
-			if ($patron == $titre_option)
-				$selected = "selected='selected";
-			$page_result .= "<option ".$selected." value='".$titre_option."'>".$titre_option."</option>\n";
-		}
-		$page_result .= ""
-			. "</select>"
+			//
+			. spiplistes_boite_selection_patrons ($patron, true, "patron", 1)
+			//
 			. "</li>"
 			. "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl' /> "._T('info_jours')."</li>"
+			. "<li>"._T('spiplistes:A_partir_de')." : <br />"
+			//
+			. spiplistes_dater_envoi($id_liste, true, $statut, $date_debut_envoi, 'btn_changer_date', false)."</li>\n"
 			.	(
 				(!$envoyer_direct)
 				? " <li><input type='checkbox' class='checkbox' name='envoyer_direct' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>"
@@ -437,12 +449,14 @@ function exec_listes_dist(){
 				? "<input type='hidden' name='new' value='$new' />"
 				: ""
 				)
-			. "<input type='submit' name='Valider_auto' value='"._T('bouton_valider')."' class='fondo' />"
+			// bouton de validation
+			. "<input type='submit' name='btn_courrier_auto' value='"._T('bouton_valider')."' class='fondo' />"
 			. "</td></tr>"
 			. "</table>\n"
 			. "</form>"
 			. fin_cadre_relief(true)
 			;
+			
 	} // end if ($connect_statut == '0minirezo' )
 	
 	$page_result .= ""

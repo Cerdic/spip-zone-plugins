@@ -63,7 +63,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'adresse_de_reponse' => "Adresse de r&eacute;ponse",
 'adresse_mail_retour' => 'Adresse email du gestionnaire de la liste (reply-to)',
 'Attention_action_retire_invites' => "Attention: cette action retire les invit&eacute;s de la liste des abonn&eacute;s.",
-	
+'A_partir_de' => "&Agrave; partir de",
+
 //B
 
 'bouton_listes' => 'Lettres d\'information',
@@ -115,6 +116,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'date_depuis'=>'depuis @delai@', 
 'discussion_intro' => 'Bonjour, <br />Voici les discussions d&eacute;marr&eacute;es sur le site',
 'Destination' => "Destination",
+'Date_non_precisee' => "Date non pr&eacute;cis&eacute;e",
 
 //E
 'email' => 'E-mail',
@@ -372,7 +374,7 @@ et de recevoir les lettres d\'informations.',
 'nb_abonnes' => 'Dans les listes : ',
 'nb_inscrits' => 'Dans le site :  ',
 'nb_listes' => 'Incriptions dans toutes les listes : ',
-'non_program' => 'Il n\'y a pas de courrier automatique programm&eacute; pour cette liste.',
+'Pas_de_courrier_auto_programme' => 'Il n\'y a pas de courrier automatique programm&eacute; pour cette liste.',
 'nouvelle_abonne' => 'L\'abonn&eacute; suivant a &eacute;t&eacute; ajout&eacute; la liste',
 
 'pas_acces' => 'Vous n\'avez pas acc&egrave;s &agrave; cette page.',

@@ -29,7 +29,9 @@ define("_SPIPLISTES_TYPE_LISTEAUTO", "auto");
 
 define("_SPIPLISTES_PUBLIC_LIST", "liste");
 define("_SPIPLISTES_PRIVATE_LIST", "inact");
+define("_SPIPLISTES_MONTHLY_LIST", "pub_mois");
 define("_SPIPLISTES_TRASH_LIST", "poublist");
+
 // statuts des listes tels qu'affichées en liste 
 define("_SPIPLISTES_LISTES_STATUTS", _SPIPLISTES_PRIVATE_LIST.";"._SPIPLISTES_PUBLIC_LIST.";"._SPIPLISTES_TRASH_LIST);
 

@@ -315,7 +315,7 @@ e ricevere le newsletter.',
 'nb_abonnes' => 'Nelle Newsletter: ',
 'nb_inscrits' => 'Nel sito:  ',
 'nb_listes' => 'Iscrizioni in tutte le Newsletter: ',
-'non_program' => 'Non c\'&egrave; alcun messaggio automatico programmato per questa Newsletter.',
+'Pas_de_courrier_auto_programme' => 'Non c\'&egrave; alcun messaggio automatico programmato per questa Newsletter.',
 'nouvelle_abonne' => 'L\'abbonato seguente &egrave; stato aggiunto alla Newsletter',
 
 'pas_acces' => 'Non avete i diritti di accesso per questa pagina.',

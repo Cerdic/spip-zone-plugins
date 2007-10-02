@@ -432,6 +432,31 @@ function spiplistes_liste_des_patrons ($chemin) {
 	return($result);
 }
 
+// construit la boite de selection patrons
+function spiplistes_boite_selection_patrons ($current_titre="", $return=false, $select_nom="patron", $size_select=10) {
+	$result = "";
+	// va chercher la liste des patrons
+	$liste_patrons = spiplistes_liste_des_patrons ("patrons/");
+	// boite de sélection du patron
+	$result  .= "<select style='width:34ex;' name='". $select_nom . "' class='verdana1' size='" . $size_select . "'>";
+	// par defaut, selectionne le premier
+	$selected = (empty($title_selected) ? "selected='selected'" : ""); 
+	foreach($liste_patrons as $titre_option) {
+		//$titre_option = basename($titre_option, ".html");
+		if($titre_option == $current_titre) {
+			$selected = "selected='selected'";
+		}	
+		$result .= "<option $selected value='" . $titre_option . "'>" . $titre_option . "</option>\n";
+		if (!empty($selected)) {
+			$selected = "";
+		}
+	}
+	$result  .= "</select>\n";
+
+	if($return) return($result);
+	else echo($result);
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */

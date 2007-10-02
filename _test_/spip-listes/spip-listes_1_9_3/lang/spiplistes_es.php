@@ -326,7 +326,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'nb_abonnes' => 'En los boletines: ',
 'nb_inscrits' => 'En el sitio:  ',
 'nb_listes' => 'Entre todas los boletines: ',
-'non_program' => 'No hay env&iacute;os programados para este bolet&iacute;n.',
+'Pas_de_courrier_auto_programme' => 'No hay env&iacute;os programados para este bolet&iacute;n.',
 'nouvelle_abonne' => 'La siguiente inscripci&oacute;n ha sido a&ntilde;adida al bolet&iacute;n',
 
 'pas_acces' => 'No tienes acceso permitido a esta p&aacute;gina.',

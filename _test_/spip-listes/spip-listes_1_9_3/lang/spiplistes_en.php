@@ -311,7 +311,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'nb_abonnes' => 'On the list: ',
 'nb_inscrits' => 'On the site: ',
 'nb_listes' => 'Subscribe to all lists: ',
-'non_program' => 'There is no message to send out on this list.',
+'Pas_de_courrier_auto_programme' => 'There is no message to send out on this list.',
 'nouvelle_abonne' => 'The following subscriber has been added to the list',
 
 'pas_acces' => 'You dont have access to this webpage.',
