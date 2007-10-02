@@ -31,7 +31,7 @@ function honeypot_affichage_final($flux) {
 	if(($config['type'.$info['type'].'_filter'] == 'cacheremail') || ($config['type'.$info['type'].'_filter'] == 'cachertout')){
 	  $flux = preg_replace(_httpbl_mailcrypt_REGEXPR, sinon($config['remplacement_email'],'NOSPAM'), $flux);	
 		//log pour l'instant, TODO faire mieux
-		spip_log("cacher les emails à ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
+		spip_log("caché les emails à ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
 	}
   }
 

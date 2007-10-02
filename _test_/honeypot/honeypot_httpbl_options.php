@@ -44,12 +44,12 @@ if((_DIR_RACINE =='') &&
 	if(min(intval($config['type'.$info['type'].'_threat']),255) <=  $info['threat']){
 	  if($config['type'.$info['type'].'_filter'] == 'bloquer'){
 		//log pour l'instant, TODO faire mieux
-		spip_log("bloquer ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
+		spip_log("bloqué ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
 		httpbl_send403($info);		
 	  } else if($config['type'.$info['type'].'_filter'] == 'tohoneypot') {
 		include_spip('inc/headers');
 		//log pour l'instant, TODO faire mieux
-		spip_log("envoyer vers le pot de miel ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
+		spip_log("envoyé vers le pot de miel ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
 		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'.lire_config('honeypot/hpfile').'.php');
 	  } else if(count($_POST) &&
 				($config['type'.$info['type'].'_filter'] == 'cacherforum' || $config['type'.$info['type'].'_filter'] == 'cachertout' )) {
@@ -62,7 +62,7 @@ if((_DIR_RACINE =='') &&
 		foreach (array_keys($_POST) as $key)
 		  if (preg_match($spam_POST_reg, $key)) {
 			//log pour l'instant, TODO faire mieux
-			spip_log("cacher forum ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
+			spip_log("caché forum ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
 			httpbl_send403($info);		
 			break;
 		  }
