@@ -3,6 +3,7 @@
 // * Acces restreint, plugin pour SPIP * //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+	include_spip('base/abstract_sql');
 
 	function AccesRestreint_cree_zone(){
 		$titre = addslashes(_request('titre'));
