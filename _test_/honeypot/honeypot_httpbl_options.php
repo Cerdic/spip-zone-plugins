@@ -21,7 +21,7 @@ function httpbl_send403($info) {
   include_spip('inc/headers');
   http_status(403);
   include_spip('public/assembler');
-  echo recuperer_fond("fonds/403",array(
+  echo recuperer_fond("fonds/httpbl_403",array(
 										'ip'=>$_SERVER['REMOTE_ADDR'],
 										'type'=>_T('honeypothttpbl:type'.$info['type']),
 										'threat'=>$info['threat'],
