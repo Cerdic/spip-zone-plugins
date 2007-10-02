@@ -15,6 +15,8 @@ Plugin HoneyPot
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]
+[(#ENV{hp}|?{' ',''})
+
 <a href="#URL_SITE_SPIP/#ENV{hp}.php"><!-- #HONEYPOT_RANDOM --></a> 
 <a href="#URL_SITE_SPIP/#ENV{hp}.php"><img src="#HONEYPOT_RANDOM{3,_}.gif" height="1" width="1" border="0"></a>
  <a href="#URL_SITE_SPIP/#ENV{hp}.php" style="display: none;">#HONEYPOT_RANDOM</a>
@@ -25,3 +27,5 @@ Plugin HoneyPot
  <a href="#URL_SITE_SPIP/#ENV{hp}.php"><span style="display: none;">#HONEYPOT_RANDOM</span></a>
  <a href="#URL_SITE_SPIP/#ENV{hp}.php"><div style="height: 0px; width: 0px;"></div></a>
  <div class="pluginhp#ENV{hp}"><a href="#URL_SITE_SPIP/#ENV{hp}.php">#HONEYPOT_RANDOM</a></div>
+
+]
