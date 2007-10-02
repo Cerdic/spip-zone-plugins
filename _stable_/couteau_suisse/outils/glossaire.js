@@ -21,12 +21,12 @@ jQuery(document).ready(function() {
 			gloss_el.style.left = gloss_posx.toString()+"px";
 			gloss_dt.innerHTML = e.target.nextSibling.title; // titre
 			gloss_dd.innerHTML = e.target.nextSibling.nextSibling.title; // definition
+			gloss_el.style.fontSize = $(this).css('font-size');
 			gloss_el.style.display    = 'block';
 			gloss_el.style.visibility = 'visible';
 		}
 	);
 	gloss_el = document.getElementById('glossOverDiv');
-	gloss_el.style.fontSize = $('span.gl_mot').css('font-size');
 	gloss_dt = gloss_el.firstChild.firstChild;
 	gloss_dd = gloss_el.firstChild.lastChild;
   }
