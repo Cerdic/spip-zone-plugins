@@ -119,11 +119,9 @@ function PIMAgenda_rendu_evenement($flux) {
 	$url = $evenement['URL']; 
 	$texte = PIMAgenda_rendu_boite($evenement['SUMMARY'],$evenement['DESCRIPTION'],$evenement['LOCATION'],$flux['args']['type']);
 	if (is_string($url)) {
-		if (_DIR_RESTREINT && preg_match(',id_agenda=([0-9]*),',$url,$regs)) {
-			$args = explode('?',$url);
-			$args = end($args);
-			$urljs = generer_url_public('pim_agenda_formulaire',$args."&script=".urlencode($url));
-			$texte = "<a href='".quote_amp($url)."' onclick=\"$('#formulaire_agenda').load('$urljs');return false;\">$texte</a>"; 
+		if (_DIR_RESTREINT && preg_match(',agenda_tip,',$url)) {
+			$id = substr(md5($url),0,8);
+			$texte = "<a class='jTip' href='".quote_amp(parametre_url($url,'edit',urlencode(self())))."' id='$id' >$texte</a>"; 
 		}
 		else {
 			$texte = http_href(quote_amp($url), $texte, '', '', '', '');

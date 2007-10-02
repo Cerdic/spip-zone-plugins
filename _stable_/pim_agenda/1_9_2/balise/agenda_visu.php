@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/agenda_filtres');
+include_spip('inc/texte');
 
 function PIMAgenda_date_debut_fin($annee,$mois,$jour,$type){
 	if ($type=='jour'){
@@ -73,11 +74,14 @@ function PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie, $af
 	$is_evt=(in_array($row['type'],array('evenement','anniversaire','rappel')))
 					||($row['date_debut']<$datestart && $row['date_fin']>$datefin);
 
-	$url=parametre_url($urlbase,'id_agenda',$row['id_agenda']);
-	$url=parametre_url($url,'ajouter_id_article',$row['id_article']);
+	//$url=parametre_url($urlbase,'id_agenda',$row['id_agenda']);
+	//$url=parametre_url($url,'ajouter_id_article',$row['id_article']);
+
+	$url = generer_url_public('agenda_tip','id_agenda='.$row['id_agenda'].'&width=200');
+	//<a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a>
 	
 	$titre = $row['titre'];
-	$descriptif = $row['descriptif'];
+	$descriptif = propre($row['descriptif']);
 	$lieu = $row['lieu'];
 	$texte = "";
 	
@@ -108,10 +112,9 @@ function PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie, $af
 		Agenda_memo_evt_full($row['date_debut'], $row['date_fin'], $titre, $descriptif, $lieu, $url, $categorie);
 }
 
-function PIMAgenda_affiche_evenements($texte){
+function PIMAgenda_affiche_evenements($id_auteur=0){
 	$flag_editable = true;
 	global $visu_evenements;
-	global $auteur_session;
 	$type = _request('type');
 	$partie_cal = _request('partie_cal');
 	if (!$type) $type='semaine';
@@ -168,9 +171,11 @@ function PIMAgenda_affiche_evenements($texte){
 	$urlbase=parametre_url($urlbase,'mois',$mois);
 	$urlbase=parametre_url($urlbase,'jour',$jour);
 	
-	$id_auteur = 0;
-	if (is_array($auteur_session))
-		$id_auteur = $auteur_session['id_auteur'];
+	$prive = false;
+	if (!$id_auteur && is_array($GLOBALS['auteur_session']) && isset($GLOBALS['auteur_session']['id_auteur']))
+		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	if (is_array($GLOBALS['auteur_session']) && isset($GLOBALS['auteur_session']['id_auteur']) && ($id_auteur==$GLOBALS['auteur_session']['id_auteur']))
+		$prive = true;
 	if (!($id_donnee=intval(_request('id_donnee')))){
 		if($id_auteur){
 			// tous les evenements organises par le visiteur logge
@@ -180,8 +185,9 @@ function PIMAgenda_affiche_evenements($texte){
 								 WHERE spip_pim_agenda_auteurs.id_auteur=$id_auteur
 								 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin') 
 								 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
-								 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
-								 ORDER BY agenda.date_debut;");
+								 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))"
+								.($prive?'':" AND agenda.prive!='oui'")
+								." ORDER BY agenda.date_debut;");
 			while ($row = spip_fetch_array($res)){
 				PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_concerne, false);
 				$visu_evenements[$row['id_agenda']]=1;
@@ -194,8 +200,9 @@ function PIMAgenda_affiche_evenements($texte){
 								 WHERE spip_pim_agenda_invites.id_auteur=$id_auteur
 								 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin')
 								 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
-								 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
-								 ORDER BY agenda.date_debut;");
+								 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))"
+								.($prive?'':" AND agenda.prive!='oui'")
+								." ORDER BY agenda.date_debut;");
 			while ($row = spip_fetch_array($res)){
 				if (!isset($visu_evenements[$row['id_agenda']])){
 					PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_concerne);
@@ -243,6 +250,7 @@ function PIMAgenda_affiche_evenements($texte){
 	// attention : bug car $type est modifie apres cet appel !
 	$s .= Agenda_affiche_full(1,'', $type, 'calendrier-creneau','calendrier-creneau-today','calendrier-creneau-sunday','calendrier-reunions','calendrier-rdv','calendrier-evenements-selection','calendrier-evenements','calendrier-anniversaire-selection','calendrier-anniversaire','calendrier-rappel-selection','calendrier-rappel','calendrier-info-selection','calendrier-info','calendrier-reunions-selection','calendrier-rdv-selection');
 	$s .= "</span>";
+	$s .= "<script type='text/javascript' src='"._DIR_PLUGIN_PIMAGENDA."javascript/jtip.js'></script>";
 
 	return $s;
 }
@@ -252,11 +260,10 @@ function balise_AGENDA_VISU ($p) {return calculer_balise_dynamique($p,'AGENDA_VI
 
 // filtres[0] = url destination apres logout [(#URL_LOGOUT|url)]
 function balise_AGENDA_VISU_stat ($args, $filtres) {
-	return array($filtres[0]);
+	return array($args);
 }
 
-function balise_AGENDA_VISU_dyn($cible) {
-
-	return PIMAgenda_affiche_evenements('');
+function balise_AGENDA_VISU_dyn($id_auteur=0) {
+	return PIMAgenda_affiche_evenements($id_auteur);
 }
 ?>
