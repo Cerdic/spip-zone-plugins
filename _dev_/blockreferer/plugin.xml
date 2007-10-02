@@ -23,9 +23,7 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		[en]This plugin can block visitors with blacklisted referers to avoid referer spamming.
 	  </multi>
 	</description>
-	<options>
-	blockreferer_options.php
-	</options>
+
 	<prefix> 
 	  blockreferer
 	</prefix>
@@ -33,4 +31,5 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		<nom>header_prive</nom> 
 		<inclure>blockreferer_pipeline.php</inclure>
 	</pipeline>
+	<install>base/blockreferer_upgrade.php</install>
 </plugin>
