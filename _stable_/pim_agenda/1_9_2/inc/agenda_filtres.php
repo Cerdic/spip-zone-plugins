@@ -1,15 +1,4 @@
 <?php
-
-/*
- * P.I.M Agenda
- * Gestion d'un agenda collaboratif
- *
- * Auteur :
- * Cedric Morin, Notre-ville.net
- * (c) 2005,2007 - Distribue sous licence GNU/GPL
- *
- */
-
 /**
  * Fichier de filtres communs au plugin Agenda et PIM_agenda
  *
@@ -139,7 +128,7 @@ function Agenda_affiche_full($i)
 	return $texte;
 }
 
-function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
+function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 	static $trans_tbl=NULL;
 	if ($trans_tbl==NULL){
 		$trans_tbl = get_html_translation_table (HTML_ENTITIES);
@@ -158,7 +147,7 @@ function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
 	$s = "";
 	if ($d==$f)
 	{ // meme jour
-		$s = ucfirst(nom_jour($d))." ".affdate_jourcourt($d);
+		$s = ucfirst(nom_jour($d,$forme))." ".affdate_jourcourt($d);
 		if ($h){
 			$s .= " $hd";
 			if ($hd!=$hf) $s .= "-$hf";
