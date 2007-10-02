@@ -83,6 +83,13 @@ function Agenda_affiche_full($i)
 	$sinon = array_shift($args);
 	if (!$nb) return $sinon;
 	$type = array_shift($args);
+	
+	$url_retour = end($args);
+	if (preg_match(';[a-z]{3,5}://;i',$url_retour))
+		array_pop($args);
+	else
+		$url_retour = "";
+	
 	$agenda = Agenda_memo_full(0);
 	$evt_avec = array();
 	foreach (($args ? $args : array_keys($agenda)) as $k) {
@@ -116,7 +123,7 @@ function Agenda_affiche_full($i)
 	}
 
 	include_spip('inc/agenda');
-	$texte=http_calendrier_init('', $type, '', '', self(), $evt);
+	$texte=http_calendrier_init('', $type, '', '', $url_retour?$url_retour:self(), $evt);
 
 	return $texte;
 }
