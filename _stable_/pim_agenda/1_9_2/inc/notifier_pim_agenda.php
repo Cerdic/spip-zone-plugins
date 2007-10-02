@@ -74,7 +74,7 @@ function inc_notifier_pim_agenda_dist($action, $id_agenda, $row_anc, $script){
 	}
 }
 
-function notifier_envoi_message($message_titre,$message_auteur,$message_date_heure,$texte,$redirect_url,$destinataires,$interne = true){
+function notifier_envoi_message($message_titre,$message_auteur,$message_date_heure,$message_texte,$redirect_url,$destinataires,$interne = true){
 	if (!count($destinataires)) return;
 	$id_message = 0;
 	if ($interne){
@@ -84,7 +84,7 @@ function notifier_envoi_message($message_titre,$message_auteur,$message_date_heu
 				"("._q($message_titre).","._q($message_texte).",'normal','$message_date_heure','$message_date_heure','non','publie',$message_auteur,NOW())");
 	}
 
-	$from = "agenda@".$_SERVER["HTTP_HOST"]."\n";
+	$from = "agenda@".$_SERVER["HTTP_HOST"];
 	$message_texte = supprimer_tags($message_texte) . "\n".url_absolue($redirect_url);
 	
 	// envoyer le message interne
@@ -104,6 +104,7 @@ function notifier_envoi_message($message_titre,$message_auteur,$message_date_heu
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		$envoyer_mail($email, $message_titre, $message_texte, $from);
 		spip_log("envoyer_mail: $email:$message_titre: $message_texte:$from:",'pimagenda');
+		inc_envoyer_mail_dist()
 	}
 }
 
