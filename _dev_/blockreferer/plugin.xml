@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  <multi>
+		[fr]
+		Bloque referers
+		[en]
+		Block referers
+		</multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (Mortimer)
+_ &#169; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	experimental
+	</etat>
+	<description>
+	  <multi>
+		[fr]Ce plugin permet de faire une liste noire des sites d'origines des visiteurs pour empecher le spam des referers.
+		[en]This plugin can block visitors with blacklisted referers to avoid referer spamming.
+	  </multi>
+	</description>
+	<options>
+	blockreferer_options.php
+	</options>
+	<prefix> 
+	  blockreferer
+	</prefix>
+	<pipeline>
+		<nom>header_prive</nom> 
+		<inclure>blockreferer_pipeline.php</inclure>
+	</pipeline>
+</plugin>
