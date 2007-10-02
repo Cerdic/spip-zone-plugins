@@ -20,7 +20,7 @@
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
-// $LastChangedDate$
+// $LastChangedDate: 2007-09-30 10:27:41 +0200 (dim., 30 sept. 2007) $
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -108,7 +108,7 @@ function spiplistes_afficher_pile_messages() {
 } // spiplistes_afficher_pile_messages()
 
 
-function exec_spip_listes() {
+function exec_spiplistes_courriers_casier () {
 	
 	include_spip ('inc/acces');
 	include_spip ('inc/filtres');
