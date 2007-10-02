@@ -31,13 +31,13 @@
 			markerManager[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})] = new GMarkerManager(map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]);
 			<BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>
 			[(#ENV{id_article}|=={''}|?{'',
-			var kml = new GGeoXml("#URL_SITE_SPIP/#URL_DOCUMENT");
-			map[(#ENV{id_carte_gis})].addOverlay(kml)
+			var kml = new GGeoXml("[(#URL_DOCUMENT|url_absolue)]");
+			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addOverlay(kml)
 			})]
 			</BOUCLE_kml_art>
 			<BOUCLE_kml_rub(documents){id_rubrique}{0,1}{extension=kml}>
 			[(#ENV{id_rubrique}|=={''}|?{'',
-			var kml = new GGeoXml("#URL_SITE_SPIP/#URL_DOCUMENT");
+			var kml = new GGeoXml("[(#URL_DOCUMENT|url_absolue)]");
 			map[(#ENV{id_carte_gis})].addOverlay(kml)
 			})]
 			</BOUCLE_kml_rub>

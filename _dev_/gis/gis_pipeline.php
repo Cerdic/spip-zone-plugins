@@ -39,7 +39,8 @@ function gis_insertar_head($flux){
 		$(document).ready(function() {
 			$(\'#cadroFormulario\').hide()
 		});
-		</script>';
+		</script>
+		<script type="text/javascript" src="'._DIR_PLUGIN_GEOMAP.'js/customControls.js"></script>';
 	}
 	return $flux;
 }

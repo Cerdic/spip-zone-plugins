@@ -16,6 +16,7 @@ function gis_cambiar_coord($id_article) {
 	
 	$glat = NULL;
 	$glonx = NULL;
+	$gicon = NULL;
 	$mapa = "";
 	$result= spip_query("SELECT * FROM spip_gis WHERE id_article = " . intval($id_article));
 	if ($row = spip_fetch_array($result)){
@@ -31,11 +32,18 @@ function gis_cambiar_coord($id_article) {
 			spip_query("UPDATE spip_gis SET lat="._q($glat).", lonx="._q($glonx)."  WHERE id_article = " . _q($id_article));
 	}
 	if ($glat!==NULL){
+		$resultMots = spip_query("SELECT * FROM spip_mots_articles WHERE id_article = ".intval($id_article));
+		while ($rowMot = spip_fetch_array($resultMots)) {
+			$resultMotIcon = spip_query("SELECT * FROM spip_mots WHERE type ='marker_icon' AND id_mot=".$rowMot['id_mot']);
+			if ($rowMotIcon = spip_fetch_array($resultMotIcon)){
+				$gicon = "moton".$rowMot['id_mot'].".png";
+			}
+		}
 		$gis_append_view_map = charger_fonction('geomap_append_view_map','inc');
-		$mapa = "<div id='map' name='map' style='width: 470px; height: 100px; border:1px solid #000'></div>"
-		  .$gis_append_view_map('map',$glat,$glonx,NULL,array(array('lon'=>$glonx,'lat'=>$glat)));
+		$mapa = "<div id='viewMap' name='viewMap' style='width: 470px; height: 100px; border:1px solid #000'></div>"
+		  .$gis_append_view_map('viewMap',$glat,$glonx,null,array(array('lonx'=>$glonx,'lat'=>$glat)),$gicon);
 	}
-
+	
 	$s .= "";
 	// Ajouter un formulaire
 	$s .= "\n<p>";
