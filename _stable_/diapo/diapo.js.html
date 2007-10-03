@@ -24,19 +24,19 @@ $.fn.diapo_mode = function() {
     return this.click(function() {
     	mDiapo=$(this).attr('rel');
 		$("#"+mDiapo+" .diapo_icones a").removeClass("selected");
-		$(this).addClass("selected");
 		mId=$(this).attr('class');
-		if (mId=="diapo_ico selected"){
+		$(this).addClass("selected");
+		if ((mId=="diapo_ico")||(mId=="diapo_ico play")){
 			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_invisible");
 			$("#"+mDiapo+" div.diapo").attr("class","diapo diapo_grand");
 			$("#"+mDiapo+" div.diapo img.diapo_petit").hide();
 			$("#"+mDiapo+" div.diapo img.diapo_grand").show();
 			diapo_on=!diapo_on;
 			center=true;
-			if ($(this).html()=='<:diapo:ico_diapo_pause:>')$(this).html('<:diapo:ico_diapo_play:>');
-			else $(this).html('<:diapo:ico_diapo_pause:>');
+			if (mId=="diapo_ico") $(this).addClass("play").html('<:diapo:ico_diapo_pause:>');
+			else $(this).removeClass("play").html('<:diapo:ico_diapo_play:>');
 			setTimeout('diaposlide(#DIAPO_TEMPS,mDiapo)', #DIAPO_TEMPS);
-		}else if (mId=="diapo_icoleft selected"){
+		}else if (mId=="diapo_icoleft"){
 			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_invisible");
 			$("#"+mDiapo+" div.diapo").attr("class","diapo diapo_petit");
 			$("#"+mDiapo+" div.diapo img.diapo_grand").hide();
@@ -45,7 +45,7 @@ $.fn.diapo_mode = function() {
 			$("#"+mDiapo+" .diapo_ico").html('<:diapo:ico_diapo_play:>');
 			diapo_on=false;
 			center=false;
-		}else if (mId=="diapo_icoright selected"){
+		}else if (mId=="diapo_icoright"){
 			$("#"+mDiapo+" .diapo_vignettes").attr("class","diapo_vignettes diapo_vignettes_invisible");
 			$("#"+mDiapo+" div.diapo").attr("class","diapo diapo_petit");
 			$("#"+mDiapo+" div.diapo img.diapo_grand").hide();
@@ -121,9 +121,13 @@ $(document).ready(function(){
 	$(".diapo_icones a").diapo_mode();
 	$(".diapo_menu a.lien_pagination").diapo_pagination();
 	$(".diapo_vignette a").diapo_vignette();
-	$(".diapo_icones .selected").click();	
-	$(".diapo_menu a.lien_pagination").each(function(){
-		$(this).attr("rel",$(this).parent().parent().parent().attr("id"));
+	$(".diaporama").each(function(){
+		rel=$(this).attr("id");
+		$(this).find(".diapo_menu a.lien_pagination").attr("rel",rel);
 	});
+	$(".diapo_icones .selected").each(function(){
+		if ($(this).attr('class')=='diapo_ico selected play') $(this).click();
+	});	
+	
 	
 });

@@ -3,8 +3,8 @@
 <BOUCLE_cpt_diapo(DOCUMENTS){id_article}{extension IN png,jpg,gif}></BOUCLE_cpt_diapo>
 <BOUCLE_docs_diapo(DOCUMENTS){id_article}{extension IN png,jpg,gif}{(#ENV{num}|diapo_seq{#_cpt_diapo:TOTAL_BOUCLE}),1}{par num titre}>
 <a target="_blank" href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] type="#MIME_TYPE">
-<img class="diapo_petit"[ style="(#ENV{align}|match{right|left}|?{'','display:none'})"] src='[(#FICHIER|image_reduire{#DIAPO_GRAND,0}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{#DIAPO_PETIT,0}|hauteur)]' width='[(#FICHIER|image_reduire{#DIAPO_PETIT,0}|largeur)]' alt='[(#TITRE|supprimer_numero|sinon{[(#FICHIER|)]})]' />
-<img class="diapo_[(#_art:ID_ARTICLE)]_[(#COMPTEUR_BOUCLE)] diapo_grand"[ style="(#ENV{align}|match{right|left}|?{'display:none',''})"] src='[(#FICHIER|image_reduire{#DIAPO_GRAND,0}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{#DIAPO_GRAND,0}|hauteur)]' width='[(#FICHIER|image_reduire{#DIAPO_GRAND,0}|largeur)]' alt='[(#TITRE|supprimer_numero|sinon{[(#FICHIER|)]})]' />
+<img class="diapo_petit"[ style="(#ENV{align}|match{right|left}|?{'','display:none'})"] src='[(#FICHIER|image_reduire{#DIAPO_GRAND,#DIAPO_GRAND_H}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{#DIAPO_PETIT,#DIAPO_PETIT_H}|hauteur)]' width='[(#FICHIER|image_reduire{#DIAPO_PETIT,#DIAPO_PETIT_H}|largeur)]' alt='[(#TITRE|supprimer_numero|sinon{[(#FICHIER|)]})]' />
+<img class="diapo_[(#_art:ID_ARTICLE)]_[(#COMPTEUR_BOUCLE)] diapo_grand"[ style="(#ENV{align}|match{right|left}|?{'display:none',''})"] src='[(#FICHIER|image_reduire{#DIAPO_GRAND,#DIAPO_GRAND_H}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{#DIAPO_GRAND,#DIAPO_GRAND_H}|hauteur)]' width='[(#FICHIER|image_reduire{#DIAPO_GRAND,#DIAPO_GRAND_H}|largeur)]' alt='[(#TITRE|supprimer_numero|sinon{[(#FICHIER|)]})]' />
 </a>
 [<h3>(#TITRE|supprimer_numero)</h3>]
 [<p>(#DESCRIPTIF)</p>]
