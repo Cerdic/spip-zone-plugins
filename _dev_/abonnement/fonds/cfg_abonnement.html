@@ -5,13 +5,13 @@
 		<ul style='text-align: left; list-style-type:none'>
 		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=abonnement_tous">Abonnements</a></li>
 		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=abonnement_relances">Relances</a></li>
-		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement">Emails de confirmation</a></li>
+		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement">Configuration</a></li>
 		</ul>
 </div>
 
 -->
 
-<!-- boite=Alertes envoy&eacute;es lors de l'abonnement-->
+<!-- boite=Configuration des abonnements-->
 
 
 <style>
@@ -26,7 +26,7 @@
 #CACHE{0}
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
-<fieldset class="ajouter"><legend>Expediteur</legend>
+<fieldset class="ajouter"><legend>Expediteur des mails automatiques</legend>
 <div>
 <label>Nom expediteur</label>
 <input type="text" name="nom_envoi" value="#ENV{nom_envoi}"  />
@@ -58,6 +58,14 @@
 <textarea name="texte_ko" >[(#ENV{texte_ko})]</textarea>
 </div>
 </fieldset>
+
+<fieldset class="ajouter"><legend>Articles payants</legend>
+<div>
+<label>Tarif</label>
+<input type="text" name="prix_article" style="width:30px" value="#ENV{prix_article}" /> (euros)
+</div>
+</fieldset>
+
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 <input type="reset" value="<:Reset:>" />
 <!--input type="submit" name="_cfg_delete" value="<:Supprimer:>" /-->

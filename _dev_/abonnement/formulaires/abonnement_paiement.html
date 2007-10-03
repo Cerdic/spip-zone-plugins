@@ -112,7 +112,7 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 		]
 		[(#ENV{option}|!={achat_unite}|?{'',' '})
 		<dt>Mon article</dt>
-		<dd>[(#ENV{article}|id_article_to_titre) - 5 euros]</dd>
+		<dd>[(#ENV{article}|id_article_to_titre) - #CONFIG{abonnement/prix_article} &nbsp; euros]</dd>
 		]
 		</dl>
 		
@@ -124,7 +124,7 @@ $Formulaire_Paiement = CreerFormulaireHmac($CMCIC_Tpe,
 			<input type="hidden" name="reference" value="[(#ENV{id_auteur_elargi})]" />
 			<input type="hidden" name="texteLibre" value="#GET{texteLibre}" />
 			<input type="hidden" name="devise" value="EUR" />
-			<input type="hidden" name="montant" value="[(#ENV{abonnement}|id_abonnement_to_montant|sinon{5})]" />
+			<input type="hidden" name="montant" value="[(#ENV{abonnement}|id_abonnement_to_montant|sinon{#CONFIG{abonnement/prix_article}})]" />
 			
 			<input type="submit" name="reponse_banque" class="spip_bouton" value="ok" />
 			<input type="submit" name="reponse_banque" class="spip_bouton" value="erreur_bank" />	

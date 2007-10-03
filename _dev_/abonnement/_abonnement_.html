@@ -50,7 +50,7 @@
 				<legend>Informations personnelles</legend>
 				<INCLURE(inc/profil_adherent.php){id_auteur = #SESSION{id_auteur}}> 
 				</fieldset>
-				<INCLURE{fond=fonds/mes_abonnements}{id_auteur = #SESSION{id_auteur}}>
+				<INCLURE{fond=fonds/mes_abonnements}>
 				]			
 
 			[(#SESSION{id_auteur}|?{'',' '})			

@@ -1,6 +1,6 @@
 #CACHE{0}
 
-<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<BOUCLE_auteur(AUTEURS){id_auteur = #SESSION{id_auteur}}{tout}>
 <BOUCLE_auteur_elargi(AUTEURS_ELARGIS auteurs){id_auteur}>
 
 <BOUCLE_abo_valide(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}{validite > #ENV{date}}>
@@ -11,7 +11,6 @@
 </BOUCLE_abo_valide>		
 	
 	<BOUCLE_abo_echu(spip_auteurs_elargis_abonnements){id_auteur_elargi = #ID}>
-	
 	<BOUCLE_abo_2(spip_abonnements){id_abonnement}>
 
 	<div style="margin:20px 0px;padding:10px;background-color:#FFE2E2">
@@ -35,6 +34,7 @@
 	
 	</BOUCLE_abo_2>
 	</BOUCLE_abo_echu>
+	
 	
 	<B_articles>
 	<h2 style="margin:20px 0px">Vos articles</h2>

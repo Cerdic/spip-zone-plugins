@@ -28,7 +28,7 @@
 		]
 		[(#ENV{option}|!={achat_unite}|?{'',' '})
 		<dt>Mon article</dt>
-		<dd>[(#ENV{article}|id_article_to_titre) - 5 euros]</dd>
+		<dd>[(#ENV{article}|id_article_to_titre) - #CONFIG{abonnement/prix_article} &nbsp; euros]</dd>
 		]
 		</dl>
 		

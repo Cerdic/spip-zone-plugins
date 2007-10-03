@@ -20,7 +20,7 @@ x) Ajouter dans une page _abonnement_.html avec un #CACHE{0}
 				<legend>Informations personnelles</legend>
 				<INCLURE(inc/profil_adherent.php){id_auteur = #SESSION{id_auteur}}> 
 				</fieldset>
-				<INCLURE{fond=fonds/mes_abonnements}{id_auteur = #SESSION{id_auteur}}>
+				<INCLURE{fond=fonds/mes_abonnements}>
 				]			
 
 			[(#SESSION{id_auteur}|?{'',' '})			
@@ -49,3 +49,5 @@ x) Rendez-vous sur la page spip.php?page=_abonnement_ pour utiliser le plugin
 TODO :
 
 Vérifier les index de spip_auteurs_elargis_abonnements et le auto increment
+mettre le montant payé dans spip_auteurs_elargis_articles
+passer en cfg les mails automatiques de confirmation d'achat d'article
