@@ -1,3 +1,8 @@
+compte_clics (0.6)
+ * bug hunting : some db errors are now handled and install_test is now complete
+
+ -- Chryjs <chryjs@free.fr>  Wed,  3 Oct 2007 14:00:00 +0200
+
 compte_clics (0.5)
  * brand new plugin name changed from clic to compte_clics
  * move the dirty html page to action structure

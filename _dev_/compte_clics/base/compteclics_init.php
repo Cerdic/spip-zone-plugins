@@ -21,30 +21,41 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+if (!function_exists("spip_query")) include_ecrire("inc/utils");
 
 function compteclics_install($action)
 {
 switch ($action) {
- case 'test' : /* test pour savoir si les actions sont nécessaires */
+ case 'test' : /* test pour savoir si les actions sont necessaires */
 	include_ecrire ('base/abstract_sql.php');
 	$desc = spip_abstract_showtable("spip_syndic", '', true);
-	return (isset($desc['field']['clic_compteur']));
+	return (isset($desc['field']['clic_compteur']) AND isset($desc['field']['clic_compteur_derniere_ip']) AND isset($desc['field']['clic_compteur_temps']));
 	break;
  case 'install' :
-	spip_query("ALTER TABLE spip_syndic ADD COLUMN clic_compteur INTEGER DEFAULT 0");
-	spip_query("ALTER TABLE spip_syndic ADD COLUMN clic_compteur_derniere_ip VARCHAR(15)");
-	spip_query("ALTER TABLE spip_syndic ADD COLUMN clic_compteur_temps TIMESTAMP DEFAULT 0");
-	spip_query("ALTER TABLE spip_syndic_articles ADD COLUMN clic_compteur INTEGER DEFAULT 0");
-	echo "<br> Fin de l'installation du compteur de clics <br>";
+	$res =@spip_query("ALTER TABLE spip_syndic ADD COLUMN clic_compteur INTEGER DEFAULT 0");
+	$res = ($res AND @spip_query("ALTER TABLE spip_syndic ADD COLUMN clic_compteur_derniere_ip VARCHAR(15)"));
+	$res = ($res AND @spip_query("ALTER TABLE spip_syndic ADD COLUMN clic_compteur_temps TIMESTAMP DEFAULT 0"));
+	$res = ($res AND @spip_query("ALTER TABLE spip_syndic_articles ADD COLUMN clic_compteur INTEGER DEFAULT 0"));
+	if ($res) {
+		echo "<br>"._T('compteclics:titre')." : "._T('compteclics:install_ok')."<br>";
+		return true;
+	}
+	else {
+		echo "<br>"._T('compteclics:titre')." : "._T('compteclics:err_install')."<br>";
+		return false;
+	}
 	break;
  case 'uninstall' :
-	spip_query("ALTER TABLE spip_syndic DROP COLUMN clic_compteur");
-	spip_query("ALTER TABLE spip_syndic DROP COLUMN clic_compteur_derniere_ip");
-	spip_query("ALTER TABLE spip_syndic DROP COLUMN clic_compteur_temps");
-	spip_query("ALTER TABLE spip_syndic_articles DROP COLUMN clic_compteur");
+	$res = @spip_query("ALTER TABLE spip_syndic DROP COLUMN clic_compteur");
+	$res = ($res AND @spip_query("ALTER TABLE spip_syndic DROP COLUMN clic_compteur_derniere_ip"));
+	$res = ($res AND @spip_query("ALTER TABLE spip_syndic DROP COLUMN clic_compteur_temps"));
+	$res = ($res AND @spip_query("ALTER TABLE spip_syndic_articles DROP COLUMN clic_compteur"));
+	return $res;
 	break;
  }
-} /* clic_install */
+} /* compteclics_install */
 
 /* rend disponible l'icone de désinstallation */
 /* ca doit certainement permettre d'effacer les fichiers et autres */
