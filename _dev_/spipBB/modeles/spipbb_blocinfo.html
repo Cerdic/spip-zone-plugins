@@ -1,4 +1,6 @@
-﻿<BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#CONFIG{spipbb/spipbb_id_rubrique}}>
+﻿[(#REM) Bloc d'informations a afficher en bas de page]
+
+<BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#CONFIG{spipbb/spipbb_id_rubrique}}>
 <hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
 <table summary="index" class="spipforum">
 		<tbody[ id="salon(#ID_RUBRIQUE)"]>
@@ -10,7 +12,7 @@
 				<span><:titre_forum:></span>
 			</td>
 			<td class="enligne">
-			<B_messages><:spipbb:total_messages_membres:> <BOUCLE_messages(FORUMS){id_secteur}{plat}></BOUCLE_messages>#TOTAL_BOUCLE <:messages:><br /><//B_messages>
+			<B_messages><:spipbb:total_messages_membres:> <BOUCLE_messages(FORUMS ARTICLES RUBRIQUES){spip_rubriques.id_secteur=#CONFIG{spipbb/spipbb_id_rubrique}}></BOUCLE_messages>#TOTAL_BOUCLE <:messages:><br /><//B_messages>
 			<B_auteurs><:spipbb:total_membres:> <BOUCLE_auteurs(AUTEURS){tout}></BOUCLE_auteurs>#TOTAL_BOUCLE <:auteurs:><br /><//B_auteurs>
 			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{par maj}{inverse}{0,1}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{id_rubrique}})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
 			</td>
