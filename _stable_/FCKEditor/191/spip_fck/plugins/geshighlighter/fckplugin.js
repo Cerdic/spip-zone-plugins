@@ -23,14 +23,14 @@ HighlightCodeCommand.Execute=function() {
 
 // Register the related commands.
 FCKCommands.RegisterCommand(
-   'RtHighlight',
+   'coloration',
     new FCKDialogCommand(
         FCKLang['GeshighlighterHighlightTitle'],
         FCKLang['GeshighlighterHighlightTitle'],
         FCKPlugins.Items['geshighlighter'].Path + 'highlight.html', 600, 420));
         
-var btnHighlight = new FCKToolbarButton('RtHighlight', FCKLang['GeshighlighterHighlightTitle'])
+var btnHighlight = new FCKToolbarButton('coloration', FCKLang['GeshighlighterHighlightTitle'])
 btnHighlight.IconPath = FCKPlugins.Items['geshighlighter'].Path + 'highlighter.gif' ;
 
 // 'My_Find' is the name used in the Toolbar config.
-FCKToolbarItems.RegisterItem( 'RtHighlight', btnHighlight ) ;
+FCKToolbarItems.RegisterItem( 'coloration', btnHighlight ) ;
