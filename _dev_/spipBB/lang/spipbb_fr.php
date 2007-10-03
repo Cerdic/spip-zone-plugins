@@ -54,7 +54,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 
 // A
 'abo' => 'Abonnements&nbsp;',
-'aecrit' => 'a &eacute;crit ',
+'aecrit' => 'a &eacute;crit :',
 'annonce' => 'Annonce',
 'anonyme' => 'Anonyme',
 'avatar' => 'Avatar',

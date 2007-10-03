@@ -50,8 +50,8 @@
   				<td class="tabvs">
 		        		<ul class="actionvs">
 		        			<?php if($sujet_clos==0){ ?>
-		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&amp;citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
-		        			<?php } ?>
+	<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&citer=oui' title="<:phpbb:citer:>"><span><:phpbb:citer:></span>&nbsp;</a></li>
+                                                <?php } ?>
                                                 <?php if ($GLOBALS['auteur_session']['statut']=='0minirezo' OR $GLOBALS['auteur_session']['id_auteur']=='#ID_AUTEUR'){?>
                                                 <li class="editervs"><a href='spip.php?page=editer&id_forum=#ID_FORUM' title="<:spipbb:editer:>"><span><:spipbb:editer:></span>&nbsp;</a></li>
                                                 <?php } ?>
@@ -72,7 +72,11 @@
 			</tr>
 			<tr class="row1"> 
 				<td class="retourvs"><a href="#top"><:spipbb:revenir_haut:></a></td>
-				<td class="videvs">&nbsp;</td>
+				<td class="videvs">
+                                        <BOUCLE_maj(FORUMS) {id_forum} {0,1}>
+                                        Dernière mise à jour le [(#MAJ|date_maj)]
+                                        </BOUCLE_maj>
+                                </td>
 			</tr>
 
 			<BOUCLE_posts(FORUMS){id_thread}{plat}{par date}{doublons}>
@@ -92,8 +96,8 @@
   				<td class="tabvs">
 		        		<ul class="actionvs">
 		        			<?php if($sujet_clos==0){ ?>
-		        			<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&amp;citer=oui' title="<:spipbb:citer:>"><span><:spipbb:citer:></span>&nbsp;</a></li>
-		        			<?php } ?>
+	<li class="citervs"><a href='spip.php?page=poster&amp;[(#PARAMETRES_FORUM)]&citer=oui' title="<:phpbb:citer:>"><span><:phpbb:citer:></span>&nbsp;</a></li>
+                                                <?php } ?>
                                                 <?php if ($GLOBALS['auteur_session']['statut']=='0minirezo' OR $GLOBALS['auteur_session']['id_auteur']=='#ID_AUTEUR'){?>
                                                 <li class="editervs"><a href='spip.php?page=editer&id_forum=#ID_FORUM' title="<:spipbb:editer:>"><span><:spipbb:editer:></span>&nbsp;</a></li>
                                                 <?php } ?>
@@ -114,7 +118,11 @@
 			</tr>
 			<tr class="row[(#COMPTEUR_BOUCLE|alterner{2,1})]"> 
 				<td class="retourvs"><a href="#top"><:spipbb:revenir_haut:></a></td>
-				<td class="videvs">&nbsp;</td>
+                                <td class="videvs">
+                                        <BOUCLE_maj2(FORUMS) {id_forum} {0,1}>
+                                        Dernière mise à jour le [(#MAJ|date_maj)]
+                                        </BOUCLE_maj2>
+                                </td>
 			</tr>
 
 			</BOUCLE_posts>

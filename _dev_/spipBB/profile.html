@@ -70,7 +70,6 @@ if ($modif) {
 
 	// recoller les champs du extra
 	if ($champs_extra) {
-        include_spip('inc/presentation');
 		include_spip("inc/extra");
 		$extra = extra_recup_saisie("auteurs");
 		$add_extra = ", extra = '".addslashes($extra)."'";
