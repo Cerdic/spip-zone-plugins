@@ -230,7 +230,7 @@
 			}
 			
 			// Afficher les resultats
-			$r .= ($t=typo($row2['nom']))?"<strong>$t :</strong>":"";
+			$r .= ($t=typo($row2['titre']))?"<strong>$t :</strong>":"";
 			$r .= "<br />\n";
 			$r .= "<div class='sondage_table'>";
 			foreach ($liste as $valeur => $nom) {

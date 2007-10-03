@@ -118,7 +118,10 @@
 			spip_query("DROP TABLE spip_forms_champs");
 			spip_query("DROP TABLE spip_forms_champs_choix");
 			
-			// renommer les tables qui changent de nom, sinon elles vont etre crees
+			// virer les tables vides crees lors dun creer base precedent avec spip_forms_donnees dans la definition
+			spip_query("DROP TABLE spip_forms_donnees");
+			spip_query("DROP TABLE spip_forms_donnees_champs");
+			// renommer les tables qui changent de nom, pour recuperer les donees
 			spip_query("ALTER TABLE spip_reponses RENAME spip_forms_donnees");
 			spip_query("ALTER TABLE spip_reponses_champs RENAME spip_forms_donnees_champs");
 			// creer toutes les nouvelles tables
@@ -226,7 +229,7 @@
 			ecrire_meta('forms_base_version',$current_version=0.26,'non');
 		}
 		if ($current_version<0.27){
-			spip_query("ALTER TABLE spip_forms_donnees_article ADD article_ref ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER id_article");
+			spip_query("ALTER TABLE spip_forms_donnees_articles ADD article_ref ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER id_article");
 			spip_query("ALTER TABLE spip_forms_donnees_donnees ADD donnee_ref ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER id_donnee");
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
