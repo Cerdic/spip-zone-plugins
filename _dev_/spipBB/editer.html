@@ -1,24 +1,22 @@
 #CACHE{0}
 <?
-if ($redirect==oui) {
-	echo "<meta http-equiv='refresh' content='0; url=spip.php?page=editer&id_forum=$id_forum&var_mode=recalcul'>";
-}
- 
- // permet la zolie mise en page comme dans l'espace admin
+// permet la zolie mise en page comme dans l'espace admin
 $spip_display=1;
 
 include("ecrire/inc/presentation.php"); //encore pour les cadres
 
+
 // On récup les infos du forum
 $result = spip_query("SELECT * FROM spip_forum WHERE id_forum=".$id_forum);
 if ($row = spip_fetch_array($result)) $forum=$row;
-	
 
 //
 // Modification du forum
 //
 
-if ($modif) { 
+
+if ($redirect==oui) { 
+
 	if ($titre)	// pas de titre vide
 		$forum['titre'] = corriger_caracteres($titre);
         
@@ -41,15 +39,19 @@ if ($modif) {
     url_site='".addslashes($forum['url_site'])."'
     WHERE id_forum=".$id_forum;
     spip_query($query) OR die($query);
+    
+    // et on redirige vers le fofo en question
+    $id_parent=$forum['id_parent'];
+    echo "<meta http-equiv='refresh' content='0; url=spip.php?page=voirsujet&id_forum=$id_parent#forum$id_forum'>";
 	
 
 }
 
 // Le forum n'est modérable que par un admin ou par son auteur (du moins pour l'instant l'auteur ayant le même pseudo que l'auetur du thread
-$statut=$auteur_session['statut'];
-$nom_auteur_session=$auteur_session['nom'];
+$statut=$GLOBALS['auteur_session']['statut'];
+$nom_auteur_session=$GLOBALS['auteur_session']['nom'];
 
-if ($auteur_session AND $forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') { 
+if ($forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') { 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
@@ -85,51 +87,47 @@ if ($auteur_session AND $forum['auteur']==$nom_auteur_session OR $statut=='0mini
           			<div class="tailformulaire">
           			<!-- Ce div est lÃ  pour pallier l'illogisme qui fait que selon l'avancement dans le post on se trouve un coup avec .spip_encadrer autour de form et un coup l'inverse -->
           			<!-- Donc c'est lui qu'il faut dimmensionner et Ã©ventuellement centrer -->
-                                <? 
-                    $s = spip_query("SELECT * FROM spip_forum WHERE id_forum=".$id_forum);
-                 if ($t = spip_fetch_array($s))
-                $titre =  $t['titre'];
-                $texte =  $t['texte'];
-                $auteur =  $t['auteur'];
-                $email_auteur =  $t['email_auteur'];
-                $nom_site =  $t['nom_site'];
-                $url_site =  $t['url_site'];
-                ?>
+
 				<div class="formulaire_spip formulaire_forum">
 
                                         <a id="formulaire_forum" name="formulaire_forum"></a>
-
-                                        <form action="spip.php?page=editer" method="post"><div>
-                                        [(#ENV{url_post}|form_hidden)]
+                                        
+                                        <form action="spip.php?page=editer&id_forum=<? echo $id_forum;?>" method="post"><div>
                                         <input type="hidden" name="id_forum" value="<? echo $id_forum;?>" />
                                         <input type="hidden" name="redirect" value="oui" />
                                         <input type="hidden" name="modif" value="1" />
-                                        [<fieldset class="reponse_formulaire">
-                                        <legend><:bouton_radio_modere_priori:></legend>
-                                        <p>(#ENV{modere})<:forum_info_modere:></p>
-                                        </fieldset>]
+                                        <input type="hidden" name="titre" value="<? echo $titre; ?>" />
+                                        <input type="hidden" name="texte" value="<? echo $texte; ?>" />
+                                        <input type="hidden" name="nom_site" value="<? echo $nom_site; ?>" />
+                                        <input type="hidden" name="url_site" value="<? echo $url_site; ?>" />
+                                        <input type="hidden" name="auteur" value="<? echo $auteur; ?>" />
+                                        <input type="hidden" name="email_auteur" value="<? echo $email_auteur; ?>" />
+                                            
+                                        <?  echo $titre;
+                        echo $texte;
+                        echo "<INPUT TYPE='submit' CLASS='fondo' NAME='Confirmer' VALUE='"._T('bouton_valider')."'>";
+                    ?>
+                                        </div></form>
 
-                                        [(#ENV*{previsu})]
+                                        <form action="spip.php?page=editer&id_forum=<? echo $id_forum;?>" method="post"><div>
+                                        <input type="hidden" name="id_forum" value="<? echo $id_forum;?>" />
+                                        <input type="hidden" name="redirect" value="non" />
+                                        <input type="hidden" name="modif" value="1" />
 
-                                        <BOUCLE_G(GROUPES_MOTS)
-                                            {forum=(#CONFIG{mots_cles_forums}|choixsiegal{oui,oui,jamais})}
-                                            {articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
-                                            {breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}
-                                            {rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}
-                                            {syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
-                                        >
-                                        [(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
-                                            <fieldset>
-                                            <legend><:mots_clefs:> : #TITRE</legend>
-                                                <INCLURE{fond=formulaires/choix_mots}{id_groupe}{ajouter_mot}{unseul}>
-                                            </fieldset>
-                                        ]</BOUCLE_G>
-
-                                        [(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
-                                        [<input type="hidden" name="titre" value="(#ENV{titre})" />]
-                                        <p class="spip_bouton"><input type="submit" value="<:forum_valider:>" /></p>]
-
-                                        [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
+                                        
+                                        
+                                <? 
+                if (!$modif) { 
+                        $s = spip_query("SELECT * FROM spip_forum WHERE id_forum=".$id_forum);
+                     if ($t = spip_fetch_array($s))
+                    $titre =  $t['titre'];
+                    $texte =  $t['texte'];
+                    $auteur =  $t['auteur'];
+                    $email_auteur =  $t['email_auteur'];
+                    $nom_site =  $t['nom_site'];
+                    $url_site =  $t['url_site'];
+                }
+                ?>
 
                                             <fieldset>
                                             <legend><:form_pet_message_commentaire:></legend>
@@ -163,7 +161,7 @@ if ($auteur_session AND $forum['auteur']==$nom_auteur_session OR $statut=='0mini
                                             <input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
 
                                             <?echo "<INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'>";?>
-                                        ]
+                                        
                                         </div>
                                         </form>
 
@@ -186,7 +184,8 @@ if ($auteur_session AND $forum['auteur']==$nom_auteur_session OR $statut=='0mini
 </html>
 
 
- <?} else { echo "<:spipbb:droit_editer:>";
+ <?} 
+ else { echo "<:spipbb:droit_editer:>";
  echo "<meta http-equiv='refresh' content='0; url=Javascript:history.go(-1)'>";
  }?>
  
