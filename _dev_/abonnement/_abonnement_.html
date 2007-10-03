@@ -45,25 +45,17 @@
 			<h1 class="invisible">#NOM_SITE_SPIP</h1>
 			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 
-			<?php if($auteur_session) { ?>
+			[(#SESSION{id_auteur}|?{' ',''})			
+				<fieldset style="margin:10px 0px">
+				<legend>Informations personnelles</legend>
+				<INCLURE(inc/profil_adherent.php){id_auteur = #SESSION{id_auteur}}> 
+				</fieldset>
+				<INCLURE{fond=fonds/mes_abonnements}{id_auteur = #SESSION{id_auteur}}>
+				]			
 
-			<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
-			
-			<fieldset style="margin:10px 0px">
-			<legend>Informations personnelles</legend>
-			<INCLURE(inc/profil_adherent.php){id_auteur}> 
-			</fieldset>
-			
-			<INCLURE{fond=fonds/mes_abonnements}{id_auteur}>
-			
-			</BOUCLE_auteur>
-			
-
-			<?php } else { ?>
-
-			#FORMULAIRE_INSCRIPTION2
-
-			<?php } ?>
+			[(#SESSION{id_auteur}|?{'',' '})			
+				#FORMULAIRE_INSCRIPTION2
+			]
 
 
 		</div><!-- fin contenu -->
