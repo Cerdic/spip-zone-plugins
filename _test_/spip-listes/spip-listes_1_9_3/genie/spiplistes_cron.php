@@ -25,6 +25,8 @@
 
 	// Appelé en tache de fond (CRON SPIP)
 	
+	// Trieuse 
+	
 	// - Verifie toutes les listes auto==oui publiques et privées
 	// - créé le courrier pour la méleuse dans spip_courriers
 	// - determine les dates prochain envoi si periode > 0
@@ -38,14 +40,14 @@ function cron_spiplistes_cron ($last_time) {
 		
 	$current_time = time();
 
-	$sql_select = "id_liste,titre,titre_message,maj,message_auto,periode,lang,patron";
+	$sql_select = "id_liste,titre,titre_message,date,message_auto,periode,lang,patron";
 
 	// demande les listes auto valides
 	$sql_query = "SELECT $sql_select FROM spip_listes 
 		WHERE message_auto='oui'
-			AND (maj NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE).") 
+			AND (date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE).") 
 			AND (statut='"._SPIPLISTES_PUBLIC_LIST."' OR statut='"._SPIPLISTES_PRIVATE_LIST."')
-			AND (maj BETWEEN 0 AND NOW())"
+			AND (date BETWEEN 0 AND NOW())"
 		;
 		
 	$listes_privees_et_publiques = spip_query ($sql_query);
@@ -66,23 +68,22 @@ function cron_spiplistes_cron ($last_time) {
 		spiplistes_log("CRON: lang == $lang", LOG_DEBUG);
 
 		/////////////////////////////
-		// Maj de la prochaine date d'envoi
-		$next_time = ($periode)
-			? date('Y-m-d H:i:s', time() + ((3600 * 24) * $periode)) // periode * 1 jour
-			: _SPIPLISTES_ZERO_TIME_DATE
-			;
-		$sql_set = "maj='$next_time'";
-		if(!$periode) {
+		// Tampon date d'envoi (dans maj)
+		if($periode) {
+			$next_time = strtotime($date) + (_SPIPLISTES_TIME_1_DAY * $periode);
+			$sql_set = "date='" . __mysql_date_time($next_time) . "',maj=NOW()";
+		}
+		else {
 		// pas de période ? c'est un envoyer_maintenant.
-		// Repasse la liste en auto non (au cas où) 
-			$sql_set .= ",message_auto='non'";
+		// Applique le tampon date d'envoi et repasse la liste en auto non
+			$sql_set = "date='',maj=NOW(),message_auto='non'";
 		}
 		spip_query("UPDATE spip_listes SET $sql_set WHERE id_liste=$id_liste LIMIT 1"); 
 
 		/////////////////////////////
 		// preparation du courrier à placer dans le panier
 		include_spip('public/assembler');
-		$contexte_patron = array('date' => $maj, 'patron'=>$patron, 'lang'=>$lang);
+		$contexte_patron = array('date' => $date, 'patron'=>$patron, 'lang'=>$lang);
 		$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
 		$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 		

@@ -114,7 +114,6 @@ function exec_spiplistes_liste_edit(){
 	debut_droite("messagerie");
 	
 	$titre = entites_html($titre);
-	$descriptif = entites_html($descriptif);
 	$texte = entites_html($texte);
 	
 	$formulaire_action = 
@@ -149,13 +148,6 @@ function exec_spiplistes_liste_edit(){
 			// ne sert pas pour le moment (CP-20070922)
 			($lier_trad)
 			? "<input type='hidden' name='lier_trad' value='$lier_trad' />"
-				. "<input type='hidden' name='changer_lang' value='$spip_lang' />"
-			: ""
-			)
-		.	(
-			// ne sert pas pour le moment (CP-20070922)
-			($date)
-			? "<input type='hidden' name='date' value='$date' />"
 			: ""
 			)
 		. _T('texte_titre_obligatoire')
@@ -182,7 +174,7 @@ function exec_spiplistes_liste_edit(){
 			: ""
 			)
 		. "<p align='right' class='verdana2'>"
-		. "<input class='fondo' type='submit' name='btn_liste_editor' value='"._T('bouton_valider')."' />"
+		. "<input class='fondo' type='submit' name='btn_liste_edit' value='"._T('bouton_valider')."' />"
 		. "</p>"
 		. "</form>"
 		. fin_cadre_formulaire(true)

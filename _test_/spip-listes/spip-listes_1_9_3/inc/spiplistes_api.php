@@ -100,9 +100,18 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false) {
 		$nb_abos = spiplistes_nb_abonnes_count($id_liste);
 	}
 	if($nb_abos) {
-		$result = "(" . $nb_abos . (($nb_abos > 1) ?  _T('spiplistes:nb_abonnes_plur') : _T('spiplistes:nb_abonnes_sing')) . ")";
+		//$result = "(" . $nb_abos . (($nb_abos > 1) ?  _T('spiplistes:nb_abonnes_plur') : _T('spiplistes:nb_abonnes_sing')) . ")";
+		$result = "(" . $nb_abos . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")";
 	}
 	return ($result);
+}
+
+function spiplistes_singulier_pluriel_str_get ($var, $str_sing, $str_plur, $returnvar = true) {
+	$result = "";
+	if($var) {
+		$result = (($returnvar) ? $var : "") . " " . (($var > 1) ? $str_plur : $str_sing);
+	}
+	return($result);
 }
 
 function spiplistes_nb_courriers_en_cours() {
@@ -456,6 +465,64 @@ function spiplistes_boite_selection_patrons ($current_titre="", $return=false, $
 	if($return) return($result);
 	else echo($result);
 }
+
+//function spiplistes_texte_propre($texte)
+// passe propre() sur un texte puis nettoie les trucs rajoutes par spip sur du html
+// 	Remplace spiplistes_propre() qui est à supprimer après vérif.
+function spiplistes_texte_propre($texte){
+	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
+	if (isset($style_reg[0])) 
+		$style_str = $style_reg[0]; 
+	else 
+		$style_str = "";
+	$texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
+	//passer propre si y'a pas de html (balises fermantes)
+	if( !preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $texte) ) 
+	$texte = propre($texte); // pb: enleve aussi <style>...  
+	
+	// Corrections complémentaires
+	$patterns = array();
+	$replacements = array();
+	// html
+	$patterns[] = "#<br>#i";
+	$replacements[] = "<br />";
+	$patterns[] = "#<b>([^<]*)</b>#i";
+	$replacements[] = '<strong>\\1</strong>';
+	$patterns[] = "#<i>([^<]*)</i>#i";
+	$replacements[] = '<em>\\1</em>';
+	// spip class
+	$patterns[] = "# class=\"spip\"#";
+	$replacements[] = "";	
+	
+	$texte = preg_replace($patterns, $replacements, $texte);
+
+	$texte = ereg_replace("__STYLE__", $style_str, $texte);
+	
+	//les liens avec double début #URL_SITE_SPIP/#URL_ARTICLE
+	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
+	$texte = liens_absolus($texte);
+	
+	return ($texte);
+}
+
+function spiplistes_titre_propre($titre){
+	$titre = spiplistes_texte_propre($titre);
+	$titre = substr($titre, 0, 128); // Au cas où copié/collé
+	return($titre);
+}
+
+// complète les dates chiffres (jour, heure, etc.)
+// de retour du formulaire pour les dates 
+// et renvoie une date formattée correcte
+function spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute) {
+	foreach(array('mois', 'jour', 'heure', 'minute') as $k) {
+		if($$k < 10) {
+			$$k = str_pad($$k, 2, "0", STR_PAD_LEFT);
+		}
+	}
+	return($annee."-".$mois."-".$jour." ".$heure.":".$minute.":00");
+}
+
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

@@ -64,6 +64,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'adresse_mail_retour' => 'Adresse email du gestionnaire de la liste (reply-to)',
 'Attention_action_retire_invites' => "Attention: cette action retire les invit&eacute;s de la liste des abonn&eacute;s.",
 'A_partir_de' => "&Agrave; partir de",
+'aucun' => "aucun",
 
 //B
 
@@ -117,6 +118,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'discussion_intro' => 'Bonjour, <br />Voici les discussions d&eacute;marr&eacute;es sur le site',
 'Destination' => "Destination",
 'Date_non_precisee' => "Date non pr&eacute;cis&eacute;e",
+'Dernier_envoi_le_:' => "Dernier envoi le :",
 
 //E
 'email' => 'E-mail',
@@ -173,6 +175,7 @@ et de recevoir les lettres d\'informations.',
 'import_export' => 'Import / Export',
 
 //J
+'jour' => 'jour',
 'jours' => 'jours',
 
 //L
@@ -250,7 +253,8 @@ et de recevoir les lettres d\'informations.',
 'publie' => 'Publi&eacute; le',
 'Pas_de_liste_pour_import' => "Vous devez cr&eacute;er au moins une liste de destination afin de pouvoir importer 
 	vos abonn&eacute;s.",
-	
+'Periodicite_:' => "P&eacute;riodicit&eacute; : ",
+
 //R
 'recherche' => 'Rechercher',
 'regulariser' => 'regulariser les desabonnes avec listes...<br />',

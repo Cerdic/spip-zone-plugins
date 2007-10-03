@@ -63,6 +63,8 @@ define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
 
 define("_SPIPLISTES_META_PREFERENCES", 'spiplistes_preferences');
 
+define("_SPIPLISTES_TIME_1_DAY", (3600 * 24));
+
 //Balises Spip-listes
 
 function balise_MELEUSE_CRON($p) {
