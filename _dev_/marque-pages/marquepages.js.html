@@ -16,7 +16,7 @@ function confirmer(quoi){
 			.append('<:marquepages:confirmer:>&nbsp;')
 			.append($("<a><:marquepages:oui:></a>")
 				.addClass("oui")
-				.attr("href", $(this).attr("href"))
+				.attr("href", ce_lien.attr("href"))
 			)
 			.append("&nbsp;")
 			.append($("<a><:marquepages:non:></a>")
@@ -30,7 +30,7 @@ function confirmer(quoi){
 			);
 		
 		// On échange l'action et la confirmation
-		$(this)
+		ce_lien
 			.css("display", "none")
 			.parent().append(question);
 		
