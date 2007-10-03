@@ -1,25 +1,24 @@
 <?php
 
-$GLOBALS['diapo_grand_h']=0;
-$GLOBALS['diapo_petit_h']=0;
-//$GLOBALS['diapo_vignette_h']=0;
-
 if (!isset($GLOBALS['diapo_temps']))
 	$GLOBALS['diapo_temps']=8000;
 if (!isset($GLOBALS['diapo_grand']))
 	$GLOBALS['diapo_grand']=560;
 if (!isset($GLOBALS['diapo_grand_h']))
-	$GLOBALS['diapo_grand_h']=$GLOBALS['diapo_grand'];
+	$GLOBALS['diapo_grand_h']=0;
+//	$GLOBALS['diapo_grand_h']=$GLOBALS['diapo_grand'];
 if (!isset($GLOBALS['diapo_vignettes']))
 	$GLOBALS['diapo_vignettes']=8;
 if (!isset($GLOBALS['diapo_vignette']))
 	$GLOBALS['diapo_vignette']=floor($GLOBALS['diapo_grand']/$GLOBALS['diapo_vignettes']-2);
 if (!isset($GLOBALS['diapo_vignette_h']))
+//	$GLOBALS['diapo_vignette_h']=0;
 	$GLOBALS['diapo_vignette_h']=$GLOBALS['diapo_vignette'];
 if (!isset($GLOBALS['diapo_petit']))
 	$GLOBALS['diapo_petit']=floor($GLOBALS['diapo_grand']-($GLOBALS['diapo_grand']/$GLOBALS['diapo_vignettes']*2)-10);
 if (!isset($GLOBALS['diapo_petit_h']))
-	$GLOBALS['diapo_petit_h']=$GLOBALS['diapo_petit'];
+	$GLOBALS['diapo_petit_h']=0;
+//	$GLOBALS['diapo_petit_h']=$GLOBALS['diapo_petit'];
 
 function balise_DIAPO_TEMPS_dist($p) {
 	$p->code = "\$GLOBALS['diapo_temps']";
