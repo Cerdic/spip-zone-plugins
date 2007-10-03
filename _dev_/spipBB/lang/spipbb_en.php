@@ -23,6 +23,32 @@ The e-mail address will be used only to confirm the details of your registration
 'champsobli'=>'Fields marked with an * are compulsory.',
 
 
+'interet'=>'Hobbies',
+'loisirs'=>'Occupations',
+'numero_icq'=>'chat (ICQ, Skype, etc. )',
+'url_avatar'=>'Avatar\'s Url',
+'signature'=>'Signature',
+'droit_editer'=>'You\'re not allowed to edit this post',
+'editer'=>'&eacute;dit',
+
+'config_spipbb' => 'Basic spipBB config in order to use the forums with this plugin.',
+'config_choix_rubrique' => 'Choose the section used by spipBB forums',
+'choix_rubrique_selection' => 'Select the section that will host the base of your forums. Inside, each sub-section will be a forum group, each published article will open a new forum.',
+'config_choix_mots' => 'Choose the keyword group',
+'choix_mots_selection' => 'This keyword group should at least contain 2 keywords. Usually, the plugin will create them while installing. SpipBB needs - in general - the {ferme} (closed) and {annonce} (announce) keywords, but you are allowed to choose any other ones.',
+'config_choix_squelettes' => 'Choose the skeletons',
+'choix_squelettes' => 'You are allowed to used other skeletons, but the selected files replacing groupeforum.html and filforum.html must already exist!',
+
+'dernier_membre' => 'The most recently registered user is',
+'en_ligne' => 'Who\'s online?',
+'membres_en_ligne' => 'online users',
+'squelette_filforum' => 'Skeleton base for threads:',
+'squelette_groupeforum' => 'Skeleton base for forum groups:',
+'titre_spipbb' => 'SpipBB',
+'total_messages_membres' => 'Our members already post a total of',
+'total_membres' => 'We have',
+
+
 // A
 'abo' => 'Subscription',
 'aecrit' => 'wrote',
@@ -54,7 +80,9 @@ The e-mail address will be used only to confirm the details of your registration
 'connecte' => 'Once you are connected, you will be able to modify your password or your personal information at the address ',
 'contact' => 'Contact',
 'courrier' => '<p>Once registered, you personal identifier will be sent to you as soon as possible by e-mail.</p>',
-'credits'=>'Developed with <a href="http://www.spip.net/" class="copyright">SPIP</a>: 2004-2005<br/><a http://www.spip-contrib.net/Un-squelette-de-forum-8-4-CSS>spipBB 0.9 CSS</a> by <a href=http://www.laprise.org/>James aka Kliké</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> et <a href=http://www.missmopi.net/>Nadège aka Miss Mopi</a> (logos from Stéphane)',
+'credits'=>'Developed with <a href="http://www.spip.net/" class="copyright">SPIP</a>: 2004-2007<br/>
+<a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> by <a href=""http://spipbb.spip-zone.info/">the spipbb-team</a><br />
+<a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB">Plugin by Gurdil Chryjs real3t</a>',
 'credits_bis1' => 'GAFoSPIP v. ',
 'credits_bis2' => 'August 2005',
 'credits_bis3' => 'Adapted for, and, Inspired from, Forums management of:<br>',

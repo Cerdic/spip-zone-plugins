@@ -7,10 +7,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //Connexion
 'connexion' => 'Veuillez entrer votre nom d\'utilisateur et votre mot de passe pour vous connecter.',
 
-
-//
-
-//nouveautes a traduire dans les autres langues
 'pb_mysql' => 'Un probl&egrave;me technique a interrompu votre inscription, veuillez re&eacute;ssayer',
 
 
@@ -39,7 +35,22 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'droit_editer'=>'vous n\'avez pas les droits suffisants pour &eacute;diter ce message',
 'editer'=>'&eacute;diter',
 
+'config_spipbb' => 'Configuration de base de spipBB pour permettre le fonctionnement des forums avec ce plugin.',
+'config_choix_rubrique' => 'Choisir la rubrique contenant les forums spipBB',
+'choix_rubrique_selection' => 'S&eacute;lectionner un secteur qui sera la base de vos forums. Dedans, chaque sous-rubrique sera un groupe de forums, chaque article publi&eacute; ouvrira un forum.',
+'config_choix_mots' => 'Choisir le groupe de mot-cl&eacute;s',
+'choix_mots_selection' => 'Le groupe de mot doit contenir deux mot-clefs. Normalement, le plugin les a cr&eacute;&eacute; au moment de son installation. SpipBB utilise en g&eacute;n&eacute;ral les mots {ferme} et {annonce}, mais vous pouvez en choisir d\'autres.',
+'config_choix_squelettes' => 'Choisir les squelettes utilis&eacute;s',
+'choix_squelettes' => 'Vous pouvez en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
 
+'dernier_membre' => 'L\'utilisateur enregistr&eacute; le plus r&eacute;cent est',
+'en_ligne' => 'Qui est en ligne ?',
+'membres_en_ligne' => 'utilisateurs en ligne',
+'squelette_filforum' => 'Base de squelette pour les fils de discussions :',
+'squelette_groupeforum' => 'Base de squelette pour les groupes de discussions :',
+'titre_spipbb' => 'SpipBB',
+'total_messages_membres' => 'Nos membres ont post&eacute; un total de',
+'total_membres' => 'Nous avons',
 
 // A
 'abo' => 'Abonnements&nbsp;',
@@ -72,28 +83,21 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'connecte' => 'Une fois connect&eacute;, vous pouvez modifer votre mot de passe ou vos informations personnelles &agrave; l\'adresse ',
 'contact' => 'Contact',
 'courrier' => '<p>Apr&egrave;s l\'&eacute;tape d\'enregistrement, votre identifiant personnel vous parviendra rapidement par courrier &eacute;lectronique.</p>',
-'credits'=>'R&eacute;alis&eacute; avec <a href="http://www.spip.net/" class="copyright">SPIP</a> : 2004-2006<br />
+'credits'=>'R&eacute;alis&eacute; avec <a href="http://www.spip.net/" class="copyright">SPIP</a> : 2004-2007<br />
 <a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> 
-par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a>',
+par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a><br />
+<a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB">Plugin par Gurdil Chryjs real3t</a>',
 'credits_bis1' => 'GAFoSPIP v. ',
 'credits_bis2' => 'Ao&ucirc;t 2005',
 'credits_bis3' => 'Adapt&eacute; pour, et, Inspir&eacute; par, le traitement des Forums de :<br />',
 'credits_bis4' => '(James, BoOz, Nikau et Miss Mopi).',
 'creer_forum' => 'Cr&eacute;er Nouveau Forum',
-'config_spipbb' => 'Configuration de base de spipBB pour permettre le fonctionnement des forums avec ce plugin.',
-'config_choix_rubrique' => 'Choisir la rubrique contenant les forums spipBB',
-'choix_rubrique_selection' => 'S&eacute;lectionner un secteur qui sera la base de vos forums. Dedans, chaque sous-rubrique sera un groupe de forums, chaque article publi&eacute; ouvrira un forum.',
-'config_choix_mots' => 'Choisir le groupe de mot-cl&eacute;s',
-'choix_mots_selection' => 'Le groupe de mot doit contenir deux mot-clefs. Normalement, le plugin les a cr&eacute;&eacute; au moment de son installation. SpipBB utilise en g&eacute;n&eacute;ral les mots {ferme} et {annonce}, mais vous pouvez en choisir d\'autres.',
-'config_choix_squelettes' => 'Choisir les squelettes utilis&eacute;s',
-'choix_squelettes' => 'Vous pouvez en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
 
 //D
 'dans_forum' => 'dans le forum',
 'date' => 'Inscrit le',
 'deja_enregistree' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e<p><a href=\'spip.php?page=formulaire_oubli\'>[ Mot de passe oubli&eacute; ]</a></p>',
 'dernier' => '&nbsp;Dernier<br />',
-'dernier_membre' => 'L\'utilisateur enregistr&eacute; le plus r&eacute;cent est',
 
 //E
 'ecrirea' => 'Ecrire Email &agrave;',
@@ -108,7 +112,6 @@ par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a>',
 'entree_url' => 'L\'adresse (URL) de votre site',
 'entree_biographie' => 'Courte biographie en quelques mots.',
 'etplus' => '... et plus ...',
-'en_ligne' => 'Qui est en ligne ?',
 
 //F
 'faq' => 'FAQ',
@@ -171,7 +174,6 @@ par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a>',
 'messages_voir_dernier' => 'Voir le dernier message',
 'moderateurs' => 'Mod&eacute;rateur(s)',
 'mp' => 'Message Priv&eacute;',
-'membres_en_ligne' => 'utilisateurs en ligne',
 
 //n
 'nom' => 'Nom d\'utilisateur',
@@ -242,9 +244,6 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'sujet_verifie' => 'V&eacute;rifier ce sujet',
 'sujet_visites' => 'Visites',
 'sur' => ' sur ',
-'squelette_filforum' => 'Base de squelette pour les fils de discussions :',
-'squelette_groupeforum' => 'Base de squelette pour les groupes de discussions :',
-
 
 //T
 'texte_login_precaution' => 'Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
@@ -255,9 +254,6 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'toutes_categories' => 'Toutes les cat&eacute;gories',
 'tout_apropos' => 'Tout &agrave; propos de',
 'total_messages' => 'Total messages',
-'titre_spipbb' => 'SpipBB',
-'total_messages_membres' => 'Nos membres ont posté un total de',
-'total_membres' => 'Nous avons',
 
 //V
 'visites_jour' => 'Visites aujourd\'hui',

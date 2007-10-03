@@ -1,4 +1,5 @@
-﻿[(#REM) Bloc d'informations a afficher en bas de page]
+﻿#CACHE{60}
+[(#REM) Bloc d'informations a afficher en bas de page]
 
 <BOUCLE_forum_principal(RUBRIQUES){id_rubrique=#CONFIG{spipbb/spipbb_id_rubrique}}>
 <hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
@@ -12,14 +13,23 @@
 				<span><:titre_forum:></span>
 			</td>
 			<td class="enligne">
-			<B_messages><:spipbb:total_messages_membres:> <BOUCLE_messages(FORUMS ARTICLES RUBRIQUES){spip_rubriques.id_secteur=#CONFIG{spipbb/spipbb_id_rubrique}}></BOUCLE_messages>#TOTAL_BOUCLE <:messages:><br /><//B_messages>
+			<?php $total_messages=0 ?>
+			<BOUCLE_rub_main(RUBRIQUES){id_rubrique}>
+				<BOUCLE_sous_rub(RUBRIQUES){id_parent}>
+					<BOUCLE_forum(ARTICLES){id_rubrique}>
+					<BOUCLE_threads(FORUMS){id_article}></BOUCLE_threads><?php $total_messages+=#TOTAL_BOUCLE ?><//B_threads>
+					</BOUCLE_forum>
+					<BOUCLE_sous_sous_rub(BOUCLE_sous_rub)></BOUCLE_sous_sous_rub>
+				</BOUCLE_sous_rub>
+			</BOUCLE_rub_main>
+			<:spipbb:total_messages_membres:> <?php echo $total_messages ?> <:spipbb:messages:><br />
 			<B_auteurs><:spipbb:total_membres:> <BOUCLE_auteurs(AUTEURS){tout}></BOUCLE_auteurs>#TOTAL_BOUCLE <:auteurs:><br /><//B_auteurs>
-			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{par maj}{inverse}{0,1}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{id_rubrique}})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
+			<B_dernier_auteur><:spipbb:dernier_membre:> <BOUCLE_dernier_auteur(AUTEURS){tout}{par id_auteur}{inverse}{0,1}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></BOUCLE_dernier_auteur><br /></B_dernier_auteur>
 			</td>
 		</tr>
 		<tr  class="forumligne">
-			<td class="dernmsg"><!-- DATE_SUB(NOW(),INTERVAL 5 MINUTE) -->
-				<B_auteurs_en_ligne><BOUCLE_auteurs_en_ligne(AUTEURS){tout}{en_ligne<=1)}></BOUCLE_auteurs_en_ligne>#TOTAL_BOUCLE <:spipbb:membres_en_ligne:><br /><//B_auteurs_en_ligne>
+			<td class="dernmsg">
+				[(#TOTAL_AUTEURS_EN_LIGNE{'5 MINUTE'}) <:spipbb:membres_en_ligne:><br />]
 			</td>
 		</tr>
 		</tbody>
