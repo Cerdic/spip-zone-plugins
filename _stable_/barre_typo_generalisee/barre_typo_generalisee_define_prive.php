@@ -53,7 +53,7 @@ function barre_typo_generalisee_insertion_in_head_prive ($texte)
 		|| (lire_config('barre_typo_generalisee/rubriques_descriptif_barre_typo_generalisee') == "on")
 		|| (lire_config('barre_typo_generalisee/rubriques_texte_barre_typo_generalisee') == "on"))
 		{
-			$activer_barres .= "$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$activer_barres .= "$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 	
 		if (lire_config('barre_typo_generalisee/rubriques_titre_barre_typo_generalisee') == "on")
@@ -80,19 +80,19 @@ function barre_typo_generalisee_insertion_in_head_prive ($texte)
 		{
 			$activer_barres .= "$('#barre_typo_groupemot_nom').insertBefore(\"input[@name=change_type]\");
 			$('#barre_typo_groupemot_nom').css(\"display\",\"block\");
-			$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 		if (lire_config('barre_typo_generalisee/groupesmots_descriptif_barre_typo_generalisee') == "on")
 		{
 			$activer_barres .= "$('#barre_typo_groupemot_descriptif').insertBefore(\"textarea[@name=descriptif]\");
 			$('#barre_typo_groupemot_descriptif').css(\"display\",\"block\");
-			$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 		if (lire_config('barre_typo_generalisee/groupesmots_texte_barre_typo_generalisee') == "on")
 		{
 			$activer_barres .= "$('#barre_typo_groupemot_texte').insertBefore(\"textarea[@name=texte]\");
 			$('#barre_typo_groupemot_texte').css(\"display\",\"block\");
-			$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 	}
 	
@@ -103,19 +103,19 @@ function barre_typo_generalisee_insertion_in_head_prive ($texte)
 		{
 			$activer_barres .= "$('#barre_typo_mot_nom').insertBefore(\"input[@name=titre]\");
 			$('#barre_typo_mot_nom').css(\"display\",\"block\");
-			$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 		if (lire_config('barre_typo_generalisee/mots_descriptif_barre_typo_generalisee') == "on")
 		{
 			$activer_barres .= "$('#barre_typo_mot_descriptif').insertBefore(\"textarea[@name=descriptif]\");
 			$('#barre_typo_mot_descriptif').css(\"display\",\"block\");
-			$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 		if (lire_config('barre_typo_generalisee/mots_texte_barre_typo_generalisee') == "on")
 		{
 			$activer_barres .= "$('#barre_typo_mot_texte').insertBefore(\"textarea[@name=texte]\");
 			$('#barre_typo_mot_texte').css(\"display\",\"block\");
-			$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 	}
 	
@@ -126,13 +126,13 @@ function barre_typo_generalisee_insertion_in_head_prive ($texte)
 		{
 			$activer_barres .= "$('#barre_typo_site_nom').insertBefore(\"input[@name=nom_site]\");
 			$('#barre_typo_site_nom').css(\"display\",\"block\");
-			$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 		if (lire_config('barre_typo_generalisee/sites_description_barre_typo_generalisee') == "on")
 		{
 			$activer_barres .= "$('#barre_typo_site_descriptif').insertBefore(\"textarea[@name=descriptif]\");
 			$('#barre_typo_site_descriptif').css(\"display\",\"block\");
-			$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 	}
 	
@@ -156,7 +156,7 @@ function barre_typo_generalisee_insertion_in_head_prive ($texte)
 		//barres dans la page configuration
 		if ((lire_config('barre_typo_generalisee/configuration_nom_barre_typo_generalisee') == "on") || (lire_config('barre_typo_generalisee/configuration_description_barre_typo_generalisee') == "on"))
 		{
-			$activer_barres .= "$(\"#contenu form:first\").attr(\"name\", \"formulaire\");";
+			$activer_barres .= "$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");";
 		}
 		if (lire_config('barre_typo_generalisee/configuration_nom_barre_typo_generalisee') == "on")
 		{
@@ -175,13 +175,13 @@ function barre_typo_generalisee_insertion_in_head_prive ($texte)
 		//barres dans la page auteur
 		if (lire_config('barre_typo_generalisee/auteurs_signature_barre_typo_generalisee') == "on")
 		{
-			$activer_barres .= "$(\"#contenu form:first\").attr(\"name\", \"formulaire\");
+			$activer_barres .= "$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");
 			$('#barre_typo_auteur_signature').insertAfter(\"input[@name=nom]\");
 			$('#barre_typo_auteur_signature').css(\"display\",\"block\");";
 		}
 		if (lire_config('barre_typo_generalisee/auteurs_quietesvous_barre_typo_generalisee') == "on")
 		{
-			$activer_barres .= "$(\"#contenu form:first\").attr(\"name\", \"formulaire\");
+			$activer_barres .= "$(\"#contenu form:first, form[textarea]\").attr(\"name\", \"formulaire\");
 			$('#barre_typo_auteur_quietesvous').insertAfter(\"textarea[@name=bio]\");
 			$('#barre_typo_auteur_quietesvous').css(\"display\",\"block\");";
 		}
