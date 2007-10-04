@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--
+ * FCKeditor - The text editor for internet
+ * Copyright (C) 2003-2006 Frederico Caldeira Knabben
+ * 
+ * Licensed under the terms of the GNU Lesser General Public License:
+ * 		http://www.opensource.org/licenses/lgpl-license.php
+ * 
+ * For further information visit:
+ * 		http://www.fckeditor.net/
+ * 
+ * "Support Open Source software. What about a donation today?"
+ * 
+ * File Name: frmresourceslist.html
+ * 	This page shows all resources available in a folder in the File Browser.
+ * 
+ * File Authors:
+ * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link href="browser.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+
+var oListManager = new Object() ;
+
+oListManager.Init = function()
+{
+	this.Table = document.getElementById('tableFiles') ;
+}
+
+oListManager.Clear = function()
+{
+	// Remove all other rows available.
+	while ( this.Table.rows.length > 0 )
+		this.Table.deleteRow(0) ;
+}
+
+oListManager.AddFolder = function( folderName, folderPath, folderRename, folderDelete )
+{
+	// Create the new row.
+	var oRow = this.Table.insertRow(-1) ;
+
+	// Build the link to view the folder.
+	var sLink = '<a href="#" onclick="OpenFolder(\'' + folderPath.replace( /'/g, '\\\'') + '\');return false;">' ;
+	
+	// Link to Delete File
+	var dLink = '<img src="images/spacer.gif" width="16" height="16">';
+	if(folderDelete==1 && DeleteOk) dLink = '<a href="#" onclick="DeleteFolder(\'' + escape(folderName) + '\');return false;"><img alt="Effacer le répertoire" title="Effacer le répertoire" src="images/delete.gif"  width="16" height="16" border="0"></a>';
+	
+	// Link to Rename File
+	var rLink = '<img src="images/spacer.gif" width="16" height="16">';
+	if(folderRename==1 && RenameOk) rLink = '<a href="#" onclick="RenameFolder(\'' + escape(folderName) + '\');return false;"><img alt="Renommer le répertoire" title="Renommer le répertoire" src="images/edit.gif" width="16" height="16" border="0"></a>';
+
+	// Add the folder icon cell.
+	var oCell = oRow.insertCell(-1) ;
+	oCell.width = 16 ;
+	oCell.innerHTML = sLink + '<img alt="" src="images/Folder.gif" width="16" height="16" border="0"></a>' ;
+
+	// Add the folder name cell.
+	oCell = oRow.insertCell(-1) ;
+	oCell.noWrap = true ;
+	//oCell.colSpan = 2 ;
+	oCell.innerHTML = '&nbsp;' + sLink + folderName + '</a>' ;
+	
+	// Add the delete and rename icons cell.
+	oCell = oRow.insertCell(-1) ;
+	oCell.noWrap = true ;
+	oCell.align = 'right' ;
+	oCell.innerHTML = '&nbsp;' + dLink + rLink ;
+}
+
+oListManager.AddFile = function( fileName, fileUrl, fileSize, fileRename, fileDelete )
+{
+	// Create the new row.
+	var oRow = this.Table.insertRow(-1) ;
+
+	// Build the link to view the folder.
+	var sLink = '<a href="#" onclick="OpenFile(\'' + fileUrl.replace( /'/g, '\\\'') + '\');return false;">' ;
+
+	// Get the file icon.
+	var sIcon = oIcons.GetIcon( fileName ) ;
+	
+	// Link to Delete File
+	var dLink = '<img src="images/spacer.gif" width="16" height="16">';
+	if(fileDelete==1 && DeleteOk) dLink = '<a href="#" onclick="DeleteFile(\'' + escape(fileName) + '\');return false;"><img alt="Effacer le fichier" title="Effacer le fichier" src="images/delete.gif"  width="16" height="16" border="0"></a>';
+	
+	// Link to Rename File
+	var rLink = '<img src="images/spacer.gif" width="16" height="16">';
+	if(fileRename==1 && RenameOk) rLink = '<a href="#" onclick="RenameFile(\'' + escape(fileName) + '\');return false;"><img alt="Renommer le fichier" title="Renommer le fichier" src="images/edit.gif" width="16" height="16" border="0"></a>';
+
+	// Add the file icon cell.
+	var oCell = oRow.insertCell(-1) ;
+	oCell.width = 16 ;
+	oCell.innerHTML =  sLink + '<img alt="" src="images/icons/' + sIcon + '.gif" width="16" height="16" border="0"></a>' ;
+	// Add the file name cell.
+	oCell = oRow.insertCell(-1) ;
+	oCell.innerHTML = '&nbsp;' + sLink + fileName + '</a>' ;
+	
+	// Add the file size cell.
+	oCell = oRow.insertCell(-1) ;
+	oCell.noWrap = true ;
+	oCell.align = 'right' ;
+	oCell.innerHTML = '&nbsp;' + fileSize + ' KB ' + dLink + rLink ;
+}
+
+function OpenFolder( folderPath )
+{
+	// Load the resources list for this folder.
+	window.parent.frames['frmFolders'].LoadFolders( folderPath ) ;
+}
+
+function OpenFile( fileUrl )
+{
+	window.top.opener.SetUrl( fileUrl ) ;
+	window.top.close() ;
+	window.top.opener.focus() ;
+}
+
+function DeleteFile( fileName )
+{
+
+confirm('Fonction inactive');
+// 	if (confirm('Voulez vous vraiment effacer ' + unescape(fileName) + '?')) {
+// 		oConnector.SendCommand( 'DeleteFile', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FileName=" + fileName, DeleteFileCallBack ) ;
+// 	}
+}
+
+
+function DeleteFolder( folderName )
+{
+confirm('Fonction inactive');
+// 	if (confirm('Voulez vous vraiment effacer ' + unescape(folderName) + ' et les fichiers qu\'il contient ?')) {
+// 		oConnector.SendCommand( 'DeleteFolder', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FolderName=" + folderName, DeleteFolderCallBack ) ;
+// 	}
+}
+
+
+function RenameFile( fileName )
+{
+confirm('Fonction inactive');
+// 	var promptMsg='Veuillez entrer le nouveau nom pour ' + unescape(fileName) + ' :';
+// 	var newName=prompt(promptMsg,unescape(fileName));
+// 	
+// 	if ((newName!=null)&&(newName!='')&&(newName!=fileName)) {
+// 		oConnector.SendCommand( 'RenameFile', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FileName=" + fileName + "&NewName=" + escape( newName ), RenameFileCallBack ) ;
+// 	}
+}
+
+
+function RenameFolder( folderName )
+{
+// 	var promptMsg='Veuillez entrer le nouveau nom pour ' + unescape(folderName) + ' :';
+// 	var newName=prompt(promptMsg,unescape(folderName));
+// 	
+// 	if ((newName!=null)&&(newName!='')&&(newName!=unescape(folderName))) {
+// 		oConnector.SendCommand( 'RenameFolder', "Type=" + oConnector.ResourceType + "&CurrentFolder=" + oConnector.CurrentFolder + "&FolderName=" + folderName + "&NewName=" + escape ( newName ), RenameFolderCallBack ) ;
+// 	}
+confirm('Fonction inactive');
+}
+
+
+function LoadResources( resourceType, folderPath )
+{
+	if(resourceType=='SpipGal') 
+  {
+
+		oListManager.Clear() ;
+		document.getElementById('galerie').innerHTML = '<iframe width="100%" height="100%" style="border: none;" src="' + galerieSpip + '"></iframe>';
+	} 
+  else 
+  {
+  		if(resourceType=='Spip') 
+      {
+  			resourceType = '';
+  		}
+		oListManager.Clear() ;
+		document.getElementById('galerie').innerHTML = '';
+		oConnector.ResourceType = resourceType ;
+		oConnector.CurrentFolder = folderPath;
+		oConnector.SendCommand( 'GetFoldersAndFiles', null, GetFoldersAndFilesCallBack ) ;
+	}
+}
+
+function Refresh()
+{
+	LoadResources( oConnector.ResourceType, oConnector.CurrentFolder ) ;
+}
+
+function GetFoldersAndFilesCallBack( fckXml )
+{
+	if ( oConnector.CheckError( fckXml ) != 0 )
+		return ;
+
+	// Get the current folder path.
+	var oNode = fckXml.SelectSingleNode( 'Connector/CurrentFolder' ) ;
+	var sCurrentFolderPath	= oNode.attributes.getNamedItem('path').value ;
+	var sCurrentFolderUrl	= oNode.attributes.getNamedItem('url').value ;
+
+	// Add the Folders.	
+	var oNodes = fckXml.SelectNodes( 'Connector/Folders/Folder' ) ;
+	for ( var i = 0 ; i < oNodes.length ; i++ )
+	{
+		var sFolderName = oNodes[i].attributes.getNamedItem('name').value ;
+		var sFolderRename = parseInt(oNodes[i].attributes.getNamedItem('rename').value) ;
+		var sFolderDelete = parseInt(oNodes[i].attributes.getNamedItem('delete').value) ;
+		oListManager.AddFolder( sFolderName, sCurrentFolderPath + sFolderName + "/", sFolderRename, sFolderDelete ) ;
+	}
+	
+	// Add the Files.	
+	var oNodes = fckXml.SelectNodes( 'Connector/Files/File' ) ;
+	for ( var i = 0 ; i < oNodes.length ; i++ )
+	{
+		var sFileName = oNodes[i].attributes.getNamedItem('name').value ;
+		var sFileSize = oNodes[i].attributes.getNamedItem('size').value ;
+		var sFileRename = parseInt(oNodes[i].attributes.getNamedItem('rename').value) ;
+		var sFileDelete = parseInt(oNodes[i].attributes.getNamedItem('delete').value) ;
+		oListManager.AddFile( sFileName, sCurrentFolderUrl + sFileName, sFileSize, sFileRename, sFileDelete ) ;
+	}
+}
+
+function DeleteFileCallBack ( fckXml )
+{
+	var oNode = fckXml.SelectSingleNode( 'Connector/Error' );
+	var errNo = parseInt(oNode.attributes.getNamedItem('number').value) ;
+	switch (errNo) {
+		case 0 :
+			break;	
+		case 302 :
+			alert('Failed to delete file.');
+			break;
+		default:
+			alert('DFi: Invalid XML response from connector..');
+	}
+	Refresh();
+}
+
+function DeleteFolderCallBack ( fckXml )
+{
+	var oNode = fckXml.SelectSingleNode( 'Connector/Error' );
+	var errNo = parseInt(oNode.attributes.getNamedItem('number').value) ;
+	switch (errNo) {
+		case 0 :
+			break;	
+		case 402 :
+			alert('Failed to delete folder.');
+			break;
+		default:
+			alert('DFi: Invalid XML response from connector..');
+	}
+	Refresh();
+}
+
+function RenameFileCallBack ( fckXml )
+{
+	var oNode = fckXml.SelectSingleNode( 'Connector/Error' );
+	var errNo = parseInt(oNode.attributes.getNamedItem('number').value) ;
+	switch (errNo) {
+		case 0 :
+			break;	
+		case 502 :
+			alert('Failed to rename file.');
+			break;
+		default:
+			alert('DFi: Invalid XML response from connector..');
+	}
+	Refresh();
+}
+
+function RenameFolderCallBack ( fckXml )
+{
+	var oNode = fckXml.SelectSingleNode( 'Connector/Error' );
+	var errNo = parseInt(oNode.attributes.getNamedItem('number').value) ;
+	switch (errNo) {
+		case 0 :
+			break;	
+		case 602 :
+			alert('Failed to rename file.');
+			break;
+		default:
+			alert('DFi: Invalid XML response from connector..');
+	}
+	Refresh();
+}
+
+window.onload = function()
+{
+	oListManager.Init() ;
+	window.top.IsLoadedResourcesList = true ;
+}
+	</script>
+</head>
+<body class="FileArea" bottommargin="10" leftmargin="10" topmargin="10" rightmargin="10">
+	<table id="tableFiles" cellspacing="1" cellpadding="0" width="100%" border="0">
+	</table>
+	<div id="galerie"><div>
+</body>
+</html>
+

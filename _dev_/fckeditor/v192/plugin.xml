@@ -1,0 +1,60 @@
+<plugin>
+	<nom>FCKeditor pour Spip (1.9.2b)</nom>
+	<auteur>[Frank SAURET->http://electropol.free.fr], Val&eacute;rian &#169; 2007
+      <br />Distribu&eacute; sous licence GNU/GPL
+      <br />Logo [Everaldo Coelho->http://www.everaldo.com]
+   </auteur>
+	<version>1.703</version>
+	<etat><!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	stable</etat>
+	<lien>Aide compl&#232;te sur [Electropol->http://electropol.free.fr]</lien>
+	<icon>images/edit.png</icon>	
+		<!-- préfixe des fonctions, filtres et fichers de votre plugin :
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : fckeditor_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+    <prefix>fckeditor</prefix>	
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<!-- pipeline qui permet de modifier les pages publiques html issues du cache ou du calcul avant leur envoi au navigateur
+		il permet de modifier n'importe quoi, mais est execute a chaque fois et ne profite pas du cache
+		il est donc a reserver pour des plugins qui ne sont pas utilises en production de preference
+		-->
+		<nom>header_prive</nom> 
+		<action>header_prive</action>
+		<inclure>fckeditor_pipelines.php</inclure>
+	</pipeline>	
+	
+<description>
+{{{Edition WYSIWYG avec FCKeditor}}}
+
+<br /><br />
+<!--
+<u>Fin de l'installation et mise &agrave; jour :</u>
+-* -Vous devez avoir install&#233; et valid&#233; le plugin {{Chargeur}}
+-* -Pour finir d'installer FCKEditor vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=fckeditor&amp;dest_path=plugins/fckeditor] pour t&#233;l&#233;charger automatiquement la derni&#232;re version valid&#233;e pour ce plugin de FCKEditor. 
+-* -Pour utiliser Geshi (coloration syntaxique), vous devez cliquer [ici->../?action=charger&amp;depot=http://electropol.free.fr/spip/IMG/File/&amp;zip=geshi&amp;dest_path=plugins/fckeditor/spip_fck/plugins/coloration] pour ajouter le module correspondant.
+Attention : Ces fonctions ne marchent pas bien et ne sont l&agrave; qu'&agrave; titre exp&#233;rimental. 
+-->
+<br />{{Caract&#233;ristiques :}}<br />
+- Edition des articles, des br&#232;ves et des rubriques,
+- Propose un bouton pour passer de l'&#233;diteur FCKEditor &agrave; l'&#233;diteur SPIP,
+- G&#233;n&#232;re du HTML,
+- Possibilit&#233; de lier et d'ins&#233;rer des fichiers et images envoy&#233;s par SPIP,
+- Suppression du d&#233;coupage de texte long,
+- Coloration syntaxique du code (Geshi).
+
+<br />{{Limitations :}}<br />
+- Ne pas mixer pour un m&ecirc;me article l'&eacute;dition WYSIWYG et le code SPIP,
+- Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs, 
+- Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP,
+- Le plugin doit &#234;tre install&#233; dans la racine du r&#233;pertoire plugin de spip,
+- Le plugin n'est, &agrave; priori, pas compatible avec les plugins qui modifient les barres d'&#233;ditions (apparition de multiples boutons).
+
+<br />{{Info :}}<br />
+- De nombreux boutons peuvent &#234;tre jug&#233;s inutiles (voire dangereux) par les uns ou les autres. Pour faire vos propres barre d'outils, vous pouvez retoucher le fichier fckconfig.php (dans le dossier spip_fck). L&#224;, changez FCKConfig.ToolbarSets (BarreArticle, BarreBreve et BarreRubrique),
+ 
+</description>
+	
+</plugin>
