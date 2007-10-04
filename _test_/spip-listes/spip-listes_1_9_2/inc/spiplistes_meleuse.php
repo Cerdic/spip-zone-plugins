@@ -58,8 +58,17 @@ if ($message_pile > 0){
 
 	$pied_page = "" ;
 	$pied_page = pied_de_page_liste($id_liste) ;
-	$lang = spiplistes_langue_liste($id_liste);
 	
+	// on prepare l'email
+	$nomsite = $GLOBALS['meta']['nom_site'];
+	$urlsite = $GLOBALS['meta']['adresse_site'];
+
+	$page_texte="\n\n________________________________________________________________________"  ;
+	$page_texte.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
+	$page_texte.=$urlsite."\n";
+	$page_texte.="________________________________________________________________________"  ;
+		
+	$lang = spiplistes_langue_liste($id_liste);
 	if($lang != '') $GLOBALS['spip_lang'] = $lang ;
 	
 	// Determiner le destinataire ou la liste destinataire
@@ -93,10 +102,7 @@ if ($message_pile > 0){
 		}
 	}
 	
-	// on prepare l'email
-	$nomsite = $GLOBALS['meta']['nom_site'];
-	$urlsite = $GLOBALS['meta']['adresse_site'];
-		
+
 	// email emmeteur
 	$email_webmaster = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
 	$from = email_valide($email_liste) ? $email_liste : $email_webmaster;
@@ -108,6 +114,9 @@ if ($message_pile > 0){
 	if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
 		$objet = strtr($objet, $remplacements);
 		$texte = strtr($texte, $remplacements);
+		$pied_page = strtr($pied_page, $remplacements);
+		$pied_page_texte = strtr($pied_page_texte, $remplacements);
+		$from = strtr($from, $remplacements);
  	}
 	
 	// on prepare le debut de la version html
@@ -120,17 +129,18 @@ if ($message_pile > 0){
 	else
 		$page_ = version_texte($texte);
     
-	$page_.="\n\n________________________________________________________________________"  ;
-	$page_.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
-	$page_.=$urlsite."\n";
-	$page_.="________________________________________________________________________"  ;
 
 	if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
 		include_spip('inc/charsets');
 		$pageh = unicode2charset(charset2unicode($pageh),$GLOBALS['meta']['spiplistes_charset_envoi']);
 		$page_ = unicode2charset(charset2unicode($page_),$GLOBALS['meta']['spiplistes_charset_envoi']);
 		$pied_page = unicode2charset(charset2unicode($pied_page),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		$pied_page_texte = unicode2charset(charset2unicode($pied_page_texte),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		$from = unicode2charset(charset2unicode($from),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		$objet = unicode2charset(charset2unicode($objet),$GLOBALS['meta']['spiplistes_charset_envoi']);
 	}
+
+	$page_.= $pied_page_texte;
 	
 	$email_a_envoyer['texte'] = new phpMail('', $objet, '',$page_, $GLOBALS['meta']['spiplistes_charset_envoi']);
 	$email_a_envoyer['texte']->From = $from ; 
