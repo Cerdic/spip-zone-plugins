@@ -20,12 +20,13 @@ jQuery(document).ready(function() {
 			if(this.firstChild.className=="spip_surligne") {
 				this.className = "gl_mot spip_surligne";
 				this.innerHTML = this.firstChild.innerHTML;
+				//alert(this.firstChild.className);
 			}
 			GlossMouse(e);
 			gloss_el.style.top  = gloss_posy.toString()+"px";
 			gloss_el.style.left = gloss_posx.toString()+"px";
-			gloss_dt.innerHTML = e.currentTarget.nextSibling.title; // titre
-			gloss_dd.innerHTML = e.currentTarget.nextSibling.nextSibling.title; // definition
+			gloss_dt.innerHTML = this.nextSibling.title; // titre
+			gloss_dd.innerHTML = this.nextSibling.nextSibling.title; // definition
 			gloss_el.style.fontSize = $(this).css('font-size');
 			gloss_el.style.display    = 'block';
 			gloss_el.style.visibility = 'visible';
