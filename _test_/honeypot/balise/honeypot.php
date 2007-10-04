@@ -14,7 +14,7 @@ function balise_HONEYPOT_stat($args, $filtres) {
 function balise_HONEYPOT_dyn() {
 	return array('formulaires/honeypot', 7*24*3600, 
 		array(
-			  'hp' => lire_config('honeypot/hpfile')
+			  'hp' => preg_replace('/\.php$/','',lire_config('honeypot/hpfile'));
 		));
 }
 

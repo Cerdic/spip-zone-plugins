@@ -50,7 +50,7 @@ if((_DIR_RACINE =='') &&
 		include_spip('inc/headers');
 		//log pour l'instant, TODO faire mieux
 		spip_log("envoyé vers le pot de miel ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
-		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'.lire_config('honeypot/hpfile').'.php');
+		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'.preg_replace('/\.php/$','',lire_config('honeypot/hpfile')).'.php');
 	  } else if(count($_POST) &&
 				($config['type'.$info['type'].'_filter'] == 'cacherforum' || $config['type'.$info['type'].'_filter'] == 'cachertout' )) {
 		// champs de formulaires a visiter (depuis couteau suisse)
