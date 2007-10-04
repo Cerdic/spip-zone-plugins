@@ -9,9 +9,24 @@
 $(document).ready(JT_init);
 
 function JT_init(){
-	       $("a.jTip")
-		   .hover(function(){JT_show(this.href,this.id,this.name)},function(){$('#JT').remove()})
-           .click(function(){return false});	   
+	var timer = null;
+	var current_id = null;
+   $("a.jTip")
+ .hover(function(){
+	 if (timer) {clearTimeout(timer);timer=null;}
+	 if (current_id!=this.id){$('#JT').remove();current_id=null;}
+	 current_id = this.id;
+ 	 JT_show(this.href,this.id,this.name);
+	 $('#JT').hover(
+	 	function(){
+	 		if (timer) {clearTimeout(timer);timer=null;}
+	 	}
+	 	,function(){
+	 		timer=setTimeout(function(){$('#JT').remove();current_id=null;},300);
+	 	});
+ }
+ ,function(){timer=setTimeout(function(){$('#JT').remove();current_id=null;},300)})
+     .click(function(){return false});
 }
 
 function JT_show(url,linkId,title){
