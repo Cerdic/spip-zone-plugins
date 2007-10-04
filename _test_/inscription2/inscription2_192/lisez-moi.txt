@@ -1,0 +1,50 @@
+fork de inc/utils pour editer son profil avec les crayons en 192
+
+// http://doc.spip.org/@id_table_objet
+/*
+function id_table_objet($type) {
+	if ($type == 'site' OR $type == 'syndic')
+		return 'id_syndic';
+	else if ($type == 'forum')
+		return 'id_forum';
+	else if ($type=='doc' OR $type=='img' OR $type=='emb') # pour les modeles
+		return 'id_document';
+	else
+		return 'id_'.$type;
+}
+*/
+// fork pour 192 avec le code de 193 necessaire pour la primary key chelou de spip_auteurs_elargis
+// http://doc.spip.org/@id_table_objet
+function id_table_objet($type) {
+	$type = preg_replace(',^spip_|s$,', '', $type);
+			spip_log("wesh".$t,"tamere");
+
+	if ($type == 'site' OR $type == 'syndic')
+		return 'id_syndic';
+	else if ($type == 'forum')
+		return 'id_forum';
+	else if ($type=='doc' OR $type=='img' OR $type=='emb') # pour les modeles
+		return 'id_document';
+	else if ($type == 'petition')
+		return 'id_article';
+	else if ($type == 'type')
+		return 'extension';
+	else {
+		$t = table_objet_sql($type);
+		spip_log("wesh".$t,"tamere");
+		global $tables_principales;
+		if (isset($tables_principales[$t]['key']["PRIMARY KEY"]))
+			return $tables_principales[$t]['key']["PRIMARY KEY"];
+	}
+	return 'id_'.$type;
+}
+// http://doc.spip.org/@table_objet_sql
+function table_objet_sql($type) {
+return 'spip_' . table_objet($type);
+}
+
+
+TODO
+
+reparer la sauvergarde 192 des auteurs elargis
+test / abo

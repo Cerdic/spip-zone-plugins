@@ -87,6 +87,17 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 }
 
 
+function revision_auteurs_elargi($id, $c=false) {
+
+	return modifier_contenu('auteurs_elargi', $id,
+		array(
+			'champs' => array('nom_famille', 'prenom', 'adresse','ville','code_postal'),
+			'nonvide' => array('nom_email' => _T('info_sans_titre'))
+		),
+		$c);
+}
+
+
 //email envoye lors de l'inscription
 
 function envoyer_inscription2($id_auteur,$mode="inscription") {
