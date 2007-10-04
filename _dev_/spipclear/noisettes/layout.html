@@ -14,11 +14,11 @@
 		[(#CONFIG{spipclear/choix_theme}|?{' ',''})
 			[(#SET{chemin_theme, [themes/(#CONFIG{spipclear/nom_theme})/]})]
 		]
-		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]styles/layout.css})" media="screen" />]
+		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]layout.css})" media="screen" />]
 		[(#CONFIG{spipclear/navigation_gauche}|=={1}|?{
-			[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]styles/layout-gauche.css})" media="screen" />]
+			[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]layout-gauche.css})" media="screen" />]
 		})]
-		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]styles/style.css})" media="screen" />]
+		[<link rel="stylesheet" type="text/css" href="(#CHEMIN{[(#GET{chemin_theme})]style.css})" media="screen" />]
 		[<link rel="shortcut icon" href="(#CHEMIN{[(#GET{chemin_theme})]images/favicon.ico})" />]
 		#INSERT_HEAD
 	</head>
