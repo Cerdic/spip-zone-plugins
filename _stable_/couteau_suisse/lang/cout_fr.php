@@ -257,9 +257,9 @@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation 
 - Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
 - Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
 [[Cr&eacute;ation syst&eacute;matique du sommaire :->%auto_sommaire%]]
-Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'article automatiquement. Mais vous avez la possibilt&eacute; de placer le sommaire ailleurs qu'en t&ecirc;te de votre article et met &agrave; votre disposition une balise #CS_SOMMAIRE que vous pouvez activer ici :
+Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'article automatiquement. Mais vous avez la possibilt&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
 [[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]
-Attention, si vous n'activez pas la balise #CS_SOMMAIRE, aucun sommaire automatique ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
+Attention, aucun sommaire automatique (balise #CS_SOMMAIRE inactive) ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.",
 	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
 	'sommaire_titre' => 'Sommaire',
