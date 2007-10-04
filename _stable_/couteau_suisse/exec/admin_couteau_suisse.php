@@ -158,7 +158,7 @@ function outilcheck(ischecked, index) {
 
  if (Outils[index][1]>0) {
   var chaine=document.getElementById('tweak'+index+html).innerHTML;
-  if(html=='-input') chaine=chaine.replace(/HIDDENTWEAKVAR__/g,'');
+  if(html=='-input') chaine=chaine.replace(/HIDDENCSVAR__/g,'');
   document.getElementById('tweak'+index+'-visible').innerHTML = chaine;
  }
 }

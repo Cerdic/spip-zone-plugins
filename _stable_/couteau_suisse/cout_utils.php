@@ -135,7 +135,7 @@ function set_cs_metas_pipelines_fichier($infos_pipelines, $type) {
 cs_log("set_cs_metas_pipelines_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "mes_$type.php";
 cs_log(" -- fichier_dest = $fichier_dest");
-	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n++\$GLOBALS['tweak_$type'];\n$code?".'>');
+	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n++\$GLOBALS['cs_$type'];\n$code?".'>');
 }
 
 // installation de $cs_metas_pipelines

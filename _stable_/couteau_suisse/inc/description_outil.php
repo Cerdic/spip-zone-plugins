@@ -34,7 +34,7 @@ cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 			$br = (($nb>0) && ( ++$i % $nb == 0))?'<br />':' ';
 			$ok_input .=
 				"<label><input id=\"label_{$variable}_$code\" type=\"radio\""
-				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"HIDDENTWEAKVAR__$variable\"/>"
+				.($valeur==$code?' checked="checked"':'')." value=\"$code\" name=\"HIDDENCSVAR__$variable\"/>"
 				.($valeur==$code?'<b>':'')._T($traduc).($valeur==$code?'</b>':'')
 				."</label>$br";
 		}
@@ -50,9 +50,9 @@ cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 		$ok_input = $label .
 			( $lignes < 2
 				// <html></html> empechera SPIP de modifier le contenu des <input> ou <textarea>
-				?"<html><input name='HIDDENTWEAKVAR__$variable' value=\""
+				?"<html><input name='HIDDENCSVAR__$variable' value=\""
 					. htmlspecialchars($valeur) . "\" type='text' size='$len' $width/></html>"
-				:"<html><textarea rows='$lignes' name='HIDDENTWEAKVAR__$variable' $width/>"
+				:"<html><textarea rows='$lignes' name='HIDDENCSVAR__$variable' $width/>"
 					. htmlspecialchars($valeur) . '</textarea></html>'
 			) . _VAR_OUTIL;
 		$ok_valeur = $label.(strlen($valeur)?echapper_tags($valeur):'&nbsp;'._T('cout:variable_vide'));
@@ -103,8 +103,8 @@ cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 		$ok_input = $ok_valeur . '<div style="margin-top: 0; text-align: right;">'._T('cout:validez_page').' <span class="fondo" style="cursor:pointer; padding:0.2em;" onclick="submit_general('.$index.')">'._T('bouton_valider').'</span></div>';
 	// nettoyage...
 	$ok_input = str_replace(_VAR_OUTIL, '', $ok_input);
-	// HIDDENTWEAKVAR__ pour eviter d'avoir deux inputs du meme nom...
-	$ok_visible .= $actif?str_replace("HIDDENTWEAKVAR__", "", $ok_input):$ok_valeur;
+	// HIDDENCSVAR__ pour eviter d'avoir deux inputs du meme nom...
+	$ok_visible .= $actif?str_replace("HIDDENCSVAR__", "", $ok_input):$ok_valeur;
 	$variables = urlencode(serialize($variables));
 	$res = "\n<div id='tweak$index-visible' >$ok_visible</div>";
 	if($c) {
