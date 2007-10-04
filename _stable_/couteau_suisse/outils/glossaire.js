@@ -7,7 +7,7 @@ var gloss_dd = null;
 
 jQuery(document).ready(function() {
   if($('span.gl_js').length) {
-    $('body').append('<div id="glossOverDiv" style="position:absolute; display:none; visibility: hidden;" class="cs_glossaire"><span class="gl_dl"><span class="gl_dt">TITRE</span><span class="gl_dd">Definition</span></span></div>');
+    $('body').append('<div id="glossOverDiv" style="position:absolute; display:none; visibility: hidden;"><span class="gl_dl"><span class="gl_dt">TITRE</span><span class="gl_dd">Definition</span></span></div>');
 	$('span.gl_mot').bind('mouseout',
 		function(e) {
 			gloss_el.style.display    = 'none';

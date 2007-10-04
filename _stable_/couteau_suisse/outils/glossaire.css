@@ -1,10 +1,10 @@
 /*
  a.cs_glossaire : concerne le glossaire en mode CSS 
- div.cs_glossaire : concerne le glossaire en mode JS
+ #glossOverDiv : concerne le glossaire en mode JS
 */
 
 /* Empecher la definition de s'afficher comme les autres liens, vous pouvez donner les attributs standards de votre texte */
-a.cs_glossaire, a.cs_glossaire:hover, div.cs_glossaire {
+a.cs_glossaire, a.cs_glossaire:hover, #glossOverDiv {
 	color: #000000;
 	text-decoration: none;
 }
@@ -27,13 +27,13 @@ a.cs_glossaire span.gl_dd {
 	font-weight:normal;
 }
 
-a.cs_glossaire:hover span.gl_dt, div.cs_glossaire span.gl_dt,
-a.cs_glossaire:hover span.gl_dd, div.cs_glossaire span.gl_dd {
+a.cs_glossaire:hover span.gl_dt, #glossOverDiv span.gl_dt,
+a.cs_glossaire:hover span.gl_dd, #glossOverDiv span.gl_dd {
 	display: block;
 	visibility:visible;
 }
 
-a.cs_glossaire:hover span.gl_dl, div.cs_glossaire span.gl_dl {
+a.cs_glossaire:hover span.gl_dl, #glossOverDiv span.gl_dl {
 	display: inline;
 	visibility: visible;
 	/* Placement de la definition dans la page. */
@@ -47,13 +47,13 @@ a.cs_glossaire:hover span.gl_dl, div.cs_glossaire span.gl_dl {
 	background-color: #FFFFFF;
 	font-size: 80%;
 }
-a.cs_glossaire:hover span.gl_dt, div.cs_glossaire span.gl_dt {
+a.cs_glossaire:hover span.gl_dt, #glossOverDiv span.gl_dt {
 	padding: 3px;
 	background-color: #ffffbf;
 	font-weight: bold;
 	text-align: right;
 }
-a.cs_glossaire:hover span.gl_dd, div.cs_glossaire span.gl_dd {
+a.cs_glossaire:hover span.gl_dd, #glossOverDiv span.gl_dd {
 	padding: 3px;
 	text-align: left;
 	line-height: 1.3em;
@@ -63,9 +63,4 @@ a.cs_glossaire span.gl_mot {
 	border-bottom: 1px dotted gray;
 	font-size:inherit;
 /* cursor: help; */
-}
-
-/* exception sur le js */	
-div.cs_glossaire span.gl_dl {
-	margin-left: -60px;
 }
