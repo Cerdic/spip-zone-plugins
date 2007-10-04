@@ -308,4 +308,49 @@
 	function forms_ajoute_styles($texte){
 		return pipeline('forms_ajoute_styles',$texte);
 	}
+    /*
++--------------------------------------------+
+| derebloc v. 0.3 - 17/04/07
++--------------------------------------------+
+| plugin spip 1.9.2
++--------------------------------------------+
+| H. AROUX . Scoty . koakidi.com
+| Script certifié KOAK2.0 strict, mais si !
++--------------------------------------------+
+| Definition des 3 balises pour block depliant.
+| pipeline .. mes_fonctions
++--------------------------------------------+
+| Superyms (Mehdi Cherifi) Net Studio
+| Ajouter block depliant pour Forms & Tables
++--------------------------------------------+
+*/
+
+
+include_spip('inc/minipres');
+include_spip('inc/layer');
+
+function calculer_id_block($a='') {
+	static $id_block = 0;
+	$id_block++;
+	if($a) { $id_block = $id_block-1; }
+	return $id_block;
+}
+
+function balise_BOUTON_BLOCK($p) {
+	$p->code = "bouton_block_invisible('bout'.calculer_id_block())";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+function balise_DEBUT_BLOCK($p) {
+	$p->code = "debut_block_invisible('bout'.calculer_id_block('1'))";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+function balise_FIN_BLOCK($p) {
+	$p->code = "fin_block()";
+	$p->interdire_scripts = false;
+	return $p;
+}
 ?>

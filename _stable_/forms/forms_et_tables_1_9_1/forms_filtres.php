@@ -22,9 +22,43 @@
 				$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnees_tous.css')."' type='text/css' media='all' />\n";
 				$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
 				$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
+/*
++--------------------------------------------+
+| derebloc v. 0.3 - 17/04/07
++--------------------------------------------+
+| plugin spip 1.9.2
++--------------------------------------------+
+| H. AROUX . Scoty . koakidi.com
+| Script certifié KOAK2.0 strict, mais si !
++--------------------------------------------+
+| appel layer.js
+| insere dans le <head> des squelettes via balise spip #INSERT_HEAD
++--------------------------------------------+
+| Superyms (Mehdi Cherifi) Net Studio
+| Ajouter block depliant pour Forms & Tables
++--------------------------------------------+
+*/
+	            $flux .= "\n".'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'layer.js"></script>'."\n";
 			}
 			else 
 				$flux .= "<link rel='stylesheet' href='".generer_url_public('forms_styles.css')."' type='text/css' media='all' />\n";
+/*
++--------------------------------------------+
+| derebloc v. 0.3 - 17/04/07
++--------------------------------------------+
+| plugin spip 1.9.2
++--------------------------------------------+
+| H. AROUX . Scoty . koakidi.com
+| Script certifié KOAK2.0 strict, mais si !
++--------------------------------------------+
+| appel layer.js
+| insere dans le <head> des squelettes via balise spip #INSERT_HEAD
++--------------------------------------------+
+| Superyms (Mehdi Cherifi) Net Studio
+| Ajouter block depliant pour Forms & Tables
++--------------------------------------------+
+*/
+                $flux .= "\n".'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'layer.js"></script>'."\n";
 		}
 		return $flux;
 	}
