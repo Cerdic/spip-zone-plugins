@@ -110,6 +110,13 @@ if ($message_pile > 0){
 	$is_from_valide = email_valide($from);         
           
 	$objet= filtrer_entites($titre);
+	if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+		include_spip('inc/charsets');
+		$pied_page = unicode2charset(charset2unicode($pied_page),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		$pied_page_texte = unicode2charset(charset2unicode($pied_page_texte),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		$from = unicode2charset(charset2unicode($from),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		$objet = unicode2charset(charset2unicode($objet),$GLOBALS['meta']['spiplistes_charset_envoi']);
+	}
 	$remplacements = array("&#8217;"=>"'","&#8220;"=>'"',"&#8221;"=>'"');
 	if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
 		$objet = strtr($objet, $remplacements);
@@ -134,10 +141,6 @@ if ($message_pile > 0){
 		include_spip('inc/charsets');
 		$pageh = unicode2charset(charset2unicode($pageh),$GLOBALS['meta']['spiplistes_charset_envoi']);
 		$page_ = unicode2charset(charset2unicode($page_),$GLOBALS['meta']['spiplistes_charset_envoi']);
-		$pied_page = unicode2charset(charset2unicode($pied_page),$GLOBALS['meta']['spiplistes_charset_envoi']);
-		$pied_page_texte = unicode2charset(charset2unicode($pied_page_texte),$GLOBALS['meta']['spiplistes_charset_envoi']);
-		$from = unicode2charset(charset2unicode($from),$GLOBALS['meta']['spiplistes_charset_envoi']);
-		$objet = unicode2charset(charset2unicode($objet),$GLOBALS['meta']['spiplistes_charset_envoi']);
 	}
 
 	$page_.= $pied_page_texte;
