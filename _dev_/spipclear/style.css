@@ -118,7 +118,7 @@ a:hover{
 /* La page
 -------------------------------------------------------- */
 #page{
-	background: #fff url(../images/page.png) repeat-y center top;
+	background: #fff url(images/page.png) repeat-y center top;
 	color: inherit;
 }
  
@@ -127,7 +127,7 @@ a:hover{
 #top{
 	height: 120px;
 	/*padding-top: 20px;*/
-	background: #FFF url(../images/top.png) no-repeat left top;
+	background: #FFF url(images/top.png) no-repeat left top;
 }
 
 #top h1{
@@ -167,7 +167,7 @@ a:hover{
 	padding-left: 20px;
 	margin-left: -25px;
 	color: #888;
-	background: transparent url(../images/day-date.png) no-repeat left center;
+	background: transparent url(images/day-date.png) no-repeat left center;
 	font-style: italic;
 }
 
@@ -252,7 +252,7 @@ a:hover{
 
 #q{
 	padding-left: 18px;
-	background: #fff url(../images/q.png) no-repeat 4px center;
+	background: #fff url(images/q.png) no-repeat 4px center;
 }
 
 #sidebar div#calendar{
