@@ -16,11 +16,16 @@ jQuery(document).ready(function() {
 	);
 	$('span.gl_mot').bind('mouseover', 
 		function(e) {
+			// cas du surligneur (SPIP 1.93)
+			if(this.firstChild.className=="spip_surligne") {
+				this.className = "gl_mot spip_surligne";
+				this.innerHTML = this.firstChild.innerHTML;
+			}
 			GlossMouse(e);
 			gloss_el.style.top  = gloss_posy.toString()+"px";
 			gloss_el.style.left = gloss_posx.toString()+"px";
-			gloss_dt.innerHTML = e.target.nextSibling.title; // titre
-			gloss_dd.innerHTML = e.target.nextSibling.nextSibling.title; // definition
+			gloss_dt.innerHTML = e.currentTarget.nextSibling.title; // titre
+			gloss_dd.innerHTML = e.currentTarget.nextSibling.nextSibling.title; // definition
 			gloss_el.style.fontSize = $(this).css('font-size');
 			gloss_el.style.display    = 'block';
 			gloss_el.style.visibility = 'visible';

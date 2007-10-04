@@ -568,7 +568,7 @@ add_variable( array(
 	'nom' => 'glossaire_js',
 	'radio' => array(0 => 'cout:glossaire_css', 1 => 'cout:glossaire_js'),
 	'format' => 'nombre',
-	'defaut' => 0,
+	'defaut' => 1,
 	'code:%s' => "define('_GLOSSAIRE_JS', %s);",
 ));
 add_outil( array(
