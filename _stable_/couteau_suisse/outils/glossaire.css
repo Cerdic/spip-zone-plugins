@@ -64,3 +64,8 @@ a.cs_glossaire span.gl_mot {
 	font-size:inherit;
 /* cursor: help; */
 }
+
+/* exception sur le JS */	
+#glossOverDiv span.gl_dl {
+	margin-left: -60px;
+}
