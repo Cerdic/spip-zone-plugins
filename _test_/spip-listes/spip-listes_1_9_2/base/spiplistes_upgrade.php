@@ -43,6 +43,103 @@
 		ecrire_meta('abonnement_config', 'simple');
 		ecrire_metas();
 		}
+		
+	function spip_listes_upgrade_from_18(){
+		$trans_messages_couriers = array();
+		// regarder si des newsletter existent
+		$res = spip_query("SELECT * FROM spip_messages WHERE type='nl'");
+		if(@spip_num_rows($res) > 0) {
+			echo "[spip_courriers] "._T('spiplistes:mettre_a_jour');
+			while ($row = spip_fetch_array($res)){
+				$result = spip_query("INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur) VALUES ("
+				._q($row['titre']).","
+				._q($row['texte']).","
+				._q($row['date_heure']).","
+				._q($row['statut']).","
+				._q($row['type']).","
+				._q($row['id_auteur']).")");
+				$trans_messages_couriers[$row['id_message']]= spip_insert_id();
+			}
+			//spip_query("DELETE FROM spip_messages WHERE type='nl'");
+		}
+
+		//Migrer des listes anciennes listes
+		$resultat_aff = spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'");
+		if(@spip_num_rows($resultat_aff) > 0){
+			echo "[spip_listes] "._T('spiplistes:mettre_a_jour');
+			while ($row = spip_fetch_array($resultat_aff)) {
+				$id_article=$row['id_article'];
+				$titre_liste=corriger_caracteres($row['titre']);
+				$texte_liste = corriger_caracteres($row['texte']);
+				$date_liste = $row['date'];
+				$langue=$row["lang"];
+				$statut = $row['statut'];
+				$extra=unserialize($row['extra']);
+				$patron_liste=$extra["squelette"];
+				$periode_liste=$extra["periode"];
+				$maj_liste=$extra["majnouv"];
+				$email_envoi=$extra["email_envoi"];
+				$message_auto=$extra["auto"];
+				$options="<p>".$titre_liste."<br/>";
+				echo $options."</p>";
+				
+				// ajout du pied de page
+				include_spip('public/assembler');
+				$contexte_pied = array('lang'=>$langue);
+				$pied = recuperer_fond('modeles/piedmail', $contexte_pied);
+				
+				spip_query("INSERT INTO spip_listes (titre, texte, statut, date, lang, pied_page) VALUES ("
+					._q($titre_liste).","._q($texte_liste).","._q($statut).","._q($date_liste).","._q($langue).","._q($pied).")" );
+				$id_liste=spip_insert_id();
+				if($message_auto=="oui")
+					spip_query("UPDATE spip_listes SET patron="._q($patron_liste).", periode="._q($periode_liste)
+					  . ", maj=FROM_UNIXTIME("._q($maj_liste)."), email_envoi="._q($email_envoi)
+					  . ", message_auto="._q($message_auto)." WHERE id_liste="._q($id_liste));
+				
+				//Auteur de la liste (moderateur)
+				spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste ="._q($id_liste));
+				spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
+				
+				//recuperer les abonnes (peut etre plus tard ?)
+				$abos=spip_query("SELECT id_auteur, id_article FROM spip_auteurs_articles WHERE id_article="._q($id_article));
+				while($abonnes=spip_fetch_array($abos)){
+					$abo=$abonnes["id_auteur"];
+					spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($abo).","._q($id_liste).")");
+				}
+				
+				//effacer les anciens articles/abo
+				#spip_query("DELETE FROM spip_articles WHERE id_article ="._q($id_article));
+				#spip_query("DELETE FROM spip_auteurs_articles WHERE id_article ="._q($id_article));
+	
+				//manque un traitement pour récuperer les courriers
+			}
+		}
+		
+		//evaluer les extras de tous les auteurs et les virer
+		$result = spip_query('SELECT extra, id_auteur FROM spip_auteurs');
+		while ($row = spip_fetch_array($result)) {
+			$abo = unserialize($row['extra']);
+			if (is_array($abo)
+			  && isset($abo['abo'])
+			  && ($format = $abo['abo'])
+			  && ($format=="texte" OR $format=="html")){
+					spip_query("INSERT INTO spip_auteurs_elargis (id_auteur, `spip_listes_format`) VALUES ("._q($row['id_auteur']).","._q($format).") ");
+			  }
+		}
+		
+		echo _T('spiplistes:regulariser');
+
+		$result = spip_query("SELECT a.`email`, a.id_auteur FROM `spip_auteurs` a, `spip_auteurs_listes` l, `spip_auteurs_elargis` f
+			WHERE a.id_auteur=f.id_auteur 
+			AND f.spip_listes_format = 'non'
+			AND a.id_auteur = l.id_auteur
+			AND a.statut!='5poubelle' 
+			GROUP BY email");
+		
+		while($res = spip_fetch_array($result)){
+			spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur =".$res['id_auteur']) ;			
+		} 
+	}
 	
 	function spiplistes_verifier_base(){
 		
@@ -80,87 +177,7 @@
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
-				
-				//Migrer des listes anciennes // a deplacer dans une en fonction
-				$resultat_aff = spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'");
-				if(@spip_num_rows($resultat_aff) > 0){
-					echo _T('spiplistes:mettre_a_jour');
-					while ($row = spip_fetch_array($resultat_aff)) {
-						$id_article=$row['id_article'];
-						$titre_liste=corriger_caracteres($row['titre']);
-						$texte_liste = corriger_caracteres($row['texte']);
-						$date_liste = $row['date'];
-						$langue=$row["lang"];
-						$statut = $row['statut'];
-						$extra=unserialize($row['extra']);
-						$patron_liste=$extra["squelette"];
-						$periode_liste=$extra["periode"];
-						$maj_liste=$extra["majnouv"];
-						$email_envoi=$extra["email_envoi"];
-						$message_auto=$extra["auto"];
-						$options="<p>".$titre_liste."<br/>";
-						echo $options."</p>";
-						
-						// ajout du pied de page
-						include_spip('public/assembler');
-						$contexte_pied = array('lang'=>$langue);
-						$pied = recuperer_fond('modeles/piedmail', $contexte_pied);
-						
-						spip_query("INSERT INTO spip_listes (titre, texte, statut, date, lang, pied_page) VALUES ("
-							._q($titre_liste).","._q($texte_liste).","._q($statut).","._q($date_liste).","._q($langue).","._q($pied).")" );
-						$id_liste=spip_insert_id();
-						if($message_auto=="oui")
-							spip_query("UPDATE spip_listes SET patron="._q($patron_liste).", periode="._q($periode_liste)
-							  . ", maj=FROM_UNIXTIME("._q($maj_liste)."), email_envoi="._q($email_envoi)
-							  . ", message_auto="._q($message_auto)." WHERE id_liste="._q($id_liste));
-						
-						//Auteur de la liste (moderateur)
-						spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste ="._q($id_liste));
-						spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
-						
-						//recuperer les abonnes (peut etre plus tard ?)
-						$abos=spip_query("SELECT id_auteur, id_article FROM spip_auteurs_articles WHERE id_article="._q($id_article));
-						while($abonnes=spip_fetch_array($abos)){
-							$abo=$abonnes["id_auteur"];
-							spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($abo).","._q($id_liste).")");
-						}
-						
-						//effacer les anciens articles/abo
-						spip_query("DELETE FROM spip_articles WHERE id_article ="._q($id_article));
-						spip_query("DELETE FROM spip_auteurs_articles WHERE id_article ="._q($id_article));
-			
-						//manque un traitement pour récuperer les courriers
-					}
-				//evaluer les extras de tous les auteurs et les virer
-				$result = spip_query(
-				  'SELECT extra, spip_auteurs.id_auteur FROM spip_auteurs');
-				while ($row = spip_fetch_array($result, SPIP_NUM)) {
-					$abo = unserialize($row[0]);
-					$format = $abo['abo'] ;
-				if($format=="texte" OR $format=="html")
-				spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-				VALUES ("._q($row[1]).","._q($format).") ");
-				else
-				spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`, `spip_listes_format`) 
-				VALUES ("._q($row[1]).","._q('non').") ");
-				}
-				
-				echo _T('spiplistes:regulariser');
-
-				$result = spip_query("SELECT a.`email`, a.id_auteur FROM `spip_auteurs` a, `spip_auteurs_listes` l, `spip_auteurs_elargis` f
-				WHERE a.id_auteur=f.id_auteur 
-				AND f.spip_listes_format = 'non'
-				AND a.id_auteur = l.id_auteur
-				AND a.statut!='5poubelle' 
-				GROUP BY email
-				");
-				
-				while($res = spip_fetch_array($result)){
-				spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur =".$res['id_auteur']) ;			
-				} 
-				
-				
-				}
+				spip_listes_upgrade_from_18(); // faire les eventuels imports depuis la contrib 1.8
 				ecrire_meta('spiplistes_version',$current_version=$version_base,'non');
 			}
 			
