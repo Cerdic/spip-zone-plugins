@@ -10,7 +10,7 @@
 <a rel="diapo#ID_ARTICLE" class="diapo_icocenter[ (#ENV{align}|choixsiegal{'center','selected',''})]" href="#pagination#ID_ARTICLE" title="<:diapo:txt_icocenter:>"><:diapo:ico_center:></a>
 </span>
 [(#ANCRE_PAGINATION)]
-[(#PAGINATION)]
+[<div class="diapo_pagination">(#PAGINATION)</div>]
 </div>
 <div class="diapo_vignettes[ diapo_vignettes_(#ENV{align})]">
 <BOUCLE_docs(DOCUMENTS){id_article}{extension IN png,jpg,gif}{pagination 8 #ID_ARTICLE}{par num titre}>
