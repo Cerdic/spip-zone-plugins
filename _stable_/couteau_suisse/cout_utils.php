@@ -65,13 +65,6 @@ function cs_compatibilite_ascendante() {
 	cs_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
 	cs_suppr_metas_var('target_blank');
 	cs_suppr_metas_var('');
-	/*
-	// compatibilite avec l'ancien plugin Tweak SPIP
-	if (@file_exists($f=sous_repertoire(_DIR_TMP, "tweak-spip"))) {
-		include_spip('inc/getdocument');
-		effacer_repertoire_temporaire($f);
-	}
-	*/
 }
 
 /*************/
@@ -133,7 +126,7 @@ function set_cs_metas_pipelines_fichier($infos_pipelines, $type) {
 	// ... en avant le code !
 	$cs_metas_pipelines[$type] = $code;
 cs_log("set_cs_metas_pipelines_fichier($type) : strlen=".strlen($code));
-	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "mes_$type.php";
+	$fichier_dest = _DIR_CS_TMP . "mes_$type.php";
 cs_log(" -- fichier_dest = $fichier_dest");
 	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n++\$GLOBALS['cs_$type'];\n$code?".'>');
 }
@@ -148,7 +141,7 @@ function set_cs_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
 	}
 	$cs_metas_pipelines[$pipeline] = $code;
 cs_log("set_cs_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
-	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "$pipeline.php";
+	$fichier_dest = _DIR_CS_TMP . "$pipeline.php";
 cs_log(" -- fichier_dest = $fichier_dest");
 	ecrire_fichier($fichier_dest, '<'."?php\n// Code de contrôle pour le plugin 'Couteau Suisse'\n$code?".'>');
 }
@@ -232,7 +225,7 @@ function cs_sauve_configuration() {
 	$sauve = "// Outils actifs\n\$outils = array('\n" . chr(9) . join("',\n".chr(9)."'", $actifs) . "'\n);\n";
 	$sauve .= "\n// Variables actives\n\$variables = array('\n" . chr(9)  . join("',\n".chr(9)."'", $variables) . "'\n);\n";
 	$sauve .= "\n// Valeurs validees en metas\n\$valeurs = array(" . join(', ', $metas) . "\n);\n";
-	$fichier_dest = sous_repertoire(_DIR_TMP, "couteau-suisse") . "config.php";
+	$fichier_dest = _DIR_CS_TMP . "config.php";
 	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
 }
 
@@ -320,10 +313,10 @@ function cs_initialise_includes() {
 	}
 	$infos_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
-	if (@file_exists($f=sous_repertoire(_DIR_TMP, "couteau-suisse"))) {
+	if (@file_exists(_DIR_CS_TMP)) {
 		include_spip('inc/getdocument');
-		effacer_repertoire_temporaire($f);
-	} else spip_log("Erreur - cs_initialise_includes() : $f introuvable !");
+		effacer_repertoire_temporaire(_DIR_CS_TMP);
+	} else spip_log('Erreur - cs_initialise_includes() : '._DIR_CS_TMP.' introuvable !');
 	// installation de $cs_metas_pipelines
 	set_cs_metas_pipelines_fichier($infos_pipelines, 'options');
 	set_cs_metas_pipelines_fichier($infos_pipelines, 'fonctions');

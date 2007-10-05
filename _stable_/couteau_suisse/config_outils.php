@@ -259,7 +259,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'log_couteau_suisse',
-	'code:options' => "\$GLOBALS['log_couteau_suisse']=true;",
+	'code:options' => "define('_LOG_CS','oui');",
 ));
 
 add_outil( array(

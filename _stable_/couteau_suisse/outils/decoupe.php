@@ -16,7 +16,7 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // et calcule a l'avance les images trouvees dans le repertoire img/decoupe/
 function decoupe_installe() {
-cs_log('decoupe_installe()');
+//cs_log('decoupe_installe()');
 	$path = dirname(find_in_path('img/decoupe/test'));
 	$images = array();
 	$dossier=opendir($path);

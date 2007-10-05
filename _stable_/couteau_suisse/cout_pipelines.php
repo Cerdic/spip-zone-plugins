@@ -15,6 +15,8 @@ if ($GLOBALS['spip_version_code']<1.92) {
  * INSTALL *
  ***********/
 
+cs_log("Chargement de cout_pipelines.php...");
+
 function couteau_suisse_install($action){
 cs_log("couteau_suisse_install($action)");
 	include_spip('inc/meta');
@@ -36,9 +38,9 @@ cs_log("couteau_suisse_install($action)");
 				if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 			}
 			ecrire_metas();
-			if (@file_exists($f=sous_repertoire(_DIR_TMP, "couteau-suisse"))) {
+			if (@file_exists(_DIR_CS_TMP)) {
 				include_spip('inc/getdocument');
-				effacer_repertoire_temporaire($f);
+				effacer_repertoire_temporaire(_DIR_CS_TMP);
 			}
 			break;
 	}
@@ -138,5 +140,9 @@ function couteau_suisse_post_typo($flux){
 		eval($cs_metas_pipelines['post_typo']);
 	return $flux;
 }
-
+/*
+cs_log("appel de cout_pipelines : strlen=" . strlen($cs_metas_pipelines['pipelines']));
+if (!$GLOBALS['cs_pipelines']) include_once(_DIR_CS_TMP.'pipelines.php');
+cs_log(' -- appel cout_pipelines achevé... cs_pipelines = ' . intval($GLOBALS['cs_pipelines']));
+*/
 ?>

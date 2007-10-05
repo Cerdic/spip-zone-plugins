@@ -1,4 +1,6 @@
 <?php
+// Ce fichier est charge a chaque recalcul //
+
 // compatibilite SPIP < 1.92
 if ($GLOBALS['spip_version_code']<1.92) {
 	function interprete_argument_balise($n,$p) {
@@ -8,29 +10,15 @@ if ($GLOBALS['spip_version_code']<1.92) {
 	}
 }
 
-// fichier charge a chaque recalcul
-	global $cs_metas_pipelines;
 // liste de filtres qui sert a la balise #INTRODUCTION
-	$GLOBALS['cs_introduire'] = array();
+$GLOBALS['cs_introduire'] = array();
 // fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
-	function cs_introduire($texte) {
-		$liste = array_unique($GLOBALS['cs_introduire']);
-		foreach($liste as $f)
-			if (function_exists($f)) $texte = $f($texte);
-		return $texte;
-	}
-	
-	// inclusion des fonctions pre-compilees
-	cs_log("appel de cout_fonctions : strlen=" . strlen($cs_metas_pipelines['fonctions']));
-	if (!$GLOBALS['cs_fonctions']) include_once(sous_repertoire(_DIR_TMP, "couteau-suisse").'mes_fonctions.php');
-	cs_log(' -- appel cout_fonctions achevé... cs_fonctions = ' . intval($GLOBALS['cs_fonctions']));
-
-/*
-	if(!$GLOBALS['cs_fonctions']) {
-		if (isset($cs_metas_pipelines['fonctions'])) eval($cs_metas_pipelines['fonctions']);
-cs_log(' -- appel mes_fonctions achevé par eval()... cs_fonctions = '.intval($GLOBALS['cs_fonctions']));
-	}
-*/
+function cs_introduire($texte) {
+	$liste = array_unique($GLOBALS['cs_introduire']);
+	foreach($liste as $f)
+		if (function_exists($f)) $texte = $f($texte);
+	return $texte;
+}
 
 // Filtre creant un lien <a> sur un texte
 // Exemple d'utilisation : [(#EMAIL*|cs_lien{#NOM})]
@@ -41,4 +29,10 @@ function cs_lien($lien, $texte='') {
 	$GLOBALS['toujours_paragrapher'] = $mem;
 	return $lien;
 }
+
+// inclusion des fonctions pre-compilees
+cs_log("appel de cout_fonctions : strlen=" . strlen($cs_metas_pipelines['fonctions']));
+if (!$GLOBALS['cs_fonctions']) include_once(_DIR_CS_TMP.'mes_fonctions.php');
+cs_log(' -- appel cout_fonctions achevé... cs_fonctions = ' . intval($GLOBALS['cs_fonctions']));
+
 ?>
