@@ -89,7 +89,8 @@ $.fn.diapo_pagination = function() {
     				fin=txt.lastIndexOf("<!-- fin diapo"+mid_article+" -->");
     				txt=txt.substring(debut,fin);
     				$("#diapo"+mid_article).html(txt);
-    				$("#diapo"+mid_article+" .diapo_menu a.lien_pagination").attr("rel","diapo"+mid_article);
+    				$(".diapo_icones").show();
+					$("#diapo"+mid_article+" .diapo_menu a.lien_pagination").attr("rel","diapo"+mid_article);
     				$("#diapo"+mid_article+" .diapo_icones a").diapo_mode();
 					$("#diapo"+mid_article+" .diapo_menu a.lien_pagination").diapo_pagination();
 					$("#diapo"+mid_article+" .diapo_vignette a").diapo_vignette();
