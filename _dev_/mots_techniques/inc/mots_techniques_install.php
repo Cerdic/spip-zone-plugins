@@ -12,7 +12,6 @@
 				echo "Mots Techniques install&eacute;<br/>";
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 			}
-			ecrire_metas();
 		}
 	}
 
@@ -20,7 +19,6 @@
 		sql_alter("TABLE spip_groupes_mots DROP technique");
 		sql_alter("TABLE spip_groupes_mots DROP affiche_formulaire");
 		effacer_meta($nom_meta_base_version);
-		ecrire_metas();
 	}
 
 ?>

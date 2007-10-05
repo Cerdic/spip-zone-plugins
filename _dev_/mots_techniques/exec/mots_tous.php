@@ -51,8 +51,7 @@ function exec_mots_tous()
 //
 // On boucle d'abord sur les groupes de mots (non techniques ou technique='oui')
 //
-
-	$result = spip_query("SELECT *, ".sql_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE technique='oui' OR technique='' ORDER BY technique, multi");
+	$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "technique='oui' OR technique='' ", "", "technique, multi");
 	
 	while ($row_groupes = sql_fetch($result)) {
 		$id_groupe = $row_groupes['id_groupe'];
@@ -103,7 +102,7 @@ function exec_mots_tous()
 		// Afficher les mots-cles du groupe
 		//
 		
-		$groupe = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
+		$groupe = sql_fetsel("COUNT(*) AS n", "spip_mots", "id_groupe=$id_groupe");
 		$groupe = $groupe['n'];
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
@@ -149,7 +148,7 @@ function exec_mots_tous()
 // http://doc.spip.org/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
-	$row = sql_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));
+	$row = sql_fetsel("*", "spip_mots", "id_mot=$conf_mot");
 	if (!$row) return ""; // deja detruit (acces concurrent etc)
 
 	$id_mot = $row['id_mot'];

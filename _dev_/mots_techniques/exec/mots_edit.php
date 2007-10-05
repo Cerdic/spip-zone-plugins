@@ -35,7 +35,7 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 //
 // Recupere les donnees
 //
-	$row = sql_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
+	$row = sql_fetsel("*", "spip_mots", "id_mot=$id_mot");
 	 if ($row) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = $row['titre'];
@@ -224,8 +224,8 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 
 // http://doc.spip.org/@determine_groupe_mots
 function determine_groupe_mots($table, $id_groupe) {
-
-	$q = spip_query("SELECT id_groupe, titre FROM spip_groupes_mots ". ($table ? "WHERE $table='oui' AND" : 'WHERE') . " (technique='' OR technique='oui') ORDER BY titre");
+	
+	$q = sql_select('id_groupe, titre, technique', 'spip_groupes_mots', ($table ? "$table='oui' AND" : '') . " (technique='' OR technique='oui')", '', 'titre');
 
 	if (sql_count($q)>1) {
 

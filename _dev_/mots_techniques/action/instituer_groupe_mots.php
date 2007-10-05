@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
-include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_instituer_groupe_mots_dist
 function action_instituer_groupe_mots()
@@ -48,7 +47,7 @@ function action_instituer_groupe_mots_post($id_groupe)
 	$affiche_formulaire = _request('affiche_formulaire');
 
 	if ($id_groupe < 0){
-		spip_query("DELETE FROM spip_groupes_mots WHERE id_groupe=" . (0- $id_groupe));
+		sql_delete("spip_groupes_mots", "id_groupe=" . (0- $id_groupe));
 	} else {
 		$change_type = (corriger_caracteres($change_type));
 		$texte = (corriger_caracteres($texte));
