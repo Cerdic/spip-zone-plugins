@@ -4,7 +4,7 @@
 // Puisque ce plugin n'est pas destine (pour l'instant) a abandonner la compatibilite avec 1.9.1
 define('_SIGNALER_ECHOS', false); // horrible      
 // Repertoire temporaire pour le Couteau Suisse
-define(_DIR_CS_TMP, sous_repertoire(_DIR_TMP, "couteau-suisse"));
+define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
 // Pour forcer les logs du plugin, outil actif ou non :
 // define('_LOG_CS_FORCE', 'oui');
 
