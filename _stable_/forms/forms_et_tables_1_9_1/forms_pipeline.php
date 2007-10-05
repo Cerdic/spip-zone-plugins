@@ -99,7 +99,10 @@
 		return $flux;
 	}
 	function Forms_header_prive($flux){
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms.css' type='text/css' media='all' />\n";
+		if ($f=find_in_path('spip_forms_prive.css'))
+			$flux .= "<link rel='stylesheet' href='$f' type='text/css' media='all' />\n";
+		else
+			$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."donnee_voir.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."donnees_tous.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
@@ -116,7 +119,7 @@
 			$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
 			if (!_request('var_noajax'))
 				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
-			$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms_prive.css' type='text/css' media='all' />\n";
+			$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms_edit.css' type='text/css' media='all' />\n";
 		
 			if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui")
 				$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";

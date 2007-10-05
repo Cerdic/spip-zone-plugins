@@ -95,7 +95,7 @@ background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padd
 .barre_nav .pointeur {margin-bottom:0.5em;}
 </style><div class='barre_nav'>";
 	foreach($liste_items as $item){
-		$out .= icone_etendue($item['titre'], isset($item['url'])?$item['url']:generer_url_ecrire($item['page']), $item['icone'], isset($item['action'])?$item['icone']:"rien.gif","", false, $page_actuelle==$item['page']);
+		$out .= icone_etendue($item['titre'], isset($item['url'])?$item['url']:generer_url_ecrire($item['page']), $item['icone'], isset($item['action'])?$item['action']:"rien.gif","", false, $page_actuelle==$item['page']);
 	}
 	return $out."</div>";
 }
