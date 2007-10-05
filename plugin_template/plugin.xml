@@ -30,6 +30,33 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	<prefix> 
 	template
 	</prefix>
+	
+	<!-- Boutons, SPIP >= 1.9.3 [9984] (spip_version_code >= 1.9261)
+	     Avant cette version de spip, utiliser les pipelines
+	     ajouter_boutons ou ajouter_onglets
+	     -->
+	<!-- Ajoute un bouton dans le menu principal -->
+	<bouton id='mon_bouton_1' parent=''>
+		<icone>images/bouton-24.png</icone>
+		<titre>Template</titre>
+		<url>template</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+		<args>type=texte&id=1</args>
+	</bouton> 
+	<!-- Ajoute un bouton dans un sous-menu -->
+	<bouton id='mon_sous_bouton' parent='mon_bouton_1'>
+		<icone>images/bouton-24.png</icone>
+		<titre>Sous le template</titre>
+		<url>template</url> 
+		<args>type=autre_chose&id=1</args>
+	</bouton> 	
+	<!-- Ajoute un onglet -->
+	<onglet id='mon_onglet' parent='configuration'>
+		<icone>images/onglet-24.png</icone>
+		<titre>Un onglet</titre>
+		<url>template</url>
+		<args>type=autre_chose&id=1</args>
+	</onglet> 		
+	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
 	ex : template_affichage_final()
