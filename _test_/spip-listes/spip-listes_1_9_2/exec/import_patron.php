@@ -54,7 +54,11 @@ function exec_import_patron(){
 	$url = generer_url_public('patron_switch','',true);
 	foreach ($contexte_patron as $k=>$v)
 		$url = parametre_url($url,$k,$v,'&');
-	$texte_patron = recuperer_page($url) ;		
+	$texte_patron = recuperer_page($url) ;
+
+	// passer tout ca en unicode pour eviter certains problemes
+	include_spip('inc/charsets');
+	$texte_patron = charset2unicode($texte_patron);
 			
 	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
 	
@@ -86,6 +90,7 @@ function exec_import_patron(){
 	echo "<a href='?exec=courrier_edit&id_message=$id_message'>"._T('spiplistes:retour_link')."</a><br />\n";
 	echo "</form>";
 	echo "</div>";
+
 	echo "<div style='text-align:left;margin-right:250px;border-right:2px outset #000000'>";
 	echo spiplistes_propre($texte_patron).$message_erreur;
 	
