@@ -316,6 +316,7 @@ function cs_initialise_includes() {
 	if (@file_exists(_DIR_CS_TMP)) {
 		include_spip('inc/getdocument');
 		effacer_repertoire_temporaire(_DIR_CS_TMP);
+		sous_repertoire(_DIR_TMP, "couteau-suisse");
 	} else spip_log('Erreur - cs_initialise_includes() : '._DIR_CS_TMP.' introuvable !');
 	// installation de $cs_metas_pipelines
 	set_cs_metas_pipelines_fichier($infos_pipelines, 'options');
