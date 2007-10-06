@@ -192,7 +192,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			// si c'est un courrier, donne la date 
 			// - date debut envoi si encour
 			// - sinon date de publication
-			if(($element='courriers') && (!in_array($statut, array(_SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY)))) {
+			if(($element=='courriers') && (!in_array($statut, array(_SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY)))) {
 				$en_liste .= ""
 					. affdate_heure(($statut==_SPIPLISTES_STATUT_ENCOURS) ? $date_debut_envoi : $date_fin_envoi)
 					;
