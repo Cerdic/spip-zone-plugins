@@ -33,50 +33,9 @@ $().ready(function() {
 </script>
 
 <?php 
-	echo gros_titre(_T('inscription2:gestion_adherent'),'','');
-	echo debut_gauche(); 
-?>
 
-<div id="menu">
-		
-	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-	#INCLURE{fond=inc/menu_abonnement}	
-	]
+// Effectuer les traitements adequat et definir les infos de la personne concernee
 
-	<?php
-	debut_boite_info();
-	?>
-	<div class='raccourcis'>
-		<strong><:inscription2:raccourcis:></strong>
-		<ul>
-			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
-			<li><a href="?exec=cfg&amp;cfg=inscription2"><:inscription2:configuration:></a></li>
-			<li><a class ="confirm" href="?exec=inscription2_adherents&amp;act=net"><:inscription2:nettoyer_tables:></a></li>
-		
-		</ul>
-	</div>
-	<?php
-	fin_boite_info();
-	?>
-	
-	<div class="legend">
-		
-		<img src="#CHEMIN{'images/admin-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:admin:><br/>
-		<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:><br/>
-		<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:adherent:><br/>
-		<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:><br/>
-		<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:autre:><br/>
-		
-	</div>
-	
-</div>
-<?php 
-	echo debut_droite();
-?>
-
-<div id="droite">
-
-	<?php
 	$id = _request('id');
 	$act = _request('act');
 
@@ -135,9 +94,9 @@ $().ready(function() {
 		}
 		
 		if(_request('abonnement') and _request('id_auteur_elargi')){
-                echo "test";
+
 		spip_query("delete from spip_auteurs_elargis_abonnements where id_auteur_elargi ='"._request('id_auteur_elargi')."'"); //source de pbs
-		spip_query("INSERT INTO spip_auteurs_elargis_abonnements (id_abonnement, id_auteur_elargi) values ('"._request('abonnement')."','"._request('id_auteur_elargi')."') ");
+		spip_query("INSERT INTO spip_auteurs_elargis_abonnements (id_abonnement, id_auteur_elargi, validite) values ('"._request('abonnement')."','"._request('id_auteur_elargi')."','"._request('validite_abo')."')");
 		}
 		spip_log($var_user);		
 		if($var_user['a.nom'])
@@ -201,6 +160,65 @@ $().ready(function() {
 		if($query2['id'] == NULL)
 			$id_elargi = spip_query("INSERT INTO spip_auteurs_elargis (id_auteur) VALUES ($id)"); //source de pbs
 	}
+
+
+// debut de la page
+
+	echo gros_titre(_T('inscription2:gestion_adherent'),'','');
+	echo debut_gauche(); 
+?>
+
+<div id="menu">
+		
+		
+	<div class='cadre-info verdana1'>
+	<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>
+	AUTEUR NUM&Eacute;RO<br />
+	<span class='spip_xx-large'><?php echo $id ?></span>
+	<div style="margin-top:7px">AUTEUR ELARGI NUM&Eacute;RO<br />
+	<?php echo ($id_elargi) ? $id_elargi : $query['id'] ?>
+	</div>
+	</div></div>	
+		
+		
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	#INCLURE{fond=inc/menu_abonnement}	
+	]
+
+	<?php
+	debut_boite_info();
+	?>
+	<div class='raccourcis'>
+		<strong><:inscription2:raccourcis:></strong>
+		<ul>
+			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
+			<li><a href="?exec=cfg&amp;cfg=inscription2"><:inscription2:configuration:></a></li>
+			<li><a class ="confirm" href="?exec=inscription2_adherents&amp;act=net"><:inscription2:nettoyer_tables:></a></li>
+		
+		</ul>
+	</div>
+	<?php
+	fin_boite_info();
+	?>
+	
+	<div class="legend">
+		
+		<img src="#CHEMIN{'images/admin-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:admin:><br/>
+		<img src="#CHEMIN{'images/redac-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:auteur:><br/>
+		<img src="#CHEMIN{'images/adherent-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:adherent:><br/>
+		<img src="#CHEMIN{'images/aconf-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:a_confirmer:><br/>
+		<img src="#CHEMIN{'images/defaut-12.gif'}" alt="<:inscription2:fiche_adherent:>" /> <:inscription2:autre:><br/>
+		
+	</div>
+	
+</div>
+<?php 
+	echo debut_droite();
+?>
+
+<div id="droite">
+
+	<?php
 	
 	echo "<form id='adherent' name='adherent' method='post' action='?exec=editer_adherent&amp;act=val&amp;id=$id'>";
 	echo "<table>";
@@ -233,12 +251,14 @@ $().ready(function() {
 					 echo "<option value=\"$cle\">".entites_html($val)."</option>";
 				}
 			}elseif($cle == 'statut_abonnement'){ //plugin abonnment
+				
+				
 				$statuts_possibles = array('prospect','abonne','relance','sorti');
 				foreach($statuts_possibles as $val_abo){
 					$selected = ($val == $val_abo)?'selected="selected"':'' ;
 					echo "<option value=\"$val_abo\" $selected>".entites_html($val_abo)."</option>";
 				}
-			$mon_abo = spip_fetch_array(spip_query("select ab.id_abonnement, b.id from spip_auteurs_elargis_abonnements ab, spip_auteurs_elargis b where b.id_auteur='$id' AND ab.id_auteur_elargi = b.id"));
+			$mon_abo = spip_fetch_array(spip_query("select ab.id_abonnement, ab.validite, b.id from spip_auteurs_elargis_abonnements ab, spip_auteurs_elargis b where b.id_auteur='$id' AND ab.id_auteur_elargi = b.id"));
 			$query_abo="select id_abonnement, libelle from spip_abonnements";
 			$result_abo = spip_query($query_abo);
 				if(spip_num_rows($result_abo) > 0){
@@ -253,6 +273,13 @@ $().ready(function() {
 			
 			}
 			echo "</select></td></tr>";
+			
+			if($cle == 'statut_abonnement')
+				echo "<tr><td><strong>"._T('abonnement:Ech&eacute;ance')."</strong></td><td><input type=\"text\" name=\"validite_abo\" value=\"".$mon_abo['validite']."\" /><br /></td></tr>"; 
+
+			
+			
+			
 		}elseif($cle=='publication'){ // checkbox
 			if ($val == 'on')	
 				$val = 'checked';

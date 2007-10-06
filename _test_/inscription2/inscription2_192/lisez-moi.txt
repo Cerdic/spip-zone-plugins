@@ -46,5 +46,4 @@ return 'spip_' . table_objet($type);
 
 TODO
 
-reparer la sauvergarde 192 des auteurs elargis
-test / abo
+regulariser les pays avec le plugin spip_geo dans inc/editer_adherent
