@@ -25,7 +25,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /*
-	_SPIPLISTES_EXEC_COURRIER_MODIF
+	_SPIPLISTES_EXEC_COURRIER_GERER
 	
 	Affiche un courrier. 
 	Le formulaire permet :

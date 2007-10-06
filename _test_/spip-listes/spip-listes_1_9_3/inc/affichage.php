@@ -123,7 +123,7 @@ spiplistes_log("AUTOCRON nb courries prets envoi $n") ; // debug
 		});
 		//--></script>";
 		echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
-		echo "<p align='center'><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,'change_statut=publie&id_courrier='.$id_mess)."'>["._T('annuler')."]</a></p>";
+		echo "<p align='center'><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,'change_statut=publie&id_courrier='.$id_mess)."'>["._T('annuler')."]</a></p>";
 		echo fin_boite_info();
 	}
 	//echo ' <div style="background-image: url(\''. generer_url_action('cron','&var='.time()).'\');"> </div> ';
@@ -321,7 +321,7 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 			default:
 				$id_row	= $row['id_courrier'];			
 				$nb_emails_envoyes	= $row['nb_emails_envoyes'];
-				$url_row	= generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF, 'id_message='.$id_row);
+				$url_row	= generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER, 'id_message='.$id_row);
 		}
 		
 		$en_liste.= "<tr class='tr_liste'>\n";

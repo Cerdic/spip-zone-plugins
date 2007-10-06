@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// Précision sur la table spip_listes:
 	// 'date': date d'envoi souhaitée
 	// 'maj': date d'envoi du courrier mis à jour par cron.
-	// 'description': (pas utilisé)
+	// 'description': (pas utilisé au 20071006)
 	// 'texte': description affichée dans formulaire abonnement
 	
 function exec_listes_dist(){

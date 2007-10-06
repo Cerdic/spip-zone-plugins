@@ -103,7 +103,7 @@ function exec_spiplistes_courrier_edit(){
 		. fin_cadre_relief(true)
 		. "<br />"
 		//
-		. "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,"id_courrier=$id_courrier")."' method='post' name='formulaire'>"
+		. "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")."' method='post' name='formulaire'>"
 		. "<input type='hidden' name='modifier_message' value=\"oui\" />"
 		. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
 		. _T('spiplistes:sujet_courrier')

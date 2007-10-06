@@ -88,7 +88,7 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable, $st
 		
 		// enveloppe dans un formulaire
 		$masque = ""
-				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_MODIF,'id_courrier='.$id_courrier)."' method='post'>\n"
+				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,'id_courrier='.$id_courrier)."' method='post'>\n"
 				. $masque
 				. "</form>\n"
 				;
