@@ -100,8 +100,8 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false) {
 		$nb_abos = spiplistes_nb_abonnes_count($id_liste);
 	}
 	if($nb_abos) {
-		//$result = "(" . $nb_abos . (($nb_abos > 1) ?  _T('spiplistes:nb_abonnes_plur') : _T('spiplistes:nb_abonnes_sing')) . ")";
-		$result = "(" . $nb_abos . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")";
+		//$result = "(" . $nb_abos . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")";
+		$result = "(" . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")";
 	}
 	return ($result);
 }

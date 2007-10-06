@@ -23,8 +23,6 @@
 // $LastChangedBy$
 // $LastChangedDate: 2007-10-01 08:58:08 +0200 (lun., 01 oct. 2007) $
 
-include_spip('inc/spiplistes_api');
-
 /**
 * Adaptation de spiplistes_afficher_en_liste de SL192
 *
@@ -48,6 +46,8 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	, $apres_maintenant=false, $nom_position='position'
 	, $exec, $pas = 10, $return = true) {
 
+	include_spip('inc/spiplistes_api');
+
 	global $id_auteur
 		;
 	
@@ -61,7 +61,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	// construction de la requête SQL
 	switch($element) {
 		case 'courriers':
-			$sql_query = "SELECT id_courrier, titre, date, date_debut_envoi, nb_emails_envoyes,total_abonnes,email_test
+			$sql_query = "SELECT id_courrier, titre, date, date_debut_envoi,date_fin_envoi, nb_emails_envoyes,total_abonnes,email_test
 				FROM spip_courriers
 				WHERE statut="._q($statut)."
 				ORDER BY date DESC
@@ -113,6 +113,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					$id_row	= $row['id_courrier'];			
 					$nb_emails_envoyes	= $row['nb_emails_envoyes'];
 					$date_debut_envoi	= $row['date_debut_envoi'];
+					$date_fin_envoi	= $row['date_fin_envoi'];
 					$total_abonnes	= $row['total_abonnes'];
 					$email_test	= $row['email_test'];
 					$url_row	= generer_url_ecrire($exec, 'id_courrier='.$id_row);
@@ -170,32 +171,33 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					break;
 			// si liste, donne le nombre d'abonnés
 				case 'listes':
-					$nb_abo = spiplistes_nb_abonnes_liste($id_row);
+					//$nb_abo = spiplistes_nb_abonnes_liste($id_row);
 					// affiche infos complémentaires pour les listes
 					$en_liste .=
 						" <span style='font-size:100%;color:#666666' dir='ltr'>\n"
-						. "(".$nb_abo.")\n"
+						. spiplistes_nb_abonnes_liste_str_get($id_row)
 						. (!empty($patron) ? "<br />Patron : <strong>".$patron."</strong>" : "")
-						. ((!empty($maj) && ($maj!=_SPIPLISTES_ZERO_TIME_DATE)) ? "<br />Prochain envoi : <strong>".affdate_heure($maj)."</strong>" : "")
+						. ((!empty($date) && ($date!=_SPIPLISTES_ZERO_TIME_DATE)) ? "<br />Prochain envoi : <strong>".affdate_heure($date)."</strong>" : "")
 						. "</span>\n"
 						;
 						break;
 			}
 								
-			$en_liste.= 
-				"</a>\n"
+			$en_liste .= ""
+				. "</a>\n"
 				. "</div>\n"
 				. "</td>\n"
 				. "<td width='120' class='arial1'>"
-				. (
-					($statut=='encour') 
-						? affdate_heure($date_debut_envoi) 
-						: (
-							($apres_maintenant==true) 
-							? ""
-							: affdate($date)
-							)
-					)
+				;
+			// si c'est un courrier, donne la date 
+			// - date debut envoi si encour
+			// - sinon date de publication
+			if(($element='courriers') && (!in_array($statut, array(_SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY)))) {
+				$en_liste .= ""
+					. affdate_heure(($statut==_SPIPLISTES_STATUT_ENCOURS) ? $date_debut_envoi : $date_fin_envoi)
+					;
+			}
+			$en_liste .= ""
 				. "</td>\n"
 				. "<td width='50' class='arial1'><strong>"._T('spiplistes:numero').$id_row."</strong></td>\n"
 				. "</tr>\n"

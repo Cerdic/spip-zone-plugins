@@ -28,6 +28,7 @@ function exec_spiplistes_listes_toutes(){
 	
 	include_spip('inc/presentation');
 	include_spip('inc/affichage');
+	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_lister_courriers_listes');
 	
 	global $connect_statut;
@@ -54,13 +55,29 @@ function exec_spiplistes_listes_toutes(){
 	
 	// MODE LISTES: afficher les listes --------------------------------------------
 	
-	echo(
-		spiplistes_afficher_en_liste(_T('spiplistes:listes_internes'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif', 'listes', 'inact', '', 'position')
-		. spiplistes_afficher_en_liste(_T('spiplistes:liste_diff_publiques'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif', 'listes', 'liste', '', 'position')
-		. spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif', 'listes', 'poublist', '', 'position')
-		);
+	$page_result = "";
 	
+	foreach(array(_SPIPLISTES_PRIVATE_LIST, _SPIPLISTES_PUBLIC_LIST, _SPIPLISTES_MONTHLY_LIST, _SPIPLISTES_TRASH_LIST) as $statut) {
+		$page_result .= ""
+			. spiplistes_lister_courriers_listes(
+				spiplistes_items_get_item("tab_t", $statut)
+					.	(
+						($desc = spiplistes_items_get_item("desc", $statut))
+						? "<br /><span style='font-weight:normal;'>$desc</span>"
+						: ""
+						)
+				, spiplistes_items_get_item("icon", $statut)
+				, 'listes'
+				, $statut
+				, false
+				, 'position'
+				, _SPIPLISTES_EXEC_LISTE_GERER
+			)
+			;
+	}
 	
+	echo($page_result);
+		
 	// MODE EDIT LISTES FIN --------------------------------------------------------
 	
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();
