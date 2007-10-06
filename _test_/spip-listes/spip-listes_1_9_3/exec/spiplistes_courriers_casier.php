@@ -178,7 +178,7 @@ function exec_spiplistes_courriers_casier () {
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
-	// la gestion des listes de courriers est réservée aux admins 
+	// la gestion des courriers est réservée aux admins 
 	if($connect_statut != "0minirezo") {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
@@ -195,15 +195,22 @@ function exec_spiplistes_courriers_casier () {
 	// MODE HISTORIQUE: Historique des envois --------------------------------------
 	
 	$page_result = ""
-		. spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'), _DIR_PLUGIN_SPIPLISTES.'img_pack/24_send-receive.gif', 'messages', 'encour', '', 'position')
-		. spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'redac', '', 'position')
-		// afficher les messages auto
+		. spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'24_send-receive.gif'
+			, 'messages', _SPIPLISTES_STATUT_ENCOURS, '', 'position')
+		. spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
+			, 'messages', _SPIPLISTES_STATUT_REDAC, '', 'position')
+		. spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
+			, 'messages', _SPIPLISTES_STATUT_READY, '', 'position')
+		//
+		// liste des courriers programmés (des listes)
 		. spiplistes_afficher_pile_messages()
 		//
-		. "<br /><br />"
+		. "<br />"
 		//
-		. spiplistes_afficher_en_liste(_T('spiplistes:messages_auto_envoye'),_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'auto', '', 'position')
-		. spiplistes_afficher_en_liste(_T('spiplistes:aff_envoye'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'publie', '', 'position') 
+		. spiplistes_afficher_en_liste(_T('spiplistes:messages_auto_envoye'),_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
+			, 'messages', _SPIPLISTES_STATUT_AUTO, '', 'position')
+		. spiplistes_afficher_en_liste(_T('spiplistes:aff_envoye'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
+			, 'messages', _SPIPLISTES_STATUT_PUBLIE, '', 'position') 
 		;
 	
 	echo($page_result);

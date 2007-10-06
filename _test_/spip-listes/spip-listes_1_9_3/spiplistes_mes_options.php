@@ -23,6 +23,7 @@ define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");
 define("_SPIPLISTES_STATUT_REDAC", "redac");
 define("_SPIPLISTES_STATUT_READY", "ready");
 define("_SPIPLISTES_STATUT_ENCOURS", "encour");
+define("_SPIPLISTES_STATUT_AUTO", "auto"); // publié de liste
 define("_SPIPLISTES_STATUT_PUBLIE", "publie");
 define("_SPIPLISTES_STATUT_STOPE", "stope");
 
