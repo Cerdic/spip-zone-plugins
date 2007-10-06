@@ -63,7 +63,7 @@ function spiplistes_dater_envoi($id, $flag, $statut, $date_debut_envoi, $btn_nom
 
 		if($enveloppe_formulaire) {
 			$masque = ""
-				. "<form action='".generer_url_ecrire('gerer_courrier','id_courrier='.$id)."' method='post' style='margin: 5px; margin-$spip_lang_left: 20px;'>\n"
+				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,'id_courrier='.$id)."' method='post' style='margin: 5px; margin-$spip_lang_left: 20px;'>\n"
 				. $masque
 				. (
 					($date_valide)
