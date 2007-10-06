@@ -114,17 +114,31 @@ function spiplistes_singulier_pluriel_str_get ($var, $str_sing, $str_plur, $retu
 	return($result);
 }
 
-function spiplistes_nb_courriers_en_cours() {
-	$n =
-		(($row = spip_fetch_array(spip_query(
-			"SELECT SUM(total_abonnes) AS n 
-				FROM spip_courriers 
-				WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."'"
-				)))
-			&& $row['n'])
-		? intval($row['n'])
-		: 0
-		;
+function spiplistes_nb_courriers_en_cours($id_courrier = 0) {
+	if($id_courrier) {
+		$n =
+			(($row = spip_fetch_array(spip_query(
+				"SELECT COUNT(id_auteur) AS n 
+					FROM spip_auteurs_courriers 
+					WHERE id_courrier=$id_courrier AND etat=''"
+					)))
+				&& $row['n'])
+			? intval($row['n'])
+			: 0
+			;
+	}
+	else {
+		$n =
+			(($row = spip_fetch_array(spip_query(
+				"SELECT SUM(total_abonnes) AS n 
+					FROM spip_courriers 
+					WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."'"
+					)))
+				&& $row['n'])
+			? intval($row['n'])
+			: 0
+			;
+	}
 	return($n);
 }
 

@@ -130,16 +130,9 @@ function cron_spiplistes_cron ($last_time) {
 	/////////////////////////////
 	// Si panier courriers des encours plein, appelle meleuse
 	if (spiplistes_nb_courriers_en_cours()){
-	
 		spiplistes_log("CRON: appel meleuse", LOG_DEBUG);
 		include_spip('inc/spiplistes_meleuse');
-		spiplistes_meleuse();
-		
-		if(spiplistes_nb_courriers_en_cours() > 0) {
-		// il en reste après la meleuse ? Signale au CRON tache non terminée
-			spiplistes_log("CRON: il reste des courriers a envoyer !", LOG_DEBUG);
-			return (0 - $last_time);
-		}
+		return(spiplistes_meleuse());
 	}
 	return ($last_time); 
 }

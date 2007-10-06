@@ -55,7 +55,7 @@ function exec_spiplistes_liste_gerer () {
 		, 'btn_modifier_diffusion', 'changer_lang', 'statut' // local
 		, 'btn_modifier_replyto', 'email_envoi' // local
 		, 'btn_modifier_courrier_auto', 'message_auto' // local
-			, 'titre_message', 'patron', 'periode', 'envoyer_direct'
+			, 'titre_message', 'patron', 'periode', 'envoyer_maintenant'
 			, 'jour', 'mois', 'annee', 'heure', 'minute'
 		) as $key) {
 		$$key = _request($key);
@@ -156,12 +156,15 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 						}
 						break;
 					case 'non':
-						$sql_query .= "message_auto='non',titre_message='',date='',periode=0";
+						$sql_query .= "message_auto='non',titre_message='',date='',periode=0,";
 						break;
 					case 'envoyer_maintenant':
-						$sql_query .= "message_auto='non',date=NOW(),periode=0,"; 
+						$sql_query = "message_auto='oui',titre_message='"._q($titre_message)."'date=NOW(),periode=0,"; 
 						// la trieuse s'occupera du reste
 						break;
+				}
+				if($patron && ($message_auto!='non')) {
+					$sql_query .= "patron="._q($patron).",";
 				}
 			}
 
@@ -418,8 +421,8 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 		//
 		. spiplistes_dater_envoi($id_liste, true, $statut, $date_debut_envoi, 'btn_changer_date', false)."</li>\n"
 		.	(
-			(!$envoyer_direct)
-			? " <li><input type='checkbox' class='checkbox' name='envoyer_direct' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>\n"
+			(!$envoyer_maintenant)
+			? " <li><input type='checkbox' class='checkbox' name='envoyer_maintenant' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>\n"
 			: ""
 			)
 		. "</ul></div>\n"

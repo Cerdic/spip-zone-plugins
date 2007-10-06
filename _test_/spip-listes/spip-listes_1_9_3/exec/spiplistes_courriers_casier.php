@@ -40,7 +40,7 @@ function spiplistes_afficher_pile_messages() {
 			spiplistes_install('install');
 	}
 	
-	$list = spip_query ("SELECT * FROM spip_listes WHERE message_auto='oui' ");
+	$list = spip_query ("SELECT id_liste,titre,date,maj,periode,patron FROM spip_listes WHERE message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
 	$message_pile = spip_num_rows($list);
 	if ($message_pile == 0) {
 		return (false); 
@@ -49,9 +49,7 @@ function spiplistes_afficher_pile_messages() {
 	$out = ""
 		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_timer.gif', true, ''
 			, _T('spiplistes:Messages_automatiques').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
-		//. "<div  class='chapo' style='border-top:1px #cccccc;width:100%;font-weight:bold;font-size:14px'>"._T('spiplistes:Messages_automatiques')."</div>"
-		// déclaration css. Devrait plutot etre dans le head. A voir + tard
-		. "<style>
+		. "\n<style>
 	table.tab td {
 	text-align:center;
 	padding:3px;
@@ -74,10 +72,10 @@ function spiplistes_afficher_pile_messages() {
 		;
 
 	while($row = spip_fetch_array($list)) {
-		$id_article = $row['id_liste'] ;
+		$id_liste = $row['id_liste'] ;
 		$titre = $row['titre'] ;
-		$sablier = time() - strtotime($row['maj']) ;
-		$proch = round( ( (24*3600*$row['periode']) - $sablier) / (3600*24) ) ;
+		
+		$proch = round((strtotime($row['date']) - time()) / _SPIPLISTES_TIME_1_DAY);
 	
 		if($i == 0){
 			$out .= "<tr style='padding:5px'>" ;
@@ -92,11 +90,13 @@ function spiplistes_afficher_pile_messages() {
 		$date_dernier = date(_T('spiplistes:format_date'),$date_dernier) ;
 
 		$out .= ""
-			. "<td><a href='".generer_url_public('patron_switch',"patron=".$row['patron']."&date=".$date_dernier)."'> ".$row['patron']."</a><br />"._T('spiplistes:Tous_les')." ".$row['periode']." "._T('spiplistes:jours')."</td><td><a href='?exec=listes&id_liste=$id_article'>$titre</a><br />"
+			. "<td><a href='".generer_url_public('patron_switch',"patron=".$row['patron']."&date=".$date_dernier)."'> ".$row['patron']."</a>"
+			. "<br />"._T('spiplistes:Tous_les')." ".$row['periode']." "._T('spiplistes:jours')."</td>"
+			. "<td><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>$titre</a><br />"
 			. "</td>"
 			. "<td>"
 			.	(
-				($proch != 0)
+				($proch > 0)
 				? _T('spiplistes:dans_jours')." <strong>$proch</strong> "._T('spiplistes:jours')."</td>"
 				: "<strong>"._T('date_aujourdhui')."</strong></td>"
 				)
