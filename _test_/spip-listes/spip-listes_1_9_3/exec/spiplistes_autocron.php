@@ -3,11 +3,13 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+// _SPIPLISTES_EXEC_AUTOCRON
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// ne sert plus ??
+// appelé par javascript/autocron.js ??
 
-function exec_autocron(){
+function exec_spiplistes_autocron () {
 
 	include_spip('inc/spiplistes_api');
 
