@@ -55,7 +55,7 @@ function exec_spiplistes_liste_gerer () {
 		, 'btn_modifier_diffusion', 'changer_lang', 'statut' // local
 		, 'btn_modifier_replyto', 'email_envoi' // local
 		, 'btn_modifier_courrier_auto', 'message_auto' // local
-			, 'patron', 'periode', 'envoyer_direct'
+			, 'titre_message', 'patron', 'periode', 'envoyer_direct'
 			, 'jour', 'mois', 'annee', 'heure', 'minute'
 		) as $key) {
 		$$key = _request($key);
@@ -348,7 +348,7 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
 		. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>\n"
-		. "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>\n"
+		. "<tr><td background='"._DIR_IMG_PACK."rien.gif' align='$spip_lang_left' class='verdana2'>\n"
 		;
 	if ($message_auto != "oui")
 		$page_result .= _T('spiplistes:Pas_de_courrier_auto_programme');
@@ -400,7 +400,7 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 	}
 	$date_debut_envoi = ($date && intval($date)) ? $date : __mysql_date_time(time());
 	$page_result .= ""
-		. "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>"
+		. "<tr><td background='"._DIR_IMG_PACK."rien.gif' align='$spip_lang_left' class='verdana2'>"
 		. "<input type='radio' name='message_auto' value='oui' id='auto_oui' "
 		. ($auto_checked = ($message_auto=='oui' ? "checked='checked'" : ""))
 		. " onchange=\"jQuery('#auto_oui_detail').show();\" />"
