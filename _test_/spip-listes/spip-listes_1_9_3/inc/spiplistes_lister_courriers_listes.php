@@ -1,10 +1,6 @@
 <?php
 // SPIP-Listes-V :: $Id$
 /******************************************************************************************/
-/* SPIP-Listes-v est une adaptation de SPIP-Listes.                                       */
-/* Copyright (C) 2007 Christian PAULUS  cpaulus@quesaco.org , http://quesaco.org          */
-/* Plus d'informations sur le lien donné dans la boîte info du plugin.                    */
-/*                                                                                        */
 /* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
@@ -22,7 +18,7 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-// Orginal From SPIP-Listes-V :: Id: spiplistes_afficher_en_liste.php paladin@quesaco.org
+// Original From SPIP-Listes-V :: Id: spiplistes_afficher_en_liste.php paladin@quesaco.org
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate: 2007-10-01 08:58:08 +0200 (lun., 01 oct. 2007) $
