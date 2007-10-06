@@ -9,4 +9,5 @@ TO-DO:
 - Corriger documentation contextuelle
 - Problème de charset sur le titre ;
 - Annulation d'envoi dans boite autocron à revoir ;
+- Ajouter bouton supprimer liste dans liste_gerer ;
 - Revoir formulaire abonnement (XHTML/WAI incorrect).

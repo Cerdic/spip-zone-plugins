@@ -128,7 +128,7 @@ function exec_spiplistes_liste_edit(){
 
 	$page_result = ""
 		. debut_cadre_formulaire("", true)
-		. "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>"
+		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
 		. "<tr width='100%'>"
 		. "<td>"
 		. $gros_bouton_retour
@@ -167,16 +167,11 @@ function exec_spiplistes_liste_edit(){
 		. $texte
 		. "</textarea>\n"
 		// pied de page
-		. (
-			(!empty($pied_de_page))
-			?	_T('spiplistes:texte_pied')
-				. _T('spiplistes:texte_contenu_pied')
-				. "<div style='background-color:#fff'>"
-				. $pied_de_page
-				. "</div>"
-				. "<input type='hidden' name='pied_page' value=\"$pied_page\" />"
-			: ""
-			)
+		. _T('spiplistes:texte_pied')
+		. _T('spiplistes:texte_contenu_pied')
+		. "<div style='background-color:#fff'>"
+		. $pied_page
+		. "</div>"
 		. "<p align='right' class='verdana2'>"
 		. "<input class='fondo' type='submit' name='btn_liste_edit' value='"._T('bouton_valider')."' />"
 		. "</p>"
