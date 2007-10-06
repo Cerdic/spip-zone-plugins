@@ -208,7 +208,7 @@ function exec_spiplistes_courriers_casier () {
 		_SPIPLISTES_STATUT_ENCOURS, _SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY
 		, $_skip_statut
 		, _SPIPLISTES_STATUT_AUTO, _SPIPLISTES_STATUT_PUBLIE
-		, _SPIPLISTES_STATUT_VIDE, _SPIPLISTES_STATUT_IGNORE, _SPIPLISTES_STATUT_STOPE
+		, _SPIPLISTES_STATUT_VIDE, _SPIPLISTES_STATUT_IGNORE, _SPIPLISTES_STATUT_STOPE, _SPIPLISTES_STATUT_ERREUR
 		);
 	$mes_statuts = ($statut && in_array($statut, $listes_statuts)) ? array($statut) : $listes_statuts;
 	foreach($mes_statuts as $statut) {

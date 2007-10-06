@@ -28,6 +28,7 @@ define("_SPIPLISTES_STATUT_PUBLIE", "publie");
 define("_SPIPLISTES_STATUT_VIDE", "vide");
 define("_SPIPLISTES_STATUT_IGNORE", "ignore");
 define("_SPIPLISTES_STATUT_STOPE", "stope");
+define("_SPIPLISTES_STATUT_ERREUR", "erreur");
 
 define("_SPIPLISTES_TYPE_NEWSLETTER", "nl");
 define("_SPIPLISTES_TYPE_LISTEAUTO", "auto");
@@ -198,6 +199,15 @@ $spiplistes_items = array(
 		, 'alt' => _T('spiplistes:Envoi_abandonne')
 		, 'nav_t' => _T('spiplistes:Sans_destinataire')
 		, 'tab_t' => _T('spiplistes:Courriers_sans_destinataire')
+		, 'desc' => null
+		)
+	, _SPIPLISTES_STATUT_ERREUR => array(
+		// courrier en erreur (liste manquante)
+		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."puce-inconnu.gif"
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'
+		, 'alt' => _T('spiplistes:Envoi_abandonne')
+		, 'nav_t' => _T('spiplistes:Sans_destinataire')
+		, 'tab_t' => _T('spiplistes:Courriers_sans_liste')
 		, 'desc' => null
 		)
 	// les listes

@@ -106,6 +106,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Courriers_stope' => "Courriers stopp&eacute;s en cours d'envoi",
 'Courriers_vides' => "Courriers annul&eacute;s (vides)",
 'Courriers_sans_destinataire' => "Courriers sans destinataire (liste vide)",
+'Courriers_sans_liste' => "Courriers sans abonn&eacute;s (liste manquante)",
 
 //D
 '_de_' => " de ",
