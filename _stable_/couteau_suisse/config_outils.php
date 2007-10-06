@@ -157,7 +157,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'simpl_interface',
-	'code:options' => "define('_ACTIVER_PUCE_RAPIDE', false);",
+	'code:options' => "@define('_ACTIVER_PUCE_RAPIDE', false);",
 	'categorie' => 'admin',
 	'version-min' => 1.93,
 ));
@@ -219,7 +219,7 @@ add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'admin',
 	'jquery'	=> 'oui',
-	'code:options' => "define('_FORUM_OBLIGE_AUTEUR', 'oui');",
+	'code:options' => "@define('_FORUM_OBLIGE_AUTEUR', 'oui');",
 	'pipeline:affichage_final' => 'Auteur_forum_affichage_final',
 ));
 
@@ -252,14 +252,14 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'flock',
-	'code:options' => "define('_SPIP_FLOCK',false);",
+	'code:options' => "@define('_SPIP_FLOCK',false);",
 	'categorie' => 'admin',
 	'version-min' => 1.93,
 ));
 
 add_outil( array(
 	'id' => 'log_couteau_suisse',
-//	'code:options' => "define('_LOG_CS','oui');",
+//	'code:options' => "@define('_LOG_CS','oui');",
 ));
 
 add_outil( array(
@@ -344,7 +344,7 @@ add_outil( array(
 add_outil( array(
 	'id' => 'decoupe',
 	'contrib'	=> 2135,
-	'code:options' => "define('_decoupe_SEPARATEUR', '++++');
+	'code:options' => "@define('_decoupe_SEPARATEUR', '++++');
 if (isset(\$_GET['var_recherche'])) {
 	include_spip('inc/headers');
 	redirige_par_entete(str_replace('var_recherche=', 'decoupe_recherche=', \$GLOBALS['REQUEST_URI']));
@@ -426,7 +426,7 @@ add_outil( array(
 	'categorie' => 'public',
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
-	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe2%%",
+	'code:options' => "%%radio_target_blank3%%%%url_glossaire_externe2%%",
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function(){ $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 ));
 
