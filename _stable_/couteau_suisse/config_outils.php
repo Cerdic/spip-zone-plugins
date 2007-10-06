@@ -331,7 +331,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'verstexte',
-	'auteur' => '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
+	'auteur' => '[Cedric MORIN->cedric.morin@yterium.com]',
 	'categorie' => 'spip',
 ));
 
@@ -402,7 +402,7 @@ add_outil( array(
 // TODO : gestion du jQuery dans la fonction a revoir ?
 add_outil( array(
 	'id' => 'desactiver_flash',
-	'auteur' 	 => '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
+	'auteur' 	 => '[Cedric MORIN->cedric.morin@yterium.com]',
 	'categorie'	 => 'public',
 	'jquery'	=> 'oui',
 	'pipeline:affichage_final' => 'InhibeFlash_affichage_final',
@@ -497,7 +497,7 @@ function couleurs_introduire(\$texte) {
 // outil specifiquement français. D'autres langues peuvent etre ajoutees dans outils/typo_exposants.php
 add_outil( array(
 	'id' => 'typo_exposants',
-	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
+	'auteur' 	 => 'Vincent Ramos [contact->www-lansargues@kailaasa.net]',
 	'categorie'	 => 'typo-corr',
 	'contrib'	=> 1564,
 	'pipeline:post_typo' => 'typo_exposants',
@@ -506,7 +506,7 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'guillemets',
-	'auteur' 	 => 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
+	'auteur' 	 => 'Vincent Ramos [contact->www-lansargues@kailaasa.net]',
 	'categorie'	 => 'typo-corr',
 	'pipeline:post_typo' => 'typo_guillemets',
 ));
