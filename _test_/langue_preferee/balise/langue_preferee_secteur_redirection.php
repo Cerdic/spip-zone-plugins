@@ -5,6 +5,7 @@
  *
  * Auteur :
  * Nicolas Hoizey
+ * modification : chryjs - exclusion de rubriques
  * © 2007 - Distribue sous licence GNU/GPL
  */
 
@@ -18,7 +19,7 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_stat($args, $filtres)
 	return $args;
 }
 
-function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn()
+function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
 {
     include_spip('inc/meta');
 
@@ -74,11 +75,18 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn()
             }
         }
     }
+
     // On recupere l'id du premier secteur trouve correspondant a la langue preferee (tant pis s'il y en a plusieurs)
-    $query = 'SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 AND lang='._q($langue_preferee).' LIMIT 0,1';
+    if (!empty($liste_rub_exclues)) {
+       $query='SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 AND lang='._q($langue_preferee).' AND id_rubrique NOT IN ('.$liste_rub_exclues.') LIMIT 0,1';
+    }
+    else {
+       $query = 'SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 AND lang='._q($langue_preferee).' LIMIT 0,1';
+    }
     $res = spip_query($query);
     if ($row = spip_fetch_array($res)) {
         $id_rubrique = $row['id_rubrique'];
+	if (!function_exists('generer_url_rubrique')) { include_spip('urls/'.$GLOBALS['type_urls']); }
         $url_rubrique = generer_url_rubrique($id_rubrique);
         spip_log('Redirection vers '.$url_rubrique);
         header('Location: '.$url_rubrique);
