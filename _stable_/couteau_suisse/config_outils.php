@@ -474,7 +474,7 @@ add_variable( array(
 	'nom' => 'couleurs_perso',
 	'format' => 'chaine',
 	'lignes' => 3,
-	'defaut' => '$GLOBALS["url_glossaire_externe"]',
+	'defaut' => '"gris, rouge"',
 	'code' => "define('_COULEURS_PERSO', %s);",
 ));
 add_outil( array(
