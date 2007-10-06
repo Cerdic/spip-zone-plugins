@@ -46,16 +46,12 @@ function exec_spiplistes_abonne_edit(){
 	// Admin SPIP-Listes
 	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
-	if ($connect_statut != "0minirezo" ) {
-		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-		echo fin_page();
-		exit;
+	// la gestion des abonnés est réservée aux admins
+	if($connect_statut != "0minirezo") {
+		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
-		$statut_auteur=$statut;
-		spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
-	}
+	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
 	spiplistes_boite_raccourcis();

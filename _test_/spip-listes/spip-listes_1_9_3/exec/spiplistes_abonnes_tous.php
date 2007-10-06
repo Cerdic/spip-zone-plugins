@@ -46,7 +46,7 @@ function exec_spiplistes_abonnes_tous () {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
 	spiplistes_boite_raccourcis();

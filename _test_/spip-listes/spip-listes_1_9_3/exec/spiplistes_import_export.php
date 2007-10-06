@@ -97,8 +97,7 @@ function exec_spiplistes_import_export(){
 		die (spiplistes_terminer_page_non_authorisee() . fin_page());
 	}
 
-	// les onglets du haut de page
-	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 
 	debut_gauche();
 	spiplistes_boite_raccourcis();

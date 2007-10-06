@@ -80,7 +80,7 @@ function exec_spiplistes_courrier_edit(){
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, false);

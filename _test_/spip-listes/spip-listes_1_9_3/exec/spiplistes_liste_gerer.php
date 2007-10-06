@@ -238,7 +238,7 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:Liste_numero_:'), $id_liste, false);

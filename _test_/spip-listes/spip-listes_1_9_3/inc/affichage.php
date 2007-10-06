@@ -25,16 +25,25 @@
 include_spip('inc/spiplistes_api');
 
 
-function spip_listes_onglets($rubrique, $onglet){
-	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
+function spiplistes_onglets ($rubrique, $onglet, $return = false) {
+
+	$result = "";
 	
-	echo debut_onglet();
-	if ($rubrique == "messagerie"){
-		echo onglet(_T('spiplistes:Historique_des_envois'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/stock_hyperlink-mail-and-news-24.gif");
-		echo onglet(_T('spiplistes:Listes_de_diffusion'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
-		echo onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/addressbook-24.gif");
+	if ($rubrique == _SPIPLISTES_RUBRIQUE){
+		$result = ""
+			. debut_onglet()
+			. onglet(_T('spiplistes:Casier_a_courriers'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE), $rubrique
+				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_hyperlink-mail-and-news-24.gif")
+			. onglet(_T('spiplistes:Listes_de_diffusion'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE), $rubrique
+				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif")
+			. onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), $rubrique
+				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."addressbook-24.gif")
+			. fin_onglet()
+		;
 	}
-	echo fin_onglet();
+
+	if($return) return($result);
+	else echo($result);
 }
 
 

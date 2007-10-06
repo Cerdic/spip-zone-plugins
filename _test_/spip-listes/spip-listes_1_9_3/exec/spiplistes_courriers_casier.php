@@ -22,6 +22,8 @@
 // $LastChangedBy$
 // $LastChangedDate: 2007-09-30 10:27:41 +0200 (dim., 30 sept. 2007) $
 
+// _SPIPLISTES_EXEC_COURRIERS_LISTE
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
@@ -44,8 +46,9 @@ function spiplistes_afficher_pile_messages() {
 	}
 	
 	$out = ""
-		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_timer.gif',true)
-		. "<div  class='chapo' style='border-top:1px #cccccc;width:100%;font-weight:bold;font-size:14px'>"._T('spiplistes:Messages_automatiques')."</div>"
+		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_timer.gif', true, ''
+			, _T('spiplistes:Messages_automatiques').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
+		//. "<div  class='chapo' style='border-top:1px #cccccc;width:100%;font-weight:bold;font-size:14px'>"._T('spiplistes:Messages_automatiques')."</div>"
 		// déclaration css. Devrait plutot etre dans le head. A voir + tard
 		. "<style>
 	table.tab td {
@@ -105,6 +108,7 @@ function spiplistes_afficher_pile_messages() {
 		. fin_cadre_enfonce(true)
 		;
 	return ($out);
+	
 } // spiplistes_afficher_pile_messages()
 
 
@@ -179,7 +183,7 @@ function exec_spiplistes_courriers_casier () {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	spip_listes_onglets("messagerie", _T('spiplistes:spip_listes'));
+	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
 	spiplistes_boite_raccourcis();

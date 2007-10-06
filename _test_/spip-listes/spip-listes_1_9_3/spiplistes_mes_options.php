@@ -14,6 +14,8 @@ define('_SIGNALER_ECHOS', false); // horrible
 
 define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 
+define("_SPIPLISTES_RUBRIQUE", "messagerie");
+
 define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
 
 define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");

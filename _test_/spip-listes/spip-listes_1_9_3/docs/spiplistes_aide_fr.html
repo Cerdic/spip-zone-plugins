@@ -37,7 +37,12 @@ p {
 ul {
 	list-style: square;
 	margin:0;
-	padding:0.75em 4em;
+	padding:0 0 0 6em;
+}
+ul ul {
+	margin:0;
+	padding:0 0 0 2ex;
+	list-style: circle;
 }
 li {
 	margin: 0.5em 0;
@@ -65,6 +70,7 @@ img {
    <li><a href="#configuration">Configuration</a></li>
    <li><a href="#simulation">Activation des envois de courriers (mode simulation)</a></li>
    <li><a href="#acces_gestion">Acc&eacute;der &agrave; la gestion du courrier</a></li>
+   <li><a href="#casier_courriers">Le casier &agrave; courriers</a></li>
    <li><a href="#testeremail">Tester l'envoi du courrier</a></li>
    <li><a href="#forcerliste">Forcer un abonnement pour une liste</a></li>
    <li><a href="#configureliste">Configurer une liste de diffusion</a></li>
@@ -133,6 +139,26 @@ img {
    vous permet de g&eacute;rer le courrier :</p>
 <p><img src="../img_docs/2007-09-05_181420.png" alt="Les onglets du plugin" width="487" height="43" /></p>
 <p><img src="../img_docs/2007-09-02_194435.png" alt="Les raccourcis du plugin" width="217" height="157" /></p>
+<h2><a name="casier_courriers" id="casier_courriers"></a>Le casier &agrave; courriers</h2>
+<p>Le casier &agrave; courriers permet de lister, dans l'ordre :</p>
+<ul>
+   <li>Les courriers en cours de r&eacute;daction ;</li>
+   <li>Les courriers pr&ecirc;ts &agrave; l'envoi. La destination du courrier 
+      a &eacute;t&eacute; s&eacute;lectionn&eacute;e, il vous faut confirmer l'envoi 
+      ;</li>
+   <li>Les courriers automatiques programm&eacute;s - issus des listes programm&eacute;es 
+      ;</li>
+   <li>Les courriers envoy&eacute;s ;</li>
+   <li>Les courriers non-envoy&eacute;s : 
+      <ul>
+         <li>Courriers vides, en g&eacute;n&eacute;ral g&eacute;n&eacute;r&eacute; 
+            par un patron :</li>
+         <li>Courriers sans destinataires - la liste n'a plus d'abonn&eacute;s 
+            ;</li>
+         <li>Les envois abandonn&eacute;s lors de l'exp&eacute;dition.</li>
+      </ul>
+   </li>
+</ul>
 <h2><a name="configureliste" id="configureliste"></a>Configurer une liste de diffusion<a name="diffusion" id="diffusion"></a></h2>
 <p>La diffusion : une liste peut &ecirc;tre priv&eacute;e ou publique. L'inscription 
    &agrave; une liste priv&eacute;e n'est pas visible dans l'espace public. <a name="replyto" id="replyto"></a></p>
