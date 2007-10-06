@@ -34,29 +34,29 @@
 			   <th><:spipbb:site:></th>
 			</tr>
 	
-		<!-- Début de calcul des lignes de membres -->
+		<!-- Debut de calcul des lignes de membres -->
 			<?php $ligne=1; ?>
 			<BOUCLE_auteur_principal(AUTEURS){tout}{par id_auteur}{inverse}{pagination 30}>
-			<!-- Ici on relève le statut de l'auteur -->
+			<!-- Ici on releve le statut de l'auteur -->
 			<BOUCLE_statadm(AUTEURS){id_auteur}{statut=="0minirezo"}{tout}> </BOUCLE_statadm><?php $statmem='<:titre_image_administrateur:>' ?></B_statadm>
 			<BOUCLE_statredac1(AUTEURS){id_auteur}{statut=="1comite"}{tout}> </BOUCLE_statredac1><?php $statmem='<:titre_image_redacteur_02:>' ?></B_statredac1>
 			<BOUCLE_statvisit(AUTEURS){id_auteur}{statut=="6forum"}{tout}> </BOUCLE_statvisit><?php $statmem='<:spipbb:membre:>' ?></B_statvisit>
-			<!-- Ligne affichant les données de l'auteur -->
+			<!-- Ligne affichant les donnees de l'auteur -->
 				<tr  class="auteur row<?php echo $ligne ?>"> 
 				      <td class="numaut">#ID_AUTEUR</td>
 				      <td class="nomaut"><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>"><span>#NOM</span></a></td>
 				      <td class="statutaut"><span><?php echo $statmem ?></span></td>
 				      <td class="pm">
-                                        <?php 
-                        if ($GLOBALS['auteur_session'] AND $statmem!="<:phpbb:membre:>" AND $auteur_session['statut']!="6forum"){
+                                        <?php
+                        if ($GLOBALS['auteur_session'] AND $statmem!="<:spipbb:membre:>" AND $auteur_session['statut']!="6forum"){
                         $id_auteur= $auteur_session['id_auteur'];
-                         echo '<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:phpbb:envmp:>"><span><:phpbb:envmp:></span></a>';}
+                         echo '<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span></a>';}
                     ?>
                                         </td>
 				      <td class="email"><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>#ecrire" title="<:spipbb:email:>"><span><:spipbb:email:></span></a></td>
 				      <td class="dateaut">-</td>
 				      <td class="msgaut">[(#ID_AUTEUR|spipbb_nb_messages)]</td>
-					<td class="www">[<a href="(#URL_SITE)" title="#NOM_SITE"><span><:spipbb:www:></span></a>]</td>
+					<td class="www">[<a href="(#URL_SITE)" title="#NOM_SITE" class="www"><span><:spipbb:www:></span></a>]</td>
 				</tr>
 				<?php if ($ligne==1) {$ligne=2;} else {$ligne=1;} ?>
 			</BOUCLE_auteur_principal>

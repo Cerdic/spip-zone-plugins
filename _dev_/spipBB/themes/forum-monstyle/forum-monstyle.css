@@ -8,7 +8,7 @@
 /* The register, login, search etc links at the top of the page */
 .mainmenu {white-space:nowrap; height:42px; font-size:11px; color:#000000; width:98%; margin:0 auto; background-image:url(bandoforum/bando_icones-forum.gif); background-repeat:repeat x;}
 .mainmenu a	{text-decoration:none; color:#000000;  }
-.mainmenu a:hover{ text-decoration:underline; color:#DD6900; }
+.mainmenu a:hover { text-decoration:underline; color:#DD6900; }
 .mainmenu img {border:none; padding:0; padding-left:3px; padding-right:3px; margin:0;}
 
 #linknewmessages { margin-top:12px; margin-left:5px; text-align:left; float:left;}

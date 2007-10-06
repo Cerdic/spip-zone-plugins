@@ -156,7 +156,7 @@ function spipbb_afficher_avatar($id_auteur, $classe='') {
 		}
 	    
 		if($fichier!= '' ){
-			$retour="<img".$insert." src=\"IMG/$fichier\" alt=\"avatar\" />";
+			$retour="<img".$insert." src=\"IMG/$fichier\" alt=\"Avatar\" />";
 		}
 	}
 	else {

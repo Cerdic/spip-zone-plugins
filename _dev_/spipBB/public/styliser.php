@@ -56,7 +56,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang, $ext='html') {
 		$id_rub = $id_rubrique;
 
 		while ($id_rub > 0 AND $id_rub!=intval($spipbb_meta['spipbb_id_rubrique'])) {
-			$id_rub = sql_parent($id_rub);
+			$id_rub = quete_parent($id_rub);
 		}
 		if ( $id_rub==intval($spipbb_meta['spipbb_id_rubrique']) ) {
 			switch ($fond) {

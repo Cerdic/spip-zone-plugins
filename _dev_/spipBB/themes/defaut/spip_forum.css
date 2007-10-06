@@ -9,6 +9,8 @@ hr.clr { clear: both; margin:0; padding: 0; height: 0px; visibility: hidden; }
 /* définition des styles d'éléments "génériques" */
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
+h2 { background:none; }
+p { margin:0; padding:0; border:0; font-size: 90%; }
 img { border: none; margin: 0; }
 .nav { font-weight: bold; margin-bottom: 5px; padding-top:10px}
 body#forumsect p.nouvmsg { float: right; margin-bottom: 5px; }
@@ -91,12 +93,12 @@ a.adermsg span { display: none; }
 a.adermsg:hover { text-decoration: none; }
 td.pm a, td.email a, td.www a { display: block; height: 18px; width: 59px; background-repeat: no-repeat; margin: auto; }
 td.pm, td.email, td.www { width: 65px; }
-td.pm a { background-image: url(img/icon_pm.png); }
+td.pm a, li.pm a { background-image: url(img/icon_pm.png); }
 td.email a { background-image: url(img/icon_email.png); }
-td.www a { background-image: url(img/icon_www.png); }
+td.www a, li.www a { background-image: url(img/icon_www.png); }
 td.pm a span, td.email a span, td.www a span { display: none; }
 td.tabvs { text-align: left; }
-ul.titrevs { float: left; margin: 0; padding: 0; padding-left: 14px; background-repeat: no-repeat; background-image: url(img/icon_minipost.png); background-position: 2px; }
+ul.titrevs { float: left; margin: 0; padding: 0; padding-left: 14px; background-repeat: no-repeat; background-image: url(img/icon_minipost.png); background-position: 2px;  border: 0 solid #FFFFFF; border-bottom-width: 1px; }
 ul.titrevs li { list-style-type: none; display: inline; }
 li.ttitrevs { font-style: italic; }
 div.txtvs { clear: both; text-align: left; }
@@ -118,6 +120,9 @@ li.citervs a { padding-left: 54px !important; background-image: url(img/icon_quo
 li.effacervs a { background-image: url(img/icon_delete.png); }
 li.editervs a { padding-left: 54px !important; background-image: url(img/icon_edit.png); }
 li.ipvs a { background-image: url(img/icon_ip.png); }
+
+ul.auteurvs { margin: 0; padding: 0; font-size: 11px; height: 18px; float: left; }
+ul.auteurvs li { list-style: none; display: inline;  width: 65px; }
 
 /* Styles de la liste d'actions d'administration */
 ul.actionadm { margin: 0; padding: 0; height: 20px; text-align: center; font-weight: bold; clear: both; }
@@ -213,7 +218,7 @@ body { background-color: #EDEDED; }
 /* Fond de zone de données et contour */
 div#contenant { border: 1px solid #999999; background-color: #FFFFFF; }
 /* les séparateurs */
-hr	{ height: 0; border: 0 solid #FFFFFF; border-top-width: 1px;}
+hr	{ height: 0; border: 0 solid #FFFFFF; border-top-width: 1px; margin:4px 0 0 0;}
 /* Couleur principale des tableaux et assimilés */
 table.spipforum, div.prec, div#detail, div.login, td.row1, div.rechliste
 { background-color:#D3E8E8 ; }

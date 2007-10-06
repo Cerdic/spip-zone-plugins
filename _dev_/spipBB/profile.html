@@ -121,13 +121,13 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 
 	<INCLURE{fond=entete_BB}{id_rubrique}>
 
-	<div id="corps"><!-- Section contenant les données -->
+	<div id="corps"><!-- Section contenant les donnees -->
 		
 		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
 
 		[(#MODELE{spipbb_chemindefer}{id_rubrique})]
 
-		<div id="detail"> <!-- Section pour mise en forme spécifique des informations d'un utilisateur -->
+		<div id="detail"> <!-- Section pour mise en forme specifique des informations d'un utilisateur -->
  			<h2><:spipbb:profil:> #NOM</h2>
 			[<div id="avatar"> <!--Section de l'avatar-->
 				<h3><:spipbb:avatar:></h3>
@@ -221,7 +221,7 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 	echo "<b>"._T('spipbb:texte_login_precaution')."</b>\n";
 	fin_cadre_enfonce();
 	echo "<br />"; }
-  
+
 	// Un redacteur n'a pas le droit de modifier son login !
 	if ($edit_login) {
 		echo "<b>"._T('spipbb:item_login')."</b> ";
@@ -230,7 +230,7 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 	else {
 		echo "<fieldset style='padding:5'><legend><b>"._T('spipbb:item_login')."</b><br/></legend><br/><b>".$auteur['login']."</b> ";
 		echo "<i> ("._T('spipbb:info_non_modifiable').")</i><br />"; }
-  
+
 	// On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
 	if ($edit_pass) {
 		echo "<b>"._T('pass_nouveau_pass')."</b> ";
@@ -244,9 +244,9 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 	}
 	fin_cadre_relief();
 	echo "<br />";
-	
+
 	echo "<div align='center'><input type='submit' class='fondo' name='Valider' value='"._T('bouton_valider')."' /></div>";
-  
+
 echo "</div>";
 echo "</form>";
 fin_cadre_formulaire(); ?>
@@ -257,10 +257,10 @@ fin_cadre_formulaire(); ?>
 				<!-- A savoir qu'elle est utile dans la mise en forme par css spipbblike -->
 			</div>
 			
-		</div><!-- Fin de la section détail -->
-		
+		</div><!-- Fin de la section detail -->
+
 	</div><!-- Fin de la section Corps -->
-	
+
 <INCLURE{fond=pied_BB}{id_rubrique}>
 
 </div> <!-- Fin de la section contenant -->
@@ -270,5 +270,5 @@ fin_cadre_formulaire(); ?>
 <:aucun_auteur:>
 <//B_auteur_principal>
 <?php
-} else header("Location: spip.php?page=profile&id_auteur=$id_auteur_session&id_rubrique=$id_rubrique"); // Ca c'est si un p'tit malin essaye d'éditer le profile d'un autre...
+} else header("Location: spip.php?page=profile&id_auteur=$id_auteur_session&id_rubrique=$id_rubrique"); // Ca c'est si un p'tit malin essaye d'editer le profile d'un autre...
 ?>
