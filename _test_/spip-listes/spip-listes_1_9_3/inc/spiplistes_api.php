@@ -523,6 +523,19 @@ function spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute) {
 	return($annee."-".$mois."-".$jour." ".$heure.":".$minute.":00");
 }
 
+function spiplistes_demande_format_abo($id_auteur) {
+	$id_auteur = intval($id_auteur);
+	$result = false;
+	if($id_auteur > 0) {
+		$sql_query = "SELECT `spip_listes_format` FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur LIMIT 1";
+		if($row = spip_fetch_array(spip_query($sql_query))) {
+			$result = $row['spip_listes_format'];
+			$result = (($result=="html") || ($result=="texte")) ? $result : false;
+		}
+	}
+	return($result);
+}
+
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

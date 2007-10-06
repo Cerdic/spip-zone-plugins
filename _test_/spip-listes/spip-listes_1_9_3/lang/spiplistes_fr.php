@@ -107,6 +107,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Courriers_vides' => "Courriers annul&eacute;s (vides)",
 'Courriers_sans_destinataire' => "Courriers sans destinataire (liste vide)",
 'Courriers_sans_liste' => "Courriers sans abonn&eacute;s (liste manquante)",
+'Ce_courrier_ne_sera_envoye_qu_une_fois' => "Ce courrier ne sera envoy&eacute; qu'une fois.",
 
 //D
 '_de_' => " de ",

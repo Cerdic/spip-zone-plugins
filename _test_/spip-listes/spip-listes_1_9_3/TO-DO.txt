@@ -9,3 +9,4 @@ TO-DO:
 - Corriger documentation contextuelle
 - Problème de charset sur le titre ;
 - Annulation d'envoi dans boite autocron à revoir ;
+- Revoir formulaire abonnement (XHTML/WAI incorrect).

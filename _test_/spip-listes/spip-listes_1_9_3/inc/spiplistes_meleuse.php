@@ -84,12 +84,14 @@ function spiplistes_meleuse () {
 			foreach(array('id_courrier','id_liste','total_abonnes') as $key) {
 				$$key = intval($$key);
 			}
-			$titre = typo($titre);
-			$texte = stripslashes($texte);
+			$objet_html = filtrer_entites(typo($titre));
+			$page_html = stripslashes($texte);
 			$message_texte = stripslashes($message_texte);
 			
 			$nb_emails = array();
 			
+			// compteur pourla session uniquement
+			// le total de chaque sera ajouté en fin de session
 			$nb_emails_envoyes =
 				$nb_emails_echec = 
 				$nb_emails_non_envoyes = 
@@ -97,35 +99,32 @@ function spiplistes_meleuse () {
 				$nb_emails['html'] = 0
 				;
 		
-			$pied_page = "" ;
+			$pied_page_html = "" ;
 			
 			$str_log = "CRON:"; 
 			
 			//////////////////////////
 			// Determiner le destinataire ou la liste destinataire
-			if(email_valide($email_test)) {
+			if($is_a_test = email_valide($email_test)) {
 			// courrier à destination adresse email de test
 				spiplistes_log( _T('spiplistes:email_test')." : ".$destinataires, LOG_DEBUG);
-				$test = 'oui';
-				$mail_collectif = 'non' ;
 				$str_log .= " EMAIL_TEST to: $email_test"; 
 			} 
 			else if($id_liste > 0) {
 			// courrier à destination des abonnés d'une liste
 				spiplistes_log("Envoi sur liste abos #$id_liste", LOG_DEBUG);
-				$str_log .= " ID_LISTE to: #$id_liste"; 
+				$str_log .= " ID_LISTE to: #$id_liste ($total_abonnes users)"; 
 	
-				$pied_page = pied_de_page_liste($id_liste);
+				$pied_page_html = pied_de_page_liste($id_liste);
 				$lang = spiplistes_langue_liste($id_liste);
 				if($lang != '') $GLOBALS['spip_lang'] = $lang ;
 	
-				$mail_collectif = 'non' ;
 				$result_d = spip_query("SELECT * FROM spip_listes WHERE id_liste=$id_liste LIMIT 1");
 		
 				if($ro = spip_fetch_array($result_d)){
 					$titre_liste = $ro["titre"];
 					$id = $ro["id_liste"];
-					$email_liste = $ro["email_envoi"];
+					$email_envoi = $ro["email_envoi"];
 					spiplistes_log(_T('spiplistes:envoi_listes').$titre_liste, LOG_DEBUG);
 				}
 				else {
@@ -139,148 +138,152 @@ function spiplistes_meleuse () {
 			else {
 				// erreur dans un script d'appel ? Ou url ? Ou base erreur ?
 				$str_log .= " [ERROR] MISSING PARAMS (id_liste AND email_test)";
-					spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ERREUR."' WHERE id_courrier=$id_courrier LIMIT 1"); 
+				spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ERREUR."' WHERE id_courrier=$id_courrier LIMIT 1"); 
 				// quitte while() principal
 				break;
 			}
 			
+			//////////////////////////////
 			// on prepare l'email
 			$nomsite = $GLOBALS['meta']['nom_site'];
 			$urlsite = $GLOBALS['meta']['adresse_site'];
 				
 			// email emetteur
 			$email_webmaster = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
-			$from = email_valide($email_liste) ? $email_liste : $email_webmaster;
+			$from = email_valide($email_envoi) ? $email_envoi : $email_webmaster;
 		
 			$is_from_valide = email_valide($from);         
 					 
-			$objet= filtrer_entites($titre);
-			$remplacements = array("&#8217;"=>"'","&#8220;"=>'"',"&#8221;"=>'"');
 			if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
-				$objet = strtr($objet, $remplacements);
-				$texte = strtr($texte, $remplacements);
+				$remplacements = array("&#8217;"=>"'","&#8220;"=>'"',"&#8221;"=>'"');
+				$objet_html = strtr($objet_html, $remplacements);
+				$page_html = strtr($page_html, $remplacements);
 			}
 			
 			if($opt_lien_en_tete_courrier) {
-				$texte = ""
+				$page_html = ""
 					. _T('spiplistes:Complement_lien_de_tete'
 						, array('liencourrier'=>generer_url_public('courrier', "id_courrier=$id_courrier"), 'nomsite'=>$nomsite)
 						)
-					. $texte
+					. $page_html
 					;
 			}
 			
-			// on prepare le debut de la version html
-			$pageh = "<html>\n\n<body>\n\n".$texte."\n\n";
-			// la fin de la version html sera generee pour chaque destinataire
-		  
-			// on prepare la version texte
-			if($message_texte !='')
-				$page_ = $message_texte ;  
-			else
-				$page_ = version_texte($texte);
-			 
-			$page_.="\n\n________________________________________________________________________"  ;
-			$page_.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
-			$page_.=$urlsite."\n";
-			$page_.="________________________________________________________________________"  ;
+			////////////////////////////////////		  
+			// Prepare la version texte
+			$objet_texte = version_texte($objet_html);
+			$page_texte = ($message_texte !='') ? $message_texte : version_texte($page_html);
+			$pied_page_texte = version_texte($pied_page_html);
+			
+			$ii = str_repeat("-", 40);
+			$page_texte .= ""
+				. "\n\n$ii"
+				. "\n\n"._T('spiplistes:editeur').$nomsite."\n"
+				. $urlsite."\n"
+				. "$ii"
+				;
 		
 			if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
-				$pageh = unicode2charset(charset2unicode($pageh),$GLOBALS['meta']['spiplistes_charset_envoi']);
-				$page_ = unicode2charset(charset2unicode($page_),$GLOBALS['meta']['spiplistes_charset_envoi']);
-				$pied_page = unicode2charset(charset2unicode($pied_page),$GLOBALS['meta']['spiplistes_charset_envoi']);
+				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte') as $key) {
+					$$key = unicode2charset(charset2unicode($$key),$GLOBALS['meta']['spiplistes_charset_envoi']);
+				}
 			}
 			
-			$email_a_envoyer['texte'] = new phpMail('', $objet, '',$page_, $GLOBALS['meta']['spiplistes_charset_envoi']);
+			$email_a_envoyer['texte'] = new phpMail('', $objet_texte, '', $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
 			$email_a_envoyer['texte']->From = $from ; 
 			$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
 			$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$from); 
 			$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
 			$email_a_envoyer['texte']->SMTPKeepAlive = true;
 			
-			$email_a_envoyer['html'] = new phpMail('', $objet, $pageh, $page_, $GLOBALS['meta']['spiplistes_charset_envoi']);
+			$email_a_envoyer['html'] = new phpMail('', $objet_html, $page_html, $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
 			$email_a_envoyer['html']->From = $from ; 
 			$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$from); 
 			$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
 			$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$from); 	
 			$email_a_envoyer['html']->SMTPKeepAlive = true;
 		
-			spiplistes_log(_T('spiplistes:email_reponse').$from."\n"._T('spiplistes:contacts')." : ".$total_abonnes) ;
+			spiplistes_log(_T('spiplistes:email_reponse').$from."\n"._T('spiplistes:contacts')." : ".$total_abonnes, LOG_DEBUG);
 			
-			if($total_abonnes){
+			if($total_abonnes) {
 		
-				spiplistes_log(_T('spiplistes:message'). $titre);
+				spiplistes_log(_T('spiplistes:message'). $titre, LOG_DEBUG);
 		
-				$limit=$GLOBALS['meta']['spiplistes_lots']; // nombre de messages envoyes par boucles.	
+				$limit = intval($GLOBALS['meta']['spiplistes_lots']); // nombre de messages envoyes par boucles.	
 				
 				//chopper un lot 
 				
-				if($test == 'oui')
-					$result_inscrits = spip_query("SELECT id_auteur, nom, email FROM spip_auteurs WHERE email ="._q($email_test)." ORDER BY id_auteur ASC");
-				else{
-					//$result_inscrits = spip_query("SELECT a.nom, a.id_auteur, a.email, a.extra FROM spip_auteurs AS a, spip_auteurs_courriers AS b WHERE a.id_auteur=b.id_auteur AND b.id_courrier = "._q($id_courrier)." ORDER BY a.id_auteur ASC  LIMIT 0,".intval($limit));
+				if($is_a_test) {
+					$result_inscrits = spip_query("SELECT id_auteur,nom,email FROM spip_auteurs WHERE email="._q($email_test)." LIMIT 1");
+				}
+				else {
 					// un id pour ce processus
-					$id_process = substr(creer_uniqid(),0,5);
-					spip_query("UPDATE spip_auteurs_courriers SET etat="._q($id_process)." WHERE etat='' AND id_courrier = "._q($id_courrier)." LIMIT ".intval($limit));
+					$id_process = intval(substr(creer_uniqid(),0,5));
+					spip_query("UPDATE spip_auteurs_courriers SET etat=$id_process WHERE etat='' AND id_courrier=$id_courrier LIMIT $limit");
 					$result_inscrits = spip_query(
 						"SELECT a.nom, a.id_auteur, a.email 
 						FROM spip_auteurs AS a, spip_auteurs_courriers AS b 
-						WHERE a.id_auteur=b.id_auteur AND b.id_courrier = "._q($id_courrier)." AND etat="._q($id_process)."
-						ORDER BY a.id_auteur ASC");
+						WHERE a.id_auteur=b.id_auteur AND b.id_courrier=$id_courrier AND etat=$id_process"
+						);
 				}
 					
 				$liste_abonnes = spip_num_rows($result_inscrits);
 				if($liste_abonnes > 0){
 		
 					// ne sert qu'a l affichage
-					$debut = $nb_emails_envoyes + $nb_emails_non_envoyes ; // ??
-					spiplistes_log("envois effectues : ".$debut.", pas : ".$limit.", nb:".$liste_abonnes) ;	
-		#	spip_timer();
+					$debut = $nb_emails_envoyes + $nb_emails_non_envoyes; 
+					spiplistes_log("envois effectues : ".$debut.", pas : ".$limit.", nb:".$liste_abonnes, LOG_DEBUG);	
+
 					//envoyer le lot d'email selectionne
 					while ($row2 = spip_fetch_array($result_inscrits)) {
 						$str_temp = " ";
-						$id_auteur = $row2['id_auteur'] ;
-		
-						//indiquer eventuellement le debut de l'envoi
-						if(!$date_debut_envoi) {
-							spip_query("UPDATE spip_courriers SET date_debut_envoi=NOW() WHERE id_courrier="._q($id_courrier)." LIMIT 1"); 
-							$date_debut_envoi = true; // ne pas faire 20 update au premier lot :)
+						$id_auteur = intval($row2['id_auteur']);
+						$nom_auteur = $row2['nom'];
+						$email = $row2['email'];
+
+						// Marquer le debut de l'envoi
+						if(!intval($date_debut_envoi)) {
+							spip_query("UPDATE spip_courriers SET date_debut_envoi=NOW() WHERE id_courrier=$id_courrier LIMIT 1"); 
 						}
 				
-						$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
-						
-						$format_abo = $abo["spip_listes_format"];
-		
-						$nom_auteur = $row2["nom"];
-						$email = $row2["email"];
-						
+						$format_abo = spiplistes_demande_format_abo($id_auteur);
+							
 						$str_temp .= $nom_auteur."(".$format_abo.") - $email";
-						$total=$total+1;
+						$total++;
 						unset ($cookie);
 		
-						if ( ($format_abo == 'texte') 
-						  OR ($format_abo == 'html') ) {
+						if($format_abo) {
 							$cookie = creer_uniqid();
-							spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email));				
+							spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email)." LIMIT 1");				
 		
-							if ($is_from_valide){
-								if ($format_abo == 'html')  // email HTML ------------------
-									// desabo pied de page HTML
-									$body = $pageh.$pied_page."<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
-								else						// email TXT -----------------------
-									// desabo pied de page texte			
-									$body = $page_ ."\n\n"
-									  . filtrer_entites(_T('spiplistes:abonnement_mail'))."\n"
-									  . filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
-		
+							if ($is_from_valide) {
+								switch($format_abo) {
+									case 'html':
+										$body =
+											"<html>\n\n<body>\n\n"
+											. $page_html
+											. $pied_page_html
+											. "<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')
+											. "</a>\n\n</body></html>"
+											;
+										break;
+									case 'texte':
+										$body =
+											$page_texte ."\n\n"
+											. $pied_page_texte
+										  . filtrer_entites(_T('spiplistes:abonnement_mail'))."\n"
+										  . filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"
+										  ;
+										break;
+								}
+
 								$email_a_envoyer[$format_abo]->Body = $body;
-								$email_a_envoyer[$format_abo]->SetAddress($email,$nom_auteur);
-		
-								$envoi_ok =  $opt_simuler_envoi ? true : $email_a_envoyer[$format_abo]->send();
+								$email_a_envoyer[$format_abo]->SetAddress($email, $nom_auteur);
 								
-								if ($envoi_ok) {
-									spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur="._q($id_auteur)." AND id_courrier="._q($id_courrier));				
+								// envoie le mail
+								if($opt_simuler_envoi ? true : $email_a_envoyer[$format_abo]->send()) {
+									spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur=$id_auteur AND id_courrier=$id_courrier");				
 									$str_temp .= "  [OK]";
 									$nb_emails_envoyes++;
 									$nb_emails[$format_abo]++;
@@ -288,7 +291,7 @@ function spiplistes_meleuse () {
 								else {
 									$str_temp .= _T('spiplistes:erreur_mail');
 									$nb_emails_echec++;
-							}
+								}
 							}
 							else {
 								$str_temp .= _T('spiplistes:sans_adresse');
@@ -297,24 +300,24 @@ function spiplistes_meleuse () {
 						}
 						else {  // email fin TXT /HTML  -----------------------------------------
 							$nb_emails_non_envoyes++; //desabonnes 
-							spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur="._q($id_auteur)." AND id_courrier="._q($id_courrier));	
+							spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur=$id_auteur AND id_courrier="._q($id_courrier));	
 							$str_temp .= _L('pas abonne en ce moment');
 						} /* fin abo*/
-						spiplistes_log($str_temp);
+						spiplistes_log($str_temp, LOG_DEBUG);
 					}/* fin while */
 					
 					// si c'est un test on repasse en redac
-					if ($test== 'oui') {
-						spip_query("UPDATE spip_courriers SET statut='redac', email_test='', total_abonnes=0 WHERE id_courrier="._q($id_courrier));
-						spiplistes_log('repasse en redac');
+					if($is_a_test) {
+						spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_REDAC."',email_test='',total_abonnes=0 WHERE id_courrier=$id_courrier");
+						spiplistes_log('repasse en redac', LOG_DEBUG);
 					}
 					$email_a_envoyer['texte']->SmtpClose();
 					$email_a_envoyer['html']->SmtpClose();
 				} 
 				else {   /* fin liste abonnes */	
 					// archiver
-					spiplistes_log("UPDATE spip_courriers SET statut='publie' WHERE id_courrier="._q($id_courrier));
-					spip_query("UPDATE spip_courriers SET statut='publie' WHERE id_courrier="._q($id_courrier));
+					$statut = ($type=_SPIPLISTES_TYPE_NEWSLETTER) ? _SPIPLISTES_STATUT_PUBLIE : _SPIPLISTES_STATUT_AUTO;
+					spip_query("UPDATE spip_courriers SET statut='$statut' WHERE id_courrier="._q($id_courrier));
 					$fin_envoi="oui";
 				}
 			}
@@ -324,7 +327,7 @@ function spiplistes_meleuse () {
 				spip_query("UPDATE spip_courriers SET titre="._q(_T('spiplistes:erreur_destinataire')).", statut='publie' WHERE id_courrier="._q($id_courrier)); 
 			}
 			// faire le bilan apres l'envoi d'un lot en esperant que les differents processus simultanes se telescopent pas trop
-			if($test != 'oui'){
+			if(!$is_a_test) {
 				$stats = spip_fetch_array(spip_query("SELECT nb_emails_envoyes,nb_emails_non_envoyes,nb_emails_echec,nb_emails_texte,nb_emails_html FROM spip_courriers AS messages WHERE id_courrier = $id_courrier"));
 				$nb_emails_envoyes = $nb_emails_envoyes + $stats['nb_emails_envoyes'] ;
 				spip_query("UPDATE spip_courriers SET nb_emails_envoyes="._q($nb_emails_envoyes)." WHERE id_courrier="._q($id_courrier)); 
@@ -342,7 +345,7 @@ function spiplistes_meleuse () {
 				 spip_query("UPDATE spip_courriers SET nb_emails_html="._q($nb_emails['html'])." WHERE id_courrier="._q($id_courrier)); 
 				if($fin_envoi=="oui")
 					spip_query("UPDATE spip_courriers SET date_fin_envoi=NOW() WHERE id_courrier="._q($id_courrier)); 
-		}
+			}
 		} // end while()
 	} // end if()
 	else {

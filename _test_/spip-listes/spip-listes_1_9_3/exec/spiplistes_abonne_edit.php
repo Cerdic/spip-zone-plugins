@@ -26,6 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/affichage');
+include_spip('inc/spiplistes_lister_courriers_listes');
 
 function exec_spiplistes_abonne_edit(){
 	global $connect_statut;
