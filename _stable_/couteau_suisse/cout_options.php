@@ -32,11 +32,7 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 	include_spip('cout_lancement');
 	// lancer l'initialisation du plugin
 	cs_initialisation();
-	
 	cs_log("appel de cout_options (suite) : strlen=".strlen($cs_metas_pipelines['options']));
-	//cs_log($GLOBALS['_SERVER'], 'GLOBALS : ');
-	cs_log($GLOBALS['_SERVER']['REQUEST_URI'], 'GLOBALS : ');
-	
 	
 	// inclusion des options pre-compilees, si l'on n'est jamais passe par ici...
 	if (!$GLOBALS['cs_options']) {

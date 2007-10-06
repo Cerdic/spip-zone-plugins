@@ -3,7 +3,7 @@
 
 // attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
 // et donc, pas de fonction cs_log !!
-spip_log('COUTEAU-SUISSE. appel de cout_fonctions : strlen=' . strlen($cs_metas_pipelines['fonctions']));
+if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE. appel de cout_fonctions : strlen=' . strlen($cs_metas_pipelines['fonctions']));
 
 // plugin initialise ?
 if($GLOBALS['cs_options']) {
