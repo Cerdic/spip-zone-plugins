@@ -316,7 +316,7 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 				break;
 			case "listes":
 				$id_row = $row['id_liste'];
-				$url_row	= generer_url_ecrire('listes', 'id_liste='.$id_row);
+				$url_row	= generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, 'id_liste='.$id_row);
 				break;
 			default:
 				$id_row	= $row['id_courrier'];			

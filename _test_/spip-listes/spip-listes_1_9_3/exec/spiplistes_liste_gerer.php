@@ -22,6 +22,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+// _SPIPLISTES_EXEC_LISTE_GERER
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	// Précision sur la table spip_listes:
@@ -30,7 +32,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	// 'description': (pas utilisé au 20071006)
 	// 'texte': description affichée dans formulaire abonnement
 	
-function exec_listes_dist(){
+function exec_spiplistes_liste_gerer () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/mots');
