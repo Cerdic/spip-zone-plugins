@@ -64,6 +64,7 @@ function cs_compatibilite_ascendante() {
 	cs_suppr_metas_var('desactive_cache');
 	cs_suppr_metas_var('radio_desactive_cache', 'radio_desactive_cache3');
 	cs_suppr_metas_var('target_blank');
+	cs_suppr_metas_var('url_glossaire_externe', 'url_glossaire_externe2');
 	cs_suppr_metas_var('');
 }
 

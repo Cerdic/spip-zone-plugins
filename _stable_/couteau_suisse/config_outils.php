@@ -416,7 +416,7 @@ add_variable( array(
 	'code' => '$GLOBALS["tweak_target_blank"]=%s;',
 ));
 add_variable( array(
-	'nom' => 'url_glossaire_externe',
+	'nom' => 'url_glossaire_externe2',
 	'format' => 'chaine',
 	'defaut' => '$GLOBALS["url_glossaire_externe"]',
 	'code:strlen(%s)' => '$GLOBALS["url_glossaire_externe"]=%s;',
@@ -426,7 +426,7 @@ add_outil( array(
 	'categorie' => 'public',
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
-	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe%%",
+	'code:options' => "%%radio_target_blank3%% %%url_glossaire_externe2%%",
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function(){ $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 ));
 
