@@ -58,34 +58,26 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	
 	$clause_where = '';
 	
-	// pour lister les listes programmées dans un futur 
-	if (
-		($element == 'listes')
-		&& (($statut == _SPIPLISTES_PRIVATE_LIST) || ($statut == _SPIPLISTES_PUBLIC_LIST)) 
-		&& ($apres_maintenant == true)
-		) {
-		$clause_where.= " AND (maj NOT BETWEEN 0 AND NOW())";
-	}
-	
 	// construction de la requête SQL
 	switch($element) {
 		case 'courriers':
-			$type='nl' ;
-			$type2="";
-			$statut2="";
-			if(($statut=='encour') || ($statut=='publie')) {
-				$type2=" OR type='auto' OR type='liste'";
-			}
 			$sql_query = "SELECT id_courrier, titre, date, date_debut_envoi, nb_emails_envoyes,total_abonnes,email_test
 				FROM spip_courriers
-				WHERE (type="._q($type).$type2.") AND (statut="._q($statut).$statut2.")
+				WHERE statut="._q($statut)."
 				ORDER BY date DESC
 				LIMIT $position,$pas";
 			break;
 		case 'listes':
+			if (
+			// pour lister les listes programmées dans un futur 
+				 (($statut == _SPIPLISTES_PRIVATE_LIST) || ($statut == _SPIPLISTES_PUBLIC_LIST)) 
+				&& ($apres_maintenant == true)
+				) {
+				$clause_where.= " AND (maj NOT BETWEEN 0 AND NOW())";
+			}
 			$sql_query = "SELECT id_liste,titre,date,patron,maj
 				FROM spip_listes
-				WHERE statut='._q($statut).' '.$clause_where.'
+				WHERE statut="._q($statut)." $clause_where
 				ORDER BY date DESC
 				LIMIT $position,$pas";
 			break;

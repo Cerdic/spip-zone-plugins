@@ -212,7 +212,6 @@ function exec_spiplistes_courriers_casier () {
 		);
 	$mes_statuts = ($statut && in_array($statut, $listes_statuts)) ? array($statut) : $listes_statuts;
 	foreach($mes_statuts as $statut) {
-spiplistes_log("LISTE: $statut", LOG_DEBUG);
 
 		if($statut == $_skip_statut) {
 			// liste des courriers programmés (des listes)
