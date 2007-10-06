@@ -49,6 +49,9 @@ function exec_spiplistes_liste_edit(){
 		$$key = intval($$key);
 	}
 
+	$flag_editable = false;
+	$clearonfocus = "";
+	
 	// MODE LISTE EDIT: modification ou creation
 	
 	if($id_liste > 0) {
@@ -62,25 +65,26 @@ function exec_spiplistes_liste_edit(){
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = $row[$key];
 			}
-			// supers-admins et moderateur seuls ont droit de modfier la liste
+			// supers-admins et moderateur seuls ont droit de modifier la liste
 			$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
 			$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
 		}
 	} 
-	elseif ($new=='oui') {
+	else {
 	///////////////////////////////
 	// Creation de la liste
 	//
 		$titre = filtrer_entites(_T('spiplistes:Nouvelle_liste_de_diffusion'));
 		$texte = "";
-		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		// construit le pied
-		include_spip('public/assembler');
-		$contexte_pied = array('lang'=>$lang);
-		$pied_page = recuperer_fond('modeles/piedmail', $contexte_pied);
+		$clearonfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		// supers-admins seuls ont droit de créer une liste
 		$flag_editable = $connect_toutes_rubriques;
 	}
+
+	// construit le pied
+	include_spip('public/assembler');
+	$contexte_pied = array('lang'=>$lang);
+	$pied_page = recuperer_fond('modeles/piedmail', $contexte_pied);
 
 	$gros_bouton_retour = icone(
 		_T('spiplistes:retour_link')
