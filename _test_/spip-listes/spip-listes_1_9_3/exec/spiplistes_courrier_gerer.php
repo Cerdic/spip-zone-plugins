@@ -404,9 +404,9 @@ function exec_spiplistes_courrier_gerer () {
 			//
 			// boite courrier au format html
 			. debut_cadre_couleur('', true)
-			. _T('spiplistes:version_html')." <a href='".generer_url_ecrire('courrier_preview','id_message='.$id_courrier)."' title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n"
+			. _T('spiplistes:version_html')." <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVIEW,'id_message='.$id_courrier)."' title=\""._T('spiplistes:plein_ecran')."\"><small>(+)</small></a><br />\n"
 			. "<iframe style='background-color:#fff;border:1px solid #000;'"
-				. " src='".generer_url_ecrire('courrier_preview','id_message='.$id_courrier)."' width='100%' height='500'></iframe>\n"
+				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVIEW,'id_message='.$id_courrier)."' width='100%' height='500'></iframe>\n"
 			. fin_cadre_couleur(true)
 			//
 			// boite courrier au format texte seul

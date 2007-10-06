@@ -22,13 +22,15 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+// _SPIPLISTES_EXEC_COURRIER_PREVIEW
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/affichage');
 
 
-function exec_courrier_preview(){
+function exec_spiplistes_courrier_preview () {
 
 	$id_message = _request('id_message');
 	$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_message));
