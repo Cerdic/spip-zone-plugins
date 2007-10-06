@@ -23,7 +23,7 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 	if (isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
 		else $valeur = cs_get_defaut($variable);
 	$valeur = cs_retire_guillemets($valeur);
-cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
+//cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 	$cs_variable = &$cs_variables[$variable];
 
 	// si la variable necessite des boutons radio

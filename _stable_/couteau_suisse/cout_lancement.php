@@ -8,10 +8,10 @@
 #  Fichier contenant les fonctions utilisees pendant  #
 #  l'execution du plugin                              #
 #  Seulement s'il y a lieu, cout_lancement.php        #
-#  va inclure cout_utils.php                          #
+#  va inclure cout_utils.php et compiler les outils   #
 #-----------------------------------------------------#
 
-cs_log("Chargement de cout_lancement.php");
+cs_log("Chargement de cout_lancement.php pour initialisation");
 
 // compatibilite avec les plugins de version anterieure a 1.7.0.0
 function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
@@ -42,6 +42,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	if (!isset($outil['description'])) $outil['description'] = _T('cout:'.$outil['id'].':description');
 	$outil['actif'] = isset($metas_outils[$outil['id']])?$metas_outils[$outil['id']]['actif']:0;
 	// Si Spip est trop ancien ou trop recent...
+	// TODO : revoir tout ça avec compare_version() et <necessite>
 	if ((isset($outil['version-min']) && $GLOBALS['spip_version']<$outil['version-min'])
 		|| (isset($outil['version-max']) && $GLOBALS['spip_version']>$outil['version-max']))
 			$outil['actif'] = 0;
@@ -171,20 +172,5 @@ function cs_canonicalize($address) {
 	$address = implode('/', $address);
 	return preg_replace(',([^.])\./,', '\1', $address);
 }
-
-/*****************/
-/* DEBUT DU CODE */
-/*****************/
-
-// $cs_metas_pipelines ne sert ici qu'a l'execution et ne comporte que :
-//	- le code pour <head></head>
-//	- le code pour les options.php
-//	- le code pour les fonction.php
-//	- le code pour les pipelines utilises
-
-global $cs_metas_pipelines;
-$cs_metas_pipelines = array();
-// lancer l'initialisation
-cs_initialisation();
 
 ?>

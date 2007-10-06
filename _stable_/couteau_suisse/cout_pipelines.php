@@ -2,7 +2,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('cout_lancement');
+// attention, ici il se peut que le plugin ne soit pas initialise (cas des .js/.css par exemple)
+// et donc, pas de fonction cs_log !!
+if(defined('_LOG_CS')) spip_log("COUTEAU-SUISSE. inclusion de cout_pipelines.php");
 
 // Compatibilite des autorisations pour SPIP 1.91
 if ($GLOBALS['spip_version_code']<1.92) {
@@ -14,8 +16,6 @@ if ($GLOBALS['spip_version_code']<1.92) {
 /***********
  * INSTALL *
  ***********/
-
-cs_log("Chargement de cout_pipelines.php...");
 
 function couteau_suisse_install($action){
 cs_log("couteau_suisse_install($action)");
