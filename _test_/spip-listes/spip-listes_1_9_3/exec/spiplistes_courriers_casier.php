@@ -30,6 +30,7 @@ include_spip('inc/presentation');
 include_spip('inc/affichage');
 include_spip ('base/spip-listes');
 include_spip('inc/plugin');
+include_spip('inc/spiplistes_lister_courriers_listes');
 
 function spiplistes_afficher_pile_messages() {
 	
@@ -109,7 +110,7 @@ function spiplistes_afficher_pile_messages() {
 		;
 	return ($out);
 	
-} // spiplistes_afficher_pile_messages()
+} // end spiplistes_afficher_pile_messages()
 
 
 function exec_spiplistes_courriers_casier () {
@@ -135,6 +136,7 @@ function exec_spiplistes_courriers_casier () {
 	// initialise les variables postées par formulaire
 	foreach(array(
 		'btn_confirmer_envoi', 'id_courrier', 'id_liste' // (formulaire gerer) confirmer envoi
+		, 'statut'
 		) as $key) {
 		$$key = _request($key);
 	}
@@ -194,25 +196,51 @@ function exec_spiplistes_courriers_casier () {
 	
 	// MODE HISTORIQUE: Historique des envois --------------------------------------
 	
-	$page_result = ""
-		. spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'24_send-receive.gif'
-			, 'messages', _SPIPLISTES_STATUT_ENCOURS, '', 'position')
-		. spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
-			, 'messages', _SPIPLISTES_STATUT_REDAC, '', 'position')
-		. spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
-			, 'messages', _SPIPLISTES_STATUT_READY, '', 'position')
-		//
-		// liste des courriers programmés (des listes)
-		. spiplistes_afficher_pile_messages()
-		//
-		. "<br />"
-		//
-		. spiplistes_afficher_en_liste(_T('spiplistes:messages_auto_envoye'),_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
-			, 'messages', _SPIPLISTES_STATUT_AUTO, '', 'position')
-		. spiplistes_afficher_en_liste(_T('spiplistes:aff_envoye'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_mail.gif'
-			, 'messages', _SPIPLISTES_STATUT_PUBLIE, '', 'position') 
-		;
+	$icone = _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png';
 	
+	$page_result = ""
+		;	
+
+	$_skip_statut = "Sauter une table pour afficher chronos";
+
+	// Début de liste
+	$listes_statuts = array(
+		_SPIPLISTES_STATUT_ENCOURS, _SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY
+		, $_skip_statut
+		, _SPIPLISTES_STATUT_AUTO, _SPIPLISTES_STATUT_PUBLIE
+		, _SPIPLISTES_STATUT_VIDE, _SPIPLISTES_STATUT_IGNORE, _SPIPLISTES_STATUT_STOPE
+		);
+	$mes_statuts = ($statut && in_array($statut, $listes_statuts)) ? array($statut) : $listes_statuts;
+	foreach($mes_statuts as $statut) {
+spiplistes_log("LISTE: $statut", LOG_DEBUG);
+
+		if($statut == $_skip_statut) {
+			// liste des courriers programmés (des listes)
+			$page_result .= ""
+				. spiplistes_afficher_pile_messages()
+				. "<br />"
+				;
+		}
+		else {
+			$page_result .= ""
+				. spiplistes_lister_courriers_listes(
+					spiplistes_items_get_item("tab_t", $statut)
+						.	(
+							($desc = spiplistes_items_get_item("desc", $statut))
+							? "<br /><span style='font-weight:normal;'>$desc</span>"
+							: ""
+							)
+					, spiplistes_items_get_item("icon", $statut)
+					, 'courriers'
+					, $statut
+					, false
+					, 'position'
+					, _SPIPLISTES_EXEC_COURRIER_GERER
+				)
+				;
+		}
+	}
+
 	echo($page_result);
 	
 	// MODE HISTORIQUE FIN ---------------------------------------------------------

@@ -468,6 +468,7 @@ function  spiplistes_arbo_rubriques($id_rubrique,  $rslt_id_rubrique="") {
 * @param int position
 * @author Pierre Basson
 **/
+/*
 function spiplistes_afficher_pagination($fond, $arguments, $total, $position, $nom) {
 	global $pas;
 	$pagination = '';
@@ -495,7 +496,7 @@ function spiplistes_afficher_pagination($fond, $arguments, $total, $position, $n
 
 	return $pagination;
 }
-
+*/
 
 function spiplistes_cherche_auteur(){
 	if (!$cherche_auteur = _request('cherche_auteur')) return;

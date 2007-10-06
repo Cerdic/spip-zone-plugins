@@ -99,6 +99,13 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Console_syslog_desc' => "Vous &ecirc;tes sur un r&eacute;seau local (@IP_LAN@). Si besoin, vous pouvez activer la console sur syslog au lieu des journaux SPIP.",
 'Console_syslog_texte' => "Activer les journaux syst&egrave;mes (syslog)",
 'Casier_a_courriers' => "Casier &agrave; courriers",
+'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction',
+'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;",
+'Courriers_publies' => "Courriers publi&eacute;s",
+'Courriers_auto_publies' => "Courriers automatiques publi&eacute;s",
+'Courriers_stope' => "Courriers stopp&eacute;s en cours d'envoi",
+'Courriers_vides' => "Courriers annul&eacute;s (vides)",
+'Courriers_sans_destinataire' => "Courriers sans destinataire (liste vide)",
 
 //D
 '_de_' => " de ",
@@ -143,6 +150,9 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Envoyer_ce_courrier' => "Envoyer ce courrier",
 'Exporter_une_liste_d_abonnes' => "Exporter une liste d'abonn&eacute;s",
 'Exporter_une_liste_de_non_abonnes' => "Exporter une liste de non abonn&eacute;s",
+'En_redaction' => "En r&eacute;daction",
+'En_cours' => "En cours",
+'Envoi_abandonne' => "Envoi abandonn&eacute;",
 
 //F
 'faq' => 'FAQ',
@@ -255,6 +265,8 @@ et de recevoir les lettres d\'informations.',
 'Pas_de_liste_pour_import' => "Vous devez cr&eacute;er au moins une liste de destination afin de pouvoir importer 
 	vos abonn&eacute;s.",
 'Periodicite_:' => "P&eacute;riodicit&eacute; : ",
+'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi",
+'Publies' => "Publi&eacute;s",
 
 //R
 'recherche' => 'Rechercher',
@@ -289,7 +301,9 @@ et de recevoir les lettres d\'informations.',
 'Selectionnez_une_liste_pour_import' => "Vous devez s&eacute;lectionner au moins une liste de diffusion pour pouvoir importer 
 	les abonn&eacute;s.",
 'Selectionnez_une_liste_de_destination' => "S&eacute;lectionnez une ou plusieurs listes de destination pour vos abonn&eacute;s.",
-	
+'Stoppes' => "Stopp&eacute;s",
+'Sans_destinataire' => "Sans destinataire",
+
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
 'texte_courrier' => '<b>Texte du courrier</b> (HTML autoris&eacute;)',
@@ -306,6 +320,7 @@ et de recevoir les lettres d\'informations.',
 'vous_inscrire_auteur' => 'vous inscrire en tant qu\'auteur',
 'voir_discussion' => 'Voir la discussion',
 'Voir_les_journaux_SPIPLISTES' => "Voir les journaux SPIPLISTES",
+'Vides' => "Vides",
 
 // ====================== spip_listes.php3 ======================
 'abon' => 'ABONNES',
