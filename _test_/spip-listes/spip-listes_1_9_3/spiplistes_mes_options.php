@@ -55,7 +55,7 @@ define("_SPIPLISTES_EXEC_COURRIERS_LISTE", _SPIPLISTES_EXEC_PREFIX."courriers_ca
 define("_SPIPLISTES_EXEC_IMPORT_EXPORT", _SPIPLISTES_EXEC_PREFIX."import_export");
 define("_SPIPLISTES_EXEC_IMPORT_PATRON", _SPIPLISTES_EXEC_PREFIX."import_patron");
 define("_SPIPLISTES_EXEC_LISTE_EDIT", _SPIPLISTES_EXEC_PREFIX."liste_edit");
-define("_SPIPLISTES_EXEC_LISTE_VUE", "listes");
+define("_SPIPLISTES_EXEC_LISTE_GERER", "listes"); //listes
 define("_SPIPLISTES_EXEC_LISTES_LISTE", _SPIPLISTES_EXEC_PREFIX."listes_toutes");
 
 // les formats d'envoi autorisés, ou non pour pseudo-désabonné

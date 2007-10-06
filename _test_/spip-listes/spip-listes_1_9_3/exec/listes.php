@@ -212,7 +212,7 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 			// Conserve les archives postées
 			? icone (
 					_T('spiplistes:Supprimer_cette_liste')
-					, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE, "btn_supprimer_liste=$id_liste&id_liste=$id_liste")
+					, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "btn_supprimer_liste=$id_liste&id_liste=$id_liste")
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
 					, ""
 					, "right"
@@ -306,7 +306,7 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 		//
 		////////////////////////////
 		// Formulaire diffusion
-		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='post'>\n"
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
 		. "<input type='hidden' name='exec' value='listes' />\n"
 		. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
 		. "<span class='verdana2'>". _T('spiplistes:Cette_liste_est').": "
@@ -330,7 +330,7 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 		////////////////////////////
 		// Formulaire adresse email pour le reply-to
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "replyto"))
-		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='post'>\n"
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
 		. "<p class='verdana2'>\n"
 		. _T('spiplistes:adresse_mail_retour')."<br />\n"
 		. "<blockquote class='verdana2'><em>"._T('spiplistes:adresse')."</em></blockquote></p>\n"
@@ -344,7 +344,7 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 		////////////////////////////
 		// Formulaire programmer un courrier automatique
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
-		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=$id_liste")."' method='post'>\n"
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
 		. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>\n"
 		. "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>\n"
 		;

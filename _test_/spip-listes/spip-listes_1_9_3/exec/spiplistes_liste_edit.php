@@ -84,7 +84,7 @@ function exec_spiplistes_liste_edit(){
 
 	$gros_bouton_retour = icone(
 		_T('spiplistes:retour_link')
-		, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE,"id_liste=" . ($lier_trad ? $lier_trad : $id_liste) )
+		, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=" . ($lier_trad ? $lier_trad : $id_liste) )
 		, "article-24.gif"
 		, "rien.gif"
 		, ""
@@ -118,8 +118,8 @@ function exec_spiplistes_liste_edit(){
 	
 	$formulaire_action = 
 		($id_liste)
-		? generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE)
-		: generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE, "id_liste=$id_liste")
+		? generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER)
+		: generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")
 		;
 
 	$page_result = ""

@@ -108,7 +108,7 @@ function exec_spiplistes_courrier_gerer () {
 					if(($nb_abos = spiplistes_nb_abonnes_count($id_liste)) > 0) {
 						if($row = spip_fetch_array(spip_query ("SELECT titre FROM spip_listes WHERE id_liste = $id_liste LIMIT 1"))) {
 							// va chercher le nom de la liste + nb abos
-							$str_destinataire = _T('spiplistes:sur_liste') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE, "id_liste=$id_liste")."'>".$row['titre']."</a>"
+							$str_destinataire = _T('spiplistes:sur_liste') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
 								. " " . spiplistes_nb_abonnes_liste_str_get($id_liste, $nb_abos);
 							// Ok. Met à jour le panier
 							spip_query("UPDATE spip_courriers SET email_test='',total_abonnes=$nb_abos,id_liste=$id_liste WHERE id_courrier=$id_courrier LIMIT 1");
@@ -307,7 +307,7 @@ function exec_spiplistes_courrier_gerer () {
 					$str_destinataire = 
 						(!empty($email_test))
 						? _T('spiplistes:email_adresse') . " : $email_test"
-						: _T('spiplistes:sur_liste') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_VUE, "id_liste=$id_liste")."'>".$row['titre']."</a>"
+						: _T('spiplistes:sur_liste') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
 									. " " . spiplistes_nb_abonnes_liste_str_get($id_liste)
 						;
 				}
