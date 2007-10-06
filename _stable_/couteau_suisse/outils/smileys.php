@@ -16,11 +16,15 @@ cs_log(" -- abs. path = $path2");
 	//  - les doubles, puis les simples, puis les courts
 	//  - le raccourci insere par la balise #SMILEYS est la premiere occurence de chaque fichier
 	$smileys = array(
+	// attention ' est different de ’ (&#8217;) (SPIP utilise/ecrit ce dernier)
+	 ":&#8217;-))"=> 'pleure_de_rire.png',
+	 ":&#8217;-)"=> 'pleure_de_rire.png',
+	 ":&#8217;-D"	=> 'pleure_de_rire.png',
+	 ":&#8217;-("	=> 'triste.png',
+	
 	// les doubles :
 	 ':-))'	=> 'mort_de_rire.png',
 	 ':))'	=> 'mort_de_rire.png',
-	// attention ' est different de ’ (&#8217;) (SPIP utilise/ecrit ce dernier)
-	 ":&#8217;-))"=> 'pleure_de_rire.png',
 	 ":'-))"=> 'pleure_de_rire.png',
 	 ':-(('	=> 'en_colere.png',
 
@@ -28,12 +32,9 @@ cs_log(" -- abs. path = $path2");
 	 ';-)'	=> 'clin_d-oeil.png',
 	 ':-)'	=> 'sourire.png',
 	 ':-D'	=> 'mort_de_rire.png',
-	 ":&#8217;-)"=> 'pleure_de_rire.png',
 	 ":'-)"=> 'pleure_de_rire.png',
 	 ":'-D"	=> 'pleure_de_rire.png',
-	 ":&#8217;-D"	=> 'pleure_de_rire.png',
 	 ':-('	=> 'pas_content.png',
-	 ":&#8217;-("	=> 'triste.png',
 	 ":'-("	=> 'triste.png',
 	 ':-&gt;' => 'diable.png',
 	 '|-)'	=> 'rouge.png',
