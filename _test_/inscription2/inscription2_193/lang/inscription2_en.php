@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_defaut_desc' => 'Obligatory by defect informations',
 'info_perso' => 'Personal informations',
 'info_pros' => 'Professional informations',
-'info_connection' => '<NEW>Informations de connexion',
+'info_connection' => 'Login informations',
 'general_infos' => 'General Infos',
 'info_perso_desc' => 'Personal informations requested from the new members of the site',
 'info_gener' => 'General Informations',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fiche' => 'card-index',
 'fiche_mod' => 'Modifiable',
 'table' => 'Table',
-'par_defaut' => '<NEW> par d&eacute;faut',
+'par_defaut' => ' by default',
 'form_expl' => ' : The field will be displayed on the form INSCRIPTION2',
 'form_oblig_expl' => '<NEW> : Rendre la saisie obligatoire dans le formulaire',
 'fiche_expl'=> ' : The field will be visible on the card of member',
@@ -42,7 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'table_expl' => ' : The field will be displayed on the list of the adherents (private area)',
 
 'icone_menu_config' => 'Inscription2',
-'nom' => '<MODIF>Pseudo',
+'nom' => 'Signature',
+'nom_explication' => 'your name or nickname',
 'nom_famille' => 'Name',
 'prenom' => 'First name',
 'naissance' => 'Date of birth',
@@ -160,17 +161,17 @@ The @nom_site@\'s Team',
 'website' => 'website',
 
 //validation des champs
-'champ_obligatoire' => '<NEW>Ce champ est obligatoire',
-'chaine_valide' => '<NEW>Veuillez ins&eacute;rer une chaine de caract&egrave;re',
-'cp_valide' => '<NEW>Veuillez ins&eacute;rer un code postal valide',
-'numero_valide' => '<NEW>Veuillez ins&eacute;rer un num&eacute;ro valide',
-'caracteres' => '<NEW>caract&egrave;res',
-'chainenombre' => '<NEW>(compos&eacute;e de lettres et/ou de chiffres)',
-'chainelettre' => '<NEW>(compos&eacute;e uniquement de lettres)',
-'email_valide' => '<NEW>Veuillez ins&eacute;rer un email valide',
+'champ_obligatoire' => 'This field is required',
+'chaine_valide' => 'Please insert a string',
+'cp_valide' => 'Please insert a valid postal code',
+'numero_valide' => 'Please insert a valid number',
+'caracteres' => 'characters',
+'chainenombre' => '(composed by letters and/or figures)',
+'chainelettre' => '(composed only by letters)',
+'email_valide' => 'Please insert a valid e-mail address',
 
 'titre_confirmation' => 'Confirmation',
-'page_confirmation' => '<NEW>Page de confirmation de votre inscription'
+'page_confirmation' => 'Confirmation of your inscription'
 
 );
 
