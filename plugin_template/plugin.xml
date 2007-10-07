@@ -40,21 +40,21 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		<icone>images/bouton-24.png</icone>
 		<titre>Template</titre>
 		<url>template</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
-		<args>type=texte&id=1</args>
+		<args>type=texte&amp;id=1</args>
 	</bouton> 
 	<!-- Ajoute un bouton dans un sous-menu -->
 	<bouton id='mon_sous_bouton' parent='mon_bouton_1'>
 		<icone>images/bouton-24.png</icone>
 		<titre>Sous le template</titre>
 		<url>template</url> 
-		<args>type=autre_chose&id=1</args>
+		<args>type=autre_chose&amp;id=1</args>
 	</bouton> 	
 	<!-- Ajoute un onglet -->
 	<onglet id='mon_onglet' parent='configuration'>
 		<icone>images/onglet-24.png</icone>
 		<titre>Un onglet</titre>
 		<url>template</url>
-		<args>type=autre_chose&id=1</args>
+		<args>type=autre_chose&amp;id=1</args>
 	</onglet> 		
 	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
