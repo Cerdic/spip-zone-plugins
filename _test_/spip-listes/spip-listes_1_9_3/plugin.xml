@@ -10,10 +10,11 @@
 	<prefix>spiplistes</prefix>
 	<install>base/spiplistes_upgrade.php</install>
 	<lien>[Documentation->../plugins/spip-listes_1_9_3/docs/__installation_fr.txt]</lien>
+
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>spiplistes_boutons.php</inclure>
+		<inclure>inc/spiplistes_pipeline_ajouter_boutons.php</inclure>
 	</pipeline>
 	
 	<pipeline>

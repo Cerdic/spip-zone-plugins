@@ -1,14 +1,18 @@
 <?php
+/*
+	SPIP-Listes pipeline
+	inc/spiplistes_pipeline_ajouter_boutons.php
+	
+	Nota: plugin.xml en cache.
+		si modif plugin.xml, il faut réactiver le plugin (config/plugin: désactiver/activer)
+	
+*/
 
-/**
- * definition du plugin "spiplistes" version "classe statique"
- * utilisee comme espace de nommage
- */
 
-	if (!defined('_DIR_PLUGIN_SPIPLISTES')){
-		$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-		define('_DIR_PLUGIN_SPIPLISTES',(_DIR_PLUGINS.end($p)).'/');
-	} 
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
 
 	function spiplistes_ajouterBoutons($boutons_admin) {
 		// si on est admin
@@ -22,8 +26,5 @@
 		}
 		return $boutons_admin;
 	}
-
-
-
 
 ?>

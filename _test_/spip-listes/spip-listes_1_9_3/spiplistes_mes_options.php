@@ -5,6 +5,11 @@
 
 include_spip("inc/plugin_globales_lib");
 
+if (!defined('_DIR_PLUGIN_SPIPLISTES')) {
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_SPIPLISTES',(_DIR_PLUGINS.end($p)).'/');
+} 
+
 //nombre de processus d'envoi simultanes
 @define('_SPIP_LISTE_SEND_THREADS',1);
 
