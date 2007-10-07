@@ -68,6 +68,7 @@ function cron_abonnement_cron($t){
 		and b.stade_relance < 4
 		");
 		
+
 			while($row_abo = spip_fetch_array($result_abo)){
 			$id_auteur = $row_abo['id_auteur'] ;
 			$email_abonne = $row_abo['email'] ;
@@ -76,7 +77,9 @@ function cron_abonnement_cron($t){
 			spip_log($email_abonne."(".$id_auteur.") est a relancer\n","abonnement");
 			spip_log($sujet_relance,"abonnement") ;
 			
-			include_spip('inc/mail'); // bizarre le mail n'a pas l'air de partir...
+			include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
+			include_spip('inc/mail'); 
+						
 			if(envoyer_mail($email_abonne, $sujet_relance, $texte_relance, $adresse_expediteur)){
 				spip_query("UPDATE `spip_auteurs_elargis_abonnements` SET stade_relance = 4 WHERE id_auteur_elargi = '$id_auteur_elargi'");
 			spip_log("relance faite","abonnement") ;
