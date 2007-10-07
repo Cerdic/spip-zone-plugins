@@ -33,33 +33,19 @@ function confirm(msg,callback) {
 });
 </script>
 
-<h1><:inscription2:liste_adherents:></h1>
 
 <div id="conteneur">
 
 <div id="menu">
 		
 	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-	#INCLURE{fond=inc/menu_abonnement}	
+		#INCLURE{fond=inc/menu_abonnement}	
+	]
+	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{'',' '})
+		#INCLURE{fond=inc/menu_inscription2}	
 	]
 
-	<?php
-	echo debut_boite_info();
-	?>
-	<div class='raccourcis'>
-
-		<strong><:inscription2:raccourcis:></strong>
-		<ul>
-			<li><a href="?exec=ajouter_adherent"><:inscription2:ajouter_adherent:></a></li>
-			<li><a href="?exec=cfg&amp;cfg=inscription2"><:inscription2:configuration:></a></li>
-			<li><a class ="confirm" href="?exec=inscription2_adherents&amp;act=net"><:inscription2:nettoyer_tables:></a></li>
-		
-		</ul>
-	</div>
-
-	<?php
-	echo fin_boite_info();
-	?>
+	
 	
 	<div class="legend">
 		
@@ -76,7 +62,14 @@ function confirm(msg,callback) {
 <div id="principal">
 	<div id="tetiere" >
 		<div style="float:right" >
-		<form method="post" action="?exec=inscription2_adherents">
+		[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})]} )]
+		]
+		
+		</div>
+	
+	<div style="margin-bottom:5px">
+	<form method="post" action="?exec=inscription2_adherents">
 		[(#SELF|form_hidden)]
 		<input class="search_field fondl" type="text" name="valeur" onfocus='this.value=""' value="<:info_rechercher:>" />
 		<select name="case" id="case" class="fondl" style="padding:2px">
@@ -97,12 +90,7 @@ function confirm(msg,callback) {
 		</select>
 		<input type="submit" class="fondo" value="<:info_rechercher:>" />
 		</form>
-		[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-			[(#INCLURE{fond=inc/statuts_forms}{statut_abonnement=[(#ENV{statut_abonnement})]} )]
-		]
-		
-		</div>
-
+	</div>
 	<?php
 	include_spip('base/abstract_sql');
 	
@@ -195,7 +183,6 @@ function confirm(msg,callback) {
 					echo "<a href='".parametre_url($url,'debut',$val)."'>$key</a> ";
 			}
 		echo "<a href='[(#SELF|parametre_url{debut,''})]'> tous</a> ";
-
 	?>
 	
 	</div>
@@ -367,8 +354,8 @@ function confirm(msg,callback) {
 	</form>
 
 	
-	[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
-	#INCLURE{fond=inc/pied_abonnement}
+	[<div style="margin-left:25%">(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+	#INCLURE{fond=inc/pied_abonnement}</div>
 	]
 	
 	

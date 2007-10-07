@@ -1,16 +1,15 @@
 <?php
 	echo debut_gauche();
-	echo debut_boite_info();
 ?>
-<div class="raccourcis">
-	<strong><:inscription2:raccourcis:></strong>
-	<ul>
-		<li><a href="?exec=cfg&amp;cfg=inscription2"><:inscription2:configuration:></a></li>
-		<li><a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a></li>
-	</ul>
-</div>
+[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+		#INCLURE{fond=inc/menu_abonnement}	
+]
+
+[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{'',' '})
+#INCLURE{fond=inc/menu_inscription2}	
+]
+	
 <?php
-	echo fin_boite_info();
 	echo debut_droite();
 	echo debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', $return = false, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
 ?>
