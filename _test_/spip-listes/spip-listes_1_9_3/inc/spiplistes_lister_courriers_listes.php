@@ -1,5 +1,4 @@
 <?php
-// SPIP-Listes-V :: $Id: spiplistes_lister_courriers_listes.php 15820 2007-10-06 13:50:01Z paladin@quesaco.org $
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -199,7 +198,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			}
 			$en_liste .= ""
 				. "</td>\n"
-				. "<td width='50' class='arial1'><strong>"._T('spiplistes:numero').$id_row."</strong></td>\n"
+				. "<td width='50' class='arial1'><strong>"._T('info_numero_abbreviation').$id_row."</strong></td>\n"
 				. "</tr>\n"
 				;
 		}
