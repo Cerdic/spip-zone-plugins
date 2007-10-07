@@ -57,7 +57,10 @@ function balise_FORMULAIRE_INSCRIPTION2_CONFIRMATION_dyn($mode, $retour) {
 			include_spip('inc/acces');
 			include_spip('inc/envoyer_mail');
 		}
-		else{include_spip('inc/mail');}
+		else{
+		include_spip('inc/mail');
+		include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
+		}
 		
 		$htpass = generer_htpass($pass);
 		$statut = lire_config('inscription2/statut_nouveau');

@@ -97,7 +97,10 @@ function revision_auteurs_elargi($id, $c=false) {
 
 function envoyer_inscription2($id_auteur,$mode="inscription") {
 	if ($GLOBALS['spip_version_code']>=1.9259){include_spip('inc/envoyer_mail');}
-	else{include_spip('inc/mail');}
+	else{
+	include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
+	include_spip('inc/mail');
+	}
 	
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
