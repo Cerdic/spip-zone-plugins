@@ -67,6 +67,7 @@ return false ;
 function abonnement_envoyer_mails_confirmation($validation_paiement,$abonne,$libelle,$produit,$article=''){
 
 	include_spip('inc/charsets');
+	include_spip('inc/filtres'); // pour email_valide(), sinon pas d'envoi...
 	include_spip('inc/mail');
 	
 	$nom_expediteur = lire_config('abonnement/nom_envoi');
