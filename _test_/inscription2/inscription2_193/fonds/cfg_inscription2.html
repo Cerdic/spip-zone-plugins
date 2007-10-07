@@ -5,18 +5,19 @@
 
 <!-- descriptif= [(#GET{logo})] Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site,vous pouvez choisir ici les champs suppl&eacute;mentaires
 
-<a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a> -->
+<a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a> 
 
-<style type='text/css'>
-.tabs-nav .tabs-selected a span, .tabs-nav a:hover span, .tabs-nav a:focus span, .tabs-nav a:active span {
-    background-position: 0pt 0% ;
-  	color:#000000;
-  	
-}
-.tabs-nav li {
-border:none;
-}
+[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+</div>
+#INCLURE{fond=inc/menu_abonnement_config}	
+<div>
+]
+-->
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)" />]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/abonnement.css}|direction_css)" />]
 
+<style>
+	.cadre-info {margin-bottom:10px}
 </style>
 
 #CACHE{0}
@@ -38,8 +39,8 @@ function legend_it(a,b,c){
 
 </script>
 
-<form id="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-<div>
+<form name="formulario" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
 <br />
 
 [(#REM) ------------------------ INFORMATIONS SUR LES AUTEURS ------------------------ ]
@@ -47,16 +48,16 @@ function legend_it(a,b,c){
 <legend>
 	<:inscription2:info_defaut:>
 </legend>
-<br />
+<p>
 	<:inscription2:info_defaut_desc:>
 <br /><br />
-<div><table>
+<table>
 <tr>
-<td style='width:140px' />
-<td style='width:70px'> <:inscription2:form:> </td>
-<td style='width:70px'> <:inscription2:fiche_mod:> </td>
-<td style='width:70px'> <:inscription2:fiche:> </td>
-<td style='width:70px'> <:inscription2:table:> </td>
+<td width='140'/>
+<td width='70'> <:inscription2:form:> </td>
+<td width='70'> <:inscription2:fiche_mod:> </td>
+<td width='70'> <:inscription2:fiche:> </td>
+<td width='70'> <:inscription2:table:> </td>
 </tr><tr>
 <td>
 	<strong><:inscription2:nom:></strong>
@@ -73,7 +74,7 @@ function legend_it(a,b,c){
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="nom_fiche" [checked="(#ENV{nom_fiche}?{checked})"] id="nom_fiche" [disabled ="(#ENV{nom_fiche_mod}?{disabled})"] />
+		<input type="checkbox" name="nom_fiche" [checked="(#ENV{nom_fiche}?{checked})"] id="nom_fiche" [disabled ="(#ENV{nom_fiche_mod}?{true})"] />
 	</label>
 </td><td>
 	<label>
@@ -96,7 +97,7 @@ function legend_it(a,b,c){
 	</label>
 </td><td>
 	<label>
-		<input type="checkbox" name="email_fiche" [checked="(#ENV{email_fiche}?{checked})"] id="email_fiche" [disabled ="(#ENV{email_fiche_mod}?{disabled})"] />
+		<input type="checkbox" name="email_fiche" [checked="(#ENV{email_fiche}?{checked})"] id="email_fiche" [disabled ="(#ENV{email_fiche_mod}?{true})"] />
 	</label>
 </td><td>
 	<label>
@@ -104,7 +105,7 @@ function legend_it(a,b,c){
 	</label>
 </td>
 </tr>
-</table></div>
+</table>
 
 </fieldset>
 
@@ -185,7 +186,7 @@ function legend_it(a,b,c){
 <legend>
 	<:inscription2:info_internes:>
 </legend>
-<br />
+<p>
 <:inscription2:info_internes_desc:>
 <br /><br />
 <label>
@@ -288,5 +289,5 @@ if(boxName.checked){
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
 -->
 </div>
-</div>
+
 </form>

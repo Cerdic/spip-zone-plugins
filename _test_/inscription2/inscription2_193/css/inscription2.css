@@ -2,7 +2,7 @@
 margin-top : 15pt; 
 margin-left : 15pt; 
 font-size: 8pt;
-width:100%;
+width:750px;
 }
 
 #menu  {
@@ -23,9 +23,11 @@ padding-left : 40px;
 margin-top:5px
 }
  
-#principal {margin:0% 2% 2% 23%}
+#principal {
+margin:0%
+}
 
-#tetiere{margin:10px 0px;height:40px}
+#tetiere{margin:10px}
 
 input, select, textarea {
 float:none;
@@ -49,10 +51,10 @@ sup {font-size:60%}
 width:100px
 }
 #case{
-width:80px
+width:120px
 }
 
-#principal table {clear:right; margin-left:10pt;padding:5px}
+#principal table.cadre-r {clear:right; margin-left:10pt;padding:5px;width:75%}
 #principal tr, #droite tr { background-color : #E0E0E0 ;}
  { background-color : #E0E0E0 ;}
 #principal tr.row { background:#FFF8DC; }
@@ -60,7 +62,7 @@ width:80px
 
 #principal td, #droite td {padding:3px;text-align:center}
 
-#pagination {margin:10px;font-size:0.7em}
+#pagination {margin:10px 10px 10px 30%;font-size:0.7em}
 
 a:hover{font-weight:bold;}
 	

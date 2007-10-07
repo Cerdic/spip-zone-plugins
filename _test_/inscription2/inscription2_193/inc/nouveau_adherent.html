@@ -1,21 +1,20 @@
 <?php
-	echo debut_gauche('',true);
-	echo debut_boite_info(true);
+	echo debut_gauche();
 ?>
-<div class="raccourcis">
-	<strong><:inscription2:raccourcis:></strong>
-	<ul>
-		<li><a href="?exec=cfg&amp;cfg=inscription2"><:inscription2:configuration:></a></li>
-		<li><a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a></li>
-	</ul>
-</div>
+[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
+		#INCLURE{fond=inc/menu_abonnement}	
+]
+
+[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{'',' '})
+#INCLURE{fond=inc/menu_inscription2}	
+]
+	
 <?php
-	echo fin_boite_info(true);
-	echo debut_droite('',true);
-	echo debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', true, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
+	echo debut_droite();
+	echo debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', $return = false, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
 ?>
 	#FORMULAIRE_INSCRIPTION2_PASS
 <?php
-	echo fin_cadre_sous_rub(true);
-	echo fin_gauche(true);
+	echo fin_cadre_sous_rub();
+	echo fin_gauche();
 ?>
