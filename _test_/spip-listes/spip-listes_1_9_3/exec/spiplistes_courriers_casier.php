@@ -20,7 +20,7 @@
 /******************************************************************************************/
 // $LastChangedRevision$
 // $LastChangedBy$
-// $LastChangedDate: 2007-09-30 10:27:41 +0200 (dim., 30 sept. 2007) $
+// $LastChangedDate$
 
 // _SPIPLISTES_EXEC_COURRIERS_LISTE
 

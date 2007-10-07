@@ -1,5 +1,5 @@
 <?php
-// SPIP-Listes-V :: $Id$
+// SPIP-Listes-V :: $Id: spiplistes_lister_courriers_listes.php 15820 2007-10-06 13:50:01Z paladin@quesaco.org $
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -21,7 +21,7 @@
 // Original From SPIP-Listes-V :: Id: spiplistes_afficher_en_liste.php paladin@quesaco.org
 // $LastChangedRevision$
 // $LastChangedBy$
-// $LastChangedDate: 2007-10-01 08:58:08 +0200 (lun., 01 oct. 2007) $
+// $LastChangedDate$
 
 /**
 * Adaptation de spiplistes_afficher_en_liste de SL192

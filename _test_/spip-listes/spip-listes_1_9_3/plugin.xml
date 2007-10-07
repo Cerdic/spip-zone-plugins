@@ -23,7 +23,7 @@
 
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>spiplistes_boutons.php</inclure>
+		<inclure>inc/spiplistes_pipeline_header_prive.php</inclure>
 	</pipeline>
 	
 	<pipeline>

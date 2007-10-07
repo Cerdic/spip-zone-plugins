@@ -2,7 +2,7 @@
 // From SPIP-Listes-V :: import_export.php,v 1.19 paladin@quesaco.org  http://www.quesaco.org/
 // $LastChangedRevision$
 // $LastChangedBy$
-// $LastChangedDate: 2007-09-29 21:07:55 +0200 (sam., 29 sept. 2007) $
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

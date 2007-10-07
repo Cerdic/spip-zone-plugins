@@ -5,6 +5,8 @@
 
 
 TO-DO:
+- table transcodage HTML->ISO incomplète ;
+- menu de maintenance pour vider les listes ;
 - Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"
 - Corriger documentation contextuelle
 - Problème de charset sur le titre ;

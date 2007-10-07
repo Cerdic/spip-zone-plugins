@@ -2,7 +2,7 @@
 // Orginal From SPIP-Listes-V :: Id: spiplistes_destiner_envoi.php paladin@quesaco.org
 // $LastChangedRevision$
 // $LastChangedBy$
-// $LastChangedDate: 2007-09-24 20:14:11 +0200 (lun., 24 sept. 2007) $
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

@@ -183,7 +183,7 @@ function spiplistes_meleuse () {
 				. "$ii"
 				;
 		
-			if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
 				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte') as $key) {
 					$$key = unicode2charset(charset2unicode($$key),$GLOBALS['meta']['spiplistes_charset_envoi']);
