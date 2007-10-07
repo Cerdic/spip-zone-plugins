@@ -1,5 +1,5 @@
 <?php
-	echo debut_gauche();
+	echo debut_gauche('',true);
 ?>
 [(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
 		#INCLURE{fond=inc/menu_abonnement}	
@@ -10,11 +10,11 @@
 ]
 	
 <?php
-	echo debut_droite();
+	echo debut_droite('',true);
 	echo debut_cadre_sous_rub('../dist/images/redacteurs-24.gif', $return = false, $fonction='', _T('inscription2:formulaire_inscription'), $id="", '');
 ?>
 	#FORMULAIRE_INSCRIPTION2_PASS
 <?php
-	echo fin_cadre_sous_rub();
-	echo fin_gauche();
+	echo fin_cadre_sous_rub(true);
+	echo fin_gauche(true);
 ?>

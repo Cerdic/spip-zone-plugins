@@ -158,7 +158,7 @@ function confirm(msg,callback) {
 
 	//nettoyer la table
 	if($act=='net'){
-		$desc = spip_abstract_showtable('spip_auteurs_elargis', '', true);
+		$desc = sql_showtable('spip_auteurs_elargis', '', true);
 		foreach($desc['field'] as $cle =>$val){
 			if(!(lire_config('inscription2/'.$cle) or lire_config('inscription2/'.$cle.'_fiche') 
 				or lire_config('inscription2/'.$cle.'_fiche_mod') or lire_config('inscription2/'.$cle.'_table')) 
