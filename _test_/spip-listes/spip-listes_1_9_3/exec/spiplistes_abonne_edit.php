@@ -95,6 +95,19 @@ function exec_spiplistes_abonne_edit () {
 	//////////////////////////////////////////////////////
 	// préparation du bouton 
 		// Propose de supprimer l'auteur invité 
+	$gros_bouton_modifier = 
+		($id_auteur && $flag_editable)
+		? icone (
+				_T('admin_modifier_auteur')
+				, generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&edit=oui")
+				, 'redacteurs-24.gif'
+				, "edit.gif"
+				, "right"
+				, false
+				)
+		: ""
+		;
+		// Propose de supprimer l'auteur invité 
 	$gros_bouton_supprimer = 
 		($id_auteur && $flag_editable && ($statut=='6forum'))
 		? icone (
@@ -147,6 +160,8 @@ function exec_spiplistes_abonne_edit () {
 	
 	$page_result = ""
 		. debut_cadre_relief($logo, true)
+		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
+		. "<tr><td valign='top'>\n"
 		. gros_titre($nom, '', false)
 		. "<br />\n"
 		;
@@ -159,7 +174,15 @@ function exec_spiplistes_abonne_edit () {
 			;
 	}
 	$page_result .= ""
+		. "</td>"
+		. "<td>"
+		// le gros bouton modifier si besoin
+		. $gros_bouton_modifier
+		. "</td></tr>\n"
+		. "<tr><td width='100%' colspan='2'>\n"
 		. (strlen($bio) ? "<blockquote class='spip' style='padding:1em;'>".propre($bio)."</blockquote>\n" : "")
+		. "</td>\n"
+		. "</tr></table>\n"
 		. "<br />\n"
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', true, '', _T('spiplistes:Format_de_reception_:'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT)."' method='post'>\n"
