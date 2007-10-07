@@ -151,14 +151,48 @@ function spip_listes_strlen($out){
 
 //desabonner des listes publiques
 function spiplistes_desabonner($id_auteur){
-	$listes = spip_query ("SELECT * FROM spip_listes WHERE statut = 'liste'");
+	$listes = spip_query ("SELECT id_liste FROM spip_listes WHERE statut='"._SPIPLISTES_PUBLIC_LIST."'");
 			while($row = spip_fetch_array($listes)) {
 				$id_liste = $row['id_liste'] ;
 				$result=spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur=".
 								   _q($id_auteur)." AND id_liste="._q($id_liste));
 			}
-	$result=spip_query("UPDATE `spip_auteurs_elargis` ".
-					   "SET `spip_listes_format`='non' WHERE `id_auteur` ="._q($id_auteur));
+	return(spiplistes_format_abo_modifier($id_auteur));
+}
+
+// suspend les abonnements d'un compte
+function spiplistes_suspendre_abos($id_auteur) {
+	return(spiplistes_format_abo_modifier($id_auteur));
+}
+
+// modifier le format abonné
+// si id_auteur, celui-ci uniquement
+// sinon, 'tous' pour modifier globalement
+function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
+	$format = !in_array($format, array('html', 'texte', 'non')) ? 'non' : $format;
+	if($id_auteur=='tous') {
+		$where = "";
+	}
+	else if(($id = intval($id_auteur)) > 0) {
+		$where = " WHERE id_auteur=$id LIMIT 1";
+	}
+	else {
+		return(false);
+	}
+	return (spip_query("UPDATE spip_auteurs_elargis SET `spip_listes_format`='".$format."' $where"));
+}
+
+function spiplistes_format_abo_demande($id_auteur) {
+	$id_auteur = intval($id_auteur);
+	$result = false;
+	if($id_auteur > 0) {
+		$sql_query = "SELECT `spip_listes_format` FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur LIMIT 1";
+		if($row = spip_fetch_array(spip_query($sql_query))) {
+			$result = $row['spip_listes_format'];
+			$result = (in_array($result, array('html', 'texte', 'non'))) ? $result : false;
+		}
+	}
+	return($result);
 }
 
 /* desabonnement de certaines listes uniquement */
@@ -366,19 +400,36 @@ function spiplistes_valide_listes_depuis_cookie($cookie) {
   }
 }
 
-// termine la page (à employer qd droits insuffisants)
-function spiplistes_terminer_page_non_autorisee ($return = true) {
-	$result = "<p><strong>"._T('spiplistes:acces_a_la_page')."</strong></p>";
+// termine la page (en affichant message ou retour)
+function spiplistes_terminer_page_message ($message) {
+	$result = "<p>$message</p>";
 	if($return) return($result);
 	else echo($result);
 }
 
+// termine la page (à employer qd droits insuffisants)
+function spiplistes_terminer_page_non_autorisee ($return = true) {
+	spiplistes_terminer_page_message (_T('spiplistes:acces_a_la_page'), $return);
+}
 
-// returne nombre d'abonnes a une liste
-function spiplistes_nb_abonnes_count ($id_liste) {
-	$r = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_listes WHERE id_liste="._q($id_liste)." LIMIT 1"));
-	$r = ($r && $r['n']) ? $r['n'] : 0;
-	return ($r);
+// termine page si la donnée n'existe pas dans la base
+function spiplistes_terminer_page_donnee_manquante ($return = true) {
+	spiplistes_terminer_page_message (_T('spiplistes:Pas_de_donnees'), $return);
+}
+
+// returne nombre d'abonnes a une liste ou toutes les listes
+// ou par id_auteur
+function spiplistes_nb_abonnes_count ($id_liste = 'toutes', $id_auteur = 'tous') {
+	$id_liste = ($id_liste=='toutes') ? 0 : intval($id_liste);
+	$id_auteur = ($id_auteur=='tous') ? 0 : intval($id_auteur);
+	
+	$where = (($id_liste > 0) ? "" : " id_liste=$id_liste");
+	$where .= (($id_auteur > 0) ? "" : (strlen($where) ? " AND " : "")." id_auteur=$id_auteur");
+	if(strlen($where)) $where = " WHERE $where";
+	
+	$result = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_listes $where"));
+	$result = ($result && $result['n']) ? $result['n'] : 0;
+	return ($result);
 }
 
 // retourne la puce qui va bien 
@@ -420,10 +471,21 @@ function spiplistes_mod_listes_get_id_auteur($id_liste) {
 }
 
 // boite information avec juste titre et id
-// A placer dans cadre gauche (ex.: exec/listes)
-function spiplistes_boite_info_id ($titre, $id, $return = true) {
+// A placer dans cadre gauche (ex.: exec/spiplistes_listes)
+// si $id_objet (par exemple: 'id_auteur') va chercher le logo de l'objet
+function spiplistes_boite_info_id ($titre, $id, $return = true, $id_objet = false) {
+	global $spip_display;
 	$result = "";
 	if($id) {
+		$logo = "";
+		if($id_objet && ($spip_display != 4)) {
+			include_spip("inc/iconifier");
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if ($logo = $chercher_logo($id, $id_objet, 'on')) {
+				list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
+				$logo = "<div style='text-align: center;margin:1em 0;'>$img</div>";
+			}
+		}
 		$result = 
 			debut_boite_info(true)
 			. "\n<div style='font-weight: bold; text-align: center; text-transform: uppercase;' class='verdana1 spip_xx-small'>"
@@ -431,6 +493,7 @@ function spiplistes_boite_info_id ($titre, $id, $return = true) {
 			. "<br /><span class='spip_xx-large'>"
 			. $id
 			. "</span></div>"
+			. $logo
 			. fin_boite_info(true)
 			. "<br />"
 		;
@@ -537,18 +600,6 @@ function spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute) {
 	return($annee."-".$mois."-".$jour." ".$heure.":".$minute.":00");
 }
 
-function spiplistes_demande_format_abo($id_auteur) {
-	$id_auteur = intval($id_auteur);
-	$result = false;
-	if($id_auteur > 0) {
-		$sql_query = "SELECT `spip_listes_format` FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur LIMIT 1";
-		if($row = spip_fetch_array(spip_query($sql_query))) {
-			$result = $row['spip_listes_format'];
-			$result = (($result=="html") || ($result=="texte")) ? $result : false;
-		}
-	}
-	return($result);
-}
 
 
 /******************************************************************************************/

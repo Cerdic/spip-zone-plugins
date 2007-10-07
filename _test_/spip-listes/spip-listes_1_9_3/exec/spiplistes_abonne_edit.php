@@ -1,5 +1,4 @@
 <?php
-
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -18,147 +17,191 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
+
+// _SPIPLISTES_EXEC_ABONNE_EDIT
+
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
 
+/*
+	Formulaire édition d'un abonné
+*/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/affichage');
-include_spip('inc/spiplistes_lister_courriers_listes');
+function exec_spiplistes_abonne_edit () {
 
-function exec_spiplistes_abonne_edit(){
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $connect_id_auteur;
+	include_spip('inc/presentation');
+	include_spip('inc/affichage');
+	include_spip('inc/spiplistes_lister_courriers_listes');
+
+	global $connect_statut
+		, $connect_toutes_rubriques
+		, $connect_id_auteur
+		;
+
+	// initialise les variables postées par le formulaire
+	foreach(array(
+		'id_auteur'
+		, 'btn_confirmer_format', 'modif_abo'
+		) as $key) {
+		$$key = _request($key);
+	}
+	foreach(array('id_auteur') as $key) {
+		$$key = intval($$key);
+	}
+
+	$flag_editable = (($connect_statut == "0minirezo") && $connect_toutes_rubriques);
 	
-	$id_auteur = _request('id_auteur');
-	$confirm = _request('confirm');
-	$suppr_auteur = _request('suppr_auteur');
-	$id_liste = _request('id_liste');
-	$effacer_definitif = _request('effacer_definitif');
-	$nom = _request('nom');
-	$email = _request('email');
+	//////////////////////////////////////////////////////
+	// Modifie format si demandé
+	if($btn_confirmer_format) {
+		switch($modif_abo) {
+			case 'html':
+			case 'texte':
+				spiplistes_format_abo_modifier($id_auteur, $modif_abo);
+				break;
+			case 'suspendre':
+				spiplistes_format_abo_modifier($id_auteur, 'non');
+				break;
+			case 'non':
+				spiplistes_desabonner($id_auteur);
+				break;
+			}
+	}
 	
-	$nomsite=lire_meta("nom_site"); 
-	$urlsite=lire_meta("adresse_site"); 
-		
-	// Admin SPIP-Listes
-	echo debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	//////////////////////////////////////////////////////
+	// Recharge les données de l'auteur
+	if($id_auteur) {
 	
-	// la gestion des abonnés est réservée aux admins
-	if($connect_statut != "0minirezo") {
+		$sql_select = "nom,bio,email,nom_site,url_site,login,pass,statut,pgp,messagerie,imessage,low_sec";
+		$sql_result = spip_query("SELECT $sql_select FROM spip_auteurs WHERE id_auteur=$id_auteur LIMIT 1");
+
+		if($row = spip_fetch_array($sql_result)) {
+			foreach(explode(",", $sql_select) as $key) {
+				$$key = $row[$key];
+			}
+		}
+		else {
+			$id_auteur = 0;
+		}
+	}
+	$format_abo = spiplistes_format_abo_demande($id_auteur);
+	if($nb_listes_abo = spiplistes_nb_abonnes_count('toutes', $id_auteur)) {
+		$format_abo = 'suspend';
+	}
+
+	//////////////////////////////////////////////////////
+	// préparation du bouton 
+		// Propose de supprimer l'auteur invité 
+	$gros_bouton_supprimer = 
+		($id_auteur && $flag_editable && ($statut=='6forum'))
+		? icone (
+				_T('spiplistes:Supprime_ce_contact')
+				, generer_action_auteur(_SPIPLISTES_ACTION_SUPPRIMER_ABONNER, $id_auteur, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE))
+				, 'redacteurs-24.gif'
+				, "supprimer.gif"
+				, "right"
+				, false
+				)
+		: ""
+		;
+
+//////////
+// PAGE CONTENU
+//////////
+
+	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
+	
+	// la gestion des abonnés est réservée aux admins et à l'auteur
+	if(($connect_statut != "0minirezo") && ($connect_id_auteur != $id_auteur)) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
+	}
+	
+	// erreur ?
+	if(!$id_auteur) {
+		die (spiplistes_terminer_page_donnee_manquante() . fin_page());
 	}
 	
 	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
+	spiplistes_boite_info_id(_T('titre_cadre_numero_auteur'), $id_auteur, false, 'id_auteur');
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_info_spiplistes();
 	creer_colonne_droite();
 	debut_droite("messagerie");
 	
-	// MODE ABONNE: gestion d'un abonne---------------------------------------------
-	
-	if($confirm == 'oui'){
-		$type_abo = _request('suppl_abo');
-		if($type_abo=='non') spiplistes_desabonner($id_auteur);
-		
-		 spip_query("UPDATE `spip_auteurs_elargis` SET `spip_listes_format`="._q($type_abo)." WHERE `id_auteur` ="._q($id_auteur));	
-	}
-	
-	$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur="._q($id_auteur));
-	
-	if ($row = spip_fetch_array($result)) {
-		$id_auteur=$row['id_auteur'];
-		$nom=$row['nom'];
-		$bio=$row['bio'];
-		$email=$row['email'];
-		$nom_site_auteur=$row['nom_site'];
-		$url_site=$row['url_site'];
-		$login=$row['login'];
-		$pass=$row['pass'];
-		$statut=$row['statut'];
-		$pgp=$row["pgp"];
-		$messagerie=$row["messagerie"];
-		$imessage=$row["imessage"];
-		$low_sec = $row["low_sec"];
-		
-		echo "<div align='center'>";
-		gros_titre($nom);
-		echo "</div>";
-		
-		if ($statut == "0minirezo")
-			$logo = "redacteurs-admin-24.gif";
-		elseif ($statut == "5poubelle")
+	switch($statut) {
+		case "0minirezo":
+			$logo = "redacteurs-admin-24.gif"; // jolie cravate
+			break;
+		case "5poubelle":
 			$logo = "redacteurs-poubelle-24.gif";
-		else
+			break;
+		default:
 			$logo = "redacteurs-24.gif";
-		
-		if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0 OR ($champs_extra AND $extra)) {
-			echo debut_cadre_relief("$logo");
-			echo "<font face='Verdana,Arial,Sans,sans-serif'>";
-			if (strlen($email) > 2) 
-				echo _T('email_2')." <b><a href='mailto:$email'>$email</a></b><br /> ";
-			if (strlen($nom_site_auteur) > 2)
-				echo _T('info_site_2')." <b><a href='$url_site'>$nom_site_auteur</a></b>";
-			echo "<p>".propre($bio)."</p>";
-			echo "</font>";
-			echo fin_cadre_relief();
-			
-				echo debut_cadre_relief("$logo");
-				
-				echo"<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT)."' method='post'>";
-				
-				$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
-		//var_dump($abo);die("coucou");
-		$abo = $abo["spip_listes_format"];
-				$c1 = ( $abo == 'html')? 'checked=checked)': '';
-				$c2 = ( $abo == 'texte')? 'checked=checked': '';
-				$c3 = ( $abo == 'non')? 'checked=checked': '';
-				echo'<div style="text-align: left;">';
-				echo'<strong>Format :</strong><br>';
-				echo'<input name="suppl_abo" value="html" '.$c1.'  type="radio">'._T('spiplistes:html').'<br>';
-				echo'<input name="suppl_abo" value="texte" '.$c2.' type="radio">'._T('spiplistes:texte').'<br>';
-				echo'<input name="suppl_abo" '.$c3.' value="non" type="radio">'._T('spiplistes:desabonnement').'<br>';
-				echo'</div>';
-				echo"<p>";
-				echo"<input type='submit' name='Valider' value='"._T('spiplistes:modifier')."'>";
-				echo"<input type='hidden' name='id_auteur'  value=$id_auteur >";
-				echo"<input type='hidden' name='confirm'  value='oui' >";
-				echo"</p>";
-				echo"</form>";
-				echo fin_cadre_relief();
-			
-		}
-		
-		
-		echo "<p>";
-		if ($connect_statut == "0minirezo") $aff_art = "'prepa','prop','publie','refuse'";
-		else if ($connect_id_auteur == $id_auteur) $aff_art = "'prepa','prop','publie'";
-		else $aff_art = "'prop','publie'";
+			break;
 	}
 	
-	echo spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
-
-	if ($statut == '6forum'){
-		$retour = generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE);
-		$action = generer_action_auteur('spiplistes_supprimer_abonne',$id_auteur,$retour);
-		echo debut_cadre_relief("$logo");
-		echo "<h3>"._T('spiplistes:supprime_contact')."</h3>";
-		echo "<form action='$action' method='post'>";
-		echo form_hidden($action);
-		echo "<p align='center'>";
-		echo "<input type='submit' name='Valider' value='"._T('spiplistes:supprime_contact_base')."'>";
-		echo "</p>";
-		echo "</form>";
-		echo fin_cadre_relief();
+	$page_result = ""
+		. debut_cadre_relief($logo, true)
+		. gros_titre($nom, '', false)
+		. "<br />\n"
+		;
+	if (strlen($email) || strlen($nom_site)) {			
+		$page_result .= ""
+			. "<span class='verdana3'>"
+			. (strlen($email) ? _T('email_2')."<strong><a href='mailto:$email'>$email</a></strong><br />\n" : "")
+			. (strlen($nom_site) ? _T('info_site_2')."<strong><a href='$url_site'>$nom_site</a></strong>" : "")
+			. "</span>\n"
+			;
 	}
+	$page_result .= ""
+		. (strlen($bio) ? "<blockquote class='spip' style='padding:1em;'>".propre($bio)."</blockquote>\n" : "")
+		. "<br />\n"
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', true, '', _T('spiplistes:Format_de_reception_:'))
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT)."' method='post'>\n"
+		. "<p class='verdana2'>"._T('spiplistes:Format_de_reception_desc')."</p>\n"
+		. debut_cadre_relief('', true)
+		. "<table width='100%'  border='0' cellspacing='0' cellpadding='0'><tr>"
+		. "<td class='verdana2'>"._T('spiplistes:Format_de_reception_:')."</td>\n"
+		. "<td>"
+		. "<input name='modif_abo' ".(($format_abo == 'html')? 'checked=checked)': '')." value='html' type='radio' id='f_html' />\n"
+		. "<label for='f_html' class='verdana2'>"._T('spiplistes:html')."</label>\n"
+		. "</td>\n"
+		. "<td>"
+		. "<input name='modif_abo' ".(($format_abo == 'texte')? 'checked=\"checked\")' : '')." value='texte' type='radio' id='f_texte' />\n"
+		. "<label for='f_texte' class='verdana2'>"._T('spiplistes:texte')."</label>\n"
+		. "</td>\n"
+		. "</tr></table>\n"
+		. fin_cadre_relief(true)
+		// suspendre les abonnements
+		. debut_cadre_relief('', true)
+		. "<input name='modif_abo' ".(($format_abo == 'suspend')? 'checked=\"checked\")' : '')." value='suspendre' type='radio' id='f_suspend' />"
+		. "<label for='f_suspend' class='verdana2'>"._T('spiplistes:Desabonner_temporaire')."</label>\n"
+		. fin_cadre_relief(true)
+		// résilier les abonnements
+		. debut_cadre_relief('', true)
+		. "<input name='modif_abo' ".(($format_abo == 'non')? 'checked=\"checked\")' : '')." value='non' type='radio' id='f_non' />"
+		. "<label for='f_non' class='verdana2'>"._T('spiplistes:Desabonner_definitif')."</label>\n"
+		. fin_cadre_relief(true)
+		. "<input type='hidden' name='id_auteur'  value=$id_auteur >\n"
+		//
+		// bouton validation
+		. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_format' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+		. "</form>\n"
+		. fin_cadre_relief(true)
+		. fin_cadre_relief(true)
+		//
+		. "<br />\n"
+		. spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', 'abonnements', '', '', 'position')
+		//
+		. $gros_bouton_supprimer
+		;
 	
-	
-	//MODE ABONNE FIN abonne -------------------------------------------------------
+	echo($page_result);
 	
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();
 }

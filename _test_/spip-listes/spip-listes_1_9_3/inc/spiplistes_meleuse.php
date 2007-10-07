@@ -249,13 +249,13 @@ function spiplistes_meleuse () {
 							spip_query("UPDATE spip_courriers SET date_debut_envoi=NOW() WHERE id_courrier=$id_courrier LIMIT 1"); 
 						}
 				
-						$format_abo = spiplistes_demande_format_abo($id_auteur);
+						$format_abo = spiplistes_format_abo_demande($id_auteur);
 							
 						$str_temp .= $nom_auteur."(".$format_abo.") - $email";
 						$total++;
 						unset ($cookie);
 		
-						if($format_abo) {
+						if(($format_abo=='html') || ($format_abo=='texte')) {
 							$cookie = creer_uniqid();
 							spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email)." LIMIT 1");				
 		

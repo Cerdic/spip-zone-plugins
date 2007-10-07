@@ -65,6 +65,9 @@ define("_SPIPLISTES_EXEC_LISTE_EDIT", _SPIPLISTES_EXEC_PREFIX."liste_edit");
 define("_SPIPLISTES_EXEC_LISTE_GERER", _SPIPLISTES_EXEC_PREFIX."liste_gerer"); //ancien listes
 define("_SPIPLISTES_EXEC_LISTES_LISTE", _SPIPLISTES_EXEC_PREFIX."listes_toutes");
 
+define("_SPIPLISTES_ACTION_PREFIX", "spiplistes_");
+define("_SPIPLISTES_ACTION_SUPPRIMER_ABONNER", _SPIPLISTES_ACTION_PREFIX."supprimer_abonne");
+
 // les formats d'envoi autorisés, ou non pour pseudo-désabonné
 define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
 

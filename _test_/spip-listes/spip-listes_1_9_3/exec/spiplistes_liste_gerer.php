@@ -47,6 +47,8 @@ function exec_spiplistes_liste_gerer () {
 		, $spip_lang_left,$spip_lang_right
 		;
 
+spiplistes_log("exec_spiplistes_liste_gerer() <<", LOG_DEBUG);
+
 	// initialise les variables postées par le formulaire
 	foreach(array(
 		'new'	// nouvelle liste si 'oui'

@@ -129,6 +129,9 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Destination' => "Destination",
 'Date_non_precisee' => "Date non pr&eacute;cis&eacute;e",
 'Dernier_envoi_le_:' => "Dernier envoi le :",
+'Pas_de_donnees' => "D&eacute;sol&eacute;, mais l'enregistrement demand&eacute; n'existe pas dans la base de donn&eacute;es.",
+'Desabonner_temporaire' => "D&eacute;sabonner temporairement ce compte.",
+'Desabonner_definitif' => "D&eacute;sabonner ce compte de toutes les listes de diffusion.",
 
 //E
 'email' => 'E-mail',
@@ -167,6 +170,11 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'format_html' => 'Format html : ',
 'format_texte' => 'Format texte : ',
 'Format_de_reception_:' => "Format de r&eacute;ception :",
+'Format_de_reception_desc' => "Vous pouvez choisir un format global de r&eacute;ception des courriers pour 
+   cet abonn&eacute;.<br /><br />
+   Vous pouvez &eacute;galement d&eacute;sabonner temporairement ce contact. 
+   Il reste inscrit dans les listes en tant que destinataire, mais les courriers 
+   ne lui seront pas envoy&eacute;s tant que vous ne lui aurez pas d&eacute;fini un format de r&eacute;ception de courriers.",
 
 //H
 'Historique_des_envois' => 'Historique des envois',
