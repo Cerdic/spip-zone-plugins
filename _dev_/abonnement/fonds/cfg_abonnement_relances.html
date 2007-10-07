@@ -1,17 +1,17 @@
-<!-- descriptif=
+<!-- descriptif= [(#GET{logo})] Ce plugin permet d'&eacute;tendre les information sur les auteurs sur votre site,vous pouvez choisir ici les champs suppl&eacute;mentaires
 
-<div style="width:150pt; text-align: left; margin-top:5px;padding:5px" >
-		<strong>Abonnements</strong>
-		<ul style='text-align: left; list-style-type:none'>
-		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=abonnement_tous">Abonnements</a></li>
-		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement_relances">Relances</a></li>
-		<li style="margin-top:5px"><a class ="cellule-h" href="?exec=cfg&cfg=abonnement">Emails de confirmation</a></li>
-		</ul>
+<a href="?exec=inscription2_adherents"><:inscription2:liste_adherents:></a> 
+
+[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
 </div>
-
+#INCLURE{fond=inc/menu_abonnement_config}	
+<div>
+]
 -->
 
 <!-- boite=Emails de relance-->
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/inscription2.css}|direction_css)" />]
+[<link rel="stylesheet" media="all" type="text/css" href="(#CHEMIN{css/abonnement.css}|direction_css)" />]
 
 <style>
 	.cadre-info {margin-bottom:10px}
