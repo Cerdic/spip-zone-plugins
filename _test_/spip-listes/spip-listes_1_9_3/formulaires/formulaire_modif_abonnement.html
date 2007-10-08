@@ -26,7 +26,7 @@
 				<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<li style="margin-bottom:3px">
-					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
+					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''',''})checked="checked"] value="#ID_LISTE" />
 					<a title='<:spiplistes:infos_liste:>' href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
 				</li>]
 </BOUCLE_listes>
@@ -35,12 +35,19 @@
 	[(#ENV{formulaire_affiche}|?{' ',''})<fieldset>
 	<legend style="color:#000000"><:spiplistes:abo_1_lettre:></legend>]
 <//B_listes>
-[(#ENV{formulaire_affiche}|?{' ',''})
+[(#REM)
+
+	Modification abonnement
+	
+][(#ENV{formulaire_affiche}|?{' ',''})
  <div style="text-align: left;"> 
-				 <strong>Format :</strong><br> 
-				 <input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio"><:html:><br> 
-				 <input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio"><:texte:><br> 
-				 <input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked=checked',''})] value="non" type="radio"><:desabonnement:><br> 
+				 <strong><:spiplistes:format_de_reception:> :</strong><br /> 
+				 <input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio" id='fslhtml' />
+				 <label for='fslhtml'><:html:></label><br /> 
+				 <input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio" id='fsltexte' />
+				 <label for='fsltexte'><:texte:></label><br /> 
+				 <input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked=checked',''})] value="non" type="radio" id='fslnon' />
+				 <label for='fslnon'><:desabonnement:></label><br /> 
 				 </div> 
 	<input style="margin-top:3px" type='submit' name='Valider' value='<:spiplistes:abonnement_bouton:>' />
 	<input type="hidden" name="d"  value="[(#ENV{d})]"  />

@@ -184,12 +184,12 @@ function exec_spiplistes_abonne_edit () {
 		. "</td>\n"
 		. "</tr></table>\n"
 		. "<br />\n"
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', true, '', _T('spiplistes:Format_de_reception_:'))
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', true, '', _T('spiplistes:format_de_reception').":")
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT)."' method='post'>\n"
 		. "<p class='verdana2'>"._T('spiplistes:Format_de_reception_desc')."</p>\n"
 		. debut_cadre_relief('', true)
 		. "<table width='100%'  border='0' cellspacing='0' cellpadding='0'><tr>"
-		. "<td class='verdana2'>"._T('spiplistes:Format_de_reception_:')."</td>\n"
+		. "<td class='verdana2'>"._T('spiplistes:format_de_reception').":</td>\n"
 		. "<td>"
 		. "<input name='modif_abo' ".(($format_abo == 'html')? 'checked=checked)': '')." value='html' type='radio' id='f_html' />\n"
 		. "<label for='f_html' class='verdana2'>"._T('spiplistes:html')."</label>\n"

@@ -171,7 +171,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'format2' => 'Format :',
 'format_html' => 'Format html : ',
 'format_texte' => 'Format texte : ',
-'Format_de_reception_:' => "Format de r&eacute;ception :",
+'format_de_reception' => "Format de r&eacute;ception",
 'Format_de_reception_desc' => "Vous pouvez choisir un format global de r&eacute;ception des courriers pour 
    cet abonn&eacute;.<br /><br />
    Vous pouvez &eacute;galement d&eacute;sabonner temporairement ce contact. 
