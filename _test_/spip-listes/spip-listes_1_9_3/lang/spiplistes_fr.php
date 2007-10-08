@@ -317,6 +317,7 @@ et de recevoir les lettres d\'informations.',
 'Selectionnez_une_liste_de_destination' => "S&eacute;lectionnez une ou plusieurs listes de destination pour vos abonn&eacute;s.",
 'Stoppes' => "Stopp&eacute;s",
 'Sans_destinataire' => "Sans destinataire",
+'Supprimer_ce_contact' => "Supprimer ce contact",
 
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',

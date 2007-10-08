@@ -43,28 +43,32 @@
 */
 function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='listes', $statut=''
 	, $apres_maintenant=false, $nom_position='position'
-	, $exec, $pas = 10, $return = true) {
+	, $exec, $id_auteur=0, $pas=10, $return=true) {
 
 	include_spip('inc/spiplistes_api');
 
-	global $id_auteur
-		;
-	
 	$position = intval($_GET[$nom_position]);
-	if(!$position) $position=0 ;
-
 	$pas = intval($pas);
-	
+	$id_auteur = intval($id_auteur);
+	$retour = _DIR_RESTREINT_ABS.self();
 	$clause_where = '';
 	
+	//////////////////////////////////
+	// requete
 	// construction de la requête SQL
+	// sera (en partie) utilisée plus bas pour compter et pagination
 	switch($element) {
+		case 'abonnements':
+			$sql_select = "listes.id_liste,listes.titre,listes.statut,listes.date,lien.id_auteur";
+			$sql_from = "spip_auteurs_listes AS lien LEFT JOIN spip_listes AS listes ON lien.id_liste=listes.id_liste";
+			$sql_where = "lien.id_auteur=$id_auteur AND (listes.statut='"._SPIPLISTES_PRIVATE_LIST."' OR listes.statut='"._SPIPLISTES_PUBLIC_LIST."')";
+			$sql_order = "listes.titre";
+			break;
 		case 'courriers':
-			$sql_query = "SELECT id_courrier, titre, date, date_debut_envoi,date_fin_envoi, nb_emails_envoyes,total_abonnes,email_test
-				FROM spip_courriers
-				WHERE statut="._q($statut)."
-				ORDER BY date DESC
-				LIMIT $position,$pas";
+			$sql_select = "id_courrier, titre, date, date_debut_envoi,date_fin_envoi, nb_emails_envoyes,total_abonnes,email_test";
+			$sql_from = "spip_courriers";
+			$sql_where = "statut="._q($statut);
+			$sql_order = "date";
 			break;
 		case 'listes':
 			if (
@@ -74,15 +78,16 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 				) {
 				$clause_where.= " AND (maj NOT BETWEEN 0 AND NOW())";
 			}
-			$sql_query = "SELECT id_liste,titre,date,patron,maj
-				FROM spip_listes
-				WHERE statut="._q($statut)." $clause_where
-				ORDER BY date DESC
-				LIMIT $position,$pas";
+			$sql_select = "id_liste,titre,date,patron,maj ";
+			$sql_from = "spip_listes";
+			$sql_where = "statut="._q($statut)." $clause_where";
+			$sql_order = "date";
 			break;
 	}
-	$resultat_aff = spip_query($sql_query);
+	//
+	$resultat_aff = spip_query("SELECT $sql_select FROM $sql_from WHERE $sql_where ORDER BY $sql_order DESC LIMIT $position,$pas");
 	
+	//////////////////////
 	if (($nb_ = @spip_num_rows($resultat_aff)) > 0) {
 		
 		// titre du tableau
@@ -105,10 +110,14 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 		
 			$titre = $row['titre'];
 			$date = $row['date'];
-			
-			$retour = _DIR_RESTREINT_ABS.self();
-			
+						
 			switch ($element){
+				case 'abonnements':
+					$id_row = $row['id_liste'];
+					$url_row	= generer_url_ecrire($exec, 'id_liste='.$id_row);
+					$url_desabo = generer_action_auteur(_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE, $row['id_auteur']."-listedesabo-$id_row", $retour);
+					$statut = $row['statut'];
+					break;
 				case 'courriers':
 					$id_row	= $row['id_courrier'];			
 					$nb_emails_envoyes	= $row['nb_emails_envoyes'];
@@ -139,14 +148,14 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			
 			switch($element) {
 			// si courriers, donne le nombre de destinataires
-				case courriers:
+				case 'courriers':
 					$nb_abo = "";
-					if($nb_emails_envoyes > 0) {
+/*					if($nb_emails_envoyes > 0) {
 						$en_liste.= "<span style='font-size:100%;color:#666' dir='ltr'>\n"
 							. "(".$nb_emails_envoyes.")\n"
 							. "</span>\n"
 							;
-					}
+					}*/
 					if(empty($email_test)) {
 						$nb_abo = 
 							($total_abonnes)
@@ -189,14 +198,23 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 				. "</td>\n"
 				. "<td width='120' class='arial1'>"
 				;
-			// si c'est un courrier, donne la date 
-			// - date debut envoi si encour
-			// - sinon date de publication
-			if(($element=='courriers') && (!in_array($statut, array(_SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY)))) {
-				$en_liste .= ""
-					. affdate_heure(($statut==_SPIPLISTES_STATUT_ENCOURS) ? $date_debut_envoi : $date_fin_envoi)
-					;
+			
+			switch($element) {
+				case 'abonnements':
+					$en_liste .= ""
+						. "<a href=\"$url_desabo\" dir='ltr' style='display:block;'>"._T('spiplistes:desabonnement')."</a>\n"
+						;
+					break;
+				case 'courriers':
+					// - date debut envoi si encour, sinon date de publication
+					if(!in_array($statut, array(_SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY))) {
+						$en_liste .= ""
+							. affdate_heure(($statut==_SPIPLISTES_STATUT_ENCOURS) ? $date_debut_envoi : $date_fin_envoi)
+							;
+					}
+					break;
 			}
+			
 			$en_liste .= ""
 				. "</td>\n"
 				. "<td width='50' class='arial1'><strong>"._T('info_numero_abbreviation').$id_row."</strong></td>\n"
@@ -205,29 +223,30 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 		}
 		$en_liste.= "</table>\n";
 		
+		//////////////////////
+		// Pagination si besoin
 		switch ($element){
-			case "courriers":
-				$requete_total = "SELECT id_courrier
-					FROM spip_courriers
-					WHERE statut="._q($statut);
-				$retour = _SPIPLISTES_EXEC_COURRIERS_LISTE;
+			case 'abonnements':
+				$sql_select = "COUNT(listes.id_liste) AS n";
+				$param = "&id_auteur=$id_auteur";
+				break;
+			case 'courriers':
+				$sql_select = "COUNT(id_courrier) AS n";
 				$param = "&statut=$statut";
 				break;
-			case "listes":
-				$requete_total = "SELECT id_liste
-					FROM spip_listes
-					WHERE statut="._q($statut)." ".$clause_where."
-					ORDER BY date DESC";
-				$retour = _SPIPLISTES_EXEC_LISTES_LISTE;
+			case 'listes':
+				$sql_select = "COUNT(id_liste) AS n";
 				$param = "";
 				break;
 		}
 		
-		$resultat_total = spip_query($requete_total);
-		$total = spip_num_rows($resultat_total);
+		if(($sql_result = spip_query("SELECT $sql_select FROM $sql_from WHERE $sql_where"))
+			&& ($row = spip_fetch_array($sql_result)) && ($total=$row['n'])) {
+			$retour = _request('exec');
+			$en_liste .= spiplistes_afficher_pagination($retour, $param, $total, $position, $nom_position, $pas);
+		}
 
-		$en_liste .= 
-			spiplistes_afficher_pagination($retour, $param, $total, $position, $nom_position, $pas)
+		$en_liste .= ""
 			. "</div>\n"
 			. "<br />\n"
 			;

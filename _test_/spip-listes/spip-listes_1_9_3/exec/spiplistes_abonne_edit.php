@@ -111,7 +111,7 @@ function exec_spiplistes_abonne_edit () {
 	$gros_bouton_supprimer = 
 		($id_auteur && $flag_editable && ($statut=='6forum'))
 		? icone (
-				_T('spiplistes:Supprime_ce_contact')
+				_T('spiplistes:Supprimer_ce_contact')
 				, generer_action_auteur(_SPIPLISTES_ACTION_SUPPRIMER_ABONNER, $id_auteur, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE))
 				, 'redacteurs-24.gif'
 				, "supprimer.gif"
@@ -219,7 +219,17 @@ function exec_spiplistes_abonne_edit () {
 		. fin_cadre_relief(true)
 		//
 		. "<br />\n"
-		. spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png', 'abonnements', '', '', 'position')
+		// Liste des abonnements
+		. spiplistes_lister_courriers_listes(
+			_T('spiplistes:abonne_listes')
+			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+			, 'abonnements'
+			, ''
+			, false
+			, 'position'
+			, _SPIPLISTES_EXEC_LISTE_GERER
+			, $id_auteur
+		)
 		//
 		. $gros_bouton_supprimer
 		;
