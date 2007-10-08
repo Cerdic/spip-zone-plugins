@@ -167,7 +167,7 @@ Elle peut etre appellée comme cela depuis article.html
 			[(#EVAL{defined('_DIR_PLUGIN_ABONNEMENT')}|?{' ',''})
 			<p>Vous pouvez vous abonner, ou bien acheter cet article &agrave; l'unit&eacute;</p>
 			<div style="padding:5px;background-color:#F4F1D0">
-				<form action="./?page=abonnement_complet" method="post">
+				<form action="./?page=_abonnement_" method="post">
 				[(#INCLURE{fond=formulaires/abonnement_liste})]	
 				<p style="text-align:right"><input type="submit" value="valider"></p>
 				</form>
