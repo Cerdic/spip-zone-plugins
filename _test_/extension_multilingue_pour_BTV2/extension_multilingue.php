@@ -3,9 +3,7 @@ function ExtensionMultilingue_BarreTypoEnrichie_toolbox($paramArray) {
 if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 {
 	$ret="";
-	$nom_champ = str_replace(".", "_", $paramArray[0]);
-	$champ_parent = substr($paramArray[0], 0, strrpos($paramArray[0], "."));
-	$champ_fin = substr($paramArray[0], strrpos($paramArray[0], ".") + 1);
+	$nom_champ = substr($paramArray[0], strpos($paramArray[0], "'")+1, strlen(substr($paramArray[0], strpos($paramArray[0], "'")+1))-5 );
 	$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	
 	if ($_GET['exec'] == "rubriques_edit")
@@ -149,7 +147,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	{
 		
 
-		if (($champ_fin == "titre") || ($champ_fin == "nom_site") || ($champ_fin == "change_type") || ($champ_fin == "lien_nom"))
+		if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type") || ($nom_champ == "lien_nom"))
 		{
 			$ret .= "
 			<div class=\"container-onglets\">
@@ -166,7 +164,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
 				if (lire_config('ExtensionMultilingue/typotitres_ExtensionMultilingue') == "on")
 				{			
-					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
 				}
 				$ret .= "<input type='text' class='formo' name=\"zone_multilingue_".$i."_".$nom_champ."\" value=\"".extension_multilingue_extraire_multi_lang($titre, $langues_choisies[$i])."\" size='40'  /></div>";
 			}
@@ -175,7 +173,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			
 				
 		}
-		else if (($champ_fin == "descriptif") || ($champ_fin == "descriptif_site"))
+		else if (($nom_champ == "descriptif") || ($nom_champ == "descriptif_site"))
 		{
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
@@ -191,8 +189,8 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				$ret .= "<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
 				if (lire_config('ExtensionMultilingue/typodescriptifs_ExtensionMultilingue') == "on")
 				{			
-					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
-
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
+				
 				}
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"6\" cols=\"40\">".entites_html(extension_multilingue_extraire_multi_lang($descriptif, $langues_choisies[$i]))."</textarea></div>";
         		}
@@ -200,7 +198,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			
 		}
 	
-		else if ($champ_fin == "texte")
+		else if ($nom_champ == "texte")
 		{
 			
 			
@@ -218,14 +216,14 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				$ret .= "<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
 				if (lire_config('ExtensionMultilingue/typotextes_ExtensionMultilingue') == "on")
 				{			
-					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
 				}
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"15\" cols=\"40\">".entites_html(extension_multilingue_extraire_multi_lang($texte, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret .="</div>";
 			
 		}
-		else if ($champ_fin == "surtitre")
+		else if ($nom_champ == "surtitre")
 		{
 			$ret .= "
 			<div class=\"container-onglets\">
@@ -242,7 +240,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
 				if (lire_config('ExtensionMultilingue/typotitres_ExtensionMultilingue') == "on")
 				{			
-					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
 				}
 				$ret .= "<input type='text' class='formo' name=\"zone_multilingue_".$i."_".$nom_champ."\" value=\"".extension_multilingue_extraire_multi_lang($surtitre, $langues_choisies[$i])."\" size='40'  /></div>";
 			}
@@ -250,7 +248,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$ret .= "</div>";
 			
 		}
-		else if ($champ_fin == "soustitre")
+		else if ($nom_champ == "soustitre")
 		{
 			$ret .= "
 			<div class=\"container-onglets\">
@@ -267,7 +265,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
 				if (lire_config('ExtensionMultilingue/typotitres_ExtensionMultilingue') == "on")
 				{			
-					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
 				}
 				$ret .= "<input type='text' class='formo' name=\"zone_multilingue_".$i."_".$nom_champ."\" value=\"".extension_multilingue_extraire_multi_lang($soustitre, $langues_choisies[$i])."\" size='40'  /></div>";
 			}
@@ -275,7 +273,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$ret .= "</div>";
 			
 		}
-		else if ($champ_fin == "lien_titre")
+		else if ($nom_champ == "lien_titre")
 		{
 			
 			$ret .= "
@@ -293,7 +291,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
 				if (lire_config('ExtensionMultilingue/typotitres_ExtensionMultilingue') == "on")
 				{			
-					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
 				}
 				$ret .= "<input type='text' class='formo' name=\"zone_multilingue_".$i."_".$nom_champ."\" value=\"".extension_multilingue_extraire_multi_lang($lien_titre, $langues_choisies[$i])."\" size='40'  /></div>";
 			}
@@ -301,7 +299,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 			$ret .= "</div>";
 			
 		}
-		else if ($champ_fin == "chapo")
+		else if ($nom_champ == "chapo")
 		{
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
@@ -317,15 +315,14 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				$ret .= "<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
 				if (lire_config('ExtensionMultilingue/typodescriptifs_ExtensionMultilingue') == "on")
 				{			
-					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
-
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
 				}
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"5\" cols=\"40\">".entites_html(extension_multilingue_extraire_multi_lang($chapo, $langues_choisies[$i]))."</textarea></div>";
         		}
 			$ret.="</div>";
 			
 		}
-		else if ($champ_fin == "ps")
+		else if ($nom_champ == "ps")
 		{
 			$ret .= "<div class=\"container-onglets\">
     			<ul class=\"tabs-nav\">";
@@ -341,8 +338,7 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 				$ret .= "<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
 				if (lire_config('ExtensionMultilingue/typodescriptifs_ExtensionMultilingue') == "on")
 				{			
-					$ret .= afficher_barre($champ_parent.".zone_multilingue_".$i."_".$nom_champ, false, $langues_choisies[$i]);
-
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
 				}
 				$ret .= "<textarea style=\"width: 480px;\" name=\"zone_multilingue_".$i."_".$nom_champ."\" class=\"forml\" rows=\"5\" cols=\"40\">".entites_html(extension_multilingue_extraire_multi_lang($ps, $langues_choisies[$i]))."</textarea></div>";
         		}
@@ -566,13 +562,13 @@ function calculer_actions_head_multilingues ($champ, $langues_choisies, $typedec
 	$champ_fin = substr($champ, strrpos($champ, ".") + 1);
 
 			$resultat .= "$('".$typedechamp."[@name=".$champ_fin."]').css(\"display\", \"none\");";
-			$resultat .= "$('form[@name=formulaire]').bind(\"submit\", function(e) { 
+			$resultat .= "$(\"".$typedechamp."[@name=".$champ_fin."]\").parents().filter(\"form\").bind(\"submit\", function(e) { 
 				var valeur".$champ_fin."='';
 			";
 			
 			for ($i=0; $i<count($langues_choisies); $i++)
 			{
-				$resultat .= "if ($('".$typedechamp."[@name=zone_multilingue_".$i."_".$nom_champ."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('".$typedechamp."[@name=zone_multilingue_".$i."_".$nom_champ."]').val();
+				$resultat .= "if ($('".$typedechamp."[@name=zone_multilingue_".$i."_".$champ_fin."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('".$typedechamp."[@name=zone_multilingue_".$i."_".$champ_fin."]').val();
 				";
 			}
 			
