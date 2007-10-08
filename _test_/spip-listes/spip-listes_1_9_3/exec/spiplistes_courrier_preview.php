@@ -1,5 +1,5 @@
 <?php
-
+// _SPIPLISTES_EXEC_COURRIER_PREVIEW
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -22,8 +22,6 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-// _SPIPLISTES_EXEC_COURRIER_PREVIEW
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
@@ -32,16 +30,42 @@ include_spip('inc/affichage');
 
 function exec_spiplistes_courrier_preview () {
 
-	$id_message = _request('id_message');
-	$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_message));
-	while($row = spip_fetch_array($result_m)) {
-		$texte = $row["texte"];
-		$statut = $row["statut"];
-		if($statut != 'encour' AND $statut != 'publie' AND $statut != 'ready')
-			$texte = spiplistes_propre($texte);
-		echo $texte ;
+	$id_courrier = intval(_request('id_courrier'));
+	$format = (($f = _request('format')) && ($f=='texte')) ? $f : 'html';
+	
+	if($id_courrier > 0) {
+
+		$sql_select = "texte,message_texte,statut";
+
+		$sql_result = spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1");
+
+		if($row = spip_fetch_array($sql_result)) {
+			foreach(explode(",", $sql_select) as $key) {
+				$$key = $row[$key];
+			}
+			switch($format) {
+				case 'html':
+					$texte = $row['texte'];
+					break;
+				case 'texte':
+					header("Content-Type: text/plain charset=".$GLOBALS['meta']['charset']);
+					$texte = $row['message_texte'];
+					if(empty($texte)) {
+						$texte = version_texte($row['texte']);
+					}
+					break;
+			}
+		}
+		else {
+			$texte = _T('spiplistes:Erreur_appel_courrier');
+		}
+	}
+	else {
+		$texte = _T('spiplistes:Erreur_appel_courrier');
 	}
 
+	// ajax_retour() force 'html' dans header. Pas bon pour preview.
+	if($format=='texte') echo($texte); 
+	else ajax_retour($texte);
 }
-
 ?>

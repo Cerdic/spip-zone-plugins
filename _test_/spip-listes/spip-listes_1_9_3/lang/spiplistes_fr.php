@@ -65,6 +65,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Attention_action_retire_invites' => "Attention: cette action retire les invit&eacute;s de la liste des abonn&eacute;s.",
 'A_partir_de' => "&Agrave; partir de",
 'aucun' => "aucun",
+'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran",
 
 //B
 
@@ -158,6 +159,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'En_redaction' => "En r&eacute;daction",
 'En_cours' => "En cours",
 'Envoi_abandonne' => "Envoi abandonn&eacute;",
+'Erreur_appel_courrier' => "Erreur lors de l'appel du courrier",
 
 //F
 'faq' => 'FAQ',

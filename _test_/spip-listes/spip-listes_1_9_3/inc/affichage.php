@@ -66,7 +66,7 @@ function spiplistes_boite_autocron(){
 		FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='"._SPIPLISTES_STATUT_ENCOURS."'");
 	if ($row = spip_fetch_array($res))
 		$n = intval($row['n']);
-spiplistes_log("AUTOCRON nb courries prets envoi $n") ; // debug
+spiplistes_log("AUTOCRON nb courries prets envoi $n", LOG_DEBUG);
 
 	// CP-20070925: if à revoir. pas normal de forcer.
 	//if(true or $n > 0 ){
