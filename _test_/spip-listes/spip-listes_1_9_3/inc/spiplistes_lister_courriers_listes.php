@@ -150,12 +150,6 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 			// si courriers, donne le nombre de destinataires
 				case 'courriers':
 					$nb_abo = "";
-/*					if($nb_emails_envoyes > 0) {
-						$en_liste.= "<span style='font-size:100%;color:#666' dir='ltr'>\n"
-							. "(".$nb_emails_envoyes.")\n"
-							. "</span>\n"
-							;
-					}*/
 					if(empty($email_test)) {
 						$nb_abo = 
 							($total_abonnes)
@@ -192,13 +186,13 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 						break;
 			}
 								
+		//////////////////////
 			$en_liste .= ""
 				. "</a>\n"
 				. "</div>\n"
 				. "</td>\n"
 				. "<td width='120' class='arial1'>"
 				;
-			
 			switch($element) {
 				case 'abonnements':
 					$en_liste .= ""
@@ -214,7 +208,6 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					}
 					break;
 			}
-			
 			$en_liste .= ""
 				. "</td>\n"
 				. "<td width='50' class='arial1'><strong>"._T('info_numero_abbreviation').$id_row."</strong></td>\n"
