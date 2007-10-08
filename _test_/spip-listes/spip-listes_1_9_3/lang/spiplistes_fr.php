@@ -111,6 +111,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Courriers_sans_destinataire' => "Courriers sans destinataire (liste vide)",
 'Courriers_sans_liste' => "Courriers sans abonn&eacute;s (liste manquante)",
 'Ce_courrier_ne_sera_envoye_qu_une_fois' => "Ce courrier ne sera envoy&eacute; qu'une fois.",
+'Conseil_sauvegarder_casier' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
+   dans le casier &agrave; courriers. L'annulation est impossible ici.",
 
 //D
 '_de_' => " de ",
@@ -266,6 +268,7 @@ et de recevoir les lettres d\'informations.',
 'nouveaux_messages' => 'Nouveaux messages',
 'Nouvelle_liste_de_diffusion' => 'Nouvelle liste de diffusion',
 'numero' => 'N&nbsp;',
+'Nettoyage_du_casier' => "Nettoyage du casier",
 
 //P
 'par_date' => 'Par date d\'inscription',
@@ -318,6 +321,8 @@ et de recevoir les lettres d\'informations.',
 'Stoppes' => "Stopp&eacute;s",
 'Sans_destinataire' => "Sans destinataire",
 'Supprimer_ce_contact' => "Supprimer ce contact",
+'Supprimer_du_casier_les' => "Supprimer du casier les...",
+'Suppression_de' => "Suppression de",
 
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',

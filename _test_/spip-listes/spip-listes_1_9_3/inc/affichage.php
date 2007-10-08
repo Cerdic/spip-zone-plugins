@@ -163,7 +163,7 @@ function spiplistes_fin_raccourcis ($return = false) {
 
 // From SPIP-Listes-V: CP:20070923
 function spiplistes_boite_raccourcis ($return = false) {
-	global $connect_statut;
+	global $connect_id_auteur;
 	
 	$result = ""
 		// Les raccourcis
@@ -196,6 +196,21 @@ function spiplistes_boite_raccourcis ($return = false) {
 			,false
 			)
 		. "</li>\n"
+		;
+	if($connect_id_auteur == 1) {
+		$result .= ""
+			. "<li>"
+			. icone_horizontale(
+				_T('titre_admin_tech')
+				, generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE)
+				, "administration-24.gif"
+				,""
+				,false
+				)
+			. "</li>\n"
+			;
+	}
+	$result .= ""
 		. "</ul>\n"
 		. spiplistes_fin_raccourcis(true)
 		;

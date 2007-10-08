@@ -143,6 +143,16 @@ function spiplistes_nb_courriers_en_cours($id_courrier = 0) {
 	return($n);
 }
 
+function spiplistes_courriers_casier_count ($statut='tous') {
+	$where = ($statut!='tous') ? " WHERE statut='$statut'" : "";
+	$n =
+		(($row = spip_fetch_array(spip_query("SELECT COUNT(id_courrier) AS n FROM spip_courriers $where"))) && $row['n'])
+		? intval($row['n'])
+		: 0
+		;
+	return($n);
+}
+
 //taille d'une chaine sans saut de lignes ni espaces
 function spip_listes_strlen($out){
 	$out = preg_replace("/(\r\n|\n|\r| )+/", "", $out);
