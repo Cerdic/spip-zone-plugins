@@ -63,7 +63,7 @@
 	</pipeline>
 	<necessite id="CFG" version="[1.0;]" />
 	<necessite id="BarreTypoEnrichie" version="[2.2.0;]" />
-	<necessite id="barre_typo_generalisee" version="[1.3;]" />
+	<necessite id="barre_typo_generalisee" version="[1.4;]" />
 	<necessite id='spip' version='[1.92;]' />
 	
 	
