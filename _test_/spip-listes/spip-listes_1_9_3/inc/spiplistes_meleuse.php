@@ -153,12 +153,6 @@ function spiplistes_meleuse () {
 		
 			$is_from_valide = email_valide($from);         
 		
-/*			if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
-				$remplacements = array("&#8217;"=>"'","&#8220;"=>'"',"&#8221;"=>'"');
-				$objet_html = strtr($objet_html, $remplacements);
-				$page_html = strtr($page_html, $remplacements);
-			}
-	*/					
 			////////////////////////////////////		  
 			// Prepare la version texte
 			$objet_texte = version_texte($objet_html);
@@ -185,9 +179,15 @@ function spiplistes_meleuse () {
 				$page_texte .= $tampon_texte;
 			}
 		
+			////////////////////////////////////		  
+			// La petite ligne du renvoi du cookie pour modifier son abonnement
+			$pied_rappel_html = _T('spiplistes:abonnement_mail');
+			$pied_rappel_texte = html_entity_decode($pied_rappel_html);
+			
 			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
-				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte') as $key) {
+				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte'
+					, $pied_rappel_html, $pied_rappel_texte) as $key) {
 					if(!empty($$key)) {
 						$$key = spiplistes_translate_2_charset($$key,$GLOBALS['meta']['spiplistes_charset_envoi']);
 					}
@@ -263,22 +263,22 @@ function spiplistes_meleuse () {
 							spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email)." LIMIT 1");				
 		
 							if ($is_from_valide) {
+								$_url = generer_url_public('abonnement','d='.$cookie);
 								switch($format_abo) {
 									case 'html':
 										$body =
 											"<html>\n\n<body>\n\n"
 											. $page_html
 											. $pied_page_html
-											. "<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')
-											. "</a>\n\n</body></html>"
+											. "<a href=\"$_url\">".$pied_rappel_html."</a>\n\n</body></html>"
 											;
 										break;
 									case 'texte':
 										$body =
 											$page_texte ."\n\n"
 											. $pied_page_texte
-											. filtrer_entites(_T('spiplistes:abonnement_mail'))."\n"
-											. filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"
+											. $pied_rappel_texte."\n"
+											. $_url."\n\n"
 											;
 										break;
 								}
