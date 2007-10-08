@@ -25,6 +25,7 @@
 include_spip ("inc/utils");
 include_spip ("inc/filtres");    /* email_valide() */
 include_spip ("inc/acces");      /* creer_uniqid() */
+include_spip('inc/charsets');
 
 function spiplistes_log($texte, $level = LOG_WARNING) {
 	if(__server_in_private_ip_adresses()
@@ -600,7 +601,26 @@ function spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute) {
 	return($annee."-".$mois."-".$jour." ".$heure.":".$minute.":00");
 }
 
-
+// traduit charset
+// complète caracteres manquants dans SPIP
+function spiplistes_translate_2_charset ($texte, $charset='AUTO') {
+	
+	$texte = charset2unicode($texte);
+	$texte = unicode2charset($texte, $charset);
+	if($charset != "utf-8") {
+		$remplacements = array(
+			"&#8217;"=>"'"	// quote
+			, "&#8220;"=>'"' // guillemets
+			, "&#8221;"=>'"' // guillemets
+			, "&#255;" => "ÿ" // &yuml
+			, "&#159;" => "Ÿ" // &Yuml
+			, "&#339;" => "œ"	// e dans o
+			)
+			;
+		$texte = strtr($texte, $remplacements);
+	}
+	return($texte);
+}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
