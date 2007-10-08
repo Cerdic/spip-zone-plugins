@@ -34,7 +34,7 @@ function exec_courrier_preview(){
 		$statut = $row["statut"];
 		if($statut != 'encour' AND $statut != 'publie' AND $statut != 'ready')
 			$texte = spiplistes_propre($texte);
-		echo $texte ;
+		ajax_retour($texte) ;
 	}
 
 }
