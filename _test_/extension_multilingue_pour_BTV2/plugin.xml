@@ -25,8 +25,6 @@
 	<br/>
 	Le fonctionnement est bas&eacute; sur l'utilisation des balises <tt>&lt;multi&gt;</tt>.
 	<br/>
-	<b>Attention :</b> ce plugin n'est pas compatible avec les enluminures pour la BTV2.
-	<br/>
 	[Acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]
 	[en]Add multilingual functionalities to the typographical bar V2 
 	
@@ -34,8 +32,6 @@
 
 	<br/>
 	It is based on the use of <tt>&lt;multi&gt;</tt> tags.
-	<br/>
-	<b>Please note that this plugin is not yet compliant to "enluminures" for BTV2</b>.
 	<br/>
 	[Control panel access with cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]
 	</multi>
