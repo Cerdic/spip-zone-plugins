@@ -91,11 +91,13 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Complement_lien_en_tete_desc' => "Cette option vous permet de rajouter en t&ecirc;te du courrier HTML envoy&eacute; le lien 
    du courrier original pr&eacute;sent sur votre site.",
 'Complement_lien_de_tete' => "<div style='font-size=75%;padding:0 1ex;background-color:#ffc;text-align:center;'>
-	<div>Ce courrier est au format HTML.</div>
-	<div>Si vous rencontrez 
-   des difficult&eacute;s &agrave; le lire ici, <a href='@liencourrier@'>vous pouvez 
+	<div>L'original de ce courrier est au format HTML.</div>
+	<div>Si vous rencontrez des difficult&eacute;s &agrave; lire ce courrier ici, <a href='@liencourrier@'>vous pouvez 
    consulter l'original sur le site @nomsite@</a>.</div>
 	</div>",
+'Complement_tampon_editeur' => "Ajouter le tampon Editeur",
+'Complement_tampon_editeur_desc' => "Cette option vous permet de rajouter le tampon de l'&eacute;diteur en fin de courrier. ",
+'Complement_tampon_editeur_label' => "Ajouter le tampon Editeur en fin de courrier",
 'Console' => "Console",
 'Console_syslog_desc' => "Vous &ecirc;tes sur un r&eacute;seau local (@IP_LAN@). Si besoin, vous pouvez activer la console sur syslog au lieu des journaux SPIP.",
 'Console_syslog_texte' => "Activer les journaux syst&egrave;mes (syslog)",

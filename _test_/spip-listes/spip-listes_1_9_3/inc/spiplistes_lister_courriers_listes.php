@@ -85,11 +85,12 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	
 	if (($nb_ = @spip_num_rows($resultat_aff)) > 0) {
 		
+		// titre du tableau
 		$en_liste = ""
 			. "<div class='liste'>\n"
 			. "<div style='position: relative;'>\n"
 			. "<div style='position: absolute; top: -12px; left: 3px;'>\n"
-			. "<img src='".$image."'  />\n"
+			. "<img src='$image' alt='' width='24' height='24' />\n"
 			. "</div>\n"
 			. "<div style='background-color:white; color:black; padding:3px; padding-left:30px; border-bottom:1px solid #444;' class='verdana2'>\n"
 			. "<strong>\n"

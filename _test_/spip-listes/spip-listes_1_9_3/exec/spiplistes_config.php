@@ -43,6 +43,7 @@ function exec_spiplistes_config () {
 	
 	$keys_complement_courrier = array(
 		'opt_lien_en_tete_courrier'
+		, 'opt_ajout_tampon_editeur'
 		);
 
 	$keys_param_valider = array(
@@ -220,6 +221,17 @@ function exec_spiplistes_config () {
 			. " />\n"
    	. "<label class='verdana2' for='opt_lien_en_tete_courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete')."</label>\n"
 		. fin_cadre_relief(true)
+		//
+		// ajout tampon editeur
+		. debut_cadre_relief("", true, "", _T('spiplistes:Complement_tampon_editeur'))
+		. "<p class='verdana2'>"._T('spiplistes:Complement_tampon_editeur_desc')."</p>"
+   	. "<input type='checkbox' name='opt_ajout_tampon_editeur' value='oui' id='opt_ajout_tampon_editeur' "
+			. ((__plugin_lire_s_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "")
+			. " />\n"
+   	. "<label class='verdana2' for='opt_ajout_tampon_editeur'>"._T('spiplistes:Complement_tampon_editeur_label')."</label>\n"
+		. fin_cadre_relief(true)
+		//
+		// bouton de validation
 		. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
 		. "<label for='btn_complement_courrier' style='display:none;'>"._T('bouton_valider')."</label>\n"
 		. "<input type='submit' id='btn_complement_courrier' name='btn_complement_courrier' value='"._T('bouton_valider')."' class='fondo' />\n"

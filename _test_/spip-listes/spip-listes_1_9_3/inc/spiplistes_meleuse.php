@@ -58,7 +58,7 @@ function spiplistes_meleuse () {
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 	
 	// initialise les options
-	foreach(array('opt_simuler_envoi','opt_lien_en_tete_courrier') as $key) {
+	foreach(array('opt_simuler_envoi','opt_lien_en_tete_courrier','opt_ajout_tampon_editeur') as $key) {
 		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
 	}
 
@@ -75,6 +75,9 @@ function spiplistes_meleuse () {
 	
 	if(spip_num_rows($sql_result)) {
 
+		$nomsite = $GLOBALS['meta']['nom_site'];
+		$urlsite = $GLOBALS['meta']['adresse_site'];
+
 		// boucle (sur LIMIT 1) pour pouvoir sortir par break si erreur
 		while($row = spip_fetch_array($sql_result)) {
 		
@@ -90,7 +93,7 @@ function spiplistes_meleuse () {
 			
 			$nb_emails = array();
 			
-			// compteur pourla session uniquement
+			// compteur pour la session uniquement
 			// le total de chaque sera ajouté en fin de session
 			$nb_emails_envoyes =
 				$nb_emails_echec = 
@@ -98,7 +101,7 @@ function spiplistes_meleuse () {
 				$nb_emails['texte'] = 
 				$nb_emails['html'] = 0
 				;
-		
+			
 			$pied_page_html = "" ;
 			
 			$str_log = "MEL: ID_COURRIER: #$id_courrier"; 
@@ -144,49 +147,50 @@ function spiplistes_meleuse () {
 			}
 			
 			//////////////////////////////
-			// on prepare l'email
-			$nomsite = $GLOBALS['meta']['nom_site'];
-			$urlsite = $GLOBALS['meta']['adresse_site'];
-				
 			// email emetteur
 			$email_webmaster = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
 			$from = email_valide($email_envoi) ? $email_envoi : $email_webmaster;
 		
 			$is_from_valide = email_valide($from);         
-					 
-			if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
+		
+/*			if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
 				$remplacements = array("&#8217;"=>"'","&#8220;"=>'"',"&#8221;"=>'"');
 				$objet_html = strtr($objet_html, $remplacements);
 				$page_html = strtr($page_html, $remplacements);
 			}
-			
-			if($opt_lien_en_tete_courrier) {
-				$page_html = ""
-					. _T('spiplistes:Complement_lien_de_tete'
-						, array('liencourrier'=>generer_url_public('courrier', "id_courrier=$id_courrier"), 'nomsite'=>$nomsite)
-						)
-					. $page_html
-					;
-			}
-			
+	*/					
 			////////////////////////////////////		  
 			// Prepare la version texte
 			$objet_texte = version_texte($objet_html);
 			$page_texte = ($message_texte !='') ? $message_texte : version_texte($page_html);
 			$pied_page_texte = version_texte($pied_page_html);
 			
-			$ii = str_repeat("-", 40);
-			$page_texte .= ""
-				. "\n\n$ii"
-				. "\n\n"._T('spiplistes:editeur').$nomsite."\n"
-				. $urlsite."\n"
-				. "$ii"
-				;
+			////////////////////////////////////		  
+			// Ajoute lien tete de courrier
+			if($opt_lien_en_tete_courrier) {
+				$ii = _T('spiplistes:Complement_lien_de_tete', array('liencourrier'=>generer_url_public('courrier', "id_courrier=$id_courrier"), 'nomsite'=>$nomsite));
+				$page_html = $ii . $page_html;
+				$page_texte = version_texte($ii) . $page_texte;
+			}
+
+			////////////////////////////////////		  
+			// Applique le tampon éditeur en fin de mail
+			if($opt_ajout_tampon_editeur) {
+				// html
+				$ii = "<hr style='border:0; border-top:1px solid #cccccc;' />";
+				$page_html .= $ii._T('spiplistes:editeur').$nomsite."<br />".$urlsite.$ii;
+				// texte
+				$ii = "\n".str_repeat("-", 40);
+				$tampon_texte = "\n".$ii."\n"._T('spiplistes:editeur').$nomsite."\n".$urlsite.$ii;
+				$page_texte .= $tampon_texte;
+			}
 		
 			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
 				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte') as $key) {
-					$$key = spiplistes_translate_2_charset($$key,$GLOBALS['meta']['spiplistes_charset_envoi']);
+					if(!empty($$key)) {
+						$$key = spiplistes_translate_2_charset($$key,$GLOBALS['meta']['spiplistes_charset_envoi']);
+					}
 				}
 			}
 			
@@ -212,12 +216,11 @@ function spiplistes_meleuse () {
 				
 				spiplistes_log("MEL: titre: $titre, total_abos: $total_abonnes, limit: $limit", LOG_DEBUG);
 
-				//chopper un lot 
-				
 				if($is_a_test) {
 					$result_inscrits = spip_query("SELECT id_auteur,nom,email FROM spip_auteurs WHERE email="._q($email_test)." LIMIT 1");
 				}
 				else {
+					// Traitement d'une liasse
 					// un id pour ce processus
 					$id_process = intval(substr(creer_uniqid(),0,5));
 					spip_query("UPDATE spip_auteurs_courriers SET etat=$id_process WHERE etat='' AND id_courrier=$id_courrier LIMIT $limit");
@@ -274,9 +277,9 @@ function spiplistes_meleuse () {
 										$body =
 											$page_texte ."\n\n"
 											. $pied_page_texte
-										  . filtrer_entites(_T('spiplistes:abonnement_mail'))."\n"
-										  . filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"
-										  ;
+											. filtrer_entites(_T('spiplistes:abonnement_mail'))."\n"
+											. filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"
+											;
 										break;
 								}
 
