@@ -23,6 +23,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 	$action = str_replace ("&gt;", '%3E',  $action);
 	$action = str_replace ("\n", '%5Cn',  $action);
 	$action = unicode_to_javascript(html2unicode($action));
+	$action = str_replace("\"","&quot;",$action);
 	return "<a href=\"javascript:"
 		.$action
 		."\"\n class='spip_barre' tabindex='1000' title=\""
@@ -333,8 +334,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col++;
 		if (!$forum) {
-			$ret .= bouton_barre_racc("toggle_preview($num_barre,'$champ');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
-			$ret .= bouton_barre_racc("toggle_stats($num_barre,'$champ');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
+			$ret .= bouton_barre_racc("toggle_preview($num_barre,'".replace("'","\\'",$champ)."');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
+			$ret .= bouton_barre_racc("toggle_stats($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
 		}
 		$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$ret .= aide("raccourcis");
