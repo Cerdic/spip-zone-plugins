@@ -48,7 +48,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 */
 	
 function spiplistes_meleuse () {
-
+//return(0);
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/meta');
 	include_spip('inc/texte');

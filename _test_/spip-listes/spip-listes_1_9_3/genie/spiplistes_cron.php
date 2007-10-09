@@ -33,9 +33,10 @@
 	// - si periode < 0, repasse la liste en dormeuse
 
 function cron_spiplistes_cron ($last_time) {
-
 	include_spip('inc/spiplistes_api');
 
+	spiplistes_log("-", LOG_DEBUG);
+	spiplistes_log("_", LOG_DEBUG);
 	spiplistes_log("CRON: cron_spiplistes_cron() <<", LOG_DEBUG);
 		
 	$current_time = time();
@@ -52,8 +53,12 @@ function cron_spiplistes_cron ($last_time) {
 		
 	$listes_privees_et_publiques = spip_query ($sql_query);
 	
+spiplistes_log("CRON: nb listes ok:".spip_num_rows($listes_privees_et_publiques), LOG_DEBUG);
+//return(0);
+
 	while($row = spip_fetch_array($listes_privees_et_publiques)) {
 	
+spiplistes_log("CRON: job id_liste: ".$row['id_liste'], LOG_DEBUG);
 		// initalise les variables
 		foreach(explode(",", $sql_select) as $key) {
 			$$key = $row[$key];
@@ -64,8 +69,8 @@ function cron_spiplistes_cron ($last_time) {
 		// demande id_auteur de la liste pour la signer
 		$id_auteur = spiplistes_mod_listes_get_id_auteur($id_liste);
 		
-		spiplistes_log("CRON: la liste $id_liste demande un envoi", LOG_DEBUG);
-		spiplistes_log("CRON: lang == $lang", LOG_DEBUG);
+spiplistes_log("CRON: la liste $id_liste demande un envoi", LOG_DEBUG);
+spiplistes_log("CRON: lang == $lang", LOG_DEBUG);
 
 		/////////////////////////////
 		// Tampon date d'envoi (dans maj)
@@ -87,44 +92,48 @@ function cron_spiplistes_cron ($last_time) {
 		$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
 		$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 		
-		spiplistes_log("CRON: Titre => $titre", LOG_DEBUG);
+spiplistes_log("CRON: Titre => $titre", LOG_DEBUG);
 
-		$taille = strlen(spip_listes_strlen(version_texte($texte)));
-		spiplistes_log("CRON: Taille texte du courrier => $taille", LOG_DEBUG);
+		$taille_courrier_ok = (strlen(spip_listes_strlen(version_texte($texte))) > 10);
 
-		/////////////////////////////
-		// Place le courrier dans le panier si plus de 10 caractères
-		if ( $taille > 10 ) {
-
+		if($taille_courrier_ok) {
 			include_spip('inc/filtres');
 			$texte = liens_absolus($texte);
+			$date_debut_envoi = $date_fin_envoi = "''";
+			$statut = _SPIPLISTES_STATUT_ENCOURS;
+		}
+		else {
+spiplistes_log("CRON: courrier vide !!", LOG_DEBUG);
+			$date_debut_envoi = "date_debut_envoi=NOW()";
+			$date_fin_envoi = "date_fin_envoi=NOW()";
+			$statut = _SPIPLISTES_STATUT_VIDE;
+		}
+		
+		/////////////////////////////
+		// Place le courrier dans le casier
+		$sql_query = "INSERT INTO spip_courriers (titre,date,statut,type,id_auteur,id_liste,date_debut_envoi,date_fin_envoi,texte) 
+			VALUES ("._q($titre).", NOW(),'$statut','"._SPIPLISTES_TYPE_LISTEAUTO."'
+			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($texte).")";
 
-			// Place le courrier dans le panier
-			$result = spip_query("INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur, id_liste) 
-				VALUES ("._q($titre).","._q($texte).", NOW(),'"._SPIPLISTES_STATUT_ENCOURS."','"._SPIPLISTES_TYPE_LISTEAUTO."'
-				, $id_auteur, $id_liste)");
-			
+$coucou="coucou";
+		$sql_query = "INSERT INTO spip_courriers (titre,date,statut,type,id_auteur,id_liste,date_debut_envoi,date_fin_envoi,texte) 
+			VALUES ("._q($titre).", NOW(),'$statut','"._SPIPLISTES_TYPE_LISTEAUTO."'
+			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($coucou).")";
+		$result = spip_query($sql_query);
+spiplistes_log($sql_query);
+
+		/////////////////////////////
+		// Ajoute les abonnés dans la queue (spip_auteurs_courriers)
+		if($taille_courrier_ok) {
 			$id_courrier = spip_insert_id();
-			
-			//generer la pile d'envoi (spip_auteurs_courriers)
+spiplistes_log("## >> ".$id_courrier);
 			spiplistes_remplir_liste_envois($id_courrier, $id_liste);
-			spiplistes_log("CRON: remplir courrier $id_courrier, liste : $id_liste", LOG_DEBUG);
+spiplistes_log("CRON: remplir courrier $id_courrier, liste : $id_liste", LOG_DEBUG);
 		} 
 		else {
 			// contenu du courrier vide
-			spiplistes_log("CRON: envoi mail nouveautes : pas de nouveautes, taille == $taille", LOG_DEBUG);
-			
-			// Ajoute à la pile 
-			// A revoir. Serait mieux de conserver le bon titre du courrier et
-			// de changer le statut (voir SPIP-Listes-V)
-			$result = spip_query("INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur, id_liste) 
-			 VALUES ("._q(_L("Pas d'envoi"))
-			 .","._q(_L("aucune nouveaut&eacute;, le mail automatique n'a pas &eacute;t&eacute; envoy&eacute;"))
-			 .", NOW(), '"._SPIPLISTES_STATUT_PUBLIE."', '"._SPIPLISTES_TYPE_LISTEAUTO."' , $id_auteur, $id_liste)");
-			$id_courrier = spip_insert_id(); // ??
-	
+spiplistes_log("CRON: envoi mail nouveautes : pas de nouveautes", LOG_DEBUG);
 		} 
-
 	}// fin traitement des listes
 	
 	/////////////////////////////

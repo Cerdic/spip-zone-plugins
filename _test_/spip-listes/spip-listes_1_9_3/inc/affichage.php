@@ -31,6 +31,7 @@ function spiplistes_onglets ($rubrique, $onglet, $return = false) {
 	
 	if ($rubrique == _SPIPLISTES_RUBRIQUE){
 		$result = ""
+			. "<br />"
 			. debut_onglet()
 			. onglet(_T('spiplistes:Casier_a_courriers'), generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE), $rubrique
 				, $onglet, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_hyperlink-mail-and-news-24.gif")

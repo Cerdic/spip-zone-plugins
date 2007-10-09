@@ -439,4 +439,19 @@ function __plugin_lire_s_meta ($key, $meta_name) {
 	return($result);
 }
 
+function __table_items_count ($table, $key, $where='') {
+	return (
+		(($row = spip_fetch_array(spip_query("SELECT COUNT($key) AS n FROM $table $where"))) && $row['n'])
+		? intval($row['n'])
+		: 0
+	);
+}
+
+function __table_items_get ($table, $keys, $where='', $limit='') {
+	$result = array();
+	$sql_result = spip_query("SELECT $keys FROM $table $where $limit");
+	while($row = spip_fetch_array($sql_result)) { $result[] = $row; }
+	return ($result);
+}
+
 ?>

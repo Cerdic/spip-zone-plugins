@@ -143,14 +143,23 @@ function spiplistes_nb_courriers_en_cours($id_courrier = 0) {
 	return($n);
 }
 
+// CP-20071009
 function spiplistes_courriers_casier_count ($statut='tous') {
 	$where = ($statut!='tous') ? " WHERE statut='$statut'" : "";
-	$n =
-		(($row = spip_fetch_array(spip_query("SELECT COUNT(id_courrier) AS n FROM spip_courriers $where"))) && $row['n'])
-		? intval($row['n'])
-		: 0
-		;
-	return($n);
+	return(__table_items_count('spip_courriers', 'id_courrier', $where));
+}
+
+// CP-20071009
+function spiplistes_listes_count ($statut='toutes') {
+	$where = ($statut!='toutes') ? " WHERE statut='$statut'" : "";
+	return(__table_items_count('spip_listes', 'id_liste', $where));
+}
+
+// CP-20071009
+function spiplistes_listes_items_get ($keys, $where=false, $limit=false) {
+	$where = $where ? " WHERE $where" : "";
+	$limit = $limit ? " LIMIT $limit" : "";
+	return(__table_items_get('spip_listes', $keys, $where, $limit));
 }
 
 //taille d'une chaine sans saut de lignes ni espaces
@@ -158,7 +167,6 @@ function spip_listes_strlen($out){
 	$out = preg_replace("/(\r\n|\n|\r| )+/", "", $out);
 	return $out ;
 }
-
 
 //desabonner des listes publiques
 function spiplistes_desabonner($id_auteur){
@@ -600,15 +608,17 @@ function spiplistes_titre_propre($titre){
 }
 
 // complète les dates chiffres (jour, heure, etc.)
-// de retour du formulaire pour les dates 
-// et renvoie une date formattée correcte
+// de retour du formulaire pour les dates et renvoie une date formatée correcte
 function spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute) {
-	foreach(array('mois', 'jour', 'heure', 'minute') as $k) {
-		if($$k < 10) {
-			$$k = str_pad($$k, 2, "0", STR_PAD_LEFT);
+	if(!empty($jour) && !empty($mois) && !empty($annee) && (intval($heure) >= 0) && (intval($minute) >= 0)) {
+		foreach(array('mois', 'jour', 'heure', 'minute') as $k) {
+			if($$k < 10) {
+				$$k = str_pad($$k, 2, "0", STR_PAD_LEFT);
+			}
 		}
+		return($annee."-".$mois."-".$jour." ".$heure.":".$minute.":00");
 	}
-	return($annee."-".$mois."-".$jour." ".$heure.":".$minute.":00");
+	return(false);
 }
 
 // traduit charset

@@ -70,7 +70,10 @@ function exec_spiplistes_liste_gerer () {
 
 	$cherche_auteur = _request('cherche_auteur'); // ??
 	$debut = _request('debut'); // ??
- 
+
+	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
+	$auto_mois = ($auto_mois == 'oui');
+	 
 	if(!$id_liste) {
 	//////////////////////////////////////////////////////
 	// Creer une liste
@@ -99,6 +102,7 @@ function exec_spiplistes_liste_gerer () {
 		$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
 
 		if($flag_editable) {
+spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 		
 			$sql_query = "";
 
@@ -122,14 +126,14 @@ function exec_spiplistes_liste_gerer () {
 			
 			// Modifier diffusion ?
 			if($btn_modifier_diffusion) {
-spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", LOG_DEBUG);
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut!=$current_liste['statut'])) {
 					$sql_query .= "statut='$statut',";
 				}
 				// Modifier la langue ?
 				if(!empty($lang) && ($lang!=$current_liste['lang'])) {
-spiplistes_log("LISTE MODIF: btn_modifier_diffusion $lang", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: btn_modifier_diffusion $lang", LOG_DEBUG);
 					$sql_query .= "lang='$lang',";
 				}
 			}
@@ -141,30 +145,33 @@ spiplistes_log("LISTE MODIF: btn_modifier_diffusion $lang", LOG_DEBUG);
 
 			// Modifier message_auto ?
 			if($btn_modifier_courrier_auto){
-spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 				$sql_query = "";
 				$titre_message = spiplistes_titre_propre($titre_message);
-				switch($message_auto) {
-					case 'oui':
-						$sql_query .= "message_auto='oui',titre_message="._q($titre_message).",periode=$periode,";
-						if(!empty($jour) && !empty($mois) && !empty($annee) && (intval($heure) >= 0) && (intval($minute) >= 0)) {
-							$envoyer_quand = spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute);
-							$sql_query .= "date='$envoyer_quand',";
-						}
-						if($auto_mois == 'oui') {
-							$sql_query .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
-						}
-						break;
-					case 'non':
-						$sql_query .= "message_auto='non',titre_message='',date='',periode=0,";
-						break;
-					case 'envoyer_maintenant':
-						$sql_query = "message_auto='oui',titre_message='"._q($titre_message)."'date=NOW(),periode=0,"; 
-						// la trieuse s'occupera du reste
-						break;
+//spiplistes_log("LISTE MODIF: envoyer_maintenant".($envoyer_maintenant ? "oui" : "non"), LOG_DEBUG);
+				if(
+					($message_auto == 'oui')
+					&& ($envoyer_maintenant
+						|| ($envoyer_quand = spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute)) 
+						|| $auto_mois)
+					) {
+					$sql_query .= "message_auto='oui',titre_message="._q($titre_message).",";
+					if($patron) {
+						$sql_query .= "patron="._q($patron).",";
+					}
+					if($envoyer_maintenant) {
+//spiplistes_log("LISTE MODIF: envoyer_maintenant", LOG_DEBUG);
+						$sql_query .= "date=NOW(),periode=0,"; 
+					}
+					else if($envoyer_quand) {
+							$sql_query .= "date='$envoyer_quand',periode=$periode,";
+					}
+					if($auto_mois) {
+						$sql_query .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
+					}
 				}
-				if($patron && ($message_auto!='non')) {
-					$sql_query .= "patron="._q($patron).",";
+				else if($message_auto == 'non') {
+					$sql_query .= "message_auto='non',titre_message='',date='',periode=0,";
 				}
 			}
 
@@ -405,8 +412,8 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 	$page_result .= ""
 		. "<tr><td background='"._DIR_IMG_PACK."rien.gif' align='$spip_lang_left' class='verdana2'>"
 		. "<input type='radio' name='message_auto' value='oui' id='auto_oui' "
-		. ($auto_checked = ($message_auto=='oui' ? "checked='checked'" : ""))
-		. " onchange=\"jQuery('#auto_oui_detail').show();\" />"
+			. ($auto_checked = ($message_auto=='oui' ? "checked='checked'" : ""))
+			. " onchange=\"jQuery('#auto_oui_detail').show();\" />"
 		. "<label for='auto_oui' ".($auto_checked ? "style='font-weight:bold;'" : "").">"._T('spiplistes:prog_env')."</label>\n"
 		. "<div id='auto_oui_detail'>"
 		. "<ul style='list-style-type:none;'>\n"
@@ -422,7 +429,9 @@ spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
 		. spiplistes_dater_envoi($id_liste, true, $statut, $date_debut_envoi, 'btn_changer_date', false)."</li>\n"
 		.	(
 			(!$envoyer_maintenant)
-			? " <li><input type='checkbox' class='checkbox' name='envoyer_maintenant' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>\n"
+			? " <li><input type='checkbox' class='checkbox' name='envoyer_maintenant' value='oui' id='em' class='fondl' "
+				. " onchange=\"jQuery('#auto_oui').click();\" />"
+				. "<label for='em'>"._T('spiplistes:env_maint')."</label></li>\n"
 			: ""
 			)
 		. "</ul></div>\n"

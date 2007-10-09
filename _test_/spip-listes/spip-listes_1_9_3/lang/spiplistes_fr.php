@@ -113,6 +113,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Ce_courrier_ne_sera_envoye_qu_une_fois' => "Ce courrier ne sera envoy&eacute; qu'une fois.",
 'Conseil_sauvegarder_casier' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
    dans le casier &agrave; courriers. L'annulation est impossible ici.",
+'Conseil_sauvegarder_listes' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
+   des listes. L'annulation est impossible ici.",
 
 //D
 '_de_' => " de ",
@@ -284,6 +286,7 @@ et de recevoir les lettres d\'informations.',
 'Periodicite_:' => "P&eacute;riodicit&eacute; : ",
 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi",
 'Publies' => "Publi&eacute;s",
+'Pas_de_liste' => "Pas de liste",
 
 //R
 'recherche' => 'Rechercher',
@@ -323,6 +326,8 @@ et de recevoir les lettres d\'informations.',
 'Supprimer_ce_contact' => "Supprimer ce contact",
 'Supprimer_du_casier_les' => "Supprimer du casier les...",
 'Suppression_de' => "Suppression de",
+'Supprimer_les_listes' => "Supprimer les listes",
+'Supprimer_la_liste' => "Supprimer la liste...",
 
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
@@ -331,6 +336,7 @@ et de recevoir les lettres d\'informations.',
 'texte_lettre_information' => 'Voici la lettre d\'information de ',
 'texte_pied' => '<p><b>Texte du pied de page</b>',
 'Tous_les' => 'Tous les',
+'total_items' => "Total: @total@ @item@",
 
 //V
 'version_html' => '<b>Version HTML</b>',
