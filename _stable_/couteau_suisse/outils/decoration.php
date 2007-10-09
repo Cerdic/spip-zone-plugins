@@ -12,7 +12,11 @@ cs_log("decoration_installe()");
 	$balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
 	$aide = $chevrons1 = $chevrons2 = $styles = $alias = array();
 	foreach ($balises as $balise) {
-		if (preg_match('/(span|div)\.([^=]+)=(.+)$/', $balise, $regs)) {
+		if (preg_match('/(span|div)\.([^.]+)\.class\s*=(.+)$/', $balise, $regs)) {
+			list($div, $racc, $class) = array($regs[1], trim($regs[2]), trim($regs[3]));
+			$aide[] = $racc; $chevrons1[] = "<$racc>"; $chevrons2[] = "</$racc>";
+			$styles[] = "<$regs[1] class=\"$class\">"; $fins[] = "</$regs[1]>";
+		} elseif (preg_match('/(span|div)\.([^=]+)=(.+)$/', $balise, $regs)) {
 			list($div, $racc, $style) = array($regs[1], trim($regs[2]), trim($regs[3]));
 			$aide[] = $racc; $chevrons1[] = "<$racc>"; $chevrons2[] = "</$racc>";
 			$styles[] = "<$regs[1] style=\"$style\">"; $fins[] = "</$regs[1]>";

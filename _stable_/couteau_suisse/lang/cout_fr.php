@@ -112,6 +112,8 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 &lt;mabalise&gt;texte&lt;/mabalise&gt;.<br />D&eacute;finissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
 - {span.mabalise = mon style CSS &agrave; l'int&eacute;rieur d'un paragraphe}
 - {div.mabalise = mon style CSS cr&eacute;ant un nouveau paragraphe}
+- {span.mabalise.class = ma classe CSS &agrave; l'int&eacute;rieur d'un paragraphe}
+- {div.mabalise.class = ma classe CSS cr&eacute;ant un nouveau paragraphe}
 - {unalias = mabalise}
 
 [[Vos balises de style personnalis&eacute; :->%decoration_styles%]]",
