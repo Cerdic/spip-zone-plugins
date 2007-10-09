@@ -25,7 +25,7 @@
 	<br/>
 	Le fonctionnement est bas&eacute; sur l'utilisation des balises <tt>&lt;multi&gt;</tt>.
 	<br/>
-	[Acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]
+	<strong>[Acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]</strong>
 	[en]Add multilingual functionalities to the typographical bar V2 
 	
 	<br/>Used with the generalized typographical bar, this plugin offers to easily use multilingualism on every textareas, such as titles, descriptions, and texts.
@@ -33,7 +33,7 @@
 	<br/>
 	It is based on the use of <tt>&lt;multi&gt;</tt> tags.
 	<br/>
-	[Control panel access with cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]
+	<strong>[Control panel access with cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]</strong>
 	</multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
