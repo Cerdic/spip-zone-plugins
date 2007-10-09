@@ -19,6 +19,13 @@ function phpmv_get_code(){
 			</noscript>
 			<!-- /phpmyvisites -->';	
 }
+function phpmv_get_head() {
+	$i_site = 1;
+	return '<script type="text/javascript"><!--
+var a_vars = Array();var pagename=\'\';var phpmyvisitesSite = '.$i_site.';var phpmyvisitesURL = "'.($url = generer_url_public('phpmyvisites','var_nophpmv=1',true)).'";
+//-->
+</script><script src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>';
+}
 
 function phpmv_insert_body($texte){
 	if (!isset($GLOBALS['meta']['phpmv_flag_insert_body'])){
@@ -29,12 +36,12 @@ function phpmv_insert_body($texte){
 	return $texte.phpmv_get_code();
 }
 function phpmv_insert_head($texte){
-	$i_site = 1;
-	return $texte .
-	  '<script type="text/javascript"><!--
-var a_vars = Array();var pagename=\'\';var phpmyvisitesSite = '.$i_site.';var phpmyvisitesURL = "'.($url = generer_url_public('phpmyvisites','var_nophpmv=1',true)).'";
-//-->
-</script><script src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>';
+	if (!isset($GLOBALS['meta']['phpmv_flag_insert_head'])){
+		include_spip("inc/meta");
+		ecrire_meta('phpmv_flag_insert_head','oui');
+		ecrire_metas();
+	}
+	return $texte . phpmv_het_head();
 }
 
 ?>
