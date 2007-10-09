@@ -2,7 +2,8 @@
 function ExtensionMultilingue_BarreTypoEnrichie_toolbox($paramArray) {
 if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 {
-	$ret="";
+	
+$ret="";
 	$nom_champ = substr($paramArray[0], strpos($paramArray[0], "'")+1, strlen(substr($paramArray[0], strpos($paramArray[0], "'")+1))-5 );
 	$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	
@@ -147,7 +148,35 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 	{
 		
 
-		if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type") || ($nom_champ == "lien_nom"))
+		
+	if ($nom_champ == "titre")
+		{
+			//on gère le numéro dans un input séparé
+			$ret .= "
+			<label>Num&eacute;ro : <input type='text' name=\"numero_zone_multilingue_".$nom_champ."\" value=\"".extraire_numero($titre)."\" size='5' /></label><div class=\"container-onglets\">
+        		<ul class=\"tabs-nav\">";
+        		for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$ret .= "        <li class=\"\"><a href=\"#onglet-".$i.$nom_champ."\"><span>".traduire_nom_langue($langues_choisies[$i])."</span></a></li>";
+        		}
+			$ret .= "</ul>";
+
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$ret .= "
+				<div style=\"\" class=\"tabs-container\" id=\"onglet-".$i.$nom_champ."\">";
+				if (lire_config('ExtensionMultilingue/typotitres_ExtensionMultilingue') == "on")
+				{			
+					$ret .= afficher_barre("document.getElementsByName('zone_multilingue_".$i."_".$nom_champ."')[0]", false, $langues_choisies[$i]);
+				}
+				$ret .= "<input type='text' class='formo' name=\"zone_multilingue_".$i."_".$nom_champ."\" value=\"".supprimer_numero(extension_multilingue_extraire_multi_lang($titre, $langues_choisies[$i]))."\" size='40'  /></div>";
+			}
+        		
+			$ret .= "</div>";
+			
+				
+		}
+		if (($nom_champ == "nom_site") || ($nom_champ == "change_type") || ($nom_champ == "lien_nom"))
 		{
 			$ret .= "
 			<div class=\"container-onglets\">
@@ -373,7 +402,7 @@ $newtab="";
 		{
 			if (lire_config('barre_typo_generalisee/rubriques_titre_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.titre", $langues_choisies, "input");
+				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input");
 			}
 			if (lire_config('barre_typo_generalisee/rubriques_descriptif_barre_typo_generalisee') == "on")
 			{
@@ -393,7 +422,7 @@ $newtab="";
 			}
 			if (lire_config('barre_typo_generalisee/articles_titre_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.titre", $langues_choisies, "input");
+				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input");
 			}
 			if (lire_config('barre_typo_generalisee/articles_soustitre_barre_typo_generalisee') == "on")
 			{
@@ -430,7 +459,7 @@ $newtab="";
 		{
 			if (lire_config('barre_typo_generalisee/breves_titre_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.titre", $langues_choisies, "input");
+				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input");
 			}
 			$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");	
 			
@@ -444,7 +473,7 @@ $newtab="";
 		{
 			if (lire_config('barre_typo_generalisee/configuration_nom_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.nom_site", $langues_choisies, "input");
+				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.nom_site", $langues_choisies, "input");
 			}
 			if (lire_config('barre_typo_generalisee/configuration_description_barre_typo_generalisee') == "on")
 			{
@@ -456,7 +485,7 @@ $newtab="";
 		{
 			if (lire_config('barre_typo_generalisee/groupesmots_nom_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.change_type", $langues_choisies, "input");
+				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.change_type", $langues_choisies, "input");
 			}
 			if (lire_config('barre_typo_generalisee/groupesmots_descriptif_barre_typo_generalisee') == "on")
 			{
@@ -472,7 +501,7 @@ $newtab="";
 		{
 			if (lire_config('barre_typo_generalisee/mots_nom_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.titre", $langues_choisies, "input");
+				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input");
 			}
 			if (lire_config('barre_typo_generalisee/mots_descriptif_barre_typo_generalisee') == "on")
 			{
@@ -488,7 +517,7 @@ $newtab="";
 		{
 			if (lire_config('barre_typo_generalisee/sites_nom_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.nom_site", $langues_choisies, "input");
+				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.nom_site", $langues_choisies, "input");
 			}
 			if (lire_config('barre_typo_generalisee/sites_description_barre_typo_generalisee') == "on")
 			{
@@ -574,5 +603,44 @@ function calculer_actions_head_multilingues ($champ, $langues_choisies, $typedec
 			
 			$resultat .= "if (valeur".$champ_fin." != '') $('".$typedechamp."[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); else $('".$typedechamp."[@name=".$champ_fin."]').val('');});";
 			return $resultat;
+}
+function calculer_actions_head_multilingues_titre ($champ, $langues_choisies, $typedechamp)
+{
+	$nom_champ = str_replace(".", "_", $champ);
+	$champ_fin = substr($champ, strrpos($champ, ".") + 1);
+
+			$resultat .= "$('".$typedechamp."[@name=".$champ_fin."]').css(\"display\", \"none\");";
+			$resultat .= "$(\"".$typedechamp."[@name=".$champ_fin."]\").parents().filter(\"form\").bind(\"submit\", function(e) { 
+				var valeur".$champ_fin."='';
+			";
+			
+			for ($i=0; $i<count($langues_choisies); $i++)
+			{
+				$resultat .= "if ($('".$typedechamp."[@name=zone_multilingue_".$i."_".$champ_fin."]').val() != '') valeur".$champ_fin."+='[".$langues_choisies[$i]."]'+$('".$typedechamp."[@name=zone_multilingue_".$i."_".$champ_fin."]').val();
+				";
+			}
+			$resultat .= "var numero = $('".$typedechamp."[@name=numero_zone_multilingue_".$champ_fin."]').val();
+				if (valeur".$champ_fin." != '') 
+				     {
+					if (numero != '')
+					{	$('".$typedechamp."[@name=".$champ_fin."]').val(numero+'. <multi>'+valeur".$champ_fin."+'</multi>'); 
+					} 
+					else
+					{	$('".$typedechamp."[@name=".$champ_fin."]').val('<multi>'+valeur".$champ_fin."+'</multi>'); 
+					}
+				    }
+				    else 
+				    {
+					$('".$typedechamp."[@name=".$champ_fin."]').val('');
+				    }
+			});";
+			return $resultat;
+}
+function extraire_numero ($titre) {
+	
+if (ereg("([0-9]+)\.", $titre, $match)) {
+	return $match[1];
+}
+else return "";
 }
 ?>
