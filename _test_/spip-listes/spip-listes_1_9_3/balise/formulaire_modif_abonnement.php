@@ -115,7 +115,6 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 	  	$id_auteur = $row['id_auteur'];
 		
 		$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
-		//var_dump($abo);die("coucou");
 		$format = $abo["spip_listes_format"];
 		}
 		else

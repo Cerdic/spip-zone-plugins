@@ -537,9 +537,7 @@ function spiplistes_afficher_auteurs($query, $url){
 		echo '</td><td>';
 		$id_auteur=$row['id_auteur'] ;
 		$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
-		//var_dump($abo);die("coucou");
 		$abo = $abo["spip_listes_format"];
-		//var_dump($abo);
 		if($abo == "non")
 			echo "-";
 		else

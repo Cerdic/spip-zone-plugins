@@ -115,10 +115,9 @@ spiplistes_log("CRON: courrier vide !!", LOG_DEBUG);
 			VALUES ("._q($titre).", NOW(),'$statut','"._SPIPLISTES_TYPE_LISTEAUTO."'
 			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($texte).")";
 
-$coucou="coucou";
 		$sql_query = "INSERT INTO spip_courriers (titre,date,statut,type,id_auteur,id_liste,date_debut_envoi,date_fin_envoi,texte) 
 			VALUES ("._q($titre).", NOW(),'$statut','"._SPIPLISTES_TYPE_LISTEAUTO."'
-			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($coucou).")";
+			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($texte).")";
 		$result = spip_query($sql_query);
 spiplistes_log($sql_query);
 
