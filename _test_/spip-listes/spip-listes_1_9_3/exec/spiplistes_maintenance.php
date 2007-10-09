@@ -91,9 +91,11 @@ function exec_spiplistes_maintenance () {
 		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:Nettoyage_du_casier'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE)."' method='post'>\n"
 		. "<p class='verdana2'>"._T('spiplistes:Conseil_sauvegarder_casier')."</p>\n"
-		. "<fieldset class='verdana2'><legend>&nbsp;"._T('spiplistes:Supprimer_du_casier_les')."&nbsp;</legend>\n"
 		;
 	if(spiplistes_courriers_casier_count()) {
+		$page_result .= ""
+			. "<fieldset class='verdana2'><legend>&nbsp;"._T('spiplistes:Supprimer_du_casier_les')."&nbsp;</legend>\n"
+			;
 		foreach($tous_les_statuts_courriers as $statut) {
 			if(spiplistes_courriers_casier_count($statut)) {
 				$page_result .= ""
@@ -104,12 +106,14 @@ function exec_spiplistes_maintenance () {
 				;
 			}
 		}
+		$page_result .= ""
+			. "</fieldset>"
+			;
 	}
 	else {
 		$page_result .= "<p class='verdana2'>"._T('spiplistes:Casier_vide')."</p>";
 	}
 	$page_result .= ""
-		. "</fieldset>"
 		//
 		// bouton valider
 		. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
