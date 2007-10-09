@@ -1,9 +1,9 @@
 <?php
 
 if (!isset($GLOBALS['diapo_temps']))
-	$GLOBALS['diapo_temps']=8000;
+	$GLOBALS['diapo_temps']=6000;
 if (!isset($GLOBALS['diapo_grand']))
-	$GLOBALS['diapo_grand']=560;
+	$GLOBALS['diapo_grand']=500;
 if (!isset($GLOBALS['diapo_grand_h']))
 	$GLOBALS['diapo_grand_h']=0;
 //	$GLOBALS['diapo_grand_h']=$GLOBALS['diapo_grand'];

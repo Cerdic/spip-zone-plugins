@@ -1,25 +1,15 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Diapo
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	[bill->spipcarto@gmail.com]
-	</auteur>
-	<version>
-	0.5
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>Diapo</nom>
+	<auteur>[bill->stephane@rezo.net]</auteur>
+	<version>0.6</version>
+	<etat>stable</etat>
 	<description>
 		modele galerie/diaporama
 	</description>
-	<options>
-	diapo_options.php
-	</options>
-	<fonctions>
-	diapo_fonctions.php
-	</fonctions>
+	<prefix>diapo</prefix>
+	<chemin dir='' />
+	<options>diapo_options.php</options>
+	<fonctions>diapo_fonctions.php</fonctions>
 	<pipeline>
   		<nom>insert_head</nom>
   		<inclure>diapo_pipelines.php</inclure>
@@ -28,7 +18,4 @@
 		<nom>header_prive</nom>
 		<inclure>diapo_pipelines.php</inclure>
 	</pipeline>
-	<prefix> 
-	diapo
-	</prefix>
 </plugin>

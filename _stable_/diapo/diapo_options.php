@@ -1,4 +1,6 @@
 <?php
+		include_spip('inc/meta');
+		lire_metas();
 function critere_diapo($idb, &$boucles, $crit) {
 	$idb_pag=$boucles[substr($idb,0,-6)]->modificateur['debut_nom']?$boucles[substr($idb,0,-6)]->modificateur['debut_nom']:substr($idb,0,-6);
 	$idb_diapo='intval(_request("diapo".'.$idb_pag.'))';
