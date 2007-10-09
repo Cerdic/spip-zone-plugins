@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 function pb_charts_afficher_charts($fichier, $largeur, $hauteur) {
 	global $compt_afficher_charts;
@@ -13,8 +15,10 @@ function pb_charts_afficher_charts($fichier, $largeur, $hauteur) {
 
 	$compt_afficher_charts++;
 	$delai = (500 * $compt_afficher_charts) + 500;
-	$charts = _DIR_PLUGIN_PB_CHARTS."/charts/charts.swf";
-	$charts_lib = _DIR_PLUGIN_PB_CHARTS."/charts/charts_library";
+	$charts = ($f = find_in_path('lib/charts/charts.swf'))
+		? $f
+		: _DIR_PLUGIN_PB_CHARTS."/charts/charts.swf";
+	$charts_lib = dirname($charts)."/charts_library";
 	$id = md5($fichier);
 	
 	$deb = "<div style='margin-top: 10px; margin-bottom: 10px; height: ".$hauteur."px; text-align: center;'>";

@@ -43,5 +43,6 @@
 		<inclure>pb_charts_actions.php</inclure>
 	</pipeline>
 
+	<necessite id="lib:charts" src="http://www.maani.us/xml_charts/charts.zip" />
 </plugin>
 

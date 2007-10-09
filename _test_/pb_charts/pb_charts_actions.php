@@ -1,7 +1,10 @@
 <?php
 
-if ($GLOBALS["spip_version"] >= 1.93 AND $GLOBALS["auteur_session"]) {
-	$couleurs = charger_fonction('couleurs', 'inc');
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
+if ($GLOBALS["spip_version"] >= 1.93 AND $GLOBALS["auteur_session"]
+AND $couleurs = charger_fonction('couleurs', 'inc')) {
 	$var = $couleurs($GLOBALS['auteur_session']['prefs']['couleur']);
 }
 
@@ -130,11 +133,12 @@ function pb_charts_traiter_charts ($texte) {
 	include_spip("inc/filtres_images");
 	$couleur_fond = couleur_extreme(couleur_inverser($couleur_texte));
 
-
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_PB_CHARTS',(_DIR_PLUGINS.end($p)));
-	$charts = _DIR_PLUGIN_PB_CHARTS."/charts/charts.swf";
-	
+	$charts = ($f = find_in_path('lib/charts/charts.swf'))
+		? $f
+		: _DIR_PLUGIN_PB_CHARTS."charts/charts.swf"; // install a l'ancienne
+
 	if (!file_exists($charts)) {
 		return "<ul style='font-size: 10px; text-align: left;'><li>T&eacute;l&eacute;chargez <a href='http://www.maani.us/xml_charts/index.php?menu=Download'>XML/SWF Charts</a>;</li><li>d&eacute;compactez le fichier;</li><li>Installez le contenu du dossier &laquo;charts&raquo;, par FTP, dans le dossier &laquo;/pb_charts/charts&raquo;.</li></ul>";
 		
@@ -157,7 +161,7 @@ function pb_charts_traiter_charts ($texte) {
 			// Analyser le fichier XML
 			$cache = sous_repertoire(_DIR_VAR, "cache-charts");
 			$nom_fichier = $cache.md5($regs[0].$couleur_courbe.$largeur.$hauteur).".xml";
-		
+
 			if( !file_exists($nom_fichier)) {
 				$valeurs_xml = "";
 				$xml = "";
@@ -227,13 +231,12 @@ function pb_charts_traiter_charts ($texte) {
 				$xml = "<chart>".$type_xml.$valeurs_xml.$couleurs_xml.$transition_xml.$axis_xml.$pref_xml.$titre_xml."</chart>";
 				
 				//echo "<pre>$xml</pre>";
-				
-				ecrire_fichier($nom_fichier, $xml);
+				ecrire_fichier($nom_fichier, $xml, true /* ecrire quand meme en preview */);
 			}
 			
 			
 			include_spip("inc/pb_charts");
-			
+
 			$flash = pb_charts_afficher_charts ($nom_fichier,$largeur,$hauteur);
 			
 			$compteur_charts ++;
