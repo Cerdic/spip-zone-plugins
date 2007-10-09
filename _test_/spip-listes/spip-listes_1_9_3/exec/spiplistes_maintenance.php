@@ -46,7 +46,7 @@ function exec_spiplistes_maintenance () {
 	if($flag_autorise && $btn_supprimer_ok) {
 		foreach($tous_les_statuts_courriers as $statut) {
 			if(_request("supprimer_$statut")) {
-				if(spip_query("DELETE FROM spip_courriers WHERE statut='".$statut."'")) {
+				if(spip_query("DELETE FROM spip_courriers WHERE statut='$statut'")) {
 					$msg = "<span style='color:green;'>"._T('pass_ok')."</span>";
 				}
 				else {

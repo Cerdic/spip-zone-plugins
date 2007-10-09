@@ -5,11 +5,8 @@
 
 
 TO-DO:
-- table transcodage HTML->ISO incomplète ;
-- menu de maintenance pour vider les listes ;
 - Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"
 - Corriger documentation contextuelle
-- Problème de charset sur le titre ;
 - Annulation d'envoi dans boite autocron à revoir ;
 - Ajouter bouton supprimer liste dans liste_gerer ;
-- Revoir formulaire abonnement (XHTML/WAI incorrect).
+- maintenance: mettre en place l'auth. par FTP.
