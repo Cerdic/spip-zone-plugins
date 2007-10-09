@@ -42,7 +42,6 @@ cs_log("decoration_installe()");
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoration_raccourcis() {
-//	$liste = '<strong>sc</strong>, <strong>souligne</strong>, <strong>barre</strong>, <strong>dessus</strong>, <strong>clignote</strong>, <strong>surfluo</strong>, <strong>surgris</strong>';
 	return _T('cout:decoration:aide', array('liste' => $GLOBALS['meta']['cs_decoration_racc']));
 }
 
