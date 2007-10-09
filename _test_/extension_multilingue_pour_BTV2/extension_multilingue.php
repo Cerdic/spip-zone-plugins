@@ -4,11 +4,20 @@ if (strpos($paramArray[0], "zone_multilingue") === FALSE)
 {
 	
 $ret="";
-	$nom_champ = substr($paramArray[0], strpos($paramArray[0], "'")+1, strlen(substr($paramArray[0], strpos($paramArray[0], "'")+1))-5 );
+	//le champ est passé soit sous la forme document.formulaire.champ, soit sous la forme document.getElementsByName('champ')[0]
+	if (strpos($paramArray[0], "document.formulaire") === false)
+		$nom_champ = substr($paramArray[0], strpos($paramArray[0], "'")+1, strlen(substr($paramArray[0], strpos($paramArray[0], "'")+1))-5 );
+	else
+		$nom_champ = substr($paramArray[0], strrpos($paramArray[0], ".")+1);
+		
+	
 	$langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	
 	if ($_GET['exec'] == "rubriques_edit")
 	{
+		if (lire_config("ExtensionMultilingue/rubriques_".$nom_champ."_ExtensionMultilingue", '') != "on")
+		return $ret;
+	
 		if ($_GET['new'] == "oui") 
 		{
 			$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
@@ -27,8 +36,11 @@ $ret="";
 			$texte = $row['texte'];
 		}
 	}
-	else if (($_GET['exec'] == "articles_edit") && (lire_config('ExtensionMultilingue/multiarticles_ExtensionMultilingue') == "on"))
+	else if ($_GET['exec'] == "articles_edit")
 	{
+		if (lire_config("ExtensionMultilingue/articles_".$nom_champ."_ExtensionMultilingue", '') != "on")
+		return $ret;
+
 		if ($_GET['new'] == "oui") 
 		{
 			$surtitre = "";
@@ -56,8 +68,10 @@ $ret="";
 		}
 		
 	}
-	else if (($_GET['exec'] == "breves_edit") && (lire_config('ExtensionMultilingue/multibreves_ExtensionMultilingue') == "on"))
+	else if ($_GET['exec'] == "breves_edit")
 	{
+		if (lire_config("ExtensionMultilingue/breves_".$nom_champ."_ExtensionMultilingue", '') != "on")
+		return $ret;
 		if ($_GET['new'] == "oui") 
 		{
 			$titre = filtrer_entites(_T('titre_nouvelle_breve'));
@@ -79,6 +93,8 @@ $ret="";
 	}
 	else if ($_GET['exec'] == "configuration")
 	{
+		if (lire_config("ExtensionMultilingue/configuration_".$nom_champ."_ExtensionMultilingue", '') != "on")
+		return $ret;
 		$titre = str_replace("\"","'",$GLOBALS['meta']["nom_site"]);
 		$descriptif = $GLOBALS['meta']["descriptif_site"];
 
@@ -86,6 +102,8 @@ $ret="";
 	else if ($_GET['exec'] == "mots_type")
 	{
 		
+		if (lire_config("ExtensionMultilingue/groupesmots_".$nom_champ."_ExtensionMultilingue", '') != "on")
+		return $ret;
 		if ($_GET['new'] == "oui") {
 		  	$titre = filtrer_entites(_T('titre_nouveau_groupe'));
 		  	$descriptif = "";
@@ -107,7 +125,9 @@ $ret="";
 	else if ($_GET['exec'] == "mots_edit")
 	{
 		
-
+		if (lire_config("ExtensionMultilingue/mots_".$nom_champ."_ExtensionMultilingue", '') != "on")
+		return $ret;
+	
 		$id_mot_tmp = intval($_GET['id_mot']);
 		$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot='$id_mot_tmp'"));
 		 if ($row) {
@@ -130,6 +150,8 @@ $ret="";
 	else if ($_GET['exec'] == "sites_edit")
 	{
 		
+		if (lire_config("ExtensionMultilingue/sites_".$nom_champ."_ExtensionMultilingue", '') != "on")
+		return $ret;
 		$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($_GET['id_syndic']) );
 
 		if ($row = spip_fetch_array($result)) {
@@ -144,12 +166,12 @@ $ret="";
 		}
 	}
 	
-	if (($_GET['exec'] == "sites_edit") || (($_GET['exec'] == "articles_edit")  && (lire_config('ExtensionMultilingue/multiarticles_ExtensionMultilingue') == "on")) || (($_GET['exec'] == "breves_edit")  && (lire_config('ExtensionMultilingue/multibreves_ExtensionMultilingue') == "on")) || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
+	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 		
 
 		
-	if ($nom_champ == "titre")
+	if (($nom_champ == "titre") || ($nom_champ == "nom_site") || ($nom_champ == "change_type"))
 		{
 			//on gère le numéro dans un input séparé
 			$ret .= "
@@ -176,7 +198,7 @@ $ret="";
 			
 				
 		}
-		if (($nom_champ == "nom_site") || ($nom_champ == "change_type") || ($nom_champ == "lien_nom"))
+		if ($nom_champ == "lien_nom")
 		{
 			$ret .= "
 			<div class=\"container-onglets\">
@@ -385,151 +407,236 @@ function ExtensionMultilingue_header_prive($texte) {
 $langues_choisies = explode(",",lire_config('ExtensionMultilingue/langues_ExtensionMultilingue','fr,en,de'));	
 	
 $newtab="";
-	if (($_GET['exec'] == "sites_edit") || (($_GET['exec'] == "articles_edit") && (lire_config('ExtensionMultilingue/multiarticles_ExtensionMultilingue') == "on")) || (($_GET['exec'] == "breves_edit") && (lire_config('ExtensionMultilingue/multibreves_ExtensionMultilingue') == "on")) || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
+	if (($_GET['exec'] == "sites_edit") || ($_GET['exec'] == "articles_edit") || ($_GET['exec'] == "breves_edit") || ($_GET['exec'] == "mots_edit") || ($_GET['exec'] == "mots_type") || ($_GET['exec'] == "configuration") || ($_GET['exec'] == "rubriques_edit"))	
 	{
 
-		$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
-        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
-        		<![endif]-->
-           
-        	<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
-		       
-		<script type=\"text/javascript\">
-		$(document).ready(function() {";
 		
 		//cas de l'édition des rubriques
 		if ($_GET['exec'] == "rubriques_edit")
 		{
+			
+			
+	
+			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+			       
+			<script type=\"text/javascript\">
+			$(document).ready(function() {";
+		
 			if (lire_config('barre_typo_generalisee/rubriques_titre_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/rubriques_titre_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input")."$('#barre_typo_rubrique_titre table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/rubriques_descriptif_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
+				if (lire_config("ExtensionMultilingue/rubriques_descriptif_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea")."$('#barre_typo_rubrique_descriptif table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/rubriques_texte_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");	
+				if (lire_config("ExtensionMultilingue/rubriques_texte_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('#barre_typo_rubrique_texte table.spip_barre').css(\"display\", \"none\");";	
 			}
+			$newtab .= "$('.container-onglets').tabs();
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+		
+			$newtab .= "</script>";
 		}
 		//cas de l'édition des articles
 		else if ($_GET['exec'] == "articles_edit")
 		{
+			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		       
+			<script type=\"text/javascript\">
+			$(document).ready(function() {";
+		
 			if (lire_config('barre_typo_generalisee/articles_surtitre_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.surtitre", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/articles_surtitre_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.surtitre", $langues_choisies, "input")."$('#barre_typo_article_surtitre table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/articles_titre_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/articles_titre_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input")."$('#barre_typo_article_titre table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/articles_soustitre_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.soustitre", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/articles_soustitre_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.soustitre", $langues_choisies, "input")."$('#barre_typo_article_soustitre table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/articles_descriptif_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
+				if (lire_config("ExtensionMultilingue/articles_descriptif_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea")."$('#barre_typo_article_descriptif table.spip_barre').css(\"display\", \"none\");";
 			}
-			$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");		
+				if (lire_config("ExtensionMultilingue/articles_texte_ExtensionMultilingue", '') == "on") 
+				{	
+				$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('table.spip_barre').css(\"display\", \"none\");";		
 				
-			//on annule le découpage des textes trop longs fait par SPIP
-			$newtab .= "$('textarea[@id=texte1]').css(\"display\", \"none\");$('textarea[@id=texte1]').val('');";
-			$newtab .= "$('textarea[@id=texte2]').css(\"display\", \"none\");$('textarea[@id=texte2]').val('');";
-			$newtab .= "$('textarea[@id=texte3]').css(\"display\", \"none\");$('textarea[@id=texte3]').val('');";
-			$newtab .= "$('textarea[@id=texte4]').css(\"display\", \"none\");$('textarea[@id=texte4]').val('');";
-			$newtab .= "$('textarea[@id=texte5]').css(\"display\", \"none\");$('textarea[@id=texte5]').val('');";
-			$newtab .= "$('textarea[@id=texte6]').css(\"display\", \"none\");$('textarea[@id=texte6]').val('');";
-			$newtab .= "$('textarea[@id=texte7]').css(\"display\", \"none\");$('textarea[@id=texte7]').val('');";
-			$newtab .= "$('textarea[@id=texte8]').css(\"display\", \"none\");$('textarea[@id=texte8]').val('');";
-			$newtab .= "$('textarea[@id=texte9]').css(\"display\", \"none\");$('textarea[@id=texte9]').val('');";
-			
+				//on annule le découpage des textes trop longs fait par SPIP
+				$newtab .= "$('textarea[@id=texte1]').css(\"display\", \"none\");$('textarea[@id=texte1]').val('');";
+				$newtab .= "$('textarea[@id=texte2]').css(\"display\", \"none\");$('textarea[@id=texte2]').val('');";
+				$newtab .= "$('textarea[@id=texte3]').css(\"display\", \"none\");$('textarea[@id=texte3]').val('');";
+				$newtab .= "$('textarea[@id=texte4]').css(\"display\", \"none\");$('textarea[@id=texte4]').val('');";
+				$newtab .= "$('textarea[@id=texte5]').css(\"display\", \"none\");$('textarea[@id=texte5]').val('');";
+				$newtab .= "$('textarea[@id=texte6]').css(\"display\", \"none\");$('textarea[@id=texte6]').val('');";
+				$newtab .= "$('textarea[@id=texte7]').css(\"display\", \"none\");$('textarea[@id=texte7]').val('');";
+				$newtab .= "$('textarea[@id=texte8]').css(\"display\", \"none\");$('textarea[@id=texte8]').val('');";
+				$newtab .= "$('textarea[@id=texte9]').css(\"display\", \"none\");$('textarea[@id=texte9]').val('');";
+				}
 			if (lire_config('barre_typo_generalisee/articles_chapo_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.chapo", $langues_choisies, "textarea");	
+				if (lire_config("ExtensionMultilingue/articles_chapo_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.chapo", $langues_choisies, "textarea")."$('#barre_typo_article_chapo table.spip_barre').css(\"display\", \"none\");";	
 			}
 			if (lire_config('barre_typo_generalisee/articles_ps_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.ps", $langues_choisies, "textarea");	
+				if (lire_config("ExtensionMultilingue/articles_ps_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.ps", $langues_choisies, "textarea")."$('#barre_typo_article_ps table.spip_barre').css(\"display\", \"none\");";	
 			}
+			$newtab .= "$('.container-onglets').tabs();
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+		
+			$newtab .= "</script>";
 		}	
 		//cas de l'édition des brèves
 		else if ($_GET['exec'] == "breves_edit")
 		{
+		$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		       
+			<script type=\"text/javascript\">
+			$(document).ready(function() {";
+		
 			if (lire_config('barre_typo_generalisee/breves_titre_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/breves_titre_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input")."$('#barre_typo_breve_titre table.spip_barre').css(\"display\", \"none\");";
 			}
-			$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");	
+				if (lire_config("ExtensionMultilingue/breves_texte_ExtensionMultilingue", '') == "on")
+				{ 
+					$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('table.spip_barre').css(\"display\", \"none\");";	
+				}
 			
 			if (lire_config('barre_typo_generalisee/breves_lien_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.lien_titre", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/breves_lien_titre_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.lien_titre", $langues_choisies, "input")."$('#barre_typo_breve_lien_titre table.spip_barre').css(\"display\", \"none\");";
 			}
+			$newtab .= "$('.container-onglets').tabs();
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+		
+			$newtab .= "</script>";
 		}
-		//cas de lédition de la configuration
+		//cas de l'édition de la configuration
 		else if ($_GET['exec'] == "configuration")
 		{
+			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		       
+			<script type=\"text/javascript\">
+			$(document).ready(function() {";
+		
 			if (lire_config('barre_typo_generalisee/configuration_nom_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.nom_site", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/configuration_nom_site_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues_titre("document.formulaire.nom_site", $langues_choisies, "input")."$('#barre_typo_configuration_nom_site table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/configuration_description_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif_site", $langues_choisies, "textarea");
+				if (lire_config("ExtensionMultilingue/configuration_descriptif_site_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif_site", $langues_choisies, "textarea")."$('#barre_typo_configuration_descriptif_site table.spip_barre').css(\"display\", \"none\");";
 			}
+			$newtab .= "$('.container-onglets').tabs();
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+		
+			$newtab .= "</script>";
 		}
 		//cas de l'édition des groupes de mots clefs
 		else if ($_GET['exec'] == "mots_type") 
 		{
+			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		       
+			<script type=\"text/javascript\">
+		
+			$(document).ready(function() {";
 			if (lire_config('barre_typo_generalisee/groupesmots_nom_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.change_type", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/groupesmots_change_type_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues_titre("document.formulaire.change_type", $langues_choisies, "input")."$('#barre_typo_groupemot_nom table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/groupesmots_descriptif_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
+				if (lire_config("ExtensionMultilingue/groupesmots_descriptif_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea")."$('#barre_typo_groupemot_descriptif table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/groupesmots_texte_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");
+				if (lire_config("ExtensionMultilingue/groupesmots_texte_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('#barre_typo_groupemot_texte table.spip_barre').css(\"display\", \"none\");";
 			}
+			$newtab .= "$('.container-onglets').tabs();
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+		
+			$newtab .= "</script>";
 		}
 		//cas de l'édition des mots clefs
 		else if ($_GET['exec'] == "mots_edit")
 		{
+			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		       
+			<script type=\"text/javascript\">
+			$(document).ready(function() {";
 			if (lire_config('barre_typo_generalisee/mots_nom_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/mots_titre_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues_titre("document.formulaire.titre", $langues_choisies, "input")."$('#barre_typo_mot_nom table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/mots_descriptif_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
+				if (lire_config("ExtensionMultilingue/mots_descriptif_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea")."$('#barre_typo_mot_descriptif table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/mots_texte_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea");
+				if (lire_config("ExtensionMultilingue/mots_texte_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.texte", $langues_choisies, "textarea")."$('#barre_typo_mot_texte table.spip_barre').css(\"display\", \"none\");";
 			}
+			$newtab .= "$('.container-onglets').tabs();
+			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
+		
+			$newtab .= "</script>";
 		}
 		//cas de l'édition des sites référencés
 		else if ($_GET['exec'] == "sites_edit") 
 		{
+			$newtab .= " <link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs.css')."\" type=\"text/css\" media=\"print, projection, screen\"><!-- Additional IE/Win specific style sheet (Conditional Comments) --><!--[if lte IE 7]>
+        		<link rel=\"stylesheet\" href=\"".find_in_path('css/jquery.tabs-ie.css')."\" type=\"text/css\" media=\"projection, screen\">
+        		<![endif]-->
+           
+        		<script type=\"text/javascript\" src=\"".find_in_path('javascript/jquery.tabs.js')."\"></script>
+		       
+			<script type=\"text/javascript\">
+			$(document).ready(function() {";
+		
 			if (lire_config('barre_typo_generalisee/sites_nom_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues_titre("document.formulaire.nom_site", $langues_choisies, "input");
+				if (lire_config("ExtensionMultilingue/sites_nom_site_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues_titre("document.formulaire.nom_site", $langues_choisies, "input")."$('#barre_typo_site_nom table.spip_barre').css(\"display\", \"none\");";
 			}
 			if (lire_config('barre_typo_generalisee/sites_description_barre_typo_generalisee') == "on")
 			{
-				$newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea");
+				if (lire_config("ExtensionMultilingue/sites_descriptif_ExtensionMultilingue", '') == "on") $newtab .= calculer_actions_head_multilingues("document.formulaire.descriptif", $langues_choisies, "textarea")."$('#barre_typo_site_descriptif table.spip_barre').css(\"display\", \"none\");";
 			}
-		}
-		$newtab .= "$('.container-onglets').tabs();
-			$('table.spip_barre').css(\"display\", \"none\");
+			$newtab .= "$('.container-onglets').tabs();
 			$('.container-onglets').find('table.spip_barre').css(\"display\", \"block\");});";
 		
+			$newtab .= "</script>";
+		}
 		
-		$newtab .= "</script>";
 	}
 
 	
