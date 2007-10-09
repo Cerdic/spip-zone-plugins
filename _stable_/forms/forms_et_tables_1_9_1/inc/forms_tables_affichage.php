@@ -103,6 +103,8 @@ background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padd
 function afficher_tables_tous_corps($type_form, $link=NULL, $fond='fonds/tables_tous'){
 	global $spip_lang_right;
 	include_spip('public/assembler');
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
 	$out = "";
 	$prefix = forms_prefixi18n($type_form);
 	$contexte = array('type_form'=>$type_form,'prefix'=>$prefix,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
@@ -261,6 +263,8 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 function affichage_donnees_tous($type_form,$c=NULL){
   include_spip("inc/presentation");
   $id_form = _request('id_form', $c);
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
 	if (!autoriser('voir','donnee',0,null,array('id_form'=>$id_form,'type_form'=>$type_form))) {
 		echo debut_page("&laquo; $titre &raquo;", "documents", "forms","");
 		echo _T('acces_interdit');
