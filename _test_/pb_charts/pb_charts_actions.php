@@ -237,7 +237,9 @@ function pb_charts_traiter_charts ($texte) {
 			
 			include_spip("inc/pb_charts");
 
-			$flash = pb_charts_afficher_charts ($nom_fichier,$largeur,$hauteur);
+			$alt = propre($regs[2]);
+
+			$flash = pb_charts_afficher_charts ($nom_fichier,$largeur,$hauteur,$alt);
 			
 			$compteur_charts ++;
 			

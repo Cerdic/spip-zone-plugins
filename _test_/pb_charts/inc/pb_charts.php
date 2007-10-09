@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function pb_charts_afficher_charts($fichier, $largeur, $hauteur) {
+function pb_charts_afficher_charts($fichier, $largeur, $hauteur, $alt='') {
 	global $compt_afficher_charts;
 	$GLOBALS['filtrer_javascript'] = 1;
 	
@@ -33,7 +33,7 @@ function pb_charts_afficher_charts($fichier, $largeur, $hauteur) {
 		." wmode='transparent' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer'></embed>"
 		."</object>";
 
-	$script = "<span id='chart_$id'></span>";
+	$script = "<div id='chart_$id'>$alt</div>";
 	
 	$script .= "<script type='text/javascript' language='javascript'><!--\n setTimeout(function(){document.getElementById(\"chart_$id\").innerHTML = \"$obj\"}, $delai );\n--></script>";
 //	$script .= "<noscript>$obj</noscript>";
