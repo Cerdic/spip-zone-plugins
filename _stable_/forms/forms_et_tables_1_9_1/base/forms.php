@@ -251,4 +251,5 @@ if (version_compare($spip_version_code,'1.9250','<')){
 global  $exceptions_des_jointures;
 $exceptions_des_jointures['type_form'] = array('spip_forms', 'type_form');
 
+$GLOBALS['table_date']['forms_donnees']='date';
 ?>
