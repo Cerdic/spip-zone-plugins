@@ -10,7 +10,7 @@ function decoration_installe() {
 cs_log("decoration_installe()");
 	// on decode les balises entrees par le webmaster
 	$balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
-	$aide = $chevrons1 = $chevrons2 = $styles = $alias = array();
+	$aide = $chevrons1 = $chevrons2 = $styles = $fins = $alias = array();
 	foreach ($balises as $balise) {
 		if (preg_match('/(span|div)\.([^.]+)\.class\s*=(.+)$/', $balise, $regs)) {
 			list($div, $racc, $class) = array($regs[1], trim($regs[2]), trim($regs[3]));
