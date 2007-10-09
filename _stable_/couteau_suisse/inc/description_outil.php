@@ -52,7 +52,7 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 				// <html></html> empechera SPIP de modifier le contenu des <input> ou <textarea>
 				?"<html><input name='HIDDENCSVAR__$variable' value=\""
 					. htmlspecialchars($valeur) . "\" type='text' size='$len' $width/></html>"
-				:"<html><textarea rows='$lignes' name='HIDDENCSVAR__$variable' $width/>"
+				:"<html><textarea rows='$lignes' name='HIDDENCSVAR__$variable' $width>"
 					. htmlspecialchars($valeur) . '</textarea></html>'
 			) . _VAR_OUTIL;
 		$ok_valeur = $label.(strlen($valeur)?echapper_tags($valeur):'&nbsp;'._T('cout:variable_vide'));
@@ -69,7 +69,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	// remplacement des puces
 	$descrip = str_replace('#PUCE', definir_puce(), $outil['description']);
 	// remplacement des zone input de format [[label->varable]]
-	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend><div style"margin:1em;;">\\3</div></fieldset>', $descrip);
+	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend><div style="margin:0;">\\3</div></fieldset>', $descrip);
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 

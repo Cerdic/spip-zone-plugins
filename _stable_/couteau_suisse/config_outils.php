@@ -426,7 +426,7 @@ add_outil( array(
 	'categorie' => 'public',
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
-	'code:options' => "%%radio_target_blank3%%%%url_glossaire_externe2%%",
+	'code:options' => "%%radio_target_blank3%%\n%%url_glossaire_externe2%%",
 	'code:js' => 'if (%%radio_target_blank3%%) { $(document).ready(function(){ $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }); }',
 ));
 
@@ -447,11 +447,26 @@ add_outil( array(
 	'pipeline:pre_typo' => 'pucesli_pre_typo',
 ));
 
+add_variable( array(
+	'nom' => 'decoration_styles',
+	'format' => 'chaine',
+	'lignes' => 8,
+	'defaut' => '"span.sc = font-variant:small-caps;
+span.souligne = text-decoration:underline;
+span.barre = text-decoration:line-through;
+span.dessus = text-decoration:overline;
+span.clignote = text-decoration:blink;
+span.surfluo = background-color:#ffff00; padding:0px 2px;
+span.surgris = background-color:#EAEAEC; padding:0px 2px;
+fluo = surfluo"',
+	'code' => "define('_decoration_BALISES', %s);",
+));
 add_outil( array(
 	'id' => 'decoration',
-	'auteur' 	 => '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
+	'auteur' 	 => '[izo@aucuneid.net->http://www.aucuneid.com/bones], Pat',
 	'contrib'	=> 2427,
 	'categorie'	 => 'typo-racc',
+	'code:options' => "%%decoration_styles%%",
 	'pipeline:pre_typo' => 'decoration_pre_typo',
 ));
 
@@ -479,7 +494,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'couleurs',
-	'auteur' 	 => 'Aur&eacute;lien PIERARD (id&eacute;e originale)',
+	'auteur' 	 => 'Aur&eacute;lien PIERARD (id&eacute;e originale), Pat',
 	'categorie'	 => 'typo-racc',
 	'contrib'	=> 2427,
 	'pipeline:pre_typo' => 'couleurs_pre_typo',

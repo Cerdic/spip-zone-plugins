@@ -108,7 +108,13 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
 
 	'decoration:nom' => 'D&eacute;coration',
-	'decoration:description' => "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Exemples d'utilisation :{$temp['decoration']}",
+	'decoration:description' => "De nouveaux styles param&eacute;trables dans vos textes et accessibles gr&acirc;ce &agrave; des balises &agrave; chevrons. Exemple : 
+&lt;mabalise&gt;texte&lt;/mabalise&gt;.<br />D&eacute;finissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
+- {span.mabalise = mon style CSS &agrave; l'int&eacute;rieur d'un paragraphe}
+- {div.mabalise = mon style CSS cr&eacute;ant un nouveau paragraphe}
+- {unalias = mabalise}
+
+[[Vos balises de style personnalis&eacute; :->%decoration_styles%]]",
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
 
 // ---------------------------------------------------------------------------

@@ -5,36 +5,58 @@
    Attention : seules les balises en minuscules sont reconnues.
 */
 
-// cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
-function decoration_rempl($texte) {
-	if (strpos($texte, '<')===false) return $texte;
-	// debut de balises
-	$texte = str_replace("<sc>", "<span style=\"font-variant: small-caps\">", $texte);
-	$texte = str_replace("<souligne>", "<span style=\"text-decoration: underline;\">", $texte);
-	$texte = str_replace("<barre>", "<span style=\"text-decoration: line-through;\">", $texte);
-	$texte = str_replace("<dessus>", "<span style=\"text-decoration: overline;\">", $texte);
-	$texte = str_replace("<clignote>", "<span style=\"text-decoration: blink;\">", $texte);
-	$texte = str_replace("<surfluo>", "<span style=\"background-color: #ffff00; padding:0px 2px;\">", $texte);
-	$texte = str_replace("<surgris>", "<span style=\"background-color: #EAEAEC; padding:0px 2px;\">", $texte);
-	// compatibilite
-	$texte = str_replace("<fluo>", "<span style=\"background-color: #ffff00; padding:0px 2px;\">", $texte);
-	// fin de balises
-	$texte = str_replace(array("</sc>", "</souligne>", "</barre>", "</dessus>", "</clignote>", "</surfluo>", "</surgris>", "</fluo>"), "</span>", $texte);
-	return $texte;  
-}
-
-// fonction pipeline
-function decoration_pre_typo($texte) {
-	if (strpos($texte, '<')===false) return $texte;
-	return cs_echappe_balises('', 'decoration_rempl', $texte);
+// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
+function decoration_installe() {
+cs_log("decoration_installe()");
+	// on decode les balises entrees par le webmaster
+	$balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
+	$aide = $chevrons1 = $chevrons2 = $styles = $alias = array();
+	foreach ($balises as $balise) {
+		if (preg_match('/(span|div)\.([^=]+)=(.+)$/', $balise, $regs)) {
+			list($div, $racc, $style) = array($regs[1], trim($regs[2]), trim($regs[3]));
+			$aide[] = $racc; $chevrons1[] = "<$racc>"; $chevrons2[] = "</$racc>";
+			$styles[] = "<$regs[1] style=\"$style\">"; $fins[] = "</$regs[1]>";
+		} elseif (preg_match('/([^=]+)=(.+)$/', $balise, $regs)) {
+			$alias[trim($regs[1])] = trim($regs[2]);
+		}
+	}
+	// ajout des alias qu'on a trouves
+	foreach ($alias as $a=>$v) if(($i=array_search($v, $aide, true))!==false) {
+		$aide[] = $a; $chevrons1[] = "<$a>"; $chevrons2[] = "</$a>";
+		$styles[] = $styles[$i]; $fins[] = $fins[$i];
+	}
+	// liste des balises disponibles
+	$aide = '<strong>'.join('</strong>, <strong>', $aide).'</strong>';
+	// sauvegarde en meta : aide
+	ecrire_meta('cs_decoration_racc', $aide);
+	// sauvegarde en meta : decoration
+	ecrire_meta('cs_decoration', serialize(array(array_merge($chevrons1, $chevrons2), array_merge($styles, $fins))));
+	ecrire_metas();
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoration_raccourcis() {
-	$liste = '<strong>sc</strong>, <strong>souligne</strong>, <strong>barre</strong>, <strong>dessus</strong>, <strong>clignote</strong>, <strong>surfluo</strong>, <strong>surgris</strong>';
-	return _T('cout:decoration:aide', array('liste' => $liste));
+//	$liste = '<strong>sc</strong>, <strong>souligne</strong>, <strong>barre</strong>, <strong>dessus</strong>, <strong>clignote</strong>, <strong>surfluo</strong>, <strong>surgris</strong>';
+	return _T('cout:decoration:aide', array('liste' => $GLOBALS['meta']['cs_decoration_racc']));
+}
+
+
+// cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
+function decoration_rempl($texte) {
+	if (strpos($texte, '<')===false) return $texte;
+	$balises = unserialize($GLOBALS['meta']['cs_decoration']);
+	// facile : on remplace tout d'un coup !
+	return str_replace($balises[0], $balises[1], $texte);
+}
+
+// fonction pipeline
+function decoration_pre_typo($texte) {
+	if (strpos($texte, '<')===false) return $texte;
+	if (!isset($GLOBALS['meta']['cs_decoration']) || isset($GLOBALS['var_mode']))
+		decoration_installe();
+	return cs_echappe_balises('', 'decoration_rempl', $texte);
 }
 
 ?>
