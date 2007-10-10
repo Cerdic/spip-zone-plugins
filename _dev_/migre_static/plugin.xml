@@ -14,7 +14,7 @@ _ &#169; 2006-2007 - Licence GNU/GPL
 		</multi>
 	</auteur>
 	<version>
-		0.7
+		0.7.1
 	</version>
 	<etat>
 		dev
@@ -40,4 +40,8 @@ _ and if cfg plugin is installed: [Configuration->.?exec=cfg&amp;cfg=migre_stati
 		<action>affiche_droite</action> <!-- [fr] migre_static fonction [en] migre_static function -->
 		<inclure>migre_static_pipelines.php</inclure>
 	</pipeline>
+
+	<necessite id="cfg" version="[1.0.0;]" />
+	<chemin dir='' />
+
 </plugin>

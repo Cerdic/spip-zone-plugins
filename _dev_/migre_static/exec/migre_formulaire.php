@@ -64,6 +64,7 @@ function afficher_migre_formulaire($id_rubrique) {
 
 	// [fr] initialisations
 	// [en] initialize
+	if (!function_exists('filtrer_entites')) @include_ecrire('inc/filtres');
 	$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
 	if (!isset($GLOBALS['meta']['migre_static'])) migre_static_init_metas() ;
 

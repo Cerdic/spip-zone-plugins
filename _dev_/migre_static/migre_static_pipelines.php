@@ -43,7 +43,7 @@ function migrestatic_affiche_droite($flux) {
 	    ($flux['args']['id_rubrique']>0) ) {
 		$url_lien = generer_url_ecrire('migre_formulaire', "id_rubrique=".$flux['args']['id_rubrique']) ;
 		$flux['data'] .= debut_cadre_relief('',true);
-		$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('migre:titre_migre_formulaire') . " :</b>\n";
+		$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('migrestatic:titre_migre_formulaire') . " :</b>\n";
 		$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
 		$flux['data'] .= "<tr><td><a href='$url_lien' class='cellule-h'><span class='cell-i'>" ;
 		$flux['data'] .= "<img src='"._DIR_IMG_PACK ."article-24.gif' width='24' alt='";

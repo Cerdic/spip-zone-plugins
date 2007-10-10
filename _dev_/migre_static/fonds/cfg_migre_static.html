@@ -4,8 +4,6 @@
 <!-- titre=<:migrestatic:titre_migre_formulaire:> -->
 
 [(#REM) icone=img/migre_static_icone_24.png]
-[(#REM) rediriger=1]
-[(#REM) autoriser=webmestre ]
 [(#SET{logo,
 <img src='#DOSSIER_SQUELETTE/../img/migre_static_icone.png' width='48' height='48' alt='migre_static' style="float:#LANG_RIGHT;" />
 })]
@@ -13,7 +11,7 @@
 #CACHE{0}
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
-[(#REM|debut_cadre_trait_couleur{1,'xxx','R&eacute;glages pour la migration'})]
+[(#REM|debut_cadre_trait_couleur{1,'xxx','Migre_static'})]
 [(#REM) ------------------------ RUBRIQUE D IMPORTATION ------------------------ ]
 
 <fieldset>
@@ -73,8 +71,7 @@
 </fieldset>
 
 <?php
-include_spip("inc/plugin");
-$plug=liste_plugin_actifs();
+if ( @include_spip("inc/plugin") ) $plug=liste_plugin_actifs();
 if (is_array($plug) AND array_key_exists("COUTEAU_SUISSE",$plug) AND isset($GLOBALS['meta']['cs_decoupe'])) {
 ?>
 [(#REM) ---------------------- UTILISATION DE CS_DECOUPE -------------------- ]
@@ -101,10 +98,6 @@ else
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
-<!--
-<input type="reset" value="<:Reset:>" />
-<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
--->
 </div>
 
 [(#REM|sinon{1}|fin_cadre_trait_couleur)]
