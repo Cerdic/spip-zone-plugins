@@ -231,7 +231,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'Suivi_des_abonnements' => 'Inscripciones',
 'sujet_nouveau' => 'Nuevo mensaje',
 'sujet_auteur' => 'Autor(a)',
-'sujet_courrier' => '<b>T&iacute;tulo del mensaje</b> (obligatorio)<br />',
+'sujet_courrier' => '<b>T&iacute;tulo del mensaje</b> [obligatorio]<br />',
 'sujet_courrier_auto' => 'T&iacute;tulo del mensaje autom&aacute;tico: ',
 'sujet_visites' => 'Visitas',
 'sujets' => 'Temas',

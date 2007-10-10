@@ -216,7 +216,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'Suivi_des_abonnements' => 'Subscribers follow up',
 'sujet_nouveau' => 'New subject',
 'sujet_auteur' => 'Author',
-'sujet_courrier' => '<b>Message subject</b> (required)<br />',
+'sujet_courrier' => '<b>Message subject</b> [required]<br />',
 'sujet_courrier_auto' => 'Subject of automated mail: ',
 'sujet_visites' => 'Visits',
 'sujets' => 'Sujects',

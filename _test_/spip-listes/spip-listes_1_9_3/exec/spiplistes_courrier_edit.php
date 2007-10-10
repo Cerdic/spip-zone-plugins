@@ -135,22 +135,26 @@ function exec_spiplistes_courrier_edit(){
 		. fin_cadre_relief(true)
 		. "<br />"
 		//
+		// début formulaire
 		. "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")."' method='post' name='formulaire'>"
 		. "<input type='hidden' name='modifier_message' value=\"oui\" />"
 		. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
-		. _T('spiplistes:sujet_courrier')
-		. "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' />"
+		//
+		// bloc sujet
+		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier')."</label>\n"
+		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' />"
 		. "<br />"
-		. "<br />"
-		. _T('spiplistes:texte_courrier')
-		. aide ("raccourcis")
-		. "<br />"
+		// 
+		// bloc texte
+		. "<label for='texte_courrier'>"._T('spiplistes:texte_courrier')."</label>\n"
 		. afficher_barre('document.formulaire.texte')
-		. "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>"
+		. "<textarea id='texte_courrier' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>"
 		. $texte
 		. "</textarea>\n"
 		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />" : "")
 		. "<p align='right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />"
+		//
+		// fin formulaire
 		. "</form>"
 		. fin_cadre_formulaire(true)
 		;
