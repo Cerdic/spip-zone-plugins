@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'revoke_info' => 'Vous pouvez r&eacute;voquer les droits de ce site &agrave; se connecter &agrave; votre compte Flickr en cliquant ce bouton puis en allant sur <a href="http://flickr.com/services/auth/list.gne">Flickr Authentication List</a>',
 
 	'cfg_title' => 'Configuration FpipR',
-	'cfg_descriptif' => 'Sur cette page, vous pouvez configurer les options globales du plugin FpipR.<br/> N\'oubliez pas ensuite de faire la configuration personelle dans votre fiche d\'auteur',
+	'cfg_descriptif' => 'Sur cette page, vous pouvez configurer les options globales du plugin FpipR.<br/> N\'oubliez pas ensuite de faire la configuration personnelle dans votre fiche d\'auteur',
 	'cfg_api_legend' => 'Acc&eacute;s API Flickr',
 	'cfg_api_info' => 'Pour utiliser le plugin FpipR, vous devez d\'abord obtenir une clef chez Flickr. pour cela:',
 	'cfg_api_info_1' => 'rendez vous sur le formulaire d\'inscription',
