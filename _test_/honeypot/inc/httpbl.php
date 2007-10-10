@@ -46,12 +46,12 @@ function httpbl_dbcache_fetch($ip) {
 
 function httpbl_dbcache_store($ip,$info='') {
   include_spip('base/abstract_sql');
-  if($info) {
-	spip_abstract_insert('spip_honeypot_cache','(ip,status,age,threat,type,maj)',
-						 '('.ip2long($ip).',127,'.$info['age'].','.$info['threat'].','.$info['type'].',NOW())');
+  if($info) {		  
+	spip_query("INSERT IGNORE INTO spip_honeypot_cache (ip,status,age,threat,type,maj) VALUES (".ip2long($ip).',127,'.$info['age'].','.$info['threat'].",".$info['type'].",NOW())");
+	spip_query("UPDATE spip_honeypot_cache SET maj=NOW() WHERE ip=".ip2long($ip));
   }  else {
-	spip_abstract_insert('spip_honeypot_cache','(ip,status,age,threat,type,maj)',
-						 '('.ip2long($ip).',0,0,0,0,NOW())');
+	spip_query("INSERT IGNORE INTO spip_honeypot_cache (ip,status,age,threat,type,maj) VALUES (".ip2long($ip).",0,0,0,0,NOW())");
+	spip_query("UPDATE spip_honeypot_cache SET maj=NOW() WHERE ip=".ip2long($ip));
   }
 }
 
