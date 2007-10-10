@@ -166,6 +166,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'En_cours' => "En cours",
 'Envoi_abandonne' => "Envoi abandonn&eacute;",
 'Erreur_appel_courrier' => "Erreur lors de l'appel du courrier",
+'Et_lister_les_articles_de_la_rubrique' => "Et lister les articles de la rubrique",
 
 //F
 'faq' => 'FAQ',

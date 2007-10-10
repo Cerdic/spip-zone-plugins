@@ -42,10 +42,11 @@ function exec_spiplistes_courrier_rediger () {
 	// COURRIER REDIGER: Redaction d'un courrier ------------------------------------------
 
 	if($id_courrier > 0) {
-		// edition courrier existant
+	///////////////////////////
+	// initialise les variables postées par formulaire
+		$sql_select = "";
 		$result = spip_query("SELECT * FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1");
 		if ($row = spip_fetch_array($result)) {
-			$id_courrier = $row['id_courrier'];
 			$date_heure = $row["date"];
 			$titre = entites_html($row["titre"]);
 			$texte = entites_html($row["texte"]);
@@ -53,12 +54,19 @@ function exec_spiplistes_courrier_rediger () {
 			$statut = $row["statut"];
 			$id_auteur = $row["id_auteur"];
 		}
+		else $id_courrier = false;
 	}
-	else {
-		// nouveau courrier
+
+	if(!$id_courrier) {
+	///////////////////////////
+	// nouveau courrier
 		$statut = _SPIPLISTES_STATUT_REDAC; 
-		$type = 'nl'; 
+		$type = 'nl';
+		$id_courrier = 0;
 	}
+
+	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
+	$liste_patrons = spiplistes_liste_des_patrons("patrons/");
 
 //////////
 // PAGE CONTENU
@@ -79,68 +87,72 @@ function exec_spiplistes_courrier_rediger () {
 	creer_colonne_droite();
 	debut_droite("messagerie");
 
-	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
-	$liste_patrons = spiplistes_liste_des_patrons("patrons/");
-
 	// Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
 	$page_result = ""
 		. debut_cadre_formulaire(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_insert-slide.gif', true)
 		. "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><strong>$le_type</strong></span></p>"
 		. "<p class='verdana2' style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;'>"._T('spiplistes:alerte_edit')."</p>"
 		. "<br /><br />"
-		. "<div id=\"ajax-loader\" align=\"right\"><img src=\""._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif\" /></div>"
+		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>"
 		. "<div class='verdana2' id='envoyer'>"
-		
+		//
+		// début formulaire
 		. "<form method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE)."'"
 		.		" style='border: 0px; margin: 0px;' id='template' name='template'>"
-		. "<input name=\"id_courrier\" id=\"id_courrier\" type=\"hidden\" value=\"$id_courrier\" />\n"
-		. "<br/><strong><label for='template'>"._T("Choisir un patron")."</label></strong><br/>"
+		. "<input name='id_courrier' id='id_courrier' type='hidden' value='$id_courrier' />\n"
+		//
+		// sélecteur patron
+		. "<br /><strong><label for='template'>"._T("Choisir un patron")."</label></strong><br />"
 		. "<select name='template' class='formo'>"
 		;
 	foreach($liste_patrons as $titre_option) {
 		$page_result .= "<option value='".$titre_option."'>".$titre_option."</option>\n";
 	}
-	$page_result .= "</select><br />";
-		
 	$page_result .= ""
+		. "</select>"
+		. "<br />"
+		//
+		// sélecteur de date
 		. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />"
-		. '<script src="'.url_absolue(find_in_path('javascript/datepicker.js')).'" type="text/javascript"></script>'
-		. '<script src="'.url_absolue(find_in_path('javascript/jquery-dom.js')).'" type="text/javascript"></script>'
-		. "\n\n<script type=\"text/javascript\"><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
+		. "<script src='".url_absolue(find_in_path('javascript/datepicker.js'))."' type='text/javascript'></script>"
+		. "<script src='".url_absolue(find_in_path('javascript/jquery-dom.js'))."' type='text/javascript'></script>"
+		. "\n\n <script type='text/javascript'><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
 		. unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
 		. " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script> "
 		//
 		// sélecteur de langues
 		. "<div style='float:right;width:50%;'>"
 		. "<label for='lang'>"._T('spiplistes:Langue_du_courrier_:')."</label><br />\n"
-		. "<select name='lang'  class='fondo' id='lang'>\n"
+		. "<select name='lang' class='fondo' id='lang'>\n"
 		. liste_options_langues('changer_lang')
 		. "</select>\n"
 		. "</div>\n"
 		//
 		// la date
-		. "<label for=\"date\">Contenu a partir de cette date</label><br />\n"
-		. "<input name=\"date\" id=\"date\" class=\"date-picker\"  /><br /><br /><br />\n"
-		. "<strong><label for='sujet'>"._T("Et lister les articles de la rubrique")."</label></strong>"
-		. "<br />"
+		. "<label for='date'>Contenu a partir de cette date</label><br />\n"
+		. "<input name='date' id='date' class='date-picker'  /><br /><br /><br />\n"
 		//
 		// sélecteur de rubriques
-		. "<select name=\"id_rubrique\"  class='formo'>"
-		. "<option value=\"\"></option>"
+		. "<label for='ajouter_rubrique' style='font-weight:bold;'>"._T("Et lister les articles de la rubrique").":</label>"
+		. "<select name='id_rubrique' id='ajouter_rubrique' class='formo'>"
+		. "<option value=''></option>"
 		. spiplistes_arbo_rubriques(0)
-		. "</select><br />"
+		. "</select>"
+		. "<br />"
 		//
 		// sélecteur des mots-clés
 		. "<strong><label for='sujet'>"._T("Et lister les articles du mot cl&eacute;")."</label></strong>"
 		. "<br />"
-		. "<select name=\"id_mot\"  CLASS='formo'>"
-		. "<option value=\"\"></option>"
+		//
+		// sélecteur mots-clés
+		. "<select name='id_mot'  CLASS='formo'>"
+		. "<option value=''></option>"
 		;
 	$rqt_gmc = spip_query ("SELECT id_groupe, titre FROM spip_groupes_mots WHERE articles='oui'");
 	while ($row = spip_fetch_array($rqt_gmc)) {
 		$id_groupe = $row['id_groupe'];
 		$titre = $row['titre'];
-		$page_result .= "<option value='' disabled=\"disabled\">". supprimer_numero (typo($titre)) . "</option>";
+		$page_result .= "<option value='' disabled='disabled'>". supprimer_numero (typo($titre)) . "</option>";
 		$rqt_mc = spip_query ("SELECT id_mot, titre FROM spip_mots WHERE id_groupe='".$id_groupe."'");
 		while ($row = spip_fetch_array($rqt_mc)) {
 			$id_mot = $row['id_mot'];
@@ -154,12 +166,12 @@ function exec_spiplistes_courrier_rediger () {
 		// champ du titre (sujet du courrier)
 		. "<strong><label for='sujet'>"._T("Sujet du courrier")."</label></strong> "._T('info_obligatoire_02')
 		. "<br />"
-		. "<input type='text' name='sujet' id='sujet' CLASS='formo' value=\"\" size='40'$js_titre /><br />\n"
+		. "<input type='text' name='sujet' id='sujet' CLASS='formo' value='' size='40'$js_titre /><br />\n"
 		. "<strong><label for='message'>"._T("Introduction &agrave; votre courrier, avant le contenu issu du site")."</label></strong>"
 		. "<br />"
 		. afficher_barre('document.template.message')
 		. "<textarea id='text_area' name='message' ".$GLOBALS['browser_caret']." class='formo' rows='5' cols='40' wrap=soft>"
-		. ''
+		. ""
 		. "</textarea>\n"
 		. "<p class='verdana2' style='text-align:right;'>"
 		. "<input type='submit' name='Valider' value='"._T('Apercu')."' class='fondo' /></div>\n"

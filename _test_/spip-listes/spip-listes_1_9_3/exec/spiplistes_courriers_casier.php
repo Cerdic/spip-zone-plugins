@@ -133,6 +133,7 @@ function exec_spiplistes_courriers_casier () {
 		, $supp_dest
 		;
 
+	///////////////////////////
 	// initialise les variables postées par formulaire
 	foreach(array(
 		'btn_confirmer_envoi', 'id_courrier', 'id_liste' // (formulaire gerer) confirmer envoi
