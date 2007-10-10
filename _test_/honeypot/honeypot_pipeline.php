@@ -21,10 +21,34 @@
 /*ajoute un style pour cacher les pieges aux visiteurs*/
 function honeypot_insert_head($flux) {
   $flux .= 	'<style>
-  .pluginhp'.preg_replace('/\.php$/','',lire_config('honeypot/hpfile')).' {
+.pluginhp'.lire_config('honeypot/hpfile').' {
 display: none;
 }
 </style>';
+  return $flux;
+}
+
+
+function honeypot_ajouter_boutons($flux){
+	if ( $GLOBALS['connect_statut'] == "0minirezo" && (lire_config('honeypot/httpbl/stats') == 'on')){
+		$flux['statistiques_visites']->sousmenu['honeypot_statistiques']= new Bouton(find_in_path('honeypot_24.png'),_T('honeypothttpbl:stat_bouton'));
+	}
+    
+	return $flux;
+}
+
+
+/*Les onglets pour les stats, n'afficher que les onglets des filtres utilisés*/
+function honeypot_ajouter_onglets($flux) {
+  if($flux['args']=='honeypot_statistiques') {
+	$flux['data']['general']= new Bouton('', _T('honeypothttpbl:stat_gen'),
+										 generer_url_ecrire("honeypot_statistiques"));
+	$result = spip_query("SELECT DISTINCT filtre FROM spip_honeypot_stats");
+	while($row = spip_fetch_array($result)) {
+	  $flux['data']['filtre'.$row['filtre']]= new Bouton('', _T('honeypothttpbl:stat_filtre'.$row['filtre']),
+										   generer_url_ecrire("honeypot_statistiques","filtre=".$row['filtre']));
+	}
+  }
   return $flux;
 }
 

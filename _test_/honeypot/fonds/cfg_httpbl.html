@@ -156,11 +156,15 @@ Plugin HoneyPot, configuration http:BL
 </fieldset>
 
 <fieldset [(#ENV{apikey}|?{'',' '})style="display:none;"]>
-<legend><:honeypothttpbl:cfg_log:></legend>
-<select name="loglevel">
+<legend><:honeypothttpbl:cfg_log_stats:></legend>
+<label for="loglevel"><:honeypothttpbl:cfg_log:></label>
+<select name="loglevel" id="loglevel">
 <option value="all" [(#ENV{loglevel}|choixsiegal{all,' ',''})  selected="selected"]><:honeypothttpbl:cfg_log_all:></option>
 <option value="blocked" [(#ENV{loglevel,blocked}|choixsiegal{blocked,' ',''})  selected="selected"]><:honeypothttpbl:cfg_log_blocked:></option>
 </select>
+<br/>
+<label for="stats"><:honeypothttpbl:cfg_stats:></label>
+<input type="checkbox" name="stats"[ (#ENV{stats}|?{checked="true",''})] />
 </fieldset>
 
 <fieldset [(#ENV{apikey}|?{'',' '})style="display:none;"]>

@@ -7,7 +7,7 @@
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
   </auteur>
   <version> <!-- Version du plugin -->
-	0.3
+	0.4
   </version>
   <etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
@@ -45,6 +45,17 @@ _ You can also use this plugin to limit the access to your site for the visitors
 		<nom>taches_generales_cron</nom>
 	<inclure>httpbl_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom> 
+		<action>ajouter_onglets</action>
+		<inclure>honeypot_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom> 
+		<action>ajouter_boutons</action>
+		<inclure>honeypot_pipeline.php</inclure>
+	</pipeline>
+
 
   <install>base/honeypot_upgrade.php</install>
 

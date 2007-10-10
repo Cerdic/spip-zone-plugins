@@ -49,7 +49,23 @@ To be able to use this feature on your site, you first have to [get an API key f
 									   'cfg_log_all' => 'All known access type',
 									   'cfg_log_blocked' => 'Only filtered access',
 									   'cfg_cache' => 'Cache time to live',
-									   'cfg_cache_doc' => 'A cache of the threat level of each visitor will be kept in the database for a minimum period of time to avoid sending requests to http:BL at every visit.'
+									   'cfg_cache_doc' => 'A cache of the threat level of each visitor will be kept in the database for a minimum period of time to avoid sending requests to http:BL at every visit.',
+									   'cfg_stats' => 'Enable the filter statistics',
+									   'stat_bouton'=>'Filering Statistics',
+									   'stat_gen' => 'All the filters',
+									   'stat_filtre1' => 'Access Forbiden',
+									   'stat_filtre2' => 'To the honeypot',
+									   'stat_filtre3' => 'Forbiden Forums',
+									   'stat_filtre4' => 'Seen but not filtered',
+									   'stat_filtre5' => 'Hidden Emails',
+									   'titre_page_statistiques' => 'Statistics for the honeypot http:BL filtering',
+									   'stat_info_gauche' => 'This page shows the statistics for the filtering of visitor provided by the Honeypot plugin through http:BL',
+									   'stat_info_visites' => 'Filtered visits :',
+									   'stat_info_moyenne' => 'Average :',
+									   'stat_info_aujourdhui' => 'Today :',
+									   'stat_info_total' => 'Total :',
+									   'stat_info_threat' => 'Average threat :',
+									   'stat_info_par_mois' => 'Monthly display :',
 									   );
 
 ?>

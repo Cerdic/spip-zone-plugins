@@ -20,7 +20,7 @@
 
 
 function honeypot_droptables() {
-  spip_query("DROP TABLE IF EXISTS ".$GLOBALS['table_prefix']."_honeypot_cache;");
+  spip_query("DROP TABLE IF EXISTS spip_honeypot_cache, spip_honeypot_stats;");
 }
 
 function honeypot_doupgrade() {

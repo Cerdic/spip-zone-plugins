@@ -19,7 +19,7 @@
  */
 
 
-$GLOBALS['honeypotdb_version'] = 2;
+$GLOBALS['honeypotdb_version'] = 5;
 
 $spip_honeypot_cache = array(
 							 "ip" 	=> "BIGINT NOT NULL", //stoquage avec ip2long de php pour etre plus leger
@@ -36,5 +36,21 @@ global $tables_auxiliaires;
 $tables_auxiliaires['spip_honeypot_cache'] = array(
 												   'field' => &$spip_honeypot_cache,
 												   'key' => &$spip_honeypot_cache_key);
+$spip_honeypot_stats = array(
+							 'date' => "DATE NOT NULL",
+							 "threat" 	=> "INT UNSIGNED DEFAULT 0",
+							 "type" 	=> "TINYINT UNSIGNED DEFAULT 0",
+							 "cnt" 	=> "INT UNSIGNED DEFAULT 0",
+							 'filtre' => "TINYINT UNSIGNED DEFAULT 0",
+							 "maj" 		=> "TIMESTAMP NOT NULL");
+
+$spip_honeypot_stats_key = array(
+								 "PRIMARY KEY" => "date, type, filtre");
+
+
+$tables_auxiliaires['spip_honeypot_stats'] = array(
+												   'field' => &$spip_honeypot_stats,
+												   'key' => &$spip_honeypot_stats_key);
+
 
 ?>

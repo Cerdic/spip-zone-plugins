@@ -43,14 +43,26 @@ if((_DIR_RACINE =='') &&
   if($info) {
 	if(min(intval($config['type'.$info['type'].'_threat']),255) <=  $info['threat']){
 	  if($config['type'.$info['type'].'_filter'] == 'bloquer'){
+		if($config['stats'] == 'on') {
+		  $date = date("Y-m-d", time() - 1800);
+		  
+		  spip_query("INSERT IGNORE INTO spip_honeypot_stats (date,type,filtre) VALUES ('$date',".intval($info['type']).",1)");
+		  spip_query("UPDATE spip_honeypot_stats SET cnt = cnt+1,  threat = threat+".intval($info['threat'])." WHERE date='$date' AND type=".intval($info['type'])." AND filtre=1");
+		}
 		//log pour l'instant, TODO faire mieux
 		spip_log("bloqué ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
 		httpbl_send403($info);		
 	  } else if($config['type'.$info['type'].'_filter'] == 'tohoneypot') {
 		include_spip('inc/headers');
+		if($config['stats'] == 'on') {
+		  $date = date("Y-m-d", time() - 1800);
+		  
+		  spip_query("INSERT IGNORE INTO spip_honeypot_stats (date,type,filtre) VALUES ('$date',".intval($info['type']).",2)");
+		  spip_query("UPDATE spip_honeypot_stats SET cnt = cnt+1,  threat = threat+".intval($info['threat'])." WHERE date='$date' AND type=".intval($info['type'])." AND filtre=2");
+		}
 		//log pour l'instant, TODO faire mieux
 		spip_log("envoyé vers le pot de miel ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
-		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'.preg_replace('/\.php/$','',lire_config('honeypot/hpfile')).'.php');
+		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'.lire_config('honeypot/hpfile').'.php');
 	  } else if(count($_POST) &&
 				($config['type'.$info['type'].'_filter'] == 'cacherforum' || $config['type'.$info['type'].'_filter'] == 'cachertout' )) {
 		// champs de formulaires a visiter (depuis couteau suisse)
@@ -61,6 +73,12 @@ if((_DIR_RACINE =='') &&
 		// on regarde si c'est un post qui nous interesse
 		foreach (array_keys($_POST) as $key)
 		  if (preg_match($spam_POST_reg, $key)) {
+			if($config['stats'] == 'on') {
+			  $date = date("Y-m-d", time() - 1800);
+			  
+			  spip_query("INSERT IGNORE INTO spip_honeypot_stats (date,type,filtre) VALUES ('$date',".intval($info['type']).",3)");
+			  spip_query("UPDATE spip_honeypot_stats SET cnt = cnt+1,  threat = threat+".intval($info['threat'])." WHERE date='$date' AND type=".intval($info['type'])." AND filtre=3");
+			}		
 			//log pour l'instant, TODO faire mieux
 			spip_log("caché forum ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
 			httpbl_send403($info);		
@@ -68,6 +86,12 @@ if((_DIR_RACINE =='') &&
 		  }
 	  }
 	} else if($config['loglevel'] == 'all') {
+	  if($config['stats'] == 'on') {
+		  $date = date("Y-m-d", time() - 1800);
+		  
+		  spip_query("INSERT IGNORE INTO spip_honeypot_stats (date,type,filtre) VALUES ('$date',".intval($info['type']).",4)");
+		  spip_query("UPDATE spip_honeypot_stats SET cnt = cnt+1,  threat = threat+".intval($info['threat'])." WHERE date='$date' AND type=".intval($info['type'])." AND filtre=4");
+		}
 	  //log pour l'instant, TODO faire mieux
 	  spip_log("non filtré ".$_SERVER['REMOTE_ADDR']." parce que ".$info['raw'],'httpbl');
 	}
