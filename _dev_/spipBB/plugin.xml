@@ -3,19 +3,26 @@
 		SpipBB
 	</nom>
 	<auteur>
-		Credits : james (james@tezo.net) touti (touti@free.fr)
+		Credits : james (james@rezo.net) touti (touti@free.fr) chryjs (chryjs@free.fr) gurdil real3t
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version>
-		0.1
+		0.10
 	</version>
 	<etat>
 		experimental
 	</etat>
 	<description>
-		Plugin spipbb en cours de developpement. A vos risques et perils :)
+		<multi>
+		[fr]SpipBB vous permettra d'utiliser un secteur comme base d'un groupe de forums "&agrave; la" phpbb. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d'un article y d&eacute;marre un thread.
+_ Plugin spipbb en cours de developpement. A vos risques et perils :)
 _ si vous avez cfg : [Configuration->.?exec=cfg&amp;cfg=spipbb] &agrave; visiter pour s&eacute;lectionner la rubrique qui contient les forums, vous pourrez (ce n'est pas n&eacute;cessaire) y changer le nom des squelettes utilis&eacute;s
+		[en]SpipBB will allow you to use a sector as the base for a group of forums "&agrave; la" phpbb. In this sector, the sub-sectors, are forum groups, the articles are forums, and each post in the forum of such articles will start a new thread.
+_ Spipbb plugin, dev in progress. Use it at your own risks :)
+_ if you have CFG : [Configure->.?exec=cfg&amp;cfg=spipbb] You must visit it to select the forums sector before all. You may also (not required) change the skeletons names.
+		</multi>
 	</description>
+	<lien>http://www.spip-contrib.net/spip.php?article2460</lien> <!-- [fr] URI de documentation [en] documentation URI -->
 	<fonctions>spipbb_fonctions.php</fonctions>
 	<options>spipbb_options.php</options>
 	<install>base/spipbb_init.php</install>
@@ -26,5 +33,4 @@ _ si vous avez cfg : [Configuration->.?exec=cfg&amp;cfg=spipbb] &agrave; visiter
 	</pipeline>
 	<necessite id="cfg" version="[1.0.0;]" />
 	<chemin dir='' />
-
 </plugin>

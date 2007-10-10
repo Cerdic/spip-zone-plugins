@@ -1,8 +1,27 @@
 <?php
-// spipbb
-// (c) chryjs 2007
+#--------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                      #
+#  File    : inc/spipbb - donnees et fonctions du plugin #
+#  Authors : Chryjs, 2007 et als                         #
+#  Contact : chryjs¡@!free¡.!fr                          #
+#--------------------------------------------------------#
 
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+$GLOBALS['spipbb_version'] = 0.11;
 $GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+
 
 // [fr] Initialisation des valeurs de meta du plugin aux defauts
 // [en] Init plugin meta to default values
@@ -10,6 +29,7 @@ function spipbb_init_metas($id_rubrique=0) {
 	spipbb_delete_metas(); // [fr] Nettoyage des traces [en] remove old metas
 	unset($spipbb_meta);
 	$spipbb_meta=array();
+	$spipbb_meta['version']= $GLOBALS['spipbb_version'];
 	$id_rubrique=intval($id_rubrique);
 	if (empty($id_rubrique)) {
 		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1")); // SELECT the first rubrique met

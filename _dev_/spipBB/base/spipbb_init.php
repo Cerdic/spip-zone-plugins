@@ -25,23 +25,54 @@ include_spip('inc/spipbb');
 function spipbb_install($action)
 {
 switch ($action) {
- case 'test' : /* test pour savoir si les actions sont nécessaires */
-	spipbb_init_metas();
-	return isset($GLOBALS['meta']['spipbb']);
+ case 'test' : // test pour savoir si les actions sont nécessaires
+	return ( isset($GLOBALS['meta']['spipbb']) AND isset($GLOBALS['spipbb']['version']) AND ($GLOBALS['spipbb']['version']>= $GLOBALS['spipbb_version'] ) );
 	break;
  case 'install' :
-	spipbb_init_metas();
+	spipbb_upgrade();
 	break;
  case 'uninstall' :
 	spipbb_delete_metas();
 	break;
- }
+}
+
 } /* spipbb_install */
 
-/* rend disponible l'icone de désinstallation */
-/* ca doit certainement permettre d'effacer les fichiers et autres */
+// [fr] rend disponible l'icone de désinstallation, ca doit certainement permettre d'effacer les fichiers et autres
 function spipbb_uninstall(){
 }
 
+// [fr] Met a jour la version et initialise les metas
+// [en] Upgrade release and init metas
+function spipbb_upgrade()
+{
+	$version_code = $GLOBALS['spipbb_version'] ;
+	if ( isset($GLOBALS['meta']['spipbb'] ) )
+	{
+		if ( isset($GLOBALS['spipbb']['version'] ) )
+		{
+			$installed_version = $GLOBALS['spipbb']['version'];
+		}
+		else {
+			$installed_version = 0.10 ; // first release didn't store the release level
+		}
+	}
+	else {
+		$installed_version = 0.0 ; // aka not installed
+	}
+	if ( $installed_version == 0.0 ) {
+		spipbb_init_metas();
+	}
+
+	if ( $installed_version < 0.11 ) {
+		$GLOBALS['spipbb']['version'] = $version_code;
+		include_spip('inc/meta');
+		ecrire_meta('spipbb', serialize($GLOBALS['spipbb']));
+		ecrire_metas();
+		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+	}
+
+	spip_log('spipbb : spipbb_upgrade OK');
+} /* spipbb_upgrade */
 
 ?>
