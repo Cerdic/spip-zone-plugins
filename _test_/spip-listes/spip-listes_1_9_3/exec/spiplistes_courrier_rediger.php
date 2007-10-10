@@ -133,7 +133,7 @@ function exec_spiplistes_courrier_rediger () {
 		. "<input name='date' id='date' class='date-picker'  /><br /><br /><br />\n"
 		//
 		// sélecteur de rubriques
-		. "<label for='ajouter_rubrique' style='font-weight:bold;'>"._T("Et lister les articles de la rubrique").":</label>"
+		. "<label for='ajouter_rubrique' style='font-weight:bold;'>"._T('spiplistes:Lister_articles_de_rubrique').":</label>"
 		. "<select name='id_rubrique' id='ajouter_rubrique' class='formo'>"
 		. "<option value=''></option>"
 		. spiplistes_arbo_rubriques(0)
@@ -141,23 +141,20 @@ function exec_spiplistes_courrier_rediger () {
 		. "<br />"
 		//
 		// sélecteur des mots-clés
-		. "<strong><label for='sujet'>"._T("Et lister les articles du mot cl&eacute;")."</label></strong>"
-		. "<br />"
-		//
-		// sélecteur mots-clés
-		. "<select name='id_mot'  CLASS='formo'>"
+		. "<label for='ajouter_motcle' style='font-weight:bold;'>"._T('spiplistes:Lister_articles_mot_cle').":</label>"
+		. "<select name='id_mot' id='ajouter_motcle' class='formo'>"
 		. "<option value=''></option>"
 		;
 	$rqt_gmc = spip_query ("SELECT id_groupe, titre FROM spip_groupes_mots WHERE articles='oui'");
 	while ($row = spip_fetch_array($rqt_gmc)) {
-		$id_groupe = $row['id_groupe'];
+		$id_groupe = intval($row['id_groupe']);
 		$titre = $row['titre'];
 		$page_result .= "<option value='' disabled='disabled'>". supprimer_numero (typo($titre)) . "</option>";
-		$rqt_mc = spip_query ("SELECT id_mot, titre FROM spip_mots WHERE id_groupe='".$id_groupe."'");
+		$rqt_mc = spip_query ("SELECT id_mot,titre FROM spip_mots WHERE id_groupe=$id_groupe");
 		while ($row = spip_fetch_array($rqt_mc)) {
-			$id_mot = $row['id_mot'];
-			$titre = $row['titre'];
-			$page_result .= "<option value='".$id_mot ."'>--". supprimer_numero (typo($titre)) . "</option>";
+			$id_mot = intval($row['id_mot']);
+			$titre = supprimer_numero (typo($row['titre']));
+			$page_result .= "<option value='$id_mot'>--$titre</option>";
 		}
 	}
 	$page_result .= ""
