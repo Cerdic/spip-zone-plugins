@@ -1,5 +1,5 @@
 <?php
-
+// _SPIPLISTES_EXEC_COURRIER_EDIT
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -44,6 +44,10 @@ function exec_spiplistes_courrier_edit(){
 		
 	$type = _request('type');
 	$id_courrier = intval(_request('id_courrier'));
+
+	foreach(array('btn_courrier_apercu') as $key) {
+		$$key = _request($key);
+	}
 
 	if($id_courrier > 0) {
 	///////////////////////////
@@ -109,7 +113,6 @@ function exec_spiplistes_courrier_edit(){
 	creer_colonne_droite();
 	debut_droite("messagerie");
 
-
 	$page_result .= ""
 		. debut_cadre_formulaire('', true)
 		. "<a name='haut_block' id='haut_block'></a>"
@@ -140,6 +143,9 @@ function exec_spiplistes_courrier_edit(){
 		. "<input type='hidden' name='modifier_message' value=\"oui\" />"
 		. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
 		//
+		// choisir patron
+		
+		//
 		// bloc sujet
 		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier')."</label>\n"
 		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' />"
@@ -152,7 +158,14 @@ function exec_spiplistes_courrier_edit(){
 		. $texte
 		. "</textarea>\n"
 		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />" : "")
-		. "<p align='right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />"
+		//
+		// boutons apercu/valider (en cours CP-20071010)
+		//	($btn_courrier_apercu)
+		//		? "<p style='position:relative;'>"
+		//		. "<input type='submit' name='btn_courrier_apercu' value='"._T('Apercu')."' class='fondo' />\n"
+		//		. "<input style='position:absolute;right:0;' type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' />"
+		//		. "</p>\n"
+		. "<p style='text-align:right;'><input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>"
 		//
 		// fin formulaire
 		. "</form>"

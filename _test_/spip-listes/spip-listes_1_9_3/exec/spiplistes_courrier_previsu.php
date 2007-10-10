@@ -1,5 +1,5 @@
 <?php
-
+// _SPIPLISTES_EXEC_COURRIER_PREVUE
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -73,8 +73,9 @@ function exec_spiplistes_courrier_previsu(){
 	
 	
 	$url = generer_url_public('patron_switch','',true);
-	foreach ($contexte_template as $k=>$v)
+	foreach ($contexte_template as $k=>$v) {
 		$url = parametre_url($url,$k,$v,'&');
+	}
 	
 	// $texte_patron = recuperer_page($url) ;	
 
@@ -85,18 +86,28 @@ function exec_spiplistes_courrier_previsu(){
 	$titre = $titre_patron;
 	$texte = $texte_patron;
 
-	if((strlen($texte) > 10))
-		spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte).", message_texte="._q($message_texte)." WHERE id_courrier="._q($id_courrier));
-	else
-		$message_erreur = _T('spiplistes:patron_erreur');
+	if($id_courrier > 0) { // ?? la page gerer s'occupe des updates. Pourquoi ici ?
+		if((strlen($texte) > 10)) {
+spiplistes_log("update id_courrier $id_courrier");
+			spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte).", message_texte="._q($message_texte)." WHERE id_courrier="._q($id_courrier));
+		}
+		else {
+			$message_erreur = _T('spiplistes:patron_erreur');
+		}
+	}
 
-
-	echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n";
-	echo "<html lang='$lang' dir='ltr'>";
-	echo "<head><meta http_equiv='Content-Type' content='text/html; charset=".$charset."'>\n<meta http-equiv=\"Pragma\" content=\"no-cache\">\n
+	$page_result = ""
+		. "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
+		. "<html lang='$lang' dir='ltr'>"
+		. "<head>"
+		. "<meta http_equiv='Content-Type' content='text/html; charset=".$charset."'>\n"
+		. "<meta http-equiv='Pragma' content='no-cache'>\n
 	</script>\n
 	
-	</head><body>\n";
+	</head><body>\n"
+	;
+	
+	echo($page_result);
 
 /*
  echo "<div style='text-align:left;border:1px solid #000;background: yellow;color: #000;margin-bottom: 10px;padding:10px;'>";  

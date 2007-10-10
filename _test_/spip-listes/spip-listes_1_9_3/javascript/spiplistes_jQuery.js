@@ -1,7 +1,11 @@
-// JavaScript Document
+// $LastChangedRevision: 15830 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2007-10-07 05:41:13 +0200 (dim., 07 oct. 2007) $
 
 $(document).ready(function(){
-$("#ajax-loader").hide();
+	
+	$("#ajax-loader").hide();
+	
 	$("#ajax-loader").ajaxStart(function(){
 			$(this).show();
 	});

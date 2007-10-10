@@ -54,7 +54,7 @@ function exec_spiplistes_courrier_gerer () {
 		'type'
 		, 'id_message' // devrait être id_courrier. A corriger dans les autres scripts et supprimer ici.
 		, 'id_courrier'
-		, 'modifier_message', 'titre', 'texte' // (formulaire edition) _SPIPLISTES_EXEC_COURRIER_EDIT
+		, 'btn_courrier_valider', 'titre', 'texte' // (formulaire edition) _SPIPLISTES_EXEC_COURRIER_EDIT
 		, 'new' // idem
 		, 'btn_changer_destination', 'radio_destination', 'email_test', 'id_liste' // (formulaire local) destinataire
 		, 'change_statut' // (formulaire spiplistes_boite_autocron) 'publie' pour annuler envoi par boite autocron
@@ -122,7 +122,7 @@ function exec_spiplistes_courrier_gerer () {
 			} // end if($radio_destination
 		} // if($btn_changer_destination
 
-		else if ($modifier_message == "oui") {
+		else if ($btn_courrier_valider) {
 		// retour éditeur
 			if(!empty($titre)) {
 				spip_query("UPDATE spip_courriers SET titre="._q($titre).",texte="._q($texte)." WHERE id_courrier=$id_courrier LIMIT 1");	

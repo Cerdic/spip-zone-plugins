@@ -91,20 +91,22 @@ function exec_spiplistes_courrier_rediger () {
 
 	// Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
 	$page_result = ""
-		. debut_cadre_formulaire(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_insert-slide.gif', true)
+		. "<!-- Rediger courrier -->\n"
+		. debut_cadre_formulaire(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
 		. "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><strong>$le_type</strong></span></p>"
 		. "<p class='verdana2' style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;'>"._T('spiplistes:alerte_edit')."</p>"
 		. "<br /><br />"
 		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>"
-		. "<div class='verdana2' id='envoyer'>"
+		. "<div class='verdana2' id='envoyer'>\n"
 		//
 		// début formulaire
 		. "<form method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE)."'"
 		.		" style='border: 0px; margin: 0px;' id='template' name='template'>"
 		. "<input name='id_courrier' id='id_courrier' type='hidden' value='$id_courrier' />\n"
+		. "<br />\n"
 		//
 		// sélecteur patron
-		. "<br /><strong><label for='template'>"._T("Choisir un patron")."</label></strong><br />"
+		. "<strong><label for='template'>"._T('spiplistes:Choisir_un_patron').":</label></strong><br />"
 		. "<select name='template' class='formo'>"
 		;
 	foreach($liste_patrons as $titre_option) {
@@ -112,19 +114,19 @@ function exec_spiplistes_courrier_rediger () {
 	}
 	$page_result .= ""
 		. "</select>"
-		. "<br />"
+		. "<br />\n"
 		//
 		// sélecteur de date
-		. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />"
-		. "<script src='".url_absolue(find_in_path('javascript/datepicker.js'))."' type='text/javascript'></script>"
-		. "<script src='".url_absolue(find_in_path('javascript/jquery-dom.js'))."' type='text/javascript'></script>"
-		. "\n\n <script type='text/javascript'><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
+		. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />\n"
+		. "<script src='".url_absolue(find_in_path('javascript/datepicker.js'))."' type='text/javascript'></script>\n"
+		. "<script src='".url_absolue(find_in_path('javascript/jquery-dom.js'))."' type='text/javascript'></script>\n"
+		. "<script type='text/javascript'><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
 		. unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
-		. " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script> "
+		. " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script>\n"
 		//
 		// sélecteur de langues
 		. "<div style='float:right;width:50%;'>"
-		. "<label for='lang'>"._T('spiplistes:Langue_du_courrier_:')."</label><br />\n"
+		. "<label for='lang'>"._T('spiplistes:Langue_du_courrier_').":</label><br />\n"
 		. "<select name='lang' class='fondo' id='lang'>\n"
 		. liste_options_langues('changer_lang')
 		. "</select>\n"
@@ -140,14 +142,14 @@ function exec_spiplistes_courrier_rediger () {
 		. "<option value=''></option>"
 		. spiplistes_arbo_rubriques(0)
 		. "</select>"
-		. "<br />"
+		. "<br />\n"
 		//
 		// sélecteur des mots-clés
 		. "<label for='ajouter_motcle' style='font-weight:bold;'>"._T('spiplistes:Lister_articles_mot_cle').":</label>"
 		. "<select name='id_mot' id='ajouter_motcle' class='formo'>"
 		. "<option value=''></option>"
 		;
-	$rqt_gmc = spip_query ("SELECT id_groupe, titre FROM spip_groupes_mots WHERE articles='oui'");
+	$rqt_gmc = spip_query ("SELECT id_groupe,titre FROM spip_groupes_mots WHERE articles='oui'");
 	while ($row = spip_fetch_array($rqt_gmc)) {
 		$id_groupe = intval($row['id_groupe']);
 		$titre = $row['titre'];
@@ -160,21 +162,21 @@ function exec_spiplistes_courrier_rediger () {
 		}
 	}
 	$page_result .= ""
-		. "</select><br />"
+		. "</select><br />\n"
 		//
 		// champ du titre (sujet du courrier)
-		. "<strong><label for='sujet'>"._T("Sujet du courrier")."</label></strong> "._T('info_obligatoire_02')
+		. "<label style='font-weight:bold;' for='sujet'>"._T("Sujet du courrier")."</label> "._T('info_obligatoire_02').":"
 		. "<br />"
-		. "<input type='text' name='sujet' id='sujet' CLASS='formo' value='' size='40'$js_titre /><br />\n"
-		. "<strong><label for='message'>"._T("Introduction &agrave; votre courrier, avant le contenu issu du site")."</label></strong>"
+		. "<input type='text' name='sujet' id='sujet' class='formo' value='' size='40'$js_titre /><br />\n"
+		. "<label style='font-weight:bold;' for='message'>"._T("Introduction &agrave; votre courrier, avant le contenu issu du site")."</label>"
 		. "<br />"
 		. afficher_barre('document.template.message')
 		. "<textarea id='text_area' name='message' ".$GLOBALS['browser_caret']." class='formo' rows='5' cols='40' wrap=soft>"
 		. ""
 		. "</textarea>\n"
 		. "<p class='verdana2' style='text-align:right;'>"
-		. "<input type='submit' name='Valider' value='"._T('Apercu')."' class='fondo' /></div>\n"
-		. "</form>"
+		. "<input type='submit' name='Valider' value='"._T('spiplistes:Apercu')."' class='fondo' /></div>\n"
+		. "</form>\n"
 		. "</div>\n"
 		. fin_cadre_formulaire(true)
 		// 

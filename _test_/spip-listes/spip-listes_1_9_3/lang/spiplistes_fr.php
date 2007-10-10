@@ -66,6 +66,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'A_partir_de' => "&Agrave; partir de",
 'aucun' => "aucun",
 'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran",
+'Apercu' => "Aper&ccedil;u",
 
 //B
 
@@ -115,6 +116,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
    dans le casier &agrave; courriers. L'annulation est impossible ici.",
 'Conseil_sauvegarder_listes' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
    des listes. L'annulation est impossible ici.",
+'Choisir_un_patron' => "Choisir un patron ",
 
 //D
 '_de_' => " de ",
@@ -211,7 +213,7 @@ et de recevoir les lettres d\'informations.',
 
 //L
 'langue' => '<strong>Langue :</strong>&nbsp;',
-'Langue_du_courrier_:' => "Langue du courrier :",
+'Langue_du_courrier_' => "Langue du courrier ",
 'lire' => 'Lire',
 'Listes_de_diffusion' => 'Listes de diffusion',
 'log' => 'Logs',
