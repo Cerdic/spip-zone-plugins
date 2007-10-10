@@ -54,7 +54,9 @@ function exec_spiplistes_courrier_rediger () {
 			$statut = $row["statut"];
 			$id_auteur = $row["id_auteur"];
 		}
-		else $id_courrier = false;
+		else {
+			$id_courrier = false;
+		}
 	}
 
 	if(!$id_courrier) {

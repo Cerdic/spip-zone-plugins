@@ -251,7 +251,7 @@ function exec_spiplistes_courrier_gerer () {
 				icone (
 					_T('spiplistes:Modifier_ce_courrier') // légende bouton
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'id_courrier='.$id_courrier) // lien
-					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_mail.gif" // image du fond
+					, spiplistes_items_get_item('icon', $statut) // image du fond
 					, "edit.gif" // image de la fonction. Ici, le crayon
 					, '' // alignement
 					, false // pas echo, demande retour

@@ -46,7 +46,8 @@ function exec_spiplistes_courrier_edit(){
 	$id_courrier = intval(_request('id_courrier'));
 
 	if($id_courrier > 0) {
-		// Edition /modification d'un courrier
+	///////////////////////////
+	// Edition /modification d'un courrier
 		$sql_select = "titre,texte,type,statut,id_auteur";
 		$result = spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1");
 		if ($row = spip_fetch_array($result)) {
@@ -56,27 +57,46 @@ function exec_spiplistes_courrier_edit(){
 			$titre = entites_html($titre);
 			$texte = entites_html($texte);
 		}
-	}
-	else {
-		// si pas de ID courrier, c'est une création
-		$statut = _SPIPLISTES_STATUT_REDAC; 
-		$type = 'nl';
-		$new = 'oui';
-		$titre = _T('spiplistes:Nouveau_courrier');
+		else {
+			$id_courrier = false;
+		}
 	}
 
+	// l'édition du courrier est réservée aux super-admins 
+	// ou au créateur du courrier
+	$flag_editable = (($connect_statut == "0minirezo") && ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur)));
+
+	if($flag_editable) {
+		if(!$id_courrier) {
+		///////////////////////////
+		// si pas de ID courrier, c'est une création
+			$statut = _SPIPLISTES_STATUT_REDAC; 
+			$type = 'nl';
+			$new = 'oui';
+			$titre = _T('spiplistes:Nouveau_courrier');
+		}
+	
+		$gros_bouton_retour =
+			($id_courrier)
+			? icone(
+				_T('spiplistes:retour_link')
+				, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER, "id_courrier=$id_courrier")
+				, spiplistes_items_get_item('icon', $statut)
+				, "rien.gif"
+				, ""
+				, false
+				)
+			: ""
+			;
+	}
+	
 //////////
 // PAGE CONTENU
 //////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
-	// l'édition du courrier est réservée aux super-admins 
-	// ou à l'admin créateur du courrier
-	if(!(
-		($connect_statut == "0minirezo")
-		&& ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur))
-		)) {
+	if(!flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
@@ -93,10 +113,22 @@ function exec_spiplistes_courrier_edit(){
 	$page_result .= ""
 		. debut_cadre_formulaire('', true)
 		. "<a name='haut_block' id='haut_block'></a>"
-		. "<p>".($id_courrier ? _T('spiplistes:Modifier_un_courrier_:') : _T('spiplistes:Creer_un_courrier_:') )."<br />\n"
-		. "<span style='font-size:150%;font-weight:bold;color:gray;'>$titre</span></p>\n"
-		. "<hr />\n"
-		. "<span style='font-size:80%;font-weight:bold;color:gray;'>"._T('spiplistes:alerte_edit')."</span><br />\n"
+		// 
+		// bloc titre
+		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
+		. "<tr width='100%'>"
+		. "<td>"
+		. $gros_bouton_retour
+		. "</td>"
+		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
+		. "<td width='100%'>"
+		. ($id_courrier ? _T('spiplistes:Modifier_un_courrier_:') : _T('spiplistes:Creer_un_courrier_:') )."<br />\n"
+		. gros_titre($titre, '', false)
+		. "</td>"
+		. "</tr></table>"
+		. "<hr />"
+		//
+		. "<p>"._T('spiplistes:alerte_edit')."</p>\n"
 		. "<br />\n"
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
 	   . "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_REDAC,"id_message=$id_courrier")."'>"._T('spiplistes:Generer')."</a>"
