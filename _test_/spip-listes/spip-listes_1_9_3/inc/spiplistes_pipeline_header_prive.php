@@ -17,20 +17,29 @@ function spiplistes_header_prive($flux) {
 
 	$exec = _request('exec');
 
-	switch($exec) {
-		case _SPIPLISTES_EXEC_COURRIER_REDAC:
-			$flux .="\n\n<!-- PLUGIN SPIPLISTES -->\n";
-			$flux .= "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_SPIPLISTES . "javascript/spiplistes_jQuery.js\"></script>\n";
-			if ($exec=="sl_courrier_rediger") {
-		//		. "<!-- ".__plugin_get_real_prefix(true)." v.: ".__plugin_meta_version(__plugin_get_real_prefix(true))." -->\n"
-			/*
-			$flux .= "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_SPIPLISTES . "js/datePicker.js\"></script>\n";
-			$flux .= "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_SPIPLISTES . "js/datePicker_myScripts.js\"></script>\n";
-			$flux .= "<link rel=\"stylesheet\" href=\"" ._DIR_PLUGIN_SPIPLISTES . "css/datePicker.css\" type=\"text/css\" />\n";
-			*/
-			}
-			$flux .="<!-- / PLUGIN SPIPLISTES -->\n\n";
-			break;
+	if(in_array($exec, array(
+		_SPIPLISTES_EXEC_COURRIER_EDIT
+		, _SPIPLISTES_EXEC_COURRIER_REDAC
+		)
+		)
+	) {
+		
+		$flux .="\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_get_real_version()." -->\n";
+
+		switch($exec) {
+			case _SPIPLISTES_EXEC_COURRIER_EDIT:
+			case _SPIPLISTES_EXEC_COURRIER_REDAC:
+				$flux .= ""
+					. "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_SPIPLISTES . "javascript/spiplistes_jQuery.js\"></script>\n"
+					. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />\n"
+					. "<script src='".url_absolue(find_in_path('javascript/datepicker.js'))."' type='text/javascript'></script>\n"
+					. "<script src='".url_absolue(find_in_path('javascript/jquery-dom.js'))."' type='text/javascript'></script>\n"
+					;
+				break;
+		}
+
+		$flux .="<!-- / PLUGIN SPIPLISTES -->\n\n";
+
 	}
 	return ($flux);
 }

@@ -117,9 +117,7 @@ function exec_spiplistes_courrier_rediger () {
 		. "<br />\n"
 		//
 		// sélecteur de date
-		. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />\n"
-		. "<script src='".url_absolue(find_in_path('javascript/datepicker.js'))."' type='text/javascript'></script>\n"
-		. "<script src='".url_absolue(find_in_path('javascript/jquery-dom.js'))."' type='text/javascript'></script>\n"
+		// nota: les scripts js sont appelés dans header_prive
 		. "<script type='text/javascript'><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
 		. unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
 		. " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script>\n"
