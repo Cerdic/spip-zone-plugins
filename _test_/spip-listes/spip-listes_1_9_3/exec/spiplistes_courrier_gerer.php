@@ -42,6 +42,7 @@ function exec_spiplistes_courrier_gerer () {
 	include_spip('inc/affichage');
 	include_spip('base/spip-listes');
 	include_spip('inc/spiplistes_destiner_envoi');
+	include_spip('inc/spiplistes_naviguer_paniers');
 
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -373,6 +374,7 @@ function exec_spiplistes_courrier_gerer () {
 
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, false);
+	spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'));
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
 	spiplistes_boite_info_spiplistes();

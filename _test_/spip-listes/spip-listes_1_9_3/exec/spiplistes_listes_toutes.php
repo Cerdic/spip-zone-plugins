@@ -30,6 +30,7 @@ function exec_spiplistes_listes_toutes(){
 	include_spip('inc/affichage');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_lister_courriers_listes');
+	include_spip('inc/spiplistes_naviguer_paniers');
 	
 	global $connect_statut;
 
@@ -47,6 +48,7 @@ function exec_spiplistes_listes_toutes(){
 	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
+	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
 	spiplistes_boite_info_spiplistes();

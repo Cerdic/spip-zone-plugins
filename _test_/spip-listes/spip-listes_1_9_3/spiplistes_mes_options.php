@@ -45,6 +45,18 @@ define("_SPIPLISTES_TRASH_LIST", "poublist");
 
 // statuts des listes tels qu'affichées en liste 
 define("_SPIPLISTES_LISTES_STATUTS", _SPIPLISTES_PRIVATE_LIST.";"._SPIPLISTES_PUBLIC_LIST.";"._SPIPLISTES_TRASH_LIST);
+// statuts des courriers tels qu'affichés en liste 
+define("_SPIPLISTES_COURRIERS_STATUTS"
+	,	_SPIPLISTES_STATUT_REDAC
+	. ";" . _SPIPLISTES_STATUT_READY
+	. ";" . _SPIPLISTES_STATUT_ENCOURS
+	. ";" . _SPIPLISTES_STATUT_AUTO
+	. ";" . _SPIPLISTES_STATUT_PUBLIE
+	. ";" . _SPIPLISTES_STATUT_VIDE
+	. ";" . _SPIPLISTES_STATUT_IGNORE
+	. ";" . _SPIPLISTES_STATUT_STOPE
+	. ";" . _SPIPLISTES_STATUT_ERREUR
+	);
 
 // charsets:
 // charsets autorisés :

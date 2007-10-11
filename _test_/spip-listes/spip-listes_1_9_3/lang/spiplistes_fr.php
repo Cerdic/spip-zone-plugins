@@ -68,6 +68,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran",
 'Apercu' => "Aper&ccedil;u",
 'Generer_Apercu' => "G&eacute;n&eacute;rer et Aper&ccedil;u",
+'Aller_au_panier' => "Aller au panier ",
+'Aller_aux_listes' => "Aller aux listes ",
 
 //B
 

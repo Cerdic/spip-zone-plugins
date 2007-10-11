@@ -454,4 +454,14 @@ function __table_items_get ($table, $keys, $where='', $limit='') {
 	return ($result);
 }
 
+if(!function_exists("array_fill_keys")) {
+	function array_fill_keys($array, $fill) {
+		$result = array();
+		foreach($array as $key) {
+				$result[$key] = $fill;
+		}
+		return ($result);
+	}
+} 
+
 ?>

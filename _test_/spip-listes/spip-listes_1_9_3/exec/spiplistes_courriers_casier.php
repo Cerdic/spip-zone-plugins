@@ -131,6 +131,7 @@ function exec_spiplistes_courriers_casier () {
 	include_spip ('inc/documents');
 	
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_naviguer_paniers');
 
 	spiplistes_log("spiplistes_afficher_pile_messages() <<", LOG_DEBUG); 	
 
@@ -196,6 +197,7 @@ function exec_spiplistes_courriers_casier () {
 	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
+	spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'));
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
 	spiplistes_boite_info_spiplistes();

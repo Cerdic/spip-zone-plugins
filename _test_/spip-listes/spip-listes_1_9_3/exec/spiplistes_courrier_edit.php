@@ -35,6 +35,7 @@ function exec_spiplistes_courrier_edit(){
 	include_spip('inc/affichage');
 	include_spip('inc/spiplistes_api');
 	include_spip('public/assembler');
+	include_spip('inc/spiplistes_naviguer_paniers');
 
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -109,6 +110,7 @@ function exec_spiplistes_courrier_edit(){
 
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_:'), $id_courrier, false);
+	spiplistes_naviguer_paniers_courriers(_T('spiplistes:Aller_au_panier'));
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_info_spiplistes();
 	creer_colonne_droite();

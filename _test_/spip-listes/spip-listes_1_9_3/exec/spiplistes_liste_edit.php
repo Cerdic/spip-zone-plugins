@@ -30,6 +30,7 @@ function exec_spiplistes_liste_edit(){
 	include_spip('inc/barre');
 	include_spip('inc/affichage');
 	include_spip('base/spip-listes');
+	include_spip('inc/spiplistes_naviguer_paniers');
 	
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -112,6 +113,7 @@ function exec_spiplistes_liste_edit(){
 
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, false);
+	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_info_spiplistes();
 	creer_colonne_droite();

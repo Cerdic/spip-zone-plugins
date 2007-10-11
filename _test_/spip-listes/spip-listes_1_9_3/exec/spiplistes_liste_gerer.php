@@ -40,6 +40,7 @@ function exec_spiplistes_liste_gerer () {
 	include_spip('inc/affichage');
 	include_spip('base/spip-listes');
 	include_spip('inc/spiplistes_dater_envoi');
+	include_spip('inc/spiplistes_naviguer_paniers');
 	
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -255,6 +256,7 @@ spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:Liste_numero_:'), $id_liste, false);
+	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
 	spiplistes_boite_info_spiplistes();
