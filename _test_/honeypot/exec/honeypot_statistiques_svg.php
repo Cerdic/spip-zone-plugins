@@ -21,8 +21,10 @@ global
   $aff_jours,
   $connect_statut,
   $couleur_claire,
-  $couleur_foncee,
-  $honeypot_cnt_today;
+  $couleur_foncee;
+  
+
+ $honeypot_cnt_today = intval(_request('honeypot_cnt_today'));
  
 
  $filtre = intval(_request('filtre'));
