@@ -156,7 +156,7 @@ function PIMAgenda_affiche_evenements($id_auteur=0){
  	
 	// creation des boites creneaux horaires pour ajout rapide
 	list($ts_start,$ts_fin) = PIMAgenda_date_debut_fin($annee,$mois,$jour,$type);
-	if ($flag_editable)
+	if ($flag_editable && (!defined('PIM_AGENDA_CRENEAUX') OR PIM_AGENDA_CRENEAUX))
 		PIMAgenda_ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,_request('echelle'));
 
 
