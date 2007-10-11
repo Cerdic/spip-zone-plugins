@@ -351,11 +351,12 @@ function exec_spiplistes_courrier_gerer () {
 					. " <li>"._T('spiplistes:erreur_envoi').$nb_emails_echec."</li>"
 					. "</ul>"
 					;
-		}
+		} // end switch()
 		if(!empty($str_statut_courrier)) {
 			$str_statut_courrier = "<div class='verdana2'>".$str_statut_courrier."</div>";
 		}
-
+	} // end if()
+	
 //////////
 // PAGE CONTENU
 //////////
@@ -378,6 +379,7 @@ function exec_spiplistes_courrier_gerer () {
 	debut_droite("messagerie");
 
 		
+	if($id_courrier > 0) {
 	/////////////////////
 	// construction du ventre
 		$page_result = ""

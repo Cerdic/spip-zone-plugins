@@ -160,6 +160,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'erreur_install2' => '<p>V&eacute;rifier les &eacute;tapes d\'installation, notamment si vous avez bien renomm&eacute;<i>mes_options.txt</i> en <i>mes_options.php</i>.</p>',
 'exporter' => 'Exporter la liste d\'abonn&eacute;s',
 'Erreur_liste_vide' => "Erreur: cette liste n'a pas d'abonn&eacute;s.",
+'Erreur_courrier_introuvable' => "Erreur: ce courrier n'existe pas.",
 'Envoi_des_courriers' => "Envoi des courriers",
 'Envoyer_ce_courrier' => "Envoyer ce courrier",
 'Exporter_une_liste_d_abonnes' => "Exporter une liste d'abonn&eacute;s",
