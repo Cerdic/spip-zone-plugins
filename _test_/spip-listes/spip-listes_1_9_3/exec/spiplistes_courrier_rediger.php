@@ -1,5 +1,5 @@
 <?php
-
+// _SPIPLISTES_EXEC_COURRIER_REDAC
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -91,7 +91,11 @@ function exec_spiplistes_courrier_rediger () {
 
 	// Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
 	$page_result = ""
-		. "<!-- Rediger courrier -->\n"
+		. "<a name='haut-block' id='haut-block'></a>"
+		// 
+		// le bloc pour aperçu
+		. "<div id='apercu-courrier' style='clear:both;tex-align:center'></div>"
+		//
 		. debut_cadre_formulaire(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
 		. "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><strong>$le_type</strong></span></p>"
 		. "<p class='verdana2' style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;'>"._T('spiplistes:alerte_edit')."</p>"
@@ -100,14 +104,15 @@ function exec_spiplistes_courrier_rediger () {
 		. "<div class='verdana2' id='envoyer'>\n"
 		//
 		// début formulaire
-		. "<form method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE)."'"
+		// nota: url action est forcé pat javascript
+		. "<form method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE."#haut-block")."'"
 		.		" style='border: 0px; margin: 0px;' id='template' name='template'>"
 		. "<input name='id_courrier' id='id_courrier' type='hidden' value='$id_courrier' />\n"
 		. "<br />\n"
 		//
 		// sélecteur patron
-		. "<strong><label for='template'>"._T('spiplistes:Choisir_un_patron').":</label></strong><br />"
-		. "<select name='template' class='formo'>"
+		. "<strong><label for='patron'>"._T('spiplistes:Choisir_un_patron').":</label></strong><br />"
+		. "<select name='patron' id='patron' class='formo'>"
 		;
 	foreach($liste_patrons as $titre_option) {
 		$page_result .= "<option value='".$titre_option."'>".$titre_option."</option>\n";
@@ -166,7 +171,7 @@ function exec_spiplistes_courrier_rediger () {
 		. "<label style='font-weight:bold;' for='sujet'>"._T("Sujet du courrier")."</label> "._T('info_obligatoire_02').":"
 		. "<br />"
 		. "<input type='text' name='sujet' id='sujet' class='formo' value='' size='40'$js_titre /><br />\n"
-		. "<label style='font-weight:bold;' for='message'>"._T("Introduction &agrave; votre courrier, avant le contenu issu du site")."</label>"
+		. "<label style='font-weight:bold;' for='text_area'>"._T("Introduction &agrave; votre courrier, avant le contenu issu du site")."</label>"
 		. "<br />"
 		. afficher_barre('document.template.message')
 		. "<textarea id='text_area' name='message' ".$GLOBALS['browser_caret']." class='formo' rows='5' cols='40' wrap=soft>"
@@ -177,9 +182,6 @@ function exec_spiplistes_courrier_rediger () {
 		. "</form>\n"
 		. "</div>\n"
 		. fin_cadre_formulaire(true)
-		// 
-		// le bloc pour aperçu
-		. "<div id='apercu-courrier' style='clear:both;tex-align:center'></div>"
 		;
 	
 	echo($page_result);

@@ -37,134 +37,69 @@ include_spip('inc/lang');
 
 function exec_spiplistes_courrier_previsu(){
 
-	$template 		= _request('template');
-	$sujet 			= _request('sujet');
-	$message 		= _request('message');
-	$Confirmer  	= _request('Confirmer');
-	$date 			= _request('date');
-	$id_rubrique	= _request('id_rubrique');
-	$id_mot			= _request('id_mot');
-	$id_courrier 	= _request('id_courrier');
-	$charset 		= lire_meta('charset');
+	foreach(array('patron', 'sujet', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier') as $key) {
+		$$key = _request($key);
+	}
 	
-/*	echo "<pre>";
-	print_r($GLOBALS);
-	echo "</pre>";*/
+	$charset = lire_meta('charset');
+	
 	include_spip('public/assembler');
-	$contexte_template = array('date' => trim ($date),
-							   'id_rubrique' => $id_rubrique,
-							    'id_mot' => $id_mot,
-							   'template'=>$template,
-							   'lang'=>$lang, 
-							   'sujet'=>$sujet,
-							   'message'=>$message );
+	$contexte_template = array(
+		'date' => trim ($date)
+		, 'id_rubrique' => $id_rubrique
+		, 'id_mot' => $id_mot
+		, 'patron' => $patron
+		, 'lang' => $lang
+		, 'sujet' => $sujet
+		, 'message' => $message 
+	);
 	
-	if (find_in_path('patrons/'.$template.'_texte.html')){
+	if (find_in_path('patrons/'.$patron.'_texte.html')){
 		$patron_version_texte = true ;
 		$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_template);
 	}
 	
 
-	
 	// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
 	// sont sous forme privee : spip.php?action=redirect&.... horrible !
 	// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
 	//	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
-	
-	
-	$url = generer_url_public('patron_switch','',true);
-	foreach ($contexte_template as $k=>$v) {
-		$url = parametre_url($url,$k,$v,'&');
-	}
-	
-	// $texte_patron = recuperer_page($url) ;	
+	$titre = $titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
+	$texte = $texte_patron = recuperer_fond('patrons/'.$patron, $contexte_template);
 
-	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
+	$form_action = ($id_courrier) 
+		? generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
+		: generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER)
+		;
 
-	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
-	
-	$titre = $titre_patron;
-	$texte = $texte_patron;
-
-	if($id_courrier > 0) { // ?? la page gerer s'occupe des updates. Pourquoi ici ?
-		if((strlen($texte) > 10)) {
-spiplistes_log("update id_courrier $id_courrier");
-			spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte).", message_texte="._q($message_texte)." WHERE id_courrier="._q($id_courrier));
-		}
-		else {
-			$message_erreur = _T('spiplistes:patron_erreur');
-		}
-	}
-
-	$page_result = ""
-		. "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
-		. "<html lang='$lang' dir='ltr'>"
-		. "<head>"
-		. "<meta http_equiv='Content-Type' content='text/html; charset=".$charset."'>\n"
-		. "<meta http-equiv='Pragma' content='no-cache'>\n
-	</script>\n
-	
-	</head><body>\n"
-	;
-	
-	echo($page_result);
-
-/*
- echo "<div style='text-align:left;border:1px solid #000;background: yellow;color: #000;margin-bottom: 10px;padding:10px;'>";  
-  echo "<p><strong>$patron</strong><p>\n";
-  if($patron_version_texte) echo _T('spiplistes:patron_detecte');
-  echo _T('spiplistes:date_ref').": $date<br />";
-  
-  echo menu_langues('changer_lang', $lang , '<strong>Langue :</strong>&nbsp;','', generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_PATRON,'id_message='.$id_courrier.'&patron='.$patron.'&date='.$date ) );
-	echo "</div>";
-*/
-
-
-		// si confirmation
-	
-	
-	echo "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_message=$id_courrier")."' method='post' name='choppe_patron-1'>";
-	echo "<input type='hidden' name='modifier_message' value=\"oui\" />";
-	echo "<input type='hidden' name='id_message' value=\"$id_message\" />";
-	if(!intval($id_courrier))
-		echo "<input type='hidden' name='new' value=\"oui\" />";
-		
-		echo "<input type=\"hidden\" name=\"titre\" value=\"".$sujet."\">";
-		echo "<input type=\"hidden\" name=\"texte\" value=\"".htmlspecialchars($texte)."\">";
-		echo "<input type=\"hidden\" name=\"date\" value=\"".$date."\">";
-
-		echo "<div style='background-color:white;margin-top:5px;width:600px;margin:auto'>" ;
-		
-		echo liens_absolus($texte).$message_erreur."";
-		
-	
-	//echo spiplistes_propre($texte_patron).$message_erreur;
-	
 	$contexte_pied = array('lang'=>$lang);
 	$texte_pied = recuperer_fond('modeles/piedmail', $contexte_pied);
 
-	echo $texte_pied;
-		
-		echo "</div><br/><br/>";
+	$page_result = ""
+		// boite courrier au format html
+		. debut_cadre_couleur('', true)
+		. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>"
+		. _T('spiplistes:version_html')
+		. "<input type='hidden' name='modifier_message' value='oui' />"
+		.	(
+				(intval($id_courrier))
+				?	""
+				:	"<input type='hidden' name='new' value='oui' />"
+			)
+		. "<input type='hidden' name='titre' value=\"".htmlspecialchars($sujet)."\">"
+		. "<input type='hidden' name='texte' value=\"".htmlspecialchars($texte)."\">"
+		. "<input type='hidden' name='date' value='$date'>"
+		. "<div style='background-color:#fff;border:1px solid #000;overflow:scroll;'>"
+		. liens_absolus($texte)
+		. $message_erreur
+		. $texte_pied
+		. "</div>"
+		. "<p style='text-align:right;'><input type='submit' name='btn_valider_courrier' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
+		. "</form>"
+		. fin_cadre_couleur(true)
 
-		debut_cadre_formulaire();
-		/*
-		echo "Envoyer ce courrier &agrave; cette liste de diffusion :<br />";
-		$result = spip_query("SELECT email, titre FROM spip_abomailmans");
-			echo "<select name='email_liste' class='formo'>";
-			while ($row = spip_fetch_array($result)) {
-				echo "<option value='".$row['email']."'>".$row['titre']." -> ".$row['email']."</option>\n";
-			}
-			echo "</select>";
-		*/
-		echo "<div id='cacher_confirmer'><br /><input name=\"Valider\" type=\"submit\" value=\""._T("Confirmer")."\" id=\"Confirmer\"></div>";
-		echo "</form>";
-		fin_cadre_formulaire();
-
-	
-
-	echo "</body></html>";
-	unset ($_POST);
+		;
+	echo($page_result);
 
 }	
 

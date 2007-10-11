@@ -534,6 +534,7 @@ function spiplistes_liste_des_patrons ($chemin) {
 			$result[] = basename($value, ".html");
 		}
 	}
+	sort($result);
 	return($result);
 }
 

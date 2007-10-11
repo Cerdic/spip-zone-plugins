@@ -28,7 +28,7 @@
 	
 	#MESSAGE
 	
-	<h2>Articles du mot-clé ID##ENV{id_mot}</h2>
+	<h2>Articles du mot-clé ID##ID_MOT</h2>
 	
 	 <B_articles>
 	 <h2 class="titre" style="background: #eee;border: 1px solid #ccc;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;"><:info_articles:></h2> 
@@ -44,6 +44,5 @@
 
 [
 (#DATE_MODIF_SITE|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})
-	</div>
+]	</div>
   </div>
-]
