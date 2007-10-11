@@ -179,7 +179,7 @@ function exec_spiplistes_courrier_rediger () {
 		. fin_cadre_formulaire(true)
 		// 
 		// le bloc pour aperçu
-		. "<div id='apercu' style='clear:both;tex-align:center'></div>"
+		. "<div id='apercu-c' style='clear:both;tex-align:center'></div>"
 		;
 	
 	echo($page_result);
