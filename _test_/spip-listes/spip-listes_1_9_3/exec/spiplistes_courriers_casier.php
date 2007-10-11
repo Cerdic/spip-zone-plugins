@@ -40,9 +40,10 @@ function spiplistes_afficher_pile_messages() {
 			spiplistes_install('install');
 	}
 	
-	$list = spip_query ("SELECT id_liste,titre,date,maj,periode,patron FROM spip_listes WHERE message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
-	$message_pile = spip_num_rows($list);
-	if ($message_pile == 0) {
+	$sql_select = "id_liste,titre,date,maj,periode,patron,statut";
+	$list = spip_query ("SELECT $sql_select FROM spip_listes WHERE message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
+
+	if (spip_num_rows($list) == 0) {
 		return (false); 
 	}
 	
@@ -72,10 +73,11 @@ function spiplistes_afficher_pile_messages() {
 		;
 
 	while($row = spip_fetch_array($list)) {
-		$id_liste = $row['id_liste'] ;
-		$titre = $row['titre'] ;
-		
-		$proch = round((strtotime($row['date']) - time()) / _SPIPLISTES_TIME_1_DAY);
+		foreach(explode(",", $sql_select) as $key) {
+			$$key = $row[$key];
+		}
+	
+		$proch = round((strtotime($date) - time()) / _SPIPLISTES_TIME_1_DAY);
 	
 		if($i == 0){
 			$out .= "<tr style='padding:5px'>" ;
@@ -86,13 +88,18 @@ function spiplistes_afficher_pile_messages() {
 			$i = 0 ;
 		} // end else
 	
-		$date_dernier = strtotime($row['maj']) ;
-		$date_dernier = date(_T('spiplistes:format_date'),$date_dernier) ;
+		$date_dernier = date(_T('spiplistes:format_date'), strtotime($maj)) ;
+
+		$periodicite = 
+			($statut = _SPIPLISTES_MONTHLY_LIST)
+			? _T('spiplistes:Liste_mensuelle')
+			: _T('spiplistes:Tous_les')." $periode "._T('spiplistes:jours')
+			;
 
 		$out .= ""
-			. "<td><a href='".generer_url_public('patron_switch',"patron=".$row['patron']."&date=".$date_dernier)."'> ".$row['patron']."</a>"
-			. "<br />"._T('spiplistes:Tous_les')." ".$row['periode']." "._T('spiplistes:jours')."</td>"
-			. "<td><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>$titre</a><br />"
+			. "<td><a href='" . generer_url_public('patron_switch',"patron=$patron&date=$date_dernier")."'>$patron</a>"
+			. "<br />$periodicite</td>"
+			. "<td><a href='" . generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste") . "'>$titre</a><br />"
 			. "</td>"
 			. "<td>"
 			.	(

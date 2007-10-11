@@ -422,6 +422,7 @@ et de recevoir les lettres d\'informations.',
 'listes_poubelle' => 'Vos listes de diffusion &agrave; la poubelle',
 'lock' => 'Lock actif : ',
 'Liste_numero_:' => 'Liste num&eacute;ro :',
+'Liste_mensuelle' => "Liste mensuelle",
 'Listes_diffusion_mensuelle' => "Listes publiques mensuelles",
 'Listes_diffusion_mensuelle_desc' => "L'abonnement &agrave; ces listes &agrave; p&eacute;riodicit&eacute; mensuelle 
 	est propos&eacute; sur le site public.",
