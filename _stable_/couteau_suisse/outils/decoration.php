@@ -8,14 +8,14 @@
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function decoration_installe() {
 cs_log("decoration_installe()");
-	// on decode les balises entrees par le webmaster
+	// on decode les balises entrees dans la config
 	$balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
 	$aide = $chevrons1 = $chevrons2 = $styles = $fins = $alias = array();
 	foreach ($balises as $balise) {
-		if (preg_match('/(span|div)\.([^.]+)\.class\s*=(.+)$/', $balise, $regs)) {
-			list($div, $racc, $class) = array($regs[1], trim($regs[2]), trim($regs[3]));
+		if (preg_match('/(span|div)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
+			list($div, $racc, $class) = array($regs[1], trim($regs[2]), trim($regs[4]));
 			$aide[] = $racc; $chevrons1[] = "<$racc>"; $chevrons2[] = "</$racc>";
-			$styles[] = "<$regs[1] class=\"$class\">"; $fins[] = "</$regs[1]>";
+			$styles[] = "<$regs[1] $regs[3]=\"$class\">"; $fins[] = "</$regs[1]>";
 		} elseif (preg_match('/(span|div)\.([^=]+)=(.+)$/', $balise, $regs)) {
 			list($div, $racc, $style) = array($regs[1], trim($regs[2]), trim($regs[3]));
 			$aide[] = $racc; $chevrons1[] = "<$racc>"; $chevrons2[] = "</$racc>";
