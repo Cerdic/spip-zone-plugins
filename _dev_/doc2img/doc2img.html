@@ -1,8 +1,13 @@
 #CACHE{0}
 <B_d2c>
-    #PAGINATION
-<BOUCLE_d2c(DOC2IMG)  {pagination} >
+    #ANCRE_PAGINATION
+<BOUCLE_d2c(DOC2IMG)  {pagination 1} >
     <img src="#FICHIER" />
 </BOUCLE_d2c>
+    Ce document posséde #GRAND_TOTAL page(s)
+    <br/>
+    #PAGINATION{precedent_suivant}
+    #PAGINATION
+</B_d2c>
     table vide
 <//B_d2c>
