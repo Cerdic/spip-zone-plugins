@@ -23,8 +23,11 @@ global
   $couleur_claire,
   $couleur_foncee,
   $honeypot_cnt_today;
+ 
 
  $filtre = intval(_request('filtre'));
+ $type = intval(_request('type'));
+ $aff_jours = intval($aff_jours);
 
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
@@ -72,26 +75,25 @@ if ($connect_statut != '0minirezo') {
 
 	if (!($aff_jours = intval($aff_jours))) $aff_jours = 105;
 
+	$table = "spip_honeypot_stats";
 	if($filtre) {
-	  $table = "spip_honeypot_stats";
 	  $where = "filtre=$filtre"; 
 	} else {
-	  $table = "spip_honeypot_stats";
 	  $where = "0=0"; 
 	}
 	
-	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table WHERE $where ORDER BY date LIMIT 1");
+	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table WHERE $where AND type=$type ORDER BY date LIMIT 1");
 
 	while ($row = spip_fetch_array($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
-	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, cnt FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
+	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(cnt) as sum FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) GROUP BY date ORDER BY date");
 
 
 	while ($row = spip_fetch_array($result)) {
 		$date = $row['date_unix'];
-		$honeypot_cnt = $row['cnt'];
+		$honeypot_cnt = $row['sum'];
 
 		$log[$date] = $honeypot_cnt;
 		if ($i == 0) $date_debut = $date;
@@ -219,7 +221,7 @@ if ($connect_statut != '0minirezo') {
 
 
 
-			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='$hauteur' style='fill:$fill'/>\n";	
+			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='".($largeur)."' height='$hauteur' style='fill:$fill'/>\n";
 			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='1' style='fill:$couleur_foncee;'/>\n";	
 
 			if (date("d", $key) == "1") 
