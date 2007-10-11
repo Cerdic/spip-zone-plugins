@@ -129,14 +129,17 @@ function exec_honeypot_statistiques_dist() {
 	  $date_premier = $row['date_unix'];
 	}
 
-	$result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, cnt FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
+	if($filtre)
+	  $result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, cnt as total FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
+	else
+	  $result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(cnt) as total FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) GROUP BY date ORDER BY date");
 
 	$date_debut = '';
 	$log = array();
 	while ($row = spip_fetch_array($result)) {
 	  $date = $row['date_unix'];
 	  if (!$date_debut) $date_debut = $date;
-	  $log[$date] = $row['cnt'];
+	  $log[$date] = $row['total'];
 	}
 
 
