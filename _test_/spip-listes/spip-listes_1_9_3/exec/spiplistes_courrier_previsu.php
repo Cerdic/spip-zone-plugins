@@ -35,72 +35,129 @@ include_spip('inc/lang');
 // MaZiaR - NetAktiv
 // tech@netaktiv.com
 
+/*
+	Affiche prévisu d'un courrier
+	- en plein écran si demandé
+	- sinon pour import iframe
+	- format html ou texte seul, si demandé
+	
+	Utilisé par courrier_gerer et courrier_edit
+	
+	CP-20071011
+*/
+
 function exec_spiplistes_courrier_previsu(){
 
-	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier') as $key) {
+	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier'
+		, 'lire_base', 'format', 'plein_ecran') as $key) {
 		$$key = _request($key);
 	}
 	$id_courrier = intval($id_courrier);
 	$charset = lire_meta('charset');
 	
-	include_spip('public/assembler');
-	$contexte_template = array(
-		'date' => trim ($date)
-		, 'id_rubrique' => $id_rubrique
-		, 'id_mot' => $id_mot
-		, 'patron' => $patron
-		, 'lang' => $lang
-		, 'sujet' => $titre
-		, 'message' => $message 
-	);
-	
-	if (find_in_path('patrons/'.$patron.'_texte.html')){
-		$patron_version_texte = true ;
-		$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_template);
+	if($lire_base) {
+		// prendre le courrier enregistré dans la base
+		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
+		if($id_courrier && ($row=spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier")))) {
+			foreach(explode(",", $sql_select) as $key) {
+				$$key = $row[$key];
+			}
+			$courrier = $row[$sql_select];
+			if($plein_ecran) {
+				if($format=="texte") {
+				
+					header("Content-Type: text/plain charset=$charset");
+					
+					// forcer IE à afficher en ligne. 
+					header("Content-Disposition: inline; filename=spiplistes-previsu.txt");
+
+					$message_texte = empty($message_texte) ? version_texte($texte) : $message_texte;
+					echo($message_texte);
+				}
+				else {
+					$texte = ""
+						. "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Strict//EN\">\n"
+						. (($lang) ? "<html lang='$lang' dir='ltr'>\n" : "")
+						. "<head>\n"
+						. "<meta http-equiv='Content-Type' content='text/html; charset=".$charset."'>\n"
+						. "<meta http-equiv='Pragma' content='no-cache'>\n"
+						. "<title>$titre</title>\n"
+						. "</head>\n"
+						. "<body style='text-align:center;'>\n"
+						. "<div style='margin:0 auto;'>\n"
+						. $texte
+						. "</div>\n"
+						. "</body>\n"
+						. "</html>\n";
+					ajax_retour($texte);
+				}
+			}
+			echo($courrier);
+		}
+		else {
+			echo(_T('spiplistes:Erreur_courrier_introuvable'));
+		}
 	}
+	else {
+		// générer le contenu (éditeur)
+		include_spip('public/assembler');
+		$contexte_template = array(
+			'date' => trim ($date)
+			, 'id_rubrique' => $id_rubrique
+			, 'id_mot' => $id_mot
+			, 'patron' => $patron
+			, 'lang' => $lang
+			, 'sujet' => $titre
+			, 'message' => $message 
+		);
+		
+		if (find_in_path('patrons/'.$patron.'_texte.html')){
+			$patron_version_texte = true ;
+			$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_template);
+		}
+		
+
+		// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
+		// sont sous forme privee : spip.php?action=redirect&.... horrible !
+		// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
+		//	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
+		$titre = $titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
+		$texte = $texte_patron = recuperer_fond('patrons/'.$patron, $contexte_template);
 	
-
-	// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
-	// sont sous forme privee : spip.php?action=redirect&.... horrible !
-	// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
-	//	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
-	$titre = $titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
-	$texte = $texte_patron = recuperer_fond('patrons/'.$patron, $contexte_template);
-
-	$form_action = ($id_courrier) 
-		? generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
-		: generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER)
-		;
-
-	$contexte_pied = array('lang'=>$lang);
-	$texte_pied = recuperer_fond('modeles/piedmail', $contexte_pied);
-
-	$page_result = ""
-		// boite courrier au format html
-		. debut_cadre_couleur('', true)
-		. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>\n"
-		. _T('spiplistes:version_html')
-		. "<input type='hidden' name='modifier_message' value='oui' />\n"
-		.	(
-				($id_courrier)
-				?	"<input type='hidden' name='id_courrier' value='$id_courrier' />\n"
-				:	"<input type='hidden' name='new' value='oui' />\n"
-			)
-		. "<input type='hidden' name='titre' value=\"".htmlspecialchars($titre)."\">\n"
-		. "<input type='hidden' name='texte' value=\"".htmlspecialchars($texte)."\">\n"
-		. "<input type='hidden' name='date' value='$date'>\n"
-		. "<div style='background-color:#fff;border:1px solid #000;overflow:scroll;'>\n"
-		. liens_absolus($texte)
-		. $message_erreur
-		. $texte_pied
-		. "</div>\n"
-		. "<p style='text-align:right;margin-bottom:0;'><input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
-		. "</form>\n"
-		. fin_cadre_couleur(true)
-		. "<br />\n"
-		;
-	echo($page_result);
-
+		$form_action = ($id_courrier) 
+			? generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
+			: generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER)
+			;
+	
+		$contexte_pied = array('lang'=>$lang);
+		$texte_pied = recuperer_fond('modeles/piedmail', $contexte_pied);
+	
+		$page_result = ""
+			// boite courrier au format html
+			. debut_cadre_couleur('', true)
+			. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>\n"
+			. _T('spiplistes:version_html')
+			. "<input type='hidden' name='modifier_message' value='oui' />\n"
+			.	(
+					($id_courrier)
+					?	"<input type='hidden' name='id_courrier' value='$id_courrier' />\n"
+					:	"<input type='hidden' name='new' value='oui' />\n"
+				)
+			. "<input type='hidden' name='titre' value=\"".htmlspecialchars($titre)."\">\n"
+			. "<input type='hidden' name='texte' value=\"".htmlspecialchars($texte)."\">\n"
+			. "<input type='hidden' name='date' value='$date'>\n"
+			. "<div style='background-color:#fff;border:1px solid #000;overflow:scroll;'>\n"
+			. liens_absolus($texte)
+			. $message_erreur
+			. $texte_pied
+			. "</div>\n"
+			. "<p style='text-align:right;margin-bottom:0;'><input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
+			. "</form>\n"
+			. fin_cadre_couleur(true)
+			. "<br />\n"
+			;
+		echo($page_result);
+	}
 }	
 
 /******************************************************************************************/
