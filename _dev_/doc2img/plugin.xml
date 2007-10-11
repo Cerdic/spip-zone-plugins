@@ -1,0 +1,38 @@
+<plugin>
+    <!-- Nom du plugin -->
+    <nom>doc2img</nom>
+
+    <!-- Auteur du plugin -->
+    <auteur>Camille Lafitte</auteur>
+    <version>0.2</version>
+    <etat>dev</etat>
+    <icon></icon>
+    <description> Ce plugin permet de convertir à la volée des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle .</description>
+    <!-- URI de documentation -->
+    <lien>spip-contrib</lien>
+
+    <!-- pr‚cise le prefixe utilis+ pour toutes les fonctions du plugin, en g+n+ral le nom du plugin -->
+    <prefix>doc2img</prefix>
+
+    <!-- Chemin du fichier d'installation et de mise à jour -->
+    <install>base/doc2img_install.php</install>
+
+   <!-- pr‚cise les d‚pendances vis-…-vis de d'autres plugins -->
+   <necessite id="cfg" version="[1.0.4;]" />
+
+    <!-- mes options -->
+    <options>doc2img_options.php</options>
+
+    <!-- appelle les pipelines -->
+    <pipeline>
+       <!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
+       <nom>affiche_gauche</nom>
+       <!-- nom de la fonction a appelé sans son prefixe -->
+       <action>affiche_gauche</action>
+       <!-- chemin du fichier contenant la fonction -->
+       <inclure>pipeline.php</inclure>
+   </pipeline>    
+
+   <chemin dir='' />
+
+</plugin>

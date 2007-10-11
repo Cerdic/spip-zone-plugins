@@ -1,0 +1,14 @@
+#CACHE{0}
+
+<B_doc2img>
+    <form method=post action='?exec=doc2img_convert'>
+    <select name="id_document">
+<BOUCLE_doc2img(DOCUMENTS) {id_article}>
+    <option value=#ID_DOCUMENT>#ID_DOCUMENT</option>
+</BOUCLE_doc2img>
+    </select>
+    <input type="submit" class="fondo" value="Convertir"/>
+    </form>
+</B_doc2img>
+    Desolé aucun document pour cet article
+<//B_doc2img>

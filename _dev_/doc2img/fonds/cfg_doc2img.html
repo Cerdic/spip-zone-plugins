@@ -1,0 +1,44 @@
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+[(#REM) descriptif= Configuration de doc2img]
+
+[(#REM) titre=Gestion doc2img]
+
+<fieldset><legend>Les formats</legend>
+	   <p>
+	        On indique : 
+            <ul>
+                <li>les extensions des documents à modifier, </li>
+                <li> et le format de sortie par dÚfaut</li>
+            </ul>
+	   </p>
+		<p>
+			<label>nature des documents (séparateur ,) :</label>
+			<input type="text" name="format_document" id="format_document" value="#ENV{format_source}"/>
+		</p>
+		<p>
+			<label>le format de sortie par défaut :</label>
+			<B_typedoc>
+			<select name="format_cible">
+			<BOUCLE_typedoc(TYPES_DOCUMENTS) {mime_type==^image}>
+                <option value="#ID_TYPE">#TITRE</option>
+            </BOUCLE_typedoc>
+            </select>
+            </B_typedoc>
+		</p>
+</fieldset>
+<fieldset><legend>Le repertoire cible</legend>
+		<p>
+			<label>le format de sortie par défaut :</label>
+			<input type="text" name="repertoire_cible" id="repertoire_cible" value="#ENV{repertoire_cible}"/>
+		</p>
+   </div>
+</fieldset>
+
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+
+</form>
