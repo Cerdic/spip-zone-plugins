@@ -39,13 +39,13 @@ function cron_spiplistes_cron ($last_time) {
 		
 	$current_time = time();
 
-	$sql_select = "id_liste,titre,titre_message,date,message_auto,periode,lang,patron";
+	$sql_select = "id_liste,titre,titre_message,date,message_auto,periode,lang,patron,statut";
 
 	// demande les listes auto valides
 	$sql_query = "SELECT $sql_select FROM spip_listes 
 		WHERE message_auto='oui'
 			AND (date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE).") 
-			AND (statut='"._SPIPLISTES_PUBLIC_LIST."' OR statut='"._SPIPLISTES_PRIVATE_LIST."')
+			AND (statut='"._SPIPLISTES_PUBLIC_LIST."' OR statut='"._SPIPLISTES_PRIVATE_LIST."' OR statut='"._SPIPLISTES_MONTHLY_LIST."')
 			AND (date BETWEEN 0 AND NOW())"
 		;
 		
@@ -56,7 +56,7 @@ spiplistes_log("CRON: nb listes ok:".spip_num_rows($listes_privees_et_publiques)
 
 	while($row = spip_fetch_array($listes_privees_et_publiques)) {
 	
-spiplistes_log("CRON: job id_liste: ".$row['id_liste'], LOG_DEBUG);
+//spiplistes_log("CRON: job id_liste: ".$row['id_liste'], LOG_DEBUG);
 		// initalise les variables
 		foreach(explode(",", $sql_select) as $key) {
 			$$key = $row[$key];
@@ -67,12 +67,17 @@ spiplistes_log("CRON: job id_liste: ".$row['id_liste'], LOG_DEBUG);
 		// demande id_auteur de la liste pour la signer
 		$id_auteur = spiplistes_mod_listes_get_id_auteur($id_liste);
 		
-spiplistes_log("CRON: la liste $id_liste demande un envoi", LOG_DEBUG);
-spiplistes_log("CRON: lang == $lang", LOG_DEBUG);
+//spiplistes_log("CRON: la liste $id_liste demande un envoi", LOG_DEBUG);
+//spiplistes_log("CRON: lang == $lang", LOG_DEBUG);
 
 		/////////////////////////////
 		// Tampon date d'envoi (dans maj)
-		if($periode) {
+		$sql_set = "";
+		if($statut == _SPIPLISTES_MONTHLY_LIST) {
+			$next_time = mktime(0, 0, 0, date("m")+1, 1, date("Y"));
+			$sql_set = "date='" . __mysql_date_time($next_time) . "',maj=NOW()";
+		}
+		else if($periode) {
 			$next_time = strtotime($date) + (_SPIPLISTES_TIME_1_DAY * $periode);
 			$sql_set = "date='" . __mysql_date_time($next_time) . "',maj=NOW()";
 		}
@@ -81,7 +86,10 @@ spiplistes_log("CRON: lang == $lang", LOG_DEBUG);
 		// Applique le tampon date d'envoi et repasse la liste en auto non
 			$sql_set = "date='',maj=NOW(),message_auto='non'";
 		}
-		spip_query("UPDATE spip_listes SET $sql_set WHERE id_liste=$id_liste LIMIT 1"); 
+		if($sql_set) {
+//spiplistes_log("CRON: sql_set == $sql_set", LOG_DEBUG);
+			spip_query("UPDATE spip_listes SET $sql_set WHERE id_liste=$id_liste LIMIT 1"); 
+		}
 
 		/////////////////////////////
 		// preparation du courrier à placer dans le panier
@@ -90,7 +98,7 @@ spiplistes_log("CRON: lang == $lang", LOG_DEBUG);
 		$texte = recuperer_fond('patrons/'.$patron, $contexte_patron);
 		$titre = ($titre_message =="") ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
 		
-spiplistes_log("CRON: Titre => $titre", LOG_DEBUG);
+//spiplistes_log("CRON: Titre => $titre", LOG_DEBUG);
 
 		$taille_courrier_ok = (strlen(spip_listes_strlen(version_texte($texte))) > 10);
 
@@ -101,7 +109,7 @@ spiplistes_log("CRON: Titre => $titre", LOG_DEBUG);
 			$statut = _SPIPLISTES_STATUT_ENCOURS;
 		}
 		else {
-spiplistes_log("CRON: courrier vide !!", LOG_DEBUG);
+//spiplistes_log("CRON: courrier vide !!", LOG_DEBUG);
 			$date_debut_envoi = "date_debut_envoi=NOW()";
 			$date_fin_envoi = "date_fin_envoi=NOW()";
 			$statut = _SPIPLISTES_STATUT_VIDE;

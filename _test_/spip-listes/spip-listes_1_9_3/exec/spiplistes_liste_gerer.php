@@ -57,6 +57,7 @@ function exec_spiplistes_liste_gerer () {
 		, 'btn_modifier_courrier_auto', 'message_auto' // local
 			, 'titre_message', 'patron', 'periode', 'envoyer_maintenant'
 			, 'jour', 'mois', 'annee', 'heure', 'minute'
+			, 'auto_mois'
 		) as $key) {
 		$$key = _request($key);
 	}
@@ -149,7 +150,9 @@ spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 				$sql_query = "";
 				$titre_message = spiplistes_titre_propre($titre_message);
 //spiplistes_log("LISTE MODIF: envoyer_maintenant".($envoyer_maintenant ? "oui" : "non"), LOG_DEBUG);
-				if(
+spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
+spiplistes_log("LISTE MODIF: auto_mois: $auto_mois", LOG_DEBUG);
+			if(
 					($message_auto == 'oui')
 					&& ($envoyer_maintenant
 						|| ($envoyer_quand = spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute)) 
@@ -160,13 +163,13 @@ spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 						$sql_query .= "patron="._q($patron).",";
 					}
 					if($envoyer_maintenant) {
-//spiplistes_log("LISTE MODIF: envoyer_maintenant", LOG_DEBUG);
 						$sql_query .= "date=NOW(),periode=0,"; 
 					}
 					else if($envoyer_quand) {
 							$sql_query .= "date='$envoyer_quand',periode=$periode,";
 					}
 					if($auto_mois) {
+spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 						$sql_query .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
 					}
 				}
@@ -423,7 +426,22 @@ spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 		. spiplistes_boite_selection_patrons ($patron, true, "patron", 1)
 		//
 		. "</li>\n"
-		. "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl' /> "._T('info_jours')."</li>\n"
+		// chrono début de mois
+		. "
+<script type='text/javascript'><!--
+	function auto_mois_switch(c) {
+		if(c.checked) {
+				jQuery('#periode_jours').hide();
+		}
+		else {
+				jQuery('#periode_jours').show();
+		}
+	}
+--></script>		"
+		. "<li><input type='checkbox' name='auto_mois' value='oui' id='auto_mois' $auto_mois_checked onchange=\"auto_mois_switch(this);\" $auto_mois_disabled />\n"
+		. "<label for='auto_mois'>"._T('spiplistes:En_debut_de_mois')."</label></li>\n"
+		// 
+		. "<li id='periode_jours'>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl' /> "._T('info_jours')."</li>\n"
 		. "<li>"._T('spiplistes:A_partir_de')." : <br />\n"
 		//
 		. spiplistes_dater_envoi($id_liste, true, $statut, $date_debut_envoi, 'btn_changer_date', false)."</li>\n"
