@@ -12,7 +12,7 @@
 <p>
 <label>
 <select name="spipbb_id_rubrique">
-<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}{racine}>
+<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}{racine}{tout}>
 <option value="#ID_RUBRIQUE"[ selected="(#ENV{spipbb_id_rubrique}|=={#ID_RUBRIQUE}|?{selected})"]>#ID_RUBRIQUE . #TITRE</option>
 </BOUCLE_rubriques>
 </select>
