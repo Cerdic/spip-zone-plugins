@@ -1,7 +1,15 @@
 #CACHE{0}
+<B_listed2c>
+    Liste des documents
+<BOUCLE_listed2c(DOC2IMG) > 
+    [(#ID_DOCUMENT|unique|?{' ',''})
+        <a href=#URL_PAGE{doc2img,id_document=#ID_DOCUMENT}> #ID_DOCUMENT </a>
+    ]
+</BOUCLE_listed2c>
+
 <B_d2c>
     #ANCRE_PAGINATION
-<BOUCLE_d2c(DOC2IMG)  {pagination 1} >
+<BOUCLE_d2c(DOC2IMG) {id_document} {pagination 1} >
     <img src="#FICHIER" />
 </BOUCLE_d2c>
     Ce document poss&eacute;de #GRAND_TOTAL page(s)
