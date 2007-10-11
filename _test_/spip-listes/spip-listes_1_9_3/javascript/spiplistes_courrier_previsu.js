@@ -1,4 +1,4 @@
-// spiplistes_jQuery_courrier.js
+// spiplistes_courrier_previsu.js
 // utilisé par _SPIPLISTES_EXEC_COURRIER_REDAC
 
 // $LastChangedRevision: 15830 $
@@ -22,7 +22,7 @@ $(document).ready(function(){
 		$.ajax({ type: "POST", 
 					url: "./?exec=spiplistes_courrier_previsu", 
 					data: data, 
-					success: function(msg){  $("#apercu-c").html(msg); }
+					success: function(msg){  $("#apercu-courrier").html(msg); }
 			});
 		return false;
 	});
