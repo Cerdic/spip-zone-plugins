@@ -1,12 +1,15 @@
 #CACHE{0}
 
 <B_doc2img>
-    <form method=post action='?exec=doc2img_convert'>
+  Choisissez le document pdf<br/>
+  a convertir en image :
+    <form method="post" action='?exec=doc2img_convert'>
     <select name="id_document">
 <BOUCLE_doc2img(DOCUMENTS) {id_article}>
-    <option value=#ID_DOCUMENT>#ID_DOCUMENT</option>
+    <option value=#ID_DOCUMENT>#ID_DOCUMENT - #TITRE</option>
 </BOUCLE_doc2img>
     </select>
+    <br/>
     <input type="submit" class="fondo" value="Convertir"/>
     </form>
 </B_doc2img>

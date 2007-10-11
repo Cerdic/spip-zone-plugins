@@ -11,13 +11,13 @@
     <!-- URI de documentation -->
     <lien>spip-contrib</lien>
 
-    <!-- pr‚cise le prefixe utilis+ pour toutes les fonctions du plugin, en g+n+ral le nom du plugin -->
+    <!-- precise le prefixe utilis+ pour toutes les fonctions du plugin, en general le nom du plugin -->
     <prefix>doc2img</prefix>
 
     <!-- Chemin du fichier d'installation et de mise à jour -->
     <install>base/doc2img_install.php</install>
 
-   <!-- pr‚cise les d‚pendances vis-…-vis de d'autres plugins -->
+   <!-- pr‚cise les dependances vis-a-vis de d'autres plugins -->
    <necessite id="cfg" version="[1.0.4;]" />
 
     <!-- mes options -->
@@ -31,7 +31,7 @@
        <action>affiche_gauche</action>
        <!-- chemin du fichier contenant la fonction -->
        <inclure>pipeline.php</inclure>
-   </pipeline>    
+   </pipeline>
 
    <chemin dir='' />
 
