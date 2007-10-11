@@ -90,7 +90,7 @@ if ($connect_statut != '0minirezo') {
 		$date_premier = $row['date_unix'];
 	}
 
-	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(cnt) as sum FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) GROUP BY date ORDER BY date");
+	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(cnt) as sum FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) GROUP BY type, date ORDER BY date");
 
 
 	while ($row = spip_fetch_array($result)) {

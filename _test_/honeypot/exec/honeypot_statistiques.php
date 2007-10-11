@@ -130,9 +130,9 @@ function exec_honeypot_statistiques_dist() {
 	}
 
 	if($filtre)
-	  $result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, cnt as total FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
+	  $result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(cnt) as total FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) GROUP BY type, date ORDER BY date");
 	else
-	  $result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(cnt) as total FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) GROUP BY date ORDER BY date");
+	  $result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, SUM(cnt) as total FROM $table WHERE $where AND type=$type AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) GROUP BY type, date ORDER BY date");
 
 	$date_debut = '';
 	$log = array();
@@ -192,12 +192,12 @@ function exec_honeypot_statistiques_dist() {
 		
 		
 	  if ($date_premier < $date_debut)
-		echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus&filtre=$filtre&type=$type&honeypot_cnt_today=$honeypot_cnt_today",true),
+		echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus&filtre=$filtre&type=$type&honeypot_cnt_today=$honeypot_cnt_today"),
 						   'loupe-moins.gif',
 						   "style='border: 0px; vertical-align:center;'",
 						   _T('info_zoom'). '-'), "&nbsp;";
 	  if ( (($date_today - $date_debut) / (24*3600)) > 30)
-		echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins&filtre=$filtre&type=$type&honeypot_cnt_today=$honeypot_cnt_today",true), 
+		echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins&filtre=$filtre&type=$type&honeypot_cnt_today=$honeypot_cnt_today"), 
 						   'loupe-plus.gif',
 						   "style='border: 0px; vertical-align:center;'",
 						   _T('info_zoom'). '+'), "&nbsp;";
@@ -206,7 +206,7 @@ function exec_honeypot_statistiques_dist() {
 	  if($GLOBALS['accepte_svg']) {
 		echo "\n<div>";
 		echo "<object data='", generer_url_ecrire('honeypot_statistiques_svg',"aff_jours=$aff_jours&filtre=$filtre&type=$type&honeypot_cnt_today=$honeypot_cnt_today",true), "' width='450' height='310' type='image/svg+xml'>";
-		echo "<embed src='", generer_url_ecrire('honeypot_statistiques_svg',"aff_jours=$aff_jours&filtre=$filtre&type=$type&honeypot_cnt_today=$honeypot_cnt_today",true), "' width='450' height='310' type='image/svg+xml' />";
+		echo "<embed src='", generer_url_ecrire('honeypot_statistiques_svg',"aff_jours=$aff_jours&filtre=$filtre&type=$type&honeypot_cnt_today=$honeypot_cnt_today"), "' width='450' height='310' type='image/svg+xml' />";
 		echo "</object>";
 		echo "\n</div>";
 		//		$total_absolu = $total_absolu + $honeypot_cnt_today;
