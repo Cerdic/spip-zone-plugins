@@ -22,6 +22,9 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+// ce script ne sert plus (CP-20071011)
+// le formulaire a été intégré dans courrier_edit
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_spiplistes_courrier_rediger () {
@@ -43,7 +46,7 @@ function exec_spiplistes_courrier_rediger () {
 
 	if($id_courrier > 0) {
 	///////////////////////////
-	// initialise les variables postées par formulaire
+	// initialise les variables
 		$sql_select = "";
 		$result = spip_query("SELECT * FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 1");
 		if ($row = spip_fetch_array($result)) {
@@ -90,6 +93,7 @@ function exec_spiplistes_courrier_rediger () {
 	debut_droite("messagerie");
 
 	// Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
+	
 	$page_result = ""
 		. "<a name='haut-block' id='haut-block'></a>"
 		// 
@@ -104,7 +108,7 @@ function exec_spiplistes_courrier_rediger () {
 		. "<div class='verdana2' id='envoyer'>\n"
 		//
 		// début formulaire
-		// nota: url action est forcé pat javascript
+		// nota: url action est forcé par javascript
 		. "<form method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE."#haut-block")."'"
 		.		" style='border: 0px; margin: 0px;' id='template' name='template'>"
 		. "<input name='id_courrier' id='id_courrier' type='hidden' value='$id_courrier' />\n"
@@ -178,7 +182,7 @@ function exec_spiplistes_courrier_rediger () {
 		. ""
 		. "</textarea>\n"
 		. "<p class='verdana2' style='text-align:right;'>"
-		. "<input type='submit' name='Valider' value='"._T('spiplistes:Apercu')."' class='fondo' /></div>\n"
+		. "<input type='submit' name='Valider' value='"._T('spiplistes:Apercu')."' class='fondo' /></p>\n"
 		. "</form>\n"
 		. "</div>\n"
 		. fin_cadre_formulaire(true)

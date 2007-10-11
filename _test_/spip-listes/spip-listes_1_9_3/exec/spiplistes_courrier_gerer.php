@@ -69,6 +69,7 @@ function exec_spiplistes_courrier_gerer () {
 	foreach(array('email_test','titre','texte') as $key) {
 		$$key = trim($$key);
 	}
+
 	if($id_message>0) $id_courrier = $id_message;
 	
 	$page_result = $message_erreur = $str_destinataire = "";

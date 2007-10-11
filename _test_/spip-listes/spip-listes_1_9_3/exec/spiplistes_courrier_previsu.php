@@ -37,10 +37,10 @@ include_spip('inc/lang');
 
 function exec_spiplistes_courrier_previsu(){
 
-	foreach(array('patron', 'sujet', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier') as $key) {
+	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier') as $key) {
 		$$key = _request($key);
 	}
-	
+	$id_courrier = intval($id_courrier);
 	$charset = lire_meta('charset');
 	
 	include_spip('public/assembler');
@@ -50,7 +50,7 @@ function exec_spiplistes_courrier_previsu(){
 		, 'id_mot' => $id_mot
 		, 'patron' => $patron
 		, 'lang' => $lang
-		, 'sujet' => $sujet
+		, 'sujet' => $titre
 		, 'message' => $message 
 	);
 	
@@ -78,26 +78,26 @@ function exec_spiplistes_courrier_previsu(){
 	$page_result = ""
 		// boite courrier au format html
 		. debut_cadre_couleur('', true)
-		. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>"
+		. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>\n"
 		. _T('spiplistes:version_html')
-		. "<input type='hidden' name='modifier_message' value='oui' />"
+		. "<input type='hidden' name='modifier_message' value='oui' />\n"
 		.	(
-				(intval($id_courrier))
-				?	""
-				:	"<input type='hidden' name='new' value='oui' />"
+				($id_courrier)
+				?	"<input type='hidden' name='id_courrier' value='$id_courrier' />\n"
+				:	"<input type='hidden' name='new' value='oui' />\n"
 			)
-		. "<input type='hidden' name='titre' value=\"".htmlspecialchars($sujet)."\">"
-		. "<input type='hidden' name='texte' value=\"".htmlspecialchars($texte)."\">"
-		. "<input type='hidden' name='date' value='$date'>"
-		. "<div style='background-color:#fff;border:1px solid #000;overflow:scroll;'>"
+		. "<input type='hidden' name='titre' value=\"".htmlspecialchars($titre)."\">\n"
+		. "<input type='hidden' name='texte' value=\"".htmlspecialchars($texte)."\">\n"
+		. "<input type='hidden' name='date' value='$date'>\n"
+		. "<div style='background-color:#fff;border:1px solid #000;overflow:scroll;'>\n"
 		. liens_absolus($texte)
 		. $message_erreur
 		. $texte_pied
-		. "</div>"
-		. "<p style='text-align:right;'><input type='submit' name='btn_valider_courrier' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
-		. "</form>"
+		. "</div>\n"
+		. "<p style='text-align:right;margin-bottom:0;'><input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
+		. "</form>\n"
 		. fin_cadre_couleur(true)
-
+		. "<br />\n"
 		;
 	echo($page_result);
 

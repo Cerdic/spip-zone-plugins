@@ -67,6 +67,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'aucun' => "aucun",
 'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran",
 'Apercu' => "Aper&ccedil;u",
+'Generer_Apercu' => "G&eacute;n&eacute;rer et Aper&ccedil;u",
 
 //B
 
@@ -117,6 +118,11 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Conseil_sauvegarder_listes' => "<strong>Conseil</strong>: faire une sauvegarde de la base avant de confirmer la suppression 
    des listes. L'annulation est impossible ici.",
 'Choisir_un_patron' => "Choisir un patron ",
+'Courrier_edit_desc' => 'Vous pouvez choisir de g&eacute;n&eacute;rer automatiquement le contenu du courrier
+	ou r&eacute;diger simplement votre courrier dans la bo&icirc;te <strong>texte du courrier</strong>.',
+'Contenu_a_partir_de_date_' => "Contenu &agrave; partir de cette date ",
+'Cliquez_Generer_desc' => "Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&eacute;sultat 
+	dans la bo&icirc;te @titre_champ_texte@.",
 
 //D
 '_de_' => " de ",
@@ -189,6 +195,9 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
    Il reste inscrit dans les listes en tant que destinataire, mais les courriers 
    ne lui seront pas envoy&eacute;s tant que vous ne lui aurez pas d&eacute;fini un format de r&eacute;ception de courriers.",
 
+//G
+'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu",
+
 //H
 'Historique_des_envois' => 'Historique des envois',
 
@@ -207,6 +216,7 @@ Une fois enregistr&eacute;, vous pourrez consulter les articles en cours de r&ea
 et participer &agrave; tous les forums.  L\'inscription permet &eacute;galement d\'acc&eacute;der aux parties du site en acc&egrave;s restreint
 et de recevoir les lettres d\'informations.',
 'import_export' => 'Import / Export',
+'Introduction_du_courrier_' => "Introduction &agrave; votre courrier, avant le contenu issu du site ",
 
 //J
 'jour' => 'jour',
@@ -313,7 +323,7 @@ et de recevoir les lettres d\'informations.',
 'Suivi_des_abonnements' => 'Suivi des abonnements',
 'sujet_nouveau' => 'Nouveau sujet',
 'sujet_auteur' => 'Auteur',
-'sujet_courrier' => '<b>Sujet du courrier</b> [obligatoire]<br />',
+'sujet_courrier' => '<b>Sujet du courrier</b> [obligatoire]',
 'sujet_courrier_auto' => 'Sujet du courrier automatique : ',
 'sujet_visites' => 'Visites',
 'sujets' => 'Sujets',

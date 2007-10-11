@@ -40,6 +40,7 @@ function exec_spiplistes_courrier_edit(){
 		, $connect_toutes_rubriques
 		, $connect_id_auteur
 		, $spip_ecran
+		, $compteur_block
 		;
 		
 	$type = _request('type');
@@ -113,12 +114,16 @@ function exec_spiplistes_courrier_edit(){
 	creer_colonne_droite();
 	debut_droite("messagerie");
 
-	$page_result .= ""
+	$page_result = ""
+		// le bloc pour aperçu
+		. "<div id='apercu-courrier' style='clear:both;tex-align:center'></div>\n"
+		//
 		. debut_cadre_formulaire('', true)
-		. "<a name='haut_block' id='haut_block'></a>"
+		. "<a name='haut-block' id='haut-block'></a>\n"
 		// 
+		//
 		// bloc titre
-		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
+		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
 		. "<tr width='100%'>"
 		. "<td>"
 		. $gros_bouton_retour
@@ -127,48 +132,107 @@ function exec_spiplistes_courrier_edit(){
 		. "<td width='100%'>"
 		. ($id_courrier ? _T('spiplistes:Modifier_un_courrier_:') : _T('spiplistes:Creer_un_courrier_:') )."<br />\n"
 		. gros_titre($titre, '', false)
-		. "</td>"
-		. "</tr></table>"
-		. "<hr />"
-		//
-		. "<p>"._T('spiplistes:alerte_edit')."</p>\n"
-		. "<br />\n"
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
-	   . "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_REDAC,"id_message=$id_courrier")."'>"._T('spiplistes:Generer')."</a>"
-		. fin_cadre_relief(true)
-		. "<br />"
+		. "</td>\n"
+		. "</tr></table>\n"
+		. "<hr />\n"
 		//
 		// début formulaire
-		. "<form id='choppe_patron-1' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")."' method='post' name='formulaire'>"
-		. "<input type='hidden' name='modifier_message' value=\"oui\" />"
-		. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
-		//
-		// choisir patron
-		
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
+			."' method='post' name='formulaire_courrier_edit' id='formulaire_courrier_edit'>\n"
+		. "<input type='hidden' name='modifier_message' value=\"oui\" />\n"
+		. "<input type='hidden' name='id_courrier' value='$id_courrier' />\n"
 		//
 		// bloc sujet
-		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier')."</label>\n"
-		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' />"
-		. "<br />"
+		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier').":</label>\n"
+		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' />\n"
+		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:Courrier_edit_desc')."</p>\n"
+		//
+		// générer le contenu
+		// Reprise du Formulaire adapté de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_insert-slide.gif', true)
+		. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
+		. "<a href=\"javascript:swap_couche('$compteur_block', '$spip_lang_rtl');\">"._T('spiplistes:Generer_le_contenu')."</a>\n"
+		. debut_block_invisible(md5(_T('spiplistes:charger_patron')))
 		// 
+		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>\n"
+		//sélection du patron
+		. "<label class='verdana2' style='font-weight:bold;display:block;margin-top:1em;' for='patron'>"._T('spiplistes:Choisir_un_patron').":</label>\n"
+		. spiplistes_boite_selection_patrons ("", true, "patron", 1, "100%")."<br />\n"
+		//
+		//
+		. "<div id='boite-2-cols' style='margin:1em 0;padding:0;vertical-align:top;width:100%;height:3em;'>\n" 
+		// la date
+		// sélecteur de date
+		// nota: les scripts js sont appelés dans header_prive
+		. "<div id='col-gauche' style='width:50%;height:3em;float:left;'>\n"
+		. "<script type='text/javascript'><!-- \n$(document).ready(function(){ \n $.datePicker.setDateFormat('yyyy-mm-dd');\n"
+		. unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
+		. " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script>\n"
+		. "<label class='verdana2' for='date'>"._T('spiplistes:Contenu_a_partir_de_date_').":</label><br />\n"
+		. "<input name='date' id='date' class='date-picker' style='font-size:11px;' />\n"
+		. "</div>\n"
+		// sélecteur de langues
+		. "<label class='verdana2' for='lang'>"._T('spiplistes:Langue_du_courrier_').":</label><br />\n"
+		. "<select name='lang' class='fondo' id='lang'>\n"
+		. liste_options_langues('changer_lang')
+		. "</select>\n"
+		. "</div>\n" // fin boite-2-cols
+		//
+		// sélecteur de rubriques
+		. "<label class='verdana2' for='ajouter_rubrique'>"._T('spiplistes:Lister_articles_de_rubrique').":</label>\n"
+		. "<select name='id_rubrique' id='ajouter_rubrique' class='formo'>\n"
+		. "<option value=''></option>\n"
+		. spiplistes_arbo_rubriques(0)
+		. "</select>\n"
+		. "<br />\n"
+		//
+		// sélecteur des mots-clés
+		. "<label class='verdana2' for='ajouter_motcle'>"._T('spiplistes:Lister_articles_mot_cle').":</label>\n"
+		. "<select name='id_mot' id='ajouter_motcle' class='formo'>\n"
+		. "<option value=''></option>\n"
+		;
+	$rqt_gmc = spip_query ("SELECT id_groupe,titre FROM spip_groupes_mots WHERE articles='oui'");
+	while ($row = spip_fetch_array($rqt_gmc)) {
+		$id_groupe = intval($row['id_groupe']);
+		$titre = $row['titre'];
+		$page_result .= "<option value='' disabled='disabled'>". supprimer_numero (typo($titre)) . "</option>\n";
+		$rqt_mc = spip_query ("SELECT id_mot,titre FROM spip_mots WHERE id_groupe=$id_groupe");
+		while ($row = spip_fetch_array($rqt_mc)) {
+			$id_mot = intval($row['id_mot']);
+			$titre = supprimer_numero (typo($row['titre']));
+			$page_result .= "<option value='$id_mot'>--$titre</option>\n";
+		}
+	}
+	$page_result .= ""
+		. "</select><br />\n"
+		// texte introduction
+		. "<label class='verdana2' style='display:block;' for='text_area'>"._T('spiplistes:Introduction_du_courrier_').":</label>\n"
+		. afficher_barre('document.formulaire_courrier_edit.message')
+		. "<textarea id='text_area' name='message' ".$GLOBALS['browser_caret']." rows='5' cols='40' wrap='soft' style='width:100%;'>\n"
+		. "</textarea>\n"
+		//
+		. "<p class='verdana2'>\n"
+			. _T('spiplistes:Cliquez_Generer_desc', array('titre_bouton'=>_T('spiplistes:Generer_Apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier')))
+			. "</p>\n"
+		. "<p class='verdana2' style='text-align:right;'>\n"
+		. "<input type='submit' name='Valider' value='"._T('spiplistes:Generer_Apercu')."' class='fondo' /></p>\n"
+		. fin_block() // fin_block_invisible
+		. fin_cadre_relief(true)
+		. "<br />\n"
+		//
 		// bloc texte
 		. "<label for='texte_courrier'>"._T('spiplistes:texte_courrier')."</label>\n"
-		. afficher_barre('document.formulaire.texte')
-		. "<textarea id='texte_courrier' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>"
+		. afficher_barre('document.formulaire_courrier_edit.texte')
+		. "<textarea id='texte_courrier' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>\n"
 		. $texte
 		. "</textarea>\n"
-		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />" : "")
+		. (!$id_courrier ? "<input type='hidden' name='new' value=\"oui\" />\n" : "")
 		//
-		// boutons apercu/valider (en cours CP-20071010)
-		//	($btn_courrier_apercu)
-		//		? "<p style='position:relative;'>"
-		//		. "<input type='submit' name='btn_courrier_apercu' value='"._T('Apercu')."' class='fondo' />\n"
-		//		. "<input style='position:absolute;right:0;' type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' />"
-		//		. "</p>\n"
-		. "<p style='text-align:right;'><input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>"
+		. "<p style='text-align:right;'>\n"
+		. "<input type='submit' onclick='this.value=\"oui\";' id='btn_courrier_edit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
 		//
 		// fin formulaire
-		. "</form>"
+		. "</form>\n"
 		. fin_cadre_formulaire(true)
 		;
 	
