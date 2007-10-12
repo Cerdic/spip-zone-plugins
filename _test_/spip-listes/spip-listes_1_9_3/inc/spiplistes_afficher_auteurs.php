@@ -24,43 +24,57 @@
 
 include_spip('inc/spiplistes_api');
 
-function spiplistes_cherche_auteur(){
+function spiplistes_cherche_auteur ($return = false) {
 	if (!$cherche_auteur = _request('cherche_auteur')) return;
 	
-	echo "<p align='left'>";
 	$col = strpos($cherche_auteur, '@') !== false ? 'email' : 'nom';
 	$like = '';
 	if (strpos($cherche_auteur, '%') !== false) {
 		$like = " WHERE $col LIKE '" . $cherche_auteur . "'";
 		$cherche_auteur = str_replace('%', ' ', $cherche_auteur);
 	}
-	$result = spip_query("SELECT id_auteur, $col FROM spip_auteurs$like");
 	
-	while ($row = spip_fetch_array($result, SPIP_NUM)) {
+	$sql_result = spip_query("SELECT id_auteur, $col FROM spip_auteurs$like");
+	
+	while ($row = spip_fetch_array($sql_result, SPIP_NUM)) {
 		$table_auteurs[] = $row[1];
 		$table_ids[] = $row[0];
 	}
 	
 	$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
-	echo debut_boite_info();
-	if (!$resultat)
-		echo "<b>"._T('texte_aucun_resultat_auteur', array('cherche_auteur' => $cherche_auteur)).".</b><br />";
-	elseif (count($resultat) == 1) {
+
+	$result = ""
+		. "<p align='left'>"
+		. debut_boite_info(true)
+		;
+	if (!$resultat) {
+		$result .= ""
+			. "<strong>"._T('texte_aucun_resultat_auteur', array('cherche_auteur' => $cherche_auteur)).".</strong><br />"
+			;
+	}
+	else if (count($resultat) == 1) {
 		list(, $nouv_auteur) = each($resultat);
-		echo "<b>"._T('spiplistes:une_inscription')."</b><br />";
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur="._q($nouv_auteur));
-		echo "<ul>";
-		while ($row = spip_fetch_array($result)) {
+		$result .= ""
+			. "<strong>"._T('spiplistes:une_inscription')."</strong><br />"
+			. "<ul>"
+			;
+		$sql_result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur="._q($nouv_auteur));
+		while ($row = spip_fetch_array($sql_result)) {
 			$id_auteur = $row['id_auteur'];
 			$nom_auteur = $row['nom'];
 			$email_auteur = $row['email'];
 			$bio_auteur = $row['bio'];
 
-			echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3><a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT, "id_auteur=$id_auteur")."\">".typo($nom_auteur)."</a></font></b>";
-			echo " | $email_auteur";
-			echo "</font>\n";
+			$result .= ""
+				. "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><strong>"
+					. "<font size=3><a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT, "id_auteur=$id_auteur")."\">".typo($nom_auteur)."</a></font></strong>"
+				. " | $email_auteur"
+				. "</font>\n"
+				;
 		}
-		echo "</ul>";
+		$result .= ""
+			. "</ul>"
+			;
 	}
 	elseif (count($resultat) < 16) {
 		reset($resultat);
@@ -69,31 +83,55 @@ function spiplistes_cherche_auteur(){
 			$les_auteurs[] = $id_auteur;
 		if ($les_auteurs) {
 			$les_auteurs = join(',', $les_auteurs);
-			echo "<b>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</b><br />";
-			$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom");
-			echo "<ul>";
-			while ($row = spip_fetch_array($result)) {
+			$result .= ""
+				. "<strong>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</strong><br />"
+				. "<ul>"
+				;
+			$sql_result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom");
+			while ($row = spip_fetch_array($sql_result)) {
 				$id_auteur = $row['id_auteur'];
 				$nom_auteur = $row['nom'];
 				$email_auteur = $row['email'];
 				$bio_auteur = $row['bio'];
 				
-				echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3>".typo($nom_auteur)."</font></b>";
-				if ($email_auteur)
-					echo " ($email_auteur)";
-				echo " | <a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT,"id_auteur=$id_auteur")."\">"._T('spiplistes:choisir')."</a>";
-				if (trim($bio_auteur))
-					echo "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n";
-				echo "</font><p>\n";
+				$result .= ""
+					. "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><strong><font size=3>".typo($nom_auteur)."</font></strong>"
+					;
+				if ($email_auteur) {
+					$result .= ""
+						. " ($email_auteur)"
+						;
+				}
+				$result .= ""
+					. " | <a href=\"".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT,"id_auteur=$id_auteur")."\">"._T('spiplistes:choisir')."</a>"
+					;
+				if (trim($bio_auteur)) {
+					$result .= ""
+						. "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n"
+						;
+				}
+				$result .= ""
+					. "</font><p>\n"
+					;
 			}
-			echo "</ul>";
+			$result .= ""
+				. "</ul>"
+				;
 		}
 	}
-	else
-		echo "<b>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</b><br />";
+	else {
+		$result .= ""
+			. "<strong>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</strong><br />"
+			;
+	}
+	
+	$result .= ""
+		. fin_boite_info(true)
+		. "<p>"
+		;
 
-	echo fin_boite_info();
-	echo "<p>";
+	if($return) return($result);
+	else echo($result);
 }
 
 function spiplistes_afficher_auteurs($query, $url, $return = false) {
@@ -154,14 +192,14 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 			if ($j > 0) $result .= " | ";
 			
 			if ($j == $debut)
-				$result .= "<b>$j</b>";
+				$result .= "<strong>$j</strong>";
 			elseif ($j > 0)
 				$result .= "<a href='".parametre_url($url,'debut',$j)."'>$j</a>";
 			else
 				$result .= " <a href='".parametre_url($url,'debut',0)."'>0</a>";
 			
 			if ($debut > $j  AND $debut < $j+$max_par_page)
-				$result .= " | <b>$debut</b>";
+				$result .= " | <strong>$debut</strong>";
 		}
 		$result .= ""
 			. "</font>"
@@ -176,7 +214,7 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 				;
 			foreach ($lettre as $key => $val) {
 				if ($val == $debut)
-					$result .= "<b>$key</b> ";
+					$result .= "<strong>$key</strong> ";
 				else
 					$result .= "<a href='".parametre_url($url,'debut',$val)."'>$key</a> ";
 			}
@@ -204,21 +242,21 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 		. "</td><td>"
 		.	(
 		 	($tri == '' || $tri=='nom')
-			? '<b>'._T('info_nom').'</b>'
-			: "<a href='".parametre_url($url,'tri','nom')."' title='"._T('lien_trier_nom')."'><b>"._T('info_nom')."</b></a>"
+			? '<strong>'._T('info_nom').'</strong>'
+			: "<a href='".parametre_url($url,'tri','nom')."' title='"._T('lien_trier_nom')."'><strong>"._T('info_nom')."</strong></a>"
 			)
-		. "</td><td colspan='2'><b>"._T('info_site')."</b>"
+		. "</td><td colspan='2'><strong>"._T('info_site')."</strong>"
 		. "</td><td>"
 		;
 	if ($visiteurs != 'oui') {
 		if ($tri=='nombre')
-			$result .= "<b>"._T('spiplistes:format')."</b>";
+			$result .= "<strong>"._T('spiplistes:format')."</strong>";
 		else
-			$result .= "<b>"._T('spiplistes:format')."</b>"; 
+			$result .= "<strong>"._T('spiplistes:format')."</strong>"; 
 	}
 	$result .= ""
 		. "</td><td>"
-		. "<b>"._T('spiplistes:modifier')."</b>"
+		. "<strong>"._T('spiplistes:modifier')."</strong>"
 		. "</td></tr>\n"
 		;
 	
