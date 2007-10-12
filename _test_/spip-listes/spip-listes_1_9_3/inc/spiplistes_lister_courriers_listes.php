@@ -166,9 +166,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					}
 					if($nb_abo) {
 						$en_liste .=
-							" <span style='font-size:100%;color:#666' dir='ltr'>\n"
-							. "(".$nb_abo.")\n"
-							. "</span>\n"
+							" <span class='spiplistes-legend-stitre' dir='ltr'>($nb_abo)</span>\n"
 							;
 					}
 					break;
@@ -178,7 +176,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					// affiche infos complémentaires pour les listes
 					$en_liste .=
 						" <span style='font-size:100%;color:#666666' dir='ltr'>\n"
-						. spiplistes_nb_abonnes_liste_str_get($id_row)
+						. "<span class='spiplistes-legend-stitre'>".spiplistes_nb_abonnes_liste_str_get($id_row)."</span>"
 						. (!empty($patron) ? "<br />Patron : <strong>".$patron."</strong>" : "")
 						. ((!empty($date) && ($date!=_SPIPLISTES_ZERO_TIME_DATE)) ? "<br />Prochain envoi : <strong>".affdate_heure($date)."</strong>" : "")
 						. "</span>\n"
