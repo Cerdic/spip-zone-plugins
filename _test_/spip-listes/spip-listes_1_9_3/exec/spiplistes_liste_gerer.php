@@ -74,7 +74,6 @@ function exec_spiplistes_liste_gerer () {
 	$debut = _request('debut'); // ??
 
 	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
-	$auto_mois = ($auto_mois == 'oui');
 	 
 	if(!$id_liste) {
 	//////////////////////////////////////////////////////
@@ -128,7 +127,7 @@ spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 			
 			// Modifier diffusion ?
 			if($btn_modifier_diffusion) {
-//spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", LOG_DEBUG);
+spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", LOG_DEBUG);
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut!=$current_liste['statut'])) {
 					$sql_query .= "statut='$statut',";
@@ -147,7 +146,7 @@ spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 
 			// Modifier message_auto ?
 			if($btn_modifier_courrier_auto){
-//spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto", LOG_DEBUG);
+spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto <<", LOG_DEBUG);
 				$sql_query = "";
 				$titre_message = spiplistes_titre_propre($titre_message);
 //spiplistes_log("LISTE MODIF: envoyer_maintenant".($envoyer_maintenant ? "oui" : "non"), LOG_DEBUG);
@@ -432,6 +431,7 @@ spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 		. "
 <script type='text/javascript'><!--
 	function auto_mois_switch(c) {
+		jQuery('#auto_oui').click();
 		if(c.checked) {
 				jQuery('#periode_jours').hide();
 		}
@@ -440,6 +440,7 @@ spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 		}
 	}
 --></script>		"
+		// checkbo message mensuel
 		. "<li><input type='checkbox' name='auto_mois' value='oui' id='auto_mois' $auto_mois_checked onchange=\"auto_mois_switch(this);\" $auto_mois_disabled />\n"
 		. "<label for='auto_mois'>"._T('spiplistes:En_debut_de_mois')."</label></li>\n"
 		// 
