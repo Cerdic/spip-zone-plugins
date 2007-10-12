@@ -24,7 +24,9 @@ function spiplistes_header_prive($flux) {
 		)
 	) {
 		
-		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_get_real_version()." -->\n";
+		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_get_real_version()." -->\n"
+					. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style.css' type='text/css' media='all' />\n"
+					;
 
 		switch($exec) {
 			case _SPIPLISTES_EXEC_COURRIER_EDIT:
@@ -39,9 +41,6 @@ function spiplistes_header_prive($flux) {
 					;
 				break;
 			case _SPIPLISTES_EXEC_COURRIERS_LISTE:
-				$flux .= ""
-					. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style.css' type='text/css' media='all' />\n"
-					;
 				break;
 		}
 
