@@ -105,19 +105,19 @@
   }
   
   function  sql_calendrier_interval_forums($limites, &$evenements) {
-	return quete_calendrier_interval_forums($limites, &$evenements);
+	return quete_calendrier_interval_forums($limites, $evenements);
   }
   
   function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
-	return quete_calendrier_interval_articles($avant, $apres, &$evenements);
+	return quete_calendrier_interval_articles($avant, $apres, $evenements);
   }
   
   function sql_calendrier_interval_rubriques($avant, $apres, &$evenements) {
-	return quete_calendrier_interval_rubriques($avant, $apres, &$evenements);
+	return quete_calendrier_interval_rubriques($avant, $apres, $evenements);
   }
   
   function sql_calendrier_interval_breves($avant, $apres, &$evenements) {
-	return quete_calendrier_interval_breves($avant, $apres, &$evenements);
+	return quete_calendrier_interval_breves($avant, $apres, $evenements);
   }
   
   function sql_calendrier_interval_rv($avant, $apres) {
@@ -162,7 +162,7 @@
   }
   
   function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
-	return quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache);
+	return quete_petitions($id_article, $table, $id_boucle, $serveur, $cache);
   }
   
   function sql_accepter_forum($id_article) {
