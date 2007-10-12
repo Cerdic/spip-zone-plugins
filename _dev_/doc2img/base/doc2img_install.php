@@ -1,4 +1,4 @@
-?php
+<?php
 
 /**
 * rm() -- Vigorously erase files and directories.
@@ -117,7 +117,8 @@ function doc2img_installer($version,$version_finale) {
             $cfg = array(
                 "format_source" => "pdf,tiff",
                 "repertoire_cible" => "IMG/doc2img",
-                "format_cible" => "2"
+                "format_cible" => "2",
+                "proportion" => "on"
             );
         	//par d‚faut juste le champ d'id text_area est corrigeable
 			ecrire_meta('doc2img',serialize($cfg));

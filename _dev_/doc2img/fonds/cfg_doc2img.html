@@ -1,4 +1,4 @@
-CACHE{0}
+#CACHE{0}
 
 <head>
     <link rel="stylesheet" href="../plugins/doc2img/squelette/cfg_doc2img.css" type="text/css" media="screen" />
@@ -40,13 +40,18 @@ La page présente permet la configuration :
             </B_typedoc>
 		</p>		
 		<p>
-			<label>largeur par défaut :</label>
+			<label>Largeur par défaut :</label>
 			<input type="text" name="largeur" id="largeur" value="#ENV{largeur}"/> px
 		</p>
 		<p>
-			<label>hauteur par défaut :</label>
+			<label>Hauteur par défaut :</label>
 			<input type="text" name="hauteur" id="hauteur" value="#ENV{hauteur}"/> px
 		</p>		
+		<p>
+			<label>Conserver les proportions :</label>
+			<input type="checkbox" name="proportion" id="proportion" [checked="(#ENV{proportion})"]/>
+		</p>		
+		
    </div>
 </fieldset>
 </div>

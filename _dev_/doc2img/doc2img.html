@@ -1,4 +1,4 @@
-CACHE{0}
+#CACHE{0}
 <B_listed2c>
     Liste des documents
 <BOUCLE_listed2c(DOC2IMG) > 
@@ -12,8 +12,9 @@ CACHE{0}
 <BOUCLE_d2c(DOC2IMG) {id_document} {pagination 1} >
     <img src="#FICHIER" />
 </BOUCLE_d2c>
+    <p>
     Ce document poss&eacute;de #GRAND_TOTAL page(s)
-    <br/>
+    </p>
     #PAGINATION{page_precedent_suivant}
 </B_d2c>
     table vide

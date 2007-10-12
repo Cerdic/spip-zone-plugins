@@ -9,3 +9,8 @@
 .cfg_doc2img fieldset input, .cfg_doc2img fieldset select{
     width : 10em;
 }
+
+.cfg_doc2img fieldset input#proportion {
+    width : 1em;
+    margin : 0;
+}
