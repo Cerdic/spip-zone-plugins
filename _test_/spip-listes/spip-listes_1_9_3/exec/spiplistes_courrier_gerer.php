@@ -299,20 +299,26 @@ function exec_spiplistes_courrier_gerer () {
 	if($id_courrier > 0) {
 		$le_type = _T('spiplistes:message_type');
 		
+		if($statut != _SPIPLISTES_STATUT_REDAC) {
+			if($row = spip_fetch_array(spip_query ("SELECT titre FROM spip_listes WHERE id_liste = $id_liste LIMIT 1"))) {
+				$str_destinataire = 
+					(!empty($email_test))
+					? _T('spiplistes:email_adresse') . " : $email_test"
+					: _T('spiplistes:Liste_de_destination') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
+								. " " . spiplistes_nb_abonnes_liste_str_get($id_liste)
+					;
+			}
+			else {
+				$str_destinataire = _T('spiplistes:Courriers_sans_liste');
+			}
+		}
+		
 		$str_statut_courrier = "";
 		switch($statut) {
 			case _SPIPLISTES_STATUT_REDAC:
 				$str_statut_courrier = _T('spiplistes:message_en_cours')."<br />"._T('spiplistes:modif_envoi');
 				break;
 			case _SPIPLISTES_STATUT_READY:
-				if($row = spip_fetch_array(spip_query ("SELECT titre FROM spip_listes WHERE id_liste = $id_liste LIMIT 1"))) {
-					$str_destinataire = 
-						(!empty($email_test))
-						? _T('spiplistes:email_adresse') . " : $email_test"
-						: _T('spiplistes:sur_liste') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
-									. " " . spiplistes_nb_abonnes_liste_str_get($id_liste)
-						;
-				}
 				$str_statut_courrier = ""
 					. "<p class='verdana2'>"._T('spiplistes:message_presque_envoye') . "<br />"
 					. $str_destinataire . "<br />"
@@ -329,7 +335,7 @@ function exec_spiplistes_courrier_gerer () {
 				break;
 			case _SPIPLISTES_STATUT_ENCOURS:
 				$str_statut_courrier = ""
-					. _T('spiplistes:envoi_program')."<br />"._T('spiplistes:a_destination').$str_destinataire."<br /><br />"
+					. _T('spiplistes:envoi_program')."<br />$str_destinataire<br /><br />"
 					. "<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a>"
 					;
 				break;
@@ -338,7 +344,7 @@ function exec_spiplistes_courrier_gerer () {
 					. "<span>"
 					. "<strong>"._T('spiplistes:message_arch')."</strong></span>"
 					. "<ul>"
-					. " <li>"._T('spiplistes:envoyer_a').$str_destinataire."</li>"
+					. " <li>$str_destinataire</li>"
 					. " <li>"._T('spiplistes:envoi_date').$date."</li>"
 					. " <ul>"
 					. "  <li>"._T('spiplistes:envoi_debut').$date_debut_envoi."</li>"
