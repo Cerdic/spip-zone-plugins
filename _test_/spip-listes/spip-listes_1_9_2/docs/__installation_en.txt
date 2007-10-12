@@ -29,7 +29,7 @@ send information by e-mail with a regular frequency if you so wish
 automatically send the latest from the site or a customised Spip template
 modify the layout of what you send at your leisure.
 
-There is a ToDo list on the site bloog.net at: http://bloog.net/rubrique.php3?id_rubrique=109 
+There is a ToDo list on the site bloog.net at: http://bloog.net/spip.php?article115 
 
 Installation
 
@@ -53,7 +53,7 @@ You are ready now:
 Have  fun
 
 BoOz
-http://bloog.net/spip-listes 
+http://bloog.net/?page=spip-listes
 
 This script is distributed under the GNU/GPL license. 
 

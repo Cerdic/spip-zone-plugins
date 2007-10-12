@@ -31,7 +31,7 @@ Pour ce faire SPIP-Listes vous permet de :
    * envoyer automatiquement les dernières parutions du site, ou un squelette spip personnalisé
    * modifier à votre convenance la mise en page de vos envois.
 
-   - La todo list se trouve sur le site bloog.net : http://bloog.net/rubrique.php3?id_rubrique=109
+   - La todo list se trouve sur le site bloog.net : http://bloog.net/spip.php?article115
 
 
 /**********************************************************/
@@ -73,7 +73,7 @@ Vous êtes prêt :
 Amusez-vous bien
 
 BoOz
-http://bloog.net/spip-listes
+http://bloog.net/?page=spip-listes
 
 Ce script est distribué sous licence GNU/GPL.
 
