@@ -92,7 +92,7 @@ function exec_spiplistes_courrier_previsu(){
 					ajax_retour($texte);
 				}
 			}
-			echo($courrier);
+			echo($texte);
 		}
 		else {
 			echo(_T('spiplistes:Erreur_courrier_introuvable'));
