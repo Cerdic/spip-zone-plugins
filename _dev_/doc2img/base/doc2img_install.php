@@ -1,4 +1,4 @@
-<?php
+?php
 
 /**
 * rm() -- Vigorously erase files and directories.
@@ -108,6 +108,19 @@ function doc2img_installer($version,$version_finale) {
             $dir_doc2img = getcwd().'/../IMG/doc2img';
             mkdir($dir_doc2img);
             spip_log('création repertoire '.$dir_doc2img,'doc2img');
+        //passage en 0.2, rien … faire
+        case 0.1 :
+        //on attaque la 0.3
+        //initialisation d'une configuration par d‚faut
+        case 0.2 :
+            //d‚finition des param‚tres de base
+            $cfg = array(
+                "format_source" => "pdf,tiff",
+                "repertoire_cible" => "IMG/doc2img",
+                "format_cible" => "2"
+            );
+        	//par d‚faut juste le champ d'id text_area est corrigeable
+			ecrire_meta('doc2img',serialize($cfg));
     }
 
     //on met … jour la version du plugin

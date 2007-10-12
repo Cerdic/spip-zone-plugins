@@ -1,10 +1,10 @@
-<plugin>
+plugin>
     <!-- Nom du plugin -->
     <nom>doc2img</nom>
 
     <!-- Auteur du plugin -->
     <auteur>Camille Lafitte</auteur>
-    <version>0.2</version>
+    <version>0.3</version>
     <etat>dev</etat>
     <icon></icon>
     <description> Ce plugin permet de convertir à la volée des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle .</description>

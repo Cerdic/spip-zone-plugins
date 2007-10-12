@@ -1,0 +1,11 @@
+.cfg_doc2img fieldset label{
+    float : left;
+    text-align : right;
+    display : block;
+    width : 18.5em;
+    padding-right : 0.3em;
+}
+
+.cfg_doc2img fieldset input, .cfg_doc2img fieldset select{
+    width : 10em;
+}

@@ -1,40 +1,55 @@
-#CACHE{0}
+CACHE{0}
+
+<head>
+    <link rel="stylesheet" href="../plugins/doc2img/squelette/cfg_doc2img.css" type="text/css" media="screen" />
+</head>
+
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
-[(#REM) descriptif= Configuration de doc2img]
+[(#REM) descriptif= 
+<h4> Configuration de doc2img</h4>	       
+La page présente permet la configuration :
+            <ul>
+                <li>des documents à traiter</li>
+                <li>du format de sortie</li>
+            </ul>
+]
 
 [(#REM) titre=Gestion doc2img]
-
-<fieldset><legend>Les formats</legend>
-	   <p>
-	        On indique : 
-            <ul>
-                <li>les extensions des documents à modifier, </li>
-                <li> et le format de sortie par dÚfaut</li>
-            </ul>
-	   </p>
+<div class='cfg_doc2img'>
+<fieldset><legend>Format d'entrée</legend>
 		<p>
-			<label>nature des documents (séparateur ,) :</label>
+		    <p>Utilisez la , pour séparer les formats</p>
+			<label>Extensions à traiter (pdf, tiff, ...) :</label>
 			<input type="text" name="format_document" id="format_document" value="#ENV{format_source}"/>
 		</p>
+</fieldset>
+<fieldset><legend>Les sorties</legend>
 		<p>
-			<label>le format de sortie par défaut :</label>
+			<label>Répertoire par défaut : </label>
+			<input type="text" name="repertoire_cible" id="repertoire_cible" value="#ENV{repertoire_cible}"/>
+		</p>
+		<p>
+			<label>Le format de sortie par défaut :</label>
 			<B_typedoc>
 			<select name="format_cible">
-			<BOUCLE_typedoc(TYPES_DOCUMENTS) {mime_type==^image}>
-                <option value="#ID_TYPE">#TITRE</option>
+			<BOUCLE_typedoc(TYPES_DOCUMENTS) {mime_type==^image} {titre!=djvu}>
+                <option value="#ID_TYPE" [(#ENV{format_cible}|=={#ID_TYPE}|?{selected="selected",''})]>#TITRE</option>
             </BOUCLE_typedoc>
             </select>
             </B_typedoc>
-		</p>
-</fieldset>
-<fieldset><legend>Le repertoire cible</legend>
+		</p>		
 		<p>
-			<label>le format de sortie par défaut :</label>
-			<input type="text" name="repertoire_cible" id="repertoire_cible" value="#ENV{repertoire_cible}"/>
+			<label>largeur par défaut :</label>
+			<input type="text" name="largeur" id="largeur" value="#ENV{largeur}"/> px
 		</p>
+		<p>
+			<label>hauteur par défaut :</label>
+			<input type="text" name="hauteur" id="hauteur" value="#ENV{hauteur}"/> px
+		</p>		
    </div>
 </fieldset>
+</div>
 
 
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
