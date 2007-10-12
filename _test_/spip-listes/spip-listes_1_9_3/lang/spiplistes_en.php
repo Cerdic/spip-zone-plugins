@@ -92,7 +92,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'envoi_debut' => 'Start of dispatch: ',
 'envoi_fin' => 'End of dispatch: ',
 'envoi_nouv' => 'Newsletter dispatch',
-'envoi_patron' => 'stencil dispatch',
+'envoi_patron' => 'Stencil dispatch',
 'envoi_program' => 'Scheduled dispatch',
 'envoi_smtp' => 'When sending via SMTP, this field indicate the sender\'s address.',
 'envoi_texte' => 'If this message is ok, you can send it now',
@@ -224,7 +224,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'site' => 'Website',
 'sujet_clos_titre' => 'Subject closed',
 'sujet_clos_texte' => 'This discussion has been closed. You can not post any further message',
-'sur_liste' => 'to the list',
+'sur_liste' => 'To the list',
 
 //T
 'texte_boite_en_cours' => 'SPIP-List is sending out a newsletter. <p>This message will disappear once the sending is completed.</p>',

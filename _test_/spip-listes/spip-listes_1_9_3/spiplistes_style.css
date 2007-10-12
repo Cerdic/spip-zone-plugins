@@ -1,0 +1,22 @@
+/* spiplistes CSS Document */
+
+table.spiplistes-tab {
+	margin-top:5px;
+	font-size:90%;
+}
+table.spiplistes-tab tr {
+	text-align:center;
+	padding:5px;
+}
+table.spiplistes-tab th {
+	font-weight:bold;
+	background-color:#eec;
+}
+table.spiplistes-tab td {
+	text-align:center;
+	padding:3px;
+	width:33%;
+}
+table.spiplistes-tab tr.row-even {
+	background-color:#fff;
+}

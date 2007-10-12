@@ -100,10 +100,11 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false) {
 	if(($id_liste > 0) && ($nb_abos == false)) {
 		$nb_abos = spiplistes_nb_abonnes_count($id_liste);
 	}
-	if($nb_abos) {
-		//$result = "(" . $nb_abos . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")";
-		$result = "(" . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")";
-	}
+	$result =
+		($nb_abos)
+		? "(" . spiplistes_singulier_pluriel_str_get($nb_abos, _T('spiplistes:nb_abonnes_sing'), _T('spiplistes:nb_abonnes_plur')) . ")"
+		: _T('spiplistes:sans_abonne')
+		;
 	return ($result);
 }
 
@@ -436,18 +437,20 @@ function spiplistes_terminer_page_donnee_manquante ($return = true) {
 	spiplistes_terminer_page_message (_T('spiplistes:Pas_de_donnees'), $return);
 }
 
-// returne nombre d'abonnes a une liste ou toutes les listes
+// retourne nombre d'abonnes a une liste ou toutes les listes
 // ou par id_auteur
 function spiplistes_nb_abonnes_count ($id_liste = 'toutes', $id_auteur = 'tous') {
 	$id_liste = ($id_liste=='toutes') ? 0 : intval($id_liste);
 	$id_auteur = ($id_auteur=='tous') ? 0 : intval($id_auteur);
 	
-	$where = (($id_liste > 0) ? "" : " id_liste=$id_liste");
-	$where .= (($id_auteur > 0) ? "" : (strlen($where) ? " AND " : "")." id_auteur=$id_auteur");
-	if(strlen($where)) $where = " WHERE $where";
-	
-	$result = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_listes $where"));
-	$result = ($result && $result['n']) ? $result['n'] : 0;
+	$where = (($id_liste == 0) ? "" : " id_liste=$id_liste");
+	$where .= (($id_auteur == 0) ? "" : (strlen($where) ? " AND " : "")." id_auteur=$id_auteur");
+	if(strlen($where))  {
+		$where = " WHERE $where";
+	}
+	$sql_query = "SELECT COUNT(id_auteur) AS n FROM spip_auteurs_listes $where";
+	$result = spip_fetch_array(spip_query($sql_query));
+	$result = ($result && ($result['n']>0)) ? $result['n'] : 0;
 	return ($result);
 }
 

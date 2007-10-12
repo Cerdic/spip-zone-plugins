@@ -92,7 +92,7 @@ Riceverete una email che vi permetter&agrave; di accedere alla pagina di modific
 'envoi_debut' => 'Inizio dell\'invio : ',
 'envoi_fin' => 'Fine dell\'invio : ',
 'envoi_nouv' => 'Invio delle novit&agrave;',
-'envoi_patron' => 'invio del modello',
+'envoi_patron' => 'Invio del modello',
 'envoi_program' => 'Invio programmato',
 'envoi_smtp' => 'Nel caso di un invio via con metodo SMTP questo campo definisce l\'indirizzo del mittente.',
 'envoi_texte' => 'Se questo messaggio &egrave; pronto potete inviarlo',
@@ -228,7 +228,7 @@ e ricevere le newsletter.',
 'site' => 'Sito web',
 'sujet_clos_titre' => 'Argomento chiuso',
 'sujet_clos_texte' => 'Questo argomento &egrave; chiuso, non &egrave; possibile scrivere.',
-'sur_liste' => 'sulla newsletter',
+'sur_liste' => 'Sulla newsletter',
  
  //T
 'texte_boite_en_cours' => 'SPIP-Listes sta inviando un messaggio automatico. <p> &Egrave; possibile provocare l\'invio accelerato dei flussi usando il link in basso.</p> <p>Questo box si chiuder&agrave; al termine dell\'invio.</p>',

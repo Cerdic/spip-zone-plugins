@@ -19,18 +19,16 @@ function spiplistes_header_prive($flux) {
 
 	if(in_array($exec, array(
 		_SPIPLISTES_EXEC_COURRIER_EDIT
-		, _SPIPLISTES_EXEC_COURRIER_REDAC
+		, _SPIPLISTES_EXEC_COURRIERS_LISTE
 		)
 		)
 	) {
 		
-		$flux .="\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_get_real_version()." -->\n";
+		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_get_real_version()." -->\n";
 
 		switch($exec) {
 			case _SPIPLISTES_EXEC_COURRIER_EDIT:
-			case _SPIPLISTES_EXEC_COURRIER_REDAC:
 				$flux .= ""
-					//. "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_SPIPLISTES . "javascript/spiplistes_courrier_previsu.js\"></script>\n"
 					. "<script type=\"text/javascript\" src=\"" ._DIR_PLUGIN_SPIPLISTES . "javascript/spiplistes_courrier_edit.js\"></script>\n"
 					. "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />\n"
 					. "<script src='".url_absolue(find_in_path('javascript/datepicker.js'))."' type='text/javascript'></script>\n"
@@ -38,6 +36,11 @@ function spiplistes_header_prive($flux) {
 					. "<meta http-equiv='expires' content='0'>\n"
 					. "<meta http-equiv='pragma' content='no-cache' />\n"
 					. "<meta http-equiv='cache-control' content='no-cache' />\n"
+					;
+				break;
+			case _SPIPLISTES_EXEC_COURRIERS_LISTE:
+				$flux .= ""
+					. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style.css' type='text/css' media='all' />\n"
 					;
 				break;
 		}

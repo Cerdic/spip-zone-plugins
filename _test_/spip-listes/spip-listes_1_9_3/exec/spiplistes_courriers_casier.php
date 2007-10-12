@@ -50,26 +50,13 @@ function spiplistes_afficher_pile_messages() {
 	$out = ""
 		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_timer.gif', true, ''
 			, _T('spiplistes:Messages_automatiques').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
-		. "\n<style>
-	table.tab td {
-	text-align:center;
-	padding:3px;
-	width:33%;
-	background-color:#ccc;
-	}
-	table.tab {
-	margin-top:5px;
-	}
-	tr.row_even {
-	background-color:#ccc;
-	}
-	</style>"
-		. "<table class='tab'>" 
-		. "<tr style='padding:5px'>"
-		. "<td style='font-weight:bold;background-color:#eec'>"._T('spiplistes:envoi_patron')."</td>"
-		. "<td style='font-weight:bold;background-color:#eec'>"._T('spiplistes:sur_liste')."</td>"
-		. "<td style='font-weight:bold;background-color:#eec'>"._T('spiplistes:prochain_envoi_prevu')."</td>"
-		. "</tr>"
+		. "\n"
+		. "<table class='spiplistes-tab' width='100%'  border='0' cellspacing='1' cellpadding='0'>\n" 
+		. "<tr>\n"
+		. "<th>"._T('spiplistes:envoi_patron')."</td>\n"
+		. "<th>"._T('spiplistes:sur_liste')."</td>\n"
+		. "<th>"._T('spiplistes:prochain_envoi_prevu')."</td>\n"
+		. "</tr>\n"
 		;
 
 	while($row = spip_fetch_array($list)) {
@@ -78,41 +65,32 @@ function spiplistes_afficher_pile_messages() {
 		}
 	
 		$proch = round((strtotime($date) - time()) / _SPIPLISTES_TIME_1_DAY);
-	
-		if($i == 0){
-			$out .= "<tr style='padding:5px'>" ;
-			$i = 1 ;
-		}
-		else {
-			$out .= "<tr style='padding:5px' class='row_even'>" ;
-			$i = 0 ;
-		} // end else
-	
 		$date_dernier = date(_T('spiplistes:format_date'), strtotime($maj)) ;
-
 		$periodicite = 
 			($statut = _SPIPLISTES_MONTHLY_LIST)
 			? _T('spiplistes:Liste_mensuelle')
 			: _T('spiplistes:Tous_les')." $periode "._T('spiplistes:jours')
 			;
-
+	
 		$out .= ""
+			. "<tr " . (($ii++ % 2) ? "class='row-even'" : "") . ">\n"
 			. "<td><a href='" . generer_url_public('patron_switch',"patron=$patron&date=$date_dernier")."'>$patron</a>"
-			. "<br />$periodicite</td>"
-			. "<td><a href='" . generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste") . "'>$titre</a><br />"
+			. "<br />$periodicite</td>\n"
+			. "<td><a href='" . generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste") . "'>$titre</a>"
+			. "<br />".spiplistes_nb_abonnes_liste_str_get($id_liste, false)."."
 			. "</td>"
 			. "<td>"
 			.	(
 				($proch > 0)
-				? _T('spiplistes:dans_jours')." <strong>$proch</strong> "._T('spiplistes:jours')."</td>"
-				: "<strong>"._T('date_aujourdhui')."</strong></td>"
+				? _T('spiplistes:dans_jours')." <strong>$proch</strong> "._T('spiplistes:jours')."</td>\n"
+				: "<strong>"._T('date_aujourdhui')."</strong></td>\n"
 				)
-			. "</tr>"
+			. "</tr>\n"
 			;
 	} // end while
 	
 	$out .= ""
-		. "</table>"
+		. "</table>\n"
 		. fin_cadre_enfonce(true)
 		;
 	return ($out);
