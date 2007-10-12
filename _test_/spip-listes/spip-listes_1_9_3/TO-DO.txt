@@ -5,6 +5,7 @@
 
 
 TO-DO:
+- Modifier module import/export
 - Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"
 - Corriger documentation contextuelle
 - Annulation d'envoi dans boite autocron à revoir ;

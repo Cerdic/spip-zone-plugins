@@ -143,10 +143,9 @@ function exec_spiplistes_abonnes_tous () {
 	$page_result .= ""
 		. fin_cadre_trait_couleur(true)
 		;
-	
-	echo ($page_result);
-
-	// auteur
+		
+	////////////////////////////
+	// Liste des auteurs
 	
 	$retour = generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE);
 	
@@ -192,7 +191,6 @@ function exec_spiplistes_abonnes_tous () {
 	}
 
 	
-	//
 	// La requete de base est tres sympa
 	//
 	
@@ -215,7 +213,13 @@ function exec_spiplistes_abonnes_tous () {
 		GROUP BY aut.id_auteur
 		$sql_order";
 
-	spiplistes_afficher_auteurs($query, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE));
+	$page_result .= ""
+		. "<div id='auteurs'>\n"
+		. spiplistes_afficher_auteurs($query, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE), true)
+		. "</div>\n"
+		;
+	
+	echo($page_result);
 
 	// MODE STATUT FIN -------------------------------------------------------------
 	

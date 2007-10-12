@@ -1,5 +1,20 @@
 /* spiplistes CSS Document */
 
+table.spiplistes-abos {
+	font-size:80%;
+	border:1px solid gray;
+}
+table.spiplistes-abos tr.onglets {
+	border-bottom: 10px solid #ccc;
+	line-height:1.8em;
+	margin-bottom:1em;
+	padding:1em;
+}
+table.spiplistes-abos td {
+	line-height:1.25em;
+	border-bottom: 1px solid #ccc;
+}
+
 table.spiplistes-tab {
 	margin-top:5px;
 	font-size:90%;
@@ -24,4 +39,16 @@ table.spiplistes-tab tr.row-even {
 	font-weight:bold;
 	font-size:90%;
 	color:gray;
+}
+#boite-result-chercher-auteur {
+	text-align:left;
+	margin-bottom:1.5em;
+}
+#boite-result-chercher-auteur ul {
+	padding-left:3ex;
+}
+#boite-result-chercher-auteur  .nom_auteur {
+	font-weight:bold;
+	font-size:130%;
+	line-height:1.4em;
 }

@@ -18,7 +18,8 @@ function spiplistes_header_prive($flux) {
 	$exec = _request('exec');
 
 	if(in_array($exec, array(
-		_SPIPLISTES_EXEC_COURRIER_EDIT
+		_SPIPLISTES_EXEC_ABONNES_LISTE
+		, _SPIPLISTES_EXEC_COURRIER_EDIT
 		, _SPIPLISTES_EXEC_COURRIERS_LISTE
 		, _SPIPLISTES_EXEC_COURRIERS_LISTE
 		, _SPIPLISTES_EXEC_LISTES_LISTE

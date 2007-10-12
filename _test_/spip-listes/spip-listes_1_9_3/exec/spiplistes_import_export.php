@@ -127,7 +127,8 @@ function exec_spiplistes_import_export(){
 				;
 		}
 	}
-	$list = spip_query ("SELECT id_liste,titre,texte FROM spip_listes WHERE statut = '"._SPIPLISTES_PUBLIC_LIST."' OR statut = '"._SPIPLISTES_PRIVATE_LIST."' ");
+	$list = spip_query ("SELECT id_liste,titre,texte FROM spip_listes 
+		WHERE statut = '"._SPIPLISTES_PUBLIC_LIST."' OR statut = '"._SPIPLISTES_PRIVATE_LIST."' OR statut = '"._SPIPLISTES_MONTHLY_LIST."' ");
 	$nb_listes = spip_num_rows($list);
 	
 	if(!$nb_listes) {

@@ -20,7 +20,7 @@ L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse
 Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
    &ecirc;tre ignor&eacute;s (vous pouvez importer des listes issues des anciennces versions de SPIP-Listes).",
 
-// A
+//A
 'abo_1_lettre' => 'Lettre d\'information',
 'abonnement_0' => 'Abonnement',
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
@@ -71,6 +71,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Aller_au_panier' => "Aller au panier ",
 'Aller_aux_listes' => "Aller aux listes ",
 'Annulation_chrono_' => "Annulation du chrono pour ",
+'Abonner_format_html' => "Abonner au format HTML",
+'Abonner_format_texte' => "Abonner au format texte",
 
 //B
 
@@ -150,6 +152,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Pas_de_donnees' => "D&eacute;sol&eacute;, mais l'enregistrement demand&eacute; n'existe pas dans la base de donn&eacute;es.",
 'Desabonner_temporaire' => "D&eacute;sabonner temporairement ce compte.",
 'Desabonner_definitif' => "D&eacute;sabonner ce compte de toutes les listes de diffusion.",
+'Desabonner' => "D&eacute;sabonner",
 
 //E
 'email' => 'E-mail',
@@ -343,6 +346,7 @@ et de recevoir les lettres d\'informations.',
 'Selectionnez_une_liste_de_destination' => "S&eacute;lectionnez une ou plusieurs listes de destination pour vos abonn&eacute;s.",
 'Stoppes' => "Stopp&eacute;s",
 'Sans_destinataire' => "Sans destinataire",
+'Sans_abonnement' => "Sans abonnement",
 'Supprimer_ce_contact' => "Supprimer ce contact",
 'Supprimer_du_casier_les' => "Supprimer du casier les...",
 'Suppression_de' => "Suppression de",
