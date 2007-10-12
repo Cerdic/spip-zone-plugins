@@ -199,10 +199,8 @@ function exec_spiplistes_config () {
 		. "<input type='radio' name='abonnement_config' value='membre' $checked2 id='statut_membre' />\n"
 		. "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces')."</label>\n"
 		. "</p>\n"
-		. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
-		. "<label for='abonnement_valider' style='display:none;'>"._T('bouton_valider')."</label>\n"
-		. "<input type='submit' id='abonnement_valider' name='abonnement_valider' value='"._T('bouton_valider')."' class='fondo' />\n"
-		. "</p>\n"
+		// bouton de validation
+		. "<div style='text-align:right;'><input type='submit' name='abonnement_valider' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
 		. "</form>\n"
 		. fin_cadre_trait_couleur(true)
 		;
@@ -232,10 +230,7 @@ function exec_spiplistes_config () {
 		. fin_cadre_relief(true)
 		//
 		// bouton de validation
-		. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
-		. "<label for='btn_complement_courrier' style='display:none;'>"._T('bouton_valider')."</label>\n"
-		. "<input type='submit' id='btn_complement_courrier' name='btn_complement_courrier' value='"._T('bouton_valider')."' class='fondo' />\n"
-		. "</p>\n"
+		. "<div style='text-align:right;'><input type='submit' name='btn_complement_courrier' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
 		. "</form>\n"
 		. fin_cadre_trait_couleur(true)
 		;
@@ -314,17 +309,13 @@ function exec_spiplistes_config () {
 		. fin_cadre_relief(true)
 		//
 		// Boutons de reinit/reset/validation
-		. "<p style='text-align:right;' class='verdana2'>\n"
+		. "<div style='text-align:right;'>"
 		/* CP: bouton à mettre en place après modif base/spiplistes_init.php (pas encore installé, voir SPIP-Listes-V)
 		. "<label for='p_reinit' style='display:none;'>"._T('spiplistes:reinitialiser')."</label>\n"
 		. "<input type='submit' name='param_reinitialise' value='"._T('spiplistes:reinitialiser')."' id='p_reinit' class='fondo' />&nbsp;"
 		*/
-		. "<label for='p_reset' style='display:none;'>"._T('spiplistes:Retablir')."</label>\n"
 		. "<input type='reset' name='param_reset' value='"._T('spiplistes:Retablir')."' class='fondo' id='p_reset' class='fondo' style='display:inline' />&nbsp;"
-		. "<label for='p_valid' style='display:none;'>"._T('bouton_valider')."</label>\n"
-		. "<input type='submit' name='btn_param_valider' value='"._T('bouton_valider')."' class='fondo' style='display:inline' />\n"
-		. "</p>\n"
-		//
+		. "<input type='submit' name='btn_param_valider' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
 		. "</form>\n"
 		. fin_cadre_trait_couleur(true)
 		;
@@ -347,10 +338,9 @@ function exec_spiplistes_config () {
 					. " />\n"
 				. "<label class='verdana2' for='opt_console_syslog'>"._T('spiplistes:Console_syslog_texte')."</label>\n"
 				. fin_cadre_relief(true)
-				. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
-				. "<label for='btn_console_syslog' style='display:none;'>"._T('bouton_valider')."</label>\n"
-				. "<input type='submit' id='btn_console_syslog' name='btn_console_syslog' value='"._T('bouton_valider')."' class='fondo' />\n"
-				. "</p>\n"
+				//
+				// bouton de validation
+				. "<div style='text-align:right;'><input type='submit' name='btn_console_syslog' class='fondo' value='"._T('bouton_valider')."' /></div>\n"
 				. "</form>\n"
 				;
 		}
