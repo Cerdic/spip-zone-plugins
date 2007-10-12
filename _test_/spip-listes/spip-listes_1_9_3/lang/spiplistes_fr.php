@@ -70,6 +70,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Generer_Apercu' => "G&eacute;n&eacute;rer et Aper&ccedil;u",
 'Aller_au_panier' => "Aller au panier ",
 'Aller_aux_listes' => "Aller aux listes ",
+'Annulation_chrono_' => "Annulation du chrono pour ",
 
 //B
 
@@ -199,6 +200,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 
 //G
 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu",
+'Maintenance_des_listes' => "Maintenance des listes",
 
 //H
 'Historique_des_envois' => 'Historique des envois',
@@ -304,6 +306,7 @@ et de recevoir les lettres d\'informations.',
 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi",
 'Publies' => "Publi&eacute;s",
 'Pas_de_liste' => "Pas de liste",
+'Pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)",
 
 //R
 'recherche' => 'Rechercher',
@@ -353,7 +356,7 @@ et de recevoir les lettres d\'informations.',
 'texte_lettre_information' => 'Voici la lettre d\'information de ',
 'texte_pied' => '<p><b>Texte du pied de page</b>',
 'Tous_les' => 'Tous les',
-'total_items' => "Total: @total@ @item@",
+'Total' => "Total ",
 
 //V
 'version_html' => '<b>Version HTML</b>',

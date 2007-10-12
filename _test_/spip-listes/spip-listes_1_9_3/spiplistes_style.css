@@ -20,3 +20,8 @@ table.spiplistes-tab td {
 table.spiplistes-tab tr.row-even {
 	background-color:#fff;
 }
+.spiplistes-legend-stitre {
+	font-weight:bold;
+	font-size:90%;
+	color:gray;
+}

@@ -20,6 +20,7 @@ function spiplistes_header_prive($flux) {
 	if(in_array($exec, array(
 		_SPIPLISTES_EXEC_COURRIER_EDIT
 		, _SPIPLISTES_EXEC_COURRIERS_LISTE
+		, _SPIPLISTES_EXEC_MAINTENANCE
 		)
 		)
 	) {

@@ -26,7 +26,7 @@ function exec_spiplistes_maintenance () {
 	// initialise les variables postées par le formulaire
 	foreach(array_merge(
 		array(
-			'btn_supprimer_courriers', 'btn_supprimer_listes'
+			'btn_supprimer_courriers', 'btn_reset_listes', 'btn_supprimer_listes'
 		)) as $key) {
 		$$key = _request($key);
 	}
@@ -64,6 +64,23 @@ function exec_spiplistes_maintenance () {
 			}
 		}
 		// les listes
+		if($btn_reset_listes) {
+			foreach(spiplistes_listes_items_get("titre,id_liste") as $row) {
+				$titre = $row['titre'];
+				$id_liste = intval($row['id_liste']);
+				if(_request("reset_liste_$id_liste")) {
+					$msg =
+						(
+						// reset liste 
+						spip_query("UPDATE spip_listes SET message_auto='non',date='' WHERE id_liste=$id_liste LIMIT 1")
+						)
+						?	$msg_ok
+						:	$msg_bad
+						;
+					$msg_maintenance[] = _T('spiplistes:Annulation_chrono_')." : ".$titre."... ".$msg.$msg_end;
+				}
+			}
+		}
 		if($btn_supprimer_listes) {
 			foreach(spiplistes_listes_items_get("titre,id_liste") as $row) {
 				$titre = $row['titre'];
@@ -146,34 +163,84 @@ function exec_spiplistes_maintenance () {
 	}
 	$page_result .= ""
 		//
-		// bouton valider
-		. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
+		// bouton valider casier
+		. "<div class='verdana2' style='margin-top:1ex;text-align:$spip_lang_right;'>\n"
 		. "<label for='btn_supprimer_courriers' style='display:none;'>"._T('bouton_valider')."</label>\n"
 		. "<input type='submit' id='btn_supprimer_courriers' name='btn_supprimer_courriers' value='"._T('bouton_valider')."' class='fondo' />\n"
-		. "</p>\n"
+		. "</div>\n"
 		. "</form>\n"
 		. fin_cadre_trait_couleur(true)
 		;
 
 	//////////////////////////////////////////////////////
 	// Boite des listes
+	$nb_listes = spiplistes_listes_count();
+	$nb_listes_desc = 
+						($nb_listes==1)
+						? _T('spiplistes:info_1_liste')
+						: "$nb_listes "._T('spiplistes:info_liste_2')
+						;
+	$listes_array = spiplistes_listes_items_get("id_liste,titre,message_auto");
+	$nb_listes_auto = 0;
+	foreach($listes_array as $row) {
+		if($row['message_auto']=='oui') {
+			$nb_listes_auto++;
+		}
+	}
 	$page_result .= ""
-		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:Supprimer_les_listes'))
+		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:Maintenance_des_listes'))
+		// 
+		/////////////////////////////////////////
+		// Reset des listes : date des listes remises à zéro (supprimer les chronos)
+		. debut_cadre_relief("", true, "", _T('spiplistes:Supprimer_les_chronos'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE)."' method='post'>\n"
 		. "<p class='verdana2'>"._T('spiplistes:Conseil_sauvegarder_listes')."</p>\n"
 		;
-	if($ii = spiplistes_listes_count()) {
+	if($nb_listes_auto) {
+		$page_result .= ""
+			. "<fieldset class='verdana2'><legend>&nbsp;"._T('spiplistes:Supprimer_les_chronos')
+				. "&nbsp;<span class='spiplistes-legend-stitre'>("._T('spiplistes:Total').": $nb_listes_auto / $nb_listes_desc)</span></legend>\n"
+			;
+		foreach($listes_array as $row) {
+			if($row['message_auto']=='oui') {
+				$titre = $row['titre'];
+				$id_liste = intval($row['id_liste']);
+				$page_result .= ""
+					. "<div>"
+					. "<input type='checkbox' name='reset_liste_$id_liste' value='$id_liste' id='reset_liste_$id_liste' />"
+					. "<label for='reset_liste_$id_liste'>$titre</label>\n"
+					. "</div>\n"
+					;
+			}
+		}
+		$page_result .= ""
+			. "</fieldset>"
+			;
+	}
+	else {
+		$page_result .= "<p class='verdana2'>"._T('spiplistes:Pas_de_liste_en_auto')."</p>";
+	}
+	$page_result .= ""
+		// bouton valider les resets
+		. "<div class='verdana2' style='margin-top:1ex;text-align:$spip_lang_right;'>\n"
+		. "<label for='btn_reset_listes' style='display:none;'>"._T('bouton_valider')."</label>\n"
+		. "<input type='submit' id='btn_reset_listes' name='btn_reset_listes' value='"._T('bouton_valider')."' class='fondo' />\n"
+		. "</div>\n"
+		. "</form>\n"
+		. fin_cadre_relief(true)
+		//
+		/////////////////////////////////////////
+		// supprimer les listes
+		. debut_cadre_relief("", true, "", _T('spiplistes:Supprimer_les_listes'))
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE)."' method='post'>\n"
+		. "<p class='verdana2'>"._T('spiplistes:Conseil_sauvegarder_listes')."</p>\n"
+		;
+	if($nb_listes) {
 		$page_result .= ""
 			. "<fieldset class='verdana2'><legend>&nbsp;"._T('spiplistes:Supprimer_la_liste')
-				."&nbsp;("
-					.	(
-						($ii==1)
-						? _T('spiplistes:total_items', array('total'=>'', 'item'=>_T('spiplistes:info_1_liste')))
-						: _T('spiplistes:total_items', array('total'=>$ii, 'item'=>_T('spiplistes:info_liste_2')))
-						)
-					.")</legend>\n"
+				. "&nbsp;<span class='spiplistes-legend-stitre'>("._T('spiplistes:Total').": $nb_listes_desc)</span></legend>\n"
 			;
-		foreach(spiplistes_listes_items_get("titre,id_liste") as $row) {
+		foreach($listes_array as $row) {
 			$titre = $row['titre'];
 			$id_liste = intval($row['id_liste']);
 			$page_result .= ""
@@ -191,13 +258,15 @@ function exec_spiplistes_maintenance () {
 		$page_result .= "<p class='verdana2'>"._T('spiplistes:Pas_de_liste')."</p>";
 	}
 	$page_result .= ""
-		//
-		// bouton valider
-		. "<p class='verdana2' style='text-align:$spip_lang_right;'>\n"
+		// bouton valider le suppressions
+		. "<div class='verdana2' style='margin-top:1ex;text-align:$spip_lang_right;'>\n"
 		. "<label for='btn_supprimer_listes' style='display:none;'>"._T('bouton_valider')."</label>\n"
 		. "<input type='submit' id='btn_supprimer_listes' name='btn_supprimer_listes' value='"._T('bouton_valider')."' class='fondo' />\n"
-		. "</p>\n"
+		. "</div>\n"
 		. "</form>\n"
+		. fin_cadre_relief(true)
+		//
+		// fin du cadre des listes
 		. fin_cadre_trait_couleur(true)
 		;
 
