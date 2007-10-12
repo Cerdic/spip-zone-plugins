@@ -39,20 +39,27 @@ function honeypot_http_img_rien($width, $height, $style='', $title='') {
 // pondre les stats sous forme d'un fichier csv tres basique
 function honeypot_statistiques_csv($filtre) {
   if($filtre)
-	$q = "SELECT date, type, threat, filtre, cnt FROM spip_honeypot_stats WHERE filtre$filtre ORDER BY date";
+	$q = "SELECT date, type, SUM(threat), filtre, SUM(cnt) FROM spip_honeypot_stats WHERE filtre=$filtre GROUP BY type, date ORDER BY date";
   else
 	$q = "SELECT date, type, threat, filtre, cnt FROM spip_honeypot_stats ORDER BY date";
   
   if (!autoriser('voirhoneypotstats', '')) exit;
   
   
-  $filename = 'honeypot_stats.csv';
+  $filename = 'honeypot_stats';
+  if($filtre) $filename .= "_filtre$filtre";
+  $filename .= '.csv';
   header('Content-Type: text/csv');
   header('Content-Disposition: attachment; filename='.$filename);
   
   $s = spip_query($q);
+  echo "date;cnt;type;threat";
+  if(!$filtre) echo ";filtre";
+  echo "\n";
   while ($t = spip_fetch_array($s)) {
-	echo $t['date'].";".$t['cnt'].";".$t['type'].";".(intval($t['threat'])/intval($t['cnt']))."\n";
+	echo $t['date'].";".$t['cnt'].";".$t['type'].";".(intval($t['threat'])/intval($t['cnt']));
+	if(!$filtre) echo ";".$t['filtre'];
+	echo "\n";
   }
 }
 
