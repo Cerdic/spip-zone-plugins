@@ -85,7 +85,7 @@ $inscription_visiteur ="";
 					$adresse_site = lire_meta("adresse_site");
 	
 					$message = _T('pass_mail_passcookie', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site, 'cookie' => $cookie));
-					if (envoyer_mail($email, "[$nom_site_spip] "._T('pass_oubli_mot'), $message))
+					if (envoyer_mail($email_oubli, "[$nom_site_spip] "._T('pass_oubli_mot'), $message))
 						$erreur = _T('pass_recevoir_mail');
 					else
 						$erreur = _T('pass_erreur_probleme_technique');
