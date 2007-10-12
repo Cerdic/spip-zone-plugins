@@ -79,7 +79,7 @@ $inscription_visiteur ="";
 					$erreur = _T('pass_erreur_acces_refuse');
 				else {
 					$cookie = creer_uniqid();
-					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email));
+					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email_oubli));
 	
 					$nom_site_spip = lire_meta("nom_site");
 					$adresse_site = lire_meta("adresse_site");
