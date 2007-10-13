@@ -183,6 +183,12 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Erreur_appel_courrier' => "Erreur lors de l'appel du courrier",
 'Lister_articles_de_rubrique' => "Et lister les articles de la rubrique ",
 'Lister_articles_mot_cle' => "Et lister les articles du mot-cl&eacute; ",
+'editeur_nom' => "Nom de l'&eacute;diteur ",
+'editeur_adresse' => "Adresse ",
+'editeur_rcs' => "N&deg; RCS ",
+'editeur_siret' => "N&deg; SIRET ",
+'editeur_url' => "URL du site de l'&eacute;diteur ",
+'editeur_logo' => "URL du logotype de l'&eacute;diteur ",
 
 //F
 'faq' => 'FAQ',
@@ -310,6 +316,7 @@ et de recevoir les lettres d\'informations.',
 'Publies' => "Publi&eacute;s",
 'Pas_de_liste' => "Pas de liste",
 'Pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)",
+'Patron_du_tampon' => "Patron du tampon ",
 
 //R
 'recherche' => 'Rechercher',

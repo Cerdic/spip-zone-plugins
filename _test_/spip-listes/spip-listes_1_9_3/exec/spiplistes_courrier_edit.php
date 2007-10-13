@@ -159,7 +159,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' /></div>\n"
 		//sélection du patron
 		. "<label class='verdana2' style='font-weight:bold;display:block;margin-top:1em;' for='patron'>"._T('spiplistes:Choisir_un_patron').":</label>\n"
-		. spiplistes_boite_selection_patrons ("", true, "patron", 1, "100%")."<br />\n"
+		. spiplistes_boite_selection_patrons ("", true, "patrons/", "patron", 1, "100%")."<br />\n"
 		//
 		//
 		. "<div id='boite-2-cols' style='margin:1em 0;padding:0;vertical-align:top;width:100%;height:3em;'>\n" 

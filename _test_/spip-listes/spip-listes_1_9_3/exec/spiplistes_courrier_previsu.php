@@ -55,6 +55,12 @@ function exec_spiplistes_courrier_previsu(){
 	$id_courrier = intval($id_courrier);
 	$charset = lire_meta('charset');
 	
+	$texte_editeur =
+		(__plugin_lire_s_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES) == 'oui')
+		? spiplistes_tampon_html_get(__plugin_lire_s_meta('tampon_patron', _SPIPLISTES_META_PREFERENCES))
+		: ""
+		;
+	
 	if($lire_base) {
 		// prendre le courrier enregistré dans la base
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
@@ -71,7 +77,7 @@ function exec_spiplistes_courrier_previsu(){
 					// forcer IE à afficher en ligne. 
 					header("Content-Disposition: inline; filename=spiplistes-previsu.txt");
 
-					$message_texte = empty($message_texte) ? version_texte($texte) : $message_texte;
+					$message_texte = empty($message_texte) ? version_texte($texte.$texte_editeur) : $message_texte;
 					echo($message_texte);
 				}
 				else {
@@ -86,13 +92,14 @@ function exec_spiplistes_courrier_previsu(){
 						. "<body style='text-align:center;'>\n"
 						. "<div style='margin:0 auto;'>\n"
 						. $texte
+						. $texte_editeur
 						. "</div>\n"
 						. "</body>\n"
 						. "</html>\n";
 					ajax_retour($texte);
 				}
 			}
-			echo($texte);
+			//echo($texte);
 		}
 		else {
 			echo(_T('spiplistes:Erreur_courrier_introuvable'));
@@ -131,7 +138,7 @@ function exec_spiplistes_courrier_previsu(){
 	
 		$contexte_pied = array('lang'=>$lang);
 		$texte_pied = recuperer_fond('modeles/piedmail', $contexte_pied);
-	
+		
 		$page_result = ""
 			// boite courrier au format html
 			. debut_cadre_couleur('', true)
@@ -150,6 +157,7 @@ function exec_spiplistes_courrier_previsu(){
 			. liens_absolus($texte)
 			. $message_erreur
 			. $texte_pied
+			. $texte_editeur
 			. "</div>\n"
 			. "<p style='text-align:right;margin-bottom:0;'><input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
 			. "</form>\n"

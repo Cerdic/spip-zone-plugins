@@ -524,7 +524,7 @@ function spiplistes_boite_info_id ($titre, $id, $return = true, $id_objet = fals
 	else echo($result);
 }
 
-// renvoie liste des patrons en excluant les sous-versions (texte, lang)
+// renvoie liste des patrons en excluant les sous-versions (texte, lang) (CP-20071012)
 function spiplistes_liste_des_patrons ($chemin) {
 	$liste_patrons = find_all_in_path($chemin, "[.]html$");
 	$result = array();
@@ -541,20 +541,22 @@ function spiplistes_liste_des_patrons ($chemin) {
 	return($result);
 }
 
-// construit la boite de selection patrons
-function spiplistes_boite_selection_patrons ($current_titre="", $return=false, $select_nom="patron", $size_select=10, $width='34ex') {
+// construit la boite de selection patrons (CP-20071012)
+function spiplistes_boite_selection_patrons ($current_titre="", $return=false, $chemin="patrons/", $select_nom="patron", $size_select=10, $width='34ex') {
+	global $couleur_claire;
 	$result = "";
 	// va chercher la liste des patrons
-	$liste_patrons = spiplistes_liste_des_patrons ("patrons/");
+	$liste_patrons = spiplistes_liste_des_patrons ($chemin);
 	// boite de sélection du patron
 	$result  .= "<select style='width:$width;'  name='". $select_nom . "' name='". $select_nom . "' class='verdana1' size='" . $size_select . "'>\n";
 	// par defaut, selectionne le premier
 	$selected = (empty($title_selected) ? "selected='selected'" : ""); 
 	foreach($liste_patrons as $titre_option) {
-		//$titre_option = basename($titre_option, ".html");
-		if($titre_option == $current_titre) {
-			$selected = "selected='selected'";
-		}	
+		$selected =
+			($titre_option == $current_titre)
+			? " selected='selected' style='background:$couleur_claire;' "
+			: ""
+			;
 		$result .= "<option $selected value='" . $titre_option . "'>" . $titre_option . "</option>\n";
 		if (!empty($selected)) {
 			$selected = "";
@@ -644,6 +646,36 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO') {
 		$texte = strtr($texte, $remplacements);
 	}
 	return($texte);
+}
+
+// donne contenu tampon au format html (CP-20071013)
+// tampon_patron: nom du tampon (fichier, sans extension)
+function spiplistes_tampon_html_get ($tampon_patron) {
+	$contexte_patron = array();
+	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
+		$contexte_patron[$key] = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+	}
+	include_spip('public/assembler');
+	return(recuperer_fond("patrons/tampons_courriers/".$tampon_patron, $contexte_patron));
+}
+
+// donne contenu tampon au format texte (CP-20071013)
+// tampon_patron: nom du tampon (fichier, sans extension)
+// tampon_html: contenu html converti en texte si pas de contenu
+function spiplistes_tampon_texte_get ($tampon_patron, $tampon_html) {
+	$contexte_patron = array();
+	$result = false;
+	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
+		$contexte_patron[$key] = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+	}
+	$f = "patrons/tampons_courrier/".$tampon_patron;
+	if (find_in_path($f."_texte.html")){
+		$result = recuperer_fond($f, $contexte_patron);
+	}
+	if(!$result) {
+		$result = version_texte($tampon_html);
+	}
+	return($result);
 }
 
 /******************************************************************************************/

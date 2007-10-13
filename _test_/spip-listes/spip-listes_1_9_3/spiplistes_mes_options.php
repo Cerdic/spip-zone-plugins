@@ -91,6 +91,9 @@ define("_SPIPLISTES_FORMATS_ALLOWED", "html;texte;non");
 
 define("_SPIPLISTES_META_PREFERENCES", 'spiplistes_preferences');
 
+// tampon
+define("_SPIPLISTES_TAMPON_CLES", "editeur_nom,editeur_adresse,editeur_rcs,editeur_siret,editeur_url,editeur_logo");
+
 define("_SPIPLISTES_TIME_1_DAY", (3600 * 24));
 
 //Balises Spip-listes

@@ -125,7 +125,7 @@ spiplistes_log("CRON: nb listes ok:".spip_num_rows($listes_privees_et_publiques)
 			VALUES ("._q($titre).", NOW(),'$statut','"._SPIPLISTES_TYPE_LISTEAUTO."'
 			, $id_auteur, $id_liste, $date_debut_envoi, $date_fin_envoi,"._q($texte).")";
 		$result = spip_query($sql_query);
-spiplistes_log($sql_query);
+//spiplistes_log($sql_query);
 
 		/////////////////////////////
 		// Ajoute les abonnés dans la queue (spip_auteurs_courriers)

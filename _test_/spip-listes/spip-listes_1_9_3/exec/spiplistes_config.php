@@ -43,8 +43,13 @@ function exec_spiplistes_config () {
 	
 	$keys_complement_courrier = array(
 		'opt_lien_en_tete_courrier'
-		, 'opt_ajout_tampon_editeur'
+		, 'opt_ajout_tampon_editeur', 'tampon_patron'
 		);
+	$keys_complement_courrier = array_merge($keys_complement_courrier, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
+	$tampon_labels = array_flip($_tampon_cles);
+	foreach($tampon_labels as $key=>$value) {
+		$tampon_labels[$key] = _T('spiplistes:'.$key);
+	}
 
 	$keys_param_valider = array(
 		'email_defaut'
@@ -207,6 +212,13 @@ function exec_spiplistes_config () {
 
 	//////////////////////////////////////////////////////
 	// Boite parametrage complément du courrier
+	$opt_ajout_tampon_editeur = (__plugin_lire_s_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES) == 'oui');
+	if($opt_ajout_tampon_editeur) {
+		$tampon_patron = __plugin_lire_s_meta('tampon_patron', _SPIPLISTES_META_PREFERENCES);
+		foreach($_tampon_cles as $key) {
+			$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
+		}
+	}
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, "", _T('spiplistes:Complement_des_courriers'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
@@ -224,9 +236,26 @@ function exec_spiplistes_config () {
 		. debut_cadre_relief("", true, "", _T('spiplistes:Complement_tampon_editeur'))
 		. "<p class='verdana2'>"._T('spiplistes:Complement_tampon_editeur_desc')."</p>"
    	. "<input type='checkbox' name='opt_ajout_tampon_editeur' value='oui' id='opt_ajout_tampon_editeur' "
-			. ((__plugin_lire_s_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "")
-			. " />\n"
+			. ($opt_ajout_tampon_editeur ? "checked='checked'" : "")
+			. " onchange=\"jQuery('#coordonnes_editeur').show()\" />\n"
    	. "<label class='verdana2' for='opt_ajout_tampon_editeur'>"._T('spiplistes:Complement_tampon_editeur_label')."</label>\n"
+		//
+		// coordonnées editeur: bloc coordonnes_editeur
+		. "<div id='coordonnes_editeur' style='margin-top:1em;'>"
+		// tampon sélecteur
+   	. "<label class='verdana2' style='padding-left:2ex;' for='tampon_patron'>"._T('spiplistes:Patron_du_tampon').":</label>\n"
+		. spiplistes_boite_selection_patrons($tampon_patron, true, "patrons/tampons_courriers/", "tampon_patron", 1)
+		. "<ul class='verdana2' style='".(!$opt_ajout_tampon_editeur ? "display:none;" : "")."list-style:none;padding-left:2ex;'>\n"
+		;
+		foreach($_tampon_cles as $key) {
+			$page_result .= ""
+				. "<li><label for='id_$key'>".$tampon_labels[$key].":</label>"
+				. "<input type='text' name='$key' id='id_$key' size='40' class='forml' value=\"{$$key}\" /></li>\n"
+				;
+		}
+	$page_result .= ""
+		. "</lu>\n"
+		. "</div>\n" // fin bloc coordonnes_editeur
 		. fin_cadre_relief(true)
 		//
 		// bouton de validation
@@ -332,7 +361,7 @@ function exec_spiplistes_config () {
 				//
 				// ajout du renvoi de tete
 				. debut_cadre_relief("", true, "", _T('spiplistes:Console_syslog'))
-				. "<p class='verdana2'>"._T('spiplistes:Console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>"
+				. "<p class='verdana2'>"._T('spiplistes:Console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR']))."</p>\n"
 				. "<input type='checkbox' name='opt_console_syslog' value='oui' id='opt_console_syslog' "
 					. ((__plugin_lire_s_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "")
 					. " />\n"

@@ -424,7 +424,7 @@ spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 		. "<li>"._T('spiplistes:message_sujet').": <input type='text' name='titre_message' value='".$titre_message."' size='50' class='fondl' /> </li>\n"
 		. "<li>"._T('spiplistes:squel')
 		//
-		. spiplistes_boite_selection_patrons ($patron, true, "patron", 1)
+		. spiplistes_boite_selection_patrons ($patron, true, "patrons/", "patron", 1)
 		//
 		. "</li>\n"
 		// chrono début de mois

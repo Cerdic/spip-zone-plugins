@@ -58,7 +58,11 @@ function spiplistes_meleuse () {
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 	
 	// initialise les options
-	foreach(array('opt_simuler_envoi','opt_lien_en_tete_courrier','opt_ajout_tampon_editeur') as $key) {
+	foreach(array(
+		'opt_simuler_envoi'
+		,'opt_lien_en_tete_courrier'
+		,'opt_ajout_tampon_editeur', 'tampon_patron'
+		) as $key) {
 		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
 	}
 
@@ -78,6 +82,15 @@ function spiplistes_meleuse () {
 		$nomsite = $GLOBALS['meta']['nom_site'];
 		$urlsite = $GLOBALS['meta']['adresse_site'];
 
+		// prépare le tampon editeur
+		if($opt_ajout_tampon_editeur && !empty($tampon_patron)) {
+			$tampon_html = spiplistes_tampon_html_get($tampon_patron);
+			$tampon_texte = spiplistes_tampon_texte_get($tampon_patron, $tampon_html);
+		}
+		else {
+			$tampon_html = $tampon_texte = "";
+		}
+		
 		// boucle (sur LIMIT 1) pour pouvoir sortir par break si erreur
 		while($row = spip_fetch_array($sql_result)) {
 		
@@ -170,12 +183,7 @@ function spiplistes_meleuse () {
 			////////////////////////////////////		  
 			// Applique le tampon éditeur en fin de mail
 			if($opt_ajout_tampon_editeur) {
-				// html
-				$ii = "<hr style='border:0; border-top:1px solid #cccccc;' />";
-				$page_html .= $ii._T('spiplistes:editeur').$nomsite."<br />".$urlsite.$ii;
-				// texte
-				$ii = "\n".str_repeat("-", 40);
-				$tampon_texte = "\n".$ii."\n"._T('spiplistes:editeur').$nomsite."\n".$urlsite.$ii;
+				$page_html .= $tampon_html;
 				$page_texte .= $tampon_texte;
 			}
 		
