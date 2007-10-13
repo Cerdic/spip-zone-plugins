@@ -507,6 +507,9 @@ function spiplistes_boite_info_id ($titre, $id, $return = true, $id_objet = fals
 				list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
 				$logo = "<div style='text-align: center;margin:1em 0;'>$img</div>";
 			}
+			else {
+				$logo = "";
+			}
 		}
 		$result = 
 			debut_boite_info(true)
