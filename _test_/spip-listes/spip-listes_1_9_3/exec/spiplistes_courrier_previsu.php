@@ -79,6 +79,7 @@ function exec_spiplistes_courrier_previsu(){
 
 					$message_texte = empty($message_texte) ? version_texte($texte.$texte_editeur) : $message_texte;
 					echo($message_texte);
+					exit(0);
 				}
 				else {
 					$texte = ""
@@ -99,7 +100,7 @@ function exec_spiplistes_courrier_previsu(){
 					ajax_retour($texte);
 				}
 			}
-			//echo($texte);
+			echo($texte);
 		}
 		else {
 			echo(_T('spiplistes:Erreur_courrier_introuvable'));
