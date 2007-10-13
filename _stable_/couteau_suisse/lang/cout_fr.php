@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'insert_head:description' => "Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).",
 
 	'verstexte:nom' => 'Version texte',
-	'verstexte:description' => "2 filtres pour vos squelettes.
+	'verstexte:description' => "2 filtres pour vos squelettes, permettant de produire des pages plus l&eacute;g&egrave;res.
 _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires.
 _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein.",
 
@@ -109,7 +109,7 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 
 	'decoration:nom' => 'D&eacute;coration',
 	'decoration:description' => "De nouveaux styles param&eacute;trables dans vos textes et accessibles gr&acirc;ce &agrave; des balises &agrave; chevrons. Exemple : 
-&lt;mabalise&gt;texte&lt;/mabalise&gt;.<br />D&eacute;finissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
+&lt;mabalise&gt;texte&lt;/mabalise&gt; ou : &lt;mabalise/&gt;.<br />D&eacute;finissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
 - {type.mabalise = mon style CSS}
 - {type.mabalise.class = ma classe CSS}
 - {type.mabalise.lang = ma langue (ex : fr)}

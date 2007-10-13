@@ -11,27 +11,31 @@ function decoration_installe() {
 cs_log("decoration_installe()");
 	// on decode les balises entrees dans la config
 	$deco_balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
-	$aide = $chevrons1 = $chevrons2 = $styles = $fins = $alias = $auto_bal = $auto_rempl = array();
+	$aide = $trouve = $remplace = $alias = $auto_balises = $auto_remplace = array();
 	foreach ($deco_balises as $balise) {
 		if (preg_match('/(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
 			// les class/lang
 			list($div, $racc, $class) = array($regs[1], trim($regs[2]), trim($regs[4]));
 			if ($div=='auto') {
-				$auto_bal[] = preg_quote($racc, ','); 
-				$auto_rempl[$racc] = "$regs[3]=\"$class\">";
+				$auto_balises[] = $racc; 
+				$auto_remplace[$racc] = "$regs[3]=\"$class\">";
 			} else {
-				$aide[] = $racc; $chevrons1[] = "<$racc>"; $chevrons2[] = "</$racc>";
-				$styles[] = "<$regs[1] $regs[3]=\"$class\">"; $fins[] = "</$regs[1]>";
+				$aide[] = $racc; 
+				$trouve[] = "<$racc>"; $trouve[] = "</$racc>"; $trouve[] = "<$racc/>";
+				$remplace[] = $a = "<$regs[1] $regs[3]=\"$class\">"; 
+				$remplace[] = $b = "</$regs[1]>"; $remplace[] = $a.$b;
 			}
 		} elseif (preg_match('/(span|div|auto)\.([^=]+)=(.+)$/', $balise, $regs)) {
 			// les styles inline
 			list($div, $racc, $style) = array($regs[1], trim($regs[2]), trim($regs[3]));
 			if ($div=='auto') {
-				$auto_bal[] = preg_quote($racc, ','); 
-				$auto_rempl[$racc] = "style=\"$style\">";
+				$auto_balises[] = $racc; 
+				$auto_remplace[$racc] = "style=\"$style\">";
 			} else {
-				$aide[] = $racc; $chevrons1[] = "<$racc>"; $chevrons2[] = "</$racc>";
-				$styles[] = "<$regs[1] style=\"$style\">"; $fins[] = "</$regs[1]>";
+				$aide[] = $racc; 
+				$trouve[] = "<$racc>"; $trouve[] = "</$racc>"; $trouve[] = "<$racc/>";
+				$remplace[] = $a = "<$regs[1] style=\"$style\">";
+				$remplace[] = $b = "</$regs[1]>"; $remplace[] = $a.$b;
 			}
 		} elseif (preg_match('/([^=]+)=(.+)$/', $balise, $regs)) {
 			// les alias
@@ -40,27 +44,29 @@ cs_log("decoration_installe()");
 	}
 	// ajout des alias qu'on a trouves
 	foreach ($alias as $a=>$v) 
-		if(($i=array_search($v, $aide, true))!==false) {
-			$aide[] = $a; $chevrons1[] = "<$a>"; $chevrons2[] = "</$a>";
-			$styles[] = $styles[$i]; $fins[] = $fins[$i];
-		} elseif(array_search(preg_quote($v, ','), $auto_bal, true)!==false) {
-			$auto_bal[] = preg_quote($a, ',');
-			$auto_rempl[$a] = $auto_rempl[$v];
+		if(($i=array_search("<$v>", $trouve, true))!==false) {
+			$aide[] = $a; $trouve[] = "<$a>"; $trouve[] = "</$a>"; $trouve[] = "<$a/>";
+			$remplace[] = $remplace[$i]; $remplace[] = $remplace[$i+1]; $remplace[] = $remplace[$i+2];
+		} elseif(array_search($v, $auto_balises, true)!==false) {
+			$auto_balises[] = $a;
+			$auto_remplace[$a] = $auto_remplace[$v];
 		}
 	// liste des balises disponibles
-	$aide = '<strong>'.join('</strong>, <strong>', array_merge($aide, $auto_bal)).'</strong>';
+	$aide = '<strong>'.join('</strong>, <strong>', array_merge($aide, $auto_balises)).'</strong>';
 	// sauvegarde en meta : aide
 	ecrire_meta('cs_decoration_racc', $aide);
+	// protection $auto_balises pour la future regExpr
+	foreach($auto_balises as $i=>$v) $auto_balises[$i] = preg_quote($v, ',');
 	// sauvegarde en meta : decoration
 	ecrire_meta('cs_decoration', serialize(array(
 		// balises fixes a trouver
-		array_merge($chevrons1, $chevrons2), 
+		$trouve, 
 		// replacement des balises fixes
-		array_merge($styles, $fins),
+		$remplace,
 		// RegExpr pour les balises automatiques
-		count($auto_bal)?',<('.join('|', $auto_bal).')>(.*?)</\1>,ms':'',
+		count($auto_balises)?',<('.join('|', $auto_balises).')>(.*?)</\1>,ms':'',
 		// association pour les balises automatiques
-		$auto_rempl
+		$auto_remplace
 	)));
 	ecrire_metas();
 }
@@ -82,6 +88,8 @@ function decoration_callback($matches) {
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function decoration_rempl($texte) {
 	if (strpos($texte, '<')===false) return $texte;
+	// reecrire les raccourcis du type <balise   />
+	$texte = preg_replace(', +/>,', '/>', $texte);
 	global $deco_balises;
 	// balises fixes, facile : on remplace tout d'un coup !
 	$texte = str_replace($deco_balises[0], $deco_balises[1], $texte);
