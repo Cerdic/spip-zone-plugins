@@ -48,65 +48,57 @@
 		</tr>
 		</thead>
 
+#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
+
 		<BOUCLE_forums_liens(FORUMS){doublons}{plat}{par date}{inverse}{age<15}{pagination 20}> 
 			<?php
 				$ze_titre = '[(#TITRE|texte_script)]' ;
 				$ze_titre = ereg_replace( "> ", "", $ze_titre );
-			
-			$closed='non'; 
+
 			?>
+			#SET{forumferme,0}
 			<BOUCLE_fo(FORUMS){id_thread}>
-				<?php 
-					$id_sujet='[(#ID_FORUM|texte_script)]'; 
-					$titre_sujet='[(#TITRE|texte_script)]';
-					$auteur_sujet='<B_auteurpa><BOUCLE_auteurpa(AUTEURS){id_auteur}{tout}><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique='.$ze_sect_art.'">#NOM</a></BOUCLE_auteurpa></B_auteurpa><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurpa>';
+				#SET{id_sujet,#ID_FORUM|texte_script}
+				#SET{titre_sujet,#TITRE|texte_script}
+				<?php
+				$auteur_sujet='<BOUCLE_auteurpa(AUTEURS){id_auteur}{tout}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]&amp;id_rubrique='.$ze_sect_art.'">#NOM</a></BOUCLE_auteurpa></B_auteurpa><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurpa>';
 				?>
 				<BOUCLE_ArticleForum(ARTICLES){id_article}>
-					<?php 
-						$titre_forum='[(#TITRE|texte_script)]';
-					?>
+					#SET{titre_forum,#TITRE|texte_script}
 				</BOUCLE_ArticleForum>
 				
 				
 				<BOUCLE_sujet_ferme(FORUMS){id_thread}{plat}>
-						<BOUCLE_ferme(FORUMS){id_forum}{titre_mot=ferme}>
-					    <?php $closed='[(#ID_FORUM|texte_script)]'; ?>
-				       </BOUCLE_ferme>
+					<BOUCLE_ferme(FORUMS){id_forum}{id_mot=#GET{id_mot_ferme}}>
+					#SET{forumferme,#ID_FORUM|texte_script}
+					</BOUCLE_ferme>
 				</BOUCLE_sujet_ferme>
-				<?php 
-					$reponse_forum=#TOTAL_BOUCLE-1;
-				?>
-			 </B_sujet_ferme>				
-				
+				#SET{reponse_forum,#TOTAL_BOUCLE-1}
+			 </B_sujet_ferme>
 			</BOUCLE_fo>
-						
 			<tr>
 				<td class="etatsuj normpost">
 					<span>&nbsp;</span>
 				</td> 
-				<td class="titre"><a href="#URL_FORUM"><?php echo $titre_forum ?></a></td>
-				<td class="titresuj"><?php $titre_sujet = ereg_replace( "> ", "", $titre_sujet ); ?><a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet ?>"><?php echo $titre_sujet ?></a></td>
+				<td class="titre"><a href="#URL_FORUM">#GET{titre_forum}</a></td>
+				<td class="titresuj"><?php $titre_sujet = ereg_replace( "> ", "", "#GET{titre_sujet}" ); ?><a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}})]">#GET{titre_sujet}</a></td>
 				<td class="autpost"><?php echo $auteur_sujet; ?></td>
-				<td class="msgpost"><?php echo $reponse_forum;?></td>
-				<td class="dermsg"><a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet?>#forum#ID_FORUM"><?php echo $ze_titre ?></a><br/>[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)<br/>] <:par_auteur:> <B_auteurp><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>">#NOM</a></BOUCLE_auteurp></B_auteurp><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurp> <a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet?>#forum#ID_FORUM">[<img src="(#CHEMIN{themes/defaut/img/icon_latest_reply.png})" border="0" alt="<:spipbb:messages_voir_dernier:>" title="<:spipbb:messages_voir_dernier:>" />]</a></td>
+				<td class="msgpost">#GET{reponse_forum}</td>
+				<td class="dermsg"><a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}})]#forum#ID_FORUM"><?php echo $ze_titre ?></a><br/>[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)<br/>] <:par_auteur:> <B_auteurp><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#GET{id_rubrique}})]">#NOM</a></BOUCLE_auteurp></B_auteurp><a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurp> <a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}})]#forum#ID_FORUM">[<img src="(#CHEMIN{themes/defaut/img/icon_latest_reply.png})" border="0" alt="<:spipbb:messages_voir_dernier:>" title="<:spipbb:messages_voir_dernier:>" />]</a></td>
 			</tr>
-			
-			
+
 		</BOUCLE_forums_liens>
 		</table>
 
-		
-		[<div class="pagination"> <!-- Section présentant la pagination -->
+		[<div class="pagination"> <!-- Section presentant la pagination -->
 			<div class="page">
 			(#PAGINATION)
 			</div>
 		</div>]
 	</B_forums_liens>
-		
+
 	</div> <!--Fin de section Corps-->
 
-	
-	
 <INCLURE{fond=pied_BB}{id_rubrique}>
 
 </div> <!-- Fin de la section contenant -->

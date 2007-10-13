@@ -1,9 +1,9 @@
 #CACHE{0}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <BOUCLE_profilbb(AUTEURS){id_auteur}{tout}>
-	<BOUCLE_statadm(AUTEURS){id_auteur}{statut=="0minirezo"}{tout}> </BOUCLE_statadm><?php $statmem='Administrateur' ?></B_statadm>
-	<BOUCLE_statredac1(AUTEURS){id_auteur}{statut=="1comite"}{tout}> </BOUCLE_statredac1><?php $statmem='R&eacute;dacteur' ?></B_statredac1>
-	<BOUCLE_statvisit(AUTEURS){id_auteur}{statut=="6forum"}{tout}> </BOUCLE_statvisit><?php $statmem='Membre' ?></B_statvisit>
+	<BOUCLE_statadm(AUTEURS){id_auteur}{statut=="0minirezo"}{tout}> </BOUCLE_statadm> #SET{statmem,'Administrateur'}</B_statadm>
+	<BOUCLE_statredac1(AUTEURS){id_auteur}{statut=="1comite"}{tout}> </BOUCLE_statredac1> #SET{statmem,'R&eacute;dacteur'}</B_statredac1>
+	<BOUCLE_statvisit(AUTEURS){id_auteur}{statut=="6forum"}{tout}> </BOUCLE_statvisit> #SET{statmem,'Membre'}</B_statvisit>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 	<title>[(#NOM_SITE_SPIP|textebrut)] - <:spipbb:voirprofil:> [(#NOM|textebrut)]</title>
@@ -45,22 +45,22 @@
                                         [<li class="site"><:spipbb:Numero_ICQ:> : (#EXTRA|extra{Numero_ICQ})</li>]
 				</ul>
 			</div>
-			
+
 			<div id="communication"> <!-- Section contenant les elements de communication -->
 				<h3><:spipbb:contact:> #NOM</h3>
 				<ul class="detmem">
 				<li id="ecrire"><:spipbb:luiecrire:> :#FORMULAIRE_ECRIRE_AUTEUR</li>
-				<?php 
-		if ($GLOBALS['auteur_session'] AND $statmem!="<:spipbb:membre:>" AND $statut!="6forum"){
+				<?php
+		if ($GLOBALS['auteur_session'] AND $statut!="6forum"){
 		
 		echo '<li class="pm"><:spipbb:mp:> :&nbsp;<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span> </a></li>'; } 
         ?><!-- l'espace derriere le span est important : ca permet au style spipbblike de fonctionner sous IE -->
 				</ul>
 			</div>
-			
+
 		</div> <!-- Fin de la section detail -->
 	</div><!-- Fin de la section corps -->
-	
+
 <INCLURE{fond=pied_BB}{id_rubrique}>
 
 </div> <!-- Fin de la section contenant -->

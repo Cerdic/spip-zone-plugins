@@ -56,46 +56,44 @@ secteurs-->
 					</tr>
 					</thead>
 					<!-- BEGIN searchresults -->
+#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
 			<BOUCLE_art(FORUMS){recherche}{id_article}{par points}{inverse}>
 				<BOUCLE_thread(FORUMS){id_thread}>
-					
-					<?php 
-						$id_sujet='[(#ID_FORUM|texte_script)]'; 
-						$titre_sujet='[(#TITRE|texte_script)]';
-					
-        				<BOUCLE_ArticleForum_art(ARTICLES){id_article}>
-        				 $titre_forum='[(#TITRE|texte_script)]'; 
-        				</BOUCLE_ArticleForum_art>
-        				$closed='non'; 
-								
-				<BOUCLE_reponsesalt(FORUMS){id_thread}{plat}> 
-					<BOUCLE_reponse_fermealt(FORUMS){id_forum}{titre_mot=ferme}>
-						$closed='[(#ID_FORUM|texte_script)]'; 
-					</BOUCLE_reponse_fermealt>
-				</BOUCLE_reponsesalt>
-					$reponse_forum=#TOTAL_BOUCLE-1 ;
-				</B_reponsesalt>
-		       ?>
-	        </BOUCLE_thread>
+					#SET{id_sujet,#ID_FORUM|texte_script}
+					#SET{titre_sujet,#TITRE|texte_script}
+
+					<BOUCLE_ArticleForum_art(ARTICLES){id_article}>
+					#SET{titre_forum,#TITRE|texte_script}
+					</BOUCLE_ArticleForum_art>
+					#SET{forumferme,0}
+					<BOUCLE_reponsesalt(FORUMS){id_thread}{plat}> 
+						<BOUCLE_reponse_fermealt(FORUMS){id_forum}{id_mot=#GET{id_mot_ferme}}>
+							#SET{forumferme,#ID_FORUM|texte_script}
+						</BOUCLE_reponse_fermealt>
+					</BOUCLE_reponsesalt>
+					#SET{reponse_forum,#TOTAL_BOUCLE-1}
+					</B_reponsesalt>
+				</BOUCLE_thread>
 				<tr class="salon"> 
-					<td colspan="2">[<img src="(#CHEMIN{themes/defaut/img/folder.png})" align="middle" alt="" />]&nbsp; 
-            <:spipbb:message_sujet:>:&nbsp;<a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet ?>&amp;recherche=<?php echo $recherche ?>">#TITRE</a></td>
+					<td colspan="2">[<img src="(#CHEMIN{themes/defaut/img/folder.png})" align="middle" alt="" />]
+					&nbsp;<:spipbb:message_sujet:>:&nbsp;
+					<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#GET{id_sujet}}|parametre_url{recherche,#RECHERCHE})]">#TITRE</a></td>
         			</tr>
 				<tr class="row1">
 					<td width="150"  rowspan="2" class="autvs"><p>
 					<B_auteurp1>
 					<BOUCLE_auteurp1(AUTEURS){id_auteur}{tout}>
-					<a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>">#NOM</a>
+					<a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=#GET{id_rubrique}">#NOM</a>
 					</BOUCLE_auteurp1>
 					</B_auteurp1>
 					<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
 					<//B_auteurp1><br/>
 					
-					<:spipbb:reponses:>: <?php echo $reponse_forum;?></p></td>
+					<:spipbb:reponses:>: #GET{reponse_forum}</p></td>
           				<td>	
           				<ul class="titrevs">
-	        				<li class="tdatevs"><:titre_forum:>:&nbsp;<a href="#URL_FORUM"><?php echo $titre_forum ?></a> &nbsp;#DATE</li>
-	        				<li class="ttitrevs"><:spipbb:message_sujet:>: <a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet ?>&amp;recherche=<?php echo $recherche ?>">#TITRE</a></li>
+	        				<li class="tdatevs"><:titre_forum:>:&nbsp;<a href="#URL_FORUM">#GET{titre_forum}</a> &nbsp;#DATE</li>
+	        				<li class="ttitrevs"><:spipbb:message_sujet:>: <a href="spip.php?page=voirsujet&amp;id_forum=#GET{id_sujet}&amp;recherche=#RECHERCHE">#TITRE</a></li>
 	        			</ul>
 	        			</td>
         			</tr>
@@ -137,46 +135,42 @@ secteurs-->
 			</tr>
 			</thead>
 			<!-- BEGIN searchresults -->
-          
+
 	<BOUCLE_tout(FORUMS){recherche}{doublons}{par points}>
-		
+
 		<BOUCLE_thread2(FORUMS){id_thread}>
 					
-					<?php 
-						$id_sujet='[(#ID_FORUM|texte_script)]'; 
-						$titre_sujet='[(#TITRE|texte_script)]';
-					
-        				<BOUCLE_ArticleForum_art2(ARTICLES){id_article}>
-        				 $titre_forum='[(#TITRE|texte_script)]'; 
-        				</BOUCLE_ArticleForum_art2>
-        				$closed='non'; 
-								
+					#SET{id_sujet,#ID_FORUM|texte_script}
+					#SET{titre_sujet,#TITRE|texte_script}
+
+					<BOUCLE_ArticleForum_art2(ARTICLES){id_article}>
+					#SET{titre_forum,#TITRE|texte_script}
+					</BOUCLE_ArticleForum_art2>
+					#SET{forumferme,0}
 				<BOUCLE_reponsesalt2(FORUMS){id_thread}{plat}> 
-					<BOUCLE_reponse_fermealt2(FORUMS){id_forum}{titre_mot=ferme}>
-						$closed='[(#ID_FORUM|texte_script)]'; 
+					<BOUCLE_reponse_fermealt2(FORUMS){id_forum}{id_mot=#GET{id_mot_ferme}}>
+					#SET{forumferme,#ID_FORUM|texte_script}
 					</BOUCLE_reponse_fermealt2>
 				</BOUCLE_reponsesalt2>
-					$reponse_forum=#TOTAL_BOUCLE-1 ;
+					#SET{reponse_forum,#TOTAL_BOUCLE-1}
 				</B_reponsesalt2>
-		       ?>
-	        </BOUCLE_thread2>
-		 
-		 
-		 <tr class="salon"> 
-			<td colspan="2">[<img src="(#CHEMIN{themes/defaut/img/folder.png})" align="middle" alt="" />]&nbsp;<:spipbb:message_sujet:>:&nbsp;<a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet ?>&amp;recherche=<?php echo $recherche ?>">#TITRE</a></td>
+		</BOUCLE_thread2>
+
+		 <tr class="salon">
+			<td colspan="2">[<img src="(#CHEMIN{themes/defaut/img/folder.png})" align="middle" alt="" />]&nbsp;<:spipbb:message_sujet:>:&nbsp;<a href="spip.php?page=voirsujet&amp;id_forum=#GET{id_sujet}&amp;recherche=#RECHERCHE">#TITRE</a></td>
 		</tr>
 		<tr class="row1"> 
 			<td class="autsuj" width="150" rowspan="2"><p>
 			<B_auteurp>
 			<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
-			<a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>">#NOM</a>
+			<a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=#GET{id_rubrique}">#NOM</a>
 			</BOUCLE_auteurp>
 			</B_auteurp>
 			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
 			<//B_auteurp>
-			<br/><:spipbb:reponses:>: <?php echo $reponse_forum;?></p>
+			<br/><:spipbb:reponses:>: #GET{reponse_forum}</p>
 			</td>
-            		<td >[<img src="(#CHEMIN{themes/defaut/img/icon_minipost.png})" width="12" height="9" alt="{searchresults.L_MINI_POST_ALT}" title="{searchresults.L_MINI_POST_ALT}" border="0" />]<:titre_forum:>:&nbsp;<a href="#URL_FORUM"><?php echo $titre_forum ?></a>&nbsp;#DATE: &nbsp;<:spipbb:message_sujet:>: <a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_sujet ?>&amp;recherche=<?php echo $recherche ?>">#TITRE</a></td>
+            		<td >[<img src="(#CHEMIN{themes/defaut/img/icon_minipost.png})" width="12" height="9" alt="{searchresults.L_MINI_POST_ALT}" title="{searchresults.L_MINI_POST_ALT}" border="0" />]<:titre_forum:>:&nbsp;<a href="#URL_FORUM">#GET{titre_forum}</a>&nbsp;#DATE: &nbsp;<:spipbb:message_sujet:>: <a href="spip.php?page=voirsujet&amp;id_forum=#GET{id_sujet}&amp;recherche=#RECHERCHE">#TITRE</a></td>
 		</tr>
 		<tr class="row1"> 
 			<td>[(#TEXTE|couper{300})]</td>

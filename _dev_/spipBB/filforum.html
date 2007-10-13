@@ -9,9 +9,9 @@
 </head>
 
 <body id="artforum" dir="#LANG_DIR">
-<!-- On regarde si le forum n'est pas ferme-->
-<?php $forumferme=0 ?>
-<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}><?php $forumferme=1 ?></BOUCLE_etat>
+	[(#REM) On regarde si le forum n'est pas ferme ]
+	#SET{forumferme,0}
+	<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}>#SET{forumferme,1}</BOUCLE_etat>
 
 <a name="haut"></a>
 
@@ -21,27 +21,25 @@
 
 	<div id="corps"> <!-- Section contenant les donnees -->
 	<h2>#TITRE</h2>
-        	<?php if($forumferme==0){ ?>
+
+	[(#SET{affbouton,[(#GET{forumferme}|=={1}|?{' ',
+		<ul class="actionforum">
+			<li class="poster">[<a href="[(#URL_PAGE{poster})]&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>">&nbsp;<span><:spipbb:sujet_nouveau:></span></a>]</li>
+		   </ul>
+	})]
+	})]
+	#GET{affbouton}
 	[(#MODELE{spipbb_moderateurs}{id_article})]
-		<ul class="actionforum">
-			<li class="poster">[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>">&nbsp;<span><:spipbb:sujet_nouveau:></span></a>]</li>
-	   </ul>
-	   <?php } ?>
 
-		#MODELE{spipbb_chemindefer}
+	#MODELE{spipbb_chemindefer}
 
-		<?php $tableau = array(); //permet de stocker les pieds de discussion ?>
-		
+	<?php $tableau = array(); //permet de stocker les pieds de discussion ?>
 
-[(#MODELE{spipbb_liste_sujets})]
+	[(#MODELE{spipbb_liste_sujets})]
 
-		<ul class="actionforum">
-	 		<?php if($forumferme==0){ ?>
-	 		<li class="poster">[<a href="spip.php?page=poster&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>"><span><:spipbb:sujet_nouveau:></span>&nbsp;</a>]</li>
-	 		<?php } ?>	
-		 </ul>
+	#GET{affbouton}
 
-		#MODELE{spipbb_chemindefer}
+	#MODELE{spipbb_chemindefer}
 
 		<?php if ($GLOBALS['auteur_session']['statut']=='0minirezo'){?><!-- Moderation pour les admin  -->
 		<ul class="actionadm">

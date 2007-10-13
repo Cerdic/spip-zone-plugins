@@ -240,11 +240,12 @@ function spipbb_afficher_mots_clefs($texte) {
 // 4 a changer par le num du Groupe de mot cle "Moderation"
 	if (($GLOBALS['auteur_session']['statut']=='0minirezo') OR ($GLOBALS['auteur_session']['statut']=='1comite'))
 	{
-		$GLOBALS['afficher_groupe'][]=3; //$GLOBALS['spipbb']['spipbb_id_mot_annonce']
-		$GLOBALS['afficher_groupe'][]=4; //$GLOBALS['spipbb']['spipbb_id_mot_ferme']
+		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['spipbb_id_groupe'];
+//		$GLOBALS['afficher_groupe'][]=3; //$GLOBALS['spipbb']['spipbb_id_mot_annonce']
+//		$GLOBALS['afficher_groupe'][]=4; //$GLOBALS['spipbb']['spipbb_id_mot_ferme']
 	}
 	else {
-		$GLOBALS['afficher_groupe'][]=0; 
+		$GLOBALS['afficher_groupe'][]=0;
 	}
 } // afficher_mots_clefs
 
@@ -252,7 +253,8 @@ function spipbb_afficher_mots_clefs($texte) {
 function spipbb_pas_afficher_mots_clefs($texte) {
 	if (($GLOBALS['auteur_session']['statut']=='0minirezo'))
 	{
-		$GLOBALS['afficher_groupe'][]=4; //$GLOBALS['spipbb']['spipbb_id_mot_ferme']
+		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['spipbb_id_groupe'];
+//		$GLOBALS['afficher_groupe'][]=4; //$GLOBALS['spipbb']['spipbb_id_mot_ferme']
 	}
 	else {
 		$GLOBALS['afficher_groupe'][]=0;

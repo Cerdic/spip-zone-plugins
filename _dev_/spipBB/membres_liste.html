@@ -6,63 +6,64 @@
 	<INCLURE{fond=inc-forum-head}>
 </head>
 
- 
-
 <body id="listmem" dir="#LANG_DIR">
-	<a name="haut"></a>
+<a name="haut"></a>
 
-	<div id="contenant"> <!-- Section contenant tout le reste -->
+<div id="contenant"> <!-- Section contenant tout le reste -->
 
 <INCLURE{fond=entete_BB}{id_rubrique}>
 
-		<div id="corps"> <!-- Section contenant les informations -->
+	<div id="corps"> <!-- Section contenant les informations -->
 
-			[(#MODELE{spipbb_chemindefer}{id_rubrique})]
+	[(#MODELE{spipbb_chemindefer}{id_rubrique})]
 
-		<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
-		<B_auteur_principal>
-		<div class="pagination">#PAGINATION</div>
-		<table summary="membres" class="spipforum">
-			<tr class="titre">
-			   <th>#</th>
-			   <th><:spipbb:nom:></th>
-			   <th><:spipbb:statut:></th>
-			   <th>&nbsp;</th>
-			   <th><:spipbb:email:></th>
-			   <th><:spipbb:date:></th>
-			   <th><:spipbb:messages:></th>
-			   <th><:spipbb:site:></th>
-			</tr>
-	
-		<!-- Debut de calcul des lignes de membres -->
-			<?php $ligne=1; ?>
-			<BOUCLE_auteur_principal(AUTEURS){tout}{par id_auteur}{inverse}{pagination 30}>
-			<!-- Ici on releve le statut de l'auteur -->
-			<BOUCLE_statadm(AUTEURS){id_auteur}{statut=="0minirezo"}{tout}> </BOUCLE_statadm><?php $statmem='<:titre_image_administrateur:>' ?></B_statadm>
-			<BOUCLE_statredac1(AUTEURS){id_auteur}{statut=="1comite"}{tout}> </BOUCLE_statredac1><?php $statmem='<:titre_image_redacteur_02:>' ?></B_statredac1>
-			<BOUCLE_statvisit(AUTEURS){id_auteur}{statut=="6forum"}{tout}> </BOUCLE_statvisit><?php $statmem='<:spipbb:membre:>' ?></B_statvisit>
-			<!-- Ligne affichant les donnees de l'auteur -->
-				<tr  class="auteur row<?php echo $ligne ?>"> 
-				      <td class="numaut">#ID_AUTEUR</td>
-				      <td class="nomaut"><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>"><span>#NOM</span></a></td>
-				      <td class="statutaut"><span><?php echo $statmem ?></span></td>
-				      <td class="pm">
-                                        <?php
-                        if ($GLOBALS['auteur_session'] AND $statmem!="<:spipbb:membre:>" AND $auteur_session['statut']!="6forum"){
-                        $id_auteur= $auteur_session['id_auteur'];
-                         echo '<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span></a>';}
-                    ?>
-                                        </td>
-				      <td class="email"><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_rubrique=<?php echo $id_rubrique ?>#ecrire" title="<:spipbb:email:>"><span><:spipbb:email:></span></a></td>
-				      <td class="dateaut">-</td>
-				      <td class="msgaut">[(#ID_AUTEUR|spipbb_nb_messages)]</td>
-					<td class="www">[<a href="(#URL_SITE)" title="#NOM_SITE" class="www"><span><:spipbb:www:></span></a>]</td>
-				</tr>
-				<?php if ($ligne==1) {$ligne=2;} else {$ligne=1;} ?>
-			</BOUCLE_auteur_principal>
+	<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
+	<B_auteur_principal>
+	<div class="pagination">#PAGINATION</div>
+	<table summary="membres" class="spipforum">
+		<tr class="titre">
+			<th>#</th>
+			<th><:spipbb:nom:></th>
+			<th><:spipbb:statut:></th>
+			<th>&nbsp;</th>
+			<th><:spipbb:email:></th>
+			<th><:spipbb:date:></th>
+			<th><:spipbb:messages:></th>
+			<th><:spipbb:site:></th>
+		</tr>
+
+		[(#REM)  Debut de calcul des lignes de membres ]
+		<BOUCLE_auteur_principal(AUTEURS){tout}{!par id_auteur}{statut IN 0minirezo,1comite,6forum}{pagination 30}>
+
+		[(#REM) Ici on releve le statut de l'auteur ]
+		<BOUCLE_statadm(AUTEURS){id_auteur}{statut=="0minirezo"}{tout}> </BOUCLE_statadm>#SET{statmem,#STATUT}</B_statadm>
+		<BOUCLE_statredac1(AUTEURS){id_auteur}{statut=="1comite"}{tout}> </BOUCLE_statredac1>#SET{statmem,#STATUT}</B_statredac1>
+		<BOUCLE_statvisit(AUTEURS){id_auteur}{statut=="6forum"}{tout}> </BOUCLE_statvisit>#SET{statmem,#STATUT}</B_statvisit>
+		<!-- Ligne affichant les donnees de l'auteur -->
+		<tr  class="auteur row[(#COMPTEUR_BOUCLE|alterner{'1','2'})]"> 
+			<td class="numaut">#ID_AUTEUR</td>
+			<td class="nomaut"><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]"><span>#NOM</span></a></td>
+			<td class="statutaut"><span>
+				[(#GET{statmem}|=={0minirezo}|?{<:titre_image_administrateur:>,''})]
+				[(#GET{statmem}|=={1comite}|?{<:titre_image_redacteur_02:>,''})]
+				[(#GET{statmem}|=={6forum}|?{<:spipbb:membre:>,''})]
+			</span></td>
+			<td class="pm">
+<?php
+if ($GLOBALS['auteur_session'] AND $auteur_session['statut']!="6forum"){
+	$id_auteur= $auteur_session['id_auteur'];
+	echo '<a href="'.generer_action_auteur("editer_message","normal/$id_auteur").'" title="<:spipbb:envmp:>"><span><:spipbb:envmp:></span></a>';}
+?>
+			</td>
+			<td class="email"><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_rubrique,#ENV{id_rubrique}})]#ecrire" title="<:spipbb:email:>"><span><:spipbb:email:></span></a></td>
+			<td class="dateaut">-</td>
+			<td class="msgaut">[(#ID_AUTEUR|spipbb_nb_messages)]</td>
+			<td class="www">[<a href="(#URL_SITE)" title="#NOM_SITE" class="www"><span><:spipbb:www:></span></a>]</td>
+		</tr>
+		</BOUCLE_auteur_principal>
 		<!-- fin de calcul des lignes de membres -->
 	</table>
-	<div class="pagination">#PAGINATION</div>
+	[<div class="pagination">(#PAGINATION{page_forum})</div>]
 	</B_auteur_principal>
 	</div> <!-- Fin de la section "corps" -->
 
@@ -70,4 +71,4 @@
 
 </div><!-- fin de la Section contenant -->
 </body>
-</html> 
+</html>

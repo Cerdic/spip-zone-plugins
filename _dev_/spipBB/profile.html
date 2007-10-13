@@ -17,7 +17,7 @@ include("ecrire/inc/presentation.php"); //encore pour les cadres
 $statut=$auteur_session['statut'];
 $id_auteur_session=$auteur_session['id_auteur'];
 $auteur=unserialize(spipbb_get_auteur_infos($id_auteur_session));
-//Si admin ou rédacteur, renvoie sur la page de gestion de leurs infos dans l'espace privé
+//Si admin ou redacteur, renvoie sur la page de gestion de leurs infos dans l'espace prive
 //if ($statut=="0minirezo" OR $statut=="1comite") {
 //	 header("Location: ./ecrire/?exec=auteurs_edit&amp;id_auteur=$id_auteur_session");
 //	 }
@@ -99,11 +99,11 @@ if ($modif) {
 		spip_query($query) OR die($query);
 	}
 	
-	// Subtilité, spip passe avant le php, donc la page est créée avant la mise à jour, donc l'avatar n'est pas à jour si on ne recharge pas la page !
+	// Subtilite, spip passe avant le php, donc la page est creee avant la mise a jour, donc l'avatar n'est pas a jour si on ne recharge pas la page !
 if(!echec){header("Location: spip.php?page=profile&id_auteur=$id_auteur_session&id_rubrique=$id_rubrique");}
 }	
 	
-//Si visiteur (et vérification de la correspondance des $id_auteurs) afficher la page.
+// Si visiteur (et verification de la correspondance des $id_auteurs) afficher la page.
 if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) { 
 ?>
 
@@ -138,24 +138,24 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 			<div id="information"> <!-- Section  des informations -->
 			<h3><:spipbb:paramprofil:></h3>
  <?php if ($echec){
-	debut_cadre_relief();
+	echo debut_cadre_relief(true);
 	echo '<img src="'.find_in_path('images/warning.gif').'" alt="'._T('spipbb:info_avertissement').'" width="48" height="48" style="float:left" />';
 	echo "<font color='red'>$echec <br />"._T('spipbb:info_recommencer')."</font>";
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 	echo "<br />";
 }
-  debut_cadre_formulaire();
+  echo debut_cadre_formulaire('',true);
   echo "<form action='spip.php?page=profile' method='post'>";
   echo "<input type='hidden' name='id_auteur' value=\"$id_auteur\" />";
   echo "<input type='hidden' name='id_rubrique' value=\"$id_rubrique\" />";
   echo "<input type='hidden' name='redirect' value=\"oui\" />";   
   echo "<input type='hidden' name='modif' value=\"1\" />";
- 			
- //
+
+  //
   // Infos personnelles
   //
   echo "<div class='serif'>";
-  	debut_cadre_relief("ecrire/img_pack/fiche-perso-24.png");
+  	echo debut_cadre_relief("ecrire/img_pack/fiche-perso-24.png",true);
   	echo _T('spipbb:titre_cadre_signature_obligatoire'); 
   	echo "("._T('spipbb:entree_nom_pseudo').")<br/>";
   	echo "<input type='text' name='nom' class='formo' value=\"".entites_html($auteur['nom'])."\" size='40' /><br />";
@@ -174,26 +174,26 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 	if ($champs_extra) {
 		include_spip("inc/extra");
 		extra_saisie($auteur['extra'], 'auteurs', 'inscription'); }
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 		echo "<br />";
         
   	if ($options == "avancees") {
-  		debut_cadre_relief("cadenas-24.png");
+  		echo debut_cadre_relief("cadenas-24.png",true);
 	  	echo "<b>"._T('spipbb:entree_cle_pgp')."</b><br/>";
 	  	echo "<textarea name='pgp' class='forml' rows='4' cols='40'>";
 	  	echo entites_html($auteur['pgp']);
 	  	echo "</textarea>\n";
-	  	fin_cadre_relief();
+	  	echo fin_cadre_relief(true);
 	  	echo "<br />"; }
 	else {
 		echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\" />"; }
 	
-	debut_cadre_relief("site-24.png");
+	echo debut_cadre_relief("site-24.png",true);
 	echo "<b>"._T('spipbb:entree_nom_site')."</b><br/>";
 	echo "<input type='text' name='nom_site_auteur' class='forml' value=\"".entites_html($auteur['nom_site'])."\" size='40' /><br />\n";
 	echo "<b>"._T('spipbb:entree_url')."</b><br/>";
   	echo "<input type='text' name='url_site' class='forml' value=\"".entites_html($auteur['url_site'])."\" size='40' />\n";
-  	fin_cadre_relief();
+  	echo fin_cadre_relief(true);
   	echo "<br />";
     
     echo "<b><:spipbb:lieu:> :</b><br /><input name=\"suppl_Localisation\" class=\"forml\" value=\"[(#EXTRA|extra{Localisation}|propre|entites_html)]\" size=\"40\" type=\"text\" /><br />";
@@ -205,21 +205,21 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
     }
     echo "<b><:spipbb:signature:> :</b><br /><textarea name=\"suppl_signature\" class=\"forml\" rows=\"5\" cols=\"40\">[(#EXTRA|extra{signature}|entites_html|propre)]</textarea>";
 
-	// le visiteur ne peut éditer son login et mais peut éditer son pass, modifier les valeurs selon les besoins  
+	// le visiteur ne peut editer son login et mais peut editer son pass, modifier les valeurs selon les besoins  
 		$edit_login = false;
 		$edit_pass = true;
-	// Je présume que c'est pour éviter de modifier ses coordonnées en cas d'utilisation d'un ldap
+	// Je presume que c'est pour eviter de modifier ses coordonnees en cas d'utilisation d'un ldap
 	if ($auteur[source] != 'spip') {
 		$edit_login = false;
 		$edit_pass = false; }
 
-	debut_cadre_relief("base-24.png");
+	echo debut_cadre_relief("base-24.png",true);
 	// Avertissement en cas de modifs de ses propres donnees
 	if ($edit_login OR $edit_pass) {
-	debut_cadre_enfonce();
+	echo debut_cadre_enfonce(true);
 	echo '<img src="'.find_in_path('images/warning.gif').'" alt="'._T('spipbb:info_avertissement').'" width="48" height="48" align="right" />';
 	echo "<b>"._T('spipbb:texte_login_precaution')."</b>\n";
-	fin_cadre_enfonce();
+	echo fin_cadre_enfonce(true);
 	echo "<br />"; }
 
 	// Un redacteur n'a pas le droit de modifier son login !
@@ -242,18 +242,18 @@ if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) {
 	if (!$edit_login) {
 		echo "</fieldset>";
 	}
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 	echo "<br />";
 
 	echo "<div align='center'><input type='submit' class='fondo' name='Valider' value='"._T('bouton_valider')."' /></div>";
 
 echo "</div>";
 echo "</form>";
-fin_cadre_formulaire(); ?>
+echo fin_cadre_formulaire(true); ?>
 			</div> <!-- Fin de la section des informations -->
 			
-			<div id="communication"> <!--Section contenant les éléments de communication-->
-				<!-- On garde cette section pour l'instant au cas où on en est besoin. La page est exactement sur le même modèle que la page profil_BB -->
+			<div id="communication"> <!--Section contenant les elements de communication-->
+				<!-- On garde cette section pour l'instant au cas ou on en ait besoin. La page est exactement sur le meme modele que la page profil_BB -->
 				<!-- A savoir qu'elle est utile dans la mise en forme par css spipbblike -->
 			</div>
 			
