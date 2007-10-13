@@ -48,7 +48,7 @@ function spiplistes_onglets ($rubrique, $onglet, $return = false) {
 }
 
 
-function spiplistes_boite_autocron(){
+function spiplistes_boite_autocron ($return = false) { 
 	@define('_SPIP_LISTE_SEND_THREADS',1);
 	include_spip('genie/spiplistes_cron');
 	if (cron_spiplistes_cron($time)) return; // rien a faire
@@ -69,40 +69,40 @@ function spiplistes_boite_autocron(){
 		$n = intval($row['n']);
 spiplistes_log("AUTOCRON nb courries prets envoi $n", LOG_DEBUG);
 
-	// CP-20070925: if à revoir. pas normal de forcer.
-	//if(true or $n > 0 ){
 	if($n > 0) {
-		echo "<br />";
-		echo debut_boite_info();
-		/*//echo "<script type='text/javascript' src='".find_in_path('javascript/autocron.js')."'></script>";*/
-		
-		echo "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>";
-		echo "<div style='padding : 10px;text-align:center'><img src='"._DIR_PLUGIN_SPIPLISTES."img_pack/48_import.gif'></div>";
-		
-		echo "<div id='meleuse'>";
-		if($total = spiplistes_nb_courriers_en_cours()) {
-			echo ""
-				. "<p align='center' id='envoi_statut'>"._T('spiplistes:envoi_en_cours')." "
-				. "<strong id='envois_restants'>$n</strong>/<span id='envois_total'>$total</span> (<span id='envois_restant_pourcent'>"
-				. round($n/$total*100)."</span>%)</p>"
-				;
-		}
-		
-		echo(
-			($opt_simuler_envoi) 
-			? "<div style='color:white;background-color:red;text-align:center;line-height:1.4em;'>"._T('spiplistes:Mode_simulation')."</div>\n" 
-			: ""
-		);
+		$result = ""
+			. "<br />"
+			. debut_boite_info(true)
+			. "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>"
+			. "<div style='padding : 10px;text-align:center'><img src='"._DIR_PLUGIN_SPIPLISTES."img_pack/48_import.gif'></div>"
+			. "<div id='meleuse'>"
+			.	(
+					($total = spiplistes_nb_courriers_en_cours())
+					?	""
+						. "<p align='center' id='envoi_statut'>"._T('spiplistes:envoi_en_cours')." "
+						. "<strong id='envois_restants'>$n</strong>/<span id='envois_total'>$total</span> (<span id='envois_restant_pourcent'>"
+						. round($n/$total*100)."</span>%)</p>"
+					:	""
+				)
+			// message si simulation d'envoi	
+			.	(
+					($opt_simuler_envoi == 'oui') 
+					? "<div style='color:white;background-color:red;text-align:center;line-height:1.4em;'>"._T('spiplistes:Mode_simulation')."</div>\n" 
+				: ""
+				)
+			;
 		
 		$href = generer_action_auteur('spiplistes_envoi_lot','envoyer');
 
-		for ($i=0;$i<_SPIP_LISTE_SEND_THREADS;$i++)
-			echo "<span id='proc$i' class='processus' name='$href'></span>";
-		if (_request('exec')==_SPIPLISTES_EXEC_COURRIERS_LISTE)
-			echo "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)."' id='redirect_after'></a>";
-		echo "</div>";
-		
-		echo "<script><!--
+		for ($i=0;$i<_SPIP_LISTE_SEND_THREADS;$i++) {
+			$result .= "<span id='proc$i' class='processus' name='$href'></span>";
+		}
+		if (_request('exec')==_SPIPLISTES_EXEC_COURRIERS_LISTE) {
+			$result .= "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)."' id='redirect_after'></a>";
+		}
+		$result .= ""
+			. "</div>"
+			. "<script><!--
 		var target = $('#envois_restants');
 		var total = $('#envois_total').html();
 		var target_pc = $('#envois_restant_pourcent');
@@ -131,24 +131,26 @@ spiplistes_log("AUTOCRON nb courries prets envoi $n", LOG_DEBUG);
 			$(this).html(ajax_image_searching).runProcessus(href);
 			//run_processus($(this).attr('id'));
 		});
-		//--></script>";
-		echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
-		echo "<p align='center'><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,'change_statut=publie&id_courrier='.$id_mess)."'>["._T('annuler')."]</a></p>";
-		echo fin_boite_info();
+		//--></script>"
+			. "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" 
+			. "<p align='center'><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,'change_statut=publie&id_courrier='.$id_mess)."'>["._T('annuler')."]</a></p>"
+			. fin_boite_info(true)
+			;
 	}
-	//echo ' <div style="background-image: url(\''. generer_url_action('cron','&var='.time()).'\');"> </div> ';
-	//spip_log("spip_listes :  autocron");	
+
+	if($return) return($result);
+	else echo($result);
 }
 
 // From SPIP-Listes-V: CP:20070923
 function spiplistes_debut_raccourcis ($titre = "", $raccourcis = true, $return = false) {
   
   $result = ""
-  	. ($raccourcis ? creer_colonne_droite('', true) : "")
-	. debut_cadre_enfonce('', true)
-	. "<span class='verdana2' style='font-size:80%;text-transform: uppercase;font-weight:bold;'>$titre</span>"
-	. "<br />"
-	;
+		. ($raccourcis ? creer_colonne_droite('', true) : "")
+		. debut_cadre_enfonce('', true)
+		. "<span class='verdana2' style='font-size:80%;text-transform: uppercase;font-weight:bold;'>$titre</span>"
+		. "<br />"
+		;
 	if($return) return($result);
 	else echo($result);
 }
