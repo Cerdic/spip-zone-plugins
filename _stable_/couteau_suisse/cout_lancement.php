@@ -130,6 +130,20 @@ cs_log("[#$rand]  -- ecriture metas");
 cs_log("[#$rand] cs_initialisation($forcer) : Sortie");
 }
 
+/*
+function qui determine si $texte est de type Block (true) ou Inline (false)
+_BALISES_BLOCS est defini dans texte.php :
+define('_BALISES_BLOCS',
+	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
+	.'t(able|[rdh]|body|foot|extarea)|'
+	.'form|object|center|marquee|address|'
+	.'d[ltd]|script|noscript|map|button|fieldset');
+*/
+function cs_block($texte) {
+	return strpos($texte, "\n\n")
+		|| preg_match(',</?(p|'._BALISES_BLOCS.')[>[:space:]],iS', $texte);
+}
+
 // evite les transformations typo dans les balises $balises
 // par exemple pour <html>, <cadre>, <code>, <frame>, <script>, <acronym> et <cite>, $balises = 'html|code|cadre|frame|script|acronym|cite'
 // $fonction est la fonction prevue pour transformer $texte

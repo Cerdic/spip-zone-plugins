@@ -110,11 +110,15 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 	'decoration:nom' => 'D&eacute;coration',
 	'decoration:description' => "De nouveaux styles param&eacute;trables dans vos textes et accessibles gr&acirc;ce &agrave; des balises &agrave; chevrons. Exemple : 
 &lt;mabalise&gt;texte&lt;/mabalise&gt;.<br />D&eacute;finissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
-- {span.mabalise = mon style CSS &agrave; l'int&eacute;rieur d'un paragraphe}
-- {div.mabalise = mon style CSS cr&eacute;ant un nouveau paragraphe}
-- {span.mabalise.class = ma classe CSS &agrave; l'int&eacute;rieur d'un paragraphe}
-- {div.mabalise.class = ma classe CSS cr&eacute;ant un nouveau paragraphe}
+- {type.mabalise = mon style CSS}
+- {type.mabalise.class = ma classe CSS}
+- {type.mabalise.lang = ma langue (ex : fr)}
 - {unalias = mabalise}
+
+Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
+- {span} : balise &agrave; l'int&eacute;rieur d'un paragraphe (type Inline)
+- {div} : balise cr&eacute;ant un nouveau paragraphe (type Block)
+- {auto} : balise d&eacute;termin&eacute;e automatiquement par le plugin
 
 [[Vos balises de style personnalis&eacute; :->%decoration_styles%]]",
 	'decoration:aide' => 'D&eacute;coration&nbsp;: <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
