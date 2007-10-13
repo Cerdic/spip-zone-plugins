@@ -39,7 +39,7 @@ function exec_spiplistes_courrier_gerer () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/barre');
-	include_spip('inc/affichage');
+	include_spip('inc/spiplistes_api');
 	include_spip('base/spip-listes');
 	include_spip('inc/spiplistes_destiner_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');

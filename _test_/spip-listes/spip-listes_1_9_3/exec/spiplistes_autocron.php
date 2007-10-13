@@ -1,9 +1,10 @@
 <?php
+// _SPIPLISTES_EXEC_AUTOCRON
+
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
 
-// _SPIPLISTES_EXEC_AUTOCRON
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

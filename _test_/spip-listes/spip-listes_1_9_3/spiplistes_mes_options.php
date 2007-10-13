@@ -280,4 +280,5 @@ $spiplistes_items = array(
 	
 include_spip('base/spip-listes');
 include_spip('inc/options_spip_listes');
+
 ?>

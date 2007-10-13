@@ -26,10 +26,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/distant');
-include_spip('inc/affichage');
 include_spip('inc/meta');
 include_spip('inc/filtres');
 include_spip('inc/lang');
+include_spip('inc/spiplistes_api');
 
 // adapté de abomailman ()
 // MaZiaR - NetAktiv

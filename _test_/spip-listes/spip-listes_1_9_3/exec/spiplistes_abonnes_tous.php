@@ -28,7 +28,7 @@ function exec_spiplistes_abonnes_tous () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/mots');
-	include_spip('inc/affichage');
+	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_afficher_auteurs');
 
 	global $connect_statut

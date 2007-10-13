@@ -12,9 +12,9 @@ function exec_spiplistes_maintenance () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/distant');
-	include_spip('inc/affichage');
 	include_spip('inc/meta');
 	include_spip('inc/config');
+	include_spip('inc/spiplistes_api');
 
 	global $connect_statut
 		, $connect_toutes_rubriques

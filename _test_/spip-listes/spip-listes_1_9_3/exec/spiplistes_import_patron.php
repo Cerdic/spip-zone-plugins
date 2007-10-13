@@ -24,15 +24,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/distant');
-include_spip('inc/affichage');
-include_spip('inc/meta');
-include_spip('inc/filtres');
-include_spip('inc/lang');
 
 function exec_spiplistes_import_patron(){
 
+	include_spip('inc/presentation');
+	include_spip('inc/distant');
+	include_spip('inc/meta');
+	include_spip('inc/filtres');
+	include_spip('inc/lang');
+	include_spip('inc/spiplistes_api');
+	
 	$id_message = _request('id_message');
 	$patron = _request('patron');
 	$date = _request('date');

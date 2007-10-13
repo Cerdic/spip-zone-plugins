@@ -8,7 +8,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/acces');
-include_spip('inc/affichage');
 
 function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "non", $return = false) {
 	$result = "";
