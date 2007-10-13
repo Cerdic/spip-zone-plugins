@@ -20,7 +20,6 @@ TO-DO:
 - liste des abonnements par auteur dans auteur_infos 
 - icone boite_autocron de SLV plus sympa (avis perso, CP) Qu'en pensez-vous ?
 - icone 'casier à courrier' à revoir. Idem 'listes de diffusion'
-- date jour heure dans info sur courrier envoyé. Mauvais format de présentation (rustre)
 - revoir previsu demandé sur courrier_gerer (si création, un appel previsu et click gauche recrée le courrier (doublon))
 - onglets à placer sur page de maintenance
 - gadgets pour nouveau_courrier (devrait pouvoir être mis en place par jQuery)
