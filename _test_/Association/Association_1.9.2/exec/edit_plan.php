@@ -33,7 +33,7 @@
 		fin_boite_info();
 		
 		debut_raccourcis();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
 		fin_raccourcis();
 		
 		debut_droite();
@@ -58,9 +58,9 @@
 		echo '<label for="classe"><strong>Classe :</strong></label>';
 		echo '<input name="classe" type="text" value="'.$classe.'" id="classe" class="formo" />';
 		echo '<label for="intitule"><strong>Intitul&eacute; :</strong></label>';
-		echo '<input name="intitule" type="text" size="50" value="'.$intitule.'" id="intitule" class="formo" />';
+		echo '<input name="intitule" type="text" value="'.$intitule.'" id="intitule" class="formo" />';
 		echo '<label for="reference"><strong>R&eacute;f&eacute;rence :</strong></label>';
-		echo '<input name="reference" type="text" size="50" value="'.$reference.'" id="reference" class="formo" />';
+		echo '<input name="reference" type="text" value="'.$reference.'" id="reference" class="formo" />';
 		echo '<label for="solde_anterieur"><strong>Solde report&eacute; (en euros) :</strong></label>';
 		echo '<input name="solde_anterieur" type="text" value="'.$solde_anterieur.'" id="solde_anterieur" class="formo" />';
 		echo '<label for="date_anterieure"><strong>Date report (AAA-MM-JJ) :</strong></label>';
@@ -73,9 +73,9 @@
 		if ($actif=="non") {echo ' checked="checked"';}
 		echo '>'._T('asso:plan_libelle_non');
 		echo '<br /><label for="commentaire"><strong>Commentaires :</strong></label>';
-		echo '<textarea name="commentaire" cols="38" rows="3" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
+		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
 		echo '<input type="hidden" name="action" value="'.$action.'">';
-		echo '<input type="text" name="id" value="'.$id_plan.'">';
+		echo '<input type="hidden" name="id" value="'.$id_plan.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 		echo '<div style="float:right;">';
 		echo '<input name="submit" type="submit" value="';

@@ -53,7 +53,7 @@
 		fin_boite_info();
 		
 		debut_raccourcis();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
 		fin_raccourcis();
 		
 		debut_droite();
@@ -107,7 +107,7 @@
 		echo '<input name="montant" type="text" value="'.$montant.'" id="montant" class="formo" />';
 		echo '<label for="journal"><strong>'._T('asso:prets_libelle_mode_paiement').' :</strong></label>';
 		echo '<select name="journal" type="text" id="journal" class="formo" />';
-		$sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
+		$sql = spip_query ("SELECT * FROM spip_asso_plan WHERE classe=".lire_config('association/classe_banques')." ORDER BY code") ;
 		while ($banque = spip_fetch_array($sql)) {
 			echo '<option value="'.$banque['code'].'" ';
 			if ($journal==$banque['code']) { echo ' selected="selected"'; }

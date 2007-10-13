@@ -37,7 +37,14 @@ while ($data = spip_fetch_array($query))
 echo '<input name="id_compte"  value="'.$data['id_compte'].'" type="hidden">';
 echo '<tr> ';
 echo '<td>Imputation :</td>';
-echo '<td><input name="imputation"  readonly="true" value='.$data['imputation'].'   /> </td>';
+echo '<td><select name="imputation" type="text" />';
+$sql = spip_query ("SELECT * FROM spip_asso_plan WHERE classe<>".lire_config('association/classe_banques')." ORDER BY code") ;
+while ($banque = spip_fetch_array($sql)) {
+	echo '<option value="'.$data['imputation'].'" ';
+	if ($data['imputation']==$banque['code']) { echo ' selected="selected"'; }
+	echo '>'.$banque['intitule'].'</option>';
+}
+echo '</select></td>';
 echo '</tr>';
 echo '<tr> ';
 echo '<td>Date :</td>';
@@ -54,15 +61,12 @@ echo '</tr>';
 echo '<tr>';
 echo '<td>Mode de paiement :</td>';
 echo '<td><select name="journal" type="text">';
-$sql = spip_query ("SELECT * FROM spip_asso_banques ORDER BY id_banque");
+$sql = spip_query ("SELECT * FROM spip_asso_plan WHERE classe=".lire_config('association/classe_banques')." ORDER BY code") ;
 while ($banque = spip_fetch_array($sql)) {
 echo '<option value="'.$banque['code'].'" ';
 	if ($data['journal']==$banque['code']) { echo ' selected="selected"'; }
 echo '>'.$banque['intitule'].'</option>';
 }
-echo '<option value="don"';
-	if ($data["journal"]=="don") { echo ' selected="selected"'; }
-echo '> Don </option>';
 echo '</select></td>';
 echo '</tr>';
 echo '<tr>';

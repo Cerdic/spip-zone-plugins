@@ -46,11 +46,10 @@ echo '</tr>';
 echo '<tr>';
 echo '<td>Mode de paiement :</td>';
 echo '<td><select name="journal" type="text">';
-$query = spip_query ( "SELECT * FROM spip_asso_banques ORDER BY id_banque" );
+$query = spip_query ("SELECT * FROM spip_asso_plan WHERE classe=".lire_config('association/classe_banques')." ORDER BY code") ;
 while ($data = spip_fetch_array($query)) {
-echo '<option value="'.$data['code'].'"> '.$data['intitule'].' </option>';
+	echo '<option value="'.$data['code'].'"> '.$data['intitule'].' </option>';
 }
-echo '<option value="don"> Don </option>';
 echo '</select></td>';
 echo '</tr>';
 echo '<tr> ';

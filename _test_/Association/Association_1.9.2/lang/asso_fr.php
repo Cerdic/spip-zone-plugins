@@ -19,7 +19,8 @@
 			'menu2_titre_livres_comptes' => 'Livres de comptes',
 			'menu2_titre_gestion_prets' => 'Gestion des pr&ecirc;ts',
 			
-		#Configuration
+	#Configuration
+		# Libellé
 			'config_libelle_nom' => 'Nom',
 			'config_libelle_email' => 'Adresse courriel',
 			'config_libelle_adresse' => 'Adresse',
@@ -33,10 +34,12 @@
 			'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
 			'config_info_asso' => 'Donn&eacute;es de l\'association',
 			'config_info_plugin' => 'Options du plugin',
+			'config_libelle_classe_banques' => 'Classe des comptes financiers',
 			'config_libelle_dons'=> 'Gestion des dons et colis',
 			'config_libelle_ventes'=> 'Gestion des ventes associatives',
 			'config_libelle_comptes'=> 'Gestion comptable',
 			'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
+			'config_libelle_prets'=> 'Gestion des pr&egrave;ts et ressources',
 			'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
 			'config_libelle_id_adherent'=>'Automatis&eacute;e',
 			'config_libelle_id_asso'=>'Libre',
@@ -257,7 +260,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
  'activite_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
 
 	# Liste
-	'activite_liste_legende' => 'En bleu : Inscription non valid&eacute;e | En vert : Inscription valid&eacute;e',
+	'activite_liste_legende' => 'En bleu : Inscription non valid&eacute;e <br /> En vert : Inscription valid&eacute;e',
 	'activite_liste_nombre_inscrits' => 'Nombre d\'inscrits : @total@',
 	'activite_liste_total_participations' => 'Total des participations : @total@ &euro;',
 
@@ -374,7 +377,25 @@ Commentaire: @commentaire@
 			'president' => 'President',
 			'votre_equipe' => 'Votre &eacute;quipe',
 			'donnees_perso' => 'Donn&eacute;es Personnelles',
-			'donnees_internes' => 'Donn&eacute;es Internes'
+			'donnees_internes' => 'Donn&eacute;es Internes',
+	
+	# Plan comptable
+		#Message
+			'plan_info' => 'Vous pouvez g&eacute;rer ici les comptes de votre plan comptable<br />Vous devez au minimum d&eacute;finir les comptes de produits n&eacute;cessaires &agrave; la configuration du plugin et les comptes financiers relatifs aux diff&eacute;rentes modes de paiement.</p><p>Vous pouvez vous inspirer du plan comptable normalis&eacute; fran&ccedil;ais joint au package.',
+			
+		# Titres
+			'plan_comptable' => 'Plan comptable',
 		
+		# En-tete
+			'plan_entete_tous' => 'Tous',
+		
+		# Navigation
+			'plan_nav_ajouter' => 'Ajouter une r&eacute;f&eacute;rence comptable',
+		
+		#Libelle
+			'plan_libelle_comptes_actifs' => 'Comptes actifs',
+			'plan_libelle_comptes_desactives' => 'Comptes d&eacute;csactiv&eacute;s',
+			'plan_libelle_oui' => 'oui',
+			'plan_libelle_non' => 'non',
 	);
 ?>

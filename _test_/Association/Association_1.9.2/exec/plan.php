@@ -34,12 +34,12 @@
 		debut_boite_info();
 		
 		echo association_date_du_jour();	
-		
+		echo'<p>'._T('asso:plan_info').'</p>';
 		fin_boite_info();
 		
 		debut_raccourcis();
-		icone_horizontale(_T('asso:ajout_plan'), generer_url_ecrire('edit_plan','action=ajoute'), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', 'creer.gif');
-		echo 'retour';
+		icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','action=ajoute'), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', 'creer.gif');
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
 		fin_raccourcis();
 				
 		debut_droite();
@@ -75,10 +75,10 @@
 		echo '<select name ="actif" class="fondl" onchange="form.submit()">';
 		echo '<option value="oui" ';
 		if ($actif=='oui') {echo ' selected="selected"';}
-		echo '> '._T('asso:plan_comptes_actifs').'</option>';
+		echo '> '._T('asso:plan_libelle_comptes_actifs').'</option>';
 		echo '<option value="non" ';
 		if ($actif=='non') {echo ' selected="selected"';}
-			echo '> '._T('asso:plan_comptes_desactives').'</option>';
+			echo '> '._T('asso:plan_libelle_comptes_desactives').'</option>';
 		echo '</select>';
 		echo '</form>';
 		echo '</td>';

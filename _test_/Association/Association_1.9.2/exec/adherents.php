@@ -65,16 +65,15 @@
 		echo '<font color="blue"><strong>'._T('asso:adherent_liste_nombre_adherents',array('total' => $nombre_membres)).'</strong></font>';
 		echo '</p>';
 		
-		echo '<p>';
-		echo '<a href="'.$url_pdf_adherents.'&'.$critere.'">Imprimer</a>';
-		echo '</p>';	
-		
 		fin_boite_info();	
 		
 		debut_raccourcis();
 		echo '<p>';
 		icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), generer_url_ecrire('edit_relances'),  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
 		echo '</p>';
+		echo '<p>';
+		echo '<a href="'.$url_pdf_adherents.'&'.$critere.'">Imprimer</a>';
+		echo '</p>';	
 		fin_raccourcis();
 		
 		debut_droite();

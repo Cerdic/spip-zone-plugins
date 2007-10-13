@@ -32,9 +32,7 @@
 		debut_gauche();
 		
 		debut_boite_info();
-		
 		echo association_date_du_jour();	
-		
 		fin_boite_info();
 		
 		debut_droite();
@@ -55,7 +53,7 @@
 		echo '<td style="text-align:center;"><strong>Solde</strong></td>';
 		echo '</tr>';
 		
-		$query = spip_query ("SELECT imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee, code, intitule, classe FROM spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code GROUP BY code, annee HAVING annee = $annee AND classe IN (6,7) ORDER BY annee DESC");
+		$query = spip_query ("SELECT imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee, code, intitule, classe FROM spip_asso_comptes RIGHT JOIN spip_asso_plan ON imputation=code GROUP BY code, annee HAVING annee = $annee AND classe <> ".lire_config('association/classe_banques')." ORDER BY annee DESC");
 		
 		while ($data = spip_fetch_array ($query)) {
 			$recettes=$data['recettes'];
@@ -93,7 +91,7 @@
 		echo '<td style="text-align:center;"><strong>Avoir actuel</strong></td>';
 		echo '</tr>';
 		
-		$query = spip_query ( "SELECT * FROM spip_asso_plan WHERE classe='5' ORDER BY code" );
+		$query = spip_query ( "SELECT * FROM spip_asso_plan WHERE classe=".lire_config('association/classe_banques')." ORDER BY code" );
 		
 		while ($banque = spip_fetch_array($query)) {
 			$date_solde=$banque['date_anterieure'];

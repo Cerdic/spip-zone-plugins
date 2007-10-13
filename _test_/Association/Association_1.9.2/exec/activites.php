@@ -19,8 +19,8 @@
 		
 		$url_articles = generer_url_ecrire('articles');
 		$url_activites = generer_url_ecrire('activites');
-		$url_ajout_activite = generer_url_ecrire('ajout_activite');
-		$url_edit_activites = generer_url_ecrire('edit_activite');
+		$url_ajout_activite = generer_url_ecrire('edit_activite','action=ajoute');
+		$url_edit_activites = generer_url_ecrire('edit_activite','action=modifie');
 		$url_voir_activites = generer_url_ecrire('voir_activites');
 		
 		association_onglets();
@@ -85,7 +85,6 @@
 		if (empty($debut)) { $debut=0; }
 		
 		$query = spip_query ("SELECT *, spip_evenements.id_evenement, spip_evenements.titre AS intitule, spip_mots.titre AS motact  FROM ".$table_prefix."_evenements LEFT JOIN spip_mots_evenements ON  spip_mots_evenements.id_evenement=spip_evenements.id_evenement LEFT JOIN spip_mots ON spip_mots_evenements.id_mot=spip_mots.id_mot WHERE date_format( date_debut, '%Y' ) = $annee AND (spip_mots.titre like '$mot' OR spip_mots.titre IS NULL) ORDER BY date_debut DESC LIMIT $debut,$max_par_page");
-		
 		while ($data = spip_fetch_array($query)) {
 			$date = substr($data['date_debut'],0,10);
 			$heure = substr($data['date_debut'],10,6);

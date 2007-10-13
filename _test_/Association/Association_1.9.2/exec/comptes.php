@@ -13,7 +13,6 @@
 	include_spip ('inc/navigation_modules');
 	
 	function exec_comptes() {
-		
 		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 		
 		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
@@ -41,9 +40,7 @@
 		debut_gauche();
 		
 		debut_boite_info();
-		
 		echo association_date_du_jour();	
-		
 		echo '<p>En bleu : Recettes<br />En rose : D&eacute;penses</p>'; 
 		
 		// TOTAUX
@@ -105,11 +102,11 @@
 		echo '<option value="%" ';
 		if ($imputation=="%") { echo ' selected="selected"'; }
 		echo '>Tous</option>';
-		$sql = spip_query ("SELECT * FROM spip_asso_plan ORDER BY code");
+		$sql = spip_query ("SELECT * FROM spip_asso_plan ORDER BY classe,code");
 		while ($plan = spip_fetch_array($sql)) {
 			echo '<option value="'.$plan['code'].'" ';
 			if ($imputation==$plan['code']) { echo ' selected="selected"'; }
-			echo '>'.$plan['intitule'].'</option>';
+			echo '>'.$plan['classe'].' - '.$plan['intitule'].'</option>';
 		}
 		echo '</select></td>';
 		echo '</form>';
