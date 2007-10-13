@@ -153,11 +153,11 @@ function WCalendar_header_prive($flux) {
 		$trans_tbl = array_flip ($trans_tbl);
 		
 		// les includes JS statiques
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/SPIP.js' ></script>\n";
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/dom.js' ></script>\n";
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/event.js' ></script>\n";
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/calendar.js' ></script>\n";
-		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/calendar_custom.js' ></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/SPIP.js' type='text/javascript'></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/dom.js' type='text/javascript'></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/event.js' type='text/javascript'></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/calendar.js' type='text/javascript'></script>\n";
+		$flux .= "<script src = '"._DIR_PLUGIN_WIDGET_CALENDAR."/img_pack/calendar_custom.js' type='text/javascript'></script>\n";
 		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_WIDGET_CALENDAR . '/img_pack/calendar.css" type="text/css" />'. "\n";
 
 		// les noms de mois et de jour selon les fichiers de langue :
@@ -193,7 +193,7 @@ function WCalendar_header_prive($flux) {
 
 
 	// le JS dynamique d'init
-	$flux .= "<script language='javascript'>";
+	$flux .= "<script type='text/javascript'>/*<![CDATA[*/";
 
 	// partie fonction de la langue
 	$js = "";
@@ -288,7 +288,7 @@ function WCalendar_header_prive($flux) {
 		}
 		
 		$js .= "
-	</script>";
+	/*]]>*/</script>";
 		$flux .= $js;
 	}
 	return $flux;

@@ -416,18 +416,18 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 			echo "<input type='checkbox' name='message' value='oui' id='message'>";
 		echo " <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
 
-		echo "<P>"._T('texte_descriptif_petition')."&nbsp;:<BR>";
-		echo "<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
+		echo "<p>"._T('texte_descriptif_petition')."&nbsp;:<BR>";
+		echo "<textarea name='texte_petition' class='forml' rows='4' cols='10' wrap=soft>";
 		echo entites_html($texte_petition);
-		echo "</TEXTAREA><P>\n";
+		echo "</textarea><p>\n";
 
 		echo "<P align='$spip_lang_right'>";
 	}
 
 	if (!$petition) echo "<span class='visible_au_chargement' id='valider_petition'>";
-	echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'>";
+	echo "<input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' style='font-size:10px' />";
 	if (!$petition)  echo "</span>";
-	echo "</FORM>";
+	echo "</form>";
 
 	echo "</font>";
 	echo fin_block();
@@ -814,17 +814,17 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 				}
 
 
-				$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", "width='7' height='7' border='0' NAME='statut'");
+				$vals[] = http_img_pack("puce-".puce_statut($statut_trad).'.gif', "", "width='7' height='7' style='border:none;' NAME='statut'");
 				
 				if ($id_article_trad == $id_trad) {
-				  $vals[] = http_img_pack('langues-12.gif', "", "width='12' height='12' border='0'");
+				  $vals[] = http_img_pack('langues-12.gif', "", "width='12' height='12' style='border:none;'");
 					$titre_trad = "<b>$titre_trad</b>";
 				} else {
 				  if ($connect_statut=='0minirezo'
 				  AND $connect_toutes_rubriques)
 				  	$vals[] = "<a href='" . generer_url_ecrire("articles","id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad&id_rubrique=$id_rubrique_trad") . "'>". 
-				    http_img_pack('langues-off-12.gif', _T('trad_reference'), "width='12' height='12' border='0'", _T('trad_reference')) . "</a>";
-				  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
+				    http_img_pack('langues-off-12.gif', _T('trad_reference'), "width='12' height='12' style='border:none;'", _T('trad_reference')) . "</a>";
+				  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' style='border:none;'");
 				}
 
 				$ret .= "</td>";
@@ -847,7 +847,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 				echo "<div class='liste'>";
 				bandeau_titre_boite2(_T('trad_article_traduction'),'');
-				echo "<table width='100%' cellspacing='0' border='0' cellpadding='2'>";
+				echo "<table width='100%' cellspacing='0' style='border:none;' cellpadding='2'>";
 				//echo "<tr bgcolor='#eeeecc'><td colspan='4' class='serif2'><b>"._T('trad_article_traduction')."</b></td></tr>";
 
 				$largeurs = array(7, 12, '', 100);
@@ -1033,7 +1033,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 
 	if (spip_num_rows($result)) {
 		echo "<div class='liste'>";
-		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+		echo "<table width='100%' cellpadding='3' cellspacing='0' style='border:none;'>";
 		$table = array();
 		while ($row = spip_fetch_array($result)) {
 			$vals = array();
@@ -1075,7 +1075,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 		else $vals[] =  "&nbsp;";
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-		  $vals[] =  "<A href='" . generer_url_ecrire("articles","id_article=$id_article&supp_auteur=$id_auteur#auteurs") . "'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
+		  $vals[] =  "<A href='" . generer_url_ecrire("articles","id_article=$id_article&supp_auteur=$id_auteur#auteurs") . "'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' style='border:none; vertical-align:middle;'") . "</A>";
 		} else {
 			$vals[] = "";
 		}
@@ -1313,7 +1313,7 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	 "<OPTION" , mySel("refuse", $statut_article) , " style='background-color: #FFA4A4'>",_T('texte_statut_refuse'),"</OPTION>\n",
 	  "</SELECT>",
 	  " &nbsp; ",
-	  http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'"),
+	  http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "style='border:none;' name='statut'"),
 	  "  &nbsp;\n";
 
 	echo "<span class='visible_au_chargement' id='valider_statut'>";

@@ -27,7 +27,7 @@ function WCalendar_ajoute_statique($titre,$suffixe){
 }
 function WCalendar_statique_point_entree($suffixe, $dates = ""){
 	return "<div><div id='container$suffixe' style='z-index:5000;'></div>
-	<div style='display:none;'><textarea id='selected_date$suffixe' name='selected_date$suffixe'>$dates</textarea></div>
+	<div style='display:none;'><textarea id='selected_date$suffixe' name='selected_date$suffixe' rows='3' cols='40'>$dates</textarea></div>
 	<a href='javascript:cal$suffixe.reset()'>Reset</a>"
 	//. "<a href='javascript:alert(cal$suffixe.getSelectedDates())'>what's selected?</a>"
 	. "</div>
@@ -50,7 +50,7 @@ function WCalendar_controller($date,$suffixe){
 	if (strcmp($date,format_mysql_date())==0)
 		$date=date("Y-m-d H:i:s");
 	$s = "<a href='javascript:void(null)' onclick='showCalendar$suffixe()'>
-	<img id='dateLink$suffixe' src='"._DIR_IMG_PACK."/cal-jour.gif' border='0' style='vertical-align:middle;margin:5px'/></a>
+	<img id='dateLink$suffixe' src='"._DIR_IMG_PACK."cal-jour.gif' style='border:none;vertical-align:middle;margin:5px' alt=''/></a>
 	";
 	$s .=
 	  afficher_jour(jour($date), "id='jour$suffixe' name='jour$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'") .
