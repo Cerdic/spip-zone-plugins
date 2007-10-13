@@ -5,9 +5,27 @@
 
 
 TO-DO:
+- Controler si membre possède un email avant abonner
+- passer en patron l'en-tete et pied de mail
+- ergonomie, le champ rechercher membre n'est pas au bon endroit
+- stats: revoir la liste. Pas clair !
+- vérifier la boite autocron
 - Modifier module import/export
 - Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"
 - Corriger documentation contextuelle
 - Annulation d'envoi dans boite autocron à revoir ;
 - Ajouter bouton supprimer liste dans liste_gerer ;
 - maintenance: mettre en place l'auth. par FTP.
+- module de stats (calendrier des envoyés/à envoyer pour vérifier engorgement)
+- liste des abonnements par auteur dans auteur_infos 
+- icone boite_autocron de SLV plus sympa (avis perso, CP) Qu'en pensez-vous ?
+- icone 'casier à courrier' à revoir. Idem 'listes de diffusion'
+- date jour heure dans info sur courrier envoyé. Mauvais format de présentation (rustre)
+- revoir previsu demandé sur courrier_gerer (si création, un appel previsu et click gauche recrée le courrier (doublon))
+- onglets à placer sur page de maintenance
+- gadgets pour nouveau_courrier (devrait pouvoir être mis en place par jQuery)
+- import/export: gérer les fichiers compressés
+- import/export: proposer séparateur tab ou ";", a-la-CSV
+- base_version dans plugin.xml 
+- revoir le principe de mise à jour (appel à base/*). 
+
