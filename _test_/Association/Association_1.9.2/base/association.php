@@ -250,7 +250,7 @@ $tables_principales['spip_asso_ventes'] = array(
 
 	global $table_des_tables;
 	$table_des_tables['asso_adherents'] = 'asso_adherents';
-	$table_des_tables['asso_bienfaiteurs'] = 'asso_bienfaiteurs';
+	$table_des_tables['asso_dons'] = 'asso_dons';
 	$table_des_tables['asso_ventes'] = 'asso_ventes';
 	$table_des_tables['asso_comptes'] = 'asso_comptes';
 	$table_des_tables['asso_categories'] = 'asso_categories';

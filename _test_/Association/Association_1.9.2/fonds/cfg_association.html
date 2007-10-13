@@ -37,36 +37,91 @@
 	<!-- Options du plugin -->
 	<fieldset>
 	<legend><:asso:config_info_plugin:></legend>
-		<input type="checkbox" name="comptes" [checked="(#ENV{comptes}?{checked})"] id="comptes" />
-		<label><strong><:asso:config_libelle_comptes:></strong></label><br />			
-		<input type="checkbox" name="dons" [checked="(#ENV{dons}?{checked})"] id="dons" />
+		<input type="checkbox" name="comptes" [(#ENV{comptes}|?{checked="checked"})] id="comptes" />
+		<label><strong><:asso:config_libelle_comptes:></strong></label><br />
+		<label><strong><:asso:config_libelle_classe_banques:></strong> </label>	
+		<B_classe_banques>
+		<select name="classe_banques" id="pc_activites" /> 
+		<BOUCLE_classe_banques(SPIP_ASSO_PLAN){fusion classe}{par classe}>
+		<option value="#CLASSE" [(#ENV{classe_banques}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
+		</BOUCLE_classe_banques>
+		</select>
+		</B_classe_banques>
+		<span class="spip_form_erreur">Aucune classe définie au plan comptable !</span>
+		<//B_classe_banques>
+		<p>
+		<input type="checkbox" name="dons" [(#ENV{dons}|?{checked="checked"})] id="dons" />
 		<label><strong><:asso:config_libelle_dons:></strong> </label><br />
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
-		<input type="text" name="pc_dons" value="#ENV{pc_dons}" id="pc_dons" /> <br />
-		<input type="checkbox" name="ventes" [checked="(#ENV{ventes}?{checked})"] id="ventes" />
+		<B_pc_dons>
+		<select name="pc_dons" id="pc_dons" /> 
+		<BOUCLE_pc_dons(SPIP_ASSO_PLAN){par classe}{par code}{classe!=#ENV{classe_banques}}>
+		<option value="#CODE" [(#ENV{pc_dons}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
+		</BOUCLE_pc_dons>
+		</select>
+		</B_pc_dons>
+		<span class="spip_form_erreur">Aucun plan comptable défini !</span>
+		<//B_pc_dons>
+		</p>
+		<p>
+		<input type="checkbox" name="ventes" [(#ENV{ventes}|?{checked="checked"})] id="ventes" />
 		<label><strong><:asso:config_libelle_ventes:></strong> </label><br />		
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
-		<input type="text" name="pc_ventes" value="#ENV{pc_ventes}" id="pc_ventes" /> <br />
-		<input type="checkbox" name="activites" [checked="(#ENV{activites}?{checked})"] id="activites" />
+		<B_pc_ventes>
+		<select name="pc_ventes" id="pc_ventes" /> 
+		<BOUCLE_pc_ventes(SPIP_ASSO_PLAN){par classe}{par code}>
+		<option value="#CODE" [(#ENV{pc_ventes}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
+		</BOUCLE_pc_ventes>
+		</select>
+		</B_pc_ventes>
+		<span class="spip_form_erreur">Aucun plan comptable défini !</span>
+		<//B_pc_ventes>
+		</p>
+		<p>
+		<input type="checkbox" name="activites" [(#ENV{activites}|?{checked="checked"})] id="activites" />
 		<label><strong><:asso:config_libelle_activites:></strong></label> <br />
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
-		<input type="text" name="pc_activites" value="#ENV{pc_activites}" id="pc_activites" /> <br />
-		<input type="checkbox" name="prets" [checked="(#ENV{prets}?{checked})"] id="prets" />
+		<B_pc_activites>
+		<select name="pc_activites" id="pc_activites" /> 
+		<BOUCLE_pc_activites(SPIP_ASSO_PLAN){par classe}{par code}>
+		<option value="#CODE" [(#ENV{pc_activites}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
+		</BOUCLE_pc_activites>
+		</select>
+		</B_pc_activites>
+		<span class="spip_form_erreur">Aucun plan comptable défini !</span>
+		<//B_pc_activites>
+		</p>
+		<p>
+		<input type="checkbox" name="prets" [(#ENV{prets}|?{checked="checked"})] id="prets" />
 		<label><strong><:asso:config_libelle_prets:></strong> </label><br />		
 		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
-		<input type="text" name="pc_prets" value="#ENV{pc_prets}" id="pc_prets" /> <br />
+		<B_pc_prets>
+		<select name="pc_prets" id="pc_prets" /> 
+		<BOUCLE_pc_prets(SPIP_ASSO_PLAN){par classe}{par code}>
+		<option value="#CODE" [(#ENV{pc_prets}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
+		</BOUCLE_pc_prets>
+		</select>
+		</B_pc_prets>
+		<span class="spip_form_erreur">Aucun plan comptable défini !</span>
+		<//B_pc_prets>
+		</p>
+		<p>
 		<label for="indexation"><strong><:asso:config_libelle_indexation:></strong></label>
-		<input type="radio" name="indexation" value="id_adherent" [checked="(#ENV{indexation}|=={id_adherent}|?{checked})"] id="indexation" /><:asso:config_libelle_id_adherent:>
-		<input type="radio" name="indexation" value="id_asso" [checked="(#ENV{indexation}|=={id_asso}|?{checkted})"] id="indexation" /><:asso:config_libelle_id_asso:> <br />
+		<input type="radio" name="indexation" value="id_adherent" [(#ENV{indexation}|=={id_adherent}|?{checked="checked"})] id="indexation" /><:asso:config_libelle_id_adherent:>
+		<input type="radio" name="indexation" value="id_asso" [(#ENV{indexation}|=={id_asso}|?{checked="checkted"})] id="indexation" /><:asso:config_libelle_id_asso:> <br />
+		</p>
+		<p>
 		<label for="secteurs"><strong><:asso:config_libelle_secteurs:></strong></label>
 		<input type="text" name="secteurs" [value="(#ENV{secteurs})"] id="secteurs"  class='formo'/>
+		</p>
+		<p>
 		<B_spip_listes>
 		<label for="spip_listes"><strong><:asso:config_libelle_spip_listes:></strong></label>
 		<select name="spip_liste" id="spip_listes"class='formo'/>
 		<BOUCLE_spip_listes(SPIP_LISTES)>
-		<option value="#ID_LISTE" [selected="(#ENV{spip_liste}|=={id_liste}|?{selected})"]>#TITRE</option>
+		<option value="#ID_LISTE" [(#ENV{spip_liste}|=={id_liste}|?{selected="selected"})]>#TITRE</option>
 		</BOUCLE_spip_listes>
-		
+		</p>
 	</fieldset>
 
 <div><input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" /></div>
