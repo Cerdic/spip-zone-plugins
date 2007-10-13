@@ -62,7 +62,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 
 	if (spip_num_rows($result)) {
 		$out .= "<div class='liste liste-evenements'>";
-		$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+		$out .= "<table width='100%' cellpadding='3' cellspacing='0'>";
 		$table = array();
 		while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
 			$vals = array();
@@ -78,7 +78,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			$les_evenements[] = $id_evenement;
 
 			$s = "<a href='".generer_url_ecrire('calendrier',"id_evenement=$id_evenement&ajouter_id_article=$id_article")."'>";
-			$s .= http_img_pack("../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-12.png",'', "border='0'", _T('agenda:titre_sur_l_agenda'));
+			$s .= http_img_pack("../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-12.png",'', "style='border:none;'", _T('agenda:titre_sur_l_agenda'));
 			$s .= "</a>";
 			$vals[] = $s;
 
@@ -111,7 +111,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			$vals[] = propre($descriptif);
 
 			if ($flag_editable) {
-				$vals[] = ajax_action_auteur('editer_evenement', "$id_article-supprimer-$id_evenement", $script, "id_article=$id_article", array(_T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'"),''),"&id_article=$id_article&supp_evenement=$id_evenement",'wc_init');
+				$vals[] = ajax_action_auteur('editer_evenement', "$id_article-supprimer-$id_evenement", $script, "id_article=$id_article", array(_T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' style='border:none; vertical-align:middle;'"),''),"&id_article=$id_article&supp_evenement=$id_evenement",'wc_init');
 			} else {
 				$vals[] = "";
 			}
@@ -202,10 +202,10 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 		$out .= "<div style='clear: both;'></div>";
 
 		if ($bouton_ajout)
-			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&neweven=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("agenda:icone_creer_evenement"), "width='24' height='24' border='0' align='middle'")."&nbsp;"._T("agenda:icone_creer_evenement"),''),'','wc_init')
+			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&neweven=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("agenda:icone_creer_evenement"), "width='24' height='24' style='border:none; vertical-align:middle;'")."&nbsp;"._T("agenda:icone_creer_evenement"),''),'','wc_init')
 				. "&nbsp;";
 		if (!$saisie_rapide)
-			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&saisie_rapide=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("saisierapide:icone_saisie_rapide"), "width='24' height='24' border='0' align='middle'")."&nbsp;"._T("saisierapide:icone_saisie_rapide"),''));
+			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&saisie_rapide=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("saisierapide:icone_saisie_rapide"), "width='24' height='24' style='border:none; vertical-align:middle;'")."&nbsp;"._T("saisierapide:icone_saisie_rapide"),''));
 
 		$out .= "</div>";
 		$out .=  fin_block();
@@ -297,7 +297,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div class='article-evenement'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
-			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' border='0'");
+			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' style='border:none;'");
 			$out .= entites_html($row2['titre'])."</a>";
 			$out .= "</div>\n";
 		}
@@ -305,7 +305,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 
 	$out .= "<div class='agenda-visu-evenement-bouton-fermer'>";
 	$out .= "<a href='$url' onclick=\"$('#voir_evenement-0').html('');return false;\">";
-	$out .= "<img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
+	$out .= "<img src='"._DIR_PLUGIN_AGENDA."img_pack/croix.png' width='12' height='12' style='border:none;' alt='' /></a>";
 	$out .= "</div>\n";
 
 	if (!$neweven){
@@ -332,7 +332,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .=  "<div class='horaire-titre'>";
 	$out .=  "<input type='checkbox' name='evenement_horaire' value='oui' ";
 	$out .= ($fhoraire=='oui'?"checked='checked' ":"");
-	$out .= " onClick=\"var element =  findObj('evenement_horaire');var choix = element.checked;
+	$out .= " onclick=\"var element =  findObj('evenement_horaire');var choix = element.checked;
 	if (choix==true){	setvisibility('afficher_horaire_debut_evenement', 'visible');setvisibility('afficher_horaire_fin_evenement', 'visible');}
 	else{setvisibility('afficher_horaire_debut_evenement', 'hidden');setvisibility('afficher_horaire_fin_evenement', 'hidden');}\"";
 	$out .= "/>";
@@ -359,7 +359,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	// DESCRIPTIF
 	$out .=  "<div class='descriptif-titre'>"._T('agenda:evenement_descriptif')."</div>";
 	$out .=  "<div class='descriptif-visu'>";
-	$out .=  "<textarea name='evenement_descriptif' style='width:100%;' rows='3'>";
+	$out .=  "<textarea name='evenement_descriptif' style='width:100%;' rows='3' cols='40'>";
 	$out .=  $fdescriptif;
 	$out .=  "</textarea>\n";
 	$out .=  "</div>\n";
@@ -415,10 +415,10 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
   $out .=  "<div class='edition-bouton'>";
   #echo "<input type='submit' name='submit' value='Annuler' />";
 	if ($neweven==1){
-		$out .=	"<div style='text-align:$spip_lang_right'><input type='submit' name='ajouter' value='"._T('bouton_ajouter')."' class='fondo' onclick='javascript:getSelectedDate_repetitions()'></div>";
+		$out .=	"<div style='text-align:$spip_lang_right'><input type='submit' name='ajouter' value='"._T('bouton_ajouter')."' class='fondo' onclick='javascript:getSelectedDate_repetitions()' /></div>";
 	}
 	else{
-		$out .=	"<div style='text-align:$spip_lang_right'><input type='submit' name='ajouter' value='"._T('bouton_enregistrer')."' class='fondo' onclick='javascript:getSelectedDate_repetitions()'></div>";
+		$out .=	"<div style='text-align:$spip_lang_right'><input type='submit' name='ajouter' value='"._T('bouton_enregistrer')."' class='fondo' onclick='javascript:getSelectedDate_repetitions()' /></div>";
 	}
 	$out .=  "</div>\n";
 

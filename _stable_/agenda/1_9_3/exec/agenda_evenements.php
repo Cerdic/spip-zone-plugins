@@ -51,7 +51,7 @@ function exec_agenda_evenements_dist(){
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div style=' width:750px; font-size: 18px; color: #9DBA00; font-weight: bold;text-align:left;'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
-			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' border='0'");
+			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' style='border:none;'");
 			$out .= entites_html(typo($row2['titre']))."</a></div>";
 		}
 	}

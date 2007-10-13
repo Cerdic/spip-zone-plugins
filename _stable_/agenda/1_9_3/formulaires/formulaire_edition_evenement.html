@@ -13,7 +13,7 @@ onclick="$('#agenda-visu-evenement').hide();
 $('#afficher_horaire_debut_evenement').hide();
 $('#afficher_horaire_fin_evenement').hide();
 cal_repetitions.hide();
-return false;"><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' style='border:none;'></a>
+return false;"><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' style='border:none;' alt='' /></a>
 </div>
 <legend>[(#ENV{id_evenement}|?{<:agenda:titre_cadre_modifier_evenement:>,<:agenda:titre_cadre_ajouter_evenement:>})]</legend>
 
@@ -46,7 +46,7 @@ return false;"><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' sty
 <span class='horaire-titre'>
 	<label for="evenement_lieu"><:agenda:evenement_horaire:></label>
 	<input type='checkbox' name='evenement_horaire' id='evenement_horaire' value='oui' [(#ENV**{valeurs}|table_valeur{evenement_horaire,''}|=={oui}|?{' ',''})checked='checked']
-		onClick="if ($('#evenement_horaire')[0].checked==true) { $('#afficher_horaire_debut_evenement').show();
+		onclick="if ($('#evenement_horaire')[0].checked==true) { $('#afficher_horaire_debut_evenement').show();
 $('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_evenement').hide();$('#afficher_horaire_fin_evenement').hide();}" />
 </span>
 
@@ -79,7 +79,7 @@ $('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_ev
 		class='[(#ENV**{obligatoire}|table_valeur{evenement_descriptif}|?{forml,formo})][(#ENV**{erreur}|table_valeur{evenement_descriptif}|?{' ',''}) champ_obli_oubli]' 
 		onfocus="this.className='[(#ENV**{obligatoire}|table_valeur{evenement_descriptif}|=={oui}|?{forml,formo})]-focus'" 
 		onblur="this.className='[(#ENV**{obligatoire}|table_valeur{evenement_descriptif}|=={oui}|?{forml,formo})]'" 
-		rows='3' >[(#ENV**{valeurs}|table_valeur{evenement_descriptif,''}|entites_html)]</textarea>
+		rows='3' cols='40'>[(#ENV**{valeurs}|table_valeur{evenement_descriptif,''}|entites_html)]</textarea>
 </span>
 
 [(#REM) MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
@@ -109,7 +109,7 @@ $('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_ev
 </div>
 ]
 <input type='submit' name='cancel' value='<:agenda:bouton_annuler:>' class="fondl" />
-<input type='submit' name='ajouter' value='[(#ENV{evenement_action}|=={'evenement_modif'}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' class='fondo spip_boutons' onclick='javascript:getSelectedDate_repetitions()'>
+<input type='submit' name='ajouter' value='[(#ENV{evenement_action}|=={'evenement_modif'}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' class='fondo spip_boutons' onclick='javascript:getSelectedDate_repetitions()' />
 </div>
 </fieldset>
 </form>

@@ -166,7 +166,7 @@ function Agenda_formulaire_saisie_rapide_previsu() {
 	if ($evenements_saisie_rapide = _request('evenements_saisie_rapide')){
 		$t = Agenda_compile_texte_saisie_rapide($evenements_saisie_rapide);
 		$out .= "<div class='liste liste-evenements'>";
-		$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+		$out .= "<table width='100%' cellpadding='3' cellspacing='0'>";
 		$table = array();
 		$table[] = array('',
 			'<strong>'._T('agenda:evenement_titre').'</strong>',

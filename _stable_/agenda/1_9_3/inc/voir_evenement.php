@@ -26,7 +26,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div class='article-evenement'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
-			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' border='0'");
+			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' style='border:none;'");
 			$out .= entites_html(typo($row2['titre']))."</a>";
 			$out .= "</div>\n";
 		}
@@ -39,7 +39,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$url=parametre_url($url,'id_evenement','');
 
 		$out .= "<a href='$url' onclick=\"$('#voir_evenement-0').html('');return false;\">";
-		$out .= "<img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
+		$out .= "<img src='"._DIR_PLUGIN_AGENDA."img_pack/croix.png' width='12' height='12' style='border:none;' alt='' /></a>";
 		$out .= "</div>\n";
 
 		$fobjet = entites_html($fobjet,ENT_QUOTES);

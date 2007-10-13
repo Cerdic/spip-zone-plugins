@@ -90,7 +90,7 @@ function exec_mots_type_dist()
 	$type = entites_html(rawurldecode($type));
 
 	$res = debut_cadre_relief("", true)
-	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
+	. "\n<table cellpadding='0' cellspacing='0' style='border:none;' width='100%'>"
 	. "<tr>"
 	. "<td  align='right' valign='top'><br />"
 	. icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "groupe-mot-24.gif", "rien.gif")
