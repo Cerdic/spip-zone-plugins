@@ -91,8 +91,6 @@ function couleurs_rempl($texte) {
 	if (strpos($texte, '[')===false || strpos($texte, '/')===false) return $texte;
 	// pour les callbacks
 	global $outil_couleurs;
-	// lecture des metas
-	$outil_couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
 
 	// voila, on remplace tous les raccourcis $outil_couleurs[0] (balises francaises ou personnalisees)...
 	$texte = preg_replace_callback(",\[($outil_couleurs[0])\],", 'couleurs_texte_callback', $texte);
@@ -118,17 +116,24 @@ function couleurs_rempl($texte) {
 	// patch de conformite : les <span> doivent etre inclus dans les paragraphes
 	while (preg_match(",(<span style=\"(background-)?color:[^;]+;\">)([^<]*)\n[\n]+,Sms", $texte, $regs))
 		$texte = str_replace($regs[0], "$regs[1]$regs[3]</span>\n\n$regs[1]", $texte);
-	// menage
-	unset($outil_couleurs);
 	return $texte;  
 }
 
 function couleurs_pre_typo($texte) {
 	if (strpos($texte, '[')===false || strpos($texte, '/')===false) return $texte;
+	// les raccoucis de couleur sont-il dispo ?
 	if (!isset($GLOBALS['meta']['cs_couleurs']) || isset($GLOBALS['var_mode']))
 		couleurs_installe();
+	// pour les callbacks
+	global $outil_couleurs;
+	// lecture des raccoucis de couleur
+	$outil_couleurs = unserialize($GLOBALS['meta']['cs_couleurs']);
 	// appeler couleurs_rempl() une fois que certaines balises ont ete protegees
-	return cs_echappe_balises('', 'couleurs_rempl', $texte);
+	$texte = cs_echappe_balises('', 'couleurs_rempl', $texte);
+	// menage
+	unset($outil_couleurs);
+	// retour
+	return $texte;
 }
 
 ?>
