@@ -43,8 +43,8 @@ cs_log("decoration_installe()");
 		if(($i=array_search($v, $aide, true))!==false) {
 			$aide[] = $a; $chevrons1[] = "<$a>"; $chevrons2[] = "</$a>";
 			$styles[] = $styles[$i]; $fins[] = $fins[$i];
-		} elseif(($i=array_search(preg_quote($v), $auto_bal, true))!==false) {
-			$auto_bal[] = $a;
+		} elseif(array_search(preg_quote($v, ','), $auto_bal, true)!==false) {
+			$auto_bal[] = preg_quote($a, ',');
 			$auto_rempl[$a] = $auto_rempl[$v];
 		}
 	// liste des balises disponibles
