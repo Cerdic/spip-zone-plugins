@@ -7,11 +7,9 @@
 TO-DO:
 - Controler si membre possède un email avant abonner
 - vérifier la boite autocron
-- Modifier module import/export
 - Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"
 - Corriger documentation contextuelle
 - Annulation d'envoi dans boite autocron à revoir ;
-- Ajouter bouton supprimer liste dans liste_gerer ;
 - maintenance: mettre en place l'auth. par FTP.
 - module de stats (calendrier des envoyés/à envoyer pour vérifier engorgement)
 - liste des abonnements par auteur dans auteur_infos 

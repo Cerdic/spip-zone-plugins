@@ -1,5 +1,5 @@
 <?php
-
+// _SPIPLISTES_EXEC_LISTE_GERER
 /******************************************************************************************/
 /* SPIP-listes est un syst�e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -22,7 +22,6 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-// _SPIPLISTES_EXEC_LISTE_GERER
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -60,6 +59,7 @@ function exec_spiplistes_liste_gerer () {
 			, 'jour', 'mois', 'annee', 'heure', 'minute'
 			, 'auto_mois'
 			, 'btn_patron_pied'
+		, 'btn_supprimer_liste' //local
 		) as $key) {
 		$$key = _request($key);
 	}
@@ -109,7 +109,7 @@ function exec_spiplistes_liste_gerer () {
 		$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
 
 		if($flag_editable) {
-spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 		
 			$sql_query = "";
 
@@ -133,14 +133,14 @@ spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 			
 			// Modifier patron de pied ?
 			if($btn_patron_pied && $patron) {
-spiplistes_log("LISTE MODIF: de la liste <<$id_liste $patron", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: de la liste <<$id_liste $patron", LOG_DEBUG);
 				$pied_page = spiplistes_pied_page_html_get($patron);
 				$sql_query .= "pied_page="._q($pied_page).",";
 			}
 			
 			// Modifier diffusion ?
 			if($btn_modifier_diffusion) {
-spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", LOG_DEBUG);
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut!=$current_liste['statut'])) {
 					$sql_query .= "statut='$statut',";
@@ -159,12 +159,12 @@ spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", LOG_DEBUG);
 
 			// Modifier message_auto ?
 			if($btn_modifier_courrier_auto){
-spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto <<", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto <<", LOG_DEBUG);
 				$sql_query = "";
 				$titre_message = spiplistes_titre_propre($titre_message);
 //spiplistes_log("LISTE MODIF: envoyer_maintenant".($envoyer_maintenant ? "oui" : "non"), LOG_DEBUG);
-spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
-spiplistes_log("LISTE MODIF: auto_mois: $auto_mois", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: auto_mois: $auto_mois", LOG_DEBUG);
 			if(
 					($message_auto == 'oui')
 					&& ($envoyer_maintenant
@@ -182,22 +182,22 @@ spiplistes_log("LISTE MODIF: auto_mois: $auto_mois", LOG_DEBUG);
 							$sql_query .= "date='$envoyer_quand',periode=$periode,";
 					}
 					if($auto_mois) {
-spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 						$sql_query .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
 					}
 				}
 				else if($message_auto == 'non') {
 					$sql_query .= "message_auto='non',titre_message='',date='',periode=0,";
 				}
-			}
-
+			} // end if($btn_modifier_courrier_auto)
+			
 			// Enregistre les modifs
 			if(!empty($sql_query)) {
 				$sql_query = rtrim($sql_query,",");
 				$sql_query = "UPDATE spip_listes SET $sql_query WHERE id_liste=$id_liste LIMIT 1";
 				$sql_result = spip_query($sql_query);
 			}
-		}
+		} // end if($flag_editable)
 	}
 
 	//////////////////////////////////////////////////////
@@ -282,6 +282,21 @@ spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 	changer_typo('','liste'.$id_liste);
 
 	$page_result = "";
+
+	// message alerte et demande de confirmation si supprimer liste
+	if(($btn_supprimer_liste > 0) && ($btn_supprimer_liste == $id_liste)) {
+		$page_result .= ""
+			. __boite_alerte (_T('spiplistes:Attention_suppression_liste')."<br />"._T('spiplistes:Confirmez_requete'), true)
+			. "<form name='form_suppr_liste' id='form_suppr_liste' method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE, "")."'>\n"
+			. "<div class='verdana2' style='text-align:right;'>\n"
+			. "<input type='hidden' name='id_liste' value='$id_liste'>\n"
+   		. "<label for='supprimer_liste_confirme'>"._T('spiplistes:Confirmer_la_suppression_de_la_liste')."# $id_liste : </label>\n"
+   		. "<input class='fondo' type='submit' name='btn_supprimer_liste_confirme' value='"._T('bouton_valider')."' id='supprimer_liste_confirme'>\n"
+			. "</div>\n"
+			. "</form>\n"
+			. "<br />\n"
+		;
+	}
 
 	$page_result .= ""
 		. debut_cadre_relief("", true)
@@ -527,14 +542,22 @@ spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 		'listes',
 		_SPIPLISTES_EXEC_ABONNE_EDIT);
 */
-	echo $editer_auteurs('liste',$id_liste,$flag_editable, _request('cherche_auteur'),_request('ids'), 
-		_T('spiplistes:abon'),
-		'listes',
-		'abonne_edit');
+	echo $editer_auteurs(
+		'liste'	// $type
+		, $id_liste // $id
+		, $flag_editable 
+		, _request('cherche_auteur') //$cherche_auteur
+		, _request('ids')	// $ids
+		, _T('spiplistes:abon') // $titre_boite
+		//, 'listes' // $script_edit_objet
+		//, 'abonne_edit'
+		);
 
 	////
 	// MODE EDIT LISTE FIN ---------------------------------------------------------
 
+	echo($gros_bouton_supprimer);
+	
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();
 
 }

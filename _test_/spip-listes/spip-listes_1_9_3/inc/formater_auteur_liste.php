@@ -9,21 +9,14 @@
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-//
-// Construit un tableau des 5 informations principales sur un auteur,
-// avec des liens vers les scripts associes:
-// 1. l'icone du statut, avec lien vers la page de tous ceux ayant ce statut
-// 2. l'icone du mail avec un lien mailto ou a defaut la messagerie de Spip
-// 3. le nom, avec lien vers la page complete des informations
-// 4. le mot "site" avec le lien vers le site Web personnelle
-// 5. le nombre d'articles publies
-//
-
-// http://doc.spip.org/@inc_formater_auteur_dist
+// Ligne info auteur dans boite de sélection auteur
 function inc_formater_auteur_liste_dist($id_auteur, $script_edition = _SPIPLISTES_EXEC_ABONNE_EDIT) {
 
   global $connect_id_auteur, $spip_lang_rtl, $connect_statut;
@@ -54,7 +47,14 @@ function inc_formater_auteur_liste_dist($id_auteur, $script_edition = _SPIPLISTE
 	if ($url_site_auteur = $row["url_site"]) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";
 	else $vals[] =  "&nbsp;";
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(listes.id_liste) AS n FROM spip_auteurs_listes AS lien, spip_listes AS listes WHERE lien.id_auteur=$id_auteur AND listes.id_liste=lien.id_liste AND (listes.statut='liste' OR listes.statut='inact') GROUP BY lien.id_auteur"));
+	$sql_query = "SELECT COUNT(listes.id_liste) AS n 
+		FROM spip_auteurs_listes AS lien, spip_listes AS listes 
+		WHERE lien.id_auteur=$id_auteur AND listes.id_liste=lien.id_liste 
+			AND (listes.statut='"._SPIPLISTES_PUBLIC_LIST."' 
+				OR listes.statut='"._SPIPLISTES_PRIVATE_LIST."'
+				OR listes.statut='"._SPIPLISTES_MONTHLY_LIST."') 
+		GROUP BY lien.id_auteur";
+	$cpt = spip_fetch_array(spip_query($sql_query));
 
 	$nombre_listes = intval($cpt['n']);
 
@@ -62,7 +62,7 @@ function inc_formater_auteur_liste_dist($id_auteur, $script_edition = _SPIPLISTE
 	elseif ($nombre_listes == 1) $vals[] =  _T('spiplistes:info_1_liste');
 	else $vals[] =  "&nbsp;";
 
-	return $vals;
+	return ($vals);
 }
 
 // http://doc.spip.org/@formater_auteur_mail
@@ -92,7 +92,9 @@ function inc_determiner_non_auteurs_liste($type, $id, $cond_les_auteurs, $order)
 	if (strlen($cond))
 		$cond = "id_auteur NOT IN (" . substr($cond,1) . ') AND ';
 
-	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut!='5poubelle' AND statut!='nouveau' ORDER BY $order");
+	$sql_query = "SELECT * FROM spip_auteurs WHERE $cond" . "statut!='5poubelle' AND statut!='nouveau' ORDER BY $order";
+//spiplistes_log($sql_query);
+	return spip_query($sql_query);
 }
 
 ?>

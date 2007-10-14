@@ -31,7 +31,34 @@ function exec_spiplistes_listes_toutes(){
 	include_spip('inc/spiplistes_lister_courriers_listes');
 	include_spip('inc/spiplistes_naviguer_paniers');
 	
-	global $connect_statut;
+	global $connect_statut
+		, $connect_id_auteur
+		;
+
+	$flag_editable = ($connect_statut == "0minirezo");
+
+	if($flag_editable) {
+		// initialise les variables postées par le formulaire
+		foreach(array(
+			'btn_supprimer_liste_confirme', 'id_liste' // _SPIPLISTES_EXEC_LISTE_GERER
+			) as $key) {
+			$$key = _request($key);
+		}
+		foreach(array('id_liste') as $key) {
+			$$key = intval($$key);
+		}
+
+		// suppression demandée par _SPIPLISTES_EXEC_LISTE_GERER
+		if($btn_supprimer_liste_confirme && $id_liste) {
+			$sql_query = "DELETE FROM spip_listes WHERE id_liste=$id_liste LIMIT 1";
+			$sql_result = spip_query($sql_query);
+			$sql_query = "DELETE FROM spip_auteurs_mod_listes WHERE id_liste=$id_liste";
+			$sql_result = spip_query($sql_query);
+			$sql_query = "DELETE FROM spip_auteurs_listes WHERE id_liste=$id_liste";
+			$sql_result = spip_query($sql_query);
+			spiplistes_log("ID_LISTE #$id_liste DELETED BY ID_AUTEUR #$connect_id_auteur");
+		}
+	}
 
 //////////
 // PAGE CONTENU
@@ -40,7 +67,7 @@ function exec_spiplistes_listes_toutes(){
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	
 	// la gestion des abonnés est réservée aux admins 
-	if($connect_statut != "0minirezo") {
+	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	

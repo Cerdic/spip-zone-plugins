@@ -73,6 +73,8 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Annulation_chrono_' => "Annulation du chrono pour ",
 'Abonner_format_html' => "Abonner au format HTML",
 'Abonner_format_texte' => "Abonner au format texte",
+'Attention_suppression_liste' => "Attention ! Vous demandez la suppression d'une liste de diffusion. Les abonn&eacute;s 
+seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 
 //B
 
@@ -125,6 +127,9 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Cliquez_Generer_desc' => "Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&eacute;sultat 
 	dans la bo&icirc;te @titre_champ_texte@.",
 'courrier_realise_avec_spiplistes' => "Courrier réalisé avec SPIP-Listes",
+'Confirmer_la_suppression_de_la_liste' => "Confirmer la suppression de la liste ",
+'Confirmez_requete' => "Veuillez confirmer la requ&ecirc;te.",
+
 
 //D
 '_de_' => " de ",
@@ -381,7 +386,7 @@ et de recevoir les lettres d\'informations.',
 'Vides' => "Vides",
 
 // ====================== spip_listes.php3 ======================
-'abon' => 'ABONNES',
+'abon' => 'LES ABONNES',
 'abon_ajouter' => 'AJOUTER UN ABONNE &nbsp; ',
 'abonees' => 'tous les abonn&eacute;s',
 'abonne_listes' => 'Ce contact est abonn&eacute; aux listes suivantes',
