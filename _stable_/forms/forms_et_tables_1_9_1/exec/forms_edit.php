@@ -269,7 +269,6 @@ function exec_forms_edit(){
 	
 	// gauche apercu ---------------------------------------------------------------
 	echo "<div id='apercu_gauche'>";
-	echo "<div id='apercu_gauche'>";
 	include_spip('public/assembler');
 	$GLOBALS['var_mode']='calcul';
 	echo $apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
