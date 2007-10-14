@@ -83,9 +83,7 @@ function exec_spiplistes_liste_edit(){
 	}
 
 	// construit le pied
-	include_spip('public/assembler');
-	$contexte_pied = array('lang'=>$lang);
-	$pied_page = recuperer_fond('modeles/piedmail', $contexte_pied);
+	$pied_page = spiplistes_pied_de_page_liste(0, $lang);
 
 	$gros_bouton_retour = icone(
 		_T('spiplistes:retour_link')

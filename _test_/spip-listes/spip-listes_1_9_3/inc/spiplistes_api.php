@@ -948,8 +948,11 @@ function  spiplistes_arbo_rubriques($id_rubrique,  $rslt_id_rubrique="") {
 	
 }
 
-function spiplistes_pied_de_page_liste($id_liste) {
+function spiplistes_pied_de_page_liste($id_liste = 0, $lang = false) {
 	$result = false;
+	if(!$lang) {
+		$lang = $GLOBALS['spip_lang'];
+	}
 	if(($id_liste = intval($id_liste)) > 0){
 		if($row = spip_fetch_array(spip_query("SELECT pied_page FROM spip_listes WHERE id_liste=$id_liste LIMIT 1"))) {
 			$result = $row['pied_page'];
@@ -957,8 +960,9 @@ function spiplistes_pied_de_page_liste($id_liste) {
 	}
 	if(!$result) {
 		include_spip('public/assembler');
-		$contexte_pied = array('lang'=>$GLOBALS['spip_lang']);
+		$contexte_pied = array('lang'=>$lang);
 		$result = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DEFAUT, $contexte_pied);
+		spiplistes_log(_SPIPLISTES_PATRONS_PIED_DEFAUT);
 	}
 	return ($result);
 }
