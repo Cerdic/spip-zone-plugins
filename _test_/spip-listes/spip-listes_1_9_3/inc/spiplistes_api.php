@@ -659,7 +659,7 @@ function spiplistes_tampon_html_get ($tampon_patron) {
 		$contexte_patron[$key] = __plugin_lire_s_meta($key, 'spiplistes_preferences');
 	}
 	include_spip('public/assembler');
-	return(recuperer_fond("patrons/tampons_courriers/".$tampon_patron, $contexte_patron));
+	return(recuperer_fond(_SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron, $contexte_patron));
 }
 
 // donne contenu tampon au format texte (CP-20071013)
@@ -671,7 +671,7 @@ function spiplistes_tampon_texte_get ($tampon_patron, $tampon_html) {
 	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
 		$contexte_patron[$key] = __plugin_lire_s_meta($key, 'spiplistes_preferences');
 	}
-	$f = "patrons/tampons_courrier/".$tampon_patron;
+	$f = _SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron;
 	if (find_in_path($f."_texte.html")){
 		$result = recuperer_fond($f, $contexte_patron);
 	}
@@ -681,6 +681,29 @@ function spiplistes_tampon_texte_get ($tampon_patron, $tampon_html) {
 	return($result);
 }
 
+// donne contenu lien_courrier au format html (CP-20071014)
+// lien_patron: nom du tampon (fichier, sans extension)
+function spiplistes_lien_courrier_html_get ($lien_patron, $url_courrier) {
+	$contexte_patron = array('url_courrier'=>$url_courrier);
+	include_spip('public/assembler');
+	return(recuperer_fond(_SPIPLISTES_PATRONS_LIENS_DIR.$lien_patron, $contexte_patron));
+}
+
+// donne contenu lien_courrier au format texte (CP-20071014)
+// lien_patron: nom du lien_courrier (fichier, sans extension)
+// lien_html: contenu html converti en texte si pas de contenu
+function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_courrier) {
+	$contexte_patron = array('url_courrier'=>$url_courrier);
+	$result = false;
+	$f = _SPIPLISTES_PATRONS_LIENS_DIR.$tampon_patron;
+	if (find_in_path($f."_texte.html")){
+		$result = recuperer_fond($f, $contexte_patron);
+	}
+	if(!$result) {
+		$result = version_texte($tampon_html);
+	}
+	return($result);
+}
 
 function spiplistes_onglets ($rubrique, $onglet, $return = false) {
 

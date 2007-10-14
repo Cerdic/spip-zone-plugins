@@ -42,7 +42,7 @@ function exec_spiplistes_config () {
 	spiplistes_log("CONFIGURE ID_AUTEUR #$connect_id_auteur <<");
 	
 	$keys_complement_courrier = array(
-		'opt_lien_en_tete_courrier'
+		'opt_lien_en_tete_courrier', 'lien_patron'
 		, 'opt_ajout_tampon_editeur', 'tampon_patron'
 		);
 	$keys_complement_courrier = array_merge($keys_complement_courrier, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
@@ -212,24 +212,30 @@ function exec_spiplistes_config () {
 
 	//////////////////////////////////////////////////////
 	// Boite parametrage complément du courrier
+	$opt_lien_en_tete_courrier = (__plugin_lire_s_meta('opt_lien_en_tete_courrier', _SPIPLISTES_META_PREFERENCES) == 'oui');
+	$lien_patron = __plugin_lire_s_meta('lien_patron', _SPIPLISTES_META_PREFERENCES);
 	$opt_ajout_tampon_editeur = (__plugin_lire_s_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES) == 'oui');
-	if($opt_ajout_tampon_editeur) {
-		$tampon_patron = __plugin_lire_s_meta('tampon_patron', _SPIPLISTES_META_PREFERENCES);
-		foreach($_tampon_cles as $key) {
-			$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
-		}
+	$tampon_patron = __plugin_lire_s_meta('tampon_patron', _SPIPLISTES_META_PREFERENCES);
+	foreach($_tampon_cles as $key) {
+		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 	$page_result .= ""
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, "", _T('spiplistes:Complement_des_courriers'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>\n"
 		//
-		// ajout du renvoi de tete
+		// ajout du renvoi de tete, lien courrier
 		. debut_cadre_relief("", true, "", _T('spiplistes:Complement_lien_en_tete'))
 		. "<p class='verdana2'>"._T('spiplistes:Complement_lien_en_tete_desc')."</p>"
    	. "<input type='checkbox' name='opt_lien_en_tete_courrier' value='oui' id='opt_lien_en_tete_courrier' "
-			. ((__plugin_lire_s_meta('opt_lien_en_tete_courrier', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "")
-			. " />\n"
+			. (($opt_lien_en_tete_courrier) ? "checked='checked'" : "")
+			. " onchange=\"jQuery('#div_lien_patron').show();\" />\n"
    	. "<label class='verdana2' for='opt_lien_en_tete_courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete')."</label>\n"
+		//
+		// lien courrier: boite de sélection
+		. "<div id='div_lien_patron' style='".(!$opt_lien_en_tete_courrier ? "display:none;" : "")."margin-top:1em;'>"
+   	. "<label class='verdana2' style='padding-left:2ex;' for='lien_patron'>"._T('spiplistes:Patron_du_lien').":</label>\n"
+		. spiplistes_boite_selection_patrons($lien_patron, true, _SPIPLISTES_PATRONS_LIENS_DIR, "lien_patron", 1)
+		. "</div>\n" // fin bloc div_lien_patron
 		. fin_cadre_relief(true)
 		//
 		// ajout tampon editeur
@@ -237,15 +243,15 @@ function exec_spiplistes_config () {
 		. "<p class='verdana2'>"._T('spiplistes:Complement_tampon_editeur_desc')."</p>"
    	. "<input type='checkbox' name='opt_ajout_tampon_editeur' value='oui' id='opt_ajout_tampon_editeur' "
 			. ($opt_ajout_tampon_editeur ? "checked='checked'" : "")
-			. " onchange=\"jQuery('#coordonnes_editeur').show()\" />\n"
+			. " onchange=\"jQuery('#div_coordonnes_editeur').show();\" />\n"
    	. "<label class='verdana2' for='opt_ajout_tampon_editeur'>"._T('spiplistes:Complement_tampon_editeur_label')."</label>\n"
 		//
 		// coordonnées editeur: bloc coordonnes_editeur
-		. "<div id='coordonnes_editeur' style='margin-top:1em;'>"
+		. "<div id='div_coordonnes_editeur' style='".(!$opt_ajout_tampon_editeur ? "display:none;" : "")."margin-top:1em;'>"
 		// tampon sélecteur
    	. "<label class='verdana2' style='padding-left:2ex;' for='tampon_patron'>"._T('spiplistes:Patron_du_tampon').":</label>\n"
-		. spiplistes_boite_selection_patrons($tampon_patron, true, "patrons/tampons_courriers/", "tampon_patron", 1)
-		. "<ul class='verdana2' style='".(!$opt_ajout_tampon_editeur ? "display:none;" : "")."list-style:none;padding-left:2ex;'>\n"
+		. spiplistes_boite_selection_patrons($tampon_patron, true, _SPIPLISTES_PATRONS_TAMPON_DIR, "tampon_patron", 1)
+		. "<ul class='verdana2' style='list-style:none;padding-left:2ex;'>\n"
 		;
 		foreach($_tampon_cles as $key) {
 			$page_result .= ""
@@ -255,7 +261,7 @@ function exec_spiplistes_config () {
 		}
 	$page_result .= ""
 		. "</lu>\n"
-		. "</div>\n" // fin bloc coordonnes_editeur
+		. "</div>\n" // fin bloc div_coordonnes_editeur
 		. fin_cadre_relief(true)
 		//
 		// bouton de validation

@@ -60,7 +60,7 @@ function spiplistes_meleuse () {
 	// initialise les options
 	foreach(array(
 		'opt_simuler_envoi'
-		,'opt_lien_en_tete_courrier'
+		,'opt_lien_en_tete_courrier', 'lien_patron'
 		,'opt_ajout_tampon_editeur', 'tampon_patron'
 		) as $key) {
 		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
@@ -174,10 +174,12 @@ function spiplistes_meleuse () {
 			
 			////////////////////////////////////		  
 			// Ajoute lien tete de courrier
-			if($opt_lien_en_tete_courrier) {
-				$ii = _T('spiplistes:Complement_lien_de_tete', array('liencourrier'=>generer_url_public('courrier', "id_courrier=$id_courrier"), 'nomsite'=>$nomsite));
-				$page_html = $ii . $page_html;
-				$page_texte = version_texte($ii) . $page_texte;
+			if($opt_lien_en_tete_courrier && ($opt_lien_en_tete_courrier == 'oui') && !empty($lien_patron)) {
+				$url_courrier = generer_url_public('courrier', "id_courrier=$id_courrier");
+				$lien_courrier_html = spiplistes_lien_courrier_html_get($lien_patron, $url_courrier);
+				$lien_courrier_texte = spiplistes_lien_courrier_texte_get($lien_patron, $lien_courrier_html, $url_courrier);
+				$page_html = $lien_courrier_html . $page_html;
+				$page_texte = $lien_courrier_texte . $page_texte;
 			}
 
 			////////////////////////////////////		  

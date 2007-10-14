@@ -55,6 +55,15 @@ function exec_spiplistes_courrier_previsu(){
 	$id_courrier = intval($id_courrier);
 	$charset = lire_meta('charset');
 	
+	$texte_lien_courrier =
+		(__plugin_lire_s_meta('opt_lien_en_tete_courrier', _SPIPLISTES_META_PREFERENCES) == 'oui')
+		? spiplistes_lien_courrier_html_get(
+			__plugin_lire_s_meta('lien_patron', _SPIPLISTES_META_PREFERENCES)
+			, generer_url_public('courrier', "id_courrier=$id_courrier")
+			)
+		: ""
+		;
+
 	$texte_editeur =
 		(__plugin_lire_s_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES) == 'oui')
 		? spiplistes_tampon_html_get(__plugin_lire_s_meta('tampon_patron', _SPIPLISTES_META_PREFERENCES))
@@ -68,8 +77,15 @@ function exec_spiplistes_courrier_previsu(){
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = $row[$key];
 			}
-			$courrier = $row[$sql_select];
+			
 			if($plein_ecran) {
+			
+				$texte_html = ""
+					. $texte_lien_courrier
+					. $texte
+					. $texte_editeur
+					;
+					
 				if($format=="texte") {
 				
 					header("Content-Type: text/plain charset=$charset");
@@ -77,12 +93,16 @@ function exec_spiplistes_courrier_previsu(){
 					// forcer IE à afficher en ligne. 
 					header("Content-Disposition: inline; filename=spiplistes-previsu.txt");
 
-					$message_texte = empty($message_texte) ? version_texte($texte.$texte_editeur) : $message_texte;
+					$message_texte = 
+						empty($message_texte) 
+						? version_texte($texte_html) 
+						: version_texte($texte_lien_courrier).$message_texte.version_texte($texte_editeur)
+						;
 					echo($message_texte);
 					exit(0);
 				}
 				else {
-					$texte = ""
+					$texte_html = ""
 						. "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Strict//EN\">\n"
 						. (($lang) ? "<html lang='$lang' dir='ltr'>\n" : "")
 						. "<head>\n"
@@ -92,14 +112,13 @@ function exec_spiplistes_courrier_previsu(){
 						. "</head>\n"
 						. "<body style='text-align:center;'>\n"
 						. "<div style='margin:0 auto;'>\n"
-						. $texte
-						. $texte_editeur
+						. $texte_html
 						. "</div>\n"
 						. "</body>\n"
 						. "</html>\n";
-					ajax_retour($texte);
+					ajax_retour($texte_html);
 				}
-			}
+			} // end if plein_ecran
 			echo($texte);
 		}
 		else {

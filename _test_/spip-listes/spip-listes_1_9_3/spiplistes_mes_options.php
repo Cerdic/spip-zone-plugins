@@ -19,6 +19,10 @@ define('_SIGNALER_ECHOS', false); // horrible
 
 define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 
+define("_SPIPLISTES_PATRONS_DIR", "patrons/");
+define("_SPIPLISTES_PATRONS_LIENS_DIR", _SPIPLISTES_PATRONS_DIR."lien_en_tete_courrier/");
+define("_SPIPLISTES_PATRONS_TAMPON_DIR", _SPIPLISTES_PATRONS_DIR."tampons_courriers/");
+
 define("_SPIPLISTES_RUBRIQUE", "messagerie");
 
 define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
