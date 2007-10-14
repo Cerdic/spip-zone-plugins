@@ -132,7 +132,7 @@ function spiplistes_meleuse () {
 				spiplistes_log("MEL: Envoi sur liste abos #$id_liste", LOG_DEBUG);
 				$str_log .= " to: ID_LISTE #$id_liste ($total_abonnes users)"; 
 	
-				$pied_page_html = pied_de_page_liste($id_liste);
+				$pied_page_html = spiplistes_pied_de_page_liste($id_liste);
 				$lang = spiplistes_langue_liste($id_liste);
 				if($lang != '') $GLOBALS['spip_lang'] = $lang ;
 	

@@ -234,7 +234,7 @@ function exec_spiplistes_config () {
 		// lien courrier: boite de sélection
 		. "<div id='div_lien_patron' style='".(!$opt_lien_en_tete_courrier ? "display:none;" : "")."margin-top:1em;'>"
    	. "<label class='verdana2' style='padding-left:2ex;' for='lien_patron'>"._T('spiplistes:Patron_du_lien').":</label>\n"
-		. spiplistes_boite_selection_patrons($lien_patron, true, _SPIPLISTES_PATRONS_LIENS_DIR, "lien_patron", 1)
+		. spiplistes_boite_selection_patrons($lien_patron, true, _SPIPLISTES_PATRONS_TETE_DIR, "lien_patron", 1)
 		. "</div>\n" // fin bloc div_lien_patron
 		. fin_cadre_relief(true)
 		//

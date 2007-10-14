@@ -686,7 +686,7 @@ function spiplistes_tampon_texte_get ($tampon_patron, $tampon_html) {
 function spiplistes_lien_courrier_html_get ($lien_patron, $url_courrier) {
 	$contexte_patron = array('url_courrier'=>$url_courrier);
 	include_spip('public/assembler');
-	return(recuperer_fond(_SPIPLISTES_PATRONS_LIENS_DIR.$lien_patron, $contexte_patron));
+	return(recuperer_fond(_SPIPLISTES_PATRONS_TETE_DIR.$lien_patron, $contexte_patron));
 }
 
 // donne contenu lien_courrier au format texte (CP-20071014)
@@ -695,7 +695,7 @@ function spiplistes_lien_courrier_html_get ($lien_patron, $url_courrier) {
 function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_courrier) {
 	$contexte_patron = array('url_courrier'=>$url_courrier);
 	$result = false;
-	$f = _SPIPLISTES_PATRONS_LIENS_DIR.$tampon_patron;
+	$f = _SPIPLISTES_PATRONS_TETE_DIR.$tampon_patron;
 	if (find_in_path($f."_texte.html")){
 		$result = recuperer_fond($f, $contexte_patron);
 	}
@@ -948,6 +948,20 @@ function  spiplistes_arbo_rubriques($id_rubrique,  $rslt_id_rubrique="") {
 	
 }
 
+function spiplistes_pied_de_page_liste($id_liste) {
+	$result = false;
+	if(($id_liste = intval($id_liste)) > 0){
+		if($row = spip_fetch_array(spip_query("SELECT pied_page FROM spip_listes WHERE id_liste=$id_liste LIMIT 1"))) {
+			$result = $row['pied_page'];
+		}
+	}
+	if(!$result) {
+		include_spip('public/assembler');
+		$contexte_pied = array('lang'=>$GLOBALS['spip_lang']);
+		$result = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DEFAUT, $contexte_pied);
+	}
+	return ($result);
+}
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

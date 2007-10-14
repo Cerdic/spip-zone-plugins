@@ -1,0 +1,23 @@
+#CACHE{1}
+#HTTP_HEADER{Content-Type: text/html}
+[(#REM)
+
+	* Squelette pour spip-listes    
+	* piedmail.html (ancien modeles/piedmail.html)
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	* Le pied de courrier est appliqué à l'envoi de votre courrier.
+	
+	* - ne pas envoyer des gabarits de plus de 10Ko
+	* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+	* ils seront ajoutes automatiquement à l'envoi du mail 
+	* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+	* - les urls et liens images seront automatiquement converties en absolues
+	*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+
+]<hr style="noshade color:#000;size:1px;" />
+<:spiplistes:editeur:> <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a><br />
+<a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a>
+<hr style="noshade color:#000;size:1px;"/>
