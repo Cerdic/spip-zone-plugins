@@ -1,0 +1,16 @@
+Ce qui a été fait avec «Bonbon !»
+
+1.9 Passage préliminaire à Spip 1.9
+-----------------------------------
+Passage à la version 1.9 de Spip
+Mise en plug-in
+Quelques corrections (les classes, matières, profs ne sont affichés que s'ils mènent vers des entrées du CDT)
+FCKeditor disparaît (provisoirement ?)
+«Bonbon !» est sur la zone (svn) en test.
+La pagination est désormais celle de Spip>1.9 (à la place de la pagination nulle aui avait été mise en place)
+
+
+1.0 Première sortie de Bonbon
+-----------------------------
+Ça marche et c'est publié là: http://www.spip-contrib.net/spip.php?id_article=2301
+ 

@@ -1,0 +1,156 @@
+#CACHE{60}
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en juin 2007
+***Page d'installation des mots-clés dans Spip
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Préparation du cahier de texte "Bonbon !" sous Spip</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+</head>
+<body>
+<h1>Préparation du cahier de texte sous Spip: ajout des classes et des matières et la rubrique du cahier de texte</h1>
+<p>Le bouton présent sur cette page ne doit être cliqué qu'une fois et <strong>une seule</strong>. Après avoir cliqué, ne faites pas <em>Recalculer cette page</em>.<br>
+Avant d'exécuter cette page en cliquant sur le bouton, faites une <a href="./ecrire/?exec=admin_tech" title="aller faire la sauvegarde maintenant">sauvegarde de votre base de données</a>.<br>
+En cas de problème vous devrez réutiliser cette sauvegarde.<p>
+<p>Ce squelette va installer dans votre Spip les mots-clés utilisés par le cahier de texte sous Spip.<p>
+<p>Ces mots-clés sont la liste des classes, les listes de matières, quelques autres mots-clés de gestion. Il faut éditer ce squelette pour personnaliser les classes et matières.</p>
+<p>Puis, il sera rajouté une rubrique qui contiendra les entrées du cahier de texte sous forme d'articles. Le nom de cette rubrique devra être conservé. Vous pouvez compléter ce nom (avec un numéro par exemple), mais devez impérativement garder tout le contenu de son titre actuel, sinon le cahier de texte ne fonctionnera plus.</p>
+<form name="form" method="post">
+	<input type="Submit" value="Installer les mots-clés du cahier de texte dans Spip" name="bouton">
+</form>
+<?php
+//Si le bouton a été pressé
+if($_POST['bouton']){
+
+//à adapter selon vos besoins:
+
+	$classes = array (
+	"6A", "6B", "6C", "6D", "6E", "6F", "6G", "6H", "6I", "6J", "6K", "6L", "5A", "5B", "5C", "5D", "5E", "5F", "5G", "5H", "5I", "5J", "5K", "5L", "4A", "4B", "4C", "4D", "4E", "4F", "4G", "4H", "4I", "4J", "4K", "4L", "3A", "3B", "3C", "3D", "3E", "3F", "3G", "3H", "3I", "3J", "3K", "3L"
+	);
+	$groupes = array (
+	"groupe A", "groupe B",
+	);
+	$matieres = array (
+	"Allemand LV1","Allemand LV2","Anglais LV1","Anglais LV2","Arts Plastiques","E.P.S.","Education musicale","Espagnol LV2","Histoire Géographie","Latin","Grec","Français","Mathématiques","Physique Chimie","Sciences de la vie et de la Terre","Technologie","Vie de classe","Itinéraire de découverte",
+	);
+//fin de la partie à adapter
+
+
+//Ne pas modifier ce qui suit !!!
+
+
+	$specif = array (
+	"Description de séance", "Devoirs à faire"
+	);
+	$liste_groupes= array (
+	"Classes"=>$classes,
+	"Sous groupes de classes"=>$groupes,
+	"Matières"=>$matieres,
+	"Cahier de texte en-ligne"=>$specif,
+	);
+
+//Pour chaque groupe de mot-clés à rajouter:
+	while (list($key,$val)=each($liste_groupes)) {
+
+		//D'abord, le groupe de mots
+		$nom_groupe=$key;
+		$existe=0;
+?>
+<BOUCLE_Verifie_Groupe(GROUPES_MOTS)>
+<?php
+		$pattern="%(".trim($nom_groupe).")%";
+		$string='[(#TITRE|texte_script)]';
+		preg_match ($pattern,$string,$matches);
+		if ($matches[1]) {
+			$existe=1;
+			$id_groupe='[(#ID_GROUPE|texte_script)]';
+			echo"<h2>Le groupe de mots-clés $nom_groupe existe déjà avec le n°$id_groupe. Les mots-clés seront rajoutés dedans.</h2>";
+		}
+?>
+</BOUCLE_Verifie_Groupe>
+<?php
+		if ($existe!=1) $id_groupe=ajoute_groupe($nom_groupe);
+
+		//Puis les mots...
+		while (list($key2,$val2)=each($val)) {
+			$existe=0;
+?>
+<BOUCLE_Verifie_Mot(MOTS)>
+<?php
+			if ($id_groupe=='[(#ID_GROUPE|texte_script)]') {
+				$pattern="%(".trim($val2).")%";
+				$string='[(#TITRE|texte_script)]';
+				preg_match ($pattern,$string,$matches);
+				if ($matches[1]) {
+					$existe=1;
+					$id_mot='[(#ID_MOT|texte_script)]';
+					echo "<p>Le mot-clé $val2 existe déjà avec le n°$id_mot. Il ne sera pas rajouté.</p>";
+				}
+			}
+?>
+</BOUCLE_Verifie_Mot>
+<?php
+			if ($existe!=1) $id_mot=ajoute_mot ($val2,$option_descript="",$id_groupe,$nom_groupe,$existe);
+		}//fin du while each($val)
+	}//fin du while each ($list_groupe)
+
+
+	//ajout de la rubrique qui va acceuillir le cahier de texte
+	$existe=0;
+?>
+<BOUCLE_Verifie_Rubrique(RUBRIQUES){tout}>
+<?php
+	$pattern="/(Cahier de texte en-ligne)/";
+	$string='[(#TITRE|texte_script)]';
+	preg_match ($pattern,$string,$matches);
+	if ($matches[1]) {
+		$existe=1;
+		$id_rubrique='[(#ID_RUBRIQUE|texte_script)]';
+		$texte="<p>La rubrique «Cahier de texte en-ligne» existe déjà avec le n°$id_rubrique. Elle ne sera pas ajoutée.";
+	}
+?>
+</BOUCLE_Verifie_Rubrique>
+<?php
+	if ($existe!=1) {
+		$sql = "INSERT INTO spip_rubriques (titre, descriptif , statut, date) 
+		VALUES ('".addslashes("Cahier de texte en-ligne")."','".addslashes("Cette rubrique contient le cahier de texte géré par Spip\n\nSon {titre} doit {{toujours}} contenir l'expression «{Cahier de texte en-ligne}». Si vous souhaitez changer son nom gardez cette expression dedans.")."', 'publie',NOW())";
+		
+		$result = spip_query($sql);
+		$id_rubrique=spip_insert_id();
+		$texte="<p>La rubrique «Cahier de texte en-ligne» est la rubrique n°$id_rubrique.";
+	}
+	echo "$texte\n<br>Son <em>titre</em> doit <strong>toujours</strong> contenir l'expression «<em>Cahier de texte en-ligne</em>». Si vous souhaitez changer son nom gardez cette expression dedans.</p>
+	<p><strong>Pour améliorer l'intégration du cahier de texte à votre site sous Spip vous pouvez renommer le fichier \"cahier-de-texte-rubrique.html\" livré dans le dossier squelettes en \"rubrique-$id_rubrique.html\"</strong></p>";
+	//fin du script
+	echo "<p><b>Ne rechargez pas la page</b>.<br/><br/>\n <a href=\"./ecrire/?exec=mots_tous\" title=\"Aller vérifier l'installation des groupes\">Passez dans l'espace privé de Spip</a> pour vérifier que les mots-clés et la rubrique sont bien installés.\n<ul>\n <li>En cas de problème, réutilisez votre sauvegarde de la base.</li>\n<li>Si tout va bien, effacez le ficher \"ajouter-classes-matieres-spip.html\" du serveur.</li>\n</ul><p>";
+};
+function ajoute_groupe ($nom_groupe){
+	$sql = "INSERT INTO spip_groupes_mots (titre,articles, breves,rubriques, syndic, minirezo, comite, forum) 
+		VALUES ('".trim($nom_groupe)."','oui','oui','oui','oui','oui','oui','oui')";
+		
+	$result = spip_query($sql);
+	$id_groupe=spip_insert_id();
+	echo "<h2>Ajout dans Spip du <a href=\"./ecrire/?exec=mots_tous\" title=\"Aller voir tous les groupes\">groupe</a> nommé <a href=\"./ecrire/?exec=mots_type&id_groupe=$id_groupe\" title=\"Aller voir le groupe $nom_groupe\">\"$nom_groupe\" de numéro $id_groupe</a></h2>";
+	return $id_groupe;
+};
+function ajoute_mot ($titre,$option_descript="",$id_groupe,$nom_groupe,$descript){
+	$phrase="";
+	if ($option_descript!="") {
+		$option_descript .= trim($descript);
+		$phrase=" de <b>$descript</b>";
+	};
+	$sql = "INSERT INTO spip_mots (titre, descriptif, texte , id_groupe, type) 
+		VALUES ('".trim($titre)."','Sous-thème de ".$option_descript."','','".$id_groupe."','".trim($nom_groupe)."')";
+		
+	$result = spip_query($sql);
+	$id_mot=spip_insert_id();
+	echo "<p><i>$titre</i>$phrase est le mot-clé numéro $id_mot</p>";
+	return $id_mot;
+}
+?>
