@@ -61,6 +61,7 @@ function spiplistes_meleuse () {
 	foreach(array(
 		'opt_simuler_envoi'
 		,'opt_lien_en_tete_courrier', 'lien_patron'
+		,'opt_ajout_pied_courrier', 'pied_patron'
 		,'opt_ajout_tampon_editeur', 'tampon_patron'
 		) as $key) {
 		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
