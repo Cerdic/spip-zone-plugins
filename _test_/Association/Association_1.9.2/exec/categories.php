@@ -11,31 +11,30 @@
 	**/
 	
 	include_spip('inc/presentation');
+	include_spip ('inc/navigation_modules');
 	
 	function exec_categories(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('Cat&eacute;gories de cotisation'), "", "");
+		
 		
 		$url_categories = generer_url_ecrire('categories');
-		$url_ajout_categorie=generer_url_ecrire('ajout_categorie');
-		$url_edit_categorie=generer_url_ecrire('edit_categorie');
+		$url_ajout_categorie=generer_url_ecrire('edit_categorie','action=ajoute');
+		$url_edit_categorie=generer_url_ecrire('edit_categorie','action=modifie');
 		$url_action_categorie=generer_url_ecrire('action_categorie');
+		
+		debut_page(_T('Cat&eacute;gories de cotisation'), "", "");
 		
 		debut_gauche();
 		
 		debut_boite_info();
-		echo '<p></p>';
+		echo association_date_du_jour();	
 		fin_boite_info();
 		
 		debut_raccourcis();
-		icone_horizontale("Ajout", generer_url_ecrire("edit_categorie","action=ajoute"), _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
+		icone_horizontale(_T('asso:Ajouter une cat&eacute;gorie de cotisation'), $url_ajout_categorie, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
 		fin_raccourcis();
-		
-		if ($connect_statut == '0minirezo') {
-		include_spip ('inc/navigation');
-		}
-		
+			
 		debut_droite();
 		
 		debut_cadre_relief(  "../"._DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif", false, "", $titre = _T('Cat&eacute;gories de cotisation'));
@@ -60,7 +59,7 @@
 			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right">'.$data['cotisation'].'</td>';
 			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['commentaires'].'</td>';
 			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_categorie.'&action=supprime&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_categorie.'&action=modifie&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier"></a></td>';
+			echo '<td  class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_categorie.'&id='.$data['id_categorie'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

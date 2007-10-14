@@ -24,8 +24,8 @@
 		debut_page(_T('Gestion pour  Association'), "", "");
 		
 		$url_comptes = generer_url_ecrire('comptes');
-		$url_ajout_compte = generer_url_ecrire('ajout_compte');
-		$url_edit_compte = generer_url_ecrire('edit_compte');
+		$url_ajout_compte = generer_url_ecrire('edit_compte','action=ajoute');
+		$url_edit_compte = generer_url_ecrire('edit_compte','action=modifie');
 		$url_action_comptes = generer_url_ecrire('action_comptes');
 		$url_bilan = generer_url_ecrire('bilan');
 		
