@@ -701,7 +701,7 @@
 		if (isset($env['modele']))
 			$modele_mail_confirm = $env['modele'];
 		if (isset($env['modele_admin']))
-			$modele_mail_admin = $env['modele'];
+			$modele_mail_admin = $env['modele_admin'];
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if ($row = spip_fetch_array($result)) {
 			$modele_admin = "modeles/$modele_mail_admin";

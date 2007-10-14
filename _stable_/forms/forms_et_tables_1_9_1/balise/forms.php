@@ -93,6 +93,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 	elseif (_DIR_RESTREINT!="" && $row['modifiable']=='oui'){
 		global $auteur_session;
 		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+		include_spip('inc/forms');
 		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
 		//On retourne les donnees si auteur ou cookie
 		$q = "SELECT donnees.id_donnee " .
