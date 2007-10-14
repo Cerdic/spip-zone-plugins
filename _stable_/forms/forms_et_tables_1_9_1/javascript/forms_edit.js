@@ -59,7 +59,8 @@ jQuery.fn.ajaxAction = function() {
 			if($('#'+idtarget).is('.forms_champs')) forms_init_multi($('#'+idtarget).parent());
 			if($('#'+idtarget).is('#champs')) forms_init_lang();
 		});
-		$.get( url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu" , function(data){refresh_apercu(data);} );
+		if ($('#apercu_gauche').length)
+			$.get( url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu" , function(data){refresh_apercu(data);} );
 		if (idtarget!='proprietes')
 			$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(data){ $('#proprietes').html(data).ajaxAction(); });
 		return false;
@@ -90,7 +91,8 @@ jQuery.fn.ajaxAction = function() {
 		/* jquery < 1.1.3 */
 			"after":
 			function(){
-				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
+				if ($('#apercu_gauche').length)
+					$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
 				if (idtarget!='proprietes')
 					$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(data){ $('#proprietes').html(data).ajaxAction(); });
 				$('#'+idtarget).ajaxAction();
