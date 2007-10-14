@@ -416,7 +416,7 @@ function exec_spiplistes_courrier_gerer () {
 			// boite courrier au format html
 			. debut_cadre_couleur('', true)
 			. _T('spiplistes:version_html')
-			. "&nbsp;<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&lire_base=oui&plein_ecran=oui")
+			. "&nbsp;<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&plein_ecran=oui")
 				."' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
 			. "<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' /></a><br />\n"
 			. "<iframe style='background-color:#fff;border:1px solid #000;'"
@@ -426,7 +426,7 @@ function exec_spiplistes_courrier_gerer () {
 			// boite courrier au format texte seul
 			. debut_cadre_couleur('', true)
 			. _T('spiplistes:version_texte')
-			. "&nbsp;<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&lire_base=oui&format=texte&plein_ecran=oui")."'"
+			. "&nbsp;<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&id_liste=$id_liste&lire_base=oui&format=texte&plein_ecran=oui")."'"
 				. " title='"._T('spiplistes:Apercu_plein_ecran')." ($alt_message_texte)' target='_blank'>\n"
 			. "<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' /></a><br />\n"
 			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"

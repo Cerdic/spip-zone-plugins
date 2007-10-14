@@ -124,6 +124,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Contenu_a_partir_de_date_' => "Contenu &agrave; partir de cette date ",
 'Cliquez_Generer_desc' => "Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&eacute;sultat 
 	dans la bo&icirc;te @titre_champ_texte@.",
+'courrier_realise_avec_spiplistes' => "Courrier réalisé avec SPIP-Listes",
 
 //D
 '_de_' => " de ",
@@ -313,6 +314,7 @@ et de recevoir les lettres d\'informations.',
 'Pas_de_liste' => "Pas de liste",
 'Pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)",
 'Patron_du_tampon' => "Patron du tampon ",
+'Patron_de_pied_' => "Patron de pied ",
 
 //R
 'recherche' => 'Rechercher',

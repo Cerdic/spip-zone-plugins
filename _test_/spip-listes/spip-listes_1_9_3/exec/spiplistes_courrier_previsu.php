@@ -48,11 +48,14 @@ include_spip('inc/spiplistes_api');
 
 function exec_spiplistes_courrier_previsu(){
 
-	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier'
+	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
 		, 'lire_base', 'format', 'plein_ecran') as $key) {
 		$$key = _request($key);
 	}
-	$id_courrier = intval($id_courrier);
+	foreach(array('id_courrier', 'id_liste') as $key) {
+		$$key = intval($$key);
+	}
+
 	$charset = lire_meta('charset');
 	
 	$texte_lien_courrier =
@@ -64,6 +67,8 @@ function exec_spiplistes_courrier_previsu(){
 		: ""
 		;
 
+	$pied_page = ($id_liste) ? spiplistes_pied_de_page_liste($id_liste, $lang) : "";
+	
 	$texte_editeur =
 		(__plugin_lire_s_meta('opt_ajout_tampon_editeur', _SPIPLISTES_META_PREFERENCES) == 'oui')
 		? spiplistes_tampon_html_get(__plugin_lire_s_meta('tampon_patron', _SPIPLISTES_META_PREFERENCES))
@@ -83,6 +88,7 @@ function exec_spiplistes_courrier_previsu(){
 				$texte_html = ""
 					. $texte_lien_courrier
 					. $texte
+					. $pied_page
 					. $texte_editeur
 					;
 					
@@ -96,7 +102,7 @@ function exec_spiplistes_courrier_previsu(){
 					$message_texte = 
 						empty($message_texte) 
 						? version_texte($texte_html) 
-						: version_texte($texte_lien_courrier).$message_texte.version_texte($texte_editeur)
+						: version_texte($texte_lien_courrier).$message_texte.version_texte($pied_page).version_texte($texte_editeur)
 						;
 					echo($message_texte);
 					exit(0);

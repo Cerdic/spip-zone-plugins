@@ -59,6 +59,7 @@ function exec_spiplistes_liste_gerer () {
 			, 'titre_message', 'patron', 'periode', 'envoyer_maintenant'
 			, 'jour', 'mois', 'annee', 'heure', 'minute'
 			, 'auto_mois'
+			, 'btn_patron_pied'
 		) as $key) {
 		$$key = _request($key);
 	}
@@ -128,6 +129,13 @@ spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
 					$titre = filtrer_entites(_T('spiplistes:Nouvelle_liste_de_diffusion'));
 				}
 				$sql_query .= "titre="._q($titre).",texte="._q($texte).",";
+			}
+			
+			// Modifier patron de pied ?
+			if($btn_patron_pied && $patron) {
+spiplistes_log("LISTE MODIF: de la liste <<$id_liste $patron", LOG_DEBUG);
+				$pied_page = spiplistes_pied_page_html_get($patron);
+				$sql_query .= "pied_page="._q($pied_page).",";
 			}
 			
 			// Modifier diffusion ?
@@ -261,6 +269,10 @@ spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:Liste_numero_:'), $id_liste, false);
 	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
+	spiplistes_boite_patron($id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
+		, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:Patron_de_pied_')
+		, (($ii = strlen($pied_page)) ? _T('taille_octets',array('taille'=>$ii)) : "")
+		, ($ii==0));
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
 	spiplistes_boite_info_spiplistes();

@@ -545,7 +545,7 @@ function spiplistes_liste_des_patrons ($chemin) {
 }
 
 // construit la boite de selection patrons (CP-20071012)
-function spiplistes_boite_selection_patrons ($current_titre="", $return=false, $chemin="patrons/", $select_nom="patron", $size_select=10, $width='34ex') {
+function spiplistes_boite_selection_patrons ($patron="", $return=false, $chemin="patrons/", $select_nom="patron", $size_select=10, $width='34ex') {
 	global $couleur_claire;
 	$result = "";
 	// va chercher la liste des patrons
@@ -556,7 +556,7 @@ function spiplistes_boite_selection_patrons ($current_titre="", $return=false, $
 	$selected = (empty($title_selected) ? "selected='selected'" : ""); 
 	foreach($liste_patrons as $titre_option) {
 		$selected =
-			($titre_option == $current_titre)
+			($titre_option == $patron)
 			? " selected='selected' style='background:$couleur_claire;' "
 			: ""
 			;
@@ -566,6 +566,46 @@ function spiplistes_boite_selection_patrons ($current_titre="", $return=false, $
 		}
 	}
 	$result  .= "</select>\n";
+
+	if($return) return($result);
+	else echo($result);
+}
+
+// From SPIP-Listes-V: CP:20070923
+function spiplistes_boite_patron ($id_liste, $exec_retour, $nom_bouton_valider, $chemin_patrons, $titre_boite = ""
+	, $msg_patron = false, $patron = "", $return = false) {
+	// bloc sélection patron
+	$result = ""
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."patron-24.png", true)
+		. "<div class='verdana1' style='text-align: center;'>\n"
+		;
+	$titre_boite = "<strong>$titre_boite</strong>\n";
+	// inclusion du script de gestion des layers de SPIP
+	if(($patron === true) || (is_string($patron) && empty($patron))) {
+		$result  .= ""
+			. bouton_block_visible(md5(_T('spiplistes:charger_patron')))
+			. $titre_boite
+			. debut_block_visible(md5(_T('spiplistes:charger_patron')))
+			;
+	}
+	else {
+		$result  .= ""
+			. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
+			. $titre_boite
+			. debut_block_invisible(md5(_T('spiplistes:charger_patron')))
+			;
+	}
+	$result .= "\n"
+		. "<form action='".generer_url_ecrire($exec_retour, "id_liste=$id_liste")."' method='post' style='margin:1ex;'>\n"
+		. spiplistes_boite_selection_patrons ($patron, true, $chemin_patrons)
+		. "<div style='margin-top:1em;text-align:right;'><input type='submit' name='$nom_bouton_valider' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+		. "</form>\n"
+		. fin_block()
+		. "<div style='text-align:center'>\n"
+		. ($msg_patron ? $msg_patron : "<span style='color:gray;'>&lt;"._T('spiplistes:aucun')."&gt;</span>\n")
+		. "</div>\n"
+		. fin_cadre_relief(true);
+		;
 
 	if($return) return($result);
 	else echo($result);
@@ -703,6 +743,14 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 		$result = version_texte($tampon_html);
 	}
 	return($result);
+}
+
+// donne contenu pied_page au format html (CP-20071014)
+// lien_patron: nom du tampon (fichier, sans extension)
+function spiplistes_pied_page_html_get ($pied_patron) {
+	$contexte_patron = array();
+	include_spip('public/assembler');
+	return(recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$pied_patron, $contexte_patron));
 }
 
 function spiplistes_onglets ($rubrique, $onglet, $return = false) {
@@ -962,7 +1010,6 @@ function spiplistes_pied_de_page_liste($id_liste = 0, $lang = false) {
 		include_spip('public/assembler');
 		$contexte_pied = array('lang'=>$lang);
 		$result = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DEFAUT, $contexte_pied);
-		spiplistes_log(_SPIPLISTES_PATRONS_PIED_DEFAUT);
 	}
 	return ($result);
 }
