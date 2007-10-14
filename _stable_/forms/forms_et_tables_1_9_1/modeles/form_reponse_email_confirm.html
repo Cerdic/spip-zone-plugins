@@ -3,6 +3,6 @@
 <:forms:reponse_envoyee:> [(#DATE|affdate)]
 <:forms:reponse_depuis:> [(#URL|url_absolue)]
 <BOUCLE_champs(FORMS_CHAMPS){tout}{id_form}{par rang}>
-#TITRE : [(#LESVALEURS{','}|supprimer_tags)] [(#TYPE|=={fichier}|?{' '})	[(#ENV{mail_admin}|=={'oui'}|?{' ',''}) #URL_ECRIRE{forms_telecharger,id_donnee=#ID_DONNEE&champ=#CHAMP} ] ]</BOUCLE_champs>
+#TITRE : [(#LESVALEURS{','}|supprimer_tags)] </BOUCLE_champs>
 </BOUCLE_form>
 </BOUCLE_reponses>
