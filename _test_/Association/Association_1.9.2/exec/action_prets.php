@@ -18,7 +18,7 @@
 		
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$action=$_REQUEST['action'];
-		$id_pret=$_REQUEST['id_pret'];
+		$id_pret=$_REQUEST['id'];
 		$id_ressource=$_REQUEST['id_ressource'];
 		$date_sortie=$_POST['date_sortie'];
 		$duree=$_POST['duree'];
@@ -33,7 +33,6 @@
 		$url_retour=$_POST['url_retour'];
 		
 		//SUPPRESSION PROVISOIRE PRET
-		
 		if ($action == "supprime") {
 			
 			$url_retour = $_SERVER['HTTP_REFERER'];
@@ -67,34 +66,37 @@
 			debut_cadre_relief(  "", false, "", $titre = _T('asso:prets_titre_suppression_prets'));
 			echo '<p><strong>'._T('asso:prets_danger_suppression',array('id_pret' => $id_pret)).'</strong></p>';
 			echo '<form action="'.$url_action_prets.'&action=drop"  method="post">';
+			
 			echo '<input type=hidden name="id_pret" value="'.$id_pret.'">';
 			echo '<input type=hidden name="url_retour" value="'.$url_retour.'">';
-			echo '<p style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
-			fin_cadre_relief();  
 			
+			echo '<p style="float:right;"><input name="submit" type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo"></p>';
+			echo '</form>';
+			
+			fin_cadre_relief();  
 			fin_page();
+			exit;
 		}
 		
 		//  SUPPRESSION DEFINITIVE PRET
-		
 		if ($action == "drop") {
 			
 			spip_query( "DELETE FROM spip_asso_prets WHERE id_pret='$id_pret' " );
 			spip_query ("DELETE FROM spip_asso_comptes WHERE id_journal='$id_pret' " );
 			spip_query( "UPDATE spip_asso_ressources SET statut='ok' WHERE id_ressource='$id_ressource' " );
 			header ('location:'.$url_retour);
+			exit;
 		}
 		
 		//  MODIFICATION PRET
-		
 		if ($action =="modifie") { 
 			spip_query( "UPDATE spip_asso_prets SET date_sortie="._q($date_sortie).", duree="._q($duree).", date_retour="._q($date_retour).", id_emprunteur="._q($id_emprunteur).", commentaire_sortie="._q($commentaire_sortie)." WHERE id_pret='$id_pret' " );
 			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_sortie).", journal="._q($journal).",recette="._q($montant).") " );
 			header ('location:'.$url_retour);
+			exit;
 		}
 		
 		//  AJOUT PRET
-		
 		if ($action == "ajoute") {
 			$query=spip_query( "INSERT INTO spip_asso_prets (id_ressource, date_sortie, duree, date_retour, id_emprunteur, commentaire_sortie, commentaire_retour) VALUES ("._q($id_ressource).", "._q($date_sortie).", "._q($duree).", "._q($date_retour).", "._q($id_emprunteur).", "._q($commentaire_sortie).", "._q($commentaire_retour)." )" );
 			if($query){
@@ -107,6 +109,7 @@
 				spip_query( "UPDATE spip_asso_ressources SET statut='reserve' " );
 			}
 			header ('location:'.$url_retour);
+			exit;
 		}
 	}
 ?>

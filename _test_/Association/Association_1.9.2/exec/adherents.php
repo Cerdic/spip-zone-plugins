@@ -72,7 +72,7 @@
 		icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), generer_url_ecrire('edit_relances'),  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
 		echo '</p>';
 		echo '<p>';
-		echo '<a href="'.$url_pdf_adherents.'&'.$critere.'">Imprimer</a>';
+		echo '<a href="'.$url_pdf_adherents.'&critere='.$critere.'">Imprimer</a>';
 		echo '</p>';	
 		fin_raccourcis();
 		

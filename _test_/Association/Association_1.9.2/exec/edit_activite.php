@@ -83,9 +83,11 @@
 		echo ' id="statut" /><br />';
 		echo '<label for="commentaire"><strong>'._T('asso:activite_libelle_commentaires').' :</strong></label>';
 		echo '<textarea name="commentaire" id="commentaire" class="formo" />'.$commentaire.'</textarea>';
+		
 		echo '<input name="action" type="hidden" value="'.$action.'">';
 		echo '<input name="id_evenement" type="hidden" value="'.$id_evenement.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
+		
 		echo '<div style="float:right;">';
 		echo '<input name="submit" type="submit" value="';
 		if ( isset($action)) {echo _T('asso:bouton_'.$action);}

@@ -111,7 +111,5 @@
 			header ('location:'.$url_retour);
 			exit;
 		}
-
-
 	}
 ?>

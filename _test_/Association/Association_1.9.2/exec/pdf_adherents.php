@@ -4,8 +4,6 @@ define('FPDF_FONTPATH','font/');
 include_spip('pdf/pdf_table');
 
 $critere=$_GET['critere'];
-$query=spip_query("SELECT nom FROM spip_asso_profil WHERE id_profil=1");
-$association=spip_fetch_array($query);
 
 class PDF extends PDF_Table {
 
@@ -16,7 +14,7 @@ class PDF extends PDF_Table {
 	function Header(){
 		//Titre
 		$this->SetFont('Arial','',10);
-		$this->Cell(0,6,'Association '.$association,0,1,'L');
+		$this->Cell(0,6,'Association '.lire_config('association/nom'),0,1,'L');
 		$this->SetFont('Arial','B',14);
 		$this->Cell(0,6,_T('asso:adherent_titre_liste_actifs').': '.$statut,0,1,'C');
 		$this->Ln(10);
