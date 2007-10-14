@@ -50,7 +50,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 	$erreur = array();
 	$reponse = '';
 	$formok = '';
-	$valeurs = array('0'=>'0');
+	$valeurs = pipeline('forms_pre_remplit_formulaire',array('args'=>array('id_form'=>$id_form,'id_donne'=>$id_donnee),'data'=>array('0'=>'0')));
 	$affiche_sondage = '';
 	$formactif = (
 	  (
@@ -90,7 +90,9 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 	}
 	elseif (!_DIR_RESTREINT && $id_donnee=_request('id_donnee'))
 		$valeurs = Forms_valeurs($id_donnee,$id_form);
-	elseif (_DIR_RESTREINT!="" && $row['modifiable']=='oui'){
+	elseif (_DIR_RESTREINT!="" 
+	&& ( ($row['modifiable']=='oui') || ($row['multiple']=='non') )
+	){
 		global $auteur_session;
 		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 		include_spip('inc/forms');
@@ -110,6 +112,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 		if ($row['multiple']=='oui') $q.="AND donnees.id_donnee="._q($id_donnee);
 		$res = spip_query($q);
 		if($row2 = spip_fetch_array($res)){
+			if (($row['multiple']=='non') && ($row['modifiable']=='non')) return "";
 			$id_donnee=$row2['id_donnee'];
 			$valeurs = Forms_valeurs($id_donnee,$id_form);
 		}

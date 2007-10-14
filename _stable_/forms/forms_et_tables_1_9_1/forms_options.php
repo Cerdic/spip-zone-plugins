@@ -21,17 +21,20 @@ $GLOBALS['forms_actif_exec'][] = 'donnees_edit';
 $GLOBALS['forms_saisie_km_exec'][] = 'donnees_edit';
 // pipelines d'ajout et surcharge des champs
 #edition du formulaire
-$GLOBALS['spip_pipeline']['forms_types_champs'] = '';
-$GLOBALS['spip_pipeline']['forms_bloc_edition_champ'] = '';
-$GLOBALS['spip_pipeline']['forms_update_edition_champ'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_types_champs'])) $GLOBALS['spip_pipeline']['forms_types_champs'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_bloc_edition_champ'])) $GLOBALS['spip_pipeline']['forms_bloc_edition_champ'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_update_edition_champ'])) $GLOBALS['spip_pipeline']['forms_update_edition_champ'] = '';
 
 #visualisation du formulaire
-$GLOBALS['spip_pipeline']['forms_label_details'] = '';
-$GLOBALS['spip_pipeline']['forms_input_champs'] = '';
-$GLOBALS['spip_pipeline']['forms_ajoute_styles'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_label_details'])) $GLOBALS['spip_pipeline']['forms_label_details'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_input_champs'])) $GLOBALS['spip_pipeline']['forms_input_champs'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_ajoute_styles'])) $GLOBALS['spip_pipeline']['forms_ajoute_styles'] = '';
+
+#pre remplissage du formulaire
+if (!isset($GLOBALS['spip_pipeline']['forms_pre_remplit_formulaire'])) $GLOBALS['spip_pipeline']['forms_pre_remplit_formulaire'] = '';
 #modification des donnees apres saisie du formulaire
-$GLOBALS['spip_pipeline']['forms_pre_edition_donnee'] = '';
-$GLOBALS['spip_pipeline']['forms_valide_conformite_champ'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_pre_edition_donnee'])) $GLOBALS['spip_pipeline']['forms_pre_edition_donnee'] = '';
+if (!isset($GLOBALS['spip_pipeline']['forms_valide_conformite_champ'])) $GLOBALS['spip_pipeline']['forms_valide_conformite_champ'] = '';
 
 
 #affichage des donnees

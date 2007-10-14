@@ -476,7 +476,8 @@
 		);
 		foreach($valeurs as $champ=>$val){
 			$champs_mod[] = $champ;
-			$type = $champs[$champ]['type'];
+			// un plugin a pu ajouter un 'champ factice' a enregistrer, non defini dans la structure
+			$type = isset($champs[$champ]['type'])?$champs[$champ]['type']:"";
 			$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
 			$inserts = array_merge($inserts,$ins);
 		}
