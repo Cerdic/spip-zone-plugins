@@ -176,7 +176,7 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 	}
 	
 	//////////////////////////////////
-	// ici commence la vraie boucle
+	// tableau des resultats
 	$result = ""
 		. debut_cadre_relief('redacteurs-24.gif', true)
 		. "<table border='0' cellpadding='3' cellspacing='0' width='100%' class='arial2, spiplistes-abos'>\n"
@@ -186,37 +186,55 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 	$icon_auteur = "<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0'>";
 	$result .= ""
 		. "<tr bgcolor='#DBE1C5'>"
-		. "<td width='20'>"
+		//
+		// #1: statut auteur (icone)
+		. "<th width='20'>"
 		.	(
 			($tri=='statut')
 			? $icon_auteur
 			: "<a href='".parametre_url($url,'tri','statut')."' title='"._T('lien_trier_statut')."'>$icon_auteur</a>"
 			)
-		. "</td><td>"
+		. "</th>\n"
+		// #2: nom
+		.	"<th>"
 		.	(
 		 	($tri == '' || $tri=='nom')
-			? '<strong>'._T('info_nom').'</strong>'
-			: "<a href='".parametre_url($url,'tri','nom')."' title='"._T('lien_trier_nom')."'><strong>"._T('info_nom')."</strong></a>"
+			? _T('info_nom')
+			: "<a href='".parametre_url($url,'tri','nom')."' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>"
 			)
-		. "</td><td colspan='2'><strong>"._T('info_site')."</strong>"
-		. "</td><td>"
-		;
-	if ($visiteurs != 'oui') {
-		if ($tri=='nombre')
-			$result .= "<strong>"._T('spiplistes:format')."</strong>";
-		else
-			$result .= "<strong>"._T('spiplistes:format')."</strong>"; 
-	}
-	$result .= ""
-		. "</td><td>"
-		. "<strong>"._T('spiplistes:modifier')."</strong>"
-		. "</td></tr>\n"
+		. "</th>\n"
+		//
+		// #3: contact mail
+		. "<th>"._T('email')
+		. "</th>\n"
+		//
+		// #4: site
+		.	"<th>"._T('info_site')
+		. "</th>\n"
+		//
+		// #5: Format si abonné	
+		.	"<th>"._T('spiplistes:format')
+		. "</th>\n"
+		//
+		// #6: Nombre d'abonnements	
+		.	"<th>"
+		.	(
+			($tri=='nombre')
+			? _T('spiplistes:nb_abos')
+			: "<a href='".parametre_url($url,'tri','nombre')."' title='"._T('spiplistes:lien_trier_nombre')."'>"._T('spiplistes:nb_abos')."</a>"
+			)
+		. "</th>\n"
+		//
+		// #7: Modifier l'abonnement
+		.	"<th>"
+		. _T('spiplistes:modifier')
+		. "</th></tr>\n"
 		;
 	
 	// onglets de pagination (si pagination)
 	if ($nombre_auteurs > $max_par_page) {
 		$result .= ""
-			. "<tr class='onglets'><td colspan='6'>"
+			. "<tr class='onglets'><td colspan='7'>"
 			;
 		// onglets : affiche les chiffres 
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
@@ -238,7 +256,7 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 		// onglets : affichage des lettres
 		if (($tri == 'nom') && ($GLOBALS['options'] == 'avancees')) {
 			$result .= ""
-				. "<tr class='onglets'><td colspan='6'>"
+				. "<tr class='onglets'><td colspan='7'>"
 				;
 			foreach ($lettre as $key => $val) {
 				$result .= 
@@ -264,68 +282,73 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 	for($index_map=0;$index_map<count($val);$index_map++) {
 		$trad_map[$val[$index_map]] = $trad[$index_map];
 	}
-	$i=0;
+	$ii=0;
 	
+	//////////////////////////////////
+	// ici commence la vraie boucle
+
 	// les auteurs (la liste)
 	foreach ($auteurs as $row) {
 		// couleur de ligne
-		$couleur = ($i % 2) ? '#eee' : $couleur_claire;
-		$i++;
+		$couleur = (($ii++) % 2) ? '#eee' : $couleur_claire;
+
+
 		$result .= ""
 			. "<tr style='background-color: $couleur'>"
 			//
-			// statut auteur
+			// #1: statut auteur (icone)
 			. "<td>"
 			. bonhomme_statut($row)
+			. "</td>\n"
 			//
-			// nom
-			. "</td><td>"
+			// #2: nom
+			. "<td>"
 			. "<a href='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNE_EDIT, "id_auteur=".$row['id_auteur'])."'>".typo($row['nom']).'</a>'
-			;
-		if ($connect_statut == '0minirezo' && $row['restreint']) {
-			$result .= " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
-		}
-		
-		// contact
-		if ($GLOBALS['options'] == 'avancees') {
-			$result .= "</td><td>";
-			if (
-				($row['messagerie'] == 'oui')
-				&& $row['login']
-				&& ($activer_messagerie != "non")
-				&& ($connect_activer_messagerie != "non")
-				&& ($messagerie != "non")
-				) {
-				$result .= _T('spiplistes:erreur'); // bouton_imessage($row['id_auteur'],"force")."&nbsp;";
-			}
-			if ($connect_statut=="0minirezo") {
-				if (strlen($row['email'])>3)
-					$result .= "<a href='mailto:".$row['email']."'>"._T('lien_email')."</a>";
-				else
-					$result .= "&nbsp;";
-			}
-			$result .= ""
-				.	(
-						(strlen($row['url_site'])>3)
-						? "</td><td><a href='".$row['url_site']."'>"._T('lien_site')."</a>"
-						: "</td><td>&nbsp;"
-					)
-					;
-		}
-		
-		// Abonne ou pas ?
-		$result .= '</td><td>';
-		$id_auteur=$row['id_auteur'] ;
-		$abo = spip_fetch_array(spip_query("SELECT `spip_listes_format` FROM `spip_auteurs_elargis` WHERE `id_auteur`=$id_auteur")) ;		
-		$abo = $abo["spip_listes_format"];
-		if($abo == "non")
-			$result .= "<span title='"._T('spiplistes:Sans_abonnement')."'> - </span>";
-		else
-			$result .= "&nbsp;".$trad_map[$abo];
-		
-		// Modifier l'abonnement
-		$result .= ""
-			. "</td><td>"
+			.	(
+				($connect_statut == '0minirezo' && $row['restreint'])
+				? " &nbsp;<small>"._T('statut_admin_restreint')."</small>"
+				: ""
+				)
+			. "</td>\n"
+			//
+			// #3: contact mail
+			. "<td>"
+			.	(
+				(strlen($row['email'])>3)
+				? "<a href='mailto:".$row['email']."'><img alt='' src='"._DIR_IMG_PACK."m_envoi_rtl.gif' /></a>"
+				: "<img alt='"._T('spiplistes:Pas_adresse_email')."' src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."puceoff.gif' />"
+				)
+			. "</td>\n"
+			//
+			// #4: site
+			. "<td>"
+			.	(
+					(strlen($row['url_site'])>3)
+					? "<a href='".$row['url_site']."' class='spip_out'>"._T('lien_site')."</a>"
+					: "&nbsp;"
+				)
+			. "</td>\n"
+			//
+			// #5: Format si abonné	
+			. "<td>"
+			.	(
+				(($abo = $row['format']) && (!empty($abo)) && ($abo != 'non'))
+				? $trad_map[$abo]
+				: "<span title='"._T('spiplistes:Sans_abonnement')."'> - </span>"
+				)
+			. "</td>\n"
+			//
+			// #6: nombre d'abonnement
+			. "<td>"
+			.	(
+				($row['compteur'])
+				? "<span class='spiplistes-legend-stitre'>".$row['compteur']."<span>"
+				: ""
+				)
+			. "</td>\n"
+			//
+			// #7: Modifier l'abonnement
+			. "<td>"
 			. "<a name='abo".$row['id_auteur']."'></a>"
 			;
 
@@ -337,17 +360,19 @@ function spiplistes_afficher_auteurs($query, $url, $return = false) {
 		$a_title_abo_texte =  " title='"._T('spiplistes:Abonner_format_texte')."'";
 		$a_title_desabo =  " title='"._T('spiplistes:Desabonner')."'";
 
-		if($abo == 'html'){
+		if($abo == 'html') {
 			$option_abo = "<a $a_title_desabo href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
 			 . "</a> | <a $a_title_abo_texte href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')."</a>";
 		}
-		elseif ($abo == 'texte') 
+		elseif ($abo == 'texte') {
 			$option_abo = "<a $a_title_desabo href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
 			 . "</a> | <a $a_title_abo_html href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
-		elseif(($abo == 'non') || (!$abo)) 
+		}
+		else {
 			$option_abo = "<a $a_title_abo_texte href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')
 			 . "</a> | <a $a_title_abo_html href='".parametre_url($u,'statut','html')."'>"._T('spiplistes:html')."</a>";
-			 
+		}
+		
 		$result .= ""
 			. "&nbsp;".$option_abo
 			. "</td></tr>\n"

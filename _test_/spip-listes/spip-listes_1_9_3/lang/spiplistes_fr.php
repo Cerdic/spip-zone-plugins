@@ -246,6 +246,7 @@ et de recevoir les lettres d\'informations.',
 'liste_des_abonnes' => "Liste des abonn&eacute;s",
 'Listes_de_diffusion' => 'Listes de diffusion',
 'Liste_de_destination' => "Liste de destination",
+'lien_trier_nombre' => "Trier par nombre d&acute;abonnements",
 
 //M
 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format',
@@ -296,6 +297,7 @@ et de recevoir les lettres d\'informations.',
 'Nouvelle_liste_de_diffusion' => 'Nouvelle liste de diffusion',
 'numero' => 'N&nbsp;',
 'Nettoyage_du_casier' => "Nettoyage du casier",
+'nb_abos' => "qt.",
 
 //P
 'par_date' => 'Par date d\'inscription',
@@ -315,6 +317,7 @@ et de recevoir les lettres d\'informations.',
 'Pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)",
 'Patron_du_tampon' => "Patron du tampon ",
 'Patron_de_pied_' => "Patron de pied ",
+'Pas_adresse_email' => "Pas d'adresse email",
 
 //R
 'recherche' => 'Rechercher',
@@ -383,6 +386,7 @@ et de recevoir les lettres d\'informations.',
 'abonees' => 'tous les abonn&eacute;s',
 'abonne_listes' => 'Ce contact est abonn&eacute; aux listes suivantes',
 'abonne_aucune_liste' => 'Abonn&eacute;s &agrave; aucune liste',
+'Abonnes_listes_mensuelles' => 'Abonn&eacute;s aux listes mensuelles ',
 'abonnement_simple' => '<b>Abonnement simple : </b><br /><i>Les abonn&eacute;s re&ccedil;oivent un message de confirmation apr&egrave;s leur abonnement</i>',
 'abonnement_code_acces' => '<b>Abonnement avec codes d\'acc&egrave;s : </b><br /><i>Les abonn&eacute;s re&ccedil;oivent en plus un login et un mot de passe qui leur permettront de s\'identifier sur le site. </i>',
 'abonnement_newsletter' => '<b>Abonnement &agrave; la lettre d\'information</b>',

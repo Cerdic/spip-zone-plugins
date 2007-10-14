@@ -6,7 +6,6 @@
 
 TO-DO:
 - Controler si membre possède un email avant abonner
-- stats: revoir la liste. Pas clair !
 - vérifier la boite autocron
 - Modifier module import/export
 - Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"

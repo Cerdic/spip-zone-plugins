@@ -99,11 +99,10 @@ function exec_spiplistes_abonnes_tous () {
 	}
 	
 	//Total des auteurs qui ne sont pas abonnes a une liste
-	$abonnes_a_rien = spip_query(
-		"SELECT a.id_auteur, COUNT(d.id_liste) FROM spip_auteurs AS a  
-	      LEFT JOIN spip_auteurs_listes AS d ON a.id_auteur =  d.id_auteur GROUP BY a.id_auteur HAVING COUNT(d.id_liste) = 0;"
-		); 
-	$nb_abonnes_a_rien = spip_num_rows($abonnes_a_rien);
+	$sql_result = spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs
+		WHERE id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs_listes GROUP BY id_auteur)");
+		
+	$nb_abonnes_a_rien = (($row = spip_fetch_array($sql_result)) && ($row['n'])) ? $row['n'] : 0;
 
 	$total = $cmpt['html'] + $cmpt['texte'] + $cmpt['non']; // ?
 
@@ -119,10 +118,13 @@ function exec_spiplistes_abonnes_tous () {
 		// Total des abonnés qui ont un format html ou texte
 		//. "<li>- "._T('spiplistes:nbre_abonnes') . ($cmpt['html'] + $cmpt['texte']) . "</li>"
 		// Total des abonnés listes publiques
-		. "<li>- "._T('spiplistes:abonnes_liste_pub') . $nb_abonnes['liste'] . "</li>"
+		. "<li>- "._T('spiplistes:abonnes_liste_pub') . $nb_abonnes[_SPIPLISTES_PUBLIC_LIST] . "</li>"
 		// Total des abonnés listes privées (internes)
-		. "<li>- "._T('spiplistes:abonnes_liste_int') . $nb_abonnes['inact'] . "</li>"
-	 	. "<li>- ". _T('spiplistes:abonne_aucune_liste') . " : ". ($nb_abonnes_a_rien - $cmpt['non']) . "</li>"
+		. "<li>- "._T('spiplistes:abonnes_liste_int') . $nb_abonnes[_SPIPLISTES_PRIVATE_LIST] . "</li>"
+		// Total des abonnés listes périodiques (chronos mensuels)
+	 	. "<li>- ". _T('spiplistes:Abonnes_listes_mensuelles') . ": ". $nb_abonnes[_SPIPLISTES_MONTHLY_LIST] . "</li>"
+		// Total des non abonnés
+	 	. "<li>- ". _T('spiplistes:abonne_aucune_liste') . ": ". ($nb_abonnes_a_rien - $cmpt['non']) . "</li>"
 		. "</ul>"
 		. "</div>\n"
 		// bloc de droite. Répartition des formats.
@@ -161,7 +163,6 @@ function exec_spiplistes_abonnes_tous () {
 	$sql_sel = '';
 	
 	// tri
-	// CP: switch à revoir, 3 cases ne servent à rien. Peut-être ajouter 'format' ?
 	switch ($tri) {
 		case 'nombre':
 			$sql_order = ' ORDER BY compteur DESC, unom';
@@ -201,12 +202,14 @@ function exec_spiplistes_abonnes_tous () {
 		aut.email AS email,
 		aut.url_site AS url_site,
 		aut.messagerie AS messagerie,
+		fmt.`spip_listes_format` AS format,
 		UPPER(aut.nom) AS unom,
-		count(lien.id_liste) as compteur
+		COUNT(lien.id_liste) as compteur
 		$sql_sel
 		FROM spip_auteurs as aut
 		LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
 		LEFT JOIN spip_listes AS art ON (lien.id_liste = art.id_liste)
+		LEFT JOIN spip_auteurs_elargis AS fmt ON aut.id_auteur=fmt.id_auteur
 		WHERE
 		$sql_visible
 		GROUP BY aut.id_auteur
