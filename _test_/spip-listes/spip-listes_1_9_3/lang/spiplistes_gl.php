@@ -261,7 +261,7 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 'message_presque_envoye' =>'Mensaxe preparado para ser enviado.',
 'mode_inscription' => 'Determinar o modo de inscripci&oacute;n dos/as visitantes',
 'modif_envoi' => 'Podes modificalo ou envialo coas opci&oacute;ns do final.',
-'modifier_liste' => 'Modificar esta lista:',
+'modifier_liste' => 'Modificar esta lista',
 
 'nb_abonnes' => 'Nas listas: ',
 'nb_inscrits' => 'No sitio:  ',

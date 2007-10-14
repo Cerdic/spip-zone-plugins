@@ -70,8 +70,13 @@ function exec_spiplistes_liste_edit(){
 			$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
 			$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
 		}
+		else {
+			// liste perdue ?
+			$id_liste = 0;
+		}
 	} 
-	else {
+	
+	if(!$id_liste) {
 	///////////////////////////////
 	// Creation de la liste
 	//
@@ -83,8 +88,8 @@ function exec_spiplistes_liste_edit(){
 	}
 
 	// construit le pied
-	$pied_page = spiplistes_pied_de_page_liste(0, $lang);
-
+	$pied_page = spiplistes_pied_de_page_liste($id_liste, $lang);
+	
 	$gros_bouton_retour = icone(
 		_T('spiplistes:retour_link')
 		, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=" . ($lier_trad ? $lier_trad : $id_liste) )
@@ -135,7 +140,11 @@ function exec_spiplistes_liste_edit(){
 		. "</td>"
 		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
 		. "<td width='100%'>"
-		. _T('spiplistes:modifier_liste')
+		.	(
+				(!$id_liste)
+				? _T('spiplistes:Creer_une_liste_')
+				: _T('spiplistes:modifier_liste')
+			) . ":"
 		. gros_titre($titre, '', false)
 		. "</td>"
 		. "</tr></table>"
@@ -146,7 +155,7 @@ function exec_spiplistes_liste_edit(){
 			? "<input type='hidden' name='id_liste' value='$id_liste' />" 
 			: "<input type='hidden' name='new' value='oui' />"
 				// une nouvelle liste est toujours privée
-				. "<input type='hidden' name='statut_nouv' value='"._SPIPLISTES_PRIVATE_LIST."' .>"
+				. "<input type='hidden' name='statut_nouv' value='"._SPIPLISTES_PRIVATE_LIST."' />"
 			)
 		.	(
 			// ne sert pas pour le moment (CP-20070922)
@@ -154,7 +163,7 @@ function exec_spiplistes_liste_edit(){
 			? "<input type='hidden' name='lier_trad' value='$lier_trad' />"
 			: ""
 			)
-		. _T('texte_titre_obligatoire')
+		. _T('texte_titre_obligatoire').":"
 		. "<br />"
 		// champ titre
 		. "<input type='text' name='titre' class='formo' value=\"$titre\" size='40' $clearonfocus />"

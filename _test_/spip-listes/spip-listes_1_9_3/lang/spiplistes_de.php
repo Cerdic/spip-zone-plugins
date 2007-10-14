@@ -241,7 +241,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'message_presque_envoye' =>'Diese Nachricht wird unverz&uuml;glich gesendet',
 'mode_inscription' => 'Einschreibemodus der Besucher einstellen',
 'modif_envoi' => 'Sie k&ouml;nnen sie bearbeiten oder den Versand beauftragen',
-'modifier_liste' => 'Diese Liste bearbeiten:',
+'modifier_liste' => 'Diese Liste bearbeiten',
 
 'nb_abonnes' => 'In den Listen: ',
 'nb_inscrits' => 'Auf der Site:  ',

@@ -321,7 +321,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'message_presque_envoye' =>'Mensaje preparado para ser enviado.',
 'mode_inscription' => 'Tipo de inscripci&oacute;n',
 'modif_envoi' => 'Puedes modificarlo o enviarlo con las opciones del final.',
-'modifier_liste' => 'Modificar las inscripciones de este bolet&iacute;n:',
+'modifier_liste' => 'Modificar las inscripciones de este bolet&iacute;n',
 
 'nb_abonnes' => 'En los boletines: ',
 'nb_inscrits' => 'En el sitio:  ',

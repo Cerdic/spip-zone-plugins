@@ -306,7 +306,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'message_presque_envoye' =>'This message is ready to be sent out',
 'mode_inscription' => 'Specify the subscription mode for your visitors',
 'modif_envoi' => 'You can modify it or ask to send it out',
-'modifier_liste' => 'Modify this list:',
+'modifier_liste' => 'Modify this list',
 
 'nb_abonnes' => 'On the list: ',
 'nb_inscrits' => 'On the site: ',

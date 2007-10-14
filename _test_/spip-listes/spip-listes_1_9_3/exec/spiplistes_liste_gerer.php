@@ -80,10 +80,15 @@ function exec_spiplistes_liste_gerer () {
 	// Creer une liste
 	////
 		if ($btn_liste_edit && ($new=='oui')) {
-			if ($titre=='') $titre = _T('spiplistes:liste_sans_titre');
-	
-			spip_query("INSERT INTO spip_listes (statut, lang, titre, texte) 
-				VALUES ('"._SPIPLISTES_PRIVATE_LIST."','".$GLOBALS['spip_lang']."',"._q($titre).","._q($texte).")");
+			
+			if ($titre=='') {
+				$titre = _T('spiplistes:liste_sans_titre');
+			}
+			
+			$pied_page = spiplistes_pied_de_page_liste(0, $GLOBALS['spip_lang']);
+			
+			spip_query("INSERT INTO spip_listes (statut, lang, titre, texte, pied_page) 
+				VALUES ('"._SPIPLISTES_PRIVATE_LIST."','".$GLOBALS['spip_lang']."',"._q($titre).","._q($texte).","._q($pied_page).")");
 			$id_liste = spip_insert_id();
 			//Auteur de la liste (moderateur)
 			spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste = "._q($id_liste));
