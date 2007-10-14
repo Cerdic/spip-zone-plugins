@@ -24,7 +24,6 @@
 		$depense=$_POST['depense'];
 		$justification=$_POST['justification'];
 		$journal=$_POST['journal'];
-		$justification =addslashes($justification);
 		
 		$action = $_REQUEST['action'];
 		$url_retour=$_POST['url_retour'];

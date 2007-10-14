@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/**
 	* Plugin Association
 	*
@@ -54,7 +54,7 @@
 		if ($action=="paie") {
 			spip_query("UPDATE spip_asso_activites SET nom="._q($nom).", id_adherent="._q($id_membre).", membres="._q($membres).", non_membres="._q($non_membres).", inscrits="._q($inscrits).", montant="._q($montant).", date_paiement="._q($date_paiement).", statut="._q($statut).", commentaire="._q($commentaire)." WHERE id_activite='$id_activite' ");
 			$justification=_T('asso:activite_justification_compte_inscription',array('id_activite' => $id_activite, 'nom' => $nom));
-			spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ("._q($date_paiement).","._q($journal).","._q($montant).","._q($justification).","._q($activite).","._q($id_activite).")");
+			spip_query("INSERT INTO spip_asso_comptes (date, journal,recette,justification,imputation,id_journal) VALUES ("._q($date_paiement).","._q($journal).","._q($montant).","._q($justification).",".lire_config('association/pc_activites').","._q($id_activite).")");
 			header ('location:'.$url_retour);
 			exit;
 		}	

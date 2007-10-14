@@ -10,11 +10,11 @@
 	*  
 	**/
 	include_spip('inc/presentation');
-		include_spip ('inc/navigation_modules');
+	include_spip ('inc/navigation_modules');
 
 	function exec_edit_compte() {
 		global $connect_statut, $connect_toutes_rubriques;
-
+		
 		$url_action_comptes =generer_url_ecrire('action_comptes');
 		
 		$action=$_REQUEST['action'];
@@ -76,7 +76,7 @@
 		echo '</select>';
 		echo '<label for="justification"><strong>Justification :</strong></label>';
 		echo '<input name="justification" value="'.$justification.'" type="text" id="justification" class="formo" />';
-
+		
 		echo '<input name="id" type="hidden" value="'.$id_compte.'" >';		
 		echo '<input name="action" type="hidden" value="'.$action.'">';
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
@@ -86,9 +86,8 @@
 		if ( isset($action)) {echo _T('asso:bouton_'.$action);}
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
-
 		echo '</form>';
-
+		
 		fin_cadre_relief();  
 		fin_page();
 	}  
