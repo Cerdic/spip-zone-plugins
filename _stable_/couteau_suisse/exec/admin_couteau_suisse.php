@@ -221,7 +221,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	}
 
 	// reset general
-	if (_request('reset')=='oui'){
+	if (_request('cmd')=='resetall'){
 		spip_log("Reset de tous les outils par l'auteur id=$connect_id_auteur");
 		foreach(array_keys($GLOBALS['meta']) as $meta) {
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
@@ -269,7 +269,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 
 	debut_gauche();
 	debut_boite_info();
-	echo propre(_T('cout:help'));
+	echo propre(_T('cout:help', array('reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'))));
 	fin_boite_info();
 	$aide_racc = cs_aide_raccourcis();
 	if(strlen($aide_racc)) {
@@ -296,7 +296,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
-	echo _T('cout:presente_outils'), $valider;
+	echo _T('cout:presente_outils', array('triangle'=>'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" />')), $valider;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
 	foreach($temp = $outils as $outil) $categ[_T('cout:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 

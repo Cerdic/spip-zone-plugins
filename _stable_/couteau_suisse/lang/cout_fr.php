@@ -3,7 +3,6 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 // quelques chaines temporaires a traduire
-$temp['reset'] = 'R&eacute;initialisation des outils';
 $temp['type_urls'] = "#PUCE {{page}} : la valeur par d&eacute;faut pour SPIP v1.9 : <code>/spip.php?article123</code>.
 _ #PUCE {{html}} : les liens ont la forme des pages html classiques : <code>/article123.html</code>.
 _ #PUCE {{propre}} : les liens sont calcul&eacute;s gr&acirc;ce au titre: <code>/Mon-titre-d-article</code>.
@@ -13,8 +12,6 @@ _ #PUCE {{propres-qs}} : ce syst&egrave;me fonctionne en &quot;Query-String&quot
 
 // un peu de code : ne pas toucher !
 $temp['couleurs'] = '<br /><span style="font-weight:normal; font-size:85%;"><span style="background-color:black; color:white;">black/noir</span>, <span style="background-color:red;">red/rouge</span>, <span style="background-color:maroon;">maroon/marron</span>, <span style="background-color:green;">green/vert</span>, <span style="background-color:olive;">olive/vert&nbsp;olive</span>, <span style="background-color:navy; color:white;">navy/bleu&nbsp;marine</span>, <span style="background-color:purple;">purple/violet</span>, <span style="background-color:gray;">gray/gris</span>, <span style="background-color:silver;">silver/argent</span>, <span style="background-color:chartreuse;">chartreuse/vert&nbsp;clair</span>, <span style="background-color:blue;">blue/bleu</span>, <span style="background-color:fuchsia;">fuchsia/fuchia</span>, <span style="background-color:aqua;">aqua/bleu&nbsp;clair</span>, <span style="background-color:white;">white/blanc</span>, <span style="background-color:azure;">azure/bleu&nbsp;azur</span>, <span style="background-color:bisque;">bisque/beige</span>, <span style="background-color:brown;">brown/brun</span>, <span style="background-color:blueviolet;">blueviolet/bleu&nbsp;violet</span>, <span style="background-color:chocolate;">chocolate/brun&nbsp;clair</span>, <span style="background-color:cornsilk;">cornsilk/rose&nbsp;clair</span>, <span style="background-color:darkgreen;">darkgreen/vert&nbsp;fonce</span>, <span style="background-color:darkorange;">darkorange/orange&nbsp;fonce</span>, <span style="background-color:darkorchid;">darkorchid/mauve&nbsp;fonce</span>, <span style="background-color:deepskyblue;">deepskyblue/bleu&nbsp;ciel</span>, <span style="background-color:gold;">gold/or</span>, <span style="background-color:ivory;">ivory/ivoire</span>, <span style="background-color:orange;">orange/orange</span>, <span style="background-color:lavender;">lavender/lavande</span>, <span style="background-color:pink;">pink/rose</span>, <span style="background-color:plum;">plum/prune</span>, <span style="background-color:salmon;">salmon/saumon</span>, <span style="background-color:snow;">snow/neige</span>, <span style="background-color:turquoise;">turquoise/turquoise</span>, <span style="background-color:wheat;">wheat/jaune&nbsp;paille</span>, <span style="background-color:yellow;">yellow/jaune</span></span><span style="font-size:50%;"><br />&nbsp;</span>';
-//$temp['reset'] = $GLOBALS['spip_version_code']<1.92?'<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>':'';
-$temp['reset'] = '<p>['. $temp['reset'] . '->' . parametre_url(self(),'reset','oui') . ']</p>';
 $temp['decoration'] = "{&lt;sc&gt;}Lorem ipsum dolor sit amet{&lt;/sc&gt;}
 _ {&lt;souligne&gt;}Lorem ipsum dolor sit amet{&lt;/souligne&gt;}
 _ {&lt;barre&gt;}Lorem ipsum dolor sit amet{&lt;/barre&gt;}
@@ -32,16 +29,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Le Couteau Suisse',
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Le&nbsp;Couteau&nbsp;Suisse'.</p>"
-		."<p>Lien de documentation : [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>" . $temp['reset'],
+		."<p>Lien de documentation : [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>"
+		."<p>[R&eacute;initialisation des outils->@reset@]</p>",
+
 	'raccourcis' => "Raccourcis typographiques actifs du Couteau Suisse&nbsp;:",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
 	'nb_outil' => '@pipe@ : @nb@ outil',
 	'nb_outils' => '@pipe@ : @nb@ outils',
 	'titre_tests' => 'Le Couteau Suisse - Page de tests&hellip;',
 	'actif' => 'Outil actif',
-	'inactif' => 'Outil inactif',
 	'actifs' => 'Outils actifs :',
+	'inactif' => 'Outil inactif',
+	'inactifs' => 'Outil inactifs',
+	'activer' => "Activer",
+	'desactiver' => "D&eacute;sactiver",
 	'activer_outil' => "Activer l'outil",
+	'desactiver_outil' => "D&eacute;sactiver l'outil",
+	'neplusafficher' => "Ne plus afficher",
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
 	'modifier_vars' => 'Modifier ces @nb@ param&egrave;tres',
 	'vars_modifiees' => 'Merci, les donn&eacute;es ont &eacute;t&eacute; modifi&eacute;es',
@@ -49,7 +53,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'detail_outil' => 'En jeu :',
 	'contrib' => "Plus d'infos : [->http://www.spip-contrib.net/?article@id@]",
 	'liste_outils' => 'Liste des outils du Couteau Suisse',
-	'presente_outils' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
+	'presente_outils' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle (@triangle@) pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
+	'presente_outils2' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur chacun pour acc&eacute;der &agrave; la description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
 	'par_defaut' => 'Par d&eacute;faut',
 	'jquery1' => "{{Attention}} : cette fonctionnalit&eacute; n&eacute;cessite le plugin {jQuery} pour fonctionner avec cette version de SPIP.",
 	'jquery2' => "Cette fonctionnalit&eacute;  utilise la librairie {jQuery}.",
@@ -263,14 +268,12 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}."
 
 // ---------------------------------------------------------------------------
 	'sommaire:nom' => 'Un sommaire pour vos articles',
-	'sommaire:description' => "Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un intertitre</h3></code> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).\n\nVous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :
-[[Largeur du sommaire (9 &agrave; 99) :->%lgr_sommaire% caract&egrave;res]]
-Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
+	'sommaire:description' => "Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un intertitre</h3></code> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).\n\n#PUCE Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[Largeur du sommaire (9 &agrave; 99) :->%lgr_sommaire% caract&egrave;res]]\n\n
+#PUCE Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
 - Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
-- Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
-[[Cr&eacute;ation syst&eacute;matique du sommaire :->%auto_sommaire%]]
-Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'article automatiquement. Mais vous avez la possibilt&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
-[[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]
+- Uniquement pour les articles contenant la balise <code>[sommaire]</code>.\n\n[[Cr&eacute;ation syst&eacute;matique du sommaire :->%auto_sommaire%]]\n\n
+#PUCE Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'article automatiquement. Mais vous avez la possibilt&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
+[[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]\n\n
 Attention, aucun sommaire automatique (balise #CS_SOMMAIRE inactive) ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.",
 	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
