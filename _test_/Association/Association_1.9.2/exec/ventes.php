@@ -20,8 +20,8 @@
 		$url_asso = generer_url_ecrire('association');
 		$url_ventes = generer_url_ecrire('ventes');
 		$url_action_ventes = generer_url_ecrire('action_ventes');
-		$url_edit_vente=generer_url_ecrire('edit_vente');
-		$url_ajout_vente=generer_url_ecrire('ajout_vente');
+		$url_edit_vente=generer_url_ecrire('edit_vente','action=modifie');
+		$url_ajout_vente=generer_url_ecrire('edit_vente','action=ajoute');
 		
 		association_onglets();
 		
@@ -92,7 +92,7 @@
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td  style="text-align:right;">';
-		echo '<input type="submit" name="Submit" value="Envoyer" class="fondo">';
+		echo '<input type="submit" name="Submit" value="'._T('asso:bouton_supprimer').'" class="fondo">';
 		echo '</table>';
 		echo '</form>';
 		
