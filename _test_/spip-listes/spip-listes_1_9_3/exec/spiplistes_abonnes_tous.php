@@ -50,6 +50,17 @@ function exec_spiplistes_abonnes_tous () {
 	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 	
 	debut_gauche();
+	if (spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' LIMIT 2")) > 1) {
+		echo(	""
+			. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."contact_loupe-24.png", true, "", _T('spiplistes:chercher_un_auteur'))
+			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)."' method='post' class='verdana2'>"
+			. "<div align=center>\n"
+			. "<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />"
+			. "<div style='text-align:right;margin-top:0.5em;'><input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' /></div>"
+			. "</div></form>"
+			. fin_cadre_relief(true)
+		);
+	}
 	spiplistes_boite_raccourcis();
 	spiplistes_boite_autocron();
 	spiplistes_boite_info_spiplistes();
@@ -127,19 +138,7 @@ function exec_spiplistes_abonnes_tous () {
 		. "</div>\n"
 		;
 
-	// formulaire de recherche si plus de 10 auteurs dans la base
-	$row = spip_fetch_array(spip_query("SELECT COUNT(id_auteur) AS nb FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' LIMIT 11"));
-	if ($row['nb'] > 10) {
-		$page_result .= ""
-			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)."' method='post' style='margin:0.5ex;border-top:1px solid black;padding:0.5ex 1ex 0;' class='verdana2'>"
-			. "<div style='text-align:center;'>\n"
-			. "<label for='chercher_un_auteur' style='display:none;'>"._T('spiplistes:chercher_un_auteur')." : </label>"
-			. "<input type='text' title='"._T('spiplistes:chercher_un_auteur')."' name='cherche_auteur' id='chercher_un_auteur' class='fondl' value='' size='20' />"
-			. " <input type='submit' title='"._T('spiplistes:chercher_un_auteur')."' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' />"
-			. "</div></form>\n"
-			;
-	}
-	
+
 	$page_result .= ""
 		. fin_cadre_trait_couleur(true)
 		;

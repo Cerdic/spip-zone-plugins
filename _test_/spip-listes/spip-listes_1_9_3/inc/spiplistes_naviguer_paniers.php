@@ -1,7 +1,6 @@
 <?php
 // Original From SPIP-Listes-V :: Id: spiplistes_naviguer_paniers.php paladin@quesaco.org
 
-// Original From SPIP-Listes-V :: Id: spiplistes_afficher_en_liste.php paladin@quesaco.org
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$

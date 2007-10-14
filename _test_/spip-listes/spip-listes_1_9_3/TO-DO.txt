@@ -6,8 +6,6 @@
 
 TO-DO:
 - Controler si membre possède un email avant abonner
-- passer en patron le pied de mail
-- ergonomie, le champ rechercher membre n'est pas au bon endroit
 - stats: revoir la liste. Pas clair !
 - vérifier la boite autocron
 - Modifier module import/export
