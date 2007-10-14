@@ -65,7 +65,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Attention_action_retire_invites' => "Attention: cette action retire les invit&eacute;s de la liste des abonn&eacute;s.",
 'A_partir_de' => "&Agrave; partir de",
 'aucun' => "aucun",
-'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran",
+'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran dans une nouvelle fen&ecirc;tre",
 'Apercu' => "Aper&ccedil;u",
 'Generer_Apercu' => "G&eacute;n&eacute;rer et Aper&ccedil;u",
 'Aller_au_panier' => "Aller au panier ",
