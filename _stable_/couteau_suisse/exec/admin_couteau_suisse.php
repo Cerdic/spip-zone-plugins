@@ -269,7 +269,9 @@ cs_log("Début : exec_admin_couteau_suisse()");
 
 	debut_gauche();
 	debut_boite_info();
-	echo propre(_T('cout:help', array('reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'))));
+	echo propre(_T('cout:help', array(
+		'reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'),
+		'hide' => generer_url_ecrire(_request('exec'),'cmd=showall'))));
 	fin_boite_info();
 	$aide_racc = cs_aide_raccourcis();
 	if(strlen($aide_racc)) {
@@ -297,6 +299,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	$valider = "\n<div style='text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
 	echo _T('cout:presente_outils', array('triangle'=>'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" />')), $valider;
+echo '<p style="color:red;">Testez la nouvelle interface du plugin : <a href="', generer_url_ecrire('admin2'), '">par ici !</a></p>';
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
 	foreach($temp = $outils as $outil) $categ[_T('cout:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 

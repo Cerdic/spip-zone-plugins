@@ -200,8 +200,11 @@ function cs_aide_pipelines() {
 	}
 	// nombre d'outils actifs
 	$nb = isset($GLOBALS['meta']['tweaks_actifs'])?count(unserialize($GLOBALS['meta']['tweaks_actifs'])):0;
+	// nombre d'outils caches
+	$ca = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
 	return '<p><strong>' . _T('cout:pipelines') . '</strong> '.count($aide).'</p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>'
-		. '<p><strong>' . _T('cout:actifs') . "</strong> $nb</p>";
+		. '<p><strong>' . _T('cout:actifs') . "</strong> $nb</p>"
+		. '<p><strong>' . _T('cout:caches') . "</strong> $ca</p>";
 }
 
 // met en forme le fichier $f en vue d'un insertion en head
