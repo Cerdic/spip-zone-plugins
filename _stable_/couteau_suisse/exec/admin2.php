@@ -87,7 +87,7 @@ div.cs_toggle {
 	float:left;
 	width:8%;
 	text-align:center;
-	margin-top:20px;
+	margin-top:50px;
 }
 
 div.cs_infos {
@@ -143,6 +143,14 @@ echo "
 	
 	// clic surle bouton de permutation
 	jQuery('#cs_toggle_a').click( function() {
+		if(cs_selected.length>1) {
+			msg=\""._T('cout:permuter_outils')."\";
+			msg=msg.replace(/@nb@/, cs_selected.length);
+		} else {
+			msg=\""._T('cout:permuter_outil')."\";
+			msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
+		}
+		if (!confirm(msg)) return false;
 		jQuery('#cs_selection').attr('value', cs_selected.join(','));
 //		jQuery('#csform').submit();
 		document.csform.submit();

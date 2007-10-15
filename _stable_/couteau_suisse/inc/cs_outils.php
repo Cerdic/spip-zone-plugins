@@ -109,16 +109,18 @@ function liste_outils() {
 
 	$fieldset = '<fieldset style="width:92%; margin:0; padding:0.6em;" class="cadre-trait-couleur liste_outils"><legend style="font-weight:bold; color:';
 	return '<div id="cs_outils" class="cs_outils">'
-	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'gray;">' . _T('cout:inactifs') . '</legend>'
+	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'red;">' . _T('cout:inactifs') . '</legend>'
 	. $results_inactifs . '</fieldset></div>'
 	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
 	. '<input type="hidden" value="test" name="cs_selection" id="cs_selection"/>'
 	. '<div class="cs_toggle"><div style="display:none;">'
-	. '<a id="cs_toggle_a" title="'._T('cout:permuter').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'"><-></a>'
+	. '<a id="cs_toggle_a" title="'._T('cout:permuter').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
+	. '<img alt="<->" src="'.find_in_path('img/permute.gif').'"/></a>'
 	. '<p id="cs_toggle_p">(0)</p>'
-	. '<a id="cs_reset_a" title="'._T('cout:resetselection').'" href="#">X</a>'
+	. '<a id="cs_reset_a" title="'._T('cout:resetselection').'" href="#">'
+	. '<img alt="X" class="class_png" src="'.find_in_path('img/nosel.gif').'"/></a>'
 	.	'</div></div></form>'
-	. '<div class="cs_liste cs_actifs">' . $fieldset . 'green;">' . _T('cout:actifs') . '</legend>'
+	. '<div class="cs_liste cs_actifs">' . $fieldset . '#22BB22;">' . _T('cout:actifs') . '</legend>'
 	. $results_actifs . '</fieldset>'
 	. '<div style="text-align: right;"><a id="cs_tous_a" title="'._T('cout:selectiontous').'" href="#">'._T('cout:tous').'</a></div>'
 	. '</div></div>';

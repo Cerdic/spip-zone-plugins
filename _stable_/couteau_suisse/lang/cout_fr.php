@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Le&nbsp;Couteau&nbsp;Suisse'.</p>"
 		."<p>Lien de documentation : [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>"
 		."<p>R&eacute;initialisations :
-_ - [de l'affichage des outils->@hide@]
+_ - [des outils cach&eacute;s->@hide@]
 _ - [de tout le plugin->@reset@]
 </p>",
 
@@ -43,13 +43,15 @@ _ - [de tout le plugin->@reset@]
 	'actif' => 'Outil actif',
 	'actifs' => 'Outils actifs :',
 	'inactif' => 'Outil inactif',
-	'inactifs' => 'Outil inactifs',
+	'inactifs' => 'Outil inactifs :',
 	'caches' => 'Outils cach&eacute;s :',
 	'activer' => "Activer",
 	'desactiver' => "D&eacute;sactiver",
 	'activer_outil' => "Activer l'outil",
 	'desactiver_outil' => "D&eacute;sactiver l'outil",
-	'permuter' => "Permuter les outils en gras",
+	'permuter' => "Permuter les outils en gras", // Javascript
+	'permuter_outil' => "Permuter l'outil : « @text@ » ?", // Javascript
+	'permuter_outils' => "Permuter les @nb@ outils en gras ?",
 	'resetselection' => "R&eacute;initialiser la s&eacute;lection",
 	'neplusafficher' => "Ne plus afficher",
 	'validez_page' => 'Pour acc&eacute;der aux modifications :',
@@ -60,7 +62,7 @@ _ - [de tout le plugin->@reset@]
 	'contrib' => "Plus d'infos : [->http://www.spip-contrib.net/?article@id@]",
 	'liste_outils' => 'Liste des outils du Couteau Suisse',
 	'presente_outils' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle (@triangle@) pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
-	'presente_outils2' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br />En cliquant sur le nom des outils ci-dessous, vous pourrez permuter l'&eacute;tat de ceux  qui apparaissent en gras : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
+	'presente_outils2' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br />En cliquant sur le nom des outils ci-dessous, vous s&eacute;lectionnez ceux dont vous pourrez permuter l'&eacute;tat &agrave; l'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
 	'cliquezlesoutils' => "Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.",
 	'selectiontous' => "S&eacute;lectionner tous les outils actifs",
 	'tous' => 'TOUS',
