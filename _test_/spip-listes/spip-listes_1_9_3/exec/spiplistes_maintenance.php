@@ -114,6 +114,8 @@ function exec_spiplistes_maintenance () {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
+	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
+
 	echo "<br /><br />\n";
 	gros_titre(_T('titre_admin_tech'));
 

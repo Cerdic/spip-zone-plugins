@@ -5,7 +5,6 @@
 
 
 TO-DO:
-- Controler si membre possède un email avant abonner
 - vérifier la boite autocron
 - Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"
 - Corriger documentation contextuelle
@@ -15,7 +14,6 @@ TO-DO:
 - liste des abonnements par auteur dans auteur_infos 
 - icone boite_autocron de SLV plus sympa (avis perso, CP) Qu'en pensez-vous ?
 - icone 'casier à courrier' à revoir. Idem 'listes de diffusion'
-- onglets à placer sur page de maintenance
 - gadgets pour nouveau_courrier (devrait pouvoir être mis en place par jQuery)
 - import/export: gérer les fichiers compressés
 - import/export: proposer séparateur tab ou ";", a-la-CSV
