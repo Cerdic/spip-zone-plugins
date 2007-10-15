@@ -226,8 +226,8 @@ function cs_sauve_configuration() {
 	foreach($metas_vars as $i => $v) {
 		if($i!='_chaines' && $i!='_nombres') $metas[] = "\n".chr(9)."'$i' => " . cs_php_format($v, in_array($i, $metas_vars['_chaines']));
 	}
-	$sauve = "// Outils actifs\n\$outils = array('\n" . chr(9) . join("',\n".chr(9)."'", $actifs) . "'\n);\n";
-	$sauve .= "\n// Variables actives\n\$variables = array('\n" . chr(9)  . join("',\n".chr(9)."'", $variables) . "'\n);\n";
+	$sauve = "// Outils actifs\n\$outils = array(\n" . chr(9) . "'" . join("',\n".chr(9)."'", $actifs) . "'\n);\n";
+	$sauve .= "\n// Variables actives\n\$variables = array(\n" . chr(9) . "'" . join("',\n".chr(9)."'", $variables) . "'\n);\n";
 	$sauve .= "\n// Valeurs validees en metas\n\$valeurs = array(" . join(', ', $metas) . "\n);\n";
 	$fichier_dest = _DIR_CS_TMP . "config.php";
 	ecrire_fichier($fichier_dest, '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
@@ -263,10 +263,12 @@ function cs_initialise_includes() {
 				}
 			}
 			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
-			if ($f=find_in_path("outils/$inc.css")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
+			if ($f=find_in_path($_css = "outils/$inc.css")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
 			if ($f=find_in_path("outils/$inc.js")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
-//			if ($f=find_in_path("outils/$inc.css.html")) $cs_metas_pipelines['header'][] = cs_insert_header("/?page=outils/$inc.css", 'js');
-			if ($f=find_in_path("outils/$inc.css.html")) $temp_css[] = recuperer_fond("outils/$inc.css");
+			if ($f=find_in_path("outils/$inc.css.html")) { 
+				$f = inclure_page($_css, array('fond'=>$_css));
+				$temp_css[] = $f['texte']; 
+			}
 			// recherche d'un code inline eventuellement propose
 			if (isset($outil['code:options'])) $infos_pipelines['code_options'][] = $outil['code:options'];
 			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];

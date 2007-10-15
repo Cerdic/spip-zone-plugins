@@ -625,15 +625,9 @@ add_outil( array(
 	'pipeline:post_propre' => 'liens_en_clair_post_propre',
 )); 
 
-@define('_BLOCS_IMAGE_BAS', _DIR_IMG_PACK.'triangle-bas.gif');
-@define('_BLOCS_IMAGE_HAUT', _DIR_IMG_PACK.'triangle.gif');
-//@define('_BLOCS_IMAGE_BAS', _DIR_IMG_PACK.'deplierbas.gif');
-//@define('_BLOCS_IMAGE_HAUT', _DIR_IMG_PACK.'deplierhaut.gif');
 add_outil( array(
 	'id' => 'blocs',
 	'categorie'	=> 'typo-racc',
-	'code:css' => 'div.cs_blocs h4 { background-image:url('._BLOCS_IMAGE_BAS.'); }
-div.cs_blocs h4.blocs_replie { background-image:url('._BLOCS_IMAGE_HAUT.'); }',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 ));
 
