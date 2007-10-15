@@ -92,7 +92,7 @@ function liste_outils() {
 			$test = $outil['actif']?'s_actifs':'s_inactifs';
 			$hide = cs_version_test($outil) || (!$outil['actif'] && isset($metas_caches[$outil['id']]['cache']));
 			if (!$hide)
-				${$test}[] .= _T($outil['id'].':nom') . '|' . $outil['index'] . '|' . $outil['id'];
+				${$test}[] .= _T('cout:'.$outil['id'].':nom') . '|' . $outil['index'] . '|' . $outil['id'];
 		}
 		preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
 		$div = "<div style='margin-top:.6em; padding:2px; font-weight:bold; display:block;' class='titrem'>$reg[2]</div>\n";
@@ -111,7 +111,7 @@ function liste_outils() {
 	return '<div id="cs_outils" class="cs_outils">'
 	. '<div class="cs_liste cs_inactifs">' . $fieldset . 'gray;">' . _T('cout:inactifs') . '</legend>'
 	. $results_inactifs . '</fieldset></div>'
-	. '<form id="cs_form" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
+	. '<form id="csform" name="csform" method="post" action="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'">'
 	. '<input type="hidden" value="test" name="cs_selection" id="cs_selection"/>'
 	. '<div class="cs_toggle"><div style="display:none;">'
 	. '<a id="cs_toggle_a" title="'._T('cout:permuter').'" href="'.generer_url_ecrire(_request('exec'),"cmd=toggle").'"><-></a>'

@@ -6,13 +6,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // et donc, pas de fonction cs_log !!
 if(defined('_LOG_CS')) spip_log("COUTEAU-SUISSE. inclusion de cout_pipelines.php");
 
-// Compatibilite des autorisations pour SPIP 1.91
-if ($GLOBALS['spip_version_code']<1.92) {
-	function autoriser() {
-		return $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
-	}
-}
-
 /***********
  * INSTALL *
  ***********/

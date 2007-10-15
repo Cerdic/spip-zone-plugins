@@ -46,4 +46,15 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 } else {
 	spip_log('COUTEAU-SUISSE.  -- appel de cout_options achevé sans initialisation du plugin ');
 }
+
+/* COMPATIBILITE SPIP 1.91 */
+if ($GLOBALS['spip_version_code']<1.92) {
+	// Compatibilite des autorisations pour SPIP 1.91
+	if (!function_exists('autoriser')) {
+		function autoriser($a='',$b='') {
+			return $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
+		}
+	}
+}
+
 ?>

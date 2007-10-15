@@ -14,7 +14,11 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirn
 define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
-if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
+if ($GLOBALS['spip_version_code']<1.92) { 
+	function fin_gauche(){return false;}
+	@define('_CS_NETTOYEUR','<br style="border:0pt none; clear:both; font-size:1px; height:0pt; line-height:1px; margin:0pt; padding:0pt;"/>');
+}
+@define('_CS_NETTOYEUR', '<br class="nettoyeur"/>');
 
 function cs_admin_styles_et_js() {
 	global $afficher_outil;
@@ -112,7 +116,7 @@ function set_selected() {
 	});
 	if(cs_selected.length) {
 			jQuery('div.cs_toggle div').show();
-			jQuery('#cs_toggle_p').text('('+cs_selected.length+')');
+			jQuery('#cs_toggle_p').html('('+cs_selected.length+')');
 		} else jQuery('div.cs_toggle div').hide();
 }
 
@@ -140,7 +144,8 @@ echo "
 	// clic surle bouton de permutation
 	jQuery('#cs_toggle_a').click( function() {
 		jQuery('#cs_selection').attr('value', cs_selected.join(','));
-		jQuery('#cs_form').submit();
+//		jQuery('#csform').submit();
+		document.csform.submit();
 /*		// on charge la nouvelle liste, actualisee
 		jQuery('#cs_outils')
 			.css('opacity', '0.5')
@@ -161,7 +166,7 @@ echo "
 	
 	// clic sur le bouton 'tous les actifs'	
 	jQuery('#cs_tous_a').click( function() {
-		jQuery('a.cs_href', 'div.cs_actifs').addClass('outil_on');
+		jQuery('div.cs_actifs a.cs_href').addClass('outil_on');
 		set_selected();
 		// annulation du clic
 		return false;
@@ -182,7 +187,7 @@ cs_log("Début : enregistre_modif_outils()");
 	if(isset($_GET['outil'])) $toggle[] = $_GET['outil'];
 		elseif(isset($_POST['cs_selection'])) $toggle = explode(',', $_POST['cs_selection']);
 		else return;
-	$_GET['outil'] = $toggle[0];
+	$_GET['outil'] = ($cmd!='hide' && count($toggle)==1)?$toggle[0]:'';
 
 	$i = $cmd=='hide'?'cache':'actif';
 	${$i} = isset($GLOBALS['meta']["tweaks_{$i}s"])?unserialize($GLOBALS['meta']["tweaks_{$i}s"]):array();
@@ -209,13 +214,12 @@ cs_log("Fin   : enregistre_modif_outils()");
 
 function exec_admin2() {
 cs_log("Début : exec_admin_couteau_suisse()");
-	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $outils, $afficher_outil;
 
 	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
-		echo minipres();
+		echo ($GLOBALS['spip_version_code']<1.92)?minipres( _T('avis_non_acces_page')):minipres();
 		exit;
 	}
 	$cmd = _request('cmd');
@@ -251,7 +255,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 		// pour la peine, un redirige,
 		// que les outils charges soient coherent avec la liste
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire(_request('exec'), $cmd=='toggle'?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'', true));
+		redirige_par_entete(generer_url_ecrire(_request('exec'), strlen($_GET['outil'])?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'', true));
 	}
 //	else
 //		verif_outils();
@@ -302,7 +306,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	include_spip('inc/cs_outils');
 	$_GET['source'] = _request('exec');
 	echo '<div>' . liste_outils()
-	. '</div><br class="nettoyeur"/><div>'
+	. '</div>' . _CS_NETTOYEUR . '<div>'
 	. description_outil2(strlen($afficher_outil)?$afficher_outil:'') . '</div>';
 
 	echo "</td></tr></table>\n";
