@@ -137,7 +137,7 @@ modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifi
 	else $plurdoc="";
 
 //quelques strings bien utiles préparées à l'avance: (à partir des numéros d'id)
-	if ($_POST['enregistrer_fiche'] or $_POST['valider_fiche']) {
+	if ($_POST['enregistrer_fiche'] or $_POST['valider_fiche'] or $_GET['classe_matiere']) {
 ?>
 [(#REM)Nom de la matière]
 <BOUCLE_DireMatiere(MOTS){type="Matières"}><?php if ('[(#ID_MOT|texte_script)]'==$id_matiere) {$matiere_titre='[(#TITRE)]';} ?></BOUCLE_DireMatiere>
@@ -150,7 +150,8 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 <BOUCLE_DireGroupe(MOTS){type="Sous groupes de classes"}><?php if ('[(#ID_MOT|texte_script)]'==$id_groupe) { $groupe_titre .='[(#TITRE)]'; } ?></BOUCLE_DireGroupe>
 <?php $groupe_titre .= ")"; }//fin du if id_groupe?>
 <?php
-	$titre_contenu_seance="Le $date_seance, en $matiere_titre avec les $classes_titre$groupe_titre&nbsp;:";
+	$titre_matiere_classe="en $matiere_titre avec les $classes_titre$groupe_titre&nbsp;:";
+	$titre_contenu_seance="Le $date_seance, $titre_matiere_classe";
 	$fragment_titre_devoir=", par les $classes_titre$groupe_titre en $matiere_titre&nbsp;:";
 	$fleche="->";
 	}
@@ -379,7 +380,13 @@ if ($doc_joint[1]!="") {
 }//fin if doc joint
 ?>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
-			<p><a href="spip.php?page=cahier-de-texte-accueil" title="retour à l'accueil">Retourner à l'accueil</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d'une séance et ses devoirs éventuels">Saisir une autre fiche</a></p>
+			<p><a href="spip.php?page=cahier-de-texte-accueil" title="retour à l'accueil">Retourner à l'accueil</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-affichage&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies">Afficher ses séances</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-saisie<?php
+	echo ("&id_matiere=$id_matiere");
+	for ($count=0; $count<=$classes; $count++) {
+		echo("&id_classe$count=".$id_classe[$count]);
+	};
+	if ($classes>0) echo ("&classes=$classes");
+			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels">Saisir une autre fiche</a></p>
 		</div>
 	</div></div>
 
@@ -397,6 +404,7 @@ break;}// Fin du if valider fiche
 //---------------------------------------------------
 ?>
 	<h1>Remplir une fiche du cahier de texte</h1>
+		<h2><?php echo($titre_matiere_classe);?></h2>
 			<br class="clear" />	
 	</div>
 	<div id="Contenu"><div class="bloc"><div class="moyen-bloc">
@@ -409,6 +417,7 @@ if(!$_GET['classe_matiere']){
 		<fieldset>
 			<legend>Classe<?php if ($classes>0) echo "s"?>&nbsp;:</legend>
 <?php //Une ou plusieurs classes
+if ($classes>0) echo ("Regroupement de classes&nbsp;:");
 for ($count=0; $count<=$classes; $count++) {
 ?>
 			<select id="classe<?php echo $count;?>" name="id_classe<?php echo $count;?>" size="1">

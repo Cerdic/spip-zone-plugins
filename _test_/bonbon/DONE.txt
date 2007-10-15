@@ -11,6 +11,9 @@ La pagination est désormais celle de Spip>1.9 (à la place de la pagination nulle
 Optimisations:	-utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz).
 		-atomisation des requêtes SQL grâce à des {!doublons bidule) (merci à Cédric Morin pour l'idée remarquable !).
 Des corrections de bugs divers... (voir SVN)
+Un rafraichissement plus fréquent des pages (durée de cache plus courte)
+Des améliorations dans l'interface de saisie: 	-matière et classes sont préslecetionnés quand on vient de finir de saisir une séance et qu'on passe à la suivante.
+						-au dessus du formulaire de saisie il y a un rappel du contexte...
 
 
 1.0 Première sortie de Bonbon
