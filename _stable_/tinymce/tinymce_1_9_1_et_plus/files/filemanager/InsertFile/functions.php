@@ -33,8 +33,12 @@ function dirs($dir,$abs_path) {
 }
 
 function checkName($name) {
-        $name = str_replace('../', '', $name);
+		$name = str_replace('../', '', $name);
         $name = str_replace('./', '', $name);
+		$accent = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËéèêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ "&()[]$£%,?;:!§\''; 
+		$noaccent='AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn-----------------'; 
+		$name = strtr($name,$accent,$noaccent);
+		$name = stripslashes($name);
         return $name;
 }
 function sanitize($name) {
