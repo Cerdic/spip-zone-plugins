@@ -216,7 +216,7 @@ function exec_spiplistes_liste_gerer () {
 			// Forcer les abonnements
 			if($btn_valider_forcer_abos && $forcer_abo && in_array($forcer_abo, array('tous', 'auteurs', '6forum', 'aucun'))) {
 				include_spip("inc/spiplistes_listes_forcer_abonnement");
-				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo) ==  false) {
+				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo) ===  false) {
 					$page_result .= __boite_alerte(_T('spiplistes:Forcer_abonnement_erreur', true));
 				}
 			}

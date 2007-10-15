@@ -37,26 +37,25 @@ function spiplistes_listes_forcer_abonnement ($id_liste, $statut) {
 		$sql_query = "SELECT id_auteur FROM spip_auteurs 
 			WHERE $sql_where AND LENGTH(email) AND id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste=$id_liste)";
 
-//spiplistes_log("# $sql_query");
+spiplistes_log("# $sql_query");
 		
 		if($sql_result = spip_query($sql_query)) {
 		
-			spiplistes_log(spip_num_rows($sql_result)." AUTEURS ($statut) ADDED TO LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
+			spiplistes_log($nb = spip_num_rows($sql_result)." AUTEURS ($statut) ADDED TO LISTE $id_liste BY ID_AUTEUR #$connect_id_auteur");
 
 			$sql_values = "";
 
-			while($row = spip_fetch_array($sql_result)) {
-				$sql_values .= " (".$row['id_auteur'].", $id_liste, NOW()),";
+			if($nb > 0) {
+				while($row = spip_fetch_array($sql_result)) {
+					$sql_values .= " (".$row['id_auteur'].", $id_liste, NOW()),";
+				}
+				if(!empty($sql_values)) {
+						$sql_values = rtrim($sql_values, ",");
+						$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur, id_liste, date_inscription) VALUES $sql_values";
+						return(spip_query($sql_query));
+				} 
 			}
-
-			if(!empty($sql_values)) {
-					$sql_values = rtrim($sql_values, ",");
-					$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur, id_liste, date_inscription) VALUES $sql_values";
-					return(spip_query($sql_query));
-			} 
-			else {
-				return(0); // pas d'abo à rajouter. Pas une erreur.
-			}
+			return(0); // pas d'abo à rajouter. Pas une erreur.
 		}
 		return(false);
 	}
