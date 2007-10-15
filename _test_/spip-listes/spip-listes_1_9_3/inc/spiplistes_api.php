@@ -583,16 +583,16 @@ function spiplistes_boite_patron ($id_liste, $exec_retour, $nom_bouton_valider, 
 	// inclusion du script de gestion des layers de SPIP
 	if(($patron === true) || (is_string($patron) && empty($patron))) {
 		$result  .= ""
-			. bouton_block_visible(md5(_T('spiplistes:charger_patron')))
+			. bouton_block_visible(md5($nom_bouton_valider))
 			. $titre_boite
-			. debut_block_visible(md5(_T('spiplistes:charger_patron')))
+			. debut_block_visible(md5($nom_bouton_valider))
 			;
 	}
 	else {
 		$result  .= ""
-			. bouton_block_invisible(md5(_T('spiplistes:charger_patron')))
+			. bouton_block_invisible(md5($nom_bouton_valider))
 			. $titre_boite
-			. debut_block_invisible(md5(_T('spiplistes:charger_patron')))
+			. debut_block_invisible(md5($nom_bouton_valider))
 			;
 	}
 	$result .= "\n"
