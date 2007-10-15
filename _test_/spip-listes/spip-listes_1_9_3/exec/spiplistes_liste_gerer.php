@@ -418,12 +418,20 @@ function exec_spiplistes_liste_gerer () {
 		////////////////////////////
 		// Formulaire programmer un courrier automatique
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
+		.	(
+				(empty($patron))
+				? __boite_alerte(_T('spiplistes:Patron_manquant', true))
+				: ""
+			)
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
 		. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>\n"
 		. "<tr><td background='"._DIR_IMG_PACK."rien.gif' align='$spip_lang_left' class='verdana2'>\n"
 		;
+	if(empty($patron)) {
+		$page_result .= "<p class='verdana2'>"._T('spiplistes:Patron_manquant')."</p>\n";
+	}
 	if ($message_auto != "oui")
-		$page_result .= _T('spiplistes:Pas_de_courrier_auto_programme');
+		$page_result .= "<p class='verdana2'>"._T('spiplistes:Pas_de_courrier_auto_programme')."</p>\n";
 	else {
 		$page_result .= ""
 			// petite ligne d'info si envoi programmé
@@ -474,17 +482,14 @@ function exec_spiplistes_liste_gerer () {
 	$page_result .= ""
 		. "<tr><td background='"._DIR_IMG_PACK."rien.gif' align='$spip_lang_left' class='verdana2'>"
 		. "<input type='radio' name='message_auto' value='oui' id='auto_oui' "
+			. (empty($patron) ? " disabled='disabled' " : "")
 			. ($auto_checked = ($message_auto=='oui' ? "checked='checked'" : ""))
 			. " onchange=\"jQuery('#auto_oui_detail').show();\" />"
 		. "<label for='auto_oui' ".($auto_checked ? "style='font-weight:bold;'" : "").">"._T('spiplistes:prog_env')."</label>\n"
-		. "<div id='auto_oui_detail'>"
+		. "<div id='auto_oui_detail' ".(empty($patron) ? "style='display:none;'" : "").">"
 		. "<ul style='list-style-type:none;'>\n"
 		. "<li>"._T('spiplistes:message_sujet').": <input type='text' name='titre_message' value='".$titre_message."' size='50' class='fondl' /> </li>\n"
-		. "<li>"._T('spiplistes:squel')
 		//
-		. spiplistes_boite_selection_patrons ($patron, true, "patrons/", "patron", 1)
-		//
-		. "</li>\n"
 		// chrono début de mois
 		. "
 <script type='text/javascript'><!--
@@ -518,6 +523,7 @@ function exec_spiplistes_liste_gerer () {
 	$checked = ($message_auto=='non')?"checked='checked'":"";
 	$page_result .= ""
 		. "<br /><input type='radio' name='message_auto' value='non' id='auto_non' "
+		. (empty($patron) ? " disabled='disabled' " : "")
 		. $checked
 		. " onchange=\"jQuery('#auto_oui_detail').hide();\" />"
 		. ($checked?"<strong>":"")
@@ -543,7 +549,7 @@ function exec_spiplistes_liste_gerer () {
 			: ""
 			)
 		// bouton de validation
-		. "<input type='submit' name='btn_modifier_courrier_auto' value='"._T('bouton_valider')."' class='fondo' />"
+		. (!empty($patron) ? "<input type='submit' name='btn_modifier_courrier_auto' value='"._T('bouton_valider')."' class='fondo' />" : "")
 		. "</td></tr>"
 		. "</table>\n"
 		. "</form>"
