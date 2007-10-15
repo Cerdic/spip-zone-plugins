@@ -77,12 +77,20 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Abonner_tous_les_invites_public' => "Abonner tous les membres invit&eacute;s &agrave; cette liste publique.",
 'Abonner_tous_les_inscrits_prives' => "Abonner tous les membres &agrave; cette liste priv&eacute;e, sauf les invit&eacute;s.",
+'Adresse_email_obligatoire' => "Une adresse email est obligatoire pour pouvoir vous abonner aux listes de diffusion. 
+	Si vous d&eacute;sirez profiter de ce service, merci de modifier votre fiche en compl&eacute;tant ce champ. ",
+'Alert_abonnement_sans_format' => "Votre abonnement est suspendu. Vous ne recevrez pas les courriers des listes de 
+	diffusion list&eacute;es ci-dessous. Pour recevoir &agrave; nouveau le courrier 
+	de vos listes pr&eacute;f&eacute;r&eacute;es, choisissez un format de r&eacute;ception 
+	et validez ce formulaire. ",
+'Vous_etes_abonne_aux_listes_selectionnees' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es ",
 
 
 //B
 
 'bouton_listes' => 'Lettres d\'information',
 'bouton_modifier' => 'Modifier ce courrier',
+'Abonnements_aux_courriers' => "Abonnements aux courriers",
 
 //C
 'calcul_patron' => 'Calcul avec le patron version texte',
@@ -194,6 +202,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'editeur_siret' => "N&deg; SIRET ",
 'editeur_url' => "URL du site de l'&eacute;diteur ",
 'editeur_logo' => "URL du logotype de l'&eacute;diteur ",
+'En_debut_de_mois' => "En d&eacute;but de mois",
 
 //F
 'faq' => 'FAQ',
@@ -222,6 +231,8 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Forcer_desabonner_tous_les_inscrits' => "D&eacute;sabonner tous les membres inscrits pour cette liste.",
 'Forcer_abonnement_erreur' => "Erreur technique signal&eacute;e lors de la modification d'une liste abonn&eacute;e. 
 	V&eacute;rifiez cette liste avant de poursuivre votre op&eacute;ration.",
+'Format_obligatoire_pour_diffusion' => "Pour confirmer l'abonnement de ce compte, vous devez s&eacute;lectionner un format 
+	de r&eacute;ception.",
 
 //G
 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu",
@@ -266,6 +277,10 @@ et de recevoir les lettres d\'informations.',
 'Listes_de_diffusion' => 'Listes de diffusion',
 'Liste_de_destination' => "Liste de destination",
 'lien_trier_nombre' => "Trier par nombre d&acute;abonnements",
+'Liste_prive' => "Liste priv&eacute;e",
+'Liste_publique' => "Liste publique",
+'Liste_abandonnee' => "Liste abandonn&eacute;e",
+'Liste_diffusee_le_premier_de_chaque_mois' => "Liste diffus&eacute;e le premier de chaque mois. ",
 
 //M
 'mail_format' => 'Vous &ecirc;tes abonn&eacute; &agrave; la lettre d\'information du site @nom_site_spip@ en format',
@@ -382,6 +397,7 @@ liste.",
 'Suppression_de' => "Suppression de",
 'Supprimer_les_listes' => "Supprimer les listes",
 'Supprimer_la_liste' => "Supprimer la liste...",
+'Suspendre_abonnements' => "Suspendre les abonnements pour ce compte",
 
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
@@ -496,7 +512,8 @@ liste.",
 'prog_env' => 'Programmer un envoi automatique',
 'prog_env_non' => 'Ne pas programmer d\'envoi',
 'program' => 'Programmation des courriers automatiques',
-'plein_ecran' => '(Plein &eacute;cran)',
+'plein_ecran' => "(Plein &eacute;cran)",
+'Prochain_envoi_' => "Prochain envoi ",
 
 'reinitialiser' => 'reinitialiser',
 'remplir_tout' => 'Tous les champs doivent &ecirc;tre remplis',

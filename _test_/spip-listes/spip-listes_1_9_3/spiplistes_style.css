@@ -35,6 +35,10 @@ table.spiplistes-tab td {
 table.spiplistes-tab tr.row-even {
 	background-color:#fff;
 }
+.spiplistes-legend-titre {
+	font-weight:bold;
+	font-size:110%;
+}
 .spiplistes-legend-stitre {
 	font-weight:bold;
 	font-size:90%;

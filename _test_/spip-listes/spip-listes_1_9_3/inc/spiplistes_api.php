@@ -1015,6 +1015,10 @@ function spiplistes_pied_de_page_liste($id_liste = 0, $lang = false) {
 	return ($result);
 }
 
+function spiplistes_format_est_correct ($format) {
+	return(in_array($format, array("non", "texte", "html")));
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */

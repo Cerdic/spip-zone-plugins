@@ -178,7 +178,8 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 						" <span style='font-size:100%;color:#666666' dir='ltr'>\n"
 						. "<span class='spiplistes-legend-stitre'>".spiplistes_nb_abonnes_liste_str_get($id_row)."</span>"
 						. (!empty($patron) ? "<br />Patron : <strong>".$patron."</strong>" : "")
-						. ((!empty($date) && ($date!=_SPIPLISTES_ZERO_TIME_DATE)) ? "<br />Prochain envoi : <strong>".affdate_heure($date)."</strong>" : "")
+						. ((!empty($date) && ($date!=_SPIPLISTES_ZERO_TIME_DATE)) ? "<br />"
+						. _T('spiplistes:Prochain_envoi_') . ": <strong>".affdate_heure($date)."</strong>" : "")
 						. "</span>\n"
 						;
 						break;
