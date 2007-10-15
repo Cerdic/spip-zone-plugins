@@ -75,6 +75,9 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'Abonner_format_texte' => "Abonner au format texte",
 'Attention_suppression_liste' => "Attention ! Vous demandez la suppression d'une liste de diffusion. Les abonn&eacute;s 
 seront retir&eacute;s de cette liste de diffusion automatiquement. ",
+'Abonner_tous_les_invites_public' => "Abonner tous les membres invit&eacute;s &agrave; cette liste publique.",
+'Abonner_tous_les_inscrits_prives' => "Abonner tous les membres &agrave; cette liste priv&eacute;e, sauf les invit&eacute;s.",
+
 
 //B
 
@@ -208,6 +211,17 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
    Vous pouvez &eacute;galement d&eacute;sabonner temporairement ce contact. 
    Il reste inscrit dans les listes en tant que destinataire, mais les courriers 
    ne lui seront pas envoy&eacute;s tant que vous ne lui aurez pas d&eacute;fini un format de r&eacute;ception de courriers.",
+'Forcer_les_abonnement_liste' => "Forcer les abonnement pour cette liste",
+'Forcer_abonnement_desc' => "Vous pouvez forcer ici les abonnements &agrave; cette liste, soit pour tous 
+   les membres inscrits (visiteurs, auteurs et administrateurs), soit pour tous 
+   les visiteurs.",
+'Forcer_abonnement_aide' => "<strong>Attention</strong>: un membre abonn&eacute; ne re&ccedil;oit pas forc&eacute;ment 
+   le courrier de cette liste. Il faut attendre qu'il confirme lui-m&ecirc;me 
+   le format de r&eacute;ception : html ou texte seul.<br />
+	Vous pouvez forcer le format par abonn&eacute; <a href='?exec=abonnes_tous'>sur la page du suivi des abonnements</a>",
+'Forcer_desabonner_tous_les_inscrits' => "D&eacute;sabonner tous les membres inscrits pour cette liste.",
+'Forcer_abonnement_erreur' => "Erreur technique signal&eacute;e lors de la modification d'une liste abonn&eacute;e. 
+	V&eacute;rifiez cette liste avant de poursuivre votre op&eacute;ration.",
 
 //G
 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu",

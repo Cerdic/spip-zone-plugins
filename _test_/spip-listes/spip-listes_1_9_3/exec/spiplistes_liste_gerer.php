@@ -59,6 +59,7 @@ function exec_spiplistes_liste_gerer () {
 			, 'jour', 'mois', 'annee', 'heure', 'minute'
 			, 'auto_mois'
 			, 'btn_patron_pied'
+		, 'btn_valider_forcer_abos', 'forcer_abo'
 		, 'btn_supprimer_liste' //local
 		) as $key) {
 		$$key = _request($key);
@@ -76,6 +77,8 @@ function exec_spiplistes_liste_gerer () {
 
 	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
 	 
+	$page_result = "";
+
 	if(!$id_liste) {
 	//////////////////////////////////////////////////////
 	// Creer une liste
@@ -197,6 +200,15 @@ function exec_spiplistes_liste_gerer () {
 				$sql_query = "UPDATE spip_listes SET $sql_query WHERE id_liste=$id_liste LIMIT 1";
 				$sql_result = spip_query($sql_query);
 			}
+
+			// Forcer les abonnements
+			if($btn_valider_forcer_abos && $forcer_abo && in_array($forcer_abo, array('tous', 'auteurs', '6forum', 'aucun'))) {
+				include_spip("inc/spiplistes_listes_forcer_abonnement");
+				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo) ==  false) {
+					$page_result .= __boite_alerte(_T('spiplistes:Forcer_abonnement_erreur', true));
+				}
+			}
+			
 		} // end if($flag_editable)
 	}
 
@@ -280,8 +292,6 @@ function exec_spiplistes_liste_gerer () {
 	debut_droite("messagerie");
 
 	changer_typo('','liste'.$id_liste);
-
-	$page_result = "";
 
 	// message alerte et demande de confirmation si supprimer liste
 	if(($btn_supprimer_liste > 0) && ($btn_supprimer_liste == $id_liste)) {
@@ -528,43 +538,82 @@ function exec_spiplistes_liste_gerer () {
 		. fin_cadre_relief(true)
 		;
 		
-	echo($page_result);
-	
-
-	//////////////////////////
-	// Liste des abonnes
-	// Appliquer les modifications sur les abonnes
-	echo "<a name='auteurs'></a>";
 	$editer_auteurs = charger_fonction('editer_auteurs','inc');
+	
+	$page_result .= ""
+		//////////////////////////
+		// Liste des abonnes
+		// Appliquer les modifications sur les abonnes
+		. "<a name='auteurs'></a>"
 	/*
 	echo $editer_auteurs('liste', $id_liste, $flag_editable, _request('cherche_auteur'), _request('ids'), 
 		_T('spiplistes:liste_des_abonnes'),
 		'listes',
 		_SPIPLISTES_EXEC_ABONNE_EDIT);
 */
-	echo $editer_auteurs(
-		'liste'	// $type
-		, $id_liste // $id
-		, $flag_editable 
-		, _request('cherche_auteur') //$cherche_auteur
-		, _request('ids')	// $ids
-		, _T('spiplistes:abon') // $titre_boite
-		//, 'listes' // $script_edit_objet
-		//, 'abonne_edit'
-		);
-
-	////
-	// MODE EDIT LISTE FIN ---------------------------------------------------------
-
-	echo($gros_bouton_supprimer);
+		. $editer_auteurs(
+			'liste'	// $type
+			, $id_liste // $id
+			, $flag_editable 
+			, _request('cherche_auteur') //$cherche_auteur
+			, _request('ids')	// $ids
+			, _T('spiplistes:abon') // $titre_boite
+			//, 'listes' // $script_edit_objet
+			//, 'abonne_edit'
+			)
+		;
+		
+	// le super-admin peut abonner en masse
+	if($connect_toutes_rubriques) {
+		$page_result .= ""
+			. "\n<!-- forcer abo -->\n"
+			. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."abonner-24.png", true, '', _T('spiplistes:Forcer_les_abonnement_liste').__plugin_aide("forcerliste"))."\n"
+			. "<p class='verdana2'>\n"
+			. _T('spiplistes:Forcer_abonnement_desc')."<br />\n"
+			. "<blockquote class='verdana2'><em>"._T('spiplistes:Forcer_abonnement_aide')."</em></blockquote></p>\n"
+			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste#auteurs")."' id='form_forcer_abo' name='form_forcer_abo' method='post'>\n"
+			. debut_cadre_relief("", true)."\n"
+			//
+			//////////////////////////
+			// propose de forcer les membres sauf invités si la liste est privée
+			.	(
+					($statut==_SPIPLISTES_PRIVATE_LIST)
+					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='auteurs' id='forcer_abo_tous' />\n"
+						. "<label for='forcer_abo_tous'>"._T('spiplistes:Abonner_tous_les_inscrits_prives')."</label></div>\n"
+					: ""
+				)
+			//
+			// propose de forcer les invités si la liste est publique ou périodique
+			.	(
+					(($statut!=_SPIPLISTES_PRIVATE_LIST) && ($statut!=_SPIPLISTES_TRASH_LIST))
+					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='6forum' id='forcer_abo_6forum' />\n"
+						. "<label for='forcer_abo_6forum'>"._T('spiplistes:Abonner_tous_les_invites_public')."</label></div>\n"
+					: ""
+				)
+			. (
+				($nb_abonnes)
+				? "<hr />\n"
+					. "<div class='verdana2'><input type='radio' name='forcer_abo' value='aucun' id='forcer_desabo' />\n"
+					. "<label for='forcer_desabo'>"._T('spiplistes:Forcer_desabonner_tous_les_inscrits')."</label></div>\n"
+				: ""
+				)
+			. fin_cadre_relief(true)."\n"
+			. "<div style='text-align:right;'><input type='submit' name='btn_valider_forcer_abos' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+			. "</form>\n"
+			. fin_cadre_enfonce (true)."\n"
+		;
+	}
+	//
+	$page_result .= ""
+		. $gros_bouton_supprimer
+		;
 	
+	echo($page_result);
+
 	echo __plugin_html_signature(true), fin_gauche(), fin_page();
 
 }
 
-function listes_edit_presentation($id_liste){
-	return icone(_T('spiplistes:modifier_liste'), generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,"id_liste=$id_liste"),_DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif", "edit.gif");
-}
 
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
