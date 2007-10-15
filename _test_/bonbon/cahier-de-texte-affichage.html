@@ -56,13 +56,55 @@ nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...
 		<p>[à partir du (#ENV{date_debut}|affdate) ][jusqu'au (#ENV{date_fin}|affdate)]</p>	
 	</div>
 	<div id="Contenu">
+[
+(#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
+]
+[
+(#REM) en premier on choisi les articles qui sont du bon groupe
+]
+<BOUCLE_Prepa_Groupes(ARTICLES){id_rubrique}{titre_mot==#ENV{groupe,.}}{doublons Prepa_Groupes}>
+</BOUCLE_Prepa_Groupes>
+[
+(#REM) Ensuite on selectionne parmi ceux qui ont le bon groupe (c'est à dire parmis ceux qui ne sont pas en doublon avec la boucle précédente, soit {!doublons Prepa_Groupes}), ceux qui ont la bonne matière
+]
+<BOUCLE_Prepa_Matiere(ARTICLES){id_rubrique}{titre_mot==#ENV{matiere,.}}
+{!doublons Prepa_Groupes}{doublons Prepa_Matiere}>
+</BOUCLE_Prepa_Matiere>
+[
+(#REM) Idem pour les classes
+]
+<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{titre_mot==#ENV{classe,.}}{!doublons Prepa_Matiere}{doublons Prepa_Classes}>
+</BOUCLE_PrepaClasses>
+[
+(#REM) Idem pour les dates
+]
+<BOUCLE_PrepaDates(ARTICLES){id_rubrique}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons Prepa_Classes}{doublons Prepa_Date}>
+</BOUCLE_PrepaDates>
+[
+(#REM)Idem pour les auteurs
+]
+<BOUCLE_Prepa_Auteurs(ARTICLES){id_rubrique}{id_auteur ?}{!doublons Prepa_Date}{doublons requete}>
+</BOUCLE_Prepa_Auteurs>
+
+[
+(#REM) {!doublons requete} est donc un critère qui sélectionne tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
+]
+
 <?php
 //Si on ne demande pas que les devoirs, on affiche les séances
 if (!($_GET['devoirs_seuls'])) {
 ?>
+[
+(#REM)On restrient la requête aux descriptions de séances en suivant le même modèle que précédement.
+]
+<BOUCLE_QueSeances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}>
+</BOUCLE_QueSeances>
+[
+(#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
+]
 <B_Seances>
 #ANCRE_PAGINATION
-<BOUCLE_Seances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{titre_mot==#ENV{classe,.}}{titre_mot==#ENV{groupe,.}}{titre_mot==#ENV{matiere,.}}{id_auteur ?}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{pagination #ENV{nb,100000000000000}}{doublons seances}{!par date}>
+<BOUCLE_Seances(ARTICLES){id_rubrique}{!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,100000000000000}}{!par date}>
 		<div id="documents">
 			<h3 class="titre">#TITRE</h3>
 			<div class="texte">#TEXTE</div>
@@ -83,6 +125,14 @@ if (!($_GET['devoirs_seuls'])) {
 //Si on ne demande que les devoirs, on les affiche comme un tableau (pratique !)
 if (($_GET['devoirs_seuls'])) {
 ?>
+[
+(#REM)On restrient la requête aux devoirs en suivant le même modèle que précédement.
+]
+<BOUCLE_QueDevoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{!doublons requete}{doublons QueDevoirs}>
+</BOUCLE_QueDevoirs>
+[
+(#REM) {!doublons QueDevoirs} est donc un critère qui sélectionne toutes les Devoirs à faire qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
+]
 <B_Devoirs>
 #ANCRE_PAGINATION
 		<table width="100%" border=1 class="spip">
@@ -96,7 +146,7 @@ if (($_GET['devoirs_seuls'])) {
 				<th>Donné le</th>
 			</tr>
 
-<BOUCLE_Devoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{titre_mot==#ENV{classe,.}}{titre_mot==#ENV{groupe,.}}{titre_mot==#ENV{matiere,.}}{id_auteur ?}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{par #ENV{tri}}{pagination #ENV{nb,100000000000000}}{doublons devoirs}{!par date}>
+<BOUCLE_Devoirs(ARTICLES){id_rubrique}{!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,100000000000000}}{doublons devoirs}{!par date}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 				<td>[(#DATE|affdate)]</td>
 				[(#ENV{classe}|?{'',<td>})]
