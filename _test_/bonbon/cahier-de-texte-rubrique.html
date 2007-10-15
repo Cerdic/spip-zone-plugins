@@ -1,4 +1,5 @@
- <!--
+#CACHE{600}
+<!--
 *****Cahier de texte pour Spip: Bonbon !
 *****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
 *****Sous licence GPL (enfin bon, c'est bonbonware...)
@@ -11,7 +12,7 @@
 	<title>#NOM_SITE_SPIP: Accueil du cahier de texte</title>
 
 [(#REM)Inclusion du pied de page]
-<INCLURE(cahier-de-texte-en-tete.php3)>
+<INCLURE{fond=cahier-de-texte-en-tete}>
 
 </head>
 <body>
@@ -27,14 +28,17 @@
 	<div id="Contenu">
 		<div class="bloc"><center>
 			<h3 class="titre">Acc&egrave;s public</h3>
-			<form name="choisir_devoir" method="get" action="cahier-de-texte-affichage.php3">
+			<form name="choisir_devoir" method="get" action="spip.php">
+				<input type="hidden" name="page" value="cahier-de-texte-affichage">
 				<select id="classe" name="classe" size="1">
 					<option value="" selected="selected">Classes</option>
-[(#REM)On extrait toutes les classes de Spip]
+[(#REM)On extrait toutes les classes de Spip, que pour,les devoirs]
 <BOUCLE_ToutesLesClasses_devoirs(MOTS){type="Classes"}{par titre}>
-	<BOUCLE_Que_les_classes_avec_devoir(ARTICLES){titre_mot="Devoirs à faire"}{id_mot}{0,1}>
+	<BOUCLE_Que_devoirs(MOTS){titre="Devoirs à faire"}>
+		<BOUCLE_Que_les_classes_avec_devoir(ARTICLES){id_mot=#_ToutesLesClasses_devoirs:ID_MOT}{id_mot=#_Que_devoirs:ID_MOT}{0,1}>
 					<option value="#_ToutesLesClasses_devoirs:TITRE">#_ToutesLesClasses_devoirs:TITRE</option>
-	</BOUCLE_Que_les_classes_avec_devoir>
+		</BOUCLE_Que_les_classes_avec_devoir>
+	</BOUCLE_Que_devoirs>
 </BOUCLE_ToutesLesClasses_devoirs>
 				</select>
 				<input type="hidden" name="nb" value="20">
@@ -43,28 +47,32 @@
 			<br>
 			<hr>
 			<br>
-			<form name="choisir_simple" method="get" action="cahier-de-texte-affichage.php3">
+[(#REM) Que pour les Descriptions de séances:]
+<BOUCLE_CDT_entier(MOTS){titre="Description de séance"}>
+			<form name="choisir_simple" method="get" action="spip.php">
+				<input type="hidden" name="page" value="cahier-de-texte-affichage">
 				<select id="matiere" name="matiere" size="1">
 					<option value="" selected="selected">Mati&egrave;res</option>
 [(#REM)On extrait toutes les matières de Spip]
-<BOUCLE_ToutesLesMatieres_simple(MOTS){type="Matières"}{par num titre}{par titre}>
-	<BOUCLE_Que_les_matieres_avec_article(ARTICLES){titre_mot="Description de séance"}{id_mot}{0,1}>
+	<BOUCLE_ToutesLesMatieres_simple(MOTS){type="Matières"}{par num titre}{par titre}>
+		<BOUCLE_Que_les_matieres_avec_article(ARTICLES){id_mot=#_CDT_entier:ID_MOT}{id_mot}{0,1}>
 					<option value="#_ToutesLesMatieres_simple:TITRE">#_ToutesLesMatieres_simple:TITRE</option>
-	</BOUCLE_Que_les_matieres_avec_article>
-</BOUCLE_ToutesLesMatieres_simple>
+		</BOUCLE_Que_les_matieres_avec_article>
+	</BOUCLE_ToutesLesMatieres_simple>
 				</select>
 				<select id="classe" name="classe" size="1">
 					<option value="" selected="selected">Classes</option>
 [(#REM)On extrait toutes les classes de Spip]
-<BOUCLE_ToutesLesClasses_simple(MOTS){type="Classes"}{par titre}>
-	<BOUCLE_Que_les_classes_avec_seance(ARTICLES){titre_mot="Description de séance"}{id_mot}{0,1}>
+	<BOUCLE_ToutesLesClasses_simple(MOTS){type="Classes"}{par titre}>
+		<BOUCLE_Que_les_classes_avec_seance(ARTICLES){id_mot=#_CDT_entier:ID_MOT}{id_mot}{0,1}>
 					<option value="#_ToutesLesClasses_simple:TITRE">#_ToutesLesClasses_simple:TITRE</option>
-	</BOUCLE_Que_les_classes_avec_seance>
-</BOUCLE_ToutesLesClasses_simple>
+		</BOUCLE_Que_les_classes_avec_seance>
+	</BOUCLE_ToutesLesClasses_simple>
 				</select>
 				<input type="hidden" name="nb" value="20">
 				<input type="Submit" value="Consulter le cahier de texte" name="afficher">
 			</form>
+</BOUCLE_CDT_entier>
 		</center></div>
 		<div class="bloc"><center>
 			<h3 class="titre">Acc&egrave;s enseignant</h3>
@@ -75,8 +83,8 @@
 	echo "<p class='spip'>$auteur (si vous n'&ecirc;tes pas $auteur, <a href=\"";
 ?>#URL_LOGOUT<?php
 	echo "\" title=\"d&eacute;connexion imm&eacute;diate !\">cliquez ici</a>)</p>\n";
-	echo '			<a href="cahier-de-texte-saisie.php3" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels">Saisir une s&eacute;ance</a>&nbsp;|';
-	echo '			 <a href="cahier-de-texte-affichage.php3?id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entr&eacute;es du cahier de texte">Afficher ses s&eacute;ances</a>';
+	echo '			<a href="spip.php?page=cahier-de-texte-saisie" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels">Saisir une s&eacute;ance</a>&nbsp;|';
+	echo '			 <a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entr&eacute;es du cahier de texte">Afficher ses s&eacute;ances</a>';
 } else {?>
 			#LOGIN_PUBLIC
 <?php }
@@ -85,11 +93,11 @@
 <br clear="All">
 	<hr>
 [(#REM)Inclusion de la noisette de selection]
-<INCLURE(cahier-de-texte-selection.php3)>
+<INCLURE{fond=cahier-de-texte-selection}>
 	</div>
 
 [(#REM)Inclusion du pied de page]
-<INCLURE(cahier-de-texte-pied.php3)>
+<INCLURE{fond=cahier-de-texte-pied}>
 
 </div>
 

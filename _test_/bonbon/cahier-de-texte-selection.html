@@ -51,26 +51,28 @@
 </BOUCLE_ToutesLesGroupes_affichage>
 				</select>
 			</fieldset>
+[(#REM)Pour les mots clés attachés à une description de séance existante seulement]
+<BOUCLE_CDT_entier(MOTS){titre="Description de séance"}>
 			<fieldset>
 				<legend>Matière</legend>
 				<select id="matiere" name="matiere" size="1">
 					<option value="" selected="selected">Matières</option>
 [(#REM)On extrait toutes les matières de Spip]
-<BOUCLE_ToutesLesMatieres_affichage(MOTS){type="Matières"}{par num titre}{par titre}>
-	<BOUCLE_Que_les_matieres_avec_article_affichage(ARTICLES){titre_mot="Description de séance"}{id_mot}{0,1}>
+	<BOUCLE_ToutesLesMatieres_affichage(MOTS){type="Matières"}{par num titre}{par titre}>
+		<BOUCLE_Que_les_matieres_avec_article_affichage(ARTICLES){id_mot=#_CDT_entier:ID_MOT}{id_mot}{0,1}>
 					<option value="#_ToutesLesMatieres_affichage:TITRE">#_ToutesLesMatieres_affichage:TITRE</option>
-	</BOUCLE_Que_les_matieres_avec_article_affichage>
-</BOUCLE_ToutesLesMatieres_affichage>
+		</BOUCLE_Que_les_matieres_avec_article_affichage>
+	</BOUCLE_ToutesLesMatieres_affichage>
 				</select>
 <?php if ($auteur_session) {?>
 				<select id="id_auteur" name="id_auteur" size="1">
 					<option value="" selected="selected">Liste des enseignants</option>
 [(#REM)On extrait toutes les profs (auteurs) de Spip]
-<BOUCLE_Auteurs_affichage(AUTEURS){par num nom}{par nom}>
-	<BOUCLE_Que_les_auteurs_du_cahier_de_texte(ARTICLES){id_auteur}{titre_mot="Description de séance"}{0,1}>
+	<BOUCLE_Auteurs_affichage(AUTEURS){par num nom}{par nom}>
+		<BOUCLE_Que_les_auteurs_du_cahier_de_texte(ARTICLES){id_auteur}{id_mot=#_CDT_entier:ID_MOT}{0,1}>
 					<option value="#_Auteurs_affichage:ID_AUTEUR">#_Auteurs_affichage:NOM</option>
-	</BOUCLE_Que_les_auteurs_du_cahier_de_texte>
-</BOUCLE_Auteurs_affichage>
+		</BOUCLE_Que_les_auteurs_du_cahier_de_texte>
+	</BOUCLE_Auteurs_affichage>
 				</select>
 <?php
 }?>
@@ -85,6 +87,7 @@
 				onClick="cal.select(document.forms['choisir'].date_fin,'ancre-date_fin','yyyy-MM-dd'); return false;"
 				NAME="ancre-date_fin" ID="ancre-date_fin" TITLE="Choisissez la date dans le calendrier">choisir la fin de la période à consulter</A></p>
 			</fieldset>
+</BOUCLE_CDT_entier>
 		</div>
 			<input type="Submit" value="Afficher la sélection" name="afficher"> <input type='Submit' value="N'afficher que les devoirs" name='devoirs_seuls'> <input type='Submit' value="N'afficher que les séances" name='seances_seules'>
 		</center>
