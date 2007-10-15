@@ -625,10 +625,10 @@ add_outil( array(
 	'pipeline:post_propre' => 'liens_en_clair_post_propre',
 )); 
 
-@define('_BLOCS_IMAGE_BAS', find_in_path('images/triangle-bas.gif'));
-@define('_BLOCS_IMAGE_HAUT', find_in_path('images/triangle.gif'));
-@define('_BLOCS_IMAGE_BAS', find_in_path('images/deplierbas.gif'));
-@define('_BLOCS_IMAGE_HAUT', find_in_path('images/deplierhaut.gif'));
+@define('_BLOCS_IMAGE_BAS', _DIR_IMG_PACK.'triangle-bas.gif');
+@define('_BLOCS_IMAGE_HAUT', _DIR_IMG_PACK.'triangle.gif');
+//@define('_BLOCS_IMAGE_BAS', _DIR_IMG_PACK.'deplierbas.gif');
+//@define('_BLOCS_IMAGE_HAUT', _DIR_IMG_PACK.'deplierhaut.gif');
 add_outil( array(
 	'id' => 'blocs',
 	'categorie'	=> 'typo-racc',
