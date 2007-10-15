@@ -350,15 +350,23 @@ _ Merci de votre compr&eacute;hension.",
 
 // ---------------------------------------------------------------------------
 	'blocs:nom' => 'Blocs D&eacute;pliables',
-	'blocs:description' => 'Vous permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles. Vous avez &agrave; votre disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans vos textes comme ceci : 
+	'blocs:description' => "Vous permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.\n\n#PUCE {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 
 
 <quote><code>
 <bloc>
  Un titre qui deviendra cliquable
  
- Le texte &agrave; cacher/montrer, apr&egrave;s deux sauts de ligne...
+ Le texte a cacher/montrer, apres deux sauts de ligne...
  </bloc>
-</code></quote>',
+</code></quote>
+
+#PUCE {{Dans les squelettes}} : vous avez &agrave; votre disposition les  nouvelles balises #BLOC_TITRE, #BLOC_DEBUT et #BLOC_FIN &agrave; utiliser comme ceci : 
+<quote><code> #BLOC_TITRE
+ Mon titre
+ #BLOC_DEBUT
+ Mon texte depliable
+ #BLOC_FIN</code></quote>
+",
 
 /*
 // ---------------------------------------------------------------------------
