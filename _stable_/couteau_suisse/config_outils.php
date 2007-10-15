@@ -613,7 +613,7 @@ add_outil( array(
 		// jQuery pour remplacer l'arobase image par l'arobase texte
 		. "\n\$(document).ready(function(){ \$('span.spancrypt').after('<span>&#6'+'4;<\/span>'); \$('span.spancrypt').remove(); });",
 	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
-		. ') no-repeat scroll left center; color:#000099; padding-left:12px; text-decoration:none;"}',
+		. ') no-repeat scroll left center; color:#000099; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt',
 )); 
 
@@ -625,9 +625,15 @@ add_outil( array(
 	'pipeline:post_propre' => 'liens_en_clair_post_propre',
 )); 
 
+@define('_BLOCS_IMAGE_BAS', find_in_path('images/triangle-bas.gif'));
+@define('_BLOCS_IMAGE_HAUT', find_in_path('images/triangle.gif'));
+@define('_BLOCS_IMAGE_BAS', find_in_path('images/deplierbas.gif'));
+@define('_BLOCS_IMAGE_HAUT', find_in_path('images/deplierhaut.gif'));
 add_outil( array(
 	'id' => 'blocs',
 	'categorie'	=> 'typo-racc',
+	'code:css' => 'div.cs_blocs h4 { background-image:url('._BLOCS_IMAGE_BAS.'); }
+div.cs_blocs h4.blocs_replie { background-image:url('._BLOCS_IMAGE_HAUT.'); }',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 ));
 

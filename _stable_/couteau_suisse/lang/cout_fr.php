@@ -348,6 +348,18 @@ _ Merci de votre compr&eacute;hension.",
 	'liens_en_clair:nom' => 'Liens en clair',
 	'liens_en_clair:description' => "Met &agrave; votre disposition le filtre : 'liens_en_clair'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre 'cs=print' ou 'page=print' dans l'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.",
 
+// ---------------------------------------------------------------------------
+	'blocs:nom' => 'Blocs D&eacute;pliables',
+	'blocs:description' => 'Vous permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles. Vous avez &agrave; votre disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans vos textes comme ceci : 
+
+<quote><code>
+<bloc>
+ Un titre qui deviendra cliquable
+ 
+ Le texte &agrave; cacher/montrer, apr&egrave;s deux sauts de ligne...
+ </bloc>
+</code></quote>',
+
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',
