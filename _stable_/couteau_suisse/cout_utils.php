@@ -27,6 +27,8 @@ if ($GLOBALS['spip_version_code']<1.92) {
 			return false;
 		}
 	}
+	function compacte_css($texte) { return $texte; }
+	function compacte_js($texte) { return $texte; }
 /*
 	if (!function_exists('ajax_action_greffe')) {
 		function ajax_action_greffe($idom, $corps, $br='<br />')	{
@@ -294,10 +296,10 @@ function cs_initialise_includes() {
 	// concatenation des css inline, js inline et filtres trouves
 	if (count($temp_css))
 		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
-			.join("\n", $temp_css)."\n</style>";
+			.compacte_css(join("\n", $temp_css))."\n</style>";
 	if (count($temp_js))
 		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
-			.join("\n", $temp_js)."\n// --></script>";
+			.compacte_js(join("\n", $temp_js))."\n// --></script>";
 // desactive pour l'instant. utiliser le parametre d'url : cs=print
 /*	$infos_pipelines['code_fonctions'][] = "\n// Filtre du Couteau Suisse qui rend un document imprimable\nfunction cs_imprimer(\$texte) {\n" 
 			.join("\n", $temp_filtre_imprimer)."\n\treturn \$texte;\n}"; */
