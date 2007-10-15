@@ -504,7 +504,9 @@ function exec_spiplistes_liste_gerer () {
 	}
 --></script>		"
 		// checkbo message mensuel
-		. "<li><input type='checkbox' name='auto_mois' value='oui' id='auto_mois' $auto_mois_checked onchange=\"auto_mois_switch(this);\" $auto_mois_disabled />\n"
+		. "<li><input type='checkbox' name='auto_mois' value='oui' id='auto_mois' onchange=\"auto_mois_switch(this);\" "
+			. (($statut == _SPIPLISTES_MONTHLY_LIST) ? "checked='checked'" : "")
+			. " />\n"
 		. "<label for='auto_mois'>"._T('spiplistes:En_debut_de_mois')."</label></li>\n"
 		// 
 		. "<li id='periode_jours'>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl' /> "._T('info_jours')."</li>\n"
