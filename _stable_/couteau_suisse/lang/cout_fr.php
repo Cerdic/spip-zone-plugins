@@ -364,10 +364,10 @@ _ Merci de votre compr&eacute;hension.",
 <quote><code> #BLOC_TITRE
  Mon titre
  #BLOC_DEBUT
- Mon texte depliable
+ Mon bloc depliable
  #BLOC_FIN</code></quote>
 ",
-
+	'blocs:aide' => 'Blocs D&eacute;pliables : <strong>&lt;bloc&gt;&lt;/bloc&gt;</strong> (alias : <strong>&lt;invisible&gt;&lt;/invisible&gt;</strong>) et <strong>&lt;visible&gt;&lt;/visible&gt;</strong>',
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',
