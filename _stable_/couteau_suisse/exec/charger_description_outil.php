@@ -20,7 +20,6 @@ cs_log("Début : exec_charger_description_outil_dist() - Préparation du retour pa
 		echo minipres();
 		exit;
 	}
-//echo 'toto=',_request('outil');
 	if ($outil_id=_request('outil')) {
 		include_spip('inc/cs_outils');
 		echo description_outil2($outil_id);

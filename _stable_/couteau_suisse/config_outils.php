@@ -625,6 +625,12 @@ add_outil( array(
 	'pipeline:post_propre' => 'liens_en_clair_post_propre',
 )); 
 
+add_outil( array(
+	'id' => 'blocs',
+	'categorie'	=> 'typo-racc',
+	'pipeline:pre_typo' => 'blocs_pre_typo',
+));
+
 // Idees d'ajouts :
 // http://archives.rezo.net/spip-core.mbox/
 // http://www.spip-contrib.net/Citations
