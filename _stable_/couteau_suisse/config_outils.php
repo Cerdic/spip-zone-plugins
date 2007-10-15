@@ -7,6 +7,7 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 
+cs_log("inclusion de config_outils.php");
 //-----------------------------------------------------------------------------//
 //                               options                                       //
 //-----------------------------------------------------------------------------//
@@ -644,6 +645,5 @@ add_outil( array(
 // colorations du code
 // boutonstexte
 
-cs_log("Fin de config_outils.php");
 //global $cs_variables; cs_log($cs_variables, 'cs_variables :');
 ?>

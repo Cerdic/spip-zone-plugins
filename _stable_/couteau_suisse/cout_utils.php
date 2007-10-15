@@ -9,7 +9,20 @@
 #  la configuration du plugin                         #
 #-----------------------------------------------------#
 
-cs_log("Chargement de cout_utils.php...");
+cs_log("Chargement de cout_utils.php et lancement de cs_initialisation...");
+
+// $outils : tableau ultra complet avec tout ce qu'il faut savoir sur chaque outil
+// $cs_variables : tableau de toutes les variables que les outils peuvent utiliser et manipuler
+//  - ces deux tableaux ne sont remplis qu'une seule fois, lors d'une initialisation totale
+//    les hits ordinaires ne se servent que des metas, non des fichiers.
+//  - l'initialisation totale insere en premier lieu config_outils.php
+global $outils, $cs_variables;
+$cs_variables = $outils = array();
+// liste des types de variable
+$cs_variables['_chaines'] = $cs_variables['_nombres'] = array();
+
+// lancer l'initialisation
+// cs_initialisation();
 
 /*****************/
 /* COMPATIBILITE */
@@ -246,8 +259,9 @@ function cs_initialise_includes() {
 	$traitements_utilises = array();
 	// variables temporaires
 	$temp_css = $temp_js = $temp_filtre_imprimer = array();
-	// parcours de tous les outils
+	// pour la fonction inclure_page()
 	include_spip('public/assembler');
+	// parcours de tous les outils
 	foreach ($outils as $i=>$outil) {
 		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
 		if ($outil['actif']) {
@@ -267,8 +281,12 @@ function cs_initialise_includes() {
 			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/
 			if ($f=find_in_path($_css = "outils/$inc.css")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'css');
 			if ($f=find_in_path("outils/$inc.js")) $cs_metas_pipelines['header'][] = cs_insert_header($f, 'js');
+			 // en fait on peut pas car les balises vont devoir etre traitees et les traitements ne sont pas encore dispo !
 			if ($f=find_in_path("outils/$inc.css.html")) { 
+				// ici, cout_fonction.php va etre appele pour traiter les balises du css
+				$GLOBALS['cs_options']++;
 				$f = inclure_page($_css, array('fond'=>$_css));
+				$GLOBALS['cs_options']--;
 				$temp_css[] = $f['texte']; 
 			}
 			// recherche d'un code inline eventuellement propose
@@ -458,27 +476,4 @@ function cs_initialisation_totale() {
 	// if (file_exists($f = _DIR_TMP."charger_pipelines.php")) @unlink($f);
 }
 
-/*****************/
-/* DEBUT DU CODE */
-/*****************/
-
-// les globales :
-//
-// $outils : tableau ultra complet avec tout ce qu'il faut savoir sur chaque outil
-// $cs_variables : tableau de toutes les variables que les outils peuvent utiliser et manipuler
-//  - ces deux tableaux ne sont remplis qu'une seule fois, lors d'une initialisation totale
-//    les hits ordinaires ne se servent que des metas, non des fichiers.
-//  - l'initialisation totale insere en premier lieu config_outils.php
-//
-
-global $outils, $cs_variables;
-$cs_variables = $outils = array();
-
-// liste des types de variable
-$cs_variables['_chaines'] = $cs_variables['_nombres'] = array();
-
-// lancer l'initialisation
-cs_initialisation();
-
-//print_r(unserialize($GLOBALS['meta']['tweaks_variables']));
 ?>

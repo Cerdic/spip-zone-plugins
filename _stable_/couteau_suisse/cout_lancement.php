@@ -6,9 +6,9 @@
 #  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions utilisees pendant  #
-#  l'execution du plugin                              #
+#  l'execution du plugin.                             #
 #  Seulement s'il y a lieu, cout_lancement.php        #
-#  va inclure cout_utils.php et compiler les outils   #
+#  va inclure cout_utils.php et compiler les outils.  #
 #-----------------------------------------------------#
 
 cs_log("Chargement de cout_lancement.php pour initialisation");
@@ -111,7 +111,7 @@ cs_log("[#$rand]  -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 	foreach($temp = $outils as $outil) $id = cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
-cs_log("[#$rand]  -- cs_initialise_includes()...");
+cs_log("[#$rand]  -- cs_initialise_includes()... cout_fonctions.php sera probablement inclus.");
 	// initialiser les includes et creer les fichiers de controle
 	cs_initialise_includes();
 	// sauver la configuration
