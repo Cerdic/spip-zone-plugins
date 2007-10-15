@@ -604,6 +604,7 @@ function spiplistes_boite_patron ($id_liste, $exec_retour, $nom_bouton_valider, 
 		. "<div style='text-align:center'>\n"
 		. ($msg_patron ? $msg_patron : "<span style='color:gray;'>&lt;"._T('spiplistes:aucun')."&gt;</span>\n")
 		. "</div>\n"
+		. "</div>\n"
 		. fin_cadre_relief(true);
 		;
 

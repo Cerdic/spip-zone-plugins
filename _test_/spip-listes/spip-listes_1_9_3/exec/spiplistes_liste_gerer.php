@@ -58,7 +58,7 @@ function exec_spiplistes_liste_gerer () {
 			, 'titre_message', 'patron', 'periode', 'envoyer_maintenant'
 			, 'jour', 'mois', 'annee', 'heure', 'minute'
 			, 'auto_mois'
-			, 'btn_patron_pied'
+		, 'btn_patron_pied', 'btn_grand_patron' // boites gauches
 		, 'btn_valider_forcer_abos', 'forcer_abo'
 		, 'btn_supprimer_liste' //local
 		) as $key) {
@@ -134,6 +134,11 @@ function exec_spiplistes_liste_gerer () {
 				$sql_query .= "titre="._q($titre).",texte="._q($texte).",";
 			}
 			
+			// Modifier le grand patron ?
+			if($btn_grand_patron && $patron) {
+				$sql_query .= "patron="._q($patron).",";
+			}
+			
 			// Modifier patron de pied ?
 			if($btn_patron_pied && $patron) {
 //spiplistes_log("LISTE MODIF: de la liste <<$id_liste $patron", LOG_DEBUG);
@@ -147,6 +152,13 @@ function exec_spiplistes_liste_gerer () {
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut!=$current_liste['statut'])) {
 					$sql_query .= "statut='$statut',";
+					// si la liste passe en privée, retire les invités
+					if($statut == _SPIPLISTES_PRIVATE_LIST) {
+						$auteur_statut = '6forum';
+						spip_query("DELETE FROM spip_auteurs_listes
+							WHERE id_auteur IN (SELECT id_auteur FROM spip_auteurs WHERE statut='$auteur_statut')");
+						spiplistes_log(" AUTEURS ($auteur_statut) REMOVED FROM LISTE $id_liste ($statut) BY ID_AUTEUR #$connect_id_auteur");
+					}
 				}
 				// Modifier la langue ?
 				if(!empty($lang) && ($lang!=$current_liste['lang'])) {
@@ -281,6 +293,10 @@ function exec_spiplistes_liste_gerer () {
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:Liste_numero_:'), $id_liste, false);
 	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
+	spiplistes_boite_patron($id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
+		, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:Patron_grand_')
+		, ($patron ? $patron : "")
+		, $patron);
 	spiplistes_boite_patron($id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
 		, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:Patron_de_pied_')
 		, (($ii = strlen($pied_page)) ? _T('taille_octets',array('taille'=>$ii)) : "")
@@ -570,7 +586,9 @@ function exec_spiplistes_liste_gerer () {
 			. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."abonner-24.png", true, '', _T('spiplistes:Forcer_les_abonnement_liste').__plugin_aide("forcerliste"))."\n"
 			. "<p class='verdana2'>\n"
 			. _T('spiplistes:Forcer_abonnement_desc')."<br />\n"
-			. "<blockquote class='verdana2'><em>"._T('spiplistes:Forcer_abonnement_aide')."</em></blockquote></p>\n"
+			. "<blockquote class='verdana2'><em>"
+			. _T('spiplistes:Forcer_abonnement_aide', array('lien_retour' => generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)))
+			. "</em></blockquote></p>\n"
 			. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste#auteurs")."' id='form_forcer_abo' name='form_forcer_abo' method='post'>\n"
 			. debut_cadre_relief("", true)."\n"
 			//

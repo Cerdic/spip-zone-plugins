@@ -218,7 +218,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'Forcer_abonnement_aide' => "<strong>Attention</strong>: un membre abonn&eacute; ne re&ccedil;oit pas forc&eacute;ment 
    le courrier de cette liste. Il faut attendre qu'il confirme lui-m&ecirc;me 
    le format de r&eacute;ception : html ou texte seul.<br />
-	Vous pouvez forcer le format par abonn&eacute; <a href='?exec=abonnes_tous'>sur la page du suivi des abonnements</a>",
+	Vous pouvez forcer le format par abonn&eacute; <a href='@lien_retour@'>sur la page du suivi des abonnements</a>",
 'Forcer_desabonner_tous_les_inscrits' => "D&eacute;sabonner tous les membres inscrits pour cette liste.",
 'Forcer_abonnement_erreur' => "Erreur technique signal&eacute;e lors de la modification d'une liste abonn&eacute;e. 
 	V&eacute;rifiez cette liste avant de poursuivre votre op&eacute;ration.",
@@ -336,6 +336,7 @@ et de recevoir les lettres d\'informations.',
 'Pas_de_liste_en_auto' => "Pas de liste en envoi programm&eacute;s (chrono)",
 'Patron_du_tampon' => "Patron du tampon ",
 'Patron_de_pied_' => "Patron de pied ",
+'Patron_grand_' => "Grand patron ",
 'Pas_adresse_email' => "Pas d'adresse email",
 
 //R
