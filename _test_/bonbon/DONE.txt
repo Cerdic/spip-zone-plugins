@@ -8,6 +8,7 @@ Quelques corrections (les classes, matières, profs ne sont affichés que s'ils mè
 FCKeditor disparaît (provisoirement ?)
 «Bonbon !» est sur la zone (svn) en test.
 La pagination est désormais celle de Spip>1.9 (à la place de la pagination nulle aui avait été mise en place)
+Optimisations:	-utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz)
 
 
 1.0 Première sortie de Bonbon

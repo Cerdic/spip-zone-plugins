@@ -8,7 +8,7 @@
 classe= le nom d'une classe (attention il faut qu'il y ait identité avec le mot clé de la classe)
 groupe= le nom du groupe (attention il faut qu'il y ait identité avec le mot clé du groupe)
 matiere= le nom de la matière (attention il faut qu'il y ait identité avec le mot clé de la matière)
-prof= l'id_auteur d'un auteur (un professeur)
+id_auteur= l'id_auteur d'un auteur (un professeur)
 date_debut=début de la période considérée (sinon c'est depuis le début de l'année en cours)
 date_debut=fin de la période considérée (sinon c'ets jusqu'en 9999, ce qui devrait suffire jusqu'au bug de l'an 10000)
 Les dates sont au format YYYY-MM-DD
@@ -42,7 +42,7 @@ nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...
 				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20">Afficher les 20 dernieres séances</a></li>
 <?php if ($auteur_session) {
 	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels">Saisir une séance</a></li>';
-	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&prof='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte">Afficher ses séances</a></li>';
+	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte">Afficher ses séances</a></li>';
 }?>
 				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte">Faire une requête précise</a>
 			</ul>
@@ -52,7 +52,7 @@ nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...
 			<h2>Description des séances (sans les devoirs)</h2>]
 [(#ENV{devoirs_seuls}|?{' ',''})
 		<h2>Devoirs à faire</h2>]
-		<p>[Classe de (#ENV{classe}) ][(#ENV{groupe}) ][en (#ENV{matiere}) ]<B_Prof>Professeur&nbsp;: <BOUCLE_Prof(AUTEURS){id_auteur=#ENV{prof}}>#NOM</BOUCLE_Prof></p>
+		<p>[Classe de (#ENV{classe}) ][(#ENV{groupe}) ][en (#ENV{matiere}) ]<B_Prof>Professeur&nbsp;: <BOUCLE_Prof(AUTEURS){id_auteur}>#NOM</BOUCLE_Prof></p>
 		<p>[à partir du (#ENV{date_debut}|affdate) ][jusqu'au (#ENV{date_fin}|affdate)]</p>	
 	</div>
 	<div id="Contenu">
@@ -62,7 +62,7 @@ if (!($_GET['devoirs_seuls'])) {
 ?>
 <B_Seances>
 #ANCRE_PAGINATION
-<BOUCLE_Seances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{titre_mot==#ENV{classe,.}}{titre_mot==#ENV{groupe,.}}{titre_mot==#ENV{matiere,.}}{id_auteur==#ENV{prof,.}}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{pagination #ENV{nb,100000000000000}}{doublons seances}{!par date}>
+<BOUCLE_Seances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{titre_mot==#ENV{classe,.}}{titre_mot==#ENV{groupe,.}}{titre_mot==#ENV{matiere,.}}{id_auteur ?}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{pagination #ENV{nb,100000000000000}}{doublons seances}{!par date}>
 		<div id="documents">
 			<h3 class="titre">#TITRE</h3>
 			<div class="texte">#TEXTE</div>
@@ -92,11 +92,11 @@ if (($_GET['devoirs_seuls'])) {
 				[(#ENV{groupe}|?{'',<th>Groupe</th>})]
 				[(#ENV{matiere}|?{'',<th>Matière</th>})]
 				<th>Devoir</th>
-				[(#ENV{prof}|?{'',<th>Professeur</th>})]
+				[(#ENV{id_auteur}|?{'',<th>Professeur</th>})]
 				<th>Donné le</th>
 			</tr>
 
-<BOUCLE_Devoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{titre_mot==#ENV{classe,.}}{titre_mot==#ENV{groupe,.}}{titre_mot==#ENV{matiere,.}}{id_auteur==#ENV{prof,.}}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{par #ENV{tri}}{pagination #ENV{nb,100000000000000}}{doublons devoirs}{!par date}>
+<BOUCLE_Devoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{titre_mot==#ENV{classe,.}}{titre_mot==#ENV{groupe,.}}{titre_mot==#ENV{matiere,.}}{id_auteur ?}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{par #ENV{tri}}{pagination #ENV{nb,100000000000000}}{doublons devoirs}{!par date}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 				<td>[(#DATE|affdate)]</td>
 				[(#ENV{classe}|?{'',<td>})]
@@ -109,9 +109,9 @@ if (($_GET['devoirs_seuls'])) {
 				<BOUCLE_matieres(MOTS){id_article}{type="Matières"}{"&nbsp;- "}>[(#ENV{matiere}|?{'',#TITRE})]</BOUCLE_matieres>
 				[(#ENV{matiere}|?{'',</td>})]
 				<td>[(#TEXTE)]</td>
-				[(#ENV{prof}|?{'',<td>})]
-				<BOUCLE_profs(AUTEURS){id_article}{"&nbsp;- "}>[(#ENV{prof}|?{'',#NOM})]</BOUCLE_profs>
-				[(#ENV{prof}|?{'',</td>})]
+				[(#ENV{id_auteur}|?{'',<td>})]
+				<BOUCLE_profs(AUTEURS){id_article}{"&nbsp;- "}>[(#ENV{id_auteur}|?{'',#NOM})]</BOUCLE_profs>
+				[(#ENV{id_auteur}|?{'',</td>})]
 				<td>
 <?php
 // selectionne juste la date dans le PS qui contient un texte plus decriptif (Donné Le DATE, en MATIERE avec les CLASSES (GROUPES))

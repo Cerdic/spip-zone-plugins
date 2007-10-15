@@ -73,7 +73,7 @@ modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifi
 				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20">Afficher les 20 dernières séances</a></li>
 <?php if ($auteur_session) {
 	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels">Saisir une séance</a></li>';
-	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&prof='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte">Afficher ses séances</a></li>';
+	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte">Afficher ses séances</a></li>';
 }?>
 			</ul>
 [(#REM)Vérification de l'authentification]
@@ -445,7 +445,7 @@ if ($classes>0) {
 </BOUCLE_ToutesLesMatieres>
 			</select>
 			</fieldset>
-			<input type="hidden" name="prof" value="<?php echo $id_auteur;?>">
+			<input type="hidden" name="id_auteur" value="<?php echo $id_auteur;?>">
 			<input type="Submit" value="Valider classe<?php if ($classes>0) echo "s"?> et matière" name="classe_matiere">
 		</form>
 <?php
@@ -523,7 +523,7 @@ if($_GET['classe_matiere']) {
 <B_Seances>
 <div class="bloc">
 <h2>Dernières entrées du même type dans le cahier de textes&nbsp;:</h2>
-<BOUCLE_Seances(ARTICLES){titre_mot="Description de séance"}{id_mot==#ENV{id_classe0,.}}{id_mot==#ENV{id_groupe,.}}{id_mot==#ENV{id_matiere,.}}{id_auteur==#ENV{prof,.}}{!par date}{0,10}>
+<BOUCLE_Seances(ARTICLES){titre_mot="Description de séance"}{id_mot==#ENV{id_classe0,.}}{id_mot==#ENV{id_groupe,.}}{id_mot==#ENV{id_matiere,.}}{id_auteur ?}{!par date}{0,10}>
 		<div id="documents">
 			<h3 class="titre">#TITRE</h3>
 			<div class="texte">#TEXTE</div>

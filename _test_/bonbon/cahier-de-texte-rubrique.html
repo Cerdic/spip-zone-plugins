@@ -76,7 +76,7 @@
 ?>#URL_LOGOUT<?php
 	echo "\" title=\"d&eacute;connexion imm&eacute;diate !\">cliquez ici</a>)</p>\n";
 	echo '			<a href="cahier-de-texte-saisie.php3" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels">Saisir une s&eacute;ance</a>&nbsp;|';
-	echo '			 <a href="cahier-de-texte-affichage.php3?prof='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entr&eacute;es du cahier de texte">Afficher ses s&eacute;ances</a>';
+	echo '			 <a href="cahier-de-texte-affichage.php3?id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entr&eacute;es du cahier de texte">Afficher ses s&eacute;ances</a>';
 } else {?>
 			#LOGIN_PUBLIC
 <?php }
