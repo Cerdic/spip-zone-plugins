@@ -66,14 +66,16 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$outil = &$outils[$outil_];
 	$actif = $outil['actif'];
 	$index = $outil['index'];
+	// la description de base est dans le fichier de langue
+	$descrip = _T('cout:'.$outil['id'].':description');
 	// remplacement des puces
-	$descrip = str_replace('#PUCE', definir_puce(), $outil['description']);
+	$descrip = str_replace('#PUCE', definir_puce(), $descrip);
 	// remplacement des zone input de format [[label->varable]]
 	$descrip = preg_replace(',(\[\[([^][]*)->([^]]*)\]\]),msS', '<fieldset><legend>\\2</legend><div style="margin:0;">\\3</div></fieldset>', $descrip);
 	// remplacement des variables de format : %variable%
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $descrip, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
+//cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	$ok_input = $ok_valeur = $ok_visible = '';
 	$outil['nb_variables'] = 0; $variables = array();
 	for($i=0;$i<count($t);$i+=2) if (strlen($var=trim($t[$i+1]))) {

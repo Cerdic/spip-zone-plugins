@@ -123,7 +123,7 @@ function decoupe_notes_orphelines(&$texte) {
 function cs_decoupe($texte){
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// verification des metas qui stockent les liens d'image
-	if (!isset($GLOBALS['meta']['cs_decoupe']) || isset($GLOBALS['var_mode'])) {
+	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
 		include_spip('outils/decoupe');
 		decoupe_installe();
 	}

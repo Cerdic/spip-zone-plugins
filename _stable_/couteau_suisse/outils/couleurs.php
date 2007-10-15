@@ -122,7 +122,7 @@ function couleurs_rempl($texte) {
 function couleurs_pre_typo($texte) {
 	if (strpos($texte, '[')===false || strpos($texte, '/')===false) return $texte;
 	// les raccoucis de couleur sont-il dispo ?
-	if (!isset($GLOBALS['meta']['cs_couleurs']) || isset($GLOBALS['var_mode']))
+	if (!isset($GLOBALS['meta']['cs_couleurs']))
 		couleurs_installe();
 	// pour les callbacks
 	global $outil_couleurs;

@@ -37,7 +37,7 @@ cs_log(" -- exec_charger_description_outil_dist() - Appel de config_outils.php :
 
 cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil_id, $script) :");
 	$description_outil = charger_fonction('description_outil', 'inc');
-	cs_initialisation_d_un_outil($outil_id, $description_outil, true);
+	$descrip = cs_initialisation_d_un_outil($outil_id, $description_outil, true);
 
 		include_spip('inc/presentation');
 		$s = debut_cadre_relief('', true);
@@ -56,7 +56,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 		$act = $actif?'des':'';
 		$s .= '<a href="'.generer_url_ecrire(_request('source'),'cmd=toggle&outil='.$outil_id).'" title="'._T("cout:{$act}activer_outil").'">'._T("cout:{$act}activer")."</a></div>";
 		include_spip('inc/texte');
-		$s .= propre($outil['description']);
+		$s .= propre($descrip);
 
 		if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T($GLOBALS['spip_version_code']<1.92?'cout:jquery1':'cout:jquery2') . '</p>';
 		if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';

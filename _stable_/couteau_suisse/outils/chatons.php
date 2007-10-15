@@ -13,7 +13,7 @@ function cs_rempl_chatons($texte) {
 
 function chatons_pre_typo($texte) {
 	if (strpos($texte, ':')===false) return $texte;
-	if (!isset($GLOBALS['meta']['cs_chatons']) || isset($GLOBALS['var_mode']))
+	if (!isset($GLOBALS['meta']['cs_chatons']))
 		chatons_installe();
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_chatons', $texte);
 }

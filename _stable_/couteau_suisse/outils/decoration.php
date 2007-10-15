@@ -102,7 +102,7 @@ function decoration_rempl($texte) {
 // fonction pipeline
 function decoration_pre_typo($texte) {
 	if (strpos($texte, '<')===false || !defined('_decoration_BALISES')) return $texte;
-	if (!isset($GLOBALS['meta']['cs_decoration']) || isset($GLOBALS['var_mode']))
+	if (!isset($GLOBALS['meta']['cs_decoration']))
 		decoration_installe();
 	// pour les callbacks
 	global $deco_balises;

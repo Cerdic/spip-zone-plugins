@@ -103,7 +103,7 @@ function cs_rempl_smileys($texte) {
 // fonction principale (pipeline pre_typo)
 function cs_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
-	if (!isset($GLOBALS['meta']['cs_smileys']) || isset($GLOBALS['var_mode']))
+	if (!isset($GLOBALS['meta']['cs_smileys']))
 		smileys_installe();
 //cs_log('smileys trouvés !');
 	// appeler cs_rempl_smileys() une fois que certaines balises ont ete protegees

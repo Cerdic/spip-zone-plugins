@@ -39,7 +39,6 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	$outil = &$outils[$outil_];
 	if (!isset($outil['categorie'])) $outil['categorie'] = 'divers';
 	if (!isset($outil['nom'])) $outil['nom'] = _T('cout:'.$outil['id'].':nom');
-	if (!isset($outil['description'])) $outil['description'] = _T('cout:'.$outil['id'].':description');
 	$outil['actif'] = isset($metas_outils[$outil['id']])?$metas_outils[$outil['id']]['actif']:0;
 	// Si Spip est trop ancien ou trop recent...
 	// TODO : revoir tout ça avec compare_version() et <necessite>
@@ -52,7 +51,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	if (isset($outil['code:options'])) $outil['code:options'] = cs_parse_code_php($outil['code:options']);
 	if (isset($outil['code:fonctions'])) $outil['code:fonctions'] = cs_parse_code_php($outil['code:fonctions']);
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
-	$outil['description'] = $description_outil($outil_, 'admin_couteau_suisse', $modif);
+	return $description_outil($outil_, 'admin_couteau_suisse', $modif);
 }
 
 // lit ecrit les metas et initialise $cs_metas_pipelines
@@ -108,7 +107,8 @@ cs_log("[#$rand]  -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 
 	// initialiser chaque outil
 	$id = 0;
-	foreach($temp = $outils as $outil) $id = cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
+	foreach($outils as $outil)
+		cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
 cs_log("[#$rand]  -- cs_initialise_includes()... cout_fonctions.php sera probablement inclus.");

@@ -304,10 +304,11 @@ echo '<p style="color:red;">Testez la nouvelle interface du plugin : <a href="',
 	foreach($temp = $outils as $outil) $categ[_T('cout:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 
 	$js = ''; $marge = '0';
+	$description_outil = charger_fonction('description_outil', 'inc');
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
 		foreach($temp = $outils as $outil) if ($outil['categorie']==$i) {
-			$s .= ligne_outil($outil, $js, $afficher_outil==$outil['index']) . "\n";
+			$s .= ligne_outil($outil, $js, $afficher_outil==$outil['index'], $description_outil) . "\n";
 			$basics[] = $outil['index'];
 		}
 		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
@@ -346,7 +347,7 @@ cs_log("Fin   : exec_admin_couteau_suisse()");
 }
 
 // affiche un outil sur une ligne
-function ligne_outil($outil, &$js, $afficher){
+function ligne_outil($outil, &$js, $afficher, $description_outil){
 	static $id_input=0;
 	$inc = $outil_id = $outil['id'];
 	$actif = $outil['actif'];
@@ -388,7 +389,8 @@ function ligne_outil($outil, &$js, $afficher){
 		$p = debut_block_depliable($afficher, $pliage_id);
 		else $p = $afficher?debut_block_visible($pliage_id):debut_block_invisible($pliage_id);
 	$p .= "\n<div class='detail_outil'>";
-	$p .= $outil['description'];
+	// horrible : ça prends plus de temps qu'avant, mais ca va bientot disparaitre !!
+	$p .= cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
 	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T($GLOBALS['spip_version_code']<1.92?'cout:jquery1':'cout:jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
 	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('cout:contrib', array('id'=>$outil['contrib'])) . '</p>';

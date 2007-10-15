@@ -37,10 +37,10 @@ cs_log(" -- exec_description_outil_dist() - Appel de config_outils.php : nb_outi
 
 cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil, $script) :");
 	$description_outil = charger_fonction('description_outil', 'inc');
-	cs_initialisation_d_un_outil($outil, $description_outil, true);
+	$descrip = cs_initialisation_d_un_outil($outil, $description_outil, true);
 cs_log("Fin   : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	
 
 	include_spip('inc/texte');
-	ajax_retour(propre($outils[$outil]['description']));
+	ajax_retour(propre($descrip));
 }
 ?>
