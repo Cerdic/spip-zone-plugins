@@ -15,6 +15,5 @@ TO-DO:
 - icone 'casier à courrier' à revoir. Idem 'listes de diffusion'
 - import/export: gérer les fichiers compressés
 - import/export: proposer séparateur tab ou ";", a-la-CSV
-- base_version dans plugin.xml 
-- revoir le principe de mise à jour (appel à base/*). 
+- revoir le principe de mise à jour (appel à base/*). (en cours CP 20071016)
 

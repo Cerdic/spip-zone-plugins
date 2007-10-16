@@ -1,5 +1,11 @@
 <?php
+// base/spip-listes.php
 
+// $LastChangedRevision: 16063 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2007-10-16 15:09:37 +0200 (mar., 16 oct. 2007) $
+
+//////////////////////////////////
 // Ici on declare la structure des tables au compilo
 // Inspiré de spip-lettres, Pierre Basson
 

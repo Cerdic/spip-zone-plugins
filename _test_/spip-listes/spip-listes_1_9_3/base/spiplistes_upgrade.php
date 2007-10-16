@@ -293,7 +293,8 @@ spiplistes_log('creation des tables spip_listes', LOG_DEBUG);
 			
 			ecrire_metas();
 		}
-spiplistes_log("spip-listes $current_version","spiplistes", LOG_DEBUG);
+		
+		// ajouter ici les patches si besoin pour nouvelles versions
 	}
 	
 	function spiplistes_vider_tables() {

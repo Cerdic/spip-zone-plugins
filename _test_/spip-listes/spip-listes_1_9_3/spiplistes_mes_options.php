@@ -283,8 +283,22 @@ $spiplistes_items = array(
 		, 'desc' => null
 		)
 	);
+
+	include_spip('inc/options_spip_listes');
 	
-include_spip('base/spip-listes');
-include_spip('inc/options_spip_listes');
+	$spiplistes_name = __plugin_get_real_prefix();
+	$spiplistes_version = __plugin_get_real_version();
+	$spiplistes_version_current =  lire_meta('spiplistes_version');
+	$spiplistes_version_base = __plugin_get_real_version_base();
+
+spiplistes_log("STARTING $spiplistes_name version: $spiplistes_version - version_base: $spiplistes_version_base current_version $spiplistes_version_current", LOG_DEBUG);
+	
+	if(!$spiplistes_version) {
+	// créer la base 
+		include_spip('base/spip-listes'); // pas sécure. A revoir. (CP-20071016)
+	}
+	else if($spiplistes_version > $spiplistes_version_current) {
+	// faire upgrade
+	}
 
 ?>
