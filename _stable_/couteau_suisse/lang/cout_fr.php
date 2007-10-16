@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Le Couteau Suisse',
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Le&nbsp;Couteau&nbsp;Suisse'.</p>"
+		."<p>Version : v@version@</p>"
 		."<p>Lien de documentation : [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>"
 		."<p>R&eacute;initialisations :
 _ - [des outils cach&eacute;s->@hide@]

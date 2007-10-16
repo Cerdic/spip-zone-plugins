@@ -282,9 +282,13 @@ cs_log("Début : exec_admin_couteau_suisse()");
 
 	debut_gauche();
 	debut_boite_info();
+	include_spip('inc/plugin');
+	$cs_infos = plugin_get_infos('couteau_suisse');
 	echo propre(_T('cout:help', array(
 		'reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'),
-		'hide' => generer_url_ecrire(_request('exec'),'cmd=showall'))));
+		'hide' => generer_url_ecrire(_request('exec'),'cmd=showall'),
+		'version' => $cs_infos['version']
+	)));
 	fin_boite_info();
 	$aide_racc = cs_aide_raccourcis();
 	if(strlen($aide_racc)) {
