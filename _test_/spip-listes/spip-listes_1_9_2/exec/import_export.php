@@ -297,7 +297,7 @@ function exec_import_export(){
 		echo "<fieldset> ";
 		echo "<legend>"._T('spiplistes:abonnement_newsletter')."</legend>";
 		echo _T('spiplistes:importer_preciser');
-		echo "<form action='$PHP_SELF?etape=2' method='post'enctype='multipart/form-data' name='importform'> ";
+		echo "<form action='./?exec=import_export&etape=2' method='post'enctype='multipart/form-data' name='importform'> ";
 		echo'<div style="text-align: left;">';
 				echo'<strong>Format :</strong><br>';
 				echo'<input name="suppl_abo" value="html" checked="checked"  type="radio">'._T('spiplistes:html').'<br>';
