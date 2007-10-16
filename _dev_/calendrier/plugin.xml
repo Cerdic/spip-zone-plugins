@@ -1,9 +1,15 @@
 <plugin>
 	<nom>Calendrier</nom>
-	<version>0.5</version>
-	<etat>test</etat>
+	<version>0.6</version>
+	<etat>experimental</etat>
 	<prefix>Calendrier</prefix>
-	<auteur>James, (c) 2006 Licence GNUL/GPL</auteur>
-	<description>Outils simples de squelettes pour besoin simple en mati&#234;re de pagination chronologique.<BR />[d&#233;monstration sur votre site->../spip.php?page=calendrier_demo]</description>
+	<auteur>James, et qui voudra (c) 2006-2007 Licence GNUL/GPL</auteur>
+	<description>
+	Outils simples de squelettes pour besoin simple en mati&#234;re de pagination chronologique.<br />
+	[d&#233;monstration sur votre site->../spip.php?page=calendriers]
+	</description>
 	<fonctions>calendrier_fonctions.php</fonctions>
+	<lien>http://www.spip-contrib.net/Gestion-de-dates-et-calendriers</lien>
+	<options>calendrier_options.php</options>
+	<necessite id="CFG" version="[1.0;]" />
 </plugin>

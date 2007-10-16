@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="#LANG" xml:lang="#LANG"  dir="#LANG_DIR">
+
+<head>
+	<title>Calendriers</title>
+	<INCLURE{fond=inc-head}>
+	<link rel="stylesheet" href="[(#CHEMIN{calendrier.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; 
+	<a href="#URL_PAGE{calendrier_demo}">Exemple #[(#REM)]CALENDRIER</a></div>
+
+	<div id="conteneur">
+
+	<p><a href="#URL_ECRIRE{admin_plugin}"><:icone_admin_plugin:></a></p>
+	<p><a href="#URL_ECRIRE{cfg,cfg=calendrier}"><:calendrier:config_calendrier:></a></p>
+
+	[(#REM)
+		On appelle le squelette avec le paramètre date.
+		Si la date est toujours transmise dans un modèle, on force malgré tout
+		afin de faire appel au bon cache (calculé en fonction des paramètres passés).
+		On envoi la liste des jours sur lesquels faire un lien
+	][(#MODELE{minical/mois}
+		{date}
+		{jours=#ARRAY{0,1999-02-02,1,2007-10-04,3,2007-10-07,4,2007-10-12,5,2007-09-19,6,2007-11-22}}
+	)]
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+[(#REM) titre= Calendriers]
+[(#REM) descriptif= Calendriers <p><a href="../spip.php?page=calendriers">tests</a></p>
+]
+#CACHE{0}
+<form method="post">[
+	(#ENV{_cfg_}|form_hidden)
+	]<fieldset>
+		<legend><:cal_par_mois:>&nbsp;:</legend>
+
+		<p>
+			<label for= "navigation"><:navigation:>&nbsp;: </label>
+			<input type="text" name="navigation" size="4" value="#ENV{navigation,oui}" />
+			<span>(oui=actif, par défaut, non=désactivé)</span>
+			<label for= "par_annee"><:par_annee:>&nbsp;: </label>
+			<input type="text" name="par_annee" size="4" value="#ENV{par_annee}" />
+			<span>(oui=actif)</span>
+		</p>
+
+		<p>
+			<label for= "premier_jour_culturel"><:premier_jour_culturel:>&nbsp;: </label>
+			<input type="text" name="premier_jour_culturel" size="4" value="#ENV{premier_jour_culturel}" />
+			<span>(1=dimanche, 2=lundi, ... vide=automatique, c'est-à-dire dimanche pour les pays
+			anglo-saxons et le japon, lundi sinon)</span>
+		</p>
+
+		<p>
+			<label for= "jour_semaine_abbr"><:jour_semaine_abbr:>&nbsp;: </label>
+			<input type="text" name="jour_semaine_abbr" size="4" value="#ENV{jour_semaine_abbr}" />
+			<span>(abbr=jour abrégé, initiale=initiale du jour, ... vide=jour complet)</span>
+		</p>
+
+		<p>
+			<label for= "revenir_aujourdhui"><:revenir_aujourdhui:>&nbsp;: </label>
+			<input type="text" name="revenir_aujourdhui" size="4" value="#ENV{revenir_aujourdhui,oui}" />
+			<span>(oui=actif, par défaut, non=désactivé)</span>
+		</p>
+	</fieldset>
+
+	<div>
+		<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+	</div>
+</form>

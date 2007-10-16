@@ -1,0 +1,14 @@
+[(#REM) Cellule de tableau pour un jour dans un calendrier mensuel en SPIP
+
+	jour: le jour (1..31)
+	jour_semaine: le jour de la semaine (1..7)
+	url: lien cliquable eventuel
+	aujourdhui: 1 si date du jour, non defini sinon
+	hors_preiode: mois_precedent, mois_suivant ou vide 
+
+]<td class="[(#ENV{hors_periode}) ][(#ENV{aujourdhui}|?{aujourdhui}) ]jour_#ENV{jour_semaine}">#SET{lien,''}[
+	[<a href="(#ENV{url})">#SET{lien,' '}]
+		(#ENV{jour})
+	[(#GET{lien}|?{</a>})]][
+		(#ENV{jour}|?{'',&nbsp;})
+]</td>

@@ -46,23 +46,100 @@ function calcul_calendrier($plage, $nom, $bloc_cal = true, $modele = 'articles_m
 	return recuperer_fond("modeles/calendrier_$modele",$calendrier);
 }
 
-// http://doc.spip.org/@thead_calendrier
-function thead_calendrier($lang, $forme = 'abbr'){
-	$ret = '';
-	$debut = 2;
-	if($lang == 'en') $debut = 1;
-	$forme = $forme ? '_'.$forme : '';
-	for($i=0;$i<7;$i++) {
-		$ret .= '
-				<th class="jour'.$debut.'" scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
-		_T('date_jour_'.$debut.$forme) . '</abbr></th>';
-		$debut = $debut == 7 ? 1 : $debut+1;
-	}
-	return '
-		<thead>
-			<tr>' .$ret. '
-			</tr>
-		</thead>'."\n";
+/*
+
+	Les fonctions génériques de calcul de date du calendrier
+
+*/
+
+//renvoie un jour de semaine compatible avec SPIP
+function jour_semaine($jour) {
+	return ((($jour-1)%7)+1);
+}
+
+function date_jour($jour, $abbr='') {
+	return _T('date_jour_'.$jour.($abbr ? '_'.$abbr : ''));
+}
+
+function minical_compteur($code) {
+	static $cpt = 0;
+	return $code.(++$cpt);
+}
+
+//format acceptes: AAAA, AAAA-MM, AAAA-MM-JJ
+function date_amj($date) {
+	$annee = substr($date, 0, 4);
+	$mois = ($m = substr($date, 5, 2)) ? $m : '01';
+	$jour = ($j = substr($date, 8, 2)) ? $j : '01';
+	return array($annee, $mois, $jour);
+}
+
+function amj_date($amj, $format = 'Y-m-d') {
+	list($annee, $mois, $jour) = $amj;
+	return date($format, mktime(12, 0, 0, $mois, $jour, $annee));
+}
+
+function date_voisine($date, $decal=0, $unite='', $format='Y-m-d') {
+	list($annee, $mois, $jour) = date_amj($date);
+	if($unite == 'jour' OR $unite == 'jours') $jour = $jour + $decal;
+	if($unite == 'mois') $mois = $mois + $decal;
+	if($unite == 'annee' OR $unite == 'annees') $annee = $annee + $decal;
+	$amj = array($annee, $mois, $jour);
+	return amj_date($amj, $format);
+}
+
+function jour_precedent($date) {
+	return date_voisine($date, -1, 'jour');
+}
+
+function jour_suivant($date) {
+	return date_voisine($date, +1, 'jour');
+}
+
+function mois_precedent($date) {
+	return date_voisine($date, -1, 'mois', 'Y-m');
+}
+
+function mois_suivant($date) {
+	return date_voisine($date, +1, 'mois', 'Y-m');
+}
+
+function annee_precedente($date) {
+	return date_voisine($date, -1, 'annee', 'Y-m');
+}
+
+function annee_suivante($date) {
+	return date_voisine($date, +1, 'annee', 'Y-m');
+}
+
+function debut_semaine($date, $pjc = 2) {
+	list($annee, $mois, $jour) = date_amj($date);
+	$w_day = date("w", mktime(12,0,0,$mois, $jour, $annee));
+	if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
+	$debut = $jour-$w_day+$pjc-1;
+	$amj = array($annee, $mois, $debut);
+	return amj_date($amj);
+}
+
+function debut_mois($date) {
+	list($annee, $mois, $jour) = date_amj($date);
+	$amj = array($annee, $mois, 1);
+	return amj_date($amj);
+}
+
+function numero_semaine($date) {
+	list($annee, $mois, $jour) = date_amj($date);
+	$semaine = date("W", mktime(12,0,0,$mois, $jour, $annee));
+	return sprintf('%02d', $semaine);
+}
+
+function teste_mois($date, $date_test) {
+	$test = strpos($date_test, '-') ? affdate($date_test, 'mois') : $date_test;
+	return (affdate($date, 'mois') == $test) ? $date : '';
+}
+
+function est_aujourdhui($date) {
+	return affdate($date, 'Y-m-d') == date('Y-m-d') ? $date : '';
 }
 
 ?>

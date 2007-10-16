@@ -1,15 +1,4 @@
-/* CSS Document */
-
-/* uniquement pour la page de demonstration */
-#contenu .encart{
-	width: 12em; }
-
-/* habillage de la balise #CALENDRIER */
-div.calendrier{
-	/*border-top: 1px solid #F0F0F0;*/
-}
-
-div.calendrier table{
+table.calendrier{
 	width: 100%;
 	font-size: 0.8em;
 	text-align: center;
@@ -17,22 +6,22 @@ div.calendrier table{
 	border-collapse: collapse;
 }
 
-div.calendrier table caption{
+table.calendrier caption{
 	margin: 0 auto;
 }
 
-div.calendrier table th{
+table.calendrier th{
 	color: #493;
 	background: transparent;
 }
 
-div.calendrier table td{
+table.calendrier td{
 	width: 14%;
 	line-height: 2em;
 	border: 1px solid #EEE;
 }
 
-div.calendrier table td a{
+table.calendrier td a{
 	display: block;
 	background: #EFA;
 	color: #493;
@@ -40,19 +29,15 @@ div.calendrier table td a{
 	text-decoration: none;
 }
 
-div.calendrier table td.today a{
-	border: 1px solid #493;
-}
-
-div.calendrier table td a:hover{
+table.calendrier td a:hover{
 	background: #DBB8DC;
 	color: #636;
 }
 
-div.calendrier table td.today a:hover{
-	border: 1px solid #636;
+table.calendrier td.aujourdhui{
+	border: 1px solid #493;
 }
 
-div.calendrier span{
-	display: none;
+table.calendrier td.mois_precedent, table.calendrier td.mois_suivant{
+	color: #EFA;
 }

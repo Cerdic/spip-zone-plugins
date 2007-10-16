@@ -1,0 +1,174 @@
+[(#REM) Le mini calendrier mensuel est une table répondant à la recommandation xhtml 1.0 strict
+
+	date: date du mois à afficher sous forme de calendrier (date)
+	lien_navigation: Si la page affichant ce calendrier n'est pas celle de destination des liens (url)
+	date_precedente: Si on force un lien vers une date mensuelle passée (date)
+	date_suivante: Si on force un lien vers une date mensuelle future (date)
+	annee_precedente: Si on force un lien vers une date mensuelle d'une année passée (date)
+	annee_suivante: Si on force un lien vers une date mensuelle d'une année future (date)
+	jours: Liste des jours sur lesquels afficher un lien (tableau)
+
+][(#SET{url,[(#ENV{lien_navigation,#SELF})]})][ <!-- le lien de base pour la navigation par mois est : (#GET{url}) -->
+][(#SET{date_precedente,[(#ENV{date_precedente,[(#DATE|mois_precedent)]})]})
+][(#SET{date_suivante,[(#ENV{date_suivante,[(#DATE|mois_suivant)]})]})
+][(#SET{id_calendrier,<:calendrier:minical|minical_compteur:>})
+]<table id="#GET{id_calendrier}" class="calendrier" summary="<:cal_par_mois:>">
+
+	[(#REM) Ligne de navigation par mois ou par année
+
+	]<caption>[[(#REM) debut CONFIG calendrier/navigation]
+		[(#CONFIG{calendrier/par_annee}|=={oui}|?{' '})
+		[(#SET{annee_precedente,[(#ENV{annee_precedente,[(#DATE|annee_precedente)]})]})]
+		[(#SET{annee_suivante,[(#ENV{annee_suivante,[(#DATE|annee_suivante)]})]})]
+		<a
+			href="[(#GET{url}|parametre_url{date,#GET{annee_precedente}})]"
+			title="[(#GET{annee_precedente}|nom_mois)] [(#GET{annee_precedente}|annee)]"
+		>&#171;</a>&nbsp;
+		<strong>[(#DATE|annee)]</strong>
+		&nbsp;<a
+			href="[(#GET{url}|parametre_url{date,#GET{annee_suivante}})]"
+			title="[(#GET{annee_suivante}|nom_mois)] [(#GET{annee_suivante}|annee)]"
+		>&#187;</a>
+		<br />[(#REM) fin CONFIG calendrier/par_annee]]
+		[(#GET{date_precedente}|?{' '})<a
+			href="[(#GET{url}|parametre_url{date,#GET{date_precedente}})]"
+			title="[(#GET{date_precedente}|nom_mois)] [(#GET{date_precedente}|annee)]"
+		>&#171;</a>&nbsp;]
+		(#CONFIG{calendrier/navigation}|!={non}|?{' '})
+	    ]<strong>[(#DATE|nom_mois)][(#CONFIG{calendrier/par_annee}|=={oui}|?{'',' '})[(#DATE|annee)]]</strong>[
+		(#CONFIG{calendrier/navigation}|!={non}|?{' '})
+		[(#GET{date_suivante}|?{' '})&nbsp;<a
+			href="[(#GET{url}|parametre_url{date,#GET{date_suivante}})]"
+			title="[(#GET{date_suivante}|nom_mois)] [(#GET{date_suivante}|annee)]"
+		>&#187;</a>]]
+	</caption>
+
+	[(#REM) Affichage des jours de la semaine
+
+		Dépend de la langue balise #LANG :
+		par convention, les pays anglosaxons et le Japon débutent la semaine par le dimanche
+		les autres pays commencent par le lundi.
+		On prévoit malgré cette convention un moyen de forcer le jour de début,
+		utile par exemple pour les quebecois francophones qui utilisent des calendriers anglosaxons
+		Appelons ce jour le "début de semaine culturel" ou "premier jour culturel"
+		(à noter toutefois qu'un français du vieux continent qui consulte un calendrier canadien écrit en français n'est pas soumis
+		à cette contrainte culturelle. Le mieux serait peut-être que SPIP gére la #LANG fr-ca pour prendre en compte 
+		ce code dans la convention adoptée par ce squelette)
+		
+		Concernant l'affichage des jours, le texte visible peut-être abrégé ou complet.
+		On peut aussi afficher une itiniale du jour. 
+
+	][(#CONFIG{calendrier/premier_jour_culturel}|?{' '})
+		[(#SET{pjc,#CONFIG{calendrier/premier_jour_culturel}})]
+	][(#CONFIG{calendrier/premier_jour_culturel}|?{'',' '})
+		[(#LANG|match{en|ja}|?{' '})
+			[(#SET{pjc,1})]
+		][(#LANG|match{en|ja}|?{'',' '})
+			[(#SET{pjc,2})]
+		]
+	][(#SET{jour_1,[(#GET{pjc}|plus{0}|jour_semaine)]})]
+	[(#SET{jour_2,[(#GET{pjc}|plus{1}|jour_semaine)]})]
+	[(#SET{jour_3,[(#GET{pjc}|plus{2}|jour_semaine)]})]
+	[(#SET{jour_4,[(#GET{pjc}|plus{3}|jour_semaine)]})]
+	[(#SET{jour_5,[(#GET{pjc}|plus{4}|jour_semaine)]})]
+	[(#SET{jour_6,[(#GET{pjc}|plus{5}|jour_semaine)]})]
+	[(#SET{jour_7,[(#GET{pjc}|plus{6}|jour_semaine)]})
+	]<thead>
+	<tr>
+		<th class="jour_#GET{jour_1}">
+		<abbr title="[(#GET{jour_1}|date_jour)]">
+			[(#GET{jour_1}|date_jour{[(#CONFIG{calendrier/jour_semaine_abbr})]})]
+		</abbr>
+		</th>
+		<th class="jour_#GET{jour_2}">
+		<abbr title="[(#GET{jour_2}|date_jour)]">
+			[(#GET{jour_2}|date_jour{[(#CONFIG{calendrier/jour_semaine_abbr})]})]
+		</abbr>
+		</th>
+		<th class="jour_#GET{jour_3}">
+		<abbr title="[(#GET{jour_3}|date_jour)]">
+			[(#GET{jour_3}|date_jour{[(#CONFIG{calendrier/jour_semaine_abbr})]})]
+		</abbr>
+		</th>
+		<th class="jour_#GET{jour_4}">
+		<abbr title="[(#GET{jour_4}|date_jour)]">
+			[(#GET{jour_4}|date_jour{[(#CONFIG{calendrier/jour_semaine_abbr})]})]
+		</abbr>
+		</th>
+		<th class="jour_#GET{jour_5}">
+		<abbr title="[(#GET{jour_5}|date_jour)]">
+			[(#GET{jour_5}|date_jour{[(#CONFIG{calendrier/jour_semaine_abbr})]})]
+		</abbr>
+		</th>
+		<th class="jour_#GET{jour_6}">
+		<abbr title="[(#GET{jour_6}|date_jour)]">
+			[(#GET{jour_6}|date_jour{[(#CONFIG{calendrier/jour_semaine_abbr})]})]
+		</abbr>
+		</th>
+		<th class="jour_#GET{jour_7}">
+		<abbr title="[(#GET{jour_7}|date_jour)]">
+			[(#GET{jour_7}|date_jour{[(#CONFIG{calendrier/jour_semaine_abbr})]})]
+		</abbr>
+		</th>
+	</tr>
+	</thead>
+
+	[(#REM) Corps du mini-calendrier
+
+		Le corps du calendrier contient entre 4 et 6 lignes de tableau selon le mois :
+		-* un mois de février d'une année non-bissextile commençant par un premier jour "culturel" contient 28 jours
+		   répartis en 4 semaines de 7 jours affichées sur une seule lignes, soit 4 lignes
+		   c'est le cas, par exemple, pour la langue 'fr',
+		   des années 1999, 2010, 2021 etc... a priori tous les 11 ans ?
+		-* un mois de 31 jours dont le premier jour est un 6ieme ou un 7ieme jour "culturel", ou
+		   un mois de 30 jours dont le premier jour est un 7ieme jour "culturel"
+		   est affiché sur 6 lignes
+		-* tous les autres cas affichent un mois sur 5 lignes de tableau
+
+		Pour la première semaine, la ligne de tableau peut commencer par des jours du mois precedent.		
+		Pour les cinquième et sixième semaines, la ligne de tableau peut se terminer par des jours du mois suivant.
+		Si une cellule du tableau représente le jour actuel, le marquer pour affichage dans une classe CSS particulière
+
+		Prevoir un systeme pour afficher ou non les jours hors période, c-à-d du mois précédent ou suivant.
+
+	]<tbody>
+
+		[(#SET{debut,[(#DATE|debut_mois|debut_semaine{#GET{pjc}}|affdate{Y-m-d})]})]
+		[<tr id="#GET{id_calendrier}S(#GET{debut})">[
+			(#MODELE{minical/semaine}{date}{hors_periode=mois_precedent}{pjc=#GET{pjc}}{debut=#GET{debut}}{jours}{url=#GET{url}})
+		]</tr>]
+
+		[(#SET{debut,[(#GET{debut}|date_voisine{7,jour})]})]
+		[<tr id="#GET{id_calendrier}S(#GET{debut})">[
+			(#MODELE{minical/semaine}{date}{pjc=#GET{pjc}}{debut=#GET{debut}}{jours}{url=#GET{url}})
+		]</tr>]
+
+		[(#SET{debut,[(#GET{debut}|date_voisine{7,jour})]})]
+		[<tr id="#GET{id_calendrier}S(#GET{debut})">[
+			(#MODELE{minical/semaine}{date}{pjc=#GET{pjc}}{debut=#GET{debut}}{jours}{url=#GET{url}})
+		]</tr>]
+
+		[(#SET{debut,[(#GET{debut}|date_voisine{7,jour})]})]
+		[<tr id="#GET{id_calendrier}S(#GET{debut})">[
+			(#MODELE{minical/semaine}{date}{pjc=#GET{pjc}}{debut=#GET{debut}}{jours}{url=#GET{url}})
+		]</tr>]
+
+		[(#SET{debut,[(#GET{debut}|date_voisine{7,jour})]})]
+		[<tr id="#GET{id_calendrier}S(#GET{debut}|teste_mois{#DATE})">[
+			(#MODELE{minical/semaine}{date}{hors_periode=mois_suivant}{pjc=#GET{pjc}}{debut=#GET{debut}}{jours}{url=#GET{url}})
+		]</tr>]
+
+		[(#SET{debut,[(#GET{debut}|date_voisine{7,jour})]})]
+		[<tr id="#GET{id_calendrier}S(#GET{debut}|teste_mois{#DATE})">[
+			(#MODELE{minical/semaine}{date}{hors_periode=mois_suivant}{pjc=#GET{pjc}}{debut=#GET{debut}}{jours}{url=#GET{url}})
+		]</tr>]
+		
+		[(#CONFIG{calendrier/revenir_aujourdhui}|!={non}|?{' '})
+		<tr class="revenir_aujourdhui">
+			<td colspan="7">
+			<a[ href="(#GET{url}|parametre_url{date,''})"]><:calendrier:revenir_aujourdhui:></a>
+			</td>
+		</tr>]
+
+	</tbody>
+</table>
