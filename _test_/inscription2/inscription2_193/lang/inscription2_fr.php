@@ -112,6 +112,9 @@ Si vous n\'avez pas demand&eacute; cette inscription ou ne voulez plus faire par
 Merci de votre confiance.
 
 L\'&eacute;quipe de @nom_site@',
+'rappel_password' => 'Rappel de votre mot de passe',
+'rappel_login' => 'Rappel : votre identifiant est : ',
+'choisir_nouveau_password' => 'Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant',
 'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.',
 'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
 'demande_password' => 'Votre mot de passe&nbsp;:',

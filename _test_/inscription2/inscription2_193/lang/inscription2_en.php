@@ -110,6 +110,9 @@ If you did not ask for this inscription or you do not want to form part of our s
 Thank you for your confidence.
 
 The @nom_site@\'s Team',
+'rappel_password' => 'Reminder of your password',
+'rappel_login' => 'Reminder : your login is : ',
+'choisir_nouveau_password' => 'You will be able to choose a new password by clicking on the following link',
 'lisez_mail' => 'An email has been just sent to the provided address. To activate your account please follow the instructions.',
 'mail_renvoye' => 'This email address was already recorded. Please activate your account following the instructions contained in the mail.',
 'redemande_password' => 'Please fill your password again:',

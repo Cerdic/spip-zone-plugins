@@ -135,13 +135,13 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 	
 	$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
-			. _T('Rappel de votre mot de passe')."\n\n"
-			. _T('Vous pourrez choisir un nouveau mot de passe en cliquant le lien suivant')."\n\n"
+			. _T('inscription2:rappel_password')."\n\n"
+			. _T('inscription2:choisir_nouveau_password')."\n\n"
 
 			. $adresse_site."/?page=inscription2_confirmation&id="
 			. $var_user['id_auteur']."&cle=".$var_user['alea_actuel']."&mode=conf"."\n\n"
-			. _T('inscription2:Rappel : votre login est : ') . $var_user['login'] ;
-	$sujet = "[$nom_site_spip] "._T('Rappel de votre mot de passe');
+			. _T('inscription2:rappel_login') . $var_user['login'] ;
+	$sujet = "[$nom_site_spip] "._T('inscription2:rappel_password');
 	}
 	
 	
