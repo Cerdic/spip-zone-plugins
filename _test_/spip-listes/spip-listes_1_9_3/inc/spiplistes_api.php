@@ -160,16 +160,19 @@ function spip_listes_strlen($out){
 // desabonner des listes (CP-20071016)
 // $listes_statuts : array (statuts des listes,..)
 function spiplistes_desabonner_listes_statut ($id_auteur, $listes_statuts) {
-	if(count($listes_statuts)) {
+	if(($id_auteur = intval($id_auteur)) && count($listes_statuts)) {
 		$sql_where = " statut='" . implode("' OR statut='", $listes_statuts) . "'";
 		$sql_query = "SELECT id_liste FROM spip_listes WHERE $sql_where";
 		$sql_result = spip_query ($sql_query);
-		// à optimiser.
-			while($row = spip_fetch_array($sql_result)) {
-				$id_liste = $row['id_liste'] ;
-				$result=spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur=".
-								   _q($id_auteur)." AND id_liste="._q($id_liste));
-			}
+		$listes = array();
+		while($row = spip_fetch_array($sql_result)) {
+			$listes[] = intval($row['id_liste']);
+		}
+		if(count($listes)) {
+			$sql_where = " id_auteur=$id_auteur AND (id_liste=" . implode(" OR id_liste=", $listes) . ")";
+			$sql_query = "DELETE FROM spip_auteurs_listes WHERE $sql_where";
+			$result=spip_query($sql_query);
+		}
 		return(spiplistes_format_abo_modifier($id_auteur));
 	}
 	return(false);
