@@ -86,7 +86,7 @@ texte d'inscription en tant que visiteur
 		<div>
 				<input name="suppl_abo" id="suppl_abo_html" value="html"  type="hidden" />
 				
-			[(#ENV{acces_membres}|=={oui}|?{' ',''})
+[(#ENV{acces_membres}|=={oui}|?{' ',''})
 				<div style="margin-top:5px"><label for="nom_inscription_" style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
 				<input type="text" class="forml" style="width:12em" name="nom_inscription_" id="nom_inscription_" value="" size="30" style="clear:both;" />
 				]
@@ -97,7 +97,7 @@ texte d'inscription en tant que visiteur
 			<label for="suppl_abo_oui"><:spiplistes:abonnement_0:></label>
 			</div>
 			<div>
-			<input name="desabo" id="desabo" value="oui" type="radio" />
+			<input name="desabo" id="suppl_abo_non" value="oui" type="radio" />
 				<label for="suppl_abo_non"><:spiplistes:desabonnement:></label>
 			</div>
 		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" value="<:bouton_valider:>" /></div>

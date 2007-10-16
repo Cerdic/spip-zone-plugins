@@ -66,11 +66,11 @@ function exec_spiplistes_abonne_edit () {
 				spiplistes_format_abo_modifier($id_auteur, 'non');
 				break;
 			case 'non':
-				spiplistes_desabonner($id_auteur);
+				spiplistes_desabonner_listes_statut($id_auteur, array(_SPIPLISTES_PUBLIC_LIST, _SPIPLISTES_PRIVATE_LIST,_SPIPLISTES_MONTHLY_LIST));
 				break;
 			}
 	}
-	
+
 	//////////////////////////////////////////////////////
 	// Recharge les données de l'auteur
 	if($id_auteur) {
@@ -88,9 +88,6 @@ function exec_spiplistes_abonne_edit () {
 		}
 	}
 	$format_abo = spiplistes_format_abo_demande($id_auteur);
-	if($nb_listes_abo = spiplistes_nb_abonnes_count('toutes', $id_auteur)) {
-		$format_abo = 'suspend';
-	}
 
 	//////////////////////////////////////////////////////
 	// préparation du bouton 

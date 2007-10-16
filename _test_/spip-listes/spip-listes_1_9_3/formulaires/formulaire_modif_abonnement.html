@@ -1,4 +1,13 @@
-[(#ENV*{message_formulaire})]
+[(#REM)
+
+// formulaire_modif_abonnement.html
+
+// SPIP-Listes-V :: $Id: courrier.html,v 1.1 2007/09/05 20:50:38 cpaulus Exp $
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+][(#ENV*{message_formulaire})]
 
 <BOUCLE_liste(LISTES) {statut=liste} {id_liste=#ENV{liste}}>
 			<fieldset style="margin-bottom:1em;">
@@ -18,7 +27,7 @@
 	<fieldset>
 	<legend style="color:#000000">[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</legend>
 	<ul style='width:350px;list-style-type:none'>
-<BOUCLE_listes(LISTES) {statut=liste} {0,(#ENV{formulaire_affiche}|?{100,0})}>
+<BOUCLE_listes(LISTES) {statut IN 'liste', 'pub_mois'} {0,(#ENV{formulaire_affiche}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<li style="margin-bottom:3px">
 				<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_LISTE" /><a href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>				
@@ -26,7 +35,7 @@
 				<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<li style="margin-bottom:3px">
-					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''',''})checked="checked"] value="#ID_LISTE" />
+					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''',''})checked="checked"] value="#ID_LISTE" />
 					<a title='<:spiplistes:infos_liste:>' href='[(#SELF|parametre_url{liste,#ID_LISTE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
 				</li>]
 </BOUCLE_listes>
@@ -36,25 +45,25 @@
 	<legend style="color:#000000"><:spiplistes:abo_1_lettre:></legend>]
 <//B_listes>
 [(#REM)
-
+	________________________
 	Modification abonnement
 	
 ][(#ENV{formulaire_affiche}|?{' ',''})
- <div style="text-align: left;"> 
-				 <strong><:spiplistes:format_de_reception:> :</strong><br /> 
-				 <input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio" id='fslhtml' />
-				 <label for='fslhtml'><:html:></label><br /> 
-				 <input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio" id='fsltexte' />
-				 <label for='fsltexte'><:texte:></label><br /> 
-				 <input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked=checked',''})] value="non" type="radio" id='fslnon' />
-				 <label for='fslnon'><:desabonnement:></label><br /> 
-				 </div> 
-	<input style="margin-top:3px" type='submit' name='Valider' value='<:spiplistes:abonnement_bouton:>' />
-	<input type="hidden" name="d"  value="[(#ENV{d})]"  />
-	<input type="hidden" name="confirm"  value="oui" />
-	</fieldset>
-	</div>
-</form>
+			<div style="text-align: left;"> 
+				<strong><:spiplistes:format_de_reception:> :</strong><br /> 
+				<input name="suppl_abo" value="html" [(#ENV{format}|=={html}|?{'checked=checked',''})]  type="radio" id='fslhtml' />
+				<label for='fslhtml'><:spiplistes:html:></label><br /> 
+				<input name="suppl_abo" value="texte" [(#ENV{format}|=={texte}|?{'checked=checked',''})] type="radio" id='fsltexte' />
+				<label for='fsltexte'><:spiplistes:texte:></label><br /> 
+				<input name="suppl_abo" [(#ENV{format}|=={non}|?{'checked=checked',''})] value="non" type="radio" id='fslnon' />
+				<label for='fslnon'><:spiplistes:desabonnement:></label><br /> 
+			</div> 
+			<input style="margin-top:3px" type='submit' name='Valider' value='<:spiplistes:abonnement_bouton:>' />
+			<input type="hidden" name="d"  value="[(#ENV{d})]"  />
+			<input type="hidden" name="confirm"  value="oui" />
+		</fieldset>
+		</div>
+	</form>
 ]
 [(#ENV{formulaire_cookie_affiche}|?{' ',''})
 <fieldset> 

@@ -19,13 +19,28 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
+function spiplistes_log($texte, $level = LOG_WARNING) {
+	if(__server_in_private_ip_adresses()
+		&& __plugin_lire_s_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)
+	) {
+		__syslog_trace($texte, $level);
+	}
+	else if($level < LOG_DEBUG) {
+		// Taille du log SPIP trop courte
+		// Ne pas envoyer si DEBUG sinon tronque sans cesse
+		spip_log($texte, 'spiplistes');
+	}
+}
 
 function spiplistes_langue_liste ($id_liste) {
-$lang=spip_query("SELECT lang FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 0,1");
-$lang=spip_fetch_array($lang);
-$lang= $lang['lang'];
-return $lang ;
+	$lang=spip_query("SELECT lang FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 0,1");
+	$lang=spip_fetch_array($lang);
+	$lang= $lang['lang'];
+	return $lang ;
 }
 
 

@@ -27,18 +27,6 @@ include_spip ("inc/filtres");    /* email_valide() */
 include_spip ("inc/acces");      /* creer_uniqid() */
 include_spip('inc/charsets');
 
-function spiplistes_log($texte, $level = LOG_WARNING) {
-	if(__server_in_private_ip_adresses()
-		&& __plugin_lire_s_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)
-	) {
-		__syslog_trace($texte, $level);
-	}
-	else if($level < LOG_DEBUG) {
-		// Taille du log SPIP trop courte
-		// Ne pas envoyer si DEBUG sinon tronque sans cesse
-		spip_log($texte, 'spiplistes');
-	}
-}
 
 /* function privee
  * multi_queries mysql n'est pas en mesure de le faire en natif :-(
@@ -169,15 +157,22 @@ function spip_listes_strlen($out){
 	return $out ;
 }
 
-//desabonner des listes publiques
-function spiplistes_desabonner($id_auteur){
-	$listes = spip_query ("SELECT id_liste FROM spip_listes WHERE statut='"._SPIPLISTES_PUBLIC_LIST."'");
-			while($row = spip_fetch_array($listes)) {
+// desabonner des listes (CP-20071016)
+// $listes_statuts : array (statuts des listes,..)
+function spiplistes_desabonner_listes_statut ($id_auteur, $listes_statuts) {
+	if(count($listes_statuts)) {
+		$sql_where = " statut='" . implode("' OR statut='", $listes_statuts) . "'";
+		$sql_query = "SELECT id_liste FROM spip_listes WHERE $sql_where";
+		$sql_result = spip_query ($sql_query);
+		// à optimiser.
+			while($row = spip_fetch_array($sql_result)) {
 				$id_liste = $row['id_liste'] ;
 				$result=spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur=".
 								   _q($id_auteur)." AND id_liste="._q($id_liste));
 			}
-	return(spiplistes_format_abo_modifier($id_auteur));
+		return(spiplistes_format_abo_modifier($id_auteur));
+	}
+	return(false);
 }
 
 // suspend les abonnements d'un compte
@@ -189,7 +184,7 @@ function spiplistes_suspendre_abos($id_auteur) {
 // si id_auteur, celui-ci uniquement
 // sinon, 'tous' pour modifier globalement
 function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
-	$format = !in_array($format, array('html', 'texte', 'non')) ? 'non' : $format;
+	$format = spiplistes_format_est_correct($format) ? $format : false;
 	if($id_auteur=='tous') {
 		$where = "";
 	}
@@ -209,7 +204,7 @@ function spiplistes_format_abo_demande($id_auteur) {
 		$sql_query = "SELECT `spip_listes_format` FROM spip_auteurs_elargis WHERE id_auteur=$id_auteur LIMIT 1";
 		if($row = spip_fetch_array(spip_query($sql_query))) {
 			$result = $row['spip_listes_format'];
-			$result = (in_array($result, array('html', 'texte', 'non'))) ? $result : false;
+			$result = spiplistes_format_est_correct($result) ? $result : false;
 		}
 	}
 	return($result);

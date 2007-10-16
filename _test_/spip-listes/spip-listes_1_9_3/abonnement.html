@@ -1,4 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{1}
+[(#REM)
+
+// abonnement.html
+
+// SPIP-Listes-V :: $Id: courrier.html,v 1.1 2007/09/05 20:50:38 cpaulus Exp $
+// $LastChangedRevision: 15530 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2007-09-26 09:15:16 +0200 (mer., 26 sept. 2007) $
+
+]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
 <head>
 	<title>#NOM_SITE_SPIP</title>
@@ -7,7 +17,7 @@
 	<!--
 	
 	body {
-		color:#000000;
+		color:#000;
 		background-color:#F5F5F5;
 		font-family:sans-serif;
 	}
@@ -15,27 +25,26 @@
 	
 	.cadre {
 		/*border: 1px #000000 solid;*/
-		background-color:#FFFFFF;
-	        text-align: justify;
-	        width:500px;
-	        padding: 10px;
-	        margin-left: auto;
-	        margin-right: auto;
-	        margin-bottom: 10px;
+		background-color:#fff;
+		text-align: justify;
+		width:500px;
+		padding: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 10px;
 		-moz-border-radius: 6px;
 		border-radius: 6px;
 	}
 	
 	h1 {
-	 font-size: 150%;
-	 text-decoration: underline ;
-	
+		font-size: 150%;
+		text-decoration: underline ;
 	}
 	
 	.bloc {
-	 margin-top: 10px;
-	 padding: 10px;
-	 text-align: center;
+		margin-top: 10px;
+		padding: 10px;
+		text-align: center;
 	}
 	
 	.cdt{
@@ -53,16 +62,27 @@
 		<h1>#NOM_SITE_SPIP</h1>
 		
 
-		
-		<div class='cadre'>
-			
-			[(#ENV{d}|?{'',' '})
+[(#REM) 	####################################
+			SPIP-Listes : bloc formulaire abonnement
+			#################################### ]
+		<div id='spip-listes' class='cadre'>
+[(#REM)
+	Si (d) absent dans l'url, propose l'abonnement			
+][(#ENV{d}|?{'',' '})
 			#FORMULAIRE_ABONNEMENT
-			<br />
 			]
-			
+[(#REM)
+	Si (d) présent dans l'url, propose la modification de l'abonnement			
+][(#ENV{d}|?{' ',''})
 			#FORMULAIRE_MODIF_ABONNEMENT
+			]
 		</div>
+[(#REM) 	####################################
+			SPIP-Listes : fin de bloc formulaire abonnement
+			#################################### ]
+		
+		
+		
 		<p style="text-align:center"><a href='#URL_SITE_SPIP'><:pass_retour_public:></a></p>
 		<div class='cdt'><:spiplistes:abonnement_cdt:></div>
 	</div>
