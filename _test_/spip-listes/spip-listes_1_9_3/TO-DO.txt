@@ -17,5 +17,4 @@ TO-DO:
 - import/export: proposer séparateur tab ou ";", a-la-CSV
 - base_version dans plugin.xml 
 - revoir le principe de mise à jour (appel à base/*). 
-- &nbsp; dans courrier texte seul à remplacer par & dans lien abonnement (url &nbsp;d=... incorrecte)
 

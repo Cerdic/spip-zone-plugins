@@ -135,7 +135,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 			list($affiche_formulaire,$reponse_formulaire)=formulaire_inscription(($type=="redac")? 'redac' : 'forum',$acces_membres,$formulaire);
 	}
 	else {
-		spip_log(_T('pass_erreur')." "._T('pass_rien_a_faire_ici')."visiteurs non autorises spip listes");
+spiplistes_log(_T('pass_erreur')." "._T('pass_rien_a_faire_ici')."visiteurs non autorises spip listes");
 	}
 	
 
@@ -257,7 +257,7 @@ function formulaire_inscription($type, $acces_membres, $formulaire) {
 					
 		$result = spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) ".
 						"VALUES ("._q($nom_inscription_).", "._q($mail_inscription_).","._q($login_).","._q($mdpass).","._q($statut).","._q($htpass).","._q($cookie).")");
-						spip_log("insert inscription : ->".$mail_inscription_);
+spiplistes_log("insert inscription : ->".$mail_inscription_, LOG_DEBUG);
 					$id_abo=spip_insert_id();
 			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`,`spip_listes_format`) VALUES ("._q($id_abo).","._q($type_abo).")");		
 				
@@ -353,7 +353,7 @@ function formulaire_inscription($type, $acces_membres, $formulaire) {
 		if($abonne_existant != 'oui') {
 		
 			if (envoyer_mail($mail_inscription_, "[$nom_site_spip] "._T('spiplistes:form_forum_identifiants'), $message)) {
-				spip_log("inscription : ->".$mail_inscription_);
+spiplistes_log("inscription : ->".$mail_inscription_, LOG_DEBUG);
 				if($acces_membres == 'oui') {
 					$reponse_formulaire =_T('form_forum_identifiant_mail');
 				}

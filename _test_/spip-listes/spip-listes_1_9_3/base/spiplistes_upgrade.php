@@ -1,5 +1,5 @@
 <?php
-
+// base/spiplistes_upgrade.php
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -22,9 +22,15 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+
+/*
+	Script appelé à chaque appel de exec=admin_plugin
+*/
+
 	//version actuelle du plugin à changer en cas de maj
 	$GLOBALS['spiplistes_version'] = 1.98;
 	
+spiplistes_log("spiplistes_upgrade.php() <<", LOG_DEBUG);
 	
 	//initialiser les variables
 		if (!isset($GLOBALS['meta']['spiplistes_lots'])){
@@ -79,7 +85,7 @@
 
 			if ($current_version==0.0){
 				// Verifie que les tables spip_listes existent, sinon les creer
-				spip_log('creation des tables spip_listes');
+spiplistes_log('creation des tables spip_listes', LOG_DEBUG);
 				include_spip('base/create');
 				include_spip('base/abstract_sql');
 				creer_base();
@@ -287,7 +293,7 @@
 			
 			ecrire_metas();
 		}
-	spip_log("spip-listes $current_version","spiplistes");
+spiplistes_log("spip-listes $current_version","spiplistes", LOG_DEBUG);
 	}
 	
 	function spiplistes_vider_tables() {
