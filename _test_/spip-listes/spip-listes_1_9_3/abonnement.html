@@ -22,8 +22,13 @@
 		font-family:sans-serif;
 	}
 	
+	h1 {
+		font-size: 150%;
+		text-decoration: underline ;
+		text-align:center;
+	}
 	
-	.cadre {
+	#spiplistes_formabo.cadre {
 		/*border: 1px #000000 solid;*/
 		background-color:#fff;
 		text-align: justify;
@@ -36,21 +41,19 @@
 		border-radius: 6px;
 	}
 	
-	h1 {
-		font-size: 150%;
-		text-decoration: underline ;
-	}
-	
-	.bloc {
+	#spiplistes_formabo .bloc {
 		margin-top: 10px;
 		padding: 10px;
 		text-align: center;
 	}
 	
-	.cdt{
+	.spiplistes-cdt {
 	  font-size:10px;
 	  text-align:center;
 	  margin-top:10px
+	}
+	
+	#spiplistes_formabo form {
 	}
 	
 	-->
@@ -62,10 +65,11 @@
 		<h1>#NOM_SITE_SPIP</h1>
 		
 
+	<a name="spiplistes_formabo_a" id="spiplistes_formabo_a"></a>
 [(#REM) 	####################################
 			SPIP-Listes : bloc formulaire abonnement
 			#################################### ]
-		<div id='spip-listes' class='cadre'>
+		<div id='spiplistes_formabo' class='cadre'>
 [(#REM)
 	Si (d) absent dans l'url, propose l'abonnement			
 ][(#ENV{d}|?{'',' '})
@@ -84,7 +88,7 @@
 		
 		
 		<p style="text-align:center"><a href='#URL_SITE_SPIP'><:pass_retour_public:></a></p>
-		<div class='cdt'><:spiplistes:abonnement_cdt:></div>
+		<div class='spiplistes-cdt'><:spiplistes:abonnement_cdt:></div>
 	</div>
 </body>
 </html>

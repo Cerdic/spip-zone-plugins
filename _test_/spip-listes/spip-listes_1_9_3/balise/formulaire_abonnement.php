@@ -74,31 +74,33 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui") ;
 	$inscriptions_publiques = (lire_meta('accepter_visiteurs') == "oui");
 	unset($erreur);
-	$affiche_formulaire="";
-	$inscription_redac ="";
-	$inscription_visiteur ="";
+	
+	$affiche_formulaire = $inscription_redac = $inscription_visiteur = "";
 	
 	// envoyer le cookie de relance mot de passe si pass oublie
 	if ($email_oubli) {
 		if (email_valide($email_oubli)) {
-			$res = spip_query("SELECT * FROM spip_auteurs WHERE email ="._q($email_oubli));
+			$res = spip_query("SELECT * FROM spip_auteurs WHERE email ="._q($email_oubli)." LIMIT 1");
 			if ($row = spip_fetch_array($res)) {
 				if ($row['statut'] == '5poubelle')
 					$erreur = _T('pass_erreur_acces_refuse');
 				else {
 					$cookie = creer_uniqid();
-					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email_oubli));
+					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email_oubli)." LIMIT 1");
 	
 					$nom_site_spip = lire_meta("nom_site");
 					$adresse_site = lire_meta("adresse_site");
 	
 				
-				$message = _T('spiplistes:abonnement_mail_passcookie', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site, 'cookie' => $cookie));
+					$message = _T('spiplistes:abonnement_mail_passcookie'
+						, array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site, 'cookie' => $cookie));
 				
-					if (envoyer_mail($email_oubli, "[$nom_site_spip] "._T('pass_oubli_mot'), $message))
+					if (envoyer_mail($email_oubli, "[$nom_site_spip] "._T('pass_oubli_mot'), $message)) {
 						$erreur = _T('pass_recevoir_mail');
-					else
+					}
+					else {
 						$erreur = _T('pass_erreur_probleme_technique');
+					}
 				}
 			}
 			else
@@ -160,11 +162,12 @@ function formulaire_inscription($type, $acces_membres, $formulaire) {
 	
 	$request_uri = $GLOBALS["REQUEST_URI"]."#abo";
 	
-	global $mail_inscription_;
-	global $nom_inscription_;
-	global $list;
-	global $liste;
-	global $id_fond; //fond name of the form posting values
+	global $mail_inscription_
+		, $nom_inscription_
+		, $list
+		, $liste
+		, $id_fond //fond name of the form posting values
+		;
 	
 
 	if ($type == 'redac') {
@@ -308,12 +311,16 @@ function formulaire_inscription($type, $acces_membres, $formulaire) {
 			
 
 			if($i>1) {
-				$message .= "\n"._T('spiplistes:inscription_responses').$nom_site_spip."." ;
-				$message .= "\n"._T('spiplistes:inscription_listes').$message_list ;
+				$message .= ""
+					. "\n"._T('spiplistes:inscription_responses').$nom_site_spip."."
+					. "\n"._T('spiplistes:inscription_listes').$message_list 
+					;
 			} 
 			if($i==1) {
-				$message .= "\n"._T('spiplistes:inscription_response').$nom_site_spip."." ;
-				$message .= "\n"._T('spiplistes:inscription_liste').$message_list ;
+				$message .= ""
+					. "\n"._T('spiplistes:inscription_response').$nom_site_spip."."
+					. "\n"._T('spiplistes:inscription_liste').$message_list 
+					;
 			} 
 			if($i==0) {
 				$message .= "\n"._T('spiplistes:inscription_response').$nom_site_spip._T('spiplistes:inscription_format').$type_abo."." ;
@@ -321,21 +328,27 @@ function formulaire_inscription($type, $acces_membres, $formulaire) {
 		} // end else
 	
 			if(($acces_membres == 'oui') && ($type == 'forum') ) {
-				$message .="\n\n"._T('spiplistes:inscription_mail_forum', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site))."\n\n";
-				$message .= "- "._T('form_forum_login')." $login_\n";
-				$message .= "- "._T('form_forum_pass')." $pass\n\n";
+				$message .= ""
+					. "\n\n"._T('spiplistes:inscription_mail_forum', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site))."\n\n"
+					. "- "._T('form_forum_login')." $login_\n"
+					. "- "._T('form_forum_pass')." $pass\n\n"
+					;
 			}
 			
 			if(($type == 'redac') || ($inscriptions_ecrire && $acces_membres == 'non')) {
-				$message .="\n\n"._T('spiplistes:inscription_mail_redac', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site))."\n\n";
-				$message .= "- "._T('form_forum_login')." $login_\n";
-				$message .= "- "._T('form_forum_pass')." $pass\n\n";
+				$message .= ""
+					. "\n\n"._T('spiplistes:inscription_mail_redac', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site))."\n\n"
+					. "- "._T('form_forum_login')." $login_\n"
+					. "- "._T('form_forum_pass')." $pass\n\n"
+					;
 			}
 		}
 	
-		$message .= "\n\n-----------------------------------------\n\n" ;
-		$message .= _T('spiplistes:abonnement_mail').' '.generer_url_public("abonnement","d=$cookie") ;
-		$message .= "\n\n-----------------------------------------\n\n" ;
+		$message .= ""
+			. "\n\n-----------------------------------------\n\n"
+			. _T('spiplistes:abonnement_mail').' '.generer_url_public("abonnement","d=$cookie")
+			. "\n\n-----------------------------------------\n\n"
+			;
 			
 		if($abonne_existant != 'oui') {
 		
