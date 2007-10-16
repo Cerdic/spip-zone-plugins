@@ -417,6 +417,7 @@ liste.",
 'voir_discussion' => 'Voir la discussion',
 'Voir_les_journaux_SPIPLISTES' => "Voir les journaux SPIPLISTES",
 'Vides' => "Vides",
+'Valider_abonnement' => "Valider cet abonnement",
 
 // ====================== spip_listes.php3 ======================
 'abon' => 'LES ABONNES',
