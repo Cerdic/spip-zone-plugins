@@ -288,7 +288,7 @@ function spiplistes_meleuse () {
 										$body =
 											$page_texte ."\n\n"
 											. $pied_page_texte
-											. $pied_rappel_texte."\n"
+											. str_replace("&amp;", "&", $pied_rappel_texte)
 											. $_url."\n\n"
 											;
 										break;
