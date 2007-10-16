@@ -1,12 +1,14 @@
 #CACHE{0}
 
+<h1 style="text-align:center" class="verdana2">doc2img</h1>
+
 <B_doc2img>
-  Choisissez le document pdf<br/>
-  a convertir en image :
+  Choisissez le document ([(#CONFIG{doc2img/format_document})]) <br/>
+  &agrave; convertir en image :
     <form method="post" action='?exec=doc2img_convert'>
-    <select name="id_document">
-<BOUCLE_doc2img(DOCUMENTS) {id_article}>
-    <option value=#ID_DOCUMENT>#ID_DOCUMENT - #TITRE</option>
+    <select name="id_document"><br/>
+<BOUCLE_doc2img(DOCUMENTS) {id_article=815} {extension IN #CONFIG{doc2img/format_document}|spip_explode{','}}>
+    <option value=#ID_DOCUMENT>#ID_DOCUMENT - [(#TITRE|?{#TITRE,#FICHIER})]</option>
 </BOUCLE_doc2img>
     </select>
     <br/>

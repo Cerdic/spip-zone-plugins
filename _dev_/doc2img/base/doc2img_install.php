@@ -99,7 +99,6 @@ function doc2img_installer($version,$version_finale) {
             spip_query("CREATE TABLE spip_doc2img (
                 id_doc2img BIGINT (21) AUTO_INCREMENT, 
                 id_document BIGINT (21) NOT NULL, 
-                id_type BIGINT(21) NOT NULL,
                 fichier varchar(255) NOT NULL, 
                 PRIMARY KEY (id_doc2img)
                 );");
@@ -115,13 +114,14 @@ function doc2img_installer($version,$version_finale) {
         case 0.2 :
             //d‚finition des param‚tres de base
             $cfg = array(
-                "format_source" => "pdf,tiff",
+                "format_document" => "pdf,tif",
                 "repertoire_cible" => "IMG/doc2img",
-                "format_cible" => "2",
+                "format_cible" => "png",
                 "proportion" => "on"
             );
         	//par d‚faut juste le champ d'id text_area est corrigeable
 			ecrire_meta('doc2img',serialize($cfg));
+		case 0.3 :
     }
 
     //on met … jour la version du plugin

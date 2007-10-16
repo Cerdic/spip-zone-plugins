@@ -1,16 +1,17 @@
 <?php
 
-function exec_doc2img_convert(){
+function exec_doc2img_convert_dist(){
 
     include_spip('base/compat193');
+    include_spip('cfg_options');
 
     //racine du site c'est a dire url_site/ecrire/..
     $racine_site = getcwd().'/..';
     //document a traiter
     $id_document = _request('id_document');
-    spip_log('doc2img a convertir : '.$id_document ,'doc2img');
+    spip_log('doc2img à convertir : '.$id_document ,'doc2img');
     //format d'exportation (issu de cfg)
-    $id_type = 2; //PNG
+    $extension = lire_config('doc2img/format_cible');
 
     //on recupere l'url du document
     $sql = "SELECT fichier FROM spip_documents WHERE id_document=".$id_document;
@@ -29,7 +30,8 @@ function exec_doc2img_convert(){
 
     //creation du repertoire cible
     //url relative du repertoire cible
-    $document['cible_url'] = 'IMG/doc2img/'.$document['name'];
+    $document['cible_url'] = lire_config('doc2img/repertoire_cible').'/'.$document['name'];
+
     //si le repertoire existe on ne genere pas les images, url absolue
     if (@mkdir($racine_site.'/'.$document['cible_url'])!==false) {
 
@@ -37,19 +39,59 @@ function exec_doc2img_convert(){
         spip_log('charge le document','doc2img');
         $handle = imagick_readimage($racine_site.'/'.$document['source_url'].'/'.$document['fullname']);
 
-        //genere l'ensemble des images dans un sous repertoire du nom du fichier parent
-        imagick_writeimages($handle, $racine_site.'/'.$document['cible_url'].'/'.$document['name'].'.png');
+        //on determine les dimensions des frames
+        //si les proportions sont gardées
+        $largeur = (lire_config('doc2img/largeur')) ? lire_config('doc2img/largeur') : imagick_getwidth($handle) ;
+        $hauteur = (lire_config('doc2img/hauteur')) ? lire_config('doc2img/hauteur') : imagick_getheight($handle);
+        $proportion = (lire_config('doc2img/proportion')) ? true : false;
+    
+        $ratio_largeur = $largeur / imagick_getwidth($handle);
+        $ratio_hauteur = $hauteur / imagick_getheight($handle);
 
+        spip_log('largeur_ratio :'.$ratio_largeur,'doc2img');
+        spip_log('hauteur_ratio :'.$ratio_hauteur,'doc2img');
+        spip_log('proportion :'.$proportion,'doc2img');
+                
+        //determine les ratio de taille
+        if ($proportion == true) {
+            $ratio_largeur = ($ratio_largeur < $ratio_hauteur) ? $ratio_largeur : $ratio_hauteur;
+            $ratio_hauteur = $ratio_largeur; 
+        }
+        
+        //defini les nouvelles dimensions
+        $largeur = $ratio_largeur * imagick_getwidth($handle);
+        $hauteur = $ratio_hauteur * imagick_getheight($handle);
+                 
+        spip_log('largeur_source :'.imagick_getwidth($handle),'doc2img');
+        spip_log('hauteur_source :'.imagick_getheight($handle),'doc2img');
+
+        spip_log('largeur_cible :'.$largeur,'doc2img');
+        spip_log('hauteur_cible :'.$hauteur,'doc2img');
+        
         //chaque page est un fichier on sauve dans la table doc2img chacun des ces nouveaux fichier
-
         for ($frame = 0 ; $frame < imagick_getlistsize($handle); $frame++ ) {
-            //nom du fichier cible
-            $document['frame'] = $document['cible_url'].'/'.$document['name'].'-'.$frame.'.png';
+            //on accede à la page $frame
+            imagick_goto($handle, $frame);
+            $handle_frame = imagick_getimagefromlist($handle);
+            //on redimensionne l'image
+            if (!($ratio_largeur == 1) || !($ratio_hauteur ==1)) {
+                //imagick_sample($handle, $largeur, $hauteur);
+                imagick_resize($handle_frame, $largeur, $hauteur, IMAGICK_FILTER_UNKNOWN, 0 );
+            }
+            //nom du fichier cible, c'est à dire la frame (image) indexée
+            $document['frame'] = $document['cible_url'].'/'.$document['name'].'-'.$frame.'.'.$extension;
+            //on sauvegarde la page
+            imagick_writeimage($handle_frame, $racine_site.'/'.$document['frame']);
             //sauvegarde les donnees dans la base
-            $sql = "INSERT INTO spip_doc2img (id_doc2img,id_document,id_type,fichier) VALUES('',".$id_document.",".$id_type.",'".$document['frame']."');";
+            $sql = "INSERT INTO spip_doc2img (id_doc2img,id_document,fichier) VALUES('',".$id_document.",'".$document['frame']."');";
             //print $sql;
             spip_query($sql);
+            //on libére la frame
+            imagick_free($handle_frame);                
         }
+        
+        //on libére les ressources
+        imagick_free($handle );
     }
 
     //recharge la page appelante

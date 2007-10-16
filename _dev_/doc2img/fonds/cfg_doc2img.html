@@ -21,7 +21,7 @@ La page présente permet la configuration :
 		<p>
 		    <p>Utilisez la , pour séparer les formats</p>
 			<label>Extensions à traiter (pdf, tiff, ...) :</label>
-			<input type="text" name="format_document" id="format_document" value="#ENV{format_source}"/>
+			<input type="text" name="format_document" id="format_document" value="#ENV{format_document}"/>
 		</p>
 </fieldset>
 <fieldset><legend>Les sorties</legend>
@@ -34,7 +34,7 @@ La page présente permet la configuration :
 			<B_typedoc>
 			<select name="format_cible">
 			<BOUCLE_typedoc(TYPES_DOCUMENTS) {mime_type==^image} {titre!=djvu}>
-                <option value="#ID_TYPE" [(#ENV{format_cible}|=={#ID_TYPE}|?{selected="selected",''})]>#TITRE</option>
+                <option value="#EXTENSION" [(#ENV{format_cible}|=={#EXTENSION}|?{selected="selected",''})]>#TITRE</option>
             </BOUCLE_typedoc>
             </select>
             </B_typedoc>
