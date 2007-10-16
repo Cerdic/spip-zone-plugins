@@ -30,7 +30,7 @@
 
 	[(#REM) Liste des articles en fonction de la date passée en paramètre
 	
-	]<BOUCLE_liste(ARTICLES){date==^(#DATE|affdate{Y-m-d}) ?}{par date}{inverse}>
+	]<BOUCLE_liste(ARTICLES){date==^((#DATE|affdate{Y-m})(-(#DATE|affdate{d}))?) ?}{par date}{inverse}>
 	<div>[
 		<h2>(#DATE|affdate|unique)</h2>
 		]<h3>#TITRE</h3>
