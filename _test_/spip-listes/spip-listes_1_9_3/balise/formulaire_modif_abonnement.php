@@ -1,9 +1,9 @@
 <?php
 // balise/formulaire_modif_abonnement.php
 
-// $LastChangedRevision: 15995 $
-// $LastChangedBy: paladin@quesaco.org $
-// $LastChangedDate: 2007-10-14 15:25:50 +0200 (dim., 14 oct. 2007) $
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
