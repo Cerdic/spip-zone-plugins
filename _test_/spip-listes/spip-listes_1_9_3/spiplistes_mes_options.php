@@ -27,6 +27,8 @@ define("_SPIPLISTES_PATRONS_TAMPON_DIR", _SPIPLISTES_PATRONS_DIR."tampons_courri
 
 define("_SPIPLISTES_RUBRIQUE", "messagerie");
 
+define("_SPIPLISTES_LOT_TAILLE", 30);
+
 define("_SPIPLISTES_LOTS_PERMIS", "1;5;10;30;100");
 
 define("_SPIPLISTES_ZERO_TIME_DATE", "0000-00-00 00:00:00");
@@ -150,14 +152,6 @@ function spiplistes_taches_generales_cron($taches_generales){
 	$taches_generales['spiplistes_cron'] = 10 ;
 	return $taches_generales;
 }
-
-$spiplistes_v = $GLOBALS['meta']['spiplistes_version'] ;
-
-//afficher la version de spip_listes dans le pied de page
-if($spiplistes_v == 1.91)
-$GLOBALS['spiplistes_version'] = "SPIP-listes 1.9.1";
-if($spiplistes_v >= 1.92)
-$GLOBALS['spiplistes_version'] = "SPIP-listes $spiplistes_v";
 
 /* CP: tableau issu de SPIP-Listes-V (à nettoyer en fin d'optimisation)
 	Tableau des objets de navigations dans l'espace privé
@@ -287,18 +281,19 @@ $spiplistes_items = array(
 	include_spip('inc/options_spip_listes');
 	
 	$spiplistes_name = __plugin_get_real_prefix();
-	$spiplistes_version = __plugin_get_real_version();
+	$spiplistes_version_real = __plugin_get_real_version();
 	$spiplistes_version_current =  lire_meta('spiplistes_version');
 	$spiplistes_version_base = __plugin_get_real_version_base();
 
-spiplistes_log("STARTING $spiplistes_name version: $spiplistes_version - version_base: $spiplistes_version_base current_version $spiplistes_version_current", LOG_DEBUG);
-	
-	if(!$spiplistes_version) {
-	// créer la base 
-		include_spip('base/spip-listes'); // pas sécure. A revoir. (CP-20071016)
+	if(!$spiplistes_version_current) {
+	// Une installation ? Créer la base 
+		include_spip('base/spip-listes'); 
+		spiplistes_creer_base();
 	}
-	else if($spiplistes_version > $spiplistes_version_current) {
+	else if($spiplistes_version_real > $spiplistes_version_current) {
 	// faire upgrade
+		spiplistes_log("STARTING $spiplistes_name version: $spiplistes_version_real - version_base: $spiplistes_version_base - current_version $spiplistes_version_current", LOG_DEBUG);
+		include_spip('base/spiplistes_upgrade');
 	}
 
 ?>

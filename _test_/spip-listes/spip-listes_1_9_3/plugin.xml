@@ -1,4 +1,9 @@
 <plugin>
+	<!--  
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	 -->
 	<nom><multi>[fr]SPIP-Listes[en]SPIP-Lists[ar]&#1604;&#1608;&#1575;&#1574;&#1581; SPIP</multi></nom>
 	<auteur>BoOz@rezo.net</auteur>
 	<version>1.98001</version>
@@ -9,7 +14,7 @@
 	<options>spiplistes_mes_options.php</options>
 	<fonctions>spiplistes_mes_fonctions.php</fonctions>
 	<prefix>spiplistes</prefix>
-	<install>base/spiplistes_upgrade.php</install>
+	<install>base/spiplistes_init.php</install>
 	<lien>[Documentation->../plugins/spip-listes_1_9_3/docs/__installation_fr.txt]</lien>
 
 	<pipeline>
