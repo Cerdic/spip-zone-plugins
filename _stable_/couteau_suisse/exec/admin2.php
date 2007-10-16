@@ -258,7 +258,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 		ecrire_metas();
 		cs_initialisation(true);
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire(_request('exec')));
+		redirige_par_entete(generer_url_ecrire(_request('exec'), "cmd=descrip&outil={$_GET[outil]}#cs_infos", true));
 	}
 	// reset de l'affichage
 	if ($cmd=='showall'){
