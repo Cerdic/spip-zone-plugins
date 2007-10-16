@@ -70,6 +70,7 @@ a.cs_href {
 }
 a.outil_on {
 	font-weight:bold;
+	border:1px dotted;
 }
 div.cs_liste {
 	float:left;
