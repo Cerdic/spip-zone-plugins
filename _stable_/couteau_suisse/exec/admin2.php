@@ -245,6 +245,21 @@ cs_log("Début : exec_admin_couteau_suisse()");
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire(_request('exec')));
 	}
+	// reset des variables d'un outil
+	if ($cmd=='reset' && strlen($_GET['outil'])){
+		cs_log("Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur");
+		$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);	
+		global $outils;
+		include_spip('cout_utils');
+		include_spip('config_outils');
+		cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
+		foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
+		ecrire_meta('tweaks_variables', serialize($metas_vars));
+		ecrire_metas();
+		cs_initialisation(true);
+		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire(_request('exec')));
+	}
 	// reset de l'affichage
 	if ($cmd=='showall'){
 		cs_log("Reset de tous les affichages par l'auteur id=$connect_id_auteur");
