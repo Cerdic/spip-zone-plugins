@@ -629,6 +629,7 @@ add_outil( array(
 add_outil( array(
 	'id' => 'blocs',
 	'categorie'	=> 'typo-racc',
+	'jquery'	=> 'oui',
 	'pipeline:pre_typo' => 'blocs_pre_typo',
 ));
 
