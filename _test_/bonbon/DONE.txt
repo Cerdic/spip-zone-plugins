@@ -14,6 +14,7 @@ Des corrections de bugs divers... (voir SVN)
 Un rafraichissement plus fréquent des pages (durée de cache plus courte)
 Des améliorations dans l'interface de saisie: 	-matière et classes sont préslecetionnés quand on vient de finir de saisir une séance et qu'on passe à la suivante.
 						-au dessus du formulaire de saisie il y a un rappel du contexte...
+						- etc...
 
 
 1.0 Première sortie de Bonbon
