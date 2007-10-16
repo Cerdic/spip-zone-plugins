@@ -1,7 +1,8 @@
 <plugin>
 	<nom><multi>[fr]SPIP-Listes[en]SPIP-Lists[ar]&#1604;&#1608;&#1575;&#1574;&#1581; SPIP</multi></nom>
 	<auteur>BoOz@rezo.net</auteur>
-	<version>1.97</version>
+	<version>1.98001</version>
+	<version_base>1.98</version_base>
 	<etat>test</etat>
 	<icon>spip-listes.png</icon>
 	<description><multi>[fr]Listes d'informations par email[en]Newsletter by e-mail[ar]&#1606;&#1588;&#1585;&#1577; &#1576;&#1585;&#1610;&#1583;&#1610;&#1577;</multi></description>
