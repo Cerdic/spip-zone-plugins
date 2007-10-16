@@ -14,26 +14,68 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; 
-	<a href="#URL_PAGE{calendriers}">Exemple #[(#REM)]MODELE{minical/mois}</a></div>
+	[(#REM) Contenu principal : contenu de la rubrique ]
+    <div id="conteneur">
+    <div id="contenu">
 
-	<div id="conteneur">
+		[(#REM) Fil d'Ariane ]
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; 
+		<a href="#URL_PAGE{calendriers}">Exemple #[(#REM)]MODELE{minical/mois}</a></div>
+	
+        <div class="cartouche">
+        	<h1>Calendriers</h1>
+			<p><small><a href="#URL_ECRIRE{admin_plugin}"><:icone_admin_plugin:></a>
+			<a href="#URL_ECRIRE{cfg,cfg=calendrier}"><:calendrier:config_calendrier:></a></small></p>
+		</div>
 
-	<p><a href="#URL_ECRIRE{admin_plugin}"><:icone_admin_plugin:></a></p>
-	<p><a href="#URL_ECRIRE{cfg,cfg=calendrier}"><:calendrier:config_calendrier:></a></p>
+	[(#REM) Liste des articles en fonction de la date passée en paramètre
+	
+	]<BOUCLE_liste(ARTICLES){date==^(#DATE|affdate{Y-m-d}) ?}{par date}{inverse}>
+	<div>[
+		<h2>(#DATE|affdate|unique)</h2>
+		]<h3>#TITRE</h3>
+		#INTRODUCTION
+	</div>
+	</BOUCLE_liste>
 
-	[(#REM)
-		On appelle le squelette avec le paramètre date.
-		Si la date est toujours transmise dans un modèle, on force malgré tout
-		afin de faire appel au bon cache (calculé en fonction des paramètres passés).
-		On envoi la liste des jours sur lesquels faire un lien
-	][(#MODELE{minical/mois}
-		{date}
-		{jours=#ARRAY{0,1999-02-02,1,2007-10-04,3,2007-10-07,4,2007-10-12,5,2007-09-19,6,2007-11-22}}
-	)]
 
-	</div><!-- fin conteneur -->
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]    <div id="navigation">		[(#REM) minical statique
+
+			On appelle le squelette avec le paramètre date.
+			Si la date est toujours transmise dans un modèle, on force malgré tout
+			afin de faire appel au bon cache (calculé en fonction des paramètres passés).
+			On envoi la liste des jours sur lesquels faire un lien
+
+		][<div class="menu">
+			<h2><:cal_par_mois:></h2>
+			(#REM)MODELE{minical/mois}
+				{date}
+				{jours=#ARRAY{0,1999-02-02,1,2007-10-04,3,2007-10-07,4,2007-10-12,5,2007-09-19,6,2007-11-22}}
+		)</div>]
+		
+		[(#REM) minical dynamique
+
+			On calcule ici la liste des jours cliquables à partir d'une boucle ARTICLES
+			Le critère lang_select=non permet de ne pas distinquer les articles (et donc leurs dates) dans le calendrier
+			Le critere date est une expression régulière qui compare le champ date des articles avec le paramètre date de l'url
+			Tout article dont la date commence par AAAA-MM (soit publié le mois MM de l'année AAAA)
+			
+			Emploi du filtre unique pour éviter d'ajouter plusieurs fois une même date dans la liste.
+
+		][(#SET{jours,#ARRAY{0,0}})]
+		<BOUCLE_minical(ARTICLES){date==^(#DATE|affdate{Y-m})}{lang_select=non}>[
+		[(#SET{jours,[(#GET{jours}|push{[(#DATE|affdate{Y-m-d})]})]})]
+		(#DATE|affdate{Y-m-d}|unique|?{' '})
+		]</BOUCLE_minical>[<div class="menu">
+			<h2><:cal_par_mois:></h2>
+			(#MODELE{minical/mois}
+				{date}
+				{jours=#GET{jours}}
+		)</div>]
+    </div><!--#navigation-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
