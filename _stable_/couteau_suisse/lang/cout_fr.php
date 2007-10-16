@@ -51,7 +51,7 @@ _ - [de tout le plugin->@reset@]
 	'activer_outil' => "Activer l'outil",
 	'desactiver_outil' => "D&eacute;sactiver l'outil",
 	'permuter' => "Permuter les outils en gras", // Javascript
-	'permuter_outil' => "Permuter l'outil : « @text@ » ?", // Javascript
+	'permuter_outil' => "Permuter l'outil : \253 @text@ \273 ?", // Javascript : \253 et \273 sont les guillemets
 	'permuter_outils' => "Permuter les @nb@ outils en gras ?",
 	'resetselection' => "R&eacute;initialiser la s&eacute;lection",
 	'neplusafficher' => "Ne plus afficher",
