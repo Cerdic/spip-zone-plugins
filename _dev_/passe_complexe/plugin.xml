@@ -1,0 +1,20 @@
+<plugin>
+	<version>0.1</version>
+	<nom>passe commplexe</nom>
+	<prefix>passe complexe</prefix>
+	<description>
+	Testeur de complexite des mots de passes.
+	<br />Adaptation du script de http://dev.digitalspaghetti.me.uk/password/
+	<br />Page de Config a venir
+	</description>
+	<etat>dev</etat>
+	<lien></lien>
+	<auteur>bruno bergot</auteur>
+	<prefix>passe_complexe</prefix>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>passe_complexe_options.php</inclure>
+	</pipeline>
+
+</plugin>
