@@ -53,7 +53,7 @@ function cron_spiplistes_cron ($last_time) {
 		
 	$listes_privees_et_publiques = spip_query ($sql_query);
 	
-spiplistes_log("CRON: nb listes ok:".spip_num_rows($listes_privees_et_publiques), LOG_DEBUG);
+spiplistes_log("CRON: nb listes ok: ".spip_num_rows($listes_privees_et_publiques), LOG_DEBUG);
 //return(0);
 
 	while($row = spip_fetch_array($listes_privees_et_publiques)) {

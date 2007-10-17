@@ -747,9 +747,10 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 // donne contenu pied_page au format html (CP-20071014)
 // lien_patron: nom du tampon (fichier, sans extension)
 function spiplistes_pied_page_html_get ($pied_patron) {
-	$contexte_patron = array();
+	$contexte_patron = array('lang'=>$lang);
 	include_spip('public/assembler');
-	return(recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$pied_patron, $contexte_patron));
+	$result = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$pied_patron, $contexte_patron);
+	return($result);
 }
 
 function spiplistes_onglets ($rubrique, $onglet, $return = false) {
