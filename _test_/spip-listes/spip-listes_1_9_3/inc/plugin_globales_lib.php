@@ -224,13 +224,20 @@ function __plugin_html_signature ($return = false, $html = true) {
 
 	$info = plugin_get_infos($plug_file = __plugin_dirname());
 	$nom = typo($info['nom']);
-	
+	$version = __plugin_current_version_get(__plugin_real_tag_get('prefix'));
+	//$base_version = typo($info['version_base']); // cache ?
+	$base_version = __plugin_current_version_base_get(__plugin_real_tag_get('prefix'));
+	$revision = "";
+	if($html) {
+		$version = (($version) ? " <span style='color:gray;'>".$version."</span>" : "");
+		$base_version = (($base_version) ? " <span style='color:#66c;'>&lt;".$base_version."&gt;</span>" : "");
+	}
 	$result = ""
 		. ($html ? "<p class='verdana1 spip_xx-small' style='font-weight:bold;'>" : "")
-		. $nom." ".$GLOBALS['meta']['spiplistes_version']." "
-		. ($html ? "<span style='color:gray;'>" : "")
-		. "[".__plugin_meta_version(__plugin_real_prefix_get())."]"
-		. ($html ? "</span></p>" : "")
+		. $nom
+		. $version
+		. $base_version
+		. ($html ? "</p>" : "")
 		;
 	if($return) return($result);
 	else echo($result);
