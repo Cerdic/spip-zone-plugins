@@ -32,7 +32,6 @@ function exec_spiplistes_courrier_rediger () {
 	include_spip('inc/presentation');
 	include_spip('inc/barre');
 	include_spip('inc/spiplistes_api');
-	include_spip('base/spip-listes');
 	include_spip('public/assembler');
 
 	global $connect_statut

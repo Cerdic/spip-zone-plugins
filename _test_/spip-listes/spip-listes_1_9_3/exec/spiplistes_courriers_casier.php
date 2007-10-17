@@ -28,17 +28,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/spiplistes_api');
-include_spip ('base/spip-listes');
 include_spip('inc/plugin');
 include_spip('inc/spiplistes_lister_courriers_listes');
 
 function spiplistes_afficher_pile_messages() {
-	
-	if ($GLOBALS['spip_version_code']<1.9204){
-		include_spip('base/spiplistes_upgrade');
-		if (!spiplistes_install('test'))
-			spiplistes_install('install');
-	}
 	
 	$sql_select = "id_liste,titre,date,maj,periode,patron,statut";
 	$list = spip_query ("SELECT $sql_select FROM spip_listes WHERE message_auto='oui' AND date NOT LIKE "._q(_SPIPLISTES_ZERO_TIME_DATE));
