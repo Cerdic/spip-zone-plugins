@@ -198,7 +198,7 @@ function spiplistes_meleuse () {
 			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
 				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte'
-					, $pied_rappel_html, $pied_rappel_texte) as $key) {
+					, 'pied_rappel_html', 'pied_rappel_texte') as $key) {
 					if(!empty($$key)) {
 						$$key = spiplistes_translate_2_charset($$key,$GLOBALS['meta']['spiplistes_charset_envoi']);
 					}

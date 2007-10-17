@@ -290,6 +290,22 @@ function exec_spiplistes_courrier_gerer () {
 				. fin_cadre_relief(true)
 				;
 		}
+		$boite_confirme_envoi = 
+			($statut == _SPIPLISTES_STATUT_READY)
+			? ""
+				. debut_cadre_couleur('', true)
+				// formulaire de confirmation envoi
+				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,"id_courrier=$id_courrier")."' method='post'>"
+				. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
+				. _T('spiplistes:confirme_envoi')
+				. "</p>"
+				. "<input type='hidden' name='id_liste' value='$id_liste' />"
+				. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
+				. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' /></div>\n"
+				. "</form>"
+				. fin_cadre_couleur(true)
+			: ""
+			;
 	}
 
 	/////////////////////
@@ -298,16 +314,20 @@ function exec_spiplistes_courrier_gerer () {
 		$le_type = _T('spiplistes:message_type');
 		
 		if($statut != _SPIPLISTES_STATUT_REDAC) {
-			if($row = spip_fetch_array(spip_query ("SELECT titre FROM spip_listes WHERE id_liste = $id_liste LIMIT 1"))) {
-				$str_destinataire = 
-					(!empty($email_test))
-					? _T('spiplistes:email_adresse') . " : $email_test"
-					: _T('spiplistes:Liste_de_destination') . " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
-								. " " . spiplistes_nb_abonnes_liste_str_get($id_liste)
-					;
+			if(!empty($email_test)) {
+				$str_destinataire = _T('spiplistes:email_adresse') . " : <span style='font-weight:bold;color:gray;'>$email_test</span>";
 			}
 			else {
-				$str_destinataire = _T('spiplistes:Courriers_sans_liste');
+				if($row = spip_fetch_array(spip_query ("SELECT titre FROM spip_listes WHERE id_liste = $id_liste LIMIT 1"))) {
+					$str_destinataire = ""
+						. _T('spiplistes:Liste_de_destination') 
+						. " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>".$row['titre']."</a>"
+						. " " . spiplistes_nb_abonnes_liste_str_get($id_liste)
+						;
+				}
+				else {
+					$str_destinataire = _T('spiplistes:Courriers_sans_liste');
+				}
 			}
 		}
 		
@@ -320,15 +340,6 @@ function exec_spiplistes_courrier_gerer () {
 				$str_statut_courrier = ""
 					. "<p class='verdana2'>"._T('spiplistes:message_presque_envoye') . "<br />"
 					. $str_destinataire . "<br />"
-					._T('spiplistes:confirme_envoi')
-					// formulaire de confirmation envoi
-					. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,"id_courrier=$id_courrier")."' method='post'>"
-					. "<p style='text-align:center;'>"
-					. "<input type='hidden' name='id_liste' value='$id_liste' />"
-					. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
-					. "<input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' />"
-					. "</p>"
-					. "</form>"
 					;
 				break;
 			case _SPIPLISTES_STATUT_ENCOURS:
@@ -408,6 +419,7 @@ function exec_spiplistes_courrier_gerer () {
 			. "</td>"
 			. "</tr>"
 			. "</table>"
+			. $boite_confirme_envoi
 			. $boite_selection_destinataire
 			. "<br />"
 			//
