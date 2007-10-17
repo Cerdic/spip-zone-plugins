@@ -72,7 +72,7 @@ $htos['prem']['filtre']		="";				$htos['prem']['spip']=""; // un premier filtre 
 
 $htos['comment']['filtre']	="/<!--.*-->/iUms";		$htos['comment']['spip']="";
 $htos['script']['filtre']	="/<(script|style)\b.+?<\/\\1>/i";	$htos['script']['spip']="";
-$htos['italique']['filtre']	=",<(i|em)( [^>\r]*)?".">(.+)</\\1>,Uims";	$htos['italique']['spip']="{\\3}";
+$htos['italique']['filtre']	=",<(i|em)( [^>\\r]*)?".">(.+)</\\1>,Uims";	$htos['italique']['spip']="{\\3}";
 $htos['bold']['filtre']		=",<(b|h[4-6])( [^>]*)?".">(.+)</\\1>,Uims";	$htos['bold']['spip']="@@b@@\\3@@/b@@"; // un dernier filtre pour l utilisateur
 $htos['h']['filtre']		=",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims";	$htos['h']['spip']="\\r{{{ \\3 }}}\\r";
 $htos['tr']['filtre']		=",<tr( [^>]*)?".">,Uims";	$htos['tr']['spip']="<br>\\r";

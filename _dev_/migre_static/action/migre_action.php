@@ -247,7 +247,7 @@ global $migre_meta;
 function migre_filtrer_body($contenu) {
 global $migre_meta;
 
-/* rajouts fwn */
+/* rajouts fwn *//*
 	$contenu=preg_replace('/(<span[ ]class\=\"code\">)(.*)(<\/span><br>)/iUs',"\r<code>\$2</code>\r",$contenu);
 	$contenu=preg_replace('/(<span[ ]class\=\"titre1-nb\">)(.*)(<\/span><span[ ]class\=\"titre1\">)(.*)(<\/span>)/iUs',"<h1>\$2\$4</h1>",$contenu);
 /* fin rajouts speciaux fwn */
@@ -255,7 +255,13 @@ global $migre_meta;
 	if (count($migre_meta['migre_htos'])>0) {
 		reset($migre_meta['migre_htos']);
 		while ( list($key,$val) = each($migre_meta['migre_htos']) ) {
-			if (!empty($migre_meta['migre_htos'][$key]['filtre'])) $contenu=preg_replace($migre_meta['migre_htos'][$key]['filtre'],$migre_meta['migre_htos'][$key]['spip'],$contenu);
+			if (!empty($migre_meta['migre_htos'][$key]['filtre'])) {
+				$contenu=@preg_replace($migre_meta['migre_htos'][$key]['filtre'],$migre_meta['migre_htos'][$key]['spip'],$contenu);
+				if ( function_exists('preg_last_error') AND preg_last_error()<>PREG_NO_ERROR ) {
+					spip_log("migrestatic: erreur regexp:".$key);
+					echo "migrestatic: warning function migre_filtrer_body() : invalid regexp key : $key\n<br>";
+				}
+			}
 		}
 	}
 
@@ -403,9 +409,6 @@ global $migre_meta;
 
 	$texte=preg_replace('/<a[ ]name=\"(.*)\".*>(.*)<\/a>/iUs',"[\$1<-]",$texte);
 	$texte=preg_replace('/<a.+href=\"(.*)\".*>(.*)<\/a>/iUs',"[\$2->\$1]",$texte);
-//	$texte = preg_replace ('/<br>-/iUs', "\n-", $texte);
-//	$texte = preg_replace ('/<br>\n/iUs', "\n_ ", $texte);
-//	$texte = preg_replace ('/&nbsp;/i', " ", $texte);
 
 	// Suite tableaux
 	$texte = preg_replace(",\n[| ]+\n,", "", $texte);
@@ -416,10 +419,6 @@ global $migre_meta;
 	$texte = preg_replace(",@@/?b@@,"," ",$texte);
 
 	$texte = preg_replace ('/<p>/i', "", $texte); // on enleve les balises <p> non fermées - nettoyage
-/*	$texte = preg_replace ('/\n[ \t]+/is', "\n", $texte); // on supprime les espaces multiples cf ltrim ?
-	$texte = preg_replace ('/([ a-z0-9éà])\n([-a-z0-9\)])/iUs', "\$1\$2", $texte); // on supprime les retours à la lignes inutiles
-	$texte = preg_replace ('/\n{2,}/i', "\n", $texte); // on supprime les dernieres lignes multiples
-*/
 	$texte = preg_replace ('/([ a-z0-9éà])[\n\r]([-a-z0-9\)])/iUs', "\$1\$2", $texte); // on supprime les retours à la lignes inutiles
 
 	$texte_lignes = preg_split("/\r\n|\n\r|\n|\r/", $texte);
@@ -485,12 +484,26 @@ global $migre_meta;
 	$migre_meta['migre_bcentredebut'] = _request('form_bcentredebut');
 	$migre_meta['migre_bcentrefin'] = _request('form_bcentrefin');
 	$migre_meta['migre_htos'] = array();
+	$migre_meta['migre_htos_changed']=false;
 	$htos=get_list_htos();
 	if (count($htos)>0) {
 		reset($htos);
 		while ( list($key,$val) = each($htos) ) {
 			$filtre=transcoder_page(_request($key.'-filtre'));
-			$conv=preg_replace('/\\\r/iUs',"\r",transcoder_page(_request($key.'-htos'))); // [fr] peut etre vide [en] empty value allowed
+			$conv=transcoder_page(_request($key.'-htos'));
+			if ($val['filtre']!=$filtre) {
+				$migre_meta['migre_htos_changed']=true;
+				$migre_meta['migre_htos_old'][$key]['filtre'] = $val['filtre'];
+				spip_log("migrestatic: filtre-spip($key):".$val['filtre'].":modifie:".$filtre.":");
+			}
+			if ($val['spip']!=$conv) {
+				$migre_meta['migre_htos_changed']=true;
+				$migre_meta['migre_htos_old'][$key]['spip'] = $val['spip'];
+				spip_log("migrestatic: filtre-htos($key):".$val['spip'].":modifie:".$conv.":");
+			}
+			$filtre=@preg_replace('/\\\r/iUs',"\r",$filtre); // [fr] peut etre vide [en] empty value allowed
+			$conv=@preg_replace('/\\\r/iUs',"\r",$conv); // [fr] peut etre vide [en] empty value allowed
+
 			$migre_meta['migre_htos'][$key]['filtre']=$filtre;
 			$migre_meta['migre_htos'][$key]['spip']=$conv;
 		}
