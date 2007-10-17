@@ -32,6 +32,7 @@ function exec_spiplistes_import_patron(){
 	include_spip('inc/meta');
 	include_spip('inc/filtres');
 	include_spip('inc/lang');
+	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	
 	$id_message = _request('id_message');

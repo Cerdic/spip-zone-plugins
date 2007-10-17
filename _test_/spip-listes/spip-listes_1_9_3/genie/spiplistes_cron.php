@@ -33,6 +33,8 @@
 	// - si periode < 0, repasse la liste en dormeuse
 
 function cron_spiplistes_cron ($last_time) {
+	
+	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 
 	spiplistes_log("CRON: cron_spiplistes_cron() <<", LOG_DEBUG);

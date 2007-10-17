@@ -1,6 +1,8 @@
 <?php
 
-include_spip ('base/spip-listes');
+include_spip('base/spiplistes_tables');
+
+spip_log("spiplistes_mes_fonctions.php <<", LOG_DEBUG);
 
 // Boucles SPIP-listes
 global $tables_principales,$exceptions_des_tables,$table_date;

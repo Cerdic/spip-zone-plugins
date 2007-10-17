@@ -24,20 +24,93 @@
 
 
 /*
-	Script appelé à chaque appel de exec=admin_plugin par spiplistes_init
+	Script appelé à chaque appel par mes_options
+	
+	spiplistes_upgrade() : si mise à jour de spiplistes
+	
+	spiplistes_upgrade_base() : si mise à jour de la base spiplistes
 */
 
-		
-function spiplistes_upgrade_base () {
+
+function spiplistes_upgrade () {
+
+spiplistes_log("spiplistes_upgrade() <<", LOG_DEBUG);
+
+	$spiplistes_name = __plugin_real_prefix_get();
+	$spiplistes_current_version =  __plugin_current_version_get('spiplistes');
+	$spiplistes_real_version = __plugin_real_version_get();
+	$spiplistes_current_version_base = __plugin_current_version_base_get('spiplistes');
+	$spiplistes_real_version_base = __plugin_real_version_base_get();
+
+	if(!$spiplistes_current_version) {
+	// SPIP-Listes n'a jamais été installé ? 
+		include_spip('base/spiplistes_init');
+		$spiplistes_current_version_base = spiplistes_base_creer();
+	}
+
+	if($spiplistes_current_version_base < $spiplistes_real_version_base) {
+	// upgrade de la base ?
+		$spiplistes_current_version_base = spiplistes_upgrade_base(
+			$spiplistes_name
+			, $spiplistes_current_version
+			, $spiplistes_current_version_base
+			, $spiplistes_real_version_base
+			);
+	}
 	
+	if($spiplistes_current_version < $spiplistes_real_version) {
+
+		spiplistes_log("UPGRADING $spiplistes_name $spiplistes_current_version TO $spiplistes_real_version", LOG_DEBUG);
+
+
+		if($spiplistes_current_version < 1.98008) {
+		// Commenter, ca aide ! ;-) (CP-20071016)
+			// Ne modifie pas le schéma. Ajoute juste une légende sur les tables
+			spip_query("ALTER TABLE spip_listes COMMENT 'Listes de diffusion'");
+			spip_query("ALTER TABLE spip_courriers COMMENT 'Paniers des courriers'");
+			spip_query("ALTER TABLE spip_auteurs_courriers COMMENT 'Queue des envois de courriers'");
+			spip_query("ALTER TABLE spip_auteurs_mod_listes COMMENT 'Moderateurs des listes de diffusion'");
+			spip_query("ALTER TABLE spip_auteurs_listes COMMENT 'Carnet des abonnements'");
+			spip_query("ALTER TABLE spip_auteurs_elargis COMMENT 'Preferences des auteurs'");
+			$spiplistes_current_version_base = 1.98008;
+		}
+
+
+/* ... */
+
+
+	// Ajouter au dessus de cette ligne les patches si besoin pour nouvelle version de SPIP-Listes
+	// qui ne concerne pas la base (changement de nom de script, de patron, etc.)
+
+	// fin des ajouts de patches
+		ecrire_meta('spiplistes_version', $spiplistes_real_version);
+		ecrire_metas();
+	}
+	
+	return($spiplistes_current_version);
+}
+
+function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version, $spiplistes_current_version_base, $spiplistes_real_version_base) {
+	
+	if($spiplistes_current_version_base && ($spiplistes_current_version_base >= $spiplistes_real_version_base)) {
+	// La base est à jour
+		return($spiplistes_current_version_base);
+	}
+	
+	// faire la mise à jour
+	spiplistes_log("UPGRADING DATABASE $spiplistes_name $spiplistes_current_version_base TO $spiplistes_real_version_base", LOG_DEBUG);
+	
+
+	// 'version_base' n'apparait que dans SPIP-Listes 1.98001
+	// Cherche sur $spiplistes_version pour les versions précédentes 
+
 	//install
-	$version_base = $GLOBALS['spiplistes_version'];
+	$version_base = 1.91; // ou inférieur ?
 	
-	// Comparaison de la version actuelle avec la version installee ($GLOBALS['meta']['spiplistes_version'])
-	$current_version = 0.0;
-	if (   (!isset($GLOBALS['meta']['spiplistes_version']) )
-			|| (($current_version = $GLOBALS['meta']['spiplistes_version'])!=$version_base)){
-		include_spip('base/spip-listes');
+	if (   
+		(!$spiplistes_current_version)
+		|| ($spiplistes_current_version < 1.98001)
+		) {
 		
 		// si etait deja installe mais dans une vieille version, on reprend a zero
 		include_spip('base/abstract_sql');
@@ -51,10 +124,9 @@ function spiplistes_upgrade_base () {
 
 		if ($current_version==0.0){
 			// Verifie que les tables spip_listes existent, sinon les creer
-spiplistes_log('creation des tables spip_listes', LOG_DEBUG);
+//spiplistes_log("UPGRADE: current_version: $current_version", LOG_DEBUG);
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
-			creer_base();
 			
 			//Migrer des listes anciennes // a deplacer dans une en fonction
 			$resultat_aff = spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'");
@@ -140,12 +212,14 @@ spiplistes_log('creation des tables spip_listes', LOG_DEBUG);
 		}
 		
 		if ($current_version<1.92){
+//spiplistes_log("UPGRADE: current_version: $current_version", LOG_DEBUG);
 			echo "SpipListes Maj 1.92<br />";
 			spip_query("ALTER TABLE spip_listes ADD titre_message varchar(255) NOT NULL default '';");
 			spip_query("ALTER TABLE spip_listes ADD pied_page longblob NOT NULL;");
 			ecrire_meta('spiplistes_version', $current_version=1.92);
 		}
 		if ($current_version<1.94){
+//spiplistes_log("UPGRADE: current_version: $current_version", LOG_DEBUG);
 			echo "SpipListes Maj 1.94<br />";
 			include_spip('base/abstract_sql');
 			if (($res=spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes"))
@@ -161,6 +235,7 @@ spiplistes_log('creation des tables spip_listes', LOG_DEBUG);
 			ecrire_meta('spiplistes_version', $current_version=1.94);
 		}
 		if ($current_version<1.95){
+//spiplistes_log("UPGRADE: current_version: $current_version", LOG_DEBUG);
 			echo "SpipListes Maj 1.95<br />";
 			include_spip('base/abstract_sql');
 			spip_query("ALTER TABLE spip_auteurs_courriers ADD etat varchar(5) NOT NULL default '' AFTER statut");
@@ -168,6 +243,7 @@ spiplistes_log('creation des tables spip_listes', LOG_DEBUG);
 		}
 		
 		if ($current_version<1.96){
+//spiplistes_log("UPGRADE: current_version: $current_version", LOG_DEBUG);
 			echo "SpipListes Maj 1.96<br />";
 			include_spip('base/abstract_sql');
 			
@@ -208,6 +284,7 @@ spiplistes_log('creation des tables spip_listes', LOG_DEBUG);
 		}
 		
 		if ($current_version<1.97){
+//spiplistes_log("UPGRADE: current_version: $current_version", LOG_DEBUG);
 			echo "SpipListes Maj 1.97<br />";
 			include_spip('base/abstract_sql');
 
@@ -259,18 +336,25 @@ spiplistes_log('creation des tables spip_listes', LOG_DEBUG);
 		
 		ecrire_metas();
 	}
-	
-	if($current_version<1.98001) {
-	// Commenter, ca aide ! ;-) (CP-20071016)
-		spip_query("ALTER TABLE spip_listes COMMENT 'Listes de diffusion'");
-		spip_query("ALTER TABLE spip_courriers COMMENT 'Paniers des courriers'");
-		spip_query("ALTER TABLE spip_auteurs_courriers COMMENT 'Queue des envois de courriers'");
-		spip_query("ALTER TABLE spip_auteurs_mod_listes COMMENT 'Moderateurs des listes de diffusion'");
-		spip_query("ALTER TABLE spip_auteurs_listes COMMENT 'Carnet des abonnements'");
-		spip_query("ALTER TABLE spip_auteurs_elargis COMMENT 'Preferences auteurs'");
+
+	// A partir de SPIP-Listes 1.98001, on se base sur le vrai numero de version de
+	// la base, (plugin.xml: <version_base>)
+	if($spiplistes_current_version_base < $spiplistes_real_version_base) {
+
+spiplistes_log("UPGRADING DATABASE version_base: $spiplistes_current_version_base TO $spiplistes_real_version_base", LOG_DEBUG);
+
+
+
+/* ... */
+
+
+	// ajouter au dessus de cette ligne les patches si besoin pour nouvelle version de la base
+	// fin des ajouts de patches
+		ecrire_meta('spiplistes_base_version', $spiplistes_current_version_base);
+		ecrire_metas();
 	}
-	
-	// ajouter ici les patches si besoin pour nouvelles versions
+
+	return($spiplistes_current_version_base);
 }
 
 ?>

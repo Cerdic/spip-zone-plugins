@@ -36,6 +36,7 @@ function exec_spiplistes_liste_gerer () {
 	include_spip('inc/presentation');
 	include_spip('inc/mots');
 	include_spip('inc/lang');
+	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_dater_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');

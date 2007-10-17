@@ -26,18 +26,17 @@ spiplistes_log("spiplistes_install() <<", LOG_DEBUG);
 			$result = (
 				isset($GLOBALS['meta']['spiplistes_version'])
 				&& ($v = $GLOBALS['meta']['spiplistes_version'])
-				&& ($v >= __plugin_get_real_version())
+				&& ($v >= __plugin_real_version_get())
 				&& spip_mysql_showtable("spip_auteurs_elargis")
 				&& spip_mysql_showtable("spip_listes")
 				);
 			$result = true;
-spiplistes_log("PLUGIN TEST: ".($result ? "true" : "false"), LOG_DEBUG);
+//spiplistes_log("PLUGIN TEST: ".($result ? "true" : "false"), LOG_DEBUG);
 			return($result);
 			break;
 		case 'install':
 			if(!isset($GLOBALS['meta']['spiplistes_version'])) {
-				include_spip('base/spip-listes');
-				$result = spiplistes_creer_base();
+				$result = spiplistes_base_creer();
 			}
 			else {
 				include_spip('base/spiplistes_upgrade');
@@ -48,7 +47,7 @@ spiplistes_log("PLUGIN TEST: ".($result ? "true" : "false"), LOG_DEBUG);
 				&& spiplistes_initialise_spip_metas_spiplistes()
 				&& spiplistes_activer_inscription_visiteurs()
 				);
-spiplistes_log("PLUGIN INSTALL: ".($result ? "true" : "false"), LOG_DEBUG);
+//spiplistes_log("PLUGIN INSTALL: ".($result ? "true" : "false"), LOG_DEBUG);
 			if(!$result) {
 				// nota: SPIP ne filtre pas le résultat. Si retour en erreur,
 				// la case à cocher du plugin sera quand même cochée
@@ -59,13 +58,36 @@ spiplistes_log("PLUGIN INSTALL: ".($result ? "true" : "false"), LOG_DEBUG);
 		case 'uninstall':
 			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
 			$result = spiplistes_vider_tables();
-spiplistes_log("PLUGIN UNINSTALL: ".($result ? "true" : "false"), LOG_DEBUG);
+//spiplistes_log("PLUGIN UNINSTALL: ".($result ? "true" : "false"), LOG_DEBUG);
 			return($result);
 			break;
 		default:
 			break;
 	}
 }
+
+
+function spiplistes_base_creer () {
+
+//spiplistes_log("spiplistes_base_creer() <<", LOG_DEBUG);
+
+	// demande à SPIP de créer les tables (base/create.php)
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
+	include_spip('base/db_mysql');
+	include_spip('base/spiplistes_tables');
+	creer_base();
+//spiplistes_log("spiplistes_base_creer() >>", LOG_DEBUG);
+	spiplistes_log("PLUGIN INSTALL: database creation");
+	$spiplistes_base_version = __plugin_real_version_base_get();
+	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
+	ecrire_metas();
+	
+	$spiplistes_base_version = lire_meta('spiplistes_base_version');
+
+	return($spiplistes_base_version);
+}
+
 
 function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 

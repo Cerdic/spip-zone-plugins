@@ -69,24 +69,35 @@ function __syslog_dump ($p, $tag = '') {
 }
 
 // renvoie le prefix du fichier plugin.xml
-function __plugin_get_real_prefix () {
-	$r = __plugin_get_real_tag('prefix');
+function __plugin_real_prefix_get () {
+	$r = __plugin_real_tag_get('prefix');
 	return ($r ? strtoupper($r) : false);
 }
 
 // renvoie la version du fichier plugin.xml
-function __plugin_get_real_version () {
-	$r = __plugin_get_real_tag('version');
+function __plugin_real_version_get () {
+	$r = __plugin_real_tag_get('version');
 	return ($r);
 }
 
 // renvoie la version_base du fichier plugin.xml
-function __plugin_get_real_version_base () {
-	$r = __plugin_get_real_tag('version_base');
+function __plugin_real_version_base_get () {
+	$r = __plugin_real_tag_get('version_base');
 	return ($r);
 }
 
-function __plugin_get_real_tag ($s) {
+function __plugin_current_version_get ($prefix) {
+	return(lire_meta($prefix."_version"));
+}
+
+// renvoie la version_base en cours
+	// doc: voir inc/plugin.php sur version_base (plugin.xml)
+	// qui s'appelle base_version en spip_meta %-}
+function __plugin_current_version_base_get ($prefix) {
+	return(lire_meta($prefix."_base_version"));
+}
+
+function __plugin_real_tag_get ($s) {
 	
 	include_spip("inc/plugin");
 	
@@ -108,7 +119,6 @@ function __plugin_dirname() {
 
 // renvoie le num de version du plugin lors de la dernière installation
 // présent dans les metas
-// ne sert que pour DEBUG
 function __plugin_meta_version($prefix) {
 	$result = false;
 	if($result = __plugin_meta_info($prefix)) {
@@ -121,7 +131,7 @@ function __plugin_meta_version($prefix) {
 function __plugin_meta_info($prefix = "") {
 
 	if(empty($prefix)) {
-		$prefix = __plugin_get_real_prefix();
+		$prefix = __plugin_real_prefix_get();
 	}
 	if(!empty($prefix)) {
 		$meta_plugin = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : '';
@@ -139,7 +149,7 @@ function __plugin_boite_meta_info ($return = false, $prefix = "") {
 
 	$result = false;
 	if(empty($prefix)) {
-		$prefix = __plugin_get_real_prefix();
+		$prefix = __plugin_real_prefix_get();
 	}
 	$info = plugin_get_infos($plug_file = __plugin_dirname());
 	//__syslog_dump($info);
@@ -219,7 +229,7 @@ function __plugin_html_signature ($return = false, $html = true) {
 		. ($html ? "<p class='verdana1 spip_xx-small' style='font-weight:bold;'>" : "")
 		. $nom." ".$GLOBALS['meta']['spiplistes_version']." "
 		. ($html ? "<span style='color:gray;'>" : "")
-		. "[".__plugin_meta_version(__plugin_get_real_prefix())."]"
+		. "[".__plugin_meta_version(__plugin_real_prefix_get())."]"
 		. ($html ? "</span></p>" : "")
 		;
 	if($return) return($result);

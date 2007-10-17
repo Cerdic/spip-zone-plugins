@@ -32,6 +32,7 @@ function exec_spiplistes_courrier_edit(){
 
 	include_spip('inc/presentation');
 	include_spip('inc/barre');
+	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 	include_spip('public/assembler');
 	include_spip('inc/spiplistes_naviguer_paniers');

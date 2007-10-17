@@ -1,5 +1,5 @@
 <?php
-
+// _SPIPLISTES_EXEC_COURRIER_GERER
 /******************************************************************************************/
 /* SPIP-listes est un syst�e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -25,8 +25,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /*
-	_SPIPLISTES_EXEC_COURRIER_GERER
-	
 	Affiche un courrier. 
 	Le formulaire permet :
 	- l'envoi sur mail de test
@@ -39,8 +37,8 @@ function exec_spiplistes_courrier_gerer () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/barre');
+	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
-	include_spip('base/spip-listes');
 	include_spip('inc/spiplistes_destiner_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');
 

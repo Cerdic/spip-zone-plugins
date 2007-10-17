@@ -280,20 +280,18 @@ $spiplistes_items = array(
 
 	include_spip('inc/options_spip_listes');
 	
-	$spiplistes_name = __plugin_get_real_prefix();
-	$spiplistes_version_real = __plugin_get_real_version();
-	$spiplistes_version_current =  lire_meta('spiplistes_version');
-	$spiplistes_version_base = __plugin_get_real_version_base();
+	$spiplistes_version =  lire_meta('spiplistes_version');
 
-	if(!$spiplistes_version_current) {
-	// Une installation ? Créer la base 
-		include_spip('base/spiplistes_base_creer'); 
-		spiplistes_base_creer();
-	}
-	else if($spiplistes_version_real > $spiplistes_version_current) {
-	// faire upgrade
-		spiplistes_log("STARTING $spiplistes_name version: $spiplistes_version_real - version_base: $spiplistes_version_base - current_version $spiplistes_version_current", LOG_DEBUG);
+//spiplistes_log("MES OPTIONS $spiplistes_version :: ".__plugin_real_version_base_get(), LOG_DEBUG);
+	if(__plugin_real_version_get() > $spiplistes_version) {
+		if(!$spiplistes_version) {
+		// Une installation ? Créer la base 
+			include_spip('base/spiplistes_init'); 
+			spiplistes_base_creer();
+		}
+		// faire upgrade
 		include_spip('base/spiplistes_upgrade');
+		spiplistes_upgrade();
 	}
 
 ?>
