@@ -46,6 +46,10 @@ table.spip td {
 	vertical-align: middle;
 }
 
+img {
+	border:0px;
+}
+
 /*élements de pagination*/
 .avant{
 	float: left;

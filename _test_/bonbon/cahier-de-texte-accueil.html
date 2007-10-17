@@ -19,15 +19,15 @@
 <div id="NoMenu">
 	<div id="EntetePage">
 			<ul class="boutons">
-				<li><a href="#URL_SITE_SPIP">Retourner &agrave; l'accueil du site</a></li>
-				<li><a href="#requete" title="Faire une requ&ecirc;te pr&eacute;cise sur le contenu du cahier de texte">Faire une requ&ecirc;te pr&eacute;cise</a>
+				<li><a href="#URL_SITE_SPIP"><img src="plugins/bonbon/images/dialog-ok-upside-down.png" alt="icône" vspace="2" align="middle">Retourner &agrave; l'accueil du site</a></li>
+				<li><a href="#requete" title="Faire une requ&ecirc;te pr&eacute;cise sur le contenu du cahier de texte"><img src="plugins/bonbon/images/edit-find-replace.png" alt="icône" vspace="2" align="middle">Faire une requ&ecirc;te pr&eacute;cise</a>
 			</ul>
 			<h1>Accueil du cahier de texte (#NOM_SITE_SPIP)</h1>
 			<br class="clear" />	
 	</div>
 	<div id="Contenu">
 		<div class="bloc"><center>
-			<h3 class="titre">Acc&egrave;s public</h3>
+			<h3 class="titre"><img src="plugins/bonbon/images/dialog-information.png" alt="icône" vspace="2" align="top">Acc&egrave;s public</h3>
 			<form name="choisir_devoir" method="get" action="spip.php">
 				<input type="hidden" name="page" value="cahier-de-texte-affichage">
 				<select id="classe" name="classe" size="1">
@@ -75,7 +75,7 @@
 </BOUCLE_CDT_entier>
 		</center></div>
 		<div class="bloc"><center>
-			<h3 class="titre">Acc&egrave;s enseignant</h3>
+			<h3 class="titre"><img src="plugins/bonbon/images/dialog-password.png" alt="icône" vspace="2" align="top">Acc&egrave;s enseignant</h3>
 <?php if ($auteur_session) {
 	//paramètres de session utilisés:
 	$auteur=$auteur_session['nom'];
@@ -83,8 +83,8 @@
 	echo "<p class='spip'>$auteur (si vous n'&ecirc;tes pas $auteur, <a href=\"";
 ?>#URL_LOGOUT<?php
 	echo "\" title=\"d&eacute;connexion imm&eacute;diate !\">cliquez ici</a>)</p>\n";
-	echo '			<a href="spip.php?page=cahier-de-texte-saisie" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels">Saisir une s&eacute;ance</a>&nbsp;|';
-	echo '			 <a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entr&eacute;es du cahier de texte">Afficher ses s&eacute;ances</a>';
+	echo '			<a href="spip.php?page=cahier-de-texte-saisie" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une s&eacute;ance</a>&nbsp;|';
+	echo '			 <a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entr&eacute;es du cahier de texte"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses s&eacute;ances</a>';
 } else {?>
 			#LOGIN_PUBLIC
 <?php }

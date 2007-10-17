@@ -38,13 +38,13 @@ nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...
 <div id="NoMenu">
 	<div id="EntetePage">
 			<ul class="boutons">
-				<li><a href="spip.php?page=cahier-de-texte-accueil" title="Retourner à la page d'accueil du cahier de texte">Accueil du cahier de texte</a></li>
-				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20">Afficher les 20 dernieres séances</a></li>
+				<li><a href="spip.php?page=cahier-de-texte-accueil" title="Retourner à la page d'accueil du cahier de texte"><img src="plugins/bonbon/images/dialog-ok-upside-down.png" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
+				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20"><img src="plugins/bonbon/images/system-search.png" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
 <?php if ($auteur_session) {
-	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels">Saisir une séance</a></li>';
-	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte">Afficher ses séances</a></li>';
+	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>';
+	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>';
 }?>
-				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte">Faire une requête précise</a>
+				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte"><img src="plugins/bonbon/images/edit-find-replace.png" alt="icône" vspace="2" align="middle">Faire une requête précise</a>
 			</ul>
 			<h1>Cahier de texte (#NOM_SITE_SPIP)</h1>
 			<br class="clear" />

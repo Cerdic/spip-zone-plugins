@@ -70,11 +70,11 @@ modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifi
 <div id="NoMenu">
 	<div id="EntetePage">
 			<ul class="boutons">
-				<li><a href="spip.php?page=cahier-de-texte-accueil" title="Retourner à la page d'accueil du cahier de texte">Accueil du cahier de texte</a></li>
-				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20">Afficher les 20 dernières séances</a></li>
+				<li><a href="spip.php?page=cahier-de-texte-accueil" title="Retourner à la page d'accueil du cahier de texte"><img src="plugins/bonbon/images/dialog-ok-upside-down.png" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
+				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20"><img src="plugins/bonbon/images/system-search.png" alt="icône" vspace="2" align="middle">Afficher les 20 dernières séances</a></li>
 <?php if ($auteur_session) {
-	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels">Saisir une séance</a></li>';
-	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte">Afficher ses séances</a></li>';
+	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>';
+	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>';
 }?>
 			</ul>
 [(#REM)Vérification de l'authentification]
@@ -425,7 +425,7 @@ if ($doc_joint[1]!="") {
 		echo("&id_classe$count=".$id_classe[$count]);
 	};
 	if ($classes>0) echo ("&classes=$classes");
-			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-affichage})]&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-accueil})]" title="retour à l'accueil"><img src="plugins/bonbon/images/logo-mini2-16.png" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
+			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-affichage})]&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-accueil})]" title="retour à l'accueil"><img src="plugins/bonbon/images/logo-mini2-22.png" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
 		</div>
 	</div></div>
 
