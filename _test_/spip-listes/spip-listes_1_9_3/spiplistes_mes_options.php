@@ -148,7 +148,8 @@ function balise_DATE_MODIF_FORUM($p) {
 }
 
 //utiliser le cron pour envoyer les messages en attente
-function spiplistes_taches_generales_cron($taches_generales){
+function spiplistes_taches_generales_cron($taches_generales) {
+	//spiplistes_log("spiplistes_taches_generales_cron() << ", LOG_DEBUG);
 	$taches_generales['spiplistes_cron'] = 10 ;
 	return $taches_generales;
 }

@@ -56,7 +56,7 @@ function spiplistes_meleuse () {
 	include_spip('inc/acces');
 	
 	include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
-	
+
 	// initialise les options
 	foreach(array(
 		'opt_simuler_envoi'
@@ -184,13 +184,6 @@ function spiplistes_meleuse () {
 			}
 
 			////////////////////////////////////		  
-			// Applique le tampon éditeur en fin de mail
-			if($opt_ajout_tampon_editeur) {
-				$page_html .= $tampon_html;
-				$page_texte .= $tampon_texte;
-			}
-		
-			////////////////////////////////////		  
 			// La petite ligne du renvoi du cookie pour modifier son abonnement
 			$pied_rappel_html = _T('spiplistes:abonnement_mail');
 			$pied_rappel_texte = html_entity_decode($pied_rappel_html);
@@ -198,7 +191,7 @@ function spiplistes_meleuse () {
 			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
 				include_spip('inc/charsets');
 				foreach(array('objet_html', 'objet_texte', 'page_html', 'page_texte', 'pied_page_html', 'pied_page_texte'
-					, 'pied_rappel_html', 'pied_rappel_texte') as $key) {
+					, 'pied_rappel_html', 'pied_rappel_texte', 'tampon_html', 'tampon_texte') as $key) {
 					if(!empty($$key)) {
 						$$key = spiplistes_translate_2_charset($$key,$GLOBALS['meta']['spiplistes_charset_envoi']);
 					}
@@ -282,14 +275,15 @@ function spiplistes_meleuse () {
 											. $page_html
 											. $pied_page_html
 											. "<a href=\"$_url\">".$pied_rappel_html."</a>\n\n</body></html>"
+											. $tampon_html
 											;
 										break;
 									case 'texte':
 										$body =
 											$page_texte ."\n\n"
 											. $pied_page_texte
-											. str_replace("&amp;", "&", $pied_rappel_texte)
-											. " " . $_url."\n\n"
+											. str_replace("&amp;", "&", $pied_rappel_texte). " " . $_url."\n\n"
+											. $tampon_texte
 											;
 										break;
 								}
