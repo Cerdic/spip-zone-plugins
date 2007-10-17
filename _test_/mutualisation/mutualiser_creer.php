@@ -74,7 +74,7 @@ function mutualiser_creer($e, $options) {
 						// MYSQL specifique qui aura les droits sur la base
 						if ($options['creer_user_base']) {
 							if (!mysql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_USER_DB."'@'"._INSTALL_HOST_DB."' IDENTIFIED BY '"._INSTALL_PASS_DB."'")) {
-								die (__FILE__." " . __LINE__.": Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_NAME_DB."'@'"._INSTALL_HOST_DB."'  IDENTIFIED BY 'xxx'");
+								die (__FILE__." " . __LINE__.": Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_USER_DB."'@'"._INSTALL_HOST_DB."'  IDENTIFIED BY 'xxx'");
 							}
 							mysql_close($link);
 							$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB, _INSTALL_PASS_DB);
