@@ -739,7 +739,7 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 		$result = recuperer_fond($f, $contexte_patron);
 	}
 	if(!$result) {
-		$result = version_texte($tampon_html);
+		$result = version_texte($lien_html);
 	}
 	return($result);
 }

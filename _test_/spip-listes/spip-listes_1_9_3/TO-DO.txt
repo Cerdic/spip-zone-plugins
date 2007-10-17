@@ -15,5 +15,4 @@ TO-DO:
 - icone 'casier à courrier' à revoir. Idem 'listes de diffusion'
 - import/export: gérer les fichiers compressés
 - import/export: proposer séparateur tab ou ";", a-la-CSV
-- revoir le principe de mise à jour (appel à base/*). (en cours CP 20071016)
 
