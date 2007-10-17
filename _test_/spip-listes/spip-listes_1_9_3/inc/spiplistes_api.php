@@ -746,7 +746,8 @@ function spiplistes_lien_courrier_texte_get ($lien_patron, $lien_html, $url_cour
 
 // donne contenu pied_page au format html (CP-20071014)
 // lien_patron: nom du tampon (fichier, sans extension)
-function spiplistes_pied_page_html_get ($pied_patron) {
+function spiplistes_pied_page_html_get ($pied_patron, $lang = "") {
+	if(empty($lang)) $lang = $GLOBALS['spip_lang'];
 	$contexte_patron = array('lang'=>$lang);
 	include_spip('public/assembler');
 	$result = recuperer_fond(_SPIPLISTES_PATRONS_PIED_DIR.$pied_patron, $contexte_patron);
