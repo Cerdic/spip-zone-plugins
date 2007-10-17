@@ -419,13 +419,13 @@ if ($doc_joint[1]!="") {
 }//fin if doc joint
 ?>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
-			<p><a href="spip.php?page=cahier-de-texte-saisie&id_article=<?php echo ($id_contenu_seance); ?>" tile="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe">Dupliquer la séance pour une autre classe/groupe</a>&nbsp;|<a href="spip.php?page=cahier-de-texte-accueil" title="retour à l'accueil">Retourner à l'accueil</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-affichage&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies">Afficher ses séances</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-saisie<?php
+			<p><a href="[(#URL_PAGE{cahier-de-texte-saisie})]&id_article=<?php echo ($id_contenu_seance); ?>" title="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe"><img src="plugins/bonbon/images/go-jump.png" alt="icône" vspace="2" align="middle">Dupliquer la séance pour une autre classe/groupe</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-saisie})]<?php
 	echo ("&id_matiere=$id_matiere");
 	for ($count=0; $count<=$classes; $count++) {
 		echo("&id_classe$count=".$id_classe[$count]);
 	};
 	if ($classes>0) echo ("&classes=$classes");
-			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels">Saisir une autre fiche</a></p>
+			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-affichage})]&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-accueil})]" title="retour à l'accueil"><img src="plugins/bonbon/images/logo-mini2-16.png" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
 		</div>
 	</div></div>
 
