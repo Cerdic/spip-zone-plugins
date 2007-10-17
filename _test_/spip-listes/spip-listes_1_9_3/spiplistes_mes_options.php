@@ -287,7 +287,7 @@ $spiplistes_items = array(
 
 	if(!$spiplistes_version_current) {
 	// Une installation ? Créer la base 
-		include_spip('base/spip-listes'); 
+		include_spip('base/spiplistes_base_creer'); 
 		spiplistes_creer_base();
 	}
 	else if($spiplistes_version_real > $spiplistes_version_current) {
