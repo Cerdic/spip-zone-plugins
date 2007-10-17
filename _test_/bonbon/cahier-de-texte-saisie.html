@@ -25,6 +25,7 @@ docs= nombre de documents joints (0-> pas de doc joint)
 ajoutdoc= s'il n'y avait pas de docs et qu'on veut en mettre un
 plusdoc= rafficher le formulaire avec un ligne de selection de doc en plus
 moinsdocs= effacer le dernier doc joint entré
+id_article=contient un id_article que l'on veut dupliquer (ou modifier)
 
 enregistrer_fiche= quand la fiche est validée
 modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifié
@@ -94,6 +95,7 @@ modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifi
 	//print_r($_GET);
 	//echo "liste des POST\n";
 	//print_r($_POST);
+	$id_article=($_GET['id_article']);
 	$classes=($_GET['classes']);
 	for ($count=0; $count<=$classes; $count++) {
 		$id_classe[$count]=($_GET["id_classe$count"]);
@@ -115,6 +117,43 @@ modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifi
 	for ($count=0; $count<=$docs; $count++) {
 		$doc_joint[$count]=($_POST["doc_joint$count"]);
 	};//les chemins des docs joints ont été placés dans $doc_joint[]
+
+//si on demande à dupliquer ou modifier un article: on récupère les données de l'article (si elles ne sont pas déjà présentes en GET)
+	if (!$id_classe[0] and $id_article and !$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']) {
+		$count=-1;
+?>
+<BOUCLE_TrouveClasses_id_article(MOTS){id_article}{type=Classes}><?php
+		$count++;
+		$id_classe[$count]='[(#ID_MOT|texte_script)]';
+?></BOUCLE_TrouveClasses_id_article>
+		<?php $classes=$count; ?>
+<BOUCLE_TrouveGroupe_id_article(MOTS){id_article}{type=Sous groupes de classes}><?php
+		$id_groupe='[(#ID_MOT|texte_script)]';
+?></BOUCLE_TrouveGroupe_id_article>
+<BOUCLE_TrouveMatiere_id_article(MOTS){id_article}{type=Matières}><?php
+		$id_matiere='[(#ID_MOT|texte_script)]';
+?></BOUCLE_TrouveMatiere_id_article>
+<?php
+	}//fin du not classe0 et if id_article
+
+//si on demande à dupliquer ou modifier un article *et qu'on a choisi classe et matière*: on récupère les données de l'article (si elles ne sont pas déjà présentes en GET)
+
+	if ($_GET['classe_matiere'] and $id_article and !$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']){ //si la matière est validée on récupère le contenu de la séance
+?>
+<BOUCLE_Trouve_Infos_Seance_id_article(ARTICLES){id_article}><?php
+		$date_seance='[(#DATE|affdate{d/m/Y}|texte_script)]';
+		$contenu_seance='[(#TEXTE*|texte_script)]';
+		$devoirs=-1; ?>
+	<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){titre_mot="Devoirs à faire"}{ps==#ENV{id_article}}><?php
+		$devoirs++;
+		$date_devoir[$devoirs]='[(#DATE|affdate{d/m/Y}|texte_script)]';
+		$contenu_devoir[$devoirs]='[(#TEXTE*|texte_script)]';
+	?></BOUCLE_Trouve_Infos_Devoirs_id_article>
+</BOUCLE_Trouve_Infos_Seance_id_article>
+<?php
+		if ($devoirs==-1) $devoirs="";
+	}//fin du if classe_matiere and id_article
+
 
 //boutons qui ont été pressés pour ajouter des options
 //une classe de plus ?
@@ -165,7 +204,7 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 //On l'affiche pour vérification...
 //todo: afficher avec la CSS Spip
 ?>
-	<h1>Voici la fiche que vous avez remplie&nbsp;:</h1>
+	<h1>Voici la fiche que vous avez <?php if ($id_article) {echo "dupliquée";} else {echo "remplie";}; ?>&nbsp;:</h1>
 			<br class="clear" />	
 	</div>
 	<div id="Contenu"><div class="bloc">
@@ -252,7 +291,7 @@ if ($doc_joint[1]!="") {
 	}//fin du ifnot everything_ok
 ?>
 </BOUCLE_Contexte_RubriqueCDT>
-			<h1>La fiche est définitivement enregistrée&nbsp;:</h1>
+			<h1>La fiche <?php if ($id_article) {echo "dupliquée ";}; ?>est définitivement enregistrée&nbsp;:</h1>
 			<br class="clear" />	
 	</div>
 	<div id="Contenu"><div class="bloc">
@@ -380,7 +419,7 @@ if ($doc_joint[1]!="") {
 }//fin if doc joint
 ?>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
-			<p><a href="spip.php?page=cahier-de-texte-accueil" title="retour à l'accueil">Retourner à l'accueil</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-affichage&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies">Afficher ses séances</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-saisie<?php
+			<p><a href="spip.php?page=cahier-de-texte-saisie&id_article=<?php echo ($id_contenu_seance); ?>" tile="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe">Dupliquer la séance pour une autre classe/groupe</a>&nbsp;|<a href="spip.php?page=cahier-de-texte-accueil" title="retour à l'accueil">Retourner à l'accueil</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-affichage&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies">Afficher ses séances</a>&nbsp;| <a href="spip.php?page=cahier-de-texte-saisie<?php
 	echo ("&id_matiere=$id_matiere");
 	for ($count=0; $count<=$classes; $count++) {
 		echo("&id_classe$count=".$id_classe[$count]);
@@ -402,8 +441,13 @@ break;}// Fin du if valider fiche
 //---------------------------------------------------
 //L'utilisateur veut remplir une fiche ou la modifier
 //---------------------------------------------------
+
+//--------------------------------
+//Primo: remplir classe et matière
+//--------------------------------
+
 ?>
-	<h1>Remplir une fiche du cahier de texte</h1>
+	<h1><?php if ($id_article) {echo "Modifier";} else {echo "Remplir";}; ?> une fiche du cahier de texte</h1>
 		<h2><?php echo($titre_matiere_classe);?></h2>
 			<br class="clear" />	
 	</div>
@@ -414,8 +458,9 @@ if(!$_GET['classe_matiere']){
 	<!--Selecteur de classe et matière-->
 		<form name="classe_matiere" method="get">
 		<input type="hidden" name="page" value="cahier-de-texte-saisie">
+<?php	if ($id_article) echo "<input type=\"hidden\" name=\"id_article\" value=\"$id_article\">";?>
 		<fieldset>
-			<legend>Classe<?php if ($classes>0) echo "s"?>&nbsp;:</legend>
+			<legend><?php if ($id_article) {echo "Modifier ";}; ?>Classe<?php if ($classes>0) echo "s"?>&nbsp;:</legend>
 <?php //Une ou plusieurs classes
 if ($classes>0) echo ("Regroupement de classes&nbsp;:");
 for ($count=0; $count<=$classes; $count++) {
@@ -446,7 +491,7 @@ if ($classes>0) {
 			</select>
 		</fieldset>
 		<fieldset>
-			<legend>Matière&nbsp;:</legend>
+			<legend><?php if ($id_article) {echo "Modifier ";}; ?>Matière&nbsp;:</legend>
 			<select id="matiere" name="id_matiere" size="1">
 [(#REM)On extrait toutes les matières de Spip]
 <BOUCLE_ToutesLesMatieres(MOTS){type="Matières"}{par num titre}{par titre}>
@@ -455,10 +500,16 @@ if ($classes>0) {
 			</select>
 			</fieldset>
 			<input type="hidden" name="id_auteur" value="<?php echo $id_auteur;?>">
-			<input type="Submit" value="Valider classe<?php if ($classes>0) echo "s"?> et matière" name="classe_matiere">
+			<input type="Submit" value="<?php if ($id_article) {echo "Modifier";} else {echo "Valider";}; ?> classe<?php if ($classes>0) echo "s"?> et matière" name="classe_matiere">
 		</form>
 <?php
 }//fin du ifnot classe-matiere
+
+//----------------------------------------------------------------------
+//Secundo: remplir le contenu (quand classes et matières sont renseignés
+//----------------------------------------------------------------------
+
+
 if($_GET['classe_matiere']){
 ?>
 	<div>
@@ -466,7 +517,7 @@ if($_GET['classe_matiere']){
 		<FORM NAME="contenu" method="post">
 		<input type="hidden" name="page" value="cahier-de-texte-saisie">
 			<fieldset>
-			<legend>Contenu de la séance</legend>
+			<legend><?php if ($id_article) {echo "Modifier le ";}; ?>Contenu de la séance</legend>
 			<p>Séance du <INPUT TYPE="text" ID="date_seance" NAME="date_seance" VALUE="<?php if (!$date_seance) echo date("d/m/Y"); else echo $date_seance;?>" SIZE=12>
 			<A HREF="#"
 			onClick="cal.select(document.forms['contenu'].date_seance,'ancre-date','dd/MM/yyyy'); return false;"
@@ -475,7 +526,7 @@ if($_GET['classe_matiere']){
 			</fieldset>
 	<!--Devoirs à faire -->
 			<fieldset>
-			<legend>Devoirs</legend>
+			<legend><?php if ($id_article) {echo "Modifier les ";}; ?>Devoirs</legend>
 <?php for ($count=0; $count<=$devoirs; $count++) {
 ?>
 			<p>À faire pour le <INPUT TYPE="text" ID="date_devoir<?php echo $count;?>" NAME="date_devoir<?php echo $count;?>" VALUE="<?php if (!$date_devoir[$count]) echo date("d/m/Y"); else echo $date_devoir[$count];?>" SIZE=12><A HREF="#"

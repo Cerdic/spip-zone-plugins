@@ -5,7 +5,6 @@ Ce qui a été fait avec «Bonbon !»
 Passage à la version 1.9 de Spip
 Mise en plug-in
 Quelques corrections (les classes, matières, profs ne sont affichés que s'ils mènent vers des entrées du CDT)
-FCKeditor disparaît (provisoirement ?)
 «Bonbon !» est sur la zone (svn) en test.
 La pagination est désormais celle de Spip>1.9 (à la place de la pagination nulle aui avait été mise en place)
 Optimisations:	-utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof,.}} (merci BoOz).
@@ -15,6 +14,7 @@ Un rafraichissement plus fréquent des pages (durée de cache plus courte)
 Des améliorations dans l'interface de saisie: 	-matière et classes sont préslecetionnés quand on vient de finir de saisir une séance et qu'on passe à la suivante.
 						-au dessus du formulaire de saisie il y a un rappel du contexte...
 						- etc...
+Fonctionalité majeure: On peut dupliquer une séance déjà saisie ! (pour copier coller ce qui a été fait avec une classe sur une autre)...
 
 
 1.0 Première sortie de Bonbon
