@@ -203,6 +203,7 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'editeur_url' => "URL du site de l'&eacute;diteur ",
 'editeur_logo' => "URL du logotype de l'&eacute;diteur ",
 'En_debut_de_mois' => "En d&eacute;but de mois",
+'envoi_non_programme' => "Envoi non programm&eacute;",
 
 //F
 'faq' => 'FAQ',

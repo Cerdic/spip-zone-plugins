@@ -221,6 +221,11 @@ spiplistes_log("auteur_statut: $auteur_statut");
 				$checked = in_array($id_liste, $auteur_current_list) ? "checked='checked'" : "";
 				$label = in_array($id_liste, $auteur_current_list) ? "spiplistes:Arreter_abonnement_a" : "spiplistes:Abonner_a";
 				$label = _T($label)." ".$value['titre'];
+				$prochain_envoi = 
+					($value['date'] != _SPIPLISTES_ZERO_TIME_DATE)
+					? _T('spiplistes:Prochain_envoi_').": <span style='font-weight:bold;'>".affdate_heure($value['date'])."</span>"
+					: _T('spiplistes:envoi_non_programme')
+					;
 				$result .= ""
 					. "<li style='margin:0 0 0.25em;'>\n"
 					. "<input name='abos_set[]' type='checkbox' id='abos_$id_liste' value='$id_liste' title=\"$label\" $checked />\n"
@@ -231,8 +236,7 @@ spiplistes_log("auteur_statut: $auteur_statut");
 					. "<div style='display:inline;'>\n"
 					. "<span style='font-size:110%;'>".propre($value['titre'])."</span> \n"
 					. "<span style='font-size:90%;color:gray;'>".propre($value['texte'])." </span>\n"
-						. "<span style='font-size:90%;'>("._T('spiplistes:Prochain_envoi_') 
-							. ": <span style='font-weight:bold;'>".affdate_heure($value['date'])."</span>)</span>\n"
+					. "<span style='font-size:90%;'>($prochain_envoi)</span>\n"
 					. "</div></label></li>\n"
 					;
 			}
