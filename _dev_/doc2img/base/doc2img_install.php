@@ -1,11 +1,16 @@
 <?php
 
-/**
-* rm() -- Vigorously erase files and directories.
-*
-* @param $fileglob mixed If string, must be a file name (foo.txt), glob pattern (*.txt), or directory name.
-* If array, must be an array of file names, glob patterns, or directories.
-*/
+/*! \file doc2img_install.php
+ *  \brief tout ce qui concerne l'installation et la desinstallation du plugin
+ *
+ */
+     
+/*! \brief Vigorously erase files and directories.
+ *  \param $fileglob mixed If string, must be a file name (foo.txt), glob pattern (*.txt), or directory name.
+ *  If array, must be an array of file names, glob patterns, or directories.
+ *  \return true si tout s'est bien passé
+ *  \author bishop http://fr.php.net/manual/fr/function.unlink.php#53549  
+ */
 function rm($fileglob) {
     spip_log($fileglob,'doc2img');
     if (is_string($fileglob)) {
@@ -41,22 +46,13 @@ function rm($fileglob) {
     return true;
 }
 
-function clean_file($directory) {
-    spip_log('clean_file : '.$directory,'doc2img');
-    if( !$dirhandle = @opendir($directory) )
-        return;
 
-        while( false !== ($filename = readdir($dirhandle)) ) {
-            spip_log("clean :".$filename);
-            if( $filename != "." && $filename != ".." ) {
-                $filename = $directory. "/". $filename;
-                @unlink($filename);
-            }
-       }
-}
-
-
-//configure la base spip et les metas
+/*! \brief determine si installation, mise à jour, ou supression
+ *  
+ *  Cette fonction est appélée à chaque acces à la page /ecrire/?exec=admin_plugin. Elle configure la base spip et les metas nécessaire au bon fonctionnement du plugin
+ *  \param $action soit test, install, uninstall
+ *
+ */   
 function doc2img_install($action){
     //on récupere la version depuis plugin.xml
     $doc2img_infos = plugin_get_infos('doc2img');
@@ -78,7 +74,16 @@ function doc2img_install($action){
 			break;
 	}
 }
-
+/*! \brief installeur
+ * 
+ *  Effectue l'ensemble des actions necessaire au bon fonctionnement du plugin :
+ *  - mise en place de la table doc2img
+ *  - configuration par défaut de cfg
+ *  - definition de la version en cours du plugin
+ *  
+ *  \param $version version au moment de l'installation, NULL lors d'une premiere installation
+ *  \param $version_finale version spécifiée dans plugin.xml
+ */   
 function doc2img_installer($version,$version_finale) {
 
     //méthode  $version correspond à la version installée
@@ -129,10 +134,19 @@ function doc2img_installer($version,$version_finale) {
     ecrire_metas();
 }
 
+/*! \brief desinstalleur
+ * 
+ *  Effectue l'ensemble des actions necessaire à la suppresion définitive du plugin :
+ *  - retrait de la table doc2img et de ses données
+ *  - suppression du repertoire par défaut
+ *  - definition de la version en cours du plugin
+ *  
+ */   
 function doc2img_uninstaller() {
 
-    //la desinstallation se lance depuis la racine du site et non ecrire/
+    include_spip('cfg_options');
 
+    //la desinstallation se lance depuis la racine du site et non ecrire/
     spip_log('suppression compléte','doc2img');
 
     //on néttoie ce qui a été installée
@@ -141,7 +155,7 @@ function doc2img_uninstaller() {
 	
 	spip_log('suppression table','doc2img');
 	//on supprime le repertoire créé et son contenu
-	$dir_doc2img = getcwd().'/IMG/doc2img';
+	$dir_doc2img = getcwd().'/'.lire_config('doc2img/repertoire_cible');
 	spip_log('suppression des doc2img :'.$dir_doc2img,'doc2img');
     rm($dir_doc2img);
  

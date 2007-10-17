@@ -1,18 +1,21 @@
 <?php
+
+/*! \file doc2img_options.php
+ *  \brief Ensemble des fonctions, variables à chargée coté privé et public 
+ *
+ *  On déclare les tables doc2img comme faisant partie intégrante de SPIP 
+ */   
+
     //Ajout de champs supplémentaires
     include_spip('base/serial');
-
 
 	// declaration des tables
 	$GLOBALS['table_des_tables']['doc2img'] = 'doc2img';
 	global $tables_principales;
 
-	$table_nom = "spip_doc2img";
-
     // déclaration des champes
     $spip_doc2img['id_doc2img'] = "bigint(21) NOT NULL";
     $spip_doc2img['id_document'] = "bigint(21) NOT NULL";
-    $spip_doc2img['id_type'] = "bigint(21) NOT NULL";
     $spip_doc2img['fichier'] = "varchar(255) NOT NULL";
 
     // déclaration des clef primaire et etrangére
