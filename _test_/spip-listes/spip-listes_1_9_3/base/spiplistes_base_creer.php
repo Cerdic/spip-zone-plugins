@@ -1,18 +1,18 @@
 <?php
-// base/spip-listes.php
+// base/spiplistes_base_creer.php
 
-// $LastChangedRevision: 16063 $
-// $LastChangedBy: paladin@quesaco.org $
-// $LastChangedDate: 2007-10-16 15:09:37 +0200 (mar., 16 oct. 2007) $
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 
-function spiplistes_creer_base () {
+function spiplistes_base_creer () {
 
 	include_spip('base/create');
 	include_spip('base/abstract_sql');
 	include_spip('base/db_mysql');
 
-spiplistes_log("spiplistes_creer_base() <<");
+spiplistes_log("spiplistes_base_creer() <<");
 
 //////////////////////////////////
 // Ici on declare la structure des tables au compilo
