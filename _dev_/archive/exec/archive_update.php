@@ -99,9 +99,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	//issu de ecrire/action/purger.php ('case cache')
 	include_spip('inc/invalideur');
 	supprime_invalideurs();
-	if (function_exists('spip_unlink')) {
-		spip_unlink(_CACHE_RUBRIQUES);
-	}
+	/* avant 192 et des brouettes */
+	/* http://trac.rezo.net/trac/spip/changeset/9899 */
+	if (function_exists(spip_unlink)==true) {
+	  spip_unlink(_CACHE_RUBRIQUES);
+	/* apres 192 et des brouettes */
+	} else if (function_exists(supprimer_fichier)==true) {
+      supprimer_fichier(_CACHE_RUBRIQUES);
+    }
 	purger_repertoire(_DIR_CACHE);
 
 	//relance la page appelante
