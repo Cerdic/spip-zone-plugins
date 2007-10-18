@@ -610,7 +610,7 @@ add_outil( array(
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
-	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a+'@'+b; }"
+	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }"
 		// jQuery pour remplacer l'arobase image par l'arobase texte
 		. "\n\$(document).ready(function(){ \$('span.spancrypt').after('<span>&#6'+'4;<\/span>'); \$('span.spancrypt').remove(); });",
 	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
