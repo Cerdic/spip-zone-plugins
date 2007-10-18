@@ -19,11 +19,12 @@ function passe_complexe_insert_head($flux){
 
 		$flux .= '<script type="text/javascript"><!--
 		$(document).ready(function() {
-           $("input.formo[@name=new_pass]").pstrength({
+           $("input.formo[@name=new_pass]").pstrength({ 
              minchar: '.max(lire_config('passe_complexe/length',6),6).',
-             common: ["123456","123","spip","test"'
-		  .',"'.$GLOBALS['auteur_session']['nom'].'"'
-		  .passe_complexe_quote_common(_T('passecomplexe:common').$common_cfg).'],
+             common: ["123456","123","spip","test"' //les chaines communes generales
+		  .',"'.$GLOBALS['auteur_session']['nom'].'"' //le nom de l'auteur ne devrait pas se trouver dans le password
+		  .',"'.$GLOBALS['auteur_session']['login'].'"' //ni son login
+		  .passe_complexe_quote_common(_T('passecomplexe:common').$common_cfg.','.$GLOBALS['auteur_session']['nom_site'].','.$GLOBALS['meta']['nom_site']).'],
              verdects:	["'
 		  ._T('passecomplexe:tres_faible').'","'
 		  ._T('passecomplexe:faible').'","'
