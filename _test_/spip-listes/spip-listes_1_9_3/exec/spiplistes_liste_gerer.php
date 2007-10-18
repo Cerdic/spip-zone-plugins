@@ -83,6 +83,9 @@ function exec_spiplistes_liste_gerer () {
 	//////////////////////////////////////////////////////
 	// Creer une liste
 	////
+		// admin lambda peut créer une liste
+		$flag_editable = ($connect_statut == "0minirezo");
+		
 		if ($btn_liste_edit && ($new=='oui')) {
 			
 			if ($titre=='') {
@@ -239,6 +242,10 @@ function exec_spiplistes_liste_gerer () {
 		}
 	}
 
+	// les supers-admins et le moderateur seuls peuvent modifier la liste
+	$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
+	$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
+
 	$titre_message = ($titre_message=='') ? $titre._T('spiplistes:_de_').lire_meta("nom_site") : $titre_message;
 
 	$nb_abonnes = spiplistes_nb_abonnes_count ($id_liste);
@@ -247,8 +254,7 @@ function exec_spiplistes_liste_gerer () {
 	if($flag_editable) {
 		// Propose de modifier la liste 
 		$gros_bouton_modifier = 
-			($connect_toutes_rubriques)
-			? icone (
+			icone (
 				_T('spiplistes:Modifier_cette_liste') // légende bouton
 				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'id_liste='.$id_liste) // lien
 				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif" // image du fond
@@ -256,13 +262,10 @@ function exec_spiplistes_liste_gerer () {
 				, '' // alignement
 				, false // pas echo, demande retour
 				)
-			: ""
 			;
 		// Propose de supprimer la liste 
 		$gros_bouton_supprimer = 
-			($connect_toutes_rubriques)
-			// Conserve les archives postées
-			? icone (
+			icone (
 					_T('spiplistes:Supprimer_cette_liste')
 					, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "btn_supprimer_liste=$id_liste&id_liste=$id_liste")
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
@@ -270,7 +273,6 @@ function exec_spiplistes_liste_gerer () {
 					, "right"
 					, false
 					)
-			: ""
 			;
 	}
 	else {

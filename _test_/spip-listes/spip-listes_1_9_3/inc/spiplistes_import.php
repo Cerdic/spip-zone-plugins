@@ -9,7 +9,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/acces');
 
-function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "non", $return = false) {
+function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "non", $separateur = "\t", $return = false) {
 	$result = "";
 	if(is_readable($filename)) {
 		// récupère les logins et mails existants pour éviter les doublons
@@ -27,7 +27,7 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 		for($jj=0; $jj<$ii; $jj++) {
 			$nouvelle_entree = trim($new_entries[$jj]);
 			if(!empty($nouvelle_entree) && !ereg("^[/#]", $nouvelle_entree)) {
-				list($email, $login, $nom) = explode("\t", $nouvelle_entree);
+				list($email, $login, $nom) = explode($separateur, $nouvelle_entree);
 				$email = strtolower(trim($email));
 				if(email_valide($email)) {
 					$login = strtolower(trim($login));
@@ -52,13 +52,13 @@ function spiplistes_import ($filename, $realname, $abos_liste, $format_abo = "no
 						spip_query($sql_query);
 						// abonne le comptes aux listes
 						if(is_array($abos_liste) && count($abos_liste)) {
-							$sql_query = "";
+							$sql_values = "";
 							foreach($abos_liste as $id_liste) {
-								$sql_query .= " ("._q($id_auteur).","._q($id_liste).",NOW()),";
+								$sql_values .= " ("._q($id_auteur).","._q($id_liste).",NOW()),";
 							}
-							$sql_query = rtrim($sql_query, ",");
-							if(!empty($sql_query)) {
-								$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur,id_liste,date_inscription) VALUES ".$sql_query;
+							$sql_values = rtrim($sql_values, ",");
+							if(!empty($sql_values)) {
+								$sql_query = "INSERT INTO spip_auteurs_listes (id_auteur,id_liste,date_inscription) VALUES ".$sql_values;
 								spip_query($sql_query);
 							}
 						}

@@ -13,8 +13,8 @@ dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout cour
    ordinateur.<br />
 Cette liste d'abonn&eacute;s doit &ecirc;tre au format texte seul, une ligne 
    par abonn&eacute;. Chaque ligne doit &ecirc;tre compos&eacute;e ainsi :<br />
-<tt style='display:block;margin:0.75em 0;background-color:#ccc;border:1px solid #999;padding:1ex;'>adresse@mail<span style='color:#f66'>[tabulation]</span>login<span style='color:#f66'>[tabulation]</span>nom</tt>
-<tt style='color:#f66'>[tabulation]</tt> est un caract&egrave;re de tabulation.<br /><br />
+<tt style='display:block;margin:0.75em 0;background-color:#ccc;border:1px solid #999;padding:1ex;'>adresse@mail<span style='color:#f66'>[separateur]</span>login<span style='color:#f66'>[separateur]</span>nom</tt>
+<tt style='color:#f66'>[separateur]</tt> est un caract&egrave;re de tabulation ou un point-virgule.<br /><br />
 L'adresse email doit &ecirc;tre unique, ainsi que le login. Si cette adresse 
    email ou se login existe dans la base du site, la ligne sera rejet&eacute;e.<br />
 Le premier champ adresse@mail est obligatoire. Les deux autres champs peuvent 
@@ -413,6 +413,9 @@ liste.",
 'Supprimer_les_listes' => "Supprimer les listes",
 'Supprimer_la_liste' => "Supprimer la liste...",
 'Suspendre_abonnements' => "Suspendre les abonnements pour ce compte",
+'separateur_de_champ_' => "S&eacute;parateur de champ ",
+'separateur_tabulation' => "tabulation (<code>\\t</code>)",
+'separateur_semicolon' => "point-virgule (<code>;</code>)",
 
  //T
 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',

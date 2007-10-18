@@ -1,5 +1,5 @@
 <?php
-
+// _SPIPLISTES_EXEC_LISTE_EDIT
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -58,6 +58,10 @@ function exec_spiplistes_liste_edit(){
 	///////////////////////////////
 	// Modification de la liste transmise
 	//
+		// les supers-admins et le moderateur seuls peuvent modifier la liste
+		$id_mod_liste = spiplistes_mod_listes_get_id_auteur($id_liste);
+		$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
+
 		$sql_select = "titre,lang,pied_page,texte,date,statut";
 		$sql_result = spip_query("SELECT ".$sql_select." FROM spip_listes WHERE id_liste=$id_liste LIMIT 1");
 	
@@ -82,8 +86,8 @@ function exec_spiplistes_liste_edit(){
 		$titre = filtrer_entites(_T('spiplistes:Nouvelle_liste_de_diffusion'));
 		$texte = "";
 		$clearonfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		// supers-admins seuls ont droit de créer une liste
-		$flag_editable = $connect_toutes_rubriques;
+		// les admins ont droit de créer une liste
+		$flag_editable = ($connect_statut == "0minirezo");
 	}
 
 	// construit le pied
@@ -107,7 +111,7 @@ function exec_spiplistes_liste_edit(){
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
 	// la gestion des listes de courriers est réservée aux admins 
-	if($connect_statut != "0minirezo") {
+	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
