@@ -29,6 +29,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_desactiver' => 'Non',
 'cfg_inserer_head' => 'Insertion dans le &lt;head&gt;',
 'cfg_inserer_head_texte' => 'Inserer automatiquement les appels aux fichiers suivants dans la section &lt;head&gt; des pages du site (recommand&eacute;) :',
+'cfg_bouton_valider' => 'Type de bouton valider',
+'cfg_bouton_valider_texte' => 'Vous pouvez pr&eacute;ciser quel type de bouton valider utiliser dans les formulaires&nbsp;:',
+'cfg_bouton_type_image' => 'bouton de type image',
+'cfg_bouton_type_texte' => 'bouton de type texte (submit)',
+
 
 'champ_descendre' => "descendre",
 'champ_email_details'=>"Veuillez entrer une adresse e-mail valide (de type vous@fournisseur.com).",

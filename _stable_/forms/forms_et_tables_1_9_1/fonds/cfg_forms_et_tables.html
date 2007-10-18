@@ -31,6 +31,20 @@
 
 </fieldset>
 
+[(#REM) ------------------------ type de bouton : submit ou image ? ------------------------ ]
+<fieldset>
+<legend>
+	<:forms:cfg_bouton_valider:>
+</legend>
+<p><:forms:cfg_bouton_valider_texte:></p>
+<div>
+<input type="radio" name="bouton_image" value="1" [checked="(#ENV{bouton_image,0}?{checked,''})"] id="bouton_image_1" />
+<label for='bouton_image_1'><:forms:cfg_bouton_type_image:></label><br/>
+<input type="radio" name="bouton_image" value="0" [checked="(#ENV{bouton_image,0}?{'',checked})"] id="bouton_image_0" />
+<label for='bouton_image_0'><:forms:cfg_bouton_type_texte:></label>
+</div>
+</fieldset>
+
 [(#REM) ------------------------ insertion dans le head ------------------------ ]
 <fieldset>
 <legend>
@@ -50,9 +64,9 @@
 <input type="radio" name="inserer_head" value="0" [checked="(#ENV{inserer_head,1}?{'',checked})"] id="inserer_head_0" />
 <label for='inserer_head_0'><:forms:cfg_desactiver:></label>
 </div>
+</fieldset>
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
 </div>
-</fieldset>
 </form>
