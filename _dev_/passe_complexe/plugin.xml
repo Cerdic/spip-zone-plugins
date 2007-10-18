@@ -1,10 +1,16 @@
 <plugin>
 	<version>0.1</version>
-	<nom>Passe Complexe</nom>
+	<nom><multi>[fr] Mot de Passe Complexe [en] Strong Passwords</multi></nom>
 	<description>
-	Testeur de complexite des mots de passes.
-_ Adaptation du script de [->http://dev.digitalspaghetti.me.uk/password/]
-_ Page de Config a venir
+<multi>
+[fr]
+	Testeur de compl&eacute;xit&eacute; des mots de passes.
+_ Adaptation du script de [->http://dev.digitalspaghetti.me.uk/password/].
+[en]
+Test the strength of passwords entered when registering to the site.
+_ Adaptation of [->http://dev.digitalspaghetti.me.uk/password/].
+</multi>
+_ [Configuration->./?exec=cfg&amp;cfg=passe_complexe]
 	</description>
 	<etat>dev</etat>
 	<lien></lien>
