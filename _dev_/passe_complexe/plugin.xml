@@ -18,8 +18,8 @@ _ [Configuration->./?exec=cfg&amp;cfg=passe_complexe]
 	<prefix>passe_complexe</prefix>
 	<pipeline>
 		<nom>header_prive</nom>
-		<action>insert_head</action>
+		<action>header_prive</action>
 		<inclure>passe_complexe_options.php</inclure>
 	</pipeline>
-
+	<necessite id='cfg' version='[1.0.8;]' />
 </plugin>
