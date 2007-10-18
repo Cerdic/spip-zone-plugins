@@ -17,6 +17,8 @@ Des améliorations dans l'interface de saisie: 	-matière et classes sont préslece
 						- etc...
 Fonctionalité majeure: On peut dupliquer une séance déjà saisie ! (pour copier coller ce qui a été fait avec une classe sur une autre)...
 Fonctionnalité majeure: intégrations des «crayons». Quand le plugin «Les crayons» est présent on peut modifier le contenu des séances et des devoirs directement comme dans un Wiki.
+Fonctionnalité importante: possibilité de supprimer des séances.
+Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!
 Les devoirs sont désormais affichés in-extenso avec les séances (et plus simplement pour quand ils sont à faire).
 
 

@@ -20,11 +20,6 @@ date_devoirx où x est un nombre= date du devoir n°x donné lors de la séance
 contenu_devoirx où x est un nombre= contenu du devoir n°x donné lors de la séance
 devoirs= nombre de devoirs-1 liés à la séance
 plusdate= rafficher le formulaire avec un champs devoirs+date en plus.
-doc_jointx où x est un nombre= chemin vers le document joint n°x
-docs= nombre de documents joints (0-> pas de doc joint)
-ajoutdoc= s'il n'y avait pas de docs et qu'on veut en mettre un
-plusdoc= rafficher le formulaire avec un ligne de selection de doc en plus
-moinsdocs= effacer le dernier doc joint entré
 id_article=contient un id_article que l'on veut dupliquer (ou modifier)
 
 enregistrer_fiche= quand la fiche est validée
@@ -111,13 +106,6 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 		$date_devoir[$count]=($_POST["date_devoir$count"]);
 		$contenu_devoir[$count]=(stripslashes($_POST["contenu_devoir$count"]));
 	};//les dates ont été placées dans $date_devoir[], les contenus dans $contenu_devoir[]
-	$docs=($_POST['docs']);
-	if($_POST['plusdoc']){
-		$docs++;
-	};
-	for ($count=0; $count<=$docs; $count++) {
-		$doc_joint[$count]=($_POST["doc_joint$count"]);
-	};//les chemins des docs joints ont été placés dans $doc_joint[]
 
 //si on demande à dupliquer ou modifier un article: on récupère les données de l'article (si elles ne sont pas déjà présentes en GET)
 	if (!$id_classe[0] and $id_article and !$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']) {
@@ -169,13 +157,6 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 	if($_POST['plusdate']){
 		$devoirs++;
 	};
-//un devoir de plus ?
-	if($_POST['moinsdoc']){
-		$docs--;
-	};
-//Cosmétique ! (pluriels)
-	if ($docs>1) $plurdoc="s";
-	else $plurdoc="";
 
 //quelques strings bien utiles préparées à l'avance: (à partir des numéros d'id)
 	if ($_POST['enregistrer_fiche'] or $_POST['valider_fiche'] or $_GET['classe_matiere'] or $_GET['effacer_fiche']) {
@@ -267,24 +248,14 @@ if ($contenu_devoir[0]!="") {
 ?>
 			<hr>
 			<div>
-				<h4 class="devoirs">Devoirs des<?php echo(" $classes_titre$groupe_titre&nbsp;:")?></h3>
+				<h4 class="devoirs">Devoirs des<?php echo(" $classes_titre$groupe_titre&nbsp;:")?></h4>
 <?php //Pour chaque devoir:
  for ($count=0; $count<=$devoirs; $count++) {?>
-				<h5 class="devoirs">Pour le <?php echo $date_devoir[$count]?>&nbsp;:</h5>
-				<?php echo propre($contenu_devoir[$count]);?>
+				<div><h5 class="devoirs">Pour le <?php echo $date_devoir[$count]?>&nbsp;:</h5>
+				<?php echo propre($contenu_devoir[$count]);?></div>
 <?php } //fin du for count devoirs?>
 			</div>
 <?php } //fin du if contenu_devoir?>
-<?php //si il y a des docs joints
-if ($doc_joint[1]!="") {
-//On affiche les docs joints?>
-			<div>
-				<h2><?php echo"Document$plurdoc joint$plurdoc&nbsp;:";?></h2>
-	<?php for ($count=1; $count<=$docs; $count++) {?>
-				<p>Chemin vers le document&nbsp;<?php echo "$count&nbsp;: $doc_joint[$count]";?></p>
-	<?php } //fin du for count docs?>
-			</div>
-<?php } //fin du if doc_joint?>
 		</div>
 	<div><?php
 //Si l'utilisateur veut modifier la fiche (pas l'effacer)
@@ -399,7 +370,7 @@ if ($doc_joint[1]!="") {
 	//la matière:
 	$sql = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES (" . $id_matiere . ", " . $id_contenu_seance . ")";
 	$result = spip_query($sql);
-	echo ("<!--matière: $result-->\n<p>Enregistrement de la séance</p>\n");
+	echo ("<!--matière: $result-->\n<p>La séance est enregistrée...</p>\n");
 
 //insertion des articles de devoirs s'il y a
 
@@ -453,33 +424,15 @@ if ($contenu_devoir[0]!="") {
 		$result = spip_query($sql);
 		echo ("<!--matière: $result-->\n<p>Enregistrement du devoir n°$dev_no</p>\n");
 	}//fin du for chaque devoir
-	echo ("<p>Devoirs enregistrés</p>\n");
+	echo ("<p>Devoirs enregistrés...</p>\n");
 } //fin du if contenu_devoir
 
 //rajout des références aux devoirs dans le PS du contenu de la séance
 		$sql ="UPDATE spip_articles SET ps='".addslashes($liste_devoirs_contenu)."' WHERE id_article=$id_contenu_seance";
 		$result = spip_query($sql);
 		echo ("<!--update ps: $result-->\n");
-//le document-joint qui ne fonctionne pas !...
-if ($doc_joint[1]!="") {
-//s'il y a des docs joints:
-	for ($count=1; $count<=$docs; $count++) { ?>
-	<form method='POST' action='spip_image.php3' enctype='multipart/form-data'>
-	<input type="hidden" name="id_article" value="<?php echo($id_contenu_seance)?>" />
-	<input type="hidden" name="hash" value="01aae008aae774280e1e34a974bd26ba" />
-	<input type="hidden" name="hash_id_auteur" value="1" />
-	<input type="hidden" name="ajout_doc" value="oui" />
-	<input type="hidden" name="mode" value="document" />
-	<input type="hidden" name="type" value="article" />
-	<input type="hidden" name="redirect" value="../saisie-cahier-de-texte.php3" />
-	<input name='fichier<?php echo($count)?>' type='hidden' value='<?php echo($doc_joint[$count])?>' class='forml'>
-<?php
-	//Pour chaque doc joint
-	}?>
-	<input name='ok_post' type='Submit' VALUE='T&eacute;l&eacute;charger les pièces jointes' CLASS='fondo'>
-<?php
-}//fin if doc joint
 ?>
+			<p>Vous pourrez enregistrer des documents joints à vos séances et à vos devoirs en affichant le contenu de cahier de texte (voir plus bas «afficher ses séances»</p>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
 			<p><a href="[(#URL_PAGE{cahier-de-texte-saisie})]&id_article=<?php echo ($id_contenu_seance); ?>" title="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe"><img src="plugins/bonbon/images/go-jump.png" alt="icône" vspace="2" align="middle">Dupliquer la séance pour une autre classe/groupe</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-saisie})]<?php
 	echo ("&id_matiere=$id_matiere");
@@ -568,7 +521,7 @@ if ($classes>0) {
 }//fin du ifnot classe-matiere
 
 //----------------------------------------------------------------------
-//Secundo: remplir le contenu (quand classes et matières sont renseignés
+//Secundo: remplir le contenu (quand classes et matières sont renseignés)
 //----------------------------------------------------------------------
 
 
@@ -599,36 +552,7 @@ if($_GET['classe_matiere']){
 			<input type="hidden" name="devoirs" value="<?php echo $devoirs;?>">
 			<input type="Submit" value="Rajouter un devoir pour une autre date" name="plusdate">
 			</fieldset>
-	<!-- Documents joints-->		
-			<fieldset>
-			<legend><?php echo"Document$plurdoc joint$plurdoc&nbsp;: (non fonctionnel actuellement !)";?></legend>
-			<input type="hidden" name="docs" value="<?php echo $docs;?>">
-<?php if (($docs and $docs>0) or $_POST['ajoutdoc']) {
-	if ($doc_joint[2] and $doc_joint[2]!="") $plurdoc_enr="s";
-	else $plurdoc_enr="";
-	if (!$_POST['ajoutdoc']) {
-?>
-			<div>
-				<p><?php echo "Document$plurdoc_enr déjà rajouté$plurdoc_enr&nbsp;:";?></p>
-				
-<?php
-		for ($count=1; $count<=$docs; $count++) {
-?>
-				<p>document&nbsp;<?php echo "$count&nbsp;: $doc_joint[$count]";?></p>	
-				<input type="Hidden" <?php echo "name=\"doc_joint$count\" value=\"$doc_joint[$count]\"";?>>
-<?php		} //fin du for count?>
-				<input type="Submit" value="Retirer un document joint" name="moinsdoc">
-			</div>
-<?php	} //fin du if not ajoutdoc?>
-			<input type="file" name="doc_joint<?php echo ($docs+1);?>" value="">
-			<input type="Submit" value="Rajouter ce document" name="plusdoc">
-<?php }//fin du if docs 
-if ((!$docs or $docs=0) and !$_POST['ajoutdoc']) {
-?>
-			<input type="Submit" value="Ajouter un document joint (non fonctionnel actuellement !)" name="ajoutdoc">
-<?php } //fin du if not $docs?>
-
-			</fieldset>
+			<p>Vous pourrez ajouter des documents joints à la séance ou aux devoirs après les avoir enregistrés</p>
 			<br>
 	<!--validation-->
 			<input type="Submit" value="Enregistrer dans le cahier de texte" name="enregistrer_fiche">

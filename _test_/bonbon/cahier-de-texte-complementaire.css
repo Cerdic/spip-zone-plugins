@@ -49,6 +49,24 @@ table.spip td {
 img {
 	border:0px;
 }
+a.clic:hover {
+	cursor: pointer;
+}
+
+.bloc_doc {
+	width: 70%;
+	border: 1px solid black;
+	margin-left: 10%;
+	padding: 5px;
+	-moz-border-radius: 8px;
+}
+.bloc_auteur {
+	border: 1px solid red;
+	background-color: lightgray;
+	margin:5px;
+	padding: 2px;
+	-moz-border-radius: 6px;
+}
 
 /*Devoirs affichés sous les séances*/
 h4.devoirs {

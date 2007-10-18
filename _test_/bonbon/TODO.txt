@@ -6,7 +6,6 @@
 regroupement de classes) ? (utile ? même s'il y a la duplication de séance ?)
 - mieux classer les résultats des devoirs et des séances (un ordre
 chronologique plus... chronologique...)
-- les pièces jointes bien sûr (facile en Spip 1.9)!
 - le retour de FCKeditor ou assimilé quand j'aurai débuggué (la barre typo étendue de Spip 1.9 serait mieux).
 - pouvoir rééditer les fiches après coup en repassant dans l'interface de Bonbon...
 - faire une mise en forme spéciale impression.
