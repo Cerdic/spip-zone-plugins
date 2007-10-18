@@ -139,9 +139,6 @@ function exec_spiplistes_courriers_casier () {
 	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
 	if ($detruire_message = intval(_request('detruire_message'))) {
 		spip_query("DELETE FROM spip_courriers WHERE id_courrier="._q($detruire_message));
-		// A priori, 2 reliquats anciennes versions
-		//spip_query("DELETE FROM spip_auteurs_messages WHERE id_message="._q($detruire_message));
-		//spip_query("DELETE FROM spip_forum WHERE id_message="._q($detruire_message));
 		// supprime de la queue d'envois
 		spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$detruire_message");
 	}

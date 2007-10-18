@@ -24,6 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// ne semble plus utilisé (CP-20071018)
 
 function exec_spiplistes_import_patron(){
 
