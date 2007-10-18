@@ -1,0 +1,19 @@
+<!-- cfg_passe_complexe.html -->
+<!-- descriptif=<:passecomplexe:cfg_descriptif:> -->
+<!-- titre=<:passecomplexe:cfg_titre:> -->
+[(#REM) nom=passe_complexe] 
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset>
+<label for="common"><:passecomplexe:cfg_longueur:></label><br/>
+<input type="text" name="length" id="length" value="[(#ENV{length,6}|max{6})]" />
+<br/>
+<label for="common"><:passecomplexe:cfg_common:></label><br/>
+<input type="text" name="common" id="common" value="#ENV{common}" />
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+
+</form>
