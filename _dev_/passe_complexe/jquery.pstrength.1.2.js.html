@@ -8,6 +8,8 @@
  * This code uses a modified version of Steve Moitozo's algorithm (http://www.geekwisdom.com/dyn/passwdmeter)
  * 
  * === Changelog ===
+ * Version 1.2 spip plugin (18/10/2007) P. Andrews
+ *  added options for the too short and unsafe strings and colours
  * Version 1.2 (03/09/2007)
  * Added more options for colors and common words
  * Added common words checked to see if words like 'password' or 'qwerty' are being entered
@@ -24,15 +26,16 @@
 	$.extend($.fn, {
 		pstrength : function(options) {
 			var options = $.extend({
-				verdects:	["<:passecomplexe:tres_faible:>","<:passecomplexe:faible:>","<:passecomplexe:moyen:>","<:passecomplexe:fort:>","<:passecomplexe:tres_fort:>"],
-				colors: 	["#f00","#c06", "#f60","#3c0","#3f0"],
+				verdects:	["<:passecomplexe:tres_faible:>","<:passecomplexe:faible:>","<:passecomplexe:moyen:>","<:passecomplexe:fort:>","<:passecomplexe:tres_fort:>","<:passecomplexe:court:>","<:passecomplexe:simple:>"],
+				colors: 	["#f00","#c06", "#f60","#3c0","#3f0","#f00","#ccc"],
 				scores: 	[10,15,30,40],
 				common:		["motdepasse","123456","123","1234","azerty"],
-				minchar:	6
+				minchar:	6,
+			  minchar_label: '<:passecomplexe:nb_mini:>'
 			},options);		
 			return this.each(function(){
 				var infoarea = $(this).attr('id');
-				$(this).after('<div class="pstrength-minchar" id="' + infoarea + '_minchar"><:passecomplexe:nb_mini:>' + options.minchar + '</div>');
+				$(this).after('<div class="pstrength-minchar" id="' + infoarea + '_minchar">'+options.minchar_label + options.minchar + '</div>');
 				$(this).after('<div class="pstrength-info" id="' + infoarea + '_text"></div>');
 				$(this).after('<div class="pstrength-bar" id="' + infoarea + '_bar" style="border: 1px solid white; font-size: 1px; height: 2px; width: 0px;"></div>');
 				$(this).keyup(function(){				
@@ -48,13 +51,13 @@
 	    	var ctlText = "#" + infoarea + "_text";		
 			// Color and text
 			if (nPerc == -200) {
-				strColor = '#f00';
-				strText = '<:passecomplexe:simple:>';
+				strColor = options.colors[6];
+				strText = options.verdects[6];
 				$(ctlBar).css({width: "0%"});
 			}		
 			else if (nPerc < 0 && nPerc > -199) {
-				strColor = '#ccc';
-				strText = '<:passecomplexe:court:>';
+				strColor = options.colors[5];
+				strText = options.verdects[5];
 				$(ctlBar).css({width: "1%"});
 			}
 			else if(nPerc <= options.scores[0])
@@ -153,7 +156,8 @@
 				intScore = (intScore + 3)
 			}
 			for (var i=0; i < options.common.length; i++) {
-				if (password.toLowerCase() == options.common[i]) {
+				//check that the password doesn't contain a common word
+				if (strpos(options.common[i],password.toLowerCase()) >= 0) {
 					intScore = -200;
 				}
 			}
