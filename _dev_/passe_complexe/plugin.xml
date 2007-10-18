@@ -1,11 +1,10 @@
 <plugin>
 	<version>0.1</version>
-	<nom>passe commplexe</nom>
-	<prefix>passe complexe</prefix>
+	<nom>Passe Complexe</nom>
 	<description>
 	Testeur de complexite des mots de passes.
-	<br />Adaptation du script de http://dev.digitalspaghetti.me.uk/password/
-	<br />Page de Config a venir
+_ Adaptation du script de [->http://dev.digitalspaghetti.me.uk/password/]
+_ Page de Config a venir
 	</description>
 	<etat>dev</etat>
 	<lien></lien>
