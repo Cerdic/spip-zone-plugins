@@ -5,7 +5,6 @@
 
 
 TO-DO:
-- Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"
 - Corriger documentation contextuelle
 - maintenance: mettre en place l'auth. par FTP.
 - module de stats (calendrier des envoyés/à envoyer pour vérifier engorgement)

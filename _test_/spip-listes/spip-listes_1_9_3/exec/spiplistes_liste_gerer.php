@@ -76,7 +76,9 @@ function exec_spiplistes_liste_gerer () {
 	$debut = _request('debut'); // ??
 
 	$envoyer_maintenant = ($envoyer_maintenant == 'oui');
-	 
+	
+	$boite_pour_confirmer_envoi_maintenant = "";
+	
 	$page_result = "";
 
 	if(!$id_liste) {
@@ -176,7 +178,7 @@ function exec_spiplistes_liste_gerer () {
 			}
 
 			// Modifier message_auto ?
-			if($btn_modifier_courrier_auto){
+			if($btn_modifier_courrier_auto) {
 //spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto <<", LOG_DEBUG);
 				$sql_query = "";
 				$titre_message = spiplistes_titre_propre($titre_message);
@@ -190,11 +192,28 @@ function exec_spiplistes_liste_gerer () {
 						|| $auto_mois)
 					) {
 					$sql_query .= "message_auto='oui',titre_message="._q($titre_message).",";
-					if($patron) {
-						$sql_query .= "patron="._q($patron).",";
+
+					if(time() > strtotime($envoyer_quand)) {
+					// envoi dans le passé est considéré comme envoyer maintenant
+						$envoyer_maintenant = true;
+						$envoyer_quand = false;
 					}
+					
 					if($envoyer_maintenant) {
-						$sql_query .= "date=NOW(),periode=0,"; 
+						$boite_pour_confirmer_envoi_maintenant = ""
+							. debut_cadre_couleur('', true)
+							// formulaire de confirmation envoi
+							. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE)."' method='post'>"
+							. "<p style='text-align:center;font-weight:bold;' class='verdana2'>". _T('spiplistes:Confirmez_envoi_liste')	. "</p>"
+							. "<input type='hidden' name='id_liste' value='$id_liste' />"
+							. "<input type='hidden' name='periode' value='$periode' />"
+							. "<input type='hidden' name='auto_mois' value='$auto_mois' />"
+							. "<input type='hidden' name='titre_message' value=\"$titre_message\" />"
+							. "<div style='text-align:right;'><input type='submit' name='btn_confirmer_envoi_maintenant' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' /></div>\n"
+							. "</form>"
+							. fin_cadre_couleur(true)
+							;
+						$date_prevue = __mysql_date_time(time());
 					}
 					else if($envoyer_quand) {
 							$sql_query .= "date='$envoyer_quand',periode=$periode,";
@@ -445,13 +464,15 @@ function exec_spiplistes_liste_gerer () {
 		//
 		////////////////////////////
 		// Formulaire programmer un courrier automatique
+		. "<a name='form-programmer' id='form-programmer'></a>\n"
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.png", true, '', _T('spiplistes:messages_auto').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "temporiser"))
 		.	(
 				(empty($patron))
 				? __boite_alerte(_T('spiplistes:Patron_manquant', true))
 				: ""
 			)
-		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
+		. $boite_pour_confirmer_envoi_maintenant
+		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."#form-programmer' method='post'>\n"
 		. "<table border='0' cellspacing='1' cellpadding='3' width='100%'>\n"
 		. "<tr><td background='"._DIR_IMG_PACK."rien.gif' align='$spip_lang_left' class='verdana2'>\n"
 		;
@@ -487,10 +508,10 @@ function exec_spiplistes_liste_gerer () {
 				: ""
 				)
 			.	(
-				(intval($date) && (time() < strtotime($date)))
-				? _T('spiplistes:prochain_envoi_prevu')." : <strong>" . affdate_heure($date) . "</strong>"
+				($date_prevue || (intval($date) && (time() < strtotime($date))))
+				? _T('spiplistes:prochain_envoi_prevu')." : <strong>" . affdate_heure($date_prevue ? $date_prevue : $date) . "</strong>"
 					.	(
-						($next = round((strtotime($date) - time()) / _SPIPLISTES_TIME_1_DAY))
+						(!$date_prevue && ($next = round((strtotime($date) - time()) / _SPIPLISTES_TIME_1_DAY)))
 							? " (".spiplistes_singulier_pluriel_str_get($next, _T('spiplistes:jour'), _T('spiplistes:jours')).")"
 							: ""
 						)
@@ -506,7 +527,8 @@ function exec_spiplistes_liste_gerer () {
 				;
 		}
 	}
-	$date_debut_envoi = ($date && intval($date)) ? $date : __mysql_date_time(time());
+	$date_debut_envoi = (!empty($date_prevue) ? $date_prevue : (($date && intval($date)) ? $date : __mysql_date_time(time())));
+
 	$page_result .= ""
 		. "<tr><td background='"._DIR_IMG_PACK."rien.gif' align='$spip_lang_left' class='verdana2'>"
 		. "<input type='radio' name='message_auto' value='oui' id='auto_oui' "

@@ -41,12 +41,25 @@ function exec_spiplistes_listes_toutes(){
 		// initialise les variables postées par le formulaire
 		foreach(array(
 			'btn_supprimer_liste_confirme', 'id_liste' // _SPIPLISTES_EXEC_LISTE_GERER
+			, 'btn_confirmer_envoi_maintenant', 'periode', 'auto_mois', 'titre_message'
 			) as $key) {
 			$$key = _request($key);
 		}
-		foreach(array('id_liste') as $key) {
+		foreach(array('id_liste', 'periode') as $key) {
 			$$key = intval($$key);
 		}
+
+		// envoyer maintenant demandé par _SPIPLISTES_EXEC_LISTE_GERER
+		if($btn_confirmer_envoi_maintenant) {
+			$sql_values .= "date=NOW(),periode=$periode,message_auto='oui',titre_message="._q($titre_message).",";
+			if($auto_mois == 'oui') {
+				$sql_values .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
+			}
+			$sql_values = rtrim($sql_values,",");
+			$sql_query = "UPDATE spip_listes SET $sql_values WHERE id_liste=$id_liste LIMIT 1";
+			$sql_result = spip_query($sql_query);
+		}
+		
 
 		// suppression demandée par _SPIPLISTES_EXEC_LISTE_GERER
 		if($btn_supprimer_liste_confirme && $id_liste) {

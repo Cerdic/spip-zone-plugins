@@ -140,6 +140,9 @@ seront retir&eacute;s de cette liste de diffusion automatiquement. ",
 'courrier_realise_avec_spiplistes' => "Courrier réalisé avec SPIP-Listes",
 'Confirmer_la_suppression_de_la_liste' => "Confirmer la suppression de la liste ",
 'Confirmez_requete' => "Veuillez confirmer la requ&ecirc;te.",
+'Confirmez_envoi_liste' => "Vous avez demand&eacute; l'envoi imm&eacute;diat de cette liste 
+	de diffusion.<br />
+	Svp, veuillez confirmer votre demande.",
 
 
 //D
