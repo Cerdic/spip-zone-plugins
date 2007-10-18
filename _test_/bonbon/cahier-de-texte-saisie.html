@@ -29,6 +29,7 @@ id_article=contient un id_article que l'on veut dupliquer (ou modifier)
 
 enregistrer_fiche= quand la fiche est validée
 modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifié
+effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -138,7 +139,7 @@ modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifi
 
 //si on demande à dupliquer ou modifier un article *et qu'on a choisi classe et matière*: on récupère les données de l'article (si elles ne sont pas déjà présentes en GET)
 
-	if ($_GET['classe_matiere'] and $id_article and !$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']){ //si la matière est validée on récupère le contenu de la séance
+	if (($_GET['classe_matiere'] or $_GET['effacer_fiche']) and $id_article and !$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']){ //si la matière est validée on récupère le contenu de la séance
 ?>
 <BOUCLE_Trouve_Infos_Seance_id_article(ARTICLES){id_article}><?php
 		$date_seance='[(#DATE|affdate{d/m/Y}|texte_script)]';
@@ -148,6 +149,7 @@ modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifi
 		$devoirs++;
 		$date_devoir[$devoirs]='[(#DATE|affdate{d/m/Y}|texte_script)]';
 		$contenu_devoir[$devoirs]='[(#TEXTE*|texte_script)]';
+		$id_devoirs[$devoirs]='[(#ID_ARTICLE|texte_script)]';
 	?></BOUCLE_Trouve_Infos_Devoirs_id_article>
 </BOUCLE_Trouve_Infos_Seance_id_article>
 <?php
@@ -176,7 +178,7 @@ modifier_fiche= quand la fiche est remplie, mais que le contenu doit être modifi
 	else $plurdoc="";
 
 //quelques strings bien utiles préparées à l'avance: (à partir des numéros d'id)
-	if ($_POST['enregistrer_fiche'] or $_POST['valider_fiche'] or $_GET['classe_matiere']) {
+	if ($_POST['enregistrer_fiche'] or $_POST['valider_fiche'] or $_GET['classe_matiere'] or $_GET['effacer_fiche']) {
 ?>
 [(#REM)Nom de la matière]
 <BOUCLE_DireMatiere(MOTS){type="Matières"}><?php if ('[(#ID_MOT|texte_script)]'==$id_matiere) {$matiere_titre='[(#TITRE)]';} ?></BOUCLE_DireMatiere>
@@ -195,16 +197,64 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 	$fleche="->";
 	}
 
-//------------------------------------------------
-//Si l'utilisateur a écrit une fiche puis validée
-//------------------------------------------------
+//----------------------------------------------------------------------
+//Si l'utilisateur veut effacer une fiche  dans la base (c'est confirmé)
+//----------------------------------------------------------------------
+	if ($_GET['effacer_fiche'] and ($_GET['effacer_fiche']!="a_confirmer")){
+		$liste_des_id_a_jetter[0]=$id_article;
+		$nb_trucs_a_jeter=$devoirs+1;
+		for ($count=1; $count<=$nb_trucs_a_jeter; $count++) {
+			$liste_des_id_a_jetter[$count]=$id_devoirs[$count-1];
+		};
+		for ($count=0; $count<=$nb_trucs_a_jeter; $count++) {
+			//l'article et les devoirs sont mis à la poubelle
+			$sql ="UPDATE spip_articles SET statut='poubelle' WHERE id_article=$liste_des_id_a_jetter[$count]";
+			$result = spip_query($sql);
+			echo ("<!--update ps: $result-->\n");
+		}
+?>
+	<h1>La fiche est définitivement effacée</h1>
+			<br class="clear" />	
+	</div>
+	<div id="Contenu"><div class="bloc">
+			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
+			<p><a href="[(#URL_PAGE{cahier-de-texte-saisie})]<?php
+	echo ("&id_matiere=$id_matiere");
+	for ($count=0; $count<=$classes; $count++) {
+		echo("&id_classe$count=".$id_classe[$count]);
+	};
+	if ($classes>0) echo ("&classes=$classes");
+			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-affichage})]&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-accueil})]" title="retour à l'accueil"><img src="plugins/bonbon/images/logo-mini2-22.png" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
+		</div>
+	</div></div>
+
+[(#REM)Inclusion du pied de page]
+<INCLURE{fond=cahier-de-texte-pied}>
+
+</div>
+</body>
+</html>
+<?php	break;
+	}; //fin du if effacer fiche sans que ce soit "à confirmer"
+
+
+//------------------------------------------------------------------------------
+//Si l'utilisateur a écrit une fiche puis validée ou s'il veut effacer une fiche
+//------------------------------------------------------------------------------
 
 //Si la fiche est enregistrée (enregistrée mais non à modifier)
-	if ($_POST['enregistrer_fiche'] and !($_POST['modifier_fiche'])){
+	if (($_GET['effacer_fiche']=="a_confirmer") or ($_POST['enregistrer_fiche'] and !($_POST['modifier_fiche']))){
 //On l'affiche pour vérification...
 //todo: afficher avec la CSS Spip
 ?>
-	<h1>Voici la fiche que vous avez <?php if ($id_article) {echo "dupliquée";} else {echo "remplie";}; ?>&nbsp;:</h1>
+	<h1>Voici la fiche que vous <?php
+		if ($_GET['effacer_fiche']) {echo "voulez effacer";}
+		else {
+			echo "avez "; 
+			if ($id_article) {echo "dupliquée";}
+			 else {echo "remplie";};
+		}
+?>&nbsp;:</h1>
 			<br class="clear" />	
 	</div>
 	<div id="Contenu"><div class="bloc">
@@ -217,11 +267,11 @@ if ($contenu_devoir[0]!="") {
 ?>
 			<hr>
 			<div>
-				<h3>Devoirs des<?php echo(" $classes_titre$groupe_titre&nbsp;:")?></h3>
+				<h4 class="devoirs">Devoirs des<?php echo(" $classes_titre$groupe_titre&nbsp;:")?></h3>
 <?php //Pour chaque devoir:
  for ($count=0; $count<=$devoirs; $count++) {?>
-				<p>Pour le <?php echo $date_devoir[$count]?>&nbsp;:</p>
-				<p><?php echo propre($contenu_devoir[$count]);?></p>
+				<h5 class="devoirs">Pour le <?php echo $date_devoir[$count]?>&nbsp;:</h5>
+				<?php echo propre($contenu_devoir[$count]);?>
 <?php } //fin du for count devoirs?>
 			</div>
 <?php } //fin du if contenu_devoir?>
@@ -236,7 +286,9 @@ if ($doc_joint[1]!="") {
 			</div>
 <?php } //fin du if doc_joint?>
 		</div>
-	<div>
+	<div><?php
+//Si l'utilisateur veut modifier la fiche (pas l'effacer)
+	if (!$_GET['effacer_fiche']) {?>
 	<form name="modifier" method="post">
 <?php
 //préparation du formulaire
@@ -252,6 +304,16 @@ if ($doc_joint[1]!="") {
 		<input type="Submit" name="modifier_fiche" value="Modifier la fiche">
 		<input type="Submit" name="valider_fiche" value="Confirmer l'enregistrement de la fiche (elle ne sera plus modifiée)">
 	</form>
+<?php	} //fin du if not effacer fiche
+// L'utilisateur veut effacer la fiche, on lui demande confirmation
+	else {?>
+	<form name="effacer" method="get">
+		<input type="hidden" name="page" value="cahier-de-texte-saisie">
+		<input type="hidden" name="id_article" value="#ENV{id_article}">
+		<input type="Submit" name="effacer_fiche" value="Confirmer l'effacement de la fiche ci-dessus (c'est définitif !)">
+	</form>
+<?php	} //fin du else if not effacer fiche (donc du if effacer fiche)
+?>
 	
 <?php
 } //fin du if enregistrer ficher et pas modifier fiche
