@@ -19,7 +19,7 @@ function passe_complexe_insert_head($flux){
 
 		$flux .= '<script type="text/javascript"><!--
 		$(document).ready(function() {
-            $("input.formo").filter(function(el) {return $(this).attr("name") == "new_pass";}).pstrength({
+           $("input.formo[@name=new_pass]").pstrength({
              minchar: '.max(lire_config('passe_complexe/length',6),6).',
              common: ["123456","123","spip","test"'
 		  .',"'.$GLOBALS['auteur_session']['nom'].'"'

@@ -157,7 +157,7 @@
 			}
 			for (var i=0; i < options.common.length; i++) {
 				//check that the password doesn't contain a common word
-				if (strpos(options.common[i],password.toLowerCase()) >= 0) {
+				if (password.toLowerCase().indexOf(options.common[i]) >= 0) {
 					intScore = -200;
 				}
 			}
