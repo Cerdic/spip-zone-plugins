@@ -45,13 +45,7 @@ function cron_spiplistes_cron ($last_time) {
 	foreach(array(
 		'opt_suspendre_trieuse'
 		) as $key) {
-		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
-	}
-
-	if($opt_suspendre_trieuse == 'oui') {
-		spiplistes_log("CRON: suspendu par admin", LOG_DEBUG);
-		include_spip('inc/spiplistes_meleuse');
-		return(spiplistes_meleuse());
+		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
 	$sql_select = "id_liste,titre,titre_message,date,message_auto,periode,lang,patron,statut";
@@ -66,7 +60,20 @@ function cron_spiplistes_cron ($last_time) {
 		
 	$listes_privees_et_publiques = spip_query ($sql_query);
 	
-spiplistes_log("CRON: nb listes ok: ".spip_num_rows($listes_privees_et_publiques), LOG_DEBUG);
+	$nb_listes = spip_num_rows($listes_privees_et_publiques);
+	
+spiplistes_log("CRON: nb listes ok: ".$nb_listes, LOG_DEBUG);
+
+	if($opt_suspendre_trieuse == 'oui') {
+		spiplistes_log("CRON: suspendu par admin", LOG_DEBUG);
+		if($nb_listes) {
+			return(0 - $nb_listes);
+		}
+		else {
+			include_spip('inc/spiplistes_meleuse');
+			return(spiplistes_meleuse());
+		}
+	}
 
 	while($row = spip_fetch_array($listes_privees_et_publiques)) {
 	

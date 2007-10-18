@@ -65,12 +65,7 @@ function spiplistes_meleuse () {
 		, 'opt_ajout_pied_courrier', 'pied_patron'
 		, 'opt_ajout_tampon_editeur', 'tampon_patron'
 		) as $key) {
-		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
-	}
-
-	if($opt_suspendre_meleuse == 'oui') {
-		spiplistes_log("MEL: suspendu par admin", LOG_DEBUG);
-		return(time());
+		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
 	//////////////////////////
@@ -82,9 +77,16 @@ function spiplistes_meleuse () {
 
 	$sql_result = spip_query($sql_query);
 
+	$nb_courriers =spip_num_rows($sql_result);
+	
+	if($opt_suspendre_meleuse == 'oui') {
+		spiplistes_log("MEL: suspendu par admin", LOG_DEBUG);
+		return(0 - $nb_courriers);
+	}
+
 	$meleuse_statut = "1";
 	
-	if(spip_num_rows($sql_result)) {
+	if($nb_courriers) {
 
 		$nomsite = $GLOBALS['meta']['nom_site'];
 		$urlsite = $GLOBALS['meta']['adresse_site'];
@@ -130,12 +132,10 @@ function spiplistes_meleuse () {
 			// Determiner le destinataire ou la liste destinataire
 			if($is_a_test = email_valide($email_test)) {
 			// courrier à destination adresse email de test
-				spiplistes_log("MEL: "._T('spiplistes:email_test')." : ".$destinataires, LOG_DEBUG);
 				$str_log .= " to: $email_test (TEST)"; 
 			} 
 			else if($id_liste > 0) {
 			// courrier à destination des abonnés d'une liste
-				spiplistes_log("MEL: Envoi sur liste abos #$id_liste", LOG_DEBUG);
 				$str_log .= " to: ID_LISTE #$id_liste ($total_abonnes users)"; 
 	
 				$pied_page_html = spiplistes_pied_de_page_liste($id_liste);
@@ -148,11 +148,10 @@ function spiplistes_meleuse () {
 					$titre_liste = $ro["titre"];
 					$id = $ro["id_liste"];
 					$email_envoi = $ro["email_envoi"];
-					spiplistes_log("MEL: "._T('spiplistes:envoi_listes').$titre_liste, LOG_DEBUG);
+//spiplistes_log("MEL: "._T('spiplistes:envoi_listes').$titre_liste, LOG_DEBUG);
 				}
 				else {
 					$str_log .= " [ERROR] ID_LISTE #id_liste MISSING"; 
-					spiplistes_log("MEL: "._T('spiplistes:envoi_erreur'), LOG_DEBUG);
 					spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_ERREUR."' WHERE id_courrier=$id_courrier LIMIT 1"); 
 					// quitte while() principal
 					break;
@@ -248,11 +247,11 @@ function spiplistes_meleuse () {
 						FROM spip_auteurs AS a, spip_auteurs_courriers AS b 
 						WHERE a.id_auteur=b.id_auteur AND b.id_courrier=$id_courrier AND etat=$id_process"
 						);
-					spiplistes_log("MEL: marque le lot: $id_process", LOG_DEBUG);
+//spiplistes_log("MEL: marque le lot: $id_process", LOG_DEBUG);
 				}
 					
 				$liste_abonnes = spip_num_rows($result_inscrits);
-				spiplistes_log("MEL: nb destinataires: $liste_abonnes", LOG_DEBUG);
+//spiplistes_log("MEL: nb destinataires: $liste_abonnes", LOG_DEBUG);
 				if($liste_abonnes > 0) {
 		
 					// ne sert qu'a l affichage
@@ -342,7 +341,7 @@ function spiplistes_meleuse () {
 			}
 			else {
 				//aucun destinataire connu pour ce message
-				spiplistes_log("MEL: "._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), LOG_DEBUG);
+//spiplistes_log("MEL: "._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'), LOG_DEBUG);
 				spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_IGNORE."' WHERE id_courrier=$id_courrier LIMIT 1");
 				spiplistes_supprime_liste_envois($id_courrier);
 				$str_log .= " END #$id_courrier";

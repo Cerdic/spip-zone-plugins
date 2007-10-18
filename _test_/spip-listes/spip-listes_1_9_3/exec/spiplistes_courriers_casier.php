@@ -149,7 +149,7 @@ function exec_spiplistes_courriers_casier () {
 	// à sécuriser ($connect_toutes_rubriques || $connect_id_auteur == id_auteur)
 	if ($btn_arreter_envoi = intval(_request('btn_arreter_envoi'))) {
 		// demande arreter envoi du courrier encour
-		spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_STOPE."' WHERE id_courrier=$btn_arreter_envoi LIMIT 1");
+		spip_query("UPDATE spip_courriers SET statut='"._SPIPLISTES_STATUT_STOPE."',date_fin_envoi=NOW() WHERE id_courrier=$btn_arreter_envoi LIMIT 1");
 		// supprime de la queue d'envois
 		spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$btn_arreter_envoi");
 	}

@@ -186,6 +186,7 @@ function exec_spiplistes_config () {
 	debut_gauche();
 	__plugin_boite_meta_info();
 	creer_colonne_droite();
+	spiplistes_boite_autocron();
 	spiplistes_boite_info_spiplistes();
 	debut_droite("messagerie");
 
@@ -341,13 +342,13 @@ function exec_spiplistes_config () {
 	$page_result .= ""
 		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_suspendre_trieuse'))
    	. "<input type='checkbox' name='opt_suspendre_trieuse' value='oui' id='opt_suspendre_trieuse' "
-			. ((__plugin_lire_s_meta('opt_suspendre_trieuse', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "") . " />\n"
+			. ((__plugin_lire_s_meta('opt_suspendre_trieuse', _SPIPLISTES_META_PREFERENCES) == 'oui') ? "checked='checked'" : "") . " />\n"
    	. "<label class='verdana2' for='opt_suspendre_trieuse'>"._T('spiplistes:Suspendre_le_tri_des_listes')."</label>\n"
 		. fin_cadre_relief(true)
 		//
 		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_suspendre_meleuse'))
    	. "<input type='checkbox' name='opt_suspendre_meleuse' value='oui' id='opt_suspendre_meleuse' "
-			. ((__plugin_lire_s_meta('opt_suspendre_meleuse', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "") . " />\n"
+			. ((__plugin_lire_s_meta('opt_suspendre_meleuse', _SPIPLISTES_META_PREFERENCES) == 'oui') ? "checked='checked'" : "") . " />\n"
    	. "<label class='verdana2' for='opt_suspendre_meleuse'>"._T('spiplistes:Suspendre_lenvoi_des_courriers')."</label>\n"
 		. fin_cadre_relief(true)
 		//

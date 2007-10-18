@@ -80,6 +80,10 @@ function exec_spiplistes_courrier_edit(){
 			$type = 'nl';
 			$new = 'oui';
 			$titre = _T('spiplistes:Nouveau_courrier');
+			$clearonfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		}
+		else {
+			$clearonfocus = "";
 		}
 	
 		$gros_bouton_retour =
@@ -146,7 +150,7 @@ function exec_spiplistes_courrier_edit(){
 		//
 		// bloc sujet
 		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier').":</label>\n"
-		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' />\n"
+		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' $clearonfocus />\n"
 		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:Courrier_edit_desc')."</p>\n"
 		//
 		// générer le contenu

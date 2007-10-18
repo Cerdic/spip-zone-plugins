@@ -332,6 +332,7 @@ et de recevoir les lettres d\'informations.',
 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu.",
 'trieuse_suspendue' => "Trieuse suspendue",
 'trieuse_suspendue_info' => "Le traitement des listes de diffusion programm&eacute;es est suspendu.",
+'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e",
 
 //n
 'nb_abonnes_plur' => ' abonn&eacute;s',
@@ -421,6 +422,10 @@ liste.",
 'texte_pied' => '<p><b>Texte du pied de page</b>',
 'Tous_les' => 'Tous les',
 'Total' => "Total ",
+'Trieuse_reactivee' => "Trieuse r&eacute;activ&eacute;e",
+
+//U
+'Utilisez_formulaire' => "Utilisez le formulaire ci-contre pour activer/d&eacute;activer cette option.",
 
 //V
 'version_html' => '<b>Version HTML</b>',

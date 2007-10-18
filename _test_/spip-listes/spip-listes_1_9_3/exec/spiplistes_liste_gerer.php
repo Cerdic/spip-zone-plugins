@@ -385,7 +385,7 @@ function exec_spiplistes_liste_gerer () {
 		. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
 		. "<span class='verdana2'>". _T('spiplistes:Cette_liste_est').": "
 		. 	spiplistes_bullet_titre_liste($titre, $statut, true, 'img_statut')."</span>\n"
-		. "<select class='verdana2' name='statut' size='1' class='fondl' onChange='change_bouton(this)'>\n"
+		. "<select class='verdana2' name='statut' size='1' class='fondl' onchange='change_bouton(this)'>\n"
 		. "<option" . mySel(_SPIPLISTES_PRIVATE_LIST, $statut) ." style='background-color: white'>"._T('spiplistes:statut_interne')."\n"
 		. "<option" . mySel(_SPIPLISTES_PUBLIC_LIST, $statut) . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."\n"
 		. "<option" . mySel(_SPIPLISTES_TRASH_LIST, $statut) . " style='background:url("._DIR_IMG_PACK."rayures-sup.gif)'>"._T('texte_statut_poubelle')."\n"

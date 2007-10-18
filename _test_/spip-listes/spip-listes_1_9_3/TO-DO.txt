@@ -5,13 +5,10 @@
 
 
 TO-DO:
-- vérifier la boite autocron
 - Ajouter confirmation d'envoi dans liste lors d'un "envoyer maintenant"
 - Corriger documentation contextuelle
-- Annulation d'envoi dans boite autocron à revoir ;
 - maintenance: mettre en place l'auth. par FTP.
 - module de stats (calendrier des envoyés/à envoyer pour vérifier engorgement)
-- icone boite_autocron de SLV plus sympa (avis perso, CP) Qu'en pensez-vous ?
 - icone 'casier à courrier' à revoir. Idem 'listes de diffusion'
 - import/export: gérer les fichiers compressés
 - import/export: proposer séparateur tab ou ";", a-la-CSV

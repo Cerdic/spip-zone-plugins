@@ -106,7 +106,7 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 			$ecrire_metas = true;
 		}
 	}
-	// les preferences serialisées ('spiplistes_preferences') sont installées par exec/spiplistes_config
+	// les preferences serialisées ('_SPIPLISTES_META_PREFERENCES') sont installées par exec/spiplistes_config
 	
 	if($ecrire_metas) {
 		include_spip("inc/meta");
@@ -138,7 +138,7 @@ function spiplistes_vider_tables ($nom) {
 	effacer_meta('spiplistes_charset_envoi');
 	effacer_meta('spiplistes_lots');
 	effacer_meta('abonnement_config');
-	effacer_meta('spiplistes_preferences');
+	effacer_meta(_SPIPLISTES_META_PREFERENCES);
 	ecrire_metas();
 	return(true);
 }

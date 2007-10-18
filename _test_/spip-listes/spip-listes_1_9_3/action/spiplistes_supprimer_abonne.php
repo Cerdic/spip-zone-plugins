@@ -3,9 +3,9 @@
 
 // _SPIPLISTES_ACTION_SUPPRIMER_ABONNER
 
-// $LastChangedRevision: 15830 $
-// $LastChangedBy: paladin@quesaco.org $
-// $LastChangedDate: 2007-10-07 05:41:13 +0200 (dim., 07 oct. 2007) $
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 /*
 	Supprime l'auteur (visiteur) demandé

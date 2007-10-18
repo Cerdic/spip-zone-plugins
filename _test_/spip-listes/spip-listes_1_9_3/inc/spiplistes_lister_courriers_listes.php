@@ -202,7 +202,11 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 					// - date debut envoi si encour, sinon date de publication
 					if(!in_array($statut, array(_SPIPLISTES_STATUT_REDAC, _SPIPLISTES_STATUT_READY))) {
 						$en_liste .= ""
-							. affdate_heure(($statut==_SPIPLISTES_STATUT_ENCOURS) ? $date_debut_envoi : $date_fin_envoi)
+							.	(
+								($statut==_SPIPLISTES_STATUT_ENCOURS)
+								? _T('spiplistes:envoi_en_cours')
+								: affdate_heure($date_fin_envoi)
+								)
 							;
 					}
 					break;

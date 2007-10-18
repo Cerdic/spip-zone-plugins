@@ -695,7 +695,7 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO') {
 function spiplistes_tampon_html_get ($tampon_patron) {
 	$contexte_patron = array();
 	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-		$contexte_patron[$key] = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+		$contexte_patron[$key] = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 	include_spip('public/assembler');
 	return(recuperer_fond(_SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron, $contexte_patron));
@@ -708,7 +708,7 @@ function spiplistes_tampon_texte_get ($tampon_patron, $tampon_html) {
 	$contexte_patron = array();
 	$result = false;
 	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-		$contexte_patron[$key] = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+		$contexte_patron[$key] = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 	$f = _SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron;
 	if (find_in_path($f."_texte.html")){
@@ -775,16 +775,57 @@ function spiplistes_onglets ($rubrique, $onglet, $return = false) {
 	if($return) return($result);
 	else echo($result);
 }
+
+// Petit formulaire dans la bote autocron (CP-20071018)
+function spiplistes_boite_autocron_form($titre, $option, $value) {
+	global $connect_id_auteur;
+	$result = "";
+	// n'apparaît que si super_admin et pas sur la page de config (doublon de form)
+	if($connect_id_auteur == 1) {
+		if(_request('exec')!=_SPIPLISTES_EXEC_CONFIGURE) {
+			$result = ""
+				. "<!-- bouton annulation option -->\n"
+				. "<form name='form_$option' id='id_form_$option' method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)."'"
+					. " style='margin:0.5em 0;text-align:center;'>\n"
+				. "<input type='hidden' name='$option' id='id_$option' value='$value' />\n"
+				. "<label for='id_$option' style='display:none;'>$titre option</label>\n"
+				. "<input type='submit' name='Submit' value='$titre' id='Submit' class='fondo' />\n"
+				. "</form>\n"
+				;
+		}
+		else {
+			$result = ""
+				. "<p class='verdana2'>"._T('spiplistes:Utilisez_formulaire')."</p>\n"
+				;
+		}
+	}
+	return($result);
+}
+
 // Petite boite info pour l'autocron (CP-20071018)
-function spiplistes_boite_info_autocron ($icone = "", $return = false, $fonction = '', $titre = "", $texte = "", $nom_option = "", $icone_alerte = false) {
+function spiplistes_boite_autocron_info ($icone = "", $return = false, $titre_boite = '', $bouton = "", $texte = "", $nom_option = "", $icone_alerte = false) {
 	$result = ""
-		. debut_cadre_couleur($icone, $return, $fonction, $titre)
+		. debut_cadre_couleur($icone, $return, $fonction, $titre_boite)
 		. ($icone_alerte ? "<div style='text-align:center;'><img alt='' src='$icone_alerte' border:'0' /></div>" : "")
 		. ($texte ? "<p class='verdana2' style='margin:0;'>$texte</p>\n" : "")
+		. ($bouton ? spiplistes_boite_autocron_form($bouton, $nom_option, 'non') : "")
 		. fin_cadre_couleur($return)
 		;
 	if($return) return($result);
 	else echo($result);
+}
+
+// Renvoie le nombre total de courriers en attente (CP-20071018)
+// Cumul des total_abonnes
+function spiplistes_nb_grand_total_courriers () {
+	$sql_query = "SELECT SUM(total_abonnes) AS n FROM spip_courriers WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."'";
+	$sql_result = spip_query($sql_query);
+	$result = 
+		($row = spip_fetch_array($sql_result))
+		? intval($row['n'])
+		: 0
+		;
+	return($result);
 }
 
 function spiplistes_boite_autocron ($return = false) { 
@@ -797,56 +838,68 @@ function spiplistes_boite_autocron ($return = false) {
 		'opt_suspendre_trieuse'
 		,'opt_suspendre_meleuse'
 		) as $key) {
-		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
 	$result = "";
 	
 	// initialise les options
 	foreach(array('opt_simuler_envoi') as $key) {
-		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
+	// Informe sur l'état de la trieuse
 	if($opt_suspendre_trieuse == 'oui') {
-		$result .= spiplistes_boite_info_autocron(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.gif", true, ""
-			, _T('spiplistes:trieuse_suspendue')
-			, _T('spiplistes:trieuse_suspendue_info'), 'opt_suspendre_trieuse', _DIR_IMG_PACK."warning-24.gif"
-			);
+		if(_request('opt_suspendre_trieuse')=='non') {
+			if($connect_id_auteur == 1) {
+				__plugin_ecrire_s_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
+				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Trieuse_reactivee')."</p>\n";
+			}
+		}
+		else {
+			$result .= spiplistes_boite_autocron_info(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.gif", true
+				, _T('spiplistes:trieuse_suspendue'), _T('bouton_annuler')
+				, _T('spiplistes:trieuse_suspendue_info'), 'opt_suspendre_trieuse', _DIR_IMG_PACK."warning-24.gif"
+				);
+		}
 	}
 	
+	// Informe sur l'état de la meleuse
 	if($opt_suspendre_meleuse == 'oui') {
-		$result .= spiplistes_boite_info_autocron(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true, ""
-			, _T('spiplistes:meleuse_suspendue')
-			, _T('spiplistes:meleuse_suspendue_info'), 'opt_suspendre_meleuse', _DIR_IMG_PACK."warning-24.gif"
-			);
+		if(_request('opt_suspendre_meleuse')=='non') {
+			if($connect_id_auteur == 1) {
+				__plugin_ecrire_s_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
+				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Meleuse_reactivee')."</p>\n";
+			}
+		}
+		else {
+			$result .= spiplistes_boite_autocron_info(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true
+				, _T('spiplistes:meleuse_suspendue'), _T('bouton_annuler')
+				, _T('spiplistes:meleuse_suspendue_info'), 'opt_suspendre_meleuse', _DIR_IMG_PACK."warning-24.gif"
+				);
+		}
 	}
 	
 	include_spip('genie/spiplistes_cron');
-	if (cron_spiplistes_cron($time)) { // rien a faire
+	if($ii = cron_spiplistes_cron($time) > 0) { 
+	// le CRON n'a rien a faire. Pas de boite autocron
 		if($return) return($result);
 		else {
+spiplistes_log("AUTOCRON no jobs ! $ii", LOG_DEBUG);
 			echo($result);
 			return;
 		}
 	}
 	
-/*
-	$res = spip_query("SELECT COUNT(a.id_auteur) AS n 
-		FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='"._SPIPLISTES_STATUT_ENCOURS."'");
-	$n = 0;
-*/
-	$sql_result = spip_query("SELECT SUM(c.total_abonnes) AS n 
-		FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='"._SPIPLISTES_STATUT_ENCOURS."'");
-	if ($row = spip_fetch_array($sql_result))
-		$n = intval($row['n']);
-spiplistes_log("AUTOCRON nb courries prets envoi $n", LOG_DEBUG);
+	$n = spiplistes_nb_grand_total_courriers();
+spiplistes_log("AUTOCRON nb courriers prets envoi $n", LOG_DEBUG);
 
 	if($n > 0) {
 		$result .= ""
 			. "<br />"
 			. debut_boite_info(true)
 			. "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>"
-			. "<div style='padding : 10px;text-align:center'><img src='"._DIR_PLUGIN_SPIPLISTES."img_pack/48_import.gif'></div>"
+			. "<div style='padding : 10px;text-align:center'><img alt='' src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_distribution-48.gif' /></div>"
 			. "<div id='meleuse'>"
 			.	(
 					($total = spiplistes_nb_courriers_en_cours())
@@ -904,8 +957,7 @@ spiplistes_log("AUTOCRON nb courries prets envoi $n", LOG_DEBUG);
 			//run_processus($(this).attr('id'));
 		});
 		//--></script>"
-			. "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" 
-			. "<p align='center'><a href='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,'change_statut=publie&id_courrier='.$id_mess)."'>["._T('annuler')."]</a></p>"
+			. "<p class='verdana2'>"._T('spiplistes:texte_boite_en_cours')."</p>" 
 			. fin_boite_info(true)
 			;
 	}

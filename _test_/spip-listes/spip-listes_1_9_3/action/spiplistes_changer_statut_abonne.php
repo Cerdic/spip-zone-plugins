@@ -1,4 +1,9 @@
 <?php
+// action/spiplistes_changer_statut_abonne.php
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
