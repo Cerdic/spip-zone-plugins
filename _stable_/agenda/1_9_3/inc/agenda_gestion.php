@@ -220,7 +220,7 @@ function Agenda_formulaire_article($id_article, $flag_editable, $script){
 
 	$out = "<div id='editer_evenement-$id_article'>";
 	$out .= "<a name='agenda'></a>";
-	
+	/* ne marche pas !
 	$bouton = _T('agenda:texte_agenda')." <a href='".generer_url_ecrire('calendrier',"ajouter_id_article=$id_article")."'>"._T('icone_calendrier')."</a>";
 	if ($flag_editable)
 		if (_request('edit')||_request('neweven'))
@@ -228,6 +228,16 @@ function Agenda_formulaire_article($id_article, $flag_editable, $script){
 		else
 			$bouton = bouton_block_depliable($bouton,'visible',"evenementsarticle");
 	$out= debut_cadre_enfonce("../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", true, "", $bouton);
+*/
+	if ($flag_editable) {
+		if (_request('edit')||_request('neweven'))
+			$bouton = bouton_block_visible("evenementsarticle");
+		else
+			$bouton = bouton_block_invisible("evenementsarticle");
+	}
+
+	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", true, "", $bouton._T('agenda:texte_agenda')
+	." <a href='".generer_url_ecrire('calendrier',"ajouter_id_article=$id_article")."'>"._T('icone_calendrier')."</a>");
 
 	//
 	// Afficher les evenements
