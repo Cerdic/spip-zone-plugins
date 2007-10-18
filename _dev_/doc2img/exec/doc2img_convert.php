@@ -73,7 +73,7 @@ function exec_doc2img_convert_dist(){
         $largeur = $ratio_largeur * imagick_getwidth($handle);
         $hauteur = $ratio_hauteur * imagick_getheight($handle);
                  
-        spip_log('largeur_source :'.imagick_getwidth($handle).'largeur_cible :'.$largeur,,'doc2img');
+        spip_log('largeur_source :'.imagick_getwidth($handle).'largeur_cible :'.$largeur,'doc2img');
         spip_log('hauteur_source :'.imagick_getheight($handle).'hauteur_cible :'.$hauteur,'doc2img');
         
         //chaque page est un fichier on sauve dans la table doc2img chacun des ces nouveaux fichier
