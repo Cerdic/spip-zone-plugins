@@ -68,7 +68,7 @@ function exec_spiplistes_courrier_gerer () {
 	foreach(array('email_test','titre','texte') as $key) {
 		$$key = trim($$key);
 	}
-
+			
 	if($id_message>0) $id_courrier = $id_message;
 	
 	$page_result = $message_erreur = $str_destinataire = "";
@@ -440,7 +440,7 @@ function exec_spiplistes_courrier_gerer () {
 				. " title='"._T('spiplistes:Apercu_plein_ecran')." ($alt_message_texte)' target='_blank'>\n"
 			. "<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' /></a><br />\n"
 			. "<textarea readonly='readonly' name='texte' rows='".(($spip_ecran == "large") ? 28 : 20)."' class='formo' cols='40' wrap='soft'>"
-			. $message_texte
+			. version_texte(propre($message_texte))
 			. "</textarea>\n"
 			. fin_cadre_couleur(true)
 			//

@@ -69,8 +69,9 @@ function exec_spiplistes_courrier_edit(){
 	}
 
 	// l'édition du courrier est réservée aux super-admins 
-	// ou au créateur du courrier
-	$flag_editable = (($connect_statut == "0minirezo") && ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur)));
+	// ou aux admin créateur du courrier
+	$flag_editable = (($connect_statut == "0minirezo") 
+		&& ($connect_toutes_rubriques || ($connect_id_auteur == $id_auteur) || !$id_courrier));
 
 	if($flag_editable) {
 		if(!$id_courrier) {

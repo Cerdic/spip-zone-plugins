@@ -80,7 +80,7 @@ function exec_spiplistes_courrier_previsu(){
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
 		if($id_courrier && ($row=spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier")))) {
 			foreach(explode(",", $sql_select) as $key) {
-				$$key = $row[$key];
+				$$key = propre($row[$key]);
 			}
 			
 			if($plein_ecran) {
