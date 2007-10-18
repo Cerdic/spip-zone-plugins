@@ -1,0 +1,38 @@
+#CACHE{1}
+#HTTP_HEADER{Content-Type: text/html}
+[(#REM)
+
+	* Squelette pour spip-listes    
+	* tampon_large_avec_logo_site.html (CP-20071017 paladin@quesaco.org)
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	* Le tampon de courrier est appliqué à l'envoi de votre courrier.
+	
+	* Pour paramétrer l'envoi du tampon Editeur, voir la page de configuration
+	* dans le menu configuration (espace privé)
+	* ou http://<votre-site>/ecrire/?exec=spiplistes_config
+		
+	* - ne pas envoyer des gabarits de plus de 10Ko
+	* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+	* ils seront ajoutes automatiquement à l'envoi du mail 
+	* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+	* - les urls et liens images seront automatiquement converties en absolues
+	*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+
+]
+<div style='texte-align:center;font-size:80%;'>
+<p style='background-color:#ccf;border-top:1px solid gray;'>Cette liste de diffusion est une publication de : </p>
+[(#LOGO_SITE_SPIP
+		||image_reduire{0,64}
+		|inserer_attribut{alt,[(#NOM_SITE_SPIP|textebrut)]}
+		|inserer_attribut{title,[(#NOM_SITE_SPIP|textebrut)]}
+		|inserer_attribut{width,'64'}
+		|inserer_attribut{height,'64'}
+		|liens_absolus
+		)]
+<p style='font-size:150%;font-weight:bold;margin:0;'>#EDITEUR_NOM</p>
+[<p style='margin:0;'>&nbsp;(#EDITEUR_ADRESSE) - 
+[&nbsp;RCS: (#EDITEUR_RCS) - 
+][&nbsp;Siret: (#EDITEUR_SIRET)]</p>]</div>

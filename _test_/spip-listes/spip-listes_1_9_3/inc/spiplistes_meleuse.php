@@ -198,6 +198,15 @@ function spiplistes_meleuse () {
 				}
 			}
 			
+			// corrige les liens relatifs (celui de texte a déjà été corrigé par la trieuse (cron)
+			foreach(array('pied_page_html', 'pied_page_texte'
+				, 'pied_rappel_html', 'pied_rappel_texte', 'tampon_html', 'tampon_texte') as $key) {
+				if(!empty($$key)) {
+					$$key = liens_absolus($$key);
+				}
+			}
+			
+			
 			$email_a_envoyer['texte'] = new phpMail('', $objet_texte, '', $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
 			$email_a_envoyer['texte']->From = $from ; 
 			$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
