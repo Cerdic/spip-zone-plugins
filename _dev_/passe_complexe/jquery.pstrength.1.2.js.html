@@ -24,7 +24,7 @@
 	$.extend($.fn, {
 		pstrength : function(options) {
 			var options = $.extend({
-				verdects:	["<:tres_faible:>","<:faible:>","<:moyen:>","<:fort:>","<:tres_fort:>"],
+				verdects:	["<:passecomplexe:tres_faible:>","<:passecomplexe:faible:>","<:passecomplexe:moyen:>","<:passecomplexe:fort:>","<:passecomplexe:tres_fort:>"],
 				colors: 	["#f00","#c06", "#f60","#3c0","#3f0"],
 				scores: 	[10,15,30,40],
 				common:		["motdepasse","123456","123","1234","azerty"],
@@ -32,7 +32,7 @@
 			},options);		
 			return this.each(function(){
 				var infoarea = $(this).attr('id');
-				$(this).after('<div class="pstrength-minchar" id="' + infoarea + '_minchar"><:nb_mini:>' + options.minchar + '</div>');
+				$(this).after('<div class="pstrength-minchar" id="' + infoarea + '_minchar"><:passecomplexe:nb_mini:>' + options.minchar + '</div>');
 				$(this).after('<div class="pstrength-info" id="' + infoarea + '_text"></div>');
 				$(this).after('<div class="pstrength-bar" id="' + infoarea + '_bar" style="border: 1px solid white; font-size: 1px; height: 2px; width: 0px;"></div>');
 				$(this).keyup(function(){				
@@ -49,12 +49,12 @@
 			// Color and text
 			if (nPerc == -200) {
 				strColor = '#f00';
-				strText = '<:simple:>';
+				strText = '<:passecomplexe:simple:>';
 				$(ctlBar).css({width: "0%"});
 			}		
 			else if (nPerc < 0 && nPerc > -199) {
 				strColor = '#ccc';
-				strText = '<:court:>';
+				strText = '<:passecomplexe:court:>';
 				$(ctlBar).css({width: "1%"});
 			}
 			else if(nPerc <= options.scores[0])
