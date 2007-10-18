@@ -107,20 +107,30 @@ if (!($_GET['devoirs_seuls'])) {
 <BOUCLE_Seances(ARTICLES){id_rubrique}{!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,100000000000000}}{!par date}>
 		<div id="documents">
 			<h3 class="titre">#TITRE</h3>
-			<div class="texte">#TEXTE</div>
+			<div class="#EDIT{texte} texte">#TEXTE</div>
+	<BOUCLE_Auteur_Seances(AUTEURS){id_article}{0,1}>
 <?php
 //Si c'est une séance écrite par le prof qui visite il peut dupliquer la séance
 if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) echo "<a href=\"".'[(#URL_PAGE{cahier-de-texte-saisie}|texte_script)]'."&id_article=".'[(#ID_ARTICLE|texte_script)]'."\" title=\"Copier le contenu de cette séance pour une autre classe/groupe\"><img src=\"plugins/bonbon/images/go-jump.png\" alt=\"icône\" vspace=\"2\" align=\"middle\">Dupliquer cette séance</a>";
 ?>
+	</BOUCLE_Auteur_Seances>
 [
 (#REM) Si on ne demande que les séances (donc pas les devoirs)
 
-][(#ENV{seances_seules}|?{'',' '})			[<hr>
-			<div>(#PS)</div>]
 ]
+	<B_Trouve_Infos_Devoirs_id_article>
+			[(#ENV{seances_seules}|?{'',' '})<hr>
+			<h4 class="devoirs">Devoirs donnés&nbsp;:</h4>
+			<div>]
+	<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){titre_mot="Devoirs à faire"}{ps==#ID_ARTICLE}>
+			[(#ENV{seances_seules}|?{'',' '})<div class="#EDIT{texte} texte"><h5 class="devoirs">Pour le [(#DATE|affdate)]&nbsp;: </h5>
+			#TEXTE</div>]
+	</BOUCLE_Trouve_Infos_Devoirs_id_article>
+			[(#ENV{seances_seules}|?{'',' '})</div>]
+</B_Trouve_Infos_Devoirs_id_article>
 		</div>
 </BOUCLE_Seances>
-<div class="apres">#PAGINATION{page_precedent_suivant}</div>
+[<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
 </B_Seances>
 <?php
 } //fin du if !devoirs_seuls
@@ -162,7 +172,7 @@ if (($_GET['devoirs_seuls'])) {
 				[(#ENV{matiere}|?{'',<td>})]
 				<BOUCLE_matieres(MOTS){id_article}{type="Matières"}{"&nbsp;- "}>[(#ENV{matiere}|?{'',#TITRE})]</BOUCLE_matieres>
 				[(#ENV{matiere}|?{'',</td>})]
-				<td>[(#TEXTE)]</td>
+				<td class="#EDIT{texte}">[(#TEXTE)]</td>
 				[(#ENV{id_auteur}|?{'',<td>})]
 				<BOUCLE_profs(AUTEURS){id_article}{"&nbsp;- "}>[(#ENV{id_auteur}|?{'',#NOM})]</BOUCLE_profs>
 				[(#ENV{id_auteur}|?{'',</td>})]
@@ -180,7 +190,7 @@ if (($_GET['devoirs_seuls'])) {
 			</tr>
 </BOUCLE_Devoirs>
 		</table>
-<div class="apres">#PAGINATION{page_precedent_suivant}</div>
+[<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
 </B_Devoirs>
 <?php
 } //fin du if devoirs_seuls

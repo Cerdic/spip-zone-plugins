@@ -13,8 +13,11 @@ Des corrections de bugs divers... (voir SVN)
 Un rafraichissement plus fréquent des pages (durée de cache plus courte)
 Des améliorations dans l'interface de saisie: 	-matière et classes sont préslecetionnés quand on vient de finir de saisir une séance et qu'on passe à la suivante.
 						-au dessus du formulaire de saisie il y a un rappel du contexte...
+						-c'est plus joli avec des icônes !
 						- etc...
 Fonctionalité majeure: On peut dupliquer une séance déjà saisie ! (pour copier coller ce qui a été fait avec une classe sur une autre)...
+Fonctionnalité majeure: intégrations des «crayons». Quand le plugin «Les crayons» est présent on peut modifier le contenu des séances et des devoirs directement comme dans un Wiki.
+Les devoirs sont désormais affichés in-extenso avec les séances (et plus simplement pour quand ils sont à faire).
 
 
 1.0 Première sortie de Bonbon
