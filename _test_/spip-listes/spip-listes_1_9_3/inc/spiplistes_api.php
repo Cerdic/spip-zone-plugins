@@ -582,7 +582,7 @@ function spiplistes_boite_selection_patrons ($patron="", $return=false, $chemin=
 }
 
 // From SPIP-Listes-V: CP:20070923
-function spiplistes_boite_patron ($id_liste, $exec_retour, $nom_bouton_valider, $chemin_patrons, $titre_boite = ""
+function spiplistes_boite_patron ($flag_editable, $id_liste, $exec_retour, $nom_bouton_valider, $chemin_patrons, $titre_boite = ""
 	, $msg_patron = false, $patron = "", $return = false) {
 	// bloc sélection patron
 	$result = ""
@@ -590,27 +590,39 @@ function spiplistes_boite_patron ($id_liste, $exec_retour, $nom_bouton_valider, 
 		. "<div class='verdana1' style='text-align: center;'>\n"
 		;
 	$titre_boite = "<strong>$titre_boite</strong>\n";
+	
+	if($flag_editable) {
 	// inclusion du script de gestion des layers de SPIP
-	if(($patron === true) || (is_string($patron) && empty($patron))) {
-		$result  .= ""
-			. bouton_block_visible(md5($nom_bouton_valider))
-			. $titre_boite
-			. debut_block_visible(md5($nom_bouton_valider))
+		if(($patron === true) || (is_string($patron) && empty($patron))) {
+			$result  .= ""
+				. bouton_block_visible(md5($nom_bouton_valider))
+				. $titre_boite
+				. debut_block_visible(md5($nom_bouton_valider))
+				;
+		}
+		else {
+			$result  .= ""
+				. bouton_block_invisible(md5($nom_bouton_valider))
+				. $titre_boite
+				. debut_block_invisible(md5($nom_bouton_valider))
+				;
+		}
+	}
+	else {
+		$result  .= $titre_boite;
+	}
+	if($flag_editable) {
+		$result .= "\n"
+			. "<form action='".generer_url_ecrire($exec_retour, "id_liste=$id_liste")."' method='post' style='margin:1ex;'>\n"
+			. spiplistes_boite_selection_patrons ($patron, true, $chemin_patrons)
+			. "<div style='margin-top:1em;text-align:right;'><input type='submit' name='$nom_bouton_valider' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+			. "</form>\n"
+			. fin_block()
 			;
 	}
 	else {
-		$result  .= ""
-			. bouton_block_invisible(md5($nom_bouton_valider))
-			. $titre_boite
-			. debut_block_invisible(md5($nom_bouton_valider))
-			;
 	}
 	$result .= "\n"
-		. "<form action='".generer_url_ecrire($exec_retour, "id_liste=$id_liste")."' method='post' style='margin:1ex;'>\n"
-		. spiplistes_boite_selection_patrons ($patron, true, $chemin_patrons)
-		. "<div style='margin-top:1em;text-align:right;'><input type='submit' name='$nom_bouton_valider' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
-		. "</form>\n"
-		. fin_block()
 		. "<div style='text-align:center'>\n"
 		. ($msg_patron ? $msg_patron : "<span style='color:gray;'>&lt;"._T('spiplistes:aucun')."&gt;</span>\n")
 		. "</div>\n"

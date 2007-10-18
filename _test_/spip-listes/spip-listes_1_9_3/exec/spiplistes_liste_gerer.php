@@ -293,11 +293,11 @@ function exec_spiplistes_liste_gerer () {
 	debut_gauche();
 	spiplistes_boite_info_id(_T('spiplistes:Liste_numero_:'), $id_liste, false);
 	spiplistes_naviguer_paniers_listes(_T('spiplistes:Aller_aux_listes'));
-	spiplistes_boite_patron($id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
+	spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
 		, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:Patron_grand_')
 		, ($patron ? $patron : "")
 		, $patron);
-	spiplistes_boite_patron($id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
+	spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
 		, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:Patron_de_pied_')
 		, (($ii = strlen($pied_page)) ? _T('taille_octets',array('taille'=>$ii)) : "")
 		, ($ii==0));
@@ -380,25 +380,46 @@ function exec_spiplistes_liste_gerer () {
 		//
 		////////////////////////////
 		// Formulaire diffusion
-		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
-		. "<input type='hidden' name='exec' value='listes' />\n"
-		. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
-		. "<span class='verdana2'>". _T('spiplistes:Cette_liste_est').": "
+		.	(
+			($flag_editable)
+			? ""
+				. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
+				. "<input type='hidden' name='exec' value='listes' />\n"
+				. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
+			: ""
+			)
+		. "<span class='verdana2'>". _T('spiplistes:Cette_liste_est')." : "
 		. 	spiplistes_bullet_titre_liste($titre, $statut, true, 'img_statut')."</span>\n"
-		. "<select class='verdana2' name='statut' size='1' class='fondl' onchange='change_bouton(this)'>\n"
-		. "<option" . mySel(_SPIPLISTES_PRIVATE_LIST, $statut) ." style='background-color: white'>"._T('spiplistes:statut_interne')."\n"
-		. "<option" . mySel(_SPIPLISTES_PUBLIC_LIST, $statut) . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."\n"
-		. "<option" . mySel(_SPIPLISTES_TRASH_LIST, $statut) . " style='background:url("._DIR_IMG_PACK."rayures-sup.gif)'>"._T('texte_statut_poubelle')."\n"
-		. "</select>\n"
-		. " \n"
+		.	(
+			($flag_editable)
+			? ""
+				. "<select class='verdana2' name='statut' size='1' class='fondl' onchange='change_bouton(this)'>\n"
+				. "<option" . mySel(_SPIPLISTES_PRIVATE_LIST, $statut) ." style='background-color: white'>"._T('spiplistes:statut_interne')."\n"
+				. "<option" . mySel(_SPIPLISTES_PUBLIC_LIST, $statut) . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."\n"
+				. "<option" . mySel(_SPIPLISTES_TRASH_LIST, $statut) . " style='background:url("._DIR_IMG_PACK."rayures-sup.gif)'>"._T('texte_statut_poubelle')."\n"
+				. "</select>\n"
+			: "<span class='verdana2' style='font-weight:bold;'>".spiplistes_items_get_item("alt", $statut)."</span>\n"
+			)
 		. "<div style='margin:10px 0px 10px 0px'>\n"
-		. "<label class='verdana2' for='changer_lang'>"._T(info_multi_herit)." : </label>\n"
-		. "<select name='changer_lang'  class='fondl' id='changer_lang'>\n"
-		. liste_options_langues('changer_lang', $lang , _T('spiplistes:langue'),'', '')
-		. "</select>\n"
+		.	(
+			($flag_editable)
+			? ""
+				. "<label class='verdana2' for='changer_lang'>"._T('info_multi_herit')." : </label>\n"
+				. "<select name='changer_lang'  class='fondl' id='changer_lang'>\n"
+				. liste_options_langues('changer_lang', $lang , _T('spiplistes:langue'),'', '')
+				. "</select>\n"
+			: ""
+				. "<span class='verdana2'>". _T('info_multi_herit')." : "
+				. "<span class='verdana2' style='font-weight:bold;'>".traduire_nom_langue($lang)."</span>\n"
+			)
 		. "</div>\n"
-		. "<div style='text-align:right;'><input type='submit' name='btn_modifier_diffusion' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
-		. "</form>\n"
+		.	(
+			($flag_editable)
+			? ""
+				. "<div style='text-align:right;'><input type='submit' name='btn_modifier_diffusion' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+				. "</form>\n"
+			: ""
+			)
 		. fin_cadre_relief(true)
 		//
 		////////////////////////////
@@ -406,12 +427,17 @@ function exec_spiplistes_liste_gerer () {
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').__plugin_aide(_SPIPLISTES_EXEC_AIDE, "replyto"))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste")."' method='post'>\n"
 		. "<p class='verdana2'>\n"
-		. _T('spiplistes:adresse_mail_retour')."<br />\n"
-		. "<blockquote class='verdana2'><em>"._T('spiplistes:adresse')."</em></blockquote></p>\n"
-		. "<div style='text-align:center'>\n"
-		. "<input type='text' name='email_envoi' value=\"".$email_envoi."\" size='40' class='fondl' /></div>\n"
-		. ($id_liste ? "<input type='hidden' name='id_liste' value='$id_liste' />" : "")
-		. "<div style='text-align:right;'><input type='submit' name='btn_modifier_replyto' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+		. _T('spiplistes:adresse_mail_retour').":<br />\n"
+		.	(
+			($flag_editable)
+			?	""
+				. "<blockquote class='verdana2'><em>"._T('spiplistes:adresse')."</em></blockquote></p>\n"
+				. "<div style='text-align:center'>\n"
+				. "<input type='text' name='email_envoi' value=\"".$email_envoi."\" size='40' class='fondl' /></div>\n"
+				. ($id_liste ? "<input type='hidden' name='id_liste' value='$id_liste' />" : "")
+				. "<div style='text-align:right;'><input type='submit' name='btn_modifier_replyto' value='"._T('bouton_valider')."' class='fondo' /></div>\n"
+			: "<p style='font-weight:bold;text-align:center;'>$email_envoi</p>\n"
+			)
 		. "</form>\n"
 		. fin_cadre_relief(true)
 		//
@@ -482,11 +508,11 @@ function exec_spiplistes_liste_gerer () {
 	$page_result .= ""
 		. "<tr><td background='"._DIR_IMG_PACK."rien.gif' align='$spip_lang_left' class='verdana2'>"
 		. "<input type='radio' name='message_auto' value='oui' id='auto_oui' "
-			. (empty($patron) ? " disabled='disabled' " : "")
+			. ((empty($patron) || (!$flag_editable)) ? " disabled='disabled' " : "")
 			. ($auto_checked = ($message_auto=='oui' ? "checked='checked'" : ""))
 			. " onchange=\"jQuery('#auto_oui_detail').show();\" />"
 		. "<label for='auto_oui' ".($auto_checked ? "style='font-weight:bold;'" : "").">"._T('spiplistes:prog_env')."</label>\n"
-		. "<div id='auto_oui_detail' ".(empty($patron) ? "style='display:none;'" : "").">"
+		. "<div id='auto_oui_detail' ".((empty($patron) || (!$flag_editable)) ? "style='display:none;'" : "").">"
 		. "<ul style='list-style-type:none;'>\n"
 		. "<li>"._T('spiplistes:message_sujet').": <input type='text' name='titre_message' value='".$titre_message."' size='50' class='fondl' /> </li>\n"
 		//
@@ -522,10 +548,10 @@ function exec_spiplistes_liste_gerer () {
 			)
 		. "</ul></div>\n"
 		;
-	$checked = ($message_auto=='non')?"checked='checked'":"";
+	$checked = ($message_auto=='non') ? "checked='checked'" : "";
 	$page_result .= ""
 		. "<br /><input type='radio' name='message_auto' value='non' id='auto_non' "
-		. (empty($patron) ? " disabled='disabled' " : "")
+		. ((empty($patron) || (!$flag_editable)) ? " disabled='disabled' " : "")
 		. $checked
 		. " onchange=\"jQuery('#auto_oui_detail').hide();\" />"
 		. ($checked?"<strong>":"")
@@ -551,7 +577,7 @@ function exec_spiplistes_liste_gerer () {
 			: ""
 			)
 		// bouton de validation
-		. (!empty($patron) ? "<input type='submit' name='btn_modifier_courrier_auto' value='"._T('bouton_valider')."' class='fondo' />" : "")
+		. ((!empty($patron) && $flag_editable) ? "<input type='submit' name='btn_modifier_courrier_auto' value='"._T('bouton_valider')."' class='fondo' />" : "")
 		. "</td></tr>"
 		. "</table>\n"
 		. "</form>"
