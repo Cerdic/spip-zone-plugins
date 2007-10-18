@@ -28,7 +28,7 @@
 	// Trieuse 
 	
 	// - Verifie toutes les listes auto==oui publiques et privées
-	// - créé le courrier pour la méleuse dans spip_courriers
+	// - crée le courrier pour la méleuse dans la table spip_courriers
 	// - determine les dates prochain envoi si periode > 0
 	// - si periode < 0, repasse la liste en dormeuse
 
@@ -37,9 +37,22 @@ function cron_spiplistes_cron ($last_time) {
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
 
-spiplistes_log("CRON: cron_spiplistes_cron() <<", LOG_DEBUG);
+//spiplistes_log("CRON: cron_spiplistes_cron() <<", LOG_DEBUG);
 		
 	$current_time = time();
+
+	// initialise les options
+	foreach(array(
+		'opt_suspendre_trieuse'
+		) as $key) {
+		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+	}
+
+	if($opt_suspendre_trieuse == 'oui') {
+		spiplistes_log("CRON: suspendu par admin", LOG_DEBUG);
+		include_spip('inc/spiplistes_meleuse');
+		return(spiplistes_meleuse());
+	}
 
 	$sql_select = "id_liste,titre,titre_message,date,message_auto,periode,lang,patron,statut";
 
@@ -54,7 +67,6 @@ spiplistes_log("CRON: cron_spiplistes_cron() <<", LOG_DEBUG);
 	$listes_privees_et_publiques = spip_query ($sql_query);
 	
 spiplistes_log("CRON: nb listes ok: ".spip_num_rows($listes_privees_et_publiques), LOG_DEBUG);
-//return(0);
 
 	while($row = spip_fetch_array($listes_privees_et_publiques)) {
 	

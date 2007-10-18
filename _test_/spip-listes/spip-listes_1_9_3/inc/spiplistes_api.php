@@ -775,31 +775,74 @@ function spiplistes_onglets ($rubrique, $onglet, $return = false) {
 	if($return) return($result);
 	else echo($result);
 }
-
+// Petite boite info pour l'autocron (CP-20071018)
+function spiplistes_boite_info_autocron ($icone = "", $return = false, $fonction = '', $titre = "", $texte = "", $nom_option = "", $icone_alerte = false) {
+	$result = ""
+		. debut_cadre_couleur($icone, $return, $fonction, $titre)
+		. ($icone_alerte ? "<div style='text-align:center;'><img alt='' src='$icone_alerte' border:'0' /></div>" : "")
+		. ($texte ? "<p class='verdana2' style='margin:0;'>$texte</p>\n" : "")
+		. fin_cadre_couleur($return)
+		;
+	if($return) return($result);
+	else echo($result);
+}
 
 function spiplistes_boite_autocron ($return = false) { 
 	@define('_SPIP_LISTE_SEND_THREADS',1);
-	include_spip('genie/spiplistes_cron');
-	if (cron_spiplistes_cron($time)) return; // rien a faire
+	
+	global $connect_id_auteur;
+	
+	// initialise les options
+	foreach(array(
+		'opt_suspendre_trieuse'
+		,'opt_suspendre_meleuse'
+		) as $key) {
+		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+	}
+
+	$result = "";
 	
 	// initialise les options
 	foreach(array('opt_simuler_envoi') as $key) {
 		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
 	}
 
+	if($opt_suspendre_trieuse == 'oui') {
+		$result .= spiplistes_boite_info_autocron(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_timer.gif", true, ""
+			, _T('spiplistes:trieuse_suspendue')
+			, _T('spiplistes:trieuse_suspendue_info'), 'opt_suspendre_trieuse', _DIR_IMG_PACK."warning-24.gif"
+			);
+	}
+	
+	if($opt_suspendre_meleuse == 'oui') {
+		$result .= spiplistes_boite_info_autocron(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true, ""
+			, _T('spiplistes:meleuse_suspendue')
+			, _T('spiplistes:meleuse_suspendue_info'), 'opt_suspendre_meleuse', _DIR_IMG_PACK."warning-24.gif"
+			);
+	}
+	
+	include_spip('genie/spiplistes_cron');
+	if (cron_spiplistes_cron($time)) { // rien a faire
+		if($return) return($result);
+		else {
+			echo($result);
+			return;
+		}
+	}
+	
 /*
 	$res = spip_query("SELECT COUNT(a.id_auteur) AS n 
 		FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='"._SPIPLISTES_STATUT_ENCOURS."'");
 	$n = 0;
 */
-	$res = spip_query("SELECT SUM(c.total_abonnes) AS n 
+	$sql_result = spip_query("SELECT SUM(c.total_abonnes) AS n 
 		FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='"._SPIPLISTES_STATUT_ENCOURS."'");
-	if ($row = spip_fetch_array($res))
+	if ($row = spip_fetch_array($sql_result))
 		$n = intval($row['n']);
 spiplistes_log("AUTOCRON nb courries prets envoi $n", LOG_DEBUG);
 
 	if($n > 0) {
-		$result = ""
+		$result .= ""
 			. "<br />"
 			. debut_boite_info(true)
 			. "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>"

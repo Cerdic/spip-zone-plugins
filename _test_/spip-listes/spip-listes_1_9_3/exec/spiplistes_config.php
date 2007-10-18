@@ -66,6 +66,8 @@ function exec_spiplistes_config () {
 	
 	$keys_opts_param_valider = array(
 		'opt_simuler_envoi' // demande à la méleuse de simuler l'envoi du courrier
+		, 'opt_suspendre_trieuse' // suspendre la trieuse. Les listes restent en attente
+		, 'opt_suspendre_meleuse' // suspendre les envois de courriers
 		);
 			
 	$keys_console_syslog = array(
@@ -335,11 +337,23 @@ function exec_spiplistes_config () {
 		. fin_cadre_relief(true)
 		;
 		//
-	// option simulation des envois
-	$checked = (__plugin_lire_s_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "";
+	// options simulation des envois, suspendre le tri, la meleuse
 	$page_result .= ""
+		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_suspendre_trieuse'))
+   	. "<input type='checkbox' name='opt_suspendre_trieuse' value='oui' id='opt_suspendre_trieuse' "
+			. ((__plugin_lire_s_meta('opt_suspendre_trieuse', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "") . " />\n"
+   	. "<label class='verdana2' for='opt_suspendre_trieuse'>"._T('spiplistes:Suspendre_le_tri_des_listes')."</label>\n"
+		. fin_cadre_relief(true)
+		//
+		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_suspendre_meleuse'))
+   	. "<input type='checkbox' name='opt_suspendre_meleuse' value='oui' id='opt_suspendre_meleuse' "
+			. ((__plugin_lire_s_meta('opt_suspendre_meleuse', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "") . " />\n"
+   	. "<label class='verdana2' for='opt_suspendre_meleuse'>"._T('spiplistes:Suspendre_lenvoi_des_courriers')."</label>\n"
+		. fin_cadre_relief(true)
+		//
 		. debut_cadre_relief("", true, "", _T('spiplistes:Mode_simulation'))
-   	. "<input type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' $checked />\n"
+   	. "<input type='checkbox' name='opt_simuler_envoi' value='oui' id='opt_simuler_envoi' "
+			. ((__plugin_lire_s_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES)) ? "checked='checked'" : "") . " />\n"
    	. "<label class='verdana2' for='opt_simuler_envoi'>"._T('spiplistes:Simuler_les_envois')."</label>\n"
 		. fin_cadre_relief(true)
 		//

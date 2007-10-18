@@ -319,6 +319,19 @@ et de recevoir les lettres d\'informations.',
 'Modifier_ce_courrier' => "Modifier ce courrier",
 'Mode_simulation' => "Mode simulation",
 'Simuler_les_envois' => "Simuler les envois de courriers",
+'Mode_suspendre_trieuse' => "Suspendre le traitement des envois des listes de diffusion",
+'Suspendre_le_tri_des_listes' => "Cette option vous permet - en cas d'engorgement - de suspendre le traitement des 
+	listes de diffusion programm&eacute;es et de red&eacute;finir les param&egrave;tres 
+	d'envoi. D&eacute;sactivez ensuite cette option pour reprendre le traitement des 
+	listes de diffusion programm&eacute;es.",
+'Mode_suspendre_meleuse' => "Suspendre l'envoi des courriers",
+'Suspendre_lenvoi_des_courriers' => "Cette option vous permet - en cas d'engorgement 
+	- d'annuler l'envoi des courriers. D&eacute;sactivez ensuite cette option pour 
+	reprendre les exp&eacute;ditions en cours. ",
+'meleuse_suspendue' => "Meleuse suspendue",
+'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu.",
+'trieuse_suspendue' => "Trieuse suspendue",
+'trieuse_suspendue_info' => "Le traitement des listes de diffusion programm&eacute;es est suspendu.",
 
 //n
 'nb_abonnes_plur' => ' abonn&eacute;s',

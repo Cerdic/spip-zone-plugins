@@ -48,7 +48,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 */
 	
 function spiplistes_meleuse () {
-//return(0);
+
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/meta');
 	include_spip('inc/texte');
@@ -60,11 +60,17 @@ function spiplistes_meleuse () {
 	// initialise les options
 	foreach(array(
 		'opt_simuler_envoi'
-		,'opt_lien_en_tete_courrier', 'lien_patron'
-		,'opt_ajout_pied_courrier', 'pied_patron'
-		,'opt_ajout_tampon_editeur', 'tampon_patron'
+		, 'opt_suspendre_meleuse'
+		, 'opt_lien_en_tete_courrier', 'lien_patron'
+		, 'opt_ajout_pied_courrier', 'pied_patron'
+		, 'opt_ajout_tampon_editeur', 'tampon_patron'
 		) as $key) {
 		$$key = __plugin_lire_s_meta($key, 'spiplistes_preferences');
+	}
+
+	if($opt_suspendre_meleuse == 'oui') {
+		spiplistes_log("MEL: suspendu par admin", LOG_DEBUG);
+		return(time());
 	}
 
 	//////////////////////////
