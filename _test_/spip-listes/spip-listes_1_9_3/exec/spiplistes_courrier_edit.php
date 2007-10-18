@@ -106,7 +106,7 @@ function exec_spiplistes_courrier_edit(){
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
-	if(!flag_editable) {
+	if(!$flag_editable) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
