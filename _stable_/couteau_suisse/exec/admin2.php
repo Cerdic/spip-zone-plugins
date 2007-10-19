@@ -121,10 +121,20 @@ function set_selected() {
 		} else jQuery('div.cs_toggle div').hide();
 }
 
-jQuery(function(){";
-//affichage en gras
-//if(strlen($afficher_outil)) echo "\n\tjQuery('#href_$afficher_outil').addClass('outil_on');";
-echo "
+function outils_toggle() {
+	if(cs_selected.length>1) {
+		msg=\""._T('cout:permuter_outils')."\";
+		msg=msg.replace(/@nb@/, cs_selected.length);
+	} else {
+		msg=\""._T('cout:permuter_outil')."\";
+		msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
+	}
+	if (!confirm(msg)) return false;
+	jQuery('#cs_selection').attr('value', cs_selected.join(','));
+	document.csform.submit();
+}
+
+jQuery(function(){
 	// clic sur un outil
 	jQuery('a.cs_href').click( function() {
 		jQuery(this).toggleClass('outil_on');
@@ -140,27 +150,18 @@ echo "
 			.load('".generer_url_ecrire('charger_description_outil', 'source='._request('exec').'&outil=', '\\x26')."'+this.name);
 		// annulation du clic
 		return false;
+	})
+	.dblclick(function(e){
+		jQuery('a.outil_on').removeClass('outil_on');
+		jQuery(this).addClass('outil_on');
+		set_selected();
+		outils_toggle();
+		return false;
 	});
 	
 	// clic surle bouton de permutation
 	jQuery('#cs_toggle_a').click( function() {
-		if(cs_selected.length>1) {
-			msg=\""._T('cout:permuter_outils')."\";
-			msg=msg.replace(/@nb@/, cs_selected.length);
-		} else {
-			msg=\""._T('cout:permuter_outil')."\";
-			msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
-		}
-		if (!confirm(msg)) return false;
-		jQuery('#cs_selection').attr('value', cs_selected.join(','));
-//		jQuery('#csform').submit();
-		document.csform.submit();
-/*		// on charge la nouvelle liste, actualisee
-		jQuery('#cs_outils')
-			.css('opacity', '0.5')
-			.parent()
-			.prepend(ajax_image_searching)
-			.load('".generer_url_ecrire('activer_desactiver', 'outils=', '\\x26')."'+cs_selected.join(','));*/
+		outils_toggle();
 		// annulation du clic
 		return false;
 	});
