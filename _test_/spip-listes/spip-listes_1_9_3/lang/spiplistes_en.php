@@ -133,7 +133,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 //L
 'langue' => '<strong>Language:</strong>&nbsp;',
 'lire' => 'Read',
-'Listes_de_diffusion' => 'Mailing lists',
+'listes_de_diffusion_' => 'Mailing lists',
 'log' => 'Logs',
 'login' => 'Login',
 'logout' => 'Logout',

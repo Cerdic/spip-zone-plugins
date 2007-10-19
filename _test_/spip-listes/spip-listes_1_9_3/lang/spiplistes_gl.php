@@ -116,7 +116,7 @@ Un sa&uacute;do
 //L
 'lettre_d_information' => 'Informaci&oacute;n',
 'lieu' => 'Localizaci&oacute;n',
-'Listes_de_diffusion' => 'Listas',
+'listes_de_diffusion_' => 'Listas',
 'login' => 'Conexi&oacute;n',
 'logout' => 'Desconexi&oacute;n',
 'lot_suivant' => 'Enviar seguinte lote',

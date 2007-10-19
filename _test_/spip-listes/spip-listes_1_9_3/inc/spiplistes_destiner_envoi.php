@@ -68,7 +68,7 @@ function spiplistes_destiner_envoi ($id_courrier, $id_liste, $flag_editable, $st
 				. "<input type='text' name='email_test' value='$adresse_test' class='fondo' size='35' />\n"
 				. "</li>"
 				. "<li> <input type='radio' name='radio_destination' value='id_liste' id='destlist' />"
-				. "<label for='destlist'>"._T('spiplistes:Listes_de_diffusion')."</label> : "
+				. "<label for='destlist'>"._T('spiplistes:listes_de_diffusion_')."</label> : "
 			// propose les listes
 				. "<select class='verdana2' name='id_liste' onchange='document.getElementById(\"destlist\").checked=true;' >\n"
 				;

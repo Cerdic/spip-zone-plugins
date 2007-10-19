@@ -13,6 +13,7 @@ include_spip('base/abstract_sql');
 
 
 function balise_FORMULAIRE_ABONNEMENT ($p) {
+	spiplistes_log("balise_FORMULAIRE_ABONNEMENT() << ", LOG_DEBUG);
 	return calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('id_liste'));
 }
 
@@ -24,6 +25,7 @@ function balise_FORMULAIRE_ABONNEMENT ($p) {
 // qui permet d'afficher le formulaire d'abonnement a la liste numero X
 
 function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
+	spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() << ", LOG_DEBUG);
 
 	if(!$args[1]) {
 		$args[1]='formulaire_abonnement';
@@ -45,6 +47,7 @@ function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 
 
 function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
+	spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", LOG_DEBUG);
 
 	include_spip ("inc/meta");
 	include_spip ("inc/session");
@@ -64,7 +67,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 	// recuperation de la config
 		
 	$acces_abonne = lire_meta('abonnement_config');
-	($acces_abonne == 'membre') ? $acces_membres = 'oui' : $acces_membres = 'non';
+	$acces_membres = ($acces_abonne == 'membre') ? 'oui' : 'non';
 		
 	// aller chercher le formulaire html qui va bien				
 	$formulaire = "formulaires/".$formulaire ;		

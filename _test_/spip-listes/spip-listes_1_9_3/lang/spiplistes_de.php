@@ -100,7 +100,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'jours' => 'Tage',
 
 //L
-'Listes_de_diffusion' => 'Newsletter',
+'listes_de_diffusion_' => 'Newsletter',
 'login' => 'Login',
 'logout' => 'Abmelden',
 'lot_suivant' => 'N&auml;chten Stapel abschicken',

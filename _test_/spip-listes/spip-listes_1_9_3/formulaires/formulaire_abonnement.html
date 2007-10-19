@@ -62,9 +62,13 @@
 
 [(#ENV{mode_login}|?{' ',''})
 	<form action="#SELF#spiplistes_formabo_a" method="post">
+][(#REM) 
+	________________________
+	liste des listes
 ]
+
 		<a name="spip-listes"></a>
-		<BOUCLE_liste(LISTES) {statut=liste} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
+		<BOUCLE_liste(LISTES) {statut IN 'liste', 'pub_mois'} {id_liste=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
 			[<fieldset style="margin-bottom:1em;">
 			[<legend style="font-weight:bold;">(#TITRE)</legend>]
 			(#TEXTE)
@@ -78,7 +82,7 @@
 				<:spiplistes:abo_1_lettre:></legend>
 				,<:spiplistes:abo_listes:></legend>})]
 			
-		<BOUCLE_listes(LISTES) {statut=liste} {0,(#ENV{mode_login}|?{100,0})}>
+		<BOUCLE_listes(LISTES) {statut IN 'liste', 'pub_mois'} {0,(#ENV{mode_login}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_LISTE" />
 				]
@@ -100,14 +104,19 @@
 				<div style="margin-top:5px"><label for="nom_inscription_" style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
 				<input type="text" class="forml" style="width:12em" name="nom_inscription_" id="nom_inscription_" value="" size="30" style="clear:both;" />
 				]
-			<div style="margin-top:5px"><label for="mail_inscription_" style="font-weight:bold;"><:form_pet_votre_email:></label></div>
-			<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" id="mail_inscription_" value="" size="30" />
+[(#REM) 
+	________________________
+	fin du formulaire
+]
+			<div style="margin-top:5px">
+				<label for="mail_inscription_" style="font-weight:bold;"><:form_pet_votre_email:> :</label></div>
+				<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" id="mail_inscription_" value="" size="30" />
 			<div>
-			<input name="desabo" id="suppl_abo_oui" value="non" checked type="radio" />
-			<label for="suppl_abo_oui"><:spiplistes:abonnement_0:></label>
+				<input name="desabo" id="suppl_abo_oui" value="non" checked type="radio" />
+				<label for="suppl_abo_oui"><:spiplistes:abonnement_0:></label>
 			</div>
 			<div>
-			<input name="desabo" id="suppl_abo_non" value="oui" type="radio" />
+				<input name="desabo" id="suppl_abo_non" value="oui" type="radio" />
 				<label for="suppl_abo_non"><:spiplistes:desabonnement:></label>
 			</div>
 		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" /></div>

@@ -137,7 +137,7 @@ e ricevere le newsletter.',
 //L
 'langue' => '<strong>Lingua :</strong>&nbsp;',
 'lire' => 'Leggere',
-'Listes_de_diffusion' => 'Newsletter',
+'listes_de_diffusion_' => 'Newsletter',
 'log' => 'Log',
 'login' => 'Connessione',
 'logout' => 'Disconnessione',

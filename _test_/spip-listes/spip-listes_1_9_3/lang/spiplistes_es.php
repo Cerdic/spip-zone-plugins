@@ -147,7 +147,7 @@ Recibir&aacute;s un email para acceder a la p&aacute;gina de modificaci&oacute;n
 'lettre_d_information' => 'Mensaje informativo',
 'lieu' => 'Localizaci&oacute;n',
 'lire' => 'Leer',
-'Listes_de_diffusion' => 'Boletines de informaci&oacute;n',
+'listes_de_diffusion_' => 'Boletines de informaci&oacute;n',
 'login' => 'Conexi&oacute;n',
 'logout' => 'Desconexi&oacute;n',
 'log' => 'Logs',

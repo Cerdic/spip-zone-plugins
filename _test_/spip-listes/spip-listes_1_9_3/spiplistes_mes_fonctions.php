@@ -12,12 +12,12 @@ global $tables_principales,$exceptions_des_tables,$table_date;
 // <BOUCLE(LISTES)>
 //
 function boucle_LISTES($id_boucle, &$boucles) {
+	spiplistes_log("boucle_LISTES() << ", LOG_DEBUG);
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
         $boucle->from[$id_table] =  "spip_listes";  
         return calculer_boucle($id_boucle, $boucles);
 }
-
 
 
 //
