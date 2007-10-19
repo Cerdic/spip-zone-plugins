@@ -354,8 +354,10 @@ if (isset(\$_GET['var_recherche'])) {
 div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	// inserer : $table_des_traitements['TEXTE'][]= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'cs_decoupe',
+	'traitement:TEXTE:pre_typo' => 'cs_onglets',
 	// sans oublier les articles : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
+	'traitement:TEXTE/articles:pre_typo' => 'cs_onglets',
 	'categorie' => 'typo-racc',
 ));
 

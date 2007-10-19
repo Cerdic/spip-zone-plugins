@@ -16,9 +16,45 @@ function decoupe_introduire($texte) {
 }
 $GLOBALS['cs_introduire'][] = 'decoupe_introduire';
 
+function onglets_callback($matches) {
+	// au cas ou on ne veuille pas d'onglets, on remplace les '++++' par un filet et on entoure d'une classe.
+	if ($_GET['cs']=='print') {
+		@define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
+		$t = explode("\n\n", $matches[1], 2);
+		$texte = preg_replace(','.preg_quote(_decoupe_SEPARATEUR, ',')."(.*?)\n\n,ms", _decoupe_FILET."<h4>$1</h4>\n", $t[1]);
+		// on sait jamais...
+		str_replace(_decoupe_SEPARATEUR, _decoupe_FILET, $texte);
+		return '<div class="onglets_print"><h4>' . textebrut($t[0]) . "</h4>$texte</div>";
+	}
+	$onglets = $contenus = array();
+	$pages = explode(_decoupe_SEPARATEUR, $matches[1]);
+	foreach ($pages as $p) {
+		$t = explode("\n\n", $p, 2);
+		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.trim(textebrut($t[0]))."</a></h2>$t[1]</div>";
+	}
+	$texte = '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>';
+return $texte;
+	if ($matches[1]=='visible') {
+		$h4 = '>';
+		$div = '>';
+	} else {
+		$h4 = ' class="blocs_replie">';
+		$div = ' class="blocs_invisible"">';
+	}
+	return '<div class="cs_blocs"><h4' . $h4 . $t[0] . '</h4><div' . $div . $t[1] . '</div></div>';
+}
+
+// fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
+function decouper_en_onglets_rempl($texte) {
+	if (strpos($texte, '<')===false) return $texte;
+	// il faut un callback pour analyser l'interieur du texte
+	return preg_replace_callback(',<onglets>(.*?)</onglets>,ms', 'onglets_callback', $texte);
+}
+
 // fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_pages_rempl($texte) {
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
+
 	// au cas ou on ne veuille pas de decoupe, on remplace les '++++' par un filet.
 	if ($_GET['cs']=='print') {
 		@define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
@@ -120,6 +156,7 @@ function decoupe_notes_orphelines(&$texte) {
 	$GLOBALS['les_notes'] = trim($notes);
 }
 
+// ici on est en post_propre
 function cs_decoupe($texte){
 	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
 	// verification des metas qui stockent les liens d'image
@@ -128,6 +165,17 @@ function cs_decoupe($texte){
 		decoupe_installe();
 	}
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
+}
+
+// ici on est en pre_typo
+function cs_onglets($texte){
+	if (strpos($texte, '<')===false) return $texte;
+	// verification des metas qui stockent les liens d'image
+	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
+		include_spip('outils/decoupe');
+		decoupe_installe();
+	}
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_onglets_rempl', $texte);
 }
 
 // Compatibilite

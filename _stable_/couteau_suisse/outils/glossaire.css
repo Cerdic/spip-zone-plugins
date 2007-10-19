@@ -7,6 +7,7 @@
 a.cs_glossaire, a.cs_glossaire:hover, #glossOverDiv {
 	color: #000000;
 	text-decoration: none;
+	z-index:998;
 }
 /*
 a.cs_glossaire:hover {
