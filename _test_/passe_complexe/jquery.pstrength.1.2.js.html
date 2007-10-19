@@ -8,8 +8,11 @@
  * This code uses a modified version of Steve Moitozo's algorithm (http://www.geekwisdom.com/dyn/passwdmeter)
  * 
  * === Changelog ===
- * Version 1.2 spip plugin (18/10/2007) P. Andrews
+ * Version 1.3 spip plugin (19/10/2007) P. Andrews
  *  added options for the too short and unsafe strings and colours
+ *  use \W to match special characers
+ *  remove 50 to the socre if the password contains a common word
+ *  test that we don't have consecutive repetitions of at least 3 same alphanumerical.
  * Version 1.2 (03/09/2007)
  * Added more options for colors and common words
  * Added common words checked to see if words like 'password' or 'qwerty' are being entered
@@ -50,17 +53,19 @@
 	    	var ctlBar = "#" + infoarea + "_bar"; 
 	    	var ctlText = "#" + infoarea + "_text";		
 			// Color and text
-			if (nPerc == -200) {
+			//contains compound, too simple
+			if (nPerc <= -200) {
 				strColor = options.colors[6];
 				strText = options.verdects[6];
 				$(ctlBar).css({width: "0%"});
 			}		
-			else if (nPerc < 0 && nPerc > -199) {
+			//too short
+			else if (nPerc <= 0 && nPerc >= -199) {
 				strColor = options.colors[5];
 				strText = options.verdects[5];
 				$(ctlBar).css({width: "1%"});
 			}
-			else if(nPerc <= options.scores[0])
+			else if(nPerc >= 0 && nPerc <= options.scores[0])
 			{
 		   		strColor = options.colors[0];
 				strText = options.verdects[0];
@@ -132,12 +137,12 @@
 				intScore = (intScore + 7)
 			}
 			// SPECIAL CHAR
-			if (password.match(/.[!,@,#,$,%,^,&,*,?,_,~]/))            // [verified] at least one special character
+			if (password.match(/.\W/))            // [verified] at least one special character
 			{
 				intScore = (intScore + 5)
 			}
 			// [verified] at least two special characters
-			if (password.match(/(.*[!,@,#,$,%,^,&,*,?,_,~].*[!,@,#,$,%,^,&,*,?,_,~])/))
+			if (password.match(/(.*\W.*\W)/))
 			{
 				intScore = (intScore + 7)
 			}
@@ -151,14 +156,20 @@
 				intScore = (intScore + 3)
 			}
 		 	// [verified] letters, numbers, and special characters
-			if (password.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/))
+			if (password.match(/([a-zA-Z0-9].*\W)|(\W.*[a-zA-Z0-9])/))
 			{
 				intScore = (intScore + 3)
 			}
+			// the password contains a chain of 3 identical alphanumeric character (aaaXk, bbbbbb19, ...)
+			if(password.match(/(\w)\1{2}/)) {
+				intScore -= 10;
+			}			
 			for (var i=0; i < options.common.length; i++) {
 				//check that the password doesn't contain a common word
-				if (password.toLowerCase().indexOf(options.common[i]) >= 0) {
+				if (password.toLowerCase() == options.common[i]) {
 					intScore = -200;
+				} else if (password.toLowerCase().indexOf(options.common[i]) >= 0) {
+					intScore -= 20;
 				}
 			}
 			return intScore;
