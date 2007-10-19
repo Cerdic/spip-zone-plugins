@@ -163,7 +163,25 @@
 			// the password contains a chain of 3 identical alphanumeric character (aaaXk, bbbbbb19, ...)
 			if(password.match(/(\w)\1{2}/)) {
 				intScore -= 10;
-			}			
+			}	
+			// the password contains a chain of 4 alpha letters... decrease the strength
+			if(password.match(/[a-z]{4}/i)) {
+				intScore -= 5;
+			}				
+			//check out the ratio between alpha, numerical and special chars:
+			var split = password.split(/\d/);
+			var cnt_num = split.length-1;
+			split = password.split(/\W/);
+			var cnt_special = split.length-1;
+			var cnt_alpha = password.length-cnt_alpha-cnt_special;
+			var diff_alphanum = cnt_alpha-cnt_num;
+			if(diff_alphanum <= password.length/3 || diff_alphanum >= -password.length/3) {
+				intScore += 7;
+			}
+			var diff_alphaspecial = cnt_alpha-cnt_special;
+			if(diff_alphaspecial <= password.length/3 || diff_alphaspecial >= -password.length/3) {
+				intScore += 7;
+			}
 			for (var i=0; i < options.common.length; i++) {
 				//check that the password doesn't contain a common word
 				if (password.toLowerCase() == options.common[i]) {
