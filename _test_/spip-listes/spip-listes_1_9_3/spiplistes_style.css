@@ -1,82 +1,47 @@
-/* spiplistes CSS Document */
+/* spiplistes (public part) CSS Document */
 
-table.spiplistes-abos {
-	font-size:80%;
-	border:1px solid gray;
-}
-table.spiplistes-abos tr.onglets {
-	border-bottom: 10px solid #ccc;
-	line-height:1.8em;
-	margin-bottom:1em;
-	padding:1em;
-}
-table.spiplistes-abos td {
-	line-height:1.25em;
-	border-bottom: 1px solid #ccc;
-}
-
-table.spiplistes-tab {
-	margin-top:5px;
-	font-size:90%;
-}
-table.spiplistes-tab tr {
-	text-align:center;
-	padding:5px;
-}
-table.spiplistes-tab th {
-	font-weight:bold;
-	background-color:#eec;
-}
-table.spiplistes-tab td {
-	text-align:center;
-	padding:3px;
-	width:33%;
-}
-table.spiplistes-tab tr.row-even {
+#spiplistes-formabo {
 	background-color:#fff;
+	text-align: justify;
+	width:50%;
+	padding: 2em;
+	margin: 2em auto;
 }
-.spiplistes-legend-titre {
-	font-weight:bold;
-	font-size:110%;
+#spiplistes-formabo.cadre {
+	-moz-border-radius: 6px;
+	border-radius: 6px;
 }
-.spiplistes-legend-stitre {
-	font-weight:bold;
-	font-size:90%;
-	color:gray;
+
+#spiplistes-formabo form {
+	padding:2em 4ex 0;
 }
-#boite-result-chercher-auteur {
-	text-align:left;
-	margin-bottom:1.5em;
-}
-#boite-result-chercher-auteur ul {
-	padding-left:3ex;
-}
-#boite-result-chercher-auteur  .nom_auteur {
-	font-weight:bold;
-	font-size:130%;
-	line-height:1.4em;
-}
-ul.liste-listes {
-	padding-left:0;margin:0;list-style:none;
-}
-ul.liste-listes li {
-	margin:0 0 0.25em;
-}
-ul.liste-listes li img {
-	margin: 0 0.5ex;
-}
-ul.liste-listes li .titre {
-	font-size:110%;
-}
-ul.liste-listes li .description {
-	font-size:90%;color:gray;
-}
-ul.liste-listes li .periodicite {
+
+#spiplistes-formabo form fieldset {
+	padding:2em 4ex 1em;
 	font-size:90%;
 }
-ul.liste-format, ul.liste-format-desabo {
-	padding-left:0;margin:0;list-style:none;
-}
-ul.liste-format li, ul.liste-format-desabo li {
+
+#spiplistes-formabo form fieldset legend {
+	border:1px solid black;
+	margin:1em auto;
+	width:auto;
 	display:block;
+	text-align: center;
+	padding:0 1em;
+	background-color: #ccc;
+	font-size:90%;
+	color:#fff;
 }
+#spiplistes-formabo form .spip_bouton {
+	background-color:#cfcfcf;
+	color:red;
+	text-align: center;
+	font-size:100%;
+}
+
+.spiplistes-cdt {
+  font-size:10px;
+  text-align:center;
+  margin-top:10px
+}
+

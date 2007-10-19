@@ -9,57 +9,13 @@
 // $LastChangedDate$
 
 ]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 	<title>#NOM_SITE_SPIP</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
-	<style type="text/css">
-	<!--
-	
-	body {
-		color:#000;
-		background-color:#F5F5F5;
-		font-family:sans-serif;
-	}
-	
-	h1 {
-		font-size: 150%;
-		text-decoration: underline ;
-		text-align:center;
-	}
-	
-	#spiplistes_formabo.cadre {
-		/*border: 1px #000000 solid;*/
-		background-color:#fff;
-		text-align: justify;
-		width:500px;
-		padding: 10px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 10px;
-		-moz-border-radius: 6px;
-		border-radius: 6px;
-	}
-	
-	#spiplistes_formabo .bloc {
-		margin-top: 10px;
-		padding: 10px;
-		text-align: center;
-	}
-	
-	.spiplistes-cdt {
-	  font-size:10px;
-	  text-align:center;
-	  margin-top:10px
-	}
-	
-	#spiplistes_formabo form {
-	}
-	
-	-->
-	</style>
+	<INCLURE{fond=inc-head}>
 </head>
-<body dir="#LANG_DIR">
+<body dir="#LANG_DIR" style='color:#000;background-color:#fff;font-family:sans-serif;'>
 		
 	<div class='bloc'>
 		<h1>#NOM_SITE_SPIP</h1>
@@ -69,7 +25,7 @@
 [(#REM) 	####################################
 			SPIP-Listes : bloc formulaire abonnement
 			#################################### ]
-		<div id='spiplistes_formabo' class='cadre'>
+		<div id='spiplistes-formabo' class='cadre'>
 [(#REM)
 	Si (d) absent dans l'url, propose l'abonnement			
 ][(#ENV{d}|?{'',' '})

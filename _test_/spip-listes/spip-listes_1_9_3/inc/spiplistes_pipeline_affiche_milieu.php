@@ -43,7 +43,6 @@ function spiplistes_auteur_abonnement () {
 		$sql_result = spip_query($sql_query);
 		if($row = spip_fetch_array($sql_result)) {
 			if(strlen($auteur_email = $row['email']) > 3) {
-spiplistes_log("flag_editable2: $flag_editable");
 				return(spiplistes_auteur_abonnement_details ($flag_editable, $id_auteur, $row['statut']));
 			}
 			else {
@@ -66,8 +65,6 @@ function spiplistes_auteur_abonnement_details ($flag_editable, $id_auteur, $aute
 	global $connect_statut;
 	
 	$result = "";
-spiplistes_log("flag_editable: $flag_editable");
-spiplistes_log("auteur_statut: $auteur_statut");
 
 	if($flag_editable) {
 		

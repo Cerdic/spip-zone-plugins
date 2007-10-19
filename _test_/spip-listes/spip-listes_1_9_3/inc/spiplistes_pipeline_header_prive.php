@@ -13,7 +13,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-function spiplistes_header_prive($flux) {
+function spiplistes_header_prive ($flux) {
 
 	$exec = _request('exec');
 
@@ -35,7 +35,7 @@ function spiplistes_header_prive($flux) {
 	) {
 		
 		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_real_version_get()." -->\n"
-					. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style.css' type='text/css' media='all' />\n"
+					. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style_prive.css' type='text/css' media='all' />\n"
 					;
 
 		switch($exec) {
