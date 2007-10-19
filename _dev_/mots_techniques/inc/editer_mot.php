@@ -15,7 +15,7 @@ include_spip('inc/actions');
 include_spip('inc/mots');
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false) {
+function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false) {
 
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
 
