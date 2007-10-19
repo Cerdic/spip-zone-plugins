@@ -214,7 +214,7 @@ spiplistes_log("auteur_statut: $auteur_statut");
 				. "</p>\n"
 				//
 				. "<!-- liste des abonnements -->\n"
-				. "<ul style='padding-left:0;margin:0;list-style:none;'>\n"
+				. "<ul class='liste-listes'>\n"
 				;
 			foreach($listes as $key=>$value) {
 				$id_liste = $value['id_liste'];
@@ -227,17 +227,15 @@ spiplistes_log("auteur_statut: $auteur_statut");
 					: _T('spiplistes:envoi_non_programme')
 					;
 				$result .= ""
-					. "<li style='margin:0 0 0.25em;'>\n"
-					. "<input name='abos_set[]' type='checkbox' id='abos_$id_liste' value='$id_liste' title=\"$label\" $checked />\n"
-					. "<label for='abos_$id_liste'>\n"
+					. "<li>\n"
+					. "<label>\n"
+					. "<input name='abos_set[]' type='checkbox' value='$id_liste' title=\"$label\" $checked />\n"
 					. "<img src='".spiplistes_items_get_item("puce", $value['statut'])."'"
-						. " alt=\"".spiplistes_items_get_item("alt", $value['statut'])."\" border='0'"
-						. " style='margin: 0 0.5ex;' />\n"
-					. "<div style='display:inline;'>\n"
-					. "<span style='font-size:110%;'>".propre($value['titre'])."</span> \n"
-					. "<span style='font-size:90%;color:gray;'>".propre($value['texte'])." </span>\n"
-					. "<span style='font-size:90%;'>($prochain_envoi)</span>\n"
-					. "</div></label></li>\n"
+						. " alt=\"".spiplistes_items_get_item("alt", $value['statut'])."\" border='0' />\n"
+					. "<span class='titre'>".propre($value['titre'])."</span> \n"
+					. "<span class='description'>".propre($value['texte'])." </span>\n"
+					. "<span class='periodicite'>($prochain_envoi)</span>\n"
+					. "</label></li>\n"
 					;
 			}
 			$result .= ""
@@ -250,17 +248,17 @@ spiplistes_log("auteur_statut: $auteur_statut");
 				. ((empty($abo_format) || ($abo_format=="non")) 
 					? "<p>"._T('spiplistes:Format_obligatoire_pour_diffusion')."</p>" : "" )
 				. _T('spiplistes:format_de_reception')
-				. "<ul style='padding-left:0;margin:0;list-style:none;'>\n"
+				. "<ul class='liste-format'>\n"
 				;
 			$checked = ($abo_format=="html" ? "checked='checked'" : "");
 			$result .= ""
-				. "<li style='display:block;width:50%;float:left;'>\n"
+				. "<li style='width:50%;float:left;'>\n"
 				. " <input type='radio' name='abo_format' value='html' id='format_rcpt_html' title='"._T('spiplistes:html')."' $checked />"
 				. " <label for='format_rcpt_html'>"._T('spiplistes:version_html')."</label></li>\n"
 				;
 			$checked = ($abo_format=="texte" ? "checked='checked'" : "");
 			$result .= ""
-				. "<li style='display:block;'>\n"
+				. "<li>\n"
 				. " <input type='radio' name='abo_format' value='texte' id='format_rcpt_texte' title='"._T('spiplistes:texte')."' $checked />"
 				. " <label for='format_rcpt_texte'>"._T('spiplistes:version_texte')."</label></li>\n"
 				. "</ul>\n"
@@ -269,8 +267,8 @@ spiplistes_log("auteur_statut: $auteur_statut");
 			if(spiplistes_format_est_correct($abo_format) && ($abo_format!="non")) {
 				$result .= ""
 					. debut_cadre_formulaire("margin-top:1ex", true)
-					. "<ul style='padding-left:0;margin:0;list-style:none;'>\n"
-					. "<li style='display:block;'>\n"
+					. "<ul class='liste-format-desabo'>\n"
+					. "<li>\n"
 					. " <input type='radio' name='abo_format' value='non' id='format_rcpt_non' title='"._T('spiplistes:Suspendre_abonnements')."' />"
 					. " <label for='format_rcpt_non'>"._T('spiplistes:Suspendre_abonnements')."</label></li>\n"
 					. "</ul>\n"

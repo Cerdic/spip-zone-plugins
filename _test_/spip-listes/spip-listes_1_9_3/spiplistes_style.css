@@ -56,3 +56,27 @@ table.spiplistes-tab tr.row-even {
 	font-size:130%;
 	line-height:1.4em;
 }
+ul.liste-listes {
+	padding-left:0;margin:0;list-style:none;
+}
+ul.liste-listes li {
+	margin:0 0 0.25em;
+}
+ul.liste-listes li img {
+	margin: 0 0.5ex;
+}
+ul.liste-listes li .titre {
+	font-size:110%;
+}
+ul.liste-listes li .description {
+	font-size:90%;color:gray;
+}
+ul.liste-listes li .periodicite {
+	font-size:90%;
+}
+ul.liste-format, ul.liste-format-desabo {
+	padding-left:0;margin:0;list-style:none;
+}
+ul.liste-format li, ul.liste-format-desabo li {
+	display:block;
+}
