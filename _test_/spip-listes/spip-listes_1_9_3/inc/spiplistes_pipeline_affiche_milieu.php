@@ -25,25 +25,13 @@ function spiplistes_affiche_milieu ($flux) {
 // bloc appelé en pipeline par spiplistes_affiche_milieu()
 function spiplistes_auteur_abonnement () {
 
-	global $connect_statut
-		, $connect_toutes_rubriques
-		, $connect_id_auteur
-		;
-
 	$id_auteur = intval(_request('id_auteur'));
-
-	$flag_editable = ($id_auteur > 0) 
-		&& (
-			(($connect_statut == '0minirezo') && ($connect_toutes_rubriques))
-			|| ($connect_id_auteur == $id_auteur)
-			);
-
-	if($flag_editable) {
+	if($id_auteur > 0) {
 		$sql_query = "SELECT email,statut FROM spip_auteurs WHERE id_auteur=$id_auteur LIMIT 1";
 		$sql_result = spip_query($sql_query);
 		if($row = spip_fetch_array($sql_result)) {
 			if(strlen($auteur_email = $row['email']) > 3) {
-				return(spiplistes_auteur_abonnement_details ($flag_editable, $id_auteur, $row['statut']));
+				return(spiplistes_auteur_abonnement_details ($id_auteur, $row['statut'], $auteur_email));
 			}
 			else {
 				return(	""
@@ -58,22 +46,30 @@ function spiplistes_auteur_abonnement () {
 	}
 }
 
-function spiplistes_auteur_abonnement_details ($flag_editable, $id_auteur, $auteur_statut) {
+function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $email) {
 	
 	include_spip("inc/spiplistes_api");
 
-	global $connect_statut;
+	global $connect_statut
+		, $connect_toutes_rubriques
+		, $connect_id_auteur
+		;
+
 	
 	$result = "";
 
+	$flag_editable = 1; //(email_valide($email)!==false);
+	
 	if($flag_editable) {
 		
 		// récupère la liste des abonnements disponibles
 		$sql_where = " statut='"._SPIPLISTES_PUBLIC_LIST."' OR statut='"._SPIPLISTES_MONTHLY_LIST."'" .
-			((($auteur_statut == '1comite') || ($auteur_statut == '0minirezo')) 
+			(
+			(($auteur_statut == '1comite') || ($auteur_statut == '0minirezo')) 
 			? " OR statut='"._SPIPLISTES_PRIVATE_LIST."'"
-			: "");
-		$sql_query = "SELECT id_liste,titre,texte,date,statut FROM spip_listes WHERE $sql_where";
+			: ""
+			);
+		$sql_query = "SELECT id_liste,titre,texte,date,statut FROM spip_listes WHERE $sql_where ORDER BY titre ASC";
 
 		$sql_result = spip_query($sql_query);
 		
