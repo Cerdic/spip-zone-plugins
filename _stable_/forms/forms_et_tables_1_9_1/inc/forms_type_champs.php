@@ -154,7 +154,7 @@
 						$erreur[$champ] = _T("forms:date_invalide");
 						}
 						else 
-							if (!mktime(0,0,0,$reg[1],$regs[0],$regs[2]))
+							if (!checkdate($regs[2],$regs[1],$regs[3]))
 								$erreur[$champ] = _T("forms:date_invalide");
 						break;
 					case 'num':
