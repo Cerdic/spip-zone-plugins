@@ -37,12 +37,28 @@ div.cadre_padding form{
 }
 /* fin SPIP v1.93 */
 
+div.cs_infos {
+	margin-top:1em;
+	clear:both;
+}
+
+div.cs_infos h3.titrem {
+	border-bottom:solid 1px;
+	font-weight:bold;
+	display:block;
+}
+
+div.cs_infos p {
+	margin:0.3em 1em 0.3em 0pt;
+	padding:0pt;
+}
+
 div.cs_infos hr {
 	border-top:1px solid #67707F;
 	border-bottom:0;
 	border-left:0;
 	border-right:0;
-	}
+}
 
 div.cs_infos p {
 	margin:0.3em 1em .3em 0;
@@ -89,20 +105,6 @@ div.cs_toggle {
 	width:8%;
 	text-align:center;
 	margin-top:50px;
-}
-
-div.cs_infos {
-	margin-top:1em;
-}
-div.cs_infos h3.titrem {
-	border-bottom:solid 1px;
-	font-weight:bold;
-	display:block;
-}
-
-div.cs_infos p {
-	margin:0.3em 1em 0.3em 0pt;
-	padding:0pt;
 }
 </style>
 EOF;
