@@ -13,7 +13,7 @@ function passe_complexe_quote_common($list) {
 
 //creer le javascript a ajouter au header pour que ca marche
 function passe_complexe_generer_javascript($selecteur) {
-		$flux = '<script type="text/javascript" src="'.generer_url_public('jquery.pstrength.1.2.js').'"></script>';
+		$flux = '<script type="text/javascript" src="'.generer_url_public('jquery.pstrength.js').'"></script>';
 		$common_cfg = lire_config('passe_complexe/common');
 		if(count($common_cfg) <= 0) $common_cfg = '';
 		else $common_cfg = ','.$common_cfg;
