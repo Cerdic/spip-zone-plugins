@@ -3,7 +3,7 @@
 	* Plugin Association
 	*
 	* Copyright (c) 2007
-	* Bernard Blazin & FranÃ§ois de Montlivault
+	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	* Pour plus de details voir le fichier COPYING.txt.
@@ -15,10 +15,6 @@
 		
 		echo debut_onglet();
 			
-		//echo onglet(_T('spiplistes:Historique_des_envois'), generer_url_ecrire("spip_listes"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/stock_hyperlink-mail-and-news-24.gif");
-		//echo onglet(_T('spiplistes:Listes_de_diffusion'), generer_url_ecrire("listes_toutes"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
-		//echo onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire("abonnes_tous"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/addressbook-24.gif");
-		
 		$link1= generer_url_ecrire('adherents');
 		$link2= generer_url_ecrire('dons');
 		$link4= generer_url_ecrire('ventes');
