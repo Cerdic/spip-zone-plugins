@@ -15,6 +15,16 @@ if($GLOBALS['cs_options']) {
 				return calculer_liste($p->param[0][$n],	$p->descr, $p->boucles,	$p->id_boucle);	
 			else return NULL;
 		}
+		function f_insert_head($texte) {
+			if (!$GLOBALS['html']) return $texte;
+			//include_spip('public/admin'); // pour strripos
+			($pos = stripos($texte, '</head>'))	|| ($pos = stripos($texte, '<body>'))|| ($pos = 0);
+			if (false === strpos(substr($texte, 0,$pos), '<!-- insert_head -->')) {
+				$insert = "\n".pipeline('insert_head','<!-- f_insert_head -->')."\n";
+				$texte = substr_replace($texte, $insert, $pos, 0);
+			}
+			return $texte;
+		}
 	}
 	
 	// liste de filtres qui sert a la balise #INTRODUCTION

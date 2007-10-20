@@ -193,15 +193,14 @@ cs_log("Début : enregistre_modif_outils()");
 	spip_log("Changement des outils actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
 	ecrire_meta('tweaks_actifs', serialize($liste));
 	ecrire_metas();
-include_spip('inc/plugin');
-verif_plugin();	
 /*
-		include_spip('inc/invalideur');
 @unlink(_DIR_TMP."charger_pipelines.php");
 @unlink(_DIR_TMP."charger_plugins_fonctions.php");
 @unlink(_DIR_TMP."charger_plugins_options.php");
 //		supprime_invalideurs();
 */
+include_spip('inc/plugin');
+verif_plugin();	
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_SKELS);
 		@unlink(_DIR_TMP."couteau-suisse.plat");
