@@ -353,8 +353,10 @@ if (isset(\$_GET['var_recherche'])) {
 div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 	// inserer : $table_des_traitements['TEXTE'][]= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE:post_propre' => 'cs_decoupe',
+	'traitement:TEXTE:pre_typo' => 'cs_onglets',
 	// sans oublier les articles : $table_des_traitements['TEXTE']['articles']= 'cs_decoupe(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'cs_decoupe',
+	'traitement:TEXTE/articles:pre_typo' => 'cs_onglets',
 	'categorie' => 'typo-racc',
 ));
 
@@ -609,7 +611,7 @@ add_outil( array(
 	'contrib'	=> 2443,
 	'jquery'	=> 'oui',
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
-	'code:js' => "function lancerlien(a,b){ return 'ma'+'ilto'+':'+a+'@'+b; }"
+	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }"
 		// jQuery pour remplacer l'arobase image par l'arobase texte
 		. "\n\$(document).ready(function(){ \$('span.spancrypt').after('<span>&#6'+'4;<\/span>'); \$('span.spancrypt').remove(); });",
 	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
