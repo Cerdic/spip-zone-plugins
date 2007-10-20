@@ -34,7 +34,7 @@ function liste_webmestres($void)
 	$webmestres = array();
 	include_spip('inc/texte');
 	$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN (". join (',', array_filter(explode(':', _ID_WEBMESTRES), is_numeric)).")");
-	while ($qui = spip_fetch_array($s)) {
+	while ($qui = sql_fetch($s)) {
 		if (autoriser('webmestre','','',$qui))
 			$webmestres[$qui['id_auteur']] = typo($qui['nom']);
 	}
