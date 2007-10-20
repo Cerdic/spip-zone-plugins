@@ -51,10 +51,11 @@ class cfg_formulaire
 // pour tracer les valeurs modifiees
 	var $log_modif = '';
 // configuration des types
+//TODO traductions
 	var $types = array(
 		  'id' => array('#^[a-z_]\w*$#i', 'lettre ou &#095; suivie de lettres, chiffres ou &#095;'),
 		  'idnum' => array('#^\d+$#', 'chiffres', 'intval'),
-		  'pwd' => array('#^\w+$#', 'lettres, &#095; ou chiffres'));
+		  'pwd' => array('#^.{5}#', 'minimum 5 caract&egrave;res;'));
 	
 	function cfg_formulaire($nom, $vue = '', $cfg_id = '', $opt = array())
 	{
