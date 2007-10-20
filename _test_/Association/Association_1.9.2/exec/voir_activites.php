@@ -15,7 +15,7 @@
 	function exec_voir_activites(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		include_spip ('inc/acces_page');
 		
 		$id_evenement=$_REQUEST['id'];		
 		
@@ -26,13 +26,11 @@
 		$url_pdf_activite=generer_url_ecrire('pdf_activite','id='.$id_evenement);
 		$url_ajout_participation=generer_url_ecrire('ajout_participation');
 		$url_action_activites = generer_url_ecrire('action_activites');
-
-		
-
-		$url_imprimer="../spip.php?page=print_inscriptions&id_evenement=".$id_evenement;
 		
 		if ( isset ($_POST['statut'] )) { $statut =  $_POST['statut']; }
 		else { $statut= "%"; }
+		
+		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		

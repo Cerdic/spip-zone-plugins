@@ -15,10 +15,12 @@
 	function exec_ajout_participation() {
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		include_spip ('inc/acces_page');
 		
 		$url_action_activites=generer_url_ecrire('action_activites');
 		$url_retour = $_SERVER["HTTP_REFERER"];
+		
+		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		

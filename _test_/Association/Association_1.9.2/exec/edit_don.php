@@ -16,6 +16,8 @@
 	function exec_edit_don(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
+		include_spip ('inc/acces_page');
+		
 		$url_action_dons = generer_url_ecrire('action_dons');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		

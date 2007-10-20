@@ -4,9 +4,7 @@ define('FPDF_FONTPATH','font/');
 include_spip('pdf/pdf_table');
 
 $id_evenement=$_GET['id'];
-
-$query=spip_query("SELECT nom FROM spip_asso_profil WHERE id_profil=1");
-$association=spip_fetch_array($query);
+$association=lire_config('association/nom');
 
 class PDF extends PDF_Table {
 

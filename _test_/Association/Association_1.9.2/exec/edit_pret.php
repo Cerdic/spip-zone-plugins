@@ -16,7 +16,8 @@
 	function exec_edit_pret(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('asso:prets_titre_edition_prets'), "", "");
+		include_spip ('inc/acces_page');
+		
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
@@ -35,9 +36,11 @@
 			$commentaire_sortie=$data['commentaire_sortie'];
 			$commentaire_retour=$data['commentaire_retour'];
 		}	
-			
+		
+		debut_page(_T('asso:prets_titre_edition_prets'), "", "");		
+		
 		association_onglets();
-			
+		
 		debut_gauche();
 		
 		debut_boite_info();
@@ -123,7 +126,7 @@
 		else {echo _T('asso:bouton_envoyer');}
 		echo '" class="fondo" /></div>';
 		echo '</form>';	
-
+		
 		fin_cadre_relief();  
 		fin_page();
 	}

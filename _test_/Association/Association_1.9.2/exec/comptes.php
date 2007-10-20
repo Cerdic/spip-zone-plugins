@@ -15,11 +15,7 @@
 	function exec_comptes() {
 		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 		
-		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
-			echo _T('avis_non_acces_page');
-			fin_page();
-			exit;
-		}
+		include_spip ('inc/acces_page');
 		
 		debut_page(_T('Gestion pour  Association'), "", "");
 		
@@ -44,7 +40,7 @@
 		echo '<p>En bleu : Recettes<br />En rose : D&eacute;penses</p>'; 
 		
 		// TOTAUX
-		$query = spip_query( "SELECT sum(recette) AS somme_recettes, sum(depense) AS somme_depenses FROM ".$table_prefix."_asso_comptes 		WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
+		$query = spip_query( "SELECT sum(recette) AS somme_recettes, sum(depense) AS somme_depenses FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = $annee AND imputation like '$imputation' ");
 		while ($data = spip_fetch_array($query)) {
 			$somme_recettes = $data['somme_recettes'];
 			$somme_depenses = $data['somme_depenses'];

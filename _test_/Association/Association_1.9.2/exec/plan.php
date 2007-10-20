@@ -15,17 +15,13 @@
 	function exec_plan(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
-			echo _T('avis_non_acces_page');
-			fin_page();
-			exit;
-		}
-		
-		debut_page(_T('plan comptable'), "", "");
+		include_spip ('inc/acces_page');
 		
 		$url_plan = generer_url_ecrire('plan');
 		$url_edit_plan=generer_url_ecrire('edit_plan');
 		$url_action_plan=generer_url_ecrire('action_plan');
+		
+		debut_page(_T('plan comptable'), "", "");
 		
 		association_onglets();
 		
@@ -41,7 +37,7 @@
 		icone_horizontale(_T('asso:plan_nav_ajouter'), generer_url_ecrire('edit_plan','action=ajoute'), '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/EuroOff.gif', 'creer.gif');
 		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
 		fin_raccourcis();
-				
+		
 		debut_droite();
 		
 		debut_cadre_relief(  "../"._DIR_PLUGIN_ASSOCIATION."/img_pack/EuroOff.gif", false, "", $titre = _T('asso:plan_comptable'));

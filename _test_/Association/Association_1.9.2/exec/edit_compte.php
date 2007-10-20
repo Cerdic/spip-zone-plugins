@@ -15,6 +15,8 @@
 	function exec_edit_compte() {
 		global $connect_statut, $connect_toutes_rubriques;
 		
+		include_spip('inc/acces_page');
+		
 		$url_action_comptes =generer_url_ecrire('action_comptes');
 		
 		$action=$_REQUEST['action'];

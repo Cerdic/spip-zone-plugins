@@ -16,12 +16,14 @@
 	function exec_prets(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('asso:prets_titre_liste_reservations'), "", "");
+		include_spip ('inc/acces_page');
 		
 		$url_prets = generer_url_ecrire('prets');
 		$url_edit_pret=generer_url_ecrire('edit_pret');
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$id_ressource=$_REQUEST['id'];
+		
+		debut_page(_T('asso:prets_titre_liste_reservations'), "", "");
 		
 		association_onglets();
 		
@@ -39,16 +41,12 @@
 		}
 		fin_boite_info();
 		
-		//include_spip('inc/raccourcis_modules');
-		
-		if ($connect_statut == '0minirezo') {
-			debut_raccourcis();
-			if ($statut=="ok") {
-				icone_horizontale(_T('asso:prets_nav_ajouter'), generer_url_ecrire("edit_pret","action=ajoute&id=$id_ressource"), "fiche-perso-24.gif","cree.gif");
-			}
-			icone_horizontale(_T('asso:bouton_retour'), generer_url_ecrire("ressources","id=$id_ressource"), _DIR_PLUGIN_ASSOCIATION."/img_pack/livredor.png","rien.gif");	
-			fin_raccourcis();
-		}	
+		debut_raccourcis();
+		if ($statut=="ok") {
+			icone_horizontale(_T('asso:prets_nav_ajouter'), generer_url_ecrire("edit_pret","action=ajoute&id=$id_ressource"), "fiche-perso-24.gif","cree.gif");
+		}
+		icone_horizontale(_T('asso:bouton_retour'), generer_url_ecrire("ressources","id=$id_ressource"), _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
+		fin_raccourcis();
 		
 		debut_droite();
 		debut_cadre_relief(  "", false, "", $titre =_T('asso:prets_titre_liste_reservations'));

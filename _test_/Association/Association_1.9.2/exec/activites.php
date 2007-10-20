@@ -57,7 +57,7 @@
 		echo '<option value="%"';
 		if ($mot=="%") { echo ' selected="selected"'; }
 		echo '> Toutes</option>';
-		$query = spip_query("SELECT * FROM spip_mots WHERE type='EvÃ¨nements'");
+		$query = spip_query("SELECT * FROM spip_mots WHERE type='Evènements'");
 		while($data = spip_fetch_array($query)) {
 			echo '<option value="'.$data["titre"].'"';
 			if ($mot==$data["titre"]) { echo ' selected="selected"'; }

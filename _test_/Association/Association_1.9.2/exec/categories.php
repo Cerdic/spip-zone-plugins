@@ -16,12 +16,13 @@
 	function exec_categories(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		
+		include_spip ('inc/acces_page');
 		
 		$url_categories = generer_url_ecrire('categories');
 		$url_ajout_categorie=generer_url_ecrire('edit_categorie','action=ajoute');
 		$url_edit_categorie=generer_url_ecrire('edit_categorie','action=modifie');
 		$url_action_categorie=generer_url_ecrire('action_categorie');
+		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		debut_page(_T('Cat&eacute;gories de cotisation'), "", "");
 		
@@ -33,6 +34,7 @@
 		
 		debut_raccourcis();
 		icone_horizontale(_T('asso:Ajouter une cat&eacute;gorie de cotisation'), $url_ajout_categorie, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
 		fin_raccourcis();
 			
 		debut_droite();

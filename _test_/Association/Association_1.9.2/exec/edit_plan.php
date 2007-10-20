@@ -15,7 +15,8 @@
 	function exec_edit_plan(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('Edition plan comptable'), "", "");
+		include_spip ('inc/acces_page');
+		
 		$url_asso = generer_url_ecrire('association');
 		$url_plan = generer_url_ecrire('plan');
 		$url_action_plan=generer_url_ecrire('action_plan');
@@ -23,6 +24,8 @@
 		
 		$action=$_GET['action'];
 		$id_plan=$_GET['id'];
+		
+		debut_page(_T('Edition plan comptable'), "", "");		
 		
 		association_onglets();
 		
@@ -84,8 +87,7 @@
 		echo '" class="fondo"></div>';
 		echo '</form>';
 		
-		fin_cadre_relief();  
-		
+		fin_cadre_relief();  	
 		fin_page();
 	}
 ?>

@@ -15,6 +15,8 @@
 	function exec_edit_activite(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
+		include_spip('inc/acces_page');
+		
 		$url_action_activites = generer_url_ecrire('action_activites');
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		

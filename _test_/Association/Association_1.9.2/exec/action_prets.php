@@ -16,7 +16,10 @@
 	function exec_action_prets(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
+		include_spip ('inc/acces_page');
+		
 		$url_action_prets=generer_url_ecrire('action_prets');
+		
 		$action=$_REQUEST['action'];
 		$id_pret=$_REQUEST['id'];
 		$id_ressource=$_REQUEST['id_ressource'];
@@ -58,7 +61,7 @@
 			fin_boite_info();
 			
 			debut_raccourcis();
-			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/EuroOff.gif'.gif","cree.gif");	
+			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
 			fin_raccourcis();
 			
 			debut_droite();

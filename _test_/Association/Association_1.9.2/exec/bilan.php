@@ -11,21 +11,18 @@
 	**/
 	include_spip('inc/presentation');
 	include_spip ('inc/navigation_modules');
-
+	include_spip ('inc/acces_page');
+	
 	function exec_bilan(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
-			echo _T('avis_non_acces_page');
-			fin_page();
-			exit;
-		}
-		
-		debut_page(_T('Gestion pour  Association'), "", '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/finances.jpg','rien.gif');
+		include_spip ('inc/acces_page');
 		
 		$url_comptes = generer_url_ecrire('comptes');
 		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_action_comptes = generer_url_ecrire('action_comptes');
+		
+		debut_page(_T('Gestion pour  Association'), "", '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/finances.jpg','rien.gif');
 		
 		association_onglets();
 		
@@ -34,6 +31,10 @@
 		debut_boite_info();
 		echo association_date_du_jour();	
 		fin_boite_info();
+		
+		debut_raccourcis();
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
+		fin_raccourcis();
 		
 		debut_droite();
 		

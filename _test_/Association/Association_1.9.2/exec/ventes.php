@@ -15,13 +15,15 @@
 	function exec_ventes(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('Gestion pour  Association'), "", "");
+		include_spip ('inc/acces_page');
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_ventes = generer_url_ecrire('ventes');
 		$url_action_ventes = generer_url_ecrire('action_ventes');
 		$url_edit_vente=generer_url_ecrire('edit_vente','action=modifie');
 		$url_ajout_vente=generer_url_ecrire('edit_vente','action=ajoute');
+		
+		debut_page(_T('Gestion pour  Association'), "", "");
 		
 		association_onglets();
 		
@@ -32,9 +34,7 @@
 		fin_boite_info();
 		
 		debut_raccourcis();
-		echo '<p>';
 		icone_horizontale(_T('Ajouter une vente'), $url_ajout_vente, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/panier_in.gif','rien.gif' );
-		echo '</p>';
 		fin_raccourcis();
 		
 		debut_droite();

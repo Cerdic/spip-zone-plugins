@@ -3,7 +3,7 @@
 	* Plugin Association
 	*
 	* Copyright (c) 2007
-	* Bernard Blazin & FranÃ§ois de Montlivault
+	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	* Pour plus de details voir le fichier COPYING.txt.
@@ -16,16 +16,9 @@
 	function exec_action_categorie(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
+		include_spip ('inc/acces_page');
 		
-		$url_asso = generer_url_ecrire('association');
-		$url_ajouter = generer_url_ecrire('ajouter');
-		$url_relance = generer_url_ecrire('essai');
-		$url_bienfaiteur = generer_url_ecrire('bienfaiteur');
-		$url_vente = generer_url_ecrire('ventes');
-		$url_banque = generer_url_ecrire('banque');
-		$url_delete = generer_url_ecrire('delete_membre');
-		$url_categories=generer_url_ecrire('categories');
-		
+		$url_action_categorie=generer_url_ecrire('action_categorie');
 		
 		$action=$_REQUEST['action'];
 		$id_categorie=$_REQUEST['id'];
@@ -57,7 +50,7 @@
 			debut_cadre_relief(  "", false, "", $titre = _T('Toutes les cat&eacute;gories de cotisation'));
 			
 			echo '<p><strong>Vous vous appr&ecirc;tez &agrave; effacer le cat&eacute;gorie n&deg; '.$id.' !</strong></p>';
-			echo '<form action="'.$url_action_categories.'"  method="post">';
+			echo '<form action="'.$url_action_categorie.'"  method="post">';
 			
 			echo '<input type=hidden name="action" value="drop">';
 			echo '<input type=hidden name="id" value="'.$id_categorie.'">';

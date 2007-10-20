@@ -15,6 +15,8 @@
 	function exec_action_ventes(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
+		include_spip ('inc/acces_page');
+		
 		$url_action_ventes=generer_url_ecrire('action_ventes');
 		
 		$id_vente=$_REQUEST['id'];
@@ -36,21 +38,21 @@
 		
 		//AJOUT VENTE
 		if ($action=="ajoute"){
-			spip_query( "INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ('$date_vente', '$article', '$code', '$acheteur', '$quantite', '$date_envoi', '$frais_envoi', '$don', '$prix_vente', '$commentaire' )");
+			spip_query( "INSERT INTO spip_asso_ventes (date_vente, article, code, acheteur, quantite, date_envoi, frais_envoi, don, prix_vente, commentaire) VALUES ("._q($date_vente).", "._q($article).", "._q($code).", "._q($acheteur).", "._q($quantite).", "._q($date_envoi).", "._q($frais_envoi).", "._q($don).", "._q($prix_vente).", "._q($commentaire)." )");
 			$query=spip_query( "SELECT MAX(id_vente) AS id_vente FROM spip_asso_ventes");
 			while ($data = spip_fetch_array($query)) {
 				$id_vente=$data['id_vente'];
 				$justification='vente n&deg; '.$id_vente.' - '.$article;
 			}
-			spip_query( "INSERT INTO spip_asso_comptes (date, journal,recette,depense,justification,imputation,id_journal) VALUES ('$date_vente','$journal','$recette','$frais_envoi','$justification',".lire_config('association/pc_ventes').",'$id_vente')" );
+			spip_query( "INSERT INTO spip_asso_comptes (date, journal,recette,depense,justification,imputation,id_journal) VALUES ("._q($date_vente).","._q($journal).","._q($recette).","._q($frais_envoi).","._q($justification).",".lire_config('association/pc_ventes').","._q($id_vente).")" );
 			header ('location:'.$url_retour);
 			exit;
 		}
 		
 		//MODIFICATION VENTE
 		if ($action=="modifie"){
-			spip_query( "UPDATE spip_asso_ventes SET date_vente='$date_vente', article='$article', code='$code', acheteur='$acheteur', quantite='$quantite', date_envoi='$date_envoi', frais_envoi='$frais_envoi', don='$don', prix_vente='$prix_vente', commentaire='$commentaire' WHERE id_vente='$id_vente' " );
-			spip_query( "UPDATE spip_asso_comptes SET date='$date_vente', journal='$journal',recette='$recette', depense='$frais_envoi', justification='$justification' WHERE id_journal=$id_vente AND imputation="lire_config('association/pc_ventes') );
+			spip_query( "UPDATE spip_asso_ventes SET date_vente="._q($date_vente).", article="._q($article).", code="._q($code).", acheteur="._q($acheteur).", quantite="._q($quantite).", date_envoi="._q($date_envoi).", frais_envoi="._q($frais_envoi).", don="._q($don).", prix_vente="._q($prix_vente).", commentaire="._q($commentaire)." WHERE id_vente='$id_vente' " );
+			spip_query( "UPDATE spip_asso_comptes SET date="._q($date_vente).", journal="._q($journal).",recette="._q($recette).", depense="._q($frais_envoi).", justification="._q($justification)." WHERE id_journal=$id_vente AND imputation="lire_config('association/pc_ventes') );
 			header ('location:'.$url_retour);
 			exit;
 		}

@@ -16,6 +16,8 @@
 	function exec_action_ressources(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
+		include_spip ('inc/acces_page');
+		
 		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$action=$_REQUEST['action'];
 		$id_ressource=$_REQUEST['id'];
@@ -53,7 +55,7 @@
 			fin_boite_info();
 			
 			debut_raccourcis();
-			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
+			icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
 			fin_raccourcis();
 			
 			debut_droite();

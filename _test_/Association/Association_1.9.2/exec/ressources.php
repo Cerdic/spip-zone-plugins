@@ -16,12 +16,14 @@
 	function exec_ressources(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('asso:ressources_titre_liste_ressources'), "", "");
+		include_spip ('inc/acces_page');
 		
 		$url_ressources = generer_url_ecrire('ressources');
 		$url_edit_ressource=generer_url_ecrire('edit_ressource');
 		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$url_prets=generer_url_ecrire('prets');
+		
+		debut_page(_T('asso:ressources_titre_liste_ressources'), "", "");
 		
 		association_onglets();
 		

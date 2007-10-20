@@ -16,6 +16,8 @@
 	function exec_action_plan(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
+		include_spip ('inc/acces_page');
+		
 		$id_plan=$_REQUEST['id'];
 		$action=$_REQUEST['action'];
 		

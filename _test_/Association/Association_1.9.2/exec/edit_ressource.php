@@ -16,9 +16,12 @@
 	function exec_edit_ressource(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('asso:ressources_titre_edition_ressources'), "", "");
+		include_spip ('inc/acces_page');
+		
 		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$url_retour = $_SERVER['HTTP_REFERER'];
+		
+		debut_page(_T('asso:ressources_titre_edition_ressources'), "", "");		
 		
 		association_onglets();
 		
@@ -29,12 +32,8 @@
 		fin_boite_info();
 		
 		debut_raccourcis();
-		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/calculatrice.gif","cree.gif");	
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-png","rien.gif");	
 		fin_raccourcis();
-		
-		if ($connect_statut == '0minirezo') {
-		include_spip ('inc/navigation');
-		}
 		
 		debut_droite();
 		
@@ -63,8 +62,6 @@
 		echo '<input name="intitule" type="text" value="'.$intitule.'" id="intitule" class="formo" />';
 		echo '<label for="date_acquisition"><strong>'._T('asso:ressources_libelle_date_acquisition').' :</strong></label>';
 		echo '<input name="date_acquisition" type="text" value="'.$date_acquisition.'" id="date_acquisition" class="formo" />';
-		//echo '<label for="id_achat"><strong>Achat n&deg; :</strong></label>';
-		//echo '<input name="id_achat" type="text" value="'.$cotisation.'" id="montant" class="formo" />';
 		echo '<label for="pu"><strong>'._T('asso:ressources_libelle_prix_location').' :</strong></label>';
 		echo '<input name="pu" type="text" value="'.$pu.'" id="pu" class="formo" />';	
 		echo '<label for="statut"><strong>'._T('asso:ressources_libelle_statut').' :</strong></label><br />';

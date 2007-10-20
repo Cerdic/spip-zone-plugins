@@ -10,11 +10,13 @@
 	*  
 	**/
 	
-		include_spip('inc/presentation');
-		include_spip ('inc/navigation_modules');
+	include_spip('inc/presentation');
+	include_spip ('inc/navigation_modules');
 	
 	function exec_edit_categorie(){
 		global $connect_statut, $connect_toutes_rubriques;
+		
+		include_spip('inc/acces_page');
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_ajouter = generer_url_ecrire('ajouter');

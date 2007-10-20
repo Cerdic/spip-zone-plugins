@@ -14,7 +14,9 @@
 
 	function exec_dons() {
 		global $connect_statut, $connect_toutes_rubriques;
-
+		
+		include_spip ('inc/acces_page');
+		
 		$url_asso = generer_url_ecrire('association');	
 		$url_dons = generer_url_ecrire('dons');
 		$url_ajout_don= generer_url_ecrire('edit_don','action=ajoute');
