@@ -10,7 +10,7 @@
 _ Ce plugin n&eacute;cessite l'installation du plugin cfg
 	</description>
 	<prefix>association</prefix>	
-	<install>inc/association_install.php</install>
+	<install>base/association_gestion.php</install>
 	<lien>
          [Documentation->http://www.spip-contrib.net/Plugin-Gestion-d-associations]
 	    [Configuration->.?exec=cfg&amp;cfg=association]
