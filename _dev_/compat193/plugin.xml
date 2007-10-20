@@ -7,7 +7,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	 <icon>compat.png</icon>
 
 	<lien></lien>
-	<version>1.9.3</version>
+	<version>1.9.3.1</version>
 	<etat>test</etat>
     <description>
 	SPIP 1.9.3 &agrave; partir de la version 9916 introduit de {{gros}} changements dans le nom de certaines fonctions.
