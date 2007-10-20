@@ -13,18 +13,18 @@ function balise_FORMULAIRE_UPLOAD ($p) {
 	return $p;
 }
 
-/*
+
 // http://doc.spip.org/@balise_FORMULAIRE_UPLOAD_stat
 function balise_FORMULAIRE_UPLOAD_stat($args, $filtres) {
-	#include_spip('balise/formulaire_forum');
-	#return balise_FORMULAIRE_FORUM_stat($args,$filtres);
+	if(!$args[5] || !preg_match(",\w+,",$args[5]))
+		$args[5] = "upload";
 	return $args;
 }
-*/
+
 
 // http://doc.spip.org/@balise_FORMULAIRE_UPLOAD_dyn
 function balise_FORMULAIRE_UPLOAD_dyn(
-	$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic
+	$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $fond
 ) {
 
 	// Le contexte nous servira peut-etre a identifier
@@ -93,7 +93,7 @@ function balise_FORMULAIRE_UPLOAD_dyn(
 		spip_log('invalider', 'upload');
 	}
 
-	return array('formulaires/upload', 0,
+	return array('formulaires/'.$fond, 0,
 
 	array_merge($ids,
 	array(

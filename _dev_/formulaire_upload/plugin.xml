@@ -1,6 +1,9 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
+	<multi>
 	Formulaire Upload
+	[it] Modulo di upload
+	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	fil@rezo.net
@@ -12,9 +15,15 @@
 	dev
 	</etat>
 	<description>
+		<multi>
 		Permet &#224; chaque r&#233;dacteur d'uploader des documents dans sa bo&#238;te perso ; {cf.} [la zone d'upload->../spip.php?page=upload_zone].
 		
 		<h4><a href="?exec=cfg&amp;cfg=formupload">Configuration</a></h4>
+		[it]
+		Consente ad ogni redattore di effettuare l'upload di documenti in un suo spazio personale; {cf.} [la zona di upload->../spip.php?page=upload_zone].
+
+		<h4><a href="?exec=cfg&amp;cfg=formupload">Configurazione</a></h4>
+		</multi>
 	</description>
 	<prefix>
 		FormulaireUpload
