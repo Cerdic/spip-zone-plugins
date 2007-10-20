@@ -47,7 +47,7 @@ AND $f = charger_fonction('compat', 'inc'))
 
 
 function inc_compat_autorite_dist($quoi = NULL) {
-	if (!function_exists($f = 'compat_autorite_defs')) $f .= 'dist';
+	if (!function_exists($f = 'compat_autorite_defs')) $f .= '_dist';
 	$defs = $f();
 
 	if (is_string($quoi))
