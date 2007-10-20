@@ -27,7 +27,7 @@ function exec_cfg_dist($class = null)
 	if ($message = $GLOBALS['meta']['cfg_message_'.$GLOBALS['auteur_session']['id_auteur']]) {
 		include_spip('inc/meta');
 		effacer_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur']);
-		if ($spip_version_code < '1.93') ecrire_metas();
+		if ($GLOBALS['spip_version_code']<1.93) ecrire_metas();
 		$config->message = $message;
 	}
 
