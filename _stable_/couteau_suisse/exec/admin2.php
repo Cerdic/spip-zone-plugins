@@ -105,7 +105,7 @@ div.cs_actifs {
 }
 div.cs_toggle {
 	float:left;
-	width:10%;
+	width:9.6%; /* pour IE6 */
 	text-align:center;
 	margin:50px 0 0 0;
 }
