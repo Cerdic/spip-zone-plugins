@@ -13,6 +13,11 @@ define ('_ID_WEBMESTRES', '1'); // '1:5:90' a regler dans mes_options
 $GLOBALS['autorite'] = @unserialize($GLOBALS['meta']['autorite']);
 $autorite_erreurs = array();
 
+// Compatibilite 1.92 : on a besoin de sql_fetch
+if ($GLOBALS['spip_version_code'] < '1.93'
+AND $f = charger_fonction('compat', 'inc'))
+	$f('sql_fetch');
+
 
 //
 // Les DEFINE
@@ -120,7 +125,7 @@ if (!function_exists('autoriser_article_modifier')) {
 function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,id_secteur,statut FROM spip_articles WHERE id_article="._q($id));
-	$r = spip_fetch_array($s);
+	$r = sql_fetch($s);
 	include_spip('inc/auth');
 	return
 		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
@@ -194,10 +199,10 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 
 	// Sinon, verifier si la rubrique est wiki
 	// et si on est bien enregistre (sauf cas de creation anonyme explicitement autorisee)
-	if($GLOBALS['autorite']['espace_wiki']){
+	if ($GLOBALS['autorite']['espace_wiki']) {
 		$s = spip_query(
 		"SELECT id_secteur FROM spip_rubriques WHERE id_rubrique="._q($id));
-		$r = spip_fetch_array($s);
+		$r = sql_fetch($s);
 
 		if (autorisation_wiki_visiteur($qui, $r['id_secteur'])
 		AND (
