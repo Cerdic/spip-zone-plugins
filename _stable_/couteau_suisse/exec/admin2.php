@@ -28,16 +28,12 @@ div.cadre-padding form{
 	margin:0;
 }
 
-/* debut SPIP v1.93 */
 div.cadre_padding form{
 	padding:0;
-	margin:0.8em;
+	margin:0;
 }
-/* fin SPIP v1.93 */
 
 div.cs_infos {
-	margin-top:1em;
-	clear:both;
 }
 
 div.cs_infos h3.titrem {
@@ -100,15 +96,18 @@ div.cs_liste {
 
 div.cs_outils {
 	clear:both;
-	float:left;
+	float:none;
 	width:100%;
 }
 
+div.cs_actifs {
+	float:right;
+}
 div.cs_toggle {
 	float:left;
-	width:9%;
+	width:10%;
 	text-align:center;
-	margin-top:50px;
+	margin:50px 0 0 0;
 }
 </style>
 EOF;

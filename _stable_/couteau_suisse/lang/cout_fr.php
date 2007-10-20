@@ -155,11 +155,10 @@ Idem pour changer le fond, si l'option ci-dessous le permet :
 [[Permettre les fonds :->%couleurs_fonds%]]
 [[Set &agrave; utiliser :->%set_couleurs%]][[->%couleurs_perso%]]
 {$temp['note']}Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).",
-	'couleurs:aide' => 'Mise en couleurs : <strong>[couleur]texte[/couleur]</strong>@fond@ avec <strong>couleur</strong> = @liste@',
-	'couleurs_fonds' => ', <strong>[fond&nbsp;couleur]texte[/couleur]</strong>, <strong>[bg&nbsp;couleur]texte[/couleur]</strong>',
+	'couleurs:aide' => 'Mise en couleurs : <strong>[coul]texte[/coul]</strong>@fond@ avec <strong>coul</strong> = @liste@',
+	'couleurs_fonds' => ', <strong>[fond&nbsp;coul]texte[/coul]</strong>, <strong>[bg&nbsp;coul]texte[/coul]</strong>',
 	'toutes_couleurs' => "Les 36 couleurs des styles css :" . $temp['couleurs'],
 	'certaines_couleurs' => "Seules les balises d&eacute;finies ci-dessous{$temp['note']} :",
-	'ok_fonds' => "",
 
 // ---------------------------------------------------------------------------
 	'typo_exposants:nom' => 'Exposants typographiques',
