@@ -56,4 +56,6 @@ _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultado
 		<inclure>inc/acces_restreint.php</inclure>
 	</pipeline>
 	<chemin dir='' />
+	<necessite id="compat9919" version="[1.9.3.1;]" />
+	<necessite id="SPIP" version='[1.9300;]' />
 </plugin>
