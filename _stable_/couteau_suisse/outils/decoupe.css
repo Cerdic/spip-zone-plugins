@@ -17,14 +17,13 @@ div.onglets_bloc {
 
 div.onglets_bloc h2.onglets_titre a {
 	text-decoration:	none;
+	height:18px;
 /*	cursor:	inherit;
 	color: inherit; */
 }
 
 div.onglets_bloc h2.onglets_titre {
 	height:				16px;
-/*	background-image: url( "http://127.0.0.1/svn/plugins/couteau_suisse/img/decoupe/onglet.png" );
-	background-repeat:	no-repeat;*/
 -moz-border-radius-topleft:3px;
 -moz-border-radius-topright:6px;
 	background-color:#f2f2f2;
@@ -48,7 +47,6 @@ div.onglets_bloc h2.onglets_titre {
 
 div.onglets_bloc h2.onglets_titre.selected {
 	height: 18px;
-/*	background-image:	url( "http://127.0.0.1/svn/plugins/couteau_suisse/img/decoupe/onglet_s.png" );*/
 	background-color:white;
 	border-top: 3px solid #8B6F92;
 	z-index: 3;
@@ -65,11 +63,11 @@ div.onglets_bloc h2.onglets_titre, div.onglets_bloc h2.onglets_titre a {
 	color: black;
 }
 div.onglets_bloc h2.hover a {
-/*	background-image:	url( "http://127.0.0.1/svn/plugins/couteau_suisse/img/decoupe/onglet_h.png" );*/
 	color:blue;
 }
 div.onglets_bloc h2.onglets_titre.selected a {
 	color: black;
+	height:18px;
 }
 
 
