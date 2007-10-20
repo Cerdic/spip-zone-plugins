@@ -16,9 +16,7 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 // compatibilite spip 1.9
 if ($GLOBALS['spip_version_code']<1.92) { 
 	function fin_gauche(){return false;}
-	@define('_CS_NETTOYEUR','<br style="border:0pt none; clear:both; font-size:1px; height:0pt; line-height:1px; margin:0pt; padding:0pt;"/>');
 }
-@define('_CS_NETTOYEUR', '<br class="nettoyeur"/>');
 
 function cs_admin_styles_et_js() {
 	global $afficher_outil;
@@ -33,7 +31,7 @@ div.cadre-padding form{
 /* debut SPIP v1.93 */
 div.cadre_padding form{
 	padding:0;
-	margin:0;
+	margin:0.8em;
 }
 /* fin SPIP v1.93 */
 
@@ -81,6 +79,13 @@ div.cs_infos sup {
 }
 
 /* V2.0 */
+.conteneur {
+	clear:both;
+	width:100%;
+	margin:0.8em 0 0 0;
+	padding:0;
+}
+
 a.cs_href {
 	font-weight:normal;
 }
@@ -97,7 +102,6 @@ div.cs_outils {
 	clear:both;
 	float:left;
 	width:100%;
-	margin-top:0.8em;
 }
 
 div.cs_toggle {
@@ -336,8 +340,8 @@ cs_log("Début : exec_admin_couteau_suisse()");
 
 	include_spip('inc/cs_outils');
 	$_GET['source'] = _request('exec');
-	echo '<div>' . liste_outils()
-	. '</div>' . _CS_NETTOYEUR . '<div>'
+	echo '<div class="conteneur">' . liste_outils()
+	. '</div><br class="conteneur" /><div class="conteneur">'
 	. description_outil2(strlen($afficher_outil)?$afficher_outil:'') . '</div>';
 
 	echo "</td></tr></table>\n";
