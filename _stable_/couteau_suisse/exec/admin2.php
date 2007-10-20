@@ -90,7 +90,7 @@ a.outil_on {
 }
 div.cs_liste {
 	float:left;
-	width:46%;
+	width:45%;
 }
 
 div.cs_outils {
@@ -102,7 +102,7 @@ div.cs_outils {
 
 div.cs_toggle {
 	float:left;
-	width:8%;
+	width:9%;
 	text-align:center;
 	margin-top:50px;
 }
