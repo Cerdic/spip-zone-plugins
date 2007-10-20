@@ -30,7 +30,7 @@ function exec_edittable_voir(){
 			
 			echo debut_cadre_trait_couleur();
 				echo '<form action="?exec=edittable_edit&valeur_cle='._request('valeur_cle').'&table='._request('table').'&colonne_cle='._request('colonne_cle').'" method="post">
-				<div align="right"><input type=submit value="'._T('adittable:edite_enregistrement').'" class="fondo"/></div>
+				<div align="right"><input type=submit value="'._T('edittable:edite_enregistrement').'" class="fondo"/></div>
 				</form>';
 			afficher_tableau_div($contenu_edittable);
 			echo fin_cadre_trait_couleur();

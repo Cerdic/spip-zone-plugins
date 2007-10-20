@@ -20,7 +20,7 @@ function exec_config_edittable(){
 				echo '<input type="checkbox" name="editer_table_spip" /><b>'._T('edittable:voir_table_spip').'</b><hr />';
 				echo '<b>'._T('edittable:cacher_table_avec_prefix').'</b><br />';
 				echo _T('edittable:liste_des_prefix_a_cacher').'&nbsp;<input type="text" name="prefix_a_cacher" /><hr />';
-				echo '<input type="submit" value="'._T('edittable:enrgistrer').'" class="fondo"/>';
+				echo '<input type="submit" value="'._T('edittable:enregistrer').'" class="fondo"/>';
 				echo '</form>';
 				fin_cadre_formulaire();
 			fin_cadre_trait_couleur();

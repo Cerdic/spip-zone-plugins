@@ -14,7 +14,7 @@ _ &#169; 2006 - Distribu&eacute; sous licence GPL
 		dev
 	</etat>
 	<description>
-		Ce plugin permet d'&eacute;diter les tables de la base de donn&eacute;e sur laquelle spip est install&eacute;.
+		<multi>[fr]Ce plugin permet d'&eacute;diter les tables de la base de donn&eacute;e sur laquelle spip est install&eacute;.[it]Il plugin permette di editare le tabelle del database su cui spip è istallato</multi>
 	</description>
 	<lien>http://www.spip-contrib.net</lien> <!-- URI de documentation -->
 	<prefix> 
