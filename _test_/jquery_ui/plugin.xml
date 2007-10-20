@@ -1,0 +1,19 @@
+<plugin>
+	<nom>jQuery UI</nom>
+	<auteur>
+	Collectif, extension de jquery : http://ui.jquery.com/
+_ &#169; 2007 - Distribu&#233; sous licence GPL
+	</auteur>
+	<lien>http://ui.jquery.com/</lien>
+	
+	<version>0.1</version>
+	<etat>test</etat>
+    <description>
+	Permet d'utiliser les extensions UI (v1.0) de jQuery (v1.2.1)
+_	Ajoute une balise #JQUERY_UI{nom_du_UI}
+_   cf. jqueryui_fonctions.php
+	</description>
+	<prefix>jqueryui</prefix>
+    <fonctions>jqueryui_fonctions.php</fonctions>
+	<chemin dir='' />
+</plugin>
