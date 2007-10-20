@@ -155,27 +155,58 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 ## autoriser_rubrique_publierdans
 ##
 if ($GLOBALS['autorite']['espace_wiki']
+OR $GLOBALS['autorite']['publierdans'] 
 OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_rubrique_publierdans')) {
 function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
+	
 	// Si on est deja autorise en standard, dire 'OK'
-	if (autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt))
-		return true;
+	if (!$GLOBALS['autorite']['publierdans']
+		&& autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt))
+			return true;
+	
+	// Verifions qui a le droit
+	// 1 : webmestre
+	// 2 : admin complet
+	// 4 : admin restreint
+	// 8 : redacteur
+	// cas du redacteur : attention, il faut verifier 
+	// aussi qu'il est l'auteur de l'objet publie...
+
+	if (($GLOBALS['autorite']['publierdans'] & 1)
+		&& autoriser('webmestre', $type, $id, $qui, $opt))
+			return true;		
+	if (($GLOBALS['autorite']['publierdans'] & 2)
+		&& ($qui['statut'] == '0minirezo')
+		&& (!$qui['restreint']))
+			return true;
+	if (($GLOBALS['autorite']['publierdans'] & 4)	
+		&& ($qui['statut'] == '0minirezo')
+		&& ($qui['restreint'] AND $id AND in_array($id, $qui['restreint'])))
+			return true;
+	/*	 
+	if (($GLOBALS['autorite']['publierdans'] & 8)
+		&& ($qui['statut'] == '1comite'))
+			return true;
+	*/
+
 
 	// Sinon, verifier si la rubrique est wiki
 	// et si on est bien enregistre (sauf cas de creation anonyme explicitement autorisee)
-	$s = spip_query(
-	"SELECT id_secteur FROM spip_rubriques WHERE id_rubrique="._q($id));
-	$r = spip_fetch_array($s);
+	if($GLOBALS['autorite']['espace_wiki']){
+		$s = spip_query(
+		"SELECT id_secteur FROM spip_rubriques WHERE id_rubrique="._q($id));
+		$r = spip_fetch_array($s);
 
-	if (autorisation_wiki_visiteur($qui, $r['id_secteur'])
-	AND (
-		$GLOBALS['autorite']['espace_wiki_rubrique_anonyme']
-		OR $qui['statut']
-	))
-		return true;
-
+		if (autorisation_wiki_visiteur($qui, $r['id_secteur'])
+		AND (
+			$GLOBALS['autorite']['espace_wiki_rubrique_anonyme']
+			OR $qui['statut']
+		))
+			return true;
+	}
+	
 	// par defaut, NIET
 	return false;
 }

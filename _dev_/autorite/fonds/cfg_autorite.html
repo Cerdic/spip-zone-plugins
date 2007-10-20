@@ -378,6 +378,38 @@ Voulez-vous ouvrir ce wiki &mdash; au-del&#224; des administrateurs&nbsp;:
 </p>
 </fieldset>
 
+
+[(#REM)
+	Publication :
+	1 : webmestre
+	2 : admin complet
+	4 : admin restreint
+#	8 : redacteur
+	15: tous...
+]
+<fieldset>
+<legend>
+	Publication
+</legend>
+<p>
+
+<p>
+<label>Qui peut publier sur le site :
+<br />
+<select name="publierdans">
+	<option value="1"[ selected="(#ENV{publierdans}|=={1}|?{selected})"]>Les webmestres</option>
+	<option value="3"[ selected="(#ENV{publierdans}|=={3}|?{selected})"]>Les administrateurs complets</option>
+	<option value="7"[ selected="(#ENV{publierdans,7}|=={7}|?{selected})"]>Les administrateurs (y compris restreints)</option>
+[(#REM)
+	<option value="15"[ selected="(#ENV{publierdans}|=={15}|?{selected})"]>Les r&#233;dacteurs</option>
+]
+</select>
+</label>
+</p>
+
+
+</fieldset>
+
 [(#REM) ------------------------ BOUTON OK ------------------------ ]
 <div>
 <input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
