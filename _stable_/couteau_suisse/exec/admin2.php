@@ -243,6 +243,9 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	}
 	$cmd = _request('cmd');
 
+include_spip('inc/plugin');
+verif_plugin();	
+
 	// reset general
 	if ($cmd=='resetall'){
 		spip_log("Reset de tous les outils par l'auteur id=$connect_id_auteur");
