@@ -15,7 +15,7 @@ _ Ce plugin n&eacute;cessite l'installation du plugin cfg
          [Documentation->http://www.spip-contrib.net/Plugin-Gestion-d-associations]
 	    [Configuration->.?exec=cfg&amp;cfg=association]
     </lien>
-    <icon>plugin-24.gif</icon>
+    <icon>annonce.gif</icon>
 
     <fonctions>association_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
 	<!--<options>association_options.php</options>-->		 <!-- fichier charge a chaque hit -->
@@ -30,12 +30,12 @@ _ Ce plugin n&eacute;cessite l'installation du plugin cfg
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>		
-		<inclure>association_fonctions.php</inclure>
+		<inclure>inc_association.php</inclure>
 	</pipeline>
 	
 	<pipeline>	
 			<nom>affiche_milieu</nom>
 		<action>affiche_milieu</action>
-		<inclure>association_fonctions.php</inclure>
+		<inclure>inc_association.php</inclure>
 	</pipeline>	
 </plugin>
