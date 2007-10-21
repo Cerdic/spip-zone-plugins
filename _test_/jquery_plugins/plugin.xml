@@ -1,20 +1,22 @@
 <plugin>
-	<nom>jQuery UI</nom>
+	<nom>jQuery Plugins</nom>
 	<auteur>
-	Collectif, extension de jquery : http://ui.jquery.com/
+	Collectif, extensions de jquery
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<lien>http://ui.jquery.com/</lien>
 	
 	<version>0.1</version>
-	<etat>test</etat>
+	<etat>dev</etat>
     <description>
-	Permet d'utiliser les extensions UI (v1.0) de jQuery (v1.2.1)
-_	Ajoute une balise #JQUERY_UI{nom_du_UI} (cf. jqueryui_fonctions.php)
-_	T&eacute;l&eacute;charge automatiquement la librairie jquery.ui (il faut cr&eacute;er un dossier lib/)
+	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery
+_	Ajoute une balise #JQUERY_PLUGIN{id_du_plug} et #JQUERY_PLUGIN_THEME{nom_du_theme_ou_squelette} (cf. jqueryp_fonctions.php)
+_	Propose de t&eacute;l&eacute;charger automatiquement les librairies de plugins jQuery (il faut cr&eacute;er un dossier lib/)
 	</description>
-	<prefix>jqueryui</prefix>
+	<prefix>jqueryp</prefix>
 	<necessite id="lib:jquery.ui-1.0" src="http://jqueryjs.googlecode.com/files/jquery.ui-1.0.zip" /> 
-    <fonctions>jqueryui_fonctions.php</fonctions>
+	<necessite id="lib:jquery.yav1.1.1" src="http://jquery.com/plugins/files/jquery.yav1.1.1.zip" /> 
+    <fonctions>jqueryp_fonctions.php</fonctions>
+    <options>jqueryp_options.php</options>
 	<chemin dir='' />
 </plugin>
