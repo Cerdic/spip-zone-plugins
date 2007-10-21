@@ -207,7 +207,7 @@ class cfg_formulaire
 		if ($this->message && $this->rediriger) {
 			include_spip('inc/meta');
 			ecrire_meta('cfg_message_'.$GLOBALS['auteur_session']['id_auteur'], $this->message, 'non');
-			if ($GLOBALS['spip_version_code']<1.93) ecrire_metas();
+			if (version_compare($spip_version_code,'1.93','<')) ecrire_metas();
 			include_spip('inc/headers');
 			redirige_par_entete(parametre_url(self(),null,null,'&'));
 		}

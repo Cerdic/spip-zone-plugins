@@ -78,7 +78,7 @@ class cfg_metapack
 		} else {
 		    ecrire_meta($this->cfg->nom, serialize($base));
 	    }
-	    if ($GLOBALS['spip_version_code']<1.93) ecrire_metas();
+	    if (version_compare($spip_version_code,'1.93','<')) ecrire_metas();
 	    return true;
 	}
 }
