@@ -75,8 +75,9 @@
 			echo '<label for="justification"><strong>'._T('asso:Justification').' :</strong></label>';
 			echo '<input name="justification" type="text" value="Cotisation '.$prenom.' '.$nom_famille.'" id="justification" class="formo" />';
 			echo '<input type="hidden" name="id" value="'.$id_inscription.'">';
-			echo '<input type="hidden" name="nom" value_famille="'.$nom_famille.'">';
+			echo '<input type="hidden" name="nom_famille" value_famille="'.$nom_famille.'">';
 			echo '<input type="hidden" name="prenom" value="'.$prenom.'">';
+			echo '<input type="hidden" name="categorie" value="'.$categorie.'">';
 			echo '<input type="hidden" name="action" value="ajoute">';
 		}
 		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
