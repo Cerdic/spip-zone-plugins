@@ -143,4 +143,14 @@ function est_aujourdhui($date) {
 	return affdate($date, 'Y-m-d') == date('Y-m-d') ? $date : '';
 }
 
+function push($array, $val) {
+	if($array == '' OR !array_push($array, $val)) return '';
+	return $array;
+}
+
+function find($array, $val) {
+	return ($array != '' AND in_array($val, $array));
+}
+
+
 ?>
