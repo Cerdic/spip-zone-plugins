@@ -4,6 +4,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\d+(?:-\w+)?))\b,');
 
+if ($GLOBALS['spip_version_code']<1.9300) {
+	function mysql_fetch_array($r, $t=MYSQL_ASSOC) { return spip_fetch_array($r, $t); }
+}
+
 // Si un logo est demande, on renvoie la date dudit logo (permettra de gerer
 // un "modifie par ailleurs" si la date a change, rien de plus)
 function valeur_champ_logo($table, $id, $champ) {
@@ -15,7 +19,7 @@ function valeur_champ_logo($table, $id, $champ) {
 // Idem : si un doc est demande, on renvoie la date du doc
 function valeur_champ_document($table, $id, $champ) {
 	$s = spip_query("SELECT date FROM spip_documents WHERE id_document="._q($id));
-	if ($t = spip_fetch_array($s))
+	if ($t = mysql_fetch_array($s))
 		return $t['date'];
 }
 
@@ -78,7 +82,7 @@ function logo_revision($id, $file, $type, $ref) {
 function document_fichier_revision($id, $data, $type, $ref) {
 
 	$s = spip_query("SELECT * FROM spip_documents WHERE id_document="._q($id));
-	if (!$t = spip_fetch_array($s))
+	if (!$t = mysql_fetch_array($s))
 		return false;
 
 	/*
@@ -110,7 +114,7 @@ function document_fichier_revision($id, $data, $type, $ref) {
 		if ($id_new = array_pop($actifs)
 		AND $s = spip_query("SELECT fichier, taille, largeur, hauteur, extension, distant FROM spip_documents
 			WHERE id_document="._q($id_new))
-		AND $new = spip_fetch_array($s)) {
+		AND $new = mysql_fetch_array($s)) {
 			define('FILE_UPLOAD', true); // message pour json_export :(
 
 			// Une vignette doit rester une image
@@ -245,7 +249,7 @@ function valeur_colonne_table_dist($table, $col, $id) {
 	AND $s = spip_query(
 			'SELECT `' . implode($col, '`, `') .
 			'` FROM ' . $nom_table . ' WHERE ' . $where)
-	AND $t = spip_fetch_array($s))
+	AND $t = mysql_fetch_array($s))
 		$r = array_merge($r, $t);
 
 	return $r;
