@@ -2,44 +2,44 @@
 
 ][(#MODELE{minical/jour}
 	{jour_semaine=[(#ENV{pjc}|plus{0}|jour_semaine)]}
-	{jour=[(#ENV{debut}|date_voisine{0,jour}|jour)]}
+	{jour=[(#ENV{debut}|date_voisine{0,jour}|affdate{'j'})]}
 	{hors_periode=[[(#ENV{hors_periode})](#ENV{debut}|date_voisine{0,jour}|teste_mois{#DATE}|?{'',' '})]}
 	{aujourdhui=[(#ENV{debut}|date_voisine{0,jour}|est_aujourdhui|?{1,''})]}
-	{url=[[(#ENV{url}|parametre_url{date,[(#ENV{debut}|date_voisine{0,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{0,jour})]}?{' '})]}
+	{url=[[(#ENV{url}|parametre_url{#ENV{var_date,date},[(#ENV{debut}|date_voisine{0,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{0,jour})]}?{' '})]}
 )][(#MODELE{minical/jour}
 	{jour_semaine=[(#ENV{pjc}|plus{1}|jour_semaine)]}
-	{jour=[(#ENV{debut}|date_voisine{1,jour}|jour)]}
+	{jour=[(#ENV{debut}|date_voisine{1,jour}|affdate{'j'})]}
 	{hors_periode=[[(#ENV{hors_periode})](#ENV{debut}|date_voisine{1,jour}|teste_mois{#DATE}|?{'',' '})]}
 	{aujourdhui=[(#ENV{debut}|date_voisine{1,jour}|est_aujourdhui|?{1,''})]}
-	{url=[[(#ENV{url}|parametre_url{date,[(#ENV{debut}|date_voisine{1,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{1,jour})]}?{' '})]}
+	{url=[[(#ENV{url}|parametre_url{#ENV{var_date,date},[(#ENV{debut}|date_voisine{1,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{1,jour})]}?{' '})]}
 )][(#MODELE{minical/jour}
 	{jour_semaine=[(#ENV{pjc}|plus{2}|jour_semaine)]}
-	{jour=[(#ENV{debut}|date_voisine{2,jour}|jour)]}
+	{jour=[(#ENV{debut}|date_voisine{2,jour}|affdate{'j'})]}
 	{hors_periode=[[(#ENV{hors_periode})](#ENV{debut}|date_voisine{2,jour}|teste_mois{#DATE}|?{'',' '})]}
 	{aujourdhui=[(#ENV{debut}|date_voisine{2,jour}|est_aujourdhui|?{1,''})]}
-	{url=[[(#ENV{url}|parametre_url{date,[(#ENV{debut}|date_voisine{2,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{2,jour})]}?{' '})]}
+	{url=[[(#ENV{url}|parametre_url{#ENV{var_date,date},[(#ENV{debut}|date_voisine{2,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{2,jour})]}?{' '})]}
 )][(#MODELE{minical/jour}
 	{jour_semaine=[(#ENV{pjc}|plus{3}|jour_semaine)]}
-	{jour=[(#ENV{debut}|date_voisine{3,jour}|jour)]}
+	{jour=[(#ENV{debut}|date_voisine{3,jour}|affdate{'j'})]}
 	{hors_periode=[[(#ENV{hors_periode})](#ENV{debut}|date_voisine{3,jour}|teste_mois{#DATE}|?{'',' '})]}
 	{aujourdhui=[(#ENV{debut}|date_voisine{3,jour}|est_aujourdhui|?{1,''})]}
-	{url=[[(#ENV{url}|parametre_url{date,[(#ENV{debut}|date_voisine{3,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{3,jour})]}?{' '})]}
+	{url=[[(#ENV{url}|parametre_url{#ENV{var_date,date},[(#ENV{debut}|date_voisine{3,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{3,jour})]}?{' '})]}
 )][(#MODELE{minical/jour}
 	{jour_semaine=[(#ENV{pjc}|plus{4}|jour_semaine)]}
-	{jour=[(#ENV{debut}|date_voisine{4,jour}|jour)]}
+	{jour=[(#ENV{debut}|date_voisine{4,jour}|affdate{'j'})]}
 	{hors_periode=[[(#ENV{hors_periode})](#ENV{debut}|date_voisine{4,jour}|teste_mois{#DATE}|?{'',' '})]}
 	{aujourdhui=[(#ENV{debut}|date_voisine{4,jour}|est_aujourdhui|?{1,''})]}
-	{url=[[(#ENV{url}|parametre_url{date,[(#ENV{debut}|date_voisine{4,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{4,jour})]}?{' '})]}
+	{url=[[(#ENV{url}|parametre_url{#ENV{var_date,date},[(#ENV{debut}|date_voisine{4,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{4,jour})]}?{' '})]}
 )][(#MODELE{minical/jour}
 	{jour_semaine=[(#ENV{pjc}|plus{5}|jour_semaine)]}
-	{jour=[(#ENV{debut}|date_voisine{5,jour}|jour)]}
+	{jour=[(#ENV{debut}|date_voisine{5,jour}|affdate{'j'})]}
 	{hors_periode=[[(#ENV{hors_periode})](#ENV{debut}|date_voisine{5,jour}|teste_mois{#DATE}|?{'',' '})]}
 	{aujourdhui=[(#ENV{debut}|date_voisine{5,jour}|est_aujourdhui|?{1,''})]}
-	{url=[[(#ENV{url}|parametre_url{date,[(#ENV{debut}|date_voisine{5,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{5,jour})]}?{' '})]}
+	{url=[[(#ENV{url}|parametre_url{#ENV{var_date,date},[(#ENV{debut}|date_voisine{5,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{5,jour})]}?{' '})]}
 )][(#MODELE{minical/jour}
 	{jour_semaine=[(#ENV{pjc}|plus{6}|jour_semaine)]}
-	{jour=[(#ENV{debut}|date_voisine{6,jour}|jour)]}
+	{jour=[(#ENV{debut}|date_voisine{6,jour}|affdate{'j'})]}
 	{hors_periode=[[(#ENV{hors_periode})](#ENV{debut}|date_voisine{6,jour}|teste_mois{#DATE}|?{'',' '})]}
 	{aujourdhui=[(#ENV{debut}|date_voisine{6,jour}|est_aujourdhui|?{1,''})]}
-	{url=[[(#ENV{url}|parametre_url{date,[(#ENV{debut}|date_voisine{6,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{6,jour})]}?{' '})]}
+	{url=[[(#ENV{url}|parametre_url{#ENV{var_date,date},[(#ENV{debut}|date_voisine{6,jour})]})](#ENV**{jours}|find{[(#ENV{debut}|date_voisine{6,jour})]}?{' '})]}
 )]
