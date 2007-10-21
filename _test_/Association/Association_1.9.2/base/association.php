@@ -217,10 +217,11 @@
 	//-- Relations ----------------------------------------------------
 
 	global $tables_jointures;
-	$tables_jointures['spip_asso_ressources'][]= 'asso_prets';
-	$tables_jointures['spip_asso_prets'][]= 'asso_ressources';
-//	$tables_jointures['spip_ventes'][]= 'banque';
-//	$tables_jointures['spip_banque'][]= 'ventes';
+
+	$tables_jointures['spip_asso_adherents'][]= 'auteurs';
+	$tables_jointures['spip_asso_adherents'][]= 'auteurs_elargis';
+	$tables_jointures['spip_auteurs'][]= 'asso_adherents';
+	$tables_jointures['spip_auteurs_elargis'][]= 'asso_adherents';
 
 	//-- Table des tables ----------------------------------------------------
 

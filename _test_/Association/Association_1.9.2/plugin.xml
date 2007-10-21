@@ -7,7 +7,7 @@
 	<etat>test</etat>
 	<description>
 		Gestion de petites associations
-_ Ce plugin n&eacute;cessite l'installation du plugin cfg
+_ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 	</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>

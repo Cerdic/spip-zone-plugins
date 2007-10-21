@@ -1,6 +1,9 @@
 [(#REM) titre=Association]
 [(#REM) icone=img_pack/annonce.gif]
-[(#REM) descriptif=Cette zone permet de configurer les variables de base du plugin.]
+[(#REM) descriptif=
+<p>Cette zone permet de configurer les variables de base du plugin.</p>
+<p> Pour fonctionner correctement ce plugin doit être installé en parallèle avec le plugin Inscription2</p>
+]
 
 #CACHE{0}
 
@@ -109,18 +112,6 @@
 		<label for="indexation"><strong><:asso:config_libelle_indexation:></strong></label>
 		<input type="radio" name="indexation" value="id_adherent" [(#ENV{indexation}|=={id_adherent}|?{checked="checked"})] id="indexation" /><:asso:config_libelle_id_adherent:>
 		<input type="radio" name="indexation" value="id_asso" [(#ENV{indexation}|=={id_asso}|?{checked="checkted"})] id="indexation" /><:asso:config_libelle_id_asso:> <br />
-		</p>
-		<p>
-		<label for="secteurs"><strong><:asso:config_libelle_secteurs:></strong></label>
-		<input type="text" name="secteurs" [value="(#ENV{secteurs})"] id="secteurs"  class='formo'/>
-		</p>
-		<p>
-		<B_spip_listes>
-		<label for="spip_listes"><strong><:asso:config_libelle_spip_listes:></strong></label>
-		<select name="spip_liste" id="spip_listes"class='formo'/>
-		<BOUCLE_spip_listes(SPIP_LISTES)>
-		<option value="#ID_LISTE" [(#ENV{spip_liste}|=={id_liste}|?{selected="selected"})]>#TITRE</option>
-		</BOUCLE_spip_listes>
 		</p>
 	</fieldset>
 

@@ -3,7 +3,7 @@
 	* Plugin Association
 	*
 	* Copyright (c) 2007
-	* Bernard Blazin & FranÃ§ois de Montlivault
+	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	* Pour plus de details voir le fichier COPYING.txt.
@@ -16,21 +16,19 @@
 	function exec_adherents() {
 		
 		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
-			
-		if (!($connect_statut == '0minirezo' AND $connect_toutes_rubriques)) {
-			echo _T('avis_non_acces_page');
-			fin_page();
-			exit;
-		}
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		
+		include_spip ('inc/acces_page');
 		
 		$url_adherents = generer_url_ecrire('adherents');
 		$url_ajout_cotisation = generer_url_ecrire('ajout_cotisation');
-		$url_edit_adherent = generer_url_ecrire('edit_adherent');
+		$url_edit_adherent = generer_url_ecrire('editer_adherent','act=val');
 		$url_voir_adherent = generer_url_ecrire('voir_adherent');
 		$url_action_adherents = generer_url_ecrire('action_adherents');
+		$url_edit_relances=generer_url_ecrire('edit_relances');
 		$url_pdf_adherents = generer_url_ecrire('pdf_adherents');
 		$indexation = lire_config('association/indexation');
+		
+		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		
@@ -40,40 +38,30 @@
 		else { $filtre = 'defaut'; }
 		
 		switch($filtre) {
-			case "defaut": $critere= "statut<>'sorti'";break;
-			case "ok": $critere="statut='ok'";break;
-			case "echu": $critere="statut='echu'";break;
-			case "relance": $critere="statut='relance'";break;
-			case "sorti": $critere="statut='sorti'";break;	   
-			case "prospect": $critere="statut='prospect'";break;
-			case "tous": $critere="statut LIKE '%'";break;	
+			case "defaut": $critere= "statut_relance<>'sorti'";break;
+			case "ok": $critere="statut_relance='ok'";break;
+			case "echu": $critere="statut_relance='echu'";break;
+			case "relance": $critere="statut_relance='relance'";break;
+			case "sorti": $critere="statut_relance='sorti'";break;	   
+			case "prospect": $critere="statut_relance='prospect'";break;
+			case "tous": $critere="statut_relance LIKE '%'";break;	
 		}			
 		
-		debut_boite_info();
+		// TOTAUX
+		$query = spip_query ( "SELECT * FROM spip_asso_adherents WHERE statut_relance ='ok' " );
+		$nombre_membres=spip_num_rows($query);		
 		
+		debut_boite_info();
 		echo association_date_du_jour();	
 		echo '<p>'._T('asso:adherent_liste_legende').'</p>'; 
-		
-		// TOTAUX
-		$query = spip_query ( "SELECT montant FROM spip_asso_adherents WHERE statut ='ok' " );
-		$nombre_membres=spip_num_rows($query);
-		$query = spip_query ( "SELECT sum(montant) AS somme FROM spip_asso_adherents WHERE statut ='ok' " );
-		$caisse = spip_fetch_array($query);
-		
 		echo '<p>';
-		echo '<font color="#9F1C30"><strong>'._T('asso:adherent_liste_total_cotisations',array('total' => $caisse['somme'])).'</strong></font><br/>';
 		echo '<font color="blue"><strong>'._T('asso:adherent_liste_nombre_adherents',array('total' => $nombre_membres)).'</strong></font>';
 		echo '</p>';
-		
 		fin_boite_info();	
 		
 		debut_raccourcis();
-		echo '<p>';
-		icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), generer_url_ecrire('edit_relances'),  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
-		echo '</p>';
-		echo '<p>';
-		echo '<a href="'.$url_pdf_adherents.'&critere='.$critere.'">Imprimer</a>';
-		echo '</p>';	
+		icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
+		icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&critere='.$critere,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif' ); 
 		fin_raccourcis();
 		
 		debut_droite();
@@ -86,22 +74,22 @@
 		// PAGINATION ALPHABETIQUE
 		echo '<td>';
 		
-	$lettre=$_GET['lettre'];
-	if ( empty ( $lettre ) ) { $lettre = "%"; }
-
-	$query = spip_query ( "SELECT upper( substring( nom, 1, 1 ) )  AS init FROM spip_asso_adherents WHERE $critere GROUP BY init ORDER by nom, id_adherent ");
-
-	while ($data = spip_fetch_array($query)) {
-		if($data['init']==$lettre) {
-			echo ' <strong>'.$data['init'].'</strong>';
+		$lettre=$_GET['lettre'];
+		if ( empty ( $lettre ) ) { $lettre = "%"; }
+		
+		$query = spip_query ( "SELECT upper( substring( nom_famille, 1, 1 ) )  AS init FROM spip_auteurs_elargis GROUP BY init ORDER by nom_famille, id ");
+		
+		while ($data = spip_fetch_array($query)) {
+			if($data['init']==$lettre) {
+				echo ' <strong>'.$data['init'].'</strong>';
+			}
+			else {
+				echo ' <a href="'.$url_adherents.'&lettre='.$data['init'].'&filtre='.$filtre.'">'.$data['init'].'</a>';
+			}
 		}
-		else {
-			echo ' <a href="'.$url_adherents.'&lettre='.$data['init'].'&filtre='.$filtre.'">'.$data['init'].'</a>';
-		}
-	}
-	if ($lettre == "%") { echo ' <strong>'._T('asso:adherent_entete_tous').'</strong>'; }
-	else { echo ' <a href="'.$url_adherents.'&filtre='.$filtre.'">'._T('asso:adherent_entete_tous').'</a>'; }
-	
+		if ($lettre == "%") { echo ' <strong>'._T('asso:adherent_entete_tous').'</strong>'; }
+		else { echo ' <a href="'.$url_adherents.'&filtre='.$filtre.'">'._T('asso:adherent_entete_tous').'</a>'; }
+		
 		// FILTRES
 		echo '<td style="text-align:right;">';
 		
@@ -109,7 +97,7 @@
 		if ( isset ($_POST['id'])) {
 			$id=$_POST['id'];
 			if ($indexation=="id_asso") { $critere="id_asso='$id'"; }
-			else { $critere="id_adherent='$id'"; }
+			else { $critere="id='$id'"; }
 		}
 		
 		echo '<form method="post" action="'.$url_adherent.'">';
@@ -125,7 +113,7 @@
 		echo '<form method="post" action="'.$url_adherent.'">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-		foreach (array('defaut','ok','echu','relance','sorti','prospect','tous') as $statut) {
+		foreach (array('defaut','ok','echu','relance','sorti',lire_config('inscription2/statut_interne'),'tous') as $statut) {
 			echo '<option value="'.$statut.'"';
 			if ($filtre==$statut) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
@@ -148,130 +136,80 @@
 		echo '<td><strong>'._T('asso:adherent_libelle_photo').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_nom').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_prenom').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_libelle_fonction').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_libelle_email').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_libelle_num_rue').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_libelle_rue').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_libelle_code_postal').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_libelle_ville').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_libelle_portable').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_libelle_telephone').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_categorie').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_validite').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_entete_statut_ok').'</strong></td>';
-		//echo '<td><strong>'._T('asso:adherent_entete_notes').'</strong></td>';
 		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_entete_supprimer_abrev').'</strong></td>';
 		echo '</tr>';
-
-	$max_par_page=30;
-	$debut=$_GET['debut'];
-
-	if (empty($debut)) { $debut=0; }
-
-	if (empty($lettre)) {
-		$query = spip_query ( "SELECT * FROM spip_asso_adherents  WHERE $critere ORDER BY nom LIMIT $debut,$max_par_page" );
-	}
-	else {
-		$query = spip_query ( "SELECT * FROM spip_asso_adherents WHERE upper( substring( nom, 1, 1 ) ) like '$lettre' AND $critere ORDER BY nom LIMIT $debut,$max_par_page" );
-	}
-
-	$i=0;
-
-	while ($data = spip_fetch_array($query)) {	
-		//var_dump($data);die("coucou");
 		
-		$i++;
-		$id_adherent=$data['id_adherent'];
-
-		switch($data['statut'])	{
-			case "echu": $class= "impair"; break;
-			case "ok": $class="valide";	break;
-			case "relance": $class="pair"; break;
-			case "sorti": $class="sortie"; break;
-			case "prospect": $class="prospect"; break;	   
-		}
-
-		echo '<tr> ';
-		echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>';
-		if ($indexation=="id_asso") { echo $data["id_asso"];}
-		else { echo $data["id_adherent"];}
-		echo '</td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
+		$max_par_page=30;
+		$debut=$_GET['debut'];
 		
-		if ( !empty ($data['id_auteur'])) {
-			echo'<img src="/IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60" height= "60" title="'.$data["nom"].' '.$data["prenom"].'">';
-		}
-/*
-if (empty ($data['vignette']))
-{echo'';}
-else {echo'<img src="/IMG/assologo'.$data['id_adherent'].'" width="60" eight= "60" title="'.$data["nom"].' '.$data["prenom"].'">';}
-*/
-		echo '</td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
-		if (empty($data["email"])) { echo $data["nom"].'</td>'; }
-		else	{
-			echo '<a href="mailto:'.$data["email"].'">'.$data["nom"].'</a></td>';
-		}
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["prenom"].'</td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["fonction"].'</td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.' style="text-align:right;">'.$data["numero_ad"].'</td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["rue_ad"].'</td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["cp_ad"].'</td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["ville"].'</td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["portable"].'</td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["telephone"].'</td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["categorie"].'</td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.association_datefr($data['validite']).'</td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
-//		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["remarques"].'</td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+		if (empty($debut)) { $debut=0; }
 		
-		if (isset($data["id_auteur"])) {
-			$id_auteur= $data["id_auteur"];
-			$sql = spip_query ( "SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur' ");
-			while ($auteur = spip_fetch_array($sql))	{
-				switch($auteur['statut'])	{
-					case "0minirezo":
-						$logo= "admin-12.gif";
-						break;
-					case "1comite":
-						$logo="redac-12.gif";
-						break;
-					case "5poubelle":
-						$logo="poubelle-12.gif";	 
-					case "6forum":
-						$logo="visit-12.gif";							
-				}
-				echo '<a href="'.generer_url_ecrire("auteur_infos","id_auteur=".$data['id_auteur']).'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
+		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON spip_auteurs_elargis.id=spip_asso_adherents.id_inscription LEFT JOIN spip_auteurs ON spip_auteurs.id_auteur=spip_auteurs_elargis.id_auteur WHERE $critere "
+		.if (!empty($lettre)) {"AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' "}
+		."ORDER BY nom_famille LIMIT $debut,$max_par_page" );
+		while ($data = spip_fetch_array($query)) {	
+			$id_adherent=$data['id'];
+			switch($data['statut_interne'])	{
+				case "echu": $class= "impair"; break;
+				case "ok": $class="valide";	break;
+				case "relance": $class="pair"; break;
+				case "sorti": $class="sortie"; break;
+				default : $class="prospect"; break;	   
 			}
+			
+			echo '<tr> ';
+			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>';
+			if ($indexation=="id_asso") { echo $data["id_asso"];}
+			else { echo $data["id"];}
+			echo '</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
+			
+			if ( !empty ($data['spip_auteurs.id_auteur'])) {
+				echo'<img src="/IMG/auton'.$data['id_auteur'].'.jpg" alt="&nbsp;" width="60" height= "60" title="'.$data["nom_famille"].' '.$data["prenom"].'">';
+			}
+			echo '</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+			if (empty($data["email"])) { 
+				echo $data["nom_famille"].'</td>'; 
+			} else {
+			echo '<a href="mailto:'.$data["email"].'">'.$data["nom_famille"].'</a></td>';
+			}
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["prenom"].'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["categorie"].'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.association_datefr($data['validite']).'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+			
+			switch($auteur['statut'])	{
+				case "0minirezo":
+					$logo= "admin-12.gif"; break;
+				case "1comite":
+					$logo="redac-12.gif"; break;
+				case "5poubelle":
+					$logo="poubelle-12.gif"; break; 
+				case "6forum":
+					$logo="visit-12.gif"; break;	
+				default :
+					$logo="adher-12.gif"; break;
+			}
+			echo '<a href="'.$url_edit_adherent.'&id='.$data['id']).'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id'].'></td>';
+			echo '</tr>';
 		}
-		else { echo '<img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/adher-12.gif"></td>'; }
-//echo '<td class ='.$class.'>';
-//if (empty($data["email"])) 
-//{ echo '&nbsp;</td>'; }
-//else
-//echo '<a href="mailto:'.$data["email"].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/mail-12.png" title="'._T('asso:adherent_label_envoyer_courrier').'"></a>';
-//echo '<td class ='.$class.'><input name="cotisation[]" type="checkbox" value='.$id_adherent.'></td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_adherent'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
-		echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_adherent'].'></td>';
-
-		echo '</tr>';
-	}
-
-	echo '</table>';
-
+		
+		echo '</table>';
+		
 		//SOUS-PAGINATION
 		echo '<table width=100%>';
 		echo '<tr>';	
 		echo '<td>';
-		if (empty($lettre)) {
-			$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE $critere" );
-		}
-		else {
-			$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE upper( substring( nom, 1, 1 ) ) like '$lettre'  AND $critere" );
-		}
+		$query = spip_query( "SELECT * FROM spip_auteurs_elargis WHERE   $critere"
+		.if (!empty($lettre)) {"AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' "}
+		.);
 		$nombre_selection=spip_num_rows($query);
 		$pages=intval($nombre_selection/$max_par_page) + 1;
 		
