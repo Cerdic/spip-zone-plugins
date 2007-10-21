@@ -3,7 +3,7 @@
 
 /* COMPATIBILITE SPIP 1.91 */
 if ($GLOBALS['spip_version_code']<1.92) {
-	define('_SPIP19100', 1);
+	@define('_SPIP19100', 1);
 	// Compatibilite des autorisations pour SPIP 1.91
 	if (!function_exists('autoriser')) {
 		function autoriser($a='',$b='') {
@@ -12,7 +12,7 @@ if ($GLOBALS['spip_version_code']<1.92) {
 	}
 }
 /* COMPATIBILTE SPIP 1.93 */
-if ($GLOBALS['spip_version_code']>=1.9300) define('_SPIP19300', 1);
+if ($GLOBALS['spip_version_code']>=1.9300) @define('_SPIP19300', 1);
 
 
 // Pour forcer les logs du plugin, outil actif ou non :

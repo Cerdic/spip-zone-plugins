@@ -269,8 +269,9 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 <p>Attention : en modifiant ce deuxi&egrave;me param&egrave;tre, vous perdez alors les styles standards associ&eacute;s &agrave; ces raccourcis.</p>"
 ,//	."<p>Pour afiner un peu, vous pouvez maintenant d&eacute;finir le style particulier des balises suivantes :</p>",
 
-	'decoupe:nom' => 'D&eacute;coupe un texte en pages',
+	'decoupe:nom' => 'D&eacute;coupe en pages et onglets',
 	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.
+_ Si vous utilisez ce s&eacute;parateur &agrave; l'int&eacute;rieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d'onglets.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.",
 	'decoupe:aide' => 'S&eacute;parateur de pages&nbsp;: @sep@',
 	'page_suivante' => 'Page suivante',
@@ -287,7 +288,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}."
 #PUCE Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d'article automatiquement. Mais vous avez la possibilt&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
 [[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]\n\n
 Attention, aucun sommaire automatique (balise #CS_SOMMAIRE inactive) ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
-_ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe un article en pages}.",
+_ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.",
 	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
 	'sommaire_titre' => 'Sommaire',
 	'sommaire_page' => ',&nbsp;p@page@',
