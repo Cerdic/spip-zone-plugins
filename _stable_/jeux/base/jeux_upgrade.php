@@ -28,7 +28,7 @@ function jeux_vider_tables() {
 function jeux_verifier_base(){
 	// compatibilite SPIP 1.92
 	$showtable = function_exists('sql_showtable')?'sql_showtable':'spip_abstract_showtable';
-	$fetch_array = function_exists('mysql_fetch_array')?'mysql_fetch_array':'spip_fetch_array';
+	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch';
 
 	// version de la base de donnee
 	$version_base = $GLOBALS['jeux_base_version'];
@@ -47,7 +47,7 @@ function jeux_verifier_base(){
 				// ajout d'un nom par defaut aux jeux existants
 				$res = spip_query ("SELECT id_jeu FROM spip_jeux");
 				$sans = _T('jeux:sans_type');
-				while ($row = $fetch_array($res))
+				while ($row = $fetch($res))
 					spip_query("UPDATE spip_jeux SET nom='$sans' WHERE id_jeu=".$row['id_jeu']);
 			}
 			ecrire_meta('jeux_base_version', $current_version=0.10, 'non');
@@ -60,7 +60,7 @@ function jeux_verifier_base(){
 				// ajout d'un titre par defaut aux jeux existants
 				$res = spip_query ("SELECT id_jeu FROM spip_jeux");
 				$sans = _T('jeux:sans_titre_prive');
-				while ($row = $fetch_array($res))
+				while ($row = $fetch($res))
 					spip_query("UPDATE spip_jeux SET titre='$sans' WHERE id_jeu=".$row['id_jeu']);
 			}
 			ecrire_meta('agenda_base_version', $current_version=$test_version, 'non');
