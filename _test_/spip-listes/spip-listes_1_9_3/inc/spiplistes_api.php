@@ -1139,7 +1139,7 @@ function spiplistes_format_est_correct ($format) {
 }
 
 function spiplistes_ecrire_metas() {
-	if(isset($GLOBALS['spip_version_code']) && $GLOBALS['spip_version_code']>1.93) return(true);
+	if(isset($GLOBALS['spip_version_code']) && $GLOBALS['spip_version_code']>=1.93) return(true);
 	include_spip("inc/meta");
 	ecrire_metas();
 	return(true);
