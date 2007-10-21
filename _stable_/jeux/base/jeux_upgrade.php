@@ -26,19 +26,19 @@ function jeux_vider_tables() {
 }
 
 function jeux_verifier_base(){
-	// compatibilite SPIP 1.92
-	$showtable = function_exists('sql_showtable')?'sql_showtable':'spip_abstract_showtable';
-	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
-
 	// version de la base de donnee
 	$version_base = $GLOBALS['jeux_base_version'];
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta']['jeux_base_version']) )
 			|| (($current_version = $GLOBALS['meta']['jeux_base_version']) != $version_base)){
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
+		// compatibilite SPIP 1.92
+		$showtable = function_exists('sql_showtable')?'sql_showtable':'spip_abstract_showtable';
+		$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
+		
 		include_spip('base/jeux_tables');
 		if ($current_version==0.0){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
 			creer_base();
 			// ajout du champ 'nom' a la table spip_jeux, si pas deja existant
 			$desc = $showtable("spip_jeux", '', true);
