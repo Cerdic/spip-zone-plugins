@@ -12,15 +12,18 @@
 		dev
 	</etat>
 	<description>
-		Un projet de boutique g&eacute;n&eacute;raliste pour spip
+Un projet de boutique g&eacute;n&eacute;raliste pour spip.
+_ N&eacute;c&eacute;ssite les plugins suivant:
+_ - CFG 1.0.6
+_ - Inscription2 0.2
 	</description>
 	<icon></icon>
 	<prefix>
-		  echoppe
+		echoppe
 	</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />
 	<necessite id='Inscription2' version='[0.2;]' />
-	<install></install>
+	<install>echoppe_upgrade.php</install>
 	<options>
 	</options>
 	<fonctions>
