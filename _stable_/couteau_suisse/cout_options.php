@@ -56,5 +56,9 @@ if ($GLOBALS['spip_version_code']<1.92) {
 		}
 	}
 }
+/* COMPATIBILTE SPIP 1.93 */
+if ($GLOBALS['spip_version_code']>=1.9300) {
+	if (!function_exists('ecrire_metas')) {	function ecrire_metas() {} }
+}
 
 ?>
