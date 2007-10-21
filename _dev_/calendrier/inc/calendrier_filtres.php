@@ -122,6 +122,7 @@ function debut_semaine($date, $pjc = 2) {
 }
 
 function debut_mois($date) {
+	if($date == null) return '';
 	list($annee, $mois, $jour) = date_amj($date);
 	$amj = array($annee, $mois, 1);
 	return amj_date($amj);
