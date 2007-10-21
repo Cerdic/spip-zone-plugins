@@ -15,13 +15,15 @@
 	function exec_activites(){
 		global $connect_statut, $connect_toutes_rubriques, $table_prefix;
 		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		include_spip ('inc/acces_page');
 		
 		$url_articles = generer_url_ecrire('articles');
 		$url_activites = generer_url_ecrire('activites');
 		$url_ajout_activite = generer_url_ecrire('edit_activite','action=ajoute');
 		$url_edit_activites = generer_url_ecrire('edit_activite','action=modifie');
 		$url_voir_activites = generer_url_ecrire('voir_activites');
+		
+		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		
