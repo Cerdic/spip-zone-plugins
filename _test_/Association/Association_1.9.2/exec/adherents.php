@@ -35,24 +35,25 @@
 		debut_gauche();
 		
 		if ( isset ($_REQUEST['filtre'] )) { $filtre = $_REQUEST['filtre']; }
-		else { $filtre = 'defaut'; }
+		else { $filtre = 'ok'; }
 		
 		switch($filtre) {
-			case "defaut": $critere= "statut_relance<>'sorti'";break;
-			case "ok": $critere="statut_relance='ok'";break;
-			case "echu": $critere="statut_relance='echu'";break;
-			case "relance": $critere="statut_relance='relance'";break;
-			case "sorti": $critere="statut_relance='sorti'";break;	   
-			case "prospect": $critere="statut_relance='prospect'";break;
-			case "tous": $critere="statut_relance LIKE '%'";break;	
+			case "ok": $critere="statut_interne='ok'";break;
+			case "echu": $critere="statut_interne='echu'";break;
+			case "relance": $critere="statut_interne='relance'";break;
+			case "sorti": $critere="statut_interne='sorti'";break;	   
+			case "prospect": 
+			$var=lire_config('inscription2/statut_interne');
+			$critere="statut_interne='$var'";break;
+			case "tous": $critere="statut_interne LIKE '%'";break;	
 		}			
 		
 		// TOTAUX
-		$query = spip_query ( "SELECT * FROM spip_asso_adherents WHERE statut_relance ='ok' " );
+		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis WHERE statut_interne ='ok' " );
 		$nombre_membres=spip_num_rows($query);		
 		
 		debut_boite_info();
-		echo association_date_du_jour();	
+		//echo association_date_du_jour();	
 		echo '<p>'._T('asso:adherent_liste_legende').'</p>'; 
 		echo '<p>';
 		echo '<font color="blue"><strong>'._T('asso:adherent_liste_nombre_adherents',array('total' => $nombre_membres)).'</strong></font>';
@@ -61,7 +62,7 @@
 		
 		debut_raccourcis();
 		icone_horizontale(_T('asso:menu2_titre_relances_cotisations'), $url_edit_relances,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
-		icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&critere='.$critere,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif' ); 
+		icone_horizontale(_T('asso:bouton_impression'), $url_pdf_adherents.'&statut_interne='.$filtre,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/print-24.png','rien.gif' ); 
 		fin_raccourcis();
 		
 		debut_droite();
@@ -113,7 +114,7 @@
 		echo '<form method="post" action="'.$url_adherent.'">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-		foreach (array('defaut','ok','echu','relance','sorti',lire_config('inscription2/statut_interne'),'tous') as $statut) {
+		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne'),tous) as $statut) {
 			echo '<option value="'.$statut.'"';
 			if ($filtre==$statut) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
@@ -146,10 +147,8 @@
 		$debut=$_GET['debut'];
 		
 		if (empty($debut)) { $debut=0; }
-		
-		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON spip_auteurs_elargis.id=spip_asso_adherents.id_inscription LEFT JOIN spip_auteurs ON spip_auteurs.id_auteur=spip_auteurs_elargis.id_auteur WHERE $critere "
-		.if (!empty($lettre)) {"AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' "}
-		."ORDER BY nom_famille LIMIT $debut,$max_par_page" );
+		if (!empty($lettre)) {$critere2="AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";}
+		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur LEFT JOIN spip_auteurs ON spip_auteurs.id_auteur=spip_auteurs_elargis.id_auteur WHERE $critere ".$critere2." ORDER BY nom_famille LIMIT $debut,$max_par_page" );
 		while ($data = spip_fetch_array($query)) {	
 			$id_adherent=$data['id'];
 			switch($data['statut_interne'])	{
@@ -179,10 +178,11 @@
 			}
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["prenom"].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["categorie"].'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.association_datefr($data['validite']).'</td>';
+			//echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.association_datefr($data['validite']).'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data['validite'].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
 			
-			switch($auteur['statut'])	{
+			switch($data['statut'])	{
 				case "0minirezo":
 					$logo= "admin-12.gif"; break;
 				case "1comite":
@@ -194,10 +194,10 @@
 				default :
 					$logo="adher-12.gif"; break;
 			}
-			echo '<a href="'.$url_edit_adherent.'&id='.$data['id']).'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id'].'></td>';
+			echo '<a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_inscription'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_inscription'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_inscription'].'></td>';
 			echo '</tr>';
 		}
 		
@@ -207,9 +207,8 @@
 		echo '<table width=100%>';
 		echo '<tr>';	
 		echo '<td>';
-		$query = spip_query( "SELECT * FROM spip_auteurs_elargis WHERE   $critere"
-		.if (!empty($lettre)) {"AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' "}
-		.);
+		if (!empty($lettre)) {"AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";}
+		$query = spip_query( "SELECT * FROM spip_auteurs_elargis WHERE $critere ".$critere2);
 		$nombre_selection=spip_num_rows($query);
 		$pages=intval($nombre_selection/$max_par_page) + 1;
 		
