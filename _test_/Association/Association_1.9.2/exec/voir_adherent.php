@@ -16,29 +16,33 @@
 	function exec_voir_adherent(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
+		include_spip ('inc/acces_page');
 		
-		// LES URL'S
-		$url_asso = generer_url_ecrire('association');
 		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_edit_activite = generer_url_ecrire('edit_activite');
+		
+		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
 		
 		debut_gauche();
 		
 		debut_boite_info();
-		print association_date_du_jour();	
+		//print association_date_du_jour();	
 		fin_boite_info();
+		
+		debut_raccourcis();
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
+		fin_raccourcis();
 		
 		debut_droite();
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_historique_membre'));
 		
-		$id_adherent = $_GET['id'];
+		$id_inscription= $_GET['id'];
 		$indexation = lire_config('association/indexation');
 		if ($indexation=="id_asso") { 
-			$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE id_adherent='$id_adherent' ");
+			$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE id_inscription='$id_inscription' ");
 			while ($data = spip_fetch_array($query)) { $id_asso=$data['id_asso'];}
 		}
 		// FICHE HISTORIQUE COTISATIONS
@@ -53,7 +57,7 @@
 		echo '<td><strong>&nbsp;</strong></td>';
 		echo '</tr>';
 		
-		$query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_adherent ORDER BY date DESC" );
+		$query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_inscription ORDER BY date DESC" );
 		//$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
@@ -75,7 +79,7 @@
 			echo '<tr bgcolor="#DBE1C5">';
 			echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id').'</strong></td>';
 			echo '<td><strong>'._T('asso:adherent_entete_date').'</strong></td>';
-		echo '<td><strong>'._T('asso:adherent_entete_activite').'</strong></td>';
+			echo '<td><strong>'._T('asso:adherent_entete_activite').'</strong></td>';
 			echo '<td><strong>'._T('asso:adherent_entete_lieu').'</strong></td>';
 			echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_inscrits').'</strong></td>';
 			echo '<td><strong>'._T('asso:adherent_entete_statut').'</strong></td>';
@@ -92,7 +96,8 @@
 				$sql = spip_query ("SELECT * FROM spip_evenements WHERE id_evenement=$id_evenement" );
 				while ($evenement = spip_fetch_array($sql)) {
 					$date = substr($evenement['date_debut'],0,10);
-					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($date).'</td>';
+					//echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($date).'</td>';
+					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$date.'</td>';
 					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$evenement['titre'].'</td>';
 					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$evenement['lieu'].'</td>';
 				}
