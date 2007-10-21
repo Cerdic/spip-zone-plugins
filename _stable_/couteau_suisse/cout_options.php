@@ -1,6 +1,20 @@
 <?php
 // Ce fichier est charge a chaque hit //
 
+/* COMPATIBILITE SPIP 1.91 */
+if ($GLOBALS['spip_version_code']<1.92) {
+	define('_SPIP19100', 1);
+	// Compatibilite des autorisations pour SPIP 1.91
+	if (!function_exists('autoriser')) {
+		function autoriser($a='',$b='') {
+			return $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
+		}
+	}
+}
+/* COMPATIBILTE SPIP 1.93 */
+if ($GLOBALS['spip_version_code']>=1.9300) define('_SPIP19300', 1);
+
+
 // Pour forcer les logs du plugin, outil actif ou non :
 // define('_LOG_CS_FORCE', 'oui');
 
@@ -46,18 +60,5 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 } else {
 	spip_log('COUTEAU-SUISSE.  -- appel de cout_options achevé sans initialisation du plugin ');
 }
-
-/* COMPATIBILITE SPIP 1.91 */
-if ($GLOBALS['spip_version_code']<1.92) {
-	define('_SPIP19100', 1);
-	// Compatibilite des autorisations pour SPIP 1.91
-	if (!function_exists('autoriser')) {
-		function autoriser($a='',$b='') {
-			return $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
-		}
-	}
-}
-/* COMPATIBILTE SPIP 1.93 */
-if ($GLOBALS['spip_version_code']>=1.9300) define('_SPIP19300', 1);
 
 ?>

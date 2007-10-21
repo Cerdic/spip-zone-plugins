@@ -26,7 +26,7 @@ if($GLOBALS['cs_options']) {
 			return $texte;
 		}
 	}
-	
+
 	// liste de filtres qui sert a la balise #INTRODUCTION
 	$GLOBALS['cs_introduire'] = array();
 	// fonction appelant une liste de fonctions qui permettent de nettoyer un texte original de ses raccourcis indesirables
