@@ -7,7 +7,7 @@ if (!defined('_DIR_LIB')) define('_DIR_LIB', 'lib/');
  * Balise #JQUERY_PLUGIN{x1, x2...}
  * 
  * Ecrit le code html appelant le script jQuery UI
- * indiqué par x
+ * indique par x
  * 
  * Exemples : 
  * - #JQUERY_PLUGIN{ui.tabs}
@@ -121,5 +121,13 @@ function jqueryp_liste_themes_dispo(){
 		}
 	}
 	return $liste_themes;
+}
+
+function balise_JQUERY_PLUGINS_DISPO_dist($p) {
+	if(function_exists('balise_ENV'))
+		return balise_ENV($p, 'jqueryp_liste_plugins_dispo()');
+	else
+		return balise_ENV_dist($p, 'jqueryp_liste_plugins_dispo()');
+	return $p;
 }
 ?>
