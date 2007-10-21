@@ -81,7 +81,7 @@ function spiplistes_base_creer () {
 	spiplistes_log("PLUGIN INSTALL: database creation");
 	$spiplistes_base_version = __plugin_real_version_base_get();
 	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
-	ecrire_metas();
+	spiplistes_ecrire_metas();
 	
 	$spiplistes_base_version = lire_meta('spiplistes_base_version');
 
@@ -109,8 +109,7 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 	// les preferences serialisées ('_SPIPLISTES_META_PREFERENCES') sont installées par exec/spiplistes_config
 	
 	if($ecrire_metas) {
-		include_spip("inc/meta");
-		ecrire_metas();
+		spiplistes_ecrire_metas();
 	}
 	return(true);
 }
@@ -120,7 +119,7 @@ function spiplistes_activer_inscription_visiteurs () {
 	if($accepter_visiteurs != 'oui') {
 		$accepter_visiteurs = 'oui';
 		ecrire_meta("accepter_visiteurs", $accepter_visiteurs);
-		ecrire_metas();
+		spiplistes_ecrire_metas();
 		echo _T('spiplistes:autorisation_inscription');
 	}
 	return(true);
@@ -139,7 +138,7 @@ function spiplistes_vider_tables ($nom) {
 	effacer_meta('spiplistes_lots');
 	effacer_meta('abonnement_config');
 	effacer_meta(_SPIPLISTES_META_PREFERENCES);
-	ecrire_metas();
+	spiplistes_ecrire_metas();
 	return(true);
 }
 

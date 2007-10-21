@@ -1138,6 +1138,13 @@ function spiplistes_format_est_correct ($format) {
 	return(in_array($format, array("non", "texte", "html")));
 }
 
+function spiplistes_ecrire_metas() {
+	if(isset($GLOBALS['spip_version_code']) && $GLOBALS['spip_version_code']>1.93) return(true);
+	include_spip("inc/meta");
+	ecrire_metas();
+	return(true);
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */

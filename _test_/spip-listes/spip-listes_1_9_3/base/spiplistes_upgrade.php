@@ -84,7 +84,7 @@ spiplistes_log("spiplistes_upgrade() <<", LOG_DEBUG);
 
 	// fin des ajouts de patches
 		ecrire_meta('spiplistes_version', $spiplistes_real_version);
-		ecrire_metas();
+		spiplistes_ecrire_metas();
 	}
 	
 	return($spiplistes_current_version);
@@ -334,7 +334,7 @@ function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version,
 		ecrire_meta('spiplistes_version', $current_version=1.98);
 		}
 		
-		ecrire_metas();
+		spiplistes_ecrire_metas();
 	}
 
 	// A partir de SPIP-Listes 1.98001, on se base sur le vrai numero de version de
@@ -351,7 +351,7 @@ spiplistes_log("UPGRADING DATABASE version_base: $spiplistes_current_version_bas
 	// ajouter au dessus de cette ligne les patches si besoin pour nouvelle version de la base
 	// fin des ajouts de patches
 		ecrire_meta('spiplistes_base_version', $spiplistes_current_version_base);
-		ecrire_metas();
+		spiplistes_ecrire_metas();
 	}
 
 	return($spiplistes_current_version_base);

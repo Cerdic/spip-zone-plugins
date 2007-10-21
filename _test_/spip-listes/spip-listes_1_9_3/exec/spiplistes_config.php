@@ -158,7 +158,7 @@ function exec_spiplistes_config () {
 	}
 	
 	if($doit_ecrire_metas) {
-		ecrire_metas();
+		spiplistes_ecrire_metas();
 	}
 
 	// Paramétrages des envois
