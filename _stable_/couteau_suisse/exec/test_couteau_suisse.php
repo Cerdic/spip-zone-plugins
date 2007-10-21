@@ -16,7 +16,7 @@ include_spip('inc/layer');
 include_spip("inc/presentation");
 
 // compatibilite spip 1.9
-if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
+if(defined('_SPIP19100')) { function fin_gauche(){return false;} }
 
 function exec_test_couteau_suisse() {
 cs_log("D&eacute;but : exec_test_couteau_suisse()");
@@ -32,7 +32,7 @@ cs_log("D&eacute;but : exec_test_couteau_suisse()");
 	// initialisation generale forcee : recuperation de $outils;
 	cs_initialisation(true);
 
-	if ($GLOBALS['spip_version_code']<1.92)
+	if(defined('_SPIP19100'))
   		debut_page(_T('cout:titre_tests'), 'configuration', 'couteau_suisse');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');

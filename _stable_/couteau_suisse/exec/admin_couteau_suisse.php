@@ -14,7 +14,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirn
 define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
-if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
+if(defined('_SPIP19100')) { function fin_gauche(){return false;} }
 
 function cs_admin_styles_et_js() {
 	global $couleur_claire, $couleur_foncee;
@@ -192,7 +192,7 @@ cs_log("Début : enregistre_modif_outils()");
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement des outils actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
 	ecrire_meta('tweaks_actifs', serialize($liste));
-	ecrire_metas();
+	if(!defined('_SPIP19300')) ecrire_metas();
 /*
 @unlink(_DIR_TMP."charger_pipelines.php");
 @unlink(_DIR_TMP."charger_plugins_fonctions.php");
@@ -233,7 +233,7 @@ verif_plugin();
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 		}
-		ecrire_metas();
+		if(!defined('_SPIP19300')) ecrire_metas();
 		cs_initialisation(true);
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));
@@ -261,7 +261,7 @@ verif_plugin();
 //	else
 //		verif_outils();
 
-	if ($GLOBALS['spip_version_code']<1.92)
+	if(defined('_SPIP19100'))
   		debut_page(_T('cout:titre'), 'configuration', 'couteau_suisse');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -397,7 +397,7 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	$p .= "\n<div class='detail_outil'>";
 	// horrible : ça prends plus de temps qu'avant, mais ca va bientot disparaitre !!
 	$p .= cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
-	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T($GLOBALS['spip_version_code']<1.92?'cout:jquery1':'cout:jquery2') . '</p>';
+	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'cout:jquery1':'cout:jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
 	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('cout:contrib', array('id'=>$outil['contrib'])) . '</p>';
 	$s .= propre($p) . '<hr style="margin:6pt 0 0 0;"/><div style="font-size:85%;">' . _T('cout:detail_outil').' ';

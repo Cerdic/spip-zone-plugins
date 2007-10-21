@@ -49,6 +49,7 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 
 /* COMPATIBILITE SPIP 1.91 */
 if ($GLOBALS['spip_version_code']<1.92) {
+	define('_SPIP19100', 1);
 	// Compatibilite des autorisations pour SPIP 1.91
 	if (!function_exists('autoriser')) {
 		function autoriser($a='',$b='') {
@@ -57,8 +58,6 @@ if ($GLOBALS['spip_version_code']<1.92) {
 	}
 }
 /* COMPATIBILTE SPIP 1.93 */
-if ($GLOBALS['spip_version_code']>=1.9300) {
-	if (!function_exists('ecrire_metas')) {	function ecrire_metas() {} }
-}
+if ($GLOBALS['spip_version_code']>=1.9300) define('_SPIP19300', 1);
 
 ?>

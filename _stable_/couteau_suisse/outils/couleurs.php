@@ -63,7 +63,7 @@ cs_log("couleurs_installe()");
 	ecrire_meta('cs_couleurs_racc', $aide);
 	// sauvegarde en meta : couleurs
 	ecrire_meta('cs_couleurs', serialize($couleurs));
-	ecrire_metas();
+	if(!defined('_SPIP19300')) ecrire_metas();
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse

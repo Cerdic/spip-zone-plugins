@@ -27,7 +27,7 @@ function decoupe_installe() {
 		}
 	}
 	ecrire_meta('cs_decoupe', serialize($images));
-	ecrire_metas();
+	if(!defined('_SPIP19300')) ecrire_metas();
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse

@@ -126,7 +126,7 @@ cs_log("[#$rand]  -- ecriture metas");
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// en metas : code inline pour les pipelines, mes_options et mes_fonctions;
 	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
-	ecrire_metas();
+	if(!defined('_SPIP19300')) ecrire_metas();
 cs_log("[#$rand] cs_initialisation($forcer) : Sortie");
 }
 

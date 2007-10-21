@@ -33,7 +33,7 @@ if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
 	define('_DIR_PLUGIN_COUTEAU_SUISSE', $p);
 }
-if ($GLOBALS['spip_version_code']<1.92) {
+if(defined('_SPIP19100')) {
 	if (!function_exists('stripos')) {
 		function stripos($botte, $aiguille) {
 			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs)) return strlen($regs[1]);

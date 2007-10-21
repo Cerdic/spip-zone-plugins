@@ -30,7 +30,7 @@ cs_log("couteau_suisse_install($action)");
 				if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 				if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 			}
-			ecrire_metas();
+			if(!defined('_SPIP19300')) ecrire_metas();
 			if (@file_exists(_DIR_CS_TMP)) {
 				include_spip('inc/getdocument');
 				effacer_repertoire_temporaire(_DIR_CS_TMP);

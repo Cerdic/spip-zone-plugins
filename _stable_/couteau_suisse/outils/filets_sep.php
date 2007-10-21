@@ -26,7 +26,7 @@ function filets_sep_installe() {
 	}
 	ecrire_meta('cs_filets_sep_racc', join(', ', $liste));
 	ecrire_meta('cs_filets_sep', serialize($filets));
-	ecrire_metas();
+	if(!defined('_SPIP19300')) ecrire_metas();
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse

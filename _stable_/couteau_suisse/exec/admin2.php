@@ -14,7 +14,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirn
 define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
-if ($GLOBALS['spip_version_code']<1.92) { 
+if(defined('_SPIP19100')) { 
 	function fin_gauche(){return false;}
 }
 
@@ -213,7 +213,7 @@ cs_log("Début : enregistre_modif_outils()");
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement de statut ($i) des outils par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys(${$i})));
 	ecrire_meta("tweaks_{$i}s", serialize(${$i}));
-	ecrire_metas();
+	if(!defined('_SPIP19300')) ecrire_metas();
 		include_spip('inc/invalideur');
 /*
 @unlink(_DIR_TMP."charger_pipelines.php");
@@ -238,7 +238,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 
 	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
-		echo ($GLOBALS['spip_version_code']<1.92)?minipres( _T('avis_non_acces_page')):minipres();
+		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
 		exit;
 	}
 	$cmd = _request('cmd');
@@ -253,7 +253,7 @@ verif_plugin();
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 		}
-		ecrire_metas();
+		if(!defined('_SPIP19300')) ecrire_metas();
 		cs_initialisation(true);
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire(_request('exec')));
@@ -268,7 +268,7 @@ verif_plugin();
 		cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
 		foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
 		ecrire_meta('tweaks_variables', serialize($metas_vars));
-		ecrire_metas();
+		if(!defined('_SPIP19300')) ecrire_metas();
 		cs_initialisation(true);
 		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire(_request('exec'), "cmd=descrip&outil={$_GET[outil]}#cs_infos", true));
@@ -277,7 +277,7 @@ verif_plugin();
 	if ($cmd=='showall'){
 		cs_log("Reset de tous les affichages par l'auteur id=$connect_id_auteur");
 		effacer_meta('tweaks_caches');
-		ecrire_metas();
+		if(!defined('_SPIP19300')) ecrire_metas();
 	}
 
 	// afficher la description d'un outil ?
@@ -297,7 +297,7 @@ verif_plugin();
 //	else
 //		verif_outils();
 
-	if ($GLOBALS['spip_version_code']<1.92)
+	if(defined('_SPIP19100'))
   		debut_page(_T('cout:titre'), 'configuration', 'couteau_suisse');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');

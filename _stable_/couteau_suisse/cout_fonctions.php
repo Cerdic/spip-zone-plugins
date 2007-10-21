@@ -9,7 +9,7 @@ if(defined('_LOG_CS')) spip_log('COUTEAU-SUISSE. appel de cout_fonctions : strle
 if($GLOBALS['cs_options']) {
 
 	// compatibilite SPIP < 1.92
-	if ($GLOBALS['spip_version_code']<1.92) {
+	if(defined('_SPIP19100')) {
 		function interprete_argument_balise($n,$p) {
 			if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
 				return calculer_liste($p->param[0][$n],	$p->descr, $p->boucles,	$p->id_boucle);	

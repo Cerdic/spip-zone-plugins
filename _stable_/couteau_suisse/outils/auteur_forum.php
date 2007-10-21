@@ -2,7 +2,7 @@
 
 function Auteur_forum_affichage_final($flux){
 	if(_request('page')=='forum') {
-		$form = $GLOBALS['spip_version_code']<1.92?"$('.previsu').parent()":"$('.previsu').parent().parent()";
+		$form = defined('_SPIP19100')?"$('.previsu').parent()":"$('.previsu').parent().parent()";
 		#	include_spip('inc/charsets');
 		// filtrer et remettre le tout dans le charset cible
 		$nom = unicode2charset(html2unicode(_T('cout:nom_forum')));

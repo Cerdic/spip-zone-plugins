@@ -58,7 +58,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 		include_spip('inc/texte');
 		$s .= propre($descrip);
 
-		if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T($GLOBALS['spip_version_code']<1.92?'cout:jquery1':'cout:jquery2') . '</p>';
+		if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'cout:jquery1':'cout:jquery2') . '</p>';
 		if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
 		if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('cout:contrib', array('id'=>$outil['contrib'])) . '</p>';
 		$s .= propre($p) . '<hr style="margin:6pt 0 0 0;"/><div style="font-size:85%;">' . _T('cout:detail_outil').' ';

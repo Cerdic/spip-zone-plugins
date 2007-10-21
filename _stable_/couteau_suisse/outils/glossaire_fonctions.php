@@ -7,7 +7,7 @@
 charger_generer_url();  # pour generer_url_mot()
 
 // Compatibilite SPIP 1.91
-if ($GLOBALS['spip_version_code']<1.92) { function _q($t) {return spip_abstract_quote($t);} }
+if(defined('_SPIP19100')) { function _q($t) {return spip_abstract_quote($t);} }
 
 // on calcule ici la globale $GLOBALS['glossaire_groupes_type']
 $groupes = trim($GLOBALS['glossaire_groupes']);
