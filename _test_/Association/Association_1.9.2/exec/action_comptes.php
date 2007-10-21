@@ -3,7 +3,7 @@
 	* Plugin Association
 	*
 	* Copyright (c) 2007
-	* Bernard Blazin & FranÃ§ois de Montlivault
+	* Bernard Blazin & François de Montlivault
 	* http://www.plugandspip.com 
 	* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	* Pour plus de details voir le fichier COPYING.txt.
@@ -14,6 +14,8 @@
 
 	function exec_action_comptes(){
 		global $connect_statut, $connect_toutes_rubriques;
+		
+		include_spip ('inc/acces_page');
 		
 		$url_action_comptes=generer_url_ecrire('action_comptes');
 		
