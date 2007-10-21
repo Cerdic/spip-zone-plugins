@@ -28,7 +28,7 @@ function jeux_vider_tables() {
 function jeux_verifier_base(){
 	// compatibilite SPIP 1.92
 	$showtable = function_exists('sql_showtable')?'sql_showtable':'spip_abstract_showtable';
-	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch';
+	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 
 	// version de la base de donnee
 	$version_base = $GLOBALS['jeux_base_version'];
