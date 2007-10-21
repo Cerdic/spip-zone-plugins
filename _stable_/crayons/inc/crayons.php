@@ -4,9 +4,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\d+(?:-\w+)?))\b,');
 
-if ($GLOBALS['spip_version_code']<1.9300) {
-	function sql_fetch($res, $serveur=''){ return spip_fetch_array($res); }
-}
+// en attendant inc/compat_crayons :
+// if ($GLOBALS['spip_version_code'] < '1.93' AND $f = charger_fonction('compat_crayons', 'inc')) $f('sql_fetch');
+if ($GLOBALS['spip_version_code']<'1.93') {	function sql_fetch($res, $serveur=''){ return spip_fetch_array($res); } }
+
 
 // Si un logo est demande, on renvoie la date dudit logo (permettra de gerer
 // un "modifie par ailleurs" si la date a change, rien de plus)
