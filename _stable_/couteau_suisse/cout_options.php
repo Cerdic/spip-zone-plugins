@@ -4,7 +4,7 @@
 /* COMPATIBILTE SPIP 1.93 */
 if (version_compare($GLOBALS['spip_version_code'],'1.93','>=')) @define('_SPIP19300', 1);
 /* COMPATIBILTE SPIP 1.92 */
-elseif (version_compare($GLOBALS['spip_version_code'],'1.92','>=')) @define('_SPIP19200', 1);
+if (version_compare($GLOBALS['spip_version_code'],'1.92','>=')) @define('_SPIP19200', 1);
 /* COMPATIBILITE SPIP 1.91 */
 else {
 	@define('_SPIP19100', 1);
