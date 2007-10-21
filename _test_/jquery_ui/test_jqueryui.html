@@ -3,6 +3,7 @@
 <title>Test Jquery UI</title>
 #INSERT_HEAD
 #JQUERY_UI{tabs, jqueryui.tabs.css}
+[(#REM) # JQUERY_UI{tabs, light} ]
   <script>
   $(document).ready(function(){
     $("#example > ul").tabs();
@@ -12,7 +13,7 @@
 <body>
 <h1>Test JQuery UI Tabs</h1>
 
-        <div id="example">
+		<div id="example" [(#REM) class="light"]>
             <ul>
                 <li><a href="#fragment-1"><span>One</span></a></li>
                 <li><a href="#fragment-2"><span>Two</span></a></li>

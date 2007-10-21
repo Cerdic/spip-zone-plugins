@@ -10,10 +10,11 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<etat>test</etat>
     <description>
 	Permet d'utiliser les extensions UI (v1.0) de jQuery (v1.2.1)
-_	Ajoute une balise #JQUERY_UI{nom_du_UI}
-_   cf. jqueryui_fonctions.php
+_	Ajoute une balise #JQUERY_UI{nom_du_UI} (cf. jqueryui_fonctions.php)
+_	Télécharge automatiquement la librairie jquery.ui (il faut créer un dossier lib/)
 	</description>
 	<prefix>jqueryui</prefix>
+	<necessite id="lib:jquery.ui-1.0" src="http://jqueryjs.googlecode.com/files/jquery.ui-1.0.zip" /> 
     <fonctions>jqueryui_fonctions.php</fonctions>
 	<chemin dir='' />
 </plugin>

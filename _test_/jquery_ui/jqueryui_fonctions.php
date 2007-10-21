@@ -1,11 +1,7 @@
 <?php
 
-define('_JQUERY_UI_VERSION', '1.0');
-define('_JQUERY_UI_NOM_DOSSIER', 'jquery.ui-');
-define('_JQUERY_UI_NOM_DOSSIER_THEMES', 'javascript/' 
-	. _JQUERY_UI_NOM_DOSSIER 
-	. _JQUERY_UI_VERSION 
-	. '/themes/');
+define('_DIR_JQUERY_UI', 'lib/jquery.ui-1.0');
+define('_DIR_JQUERY_UI_THEMES', _DIR_JQUERY_UI . '/themes');
 
 /*
  * Balise #JQUERY_UI{x, y?}
@@ -30,7 +26,7 @@ function balise_JQUERY_UI($p){
 	$nom 	= interprete_argument_balise(1, $p);
 	$nom	= str_replace("'", "", $nom);
 
-	if ($fichier_js = find_in_path('javascript/' . _JQUERY_UI_NOM_DOSSIER . _JQUERY_UI_VERSION . '/ui.' . $nom . '.js')) {
+	if ($fichier_js = find_in_path(_DIR_JQUERY_UI . '/ui.' . $nom . '.js')) {
 		$p->code = '"<script type=\"text/javascript\" src=\"'
 			. $fichier_js
 			. '\"></script>"';
@@ -42,8 +38,8 @@ function balise_JQUERY_UI($p){
 			// squelette css
 			if (!jqueryui_stylesheets_link($p, $theme, true)){
 				// ou theme comme jquery.ui
-				jqueryui_stylesheets_link($p, _JQUERY_UI_NOM_DOSSIER_THEMES . $theme . '/' . $theme . '.css');
-				jqueryui_stylesheets_link($p, _JQUERY_UI_NOM_DOSSIER_THEMES . $theme . '/' . $theme . '.' . $nom . '.css');
+				jqueryui_stylesheets_link($p, _DIR_JQUERY_UI_THEMES . '/' . $theme . '/' . $theme . '.css');
+				jqueryui_stylesheets_link($p, _DIR_JQUERY_UI_THEMES . '/' . $theme . '/' . $theme . '.' . $nom . '.css');
 			}
 		}									
 	} else {
