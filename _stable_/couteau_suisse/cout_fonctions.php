@@ -40,6 +40,7 @@ if($GLOBALS['cs_options']) {
 	// Filtre creant un lien <a> sur un texte
 	// Exemple d'utilisation : [(#EMAIL*|cs_lien{#NOM})]
 	function cs_lien($lien, $texte='') {
+		if(!$lien) return '';
 		$mem = $GLOBALS['toujours_paragrapher'];
 		$GLOBALS['toujours_paragrapher'] = false;
 		$lien = propre("[{$texte}->{$lien}]");
