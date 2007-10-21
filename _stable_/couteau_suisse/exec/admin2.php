@@ -255,7 +255,7 @@ verif_plugin();
 		}
 		if(!defined('_SPIP19300')) ecrire_metas();
 		cs_initialisation(true);
-		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
+		if (defined('_SPIP19200')) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire(_request('exec')));
 	}
 	// reset des variables d'un outil
@@ -270,7 +270,7 @@ verif_plugin();
 		ecrire_meta('tweaks_variables', serialize($metas_vars));
 		if(!defined('_SPIP19300')) ecrire_metas();
 		cs_initialisation(true);
-		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
+		if (defined('_SPIP19200')) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire(_request('exec'), "cmd=descrip&outil={$_GET[outil]}#cs_infos", true));
 	}
 	// reset de l'affichage
@@ -291,7 +291,7 @@ verif_plugin();
 		enregistre_modif_outils($cmd);
 		// pour la peine, un redirige,
 		// que les outils charges soient coherent avec la liste
-		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
+		if (defined('_SPIP19200')) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire(_request('exec'), strlen($_GET['outil'])?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'', true));
 	}
 //	else

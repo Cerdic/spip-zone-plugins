@@ -5,7 +5,7 @@ include_spip('inc/filtres');
 
 function action_description_outil_dist() {
 cs_log("Début : action_description_outil_dist() - Une modification de variable(s) a été demandée !");
-	if ($GLOBALS['spip_version_code']>=1.92) {
+	if (defined('_SPIP19200')) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	} else {

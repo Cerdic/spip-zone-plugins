@@ -201,6 +201,7 @@ cs_log("Début : enregistre_modif_outils()");
 */
 include_spip('inc/plugin');
 verif_plugin();	
+		include_spip('inc/invalideur');
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_SKELS);
 		@unlink(_DIR_TMP."couteau-suisse.plat");
@@ -235,7 +236,7 @@ verif_plugin();
 		}
 		if(!defined('_SPIP19300')) ecrire_metas();
 		cs_initialisation(true);
-		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
+		if (defined('_SPIP19200')) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));
 	}
 
@@ -252,7 +253,7 @@ verif_plugin();
 		enregistre_modif_outils();
 		// pour la peine, un redirige,
 		// que les outils charges soient coherent avec la liste
-		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
+		if (defined('_SPIP19200')) include_spip('inc/headers');
 		$afficher_outil = _request('afficher_outil');
 		if (strlen($afficher_outil) && $afficher_outil!=='non')
 			redirige_par_entete(generer_url_ecrire('admin_couteau_suisse', "afficher_outil=$afficher_outil", true) . "#outil$afficher_outil");
@@ -328,7 +329,12 @@ echo '<p style="color:red;">Testez la nouvelle interface du plugin : <a href="',
 	echo "</td></tr></table>\n";
 	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
 
-	echo generer_url_post_ecrire('admin_couteau_suisse', '', 'submitform');
+	if (!defined('_SPIP19300'))
+	  echo generer_url_post_ecrire('admin_couteau_suisse', '', 'submitform');
+	  else {
+		include_spip('inc/filtres');
+		echo "\n<form action='".generer_url_ecrire('admin_couteau_suisse')."' name='submitform' method='post'>" . form_hidden($action);
+	  }
 	echo "\n<input type='hidden' name='changer_outils' value='oui'>";
 	echo "\n<input type='hidden' name='afficher_outil' value='non'>";
 	foreach($temp = $outils as $outil) echo "<input type='hidden' id='tweak_".$outil['id']."' name='tweak_".$outil['id']."' value='".($outil['actif']?"1":"0")."' />";
