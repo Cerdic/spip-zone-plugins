@@ -258,7 +258,7 @@ function cs_initialise_includes() {
 	// liste des pipelines utilises
 	$traitements_utilises = array();
 	// variables temporaires
-	$temp_css = $temp_js = $temp_filtre_imprimer = array();
+	$temp_css = $temp_js = $temp_jq = $temp_filtre_imprimer = array();
 	// pour la fonction inclure_page()
 	include_spip('public/assembler');
 	// parcours de tous les outils
@@ -294,6 +294,7 @@ function cs_initialise_includes() {
 			if (isset($outil['code:fonctions'])) $infos_pipelines['code_fonctions'][] = $outil['code:fonctions'];
 			if (isset($outil['code:css'])) $temp_css[] = cs_parse_code_js($outil['code:css']);
 			if (isset($outil['code:js'])) $temp_js[] = cs_parse_code_js($outil['code:js']);
+			if (isset($outil['code:jq'])) $temp_jq[] = cs_parse_code_js($outil['code:jq']);
 			// recherche d'un fichier monoutil_options.php ou monoutil_fonctions.php pour l'inserer dans le code
 			if ($temp=cs_lire_fichier_php("outils/{$inc}_options.php")) 
 				$infos_pipelines['code_options'][] = $temp;
@@ -315,6 +316,8 @@ function cs_initialise_includes() {
 	if (count($temp_css))
 		$cs_metas_pipelines['header'][] = "<style type=\"text/css\">\n"
 			.compacte_css(join("\n", $temp_css))."\n</style>";
+	if (count($temp_jq))
+		$temp_js[] = "jQuery(document).ready(function(){\n".join("\n", $temp_jq)."\n});";
 	if (count($temp_js))
 		$cs_metas_pipelines['header'][] = "<script type=\"text/javascript\"><!--\n"
 			.compacte_js(join("\n", $temp_js))."\n// --></script>";
