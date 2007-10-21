@@ -404,7 +404,7 @@ function cs_parse_code_php($code) {
 		} else {
 			// tant que le webmestre n'a pas poste, on prend la valeur (dynamique) par defaut
 			$defaut = cs_get_defaut($nom);
-			$rempl = $cotes . cs_get_code_variable($nom, $defaut) . $cotes;
+			$rempl = cs_get_code_variable($nom, $defaut);
 			$code = "/* Valeur par defaut : {$nom} = $defaut */\n" . $code;
 		}
 		if ($cotes) $rempl = str_replace("'", "\'", $rempl);
