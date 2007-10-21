@@ -38,29 +38,28 @@
 	);
 
 	//-- Table ADHERENTS ------------------------------------------
-		$spip_asso_adherents = array(
-			"id_adherent"	=> "BIGINT(21) NOT NULL AUTO_INCREMENT",			//lié à id Inscription2
-			"id_asso" 			=> "text NOT NULL",
-			"categorie" 		=> "text NOT NULL",
-			"validite" 			=> "DATE NOT NULL DEFAULT '0000-00-00' ",
-			"statut_relance"	=> "text NOT NULL",
-			"montant" 			=> "TEXT NOT NULL",
-			"date" 				=> "DATE NOT NULL DEFAULT '0000-00-00'",
-			"utilisateur1" 		=> "text NOT NULL",
-			"utilisateur2" 		=> "text NOT NULL",
-			"utilisateur3" 		=> "text NOT NULL",
-			"utilisateur4" 		=> "text NOT NULL",
-			"maj" 				=> "timestamp(14) NOT NULL"
-		);
-		$spip_asso_adherents_key = array(
-			"PRIMARY KEY" => "id_adherent",
-			"INDEX id_auteur" => "id_auteur"
-		);
-		$tables_principales['spip_asso_adherents'] = array(
-			'field' => &$spip_asso_adherents, 
-			'key' => &$spip_asso_adherents_key
-		);
-	}
+	$spip_asso_adherents = array(
+		"id_adherent"	=> "BIGINT(21) NOT NULL AUTO_INCREMENT",			//lié à id Inscription2
+		"id_asso" 			=> "text NOT NULL",
+		"categorie" 		=> "text NOT NULL",
+		"validite" 			=> "DATE NOT NULL DEFAULT '0000-00-00' ",
+		"statut_relance"	=> "text NOT NULL",
+		"montant" 			=> "TEXT NOT NULL",
+		"date" 				=> "DATE NOT NULL DEFAULT '0000-00-00'",
+		"utilisateur1" 		=> "text NOT NULL",
+		"utilisateur2" 		=> "text NOT NULL",
+		"utilisateur3" 		=> "text NOT NULL",
+		"utilisateur4" 		=> "text NOT NULL",
+		"maj" 				=> "timestamp(14) NOT NULL"
+	);
+	$spip_asso_adherents_key = array(
+		"PRIMARY KEY" => "id_adherent",
+		"INDEX id_auteur" => "id_auteur"
+	);
+	$tables_principales['spip_asso_adherents'] = array(
+		'field' => &$spip_asso_adherents, 
+		'key' => &$spip_asso_adherents_key
+	);
 	
 	//-- Table DONS ------------------------------------------
 	$spip_asso_dons = array(
