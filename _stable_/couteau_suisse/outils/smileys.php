@@ -59,12 +59,11 @@ cs_log(" -- abs. path = $path2");
 
 	$liste = array();
 	foreach ($smileys as $smy=>$val) {
-		// accessibilite : protection de alt et title
-		$alt = '@@64@@'.base64_encode($smy).'@@65@@';
 		$espace = strlen($smy)==2?' ':'';
 		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
-		$smileys2[1][] = $img = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>";
+		// cs_code_echappement evite que le remplacement se fasse a l'interieur des attributs de la balise <img>
+		$smileys2[1][] = cs_code_echappement($espace."<img alt=\"$smy\" title=\"$smy\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>", 'SMILE');
 		$smileys2[2][] = $val;
 		// liste des raccourcis et smileys disponibles
 		$liste[] = '<strong>'.$smy.'</strong>';
@@ -81,11 +80,17 @@ function smileys_raccourcis() {
 	return _T('cout:smileys:aide', array('liste' => $GLOBALS['meta']['cs_smileys_racc']));
 }
 
+function smileys_echappe_balises_callback($matches) {
+ return cs_code_echappement($matches[1], 'SMILE');
+}
+
 // fonction de remplacement
 // les balises suivantes sont protegees : html|code|cadre|frame|script|acronym|cite
 function cs_rempl_smileys($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	$smileys_rempl = unserialize($GLOBALS['meta']['cs_smileys']);
+	// protection des images, on ne sait jamais...
+	$texte = preg_replace_callback(',(<img .*?/>),ms', 'smileys_echappe_balises_callback', $texte);
 	// smileys a probleme :
 	$texte = str_replace(':->', ':-&gt;', $texte); // remplacer > par &gt;
 	// remplacer ’ (apostrophe curly) par &#8217;
@@ -93,11 +98,8 @@ function cs_rempl_smileys($texte) {
 	$texte = str_replace(':'.chr(146).'-', ':&#8217;-', $texte);
 	// voila, on remplace tous les smileys d'un coup...
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
-	// accessibilite : alt et title avec le smiley en texte
-	$texte = preg_replace('/@@64@@([^@]*)@@65@@/e', "base64_decode('\\1')", $texte);
-	//while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
 //cs_log('smileys traités : '.$texte);
-	return $texte;
+	return echappe_retour($texte, 'SMILE');
 }
 
 // fonction principale (pipeline pre_typo)
