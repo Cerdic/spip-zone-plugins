@@ -2,28 +2,6 @@
 // MES_OPTIONS pour ACCESGROUPE : toutes les fonctions utilisées pour le controle d'accès espaces public / privé
 
 include_spip('base/accesgroupes_tables');
-
-// SURCHARGE des fonctions de l'espace privé
-//   inclure les fichiers originaux de /ecrire/exec pour que toutes les fonctions natives du core soient disponibles
-//   mais ne le faire que si on est sur une page de l'espace privé le nécessitant
-//	 !!! EXCEPTION : breves_voir est surchargé par le fichier /exec/breves_voir.php puisque le bridage d'accès se fait dans 
-//	 la fonction afficher_breves_voir() et non pas la fonction exec_breves_voir() !!!
-//	 merci ESJ pour la subtilité du include() php à la place du inclure_spip()
-$exec = _request('exec'); // si on est dans l'espace privé : intégrer le fichier concerné par la surcharge
-/*
-// coyote - modif v1.0.3 on ne modifie plus les exec_xxx.php
-if (in_array($exec, array('naviguer','rubriques_edit','articles','articles_edit','articles_versions','breves_edit'))) {  // ,'breves_voir'
-	// inclure uniquement le fichier exec dont a besoin ET utiliser un include() php et non pas include_spip() pour ne pas se faire couillonner par find_in_path()
-	include('exec/'.$exec.'.php');
-	// appel du fichier contenant les fonctions exec_xxx() modifiées pour accesgroupes
-	include_spip('inc/accesgroupes_prive');
-}
-*/
-if (!_DIR_RESTREINT){
-	// appel de la gestion de l'espace privé...
-	include_spip('inc/accesgroupes_prive');
-}
-
 function debug_var($var){
 // fonction pour débuggage / affichage variable
 $r = "<pre>";
@@ -31,19 +9,34 @@ $r .= print_r($var);
 $r .= "<pre>";
 return $r;
 }
-// CACHE : nécessité d'un cache différencié selon les rubriques autorisées/restreintes 
-//   ajouter un marqueur de cache pour permettre de differencier le cache en fonction des rubriques autorisees
-// 	 potentiellement une version de cache differente par combinaison de rubriques autorisées pour un utilisateur + le cache de base sans autorisation
-//   merci Cedric pour la méthode (plugin acces_restreint) 
-if ($exec == '') {  // si on on est dans l'espace public gérer le marqueur de cache
-	if (isset($auteur_session['id_auteur'])) {
-		//echo '<br>début cache';
-		$combins = accesgroupes_combin();
-		$combins = join("-",$combins);
-		if (!isset($GLOBALS['marqueur'])) {
-			$GLOBALS['marqueur'] = "";
+
+// SURCHARGE des fonctions de l'espace privé
+//   inclure les fichiers originaux de /ecrire/exec pour que toutes les fonctions natives du core soient disponibles
+//   mais ne le faire que si on est sur une page de l'espace privé le nécessitant
+//	 !!! EXCEPTION : breves_voir est surchargé par le fichier /exec/breves_voir.php puisque le bridage d'accès se fait dans 
+//	 la fonction afficher_breves_voir() et non pas la fonction exec_breves_voir() !!!
+//	 merci ESJ pour la subtilité du include() php à la place du inclure_spip()
+
+if (!_DIR_RESTREINT){
+	$exec = _request('exec'); // si on est dans l'espace privé : intégrer le fichier concerné par la surcharge
+	// appel de la gestion de l'espace privé...
+	include_spip('inc/accesgroupes_prive');
+}
+else {
+	// CACHE : nécessité d'un cache différencié selon les rubriques autorisées/restreintes 
+	//   ajouter un marqueur de cache pour permettre de differencier le cache en fonction des rubriques autorisees
+	// 	 potentiellement une version de cache differente par combinaison de rubriques autorisées pour un utilisateur + le cache de base sans autorisation
+	//   merci Cedric pour la méthode (plugin acces_restreint) 
+	if ($exec == '') {  // si on on est dans l'espace public gérer le marqueur de cache
+		if (isset($auteur_session['id_auteur'])) {
+			//echo '<br>début cache';
+			$combins = accesgroupes_combin();
+			$combins = join("-",$combins);
+			if (!isset($GLOBALS['marqueur'])) {
+				$GLOBALS['marqueur'] = "";
+			}
+			$GLOBALS['marqueur'] .= ":accesgroupes_combins $combins";
 		}
-		$GLOBALS['marqueur'] .= ":accesgroupes_combins $combins";
 	}
 }
 
