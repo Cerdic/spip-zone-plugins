@@ -29,6 +29,19 @@ $GLOBALS['jquery_plugins'] = array(
 		)
 	),
 		
+	
+	//syncHeight
+	'syncheight' => array(
+		'dir' => 'jquery.syncheight',
+		'url' => 'http://ginader.devjavu.com/browser/trunk/jquery/plugins/syncHeight/',
+		'install' => array(
+			'jquery.syncheight.js' => 'http://ginader.devjavu.com/browser/trunk/jquery/plugins/syncHeight/jquery.syncheight.js?format=txt'
+		),
+		'files' => array(
+			'syncheight' => 'jquery.syncheight.js'
+		)
+	),	
+		
 	//ui
 	'ui' => array(
 		'dir' => 'jquery.ui-1.0',
