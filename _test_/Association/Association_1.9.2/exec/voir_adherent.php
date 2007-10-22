@@ -20,6 +20,7 @@
 		
 		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_edit_activite = generer_url_ecrire('edit_activite');
+		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
@@ -28,7 +29,7 @@
 		debut_gauche();
 		
 		debut_boite_info();
-		//print association_date_du_jour();	
+		print association_date_du_jour();	
 		fin_boite_info();
 		
 		debut_raccourcis();
@@ -39,11 +40,13 @@
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_historique_membre'));
 		
-		$id_inscription= $_GET['id'];
+		$id_auteur= $_GET['id'];
 		$indexation = lire_config('association/indexation');
-		if ($indexation=="id_asso") { 
-			$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE id_inscription='$id_inscription' ");
-			while ($data = spip_fetch_array($query)) { $id_asso=$data['id_asso'];}
+		$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE id_auteur='$id_auteur' ");
+			while ($data = spip_fetch_array($query)) { 
+				$id_adherent=$data['id_adherent'];
+				$id_asso=$data['id_asso'];
+			}
 		}
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
@@ -57,7 +60,7 @@
 		echo '<td><strong>&nbsp;</strong></td>';
 		echo '</tr>';
 		
-		$query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_inscription ORDER BY date DESC" );
+		$query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_auteur ORDER BY date DESC" );
 		//$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
@@ -85,10 +88,7 @@
 			echo '<td><strong>'._T('asso:adherent_entete_statut').'</strong></td>';
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
-			$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=$id_asso ORDER BY date DESC" );
-			//$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=$id_adherent ORDER BY date DESC" );
-			//$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
-			
+			$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=".if($indexation=='id_asso'){$id_asso} else{$id_adherent}." ORDER BY date DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				$id_evenement=$data['id_evenement'];
 				echo '<tr style="background-color: #EEEEEE;">';

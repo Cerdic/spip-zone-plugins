@@ -53,7 +53,7 @@
 		$nombre_membres=spip_num_rows($query);		
 		
 		debut_boite_info();
-		//echo association_date_du_jour();	
+		association_date_du_jour();	
 		echo '<p>'._T('asso:adherent_liste_legende').'</p>'; 
 		echo '<p>';
 		echo '<font color="blue"><strong>'._T('asso:adherent_liste_nombre_adherents',array('total' => $nombre_membres)).'</strong></font>';
@@ -97,8 +97,8 @@
 		//Filtre ID
 		if ( isset ($_POST['id'])) {
 			$id=$_POST['id'];
+			$critere="id_adherent='$id'";
 			if ($indexation=="id_asso") { $critere="id_asso='$id'"; }
-			else { $critere="id='$id'"; }
 		}
 		
 		echo '<form method="post" action="'.$url_adherent.'">';
@@ -150,8 +150,9 @@
 		if (!empty($lettre)) {$critere2="AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";}
 		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur LEFT JOIN spip_auteurs ON spip_auteurs.id_auteur=spip_auteurs_elargis.id_auteur WHERE $critere ".$critere2." ORDER BY nom_famille LIMIT $debut,$max_par_page" );
 		while ($data = spip_fetch_array($query)) {	
-			$id_adherent=$data['id'];
-			switch($data['statut_interne'])	{
+			$id_adherent=$data['id_adherent'];
+			
+			switch($data['statut_relance'])	{
 				case "echu": $class= "impair"; break;
 				case "ok": $class="valide";	break;
 				case "relance": $class="pair"; break;
@@ -162,7 +163,7 @@
 			echo '<tr> ';
 			echo '<td style="border-top: 1px solid #CCCCCC;text-align:right;" class ='.$class.'>';
 			if ($indexation=="id_asso") { echo $data["id_asso"];}
-			else { echo $data["id"];}
+			else { echo $data["id_adherent"];}
 			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ="'.$class.'">';
 			
@@ -178,10 +179,8 @@
 			}
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["prenom"].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["categorie"].'</td>';
-			//echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.association_datefr($data['validite']).'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data['validite'].'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.association_datefr($data['validite']).'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
-			
 			switch($data['statut'])	{
 				case "0minirezo":
 					$logo= "admin-12.gif"; break;
@@ -195,9 +194,9 @@
 					$logo="adher-12.gif"; break;
 			}
 			echo '<a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_inscription'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_inscription'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_inscription'].'></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_auteur'].'></td>';
 			echo '</tr>';
 		}
 		
