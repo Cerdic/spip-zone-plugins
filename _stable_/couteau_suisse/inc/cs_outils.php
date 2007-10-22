@@ -83,6 +83,7 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 // renvoie simplement deux liste des outils actifs/inactifs
 function liste_outils() {
 	global $outils;
+	$id = 0;
 	$metas_caches = isset($GLOBALS['meta']['tweaks_caches'])?unserialize($GLOBALS['meta']['tweaks_caches']):array();
 	foreach($outils as $outil) $categ[_T('cout:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
 	$result_actifs = $result_inactifs = '';
@@ -94,16 +95,18 @@ function liste_outils() {
 			if (!$hide)
 				${$test}[] .= _T('cout:'.$outil['id'].':nom') . '|' . $outil['index'] . '|' . $outil['id'];
 		}
-		preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
-		$div = "<div style='margin-top:.6em; padding:2px; font-weight:bold; display:block;' class='titrem'>$reg[2]</div>\n";
 		foreach(array('s_actifs', 's_inactifs') as $temp) {
 			sort(${$temp});
+			$titre = " <span class='light cs_hidden'>(".count(${$temp}).")</span>";
+			preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
+			$titre = "<div class='titrem categorie'>$reg[2]$titre</div>\n";
 			$href = generer_url_ecrire(_request('exec'),"cmd=descrip&outil=");
 			foreach(${$temp} as $j=>$v) {
 				${$temp}[$j] = preg_replace(',^(.*)\|(.*)\|(.*)$,', '<a class="cs_href" id="href_$3" name="$3" href="'.$href.'$3">$1</a>', $v);
 			}
 			${$temp} = join("<br/>\n", ${$temp});
-			if (strlen(${$temp})) ${'result'.$temp} .= $div . ${$temp};
+			if (strlen(${$temp})) ${'result'.$temp} .= $titre . "<div id='sous_liste_$id'>" . ${$temp} . '</div>';
+			$id++;
 		}
 	}
 

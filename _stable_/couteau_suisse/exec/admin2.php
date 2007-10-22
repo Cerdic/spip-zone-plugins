@@ -109,6 +109,24 @@ div.cs_toggle {
 	text-align:center;
 	margin:50px 0 0 0;
 }
+
+div.categorie {
+	margin-top:.6em;
+	padding:2px;
+	font-weight:bold;
+	display:block;
+	cursor:pointer;
+}
+div.categorie span {
+	font-size:85%;
+}
+div.categorie span.light {
+	font-weight:normal;
+}
+.cs_hidden {
+	display:none;
+}
+
 </style>
 EOF;
 	echo "<script type=\"text/javascript\"><!--
@@ -125,7 +143,11 @@ function set_selected() {
 			jQuery('#cs_toggle_p').html('('+cs_selected.length+')');
 		} else jQuery('div.cs_toggle div').hide();
 }
-
+function set_categ(id) {
+	nb = jQuery('#'+id+' a.outil_on').length;
+	if(nb>0) jQuery('#'+id).prev().children().removeClass('light');
+		else jQuery('#'+id).prev().children().addClass('light');
+}
 function outils_toggle() {
 	if(cs_selected.length>1) {
 		msg=\""._T('cout:permuter_outils')."\";
@@ -140,10 +162,19 @@ function outils_toggle() {
 }
 
 jQuery(function(){
+	// clic sur un titre de categorie
+	jQuery('div.categorie').click( function() {
+		jQuery(this).children().toggleClass('cs_hidden');
+		jQuery(this).next().toggleClass('cs_hidden');
+		// annulation du clic
+		return false;
+	})
+
 	// clic sur un outil
 	jQuery('a.cs_href').click( function() {
 		jQuery(this).toggleClass('outil_on');
 		set_selected();
+		set_categ(this.parentNode.id);
 		// on s'en va si l'outil est deja affiche
 		if(cs_descripted==this.name) return false;
 		cs_descripted=this.name;
@@ -156,7 +187,7 @@ jQuery(function(){
 		// annulation du clic
 		return false;
 	})
-	.dblclick(function(e){
+	.dblclick(function(){
 		jQuery('a.outil_on').removeClass('outil_on');
 		jQuery(this).addClass('outil_on');
 		set_selected();
