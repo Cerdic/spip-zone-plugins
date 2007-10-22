@@ -101,13 +101,22 @@ function jqueryp_add_link(&$p, $adresse, $generer_url=false){
  * jqueryp_add_plugins(array('ui.tabs','ui.dimensions'));
  */
 function jqueryp_add_plugins($plugins){
+	static $lpda; // liste plugins deja actifs (même nom OU meme adresse)
+	if (empty($lpda)) $lpda = array('nom' => array(), 'adresse' => array());
 	if (!is_array($plugins)) $plugins = array($plugins);
 	
-	$lpa = jqueryp_liste_plugins_actifs();	
+	$lpa = jqueryp_liste_plugins_dispo();	
 	$res = '';
 	foreach ($plugins as $nom){
-		if ($c = find_in_path($lpa[$nom]))
+		if ($lpda['nom'][$nom] OR $lpda['adresse'][$lpa[$nom]])
+			continue;
+			
+		if ($c = find_in_path($lpa[$nom])) {
 			$res .=  "\n\n" . compacte_js(spip_file_get_contents($c)) . "\n\n";
+			$lpda['nom'][$nom] = $lpda['adresse'][$lpa[$nom]] = true;
+		} else {
+			spip_log("Adresse introuvable ($lpa[$nom]) sur $nom",'jquery_plugins');
+		}
 	}
 	
 	return $res;

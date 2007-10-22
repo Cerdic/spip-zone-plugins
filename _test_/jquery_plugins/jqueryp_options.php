@@ -13,6 +13,7 @@ $GLOBALS['jquery_plugins'] = array(
 			'ui.calendar' 		=> 'ui.calendar.js',
 			'ui.dialog' 		=> 'ui.dialog.js',
 			'ui.dimensions' 	=> 'jquery.dimensions.js',
+			'jquery.dimensions' => 'jquery.dimensions.js', // au cas ou quelqu'un l'appelle comme cela
 			'ui.draggable' 		=> 'ui.draggable.js',
 			'ui.draggable.ext' 	=> 'ui.draggable.ext.js',
 			'ui.droppable' 		=> 'ui.droppable.js',
