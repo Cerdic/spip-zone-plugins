@@ -4,9 +4,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\d+(?:-\w+)?))\b,');
 
-// en attendant inc/compat_crayons :
-// if ($GLOBALS['spip_version_code'] < '1.93' AND $f = charger_fonction('compat_crayons', 'inc')) $f('sql_fetch');
-if ($GLOBALS['spip_version_code']<'1.93') {	function sql_fetch($res, $serveur=''){ return spip_fetch_array($res); } }
+// Compatibilite pour 1.92 : on a besoin de sql_fetch
+if ($GLOBALS['spip_version_code'] < '1.93' AND $f = charger_fonction('compat_crayons', 'inc'))
+	$f('sql_fetch');
 
 
 // Si un logo est demande, on renvoie la date dudit logo (permettra de gerer
