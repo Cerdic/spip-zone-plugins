@@ -40,6 +40,7 @@
 	//-- Table ADHERENTS ------------------------------------------
 	$spip_asso_adherents = array(
 		"id_adherent"	=> "BIGINT(21) NOT NULL AUTO_INCREMENT",			//lié à id Inscription2
+		"id_auteur" 		=> "int(11) NOT NULL",
 		"id_asso" 			=> "text NOT NULL",
 		"categorie" 		=> "text NOT NULL",
 		"validite" 			=> "DATE NOT NULL DEFAULT '0000-00-00' ",
@@ -54,7 +55,7 @@
 	);
 	$spip_asso_adherents_key = array(
 		"PRIMARY KEY" => "id_adherent",
-		"INDEX id_auteur" => "id_auteur"
+		"KEY id_auteur" => "id_auteur"
 	);
 	$tables_principales['spip_asso_adherents'] = array(
 		'field' => &$spip_asso_adherents, 
@@ -128,7 +129,7 @@
 	//-- Table PLAN COMPTABLE ------------------------------------------
 	$spip_asso_plan = array(
 		"id_plan" 				=> "int(11) NOT NULL auto_increment",
-		"code" 				=> "text NOT NULL",
+		"code" 					=> "text NOT NULL",
 		"intitule" 				=> "text NOT NULL",
 		"classe"				=>"text NOT NULL",
 		"reference" 			=> "text NOT NULL",
@@ -142,7 +143,7 @@
 	);
 	$tables_principales['spip_asso_plan'] = array(
 		'field' => &$spip_asso_plan, 
-		'key' => &$spip_asso_fplan_key
+		'key' => &$spip_asso_plan_key
 	);
 
 	//-- Table RESSOURCES ------------------------------------------

@@ -65,24 +65,9 @@
 		}
 	}
 
-	function association_install($action){
-		$version_base = $GLOBALS['association_version'];
-		switch ($action){
-			case 'test':
-				return (isset($GLOBALS['meta']['asso_base_version']) 
-				  AND ($GLOBALS['meta']['asso_base_version']>=$version_base));
-				break;
-			case 'install':
-				association_verifier_base();
-				break;
-			case 'uninstall':
-				association_vider_tables();
-				break;
-		}
-	}	
-	
-	function association_vider_tablesl(){
+	function association_effacer_tables(){
 		include_spip('base/abstract_sql');
+		spip_query("DROP TABLE spip_asso_adherents");
 		spip_query("DROP TABLE spip_asso_activites");
 		spip_query("DROP TABLE spip_asso_categories");
 		spip_query("DROP TABLE spip_asso_comptes");
@@ -94,5 +79,21 @@
 		effacer_meta('asso_base_version');
 		effacer_meta('association');
 		ecrire_metas();
-	}
+	}	
+	
+	function association_install($action){
+		$version_base = $GLOBALS['association_version'];
+		switch ($action){
+			case 'test':
+				return (isset($GLOBALS['meta']['asso_base_version']) 
+				AND ($GLOBALS['meta']['asso_base_version']>=$version_base));
+				break;
+			case 'install':
+				association_verifier_base();
+				break;
+			case 'uninstall':
+				association_effacer_tables();
+				break;
+		}
+	}	
 ?>
