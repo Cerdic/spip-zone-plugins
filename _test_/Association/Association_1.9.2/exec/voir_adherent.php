@@ -44,10 +44,10 @@
 		$indexation = lire_config('association/indexation');
 		$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE id_auteur='$id_auteur' ");
 			while ($data = spip_fetch_array($query)) { 
-				$id_adherent=$data['id_adherent'];
-				$id_asso=$data['id_asso'];
-			}
+			$id_adherent=$data['id_adherent'];
+			$id_asso=$data['id_asso'];
 		}
+
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
@@ -88,7 +88,9 @@
 			echo '<td><strong>'._T('asso:adherent_entete_statut').'</strong></td>';
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
-			$query = spip_query ("SELECT * FROM spip_asso_activites WHERE id_adherent=".if($indexation=='id_asso'){$id_asso} else{$id_adherent}." ORDER BY date DESC" );			
+			$critere='id_adherent='.$id_adherent;
+			if($indexation=='id_asso'){$critere='id_adherent='.$id_asso;} 
+			$query = spip_query ("SELECT * FROM spip_asso_activites WHERE ".$critere." ORDER BY date DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				$id_evenement=$data['id_evenement'];
 				echo '<tr style="background-color: #EEEEEE;">';
@@ -112,21 +114,21 @@
 		
 		// FICHE HISTORIQUE VENTES
 		if (lire_config('association/ventes')=="on"){
-		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>';
-		echo 'A d&eacute;velopper';
-		echo '</fieldset>';
+			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>';
+			echo 'A d&eacute;velopper';
+			echo '</fieldset>';
 		}
 		// FICHE HISTORIQUE DONS
 		if (lire_config('association/dons')=="on"){
-		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_dons').'</legend>';
-		echo 'A d&eacute;velopper';
-		echo '</fieldset>';
+			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_dons').'</legend>';
+			echo 'A d&eacute;velopper';
+			echo '</fieldset>';
 		}
 		// FICHE HISTORIQUE PRETS
 		if (lire_config('association/prets')=="on"){
-		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_prets').'</legend>';
-		echo 'A d&eacute;velopper';
-		echo '</fieldset>';
+			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_prets').'</legend>';
+			echo 'A d&eacute;velopper';
+			echo '</fieldset>';
 		}
 		
 		fin_cadre_relief();
