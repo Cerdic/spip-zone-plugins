@@ -27,15 +27,15 @@ _ Ce plugin n&eacute;cessite l'installation des plugin cfg et Inscription2
 		<inclure>inc_association.php</inclure>
 	</pipeline>
 	
-	<pipeline>
-		<nom>header_prive</nom>
-		<action>header_prive</action>		
-		<inclure>inc_association.php</inclure>
-	</pipeline>
-	
 	<pipeline>	
 			<nom>affiche_milieu</nom>
 		<action>affiche_milieu</action>
 		<inclure>inc_association.php</inclure>
-	</pipeline>	
+	</pipeline>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>		
+		<inclure>association_fonctions.php</inclure>
+	</pipeline>
 </plugin>
