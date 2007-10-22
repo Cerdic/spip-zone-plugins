@@ -142,6 +142,7 @@ function set_selected() {
 			jQuery('div.cs_toggle div').show();
 			jQuery('#cs_toggle_p').html('('+cs_selected.length+')');
 		} else jQuery('div.cs_toggle div').hide();
+	// mise en gras des compteurs d'outils
 }
 function set_categ(id) {
 	nb = jQuery('#'+id+' a.outil_on').length;
@@ -216,6 +217,7 @@ jQuery(function(){
 	// clic sur le bouton 'tous les actifs'	
 	jQuery('#cs_tous_a').click( function() {
 		jQuery('div.cs_actifs a.cs_href').addClass('outil_on');
+		jQuery('div.categorie span').removeClass('light');
 		set_selected();
 		// annulation du clic
 		return false;
