@@ -1,4 +1,5 @@
 <?php
+
 include_spip("inc/accesgroupes_fonctions");
 
 function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {

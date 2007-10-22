@@ -5,10 +5,12 @@
 //		 2006 - Distribue sous licence GPL 
 
 
+if (!function_exists('critere_tout_voir_dist')){
 // {tout_voir} pour afficher toutes les rubriques même les protégées
 function critere_tout_voir_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->modificateur['tout_voir'] = true;
+}
 }
 
 

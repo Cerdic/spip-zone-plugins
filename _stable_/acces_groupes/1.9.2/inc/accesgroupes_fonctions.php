@@ -3,6 +3,7 @@
 
 // fonctions utilisées pour la surcharge des BOUCLES
 //		merci à Cedric cedric.morin@yterium.com pour le code initial  (plugin acces_restreint)
+include_spip('inc/accesgroupes_lib');
 include_spip('base/db_mysql');
 include_spip('base/abstract_sql');
 include_spip('inc/rubriques');
@@ -10,7 +11,6 @@ include_spip('inc/rubriques');
 
 // inclure le fichier de redéfinitions des BOUCLES
 include_spip('inc/accesgroupes_boucles');
-include_spip('inc/accesgroupes_lib');
 
 // le filtre qui permet d'ajouter une img aux #TITRE des rubriques/articles/breves à accès restreint
 function accesgroupes_visualise($texte, $id_rub = 0, $image = 'dist/images/cadenas-24.gif') {
@@ -314,4 +314,5 @@ function accesgroupes_evenements_accessibles_where($primary){
         $liste = accesgroupes_liste_evenements_restreints();
         return calcul_mysql_in($primary, join(",",$liste),"NOT");
 }
+
 ?>
