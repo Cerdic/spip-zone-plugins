@@ -21,8 +21,8 @@
 		$url_action_cotisations = generer_url_ecrire('action_cotisations');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
-		$id_inscription=$_GET['id'];
-		$query = spip_query( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON id=id_inscription where id='$id_inscription' " );
+		$id_auteur=$_GET['id'];
+		$query = spip_query( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur WHERE spip_auteurs_elargis.id_auteur='$id_auteur' " );
 		while($data = spip_fetch_array($query)) {
 			$nom_famille=$data['nom_famille'];
 			$prenom=$data['prenom'];
@@ -44,7 +44,7 @@
 			echo '<p>';
 			echo 'Adh&eacute;rent :<strong>'.$nom_famille.' '.$prenom.'</strong><br />';
 			echo 'Cat&eacute;gorie :<strong>'.$categorie.'</strong></p>';
-			//echo association_date_du_jour();	
+			association_date_du_jour();	
 			fin_boite_info();
 			
 			debut_droite();
@@ -74,7 +74,7 @@
 			echo '<input name="validite" type="text" value="'.$validite.'" id="validite" class="formo" />';
 			echo '<label for="justification"><strong>'._T('asso:Justification').' :</strong></label>';
 			echo '<input name="justification" type="text" value="Cotisation '.$prenom.' '.$nom_famille.'" id="justification" class="formo" />';
-			echo '<input type="hidden" name="id" value="'.$id_inscription.'">';
+			echo '<input type="hidden" name="id" value="'.$id_auteur.'">';
 			echo '<input type="hidden" name="nom_famille" value_famille="'.$nom_famille.'">';
 			echo '<input type="hidden" name="prenom" value="'.$prenom.'">';
 			echo '<input type="hidden" name="categorie" value="'.$categorie.'">';
