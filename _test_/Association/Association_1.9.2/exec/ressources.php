@@ -19,7 +19,8 @@
 		include_spip ('inc/acces_page');
 		
 		$url_ressources = generer_url_ecrire('ressources');
-		$url_edit_ressource=generer_url_ecrire('edit_ressource');
+		$url_ajout_ressource=generer_url_ecrire('edit_ressource','action=ajoute');
+		$url_edit_ressource=generer_url_ecrire('edit_ressource','action=modifie');
 		$url_action_ressources=generer_url_ecrire('action_ressources');
 		$url_prets=generer_url_ecrire('prets');
 		
@@ -34,7 +35,7 @@
 		fin_boite_info();
 		
 		debut_raccourcis();
-		icone_horizontale(_T('asso:ressources_nav_ajouter'), generer_url_ecrire('edit_ressource','action=ajoute'),'../'._DIR_PLUGIN_ASSOCIATION.'/fiche-perso-24.gif','cree.gif');	
+		icone_horizontale(_T('asso:ressources_nav_ajouter'), $url_ajout_ressource,'../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif' );
 		fin_raccourcis();
 		
 		debut_droite();
@@ -64,7 +65,7 @@
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.number_format($data['pu'], 2, ',', ' ').'</td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_prets.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:prets_nav_gerer').'"></a></td>';
 			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_action_ressources.'&action=supprime&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="'._T('asso:ressources_nav_supprimer').'"></a></td>';
-			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&action=modifie&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
+			echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center;"><a href="'.$url_edit_ressource.'&id='.$data['id_ressource'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:ressources_nav_editer').'"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';
