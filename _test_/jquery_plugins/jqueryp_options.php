@@ -1,8 +1,34 @@
 <?php
 if (!defined('_DIR_LIB')) define('_DIR_LIB', 'lib/');
 
+
 /* liste des plugins de jquery */
 $GLOBALS['jquery_plugins'] = array(
+
+	//datepicker
+	'datepicker' => array(
+		'dir' => 'jquery.datepicker',
+		'url' => 'http://jquery.com/plugins/project/datepicker',
+		'install' => array(
+			'jquery.datePicker.js' => 'http://jquery.com/plugins/files/jquery.datePicker.js_1.txt'
+		),
+		'files' => array(
+			'datepicker' 		=> 'jquery.datePicker.js'
+		)
+	),
+	
+	//easing
+	'easing' => array(
+		'dir' => 'jquery.easing',
+		'url' => 'http://jquery.com/plugins/project/Easing',
+		'install' => array(
+			'jquery.easing.1.2.js' => 'http://jquery.com/plugins/files/jquery.easing.1.2.js.txt'
+		),
+		'files' => array(
+			'easing' => 'jquery.easing.1.2.js'
+		)
+	),
+		
 	//ui
 	'ui' => array(
 		'dir' => 'jquery.ui-1.0',

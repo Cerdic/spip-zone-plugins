@@ -10,7 +10,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
     <description>
 	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery
 - T&eacute;l&eacute;charge automatiquement les librairies de 
-  plugins jQuery (il faut cr&eacute;er un dossier <code>lib/</code>)
+  plugins jQuery (il faut cr&eacute;er un dossier <code>lib/</code> avec acc&egrave;s en &eacute;criture)
 - Fournit un formulaire CFG avec les plugins &agrave; cocher 
   qui seront automatiquement ajout&eacute;es sur toutes les pages via jquery.js.html
 - Fournit un pipeline <code>insert_jquery_plugins</code> pour que 
@@ -25,10 +25,13 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
   (cf. <code>jqueryp_fonctions.php</code>)
   
   {{Liste des librairies pr&eacute;sentes :}}
+- DatePicker : [->http://jquery.com/plugins/project/datepicker]
+- Easing : [->http://jquery.com/plugins/project/Easing]
 - UI : [->http://jquery.com/plugins/project/ui]
 - Yav : [->http://jquery.com/plugins/project/jquery_yav]
 	</description>
 	<prefix>jqueryp</prefix>
+	<install>jqueryp_install.php</install>
 	<necessite id="lib:jquery.ui-1.0" src="http://jqueryjs.googlecode.com/files/jquery.ui-1.0.zip" /> 
 	<necessite id="lib:jquery.yav1.1.1" src="http://jquery.com/plugins/files/jquery.yav1.1.1.zip" /> 
     <fonctions>jqueryp_fonctions.php</fonctions>
