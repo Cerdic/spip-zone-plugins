@@ -1,15 +1,6 @@
 <?php
 @define('_decoupe_NB_CARACTERES', 60);
 
-// desactive pour l'instant. utiliser le parametre d'url : cs=print
-/*
-// Filtre local utilise par le filtre 'cs_imprimer' afin d'eviter la decoupe
-// Exemple : lors d'une impression a l'aide du squelette imprimer.html,
-// remplacer la balise #TEXTE par [(#TEXTE*|cs_imprimer|propre)].
-function decoupe_imprimer($texte) {
-	return str_replace(_decoupe_SEPARATEUR, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>', $texte);
-}
-*/
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 function decoupe_introduire($texte) {
 	return str_replace(_decoupe_SEPARATEUR, '<p>&nbsp;</p>', $texte);
@@ -32,19 +23,10 @@ function onglets_callback($matches) {
 		$t = explode("\n\n", $p, 2);
 		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.trim(textebrut($t[0]))."</a></h2>$t[1]</div>";
 	}
-	$texte = '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>';
-return $texte;
-	if ($matches[1]=='visible') {
-		$h4 = '>';
-		$div = '>';
-	} else {
-		$h4 = ' class="blocs_replie">';
-		$div = ' class="blocs_invisible"">';
-	}
-	return '<div class="cs_blocs"><h4' . $h4 . $t[0] . '</h4><div' . $div . $t[1] . '</div></div>';
+	return '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>';
 }
 
-// fonction appellee sur les parties du textes non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
+// fonction appellee sur les parties du texte non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_onglets_rempl($texte) {
 	if (strpos($texte, '<')===false) return $texte;
 	// il faut un callback pour analyser l'interieur du texte
@@ -164,10 +146,11 @@ function cs_decoupe($texte){
 		include_spip('outils/decoupe');
 		decoupe_installe();
 	}
+//echo $texte, "\n\n<hr/>\n\n", cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
 }
 
-// ici on est en pre_typo
+// ici on est en pre_propre
 function cs_onglets($texte){
 	if (strpos($texte, '<')===false) return $texte;
 	// verification des metas qui stockent les liens d'image
@@ -176,6 +159,7 @@ function cs_onglets($texte){
 		decoupe_installe();
 	}
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_onglets_rempl', $texte);
+
 }
 
 // Compatibilite
