@@ -189,8 +189,10 @@ jQuery(function(){
 	})
 	.dblclick(function(){
 		jQuery('a.outil_on').removeClass('outil_on');
+		jQuery('div.categorie span').addClass('light');
 		jQuery(this).addClass('outil_on');
 		set_selected();
+		set_categ(this.parentNode.id);
 		outils_toggle();
 		return false;
 	});
@@ -206,6 +208,7 @@ jQuery(function(){
 	jQuery('#cs_reset_a').click( function() {
 		jQuery('a.outil_on').removeClass('outil_on');
 		jQuery('div.cs_toggle div').hide();
+		jQuery('div.categorie span').addClass('light');
 		// annulation du clic
 		return false;
 	});
