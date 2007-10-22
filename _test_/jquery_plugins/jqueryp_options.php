@@ -1,10 +1,12 @@
 <?php
+if (!defined('_DIR_LIB')) define('_DIR_LIB', 'lib/');
 
 /* liste des plugins de jquery */
 $GLOBALS['jquery_plugins'] = array(
 	//ui
 	'ui' => array(
 		'dir' => 'jquery.ui-1.0',
+		'dir_themes' => 'themes',
 		'url' => 'http://jquery.com/plugins/project/ui',
 		'files' => array(
 			'ui.accordion' 		=> 'ui.accordion.js',
@@ -24,6 +26,11 @@ $GLOBALS['jquery_plugins'] = array(
 			'ui.sortable' 		=> 'ui.sortable.js',
 			'ui.tablesorter' 	=> 'ui.tablesorter.js',
 			'ui.tabs' 			=> 'ui.tabs.js'	
+		),	
+		'themes' => array(
+			'dark' 		=> 'dark',
+			'flora' 	=> 'flora',
+			'light' 	=> 'light'
 		)
 	),
 	
@@ -38,17 +45,8 @@ $GLOBALS['jquery_plugins'] = array(
 	
 );
 
-$GLOBALS['jquery_plugins_themes'] = array(
-	//ui
-	'ui' => array(
-		'dir' => 'jquery.ui-1.0/themes',
-		'themes' => array(
-			'dark' 		=> 'dark',
-			'flora' 	=> 'flora',
-			'light' 	=> 'light'
-		)
-	)
-);
 
+// signaler le pipeline d'ajout de plugins jquery
+$GLOBALS['spip_pipeline']['insert_jquery_plugins'] = "";
 
 ?>

@@ -4,14 +4,29 @@
 	Collectif, extensions de jquery
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
-	<lien>http://ui.jquery.com/</lien>
-	
-	<version>0.1</version>
+	<lien></lien>
+	<version>0.2</version>
 	<etat>dev</etat>
     <description>
 	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery
-_	Ajoute une balise #JQUERY_PLUGIN{id_du_plug} et #JQUERY_PLUGIN_THEME{nom_du_theme_ou_squelette} (cf. jqueryp_fonctions.php)
-_	Propose de t&eacute;l&eacute;charger automatiquement les librairies de plugins jQuery (il faut cr&eacute;er un dossier lib/)
+- T&eacute;l&eacute;charge automatiquement les librairies de 
+  plugins jQuery (il faut cr&eacute;er un dossier <code>lib/</code>)
+- Fournit un formulaire CFG avec les plugins &agrave; cocher 
+  qui seront automatiquement ajout&eacute;es sur toutes les pages via jquery.js.html
+- Fournit un pipeline <code>insert_jquery_plugins</code> pour que 
+  d'autres plugins puissent ajouter un plugin jquery 
+  pr&eacute;sent dans les librairies (ou du js).
+- Pour ajouter des plugins facilement dans ce pipeline, 
+  une fonction <code>jqueryp_add_plugins()</code>
+  &agrave; laquelle on passe le nom des plugins (array) 
+  renvoie leur contenu js compact&eacute;
+- Ajoute une balise <code>#JQUERY_PLUGIN{id_du_plug}</code> et 
+  <code>#JQUERY_PLUGIN_THEME{nom_du_theme_ou_squelette}</code> 
+  (cf. <code>jqueryp_fonctions.php</code>)
+  
+  {{Liste des librairies pr&eacute;sentes :}}
+- UI : [->http://jquery.com/plugins/project/ui]
+- Yav : [->http://jquery.com/plugins/project/jquery_yav]
 	</description>
 	<prefix>jqueryp</prefix>
 	<necessite id="lib:jquery.ui-1.0" src="http://jqueryjs.googlecode.com/files/jquery.ui-1.0.zip" /> 
@@ -19,4 +34,8 @@ _	Propose de t&eacute;l&eacute;charger automatiquement les librairies de plugins
     <fonctions>jqueryp_fonctions.php</fonctions>
     <options>jqueryp_options.php</options>
 	<chemin dir='' />
+	<pipeline>
+		<nom>insert_jquery_plugins</nom>
+		<inclure>jqueryp_pipeline.php</inclure>
+	</pipeline>
 </plugin>

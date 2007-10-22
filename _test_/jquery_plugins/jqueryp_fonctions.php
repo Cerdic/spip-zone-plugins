@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('_DIR_LIB')) define('_DIR_LIB', 'lib/');
-
-
 /*
  * Balise #JQUERY_PLUGIN{x1, x2...}
  * 
@@ -26,7 +23,7 @@ function balise_JQUERY_PLUGIN($p){
 			continue;
 		$plug = str_replace("'", "", $plug);
 		if (isset($liste_plugins[$plug])) {
-			jqueryp_add_script($p, _DIR_LIB . $liste_plugins[$plug]);
+			jqueryp_add_script($p, $liste_plugins[$plug]);
 		}	
 	}
 	$p->interdire_scripts = false;
@@ -59,14 +56,14 @@ function balise_JQUERY_PLUGIN_THEME($p){
 			// ou theme comme jquery.ui flora
 			$liste_themes = jqueryp_liste_themes_dispo();
 			if (isset($liste_themes[$theme])) {
-				jqueryp_add_link($p, _DIR_LIB . $liste_themes[$theme] . '/' . $theme . '.css');
+				jqueryp_add_link($p, $liste_themes[$theme] . '/' . $theme . '.css');
 				// extensions des themes flora.tabs
 				$i = 1;
 				while ($plug = interprete_argument_balise(++$i, $p)){
 					if  ($plug == "''") 
 						continue;
 					$plug = str_replace("'", "", $plug);
-					jqueryp_add_link($p, _DIR_LIB . $liste_themes[$theme] . '/' . $theme . '.' . $plug . '.css');
+					jqueryp_add_link($p, $liste_themes[$theme] . '/' . $theme . '.' . $plug . '.css');
 				}				
 			}
 		}
@@ -96,31 +93,77 @@ function jqueryp_add_link(&$p, $adresse, $generer_url=false){
 	return false;
 }
 
+/* 
+ * Retourne le contenu des fichiers js des plugin jquery dont les id 
+ * sont envoyes. En profite pour les compacter 
+ * 
+ * jqueryp_add_plugins('ui.tabs');
+ * jqueryp_add_plugins(array('ui.tabs','ui.dimensions'));
+ */
+function jqueryp_add_plugins($plugins){
+	if (!is_array($plugins)) $plugins = array($plugins);
+	
+	$lpa = jqueryp_liste_plugins_actifs();	
+	$res = '';
+	foreach ($plugins as $nom){
+		if ($c = find_in_path($lpa[$nom]))
+			$res .=  "\n\n" . compacte_js(spip_file_get_contents($c)) . "\n\n";
+	}
+	
+	return $res;
+}
 
 /* fourni un tableau 'nom' => 'adresse' des plugins possibles */
 function jqueryp_liste_plugins_dispo(){
-	global $jquery_plugins;
-	
-	$liste_plugins = array();
-	foreach ($jquery_plugins as $nom_ext=>$extension) {
-		foreach ($extension['files'] as $nom=>$fichier){
-			$liste_plugins[$nom] = $extension['dir'] . '/' . $fichier;
-		}
-	}
-	return $liste_plugins;
+	$l = jqueryp_liste_dispo();
+	return $l['plugins'];
 }
 
 /* fourni un tableau 'nom' => 'adresse' des themes possibles */
 function jqueryp_liste_themes_dispo(){
-	global $jquery_plugins_themes;
+	$l = jqueryp_liste_dispo();
+	return $l['themes'];
+}
+
+function jqueryp_liste_dispo($theme = false){
+	global $jquery_plugins;
 	
+	$liste_plugins = array();
 	$liste_themes = array();
-	foreach ($jquery_plugins_themes as $nom_ext=>$extension) {
-		foreach ($extension['themes'] as $nom=>$dossier){
-			$liste_themes[$nom] = $extension['dir'] . '/' . $dossier;
+	foreach ($jquery_plugins as $nom_ext=>$extension) {
+		if(isset($extension['files'])){
+			foreach ($extension['files'] as $nom=>$fichier){
+				$liste_plugins[$nom] = _DIR_LIB . $extension['dir'] . '/' . $fichier;
+			}
+		}
+		if(isset($extension['themes'])){
+			foreach ($extension['themes'] as $nom=>$dossier){
+				$liste_themes[$nom] = _DIR_LIB . $extension['dir'] . '/' . $extension['dir_theme'] . '/' . $dossier;
+			}
 		}
 	}
-	return $liste_themes;
+	
+	return array('plugins' => $liste_plugins, 'themes'  => $liste_themes);
+}
+
+function jqueryp_liste_plugins_actifs(){
+	$l = jqueryp_liste_actifs();
+	return $l['plugins'];
+}
+
+function jqueryp_liste_actifs(){
+	// liste plugins (nom->adresse)
+	$lpa = lire_config('jqueryp/plugins_actifs');
+	$lpd  = jqueryp_liste_plugins_dispo();
+
+	foreach ($lpa as $p){
+		$lp[$p] = $lpd[$p];	
+	}
+	
+	return 
+		array(
+			'plugins' => $lp
+		);
 }
 
 function balise_JQUERY_PLUGINS_DISPO_dist($p) {
