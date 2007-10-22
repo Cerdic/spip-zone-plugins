@@ -23,14 +23,14 @@ function notation_etoile_click($nb, $id)
   else $img = find_in_path('img_pack/notation-on.gif');
   for ($i=1; $i<=$nb; $i++)
   {  if ($multi) $img = $img0.'-on'.$i.'.gif';
-     $ret .= '<a href="javascript:notation_change_etoile('.$i.','.notation_get_nb_notes().','.$id.');" onMouseOver="notation_set_etoile('.$i.','.notation_get_nb_notes().','.$id.')" onMouseOut="notation_set_etoile('.$nb.','.notation_get_nb_notes().','.$id.')">'.
-             '<img src="'.$img.'" title="'._T('notation:note_'.$i).'" style="vertical-align:middle" border=0 name="star-'.$id.'-'.$i.'"/></a>';
+     $ret .= '<a href="javascript:notation_change_etoile('.$i.','.notation_get_nb_notes().','.$id.');" onmouseover="notation_set_etoile('.$i.','.notation_get_nb_notes().','.$id.')" onmouseout="notation_set_etoile('.$nb.','.notation_get_nb_notes().','.$id.')">'.
+             '<img src="'.$img.'" title="'._T('notation:note_'.$i).'" style="vertical-align:middle" id="star-'.$id.'-'.$i.'" alt="" /></a>';
   }
   $img = find_in_path('img_pack/notation-off.gif');
   for ($i=$nb+1; $i<=notation_get_nb_notes(); $i++)
   {  if ($multi) $img = $img0.'-off'.$i.'.gif';
-     $ret .= '<a href="javascript:notation_change_etoile('.$i.','.notation_get_nb_notes().','.$id.');" onMouseOver="notation_set_etoile('.$i.','.notation_get_nb_notes().','.$id.')" onMouseOut="notation_set_etoile('.$nb.','.notation_get_nb_notes().','.$id.')">'.
-             '<img src="'.$img.'" title="'._T('notation:note_'.$i).'" style="vertical-align:middle" border=0 name="star-'.$id.'-'.$i.'"/></a>';
+     $ret .= '<a href="javascript:notation_change_etoile('.$i.','.notation_get_nb_notes().','.$id.');" onmouseover="notation_set_etoile('.$i.','.notation_get_nb_notes().','.$id.')" onmouseout="notation_set_etoile('.$nb.','.notation_get_nb_notes().','.$id.')">'.
+             '<img src="'.$img.'" title="'._T('notation:note_'.$i).'" style="vertical-align:middle" id="star-'.$id.'-'.$i.'" alt="" /></a>';
   }
   return $ret;
 }
