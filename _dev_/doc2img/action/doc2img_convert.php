@@ -11,13 +11,14 @@
  *  - recupére les informations sur le documents (nom, repertoire, nature)
  *  - determine les informatsions sur le documents finals (nom, respertoire, extension)   
  */    
-function exec_doc2img_convert_dist(){
+function action_doc2img_convert_dist(){
 
     include_spip('base/compat193');
     include_spip('cfg_options');
 
-    //racine du site c'est a dire url_site/ecrire/..
-    $racine_site = getcwd().'/..';
+    //racine du site c'est a dire url_site/
+    //une action se repere à la racine du site 
+    $racine_site = getcwd().'/';
     //document a traiter
     $id_document = _request('id_document');
     spip_log('doc2img à convertir : '.$id_document ,'doc2img');
@@ -42,6 +43,8 @@ function exec_doc2img_convert_dist(){
     //creation du repertoire cible
     //url relative du repertoire cible
     $document['cible_url'] = lire_config('doc2img/repertoire_cible').'/'.$document['name'];
+
+    spip_log('cible_url : '.$racine_site.'/'.$document['cible_url'] ,'doc2img');
 
     //si le repertoire existe on ne genere pas les images, url absolue
     if (@mkdir($racine_site.'/'.$document['cible_url'])!==false) {
@@ -101,8 +104,17 @@ function exec_doc2img_convert_dist(){
         }
         //on libére les ressources
         imagick_free($handle );
+    } else {
+        spip_log("il semblerait que ce document ai déjà été converti","doc2img");
     }
-    //recharge la page appelante
-    header("Location: ".$_SERVER['HTTP_REFERER']);
+    
+    //charge la page donéne par $redirect à defaut la page appelante
+    if (empty($redirect)) {
+        $redirect = $_SERVER['HTTP_REFERER'];
+    } else {
+        $redirect = "ecrire/".rawurldecode(_request('redirect'));
+    }
+    spip_log("redirection : ". $redirect,"doc2img");
+    redirige_par_entete($redirect);
 }
 ?>
