@@ -130,7 +130,6 @@ div.categorie span.light {
 </style>
 EOF;
 	echo "<script type=\"text/javascript\"><!--
-// V2.0
 
 var cs_selected, cs_descripted;
 function set_selected() {
@@ -142,7 +141,6 @@ function set_selected() {
 			jQuery('div.cs_toggle div').show();
 			jQuery('#cs_toggle_p').html('('+cs_selected.length+')');
 		} else jQuery('div.cs_toggle div').hide();
-	// mise en gras des compteurs d'outils
 }
 function set_categ(id) {
 	nb = jQuery('#'+id+' a.outil_on').length;
