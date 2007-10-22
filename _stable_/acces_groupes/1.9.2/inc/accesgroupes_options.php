@@ -19,7 +19,7 @@ if (in_array($exec, array('naviguer','rubriques_edit','articles','articles_edit'
 	include_spip('inc/accesgroupes_prive');
 }
 */
-if (defined("_ECRIRE_INC_VERSION")){
+if (!_DIR_RESTREINT){
 	// appel de la gestion de l'espace privé...
 	include_spip('inc/accesgroupes_prive');
 }
