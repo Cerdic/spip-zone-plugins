@@ -28,16 +28,14 @@ else {
 	//   ajouter un marqueur de cache pour permettre de differencier le cache en fonction des rubriques autorisees
 	// 	 potentiellement une version de cache differente par combinaison de rubriques autorisées pour un utilisateur + le cache de base sans autorisation
 	//   merci Cedric pour la méthode (plugin acces_restreint) 
-	if ($exec == '') {  // si on on est dans l'espace public gérer le marqueur de cache
-		if (isset($auteur_session['id_auteur'])) {
-			//echo '<br>début cache';
-			$combins = accesgroupes_combin();
-			$combins = join("-",$combins);
-			if (!isset($GLOBALS['marqueur'])) {
-				$GLOBALS['marqueur'] = "";
-			}
-			$GLOBALS['marqueur'] .= ":accesgroupes_combins $combins";
+	if (isset($auteur_session['id_auteur'])) {
+		//echo '<br>début cache';
+		$combins = accesgroupes_combin();
+		$combins = join("-",$combins);
+		if (!isset($GLOBALS['marqueur'])) {
+			$GLOBALS['marqueur'] = "";
 		}
+		$GLOBALS['marqueur'] .= ":accesgroupes_combins $combins";
 	}
 
 	// fct pour construire et renvoyer le tableau des rubriques à accès restreint dans la partie PUBLIQUE
