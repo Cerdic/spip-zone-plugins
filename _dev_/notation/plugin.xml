@@ -1,0 +1,39 @@
+<plugin>
+  <nom>Notation des articles</nom>
+  <auteur>JEM</auteur>
+  <version>0.3</version>
+  <etat>test</etat>
+  <prefix>notation</prefix>
+  <description>
+    <b>Attribuer une note aux articles Spip</b><hr/>
+    D&eacute;finition de la balise <font color=blue>#NOTATION</font> permettant 
+    la saise et l'affichage de la note dans un article.<br>
+    D&eacute;finition des mod&egrave;les <font color=blue>&lt;autxx|notation|id_article=yy&gt;</font> 
+    qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
+    et <font color=blue>&lt;notation|topten&gt;</font> qui donne les 10 meilleurs articles.
+  </description>
+  <icon>img_pack/note.gif</icon>
+  <fonctions>
+    notation.php
+  </fonctions>
+  <fonctions>
+    balise/notation_balises.php
+  </fonctions>
+  <fonctions> <!-- fichier charge a chaque recalul de page -->
+	public/notation_boucles.php
+  </fonctions>
+  <install>base/notation_init.php</install>
+	<pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>ajouterBoutons</action>
+        <inclure>notation.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>notation_pipeline.php</inclure>
+	</pipeline>
+</plugin>

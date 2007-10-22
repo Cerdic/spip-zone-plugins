@@ -1,0 +1,130 @@
+[(#REM)
+ Plugin Notation v.0.1
+ par JEM (jean-marc.viglino@ign.fr)
+
+ Copyright (c) 2007
+ Logiciel libre distribue sous licence GNU/GPL.
+
+ Afficher les statistiques de la note
+
+exemple, statistiques de l'article 5 :
+<notation5|statistique|left|titre=Statistiques>
+]
+
+<B_not>
+#SET{n,(#GRAND_TOTAL|div{200})}
+#SET{pc,(#GRAND_TOTAL|div{100})}
+
+<BOUCLE_not(NOTATIONS){id_article=#ENV{id}}>
+</BOUCLE_not>
+
+<B_not1>
+#SET{n1,#GRAND_TOTAL}
+<BOUCLE_not1(NOTATIONS){id_article=#ENV{id}}{note=1}>
+</BOUCLE_not1>
+
+<B_not2>
+#SET{n2,#GRAND_TOTAL}
+<BOUCLE_not2(NOTATIONS){id_article=#ENV{id}}{note=2}>
+</BOUCLE_not2>
+
+<B_not3>
+#SET{n3,#GRAND_TOTAL}
+<BOUCLE_not3(NOTATIONS){id_article=#ENV{id}}{note=3}>
+</BOUCLE_not3>
+
+<B_not4>
+#SET{n4,#GRAND_TOTAL}
+<BOUCLE_not4(NOTATIONS){id_article=#ENV{id}}{note=4}>
+</BOUCLE_not4>
+
+<B_not5>
+#SET{n5,#GRAND_TOTAL}
+<BOUCLE_not5(NOTATIONS){id_article=#ENV{id}}{note=5}>
+</BOUCLE_not5>
+
+<B_not6>
+#SET{n6,#GRAND_TOTAL}
+<BOUCLE_not6(NOTATIONS){id_article=#ENV{id}}{note=6}>
+</BOUCLE_not6>
+
+<B_not7>
+#SET{n7,#GRAND_TOTAL}
+<BOUCLE_not7(NOTATIONS){id_article=#ENV{id}}{note=7}>
+</BOUCLE_not7>
+
+<B_not8>
+#SET{n8,#GRAND_TOTAL}
+<BOUCLE_not8(NOTATIONS){id_article=#ENV{id}}{note=8}>
+</BOUCLE_not8>
+
+<B_not9>
+#SET{n9,#GRAND_TOTAL}
+<BOUCLE_not9(NOTATIONS){id_article=#ENV{id}}{note=9}>
+</BOUCLE_not9>
+
+<B_not10>
+#SET{n10,#GRAND_TOTAL}
+<BOUCLE_not10(NOTATIONS){id_article=#ENV{id}}{note=10}>
+</BOUCLE_not10>
+
+[(#ENV{align}|=={center}|?{'<center>'})]
+<span class="notation" style="[float:(#ENV{align}|match{left|right});]">
+<table class=stat cellpadding=0 cellspacing=1>
+[<thead ><tr><td colspan=2>(#ENV{titre})</td></tr></thead>]
+
+[<tr><td><:notation:note_1:>
+</td><td>
+  <div class=barre style='width:[(#GET{n1}|div{#GET{n}})]px;'></div> <small>[(#GET{n1}|div{#GET{pc}}|round)%] ((#GET{n1}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_2:>
+</td><td>
+  <div class=barre style='width:[(#GET{n2}|div{#GET{n}})]px;'></div> <small>[(#GET{n2}|div{#GET{pc}}|round)%] ((#GET{n2}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_3:>
+</td><td>
+  <div class=barre style='width:[(#GET{n3}|div{#GET{n}})]px;'></div> <small>[(#GET{n3}|div{#GET{pc}}|round)%] ((#GET{n3}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_4:>
+</td><td>
+  <div class=barre style='width:[(#GET{n4}|div{#GET{n}})]px;'></div> <small>[(#GET{n4}|div{#GET{pc}}|round)%] ((#GET{n4}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_5:>
+</td><td>
+  <div class=barre style='width:[(#GET{n5}|div{#GET{n}})]px;'></div> <small>[(#GET{n5}|div{#GET{pc}}|round)%] ((#GET{n5}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_6:>
+</td><td>
+  <div class=barre style='width:[(#GET{n5}|div{#GET{n}})]px;'></div> <small>[(#GET{n6}|div{#GET{pc}}|round)%] ((#GET{n6}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_7:>
+</td><td>
+  <div class=barre style='width:[(#GET{n5}|div{#GET{n}})]px;'></div> <small>[(#GET{n7}|div{#GET{pc}})%] ((#GET{n7}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_8:>
+</td><td>
+  <div class=barre style='width:[(#GET{n5}|div{#GET{n}})]px;'></div> <small>[(#GET{n8}|div{#GET{pc}})%] ((#GET{n8}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_9:>
+</td><td>
+  <div class=barre style='width:[(#GET{n5}|div{#GET{n}})]px;'></div> <small>[(#GET{n9}|div{#GET{pc}})%] ((#GET{n9}) <:notation:votes:>)</small>
+</td></tr>]
+
+[<tr><td><:notation:note_10:>
+</td><td>
+  <div class=barre style='width:[(#GET{n5}|div{#GET{n}})]px;'></div> <small>[(#GET{n10}|div{#GET{pc}})%] ((#GET{n10}) <:notation:votes:>)</small>
+</td></tr>]
+
+</table>
+</span>
+[(#ENV{align}|=={center}|?{'</center>'})]
+
+</B_not>

@@ -1,0 +1,30 @@
+[(#REM)
+ Plugin Notation v.0.1
+ par JEM (jean-marc.viglino@ign.fr)
+
+ Copyright (c) 2007
+ Logiciel libre distribue sous licence GNU/GPL.
+
+ Afficher la note des auteurs sous forme de tableau
+
+exemple : afficher la note des auteurs 10,2,5 pour l'article 33, sur 2 colonnes
+<notation33|tableau|id_auteur=10,2,5|left|col=2>
+]
+
+<B_not>
+[(#ENV{align}|=={center}|?{'<center>'})]
+<span class="notation" style="[float:(#ENV{align}|match{left|right});]">
+<table class=auteurs cellpadding=0 cellspacing=0><tr>
+<BOUCLE_not(NOTATIONS){id_article=#ENV{id,0}}{id_auteur IN (#ENV{id_auteur}|notation_tab)}>
+  <BOUCLE_aut(AUTEURS){id_auteur=#ID_AUTEUR}{tout}>
+  <td class=nom>#NOM</td>
+  <td class=note>
+      #NOTATION_ETOILE{#NOTE}
+  </td>
+  </BOUCLE_aut>
+  [(#COMPTEUR_BOUCLE|modulo{[(#ENV{col,3})]}|=={0}|?{'</tr><tr>',''})]
+</BOUCLE_not>
+</tr></table>
+</span>
+[(#ENV{align}|=={center}|?{'</center>'})]
+</B_not>

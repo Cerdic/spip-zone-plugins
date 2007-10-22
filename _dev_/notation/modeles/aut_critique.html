@@ -1,0 +1,32 @@
+[(#REM)
+ Plugin Notation v.0.1
+ par JEM (jean-marc.viglino@ign.fr)
+
+ Copyright (c) 2007
+ Logiciel libre distribue sous licence GNU/GPL.
+
+ Afficher la critique d'un auteur
+L'auteur doit faire sa critique dans le forum de l'article avant (ou après) avoir voté.
+C'est le premier fil du forum qui est retourne.
+
+exemple : afficher la critique de l'auteur 33 pour l'article 10
+<aut33|critique|id_article=10|left>
+]
+
+<B_critique>
+<BOUCLE_critique(FORUMS){id_article=#ENV{id_article,0}}{id_auteur=#ENV{id,-1}}{titre=="notation\]"}{par date}{inverse}{0,1}>
+  <BOUCLE_not(NOTATIONS){id_article=#ENV{id_article,0}}{id_auteur=#ENV{id,-1}}{0,1}>
+[(#ENV{align}|=={center}|?{'<center>'})]
+<table class="critique" style="[float:(#ENV{align}|match{left|right});]"><tr><td>
+	<div class="grosse_note">#NOTE</div>
+	[<h2 class="titre-note"><a href="#URL_FORUM">(#TITRE|notation_critique)</a></h2>]
+	<small>
+  [(#NOTATION_ETOILE{#NOTE})]<br/>
+  [(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]
+  </small>
+	[<div class="texte-note">(#TEXTE|notation_critique)</div>]
+</td></tr></table>
+[(#ENV{align}|=={center}|?{'</center>'})]
+  </BOUCLE_not>
+</BOUCLE_critique>
+</B_critique>

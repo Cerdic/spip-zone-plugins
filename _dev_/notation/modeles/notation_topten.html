@@ -1,0 +1,38 @@
+[(#REM)
+ Plugin Notation v.0.1
+ par JEM (jean-marc.viglino@ign.fr)
+
+ Copyright (c) 2007
+ Logiciel libre distribue sous licence GNU/GPL.
+
+ Afficher le top ten
+
+exemple : 
+<notation|topten|titre=TOPTen|max=10|left>
+]
+
+<B_not>
+[(#ENV{align}|=={center}|?{'<center>'})]
+<span class="notation" style="[float:(#ENV{align}|match{left|right});]">
+<table class=topten cellpadding=0 cellspacing=0>
+	<thead><tr><td colspan=4>#ENV{titre,Le TopTen}</td>
+	</tr>
+	</thead>
+<BOUCLE_not(NOTATIONS_ARTICLES){par note_ponderee}{inverse}{0,#ENV{max,10}}>
+  <tr class=ligne_[(#COMPTEUR_BOUCLE|alterner{impaire,paire})]>
+  <td>#COMPTEUR_BOUCLE</td>
+  <BOUCLE_art(ARTICLES){id_article}>
+	<td>
+	<a class=spip href='#URL_ARTICLE'>#TITRE</a>
+	</td><td>
+    [(#NOTATION_ETOILE{#NOTE_PONDEREE})]
+    </td><td>
+   <small>(#NOTE_PONDEREE - #NB [(#NB|>{1}|?{'votes','vote'})])</small>
+	</td>
+  </BOUCLE_art>
+  </tr>
+</BOUCLE_not>
+</table>
+</span>
+[(#ENV{align}|=={center}|?{'</center>'})]
+</B_not>

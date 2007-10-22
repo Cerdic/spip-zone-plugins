@@ -1,0 +1,22 @@
+[(#REM)
+ Plugin Notation v.0.1
+ par JEM (jean-marc.viglino@ign.fr)
+
+ Copyright (c) 2007
+ Logiciel libre distribue sous licence GNU/GPL.
+
+ Afficher la note d'un auteur
+
+exemple : afficher la note de l'auteur 33 pour l'article 10
+<aut33|notation|id_article=10|left>
+]
+
+<B_not>
+[(#ENV{align}|=={center}|?{'<center>'})]
+<span class="notation" style="[float:(#ENV{align}|match{left|right});]">
+<BOUCLE_not(NOTATIONS){id_article=#ENV{id_article,0}}{id_auteur=#ENV{id,-1}}{0,1}>
+  [(#NOTATION_ETOILE{#NOTE})]
+</BOUCLE_not>
+</span>
+[(#ENV{align}|=={center}|?{'</center>'})]
+</B_not>

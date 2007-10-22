@@ -1,0 +1,141 @@
+<?php
+/**
+* Plugin Notation v.0.3
+* par JEM (jean-marc.viglino@ign.fr)
+* 
+* Copyright (c) 2007
+* Logiciel libre distribue sous licence GNU/GPL.
+*  
+* Formulaire de notation : definit par la balise #NOTATION
+*  
+**/
+
+include_spip('inc/notation_util');
+include_spip('balise/notation_balises');
+
+// Recuperer les valeurs
+global $auteur_session;
+global $dejala;
+$article	= intval(#ENV{id_article,0});
+$auteur		= $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+$ip			= $_SERVER['REMOTE_ADDR'];
+$note		= intval($_POST['note']);
+$robot		= $_POST['content'];		// Champ vide (contre les robots)
+$id_donnees	= $_POST['id_donnees'];
+$acces = notation_get_acces();
+
+// Afficher les erreurs dans le squelettes
+if (!$article) echo "<b style='color:red; background-color:yellow;'><:notation:err_balise:></b>";
+else {
+// s'assurer que l'article existe bien
+$query = "SELECT id_article FROM spip_articles WHERE id_article="._q($article);
+$res = spip_query($query);
+if (spip_num_rows($res) != 0) 
+{	// Un seul formulaire par page !
+	$dejala=true;
+
+	// Est-on autorise a voter
+  $isauteur = ($statut=="0minirezo" || $statut=="1comite");
+  if ($acces=='all') $canvote= true;
+  else
+  {  $statut = $auteur_session['statut'];
+     if (  ($acces=='ide' && $statut!='')
+        || ($acces=='aut' && isauteur)
+        || ($acces=='adm' && $statut=="0minirezo"))
+        $canvote= true;
+  }
+
+	// On est en train de voter
+	if ($canvote && $id_donnees==$article && $robot=='')
+	{	// Note correcte ?
+		if($note<1 || $note>notation_get_nb_notes())
+		{    echo "<b style='color:red; background-color:yellow;'>La note doit &ecirc;tre comprise entre 1 et ".notation_get_nb_notes()." !</b><br/>";
+		}
+		else
+		{	include_spip('base/abstract_sql');
+			include_spip('ecrire/inc_connect');
+	    // Si pas inscrit : recuperer la note de l'article sur l'IP
+	    if ($auteur == 0) $query = "SELECT id_notation,id_auteur,note FROM spip_notations WHERE id_article="._q($article)." AND ip="._q($ip);
+	    // Sinon rechercher la note de l'auteur
+	    else $query = "SELECT id_notation,id_auteur,note FROM spip_notations WHERE id_article="._q($article)." AND id_auteur="._q($auteur);
+	    $res = spip_query($query);
+	    // Premier vote
+	    if (spip_num_rows($res) == 0)
+      {  // Remplir la table de notation
+			   $sql="INSERT INTO spip_notations(id_article, id_auteur, ip, note) VALUES ('$article', '$auteur', '$ip', '$note')";
+			   $req = spip_query($sql); // or die('Erreur SQL !<br/>'.$sql.'<br/>'.mysql_error());
+         $duchangement = true;
+      }
+      // On a deja vote pour cet article -> modifier
+      else
+      {  // Modifier la note
+         $row =spip_fetch_array($res);
+          // Seulement si elle a changee ou que l'auteur a change
+         if ($row['note'] != $note || ($row['id_auteur'] != $auteur))
+         {  // Un auteur non reference ne remplace pas la note d'un auteur reference
+            if ($row['id_auteur'] == 0 || $auteur != 0)
+            {  $sql = "UPDATE spip_notations SET note='$note',id_auteur='$auteur' WHERE id_notation="._q($row['id_notation']);
+               spip_query($sql);
+               $duchangement = true;
+            }
+         }
+      }
+//			echo "Merci de votre participation !<br>";
+			// Calculer la nouvelle note de l'article
+			if ($duchangement)
+			{  $query = "SELECT id_article,note FROM spip_notations WHERE id_article="._q($article);
+			   $res = spip_query($query);
+			   $lanote = 0;
+			   $total = 0;
+			   while ($row =spip_fetch_array($res))
+			   {   $lanote += $row['note'];
+				     $total++;
+         }
+			   $lanote = $lanote/$total;
+			   $lanote = intval($lanote*100)/100;
+			   $note = round($lanote);
+         $note_ponderee = notation_ponderee ($lanote, $total);
+         //			echo "Nouvelle NOTE : ".$lanote."<br>";
+			   // Remplir la table de notation des articles
+			   $sql="INSERT INTO spip_notations_articles(id_article, note, note_ponderee, nb) VALUES ('$article', '$lanote', '$note_ponderee', '$total')";
+			   $req = spip_query($sql);
+			   // Mettre ajour dans les autres cas
+			   $sql="UPDATE spip_notations_articles SET note='$lanote',note_ponderee='$note_ponderee',nb='$total' WHERE id_article="._q($article);
+			   $req = spip_query($sql);
+			}
+			//$deja_vote = true;
+		}
+	}
+
+	{	//----- Calculer la valeur de la note
+		$query = "SELECT id_article,note_ponderee,nb FROM spip_notations_articles WHERE id_article="._q($article);
+		$res = spip_query($query);
+		$lanote=0;
+		$total=0;
+		if ($row =spip_fetch_array($res))
+		{ $lanote = $row['note_ponderee'];
+			$total = $row['nb'];
+		}
+		$note = round($lanote);
+	}
+
+	// Afficher les etoiles
+	echo "<div class='formulaire_notation'>";
+  if ($canvote) echo notation_etoile_click($lanote,$article);
+  else echo notation_etoile($lanote,$article);
+  if ($total > 1) echo "<small>(".$lanote." - ".$total." "._T('notation:votes').")</small>";
+  else echo "<small>(".$lanote." - ".$total." "._T('notation:vote').")</small>";
+
+	// Afficher le formulaire
+	if ($canvote) {
+		echo ("<form action='#SELF' method='post' name='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'>");
+		echo ("<input type='hidden' name='id_donnees' value='".$article."' />");
+		echo ("<input type='hidden' name='note' />"); // value=".$note." />");
+		echo ("<p style='display:none;'><label>Content :</label><input type='text' name='content' id='content' value='' size='10' /></p>");
+		echo ("<input type='submit' name='Submit' id='id_notation-".$article."' value='"._T('notation:bouton_voter')."' style='display:none;' />");
+		echo ("</form>");
+	}
+	echo ("</div>");
+}
+}
+?>
