@@ -10,7 +10,17 @@ include_spip('inc/rubriques');
 
 // inclure le fichier de redéfinitions des BOUCLES
 include_spip('inc/accesgroupes_boucles');
+include_spip('inc/accesgroupes_lib');
 
+// le filtre qui permet d'ajouter une img aux #TITRE des rubriques/articles/breves à accès restreint
+function accesgroupes_visualise($texte, $id_rub = 0, $image = 'dist/images/cadenas-24.gif') {
+	//echo '_DIR_SQUELETTE = '._DIR_SQUELETTE;		 
+	if (accesgroupes_verif_acces($id_rub, 'public') == 1 OR accesgroupes_verif_acces($id_rub, 'public') == 2) {
+		return "<img src=\"".$image."\" alt=\""._T('accesgroupes:bloque_rubrique')."\" style=\"border: none; vertical-align: baseline;\"> ".$texte;
+	} else {
+		return $texte;
+	}
+}
 
 // fct pour construire et renvoyer le tableau des rubriques à accès restreint dans la partie PUBLIQUE
 // 		 boucler dans l'arborescence des rubriques en commençant par la racine (secteurs en 1ers)
