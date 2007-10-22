@@ -1,0 +1,35 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	GetId3
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	BoOz, booz@rezo.net	
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Lire et ecrire les tag sur les documents audio
+	http://getid3.sourceforge.net/
+	getID3() is a PHP script that extracts useful information (such as ID3 tags, bitrate, playtime, etc.) from MP3s & other multimedia file formats (Ogg, WMA, WMV, ASF, WAV, AVI, AAC, VQF, FLAC, MusePack, Real, QuickTime, Monkey's Audio, MIDI and more).
+	</description>
+	<options>
+	getid3_options.php
+	</options>
+	<fonctions>
+	getid3_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	getid3
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>

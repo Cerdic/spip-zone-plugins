@@ -1,0 +1,9 @@
+<BOUCLE1(DOCUMENTS){extension==mp3}{!par date}{0,1}>
+<pre>
+<?php
+include_spip('getid3_fonctions');
+$id3 = recuperer_id3_doc(#ID_DOCUMENT);
+var_dump($id3);
+?>
+</pre>
+</BOUCLE1>
