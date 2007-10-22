@@ -276,20 +276,17 @@ verif_plugin();
 
 	debut_gauche();
 	debut_boite_info();
-	echo propre(_T('cout:help', array(
-		'reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'),
-		'hide' => generer_url_ecrire(_request('exec'),'cmd=showall'))));
+	echo propre(_T('cout:help0', array(
+		'reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'))));
 	fin_boite_info();
 	$aide_racc = cs_aide_raccourcis();
 	if(strlen($aide_racc)) {
-//		echo '<br />';
 		debut_boite_info();
 		echo $aide_racc;
 		fin_boite_info();
 	}
 	$aide_pipes = cs_aide_pipelines();
 	if(strlen($aide_pipes)) {
-//		echo '<br />';
 		debut_boite_info();
 		echo $aide_pipes;
 		fin_boite_info();
@@ -341,12 +338,6 @@ echo '<p style="color:red;">Testez la nouvelle interface du plugin : <a href="',
 	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
 		. "<input type='submit' name='Valider2' value='"._T('bouton_valider')."' class='fondo' /></div>";
 	echo $valider;
-
-# ce bouton est trop laid :-)
-# a refaire en javascript, qui ne fasse que "decocher" les cases
-#	echo "<div style='text-align:$spip_lang_left'>";
-#	echo "<input type='submit' name='desactive_tous' value='"._T('bouton_desactive_tout')."' class='fondl' />";
-#	echo "</div>";
 
 	fin_cadre_trait_couleur();
 //	fin_cadre_relief();

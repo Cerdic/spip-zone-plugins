@@ -27,13 +27,19 @@ $temp['note'] = "<sup>(*)</sup>";
 // traductions habituelles
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Le Couteau Suisse',
+	'help0' => "{{Cette page est uniquement accessible aux responsables du site.}}"
+		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
+		."<p>Lien de documentation :<br/>- [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>"
+		."<p>R&eacute;initialisation :
+_ - [De tout le plugin->@reset@]
+</p>",
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
-		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Le&nbsp;Couteau&nbsp;Suisse'.</p>"
+		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
 		."<p>Version : v@version@</p>"
-		."<p>Lien de documentation : [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>"
+		."<p>Liens de documentation :<br/>- [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p>"
 		."<p>R&eacute;initialisations :
-_ - [des outils cach&eacute;s->@hide@]
-_ - [de tout le plugin->@reset@]
+_ - [Des outils cach&eacute;s->@hide@]
+_ - [De tout le plugin->@reset@]
 </p>",
 
 	'raccourcis' => "Raccourcis typographiques actifs du Couteau Suisse&nbsp;:",

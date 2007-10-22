@@ -105,10 +105,13 @@ cs_log("[#$rand] ".($forcer?"\$forcer = true":"cs_initialisation($forcer) : Sort
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
 cs_log("[#$rand]  -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 
-	// initialiser chaque outil
-	$id = 0;
-	foreach($outils as $outil)
-		cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
+	// initialiser chaque outil et construire la liste des contribs
+	$contribs = array();
+	foreach($outils as $outil) {
+		cs_initialisation_d_un_outil($id = $outil['id'], $description_outil, false);
+		if(isset($outil['contrib']) && isset($metas_outils[$id]['actif']))
+			$contribs[] = '<br/> - [@@cout:'.$outil['id'].':nom@@->http://www.spip-contrib.net/?article'.$outil['contrib'].']';
+	}
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
 cs_log("[#$rand]  -- cs_initialise_includes()... cout_fonctions.php sera probablement inclus.");
@@ -126,6 +129,8 @@ cs_log("[#$rand]  -- ecriture metas");
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// en metas : code inline pour les pipelines, mes_options et mes_fonctions;
 	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
+	// en metas : les liens sur spip-contrib
+	ecrire_meta('tweaks_contribs', serialize($contribs));
 	if(!defined('_SPIP19300')) ecrire_metas();
 cs_log("[#$rand] cs_initialisation($forcer) : Sortie");
 }

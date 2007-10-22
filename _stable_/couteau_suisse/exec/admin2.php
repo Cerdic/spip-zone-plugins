@@ -168,6 +168,16 @@ jQuery(function(){
 		// annulation du clic
 		return false;
 	})
+	.dblclick(function(){
+		id = '#'+this.nextSibling.id;
+		a = jQuery(id+' a.outil_on').length;
+		b = jQuery(id+' a.cs_href').length;
+		if(a==b) jQuery(id+' a.outil_on').removeClass('outil_on');
+		else jQuery(id+' a.cs_href').addClass('outil_on');
+		set_selected();
+		set_categ(this.nextSibling.id);
+		return false;
+	});
 
 	// clic sur un outil
 	jQuery('a.cs_href').click( function() {
@@ -345,12 +355,18 @@ verif_plugin();
 
 	debut_gauche();
 	debut_boite_info();
+	// pour la  version du plugin
 	include_spip('inc/plugin');
 	$cs_infos = plugin_get_infos('couteau_suisse');
+	// pour la liste des docs sur spip-contrib
+	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
+	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace('/@@(.*?)@@/e', "couper(_T('\\1'), 25)", $v);
+	sort($contribs);
 	echo propre(_T('cout:help', array(
 		'reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'),
 		'hide' => generer_url_ecrire(_request('exec'),'cmd=showall'),
-		'version' => $cs_infos['version']
+		'version' => $cs_infos['version'],
+		'contribs' => join('', $contribs)
 	)));
 	fin_boite_info();
 	$aide_racc = cs_aide_raccourcis();

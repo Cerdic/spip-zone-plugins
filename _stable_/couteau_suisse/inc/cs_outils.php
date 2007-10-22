@@ -99,7 +99,7 @@ function liste_outils() {
 			sort(${$temp});
 			$titre = " <span class='light cs_hidden'>(".count(${$temp}).")</span>";
 			preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
-			$titre = "<div class='titrem categorie'>$reg[2]$titre</div>\n";
+			$titre = "<div class='titrem categorie'>$reg[2]$titre</div>";
 			$href = generer_url_ecrire(_request('exec'),"cmd=descrip&outil=");
 			foreach(${$temp} as $j=>$v) {
 				${$temp}[$j] = preg_replace(',^(.*)\|(.*)\|(.*)$,', '<a class="cs_href" id="href_$3" name="$3" href="'.$href.'$3">$1</a>', $v);
