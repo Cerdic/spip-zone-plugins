@@ -17,13 +17,11 @@
 	function exec_association() {
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		include_spip ('inc/acces_page');
-		
-		association_verifier_base();		
-		
-		debut_page(_T('asso:association'), "naviguer", "association");
+		include_spip ('inc/acces_page');	
 		
 		$url_edit_adherent = generer_url_ecrire('edit_adherent');
+		
+		debut_page(_T('asso:association'), "naviguer", "association");
 		
 		association_onglets();
 		
