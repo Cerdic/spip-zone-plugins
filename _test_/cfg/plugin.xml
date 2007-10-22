@@ -6,7 +6,7 @@
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
-	1.0.11
+	1.0.12
 	</version>
 	<etat>
 	stable
@@ -15,8 +15,6 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
 
 Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
-
-Utilisation de [jquery.tabs de Klaus Hartl->http://www.stilbuero.de/2006/05/13/accessible-unobtrusive-javascript-tabs-with-jquery/]
 <!--
 
 (infos developpeurs, cf. documentation)

@@ -25,22 +25,8 @@ function cfg_ajouter_onglets($flux) {
 function cfg_header_prive($texte) {
 	global $auteur_session, $spip_display, $spip_lang;
 	if (_request('exec') == 'cfg'){
-		if ($GLOBALS["spip_version"] >= 1.93) {
-			$couleurs = charger_fonction('couleurs', 'inc');
-			$paramcss = 'ltr='. $GLOBALS['spip_lang_left'] . '&'. $couleurs($auteur_session['prefs']['couleur']);
-			$css = generer_url_public('jquery.tabs_prive', $paramcss);
-		}
-		else {
-			$css = generer_url_public('jquery.tabs_prive');
-		}
-		$js = find_in_path('javascript/jquery.tabs.pack.js');
-		$texte.= "<link rel='stylesheet' type='text/css' href='" . _DIR_PLUGIN_CFG . "css/cfg.css' />
-			<link rel='stylesheet' type='text/css' href='$css' />
-			<!--[if lte IE 7]>
-			<link rel='stylesheet' href='" . _DIR_PLUGIN_CFG . "css/jquery.tabs-ie.css' type='text/css' media='projection, screen'>
-			<![endif]-->
-			<script type='text/javascript' src='$js'></script>
-			<script type='text/javascript'>
+		$texte.= "<link rel='stylesheet' type='text/css' href='" . _DIR_PLUGIN_CFG . "css/cfg.css' />"
+			. "<script type='text/javascript'>
 			$(document).ready(function(){
 				jQuery('.cfg_arbo ul').hide();
 				jQuery('.cfg_arbo h5')
