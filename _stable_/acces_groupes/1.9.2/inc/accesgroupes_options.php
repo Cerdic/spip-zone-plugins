@@ -1,14 +1,13 @@
 <?php
 // MES_OPTIONS pour ACCESGROUPE : toutes les fonctions utilisées pour le controle d'accès espaces public / privé
 
-include_spip('base/accesgroupes_tables');
-function debug_var($var){
+/*function debug_var($var){
 // fonction pour débuggage / affichage variable
 $r = "<pre>";
 $r .= print_r($var);
 $r .= "<pre>";
 return $r;
-}
+}*/
 
 // SURCHARGE des fonctions de l'espace privé
 //   inclure les fichiers originaux de /ecrire/exec pour que toutes les fonctions natives du core soient disponibles
@@ -21,6 +20,7 @@ if (!_DIR_RESTREINT){
 	$exec = _request('exec'); // si on est dans l'espace privé : intégrer le fichier concerné par la surcharge
 	// appel de la gestion de l'espace privé...
 
+	include_spip('base/accesgroupes_tables');
 	include_spip('inc/accesgroupes_prive');
 	include_spip('inc/accesgroupes_lib');
 
@@ -61,6 +61,7 @@ else {
 			//print_r($Trub_restreintes);
 			return $Trub_restreintes;
 		}
+		include_spip('base/accesgroupes_tables');
 		include_spip('inc/accesgroupes_lib');
 		//echo '<br>début cache';
 		$combins = accesgroupes_combin();
