@@ -143,16 +143,18 @@ function erreur_squelette($message='', $lieu='') {
 
 	if (is_array($message)) list($message, $lieu) = $message;
 
-	spip_log("Erreur squelette: $message | $lieu ("
+	spip_log("Erreur squelette (skel editor): $message | $lieu ("
 		. $GLOBALS['fond'].".html)");
 	$GLOBALS['bouton_admin_debug'] = true;
 	$tableau_des_erreurs[] = array($message, $lieu);
 	// Eviter les boucles infernales
-	if (++$runs > 4) {
+	//if (++$runs > 4) {
+	    // des la 1ere erreur, on arrete le parsing des boucles et on passe en mode debug
 	    echo _T('skeleditor:erreur_parsing');
-      echo "<p><a href=\"?exec=skeleditor&amp;f=".urlencode(_request(f))."&amp;debug=true\">"._T('skeleditor:editer_skel_debug')."</a></p>";	       
-			exit;
-	}
+	    echo "<code style='display:block;color:#f00;padding:10px;background:#fff;border:1px solid #999'>$lieu</code>\n";
+      echo "<p><a href=\"?exec=skeleditor&amp;f=".urlencode(_request(f))."&amp;debug=true\">"._T('skeleditor:editer_skel_debug')."</a></p>";      	       
+			exit;  
+	//}
 }
 
 
