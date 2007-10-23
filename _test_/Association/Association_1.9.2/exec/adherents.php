@@ -21,7 +21,8 @@
 		
 		$url_adherents = generer_url_ecrire('adherents');
 		$url_ajout_cotisation = generer_url_ecrire('ajout_cotisation');
-		$url_edit_adherent = generer_url_ecrire('editer_adherent','act=val');
+		$url_editer_adherent = generer_url_ecrire('editer_adherent','act=val');
+		$url_edit_adherent = generer_url_ecrire('edit_adherent');
 		$url_voir_adherent = generer_url_ecrire('voir_adherent');
 		$url_action_adherents = generer_url_ecrire('action_adherents');
 		$url_edit_relances=generer_url_ecrire('edit_relances');
@@ -53,7 +54,7 @@
 		$nombre_membres=spip_num_rows($query);		
 		
 		debut_boite_info();
-		association_date_du_jour();	
+		echo association_date_du_jour();	
 		echo '<p>'._T('asso:adherent_liste_legende').'</p>'; 
 		echo '<p>';
 		echo '<font color="blue"><strong>'._T('asso:adherent_liste_nombre_adherents',array('total' => $nombre_membres)).'</strong></font>';
@@ -114,7 +115,7 @@
 		echo '<form method="post" action="'.$url_adherent.'">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne'),tous) as $statut) {
+		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $statut) {
 			echo '<option value="'.$statut.'"';
 			if ($filtre==$statut) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
@@ -139,7 +140,7 @@
 		echo '<td><strong>'._T('asso:adherent_libelle_prenom').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_categorie').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_libelle_validite').'</strong></td>';
-		echo '<td colspan="3" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
+		echo '<td colspan="4" style="text-align:center;"><strong>'._T('asso:adherent_entete_action').'</strong></td>';
 		echo '<td><strong>'._T('asso:adherent_entete_supprimer_abrev').'</strong></td>';
 		echo '</tr>';
 		
@@ -152,7 +153,7 @@
 		while ($data = spip_fetch_array($query)) {	
 			$id_adherent=$data['id_adherent'];
 			
-			switch($data['statut_relance'])	{
+			switch($data['statut_interne'])	{
 				case "echu": $class= "impair"; break;
 				case "ok": $class="valide";	break;
 				case "relance": $class="pair"; break;
@@ -179,7 +180,9 @@
 			}
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["prenom"].'</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.$data["categorie"].'</td>';
-			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>'.association_datefr($data['validite']).'</td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
+			if ($data['validite']==""){echo '&nbsp;';}else{echo association_datefr($data['validite']);}
+			echo '</td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'>';
 			switch($data['statut'])	{
 				case "0minirezo":
@@ -193,8 +196,9 @@
 				default :
 					$logo="adher-12.gif"; break;
 			}
-			echo '<a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
+			echo '<a href="'.$url_editer_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/'.$logo.'" title="'._T('asso:adherent_label_modifier_visiteur').'"></a></td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_ajout_cotisation.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/cotis-12.gif" title="'._T('asso:adherent_label_ajouter_cotisation').'"></a></td>';
+			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_edit_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_label_modifier_membre').'"></a></td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><a href="'.$url_voir_adherent.'&id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/voir-12.gif" title="'._T('asso:adherent_label_voir_membre').'"></a></td>';
 			echo '<td style="border-top: 1px solid #CCCCCC;" class ='.$class.'><input name="delete[]" type="checkbox" value='.$data['id_auteur'].'></td>';
 			echo '</tr>';

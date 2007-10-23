@@ -22,6 +22,17 @@
 		$url_edit_activite = generer_url_ecrire('edit_activite');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
+		$id_auteur= $_GET['id'];
+		$indexation = lire_config('association/indexation');
+		$query = spip_query( "SELECT * FROM spip_asso_adherents INNER JOIN spip_auteurs_elargis ON spip_asso_adherents.id_auteur=spip_auteurs_elargis.id_auteur WHERE spip_asso_adherents.id_auteur='$id_auteur' ");
+			while ($data = spip_fetch_array($query)) { 
+			$id_adherent=$data['id_adherent'];
+			$id_asso=$data['id_asso'];
+			$nom_famille=$data['nom_famille'];
+			$prenom=$data['prenom'];
+			$validite=$data['validite'];
+		}
+		
 		debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		
 		association_onglets();
@@ -29,7 +40,12 @@
 		debut_gauche();
 		
 		debut_boite_info();
-		print association_date_du_jour();	
+		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'._T('asso:adherent_libelle_numero').'<br />';
+		echo '<span class="spip_xx-large">';
+		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_adherent;}
+		echo '</span></div>';
+		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom_famille.' '.$prenom.'</div>';
+		echo '<br /><div>'.association_date_du_jour().'</div>';	
 		fin_boite_info();
 		
 		debut_raccourcis();
@@ -40,14 +56,6 @@
 		
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_historique_membre'));
 		
-		$id_auteur= $_GET['id'];
-		$indexation = lire_config('association/indexation');
-		$query = spip_query( "SELECT * FROM spip_asso_adherents WHERE id_auteur='$id_auteur' ");
-			while ($data = spip_fetch_array($query)) { 
-			$id_adherent=$data['id_adherent'];
-			$id_asso=$data['id_asso'];
-		}
-
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
 		echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
