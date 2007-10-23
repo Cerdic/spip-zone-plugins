@@ -1,11 +1,12 @@
 - Optimisation des requêtes d'affichage: essayer de faire mon de regexp notamment sur rien quand le param n'est pas transmis dans l'URL. (Résolu, et en test)
 - Faire un affichage des scéances moins proche du look EVA mais, plus proche de ce qu'on lirait dans un cahier de texte papier.
+- prendre le look eva 3
 - écrire qu'il faut sauter une ligne pour faire un paragraphe ! (et peut-être communiquer sur les raccourcis typo ?)
 - barre typo (qui résoudrait les problêmes ci-dessus... facile à faire avec spip 1.9) ?
 - pouvoir éditer plusieurs classes en même temps (sans que ce soit un
 regroupement de classes) ? (utile ? même s'il y a la duplication de séance ?)
 - mieux classer les résultats des devoirs et des séances (un ordre
-chronologique plus... chronologique...)
+chronologique plus... chronologique...) (c'est fait ?... en test)
 - le retour de FCKeditor ou assimilé quand j'aurai débuggué (la barre typo étendue de Spip 1.9 serait mieux).
 - pouvoir rééditer les fiches après coup en repassant dans l'interface de Bonbon...
 - faire une mise en forme spéciale impression.
