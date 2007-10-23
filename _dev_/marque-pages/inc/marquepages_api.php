@@ -95,13 +95,13 @@ function marquepages_ajouter($url, $titre, $description, $tags, $id_rubrique){
 			// On s'assure qu'il y a http://
 			$url = preg_replace('|^(http://)?(.*)$|i', 'http://$2', $url);
 			
-			spip_abstract_insert('spip_syndic', "(nom_site, url_site, id_rubrique, descriptif, date, statut, syndication)", "(" . _q($titre) . ", " . _q($url) . ", " . intval($id_rubrique) .", " . _q($description) . ", NOW(), 'publie', 'non')");
+			sql_insert('spip_syndic', "(nom_site, url_site, id_rubrique, descriptif, date, statut, syndication)", "(" . _q($titre) . ", " . _q($url) . ", " . intval($id_rubrique) .", " . _q($description) . ", NOW(), 'publie', 'non')");
 			$id_syndic = spip_insert_id();
 			
 		}
 		
 		// Ensuite on crée le marque-page proprement dit, cad le forum privé
-		$id_forum = spip_abstract_insert('spip_forum', "(id_syndic, titre, texte, date_heure, maj, statut, id_auteur, auteur, email_auteur)", "($id_syndic," . _q($titre) . ", " . _q($description) . ", NOW(), NOW(), 'prive', " . _q($GLOBALS['auteur_session']['id_auteur']) . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ")");
+		$id_forum = sql_insert('spip_forum', "(id_syndic, titre, texte, date_heure, maj, statut, id_auteur, auteur, email_auteur)", "($id_syndic," . _q($titre) . ", " . _q($description) . ", NOW(), NOW(), 'prive', " . _q($GLOBALS['auteur_session']['id_auteur']) . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ")");
 		
 		// Enfin on ajoute les mots-clés
 		include_spip('inc/tag-machine');
