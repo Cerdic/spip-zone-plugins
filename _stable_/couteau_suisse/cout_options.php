@@ -1,21 +1,16 @@
 <?php
 // Ce fichier est charge a chaque hit //
 
-/* COMPATIBILTE SPIP 1.93 */
+/* COMPATIBILTES */
 if (version_compare($GLOBALS['spip_version_code'],'1.93','>=')) @define('_SPIP19300', 1);
-/* COMPATIBILTE SPIP 1.92 */
 if (version_compare($GLOBALS['spip_version_code'],'1.92','>=')) @define('_SPIP19200', 1);
-/* COMPATIBILITE SPIP 1.91 */
-else {
-	@define('_SPIP19100', 1);
-	// Compatibilite des autorisations pour SPIP 1.91
-	if (!function_exists('autoriser')) {
-		function autoriser($a='',$b='') {
-			return $GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
-		}
-	}
-}
+else @define('_SPIP19100', 1);
 
+function cout_autoriser() {
+	return function_exists('autoriser')
+		?autoriser('configurer', 'plugins')
+		:$GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"];
+}
 
 // Pour forcer les logs du plugin, outil actif ou non :
 // define('_LOG_CS_FORCE', 'oui');

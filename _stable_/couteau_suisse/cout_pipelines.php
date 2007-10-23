@@ -46,7 +46,7 @@ cs_log("couteau_suisse_install($action)");
 // ajout d'un onglet sur la page de configuration de SPIP
 function couteau_suisse_ajouter_onglets($flux){
 	// si on est admin...
-	if ($flux['args']=='configuration' && autoriser('configurer'))
+	if ($flux['args']=='configuration' && cout_autoriser())
 		$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), _T('cout:titre'), generer_url_ecrire('admin_couteau_suisse'));
 	return $flux;
 }

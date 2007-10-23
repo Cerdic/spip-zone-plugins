@@ -15,9 +15,6 @@ include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
 
-// compatibilite spip 1.9
-if(defined('_SPIP19100')) { function fin_gauche(){return false;} }
-
 function exec_test_couteau_suisse() {
 cs_log("D&eacute;but : exec_test_couteau_suisse()");
 	global $connect_statut, $connect_toutes_rubriques;

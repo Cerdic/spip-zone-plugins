@@ -16,10 +16,12 @@ if($GLOBALS['cs_options']) {
 				return false;
 			}
 		}
-		function interprete_argument_balise($n,$p) {
-			if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
-				return calculer_liste($p->param[0][$n],	$p->descr, $p->boucles,	$p->id_boucle);	
-			else return NULL;
+		if (!function_exists('interprete_argument_balise')){
+			function interprete_argument_balise($n,$p) {
+				if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
+					return calculer_liste($p->param[0][$n],	$p->descr, $p->boucles,	$p->id_boucle);	
+				else return NULL;
+			}
 		}
 		function f_insert_head($texte) {
 			if (!$GLOBALS['html']) return $texte;

@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_charger_description_outil_dist() {
 cs_log("Début : exec_charger_description_outil_dist() - Préparation du retour par Ajax sur div#cs_infos");
 
-	if (!autoriser('configurer', 'plugins')) {
+	if (!cout_autoriser()) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

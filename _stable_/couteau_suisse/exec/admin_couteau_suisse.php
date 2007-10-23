@@ -14,7 +14,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirn
 define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
-if(defined('_SPIP19100')) { function fin_gauche(){return false;} }
+if(defined('_SPIP19100') & !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
 
 function cs_admin_styles_et_js() {
 	global $couleur_claire, $couleur_foncee;

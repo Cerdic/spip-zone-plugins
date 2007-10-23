@@ -14,9 +14,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirn
 define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
-if(defined('_SPIP19100')) { 
-	function fin_gauche(){return false;}
-}
+if(defined('_SPIP19100') & !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
 
 function cs_admin_styles_et_js() {
 	global $afficher_outil;
@@ -280,7 +278,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	global $spip_lang_right;
 	global $outils, $afficher_outil;
 
-	if (!autoriser('configurer', 'plugins')) {
+	if (!cout_autoriser()) {
 		include_spip('inc/minipres');
 		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
 		exit;
