@@ -43,7 +43,7 @@ nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...
 				<li><a href="#URL_PAGE{cahier-de-texte-affichage,nb=20}"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
 <?php if ($auteur_session) {?>
 				<li><a href="#URL_PAGE{cahier-de-texte-saisie}" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
-				<li><a href="#URL_PAGE{cahier-de-texte-affichage,id_auteur=<?php echo $auteur_session['id_auteur'];?>}" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage}&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
 <?php }//fin du if auteur session ?>
 				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte"><img src="#CHEMIN{images/edit-find-replace.png}" alt="icône" vspace="2" align="middle">Faire une requête précise</a>
 			</ul>
