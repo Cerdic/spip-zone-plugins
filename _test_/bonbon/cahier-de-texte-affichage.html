@@ -39,14 +39,23 @@ nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...
 <div id="NoMenu">
 	<div id="EntetePage">
 			<ul class="boutons">
-				<li><a href="spip.php?page=cahier-de-texte-accueil" title="Retourner à la page d'accueil du cahier de texte"><img src="plugins/bonbon/images/dialog-ok-upside-down.png" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
-				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20"><img src="plugins/bonbon/images/system-search.png" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
-<?php if ($auteur_session) {
-	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>';
-	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>';
-}?>
-				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte"><img src="plugins/bonbon/images/edit-find-replace.png" alt="icône" vspace="2" align="middle">Faire une requête précise</a>
+				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="Retourner à la page d'accueil du cahier de texte"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage,nb=20}"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
+<?php if ($auteur_session) {?>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage,id_auteur=<?php echo $auteur_session['id_auteur'];?>}" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+<?php }//fin du if auteur session ?>
+				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte"><img src="#CHEMIN{images/edit-find-replace.png}" alt="icône" vspace="2" align="middle">Faire une requête précise</a>
 			</ul>
+[(#REM)Vérification de l'authentification]
+<?php if ($auteur_session) {
+//paramètre de session utilisés:
+	$auteur=$auteur_session['nom'];
+	$id_auteur=$auteur_session['id_auteur'];
+	echo "<p class='authentifie'>$auteur (si vous n'êtes pas $auteur, <a href=\"";
+?>#URL_LOGOUT<?php
+	echo "\" title=\"déconnexion immédiate !\">cliquez ici</a>)</p>\n";}?>
+
 			<h1>Cahier de texte (#NOM_SITE_SPIP)</h1>
 			<br class="clear" />
 [(#ENV{seances_seules}|?{' ',''})
@@ -54,56 +63,31 @@ nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...
 [(#ENV{devoirs_seuls}|?{' ',''})
 		<h2>Devoirs à faire</h2>]
 		<p>[Classe de (#ENV{classe}) ][(#ENV{groupe}) ][en (#ENV{matiere}) ]<B_Prof>Professeur&nbsp;: <BOUCLE_Prof(AUTEURS){id_auteur}>#NOM</BOUCLE_Prof></p>
-		<p>[à partir du (#ENV{date_debut}|affdate) ][jusqu'au (#ENV{date_fin}|affdate)]</p>	
+		<p>[à partir du (#ENV{date_debut}|affdate) ][jusqu'au (#ENV{date_fin}|affdate)]</p>
 	</div>
 	<div id="Contenu">
 [
 (#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
-]
-[
+][
 (#REM) en premier on choisi les articles qui sont du bon groupe
-]
-<BOUCLE_Prepa_Groupes(ARTICLES){id_rubrique}{titre_mot==#ENV{groupe,.}}{doublons Prepa_Groupes}>
-</BOUCLE_Prepa_Groupes>
-[
+]<BOUCLE_Prepa_Groupes(ARTICLES){id_rubrique}{titre_mot==#ENV{groupe,.}}{doublons Prepa_Groupes}></BOUCLE_Prepa_Groupes>[
 (#REM) Ensuite on selectionne parmi ceux qui ont le bon groupe (c'est à dire parmis ceux qui ne sont pas en doublon avec la boucle précédente, soit {!doublons Prepa_Groupes}), ceux qui ont la bonne matière
-]
-<BOUCLE_Prepa_Matiere(ARTICLES){id_rubrique}{titre_mot==#ENV{matiere,.}}
-{!doublons Prepa_Groupes}{doublons Prepa_Matiere}>
-</BOUCLE_Prepa_Matiere>
-[
+]<BOUCLE_Prepa_Matiere(ARTICLES){id_rubrique}{titre_mot==#ENV{matiere,.}}
+{!doublons Prepa_Groupes}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
 (#REM) Idem pour les classes
-]
-<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{titre_mot==#ENV{classe,.}}{!doublons Prepa_Matiere}{doublons Prepa_Classes}>
-</BOUCLE_PrepaClasses>
-[
-(#REM) Idem pour les dates
-]
-<BOUCLE_PrepaDates(ARTICLES){id_rubrique}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons Prepa_Classes}{doublons Prepa_Date}>
-</BOUCLE_PrepaDates>
-[
-(#REM)Idem pour les auteurs
-]
-<BOUCLE_Prepa_Auteurs(ARTICLES){id_rubrique}{id_auteur ?}{!doublons Prepa_Date}{doublons requete}>
-</BOUCLE_Prepa_Auteurs>
-
-[
+]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{titre_mot==#ENV{classe,.}}{!doublons Prepa_Matiere}{doublons Prepa_Classes}></BOUCLE_PrepaClasses>[
+(#REM) Idem pour les dates et l'auteur (s'il y a)
+]<BOUCLE_PrepaDates(ARTICLES){id_rubrique}{id_auteur ?}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons Prepa_Classes}{doublons requete}></BOUCLE_PrepaDates>[
 (#REM) {!doublons requete} est donc un critère qui sélectionne tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-]
-
-<?php
+]<?php
 //Si on ne demande pas que les devoirs, on affiche les séances
 if (!($_GET['devoirs_seuls'])) {
-?>
-[
+?>[
 (#REM)On restrient la requête aux descriptions de séances en suivant le même modèle que précédement.
-]
-<BOUCLE_QueSeances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}>
-</BOUCLE_QueSeances>
-[
+]<BOUCLE_QueSeances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}>
+</BOUCLE_QueSeances>[
 (#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-]
-<B_Seances>
+]<B_Seances>
 #ANCRE_PAGINATION
 <BOUCLE_Seances(ARTICLES){id_rubrique}{!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,20}}{!par date}>
 	<BOUCLE_Auteur_Seances(AUTEURS){id_article}{0,1}>
@@ -116,36 +100,40 @@ if (!($_GET['devoirs_seuls'])) {
 		<BOUCLE_Documents_Seances(DOCUMENTS){id_article}{"&nbsp;|"}>
 				<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]</span> <span class="#EDIT{titre}"<?php
 if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) echo " title=\"double cliquez sur ce texte pour modifier le titre du document\"";
-			?>>[(#TITRE|sinon{sans titre})]</span> (#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])
+			?>>[(#TITRE|sinon{#FICHIER|basename})]</span> (#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])
 		</BOUCLE_Documents_Seances>
 			</div>
 		</B_Documents_Seances>
 <?php
-//Si c'est une séance écrite par le prof qui visite il peut dupliquer la séance
+//Si c'est une séance écrite par le prof qui visite il peut faire des tas de trucs à la séance
 if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) {?>
 	<div class="bloc_auteur">
-		<a href="#URL_PAGE{cahier-de-texte-saisie}&id_article=#ID_ARTICLE" title="Copier le contenu de cette séance pour une autre classe/groupe"><img src="plugins/bonbon/images/go-jump.png" alt="icône" vspace="2" align="middle">Dupliquer cette séance</a>
-		&nbsp;|<a href="#URL_PAGE{cahier-de-texte-saisie}&id_article=#ID_ARTICLE&effacer_fiche=a_confirmer" title="Effacer cette fiche: séance et devoirs (c'est définitif !)"><img src="plugins/bonbon/images/dialog-cancel.png" alt="icône" vspace="2" align="middle">Effacer la fiche de cette séance</a>
+		<a href="#URL_PAGE{cahier-de-texte-saisie,id_article=#ID_ARTICLE}" title="Copier le contenu de cette séance pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer cette séance</a>
+		&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-saisie,&id_article=#ID_ARTICLE}|parametre_url{'effacer_fiche','a_confirmer'})]" title="Effacer cette fiche: séance et devoirs (c'est définitif !)"><img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer la fiche de cette séance</a>
 		&nbsp;| <span class="replie">
 				<a class="clic" title="ajouter des documents joints à cette séance">
-					<img src="plugins/bonbon/images/x-office-spreadsheet.png" alt="icône" vspace="2" align="middle">
+					<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">
 				Ajouter des documents à cette séance
 				</a>
 				<span class="bloc_doc">
+					<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
+					Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
+					Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
 					[(#ID_ARTICLE|afficher_documents_colonne)]
 				</span>
 			</span>
 	</div><?php
-}//fin du if auteur?>
-[
+}//fin du if auteur?>[
 (#REM) Si on ne demande que les séances (donc pas les devoirs)
 
-]
+][
+(#REM) On commence par un gros hack pour éviter une Regexp dans la requête SQL: on cherche les numéros d'articles dans le PS de l'article et on les mets dans un tableau
+]#SET{virgule,","}[(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
 		<B_Trouve_Infos_Devoirs_id_article>
 			[(#ENV{seances_seules}|?{'',' '})<hr>
 			<h4 class="devoirs">Devoirs donnés&nbsp;:</h4>
 			<div>]
-		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){titre_mot="Devoirs à faire"}{ps==#ID_ARTICLE}>
+		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_article IN #GET{liste_des_devoirs}}>
 			[(#ENV{seances_seules}|?{'',' '})				<div class="#EDIT{texte} texte">
 					<h5 class="devoirs">Pour le [(#DATE|affdate)]&nbsp;: </h5>
 					#TEXTE]
@@ -157,21 +145,24 @@ if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) {?>
 						</span> 
 						<span class="#EDIT{titre}"]<?php
 if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{seances_seules}|texte_script)]')) echo " title=\"double cliquez sur ce texte pour modifier le titre du document\"";?>[(#ENV{seances_seules}|?{'',' '})>
-							[(#TITRE|sinon{sans titre})]
+							[(#TITRE|sinon{#FICHIER|basename})]
 						</span> ]
 [(#ENV{seances_seules}|?{'',' '})						([(#TAILLE|taille_en_octets)]) ]
 			</BOUCLE_Documents_Devoir>
 [(#ENV{seances_seules}|?{'',' '})					</div>]
 			</B_Documents_Devoir>
 <?php
-//Si c'est une séance écrite par le prof qui visite il peut dupliquer la séance
+//Si c'est une séance écrite par le prof qui visite il peut rajouter des docs au devoir
 if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{seances_seules}|texte_script)]')) {?>
 					<div class="bloc_auteur">
 						<span class="replie">
 							<a class="clic" title="ajouter des documents joints à ce devoir">
-								<img src="plugins/bonbon/images/x-office-spreadsheet.png" alt="icône" vspace="2" align="middle">ajouter des documents à ce devoir pour le [(#DATE|affdate)]
+								<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">ajouter des documents à ce devoir pour le [(#DATE|affdate)]
 							</a>
 							<span class="bloc_doc">
+								<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
+								Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
+								Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
 							[(#ID_ARTICLE|afficher_documents_colonne)]
 							</span>
 						</span>
@@ -196,16 +187,12 @@ if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{
 <?php
 //Si on ne demande que les devoirs, on les affiche comme un tableau (pratique !)
 if (($_GET['devoirs_seuls'])) {
-?>
-[
+?>[
 (#REM)On restrient la requête aux devoirs en suivant le même modèle que précédement.
-]
-<BOUCLE_QueDevoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{!doublons requete}{doublons QueDevoirs}>
-</BOUCLE_QueDevoirs>
-[
+]<BOUCLE_QueDevoirs(ARTICLES){id_rubrique}{titre_mot="Devoirs à faire"}{!doublons requete}{doublons QueDevoirs}>
+</BOUCLE_QueDevoirs>[
 (#REM) {!doublons QueDevoirs} est donc un critère qui sélectionne toutes les Devoirs à faire qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-]
-<B_Devoirs>
+]<B_Devoirs>
 #ANCRE_PAGINATION
 		<table width="100%" border=1 class="spip">
 			<tr>
@@ -218,7 +205,7 @@ if (($_GET['devoirs_seuls'])) {
 				<th>Donné le</th>
 			</tr>
 
-<BOUCLE_Devoirs(ARTICLES){id_rubrique}{!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,100000000000000}}{doublons devoirs}{!par date}>
+<BOUCLE_Devoirs(ARTICLES){id_rubrique}{!doublons QueDevoirs}{par #ENV{tri}}{pagination #ENV{nb,20}}{!par date}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 				<td>[(#DATE|affdate)]</td>
 				[(#ENV{classe}|?{'',<td>})]
@@ -234,7 +221,7 @@ if (($_GET['devoirs_seuls'])) {
 					[(#TEXTE)]
 				<B_Documents_Devoir_seuls> [<i>Docs&nbsp;:</i> 
 				<BOUCLE_Documents_Devoir_seuls(DOCUMENTS){id_article}{"&nbsp;|"}>
-					<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]</span>
+					<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22}|inserer_attribut{'title',[(#TITRE|sinon{#FICHIER|basename})]})]</span>
 				</BOUCLE_Documents_Devoir_seuls>]
 				</B_Documents_Devoir_seuls>
 				</td>

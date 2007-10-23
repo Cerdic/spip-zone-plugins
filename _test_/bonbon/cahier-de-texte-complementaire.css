@@ -49,6 +49,28 @@ table.spip td {
 img {
 	border:0px;
 }
+
+blockquote.spip {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+	font-style: italic;
+	font-weight: normal;
+	color:gray;
+	font-size:12px;
+	margin:0%;
+	padding:1px;
+	border: none;
+
+}
+
+p.avertissement {
+	font-style: italic;
+	font-size:70%;
+	color:red;
+	padding-bottom:5px;
+	
+}
+
 a.clic:hover {
 	cursor: pointer;
 }
