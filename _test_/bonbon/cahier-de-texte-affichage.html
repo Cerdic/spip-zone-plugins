@@ -89,16 +89,18 @@ if (!($_GET['devoirs_seuls'])) {
 ]<B_Seances>
 #ANCRE_PAGINATION
 <BOUCLE_Seances(ARTICLES){id_rubrique}{!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,20}}{!par date}>
+	<BOUCLE_Auteur_Seances(AUTEURS){id_article}{0,1}>
 		<div id="documents">
 			<h3 class="titre">#TITRE</h3>
-			<div class="#EDIT{texte} texte">#TEXTE</div>
-	<BOUCLE_Auteur_Seances(AUTEURS){id_article}{0,1}>
+			<div class="#_Seances:EDIT{texte} texte"<?php
+if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) echo " title=\"double cliquez ici pour modifier le texte de cette séance\"";
+			?>>#TEXTE</div>
 		<B_Documents_Seances>
 			<div>
 				<h4 class="devoirs">Documents joints à la séance</h4>
 		<BOUCLE_Documents_Seances(DOCUMENTS){id_article}{"&nbsp;|"}>
 				<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]</span> <span class="#EDIT{titre}"<?php
-if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) echo " title=\"double cliquez sur ce texte pour modifier le titre du document\"";
+if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) echo " title=\"double cliquez ici pour modifier le titre du document\"";
 			?>>[(#TITRE|sinon{#FICHIER|basename})]</span> (#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])
 		</BOUCLE_Documents_Seances>
 			</div>
@@ -133,7 +135,8 @@ if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) {?>
 			<h4 class="devoirs">Devoirs donnés&nbsp;:</h4>
 			<div>]
 		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_article IN #GET{liste_des_devoirs}}>
-			[(#ENV{seances_seules}|?{'',' '})				<div class="#EDIT{texte} texte">
+			[(#ENV{seances_seules}|?{'',' '})				<div class="#EDIT{texte} texte"]<?php
+if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{seances_seules}|texte_script)]')) echo " title=\"double cliquez sur ce texte pour modifier le texte de ce devoir\"";?>>[(#ENV{seances_seules}|?{'',' '})
 					<h5 class="devoirs">Pour le [(#DATE|affdate)]&nbsp;: </h5>
 					#TEXTE]
 			<B_Documents_Devoir>
@@ -143,7 +146,7 @@ if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) {?>
 							[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]
 						</span> 
 						<span class="#EDIT{titre}"]<?php
-if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{seances_seules}|texte_script)]')) echo " title=\"double cliquez sur ce texte pour modifier le titre du document\"";?>[(#ENV{seances_seules}|?{'',' '})>
+if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{seances_seules}|texte_script)]')) echo " title=\"double cliquez ici pour modifier le titre du document\"";?>[(#ENV{seances_seules}|?{'',' '})>
 							[(#TITRE|sinon{#FICHIER|basename})]
 						</span> ]
 [(#ENV{seances_seules}|?{'',' '})						([(#TAILLE|taille_en_octets)]) ]
