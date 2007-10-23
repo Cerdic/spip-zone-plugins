@@ -1,0 +1,105 @@
+/*  Slideshow
+---------------------------------------------- */
+#CACHE{0,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#slideShow_vignette
+{
+	width: #CONFIG{slideshow/largeur_cadre_vignette,170}px;
+	height: #CONFIG{slideshow/hauteur_cadre_vignette,300}px;
+	border: 1px solid #ccc;
+	background-color: #CONFIG{slideshow/background,#FFF};	
+	margin: 10px;
+	text-align: center;
+	margin-top:30px;	
+}
+
+#slideShow_portfolio
+{
+	width: #CONFIG{slideshow/largeur_cadre_portfolio,500}px;
+	height: #CONFIG{slideshow/hauteur_cadre_portfolio,520}px;
+	border: 1px solid #ccc;
+	background-color: #FFF;	
+	margin: 10px;
+	text-align: center;		
+}
+
+#slideShow_portfolio .pagelinks,#slideShow_vignette .pagelinks 
+{
+	background:#FFF;color: #ccc;font-size:10px;
+}
+
+#slideShow_vignette .pagelinks
+{
+	[(#CONFIG{slideshow/navigation_vignette}|=={on}|?{'display:block;','display:none;'})]
+}
+
+#slideShow_portfolio .pagelinks
+{
+	[(#CONFIG{slideshow/navigation_portfolio}|=={on}|?{'display:block;','display:none;'})]
+}
+
+#slideShow_portfolio .slideCaption,#slideShow_vignette .slideCaption
+{
+	margin-left:0 !important;
+	margin-left:-80px;
+	width:150px;
+	background-color: #FFF;
+	text-align: center;
+	font-weight: bold;
+	padding: 4px;
+	font-size:10px;	
+}
+
+#slideShow_vignette .slideCaption
+{
+	[(#CONFIG{slideshow/descriptif_vignette}|=={on}|?{'display:block;','display:none;'})]
+		
+}
+#slideShow_portfolio .slideCaption
+{
+	[(#CONFIG{slideshow/descriptif_portfolio}|=={on}|?{'display:block;','display:none;'})]	
+}
+.pagelinks a
+{
+	color: #ccc;font-size:10px;
+}
+.pagelinks a.activeSlide,.pagelinks a:hover
+{
+	color: #f90;font-size:12px;font-weight:bold;text-decoration:none;
+}
+/* this is for IE so the prev/next links can be hovered*/
+.nextSlide,.prevSlide
+{
+	background-image: url(plugins/interface-slideshow/images/spacer.gif);
+}
+.nextSlide:hover
+{
+	background-image: url(plugins/interface-slideshow/images/set-pictos/#CONFIG{slideshow/set_pictos,bleu-simple}/nextslide.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+.prevSlide:hover
+{
+	background-image: url(plugins/interface-slideshow/images/set-pictos/#CONFIG{slideshow/set_pictos,bleu-simple}/prevslide.gif);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+}
+.inputsTooltip
+{
+	border: 1px solid #ccc;
+	background-color: #eee;
+	padding: 4px;
+	color: #333;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	filter:alpha(opacity=70);
+	-moz-opacity:.70;
+	opacity:.70;
+}
+#tooltipURL
+{
+	display: none;
+}
+/*-------------------*/

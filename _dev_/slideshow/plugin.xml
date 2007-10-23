@@ -1,0 +1,37 @@
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  Interface Slideshow
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  j4k [pasfacilearetenir.com->http://www.pasfacilearetenir.com], Achille [artisandelatoile.com->http://http://www.artisandelatoile.com/]
+  </auteur>
+  <icon>images/slideshow.png</icon>
+  <version>
+  0.6
+  </version>
+  <etat>
+  dev
+  </etat>
+  <description>
+	  Interface Slideshow - Intégration d'un portfolio dans un article ou dans une colonne de menu. 
+	  <br/><br/>Utilisation du script <a href="http://interface.eyecon.ro/demos/slideshow.html">Interface Slideshow pour JQUERY</a>
+	  <br/><br/>
+  Pour intégrer le portoflio dans une boucle ARTCICLE : <code> <INCLURE{fond=inc-slideshow-portfolio}{id_article}></code>
+	  <br/>Pour intégrer le slideshow dans un squelette : associer le mot clé Slideshow a un article et inclure <code><INCLURE{fond=inc-slideshow}></code>
+	 <br/><br/>
+	 La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant ecrire/?exec=cfg&cfg=slideshow
+	 <br/><br/>
+	 <strong>ATTENTION</strong> : Necessite jQuery et la balise #INSERT_HEAD dans les squelettes
+	<br/><br/>Ce plugin est distribué sous licence GNU/GPL
+  </description>
+	<lien></lien> <!-- URI de documentation -->
+  <fonctions>
+	  slideshow_fonctions.php
+  </fonctions>
+  <prefix>slideshow</prefix>
+  <pipeline>
+	<nom>insert_head</nom>
+	<action>insert_head</action>
+	<inclure>slideshow_fonctions.php</inclure>
+  </pipeline>
+</plugin>

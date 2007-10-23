@@ -1,0 +1,44 @@
+<div id="slideShow1">
+<BOUCLE_rub_slide_1(ARTICLES){id_article}><BOUCLE_documents_slideshow_1(DOCUMENTS){mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard}{0,1} {doublons}><img [src="(#FICHIER||image_reduire{800,500}|extraire_attribut{src})"] alt="[(#NOM_SITE_SPIP|textebrut) - ] [(#TITRE|supprimer_numero|texte_backend)]" title="[(#NOM_SITE_SPIP|textebrut) - ][(#TITRE|supprimer_numero|texte_backend)]" /></BOUCLE_documents_slideshow_1></BOUCLE_rub_slide_1>
+</div>
+<script type="text/javascript">
+$(document).ready(
+	function()
+	{
+		$.slideshow(
+			{
+				container : 'slideShow1',
+				loader: 'plugins/interface-slideshow/ajax-loader.gif',
+				linksPosition: 'top',
+				linksClass: 'pagelinks',
+				linksSeparator : ' | ',
+				fadeDuration : 400,
+				activeLinkClass: 'activeSlide',
+				nextslideClass: 'nextSlide',
+				prevslideClass: 'prevSlide',
+				captionPosition: 'bottom',
+				captionClass: 'slideCaption',
+				autoplay: 5,
+				images : [
+				{<BOUCLE_rub_slide_2(ARTICLES){id_article}><BOUCLE_documents_slideshow1(DOCUMENTS){'},{'}{mode=document}{id_article}{extension==(png|jpg|gif)$} {par hasard}{0,5} {doublons}>
+						src: '[(#FICHIER||image_reduire{800,500}|extraire_attribut{src})]',
+						caption: '[(#NOM_SITE_SPIP|textebrut) - ][(#TITRE)]'
+				</BOUCLE_documents_slideshow1></BOUCLE_rub_slide_2>}				
+				]
+			}
+		)	
+		$('a').ToolTip(
+		{
+			className: 'inputsTooltip',
+			position: 'mouse'
+		}
+	);
+	$('img').ToolTip(
+		{
+			className: 'inputsTooltip',
+			position: 'mouse'
+		}
+	);		
+	}	
+);
+</script>
