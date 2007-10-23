@@ -63,7 +63,7 @@ function balise_SMILEYS_dist($p) {
 	if ($i = $max % $nb_col) $html .= str_repeat('<td>&nbsp;</td>', $nb_col - $i) . '</tr>';
 
 	// accessibilite : alt et title avec le smiley en texte
-	$html = preg_replace('/@@64@@([^@]*)@@65@@/e', "base64_decode('\\1')", $html);
+	$html = echappe_retour($html, 'SMILE');
 	$html = str_replace("'", "\'", $html);
 	$p->code = "'$html\n</table>\n'";
 	$p->interdire_scripts = true;
