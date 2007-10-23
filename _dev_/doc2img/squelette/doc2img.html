@@ -8,7 +8,7 @@
     <form method="post" enctype="multipart/form-data" action="#URL_ACTION_AUTEUR{doc2img_convert,' ',#SELF}">
     
     <select name="id_document"><br/>
-<BOUCLE_doc2img(DOCUMENTS) {id_article=815} {extension IN #CONFIG{doc2img/format_document}|spip_explode{','}}>
+<BOUCLE_doc2img(DOCUMENTS) {id_article} {extension IN #CONFIG{doc2img/format_document}|spip_explode{','}}>
     <option value=#ID_DOCUMENT>#ID_DOCUMENT - [(#TITRE|?{#TITRE,#FICHIER})]</option>
 </BOUCLE_doc2img>
     </select>
