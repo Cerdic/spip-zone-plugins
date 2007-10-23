@@ -1,6 +1,9 @@
 <?php
 if (!defined('_DIR_LIB')) define('_DIR_LIB', 'lib/');
 
+if (version_compare($GLOBALS['spip_version_code'],'1.93','<'))
+	include_spip('inc/compat_jqueryp_1.9.2');
+	
 
 /* liste des plugins de jquery */
 $GLOBALS['jquery_plugins'] = array(
@@ -47,6 +50,7 @@ $GLOBALS['jquery_plugins'] = array(
 		'dir' => 'jquery.ui-1.0',
 		'dir_themes' => 'themes',
 		'url' => 'http://jquery.com/plugins/project/ui',
+		'install_zip' => 'http://jqueryjs.googlecode.com/files/jquery.ui-1.0.zip',
 		'files' => array(
 			'ui.accordion' 		=> 'ui.accordion.js',
 			'ui.calendar' 		=> 'ui.calendar.js',
@@ -78,6 +82,7 @@ $GLOBALS['jquery_plugins'] = array(
 	'yav' => array(
 		'dir' => 'jquery.yav1.1.1',
 		'url' => 'http://jquery.com/plugins/project/jquery_yav',
+		'install_zip' => 'http://jquery.com/plugins/files/jquery.yav1.1.1.zip',
 		'files' => array(
 			'yav' => 'jquery.yav.js'
 		)

@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
  * Balise #JQUERY_PLUGIN{x1, x2...}
  * 
