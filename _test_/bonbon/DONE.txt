@@ -20,6 +20,7 @@ Fonctionnalité majeure: intégrations des «crayons». Quand le plugin «Les crayons
 Fonctionnalité importante: possibilité de supprimer des séances.
 Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!
 Les devoirs sont désormais affichés in-extenso avec les séances (et plus simplement pour quand ils sont à faire).
+Les séances peuvent être affichée dans l'ordre chronologique et chronologique inverse.
 
 
 1.0 Première sortie de Bonbon

@@ -17,7 +17,8 @@ seances_seules= si c'est argument est donné alors les devoirs ne s'affichent pas
 devoirs_seuls= si cet argument est donné, alors seuls les devoirs s'affichent.
 Si les deux arguments sont données (seances_seules et devoirs_seul rien ne s'affiche !)
 annee_scolaire= définit quelle année scolaire (sous le format XXXX%2FYYYY comme par exemple 2006%2F2007). Si ce n'est pas défini, c'est l'année scolaire la plus récente qui s'affiche. Note: %2F est un slash (/) encodé pour aller dans l'url.
-nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...)
+nb=nombre maxi d'entrées listées (par défaut 20 entrées...)
+senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chrono.
 -->
 [
 (#REM) On se place dans le contexte de la rubrique du cahier de texte de l'année
@@ -43,7 +44,7 @@ nb=nombre maxi d'entrées listées (sinon il listes les 100000000000000 entrées...
 				<li><a href="#URL_PAGE{cahier-de-texte-affichage,nb=20}"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
 <?php if ($auteur_session) {?>
 				<li><a href="#URL_PAGE{cahier-de-texte-saisie}" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
-				<li><a href="#URL_PAGE{cahier-de-texte-affichage}&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
 <?php }//fin du if auteur session ?>
 				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte"><img src="#CHEMIN{images/edit-find-replace.png}" alt="icône" vspace="2" align="middle">Faire une requête précise</a>
 			</ul>
@@ -87,8 +88,9 @@ if (!($_GET['devoirs_seuls'])) {
 ]<BOUCLE_QueSeances(ARTICLES){id_rubrique}{titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}></BOUCLE_QueSeances>[
 (#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 ]<B_Seances>
+<div class="apres"><a href="[(#SELF|parametre_url{'senschrono',[(#ENV{senschrono}|?{0,1})]})]" title="inverser l'ordre de classement des séances">inverser l'ordre chronologique</a></div><br clear="all" />
 #ANCRE_PAGINATION
-<BOUCLE_Seances(ARTICLES){id_rubrique}{!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,20}}{!par date}>
+<BOUCLE_Seances(ARTICLES){id_rubrique}{!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,20}}{par date}{inverse #ENV{senschrono}}>
 	<BOUCLE_Auteur_Seances(AUTEURS){id_article}{0,1}>
 		<div id="documents">
 			<h3 class="titre">#TITRE</h3>

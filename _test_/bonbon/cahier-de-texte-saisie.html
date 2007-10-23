@@ -66,12 +66,12 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 <div id="NoMenu">
 	<div id="EntetePage">
 			<ul class="boutons">
-				<li><a href="spip.php?page=cahier-de-texte-accueil" title="Retourner à la page d'accueil du cahier de texte"><img src="plugins/bonbon/images/dialog-ok-upside-down.png" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
-				<li><a href="spip.php?page=cahier-de-texte-affichage&nb=20"><img src="plugins/bonbon/images/system-search.png" alt="icône" vspace="2" align="middle">Afficher les 20 dernières séances</a></li>
-<?php if ($auteur_session) {
-	echo '				<li><a href="spip.php?page=cahier-de-texte-saisie" title="Écrire le contenu d\'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>';
-	echo '				<li><a href="spip.php?page=cahier-de-texte-affichage&id_auteur='.$auteur_session['id_auteur'].'" title="Aller voir ses propres entrées du cahier de texte"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>';
-}?>
+				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="Retourner à la page d'accueil du cahier de texte"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage,nb=20}"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernières séances</a></li>
+<?php if ($auteur_session) {?>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo $auteur_session['id_auteur']; ?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
+<?php }// fin du if auteur session ?>
 			</ul>
 [(#REM)Vérification de l'authentification]
 <?php if ($auteur_session) {
@@ -205,7 +205,7 @@ if ($id_groupe!=0) { $groupe_titre .= " (";?>
 		echo("&id_classe$count=".$id_classe[$count]);
 	};
 	if ($classes>0) echo ("&classes=$classes");
-			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-affichage})]&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-accueil})]" title="retour à l'accueil"><img src="plugins/bonbon/images/logo-mini2-22.png" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
+			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-accueil})]" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
 		</div>
 	</div></div>
 
@@ -434,13 +434,13 @@ if ($contenu_devoir[0]!="") {
 ?>
 			<p>Vous pourrez enregistrer des documents joints à vos séances et à vos devoirs en affichant le contenu de cahier de texte (voir plus bas «afficher ses séances»)</p>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
-			<p><a href="[(#URL_PAGE{cahier-de-texte-saisie})]&id_article=<?php echo ($id_contenu_seance); ?>" title="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe"><img src="plugins/bonbon/images/go-jump.png" alt="icône" vspace="2" align="middle">Dupliquer la séance pour une autre classe/groupe</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-saisie})]<?php
+			<p><a href="#URL_PAGE{cahier-de-texte-saisie}&id_article=<?php echo ($id_contenu_seance); ?>" title="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer la séance pour une autre classe/groupe</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-saisie}<?php
 	echo ("&id_matiere=$id_matiere");
 	for ($count=0; $count<=$classes; $count++) {
 		echo("&id_classe$count=".$id_classe[$count]);
 	};
 	if ($classes>0) echo ("&classes=$classes");
-			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="plugins/bonbon/images/accessories-text-editor.png" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="[(#URL_PAGE{cahier-de-texte-affichage})]&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="plugins/bonbon/images/edit-find.png" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-accueil})]" title="retour à l'accueil"><img src="plugins/bonbon/images/logo-mini2-22.png" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
+			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="#URL_PAGE{cahier-de-texte-accueil}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
 		</div>
 	</div></div>
 
@@ -568,37 +568,20 @@ if($_GET['classe_matiere']) {
 (#REM)Affichage des dernières entrées dans le cahier de texte en fonction du contexte (dans le GET)
 ][
 (#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
-]
-[
+][
 (#REM) en premier on choisi les articles qui sont du bon groupe
-]
-<BOUCLE_Prepa_Groupes(ARTICLES){id_mot==#ENV{id_groupe,.}}{doublons Prepa_Groupes}>
-</BOUCLE_Prepa_Groupes>
-[
+]<BOUCLE_Prepa_Groupes(ARTICLES){id_mot==#ENV{id_groupe,.}}{doublons Prepa_Groupes}></BOUCLE_Prepa_Groupes>[
 (#REM) Ensuite on selectionne parmi ceux qui ont le bon groupe (c'est à dire parmis ceux qui ne sont pas en doublon avec la boucle précédente, soit {!doublons Prepa_Groupes}), ceux qui ont la bonne matière
-]
-<BOUCLE_Prepa_Matiere(ARTICLES){id_mot==#ENV{id_matiere,.}}
-{!doublons Prepa_Groupes}{doublons Prepa_Matiere}>
-</BOUCLE_Prepa_Matiere>
-[
+]<BOUCLE_Prepa_Matiere(ARTICLES){id_mot==#ENV{id_matiere,.}}
+{!doublons Prepa_Groupes}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
 (#REM) Idem pour les classes
-]
-<BOUCLE_PrepaClasses(ARTICLES){id_mot==#ENV{id_classe0,.}}{!doublons Prepa_Matiere}{doublons Prepa_Classes}>
-</BOUCLE_PrepaClasses>
-[
+]<BOUCLE_PrepaClasses(ARTICLES){id_mot==#ENV{id_classe0,.}}{!doublons Prepa_Matiere}{doublons Prepa_Classes}></BOUCLE_PrepaClasses>[
 (#REM)Idem pour les auteurs
-]
-<BOUCLE_Prepa_Auteurs(ARTICLES){id_auteur ?}{!doublons Prepa_Classes}{doublons requete}>
-</BOUCLE_Prepa_Auteurs>
-
-[
+]<BOUCLE_Prepa_Auteurs(ARTICLES){id_auteur ?}{!doublons Prepa_Classes}{doublons requete}></BOUCLE_Prepa_Auteurs>[
 (#REM) {!doublons requete} est donc un critère qui sélectionne tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 ][
 (#REM)On restrient la requête aux descriptions de séances en suivant le même modèle que précédement.
-]
-<BOUCLE_QueSeances(ARTICLES){titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}>
-</BOUCLE_QueSeances>
-[
+]<BOUCLE_QueSeances(ARTICLES){titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}></BOUCLE_QueSeances>[
 (#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 ]
 <B_Seances>
@@ -608,15 +591,8 @@ if($_GET['classe_matiere']) {
 		<div id="documents">
 			<h3 class="titre">#TITRE</h3>
 			<div class="texte">#TEXTE</div>
-<?php
-//Si on ne demande que les séances (donc pas les devoirs)
-	if (!($_GET['seances_seules'])) {
-?>
 			[<hr>
 			<dl class="suivants">(#PS)</dl>]
-<?php
-	} //fin du if !seances_seules
-?>
 		</div>
 </BOUCLE_Seances>
 </div>
