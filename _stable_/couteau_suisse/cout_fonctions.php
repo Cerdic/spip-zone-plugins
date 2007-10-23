@@ -10,6 +10,12 @@ if($GLOBALS['cs_options']) {
 
 	// compatibilite SPIP < 1.92
 	if(defined('_SPIP19100')) {
+		if (!function_exists('stripos')) {
+			function stripos($botte, $aiguille) {
+				if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs)) return strlen($regs[1]);
+				return false;
+			}
+		}
 		function interprete_argument_balise($n,$p) {
 			if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
 				return calculer_liste($p->param[0][$n],	$p->descr, $p->boucles,	$p->id_boucle);	

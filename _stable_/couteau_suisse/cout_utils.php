@@ -34,21 +34,8 @@ if (!defined('_DIR_PLUGIN_COUTEAU_SUISSE')){
 	define('_DIR_PLUGIN_COUTEAU_SUISSE', $p);
 }
 if(defined('_SPIP19100')) {
-	if (!function_exists('stripos')) {
-		function stripos($botte, $aiguille) {
-			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs)) return strlen($regs[1]);
-			return false;
-		}
-	}
 	function compacte_css($texte) { return $texte; }
 	function compacte_js($texte) { return $texte; }
-/*
-	if (!function_exists('ajax_action_greffe')) {
-		function ajax_action_greffe($idom, $corps, $br='<br />')	{
-			return _request('var_ajaxcharset') ? "$br$corps"	: "\n<div id='$idom'>$corps\n</div>\n";
-		}
-	}
-*/
 }
 
 // SPIP 1.93 a change cette fonction. donc, en attendant mieux...
