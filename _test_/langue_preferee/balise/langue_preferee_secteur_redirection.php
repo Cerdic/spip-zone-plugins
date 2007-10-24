@@ -9,6 +9,19 @@
  * © 2007 - Distribue sous licence GNU/GPL
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+// compatibilite spip 1.9.2
+if ($GLOBALS['spip_version_code']<1.93)
+{
+	if (!function_exists('sql_fetch')) { function sql_fetch($req) {
+		return spip_fetch_array($req) ;
+	} }
+	if (!function_exists('sql_query')) { function sql_query($query) {
+		return spip_query($query) ;
+	} }
+} // fin compat
+
 function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION($p)
 {
 	return calculer_balise_dynamique($p, 'LANGUE_PREFEREE_SECTEUR_REDIRECTION', array());
@@ -27,8 +40,8 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
     $langues_secteurs = array();
     include_spip('base/abstract_sql');
     $query = 'SELECT DISTINCT(lang) FROM spip_rubriques WHERE id_parent=0 GROUP BY lang';
-    if ($res = spip_query($query)) {
-        while($row = spip_fetch_array($res)) {
+    if ($res = sql_query($query)) { // was spip_query($query)) {
+        while($row = sql_fetch($res)) { // was spip_fetch_array
         	$langues_secteurs[] = $row['lang'];
         }
     }
@@ -83,8 +96,8 @@ function balise_LANGUE_PREFEREE_SECTEUR_REDIRECTION_dyn($liste_rub_exclues="")
     else {
        $query = 'SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 AND lang='._q($langue_preferee).' LIMIT 0,1';
     }
-    $res = spip_query($query);
-    if ($row = spip_fetch_array($res)) {
+    $res = sql_query($query) ; // was spip_query($query);
+    if ($row = sql_fetch($res)) { // was spip_fetch_array
         $id_rubrique = $row['id_rubrique'];
 	if (!function_exists('generer_url_rubrique')) { include_spip('urls/'.$GLOBALS['type_urls']); }
         $url_rubrique = generer_url_rubrique($id_rubrique);
