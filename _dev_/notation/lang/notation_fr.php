@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cree' => 'Tables cr&eacute;es',
 	'destruction' => 'Destruction des tables',
 	'detruit' => 'Tables d&eacute;truites...',
-	'detruire' => '<strong style="color:red">Attention, cette commande va d&eacute;truire les tables du plugin !</strong><br>Vous ne devez l\'utiliser que si vous voulez d&eacute;activer le plugin...',
+	'detruire' => '<strong style="color:red">Attention, cette commande va d&eacute;truire les tables du plugin !</strong><br />Vous ne devez l\'utiliser que si vous voulez d&eacute;activer le plugin...',
 
 	// Affichage
 	'vos_notes' => 'Vos 5 meilleurs articles',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   // Parametrage
 	'param' => 'Param&eacute;trage',
 	'ponderation' => 'Pond&eacute;ration de la note',
-	'info_ponderation' => 'Le facteur de pond&eacute;ration permet d\'accorder plus de valeur aux articles ayant re&ccedil;u suffisament de votes. <br> Entrez ci-dessous la nombre de votes au del&agrave; duquel vous pensez que la note est fiable.',
+	'info_ponderation' => 'Le facteur de pond&eacute;ration permet d\'accorder plus de valeur aux articles ayant re&ccedil;u suffisament de votes. <br /> Entrez ci-dessous la nombre de votes au del&agrave; duquel vous pensez que la note est fiable.',
 	'valeur_ponderation' => 'Facteur de pond&eacute;ration',
 	'acces' => 'Accessibilit&eacute;',
 	'info_acces' => 'Ouvrir le vote : ',
@@ -54,14 +54,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_ide' => 'aux personnes enregistr&eacute;es ',
 	'item_all' => '&agrave; tous ',
 	'titre_ip' => 'Mode de fonctionnement :',
-	'info_ip' => 'Pour &ecirc;tre le plus facile possible d\'utilisation, la note est fix&eacute;e sur l\'adress IP du votant, ce qui &eacute;vite deux votes successifs dans la base, avec quelques inconv&eacute;nients... en particulier si vous g&eacute;rez des votes d\'auteurs.<br>
-                Dans ce cas, on fixe la note sur l\'identifiant de l\'utilisateur (quand celui-ci est enregistr&eacute;, bien s&ucirc;r).<br>
+	'info_ip' => 'Pour &ecirc;tre le plus facile possible d\'utilisation, la note est fix&eacute;e sur l\'adress IP du votant, ce qui &eacute;vite deux votes successifs dans la base, avec quelques inconv&eacute;nients... en particulier si vous g&eacute;rez des votes d\'auteurs.<br />
+                Dans ce cas, on fixe la note sur l\'identifiant de l\'utilisateur (quand celui-ci est enregistr&eacute;, bien s&ucirc;r).<br />
                 Si vous voulez garantir l\'unicit&eacute; de la note, limitez le vote aux <b>seules</b> personnes enregistr&eacute;es (ci-dessus).',
 	'item_ip' => 'un votepar IP',
 	'item_id' => 'un vote par utilisateur ',
 	'nb_etoiles' => 'Valeure des notes',
-	'info_etoiles' => 'Ce param&egrave;tre vous permet de modifier la valeure maximale de la note (le nombre d\'&eacute;toiles, entre 1 et 10, et 5 par d&eacute;faut).<br>
-                    <strong style="color:red">/!\ Attention</strong> : vous ne devez pas toucher &agrave; ce param&egrave;tre une fois la notation engag&eacute;e car les notes ne seront pas recalul&eacute;es et cela peut provoquer des incoh&eacute;rences dans la notation...<br>
+	'info_etoiles' => 'Ce param&egrave;tre vous permet de modifier la valeure maximale de la note (le nombre d\'&eacute;toiles, entre 1 et 10, et 5 par d&eacute;faut).<br />
+                    <strong style="color:red">/!\ Attention</strong> : vous ne devez pas toucher &agrave; ce param&egrave;tre une fois la notation engag&eacute;e car les notes ne seront pas recalul&eacute;es et cela peut provoquer des incoh&eacute;rences dans la notation...<br />
                     Ce param&egrave;tres doit &ecirc;tre fix&eacute; une fois pour toute &agrave; la c&eacute;ation des notes.',
 	'valeur_nb_etoiles' => 'Notation de 1 &agrave; ',
 

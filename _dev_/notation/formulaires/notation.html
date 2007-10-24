@@ -80,7 +80,7 @@ if (spip_num_rows($res) != 0)
             }
          }
       }
-//			echo "Merci de votre participation !<br>";
+//			echo "Merci de votre participation !<br />";
 			// Calculer la nouvelle note de l'article
 			if ($duchangement)
 			{  $query = "SELECT id_article,note FROM spip_notations WHERE id_article="._q($article);
@@ -95,7 +95,7 @@ if (spip_num_rows($res) != 0)
 			   $lanote = intval($lanote*100)/100;
 			   $note = round($lanote);
          $note_ponderee = notation_ponderee ($lanote, $total);
-         //			echo "Nouvelle NOTE : ".$lanote."<br>";
+         //			echo "Nouvelle NOTE : ".$lanote."<br />";
 			   // Remplir la table de notation des articles
 			   $sql="INSERT INTO spip_notations_articles(id_article, note, note_ponderee, nb) VALUES ('$article', '$lanote', '$note_ponderee', '$total')";
 			   $req = spip_query($sql);

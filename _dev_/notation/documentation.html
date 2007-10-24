@@ -11,9 +11,9 @@
 	<body>
 		<div style='background-color:white; color:#444; padding:10px; border:1px solid;'>
 			<div style="text-align:center"><h3>
-					*********************************<br>
-					*** Notation des articles SPIP **<br>
-					*********************************<br>
+					*********************************<br />
+					*** Notation des articles SPIP **<br />
+					*********************************<br />
 				</h3>
 				<p>
 					<i>Ce plugin install&eacute; correctement dans votre r&eacute;pertoire /plugins/ 
@@ -47,11 +47,11 @@
 			<h3>INTEGRATION :</h3>
 			<p>
 				La notation s'int&egrave;gre dans la partie publique &agrave; l'aide de la 
-				balise <b>#NOTATION</b>.<br>
+				balise <b>#NOTATION</b>.<br />
 				Cette balise est &agrave; int&eacute;grer directement dans le fichier 
 				article.html de votre squelette (ou dans le fichier article-xx.html pour 
-				limiter la notation aux articles de la rubrique xx).<br>
-				<br>
+				limiter la notation aux articles de la rubrique xx).<br />
+				<br />
 				Cette balise affiche :
 				<ul>
 					<li>
@@ -89,15 +89,15 @@
 					</li>
 					<li>
 						<u>NOTATIONS_ARTICLES : #ID_ARTICLE, #NOTE (moyenne), #NOTE_PONDEREE, #NB</u>
-						<br>
+						<br />
 						Pour acc&eacute;der &agrave; la note moyenne arrondie, utiliser le filtre <u>[(#NOTE|round)]</u>
 					</li>
 				</ul>
 			</p>
 			<h3>GESTION DE CRITIQUES :</h3>
 			<p>
-				Les critiques sont g&eacute;r&eacute;es dans le forum de l'article.<br>
-				Le titre du post dans le forum doit contenir le texte <u>[notation]</u>.<br>
+				Les critiques sont g&eacute;r&eacute;es dans le forum de l'article.<br />
+				Le titre du post dans le forum doit contenir le texte <u>[notation]</u>.<br />
 				Les points positifs doivent &ecirc;tre pr&eacute;c&eacute;d&eacute;s de [+], 
 				les points n&eacute;gatifs de [-].
 			</p>
@@ -118,23 +118,23 @@
 			<h3>PONDERATION :</h3>
 			<p>
 				Le but est d'accorder une meilleure note aux articles ayant re&ccedil;u plus de 
-				vote :<br>
+				vote :<br />
 				il est injuste qu'un article ayant re&ccedil;u 1 seul vote de <b>5</b> soit 
 				mieux class&eacute; qu'un article ayant re&ccedil;u 100 votes et une moyenne de <b>4,99</b>...
-				<br>
+				<br />
 			</p>
 			<p>
-				<b>On choisit la formule :<br>
+				<b>On choisit la formule :<br />
 				</b>moy_ponderee = moy * (1-EXP(-10*moy/(2*coef)))
-				<br>
+				<br />
 				Si moy > coef, on a moy_ponderee ~ moy ;
-				<br>
+				<br />
 				sinon moy_ponderee < moy.
 			</p>
 			<p>
 				Cela nous permet de descendre les articles les moins not&eacute;s.
-				<br>
-				Ainsi, pour un coef de :<br>
+				<br />
+				Ainsi, pour un coef de :<br />
 				<b>coef=100</b>
 				<table class="help" cellpadding="0" cellspacing="0">
 					<tr>
@@ -189,7 +189,7 @@
 				L'affichage de la note est param&eacute;trable : pour cela, il vous suffit de 
 				d&eacute;finir une image <u>notation-on.gif</u> et <u>notation-off.gif</u> dans 
 				le r&eacute;pertoire <u>img_pack/</u> de votre squelette.
-				<br>
+				<br />
 				Vous pouvez &eacute;galement d&eacute;finir une image diff&eacute;rente pour 
 				chaque indice de notation : notation-on<b>1</b>.gif, notation-on<b>2</b>.gif, 
 				... et leur pendant : notation-off<b>1</b>.gif, notation-off<b>2</b>.gif, ...

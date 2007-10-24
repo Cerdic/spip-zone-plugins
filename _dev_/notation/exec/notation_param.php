@@ -39,7 +39,7 @@ function exec_notation_param(){
  	global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $couleur_claire;
 	if ($GLOBALS['connect_statut'] == "0minirezo" AND $connect_toutes_rubriques)
   {
-	   echo generer_url_post_ecrire("notation_param");
+	   echo generer_url_post_ecrire("notation_param").'<div>';
 	   
 	   /* Ponderation */
 	   debut_cadre_trait_couleur("../"._DIR_PLUGIN_NOTATION."/img_pack/poids.gif", false, "", _T('notation:ponderation'));
@@ -48,11 +48,11 @@ function exec_notation_param(){
      fin_cadre_relief();
      echo "<table><tr><td>";
 	   echo _T('notation:valeur_ponderation');
-	   echo " : <input type='text' name='notation_ponderation' class='fondl' value=\"$ponderation\" size=8>";
+	   echo " : <input type='text' name='notation_ponderation' class='fondl' value=\"$ponderation\" size='8' />";
 	   echo "<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />";
      echo "</td></tr></table>";
-     echo "<span class='verdana2'><br>"._T('notation:exemple',array('ponderation' => $ponderation))."</span>";
-     echo "<table class=spip cellspacing=1 style='border:1px solid ".$couleur_foncee."; text-align:center;'><tr style='background-color:".$couleur_claire.";'>";
+     echo "<span class='verdana2'><br />"._T('notation:exemple',array('ponderation' => $ponderation))."</span>";
+     echo "<table class='spip' cellspacing='1' style='border:1px solid ".$couleur_foncee."; text-align:center;'><tr style='background-color:".$couleur_claire.";'>";
      echo "<td>"._T("notation:nbvotes")."</td><td>1</td><td>10</td><td>25</td><td>50</td><td>100</td><td>150</td><td>200</td>";
      echo "</tr><tr>";
      echo "<td>"._T("notation:note")."</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td>";
@@ -64,9 +64,9 @@ function exec_notation_param(){
 
 	   /* Acessibilite */
 	   debut_cadre_trait_couleur("redacteurs-24.gif", false, "", _T('notation:acces'));
-     echo '<table width=100%><tr><td colspan=2>';
+     echo '<table style="width:100%"><tr><td colspan="2">';
      echo _T("notation:info_acces");
-     echo '</td></tr><tr><td width=50%>';
+     echo '</td></tr><tr><td style="width:50%">';
 	   echo afficher_choix('acces', $acces,
 		      array( 'adm' => _T('notation:item_adm'),
                  'aut' => _T('notation:item_aut'),
@@ -75,7 +75,7 @@ function exec_notation_param(){
                  ), "<br/>");
 	   echo "</td><td><input type='submit' style='margin-left:0em' name='modifier' class='fondo' value='"._T('bouton_valider')."' />";
 
-     echo '</td></tr><tr><td colspan=2>';
+     echo '</td></tr><tr><td colspan="2">';
  	   debut_cadre_relief('',false,'',_T("notation:titre_ip"));
        echo("<span class='verdana2'>"._T("notation:info_ip")."</span>");
      fin_cadre_relief();
@@ -98,18 +98,17 @@ function exec_notation_param(){
        echo("<span class='verdana2'>"._T("notation:info_etoiles")."</span>");
      fin_cadre_relief();
 	   echo _T('notation:valeur_nb_etoiles');
-     echo "&nbsp;<input type='text' name='notation_nb' class='fondl' value=\"$nb_note\" size=8>";
+     echo "&nbsp;<input type='text' name='notation_nb' class='fondl' value=\"$nb_note\" size='8' />";
 	   echo "<input type='submit' name='modifier' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />";
 
 	   fin_cadre_trait_couleur();
 
 	   /* Fin */
-	   echo "</form>";
+	   echo '</div></form>';
 	}
 	else 
 		echo "<br/><br/>".gros_titre(_T('avis_non_acces_page'));
-	echo "</span>";
-	fin_page();
+	echo fin_gauche(), fin_page();
 	
 }
 
