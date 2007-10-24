@@ -28,6 +28,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// compatibilite spip 1.9.2
+if ($GLOBALS['spip_version_code']<1.93)
+{
+	if (!function_exists('sql_fetch')) { function sql_fetch($req) {
+		return spip_fetch_array($req) ;
+	} }
+	if (!function_exists('sql_query')) { function sql_query($query) {
+		return spip_query($query) ;
+	} }
+} // fin compat
+
 function balise_TOTAL_AUTEURS_EN_LIGNE($p) {
 	return calculer_balise_dynamique($p,'TOTAL_AUTEURS_EN_LIGNE', array());
 }
@@ -39,9 +50,9 @@ function balise_TOTAL_AUTEURS_EN_LIGNE_stat($args, $filtres) {
 function balise_TOTAL_AUTEURS_EN_LIGNE_dyn($delais='5 MINUTE') {
 	if (empty($delais)) $delais='5 MINUTE';
 
-	$r = spip_query("SELECT COUNT(*) AS total FROM spip_auteurs WHERE en_ligne>= DATE_SUB(NOW(), INTERVAL ".$delais." )");
+	$r = sql_query("SELECT COUNT(*) AS total FROM spip_auteurs WHERE en_ligne>= DATE_SUB(NOW(), INTERVAL ".$delais." )");
 
-	$o=spip_fetch_array($r);
+	$o = sql_fetch($r);
 	return $o['total'] ;
 }
 
