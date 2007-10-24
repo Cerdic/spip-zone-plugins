@@ -21,5 +21,4 @@
 [(#REM) js ajoutee par les plugin et a la volee]
 [(#ENV{script}|charge_scripts|compacte_js)]
 
-[(#REM) ajouts des plugins jquery depuis d'autres plugins spip (jquery_plugins)]
-[(#PIPELINE{insert_jquery_plugins})]
+[(#PIPELINE{insert_jquery_plugins}|compacte_js)]

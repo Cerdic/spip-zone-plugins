@@ -97,13 +97,22 @@ function jqueryp_add_link(&$p, $adresse, $generer_url=false){
 
 /* 
  * Retourne le contenu des fichiers js des plugin jquery dont les id 
- * sont envoyes. En profite pour les compacter 
+ * sont envoyes.
  * 
+ * - renvoie un array() avec le nom des fichiers à inserer
+ *   pour le pipeline insert_js
+ * jqueryp_add_plugins('ui.tabs', $flux);
+ * jqueryp_add_plugins('ui.tabs','ui.dimensions', $flux);
+ * 
+ * - renvoie <script language='javascript'>...</script>
+ *   pour le pipeline insert_head (compatibilite 1.9.2)
  * jqueryp_add_plugins('ui.tabs');
  * jqueryp_add_plugins(array('ui.tabs','ui.dimensions'));
+ * 
  */
-function jqueryp_add_plugins($plugins){
+function jqueryp_add_plugins($plugins, $flux=null){
 	static $lpda; // liste plugins deja actifs (même nom OU meme adresse)
+		
 	if (empty($lpda)) $lpda = array('nom' => array(), 'adresse' => array());
 	if (!is_array($plugins)) $plugins = array($plugins);
 	
@@ -114,14 +123,26 @@ function jqueryp_add_plugins($plugins){
 			continue;
 			
 		if ($c = find_in_path($lpa[$nom])) {
-			$res .=  "\n\n" . compacte_js(spip_file_get_contents($c)) . "\n\n";
+			if (isset($flux)){
+				if ($flux['type']=='fichier')
+					$flux['data'][$nom] = substr($lpa[$nom],0,-3); // enlever '.js'
+				elseif ($flux['type']=='inline')
+					$flux['data'][$nom] =  spip_file_get_contents($c);
+			} else {
+				// inline dans insert_head (compat 1.9.2)
+				$res .=  "\n\n" . spip_file_get_contents($c) . "\n\n";	
+			}
+			// pas deux fois la meme chose...
 			$lpda['nom'][$nom] = $lpda['adresse'][$lpa[$nom]] = true;
 		} else {
 			spip_log("Adresse introuvable ($lpa[$nom]) sur $nom",'jquery_plugins');
 		}
 	}
-	
-	return $res;
+
+	if (isset($flux))
+		return $flux;
+	else
+		return "<script language='javascript'>" . $res . "</script>";
 }
 
 /* fourni un tableau 'nom' => 'adresse' des plugins possibles */

@@ -5,7 +5,7 @@
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<lien></lien>
-	<version>0.3</version>
+	<version>0.3.1</version>
 	<etat>dev</etat>
     <description>
 	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery
@@ -13,13 +13,11 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
   plugins jQuery (il faut cr&eacute;er un dossier <code>lib/</code> avec acc&egrave;s en &eacute;criture)
 - Fournit un formulaire CFG avec les plugins &agrave; cocher 
   qui seront automatiquement ajout&eacute;es sur toutes les pages via jquery.js.html
-- Fournit un pipeline <code>insert_jquery_plugins</code> pour que 
-  d'autres plugins puissent ajouter un plugin jquery 
-  pr&eacute;sent dans les librairies (ou du js).
-- Pour ajouter des plugins facilement dans ce pipeline, 
+- Pour ajouter des plugins facilement grace au pipeline insert_js (SPIP>1.9.3) 
+  ou insert_head (SPIP 1.9.2), 
   une fonction <code>jqueryp_add_plugins()</code>
   &agrave; laquelle on passe le nom des plugins (array) 
-  renvoie leur contenu js compact&eacute;
+  renvoie leur contenu js
 - Ajoute une balise <code>#JQUERY_PLUGIN{id_du_plug}</code> et 
   <code>#JQUERY_PLUGIN_THEME{nom_du_theme_ou_squelette}</code> 
   (cf. <code>jqueryp_fonctions.php</code>)
@@ -42,4 +40,5 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 		<nom>insert_jquery_plugins</nom>
 		<inclure>jqueryp_pipeline.php</inclure>
 	</pipeline>
+
 </plugin>
