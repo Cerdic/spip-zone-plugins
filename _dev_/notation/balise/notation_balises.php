@@ -31,7 +31,7 @@ function notation_etoile_click($nb, $id) {
 		if ($multi) {
 			$img = $img0.'-on'.$i.'.gif';
 		}
-		$ret .= "<button type='submit' name='note' value='$i'><img src='$img' alt='submit' /></button>";
+		$ret .= "<button type='submit' name='note' value='$i' title='Noter: $i !'><img src='$img' alt='' /></button>";
 	}
 	return $ret;
 }

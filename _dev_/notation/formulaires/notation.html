@@ -137,11 +137,6 @@ if (spip_num_rows($res) != 0)
 
 	// Afficher le formulaire
 	if ($canvote) {
-		#echo ("<form action='#SELF' method='post' id='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'><div style='display:inline'>");
-		#echo ("<input type='hidden' name='id_donnees' id='id_donnees".$article."' value='".$article."' />");
-		#echo ("<input type='hidden' name='note' />"); // value=".$note." />");
-		#echo ("<input type='hidden' name='content' id='content".$article."' value='' size='10' />");
-		#echo ("<input type='submit' name='Submit' id='id_notation-".$article."' value='"._T('notation:bouton_voter')."' style='display:none;' />");
 		echo ("</div></form>");
 	}
 	echo ("</div>");
