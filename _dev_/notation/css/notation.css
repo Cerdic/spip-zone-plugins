@@ -139,6 +139,7 @@
 	display: inline;
 	padding: 0;
 	margin: 0;
+	cursor: pointer;
 }
 .notation button img {
 	vertical-align:middle;
