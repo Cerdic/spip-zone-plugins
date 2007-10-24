@@ -31,14 +31,14 @@ function notation_etoile_click($nb, $id) {
 		if ($multi) {
 			$img = $img0.'-on'.$i.'.gif';
 		}
-		$ret .= "<button type='submit' name='note' value='$i' title='Noter: $i !' onmouseover=\"notation_set_etoile($i,".notation_get_nb_notes().",$id)\" onmouseout=\"notation_set_etoile($nb,".notation_get_nb_notes().",$id)\"><img src='$img' id='star-$id-$i' alt='' /></button>";
+		$ret .= "<button type='submit' name='note' value='$i' title='Noter: $i !' onmouseover=\"notation_set_etoile($i,".notation_get_nb_notes().",$id)\" onmouseout=\"notation_set_etoile($nb,".notation_get_nb_notes().",$id)\"><img src='$img' id='star-$id-$i' alt='$i' /></button>";
 	}
 	$img = str_replace('-on.gif','-off.gif',$img);
 	for ($i=$nb+1; $i<=notation_get_nb_notes(); $i++) {
 		if ($multi) {
 			$img = $img0.'-off'.$i.'.gif';
 		}
-		$ret .= "<button type='submit' name='note' value='$i' title='Noter: $i !' onmouseover=\"notation_set_etoile($i,".notation_get_nb_notes().",$id)\" onmouseout=\"notation_set_etoile($nb,".notation_get_nb_notes().",$id)\"><img src='$img' id='star-$id-$i' alt='' /></button>";
+		$ret .= "<button type='submit' name='note' value='$i' title='Noter: $i !' onmouseover=\"notation_set_etoile($i,".notation_get_nb_notes().",$id)\" onmouseout=\"notation_set_etoile($nb,".notation_get_nb_notes().",$id)\"><img src='$img' id='star-$id-$i' alt='$i' /></button>";
 	}
 	return $ret;
 }
