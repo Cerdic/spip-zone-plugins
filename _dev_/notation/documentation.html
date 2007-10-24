@@ -1,14 +1,3 @@
-<html>
-	<style>
-	h3 { color:navy; }
-	b { color:navy; }
-	u { color:navy; text-decoration:none; }
-	.warning { color:red; background-color:yellow; padding:2px; }
-	ul { padding:0; margin:0; margin-left:20px; }
-	.help { margin-left:50px; border-left:1px solid black; border-bottom:1px solid black;}
-	.help td { text-align:right; border:1px solid black; padding:2px; padding-left:5px; padding-right:5px; border-left:0; border-bottom:0;}
-</style>
-	<body>
 		<div style='background-color:white; color:#444; padding:10px; border:1px solid;'>
 			<div style="text-align:center"><h3>
 					*********************************<br />
@@ -21,7 +10,6 @@
 				</p>
 			</div>
 			<h3>COMPORTEMENT</h3>
-			<p>
 				<ul>
 					<li>
 						On limite &agrave; un vote par article et par utilisateur (ou adresse IP 
@@ -43,16 +31,15 @@
 						tous.
 					</li>
 				</ul>
-			</p>
 			<h3>INTEGRATION :</h3>
 			<p>
 				La notation s'int&egrave;gre dans la partie publique &agrave; l'aide de la 
 				balise <b>#NOTATION</b>.<br />
 				Cette balise est &agrave; int&eacute;grer directement dans le fichier 
 				article.html de votre squelette (ou dans le fichier article-xx.html pour 
-				limiter la notation aux articles de la rubrique xx).<br />
-				<br />
-				Cette balise affiche :
+				limiter la notation aux articles de la rubrique xx).
+			</p>
+				<p>Cette balise affiche :</p>
 				<ul>
 					<li>
 						La note sous forme d'une image de 5 etoiles (img_pack/notation-on.gif et 
@@ -63,65 +50,60 @@
 						IP ou par auteur).
 					</li>
 				</ul>
-			</p>
 			<p>
-				Dans les articles, on peut afficher :
+				Dans les articles, on peut afficher :</p>
 				<ul>
 					<li>
-						la <b>note</b> donn&eacute;e par un auteur : <u>&lt;autxx|notation|id_article=yy&gt;</u>
+						la <b>note</b> donn&eacute;e par un auteur : <strong>&lt;autxx|notation|id_article=yy&gt;</strong>
 					</li>
 					<li>
-						la note donn&eacute;e par un groupe d'auteurs : <u>&lt;notationxx|tableau|id_auteur=yy,zz,...&gt;</u>
+						la note donn&eacute;e par un groupe d'auteurs : <strong>&lt;notationxx|tableau|id_auteur=yy,zz,...&gt;</strong>
 					</li>
 					<li>
-						le <b>top ten</b> : <u>&lt;notation|topten|max=10|titre=le TopTen&gt;</u>
+						le <b>top ten</b> : <strong>&lt;notation|topten|max=10|titre=le TopTen&gt;</strong>
 					</li>
 					<li>
-						la <b>r&eacute;partition</b> des votes pour l'article xx : <u>&lt;notationxx|statistique|left|titre=Statistiques&gt;</u>
+						la <b>r&eacute;partition</b> des votes pour l'article xx : <strong>&lt;notationxx|statistique|left|titre=Statistiques&gt;</strong>
 					</li>
 				</ul>
-			</p>
 			<p>
-				Le plugin d&eacute;finit les boucles :
+				Le plugin d&eacute;finit les boucles :</p>
 				<ul>
 					<li>
-						<u>NOTATIONS : #ID_ARTICLE, #ID_AUTEUR, #NOTE, #IP, #MAJ</u>
+						<strong>NOTATIONS : #ID_ARTICLE, #ID_AUTEUR, #NOTE, #IP, #MAJ</strong>
 					</li>
 					<li>
-						<u>NOTATIONS_ARTICLES : #ID_ARTICLE, #NOTE (moyenne), #NOTE_PONDEREE, #NB</u>
+						<strong>NOTATIONS_ARTICLES : #ID_ARTICLE, #NOTE (moyenne), #NOTE_PONDEREE, #NB</strong>
 						<br />
-						Pour acc&eacute;der &agrave; la note moyenne arrondie, utiliser le filtre <u>[(#NOTE|round)]</u>
+						Pour acc&eacute;der &agrave; la note moyenne arrondie, utiliser le filtre <strong>[(#NOTE|round)]</strong>
 					</li>
 				</ul>
-			</p>
 			<h3>GESTION DE CRITIQUES :</h3>
 			<p>
 				Les critiques sont g&eacute;r&eacute;es dans le forum de l'article.<br />
-				Le titre du post dans le forum doit contenir le texte <u>[notation]</u>.<br />
+				Le titre du post dans le forum doit contenir le texte <strong>[notation]</strong>.<br />
 				Les points positifs doivent &ecirc;tre pr&eacute;c&eacute;d&eacute;s de [+], 
 				les points n&eacute;gatifs de [-].
 			</p>
 			<p>
-				Le plugin d&eacute;finit :
+				Le plugin d&eacute;finit :</p>
 				<ul>
 					<li>
 						un <b>filtre</b> notation_critique pour supprimer les balises et remplacer [+] 
-						et [-] par une image d'img_pack (<u>notation-plus.gif</u> et <u>notation-moins.gif</u>), 
-						par exemple <u>[(#TITRE|notation_critique)]</u>.
+						et [-] par une image d'img_pack (<strong>notation-plus.gif</strong> et <strong>notation-moins.gif</strong>), 
+						par exemple <strong>[(#TITRE|notation_critique)]</strong>.
 					</li>
 					<li>
 						un <b>mod&egrave;le</b> pour afficher la critique de l'auteur xx (lorsqu'il a 
-						vot&eacute; et laiss&eacute; sa critique dans le forum) <u>&lt;autxx|critique|id_article=yy&gt;</u>
+						vot&eacute; et laiss&eacute; sa critique dans le forum) <strong>&lt;autxx|critique|id_article=yy&gt;</strong>
 					</li>
 				</ul>
-			</p>
 			<h3>PONDERATION :</h3>
 			<p>
 				Le but est d'accorder une meilleure note aux articles ayant re&ccedil;u plus de 
 				vote :<br />
 				il est injuste qu'un article ayant re&ccedil;u 1 seul vote de <b>5</b> soit 
 				mieux class&eacute; qu'un article ayant re&ccedil;u 100 votes et une moyenne de <b>4,99</b>...
-				<br />
 			</p>
 			<p>
 				<b>On choisit la formule :<br />
@@ -136,6 +118,7 @@
 				<br />
 				Ainsi, pour un coef de :<br />
 				<b>coef=100</b>
+			</p>
 				<table class="help" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>nb vote</td>
@@ -158,8 +141,9 @@
 						<td>4,97</td>
 					</tr>
 				</table>
-				<b>coef=10</b>
-				<table class="help" cellpadding="0" cellspacing="0" ID="Table1">
+				
+				<p><b>coef=10</b></p>
+				<table class="help" cellpadding="0" cellspacing="0" id="Table1">
 					<tr>
 						<td>nb vote</td>
 						<td>moy</td>
@@ -181,21 +165,21 @@
 						<td>4,99</td>
 					</tr>
 				</table>
-				A vous de choisir votre coef en fonction de votre site et de sa 
+				<p>A vous de choisir votre coef en fonction de votre site et de sa 
 				fr&eacute;quentation...
 			</p>
 			<h3>PERSONALISATION :</h3>
 			<p>
 				L'affichage de la note est param&eacute;trable : pour cela, il vous suffit de 
-				d&eacute;finir une image <u>notation-on.gif</u> et <u>notation-off.gif</u> dans 
-				le r&eacute;pertoire <u>img_pack/</u> de votre squelette.
+				d&eacute;finir une image <strong>notation-on.gif</strong> et <strong>notation-off.gif</strong> dans 
+				le r&eacute;pertoire <strong>img_pack/</strong> de votre squelette.
 				<br />
 				Vous pouvez &eacute;galement d&eacute;finir une image diff&eacute;rente pour 
 				chaque indice de notation : notation-on<b>1</b>.gif, notation-on<b>2</b>.gif, 
 				... et leur pendant : notation-off<b>1</b>.gif, notation-off<b>2</b>.gif, ...
 			</p>
 			<p>
-				Pour modifier le libell&eacute;s des notes, surchargez <u>note_1</u>, <u>note_2</u>,... 
+				Pour modifier le libell&eacute;s des notes, surchargez <strong>note_1</strong>, <strong>note_2</strong>,... 
 				dans le fichier de langue de votre squelette (lang/local_fr.php).
 			</p>
 			<p>
@@ -204,14 +188,10 @@
 				d&eacute;marr&eacute;
 			</p>
 			<h3>TODO :</h3>
-			<p>
 				<ul>
 					<li>
 						Cr&eacute;er une jointure avec la table des articles pour permettre un tri 
 						directement sur la note
 					</li>
 				</ul>
-			</p>
 		</div>
-	</body>
-</html>

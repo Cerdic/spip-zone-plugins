@@ -31,7 +31,7 @@ function exec_notation_help()
 
 
 		// Fin de la page
- 		fin_page();
+ 		echo fin_gauche(), fin_page();
 	}
 }
 
