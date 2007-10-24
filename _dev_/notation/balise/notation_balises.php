@@ -20,18 +20,25 @@ function notation_etoile_click($nb, $id) {
 		$nb = round($nb);
 	}
 	// Recherche de l'image
-	$img = find_in_path('img_pack/notation-off1.gif');
+	$img = find_in_path('img_pack/notation-on1.gif');
 	$multi = ($img != '');
 	if ($multi) { 
-		$img0 = str_replace('-off1.gif','',$img);
+		$img0 = str_replace('-on1.gif','',$img);
 	} else {
-		$img = find_in_path('img_pack/notation-off.gif');
+		$img = find_in_path('img_pack/notation-on.gif');
 	}
-	for ($i=1; $i<=notation_get_nb_notes(); $i++) {
+	for ($i=1; $i<=$nb; $i++) {
 		if ($multi) {
 			$img = $img0.'-on'.$i.'.gif';
 		}
-		$ret .= "<button type='submit' name='note' value='$i' title='Noter: $i !'><img src='$img' alt='' /></button>";
+		$ret .= "<button type='submit' name='note' value='$i' title='Noter: $i !' onmouseover=\"notation_set_etoile($i,".notation_get_nb_notes().",$id)\" onmouseout=\"notation_set_etoile($nb,".notation_get_nb_notes().",$id)\"><img src='$img' id='star-$id-$i' alt='' /></button>";
+	}
+	$img = str_replace('-on.gif','-off.gif',$img);
+	for ($i=$nb+1; $i<=notation_get_nb_notes(); $i++) {
+		if ($multi) {
+			$img = $img0.'-off'.$i.'.gif';
+		}
+		$ret .= "<button type='submit' name='note' value='$i' title='Noter: $i !' onmouseover=\"notation_set_etoile($i,".notation_get_nb_notes().",$id)\" onmouseout=\"notation_set_etoile($nb,".notation_get_nb_notes().",$id)\"><img src='$img' id='star-$id-$i' alt='' /></button>";
 	}
 	return $ret;
 }

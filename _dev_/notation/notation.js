@@ -29,18 +29,3 @@ function notation_set_etoile(n, nb, id)
 	  for(i=n+1; i<=nb; i++) document.images['star-'+id+'-'+i].src = notation_img+"-off.gif";
   }
 }
-
-/** Permettre le vote
-*/
-function notation_change_etoile(n, nb, id)
-{	selected = false;
-	notation_set_etoile(n, nb, id);
-	selected = true;
-	// Changer la valeur dans le formulaire
-	document.getElementById("notation"+id).note.value = n;
-	// Permettre le vote (afficher le bouton submit)
-	if (document.getElementById) { //IE5 ou Netscape 6
-		document.getElementById("id_notation-"+id).style.display="";
-	}
-}
-
