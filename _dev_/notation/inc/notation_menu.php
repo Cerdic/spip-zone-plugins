@@ -31,7 +31,7 @@ function ecrire_menu($menu='table')
 	echo "<br/><br/>";
 	global $version;
 	debut_cadre_couleur ('',false,'',"Plugin "._T('notation:notation')." <small style='color:white'>par jmv</small>");
-		echo ("<small style='color:white'>v.0.2 &copy; 2007</small>");
+		echo ("<small style='color:white'>v.0.4 &copy; 2007</small>");
 	fin_cadre_couleur();
 
 	debut_droite();

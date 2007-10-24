@@ -1,7 +1,7 @@
 <plugin>
   <nom>Notation des articles</nom>
   <auteur>JEM</auteur>
-  <version>0.3</version>
+  <version>0.4</version>
   <etat>test</etat>
   <prefix>notation</prefix>
   <description>
