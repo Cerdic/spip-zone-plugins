@@ -39,14 +39,10 @@
 
 	//-- Table ADHERENTS ------------------------------------------
 	$spip_asso_adherents = array(
-		"id_adherent"	=> "BIGINT(21) NOT NULL AUTO_INCREMENT",			//lié à id Inscription2
+		"id_adherent"	=> "BIGINT(21) NOT NULL AUTO_INCREMENT",			
 		"id_auteur" 		=> "int(11) NOT NULL",
 		"id_asso" 			=> "text NOT NULL",
-		"categorie" 		=> "text NOT NULL",
 		"validite" 			=> "DATE NOT NULL DEFAULT '0000-00-00' ",
-		"statut_relance"	=> "text NOT NULL",
-		"montant" 			=> "TEXT NOT NULL",
-		"date" 				=> "DATE NOT NULL DEFAULT '0000-00-00'",
 		"utilisateur1" 		=> "text NOT NULL",
 		"utilisateur2" 		=> "text NOT NULL",
 		"utilisateur3" 		=> "text NOT NULL",
