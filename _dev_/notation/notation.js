@@ -37,7 +37,7 @@ function notation_change_etoile(n, nb, id)
 	notation_set_etoile(n, nb, id);
 	selected = true;
 	// Changer la valeur dans le formulaire
-	document.getElementById("id_donnees"+id).value = n;
+	document.getElementById("notation"+id).note.value = n;
 	// Permettre le vote (afficher le bouton submit)
 	if (document.getElementById) { //IE5 ou Netscape 6
 		document.getElementById("id_notation-"+id).style.display="";

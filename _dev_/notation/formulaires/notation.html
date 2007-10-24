@@ -124,20 +124,14 @@ if (spip_num_rows($res) != 0)
   if ($canvote) echo notation_etoile_click($lanote,$article);
   else echo notation_etoile($lanote,$article);
 
-
-//	On affiche pas la note...
-//	pour mémoire :
-//	  if ($total > 1) echo "<small>(".$lanote." - ".$total." "._T('notation:votes').")</small>";
-//	  else echo "<small>(".$lanote." - ".$total." "._T('notation:vote').")</small>";
-
-//  if ($total > 1) echo "<small>".$total." "._T('notation:votes')."</small>";
-//  else echo "<small>".$total." "._T('notation:vote')."</small>";
+  if ($total > 1) echo "<span class='note'>".$total." "._T('notation:votes')."</span>";
+  else echo "<span class='note'>".$total." "._T('notation:vote')."</span>";
 
 
 
 	// Afficher le formulaire
 	if ($canvote) {
-		echo ("<form action='#SELF' method='post' id='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'><div>");
+		echo ("<form action='#SELF' method='post' id='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'><div style='display:inline'>");
 		echo ("<input type='hidden' name='id_donnees' id='id_donnees".$article."' value='".$article."' />");
 		echo ("<input type='hidden' name='note' />"); // value=".$note." />");
 		echo ("<p style='display:none;'><label>Content :</label><input type='text' name='content' id='content".$article."' value='' size='10' /></p>");
