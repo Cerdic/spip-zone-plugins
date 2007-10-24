@@ -19,7 +19,7 @@
 
 /* Le texte note + nb votes
 */
-.formulaire_notation small
+.formulaire_notation .note
 {	color:Purple;
 	padding:0;
 	margin:0 5px 0 5px;
@@ -46,7 +46,7 @@
 .notation
 {}
 
-.notation small
+.notation .note
 {	color:Purple;
 	font-weight:normal;
 }
@@ -131,4 +131,17 @@
   color:Purple;
   font-size:3em;
   font-weight:bold;
+}
+
+.notation button {
+	border: none;
+	background-color: transparent;
+	display: inline;
+	padding: 0;
+	margin: 0;
+}
+.notation button img {
+	vertical-align:middle;
+	padding: 0 !important;
+	margin: 0;
 }

@@ -121,8 +121,14 @@ if (spip_num_rows($res) != 0)
 
 	// Afficher les etoiles
 	echo "<div class='formulaire_notation'>";
-  if ($canvote) echo notation_etoile_click($lanote,$article);
-  else echo notation_etoile($lanote,$article);
+  if ($canvote) {
+	echo ("<form action='#SELF' method='post' id='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'><div style='display:inline'>");
+	echo notation_etoile_click($lanote,$article);
+	echo ("<input type='hidden' name='id_donnees' id='id_donnees".$article."' value='".$article."' />");
+	echo ("<input type='hidden' name='content' id='content".$article."' value='' size='10' />");
+  } else {
+	echo notation_etoile($lanote,$article);
+  }
 
   if ($total > 1) echo "<span class='note'>".$total." "._T('notation:votes')."</span>";
   else echo "<span class='note'>".$total." "._T('notation:vote')."</span>";
@@ -131,11 +137,11 @@ if (spip_num_rows($res) != 0)
 
 	// Afficher le formulaire
 	if ($canvote) {
-		echo ("<form action='#SELF' method='post' id='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'><div style='display:inline'>");
-		echo ("<input type='hidden' name='id_donnees' id='id_donnees".$article."' value='".$article."' />");
-		echo ("<input type='hidden' name='note' />"); // value=".$note." />");
-		echo ("<input type='hidden' name='content' id='content".$article."' value='' size='10' />");
-		echo ("<input type='submit' name='Submit' id='id_notation-".$article."' value='"._T('notation:bouton_voter')."' style='display:none;' />");
+		#echo ("<form action='#SELF' method='post' id='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'><div style='display:inline'>");
+		#echo ("<input type='hidden' name='id_donnees' id='id_donnees".$article."' value='".$article."' />");
+		#echo ("<input type='hidden' name='note' />"); // value=".$note." />");
+		#echo ("<input type='hidden' name='content' id='content".$article."' value='' size='10' />");
+		#echo ("<input type='submit' name='Submit' id='id_notation-".$article."' value='"._T('notation:bouton_voter')."' style='display:none;' />");
 		echo ("</div></form>");
 	}
 	echo ("</div>");
