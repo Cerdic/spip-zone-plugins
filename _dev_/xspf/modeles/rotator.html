@@ -121,31 +121,31 @@ Get the Flash Player</a> to see this player.
 <script type="text/javascript">
 // <![CDATA[
 
-	var s#GET{objet_spip} = new SWFObject("#CHEMIN{lib/jw_image_rotator/imagerotator.swf}","rotator","#GET{width}","#GET{height}","7");
-	s#GET{objet_spip}.addParam("wmode","#GET{wmode}");
-	s#GET{objet_spip}.addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
-	s#GET{objet_spip}.addVariable("transition","#GET{transition}");
-	s#GET{objet_spip}.addVariable("backcolor","#GET{backcolor}");
-	s#GET{objet_spip}.addVariable("frontcolor","#GET{frontcolor}");
-	s#GET{objet_spip}.addVariable("lightcolor","#GET{lightcolor}");
-	s#GET{objet_spip}.addVariable("shownavigation","#GET{shownavigation}");
-	s#GET{objet_spip}.addVariable("showdownload","#GET{showdownload}");
-	s#GET{objet_spip}.addVariable("kenburns","false");
-	s#GET{objet_spip}.addVariable("overstretch","#GET{overstretch}");
-	s#GET{objet_spip}.addVariable("repeat","#GET{repeat}");
-	s#GET{objet_spip}.addVariable("rotatetime","#GET{rotatetime}");
-	s#GET{objet_spip}.addVariable("shuffle","#GET{shuffle}");
-	s#GET{objet_spip}.addVariable("height","#GET{height}");
-	s#GET{objet_spip}.addVariable("width","#GET{width}");
-	s#GET{objet_spip}.addVariable("displaywidth","#GET{displaywidth}");
-	s#GET{objet_spip}.addVariable("displayheight","#GET{displayheight}");
-	[(#GET{jwlogo}|!={''}|?{'s#GET{objet_spip}.addVariable("logo","#GET{jwlogo}");',''})]
-	[(#GET{audio}|!={''}|?{'s#GET{objet_spip}.addVariable("audio","#GET{audio}");',''})]
-	s#GET{objet_spip}.addVariable("useaudio","#GET{useaudio}");
+	var s#GET{objet_val} = new SWFObject("#CHEMIN{lib/jw_image_rotator/imagerotator.swf}","rotator","#GET{width}","#GET{height}","7");
+	s#GET{objet_val}.addParam("wmode","#GET{wmode}");
+	s#GET{objet_val}.addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s#GET{objet_val}.addVariable("transition","#GET{transition}");
+	s#GET{objet_val}.addVariable("backcolor","#GET{backcolor}");
+	s#GET{objet_val}.addVariable("frontcolor","#GET{frontcolor}");
+	s#GET{objet_val}.addVariable("lightcolor","#GET{lightcolor}");
+	s#GET{objet_val}.addVariable("shownavigation","#GET{shownavigation}");
+	s#GET{objet_val}.addVariable("showdownload","#GET{showdownload}");
+	s#GET{objet_val}.addVariable("kenburns","false");
+	s#GET{objet_val}.addVariable("overstretch","#GET{overstretch}");
+	s#GET{objet_val}.addVariable("repeat","#GET{repeat}");
+	s#GET{objet_val}.addVariable("rotatetime","#GET{rotatetime}");
+	s#GET{objet_val}.addVariable("shuffle","#GET{shuffle}");
+	s#GET{objet_val}.addVariable("height","#GET{height}");
+	s#GET{objet_val}.addVariable("width","#GET{width}");
+	s#GET{objet_val}.addVariable("displaywidth","#GET{displaywidth}");
+	s#GET{objet_val}.addVariable("displayheight","#GET{displayheight}");
+	[(#GET{jwlogo}|!={''}|?{'s#GET{objet_val}.addVariable("logo","#GET{jwlogo}");',''})]
+	[(#GET{audio}|!={''}|?{'s#GET{objet_val}.addVariable("audio","#GET{audio}");',''})]
+	s#GET{objet_val}.addVariable("useaudio","#GET{useaudio}");
 	[(#GET{link}|!={''}|?{'s#GET{objet_spip}.addVariable("link","#GET{link}");',''})]
-	s#GET{objet_spip}.addVariable("linkfromdisplay","#GET{linkfromdisplay}");
-	s#GET{objet_spip}.addVariable("linktarget","#GET{linktarget}");	
-	s#GET{objet_spip}.addParam('menu','true');
+	s#GET{objet_val}.addVariable("linkfromdisplay","#GET{linkfromdisplay}");
+	s#GET{objet_val}.addVariable("linktarget","#GET{linktarget}");	
+	s#GET{objet_val}.addParam('menu','true');
 	
 	$(document).ready(function() {
 		s#GET{objet_spip}.write("rotator[(#GET{objet_spip})]#ENV{id}");
