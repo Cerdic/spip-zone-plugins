@@ -111,7 +111,7 @@
 
 <noscript>D&#233;sol&#233;, mais le javascript est n&#233;ecessaire dans la version actuelle. Merci de le r&#233;activer pour afficher le contenu multimedia </noscript>
 <!-- alternetive texte pour ceux qui ont le js desactive -->
-<div id="rotator[(#GET{objet_spip})][(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
+<div id="rotator_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]" class="player" style="[(#GET{align}|=={center}|?{margin:auto; text-align:center;,float:[(#GET{align})]})]">
 
 <p>
 <a href="http://www.macromedia.com/go/getflashplayer">
@@ -121,34 +121,34 @@ Get the Flash Player</a> to see this player.
 <script type="text/javascript">
 // <![CDATA[
 
-	var s1 = new SWFObject("#CHEMIN{lib/jw_image_rotator/imagerotator.swf}","rotator","#GET{width}","#GET{height}","7");
-	s1.addParam("wmode","#GET{wmode}");
-	s1.addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
-	s1.addVariable("transition","#GET{transition}");
-	s1.addVariable("backcolor","#GET{backcolor}");
-	s1.addVariable("frontcolor","#GET{frontcolor}");
-	s1.addVariable("lightcolor","#GET{lightcolor}");
-	s1.addVariable("shownavigation","#GET{shownavigation}");
-	s1.addVariable("showdownload","#GET{showdownload}");
-	s1.addVariable("kenburns","false");
-	s1.addVariable("overstretch","#GET{overstretch}");
-	s1.addVariable("repeat","#GET{repeat}");
-	s1.addVariable("rotatetime","#GET{rotatetime}");
-	s1.addVariable("shuffle","#GET{shuffle}");
-	s1.addVariable("height","#GET{height}");
-	s1.addVariable("width","#GET{width}");
-	s1.addVariable("displaywidth","#GET{displaywidth}");
-	s1.addVariable("displayheight","#GET{displayheight}");
-	[(#GET{jwlogo}|!={''}|?{'s1.addVariable("logo","#GET{jwlogo}");',''})]
-	[(#GET{audio}|!={''}|?{'s1.addVariable("audio","#GET{audio}");',''})]
-	s1.addVariable("useaudio","#GET{useaudio}");
-	[(#GET{link}|!={''}|?{'s1.addVariable("link","#GET{link}");',''})]
-	s1.addVariable("linkfromdisplay","#GET{linkfromdisplay}");
-	s1.addVariable("linktarget","#GET{linktarget}");	
-	s1.addParam('menu','true');
+	var s_[(#ENV{id})]_[(#GET{objet_val})] = new SWFObject("#CHEMIN{lib/jw_image_rotator/imagerotator.swf}","rotator","#GET{width}","#GET{height}","7");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addParam("wmode","#GET{wmode}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("file",encodeURIComponent("[(#URL_PAGE{xspf}|url_absolue|parametre_url{type,'jpg|png|gif','&'}|parametre_url{[(#GET{objet_spip})],[(#GET{objet_val})],'&'})]"));
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("transition","#GET{transition}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("backcolor","#GET{backcolor}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("frontcolor","#GET{frontcolor}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("lightcolor","#GET{lightcolor}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shownavigation","#GET{shownavigation}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("showdownload","#GET{showdownload}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("kenburns","false");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("overstretch","#GET{overstretch}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("repeat","#GET{repeat}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("rotatetime","#GET{rotatetime}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("shuffle","#GET{shuffle}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("height","#GET{height}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("width","#GET{width}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displaywidth","#GET{displaywidth}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("displayheight","#GET{displayheight}");
+	[(#GET{jwlogo}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("logo","#GET{jwlogo}");',''})]
+	[(#GET{audio}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("audio","#GET{audio}");',''})]
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("useaudio","#GET{useaudio}");
+	[(#GET{link}|!={''}|?{'s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("link","#GET{link}");',''})]
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linkfromdisplay","#GET{linkfromdisplay}");
+	s_[(#ENV{id})]_[(#GET{objet_val})].addVariable("linktarget","#GET{linktarget}");	
+	s_[(#ENV{id})]_[(#GET{objet_val})].addParam('menu','true');
 	
 	$(document).ready(function() {
-		s1.write("rotator[(#GET{objet_spip})][(#GET{objet_val})]");
+		s_[(#ENV{id})]_[(#GET{objet_val})].write("rotator_[(#ENV{id})]_[(#GET{objet_spip})]_[(#GET{objet_val})]");
 	});
 
 // ]]>
