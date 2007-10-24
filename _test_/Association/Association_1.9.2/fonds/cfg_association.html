@@ -44,7 +44,7 @@
 		<label><strong><:asso:config_libelle_comptes:></strong></label><br />
 		<label><strong><:asso:config_libelle_classe_banques:></strong> </label>	
 		<B_classe_banques>
-		<select name="classe_banques" id="pc_activites" /> 
+		<select name="classe_banques" id="classe_banques" /> 
 		<BOUCLE_classe_banques(SPIP_ASSO_PLAN){fusion classe}{par classe}>
 		<option value="#CLASSE" [(#ENV{classe_banques}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
 		</BOUCLE_classe_banques>
@@ -52,6 +52,17 @@
 		</B_classe_banques>
 		<span class="spip_form_erreur">Aucune classe définie au plan comptable !</span>
 		<//B_classe_banques>
+		<p>
+		<label><strong><:asso:config_libelle_cotisations:></strong> </label><br />
+		<label><strong><:asso:config_libelle_num_pc:></strong> </label>	
+		<B_pc_cotisations>
+		<select name="pc_cotisations" id="pc_cotisations" /> 
+		<BOUCLE_pc_cotisations(SPIP_ASSO_PLAN){par classe}{par code}{classe!=#ENV{classe_banques}}>
+		<option value="#CODE" [(#ENV{pc_cotisations}|=={#CODE}|?{selected="selected"})]>#CLASSE - #CODE - #INTITULE</option>
+		</BOUCLE_pc_cotisations>
+		</select>
+		</B_pc_cotisations>
+		</p>
 		<p>
 		<input type="checkbox" name="dons" [(#ENV{dons}|?{checked="checked"})] id="dons" />
 		<label><strong><:asso:config_libelle_dons:></strong> </label><br />
