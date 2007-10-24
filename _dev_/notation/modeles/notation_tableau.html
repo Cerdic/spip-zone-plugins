@@ -12,7 +12,7 @@ exemple : afficher la note des auteurs 10,2,5 pour l'article 33, sur 2 colonnes
 ]
 
 <B_not>
-[(#ENV{align}|=={center}|?{'<center>'})]
+[(#ENV{align}|=={center}|?{'<div style="text-align:center">'})]
 <span class="notation" style="[float:(#ENV{align}|match{left|right});]">
 <table class=auteurs cellpadding=0 cellspacing=0><tr>
 <BOUCLE_not(NOTATIONS){id_article=#ENV{id,0}}{id_auteur IN (#ENV{id_auteur}|notation_tab)}>
@@ -26,5 +26,5 @@ exemple : afficher la note des auteurs 10,2,5 pour l'article 33, sur 2 colonnes
 </BOUCLE_not>
 </tr></table>
 </span>
-[(#ENV{align}|=={center}|?{'</center>'})]
+[(#ENV{align}|=={center}|?{'</div>'})]
 </B_not>

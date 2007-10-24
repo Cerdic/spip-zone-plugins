@@ -6,11 +6,11 @@
   <prefix>notation</prefix>
   <description>
     <b>Attribuer une note aux articles Spip</b><hr/>
-    D&eacute;finition de la balise <font color=blue>#NOTATION</font> permettant 
+    D&eacute;finition de la balise <code>#NOTATION</code> permettant 
     la saise et l'affichage de la note dans un article.<br>
-    D&eacute;finition des mod&egrave;les <font color=blue>&lt;autxx|notation|id_article=yy&gt;</font> 
+    D&eacute;finition des mod&egrave;les <code>&lt;autxx|notation|id_article=yy&gt;</code> 
     qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
-    et <font color=blue>&lt;notation|topten&gt;</font> qui donne les 10 meilleurs articles.
+    et <code>&lt;notation|topten&gt;</code> qui donne les 10 meilleurs articles.
   </description>
   <icon>img_pack/note.gif</icon>
   <fonctions>

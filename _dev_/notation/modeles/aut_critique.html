@@ -16,7 +16,7 @@ exemple : afficher la critique de l'auteur 33 pour l'article 10
 <B_critique>
 <BOUCLE_critique(FORUMS){id_article=#ENV{id_article,0}}{id_auteur=#ENV{id,-1}}{titre=="notation\]"}{par date}{inverse}{0,1}>
   <BOUCLE_not(NOTATIONS){id_article=#ENV{id_article,0}}{id_auteur=#ENV{id,-1}}{0,1}>
-[(#ENV{align}|=={center}|?{'<center>'})]
+[(#ENV{align}|=={center}|?{'<div style="text-align:center">'})]
 <table class="critique" style="[float:(#ENV{align}|match{left|right});]"><tr><td>
 	<div class="grosse_note">#NOTE</div>
 	[<h2 class="titre-note"><a href="#URL_FORUM">(#TITRE|notation_critique)</a></h2>]
@@ -26,7 +26,7 @@ exemple : afficher la critique de l'auteur 33 pour l'article 10
   </small>
 	[<div class="texte-note">(#TEXTE|notation_critique)</div>]
 </td></tr></table>
-[(#ENV{align}|=={center}|?{'</center>'})]
+[(#ENV{align}|=={center}|?{'</div>'})]
   </BOUCLE_not>
 </BOUCLE_critique>
 </B_critique>

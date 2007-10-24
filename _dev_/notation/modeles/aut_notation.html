@@ -12,11 +12,11 @@ exemple : afficher la note de l'auteur 33 pour l'article 10
 ]
 
 <B_not>
-[(#ENV{align}|=={center}|?{'<center>'})]
+[(#ENV{align}|=={center}|?{'<div style="text-align:center">'})]
 <span class="notation" style="[float:(#ENV{align}|match{left|right});]">
 <BOUCLE_not(NOTATIONS){id_article=#ENV{id_article,0}}{id_auteur=#ENV{id,-1}}{0,1}>
   [(#NOTATION_ETOILE{#NOTE})]
 </BOUCLE_not>
 </span>
-[(#ENV{align}|=={center}|?{'</center>'})]
+[(#ENV{align}|=={center}|?{'</div>'})]
 </B_not>

@@ -68,7 +68,7 @@ exemple, statistiques de l'article 5 :
 <BOUCLE_not10(NOTATIONS){id_article=#ENV{id}}{note=10}>
 </BOUCLE_not10>
 
-[(#ENV{align}|=={center}|?{'<center>'})]
+[(#ENV{align}|=={center}|?{'<div style="text-align:center">'})]
 <span class="notation" style="[float:(#ENV{align}|match{left|right});]">
 <table class=stat cellpadding=0 cellspacing=1>
 [<thead ><tr><td colspan=2>(#ENV{titre})</td></tr></thead>]
@@ -125,6 +125,6 @@ exemple, statistiques de l'article 5 :
 
 </table>
 </span>
-[(#ENV{align}|=={center}|?{'</center>'})]
+[(#ENV{align}|=={center}|?{'</div>'})]
 
 </B_not>

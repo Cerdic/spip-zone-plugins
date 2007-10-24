@@ -22,7 +22,7 @@ function ecrire_menu($menu='table')
 	{ // Pas d'acces
     debut_gauche();
 		debut_droite();
-	  gros_titre("<center>Plugin "._T('notation:notation')."</center>");
+	  gros_titre("Plugin "._T('notation:notation'));
 		return true;
 	}
 
@@ -37,7 +37,7 @@ function ecrire_menu($menu='table')
 	debut_droite();
 	
 	// Afficher les onglets
-	gros_titre("<center>Plugin "._T('notation:notation')."</center>");
+	gros_titre("Plugin "._T('notation:notation'));
 	echo debut_onglet().
 	onglet(_T('notation:afficher_tables'), generer_url_ecrire("notation"), 'table', $menu, '../'._DIR_PLUGIN_NOTATION.'/img_pack/notation.png').
 	onglet(_T('notation:param'), generer_url_ecrire("notation_param"), 'param', $menu, '../'._DIR_PLUGIN_NOTATION.'/img_pack/spip_mecano_24.png').
