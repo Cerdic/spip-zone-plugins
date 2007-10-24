@@ -36,9 +36,10 @@
 		debut_gauche();
 		
 		if ( isset ($_REQUEST['filtre'] )) { $filtre = $_REQUEST['filtre']; }
-		else { $filtre = 'ok'; }
+		else { $filtre = 'defaut'; }
 		
 		switch($filtre) {
+			case "defaut": $critere="statut_interne IN ('ok','echu','relance')";break;
 			case "ok": $critere="statut_interne='ok'";break;
 			case "echu": $critere="statut_interne='echu'";break;
 			case "relance": $critere="statut_interne='relance'";break;
@@ -115,7 +116,7 @@
 		echo '<form method="post" action="'.$url_adherent.'">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 		echo '<select name ="filtre" class="fondl" onchange="form.submit()">';
-		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $statut) {
+		foreach (array(defaut,ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $statut) {
 			echo '<option value="'.$statut.'"';
 			if ($filtre==$statut) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$statut).'</option>';
