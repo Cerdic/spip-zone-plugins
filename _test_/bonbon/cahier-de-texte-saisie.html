@@ -563,28 +563,26 @@ if($_GET['classe_matiere']){
 
 <?php
 if($_GET['classe_matiere']) {
-?>
-[
+?>[
 (#REM)Affichage des dernières entrées dans le cahier de texte en fonction du contexte (dans le GET)
 ][
+
 (#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
+
 ][
-(#REM) en premier on choisi les articles qui sont du bon groupe
-]<BOUCLE_Prepa_Groupes(ARTICLES){id_mot==#ENV{id_groupe,.}}{doublons Prepa_Groupes}></BOUCLE_Prepa_Groupes>[
-(#REM) Ensuite on selectionne parmi ceux qui ont le bon groupe (c'est à dire parmis ceux qui ne sont pas en doublon avec la boucle précédente, soit {!doublons Prepa_Groupes}), ceux qui ont la bonne matière
-]<BOUCLE_Prepa_Matiere(ARTICLES){id_mot==#ENV{id_matiere,.}}
-{!doublons Prepa_Groupes}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
-(#REM) Idem pour les classes
-]<BOUCLE_PrepaClasses(ARTICLES){id_mot==#ENV{id_classe0,.}}{!doublons Prepa_Matiere}{doublons Prepa_Classes}></BOUCLE_PrepaClasses>[
-(#REM)Idem pour les auteurs
-]<BOUCLE_Prepa_Auteurs(ARTICLES){id_auteur ?}{!doublons Prepa_Classes}{doublons requete}></BOUCLE_Prepa_Auteurs>[
+(#REM) on selectionne ceux qui ont la bonne les classes
+]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{titre_mot==#ENV{id_classe0,.}}{doublons Prepa_Classes}></BOUCLE_PrepaClasses>[
+(#REM) on selectionne ceux qui ont la bonne matière
+]<BOUCLE_Prepa_Matiere(ARTICLES){id_rubrique}{titre_mot==#ENV{id_matiere,.}}
+{!doublons Prepa_Classes}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
+(#REM) Idem pour les dates et l'auteur (s'il y a)
+]<BOUCLE_PrepaDates(ARTICLES){id_rubrique}{id_auteur ?}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons Prepa_Matiere}{doublons Date_auteur}></BOUCLE_PrepaDates>[
+(#REM) on choisi les articles qui sont du bon groupe
+]<BOUCLE_Prepa_Groupes(ARTICLES){id_rubrique}{titre_mot==#ENV{id_groupe,.}}{!doublons Date_auteur}{doublons requete}></BOUCLE_Prepa_Groupes>[
+
 (#REM) {!doublons requete} est donc un critère qui sélectionne tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-][
-(#REM)On restrient la requête aux descriptions de séances en suivant le même modèle que précédement.
-]<BOUCLE_QueSeances(ARTICLES){titre_mot="Description de séance"}{!doublons requete}{doublons QueSeances}></BOUCLE_QueSeances>[
-(#REM) {!doublons QueSeances} est donc un critère qui sélectionne toutes les Descriptions de séances qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
-]
-<B_Seances>
+
+]<B_Seances>
 <div class="bloc">
 <h2>Dernières entrées du même type dans le cahier de textes&nbsp;:</h2>
 <BOUCLE_Seances(ARTICLES){!doublons QueSeances}{!par date}{0,10}>
@@ -597,7 +595,7 @@ if($_GET['classe_matiere']) {
 </BOUCLE_Seances>
 </div>
 </B_Seances>
-<p>Pas encore d'entrées du même type dans le cahier de texte...</p>
+<p>Pas encore d'entrées du même type trouvées dans le cahier de texte...</p>
 <//B_Seances>
 <?php
 	if (!($_POST['enregistrer_fiche'])) {
