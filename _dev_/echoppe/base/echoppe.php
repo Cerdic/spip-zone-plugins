@@ -28,7 +28,7 @@ $spip_echoppe_produits = array(
 	"date_mise_en_ligne"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 	"date_retrait_mise_en_ligne"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 	"poids"					=> "float DEFAULT '0' NOT NULL", 	// (crowfoot : probablement pas internationalisé pour le calcul des frais de port)
-	"hauteur"					=> "float DEFAULT '0' NOT NULL", 	//(crowfoot : serait important pour le calcul des frais de livraison ...)
+	"hauteur"					=> "float DEFAULT '0' NOT NULL", 	// (crowfoot : serait important pour le calcul des frais de livraison ...)
 	"largeur"					=> "float DEFAULT '0' NOT NULL",
 	"longueur"				=> "float DEFAULT '0' NOT NULL",
 	"ref_produit"				=> "text NOT NULL",
@@ -53,6 +53,46 @@ $spip_echoppe_categories_produits = array(
 	"id_categorie"			=> "bigint(21) NOT NULL",
 	"id_produit"			=> "bigint(21) NOT NULL"
 	);
+	
+	
+//
+// Base des liens avec les objets spip
+//
+$spip_echoppe_categories_rubriques = array(
+	"id_categorie"			=> "bigint(21) NOT NULL",
+	"id_rubrique"			=> "bigint(21) NOT NULL"
+	);
+
+$spip_echoppe_categories_articles = array(
+	"id_categorie"			=> "bigint(21) NOT NULL",
+	"id_article"			=> "bigint(21) NOT NULL"
+	);
+
+$spip_echoppe_produits_articles = array(
+	"id_produit"			=> "bigint(21) NOT NULL",
+	"id_article"			=> "bigint(21) NOT NULL"
+	);
+
+$spip_echoppe_produits_rubriques = array(
+	"id_produit"			=> "bigint(21) NOT NULL",
+	"id_rubrique"			=> "bigint(21) NOT NULL"
+	);
+
+$spip_echoppe_produits_sites = array(
+	"id_produit"			=> "bigint(21) NOT NULL",
+	"id_site"				=> "bigint(21) NOT NULL"
+	);
+
+$spip_echoppe_produits_documents = array(
+	"id_produit"			=> "bigint(21) NOT NULL",
+	"lang"				=> "VARCHAR(2) DEFAULT '' NOT NULL", // Dans le cas ou le doc sert d'illu de pochette de dvd par ex, mettre la bonne pochette avec le titre du film dans la langue visitée
+	"id_documents"		=> "bigint(21) NOT NULL"
+	);
+//
+// fin base des liens avec les objets spip
+//
+
+
 
 $spip_echoppe_options = array(
 	"id_option"			=> "bigint(21) NOT NULL",
