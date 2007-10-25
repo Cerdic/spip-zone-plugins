@@ -4,7 +4,6 @@ function jqueryp_insert_jquery_plugins($flux){
 	$js = array('type'=>'inline','data'=>array());
 	$js = _jqueryp_insert_jquery_plugins($js);
 	$inline = join($js['data'],"\n");
-	spip_log("inline" . $inline,'jquery_plugins');
 	return $flux . "\n\n" . $inline;
 }
 
