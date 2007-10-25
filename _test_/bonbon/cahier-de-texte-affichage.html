@@ -72,15 +72,15 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 (#REM) On prépare une liste des artciles parmis lesquels faire la requête. Cette liste sera «stockée» dans {!doublons requete}. Ceci atomise les requêtes avec des Regexp et évite les trop grosses requêtes SQL. Merci à Cédric Morin pour l'idée.
 
 ][
-(#REM) on selectionne ceux qui ont la bonne les classes
-]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{titre_mot==#ENV{classe,.}}{doublons Prepa_Classes}></BOUCLE_PrepaClasses>[
+(#REM) on selectionne ceux qui ont la bonne les classes et l'auteur (s'il y a)
+]<BOUCLE_PrepaClasses(ARTICLES){id_rubrique}{id_auteur ?}{titre_mot==#ENV{classe,.}}{doublons Prepa_Classes_auteur}></BOUCLE_PrepaClasses>[
 (#REM) on selectionne ceux qui ont la bonne matière
 ]<BOUCLE_Prepa_Matiere(ARTICLES){id_rubrique}{titre_mot==#ENV{matiere,.}}
-{!doublons Prepa_Classes}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
-(#REM) Idem pour les dates et l'auteur (s'il y a)
-]<BOUCLE_PrepaDates(ARTICLES){id_rubrique}{id_auteur ?}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons Prepa_Matiere}{doublons Date_auteur}></BOUCLE_PrepaDates>[
+{!doublons Prepa_Classes_auteur}{doublons Prepa_Matiere}></BOUCLE_Prepa_Matiere>[
+(#REM) Idem pour les dates 
+]<BOUCLE_PrepaDates(ARTICLES){id_rubrique}{date>=#ENV{date_debut,.}}{date<=#ENV{date_fin,9999-12-01 03:25:02}}{!doublons Prepa_Matiere}{doublons Date}></BOUCLE_PrepaDates>[
 (#REM) on choisi les articles qui sont du bon groupe
-]<BOUCLE_Prepa_Groupes(ARTICLES){id_rubrique}{titre_mot==#ENV{groupe,.}}{!doublons Date_auteur}{doublons requete}></BOUCLE_Prepa_Groupes>[
+]<BOUCLE_Prepa_Groupes(ARTICLES){id_rubrique}{titre_mot==#ENV{groupe,.}}{!doublons Date}{doublons requete}></BOUCLE_Prepa_Groupes>[
 
 (#REM) {!doublons requete} est donc un critère qui sélectionne tous les articles qui correspondent aux restrictions de groupe, date, matière et même auteur s'il y a. Sans reitérer les commandes SQL.
 
