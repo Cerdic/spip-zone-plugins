@@ -29,7 +29,7 @@
 		if ($GLOBALS['auteur_session']['statut'] == '0minirezo')
 		if ($x['args']['exec'] == 'articles') {
 			$id_article = intval($x['args']['id_article']);
-			$t = spip_fetch_array(spip_query("SELECT texte FROM spip_articles WHERE id_article=$id_article"));
+			$t = sql_fetch(spip_query("SELECT texte FROM spip_articles WHERE id_article=$id_article"));
 			if ($c = notes_automatiques($t['texte'])) {
 				$x['data'] .= "<br />\n"
 				.debut_boite_info(true)
