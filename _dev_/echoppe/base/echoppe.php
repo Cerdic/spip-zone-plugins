@@ -11,6 +11,10 @@ $spip_echoppe_categories = array(
 	"id_categorie"	=> "bigint(21) NOT NULL",
 	"id_parent"	=> "bigint(21) NOT NULL"
 	);
+	
+$spip_echoppe_categories_key = array(
+	"PRIMARY KEY"        => "id_categorie",
+	);
 
 $spip_echoppe_categories_descriptions = array(
 	"id_categorie_description"	=> "bigint(21) NOT NULL",
@@ -20,7 +24,14 @@ $spip_echoppe_categories_descriptions = array(
 	"descriptif"				=> "text NOT NULL",
 	"texte"					=> "longblob NOT NULL",
 	"logo"					=> "text NOT NULL",
+	"maj"					=> "TIMESTAMP",
 	"statut"					=> "varchar(10) DEFAULT '0' NOT NULL"	// ( je le mets ici, comme ça, on peut avoir moins de catégories dans les langues étrangères)
+	);
+
+$spip_echoppe_categories_descriptions_key = array(
+	"PRIMARY KEY"		=> "id_categorie_description",
+	"KEY id_categorie"    => "id_categorie",
+	"KEY lang"		=> "lang",
 	);
 
 $spip_echoppe_produits = array(
@@ -32,6 +43,7 @@ $spip_echoppe_produits = array(
 	"largeur"					=> "float DEFAULT '0' NOT NULL",
 	"longueur"				=> "float DEFAULT '0' NOT NULL",
 	"ref_produit"				=> "text NOT NULL",
+	"maj"					=> "TIMESTAMP",
 	"statut"					=> "varchar(10) DEFAULT '0' NOT NULL"
 	);
 
@@ -46,6 +58,7 @@ $spip_echoppe_produits_descriptions = array(
 	"prix_base_htva"		=> "float DEFAULT '0' NOT NULL", 	//(permettrait de donner un prix de base et pas faire 50000 jointures pour retrouver le prix dans une liste de produits....)
 	"tva"					=> "float DEFAULT '0' NOT NULL",	// (doit à mon avis être internationalisé... non ? )
 	"quantite_mini"		=> "int NOT NULL",
+	"maj"				=> "TIMESTAMP",
 	"colisage"			=> "VARCHAR(10) DEFAULT '' NOT NULL"//(ça pourrait etre une donnée d'info sur la taille du colis ( ou lettre, ou palettes ... etc )
 	);
 
@@ -53,8 +66,23 @@ $spip_echoppe_categories_produits = array(
 	"id_categorie"			=> "bigint(21) NOT NULL",
 	"id_produit"			=> "bigint(21) NOT NULL"
 	);
-	
-	
+
+// Un produits peut faire partie d'une catégorie : écran smasung, mais aussi d'une gamme : "SyncMaster" ou "Ordinateur complet" 
+// A voir si ca fait pas double emplois avec les mots clés
+$spip_echoppe_gammes = array(
+	"id_gamme"			=> "bigint(21) NOT NULL",
+	"titre"				=> "text NOT NULL", // On se pete pas la tete, on utilise les multi
+	"descriptif"			=> "text NOT NULL"
+	);
+
+$spip_echoppe_gammes_produits = array(
+	"id_gamme"			=> "bigint(21) NOT NULL",
+	"id_produit"			=> "bigint(21) NOT NULL"
+	);
+
+
+
+
 //
 // Base des liens avec les objets spip
 //
