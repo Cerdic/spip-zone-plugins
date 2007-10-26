@@ -170,7 +170,7 @@ function jqueryp_liste_dispo($theme = false){
 		}
 		if(isset($extension['themes'])){
 			foreach ($extension['themes'] as $nom=>$dossier){
-				$liste_themes[$nom] = _DIR_LIB . $extension['dir'] . '/' . $extension['dir_theme'] . '/' . $dossier;
+				$liste_themes[$nom] = _DIR_LIB . $extension['dir'] . '/' . $extension['dir_themes'] . '/' . $dossier;
 			}
 		}
 	}
