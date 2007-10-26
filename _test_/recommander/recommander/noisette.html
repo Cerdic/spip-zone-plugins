@@ -1,0 +1,11 @@
+<div id='recommander' class='formulaire_spip'>
+<h2 class='menu-titre'><:recommander:recommander:></h2>
+<div id='formulaire_recommander'>
+#ENV*{fragment}
+</div>
+</div>
+<script type="text/javascript"><!--
+	var ajax_image_searching = '<div style="float: #LANG_RIGHT; z-index:2;"><img src="#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{searching.gif}}" /></div>';
+	[(#INCLURE{javascript/recommander.js}|compacte_js)]
+// -->
+</script>

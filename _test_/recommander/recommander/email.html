@@ -1,0 +1,15 @@
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+Bonjour,
+
+#ENV{recommander_from} vous recommande la lecture de cette page :
+
+* [(#ENV{titre}|texte_brut)] *[
+(#ENV{texte}|textebrut)
+
+][-> (#ENV{url}|url_absolue)
+][
+
+(#ENV{recommander_message})
+
+]
+-- <:envoi_via_le_site:> #CONFIG{nom_site} #CONFIG{adresse_site} --

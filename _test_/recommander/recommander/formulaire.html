@@ -1,0 +1,20 @@
+[<div class='erreur'>(#ENV{erreur,''})</div>]
+<form method='post' action='#ENV{self}'>
+[(#ENV{url}|form_hidden)]
+<input type='hidden' name='recommander_env' value='#ENV*{recommander_env}' />
+<input type='hidden' name='recommander_cle' value='#ENV*{recommander_cle}' />
+<p>
+<label for='recommander_from'><:form_pet_votre_email:></label>
+<input type='text' id='recommander_from' name='recommander_from' 
+value='[(#ENV{recommander_from,''}|htmlspecialchars)]' class='forml' />
+</p>
+<p>
+<label for='recommander_to'><:recommander:destinataire:></label>
+<input type='text' id='recommander_to' name='recommander_to' class='forml'
+value='[(#ENV{recommander_to,''}|htmlspecialchars)]' class='formo' />
+</p>
+<p><label for='recommander_message'><:forum_texte:></label>
+<textarea id='recommander_message' name='recommander_message' class='forml'>[(#ENV{recommander_message,''}|htmlspecialchars)]</textarea>
+</p>
+<div class='spip_bouton'><input type='submit' name='recommander_email' value='<:recommander:recommander_message:>' /></div>
+</form>
