@@ -11,13 +11,13 @@ if (!isset($GLOBALS['meta']['recommander_secret'])){
 
 function verifier_email_ou_erreur($email) {
 	if (!$email = trim($email))
-		return _T('form_prop_indiquer_email');
+		return _T('form_prop_indiquer_email').'<br />';
 	if (!email_valide($email))
 		return _T('pass_erreur_non_valide',
 				array(
 				'email_oubli' => htmlspecialchars($email)
 				)
-			);
+			).'<br />';
 }
 
 //

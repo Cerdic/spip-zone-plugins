@@ -1,4 +1,4 @@
-[<div class='erreur'>(#ENV{erreur,''})</div>]
+[<div class='erreur'>(#ENV*{erreur,''})</div>]
 <form method='post' action='#ENV{self}'>
 [(#ENV{url}|form_hidden)]
 <input type='hidden' name='recommander_env' value='#ENV*{recommander_env}' />
