@@ -288,7 +288,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}."
 
 // ---------------------------------------------------------------------------
 	'sommaire:nom' => 'Un sommaire pour vos articles',
-	'sommaire:description' => "Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML <code><h3>Un intertitre</h3></code> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).\n\n#PUCE Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[Largeur du sommaire (9 &agrave; 99) :->%lgr_sommaire% caract&egrave;res]]\n\n
+	'sommaire:description' => "Construit un sommaire pour vos articles afin d&rsquo;acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).\n\n#PUCE Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[Largeur du sommaire (9 &agrave; 99) :->%lgr_sommaire% caract&egrave;res]]\n\n
 #PUCE Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
 - Syst&eacute;matique pour chaque article (une balise <code>[!sommaire]</code> plac&eacute;e n&rsquo;importe o&ugrave; &agrave; l&rsquo;int&eacute;rieur du texte de l&rsquo;article cr&eacute;era une exception).
 - Uniquement pour les articles contenant la balise <code>[sommaire]</code>.\n\n[[Cr&eacute;ation syst&eacute;matique du sommaire :->%auto_sommaire%]]\n\n

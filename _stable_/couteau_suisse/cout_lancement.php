@@ -119,9 +119,6 @@ cs_log("[#$rand]  -- cs_initialise_includes()... cout_fonctions.php sera probabl
 	cs_initialise_includes();
 	// sauver la configuration
 	cs_sauve_configuration();
-cs_log("[#$rand]  -- cs_installe_outils...");
-	// lancer la procedure d'installation pour chaque outil
-	cs_installe_outils();
 	// en metas : outils actifs
 cs_log("[#$rand]  -- ecriture metas");
 	ecrire_meta('tweaks_actifs', serialize($metas_outils));

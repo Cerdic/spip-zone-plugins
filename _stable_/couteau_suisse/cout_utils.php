@@ -10,6 +10,7 @@
 #-----------------------------------------------------#
 
 cs_log("Chargement de cout_utils.php et lancement de cs_initialisation...");
+@define('_CS_INSTALLATION', 1);
 
 // $outils : tableau ultra complet avec tout ce qu'il faut savoir sur chaque outil
 // $cs_variables : tableau de toutes les variables que les outils peuvent utiliser et manipuler
@@ -20,9 +21,6 @@ global $outils, $cs_variables;
 $cs_variables = $outils = array();
 // liste des types de variable
 $cs_variables['_chaines'] = $cs_variables['_nombres'] = array();
-
-// lancer l'initialisation
-// cs_initialisation();
 
 /*****************/
 /* COMPATIBILITE */
@@ -438,10 +436,10 @@ function cs_optimise_js($code) {
 // la fonction doit etre ecrite sous la forme monoutil_installe() et placee
 // dans le fichier outils/monoutil.php
 function cs_installe_outils() {
-	global $outils;
-	foreach($temp = $outils as $outil) if ($outil['actif']) {
-		include_spip('outils/'.$outil['id']);
-		if (function_exists($f = $outil['id'].'_installe')) {
+	$actifs = unserialize($GLOBALS['meta']['tweaks_actifs']);
+	foreach($actifs as $nom=>$actif) if($actif['actif']) {
+		include_spip('outils/'.$nom);
+		if (function_exists($f = $nom.'_installe')) {
 			$f();
 cs_log(" -- $f() : installé !");
 		}
