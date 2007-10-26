@@ -10,7 +10,14 @@ function inc_forum_insert() {
 		return '!'; # echec silencieux du POST
 	}
 
-	if ($cfg = @unserialize($GLOBALS['meta']['akismet'])) {
+	// On ne passe pas dans akismet
+	// si le visiteur est connecte
+	// ou si akismet n'est pas configure
+	if (
+	!isset($GLOBALS['auteur_session']['statut'])
+	AND $cfg = @unserialize($GLOBALS['meta']['akismet'])
+	AND strlen($cfg['apiKey'])
+	) {
 		$akismet = new Akismet($GLOBALS['meta']["adresse_site"], $cfg['apiKey']); 
 		// Utilisez votre propre cle de developpeur Wordress, 
 		// disponible sur http://akismet.com/personal/ pour un usage personnel / non commercial
@@ -32,7 +39,6 @@ function inc_forum_insert() {
 		}
 	}
 
-	// Si c'est OK (ou pas configure) on passe la main a SPIP
 	return inc_forum_insert_dist();
 }
 
