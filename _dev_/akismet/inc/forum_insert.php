@@ -22,12 +22,13 @@ function inc_forum_insert() {
 		$akismet->setType('comment');
 		$akismet->setPermalink('http://' . $GLOBALS['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 		if ($akismet->isSpam()) {
-			//spip_log('*** sauvegarde le commentaire mais le garde comme spam (en cas de faux positif) ***');
-			//$spam_statut = 'spam_akismet';
-			//Solution brutale : on sort sans rien demander
-			spip_log($_POST);
+			// sauvegarde le commentaire mais le garde comme spam
+			// (en cas de faux positif)
 			tracer_erreur_forum('Akismet a d&#233;tect&#233; un SPAM');
-			return '!'; # echec silencieux du POST
+			return inc_forum_insert_dist('spam');
+
+			// Si on prefere ne pas enregistrer et mourrrrir :
+			// return self('&');
 		}
 	}
 
