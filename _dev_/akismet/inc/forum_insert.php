@@ -3,6 +3,7 @@
 // On deroute inc/forum_insert pour verifier d'abord chez akismet
 function inc_forum_insert() {
 	require_once _DIR_RESTREINT.'inc/forum_insert.php';
+	require_once _DIR_PLUGIN_AKISMET.'Akismet.class.php';
 
 	// Antispam : si 'nobot' a ete renseigne, ca ne peut etre qu'un bot
 	if (strlen(_request('nobot'))) {

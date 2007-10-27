@@ -1,26 +1,24 @@
 <plugin>
 	<nom>
-		Akismet : antiSpam
+		Akismet : antispam des forums
 	</nom>
   	<auteur>
-		Gilles VINCENT, Alex Potsides
-_ Cette extension, basé de la classe PHP4 fournie par [Alex Potsides->http://www.achingbrain.net], est distribu&#233; sous licence [GNU/GPL->http://www.gnu.org/licenses/gpl.html]
+		Gilles VINCENT, Fil
+_ Cette extension, bas&eacute;e sur la classe PHP4 d'[Alex Potsides->http://www.achingbrain.net], est distribu&#233;e sous licence [GNU/GPL->http://www.gnu.org/licenses/gpl.html]
 	</auteur>
 	<lien>
 	</lien>
 	<version>
-		0.1
+		0.2
 	</version>
 	<etat>
-    	test
+		test
 	</etat>
 	<description>
-		Portage pour SPIP d'[Akismet->http://akismet.com], une extension anti-spam de Wordpress . Cette extension de Spip nécessite l'extension CFG. [ Accédez à la configuration->.?exec=cfg&amp;cfg=akismet]
+		Portage pour SPIP d'[Akismet->http://akismet.com], une extension antispam de Wordpress.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-  	<prefix>akismet
-	</prefix>
-	<options>
-		Akismet.class.php
-	</options>
+	<lien>http://www.spip-contrib.net/Akismet</lien>
+	<prefix>akismet</prefix>
+	<necessite id='cfg' version='[0;]' />
+	<necessite id='spip' version='[1.9300;]' />
 </plugin>
