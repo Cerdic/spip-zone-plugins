@@ -416,17 +416,22 @@ cs_log("Fin   : exec_admin_couteau_suisse()");
 function cs_boite_rss() {
 	include_spip('action/editer_site');
 	$r = spip_xml_load(_CS_RSS_SOURCE);
-	$c = spip_xml_match_nodes(',^item$,', $r, $r2);
+	if (function_exists('spip_xml_match_nodes')) $c = spip_xml_match_nodes(',^item$,', $r, $r2);
+	else {
+		$r2= array_shift(array_shift(array_shift(array_shift($r))));
+		$c = count($r2);
+	}
 	if($c) {
 		debut_boite_info();
 		$r3 = &$r2['item'];
 		$c = count($r3);
-		echo '<p><strong>'._T('cout:rss_titre').'</strong></p><ul style="padding:0 0 0 0.6em;">';
+		echo '<p><strong>'._T('cout:rss_titre').'</strong></p><ul style="list-style-type:none; padding:0 0 0 0.6em; ">';
 		for($i=0; $i<min($c, 12); $i++) {
-		 $t = htmlentities(($r3[$i]['title'][0]), ENT_QUOTES, "UTF-8");
-		 $t = preg_replace(',\s*&amp;#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
 		 $l = $r3[$i]['link'][0];
-		 echo "<li style='padding-top:0.6em;'><a href='$l' class='spip_out' target='_cout'>$t</a></li>";
+		 $t = str_replace('&amp;', '&', htmlentities($r3[$i]['title'][0], ENT_NOQUOTES, "UTF-8"));
+		 $t = preg_replace(',\s*&#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
+		 $t = preg_replace(',^(.*?):,', "- <a href='$l' class='spip_out' target='_cout'>$1</a>:", $t);
+		 echo "<li style='padding-top:0.6em;'>$t</li>";
 		}
 		echo '</ul>';
 		fin_boite_info();
