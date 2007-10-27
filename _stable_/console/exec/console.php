@@ -11,6 +11,7 @@ function exec_console(){
 		if (isset($GLOBALS['meta']['console']))
 			$liste_auteur_console_active = unserialize($GLOBALS['meta']['console']);
 		$console_active = in_array($connect_id_auteur,$liste_auteur_console_active);
+		
 		if (_request("activer")){
 			include_spip('inc/metas');
 			$liste_auteur_console_active = array_merge($liste_auteur_console_active,array($connect_id_auteur));
@@ -43,7 +44,21 @@ function exec_console(){
 		exit;
 	}
 
+
+echo "<script>
+	$(document).ready(function(){
+		$('#belle_console').click(function(e){
+		e.preventDefault;
+		document.location = '../?page=logs'; 
+		});
+	});
+	</script>";
+	
+	echo "<div style='text-align:center'>
+		<input id='belle_console' type='submit' name='afficher_belle_console' value='"._L('Afficher la belle console')."' class='fondo'></div>";
+
 	echo generer_url_post_ecrire('console');
+	
 	if ($console_active){
 		echo "<div style='text-align:$spip_lang_right'>
 		<input type='submit' name='desactiver' value='"._L('Desactiver la console')."' class='fondo'></div>";

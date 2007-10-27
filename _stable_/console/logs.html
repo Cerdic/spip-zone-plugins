@@ -37,7 +37,7 @@ color : #00CC00 ;
 
 
 <?php
-if(!$auteur_session['nom']) {echo "reservé aux admins"; return ;}
+if(!($auteur_session['statut'] == "0minirezo")) {echo "reservé aux admins"; return ;}
 
 function menu_log(){
 $menu ="" ;

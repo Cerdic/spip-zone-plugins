@@ -2,7 +2,7 @@
 #HTTP_HEADER{Content-Type: text/html}
 <?php
 
-if(!$auteur_session['nom']) {echo "reservé aux admins"; return ;}
+if(!($auteur_session['statut'] == "0minirezo")) {echo "reservé aux admins"; return ;}
 
 function console_lit_log($logname = "#ENV{log}"){
 	$files = preg_files(defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION ,"$logname\.log(\.[0-9])?");
@@ -19,7 +19,7 @@ function console_lit_log($logname = "#ENV{log}"){
 	$maxlines = 40;
 	while ($contenu && $maxlines--){
 		$hop = array_pop($contenu) ;
-		
+		if(preg_match(",page='console',", $hop)) continue ;
 		if (preg_match_all("/.{100}/UmsS", $hop, $longs, PREG_SET_ORDER)) {
 	        foreach ($longs as $long) {
  	            $hop = str_replace($long[0], $long[0].'<br>', $hop);
