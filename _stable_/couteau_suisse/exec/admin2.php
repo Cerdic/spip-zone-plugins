@@ -356,6 +356,11 @@ verif_plugin();
 	// pour la  version du plugin
 	include_spip('inc/plugin');
 	$cs_infos = plugin_get_infos('couteau_suisse');
+	$cs_infos = $cs_infos['version'];
+	// pour la  version disponible
+	include_spip('inc/distant');
+	if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
+		$distant = preg_match(',<version>([1-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
 	// pour la liste des docs sur spip-contrib
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
 	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace('/@@(.*?)@@/e', "couper(_T('\\1'), 25)", $v);
@@ -363,30 +368,31 @@ verif_plugin();
 	echo propre(_T('cout:help', array(
 		'reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'),
 		'hide' => generer_url_ecrire(_request('exec'),'cmd=showall'),
-		'version' => $cs_infos['version'],
+		'version' => $cs_infos,
+		'distant' => $distant==$cs_infos?_T('cout:a_jour'):($distant?_T('cout:distant', array('version' => $distant)):''),
 		'contribs' => join('', $contribs)
 	)));
 	fin_boite_info();
 	$aide_racc = cs_aide_raccourcis();
 	if(strlen($aide_racc)) {
-		echo '<br />';
 		debut_boite_info();
 		echo $aide_racc;
 		fin_boite_info();
 	}
 	$aide_pipes = cs_aide_pipelines();
 	if(strlen($aide_pipes)) {
-		echo '<br />';
 		debut_boite_info();
 		echo $aide_pipes;
 		fin_boite_info();
 	}
-
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
+
 	creer_colonne_droite();
+	lire_metas();
+	// si l'outil rss_couteau_suisse est actif, on telecharge les news...
+	if (strpos($GLOBALS['meta']['tweaks_actifs'], 'rss_couteau_suisse') !== false) cs_boite_rss();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
 	debut_droite();
-	lire_metas();
 
 	debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),'','','&nbsp;'._T('cout:liste_outils'));
 	echo _T('cout:presente_outils2');
@@ -405,6 +411,26 @@ verif_plugin();
 
 	echo fin_gauche(), fin_page();
 cs_log("Fin   : exec_admin_couteau_suisse()");
+}
+
+function cs_boite_rss() {
+	include_spip('action/editer_site');
+	$r = spip_xml_load(_CS_RSS_SOURCE);
+	$c = spip_xml_match_nodes(',^item$,', $r, $r2);
+	if($c) {
+		debut_boite_info();
+		$r3 = &$r2['item'];
+		$c = count($r3);
+		echo '<p><strong>'._T('cout:rss_titre').'</strong></p><ul style="padding:0 0 0 0.6em;">';
+		for($i=0; $i<min($c, 12); $i++) {
+		 $t = htmlentities(($r3[$i]['title'][0]), ENT_QUOTES, "UTF-8");
+		 $t = preg_replace(',\s*&amp;#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
+		 $l = $r3[$i]['link'][0];
+		 echo "<li style='padding-top:0.6em;'><a href='$l' class='spip_out' target='_cout'>$t</a></li>";
+		}
+		echo '</ul>';
+		fin_boite_info();
+	}
 }
 
 ?>

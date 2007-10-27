@@ -22,6 +22,8 @@ _ {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}";
 $temp['decoration'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['decoration']}</blockquote>";
 $temp['type_urls'] = "<blockquote style=\"font-size:90%; margin:0 2em 0 2em;\">{$temp['type_urls']}</blockquote>";
 $temp['note'] = "<sup>(*)</sup>";
+@define('_CS_RSS_SOURCE', 'http://zone.spip.org/trac/spip-zone/log/_plugins_/_stable_/couteau_suisse?format=rss&mode=stop_on_copy&limit=20');	
+
 // fin du code
 
 // traductions habituelles
@@ -35,12 +37,14 @@ _ - [De tout le plugin->@reset@]
 </p>",
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
-		."<p>Version : v@version@</p>"
+		."<p>Version : @version@@distant@</p>"
 		."<p>Liens de documentation :<br/>- [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p>"
 		."<p>R&eacute;initialisations :
 _ - [Des outils cach&eacute;s->@hide@]
 _ - [De tout le plugin->@reset@]
 </p>",
+	'distant' => "<br/>Mise &agrave; jour : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]",
+	'a_jour' => "<br/>Votre version est &agrave; jour.",
 
 	'raccourcis' => "Raccourcis typographiques actifs du Couteau Suisse&nbsp;:",
 	'pipelines' => "Pipelines utilis&eacute;s&nbsp;:",
@@ -226,7 +230,11 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 
 // ---------------------------------------------------------------------------
 	'log_couteau_suisse:nom' => 'Log d&eacute;taill&eacute; du Couteau Suisse',
-	'log_couteau_suisse:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Couteau Suisse' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
+	'log_couteau_suisse:description' => "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Le Couteau Suisse' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".cs_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
+
+	'rss_couteau_suisse:nom' => 'R&eacute;visions du Couteau Suisse',
+	'rss_couteau_suisse:description' => "Ajoute un cadre sur la pr&eacute;sente page de configuration, o&ugrave; figurent les derni&egrave;res modifications apport&eacute;es au code du plugin 'Le Couteau Suisse' ([Source->"._CS_RSS_SOURCE."]).",
+	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
 
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
 	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',
@@ -304,7 +312,7 @@ _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}."
 [[Activer la balise #CS_SOMMAIRE :->%balise_sommaire%]]\n\n
 Attention, aucun sommaire automatique (balise #CS_SOMMAIRE inactive) ne sera pas ins&eacute;r&eacute; dans l'article si votre squelette utilise la balise #TEXTE &eacute;toil&eacute;e : <code>#TEXTE*</code>.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec : {D&eacute;coupe en pages et onglets}.",
-	'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
+		'sommaire:aide' => defined('_sommaire_AUTOMATIQUE')?'Un article sans sommaire&nbsp;: @racc@':'Un article avec sommaire&nbsp;: @racc@',
 	'sommaire_titre' => 'Sommaire',
 	'sommaire_page' => ',&nbsp;p@page@',
 

@@ -144,7 +144,7 @@ function set_cs_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
 cs_log("set_cs_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
 	$fichier_dest = _DIR_CS_TMP . "$pipeline.php";
 cs_log(" -- fichier_dest = $fichier_dest");
-	ecrire_fichier($fichier_dest, '<'."?php\n// Code de contrôle pour le plugin 'Couteau Suisse'\n$code?".'>');
+	ecrire_fichier($fichier_dest, '<'."?php\n// Code de controle pour le plugin 'Couteau Suisse'\n$code?".'>');
 }
 
 // est-ce que $pipe est un pipeline ?
@@ -180,9 +180,11 @@ function cs_aide_raccourcis() {
 	foreach ($outils as $outil) {
 		// stockage de la liste des fonctions par pipeline, si l'outil est actif...
 		if ($outil['actif']) {
-			if (function_exists($f=$outil['id'].'_raccourcis')) $aide[] = '<li style="margin-top: 0.7em;">' . $f() . '</li>';
-			elseif (!preg_match(',:aide$,', _T("cout:{$outil['id']}:aide") ))
-				$aide[] = '<li style="margin-top: 0.7em;">' .  _T("cout:{$outil['id']}:aide") . '</li>';
+			$id = $outil['id'];
+			include_spip('outils/'.$id);	
+			if (function_exists($f = $id.'_raccourcis')) $aide[] = '<li style="margin-top: 0.7em;">' . $f() . '</li>';
+			elseif (!preg_match(',:aide$,', _T("cout:$id:aide") ))
+				$aide[] = '<li style="margin-top: 0.7em;">' .  _T("cout:$id:aide") . '</li>';
 		}
 	}
 	if(!count($aide)) return '';

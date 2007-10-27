@@ -5,16 +5,6 @@
 
 // TODO : ajouter un fichier css pour le sommaire
 
-// desactive pour l'instant. utiliser le parametre d'url : cs=print
-/*
-// Filtre local utilise par le filtre 'cs_imprimer' afin d'eviter la decoupe
-// Exemple : lors d'une impression a l'aide du squelette imprimer.html,
-// remplacer la balise #TEXTE par [(#TEXTE*|cs_imprimer|propre)].
-function sommaire_imprimer($texte) {
-	return sommaire_d_article($texte);
-}
-*/
-
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 function sommaire_retire_raccourcis($texte) {
 	return str_replace(array(_sommaire_SANS_FOND, _sommaire_SANS_SOMMAIRE, _sommaire_AVEC_SOMMAIRE), '', $texte);

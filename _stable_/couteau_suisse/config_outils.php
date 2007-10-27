@@ -259,7 +259,10 @@ add_outil( array(
 
 add_outil( array(
 	'id' => 'log_couteau_suisse',
-//	'code:options' => "@define('_LOG_CS','oui');",
+));
+
+add_outil( array(
+	'id' => 'rss_couteau_suisse',
 ));
 
 add_outil( array(
