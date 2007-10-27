@@ -371,7 +371,7 @@ verif_plugin();
 	$cs_infos = $maj[1] = $cs_infos['version'];
 	// pour la version disponible, on regarde toutes les deux heures
 	$maj = isset($GLOBALS['meta']['tweaks_maj'])?unserialize($GLOBALS['meta']['tweaks_maj']):array(0, '');
-	if ($maj[1] && (time()-$maj[0] < 2*3600)) $distant = $maj[1];
+	if ($quiet = $maj[1] && (time()-$maj[0] < 2*3600)) $distant = $maj[1];
 	else {
 		include_spip('inc/distant');
 		if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
@@ -409,7 +409,7 @@ verif_plugin();
 	creer_colonne_droite();
 	lire_metas();
 	// si l'outil rss_couteau_suisse est actif, on telecharge les news...
-	if (strpos($GLOBALS['meta']['tweaks_actifs'], 'rss_couteau_suisse') !== false) cs_boite_rss();
+	if (strpos($GLOBALS['meta']['tweaks_actifs'], 'rss_couteau_suisse') !== false) cs_boite_rss(!$quiet);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
 	debut_droite();
 
@@ -432,12 +432,12 @@ verif_plugin();
 cs_log("Fin   : exec_admin_couteau_suisse()");
 }
 
-function cs_boite_rss() {
+function cs_boite_rss($force) {
 	debut_boite_info();
 	$p = '';
 	// on cherche le flux rss toutes les deux heures
 	$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
-	if (time()-$lastmodified < 2*3600) lire_fichier(_DIR_RSS_TMP, $p);
+	if (!$force && (time()-$lastmodified < 2*3600)) lire_fichier(_DIR_RSS_TMP, $p);
 	if(strlen($p)) {
 		echo $p;
 		fin_boite_info();
