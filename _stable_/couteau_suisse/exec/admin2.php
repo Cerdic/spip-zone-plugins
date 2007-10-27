@@ -15,6 +15,14 @@ define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
 if(defined('_SPIP19100') & !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
+if(defined('_SPIP19100') & !function_exists('spip_xml_load')) { 
+	function spip_xml_load($url){
+		$texte = recuperer_page($url);
+		include_spip('inc/plugin');
+		return parse_plugin_xml($texte);
+	}
+}
+
 
 function cs_admin_styles_et_js() {
 	global $afficher_outil;
@@ -425,7 +433,7 @@ function cs_boite_rss() {
 		debut_boite_info();
 		$r3 = &$r2['item'];
 		$c = count($r3);
-		echo '<p><strong>'._T('cout:rss_titre').'</strong></p><ul style="list-style-type:none; padding:0 0 0 0.6em; ">';
+		echo '<p><strong>'._T('cout:rss_titre').'</strong></p><ul style="list-style-type:none; padding:0; ">';
 		for($i=0; $i<min($c, 12); $i++) {
 		 $l = $r3[$i]['link'][0];
 		 $t = str_replace('&amp;', '&', htmlentities($r3[$i]['title'][0], ENT_NOQUOTES, "UTF-8"));
