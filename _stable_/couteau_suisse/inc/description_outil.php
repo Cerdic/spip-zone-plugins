@@ -22,6 +22,8 @@ function description_outil_une_variable($index, $outil, $variable, $label, &$ok_
 	// la valeur de la variable n'est stockee dans les metas qu'au premier post
 	if (isset($metas_vars[$variable])) $valeur = $metas_vars[$variable];
 		else $valeur = cs_get_defaut($variable);
+if($index==11) cs_log("---------------------- $metas_vars[dossier_squelettes] !");
+if($index==11) cs_log("---------------------- une_variable($index) - Traite %$variable% = $valeur");
 	$valeur = cs_retire_guillemets($valeur);
 //cs_log(" -- description_outil_une_variable($index) - Traite %$variable%");
 	$cs_variable = &$cs_variables[$variable];

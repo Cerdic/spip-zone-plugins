@@ -2,8 +2,8 @@
 // Ce fichier est charge a chaque hit //
 
 /* COMPATIBILTES */
-if (version_compare($GLOBALS['spip_version_code'],'1.93','>=')) @define('_SPIP19300', 1);
-if (version_compare($GLOBALS['spip_version_code'],'1.92','>=')) @define('_SPIP19200', 1);
+if ($GLOBALS['spip_version_code']>=1.93) @define('_SPIP19300', 1);
+if ($GLOBALS['spip_version_code']>=1.92) @define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
 
 function cout_autoriser() {

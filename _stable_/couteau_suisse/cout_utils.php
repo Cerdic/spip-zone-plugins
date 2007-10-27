@@ -452,8 +452,6 @@ cs_log(" -- $f() : installé !");
 function cs_initialisation_totale() {
 	// on force la reinstallation complete des outils
 	cs_initialisation(true);
-	// reinitialisation des pipelines, par precaution
-	// if (file_exists($f = _DIR_TMP."charger_pipelines.php")) @unlink($f);
 }
 
 ?>

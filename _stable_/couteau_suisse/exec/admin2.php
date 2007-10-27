@@ -26,8 +26,11 @@ if(defined('_SPIP19100') & !function_exists('spip_xml_load')) {
 
 function cs_admin_styles_et_js() {
 	global $afficher_outil;
+	$a = defined('_SPIP19100')||defined('_SPIP19200')
+		?'div.cadre-info a { background:none; padding:0; border:0; } div.cadre-info { margin-bottom:1em; }'
+		:'';
 	echo <<<EOF
-<style type='text/css'>
+<style type='text/css'>$a
 
 div.cadre-padding form{
 	padding:0;
@@ -315,6 +318,7 @@ verif_plugin();
 		global $outils;
 		include_spip('cout_utils');
 		include_spip('config_outils');
+		include_spip('inc/cs_outils');
 		cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
 		foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
 		ecrire_meta('tweaks_variables', serialize($metas_vars));
@@ -367,13 +371,13 @@ verif_plugin();
 	$cs_infos = $maj[1] = $cs_infos['version'];
 	// pour la version disponible, on regarde toutes les deux heures
 	$maj = isset($GLOBALS['meta']['tweaks_maj'])?unserialize($GLOBALS['meta']['tweaks_maj']):array(0, '');
-	if (time()-$maj[0] < 2*3600) $distant = $maj[1];
+	if ($maj[1] && (time()-$maj[0] < 2*3600)) $distant = $maj[1];
 	else {
-	include_spip('inc/distant');
-	if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
-		$distant = $maj[1] = preg_match(',<version>([1-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
+		include_spip('inc/distant');
+		if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
+			$distant = $maj[1] = preg_match(',<version>([0-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
 		$maj[0] = time();
-		ecrire_meta('tweaks_maj', serialize($maj));
+		if ($distant) ecrire_meta('tweaks_maj', serialize($maj));
 		if(!defined('_SPIP19300')) ecrire_metas();
 	}
 	// pour la liste des docs sur spip-contrib
