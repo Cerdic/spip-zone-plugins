@@ -460,7 +460,7 @@ function cs_boite_rss() {
 	$du = affdate_heure(date('Y-m-d H:i:s',time()));
 	echo $p = '<p><b>'._T('cout:rss_titre').'</b></p><ul style="list-style-type:none; padding:0; ">'.$p
 		.'</ul><p class="spip_xx-small"><b>'
-		._T('cout:edition', array('du'=>$du)).'</b></p>';
+		._T('cout:edition')."</b><br/>$du</p>";
 	ecrire_fichier(_DIR_RSS_TMP, $p);
 	fin_boite_info();
 }
