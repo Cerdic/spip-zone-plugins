@@ -35,6 +35,7 @@ cs_log("couteau_suisse_install($action)");
 				include_spip('inc/getdocument');
 				effacer_repertoire_temporaire(_DIR_CS_TMP);
 			}
+			@unlink(_DIR_RSS_TMP);
 			break;
 	}
 }

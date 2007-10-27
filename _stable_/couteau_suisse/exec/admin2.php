@@ -361,10 +361,17 @@ verif_plugin();
 
 	debut_gauche();
 	debut_boite_info();
-	// pour la  version du plugin
-	include_spip('inc/plugin');
-	$cs_infos = plugin_get_infos('couteau_suisse');
-	$cs_infos = $cs_infos['version'];
+	// pour la  version du plugin, on regarde toutes les deux heures
+	$maj = isset($GLOBALS['meta']['tweaks_maj'])?unserialize($GLOBALS['meta']['tweaks_maj']):array(0, '');
+	if (time()-$maj[0] < 2*3600) $cs_infos = $maj[1];
+	else {
+		include_spip('inc/plugin');
+		$cs_infos = plugin_get_infos('couteau_suisse');
+		$cs_infos = $maj[1] = $cs_infos['version'];
+		$maj[0] = time();
+		ecrire_meta('tweaks_maj', serialize($maj));
+		if(!defined('_SPIP19300')) ecrire_metas();
+	}
 	// pour la  version disponible
 	include_spip('inc/distant');
 	if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
@@ -422,6 +429,16 @@ cs_log("Fin   : exec_admin_couteau_suisse()");
 }
 
 function cs_boite_rss() {
+	debut_boite_info();
+	$p = '';
+	// on cherche le flux rss toutes les deux heures
+	$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
+	if (time()-$lastmodified < 2*3600) lire_fichier(_DIR_RSS_TMP, $p);
+	if(strlen($p)) {
+		echo $p;
+		fin_boite_info();
+		return;
+	}
 	include_spip('action/editer_site');
 	$r = spip_xml_load(_CS_RSS_SOURCE);
 	if (function_exists('spip_xml_match_nodes')) $c = spip_xml_match_nodes(',^item$,', $r, $r2);
@@ -430,20 +447,22 @@ function cs_boite_rss() {
 		$c = count($r2);
 	}
 	if($c) {
-		debut_boite_info();
 		$r3 = &$r2['item'];
-		$c = count($r3);
-		echo '<p><strong>'._T('cout:rss_titre').'</strong></p><ul style="list-style-type:none; padding:0; ">';
+		$c = count($r3); $p='';
 		for($i=0; $i<min($c, 12); $i++) {
 		 $l = $r3[$i]['link'][0];
 		 $t = str_replace('&amp;', '&', htmlentities($r3[$i]['title'][0], ENT_NOQUOTES, "UTF-8"));
 		 $t = preg_replace(',\s*&#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
 		 $t = preg_replace(',^(.*?):,', "&bull; <a href='$l' class='spip_out' target='_cout'>$1</a>:", $t);
-		 echo "<li style='padding-top:0.6em;'>$t</li>";
+		 $p .= "<li style='padding-top:0.6em;'>$t</li>";
 		}
-		echo '</ul>';
-		fin_boite_info();
 	}
+	$du = affdate_heure(date('Y-m-d H:i:s',time()));
+	echo $p = '<p><b>'._T('cout:rss_titre').'</b></p><ul style="list-style-type:none; padding:0; ">'.$p
+		.'</ul><p class="spip_xx-small"><b>'
+		._T('cout:edition', array('du'=>$du)).'</b></p>';
+	ecrire_fichier(_DIR_RSS_TMP, $p);
+	fin_boite_info();
 }
 
 ?>

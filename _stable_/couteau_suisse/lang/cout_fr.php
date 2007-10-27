@@ -235,6 +235,7 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 	'rss_couteau_suisse:nom' => 'R&eacute;visions du Couteau Suisse',
 	'rss_couteau_suisse:description' => "Ajoute un cadre sur la pr&eacute;sente page de configuration, o&ugrave; figurent les derni&egrave;res modifications apport&eacute;es au code du plugin 'Le Couteau Suisse' ([Source->"._CS_RSS_SOURCE."]).",
 	'rss_titre' => '&laquo;&nbsp;Le Couteau Suisse&nbsp;&raquo; en d&eacute;veloppement :',
+	'edition' => 'Mis &agrave; jour le @du@',
 
 	'cookie_prefix:nom' => 'Pr&eacute;fixe des cookies',
 	'cookie_prefix:description' => 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.[[Votre choix :->%cookie_prefix%]]',

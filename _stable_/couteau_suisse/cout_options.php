@@ -34,8 +34,9 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 	
 	// Puisque ce plugin n'est pas destine (pour l'instant) a abandonner la compatibilite avec 1.9.1
 	define('_SIGNALER_ECHOS', false); // horrible      
-	// Repertoire temporaire pour le Couteau Suisse
+	// fichiers/dossiers temporaires pour le Couteau Suisse
 	define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
+	define('_DIR_RSS_TMP', _DIR_TMP . 'rss_couteau_suisse.html');
 	// alias pour passer en mode impression
 	if(isset($_GET['page']) && $_GET['page']=='print') $_GET['cs']='print';
 	
