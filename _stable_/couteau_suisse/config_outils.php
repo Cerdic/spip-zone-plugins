@@ -430,7 +430,6 @@ add_outil( array(
 	'jquery'	=> 'oui',
 	'code:options' => "%%radio_target_blank3%%\n%%url_glossaire_externe2%%",
 	'code:jq' => 'if (%%radio_target_blank3%%) { $("a.spip_out,a.spip_url,a.spip_glossaire").attr("target", "_blank"); }',
-	
 ));
 
 //-----------------------------------------------------------------------------//

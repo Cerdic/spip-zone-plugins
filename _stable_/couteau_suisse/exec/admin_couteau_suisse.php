@@ -9,6 +9,7 @@
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
+include_spip('inc/cs_outils');
 /*
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
@@ -354,8 +355,7 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	static $id_input=0;
 	$inc = $outil_id = $outil['id'];
 	$actif = $outil['actif'];
-	$erreur_version = (isset($outil['version-min']) && $GLOBALS['spip_version']<$outil['version-min'])
-		|| (isset($outil['version-max']) && $GLOBALS['spip_version']>$outil['version-max']);
+	$erreur_version = cs_version_erreur($outil);
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('cout:'.($actif?'':'in').'actif');
 	$nb_var = intval($outil['nb_variables']);
@@ -397,23 +397,7 @@ function ligne_outil($outil, &$js, $afficher, $description_outil){
 	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'cout:jquery1':'cout:jquery2') . '</p>';
 	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
 	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('cout:contrib', array('id'=>$outil['contrib'])) . '</p>';
-	$s .= propre($p) . '<hr style="margin:6pt 0 0 0;"/><div style="font-size:85%;">' . _T('cout:detail_outil').' ';
-	if ($erreur_version) $s .= _T('cout:erreur:version');
-	else {
-		$a = array();
-		if(isset($outil['code:options'])) $a[] = "code options";
-		if(isset($outil['code:fonction'])) $a[] = "code fonctions";
-		if(isset($outil['code:js'])) $a[] = "code javascript";
-		if(isset($outil['code:css'])) $a[] = "code styles";
-		if (find_in_path('outils/'.($temp=$outil_id.'.php'))) $a[] = $temp;
-		if (find_in_path('outils/'.($temp=$outil_id.'_options.php'))) $a[] = $temp;
-		if (find_in_path('outils/'.($temp=$outil_id.'_fonctions.php'))) $a[] = $temp;
-		foreach ($outil as $pipe=>$fonc) if (is_pipeline_outil($pipe, $pipe2)) $a[] = $pipe2;
-		if (find_in_path('outils/'.($temp=$outil_id.'.js'))) $a[] = $temp;
-		if (find_in_path('outils/'.($temp=$outil_id.'.css'))) $a[] = $temp;
-		$s .= join(' | ', $a);
-	}
-	$s .= "</div></div>";
+	$s .= propre($p) . detail_outil($outil['id']) . '</div>';
 
 	$s .= fin_block();
 	$id_input++;

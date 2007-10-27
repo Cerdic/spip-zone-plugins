@@ -36,6 +36,7 @@ cs_log(" -- exec_description_outil_dist() - Appel de config_outils.php : nb_outi
 	$metas_vars = isset($GLOBALS['meta']['tweaks_variables'])?unserialize($GLOBALS['meta']['tweaks_variables']):array();
 
 cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de description_outil($outil, $script) :");
+	include_spip('inc/cs_outils');
 	$description_outil = charger_fonction('description_outil', 'inc');
 	$descrip = cs_initialisation_d_un_outil($outil, $description_outil, true);
 cs_log("Fin   : exec_description_outil_dist() - Appel maintenant de ajax_retour() pour afficher la ligne de configuration de l'outil");	

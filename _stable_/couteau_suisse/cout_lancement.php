@@ -7,8 +7,8 @@
 #-----------------------------------------------------#
 #  Fichier contenant les fonctions utilisees pendant  #
 #  l'execution du plugin.                             #
-#  Seulement s'il y a lieu, cout_lancement.php        #
-#  va inclure cout_utils.php et compiler les outils.  #
+#  Seulement s'il y a lieu, on va inclure ici         #
+#  cout_utils.php et compiler les outils.             #
 #-----------------------------------------------------#
 
 cs_log("Chargement de cout_lancement.php pour initialisation");
@@ -34,26 +34,6 @@ function cs_code_echappement($rempl, $source='') {
 	return "<span class='base64$source' title='$base64'></span>";
 }
 
-function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
-	global $outils, $metas_outils;
-	$outil = &$outils[$outil_];
-	if (!isset($outil['categorie'])) $outil['categorie'] = 'divers';
-	if (!isset($outil['nom'])) $outil['nom'] = _T('cout:'.$outil['id'].':nom');
-	$outil['actif'] = isset($metas_outils[$outil['id']])?$metas_outils[$outil['id']]['actif']:0;
-	// Si Spip est trop ancien ou trop recent...
-	// TODO : revoir tout ça avec compare_version() et <necessite>
-	if ((isset($outil['version-min']) && $GLOBALS['spip_version']<$outil['version-min'])
-		|| (isset($outil['version-max']) && $GLOBALS['spip_version']>$outil['version-max']))
-			$outil['actif'] = 0;
-	// au cas ou des variables sont presentes dans le code
-	$outil['variables'] = array(); $outil['nb_variables'] = 0;
-	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
-	if (isset($outil['code:options'])) $outil['code:options'] = cs_parse_code_php($outil['code:options']);
-	if (isset($outil['code:fonctions'])) $outil['code:fonctions'] = cs_parse_code_php($outil['code:fonctions']);
-	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
-	return $description_outil($outil_, 'admin_couteau_suisse', $modif);
-}
-
 // lit ecrit les metas et initialise $cs_metas_pipelines
 // cette fonction est appellee par cout_options a chaque hit de la page
 function cs_initialisation($forcer=false) {
@@ -62,7 +42,7 @@ function cs_initialisation($forcer=false) {
 	// au premier passage, on force l'installation si var_mode est defini
 	static $deja_passe_ici;
 	if (!intval($deja_passe_ici)) {
-cs_log("#### 1er PASSAGE [#$rand] ###################################### - \$forcer = ".intval($forcer));
+cs_log("#### 1er PASSAGE [#$rand] ################################# - \$forcer = ".intval($forcer));
 cs_log("[#$rand] Version PHP courante : ".phpversion()." - Versions SPIP (base/code) : {$GLOBALS['spip_version']}/{$GLOBALS['spip_version_code']}");
 		$forcer |= (_request('var_mode')!=NULL);
 	}
@@ -107,6 +87,7 @@ cs_log("[#$rand]  -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 
 	// initialiser chaque outil et construire la liste des contribs
 	$contribs = array();
+	include_spip('inc/cs_outils');
 	foreach($outils as $outil) {
 		cs_initialisation_d_un_outil($id = $outil['id'], $description_outil, false);
 		if(isset($outil['contrib']) && isset($metas_outils[$id]['actif']))
