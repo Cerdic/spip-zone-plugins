@@ -361,21 +361,21 @@ verif_plugin();
 
 	debut_gauche();
 	debut_boite_info();
-	// pour la  version du plugin, on regarde toutes les deux heures
+	// pour la  version du plugin
+	include_spip('inc/plugin');
+	$cs_infos = plugin_get_infos('couteau_suisse');
+	$cs_infos = $maj[1] = $cs_infos['version'];
+	// pour la version disponible, on regarde toutes les deux heures
 	$maj = isset($GLOBALS['meta']['tweaks_maj'])?unserialize($GLOBALS['meta']['tweaks_maj']):array(0, '');
-	if (time()-$maj[0] < 2*3600) $cs_infos = $maj[1];
+	if (time()-$maj[0] < 2*3600) $distant = $maj[1];
 	else {
-		include_spip('inc/plugin');
-		$cs_infos = plugin_get_infos('couteau_suisse');
-		$cs_infos = $maj[1] = $cs_infos['version'];
+	include_spip('inc/distant');
+	if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
+		$distant = $maj[1] = preg_match(',<version>([1-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
 		$maj[0] = time();
 		ecrire_meta('tweaks_maj', serialize($maj));
 		if(!defined('_SPIP19300')) ecrire_metas();
 	}
-	// pour la  version disponible
-	include_spip('inc/distant');
-	if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
-		$distant = preg_match(',<version>([1-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
 	// pour la liste des docs sur spip-contrib
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
 	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace('/@@(.*?)@@/e', "couper(_T('\\1'), 25)", $v);
