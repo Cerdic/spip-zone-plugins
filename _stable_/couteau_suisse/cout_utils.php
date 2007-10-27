@@ -182,13 +182,13 @@ function cs_aide_raccourcis() {
 		if ($outil['actif']) {
 			$id = $outil['id'];
 			include_spip('outils/'.$id);	
-			if (function_exists($f = $id.'_raccourcis')) $aide[] = '<li style="margin-top: 0.7em;">' . $f() . '</li>';
+			if (function_exists($f = $id.'_raccourcis')) $aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' . $f() . '</li>';
 			elseif (!preg_match(',:aide$,', _T("cout:$id:aide") ))
-				$aide[] = '<li style="margin-top: 0.7em;">' .  _T("cout:$id:aide") . '</li>';
+				$aide[] = '<li style="margin: 0.7em 0 0 0;">&bull; ' .  _T("cout:$id:aide") . '</li>';
 		}
 	}
 	if(!count($aide)) return '';
-	return '<p><strong>' . _T('cout:raccourcis') . '</strong></p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
+	return '<p><strong>' . _T('cout:raccourcis') . '</strong></p><ul style="list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
 }
 
 // retourne une aide concernant les pipelines utilises par l'outil

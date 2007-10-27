@@ -31,17 +31,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Le Couteau Suisse',
 	'help0' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
-		."<p>Lien de documentation :<br/>- [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>"
+		."<p>Lien de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>"
 		."<p>R&eacute;initialisation :
 _ - [De tout le plugin->@reset@]
 </p>",
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
 		."<p>Version : @version@@distant@</p>"
-		."<p>Liens de documentation :<br/>- [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p>"
+		."<p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p>"
 		."<p>R&eacute;initialisations :
-_ - [Des outils cach&eacute;s->@hide@]
-_ - [De tout le plugin->@reset@]
+_ &bull; [Des outils cach&eacute;s->@hide@]
+_ &bull; [De tout le plugin->@reset@]
 </p>",
 	'distant' => "<br/>Mise &agrave; jour : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]",
 	'a_jour' => "<br/>Votre version est &agrave; jour.",

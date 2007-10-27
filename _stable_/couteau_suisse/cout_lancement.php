@@ -91,7 +91,7 @@ cs_log("[#$rand]  -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 	foreach($outils as $outil) {
 		cs_initialisation_d_un_outil($id = $outil['id'], $description_outil, false);
 		if(isset($outil['contrib']) && isset($metas_outils[$id]['actif']))
-			$contribs[] = '<br/> - [@@cout:'.$outil['id'].':nom@@->http://www.spip-contrib.net/?article'.$outil['contrib'].']';
+			$contribs[] = '<br/> &bull; [@@cout:'.$outil['id'].':nom@@->http://www.spip-contrib.net/?article'.$outil['contrib'].']';
 	}
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
