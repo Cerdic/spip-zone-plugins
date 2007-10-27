@@ -438,7 +438,7 @@ function cs_boite_rss() {
 		 $l = $r3[$i]['link'][0];
 		 $t = str_replace('&amp;', '&', htmlentities($r3[$i]['title'][0], ENT_NOQUOTES, "UTF-8"));
 		 $t = preg_replace(',\s*&#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
-		 $t = preg_replace(',^(.*?):,', "- <a href='$l' class='spip_out' target='_cout'>$1</a>:", $t);
+		 $t = preg_replace(',^(.*?):,', "&bull; <a href='$l' class='spip_out' target='_cout'>$1</a>:", $t);
 		 echo "<li style='padding-top:0.6em;'>$t</li>";
 		}
 		echo '</ul>';
