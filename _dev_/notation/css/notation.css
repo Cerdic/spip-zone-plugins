@@ -133,7 +133,7 @@
   font-weight:bold;
 }
 
-.notation button {
+.formulaire_notation button {
 	border: none;
 	background-color: transparent;
 	display: inline;
@@ -141,7 +141,7 @@
 	margin: 0;
 	cursor: pointer;
 }
-.notation button img {
+.formulaire_notation button img {
 	vertical-align:middle;
 	padding: 0 !important;
 	margin: 0;

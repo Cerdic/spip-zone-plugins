@@ -11,6 +11,7 @@
 **/
 
 include_spip('inc/notation_util');
+include_spip('inc/vieilles_defs');
 include_spip('balise/notation_balises');
 
 // Recuperer les valeurs
@@ -46,7 +47,7 @@ if (spip_num_rows($res) != 0)
   }
 
 	// On est en train de voter
-	if ($canvote && $id_donnees==$article && $robot=='')
+	if ($canvote && ($id_donnees==$article) && $robot=='')
 	{	// Note correcte ?
 		if($note<1 || $note>notation_get_nb_notes())
 		{    echo "<b style='color:red; background-color:yellow;'>La note doit &ecirc;tre comprise entre 1 et ".notation_get_nb_notes()." !</b><br/>";
@@ -121,18 +122,19 @@ if (spip_num_rows($res) != 0)
 
 	// Afficher les etoiles
 	echo "<div class='formulaire_notation'>";
-  if ($canvote) {
-	echo ("<form action='#SELF' method='post' id='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'><div style='display:inline'>");
-	echo notation_etoile_click($lanote,$article);
-	echo ("<input type='hidden' name='id_donnees' id='id_donnees".$article."' value='".$article."' />");
-	echo ("<input type='hidden' name='content' id='content".$article."' value='' size='10' />");
-  } else {
-	echo notation_etoile($lanote,$article);
-  }
+	if ($canvote) {
+		echo ("<form action='#SELF' method='post' id='notation".$article."' enctype='multipart/form-data' style='display:inline; padding:0; spacing:0; border:0'><div style='display:inline'>");
+		echo notation_etoile_click($lanote,$article);
+		echo ("<input type='hidden' name='id_donnees' id='id_donnees".$article."' value='".$article."' />");
+		echo ("<input type='hidden' name='content' id='content".$article."' value='' size='10' />");
+	} else {
+		echo notation_etoile($lanote,$article);
+	}
 
-  if ($total > 1) echo "<span class='note'>".$total." "._T('notation:votes')."</span>";
-  else echo "<span class='note'>".$total." "._T('notation:vote')."</span>";
-
+	if ($total > 1)
+		echo "<span class='note'>".$total." "._T('notation:votes')."</span>";
+	else
+		echo "<span class='note'>".$total." "._T('notation:vote')."</span>";
 
 
 	// Afficher le formulaire

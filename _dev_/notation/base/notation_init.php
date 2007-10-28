@@ -11,6 +11,7 @@
 **/
 
 function notation_install($action){
+include_spip('inc/vieilles_defs');
 	switch ($action)
 	{	// La base est deja cree ?
 		case 'test':
