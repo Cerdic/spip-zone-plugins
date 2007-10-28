@@ -38,7 +38,7 @@ class cfg_classic
 			    ecrire_meta($name, $this->cfg->val[$name]);
 			}
 	    }
-	    if (version_compare($GLOBALS['spip_version_code'],'1.93','<')) ecrire_metas();
+	    if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 	    return true;
 	}
 }
