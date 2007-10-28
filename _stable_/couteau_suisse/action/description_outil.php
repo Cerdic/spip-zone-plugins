@@ -48,7 +48,7 @@ cs_log(" -- outil $index ($outil) : %$var% prend la valeur '$final'");
 	$serialized = serialize($metas_vars);
 //cs_log($metas_vars, " -- metas_vars = ");
 	ecrire_meta('tweaks_variables', $serialized);
-	if(!defined('_SPIP19300')) ecrire_metas();
+	ecrire_metas();
 
 cs_log(" -- donc, réinitialisation forcée !");
 	// on reinitialise tout, au cas ou ...

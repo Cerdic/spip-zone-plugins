@@ -70,7 +70,7 @@ cs_log(" -- abs. path = $path2");
 	}
 	ecrire_meta('cs_smileys_racc', join(', ', $liste));
 	ecrire_meta('cs_smileys', serialize($smileys2));
-	if(!defined('_SPIP19300')) ecrire_metas();
+	ecrire_metas();
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse

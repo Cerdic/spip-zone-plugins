@@ -193,7 +193,7 @@ cs_log("Début : enregistre_modif_outils()");
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement des outils actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
 	ecrire_meta('tweaks_actifs', serialize($liste));
-	if(!defined('_SPIP19300')) ecrire_metas();
+	ecrire_metas();
 /*
 @unlink(_DIR_TMP."charger_pipelines.php");
 @unlink(_DIR_TMP."charger_plugins_fonctions.php");
@@ -235,7 +235,7 @@ verif_plugin();
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 		}
-		if(!defined('_SPIP19300')) ecrire_metas();
+		ecrire_metas();
 		cs_initialisation(true);
 		if (defined('_SPIP19200')) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));

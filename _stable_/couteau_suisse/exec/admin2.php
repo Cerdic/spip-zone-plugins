@@ -266,7 +266,7 @@ cs_log("Début : enregistre_modif_outils()");
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement de statut ($i) des outils par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys(${$i})));
 	ecrire_meta("tweaks_{$i}s", serialize(${$i}));
-	if(!defined('_SPIP19300')) ecrire_metas();
+	ecrire_metas();
 		include_spip('inc/invalideur');
 /*
 @unlink(_DIR_TMP."charger_pipelines.php");
@@ -306,7 +306,7 @@ verif_plugin();
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 		}
-		if(!defined('_SPIP19300')) ecrire_metas();
+		ecrire_metas();
 		cs_initialisation(true);
 		if (defined('_SPIP19200')) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire(_request('exec')));
@@ -322,7 +322,7 @@ verif_plugin();
 		cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
 		foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
 		ecrire_meta('tweaks_variables', serialize($metas_vars));
-		if(!defined('_SPIP19300')) ecrire_metas();
+		ecrire_metas();
 		cs_initialisation(true);
 		if (defined('_SPIP19200')) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire(_request('exec'), "cmd=descrip&outil={$_GET[outil]}#cs_infos", true));
@@ -331,7 +331,7 @@ verif_plugin();
 	if ($cmd=='showall'){
 		cs_log("Reset de tous les affichages par l'auteur id=$connect_id_auteur");
 		effacer_meta('tweaks_caches');
-		if(!defined('_SPIP19300')) ecrire_metas();
+		ecrire_metas();
 	}
 
 	// afficher la description d'un outil ?
@@ -378,7 +378,7 @@ verif_plugin();
 			$distant = $maj[1] = preg_match(',<version>([0-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
 		$maj[0] = time();
 		if ($distant) ecrire_meta('tweaks_maj', serialize($maj));
-		if(!defined('_SPIP19300')) ecrire_metas();
+		ecrire_metas();
 	}
 	// pour la liste des docs sur spip-contrib
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();

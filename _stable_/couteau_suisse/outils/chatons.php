@@ -34,7 +34,7 @@ function chatons_installe() {
 	}
 	ecrire_meta('cs_chatons_racc', join(', ', $liste));
 	ecrire_meta('cs_chatons', serialize($chatons));
-	if(!defined('_SPIP19300')) ecrire_metas();
+	ecrire_metas();
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse

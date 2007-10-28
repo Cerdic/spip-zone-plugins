@@ -109,7 +109,7 @@ cs_log("[#$rand]  -- ecriture metas");
 	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
 	// en metas : les liens sur spip-contrib
 	ecrire_meta('tweaks_contribs', serialize($contribs));
-	if(!defined('_SPIP19300')) ecrire_metas();
+	ecrire_metas();
 cs_log("[#$rand] cs_initialisation($forcer) : Sortie");
 }
 

@@ -68,7 +68,7 @@ cs_log("decoration_installe()");
 		// association pour les balises automatiques
 		$auto_remplace
 	)));
-	if(!defined('_SPIP19300')) ecrire_metas();
+	ecrire_metas();
 }
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
