@@ -14,7 +14,7 @@
 	<description>
 	Lire et ecrire les tag sur les documents audio
 	http://getid3.sourceforge.net/
-	getID3() is a PHP script that extracts useful information (such as ID3 tags, bitrate, playtime, etc.) from MP3s & other multimedia file formats (Ogg, WMA, WMV, ASF, WAV, AVI, AAC, VQF, FLAC, MusePack, Real, QuickTime, Monkey's Audio, MIDI and more).
+	getID3() is a PHP script that extracts useful information (such as ID3 tags, bitrate, playtime, etc.) from MP3s &amp; other multimedia file formats (Ogg, WMA, WMV, ASF, WAV, AVI, AAC, VQF, FLAC, MusePack, Real, QuickTime, Monkey's Audio, MIDI and more).
 	</description>
 	<options>
 	getid3_options.php
