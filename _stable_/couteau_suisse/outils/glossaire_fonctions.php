@@ -41,6 +41,8 @@ function glossaire_echappe_balises_callback($matches) {
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite|a
 function cs_rempl_glossaire($texte) {
+	static $accents;
+	if(!isset($accents)) $accents = cs_glossaire_accents();
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
 	$r = spip_query("SELECT id_mot, titre, texte FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type']);
 	// compatibilite SPIP 1.92
@@ -57,8 +59,12 @@ function cs_rempl_glossaire($texte) {
 		foreach($les_mots as $i=>$v) $les_mots[$i] = preg_quote($v, ',');
 		$les_mots = join('|', $les_mots);
 		if(preg_match(",\W($les_mots)\W,i", $texte)) {
-			// prudence : on protege TOUTES les balises contenant le mot en question
-			$texte = preg_replace_callback(',(<[^>]*($les_mots)[^>]*>),Umsi', 'glossaire_echappe_balises_callback', $texte);
+			// prudence 1 : on protege TOUTES les balises contenant le mot en question
+			$texte = preg_replace_callback(",(<[^>]*($les_mots)[^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
+			// prudence 2 : on neutralise le mot si on trouve un accent html juste avant ou apres
+			$texte = preg_replace_callback(",(&($accents);($les_mots)),i", 'glossaire_echappe_balises_callback', $texte);
+			$texte = preg_replace_callback(",(($les_mots)&($accents);),i", 'glossaire_echappe_balises_callback', $texte);
+			// on y va !
 			$lien = generer_url_mot($id);
 			$definition = nl2br(trim($mot['texte']));
 			$table1[$id] = "<a name=\"mot$id\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
@@ -69,7 +75,6 @@ function cs_rempl_glossaire($texte) {
 			$texte = preg_replace(",(\W)($les_mots)(\W),i", "\\1@@GLOSS\\2#$id@@\\3", $texte, $limit);
 		}
 	}
-//print_r($table1);
 	// remplacement final des balises posees ci-dessus
 	$texte = preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", '"$table1[\\2]\\1$table2[\\2]"', $texte);
 	return echappe_retour($texte, 'GLOSS');
@@ -79,6 +84,8 @@ function cs_glossaire($texte) {
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite|a', 'cs_rempl_glossaire', $texte);
 }
 
-// autre exemple : www.vinove.com/glossary.php
+// liste des accents (sans casse)
+function cs_glossaire_accents() { return '#(19[2-9]|2[023][0-9]|21[0-46-9]|24[0-689]|25[0-4]|33[89]|35[23]|376)||a(acute|circ|elig|grave|ring|tilde|uml)|ccedil|e(acute|circ|grave|th|uml)|i(acute|circ|grave|uml)|ntilde|o(acute|circ|elig|grave|slash|tilde|uml)|s(caron|zlig)|thorn|u(acute|circ|grave|uml)|y(acute|uml)';
+}
 
 ?>
