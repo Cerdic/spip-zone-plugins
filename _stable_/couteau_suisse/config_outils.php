@@ -596,7 +596,6 @@ add_outil( array(
 	'categorie'	=> 'typo-corr',
 	'contrib'	=> 2206,
 	'code:options' => "%%glossaire_limite%%%%glossaire_groupes%%%%glossaire_js%%",
-//	'pipeline:post_propre' => 'cs_glossaire',
 	'traitement:TEXTE:post_propre' => 'cs_glossaire',
 	// sans oublier les articles...
 	'traitement:TEXTE/articles:post_propre' => 'cs_glossaire',

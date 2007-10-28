@@ -46,21 +46,32 @@ function cs_rempl_glossaire($texte) {
 	// compatibilite SPIP 1.92
 	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
-	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot'] && preg_match(",(\W)($mot[titre])(\W),i", $texte)) {
-//		$table[$mot[id_mot]] = "<abbr title=\"$mot[texte]\">$mot[titre]</abbr>";
-		// prudence : on protege TOUTES les balises contenant le mot en question
-		$texte = preg_replace_callback(",(<[^>]*$mot[titre][^>]*>),Umsi", 'glossaire_echappe_balises_callback', $texte);
-		$lien = generer_url_mot($m = $mot['id_mot']);
-		$definition = nl2br(trim($mot['texte']));
-		$table1[$m] = "<a name=\"mot$m\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
-		$table2[$m] = defined('_GLOSSAIRE_JS')
-			?'</span><span class="gl_js" title="'.$mot['titre'].'"></span><span title="'.htmlspecialchars($definition).'"></span></a>'
-			:"</span><span class=\"gl_dl\"><span class=\"gl_dt\">$mot[titre]</span><span class=\"gl_dd\">$definition</span></span></a>";
-		// a chaque mot reconnu, on pose une balise temporaire	
-		$texte = preg_replace(",(\W)($mot[titre])(\W),i", "\\1@@GLOSS\\2#$m@@\\3", $texte, $limit);
+	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
+		$m = $mot['titre'];
+		$id = $mot['id_mot'];
+		$u = charset2unicode($m);
+		// liste de toutes les formes possible du mot clef en question.
+		// normalement, y a pas besoin de : html_entity_decode($m)
+		$les_mots = array_unique(array(
+			htmlentities($m), $u, unicode_to_utf_8($u), unicode2charset($u), $m));
+		foreach($les_mots as $i=>$v) $les_mots[$i] = preg_quote($v, ',');
+		$les_mots = join('|', $les_mots);
+		if(preg_match(",\W($les_mots)\W,i", $texte)) {
+			// prudence : on protege TOUTES les balises contenant le mot en question
+			$texte = preg_replace_callback(',(<[^>]*($les_mots)[^>]*>),Umsi', 'glossaire_echappe_balises_callback', $texte);
+			$lien = generer_url_mot($id);
+			$definition = nl2br(trim($mot['texte']));
+			$table1[$id] = "<a name=\"mot$id\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
+			$table2[$id] = defined('_GLOSSAIRE_JS')
+				?'</span><span class="gl_js" title="'.htmlspecialchars($m).'"></span><span title="'.htmlspecialchars($definition).'"></span></a>'
+				:"</span><span class=\"gl_dl\"><span class=\"gl_dt\">$m</span><span class=\"gl_dd\">$definition</span></span></a>";
+			// a chaque mot reconnu, on pose une balise temporaire	
+			$texte = preg_replace(",(\W)($les_mots)(\W),i", "\\1@@GLOSS\\2#$id@@\\3", $texte, $limit);
+		}
 	}
+//print_r($table1);
 	// remplacement final des balises posees ci-dessus
-	$texte = preg_replace(",@@GLOSS([^#]+)#([0-9]+)@@,e", '"$table1[\\2]\\1$table2[\\2]"', $texte);
+	$texte = preg_replace(",@@GLOSS(.*?)#([0-9]+)@@,e", '"$table1[\\2]\\1$table2[\\2]"', $texte);
 	return echappe_retour($texte, 'GLOSS');
 }
 

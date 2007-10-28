@@ -369,9 +369,9 @@ verif_plugin();
 	include_spip('inc/plugin');
 	$cs_infos = plugin_get_infos('couteau_suisse');
 	$cs_infos = $maj[1] = $cs_infos['version'];
-	// pour la version disponible, on regarde toutes les deux heures
+	// pour la version disponible, on regarde toutes les 1h06
 	$maj = isset($GLOBALS['meta']['tweaks_maj'])?unserialize($GLOBALS['meta']['tweaks_maj']):array(0, '');
-	if ($quiet = $maj[1] && (time()-$maj[0] < 2*3600)) $distant = $maj[1];
+	if ($quiet = $maj[1] && (time()-$maj[0] < 4000)) $distant = $maj[1];
 	else {
 		include_spip('inc/distant');
 		if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
