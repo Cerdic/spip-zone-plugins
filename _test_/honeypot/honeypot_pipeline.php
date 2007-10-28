@@ -20,7 +20,7 @@
 
 /*ajoute un style pour cacher les pieges aux visiteurs*/
 function honeypot_insert_head($flux) {
-  $flux .= 	'<style>
+  $flux .= 	'<style type="text/css">
 .pluginhp'.lire_config('honeypot/hpfile').' {
 display: none;
 }
