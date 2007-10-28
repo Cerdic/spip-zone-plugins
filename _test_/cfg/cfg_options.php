@@ -84,7 +84,7 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 			$and = ' AND ';
 	    }
 		$extra = spip_query($extra);
-		$extra = spip_fetch_array($extra);
+		$extra = sql_fetch($extra);
 		$config = isset($extra['extra']) && $extra['extra'] ?
 					$extra['extra'] :  array();
 	// sinon classiquement de meta
