@@ -392,7 +392,7 @@ add_outil( array(
 	'contrib'	=> 2378,
 	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
-	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}",
+	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;} div.cs_sommaire a:after, a.cs_ancre {display:none;}",
 	'code:jq' => 'if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none");',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
@@ -603,6 +603,7 @@ add_outil( array(
 	'traitement:CHAPO:post_propre' => 'cs_glossaire',
 	// Precaution pour les articles virtuels
 	'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
+	'code:css' =>  'a.cs_glossaire:after {display:none;}',
 ));
 
 // attention : mailcrypt doit etre place apres liens_orphelins
@@ -627,6 +628,7 @@ add_outil( array(
 	'categorie'	 => 'spip',
 	'contrib'	=> 2443,
 	'pipeline:post_propre' => 'liens_en_clair_post_propre',
+	'code:css' => 'a.spip_out:after {display:none;}',
 )); 
 
 add_outil( array(

@@ -38,7 +38,7 @@ if(!isset($_GET['page']) OR !preg_match(',\.(css|js)$,', $_GET['page'])) {
 	define('_DIR_CS_TMP', sous_repertoire(_DIR_TMP, "couteau-suisse"));
 	define('_DIR_RSS_TMP', _DIR_TMP . 'rss_couteau_suisse.html');
 	// alias pour passer en mode impression
-	if(isset($_GET['page']) && $_GET['page']=='print') $_GET['cs']='print';
+	if(isset($_GET['page']) && ($_GET['page']=='print' || $_GET['page']=='imprimer')) $_GET['cs']='print';
 	
 	// fonctions indispensables a l'execution
 	include_spip('cout_lancement');

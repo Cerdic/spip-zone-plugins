@@ -31,7 +31,7 @@ color:#000099; padding-left:12px; text-decoration:none;\"></a>";
 	// calcul de la page
 	$p = $page?_T('cout:sommaire_page', array('page'=>$page)):'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
-		$ancre = "\n<a id=\"outil_sommaire_$index\" name=\"outil_sommaire_$index\"></a>";
+		$ancre = "\n<a id=\"outil_sommaire_$index\" name=\"outil_sommaire_$index\" class=\"cs_ancre\"></a>";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
 			$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($regs[2][$i]));
 			$texte = substr($texte, 0, $pos2) . $ancre . $regs[1][$i] 
@@ -78,7 +78,7 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	include_spip('public/assembler');
 	$sommaire = recuperer_fond('fonds/sommaire'.$fond, array('sommaire'=>$sommaire));
 
-	$ancre = '<a name="outil_sommaire" id="outil_sommaire"></a>';
+	$ancre = '<a name="outil_sommaire" id="outil_sommaire" class="cs_ancre"></a>';
 	// si on ne veut que le sommaire, on renvoie le sommaire
 	// sinon, on n'insere ce sommaire en tete de texte que si la balise #CS_SOMMAIRE n'est pas activee
 	if($sommaire_seul) return $ancre.$sommaire;
