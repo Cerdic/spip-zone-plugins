@@ -4,7 +4,7 @@
 
 // compatibilite avec SPIP 1.92 et anterieurs
 $GLOBALS['cs_couper_intro'] = 'couper_intro';
-if ($GLOBALS['spip_version_code']<1.925) {
+if (!defined('_SPIP19300')) {
 	$GLOBALS['cs_couper_intro'] = 'couper_intro2';
 	function couper_intro2($texte, $long, $suite) {
 		$texte = couper_intro($texte, $long);
@@ -17,7 +17,7 @@ if ($GLOBALS['spip_version_code']<1.925) {
 // compatibilite avec SPIP 1.93 : la balise a fortement change !! >> TODO
 // la fonction couper_intro a disparu.
 // voir function filtre_introduction_dist
-if ($GLOBALS['spip_version_code']>=1.9262) {
+if (defined('_SPIP19300')) {
 	$GLOBALS['cs_couper_intro'] = 'couper_intro3';
 	function couper_intro3($texte, $long, $suite) {
 		$texte = extraire_multi(preg_replace(",(</?)intro>,i", "\\1intro>", $texte)); // minuscules

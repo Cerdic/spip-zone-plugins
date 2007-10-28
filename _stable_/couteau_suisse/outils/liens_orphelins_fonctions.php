@@ -4,8 +4,8 @@
 @define('_liens_orphelins_AUTORISE', '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9');
 @define('_liens_orphelins_AUTORISE_FIN', '\#\$\&\'\*\+\-\/\=\^\_\`\|\~a-zA-Z0-9');
 
-// expanser_liens() introduit sous SPIP 1.93
-if ($GLOBALS['spip_version_code']<1.9262) {
+// expanser_liens() est introduit sous SPIP 1.93
+if (!defined('_SPIP19300')) {
 	@define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 	function expanser_liens($letexte) {
 		$inserts = array();
@@ -70,7 +70,7 @@ function liens_orphelins($texte){
 	}
 
 	// SPIP 1.93 ne repasse plus les liens : ils sont deja expanses
-	if ($GLOBALS['spip_version_code']>=1.9262) $texte=expanser_liens($texte);
+	if (defined('_SPIP19300')) $texte=expanser_liens($texte);
 
 	return echappe_retour($texte, 'LIENS');
 }
