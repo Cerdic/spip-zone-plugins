@@ -17,14 +17,14 @@ Plugin HoneyPot
 ]
 [(#ENV{hp}|?{' ',''})
 <div>
-<a href="#URL_SITE_SPIP/#ENV{hp}.php"><!-- #HONEYPOT_RANDOM --></a> 
-<a href="#URL_SITE_SPIP/#ENV{hp}.php"><img src="#HONEYPOT_RANDOM{3,_}.gif" height="0" width="0" alt="" /></a>
-<a href="#URL_SITE_SPIP/#ENV{hp}.php" style="display: none;">#HONEYPOT_RANDOM</a>
-<div style="display: none;"><a href="#URL_SITE_SPIP/#ENV{hp}.php">#HONEYPOT_RANDOM</a></div>
-<a href="#URL_SITE_SPIP/#ENV{hp}.php"></a>
+<a href="#URL_SITE_SPIP/#ENV{hp}.php" title="#HONEYPOT_RANDOM"><!-- #HONEYPOT_RANDOM --></a> 
+<a href="#URL_SITE_SPIP/#ENV{hp}.php" title="#HONEYPOT_RANDOM"><img src="#HONEYPOT_RANDOM{3,_}.gif" height="0" width="0" alt="#HONEYPOT_RANDOM" /></a>
+<a href="#URL_SITE_SPIP/#ENV{hp}.php" style="display: none;" title="#HONEYPOT_RANDOM">#HONEYPOT_RANDOM</a>
+<div style="display: none;"><a href="#URL_SITE_SPIP/#ENV{hp}.php" title="#HONEYPOT_RANDOM">#HONEYPOT_RANDOM</a></div>
+<a title="#HONEYPOT_RANDOM" href="#URL_SITE_SPIP/#ENV{hp}.php"></a>
 <!-- <a href="#URL_SITE_SPIP/#ENV{hp}.php">#HONEYPOT_RANDOM</a> -->
-<div style="position: absolute; top: -250px; left: -250px;"><a href="#URL_SITE_SPIP/#ENV{hp}.php">#HONEYPOT_RANDOM</a></div>
-<a href="#URL_SITE_SPIP/#ENV{hp}.php"><span style="display: none;">#HONEYPOT_RANDOM</span></a>
-<div class="pluginhp#ENV{hp}"><a href="#URL_SITE_SPIP/#ENV{hp}.php">#HONEYPOT_RANDOM</a></div>
+<div style="position: absolute; top: -250px; left: -250px;"><a href="#URL_SITE_SPIP/#ENV{hp}.php" title="#HONEYPOT_RANDOM">#HONEYPOT_RANDOM</a></div>
+<a href="#URL_SITE_SPIP/#ENV{hp}.php" title="#HONEYPOT_RANDOM"><span style="display: none;">#HONEYPOT_RANDOM</span></a>
+<div class="pluginhp#ENV{hp}"><a href="#URL_SITE_SPIP/#ENV{hp}.php" title="#HONEYPOT_RANDOM">#HONEYPOT_RANDOM</a></div>
 </div>
 ]
