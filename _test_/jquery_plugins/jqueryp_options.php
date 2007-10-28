@@ -1,7 +1,7 @@
 <?php
 if (!defined('_DIR_LIB')) define('_DIR_LIB', 'lib/');
 
-if (version_compare($GLOBALS['spip_version_code'],'1.93','<'))
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
 	include_spip('inc/compat_jqueryp_1.9.2');
 	
 

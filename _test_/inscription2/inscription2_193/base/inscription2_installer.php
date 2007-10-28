@@ -8,7 +8,7 @@ function inscription2_upgrade(){
 	$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
 	if($accepter_visiteurs != 'oui'){
 		ecrire_meta("accepter_visiteurs", "oui");
-		if (version_compare($GLOBALS['spip_version_code'],'1.93','<')) ecrire_metas();
+		if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 	}
 	
 	$version_base = $GLOBALS['inscription2_version'];
@@ -51,7 +51,7 @@ function inscription2_upgrade(){
 		if(!$lala){
 		ecrire_meta('inscription2','a:142:{s:3:"nom";s:2:"on";s:15:"nom_obligatoire";s:2:"on";s:13:"nom_fiche_mod";s:2:"on";s:9:"nom_fiche";N;s:9:"nom_table";s:2:"on";s:5:"email";s:2:"on";s:17:"email_obligatoire";s:2:"on";s:15:"email_fiche_mod";N;s:11:"email_fiche";N;s:11:"email_table";N;s:11:"nom_famille";s:2:"on";s:23:"nom_famille_obligatoire";N;s:21:"nom_famille_fiche_mod";N;s:17:"nom_famille_fiche";N;s:17:"nom_famille_table";s:2:"on";s:6:"prenom";s:2:"on";s:18:"prenom_obligatoire";N;s:16:"prenom_fiche_mod";N;s:12:"prenom_fiche";N;s:12:"prenom_table";s:2:"on";s:8:"username";s:2:"on";s:20:"username_obligatoire";N;s:18:"username_fiche_mod";s:2:"on";s:14:"username_fiche";N;s:14:"username_table";N;s:9:"naissance";N;s:21:"naissance_obligatoire";N;s:19:"naissance_fiche_mod";N;s:15:"naissance_fiche";N;s:15:"naissance_table";N;s:4:"sexe";N;s:16:"sexe_obligatoire";N;s:14:"sexe_fiche_mod";N;s:10:"sexe_fiche";N;s:10:"sexe_table";N;s:7:"adresse";s:2:"on";s:19:"adresse_obligatoire";N;s:17:"adresse_fiche_mod";s:2:"on";s:13:"adresse_fiche";N;s:13:"adresse_table";N;s:11:"code_postal";s:2:"on";s:23:"code_postal_obligatoire";N;s:21:"code_postal_fiche_mod";s:2:"on";s:17:"code_postal_fiche";N;s:17:"code_postal_table";N;s:5:"ville";s:2:"on";s:17:"ville_obligatoire";N;s:15:"ville_fiche_mod";s:2:"on";s:11:"ville_fiche";N;s:11:"ville_table";s:2:"on";s:4:"pays";N;s:16:"pays_obligatoire";N;s:14:"pays_fiche_mod";N;s:10:"pays_fiche";N;s:10:"pays_table";N;s:9:"telephone";s:2:"on";s:21:"telephone_obligatoire";N;s:19:"telephone_fiche_mod";s:2:"on";s:15:"telephone_fiche";N;s:15:"telephone_table";N;s:3:"fax";N;s:15:"fax_obligatoire";N;s:13:"fax_fiche_mod";N;s:9:"fax_fiche";N;s:9:"fax_table";N;s:6:"mobile";N;s:18:"mobile_obligatoire";N;s:16:"mobile_fiche_mod";N;s:12:"mobile_fiche";N;s:12:"mobile_table";N;s:11:"commentaire";s:2:"on";s:23:"commentaire_obligatoire";N;s:21:"commentaire_fiche_mod";N;s:17:"commentaire_fiche";N;s:17:"commentaire_table";N;s:10:"profession";N;s:22:"profession_obligatoire";N;s:20:"profession_fiche_mod";N;s:16:"profession_fiche";N;s:16:"profession_table";N;s:7:"societe";N;s:19:"societe_obligatoire";N;s:17:"societe_fiche_mod";N;s:13:"societe_fiche";N;s:13:"societe_table";N;s:11:"url_societe";N;s:23:"url_societe_obligatoire";N;s:21:"url_societe_fiche_mod";N;s:17:"url_societe_fiche";N;s:17:"url_societe_table";N;s:7:"secteur";N;s:19:"secteur_obligatoire";N;s:17:"secteur_fiche_mod";N;s:13:"secteur_fiche";N;s:13:"secteur_table";N;s:8:"fonction";N;s:20:"fonction_obligatoire";N;s:18:"fonction_fiche_mod";N;s:14:"fonction_fiche";N;s:14:"fonction_table";N;s:11:"adresse_pro";N;s:23:"adresse_pro_obligatoire";N;s:21:"adresse_pro_fiche_mod";N;s:17:"adresse_pro_fiche";N;s:17:"adresse_pro_table";N;s:15:"code_postal_pro";N;s:27:"code_postal_pro_obligatoire";N;s:25:"code_postal_pro_fiche_mod";N;s:21:"code_postal_pro_fiche";N;s:21:"code_postal_pro_table";N;s:9:"ville_pro";N;s:21:"ville_pro_obligatoire";N;s:19:"ville_pro_fiche_mod";N;s:15:"ville_pro_fiche";N;s:15:"ville_pro_table";N;s:8:"pays_pro";N;s:20:"pays_pro_obligatoire";N;s:18:"pays_pro_fiche_mod";N;s:14:"pays_pro_fiche";N;s:14:"pays_pro_table";N;s:13:"telephone_pro";N;s:25:"telephone_pro_obligatoire";N;s:23:"telephone_pro_fiche_mod";N;s:19:"telephone_pro_fiche";N;s:19:"telephone_pro_table";N;s:7:"fax_pro";N;s:19:"fax_pro_obligatoire";N;s:17:"fax_pro_fiche_mod";N;s:13:"fax_pro_fiche";N;s:13:"fax_pro_table";N;s:10:"mobile_pro";N;s:22:"mobile_pro_obligatoire";N;s:20:"mobile_pro_fiche_mod";N;s:16:"mobile_pro_fiche";N;s:16:"mobile_pro_table";N;s:11:"publication";N;s:8:"domaines";N;s:6:"divers";N;s:14:"statut_nouveau";s:6:"6forum";s:8:"creation";N;s:10:"statut_int";N;s:14:"statut_interne";s:0:"";}');
 			//On ecrit tout de suite les metas comme cela on cree les champs directement derriere
-			if (version_compare($GLOBALS['spip_version_code'],'1.93','<')) ecrire_metas();
+			if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 		}
 	
 		//ajouts des differents champs ecris dans les metas
@@ -126,7 +126,7 @@ function inscription2_upgrade(){
 		echo "Inscription2 update @ 0.61<br/>On retablit le champs pays sur la table pays et pas nom";
 		ecrire_meta('inscription2_version',$current_version=0.61);
 	}
-	if (version_compare($GLOBALS['spip_version_code'],'1.93','<')) ecrire_metas();
+	if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 }
 
 
@@ -146,7 +146,7 @@ function inscription2_upgrade(){
 		}
 		effacer_meta('inscription2');
 		effacer_meta('inscription2_version');
-		if (version_compare($GLOBALS['spip_version_code'],'1.93','<')) ecrire_metas();
+		if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) ecrire_metas();
 	}
 	
 	function inscription2_install($action){

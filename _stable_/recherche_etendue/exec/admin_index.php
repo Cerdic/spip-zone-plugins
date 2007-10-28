@@ -79,7 +79,7 @@ function exec_admin_index_dist()
 	}
 	include_spip('inc/indexation');
 	include_spip('inc/indexation_etendue');
-	if (version_compare($GLOBALS['spip_version_code'],'1.92','<'))
+	if (version_compare($GLOBALS['spip_version_code'],'1.9200','<'))
 		RechercheEtendue_verifier_base();
 	
 	

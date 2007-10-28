@@ -44,7 +44,7 @@ include_spip('base/indexation_etendue');
 
 	function update_index_tables_sql_from_meta(){
 		global $table_des_tables;
-		if (version_compare($GLOBALS['spip_version_code'],'1.92','<'))
+		if (version_compare($GLOBALS['spip_version_code'],'1.9200','<'))
 			RechercheEtendue_verifier_base();
 
 		// mettre a jour le contenu de spip_types_tables en fonction de la meta

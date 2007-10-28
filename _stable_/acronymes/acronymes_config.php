@@ -5,7 +5,7 @@ function acronymes_config($flux){
 		$out = "";
 		$id_syndic = $flux['args']['id_syndic'];
 		$acronymes_id_syndic = $GLOBALS['meta']['acronymes_id_syndic']?$GLOBALS['meta']['acronymes_id_syndic']:0;
-		if (version_compare($GLOBALS['spip_version_code'],'1.92','<=') OR ($id_syndic==$acronymes_id_syndic)){
+		if (version_compare($GLOBALS['spip_version_code'],'1.9200','<=') OR ($id_syndic==$acronymes_id_syndic)){
 			$id_rubrique = _request('rubrique');
 			if (($id=_request('acronymes_id_syndic'))!=NULL){
 				ecrire_meta('acronymes_id_syndic',$id);
@@ -36,7 +36,7 @@ function acronymes_config($flux){
 		$out = "";
 		$id_rubrique = $flux['args']['id_rubrique'];
 		$acronymes_rubrique_locale_active = $GLOBALS['meta']['acronymes_rubrique_locale_active']?$GLOBALS['meta']['acronymes_rubrique_locale_active']:'non';
-		if (version_compare($GLOBALS['spip_version_code'],'1.92','<=') OR ($id_rubrique==$acronymes_rubrique_locale_active)){
+		if (version_compare($GLOBALS['spip_version_code'],'1.9200','<=') OR ($id_rubrique==$acronymes_rubrique_locale_active)){
 			if ($id_rubrique){
 				if (($active=_request('acronymes_rubrique_locale_active'))!=NULL){
 					ecrire_meta('acronymes_rubrique_locale_active',$active);

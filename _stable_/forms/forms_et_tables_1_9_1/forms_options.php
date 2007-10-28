@@ -41,7 +41,7 @@ if (!isset($GLOBALS['spip_pipeline']['forms_valide_conformite_champ'])) $GLOBALS
 $GLOBALS['spip_pipeline']['forms_calcule_valeur_en_clair'] = '';
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
-if (version_compare($GLOBALS['spip_version_code'],'1.92','<')){
+if (version_compare($GLOBALS['spip_version_code'],'1.9200','<')){
 	function inc_safehtml($t) {
 		include_spip('inc/forms_safehtml_191');
 		if (function_exists('inc_safehtml_dist'))
