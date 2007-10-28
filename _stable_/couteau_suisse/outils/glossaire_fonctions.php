@@ -49,13 +49,19 @@ function cs_rempl_glossaire($texte) {
 	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
 	while($mot = $fetch($r)) if ($mot['id_mot']<>$GLOBALS['id_mot']) {
-		$m = $mot['titre'];
+		// prendre en compte les formes du mot : architrave/architraves
+		$a = explode('/', $mot['titre']);
 		$id = $mot['id_mot'];
-		$u = charset2unicode($m);
-		// liste de toutes les formes possible du mot clef en question.
-		// normalement, y a pas besoin de : html_entity_decode($m)
-		$les_mots = array_unique(array(
-			htmlentities($m), $u, unicode_to_utf_8($u), unicode2charset($u), $m));
+		$les_mots = array();
+		foreach ($a as $m) {
+			$u = charset2unicode($m = trim($m));
+			// liste de toutes les formes possible du mot clef en question.
+			// normalement, y a pas besoin de : html_entity_decode($m)
+			$les_mots = array_merge($les_mots, array(
+				htmlentities($m), $u, unicode_to_utf_8($u), unicode2charset($u), $m));
+		}
+		$m = $mot['titre'];
+		$les_mots = array_unique($les_mots);
 		foreach($les_mots as $i=>$v) $les_mots[$i] = preg_quote($v, ',');
 		$les_mots = join('|', $les_mots);
 		if(preg_match(",\W($les_mots)\W,i", $texte)) {
