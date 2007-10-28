@@ -1,0 +1,10 @@
+<plugin>
+	<nom>Couleurs</nom>
+	<auteur>Vincent ROBERT alias cent20</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+    <description>
+	Création de jeux de couleurs et sélection d'un jeu pour une utilisation dans une feuille de style CSS
+	 </description>
+	 <prefix>couleurs</prefix>
+</plugin>

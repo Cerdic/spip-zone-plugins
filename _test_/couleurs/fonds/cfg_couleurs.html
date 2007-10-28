@@ -1,0 +1,73 @@
+[(#REM) titre=Jeux de couleurs]
+[(#REM) descriptif=<h4>Création et mise en production de jeux de couleurs</h4>]
+[(#REM) liens*=couleurs]
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+
+<fieldset><legend>Créer un jeu de couleurs</legend>
+<table><tr>
+<td style="width: 60px"><label title="Nom du jeu de couleurs">Nom : </label></td><td><input type="text" name="id" class="cfg_id" id="id" value="#ENV{id}" style="width: 120px;" title="Notez ici le nom du jeu de couleurs" />
+&nbsp;|&nbsp;<input type="submit" name="_cfg_affiche" value="Afficher" style="width: 80px;" title="Afficher la configuration du jeu de couleurs choisi" /></td>
+</tr><tr>
+<td style="width: 60px"><label title="Option d'enregistrement">Option : </label></td><td><input type="checkbox" name="_cfg_copier" title="Cochez cette case pour enregistrer une nouvelle configuration avec l'identifiant modifi&eacute;" /><label title="Cochez cette case pour cr&eacute;er un nouveau jeu de couleur avec le nom saisi">&nbsp;Cr&eacute;er un nouveau jeu si le nom est modifi&eacute;</label></td>
+</tr></table>
+</fieldset>
+
+
+<fieldset><legend>Configurer les couleurs de l'arrière plan et des textes</legend>
+<table>
+
+<tr>
+<td style="width: 140px"><label title="Couleur principale">Arrière plan : </label></td>
+<td style="width: 80px"><input type="text" name="arriere_plan" id="arriere_plan" value="#ENV{arriere_plan}" MAXLENGTH="7" style="width: 60px;" title="Notez ici le nom du jeu de couleurs" /></td>
+
+<td style="width: 180px"><label title="Couleur principale">Textes : </label></td>
+<td style="width: 80px"><input type="text" name="textes" id="textes" value="#ENV{textes}" MAXLENGTH="7" style="width: 60px;" title="Notez ici le nom du jeu de couleurs" /></td>
+</tr>
+
+<tr>
+<td style="width: 140px"><label title="Couleur principale">Textes nuance forte : </label></td>
+<td style="width: 60px"><input type="text" name="texte_nuance_forte" id="texte_nuance_forte" value="#ENV{texte_nuance_forte}" MAXLENGTH="7" style="width: 60px;" title="Notez ici le nom du jeu de couleurs" /></td>
+
+<td style="width: 180px"><label title="Couleur principale">Textes nuance faible : </label></td>
+<td style="width: 60px"><input type="text" name="texte_nuance_faible" id="texte_nuance_faible" value="#ENV{texte_nuance_faible}" MAXLENGTH="7" style="width: 60px;" title="Notez ici le nom du jeu de couleurs" /></td>
+</tr>
+
+</table>
+</fieldset>
+
+
+<fieldset><legend>Configurer les couleurs des liens et des titres</legend>
+<table>
+
+<tr>
+<td style="width: 140px"><label title="Couleur principale">Couleur principale : </label></td>
+<td style="width: 80px"><input type="text" name="couleur_principale" id="couleur_principale" value="#ENV{couleur_principale}" MAXLENGTH="7" style="width: 60px;" title="Notez ici le nom du jeu de couleurs" /></td>
+
+<td style="width: 180px"><label title="Couleur principale">Couleur principale nuance : </label></td>
+<td style="width: 60px"><input type="text" name="couleur_principale_nuance" id="couleur_principale_nuance" value="#ENV{couleur_principale_nuance}" MAXLENGTH="7" style="width: 60px;" title="Notez ici le nom du jeu de couleurs" /></td>
+</tr>
+
+<tr>
+<td style="width: 140px"><label title="Couleur principale">Couleur secondaire : </label></td>
+<td style="width: 80px"><input type="text" name="couleur_secondaire" id="couleur_secondaire" value="#ENV{couleur_secondaire}" MAXLENGTH="7" style="width: 60px;" title="Notez ici le nom du jeu de couleurs" /></td>
+
+<td style="width: 180px"><label title="Couleur principale">Couleur secondaire nuance : </label></td>
+<td style="width: 60px"><input type="text" name="couleur_secondaire_nuance" id="couleur_secondaire_nuance" value="#ENV{couleur_secondaire_nuance}" MAXLENGTH="7" style="width: 60px;" title="Notez ici le nom du jeu de couleurs" /></td>
+</tr>
+
+</table>
+</fieldset>
+
+
+<div>
+<input type="submit" name="_cfg_delete" value="Supprimer" style="width: 80px;" />&nbsp;|&nbsp;
+<input type="reset" value="Annuler" style="width: 80px;" />
+<input type="submit" name="_cfg_ok" value="Enregistrer" style="width: 120px; float: right;" />
+</div>
+</form>
+
+<hr />
+<div>#CFG_ARBO{couleurs}</div>
