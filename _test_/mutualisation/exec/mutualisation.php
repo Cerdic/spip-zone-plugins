@@ -62,7 +62,8 @@ function exec_mutualisation_dist() {
 			$url = 'http://'.$v.'/';
 			$erreur = ' (erreur!)';
 		}
-		$page .= "<tr class='tr". $nsite % 2 ."'>
+		$page .= "<tr class='tr". $nsite % 2 ."'"
+			. " style='background: url(${url}spip.php?action=cron);'>
 			<td>$v$version_installee$erreur</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
