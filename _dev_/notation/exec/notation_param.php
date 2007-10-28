@@ -1,4 +1,18 @@
 <?php
+/**
+* Plugin Notation
+* par JEM (jean-marc.viglino@ign.fr)
+* 
+* Copyright (c) 2007
+* Logiciel libre distribue sous licence GNU/GPL.
+*  
+* Affichage de l'aide
+*  
+**/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/vieilles_defs');
 include_spip('inc/presentation');
 include_spip('inc/notation_menu');
 include_spip('inc/config');
