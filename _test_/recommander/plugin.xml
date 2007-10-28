@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	[fil@rezo.net->mailto:fil@rezo.net]
-_ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
+_ &#169; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.2
@@ -16,10 +16,10 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 	Fonction recommander un article &#224; un ami.
 
 On l'ajoute dans n'importe quel squelette sous la forme :
-{#RECOMMANDER{titre de la page,url de la page,intro de la page,sujet}}
+<code>#RECOMMANDER{titre de la page,url de la page,intro de la page,sujet}</code>
 _ par exemple
-{#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}}
-_ l'url, l'intro et le sujets sont facultatifs
+<code>#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}</code>
+_ l'url, l'intro et le sujet sont facultatifs
 
 L'interface est en ahah.
 	</description>

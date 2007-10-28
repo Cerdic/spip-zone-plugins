@@ -59,7 +59,12 @@ function envoi_recommander($contexte_inclus) {
 	include_spip('public/assembler');
 	$body = recuperer_fond('recommander/email',$contexte);
 
-	lang_dselect();
+
+	// depiler la langue qu'on a empile plus haut
+	if (function_exists('lang_dselect'))
+		lang_dselect();
+	else
+		lang_select();
 
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	if (!$envoyer_mail(

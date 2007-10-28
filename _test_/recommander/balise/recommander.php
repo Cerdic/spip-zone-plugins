@@ -13,7 +13,7 @@ function balise_RECOMMANDER_stat($args, $filtres) {
 	return $args;
 }
 
-function balise_RECOMMANDER_dyn($titre,$url='',$texte='',$subject='') {
+function balise_RECOMMANDER_dyn($titre='',$url='',$texte='',$subject='') {
 	if (!$f = charger_fonction('fragment_recommander', 'action', true))
 		die('erreur fragment_recommander absent');
 
