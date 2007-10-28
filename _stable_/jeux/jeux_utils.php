@@ -12,7 +12,7 @@
 include_spip('jeux_config');
 
 // sacree compatibilite...
-if ($GLOBALS['spip_version_code']<1.92) {
+ if (defined('_SPIP19100')) {
 	define(_DIR_VAR, _DIR_IMG);
 	function set_request($var, $val = NULL) {
 		unset($_GET[$var]);
@@ -203,15 +203,15 @@ function jeux_javascript($b) {
 // deux fonctions qui utilisent inc/layer.php
 function jeux_block_init() {
   global $spip_version_code;
-  if ($spip_version_code<1.92) { $temp = _DIR_IMG_PACK; define(_DIR_IMG_PACK, 'ecrire/'._DIR_IMG_PACK);	}	// compatibilite avec 1.9.1
+  if (defined('_SPIP19100')) { $temp = _DIR_IMG_PACK; define(_DIR_IMG_PACK, 'ecrire/'._DIR_IMG_PACK);	}	// compatibilite avec 1.9.1
   include_spip('inc/layer');
-  if ($spip_version_code<1.92) define(_DIR_IMG_PACK, $temp);		// compatibilite avec 1.9.1
+   if (defined('_SPIP19100')) define(_DIR_IMG_PACK, $temp);		// compatibilite avec 1.9.1
 }
 function jeux_block_invisible($id, $texte, $block) {
  if (!strlen($texte)) return '';
  if(function_exists('bouton_block_depliable'))						// fonction introduite en 1.93
  	return bouton_block_depliable($texte, false, $id).debut_block_depliable(false, $id).$block.fin_block();
- else return $GLOBALS['spip_version_code']<1.92?				// compatibilite avec 1.9.1
+ else return defined('_SPIP19100')?				// compatibilite avec 1.9.1
 	bouton_block_visible($id).$texte.debut_block_visible($id).$block.fin_block()
 	:bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block();
 }

@@ -1,6 +1,5 @@
 <?
 
-if ($GLOBALS['spip_version_code']>=1.9300) @define('_SPIP19300', 1);
 $GLOBALS['jeux_base_version'] = 0.12;
 
 function jeux_install($install){
