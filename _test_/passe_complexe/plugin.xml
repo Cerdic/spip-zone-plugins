@@ -4,7 +4,7 @@
 	<description>
 <multi>
 [fr]
-	Testeur de compl&eacute;xit&eacute; des mots de passes.
+	Testeur de complexit&eacute; des mots de passes.
 _ Adaptation du script de [->http://dev.digitalspaghetti.me.uk/password/].
 [en]
 Test the strength of passwords entered when registering to the site.
