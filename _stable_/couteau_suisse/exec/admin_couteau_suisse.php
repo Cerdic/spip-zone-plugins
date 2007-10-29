@@ -3,197 +3,270 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.spip-contrib.net/?article2166   #
+#  Infos : http://www.spip-contrib.net/?article1554   #
 #-----------------------------------------------------#
 
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip("inc/presentation");
-include_spip('inc/cs_outils');
 /*
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_COUTEAU_SUISSE',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
 if(defined('_SPIP19100') & !function_exists('fin_gauche')) { function fin_gauche(){return '';} }
+if(defined('_SPIP19100') & !function_exists('spip_xml_load')) { 
+	function spip_xml_load($url){
+		$texte = recuperer_page($url);
+		include_spip('inc/plugin');
+		return parse_plugin_xml($texte);
+	}
+}
+
 
 function cs_admin_styles_et_js() {
-	global $couleur_claire, $couleur_foncee;
-	// SPIP v193
-/*
-	if (!$couleur_claire) { 
-		$couleurs = charger_fonction('couleurs', 'inc'); 
-		$couleurs = $couleurs($GLOBALS['auteur_session']['prefs']['couleur']);
-		print_r($couleurs);
-	}
-*/
-	echo "<style type='text/css'>\n";
+	global $afficher_outil;
+	$a = defined('_SPIP19100')||defined('_SPIP19200')
+		?'div.cadre-info a { background:none; padding:0; border:0; } div.cadre-info { margin-bottom:1em; }'
+		:'';
 	echo <<<EOF
-div.cadre-padding *{
-/*	padding:0;
-	margin:0;*/
-}
+<style type='text/css'>$a
+
 div.cadre-padding form{
 	padding:0;
 	margin:0;
 }
-div.cadre-padding ul li {
-	list-style:none ;
-}
-div.cadre-padding ul {
-	padding-left:1em;
-	margin:.5em 0 .5em 0;
-}
-div.cadre-padding ul ul {
-	border-left:5px solid #DFDFDF;
-}
-div.cadre-padding ul li li {
-	margin:0;
-	padding:0 0 0.25em 0;
-}
-div.cadre-padding ul li li div.nomoutil, div.cadre-padding ul li li div.nomoutil_on {
-	border:1px solid #AFAFAF;
-	padding:.3em .3em .6em .3em;
-	font-weight:normal;
-}
-div.cadre-padding ul li li div.nomoutil a, div.cadre-padding ul li li div.nomoutil_on a {
-	outline:0;
-	outline:0 !important;
-	-moz-outline:0 !important;
-}
-div.cadre-padding ul li li div.nomoutil_on {
-	background:$couleur_claire;
-	font-weight:bold;
-}
-div.cadre-padding div.droite label {
-	padding:.3em;
-	background:#EFEFEF;
-	border:1px dotted #95989F !important;
-	border:1px solid #95989F;
-	cursor:pointer;
-	margin:.2em;
-	display:block;
-	width:10.1em;
-}
-/* debut SPIP v1.93 */
+
 div.cadre_padding form{
 	padding:0;
 	margin:0;
 }
 
-div.cadre_padding .titrem {
-	display:inline;
-	font-weight:normal;
-	background-position:left 1pt;
-	background-color:white;
-	padding:0 0 0 12pt;
-	cursor:help;
+div.cs_infos {
 }
-div.cadre-padding .deplie {
-	cursor:default;
+
+div.cs_infos h3.titrem {
+	border-bottom:solid 1px;
+	font-weight:bold;
+	display:block;
 }
-div.cadre-padding .hover {
-	background-color:$couleur_foncee;
+
+div.cs_infos p {
+	margin:0.3em 1em 0.3em 0pt;
+	padding:0pt;
 }
-/* fin SPIP v1.93 */
-input.checkbox {
-	margin:0;
-	cursor:pointer;
-}
-div.detail_outil {
-	border-top:1px solid #B5BECF;
-	padding:0 .5em .5em .5em;
-	background:#F5F5F5;
-}
-div.detail_outil hr {
+
+div.cs_infos hr {
 	border-top:1px solid #67707F;
 	border-bottom:0;
 	border-left:0;
 	border-right:0;
-	}
+}
 
-div.detail_outil p {
+div.cs_infos p {
 	margin:0.3em 1em .3em 0;
 	padding:0;
 }
 
-div.detail_outil fieldset {
+div.cs_infos fieldset {
 	margin:.8em 4em .5em 4em;
-	-moz-border-radius:8px;
+/*	-moz-border-radius:8px; */
 }
 
-div.detail_outil legend {
+div.cs_infos legend {
 	font-weight:bold;
 }
 
-div.detail_outil sup {
+div.cs_infos sup {
 	font-size:85%;
 	font-variant:normal;
 	vertical-align:super;
 }
 
+/* V2.0 */
+.conteneur {
+	clear:both;
+	width:100%;
+	margin:0.8em 0 0 0;
+	padding:0;
+}
+
+a.cs_href {
+	font-weight:normal;
+}
+a.outil_on {
+	font-weight:bold;
+	border:1px dotted;
+}
+div.cs_liste {
+	float:left;
+	width:45%;
+}
+
+div.cs_outils {
+	clear:both;
+	float:none;
+	width:100%;
+}
+
+div.cs_actifs {
+	float:right;
+}
+div.cs_toggle {
+	float:left;
+	width:9.6%; /* pour IE6 */
+	text-align:center;
+	margin:50px 0 0 0;
+}
+
+div.categorie {
+	margin-top:.6em;
+	padding:2px;
+	font-weight:bold;
+	display:block;
+	cursor:pointer;
+}
+div.categorie span {
+	font-size:85%;
+}
+div.categorie span.light {
+	font-weight:normal;
+}
+.cs_hidden {
+	display:none;
+}
+
+</style>
 EOF;
-	echo "</style>";
 	echo "<script type=\"text/javascript\"><!--
 
-var Outils = new Array(); // Listes des outils
-
-function submit_general(outil) {
-	document.forms.submitform.afficher_outil.value = outil;
-	document.forms.submitform.submit();
+var cs_selected, cs_descripted;
+function set_selected() {
+	cs_selected = new Array();
+	jQuery('a.outil_on').each( function(i){
+		cs_selected[i] = this.name;
+	});
+	if(cs_selected.length) {
+			jQuery('div.cs_toggle div').show();
+			jQuery('#cs_toggle_p').html('('+cs_selected.length+')');
+		} else jQuery('div.cs_toggle div').hide();
 }
-
-function outilcheck(ischecked, index) {
- outil = Outils[index][0];
- if(ischecked == true) {
- 	classe = 'nomoutil_on';
-	html = '-input';
-	test = 1
- } else {
- 	classe = 'nomoutil';
-	html = '-valeur';
-	test = 0
- }
- document.getElementById(outil).className = classe;
- document.getElementById('tweak_'+outil).value = test;
-
- if (Outils[index][1]>0) {
-  var chaine=document.getElementById('tweak'+index+html).innerHTML;
-  if(html=='-input') chaine=chaine.replace(/HIDDENCSVAR__/g,'');
-  document.getElementById('tweak'+index+'-visible').innerHTML = chaine;
- }
+function set_categ(id) {
+	nb = jQuery('#'+id+' a.outil_on').length;
+	if(nb>0) jQuery('#'+id).prev().children().removeClass('light');
+		else jQuery('#'+id).prev().children().addClass('light');
 }
-
-function categ_outil(categ, lesoutils, count) {
- for(tk=0;tk<count;tk++) {
- 	name = Outils[lesoutils[tk]][0];
-	if (!document.getElementsByName('foo_'+name)[0].disabled) {
-		document.getElementsByName('foo_'+name)[0].checked = this.checked;
-		outilcheck(this.checked, lesoutils[tk]);
+function outils_toggle() {
+	if(cs_selected.length>1) {
+		msg=\""._T('cout:permuter_outils')."\";
+		msg=msg.replace(/@nb@/, cs_selected.length);
+	} else {
+		msg=\""._T('cout:permuter_outil')."\";
+		msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
 	}
- }
+	if (!confirm(msg)) return false;
+	jQuery('#cs_selection').attr('value', cs_selected.join(','));
+	document.csform.submit();
 }
 
-function outilchange(index) {
- outilcheck(this.checked, index);
-}
+jQuery(function(){
+	// clic sur un titre de categorie
+	jQuery('div.categorie').click( function() {
+		jQuery(this).children().toggleClass('cs_hidden');
+		jQuery(this).next().toggleClass('cs_hidden');
+		// annulation du clic
+		return false;
+	})
+	.dblclick(function(){
+		id = '#'+this.nextSibling.id;
+		a = jQuery(id+' a.outil_on').length;
+		b = jQuery(id+' a.cs_href').length;
+		if(a==b) jQuery(id+' a.outil_on').removeClass('outil_on');
+		else jQuery(id+' a.cs_href').addClass('outil_on');
+		set_selected();
+		set_categ(this.nextSibling.id);
+		return false;
+	});
+
+	// clic sur un outil
+	jQuery('a.cs_href').click( function() {
+		jQuery(this).toggleClass('outil_on');
+		set_selected();
+		set_categ(this.parentNode.id);
+		// on s'en va si l'outil est deja affiche
+		if(cs_descripted==this.name) return false;
+		cs_descripted=this.name;
+		// on charge la nouvelle description
+		jQuery('#cs_infos')
+			.css('opacity', '0.5')
+			.parent()
+			.prepend(ajax_image_searching)
+			.load('".generer_url_ecrire('charger_description_outil', 'source='._request('exec').'&outil=', '\\x26')."'+this.name);
+		// annulation du clic
+		return false;
+	})
+	.dblclick(function(){
+		jQuery('a.outil_on').removeClass('outil_on');
+		jQuery('div.categorie span').addClass('light');
+		jQuery(this).addClass('outil_on');
+		set_selected();
+		set_categ(this.parentNode.id);
+		outils_toggle();
+		return false;
+	});
+	
+	// clic surle bouton de permutation
+	jQuery('#cs_toggle_a').click( function() {
+		outils_toggle();
+		// annulation du clic
+		return false;
+	});
+
+	// clic sur le bouton de reset
+	jQuery('#cs_reset_a').click( function() {
+		jQuery('a.outil_on').removeClass('outil_on');
+		jQuery('div.cs_toggle div').hide();
+		jQuery('div.categorie span').addClass('light');
+		// annulation du clic
+		return false;
+	});
+	
+	// clic sur le bouton 'tous les actifs'	
+	jQuery('#cs_tous_a').click( function() {
+		jQuery('div.cs_actifs a.cs_href').addClass('outil_on');
+		jQuery('div.categorie span').removeClass('light');
+		set_selected();
+		// annulation du clic
+		return false;
+	});
+	
+
+});
+
 //--></script>";
 }
 
-// mise à jour des données si envoi via formulaire
-function enregistre_modif_outils(){
+// mise a jour des donnees si envoi via formulaire
+function enregistre_modif_outils($cmd){
 cs_log("Début : enregistre_modif_outils()");
 	global $outils;
-	// recuperer les outils dans l'ordre des $_POST
-	$test = array();
-	foreach($outils as $outil) $test["tweak_".$outil['id']] = $outil['id'];
-	$liste = array();
-	if (!isset($_POST['desactive_tous']))
-		foreach($_POST as $choix=>$val) if (isset($test[$choix]) && $val=='1') $liste[$test[$choix]]['actif'] = 1;
+	// recuperer les outils dans $_POST ou $_GET
+	$toggle = array();
+	if(isset($_GET['outil'])) $toggle[] = $_GET['outil'];
+		elseif(isset($_POST['cs_selection'])) $toggle = explode(',', $_POST['cs_selection']);
+		else return;
+	$_GET['outil'] = ($cmd!='hide' && count($toggle)==1)?$toggle[0]:'';
+
+	$i = $cmd=='hide'?'cache':'actif';
+	${$i} = isset($GLOBALS['meta']["tweaks_{$i}s"])?unserialize($GLOBALS['meta']["tweaks_{$i}s"]):array();
+	foreach($toggle as $o) if(isset(${$i}[$o][$i]))
+			unset(${$i}[$o][$i]);
+			else ${$i}[$o][$i] = 1;
+	
 	global $connect_id_auteur, $connect_login;
-	spip_log("Changement des outils actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
-	ecrire_meta('tweaks_actifs', serialize($liste));
-	ecrire_metas();
+	spip_log("Changement de statut ($i) des outils par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys(${$i})));
+	ecrire_meta("tweaks_{$i}s", serialize(${$i}));
+		include_spip('inc/invalideur');
 /*
 @unlink(_DIR_TMP."charger_pipelines.php");
 @unlink(_DIR_TMP."charger_plugins_fonctions.php");
@@ -202,63 +275,88 @@ cs_log("Début : enregistre_modif_outils()");
 */
 include_spip('inc/plugin');
 verif_plugin();	
-		include_spip('inc/invalideur');
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_SKELS);
 		@unlink(_DIR_TMP."couteau-suisse.plat");
-	cs_initialisation(true);
 
 cs_log("Fin   : enregistre_modif_outils()");
 }
 
+function cout_exec_redirige($p = '') {
+	ecrire_metas();
+	cs_initialisation(true);
+	if (defined('_SPIP19200')) include_spip('inc/headers');
+	redirige_par_entete(generer_url_ecrire(_request('exec'), $p, true));
+}
+
 function exec_admin_couteau_suisse() {
 cs_log("Début : exec_admin_couteau_suisse()");
-	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
-	global $couleur_claire;
-	global $outils;
+	global $outils, $afficher_outil;
 
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
-		echo _T('avis_non_acces_page');
-		fin_page();
+	if (!cout_autoriser()) {
+		include_spip('inc/minipres');
+		echo defined('_SPIP19100')?minipres( _T('avis_non_acces_page')):minipres();
 		exit;
 	}
+	$cmd = _request('cmd');
+	$exec = _request('exec');
 
 include_spip('inc/plugin');
 verif_plugin();	
 
 	// reset general
-	if (_request('cmd')=='resetall'){
+	if ($cmd=='resetall'){
 		spip_log("Reset de tous les outils par l'auteur id=$connect_id_auteur");
 		foreach(array_keys($GLOBALS['meta']) as $meta) {
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 		}
+		cout_exec_redirige();
+	}
+	// installation personnalisee
+	if ($cmd=='install' && isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])){
+		spip_log("Installation peronnalisee de '$_GET[outils]' par l'auteur id=$connect_id_auteur");
+		$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
+		$vars = unserialize($GLOBALS['meta']['tweaks_variables']);
+		effacer_meta('tweaks_actifs');
+		$actifs = array();
+		foreach(explode('|', $pack['outils']) as $o) $actifs[trim($o)]['actif'] = 1;
+		if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $vars[$i] = $v;
+		ecrire_meta('tweaks_actifs', serialize($actifs));
+		ecrire_meta('tweaks_variables', serialize($vars));
+		cout_exec_redirige();
+	}
+	// reset des variables d'un outil
+	if ($cmd=='reset' && strlen($_GET['outil'])){
+		cs_log("Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur");
+		$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);	
+		global $outils;
+		include_spip('cout_utils');
+		include_spip('config_outils');
+		include_spip('inc/cs_outils');
+		cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
+		foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
+		ecrire_meta('tweaks_variables', serialize($metas_vars));
+		cout_exec_redirige("cmd=descrip&outil={$_GET[outil]}#cs_infos");
+	}
+	// reset de l'affichage
+	if ($cmd=='showall'){
+		cs_log("Reset de tous les affichages par l'auteur id=$connect_id_auteur");
+		effacer_meta('tweaks_caches');
 		ecrire_metas();
-		cs_initialisation(true);
-		if (defined('_SPIP19200')) include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));
 	}
 
-	// afficher un outil completement ?
-	$afficher_outil = $_GET['afficher_outil'];
-	if (!strlen($afficher_outil) || $afficher_outil=='non' ) $afficher_outil = -1;
-		else $afficher_outil = intval($afficher_outil);
+	// afficher la description d'un outil ?
+	$afficher_outil = ($cmd=='descrip' OR $cmd=='toggle')?$_GET['outil']:'';
 
 	// initialisation generale forcee : recuperation de $outils;
 	cs_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les outils
-	if (_request('changer_outils')=='oui'){
-		enregistre_modif_outils();
-		// pour la peine, un redirige,
-		// que les outils charges soient coherent avec la liste
-		if (defined('_SPIP19200')) include_spip('inc/headers');
-		$afficher_outil = _request('afficher_outil');
-		if (strlen($afficher_outil) && $afficher_outil!=='non')
-			redirige_par_entete(generer_url_ecrire('admin_couteau_suisse', "afficher_outil=$afficher_outil", true) . "#outil$afficher_outil");
-			else redirige_par_entete(generer_url_ecrire('admin_couteau_suisse'));
+	if ($cmd=='toggle' OR $cmd=='hide'){
+		enregistre_modif_outils($cmd);
+		cout_exec_redirige(strlen($_GET['outil'])?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'');
 	}
 //	else
 //		verif_outils();
@@ -274,133 +372,117 @@ verif_plugin();
 	echo "<br /><br /><br />";
 	gros_titre(_T('cout:titre'));
 	echo barre_onglets("configuration", 'couteau_suisse');
+echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire('admin_couteau_suisse_old'), '">par ici</a></p>';
 
 	debut_gauche();
 	debut_boite_info();
-	echo propre(_T('cout:help0', array(
-		'reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'))));
+	// pour la  version du plugin
+	include_spip('inc/plugin');
+	$cs_infos = plugin_get_infos('couteau_suisse');
+	$cs_infos = $maj[1] = $cs_infos['version'];
+	// pour la version disponible, on regarde toutes les 1h06
+	$maj = isset($GLOBALS['meta']['tweaks_maj'])?unserialize($GLOBALS['meta']['tweaks_maj']):array(0, '');
+	if ($quiet = $maj[1] && (time()-$maj[0] < 4000)) $distant = $maj[1];
+	else {
+		include_spip('inc/distant');
+		if ($distant = recuperer_page('http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/couteau_suisse/plugin.xml?format=txt'))
+			$distant = $maj[1] = preg_match(',<version>([0-9.]+)</version>,', $distant, $regs)?$regs[1]:'';
+		$maj[0] = time();
+		if ($distant) ecrire_meta('tweaks_maj', serialize($maj));
+		ecrire_metas();
+	}
+	// pour la liste des docs sur spip-contrib
+	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
+	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace('/@@(.*?)@@/e', "couper(_T('\\1'), 25)", $v);
+	sort($contribs);
+	$aide = '';
+	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
+		$aide .= "\n_ " . _T('cout:pour', array('pack'=>"{[{$pack}->" . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
+	$aide = _T('cout:help', array(
+		'reset' => generer_url_ecrire($exec,'cmd=resetall'),
+		'hide' => generer_url_ecrire($exec,'cmd=showall'),
+		'version' => $cs_infos,
+		'distant' => $distant==$cs_infos?_T('cout:a_jour'):($distant?_T('cout:distant', array('version' => $distant)):''),
+		'contribs' => join('', $contribs),
+		'install' => $aide,
+	));
+	echo propre($aide);
 	fin_boite_info();
-	$aide_racc = cs_aide_raccourcis();
-	if(strlen($aide_racc)) {
+	$aide = cs_aide_raccourcis();
+	if(strlen($aide)) {
 		debut_boite_info();
-		echo $aide_racc;
+		echo $aide;
 		fin_boite_info();
 	}
-	$aide_pipes = cs_aide_pipelines();
-	if(strlen($aide_pipes)) {
+	$aide = cs_aide_pipelines();
+	if(strlen($aide)) {
 		debut_boite_info();
-		echo $aide_pipes;
+		echo $aide;
 		fin_boite_info();
 	}
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
 	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
-	debut_droite();
 	lire_metas();
+	// si l'outil rss_couteau_suisse est actif, on telecharge les news...
+	if (strpos($GLOBALS['meta']['tweaks_actifs'], 'rss_couteau_suisse') !== false) cs_boite_rss(!$quiet);
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
+	debut_droite();
 
 	debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),'','','&nbsp;'._T('cout:liste_outils'));
+	echo _T('cout:presente_outils2');
+	echo "\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 
-	$valider = "\n<div style='text-align:$spip_lang_right'>"
-		. "<input type='submit' name='Valider1' value='"._T('bouton_valider')."' class='fondo' onclick='document.forms.submitform.submit()' /></div>";
-	echo _T('cout:presente_outils', array('triangle'=>'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" />')), $valider;
-echo '<p style="color:red;">Testez la nouvelle interface du plugin : <a href="', generer_url_ecrire('admin2'), '">par ici !</a></p>';
-	echo "\n<table border='0' cellspacing='0' cellpadding='5' ><tr><td class='sansserif'>";
-	foreach($temp = $outils as $outil) $categ[_T('cout:'.$outil['categorie'])] = $outil['categorie']; ksort($categ);
+	include_spip('inc/cs_outils');
+	$_GET['source'] = $exec;
+	echo '<div class="conteneur">' . liste_outils()
+	. '</div><br class="conteneur" /><div class="conteneur">'
+	. description_outil2(strlen($afficher_outil)?$afficher_outil:'') . '</div>';
 
-	$js = ''; $marge = '0';
-	$description_outil = charger_fonction('description_outil', 'inc');
-	foreach($categ as $c=>$i) {
-		$basics = array(); $s = '';
-		foreach($temp = $outils as $outil) if ($outil['categorie']==$i) {
-			$s .= ligne_outil($outil, $js, $afficher_outil==$outil['index'], $description_outil) . "\n";
-			$basics[] = $outil['index'];
-		}
-		$ss = "<input type='checkbox' class='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
-//		$ss .= $actif?" checked='checked'":"";
-		$ss .= " onclick='categ_outil.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
-		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('cout:activer_outil')."</label>";
-		preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
-		echo "<form style='margin-top:$marge; margin-left:2em;'>$ss&nbsp;<b>$reg[2]</b></form>\n", $s;
-		$marge = '.8em';
-	}
 	echo "</td></tr></table>\n";
-	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
-
-	if (!defined('_SPIP19300'))
-	  echo generer_url_post_ecrire('admin_couteau_suisse', '', 'submitform');
-	  else {
-		include_spip('inc/filtres');
-		echo "\n<form action='".generer_url_ecrire('admin_couteau_suisse')."' name='submitform' method='post'>" . form_hidden($action);
-	  }
-	echo "\n<input type='hidden' name='changer_outils' value='oui'>";
-	echo "\n<input type='hidden' name='afficher_outil' value='non'>";
-	foreach($temp = $outils as $outil) echo "<input type='hidden' id='tweak_".$outil['id']."' name='tweak_".$outil['id']."' value='".($outil['actif']?"1":"0")."' />";
-	$valider = "\n<div style='margin-top:0.4em; text-align:$spip_lang_right'>"
-		. "<input type='submit' name='Valider2' value='"._T('bouton_valider')."' class='fondo' /></div>";
-	echo $valider;
-
 	fin_cadre_trait_couleur();
-//	fin_cadre_relief();
 
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));
-	echo "</form>";
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>''));
 
 	echo fin_gauche(), fin_page();
 cs_log("Fin   : exec_admin_couteau_suisse()");
 }
 
-// affiche un outil sur une ligne
-function ligne_outil($outil, &$js, $afficher, $description_outil){
-	static $id_input=0;
-	$inc = $outil_id = $outil['id'];
-	$actif = $outil['actif'];
-	$erreur_version = cs_version_erreur($outil);
-	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
-	$titre_etat = _T('cout:'.($actif?'':'in').'actif');
-	$nb_var = intval($outil['nb_variables']);
-	$index = intval($outil['index']);
-	$pliage_id = 'plie_'.$outil_id;
-
-	$s = "<a name='outil$index' id='outil$index'></a><form  style='margin:0 0 0 1em;'><div id='$outil_id' class='nomoutil".($actif?'_on':'')."'>";
-/*
-	if (isset($info['erreur'])){
-		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
-		$erreur = true;
-		foreach($info['erreur'] as $err)
-			$s .= "/!\ $err <br/>";
-		$s .=  "</div>";
+function cs_boite_rss($force) {
+	debut_boite_info();
+	$p = '';
+	// on cherche le flux rss toutes les deux heures
+	$lastmodified = @file_exists(_DIR_RSS_TMP)?@filemtime(_DIR_RSS_TMP):0;
+	if (!$force && (time()-$lastmodified < 2*3600)) lire_fichier(_DIR_RSS_TMP, $p);
+	if(strlen($p)) {
+		echo $p;
+		fin_boite_info();
+		return;
 	}
-*/
-	$p = '<div style="margin:0 0 0 2em;">';
-	$p .= "<img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
-	$p .= "<input type='checkbox' class='checkbox' name='foo_$inc' value='O' id='label_$id_input' style=''";
-	$p .= $actif?" checked='checked'":"";
-	$p .= $erreur_version?" disabled='disabled'":"";
-	$p .= " onclick='outilchange.apply(this,[$index])'";
-	$p .= "/> <label for='label_$id_input' style='display:none'>"._T('cout:activer_outil')."</label>";
-	$js .= "Outils[$index] = Array(\"$inc\", $nb_var);\n";
-	// compatibilite SPIP < v1.93
-	if(function_exists('bouton_block_depliable'))
-		$p .= bouton_block_depliable($outil['nom'], $afficher, $pliage_id);
-		else $p .= ($afficher?bouton_block_visible($pliage_id):bouton_block_invisible($pliage_id)) . $outil['nom'];
-	$p .= '</div>';
-	$s .= propre($p) . "</div></form>";
-
-	// compatibilite SPIP < v1.93
-	if(function_exists('debut_block_depliable'))
-		$p = debut_block_depliable($afficher, $pliage_id);
-		else $p = $afficher?debut_block_visible($pliage_id):debut_block_invisible($pliage_id);
-	$p .= "\n<div class='detail_outil'>";
-	// horrible : ça prends plus de temps qu'avant, mais ca va bientot disparaitre !!
-	$p .= cs_initialisation_d_un_outil($outil['id'], $description_outil, false);
-	if (isset($outil['jquery']) && $outil['jquery']=='oui') $p .= '<p>' . _T(defined('_SPIP19100')?'cout:jquery1':'cout:jquery2') . '</p>';
-	if (isset($outil['auteur']) && strlen($outil['auteur'])) $p .= '<p>' . _T('auteur') .' '. ($outil['auteur']) . '</p>';
-	if (isset($outil['contrib']) && strlen($outil['contrib'])) $p .= '<p>' . _T('cout:contrib', array('id'=>$outil['contrib'])) . '</p>';
-	$s .= propre($p) . detail_outil($outil['id']) . '</div>';
-
-	$s .= fin_block();
-	$id_input++;
-	return $s;
+	include_spip('action/editer_site');
+	$r = spip_xml_load(_CS_RSS_SOURCE);
+	if (function_exists('spip_xml_match_nodes')) $c = spip_xml_match_nodes(',^item$,', $r, $r2);
+	else {
+		$r2= array_shift(array_shift(array_shift(array_shift($r))));
+		$c = count($r2);
+	}
+	if($c) {
+		$r3 = &$r2['item'];
+		$c = count($r3); $p='';
+		for($i=0; $i<min($c, 12); $i++) {
+		 $l = $r3[$i]['link'][0];
+		 $t = str_replace('&amp;', '&', htmlentities($r3[$i]['title'][0], ENT_NOQUOTES, "UTF-8"));
+		 $t = preg_replace(',\s*&#8364;(&brvbar;)?,', '&nbsp;(&hellip;)', $t);
+		 $t = preg_replace(',^(.*?):,', "&bull; <a href='$l' class='spip_out' target='_cout'>$1</a>:", $t);
+		 $p .= "<li style='padding-top:0.6em;'>$t</li>";
+		}
+	}
+	$du = affdate_heure(date('Y-m-d H:i:s',time()));
+	echo $p = '<p><b>'._T('cout:rss_titre').'</b></p><ul style="list-style-type:none; padding:0; ">'.$p
+		.'</ul><p class="spip_xx-small"><b>'
+		._T('cout:edition')."</b><br/>$du</p>";
+	ecrire_fichier(_DIR_RSS_TMP, $p);
+	fin_boite_info();
 }
+
 ?>

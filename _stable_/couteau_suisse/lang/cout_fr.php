@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
 		."<p>Lien de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]</p>"
 		."<p>R&eacute;initialisation :
-_ - [De tout le plugin->@reset@]
+_ &bull; [De tout le plugin->@reset@]
 </p>",
 	'help' => "{{Cette page est uniquement accessible aux responsables du site.}}"
 		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.</p>"
@@ -81,8 +81,8 @@ _ &bull; [De tout le plugin->@reset@]@install@
 	'code_css' => 'CSS',
 	'contrib' => "Plus d'infos : [->http://www.spip-contrib.net/?article@id@]",
 	'liste_outils' => 'Liste des outils du Couteau Suisse',
-	'presente_outils' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition. Cliquez sur le petit triangle (@triangle@) pour acc&eacute;der &agrave; leur description.<br />Vous pouvez activer les fonctionnalit&eacute;s n&eacute;cessaires en cochant la case correspondante puis en validant la page.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
-	'presente_outils2' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br />En cliquant sur le nom des outils ci-dessous, vous s&eacute;lectionnez ceux dont vous pourrez permuter l'&eacute;tat &agrave; l'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description apparait au-dessous des listes.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
+	'presente_outils' => "Cette interface est ancienne.<br /><br />Si rencontrez des probl&egrave;mes dans l'utilisation de la <a href='./?exec=admin_couteau_suisse'>nouvelle interface</a>, n'h&eacute;sitez pas &agrave; nous en faire part sur le forum de <a href='http://www.spip-contrib.net/?article2166'>Spip-Contrib</a>.",
+	'presente_outils2' => "Cette page liste les fonctionnalit&eacute;s du plugin mises &agrave; votre disposition.<br /><br />En cliquant sur le nom des outils ci-dessous, vous s&eacute;lectionnez ceux dont vous pourrez permuter l'&eacute;tat &agrave; l'aide du bouton central : les outils activ&eacute;s seront d&eacute;sactiv&eacute;s et <i>vice versa</i>. &Agrave; chaque clic, la description apparait au-dessous des listes. Les cat&eacute;gories sont repliables et les outils peuvent &ecirc;tre cach&eacute;s. Le double-clic permet de permuter rapidement un outil.<br /><br />Pour une premi&egrave;re utilisation, il est recommand&eacute; d'activer les outils un par un, au cas o&ugrave; apparaitraient certaines incompatibilit&eacute;s avec votre squelette, avec SPIP ou avec d'autres plugins.",
 	'cliquezlesoutils' => "Cliquez sur le nom des outils ci-dessus pour afficher ici leur description.",
 	'selectiontous' => "S&eacute;lectionner tous les outils actifs",
 	'tous' => 'TOUS',
