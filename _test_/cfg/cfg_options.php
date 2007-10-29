@@ -1,4 +1,9 @@
 <?php
+
+// Compatibilite 1.9.2
+if (version_compare($GLOBALS['spip_version_code'],'1.9300','<'))
+	include_spip('inc/compat_cfg');
+	
 /* etend la balise #CONFIG 
  *
  *  cfg plugin for spip (c) toggg 2007 -- licence LGPL

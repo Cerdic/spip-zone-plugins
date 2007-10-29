@@ -38,7 +38,7 @@ class cfg_classic
 			    ecrire_meta($name, $this->cfg->val[$name]);
 			}
 	    }
-	    ecrire_metas();
+	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
 	    return true;
 	}
 }

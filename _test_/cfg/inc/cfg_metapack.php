@@ -78,7 +78,7 @@ class cfg_metapack
 		} else {
 		    ecrire_meta($this->cfg->nom, serialize($base));
 	    }
-	    ecrire_metas();
+	    if (defined('_COMPAT_CFG_192')) ecrire_metas();
 	    return true;
 	}
 }
