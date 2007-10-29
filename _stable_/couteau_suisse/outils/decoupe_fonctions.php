@@ -3,6 +3,8 @@
 
 // aide le Couteau Suisse a calculer la balise #INTRODUCTION
 function decoupe_introduire($texte) {
+	if (defined('_decoupe_COMPATIBILITE'))
+		return str_replace(array(_decoupe_SEPARATEUR, _decoupe_COMPATIBILITE), '<p>&nbsp;</p>', $texte);
 	return str_replace(_decoupe_SEPARATEUR, '<p>&nbsp;</p>', $texte);
 }
 $GLOBALS['cs_introduire'][] = 'decoupe_introduire';
@@ -28,6 +30,10 @@ function onglets_callback($matches) {
 
 // fonction appellee sur les parties du texte non comprises entre les balises : html|code|cadre|frame|script|acronym|cite
 function decouper_en_onglets_rempl($texte) {
+	// surcharge possible de _decoupe_SEPARATEUR par _decoupe_COMPATIBILITE
+	if (defined('_decoupe_COMPATIBILITE'))
+		$texte = str_replace(_decoupe_COMPATIBILITE,_decoupe_SEPARATEUR, $texte);
+	// si pas de balise, on sort
 	if (strpos($texte, '<')===false) return $texte;
 	// il faut un callback pour analyser l'interieur du texte
 	return preg_replace_callback(',<onglets>(.*?)</onglets>,ms', 'onglets_callback', $texte);
@@ -138,28 +144,20 @@ function decoupe_notes_orphelines(&$texte) {
 	$GLOBALS['les_notes'] = trim($notes);
 }
 
-// ici on est en post_propre
-function cs_decoupe($texte){
-	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
-	// verification des metas qui stockent les liens d'image
-	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
-		include_spip('outils/decoupe');
-		decoupe_installe();
-	}
-//echo $texte, "\n\n<hr/>\n\n", cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
-	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
-}
-
-// ici on est en pre_propre
+// ici on est en pre_propre, tests requis
 function cs_onglets($texte){
-	if (strpos($texte, '<')===false) return $texte;
 	// verification des metas qui stockent les liens d'image
 	if (!isset($GLOBALS['meta']['cs_decoupe'])) {
 		include_spip('outils/decoupe');
 		decoupe_installe();
 	}
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_onglets_rempl', $texte);
+}
 
+// ici on est en post_propre, tests non requis
+function cs_decoupe($texte){
+	if (strpos($texte, _decoupe_SEPARATEUR)===false) return $texte;
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'decouper_en_pages_rempl', $texte);
 }
 
 // Compatibilite

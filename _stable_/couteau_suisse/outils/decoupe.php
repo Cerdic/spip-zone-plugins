@@ -34,6 +34,8 @@ function decoupe_installe() {
 // le resultat est une chaine apportant des informations sur les nouveau raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('cout:un_outil:aide');
 function decoupe_raccourcis() {
-	return _T('cout:decoupe:aide', array('sep' => '<strong>'._decoupe_SEPARATEUR.'</strong>'));
+	$compat = defined('_decoupe_COMPATIBILITE')
+		?_T('cout:decoupe:aide2', array('sep' => '<b>'._decoupe_COMPATIBILITE.'</b>')):'';
+	return _T('cout:decoupe:aide', array('sep' => '<b>'._decoupe_SEPARATEUR.'</b>')).$compat;
 }
 ?>
