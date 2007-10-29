@@ -1,5 +1,6 @@
 <?php
 
+include_spip('inc/vieilles_defs');
 include_spip('inc/svn_update');
 
 # redefinissables dans ecrire/mes_options ; si on veut en mettre
