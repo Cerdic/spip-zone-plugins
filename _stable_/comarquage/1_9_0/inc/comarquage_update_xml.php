@@ -29,7 +29,7 @@ function cron_comarquage_update_xml($t){
 		$table = preg_files(_DIR_CACHE._DIR_CACHE_COMARQUAGE_XML, '[.]*\.xml$');
 		$time = time();
 		foreach ($table as $file){
-	    if ( ($time - filemtime($file)) <$GLOBALS['meta']['comarquage_local_refresh']) {
+	    if ( ($time - filemtime($file)) >$GLOBALS['meta']['comarquage_local_refresh']) {
 	    	$file_liste[] = $file;
 	    }
 		}
