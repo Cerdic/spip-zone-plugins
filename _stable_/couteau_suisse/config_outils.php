@@ -33,6 +33,12 @@ add_variable( array(
 	'nom' => 'duree_cache',
 	'format' => 'nombre',
 	'defaut' => "24", // 1 jour
+	'code' => "\$GLOBALS['delais']=%s*3600;\n",
+));
+add_variable( array(
+	'nom' => 'duree_cache_mutu',
+	'format' => 'nombre',
+	'defaut' => "24", // 1 jour
 	'code' => "define('_DUREE_CACHE_DEFAUT', %s*3600);\n",
 ));
 add_variable( array(
@@ -43,7 +49,7 @@ add_variable( array(
 ));
 add_outil( array(
 	'id' => 'SPIP_cache',
-	'code:options' => "%%radio_desactive_cache3%%%%duree_cache%%%%quota_cache%%",
+	'code:options' => "%%radio_desactive_cache3%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%",
 	'categorie' => 'admin',
 ));
 
