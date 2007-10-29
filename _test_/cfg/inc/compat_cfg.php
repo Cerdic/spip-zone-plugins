@@ -5,7 +5,7 @@ define('_COMPAT_CFG_192', true);
 
 /* fichier de compatibilite vers spip 1.9.2 */
 if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')
-	AND $f = charger_fonction('compat', 'inc'))
+	AND $f = charger_fonction('compat_cfg', 'inc'))
 		$f();
 
 
