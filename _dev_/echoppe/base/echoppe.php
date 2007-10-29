@@ -13,7 +13,13 @@ $spip_echoppe_categories = array(
 	);
 	
 $spip_echoppe_categories_key = array(
-	"PRIMARY KEY"        => "id_categorie",
+	"PRIMARY KEY"		=> "id_categorie",
+	"KEY id_parent"	=> "id_parent"
+	);
+
+$spip_echoppe_categories_join = array(
+	"id_categorie"		=> "id_categorie",
+	"id_parent"		=> "id_parent"
 	);
 
 $spip_echoppe_categories_descriptions = array(
@@ -32,6 +38,12 @@ $spip_echoppe_categories_descriptions_key = array(
 	"PRIMARY KEY"		=> "id_categorie_description",
 	"KEY id_categorie"    => "id_categorie",
 	"KEY lang"		=> "lang",
+	"KEY statut"		=> "statut"
+	);
+
+$spip_echoppe_categories_descriptions_join = array(
+	"id_categorie"		=>"id_categorie",
+	"lang"			=>"lang",
 	);
 
 $spip_echoppe_produits = array(
@@ -42,9 +54,26 @@ $spip_echoppe_produits = array(
 	"hauteur"					=> "float DEFAULT '0' NOT NULL", 	// (crowfoot : serait important pour le calcul des frais de livraison ...)
 	"largeur"					=> "float DEFAULT '0' NOT NULL",
 	"longueur"				=> "float DEFAULT '0' NOT NULL",
+	"colisage"				=> "VARCHAR(10) DEFAULT '' NOT NULL"//(ça pourrait etre une donnée d'info sur la taille du colis ( ou lettre, ou palettes ... etc )
 	"ref_produit"				=> "text NOT NULL",
+	"prix_base_htva"			=> "float DEFAULT '0' NOT NULL", 	//(permettrait de donner un prix de base et pas faire 50000 jointures pour retrouver le prix dans une liste de produits....)
 	"maj"					=> "TIMESTAMP",
 	"statut"					=> "varchar(10) DEFAULT '0' NOT NULL"
+	);
+	
+$spip_echoppe_produits_key = array(
+	"PRIMARY KEY"					=> "id_produit",
+	"KEY statut"					=> "statut",
+	"KEY date_mise_en_ligne"		=> "date_mise_en_ligne",
+	"KEY date_retrait_mise_en_ligne"	=> "date_retrait_mise_en_ligne",
+	"KEY ref_produit"				=> "ref_produit"
+	);
+
+$spip_echoppe_produits_join = array(
+	"id_produit"				=> "id_produit",
+	"statut"					=> "statut",
+	"date_mise_en_ligne"		=> "date_mise_en_ligne",
+	"date_retrait_mise_en_ligne"	=> "date_retrait_mise_en_ligne"
 	);
 
 $spip_echoppe_produits_descriptions = array(
@@ -55,16 +84,30 @@ $spip_echoppe_produits_descriptions = array(
 	"descriptif"			=> "text NOT NULL",
 	"texte"				=> "longblob NOT NULL",
 	"ps"					=> "text NOT NULL",
-	"prix_base_htva"		=> "float DEFAULT '0' NOT NULL", 	//(permettrait de donner un prix de base et pas faire 50000 jointures pour retrouver le prix dans une liste de produits....)
 	"tva"					=> "float DEFAULT '0' NOT NULL",	// (doit à mon avis être internationalisé... non ? )
 	"quantite_mini"		=> "int NOT NULL",
 	"maj"				=> "TIMESTAMP",
-	"colisage"			=> "VARCHAR(10) DEFAULT '' NOT NULL"//(ça pourrait etre une donnée d'info sur la taille du colis ( ou lettre, ou palettes ... etc )
+	);
+
+$spip_echoppe_produits_descriptions_key = array(
+	"PRIMARY KEY"			=> "id_descriptif_produit",
+	"KEY id_produit"		=> "id_produit",
+	"KEY lang"			=> "lang"
+	);
+
+$spip_echoppe_produits_descriptions_join = array(
+	"id_produit"		=> "id_produit",
+	"lang"			=> "lang"
 	);
 
 $spip_echoppe_categories_produits = array(
 	"id_categorie"			=> "bigint(21) NOT NULL",
 	"id_produit"			=> "bigint(21) NOT NULL"
+	);
+
+$spip_echoppe_categories_produits_key = array(
+	"PRIMARY KEY"			=> "id_categorie, id_produit",
+	"KEY id_produit"		=> "id_produit"
 	);
 
 // Un produits peut faire partie d'une catégorie : écran smasung, mais aussi d'une gamme : "SyncMaster" ou "Ordinateur complet" 
@@ -73,6 +116,14 @@ $spip_echoppe_gammes = array(
 	"id_gamme"			=> "bigint(21) NOT NULL",
 	"titre"				=> "text NOT NULL", // On se pete pas la tete, on utilise les multi
 	"descriptif"			=> "text NOT NULL"
+	);
+
+$spip_echoppe_gammes_key = array(
+	"PRIMARY KEY"			=> "id_gamme"
+	);
+
+$spip_echoppe_gammes_join = array(
+	"PRIMARY KEY"			=> "id_gamme"
 	);
 
 $spip_echoppe_gammes_produits = array(
