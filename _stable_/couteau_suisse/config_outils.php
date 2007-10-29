@@ -365,8 +365,6 @@ div.pagination img { border:0pt none; margin:0pt; padding:0pt; }",
 
 // couplage avec l'outil 'decoupe', donc 'sommaire' doit etre place juste apres :
 // il faut inserer le sommaire dans l'article et ensuite seulement choisir la page
-include_spip('inc/texte');
-$code = str_replace("'", "\'", cs_code_echappement("<!--  -->\n", 'SOMMAIRE'));
 add_variable( array(
 	'nom' => 'lgr_sommaire',
 	'format' => 'nombre',
@@ -390,7 +388,7 @@ add_variable( array(
 add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
-	'code:options' => "define('_sommaire_REM', '$code');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
+	'code:options' => "define('_sommaire_REM', '<span class=\'_foo\'></span>');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
 	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;} div.cs_sommaire a:after, a.cs_ancre {display:none;}",
 	'code:jq' => 'if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none");',

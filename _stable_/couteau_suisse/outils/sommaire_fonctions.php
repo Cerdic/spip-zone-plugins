@@ -76,7 +76,8 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	// calcul du sommaire en recuperant le fond qui va bien
 	$fond = strpos($texte0, _sommaire_SANS_FOND)!==false ?2:1;
 	include_spip('public/assembler');
-	$sommaire = recuperer_fond('fonds/sommaire'.$fond, array('sommaire'=>$sommaire));
+	@define('_sommaire_TITRE', _T('cout:sommaire_titre'));
+	$sommaire = recuperer_fond('fonds/sommaire'.$fond, array('sommaire'=>$sommaire, 'titre'=>_sommaire_TITRE));
 
 	$ancre = '<a name="outil_sommaire" id="outil_sommaire" class="cs_ancre"></a>';
 	// si on ne veut que le sommaire, on renvoie le sommaire
