@@ -280,7 +280,7 @@ $spiplistes_items = array(
 	);
 
 	include_spip('inc/options_spip_listes');
-	
+		
 	$spiplistes_version =  lire_meta('spiplistes_version');
 
 //spiplistes_log("MES OPTIONS $spiplistes_version :: ".__plugin_real_version_base_get(), LOG_DEBUG);

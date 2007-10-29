@@ -31,6 +31,8 @@
 	spiplistes_upgrade_base() : si mise à jour de la base spiplistes
 */
 
+include_spip('inc/spiplistes_api');
+
 
 function spiplistes_upgrade () {
 

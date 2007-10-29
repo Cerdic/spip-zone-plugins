@@ -13,6 +13,8 @@
 // 3/ $action = 'test'
 // 
 
+include_spip('inc/spiplistes_api');
+
 function spiplistes_install ($action) {
 
 
