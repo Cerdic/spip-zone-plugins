@@ -15,7 +15,7 @@ function convertir_document($id_document) {
 
     //racine du site c'est a dire url_site/
     //une action se repere à la racine du site 
-    $racine_site = getcwd().'/';
+    $racine_site = getcwd();
 
     spip_log('doc2img à convertir : '.$id_document ,'doc2img');
     //format d'exportation (issu de cfg)
@@ -27,8 +27,12 @@ function convertir_document($id_document) {
 
     //nom complet du fichier : recherche ce qui suit le dernier / et retire ce dernier
     $document['fullname'] = substr(strrchr($res['fichier'], "/"),1);
-    //url relative du repertoire contenant le fichier
-    $document['source_url'] = substr($res['fichier'],0,strlen($res['fichier'])-strlen($document['fullname']));
+    //url relative du repertoire contenant le fichier , on retire aussi le / en fin
+    $document['source_url'] = substr($res['fichier'],0,strlen($res['fichier'])-strlen($document['fullname'])-1);
+    // si /IMG ne conclut par l'url, on l'ajoute (a priori effet 193)
+    if (stristr($document['source_url'], 'IMG') === false) {
+        $document['source_url'] = 'IMG/'.$document['source_url'];
+    }
     //decompose nom.extension
     $file_array = explode(".",$document['fullname']);
     $document['extension'] = $file_array[1];
@@ -47,7 +51,8 @@ function convertir_document($id_document) {
 
         //charge le document dans imagick
         spip_log('charge le document','doc2img');
-        $handle = imagick_readimage($racine_site.'/'.$document['source_url'].'/'.$document['fullname']);
+        spip_log('url_source'.$racine_site.'/'.$document['source_url'].'/'.$document['fullname'],'doc2img');
+        $handle = imagick_readimage($racine_site.'/'.$document['source_url'].'/'.$document['fullname']);       
 
         //on determine les dimensions des frames
         //si les proportions sont gardées
