@@ -206,7 +206,7 @@ verif_plugin();
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_SKELS);
 		@unlink(_DIR_TMP."couteau-suisse.plat");
-	cs_initialisation_totale();
+	cs_initialisation(true);
 
 cs_log("Fin   : enregistre_modif_outils()");
 }
@@ -321,7 +321,7 @@ echo '<p style="color:red;">Testez la nouvelle interface du plugin : <a href="',
 		$ss .= " onclick='categ_outil.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
 		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('cout:activer_outil')."</label>";
 		preg_match(',([0-9]+)\.?\s*(.*),', _T('cout:'.$c), $reg);
-		echo "<form style='margin-top:$marge; margin-left:2em;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
+		echo "<form style='margin-top:$marge; margin-left:2em;'>$ss&nbsp;<b>$reg[2]</b></form>\n", $s;
 		$marge = '.8em';
 	}
 	echo "</td></tr></table>\n";

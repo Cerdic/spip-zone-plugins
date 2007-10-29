@@ -16,7 +16,7 @@ function filets_sep_installe() {
 	$dossier = opendir($path);
 	while ($image = readdir($dossier)) {
 		if (preg_match(',^(([a-z0-9_-]+)\.(png|gif|jpg)),', $image, $reg)) { 
-			$liste[] = '<strong>__'.$reg[1].'__</strong>';	
+			$liste[] = '<b>__'.$reg[1].'__</b>';	
 			$filets[0][] = '__'.$reg[1].'__';	
 			list(,$haut) = @getimagesize("$path/$reg[1]");
 			if ($haut) $haut="height:{$haut}px;";

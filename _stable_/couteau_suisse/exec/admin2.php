@@ -266,7 +266,6 @@ cs_log("Début : enregistre_modif_outils()");
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement de statut ($i) des outils par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys(${$i})));
 	ecrire_meta("tweaks_{$i}s", serialize(${$i}));
-	ecrire_metas();
 		include_spip('inc/invalideur');
 /*
 @unlink(_DIR_TMP."charger_pipelines.php");
@@ -279,9 +278,15 @@ verif_plugin();
 		purger_repertoire(_DIR_CACHE);
 		purger_repertoire(_DIR_SKELS);
 		@unlink(_DIR_TMP."couteau-suisse.plat");
-	cs_initialisation_totale();
 
 cs_log("Fin   : enregistre_modif_outils()");
+}
+
+function cout_exec_redirige($p = '') {
+	ecrire_metas();
+	cs_initialisation(true);
+	if (defined('_SPIP19200')) include_spip('inc/headers');
+	redirige_par_entete(generer_url_ecrire(_request('exec'), $p, true));
 }
 
 function exec_admin2() {
@@ -306,10 +311,20 @@ verif_plugin();
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
 		}
-		ecrire_metas();
-		cs_initialisation(true);
-		if (defined('_SPIP19200')) include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire(_request('exec')));
+		cout_exec_redirige();
+	}
+	// installation personnalisee
+	if ($cmd=='install' && isset($_GET['pack']) && isset($GLOBALS['cs_installer'][$_GET['pack']]['outils'])){
+		spip_log("Installation peronnalisee de '$_GET[outils]' par l'auteur id=$connect_id_auteur");
+		$pack = &$GLOBALS['cs_installer'][$_GET['pack']];
+		$vars = unserialize($GLOBALS['meta']['tweaks_variables']);
+		effacer_meta('tweaks_actifs');
+		$actifs = array();
+		foreach(explode('|', $pack['outils']) as $o) $actifs[trim($o)]['actif'] = 1;
+		if(isset($pack['variables'])) foreach($pack['variables'] as $i=>$v) $vars[$i] = $v;
+		ecrire_meta('tweaks_actifs', serialize($actifs));
+		ecrire_meta('tweaks_variables', serialize($vars));
+		cout_exec_redirige();
 	}
 	// reset des variables d'un outil
 	if ($cmd=='reset' && strlen($_GET['outil'])){
@@ -322,10 +337,7 @@ verif_plugin();
 		cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
 		foreach ($outils[$_GET['outil']]['variables'] as $a) unset($metas_vars[$a]);
 		ecrire_meta('tweaks_variables', serialize($metas_vars));
-		ecrire_metas();
-		cs_initialisation(true);
-		if (defined('_SPIP19200')) include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire(_request('exec'), "cmd=descrip&outil={$_GET[outil]}#cs_infos", true));
+		cout_exec_redirige("cmd=descrip&outil={$_GET[outil]}#cs_infos");
 	}
 	// reset de l'affichage
 	if ($cmd=='showall'){
@@ -343,10 +355,7 @@ verif_plugin();
 	// sinon fait une passe de verif sur les outils
 	if ($cmd=='toggle' OR $cmd=='hide'){
 		enregistre_modif_outils($cmd);
-		// pour la peine, un redirige,
-		// que les outils charges soient coherent avec la liste
-		if (defined('_SPIP19200')) include_spip('inc/headers');
-		redirige_par_entete(generer_url_ecrire(_request('exec'), strlen($_GET['outil'])?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'', true));
+		cout_exec_redirige(strlen($_GET['outil'])?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'');
 	}
 //	else
 //		verif_outils();
@@ -384,24 +393,29 @@ verif_plugin();
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
 	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace('/@@(.*?)@@/e', "couper(_T('\\1'), 25)", $v);
 	sort($contribs);
-	echo propre(_T('cout:help', array(
+	$aide = '';
+	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
+		$aide .= "\n_ " . _T('cout:pour', array('pack'=>"{[{$pack}->" . generer_url_ecrire(_request('exec'),'cmd=install&pack='.urlencode($pack)) . ']}'));
+	$aide = _T('cout:help', array(
 		'reset' => generer_url_ecrire(_request('exec'),'cmd=resetall'),
 		'hide' => generer_url_ecrire(_request('exec'),'cmd=showall'),
 		'version' => $cs_infos,
 		'distant' => $distant==$cs_infos?_T('cout:a_jour'):($distant?_T('cout:distant', array('version' => $distant)):''),
-		'contribs' => join('', $contribs)
-	)));
+		'contribs' => join('', $contribs),
+		'install' => $aide,
+	));
+	echo propre($aide);
 	fin_boite_info();
-	$aide_racc = cs_aide_raccourcis();
-	if(strlen($aide_racc)) {
+	$aide = cs_aide_raccourcis();
+	if(strlen($aide)) {
 		debut_boite_info();
-		echo $aide_racc;
+		echo $aide;
 		fin_boite_info();
 	}
-	$aide_pipes = cs_aide_pipelines();
-	if(strlen($aide_pipes)) {
+	$aide = cs_aide_pipelines();
+	if(strlen($aide)) {
 		debut_boite_info();
-		echo $aide_pipes;
+		echo $aide;
 		fin_boite_info();
 	}
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'admin_couteau_suisse'),'data'=>''));

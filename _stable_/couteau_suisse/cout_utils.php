@@ -188,7 +188,7 @@ function cs_aide_raccourcis() {
 		}
 	}
 	if(!count($aide)) return '';
-	return '<p><strong>' . _T('cout:raccourcis') . '</strong></p><ul style="list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
+	return '<p><b>' . _T('cout:raccourcis') . '</b></p><ul style="list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>';
 }
 
 // retourne une aide concernant les pipelines utilises par l'outil
@@ -204,9 +204,9 @@ function cs_aide_pipelines() {
 	$nb = isset($GLOBALS['meta']['tweaks_actifs'])?count(unserialize($GLOBALS['meta']['tweaks_actifs'])):0;
 	// nombre d'outils caches
 	$ca = isset($GLOBALS['meta']['tweaks_caches'])?count(unserialize($GLOBALS['meta']['tweaks_caches'])):0;
-	return '<p><strong>' . _T('cout:pipelines') . '</strong> '.count($aide).'</p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>'
-		. '<p><strong>' . _T('cout:actifs') . "</strong> $nb</p>"
-		. '<p><strong>' . _T('cout:caches') . "</strong> $ca</p>";
+	return '<p><b>' . _T('cout:pipelines') . '</b> '.count($aide).'</p><ul style="margin: 0 0 0 0.7em; padding-left: 0.7em; list-style-image: none; list-style-position: outside; ">' . join("\n", $aide) . '</ul>'
+		. '<p><b>' . _T('cout:actifs') . "</b> $nb</p>"
+		. '<p><b>' . _T('cout:caches') . "</b> $ca</p>";
 }
 
 // met en forme le fichier $f en vue d'un insertion en head
@@ -446,12 +446,6 @@ function cs_installe_outils() {
 cs_log(" -- $f() : installé !");
 		}
 	}
-}
-
-// on force la reinstallation complete des outils et des plugins
-function cs_initialisation_totale() {
-	// on force la reinstallation complete des outils
-	cs_initialisation(true);
 }
 
 ?>

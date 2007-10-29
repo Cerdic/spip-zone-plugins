@@ -52,7 +52,7 @@ cs_log("decoration_installe()");
 			$auto_remplace[$a] = $auto_remplace[$v];
 		}
 	// liste des balises disponibles
-	$aide = '<strong>'.join('</strong>, <strong>', array_merge($aide, $auto_balises)).'</strong>';
+	$aide = '<b>'.join('</b>, <b>', array_merge($aide, $auto_balises)).'</b>';
 	// sauvegarde en meta : aide
 	ecrire_meta('cs_decoration_racc', $aide);
 	// protection $auto_balises pour la future regExpr

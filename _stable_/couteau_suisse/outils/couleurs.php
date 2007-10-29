@@ -53,9 +53,9 @@ cs_log("couleurs_installe()");
 		}
 		$couleurs[2] = $couleurs_perso;
 		$couleurs[0] = join('|', array_keys($couleurs_perso));
-		$aide = '<strong>'.join('</strong>, <strong>', array_keys($couleurs_perso)).'</strong>';
+		$aide = '<b>'.join('</b>, <b>', array_keys($couleurs_perso)).'</b>';
 	} else {
-		$aide = '<strong>'.join('</strong>, <strong>', array_merge($couleurs[0], $couleurs[1])).'</strong>';
+		$aide = '<b>'.join('</b>, <b>', array_merge($couleurs[0], $couleurs[1])).'</b>';
 		$couleurs[0] = join('|', $couleurs[0]);
 		$couleurs[1] = join('|', $couleurs[1]);
 	}

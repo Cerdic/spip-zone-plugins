@@ -41,8 +41,9 @@ _ - [De tout le plugin->@reset@]
 		."<p>Liens de documentation :<br/>&bull; [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p>"
 		."<p>R&eacute;initialisations :
 _ &bull; [Des outils cach&eacute;s->@hide@]
-_ &bull; [De tout le plugin->@reset@]
+_ &bull; [De tout le plugin->@reset@]@install@
 </p>",
+	'pour' => '&bull; pour @pack@',
 	'distant' => "<br/>Mise &agrave; jour : [@version@->http://files.spip.org/spip-zone/couteau_suisse.zip]",
 	'a_jour' => "<br/>Votre version est &agrave; jour.",
 
@@ -138,7 +139,7 @@ _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du 
 	'toutmulti:description' => "Introduit le raccourci <code><:un_texte:></code> pour introduire librement des blocs multi-langues dans un article.
 _ La fonction SPIP utilis&eacute;e est : <code>_T('un_texte', \$flux)</code>.
 _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans les fichiers de langue.",
-	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <strong><:trad:></strong>',
+	'toutmulti:aide' => 'Blocs multilingues&nbsp;: <b><:trad:></b>',
 
 	'pucesli:nom' => 'Belles puces',
 	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des articles par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>&hellip;&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre personnalis&eacute; par css.',
@@ -157,7 +158,7 @@ Le param&egrave;tre {type} ci-dessus peut prendre trois valeurs :
 - {auto} : balise d&eacute;termin&eacute;e automatiquement par le plugin
 
 [[Vos balises de style personnalis&eacute; :->%decoration_styles%]]",
-	'decoration:aide' => 'D&eacute;coration&nbsp;: <strong>&lt;balise&gt;test&lt;/balise&gt;</strong>, avec <strong>balise</strong> = @liste@',
+	'decoration:aide' => 'D&eacute;coration&nbsp;: <b>&lt;balise&gt;test&lt;/balise&gt;</b>, avec <b>balise</b> = @liste@',
 
 // ---------------------------------------------------------------------------
 	'couleurs:nom' => 'Tout en couleurs',
@@ -174,8 +175,8 @@ Idem pour changer le fond, si l'option ci-dessous le permet :
 [[Permettre les fonds :->%couleurs_fonds%]]
 [[Set &agrave; utiliser :->%set_couleurs%]][[->%couleurs_perso%]]
 {$temp['note']}Le format de ces balises personnalis&eacute;es doit lister des couleurs existantes ou d&eacute;finir des couples &laquo;balise=couleur&raquo;, le tout s&eacute;par&eacute; par des virgules. Exemples : &laquo;gris, rouge&raquo;, &laquo;faible=jaune, fort=rouge&raquo;, &laquo;bas=#99CC11, haut=brown&raquo; ou encore &laquo;gris=#DDDDCC, rouge=#EE3300&raquo;. Pour le premier et le dernier exemple, les balises autoris&eacute;es sont : <code>[gris]</code> et <code>[rouge]</code> (<code>[fond gris]</code> et <code>[fond rouge]</code> si les fonds sont permis).",
-	'couleurs:aide' => 'Mise en couleurs : <strong>[coul]texte[/coul]</strong>@fond@ avec <strong>coul</strong> = @liste@',
-	'couleurs_fonds' => ', <strong>[fond&nbsp;coul]texte[/coul]</strong>, <strong>[bg&nbsp;coul]texte[/coul]</strong>',
+	'couleurs:aide' => 'Mise en couleurs : <b>[coul]texte[/coul]</b>@fond@ avec <b>coul</b> = @liste@',
+	'couleurs_fonds' => ', <b>[fond&nbsp;coul]texte[/coul]</b>, <b>[bg&nbsp;coul]texte[/coul]</b>',
 	'toutes_couleurs' => "Les 36 couleurs des styles css :" . $temp['couleurs'],
 	'certaines_couleurs' => "Seules les balises d&eacute;finies ci-dessous{$temp['note']} :",
 
@@ -187,7 +188,7 @@ _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimeri
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
 	'filets_sep:description' =>  "Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de Spip.
 _ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d'une image plac&eacute;e dans le dossier plugins/couteau_suisse/img/filets.",
-	'filets_sep:aide' => 'Filets de S&eacute;paration&nbsp;: <strong>__i__</strong> o&ugrave; <strong>i</strong> est un nombre.<br />Autres filets disponibles : @liste@',
+	'filets_sep:aide' => 'Filets de S&eacute;paration&nbsp;: <b>__i__</b> o&ugrave; <b>i</b> est un nombre.<br />Autres filets disponibles : @liste@',
 
 	'smileys:nom' => 'Smileys',
 	'smileys:description' => "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
@@ -246,7 +247,7 @@ _ Plus d'infos : [->http://www.spip.net/fr_article765.html]
 - <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
 - <i>toujours</i> : le javascript est accept&eacute; partout.
 
-Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <strong>toujours</strong> s&eacute;curis&eacute;e.[[Votre choix :->%radio_filtrer_javascript3%]]',
+Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <b>toujours</b> s&eacute;curis&eacute;e.[[Votre choix :->%radio_filtrer_javascript3%]]',
 	'js_jamais' => 'Jamais',
 	'js_defaut' => 'D&eacute;faut',
 	'js_toujours' => 'Toujours',
@@ -297,7 +298,8 @@ Attention : certains outils du Couteau Suisse n&eacute;cessitent les fonctions d
 	'decoupe:description' => "D&eacute;coupe l'affichage public d'un article en plusieurs pages gr&acirc;ce &agrave; une pagination automatique. placez simplement dans votre article quatre signes plus cons&eacute;cutifs (<code>++++</code>) &agrave; l'endroit qui doit recevoir la coupure.
 _ Si vous utilisez ce s&eacute;parateur &agrave; l'int&eacute;rieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d'onglets.
 _ Cet outil peut &ecirc;tre coupl&eacute; avec {Un sommaire pour vos articles}.",
-	'decoupe:aide' => 'S&eacute;parateur de pages&nbsp;: @sep@',
+	'decoupe:aide' => 'S&eacute;parateur de pages ou d\'onglets&nbsp;: @sep@',
+	'decoupe:aide2' => ' (alias&nbsp;:&nbsp;@sep@)',
 	'page_suivante' => 'Page suivante',
 	'page_precedente' => 'Page pr&eacute;c&eacute;dente',
 	'page_debut' => 'Premi&egrave;re page',
@@ -393,7 +395,7 @@ _ Merci de votre compr&eacute;hension.",
  Mon bloc depliable
  #BLOC_FIN</code></quote>
 ",
-	'blocs:aide' => 'Blocs D&eacute;pliables : <strong>&lt;bloc&gt;&lt;/bloc&gt;</strong> (alias : <strong>&lt;invisible&gt;&lt;/invisible&gt;</strong>) et <strong>&lt;visible&gt;&lt;/visible&gt;</strong>',
+	'blocs:aide' => 'Blocs D&eacute;pliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
 /*
 // ---------------------------------------------------------------------------
 	':nom' => '',

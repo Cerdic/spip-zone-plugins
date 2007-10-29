@@ -67,8 +67,8 @@ function test_outil($array, $titre) {
 	static $i;
 	debut_cadre_trait_couleur($icone,'','',++$i.". $titre");
 	foreach($array as $s=>$v) if(is_array($v))
-			foreach($v as $s2=>$v2) echo "\n<strong>{$s}[$s2]</strong> = ".trim($v2)."<br />";
-		else echo "\n<strong>$s</strong> = ".trim($v)."<br />";
+			foreach($v as $s2=>$v2) echo "\n<b>{$s}[$s2]</b> = ".trim($v2)."<br />";
+		else echo "\n<b>$s</b> = ".trim($v)."<br />";
 	fin_cadre_trait_couleur();
 }
 

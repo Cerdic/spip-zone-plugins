@@ -66,7 +66,7 @@ cs_log(" -- abs. path = $path2");
 		$smileys2[1][] = cs_code_echappement($espace."<img alt=\"$smy\" title=\"$smy\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>", 'SMILE');
 		$smileys2[2][] = $val;
 		// liste des raccourcis et smileys disponibles
-		$liste[] = '<strong>'.$smy.'</strong>';
+		$liste[] = '<b>'.$smy.'</b>';
 	}
 	ecrire_meta('cs_smileys_racc', join(', ', $liste));
 	ecrire_meta('cs_smileys', serialize($smileys2));
