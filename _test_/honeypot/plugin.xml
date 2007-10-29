@@ -43,7 +43,7 @@ _ You can also use this plugin to limit the access to your site for the visitors
   </pipeline>	
   	<pipeline>
 		<nom>taches_generales_cron</nom>
-	<inclure>httpbl_pipeline.php</inclure>
+	<inclure>honeypot_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_onglets</nom> 
