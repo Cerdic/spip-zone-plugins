@@ -1,4 +1,5 @@
 <BOUCLE_art(ARTICLES){id_article=#ENV{id}}>
+#SET{nb_vignettes,#DIAPO_VIGNETTES}
 <div id="diapo#ID_ARTICLE" class="diaporama">
 <!-- debut diapo#ID_ARTICLE -->
 <B_docs>
@@ -13,18 +14,18 @@
 [<div class="diapo_pagination">(#PAGINATION)</div>]
 </div>
 <div class="diapo_vignettes[ diapo_vignettes_(#ENV{align})]">
-<BOUCLE_docs(DOCUMENTS){id_article}{extension IN png,jpg,gif}{pagination 8 #ID_ARTICLE}{par num titre}>
+<BOUCLE_docs(DOCUMENTS){id_article}{extension IN png,jpg,gif}{pagination (#GET{nb_vignettes}) #ID_ARTICLE}{par num titre}>
 [<div class="diapo_vignette"><a rel="diapo#ID_ARTICLE" class="vignette_[(#_art:ID_ARTICLE)]_[(#COMPTEUR_BOUCLE)]" href="[(#SELF|parametre_url{diapo#ID_ARTICLE,[(#COMPTEUR_BOUCLE|moins{1})]})]#pagination#ID_ARTICLE"[ title="(#TITRE|couper{80}|texte_backend)"]>
 (#LOGO_DOCUMENT||image_reduire{#DIAPO_VIGNETTE,#DIAPO_VIGNETTE_H}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
 </a></div>]
 </BOUCLE_docs>
 </div>
 </B_docs>
-[(#REM) Attention bidouille : 
-- critere diapo avec meme pas que pagination 
-- meme nom de boucle + 6 caracteres(_diapo) 
+[(#REM) Attention bidouille :
+- critere diapo avec meme pas que pagination
+- meme nom de boucle + 6 caracteres(_diapo)
 => il faudrait sans doute surcharger pagination...]
-<BOUCLE_docs_diapo(DOCUMENTS){id_article}{extension IN png,jpg,gif}{diapo 8 #ID_ARTICLE}{par num titre}>
+<BOUCLE_docs_diapo(DOCUMENTS){id_article}{extension IN png,jpg,gif}{diapo (#GET{nb_vignettes}) #ID_ARTICLE}{par num titre}>
 <img class="diapo_loading" alt="<:diapo:loading:>" style="display:none" src="[(#CHEMIN{'img_pack/loading.gif'})]"/>
 <div class="diapo[ (#ENV{align}|match{right|left}|?{'diapo_petit','diapo_grand'})]">
 <a href="#FICHIER"[ title="(#TITRE|supprimer_numero|texte_backend)"] type="#MIME_TYPE">
