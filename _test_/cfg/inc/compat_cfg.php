@@ -21,7 +21,7 @@ if (version_compare($GLOBALS['spip_version_code'], '1.9300', '<')
 
 
 function inc_compat_cfg_dist($quoi = NULL) {
-	if (!function_exists($f = 'compat_autorite_defs')) $f .= '_dist';
+	if (!function_exists($f = 'compat_cfg_defs')) $f .= '_dist';
 	$defs = $f();
 
 	if (is_string($quoi))
