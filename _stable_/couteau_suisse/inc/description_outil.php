@@ -57,7 +57,7 @@ if($index==11) cs_log("---------------------- une_variable($index) - Traite %$va
 				:"<html><textarea rows='$lignes' name='HIDDENCSVAR__$variable' $width>"
 					. htmlspecialchars($valeur) . '</textarea></html>'
 			) . _VAR_OUTIL;
-		$ok_valeur = $label.(strlen($valeur)?echapper_tags($valeur):'&nbsp;'._T('cout:variable_vide'));
+		$ok_valeur = $label.'<html>'.(strlen($valeur)?nl2br(echapper_tags($valeur)):'&nbsp;'._T('cout:variable_vide')).'</html>';
 	}
 	$ok_input_ .= $ok_input; $ok_valeur_ .= $ok_valeur;
 }
