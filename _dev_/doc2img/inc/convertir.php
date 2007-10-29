@@ -29,10 +29,11 @@ function convertir_document($id_document) {
     $document['fullname'] = substr(strrchr($res['fichier'], "/"),1);
     //url relative du repertoire contenant le fichier , on retire aussi le / en fin
     $document['source_url'] = substr($res['fichier'],0,strlen($res['fichier'])-strlen($document['fullname'])-1);
-    // si /IMG ne conclut par l'url, on l'ajoute (a priori effet 193)
-    if (stristr($document['source_url'], 'IMG') === false) {
-        $document['source_url'] = 'IMG/'.$document['source_url'];
+    // si 193 alors on précise le repertoire IMG/
+    if (version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) { 
+        $document['source_url'] = _DIR_IMG.$document['source_url'];
     }
+
     //decompose nom.extension
     $file_array = explode(".",$document['fullname']);
     $document['extension'] = $file_array[1];

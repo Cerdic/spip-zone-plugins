@@ -17,6 +17,7 @@ function doc2img_affiche_gauche($flux) {
 
     spip_log('pipeline affiche gauche','doc2img');
 
+    spip_log('pipeline :'.$flux['args']['exec'],'doc2img');
 	//determine la page demandée 
 	switch ($flux['args']['exec']) {
 		//la page articles est demandée

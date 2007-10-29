@@ -109,7 +109,8 @@ function doc2img_installer($version,$version_finale) {
                 );");
             spip_log('table spip_doc2img créée','doc2img');
             //on defini un repertoire de stockage
-            $dir_doc2img = getcwd().'/../IMG/doc2img';
+            spip_log(_DIR_IMG,'doc2img');
+            $dir_doc2img = getcwd().'/'._DIR_IMG.'/doc2img';
             mkdir($dir_doc2img);
             spip_log('création repertoire '.$dir_doc2img,'doc2img');
         //passage en 0.2, rien … faire
@@ -117,7 +118,7 @@ function doc2img_installer($version,$version_finale) {
         //on attaque la 0.3
         //initialisation d'une configuration par d‚faut
         case 0.2 :
-            //d‚finition des param‚tres de base
+            //définition des param‚tres de base
             $cfg = array(
                 "format_document" => "pdf,tif",
                 "repertoire_cible" => "IMG/doc2img",
