@@ -111,6 +111,7 @@ function jqueryp_compat_chargeur_charger_zip($quoi = array())
 
 	// Indiquer par un fichier install.log
 	// a la racine que c'est chargeur qui a installe ce plugin
+	include_spip('inc/flock');
 	ecrire_fichier($tmpname.'/install.log',
 		"installation: charger_plugin\n"
 		."date: ".gmdate('Y-m-d\TH:i:s\Z', time())."\n"
@@ -132,7 +133,9 @@ function jqueryp_compat_chargeur_charger_zip($quoi = array())
 // charge un plugin jquery depuis un zip distant
 // code pris que action_charger_plugin_dist 1.9.3
 function jqueryp_compat_install_zip($zip){
+	
 	# si premiere lecture, destination temporaire des fichiers
+	include_spip('inc/flock');
 	$tmp = sous_repertoire(_DIR_CACHE, 'chargeur');
 
 	# dispose-t-on du fichier ?
@@ -159,13 +162,84 @@ function jqueryp_compat_install_zip($zip){
 				'extract' => true
 			)
 		);
-		spip_unlink($fichier);
+		supprimer_fichier($fichier);
 	}
 
 	if (is_array($status))
 		return true;
 	else
 		return false;
+}
+
+
+
+include_spip('public/balises');
+if (!function_exists('balise_FOREACH_dist')){
+	//#FOREACH
+	//
+	// http://doc.spip.org/@balise_FOREACH_dist
+	function balise_FOREACH_dist($p) {
+		$_tableau = interprete_argument_balise(1,$p);
+		$_tableau = str_replace("'", "", strtoupper($_tableau));
+		$_tableau = sinon($_tableau, 'ENV');
+		$f = 'balise_'.$_tableau;
+		$balise = function_exists($f) ? $f : (function_exists($g = $f.'_dist') ? $g : '');
+
+		if($balise) {
+			$_modele = interprete_argument_balise(2,$p);
+			$_modele = str_replace("'", "", strtolower($_modele));
+			$__modele = 'foreach_'.strtolower($_tableau);
+			$_modele = (!$_modele AND find_in_path('modeles/'.$__modele.'.html')) ?
+				$__modele : 
+				($_modele ? $_modele : 'foreach');
+
+			$p->param = @array_shift(@array_shift($p->param));
+			$p = $balise($p);
+			$filtre = chercher_filtre('foreach');
+			$p->code = $filtre . "(unserialize(" . $p->code . "), '" . $_modele . "')";
+		}
+		//On a pas trouve la balise correspondant au tableau a traiter
+		else {
+			erreur_squelette(
+				_L(/*zbug*/'erreur #FOREACH: la balise #'.$_tableau.' n\'existe pas'),
+				$p->id_boucle
+			);
+			$p->code = "''";
+		}
+		return $p;
+	}
+}
+
+include_spip('inc/filtres');
+if (!function_exists('chercher_filtre')){
+	// http://doc.spip.org/@chercher_filtre
+	function chercher_filtre($fonc) {
+			foreach (
+			array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
+				if (function_exists($f)
+				OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)                            
+					AND is_callable(array($regs[1], $regs[2]))
+				)) {
+					return $f;
+				}
+			return NULL;
+	}
+}
+	
+if (!function_exists('filtre_foreach_dist')){
+	//[(#ENV*|unserialize|foreach)]
+	// http://doc.spip.org/@filtre_foreach_dist
+	function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
+		spip_log("FILTRE  - ");
+		$texte = '';
+		if(is_array($balise_deserializee))
+			foreach($balise_deserializee as $k => $v)
+				$texte .= recuperer_fond(
+					'modeles/'.$modele,
+					array_merge(array('cle' => $k), (is_array($v) ? $v : array('valeur' => $v)))
+				);
+		return $texte;
+	}
 }
 
 ?>
