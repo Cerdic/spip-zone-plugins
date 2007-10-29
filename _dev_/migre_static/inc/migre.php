@@ -21,90 +21,103 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$GLOBALS['migre_static'] = @unserialize($GLOBALS['meta']['migre_static']);
+$GLOBALS['migrestatic_version'] = 0.83;
+$GLOBALS['migrestatic'] = @unserialize($GLOBALS['meta']['migrestatic']);
 
+// ------------------------------------------------------------------------------
 // [fr] Initialisation des valeurs de meta du plugin aux defauts
 // [en] Init plugin meta to default values
-function migre_static_init_metas() {
-global $migre_meta;
+// ------------------------------------------------------------------------------
+function migre_static_init_metas()
+{
+	global $migre_meta;
 	migre_static_delete_metas(); // [fr] Nettoyage des traces [en] remove old metas
 	unset($migre_meta);
 	$migre_meta=array();
-	$migre_meta['migre_id_rubrique']= "";
-	$migre_meta['migre_id_mot']= "";
+	$migre_meta['version']= $GLOBALS['migrestatic_version'];
+	$migre_meta['migre_id_rubrique']= 0;
+	$migre_meta['migreidmot']= "";
 	$migre_meta['migre_liste_pages']= _T('migrestatic:liste_des_pages'); // from lang file
 	$migre_meta['migre_test']= "checked";
-	$migre_meta['migre_bcentredebut'] = "&lt;.{3,5}NAME.*index.{3,5}&gt;";
-	$migre_meta['migre_bcentrefin'] = "&lt;.{3,5}END.*index.*&gt;";
+	$migre_meta['migre_bcentredebut'] = ""; // was example : &lt;.{3,5}NAME.*index.{3,5}&gt
+	$migre_meta['migre_bcentrefin'] = ""; // was example : &lt;.{3,5}END.*index.*&gt
 	$migre_meta['migre_htos'] = get_list_htos();
-	if ($migre_meta!= $GLOBALS['meta']['migre_static']) {
+	$migre_meta['migre_cs_decoupe']= "checked";
+	if ($migre_meta!= $GLOBALS['meta']['migrestatic']) {
 		include_spip('inc/meta');
 		ecrire_meta('migre_static', serialize($migre_meta));
 		ecrire_metas();
-		$GLOBALS['migre_static'] = @unserialize($GLOBALS['meta']['migre_static']);
+		$GLOBALS['migrestatic'] = @unserialize($GLOBALS['meta']['migrestatic']);
+		spip_log('migrestatic : migre_static_init_metas OK');
 	}
-	$migre_meta['migre_cs_decoupe']= "checked";
-}
+} // migre_static_init_metas
 
+// ------------------------------------------------------------------------------
 // [fr] Supprimer les metas du plugin (desinstallation)
 // [en] Delete plugin metas
-function migre_static_delete_metas() {
-	if (isset($GLOBALS['meta']['migre_static'])) {
+// ------------------------------------------------------------------------------
+function migre_static_delete_metas()
+{
+	if (isset($GLOBALS['meta']['migrestatic'])) {
 		include_spip('inc/meta');
-		effacer_meta('migre_static');
+		effacer_meta('migrestatic');
 		ecrire_metas();
-		spip_log('migre_static : delete_meta OK');
+		unset($GLOBALS['migrestatic']);
+		unset($GLOBALS['meta']['migrestatic']);
+		spip_log('migrestatic : migre_static_delete_meta OK');
 	}
-}
+} // migre_static_delete_metas
 
-/*
-Tableau de correspondance par defaut des differentes balises html
+// ------------------------------------------------------------------------------
+// [fr] Tableau de correspondance par defaut des differentes balises html
+// [fr] On ne peut pas faire en une seule passe car certaines balises spip ont une syntaxe proche de celles du html...
+// [fr] D autre part il se peut qu on veuille adapter la conversion a ses propres choix...
+// [fr] Comme on peut les modifier dans des champs (pas des textarea) les \n et \r sont transformes en @n et @r
+// ------------------------------------------------------------------------------
+function get_list_htos()
+{
+	$htos=array();
+	
+	$htos['prem']['filtre']		="";				$htos['prem']['spip']=""; // un premier filtre pour l utilisateur
+	
+	$htos['comment']['filtre']	="/<!--.*-->/iUms";		$htos['comment']['spip']="";
+	$htos['script']['filtre']	="/<(script|style)\b.+?<\/\\1>/i";	$htos['script']['spip']="";
+	$htos['italique']['filtre']	=",<(i|em)( [^>@r]*)?".">(.+)</\\1>,Uims";	$htos['italique']['spip']="{\\3}";
+	$htos['bold']['filtre']		=",<(b|h[4-6])( [^>]*)?".">(.+)</\\1>,Uims";	$htos['bold']['spip']="@@b@@\\3@@/b@@"; 
+	$htos['h']['filtre']		=",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims";	$htos['h']['spip']="@r{{{ \\3 }}}@r";
+	$htos['tr']['filtre']		=",<tr( [^>]*)?".">,Uims";	$htos['tr']['spip']="<br>@r";
+	$htos['thtd']['filtre']		=",<t[hd]( [^>]*)?".">,Uims";	$htos['thtd']['spip']=" | ";
+	//$htos['thtd']['filtre']	=",<t[hd]( [^>]*)?".">,Uims";	$htos['thtd']['spip']="";
+	$htos['br']['filtre']		="/<br.*>/iUs";			$htos['br']['spip']="";
+	$htos['tbody']['filtre']	="/<\/*tbody.*>/iUs";		$htos['tbody']['spip']="";
+	$htos['table']['filtre']	="/<\/*table.*>/iUs";		$htos['table']['spip']="";
+	$htos['font']['filtre']		="/<\/*font.*>/iUs";		$htos['font']['spip']="";
+	$htos['span']['filtre']		="/<\/*span.*>/iUs";		$htos['span']['spip']="";
+	$htos['ulol']['filtre']		="/<\/*[uo]l.*>/iUs";		$htos['ulol']['spip']="";
+	$htos['blockquote']['filtre']	="/<\/*blockquote.*>/iUs";	$htos['blockquote']['spip']="";
+	$htos['div']['filtre']		="/<\/*div.*>/iUs";		$htos['div']['spip']="";
+	$htos['hr']['filtre']		="/<hr.*>/iUs";			$htos['hr']['spip']="";
+	$htos['bull']['filtre']		="/&bull;/";			$htos['bull']['spip']="@r@r-*";
+	$htos['li']['filtre']		="/<li.*>/iUs";			$htos['li']['spip']="@r@r-*";
+	$htos['slashli']['filtre']	="/<\/li>/iUs";			$htos['slashli']['spip']="";
+	$htos['nbsp']['filtre']		="/&nbsp;/iUs";			$htos['nbsp']['spip']=" ";
+	$htos['slashtrtd']['filtre']	=",</t[rhd]>,Uims";		$htos['slashtrtd']['spip']="@r";
+	$htos['p']['filtre']		=",</*p.*>,Uims";		$htos['p']['spip']="";
+	
+	$htos['dern']['filtre']		="";				$htos['dern']['spip']=""; // un dernier filtre pour l utilisateur
+	
+	return $htos;
+} // get_list_htos
 
-On ne peut pas faire en une seule passe car certaines balises spip ont une syntaxe proche de celles du html...
-D autre part il se peut qu on veuille adapter la conversion a ses propres choix...
-*/
-
-function get_list_htos() {
-
-$htos=array();
-
-$htos['prem']['filtre']		="";				$htos['prem']['spip']=""; // un premier filtre pour l utilisateur
-
-$htos['comment']['filtre']	="/<!--.*-->/iUms";		$htos['comment']['spip']="";
-$htos['script']['filtre']	="/<(script|style)\b.+?<\/\\1>/i";	$htos['script']['spip']="";
-$htos['italique']['filtre']	=",<(i|em)( [^>\\r]*)?".">(.+)</\\1>,Uims";	$htos['italique']['spip']="{\\3}";
-$htos['bold']['filtre']		=",<(b|h[4-6])( [^>]*)?".">(.+)</\\1>,Uims";	$htos['bold']['spip']="@@b@@\\3@@/b@@"; // un dernier filtre pour l utilisateur
-$htos['h']['filtre']		=",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims";	$htos['h']['spip']="\\r{{{ \\3 }}}\\r";
-$htos['tr']['filtre']		=",<tr( [^>]*)?".">,Uims";	$htos['tr']['spip']="<br>\\r";
-//$htos['thtd']['filtre']		=",<t[hd]( [^>]*)?".">,Uims";	$htos['thtd']['spip']=" | ";
-$htos['thtd']['filtre']		=",<t[hd]( [^>]*)?".">,Uims";	$htos['thtd']['spip']=""; // sepcial fwn
-
-$htos['br']['filtre']		="/<br.*>/iUs";			$htos['br']['spip']="";
-$htos['tbody']['filtre']	="/<\/*tbody.*>/iUs";		$htos['tbody']['spip']="";
-$htos['table']['filtre']	="/<\/*table.*>/iUs";		$htos['table']['spip']="";
-$htos['font']['filtre']		="/<\/*font.*>/iUs";		$htos['font']['spip']="";
-$htos['span']['filtre']		="/<\/*span.*>/iUs";		$htos['span']['spip']="";
-$htos['ulol']['filtre']		="/<\/*[uo]l.*>/iUs";		$htos['ulol']['spip']="";
-$htos['blockquote']['filtre']	="/<\/*blockquote.*>/iUs";	$htos['blockquote']['spip']=""; //special fwn rajout
-$htos['div']['filtre']		="/<\/*div.*>/iUs";		$htos['div']['spip']="";
-//$htos['hr']['filtre']		="/<hr.*>/iUs";			$htos['hr']['spip']="------";
-$htos['hr']['filtre']		="/<hr.*>/iUs";			$htos['hr']['spip']=""; //special fwn
-$htos['bull']['filtre']		="/&bull;/";			$htos['bull']['spip']="\\r\\r-*";
-$htos['li']['filtre']		="/<li.*>/iUs";			$htos['li']['spip']="\\r\\r-*";
-$htos['slashli']['filtre']	="/<\/li>/iUs";			$htos['slashli']['spip']="";
-$htos['nbsp']['filtre']		="/&nbsp;/iUs";			$htos['nbsp']['spip']=" ";
-$htos['slashtrtd']['filtre']	=",</t[rhd]>,Uims";		$htos['slashtrtd']['spip']="\\r";
-$htos['p']['filtre']		=",</*p.*>,Uims";			$htos['p']['spip']="";
-
-$htos['dern']['filtre']		="";				$htos['dern']['spip']=""; // un dernier filtre pour l utilisateur
-
-return $htos;
-}
-
-// [fr] Cette fonction verirife que la liste est bien sur le meme site : petit controle de copyright et retourne un tableau avec la liste des URI des pages a telecharger. Le document attendu doit respecter la syntaxe definie !!!
-
-function get_list_of_pages($uri_list="") {
-include_spip("inc/distant");
+// ------------------------------------------------------------------------------
+// [fr] Cette fonction verirife que :
+// [fr] - la liste est bien sur le meme site (petit controle de copyright)
+// [fr] retourne un tableau avec la liste des URI des pages a telecharger. 
+// [fr] Le document attendu doit respecter la syntaxe definie !!!
+// ------------------------------------------------------------------------------
+function get_list_of_pages($uri_list="")
+{
+	include_spip("inc/distant");
 	$uri_pages=array();
 	if (!empty($uri_list)) {
 		$site=parse_url($uri_list); // urlencode ?
@@ -121,9 +134,9 @@ include_spip("inc/distant");
 					$uri_pages[]=$val;
 				}
 			}
-		}
+		} // while
 	}
 	return $uri_pages;
-}
+} // get_list_of_pages
 
 ?>

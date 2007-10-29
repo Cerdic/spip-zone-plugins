@@ -1,3 +1,11 @@
+migre_static (0.83)
+ * Improved output actions
+ * Created step by step operations and allowed to check the page list just in case
+ * Corrected many bugs : cfg does not like _, removed forgotten local specific parameters, metas cleanup, release check,...
+ * Added release check
+ 
+ -- Chryjs <chryjs@free.fr>  Mon,  29 Oct 2007 18:30:00 +0200
+
 migre_static (0.7)
  * Add links to imported articles
  * Add usage of cs_decoupe and set it optionnal

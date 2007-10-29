@@ -11,7 +11,7 @@
 #CACHE{0}
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
 
-[(#REM|debut_cadre_trait_couleur{1,'xxx','Migre_static'})]
+[(#REM|debut_cadre_trait_couleur{1,'xxx','Migre static'})]
 [(#REM) ------------------------ RUBRIQUE D IMPORTATION ------------------------ ]
 
 <fieldset>
@@ -36,10 +36,9 @@
 <label>
 	<:migrestatic:sous_choix_mot_cle:>
 	<br />
-#SET{selected,#CONFIG{migre_static/migre_id_mot,'',''}}
-	<select name="migre_id_mot[]" multiple="multiple" size="5" id="migre_id_mot">
+	<select name="migre_id_mot[]" multiple="multiple" size="5">
 	<BOUCLE_mots(MOTS){par id_mot}>
-		<option value="#ID_MOT"[(#ID_MOT|in_array{#GET{selected}}|?{' selected="selected"'})]>#ID_MOT . #TITRE</option>
+		<option value="#ID_MOT"[(#ID_MOT|in_array{#CONFIG{migrestatic/migre_id_mot,'',''}}|?{' selected="selected"'})]>#ID_MOT . #TITRE</option>
 	</BOUCLE_mots>
 	</select>
 	<small><:migrestatic:choix_mot_cle_selection:></small>
@@ -52,7 +51,7 @@
 <legend><:migrestatic:choix_url_listepages:></legend>
 <p>
 <label>
-	<input type="text" name="migre_liste_pages" value="#ENV{migre_liste_pages}" size='70' />
+	<input type="text" name="migre_liste_pages" value="[(#CONFIG{migrestatic/migre_liste_pages}|sinon{<:migrestatic:liste_des_pages:>})]" size='70' />
 	<br />
 	<i><:migrestatic:sous_choix_url_listepages:></i>
 </label>

@@ -1,11 +1,8 @@
 Migre_static todolist
 ---------------------
 
--* checking security
 -* performance improvement
+-* amelioration des filtres
 -* better ul/ol filters
--* la possibilité d'indiquer la rubrique d'import dans la liste sous la forme <rubriquexxx> par blocs
--* de même la possibilité d'indiquer le mot clé dans la liste
--* la possibilité de forcer la langue
--* amélioration des filtres
--* présenter les filtres sous forme dynamique
+-* la possibilite de forcer la langue
+-* presenter les filtres sous forme dynamique

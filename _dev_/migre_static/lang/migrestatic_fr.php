@@ -61,7 +61,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // Action
 
 'titre_migre_action' => 'R&eacute;alisation de la migration',
+'titre_migre_action_etape' => 'R&eacute;alisation de la migration - &eacute;tape',
 'sur_titre_migre_static' => 'R&eacute;sultat de la migration demand&eacute;e',
+'resultat_liste_pages' => 'Liste des pages import&eacute;es',
 'processing_page' => 'Traitement de la page : ',
 'page_title' => 'Titre : ',
 'err_page_vide' => 'Erreur : La page est vide',

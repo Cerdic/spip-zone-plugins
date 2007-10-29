@@ -26,10 +26,11 @@ function migrestatic_install($action)
 {
 switch ($action) {
  case 'test' : /* test pour savoir si les actions sont nécessaires */
-	return isset($GLOBALS['meta']['migre_static']);
+	return ( isset($GLOBALS['meta']['migrestatic']) AND isset($GLOBALS['migrestatic']['version']) AND ($GLOBALS['migrestatic']['version']>= $GLOBALS['migrestatic_version'] ) );
 	break;
  case 'install' :
-	migre_static_init_metas();
+	migre_static_upgrade();
+	//migre_static_init_metas();
 	break;
  case 'uninstall' :
 	migre_static_delete_metas();
@@ -41,5 +42,31 @@ switch ($action) {
 /* ca doit certainement permettre d'effacer les fichiers et autres */
 function migrestatic_uninstall(){
 }
+
+// [fr] Met a jour la version et initialise les metas
+// [en] Upgrade release and init metas
+function migre_static_upgrade()
+{
+	$version_code = $GLOBALS['migrestatic_version'] ;
+	if ( isset($GLOBALS['meta']['migrestatic'] ) )
+	{
+		if ( isset($GLOBALS['migrestatic']['version'] ) )
+		{
+			$installed_version = $GLOBALS['migrestatic']['version'];
+		}
+		else {
+			$installed_version = 0.80 ; // previous releases didn't store the release level
+		}
+	}
+	else {
+		$installed_version = 0.0 ; // aka not installed
+	}
+
+	if ( $installed_version < 0.83 ) {
+		migre_static_init_metas(); // we reset everything
+	}
+
+	spip_log('migrestatic : migre_static_upgrade OK');
+} /* migre_static_upgrade */
 
 ?>

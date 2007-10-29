@@ -28,62 +28,87 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip("inc/migre"); // [fr] Charge les fonctions de migre_static [en] Loads migre_static functions
-include_spip('base/abstract_sql');
+include_spip("base/abstract_sql");
 include_spip('inc/rubriques');
 include_spip('inc/charsets');
+include_spip('inc/minipres');
+include_spip("inc/presentation");
 
 global $migre_meta;
+$migre_meta = $GLOBALS['migrestatic'];
 
 // ------------------------------------------------------------------------------
+// [fr] Action principale : realise la presentation
+// [en] Main action : shows everything
 // ------------------------------------------------------------------------------
-function action_migre_action() {
+function action_migre_action()
+{
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
 	$id_rubrique = intval($arg);
+	$step = _request('etape');
+	$go_back = generer_url_ecrire("naviguer","id_rubrique=$id_rubrique");
+	$link_back  = icone(_T('icone_retour'), $go_back, "rubrique-12.gif", "rien.gif", ' ',false);
+	$corps = $link_back;
 
-	migre_check_var($id_rubrique);
+	switch ($step) {
+	case 1 :
+		$debug  = migre_check_var($id_rubrique);
 
-	// [fr] compatibilite ascendante
-	// [en] backward compatibility
-	if ($GLOBALS['spip_version_code']<1.92)
-		debut_page(_T('migrestatic:titre_migre_action'), 'action', 'migre_static');
-	else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('migrestatic:titre_migre_action'), "action", 'migre_static');
+/* debug
+		$corps .= $debug;
+		$form   = "<input type='hidden' name='etape' id='etape' value='2'>";
+		$form  .= "<div align='right'><input class='fondo' type='submit' value='"._T('bouton_suivant')."' /></div>" ;
+		$corps .= generer_action_auteur("migre_action",$id_rubrique, $retour,$form," method='post' name='formulaire'");
+		$corps .= $link_back;
+		break;
+	case 2 :
+*/
+		$corps .= migre_affiche_pages();
+		$form   = "<input type='hidden' name='etape' id='etape' value='2'>";
+		$form  .= "<div align='right'><input class='fondo' type='submit' value='"._T('bouton_suivant')."' /></div>" ;
+		$corps .= generer_action_auteur("migre_action",$id_rubrique, $retour,$form," method='post' name='formulaire'");
+		$corps .= $link_back;
+		break;
+	case 2 :
+		$corps .= migre_pages($id_rubrique);
+		$corps .= $link_back;
+		break;
+	default :
+		$corps .= "<strong>"._T('avis_non_acces_page')."</strong>";
 	}
 
-	debut_cadre_formulaire();
-	echo migre_action_presentation_haut($id_rubrique,_T('migrestatic:titre_migre_action'));
-	echo migre_pages($id_rubrique);
-	fin_cadre_formulaire();
+	echo minipres(_T("migrestatic:titre_migre_action_etape")." $step",$corps);
+} // action_migre_action
 
-	echo fin_page();
-}
 
 // ------------------------------------------------------------------------------
-// [fr] Haut de la presentation
-// [en] Top of page
+// [fr] Affiche la liste des pages (URIs) qui seront importees
+// [en] Shows the URI list of pages to be imported
 // ------------------------------------------------------------------------------
-function migre_action_presentation_haut($id_rubrique,$titre) {
-	$go_back=generer_url_ecrire("naviguer","id_rubrique=$id_rubrique");
-	return
-		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
-		"<tr>".
-		"\n<td style='width: 130px;'>" .
-		icone(_T('icone_retour'), $go_back, "article-24.gif", "rien.gif", 'rien',false) .
-		"</td>\n<td>" .
-		"<img src='" . _DIR_IMG_PACK . "rien.gif' width='10' alt='rien' />" .
-		"</td>\n<td>" .
-		_T('migrestatic:sur_titre_migre_static') .
-		gros_titre($titre,'',false) .
-		"</td></tr></table>\n" .
-		"<hr />\n";
-}
+function migre_affiche_pages()
+{
+global $migre_meta;
+	$listepages=$migre_meta['migre_liste_pages'];
+	$dochtml=get_list_of_pages($listepages);
+	$i=0;
+	$res  = _T('migrestatic:resultat_liste_pages');
+	$res .= "\n<div style='text-align:left;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;overflow:auto;height:15em;'><ol>";
+	while(list ($key, $migre_uri) = each ($dochtml) )
+	{
+		$res .= "\n<li><a href='$migre_uri'>".$migre_uri."</a></li>";
+	}
+	$res .= "\n</ol></div>";
+	return $res;
+} // migre_affiche_pages
 
 // ------------------------------------------------------------------------------
+// [fr] Realise la migration des pages
+// [en] Runs the pages migration
 // ------------------------------------------------------------------------------
-function migre_pages($id_rubrique) {
+function migre_pages($id_rubrique)
+{
 global $migre_meta, $dir_lang;
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
@@ -93,15 +118,14 @@ global $migre_meta, $dir_lang;
 		$id_rubrique = $row['id_rubrique'];
 	}
 
-//	$listepages=_request('listepages'); // html_entity_decode ??
 	$listepages=$migre_meta['migre_liste_pages'];
 	$dochtml=get_list_of_pages($listepages);
 
 	// [fr] Récup des URIs du site statique et traitement
 	// [en] Get all URIs and process them
-	$res_list= "\n<div $dir_lang style='width:98%;height:4em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>" ;
+	$res_list= _T('migrestatic:resultat_liste_pages'). "\n<div $dir_lang style='width:98%;height:4em;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>" ;
 
-	$res="";
+	$res  = "";
 	$i=0;
 	while(list ($key, $migre_uri) = each ($dochtml) )
 	{
@@ -187,11 +211,11 @@ global $dir_lang, $migre_meta;
 	// [fr] Si ce n est pas un test : integration de l'article dans SPIP
 	// [en] If it s not a test, load into SPIP
 	$migretest = $migre_meta['migre_test'];
-	$id_mot = $migre_meta['migre_id_mot'];
+	$id_mot = $migre_meta['migreidmot'];
 
 	if (!$migretest)
 	{
-		$res .= migre_cree_article($titre,$body,$adresse,$id_rubrique,$auteur,$id_mot,$lang);
+		$res .= "\n<div $dir_lang style='float:left;width:98%;overflow:auto;border: 1px dashed #ada095;padding:2px;margin:2px;background-color:#eee;text-align:left;'>".migre_cree_article($titre,$body,$adresse,$id_rubrique,$auteur,$id_mot,$lang)."\n</div>\n";
 	}
 	else
 	{
@@ -202,7 +226,7 @@ global $dir_lang, $migre_meta;
 	}
 
 	return $res;
-}
+} // migre_pages
 
 // ------------------------------------------------------------------------------
 // [fr] met le contenu de <title></title> dans une chaîne
@@ -213,7 +237,7 @@ function migre_chercher_titre($ascruter)
 	preg_match("/(<title>)(.*?)(<\/title>)/i",$ascruter, $recherche);
 	$titre = $recherche [2];
 	return $titre;
-}
+} // migre_chercher_titre
 
 // ------------------------------------------------------------------------------
 // [fr] met le contenu de <body></body> dans une chaîne
@@ -240,12 +264,13 @@ global $migre_meta;
 	}
 
 	return $contenu;
-}
+} // migre_chercher_body
 
 // ------------------------------------------------------------------------------
+// [fr] Extrait et filtre le BODY d'une page importee
 // ------------------------------------------------------------------------------
 function migre_filtrer_body($contenu) {
-global $migre_meta;
+	global $migre_meta;
 
 /* rajouts fwn *//*
 	$contenu=preg_replace('/(<span[ ]class\=\"code\">)(.*)(<\/span><br>)/iUs',"\r<code>\$2</code>\r",$contenu);
@@ -256,9 +281,14 @@ global $migre_meta;
 		reset($migre_meta['migre_htos']);
 		while ( list($key,$val) = each($migre_meta['migre_htos']) ) {
 			if (!empty($migre_meta['migre_htos'][$key]['filtre'])) {
-				$contenu=@preg_replace($migre_meta['migre_htos'][$key]['filtre'],$migre_meta['migre_htos'][$key]['spip'],$contenu);
+				$filtre=@preg_replace('/@r/iUs',"\r",$migre_meta['migre_htos'][$key]['filtre']); 
+				$filtre=@preg_replace('/@n/iUs',"\n",$filtre);
+				$conv=@preg_replace('/@r/iUs',"\r",$migre_meta['migre_htos'][$key]['spip']);
+				$conv=@preg_replace('/@n/iUs',"\n",$conv);
+
+				$contenu=@preg_replace($filtre,$conv,$contenu);
 				if ( function_exists('preg_last_error') AND preg_last_error()<>PREG_NO_ERROR ) {
-					spip_log("migrestatic: erreur regexp:".$key);
+					spip_log("migre_static: migre_filtrer_body() erreur regexp:".$key.":filtre:".$filtre.":conv:".$conv);
 					echo "migrestatic: warning function migre_filtrer_body() : invalid regexp key : $key\n<br>";
 				}
 			}
@@ -266,10 +296,10 @@ global $migre_meta;
 	}
 
 	return $contenu;
-}
+} // migre_filtrer_body
 
 // ------------------------------------------------------------------------------
-// [fr] Insère un nouvel article dans Spip.
+// [fr] Insere un nouvel article dans Spip.
 // [en] Add a new article into SPIP
 // ------------------------------------------------------------------------------
 function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lang)
@@ -301,7 +331,11 @@ function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lan
 		$t_mess='migrestatic:update_article_id';
 	}
 
-	if (!empty($id_article))
+	if (empty($id_article))
+	{
+		return "<strong>"._T('migrestatic:err_insert_article').$titre."</strong>";
+	}
+	else
 	{
 		spip_log('migre_static : insert article #'.$id_article);
 
@@ -323,11 +357,8 @@ function migre_cree_article($titre,$texte,$url_site,$id_rub,$auteur,$id_mot,$lan
 
 		return _T($t_mess) . $id_article. _T('migrestatic:insert_article_titre') . "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>". $titre ."</a>" ;
 	}
-	else
-	{
-		return "<strong>"._T('migrestatic:err_insert_article').$titre."</strong>";
-	}
-}
+
+} // migre_cree_article
 
 // ------------------------------------------------------------------------------
 // [fr] Nettoie les urls des differents liens et images
@@ -339,7 +370,7 @@ function migre_nettoie_url($texte,$url)
 	$texte=preg_replace('/href=\"(.*?)\"/ie',"url_absolues('\$1','".$url."','href=\"')",$texte);
 	$texte=preg_replace('/href=\".*\" onClick=\".*\(\'(http:\/\/.*)\'.*\"/iUs',"href=\"\$1\"",$texte); // [fr] suppr le js [en] remove the js
 	return $texte;
-}
+} // migre_nettoie_url
 
 // ------------------------------------------------------------------------------
 // [fr] transforme des URL relatives en absolues
@@ -351,54 +382,54 @@ function url_absolues($rel,$url,$rajout)
 	$com = InternetCombineURL($url,$rel);
 	$com= $rajout.$com.'"';
 	return $com;
-}
+} // url_absolues
 
 // ------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------
 function InternetCombineURL($absolute,$relative)
 {
-        $p = parse_url($relative);
-        if($p["scheme"])return $relative;
-
-        extract(parse_url($absolute));
-        $path = dirname($path);
-
-        if($relative{0} == '/') {
-            $cparts = array_filter(explode("/", $relative));
-        }
-        else {
-            $aparts = array_filter(explode("/", $path));
-            $rparts = array_filter(explode("/", $relative));
-            $cparts = array_merge($aparts, $rparts);
-            foreach($cparts as $i => $part) {
-                if($part == '.') {
-                    $cparts[$i] = null;
-                }
-                if($part == '..') {
-                    $cparts[$i - 1] = null;
-                    $cparts[$i] = null;
-                }
-            }
-            $cparts = array_filter($cparts);
-        }
-        $path = implode("/", $cparts);
-        $url = "";
-        if($scheme) {
-            $url = "$scheme://";
-        }
-        if($user) {
-            $url .= "$user";
-            if($pass) {
-                $url .= ":$pass";
-            }
-            $url .= "@";
-        }
-        if($host) {
-            $url .= "$host/";
-        }
-        $url .= $path;
-        return $url;
-}
+	$p = parse_url($relative);
+	if($p["scheme"])return $relative;
+	
+	extract(parse_url($absolute));
+	$path = dirname($path);
+	
+	if($relative{0} == '/') {
+		$cparts = array_filter(explode("/", $relative));
+	}
+	else {
+		$aparts = array_filter(explode("/", $path));
+		$rparts = array_filter(explode("/", $relative));
+		$cparts = array_merge($aparts, $rparts);
+		foreach($cparts as $i => $part) {
+		if($part == '.') {
+			$cparts[$i] = null;
+		}
+		if($part == '..') {
+			$cparts[$i - 1] = null;
+			$cparts[$i] = null;
+		}
+		}
+		$cparts = array_filter($cparts);
+	}
+	$path = implode("/", $cparts);
+	$url = "";
+	if($scheme) {
+		$url = "$scheme://";
+	}
+	if($user) {
+		$url .= "$user";
+		if($pass) {
+		$url .= ":$pass";
+		}
+		$url .= "@";
+	}
+	if($host) {
+		$url .= "$host/";
+	}
+	$url .= $path;
+	return $url;
+} // InternetCombineURL
 
 // ------------------------------------------------------------------------------
 // [fr] remplace du HTML par des raccourcis Spip
@@ -447,12 +478,12 @@ global $migre_meta;
 	}
 
 	return $texte;
-}
+} // migre_html_to_spip
 
 // ------------------------------------------------------------------------------
 // [fr] nettoie une page web avec Tidy
 // ------------------------------------------------------------------------------
-function migre_nettoie_html ($anetoyer)
+function migre_nettoie_html($anetoyer)
 {
 	$res=$anetoyer;
 	if (function_exists('tidy_parse_string'))
@@ -467,53 +498,66 @@ function migre_nettoie_html ($anetoyer)
 	$res = str_replace("\n", "\r", $res);
 
 	return $res;
-}
+} migre_nettoie_html
 
 // ------------------------------------------------------------------------------
 // [fr] Compare le formulaire avec les valeur en meta et les met à jour
 // [en] Compare the form values with the meta ones and updates them
 // ------------------------------------------------------------------------------
-function migre_check_var($id_rubrique) {
-global $migre_meta;
+function migre_check_var($id_rubrique)
+{
+	global $migre_meta;
 
+	$out = "\n<table width='100%' cellspacing='0' cellpadding='0' border='1'>";
 	$migre_meta=array();
 	$migre_meta['migre_id_rubrique']=$id_rubrique;
-	$migre_meta['migre_id_mot']= _request('form_id_mot');
+	$migre_meta['migreidmot'] = _request('form_idmot');
 	$migre_meta['migre_liste_pages']=_request('form_liste_pages');
-	$migre_meta['migre_test']= _request('form_migre_test');
+	$migre_meta['migre_test'] = _request('form_migre_test');
 	$migre_meta['migre_bcentredebut'] = _request('form_bcentredebut');
 	$migre_meta['migre_bcentrefin'] = _request('form_bcentrefin');
+
+	$out .= "\n<tr><td>bcentredebut</td><td>".$migre_meta['migre_bcentredebut']."</td></tr>";
+	$out .= "\n<tr><td>bcentrefin</td><td>".$migre_meta['migre_bcentrefin']."</td></tr>";
+
 	$migre_meta['migre_htos'] = array();
 	$migre_meta['migre_htos_changed']=false;
 	$htos=get_list_htos();
 	if (count($htos)>0) {
 		reset($htos);
 		while ( list($key,$val) = each($htos) ) {
-			$filtre=transcoder_page(_request($key.'-filtre'));
-			$conv=transcoder_page(_request($key.'-htos'));
+			$filtre=_request($key.'-filtre');
+			$conv=_request($key.'-htos');
+			$out .= "\n<tr><td>".$key."</td><td>".$filtre;
+			// code ajoute pour pister les eventuels problemes de conversions
 			if ($val['filtre']!=$filtre) {
 				$migre_meta['migre_htos_changed']=true;
 				$migre_meta['migre_htos_old'][$key]['filtre'] = $val['filtre'];
+				$out .= "*";
 				spip_log("migrestatic: filtre-spip($key):".$val['filtre'].":modifie:".$filtre.":");
 			}
+			$out .= "</td></tr>";
+			$out .= "\n<tr><td>".$key."</td><td>".$conv;
 			if ($val['spip']!=$conv) {
 				$migre_meta['migre_htos_changed']=true;
 				$migre_meta['migre_htos_old'][$key]['spip'] = $val['spip'];
+				$out .= "*";
 				spip_log("migrestatic: filtre-htos($key):".$val['spip'].":modifie:".$conv.":");
 			}
-			$filtre=@preg_replace('/\\\r/iUs',"\r",$filtre); // [fr] peut etre vide [en] empty value allowed
-			$conv=@preg_replace('/\\\r/iUs',"\r",$conv); // [fr] peut etre vide [en] empty value allowed
+			$out .= "</td></tr>";
 
 			$migre_meta['migre_htos'][$key]['filtre']=$filtre;
 			$migre_meta['migre_htos'][$key]['spip']=$conv;
 		}
 	}
 	$migre_meta['migre_cs_decoupe']= _request('form_migre_cs_decoupe');
-	if ($migre_meta!= $GLOBALS['meta']['migre_static']) {
+	if ($migre_meta!= $GLOBALS['meta']['migrestatic']) {
 		include_spip('inc/meta');
-		ecrire_meta('migre_static', serialize($migre_meta));
+		ecrire_meta('migrestatic', serialize($migre_meta));
 		ecrire_metas();
 	}
-}
+	$out .= "\n</table>";
+	return $out;
+} // migre_check_var
 
 ?>

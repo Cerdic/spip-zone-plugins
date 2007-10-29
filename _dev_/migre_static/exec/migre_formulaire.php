@@ -36,94 +36,92 @@ include_spip("inc/editer_article");
 // [en] SPIP 1.9 compatibility
 if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
-// ------------------------------------------------------------------------------
-// [fr] Methode exec
-// [en] Exec method
-// ------------------------------------------------------------------------------
-function exec_migre_formulaire() {
-	afficher_migre_formulaire(intval(_request('id_rubrique')));
-}
+if (!function_exists('spip_num_rows')) { include_spip("inc/vieilles_defs"); }
 
 // ------------------------------------------------------------------------------
+// [fr] Methode exec
 // [fr] Affiche la page complete spip privee avec le formulaire
+// [en] Exec method
 // [en] Provides the full spip private space form
 // ------------------------------------------------------------------------------
-function afficher_migre_formulaire($id_rubrique) {
+function exec_migre_formulaire()
+{
 	global $connect_statut;
+	$id_rubrique = intval(_request('id_rubrique'));
+
 	// [fr] Pour le moment l acces est reserve a l administrateur, a voir plus tard
 	// [fr] pour tester plutot en fonction rubrique de l import comme pour les articles...
 	// [en] For now the access is only allowed to the admin, will check it later
 	// [en] in order to check it for each rubrique like for the articles...
 
 	if ($connect_statut != '0minirezo') {
-		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
-		echo "<strong>"._T('avis_non_acces_page')."</strong>";
-		echo fin_page();
-		exit;
-	}
+		$err = "<strong>"._T('avis_non_acces_page')."</strong>";
+		include_spip('inc/minipres');
+		echo minipres($err);
+	} else {
 
-	// [fr] initialisations
-	// [en] initialize
-	if (!function_exists('filtrer_entites')) @include_ecrire('inc/filtres');
-	$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
-	if (!isset($GLOBALS['meta']['migre_static'])) migre_static_init_metas() ;
-
-	// [fr] La conf pre-existante domine
-	// [en] Pre-existing config leads
-	$row['id_rubrique'] = (!empty($GLOBALS['migre_static']['migre_id_rubrique'])) ? $GLOBALS['migre_static']['migre_id_rubrique'] : $id_rubrique;
-	if (!$row['id_rubrique']) {
-		if ($connect_id_rubrique)
-			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0];
-		else {
-			$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1"));
-			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
-		}
-		if (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] )){
-			// [fr] manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
-			// [en] too bad , this rubrique is not allowed, we look for the first allowed sector
-			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
-			while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = spip_fetch_array($res)){
-				$row['id_rubrique'] = $row_rub['id_rubrique'];
+		// [fr] initialisations
+		// [en] initialize
+		if (!function_exists('filtrer_entites')) include_spip('inc/filtres');
+		$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
+		if (!isset($GLOBALS['meta']['migrestatic'])) migre_static_init_metas() ;
+	
+		// [fr] La conf pre-existante domine
+		// [en] Pre-existing config leads
+		$row['id_rubrique'] = (!empty($GLOBALS['migrestatic']['migre_id_rubrique'])) ? $GLOBALS['migrestatic']['migre_id_rubrique'] : $id_rubrique;
+		if (!$row['id_rubrique']) {
+			if ($connect_id_rubrique)
+				$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0];
+			else {
+				$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1"));
+				$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
+			}
+			if (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] )){
+				// [fr] manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
+				// [en] too bad , this rubrique is not allowed, we look for the first allowed sector
+				$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
+				while (!autoriser('creerarticledans','rubrique',$row['id_rubrique'] ) && $row_rub = spip_fetch_array($res)){
+					$row['id_rubrique'] = $row_rub['id_rubrique'];
+				}
 			}
 		}
-	}
-	// [fr] recuperer leis donnees du secteur
-	// [en] load the sector datas
-	$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-	$row['id_secteur'] = $row_rub['id_secteur'];
-	$id_rubrique = $row['id_rubrique'];
-
-	// [fr] compatibilite ascendante
-	// [en] upscale compat
-	if ($GLOBALS['spip_version_code']<1.92)
-		debut_page(_T('migrestatic:titre_migre_formulaire'), 'configuration', 'migre_static');
-	else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('migrestatic:titre_migre_formulaire'), "configuration", 'migre_static');
-	}
-
-	if (!$row
-	   OR !autoriser('creerarticledans','rubrique',$id_rubrique)) {
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
-		exit;
-	}
-
-	debut_grand_cadre();
-	echo afficher_hierarchie($id_rubrique);
-	fin_grand_cadre();
-	debut_gauche();
-
-	creer_colonne_droite();
-	debut_droite();
-
-	debut_cadre_formulaire();
-	echo migre_gen_top($id_rubrique,_T('migrestatic:titre_migre_formulaire'));
-	echo migre_formulaire($row);
-	fin_cadre_formulaire();
-	echo fin_gauche();
-	echo fin_page();
-} // afficher_migre_formulaire
+		// [fr] recuperer les donnees du secteur
+		// [en] load the sector datas
+		$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row['id_secteur'] = $row_rub['id_secteur'];
+		$id_rubrique = $row['id_rubrique'];
+	
+		if (!$row
+		OR !autoriser('creerarticledans','rubrique',$id_rubrique)) {
+			$err = "<strong>"._T('avis_non_acces_page')."</strong>";
+			include_spip('inc/minipres');
+			echo minipres($err);
+		} else {
+			// [fr] compatibilite ascendante
+			// [en] upscale compat
+			if ($GLOBALS['spip_version_code']<1.92)
+				debut_page(_T('migrestatic:titre_migre_formulaire'), 'configuration', 'migre_static');
+			else {
+				$commencer_page = charger_fonction('commencer_page', 'inc');
+				echo $commencer_page(_T('migrestatic:titre_migre_formulaire'), "configuration", 'migre_static');
+			}
+	
+			echo debut_grand_cadre(true);
+			echo afficher_hierarchie($id_rubrique);
+			echo fin_grand_cadre(true);
+			echo debut_gauche('',true);
+		
+			echo creer_colonne_droite('',true);
+			echo debut_droite('',true);
+		
+			echo debut_cadre_formulaire('',true);
+			echo migre_gen_top($id_rubrique,_T('migrestatic:titre_migre_formulaire'));
+			echo migre_formulaire($row);
+			echo fin_cadre_formulaire(true);
+			echo fin_gauche(), fin_page();
+		} // !row or !autoriser
+	} // ! acces Ominirezo
+} // exec_migre_formulaire
 
 // ------------------------------------------------------------------------------
 // [fr] Genere le haut de bloc du formulaire de migration
@@ -150,13 +148,14 @@ function migre_gen_top($id_rubrique,$titre) {
 // [fr] Genere le formulaire de saisie des parametres de migration
 // [en] Generates the form to fill with migration parameters
 // ------------------------------------------------------------------------------
-function migre_formulaire($row=array()) {
+function migre_formulaire($row=array())
+{
 	$aider = charger_fonction('aider', 'inc');
 	$config = "";
 	$id_rubrique = $row['id_rubrique'];
 	$id_secteur = $row['id_secteur'];
-	$valeur_url= (!empty($GLOBALS['migre_static']['migre_liste_pages'])) ? $GLOBALS['migre_static']['migre_liste_pages'] : _T('migrestatic:liste_des_pages') ;
-	$valeur_test= (!empty($GLOBALS['migre_static']['migre_test'])) ? $GLOBALS['migre_static']['migre_test'] : "checked" ;
+	$valeur_url= (!empty($GLOBALS['migrestatic']['migre_liste_pages'])) ? $GLOBALS['migrestatic']['migre_liste_pages'] : _T('migrestatic:liste_des_pages') ;
+	$valeur_test= (!empty($GLOBALS['migrestatic']['migre_test'])) ? $GLOBALS['migrestatic']['migre_test'] : "checked" ;
 	$form= "\n".
 		editer_article_rubrique($id_rubrique, $id_secteur, $config, $aider) .
 		"\n<p><b>" .
@@ -174,6 +173,7 @@ function migre_formulaire($row=array()) {
 		"<div align='right'><input class='fondo' type='submit' value='" .
 		_T('bouton_valider') .
 		"' /></div>" .
+		"\n<input type='hidden' name='etape' id='etape' value='1'>" .
 		formulaire_liste_balise()  ;
 
 	return generer_action_auteur("migre_action", $id_rubrique, $retour, $form, " method='post' name='formulaire'");
@@ -183,8 +183,9 @@ function migre_formulaire($row=array()) {
 // [fr] Selection de mot-cles globaux pour tous les articles migres
 // [en] Select keywords for all imported articles
 // ------------------------------------------------------------------------------
-function choisir_un_mot($id_rubrique) {
-	$res.="\n<select name='form_id_mot[]' multiple='multiple' size='10' id='form_id_mot' style='width:300px;'>\n";
+function choisir_un_mot($id_rubrique)
+{
+	$res.="\n<select name='form_idmot[]' multiple='multiple' size='10' id='form_idmot' style='width:300px;'>\n";
 	// [fr] Rend possible de ne pas choisir un mot cle
 	// [en] Allows not to select a keyword
 	$result = spip_query("SELECT mots.id_mot, mots.titre FROM spip_mots AS mots, spip_groupes_mots AS groupe WHERE mots.id_groupe=groupe.id_groupe AND groupe.articles='oui' ORDER BY mots.id_mot");
@@ -192,7 +193,7 @@ function choisir_un_mot($id_rubrique) {
 		while ($row = spip_fetch_array($result)) {
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
-			$valeur_select = (is_array($GLOBALS['migre_static']['migre_id_mot']) AND in_array($id_mot,$GLOBALS['migre_static']['migre_id_mot']) ) ? " selected='selected' " : "" ;
+			$valeur_select = (is_array($GLOBALS['migrestatic']['migre_id_mot']) AND in_array($id_mot,$GLOBALS['migrestatic']['migre_id_mot']) ) ? " selected='selected' " : "" ;
 			$res.="<option value='".$row['id_mot']."' ".$valeur_select ."> ".$id_mot.". ".typo($row['titre'])."</option>\n";
 		}
 	}
@@ -204,20 +205,22 @@ function choisir_un_mot($id_rubrique) {
 // [fr] Produit un formulaire avec une liste de balises HTML et leur eventuelle conversion
 // [en] Provides a form showing a list of HTML marks and their translation
 // ------------------------------------------------------------------------------
-function formulaire_liste_balise() {
-	if ($GLOBALS['migre_static'] AND is_array($GLOBALS['migre_static']['migre_htos'])) {
-		$htos=$GLOBALS['migre_static']['migre_htos'];
+function formulaire_liste_balise()
+{
+	if ($GLOBALS['migrestatic'] AND is_array($GLOBALS['migrestatic']['migre_htos'])) {
+		$htos=$GLOBALS['migrestatic']['migre_htos'];
 	}
 	else {
 		$htos=get_list_htos();
 	}
 	// fwn
-	$valeur_debut = ($GLOBALS['migre_static']['migre_bcentredebut']) ? $GLOBALS['migre_static']['migre_bcentredebut']: "&lt;.{3,5}NAME.*index.{3,5}&gt;" ;
-	$valeur_fin = ($GLOBALS['migre_static']['migre_bcentrefin']) ? $GLOBALS['migre_static']['migre_bcentrefin']: "&lt;.{3,5}END.*index.*&gt;" ;
+	$valeur_debut = ($GLOBALS['migrestatic']['migre_bcentredebut']) ? $GLOBALS['migrestatic']['migre_bcentredebut']: ""; // was : &lt;.{3,5}NAME.*index.{3,5}&gt;
+	$valeur_fin = ($GLOBALS['migrestatic']['migre_bcentrefin']) ? $GLOBALS['migrestatic']['migre_bcentrefin']: ""; // was : &lt;.{3,5}END.*index.*&gt;
 	// fwn
 
 	$res  = debut_cadre_relief("",true);
-	$res .= bouton_block_invisible('migrefiltre') . "<b class='arial2'>". _T('migrestatic:choix_balises')."</b>" ;
+	$res .= bouton_block_invisible('migrefiltre') ;
+	$res .= "<b class='arial2'>". _T('migrestatic:choix_balises')."</b>" ;
 	$res .= debut_block_invisible('migrefiltre') ;
 	$res .= "<p class='arial2'>"._T('migrestatic:sous_choix_balises')."</p>" ;
 
@@ -244,7 +247,7 @@ function formulaire_liste_balise() {
 		AND array_key_exists("COUTEAU_SUISSE",$plug)
 		AND isset($GLOBALS['meta']['cs_decoupe']) )
 	{
-		$valeur_cs_decoupe= (!empty($GLOBALS['migre_static']['migre_cs_decoupe'])) ? $GLOBALS['migre_static']['migre_cs_decoupe'] : "checked" ;
+		$valeur_cs_decoupe= (!empty($GLOBALS['migrestatic']['migre_cs_decoupe'])) ? $GLOBALS['migrestatic']['migre_cs_decoupe'] : "checked" ;
 		$res.= "\n<p><b>" .  _T('migrestatic:config_cs_decoupe') .  "</b><br />" ._T('migrestatic:sous_choix_cs_decoupe');
 		$res.= "\n<input type='checkbox' name='form_migre_cs_decoupe' id='form_migre_cs_decoupe' checked='".$valeur_cs_decoupe . "' class='check' />" ;
 	}

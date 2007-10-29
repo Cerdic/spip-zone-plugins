@@ -34,7 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_balises_htos' => 'Converted tag',
 
 'choix_balises_prem' => 'First filter',
-
 'choix_balises_comment' => '&lt;!-- comments --&gt;',
 'choix_balises_script' => 'script/style',
 'choix_balises_italique' => 'I',
@@ -59,11 +58,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_balises_p' => 'P',
 'choix_balises_dern' => 'Last filter',
 
-
 // Action
 
-'titre_migre_action' => 'Migration step',
+'titre_migre_action' => 'Migration process',
+'titre_migre_action_etape' => 'Processing migration - step',
 'sur_titre_migre_static' => 'Result of the migration process',
+'resultat_liste_pages' => 'List of imported webpages',
 'processing_page' => 'Processing page : ',
 'page_title' => 'Title : ',
 'err_page_vide' => 'Error : This page is empty',
