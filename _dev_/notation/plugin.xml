@@ -8,9 +8,9 @@
     <b>Attribuer une note aux articles Spip</b><hr/>
     D&eacute;finition de la balise <code>#NOTATION</code> permettant 
     la saise et l'affichage de la note dans un article.<br>
-    D&eacute;finition des mod&egrave;les <code><autxx|notation|id_article=yy></code> 
+    D&eacute;finition des mod&egrave;les <em>&gt;autxx|notation|id_article=yy&lt;</em> 
     qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
-    et <code><notation|topten></code> qui donne les 10 meilleurs articles.
+    et <em>&gt;notation|topten&lt;</em> qui donne les 10 meilleurs articles.
   </description>
   <icon>img_pack/note.gif</icon>
   <fonctions>
