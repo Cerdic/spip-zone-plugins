@@ -3,7 +3,7 @@
 #  Plugin  : Couteau Suisse - Licence : GPL           #
 #  Auteur  : Patrice Vanneufville, 2006               #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
-#  Infos : http://www.spip-contrib.net/?article1554   #
+#  Infos : http://www.spip-contrib.net/?article2166   #
 #-----------------------------------------------------#
 
 include_spip('inc/texte');
@@ -425,7 +425,8 @@ echo '<p style="color:red;">Ancienne interface : <a href="', generer_url_ecrire(
 	creer_colonne_droite();
 	lire_metas();
 	// si l'outil rss_couteau_suisse est actif, on telecharge les news...
-	if (strpos($GLOBALS['meta']['tweaks_actifs'], 'rss_couteau_suisse') !== false) cs_boite_rss(!$quiet);
+	$actifs = unserialize($GLOBALS['meta']['tweaks_actifs']);
+	if ($actifs['rss_couteau_suisse'][actif]==1) cs_boite_rss(!$quiet);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>''));
 	debut_droite();
 
@@ -480,7 +481,9 @@ function cs_boite_rss($force) {
 	$du = affdate_heure(date('Y-m-d H:i:s',time()));
 	echo $p = '<p><b>'._T('cout:rss_titre').'</b></p><ul style="list-style-type:none; padding:0; ">'.$p
 		.'</ul><p class="spip_xx-small"><b>'
-		._T('cout:edition')."</b><br/>$du</p>";
+		._T('cout:edition')."</b><br/>$du</p>"
+		.'<div style="text-align: right; font-size: 85%;"><a title="'._T('cout:desactiver_rss').'" href="'
+		.generer_url_ecrire(_request('exec'),'cmd=toggle&outil=rss_couteau_suisse').'">'._T('cout:supprimer_cadre').'</a></div>';
 	ecrire_fichier(_DIR_RSS_TMP, $p);
 	fin_boite_info();
 }
