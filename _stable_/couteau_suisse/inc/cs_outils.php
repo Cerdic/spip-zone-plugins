@@ -151,8 +151,8 @@ function detail_outil($outil_id) {
 	$serial = serialize(array_keys($outil));
 	if (preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
 		$details[] =  _T('cout:detail_traitements') . ' #' . join(', #', array_unique($regs[1]));	
-	if (preg_match_all(',pipeline:([a-z_]+),', serialize(array_keys($outil)), $regs, PREG_PATTERN_ORDER))
-		$details[] = _T('cout:detail_pipelines') . ' ' . join(', ', array_unique($regs[1]));	
+	if (preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', serialize(array_keys($outil)), $regs, PREG_PATTERN_ORDER))
+		$details[] = _T('cout:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));	
 	if(count($details)) return $hr . join('<br />', $details) . '</div>';
 	return '';
 }

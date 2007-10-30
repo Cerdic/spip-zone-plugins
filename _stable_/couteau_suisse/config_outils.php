@@ -45,12 +45,21 @@ add_variable( array(
 	'nom' => 'quota_cache',
 	'format' => 'nombre',
 	'defaut' => "\$GLOBALS['quota_cache']",
-	'code' => "\$GLOBALS['quota_cache']=%s;",
+	'code' => "\$GLOBALS['quota_cache']=%s;\n",
 ));
+add_variable( array(
+	'nom' => 'exceptions_cache',
+	'format' => 'chaine',
+	'defaut' => "''",
+	'code:strlen(%s)' => "define('_cache_PERSO', %s);",
+));
+// balise pour choisir le cache a appliquer aux articles
+
 add_outil( array(
-	'id' => 'SPIP_cache',
-	'code:options' => "%%radio_desactive_cache3%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%",
+	'id' => 'spip_cache',
+	'code:options' => "%%radio_desactive_cache3%%%%duree_cache%%%%duree_cache_mutu%%%%quota_cache%%%%exceptions_cache%%",
 	'categorie' => 'admin',
+	'pipelinecode:insert_head' => 'if(defined(\'_cache_PERSO\')) cs_fixe_cache($GLOBALS[\'delais\']);'
 ));
 
 	// ici on a besoin d'une case input. La variable est : dossier_squelettes

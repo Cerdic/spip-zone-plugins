@@ -137,8 +137,10 @@ function set_cs_metas_pipelines_pipeline($infos_pipelines, $pipeline) {
 	global $cs_metas_pipelines;
 	$code = '';
 	if (isset($infos_pipelines[$pipeline])) {
-		foreach ($infos_pipelines[$pipeline]['inclure'] as $inc) $code .= "include_spip('outils/$inc');\n";
-		foreach ($infos_pipelines[$pipeline]['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
+		$a = &$infos_pipelines[$pipeline];
+		if(is_array($a['inline'])) foreach ($a['inline'] as $inc) $code .= "$inc\n";
+		if(is_array($a['inclure'])) foreach ($a['inclure'] as $inc) $code .= "include_spip('outils/$inc');\n";
+		if(is_array($a['fonction'])) foreach ($a['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
 	}
 	$cs_metas_pipelines[$pipeline] = $code;
 cs_log("set_cs_metas_pipelines_pipeline($pipeline) : strlen=".strlen($code));
@@ -150,6 +152,11 @@ cs_log(" -- fichier_dest = $fichier_dest");
 // est-ce que $pipe est un pipeline ?
 function is_pipeline_outil($pipe, &$set_pipe) {
 	if ($ok = preg_match(',^pipeline:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
+	return $ok;
+}
+// est-ce que $pipe est un pipeline inline?
+function is_pipeline_outil_inline($pipe, &$set_pipe) {
+	if ($ok = preg_match(',^pipelinecode:(.*?)$,', $pipe, $t)) $set_pipe = trim($t[1]);
 	return $ok;
 }
 
@@ -261,8 +268,12 @@ function cs_initialise_includes() {
 					$infos_pipelines[$pipe2]['fonction'][] = $fonc;
 					// liste des pipelines utilises
 					if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
+				} elseif (is_pipeline_outil_inline($pipe, $pipe2)) {
+					// code inline
+					$infos_pipelines[$pipe2]['inline'][] = $fonc;
+					if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
 				} elseif (is_traitements_outil($pipe, $fonc, $traitements_utilises)) {
-					// bah rien a faire du coup... $traitements_utilises est deja rempli
+					// rien a faire : $traitements_utilises est rempli par is_traitements_outil()
 				}
 			}
 			// recherche d'un fichier .css, .css.html et/ou .js eventuellement present dans outils/

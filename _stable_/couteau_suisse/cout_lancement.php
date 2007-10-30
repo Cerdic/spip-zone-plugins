@@ -58,6 +58,12 @@ cs_log("[#$rand]  -- lecture metas");
 		$cs_metas_pipelines = unserialize($GLOBALS['meta']['tweaks_pipelines']);
 cs_log("[#$rand]  -- cs_metas_pipelines = ".(is_array($cs_metas_pipelines)?join(', ',array_keys($cs_metas_pipelines)):''));
 		$actifs = unserialize($GLOBALS['meta']['tweaks_actifs']);
+		// compatibilite : SPIP_cache => spip_cache
+		if (isset($actifs['SPIP_cache'])) { 
+			$actifs['spip_cache'] = $actifs['SPIP_cache']; unset($actifs['SPIP_cache']);
+			ecrire_meta('tweaks_actifs', serialize($actifs));
+			ecrire_metas();
+		}
 		// definition des constantes attestant qu'un outil est bien actif : define('_CS_monoutil', 'oui');
 		foreach($actifs as $nom=>$actif) if($actif['actif']) @define('_CS_'.$nom, 'oui');
 cs_log("[#$rand]  -- ".(is_array($actifs)?count($actifs):0).' outil(s) actif(s)'.(is_array($actifs)?" = ".join(', ',array_keys($actifs)):''));

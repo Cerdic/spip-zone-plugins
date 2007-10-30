@@ -70,4 +70,5 @@ function balise_SMILEYS_dist($p) {
 	$p->type = 'html';
 	return $p;
 }
+
 ?>
