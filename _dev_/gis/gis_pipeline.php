@@ -31,7 +31,7 @@ function gis_insertar_maparticle($flux){
 // inserta no head da parte PRIVADA
 // --------------------------------
 function gis_insertar_head($flux){
-	if (($r=_request('exec'))=='articles' OR _request('exec')=='mots_edit' OR $r=='gis'){
+  if ((strpos($flux, '<div id="map') == true) or (strpos($flux, '<div id="formMap') == true) or (strpos($flux, "<div id='map") == true)){
 		$flux .= '<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>';
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/gis.js"></script>';
 		if ((_request('exec')=='articles'))
@@ -49,7 +49,7 @@ function gis_insertar_head($flux){
 // inserta no head da parte PUBLICA
 // --------------------------------
 function gis_affichage_final($flux){
-    if ((strpos($flux, '<div id="map') == true) or (strpos($flux, '<div id="formMap') == true)){
+    if ((strpos($flux, '<div id="map') == true) or (strpos($flux, '<div id="formMap') == true) or (strpos($flux, "<div id='map") == true)){
 	
 		$incHead='
 		<script type="text/javascript" src="'.generer_url_public('geomap.js').'"></script>

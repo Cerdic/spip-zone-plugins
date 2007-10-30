@@ -21,9 +21,14 @@
 		if (GBrowserIsCompatible()) {
 			// facelo mapa
 			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})] = new GMap2(document.getElementById("map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]"));
-			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapTypeControl());
-			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapZoomControl());
-			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapMoveControl());
+			[(#ENV{control}|=={'custom'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapTypeControl());})]
+			[(#ENV{control}|=={'custom'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapZoomControl());})]
+			[(#ENV{control}|=={'custom'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new mapMoveControl());})]
+			[(#ENV{control}|=={'small'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new GSmallMapControl());})]
+			[(#ENV{control}|=={'small'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new GMapTypeControl());})]
+			[(#ENV{control}|=={'large'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new GLargeMapControl());})]
+			[(#ENV{control}|=={'large'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new GMapTypeControl());})]
+			[(#ENV{rounded}|=={'true'}|?{map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].addControl(new cornerControl());})]
 			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].setCenter(new GLatLng(#GET{latitude}, #GET{lonxitude}), #ENV{zoom,#CONFIG**{geomap_default_zoom,0}}, #GET{type});
 			center = map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].getCenter();
 			map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})].enableDoubleClickZoom();

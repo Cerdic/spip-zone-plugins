@@ -36,7 +36,11 @@ function gis_cambiar_coord($id_article) {
 		while ($rowMot = spip_fetch_array($resultMots)) {
 			$resultMotIcon = spip_query("SELECT * FROM spip_mots WHERE type ='marker_icon' AND id_mot=".$rowMot['id_mot']);
 			if ($rowMotIcon = spip_fetch_array($resultMotIcon)){
-				$gicon = "moton".$rowMot['id_mot'].".png";
+				if (file_exists("../IMG/"."moton".$rowMot['id_mot'].".png")) {
+  				  	$gicon = "moton".$rowMot['id_mot'].".png";
+				} else if (file_exists("../IMG/"."moton".$rowMot['id_mot'].".gif")) {
+					$gicon = "moton".$rowMot['id_mot'].".gif";
+				}
 			}
 		}
 		$gis_append_view_map = charger_fonction('geomap_append_view_map','inc');
