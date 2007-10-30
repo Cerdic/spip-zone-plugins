@@ -39,26 +39,32 @@ function exec_import_patron(){
 
 	$nomsite=lire_meta("nom_site"); 
 	$message_texte ='';
+	$texte_patron = '';
 
-	include_spip('public/assembler');
-	$contexte_patron = array('date' => $date,'patron'=>$patron,'lang'=>$lang);
+	# ATENTION : une image erronnee dans le patron sous la forme <img src='' />
+	# provoque un deuxieme hit sur cet exec, mais sans argument patron
+	# il ne faut pas ecraser la nl avec la page 404 dans ce cas !
+	if ($patron) {
+		include_spip('public/assembler');
+		$contexte_patron = array('date' => $date,'patron'=>$patron,'lang'=>$lang);
+		
+		if (find_in_path('patrons/'.$patron.'_texte.html')){
+			$patron_version_texte = true ;
+			$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_patron);
+		}
+		// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
+		// sont sous forme privee : spip.php?action=redirect&.... horrible !
+		// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
+		//$texte_patron = recuperer_fond('patrons/'.$patron, $contexte_patron);
+		$url = generer_url_public('patron_switch','',true);
+		foreach ($contexte_patron as $k=>$v)
+			$url = parametre_url($url,$k,$v,'&');
+		$texte_patron = recuperer_page($url) ;
 	
-	if (find_in_path('patrons/'.$patron.'_texte.html')){
-		$patron_version_texte = true ;
-		$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_patron);
+		// passer tout ca en unicode pour eviter certains problemes
+		include_spip('inc/charsets');
+		$texte_patron = charset2unicode($texte_patron);
 	}
-	// Il faut utiliser recuperer_page et non recuperer_fond car sinon les url des articles
-	// sont sous forme privee : spip.php?action=redirect&.... horrible !
-	// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
-	//$texte_patron = recuperer_fond('patrons/'.$patron, $contexte_patron);
-	$url = generer_url_public('patron_switch','',true);
-	foreach ($contexte_patron as $k=>$v)
-		$url = parametre_url($url,$k,$v,'&');
-	$texte_patron = recuperer_page($url) ;
-
-	// passer tout ca en unicode pour eviter certains problemes
-	include_spip('inc/charsets');
-	$texte_patron = charset2unicode($texte_patron);
 			
 	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
 	
