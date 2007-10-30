@@ -252,3 +252,43 @@ function pan(dir){
 	if(dir==south) map.panTo(new GLatLng(southWest.lat(), center.x));
 	if(dir==west)  map.panTo(new GLatLng(center.y, southWest.lng()));
 }
+//***********
+// Fake Map Custom Control
+// for rounded corners
+//***********
+function cornerControl() {
+}
+cornerControl.prototype = new GControl();
+cornerControl.prototype.initialize = function(map) {
+	var size = map.getSize();
+	var div = document.createElement("div");
+	div.style.position = "absolute";
+	var img1 = document.createElement("img");
+	img1.src =  URLbase + "/googlemap_api/img_pack/" + images_folder + "/corner01." + images_extension;
+	img1.style.position = "absolute";
+	img1.style.left= "0px";
+	div.appendChild(img1);
+	var img2 = document.createElement("img");
+	img2.src = URLbase + "/googlemap_api/img_pack/" + images_folder + "/corner02." + images_extension;
+	img2.style.position = "absolute";
+	img2.style.left = (size.width - 15) + "px";
+	div.appendChild(img2);
+	var img3 = document.createElement("img");
+	img3.src = URLbase + "/googlemap_api/img_pack/" + images_folder + "/corner03." + images_extension;
+	img3.style.position = "absolute";
+	img3.style.left = (size.width - 15) + "px";
+	img3.style.top = (size.height - 15) + "px";
+	div.appendChild(img3);
+	var img4 = document.createElement("img");
+	img4.src = URLbase + "/googlemap_api/img_pack/" + images_folder + "/corner04." + images_extension;
+	img4.style.position = "absolute";
+	img4.style.left = "0px";
+	img4.style.top = (size.height - 15) + "px";
+	div.appendChild(img4);
+	
+	map.getContainer().appendChild(div);
+	return div;
+}
+cornerControl.prototype.getDefaultPosition = function() {
+	return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(0, 0));
+}
