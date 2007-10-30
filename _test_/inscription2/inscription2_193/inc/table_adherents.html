@@ -234,8 +234,8 @@ function confirm(msg,callback) {
 	}
 	//abonnement
 	if(defined('_DIR_PLUGIN_ABONNEMENT')){
-	echo '<td><a href="#"><strong>Abonnement</strong></a></td>';
-	echo '<td><a href="#"><strong>&Eacute;ch&eacute;ance</strong></a></td>';
+	echo '<td><a href="#"><strong>Produit</strong></a></td>';
+	echo '<td><a href="#"><strong>&Eacute;ch&eacute;ance / quantit&eacute;</strong></a></td>';
 	$table_auteurs[] = 'b.statut_abonnement';
 	}
 	
@@ -335,8 +335,16 @@ function confirm(msg,callback) {
 		//abonnement
 		if(defined('_DIR_PLUGIN_ABONNEMENT')){
 		$abonnement = spip_fetch_array(spip_query("select a.libelle, b.validite from `spip_abonnements` a join `spip_auteurs_elargis_abonnements` b where a.id_abonnement=b.id_abonnement and b.id_auteur_elargi='$id'" ));
-		echo '<td>'.$abonnement["libelle"].'</td>';
-		echo '<td>'.$abonnement["validite"].'</td>';
+		$au_numero = spip_fetch_array(spip_query("select count(id_article) as 'n' from `spip_auteurs_elargis_articles` a where a.id_auteur_elargi='$id'" ));
+		if($abonnement["libelle"] =="" AND $au_numero["n"] > 0){
+		 $libelle = "achat au numero" ;
+		 $validite = $au_numero["n"] ;
+		 }else{
+		 $libelle = $abonnement["libelle"] ;
+		 $validite = $abonnement["validite"] ;
+		 }
+		echo '<td>'.$libelle.'</td>';
+		echo '<td>'.$validite.'</td>';
 		}
 		
 		echo '<td><a href="?exec=editer_adherent&amp;id='.$data['id_auteur'].'"><img src="'._DIR_PLUGIN_INSCRIPTION2.'/images/edit-12.gif" alt="'._T('inscription2:editer_adherent').'" /></a></td>';	
