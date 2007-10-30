@@ -1,0 +1,10 @@
+[(#REM)
+
+	Charger la librairie GoogleMaps et nos ajouts
+
+]#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+[(#CONFIG**{geomap_googlemapkey,''}|?{' '})
+#SET{cache,http://maps.google.com/maps?file=api&v=2&key=#CONFIG**{geomap_googlemapkey}}
+[(#GET{cache}|recuperer_page|compacte_js)]]
+[(#INCLURE{js/geomap.js})]

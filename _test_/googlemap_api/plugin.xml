@@ -1,0 +1,30 @@
+<plugin>
+ <nom>GoogleMap Api</nom>
+ <icon></icon>
+ <version>0.2</version>
+ <etat>test</etat>
+ <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>
+ <description>
+ <multi>[gl]Plugin para configurar a API Googlemaps na parte privada do teu sitio SPIP.
+_ Permite empregar a API con vaios plugins (Gis, GeoForms...).
+ [es] Plugin para configurar la API Googlemaps en la parte privada de tu sitio SPIP.
+_ Permite utilizar la API con varios plugins (Gis, GeoForms...).
+_ Una pa&tilde;gina de pruebas del plugin en [www.spip.escoitar.org->http://www.spip.escoitar.org]
+ [fr]Plugin pour configurer l'API Googlemaps dans la partie priv&eacute;e de votre site SPIP.
+_ Permet d'utiliser l'API avec plusieurs plugins (Gis, Geoforms...).
+ [en]Plugin to configure the Googlemap's API in the private area of you spip website.
+_ Help to use the API in several plugins (Gis, Geoforms...).
+ </multi>
+ </description>
+ 
+ <lien>http://www.escoitar.org/documentacion/spip.php?article175</lien>
+ <install>base/geomap_upgrade.php</install>
+ <fonctions>public/geomap_balises.php</fonctions>
+ <prefix>geomap</prefix>
+ <pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>geomap_pipeline.php</inclure>
+	</pipeline>
+ <chemin dir='' />
+</plugin>
