@@ -203,8 +203,9 @@ function inscription2_nouveau($declaration){
 	if(isset($declaration['article'])){
 		$value = $declaration['article'] ;	
 		include_spip('inc/acces');
+		$montant =  lire_config('abonnement/prix_article');
 		$hash = creer_uniqid();
-			spip_query("INSERT INTO `spip_auteurs_elargis_articles` (`id_auteur_elargi`, `id_article`, `statut_paiement` , `hash`) VALUES ('$n', '$value', 'a_confirmer','$hash')");
+			spip_query("INSERT INTO `spip_auteurs_elargis_articles` (`id_auteur_elargi`, `id_article`, `statut_paiement` , `hash`,`montant`) VALUES ('$n', '$value', 'a_confirmer','$hash','$montant')");
 		$declaration['hash_article'] = $hash ;
 
 	}
