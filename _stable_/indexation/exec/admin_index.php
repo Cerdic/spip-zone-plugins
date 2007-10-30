@@ -139,7 +139,7 @@ function exec_admin_index_dist()
 	
 	debut_cadre_relief();
 
-	echo "<table>";
+	echo "<table width='492'>";
 	foreach($liste_tables as $table){
 		if ($ifond==0){
 			$ifond=1;
@@ -149,19 +149,19 @@ function exec_admin_index_dist()
 			$couleur="#FFFFFF";
 		}
 		echo "<tr style='background-color:$couleur;'>";
-		echo "<td style='width:100;'>";
+		echo "<td style='width:100px;'>";
 		echo "<span style='font:arial,helvetica,sans-serif;font-size:small;'>";
 		echo $table;
-		echo "</span><td>";
+		echo "</span><td style='text-align:center'>";
 		if (isset($INDEX_elements_objet[$table])){
 			if ($index_total[$table]>0) {
 				if ($index_total[$table]>0) {
-					jauge('rouge', $a = floor(300*$indexes[$table]['non']/$index_total[$table]), _L('non index&#233;'));
-					jauge('jaune', $b = ceil(300*$indexes[$table]['bof']/$index_total[$table]),
+					jauge('rouge', $a = max(0,floor(270*$indexes[$table]['non']/$index_total[$table])), _L('non index&#233;'));
+					jauge('jaune', $b = max(0,ceil(270*$indexes[$table]['bof']/$index_total[$table])),
 					_L('&#224; r&#233;indexer'));
-					jauge('vert', $c = ceil(300*$indexes[$table]['oui']/$index_total[$table]),
+					jauge('vert', $c = max(0,min(270,ceil(270*$indexes[$table]['oui']/$index_total[$table]))),
 					_L('index&#233;'));
-					jauge('fond', 300-$a-$b-$c);
+					jauge('fond', max(0,270-$a-$b-$c));
 				}
 			}
 			else{
