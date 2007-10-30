@@ -10,7 +10,7 @@
 **/
 
 //version actuelle du plugin à changer en cas de maj
-	$GLOBALS['abonnement_base_version'] = 0.61;
+	$GLOBALS['abonnement_base_version'] = 0.62;
 	
 	function abonnement_upgrade(){
 		$version_base = $GLOBALS['abonnement_base_version'];
@@ -85,6 +85,15 @@
 			include_spip('base/abstract_sql');
 			spip_query("ALTER TABLE `spip_auteurs_elargis_abonnements` ADD stade_relance int(10) unsigned NOT NULL");
 			echo "Maj 0.61 de `spip_auteurs_elargis_abonnements` (stade_relance)";
+			ecrire_meta('abonnement_base_version',$current_version=$version_base);
+		}
+		ecrire_metas();
+		
+		if ($current_version < 0.62){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			spip_query("ALTER TABLE `spip_auteurs_elargis_articles` ADD montant int(10) unsigned NOT NULL");
+			echo "Maj 0.62 de `spip_auteurs_elargis_articles` (montant)";
 			ecrire_meta('abonnement_base_version',$current_version=$version_base);
 		}
 		ecrire_metas();

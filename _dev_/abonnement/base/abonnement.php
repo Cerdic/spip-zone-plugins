@@ -63,6 +63,7 @@ $spip_auteurs_elargis_articles = array(
 						"id_article" 			=> "int(10) unsigned NOT NULL",
 						"date" 				=> "timestamp(14) NOT NULL",
 						"statut_paiement" 	=> "tinytext NOT NULL",
+						"montant" => "int(10) unsigned NOT NULL",
 						"hash" 				=> "tinytext NOT NULL"
 						);
 
