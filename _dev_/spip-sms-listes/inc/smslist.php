@@ -24,7 +24,8 @@ function smslist_trouver_abonne($telephone){
 function smslist_actualiser_abonnements($id_donnee, $c=NULL){
 	include_spip("base/forms_base_api");
 	include_spip("base/abstract_sql");
-	$listes = _request('liste',$c);
+	if (!$listes = _request('liste',$c))
+		$listes = array();
 	$in_saisie = calcul_mysql_in('id_donnee',implode(',',$listes));
 	
 	$listef = Forms_liste_tables('smslist_liste');
