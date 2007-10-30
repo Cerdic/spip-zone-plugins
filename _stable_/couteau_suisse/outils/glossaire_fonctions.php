@@ -44,7 +44,7 @@ function cs_rempl_glossaire($texte) {
 	static $accents;
 	if(!isset($accents)) $accents = cs_glossaire_accents();
 	$limit = defined('_GLOSSAIRE_LIMITE')?_GLOSSAIRE_LIMITE:-1;
-	$r = spip_query("SELECT id_mot, titre, texte FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type']);
+	$r = spip_query("SELECT id_mot, titre, texte, descriptif FROM spip_mots WHERE " . $GLOBALS['glossaire_groupes_type']);
 	// compatibilite SPIP 1.92
 	$fetch = function_exists('sql_fetch')?'sql_fetch':'spip_fetch_array';
 	// parcours de tous les mots, sauf celui qui peut faire partie du contexte (par ex : /spip.php?mot5)
@@ -72,7 +72,10 @@ function cs_rempl_glossaire($texte) {
 			$texte = preg_replace_callback(",(($les_mots)&($accents);),i", 'glossaire_echappe_balises_callback', $texte);
 			// on y va !
 			$lien = generer_url_mot($id);
-			$definition = nl2br(trim($mot['texte']));
+			$mem = $GLOBALS['toujours_paragrapher'];
+			$GLOBALS['toujours_paragrapher'] = false;
+			$definition = safehtml(propre(nl2br(trim(strlen($mot['descriptif'])?$mot['descriptif']:$mot['texte']))));
+			$GLOBALS['toujours_paragrapher'] = $mem;
 			$table1[$id] = "<a name=\"mot$id\" href=\"$lien\" class=\"cs_glossaire\"><span class=\"gl_mot\">";
 			$table2[$id] = defined('_GLOSSAIRE_JS')
 				?'</span><span class="gl_js" title="'.htmlspecialchars($m).'"></span><span title="'.htmlspecialchars($definition).'"></span></a>'
