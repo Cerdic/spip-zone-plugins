@@ -12,7 +12,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+'abo_listes' => 'Choisir un th&eagrave;me',
 'derniers_envois' => 'Envois R&eacute;cents',
 'envois_programmes' => 'Envois programm&eacute;s',
 'envois_en_cours' => 'Envois en cours',

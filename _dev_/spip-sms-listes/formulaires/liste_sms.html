@@ -15,7 +15,7 @@
 			[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 			<li>
 			<label><input type="checkbox" name="liste&#91;&#93;"
-				[(#ID_DONNEE|in_any{#ENV**{valeurs}|table_valeur{liste}}|?{'checked="checked"',''})]
+				[(#ID_DONNEE|in_any{#ENV**{valeurs}|table_valeur{liste},''}|?{'checked="checked"',''})]
 			  value="#ID_DONNEE" />#LESVALEURS{' ',ligne_1}</label></li>]
 	</BOUCLE_listes>
 	[(#COMPTEUR_BOUCLE|!={1}|?{'</ul>',''})]
