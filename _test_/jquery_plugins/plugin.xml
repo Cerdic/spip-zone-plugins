@@ -5,16 +5,16 @@
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<lien></lien>
-	<version>0.3.2</version>
+	<version>0.3.3</version>
 	<etat>dev</etat>
     <description>
-	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery
+	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery.
+	N&eacute;cessite SPIP >= 1.9.3 
 - T&eacute;l&eacute;charge automatiquement les librairies de 
   plugins jQuery (il faut cr&eacute;er un dossier <code>lib/</code> avec acc&egrave;s en &eacute;criture)
 - Fournit un formulaire CFG avec les plugins &agrave; cocher 
   qui seront automatiquement ajout&eacute;es sur toutes les pages via jquery.js.html
-- Pour ajouter des plugins facilement grace au pipeline insert_js (SPIP>1.9.3) 
-  ou insert_head (SPIP 1.9.2), 
+- Pour ajouter des plugins facilement grace au pipeline insert_jquery_plugins 
   une fonction <code>jqueryp_add_plugins()</code>
   &agrave; laquelle on passe le nom des plugins (array) 
   renvoie leur contenu js
@@ -33,6 +33,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<install>jqueryp_install.php</install>
 	<necessite id="lib:jquery.ui-1.0" src="http://jqueryjs.googlecode.com/files/jquery.ui-1.0.zip" /> 
 	<necessite id="lib:jquery.yav1.1.1" src="http://jquery.com/plugins/files/jquery.yav1.1.1.zip" /> 
+	<necessite id="spip" version="[1.9300;]" /> 
     <fonctions>jqueryp_fonctions.php</fonctions>
     <options>jqueryp_options.php</options>
 	<chemin dir='' />

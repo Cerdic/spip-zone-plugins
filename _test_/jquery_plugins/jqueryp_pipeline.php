@@ -7,28 +7,14 @@ function jqueryp_insert_jquery_plugins($flux){
 	return $flux . "\n\n" . $inline;
 }
 
+/*
 // ajoute les plugins jquery dans jquery.js.html
 function jqueryp_insert_js($flux) {
 	if (isset($flux) && $flux['type']=='fichier')
 		$flux = _jqueryp_insert_jquery_plugins($flux);
 	return $flux;
 }
-
-// ajoute les plugins jquery dans le head pour SPIP 1.9.2
-function jqueryp_insert_head($flux) {
-	if (!isset($GLOBALS["spip_pipeline"]["insert_js"])){
-		$flux .= _jqueryp_insert_jquery_plugins();
-	}
-	return $flux;
-}
-
-// ajoute les plugins jquery dans le head pour SPIP 1.9.2
-function jqueryp_header_prive($flux) {
-	if (!isset($GLOBALS["spip_pipeline"]["insert_js"])){
-		$flux .= _jqueryp_insert_jquery_plugins();
-	}
-	return $flux;
-}
+*/
 
 function _jqueryp_insert_jquery_plugins($flux = null){
 	if (!$lpa = jqueryp_liste_plugins_actifs())

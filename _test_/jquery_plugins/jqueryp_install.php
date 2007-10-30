@@ -75,22 +75,6 @@ function jqueryp_install_librairies($liste_plugins){
 			}
 		}
 	}
-	// 1.9.2
-	// je ferais bien pour tout le monde comme ça
-	// (installation des librairies zip en une fois), mais
-	// j'ai peur que ca fasse des timeout !
-	if (defined('_COMPAT_JQUERYP_192')){
-		spip_log('! installation compatible 192', 'jquery_plugins');
-		foreach ($lpai as $nom=>$lib){
-			// si a installer et pas deja installe (repertoire present)
-			if (isset($lib['install_zip']) 
-				&& !empty($lib['install_zip'])
-				&& !is_dir(_DIR_RACINE . _DIR_LIB . $lib['dir'])){
-					if (!jqueryp_compat_install_zip($lib['install_zip']))
-						$return = false;			
-			}
-		}	
-	}
 	return $return;
 }
 
