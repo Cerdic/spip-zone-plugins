@@ -1,7 +1,7 @@
 <B_liste>[(#ENV{home}|?{'',' '})#PAGINATION]
 <BOUCLE_liste(ARTICLES){branche ?}{lang ?}{archives ?}{par date}{inverse}{pagination 15}>
 <div class="post">
-	[(#LOGO_ARTICLE|right|liens_absolus)]
+	[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
 	[<p class="day-date">(#DATE|affdate_long|unique)</p>]
 
 	<h2 id="p#ID_ARTICLE" class="post-title"><a href="#URL_ARTICLE">#TITRE</a></h2>

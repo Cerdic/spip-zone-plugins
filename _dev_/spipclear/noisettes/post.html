@@ -1,5 +1,5 @@
 <BOUCLE_article(ARTICLES){id_article}>
-[(#LOGO_ARTICLE|right|liens_absolus)]
+[(#LOGO_ARTICLE|right|#URL_ARTICLE|liens_absolus)]
 <h2 class="post-title">#TITRE</h2>
 <p class="post-info"><B_auteurs><:par_auteur|ucfirst:> <BOUCLE_auteurs(AUTEURS){id_article}{", "}>#NOM</BOUCLE_auteurs>,</B_auteurs>
 [(#DATE|affdate_long)] <:spipclear:attime:> [(#DATE|heures)]:[(#DATE|minutes)]
