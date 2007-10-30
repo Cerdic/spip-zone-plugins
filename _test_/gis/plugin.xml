@@ -1,0 +1,73 @@
+<plugin>
+
+ <nom>Escoitar Gis Plugin</nom>
+ <icon></icon>
+ <version>0.2</version>
+ <version_base>0.1.4</version_base>
+ <etat>test</etat>
+
+ <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>
+
+ <description>
+ <multi>[gl] Este plugin, xunto co plugin Google Map API, permite visualizar mapas GoogleMaps nas p&aacute;xinas p&uacute;blicas do sitio. Os artigos e as palabras chaves do sitio poden ser xeocalizadas por marcadores nos mapas.
+_ Este plugin engade duas t&aacute;boas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_mots}}
+_ A p&aacute;xina de probas do plugin &eacute; [->http://www.spip.escoitar.org/]
+_ Documentacion: [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
+ [es]Este plugin, acoplado al plugin Google Map API, permite visualizar mapas GoogleMaps en las p&aacute;ginas p&uacute;blicas del sitio. Los art&iacute;culos y las palabras claves del sitio pueden ser geolocalizadas por marcadores en los mapas. 
+_ Este plugin introduce dos tablas en la base de datos, una denominada {{spip_gis}} et l'autre {{spip_gis_mots}}
+_ P&aacute;gina de pruebas: [->http://www.spip.escoitar.org/]
+_ Documentaci&oacute;n: [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
+[fr]Ce plugin, coupl&eacute; au plugin Google Map API permet d'afficher des cartes GoogleMaps sur les pages publiques du site. Les articles et mots-cl&eacute;s du site peuvent &ecirc;tre g&eacute;olocalis&eacute;s par des marqueurs sur les cartes.
+_ Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eacute;e {{spip_gis}} et l'autre {{spip_gis_mots}}
+_ page de test [->http://www.spip.escoitar.org/] 
+_ Documentation : [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
+[en]This plugin, associated with Google Map API plugin enables GoogleMaps' display on public site's pages. Articles and keywords can be geo-localised with marks on maps.
+_ This plugin adds two talbes to the database, one named {{spip_gis}} and the other {{spip_gis_mots}}.
+_ Test page: [->http://www.spip.escoitar.org/] 
+_ Documentation: [->http://www.spip-contrib.net/Plugin-Gis-escoitar]
+ </multi>
+ </description>
+ 
+ <lien>http://www.spip-contrib.net/Plugin-Gis-escoitar</lien>
+ 
+ <install>base/gis_upgrade.php</install>
+
+ <options>gis_options.php</options>
+  
+ <fonctions>base/gis.php</fonctions>
+
+ <prefix>gis</prefix>
+	
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>gis_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insertar_head</action>
+		<inclure>gis_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>gis_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>insertar_maparticle</action>
+		<inclure>gis_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>gismot</action>
+		<inclure>gis_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>gis_pipeline.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+	<necessite id='geomap' version='[0.2;]' />
+</plugin>

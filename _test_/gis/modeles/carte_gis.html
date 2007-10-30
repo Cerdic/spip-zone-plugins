@@ -1,0 +1,12 @@
+[(#SET{width,#ENV{width,100%}})]
+[(#SET{height,#ENV{height,400px}})]
+[(#SET{id_article,#ENV{id_article}})]
+<BOUCLE_rub(ARTICLES){id_article=#ENV{id_article}}>
+[(#SET{rub2,#ID_RUBRIQUE})]
+</BOUCLE_rub>
+[(#SET{id_rubrique,#ENV{id_rubrique,#GET{rub2}}})]
+
+[(#INCLURE{fond=inc-gis_map}{id_rubrique=#GET{id_rubrique}}{id_mot}{id_auteur}
+{recherche}{id_article}{zoom}{type}{latit}{id_carte_gis}{lonxit})]
+
+<div id="map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],Spip})]" style="[width: (#GET{width});][height:(#GET{height});]"></div>
