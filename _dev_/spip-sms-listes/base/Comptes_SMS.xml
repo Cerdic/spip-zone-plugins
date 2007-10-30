@@ -100,6 +100,18 @@
 			<aide></aide>
 			<html_wrap></html_wrap>
 		</field>
+		<field>
+			<champ>ligne_4</champ>
+			<rang>7</rang>
+			<titre>Prefixe Pays par defaut</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
 	</fields>
 </form>
 </forms>

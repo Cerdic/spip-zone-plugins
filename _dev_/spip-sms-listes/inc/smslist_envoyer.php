@@ -94,6 +94,7 @@ function smslist_spool($nombre){
 }	
 
 function smslist_envoi_unitaire($compte,$from,$to,$texte, $simuler=false){
+	$prefixe_defaut="";
 	static $connexion = array();
 	if (!isset($connexion[$compte])){
 		$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($compte));
@@ -105,11 +106,16 @@ function smslist_envoi_unitaire($compte,$from,$to,$texte, $simuler=false){
 				'api_id'=>Forms_les_valeurs($row['id_form'], $compte, "ligne_2", " ",true),
 				'client_id' =>Forms_les_valeurs($row['id_form'], $compte, "ligne_3", " ",true)
 			);
+			$prefixe_defaut = Forms_les_valeurs($row['id_form'], $compte, "ligne_4", " ",true);
 		}
 	}
 	if (!isset($connexion[$compte])) return "Compte SMS $compte introuvable";
 	include_spip('inc/charsets');
 	$texte = unicode2charset($texte,'iso-8859-1');
+	
+	// mettre un prefixe pays si pas precise dans le destinataire
+	if ((substr($to,0,1)=='0') && $prefixe_defaut)
+		$to = $prefixe_defaut . substr($to,1);
 	
 	if (!$envoyer_sms = charger_fonction('envoyer_sms','inc',true))
 		return "Interface techniqe SMS introuvable (inc/envoyer_sms)";
@@ -223,7 +229,7 @@ function smslist_demon_boite_envoi($test = false){
 		$heure = Forms_les_valeurs($row['id_form'], $id_donnee, "heure_1", " ",true);
 		$message = Forms_les_valeurs($row['id_form'], $id_donnee, "joint_1", ",",true);
 		$listes = Forms_les_valeurs($row['id_form'], $id_donnee, "joint_2", ",",true);
-		$log = "#$id_donnee:$date:$heure:$message:$listes";
+		$log = "#$id_donnee/$date/$heure/$message/$listes";
 		if (strtotime("$date $heure")<$now){
 			if ($test) return true; // ok il y a des actions a faire, pas la peine de continuer
 			$log .= " Top depart";
