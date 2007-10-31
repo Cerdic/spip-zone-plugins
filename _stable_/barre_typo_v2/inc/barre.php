@@ -92,7 +92,7 @@ $tableau_formulaire = '
 </td><td>
 '._T('bartypenr:barre_langue').'&nbsp;: <input type="text" name="lien_langue" id="lien_langue'.$num_barre.'" value="" size="10" maxlength="10" />
 </td><td>
-  <input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', document.formulaire.lien_nom'.$num_barre.'.value, document.formulaire.lien_bulle'.$num_barre.'.value, document.formulaire.lien_langue'.$num_barre.'.value,'.$champ.','.$num_barre.');document.formulaire.lien_nom'.$num_barre.'.value=\'\';document.formulaire.lien_bulle'.$num_barre.'.value=\'\';document.formulaire.lien_langue'.$num_barre.'.value=\'\';" /> 
+  <input type="button" value="'._T('pass_ok').'" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', document.getElementById(\'lien_nom'.$num_barre.'\').value, document.getElementById(\'lien_bulle'.$num_barre.'\').value, document.getElementById(\'lien_langue'.$num_barre.'\').value,'.$champ.','.$num_barre.');document.getElementById(\'lien_nom'.$num_barre.'\').value=\'\';document.getElementById(\'lien_bulle'.$num_barre.'\').value=\'\';document.getElementById(\'lien_langue'.$num_barre.'\').value=\'\';" /> 
 </td></tr></table>
 ';
   return produceWharf('tableau_lien','',$tableau_formulaire); 	
