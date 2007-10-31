@@ -95,11 +95,21 @@ function sommaire_d_article($texte) {
 		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, false);
 }
 
-// fonction appelee par le traitement de #CS_SOMMAIRE
+// fonction appelee par le traitement pre_propre de #CS_SOMMAIRE
+function sommaire_sauve_notes($texte) {
+	$GLOBALS['cs_notes'][0] = $GLOBALS['les_notes'];
+	$GLOBALS['cs_notes'][1] = $GLOBALS['compt_note'];
+	return $texte;
+}
+
+// fonction appelee par le traitement post_propre de #CS_SOMMAIRE
 function sommaire_d_article_balise($texte) {
+	$GLOBALS['les_notes'] = $GLOBALS['cs_notes'][0];
+	$GLOBALS['compt_note'] = $GLOBALS['cs_notes'][1];
+	unset($GLOBALS['cs_notes']);
 	// si la balise n'est pas utilisee ou s'il n'y a aucun intertitre, on ne fait rien
 	if(!defined('_sommaire_BALISE') || (strpos($texte, '<h3')===false)) return '';
-		else return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, true);
+	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, true);
 }
 
 // on veut la balise
@@ -113,7 +123,7 @@ if (defined('_sommaire_BALISE')) {
 		} else {
 			$p->code = "''";
 		}
-		#$p->interdire_scripts = true;
+		$p->interdire_scripts = true;
 		return $p;
 	}
 }

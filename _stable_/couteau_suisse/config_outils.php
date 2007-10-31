@@ -423,6 +423,7 @@ add_outil( array(
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
 	'traitement:CS_SOMMAIRE:post_propre' => 'sommaire_d_article_balise',
+	'traitement:CS_SOMMAIRE:pre_propre' => 'sommaire_sauve_notes',
 	'categorie' => 'typo-corr',
 ));
 
