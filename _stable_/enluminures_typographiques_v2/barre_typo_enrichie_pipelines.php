@@ -32,7 +32,7 @@ $tableau_formulaire = '
 }
 
 function TypoEnluminee_BarreTypoEnrichie_toolbox($paramArray) {
-	afficher_boutonsavances($paramArray[0], $paramArray[1]);
+	$paramArray = afficher_boutonsavances($paramArray[0], $paramArray[1]);
 	return $paramArray;
 }
 
