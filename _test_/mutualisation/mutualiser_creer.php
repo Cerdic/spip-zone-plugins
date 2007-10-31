@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-$
+
 
 // http://doc.spip.org/@mutualiser_creer
 function mutualiser_creer($e, $options) {
