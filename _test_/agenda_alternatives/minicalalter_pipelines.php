@@ -26,6 +26,10 @@ function CalAlter_insert_head($flux){
 	}
 	$flux .= "
 	<style type=\"text/css\">
+		table.agenda abbr {
+			border-bottom: none;
+			cursor: help;
+		}
 		.agenda {
 			line-height:1.4em;
 		}
