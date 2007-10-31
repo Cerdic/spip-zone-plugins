@@ -49,14 +49,14 @@ function action_instituer_groupe_mots_post($id_groupe)
 	$unseul = _request('unseul');
 
 	if ($id_groupe < 0){
-		spip_query("DELETE FROM spip_groupes_mots WHERE id_groupe=" . (0- $id_groupe));
+		sql_delete("spip_groupes_mots", "id_groupe=" . (0- $id_groupe));
 	} else {
 		$change_type = (corriger_caracteres($change_type));
 		$texte = (corriger_caracteres($texte));
 		$descriptif = (corriger_caracteres($descriptif));
 
 		if ($id_groupe) {	// modif groupe
-			spip_query("UPDATE spip_mots SET type=" . _q($change_type) . " WHERE id_groupe=$id_groupe");
+			sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
 
 			spip_query("UPDATE spip_groupes_mots SET titre=" . _q($change_type) . ", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", unseul=" . _q($unseul) . ", obligatoire=" . _q($obligatoire) . ", articles=" . _q($articles) . ", breves=" . _q($breves) . ", rubriques=" . _q($rubriques) . ", syndic=" . _q($syndic) 
 			. (defined('_DIR_PLUGIN_AGENDA')?", evenements=" . _q(_request('evenements')):"") 

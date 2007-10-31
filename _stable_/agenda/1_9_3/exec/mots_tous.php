@@ -17,14 +17,6 @@ include_spip('inc/actions');
 include_spip('inc/agenda_gestion');
 include_spip('inc/pim_agenda_gestion');
 
-// compatibilite avec SPIP 1.92
-if(!function_exists('icone_inline')) {
-	// fonction placee dans inc/presentation
-	function icone_inline($texte, $lien, $fond, $fonction="", $align=""){	
-		return icone($texte, $lien, $fond, $fonction, $align);
-	}
-}
-
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
 {
@@ -63,7 +55,7 @@ function exec_mots_tous_dist()
 // On boucle d'abord sur les groupes de mots
 //
 
-	$result = spip_query("SELECT *, ".sql_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
+	$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
 
 	while ($row_groupes = sql_fetch($result)) {
 		$id_groupe = $row_groupes['id_groupe'];
@@ -119,7 +111,7 @@ function exec_mots_tous_dist()
 		// Afficher les mots-cles du groupe
 		//
 
-		$groupe = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
+		$groupe = sql_fetsel("COUNT(*) AS n", "spip_mots", "id_groupe=$id_groupe");
 		$groupe = $groupe['n'];
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
@@ -165,7 +157,7 @@ function exec_mots_tous_dist()
 // http://doc.spip.org/@confirmer_mot
 function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
-	$row = sql_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));
+	$row = sql_fetsel("*", "spip_mots", "id_mot=$conf_mot");
 	if (!$row) return ""; // deja detruit (acces concurrent etc)
 
 	$id_mot = $row['id_mot'];

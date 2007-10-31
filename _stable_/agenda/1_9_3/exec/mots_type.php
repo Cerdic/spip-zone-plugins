@@ -14,14 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// compatibilite avec SPIP 1.92
-if(!function_exists('icone_inline')) {
-	// fonction placee dans inc/presentation
-	function icone_inline($texte, $lien, $fond, $fonction="", $align=""){	
-		return icone($texte, $lien, $fond, $fonction, $align);
-	}
-}
-
 // http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type_dist()
 {
@@ -44,7 +36,7 @@ function exec_mots_type_dist()
 	  $row = array();
 	} else {
 
-		$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
+		$result_groupes = sql_select("*", "spip_groupes_mots", "id_groupe=$id_groupe");
 
 		if ($row = sql_fetch($result_groupes)) {
 			$id_groupe = $row['id_groupe'];
@@ -73,8 +65,7 @@ function exec_mots_type_dist()
 	    !autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 	
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -111,7 +102,7 @@ function exec_mots_type_dist()
 	  . entites_html($descriptif)
 	  . "</textarea>\n";
 
-	$res .= "<br /><label for='texte'><b>"._T('info_texte_explicatif')."</b><label><br />";
+	$res .= "<br /><label for='texte'><b>"._T('info_texte_explicatif')."</b></label><br />";
 	$res .= "<textarea name='texte' id='texte' rows='8' class='forml' cols='40'>";
 	$res .= entites_html($texte);
 	$res .= "</textarea>\n";
@@ -216,7 +207,6 @@ function exec_mots_type_dist()
 	),
 	fin_gauche(),
 	fin_page();
-
+	}
 }
-
 ?>
