@@ -1,0 +1,23 @@
+<plugin>
+    <!-- Nom du plugin -->
+    <nom>pipeline_ajouter_document</nom>
+
+    <!-- Auteur du plugin -->
+    <auteur>la zone</auteur>
+    <version>0.1</version>
+    <etat>stable</etat>
+    <icon></icon>
+    <description> Permet d'ajouter un pipeline dans ajouter_document(), non natif en 192.</description>
+    <!-- URI de documentation -->
+    <lien></lien>
+
+    <!-- precise le prefixe utilis+ pour toutes les fonctions du plugin, en general le nom du plugin -->
+    <prefix>pipeline_ad</prefix>
+
+
+   <!-- précise les dependances vis-a-vis de d'autres plugins -->
+   <necessite id="spip" version="[1.92;1.93(" />
+   
+   <chemin dir='' />
+
+</plugin>
