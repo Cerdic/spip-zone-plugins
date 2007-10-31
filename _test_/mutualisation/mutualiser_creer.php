@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+$
 
 // http://doc.spip.org/@mutualiser_creer
 function mutualiser_creer($e, $options) {
@@ -87,8 +87,8 @@ function mutualiser_creer($e, $options) {
 							.'</h3>'
 						);
 						if ($options['mail']) {
-							include_spip('inc/envoyer_mail');
-							envoyer_mail($options['mail'],
+							$mail = charger_fonction('envoyer_mail', 'inc');
+							$mail($options['mail'],
 								_L('Creation de la base de donn&#233;es '._INSTALL_NAME_DB),
 								_L('La base de donn&#233;es '._INSTALL_NAME_DB.' a &#233;t&#233; cr&#233;&#233;e pour le site '.$e),
 								$options['mail']
@@ -174,8 +174,8 @@ function mutualiser_creer($e, $options) {
 			);
 
 			if ($options['mail']) {
-				include_spip('inc/envoyer_mail');
-				envoyer_mail($options['mail'],
+				$mail = charger_fonction('envoyer_mail', 'inc');
+				$mail($options['mail'],
 					_L('Creation du site '.joli_repertoire($e)),
 					_L('Les r&#233;pertoires du site '.$e.' ont &#233;t&#233; cr&#233;&#233;s.'),
 					$options['mail']
