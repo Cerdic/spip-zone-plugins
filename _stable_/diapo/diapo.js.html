@@ -34,8 +34,8 @@ $.fn.diapo_mode = function() {
 			$("#"+mDiapo+" div.diapo img.diapo_grand").show();
 			diapo_on=!diapo_on;
 			center=true;
-			if (mId=="diapo_ico") $(this).addClass("play").html('<:diapo:ico_diapo_pause:>');
-			else $(this).removeClass("play").html('<:diapo:ico_diapo_play:>');
+			if (mId=="diapo_ico") $(this).attr("class","diapo_ico play").html('<:diapo:ico_diapo_play:>');
+			else $(this).attr("class","diapo_ico").html('<:diapo:ico_diapo_pause:>');
 			setTimeout('diaposlide(#DIAPO_TEMPS,mDiapo)', #DIAPO_TEMPS);
 		}else if (mId=="diapo_icoleft"){
 			$("#"+mDiapo+" .diapo_pagination").show();
@@ -81,7 +81,7 @@ $.fn.diapo_pagination = function() {
 		tab=$(this).attr('href').split('#');
     	i=tab[0].lastIndexOf('debut')
     	if (i>0)
-			pagin="?"+tab[0].substring(i,(tab[0].indexOf('=',i)))+"="+tab[0].substring((tab[0].indexOf('=',i)+1),tab[0].length);	
+			pagin="?"+tab[0].substring(i,(tab[0].indexOf('=',i)))+"="+tab[0].substring((tab[0].indexOf('=',i)+1),tab[0].length);
     	$.get("spip.php"+pagin,
     			{page : mPage, id_article : mid_article, align : malign},
     			function(txt){
@@ -94,7 +94,7 @@ $.fn.diapo_pagination = function() {
     				$("#diapo"+mid_article+" .diapo_icones a").diapo_mode();
 					$("#diapo"+mid_article+" .diapo_menu a.lien_pagination").diapo_pagination();
 					$("#diapo"+mid_article+" .diapo_vignette a").diapo_vignette();
-					$("#diapo"+mid_article+" .diapo_icones .selected").click();	
+					$("#diapo"+mid_article+" .diapo_icones .selected").click();
     			});
 		return false;
     });
@@ -131,7 +131,7 @@ $(document).ready(function(){
 	});
 	$(".diapo_icones .selected").each(function(){
 		if ($(this).attr('class')=='diapo_ico selected play') $(this).click();
-	});	
-	
-	
+	});
+
+
 });
