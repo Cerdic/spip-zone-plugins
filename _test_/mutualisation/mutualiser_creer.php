@@ -174,7 +174,7 @@ function mutualiser_creer($e, $options) {
 			);
 
 			if ($options['mail']) {
-				include_spip('inc/mail');
+				include_spip('inc/envoyer_mail');
 				envoyer_mail($options['mail'],
 					_L('Creation du site '.joli_repertoire($e)),
 					_L('Les r&#233;pertoires du site '.$e.' ont &#233;t&#233; cr&#233;&#233;s.'),
