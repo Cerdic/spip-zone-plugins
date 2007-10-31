@@ -355,6 +355,18 @@ function afficher_barre($champ, $forum=false, $lang='') {
 form_dirty = false;
 warn_onunload = true;
 
+/* ChainHandler, py Peter van der Beken
+-------------------------------------------------------- */
+function chainHandler(obj, handlerName, handler) {
+        obj[handlerName] = (function(existingFunction) {
+                return function() {
+                        handler.apply(this, arguments);
+                        if (existingFunction)
+                                existingFunction.apply(this, arguments);
+                };
+        })(handlerName in obj ? obj[handlerName] : null);
+};
+
 $(document).ready(function(){';
 	 if (!$forum) {
 	 $ret .= '
@@ -375,10 +387,15 @@ $(document).ready(function(){';
 	$('.$champ.').click(function() { MajStats('.$num_barre.',"'.$champ.'") });';
 	 }
 	 $ret .= '
-	$(window).bind("beforeunload", function(e) { 
-		if ( (warn_onunload == true) && (form_dirty == true) ) {
-			e.returnValue = \'Quitter la page sans sauvegarder ?\' 
+	chainHandler(window,\'onbeforeunload\',function(e) { 
+		if (e == undefined && window.event) {
+	                e = window.event;
 		}
+		if ( (warn_onunload == true) && (form_dirty == true) ) {
+			e.returnValue = \'Quitter la page sans sauvegarder ?\';
+			return \'Quitter la page sans sauvegarder ?\'; 
+		}
+		return false;
 	} );
 	$("form").submit ( function() {warn_onunload=false;} );
 	$('.$champ.')
