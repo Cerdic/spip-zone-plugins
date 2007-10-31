@@ -1,0 +1,99 @@
+[
+(#REM)
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en octobre 2007
+***Affichage du contenu d'une séance et de ses devoirs cette noisette prend le paramètre suivant (en GET):
+id_article= n° de la séance. Ce paramètre est obligatoire
+-->]
+#CACHE{300}
+[
+(#REM) Affiche une séance
+]
+<BOUCLE_Seances(ARTICLES){id_article}>
+	<BOUCLE_Auteur_Seances(AUTEURS){id_article}>
+<div id="documents">
+			<h3 class="titre">#TITRE</h3>
+			<div class="#_Seances:EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le texte de cette séance"]>#TEXTE</div>
+		<B_Documents_Seances>
+			<div>
+				<h4 class="devoirs">Documents joints à la séance</h4>
+		<BOUCLE_Documents_Seances(DOCUMENTS){id_article}{"&nbsp;|"}>
+				<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]</span> <span class="#EDIT{titre}"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le titre du document"]>[(#TITRE|sinon{#FICHIER|basename})]</span> (#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])
+		</BOUCLE_Documents_Seances>
+			</div>
+		</B_Documents_Seances>
+[
+(#REM) Si c'est une séance écrite par le prof qui visite il peut faire des tas de trucs à la séance
+]
+[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})
+	<div class="bloc_auteur">
+		<a href="#URL_PAGE{cahier-de-texte-saisie,id_article=#ID_ARTICLE}" title="Copier le contenu de cette séance pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer cette séance</a>
+		&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-saisie,&id_article=#ID_ARTICLE}|parametre_url{'effacer_fiche','a_confirmer'})]" title="Effacer cette fiche: séance et devoirs (c'est définitif !)"><img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer la fiche de cette séance</a>
+		&nbsp;| <span class="replie">
+				<a class="clic" title="ajouter des documents joints à cette séance">
+					<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">
+				Ajouter des documents à cette séance
+				</a>
+				<span class="bloc_doc">
+					<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
+					Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
+					Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
+					[(#ID_ARTICLE|afficher_documents_colonne)]
+				</span>
+			</span>
+	</div>
+][
+(#REM) On affiche les devoirs (in-extenso)
+]
+[
+(#REM) On commence par un gros hack pour éviter une Regexp dans la requête SQL: on cherche les numéros d'articles dans le PS de l'article et on les mets dans un tableau
+]#SET{virgule,","}[(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
+		<B_Trouve_Infos_Devoirs_id_article>
+			<hr>
+			<h4 class="devoirs">Devoirs donnés&nbsp;:</h4>
+			<div>
+		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_article IN #GET{liste_des_devoirs}}>
+				<div class="#EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez sur ce texte pour modifier le texte de ce devoir"]>
+					<h5 class="devoirs">Pour le [(#DATE|affdate)]&nbsp;: </h5>
+					#TEXTE
+			<B_Documents_Devoir>
+					<div>
+						Documents joints à ce devoir&nbsp;: 
+			<BOUCLE_Documents_Devoir(DOCUMENTS){id_article}{"&nbsp;|"}>			<span class="#EDIT{fichier}">
+							[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]
+						</span> 
+						<span class="#EDIT{titre}"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})  title="double cliquez ici pour modifier le titre du document"]>
+							[(#TITRE|sinon{#FICHIER|basename})]
+						</span> 
+						([(#TAILLE|taille_en_octets)]) 
+			</BOUCLE_Documents_Devoir>
+					</div>
+			</B_Documents_Devoir>
+[
+(#REM) Si c'est une séance écrite par le prof qui visite il peut rajouter des docs au devoir
+]
+[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})
+					<div class="bloc_auteur">
+						<span class="replie">
+							<a class="clic" title="ajouter des documents joints à ce devoir">
+								<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">ajouter des documents à ce devoir pour le [(#DATE|affdate)]
+							</a>
+							<span class="bloc_doc">
+								<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
+								Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
+								Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
+							[(#ID_ARTICLE|afficher_documents_colonne)]
+							</span>
+						</span>
+					</div>
+]
+				</div>
+		</BOUCLE_Trouve_Infos_Devoirs_id_article>
+			</div>
+		</B_Trouve_Infos_Devoirs_id_article>
+		</div>
+	</BOUCLE_Auteur_Seances>
+</BOUCLE_Seances>

@@ -13,7 +13,6 @@ id_auteur= l'id_auteur d'un auteur (un professeur)
 date_debut=début de la période considérée (sinon c'est depuis le début de l'année en cours)
 date_debut=fin de la période considérée (sinon c'ets jusqu'en 9999, ce qui devrait suffire jusqu'au bug de l'an 10000)
 Les dates sont au format YYYY-MM-DD
-seances_seules= si c'est argument est donné alors les devoirs ne s'affichent pas.
 devoirs_seuls= si cet argument est donné, alors seuls les devoirs s'affichent.
 Si les deux arguments sont données (seances_seules et devoirs_seul rien ne s'affiche !)
 annee_scolaire= définit quelle année scolaire (sous le format XXXX%2FYYYY comme par exemple 2006%2F2007). Si ce n'est pas défini, c'est l'année scolaire la plus récente qui s'affiche. Note: %2F est un slash (/) encodé pour aller dans l'url.
@@ -59,8 +58,6 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 
 			<h1>Cahier de texte (#NOM_SITE_SPIP)</h1>
 			<br class="clear" />
-[(#ENV{seances_seules}|?{' ',''})
-			<h2>Description des séances (sans les devoirs)</h2>]
 [(#ENV{devoirs_seuls}|?{' ',''})
 		<h2>Devoirs à faire</h2>]
 		<p>[Classe de (#ENV{classe}) ][(#ENV{groupe}) ][en (#ENV{matiere}) ]<B_Prof>Professeur&nbsp;: <BOUCLE_Prof(AUTEURS){id_auteur}>#NOM</BOUCLE_Prof></p>
@@ -95,97 +92,7 @@ if (!($_GET['devoirs_seuls'])) {
 <div class="apres"><a href="[(#SELF|parametre_url{'senschrono',[(#ENV{senschrono}|?{0,1})]})]" title="inverser l'ordre de classement des séances">inverser l'ordre chronologique</a></div><br clear="all" />
 #ANCRE_PAGINATION
 <BOUCLE_Seances(ARTICLES){id_rubrique}{!doublons QueSeances}{par #ENV{tri}}{pagination #ENV{nb,20}}{par date}{inverse #ENV{senschrono}}>
-	<BOUCLE_Auteur_Seances(AUTEURS){id_article}{0,1}>
-		<div id="documents">
-			<h3 class="titre">#TITRE</h3>
-			<div class="#_Seances:EDIT{texte} texte"<?php
-if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) echo " title=\"double cliquez ici pour modifier le texte de cette séance\"";
-			?>>#TEXTE</div>
-		<B_Documents_Seances>
-			<div>
-				<h4 class="devoirs">Documents joints à la séance</h4>
-		<BOUCLE_Documents_Seances(DOCUMENTS){id_article}{"&nbsp;|"}>
-				<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]</span> <span class="#EDIT{titre}"<?php
-if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) echo " title=\"double cliquez ici pour modifier le titre du document\"";
-			?>>[(#TITRE|sinon{#FICHIER|basename})]</span> (#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])
-		</BOUCLE_Documents_Seances>
-			</div>
-		</B_Documents_Seances>
-<?php
-//Si c'est une séance écrite par le prof qui visite il peut faire des tas de trucs à la séance
-if ('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) {?>
-	<div class="bloc_auteur">
-		<a href="#URL_PAGE{cahier-de-texte-saisie,id_article=#ID_ARTICLE}" title="Copier le contenu de cette séance pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer cette séance</a>
-		&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-saisie,&id_article=#ID_ARTICLE}|parametre_url{'effacer_fiche','a_confirmer'})]" title="Effacer cette fiche: séance et devoirs (c'est définitif !)"><img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer la fiche de cette séance</a>
-		&nbsp;| <span class="replie">
-				<a class="clic" title="ajouter des documents joints à cette séance">
-					<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">
-				Ajouter des documents à cette séance
-				</a>
-				<span class="bloc_doc">
-					<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
-					Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
-					Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
-					[(#ID_ARTICLE|afficher_documents_colonne)]
-				</span>
-			</span>
-	</div><?php
-}//fin du if auteur?>[
-(#REM) Si on ne demande que les séances (donc pas les devoirs)
-
-][
-(#REM) On commence par un gros hack pour éviter une Regexp dans la requête SQL: on cherche les numéros d'articles dans le PS de l'article et on les mets dans un tableau
-]#SET{virgule,","}[(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
-		<B_Trouve_Infos_Devoirs_id_article>
-			[(#ENV{seances_seules}|?{'',' '})<hr>
-			<h4 class="devoirs">Devoirs donnés&nbsp;:</h4>
-			<div>]
-		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_article IN #GET{liste_des_devoirs}}>
-			[(#ENV{seances_seules}|?{'',' '})				<div class="#EDIT{texte} texte"]<?php
-if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{seances_seules}|texte_script)]')) echo " title=\"double cliquez sur ce texte pour modifier le texte de ce devoir\"";?>>[(#ENV{seances_seules}|?{'',' '})
-					<h5 class="devoirs">Pour le [(#DATE|affdate)]&nbsp;: </h5>
-					#TEXTE]
-			<B_Documents_Devoir>
-[(#ENV{seances_seules}|?{'',' '})					<div>
-						Documents joints à ce devoir&nbsp;: ]
-			<BOUCLE_Documents_Devoir(DOCUMENTS){id_article}{"&nbsp;|"}>[(#ENV{seances_seules}|?{'',' '})			<span class="#EDIT{fichier}">
-							[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]
-						</span> 
-						<span class="#EDIT{titre}"]<?php
-if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{seances_seules}|texte_script)]')) echo " title=\"double cliquez ici pour modifier le titre du document\"";?>[(#ENV{seances_seules}|?{'',' '})>
-							[(#TITRE|sinon{#FICHIER|basename})]
-						</span> ]
-[(#ENV{seances_seules}|?{'',' '})						([(#TAILLE|taille_en_octets)]) ]
-			</BOUCLE_Documents_Devoir>
-[(#ENV{seances_seules}|?{'',' '})					</div>]
-			</B_Documents_Devoir>
-<?php
-//Si c'est une séance écrite par le prof qui visite il peut rajouter des docs au devoir
-if (('[(#ID_AUTEUR|texte_script)]'==$auteur_session['id_auteur']) and (!'[(#ENV{seances_seules}|texte_script)]')) {?>
-					<div class="bloc_auteur">
-						<span class="replie">
-							<a class="clic" title="ajouter des documents joints à ce devoir">
-								<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">ajouter des documents à ce devoir pour le [(#DATE|affdate)]
-							</a>
-							<span class="bloc_doc">
-								<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
-								Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
-								Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
-							[(#ID_ARTICLE|afficher_documents_colonne)]
-							</span>
-						</span>
-					</div>
-<?php
-}//fin du if auteur
-?>
-[(#ENV{seances_seules}|?{'',' '})
-				</div>]
-		</BOUCLE_Trouve_Infos_Devoirs_id_article>
-			[(#ENV{seances_seules}|?{'',' '})
-			</div>]
-		</B_Trouve_Infos_Devoirs_id_article>
-		</div>
-	</BOUCLE_Auteur_Seances>
+		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}>
 </BOUCLE_Seances>
 [<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
 </B_Seances>
@@ -235,16 +142,14 @@ if (($_GET['devoirs_seuls'])) {
 				[(#ENV{id_auteur}|?{'',<td>})]
 				<BOUCLE_profs(AUTEURS){id_article}{"&nbsp;- "}>[(#ENV{id_auteur}|?{'',#NOM})]</BOUCLE_profs>
 				[(#ENV{id_auteur}|?{'',</td>})]
-				<td>
-<?php
-// selectionne juste la date dans le PS qui contient un texte plus decriptif (Donné Le DATE, en MATIERE avec les CLASSES (GROUPES))
-		$pour_le='[(#PS)]';
-		$debut=strpos ($pour_le,"e ")+1;
-		$fin=strpos ($pour_le,",")-$debut;
-		$coupe=substr($pour_le,$debut,$fin);
-		$lien=substr($pour_le,0,strpos ($pour_le,">")+1);
-		echo "				".$lien.$coupe."</a>";
-?>
+				<td>[
+
+(#REM) On cherche ne l'id de la séance au cours de laquelle le devoir a été donné, puis on affiche un lien vers se devoir (la date de la séance).
+
+][(#SET{id_seance,[(#PS*|bonbon_matches_id_article)]})]
+				<BOUCLE_Seance_de_devoir(ARTICLES){id_article=#GET{id_seance}}>
+				<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,id_article=#ID_ARTICLE})]" title="Afficher les détails de la séance au cours de laquelle le devoir a été donné" target="_blank">[(#DATE|affdate)]</a>
+				</BOUCLE_Seance_de_devoir>
 				</td>
 			</tr>
 </BOUCLE_Devoirs>

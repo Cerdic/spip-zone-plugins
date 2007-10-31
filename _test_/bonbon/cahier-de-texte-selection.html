@@ -1,12 +1,14 @@
 #CACHE{600}
+[(#REM)
 <!--
 *****Cahier de texte pour Spip: Bonbon !
 *****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
 *****Sous licence GPL (enfin bon, c'est bonbonware...)
 *****CopyLeft en juin 2007
 ***Selection des éléments à faire afficher par cahier-de-texte-affichage
--->
-<!-- Javascript du calendrier en pop-up-->
+-->]
+<!--Formulaire pour les requêtes précises-->
+	<!-- Javascript du calendrier en pop-up-->
 <script type="text/javascript" src="#DOSSIER_SQUELETTE/CalendarPopup.js"></script>
 <SCRIPT LANGUAGE="JavaScript">
 //paramètres pour la fenêtre pop-up
@@ -89,7 +91,7 @@
 			</fieldset>
 </BOUCLE_CDT_entier>
 		</div>
-			<input type="Submit" value="Afficher la sélection" name="afficher"> <input type='Submit' value="N'afficher que les devoirs" name='devoirs_seuls'> <input type='Submit' value="N'afficher que les séances" name='seances_seules'>
+			<input type="Submit" value="Afficher les séances" name="afficher"> <input type='Submit' value="N'afficher que les devoirs" name='devoirs_seuls'>
 		</center>
 	</form>
 

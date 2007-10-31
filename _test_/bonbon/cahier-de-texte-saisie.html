@@ -307,7 +307,7 @@ if ($contenu_devoir[0]!="") {
 			$nom_rub_annee=$num_annee."/".($num_annee+1);
 		}
 ?>
-<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>#SET{id_rub_annee,#ID_RUBRIQUE}
 [(#REM)Vérifier si il existe déjà une sous rubrique du cahier de texte pour l'année en cours]
 	<BOUCLE_Verifie_RubriqueAnnee(RUBRIQUES){id_parent}{tout}><?php if ('[(#TITRE|texte_script)]'==$nom_rub_annee) {$everything_ok=1; $id_rub_cdt='[(#ID_RUBRIQUE|texte_script)]';}
 //id_rub_cdt contient l'id de la sous-rubrique pour l'année en cours?>
@@ -432,8 +432,11 @@ if ($contenu_devoir[0]!="") {
 		$result = spip_query($sql);
 		echo ("<!--update ps: $result-->\n");
 ?>
-			<p>Vous pourrez enregistrer des documents joints à vos séances et à vos devoirs en affichant le contenu de cahier de texte (voir plus bas «afficher ses séances»)</p>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
+			<p><a href="#URL_PAGE{cahier-de-texte-affichage-seance}&id_article=<?php echo ($id_contenu_seance); ?>" title="visualiser et ajouter des documents joints à cette séance ou ses devoirs" target="_blank">
+					<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">
+				Visualiser et/ou ajouter des documents à cette séance et ses devoirs
+				</a></p>
 			<p><a href="#URL_PAGE{cahier-de-texte-saisie}&id_article=<?php echo ($id_contenu_seance); ?>" title="Faire une copie de la séance que vous venez de saisir, pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer la séance pour une autre classe/groupe</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-saisie}<?php
 	echo ("&id_matiere=$id_matiere");
 	for ($count=0; $count<=$classes; $count++) {
@@ -441,7 +444,7 @@ if ($contenu_devoir[0]!="") {
 	};
 	if ($classes>0) echo ("&classes=$classes");
 			?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une autre fiche</a>&nbsp;| <a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo($auteur_session['id_auteur']);?>" title="Afficher les séances que l'on a déjà saisies"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a>&nbsp;|<a href="#URL_PAGE{cahier-de-texte-accueil}" title="retour à l'accueil"><img src="#CHEMIN{images/logo-mini2-22.png}" alt="icône" vspace="2" align="middle">Retourner à l'accueil</a></p>
-		</div>
+		</div>		
 	</div></div>
 
 [(#REM)Inclusion du pied de page]

@@ -1,0 +1,37 @@
+#CACHE{0}
+<!--
+*****Cahier de texte pour Spip: Bonbon !
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en octobre 2007
+***Affiche le contenu d'une séance et de ses devoirs dans une fenêtre externe (target="_blank").
+Cette page prend le paramètre suivant (en GET):
+id_article= n° de la séance. Ce paramètre est obligatoire
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>#NOM_SITE_SPIP: Visualisation d'une séance</title>
+
+[
+(#REM)Inclusion du pied de page
+]
+<INCLURE{fond=cahier-de-texte-en-tete}>
+
+</head>
+<body>
+<div id="NoMenu">
+	<div id="Contenu">
+
+<BOUCLE_no_seance(ARTICLES){id_article}>
+	<BOUCLE_seance_auteur(AUTEURS){id_article}{0,1}>
+		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}{id_auteur=#ID_AUTEUR}>
+	</BOUCLE_seance_auteur>
+</BOUCLE_no_seance>
+		<center>
+			<input type='button' value='Fermer cette fenêtre (revenir au cahier de texte)' onClick='self.close()' name="button">
+		</center>
+	</div>
+</div>
+</body>
+</html>

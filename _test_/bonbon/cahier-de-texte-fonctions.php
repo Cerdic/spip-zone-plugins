@@ -11,8 +11,10 @@ function bonbon_matches_id_article ($a_matcher) {
 	preg_match_all ("/->(\d+?)\]/",$a_matcher,$matches);
 	$key = key($matches[1]);
 	$val = current($matches[1]);
+	$virgule="";
 	while(list ($key, $val) = each ($matches[1])) {
-	$sortie .= $val.",";
+	$sortie .= $virgule.$val;
+	if ($virgule=="") $virgule=",";
  	};
 	return $sortie;
 }
