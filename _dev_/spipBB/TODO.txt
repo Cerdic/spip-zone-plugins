@@ -7,3 +7,4 @@ Todo-list pour spipbb
 -* utilisation des idees utilisees dans Gafospip
 -* compter les visites sur les messages
 -* j'en oublie sûrement
+-* lien entre autre et la liste des messages qu'il a publie

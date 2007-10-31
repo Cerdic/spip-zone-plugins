@@ -3,6 +3,9 @@
 // fonction de répartition de la variable date "brute" renvoyée par #MAJ (aaaa-mm-jj hh:mm:ss)
 // en jj-mm-aaaa
 // NB 31/08/2006 17:28:58
+
+if (!function_exists('spip_num_rows')) include_spip('inc/vieilles_defs');
+
 function date_maj($maj_brute)
 {
 $anneeMaj=substr($maj_brute,0,4);

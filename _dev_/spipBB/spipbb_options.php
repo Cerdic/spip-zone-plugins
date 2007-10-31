@@ -25,7 +25,7 @@
 			// tous : par defaut
 			'tous' =>  'Localisation|Emploi|Loisirs|Numero_ICQ|Nom_AIM|Nom_Yahoo|Nom_MSNM|signature',
 			// les inscrits non admin ont de quoi se faire un avatar, équivalent au logo des auteurs.
-			'6forum' => 'Localisation|Emploi|Loisirs|Numero_ICQ|avatar|signature'
+			'6forum' => 'Localisation|Emploi|Loisirs|Numero_ICQ|Nom_AIM|Nom_Yahoo|Nom_MSNM|avatar|signature'
 			)
 	);
 
