@@ -26,10 +26,10 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 	$action = str_replace("\"","&quot;",$action);
 	return "<a href=\"javascript:"
 		.$action
-		."\"\n class='spip_barre' tabindex='1000' title=\""
+		."\"\n tabindex='1000' title=\""
 		. $a
 		."\"" 
-		.(!_DIR_RESTREINT ? '' :  " onmouseover=\"helpline('"
+		.(test_espace_prive() ? '' :  " onmouseover=\"helpline('"
 		  .addslashes(str_replace('&#39;',"'",$a))
 		  ."',$champhelp)\" onmouseout=\"helpline('"
 		  .attribut_html(_T('barre_aide'))
@@ -224,18 +224,19 @@ $tableau_formulaire = '
 
 // http://doc.spip.org/@afficher_barre
 function afficher_barre($champ, $forum=false, $lang='') {
-	global $spip_lang, $spip_lang_right, $spip_lang_left, $spip_lang;
+	global $spip_lang, $spip_lang_right, $spip_lang_left;
 	static $num_barre = 0;
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
 	if (!$lang) $lang = $spip_lang;
+	$num_barre++;
+	$champhelp = "document.getElementById('barre_$num_barre')";
+
 	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
-	$ret = ($num_barre > 0)  ? '' :
+	$ret = ($num_barre > 1)  ? '' :
 	  $layer_public . '<script type="text/javascript" src="' . find_in_path('javascript/spip_barre.js').'"></script>';
 
 
-	$num_barre++;
-	$champhelp = "document.getElementById('barre_$num_barre')";
 
 
  // Pregeneration des toolzbox.. (wharfing)
@@ -244,15 +245,15 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_ancre($champ, $num_barre);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp, $num_barre);
 //un pipeline pour ajouter une toolbox
-    $params=array($champ,$champhelp,$spip_lang, $num_barre);
-    $add=pipeline("BarreTypoEnrichie_toolbox",$params);
+    $params = array($champ,$champhelp,$spip_lang, $num_barre);
+    $add = pipeline("BarreTypoEnrichie_toolbox", $params);
     if ($params!=$add)
 		$toolbox .= $add;
 
 //
 
-	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
-	$ret .= "\n<tr style='width: auto;' class='spip_barre'>";
+	$ret .= "<table class='spip_barre' cellpadding='0' cellspacing='0' border='0'>";
+	$ret .= "\n<tr>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 	$col = 1;
 
@@ -330,22 +331,22 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= "</td>";
 	$col++;
 
-	if (!_DIR_RESTREINT) {
-		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
+	if (test_espace_prive()) {
+		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
 		$col++;
 		if (!$forum) {
 			$ret .= bouton_barre_racc("toggle_preview($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
 			$ret .= bouton_barre_racc("toggle_stats($num_barre,'".str_replace("'","\\'",$champ)."');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/stats.png", _T('bartypenr:barre_stats'), $champhelp);
 		}
-		$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$ret .= aide("raccourcis");
+		$ret .= "&nbsp;";
 		$ret .= "</td>";
 	}
 	$ret .= "</tr>";
 
 	// Sur les forums publics, petite barre d'aide en survol des icones
-	if (_DIR_RESTREINT)
-		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' id='barre_$num_barre' size='45' maxlength='100' style='width:auto; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
+	if (!test_espace_prive())
+		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' class='barre' id='barre_$num_barre' size='45' maxlength='100'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
 
 	$ret .= "</table>";
 	 $ret .= $toolbox;
