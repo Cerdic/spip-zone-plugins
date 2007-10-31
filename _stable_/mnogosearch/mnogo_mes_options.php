@@ -171,9 +171,9 @@ function hash_where($recherche=NULL, $c=false){
 	if ((substr($vers['v'], 0, 1) >= 4
 		AND substr($vers['v'], 2, 1) >= 1 )
 		OR substr($vers['v'], 0, 1) >= 5)
-		return  "HEX(hash)='$h'";
-	else
 		return "hash=0x$h";
+	else
+		return  "HEX(hash)='$h'";
 }
 
 function mnogo_checkresults($recherche, $debut, $nombre, $c=false){
