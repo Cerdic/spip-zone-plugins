@@ -343,6 +343,19 @@ add_outil( array(
 	'auteur' => '[Arnaud Ventre->ventrea@gmail.com]',
 ));
 
+add_variable( array(
+	'nom' => 'max_auteurs_page',
+	'format' => 'nombre',
+	'defaut' => 30,
+	'code:%s' => "@define('MAX_AUTEURS_PAR_PAGE', %s);",
+));
+add_outil( array(
+	'id' => 'stats_rapides',
+	'code:options' => "%%max_auteurs_page%%",
+	'categorie' => 'admin',
+	'pipeline:affiche_droite' => 'stats_rapides_affiche_droite',
+));
+
 //-----------------------------------------------------------------------------//
 //                               fonctions                                     //
 //-----------------------------------------------------------------------------//

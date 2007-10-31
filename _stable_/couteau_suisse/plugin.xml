@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Le Couteau Suisse</nom>
 	<icon>img/couteau-50.gif</icon>
-	<version>1.7.9.03</version>
+	<version>1.7.9.04</version>
 	<auteur>Patrice Vanneufville
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
@@ -41,52 +41,46 @@ Compatibilit&#233; : SPIP version 1.9 minimum.
 		il est donc a reserver pour des plugins qui ne sont pas utilises en production de preference
 		-->
 		<nom>affichage_final</nom>
-		<action>affichage_final</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<action>insert_head</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_onglets</nom>
-		<action>ajouter_onglets</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<action>header_prive</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_gauche</nom>
-		<action>affiche_gauche</action>
+		<inclure>cout_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>nettoyer_raccourcis_typo</nom>
-		<action>nettoyer_raccourcis_typo</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>pre_propre</nom>
-		<action>pre_propre</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>pre_typo</nom>
-		<action>pre_typo</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_propre</nom>
-		<action>post_propre</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_typo</nom>
-		<action>post_typo</action>
 		<inclure>cout_pipelines.php</inclure>
 	</pipeline>
 </plugin>

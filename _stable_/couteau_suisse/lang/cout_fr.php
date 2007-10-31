@@ -381,6 +381,19 @@ _ Merci de votre compr&eacute;hension.",
 	'liens_en_clair:description' => "Met &agrave; votre disposition le filtre : 'liens_en_clair'. Votre texte contient probablement des liens hypertexte qui ne sont pas visibles lors d'une impression. Ce filtre ajoute entre crochets la destination de chaque lien cliquable (liens externes ou mails). Attention : en mode impression (parametre 'cs=print' ou 'page=print' dans l'url de la page), cette fonctionnalit&eacute; est appliqu&eacute;e automatiquement.",
 
 // ---------------------------------------------------------------------------
+	'stats_rapides:nom' => 'Les auteurs en stat',
+	'stats_rapides:description' => "Un cadre d'informations suppl&eacute;mentaires sur [la page des auteurs->".generer_url_ecrire('auteurs')."]
+- les 10 derniers connect&eacute;s
+- les inscriptions non confirm&eacute;es.
+
+D&eacute;finissez ci-dessous le nombre maximal d'auteurs &agrave; afficher sur cette page.
+[[Auteurs par page->%max_auteurs_page%]]",
+	'derniers_connectes' => '10 derniers connect&eacute;s :',
+	'non_confirmes' => 'Non confirm&eacute;s :',
+	'stats_auteur' => '@icon@ @nom@, le&nbsp;@date@',
+	'attente_confirmation' => "En attente de confirmation",
+
+// ---------------------------------------------------------------------------
 	'blocs:nom' => 'Blocs D&eacute;pliables',
 	'blocs:description' => "Vous permet  de cr&eacute;er des blocs dont le titre cliquable peut les rendre visibles ou invisibles.\n\n#PUCE {{Dans les textes SPIP}} : les r&eacute;dacteurs ont &agrave; disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; &agrave; utiliser dans leurs textes comme ceci : 
 

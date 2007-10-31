@@ -32,58 +32,17 @@ function cs_admin_styles_et_js() {
 	echo <<<EOF
 <style type='text/css'>$a
 
-div.cadre-padding form{
-	padding:0;
-	margin:0;
-}
+.cs_hidden { display:none; }
+div.cadre-padding form{ padding:0; margin:0; }
+div.cadre_padding form{	padding:0; margin:0; }
+div.cs_infos { }
+div.cs_infos p { margin:0.3em 1em 0.3em 0pt; padding:0pt; }
+div.cs_infos h3.titrem { border-bottom:solid 1px; font-weight:bold; display:block; }
+div.cs_infos legend { font-weight:bold; }
+div.cs_infos fieldset {	margin:.8em 4em .5em 4em; /* -moz-border-radius:8px; */ }
+div.cs_infos sup { font-size:85%; font-variant:normal; vertical-align:super; }
+div.cs_infos hr { border:0; border-top:1px solid #67707F; }
 
-div.cadre_padding form{
-	padding:0;
-	margin:0;
-}
-
-div.cs_infos {
-}
-
-div.cs_infos h3.titrem {
-	border-bottom:solid 1px;
-	font-weight:bold;
-	display:block;
-}
-
-div.cs_infos p {
-	margin:0.3em 1em 0.3em 0pt;
-	padding:0pt;
-}
-
-div.cs_infos hr {
-	border-top:1px solid #67707F;
-	border-bottom:0;
-	border-left:0;
-	border-right:0;
-}
-
-div.cs_infos p {
-	margin:0.3em 1em .3em 0;
-	padding:0;
-}
-
-div.cs_infos fieldset {
-	margin:.8em 4em .5em 4em;
-/*	-moz-border-radius:8px; */
-}
-
-div.cs_infos legend {
-	font-weight:bold;
-}
-
-div.cs_infos sup {
-	font-size:85%;
-	font-variant:normal;
-	vertical-align:super;
-}
-
-/* V2.0 */
 .conteneur {
 	clear:both;
 	width:100%;
@@ -131,9 +90,6 @@ div.categorie span {
 }
 div.categorie span.light {
 	font-weight:normal;
-}
-.cs_hidden {
-	display:none;
 }
 
 </style>

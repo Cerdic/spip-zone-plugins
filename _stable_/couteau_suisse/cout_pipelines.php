@@ -62,6 +62,12 @@ function couteau_suisse_affiche_gauche($flux){
 */
 	return $flux;
 }
+function couteau_suisse_affiche_droite($flux){
+	global $cs_metas_pipelines;
+	if (isset($cs_metas_pipelines['affiche_droite']))
+		eval($cs_metas_pipelines['affiche_droite']);
+	return $flux;
+}
 
 
 function couteau_suisse_header_prive($flux){
