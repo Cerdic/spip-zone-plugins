@@ -43,7 +43,11 @@
 <option value="#ID_MOT"[ selected="(#ENV{spipbb_id_mot_annonce}|=={#ID_MOT}|?{selected})"]>#ID_MOT . #TITRE</option>
 </BOUCLE_mot_annonce>
 </select>
-
+<select name="spipbb_id_mot_postit">
+<BOUCLE_mot_postit(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
+<option value="#ID_MOT"[ selected="(#ENV{spipbb_id_mot_postit}|=={#ID_MOT}|?{selected})"]>#ID_MOT . #TITRE</option>
+</BOUCLE_mot_postit>
+</select>
 	<br />
 	<i><:spipbb:choix_mots_selection:></i>
 </label>

@@ -1,7 +1,7 @@
 <?php
 #-----------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                   #
-#  File    : spipbb_init - plugin init/test/del       #
+#  File    : spipbb_upgrade - plugin init/test/del    #
 #  Authors : Chryjs, 2007 et als                      #
 #  Contact : chryjs¡@!free¡.!fr                       #
 #-----------------------------------------------------#
@@ -29,7 +29,7 @@ switch ($action) {
 	return ( isset($GLOBALS['meta']['spipbb']) AND isset($GLOBALS['spipbb']['version']) AND ($GLOBALS['spipbb']['version']>= $GLOBALS['spipbb_version'] ) );
 	break;
  case 'install' :
-	spipbb_upgrade();
+	spipbb_upgrade_all();
 	break;
  case 'uninstall' :
 	spipbb_delete_metas();
@@ -38,13 +38,9 @@ switch ($action) {
 
 } /* spipbb_install */
 
-// [fr] rend disponible l'icone de désinstallation, ca doit certainement permettre d'effacer les fichiers et autres
-function spipbb_uninstall(){
-}
-
 // [fr] Met a jour la version et initialise les metas
 // [en] Upgrade release and init metas
-function spipbb_upgrade()
+function spipbb_upgrade_all()
 {
 	$version_code = $GLOBALS['spipbb_version'] ;
 	if ( isset($GLOBALS['meta']['spipbb'] ) )
@@ -72,7 +68,7 @@ function spipbb_upgrade()
 		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 	}
 
-	spip_log('spipbb : spipbb_upgrade OK');
-} /* spipbb_upgrade */
+	spip_log('spipbb : spipbb_upgrade_all OK');
+} /* spipbb_upgrade_all */
 
 ?>

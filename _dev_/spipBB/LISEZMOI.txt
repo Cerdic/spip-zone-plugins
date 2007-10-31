@@ -1,4 +1,4 @@
-Pour le moment (23 9 2007) ce plugin est en dev donc inutilisable ou a vos risques et perils...
+Pour le moment (23 9 2007) ce plugin est en dev donc a tester a vos risques et perils...
 
 Tout est importe au depart de _squelettes_/forum_spipBB/dev/ 
 
@@ -11,3 +11,9 @@ Fonctionnalites :
 -* A priori le mode de fonctionnement choisi risque de rendre spipbb incompatible avec le plugin squelettes_par_mots_cle -> a faire evoluer. Voir si on peut surcharger la fonction public_styliser pour uniquement prendre en compte la partie concernant spipbb (voir commentaires) pour que les squelettes soient chargés en priorité avant le traitement normal (dist).
 
 
+Simplifcation de l'ajout de modules d'administration
+- dans exec/
+- nommer chaque module spipbb_admin_XXXXX.php avec XXXX == nom du module
+- ajouter les quelques lignes donnees en exemple dans inc/spipbb.php spipbb_admin_gauche
+- utiliser la presentation et la fonction spipbb_admin_gauche avec comme parametre le nom du module, qui permet la gestion du menu
+- ajouter les nom de l'action (et de categorie si nouvelle) dans lang/spip_XX.php (voir lettre A)

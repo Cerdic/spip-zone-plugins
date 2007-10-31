@@ -7,7 +7,7 @@
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version>
-		0.10
+		0.13
 	</version>
 	<etat>
 		experimental
@@ -23,14 +23,28 @@ _ if you have CFG : [Configure->.?exec=cfg&amp;cfg=spipbb] You must visit it to 
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/spip.php?article2460</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
 	<fonctions>spipbb_fonctions.php</fonctions>
 	<options>spipbb_options.php</options>
-	<install>base/spipbb_init.php</install>
+	<install>base/spipbb_upgrade.php</install>
 	<prefix>spipbb</prefix>
 	<pipeline>
-		<nom>ajouter_boutons</nom>
+		<nom>affiche_droite</nom> <!-- [fr]point d entree [en] entry point -->
+		<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.0.0;]" />
 	<chemin dir='' />
+
+	<bouton id='spipbb_admin' parent='forum'>
+		<icone>img_pack/spipbb-24.png</icone>
+		<titre>SpipBB</titre>
+		<url>spipbb_admin</url>
+	</bouton>
+	<bouton id='spipbb_config' parent='configuration'>
+		<icone>img_pack/spipbb-24.png</icone>
+		<titre>SpipBB</titre>
+		<url>cfg</url>
+		<args>cfg=spipbb</args>
+	</bouton>
 </plugin>

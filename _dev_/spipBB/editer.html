@@ -104,7 +104,7 @@ if ($forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') {
                                         <input type="hidden" name="email_auteur" value="<? echo $email_auteur; ?>" />
                                         <fieldset class="previsu">
                                                 <legend><:spip:previsualisation:></legend>
-                                                <p>[<strong>(#ENV*{titre})</strong>][<em> - (#ENV*{auteur}|supprimer_numero|couper{80})</em>]</p>
+                                                <p>[<strong>(#ENV*{titre})</strong>][<em> - (#ENV*{auteur}|couper{80})</em>]</p>
                                                 [(#ENV*{texte}|lignes_longues|spipbb_chatons)]
                                                 [<p><a [href="(#ENV{url_site}|attribut_html)"] class="spip_out">(#ENV*{nom_site}|sinon{#ENV{url_site}|couper{80}})</a></p>]
                                                 </fieldset>

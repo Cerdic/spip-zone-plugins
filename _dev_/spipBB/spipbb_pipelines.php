@@ -19,15 +19,29 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_SPIPBB',(_DIR_PLUGINS.end($p)));
+//$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+//define('_DIR_PLUGIN_SPIPBB',(_DIR_PLUGINS.end($p)));
+//die("spipbb_pipelines");
 
-function spipbb_ajouter_boutons($boutons_admin) {
-	// si on est admin
-	if ($GLOBALS['connect_statut'] == "0minirezo") {
-		$boutons_admin['configuration']->sousmenu['cfg&cfg=spipbb']= new Bouton('../'._DIR_PLUGIN_SPIPBB.'/img_pack/spipbb-24.gif', _T('spipbb:titre_spipbb') );
+function spipbb_affiche_droite($flux) {
+// [fr] Peut etre ajouter un controle d acces
+// [fr] On accede a la migration de pages vers de nouveaux articles uniquement au sein d une rubrique
+// [en] Todo : maybe add access control
+// [en] Access is only allowed within a rubrique
+$spipbb_meta = @unserialize($GLOBALS['meta']['spipbb']);
+	if (($flux['args']['exec']=='naviguer') AND (!empty($spipbb_meta)) AND
+	    ($flux['args']['id_rubrique']==$spipbb_meta['spipbb_id_rubrique']) ) {
+		$url_lien = generer_url_ecrire('spipbb_fromphpbb', "id_rubrique=".$flux['args']['id_rubrique']) ;
+		$flux['data'] .= debut_cadre_relief('',true);
+		$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('spipbb:fromphpbb_titre') . " :</b>\n";
+		$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
+		$flux['data'] .= "<tr><td><a href='$url_lien' class='cellule-h'><span class='cell-i'>" ;
+		$flux['data'] .= "<img src='"._DIR_IMG_PACK ."article-24.gif' width='24' alt='";
+		$flux['data'] .= _T('spipbb:fromphpbb_surtitre') . "' /></span></a></td>\n" ;
+		$flux['data'] .= "<td class='cellule-h-lien'><a href='$url_lien' class='cellule-h'>" ;
+		$flux['data'] .= _T('spipbb:fromphpbb_sous_titre') . "</a></td></tr></table>\n</div>\n" ;
+		$flux['data'] .= fin_cadre_relief(true);
 	}
-	return $boutons_admin;
+	return $flux;
 }
-
 ?>

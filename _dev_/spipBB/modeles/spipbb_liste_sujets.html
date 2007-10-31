@@ -1,4 +1,16 @@
-ï»¿<B_messages>
+#CACHE{0}
+<BOUCLE_forum_principal(ARTICLES){id_article}>
+[(#REM) On recupere le mot cle fermant les forums]
+#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
+[(#REM) on regarde si l'article/forum est ferme ]
+#SET{forumferme,0}
+<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
+#SET{forumferme,1}
+</BOUCLE_etat>
+[(#REM) On recupere le mot cle identifiant les annonces]
+#SET{id_mot_annonce,#CONFIG{spipbb/spipbb_id_mot_annonce}}
+
+<B_messages>
 [<div class="pagination"> <!-- Section présentant la pagination -->
 	<div class="navigapage"> <!-- Section de la liste de page -->
 		<p class="nav">(#PAGINATION)</p>
@@ -16,10 +28,58 @@
 	</tr>
 	</thead>
 
-<BOUCLE_messages(FORUMS){id_article}{par date_thread}{inverse}{pagination 25}> 
+	[(#SET{messageferme,[(#GET{forumferme}|=={0}|?{' ',
+	<tr class="forum_clos">
+		<td colspan=5><:spipbb:forum_ferme:></td>
+	</tr>
+	})]
+	})]
+	#GET{messageferme}
 
+[(#REM) Les annonces en premier]
+<BOUCLE_messages_annonce(FORUMS){id_article}{par date_thread}{inverse}{pagination 25}{id_mot=#GET{id_mot_annonce}}{doublons annonces}>
+	<!-- BEGIN topicrow_a -->
+	<tr>
+		<td class='etatsuj annpost'>&nbsp;<span><:spipbb:annonce:></span>&nbsp;</td>
+		<td class="titre" id="forum#ID_FORUM">
+			<BOUCLE_sujet_a(FORUMS){id_thread}>
+			[<a href="(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ID_FORUM})">
+			#TITRE
+			</a>]
+			</BOUCLE_sujet_a>
+		</td>
+		<td class="msgpost">
+			<BOUCLE_reponses_a(FORUMS){id_thread}{plat}{exclus}></BOUCLE_reponses_a>
+			#TOTAL_BOUCLE
+			<//B_reponses_a>
+		</td>
+		<td class="autpost">
+			<BOUCLE_auteurp_a(AUTEURS){id_auteur}{tout}>
+			<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
+			</BOUCLE_auteurp_a>
+			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
+			<//B_auteurp_a>
+		</td>
+		<td class="dermsg">
+		<BOUCLE_dernier_message_a(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>
+			[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]<br />
+			<B_auteurpr_a>
+			<:par_auteur:>
+			<BOUCLE_auteurpr_a(AUTEURS){id_auteur}{tout}>
+			<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
+			</BOUCLE_auteurpr_a></B_auteurpr_a>
+			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
+			<//B_auteurpr_a> 
+			<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ENV{id_forum}})]#forum#ID_FORUM"class="adermsg" title="<:spipbb:messages_voir_dernier:>">
+			&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span></a>
+		</BOUCLE_dernier_message_a> - <//B_dernier_message_a>
+		</td>
+	</tr>
+	<!-- END topicrow_a -->
+</BOUCLE_messages_annonce>
+<BOUCLE_messages(FORUMS){id_article}{!par date_thread}{pagination 25}{doublons annonces}>
 	<!-- BEGIN topicrow -->
-	<tr> 
+	<tr>
 		<td class='etatsuj normpost'>&nbsp;<span><:message:></span>&nbsp;</td>
 		<td class="titre" id="forum#ID_FORUM">
 			<BOUCLE_sujet(FORUMS){id_thread}>
@@ -33,23 +93,30 @@
 			#TOTAL_BOUCLE
 			<//B_reponses>
 		</td>
-		<td class="autpost"><BOUCLE_auteurp(AUTEURS){id_auteur}{tout}><a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM</a></BOUCLE_auteurp><a href="mailto:[(#EMAIL|antispam)]">
-		[(#NOM|sinon{<:spipbb:anonyme:>})]</a><//B_auteurp></td>
+		<td class="autpost">
+			<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+			<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
+			</BOUCLE_auteurp>
+			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
+			<//B_auteurp>
+		</td>
 		<td class="dermsg">
 		<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>
 			[(#DATE|nom_jour)] [(#DATE|affdate),] [(#DATE|heures)]:[(#DATE|minutes)]<br />
-			<:par_auteur:><B_auteurpr><BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
-			<a href="spip.php?page=profil_BB&amp;id_auteur=#ID_AUTEUR&amp;id_article=#ID_ARTICLE">#NOM</a>
+			<B_auteurpr>
+			<:par_auteur:>
+			<BOUCLE_auteurpr(AUTEURS){id_auteur}{tout}>
+			<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
 			</BOUCLE_auteurpr></B_auteurpr>
 			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
 			<//B_auteurpr> 
-			<a href="spip.php?page=voirsujet&amp;id_forum=<?php echo $id_forum?>#forum#ID_FORUM"class="adermsg" title="<:spipbb:messages_voir_dernier:>">
+			<a href="[(#URL_PAGE{voirsujet}|parametre_url{id_forum,#ENV{id_forum}})]#forum#ID_FORUM"class="adermsg" title="<:spipbb:messages_voir_dernier:>">
 			&nbsp;<span>(<:spipbb:messages_voir_dernier:>)</span></a>
 		</BOUCLE_dernier_message> - <//B_dernier_message>
 		</td>
 	</tr>
 	<!-- END topicrow -->
-	</BOUCLE_messages>
+</BOUCLE_messages>
 
 </table><!--Fin table spipforum-->
 
@@ -75,5 +142,5 @@
 	</tr>
 </table><!--Fin table spipforum-->
 <!-- END switch_no_topics -->
-
 <//B_messages>
+</BOUCLE_forum_principal>

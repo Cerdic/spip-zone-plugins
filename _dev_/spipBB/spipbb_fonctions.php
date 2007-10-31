@@ -293,7 +293,7 @@ global $table_prefix;
 
 /*
  *   +----------------------------------+
- *    Nom du Filtre :    citation                                            
+ *    Nom du Filtre :    citation
  *   +----------------------------------+
  *    BASE : ... Date : vendredi 11 novembre 2006 - Auteur :  BoOz
  *    

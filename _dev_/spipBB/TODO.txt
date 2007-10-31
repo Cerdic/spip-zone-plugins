@@ -1,12 +1,9 @@
 Todo-list pour spipbb
 ---------------------
 
-
--* nettoyer le code avec les correctifs deja publies
 -* simplifier encore l'installation
 -* améliorer l'"administration" des forums (interface privee)
 -* nettoyer les squelettes
 -* utilisation des idees utilisees dans Gafospip
 -* compter les visites sur les messages
 -* j'en oublie sûrement
-

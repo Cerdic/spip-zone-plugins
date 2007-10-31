@@ -1,5 +1,6 @@
-<BOUCLE_rubrique_principal(RUBRIQUES){id_secteur}{id_parent=0}>
-
+#CACHE{0}
+<BOUCLE_rubrique_parcourue(RUBRIQUES){id_rubrique}>
+<BOUCLE_rubrique_principale(RUBRIQUES){id_secteur}{racine}>
 	<B_categories>
 	<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
 	<table summary="index" class="spipforum">
@@ -14,14 +15,18 @@
 	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
 		<tbody[ id="salon(#ID_RUBRIQUE)"]>
 		<tr class="salon">
-			<td colspan="2" class="salontitre">[<h2><a href="#URL_RUBRIQUE">(#TITRE)</a></h2>][<p>(#INTRODUCTION)</p>]</td>
-			<td colspan="3" class="salonreste">&nbsp;</td>
+			<td colspan="5" class="salontitre">[<h2><a href="#URL_RUBRIQUE">(#TITRE)</a></h2>][<p>(#INTRODUCTION)</p>]</td>
 		</tr>
+	#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
 	<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
+		#SET{forumferme,0}
+		<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>
+		#SET{forumferme,1}
+		</BOUCLE_etat>
 		<tr class="forumligne">
-			<td class="etatfor[ (#ACCEPTER_FORUM|=={non}|?{fermefor,ouvfor})]">
+			<td class="etatfor[ (#GET{forumferme}|=={0}|?{fermefor,ouvfor})]">
 				<span>
-				[(#ACCEPTER_FORUM|=={non}|?{<:spipbb:forum_ferme:>,<:titre_forum:>})]
+				[(#GET{forumferme}|=={0}|?{<:spipbb:forum_ferme:>,<:titre_forum:>})]
 				</span>
 			</td>
 			<td class="titre">
@@ -36,7 +41,7 @@
 			<td class="msgpost">#TOTAL_BOUCLE</td>
 			<//B_messages>
 			<td class="dermsg">
-			#MODELE{spipbb_dernier_message} 
+			[(#MODELE{spipbb_dernier_message}{id_article})]
 			</td>
 		</tr>
 	</BOUCLE_forums>
@@ -44,5 +49,5 @@
 	</BOUCLE_categories>
 	</table>
 	</B_categories>
-
-</BOUCLE_rubrique_principal>
+</BOUCLE_rubrique_principale>
+</BOUCLE_rubrique_parcourue>

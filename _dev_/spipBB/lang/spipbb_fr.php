@@ -71,6 +71,10 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admseparer_forum' => 'Diviser ce forum',
 'article_forum' => ' Article / Forum<br />',
 'aucun' => 'aucun !',
+'admin_cat_general' => 'Administration',
+'admin_action_index' => 'Index de l\'administration',
+'admin_cat_outils' => 'Outils',
+'admin_action_fromphpbb' => 'Import de PhpBB',
 
 // B
 'bio' => 'Petite biographie',
@@ -126,6 +130,17 @@ par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a><br />
 'forum_ouvrir' => 'Ouvrir ce Forum',
 'forum_selection' => 'dans le FORUM (article) &agrave; s&eacute;lectionner :',
 'forum_vers' => 'Vers le Forum ...',
+'fromphpbb_surtitre' => 'fromphpbb surtitre',
+'fromphpbb_titre' => 'Import d\'un forum PhpBB',
+'fromphpbb_sous_titre' => 'D&eacute;marrage d\'une migration d\'un forum PhpBB vers SpipBB',
+'fromphpbb_parametres_titre' => 'Informations sur la base phpBB',
+'fromphpbb_login' => 'Identifiant',
+'fromphpbb_password' => 'Mot de passe',
+'fromphpbb_base' => 'Nom de la base',
+'fromphpbb_prefix' => 'Pr&eacute;fixe des tables',
+'fromphpbb_racine' => 'Chemin vers phpBB',
+'fromphpbb_choix_test' => 'Import &agrave; blanc',
+'fromphpbb_sous_choix_test' => '(param&egrave;tre obligatoire)',
 
 //G
 'gaf_titre' => 'GAFoSPIP<br />Gestion Alternative des Forums',

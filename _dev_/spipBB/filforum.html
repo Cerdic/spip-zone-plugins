@@ -1,4 +1,4 @@
-#CACHE{86400}
+#CACHE{0}
 <BOUCLE_article_principal(ARTICLES) {id_article}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
@@ -33,9 +33,7 @@
 
 	#MODELE{spipbb_chemindefer}
 
-	<?php $tableau = array(); //permet de stocker les pieds de discussion ?>
-
-	[(#MODELE{spipbb_liste_sujets})]
+	[(#MODELE{spipbb_liste_sujets}{id_article})]
 
 	#GET{affbouton}
 
