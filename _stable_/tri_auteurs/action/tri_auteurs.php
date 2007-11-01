@@ -19,6 +19,7 @@
 
 
 function action_tri_auteurs() {
+  include_spip('inc/securiser_action');
   $hash = intval(_request('hash'));
   $id_article = intval(_request('id_article'));
 
