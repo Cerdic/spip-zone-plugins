@@ -19,6 +19,7 @@
 
 
 function action_tri_mots() {
+  include_spip('inc/securiser_action');
   $redirect = _request('redirect');
   $hash = _request('hash');
   $order = _request('order');
