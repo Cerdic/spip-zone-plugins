@@ -66,6 +66,21 @@
         </div>
         </B_rubriques>
 
+        [(#REM) Documents trouves ]
+        <B_documents>
+        <div class="menu documents">
+           #ANCRE_PAGINATION
+           <h2><:documents:> (#GRAND_TOTAL)</h2>
+           <dl>
+               <BOUCLE_documents(DOCUMENTS) {recherche} {par points}{inverse} {pagination 5}>
+               <dt><a href="#URL_DOCUMENT">#TITRE</a></dt>
+               [<dd class='extrait-recherche'>(#EXTRAIT)</dd>]
+               </BOUCLE_documents>
+           </dl>
+        [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
+        </div>
+        </B_documents>
+	
         [(#REM) Mots-cles trouves ]
         <B_mots>
         <div class="menu">

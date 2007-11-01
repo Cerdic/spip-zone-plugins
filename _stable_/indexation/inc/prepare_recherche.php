@@ -96,15 +96,16 @@ function inc_prepare_recherche($recherche, $table='articles', $cond=false) {
 			} else {
 				$listes_ids = array();
 				$select = '0';
+				$table_abreg = preg_replace("{^spip_}","",$ttable);
 				foreach ($scores as $id => $score)
 					$listes_ids[$score] .= ','.$id;
 				foreach ($listes_ids as $p => $liste_ids)
 					$select .= "+$p*(".
-					calcul_mysql_in($primary, substr($liste_ids, 1))
+					calcul_mysql_in("$table_abreg.$primary", substr($liste_ids, 1))
 					.") ";
 
 				$cache[$recherche][$ttable] = array($select,
-					'('.calcul_mysql_in($primary, array_keys($scores)).')'
+					'('.calcul_mysql_in("$table_abreg.$primary", array_keys($scores)).')'
 					);
 			}
 		}}
