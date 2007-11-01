@@ -87,7 +87,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$out .=  "<div class='agenda_mots_cles'>";
 		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
 		$sep = "";
-		while ($row = mysql_fetch_array($res,MYSQL_ASSOC)){
+		while ($row = spip_fetch_array($res,MYSQL_ASSOC)){
 			$id_groupe = $row['id_groupe'];
 			$row2 = sql_fetch(
 						spip_query("SELECT mots.titre FROM spip_mots_evenements AS mots_evenements

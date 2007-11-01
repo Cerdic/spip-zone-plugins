@@ -44,7 +44,7 @@ function balise_FORMULAIRE_EDITION_EVENEMENT_dyn($id_evenement = 0, $id_article 
 	
 	// les champs
 	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement="._q($id_evenement)." AND id_article="._q($id_article));
-	if ($row = mysql_fetch_array($res,MYSQL_ASSOC)){
+	if ($row = spip_fetch_array($res,MYSQL_ASSOC)){
 		$evenement_action='evenement_modif';
 		foreach($row as  $k=>$val){
 			$valeurs["evenement_$k"]=$val;

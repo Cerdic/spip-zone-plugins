@@ -167,7 +167,7 @@ function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 		// les mots cles : par groupes
 		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
 		$liste_mots = array();
-		while ($row = mysql_fetch_array($res,MYSQL_ASSOC)){
+		while ($row = spip_fetch_array($res,MYSQL_ASSOC)){
 			$id_groupe = $row['id_groupe'];
 			$id_mot_a = _request("evenement_groupe_mot_select_$id_groupe",$c); // un array
 			if (is_array($id_mot_a) && count($id_mot_a)){

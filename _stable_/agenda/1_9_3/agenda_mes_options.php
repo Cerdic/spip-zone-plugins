@@ -16,7 +16,7 @@ function cron_agenda_nettoyer_base($t){
 		        LEFT JOIN spip_articles AS articles
 		          ON evenements.id_article=articles.id_article
 		       WHERE articles.id_article IS NULL");
-	while ($row = mysql_fetch_array($res,MYSQL_ASSOC))
+	while ($row = spip_fetch_array($res,MYSQL_ASSOC))
 		spip_query("DELETE FROM spip_evenements
 		WHERE id_evenement=".$row['id_evenement']
 		." AND id_article=".$row['id_article']);
@@ -28,7 +28,7 @@ function cron_agenda_nettoyer_base($t){
 		          ON mots_evenements.id_evenement=evenements.id_evenement
 		       WHERE evenements.id_evenement IS NULL");
 
-	while ($row = mysql_fetch_array($res,MYSQL_ASSOC))
+	while ($row = spip_fetch_array($res,MYSQL_ASSOC))
 		spip_query("DELETE FROM spip_mots_evenements
 		WHERE id_mot=".$row['id_mot']
 		." AND id_evenement=".$row['id_evenement']);
