@@ -42,13 +42,14 @@ function exec_agenda_evenements_dist(){
 		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 	}
 
-  $out = debut_page($titre, "redacteurs", "calendrier","",$css);
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	$out = $commencer_page($titre, "redacteurs", "calendrier","",$css);
 	$out .= barre_onglets("calendrier", "evenements");
 
 	$out .= "<div>";
 	if ($ajouter_id_article){
 		$res2 = spip_query("SELECT * FROM spip_articles AS articles WHERE id_article="._q($ajouter_id_article));
-		if ($row2 = spip_fetch_array($res2)){
+		if ($row2 = sql_fetch($res2)){
 			$out .= "<div style=' width:750px; font-size: 18px; color: #9DBA00; font-weight: bold;text-align:left;'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
 			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' style='border:none;'");

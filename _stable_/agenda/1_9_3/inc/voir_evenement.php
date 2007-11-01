@@ -9,7 +9,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 
 	if ($id_evenement!=NULL){
 		$res = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement="._q($id_evenement));
-		if ($row = spip_fetch_array($res)){
+		if ($row = sql_fetch($res)){
 			if (!isset($neweven)){
 				$fid_evenement=$row['id_evenement'];
 				$ftitre=attribut_html(typo($row['titre']));
@@ -23,7 +23,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 			}
 	 	}
 		$res2 = spip_query("SELECT articles.* FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement="._q($id_evenement));
-		if ($row2 = spip_fetch_array($res2)){
+		if ($row2 = sql_fetch($res2)){
 			$out .= "<div class='article-evenement'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
 			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' style='border:none;'");
@@ -87,9 +87,9 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$out .=  "<div class='agenda_mots_cles'>";
 		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
 		$sep = "";
-		while ($row = spip_fetch_array($res,SPIP_ASSOC)){
+		while ($row = mysql_fetch_array($res,MYSQL_ASSOC)){
 			$id_groupe = $row['id_groupe'];
-			$row2 = spip_fetch_array(
+			$row2 = sql_fetch(
 						spip_query("SELECT mots.titre FROM spip_mots_evenements AS mots_evenements
 								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
 								WHERE mots.id_groupe="._q($id_groupe).
@@ -109,9 +109,9 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$out .= "<div class='repetitions-calendrier'>";
 		$id_source = $fid_evenement_source?$fid_evenement_source:$id_evenement;
 		$res2 = spip_query("SELECT * FROM spip_evenements WHERE id_evenement="._q($id_source)." OR id_evenement_source="._q($id_source)." ORDER BY date_debut");
-		if (spip_num_rows($res2)>1){
+		if (sql_count($res2)>1){
 			$out .= _T('agenda:evenement_autres_occurences');
-			while($row2 = spip_fetch_array($res2)){
+			while($row2 = sql_fetch($res2)){
 				if ($row2['id_evenement']!=$fid_evenement){
 					$url = parametre_url(self(),'id_evenement',$row2['id_evenement']);
 					$out .= " <a href='$url'>" . affdate_jourcourt($row2['date_debut']) ."</a>";
@@ -122,7 +122,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 	
 		if ($fid_evenement_source!=0){
 			$res2 = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement="._q($fid_evenement_source));
-			if ($row2 = spip_fetch_array($res2)){
+			if ($row2 = sql_fetch($res2)){
 				$url = parametre_url($url,'id_evenement',$row2['id_evenement']);
 			  $out .= "<div class='edition-bouton'>";
 			  $out .= _T('agenda:repetition_de')." <a href='";

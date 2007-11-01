@@ -133,11 +133,11 @@ function Agenda_verifie_les_mots_clefs($mots_envoyes) {
  	$les_mots_ok = $mots_compiles = array();
 	// on recupere tous les mots cles sur les evenements
 	$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui'");
-	while ($row = spip_fetch_array($res,SPIP_ASSOC)){
+	while ($row = sql_fetch($res,MYSQL_ASSOC)){
 		$id_groupe = $row['id_groupe'];
 		$titre = supprimer_numero($row['titre']);
 		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe="._q($id_groupe));
-		while ($row2 = spip_fetch_array($res2,SPIP_ASSOC)){
+		while ($row2 = sql_fetch($res2,MYSQL_ASSOC)){
 			$les_mots_ok[]=array(	'nb'=>0, 'id_mot'=>$row2['id_mot'], 'titre_mot'=> $row2['titre'],
 											'id_groupe'=>$id_groupe, 'titre_groupe'=> $titre,
 											'echo' => $titre.':'.$row2['titre']);
@@ -191,10 +191,10 @@ function Agenda_formulaire_saisie_rapide_previsu() {
 					$rep_date_fin = $rep_date_debut + $date_fin - $date_debut;
 					$s_rep .= Agenda_afficher_date_evenement($rep_date_debut, $rep_date_fin, $horaire)."<br/>";
 				}
-				$s .= "<br/><div style=\"\">".bouton_block_invisible("repetitions_evenement_rapide_{$id_eve}");
+				$s .= "<br/><div style=\"\">".debut_block_depliable(false, "repetitions_evenement_rapide_{$id_eve}");
 				if ($c>1) $s .= _T('agenda:nb_repetitions', array('nb' => $c));
 					else $s .= _T('agenda:une_repetition');
-				$s .= debut_block_invisible("repetitions_evenement_rapide_{$id_eve}");
+				$s .= debut_block_depliable(false, "repetitions_evenement_rapide_{$id_eve}");
 				$s .= $s_rep;
 				$s .= fin_block().'</div>';
 			}
@@ -203,10 +203,10 @@ function Agenda_formulaire_saisie_rapide_previsu() {
 			$vals[] = $lieu;
 			$s = '';
 			if ($c = count($eve['evenement_groupe_mot_select'])){
-				$s .= "<br/>".bouton_block_invisible("mots_evenement_rapide_{$id_eve}");
+				$s .= "<br/>".debut_block_depliable(false, "mots_evenement_rapide_{$id_eve}");
 				if ($c>1) $s .= _T('agenda:nb_mots_clefs', array('nb' => $c));
 					else $s .= _T('agenda:un_mot_clef');
-				$s .= debut_block_invisible("mots_evenement_rapide_{$id_eve}");
+				$s .= debut_block_depliable(false, "mots_evenement_rapide_{$id_eve}");
 				$s .= implode(", ", $eve['evenement_groupe_mot_select']);
 				$s .= fin_block();
 			}

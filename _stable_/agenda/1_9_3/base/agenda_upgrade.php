@@ -27,7 +27,7 @@
 				spip_query("ALTER TABLE spip_evenements ADD `id_article` bigint(21) DEFAULT '0' NOT NULL AFTER `id_evenement`");
 				spip_query("ALTER TABLE spip_evenements ADD INDEX ( `id_article` )");
 				$res = spip_query ("SELECT * FROM spip_evenements_articles");
-				while ($row = spip_fetch_array($res)){
+				while ($row = sql_fetch($res)){
 					$id_article = $row['id_article'];
 					$id_evenement = $row['id_evenement'];
 					spip_query("UPDATE spip_evenements SET id_article=$id_article WHERE id_evenement=$id_evenement");

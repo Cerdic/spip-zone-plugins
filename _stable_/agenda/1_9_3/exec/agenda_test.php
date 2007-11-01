@@ -25,7 +25,7 @@ function exec_agenda_test_dist()
 	gros_titre(_L('Tests pour la saisie rapide et l\'affichage des dates'));
 	echo '<br />';
 
-	$un_mot = spip_fetch_array(spip_query("SELECT titre FROM spip_mots"));
+	$un_mot = sql_fetch(spip_query("SELECT titre FROM spip_mots"));
 	$test0 = '04/05/2001 20 - 05/05 22 "m&ecirc;me mois" REP=1/1,2/1 MOTS='.$un_mot['titre'].',mot2
 	04/05/01 20	-	05/05 :30 "m&ecirc;me mois" "toto" "titi" MOTS=mot REP=1/1
 	1/7 "Vacances !" "ici" "et l&agrave;..." REP=2,3,4,5,6

@@ -28,7 +28,7 @@ function inc_voir_agenda($flag_editable){
 		}
 		else { // date de l'evenement
 			$res = spip_query("SELECT date_debut FROM spip_evenements WHERE id_evenement="._q($id_evenement));
-			if ($row = spip_fetch_array($res))
+			if ($row = sql_fetch($res))
 				$stamp=strtotime($row['date_debut']);
 			else 
 				$stamp=time();
@@ -71,7 +71,7 @@ function inc_voir_agenda($flag_editable){
 	$urlbase=parametre_url($urlbase,'annee',$annee);
 	$urlbase=parametre_url($urlbase,'mois',$mois);
 	$urlbase=parametre_url($urlbase,'jour',$jour);
-	while ($row = spip_fetch_array($res)) if (autoriser('voir','evenement',$row['id_evenement'])) {
+	while ($row = sql_fetch($res)) if (autoriser('voir','evenement',$row['id_evenement'])) {
 		$is_evt=($row['horaire']!='oui')
 						||($row['date_debut']<$datestart && $row['date_fin']>$datefin);
 		$concerne=(!$ajouter_id_article) || ($ajouter_id_article==$row['id_article']);
