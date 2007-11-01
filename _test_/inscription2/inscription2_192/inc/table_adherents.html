@@ -141,8 +141,8 @@ function confirm(msg,callback) {
 	
 	//supprimer un auteur
 	if(!empty($id) and $act=='sup'){
-		$row = spip_fetch_array(spip_query("select statut from spip_auteurs where id_auteur='$id'"));
-		
+		$row = spip_fetch_array(spip_query("select a.statut, b.id as 'id_auteur_elargi' from spip_auteurs a, spip_auteurs_elargis b where a.id_auteur='$id' AND a.id_auteur=b.id_auteur"));
+		//var_dump($row);die();
 		if($row['statut'] !='0minirezo' and $row['statut'] !='1commite')
 			spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id'");
 
@@ -152,10 +152,18 @@ function confirm(msg,callback) {
                 if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
                     spip_query("DELETE FROM spip_zones_auteurs WHERE id_auteur='$id'");
 
+                /*
                 if(defined('_DIR_PLUGIN_SPIPLISTES'))
                     spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur='$id'");
+                */    
+                    
+                 if(defined('_DIR_PLUGIN_ABONNEMENT')){
+                   spip_query("DELETE FROM spip_auteurs_elargis_abonnements WHERE id_auteur_elargi='".$row['id_auteur_elargi']."'"); 
+                   spip_query("DELETE FROM spip_auteurs_elargis_articles WHERE id_auteur_elargi='".$row['id_auteur_elargi']."'");  
+                 }     
 	}
 
+	/* un peu dangereux ca...
 	//nettoyer la table
 	if($act=='net'){
 		$desc = spip_abstract_showtable('spip_auteurs_elargis', '', true);
@@ -166,7 +174,8 @@ function confirm(msg,callback) {
 				$a = spip_query('ALTER TABLE spip_auteurs_elargis DROP COLUMN '.$cle);
 		}
 	}
-
+	*/
+	
 	$lettre = array();
 		$qlettre = spip_query(
 	'select distinct upper(left(a.nom,1)) l, count(*) from spip_auteurs a left join spip_auteurs_elargis b on a.id_auteur = b.id_auteur group by l order by l');
@@ -237,6 +246,7 @@ function confirm(msg,callback) {
 	echo '<td><a href="#"><strong>Produit</strong></a></td>';
 	echo '<td><a href="#"><strong>&Eacute;ch&eacute;ance / quantit&eacute;</strong></a></td>';
 	$table_auteurs[] = 'b.statut_abonnement';
+	$table_auteurs[] = 'b.statut_paiement';
 	}
 	
 	echo '<td colspan="3" style="text-align:center;"><strong><a href="'.$url.'&amp;ordre=statut&amp;desc='.$desc.'">'._T('inscription2:action_adherent').'</a></strong></td>';
@@ -273,7 +283,11 @@ function confirm(msg,callback) {
 		 $class='even';
 		 }
 		 //var_dump($data);die();
-		 if(!empty($data['statut_abonnement'])) $class = $data['statut_abonnement'] ;
+		 if(!empty($data['statut_abonnement'])){
+		  $class = $data['statut_abonnement'] ;
+		  if($data['statut_paiement'] == 'erreur_bank') $class = $data['statut_paiement'] ;
+		 }
+		
 		
 		if($data['statut']=='0minirezo')
 			$url_logo = '"'._DIR_PLUGIN_INSCRIPTION2.'/images/admin-12.gif"';
