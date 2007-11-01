@@ -133,11 +133,11 @@ function Agenda_verifie_les_mots_clefs($mots_envoyes) {
  	$les_mots_ok = $mots_compiles = array();
 	// on recupere tous les mots cles sur les evenements
 	$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui'");
-	while ($row = sql_fetch($res,MYSQL_ASSOC)){
+	while ($row = mysql_fetch_array($res,MYSQL_ASSOC)){
 		$id_groupe = $row['id_groupe'];
 		$titre = supprimer_numero($row['titre']);
 		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe="._q($id_groupe));
-		while ($row2 = sql_fetch($res2,MYSQL_ASSOC)){
+		while ($row2 = mysql_fetch_array($res2,MYSQL_ASSOC)){
 			$les_mots_ok[]=array(	'nb'=>0, 'id_mot'=>$row2['id_mot'], 'titre_mot'=> $row2['titre'],
 											'id_groupe'=>$id_groupe, 'titre_groupe'=> $titre,
 											'echo' => $titre.':'.$row2['titre']);
