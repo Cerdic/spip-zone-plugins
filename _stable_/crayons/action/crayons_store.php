@@ -61,7 +61,6 @@ function crayons_store() {
 	$return = array('$erreur'=>'');
 
 	$postees = post_crayons();
-var_dump($postees);
 
 	$modifs = $updates = array();
 	if (!is_array($postees)) {
