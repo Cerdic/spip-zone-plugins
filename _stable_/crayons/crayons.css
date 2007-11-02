@@ -59,12 +59,12 @@ em.crayon-edit, em.crayon-crayon, em.crayon-img-changed {
 }
 
 
-.formulaire_spip .crayon-active {
+.formulaire_crayon .crayon-active {
 	padding: 1px;
 	border: 1px inset;
 	font: inherit;
 }
-.crayon-html .formulaire_spip {
+.crayon-html .formulaire_crayon {
 	max-width: 703px;
 }
 .crayon-html textarea {
