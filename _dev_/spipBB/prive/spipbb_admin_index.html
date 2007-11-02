@@ -1,0 +1,46 @@
+#CACHE{0}
+[(#REM) Plugin SpiBB - Licence GPL]
+[(#REM) SpipBB admin - Page d'accueil des statistiques]
+
+<table cellpadding='0' cellspacing='0' border='1' width='100%'>
+<thead>
+<tr bgcolor='#ENV{couleur_foncee}'>
+	<td><:spipbb:statistique:></td>
+	<td><:spipbb:valeur:></td>
+</tr>
+</thead>
+<tbody>
+<tr bgcolor='#ENV{couleur_claire}'>
+	<td><:spipbb:total_posts:></td>
+	<td>#ENV{total_posts}</td>
+</tr>
+<tr bgcolor='#fff'>
+	<td><:spipbb:average_posts:></td>
+	<td>#ENV{posts_per_day}</td>
+</tr>
+<tr bgcolor='#ENV{couleur_claire}'>
+	<td><:spipbb:total_users:></td>
+	<td>#ENV{total_users}</td>
+</tr>
+<tr bgcolor='#fff'>
+	<td><:spipbb:average_users:></td>
+	<td>#ENV{users_per_day}</td>
+</tr>
+<tr bgcolor='#ENV{couleur_claire}'>
+	<td><:spipbb:date_ouverture:></td>
+	<td>#ENV{start_date}</td>
+</tr>
+<tr bgcolor='#fff'>
+	<td><:spipbb:age_forum:></td>
+	<td>#ENV{forum_age}</td>
+</tr>
+<tr bgcolor='#ENV{couleur_claire}'>
+	<td><:spipbb:total_users_online:></td>
+	<td>#ENV{total_online}</td>
+</tr>
+<tr bgcolor='#fff'>
+	<td><:spipbb:spipbb_release:></td>
+	<td>#ENV{spipbb_version}</td>
+</tr>
+</tbody>
+</table>

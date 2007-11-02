@@ -24,6 +24,7 @@
 		<th colspan="2" class="tsujet"><:spipbb:sujets:></th>
 		<th class="tmsg"><:spipbb:messages:></th>
 		<th class="tsujaut"><:spipbb:sujet_auteur:></th>
+		<th class="tmsg"><:spipbb:visites:></th>
 		<th class="tdermsg"><:spipbb:messages_derniers:></th>
 	</tr>
 	</thead>
@@ -59,6 +60,9 @@
 			</BOUCLE_auteurp_a>
 			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
 			<//B_auteurp_a>
+		</td>
+		<td class="msgpost">
+			<BOUCLE_vues_a(SPIP_VISITES_FORUMS){id_forum}>#VISITES</BOUCLE_vues_a></B_vues_a>0<//B_vues_a>
 		</td>
 		<td class="dermsg">
 		<BOUCLE_dernier_message_a(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>
@@ -99,6 +103,9 @@
 			</BOUCLE_auteurp>
 			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
 			<//B_auteurp>
+		</td>
+		<td class="msgpost">
+			<BOUCLE_vues(SPIP_VISITES_FORUMS){id_forum}>#VISITES</BOUCLE_vues></B_vues>0<//B_vues>
 		</td>
 		<td class="dermsg">
 		<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{par date}{inverse}{0,1}>

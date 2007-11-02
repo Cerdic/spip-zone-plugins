@@ -24,20 +24,27 @@ include_spip('inc/spipbb');
 
 function spipbb_install($action)
 {
-echo "spipbb:$action<br>".$GLOBALS['spipbb']['version']."<br>".$GLOBALS['spipbb_version'];
-switch ($action) {
- case 'test' : // test pour savoir si les actions sont nécessaires
-	return ( isset($GLOBALS['meta']['spipbb']) AND isset($GLOBALS['spipbb']['version']) AND ($GLOBALS['spipbb']['version']>= $GLOBALS['spipbb_version'] ) );
-	break;
- case 'install' :
-	spipbb_upgrade_all();
-	break;
- case 'uninstall' :
- default :
-	spipbb_delete_metas();
-	break;
-}
+	switch ($action)
+	{
+		case 'test' : // test pour savoir si les actions sont nécessaires
+			return ( isset($GLOBALS['meta']['spipbb']) AND
+				 isset($GLOBALS['spipbb']['version']) AND
+				 ($GLOBALS['spipbb']['version']>= $GLOBALS['spipbb_version'] ) );
+			break;
+		case 'install' :
+			spipbb_upgrade_all();
+			break;
+		case 'uninstall' :
+		default :
+			spipbb_delete_metas();
+			break;
+	}
 } /* spipbb_install */
+
+/* rend disponible l'icone de désinstallation */
+/* ca doit certainement permettre d'effacer les fichiers et autres */
+function spipbb_uninstall(){
+}
 
 // [fr] Met a jour la version et initialise les metas
 // [en] Upgrade release and init metas
@@ -59,6 +66,15 @@ function spipbb_upgrade_all()
 	}
 	if ( $installed_version == 0.0 ) {
 		spipbb_init_metas();
+	}
+
+	if ( $installed_version < 0.14 ) // 0.14 or schema
+	{
+		include_spip('base/spipbb');
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
+		creer_base();
+		spip_log('spipbb : spipbb_upgrade_all OK');
 	}
 
 	if ( $installed_version < $version_code ) {

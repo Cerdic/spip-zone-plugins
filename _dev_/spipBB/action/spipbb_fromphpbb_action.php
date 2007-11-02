@@ -550,7 +550,7 @@ function migre_utilisateurs() {
 			// transcoder_page
 			// corriger_caracteres
 
-			$nom = $row['username'];
+			$nom = addslashes($row['username']);
 			$email = $row['user_email'];
 			$pass = $row['user_password'];
 			$site = $row['user_website']; if ($site == "http://") { $site = ""; }

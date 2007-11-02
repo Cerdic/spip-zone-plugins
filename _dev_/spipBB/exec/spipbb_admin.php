@@ -84,7 +84,7 @@ global $couleur_claire, $couleur_foncee;
 	{
 		$users_per_day = $total_users;
 	}
-
+/*
 	$res  = "<table cellpadding='0' cellspacing='0' border='0' width='100%'>" ;
 	$res .= "<thead><tr bgcolor='$couleur_foncee'><td>"._T('spipbb:statistique')."</td><td>"._T('spipbb:valeur')."</td></tr></thead>" ;
 	$res .= "<tr bgcolor='$couleur_claire'><td>" . _T('spipbb:total_posts') . "</td><td>" . $total_posts ."</td></tr>" ;
@@ -93,18 +93,38 @@ global $couleur_claire, $couleur_foncee;
 	$res .= "<tr bgcolor='#fff'><td>" . _T('spipbb:average_users') . "</td><td>" . $users_per_day ."</td></tr>" ;
 	$res .= "<tr bgcolor='$couleur_claire'><td>" . _T('spipbb:date_ouverture') . "</td><td>" . date("j n y",$start_date) ."</td></tr>" ;
 	$res .= "<tr bgcolor='#fff'><td>" . _T('spipbb:age_forum') . "</td><td>" . $forum_age ."</td></tr>" ;
-
+*/
 // Qui est en ligne
 
 	$r = spip_query("SELECT COUNT(*) AS total FROM spip_auteurs WHERE en_ligne>= DATE_SUB(NOW(), INTERVAL 5 MINUTE )");
 	$o = spip_fetch_array($r); // fetch all ?
 	$total_online = count($o);
-
+/*
 	$res .= "<tr bgcolor='$couleur_claire'><td>" . _T('spipbb:total_users_online') . "</td><td>" . $total_online ."</td></tr>" ;
 // Check available spipbb updates
 	$res .= "<tr bgcolor='#fff'><td>" . _T('spipbb:spipbb_release') . "</td><td>" . $GLOBALS['spipbb_version'] . "</td></tr>" ;
 
 	$res .= "</table>" ;
+*/
+
+	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	// on sait que cette fonction est dans le fichier associe
+
+	$contexte = array( 
+				'couleur_foncee'=>$couleur_foncee,
+				'couleur_claire' => $couleur_claire,
+				'total_posts' => $total_posts,
+				'posts_per_day' => $posts_per_day,
+				'total_users' => $total_users,
+				'users_per_day' => $users_per_day,
+				'posts_per_day' => $posts_per_day,
+				'start_date' => date("j n y",$start_date),
+				'forum_age' => $forum_age,
+				'total_online' => $total_online,
+				'spipbb_version' => $GLOBALS['spipbb']['version']
+			);
+	$res = recuperer_fond("prive/spipbb_admin_index",$contexte) ;
 
 	return $res;
 

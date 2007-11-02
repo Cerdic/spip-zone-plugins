@@ -55,7 +55,7 @@ function exec_spipbb_admin_forums()
 
 	echo debut_gauche('',true);
 	echo debut_boite_info(true);
-	echo  _T('spipbb:fromphpbb_titre');
+	echo  _T('spipbb:admin_forums_titre');
 	echo fin_boite_info(true);
 	echo spipbb_admin_gauche($GLOBALS['spipbb']['spipbb_id_rubrique'],'spipbb_admin_forums');
 
@@ -87,7 +87,7 @@ function spipbb_admin_forums()
 				'hash_supprimer' => $hash_supprimer,
 				'hash_instituer' => $hash_instituer
 			);
-	$res = recuperer_fond("prive/spipbb_admin_gerer",$contexte) ;
+	$res = recuperer_fond("prive/spipbb_admin_forums",$contexte) ;
 
 	return $res;
 } // spipbb_admin_forums
