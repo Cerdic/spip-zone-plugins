@@ -1,4 +1,10 @@
 <?php
+#---------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                       #
+#  File    : spipbb_en : language file                    #
+#  Authors : Chryjs, 2007 and als (please read the notes) #
+#  Contact : chryjs¡@!free¡.!fr                           #
+#---------------------------------------------------------#
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
 
@@ -25,19 +31,15 @@ The e-mail address will be used only to confirm the details of your registration
 
 'interet'=>'Hobbies',
 'loisirs'=>'Occupations',
-'numero_icq'=>'chat (ICQ, Skype, etc. )',
+'numero_icq'=>'chat (ICQ)',
+'nom_Yahoo'=>'chat (Yahoo)',
+'nom_AIM'=>'chat (AIM)',
+'nom_MSNM'=>'chat (MSN Messenger)',
 'url_avatar'=>'Avatar\'s Url',
 'signature'=>'Signature',
 'droit_editer'=>'You\'re not allowed to edit this post',
 'editer'=>'&eacute;dit',
 
-'config_spipbb' => 'Basic spipBB config in order to use the forums with this plugin.',
-'config_choix_rubrique' => 'Choose the section used by spipBB forums',
-'choix_rubrique_selection' => 'Select the section that will host the base of your forums. Inside, each sub-section will be a forum group, each published article will open a new forum.',
-'config_choix_mots' => 'Choose the keyword group',
-'choix_mots_selection' => 'This keyword group should at least contain 2 keywords. Usually, the plugin will create them while installing. SpipBB needs - in general - the {ferme} (closed) and {annonce} (announce) keywords, but you are allowed to choose any other ones.',
-'config_choix_squelettes' => 'Choose the skeletons',
-'choix_squelettes' => 'You are allowed to used other skeletons, but the selected files replacing groupeforum.html and filforum.html must already exist!',
 
 'dernier_membre' => 'The most recently registered user is',
 'en_ligne' => 'Who\'s online?',
@@ -68,6 +70,24 @@ The e-mail address will be used only to confirm the details of your registration
 'admseparer_forum' => 'Split this forum',
 'article_forum' => ' Article / Forum<br>',
 'aucun' => 'none!',
+'admin_surtitre' => 'Forums management',
+'admin_titre' => 'SpipBB Admin',
+'admin_sous_titre' => 'Go to the SpipBB forums admin panel',
+'admin_cat_01_general' => 'Administration',
+'admin_action_01_index' => 'Administration index',
+'admin_cat_outils' => 'Tools',
+'admin_action_fromphpbb' => 'Import from PhpBB',
+'admin_cat_admin' => 'Main administration',
+'admin_action_gestion' => 'Management',
+'admin_form_sujets' => '&nbsp;',
+'admin_form_messages' => '&nbsp;',
+'admin_form_editer' => 'Edit',
+'admin_form_supprimer' => 'Delete',
+'admin_form_deplacer' => 'Move',
+'admin_form_monter' => 'Up',
+'admin_form_descendre' => 'Down',
+'admin_form_creer_forum' => 'Create a forum',
+'admin_form_creer_categorie' => 'Create a category',
 
 // B
 'bio' => 'Short biography',
@@ -88,6 +108,14 @@ The e-mail address will be used only to confirm the details of your registration
 'credits_bis3' => 'Adapted for, and, Inspired from, Forums management of:<br>',
 'credits_bis4' => '(James, BoOz, Nikau and Miss Mopi).',
 'creer_forum' => 'Create New Forum',
+
+'config_spipbb' => 'Basic spipBB config in order to use the forums with this plugin.',
+'config_choix_rubrique' => 'Choose the section used by spipBB forums',
+'choix_rubrique_selection' => 'Select the section that will host the base of your forums. Inside, each sub-section will be a forum group, each published article will open a new forum.',
+'config_choix_mots' => 'Choose the keyword group',
+'choix_mots_selection' => 'This keyword group should at least contain 3 keywords. Usually, the plugin will create them while installing. SpipBB needs - in general - the {ferme} (closed), {annonce} (announce) and {postit} (postit) keywords, but you are allowed to choose another one.',
+'config_choix_squelettes' => 'Choose the skeletons',
+'choix_squelettes' => 'You are allowed to used other skeletons, but the selected files replacing groupeforum.html and filforum.html must already exist!',
 
 //D
 'dans_forum' => 'in the forum',

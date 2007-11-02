@@ -24,6 +24,7 @@ include_spip('inc/spipbb');
 
 function spipbb_install($action)
 {
+echo "spipbb:$action<br>".$GLOBALS['spipbb']['version']."<br>".$GLOBALS['spipbb_version'];
 switch ($action) {
  case 'test' : // test pour savoir si les actions sont nécessaires
 	return ( isset($GLOBALS['meta']['spipbb']) AND isset($GLOBALS['spipbb']['version']) AND ($GLOBALS['spipbb']['version']>= $GLOBALS['spipbb_version'] ) );
@@ -32,10 +33,10 @@ switch ($action) {
 	spipbb_upgrade_all();
 	break;
  case 'uninstall' :
+ default :
 	spipbb_delete_metas();
 	break;
 }
-
 } /* spipbb_install */
 
 // [fr] Met a jour la version et initialise les metas
@@ -60,12 +61,8 @@ function spipbb_upgrade_all()
 		spipbb_init_metas();
 	}
 
-	if ( $installed_version < 0.11 ) {
-		$GLOBALS['spipbb']['version'] = $version_code;
-		include_spip('inc/meta');
-		ecrire_meta('spipbb', serialize($GLOBALS['spipbb']));
-		ecrire_metas();
-		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+	if ( $installed_version < $version_code ) {
+		spipbb_upgrade_metas();
 	}
 
 	spip_log('spipbb : spipbb_upgrade_all OK');

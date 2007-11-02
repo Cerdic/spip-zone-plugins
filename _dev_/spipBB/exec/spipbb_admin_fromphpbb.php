@@ -1,8 +1,8 @@
 <?php
 
 #---------------------------------------------------------------#
-#  Plugin  : spipbb_admin_fromphpbb - Licence : GPL             #
-#  File    : exec/migre_formulaire - first step form            #
+#  Plugin  : spipbb - Licence : GPL                             #
+#  File    : exec/spipbb_admin_fromphpbb - first step form      #
 #  Authors : 2004+ Jean-Luc Béchennec - Chryjs, 2007            #
 #  Contact : chryjs¡@!free¡.!fr                                 #
 # [fr] Menu d'accueil pour la migration d'un forum phpBB        #

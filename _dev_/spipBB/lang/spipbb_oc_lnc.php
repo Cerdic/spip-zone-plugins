@@ -1,9 +1,14 @@
 <?php
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : spipbb_oc_lnc : fichier de langue             #
+#  Authors : Chryjs, 2007 et als (merci de lire les notes) #
+#  Contact : chryjs¡@!free¡.!fr                            #
+#----------------------------------------------------------#
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 //A
 'abo' => 'Abonaments&nbsp;',
@@ -39,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion' => 'Volgatz picar v&ograve;stre nom d\'usanci&egrave;r e v&ograve;stre mot de santa Clara per vos connectar.',
 'contact' => 'Contacte',
 'courrier' => '<p>Apr&egrave;p l\'estapa d\'enregistrament, recebretz l&egrave;u-l&egrave;u v&ograve;stres identificants personals per cori&egrave;r electronic.</p>',
-'credits' => 'Realizat amb <a href="http://www.spip.net/" class="copyright">SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> per <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> e <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (l&ograve;gos de St&eacute;phane)',
+'credits' => 'Realizat amb <a href="http://www.spip.net/" class="copyright">SPIP</a> : 2004-2005<br/><a href=http://www.spip-contrib.net/article.php3?id_article=414>spipBB 0.9 CSS</a> per <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> e <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (l&ograve;gos de St&eacute;phane)<br /><a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB">Plugin: Gurdil Chryjs real3t</a>',
 'credits_bis1' => 'GAFoSPIP v.&nbsp;',
 'credits_bis2' => 'Agost de 2005',
 'credits_bis3' => 'Adaptat per, e, Inspirat per, lo tractament dels forums de&nbsp;:<br>',

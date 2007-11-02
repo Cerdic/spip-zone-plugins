@@ -81,14 +81,11 @@ function spipbb_init_metas($id_rubrique=0)
 	// chemin icones et smileys ?
 	// final - sauver
 
-	if ($spipbb_meta!= $GLOBALS['meta']['spipbb'])
-	{
-		include_spip('inc/meta');
-		ecrire_meta('spipbb', serialize($spipbb_meta));
-		ecrire_metas();
-		$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
-		spip_log('spipbb : init_metas OK');
-	}
+	include_spip('inc/meta');
+	ecrire_meta('spipbb', serialize($spipbb_meta));
+	ecrire_metas();
+	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+	spip_log('spipbb : init_metas OK');
 
 } // spipbb_init_metas
 
@@ -107,6 +104,16 @@ function spipbb_delete_metas()
 		spip_log('spipbb : delete_metas OK');
 	}
 } // spipbb_delete_metas
+
+//----------------------------------------------------------------------------
+// [fr] Met à jour les metas du plugin
+// [en] Upgrade plugin metas
+//----------------------------------------------------------------------------
+function spipbb_upgrade_metas()
+{
+	spipbb_init_metas($GLOBALS['spipbb']['spipbb_id_rubrique']);
+} // spipbb_delete_metas
+
 
 //----------------------------------------------------------------------------
 // [fr] Initialise le groupe de mot cles necessaire pour spipbb
@@ -143,7 +150,7 @@ function spipbb_init_mot_cle($mot,$groupe)
 function spipbb_admin_gauche($id_rubrique=0,$adm="")
 {
 	$modules = array();
-	$modules['general']['index']= "spipbb_admin.php"; // config par defaut
+	$modules['01_general']['01_index']= "spipbb_admin.php"; // config par defaut
 
 	$dir = @opendir(_DIR_PLUGIN_SPIPBB."exec/");
 

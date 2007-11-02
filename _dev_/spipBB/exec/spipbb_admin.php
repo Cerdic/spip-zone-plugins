@@ -96,7 +96,7 @@ global $couleur_claire, $couleur_foncee;
 
 // Qui est en ligne
 
-	$r = spip_query("SELECT * AS total FROM spip_auteurs WHERE en_ligne>= DATE_SUB(NOW(), INTERVAL 5 MINUTE )");
+	$r = spip_query("SELECT COUNT(*) AS total FROM spip_auteurs WHERE en_ligne>= DATE_SUB(NOW(), INTERVAL 5 MINUTE )");
 	$o = spip_fetch_array($r); // fetch all ?
 	$total_online = count($o);
 

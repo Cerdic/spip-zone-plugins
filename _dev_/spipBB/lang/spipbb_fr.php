@@ -1,4 +1,10 @@
 <?php
+#----------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                        #
+#  File    : spipbb_fr : fichier de langue                 #
+#  Authors : Chryjs, 2007 et als (merci de lire les notes) #
+#  Contact : chryjs¡@!free¡.!fr                            #
+#----------------------------------------------------------#
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
 
@@ -29,19 +35,15 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 
 'interet'=>'Centres d\'int&eacute;r&ecirc;t',
 'loisirs'=>'Loisirs',
-'numero_icq'=>'Contacts chat (ICQ, Skype, etc... )',
+'numero_icq'=>'Contacts chat (ICQ)',
+'nom_Yahoo'=>'Contacts chat (Yahoo)',
+'nom_AIM'=>'Contacts chat (AIM)',
+'nom_MSNM'=>'Contacts chat (MSN Messenger)',
 'url_avatar'=>'Url de votre avatar',
 'signature'=>'Signature',
 'droit_editer'=>'vous n\'avez pas les droits suffisants pour &eacute;diter ce message',
 'editer'=>'&eacute;diter',
 
-'config_spipbb' => 'Configuration de base de spipBB pour permettre le fonctionnement des forums avec ce plugin.',
-'config_choix_rubrique' => 'Choisir la rubrique contenant les forums spipBB',
-'choix_rubrique_selection' => 'S&eacute;lectionner un secteur qui sera la base de vos forums. Dedans, chaque sous-rubrique sera un groupe de forums, chaque article publi&eacute; ouvrira un forum.',
-'config_choix_mots' => 'Choisir le groupe de mot-cl&eacute;s',
-'choix_mots_selection' => 'Le groupe de mot doit contenir deux mot-clefs. Normalement, le plugin les a cr&eacute;&eacute; au moment de son installation. SpipBB utilise en g&eacute;n&eacute;ral les mots {ferme} et {annonce}, mais vous pouvez en choisir d\'autres.',
-'config_choix_squelettes' => 'Choisir les squelettes utilis&eacute;s',
-'choix_squelettes' => 'Vous pouvez en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
 
 'dernier_membre' => 'L\'utilisateur enregistr&eacute; le plus r&eacute;cent est',
 'en_ligne' => 'Qui est en ligne ?',
@@ -71,10 +73,24 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admseparer_forum' => 'Diviser ce forum',
 'article_forum' => ' Article / Forum<br />',
 'aucun' => 'aucun !',
-'admin_cat_general' => 'Administration',
-'admin_action_index' => 'Index de l\'administration',
+'admin_surtitre' => 'G&eacute;rer les forums',
+'admin_titre' => 'Administration SpipBB',
+'admin_sous_titre' => 'Acc&egrave;der au panneau d\'administration des forums avec SpipBB',
+'admin_cat_01_general' => 'Administration',
+'admin_action_01_index' => 'Index de l\'administration',
 'admin_cat_outils' => 'Outils',
 'admin_action_fromphpbb' => 'Import de PhpBB',
+'admin_action_gestion' => 'Gestion',
+'admin_form_sujets' => '&nbsp;',
+'admin_form_messages' => '&nbsp;',
+'admin_form_editer' => 'Editer',
+'admin_form_supprimer' => 'Supprimer',
+'admin_form_deplacer' => 'D&eacute;placer',
+'admin_form_monter' => 'Monter',
+'admin_form_descendre' => 'Descendre',
+'admin_form_creer_forum' => 'Cr&eacute;er un forum',
+'admin_form_creer_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
+
 
 // B
 'bio' => 'Petite biographie',
@@ -96,6 +112,14 @@ par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a><br />
 'credits_bis3' => 'Adapt&eacute; pour, et, Inspir&eacute; par, le traitement des Forums de :<br />',
 'credits_bis4' => '(James, BoOz, Nikau et Miss Mopi).',
 'creer_forum' => 'Cr&eacute;er Nouveau Forum',
+
+'config_spipbb' => 'Configuration de base de spipBB pour permettre le fonctionnement des forums avec ce plugin.',
+'config_choix_rubrique' => 'Choisir la rubrique contenant les forums spipBB',
+'choix_rubrique_selection' => 'S&eacute;lectionner un secteur qui sera la base de vos forums. Dedans, chaque sous-rubrique sera un groupe de forums, chaque article publi&eacute; ouvrira un forum.',
+'config_choix_mots' => 'Choisir le groupe de mot-cl&eacute;s',
+'choix_mots_selection' => 'Le groupe de mot doit contenir trois mot-clefs. Normalement, le plugin les a cr&eacute;&eacute; au moment de son installation. SpipBB utilise en g&eacute;n&eacute;ral les mots {ferme}, {annonce} et {postit}, mais vous pouvez en choisir d\'autres.',
+'config_choix_squelettes' => 'Choisir les squelettes utilis&eacute;s',
+'choix_squelettes' => 'Vous pouvez en choisir d\'autres, mais les fichiers qui remplacent groupeforum.html et filforum.html doivent exister !',
 
 //D
 'dans_forum' => 'dans le forum',

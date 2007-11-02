@@ -1,4 +1,10 @@
 <?php
+#---------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                       #
+#  File    : spipbb_en : language file                    #
+#  Authors : Chryjs, 2007 and als (please read the notes) #
+#  Contact : chryjs¡@!free¡.!fr                           #
+#---------------------------------------------------------#
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
 
@@ -28,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date' => 'Inscripto el',
 
 //C
-'credits'=>'Realizado con <a href="http://www.spip.net/" class="copyright">SPIP</a> 1.7 : 2004<br/><a http://www.spip-contrib.net/Un-squelette-de-forum-8-4-CSS>Squelettes 0.8.4 CSS</a> por <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> y <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (logos de St&eacute;phane),<br /> traducci&oacute;n de <a href=http://www.belvil.net/>dani</a>.',
+'credits'=>'Realizado con <a href="http://www.spip.net/" class="copyright">SPIP</a> 1.7 : 2004<br/><a http://www.spip-contrib.net/Un-squelette-de-forum-8-4-CSS>Squelettes 0.8.4 CSS</a> por <a href=http://www.laprise.org/>James aka Klik&eacute;</a>, <a href=http://bloog.net/>BoOz</a>, <a href=http://esprit-str.com/>Nikau</a> y <a href=http://www.missmopi.net/>Nad&egrave;ge aka Miss Mopi</a> (logos de St&eacute;phane),<br /> traducci&oacute;n de <a href=http://www.belvil.net/>dani</a><br /><a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB">Plugin: Gurdil Chryjs real3t</a>',
 'categorie'=>'Categor&iacute;a',
 'contact' => 'Contacto',
 'citer' => 'Citar',
