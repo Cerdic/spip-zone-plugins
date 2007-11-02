@@ -2,12 +2,21 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
+//include_spip('base/serial');
+include_spip('base/create');
+include_spip('inc/acces');
 include_spip('base/serial');
+include_spip('base/auxiliaires');
+include_spip('base/typedoc');
+include_spip('base/abstract_sql');
 
 global $tables_principales;
 global $tables_auxiliaires;
+global $tables_jointures;
 
-$version_base_echoppe = "0.1";
+$GLOBALS['echoppe_version_base'] = 0.1;
+
+
 $spip_echoppe_categories = array(
 	"id_categorie"	=> "bigint(21) NOT NULL",
 	"id_parent"	=> "bigint(21) NOT NULL"
@@ -22,6 +31,7 @@ $spip_echoppe_categories_join = array(
 	"id_categorie"		=> "id_categorie",
 	"id_parent"		=> "id_parent"
 	);
+
 
 $spip_echoppe_categories_descriptions = array(
 	"id_categorie_description"	=> "bigint(21) NOT NULL",
@@ -55,7 +65,7 @@ $spip_echoppe_produits = array(
 	"hauteur"		=> "float DEFAULT '0' NOT NULL", 	// (crowfoot : serait important pour le calcul des frais de livraison ...)
 	"largeur"		=> "float DEFAULT '0' NOT NULL",
 	"longueur"		=> "float DEFAULT '0' NOT NULL",
-	"colisage"		=> "VARCHAR(10) DEFAULT '' NOT NULL"//(ça pourrait etre une donnée d'info sur la taille du colis ( ou lettre, ou palettes ... etc )
+	"colisage"		=> "VARCHAR(10) DEFAULT '' NOT NULL", //(ça pourrait etre une donnée d'info sur la taille du colis ( ou lettre, ou palettes ... etc )
 	"ref_produit"		=> "text NOT NULL",
 	"prix_base_htva"	=> "float DEFAULT '0' NOT NULL", 	//(permettrait de donner un prix de base et pas faire 50000 jointures pour retrouver le prix dans une liste de produits....)
 	"maj"			=> "TIMESTAMP",
@@ -375,4 +385,13 @@ $spip_echoppe_panier_join = array(
 	"token_panier"	=> "token_panier"
 	);
 
+ $tables_principales['spip_echoppe_categories'] = array(
+	'field' => &$spip_echoppe_categories,
+	'key' => &$spip_echoppe_categories_key,
+	'join' => &$spip_echoppe_categories_join
+	);
+	spip_log('Installation bdd echoppe');
+	creer_base();
+	spip_log('Installation bdd echoppe OK');
+	
 ?>
