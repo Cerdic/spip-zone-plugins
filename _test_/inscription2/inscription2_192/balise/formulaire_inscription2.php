@@ -25,7 +25,6 @@ function balise_FORMULAIRE_INSCRIPTION2_stat($args, $filtres) {
 
 function balise_FORMULAIRE_INSCRIPTION2_dyn($mode,$option,$article) {
 	//var_dump(lire_config('inscription2'));
-	
 	if (!test_mode_inscription2($mode)) 
 		return _T('pass_rien_a_faire_ici');
 	//recuperer les infos inserées par le visiteur
@@ -54,7 +53,7 @@ function balise_FORMULAIRE_INSCRIPTION2_dyn($mode,$option,$article) {
 			}
 			elseif(ereg("^newsletter.*$", $cle)){
 				$var_user['newsletters'] = _request('newsletters');
-				$var_user['`spip_listes_format`'] =_request('format');
+				$var_user['`spip_listes_format`'] = "html"; // bizare le _request('format') passe pas
 			}
 				
 			elseif(ereg("^statut_interne.*$", $cle))
@@ -147,10 +146,27 @@ function message_inscription2($var_user, $mode) {
 	if ($row['statut'] == '5poubelle')	// irrecuperable
 		return _T('form_forum_access_refuse');
 	
-	if ($row['statut'] == 'aconfirmer'){	// deja inscrit
-		envoyer_inscription2($row['id_auteur']);/**RENVOYER MAIL D'INSCRIPTION **/
+	
+if ($row['statut'] == 'aconfirmer'){	// deja inscrit
+		envoyer_inscription2($row['id_auteur']);//RENVOYER MAIL D'INSCRIPTION 
 		return _T('inscription2:mail_renvoye');
 	}
+
+	// est-ce un abonne à spip-listes ?
+	$spip_listes_abo = spip_query("SELECT b.id, b.spip_listes_format, b.nom_famille, b.adresse FROM `spip_auteurs` a , `spip_auteurs_elargis` b WHERE a.email=" . _q($var_user['email'])." AND a.id_auteur=b.id_auteur");
+	$spip_listes_abo = spip_fetch_array($spip_listes_abo);
+	
+	$format_spip_listes = array("texte","html","non");
+		
+	if ( in_array($spip_listes_abo['spip_listes_format'],$format_spip_listes) 
+		AND $spip_listes_abo['nom_famille'] == ''
+		AND $spip_listes_abo['adresse'] == ''
+		){	// inscrit spip-listes
+		$infos_auteur = array("id_auteur" => $row['id_auteur'] , "id_auteur_elargi" => $spip_listes_abo['id']);
+		//maj
+		return inscription2_maj($var_user,$infos_auteur);
+	}
+
 
 	return _T('form_forum_email_deja_enregistre');
 }
@@ -212,6 +228,74 @@ function inscription2_nouveau($declaration){
 
 	return $declaration;
 }
+
+
+function inscription2_maj($declaration,$infos_auteur){
+		
+	$declaration['statut'] = 'aconfirmer';
+	$alea_actuel = rand(1,99999);
+
+	//update nom et statut des données ds la table spip_auteurs
+	if(intval($infos_auteur['id_auteur']) > 0)
+		spip_query("UPDATE spip_auteurs SET nom="._q($declaration['nom']).", statut="._q($declaration['statut'])." , pass='' , alea_actuel=$alea_actuel WHERE id_auteur=".$infos_auteur['id_auteur']) ;
+	
+	
+	foreach($declaration as $cle => $val){
+		if($cle == 'newsletters' or $cle == '`spip_listes_format`'  or $cle == 'zones' or $cle =='sites' or $cle == 'zone' or $cle =='abonnement' or $cle=='option' or $cle=='article')
+			continue;
+		if ($cle == 'email' or $cle == 'nom' or $cle == 'bio' or $cle == 'statut' or $cle == 'login')
+			continue;
+		else
+			$elargis[$cle] = "$cle = "._q($val) ;
+	}
+	
+
+	//insertion des données dans la table spip_auteurs_elargis
+	if(isset($declaration['newsletters'])){
+		foreach($declaration['newsletters'] as $value){
+			if($value != '0' AND intval($infos_auteur['id_auteur']) > 0){
+				spip_query("DELETE FROM `spip_auteurs_listes` WHERE id_auteur=".$infos_auteur['id_auteur']." AND id_liste=$value");
+				spip_query("INSERT INTO `spip_auteurs_listes` 
+				(`id_auteur`, `id_liste`, `statut`, `date_inscription`) 
+				VALUES ('".$infos_auteur['id_auteur']."', '$value', 'valide','$date')");
+				}
+	}}
+	if(isset($declaration['zones']) && !$declaration['article']){
+		foreach($declaration['zones'] as $value)
+			spip_query("DELETE FROM `spip_zones_auteurs` WHERE id_auteur=".$infos_auteur['id_auteur']." AND id_zone=$value");
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`) VALUES ('".$infos_auteur['id_auteur']."', '$value')");
+	}
+	if(isset($declaration['domaines']) and $declaration['zone'] and lire_config('plugin/ACCESRESTREINT')){
+		foreach($declaration['zone'] as $value)
+			spip_query("INSERT INTO `spip_zones_auteurs` (`id_auteur`, `id_zone`)VALUES ('".$infos_auteur['id_auteur']."', '$value')");
+	}
+	// update
+	
+	if(intval($infos_auteur['id_auteur']) > 0)
+		$q1 = spip_query("update `spip_auteurs_elargis` set ".join(', ', $elargis)." where `id_auteur`='".$infos_auteur['id_auteur']."'");
+		
+		
+	$declaration['id_auteur_elargi'] = $infos_auteur['id_auteur_elargi'] ;
+	
+	
+	if($declaration['abonnement']){
+		$value = $declaration['abonnement'] ;	
+			spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('".$infos_auteur['id_auteur_elargi']."', '$value')");
+	}
+	
+	if(isset($declaration['article']) AND $declaration['article'] > 0){
+		$value = $declaration['article'] ;	
+		include_spip('inc/acces');
+		$montant =  lire_config('abonnement/prix_article');
+		$hash = creer_uniqid();
+			spip_query("INSERT INTO `spip_auteurs_elargis_articles` (`id_auteur_elargi`, `id_article`, `statut_paiement` , `hash`,`montant`) VALUES ('".$infos_auteur['id_auteur_elargi']."', '$value', 'a_confirmer','$hash','$montant')");
+		$declaration['hash_article'] = $hash ;
+
+	}
+
+	return $declaration;
+}
+
 
 function inscription2_test_login($var_user) {
 	if(!isset($var_user['login']))
