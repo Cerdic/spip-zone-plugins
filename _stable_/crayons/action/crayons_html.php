@@ -186,13 +186,9 @@ class Crayon {
 
 	// formulaire standard
 	function formulaire($contexte = array(), $inputAttrs = array()) {
-		include_spip('inc/filtres');
-		return liens_absolus('<form class="formulaire_spip" method="post" action="' .
-			url_absolue(parametre_url(self(),'action', 'crayons_store')) . '" enctype="multipart/form-data">' .
+		return
 			$this->code() .
-			$this->input($contexte, $inputAttrs) .
-			$this->boutons() . // array('edit'=>'')
-			'</form>');
+			$this->input($contexte, $inputAttrs);
 	}
 
 	// balises input type hidden d'identification du crayon
@@ -276,40 +272,45 @@ class Crayon {
 		return $return;
 	}
 
-/*
- Fabriquer les boutons par defaut du crayon
-	$boutons: tableau optionnel des boutons à poser (class=>array(img,texte[,url]))
-	submit et cancel sont ajoutés par défaut, annullables comme 'cancel'=>''
-	le + "editer tout" n'y est pas, au contraire on peut le mettre avec 'edit'=>''
-*/
-	function boutons($boutons = array()) {
-		$crayonsImgPath = dirname(url_absolue(find_in_path('images/cancel.png')));
-		if (!isset($boutons['submit'])) {
-			$boutons['submit'] = array('ok', texte_backend(_T('bouton_enregistrer')));
-		}
-		if (!isset($boutons['cancel'])) {
-			$boutons['cancel'] = array('cancel', texte_backend(_T('crayons:annuler')));
-		}
-		if (isset($boutons['edit']) && !$boutons['edit']) {
-			$boutons['edit'] = array('edit',
-				texte_backend(_T('crayons:editer_@type@_@id@',
-							array('type'=>$this->type, 'id'=>$this->id))),
-				"ecrire/?exec={$this->type}s_edit&amp;id_{$this->type}={$this->id}");
-		}
+}
 
-		$html = '<div class="crayon-boutons"><div>';
-		foreach ($boutons as $bnam => $bdef) if ($bdef) {
-			$html .= '<a class="crayon-' . $bnam .
-				'" title="' . $bdef[1] . '"';
-			if (!empty($bdef[2])) {
-				$html .= ' href="' . $bdef[2] . '"';
-			}
-			$html .= '><img src="' . $crayonsImgPath . '/' .
-				$bdef[0] . '.png" width="20" height="20" /></a>';
+
+/*
+	Fabriquer les boutons du formulaire
+*/
+function crayons_boutons($boutons = array()) {
+	$crayonsImgPath = dirname(url_absolue(find_in_path('images/cancel.png')));
+	$boutons['submit'] = array('ok', texte_backend(_T('bouton_enregistrer')));
+	$boutons['cancel'] = array('cancel', texte_backend(_T('crayons:annuler')));
+
+	$html = '';
+	foreach ($boutons as $bnam => $bdef) if ($bdef) {
+		$html .= '<a class="crayon-' . $bnam .
+			'" title="' . $bdef[1] . '"';
+		if (!empty($bdef[2])) {
+			$html .= ' href="' . $bdef[2] . '"';
 		}
-		$html .= '</div></div>';
-		return $html;
+		$html .= '><img src="' . $crayonsImgPath . '/' .
+			$bdef[0] . '.png" width="20" height="20" /></a>';
 	}
+
+	if ($html)
+		return '<div class="crayon-boutons"><div>'.$html.'</div></div>';
+}
+
+function crayons_formulaire($html) {
+	if (!$html)
+		return '';
+
+	include_spip('inc/filtres');
+	return liens_absolus(
+		'<form class="formulaire_crayon" method="post" action="'
+		. url_absolue(parametre_url(self(),'action', 'crayons_store'))
+		. '" enctype="multipart/form-data">'
+		. $html
+		. crayons_boutons()
+		. '</form>'
+	);
 }
 
 //
@@ -340,8 +341,10 @@ function action_crayons_html_dist() {
 	include_spip('inc/crayons');
 	lang_select($GLOBALS['auteur_session']['lang']);
 	$return = affiche_controleur(_request('class'));
+	$return['$html'] = crayons_formulaire($return['$html']);
 
 	echo var2js($return);
 	exit;
 }
+
 ?>
