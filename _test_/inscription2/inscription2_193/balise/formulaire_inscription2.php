@@ -200,7 +200,7 @@ function inscription2_nouveau($declaration){
 			spip_query("INSERT INTO `spip_auteurs_elargis_abonnements` (`id_auteur_elargi`, `id_abonnement`) VALUES ('$n', '$value')");
 	}
 	
-	if(isset($declaration['article'])){
+	if(isset($declaration['article']) AND $declaration['article'] > 0){
 		$value = $declaration['article'] ;	
 		include_spip('inc/acces');
 		$montant =  lire_config('abonnement/prix_article');
