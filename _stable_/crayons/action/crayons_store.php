@@ -37,13 +37,13 @@ function post_crayons() {
         // Si les donnees POSTees ne correspondent pas a leur md5,
         // il faut les traiter
         if (md5(serialize($content)) <> $_POST['md5_'.$crayon]) {
-            if (!isset($_POST['secu_'.$crayon]))
+            if (!isset($_POST['secu_'.$crayon])
+            OR verif_secu($name, $_POST['secu_'.$crayon])) {
                 $results[] = array($name, $content, $_POST['md5_'.$crayon], $crayon);
-
-            elseif (verif_secu($name, $_POST['secu_'.$crayon]))
-                $results[] = array($name, $content, $_POST['md5_'.$crayon], $crayon);
-            else
+            }
+            else {
                 return false; // erreur secu
+            }
         }
         // cas inchange
         else
@@ -54,15 +54,14 @@ function post_crayons() {
 }
 
 
-function action_crayons_store_dist() {
+function crayons_store() {
 	include_spip('inc/crayons');
-	lang_select($GLOBALS['auteur_session']['lang']);
 	$wdgcfg = wdgcfg();
-	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 	
 	$return = array('$erreur'=>'');
 
 	$postees = post_crayons();
+var_dump($postees);
 
 	$modifs = $updates = array();
 	if (!is_array($postees)) {
@@ -73,33 +72,34 @@ function action_crayons_store_dist() {
 		foreach ($postees as $postee) {
 			$name = $postee[0];
 			$content = $postee[1];
+
 			if ($content && preg_match(_PREG_CRAYON, 'crayon '.$name, $regs)) {
 				list(,$crayon,$type,$modele,$id) = $regs;
 				$wid = $postee[3];
+
 				if (!autoriser('modifier', $type, $id, NULL, array('modele'=>$modele))) {
 					$return['$erreur'] =
 						"$type $id: " . _U('crayons:non_autorise');
-					break;
-				}
+				} else {
 
-				// recuperer l'existant pour calculer son md5 et verifier
-				// qu'il n'a pas ete modifie entre-temps
-				$data = valeur_colonne_table($type, array_keys($content), $id);
-				$md5 = md5(serialize($data));
+					// recuperer l'existant pour calculer son md5 et verifier
+					// qu'il n'a pas ete modifie entre-temps
+					$data = valeur_colonne_table($type, array_keys($content), $id);
+					$md5 = md5(serialize($data));
 
-				// est-ce que le champ a ete modifie dans la base entre-temps ?
-				if ($md5 != $postee[2]) {
-					// si oui, la modif demandee correspond peut-etre
-					// a la nouvelle valeur ? dans ce cas on procede
-					// comme si "pas de modification", sinon erreur
-					if ($md5 != md5(serialize($content))) {
-						$return['$erreur'] = "$type $id $champtable: " .
-							_U('crayons:modifie_par_ailleurs');
+					// est-ce que le champ a ete modifie dans la base entre-temps ?
+					if ($md5 != $postee[2]) {
+						// si oui, la modif demandee correspond peut-etre
+						// a la nouvelle valeur ? dans ce cas on procede
+						// comme si "pas de modification", sinon erreur
+						if ($md5 != md5(serialize($content))) {
+							$return['$erreur'] = "$type $id $champtable: " .
+								_U('crayons:modifie_par_ailleurs');
+						}
 					}
-					break;
-				}
 
-				$modifs[] = array($type, $modele, $id, $content, $wid);
+					$modifs[] = array($type, $modele, $id, $content, $wid);
+				}
 			}
 		}
 	}
@@ -111,10 +111,8 @@ function action_crayons_store_dist() {
 	}
 
 	// une quelconque erreur ... ou rien ==> on ne fait rien !
-	if ($return['$erreur']) {
-		echo json_export($return);
-		exit;
-	}
+	if ($return['$erreur'])
+		return $return;
 
 	// sinon on bosse : toutes les modifs ont ete acceptees
 	// verifier qu'on a tout ce qu'il faut pour mettre a jour la base
@@ -178,10 +176,9 @@ function action_crayons_store_dist() {
 	}
 
 	// il manque une fonction de mise à jour ==> on ne fait rien !
-	if ($return['$erreur']) {
-	    echo json_export($return);
-	    exit;
-	}
+	if ($return['$erreur'])
+	    return $return;
+
 	// hop ! mises à jour table par table et id par id
 	foreach ($updates as $type => $idschamps) {
 		foreach ($idschamps['ids'] as $id => $champsvaleurs) {
@@ -195,15 +192,14 @@ function action_crayons_store_dist() {
 	// et maintenant refaire l'affichage des crayons modifies
 	include_spip('inc/texte');
 	foreach ($modifs as $m) {
-		list($type, $modele, $id, $content, $wid) = $modif;
+		list($type, $modele, $id, $content, $wid) = $m;
 			$f = charger_fonction($type.'_'.$modele, 'vues', true)
 			  OR $f = charger_fonction($modele, 'vues', true)
 			  OR $f = charger_fonction($type, 'vues', true)
 			  OR $f = 'vues_dist';
 			$return[$wid] = $f($type, $modele, $id, $content);
 	}
-	echo json_export($return);
-	exit;
+	return $return;
 }
 
 //
@@ -277,7 +273,7 @@ function crayons_update($id, $colval = array(), $type = '')
 	$a = spip_query($q = 
         'UPDATE `' . $nom_table . '` SET ' . $update . ' WHERE ' . $where);
 
-	spip_log($q);
+	#spip_log($q);
 	include_spip('inc/invalideur');
 	suivre_invalideur($cond, $modif=true);
 
@@ -308,6 +304,45 @@ function crayons_update_article($id_article, $c = false) {
 function modeles_tags($id, $c) {
 	var_dump($id); #id_article
 	var_dump($c); # perturbant : ici on a array('id_article'=>'valeur envoyee')
+}
+
+function action_crayons_store_dist() {
+	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
+	lang_select($GLOBALS['auteur_session']['lang']);
+
+	$r = crayons_store();
+
+	// Si on a ete appeles par jQuery, on renvoie tout, c'est le client
+	// crayons.js qui va traiter l'affichage du resultat et status
+	# Attention le test $_SERVER["HTTP_X_REQUESTED_WITH"] === "XMLHttpRequest"
+	# n'est pas bon car le cas d'un fichier uploade via iframe n'est pas detecte
+
+	// S'il y a une adresse de redirection, on renvoie vers elle
+	// En cas d'erreur il faudrait ajouter &err=... dans l'url ?
+	if (_request('redirect')) {
+		if (!$r['$erreur']
+		OR $r['$annuler']) {
+			include_spip('inc/headers');
+			redirige_par_entete(_request('redirect'));
+		} else {
+			echo "<h4 class='status'>".$r['$erreur']."</h4>\n";
+
+			foreach ($r as $wid => $v) {
+				if ($wid !== '$erreur')
+					echo "<div id='$wid'>$v</div><hr />\n";
+			}
+			echo "<a href='".quote_amp(_request('redirect'))."'>"
+				.quote_amp(_request('redirect'))
+				."</a>\n";
+		}
+	}
+
+	// Cas normal : JSON
+	else {
+		echo json_export($r);
+	}
+
+	exit;
 }
 
 ?>

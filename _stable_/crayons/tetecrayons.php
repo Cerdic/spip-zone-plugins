@@ -172,6 +172,53 @@ function balise_EDIT($p) {
 	return $p;
 }
 
+function creer_le_crayon($type, $champ, $id) {
+	include_spip('inc/crayons');
+	include_spip('action/crayons_html');
+	$a = affiche_controleur("crayon $type-$champ-$id",
+		array('w' => 485, 'h' => 300, 'wh' => 500)
+	);
+	return $a['$erreur'] ? $a['$erreur'] : $a['$html'];
+}
+
+// #CRAYON{ps} pour creer le crayon ps SI ?edit=1;
+function balise_CRAYON($p) {
+
+	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	// #CRAYON hors boucle ? ne rien faire
+	if (!$type = $p->boucles[$i_boucle]->type_requete) {
+		$p->code = "''";
+		$p->interdire_scripts = false;
+		return $p;
+	}
+
+	// crayon sur une base distante 'nua:article-intro-5'
+	// on ne sait pas encore les gerer, mais au moins on les detecte
+	if ($distant = $p->boucles[$i_boucle]->sql_serveur)
+		$type = "$distant:$type";
+
+	// le compilateur 1.9.2 ne calcule pas primary pour les tables secondaires
+	if (!($primary = $p->boucles[$i_boucle]->primary)) {
+		list($nom, $desc) = trouver_def_table(
+			$p->boucles[$i_boucle]->type_requete, $p->boucles[$i_boucle]);
+		$primary = $desc['key']['PRIMARY KEY'];
+	}
+	$primary = explode(',',$primary);
+	$id = array();
+	foreach($primary as $key)
+		$id[] = champ_sql(trim($key),$p);
+	$primary = implode(".'-'.",$id);
+	$p->code = "creer_le_crayon('"
+		. $type
+		."',"
+		.sinon(interprete_argument_balise(1,$p),"''")
+		.","
+		. $primary
+		.").' '";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 
 // Donne la classe crayon en fonction
 // - du type de la boucle

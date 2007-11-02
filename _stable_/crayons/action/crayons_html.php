@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function affiche_controleur($class) {
+function affiche_controleur($class, $c=null) {
 	$return = array('$erreur'=>'');
 
 	if (preg_match(_PREG_CRAYON, $class, $regs)) {
@@ -16,7 +16,7 @@ function affiche_controleur($class) {
 			OR $f = charger_fonction($champ, 'controleurs', true)
 			OR $f = charger_fonction($type, 'controleurs', true)
 			OR $f = 'controleur_dist';
-			list($html,$status) = $f($regs);
+			list($html,$status) = $f($regs, $c);
 			if ($status) {
 				$return['$erreur'] = $html;
 			} else {
@@ -29,7 +29,7 @@ function affiche_controleur($class) {
 	return $return;
 }
 
-function controleur_dist($regs) {
+function controleur_dist($regs, $c=null) {
 	list( , $nomcrayon, $type, $champ, $id, $class) = $regs;
 	$options = array(
 		'class' => $class
@@ -92,12 +92,13 @@ function controleur_dist($regs) {
 		}
 	}
 
-	$crayon = new Crayon($nomcrayon, $valeur, $options);
+	$crayon = new Crayon($nomcrayon, $valeur, $options, $c);
 	$inputAttrs['style'] = join($crayon->styles);
 
-	if (!$controleur)
+	if (!$controleur) {
 		$inputAttrs['style'] .= 'width:' . $crayon->largeur . 'px;' .
 		 ($crayon->hauteur ? ' height:' . $crayon->hauteur . 'px;' : '');
+	}
 
 	$html = $controleur ? $crayon->formulaire(null, $inputAttrs) :
 					$crayon->formulaire($option['inmode'], $inputAttrs);
@@ -138,7 +139,7 @@ class Crayon {
 	// $name : son nom
 	// $texts : tableau associatif des valeurs ou valeur unique si crayon monochamp
 	// $options : options directes du crayon (developpement)
-	function Crayon($name, $texts = array(), $options = array()) {
+	function Crayon($name, $texts = array(), $options = array(), $c=null) {
 		$this->name = $name;
 		list($this->type, $this->modele, $this->id) = explode('-', $this->name, 3);
 		if (is_scalar($texts) || is_null($texts)) {
@@ -150,7 +151,7 @@ class Crayon {
 		foreach ($options as $opt=>$val) {
 			$this->$opt = $val;
 		}
-		$this->dimension();
+		$this->dimension($c);
 		$this->css();
 	}
 
@@ -160,13 +161,13 @@ class Crayon {
 	}
 
 	// dimensions indicatives
-	function dimension() {
+	function dimension($c) {
 		// largeur du crayon
-		$this->largeur = min(max(intval(_request('w')),
+		$this->largeur = min(max(intval(_request('w', $c)),
 					$this->largeurMini), $this->largeurMaxi);
 		// hauteur maxi d'un textarea selon wh: window height
-		$maxheight = min(max(intval(_request('wh')) - 50, 400), $this->hauteurMaxi);
-		$this->hauteur = min(max(intval(_request('h')), $this->hauteurMini), $maxheight);
+		$maxheight = min(max(intval(_request('wh', $c)) - 50, 400), $this->hauteurMaxi);
+		$this->hauteur = min(max(intval(_request('h', $c)), $this->hauteurMini), $maxheight);
 	}
 
 	// recuperer les elements de style
