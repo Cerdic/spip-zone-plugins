@@ -75,7 +75,7 @@ $.fn.crayon = function(){
 
 // ouvre un crayon
 $.fn.opencrayon = function(evt, percent) {
-  if (evt.stopPropagation) {
+  if (evt && evt.stopPropagation) {
     evt.stopPropagation();
   }
   return this
