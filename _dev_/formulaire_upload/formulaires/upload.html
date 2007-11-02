@@ -46,11 +46,11 @@
 	<br class='nettoyeur' />
 	[(#CONFIG{formupload/insert_code}|?{' ',''})
 	<div class="insert_code">
-		<strong><:formupload:insert_code:></strong><br>
+		<strong><:formupload:insert_code:></strong><br />
 		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{' ',''})
 		<abbr title="<:formupload:img_left:>">&lt;img#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:img_center:>">&lt;img#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:img_right:>">&lt;img#ID_DOCUMENT|right&gt;]
 		[(#TYPE_DOCUMENT|match{jpg|gif|png}|?{'',' '})
-		<abbr title="<:formupload:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:doc_right:>&lt;doc#ID_DOCUMENT|right&gt;</abbr>]
+		<abbr title="<:formupload:doc_left:>">&lt;doc#ID_DOCUMENT|left&gt;</abbr> <abbr title="<:formupload:doc_center:>">&lt;doc#ID_DOCUMENT|center&gt;</abbr> <abbr title="<:formupload:doc_right:>">&lt;doc#ID_DOCUMENT|right&gt;</abbr>]
 	</div>]
 	</div>
 	</BOUCLE_docs>
