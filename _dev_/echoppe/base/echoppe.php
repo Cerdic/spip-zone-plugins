@@ -3,18 +3,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 //include_spip('base/serial');
-include_spip('base/create');
-include_spip('inc/acces');
-include_spip('base/serial');
-include_spip('base/auxiliaires');
-include_spip('base/typedoc');
-include_spip('base/abstract_sql');
 
 global $tables_principales;
 global $tables_auxiliaires;
 global $tables_jointures;
+global $table_des_tables;
 
-$GLOBALS['echoppe_version_base'] = 0.1;
+$GLOBALS['echoppe_version_base'] = 0.2;
 
 
 $spip_echoppe_categories = array(
@@ -66,7 +61,7 @@ $spip_echoppe_produits = array(
 	"largeur"		=> "float DEFAULT '0' NOT NULL",
 	"longueur"		=> "float DEFAULT '0' NOT NULL",
 	"colisage"		=> "VARCHAR(10) DEFAULT '' NOT NULL", //(ça pourrait etre une donnée d'info sur la taille du colis ( ou lettre, ou palettes ... etc )
-	"ref_produit"		=> "text NOT NULL",
+	"ref_produit"		=> "tinytext NOT NULL",
 	"prix_base_htva"	=> "float DEFAULT '0' NOT NULL", 	//(permettrait de donner un prix de base et pas faire 50000 jointures pour retrouver le prix dans une liste de produits....)
 	"maj"			=> "TIMESTAMP",
 	"statut"		=> "varchar(10) DEFAULT '0' NOT NULL"
@@ -342,7 +337,7 @@ $spip_echoppe_prix_join = array(
 $spip_echoppe_client = array(
 	"id_client"	=> "bigint(21) NOT NULL",
 	"id_auteur"	=> "bigint(21) NOT NULL",
-	"token_client"	=> "tinytext NOT NULL"
+	"token_client"	=> "VARCHAR(255) NOT NULL"
 	);
 
 
@@ -385,13 +380,129 @@ $spip_echoppe_panier_join = array(
 	"token_panier"	=> "token_panier"
 	);
 
- $tables_principales['spip_echoppe_categories'] = array(
+
+
+$tables_principales['spip_echoppe_categories'] = array(
 	'field' => &$spip_echoppe_categories,
 	'key' => &$spip_echoppe_categories_key,
 	'join' => &$spip_echoppe_categories_join
 	);
-	spip_log('Installation bdd echoppe');
-	creer_base();
-	spip_log('Installation bdd echoppe OK');
+
+$tables_principales['spip_echoppe_categories_descriptions'] = array(
+	'field' => &$spip_echoppe_categories_descriptions,
+	'key' => &$spip_echoppe_categories_descriptions_key,
+	'join' => &$spip_echoppe_categories_descriptions_join
+	);
+
+$tables_principales['spip_echoppe_produits'] = array(
+	'field' => &$spip_echoppe_produits,
+	'key' => &$spip_echoppe_produits_key,
+	'join' => &$spip_echoppe_produits_join
+	);
+
+$tables_principales['spip_echoppe_produits_descriptions'] = array(
+	'field' => &$spip_echoppe_produits_descriptions,
+	'key' => &$spip_echoppe_produits_descriptions_key,
+	'join' => &$spip_echoppe_produits_descriptions_join
+	);
+
+$tables_principales['spip_echoppe_categories_produits'] = array(
+	'field' => &$spip_echoppe_categories_produits,
+	'key' => &$spip_echoppe_categories_produits_key,
+	'join' => &$spip_echoppe_categories_produits_join
+	);
+
+$tables_principales['spip_echoppe_gammes'] = array(
+	'field' => &$spip_echoppe_gammes,
+	'key' => &$spip_echoppe_gammes_key,
+	'join' => &$spip_echoppe_gammes_join
+	);
+
+$tables_principales['spip_echoppe_gammes_produits'] = array(
+	'field' => &$spip_echoppe_gammes_produits,
+	'key' => &$spip_echoppe_gammes_produits_key,
+	'join' => &$spip_echoppe_gammes_produits_join
+	);
+
+$tables_principales['spip_echoppe_categories_rubriques'] = array(
+	'field' => &$spip_echoppe_categories_rubriques,
+	'key' => &$spip_echoppe_categories_rubriques_key,
+	'join' => &$spip_echoppe_categories_rubriques_join
+	);
 	
+$tables_principales['spip_echoppe_categories_articles'] = array(
+	'field' => &$spip_echoppe_categories_articles,
+	'key' => &$spip_echoppe_categories_articles_key,
+	'join' => &$spip_echoppe_categories_articles_join
+	);
+
+$tables_principales['spip_echoppe_produits_articles'] = array(
+	'field' => &$spip_echoppe_produits_articles,
+	'key' => &$spip_echoppe_produits_articles_key,
+	'join' => &$spip_echoppe_produits_articles_join
+	);
+
+$tables_principales['spip_echoppe_produits_rubriques'] = array(
+	'field' => &$spip_echoppe_produits_rubriques,
+	'key' => &$spip_echoppe_produits_rubriques_key,
+	'join' => &$spip_echoppe_produits_rubriques_join
+	);
+
+$tables_principales['spip_echoppe_produits_sites'] = array(
+	'field' => &$spip_echoppe_produits_sites,
+	'key' => &$spip_echoppe_produits_sites_key,
+	'join' => &$spip_echoppe_produits_sites_join
+	);
+
+$tables_principales['spip_echoppe_produits_documents'] = array(
+	'field' => &$spip_echoppe_produits_documents,
+	'key' => &$spip_echoppe_produits_documents_key,
+	'join' => &$spip_echoppe_produits_documents_join
+	);
+
+$tables_principales['spip_echoppe_options'] = array(
+	'field' => &$spip_echoppe_options,
+	'key' => &$spip_echoppe_options_key,
+	'join' => &$spip_echoppe_options_join
+	);
+
+$tables_principales['spip_echoppe_options_descriptifs'] = array(
+	'field' => &$spip_echoppe_options_descriptifs,
+	'key' => &$spip_echoppe_options_descriptifs_key,
+	'join' => &$spip_echoppe_options_descriptifs_join
+	);
+
+$tables_principales['spip_echoppe_options_valeurs'] = array(
+	'field' => &$spip_echoppe_options_valeurs,
+	'key' => &$spip_echoppe_options_valeurs_key,
+	'join' => &$spip_echoppe_options_valeurs_join
+	);
+
+$tables_principales['spip_echoppe_options_valeurs_descriptifs'] = array(
+	'field' => &$spip_echoppe_options_valeurs_descriptifs,
+	'key' => &$spip_echoppe_options_valeurs_descriptifs_key,
+	'join' => &$spip_echoppe_options_valeurs_descriptifs_join
+	);
+
+$tables_principales['spip_echoppe_prix'] = array(
+	'field' => &$spip_echoppe_prix,
+	'key' => &$spip_echoppe_prix_key,
+	'join' => &$spip_echoppe_prix_join
+	);
+
+$tables_principales['spip_echoppe_client'] = array(
+	'field' => &$spip_echoppe_client,
+	'key' => &$spip_echoppe_client_key,
+	'join' => &$spip_echoppe_client_join
+	);
+
+$tables_principales['spip_echoppe_panier'] = array(
+	'field' => &$spip_echoppe_panier,
+	'key' => &$spip_echoppe_panier_key,
+	'join' => &$spip_echoppe_panier_join
+	);
+
+
+
+
 ?>

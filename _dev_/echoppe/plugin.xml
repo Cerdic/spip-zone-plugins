@@ -18,12 +18,10 @@ _ - CFG 1.0.6
 _ - Inscription2 0.2
 	</description>
 	<icon></icon>
-	<prefix>
-		echoppe
-	</prefix>
+	<prefix>echoppe</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />
 	<necessite id='Inscription2' version='[0.2;]' />
-	<install>echoppe_upgrade.php</install>
+	<install>base/echoppe_upgrade.php</install>
 	<options>
 	</options>
 	<fonctions>
