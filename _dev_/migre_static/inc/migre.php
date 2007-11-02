@@ -20,8 +20,12 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (defined("_INC_MIGRE")) return; else define("_INC_MIGRE", true);
 
-$GLOBALS['migrestatic_version'] = 0.83;
+if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
+
+$infos=plugin_get_infos(_DIR_PLUGIN_MIGRESTATIC);
+$GLOBALS['migrestatic_version'] = $infos['version']; // was 0.83
 $GLOBALS['migrestatic'] = @unserialize($GLOBALS['meta']['migrestatic']);
 
 // ------------------------------------------------------------------------------
@@ -45,7 +49,7 @@ function migre_static_init_metas()
 	$migre_meta['migre_cs_decoupe']= "checked";
 	if ($migre_meta!= $GLOBALS['meta']['migrestatic']) {
 		include_spip('inc/meta');
-		ecrire_meta('migre_static', serialize($migre_meta));
+		ecrire_meta('migrestatic', serialize($migre_meta));
 		ecrire_metas();
 		$GLOBALS['migrestatic'] = @unserialize($GLOBALS['meta']['migrestatic']);
 		spip_log('migrestatic : migre_static_init_metas OK');
@@ -67,6 +71,21 @@ function migre_static_delete_metas()
 		spip_log('migrestatic : migre_static_delete_meta OK');
 	}
 } // migre_static_delete_metas
+
+// ------------------------------------------------------------------------------
+// [fr] Mise à jour des metas du plugin
+// [en] Update plugin metas
+// ------------------------------------------------------------------------------
+function migre_static_update_metas()
+{
+	$migre_meta = @unserialize($GLOBALS['meta']['migrestatic']);
+	$migre_meta['version']= $GLOBALS['migrestatic_version'];
+	include_spip('inc/meta');
+	ecrire_meta('migrestatic', serialize($migre_meta));
+	ecrire_metas();
+	$GLOBALS['migrestatic'] = @unserialize($GLOBALS['meta']['migrestatic']);
+	spip_log('migrestatic : migre_static_update_metas OK');
+} // migre_static_update_metas
 
 // ------------------------------------------------------------------------------
 // [fr] Tableau de correspondance par defaut des differentes balises html

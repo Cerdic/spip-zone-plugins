@@ -20,7 +20,8 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip("inc/migre"); // [fr] Charge les fonctions de migre_static [en] Loads migre_static functions
+
+include_spip('inc/migre'); // [fr] Charge les fonctions de migre_static [en] Loads migre_static functions
 
 function migrestatic_install($action)
 {
@@ -64,6 +65,10 @@ function migre_static_upgrade()
 
 	if ( $installed_version < 0.83 ) {
 		migre_static_init_metas(); // we reset everything
+	}
+
+	if ( $installed_version < $version_code ) {
+		migre_static_update_metas();
 	}
 
 	spip_log('migrestatic : migre_static_upgrade OK');
