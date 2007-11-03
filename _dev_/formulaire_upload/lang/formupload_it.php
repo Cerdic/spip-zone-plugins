@@ -2,7 +2,7 @@
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 	'yourfiles' => 'I tuoi file',
-	'choosefiles' => 'Scelgiere i file da aggiugere:',
+	'choosefiles' => 'Scegliere i file da aggiungere:',
 	'nodocs' => 'Nessun documento nella zona di upload',
 	'insert_code' => 'Codice da inserire nella zona di testo:',
 	'doc_delete' => 'Elimina questo dicumento',
