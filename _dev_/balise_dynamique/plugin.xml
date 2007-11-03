@@ -1,12 +1,12 @@
 <plugin>
-        <nom>Un mod&#232;le de balise #DYNAMIQUE</nom>
+        <nom>Shoutbox : un mod&#232;le de balise dynamique</nom>
         <version>
           0.1
         </version>
         <etat>
           dev
         </etat>
-        <prefix>balise_dynamique</prefix>
+        <prefix>shoutbox</prefix>
         <description>
         Un exemple de plugin pour apprendre &#223; faire des balises dynamiques
         </description>
