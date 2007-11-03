@@ -65,7 +65,6 @@ function action_ical()
 	$titres = Array();
 	$nb_articles = spip_ical_articles($nom_site, $id_utilisateur, $id_secteur);
 	$nb_breves = spip_ical_breves($nom_site, $id_utilisateur, $id_secteur);
-	$nb_articles=0;
 	if ($nb_articles || $nb_breves) {
 		if ($nb_articles > 0) $titre_prop[] = _T('info_articles_proposes').": ".$nb_articles;
 		if ($nb_breves > 0) $titre_prop[] = _T('info_breves_valider').": ".$nb_breves;
@@ -194,6 +193,7 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur)
 {
 	global $titres;
+	$nb_articles=0;
 	$opt_prive = array();
 	$opt_prive['publique'] = false;
 	$opt_publique = array();
@@ -268,6 +268,7 @@ function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur)
 function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur)
 {
 	global $titres;
+	$nb_breves=0;
 	$opt_prive = array();
 	$opt_prive['publique'] = false;
 	$opt_publique = array();
