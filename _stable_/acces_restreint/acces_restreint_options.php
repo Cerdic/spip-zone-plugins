@@ -28,7 +28,7 @@ $GLOBALS['marqueur'] .= ":AccesRestreint_zones_autorisees="
 //
 
 if(!function_exists('autoriser_rubrique_voir')) {
-function autoriser_rubrique_voirff($faire, $type, $id, $qui, $opt) {
+function autoriser_rubrique_voir($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/acces_restreint');
 	static $rub_exclues;
 	if (isset($opt['publique']))
@@ -49,7 +49,7 @@ function autoriser_rubrique_voirff($faire, $type, $id, $qui, $opt) {
 }
 }
 if(!function_exists('autoriser_article_voir')) {
-function autoriser_article_voirff($faire, $type, $id, $qui, $opt) {
+function autoriser_article_voir($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/acces_restreint');
 	static $art_exclus;
 	if (isset($opt['publique']))
@@ -70,7 +70,7 @@ function autoriser_article_voirff($faire, $type, $id, $qui, $opt) {
 }
 }
 if(!function_exists('autoriser_breve_voir')) {
-function autoriser_breve_voirff($faire, $type, $id, $qui, $opt) {
+function autoriser_breve_voir($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/acces_restreint');
 	static $breves_exclues;
 	if (isset($opt['publique']))
@@ -91,7 +91,7 @@ function autoriser_breve_voirff($faire, $type, $id, $qui, $opt) {
 }
 }
 if(!function_exists('autoriser_site_voir')) {
-function autoriser_site_voirff($faire, $type, $id, $qui, $opt) {
+function autoriser_site_voir($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/acces_restreint');
 	static $sites_exclus;
 	if (isset($opt['publique']))
@@ -112,7 +112,7 @@ function autoriser_site_voirff($faire, $type, $id, $qui, $opt) {
 }
 }
 if(!function_exists('autoriser_evenement_voir')) {
-function autoriser_evenement_voirff($faire, $type, $id, $qui, $opt) {
+function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/acces_restreint');
 	static $evenements_exclus;
 	if (isset($opt['publique']))
