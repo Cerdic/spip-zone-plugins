@@ -5,7 +5,7 @@
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<lien></lien>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>stable</etat>
     <description>
 Fournit des filtres pour le traitement des images, essentiellement 
@@ -17,14 +17,14 @@ Une page de test permet de voir <a href="../?page=tests_fonctions_images">les fi
 - en_image
 - couleur_chroma
 - couleur_saturer
+- image_contour_alpha
+- image_courbe
+- image_dispersion
 - image_estampage_alpha
-- image_saturer
+- image_float
 - image_niveaux_gris_auto
 - image_podpod
-- image_courbe
-- image_float
-- image_contour_alpha
-	
+- image_saturer
 	</description>
 	<prefix>Fonctions_images</prefix>
     <fonctions>fonctions_images_fonctions.php</fonctions>
