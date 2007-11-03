@@ -241,12 +241,14 @@ function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur)
 				$auteurs .= $aut_row['nom'];
 			}
 			$arbre = icpe_arbre($id_rubrique);
+			if ($acces_prive) $url=generer_url_ecrire("articles","id_article=$id_article");
+			else $url=generer_url_public("article","id_article=$id_article");
+			
 			$texte = _T('icpe:derniere_modification')." ".affdate($row['date_modif'])."\\n";
 			$texte .= _T('info_mise_en_ligne')." ".affdate($row['date'])."\n";
 			if ($row['descriptif']) $texte .= "\\n\\n"._T('info_descriptif')." ".textebrut($row['descriptif'])."\n";
 			if ($row['texte']) $texte .= "\\n\\n"._T('info_texte')." ".couper(textebrut($row['texte']),300)."\n";
-			if ($acces_prive) $url=generer_url_ecrire("articles","id_article=$id_article");
-			else $url=generer_url_public("article","id_article=$id_article");
+			$texte .=  _T('info_lien_hypertexte').' '.$url."\n";
 			
 			echo filtrer_ical ("BEGIN:VEVENT"), "\n",
 			filtrer_ical ("SUMMARY:[$nom_site] $titre - $auteurs (".$cat.")"), "\n";
@@ -303,9 +305,11 @@ function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur)
 			if ($statut=='prop') $nb_breves++;
 			if ($acces_prive) $url=generer_url_ecrire("breves_voir","id_breve=$id_breve");
 			else $url=generer_url_public("breve","id_breve=$id_breve");
+			
 			$texte = _T('icpe:derniere_modification')." ".affdate($row['maj'])."\\n";
 			$texte .= _T('info_mise_en_ligne')." ".affdate($row['date_heure'])."\n";
 			if ($row['texte']) $texte .= "\\n\\n"._T('info_texte')." ".couper(textebrut($row['texte']),300)."\n";
+			$texte .=  _T('info_lien_hypertexte').' '.$url."\n";
 			echo filtrer_ical ("BEGIN:VEVENT"), "\n",
 				filtrer_ical ("SUMMARY:[$nom_site] $titre (".$cat.")"), "\n";
 			ligne_uid ("breve$id_breve");
