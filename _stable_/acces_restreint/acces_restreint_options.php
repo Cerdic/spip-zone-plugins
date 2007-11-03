@@ -85,7 +85,7 @@ function autoriser_breve_voir($faire, $type, $id, $qui, $opt) {
 			$breves_exclues = AccesRestreint_liste_breves_exclues($publique,$qui['id_auteur']);
 		else
 			$breves_exclues = AccesRestreint_liste_breves_exclues($publique);
-		$breves_exclues = array_flip($breves_exclus);
+		$breves_exclues = array_flip($breves_exclues);
 	}
 	return !isset($breves_exclues[$id]);
 }
