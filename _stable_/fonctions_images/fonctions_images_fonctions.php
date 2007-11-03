@@ -752,6 +752,173 @@ function image_sincity($im)
 
 
 
+/*
+ * http://www.paris-beyrouth.org/Un-filtre-de-dispersion-graphique 
+ */
+function image_dispersion($im, $masque, $h=5, $v=5, $pos="") {
+	
+	$nom = ereg_replace("\.(png|jpg|gif)$", "", $masque);
+	$nom = ereg_replace("/","-",$nom);
+
+	$numargs = func_num_args();
+	$arg_list = func_get_args();
+	$texte = $arg_list[0];
+	for ($i = 1; $i < $numargs; $i++) {
+		if (ereg("\=", $arg_list[$i])) {
+			$nom_variable = substr($arg_list[$i], 0, strpos($arg_list[$i], "="));
+			$val_variable = substr($arg_list[$i], strpos($arg_list[$i], "=")+1, strlen($arg_list[$i]));
+			$variable["$nom_variable"] = $val_variable;
+			$defini["$nom_variable"] = 1;
+		}
+	}
+
+	$image = valeurs_image_trans($im, "disp$nom-$h-$v$pos", "png");
+	if (!$image) return("");
+
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	$creer = $image["creer"];
+
+	if (strlen($pos) > 0) {
+		$placer = true;
+	}
+	else $placer = false;
+
+	if ($creer) {
+		include_spip('inc/logos'); // bicoz presence reduire_image
+	
+		$masque = find_in_path($masque);	
+		$mask = valeurs_image_trans($masque,"");
+		$im_m = $mask["fichier"];
+		$x_m = $mask["largeur"];
+		$y_m = $mask["hauteur"];
+	
+		$im2 = $mask["fonction_imagecreatefrom"]($masque);
+		
+		if ($placer) {
+			// On fabriquer une version "agrandie" du masque,
+			// aux dimensions de l'image source
+			// et on "installe" le masque dans cette image
+			// ainsi: aucun redimensionnement
+			
+			$dx = 0;
+			$dy = 0;
+			
+			if ($defini["right"]) {
+				$right = $variable["right"];
+				$dx = ($x_i - $x_m) - $right;
+			}
+			if ($defini["bottom"]) {
+				$bottom = $variable["bottom"];
+				$dy = ($y_i - $y_m) - $bottom;
+				}
+			if ($defini["top"]) {
+				$top = $variable["top"];
+				$dy = $top;
+			}
+			if ($defini["left"]) {
+				$left = $variable["left"];
+				$dx = $left;
+			}
+				
+			$im3 = imagecreatetruecolor($x_i, $y_i);
+			@imagealphablending($im3, false);
+			@imagesavealpha($im3,true);
+			$color_t = ImageColorAllocateAlpha( $im3, 128, 128, 128 , 0 );
+			imagefill ($im3, 0, 0, $color_t);
+
+			imagecopy ( $im3, $im2, $dx, $dy, 0, 0, $x_m, $y_m);	
+
+			imagedestroy($im2);
+			$im2 = imagecreatetruecolor($x_i, $y_i);
+			@imagealphablending($im2, false);
+			@imagesavealpha($im2,true);
+			
+			imagecopy ( $im2, $im3, 0, 0, 0, 0, $x_i, $y_i);			
+			imagedestroy($im3);
+			$x_m = $x_i;
+			$y_m = $y_i;
+		}
+	
+		$rapport = $x_i / $x_m;
+		if (($y_i / $y_m) < $rapport ) {
+			$rapport = $y_i / $y_m;
+		}
+			
+		$x_d = ceil($x_i / $rapport);
+		$y_d = ceil($y_i / $rapport);
+		
+		if ($x_i < $x_m OR $y_i < $y_m) {
+			$x_dest = $x_i;
+			$y_dest = $y_i;
+			$x_dec = 0;
+			$y_dec = 0;
+		} else {
+			$x_dest = $x_m;
+			$y_dest = $y_m;
+			$x_dec = round(($x_d - $x_m) /2);
+			$y_dec = round(($y_d - $y_m) /2);
+		}
+
+		$nouveau = valeurs_image_trans(reduire_image($im, $x_d, $y_d),"");
+		$im_n = $nouveau["fichier"];
+		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
+		$im_ = imagecreatetruecolor($x_dest, $y_dest);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+		imagefill ($im_, 0, 0, $color_t);
+
+		for ($x = 0; $x < $x_dest; $x++) {
+			for ($y=0; $y < $y_dest; $y++) {
+
+				$rgb2 = ImageColorAt($im2, $x+$x_dec, $y+$y_dec);
+				$a2 = ($rgb2 >> 24) & 0xFF;
+				$r2 = ($rgb2 >> 16) & 0xFF;
+				$g2 = ($rgb2 >> 8) & 0xFF;
+				$b2 = $rgb2 & 0xFF;
+
+				$g2 = ($r2+$g2+$b2)/3;
+				$val = ($g2-127)/127;
+				$xd = $x - ($val*$h);
+				$yd = $y + ($val*$v);
+
+				$xd = max(0,$xd);
+				$yd = max(0,$yd);
+				if ($xd > $x_dest - $x_dec - 1) $xd = $x_dest - $x_dec - 1;
+				if ($yd > $y_dest - $y_dec - 1) $yd = $y_dest - $y_dec - 1;
+
+				$rgb = ImageColorAt($im, $xd+$x_dec, $yd+$y_dec);
+				$a = ($rgb >> 24) & 0xFF;
+				$r = ($rgb >> 16) & 0xFF;
+				$g = ($rgb >> 8) & 0xFF;
+				$b = $rgb & 0xFF;
+
+				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b, $a );
+				imagesetpixel ($im_, $x, $y, $color);				}
+		}
+
+		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
+		imagedestroy($im);
+		imagedestroy($im2);
+
+	}
+
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	return "<img src='$dest'$tags />";
+}
+
+
+
+
+
 /* ------------------ Autres fonctions ---------------------------- */
 
 /*
@@ -814,5 +981,6 @@ function couleur_tableau_chroma($coul, $tot=6, $debut=1, $fin=0){
 	
 	return $retour;
 } 
+ 
  
 ?>

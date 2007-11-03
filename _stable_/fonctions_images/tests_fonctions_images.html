@@ -170,7 +170,30 @@ Des titres en relief</a>)</dd>
  		|extraire_attribut{src})],top=-1,left=-1})]</dd>	
 
 
-</dl>
 
+
+
+
+
+<dt>image_dispersion</dt>
+<dd>R&eacute;aliser des dispersions, des floutages
+(Paris-Beyrouth : <a href="http://www.paris-beyrouth.org/Un-filtre-de-dispersion-graphique">
+Un filtre de dispersion graphique</a>)</dd>
+<dd><code>[(# CHEMIN{img/souci.jpg}|image_dispersion{img/disp-points.png,4,4})]<br />
+		[(# CHEMIN{img/disp-points.png}|en_image|image_recadre{200,150})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|image_dispersion{img/disp-points.png,4,4})] 
+		[(#CHEMIN{img/disp-points.png}|en_image|image_recadre{200,150})]</dd>
+	
+<dd><code>[(# CHEMIN{img/souci.jpg}|image_dispersion{img/disp-twirl.png,8,8})]<br />
+		[(# CHEMIN{img/disp-twirl.png}|en_image|image_recadre{200,150})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|image_dispersion{img/disp-twirl.png,8,8})] 
+		[(#CHEMIN{img/disp-twirl.png}|en_image|image_recadre{200,150})]</dd>
+	
+<dd><code>[(# CHEMIN{img/souci.jpg}|image_dispersion{img/disp-noir.png,6,6})]<br />
+		[(# CHEMIN{img/disp-noir.png}|en_image|image_recadre{200,150})]</code></dd>
+<dd>[(#CHEMIN{img/souci.jpg}|image_dispersion{img/disp-noir.png,6,6})] 
+		[(#CHEMIN{img/disp-noir.png}|en_image|image_recadre{200,150})]</dd>	
+
+</dl>
 </body>
 </html>
