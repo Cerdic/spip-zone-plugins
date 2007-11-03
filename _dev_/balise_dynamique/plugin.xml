@@ -1,0 +1,12 @@
+<plugin>
+        <nom>Un mod&#232;le de balise #DYNAMIQUE</nom>
+        <version>
+          0.1
+        </version>
+        <etat>
+          dev
+        </etat>
+        <description>
+        Un exemple de plugin pour apprendre &#223; faire des balises dynamiques
+        </description>
+</plugin>
