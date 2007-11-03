@@ -140,6 +140,11 @@ function barre_ancre(debut,milieu,fin,affich,champ,barre) {
 function barre_inserer(text,champ, barre) {
 	var txtarea = champ;
 	
+	 if (is_ie) {
+		txtarea.focus();
+		txtarea.caretPos = document.selection.createRange().duplicate();
+	}
+	
 	if (txtarea.createTextRange && txtarea.caretPos) {
 		var caretPos = txtarea.caretPos;
 		caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? caretPos.text + text + ' ' : caretPos.text + text;
