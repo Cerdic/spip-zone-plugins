@@ -102,7 +102,8 @@ function AccesRestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 		if (is_null($id_auteur) AND $GLOBALS['AccesRestreint_zones_autorisees'])
 			$cond .= " AND zr.id_zone NOT IN (".$GLOBALS['AccesRestreint_zones_autorisees'].")";
 		elseif (!is_null($id_auteur))
-			$cond .= " AND zr.id_zone NOT IN (".AccesRestreint_liste_zones_autorisees('',$id_auteur).")";
+			if ($zones_autorisees=AccesRestreint_liste_zones_autorisees('',$id_auteur))
+				$cond .= " AND zr.id_zone NOT IN (".$zones_autorisees.")";
 
 		$liste_rub_exclues[$publique] = AccesRestreint_liste_contenu_zone_rub($cond);
 		$liste_rub_exclues[$publique] = array_unique($liste_rub_exclues[$publique]);
