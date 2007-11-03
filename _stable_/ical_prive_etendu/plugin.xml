@@ -1,0 +1,28 @@
+<plugin>
+	<nom>
+	<multi>[fr]iCal priv&eacute; &eacute;tendu pour 1.9.2
+	</nom>
+	<auteur>
+	Joseph LARMARANGE - http://joseph.larmarange.net
+	</auteur>
+	<icon>images/calendrier-24.gif</icon>
+	<version>
+	1.0
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	<multi>
+	[fr] Ce plugin vient surcharger le flux {iCal} priv&eacute; g&eacute;n&eacute;r&eacute; par SPIP pour y inclure l'ensemble des messages
+	et annonces de la messagerie interne ainsi que l'ensemble des articles et des br&egrave;ves du site (quelque soit leur statut). 
+	Pour chaque auteur, le plugin v&eacute;rifie les droits de visualiser un article ou une br&egrave;ve. Chaque auteur ne verra donc que les 
+	articles et les br&egrave;ves qu'il peut visualiser dans l'espace priv&eacute;. En ce sens, ce plugin est compatible avec acces_restreint. 
+	Si celui-ci est activ&eacute;, alors chaque r&eacute;dacteur ne verra dans ce flux que s'il est autoris&eacute; à voir dans l'espace priv&eacute;.
+	</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/spip.php?article2500</lien> <!-- URI de documentation -->
+	<prefix>
+	icpe
+	</prefix>
+</plugin>
