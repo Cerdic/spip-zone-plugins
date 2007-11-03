@@ -1,0 +1,5 @@
+<?php
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+	'ical_texte_prive' => 'Ce calendrier personnel et priv&eacute; vous permet de suivre &agrave; la fois votre messagerie interne au site et les articles et les br&egrave;ves du site auxquels vous avez acc&egrave;s dans l\'espace publique ou dans l\'espace priv&eacute; (ce flux iCal est compatible avec le plugin Acc&egrave;s restreints).<p />Les articles et les br&egrave;ves sont positionn&eacute;s &agrave; leur date de derni&egrave;re modification. Seuls ceux ayant &eacute;t&eacute; modifi&eacute;s il y a moins de 30 jours sont affich&eacute;s (les articles et les br&egrave;ves propos&eacute;s &agrave; publication sont syst&eacute;matiquement inclus quelque soit leur date).<p />Par ailleurs, si vous ajouter <i>&id_secteur=</i>num&eacute;ro_du_secteur &agrave; l\'url du flux, vous pouvez restreindre le flux &agrave; un secteur donn&eacute; (rappel : un secteur est une rubrique situ&eacute;e &agrave; la racine du site).'
+);
+?>
