@@ -433,7 +433,7 @@ if ($contenu_devoir[0]!="") {
 		echo ("<!--update ps: $result-->\n");
 ?>
 			<p><strong>Ne revenez pas en arrière, mais choisissez&nbsp;:</strong></p>
-			<p><a href="#URL_PAGE{cahier-de-texte-affichage-seance}&id_article=<?php echo ($id_contenu_seance); ?>" title="visualiser et ajouter des documents joints à cette séance ou ses devoirs" onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">
+			<p><a href="#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=recalcul}&id_article=<?php echo ($id_contenu_seance); ?>" title="visualiser et ajouter des documents joints à cette séance ou ses devoirs" onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">
 					<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">
 				Visualiser et/ou ajouter des documents à cette séance et ses devoirs
 				</a></p>

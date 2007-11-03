@@ -42,7 +42,7 @@ if($_GET['doc-choisi']) {
 	$sql ="UPDATE spip_articles SET surtitre='".addslashes($surtitre)."' WHERE id_article=".$_GET['id_article'];
 	$result = spip_query($sql);
 	echo ("		<!--update soustitre: $result-->\n");?>
-		<p>Le document encadré a été enregistré dans la fiche (#TITRE)</p>
+		<p class="avertissement">Le document encadré a été enregistré dans la fiche (#TITRE)</p>
 <?php
 }// fin du if doc choisi
 ?>
@@ -60,6 +60,7 @@ if($_GET['doc-choisi']) {
 				<input type="hidden"  name="page" value="cahier-de-texte-selection-document">
 				<input type="hidden" name="id_article" value="#ID_ARTICLE">
 				<input type="hidden" name="id_document" value="#ID_DOCUMENT">
+				<input type="hidden" name="debut_Documents" value="#ENV{debut_Documents}">
 				<input type="Submit" value="Choisir" name="doc-choisi">
 			</form>
 		</div>
@@ -70,7 +71,7 @@ if($_GET['doc-choisi']) {
 </B_Documents>
 		<br clear="all" />
 		<center style="margin-top: 1em;">
-			<input type='button' value='Fermer cette fenêtre (revenir au cahier de texte)' onClick='parent.opener.location.reload();self.close()' name="button">
+			<input type='button' value='Fermer cette fenêtre (revenir à la séance)' onClick='parent.opener.location.reload();self.close()' name="button">
 		</center>
 	</div>
 </div>
