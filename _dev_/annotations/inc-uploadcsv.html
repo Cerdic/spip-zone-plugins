@@ -1,0 +1,139 @@
+#CACHE{86400}
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.MultiFile.js})"></script>
+]
+
+
+
+
+			<div id="tous_docs">
+			<INCLURE{fond=modeles/upload_documents_auteurs}>
+			</div>
+
+
+
+<script type="text/javascript"><!--
+
+var load_zone_documents = function() {
+
+	var r = ($(this).attr('href')||'').match(/[?&;]debut_tous=([0-9]+)/);
+	r = r ? r[1] : 0;
+	$('#tous_docs')
+	.addClass('ajaxloading')
+	.css({'opacity': 0.5});
+	$.get(
+		'#URL_PAGE{annotation_mini_formulaire_upload}&liste=1&debut_tous='+r,
+		function(c) {
+			$('#tous_docs')
+			.html(
+				$('<iframe>').html(c).find('#tous_docs').html()
+			)
+			.removeClass('ajaxloading')
+			.css({'opacity':1.0});
+			pagination_zone();
+		}
+	);
+	return false;
+};
+
+var pagination_zone = function() {
+	$('#zone-documents')
+	.prev('.pagination')
+	.find('a')
+	.click(load_zone_documents);
+};
+pagination_zone();
+
+// --></script>
+
+
+<script type="text/javascript">
+(function($){
+	$(function(){
+		$("a.annotate_document").click(function(){
+			$.carto.idCsv = this.id.match(/\d+/);
+			$.carto.showAnnotatePanel(4);
+		})
+	});
+})(jQuery)
+
+</script>
+
+
+
+		#FORMULAIRE_UPLOAD{upload_annotation}
+
+
+<script type='text/javascript'><!--
+if (window.jQuery && jQuery.fn.ajaxForm) {
+function upload_attach (re) {
+	jQuery('#formulaire_upload>form')
+
+	// changer l'action : pas indispensable mais permet d'eviter la lenteur du
+	// recalcul total de la page, qui provoque en plus un rechargement
+	// des javascripts etc. dans l'iframe.
+	.attr('action', '#URL_PAGE{annotation_mini_formulaire_upload}')
+
+	.ajaxForm({
+		'beforeSubmit': function(formData, jqForm, options){
+			$('#formulaire_upload')
+			.addClass('ajaxloading')
+			.css({'opacity': 0.5});
+			return true;
+		},
+		'success': function(e){
+			var h;
+			if (h = $('<iframe><\/iframe>').html(e).find('#formulaire_upload').html()) {
+				$('#formulaire_upload')
+				.html(h)
+				.removeClass('ajaxloading')
+				.css({'opacity':1.0})
+				.find("a.annotate_document").click(function(){
+					$.carto.idCsv = this.id.match(/\d+/);
+					$.carto.showAnnotatePanel(4);
+				});
+				upload_attach(true);
+				load_zone_documents(); // recharge la partie du milieu
+			}
+			else
+				alert('bug !');
+		}
+	});
+
+	// si on reattache les evenements, remettre les crayons
+	if (re && window.cQuery)
+		cQuery("#formulaire_upload .crayon:lt(1000)").initcrayon();
+
+	// si multifile est la, on l'utilise (trop bien)
+	if (jQuery.fn.MultiFile)
+	$('#formulaire_upload>form input[@type=file]').MultiFile({
+		max: 5,
+		STRING: {'remove': 'x', 'selected': '$file'}
+	});
+
+	// et la pagination
+	$('#formulaire_upload .pagination a')
+	.click(function(){
+		var r = ($(this).attr('href')||'').match(/[?&;]debut_docs=([0-9]+)/);
+		r = r ? r[1] : 0;
+		$('#formulaire_upload')
+		.addClass('ajaxloading')
+		.css({'opacity': 0.5});
+		$.get(
+			'#URL_PAGE{annotation_mini_formulaire_upload}&debut_docs='+r,
+			function(c) {
+				$('#formulaire_upload')
+				.removeClass('ajaxloading')
+				.css({'opacity': 1.0})
+				.html(
+					$('<iframe>').html(c).find('#formulaire_upload').html()
+				);
+				upload_attach(true);
+			}
+		);
+		return false;
+	});
+
+};
+upload_attach(false);
+}
+// --></script>

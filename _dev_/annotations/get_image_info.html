@@ -1,0 +1,12 @@
+#CACHE{0}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+<BOUCLE_info(DOCUMENTS){id_document}>
+{	"attributes": {
+		"src": "#FICHIER",
+		"width": "#LARGEUR",
+		"height": "#HAUTEUR"
+	},
+	"postData": #JS_ACTION_AUTEUR{annotate_carto,#ID_DOCUMENT},
+	"imagePreview": "[(#FICHIER|image_reduire{#ENV{width,200},#ENV{height,200}})]"
+}
+</BOUCLE_info>

@@ -1,0 +1,101 @@
+<div class="formulaire_spip formulaire_forum"  id="formulaire_forum">
+
+<form action="#ENV{url}#formulaire_forum" method="post"><div>
+[(#ENV{url_post}|form_hidden)]
+[<input type="hidden" name="arg" value="(#ENV{arg})" />]
+[<input type="hidden" name="hash" value="(#ENV{hash})" />]
+[<input type="hidden" name="verif_(#ENV{hash})" value="ok" />]
+[<input type="hidden" name="retour_forum" value="(#ENV*{retour_forum}|rawurlencode)" />]
+[<fieldset class="reponse_formulaire">
+<legend><:bouton_radio_modere_priori:></legend>
+<p>(#ENV{modere})<:forum_info_modere:></p>
+</fieldset>]
+
+[(#ENV*{previsu})]
+
+<BOUCLE_G(GROUPES_MOTS)
+	{forum=(#CONFIG{mots_cles_forums}|choixsiegal{oui,oui,jamais})}
+	{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
+	{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}
+	{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}
+	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
+>
+[(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
+	<fieldset>
+	<legend><:mots_clefs:> : #TITRE</legend>
+		<INCLURE{fond=formulaires/choix_mots}{id_groupe}{ajouter_mot}{unseul}>
+	</fieldset>
+]</BOUCLE_G>
+
+
+
+	<fieldset>
+	<legend><:form_pet_message_commentaire:></legend>
+
+[(#CONFIG{forums_titre}|=={oui}|?{
+	<p><label for="titre"><:forum_titre:></label>
+	<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
+,
+	<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
+})]
+
+[(#CONFIG{forums_texte}|=={oui}|?{
+	<label><:forum_texte:></label>
+	<p><small><:info_creation_paragraphe:></small></p>
+	[(#ENV**{texte}|barre_textarea{12,40})]
+	</fieldset>
+})]
+
+	<fieldset>
+	<legend><:forum_lien_hyper:></legend>
+	<p><:forum_page_url:></p>
+	<p><label for="nom_site">Document</label>
+	<select name="nom_site" id="nom_site">
+	<option value=""[ selected="selected"(#ENV{nom_site}|?{'',' '})]></option>
+	<BOUCLE_cartes(DOCUMENTS){id_article}{extension IN jpg,gif,png}>
+	<option value="#ID_DOCUMENT"[ selected="selected"(#ENV{nom_site}|=={#ID_DOCUMENT}|?{' ',''})]>#TITRE (#ID_DOCUMENT - #FICHIER)</option>
+	</BOUCLE_cartes>
+	</select></p>
+	<p><label for="url_site">Coordinates</label><br />
+	<span id="anno_map_coords">Please select an image from the previous menu</span>
+	<input type="hidden" class="forml" name="url_site" id="url_site" value="[(#ENV{url_site})]" /></p>
+	</fieldset>
+	<script type="text/javascript">
+		jQuery(function(){
+			var showMap = function() {
+				var val = jQuery(this).val(); 
+				if(val) {
+					var width =	jQuery("#anno_map_coords").html("<img src='#CHEMIN{images/loader.gif}' />")
+					.parents("form").width();
+					jQuery.getJSON("#URL_PAGE{get_image_info}&id_document="+val+"&width="+width+"&height=0",function(data){
+						jQuery("#anno_map_coords").html(data.imagePreview).find("img").click(function(e){
+							var coord = jQuery.carto.get_xy_coord($(this),e);
+							jQuery(this).siblings(".map_marker,.map_marker_overlay").remove();
+							jQuery.carto.addMarker(this,{xy:[coord.x,coord.y]},{id:"anno_insert_marker0"});
+							jQuery("#url_site").val(parseInt(coord.x*data.attributes.width/$(this).width())+","+parseInt(coord.y*data.attributes.height/$(this).height()));
+						});
+					});
+				} else {
+					jQuery("#anno_map_coords").html("Please select an image from the previous menu");
+				}
+			}
+			showMap.apply(jQuery("#nom_site").change(showMap)[0]);
+		});
+	</script>
+	<fieldset>
+	<legend><:forum_qui_etes_vous:></legend>
+	<p><label for="auteur"><:forum_votre_nom:></label>
+	<input type="text" class="forml" name="auteur" id="auteur" value="#ENV{auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	<p><label for="email_auteur"><:forum_votre_email:></label>
+	<input type="text" class="forml" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	</fieldset>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style='display: none;'><label for="nobot"><:antispam_champ_vide:></label>
+	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
+
+	<p class="spip_bouton"><input type="submit" value="<:forum_voir_avant:>" /></p>
+</div>
+</form>
+
+</div>

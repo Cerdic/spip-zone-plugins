@@ -1,0 +1,18 @@
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	background-color: #eee;
+	padding: 5px;
+	opacity: 0.90;
+}
+/*
+#tooltip h3, #tooltip div { margin: 0; }
+#tooltip h3 {font-weight:bold}
+*/
+
+/* style perso*/
+#tooltip.carto {font-size:12px;text-align:left}
+#tooltip.carto p, #tooltip.carto ul, #tooltip.carto ol, #tooltip.carto dl, #tooltip.carto table {margin-bottom: 1em;}
+#tooltip.carto h3 {margin-top:1em}
+#tooltip.carto a.jqmClose {position:absolute;top:5px;right:5px}

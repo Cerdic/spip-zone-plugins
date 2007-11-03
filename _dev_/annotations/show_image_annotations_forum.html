@@ -1,0 +1,21 @@
+#CACHE{0}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+{"documents":{
+<BOUCLE_documents(DOCUMENTS){id_document IN #ENV**{id_document}}{','}>
+	"#ID_DOCUMENT":{
+		"width": #LARGEUR,
+		"height": #HAUTEUR		
+	}
+</BOUCLE_documents>
+},
+"ids":[
+<BOUCLE_annotations(FORUMS){id_article}{nom_site IN #ENV**{id_document}}{','}>
+	{
+		"id_annotation":#ID_FORUM,
+		"id_document":#NOM_SITE,
+		"title": [(#TITRE*|propre|attribut_html|_q_json|)],
+		"x":[(#URL_SITE|match{^\d+,''})],
+		"y":[(#URL_SITE|match{\d+$,''})]
+	}
+</BOUCLE_annotations>
+]}
