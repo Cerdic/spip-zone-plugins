@@ -70,6 +70,23 @@ p.avertissement {
 	padding-bottom:5px;
 	
 }
+p.Copie_doc {
+	border: 1px solid black;
+}
+.Doc-joint {
+	text-align: center;
+	margin: 0.2em;
+	float: left;
+	width: 150px;
+	height: 10em;
+	padding: 0.5em;
+}
+.doc-cadre{
+	border: 1px solid red;
+	background-color: lightgray;
+	padding: 2px;
+	-moz-border-radius: 6px;
+}
 
 a.clic:hover {
 	cursor: pointer;
@@ -110,6 +127,7 @@ h5.devoirs {
 }
 .apres{
 	float: right;
+	margin-right: 3em;
 }
 .on {
 	color:red;

@@ -148,7 +148,7 @@ if (($_GET['devoirs_seuls'])) {
 
 ][(#SET{id_seance,[(#PS*|bonbon_matches_id_article)]})]
 				<BOUCLE_Seance_de_devoir(ARTICLES){id_article=#GET{id_seance}}>
-				<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,id_article=#ID_ARTICLE})]" title="Afficher les détails de la séance au cours de laquelle le devoir a été donné" target="_blank">[(#DATE|affdate)]</a>
+				<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,id_article=#ID_ARTICLE})]" title="Afficher les détails de la séance au cours de laquelle le devoir a été donné" onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">[(#DATE|affdate)]</a>
 				</BOUCLE_Seance_de_devoir>
 				</td>
 			</tr>

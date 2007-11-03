@@ -9,6 +9,7 @@
 id_article= n° de la séance. Ce paramètre est obligatoire
 -->]
 #CACHE{300}
+#SET{virgule,","} [(#REM) utile pour les explodes]
 [
 (#REM) Affiche une séance
 ]
@@ -16,11 +17,23 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 	<BOUCLE_Auteur_Seances(AUTEURS){id_article}>
 <div id="documents">
 			<h3 class="titre">#TITRE</h3>
-			<div class="#_Seances:EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le texte de cette séance"]>#TEXTE</div>
-		<B_Documents_Seances>
+			<div class="#_Seances:EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le texte de cette séance"]>#TEXTE</div>[
+
+(#REM) On récupère la liste des documents liés à l'article
+
+		]<BOUCLE_Documents_originaux_Seances(DOCUMENTS){id_article}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Seances>[
+
+(#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
+
+		][(#SET{liste_docs_copies_seance,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
+		<BOUCLE_Copies_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_copies_seance}}>[(#SET{liste_docs_seance,#GET{liste_docs_seance}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Seances>[
+
+(#REM) On affiche les documents de la liste
+
+		]<B_Documents_Seances>
 			<div>
 				<h4 class="devoirs">Documents joints à la séance</h4>
-		<BOUCLE_Documents_Seances(DOCUMENTS){id_article}{"&nbsp;|"}>
+		<BOUCLE_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{"&nbsp;|"}{par titre}>
 				<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]</span> <span class="#EDIT{titre}"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le titre du document"]>[(#TITRE|sinon{#FICHIER|basename})]</span> (#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])
 		</BOUCLE_Documents_Seances>
 			</div>
@@ -38,10 +51,17 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 				Ajouter des documents à cette séance
 				</a>
 				<span class="bloc_doc">
-					<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
-					Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
-					Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
-					[(#ID_ARTICLE|afficher_documents_colonne)]
+					<p class="Copie_doc">
+							- Choisir parmi vos documents déjà en ligne (ceux qui sont déjà associés à vos séances et devoirs)&nbsp;:<br />
+							<input type="button" value="Choisir parmi vos documents" onClick="javascript:window.open('#URL_PAGE{cahier-de-texte-selection-document,id_article=#ID_ARTICLE}','slection', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;" name="button">
+					</p>
+					<p>
+						- Ajouter un nouveau document&nbsp;:
+						<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
+						Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
+						Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
+						[(#ID_ARTICLE|afficher_documents_colonne)]
+					</p>
 				</span>
 			</span>
 	</div>
@@ -50,7 +70,7 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 ]
 [
 (#REM) On commence par un gros hack pour éviter une Regexp dans la requête SQL: on cherche les numéros d'articles dans le PS de l'article et on les mets dans un tableau
-]#SET{virgule,","}[(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
+][(#SET{liste_des_devoirs,[(#GET{virgule}|explode{[(#PS*|bonbon_matches_id_article)]})]})]
 		<B_Trouve_Infos_Devoirs_id_article>
 			<hr>
 			<h4 class="devoirs">Devoirs donnés&nbsp;:</h4>
@@ -58,11 +78,24 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 		<BOUCLE_Trouve_Infos_Devoirs_id_article(ARTICLES){id_article IN #GET{liste_des_devoirs}}>
 				<div class="#EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez sur ce texte pour modifier le texte de ce devoir"]>
 					<h5 class="devoirs">Pour le [(#DATE|affdate)]&nbsp;: </h5>
-					#TEXTE
+					#TEXTE[
+
+(#REM) On récupère la liste des documents liés à l'article
+
+		]<BOUCLE_Documents_originaux_Devoirs(DOCUMENTS){id_article}>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Documents_originaux_Devoirs>[
+
+(#REM) On récupère dans le surtitre la liste des documents qui ont été copié dans cette séance (quand on veut ajouter des documents sans les remettre sur le serveur
+
+		][(#SET{liste_docs_copies_devoirs,[(#GET{virgule}|explode{[(#SURTITRE*|bonbon_matches_id_document)]})]})]
+		<BOUCLE_Copies_Documents_Devoirs(DOCUMENTS){id_document IN #GET{liste_docs_copies_devoirs}}>[(#SET{liste_docs_devoirs,#GET{liste_docs_devoirs}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_DOCUMENT}}})]</BOUCLE_Copies_Documents_Devoirs>[
+
+(#REM) On affiche les documents de la liste
+
+		]
 			<B_Documents_Devoir>
 					<div>
 						Documents joints à ce devoir&nbsp;: 
-			<BOUCLE_Documents_Devoir(DOCUMENTS){id_article}{"&nbsp;|"}>			<span class="#EDIT{fichier}">
+			<BOUCLE_Documents_Devoir(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{"&nbsp;|"}>			<span class="#EDIT{fichier}">
 							[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]
 						</span> 
 						<span class="#EDIT{titre}"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})  title="double cliquez ici pour modifier le titre du document"]>
@@ -82,10 +115,17 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 								<img src="#CHEMIN{images/x-office-spreadsheet.png}" alt="icône" vspace="2" align="middle">ajouter des documents à ce devoir pour le [(#DATE|affdate)]
 							</a>
 							<span class="bloc_doc">
-								<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
-								Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
-								Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
-							[(#ID_ARTICLE|afficher_documents_colonne)]
+								<p class="Copie_doc">
+										- Choisir parmi vos documents déjà en ligne (ceux qui sont déjà associés à vos séances et devoirs)&nbsp;:<br />
+										<input type="button" value="Choisir parmi vos documents" onClick="javascript:window.open('#URL_PAGE{cahier-de-texte-selection-document,id_article=#ID_ARTICLE}','slection', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;" name="button">
+								</p>
+								<p>
+									- Ajouter un nouveau document&nbsp;:
+									<p class="avertissement">Veillez à ne télécharger que des documents que vous avez le droit de distribuer.<br />
+									Vérifiez que vos images et vos documents ne sont pas trop volumineux (taille en octets faible).<br />
+									Préférez les documents .pdf ou OpenOffice.org (odt, odc, odp, odg) aux documents MS-Office (doc, xls, ppt, etc.)</p>
+									[(#ID_ARTICLE|afficher_documents_colonne)]
+								</p>
 							</span>
 						</span>
 					</div>

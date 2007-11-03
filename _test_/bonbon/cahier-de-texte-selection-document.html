@@ -1,0 +1,81 @@
+<?php
+//on vérifie qu'on a le droit d'être là...
+if ($auteur_session) {
+?>
+#CACHE{0}
+<BOUCLE_Auteur(AUTEURS){id_article}{0,1}>
+	<BOUCLE_Article(ARTICLES){id_article}>
+<!-- 
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en novembre 2007
+**** Permet de chosir un document parmis ceux de l'auteur de l'article et d'en écrire la référence dans le surtitre.
+Cette page prend le paramètre suivant (en GET):
+id_article= n° de la séance. Ce paramètre est obligatoire
+id_document= n° du doc choisi à relier à id_article
+doc-choisi= si cette valeur est non nulle, l'id_document est place dans le surtitre de l'article id_article.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Cahier de texte: Sélection d'un document parmi ceux de [(#NOM|textebrut)]</title>
+
+[
+(#REM)Inclusion du pied de page
+]
+<INCLURE{fond=cahier-de-texte-en-tete}>
+
+</head>
+<body>
+<div id="NoMenu">
+	<div id="EntetePage">
+		<h1>Associer un document déjà enregistré à cette fiche</h1>
+	</div>
+	<div id="Contenu">
+<?php
+
+//On vérifie sur un doc a été choisi, si il a été choisi on le rajoute dans le surtitre de l'article
+if($_GET['doc-choisi']) {
+	$surtitre = '[(#SURTITRE*|texte_script)]';
+	$surtitre = $surtitre."<doc".$_GET['id_document']."> ";
+//on met le surtitre modifié dans la base:
+	$sql ="UPDATE spip_articles SET surtitre='".addslashes($surtitre)."' WHERE id_article=".$_GET['id_article'];
+	$result = spip_query($sql);
+	echo ("		<!--update soustitre: $result-->\n");?>
+		<p>Le document encadré a été enregistré dans la fiche (#TITRE)</p>
+<?php
+}// fin du if doc choisi
+?>
+<BOUCLE_Contexte_RubriqueCDT(RUBRIQUES){titre=="Cahier de texte en-ligne"}{0,1}{tout}>
+	<BOUCLE_Articles_de_auteur(ARTICLES){id_secteur}{id_auteur}>[(#SET{liste_articles,#GET{liste_articles}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]</BOUCLE_Articles_de_auteur>
+</BOUCLE_Contexte_RubriqueCDT>
+<B_Documents>
+#ANCRE_PAGINATION
+<BOUCLE_Documents(DOCUMENTS){id_article IN #GET{liste_articles}}{pagination #ENV{nb,8}}>
+		<div class="#EDIT{fichier} Doc-joint [(#ENV{id_document}|=={#ID_DOCUMENT}|?{'doc-cadre',''})]">
+			[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]
+			<p class="#EDIT{titre}" title="double cliquez ici pour modifier le titre du document">[(#TITRE|sinon{#FICHIER|basename})]</p>
+			<p>(#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])</p>
+			<form method="get" name="choix_doc#ID_DOCUMENT">
+				<input type="hidden"  name="page" value="cahier-de-texte-selection-document">
+				<input type="hidden" name="id_article" value="#ID_ARTICLE">
+				<input type="hidden" name="id_document" value="#ID_DOCUMENT">
+				<input type="Submit" value="Choisir" name="doc-choisi">
+			</form>
+		</div>
+</BOUCLE_Documents>
+[
+		<br clear="all" />
+		<div class="apres">Pages&nbsp;: (#PAGINATION{page_precedent_suivant})</div>]
+</B_Documents>
+		<br clear="all" />
+		<center style="margin-top: 1em;">
+			<input type='button' value='Fermer cette fenêtre (revenir au cahier de texte)' onClick='parent.opener.location.reload();self.close()' name="button">
+		</center>
+	</div>
+</div>
+</body>
+</html>
+	</BOUCLE_Article>
+</BOUCLE_Auteur>
+<?php } else {echo("affichage non autorisé !");}?>

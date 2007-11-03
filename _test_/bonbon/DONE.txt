@@ -19,7 +19,8 @@ Des améliorations dans l'interface de saisie: 	-matière et classes sont préslece
 Fonctionalité majeure: On peut dupliquer une séance déjà saisie ! (pour copier coller ce qui a été fait avec une classe sur une autre)...
 Fonctionnalité majeure: intégrations des «crayons». Quand le plugin «Les crayons» est présent on peut modifier le contenu des séances et des devoirs directement comme dans un Wiki.
 Fonctionnalité importante: possibilité de supprimer des séances.
-Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!
+Fonctionnalité fondamentale: les documents joints sont implémentés dans les séances et les devoirs !!!.
+Pour éviter de surcharger le serveur avec des doublons de documents (du genre poly distribué à 10 classes), il est possible (et vivement conseillé) d'associer un doc joint d'un séance/devoir à une autre fiche (en fait l'ID_DOCUMENT est copié dans le SURTITRE, et Bonbon sait l'y retrouver).
 Les devoirs sont désormais affichés in-extenso avec les séances (et plus simplement pour quand ils sont à faire).
 Les séances peuvent être affichées dans l'ordre chronologique et chronologique inverse.
 Externalisation de la gestion de l'affichage d'une séance dans une noisette. Ce qui permet: de préparer les changement d'aspect, d'afficher la séance juste après sa saisie, d'avoir un affichage correct de la séance depuis la liste des devoirs.

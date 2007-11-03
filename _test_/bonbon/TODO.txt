@@ -17,3 +17,4 @@ chronologique plus... chronologique...) (c'est fait ?... en test)
 - automatiser le renommage de cahier-de-texte-rubrique.html (le mieux serait carrement d'automatiser la copie de cahier-de-texte-accueil.html)
 - utiliser cfg (ou autre) pour configurer les mots-clés/rubriques
 - automatiser la mise en place des mots-clés et rubriques.
+- rajouter des élements qui permettent de mieux exploiter les docs joints: infos sur le doc que l'on vient de joindre...
