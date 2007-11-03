@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //Compatibilite pour avant 1.9.3
 if (!function_exists('test_espace_prive')) {
 	function test_espace_prive() {
-		return defined('_ESPACE_PRIVE') ? _ESPACE_PRIVE : false;
+		return defined('_DIR_RESTREINT') ? !_DIR_RESTREINT : false;
 	}
 }
 
