@@ -6,6 +6,7 @@
         <etat>
           dev
         </etat>
+        <prefix>balise_dynamique</prefix>
         <description>
         Un exemple de plugin pour apprendre &#223; faire des balises dynamiques
         </description>

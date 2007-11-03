@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_shoutbox" id="formulaire_shoutbox_#ENV{id}">
+
+[(#REM)
+	Le formulaire de saisie
+]
+<form action="#SELF#formulaire_shoutbox_#ENV{id}" method="post">
+
+[(#REM)
+	Un message en cas d'erreur
+]
+[<p class="erreur">(#ENV*{erreur})</p>]
+
+<fieldset>
+<legend>Shoutbox :</legend>
+
+[(#REM)
+	Contenu de la shoutbox
+]
+[(#ENV*{texte}|typo|safehtml)]
+
+[(#REM)
+	Champ de saisie d'une nouvelle ligne
+]
+<p><label for="shoutbox_#ENV{id}"><:info_texte_message:></label>
+<input name="shoutbox_#ENV{id}" id="shoutbox_#ENV{id}" size="40"
+value="[(#ENV*{defaut}|entites_html)]" /></p>
+
+[(#REM)
+	Bouton aligne a droite (en LTR)
+]
+[<p class="spip_bouton" style="float:#LANG_RIGHT;"><input type="submit" name="valide#ENV{id}" value="(#ENV{bouton})" /></p>]
+</fieldset>
+
+[(#REM) Antispam "nobot" ]
+<p style='display: none;'><label for="nobot"><:antispam_champ_vide:></label>
+<input type="text" name="nobot" id="nobot" value="" size="10" /></p>
+
+</form>
+
+
+</div>
