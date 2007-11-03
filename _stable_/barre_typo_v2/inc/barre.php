@@ -385,8 +385,7 @@ $(document).ready(function(){';
 	 $ret .= '$.ajaxTimeout( 5000 );
 	 '; // jquery < 1.1.4
 	} else {
-	 $ret .= '$.ajaxSetup({timeout: 5000});
-	 '; // a partir de jquery 1.1.4, donc de SPIP 1.9.3
+	 $ret .= '$.ajaxSetup({timeout: 5000});'; // a partir de jquery 1.1.4, donc de SPIP 1.9.3
 	}
 	 $ret .= '
 	$('.$champ.').keypress(function() { MajPreview('.$num_barre.',"'.$champ.'") });
@@ -398,7 +397,7 @@ $(document).ready(function(){';
 		if (e == undefined && window.event) {
 	                e = window.event;
 		}
-		if ( (warn_onunload == true) && (form_dirty == true) ) {
+		if ( (warn_onunload == true) && (form_dirty == true) && ($.browser.mozilla) ) {
 			e.returnValue = \'Quitter la page sans sauvegarder ?\';
 			return \'Quitter la page sans sauvegarder ?\'; 
 		}
