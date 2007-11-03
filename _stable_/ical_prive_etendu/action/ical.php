@@ -248,7 +248,7 @@ function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur)
 			$texte .= _T('info_mise_en_ligne')." ".affdate($row['date'])."\n";
 			if ($row['descriptif']) $texte .= "\\n\\n"._T('info_descriptif')." ".textebrut($row['descriptif'])."\n";
 			if ($row['texte']) $texte .= "\\n\\n"._T('info_texte')." ".couper(textebrut($row['texte']),300)."\n";
-			$texte .=  _T('info_lien_hypertexte').' '.$url."\n";
+			$texte .=  "\\n\\n"._T('info_lien_hypertexte').' '.$url."\n";
 			
 			echo filtrer_ical ("BEGIN:VEVENT"), "\n",
 			filtrer_ical ("SUMMARY:[$nom_site] $titre - $auteurs (".$cat.")"), "\n";
@@ -309,7 +309,7 @@ function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur)
 			$texte = _T('icpe:derniere_modification')." ".affdate($row['maj'])."\\n";
 			$texte .= _T('info_mise_en_ligne')." ".affdate($row['date_heure'])."\n";
 			if ($row['texte']) $texte .= "\\n\\n"._T('info_texte')." ".couper(textebrut($row['texte']),300)."\n";
-			$texte .=  _T('info_lien_hypertexte').' '.$url."\n";
+			$texte .=  "\\n\\n"._T('info_lien_hypertexte').' '.$url."\n";
 			echo filtrer_ical ("BEGIN:VEVENT"), "\n",
 				filtrer_ical ("SUMMARY:[$nom_site] $titre (".$cat.")"), "\n";
 			ligne_uid ("breve$id_breve");
