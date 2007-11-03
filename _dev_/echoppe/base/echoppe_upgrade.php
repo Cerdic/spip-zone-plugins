@@ -9,7 +9,7 @@ function echoppe_install($action){
 		case 'test':
 			//Contrôle du plugin à chaque chargement de la page d'administration
 			// doit retourner true si le plugin est proprement installé et à jour, false sinon
-			$version_echoppe_locale = 0.2;
+			$version_echoppe_locale = 0.4;
 			$version_echoppe_installee = $GLOBALS['meta']['echoppe_version'];
 			//~ echo $version_echoppe_locale.' <-> '.$version_echoppe_installee.'<br />';
 			if ($version_echoppe_installee == $version_echoppe_locale){
@@ -24,7 +24,7 @@ function echoppe_install($action){
 		case 'install':
 			//Appel de la fonction d'installation. Lors du clic sur l'icône depuis le panel.
 			//quand le plugin est activé et test retourne false
-			$version_echoppe_locale = 0.2;
+			$version_echoppe_locale = 0.4;
 			//~ echo ("Test : ".$version_echoppe_locale);
 			spip_log('Installation plugin echoppe '.$version_echoppe_locale);
 			include_spip('base/echoppe');

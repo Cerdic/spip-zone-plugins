@@ -9,7 +9,7 @@ global $tables_auxiliaires;
 global $tables_jointures;
 global $table_des_tables;
 
-$GLOBALS['echoppe_version_base'] = 0.2;
+$GLOBALS['echoppe_version_base'] = 0.4;
 
 
 $spip_echoppe_categories = array(
@@ -37,7 +37,7 @@ $spip_echoppe_categories_descriptions = array(
 	"texte"					=> "longblob NOT NULL",
 	"logo"					=> "text NOT NULL",
 	"maj"					=> "TIMESTAMP",
-	"statut"				=> "varchar(10) DEFAULT '0' NOT NULL"	// ( je le mets ici, comme ça, on peut avoir moins de catégories dans les langues étrangères)
+	"statut"				=> "VARCHAR(10) DEFAULT '0' NOT NULL"	// ( je le mets ici, comme ça, on peut avoir moins de catégories dans les langues étrangères)
 	);
 
 $spip_echoppe_categories_descriptions_key = array(
@@ -61,10 +61,10 @@ $spip_echoppe_produits = array(
 	"largeur"		=> "float DEFAULT '0' NOT NULL",
 	"longueur"		=> "float DEFAULT '0' NOT NULL",
 	"colisage"		=> "VARCHAR(10) DEFAULT '' NOT NULL", //(ça pourrait etre une donnée d'info sur la taille du colis ( ou lettre, ou palettes ... etc )
-	"ref_produit"		=> "tinytext NOT NULL",
+	"ref_produit"		=> "VARCHAR(255) NOT NULL",
 	"prix_base_htva"	=> "float DEFAULT '0' NOT NULL", 	//(permettrait de donner un prix de base et pas faire 50000 jointures pour retrouver le prix dans une liste de produits....)
 	"maj"			=> "TIMESTAMP",
-	"statut"		=> "varchar(10) DEFAULT '0' NOT NULL"
+	"statut"		=> "VARCHAR(10) DEFAULT '0' NOT NULL"
 	);
 	
 $spip_echoppe_produits_key = array(
@@ -104,6 +104,43 @@ $spip_echoppe_produits_descriptions_key = array(
 $spip_echoppe_produits_descriptions_join = array(
 	"id_produit"		=> "id_produit",
 	"lang"			=> "lang"
+	);
+
+
+$spip_echoppe_stock_produits = array(
+	"id_stock"			=> "bigint(21) NOT NULL",
+	"id_produit"		=> "bigint(21) NOT NULL",
+	"configuration"		=> "blob NOT NULL", // Utile si on veux renseigner qu'il y a 3 graveur DVD-425RW face noir+BurnProof et 10 graveur DVD-425RW face blanche+BurnProof
+	"id_depot"		=> "bigint(21) NOT NULL",
+	"quantite"		=> "int NOT NULL",
+	"maj"			=> "TIMESTAMP"
+	);
+
+$spip_echoppe_stock_produits_key = array(
+	"PRIMARY KEY"		=> "id_stock",
+	"KEY id_produit"	=> "id_produit",
+	"KEY id_depot"		=>"id_depot"
+	);
+
+$spip_echoppe_stock_produits_join = array(
+	"id_produit"	=> "id_produit",
+	"id_depot"	=>"id_depot"
+	);
+
+$spip_echoppe_depots = array(
+	"id_depot"			=> "bigint(21) NOT NULL",
+	"titre"				=> "tinytext NOT NULL",
+	"descriptif"			=> "text NOT NULL",
+	"adresse"				=> "tinytext NOT NULL",
+	"maj"				=> "TIMESTAMP"
+	);
+
+$spip_echoppe_depots_key = array(
+	"PRIMARY KEY"			=> "id_depot"
+	);
+
+$spip_echoppe_depots_join = array(
+	"id_depot"			=> "id_depot"
 	);
 
 $spip_echoppe_categories_produits = array(
@@ -195,7 +232,7 @@ $spip_echoppe_produits_rubriques = array(
 
 $spip_echoppe_produits_rubriques_key = array(
 	"PRIMARY KEY"			=> "id_produit,id_rubrique",
-	"id_rubrique"			=> "id_rubrique"
+	"KEY id_rubrique"			=> "id_rubrique"
 	);
 
 $spip_echoppe_produits_sites = array(
@@ -360,8 +397,8 @@ $spip_echoppe_panier = array(
 	"id_produit"	=> "bigint(21) NOT NULL",
 	"quantite"	=> "bigint(21) NOT NULL",
 	"configuration"	=> "longblob NOT NULL",
-	"token_client"	=> "tinytext NOT NULL",
-	"token_panier"	=> "tinytext NOT NULL"
+	"token_client"	=> "VARCHAR(255) NOT NULL",
+	"token_panier"	=> "VARCHAR(255) NOT NULL"
 	);
 
 
@@ -502,7 +539,16 @@ $tables_principales['spip_echoppe_panier'] = array(
 	'join' => &$spip_echoppe_panier_join
 	);
 
-
-
+$tables_principales['spip_echoppe_depots'] = array(
+	'field' => &$spip_echoppe_depots,
+	'key' => &$spip_echoppe_depots_key,
+	'join' => &$spip_echoppe_depots_join
+	);
+	
+$tables_principales['spip_echoppe_stock_produits'] = array(
+	'field' => &$spip_echoppe_stock_produits,
+	'key' => &$spip_echoppe_stock_produits_key,
+	'join' => &$spip_echoppe_stock_produits_join
+	);
 
 ?>

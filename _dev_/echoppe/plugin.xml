@@ -3,7 +3,7 @@
 		&Eacute;choppe
 	</nom>
 	<auteur>
-		&copy; 2007 - Distribu&eacute; sous licence GNU/LGPL
+		crowf00t, kent1, yoann etc... &copy; 2007 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 	<version>
 		0.1
@@ -16,14 +16,30 @@ Un projet de boutique g&eacute;n&eacute;raliste pour spip.
 _ N&eacute;c&eacute;ssite les plugins suivant:
 _ - CFG 1.0.6
 _ - Inscription2 0.2
+_ 
+_ 
+ {{Pour le logo, c'est du provisoire :D}}
 	</description>
-	<icon></icon>
+	<icon>images/logo.png</icon>
 	<prefix>echoppe</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />
 	<necessite id='Inscription2' version='[0.2;]' />
 	<install>base/echoppe_upgrade.php</install>
-	<options>
-	</options>
-	<fonctions>
-	</fonctions>
+	<options></options>
+	<fonctions></fonctions>
+	<!-- Les bouttons pour 1.9.2 -->
+	<pipeline>
+		<!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
+		<nom>ajouter_boutons</nom>
+		<!-- nom de la fonction a appelé sans son prefixe -->
+		<action>ajouter_boutons</action>
+		<!-- chemin du fichier contenant la fonction -->
+		<inclure>echoppe_pipeline.php</inclure>
+	</pipeline>
+	<bouton id='echoppe' parent='naviguer'>
+		<icone>images/logo.png</icone>
+		<titre>Echoppe</titre>
+		<url>echoppe</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+		<args></args>
+	</bouton>
 </plugin>
