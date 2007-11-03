@@ -96,6 +96,10 @@ function balise_SHOUTBOX_dyn($defaut, $a) {
 		// stocker dans la base de donnees (ici table spip_meta)
 		spip_log("INSERER DES DONNEES");
 		ecrire_meta('shoutbox', serialize($shoutbox));
+		
+		// invalider les caches pour que tout le monde voie les messages
+		include_spip('inc/invalideur');
+		suivre_invalideur('1');
 	}
 
 	// Afficher le squelette resultant
