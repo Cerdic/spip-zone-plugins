@@ -96,7 +96,7 @@ function couleur_chroma ($coul, $num) {
 	$pos = substr($num, 0, strpos($num, "/")) -  1;
 	$tot = substr($num, strpos($num, "/")+1, strlen($num));
 	
-	include_ecrire("filtres");
+	include_spip("inc/filtres");
 	$couleurs = couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
@@ -367,7 +367,7 @@ function image_niveaux_gris_auto($im, $limite=1000) {
  */
 function image_podpod($im, $coul='000000', $deb=0, $fin=70)
 {
-	include_ecrire("filtres");
+	include_spip("inc/filtres");
 	$image = image_valeurs_trans($im, "podpod-$coul-$deb-$fin","png");
 	if (!$image) return("");
 
@@ -591,7 +591,7 @@ function image_contour_alpha($im, $coul='000000', $trait=1)
 	$image = image_valeurs_trans($im, "contour-$coul-$trait", "png");
 	if (!$image) return("");
 
-	include_ecrire("filtres");
+	include_spip("inc/filtres");
 	$couleurs = couleur_hex_to_dec($coul);
 	$dr= $couleurs["red"];
 	$dv= $couleurs["green"];
@@ -769,7 +769,7 @@ function en_image($url, $alt=''){
  */
 function couleur_saturer ($coul, $val=1.2) {
 	
-	include_ecrire("filtres");
+	include_spip("inc/filtres");
 	$couleurs = couleur_hex_to_dec($coul);
 	$r= $couleurs["red"];
 	$g= $couleurs["green"];
@@ -801,7 +801,7 @@ function couleur_saturer ($coul, $val=1.2) {
  */
 function couleur_tableau_chroma($coul, $tot=6, $debut=1, $fin=0){
 	
-	include_ecrire("filtres");
+	include_spip("inc/filtres");
 	if($fin==0) $fin = $tot;
 	
 	$retour = "<div style='width:300px;'>\n";
