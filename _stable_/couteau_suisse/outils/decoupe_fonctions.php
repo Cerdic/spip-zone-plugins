@@ -13,8 +13,8 @@ function onglets_callback($matches) {
 	// au cas ou on ne veuille pas d'onglets, on remplace les '++++' par un filet et on entoure d'une classe.
 	if ($_GET['cs']=='print') {
 		@define(_decoupe_FILET, '<p style="border-bottom:1px dashed #666; padding:0; margin:1em 20%; font-size:4pt;" >&nbsp; &nbsp;</p>');
-		$t = explode("\n\n", $matches[1], 2);
-		$texte = preg_replace(','.preg_quote(_decoupe_SEPARATEUR, ',')."(.*?)\n\n,ms", _decoupe_FILET."<h4>$1</h4>\n", $t[1]);
+		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[1], 2);
+		$texte = preg_replace(','.preg_quote(_decoupe_SEPARATEUR, ',').'(.*?)(\n\n|\r\n\r\n|\r\r),ms', _decoupe_FILET."<h4>$1</h4>\n", $t[1]);
 		// on sait jamais...
 		str_replace(_decoupe_SEPARATEUR, _decoupe_FILET, $texte);
 		return '<div class="onglets_print"><h4>' . textebrut($t[0]) . "</h4>$texte</div>";
@@ -22,7 +22,7 @@ function onglets_callback($matches) {
 	$onglets = $contenus = array();
 	$pages = explode(_decoupe_SEPARATEUR, $matches[1]);
 	foreach ($pages as $p) {
-		$t = explode("\n\n", $p, 2);
+		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
 		$contenus[] = '<div class="onglets_contenu"><h2 class="cs_onglet"><a href="#">'.trim(textebrut($t[0]))."</a></h2>$t[1]</div>";
 	}
 	return '<div class="onglets_bloc_initial">'.join('', $contenus).'</div>';

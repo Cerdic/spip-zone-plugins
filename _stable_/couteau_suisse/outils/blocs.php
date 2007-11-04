@@ -15,7 +15,7 @@ function blocs_raccourcis() {
 }
 
 function blocs_callback($matches) {
-	$t = explode("\n\n", $matches[2], 2);
+	$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $matches[2], 2);
 	if ($matches[1]=='visible') {
 		$h4 = '>';
 		$div = '>';

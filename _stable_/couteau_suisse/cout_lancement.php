@@ -129,7 +129,7 @@ define('_BALISES_BLOCS',
 	.'d[ltd]|script|noscript|map|button|fieldset');
 */
 function cs_block($texte) {
-	return strpos($texte, "\n\n")
+	return preg_match(',(\n\n|\r\n\r\n|\r\r),', $texte)
 		|| preg_match(',</?(p|'._BALISES_BLOCS.')[>[:space:]],iS', $texte);
 }
 
