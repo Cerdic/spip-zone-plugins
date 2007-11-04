@@ -3,8 +3,9 @@
 	Si on ne lui passe pas {objet} elle affiche tous les messages du systeme
 ]
 <BOUCLE_shout(SHOUTBOX){objet?}{par date}{n-9,10}>
-<div>[<small>(#DATE|affdate{H:i:s})</small> ]&ndash;
-	[(#ID_AUTEUR|?{<a href="[(#URL_AUTEUR{#ID_AUTEUR})]">#AUTEUR</a>,#AUTEUR})][: (#TEXTE*|htmlspecialchars)]
+<div>[<small><u>(#DATE|affdate{H:i})</u></small>]
+[<small>(#ID_AUTEUR|?{<a href="[(#URL_AUTEUR{#ID_AUTEUR})]">#AUTEUR</a>,#AUTEUR}):</small>]
+[(#TEXTE*|htmlspecialchars)]
 </div>
 </BOUCLE_shout>
 	<div><small>(aucun message)</small></div>
