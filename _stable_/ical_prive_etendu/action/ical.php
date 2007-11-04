@@ -56,26 +56,37 @@ function action_ical()
 			$aff_art = true;
 			$aff_brev = false;
 			$aff_mess = false;
+			$aff_forum = false;
 			break;
 		case 'brev':
 			$aff_art = false;
 			$aff_brev = true;
 			$aff_mess = false;
+			$aff_forum = false;
 			break;
 		case 'artbrev':
 			$aff_art = true;
 			$aff_brev = true;
 			$aff_mess = false;
+			$aff_forum = false;
 			break;
 		case 'mess':
 			$aff_art = false;
 			$aff_brev = false;
 			$aff_mess = true;
+			$aff_forum = false;
+			break;
+		case 'mess':
+			$aff_art = false;
+			$aff_brev = false;
+			$aff_mess = false;
+			$aff_forum = true;
 			break;
 		default:
 			$aff_art = true;
 			$aff_brev = true;
 			$aff_mess = true;
+			$aff_forum = true;
 			break;
 	}
 	
@@ -123,8 +134,8 @@ function action_ical()
 			filtrer_ical ("END:VTODO"), "\n";
 	}
 	if ($aff_mess) spip_ical_messages($id_utilisateur, $nom_site, $age);
-	if ($statut_utilisateur == "0minirezo" AND $aff_mess) {
-		spip_ical_forums($id_utilisateur, $nom_site, $age);
+	if ($statut_utilisateur == "0minirezo" AND $aff_forum) {
+		spip_ical_forums($id_utilisateur, $nom_site);
 	}
 	echo filtrer_ical ("END:VCALENDAR"), "\n";
 }
@@ -430,7 +441,7 @@ function spip_ical_messages($id_utilisateur, $nom_site, $age)
 }
 
 // http://doc.spip.org/@spip_ical_forums
-function spip_ical_forums($id_utilisateur, $nom_site, $age)
+function spip_ical_forums($id_utilisateur, $nom_site)
 {
 	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut = 'prop'");
 
