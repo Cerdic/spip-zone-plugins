@@ -413,12 +413,15 @@ add_variable( array(
 	'defaut' => 0,
 	'code:%s' => "define('_sommaire_BALISE', %s);",
 ));
+$path = cs_htmlpath(find_in_path(defined('_SPIP19100')?"img_pack/spip_out.gif":"images/spip_out.gif"));
 add_outil( array(
 	'id' => 'sommaire',
 	'contrib'	=> 2378,
 	'code:options' => "define('_sommaire_REM', '<span class=\'_foo\'></span>');\ndefine('_sommaire_SANS_SOMMAIRE', '[!sommaire]');\ndefine('_sommaire_AVEC_SOMMAIRE', '[sommaire]');\n%%lgr_sommaire%%%%auto_sommaire%%%%balise_sommaire%%",
 	// s'il y a un sommaire, on cache la navigation haute sur les pages
-	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;} div.cs_sommaire a:after, a.cs_ancre {display:none;}",
+	'code:css' => "div.cs_sommaire {display:block; float:right; margin-left:1em; margin-right:0.4em; overflow:auto; z-index:100; max-height:350px; text-align:left;}
+a.sommaire_ancre {background:transparent url($path) no-repeat scroll left center; padding-left:10px; text-decoration:none; }
+div.cs_sommaire a:after {display:none;}",
 	'code:jq' => 'if($("div.cs_sommaire").length) $("div.decoupe_haut").css("display", "none");',
 	// inserer : $table_des_traitements['TEXTE']['article']= 'sommaire_d_article(propre(%s))';
 	'traitement:TEXTE/articles:post_propre' => 'sommaire_d_article',
@@ -643,9 +646,9 @@ add_outil( array(
 	'pipeline:post_propre' => 'mailcrypt_post_propre',
 	'code:js' => "function lancerlien(a,b){ x='ma'+'ilto'+':'+a+'@'+b; return x; }",
 	// jQuery pour remplacer l'arobase image par l'arobase texte
-	'code:jq' => "\$('span.spancrypt').after('<span>&#6'+'4;<\/span>'); \$('span.spancrypt').remove();",
+	'code:jq' => "\$('span.spancrypt').after('<span class=\"cryptOK\">&#6'+'4;<\/span>'); \$('span.spancrypt').remove();",
 	'code:css' => 'span.spancrypt {background:transparent url(' . find_in_path('img/mailcrypt/leure.gif')
-		. ') no-repeat scroll left center; color:#000099; padding-left:12px; text-decoration:none;}',
+		. ') no-repeat scroll 0.1em center; padding-left:12px; text-decoration:none;}',
 	'traitement:EMAIL' => 'mailcrypt',
 )); 
 

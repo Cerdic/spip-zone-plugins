@@ -3,7 +3,7 @@
 @define('_mailcrypt_AROBASE_JS', '..&aring;t..'); // tip visible onMouseOver
 //@define('_mailcrypt_MAIL', '['.ucfirst(_T('email')).']'); // affichage de : [Email]
 // span ayant l'arobase en background
-@define('_mailcrypt_AROBASE', '<span class="spancrypt"></span>');
+@define('_mailcrypt_AROBASE', '<span class="spancrypt">&nbsp;</span>');
 // regexp trouvee dans l'outil "liens orphelins"
 @define('_mailcrypt_AUTORISE', '\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\.\{\|\}\~a-zA-Z0-9');
 @define('_mailcrypt_REGEXPR1', ',\b['._mailcrypt_AUTORISE.']*@[a-zA-Z][a-zA-Z0-9-.]*\.[a-zA-Z]+(\?['._mailcrypt_AUTORISE.']*)?,');

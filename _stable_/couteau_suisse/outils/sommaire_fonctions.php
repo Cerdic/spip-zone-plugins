@@ -20,23 +20,21 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0) {
 	// si on n'est pas en mode impression, on calcule l'image de retour au sommaire
 	if($_GET['cs']!='print') {
 		$titre = _T('cout:sommaire_titre');
-		$path = find_in_path(defined('_SPIP19100')?"img_pack/spip_out.gif":"images/spip_out.gif");
-		$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\" style=\"background:transparent url($path) no-repeat scroll left center;
-color:#000099; padding-left:12px; text-decoration:none;\"></a>";
+		$haut = "<a title=\"$titre\" href=\"".self()."#outil_sommaire\" class=\"sommaire_ancre\">&nbsp;</a>";
 	} else $haut = '';
 	// traitement des titres <h3>
-	preg_match_all(',(<h3[^>]*>)(.*)</h3>,Umsi',$texte, $regs);
+	preg_match_all(',(<h3[^>]*)>(.*)</h3>,Umsi',$texte, $regs);
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
 	$p = $page?_T('cout:sommaire_page', array('page'=>$page)):'';
 	for($i=0;$i<count($regs[0]);$i++,$index++){
-		$ancre = "\n<a id=\"outil_sommaire_$index\" name=\"outil_sommaire_$index\" class=\"cs_ancre\"></a>";
+		$ancre = " id=\"outil_sommaire_$index\">";
 		if (($pos2 = strpos($texte, $regs[0][$i], $pos))!==false) {
 			$titre = preg_replace(',^<p[^>]*>(.*)</p>$,Umsi', '\\1', trim($regs[2][$i]));
-			$texte = substr($texte, 0, $pos2) . $ancre . $regs[1][$i] 
-				. $haut	. $titre 
-				. substr($texte, $pos2 + strlen($regs[1][$i]) + strlen($regs[2][$i]));
+			$texte = substr($texte, 0, $pos2) . $regs[1][$i] 
+				. $ancre . $haut . $titre
+				. substr($texte, $pos2 + strlen($regs[1][$i])+1 + strlen($regs[2][$i]));
 			$pos = $pos2 + strlen($ancre) + strlen($regs[0][$i]);
 			$lien = couper($regs[2][$i], _sommaire_NB_CARACTERES);
 			$lien = preg_replace('/[!?,;.:]+$/', '', $lien); // eviter une ponctuation a la fin
@@ -79,12 +77,11 @@ function sommaire_d_article_rempl($texte0, $sommaire_seul=false) {
 	@define('_sommaire_TITRE', _T('cout:sommaire_titre'));
 	$sommaire = recuperer_fond('fonds/sommaire'.$fond, array('sommaire'=>$sommaire, 'titre'=>_sommaire_TITRE));
 
-	$ancre = '<a name="outil_sommaire" id="outil_sommaire" class="cs_ancre"></a>';
 	// si on ne veut que le sommaire, on renvoie le sommaire
 	// sinon, on n'insere ce sommaire en tete de texte que si la balise #CS_SOMMAIRE n'est pas activee
-	if($sommaire_seul) return $ancre.$sommaire;
+	if($sommaire_seul) return $sommaire;
 	if(defined('_sommaire_BALISE')) return $texte;
-	return _sommaire_REM.$ancre.$sommaire._sommaire_REM.$texte;
+	return _sommaire_REM.$sommaire._sommaire_REM.$texte;
 }
 
 // fonction appelee par le traitement de #TEXTE/articles
