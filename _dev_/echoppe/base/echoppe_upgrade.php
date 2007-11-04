@@ -41,21 +41,27 @@ function echoppe_install($action){
 			//quand l'utilisateur clickque sur "supprimer tout" (disponible si test retourne true)
 			
 			$sql_supprimer_table = "DROP TABLE `spip_echoppe_categories` ,
-						`spip_echoppe_categories_articles` ,
-						`spip_echoppe_categories_descriptions` ,
-						`spip_echoppe_categories_produits` ,
-						`spip_echoppe_categories_rubriques` ,
-						`spip_echoppe_gammes` ,
-						`spip_echoppe_gammes_produits` ,
-						`spip_echoppe_options` ,
-						`spip_echoppe_options_descriptifs` ,
-						`spip_echoppe_options_valeurs` ,
-						`spip_echoppe_options_valeurs_descriptifs` ,
-						`spip_echoppe_prix` ,
-						`spip_echoppe_produits_articles` ,
-						`spip_echoppe_produits_descriptions` ,
-						`spip_echoppe_produits_documents` ,
-						`spip_echoppe_produits_sites` ;";
+							`spip_echoppe_categories_articles` ,
+							`spip_echoppe_categories_descriptions` ,
+							`spip_echoppe_categories_produits` ,
+							`spip_echoppe_categories_rubriques` ,
+							`spip_echoppe_client` ,
+							`spip_echoppe_depots` ,
+							`spip_echoppe_gammes` ,
+							`spip_echoppe_gammes_produits` ,
+							`spip_echoppe_options` ,
+							`spip_echoppe_options_descriptifs` ,
+							`spip_echoppe_options_valeurs` ,
+							`spip_echoppe_options_valeurs_descriptifs` ,
+							`spip_echoppe_panier` ,
+							`spip_echoppe_prix` ,
+							`spip_echoppe_produits` ,
+							`spip_echoppe_produits_articles` ,
+							`spip_echoppe_produits_descriptions` ,
+							`spip_echoppe_produits_documents` ,
+							`spip_echoppe_produits_rubriques` ,
+							`spip_echoppe_produits_sites` ,
+							`spip_echoppe_stock_produits` ;";
 			spip_query($sql_supprimer_table);
 			ecrire_meta('echoppe_version','0.0');
 			ecrire_metas();

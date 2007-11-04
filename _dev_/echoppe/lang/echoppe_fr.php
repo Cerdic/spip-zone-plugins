@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'vos_contacts_livraison' => 'Vos contacts de livraison',
 'votre_adresse_livraison' => 'Votre adresse de livraison',
 
+// E
+'echoppe'=>'Echoppe, le plugin.',
 
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
