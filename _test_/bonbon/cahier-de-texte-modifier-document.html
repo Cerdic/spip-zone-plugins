@@ -71,7 +71,7 @@ if($_GET['effacer'] and !$_GET['effacement_total']) {
 			<ul>
 <BOUCLE_Articles_touche(ARTICLES){id_article IN #GET{liste_articles}}>
 				<li>
-					<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=recalcul}|parametre_url{'id_article',#ID_ARTICLE})]" title="aller voir la fiche"onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">#TITRE</a>
+					<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=recalcul}|parametre_url{'id_article',#ID_ARTICLE})]" title="aller voir la fiche"onClick="javascript:window.open(this.href,'affichage-depuis-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">#TITRE</a>
 				</li>
 </BOUCLE_Articles_touche>
 			</ul>
