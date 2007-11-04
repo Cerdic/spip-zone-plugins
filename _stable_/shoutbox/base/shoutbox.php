@@ -2,6 +2,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+// faire tourner la boucle(SHOUTBOX)
+$GLOBALS['table_des_tables']['shoutbox']='shoutbox';
+
+// definir la table pour l'installation et le compilo
 global $tables_principales;
 
 $spip_shoutbox = array(
