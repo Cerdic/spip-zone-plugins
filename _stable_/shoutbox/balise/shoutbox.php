@@ -3,7 +3,7 @@
 /*
  * #SHOUTBOX dans le squelette
  *
- * (c) Fil 2007, licence GUN/GPL
+ * (c) Fil 2007, licence GNU/GPL
  * http://urldedocumentation
  */
 
@@ -58,6 +58,16 @@ function balise_SHOUTBOX_stat($args, $filtres) {
 	return array($defaut, $a);
 }
 
+/*
+ # bof...
+function shoutbox_command_nick(&$val, $r, &$nom) {
+	include_spip('inc/cookie');
+	spip_setcookie('spip_shoutbox_nick', $r[2]);
+	$val = $nom.' is now known as '.$r[2];
+	$nom = htmlspecialchars($r[2]);
+}
+*/
+
 // http://doc.spip.org/@balise_SHOUTBOX_dyn
 function balise_SHOUTBOX_dyn($defaut, $a) {
 
@@ -66,27 +76,28 @@ function balise_SHOUTBOX_dyn($defaut, $a) {
 	// si $_POST correspondant a notre formulaire : stocker un truc
 	// dans la base de donnees
 	if (_request('valide'.$a)
-	AND _request('shoutbox_'.$a)) {
+	AND $val = strval(_request('shoutbox_'.$a))) {
 		// antispam
 		if (_request('nobot')) {
 			spip_log('spam');
 			return '';
 		}
 
-		// supprimer la 10eme ligne et ajouter la nouvelle
-		while (count($shoutbox[$a]) > 9) array_shift($shoutbox[$a]);
-		$ligne = date('H:i:s')
-			. ' - '
-			. sinon($GLOBALS['auteur_session']['nom'], $GLOBALS['ip'])
-			. ': '
-			. strval(_request('shoutbox_'.$a));
-		$shoutbox[$a][] = $ligne;
+		$nom = sinon(htmlspecialchars($_COOKIE['spip_shoutbox_nick']),
+			sinon($GLOBALS['auteur_session']['nom'], $GLOBALS['ip']));
+
+	/*
+		// est-ce une commande ? (API pas terrible, a voir...)
+		if (preg_match(',^/(.*?)(\s+(.*))?$,', $val, $r)
+		AND function_exists($f = 'shoutbox_command_'.$r[1]))
+			$f($val, $r, $nom);
+	*/
 
 		// stocker dans la base de donnees (ici table spip_meta)
 		$ou = 'objet,auteur,texte,date';
 		$quoi = _q($a) .','
-			. _q(sinon($GLOBALS['auteur_session']['nom'], $GLOBALS['ip'])) .','
-			. _q(strval(_request('shoutbox_'.$a))) .','
+			. _q($nom) .','
+			. _q($val) .','
 			. 'NOW()';
 		if (isset($GLOBALS['auteur_session']['id_auteur'])) {
 			$ou .= ',id_auteur';

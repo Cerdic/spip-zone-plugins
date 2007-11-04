@@ -5,7 +5,7 @@
 <BOUCLE_shout(SHOUTBOX){objet?}{par date}{n-9,10}>
 <div>[<small><u>(#DATE|affdate{H:i})</u></small>]
 [<small>(#ID_AUTEUR|?{<a href="[(#URL_AUTEUR{#ID_AUTEUR})]">#AUTEUR</a>,#AUTEUR}):</small>]
-[(#TEXTE*|htmlspecialchars)]
+[(#TEXTE*|htmlspecialchars|liens_orphelins_actifs)]
 </div>
 </BOUCLE_shout>
 	<div><small>(aucun message)</small></div>
