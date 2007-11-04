@@ -64,7 +64,7 @@
 			var container = $(selector).parent();
 			if(!container.is(".marker_container")) {
 		  	container = $(selector).wrap("<div class='marker_container'>").parent().width($(selector).width());
-				container.css("position","relative");
+				container.css({position:"relative",margin:"auto"});
 				$.carto.overlay.push({container:container,items:$([]),zindex:1});
 				var offset = container.offset();  
 				if($.carto.mapMarker.map) {

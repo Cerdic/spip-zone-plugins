@@ -46,8 +46,9 @@ function csv2json($url_document) {
 	}
 	
   $json = "{\n".
-	"\"path\":"._q($url_document).",\n".
+	"\"path\":"._q_json($url_document).",\n".
 	"\"count\":".count($data).",\n". 
+	"\"noData\":"._q_json(_T('annotations:no_data_csv')).",\n".
 	"\"fields\": [\n\t".
 	join(",\n\t",array_map(_q_json,$fields)).
 	"\n],\n".

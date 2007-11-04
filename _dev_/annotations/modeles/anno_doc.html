@@ -18,6 +18,6 @@
 <dt><img id="annotated_map#ID_DOCUMENT" src='#GET{fichier}' width='#GET{ width}' height='#GET{height}' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' /></dt>[
 <dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{ width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='#EDIT{descriptif} spip_doc_descriptif'[ style='width:(#GET{ width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
-[(#SESSION{statut}|?{'',''})<dd class="spip_doc_descriptif"><a class="annotate_link" id="map_#ID_DOCUMENT" href="#" title="click here to manage the points on the map">Manage points on the map</a></dd>]
+[(#SESSION{statut}|?{'',''})<dd class="spip_doc_descriptif"><a class="annotate_link" id="map_#ID_DOCUMENT" href="#" title="<:annotations:manage_poins_title:>"><:annotations:manage_points:></a></dd>]
 </dl>
 </BOUCLE_doc>

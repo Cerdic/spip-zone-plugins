@@ -15,7 +15,7 @@
 
 #ENV{debug}
 
-	<fieldset><legend>Click on the icons to select a csv file</legend>
+	<fieldset><legend><:annotations:click_select_csv:></legend>
 	<B_docs>
 		#ANCRE_PAGINATION
 	<BOUCLE_docs(DOCUMENTS)
@@ -31,7 +31,7 @@
 	})]})]
 	<a href="#" class="annotate_document" id="annotate_document#ID_DOCUMENT">#GET{logo}</a>
 		[<br />(#DATE|affdate_court)]
-		<br /><a href="#URL_DOCUMENT"><:telecharge:></a>
+		<br /><a href="#URL_DOCUMENT"><:annotations:download:></a>
 	</div>
 	<div style='float:#LANG_RIGHT;width:60%;'>
 		<div style='float:#LANG_RIGHT;width:10px;'>

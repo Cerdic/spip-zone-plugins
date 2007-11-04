@@ -53,6 +53,7 @@ li.wizard_page {
 }
 
 #annotate_window {padding-bottom:36px;}
+#annotate_window ul {margin:0;padding:0}
 #annotate_window_cancel {position:absolute;bottom:10px;right:10px}
 #annotate_save_point {position:absolute;bottom:10px;left:10px}
 

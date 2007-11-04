@@ -10,15 +10,27 @@ jQuery(function() {
 			hotSpot: [11,34]		
 		},
 		cfg: {
+			//url to load all document and annotations data
 			loadAnnotations: "#URL_PAGE{get_image_annotations}",
+			//url to load the coords of annotations for a given document
 			loadCoordsAnnotations: "#URL_PAGE{show_image_annotations}",
+			//url to load the text of a aspecified annotation
 			loadAnnotationText: "#URL_PAGE{get_annotation_text}",
+			//url to load image info (annotation window)
+			getImageInfo: "#URL_PAGE{get_image_info}",
+			//url to post actions (annotation window)
 			action: "#URL_SITE_SPIP/spip.php",
+			//url to get csv file (annotation window)
 			loadCsv: "#URL_PAGE{get_csv_file}",
+			//images
 			emptyImage: "#CHEMIN{images/rien.gif}",
-			loaderImage: "#CHEMIN{images/loader.gif}"
+			loaderImage: "#CHEMIN{images/loader.gif}",
+			modifyImage: "[(#CHEMIN{images/article-24.gif}|image_masque{#CHEMIN{images/edit.gif},mode=normal}|extraire_attribut{src})]",
+			deleteImage: "[(#CHEMIN{images/article-24.gif}|image_masque{#CHEMIN{images/supprimer.gif},mode=normal}|extraire_attribut{src})]"
 		}
 	});
 
 	jQuery.carto.loadMarkersWithTooltip();
+	//if you want to load the annotations text inside an overlay window use the next line instead of the previous one
+	//jQuery.carto.loadMarkersWithOverlay();
 });

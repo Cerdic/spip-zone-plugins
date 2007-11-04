@@ -1,345 +1,13 @@
-<script type="text/javascript">
-(function($){
-	var points_data = {ids:[]},csv_data = {};
-	
-	//init function
-	$(function(){
-		var hash = jQuery("#annotate_window").jqm().getHashWindow();
-		//bind event to hide window
-		jQuery("#annotate_window_cancel").click(function(){
-			jQuery("#annotate_window").jqmHide();
-		});
-		//hide all wizard pages
-		$("#annotate_window li.wizard_page").hide();
-		//bind links that trigger the wizard
-		jQuery("a.annotate_link").click(function(){
-			//setup and loading of infos about the document being annotated
-			jQuery.carto.id_document = this.id.match(/map_(\d+)/)[1];
-			jQuery.getJSON("#URL_PAGE{get_image_info}&id_document="+jQuery.carto.id_document,function(data){
-				//set up preview and full images
-				jQuery("#map_annotate").attr(data.attributes);
-				jQuery("#annotate_image_summary").empty().append(data.imagePreview);
-				//set up annotate window dimensions
-				var w,h;
-				w = jQuery(window).width();
-				h = jQuery(window).height();
-				jQuery("#annotate_window").width(w*0.8);
-				jQuery("#annotate_window").height('auto');
-				jQuery("#annotate_window").css({marginLeft:"-"+(w*0.4)+24+"px",top:(h-h*.8)/2+"px"});
-				jQuery("#annotate_window div.image_container").width(w*0.8);
-				jQuery("#annotate_window div.image_container").height('auto');
-				//set up post data
-			  jQuery.carto.postData = data.postData;
-				//show panel
-				jQuery.carto.showAnnotatePanel(1);
-				jQuery("#annotate_window").jqmShow();
-				hash.o.unbind("click");
-				jQuery.carto.annotate_fill_summary_panel(function(p){
-					$("#annotate_image_summary").find("div.map_marker,div.map_marker_highlight").remove();
-					var images = {};
-					images[jQuery.carto.id_document] = $("#annotate_image_summary img");
-					$.carto.displayMarkers(p,images,"map_marker_preview");
-				});
-			});
-		});
-	
-
-	});
-	
-	$.carto.annotate_fill_summary_panel = function (data,callback) {
-		var clean_it = function() {
-			var panel = $("#annotate_summary_panel").empty();
-			panel.append("<tr><th>Id</th><th>Title</th><th>Coord</th><th>Actions</th></tr>");
-			panel.append("<tr><th colspan='5' style='text-align:center'><img src='#CHEMIN{images/loader.gif}'></th></tr>");		
-		};
-		var fill_it = function() {
-			var panel = $("#annotate_summary_panel");
-			panel.find("tr:last").remove();
-			if(!points_data.ids.length) {
-				panel.append("<tr><th colspan='5' style='text-align:center'>No point on the map</th></tr>");							
-				return callback(points_data);
-			}; 
-			$.each(points_data.ids,function(i,n){
-				panel.append("<tr><td>"+n.id_annotation+"</td><td>"+n.title+"</td><td>"+n.x+","+n.y+"</td>"+
-				"<td><a href='#' title='modify the annotation' class='annotate_action_change'><img src='#CHEMIN{images/article-24.gif}' width='26' height='24' /><span><img src='#CHEMIN{images/edit.gif}' width='24' height='24' /></span></a>"+
-				"<a href='#' title='delete the annotation' class='annotate_action_delete'><img src='#CHEMIN{images/article-24.gif}' width='26' height='24' /><span><img src='#CHEMIN{images/supprimer.gif}' width='26' height='24' /></span></a></td></tr>");
-			});
-			
-			var rows = panel.find("tr:not(:first)");
-			rows.hover(function(){
-				rows.css("background","none");
-				$(this).css("background","#FEFFAF");
-				var id = $(this).find("td:first").text();
-				var marker_container = $("#annotate_image_summary div.marker_container");
-				var marker = $("#map_marker_preview"+id);
-				if(!marker.size()) return;
-				marker_container.find("div.map_marker_highlight").remove();
-				var marker_highlight = $("<div class='map_marker_highlight'>");
-				marker_highlight.css({
-					position:'absolute',
-					width:marker.width(),
-					height:marker.height(),
-					left:parseFloat(marker.css('left'))-2+"px",
-					top:parseFloat(marker.css('top'))-2+"px",
-					border:"2px solid yellow",
-					zIndex:1
-				});
-				marker_container.append(marker_highlight);
-			},function(){});
-
-			//bind action change
-			$("a.annotate_action_change").click(function(){
-				$.carto.showAnnotatePanel(3);
-				var id = $(this).parent().siblings(":first").text();
-				$.each(points_data.ids,function(i,n) {
-					if(n.id_annotation==id) {
-						$("#annotate_point_id").text(id);
-						$("#annotate_point_title").val(n.title);
-						$("#annotate_point_text").val(n.text);
-						$("#annotate_point_x").text(n.x);
-						$("#annotate_point_y").text(n.y);
-						$("#annotate_window").find(".map_marker,.map_marker+map").remove();
-						$.carto.addMarker($("#map_annotate"),{xy:[n.x,n.y]},{id:"map_marker_change"+id});
-						return false;
-					}
-				});
-			});
-			//bind action delete
-			$("a.annotate_action_delete").click(function(){
-				var id = $(this).parent().siblings(":first").text();
-				var points = {ids:[{id_annotation:id}]};
-				$.carto.deleteAnnotations($.carto.postData,points,function(answer){
-					console.log("answer delete: "+answer.result);
-					points_data.ids = $.grep(points_data.ids,function(n,i) {
-						return !(n.id_annotation==id); 
-					});
-					$.carto.showAnnotatePanel(1);
-					$.carto.annotate_fill_summary_panel(points_data,function(p){
-						$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
-						var images = {};
-						images[$.carto.id_document] = $("#annotate_image_summary img");
-						$.carto.displayMarkers(p,images);
-					});				
-				});
-			});
-			callback(points_data);
-		};
-		
-		if($.isFunction(data)) {
-			callback = data;
-			data = null;
-		};
-		callback = callback || function() {}; 
-		 
-		clean_it();
-		if(!data)
-			$.carto.loadAnnotations([$.carto.id_document],function(data){
-				points_data = data;
-				fill_it();
-			});
-		else
-			fill_it();
-	};
-	
-	$.carto.showAnnotatePanel = function(number) {
-		$("#annotate_window li.wizard_page").hide();
-		switch(number) {
-			case 1:
-				$("#annotate_wizard1").show();
-				$("#annotate_summary_panel").appendTo("#annotate_wizard1 div.annotate_summary_container").show();
-				$("#annotate_import_csv").unbind().click(function(){
-					$.carto.showAnnotatePanel(2);
-					return false;
-				});
-				$("#annotate_export_csv").unbind().click(function(){
-					var params = [];
-					$.each($.carto.postData,function(i,n){
-						params.push(i+"="+n);
-					});
-					params.push("export=1");
-					var url = "?"+params.join("&");
-					window.location = url;
-					return false;
-				});
-				$("#annotate_click_map").unbind().click(function(){
-					$.carto.showAnnotatePanel(3);
-					return false;
-				});
-				$("#annotate_delete_points").unbind().click(function(){
-					if(!points_data.ids.length) return false;
-					$.carto.deleteAnnotations($.carto.postData,points_data,function(answer){
-						console.log("answer delete all: "+answer.result);
-						points_data.ids = [];
-						$.carto.annotate_fill_summary_panel(points_data,function(p){
-							$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
-							var images = {};
-							images[$.carto.id_document] = $("#annotate_image_summary img");
-							$.carto.displayMarkers(p,images);
-						});										
-					});
-					return false;
-				});
-				break;
-			case 2:
-				$("#annotate_wizard2").show();
-				break;			
-			case 3:
-				//add,chenge point data
-				$("#annotate_wizard3").show();
-				//reset params
-				$("#annotate_point_id").text('');
-				$("#annotate_point_title").val(''),
-				$("#annotate_point_text").val(''),
-				$("#annotate_point_x").text(''),
-				$("#annotate_point_y").text('')
-				//bind click on the map
-				$("#map_annotate").unbind().click(function(event){
-					var xy = $.carto.get_xy_coord($(this),event);
-					$("#annotate_point_x").text(xy.x);
-					$("#annotate_point_y").text(xy.y);
-					$("#annotate_window").find(".map_marker,.map_marker+map").remove();
-					$.carto.addMarker(this,{xy:[xy.x,xy.y]},{id:"map_marker_preview0"});
-					return false;
-				});
-				//bind click on save button
-				$("#annotate_save_point").unbind().click(function(){
-					var point = {
-						id_annotation:$("#annotate_point_id").text(),
-						id_document: $.carto.id_document,
-						title: $("#annotate_point_title").val(),
-						text: $("#annotate_point_text").val(),
-						x:$("#annotate_point_x").text(),
-						y:$("#annotate_point_y").text()
-					};
-					var points = {ids:[point]};
-					$.carto.saveAnnotations($.carto.postData,points,function(answer){
-						console.log("answer save point: "+answer.result);
-						if(answer.mode=="insert") {
-							point.id_annotation = answer.new_id;
-							points_data.ids.push(point);
-						} else if (answer.mode=="update") {
-							points_data.ids = $.map(points_data.ids,function(n,i){
-								return (n.id_annotation==point.id_annotation)?point:n;
-							})
-						}
-						$.carto.showAnnotatePanel(1);
-						window.scrollTo(0,0);
-						$.carto.annotate_fill_summary_panel(points_data,function(p){
-							$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
-							var images = {};
-							images[$.carto.id_document] = $("#annotate_image_summary img");
-							$.carto.displayMarkers(p,images,"map_marker_preview");
-						});
-					});
-					return false;
-				});
-				break;
-			case 4:
-				$("#annotate_wizard4").show();
-				$.carto.loadCsv($.carto.idCsv,function(content){
-					csv_data = content;
-					var options = $("<option value='' selected='selected'></option>");
-					$.each(csv_data.fields,function(i,n){
-						if(!n) return;
-						options = options.add($("<option value='"+i+"'>"+n+"</option>"));
-					});
-					$("#annotate_select_title").empty().append(options.clone());
-					$("#annotate_select_text").empty().append(options.clone());
-					$("#annotate_select_x").empty().append(options.clone());
-					$("#annotate_select_y").empty().append(options.clone());
-					$("#annotate_import_csv_data").unbind().click(function(){
-						var points = {ids:[]};
-						$.each(csv_data.rows,function(i,n){
-							var point = {
-								id_document: $.carto.id_document,
-								title: n[$("#annotate_select_title").val()],
-								text: n[$("#annotate_select_text").val()],
-								x: n[$("#annotate_select_x").val()],
-								y: n[$("#annotate_select_y").val()]
-							}
-							points.ids.push(point);
-						});
-						$.carto.saveAnnotations($.carto.postData,points,function(answer){
-							$.carto.showAnnotatePanel(1);
-							window.scrollTo(0,0);
-							$.carto.annotate_fill_summary_panel(function(p){
-								$("#annotate_image_summary").find(".map_marker,.map_marker+map,div.map_marker_highlight").remove();
-								var images = {};
-								images[$.carto.id_document] = $("#annotate_image_summary img");
-								$.carto.displayMarkers(p,images);
-							});							
-						});
-						return false;
-					});
-										
-					$.carto.displayCsv(csv_data,10);					
-				});
-				break;
-		}
-	}
-	
-	$.carto.displayCsv = function(data,rowsToShow) {
-		rowsToShow = rowsToShow || -1; 
-		var container = $("#annotate_csv_panel_container"); 
-		var clean_it = function() {
-			var panel = $("#annotate_csv_panel").empty();
-			container.width($("#annotate_window").width()).
-			height($(window).height()*0.8);
-			
-			panel.append("<tr><th style='text-align:center'><img src='#CHEMIN{images/loader.gif}'></th></tr>");		
-		};
-
-		var fill_it = function() {
-			var panel = $("#annotate_csv_panel");
-			panel.empty();
-			if(!csv_data.count) {
-				panel.append("<thead><tr><th style='text-align:center'>No data in the csv file</th></tr></thead>");							
-				return;
-			}; 
-
-			var header = "<thead><tr>";
-			$.each(csv_data.fields,function(i,n){
-				header += "<th>"+n+"</th>";
-			});
-			header += "</tr></thead>";
-
-			var body = "<tbody>";
-			$.each(csv_data.rows,function(i,n){
-				var row = "<tr>";
-				$.each(n,function(i,n){
-					row += "<td>"+n+"</td>";
-				});
-				row += "</tr>";
-				body += row;
-				if(rowsToShow==0) return;
-				rowsToShow--;
-			});
-			body += "</tbody>";
-			panel.append(header+body);
-			
-		};
-		
-		clean_it();
-		if(!data) 
-			$.carto.loadCsv($.carto.idCsv,function(content){
-				csv_data = content;
-				fill_it();
-			});
-		else
-			fill_it();
-	}
-})(jQuery)
-</script>
 <div class="jqmWindow" id="annotate_window">
 	<ul>
 		<li id="annotate_wizard1" class="wizard_page">
-			Points on the map:<br />
+			<:annotations:points_on_image:>:<br />
 			<div style="text-align:center" id="annotate_image_summary">
 
 			</div>
-			<a href="#" id="annotate_import_csv">Import a csv file</a> / <a href="#" id="annotate_export_csv">Export to a csv file</a><br />
-			<a href="#" id="annotate_click_map">Add a new point</a><br />
-			<a href="#" id="annotate_delete_points">Delete all points</a><br />
+			<a href="#" id="annotate_import_csv"><:annotations:import_csv:></a> / <a href="#" id="annotate_export_csv"><:annotations:export_csv:></a><br />
+			<a href="#" id="annotate_click_map"><:annotations:add_point:></a><br />
+			<a href="#" id="annotate_delete_points"><:annotations:delete_points:></a><br />
 			<div class="annotate_summary_container">
 			</div>
 		</li>
@@ -347,29 +15,29 @@
 			<INCLUDE{fond=inc-uploadcsv}{lang=#LANG}>
 		</li>
 		<li id="annotate_wizard3" class="wizard_page">
-		  Please click on the image to select a point<br />
+		  <:annotations:click_point:><br />
 			<!--here the image is shown-->
 			<div class="image_container">
 				<img id="map_annotate" />
 			</div>
 			<div id="annotate_info_panel">
 				<span id="annotate_point_id" style="display:none"></span>
-				<div id="annotate_coordinate">Coordinates:<span id="annotate_point_x"></span>, <span id="annotate_point_y"></span></div>
-				Title<br />
+				<div id="annotate_coordinate"><:annotations:coordinates:>:<span id="annotate_point_x"></span>, <span id="annotate_point_y"></span></div>
+				<:info_titre:><br />
 				<input type="text" id="annotate_point_title" /><br />
-				Text<br />
+				<:info_texte:><br />
 				<textarea id="annotate_point_text" rows="10"></textarea>
-				<a href="#" id="annotate_save_point">Save this point</a>
+				<a href="#" id="annotate_save_point"><:annotations:save_point:></a>
 			</div>
 		</li>
 		<li id="annotate_wizard4" class="wizard_page">
-		  Select the field to add:<br />
-		  Title: <select id="annotate_select_title"></select><br />
-			Text: <select id="annotate_select_text"></select><br />
+		  <:annotations:select_fields:>:<br />
+		  <:info_titre:> <select id="annotate_select_title"></select><br />
+			<:info_texte:> <select id="annotate_select_text"></select><br />
 			X: <select id="annotate_select_x"></select><br />
 			Y: <select id="annotate_select_y"></select><br />
-			<a href="#" id="annotate_import_csv_data">Import</a><br /> 
-		  <p>Preview of the csv file</p>
+			<a href="#" id="annotate_import_csv_data"><:annotations:import:></a><br /> 
+		  <p><:annotations:preview_csv:></p>
 			<div id="annotate_csv_panel_container">
 				<table id="annotate_csv_panel">
 			  
@@ -377,8 +45,12 @@
 		  </div>
 		</li>
 	</ul>
-	<a href="#" id="annotate_window_cancel" style="float:right">Cancel</a>
+	<a href="#" id="annotate_window_cancel" style="float:right"><:bouton_annuler:></a>
 	<table id="annotate_summary_panel" style="display:none">
-	
+		<thead>
+			<tr><th>Id</th><th><:info_titre:></th><th><:annotations:coordinates:></th><th><:annotations:actions:></th></tr>
+		</thead>
+		<tbody>
+		</tbody>
 	</table>
 </div>

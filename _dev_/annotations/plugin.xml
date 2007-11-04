@@ -29,6 +29,11 @@
 		<action>insert_js</action>
 		<inclure>annotations_pipelines.php</inclure>
 	</pipeline-->
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>annotations_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="spip" version="[1.9300;]" />
 	<necessite id="FormulaireUpload" version="[0.1;]" />
 	
