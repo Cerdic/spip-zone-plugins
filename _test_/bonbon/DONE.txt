@@ -12,6 +12,7 @@ Optimisations:	-utilisation de {id_auteur ?} à la place de {id_auteur==#ENV{prof
 Des corrections de bugs divers... (voir SVN)
 Un rafraichissement plus fréquent des pages (durée de cache plus courte)
 Des améliorations dans l'interface de saisie: 	-matière et classes sont préslecetionnés quand on vient de finir de saisir une séance et qu'on passe à la suivante.
+						- la classe est -plus ou moins- préremplie quand on clique sur saisir une séance depuis l'accueil ou l'en-tête (ça devrait quand même fonctionner dans la plupart des cas)
 						-au dessus du formulaire de saisie il y a un rappel du contexte...
 						-après la saisie, une fois qu'on a confirmé l'enregistrement, on peut voir la séance et mettre des pièces jointes dans une pop-up. (on peut même la modifier via les crayons).
 						-c'est plus joli avec des icônes !

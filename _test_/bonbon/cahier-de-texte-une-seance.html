@@ -14,8 +14,23 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 (#REM) Affiche une séance
 ]
 <BOUCLE_Seances(ARTICLES){id_article}>
-	<BOUCLE_Auteur_Seances(AUTEURS){id_article}>
-<div id="documents">
+	<BOUCLE_Auteur_Seances(AUTEURS){id_article}>[
+
+(#REM) la valeur d'amin_fiche va déterminer si on affiche les icônes d'admistration (dupliquer, effacer, doc-joints) ou non.
+
+Deux conditions à remplir:
+1- qu'on soit l'auteur de l'article
+2- que admin_fine=non ne soit pas passé en argument dans l'URL.
+
+]#SET{admin_fiche,''}
+[
+(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})
+	#SET{admin_fiche,'ok'}
+	[
+	(#ENV{admin_fiche}|=={non}|?{' ',''})
+		#SET{admin_fiche,''}
+	]
+]<div id="documents">
 			<h3 class="titre">#TITRE</h3>
 			<div class="#_Seances:EDIT{texte} texte"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le texte de cette séance"]>#TEXTE</div>[
 
@@ -41,7 +56,7 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 [
 (#REM) Si c'est une séance écrite par le prof qui visite il peut faire des tas de trucs à la séance
 ]
-[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})
+[(#GET{admin_fiche}|?{' ',''})
 	<div class="bloc_auteur">
 		<a href="#URL_PAGE{cahier-de-texte-saisie,id_article=#ID_ARTICLE}" title="Copier le contenu de cette séance pour une autre classe/groupe"><img src="#CHEMIN{images/go-jump.png}" alt="icône" vspace="2" align="middle">Dupliquer cette séance</a>
 		&nbsp;|<a href="[(#URL_PAGE{cahier-de-texte-saisie,&id_article=#ID_ARTICLE}|parametre_url{'effacer_fiche','a_confirmer'})]" title="Effacer cette fiche: séance et devoirs (c'est définitif !)"><img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer la fiche de cette séance</a>
@@ -103,7 +118,7 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 [
 (#REM) Si c'est une séance écrite par le prof qui visite il peut rajouter des docs au devoir
 ]
-[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})
+[(#GET{admin_fiche}|?{' ',''})
 					<div class="bloc_auteur">
 						<span class="replie">
 							<a class="clic" title="ajouter des documents joints à ce devoir">

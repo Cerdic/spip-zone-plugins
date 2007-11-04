@@ -42,7 +42,7 @@ senschrono= si 1 les séance sont en chronologique inverse, si 0 dans le sens chr
 				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="Retourner à la page d'accueil du cahier de texte"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
 				<li><a href="#URL_PAGE{cahier-de-texte-affichage,nb=20}"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernieres séances</a></li>
 <?php if ($auteur_session) {?>
-				<li><a href="#URL_PAGE{cahier-de-texte-saisie}" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
 				<li><a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo $auteur_session['id_auteur'];?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
 <?php }//fin du if auteur session ?>
 				<li><a href="#requete" title="Faire une requête précise sur le contenu du cahier de texte"><img src="#CHEMIN{images/edit-find-replace.png}" alt="icône" vspace="2" align="middle">Faire une requête précise</a>

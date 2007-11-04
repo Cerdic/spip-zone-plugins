@@ -69,7 +69,7 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 				<li><a href="#URL_PAGE{cahier-de-texte-accueil}" title="Retourner à la page d'accueil du cahier de texte"><img src="#CHEMIN{images/dialog-ok-upside-down.png}" alt="icône" vspace="2" align="middle">Accueil du cahier de texte</a></li>
 				<li><a href="#URL_PAGE{cahier-de-texte-affichage,nb=20}"><img src="#CHEMIN{images/system-search.png}" alt="icône" vspace="2" align="middle">Afficher les 20 dernières séances</a></li>
 <?php if ($auteur_session) {?>
-				<li><a href="#URL_PAGE{cahier-de-texte-saisie}" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
+				<li><a href="#URL_PAGE{cahier-de-texte-saisie}&id_auteur=<?php echo $auteur_session['id_auteur']; ?>" title="Écrire le contenu d'une séance et ses devoirs éventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une séance</a></li>
 				<li><a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo $auteur_session['id_auteur']; ?>" title="Aller voir ses propres entrées du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses séances</a></li>
 <?php }// fin du if auteur session ?>
 			</ul>
@@ -106,6 +106,12 @@ effacer_fiche=quand la fiche doit être effacée. Les devoirs le seront aussi !
 		$date_devoir[$count]=($_POST["date_devoir$count"]);
 		$contenu_devoir[$count]=(stripslashes($_POST["contenu_devoir$count"]));
 	};//les dates ont été placées dans $date_devoir[], les contenus dans $contenu_devoir[]
+
+//Si le id_matière n'est pas défini, on essaie d'aider un peu en le prédéfinissant... C'est tj qq sec de gagnées pour le prof qui saisis.
+
+	if ((!$id_matiere) and ($_GET['id_auteur']==$auteur_session['id_auteur'])) { ?>
+		<BOUCLE_TrouveMatiere_auteur(ARTICLES){titre_mot="Description de séance"}{id_auteur=#ENV{id_auteur}}{!par date}{0,1}><BOUCLE_TrouveMot_Matiere(MOTS){id_article}{type=Matières}><?php $id_matiere='[(#ID_MOT|texte_script)]';?></BOUCLE_TrouveMot_Matiere></BOUCLE_TrouveMatiere_auteur>
+	<?php };// fin du if pas id_matiere et id_auteur
 
 //si on demande à dupliquer ou modifier un article: on récupère les données de l'article (si elles ne sont pas déjà présentes en GET)
 	if (!$id_classe[0] and $id_article and !$_POST['enregistrer_fiche'] and !$_POST['modifier_fiche'] and !$_POST['valider_fiche']) {
@@ -591,7 +597,7 @@ if($_GET['classe_matiere']) {
 <div class="bloc">
 <h2>Dernières entrées du même type dans le cahier de textes&nbsp;:</h2>
 <BOUCLE_Seances(ARTICLES){!doublons QueSeances}{!par date}{0,10}>
-		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}>
+		<INCLURE(session.php){fond=cahier-de-texte-une-seance}{id_article=#ID_ARTICLE}{admin_fiche=non}>
 </BOUCLE_Seances>
 </div>
 </B_Seances>

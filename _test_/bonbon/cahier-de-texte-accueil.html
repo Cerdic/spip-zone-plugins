@@ -83,7 +83,7 @@
 	echo "<p class='spip'>$auteur (si vous n'&ecirc;tes pas $auteur, <a href=\"";
 ?>#URL_LOGOUT<?php
 	echo "\" title=\"d&eacute;connexion imm&eacute;diate !\">cliquez ici</a>)</p>\n";?>
-			<a href="#URL_PAGE{cahier-de-texte-saisie}" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une s&eacute;ance</a>&nbsp;|
+			<a href="#URL_PAGE{cahier-de-texte-saisie}&id_auteur=$id_auteur" title="&Eacute;crire le contenu d\'une s&eacute;ance et ses devoirs &eacute;ventuels"><img src="#CHEMIN{images/accessories-text-editor.png}" alt="icône" vspace="2" align="middle">Saisir une s&eacute;ance</a>&nbsp;|
 			 <a href="#URL_PAGE{cahier-de-texte-affichage,senschrono=1}&id_auteur=<?php echo $auteur_session['id_auteur']; ?>" title="Aller voir ses propres entr&eacute;es du cahier de texte"><img src="#CHEMIN{images/edit-find.png}" alt="icône" vspace="2" align="middle">Afficher ses s&eacute;ances</a>
 <?php } else {?>
 			#LOGIN_PUBLIC
