@@ -26,7 +26,7 @@ function spipbb_install($action)
 {
 	switch ($action)
 	{
-		case 'test' : // test pour savoir si les actions sont nécessaires
+		case 'test' : // test pour savoir si les actions sont nécessaires + tester les bases
 			return ( isset($GLOBALS['meta']['spipbb']) AND
 				 isset($GLOBALS['spipbb']['version']) AND
 				 ($GLOBALS['spipbb']['version']>= $GLOBALS['spipbb_version'] ) );

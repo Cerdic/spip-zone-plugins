@@ -53,41 +53,6 @@ function spipbb_chatons($texte) {
 
 /*
  *   +----------------------------------+
- *    Nom du Filtre :    quelstatut
- *   +----------------------------------+
- *    Date : 1 fevrier 2007
- *    Auteur :  Chryjs (chryjs@free.fr)
- *   +----------------------------------+
- *
- * Essai de realisation d un filtre quelstatut
-*/
-/*
-function spipbb_quelstatut($nom='',$id='') {
-global $table_prefix;
-
-	if ($nom) $query = "SELECT statut FROM ".$table_prefix."_auteurs WHERE nom='$nom'";
-	if ($id) $query = "SELECT statut FROM ".$table_prefix."_auteurs WHERE id_auteur=$id";
-
-	$result_auteurs = spip_query($query);
-
-	switch ($result_auteurs[statut]) {
-	'0minirezo': return _T('info_administrateur_1');
-		break;
-	'1comite': return _T('info_redacteur_1');
-		break;
-	'6forum':
-	'6visiteur': return _T('info_visiteur_1');
-		break;
-	'5poubelle':
-	default:
-		return '';
-	}
-	return  '';
-}
-*/
-
-/*
- *   +----------------------------------+
  *    Nom du Filtre :    get_auteur_infos
  *   +----------------------------------+
  *    Date : lundi 23 février 2004

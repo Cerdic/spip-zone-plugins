@@ -57,7 +57,9 @@ function spipbb_init_metas($id_rubrique=0)
 	if (empty($spipbb_meta['spipbb_id_groupe_mot']))
 		$spipbb_meta = spipbb_creer_groupe_mot($spipbb_meta);
 	else {
-
+		// Verifier aussi la config de SPIP
+		// Utiliser les mot cles oui
+		// Autoriser l'ajout de mot cles aux forums oui
 		$row = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='ferme' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
 		if ( is_array($row) AND !empty($row['id_mot']) )
 			$spipbb_meta['spipbb_id_mot_ferme']=intval($row['id_mot']);
@@ -120,9 +122,17 @@ function spipbb_upgrade_metas()
 //----------------------------------------------------------------------------
 function spipbb_creer_groupe_mot($l_meta)
 {
-	$res = spip_query("INSERT INTO spip_groupes_mots SET titre='spipbb'");
-	$l_meta['spipbb_id_groupe_mot']= spip_insert_id();
-	$res = spip_query("INSERT INTO spip_mots SET titre='ferme', id_groupe='".$l_meta['spipbb_id_groupe_mot']."'");
+	$res = sql_insertq("spip_groupes_mots",array(
+				'titre' => 'spipbb',
+				'descriptif' => _T('spipbb:mot_groupe_moderation'),
+				'articles' => 'oui',
+				'rubriques' => 'oui',
+				'minirezo' => 'oui',
+				'comite' => 'oui',
+				'forum' => 'oui' )
+			);
+
+	$l_meta['spipbb_id_groupe_mot']= $res;
 	$l_meta['spipbb_id_mot_ferme'] = spipbb_init_mot_cle("ferme",$l_meta['spipbb_id_groupe_mot']);
 	$l_meta['spipbb_id_mot_annonce'] = spipbb_init_mot_cle("annonce",$l_meta['spipbb_id_groupe_mot']);
 	$l_meta['spipbb_id_mot_postit'] = spipbb_init_mot_cle("postit",$l_meta['spipbb_id_groupe_mot']);
@@ -135,8 +145,13 @@ function spipbb_creer_groupe_mot($l_meta)
 function spipbb_init_mot_cle($mot,$groupe)
 {
 	if (empty($mot) OR empty($groupe)) return 0;
-	$res = spip_query("INSERT INTO spip_mots SET titre='$mot', id_groupe='$groupe'");
-	$id_mot = spip_insert_id();
+	$groupe_mot = sql_fetsel ("titre","spip_groupes_mots",array("id_groupe"=>$groupe));
+	$id_mot = sql_insertq("spip_mots",array(
+				'titre'=>$mot,
+				'id_groupe'=>$groupe,
+				'descriptif'=> _T('spipbb:mot_'.$mot),
+				'type' => $groupe_mot['titre'])
+			);
 	return $id_mot;
 } // spipbb_init_mot_cle
 
@@ -195,8 +210,6 @@ function spipbb_admin_gauche($id_rubrique=0,$adm="")
 	}
 	$res .= "</ul>";
 
-//	$res = debut_cadre_relief("", true, '',_T('spipbb:admin_moderation')) . $res .
-//		fin_cadre_relief(true);
 	$res = debut_boite_info(true) . $res . fin_boite_info(true);
 
 	// -- liste des fonctions
