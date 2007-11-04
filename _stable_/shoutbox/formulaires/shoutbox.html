@@ -23,6 +23,8 @@
 
 [(#REM)
 	Un message si on vient d'ajouter une ligne ?
+	a passer dans le inc-shoutbox (a cause d'ajax)
+	idem pour l'erreur...
 ]
 [(#ENV{nouveau}|?{'  '})]
 
@@ -31,6 +33,7 @@
 ]
 <p><label for="shoutbox_#ENV{objet}"><:info_texte_message:></label>
 <input name="shoutbox_#ENV{objet}" id="shoutbox_#ENV{objet}"
+class="forml"
 value="[(#ENV*{defaut}|entites_html)]" style="width:98%;"
 onfocus="this.value='';"
 /></p>
