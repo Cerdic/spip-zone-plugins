@@ -1,0 +1,131 @@
+ 
+<?php
+//on vérifie qu'on a le droit d'être là...
+if ($auteur_session) {
+?>
+#CACHE{0}
+<BOUCLE_Auteur(AUTEURS){id_article}{0,1}>
+	<BOUCLE_Article(ARTICLES){id_article}>
+		<BOUCLE_Document(DOCUMENTS){id_document}>
+<!-- 
+*****Réalisé par Bertrand MARNE (bmarne à ac-creteil.fr)
+*****Sous licence GPL (enfin bon, c'est bonbonware...)
+*****CopyLeft en novembre 2007
+**** Permet de modifier les documents attachés aux articles (séances/devoirs)
+Cette page prend le paramètre suivant (en GET):
+id_article= n° de la séance. Ce paramètre est obligatoire
+id_document= n° du doc choisi à relier à id_article. Ce paramètre est obligatoire
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Cahier de texte: Faire des modifications sur le document [(#TITRE|sinon{#FICHIER|basename}|textebrut)]</title>
+
+[
+(#REM)Inclusion du pied de page
+]
+<INCLURE{fond=cahier-de-texte-en-tete}>
+
+</head>
+<body>
+<div id="NoMenu">
+	<div id="EntetePage">
+		<h1>Faire des modifications sur le document [(#TITRE|sinon{#FICHIER|basename})]</h1>
+	</div>
+	<div id="Contenu">
+<?php
+
+//Si on demande d'effacer juste pour une séance (c'est à dire dans le surtitre), on enlève l'occurence dans le susrtitre et on met à jour la base.
+if($_GET['effacer'] and !$_GET['effacement_total']) {
+	$surtitre = '[(#SURTITRE*|texte_script)]';
+	$surtitre = preg_replace("/(<doc".$_GET['id_document']."> )/","",$surtitre);
+//on met le surtitre modifié dans la base:
+	$sql ="UPDATE spip_articles SET surtitre='".addslashes($surtitre)."' WHERE id_article=".$_GET['id_article'];
+	$result = spip_query($sql);
+	echo ("		<!--update soustitre: $result-->\n");?>
+		<p class="avertissement">Le document [(#TITRE|sinon{#FICHIER|basename})] été effacé de cette fiche (#_Article:TITRE)</p>
+<?php
+}// fin du if effacer et pas effacement_total
+?>
+<?php if (!$_GET['effacer'] and !$_GET['effacement_total']) {?>
+#SET{titres,""}
+<BOUCLE_Liste_articles_directement_attaches(ARTICLES){id_document}>[
+	(#SET{liste_articles,#GET{liste_articles}|fusion_tableau{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})
+][
+	(#SET{titre,[(#GET{titre}|concat{#TITRE," "})]})
+][
+	(#ID_ARTICLE|=={#ENV{id_article}}|?{#SET{doc_reel,"oui"}})
+]</BOUCLE_Liste_articles_directement_attaches>
+[
+(#SET{doc,"<doc"})
+][
+(#SET{docXXX,[(#GET{doc}|concat{#ID_DOCUMENT,">"})]})
+]
+<BOUCLE_Liste_articles_indirectement_lies(ARTICLES){surtitre==#GET{docXXX}}>[
+	(#SET{compteur,[(#COMPTEUR_BOUCLE|plus{#_Liste_articles_directement_attaches:TOTAL_BOUCLE})]})
+][
+	(#SET{liste_articles,#GET{liste_articles}|fusion_tableau{#ARRAY{#GET{compteur},#ID_ARTICLE}}})
+]</BOUCLE_Liste_articles_indirectement_lies>
+		<div class="bloc_auteur">
+			<p>Les modfications que vous allez faire ce sur document vont affecter toutes les fiches auxquelles il est attaché&nbsp;:</p>
+			<ul>
+<BOUCLE_Articles_touche(ARTICLES){id_article IN #GET{liste_articles}}>
+				<li>
+					<a href="[(#URL_PAGE{cahier-de-texte-affichage-seance,var_mode=recalcul}|parametre_url{'id_article',#ID_ARTICLE})]" title="aller voir la fiche"onClick="javascript:window.open(this.href,'affichage', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;">#TITRE</a>
+				</li>
+</BOUCLE_Articles_touche>
+			</ul>
+		</div>
+		<center>
+			<p>Double-cliquez sur la miniature pour télécharger un autre fichier à la place. Double-cliquez sur le titre pour modfier le titre.</p>
+			<div class="#EDIT{fichier}" title="Double-cliquez sur cet élément pour le modifier">
+				[(#LOGO_DOCUMENT||image_reduire{128,128})]
+			</div>
+			<div>
+				<a href="#URL_DOCUMENT" title="Télécharger le document">Voir le document</a>
+			</div>
+			<div>
+				Type de fichier&nbsp;: «&nbsp;<em>#TYPE_DOCUMENT</em>&nbsp;». Taille du fichier&nbsp;: [(#TAILLE|taille_en_octets)] [(#TAILLE|>{500000}|?{' ',''})<p class='avertissement'>([(#TAILLE|taille_en_octets)] C'est trop volumineux, vous devriez compresser ce document !)</p>]
+			</div>
+			<div class="#EDIT{date}" title="Double-cliquez sur cet élément pour le modifier">
+				Date&nbsp;: [(#DATE|affdate)]
+			</div>
+			<div class="#EDIT{titre}" title="Double-cliquez sur cet élément pour le modifier">
+				Titre&nbsp;: [(#TITRE|sinon{#FICHIER|basename})]
+			</div>
+			<div>[
+	(#SET{debut_texte," pour la fiche «&nbsp;"})
+][
+	(#SET{texte,[(#GET{debut_texte}|concat{#_Article:TITRE,'&nbsp;» seulement'})]})
+][
+	(#GET{doc_reel}|?{' ',''}) #SET{effacement_total,'oui'}
+][
+(#REM) Pour l'nstant, l'effacement_total n'est pas activé, je cherche une méthode propre pour faire ça...
+][
+	(#GET{doc_reel}|?{'',' '})
+				<a href="[(#SELF|parametre_url{effacer,'oui'}|parametre_url{effacement_total,[(#GET{effacement_total})]})]" title="Effacer ce document (c'est définitif !)">
+				<img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer ce document[(#GET{doc_reel}|?{'pour toutes les fiches ! (voir liste ci-dessus)',#GET{texte}})]</a>
+			</div>][
+	(#GET{doc_reel}|?{'',' '})
+<!-- pas activé pour l'instant
+			<div>
+				<a href="[(#SELF|parametre_url{effacer,'oui'}|parametre_url{effacement_total,'oui'})]" title="Effacer ce document (c'est définitif !)">
+				<img src="#CHEMIN{images/dialog-cancel.png}" alt="icône" vspace="2" align="middle">Effacer ce document pour toutes les fiches ! (voir liste ci-dessus)</a>
+			</div>
+-->]
+		</center>
+<?php
+}// fin du if pas effacer et pas effacement_total
+?>
+		<br clear="all" />
+		<center style="margin-top: 1em;">
+			<input type='button' value='Fermer cette fenêtre (revenir à la séance)' onClick='parent.opener.location.reload();self.close()' name="button">
+		</center>
+	</div>
+</div>
+</body>
+</html>
+		</BOUCLE_Document>
+	</BOUCLE_Article>
+</BOUCLE_Auteur>
+<?php } else {echo("affichage non autorisé !");}?>

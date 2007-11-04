@@ -34,7 +34,7 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 			<div>
 				<h4 class="devoirs">Documents joints à la séance</h4>
 		<BOUCLE_Documents_Seances(DOCUMENTS){id_document IN #GET{liste_docs_seance}}{"&nbsp;|"}{par titre}>
-				<span class="#EDIT{fichier}">[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]</span> <span class="#EDIT{titre}"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''}) title="double cliquez ici pour modifier le titre du document"]>[(#TITRE|sinon{#FICHIER|basename})]</span> (#TYPE_DOCUMENT de [(#TAILLE|taille_en_octets)])
+				[(#SESSION{id_auteur}|?{' ',''})<a href="[(#URL_PAGE{cahier-de-texte-modifier-document,id_article=#ID_ARTICLE}|parametre_url{'id_document',#ID_DOCUMENT})]" title="modfier ce document (titre, fichier, effacer, etc.)" onClick="javascript:window.open(this.href,'modif-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;" name="button"><img src="#CHEMIN{images/preferences-desktop-sosmall.png}" alt="icône" vspace="2" align="middle"></a>]<a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
 		</BOUCLE_Documents_Seances>
 			</div>
 		</B_Documents_Seances>
@@ -95,13 +95,8 @@ id_article= n° de la séance. Ce paramètre est obligatoire
 			<B_Documents_Devoir>
 					<div>
 						Documents joints à ce devoir&nbsp;: 
-			<BOUCLE_Documents_Devoir(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{"&nbsp;|"}>			<span class="#EDIT{fichier}">
-							[(#LOGO_DOCUMENT|#URL_DOCUMENT||image_reduire{22,22})]
-						</span> 
-						<span class="#EDIT{titre}"[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' ',''})  title="double cliquez ici pour modifier le titre du document"]>
-							[(#TITRE|sinon{#FICHIER|basename})]
-						</span> 
-						([(#TAILLE|taille_en_octets)]) 
+			<BOUCLE_Documents_Devoir(DOCUMENTS){id_document IN #GET{liste_docs_devoirs}}{"&nbsp;|"}>			
+						[(#SESSION{id_auteur}|?{' ',''})<a href="[(#URL_PAGE{cahier-de-texte-modifier-document,id_article=#ID_ARTICLE}|parametre_url{'id_document',#ID_DOCUMENT})]" title="modfier ce document (titre, fichier, effacer, etc.)" onClick="javascript:window.open(this.href,'modif-doc', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;" name="button"><img src="#CHEMIN{images/preferences-desktop-sosmall.png}" alt="icône" vspace="2" align="middle"></a>]<a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT||image_reduire{22,22})]&nbsp;[(#TITRE|sinon{#FICHIER|basename})] (<em>#TYPE_DOCUMENT</em> de [(#TAILLE|taille_en_octets)])</a>
 			</BOUCLE_Documents_Devoir>
 					</div>
 			</B_Documents_Devoir>
