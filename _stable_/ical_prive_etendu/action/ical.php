@@ -48,6 +48,37 @@ function action_ical()
 	}
 	lang_select($langue_utilisateur);
 	$id_secteur = _request('id_secteur');
+	$age = (_request('age')=='')?30:intval(_request('age'));
+	
+	$juste = _request('juste');
+	switch($juste) {
+		case 'art':
+			$aff_art = true;
+			$aff_brev = false;
+			$aff_mess = false;
+			break;
+		case 'brev':
+			$aff_art = false;
+			$aff_brev = true;
+			$aff_mess = false;
+			break;
+		case 'artbrev':
+			$aff_art = true;
+			$aff_brev = true;
+			$aff_mess = false;
+			break;
+		case 'mess':
+			$aff_art = false;
+			$aff_brev = false;
+			$aff_mess = true;
+			break;
+		default:
+			$aff_art = true;
+			$aff_brev = true;
+			$aff_mess = true;
+			break;
+	}
+	
 	$nom_site = $GLOBALS['meta']["nom_site"];
 	$adresse_site = url_de_base();
 	$spip = "SPIP " . $GLOBALS['spip_version_affichee'] . ' ' . $GLOBALS['home_server'];
@@ -59,12 +90,18 @@ function action_ical()
 		filtrer_ical ("VERSION:2.0"), "\n",
 		filtrer_ical ("X-WR-CALNAME;VALUE=TEXT:$nom_site / $nom_utilisateur"), "\n",
 		filtrer_ical ("X-WR-RELCALID:cal$id_utilisateur @ $adresse_site"), "\n";
-	spip_ical_rendez_vous($id_utilisateur, $nom_site);
-	spip_ical_taches($id_utilisateur, $nom_site);
+	if ($aff_mess) spip_ical_rendez_vous($id_utilisateur, $nom_site, $age);
+	if ($aff_mess) spip_ical_taches($id_utilisateur, $nom_site, $age);
 
 	$titres = Array();
-	$nb_articles = spip_ical_articles($nom_site, $id_utilisateur, $id_secteur);
-	$nb_breves = spip_ical_breves($nom_site, $id_utilisateur, $id_secteur);
+	if ($aff_art) 
+		$nb_articles = spip_ical_articles($nom_site, $id_utilisateur, $id_secteur, $age);
+	else
+		$nb_articles = 0;
+	if ($aff_brev)
+		$nb_breves = spip_ical_breves($nom_site, $id_utilisateur, $id_secteur, $age);
+	else
+		$nb_breves = 0;
 	if ($nb_articles || $nb_breves) {
 		if ($nb_articles > 0) $titre_prop[] = _T('info_articles_proposes').": ".$nb_articles;
 		if ($nb_breves > 0) $titre_prop[] = _T('info_breves_valider').": ".$nb_breves;
@@ -85,18 +122,19 @@ function action_ical()
 			filtrer_ical ("URL:$adresse_site" . _DIR_RESTREINT_ABS), "\n",
 			filtrer_ical ("END:VTODO"), "\n";
 	}
-	spip_ical_messages($id_utilisateur, $nom_site);
-	if ($statut_utilisateur == "0minirezo") {
-		spip_ical_forums($id_utilisateur, $nom_site);
+	if ($aff_mess) spip_ical_messages($id_utilisateur, $nom_site, $age);
+	if ($statut_utilisateur == "0minirezo" AND $aff_mess) {
+		spip_ical_forums($id_utilisateur, $nom_site, $age);
 	}
 	echo filtrer_ical ("END:VCALENDAR"), "\n";
 }
 
 // http://doc.spip.org/@spip_ical_rendez_vous
-function spip_ical_rendez_vous($id_utilisateur, $nom_site)
+function spip_ical_rendez_vous($id_utilisateur, $nom_site, $age)
 {
 	// Les messages non affichés dans le calendrier sont également pris en compte 
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.statut='publie' AND ((TO_DAYS(NOW()) - TO_DAYS(date_heure) <= 30) OR ) GROUP BY messages.id_message ORDER BY messages.date_heure");
+	if ($age==0) $cond=''; else $cond="AND (TO_DAYS(NOW()) - TO_DAYS(date_heure) <= $age)";
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.statut='publie' $cond GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
@@ -145,9 +183,10 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 }
 
 // http://doc.spip.org/@spip_ical_taches
-function spip_ical_taches($id_utilisateur, $nom_site)
+function spip_ical_taches($id_utilisateur, $nom_site, $age)
 {
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' AND TO_DAYS(NOW()) - TO_DAYS(date_heure) <= 30 GROUP BY messages.id_message ORDER BY messages.date_heure");
+	if ($age==0) $cond=''; else $cond="AND (TO_DAYS(NOW()) - TO_DAYS(date_heure) <= $age)";
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' $cond GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
@@ -190,7 +229,7 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 }
 
 // http://doc.spip.org/@spip_ical_articles
-function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur)
+function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur, $age)
 {
 	global $titres;
 	$nb_articles=0;
@@ -200,9 +239,10 @@ function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur)
 	$opt_publique['publique'] = true;
 	// On prend tous les articles
 	// si $id_secteur, alors on restreint au secteur
-	if ($id_secteur>0) $cond = "AND id_secteur=$id_secteur";
-	else $cond = '';
-	$result_articles = spip_query("SELECT id_article, id_rubrique, titre, date, descriptif, texte, date_modif, statut FROM spip_articles WHERE ((TO_DAYS(NOW()) - TO_DAYS(date_modif) <= 30) OR statut='prop') $cond");
+	if ($id_secteur>0) $cond = "id_secteur=$id_secteur"; else $cond ='';
+	if ($id_secteur>0 AND $age!=O) $cond .= ' AND ';
+	if ($age!=0) $cond.="((TO_DAYS(NOW()) - TO_DAYS(date_modif) <= $age) OR statut='prop')";
+	$result_articles = spip_query("SELECT id_article, id_rubrique, titre, date, descriptif, texte, date_modif, statut FROM spip_articles WHERE $cond");
 	while($row=spip_fetch_array($result_articles)){
 		$id_article=$row['id_article'];
 		$id_rubrique=$row['id_rubrique'];
@@ -212,23 +252,23 @@ function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur)
 			OR $acces_prive=autoriser('voir', 'article', $id_article, $id_utilisateur, $opt_prive)) {
 			switch($statut) {
 				case 'prop':
-				$cat = _T('info_article_propose');
-				break;
+					$cat = _T('info_article_propose');
+					break;
 				case 'prepa':
-				$cat = _T('info_article_redaction');
-				break;
+					$cat = _T('info_article_redaction');
+					break;
 				case 'publie':
-				$cat = _T('info_article_publie');
-				break;
+					$cat = _T('info_article_publie');
+					break;
 				case 'refuse':
-				$cat = _T('info_article_refuse');
-				break;
+					$cat = _T('info_article_refuse');
+					break;
 				case 'poubelle':
-				$cat = _T('info_article_supprime');
-				break;
+					$cat = _T('info_article_supprime');
+					break;
 				default:
-				$cat = '';
-				break;
+					$cat = '';
+					break;
 			}
 			$titre = supprimer_numero($row['titre']);
 			$titres[] = $titre;	
@@ -267,7 +307,7 @@ function spip_ical_articles($nom_site, $id_utilisateur, $id_secteur)
 
 
 // http://doc.spip.org/@spip_ical_breves
-function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur)
+function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur, $age)
 {
 	global $titres;
 	$nb_breves=0;
@@ -275,9 +315,10 @@ function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur)
 	$opt_prive['publique'] = false;
 	$opt_publique = array();
 	$opt_publique['publique'] = true;
-	if ($id_secteur>0) $cond = "AND id_rubrique=$id_secteur";
-	else $cond = '';
-	$result = spip_query("SELECT id_breve, titre, date_heure, statut, id_rubrique, texte, maj FROM spip_breves WHERE ((TO_DAYS(NOW()) - TO_DAYS(maj) <= 30) OR statut='prop') $cond");
+	if ($id_secteur>0) $cond = "id_secteur=$id_secteur"; else $cond ='';
+	if ($id_secteur>0 AND $age!=O) $cond .= ' AND ';
+	if ($age!=0) $cond.="((TO_DAYS(NOW()) - TO_DAYS(maj) <= $age) OR statut='prop')";
+	$result = spip_query("SELECT id_breve, titre, date_heure, statut, id_rubrique, texte, maj FROM spip_breves WHERE $cond");
 	while($row=spip_fetch_array($result)){
 		$id_breve=$row['id_breve'];
 		$id_rubrique=$row['id_rubrique'];
@@ -286,17 +327,17 @@ function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur)
 			OR $acces_prive=autoriser('voir', 'breve', $id_breve, $id_utilisateur, $opt_prive)) {
 			switch($statut) {
 				case 'prop':
-				$cat = _T('titre_breve_proposee');
-				break;
+					$cat = _T('titre_breve_proposee');
+					break;
 				case 'publie':
-				$cat = _T('titre_breve_publiee');
-				break;
+					$cat = _T('titre_breve_publiee');
+					break;
 				case 'refuse':
-				$cat = _T('titre_breve_refusee');
-				break;
+					$cat = _T('titre_breve_refusee');
+					break;
 				default:
-				$cat = '';
-				break;
+					$cat = '';
+					break;
 			}
 			$titre = supprimer_numero($row['titre']);
 			$titres[] = $titre;
@@ -327,9 +368,10 @@ function spip_ical_breves($nom_site, $id_utilisateur, $id_secteur)
 
 
 // http://doc.spip.org/@spip_ical_messages
-function spip_ical_messages($id_utilisateur, $nom_site)
+function spip_ical_messages($id_utilisateur, $nom_site, $age)
 {
-	$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$id_utilisateur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
+	if ($age==0) $cond=''; else $cond="AND (TO_DAYS(NOW()) - TO_DAYS(date_heure) <= $age)";
+	$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$id_utilisateur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message $cond");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
@@ -388,7 +430,7 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 }
 
 // http://doc.spip.org/@spip_ical_forums
-function spip_ical_forums($id_utilisateur, $nom_site)
+function spip_ical_forums($id_utilisateur, $nom_site, $age)
 {
 	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut = 'prop'");
 
