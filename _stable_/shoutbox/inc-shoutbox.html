@@ -1,0 +1,11 @@
+[(#REM)
+	Affichage du contenu de la shoutbox (partie mise a jour en ajax)
+	Si on ne lui passe pas {objet} elle affiche tous les messages du systeme
+]
+<BOUCLE_shout(spip_shoutbox){objet?}{par date}{n-9,10}>
+<div>[<small>(#DATE|affdate{H:i:s})</small> ][&ndash;
+	(#AUTEUR)][: (#TEXTE*|htmlspecialchars)]
+</div>
+</BOUCLE_shout>
+	<div><small>(aucun message)</small></div>
+<//B_shout>

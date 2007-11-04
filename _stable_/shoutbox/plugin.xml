@@ -1,0 +1,20 @@
+<plugin>
+        <nom>Shoutbox</nom>
+        <version>
+          0.1
+        </version>
+
+		<auteur>Fil</auteur>
+
+        <etat>
+          test
+        </etat>
+        <prefix>shoutbox</prefix>
+        <description>
+        Chaque objet du site peut avoir sa shoutbox, qui permet ˆ tout visiteur de laisser un commentaire rapide. Balise <code>#SHOUTBOX</code>, ou <code>#SHOUTBOX{article,#ID_ARTICLE}</code>
+        </description>
+
+	<version_base>0.1</version_base>
+	<install>base/shoutbox_upgrade.php</install>
+
+</plugin>

@@ -1,0 +1,62 @@
+<div class="formulaire_spip formulaire_shoutbox" id="formulaire_shoutbox_#ENV{objet}">
+
+[(#REM)
+	Le formulaire de saisie
+]
+<form action="#SELF#formulaire_shoutbox_#ENV{objet}" method="post">
+
+[(#REM)
+	Un message en cas d'erreur
+]
+[<p class="erreur">(#ENV*{erreur})</p>]
+
+<fieldset>
+<legend>Shoutbox :</legend>
+
+[(#REM)
+	Contenu de la shoutbox
+]
+<br />
+<div id="contenu_shoutbox_#ENV{objet}">
+<INCLURE{fond=inc-shoutbox}{objet}>
+</div>
+
+[(#REM)
+	Un message si on vient d'ajouter une ligne ?
+]
+[(#ENV{nouveau}|?{'  '})]
+
+[(#REM)
+	Champ de saisie d'une nouvelle ligne
+]
+<p><label for="shoutbox_#ENV{objet}"><:info_texte_message:></label>
+<input name="shoutbox_#ENV{objet}" id="shoutbox_#ENV{objet}"
+value="[(#ENV*{defaut}|entites_html)]" style="width:98%;"
+onfocus="this.value='';"
+/></p>
+
+[(#REM)
+	Bouton aligne a droite (en LTR)
+]
+[<p class="spip_bouton"><input type="submit" name="valide#ENV{objet}" value="(#ENV{bouton})" /></p>]
+</fieldset>
+
+[(#REM) Antispam "nobot" ]
+<p style='display: none;'><label for="nobot"><:antispam_champ_vide:></label>
+<input type="text" name="nobot" id="nobot" value="" size="10" /></p>
+
+</form>
+</div>
+
+<script type='text/javascript'><!--
+if (window.jQuery) {
+	jQuery("#formulaire_shoutbox_[(#ENV{objet})] form")
+	.ajaxForm({
+		url: 'spip.php?page=shoutbox&objet=#ENV{objet}',
+		target: "#contenu_shoutbox_#ENV{objet}",
+		success: function(){
+			jQuery("#shoutbox_#ENV{objet}").attr('value','');
+		}
+	});
+}
+// --></script>
