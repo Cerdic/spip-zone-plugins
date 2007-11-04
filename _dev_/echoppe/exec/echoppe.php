@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_echoppe(){
-	
+	include_spip('inc/commencer_page');
 	if ($GLOBALS['meta']['version_installee'] <= '1.927'){
 		echo debut_page(_T('echoppe:echoppe'), "redacteurs", "echoppe");	
 	}else{
