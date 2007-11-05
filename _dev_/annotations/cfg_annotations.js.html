@@ -10,12 +10,15 @@ jQuery(function() {
 			hotSpot: [11,34]		
 		},
 		cfg: {
+			//For some urls there is a second line commented to be used when loading annotations data from forum table
 			//url to load all document and annotations data
 			loadAnnotations: "#URL_PAGE{get_image_annotations}",
 			//url to load the coords of annotations for a given document
 			loadCoordsAnnotations: "#URL_PAGE{show_image_annotations}",
-			//url to load the text of a aspecified annotation
+			//loadCoordsAnnotations: "#URL_PAGE{show_image_annotations_forum}",
+			//url to load the text of a specified annotation
 			loadAnnotationText: "#URL_PAGE{get_annotation_text}",
+			//loadAnnotationText: "#URL_PAGE{get_annotation_text_forum}",
 			//url to load image info (annotation window)
 			getImageInfo: "#URL_PAGE{get_image_info}",
 			//url to post actions (annotation window)
