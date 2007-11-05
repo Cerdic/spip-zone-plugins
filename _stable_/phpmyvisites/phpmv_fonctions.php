@@ -41,7 +41,7 @@ function phpmv_insert_head($texte){
 		ecrire_meta('phpmv_flag_insert_head','oui');
 		ecrire_metas();
 	}
-	return $texte . phpmv_het_head();
+	return $texte . phpmv_get_head();
 }
 
 ?>
