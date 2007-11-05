@@ -96,7 +96,8 @@ if ($modif) {
 			statut='".addslashes($auteur['statut'])."'
 			$add_extra
 			WHERE id_auteur=".$auteur['id_auteur'];
-		spip_query($query) OR die($query);
+		if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
+		sql_query($query) OR die($query);
 	}
 	
 	// Subtilite, spip passe avant le php, donc la page est creee avant la mise a jour, donc l'avatar n'est pas a jour si on ne recharge pas la page !

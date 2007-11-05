@@ -46,42 +46,4 @@ function spipbb_install($action)
 function spipbb_uninstall(){
 }
 
-// [fr] Met a jour la version et initialise les metas
-// [en] Upgrade release and init metas
-function spipbb_upgrade_all()
-{
-	$version_code = $GLOBALS['spipbb_version'] ;
-	if ( isset($GLOBALS['meta']['spipbb'] ) )
-	{
-		if ( isset($GLOBALS['spipbb']['version'] ) )
-		{
-			$installed_version = $GLOBALS['spipbb']['version'];
-		}
-		else {
-			$installed_version = 0.10 ; // first release didn't store the release level
-		}
-	}
-	else {
-		$installed_version = 0.0 ; // aka not installed
-	}
-	if ( $installed_version == 0.0 ) {
-		spipbb_init_metas();
-	}
-
-	if ( $installed_version < 0.14 ) // 0.14 or schema
-	{
-		include_spip('base/spipbb');
-		include_spip('base/create');
-		include_spip('base/abstract_sql');
-		creer_base();
-		spip_log('spipbb : spipbb_upgrade_all OK');
-	}
-
-	if ( $installed_version < $version_code ) {
-		spipbb_upgrade_metas();
-	}
-
-	spip_log('spipbb : spipbb_upgrade_all OK');
-} /* spipbb_upgrade_all */
-
 ?>

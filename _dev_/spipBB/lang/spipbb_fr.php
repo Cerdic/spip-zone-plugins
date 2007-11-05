@@ -106,7 +106,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'credits'=>'R&eacute;alis&eacute; avec <a href="http://www.spip.net/" class="copyright">SPIP</a> : 2004-2007<br />
 <a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> 
 par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a><br />
-<a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB">Plugin par Gurdil Chryjs real3t</a>',
+<a href="http://www.spip-contrib.net/spip.php?article2460">Plugin par Gurdil Chryjs real3t</a>',
 'credits_bis1' => 'GAFoSPIP v. ',
 'credits_bis2' => 'Ao&ucirc;t 2005',
 'credits_bis3' => 'Adapt&eacute; pour, et, Inspir&eacute; par, le traitement des Forums de :<br />',

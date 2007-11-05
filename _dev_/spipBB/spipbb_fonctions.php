@@ -4,19 +4,20 @@
 // en jj-mm-aaaa
 // NB 31/08/2006 17:28:58
 
-if (!function_exists('spip_num_rows')) include_spip('inc/vieilles_defs');
+//if (!function_exists('spip_num_rows')) include_spip('inc/vieilles_defs');
+if (!function_exists('sql_query')) include_spip('inc/spipbb_192');
 
 function date_maj($maj_brute)
 {
-$anneeMaj=substr($maj_brute,0,4);
-$moisMaj=substr($maj_brute,5,2);
-$jourMaj=substr($maj_brute,8,2);
-$heureMaj=substr($maj_brute,11,2);
-$minuteMaj=substr($maj_brute,14,2);
-$mise_a_jour=$jourMaj.'-'.$moisMaj.'-'.$anneeMaj.' '.$heureMaj.'h'.$minuteMaj;
-return $mise_a_jour;
+	$anneeMaj=substr($maj_brute,0,4);
+	$moisMaj=substr($maj_brute,5,2);
+	$jourMaj=substr($maj_brute,8,2);
+	$heureMaj=substr($maj_brute,11,2);
+	$minuteMaj=substr($maj_brute,14,2);
+	$mise_a_jour=$jourMaj.'-'.$moisMaj.'-'.$anneeMaj.' '.$heureMaj.'h'.$minuteMaj;
+	return $mise_a_jour;
 }
-    
+
 /*
  *   +----------------------------------+
  *    Nom du Filtre :    Chatons
@@ -34,7 +35,7 @@ return $mise_a_jour;
 */
 
 function spipbb_chatons($texte) {
-    $path = dirname(find_in_path('chatons/test'));
+	$path = dirname(find_in_path('chatons/test'));
 	$liste = $chatons = array();
 	$dossier=opendir($path);
 	while ($image = readdir($dossier)) {
@@ -42,7 +43,8 @@ function spipbb_chatons($texte) {
 			$chatons[0][] = ':'.$reg[1];
 			$liste[] = '<strong>:'.$reg[1].'</strong>';
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
-			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"plugins/spipBB/chatons/$reg[1].$reg[2]\" $size/>";
+			$chatons[1][] = "<img class='no_image_filtrer' alt='".$reg[1]."' title='".$reg[1].
+				"' src='"._DIR_PLUGIN_SPIPBB."/chatons/".$reg[1].$reg[2]."' $size/>";
 		}
 	}
 
@@ -75,9 +77,9 @@ function spipbb_chatons($texte) {
 function spipbb_get_auteur_infos($id='', $nom='') {
 	if ($id) $query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id";
 	if ($nom) $query = "SELECT * FROM spip_auteurs WHERE nom='$nom'";
-	$result = spip_query($query);
+	$result = sql_query($query);
 
-	if ($row = spip_fetch_array($result)) {
+	if ($row = sql_fetch($result)) {
 		$row=serialize($row);
 	}
 	return $row;
@@ -166,21 +168,22 @@ function spipbb_afficher_avatar($id_auteur, $classe='') {
 */
 // voirsujet
 
-function spipbb_afficher_signature($id_auteur, $classe='') {
+function spipbb_afficher_signature($id_auteur, $classe='')
+{
 	if ($classe!='') $insert=" class=\"$classe\""; else $insert="";
-		
-    $infos=unserialize(spipbb_get_auteur_infos($id_auteur,''));
-    $source=unserialize($infos[extra]);
-    $texte=$source[signature];
-    $texte = entites_html($texte);
-    $texte = preg_replace('#\[img\](.+)\[/img\]#isU', '<img src="$1" alt="signature"/>', $texte);
-    $texte = preg_replace('#\[a="(.+)"\](.+)\[/a\]#isU', '<a href="$1" alt="$2">$2</a>', $texte);
-		
-    if(isset($texte))
-    $retour=$texte;		
-	    
+
+	$infos=unserialize(spipbb_get_auteur_infos($id_auteur,''));
+	$source=unserialize($infos[extra]);
+	$texte=$source[signature];
+	$texte = entites_html($texte);
+	$texte = preg_replace('#\[img\](.+)\[/img\]#isU', '<img src="$1" alt="signature"/>', $texte);
+	$texte = preg_replace('#\[a="(.+)"\](.+)\[/a\]#isU', '<a href="$1" alt="$2">$2</a>', $texte);
+
+	if(isset($texte))
+	$retour=$texte;		
+	
 	return $retour;
-}
+} // spipbb_afficher_signature
 
 /*
  *   +----------------------------------+
@@ -204,13 +207,9 @@ function spipbb_afficher_signature($id_auteur, $classe='') {
 */
 // poster
 function spipbb_afficher_mots_clefs($texte) {
-// 3 a changer par le num du Groupe "Type de sujets"
-// 4 a changer par le num du Groupe de mot cle "Moderation"
 	if (($GLOBALS['auteur_session']['statut']=='0minirezo') OR ($GLOBALS['auteur_session']['statut']=='1comite'))
 	{
 		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['spipbb_id_groupe'];
-//		$GLOBALS['afficher_groupe'][]=3; //$GLOBALS['spipbb']['spipbb_id_mot_annonce']
-//		$GLOBALS['afficher_groupe'][]=4; //$GLOBALS['spipbb']['spipbb_id_mot_ferme']
 	}
 	else {
 		$GLOBALS['afficher_groupe'][]=0;
@@ -222,7 +221,6 @@ function spipbb_pas_afficher_mots_clefs($texte) {
 	if (($GLOBALS['auteur_session']['statut']=='0minirezo'))
 	{
 		$GLOBALS['afficher_groupe'][]=$GLOBALS['spipbb']['spipbb_id_groupe'];
-//		$GLOBALS['afficher_groupe'][]=4; //$GLOBALS['spipbb']['spipbb_id_mot_ferme']
 	}
 	else {
 		$GLOBALS['afficher_groupe'][]=0;
@@ -253,11 +251,10 @@ function spipbb_nb_messages($id_auteur){
 global $table_prefix;
 	$query = "SELECT auteur FROM ".$table_prefix."_forum WHERE id_auteur=$id_auteur";
 	$nb_mess = "";
-	$result_auteurs = spip_query($query);
-	$nb_mess = spip_num_rows($result_auteurs);
+	$result_auteurs = sql_query($query);
+	$nb_mess = sql_count($result_auteurs);
 	return $nb_mess;
 } // nb_messages
-
 
 /*
  *   +----------------------------------+
@@ -276,20 +273,21 @@ global $table_prefix;
  * http://www.spip-contrib.net/Pagination,663
 */
 
-function barre_forum_citer($texte, $lan, $rows, $cols, $lang='') {
+function barre_forum_citer($texte, $lan, $rows, $cols, $lang='')
+{
 	if (!$premiere_passe = rawurldecode(_request('retour_forum'))) {
 		if(_request('citer')=='oui'){
 			$id_citation = _request('id_forum') ;
 			$query = "SELECT auteur, texte FROM spip_forum WHERE id_forum=$id_citation";
-		    $result = spip_query($query);
-		    $row = spip_fetch_array($result);
-		    $aut_cite=$row['auteur'];
-		    $text_cite=$row['texte'];
-		    
+			$result = sql_query($query);
+			$row = sql_fetch($result);
+			$aut_cite=$row['auteur'];
+			$text_cite=$row['texte'];
 			//ajout de la citation
 			$texte="{{ $aut_cite $lan }}\n<quote>\n$text_cite</quote>\n";
 		}
 	}
 	return barre_textarea($texte, $rows, $cols, $lang);
-}
+} // barre_forum_citer
+
 ?>

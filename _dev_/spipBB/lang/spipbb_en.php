@@ -101,8 +101,8 @@ The e-mail address will be used only to confirm the details of your registration
 'contact' => 'Contact',
 'courrier' => '<p>Once registered, you personal identifier will be sent to you as soon as possible by e-mail.</p>',
 'credits'=>'Developed with <a href="http://www.spip.net/" class="copyright">SPIP</a>: 2004-2007<br/>
-<a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> by <a href=""http://spipbb.spip-zone.info/">the spipbb-team</a><br />
-<a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/_dev_/spipBB">Plugin by Gurdil Chryjs real3t</a>',
+<a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> by <a href="http://spipbb.spip-zone.info/">the spipbb-team</a><br />
+<a href="http://www.spip-contrib.net/spip.php?article2460">Plugin by Gurdil Chryjs real3t</a>',
 'credits_bis1' => 'GAFoSPIP v. ',
 'credits_bis2' => 'August 2005',
 'credits_bis3' => 'Adapted for, and, Inspired from, Forums management of:<br>',

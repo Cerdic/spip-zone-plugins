@@ -25,10 +25,51 @@ if (defined("_INC_SPIPBB")) return; else define("_INC_SPIPBB", true);
 if (!function_exists('plugin_get_infos')) include_spip('inc/plugin');
 
 $infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
-$GLOBALS['spipbb_version'] = $infos['version']; // was 0.12
+$GLOBALS['spipbb_version'] = $infos['version'];
 $GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 
-if (!function_exists('spip_insert_id')) include_spip('inc/vieilles_defs');
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.925','<')){
+	include_spip('inc/spipbb_192');; // SPIP 1.9.2
+}
+// else if (!function_exists('spip_insert_id')) include_spip('inc/vieilles_defs');
+
+// [fr] Met a jour la version et initialise les metas
+// [en] Upgrade release and init metas
+function spipbb_upgrade_all()
+{
+	$version_code = $GLOBALS['spipbb_version'] ;
+	if ( isset($GLOBALS['meta']['spipbb'] ) )
+	{
+		if ( isset($GLOBALS['spipbb']['version'] ) )
+		{
+			$installed_version = $GLOBALS['spipbb']['version'];
+		}
+		else {
+			$installed_version = 0.10 ; // first release didn't store the release level
+		}
+	}
+	else {
+		$installed_version = 0.0 ; // aka not installed
+	}
+	if ( $installed_version == 0.0 ) {
+		spipbb_init_metas();
+	}
+
+	if ( $installed_version < 0.14 ) // 0.14 or schema
+	{
+		include_spip('base/spipbb');
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
+		creer_base();
+		spip_log('spipbb : spipbb_upgrade_all OK');
+	}
+
+	if ( $installed_version < $version_code ) {
+		spipbb_upgrade_metas();
+	}
+
+	spip_log('spipbb : spipbb_upgrade_all OK');
+} /* spipbb_upgrade_all */
 
 //----------------------------------------------------------------------------
 // [fr] Initialisation des valeurs de meta du plugin aux defauts
@@ -42,7 +83,9 @@ function spipbb_init_metas($id_rubrique=0)
 	$spipbb_meta['version']= $GLOBALS['spipbb_version'];
 	$id_rubrique=intval($id_rubrique);
 	if (empty($id_rubrique)) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1")); // SELECT the first rubrique met
+		//spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1")); // SELECT the first rubrique met
+		$row = sql_fetsel('id_rubrique','spip_rubriques',array('id_parent'=>0),'',array('0+titre','titre'),'1');
+
 		$spipbb_meta['spipbb_id_rubrique']=  $row['id_rubrique'];
 	}
 	else $spipbb_meta['spipbb_id_rubrique']= $id_rubrique;
@@ -51,7 +94,9 @@ function spipbb_init_metas($id_rubrique=0)
 	$spipbb_meta['spipbb_squelette_filforum']= "filforum";
 
 	// les mots cles specifiques
-	$row = spip_fetch_array(spip_query("SELECT id_groupe FROM spip_groupes_mots WHERE titre='spipbb' LIMIT 1"));
+	// spip_fetch_array(spip_query("SELECT id_groupe FROM spip_groupes_mots WHERE titre='spipbb' LIMIT 1"));
+	$row = sql_fetsel('id_groupe','spip_groupes_mots',array('titre'=>'spipbb'),'','','1');
+
 	$spipbb_meta['spipbb_id_groupe_mot']=intval($row['id_groupe']);
 
 	if (empty($spipbb_meta['spipbb_id_groupe_mot']))
@@ -60,19 +105,31 @@ function spipbb_init_metas($id_rubrique=0)
 		// Verifier aussi la config de SPIP
 		// Utiliser les mot cles oui
 		// Autoriser l'ajout de mot cles aux forums oui
-		$row = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='ferme' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
+		// spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='ferme' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
+		$row = sql_fetsel('id_mot','spip_mots', array(
+						'titre'=>'ferme',
+						'id_groupe'=>$spipbb_meta['spipbb_id_groupe_mot'])
+				);
 		if ( is_array($row) AND !empty($row['id_mot']) )
 			$spipbb_meta['spipbb_id_mot_ferme']=intval($row['id_mot']);
 		else
 			$spipbb_meta['spipbb_id_mot_ferme'] = spipbb_init_mot_cle("ferme",$spipbb_meta['spipbb_id_groupe_mot']);
 
-		$row = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='annonce' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
+		//$row = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='annonce' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
+		$row = sql_fetsel('id_mot','spip_mots',array(
+						'titre'=>'annonce',
+						'id_groupe'=>$spipbb_meta['spipbb_id_groupe_mot'])
+				);
 		if (is_array($row) AND !empty($row['id_mot']) )
 			$spipbb_meta['spipbb_id_mot_annonce']=intval($row['id_mot']);
 		else
 			$spipbb_meta['spipbb_id_mot_annonce'] = spipbb_init_mot_cle("annonce",$spipbb_meta['spipbb_id_groupe_mot']);
 
-		$row = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='postit' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
+		//$row = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre='postit' AND id_groupe='".$spipbb_meta['spipbb_id_groupe_mot']."'"));
+		$row = sql_fetsel('id_mot','spip_mots',array(
+						'titre'=>'postit',
+						'id_groupe'=>$spipbb_meta['spipbb_id_groupe_mot'])
+				);
 		if (is_array($row) AND !empty($row['id_mot']) )
 			$spipbb_meta['spipbb_id_mot_postit']=intval($row['id_mot']);
 		else

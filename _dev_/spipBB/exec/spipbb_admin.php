@@ -39,7 +39,6 @@ function exec_spipbb_admin()
 
 	echo gros_titre(_T('spipbb:titre_spipbb'),'',false) ;
 
-//	echo "hierarchie ?";
 	echo debut_grand_cadre(true);
 	echo afficher_hierarchie($GLOBALS['spipbb']['spipbb_id_rubrique']);
 	echo fin_grand_cadre(true);
@@ -84,31 +83,15 @@ global $couleur_claire, $couleur_foncee;
 	{
 		$users_per_day = $total_users;
 	}
-/*
-	$res  = "<table cellpadding='0' cellspacing='0' border='0' width='100%'>" ;
-	$res .= "<thead><tr bgcolor='$couleur_foncee'><td>"._T('spipbb:statistique')."</td><td>"._T('spipbb:valeur')."</td></tr></thead>" ;
-	$res .= "<tr bgcolor='$couleur_claire'><td>" . _T('spipbb:total_posts') . "</td><td>" . $total_posts ."</td></tr>" ;
-	$res .= "<tr bgcolor='#fff'><td>" . _T('spipbb:average_posts') . "</td><td>" . $posts_per_day ."</td></tr>" ;
-	$res .= "<tr bgcolor='$couleur_claire'><td>" . _T('spipbb:total_users') . "</td><td>" . $total_users ."</td></tr>" ;
-	$res .= "<tr bgcolor='#fff'><td>" . _T('spipbb:average_users') . "</td><td>" . $users_per_day ."</td></tr>" ;
-	$res .= "<tr bgcolor='$couleur_claire'><td>" . _T('spipbb:date_ouverture') . "</td><td>" . date("j n y",$start_date) ."</td></tr>" ;
-	$res .= "<tr bgcolor='#fff'><td>" . _T('spipbb:age_forum') . "</td><td>" . $forum_age ."</td></tr>" ;
-*/
-// Qui est en ligne
+
+	// Qui est en ligne
 
 	$r = spip_query("SELECT COUNT(*) AS total FROM spip_auteurs WHERE en_ligne>= DATE_SUB(NOW(), INTERVAL 5 MINUTE )");
 	$o = spip_fetch_array($r); // fetch all ?
 	$total_online = count($o);
-/*
-	$res .= "<tr bgcolor='$couleur_claire'><td>" . _T('spipbb:total_users_online') . "</td><td>" . $total_online ."</td></tr>" ;
-// Check available spipbb updates
-	$res .= "<tr bgcolor='#fff'><td>" . _T('spipbb:spipbb_release') . "</td><td>" . $GLOBALS['spipbb_version'] . "</td></tr>" ;
-
-	$res .= "</table>" ;
-*/
 
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
-	$securiser_action = charger_fonction('securiser_action', 'inc');
+	//$securiser_action = charger_fonction('securiser_action', 'inc');
 	// on sait que cette fonction est dans le fichier associe
 
 	$contexte = array( 
@@ -154,8 +137,8 @@ function get_db_stat($mode)
 			break;
 	}
 
-	if ($result=spip_query($query)) {
-		$row=spip_fetch_array($result);
+	if ($result=sql_query($query)) {
+		$row=sql_fetch($result);
 	}
 
 	switch( $mode )
