@@ -8,7 +8,7 @@ define('_DIR_PLUGIN_ECHOPPE',(_DIR_PLUGINS.end($p)));
 
 
 function echoppe_ajouter_boutons($flux){
-	$flux['naviguer']->sousmenu['echoppe']= new Bouton("../"._DIR_PLUGIN_ECHOPPE."/images/logo.png",_T('echoppe:gerer_echoppe'));
+	$flux['naviguer']->sousmenu['echoppe']= new Bouton("../"._DIR_PLUGIN_ECHOPPE."/images/echoppe_blk_24.png",_T('echoppe:gerer_echoppe'));
 	return $flux;	
 }
 
