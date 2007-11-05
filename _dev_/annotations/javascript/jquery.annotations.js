@@ -194,7 +194,7 @@
 		*	 -points (object):
 		*	 		object with the points and document data			
 		*	 -images (hash):
-		*	 		hash of jQuery objects or selectors. The name of every item must be the id_document
+		*	 		hash of jQuery objects. The name of every item must be the id_document
 		*	 -id_prefix (string):
 		*	 		string that will be used to create the ids of the markers and all other necessary	 
 		*	 		markup (default="map_marker"). Usefull when showing several times the same points on a page	
