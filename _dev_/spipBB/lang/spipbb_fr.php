@@ -90,6 +90,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_form_descendre' => 'Descendre',
 'admin_form_creer_forum' => 'Cr&eacute;er un forum',
 'admin_form_creer_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
+'admin_forums_titre' => 'Gestion des forums',
 
 
 // B

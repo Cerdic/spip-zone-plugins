@@ -1,9 +1,9 @@
 #CACHE{0}
 [(#REM) Plugin SpiBB - Licence GPL]
 [(#REM) SpipBB admin - Page de gestion des forums]
-
-<BOUCLE_rubrique_parcourue(RUBRIQUES){id_rubrique}>
-<BOUCLE_rubrique_principale(RUBRIQUES){id_secteur}{racine}>
+<BOUCLE_rubrique_parcourue(RUBRIQUES){id_rubrique}{tout}>
+[(#REM) On remonte au secteur]
+<BOUCLE_rubrique_principale(RUBRIQUES){id_secteur}{racine}{tout}>
 	<B_categories>
 	<table border='1' cellspacing='1' cellpadding='3' width='100%' >
 		<thead>
@@ -16,18 +16,18 @@
 			<th class="tdermsg"><:spipbb:admin_form_deplacer:></th>
 		</tr>
 		</thead>
-	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
+	<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}{tout}>
 		<tbody[ id="salon(#ID_RUBRIQUE)"]>
 		<tr class="salon">
-			<td colspan="3" class='verdana2'>[<h2><a href="./?exec=rubriques_edit&amp;id_rubrique=#ID_RUBRIQUE[&amp;retour=(#SELF|rawurlencode)]">(#TITRE)</a></h2>]</td>
-			<td class='verdana2'><a href="./?exec=rubriques_edit&amp;id_rubrique=#ID_RUBRIQUE[&amp;retour=(#SELF|rawurlencode)]"><:spipbb:admin_form_editer:></a></td>
+			<td colspan="3" class='verdana2'>[<h2><a href="/ecrire/?exec=rubriques_edit&amp;id_rubrique=#ID_RUBRIQUE[&amp;retour=(#SELF|rawurlencode)]">(#TITRE)</a></h2>]</td>
+			<td class='verdana2'><a href="/ecrire/?exec=rubriques_edit&amp;id_rubrique=#ID_RUBRIQUE[&amp;retour=(#SELF|rawurlencode)]"><:spipbb:admin_form_editer:></a></td>
 			<td class='verdana2'><a href="/spip.php?action=supprimer&amp;arg=rubrique-#ID_RUBRIQUE&amp;hash=#ENV{hash_supprimer}[&amp;redirect=(#SELF|rawurlencode)]"><:spipbb:admin_form_supprimer:></a></td>
 			<td class='verdana2'><!-- a href='/spip.php?action=spipbb_move&amp;arg=#ID_RUBRIQUE&amp;id_rubrique=#ID_RUBRIQUE&amp;objet=rubrique&amp;move=-5&amp;hash=#ENV{hash_move}[&amp;redirect=(#SELF|rawurlencode)]'--><:spipbb:admin_form_monter:></a><br /><!--a href='/spip.php?action=spipbb_move&amp;arg=#ID_RUBRIQUE&amp;id_rubrique=#ID_RUBRIQUE&amp;objet=rubrique&amp;move=+5&amp;hash=#ENV{hash_move}[&amp;redirect=(#SELF|rawurlencode)]'--><:spipbb:admin_form_descendre:></a></td>
 		</tr>
 		<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
 		<tr class="forumligne">
 			<td class='verdana2'>
-				[<h3><a href="./?exec=articles_edit&amp;id_article=#ID_ARTICLE[&amp;retour=(#SELF|rawurlencode)]">(#TITRE)</a></h3>]
+				[<h3><a href="/ecrire/?exec=articles_edit&amp;id_article=#ID_ARTICLE[&amp;retour=(#SELF|rawurlencode)]">(#TITRE)</a></h3>]
 				[<p>(#INTRODUCTION)</p>]
 			</td>
 			<BOUCLE_sujets(FORUMS){id_article}{doublons sujets}></BOUCLE_sujets>
@@ -36,22 +36,47 @@
 			<BOUCLE_messages(FORUMS){id_article}{plat}{doublons sujets}></BOUCLE_messages>
 			<td class='verdana2'>#TOTAL_BOUCLE</td>
 			<//B_messages>
-			<td class='verdana2'><a href="./?exec=articles_edit&amp;id_article=#ID_ARTICLE[&amp;retour=(#SELF|rawurlencode)]"><:spipbb:admin_form_editer:></a></td>
+			<td class='verdana2'><a href="/ecrire/?exec=articles_edit&amp;id_article=#ID_ARTICLE[&amp;retour=(#SELF|rawurlencode)]"><:spipbb:admin_form_editer:></a></td>
 			<td class='verdana2'><a href="/spip.php?action=instituer_article&amp;arg=#ID_ARTICLE&amp;statut_nouv=poubelle&amp;hash=#ENV{hash_instituer}[&amp;retour=(#SELF|rawurlencode)]"><:spipbb:admin_form_supprimer:></a></td>
 			<td class='verdana2'"><!-- a href='/spip.php?action=spipbb_move&amp;arg=#ID_ARTICLE&amp;id_rubrique=#ID_RUBRIQUE&amp;objet=article&amp;move=-5&amp;hash=#ENV{hash_move}&amp;redirect=(#SELF|rawurlencode)'--><:spipbb:admin_form_monter:></a><br /><!--a href='/spip.php?action=spipbb_move&amp;arg=#ID_ARTICLE&amp;id_rubrique=#ID_RUBRIQUE&amp;objet=article&amp;move=+5&amp;hash=#ENV{hash_move}[&amp;retour=(#SELF|rawurlencode)]'--><:spipbb:admin_form_descendre:></a></td>
 		</tr>
 		</BOUCLE_forums>
 		<tr>
-			<td colspan='6' class='verdana2'><a href="./ecrire/?exec=articles_edit&id_rubrique=#ID_RUBRIQUE&new=oui"><:spipbb:admin_form_creer_forum:></a></td>
+			<td colspan='6' class='verdana2'><a href="/ecrire/?exec=articles_edit&amp;id_rubrique=#ID_RUBRIQUE&amp;new=oui"><:spipbb:admin_form_creer_forum:></a></td>
 		</tr>
 		</tbody>
 	</BOUCLE_categories>
 		<tbody>
 		<tr>
-			<td colspan='6' class='verdana2'><a href="./?exec=rubriques_edit&new=oui&retour=nav&id_parent=#ID_RUBRIQUE"><:spipbb:admin_form_creer_categorie:></td>
+			<td colspan='6' class='verdana2'><a href="/ecrire/?exec=rubriques_edit&amp;new=oui&amp;retour=nav&amp;id_parent=#ID_RUBRIQUE"><:spipbb:admin_form_creer_categorie:></td>
+		</tr>
+		</tbody>
+	</B_categories>
+	<table border='1' cellspacing='1' cellpadding='3' width='100%' >
+		<thead>
+		<tr>
+			<th class="tforum"><:titre_forum:></th>
+			<th class="tsujets"><:spipbb:admin_form_sujets:></th>
+			<th class="tmsg"><:spipbb:admin_form_messages:></th>
+			<th class="tdermsg"><:spipbb:admin_form_editer:></th>
+			<th class="tdermsg"><:spipbb:admin_form_supprimer:></th>
+			<th class="tdermsg"><:spipbb:admin_form_deplacer:></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td colspan='6' class='verdana2'><a href="/ecrire/?exec=rubriques_edit&amp;new=oui&amp;retour=nav&amp;id_parent=#ID_RUBRIQUE"><:spipbb:admin_form_creer_categorie:></td>
 		</tr>
 		</tbody>
 	</table>
+	<//B_categories>
+	</table>
 	</B_categories>
 </BOUCLE_rubrique_principale>
+</B_rubrique_principale>
+<a href="/ecrire/?exec=articles_edit&amp;id_rubrique=0&amp;new=oui"><:spipbb:admin_form_creer_forum:></a>
+<//B_rubrique_principale>
 </BOUCLE_rubrique_parcourue>
+</B_rubrique_parcourue>
+<a href="/ecrire/?exec=rubriques_edit&amp;new=oui&amp;retour=nav&amp;id_parent=#ID_RUBRIQUE"><:spipbb:admin_form_creer_categorie:></a>
+<//B_rubrique_parcourue>

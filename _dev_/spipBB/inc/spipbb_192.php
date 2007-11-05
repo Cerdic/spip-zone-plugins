@@ -32,6 +32,7 @@ include_spip('base/db_mysql'); // SPIP 192
 /* 
 Principales fonctions definies dans l'ordre alphanumerique :
 
+sql_count
 sql_insertq
 sql_fetch
 sql_fetsel
@@ -42,15 +43,17 @@ sql_updateq
 */
 
 //  sql_fetsel
+if (!function_exists('sql_fetsel')) {
 function sql_fetsel($select, $from = array(), $where = array(), $groupby = '', 
 	$orderby = array(), $limit = '', $having = array(), $serveur='')
 {
 	return spip_abstract_fetsel($select,$from,$where,$groupby,$orderby,$limit,'',$having,'','',$serveur) ;
-} //  sql_fetsel
+} } //  sql_fetsel
 
 // sql_insertq
 // from spip req/mysql.php 193
 // http://doc.spip.org/@spip_mysql_insertq
+if (!function_exists('sql_insertq')) {
 function sql_insertq($table, $couples, $desc=array(), $serveur='')
 { 
 	if (!$desc) $desc = description_table($table);
@@ -62,9 +65,10 @@ function sql_insertq($table, $couples, $desc=array(), $serveur='')
 	}
 
 	return spip_mysql_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur);
-} // sql_insertq
+} } // sql_insertq
 
 // from http://doc.spip.org/@spip_mysql_cite
+if (!function_exists('spip_mysql_cite')) {
 function spip_mysql_cite($v, $type) {
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
 	OR (sql_test_int($type)
@@ -73,14 +77,16 @@ function spip_mysql_cite($v, $type) {
 			  AND $v[0]=='0' AND $v[1]=='x'))))
 		return $v;
 	else return  ("'" . addslashes($v) . "'");
-}
+} } // spip_mysql_cite
 
 // from http://doc.spip.org/@sql_query
+if (!function_exists('sql_query')) {
 function sql_query($ins, $serveur='') {
 	return spip_mysql_query($ins,$serveur);
-}
+} } // sql_query
 
 // from http://doc.spip.org/@spip_mysql_query
+if (!function_exists('spip_mysql_query')) {
 function spip_mysql_query($query, $serveur='') {
 
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -96,9 +102,10 @@ function spip_mysql_query($query, $serveur='') {
 	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query); // et du fautif
 	return $t ? trace_query_end($query, $t, $r, $e) : $r;
-}
+} } // spip_mysql_query
 
 // from http://doc.spip.org/@trace_query_start
+if (!function_exists('trace_query_start')) {
 function trace_query_start()
 {
 	static $trace = '?';
@@ -111,9 +118,10 @@ function trace_query_start()
 		$trace = autoriser('debug');
 	}
 	return  $trace ?  microtime() : 0;
-}
+} } // trace_query_start
 
 // from http://doc.spip.org/@trace_query_end
+if (!function_exists('trace_query_end')) {
 function trace_query_end($query, $start, $result, $err)
 {
 	global $tableau_des_erreurs;
@@ -127,8 +135,10 @@ function trace_query_end($query, $start, $result, $err)
 		"&laquo; " .  htmlentities($err)," &raquo;");
 	}
 	return $err;
-}
+} } // trace_query_end
+
 // from http://doc.spip.org/@trace_query_chrono
+if (!function_exists('trace_query_chrono')) {
 function trace_query_chrono($m1, $m2, $query, $result)
 {
 	static $tt = 0, $nb=0;
@@ -152,9 +162,10 @@ function trace_query_chrono($m1, $m2, $query, $result)
 				     $query,
 				     $explain,
 				     $result);
-}
+} } // trace_query_chrono
 
 // from http://doc.spip.org/@spip_mysql_explain
+if (!function_exists('spip_mysql_explain')) {
 function spip_mysql_explain($query, $serveur=''){
 	if (strpos($query, 'SELECT') !== 0) return array();
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -165,9 +176,10 @@ function spip_mysql_explain($query, $serveur=''){
 	$query = 'EXPLAIN ' . traite_query($query, $db, $prefixe);
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 	return spip_mysql_fetch($r, NULL, $serveur);
-}
+} } // spip_mysql_explain
 
 // from http://doc.spip.org/@traite_query
+if (!function_exists('traite_query')) {
 function traite_query($query, $db='', $prefixe='') {
 
 	if ($GLOBALS['mysql_rappel_nom_base'] AND $db)
@@ -185,31 +197,35 @@ function traite_query($query, $db='', $prefixe='') {
 	$r = preg_replace('/([,\s])spip_/', '\1'.$pref, $query) . $suite;
 #	spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe");
 	return $r;
-}
+} } // traite_query
 
 // from http://doc.spip.org/@sql_fetch
+if (!function_exists('sql_fetch')) {
 function sql_fetch($res, $serveur='') {
 	return spip_mysql_fetch($res, NULL, $serveur);
-} // spip_mysql_fetch in base/db_mysql.php  192
+} } // spip_mysql_fetch in base/db_mysql.php  192
 
 // sql_getfetsel
 // from http://doc.spip.org/@sql_getfetsel
+if (!function_exists('sql_getfetsel')) {
 function sql_getfetsel(
 	$select, $from = array(), $where = array(), $groupby = '', 
 	$orderby = array(), $limit = '', $having = array(), $serveur='') {
 	$r = sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur), $serveur);
 	return $r ? $r[$select] : NULL;
-}
+} } // sql_getfetsel
 
 // sql_updateq
 // from base/abstract_sql.php 193
+if (!function_exists('sql_updateq')) {
 function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='')
 {
 	return spip_mysql_updateq($table, $exp, $where, $desc, $serveur);
-}
+} } // sql_updateq
 
 // from req/mysql.php 193
 // http://doc.spip.org/@spip_mysql_updateq
+if (!function_exists('spip_mysql_updateq')) {
 function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur='') {
 
 	if (!$champs) return;
@@ -222,12 +238,45 @@ function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur=
 	}
 	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
 	spip_mysql_query($r, $serveur);
-}
+} } // spip_mysql_updateq
 
 // from base/abstract_sql.php 193
+if (!function_exists('sql_count')) {
 function sql_count($res, $serveur='')
 {
 	if ($res) return mysql_num_rows($res);
-}
+} } // sql_count
+
+
+// from base/abstract_sql.php 193
+if (!function_exists('sql_test_date')) {
+function sql_test_date($type, $serveur='')
+{
+  return (preg_match('/^datetime/i',$type)
+	  OR preg_match('/^timestamp/i',$type));
+} } // sql_test_date
+
+// from base/abstract_sql.php 193
+if (!function_exists('sql_test_int')) {
+function sql_test_int($type, $serveur='')
+{
+  return (preg_match('/^bigint/i',$type)
+	  OR preg_match('/^int/i',$type)
+	  OR preg_match('/^tinyint/i',$type));
+} } // sql_test_int
+
+// from req/mysql.php 193
+// A transposer dans les portages
+if (!function_exists('spip_mysql_errno')) {
+function spip_mysql_errno() {
+	$s = mysql_errno();
+	// 2006 MySQL server has gone away
+	// 2013 Lost connection to MySQL server during query
+	if (in_array($s, array(2006,2013)))
+		define('spip_interdire_cache', true);
+	if ($s) spip_log("Erreur mysql $s");
+	return $s;
+} } // spip_mysql_errno
+
 
 ?>
