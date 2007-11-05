@@ -88,6 +88,7 @@ The e-mail address will be used only to confirm the details of your registration
 'admin_form_descendre' => 'Down',
 'admin_form_creer_forum' => 'Create a forum',
 'admin_form_creer_categorie' => 'Create a category',
+'admin_forums_titre' => 'Forums admin',
 
 // B
 'bio' => 'Short biography',
