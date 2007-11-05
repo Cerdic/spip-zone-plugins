@@ -3,7 +3,7 @@
 		SpipBB
 	</nom>
 	<auteur>
-		Credits : james (james@rezo.net) touti (touti@free.fr) chryjs (chryjs@free.fr) gurdil real3t
+		Credits : james [->james@rezo.net] touti [->touti@free.fr] chryjs [->chryjs@free.fr] gurdil real3t
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version>
@@ -22,7 +22,7 @@ _ Spipbb plugin, dev in progress. Use it at your own risks :)
 _ if you have CFG : [Configure->.?exec=cfg&amp;cfg=spipbb] You must visit it to select the forums sector before all. You may also (not required) change the skeletons names.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article2460</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<lien>[Documentation->http://www.spip-contrib.net/spip.php?article2460]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
 	<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
 	<fonctions>spipbb_fonctions.php</fonctions>
 	<options>spipbb_options.php</options>
