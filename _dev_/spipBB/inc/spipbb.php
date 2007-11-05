@@ -28,7 +28,7 @@ $infos=plugin_get_infos(_DIR_PLUGIN_SPIPBB);
 $GLOBALS['spipbb_version'] = $infos['version'];
 $GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 
-if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.925','<')) {
+if (version_compare(substr($GLOBALS['spip_version_code'],0,5),'1.927','<')) {
 	include_spip('inc/spipbb_192'); // SPIP 1.9.2
 }
 // else if (!function_exists('spip_insert_id')) include_spip('inc/vieilles_defs');

@@ -34,15 +34,26 @@ if ($_POST['redirect']=='oui') {
 	$forum['url_site'] = vider_url($url_site);
 
 	// l'entrer dans la base
-    $query = "UPDATE spip_forum SET
-    titre='".addslashes($forum['titre'])."',
-    texte='".addslashes($forum['texte'])."',
-    auteur='".addslashes($forum['auteur'])."',
-    email_auteur='".addslashes($forum['email_auteur'])."',
-    nom_site='".addslashes($forum['nom_site'])."',
-    url_site='".addslashes($forum['url_site'])."'
-    WHERE id_forum=".$id_forum;
-    sql_query($query) OR die($query);
+    //$query = "UPDATE spip_forum SET
+    //titre='".addslashes($forum['titre'])."',
+    //texte='".addslashes($forum['texte'])."',
+    //auteur='".addslashes($forum['auteur'])."',
+    //email_auteur='".addslashes($forum['email_auteur'])."',
+    //nom_site='".addslashes($forum['nom_site'])."',
+    //url_site='".addslashes($forum['url_site'])."'
+    //WHERE id_forum=".$id_forum;
+    //sql_query($query) OR die($query);
+
+	if (!function_exists('sql_updateq')) include_spip('inc/spipbb_192');
+	@sql_updateq('spip_forum', array(
+			'titre' => addslashes($forum['titre']),
+			'texte' => addslashes($forum['texte']),
+			'auteur' => addslashes($forum['auteur']),
+			'email_auteur' => addslashes($forum['email_auteur']),
+			'nom_site' => addslashes($forum['nom_site']),
+			'url_site' => addslashes($forum['url_site']) ),
+			"id_forum='$id_forum'" );
+
     
     // et on redirige vers le fofo en question
     if ($forum['id_parent'] != 0) $id_parent=$forum['id_parent'];
