@@ -95,14 +95,15 @@ function inc_prepare_recherche($recherche, $table='articles', $cond=false) {
 				$cache[$recherche][$ttable] = array("''", '0');
 			} else {
 				$listes_ids = array();
-				$select = '0';
 				$table_abreg = preg_replace("{^spip_}","",$ttable);
 				foreach ($scores as $id => $score)
 					$listes_ids[$score] .= ','.$id;
+				$select = '';
 				foreach ($listes_ids as $p => $liste_ids)
-					$select .= "+$p*(".
+					$select .= "+ (case when (".
 					calcul_mysql_in("$table_abreg.$primary", substr($liste_ids, 1))
-					.") ";
+					.") then $p else 0 end) "; 
+				$select = $select ? substr($select,1) : '0';
 
 				$cache[$recherche][$ttable] = array($select,
 					'('.calcul_mysql_in("$table_abreg.$primary", array_keys($scores)).')'
