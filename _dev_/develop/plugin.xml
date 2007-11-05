@@ -1,0 +1,39 @@
+<plugin>
+	<nom>
+		develop
+	</nom>
+	<auteur>
+		crowf00t &copy; 2007 - Distribu&eacute; sous licence GNU/LGPL
+	</auteur>
+	<version>
+		0.1
+	</version>
+	<etat>
+		dev
+	</etat>
+	<description>
+Un plugin pour les developeurs de plugin
+	</description>
+	<icon>images/develop.png</icon>
+	<prefix>develop</prefix>
+	<necessite id='cfg' version='[1.0.6;]' />
+	<necessite id='Inscription2' version='[0.2;]' />
+	<install>base/develop_upgrade.php</install>
+	<options></options>
+	<fonctions></fonctions>
+	<!-- Les bouttons pour 1.9.2 -->
+	<pipeline>
+		<!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
+		<nom>ajouter_boutons</nom>
+		<!-- nom de la fonction a appelé sans son prefixe -->
+		<action>ajouter_boutons</action>
+		<!-- chemin du fichier contenant la fonction -->
+		<inclure>develop_pipeline.php</inclure>
+	</pipeline>
+	<bouton id='develop' parent='statistiques_visites'>
+		<icone>images/logo.png</icone>
+		<titre>develop</titre>
+		<url>develop</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+		<args></args>
+	</bouton>
+</plugin>
