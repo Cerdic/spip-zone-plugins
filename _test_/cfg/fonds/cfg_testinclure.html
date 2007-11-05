@@ -22,19 +22,24 @@ boucle sur les rubriques racine et inclusion des champs de formulaire par &lt;IN
 #CACHE{0}
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
+#CFG_ARBO{testinclure}
 
 <fieldset><legend><:cfg:boucles_et_inclusions:></legend>
 <BOUCLE_racine(RUBRIQUES){racine}{par num titre}>
 
 	<label for="cfg_bidule_rubrique_#ID_RUBRIQUE">#TITRE</label>
 	<select name="bidule_rubrique_#ID_RUBRIQUE" id="cfg_bidule_rubrique_#ID_RUBRIQUE" class="forml">
-		<option value="non"[ selected="(#ENV{bidule_rubrique_#ID_RUBRIQUE}|=={non}|?{selected})"]><:non:></option>
-		<option value="oui"[ selected="(#ENV{bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{selected})"]><:oui:></option>
+		<option value="non"[ selected="(#CONFIG{testinclure/bidule_rubrique_#ID_RUBRIQUE}|=={non}|?{selected})"]><:non:></option>
+		<option value="oui"[ selected="(#CONFIG{testinclure/bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{selected})"]><:oui:></option>
 	</select>
 	
-	[(#ENV{bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{' ',''})
+	[(#CONFIG{testinclure/bidule_rubrique_#ID_RUBRIQUE}|=={oui}|?{' ',''})
 		<blockquote>
-		<INCLURE{fond=fonds/inc-articles-rubrique}{nom=articles_rubrique_#ID_RUBRIQUE}{label=Articles de #TITRE}{cfg_rep=testinclure}{id_rubrique}>
+		[(#INCLURE{fond=fonds/inc-articles-rubrique}
+				{nom=articles_rubrique_#ID_RUBRIQUE}
+				{label=Articles de #TITRE}
+				{cfg_rep=testinclure}
+				{id_rubrique})]
 		</blockquote>
 	]
 	<br />
