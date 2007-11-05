@@ -81,7 +81,7 @@
 						[(#GET{sujetferme}|=={0}|?{' ',
 						<li class="citervs"><a href='[(#URL_PAGE{poster}|parametre_url{citer,oui})]&amp;[(#PARAMETRES_FORUM)]' title="<:spipbb:citer:>"><span><:[(#URL_PAGE{poster}|parametre_url{citer,oui})]spipbb:citer:></span>&nbsp;</a></li>})]
 						<?php if ($GLOBALS['auteur_session']['statut']=='0minirezo' OR $GLOBALS['auteur_session']['id_auteur']=='#ID_AUTEUR'){?>
-						<li class="editervs"><a href='[(#URL_PAGE{editer}|parametre_url{id_forum,#ID_forum})]' title="<:spipbb:editer:>"><span><:spipbb:editer:></span>&nbsp;</a></li>
+						<li class="editervs"><a href='[(#URL_PAGE{editer}|parametre_url{id_forum,#ID_FORUM})]' title="<:spipbb:editer:>"><span><:spipbb:editer:></span>&nbsp;</a></li>
 						<?php } ?>
 						<!-- Moderation pour les admin --><?php if ($GLOBALS['auteur_session']['statut']=='0minirezo'){?>
 						<li class="effacervs"><a href='./ecrire/?exec=controle_forum&amp;id_article=#GET{id_article}' title="<:spipbb:effacer:>"><span><:spipbb:effacer:></span>&nbsp;</a></li>

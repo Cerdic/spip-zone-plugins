@@ -12,9 +12,14 @@ if ($row = spip_fetch_array($result)) $forum=$row;
 //
 // Modification du forum
 //
+$titre =  $_POST['titre'];
+$texte =  $_POST['texte'];
+$auteur =  $_POST['auteur'];
+$email_auteur =  $_POST['email_auteur'];
+$nom_site =  $_POST['nom_site'];
+$url_site =  $_POST['url_site'];
 
-
-if ($redirect==oui) { 
+if ($_POST['redirect']=='oui') { 
 
 	if ($titre)	// pas de titre vide
 		$forum['titre'] = corriger_caracteres($titre);
@@ -37,12 +42,12 @@ if ($redirect==oui) {
     nom_site='".addslashes($forum['nom_site'])."',
     url_site='".addslashes($forum['url_site'])."'
     WHERE id_forum=".$id_forum;
-    spip_query($query) OR die($query);
+    sql_query($query) OR die($query);
     
     // et on redirige vers le fofo en question
-    $id_parent=$forum['id_parent'];
-    header("Location: spip.php?page=voirsujet&id_forum=$id_parent#forum$id_forum");
-	
+    if ($forum['id_parent'] != 0) $id_parent=$forum['id_parent'];
+    else $id_parent=$id_forum;
+    header("Location: spip.php?page=voirsujet&id_forum=$id_parent");	
 
 }
 
@@ -91,7 +96,7 @@ if ($forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') {
 
                                         <a id="formulaire_forum" name="formulaire_forum"></a>
                                         
-                                        <? if ($modif) {  ?>
+                                        <? if ($_POST['modif']) {?>
                                         <form action="spip.php?page=editer&id_forum=<? echo $id_forum;?>" method="post"><div>
                                         <input type="hidden" name="id_forum" value="<? echo $id_forum;?>" />
                                         <input type="hidden" name="redirect" value="oui" />
