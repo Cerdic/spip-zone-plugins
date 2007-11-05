@@ -58,6 +58,13 @@ function exec_echoppe_edit_categorie(){
 	
 	echo debut_cadre_formulaire();
 	echo '<form action="'.generer_url_action("echoppe_sauver_categorie","new=oui").'" method="post" >';
+	
+	echo '<input type="hidden" name="lang" value="'.$lang.'" />';
+	echo '<input type="hidden" name="id_parent" value="'.$id_parent.'" />';
+	echo '<input type="hidden" name="redirect" value="'.generer_url_ecrire('echoppe').'" />';
+	echo '<input type="hidden" name="new" value="'._request('new').'" />';
+	echo '<input type="hidden" name="id_categorie_descriptif" value="'.$id_categorie.'" />';
+	
 	echo '<b>'._T('echoppe:titre_categorie').'</b><br />';
 	echo '<input type=text class="forml" name="titre"/><br />';
 	
