@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_echoppe_sauver_categorie(){
-	$lang = _request('lang');
+	$lang_categorie = _request('lang');
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$texte = _request('texte');
@@ -15,7 +15,7 @@ function action_echoppe_sauver_categorie(){
 		$res_insert_categorie = spip_query($sql_insert_categorie);
 		//echo $sql_insert_categorie.'<hr />';
 		$new_id_categorie = spip_insert_id();
-		$sql_insert_categorie_descriptif = "INSERT INTO spip_echoppe_categories_descriptions VALUES ('','".$new_id_categorie."','".$lang."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".$logo."','','".$statut."') ";
+		$sql_insert_categorie_descriptif = "INSERT INTO spip_echoppe_categories_descriptions VALUES ('','".$new_id_categorie."','".$lang_categorie."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".$logo."','','".$statut."') ";
 		$res_insert_categorie_descriptif = spip_query($sql_insert_categorie_descriptif);
 		//echo $sql_insert_categorie_descriptif.'<hr />';
 		

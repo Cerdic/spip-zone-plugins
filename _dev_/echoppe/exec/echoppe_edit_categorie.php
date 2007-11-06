@@ -12,8 +12,9 @@ function exec_echoppe_edit_categorie(){
 	$lang_categorie = _request('lang');
 	$id_parent = _request('id_parent');
 	$id_categorie = _request('id_categorie');
+	$new = _request('new');
 	
-	if (_request('new') == "oui"){
+	if ($new == "oui"){
 		$titre = filtrer_entites(_T('echoppe:nouvelle_cetegorie'));
 		$descriptif = "";
 		$texte = "";
@@ -21,10 +22,13 @@ function exec_echoppe_edit_categorie(){
 		$maj = '';
 		$statut = 'redac';
 	}else{
-		$sql_descriptif_categorie = "SELECT * FROM spip_echoppe_categories_descriptions WHERE id_categorie = '".$id_categorie."'";
-		if (!empty($lang_categorie)) $sql_descriptif_categorie .= " AND lang='".$lang_categorie."'";
+		$sql_descriptif_categorie = "SELECT * FROM spip_echoppe_categories_descriptions WHERE id_categorie = '".$id_categorie."' AND lang='".$lang_categorie."'";
 		$res_descriptif_categorie = spip_query($sql_descriptif_categorie);
 		$descriptif_categorie = spip_fetch_array($res_descriptif_categorie);
+		
+		if (spip_num_rows($res_descriptif_categorie) <= 0){
+			$new = 'oui';
+		}
 		
 		$id_categorie = _request('id_categorie');
 		$titre = $descriptif_categorie['titre'];
@@ -76,7 +80,7 @@ function exec_echoppe_edit_categorie(){
 	echo '<input type="hidden" name="lang" value="'.$lang_categorie.'" />';
 	echo '<input type="hidden" name="id_parent" value="'.$id_parent.'" />';
 	echo '<input type="hidden" name="redirect" value="'.generer_url_ecrire('echoppe').'" />';
-	echo '<input type="hidden" name="new" value="'._request('new').'" />';
+	echo '<input type="hidden" name="new" value="'.$new.'" />';
 	echo '<input type="hidden" name="id_categorie_descriptif" value="'.$id_categorie.'" />';
 	
 	echo '<b>'._T('echoppe:titre_categorie').'</b><br />';
