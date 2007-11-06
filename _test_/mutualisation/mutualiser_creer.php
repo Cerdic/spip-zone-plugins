@@ -73,8 +73,9 @@ function mutualiser_creer($e, $options) {
 						// Pour chaque base creee on cree aussi un user
 						// MYSQL specifique qui aura les droits sur la base
 						if ($options['creer_user_base']) {
-							if (!mysql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_USER_DB."'@'"._INSTALL_HOST_DB."' IDENTIFIED BY '"._INSTALL_PASS_DB."'")) {
-								die (__FILE__." " . __LINE__.": Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_USER_DB."'@'"._INSTALL_HOST_DB."'  IDENTIFIED BY 'xxx'");
+							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); // le nom de la machine MySQL peut different du nom de la connexion via DNS
+							if (!mysql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME."' IDENTIFIED BY '"._INSTALL_PASS_DB."'")) {
+								die (__FILE__." " . __LINE__.": Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME."'  IDENTIFIED BY 'xxx'");
 							}
 							mysql_close($link);
 							$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB, _INSTALL_PASS_DB);
