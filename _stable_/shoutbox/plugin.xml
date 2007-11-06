@@ -11,8 +11,10 @@
         </etat>
         <prefix>shoutbox</prefix>
         <description>
-        Chaque objet du site peut avoir sa shoutbox, qui permet ˆ tout visiteur de laisser un commentaire rapide. Balise <code>#SHOUTBOX</code>, ou <code>#SHOUTBOX{article,#ID_ARTICLE}</code>
+        Chaque objet du site peut avoir sa shoutbox, qui permet &#224; tout visiteur de laisser un commentaire rapide. Balise <code>#SHOUTBOX</code>, ou <code>#SHOUTBOX{article,#ID_ARTICLE}</code>
         </description>
+
+	<icon>shoutbox.png</icon>
 
 	<version_base>0.1</version_base>
 	<install>base/shoutbox_upgrade.php</install>
