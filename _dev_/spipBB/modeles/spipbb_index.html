@@ -24,9 +24,9 @@
 		#SET{forumferme,1}
 		</BOUCLE_etat>
 		<tr class="forumligne">
-			<td class="etatfor[ (#GET{forumferme}|=={0}|?{fermefor,ouvfor})]">
+			<td class="etatfor[ (#GET{forumferme}|=={0}|?{ouvfor,fermefor})]">
 				<span>
-				[(#GET{forumferme}|=={0}|?{<:spipbb:forum_ferme:>,<:titre_forum:>})]
+				[(#GET{forumferme}|=={0}|?{<:titre_forum:>,<:spipbb:forum_ferme:>})]
 				</span>
 			</td>
 			<td class="titre">

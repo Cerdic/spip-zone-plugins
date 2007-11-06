@@ -12,9 +12,8 @@ a:hover { text-decoration: underline; }
 h2 { background:none; }
 p { margin:0; padding:0; border:0; font-size: 90%; }
 img { border: none; margin: 0; }
-.nav { font-weight: bold; margin-bottom: 5px; padding-top:10px}
-#moderateurs {float:left;}
-#hierarchie {float:left;}
+.moderateurs { clear:left; font-size:90%; text-align:left; font-weight: bold; padding:1em; padding-top:0; margin:0px; }
+.nav { float:left; font-weight: bold; margin-bottom: 5px; padding-top:20px;}
 body#forumsect p.nouvmsg { float: right; margin-bottom: 5px; }
 body#forumsect p.nav { float: left; margin-left:10px }
 body#artforum p.nav, body#voirsujet p.nav { float: left; }

@@ -34,7 +34,8 @@ function date_maj($maj_brute)
  *   +-------------------------------------+ 
 */
 
-function spipbb_chatons($texte) {
+function spipbb_chatons($texte)
+{
 	$path = dirname(find_in_path('chatons/test'));
 	$liste = $chatons = array();
 	$dossier=opendir($path);
@@ -44,14 +45,14 @@ function spipbb_chatons($texte) {
 			$liste[] = '<strong>:'.$reg[1].'</strong>';
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
 			$chatons[1][] = "<img class='no_image_filtrer' alt='".$reg[1]."' title='".$reg[1].
-				"' src='"._DIR_PLUGIN_SPIPBB."/chatons/".$reg[1].$reg[2]."' $size/>";
+				"' src='"._DIR_PLUGIN_SPIPBB."chatons/".$reg[1].".".$reg[2]."' $size/>";
 		}
 	}
 
 	if (strpos($texte, ':')===false) return $texte;
 	$chatons_rempl = $chatons;
 	return str_replace($chatons_rempl[0], $chatons_rempl[1], $texte);
-}
+} // spipbb_chatons
 
 /*
  *   +----------------------------------+

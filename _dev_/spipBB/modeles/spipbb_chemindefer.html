@@ -2,17 +2,17 @@
 [(#REM) Cf fil d'ariane]
 
 <B_cdf>
-<div id="hierarchie">
+<div class="nav">
 <BOUCLE_cdf(ARTICLES){id_article}>
 	<BOUCLE_secteur(RUBRIQUES){id_secteur}{id_parent=0}>
 	<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
 	</BOUCLE_secteur>
 	-&gt; <strong class="on"><a href="#URL_ARTICLE">[(#TITRE)]</a></strong>
 </BOUCLE_cdf>
-</div>
+</div> <!-- class = nav -->
 </B_cdf>
 <B_cdf2>
-<div id="hierarchie">
+<div class="nav">
 <BOUCLE_cdf2(RUBRIQUES){id_rubrique}>
 	<BOUCLE_secteur2(RUBRIQUES){id_secteur}{id_parent=0}>
 	<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
@@ -21,5 +21,5 @@
 	-&gt; <strong class="on"><a href="#URL_RUBRIQUE">[(#TITRE)]</a></strong>
 	</BOUCLE_secteur3>
 </BOUCLE_cdf2>
-</div>
+</div> <!-- class = nav -->
 </B_cdf2>

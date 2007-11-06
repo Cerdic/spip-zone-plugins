@@ -1,0 +1,6 @@
+2007-11-06  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction spipbb_index : erreur sur le test des forums fermes
+ * Presentation hierarchie/fil d'ariane et moderateurs revue mais reste a ameliorer
+ * Revoir le formulaire admin avec les infos de http://www.spip-blog.net/spip.php?article431
+ * Correction du chemin des plugins dans les fonctions spipbb_chatons : j'avois oublie un . entre le nom et l'extension

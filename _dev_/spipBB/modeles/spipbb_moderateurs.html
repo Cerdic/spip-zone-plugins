@@ -1,6 +1,6 @@
 #CACHE{300}
 <B_select_forum>
-<div id="moderateurs">
+<div class="moderateurs">
 <:spipbb:moderateurs:>&nbsp;: 
 #SET{prev,0}
 <BOUCLE_select_forum(ARTICLES){id_article}>
@@ -20,11 +20,11 @@
 		</B_mod_groupe_forum>
 	</BOUCLE_liste_rub>
 	<B_moderateurs>
-	[(#SET{separateur,[(#GET{prev}|=={0}|?{' ', ", "})]})]
+	[(#SET{separateur,[(#GET{prev}|=={0}|?{'', ", "})]})]
 	#GET{separateur}
 	<BOUCLE_moderateurs(AUTEURS){", "}{id_article}{doublons mod}>
 		<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a>
 	</BOUCLE_moderateurs>
 </BOUCLE_select_forum>
-</div> <!-- id=moderateurs -->
+</div> <!-- class=moderateurs -->
 </B_select_forum>
