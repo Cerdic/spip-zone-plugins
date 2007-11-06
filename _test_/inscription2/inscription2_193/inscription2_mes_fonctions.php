@@ -20,7 +20,7 @@ function confirmation_inscription2($id, $mode, $cle){
 function inscription2_verifier_tables(){
 	//definition de la table cible
 	$table_nom = "spip_auteurs_elargis";
-	$desc = sql_showtable($table_nom, '', true);
+	$desc = sql_showtable($table_nom, true, '');
 	spip_query("CREATE TABLE IF NOT EXISTS ".$table_nom." (id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, id_auteur bigint NOT NULL, FOREIGN KEY (id_auteur) REFERENCES spip_auteurs (id_auteur));");
 	foreach(lire_config('inscription2') as $clef => $val) {
 		$cle = ereg_replace("_(obligatoire|fiche|table).*", "", $clef);
@@ -58,7 +58,6 @@ return $pays['pays'] ;
 }
 
 function form_hidden_env($env){
-
  	    $hidden = '';
  	        foreach(unserialize($env) as $c => $v) {
  	            if(!is_array($v)){
@@ -73,12 +72,9 @@ function form_hidden_env($env){
  	                entites_html($c) .
  	                "[]' value='" . entites_html($vv) .
  	                "' type='hidden' />\n";
- 	            }    
- 	            
- 	            }    
- 	   
+ 	            }
+ 	            }
  	    return $hidden;
-
 }
 
 ?>
