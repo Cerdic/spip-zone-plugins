@@ -126,7 +126,7 @@ function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
 		elseif (!isset($GLOBALS['auteur_session']['id_auteur']) && isset($qui['id_auteur']))
 			$evenements_exclus[$publique] = AccesRestreint_liste_evenements_exclus($publique,$qui['id_auteur']);
 		else
-			$evenements_exclus[$publique] = AccesRestreint_evenements_evenements_exclus($publique);
+			$evenements_exclus[$publique] = AccesRestreint_liste_evenements_exclus($publique);
 		$evenements_exclus[$publique] = array_flip($evenements_exclus[$publique]);
 	}
 	return !isset($evenements_exclus[$publique][$id]);
