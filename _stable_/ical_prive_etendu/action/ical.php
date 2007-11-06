@@ -133,7 +133,7 @@ function action_ical()
 			filtrer_ical ("URL:$adresse_site" . _DIR_RESTREINT_ABS), "\n",
 			filtrer_ical ("END:VTODO"), "\n";
 	}
-	if ($aff_mess) spip_ical_messages($id_utilisateur, $nom_site, $age);
+	//if ($aff_mess) spip_ical_messages($id_utilisateur, $nom_site, $age);
 	if ($statut_utilisateur == "0minirezo" AND $aff_forum) {
 		spip_ical_forums($id_utilisateur, $nom_site);
 	}
