@@ -41,7 +41,12 @@ onfocus="this.value='';"
 [(#REM)
 	Bouton
 ]
-[<p class="spip_bouton"><input type="submit" name="valide#ENV{objet}" value="(#ENV{bouton})" /></p>]
+<p class="spip_bouton">
+<input type="submit" name="valide#ENV{objet}" value="#ENV{bouton}" />
+</p>
+
+<label for="shoutbox_nick_#ENV{objet}" class="labelhide"><:form_pet_votre_nom:></label>
+<input type="text" name="shoutbox_nick_#ENV{objet}" value="[(#ENV{nick})]" class="forml" style="width:50%;" />
 </fieldset>
 
 [(#REM) Antispam "nobot" ]
@@ -51,23 +56,40 @@ onfocus="this.value='';"
 </form>
 </div>
 
+
+<script type='text/javascript' src='#CHEMIN{js/jquery.labelhide.js}'></script>
 <script type='text/javascript'><!--
-if (window.jQuery) {
-	jQuery("#formulaire_shoutbox_[(#ENV{objet})] form")
+if (window.jQuery) (function($){
+	// adresse du fragment ajax
+	var url = 'spip.php?page=shoutbox\x26objet=#ENV{objet}';
+
+	// reload : au debut, toutes les 20s, puis 22, 24... 60s
+	// si on participe on revient a 5s, puis 7, 9... 60s
+	var r = 20;
+	var reload = function() {
+		$("#contenu_shoutbox_#ENV{objet}")
+		.load(url,function(){setTimeout(reload,1000*(r=Math.min(r+2,60)));});
+	}
+	setTimeout(reload, r);
+
+	$("#formulaire_shoutbox_[(#ENV{objet})] form")
 	.ajaxForm({
-		url: 'spip.php?page=shoutbox\x26objet=#ENV{objet}',
+		url: url,
 		target: "#contenu_shoutbox_#ENV{objet}",
 		beforeSubmit: function(){
-			if (!jQuery("#shoutbox_#ENV{objet}").val().length)
-				return false;
-			jQuery("#shoutbox_#ENV{objet}").val('');
-			jQuery("#contenu_shoutbox_#ENV{objet}")
+			$("#shoutbox_#ENV{objet}").val('');
+			$("#shoutbox_nick_#ENV{objet}").blur();
+			$("#contenu_shoutbox_#ENV{objet}")
 			.css('opacity', 0.5);
 		},
 		success: function(){
-			jQuery("#contenu_shoutbox_#ENV{objet}")
+			$("#contenu_shoutbox_#ENV{objet}")
 			.css('opacity', 1);
+			r = 5;
 		}
 	});
-}
+
+	// Masquer le champ de saisie du nick sous son label
+	$('label.labelhide').labelhide();
+})(jQuery);
 // --></script>

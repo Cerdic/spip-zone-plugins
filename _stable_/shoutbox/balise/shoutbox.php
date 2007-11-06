@@ -44,7 +44,7 @@ function balise_SHOUTBOX_stat($args, $filtres) {
 	list($objet, $type, $id, $defaut) = $args;
 
 	// valeur par defaut du formulaire
-	if (!isset($defaut)) $defaut = '...';
+	if (!isset($defaut)) $defaut = '';
 
 	// nom de la shoutbox passe en argument #SHOUTBOX{},
 	// sinon le contexte d'objet, sinon 'normal'
@@ -71,32 +71,40 @@ function shoutbox_command_nick(&$val, $r, &$nom) {
 // http://doc.spip.org/@balise_SHOUTBOX_dyn
 function balise_SHOUTBOX_dyn($defaut, $a) {
 
-	// analyser les donnees
+	// analyser le nick envoye et poser/supprimer le cookie
+	if (_request('valide'.$a)) {
+		$nick = strval(_request('shoutbox_nick_'.$a));
+		if ($nick != strval($_COOKIE['spip_shoutbox_nick'])) {
+			include_spip('inc/cookie');
+			if (strlen($nick))
+				spip_setcookie('spip_shoutbox_nick',
+					$nick,
+					time()+7*24*3600);
+			else
+				spip_setcookie('spip_shoutbox_nick',
+					$_COOKIE['spip_shoutbox_nick'],
+					time()-3600);
+			$_COOKIE['spip_shoutbox_nick'] = $nick;
+		}
+	}
+
+	if (!$nick = htmlspecialchars($_COOKIE['spip_shoutbox_nick']))
+		$nick = $GLOBALS['auteur_session']['nom'];
 
 	// si $_POST correspondant a notre formulaire : stocker un truc
 	// dans la base de donnees
 	if (_request('valide'.$a)
-	AND $val = strval(_request('shoutbox_'.$a))) {
+	AND strlen($val = strval(_request('shoutbox_'.$a)))) {
 		// antispam
 		if (_request('nobot')) {
 			spip_log('spam');
 			return '';
 		}
 
-		$nom = sinon(htmlspecialchars($_COOKIE['spip_shoutbox_nick']),
-			sinon($GLOBALS['auteur_session']['nom'], $GLOBALS['ip']));
-
-	/*
-		// est-ce une commande ? (API pas terrible, a voir...)
-		if (preg_match(',^/(.*?)(\s+(.*))?$,', $val, $r)
-		AND function_exists($f = 'shoutbox_command_'.$r[1]))
-			$f($val, $r, $nom);
-	*/
-
 		// stocker dans la base de donnees (ici table spip_meta)
 		$ou = 'objet,auteur,texte,date';
 		$quoi = _q($a) .','
-			. _q($nom) .','
+			. _q(sinon($nick, $GLOBALS['ip'])) .','
 			. _q($val) .','
 			. 'NOW()';
 		if (isset($GLOBALS['auteur_session']['id_auteur'])) {
@@ -136,7 +144,8 @@ function balise_SHOUTBOX_dyn($defaut, $a) {
 				'defaut' => $defaut,
 				'bouton' => 'ok',
 				'nouveau' => isset($id), # si on vient de faire l'insertion
-				'erreur' => $erreur
+				'erreur' => $erreur,
+				'nick' => $nick # attention avec l'IP on perdrait le cache d'un visiteur a l'autre
 			)
 		);
 }
