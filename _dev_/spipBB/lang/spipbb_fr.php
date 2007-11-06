@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : spipbb_fr : fichier de langue                 #
 #  Authors : Chryjs, 2007 et als (merci de lire les notes) #
-#  Contact : chryjs¡@!free¡.!fr                            #
+#  Contact : chryjsï¿½@!freeï¿½.!fr                            #
 #----------------------------------------------------------#
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
@@ -91,7 +91,8 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_form_creer_forum' => 'Cr&eacute;er un forum',
 'admin_form_creer_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
 'admin_forums_titre' => 'Gestion des forums',
-
+'admin_action_configuration' => 'Configuration',
+'admin_forums_configuration' => 'Configuration de SpipBB',
 
 // B
 'bio' => 'Petite biographie',
@@ -157,6 +158,7 @@ par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a><br />
 'forum_vers' => 'Vers le Forum ...',
 'fromphpbb_surtitre' => 'fromphpbb surtitre',
 'fromphpbb_titre' => 'Import d\'un forum PhpBB',
+'fromphpbb_titre_etape' => 'Import d\'un forum PhpBB - &eacute;tape',
 'fromphpbb_sous_titre' => 'D&eacute;marrage d\'une migration d\'un forum PhpBB vers SpipBB',
 'fromphpbb_parametres_titre' => 'Informations sur la base phpBB',
 'fromphpbb_login' => 'Identifiant',

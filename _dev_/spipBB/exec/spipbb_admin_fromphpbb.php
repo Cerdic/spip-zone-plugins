@@ -3,8 +3,8 @@
 #---------------------------------------------------------------#
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin_fromphpbb - first step form      #
-#  Authors : 2004+ Jean-Luc Béchennec - Chryjs, 2007            #
-#  Contact : chryjs¡@!free¡.!fr                                 #
+#  Authors : 2004+ Jean-Luc Bï¿½chennec - Chryjs, 2007            #
+#  Contact : chryjsï¿½@!freeï¿½.!fr                                 #
 # [fr] Menu d'accueil pour la migration d'un forum phpBB        #
 # [en] Home page base of phpBB forum migration                  #
 #---------------------------------------------------------------#
@@ -117,33 +117,11 @@ function exec_spipbb_admin_fromphpbb() {
 	echo debut_droite($id_rubrique,true);
 
 	echo debut_cadre_formulaire('',true);
-	echo spipbb_fromphpbb_gen_top($id_rubrique,_T('spipbb:fromphpbb_titre'));
+	echo gros_titre(_T('spipbb:fromphpbb_titre'),'',false)."<hr />\n";
 	echo spipbb_fromphpbb_formulaire($row);
 	echo fin_cadre_formulaire(true);
-	echo fin_gauche();
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 } // exec_spipbb_admin_fromphpbb
-
-// ------------------------------------------------------------------------------
-// [fr] Genere le haut de bloc du formulaire de migration
-// [en] Generates the top of the migration form block
-// ------------------------------------------------------------------------------
-function spipbb_fromphpbb_gen_top($id_rubrique,$titre) {
-	$go_back=generer_url_ecrire("naviguer","id_rubrique=$id_rubrique");
-	return
-		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
-		"<tr>".
-		"\n<td style='width: 130px;'>" .
-		icone(_T('icone_retour'), $go_back, "article-24.gif", "rien.gif", ' ',false) .
-		"</td>\n<td>" .
-		"<img src='" .
-		_DIR_IMG_PACK . "rien.gif' width='10' alt='' />" .
-		"</td>\n<td>" .
-		_T('spipbb:fromphpbb_titre') .
-		gros_titre($titre,'',false) .
-		"</td></tr></table>\n" .
-		"<hr />\n";
-} // spipbb_fromphpbb_gen_top
 
 // ------------------------------------------------------------------------------
 // [fr] Genere le formulaire de saisie des parametres de migration

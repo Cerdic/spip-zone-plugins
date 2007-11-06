@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                       #
 #  File    : spipbb_en : language file                    #
 #  Authors : Chryjs, 2007 and als (please read the notes) #
-#  Contact : chryjs¡@!free¡.!fr                           #
+#  Contact : chryjsï¿½@!freeï¿½.!fr                           #
 #---------------------------------------------------------#
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
@@ -89,6 +89,8 @@ The e-mail address will be used only to confirm the details of your registration
 'admin_form_creer_forum' => 'Create a forum',
 'admin_form_creer_categorie' => 'Create a category',
 'admin_forums_titre' => 'Forums admin',
+'admin_action_configuration' => 'Configure',
+'admin_forums_configuration' => 'Configure SpipBB',
 
 // B
 'bio' => 'Short biography',
@@ -151,6 +153,18 @@ The e-mail address will be used only to confirm the details of your registration
 'forum_ouvrir' => 'Open this Forum',
 'forum_selection' => 'in the FORUM (article) to select:',
 'forum_vers' => 'To Forum ...',
+'fromphpbb_surtitre' => 'fromphpbb surtitre',
+'fromphpbb_titre' => 'Import from a PhpBB forum',
+'fromphpbb_titre_etape' => 'Import from a PhpBB forum - step',
+'fromphpbb_sous_titre' => 'Start a migration from a PhpBB forum to SpipBB',
+'fromphpbb_parametres_titre' => 'Config access to phpBB database',
+'fromphpbb_login' => 'Login',
+'fromphpbb_password' => 'Password',
+'fromphpbb_base' => 'Database name',
+'fromphpbb_prefix' => 'Tables prefix',
+'fromphpbb_racine' => 'Path to phpBB',
+'fromphpbb_choix_test' => 'Blank import',
+'fromphpbb_sous_choix_test' => '(required)',
 
 //G
 'gaf_titre' => 'GAFoSPIP<br>Alternative management of Forums',

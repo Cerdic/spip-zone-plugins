@@ -7,7 +7,7 @@
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version>
-		0.15
+		0.2.0
 	</version>
 	<etat>
 		experimental
@@ -22,7 +22,7 @@ _ Spipbb plugin, dev in progress. Use it at your own risks :)
 _ if you have CFG : [Configure->.?exec=cfg&amp;cfg=spipbb] You must visit it to select the forums sector before all. You may also (not required) change the skeletons names.
 		</multi>
 	</description>
-	<lien>[Documentation->http://www.spip-contrib.net/spip.php?article2460]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<lien>[Documentation->http://www.spip-contrib.net/SpipBB-le-forum]</lien> <!-- [fr] URI de documentation [en] documentation URI -->
 	<icon>img_pack/spipbb-48.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
 	<fonctions>spipbb_fonctions.php</fonctions>
 	<options>spipbb_options.php</options>

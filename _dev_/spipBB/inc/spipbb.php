@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                      #
 #  File    : inc/spipbb - donnees et fonctions du plugin #
 #  Authors : Chryjs, 2007 et als                         #
-#  Contact : chryjs¡@!free¡.!fr                          #
+#  Contact : chryjsï¿½@!freeï¿½.!fr                          #
 #--------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
@@ -158,6 +158,7 @@ function spipbb_delete_metas()
 	{
 		include_spip('inc/meta');
 		effacer_meta('spipbb');
+		effacer_meta('spipbb_fromphpbb'); // requis si la migration n est pas finie
 		ecrire_metas();
 		unset($GLOBALS['meta']['spipbb']);
 		spip_log('spipbb : delete_metas OK');
@@ -165,7 +166,7 @@ function spipbb_delete_metas()
 } // spipbb_delete_metas
 
 //----------------------------------------------------------------------------
-// [fr] Met à jour les metas du plugin
+// [fr] Met ï¿½ jour les metas du plugin
 // [en] Upgrade plugin metas
 //----------------------------------------------------------------------------
 function spipbb_upgrade_metas()
@@ -173,6 +174,38 @@ function spipbb_upgrade_metas()
 	spipbb_init_metas($GLOBALS['spipbb']['spipbb_id_rubrique']);
 } // spipbb_delete_metas
 
+//----------------------------------------------------------------------------
+// [fr] Initialisation des valeurs de meta du plugin aux defauts
+// [en] Init plugin meta to default values
+//----------------------------------------------------------------------------
+function spipbb_save_metas()
+{
+	$spipbb_meta=$GLOBALS['spipbb'];
+
+	if ($id_rubrique = intval(_request('spipbb_id_rubrique')))
+		$spipbb_meta['spipbb_id_rubrique'] =  $id_rubrique;
+	if ($squelette_groupeforum = _request('spipbb_squelette_groupeforum'))
+		$spipbb_meta['spipbb_squelette_groupeforum'] =  $squelette_groupeforum;
+	if ($squelette_filforum = _request('spipbb_squelette_filforum'))
+		$spipbb_meta['spipbb_squelette_filforum'] =  $squelette_filforum;
+	if ($id_groupe_mot = intval(_request('spipbb_id_groupe_mot')))
+		$spipbb_meta['spipbb_id_groupe_mot'] =  $id_groupe_mot;
+	if ($id_mot_ferme = intval(_request('spipbb_id_mot_ferme')))
+		$spipbb_meta['spipbb_id_mot_ferme'] =  $id_mot_ferme;
+	if ($id_mot_annonce = intval(_request('spipbb_id_mot_annonce')))
+		$spipbb_meta['spipbb_id_mot_annonce'] = $id_mot_annonce;
+	if ($id_mot_postit = intval(_request('spipbb_id_mot_postit')))
+		$spipbb_meta['spipbb_id_mot_postit'] = $id_mot_postit;
+
+	// final - sauver
+
+	include_spip('inc/meta');
+	ecrire_meta('spipbb', serialize($spipbb_meta));
+	ecrire_metas();
+	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
+	spip_log('spipbb : save_metas OK');
+
+} // spipbb_save_metas
 
 //----------------------------------------------------------------------------
 // [fr] Initialise le groupe de mot cles necessaire pour spipbb
@@ -215,9 +248,9 @@ function spipbb_init_mot_cle($mot,$groupe)
 // ------------------------------------------------------------------------------
 // [fr] Construit la liste des choix de l'admin spipbb en fonction de ce qui est
 // disponible
-// Pour etre affiché dans la liste, le fichier doit etre dans exec/
+// Pour etre affichï¿½ dans la liste, le fichier doit etre dans exec/
 // s'appeler spipbb_admin_XXXX
-// et contenir une fonction / un objet ? associé ... element de tableau ?
+// et contenir une fonction / un objet ? associï¿½ ... element de tableau ?
 // ------------------------------------------------------------------------------
 function spipbb_admin_gauche($id_rubrique=0,$adm="")
 {
@@ -273,14 +306,14 @@ function spipbb_admin_gauche($id_rubrique=0,$adm="")
 
 /*
 Index de l'Administration
-Aperçu du Forum
+Aperï¿½u du Forum
 Configuration
 Gestion
 Permissions
-Délester
-Administration Générale
+Dï¿½lester
+Administration Gï¿½nï¿½rale
 E-mail de Masse
-Restaurer la base de données
+Restaurer la base de donnï¿½es
 Smilies
 Censure
 Administration des Groupes
@@ -291,10 +324,10 @@ Configuration
 Flagged Posts
 Log
 Manage Words
-Administration des Thèmes
+Administration des Thï¿½mes
 Menu
 Administration des Utilisateurs
-Contrôle du bannissement
+Contrï¿½le du bannissement
 Interdire un nom d'utilisateur
 Flags
 Link Checker

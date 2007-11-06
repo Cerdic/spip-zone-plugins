@@ -4,7 +4,7 @@
 #  File    : action/spipbb_fromphpbb - import de phpbb    #
 #  Authors : chryjs, 2007                                 #
 #            2004+ Jean-Luc Bechennec certaines fonctions #
-#  Contact : chryjs¡@!free¡.!fr                           #
+#  Contact : chryjsï¿½@!freeï¿½.!fr                           #
 #---------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
@@ -31,18 +31,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 global $time_start;
 $time_start = array_sum(explode(' ', microtime()));;
 
-if ($GLOBALS['spip_version_code']<1.93)
-{
-	die("Version de spip trop ancienne");
-}
-
 global $spipbb_fromphpbb; // stockage des informations et des etapes
 
 include_spip('inc/minipres');
 include_spip('inc/spipbb');
 include_spip('inc/presentation');
 
-ini_set('max_execution_time',300); // pas toujours possible mais requis pour etape 2 et surtout 3!
+ini_set('max_execution_time',600); // pas toujours possible mais requis pour etape 2 et surtout 3!
 
 // ------------------------------------------------------------------------------
 // [fr] Verification et declenchement de l'operation
@@ -201,7 +196,7 @@ function bbcode_to_raccourcis_spip($texte) {
 	$result = str_replace('<','&lt;',$texte);
 	$result = str_replace('>','&gt;',$result);
 
-	// on continue en virant les numéros de série dans le bbcode
+	// on continue en virant les numï¿½ros de sï¿½rie dans le bbcode
 	$result = preg_replace('/\[(\/?[^:]+):[a-f0-9]+/','[\\1',$result);
 	// quote
 	$result = preg_replace('/\[quote="?([^"\]]*)"?\]/','<quote>',$result);
@@ -218,7 +213,7 @@ function bbcode_to_raccourcis_spip($texte) {
 	//    $result = $texte;
 	// on applique les transformations simples
 	$result = str_replace($bbcode, $spipcode, $result);
-	//    $result = preg_replace('/\[quote(:)?[A-Fa-f0-9]*="([^"]*)"\]/','<div class="quote"><p>\\2 <i>a écrit :</i></p><p>',$result);
+	//    $result = preg_replace('/\[quote(:)?[A-Fa-f0-9]*="([^"]*)"\]/','<div class="quote"><p>\\2 <i>a ï¿½crit :</i></p><p>',$result);
 	//    $result = preg_replace('/\[\/quote(:)?[A-Fa-f0-9]*\]/','</p></div>',$result);
 	$result = nl2br($result);
 
@@ -234,8 +229,10 @@ function bbcode_to_raccourcis_spip($texte) {
 function fromphpbb_convert($texte) {
 	if (is_ascii($texte)) {
 		$charset='ascii';
+		return corriger_caracteres($texte);
 	}
-	elseif (is_utf8($texte)) {
+
+	if (is_utf8($texte)) {
 		$charset='utf-8';
 	}
 	else {
@@ -267,7 +264,7 @@ function fromphpbb_init_metas($spiprubid)
 	$spipbb_fromphpbb['mc_postit_id'] = $GLOBALS['spipbb']['spipbb_id_mot_postit'];
 	$spipbb_fromphpbb['mc_ferme_id'] = $GLOBALS['spipbb']['spipbb_id_mot_ferme'];
 
-	// recupère les paramètres de connexion
+	// recupï¿½re les paramï¿½tres de connexion
 	$spipbb_fromphpbb['phpbb_login'] = _request('phpbb_login');
 	$spipbb_fromphpbb['phpbb_pass'] = _request('phpbb_pass');
 	$spipbb_fromphpbb['phpdb'] = _request('phpbb_base');
@@ -276,13 +273,13 @@ function fromphpbb_init_metas($spiprubid)
 	$spipbb_fromphpbb['spiproot'] = _DIR_RACINE;
 
 	$spipbb_fromphpbb['phpbb_connect'] =
-		mysql_connect("localhost",$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
+		@mysql_connect("localhost",$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
 			die("<p>Impossible de se connecter a la base phpBB</p>");
 	select_phpbb_db();
-	$result = mysql_query("SELECT config_value FROM ".$spipbb_fromphpbb['PR'].
+	$result = @mysql_query("SELECT config_value FROM ".$spipbb_fromphpbb['PR'].
 			"config WHERE config_name='default_lang'") or
 			die("Impossible de recuperer la configuration");
-	$row = mysql_fetch_assoc($result);
+	$row = @mysql_fetch_assoc($result);
 	$spipbb_fromphpbb['phpbb_lang'] = substr($row['config_value'],0,2);
 	$spipbb_fromphpbb['phpbb_lang'] = $spipbb_fromphpbb['phpbb_lang'] ? $spipbb_fromphpbb['phpbb_lang'] :
 						$spipbb_fromphpbb['spip_lang'];
@@ -299,10 +296,11 @@ function fromphpbb_init_metas($spiprubid)
 	}
 	else {
 		
-		die ("Impossible de déterminer le secteur dans lequel est la rubrique");
+		die ("Impossible de determiner le secteur dans lequel est la rubrique");
 	}
 
-	$spipbb_fromphpbb['go'] = _request('phpbb_test') == "on";
+	$spipbb_fromphpbb['go'] = _request('phpbb_test') != "on";
+//die ("go : "._request('phpbb_test')." : ".$spipbb_fromphpbb['go']);
 	$spipbb_fromphpbb['etape'] = 1;
 }
 
@@ -319,7 +317,7 @@ function fromppbb_load_metas($spiprubid)
 		$spipbb_fromphpbb = unserialize($GLOBALS['meta']['spipbb_fromphpbb']);
 		// rappel de connexion
 		$spipbb_fromphpbb['phpbb_connect'] =
-		mysql_connect("localhost",$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
+		@mysql_connect("localhost",$spipbb_fromphpbb['phpbb_login'],$spipbb_fromphpbb['phpbb_pass']) or
 			die("<p>Impossible de se connecter a la base phpBB</p>");
 	}
 	else
@@ -350,10 +348,11 @@ function fromphpbb_delete_metas()
 {
 	global $spipbb_fromphpbb;
 
-	if (isset($GLOBALS['meta']['spipbb_fromphpbb'])) {
+	if (isset($GLOBALS['meta']['spipbb_fromphpbb']) or isset($GLOBALS['spipbb_fromphpbb'])) {
 		include_spip('inc/meta');
 		effacer_meta('spipbb_fromphpbb');
 		ecrire_metas();
+		unset($GLOBALS['spipbb_fromphpbb']);
 		unset($GLOBALS['meta']['spipbb_fromphpbb']);
 		unset($spipbb_fromphpbb);
 		spip_log('spipbb_fromphpbb : fromphpbb_delete_metas() OK');
@@ -379,8 +378,8 @@ function migre_categories_forums() {
 	select_phpbb_db();
 
 	//
-	// transfert des catégories
-	// 1 catégorie = 1 sous rubrique de la rubrique affectée aux forums
+	// transfert des catï¿½gories
+	// 1 catï¿½gorie = 1 sous rubrique de la rubrique affectï¿½e aux forums
 	//
 	select_phpbb_db();
 
@@ -408,7 +407,7 @@ function migre_categories_forums() {
 							'statut_tmp'=>'publie')
 							);
 				$res .= "<p>Groupe $rub_name [ $spip_id ]</p>";
-				// memorise la relation entre les id de catégories et les rubriques
+				// memorise la relation entre les id de catï¿½gories et les rubriques
 				$spipbb_fromphpbb['spiprub_from_catid'][$row['cat_id']] = $spip_id;
 			}
 			else {
@@ -429,11 +428,11 @@ function migre_categories_forums() {
 	
 	//
 	// transfert des forums
-	// 1 forum = 1 article dans la rubrique catégorie
+	// 1 forum = 1 article dans la rubrique catï¿½gorie
 	//
 	select_phpbb_db();
 	$result = mysql_query("SELECT * FROM ".$spipbb_fromphpbb['PR']."forums",$spipbb_fromphpbb['phpbb_connect']) or
-		die("impossible de récupérer les forums");
+		die("impossible de rï¿½cupï¿½rer les forums");
 	// forum_id   	  cat_id   	  forum_name   	  forum_desc   	  forum_status
 	// forum_order   	  forum_posts   	  forum_topics
 	// forum_last_post_id   	  prune_next   	  prune_enable
@@ -525,8 +524,8 @@ function migre_utilisateurs() {
 	select_spip_db();
 	while ($row = mysql_fetch_assoc($result))
 	{
-		// on commence par la date de la dernière visite et
-		// par la date d'inscription pour éliminer les gus
+		// on commence par la date de la derniï¿½re visite et
+		// par la date d'inscription pour ï¿½liminer les gus
 		// qui sont inscrit depuis longtemps mais qui ne
 		// sont jamais venus sur les forums
 		$date_inscription = $row['user_regdate'];
@@ -650,7 +649,7 @@ function migre_utilisateurs() {
 				//$logodata = file_get_contents($logo_url);
 			}
 
-			// si c'est un nouvel admin, on le restreint à la rubrique du forum
+			// si c'est un nouvel admin, on le restreint ï¿½ la rubrique du forum
 			// verifier que cette restriction n existe pas deja
 			$verif = sql_getfetsel("id_auteur","spip_auteurs_rubriques",
 					"id_auteur=$spip_id AND id_rubrique=".$spipbb_fromphpbb['spiprubid']);
@@ -708,8 +707,8 @@ function migre_threads() {
 	select_spip_db();
 	while ($row = mysql_fetch_assoc($result))
 	{
-		// le premier post rencontré pour un topic donné est
-		// le post qui a lancé le topic (normalement)
+		// le premier post rencontrï¿½ pour un topic donnï¿½ est
+		// le post qui a lancï¿½ le topic (normalement)
 		$topic_id = $row['topic_id'];
 		if (! isset($topic_post[$topic_id])) {
 			$id_parent = 0;
@@ -718,7 +717,7 @@ function migre_threads() {
 			$id_parent = $topic_post[$topic_id];
 		}
 	
-		// traite le cas des posts qui appartiennent à un forum qui n'existe plus
+		// traite le cas des posts qui appartiennent ï¿½ un forum qui n'existe plus
 		if (! isset($spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']])) { continue; }
 		
 		$id_article = $spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']];
@@ -835,11 +834,11 @@ function migre_threads() {
 			$topic_post[$topic_id] = $insert_id;
 		}
 
-		// Ajout d'un mot-clé adéquat pour étiqueter les topics qui sont des
-		// post-it (la colonne concernée est topic_type)
+		// Ajout d'un mot-clï¿½ adï¿½quat pour ï¿½tiqueter les topics qui sont des
+		// post-it (la colonne concernï¿½e est topic_type)
 		// 0 = topic normal
-		// 1 = post-it (un post-it apparaît en tête des sujets sur la première page)
-		// 2 = annonce (une annonce apparaît en tête des sujets sur toutes les pages
+		// 1 = post-it (un post-it apparaï¿½t en tï¿½te des sujets sur la premiï¿½re page)
+		// 2 = annonce (une annonce apparaï¿½t en tï¿½te des sujets sur toutes les pages
 		// des topics)
 
 		if ($id_parent == 0 && $row['topic_type'] != 0)

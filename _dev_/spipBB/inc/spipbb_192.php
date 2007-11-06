@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                      #
 #  File    : inc/spipbb_192 - compatibilite ancienne version #
 #  Authors : Chryjs, 2007 et als                         #
-#  Contact : chryjs¡@!free¡.!fr                          #
+#  Contact : chryjsï¿½@!freeï¿½.!fr                          #
 #--------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
@@ -290,5 +290,16 @@ function spip_mysql_errno() {
 	return $s;
 } } // spip_mysql_errno
 
+// sql_select
+// from base/abstract.php 193
+// http://doc.spip.org/@sql_select
+if (!function_exists('sql_select')) {
+function sql_select (
+	$select = array(), $from = array(), $where = array(),
+	$groupby = '', $orderby = array(), $limit = '', $having = array(),
+	$serveur='') {
+
+	return spip_mysql_select($select, $from, $where, $groupby, $orderby, $limit, '', $having, '', '', $serveur);
+} } // sql_select
 
 ?>
