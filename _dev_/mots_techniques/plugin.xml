@@ -3,7 +3,7 @@
 	<auteur>	<!-- Auteur du plugin -->
 	Joseph et toutes les bonnes volont&eacute;es - 2007
 	</auteur>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<version_base>0.1</version_base>
 	<etat>
 	dev
@@ -11,7 +11,7 @@
 	<description>
 	<multi>
 	Plugin de dev pour tester l'ajout d'un champs technique aux mots cl&eacute;s. Cf. les discussions sur spip-dev.
-_ Le d&eacute;veloppement s'est bas&eacute; sur la version 1.9.3 dev SVN 10634 de SPIP.
+_ Le d&eacute;veloppement s'est bas&eacute; sur la version 1.9.3 dev SVN 10751 de SPIP.
 - Ajout d'un champ technique de type texte &agrave; la table spip_groupes_mots.
 - Ajout d'un champ affiche_formulaire de type varchar(3) &agrave; la table 
 spip_groupes_mots.

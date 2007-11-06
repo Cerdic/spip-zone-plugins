@@ -51,8 +51,9 @@ function exec_mots_tous_dist()
 //
 // On boucle d'abord sur les groupes de mots (non techniques ou technique='oui')
 //
+
 	$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "technique='oui' OR technique='' ", "", "technique, multi");
-	
+
 	while ($row_groupes = sql_fetch($result)) {
 		$id_groupe = $row_groupes['id_groupe'];
 		$titre_groupe = typo($row_groupes['titre']);
@@ -101,7 +102,7 @@ function exec_mots_tous_dist()
 		//
 		// Afficher les mots-cles du groupe
 		//
-		
+
 		$groupe = sql_fetsel("COUNT(*) AS n", "spip_mots", "id_groupe=$id_groupe");
 		$groupe = $groupe['n'];
 

@@ -37,14 +37,13 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 		$url_base = "naviguer";
 	}
 
-	else if ($objet == 'syndic') {
+	else {
+		if ($objet != 'syndic') 
+			spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag)");
+		// continuer avec des valeurs par defaut pour le validateur
 		$table_id = 'id_syndic';
 		$table = 'syndic';
 		$url_base = "sites";
-	}
-	else {
-		spip_log("erreur dans formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag)");
-		return '';
 	}
 
 	$cpt = sql_countsel("spip_mots AS mots, spip_mots_$table AS lien, spip_groupes_mots AS groupes", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot AND mots.id_groupe=groupes.id_groupe AND groupes.affiche_formulaire='oui'");
@@ -115,7 +114,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	else if ($table == 'breves') $ou = _T('info_la_breve');
 	else if ($table == 'rubriques') $ou = _T('info_la_rubrique');
 
-	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe=" . _q($id_groupe));
+	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe=" . sql_quote($id_groupe));
 
 	$table_mots = array();
 	$table_ids = array();
@@ -196,7 +195,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			}
 			
 			// On n'affiche que les mots cles tels que affiche_formulaire==oui
-			if ($row_groupe['affiche_formulaire'] == 'oui') {
+			if ($r['affiche_formulaire'] == 'oui') {
 				$id_groupes_vus[] = $id_groupe;
 				$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
 				if ($technique) $vals= array("<a href='$url'>$cletech</a>");
@@ -247,6 +246,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet)
 {
 	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe = $id_groupe", "", "titre");
+	
 	$s = '';
 
 	while ($row_autres = sql_fetch($result)) {
@@ -329,13 +329,12 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 			'breves'=>'icone_creer_mot_cle_breve',
 			'rubriques'=>'icone_creer_mot_cle_rubrique',
 			'sites'=>'icone_creer_mot_cle_site'			);
-		$bouton_ajouter = icone_horizontale(isset($titres[$table])?_T($titres[$table]):_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
+		$bouton_ajouter = icone_horizontale_display(isset($titres[$table])?_T($titres[$table]):_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
 		. "\n";
 	} else $bouton_ajouter = '';
 
 	if ($message OR $bouton_ajouter) {
-		$res .= "<div style='width:170px;'>$message
-			<br />$bouton_ajouter</div>\n";
+		$res .= "$message<br />$bouton_ajouter";
 	}
 
 	return $res . fin_block();

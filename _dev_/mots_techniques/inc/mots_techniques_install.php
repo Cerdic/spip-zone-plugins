@@ -21,4 +21,22 @@
 		effacer_meta($nom_meta_base_version);
 	}
 
+	/*
+	function mots_techniques_install($action){
+		$nom_meta = "mots_techniques_base";
+		
+		$version_base = $GLOBALS['mots_techniques_base_version'];
+		switch ($action){
+			case 'test':
+				return (isset($GLOBALS['meta'][$nom_meta]) 
+					AND ($GLOBALS['meta'][$nom_meta]>=$version_base));
+				break;
+			case 'install':
+				mots_techniques_upgrade($nom_meta, $version_base);
+				break;
+			case 'uninstall':
+				mots_techniques_vider_tables($nom_meta);
+				break;
+		}
+	}*/
 ?>
