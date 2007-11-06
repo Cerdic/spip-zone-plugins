@@ -25,12 +25,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'echoppe'=>'Echoppe, le plugin.',
+'editer_categorie' => 'Editer',
 'editer_version'=>'Editer la version',
+'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
 
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
 
 // L
+'langue_editee' => '&Eacute;dition de la langue',
 'les_categories' => 'Les cat&eacute;gories',
 
 // N
@@ -41,6 +44,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'par_defaut' => 'Par d&eacute;faut',
 'pas_encore_cree' => 'N\'existe pas encore.',
 'pas_encore_modifie' => 'Jamais modifi&eacute;',
+
+// R
+'retour' => 'Retour',
+
 // T
 'texte'=>'Texte :',
 'titre_categorie' => 'Titre de la cat&eacute;gorie :',

@@ -12,14 +12,11 @@ function exec_echoppe_categorie(){
 		echo echoppe_echec_autorisation().fin_page();
 	}
 	
-	$lang = _request('lang');
-	if (empty($lang)){
-		$lang = $GLOBALS['meta']['langue_site'];
-	}
+	$lang_categorie = _request('lang');
 
 	
 	$id_categorie = _request('id_categorie');
-	$sql_select_categorie = "SELECT cat.*, cat_desc.* FROM spip_echoppe_categories cat, spip_echoppe_categories_descriptions cat_desc WHERE cat.id_categorie = '".$id_categorie."' AND cat.id_categorie = cat_desc.id_categorie AND cat_desc.lang='".$lang."';";
+	$sql_select_categorie = "SELECT cat.*, cat_desc.* FROM spip_echoppe_categories cat, spip_echoppe_categories_descriptions cat_desc WHERE cat.id_categorie = '".$id_categorie."' AND cat.id_categorie = cat_desc.id_categorie AND cat_desc.lang='".$lang_categorie."';";
 	$res_select_categorie = spip_query($sql_select_categorie);
 	$categorie = spip_fetch_array($res_select_categorie);
 	
@@ -49,10 +46,18 @@ function exec_echoppe_categorie(){
 	echo '<div style="font-size: 10;text-align: center;">'._T('echoppe:derniere_modification').' : <br /><b>'.$date_dernière_modification.'</b></div>';
 	echo '<br />';
 	echo _T('echoppe:editer_version').'<br />';
-	echo '<a href="'.generer_url_ecrire('echoppe_categorie','id_categorie='.$id_categorie.'&lang=').'">'._T('echoppe:par_defaut').'</a><br />';
+	if (empty($lang_categorie)) {
+		echo '<b>=> <a href="'.generer_url_ecrire('echoppe_categorie','id_categorie='.$id_categorie.'&lang=').'">'._T('echoppe:par_defaut').'</a></b><br />';
+	}else{
+		echo '<a href="'.generer_url_ecrire('echoppe_categorie','id_categorie='.$id_categorie.'&lang=').'">'._T('echoppe:par_defaut').'</a><br />';
+	}
 	$les_langues = explode(',',$GLOBALS['meta']['langues_multilingue']);
 	foreach ($les_langues as $key => $value){
-		echo '<a href="'.generer_url_ecrire('echoppe_categorie','id_categorie='.$id_categorie.'&lang='.$value).'">'.traduire_nom_langue($value).'</a><br />';
+		if ($value == $lang_categorie) {
+			echo '<b>=> <a href="'.generer_url_ecrire('echoppe_categorie','id_categorie='.$id_categorie.'&lang='.$value).'">'.traduire_nom_langue($value).'</a></b><br />';
+		}else{
+			echo '<a href="'.generer_url_ecrire('echoppe_categorie','id_categorie='.$id_categorie.'&lang='.$value).'">'.traduire_nom_langue($value).'</a><br />';
+		}
 		
 	}
 	echo fin_boite_info();
@@ -67,6 +72,7 @@ function exec_echoppe_categorie(){
 	echo '<div class="cadre-r"><div class="cadre-padding">';
 	
 	echo gros_titre($categorie['titre']);
+	echo icone_horizontale(_T('echoppe:editer_categorie'), generer_url_ecrire("echoppe_edit_categorie","id_categorie=".$id_categorie."&lang=".$lang_categorie), "","edit.gif", false);
 	echo '<br /><div class="verdana1 spip_small" align="left" style="border: 1px dashed rgb(170, 170, 170); padding: 5px;">'.$categorie['descriptif'].'</div>';
 	echo '</div></div>';
 	

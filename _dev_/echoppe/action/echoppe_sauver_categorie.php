@@ -9,6 +9,7 @@ function action_echoppe_sauver_categorie(){
 	$texte = _request('texte');
 	$logo = _request('logo');
 	$id_categorie = _request('id_categorie_descriptif');
+	//echo _request('new');
 	if (_request('new') == 'oui'){
 		$sql_insert_categorie = "INSERT INTO spip_echoppe_categories VALUES ('','"._request('id_parent')."')";
 		$res_insert_categorie = spip_query($sql_insert_categorie);
@@ -19,9 +20,9 @@ function action_echoppe_sauver_categorie(){
 		//echo $sql_insert_categorie_descriptif.'<hr />';
 		
 	}else{
-		$sql_update_categorie_descriptif = "UPDATE spip_echoppe_categories_descriptifs SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texet = '".addslashes($texte)."', statut = '".$statut."' WHERE id_categorie_descriptif = '".$id_categorie."' ";
+		$sql_update_categorie_descriptif = "UPDATE spip_echoppe_categories_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."', statut = '".$statut."' WHERE id_categorie = '".$id_categorie."' AND lang = '".$lang_categorie."' ";
 		//echo $sql_update_categorie_descriptif;
-		$res_update_categorie_descriptif = spip_query($sql_insert_categorie_descriptif);
+		$res_update_categorie_descriptif = spip_query($sql_update_categorie_descriptif);
 	}
 
 }
