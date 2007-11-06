@@ -21,9 +21,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 'descriptif'=>'Descriptif :',
 'descriptif_echoppe' => 'Echoppe est un plugin de gestion de boutique en ligne. Il tente d\' &ecirc;tre le plus g&eacute;n&eacute;raliste possible.',
+'derniere_modification' => 'Derni&egrave;re modification',
 
 // E
 'echoppe'=>'Echoppe, le plugin.',
+'editer_version'=>'Editer la version',
 
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveau_produit' => 'Cr&eacute;er un produit',
 'nouvelle_cetegorie' => 'Nouvelle cat&eacute;gorie',
 
+// P
+'par_defaut' => 'Par d&eacute;faut',
+'pas_encore_cree' => 'N\'existe pas encore.',
+'pas_encore_modifie' => 'Jamais modifi&eacute;',
 // T
 'texte'=>'Texte :',
 'titre_categorie' => 'Titre de la cat&eacute;gorie :',
