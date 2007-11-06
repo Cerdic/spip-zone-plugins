@@ -77,8 +77,6 @@ if ($forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') {
 
 <body id="posterfor" dir="#LANG_DIR">
 
-
-
 <a name="haut"></a>
 <div id="contenant"> <!-- Section contenant la page -->
 
@@ -189,15 +187,16 @@ if ($forum['auteur']==$nom_auteur_session OR $statut=='0minirezo') {
 
 	</div> <!-- Fin de la section "corps" -->
 
-<INCLURE{fond=pied_BB}{id_article}{id_forum}>
-</div><!-- fin de la Section contenant -->
+	<INCLURE{fond=pied_BB}{id_article}{id_forum}>
 
+	[(#REM) Pied de page standard SPIP]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin de la Section contenant -->
 
 </body>
 
-
 </html>
-
 
  <?} 
  else { echo "<:spipbb:droit_editer:>";

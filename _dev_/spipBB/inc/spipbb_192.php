@@ -199,14 +199,26 @@ function traite_query($query, $db='', $prefixe='') {
 	return $r;
 } } // traite_query
 
-// from http://doc.spip.org/@sql_fetch
+//spip_mysql_error
+// from req/mysql.php 193
+// http://doc.spip.org/@spip_mysql_error
+if (!function_exists('spip_mysql_error')) {
+function spip_mysql_error($query='') {
+	$s = mysql_error();
+	if ($s) spip_log("$s - $query", 'mysql');
+	return $s;
+} } // spip_mysql_error
+
+// from
+// http://doc.spip.org/@sql_fetch
 if (!function_exists('sql_fetch')) {
 function sql_fetch($res, $serveur='') {
 	return spip_mysql_fetch($res, NULL, $serveur);
 } } // spip_mysql_fetch in base/db_mysql.php  192
 
 // sql_getfetsel
-// from http://doc.spip.org/@sql_getfetsel
+// from
+// http://doc.spip.org/@sql_getfetsel
 if (!function_exists('sql_getfetsel')) {
 function sql_getfetsel(
 	$select, $from = array(), $where = array(), $groupby = '', 

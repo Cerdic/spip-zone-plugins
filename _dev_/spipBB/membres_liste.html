@@ -3,7 +3,8 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 	<title>[(#NOM_SITE_SPIP|textebrut)] - <:spipbb:membres_liste:> </title>
-	<INCLURE{fond=inc-forum-head}>
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
 </head>
 
 <body id="listmem" dir="#LANG_DIR">
@@ -19,7 +20,7 @@
 
 	<hr class="clr" /> <!-- Permet l'affichage correctement pour certaines versions de safari -->
 	<B_auteur_principal>
-	<div class="pagination">#PAGINATION</div>
+	[<div class="pagination">(#PAGINATION)</div>]
 	<table summary="membres" class="spipforum">
 		<tr class="titre">
 			<th>#</th>
@@ -63,11 +64,14 @@ if ($GLOBALS['auteur_session'] AND $auteur_session['statut']!="6forum"){
 		</BOUCLE_auteur_principal>
 		<!-- fin de calcul des lignes de membres -->
 	</table>
-	[<div class="pagination">(#PAGINATION{page_forum})</div>]
+	[<div class="pagination">(#PAGINATION)</div>]
 	</B_auteur_principal>
 	</div> <!-- Fin de la section "corps" -->
 
-<INCLURE{fond=pied_BB}{id_rubrique}>
+	<INCLURE{fond=pied_BB}{id_rubrique}>
+
+	[(#REM) Pied de page standard SPIP]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
 </div><!-- fin de la Section contenant -->
 </body>

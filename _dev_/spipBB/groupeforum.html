@@ -1,16 +1,17 @@
+#CACHE{0}
 <BOUCLE_rubrique_principal(RUBRIQUES){id_rubrique}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
-	<INCLURE{fond=inc-forum-head}>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
 
-	[(#REM) Lien vers le flux RSS de la rubrique ]
-	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
  
-	
-	[(#MODELE{spipbb_display_index}{id_secteur})] 
+[(#MODELE{spipbb_display_index}{id_secteur})] 
 	
 </head>
 
@@ -36,6 +37,9 @@
 	#MODELE{spipbb_login}
 
 	<INCLURE{fond=pied_BB}{id_rubrique}>
+
+	[(#REM) Pied de page standard SPIP]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
 </div> <!-- Fin de la section contenant -->
 

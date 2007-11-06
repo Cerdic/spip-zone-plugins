@@ -13,7 +13,7 @@ if (!$auteur_session){ //Si pas logge, on affiche le formulaire de login'
  // permet la zolie mise en page comme dans l'espace admin
 $spip_display=1;
 
-include("ecrire/inc/presentation.php"); //encore pour les cadres
+include_spip('inc/presentation'); //encore pour les cadres
 $statut=$auteur_session['statut'];
 $id_auteur_session=$auteur_session['id_auteur'];
 $auteur=unserialize(spipbb_get_auteur_infos($id_auteur_session));
@@ -45,7 +45,7 @@ if ($modif) {
 
 
 	if ($modif_login) {
-		include_ecrire('/inc/session.php');
+		include_spip('inc/session');
 		zap_sessions ($auteur['id_auteur'], true);
 		if ($id_auteur_session == $auteur['id_auteur'])
 			supprimer_session($GLOBALS['spip_session']);
@@ -108,14 +108,15 @@ if(!echec){header("Location: spip.php?page=profile&id_auteur=$id_auteur_session&
 if ($auteur_session AND $auteur_session['id_auteur']==$id_auteur) { 
 ?>
 
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-  <BOUCLE_auteur_principal(AUTEURS){id_auteur}{tout}>
-  <html lang="#LANG">
-  <head>
-  <title><:spipbb:profil:> #NOM</title>
-  <INCLURE{fond=inc-forum-head}>
-  </head>
+<BOUCLE_auteur_principal(AUTEURS){id_auteur}{tout}>
+<html lang="#LANG">
+<head>
+<title><:spipbb:profil:> #NOM</title>
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
+</head>
   
 <body id="profilmod" dir="#LANG_DIR">
 <div id="contenant"> <!-- Section contenant la page -->
@@ -265,7 +266,10 @@ echo fin_cadre_formulaire(true); ?>
 
 	</div><!-- Fin de la section Corps -->
 
-<INCLURE{fond=pied_BB}{id_rubrique}>
+	<INCLURE{fond=pied_BB}{id_rubrique}>
+
+	[(#REM) Pied de page standard SPIP]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
 </div> <!-- Fin de la section contenant -->
 </body>

@@ -3,7 +3,8 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head> 
 	<title>[(#NOM_SITE_SPIP|textebrut)] <:poster_message:></title>
-	<INCLURE{fond=inc-forum-head}>
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
 </head> 
 
 <body id="posterfor" dir="#LANG_DIR">
@@ -145,7 +146,11 @@ Attention que cette boucle vaut son pesant de cachouettes ]
 		</table>
 	</div> <!-- Fin de la section "corps" -->
 
-<INCLURE{fond=pied_BB}{id_article}{id_forum}>
+	<INCLURE{fond=pied_BB}{id_article}{id_forum}>
+
+	[(#REM) Pied de page standard SPIP]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
 </div><!-- fin de la Section contenant -->
 
 </body>

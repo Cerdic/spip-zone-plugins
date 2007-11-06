@@ -21,7 +21,8 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 <title>[(#NOM_SITE_SPIP|textebrut)] - <:spipbb:messages_nouveaux:></title>
-	<INCLURE{fond=inc-forum-head}>
+<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-forum-head}>
 </head>
 
 <body id="nouvmsgfor" dir="#LANG_DIR">
@@ -99,7 +100,10 @@
 
 	</div> <!--Fin de section Corps-->
 
-<INCLURE{fond=pied_BB}{id_rubrique}>
+	<INCLURE{fond=pied_BB}{id_rubrique}>
+
+	[(#REM) Pied de page standard SPIP]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
 </div> <!-- Fin de la section contenant -->
 

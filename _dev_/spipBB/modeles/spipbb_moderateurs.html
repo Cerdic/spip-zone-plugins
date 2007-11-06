@@ -1,7 +1,30 @@
 #CACHE{300}
+<B_select_forum>
+<div id="moderateurs">
+<:spipbb:moderateurs:>&nbsp;: 
+#SET{prev,0}
 <BOUCLE_select_forum(ARTICLES){id_article}>
-<:spipbb:moderateurs:>&nbsp;: <?php $prev=false; ?>
-<BOUCLE_admin(AUTEURS){tout}{statut=="0minirezo"}{id_auteur==1}{", "}{doublons mod}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></BOUCLE_admin><?php $prev=true; ?></B_admin>
-<BOUCLE_liste_rub(HIERARCHIE){id_rubrique}{tout}><B_mod_groupe_forum><?php if ($prev) { echo ", "; $prev=false; } ?><BOUCLE_mod_groupe_forum(AUTEURS spip_auteurs_rubriques){statut=="0minirezo"}{id_rubrique==#_select_forum:ID_RUBRIQUE}{tout}{", "}{doublons mod}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></BOUCLE_mod_groupe_forum><?php $prev=true; ?></B_mod_groupe_forum></BOUCLE_liste_rub>
-<B_moderateurs><?php if ($prev) { echo ", ";} ?><BOUCLE_moderateurs(AUTEURS){", "}{id_article}{doublons mod}><a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></BOUCLE_moderateurs>
+	<BOUCLE_admin(AUTEURS){tout}{statut=="0minirezo"}{id_auteur==1}{", "}{doublons mod}>
+	<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a>
+	</BOUCLE_admin>
+	#SET{prev,1}
+	</B_admin>
+	<BOUCLE_liste_rub(HIERARCHIE){id_rubrique}{tout}>
+		<B_mod_groupe_forum>
+			[(#SET{separateur,[(#GET{prev}|=={0}|?{'', ", "})]})]
+			#GET{separateur}
+			<BOUCLE_mod_groupe_forum(AUTEURS spip_auteurs_rubriques){statut=="0minirezo"}{id_rubrique==#_select_forum:ID_RUBRIQUE}{tout}{", "}{doublons mod}>
+				<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a>
+			</BOUCLE_mod_groupe_forum>
+			#SET{prev,1}
+		</B_mod_groupe_forum>
+	</BOUCLE_liste_rub>
+	<B_moderateurs>
+	[(#SET{separateur,[(#GET{prev}|=={0}|?{' ', ", "})]})]
+	#GET{separateur}
+	<BOUCLE_moderateurs(AUTEURS){", "}{id_article}{doublons mod}>
+		<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a>
+	</BOUCLE_moderateurs>
 </BOUCLE_select_forum>
+</div> <!-- id=moderateurs -->
+</B_select_forum>
