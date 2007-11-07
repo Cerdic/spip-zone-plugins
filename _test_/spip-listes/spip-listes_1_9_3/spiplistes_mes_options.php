@@ -72,7 +72,9 @@ define("_SPIPLISTES_CHARSETS_ALLOWED", "iso-8859-1;iso-8859-9;iso-8859-6;iso-885
 define("_SPIPLISTES_CHARSET_ENVOI", "iso-8859-1"); // pour historique
 define("_SPIPLISTES_CHARSET_DEFAULT", _SPIPLISTES_CHARSET_ENVOI);
 
-define("_SPIPLISTES_EXEC_PREFIX", "spiplistes_");
+define("_SPIPLISTES_PREFIX", "spiplistes");
+
+define("_SPIPLISTES_EXEC_PREFIX", _SPIPLISTES_PREFIX."_");
 define("_SPIPLISTES_EXEC_ABONNE_EDIT", _SPIPLISTES_EXEC_PREFIX."abonne_edit");
 define("_SPIPLISTES_EXEC_ABONNES_LISTE", _SPIPLISTES_EXEC_PREFIX."abonnes_tous");
 define("_SPIPLISTES_EXEC_AIDE", _SPIPLISTES_EXEC_PREFIX."aide");
@@ -90,7 +92,7 @@ define("_SPIPLISTES_EXEC_LISTE_GERER", _SPIPLISTES_EXEC_PREFIX."liste_gerer"); /
 define("_SPIPLISTES_EXEC_LISTES_LISTE", _SPIPLISTES_EXEC_PREFIX."listes_toutes");
 define("_SPIPLISTES_EXEC_MAINTENANCE", _SPIPLISTES_EXEC_PREFIX."maintenance");
 
-define("_SPIPLISTES_ACTION_PREFIX", "spiplistes_");
+define("_SPIPLISTES_ACTION_PREFIX", _SPIPLISTES_PREFIX."_");
 define("_SPIPLISTES_ACTION_SUPPRIMER_ABONNER", _SPIPLISTES_ACTION_PREFIX."supprimer_abonne");
 define("_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE", _SPIPLISTES_ACTION_PREFIX."changer_statut_abonne");
 
@@ -284,7 +286,7 @@ $spiplistes_items = array(
 	$spiplistes_version =  lire_meta('spiplistes_version');
 
 //spiplistes_log("MES OPTIONS $spiplistes_version :: ".__plugin_real_version_base_get(), LOG_DEBUG);
-	if(__plugin_real_version_get() > $spiplistes_version) {
+	if(__plugin_real_version_get(_SPIPLISTES_PREFIX) > $spiplistes_version) {
 		if(!$spiplistes_version) {
 		// Une installation ? Créer la base 
 			include_spip('base/spiplistes_init'); 

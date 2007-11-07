@@ -28,7 +28,7 @@ spiplistes_log("spiplistes_install() <<", LOG_DEBUG);
 			$result = (
 				isset($GLOBALS['meta']['spiplistes_version'])
 				&& ($v = $GLOBALS['meta']['spiplistes_version'])
-				&& ($v >= __plugin_real_version_get())
+				&& ($v >= __plugin_real_version_get(_SPIPLISTES_PREFIX))
 				&& spip_mysql_showtable("spip_auteurs_elargis")
 				&& spip_mysql_showtable("spip_listes")
 				);
@@ -81,7 +81,7 @@ function spiplistes_base_creer () {
 	creer_base();
 //spiplistes_log("spiplistes_base_creer() >>", LOG_DEBUG);
 	spiplistes_log("PLUGIN INSTALL: database creation");
-	$spiplistes_base_version = __plugin_real_version_base_get();
+	$spiplistes_base_version = __plugin_real_version_base_get(_SPIPLISTES_PREFIX);
 	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
 	spiplistes_ecrire_metas();
 	

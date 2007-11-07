@@ -38,11 +38,11 @@ function spiplistes_upgrade () {
 
 spiplistes_log("spiplistes_upgrade() <<", LOG_DEBUG);
 
-	$spiplistes_name = __plugin_real_prefix_get();
-	$spiplistes_current_version =  __plugin_current_version_get('spiplistes');
-	$spiplistes_real_version = __plugin_real_version_get();
-	$spiplistes_current_version_base = __plugin_current_version_base_get('spiplistes');
-	$spiplistes_real_version_base = __plugin_real_version_base_get();
+	$spiplistes_name = _SPIPLISTES_PREFIX;
+	$spiplistes_current_version =  __plugin_current_version_get(_SPIPLISTES_PREFIX);
+	$spiplistes_real_version = __plugin_real_version_get(_SPIPLISTES_PREFIX);
+	$spiplistes_current_version_base = __plugin_current_version_base_get(_SPIPLISTES_PREFIX);
+	$spiplistes_real_version_base = __plugin_real_version_base_get(_SPIPLISTES_PREFIX);
 
 	if(!$spiplistes_current_version) {
 	// SPIP-Listes n'a jamais été installé ? 

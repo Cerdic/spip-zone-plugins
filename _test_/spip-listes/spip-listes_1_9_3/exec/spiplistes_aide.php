@@ -73,7 +73,7 @@ function exec_spiplistes_aide () {
 			);
 		$replacement = array(
 			$nom
-			, __plugin_meta_version(__plugin_real_prefix_get())
+			, __plugin_get_meta_version(_SPIPLISTES_PREFIX)
 			, ''
 			, ''
 			, _T('spiplistes:_aide')

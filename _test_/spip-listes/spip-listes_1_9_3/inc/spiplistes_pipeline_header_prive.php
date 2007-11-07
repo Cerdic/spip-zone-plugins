@@ -18,7 +18,7 @@ function spiplistes_header_prive ($flux) {
 	$exec = _request('exec');
 
 	$flux .= ""
-		. "\n\n<!-- PLUGIN SPIPLISTES GADGETS v.: ".__plugin_real_version_get()." -->\n"
+		. "\n\n<!-- PLUGIN SPIPLISTES GADGETS v.: ".__plugin_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
 		. "<script src='".url_absolue(find_in_path('javascript/spiplistes_gadgets.js'))."' type='text/javascript'></script>\n"
 	;
 
@@ -34,7 +34,7 @@ function spiplistes_header_prive ($flux) {
 		)
 	) {
 		
-		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_real_version_get()." -->\n"
+		$flux .= "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
 					. "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPLISTES."spiplistes_style_prive.css' type='text/css' media='all' />\n"
 					;
 

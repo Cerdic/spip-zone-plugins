@@ -65,7 +65,7 @@ function spiplistes_meleuse () {
 		, 'opt_ajout_pied_courrier', 'pied_patron'
 		, 'opt_ajout_tampon_editeur', 'tampon_patron'
 		) as $key) {
-		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
 	//////////////////////////

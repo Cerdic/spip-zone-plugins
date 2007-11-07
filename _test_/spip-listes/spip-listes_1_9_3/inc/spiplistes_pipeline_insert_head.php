@@ -16,7 +16,7 @@
 function spiplistes_insert_head ($flux) {
 
 	$flux .= ""
-		. "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_real_version_get()." -->\n"
+		. "\n\n<!-- PLUGIN SPIPLISTES v.: ".__plugin_real_version_get(_SPIPLISTES_PREFIX)." -->\n"
 	;
 
 	if(in_array(_request('page'), array(

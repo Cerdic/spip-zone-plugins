@@ -719,7 +719,7 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO') {
 function spiplistes_tampon_html_get ($tampon_patron) {
 	$contexte_patron = array();
 	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-		$contexte_patron[$key] = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$contexte_patron[$key] = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 	include_spip('public/assembler');
 	return(recuperer_fond(_SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron, $contexte_patron));
@@ -732,7 +732,7 @@ function spiplistes_tampon_texte_get ($tampon_patron, $tampon_html) {
 	$contexte_patron = array();
 	$result = false;
 	foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-		$contexte_patron[$key] = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$contexte_patron[$key] = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 	$f = _SPIPLISTES_PATRONS_TAMPON_DIR.$tampon_patron;
 	if (find_in_path($f."_texte.html")){
@@ -862,21 +862,21 @@ function spiplistes_boite_autocron ($return = false) {
 		'opt_suspendre_trieuse'
 		,'opt_suspendre_meleuse'
 		) as $key) {
-		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
 	$result = "";
 	
 	// initialise les options
 	foreach(array('opt_simuler_envoi') as $key) {
-		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
 	// Informe sur l'état de la trieuse
 	if($opt_suspendre_trieuse == 'oui') {
 		if(_request('opt_suspendre_trieuse')=='non') {
 			if($connect_id_auteur == 1) {
-				__plugin_ecrire_s_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
+				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Trieuse_reactivee')."</p>\n";
 			}
 		}
@@ -892,7 +892,7 @@ function spiplistes_boite_autocron ($return = false) {
 	if($opt_suspendre_meleuse == 'oui') {
 		if(_request('opt_suspendre_meleuse')=='non') {
 			if($connect_id_auteur == 1) {
-				__plugin_ecrire_s_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
+				__plugin_ecrire_key_in_serialized_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Meleuse_reactivee')."</p>\n";
 			}
 		}

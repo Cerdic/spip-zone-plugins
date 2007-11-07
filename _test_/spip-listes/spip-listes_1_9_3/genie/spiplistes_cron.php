@@ -45,7 +45,7 @@ function cron_spiplistes_cron ($last_time) {
 	foreach(array(
 		'opt_suspendre_trieuse'
 		) as $key) {
-		$$key = __plugin_lire_s_meta($key, _SPIPLISTES_META_PREFERENCES);
+		$$key = __plugin_lire_key_in_serialized_meta($key, _SPIPLISTES_META_PREFERENCES);
 	}
 
 	$sql_select = "id_liste,titre,titre_message,date,message_auto,periode,lang,patron,statut";
