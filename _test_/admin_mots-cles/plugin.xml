@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<!--  
 
@@ -8,12 +7,12 @@
 	// $LastChangedBy$
 	// $LastChangedDate$
 	 -->
-	<nom>Administration des mots-clés</nom>
+	<nom>Administration des mots-cl�s</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.2002</version>
+	<version>0.2003</version>
 	<etat>test</etat>
 	<icon>images/amocles.png</icon>
-	<description>Permet de :<ul><li>déléguer l'administration des mots-clés</li><li>importer et exporter vos mots-clés via un fichier texte.</li></ul></description>
+	<description>Permet de :<ul><li>d&#233;l&#233;guer l'administration des mots-cl&#233;s</li><li>importer et exporter vos mots-cl&#233;s via un fichier texte.</li></ul></description>
 	<lien>[Documentation->http://www.quesaco.org/Administrer-les-mots-cles]</lien>
 	
 	<prefix>amocles</prefix>
