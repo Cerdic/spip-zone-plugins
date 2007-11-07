@@ -1,0 +1,8 @@
+
+	// TODO.txt
+	
+	// $LastChangedRevision: 16409 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2007-10-29 08:33:41 +0100 (lun., 29 oct. 2007) $
+
+- Interface de saisie pour les titres,descriptifs,textes en <multi>

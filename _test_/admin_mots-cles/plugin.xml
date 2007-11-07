@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<!--  
+
+	// amocles plugin.xml
+
+	// $LastChangedRevision: 16409 $
+	// $LastChangedBy: paladin@quesaco.org $
+	// $LastChangedDate: 2007-10-29 08:33:41 +0100 (lun., 29 oct. 2007) $
+	 -->
+	<nom>Administration des mots-clés</nom>
+	<auteur>cpaulus@quesaco.org</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<icon>images/amocles.png</icon>
+	<description>Permet de :<ul><li>déléguer l'administration des mots-clés</li><li>importer et exporter vos mots-clés via un fichier texte.</li></ul></description>
+	<lien>[Documentation->http://www.quesaco.org/Administrer-les-mots-cles]</lien>
+	
+	<prefix>amocles</prefix>
+
+	<options>amocles_mes_options.php</options>
+	
+	<install>base/amocles_install.php</install>
+
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>inc/amocles_pipeline_ajouter_boutons.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/amocles_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+
+	<chemin dir='' />
+</plugin>
