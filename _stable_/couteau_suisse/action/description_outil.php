@@ -23,7 +23,9 @@ cs_log("Fin   : action_description_outil_dist($arg)");
 }
 
 function action_description_outil_post($index) {
-	global $connect_id_auteur, $metas_vars;
+	global $metas_vars;
+	if(defined('_SPIP19300')) $connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+		else global $connect_id_auteur;
 cs_log("Début : action_description_outil_post($index) - On modifie la(les) variable(s) dans la base");
 
 	// on lit les metas

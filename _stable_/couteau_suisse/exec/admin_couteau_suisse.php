@@ -219,7 +219,8 @@ cs_log("Début : enregistre_modif_outils()");
 			unset(${$i}[$o][$i]);
 			else ${$i}[$o][$i] = 1;
 	
-	global $connect_id_auteur, $connect_login;
+	if(defined('_SPIP19300')) $connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+		else global $connect_id_auteur;
 	spip_log("Changement de statut ($i) des outils par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys(${$i})));
 	ecrire_meta("tweaks_{$i}s", serialize(${$i}));
 
@@ -255,6 +256,10 @@ cs_log("Début : exec_admin_couteau_suisse()");
 @unlink(_DIR_TMP."couteau-suisse.plat");
 include_spip('inc/plugin');
 verif_plugin();	
+
+	// id de l'auteur en session
+	if(defined('_SPIP19300')) $connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+		else global $connect_id_auteur;
 
 	// reset general
 	if ($cmd=='resetall'){
