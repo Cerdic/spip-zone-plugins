@@ -93,15 +93,12 @@ function sommaire_d_article($texte) {
 }
 
 // fonction appelee par le traitement pre_propre de #CS_SOMMAIRE
-function sommaire_sauve_notes($texte) {
-	$GLOBALS['cs_notes'] = array($GLOBALS['les_notes'], $GLOBALS['compt_note']);
-	return $texte;
+function sommaire_supprime_notes($texte) {
+	return preg_replace(', *\[\[(.*?)\]\],msS', '', $texte);
 }
 
 // fonction appelee par le traitement post_propre de #CS_SOMMAIRE
 function sommaire_d_article_balise($texte) {
-	list($GLOBALS['les_notes'], $GLOBALS['compt_note']) = $GLOBALS['cs_notes'];
-	unset($GLOBALS['cs_notes']);
 	// si la balise n'est pas utilisee ou s'il n'y a aucun intertitre, on ne fait rien
 	if(!defined('_sommaire_BALISE') || (strpos($texte, '<h3')===false)) return '';
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'sommaire_d_article_rempl', $texte, true);
@@ -114,7 +111,7 @@ if (defined('_sommaire_BALISE')) {
 		$type = $p->type_requete;
 		if ($type == 'articles') {
 			$_texte = champ_sql('texte', $p);
-			$p->code = "$_texte";
+			$p->code = "$_texte.traiter_raccourcis('&nbsp;')";
 		} else {
 			$p->code = "''";
 		}
