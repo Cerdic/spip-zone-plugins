@@ -74,7 +74,7 @@ function mutualiser_creer($e, $options) {
 
 			// si la base n'existe pas, on va travailler
 			if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
-				if (_request('creerbase')) {
+				if (_request('creerbase') && _request('creerbase')=='oui') {
 					if (sql_query('CREATE DATABASE '._INSTALL_NAME_DB, _INSTALL_SERVER_DB)
 					AND sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['prefixe'] = $GLOBALS['table_prefix'];
@@ -104,7 +104,7 @@ function mutualiser_creer($e, $options) {
 							_L('La base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;t&#233; cr&#233;&#233;e'),
 							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 							'<h3>'
-							._L('<a href="'.parametre_url(self(), 'creerbase', null).'">Continuer...</a>')
+							._L('<a href="'.parametre_url(self(), 'creerbase', 'ok').'">Continuer...</a>')
 							.'</h3>'
 						);
 						if ($options['mail']) {
