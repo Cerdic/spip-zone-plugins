@@ -26,9 +26,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_spiplistes_liste_edit(){
 
-	include_spip('inc/presentation');
 	include_spip('inc/barre');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_naviguer_paniers');
 	
 	global $connect_statut
@@ -148,7 +148,7 @@ function exec_spiplistes_liste_edit(){
 				? _T('spiplistes:Creer_une_liste_')
 				: _T('spiplistes:modifier_liste')
 			) . ":"
-		. gros_titre($titre, '', false)
+		. spiplistes_gros_titre($titre, '', false)
 		. "</td>"
 		. "</tr></table>"
 		. "<hr />"

@@ -10,11 +10,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_spiplistes_maintenance () {
 
-	include_spip('inc/presentation');
 	include_spip('inc/distant');
 	include_spip('inc/meta');
 	include_spip('inc/config');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_presentation');
 
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -117,10 +117,10 @@ function exec_spiplistes_maintenance () {
 	spiplistes_onglets(_SPIPLISTES_RUBRIQUE, _T('spiplistes:spip_listes'));
 
 	echo "<br /><br />\n";
-	gros_titre(_T('titre_admin_tech'));
+	spiplistes_gros_titre(_T('titre_admin_tech'));
 
 	debut_gauche();
-	__plugin_boite_meta_info();
+	__plugin_boite_meta_info(_SPIPLISTES_PREFIX);
 	spiplistes_boite_raccourcis();
 	creer_colonne_droite();
 	debut_droite("messagerie");

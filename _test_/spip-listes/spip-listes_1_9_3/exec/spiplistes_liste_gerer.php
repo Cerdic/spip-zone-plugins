@@ -33,11 +33,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 function exec_spiplistes_liste_gerer () {
 
-	include_spip('inc/presentation');
 	include_spip('inc/mots');
 	include_spip('inc/lang');
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_dater_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');
 	
@@ -349,7 +349,7 @@ function exec_spiplistes_liste_gerer () {
 		. debut_cadre_relief("", true)
 		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
 		. "<tr><td valign='top'>\n"
-		. gros_titre(spiplistes_bullet_titre_liste($titre, $statut, true)." ".$titre, '', false)
+		. spiplistes_gros_titre(spiplistes_bullet_titre_liste($titre, $statut, true)." ".$titre, '', false)
 		. "</td>"
 		. "<td rowspan='2'>"
 		// le gros bouton modifier si besoin

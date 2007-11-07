@@ -26,9 +26,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_spiplistes_config () {
 
-	include_spip('inc/presentation');
 	include_spip('inc/distant');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/meta');
 	include_spip('inc/config');
 
@@ -180,7 +180,7 @@ function exec_spiplistes_config () {
 	}
 
 	echo "<br /><br /><br />\n";
-	gros_titre(_T('titre_page_config_contenu'));
+	spiplistes_gros_titre(_T('titre_page_config_contenu'));
 	echo barre_onglets("configuration", "spiplistes");
 
 	debut_gauche();

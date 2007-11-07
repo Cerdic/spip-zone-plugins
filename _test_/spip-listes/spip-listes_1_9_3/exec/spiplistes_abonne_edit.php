@@ -32,8 +32,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_spiplistes_abonne_edit () {
 
-	include_spip('inc/presentation');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_lister_courriers_listes');
 
 	global $connect_statut
@@ -159,7 +159,7 @@ function exec_spiplistes_abonne_edit () {
 		. debut_cadre_relief($logo, true)
 		. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
 		. "<tr><td valign='top'>\n"
-		. gros_titre($nom, '', false)
+		. spiplistes_gros_titre($nom, '', false)
 		. "<br />\n"
 		;
 	if (strlen($email) || strlen($nom_site)) {			

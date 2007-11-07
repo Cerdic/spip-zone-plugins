@@ -30,10 +30,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_spiplistes_courrier_edit(){
 
-	include_spip('inc/presentation');
 	include_spip('inc/barre');
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_presentation');
 	include_spip('public/assembler');
 	include_spip('inc/spiplistes_naviguer_paniers');
 
@@ -138,7 +138,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
 		. "<td width='100%'>"
 		. ($id_courrier ? _T('spiplistes:Modifier_un_courrier_:') : _T('spiplistes:Creer_un_courrier_:') )."<br />\n"
-		. gros_titre($titre, '', false)
+		. spiplistes_gros_titre($titre, '', false)
 		. "</td>\n"
 		. "</tr></table>\n"
 		. "<hr />\n"

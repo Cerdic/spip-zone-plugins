@@ -35,10 +35,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 */
 function exec_spiplistes_courrier_gerer () {
 
-	include_spip('inc/presentation');
 	include_spip('inc/barre');
 	include_spip('base/spiplistes_tables');
 	include_spip('inc/spiplistes_api');
+	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/spiplistes_destiner_envoi');
 	include_spip('inc/spiplistes_naviguer_paniers');
 
@@ -422,7 +422,7 @@ function exec_spiplistes_courrier_gerer () {
 			. debut_cadre_relief(spiplistes_items_get_item('icon', $statut), true)
 			. "<table width='100%'  border='0' cellspacing='0' cellpadding='0'>"
 			. "<tr>"
-			. "<td>".gros_titre($titre, spiplistes_items_get_item('puce', $statut), false)."</td>"
+			. "<td>".spiplistes_gros_titre($titre, spiplistes_items_get_item('puce', $statut), false)."</td>"
 			. "<td rowspan='2' style='vertical-align:top;width:90px;'>"
 				// si besoin, l'un de ces deux boutons apparaît
 				. $gros_bouton_modifier
