@@ -408,7 +408,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		}
 		$dates = implode(",",$dates);
 	}
-	$out .= "<div class='repetitions-calendrier'>";
+	$out .= "<div class='repetitions-calendrier' style='clear:left;'>";
 	$out .= WCalendar_statique_point_entree('_repetitions',$dates);
 	$out .= "</div>";
 
