@@ -166,7 +166,7 @@ add_outil( array(
 	'categorie' => 'admin',
 	// pipeline pour retirer en javascript le bouton de controle de l'interface
 	'pipeline:header_prive' => 'set_options_header_prive',
-	// non supporte a partir de la version 1.9.3
+	// non supporte a partir de la version 1.93
 	'version-max' => 1.93,
 ));
 
@@ -251,7 +251,9 @@ add_outil( array(
 	'id' => 'suivi_forums',
 	'code:options' => "%%radio_suivi_forums3%%",
 	'categorie' => 'admin',
+	// effectif dans la version 1.92 (cf : plugin notifications)
 	'version-min' => 1.92,
+	'version-max' => 1.93,
 ));
 
 add_outil( array(
