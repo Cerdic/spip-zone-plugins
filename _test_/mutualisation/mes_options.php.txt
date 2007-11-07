@@ -18,7 +18,7 @@
 
 	// si le nom du serveur est different du nom dns, 
 	// ca peut parfois poser probleme
-	// il faut alors le définir ici
+	// il faut alors le definir ici
 	# define ('_INSTALL_HOST_DB_LOCALNAME', 'nom_serveur');
 	
 	// Si le serveur n'est pas mysql, il faut le preciser obligatoirement.

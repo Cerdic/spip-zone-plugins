@@ -83,7 +83,7 @@ function mutualiser_creer($e, $options) {
 						// Pour chaque base creee on cree aussi un user
 						// MYSQL specifique qui aura les droits sur la base
 						if ($options['creer_user_base']) {
-							// le nom de la machine MySQL peut different 
+							// le nom de la machine MySQL peut etre different 
 							// du nom de la connexion via DNS
 							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); 							
 							if (!sql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
