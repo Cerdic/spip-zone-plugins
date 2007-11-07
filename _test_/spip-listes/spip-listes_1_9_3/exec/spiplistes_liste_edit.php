@@ -104,9 +104,9 @@ function exec_spiplistes_liste_edit(){
 		;
 		
 
-//////////
+////////////////////////////////////
 // PAGE CONTENU
-//////////
+////////////////////////////////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 

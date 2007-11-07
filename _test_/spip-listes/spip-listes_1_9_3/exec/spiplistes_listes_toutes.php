@@ -73,9 +73,9 @@ function exec_spiplistes_listes_toutes(){
 		}
 	}
 
-//////////
+////////////////////////////////////
 // PAGE CONTENU
-//////////
+////////////////////////////////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	

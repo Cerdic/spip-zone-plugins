@@ -391,9 +391,9 @@ function exec_spiplistes_courrier_gerer () {
 		}
 	} // end if()
 	
-//////////
+////////////////////////////////////
 // PAGE CONTENU
-//////////
+////////////////////////////////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
@@ -447,7 +447,8 @@ function exec_spiplistes_courrier_gerer () {
 				."' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
 			. "<img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."oeil-16.png' alt='' width:'16' height='16' border='0' /></a><br />\n"
 			. "<iframe style='background-color:#fff;border:1px solid #000;'"
-				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&lire_base=oui")."' width='100%' height='500'></iframe>\n"
+				. " src='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE,"id_courrier=$id_courrier&lire_base=oui")
+				."' width='100%' height='500'></iframe>\n"
 			. fin_cadre_couleur(true)
 			//
 			// boite courrier au format texte seul

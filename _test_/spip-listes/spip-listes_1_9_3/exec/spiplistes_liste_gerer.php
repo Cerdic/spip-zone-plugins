@@ -298,9 +298,9 @@ function exec_spiplistes_liste_gerer () {
 		$gros_bouton_modifier = $gros_bouton_supprimer = "";
 	}
 
-//////////
+////////////////////////////////////
 // PAGE CONTENU
-//////////
+////////////////////////////////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 

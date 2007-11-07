@@ -168,9 +168,9 @@ function exec_spiplistes_config () {
 	$smtp_server = (isset($GLOBALS['meta']['smtp_server']) && (!empty($GLOBALS['meta']['smtp_server']))) ? $GLOBALS['meta']['smtp_server'] : "localhost";
 	$smtp_sender = (email_valide($GLOBALS['meta']['smtp_sender'])) ? $GLOBALS['meta']['smtp_sender'] : $GLOBALS['meta']['email_webmaster'];
 
-//////////
+////////////////////////////////////
 // PAGE CONTENU
-//////////
+////////////////////////////////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 

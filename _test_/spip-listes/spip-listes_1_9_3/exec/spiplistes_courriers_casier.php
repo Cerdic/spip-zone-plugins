@@ -104,7 +104,7 @@ function exec_spiplistes_courriers_casier () {
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_naviguer_paniers');
 
-	spiplistes_log("spiplistes_afficher_pile_messages() <<", LOG_DEBUG); 	
+	spiplistes_log("spiplistes_afficher_pile_messages()2 <<", LOG_DEBUG); 	
 
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -151,9 +151,9 @@ function exec_spiplistes_courriers_casier () {
 		spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier=$btn_arreter_envoi");
 	}
 
-//////////
+////////////////////////////////////
 // PAGE CONTENU
-//////////
+////////////////////////////////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 	

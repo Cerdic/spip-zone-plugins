@@ -172,6 +172,12 @@ spiplistes_log("CRON: envoi mail nouveautes : pas de nouveautes", LOG_DEBUG);
 	return ($last_time); 
 }
 
+// SPIP 193 ?
+
+function genie_spiplistes_cron ($last_time) {
+	cron_spiplistes_cron ($last_time);
+}
+
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */

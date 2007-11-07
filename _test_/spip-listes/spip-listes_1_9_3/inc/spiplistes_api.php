@@ -1145,6 +1145,25 @@ function spiplistes_ecrire_metas() {
 	return(true);
 }
 
+// hack de chez hack. 
+// A revoir quand le 193 sera 
+if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) { 
+	function generer_url_courrier ($script='', $args="", $no_entities=false, $rel=false) {
+		$action = get_spip_script();
+		$id_courrier = _request('id_courrier');
+		$action = parametre_url($action, 'page', 'courrier', '&') . "&id_courrier=$id_courrier";
+		if (!$no_entities) {
+			$action = quote_amp($action);
+		}
+		return ($rel ? '' : url_de_base()) . $action;
+	}
+}
+
+// charge les vieilles def nécessaires si besoin
+if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) { 
+	include_spip("inc/spiplistes_api_vieilles_defs");
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */

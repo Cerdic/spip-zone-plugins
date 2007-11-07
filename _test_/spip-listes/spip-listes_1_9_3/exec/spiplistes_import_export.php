@@ -102,9 +102,9 @@ function exec_spiplistes_import_export(){
 	}
 	// fin de generation du fichier export
 
-//////////
+////////////////////////////////////
 // PAGE CONTENU
-//////////
+////////////////////////////////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 

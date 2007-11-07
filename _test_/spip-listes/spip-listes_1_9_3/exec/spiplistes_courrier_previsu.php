@@ -24,12 +24,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/distant');
-include_spip('inc/meta');
-include_spip('inc/filtres');
-include_spip('inc/lang');
-include_spip('inc/spiplistes_api');
 
 // adapté de abomailman ()
 // MaZiaR - NetAktiv
@@ -47,7 +41,16 @@ include_spip('inc/spiplistes_api');
 */
 
 function exec_spiplistes_courrier_previsu(){
+spip_log("exec_spiplistes_courrier_previsu()");
 
+	include_spip('inc/presentation');
+	include_spip('inc/distant');
+	include_spip('inc/urls');
+	include_spip('inc/meta');
+	include_spip('inc/filtres');
+	include_spip('inc/lang');
+	include_spip('inc/spiplistes_api');
+	
 	foreach(array('patron', 'titre', 'message', 'Confirmer', 'date', 'id_rubrique', 'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
 		, 'lire_base', 'format', 'plein_ecran') as $key) {
 		$$key = _request($key);
@@ -78,7 +81,7 @@ function exec_spiplistes_courrier_previsu(){
 	if($lire_base) {
 		// prendre le courrier enregistré dans la base
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
-		if($id_courrier && ($row=spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier")))) {
+		if($id_courrier && ($row=spip_fetch_array(spip_query("SELECT $sql_select FROM spip_courriers WHERE id_courrier=$id_courrier LIMIT 0,1")))) {
 			foreach(explode(",", $sql_select) as $key) {
 				$$key = propre($row[$key]);
 			}
@@ -154,9 +157,10 @@ function exec_spiplistes_courrier_previsu(){
 		// sont sous forme privee : spip.php?action=redirect&.... horrible !
 		// pour utiliser recuperer_fond,il faudrait etre ici dans un script action
 		//	$texte_patron = recuperer_fond('patrons/'.$template, $contexte_template);
+
 		$titre = $titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
 		$texte = $texte_patron = recuperer_fond('patrons/'.$patron, $contexte_template);
-	
+
 		$form_action = ($id_courrier) 
 			? generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER,"id_courrier=$id_courrier")
 			: generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER)

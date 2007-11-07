@@ -531,12 +531,8 @@ if(!function_exists('__plugin_lire_key_in_serialized_meta')) {
 	function __plugin_lire_key_in_serialized_meta ($key, $meta_name) {
 		$result = false;
 		$s_meta = __plugin_lire_serialized_meta($meta_name);
-		if($s_meta) {
-spip_log("???? $key ");
-}
 		if($s_meta && isset($s_meta[$key])) {
 			$result = $s_meta[$key];
-spip_log("___ $key: ".$s_meta[$key]);
 		}
 		return($result);
 	}

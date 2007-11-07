@@ -36,9 +36,9 @@ function exec_spiplistes_abonnes_tous () {
 		, $connect_id_auteur
 		;
 
-//////////
+////////////////////////////////////
 // PAGE CONTENU
-//////////
+////////////////////////////////////
 
 	debut_page(_T('spiplistes:spip_listes'), "redacteurs", "spiplistes");
 
