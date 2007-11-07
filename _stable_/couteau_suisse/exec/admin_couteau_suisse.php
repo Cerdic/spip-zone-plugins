@@ -249,6 +249,7 @@ cs_log("Début : exec_admin_couteau_suisse()");
 	$cmd = _request('cmd');
 	$exec = _request('exec');
 
+@unlink(_DIR_TMP."couteau-suisse.plat");
 include_spip('inc/plugin');
 verif_plugin();	
 
