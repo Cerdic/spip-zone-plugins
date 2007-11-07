@@ -118,7 +118,7 @@ function amocles_supprimer_admin_et_rediriger ($type, $id, $id_auteur, $redirect
 		include_spip('inc/amocles_api');
 		$connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		if(
-			($ii = __plugin_lire_s_meta(_AMOCLES_META_PREFERENCES))
+			($ii = __plugin_lire_serialized_meta(_AMOCLES_META_PREFERENCES))
 			&& isset($ii['admins_groupes_mots_ids'])
 			) {
 			$ii = array_values($ii['admins_groupes_mots_ids']);
@@ -152,7 +152,7 @@ function amocles_ajouter_admin_et_redirige($type, $id, $id_auteur, $redirect) {
 		include_spip('inc/amocles_api');
 		$connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		if(
-			($ii = __plugin_lire_s_meta(_AMOCLES_META_PREFERENCES))
+			($ii = __plugin_lire_serialized_meta(_AMOCLES_META_PREFERENCES))
 			&& isset($ii['admins_groupes_mots_ids'])
 			) {
 			$ii = array_values($ii['admins_groupes_mots_ids']);

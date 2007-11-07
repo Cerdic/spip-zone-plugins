@@ -114,7 +114,7 @@ function exec_amocles_configuration () {
 				}
 				if(count($ids)) {
 					if(
-						($ii = __plugin_lire_s_meta(_AMOCLES_META_PREFERENCES))
+						($ii = __plugin_lire_serialized_meta(_AMOCLES_META_PREFERENCES))
 						&& isset($ii['admins_groupes_mots_ids'])
 						) {
 						$ii = array_values($ii['admins_groupes_mots_ids']);
