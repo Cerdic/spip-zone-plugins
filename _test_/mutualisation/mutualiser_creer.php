@@ -89,7 +89,7 @@ function mutualiser_creer($e, $options) {
 							if (!sql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
 								. _INSTALL_NAME_DB.".* TO '" 
 								. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
-								. "' IDENTIFIED BY '" . _INSTALL_PASS_DB."'")) 
+								. "' IDENTIFIED BY '" . _INSTALL_PASS_DB."'", _INSTALL_SERVER_DB)) 
 							{
 								die (__FILE__." " . __LINE__ 
 									. ": Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "

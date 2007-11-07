@@ -73,7 +73,7 @@ function demarrer_site($site = '', $options = array()) {
 		// password et code d'activation
 		$link = @mutu_connect_db(_INSTALL_PANEL_HOST_DB, 0, _INSTALL_PANEL_USER_DB, _INSTALL_PANEL_PASS_DB, '', _INSTALL_SERVER_DB);
 		@sql_selectdb(_INSTALL_PANEL_NAME_DB, _INSTALL_SERVER_DB);
-		$result=@sql_query("SELECT * FROM "._INSTALL_PANEL_NAME_TABLE." WHERE "._INSTALL_PANEL_FIELD_SITE."='$site'");
+		$result=@sql_query("SELECT * FROM "._INSTALL_PANEL_NAME_TABLE." WHERE "._INSTALL_PANEL_FIELD_SITE."='$site'", _INSTALL_SERVER_DB);
 		if (sql_count($result)>0) {
 			$data = sql_fetch($result);
 			$options['code'] =$data[_INSTALL_PANEL_FIELD_CODE];
