@@ -12,15 +12,17 @@ jQuery(document).ready(function() {
 				this.className = "gl_mot spip_surligne";
 				this.innerHTML = this.firstChild.innerHTML;
 			}
-			gloss_el.style.top  = e.pageY.toString()+"px";
-			gloss_el.style.left = e.pageX.toString()+"px";
 			gloss_dt.innerHTML = this.nextSibling.title; // titre
 			gloss_dd.innerHTML = this.nextSibling.nextSibling.title; // definition
-			gloss_el.style.fontSize = jQuery(this).css('font-size');
-			gloss_el.style.fontFamily = jQuery(this).css('font-family');
+			reg = jQuery(this).css('font-size').match(/^\d\d?(?:\.\d+)?px/);
+			if(reg) gloss_el.style.fontSize = reg[0];
+			jQuery(gloss_el)
+				.css('top',e.pageY.toString()+"px")
+				.css('left', e.pageX.toString()+"px")
+				.css('font-family', jQuery(this).css('font-family'));
 			gloss_el.style.display    = 'block';
 			gloss_el.style.visibility = 'visible';
-		},
+			},
 		function(e) {
 			gloss_el.style.display    = 'none';
 			gloss_el.style.visibility = 'hidden';
