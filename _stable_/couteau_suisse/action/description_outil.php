@@ -52,6 +52,9 @@ cs_log(" -- outil $index ($outil) : %$var% prend la valeur '$final'");
 
 cs_log(" -- donc, réinitialisation forcée !");
 	// on reinitialise tout, au cas ou ...
+	include_spip('inc/invalideur');
+	purger_repertoire(_DIR_SKELS);
+	purger_repertoire(_DIR_CACHE);
 	include_spip('cout_utils');
 	cs_initialisation(true);
 cs_log("Fin   : action_description_outil_post(Array($index)) - Réinitialisation forcée terminée.");

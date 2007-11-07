@@ -232,6 +232,9 @@ cs_log("Fin   : enregistre_modif_outils()");
 function cout_exec_redirige($p = '') {
 	ecrire_metas();
 	cs_initialisation(true);
+	include_spip('inc/invalideur');
+	purger_repertoire(_DIR_SKELS);
+	purger_repertoire(_DIR_CACHE);
 	if (defined('_SPIP19200')) include_spip('inc/headers');
 	redirige_par_entete(generer_url_ecrire(_request('exec'), $p, true));
 }
@@ -255,7 +258,7 @@ verif_plugin();
 
 	// reset general
 	if ($cmd=='resetall'){
-		spip_log("Reset de tous les outils par l'auteur id=$connect_id_auteur");
+		spip_log("Reset de tous les outils du Couteau Suisse par l'auteur id=$connect_id_auteur");
 		foreach(array_keys($GLOBALS['meta']) as $meta) {
 			if(strpos($meta, 'tweaks_') === 0) effacer_meta($meta);
 			if(strpos($meta, 'cs_') === 0) effacer_meta($meta);
@@ -277,7 +280,7 @@ verif_plugin();
 	}
 	// reset des variables d'un outil
 	if ($cmd=='reset' && strlen($_GET['outil'])){
-		cs_log("Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur");
+		spip_log("Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur");
 		$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);	
 		global $outils;
 		include_spip('cout_utils');
@@ -290,7 +293,7 @@ verif_plugin();
 	}
 	// reset de l'affichage
 	if ($cmd=='showall'){
-		cs_log("Reset de tous les affichages par l'auteur id=$connect_id_auteur");
+		spi_log("Reset de tous les affichages du Couteau Suisse par l'auteur id=$connect_id_auteur");
 		effacer_meta('tweaks_caches');
 		ecrire_metas();
 	}
