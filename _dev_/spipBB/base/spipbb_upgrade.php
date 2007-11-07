@@ -37,6 +37,7 @@ function spipbb_install($action)
 		case 'uninstall' :
 		default :
 			spipbb_delete_metas();
+			spipbb_delete_tables();
 			break;
 	}
 } /* spipbb_install */

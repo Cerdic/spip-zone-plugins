@@ -112,7 +112,7 @@ function migre_forum_old($id_rubrique)
 	// la premiere rubrique racine disponible
 	if (!$id_rubrique = intval($id_rubrique)) {
 		// spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
-		$row = sql_fetsel('id_rubrique','spip_rubriques',array('id_parent'=>0),'',array('0+titre','titre'),'1');
+		$row = sql_fetsel('id_rubrique','spip_rubriques',"id_parent=0",'',array('0+titre','titre'),'1');
 
 		$id_rubrique = $row['id_rubrique'];
 	}
@@ -707,8 +707,8 @@ function migre_threads() {
 	select_spip_db();
 	while ($row = mysql_fetch_assoc($result))
 	{
-		// le premier post rencontr� pour un topic donn� est
-		// le post qui a lanc� le topic (normalement)
+		// le premier post rencontre pour un topic donne est
+		// le post qui a lance le topic (normalement)
 		$topic_id = $row['topic_id'];
 		if (! isset($topic_post[$topic_id])) {
 			$id_parent = 0;
@@ -717,7 +717,7 @@ function migre_threads() {
 			$id_parent = $topic_post[$topic_id];
 		}
 	
-		// traite le cas des posts qui appartiennent � un forum qui n'existe plus
+		// traite le cas des posts qui appartiennent a un forum qui n'existe plus
 		if (! isset($spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']])) { continue; }
 		
 		$id_article = $spipbb_fromphpbb['spip_art_from_forumid'][$row['forum_id']];

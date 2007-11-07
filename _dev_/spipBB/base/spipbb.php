@@ -20,6 +20,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (defined("_BASE_SPIPBB")) return; else define("_BASE_SPIPBB", true);
 
 //
 // Structure des tables
@@ -27,6 +28,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 global $tables_principales;
 global $tables_auxiliaires;
+global $tables_spipbb;
+
+$tables_spipbb = array( 'spip_visites_forums', 'spip_auteurs_spipbb', 'spip_spam_words', 'spip_spam_words_log' );
 
 // suivi des visites (sur la base de spip_visites_articles)
 
@@ -47,11 +51,57 @@ $tables_principales['spip_visites_forums'] = array(
 	'field' => &$spip_visites_forums,
 	'key' => &$spip_visites_forums_key);
 
+$spip_auteurs_spipbb = array( // table spip_auteurs_spipbb
+	"id_auteur"	=> "BIGINT(21) UNSIGNED NOT NULL", // primary key
+	"spam_warnings"	=> "INT(10) unsigned not null default '0'",
+	'ip_auteur'	=> "varchar(16)",
+	'ban_date'	=> "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",
+	'ban'		=> "VARCHAR(3) default 'non'"	// ban 'oui' 'non' default 'non'
+	);
+
+$spip_auteurs_spipbb_key = array(
+		'PRIMARY KEY' => "id_auteur"
+		);
+
+$tables_principales['spip_auteurs_spipbb'] = array(
+		'field' => &$spip_auteurs_spipbb,
+		'key' => &$spip_auteurs_spipbb_key );
+
+$spip_spam_words = array(
+	"id_spam_word"	=> "BIGINT(21) unsigned not null auto_increment",
+	"spam_word"	=> "varchar(255) not null" );
+
+$spip_spam_words_key = array( 'PRIMARY KEY' => "id_spam_word" );
+
+$tables_principales['spip_spam_words'] = array(
+		'field' => &$spip_spam_words,
+		'key' => &$spip_spam_words_key );
+
+$spip_spam_words_log = array(
+	"id_spam_log"	=> "BIGINT(21) unsigned not null auto_increment",
+	"id_auteur"	=> "bigint(21) unsigned not null",
+	"ip_auteur"	=> "varchar(16)",
+	"login"		=> "varchar(255)",
+	"log_date"	=> "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",
+	"titre"		=> "text",
+	"message"	=> "mediumtext",
+	"id_forum"	=> "bigint(21) unsigned not null" );
+
+$spip_spam_words_log_key = array( 'PRIMARY KEY' => "id_spam_log" );
+
+$tables_principales['spip_spam_words_log'] = array(
+		'field' => &$spip_spam_words_log,
+		'key' => &$spip_spam_words_log_key );
+
 //-- Relations ----------------------------------------------------
 global $tables_jointures;
 $tables_jointures['spip_visites_forums'][] = 'spip_forums';
+$tables_jointures['spip_auteurs_spipbb'][] = 'spip_auteurs';
 
 global $table_des_tables;
 $table_des_tables['spip_visites_forums'] = 'spip_visites_forums';
+$table_des_tables['spip_auteurs_spipbb'] = 'spip_auteurs_spipbb';
+$table_des_tables['spip_spam_words'] = 'spip_spam_words';
+$table_des_tables['spip_spam_words_log'] = 'spip_spam_words_log';
 
 ?>
