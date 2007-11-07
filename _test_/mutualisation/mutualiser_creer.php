@@ -88,7 +88,7 @@ function mutualiser_creer($e, $options) {
 							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); 							
 							if (!sql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
 								. _INSTALL_NAME_DB.".* TO '" 
-								. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB
+								. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
 								. "' IDENTIFIED BY '" . _INSTALL_PASS_DB."'")) 
 							{
 								die (__FILE__." " . __LINE__ 
