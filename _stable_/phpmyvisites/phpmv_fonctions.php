@@ -36,12 +36,12 @@ function phpmv_insert_body($texte){
 	return $texte.phpmv_get_code();
 }
 function phpmv_insert_head($texte){
-	if (!isset($GLOBALS['meta']['phpmv_flag_insert_head'])){
+	/*if (!isset($GLOBALS['meta']['phpmv_flag_insert_head'])){
 		include_spip("inc/meta");
 		ecrire_meta('phpmv_flag_insert_head','oui');
 		ecrire_metas();
-	}
-	return $texte . phpmv_get_head();
+	}*/
+	return $texte;// . phpmv_get_head();
 }
 
 ?>
