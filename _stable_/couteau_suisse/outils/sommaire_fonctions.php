@@ -111,7 +111,7 @@ if (defined('_sommaire_BALISE')) {
 		$type = $p->type_requete;
 		if ($type == 'articles') {
 			$_texte = champ_sql('texte', $p);
-			$p->code = "$_texte.traiter_raccourcis('&nbsp;')";
+			$p->code = "$_texte";
 		} else {
 			$p->code = "''";
 		}
