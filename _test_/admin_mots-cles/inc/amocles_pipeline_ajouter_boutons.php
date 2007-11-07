@@ -57,8 +57,6 @@
 	
 */
 
-spip_log("amocles_ajouter_boutons.php +-", _AMOTSCLES_PREFIX);
-
 function amocles_ajouter_boutons($boutons_admin) {
 
 	include_spip("inc/amocles_api");
