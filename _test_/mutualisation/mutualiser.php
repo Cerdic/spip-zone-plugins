@@ -100,7 +100,7 @@ function demarrer_site($site = '', $options = array()) {
 	define('_SPIP_PATH',
 		$e . 'dist/:' .  // + 
 		$e . ':' .
-		//_DIR_RACINE .':' . // -
+		_DIR_RACINE .':' . 
 		_DIR_RACINE .'dist/:' .
 		_DIR_RACINE .'dist/javascript/:' . // +
 		_DIR_RESTREINT);
