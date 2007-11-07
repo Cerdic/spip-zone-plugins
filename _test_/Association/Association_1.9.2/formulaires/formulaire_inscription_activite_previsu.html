@@ -30,7 +30,7 @@
 		<span class='spip_form_label'>
 			<label for="telephone"><:asso:adherent_libelle_telephone:> :</label>
 		</span>	
-		<input name="cp" type="text" class="choix" size="40" value="[(#ENV{telephone})]" /> 
+		<input name="telephone" type="text" class="choix" size="40" value="[(#ENV{telephone})]" /> 
 	</div>
 	<p class='spip_form_label'><:asso:activite_libelle_accompagne_de:> :</p>
 	<div class='spip_form_champs'>
@@ -55,7 +55,6 @@
 	<div class='spip_form_champs'>
 		<span class='spip_form_label'>
 			<label for="montant"><:asso:activite_libelle_montant_inscription:> :</label>
-			[<span class="spip_form_erreur">(#ENV{erreur_montant})</span>]
 		</span>
 		<input name="montant" type="text" id="montant" size="40" value="[(#ENV{montant})]" />
 	</div>

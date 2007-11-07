@@ -42,7 +42,11 @@
 		$commentaire=_request('commentaire');
 		$bouton=_request('bouton');
 		
-		if ($bouton=='Confirmer'){	
+		if ($bouton=='Confirmer'){		
+			
+			//enregistrement dans la table
+			spip_query ( " INSERT INTO spip_asso_activites (id_evenement, nom, id_adherent, membres, non_membres, inscrits, email, date, adresse, telephone, montant, commentaire) VALUES ("._q($id_evenement).","._q($nom).", "._q($id_adherent).", "._q($membres).", "._q($non_membres).", "._q($inscrits).", "._q($email).", NOW(), "._q($adresse).", "._q($telephone).", "._q($montant).", "._q($commentaire).") ");
+			
 			//on envoit des emails
 			
 			$nom_asso=lire_config('association/nom');
@@ -97,10 +101,7 @@
 				'commentaire'=>$commentaire,
 				'nomasso'=>$nom_asso
 			));
-			envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );
-			
-			//enregistrement dans la table
-			spip_query ( " INSERT INTO spip_asso_activites (id_evenement, nom, id_adherent, membres, non_membres, inscrits, email, date, telephone, montant, commentaire) VALUES ("._q($id_evenement).","._q($nom).", "._q($id_adherent).", "._q($membres).", "._q($non_membres).", "._q($inscrits).", "._q($email).", NOW(), "._q($telephone).", "._q($montant).", "._q($commentaire).") ");	
+			envoyer_mail ( $adresse, $sujet, $message, $from = $expediteur, $headers = $entetes );	
 			
 		}
 		else {
@@ -121,10 +122,6 @@
 				}
 				if ( empty($inscrits) ){
 					$erreur_inscrits='Nombre d\'inscrits manquant !';
-					$bouton='Soumettre';
-				}
-				if ( empty($montant) ){
-					$erreur_montant='Montant de la participation manquant !';
 					$bouton='Soumettre';
 				}
 				
