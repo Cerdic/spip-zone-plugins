@@ -18,10 +18,12 @@
 	function exec_action_relances(){
 		global $connect_statut, $connect_toutes_rubriques;
 		
-		debut_page();
+		include_spip ('inc/acces_page');
 		
-		$url_asso = generer_url_ecrire('association');
 		$url_action_relances = generer_url_ecrire('action_relances');
+		$url_retour=$_POST['url_retour'];
+		
+		debut_page();
 		
 		association_onglets();
 		
@@ -30,6 +32,10 @@
 		debut_boite_info();
 		echo association_date_du_jour();	
 		fin_boite_info();
+		
+		debut_raccourcis();
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
+		fin_raccourcis();
 		
 		debut_droite();
 		
@@ -42,7 +48,7 @@
 		$statut=$_POST['statut'];
 		$email_tab=(isset($_POST["email"])) ? $_POST["email"]:array();
 		$statut_tab=(isset($_POST["statut"])) ? $_POST["statut"]:array();
-		$relance_tab=(isset($_POST["relance"])) ? $_POST["relance"]:array();
+		$id_tab=(isset($_POST["id"])) ? $_POST["id"]:array();
 		$count=count ($email_tab);
 		
 		//On prépare le mail et on envoi! On peut modifier le $headers à  sa guise
@@ -67,12 +73,12 @@
 		for ( $i=0 ; $i < $count ; $i++ ) {
 			$email = $email_tab[$i];
 			$statut = $statut_tab[$i];
-			$relance = $relance_tab[$i];
+			$id = $id_tab[$i];
 			
-			if ( isset ( $relance ) ) {
+			if ( isset ( $id ) ) {
 				envoyer_mail ( $email, $sujet, $message, $from = $expediteur, $headers = $entetes );
 				if ($statut=="echu"){
-					spip_query("UPDATE spip_asso_adherents SET statut='relance' WHERE id_adherent = '$relance' ");
+					spip_query("UPDATE spip_auteurs_elargis SET statut_interne='relance' WHERE id = '$id' ");
 				}
 			}
 		}
@@ -85,7 +91,7 @@
 		echo '</strong></p>';
 		
 		//remettre le champ 0 à  1 et réactualiser la date
-		//spip_query("UPDATE spip_adherents SET regle_le='relance',date_jour=NOW() WHERE id_ad=$id");	
+		//spip_query("UPDATE spip_auteurs_elargis SET regle_le='relance',date_jour=NOW() WHERE id_ad=$id");	
 		
 		fin_cadre_relief();  
 		fin_page();

@@ -20,6 +20,7 @@
 		
 		$url_edit_compte = generer_url_ecrire('edit_compte');
 		$url_edit_activite = generer_url_ecrire('edit_activite');
+		$url_edit_pret = generer_url_ecrire('edit_pret','action=modifie');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		
 		$id_auteur= $_GET['id'];
@@ -68,7 +69,7 @@
 		echo '<td><strong>&nbsp;</strong></td>';
 		echo '</tr>';
 		
-		$query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_auteur ORDER BY date DESC" );
+		$query = spip_query ("SELECT * FROM spip_asso_comptes WHERE id_journal=$id_adherent ORDER BY date DESC" );
 		//$query = "SELECT * FROM spip_asso_comptes WHERE date_format( date, '%Y' ) = '$annee' AND imputation like '$imputation'  ORDER BY date DESC LIMIT $debut,$max_par_page";
 		while ($data = spip_fetch_array($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
@@ -91,13 +92,12 @@
 			echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_id').'</strong></td>';
 			echo '<td><strong>'._T('asso:adherent_entete_date').'</strong></td>';
 			echo '<td><strong>'._T('asso:adherent_entete_activite').'</strong></td>';
-			echo '<td><strong>'._T('asso:adherent_entete_lieu').'</strong></td>';
 			echo '<td style="text-align:right;"><strong>'._T('asso:adherent_entete_inscrits').'</strong></td>';
 			echo '<td><strong>'._T('asso:adherent_entete_statut').'</strong></td>';
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			$critere='id_adherent='.$id_adherent;
-			if($indexation=='id_asso'){$critere='id_adherent='.$id_asso;} 
+			if($indexation=='id_asso'){$critere='id_adherent='._q($id_asso);} 
 			$query = spip_query ("SELECT * FROM spip_asso_activites WHERE ".$critere." ORDER BY date DESC" );			
 			while ($data = spip_fetch_array($query)) {
 				$id_evenement=$data['id_evenement'];
@@ -109,7 +109,6 @@
 					//echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.association_datefr($date).'</td>';
 					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$date.'</td>';
 					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$evenement['titre'].'</td>';
-					echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$evenement['lieu'].'</td>';
 				}
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['inscrits'].'</td>';
 				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['statut'].'</td>';
@@ -135,7 +134,31 @@
 		// FICHE HISTORIQUE PRETS
 		if (lire_config('association/prets')=="on"){
 			echo '<fieldset><legend>'._T('asso:adherent_titre_historique_prets').'</legend>';
-			echo 'A d&eacute;velopper';
+			echo "<table border=0 cellpadding=2 cellspacing=0 width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
+			echo '<tr bgcolor="#DBE1C5">';
+			echo '<td>&nbsp;</td>';
+			echo '<td style="text-align:right;"><strong>'._T('asso:pret_entete_id').'</strong></td>';
+			echo '<td><strong>'._T('asso:pret_entete_article').'</strong></td>';
+			echo '<td style="text-align:right;"><strong>'._T('asso:pret_entete_date_sortie').'</strong></td>';
+			echo '<td style="text-align:right;"><strong>'._T('asso:pret_entete_date_retour').'</strong></td>';
+			echo '<td><strong>&nbsp;</strong></td>';
+			echo '</tr>';
+			if($indexation=='id_asso'){$critere='id_emprunteur='._q($id_asso);} else {$critere='id_emprunteur='._q($id_adherent);}
+			$query = spip_query ("SELECT * FROM spip_asso_prets LEFT JOIN spip_asso_ressources ON spip_asso_prets.id_ressource=spip_asso_ressources.id_ressource WHERE ".$critere." ORDER BY id_pret DESC" );			
+			while ($data = spip_fetch_array($query)) {
+				echo '<tr style="background-color: #EEEEEE;">';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">';
+				echo '<img src="/dist/images/puce-'.$puce.'.gif"></td>';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.$data['id_pret'].'</td>';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;">'.$data['intitule'].'</td>';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">'.association_datefr($data['date_sortie']).'</td>';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:right;">';
+				if($data['date_retour']=="0000-00-00"){echo '&nbsp;';} else {echo association_datefr($data['date_retour']);}
+				echo '</td>';
+				echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;text-align:center"><a href="'.$url_edit_pret.'&id='.$data['id_pret'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="'._T('asso:adherent_bouton_maj_pret').'"></a></td>';
+				echo '</tr>';
+			}
+			echo '</table>';
 			echo '</fieldset>';
 		}
 		

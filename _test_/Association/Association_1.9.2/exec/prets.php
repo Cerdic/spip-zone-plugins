@@ -20,7 +20,7 @@
 		
 		$url_prets = generer_url_ecrire('prets');
 		$url_ajout_pret=generer_url_ecrire('edit_pret','action=ajoute');
-		$url_edit_pret=generer_url_ecrire('edit_pret');
+		$url_edit_pret=generer_url_ecrire('edit_pret','action=modifie');
 		$url_action_prets=generer_url_ecrire('action_prets');
 		$url_retour = $_SERVER['HTTP_REFERER'];
 		$id_ressource=$_REQUEST['id'];

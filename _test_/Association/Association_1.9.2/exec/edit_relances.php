@@ -22,6 +22,7 @@
 		$url_edit_relances = generer_url_ecrire('edit_relances');
 		$url_edit_labels = generer_url_ecrire('edit_labels');
 		$indexation = lire_config('association/indexation');
+		$url_retour = $_SERVER["HTTP_REFERER"];
 		
 		association_onglets();
 		
@@ -30,6 +31,11 @@
 		debut_boite_info();
 		echo association_date_du_jour();	
 		fin_boite_info();
+		
+		debut_raccourcis();
+		icone_horizontale(_T('asso:bouton_impression'), $url_edit_labels, _DIR_PLUGIN_ASSOCIATION."/img_pack/print-24.png","rien.gif");	
+		icone_horizontale(_T('asso:bouton_retour'), $url_retour, _DIR_PLUGIN_ASSOCIATION."/img_pack/retour-24.png","rien.gif");	
+		fin_raccourcis();
 		
 		debut_droite();
 		
@@ -46,17 +52,16 @@
 		echo '</fieldset>';
 		
 		// FILTRES
-		if ( isset ($_POST['statut'] )) { $statut = $_POST['statut']; }
-		else { $statut= "echu"; }
+		if ( isset ($_POST['statut_interne'] )) { $statut = $_POST['statut_interne']; }
+		else { $statut_interne= "echu"; }
 		
 		echo '<table width="100%">';
 		echo '<tr>';
-		echo '<td><a href=" '.$url_edit_labels.'">Etiquettes</a></td>';
 		echo '<td style="text-align:right;">';
 		echo '<form method="post" action="#">';
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
-		echo '<select name ="statut" class="fondl" onchange="form.submit()">';
-		foreach (array('ok','echu','relance','sorti','prospect','tous') as $var) {
+		echo '<select name ="statut_interne" class="fondl" onchange="form.submit()">';
+		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
 			echo '<option value="'.$var.'"';
 			if ($var==$statut) {echo ' selected="selected"';}
 			echo '> '._T('asso:adherent_entete_statut_'.$var).'</option>';
@@ -81,16 +86,14 @@
 		echo '<td><strong>Validit&eacute;</strong></td>';
 		echo '<td><strong>Env</strong></td>';
 		echo '</tr>';
-		$query = spip_query ("SELECT * FROM spip_asso_adherents WHERE email <> ''  AND statut like '$statut' AND statut <> 'sorti' ORDER by nom" );
-		$i=0;
+		$query = spip_query ( "SELECT * FROM spip_auteurs_elargis LEFT JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur LEFT JOIN spip_auteurs ON spip_auteurs.id_auteur=spip_auteurs_elargis.id_auteur WHERE email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti' ORDER by nom_famille" );
 		while ($data = spip_fetch_array($query)) {
-			$i++;
-			$id_adherent=$data['id_adherent'];
+			$id_adherent=$data['id'];
 			
-			switch($data['statut']) {
+			switch($data['statut_interne']) {
 				case "echu": $class= "impair"; break;
 				case "ok": $class="valide"; break;
-			    case "relance": $class="pair"; break;
+				case "relance": $class="pair"; break;
 				case "prospect": $class="prospect"; break;	   
 			}
 			
@@ -99,15 +102,17 @@
 			if ($indexation=="id_asso") { echo $data["id_asso"];}
 			else { echo $data["id_adherent"];}
 			echo '</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data["nom"].'</td>';
+			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data["nom_famille"].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['prenom'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['telephone'].'</td>';
-			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['portable'].'</td>';
+			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.$data['mobile'].'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;">'.association_datefr($data['validite']).'</td>';
 			echo '<td class ='.$class.' style="border-top: 1px solid #CCCCCC;text-align:center;">';
-			echo '<input name="relance[]" type="checkbox" value="'.$data['id_adherent'].'" checked >';
-			echo '<input type="hidden" name="statut[]" value="'.$statut.'">';
-			echo '<input type="hidden" name="email[]" value="'.$data["email"].'">';
+			echo '<input name="id_adherent[]" type="checkbox" value="'.$data['id_adherent'].'" checked >';
+			echo '<input name="id_asso[]" type="checkbox" value="'.$data['id_asso'].'" checked >';
+			echo '<input name="statut[]" type="hidden" value="'.$statut_interne.'">';
+			echo '<input name="email[]" type="hidden" value="'.$data["email"].'">';
+			echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
 			echo '</td>';
 			echo '</tr>';
 		}

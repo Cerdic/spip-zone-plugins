@@ -28,19 +28,19 @@ $pdf=new PDF();
 $pdf->Open();
 $pdf->AddPage();
 //On définit les colonnes (champs,largeur,intitulé,alignement)
-$pdf->AddCol('id_adherent',10,_T('asso:adherent_libelle_id'),'R');
-$pdf->AddCol('nom',50,_T('asso:adherent_libelle_nom'),'L');
+$pdf->AddCol('id',10,_T('asso:adherent_libelle_id'),'R');
+$pdf->AddCol('nom_famille',50,_T('asso:adherent_libelle_nom'),'L');
 $pdf->AddCol('prenom',40,_T('asso:adherent_libelle_prenom'),'L');
 $pdf->AddCol('ville',50,_T('asso:adherent_libelle_ville'),'L');
 $pdf->AddCol('id_asso',20,_T('asso:adherent_libelle_reference_interne_abrev'),'R');
 $pdf->AddCol('categorie',40,_T('asso:adherent_libelle_categorie'),'L');
 $pdf->AddCol('validite',20,_T('asso:adherent_libelle_validite'),'L');
-$pdf->AddCol('statut',15,'Statut','L');
+$pdf->AddCol('statut_interne',15,'Statut','L');
 $prop=array(
 		'HeaderColor'=>array(255,150,100),
           'color1'=>array(224,235,255),
           'color2'=>array(255,255,255),
           'padding'=>2);
-$pdf->Table("SELECT * FROM spip_asso_adherents WHERE $critere ORDER BY nom,prenom",$prop);
+$pdf->Table("SELECT * FROM spip_auteurs_elargis WHERE $critere ORDER BY nom_famille,prenom",$prop);
 $pdf->Output();
 ?>

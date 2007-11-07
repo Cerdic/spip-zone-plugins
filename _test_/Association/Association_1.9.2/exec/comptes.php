@@ -68,10 +68,8 @@
 		fin_boite_info();	
 		
 		debut_raccourcis();
-		echo '<p>';
 		icone_horizontale(_T('Bilan'), $url_bilan, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/finances.jpg','rien.gif');
 		icone_horizontale(_T('Ajouter une op&eacute;ration'), $url_ajout_compte, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','creer.gif' );
-		echo '</p>';
 		fin_raccourcis();
 		
 		debut_droite();

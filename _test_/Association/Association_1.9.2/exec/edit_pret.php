@@ -80,11 +80,7 @@
 			$date_sortie=date('Y-m-d');
 		} 
 		
-		echo '<form action="'.$url_action_prets.'&action='.$action.'" method="post">';			
-		echo '<input name="id_pret" type="hidden" value="'.$id_pret.'" />';
-		echo '<input name="id_ressource" type="hidden" value="'.$id_ressource.'" />';		
-		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
-		echo '<input name="action" type="hidden" value="'.$action.'">';
+		echo '<form action="'.$url_action_prets.'" method="post">';			
 		
 		// Cadre Réservation
 		echo '<fieldset>';
@@ -120,6 +116,11 @@
 		echo '<label for="commentaire_retour"><strong>'._T('asso:prets_libelle_commentaires').' :</strong></label>';
 		echo '<textarea name="commentaire_retour" id="commentaire_retour" class="formo" />'.$commentaire_retour.'</textarea>';
 		echo '</fieldset>';
+		
+		echo '<input name="id" type="hidden" value="'.$id_pret.'" />';
+		echo '<input name="id_ressource" type="hidden" value="'.$id_ressource.'" />';		
+		echo '<input name="url_retour" type="hidden" value="'.$url_retour.'">';
+		echo '<input name="action" type="hidden" value="'.$action.'">';
 		
 		echo '<div style="float:right;"><input name="submit" type="submit" value="';
 		if ( isset($action)) {echo _T('asso:bouton_'.$action);}

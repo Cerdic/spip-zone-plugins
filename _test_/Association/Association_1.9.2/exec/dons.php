@@ -22,15 +22,15 @@
 		$url_ajout_don= generer_url_ecrire('edit_don','action=ajoute');
 		$url_edit_don =generer_url_ecrire('edit_don','action=modifie');
 		$url_action_dons = generer_url_ecrire('action_dons');
-
+		
 		debut_page(_T('Gestion pour  Association'), "", "");
-
+		
 		association_onglets();
 		
 		debut_gauche();
 		
 		debut_boite_info();
-		echo association_date_du_jour();	
+		association_date_du_jour();
 		fin_boite_info();
 		
 		debut_raccourcis();

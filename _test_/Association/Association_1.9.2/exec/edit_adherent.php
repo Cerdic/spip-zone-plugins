@@ -80,9 +80,9 @@
 			echo '> '.$var['libelle'].'</option>';
 		}
 		echo '</select>';
-		echo	'<label for="validite"><strong>'._T('adherent_libelle_validite').' :</strong></label>';
+		echo	'<label for="validite"><strong>'._T('asso:adherent_libelle_validite').' :</strong></label>';
 		echo '<input name="validite" value="'.$validite.'" type="text" id="validite" class="formo" />';
-		echo	'<label for="statut_interne"><strong>'._T('adherent_libelle_statut').' :</strong></label>';
+		echo	'<label for="statut_interne"><strong>'._T('asso:adherent_libelle_statut').' :</strong></label>';
 		echo '<select name ="statut_interne" id="statut_interne" class="formo">';
 		foreach (array(ok,echu,relance,sorti,lire_config('inscription2/statut_interne')) as $var) {
 			echo '<option value="'.$var.'"';
