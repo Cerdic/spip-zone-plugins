@@ -1,5 +1,37 @@
 <?php
 
+/*! \brief fonction controlant que le document founit est convertible
+ *
+ *  Vérifie que le document donné en paramétre est bien listé dans les types de documents autorisés à la conversion via CFG
+ *  
+ *  \param $id_document identifiant du document à controler
+ *  \return booleen $resultat : true document convertible, false sinon
+ */
+function controler_document($id_document) {
+
+    include_spip('base/compat193');
+    include_spip('cfg_options');    
+
+    //on recupere l'extension du document
+    $sql = "SELECT extension
+                FROM spip_documents
+                LEFT JOIN spip_types_documents ON spip_documents.id_type = spip_types_documents.id_type
+                WHERE id_document =".$id_document;
+    $res = sql_fetch(spip_query($sql));
+
+    //on lit la chaine de caractéres listant les extensions autorisées
+    $types_autorises = lire_config("doc2img/format_document",null,true);
+
+    //on controle si le document est convertible ou non
+    if (preg_match("/".$res['extension']."/i",$types_autorises)) {
+        spip_log("Document autorisé à la conversion","doc2img");
+        return true;
+    } else {
+        spip_log("Document refusé à la conversion","doc2img");
+        return false;
+    }
+}
+
 /*! \brief fonction autonome convertissant un document donné en paramétre
  *
  *  Ensemble des actions necessaires à la conversion d'un document en image :
@@ -102,7 +134,7 @@ function convertir_document($id_document) {
             //on sauve les informations
             spip_query($sql);
             //on libére la frame
-            imagick_free($handle_frame);                
+            imagick_free($handle_frame);        
         }
         //on libére les ressources
         imagick_free($handle );

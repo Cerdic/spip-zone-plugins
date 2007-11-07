@@ -127,6 +127,7 @@ function doc2img_installer($version,$version_finale) {
             );
         	//par d‚faut juste le champ d'id text_area est corrigeable
 			ecrire_meta('doc2img',serialize($cfg));
+        //passage en 0.4, rien à faire
 		case 0.3 :
     }
 

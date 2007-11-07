@@ -33,4 +33,31 @@ function doc2img_affiche_gauche($flux) {
 	return $flux;
 }
 
+
+/*! \brief surcharge de post_edition
+ *
+ *  Pipeline gérant la conversion à la volée des documents
+ *    
+ *  \param $flux flux html de la partie gauche
+ *  \return $flux renvoi le flux html complété  
+ */  
+function doc2img_post_edition($flux) {
+    spip_log('document (tele)chargé','doc2img');
+
+    $id_document = $flux['args']['id_objet'];
+    spip_log('id_document'.$id_document,'doc2img');
+
+    include_once('inc/convertir.php');
+//	include_spip('inc/convertir');
+
+    if (($flux['args']['operation'] == 'ajouter_document') 
+            && (controler_document($id_document) == true)
+            && (lire_config('doc2img/conversion_auto') == "on"))  {
+	    spip_log('document '.$id_document.' en conversion automatique','doc2img');
+	    convertir_document($id_document);
+    }
+
+	return $flux;
+}
+
 ?>

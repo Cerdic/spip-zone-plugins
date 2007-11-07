@@ -10,7 +10,8 @@
     width : 10em;
 }
 
-.cfg_doc2img fieldset input#proportion {
+.cfg_doc2img fieldset input#proportion,
+.cfg_doc2img fieldset input#conversion_auto {
     width : 1em;
     margin : 0;
 }

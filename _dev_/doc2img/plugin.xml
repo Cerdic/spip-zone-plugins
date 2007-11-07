@@ -36,6 +36,15 @@
        <inclure>pipeline.php</inclure>
    </pipeline>
 
+    <pipeline>
+       <!-- voir la page sur doc.spip.org, pour connaitre l'ensemble des pipeline -->
+       <nom>post_edition</nom>
+       <!-- nom de la fonction a appelé sans son prefixe -->
+       <action>post_edition</action>
+       <!-- chemin du fichier contenant la fonction -->
+       <inclure>pipeline.php</inclure>
+   </pipeline>   
+   
    <chemin dir='' />
 
 </plugin>
