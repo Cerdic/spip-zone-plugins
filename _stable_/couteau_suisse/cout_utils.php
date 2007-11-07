@@ -330,10 +330,10 @@ function cs_initialise_includes() {
 	}
 	$infos_pipelines['code_options'][] = "// Table des traitements\n" . join("\n", $traitements_utilises);
 	// effacement du repertoire temporaire de controle
-	if (@file_exists(_DIR_CS_TMP)) {
-		include_spip('inc/getdocument');
-		effacer_repertoire_temporaire(_DIR_CS_TMP);
-		@mkdir(_DIR_CS_TMP, _SPIP_CHMOD);
+	if (@file_exists(_DIR_CS_TMP) && ($handle = @opendir(_DIR_CS_TMP))) {
+		while (($fichier = @readdir($handle)) !== false)
+			if ($fichier[0] != '.')	supprimer_fichier(_DIR_CS_TMP.$fichier);
+		closedir($handle);
 	} else spip_log('Erreur - cs_initialise_includes() : '._DIR_CS_TMP.' introuvable !');
 	// installation de $cs_metas_pipelines
 	set_cs_metas_pipelines_fichier($infos_pipelines, 'options');
