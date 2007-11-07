@@ -142,7 +142,7 @@ function jeux_affiche_droite($flux){
 }
 
 function jeux_taches_generales_cron($taches_generales){
-	$taches_generales['jeux_cron'] = 10 ;
+	$taches_generales['jeux_cron'] = 60 * 20; // 20 minutes
 	return $taches_generales;
 }
 
