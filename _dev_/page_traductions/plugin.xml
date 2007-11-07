@@ -1,0 +1,35 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	MODELE{page_traductions}
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Suske
+_ &#169; 2007 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	experimental
+	</etat>
+	<description>
+	Un modèle qui permet de placer sur tous les éléments SPIP des liens de traductions identiques à ceux fournis en standard dans la dist pour les articles. En version 0.1, il se base sur les langues du site. La version 1.0 devra permettre de s'appuyer aussi sur la présence de champs multi dans l'élément #TITRE (option de configuration). J'espère aussi en faire une balise ?
+	
+	Insérer <code>#MODELE{page_traductions}</code> dans les squelettes.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
+	</options>
+	<fonctions> <!-- fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
+	page_traductions_fonctions.php
+	</fonctions>
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	page_traductions
+	</prefix>
+	
+</plugin>
