@@ -61,7 +61,6 @@ function exec_amocles_configuration () {
   , $connect_id_rubrique
   , $spip_lang_left
   , $spip_lang_right
-  , $spip_display
   ;
 
 	include_spip('inc/presentation');
@@ -122,7 +121,7 @@ function exec_amocles_configuration () {
 						sort($ids);
 						$ids = array_unique($ids);
 					}
-					__plugin_ecrire_s_meta('admins_groupes_mots_ids', $ids, _AMOCLES_META_PREFERENCES);
+					__plugin_ecrire_key_in_serialized_meta('admins_groupes_mots_ids', $ids, _AMOCLES_META_PREFERENCES);
 					__ecrire_metas();
 					spip_log($ii." KEYWORDS ID(s) ADDED BY ID_AUTEUR #".$connect_id_auteur, _AMOCLES_PREFIX);
 				}
@@ -311,7 +310,7 @@ function exec_amocles_configuration () {
 		. gros_titre(_T(_AMOCLES_LANG."administration_mots_cles"), "", false)
 		. barre_onglets($rubrique, _AMOCLES_PREFIX)
 		. debut_gauche($rubrique, true)
-		. __plugin_boite_meta_info(true)
+		. __plugin_boite_meta_info(_AMOCLES_PREFIX, true)
 		. $message_gauche
 		;
 	
@@ -438,13 +437,7 @@ function exec_amocles_configuration () {
 		;
 	
 	echo($page_result);
-	echo __plugin_html_signature(true), fin_gauche(), fin_page();
-	//phpinfo();
-	//phpinfo(INFO_VARIABLES);
-/*	foreach($_FILES as $key=>$value) {
-		echo("$key => $value<br>\n");
-	}
-	*/
+	echo __plugin_html_signature(_AMOCLES_PREFIX, true), fin_gauche(), fin_page();
 	return(true);
 }
 

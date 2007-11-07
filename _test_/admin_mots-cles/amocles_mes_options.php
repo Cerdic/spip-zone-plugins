@@ -48,8 +48,6 @@
 	
 	*****************************************************/
 
-
-
 if (!defined('_DIR_PLUGIN_AMOCLES')) {
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_AMOCLES',(_DIR_PLUGINS.end($p)).'/');

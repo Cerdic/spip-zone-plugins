@@ -131,7 +131,7 @@ function amocles_supprimer_admin_et_rediriger ($type, $id, $id_auteur, $redirect
 					}
 				}
 				if(count($result)) {
-					__plugin_ecrire_s_meta ('admins_groupes_mots_ids', $result, _AMOCLES_META_PREFERENCES);
+					__plugin_ecrire_key_in_serialized_meta ('admins_groupes_mots_ids', $result, _AMOCLES_META_PREFERENCES);
 					__ecrire_metas();
 					spip_log("KEYWORDS ADMIN #$id_auteur REMOVED BY ID_AUTEUR #$connect_id_auteur", _AMOCLES_PREFIX);
 				}
@@ -160,7 +160,7 @@ function amocles_ajouter_admin_et_redirige($type, $id, $id_auteur, $redirect) {
 			if(!in_array($id_auteur, $ids)) {
 				$ids[] = $id_auteur;
 				sort($ids);
-				__plugin_ecrire_s_meta('admins_groupes_mots_ids', $ids, _AMOCLES_META_PREFERENCES);
+				__plugin_ecrire_key_in_serialized_meta('admins_groupes_mots_ids', $ids, _AMOCLES_META_PREFERENCES);
 				__ecrire_metas();
 				spip_log("KEYWORDS ADMIN #$id_auteur ADDED BY ID_AUTEUR #$connect_id_auteur", _AMOCLES_PREFIX);	
 			}

@@ -10,7 +10,7 @@
 	 -->
 	<nom>Administration des mots-clés</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.2001</version>
+	<version>0.2002</version>
 	<etat>test</etat>
 	<icon>images/amocles.png</icon>
 	<description>Permet de :<ul><li>déléguer l'administration des mots-clés</li><li>importer et exporter vos mots-clés via un fichier texte.</li></ul></description>

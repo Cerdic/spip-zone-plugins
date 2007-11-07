@@ -66,9 +66,8 @@ function amocles_ajouter_onglets ($flux) {
 		&& ($connect_statut == '0minirezo')
 		&& $connect_toutes_rubriques
 		) {
-		
 		$flux['data'][_AMOCLES_PREFIX] = new Bouton( 
-			_DIR_PLUGIN_AMOCLES_IMG_PACK."groupe-mots-24.png"
+			_DIR_PLUGIN_AMOCLES_IMG_PACK."groupe-mot-24.png"
 			, _T('icone_mots_cles')
 			, generer_url_ecrire("amocles_configuration")
 			)

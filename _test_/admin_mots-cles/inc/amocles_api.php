@@ -50,16 +50,17 @@
 
 include_spip('inc/plugin');
 
+/**/
 if(!function_exists('__plugin_html_signature')) {
 	// petite signature de plugin
 	// du style "Dossier plugin [version]"
-	function __plugin_html_signature ($return = false, $html = true) {
+	function __plugin_html_signature ($prefix, $return = false, $html = true) {
 	
-		$info = plugin_get_infos($plug_file = __plugin_dirname());
+		$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
 		$nom = typo($info['nom']);
 		$version = typo($info['version']);
 		//$base_version = typo($info['version_base']); // cache ?
-		$base_version = __plugin_current_version_base_get(__plugin_real_tag_get('prefix'));
+		$base_version = __plugin_current_version_base_get($prefix);
 		$revision = "";
 		if($html) {
 			$version = (($version) ? " <span style='color:gray;'>".$version."</span>" : "");
@@ -76,84 +77,35 @@ if(!function_exists('__plugin_html_signature')) {
 		if($return) return($result);
 		else echo($result);
 	}
-}
+} // end if __plugin_html_signature
 
-if(!function_exists('__plugin_dirname')) {
-	// renvoie le nom du répertoire du plugin
-	function __plugin_dirname() {
-		$p = trim(dirname(preg_replace("/.*".basename(_DIR_PLUGINS)."(.*)/", "$1", realpath(dirname(__FILE__)))), "/");
-		return($p);
-	}
-}
-
-if(!function_exists('__plugin_meta_info')) {
-	// renvoie le tableau meta du plugin
-	function __plugin_meta_info($prefix = "") {
-		if(empty($prefix)) {
-			$prefix = __plugin_real_prefix_get();
-		}
-		if(!empty($prefix)) {
-			$meta_plugin = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : '';
-			if(!empty($meta_plugin) && is_array($result = unserialize($meta_plugin)) && isset($result[$prefix]) && is_array($result = $result[$prefix])) {
-				return($result);
-			}
-		}
-		return(false);
-	}
-}
-
-if(!function_exists('__plugin_real_prefix_get')) {
-	// renvoie le prefix du fichier plugin.xml
-	function __plugin_real_prefix_get () {
-		$r = __plugin_real_tag_get('prefix');
-		return ($r ? strtoupper($r) : false);
-	}
-}
-
-if(!function_exists('__plugin_real_tag_get')) {
-	function __plugin_real_tag_get ($s) {
-			
-		$f = _DIR_PLUGINS.__plugin_dirname()."/"._FILE_PLUGIN_CONFIG;
-	
-		if(is_readable($f) && ($c = file_get_contents($f))) {
-			$p = array("/<!--(.*?)-->/is","/<\/".$s.">.*/s","/.*<".$s.">/s");
-			$r = array("","","");
-			$r = preg_replace($p, $r, $c);
-		}
-		return(!empty($r) ? $r : false);
-	}
-}
-
+/**/
 if(!function_exists('__plugin_boite_meta_info')) {
 	// affiche un petit bloc info sur le plugin
-	function __plugin_boite_meta_info ($return = false, $prefix = "") {
-		global $spip_lang_right;
-	
+	function __plugin_boite_meta_info ($prefix, $return = false) {
+		include_spip('inc/meta');
 		$result = false;
-		if(empty($prefix)) {
-			$prefix = __plugin_real_prefix_get();
-		}
-		$info = plugin_get_infos($plug_file = __plugin_dirname());
-		$icon = 
-			(isset($info['icon']))
-			? "<div "
-				. " style='width:64px;height:64px;"
-					. "margin:0 auto 1em;"
-					. "background: url(". _DIR_PLUGINS.$plug_file.'/'.trim($info['icon']).") no-repeat center center;overflow: hidden;'"
-				. " title='Logotype plugin'>"
-				. "</div>\n"
-			: ""
-			;
-		
-		if($info = __plugin_meta_info($prefix)) {
-			foreach($info as $k=>$v) {
-				$result .= "<li><span style='font-weight:bold;font-variant: small-caps;'>$k</span> : $v</li>";
-			}
+		if(!empty($prefix)) {
+			$meta_info = __plugin_get_meta_infos($prefix); // dir et version
+			$info = plugin_get_infos($meta_info['dir']);
+			$icon = 
+				(isset($info['icon']))
+				? "<div "
+					. " style='width:64px;height:64px;"
+						. "margin:0 auto 1em;"
+						. "background: url(". _DIR_PLUGINS.$meta_info['dir']."/".trim($info['icon']).") no-repeat center center;overflow: hidden;'"
+					. " title='Logotype plugin $prefix'>"
+					. "</div>\n"
+				: ""
+				;
+			//$result .= __plugin_boite_meta_info_liste($info, true); // pour DEBUG
+			$result .= __plugin_boite_meta_info_liste($info, false);
+			$result .= __plugin_boite_meta_info_liste($meta_info, true);
 			if(!empty($result)) {
 				$result = ""
 					. debut_cadre_relief('plugin-24.gif', true, '', $prefix)
 					. $icon
-					. "<ul style='margin:0;padding:0 1ex;list-style: none;' class='verdana2'>$result</ul>"
+					. $result
 					. fin_cadre_relief(true)
 					;
 			}
@@ -161,21 +113,77 @@ if(!function_exists('__plugin_boite_meta_info')) {
 		if($return) return($result);
 		else echo($result);
 	}
-}
+	/**/
+	function __plugin_boite_meta_info_liste($array, $recursive = false) {
+		global $spip_lang_left;
+		$result = "";
+		if(is_array($array)) {
+			foreach($array as $key=>$value) {
+				$sub_result = "";
+				if(is_array($value)) {
+					if($recursive) {
+						$sub_result = __plugin_boite_meta_info_liste($value);
+					}
+				}
+				else {
+					$sub_result = propre($value);
+				}
+				if(!empty($sub_result)) {
+					$result .= "<li><span style='font-weight:bold;'>$key</span> : $sub_result</li>\n";
+				}
+			}
+			if(!empty($result)) {
+				$result = "<ul style='margin:0;padding:0 1ex;list-style: none;text-align: $spip_lang_left;' class='verdana2'>$result</ul>";
+			}
+		}
+		return($result);
+	}
+} // end if __plugin_boite_meta_info
 
+/**/
+if(!function_exists('__plugin_get_meta_infos')) {
+	// renvoie les infos du plugin contenues dans les metas
+	// qui contient 'dir' et 'version'
+	function __plugin_get_meta_infos ($prefix) {
+		if(isset($GLOBALS['meta']['plugin'])) {
+			$result = unserialize($GLOBALS['meta']['plugin']);
+			$prefix = strtoupper($prefix);
+			if(isset($result[$prefix])) {
+				return($result[$prefix]);
+			}
+		}
+		return(false);
+	}
+} // end if __plugin_get_meta_infos
+
+/**/
+if(!function_exists('__plugin_get_meta_dir')) {
+	// renvoie le dir du plugin
+	// présent dans les metas
+	function __plugin_get_meta_dir($prefix) {
+		$result = false;
+		$info = __plugin_get_meta_infos($prefix);
+		if(isset($info['dir'])) {
+			$result = $info['dir'];
+		}
+		return($result);
+	}
+} // end if __plugin_get_meta_dir
+
+/**/
 if(!function_exists('__plugin_current_version_base_get')) {
 	// renvoie la version_base en cours
 		// doc: voir inc/plugin.php sur version_base (plugin.xml)
 		// qui s'appelle base_version en spip_meta %-}
 	function __plugin_current_version_base_get ($prefix) {
-		$ii = $prefix."_base_version";
-		return(isset($GLOBAL['meta'][$ii]) ? $GLOBAL['meta'][$ii] : false);
+		return(lire_meta($prefix."_base_version"));
 	}
-}
+} // end if __plugin_current_version_base_get
 
-if(!function_exists('__plugin_ecrire_s_meta')) {
+
+if(!function_exists('__plugin_ecrire_key_in_serialized_meta')) {
 	// ecriture dans les metas, format sérialisé
-	function __plugin_ecrire_s_meta ($key, $value, $meta_name) {
+	function __plugin_ecrire_key_in_serialized_meta ($key, $value, $meta_name) {
 		$s_meta = unserialize($GLOBALS['meta'][$meta_name]);
 		$s_meta[$key] = $value;
 		ecrire_meta($meta_name, serialize($s_meta));
