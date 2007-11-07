@@ -148,6 +148,9 @@ function amocles_editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, 
 	. '</div>'
 	;
 
+	if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) { 
+		return ajax_action_greffe("editer_auteurs-$id", "", $res);
+	}
 	return ajax_action_greffe("editer_auteurs-$id", $res);
 }
 

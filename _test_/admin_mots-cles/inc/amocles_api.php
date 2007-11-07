@@ -231,4 +231,10 @@ function amocles_admins_groupes_mots_get_ids () {
 	return($result);
 }
 
+// charge les vieilles def nécessaires si besoin
+if(version_compare($GLOBALS['spip_version_code'],'1.9300','>=')) { 
+	include_spip("inc/amocles_api_vieilles_defs");
+}
+
+
 ?>
