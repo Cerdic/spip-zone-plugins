@@ -16,8 +16,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@mutualiser_creer
 function mutualiser_creer($e, $options) {
 	include_spip('inc/minipres');
+	include_spip('base/abstract_sql');
+	include_spip('base/abstract_mutu');
+	
 	$GLOBALS['meta']["charset"] = 'utf-8'; // pour que le mail fonctionne
-
+	
+	//$GLOBALS['spip_connect_version'] = 0.7;
+	
+	if (!defined('_INSTALL_SERVER_DB'))
+		define('_INSTALL_SERVER_DB','mysql');
 
 	if ($options['code']) {
 		$secret = md5($code.$options['code']);
@@ -58,27 +65,40 @@ function mutualiser_creer($e, $options) {
 			(defined('_INSTALL_USER_DB') AND defined('_INSTALL_PASS_DB'))
 			)
 		AND defined('_INSTALL_NAME_DB')) {
-			
+
 			if (defined('_INSTALL_USER_DB_ROOT')) {
-				$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB_ROOT, _INSTALL_PASS_DB_ROOT);
+				$link = mutu_connect_db(_INSTALL_HOST_DB, 0,  _INSTALL_USER_DB_ROOT, _INSTALL_PASS_DB_ROOT, '', _INSTALL_SERVER_DB);
 			} else {
-				$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB, _INSTALL_PASS_DB);
+				$link = mutu_connect_db(_INSTALL_HOST_DB, 0,  _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
 			}
 
 			// si la base n'existe pas, on va travailler
-			if (!mysql_select_db(_INSTALL_NAME_DB)) {
+			if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 				if (_request('creerbase')) {
-					if (mysql_query('CREATE DATABASE '._INSTALL_NAME_DB)
-					AND mysql_select_db(_INSTALL_NAME_DB)) {
+					if (sql_query('CREATE DATABASE '._INSTALL_NAME_DB, _INSTALL_SERVER_DB)
+					AND sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
+							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['prefixe'] = $GLOBALS['table_prefix'];
+							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['db'] = _INSTALL_NAME_DB;
+								
 						// Pour chaque base creee on cree aussi un user
 						// MYSQL specifique qui aura les droits sur la base
 						if ($options['creer_user_base']) {
-							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); // le nom de la machine MySQL peut different du nom de la connexion via DNS
-							if (!mysql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME."' IDENTIFIED BY '"._INSTALL_PASS_DB."'")) {
-								die (__FILE__." " . __LINE__.": Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "._INSTALL_NAME_DB.".* TO '"._INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME."'  IDENTIFIED BY 'xxx'");
+							// le nom de la machine MySQL peut different 
+							// du nom de la connexion via DNS
+							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); 							
+							if (!sql_query("GRANT Alter,Select,Insert,Update,Delete,Create,Drop,Execute ON "
+								. _INSTALL_NAME_DB.".* TO '" 
+								. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB
+								. "' IDENTIFIED BY '" . _INSTALL_PASS_DB."'")) 
+							{
+								die (__FILE__." " . __LINE__ 
+									. ": Erreur sur  : GRANT Select,Insert,Update,Delete,Create,Drop,Execute ON "
+									. _INSTALL_NAME_DB.".* TO '"
+									. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
+									. "'  IDENTIFIED BY 'xxx'");
 							}
-							mysql_close($link);
-							$link = mysql_connect(_INSTALL_HOST_DB, _INSTALL_USER_DB, _INSTALL_PASS_DB);
+							mutu_close();
+							$link = mutu_connect_db(_INSTALL_HOST_DB,'',  _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
 						}
 						echo minipres(
 							_L('La base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;t&#233; cr&#233;&#233;e'),
@@ -128,7 +148,7 @@ function mutualiser_creer($e, $options) {
 
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
 				.'<h3>'. _L('erreur') .'</h3>'
-				. _L('Les donn&#233;es de connexion MySQL ne sont pas d&#233;finies, impossible de cr&#233;er automatiquement la base.')
+				. _L('Les donn&#233;es de connexion ' . uppercase(_INSTALL_SERVER_DB) . ' ne sont pas d&#233;finies, impossible de cr&#233;er automatiquement la base.')
 			);
 			exit;
 		}

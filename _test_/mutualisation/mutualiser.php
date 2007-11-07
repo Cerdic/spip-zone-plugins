@@ -12,6 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (false===strpos($GLOBALS['dossier_squelettes'], ':mutualisation')){
+	// temporaire car remis a zero lors de la mutualisation
+	$GLOBALS['dossier_squelettes'] .= ':mutualisation';
+}
 
 // Demarrer un site dans le sous-repertoire sites/$f/
 // Options :
@@ -36,13 +40,15 @@ function demarrer_site($site = '', $options = array()) {
 		$options
 	);
 
-	$GLOBALS['mutualisation_dir']=$options['repertoire'];
+	$GLOBALS['mutualisation_dir'] = $options['repertoire'];
 	
 	if ($options['cookie_prefix'])
 		$GLOBALS['cookie_prefix'] = prefixe_mutualisation($site);
 	if ($options['table_prefix'])
 		$GLOBALS['table_prefix'] = prefixe_mutualisation($site);
 
+
+		
 	if (($options['creer_user_base']) AND (!$options['utiliser_panel'])) {
 		define('_INSTALL_USER_DB', _INSTALL_NAME_DB);
 		define('_INSTALL_PASS_DB',
@@ -53,19 +59,23 @@ function demarrer_site($site = '', $options = array()) {
 			), 0, 8)
 		);
 	}
-	
+
 	if ($options['utiliser_panel']) {
+		include_spip('base/abstract_sql');
+		include_spip('base/abstract_mutu');
 		
 		// Voir http://www.spip-contrib.net/Service-d-hebergement-mutualise
-				
+		
+		if (!defined('_INSTALL_SERVER_DB'))
+			define('_INSTALL_SERVER_DB','mysql');
+						
 		// On cherche en BD si le site est enregistre et on recupere
 		// password et code d'activation
-
-		$link = @mysql_connect(_INSTALL_PANEL_HOST_DB,_INSTALL_PANEL_USER_DB,_INSTALL_PANEL_PASS_DB);
-		@mysql_select_db(_INSTALL_PANEL_NAME_DB);
-		$result=@mysql_query("SELECT * FROM "._INSTALL_PANEL_NAME_TABLE." WHERE "._INSTALL_PANEL_FIELD_SITE."='$site'");
-		if (mysql_num_rows($result)>0) {
-			$data = mysql_fetch_assoc($result);
+		$link = @mutu_connect_db(_INSTALL_PANEL_HOST_DB, 0, _INSTALL_PANEL_USER_DB, _INSTALL_PANEL_PASS_DB, '', _INSTALL_SERVER_DB);
+		@sql_selectdb(_INSTALL_PANEL_NAME_DB, _INSTALL_SERVER_DB);
+		$result=@sql_query("SELECT * FROM "._INSTALL_PANEL_NAME_TABLE." WHERE "._INSTALL_PANEL_FIELD_SITE."='$site'");
+		if (sql_count($result)>0) {
+			$data = sql_fetch($result);
 			$options['code'] =$data[_INSTALL_PANEL_FIELD_CODE];
 			define ('_INSTALL_NAME_DB',_INSTALL_NAME_DB);
 			define ('_INSTALL_USER_DB',_INSTALL_NAME_DB);
@@ -88,11 +98,13 @@ function demarrer_site($site = '', $options = array()) {
 	}
 
 	define('_SPIP_PATH',
+		$e . 'dist/:' .  // + 
 		$e . ':' .
-		_DIR_RACINE .':' .
+		//_DIR_RACINE .':' . // -
 		_DIR_RACINE .'dist/:' .
-		_DIR_RESTREINT
-	);
+		_DIR_RACINE .'dist/javascript/:' . // +
+		_DIR_RESTREINT);
+
 
 	if (is_dir($e.'squelettes'))
 		$GLOBALS['dossier_squelettes'] = $adr_site.'squelettes';
@@ -150,5 +162,7 @@ function prefixe_mutualisation($site) {
 	return $prefix[$site];
 
 }
+
+
 
 ?>

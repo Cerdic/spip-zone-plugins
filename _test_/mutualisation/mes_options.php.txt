@@ -16,6 +16,18 @@
 	define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));
 	define ('_INSTALL_TABLE_PREFIX', 'spip');
 
+	// si le nom du serveur est different du nom dns, 
+	// ca peut parfois poser probleme
+	// il faut alors le définir ici
+	# define ('_INSTALL_HOST_DB_LOCALNAME', 'nom_serveur');
+	
+	// Si le serveur n'est pas mysql, il faut le preciser obligatoirement.
+	// /!\ Actuellement, pg ne sais pas utiliser les bases de donnees crees
+	// (il garde la connexion avec la base au nom de l'utilisateur)
+	// car sql_selectdb() n'est pas fontionnel en pg pour le moment.
+	// il faut donc creer la base de donnee voulue manuellement.
+	# define ('_INSTALL_SERVER_DB', 'pg'); // mysql|pg
+	
 	// inscrire ici le nom du site d'administration du tableau de bord
 	// de la mutualisation (ou plusieurs, separes par des virgules)
 	// (dans cet exemple, 'scriibe.net' est le top level domain, TLD)

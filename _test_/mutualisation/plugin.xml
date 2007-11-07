@@ -6,7 +6,7 @@
 		&#169; Fil 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.2
+		0.3
 	</version>
 	<etat>
 		test
@@ -23,7 +23,7 @@
 	<prefix>
 		  Mutualisation
 	</prefix>
-	<necessite id='spip' version='[1.9255;]' />
+	<necessite id='spip' version='[1.9259;]' />
 
 	<chemin dir='' type='aucun' />
 </plugin>
