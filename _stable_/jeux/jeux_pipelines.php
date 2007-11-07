@@ -143,9 +143,9 @@ function jeux_affiche_droite($flux){
 
 function jeux_taches_generales_cron($taches_generales){
 	$taches_generales['jeux_cron'] = 10 ;
-	
 	return $taches_generales;
-	}
+}
+
 function cron_jeux_cron($t,$attente=86400){
 
 	$date = date("YmdHis", time() - $attente);
@@ -169,5 +169,10 @@ function cron_jeux_cron($t,$attente=86400){
 		}
 	
 	}
+
+// en 1.9.3 c'est genie_ et pas cron_
+function genie_jeux_cron($time) {
+	return cron_jeux_cron($time);
+}
 
 ?>
