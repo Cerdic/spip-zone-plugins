@@ -13,7 +13,7 @@ _ &#169; 2007 - Distribu&eacute; sous licence GPL
 	experimental
 	</etat>
 	<description>
-		Un mod&egrave;le qui permet de placer sur tous les &eacute;l&eacute;ments SPIP des liens de traductions identiques à ceux fournis en standard dans la dist pour les articles. En version 0.1, il se base sur les langues du site. La version 1.0 devra permettre de s&#39;appuyer aussi sur la présence de champs multi dans l&#39;&eacute;l&eacute;ment #TITRE (option de configuration). J&#39;esp&egrave;re aussi en faire une balise ?
+		Un mod&egrave;le qui permet de placer sur tous les &eacute;l&eacute;ments SPIP des liens de traductions identiques à ceux fournis en standard dans la dist pour les articles. En version 0.1, il se base sur les langues du site. La version 1.0 devra permettre de s&#39;appuyer aussi sur la pr&eacute;sence de champs multi dans l&#39;&eacute;l&eacute;ment #TITRE (option de configuration). J&#39;esp&egrave;re aussi en faire une balise ?
 	
 		Ins&eacute;rer #MODELE&#123;page_traductions&#125; dans les squelettes.
 	</description>
