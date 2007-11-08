@@ -8,8 +8,6 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 	<version>0.3.3</version>
 	<etat>dev</etat>
     <description>
-    Et une & boulette & pour Ben SPIP !
-    
 	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery.
 	N&eacute;cessite SPIP >= 1.9.3 
 - T&eacute;l&eacute;charge automatiquement les librairies de 
