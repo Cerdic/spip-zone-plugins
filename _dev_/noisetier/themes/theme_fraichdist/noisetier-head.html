@@ -1,8 +1,7 @@
 #CACHE{86400}
-<INCLURE{fond=noisetier-compilateur-tete}{env}>
 [(#REM)
 	Entete standard de toutes les pages ; les elements specifiques
-	(title, description) sont inseres vias une noisette
+	(title, description) sont inseres via une noisette
 ]
 
 [(#REM) Lien vers l'icone destinee a la barre de bookmarks ]
@@ -19,3 +18,6 @@
 
 [(#REM) Feuille de style CSS pour l'impression ]
 [<link rel="stylesheet" href="(#CHEMIN{impression.css}|direction_css)" type="text/css" media="print" />]
+
+[(#REM) Appel du compilateur d'en tete ]
+<INCLURE{fond=noisetier-compilateur-tete}{env}>
