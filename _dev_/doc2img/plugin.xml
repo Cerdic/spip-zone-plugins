@@ -7,7 +7,7 @@
     <version>0.4</version>
     <etat>dev</etat>
     <icon></icon>
-    <description> Ce plugin permet de convertir à la volée des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle .</description>
+    <description> Ce plugin permet de convertir à la vol&egrave;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle .</description>
     <!-- URI de documentation -->
     <lien>http://www.spip-contrib.net/doc2img</lien>
 
