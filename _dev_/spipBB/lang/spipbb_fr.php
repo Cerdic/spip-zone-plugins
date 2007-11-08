@@ -105,14 +105,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'connecte' => 'Une fois connect&eacute;, vous pouvez modifer votre mot de passe ou vos informations personnelles &agrave; l\'adresse ',
 'contact' => 'Contact',
 'courrier' => '<p>Apr&egrave;s l\'&eacute;tape d\'enregistrement, votre identifiant personnel vous parviendra rapidement par courrier &eacute;lectronique.</p>',
-'credits'=>'R&eacute;alis&eacute; avec <a href="http://www.spip.net/" class="copyright">SPIP</a> : 2004-2007<br />
-<a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> 
-par <a href="http://spipbb.spip-zone.info/">la spipbb-team</a><br />
-<a href="http://www.spip-contrib.net/spip.php?article2460">Plugin par Gurdil Chryjs real3t</a>',
-'credits_bis1' => 'GAFoSPIP v. ',
-'credits_bis2' => 'Ao&ucirc;t 2005',
-'credits_bis3' => 'Adapt&eacute; pour, et, Inspir&eacute; par, le traitement des Forums de :<br />',
-'credits_bis4' => '(James, BoOz, Nikau et Miss Mopi).',
+'credits'=>'R&eacute;alis&eacute; avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 'creer_forum' => 'Cr&eacute;er Nouveau Forum',
 
 'config_spipbb' => 'Configuration de base de spipBB pour permettre le fonctionnement des forums avec ce plugin.',

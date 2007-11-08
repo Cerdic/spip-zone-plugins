@@ -34,9 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date' => 'Inscripto el',
 
 //C
-'credits'=>'Realizado con <a href="http://www.spip.net/" class="copyright">SPIP</a>2004-2007<br/>
-<a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> por <a href="http://spipbb.spip-zone.info/">the spipbb-team</a><br />
-<a href="http://www.spip-contrib.net/spip.php?article2460">Plugin: Gurdil Chryjs real3t</a>',
+'credits'=>'Realizado con <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 'categorie'=>'Categor&iacute;a',
 'contact' => 'Contacto',
 'citer' => 'Citar',

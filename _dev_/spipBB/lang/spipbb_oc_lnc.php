@@ -44,13 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion' => 'Volgatz picar v&ograve;stre nom d\'usanci&egrave;r e v&ograve;stre mot de santa Clara per vos connectar.',
 'contact' => 'Contacte',
 'courrier' => '<p>Apr&egrave;p l\'estapa d\'enregistrament, recebretz l&egrave;u-l&egrave;u v&ograve;stres identificants personals per cori&egrave;r electronic.</p>',
-'credits' => 'Realizat amb <a href="http://www.spip.net/" class="copyright">SPIP</a> : 2004-2007<br/>
-<a href="http://www.spip-contrib.net/spipBB">spipBB 1.0a1</a> by <a href="http://spipbb.spip-zone.info/">the spipbb-team</a><br />
-<a href="http://www.spip-contrib.net/spip.php?article2460">Plugin: Gurdil Chryjs real3t</a>',
-'credits_bis1' => 'GAFoSPIP v.&nbsp;',
-'credits_bis2' => 'Agost de 2005',
-'credits_bis3' => 'Adaptat per, e, Inspirat per, lo tractament dels forums de&nbsp;:<br>',
-'credits_bis4' => '(James, BoOz, Nikau e Miss Mopi).',
+'credits' => 'Realizat amb <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 'creer_forum' => 'Crear un Forum n&ograve;u',
 
 

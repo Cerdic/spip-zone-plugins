@@ -11,8 +11,9 @@
 
 <body id="artforum" dir="#LANG_DIR">
 	[(#REM) On regarde si le forum n'est pas ferme ]
+	#SET{id_mot_ferme,#CONFIG{spipbb/spipbb_id_mot_ferme}}
 	#SET{forumferme,0}
-	<BOUCLE_etat(ARTICLES){id_article}{titre_mot=ferme}>#SET{forumferme,1}</BOUCLE_etat>
+	<BOUCLE_etat(ARTICLES){id_article}{id_mot=#GET{id_mot_ferme}}>#SET{forumferme,1}</BOUCLE_etat>
 
 <a name="haut"></a>
 
@@ -25,8 +26,10 @@
 
 	[(#SET{affbouton,[(#GET{forumferme}|=={1}|?{' ',
 		<ul class="actionforum">
-			<li class="poster">[<a href="[(#URL_PAGE{poster})]&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>">&nbsp;<span><:spipbb:sujet_nouveau:></span></a>]</li>
-		   </ul>
+			<li class="poster">
+				[<a href="[(#URL_PAGE{poster})]&amp;(#PARAMETRES_FORUM)" title="<:spipbb:sujet_nouveau:>">&nbsp;<span><:spipbb:sujet_nouveau:></span></a>]
+			</li>
+		</ul>
 	})]
 	})]
 	#GET{affbouton}

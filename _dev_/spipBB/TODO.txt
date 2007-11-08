@@ -1,23 +1,19 @@
 Todo-list pour spipbb
 ---------------------
--* creation d'un site de test "temporaire"
 
 -* simplifier encore l'installation
 -* améliorer l'"administration" des forums (interface privee)
 -* nettoyer les squelettes
 -* utilisation des idees utilisees dans Gafospip
--* compter les visites sur les messages
--* j'en oublie sûrement
 -* lien entre auteur et la liste des messages qu'il a publie
 
 -* Bugs et autres éléments non finis :
--** Evolution de la gestion des metas (SVN)
 -** Anti spam : mots clés, login, IP
--** Installation : "not configured" => Bouton/ case d'alerte + lien vers admin_config
--** Améliorer les requetes de sélection lors de l'installation (like)
+-** Evolution de la gestion des metas (SVN)
 -** Ajouter les descriptions des mots clés
 -** Présentation du panneau gauche de l'administration
 -** Présentation de admin_config (titres par mots clés, JS pour sélection ?)
+-** Installation : "not configured" => Bouton/ case d'alerte + lien vers admin_config
 -** Hierarchie qui ne s'affiche pas correctement pour admin_configuration et gestion 
 -** lignes noires pour admin_index pour average_posts... avec IE
 -** espaces gris en haut et bas de bloc central pour admin_configuration (avec IE)
@@ -26,12 +22,13 @@ Todo-list pour spipbb
 -** Les des messages d'un auteur
 -** Affichage du profil à revoir
 -** Affichage de poster à revoir (les chatons sont trop serrés)
--** Getion avatar : à améliorer
+-** Getion avatar : à améliorer + téléchargement (droits ?)
 -** Import phpBB : test mot de passe / authentification d'un auteur importé
 -** Import phpBB : vérifier différence login et nom auteur
 -** Import phpBB : import des MP ? Option de départ ?
 -** Import phpBB : adresse IP des posteurs -> forums
 -** Import phpBB : Si pas Iniset, réalisation par étapes de la partie 2 et 3 ? Précalcul à l'avance
+-** mot cles ferme, postit, annonce : bug ne doivent s'appliquer qu'au message principal du thread
 
 -** Avantage/inconvénients utilisation d'une portion de code similaire à balise #SESSION
 -** Citations

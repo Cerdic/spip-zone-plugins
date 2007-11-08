@@ -84,6 +84,7 @@ td.etatsuj span, td.etatfor span, td.etatenligne span  { display: none; }
 td.annpost { background-image: url(img/folder_announce.png); background-repeat: no-repeat; background-position: center; }
 td.normpost { background-image: url(img/folder.png); background-repeat: no-repeat; background-position: center; }
 td.fermpost { background-image: url(img/topic_lock.png); background-repeat: no-repeat; background-position: center; }
+td.postitpost { background-image: url(img/folder_sticky.png); background-repeat: no-repeat; background-position: center; }
 td.ouvfor { background-image: url(img/folder_big.png); background-repeat: no-repeat; background-position: center; }
 td.fermfor { background-image: url(img/folder_lock_big.png); background-repeat: no-repeat; background-position: center; }
 td.etatenligne { background-image: url(img/whosonline.png); background-repeat: no-repeat; background-position: center; }

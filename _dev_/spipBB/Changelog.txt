@@ -1,6 +1,8 @@
 2007-11-08  chryjs  <chryjs!@!free!.!fr>
 
  * Correction de la librairie de compatibilite, mauvaise adaptation du code de sql_fetch et de spip_mysql_explain donc bug !
+ * Correction des credits (remarques sur la liste), renvoi vers la documentation http://www.spip-contrib.net/Plugin-SpipBB#contributeurs
+ * Correction mots cles annonce postit et ferme dans modeles/spipbb_liste_sujets et filforum, il reste un "soucis" postit et annonce ne peuvent s'appliquer qu'au message principal du thread et on ne peut pas appliquer fermé n'importe comment
 
 
 2007-11-07  chryjs  <chryjs!@!free!.!fr>
