@@ -1,3 +1,8 @@
+2007-11-08  chryjs  <chryjs!@!free!.!fr>
+
+ * Correction de la librairie de compatibilite, mauvaise adaptation du code de sql_fetch et de spip_mysql_explain donc bug !
+
+
 2007-11-07  chryjs  <chryjs!@!free!.!fr>
 
  * Ajout d'un filtre de spam dans le formulaire_forum inc/forum_insert + tables associes
