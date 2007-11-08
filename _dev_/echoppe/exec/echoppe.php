@@ -49,7 +49,7 @@ function exec_echoppe(){
 	echo '<br />';
 	if ($GLOBALS['connect_statut'] == "0minirezo"){
 		
-		$sql_categories = "SELECT DISTINCT cat.id_categorie, cat_desc.titre, cat_desc.descriptif FROM spip_echoppe_categories cat, spip_echoppe_categories_descriptions cat_desc WHERE id_parent = '0' AND cat.id_categorie = cat_desc.id_categorie AND cat_desc.lang = '".$GLOBALS['meta']['langues_utilisees']."' ORDER BY cat.id_categorie;";
+		$sql_categories = "SELECT cat.id_categorie, cat_desc.titre, cat_desc.descriptif FROM spip_echoppe_categories cat, spip_echoppe_categories_descriptions cat_desc WHERE id_parent = '0' AND cat.id_categorie = cat_desc.id_categorie AND cat_desc.lang = '' ORDER BY cat.id_categorie;";
 		//echo $sql_categories;
 		$res_categories = spip_query($sql_categories);
 		

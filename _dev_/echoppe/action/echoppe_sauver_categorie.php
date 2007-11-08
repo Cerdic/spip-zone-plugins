@@ -9,20 +9,30 @@ function action_echoppe_sauver_categorie(){
 	$texte = _request('texte');
 	$logo = _request('logo');
 	$id_categorie = _request('id_categorie_descriptif');
+	$new = _request('new');
 	//echo _request('new');
-	if (_request('new') == 'oui'){
-		$sql_insert_categorie = "INSERT INTO spip_echoppe_categories VALUES ('','"._request('id_parent')."')";
-		$res_insert_categorie = spip_query($sql_insert_categorie);
-		//echo $sql_insert_categorie.'<hr />';
-		$new_id_categorie = spip_insert_id();
-		$sql_insert_categorie_descriptif = "INSERT INTO spip_echoppe_categories_descriptions VALUES ('','".$new_id_categorie."','".$lang_categorie."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".$logo."','','".$statut."') ";
-		$res_insert_categorie_descriptif = spip_query($sql_insert_categorie_descriptif);
-		//echo $sql_insert_categorie_descriptif.'<hr />';
+	
+	switch ($new){
+		case 'oui':
+			$sql_insert_categorie = "INSERT INTO spip_echoppe_categories VALUES ('','"._request('id_parent')."')";
+			$res_insert_categorie = spip_query($sql_insert_categorie);
+			//echo $sql_insert_categorie.'<hr />';
+			$new_id_categorie = spip_insert_id();
+			$sql_insert_categorie_descriptif = "INSERT INTO spip_echoppe_categories_descriptions VALUES ('','".$new_id_categorie."','".$lang_categorie."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".$logo."','','".$statut."') ";
+			$res_insert_categorie_descriptif = spip_query($sql_insert_categorie_descriptif);
+			break;
 		
-	}else{
-		$sql_update_categorie_descriptif = "UPDATE spip_echoppe_categories_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."', statut = '".$statut."' WHERE id_categorie = '".$id_categorie."' AND lang = '".$lang_categorie."' ";
-		//echo $sql_update_categorie_descriptif;
-		$res_update_categorie_descriptif = spip_query($sql_update_categorie_descriptif);
+		case 'description' :
+			$sql_insert_categorie_descriptif = "INSERT INTO spip_echoppe_categories_descriptions VALUES ('','".$id_categorie."','".$lang_categorie."','".addslashes($titre)."','".addslashes($descriptif)."','".addslashes($texte)."','".$logo."','".$lang_categorie."','".$statut."') ";
+			$res_insert_categorie_descriptif = spip_query($sql_insert_categorie_descriptif);
+			break;
+		
+		default :
+			$sql_update_categorie_descriptif = "UPDATE spip_echoppe_categories_descriptions SET titre = '".addslashes($titre)."', descriptif = '".addslashes($descriptif)."', texte = '".addslashes($texte)."', statut = '".$statut."' WHERE id_categorie = '".$id_categorie."' AND lang = '".$lang_categorie."' ";
+			//echo $sql_update_categorie_descriptif;
+			$res_update_categorie_descriptif = spip_query($sql_update_categorie_descriptif);
+			break;
+		
 	}
 
 }

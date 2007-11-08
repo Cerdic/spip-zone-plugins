@@ -26,9 +26,7 @@ function exec_echoppe_edit_categorie(){
 		$res_descriptif_categorie = spip_query($sql_descriptif_categorie);
 		$descriptif_categorie = spip_fetch_array($res_descriptif_categorie);
 		
-		if (spip_num_rows($res_descriptif_categorie) <= 0){
-			$new = 'oui';
-		}
+		(spip_num_rows($res_descriptif_categorie) > 0)?$new = $new:$new = 'description';
 		
 		$id_categorie = _request('id_categorie');
 		$titre = $descriptif_categorie['titre'];
@@ -38,16 +36,18 @@ function exec_echoppe_edit_categorie(){
 		$maj = $descriptif_categorie['maj'];
 		$statut = $descriptif_categorie['statut'];
 		
-		$date_dernière_modification = affdate($maj);
-		if (empty($date_dernière_modification)){
-			$date_dernière_modification = _T('echoppe:pas_encore_cree');
+		$date_derniere_modification = affdate($maj);
+		if (empty($date_derniere_modification)){
+			$date_derniere_modification = _T('echoppe:pas_encore_cree');
 		}else{
-			if($date_dernière_modification == 0){
-				$date_dernière_modification = _T('echoppe:pas_encore_modifie');
+			if($date_derniere_modification == 0){
+				$date_derniere_modification = _T('echoppe:pas_encore_modifie');
 			}
 		}
+		
 	}
-
+	
+	$nom_lang = (traduire_nom_langue($lang_categorie))?traduire_nom_langue($lang_categorie):_T('echoppe:par_defaut');
 
 	if ($GLOBALS['meta']['version_installee'] <= '1.927'){
 		echo debut_page(_T('echoppe:les_categories'), "redacteurs", "echoppe");	
@@ -60,8 +60,8 @@ function exec_echoppe_edit_categorie(){
 	echo debut_boite_info();
 	echo '<div style="font-weight:bold;text-align: center; text-transform : uppercase;">'._T('echoppe:categorie_numero').'</div>';
 	echo '<div style="font-weight:bold;text-align: center;" class="spip_xx-large">'.$id_categorie.'</div>';
-	echo '<div style="font-size: 10;text-align: center;">'._T('echoppe:derniere_modification').' : <br /><b>'.$date_dernière_modification.'</b></div><br />';
-	echo '<div style="font-size: 10;text-align: center;">'._T('echoppe:langue_editee').' : <br /><b>'.traduire_nom_langue($lang_categorie).'</b></div>';
+	echo '<div style="font-size: 10;text-align: center;">'._T('echoppe:derniere_modification').' : <br /><b>'.$date_derniere_modification.'</b></div><br />';
+	echo '<div style="font-size: 10;text-align: center;">'._T('echoppe:langue_editee').' : <br /><b>'.$nom_lang.'</b></div>';
 	echo fin_boite_info();
 	
 	$raccourcis .= icone_horizontale(_T('echoppe:gerer_echoppe'), generer_url_ecrire("echoppe",""), _DIR_PLUGIN_ECHOPPE."images/echoppe_blk_24.png","", false);

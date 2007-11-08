@@ -20,12 +20,12 @@ function exec_echoppe_categorie(){
 	$res_select_categorie = spip_query($sql_select_categorie);
 	$categorie = spip_fetch_array($res_select_categorie);
 	
-	$date_dernière_modification = affdate($categorie['maj']);
-	if (empty($date_dernière_modification)){
-		$date_dernière_modification = _T('echoppe:pas_encore_cree');
+	$date_derniere_modification = affdate($categorie['maj']);
+	if (empty($date_derniere_modification)){
+		$date_derniere_modification = _T('echoppe:pas_encore_cree');
 	}else{
-		if($date_dernière_modification == 0){
-			$date_dernière_modification = _T('echoppe:pas_encore_modifie');
+		if($date_derniere_modification == 0){
+			$date_derniere_modification = _T('echoppe:pas_encore_modifie');
 		}
 	}
 	
@@ -43,7 +43,7 @@ function exec_echoppe_categorie(){
 	echo debut_boite_info();
 	echo '<div style="font-weight:bold;text-align: center; text-transform : uppercase;">'._T('echoppe:categorie_numero').'</div>';
 	echo '<div style="font-weight:bold;text-align: center;" class="spip_xx-large">'.$id_categorie.'</div>';
-	echo '<div style="font-size: 10;text-align: center;">'._T('echoppe:derniere_modification').' : <br /><b>'.$date_dernière_modification.'</b></div>';
+	echo '<div style="font-size: 10;text-align: center;">'._T('echoppe:derniere_modification').' : <br /><b>'.$date_derniere_modification.'</b></div>';
 	echo '<br />';
 	echo _T('echoppe:editer_version').'<br />';
 	if (empty($lang_categorie)) {
@@ -72,7 +72,7 @@ function exec_echoppe_categorie(){
 	echo '<div class="cadre-r"><div class="cadre-padding">';
 	
 	echo gros_titre($categorie['titre']);
-	echo icone_horizontale(_T('echoppe:editer_categorie'), generer_url_ecrire("echoppe_edit_categorie","id_categorie=".$id_categorie."&lang=".$lang_categorie), "","edit.gif", false);
+	echo icone_horizontale(_T('echoppe:editer_categorie'), generer_url_ecrire("echoppe_edit_categorie","id_categorie=".$id_categorie."&lang=".$lang_categorie), _DIR_PLUGIN_ECHOPPE."images/categorie-24.png","edit.gif", false);
 	echo '<br /><div class="verdana1 spip_small" align="left" style="border: 1px dashed rgb(170, 170, 170); padding: 5px;">'.$categorie['descriptif'].'</div>';
 	echo '</div></div>';
 	
