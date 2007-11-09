@@ -75,6 +75,24 @@ $GLOBALS['jquery_plugins'] = array(
 		)
 	),
 	
+	//validate
+	'validate' => array(
+		'dir' => 'jquery.validate_7',
+		'url' => 'http://jquery.com/plugins/project/validate',
+		//'install_zip' => 'http://jquery.com/plugins/files/jquery.validate_7.zip',
+		'files' => array(
+			'validate.additional-methods' 	=> 'additional-methods.js',
+			'validate.ajaxQueue'			=> 'jquery.ajaxQueue.js',
+			'validate.metadata' 			=> 'jquery.metadata.js',
+			'validate.metadata' 			=> 'jquery.metadata.js',
+			'validate.validate' 			=> 'jquery.validate.js',
+			'validate' 						=> 'jquery.validate.js', // alias
+			'validate.min'					=> 'jquery.validate.min.js',
+			'validate.pack' 				=> 'jquery.validate.pack.js'
+			
+		)
+	),
+		
 	//yav
 	'yav' => array(
 		'dir' => 'jquery.yav1.1.1',

@@ -5,7 +5,7 @@
 _ &#169; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<lien></lien>
-	<version>0.3.3</version>
+	<version>0.3.4</version>
 	<etat>dev</etat>
     <description>
 	Permet d'automatiser l'installation et l'utilisation des plugins de jQuery.
@@ -27,12 +27,14 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 - Easing : [->http://jquery.com/plugins/project/Easing]
 - SyncHeight : [->http://ginader.devjavu.com/browser/trunk/jquery/plugins/syncHeight/]
 - UI : [->http://jquery.com/plugins/project/ui]
+- Validate : [->http://jquery.com/plugins/files/jquery.validate_7.zip]
 - Yav : [->http://jquery.com/plugins/project/jquery_yav]
 	</description>
 	<prefix>jqueryp</prefix>
 	<install>jqueryp_install.php</install>
 	<necessite id="lib:jquery.ui-1.0" src="http://jqueryjs.googlecode.com/files/jquery.ui-1.0.zip" /> 
 	<necessite id="lib:jquery.yav1.1.1" src="http://jquery.com/plugins/files/jquery.yav1.1.1.zip" /> 
+	<necessite id="lib:jquery.validate_7" src="http://jquery.com/plugins/files/jquery.validate_7.zip" /> 
 	<necessite id="spip" version="[1.9300;]" /> 
     <fonctions>jqueryp_fonctions.php</fonctions>
     <options>jqueryp_options.php</options>
