@@ -1,5 +1,5 @@
 <plugin>
-	<nom>booster: un booster pour Spip</nom>
+	<nom>expresso: un expresso pour Spip</nom>
 	<auteur>C&eacute;dric Morin [->http://www.yterium.net/]
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
@@ -7,22 +7,22 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	<version_base>0.1.0</version_base>
 	<etat>experimental</etat>
 	<description>
-Ce plugin permet de booster votre site spip avec un cache statique de second niveau servi directment par Apache
-_ Pour etre boostee une page doit contenir la directive
-_ #HTTP_HEADER{X-Cache-Apache: true}
+Expresso permet d'accelerer votre spip a l'aide d'un percolateur constitue d'un cache statique de second niveau servi directment par Apache
+_ Pour etre percolee page doit contenir la directive
+_ #HTTP_HEADER{X-Expresso: true}
 
-Le plugin stocke les pages statiques dans un repertoire tmp/cache/apache et maintient une liste de correspondance (url,fichier)
-_ Il generere un htaccess comportant les directives de RewriteRules 
-avec une condition temporelle afin de repartir le service entre Apache et Spip.
-Ce fonctionnement permet de laisser passer une partie des requettes a Spip afin qu'il mette a jour les pages expirees.
+Le plugin stocke les pages statiques dans un repertoire local/apache et maintient une liste de correspondance (url,fichier)
+_ Il integre dans votre .htaccess a la racine les directives de RewriteRules 
+avec une condition temporelle afin de repartir le service entre Apache et Spip :
+C'est le percolateur qui ne laisse passer qu'une petite partie des requetes a Spip afin qu'il mette a jour les pages expirees.
 	</description>
 	<lien></lien>
-	<install>booster_install.php</install>
-	<prefix>booster</prefix>
+	<install>expresso_install.php</install>
+	<prefix>expresso</prefix>
 	<icon></icon>
 	<chemin dir='' />
 	<pipeline>
 		<nom>affichage_final</nom>
-		<inclure>booster_pipeline.php</inclure>
+		<inclure>expresso_pipeline.php</inclure>
 	</pipeline>
 </plugin>
