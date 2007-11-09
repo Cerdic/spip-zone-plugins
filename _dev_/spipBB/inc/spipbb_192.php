@@ -47,10 +47,11 @@ include_spip('base/db_mysql'); // SPIP 192
 Principales fonctions definies dans l'ordre alphanumerique :
 
 sql_count
-sql_insertq
+sql_delete
 sql_fetch
 sql_fetsel
 sql_getfetsel
+sql_insertq
 sql_query
 sql_select
 sql_updateq
@@ -352,5 +353,14 @@ function sql_select (
 
 	return spip_mysql_select($select, $from, $where, $groupby, $orderby, $limit, '', $having, '', '', $serveur);
 } } // sql_select
+
+#------------------------------------------------------------#
+// sql_delete
+// from req/mysql.php 193
+#------------------------------------------------------------#
+if (!function_exists('sql_delete')) {
+function sql_delete ($table, $where='', $serveur='')
+	return spip_mysql_query("DELETE FROM $table" . ($where ? " WHERE $where" : ''), $serveur);
+} } // sql_delete
 
 ?>

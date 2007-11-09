@@ -79,6 +79,7 @@ The e-mail address will be used only to confirm the details of your registration
 'admin_action_fromphpbb' => 'Import from PhpBB',
 'admin_cat_admin' => 'Main administration',
 'admin_action_gestion' => 'Management',
+'admin_form_action' => 'Action',
 'admin_form_sujets' => '&nbsp;',
 'admin_form_messages' => '&nbsp;',
 'admin_form_editer' => 'Edit',
@@ -93,6 +94,8 @@ The e-mail address will be used only to confirm the details of your registration
 'admin_forums_configuration' => 'Configure SpipBB',
 'admin_cat_spamwords' => 'Spam Words',
 'admin_action_swconfig' => 'Configure',
+'admin_action_swforum' => 'Flagged posts',
+'admin_action_swwords' => 'Manage Words',
 
 // B
 'bio' => 'Short biography',
@@ -296,6 +299,11 @@ Words less than three letters long will be ignored.',
 'sw_warning_pm_message' => 'Private message text',
 'sw_pm_spam_warning_titre' => 'Warning.',
 'sw_pm_spam_warning_message' => 'This is a warning. You have tried to post a word that is defined as spam on this website. Please refrain from doing so again.',
+'sw_spam_forum_titre' => 'Manage flagged posts',
+'sw_admin_no_spam' => 'No spam',
+'sw_spam_words_titre' => 'Spam words filtering',
+'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
+'sw_spam_words_mass_add' => 'Paste or type your spam words lists into the text area. Separate each spam word by either a comma, semi-colon, or line-break',
 
 //T
 'texte_login_precaution' => 'Warning! this is the login with which your are connected at present.

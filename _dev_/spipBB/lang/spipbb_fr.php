@@ -81,6 +81,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_cat_outils' => 'Outils',
 'admin_action_fromphpbb' => 'Import de PhpBB',
 'admin_action_gestion' => 'Gestion',
+'admin_form_action' => 'Action',
 'admin_form_sujets' => '&nbsp;',
 'admin_form_messages' => '&nbsp;',
 'admin_form_editer' => 'Editer',
@@ -95,6 +96,8 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_forums_configuration' => 'Configuration de SpipBB',
 'admin_cat_spam' => 'Anti Spam',
 'admin_action_swconfig' => 'Configuration',
+'admin_action_swforum' => 'Posts marqu&eacute;s',
+'admin_action_swwords' => 'Gestion des mots',
 
 // B
 'bio' => 'Petite biographie',
@@ -299,6 +302,12 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'sw_warning_pm_message' => 'Texte du message priv&eacute;',
 'sw_pm_spam_warning_titre' => 'Attention.',
 'sw_pm_spam_warning_message' => 'Ceci est un avertissement. Vous avez essay&eacute; de poster un message analys&eacute; comme du spam sur ce site web. Merci d\'&eacute;viter de recommencer.',
+'sw_spam_forum_titre' => 'Gestion des messages de spam',
+'sw_admin_no_spam' => 'Pas de spam',
+'sw_spam_words_titre' => 'Filtrage de mots',
+'sw_spam_words_action' => 'A partir de cette page, vous pouvez ajouter, &eacute;diter et supprimer des mots associ&eacute;s &agrave; du spam. Le caract&egrave;re (*) est accept&eacute; dans le mot. Par exemple&nbsp;: *tes* capturera d&eacute;testable, tes* capturera tester, *tes capturera portes.',
+'sw_word' => 'Mot',
+'sw_spam_words_mass_add' => 'Copier-coller ou saisir vos mots dans cette zone. S&eacute;parer chaque mot par une virgule, deux points ou un retour &agrave; la ligne.',
 
 //T
 'texte_login_precaution' => 'Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.

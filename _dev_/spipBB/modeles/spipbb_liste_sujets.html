@@ -152,7 +152,7 @@
 			<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
 			<a href="[(#URL_PAGE{profil_BB}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{id_article,#ID_ARTICLE})]">#NOM</a>
 			</BOUCLE_auteurp>
-			<a href="mailto:[(#EMAIL|antispam)]">[(#NOM|sinon{<:spipbb:anonyme:>})]</a>
+				[(#NOM|sinon{<:spipbb:anonyme:>})]
 			<//B_auteurp>
 		</td>
 		<td class="msgpost">

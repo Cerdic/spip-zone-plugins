@@ -1,3 +1,8 @@
+2007-11-09  chryjs  <chryjs!@!free!.!fr>
+
+ * admin : Gestion des messages de spam, ajout de la gestion de mot, envoyer un message, logger etc
+
+
 2007-11-08  chryjs  <chryjs!@!free!.!fr>
 
  * Correction de la librairie de compatibilite, mauvaise adaptation du code de sql_fetch et de spip_mysql_explain donc bug !

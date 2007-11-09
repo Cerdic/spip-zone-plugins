@@ -65,12 +65,23 @@ function inc_forum_insert($force_statut = NULL) {
 }
 
 
-//
-// Declare functions
-//
-function insert_pm($to_id, $pm_message, $subject, $from_id)
+// [fr] Envoyer un message prive a l'auteur fautif
+// [en] Send a private message to spammer
+function insert_pm($id_auteur)
 {
-}
+	if ( $GLOBALS['spipbb']['sw_send_pm_warning'] == "oui" ) {
+		$from_id = $GLOBALS['spipbb']['sw_warning_from_admin'] ;
+		$message = $GLOBALS['spipbb']['sw_warning_pm_message'] ;
+		$to_auteur = sql_fetsel('email', 'spip_auteurs', "id_auteur=$id_auteur");
+		$from_auteur = sql_fetsel('email', 'spip_auteurs', "id_auteur=$from_id");
+
+		// action !!!
+		$envoyer_mail = charger_fonction('envoyer_mail','inc');
+		$titre = nettoyer_titre_email($GLOBALS['spipbb']['sw_warning_pm_titre']);
+		$envoyer_mail($to_auteur['email'],$titre,$message,$from_auteur['email']);
+	}
+
+} // insert_pm
 // table spip_auteurs_spipbb
 // id_auteur bigint(21) not null primary key
 // spam_warnings unsigned int not null default 0
@@ -78,6 +89,8 @@ function insert_pm($to_id, $pm_message, $subject, $from_id)
 // ban_date timestamp
 // ban 'oui' 'non' default 'non'
 
+// [fr] Stocke dans la base l'avertissement de l'auteur
+// [en] Store in database the spammer informations
 function warn_user($id_auteur=0)
 {
 	if (empty($id_auteur)) return;
@@ -108,7 +121,8 @@ function warn_user($id_auteur=0)
 // message mediumtext
 // id_forum bigint(21)
 
-// was update_log
+// [fr] Met a jour la log des mots spammes
+// [en] Update the spam word log
 function log_spam_word($id_auteur, $login, $id_forum, &$titre, &$message)
 {
 	$current_time = time();
@@ -125,7 +139,8 @@ function log_spam_word($id_auteur, $login, $id_forum, &$titre, &$message)
 			);
 } // log_spam_word
 
-
+// [fr] Bannis le spammeur
+// [en] Ban the spammer
 function ban_user($id_auteur)
 {
 	$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
@@ -136,7 +151,7 @@ function ban_user($id_auteur)
 	// On le recherche
 	$is_spammer = sql_fetsel('id_auteur', 'spip_auteurs_spipbb', "id_auteur=$id_auteur");
 
-	if (is_array($is_spammer) and !empty($is_spammer['id_auteur']) and $is_spammer['user_spam_warnings'] > 3 ) // parametrage
+	if (is_array($is_spammer) and !empty($is_spammer['id_auteur']) and $is_spammer['user_spam_warnings'] > $GLOBALS['spipbb']['sw_nb_spam_ban'] ) // parametrage
 	{
 		$res=sql_updateq('spip_auteurs_spipbb', array(
 					'ip_auteur' => $user_ip,
@@ -147,12 +162,23 @@ function ban_user($id_auteur)
 	}
 } // ban_user
 
+function ban_ip()
+{
+	$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
+}
+
 // table spip_spam_words
 // id_spam_word BIGINT(21) not null primary key autoincrement
 // spam_word varchar(255)
-
+// [fr] Verifie s'il s'agit de spam
+// [en] Check if it's a  spam post
 function check_spam($id_auteur,$login,$id_forum,$message, &$titre)
 {
+	if ($GLOBALS['spipbb']['disable_sw']=="oui") return false;
+	$is_spammer = sql_fetsel('id_auteur, statut', 'spip_auteurs_spipbb', "id_auteur=$id_auteur");
+	if ( $id_auteur==1 AND $GLOBALS['spipbb']['sw_admin_can_spam']=="oui" ) return;
+	if ( $is_spammer['statut']=="0minirezo" AND $GLOBALS['spipbb']['sw_modo_can_spam']=="oui" ) return;
+
 	$req = sql_select('spam_word','spip_spam_words');
 
 	$message = preg_replace("#\[.{12,16}\]#i", '', $message);
@@ -167,7 +193,8 @@ function check_spam($id_auteur,$login,$id_forum,$message, &$titre)
 			log_spam_word($id_auteur, $login, $id_forum, $titre, $message);
 			warn_user($id_auteur);
 			ban_user($id_auteur);
-			// insert_pm($id_admin, 'spam warning', 'forum spipBB', $id_auteur );
+			ban_ip();
+			// insert_pm($id_auteur);
 			$spam = true;
 			break;
 		}

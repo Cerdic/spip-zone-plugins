@@ -1,0 +1,48 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) SpipBB admin - Page de gestion des forums]
+
+<form method="post" action="<?php echo generer_action_auteur("#ENV{action_script}","0-insert","ecrire/?exec=#ENV{exec_script}") ; ?>">
+<input type='hidden' id="exec" value="#ENV{action_script}">
+<input type='hidden' id='id_rubrique' value="#ENV{id_rubrique}">
+
+[(#ENV{url_post}|form_hidden)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx','SpipBB Anti Spam Words'})]
+[(#REM) ------------------------ Liste et edition ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:sw_config_generale_titre:></legend>
+<p>
+	<:spipbb:sw_spam_words_action:>
+</p>
+<div><table border='0' cellspacing='1' cellpadding='3' width="100%">
+<thead>
+<tr>
+	<td class='verdana2'><:spipbb:sw_word:></td>
+	<td class='verdana2'><:spipbb:admin_form_action:></td>
+</tr>
+</thead>
+<BOUCLE_list_spam_words(SPIP_SPAM_WORDS){par id_spam_word}>
+<tr>
+	<td align='left' class='verdana2'>#SPAM_WORD</td>
+	<td>
+		<a href='<?php echo generer_action_auteur('spipbb_spam_word',"#ID_SPAM_WORD-del","ecrire/[(#SELF|urldecode)]") ; ?>'><:supprimer:></a>
+	</td>
+</tr>
+</BOUCLE_list_spam_words>
+</table></div>
+<p>
+	<:spipbb:sw_spam_words_mass_add:>
+	<textarea name='sw_mass_add' id='sw_mass_add' class='forml' rows='2' cols='40'></textarea>
+</p>
+</fieldset>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" />
+</div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>
