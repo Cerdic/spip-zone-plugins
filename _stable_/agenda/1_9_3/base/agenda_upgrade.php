@@ -13,7 +13,7 @@
 				creer_base();
 				// ajout du champ evenements a la table spip_groupe_mots
 				// si pas deja existant
-				$desc = sql_showtable("spip_groupes_mots", '', false);
+				$desc = sql_showtable("spip_groupes_mots", true, '');
 				if (!isset($desc['field']['evenements'])){
 					spip_query("ALTER TABLE spip_groupes_mots ADD `evenements` VARCHAR(3) NOT NULL AFTER `syndic`");
 				}
