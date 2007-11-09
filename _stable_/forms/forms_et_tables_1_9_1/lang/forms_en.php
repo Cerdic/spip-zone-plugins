@@ -39,9 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'champ_nom_texte' => "Text",
 'champs_formulaire'=>"Form fields",
 'changer_choix_multiple' => "Change to multiple choice",
-'changer_choix_unique' => "Changer to unique choice",
+'changer_choix_unique' => "Change to unique choice",
 'choisir_email' => "Choose email according to",
-'confirmer_reponse' => "Confirme reply by mail with:",
+'confirmer_reponse' => "Confirm reply by mail with:",
 'csv_classique' => "Classic CSV (,)",
 'csv_excel' => "CSV for Excel (;)",
 'csv_tab' => "CSV with tabs",
@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nombre_reponses'=>"@number@ answers",
 'nouveau_champ' => "New field",
-'nouveau_choix' => "Niew choice",
+'nouveau_choix' => "New choice",
 'nouveau_formulaire' => "New form",
 
 'page'=>"Page",
