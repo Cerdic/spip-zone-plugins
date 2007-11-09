@@ -291,10 +291,16 @@
 
 	function Forms_extraire_reponse($id_donnee){
 		// Lire les valeurs entrees
-		$result = spip_query("SELECT * FROM spip_forms_donnees_champs AS r 
-			JOIN spip_forms_champs AS ch ON ch.champ=r.champ 
-			JOIN spip_forms_donnees AS d ON d.id_donnee = r.id_donnee
-			WHERE d.id_form = ch.id_form AND r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");
+		if (substr(spip_mysql_version(), 0, 1) == 3) {
+			$result = spip_query("SELECT * FROM spip_forms_donnees_champs  AS r, spip_forms_champs AS ch, spip_forms_donnees AS d
+			WHERE ch.champ=r.champ AND d.id_donnee = r.id_donnee AND d.id_form = ch.id_form AND r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");
+		}
+		else {
+			$result = spip_query("SELECT * FROM spip_forms_donnees_champs AS r 
+				JOIN spip_forms_champs AS ch ON ch.champ=r.champ 
+				JOIN spip_forms_donnees AS d ON d.id_donnee = r.id_donnee
+				WHERE d.id_form = ch.id_form AND r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");	
+		}
 		$valeurs = array();
 		$retour = urlencode(self());
 		$libelles = array();

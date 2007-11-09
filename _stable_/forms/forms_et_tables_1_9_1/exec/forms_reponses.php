@@ -125,10 +125,17 @@ function exec_forms_reponses(){
 	$types = array();
 	$form_unique = $id_form;
 
-	$query = "SELECT r.*, a.nom, f.titre FROM spip_forms_donnees AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) 
+	if (substr(spip_mysql_version(), 0, 1) == 3) {
+		$query = "SELECT r.*, a.nom, f.titre FROM spip_forms_donnees AS r LEFT JOIN spip_auteurs AS a USING (id_auteur), spip_forms AS f  
+		WHERE r.id_form=f.id_form AND r.confirmation ='valide' AND r.statut <> 'poubelle' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
+		ORDER BY r.date DESC LIMIT "._q($debut).", "._q($tranche);
+	}
+	else {
+		$query = "SELECT r.*, a.nom, f.titre FROM spip_forms_donnees AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) 
 		JOIN spip_forms AS f ON r.id_form=f.id_form
 		$where r.confirmation='valide' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
 		ORDER BY r.date DESC LIMIT "._q($debut).", "._q($tranche);
+	}
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$id_form = $row['id_form'];
