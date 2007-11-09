@@ -15,7 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				include_spip('base/abstract_sql');
 				creer_base();
 				// ajout des champs publique/privee si pas existants
-				$desc = spip_abstract_showtable("spip_zones", '', true);
+				if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
+					$desc = spip_abstract_showtable("spip_zones", '', true);
+				} else {
+					$desc = spip_abstract_showtable("spip_zones", true, '');
+				}
 				if (!isset($desc['field']['publique']))
 					spip_query("ALTER TABLE spip_zones ADD publique ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER descriptif");
 				if (!isset($desc['field']['privee']))
