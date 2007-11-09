@@ -1,0 +1,26 @@
+<plugin>
+	<nom>booster: un booster pour Spip</nom>
+	<auteur>C&eacute;dric Morin [->http://www.yterium.net/]
+_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>0.1.0</version>
+	<etat>experimental</etat>
+	<description>
+Ce plugin permet de booster votre site spip avec un cache statique de second niveau servi directment par Apache
+_ Pour etre boostee une page doit contenir la directive
+_ #HTTP_HEADER{X-Cache-Apache: true}
+
+Le plugin stocke les pages statiques dans un repertoire tmp/cache/apache et maintient une liste de correspondance (url,fichier)
+_ Il generere un htaccess comportant les directives de RewriteRules 
+avec une condition temporelle afin de repartir le service entre Apache et Spip.
+Ce fonctionnement permet de laisser passer une partie des requettes a Spip afin qu'il mette a jour les pages expirees.
+	</description>
+	<lien>[Documentation->http://www.spip-contrib.net/?article1605]</lien>
+	<prefix>booster</prefix>
+	<icon></icon>
+	<chemin dir='' />
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>booster_pipeline.php</inclure>
+	</pipeline>
+</plugin>
