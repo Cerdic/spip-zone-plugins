@@ -1,8 +1,22 @@
 <?php
+/*
+ * Booster
+ * Gestion d'un cache statique Apache
+ *
+ * Auteurs :
+ * Cedric Morin, Yterium.com
+ * (c) 2007 - Distribue sous licence GNU/GPL
+ *
+ */
+
+// ration de cache, exprime en 60e de temps :
+// 0 : pas de cache apache
+// 60 : toutes les requetes passent par apache (ne jamais faire ca !)
+// il faut laisser passer une partie des requetes pour que spip mette les pages a jour
+@define('_BOOSTER_CACHE_RATIO',50);
 
 function booster_genere_htaccess(){
 	/* debug*/
-	if (_request('clear_booster')!==NULL)		$GLOBALS['meta']['booster'] = "";
 	include_spip('inc/meta');
 	ecrire_meta('booster',$GLOBALS['meta']['booster']);
 	ecrire_metas();
