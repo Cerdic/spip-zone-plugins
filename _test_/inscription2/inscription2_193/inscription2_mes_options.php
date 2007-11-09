@@ -62,11 +62,11 @@
 	*/	
 	
 # autoriser les visiteurs a modifier leurs infos
-#define ('_DEBUG_AUTORISER', true);
+# define ('_DEBUG_AUTORISER', true);
 if (!function_exists('autoriser_spip_auteurs_elargis')) {
 function autoriser_auteurs_elargi($faire, $type, $id, $qui, $opt) {
-	$query = spip_query("select id_auteur from spip_auteurs_elargis where id=$id");
-	$query = spip_fetch_array($query);
+	$query = sql_select("id_auteur","spip_auteurs_elargis","id=".$id);
+	$query = sql_fetch($query);
 	if($query['id_auteur']==$qui['id_auteur'])
 		$qui['id_auteur'] = $id;
 	return autoriser($faire,'auteur', $id, $qui, $opt);
@@ -83,21 +83,21 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 		return
 			$qui['statut'] == '6forum'
 			AND $id == $qui['id_auteur'];
+	}
 }
-}
 
 
-function revision_auteurs_elargi($id, $c=false) {
-
+if (!function_exists('revision_auteurs_elargi')) {
+function revision_auteurs_elargi_dist($id, $c=false) {
 	return modifier_contenu('auteurs_elargi', $id,
 		array(
-			'champs' => array('nom_famille', 'prenom', 'adresse','ville','code_postal'),
+			'champs' => array('nom_famille', 'prenom', 'adresse','ville','code_postal','pays','telephone','fax','mobile','adresse_pro','code_postal_pro','pays_pro','ville_pro','telephone_pro','fax_pro','mobile_pro'),
 			'nonvide' => array('nom_email' => _T('info_sans_titre'))
 		),
 		$c);
 }
-
-
+}
+	
 //email envoye lors de l'inscription
 
 function envoyer_inscription2($id_auteur,$mode="inscription") {
@@ -121,9 +121,9 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
 	$message = _T('inscription2:message_auto')."\n\n"
 			. _T('inscription2:email_bonjour', array('nom'=>sinon($var_user['prenom'],$var_user['nom'])))."\n\n"
 			. _T('inscription2:texte_email_inscription', array(
-			'link_activation' => $adresse_site.'/?page=inscription2_confirmation&id='
+			'link_activation' => $adresse_site.'/spip.php?page=inscription2_confirmation&id='
 			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=conf', 
-			'link_suppresion' => $adresse_site.'/?page=inscription2_confirmation&id='
+			'link_suppresion' => $adresse_site.'/spip.php?page=inscription2_confirmation&id='
 			   .$var_user['id_auteur'].'&cle='.$var_user['alea_actuel'].'&mode=sup',
 			'login' => $var_user['login'], 'nom_site' => $nom_site_spip ));
 			
@@ -137,14 +137,12 @@ function envoyer_inscription2($id_auteur,$mode="inscription") {
  	. _T('inscription2:rappel_password')."\n\n" 
  	. _T('inscription2:choisir_nouveau_password')."\n\n" 
  	
- 	. $adresse_site."/?page=inscription2_confirmation&id=" 
+ 	. $adresse_site."/spip.php?page=inscription2_confirmation&id=" 
  	. $var_user['id_auteur']."&cle=".$var_user['alea_actuel']."&mode=conf"."\n\n" 
  	. _T('inscription2:rappel_login') . $var_user['login'] ; 
  	$sujet = "[$nom_site_spip] "._T('inscription2:rappel_password'); 
  	} 
-	
-	
-	
+
 	if (envoyer_mail($var_user['email'],
 			$sujet,
 			 $message))
