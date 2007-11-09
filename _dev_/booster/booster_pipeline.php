@@ -15,6 +15,8 @@
 // il faut laisser passer une partie des requetes pour que spip mette les pages a jour
 @define('_BOOSTER_CACHE_RATIO',50);
 
+function booster_fenetre_temps($duree){
+}
 function booster_genere_htaccess(){
 	/* debug*/
 	include_spip('inc/meta');
@@ -29,10 +31,22 @@ function booster_genere_htaccess(){
 			# une fraction de temps donnee basse sur la valeur des secondes
 			# on sert par apache
 			$url = parse_url($rewrite[0]);
-			$ht .= "
+			$start = rand(0,59);
+			$end = modulo($start+round(_BOOSTER_CACHE_RATIO),60);
+			if ($start<$end)
+				$ht .= "RewriteCond %{HTTP_HOST} ^".$url['host']."$ [NC]
+RewriteCond %{TIME_SEC} >=$start
+RewriteCond %{TIME_SEC} <=$end
+RewriteRule ^".$url['path']."$ ".$rewrite[1]." [L]
+";
+			else
+				$ht .= "RewriteCond %{HTTP_HOST} ^".$url['host']."$ [NC]
+RewriteCond %{TIME_SEC} >=$start
+RewriteRule ^".$url['path']."$ ".$rewrite[1]." [L]
 RewriteCond %{HTTP_HOST} ^".$url['host']."$ [NC]
-RewriteCond %{TIME_SEC} <30
-RewriteRule ^".$url['path']."$ ".$rewrite[1]." [L]";
+RewriteCond %{TIME_SEC} <=$end
+RewriteRule ^".$url['path']."$ ".$rewrite[1]." [L]
+";
 		}
 	}
 	ecrire_fichier(_DIR_TMP."htaccess.txt",$ht);
@@ -50,8 +64,7 @@ function booster_affichage_final($flux) {
 			ecrire_fichier($nom_cache,$flux);
 			# booster est une simple chaine pour eviter la deserialisation a chaque hit et preferer un strpos plus rapide
 			# url!nom_cache\n
-			if (/*debug*/!$e OR
-			 strpos($GLOBALS['meta']['booster'],"$url!")===FALSE) {
+			if (strpos($GLOBALS['meta']['booster'],"$url!")===FALSE) {
 				$GLOBALS['meta']['booster'] .= "$url!$nom_cache\n";
 				booster_genere_htaccess();
 			}

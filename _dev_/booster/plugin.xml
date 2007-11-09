@@ -4,6 +4,7 @@
 _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>0.1.0</version>
+	<version_base>0.1.0</version_base>
 	<etat>experimental</etat>
 	<description>
 Ce plugin permet de booster votre site spip avec un cache statique de second niveau servi directment par Apache
@@ -15,7 +16,8 @@ _ Il generere un htaccess comportant les directives de RewriteRules
 avec une condition temporelle afin de repartir le service entre Apache et Spip.
 Ce fonctionnement permet de laisser passer une partie des requettes a Spip afin qu'il mette a jour les pages expirees.
 	</description>
-	<lien>[Documentation->http://www.spip-contrib.net/?article1605]</lien>
+	<lien></lien>
+	<install>booster_install.php</install>
 	<prefix>booster</prefix>
 	<icon></icon>
 	<chemin dir='' />
