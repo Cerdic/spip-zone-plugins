@@ -134,6 +134,18 @@ function spipbb_init_metas($id_rubrique=0)
 	} // if empty spipbb_meta
 
 	// chemin icones et smileys ?
+
+	// spam words
+	$spipbb_meta['disable_sw'] = "non";
+	$spipbb_meta['sw_nb_spam_ban'] = 3;
+	$spipbb_meta['sw_ban_ip'] = "non";
+	$spipbb_meta['sw_admin_can_spam'] = "oui";
+	$spipbb_meta['sw_modo_can_spam'] = "oui";
+	$spipbb_meta['sw_send_pm_warning'] = "non";
+	$spipbb_meta['sw_warning_from_admin'] = 1; // id_auteur
+	$spipbb_meta['sw_warning_pm_titre'] = _T('spipbb:sw_pm_spam_warning_titre');
+	$spipbb_meta['sw_warning_pm_message'] = _T('spipbb:sw_pm_spam_warning_message');
+
 	// final - sauver
 
 	include_spip('inc/meta');
@@ -316,29 +328,20 @@ function spipbb_admin_gauche($id_rubrique=0,$adm="")
 	// -- liste des fonctions
 
 /*
-Index de l'Administration
-Aper�u du Forum
-Configuration
-Gestion
+Apercu du Forum
 Permissions
-D�lester
-Administration G�n�rale
+Delester
 E-mail de Masse
-Restaurer la base de donn�es
 Smilies
 Censure
 Administration des Groupes
 Gestion
 Permissions
-Spam Words
-Configuration
-Flagged Posts
+SPAM Flagged Posts
 Log
 Manage Words
-Administration des Th�mes
-Menu
 Administration des Utilisateurs
-Contr�le du bannissement
+Controle du bannissement
 Interdire un nom d'utilisateur
 Flags
 Link Checker

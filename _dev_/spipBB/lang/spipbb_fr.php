@@ -93,6 +93,8 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_forums_titre' => 'Gestion des forums',
 'admin_action_configuration' => 'Configuration',
 'admin_forums_configuration' => 'Configuration de SpipBB',
+'admin_cat_spam' => 'Anti Spam',
+'admin_action_swconfig' => 'Configuration',
 
 // B
 'bio' => 'Petite biographie',
@@ -279,6 +281,24 @@ Les mots de moins de trois lettres sont ignor&eacute;s.',
 'sujet_verifie' => 'V&eacute;rifier ce sujet',
 'sujet_visites' => 'Visites',
 'sur' => ' sur ',
+'sw_spam_titre' => 'Filtrage du spam',
+'sw_config_generale_titre' => 'Configuration g&eacute;n&eacute;rale du filtrage du spam',
+'sw_config_generale' => 'Configuration actuelle du filtrage :',
+'sw_disable_sw_titre' => '<strong>D&eacute;sactive le filtrage</strong><br />Si vous devez vous passer du filtrage,<br />cliquez sur Oui',
+'sw_nb_spam_ban_titre' => 'Nombre de spams avant banissement',
+'sw_ban_ip_titre' => 'Bannir l\'IP en m&ecirc;me temps',
+'sw_config_exceptions_titre' => 'Gestion des exceptions',
+'sw_config_exceptions' => 'Vous pouvez activer des exceptions pour des utilisateurs privil&eacute;gi&eacute;s ici. Ils pourront quand m&ecirc;me publier avec des mots bannis.',
+'sw_admin_can_spam' => 'Les admins sont autoris&eacute;s',
+'sw_modo_can_spam' => 'Les mod&eacute;rateurs sont autoris&eacute;s',
+'sw_config_warning_titre' => 'Configuration des avertissements par message priv&eacute;',
+'sw_config_warning' => 'Vous pouvez choisir le texte du MP envoy&eacute; si vous activez cette option (maxi 255 caract&egrave;res).',
+'sw_send_pm_warning' => '<strong>Envoie un MP &agrave; l\'utilisateur</strong><br />lorsqu\'il poste un message avec un mot interdit',
+'sw_warning_from_admin' => 'Choisir l\'admin auteur du message envoy&eacute;',
+'sw_warning_pm_titre' => 'Sujet du message priv&eacute;',
+'sw_warning_pm_message' => 'Texte du message priv&eacute;',
+'sw_pm_spam_warning_titre' => 'Attention.',
+'sw_pm_spam_warning_message' => 'Ceci est un avertissement. Vous avez essay&eacute; de poster un message analys&eacute; comme du spam sur ce site web. Merci d\'&eacute;viter de recommencer.',
 
 //T
 'texte_login_precaution' => 'Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.

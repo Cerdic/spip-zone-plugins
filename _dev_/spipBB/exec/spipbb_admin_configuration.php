@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin_configuration - config SpipBB    #
 #  Authors : Chryjs, 2007                                       #
-#  Contact : chryjs�@!free�.!fr                                 #
+#  Contact : chryjs!@!free!.!fr                                 #
 # [en] admin menus                                              #
 # [fr] menus d'administration                                   #
 #---------------------------------------------------------------#
@@ -41,6 +41,12 @@ function exec_spipbb_admin_configuration()
 
 	// [fr] initialisations
 	// [en] initialize
+	$id_rubrique=intval(_request('id_rubrique'));
+
+	// [fr] recuperer les donnees du secteur
+	// [en] load the sector datas
+	$row_rub = sql_fetsel("id_secteur","spip_rubriques","id_rubrique=$id_rubrique");
+	$id_secteur= $row_rub['id_secteur'];
 
 	if (_request('save')=="oui") {
 		if (!autoriser('configurer', 'plugins')) {

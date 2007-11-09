@@ -1,0 +1,110 @@
+#CACHE{0}
+
+<form method="post" action="#ENV{lien_action}">
+<input type='hidden' id="exec" value="#ENV{exec_script}">
+
+[(#ENV{url_post}|form_hidden)]
+
+[(#REM|debut_cadre_trait_couleur{1,'xxx','SpipBB Anti Spam'})]
+[(#REM) ------------------------ Configuration generale ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:sw_config_generale_titre:></legend>
+<div><table border='0' cellspacing='1' cellpadding='3' width="100%">
+<tr><td colspan='2' class='verdana2'><:spipbb:sw_config_generale:></td></tr>
+<tr>
+	<td align='left' class='verdana2'><:spipbb:sw_disable_sw_titre:></td>
+	<td>
+		<input type='radio' name='disable_sw' value='oui' id='disable_sw_1' [ checked="(#ENV{disable_sw}|=={'oui'}|?{checked})"] /> <label for='disable_sw_1'><:oui:></label>
+		&nbsp;
+		<input type='radio' name='disable_sw' value='non' id='disable_sw_0' [ checked="(#ENV{disable_sw}|=={'non'}|?{checked})"] /> <label for='disable_sw_0'><:non:></label>
+	</td>
+</tr>
+<tr>
+	<td align='left' class='verdana2'><:spipbb:sw_nb_spam_ban_titre:></td>
+	<td>
+		<input type="text" name="sw_nb_spam_ban" value="[(#ENV{sw_nb_spam_ban})]" size='2' />
+	</td>
+</tr>
+<tr>
+	<td align='left' class='verdana2'><:spipbb:sw_ban_ip_titre:></td>
+	<td>
+		<input type='radio' name='sw_ban_ip' value='oui' id='sw_ban_ip_1' [ checked="(#ENV{sw_ban_ip}|=={'oui'}|?{checked})"] /> <label for='sw_ban_ip_1'><:oui:></label>
+		&nbsp;
+		<input type='radio' name='sw_ban_ip' value='non' id='sw_ban_ip_0' [ checked="(#ENV{sw_ban_ip}|=={'non'}|?{checked})"] /> <label for='sw_ban_ip_0'><:non:></label>
+	</td>
+</tr>
+</table></div>
+</fieldset>
+
+[(#REM) ------------------------ Exceptions ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:sw_config_exceptions_titre:></legend>
+<div><table border='0' cellspacing='1' cellpadding='3' width="100%">
+<tr><td colspan='2' class='verdana2'><:spipbb:sw_config_exceptions:></td></tr>
+<tr>
+	<td align='left' class='verdana2'><:spipbb:sw_admin_can_spam:></td>
+	<td align='left' class='verdana2'>
+		<input type='radio' name='sw_admin_can_spam' value='oui' id='sw_admin_can_spam_1' [ checked="(#ENV{sw_admin_can_spam}|=={'oui'}|?{checked})"] /> <label for='sw_admin_can_spam_1'><:oui:></label>
+		&nbsp;
+		<input type='radio' name='sw_admin_can_spam' value='non' id='sw_admin_can_spam_0' [ checked="(#ENV{sw_admin_can_spam}|=={'non'}|?{checked})"] /> <label for='sw_admin_can_spam_0'><:non:></label>
+	</td>
+</tr>
+<tr>
+	<td align='left' class='verdana2'><:spipbb:sw_modo_can_spam:></td>
+	<td align='left' class='verdana2'>
+		<input type='radio' name='sw_modo_can_spam' value='oui' id='sw_modo_can_spam_1' [ checked="(#ENV{sw_modo_can_spam}|=={'oui'}|?{checked})"] /> <label for='sw_modo_can_spam_1'><:oui:></label>
+		&nbsp;
+		<input type='radio' name='sw_modo_can_spam' value='non' id='sw_modo_can_spam_0' [ checked="(#ENV{sw_modo_can_spam}|=={'non'}|?{checked})"] /> <label for='sw_modo_can_spam_0'><:non:></label>
+	</td>
+</tr>
+</table></div>
+</fieldset>
+
+
+[(#REM) ------------------------ Warning settings ------------------------ ]
+
+<fieldset>
+<legend><:spipbb:sw_config_warning_titre:></legend>
+<div><table border='0' cellspacing='1' cellpadding='3' width="100%">
+<tr><td colspan='2' class='verdana2'><:spipbb:sw_config_warning:></td></tr>
+<tr>
+	<td align='left' class='verdana2'><:spipbb:sw_send_pm_warning:></td>
+	<td align='left' class='verdana2'>
+		<input type='radio' name='sw_send_pm_warning' value='oui' id='sw_send_pm_warning_1' [ checked="(#ENV{sw_send_pm_warning}|=={'oui'}|?{checked})"] /> <label for='sw_send_pm_warning_1'><:oui:></label>
+		<input type='radio' name='sw_send_pm_warning' value='non' id='sw_send_pm_warning_0' [ checked="(#ENV{sw_send_pm_warning}|=={'non'}|?{checked})"] /> <label for='sw_send_pm_warning_0'><:non:></label>
+	</td>
+</tr>
+<tr>
+	<td align='left' class='verdana2'><:spipbb:sw_warning_from_admin:></td>
+	<td align='left' class='verdana2'>
+		<select name="sw_warning_from_admin">
+		<BOUCLE_admin(AUTEURS){statut='0minirezo'}{par id_auteur}>
+			<option value="#ID_AUTEUR"[ selected="(#ENV{sw_warning_from_admin}|=={#ID_AUTEUR}|?{selected})"]>#NOM</option>
+		</BOUCLE_admin>
+		</select>
+	</td>
+</tr>
+</table></div>
+<p>
+	<:spipbb:sw_warning_pm_titre:>
+	<textarea name='sw_warning_pm_titre' id='sw_warning_pm_titre' class='forml' rows='2' cols='40'>[(#ENV{sw_warning_pm_titre})]</textarea>
+	<br />
+	<:spipbb:sw_warning_pm_message:>
+	<textarea name="sw_warning_pm_message" id='sw_warning_pm_message' class='forml' rows='4' cols='40'>[(#ENV{sw_warning_pm_message})]</textarea>
+</p>
+</fieldset>
+
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_spipbb_ok" value="<:OK:>" class="fondo" />
+<!--
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+-->
+</div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</form>

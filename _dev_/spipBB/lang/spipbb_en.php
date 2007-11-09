@@ -91,6 +91,8 @@ The e-mail address will be used only to confirm the details of your registration
 'admin_forums_titre' => 'Forums admin',
 'admin_action_configuration' => 'Configure',
 'admin_forums_configuration' => 'Configure SpipBB',
+'admin_cat_spamwords' => 'Spam Words',
+'admin_action_swconfig' => 'Configure',
 
 // B
 'bio' => 'Short biography',
@@ -276,7 +278,24 @@ Words less than three letters long will be ignored.',
 'sujet_clos_texte' => 'This topic is closed, you cannot post to it.',
 'sujet_ouvrir' => 'Open this Topic',
 'sur' => 'on',
-
+'sw_spam_titre' => 'Spam filtering',
+'sw_config_generale_titre' => 'General spam filtering settings',
+'sw_config_generale' => 'Currently activated spam words:',
+'sw_disable_sw_titre' => '<strong>Disable Spam words filter</strong><br />If you need to bypass this filter,<br />then set this to "Yes".',
+'sw_nb_spam_ban_titre' => 'Number of offenses before user is automatically banned',
+'sw_ban_ip_titre' => 'Ban IP as well?',
+'sw_config_exceptions_titre' => 'Exceptions',
+'sw_config_exceptions' => 'You can set exceptions for privileged members here. The members who meet these criteria will be permitted to post spam words.',
+'sw_admin_can_spam' => 'Allow admin to post spam words',
+'sw_modo_can_spam' => 'Allow moderators to post spam words',
+'sw_config_warning_titre' => 'Private message warning settings',
+'sw_config_warning' => 'Here you can define the text to PM your users if you choose to warn them via PM when they posts a spam word (max. 255 characters).',
+'sw_send_pm_warning' => 'Send a PM to user to warn them when they submit a post that contains a spam word',
+'sw_warning_from_admin' => 'Select the administrator that is listed as the Private Message sender',
+'sw_warning_pm_titre' => 'Private message subject',
+'sw_warning_pm_message' => 'Private message text',
+'sw_pm_spam_warning_titre' => 'Warning.',
+'sw_pm_spam_warning_message' => 'This is a warning. You have tried to post a word that is defined as spam on this website. Please refrain from doing so again.',
 
 //T
 'texte_login_precaution' => 'Warning! this is the login with which your are connected at present.
