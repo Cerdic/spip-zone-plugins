@@ -17,13 +17,21 @@ include_spip('inc/vieilles_defs');
 		case 'test':
 			// Verifier que le champ id_notation est present...
 			include_spip('base/abstract_sql');
-			$desc = spip_abstract_showtable("spip_notations", '', false);
+			if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
+				$desc = spip_abstract_showtable("spip_notations", '', true);
+			} else {
+				$desc = spip_abstract_showtable("spip_notations", true, '');
+			}
 			return (isset($desc['field']['maj']));
 			break;
 		// Installer la base
 		case 'install':
 			include_spip('base/create');
-			$desc = spip_abstract_showtable("spip_notations", '', false);
+			if (version_compare($GLOBALS['spip_version_code'],'1.9300','<')) {
+				$desc = spip_abstract_showtable("spip_notations", '', true);
+			} else {
+				$desc = spip_abstract_showtable("spip_notations", true, '');
+			}
 			if (isset($desc['field']['id_notation']))
       { spip_query("ALTER TABLE spip_notations ADD `maj` TIMESTAMP NOT NULL ");
       }
