@@ -392,7 +392,7 @@ function exec_skeleditor(){
 	// POST request ?
 	if (isset($_POST['editor'])) {      // save file ?
 	     $editor = $_POST['editor'];
-	     $editor = str_replace("&lt;/textarea","</textarea",$editor); // exception: textarea closing tag	     
+	     $editor = str_replace("&lt;/textarea","</textarea",$editor); // exception: textarea closing tag           
 	     if (isset($_GET['f'])){
 	     	 $file_name = $_GET['f'];		         
 	     } else $file_name = "";
@@ -531,6 +531,7 @@ function exec_skeleditor(){
                     $file_str = implode ('',$file_tmp);                  
                     if (($extension=='html') && (_request(debug)!='true')) echo  skel_parser($file_str); // experimental                            	        
                     $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag
+                    $file_str = str_replace("&","&amp;",$file_str); //  preserve html entities
   								  echo generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));
                     echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
   									echo "<div style='text-align:$spip_lang_right'><input type='submit' name='action' value='"._T("skeleditor:sauver")."' class='fondo'></div>";
