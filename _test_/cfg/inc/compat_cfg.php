@@ -38,14 +38,28 @@ function inc_compat_cfg_dist($quoi = NULL) {
 }
 
 function compat_cfg_defs_dist() {
-	$defs = array();
-
-	// http://trac.rezo.net/trac/spip/changeset/9919
-	if ($GLOBALS['spip_version_code'] < '1.9259')
-	$defs['sql_fetch'] = '($res, $serveur=\'\') {
-		return spip_fetch_array($res);
-	}';
-
+	$defs = array(
+		'sql_fetch' => 
+			'($res, $serveur=\'\') {
+				return spip_fetch_array($res);
+			}',
+		
+		/*'sql_selectdb' => 
+			'($res, $serveur=\'\') {
+				$GLOBALS[\'spip_mysql_db\'] = mysql_select_db($res);
+				return $GLOBALS[\'spip_mysql_db\'];
+			}',	*/
+		
+		'sql_query' => 
+			'($res, $serveur=\'\') {
+				return spip_query_db($res);
+			}',				
+			
+		/*'sql_count' => 
+			'($res, $serveur=\'\') {
+				return spip_mysql_count($res);
+			}'*/
+	);
 	return $defs;
 }
 

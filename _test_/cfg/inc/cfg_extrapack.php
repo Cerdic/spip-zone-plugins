@@ -104,7 +104,7 @@ class cfg_extrapack
 				(is_numeric($cles[$i]) ? intval($cles[$i]) : _q($cles[$i]));
 			$and = ' AND ';
 	    }
-		return spip_query($extra);
+		return sql_query($extra);
 	}
 }
 ?>

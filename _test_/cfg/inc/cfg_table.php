@@ -48,8 +48,8 @@ class cfg_table
 			$sep = ', ';
 	    }
 		$query .= ' FROM ' . $this->cfg->table . $this->where();
-		$query = spip_query($query);
-		($query = spip_fetch_array($query)) && ($val = $query);
+		$query = sql_query($query);
+		($query = sql_fetch($query)) && ($val = $query);
 
 		foreach ($this->cfg->champs_id as $i => $name) {
 			$val[$name] = $cles[$i];
@@ -88,7 +88,7 @@ class cfg_table
     	
     	if ($supprimer) {
 			return !$existe || 
-				spip_query('DELETE FROM ' . $this->cfg->table . $this->where());
+				sql_query('DELETE FROM ' . $this->cfg->table . $this->where());
 		}
 
 		if ($existe) {
@@ -102,7 +102,7 @@ class cfg_table
 				$sep = ', ';
 		    }
 				spip_log($query . $this->where());
-		    return spip_query($query . $this->where());
+		    return sql_query($query . $this->where());
 	    }
 
 		$query = 'INSERT INTO ' . $this->cfg->table;
@@ -114,7 +114,7 @@ class cfg_table
 			$sep = ', ';
 	    }
 				spip_log($query . ')' . $values . ')');
-	    return spip_query($query . ')' . $values . ')');
+	    return sql_query($query . ')' . $values . ')');
 	}
 }
 ?>
