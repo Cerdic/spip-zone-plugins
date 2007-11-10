@@ -59,6 +59,13 @@ function chess_insert_head($flux)
 		
 		
 	}
+	
+	$(document).ready(function(){
+
+$("#mainContainer").dblclick(function(){
+return false;
+});
+});
 </script >
 EOH;
 
