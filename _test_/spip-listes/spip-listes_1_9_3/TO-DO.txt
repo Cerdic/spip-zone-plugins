@@ -5,6 +5,7 @@
 
 
 TO-DO:
+- pouvoir déléguer l'administration d'une liste 
 - Corriger documentation contextuelle
 - maintenance: mettre en place l'auth. par FTP.
 - module de stats (calendrier des envoyés/à envoyer pour vérifier engorgement)
