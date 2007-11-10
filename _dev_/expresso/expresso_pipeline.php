@@ -42,6 +42,7 @@ function expresso_genere_htaccess(){
 				$start = rand(0,59);
 				$r = "RewriteCond %{HTTP_HOST} ^$host$
 RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{HTTP_COOKIE} !^.*spip_admin=.*$
 RewriteCond %{QUERY_STRING} ^$query$";
 				if (_EXPRESSO_CACHE_RATIO==59){
 					$express .= $r . "
@@ -81,40 +82,41 @@ RewriteRule ^$url$ ".$rewrite[1]." [L]
 
 function expresso_nettoie($flux){
 	$flux =	str_replace("</body>","<span style='font-size:xx-small;'>expresso</span></body>",$flux);
-	$flux = preg_replace(",<div[^>]*spip-admin[^>]*>.*</div>,Uims","",$flux);
+	//$flux = preg_replace(",<div[^>]*spip-admin[^>]*>.*</div>,Uims","",$flux);
 	return $flux;
 }
 
 function expresso_affichage_final($flux) {
-	$url = self(true);
-spip_log($url);
-	$url = "http://".$_SERVER['HTTP_HOST']. preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']) . $url;
-spip_log($GLOBALS['meta']['adresse_site']);
-spip_log(preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']));
-spip_log($url);
-	if (isset($GLOBALS['page']['entetes']['X-Expresso'])) {
-		$nom_cache = _DIR_VAR . "apache/".md5($url).".html";
-		if ( 
-			($GLOBALS['var_mode']=='calcul')
-			OR ($GLOBALS['var_mode']=='recalcul')
-			OR !($e=file_exists($nom_cache))
-			OR ( ($d=filemtime($nom_cache)) AND ($d+$GLOBALS['page']['entetes']['X-Spip-Cache']<time()))
-			) {
-			spip_log("$url : $nom_cache",'boost');
-			ecrire_fichier($nom_cache,expresso_nettoie($flux));
-			# expresso est une simple chaine pour eviter la deserialisation a chaque hit et preferer un strpos plus rapide
-			# url!nom_cache\n
-			if (strpos($GLOBALS['meta']['expresso'],"$url!")===FALSE) {
-				$GLOBALS['meta']['expresso'] .= "$url!$nom_cache\n";
-				expresso_genere_htaccess();
+	if (empty($_POST)
+	AND !isset($_COOKIE['spip_admin'])
+	AND !isset($_COOKIE['spip_session'])
+	AND !isset($_SERVER['PHP_AUTH_USER'])){
+		$url = self(true);
+		$url = "http://".$_SERVER['HTTP_HOST']. preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']) . $url;
+		if (isset($GLOBALS['page']['entetes']['X-Expresso'])) {
+			$nom_cache = _DIR_VAR . "apache/".md5($url).".html";
+			if ( 
+				($GLOBALS['var_mode']=='calcul')
+				OR ($GLOBALS['var_mode']=='recalcul')
+				OR !($e=file_exists($nom_cache))
+				OR ( ($d=filemtime($nom_cache)) AND ($d+$GLOBALS['page']['entetes']['X-Spip-Cache']<time()))
+				) {
+				spip_log("$url : $nom_cache",'boost');
+				ecrire_fichier($nom_cache,expresso_nettoie($flux));
+				# expresso est une simple chaine pour eviter la deserialisation a chaque hit et preferer un strpos plus rapide
+				# url!nom_cache\n
+				if (strpos($GLOBALS['meta']['expresso'],"$url!")===FALSE) {
+					$GLOBALS['meta']['expresso'] .= "$url!$nom_cache\n";
+					expresso_genere_htaccess();
+				}
+				elseif($GLOBALS['var_mode']=='recalcul')
+					expresso_genere_htaccess();
 			}
-			elseif($GLOBALS['var_mode']=='recalcul')
-				expresso_genere_htaccess();
 		}
-	}
-	elseif (strpos($GLOBALS['meta']['expresso'],"$url!")!==FALSE) {
-		$GLOBALS['meta']['expresso'] = preg_replace(",$url!.*?\n,","",$GLOBALS['meta']['expresso']);
-		expresso_genere_htaccess();
+		elseif (strpos($GLOBALS['meta']['expresso'],"$url!")!==FALSE) {
+			$GLOBALS['meta']['expresso'] = preg_replace(",$url!.*?\n,","",$GLOBALS['meta']['expresso']);
+			expresso_genere_htaccess();
+		}
 	}
 	return $flux;
 }
