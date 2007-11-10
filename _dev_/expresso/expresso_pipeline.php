@@ -52,7 +52,7 @@ RewriteRule ^$url$ ".$rewrite[1]." [L]
 ";					
 				}
 				else {
-					$end = modulo($start+round(_EXPRESSO_CACHE_RATIO),60);
+					$end = ($start+round(_EXPRESSO_CACHE_RATIO))%60;
 					$start--;
 					$end++;
 					if ($start<$end)
