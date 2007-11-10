@@ -1,3 +1,12 @@
+2007-11-10  chryjs  <chryjs!@!free!.!fr>
+
+ * Anti Spam : ajout de l'import d'un CSV avec une liste de mots
+ * Admin info : Presentation et traduction [fr] [en]
+ * Admin config : Presentation et traduction [fr] [en] correction des actions
+ * Admin Correction de la presentation + bug select id_rubrique + actions / exec
+ * inc/forum_insert doit inclure inc/spipbb pour la compatibilite 192 voir : http://www.spip-contrib.net/Plugin-SpipBB#forum400088
+
+
 2007-11-09  chryjs  <chryjs!@!free!.!fr>
 
  * admin : Gestion des messages de spam, ajout de la gestion de mot, envoyer un message, logger etc

@@ -355,5 +355,62 @@ Utilisateurs inactifs
 	return $res;
 }
 
+/*
+// ------------------------------------------------------------------------------
+// [fr] compatibilite spip192->193 ecrire_metas n'est plus requis en 193
+#-------------------------------------------------------------------------------#
+// from inc/utils.php 193
+#-------------------------------------------------------------------------------#
+if (!function_exists('ecrire_metas')) {
+function ecrire_metas() { // ne fait rien en Spip 193
+} } // ecrire_metas
+*/
+
+// ------------------------------------------------------------------------------
+// [fr] Verifie que les rubriques et les articles sont bien numerotes et les
+// [fr] renumerote si besoin
+// ------------------------------------------------------------------------------
+function spipbb_renumerote()
+{
+	$id_secteur = $GLOBALS['spipbb']['spipbb_id_rubrique'];
+	// les rubriques
+
+	$result = sql_select("id_rubrique, titre", "spip_rubriques", array(
+			"id_secteur='".$id_secteur."'",
+			"id_rubrique!='".$id_secteur."'" ),	// array where
+			'','titre');
+	$numero = 10;
+	while ( $row = sql_fetch($result) )
+	{
+		$titre = supprimer_numero($row['titre']);
+		$id_rubrique = $row['id_rubrique'];
+		$titre = $numero . ". ".trim($titre);
+		@sql_updateq('spip_rubriques', array(
+						'titre'=>$titre
+						),
+				"id_rubrique='$id_rubrique'");
+		$numero = $numero + 10;
+	} // while
+
+	// les articles
+//	$query = "SELECT A.id_article , A.titre FROM spip_articles AS A, spip_rubriques AS R WHERE A.id_rubrique=R.id_rubrique AND A.id_secteur='".$id_secteur."' ORDER BY R.titre, A.titre";
+//	$result = sql_query($query);
+
+	$result = sql_select("A.id_article , A.titre", array("spip_articles AS A", "spip_rubriques AS R"),
+			array("A.id_rubrique=R.id_rubrique","A.id_secteur='".$id_secteur."'"),
+			'', array("R.titre", "A.titre") );
+	$numero = 10;
+	while ( $row = sql_fetch($result) )
+	{
+		$titre = supprimer_numero($row['titre']);
+		$id_article = $row['id_article'];
+		$titre = $numero . ". ".trim($titre);
+		@sql_updateq('spip_articles', array(
+						'titre'=>$titre
+						),
+				"id_article='$id_article'");
+		$numero = $numero + 10;
+	} // while
+} // spipbb_renumerote
 
 ?>

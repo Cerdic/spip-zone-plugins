@@ -51,9 +51,7 @@ function exec_spipbb_admin()
 	echo creer_colonne_droite('', true);
 	echo debut_droite('',true);
 
-	echo debut_cadre_formulaire('',true);
 	echo spipbb_recap_config();
-	echo fin_cadre_formulaire(true);
 
 	echo fin_gauche(), fin_page();
 } // exec_spipbb_admin
@@ -61,8 +59,9 @@ function exec_spipbb_admin()
 // ------------------------------------------------------------------------------
 // [fr] Affiche les statistiques generales du forum SpipBB
 // ------------------------------------------------------------------------------
-function spipbb_recap_config() {
-global $couleur_claire, $couleur_foncee;
+function spipbb_recap_config()
+{
+	global $couleur_claire, $couleur_foncee;
 // Welcome
 // Statistiques du Forum
 
@@ -72,7 +71,7 @@ global $couleur_claire, $couleur_foncee;
 	$boarddays = ( time() - $start_date ); // format de start_date ?
 	$posts_per_day = sprintf("%.8f", $total_posts / $boarddays);
 	$users_per_day = sprintf("%.8f", $total_users / $boarddays);
-	$forum_age = ( date("Y",$boarddays)-1970 ) . " ans " . date("n",$boarddays). " mois " . date("j",$boarddays)." jours ";
+	$forum_age = ( date("Y",$boarddays)-1970 ) . "/" . date("n",$boarddays);
 
 	if($posts_per_day > $total_posts)
 	{
@@ -86,13 +85,10 @@ global $couleur_claire, $couleur_foncee;
 
 	// Qui est en ligne
 
-	$r = spip_query("SELECT COUNT(*) AS total FROM spip_auteurs WHERE en_ligne>= DATE_SUB(NOW(), INTERVAL 5 MINUTE )");
-	$o = spip_fetch_array($r); // fetch all ?
-	$total_online = count($o);
+	$r = sql_fetsel("count(*) AS total",'spip_auteurs', 'en_ligne>= DATE_SUB(NOW(), INTERVAL 5 MINUTE )');
+	$total_online = $r['total'];
 
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
-	//$securiser_action = charger_fonction('securiser_action', 'inc');
-	// on sait que cette fonction est dans le fichier associe
 
 	$contexte = array( 
 				'couleur_foncee'=>$couleur_foncee,
@@ -102,7 +98,7 @@ global $couleur_claire, $couleur_foncee;
 				'total_users' => $total_users,
 				'users_per_day' => $users_per_day,
 				'posts_per_day' => $posts_per_day,
-				'start_date' => date("j n y",$start_date),
+				'start_date' => normaliser_date($start_date), //date("j n y",$start_date),
 				'forum_age' => $forum_age,
 				'total_online' => $total_online,
 				'spipbb_version' => $GLOBALS['spipbb']['version']
@@ -110,8 +106,7 @@ global $couleur_claire, $couleur_foncee;
 	$res = recuperer_fond("prive/spipbb_admin_index",$contexte) ;
 
 	return $res;
-
-}
+} // spipbb_recap_config
 
 // ------------------------------------------------------------------------------
 // [fr] Fourni des statistiques sur la base de donnees
@@ -121,23 +116,27 @@ function get_db_stat($mode)
 	switch( $mode )
 	{
 		case 'usercount':
-			$query="SELECT COUNT(id_auteur) AS total FROM spip_auteurs"; // peut etre rajouter where enligne<>NULL
+			//$query="SELECT COUNT(id_auteur) AS total FROM spip_auteurs"; // peut etre rajouter where enligne<>NULL
+			$result = sql_select('COUNT(id_auteur) AS total','spip_auteurs');
 			break;
 
 		case 'newestuser':
-			$query="SELECT id_auteur, nom FROM spip_auteurs ORDER BY id_auteur DESC LIMIT 0,1";
+			//$query="SELECT id_auteur, nom FROM spip_auteurs ORDER BY id_auteur DESC LIMIT 0,1";
+			$result = sql_select('id_auteur, nom','spip_auteurs','','','id_auteur DESC','1');
 			break;
 
 		case 'postcount':
-			$query="SELECT COUNT(*) AS total FROM spip_forum";
+			//$query="SELECT COUNT(*) AS total FROM spip_forum";
+			$result = sql_select('COUNT(*) AS total','spip_forum');
 			break;
 
 		case 'oldestpost':
-			$query="SELECT date_heure AS date FROM spip_forum ORDER BY date_heure ASC LIMIT 0,1";
+			//$query="SELECT date_heure AS date FROM spip_forum ORDER BY date_heure ASC LIMIT 0,1";
+			$result = sql_select('date_heure AS date','spip_forum','','','date_heure ASC','1');
 			break;
 	}
 
-	if ($result=sql_query($query)) {
+	if ($result) {
 		$row=sql_fetch($result);
 	}
 

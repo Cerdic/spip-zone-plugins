@@ -2,6 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spipbb');
+
 //
 function spipbb_preg_quote($str, $delimiter)
 {

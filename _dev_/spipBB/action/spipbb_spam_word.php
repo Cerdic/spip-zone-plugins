@@ -53,12 +53,29 @@ function action_spipbb_spam_word()
 //	case 'edit' :
 //		break;
 	case 'insert' :
-		$list_sw = corriger_caracteres(_request('sw_mass_add'));
-		$list = preg_split("#[^A-Za-z-]#", $list_sw );
-		for ($i = 0; $i < count($list); $i++) {
-			$word = trim($list[$i]);
-			if (empty($word)) { continue; }
-			@sql_insertq('spip_spam_words',array( 'spam_word'=>str_replace("\'", "''", $word)) );
+		$list_sw = trim(corriger_caracteres(_request('sw_mass_add')));
+		if ($list_sw) {
+			$list = preg_split("#[^A-Za-z-]#", $list_sw );
+			for ($i = 0; $i < count($list); $i++) {
+				$word = trim($list[$i]);
+				if (empty($word)) { continue; }
+				@sql_insertq('spip_spam_words',array( 'spam_word'=>str_replace("\'", "''", $word)) );
+			}
+		}
+		if ( $list_url = trim(_request('sw_url_add')) ) {
+			include_spip("inc/distant");
+			$list_csv_raw = recuperer_page($list_url,true);
+			$list_csv = preg_split("/\r\n|\n\r|\n|\r|\s| |\t/",$list_csv_raw);
+			reset($list_csv);
+			while (list($key,$val)=each($list_csv)) {
+				$val=preg_replace("/[\t| |\s]#.*/","",$val); // remove comments
+				$val=preg_replace("/^#.*$/","",$val); // remove comments line
+				if (!empty($val)) {
+					if ($val) {
+						@sql_insertq('spip_spam_words',array( 'spam_word'=>str_replace("\'", "''", $val)) );
+					}
+				}
+			} // while
 		}
 		break;
 	}

@@ -88,9 +88,7 @@ function exec_spipbb_admin_anti_spam_words()
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
 
-	echo debut_cadre_formulaire('',true);
 	echo spipbb_anti_spam_words_formulaire($id_rubrique);
-	echo fin_cadre_formulaire(true);
 	echo fin_gauche(), fin_page();
 
 } // exec_spipbb_admin_spam_words

@@ -40,6 +40,13 @@ function exec_spipbb_admin_forums()
 {
 	global $connect_statut, $connect_toutes_rubriques;
 
+	$id_rubrique=intval(_request('id_rubrique'));
+
+	// [fr] recuperer les donnees du secteur
+	// [en] load the sector datas
+	$row_rub = sql_fetsel("id_secteur","spip_rubriques","id_rubrique=$id_rubrique");
+	$id_secteur= $row_rub['id_secteur'];
+
 	// [fr] initialisations
 	// [en] initialize
 	if (!isset($GLOBALS['spipbb'])) spipbb_init_metas() ;
@@ -62,10 +69,10 @@ function exec_spipbb_admin_forums()
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
 
-	echo debut_cadre_formulaire('',true);
+//	echo debut_cadre_formulaire('',true);
 	spipbb_renumerote();
 	echo spipbb_admin_forums($row);
-	echo fin_cadre_formulaire(true);
+//	echo fin_cadre_formulaire(true);
 
 	echo fin_gauche(), fin_page();
 } // exec_spipbb_admin_forums
@@ -82,54 +89,17 @@ function spipbb_admin_forums()
 	$hash_move = calculer_action_auteur("spipbb_move",$GLOBALS['spipbb']['spipbb_id_rubrique']);
 	$hash_instituer = calculer_action_auteur("instituer_article");
 
-	$contexte = array( 'id_rubrique'=>$GLOBALS['spipbb']['spipbb_id_rubrique'],
-				'hash_move' => $hash_move,
-				'hash_supprimer' => $hash_supprimer,
-				'hash_instituer' => $hash_instituer
+	$contexte = array( 
+			'id_rubrique'=>$GLOBALS['spipbb']['spipbb_id_rubrique'],
+			'hash_move' => $hash_move,
+			'hash_supprimer' => $hash_supprimer,
+			'hash_instituer' => $hash_instituer
 			);
 	$res = recuperer_fond("prive/spipbb_admin_forums",$contexte) ;
 
 	return $res;
 } // spipbb_admin_forums
 
-// ------------------------------------------------------------------------------
-// [fr] Verifie que les rubriques et les articles sont bien numerotes et les
-// [fr] renumerote si besoin
-// ------------------------------------------------------------------------------
-function spipbb_renumerote()
-{
-	$id_secteur = $GLOBALS['spipbb']['spipbb_id_rubrique'];
-	// les rubriques
-	$query = "SELECT id_rubrique, titre FROM spip_rubriques WHERE id_secteur='".$id_secteur."' AND id_rubrique!='".$id_secteur."' ORDER BY titre";
-	$result = sql_query($query);
-	$numero = 10;
-	while ( $row = sql_fetch($result) )
-	{
-		$titre = supprimer_numero($row['titre']);
-		$id_rubrique = $row['id_rubrique'];
-		$titre = $numero . ". ".trim($titre);
-		@sql_updateq('spip_rubriques', array(
-						'titre'=>$titre
-						),
-				"id_rubrique='$id_rubrique'");
-		$numero = $numero + 10;
-	} // while
 
-	// les articles
-	$query = "SELECT A.id_article , A.titre FROM spip_articles AS A, spip_rubriques AS R WHERE A.id_rubrique=R.id_rubrique AND A.id_secteur='".$id_secteur."' ORDER BY R.titre, A.titre";
-	$result = sql_query($query);
-	$numero = 10;
-	while ( $row = sql_fetch($result) )
-	{
-		$titre = supprimer_numero($row['titre']);
-		$id_article = $row['id_article'];
-		$titre = $numero . ". ".trim($titre);
-		@sql_updateq('spip_articles', array(
-						'titre'=>$titre
-						),
-				"id_article='$id_article'");
-		$numero = $numero + 10;
-	} // while
-} // spipbb_renumerote
 // http://www.firewall-net.com/phpBB2/admin/admin_forums.php?mode=forum_order&move=-15&f=2&sid=925c4f9ea2841dfd4c3491cfe3361352
 ?>

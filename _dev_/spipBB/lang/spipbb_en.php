@@ -75,6 +75,17 @@ The e-mail address will be used only to confirm the details of your registration
 'admin_sous_titre' => 'Go to the SpipBB forums admin panel',
 'admin_cat_01_general' => 'Administration',
 'admin_action_01_index' => 'Administration index',
+'admin_infos' => 'SpipBB - Admin - Summary',
+'admin_statistique' => 'Information',
+'admin_valeur' => 'Value',
+'admin_total_posts' => 'Total number of posts',
+'admin_average_posts'=> 'Daily posts average',
+'admin_total_users' => 'Number of members',
+'admin_average_users' => 'Daily inscription average',
+'admin_date_ouverture' => 'Openning date',
+'admin_age_forum' => 'Forum age Y/m',
+'admin_total_users_online' =>'Online members',
+'admin_spipbb_release' => 'SpipBB relase',
 'admin_cat_outils' => 'Tools',
 'admin_action_fromphpbb' => 'Import from PhpBB',
 'admin_cat_admin' => 'Main administration',
@@ -116,6 +127,9 @@ The e-mail address will be used only to confirm the details of your registration
 'choix_rubrique_selection' => 'Select the section that will host the base of your forums. Inside, each sub-section will be a forum group, each published article will open a new forum.',
 'config_choix_mots' => 'Choose the keyword group',
 'choix_mots_selection' => 'This keyword group should at least contain 3 keywords. Usually, the plugin will create them while installing. SpipBB needs - in general - the {ferme} (closed), {annonce} (announce) and {postit} (postit) keywords, but you are allowed to choose another one.',
+'choix_mots_ferme' => 'To close a thread',
+'choix_mots_annonce' => 'Make an announce',
+'choix_mots_postit' => 'Set sticky',
 'config_choix_squelettes' => 'Choose the skeletons',
 'choix_squelettes' => 'You are allowed to used other skeletons, but the selected files replacing groupeforum.html and filforum.html must already exist!',
 
@@ -212,6 +226,9 @@ The e-mail address will be used only to confirm the details of your registration
 'messages_voir_dernier' => 'Show last message',
 'moderateurs' => 'Moderator(s)',
 'mp' => 'Private message',
+'mot_ferme' => '<multi>[fr]Ferm&eacute;[en]Closed</multi>',
+'mot_annonce' => '<multi>[fr]Annonce[en]Announce</multi>',
+'mot_postit' => '<multi>[fr]Postit[en]Sticky</multi>',
 
 //n
 'nom' => 'Username',
@@ -304,6 +321,8 @@ Words less than three letters long will be ignored.',
 'sw_spam_words_titre' => 'Spam words filtering',
 'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
 'sw_spam_words_mass_add' => 'Paste or type your spam words lists into the text area. Separate each spam word by either a comma, semi-colon, or line-break',
+'sw_spam_words_url_add' => 'Type the URL of file with a properly formatted word list.
+Example: http://spipbb.homelinux.org/plugins/spipBB/base/spamwordlist.csv .',
 
 //T
 'texte_login_precaution' => 'Warning! this is the login with which your are connected at present.

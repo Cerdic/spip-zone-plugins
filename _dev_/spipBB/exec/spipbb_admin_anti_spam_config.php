@@ -96,10 +96,7 @@ function exec_spipbb_admin_anti_spam_config() {
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
 
-	echo debut_cadre_formulaire('',true);
-	//echo gros_titre(_T('spipbb:sw_spam_titre'),'',false)."<hr />\n";
 	echo spipbb_anti_spam_formulaire($id_rubrique);
-	echo fin_cadre_formulaire(true);
 	echo fin_gauche(), fin_page();
 
 } // exec_spipbb_admin_spam_words_config

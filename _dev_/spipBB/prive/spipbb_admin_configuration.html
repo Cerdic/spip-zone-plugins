@@ -1,24 +1,27 @@
 #CACHE{0}
+[(#REM) Plugin SpiBB - Licence GPL]
+[(#REM) SpipBB admin - Page d'accueil des statistiques]
 
 <form method="post" action="#ENV{lien_action}">
 <input type='hidden' id="exec" value="#ENV{exec_script}">
 
 [(#ENV{url_post}|form_hidden)]
 
-[(#REM|debut_cadre_trait_couleur{1,'xxx','SpipBB'})]
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_forums_configuration:>})]
 [(#REM) ------------------------ RUBRIQUE/SECTEUR CONTENANT LES FORUMS ------------------------ ]
 
 <fieldset>
 <legend><:spipbb:config_choix_rubrique:></legend>
 <p>
 <label>
-<select name="spipbb_id_rubrique">
-<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}{racine}{tout}>
-<option value="#ID_RUBRIQUE"[ selected="(#ENV{spipbb_id_rubrique}|=={#ID_RUBRIQUE}|?{selected})"]>#ID_RUBRIQUE . #TITRE</option>
-</BOUCLE_rubriques>
-</select>
-	<br />
 	<i><:spipbb:choix_rubrique_selection:></i>
+	<div style='text-align:center'>
+	<select name="spipbb_id_rubrique">
+	<BOUCLE_rubriques(RUBRIQUES){par id_rubrique}{racine}{tout}>
+		<option value="#ID_RUBRIQUE"[ selected="(#ENV{spipbb_id_rubrique}|=={#ID_RUBRIQUE}|?{selected})"]>#ID_RUBRIQUE. #TITRE</option>
+	</BOUCLE_rubriques>
+	</select>
+	</div>
 </label>
 </p>
 </fieldset>
@@ -29,28 +32,50 @@
 <legend><:spipbb:config_choix_mots:></legend>
 <p>
 <label>
-<select name="spipbb_id_groupe_mot">
-<BOUCLE_mots(GROUPES_MOTS){par id_groupe}>
-<option value="#ID_GROUPE"[ selected="(#ENV{spipbb_id_groupe_mot}|=={#ID_GROUPE}|?{selected})"]>#ID_GROUPE . #TITRE</option>
-</BOUCLE_mots>
-</select>
-<select name="spipbb_id_mot_ferme">
-<BOUCLE_mot_ferme(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
-<option value="#ID_MOT"[ selected="(#ENV{spipbb_id_mot_ferme}|=={#ID_MOT}|?{selected})"]>#ID_MOT . #TITRE</option>
-</BOUCLE_mot_ferme>
-</select>
-<select name="spipbb_id_mot_annonce">
-<BOUCLE_mot_annonce(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
-<option value="#ID_MOT"[ selected="(#ENV{spipbb_id_mot_annonce}|=={#ID_MOT}|?{selected})"]>#ID_MOT . #TITRE</option>
-</BOUCLE_mot_annonce>
-</select>
-<select name="spipbb_id_mot_postit">
-<BOUCLE_mot_postit(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
-<option value="#ID_MOT"[ selected="(#ENV{spipbb_id_mot_postit}|=={#ID_MOT}|?{selected})"]>#ID_MOT . #TITRE</option>
-</BOUCLE_mot_postit>
-</select>
-	<br />
 	<i><:spipbb:choix_mots_selection:></i>
+	<div style='text-align:center; margin-bottom:4px;'>
+	<select name="spipbb_id_groupe_mot">
+	<BOUCLE_mots(GROUPES_MOTS){par id_groupe}>
+	<option value="#ID_GROUPE"[ selected="(#ENV{spipbb_id_groupe_mot}|=={#ID_GROUPE}|?{selected})"]>#TITRE</option>
+	</BOUCLE_mots>
+	</select>
+	</div>
+	<?php if ( $idgm="#ENV{spipbb_id_groupe_mot}" ) { ?>
+	<table cellpadding='3' cellspacing='1' border='1' width='100%'>
+	<thead>
+	<tr>
+		<td class='verdana2'><:spipbb:choix_mots_ferme:></td>
+		<td class='verdana2'><:spipbb:choix_mots_annonce:></td>
+		<td class='verdana2'><:spipbb:choix_mots_postit:></td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+		<select name='spipbb_id_mot_ferme'>
+		<BOUCLE_mot_ferme(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
+		<option value='#ID_MOT'[ selected='(#ENV{spipbb_id_mot_ferme}|=={#ID_MOT}|?{selected})']>#TITRE - #DESCRIPTIF</option>
+		</BOUCLE_mot_ferme>
+		</select>
+		</td>
+		<td>
+		<select name='spipbb_id_mot_annonce'>
+		<BOUCLE_mot_annonce(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
+		<option value='#ID_MOT'[ selected='(#ENV{spipbb_id_mot_annonce}|=={#ID_MOT}|?{selected})']>#TITRE - #DESCRIPTIF</option>
+		</BOUCLE_mot_annonce>
+		</select>
+		</td>
+		<td>
+		<select name='spipbb_id_mot_postit'>
+		<BOUCLE_mot_postit(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
+		<option value='#ID_MOT"[ selected='(#ENV{spipbb_id_mot_postit}|=={#ID_MOT}|?{selected})']>#TITRE - #DESCRIPTIF</option>
+		</BOUCLE_mot_postit>
+		</select>
+		</td>
+	</tr>
+	</tbody>
+	</table>
+	<?php } ?>
 </label>
 </p>
 </fieldset>
@@ -61,13 +86,23 @@
 <fieldset>
 <legend><:spipbb:config_choix_squelettes:></legend>
 <p>
+	<i><:spipbb:choix_squelettes:></i>
+</p>
 <label>
 </select>
-	<:spipbb:squelette_groupeforum:><br /><input type="text" name="spipbb_squelette_groupeforum" value="[(#ENV{spipbb_squelette_groupeforum})]" size='20' /><br />
-	<:spipbb:squelette_filforum:><br /><input type="text" name="spipbb_squelette_filforum" value="[(#ENV{spipbb_squelette_filforum})]" size='20' /><br />
-	<i><:spipbb:choix_squelettes:></i>
-</label>
-</p>
+<table cellpadding='3' cellspacing='1' border='1' width='100%'>
+<tr>	
+	<td><:spipbb:squelette_groupeforum:></td>
+	<td><input type="text" name="spipbb_squelette_groupeforum" value="[(#ENV{spipbb_squelette_groupeforum})]" size='20' />
+	</td>
+</tr>
+<tr>
+	<td><:spipbb:squelette_filforum:></td>
+	<td><input type="text" name="spipbb_squelette_filforum" value="[(#ENV{spipbb_squelette_filforum})]" size='20' />
+	</td>
+</tr>
+</table>
+<label>
 </fieldset>
 
 

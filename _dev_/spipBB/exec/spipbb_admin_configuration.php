@@ -79,9 +79,7 @@ function exec_spipbb_admin_configuration()
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
 
-	echo debut_cadre_formulaire('',true);
 	echo spipbb_admin_configuration($row);
-	echo fin_cadre_formulaire(true);
 
 	echo fin_gauche(), fin_page();
 

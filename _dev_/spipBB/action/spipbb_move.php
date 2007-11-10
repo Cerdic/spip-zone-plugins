@@ -3,7 +3,6 @@
 #  Plugin  : spipbb - Licence : GPL                       #
 #  File    : action/spipbb_move - renumerote un objet     #
 #  Authors : chryjs, 2007                                 #
-#            2004+ Jean-Luc Bechennec certaines fonctions #
 #  Contact : chryjs¡@!free¡.!fr                           #
 #---------------------------------------------------------#
 
@@ -25,7 +24,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/minipres');
 include_spip('inc/spipbb');
 
 // ------------------------------------------------------------------------------
@@ -36,35 +34,57 @@ function action_spipbb_move()
 	global $spip_lang_left, $spipbb_fromphpbb, $dir_lang, $time_start;
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	$id_item = intval($arg);
-	if (empty($id_item))
-	{
-		minipres( _T('spipbb:titre_spipbb'), "<strong>"._T('avis_non_acces_page')."</strong>" );
+
+	list($objet, $id_item, $statut) = preg_split('/\W/', $arg);
+
+	$id_item = intval($id_item);
+	$redirige = urldecode(_request('redirect'));
+	$id_rubrique = _request('id_rubrique');
+
+	if (!empty($id_rubrique)) $redirige = parametre_url($redirige, 'id_rubrique', $id_rubrique, '&') ;
+	if (!$id_item) {
+		redirige_par_entete($redirige);
 		exit;
 	}
-	$objet = _request('objet');
-	$id_rubrique = intval(_request('id_rubrique'));
-	$move_increment = intval(_request('move'));
 
-	$query = "SELECT id_$objet, titre FROM spip_".$objet."s WHERE id_$objet=$id_item";
-	$result = sql_query($query);
-	$row = sql_fetch($result);
-	$numero = recuperer_numero($row['titre']) + $move_increment;
+	$row = sql_fetsel("id_".$objet." , titre", "spip_".$objet."s", "id_".$objet."='$id_item'");
+	if (!$row) {
+		redirige_par_entete($redirige);
+		exit;
+	}
+
+	switch ($statut) {
+	case "up" :
+		$move_increment = -15;
+		break;
+	case 'down' :
+		$move_increment = +15;
+		break;
+	default :
+		$move_increment = 0;
+		break;
+	}
+	$ancien_numero = recuperer_numero($row['titre']) ;
+	$nouveau_numero = $ancien_numero + $move_increment;
+
+	if ( ($move_increment==0) OR ($nouveau_numero<5)) {
+		redirige_par_entete($redirige);
+		exit;
+	}
+
 	$titre = supprimer_numero($row['titre']);
-	$titre = $numero . ". ".trim($titre);
-	$redirige = urldecode(_request('redirect'));
-/*
+	if ($nouveau_numero<10) $titre = "0" . $nouveau_numero . ". ".trim($titre);
+	else $titre = $nouveau_numero . ". ".trim($titre);
+
 	@sql_updateq("spip_".$objet."s", array(
 					'titre'=>$titre
 					),
 			"id_$objet='$id_item'");
 
-	$redirect = parametre_url($redirige,
-		'id_rubrique', $id_rubrique, '&') ;
+	spipbb_renumerote();
 
-	redirige_par_entete($redirect);
-*/
-echo "id_item:$id_item<br>objet:$objet<br>id_rubrique:$id_rubrique<br>move_inc:$move_increment<br>redirect:$redirige";
+	redirige_par_entete($redirige);
+// echo "id_item:$id_item<br>objet:$objet<br>id_rubrique:$id_rubrique<br>move_inc:$move_increment<br>titre:$titre<br>redirect:$redirige";
 } // action_spipbb_move
 
 ?>

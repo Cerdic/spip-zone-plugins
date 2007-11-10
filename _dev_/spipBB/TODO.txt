@@ -4,13 +4,12 @@ Todo-list pour spipbb
 -* simplifier encore l'installation
 -* améliorer l'"administration" des forums (interface privee)
 -* nettoyer les squelettes
--* utilisation des idees utilisees dans Gafospip
+-* utilisation des idees utilisees dans Gafospip -> Scoty ?
 -* lien entre auteur et la liste des messages qu'il a publie
 
 -* Bugs et autres éléments non finis :
--** Anti spam : mots clés, login, IP
--** Evolution de la gestion des metas (SVN)
--** Ajouter les descriptions des mots clés
+-** Evolution de la gestion des metas (SVN) ecrire_metas (inc/utils) est depreciee mais toujours presente (vide) mais requise en 192
+-** Utiliser les descriptions des mots clés (ajoutees dans lang/... mot_...)
 -** Présentation du panneau gauche de l'administration
 -** Présentation de admin_config (titres par mots clés, JS pour sélection ?)
 -** Installation : "not configured" => Bouton/ case d'alerte + lien vers admin_config
@@ -29,6 +28,7 @@ Todo-list pour spipbb
 -** Import phpBB : adresse IP des posteurs -> forums
 -** Import phpBB : Si pas Iniset, réalisation par étapes de la partie 2 et 3 ? Précalcul à l'avance
 -** mot cles ferme, postit, annonce : bug ne doivent s'appliquer qu'au message principal du thread
+-** Anti spam : sur le login, IP (ban)
 
 -** Avantage/inconvénients utilisation d'une portion de code similaire à balise #SESSION
 -** Citations

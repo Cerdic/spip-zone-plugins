@@ -2,45 +2,49 @@
 [(#REM) Plugin SpiBB - Licence GPL]
 [(#REM) SpipBB admin - Page d'accueil des statistiques]
 
-<table cellpadding='0' cellspacing='0' border='1' width='100%'>
+[(#REM|debut_cadre_trait_couleur{1,'xxx',<:spipbb:admin_infos:>})]
+[(#REM) ------------------------ Liste et edition ------------------------ ]
+
+<table cellpadding='3' cellspacing='1' border='1' width='100%'>
 <thead>
 <tr bgcolor='#ENV{couleur_foncee}'>
-	<td><:spipbb:statistique:></td>
-	<td><:spipbb:valeur:></td>
+	<td class='verdana2' width='35%'><:spipbb:admin_statistique:></td>
+	<td class='verdana2' width='15%'><:spipbb:admin_valeur:></td>
+	<td class='verdana2' width='35%'><:spipbb:admin_statistique:></td>
+	<td class='verdana2' width='15%'><:spipbb:admin_valeur:></td>
 </tr>
 </thead>
 <tbody>
 <tr bgcolor='#ENV{couleur_claire}'>
-	<td><:spipbb:total_posts:></td>
-	<td>#ENV{total_posts}</td>
+	<td class='verdana2'><:spipbb:admin_total_posts:></td>
+	<td class='verdana2'>#ENV{total_posts}</td>
+	<td class='verdana2'><:spipbb:admin_average_posts:></td>
+	<td class='verdana2'>#ENV{posts_per_day}</td>
 </tr>
-<tr bgcolor='#fff'>
-	<td><:spipbb:average_posts:></td>
-	<td>#ENV{posts_per_day}</td>
-</tr>
-<tr bgcolor='#ENV{couleur_claire}'>
-	<td><:spipbb:total_users:></td>
-	<td>#ENV{total_users}</td>
-</tr>
-<tr bgcolor='#fff'>
-	<td><:spipbb:average_users:></td>
-	<td>#ENV{users_per_day}</td>
+<tr bgcolor='#ffffff'>
+	<td class='verdana2'><:spipbb:admin_total_users:></td>
+	<td class='verdana2'>#ENV{total_users}</td>
+	<td class='verdana2'><:spipbb:admin_average_users:></td>
+	<td class='verdana2'>#ENV{users_per_day}</td>
 </tr>
 <tr bgcolor='#ENV{couleur_claire}'>
-	<td><:spipbb:date_ouverture:></td>
-	<td>#ENV{start_date}</td>
+	<td class='verdana2'><:spipbb:admin_date_ouverture:></td>
+	<td class='verdana2'>[(#ENV{start_date}|affdate_jourcourt)]</td>
+	<td class='verdana2'><:spipbb:admin_age_forum:></td>
+	<td class='verdana2'>#ENV{forum_age}</td>
 </tr>
-<tr bgcolor='#fff'>
-	<td><:spipbb:age_forum:></td>
-	<td>#ENV{forum_age}</td>
+<tr bgcolor='#ffffff'>
+	<td class='verdana2'><:spipbb:admin_total_users_online:></td>
+	<td class='verdana2'>#ENV{total_online}</td>
+	<td></td>
+	<td></td>
 </tr>
 <tr bgcolor='#ENV{couleur_claire}'>
-	<td><:spipbb:total_users_online:></td>
-	<td>#ENV{total_online}</td>
-</tr>
-<tr bgcolor='#fff'>
-	<td><:spipbb:spipbb_release:></td>
-	<td>#ENV{spipbb_version}</td>
+	<td class='verdana2'>SPIP</td>
+	<td class='verdana2'>[(#SPIP_VERSION)]</td>
+	<td class='verdana2'><:spipbb:admin_spipbb_release:></td>
+	<td class='verdana2'>#ENV{spipbb_version}</td>
 </tr>
 </tbody>
 </table>
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
