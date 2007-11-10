@@ -26,7 +26,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-	include_spip('inc/spiplistes_api');
+include_spip('inc/spiplistes_api_globales');
+include_spip('inc/spiplistes_api');
 
 // adaptation de aide_index.php
 spiplistes_log(_SPIPLISTES_EXEC_AIDE." <<");

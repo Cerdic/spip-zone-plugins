@@ -10,6 +10,7 @@ include_spip('inc/presentation');
 include_spip('inc/texte');
 include_spip('inc/actions');
 include_spip('inc/date');
+include_spip('inc/spiplistes_api');
 
 function spiplistes_dater_envoi($id, $flag, $statut, $date_debut_envoi, $btn_nom_valider, $enveloppe_formulaire = true)
 {

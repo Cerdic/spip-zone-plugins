@@ -24,6 +24,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
+
 // ne semble plus utilisé (CP-20071018)
 
 function exec_spiplistes_import_patron(){

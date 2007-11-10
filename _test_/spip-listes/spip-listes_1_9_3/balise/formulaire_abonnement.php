@@ -1,4 +1,5 @@
 <?php
+
 // balise/formulaire_abonnement.php
 
 // $LastChangedRevision$
@@ -8,6 +9,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('base/abstract_sql');
+include_spip('inc/spiplistes_api_globales');
 
 // Balise independante du contexte
 

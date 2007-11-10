@@ -24,6 +24,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
+
 /*
 	Affiche un courrier. 
 	Le formulaire permet :

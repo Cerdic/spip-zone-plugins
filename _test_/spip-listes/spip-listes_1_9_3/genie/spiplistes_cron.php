@@ -23,6 +23,10 @@
 // $LastChangedBy: paladin@quesaco.org $
 // $LastChangedDate: 2007-09-22 18:27:40 +0200 (sam., 22 sept. 2007) $
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/spiplistes_api_globales');
+
 	// Appelé en tache de fond (CRON SPIP)
 	
 	// Trieuse 

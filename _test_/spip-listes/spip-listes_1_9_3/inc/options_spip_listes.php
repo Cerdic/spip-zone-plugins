@@ -1,4 +1,7 @@
 <?php
+
+// inc/options_spip_listes.php
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
@@ -22,19 +25,6 @@
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
-
-function spiplistes_log($texte, $level = LOG_WARNING) {
-	if(__server_in_private_ip_adresses()
-		&& __plugin_lire_key_in_serialized_meta('opt_console_syslog', _SPIPLISTES_META_PREFERENCES)
-	) {
-		__syslog_trace($texte, $level);
-	}
-	else if($level < LOG_DEBUG) {
-		// Taille du log SPIP trop courte
-		// Ne pas envoyer si DEBUG sinon tronque sans cesse
-		spip_log($texte, 'spiplistes');
-	}
-}
 
 function spiplistes_langue_liste ($id_liste) {
 	$lang=spip_query("SELECT lang FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 0,1");

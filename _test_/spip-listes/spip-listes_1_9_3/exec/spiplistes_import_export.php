@@ -24,6 +24,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
+
 function exec_spiplistes_import_export(){
 
 	include_spip('inc/presentation');

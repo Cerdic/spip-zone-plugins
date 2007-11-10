@@ -1,5 +1,7 @@
 <?php
+
 // base/spiplistes_upgrade.php
+
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -31,6 +33,7 @@
 	spiplistes_upgrade_base() : si mise à jour de la base spiplistes
 */
 
+include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api');
 
 

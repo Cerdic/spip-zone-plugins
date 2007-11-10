@@ -11,6 +11,8 @@
 	From: SPIP-Listes-V, http://www.quesaco.org/
 */
 
+include_spip('inc/spiplistes_api_globales');
+
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$

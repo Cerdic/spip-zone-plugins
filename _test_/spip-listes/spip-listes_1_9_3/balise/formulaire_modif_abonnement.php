@@ -1,4 +1,5 @@
 <?php
+
 // balise/formulaire_modif_abonnement.php
 
 // $LastChangedRevision$
@@ -7,6 +8,8 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
+include_spip('inc/spiplistes_api_globales');
 
 function balise_FORMULAIRE_MODIF_ABONNEMENT ($p) {
 

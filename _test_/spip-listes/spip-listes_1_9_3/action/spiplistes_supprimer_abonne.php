@@ -14,6 +14,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
+
 function action_spiplistes_supprimer_abonne_dist () {
 
 	include_spip('inc/autoriser');

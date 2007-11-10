@@ -6,6 +6,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api');
+
 /*
 	Formulaire de sélection destinataire
 

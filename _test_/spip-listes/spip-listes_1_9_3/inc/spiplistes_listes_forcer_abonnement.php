@@ -9,6 +9,8 @@
 // $statut = "tous" => '6forum' + '1comite' + '0minirezo'
 // si statut == 'aucun', désabonne tous
 
+include_spip('inc/spiplistes_api_globales');
+
 function spiplistes_listes_forcer_abonnement ($id_liste, $statut) {
 
 	global $connect_statut

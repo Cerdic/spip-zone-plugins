@@ -1,4 +1,7 @@
 <?php 
+
+// base/spiplistes_init.php
+
 // Original From SPIP-Listes-V :: Id: spiplistes_init.php paladin@quesaco.org
 
 // $LastChangedRevision$
@@ -13,12 +16,12 @@
 // 3/ $action = 'test'
 // 
 
+include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api');
 
 function spiplistes_install ($action) {
 
-
-spiplistes_log("spiplistes_install() <<", LOG_DEBUG);
+//spiplistes_log("spiplistes_install() <<", LOG_DEBUG);
 
 	switch($action) {
 		case 'test':
@@ -32,8 +35,7 @@ spiplistes_log("spiplistes_install() <<", LOG_DEBUG);
 				&& spip_mysql_showtable("spip_auteurs_elargis")
 				&& spip_mysql_showtable("spip_listes")
 				);
-			$result = true;
-//spiplistes_log("PLUGIN TEST: ".($result ? "true" : "false"), LOG_DEBUG);
+			spiplistes_log("spiplistes TEST: ".($result ? "OK" : "NO"));
 			return($result);
 			break;
 		case 'install':
@@ -49,18 +51,18 @@ spiplistes_log("spiplistes_install() <<", LOG_DEBUG);
 				&& spiplistes_initialise_spip_metas_spiplistes()
 				&& spiplistes_activer_inscription_visiteurs()
 				);
-//spiplistes_log("PLUGIN INSTALL: ".($result ? "true" : "false"), LOG_DEBUG);
 			if(!$result) {
 				// nota: SPIP ne filtre pas le résultat. Si retour en erreur,
 				// la case à cocher du plugin sera quand même cochée
-				spiplistes_log("PLUGIN INSTALL: ERROR. PLEASE REINSTALL PLUGIN...", LOG_DEBUG);
+				spiplistes_log("spiplistes INSTALL: ERROR. PLEASE REINSTALL PLUGIN...", LOG_DEBUG);
 			}
+			spiplistes_log("spiplistes INSTALL: ".($result ? "OK" : "NO"));
 			return($result);
 			break;
 		case 'uninstall':
 			// est appellé lorsque "Effacer tout" dans exec=admin_plugin
 			$result = spiplistes_vider_tables();
-//spiplistes_log("PLUGIN UNINSTALL: ".($result ? "true" : "false"), LOG_DEBUG);
+			spiplistes_log("spiplistes UNINSTALL: ".($result ? "OK" : "NO"));
 			return($result);
 			break;
 		default:
@@ -79,8 +81,7 @@ function spiplistes_base_creer () {
 	include_spip('base/db_mysql');
 	include_spip('base/spiplistes_tables');
 	creer_base();
-//spiplistes_log("spiplistes_base_creer() >>", LOG_DEBUG);
-	spiplistes_log("PLUGIN INSTALL: database creation");
+	spiplistes_log("spiplistes INSTALL: database creation");
 	$spiplistes_base_version = __plugin_real_version_base_get(_SPIPLISTES_PREFIX);
 	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
 	spiplistes_ecrire_metas();
@@ -128,7 +129,11 @@ function spiplistes_activer_inscription_visiteurs () {
 }
 
 function spiplistes_vider_tables ($nom) {
+
+//spiplistes_log("spiplistes_vider_tables() <<", LOG_DEBUG);
+
 	include_spip('base/abstract_sql');
+	
 	spip_query("DROP TABLE spip_courriers");
 	spip_query("DROP TABLE spip_listes");
 	spip_query("DROP TABLE spip_auteurs_courriers");
@@ -136,6 +141,7 @@ function spiplistes_vider_tables ($nom) {
 	spip_query("DROP TABLE spip_auteurs_mod_listes");
 	// ne supprime pas spip_auteurs_elargis. Ca peut servir ;-?
 	effacer_meta('spiplistes_version');
+	effacer_meta('spiplistes_base_version');
 	effacer_meta('spiplistes_charset_envoi');
 	effacer_meta('spiplistes_lots');
 	effacer_meta('abonnement_config');

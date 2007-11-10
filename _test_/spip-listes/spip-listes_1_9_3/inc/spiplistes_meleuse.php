@@ -24,6 +24,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
+
 /*
 	Prend dans le panier des courriers (spip_courriers) les encours
 	- formate le titre, texte pour l'envoi

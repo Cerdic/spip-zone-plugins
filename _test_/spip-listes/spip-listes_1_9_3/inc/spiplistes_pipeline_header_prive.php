@@ -8,6 +8,7 @@
 	
 */
 
+include_spip('inc/spiplistes_api_globales');
 
 // $LastChangedRevision$
 // $LastChangedBy$

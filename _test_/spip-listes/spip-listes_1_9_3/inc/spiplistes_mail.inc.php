@@ -1,5 +1,13 @@
 <?php
 
+// inc/spiplistes_mail.inc.php
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+include_spip('inc/spiplistes_api_globales');
+
 	include_spip('phpmailer/class.phpmailer');
 	include_spip('phpmailer/class.smtp');
 

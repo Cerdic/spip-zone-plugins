@@ -5,6 +5,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+include_spip('inc/spiplistes_api_globales');
 
 /*
 	Affiche gauche

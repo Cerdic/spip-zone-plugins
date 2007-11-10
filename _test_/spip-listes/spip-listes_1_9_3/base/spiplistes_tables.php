@@ -15,6 +15,8 @@
 	
 */
 
+include_spip('inc/spiplistes_api_globales');
+
 //////////////////////////////////
 // Ici on declare la structure des tables au compilo
 // Inspiré de spip-lettres, Pierre Basson

@@ -25,6 +25,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
+
 	// Précision sur la table spip_listes:
 	// 'date': date d'envoi souhaitée
 	// 'maj': date d'envoi du courrier mis à jour par cron.

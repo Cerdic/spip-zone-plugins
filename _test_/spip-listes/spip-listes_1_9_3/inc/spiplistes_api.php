@@ -1,4 +1,7 @@
 <?php
+
+// inc/spiplistes_api.php
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */

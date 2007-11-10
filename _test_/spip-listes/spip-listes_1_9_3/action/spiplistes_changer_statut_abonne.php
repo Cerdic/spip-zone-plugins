@@ -7,6 +7,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
+
 function action_spiplistes_changer_statut_abonne_dist() {
 
 	// les globales ne passent pas en action

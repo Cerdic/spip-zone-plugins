@@ -1,4 +1,7 @@
 <?php
+
+// inc/spiplistes_lister_courriers_listes.php
+
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -21,6 +24,8 @@
 // $LastChangedRevision$
 // $LastChangedBy$
 // $LastChangedDate$
+
+include_spip('inc/spiplistes_api_globales');
 
 /**
 * Adaptation de spiplistes_afficher_en_liste de SL192

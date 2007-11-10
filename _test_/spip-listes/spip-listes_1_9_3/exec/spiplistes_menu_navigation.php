@@ -11,6 +11,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
+
 function exec_spiplistes_menu_navigation () {
 
 	global $connect_statut
