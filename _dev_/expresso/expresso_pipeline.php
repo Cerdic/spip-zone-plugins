@@ -40,28 +40,36 @@ function expresso_genere_htaccess(){
 				if (($p=strpos($url,"?"))!==FALSE)
 					$url = substr($url,0,$p);
 				$start = rand(0,59);
-				$end = modulo($start+round(_EXPRESSO_CACHE_RATIO),60);
-				$start--;
-				$end++;
-				if ($start<$end)
-					$express .= "RewriteCond %{HTTP_HOST} ^$host$ [NC]
-RewriteCond %{QUERY_STRING} ^$query$ [NC]
+				$r = "RewriteCond %{HTTP_HOST} ^$host$ [NC]
+RewriteCond %{QUERY_STRING} ^$query$ [NC]";
+				if (_EXPRESSO_CACHE_RATIO==59){
+					$express .= $r . "
+RewriteCond %{TIME_SEC} !=$start
+RewriteRule ^$url$ ".$rewrite[1]." [L]
+
+";					
+				}
+				else {
+					$end = modulo($start+round(_EXPRESSO_CACHE_RATIO),60);
+					$start--;
+					$end++;
+					if ($start<$end)
+						$express .= $r ."
 RewriteCond %{TIME_SEC} >$start
 RewriteCond %{TIME_SEC} <$end
 RewriteRule ^$url$ ".$rewrite[1]." [L]
 	
 ";
-				else
-					$express .= "RewriteCond %{HTTP_HOST} ^$host$ [NC]
-RewriteCond %{QUERY_STRING} ^$query$ [NC]
+					else
+						$express .= $r . "
 RewriteCond %{TIME_SEC} >$start
 RewriteRule ^$url$ ".$rewrite[1]." [L]
-RewriteCond %{HTTP_HOST} ^$host$ [NC]
-RewriteCond %{QUERY_STRING} ^$query$ [NC]
+$r
 RewriteCond %{TIME_SEC} <$end
 RewriteRule ^$url$ ".$rewrite[1]." [L]
 	
 ";
+				}
 			}
 		}
 		$htaccess = preg_replace(",###EXPRESSO###.*###/EXPRESSO###,ms","###EXPRESSO###",$htaccess);
