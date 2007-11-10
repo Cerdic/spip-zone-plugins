@@ -15,8 +15,6 @@
 // il faut laisser passer une partie des requetes pour que spip mette les pages a jour
 @define('_EXPRESSO_CACHE_RATIO',50);
 
-function expresso_fenetre_temps($duree){
-}
 function expresso_genere_htaccess(){
 	/* debug*/
 	include_spip('inc/meta');
@@ -26,7 +24,7 @@ function expresso_genere_htaccess(){
 	lire_fichier('.htaccess',$htaccess);
 	if (strpos($htaccess,'###EXPRESSO###')!==FALSE) {
 		$base = preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']);
-		$express = "";
+		$express = "AddCharset ".strtoupper($GLOBALS['meta']['charset'])." .html\n";
 		$liste_pages = explode("\n",$GLOBALS['meta']['expresso']);
 		foreach($liste_pages as $rewrite) {
 			$rewrite = explode('!',$rewrite);
