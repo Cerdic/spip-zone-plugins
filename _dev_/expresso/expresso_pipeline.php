@@ -39,6 +39,7 @@ function expresso_genere_htaccess(){
 				if ($url{0}=='/') $url = substr($url,1);
 				if (($p=strpos($url,"?"))!==FALSE)
 					$url = substr($url,0,$p);
+				$url = preg_quote($url);
 				$start = rand(0,59);
 				$r = "RewriteCond %{HTTP_HOST} ^$host$
 RewriteCond %{REQUEST_METHOD} !POST
