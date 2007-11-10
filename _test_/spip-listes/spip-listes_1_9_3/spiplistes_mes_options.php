@@ -287,7 +287,12 @@ $spiplistes_items = array(
 	include_spip('inc/options_spip_listes');
 	
 	$spiplistes_version = lire_meta('spiplistes_version');
-	if($spiplistes_version && (__plugin_real_version_get(_SPIPLISTES_PREFIX) > $spiplistes_version)) {
+	$spiplistes_base_version = lire_meta('spiplistes_base_version');
+	if(
+		($spiplistes_version && (__plugin_real_version_get(_SPIPLISTES_PREFIX) > $spiplistes_version))
+		||
+		($spiplistes_base_version && (__plugin_real_version_base_get(_SPIPLISTES_PREFIX) > $spiplistes_base_version))
+		) {
 		// faire upgrade auto
 		include_spip('base/spiplistes_upgrade');
 		spiplistes_upgrade();
