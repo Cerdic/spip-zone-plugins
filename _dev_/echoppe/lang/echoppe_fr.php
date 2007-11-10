@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_categorie' => 'Editer',
 'editer_version'=>'Editer la version',
 'edition_de_cetegorie'=>'&Eacute;dition d\'une cat&eacute;gorie',
+'edition_de_produit' => '&Eacute;dition d\'un produit',
 
 // G
 'gerer_echoppe' => 'G&eacute;rer Echoppe',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // L
 'langue_editee' => '&Eacute;dition de la langue',
 'les_categories' => 'Les cat&eacute;gories',
+'les_produits' => 'Les produits',
 
 // N
 'nouveau_produit' => 'Cr&eacute;er un produit',
@@ -51,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
 'texte'=>'Texte :',
 'titre_categorie' => 'Titre de la cat&eacute;gorie :',
+'titre_produit' => 'Titre du produit :',
 
 // X
 'xxx' => 'xxx'
