@@ -1,5 +1,7 @@
 <?php
 
+// inc/formater_auteur_liste.php
+
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *

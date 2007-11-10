@@ -53,7 +53,8 @@ function exec_spiplistes_aide () {
 		changer_langue($var_lang);
 	}
 		
-	$info = plugin_get_infos($plug_file = __plugin_dirname());
+	$meta_info = __plugin_get_meta_infos(_SPIPLISTES_PREFIX); // dir et version
+	$info = plugin_get_infos($meta_info['dir']);
 	$nom = typo($info['nom']);
 
 	$fichier_aide_spiplistes = is_readable($f = _DIR_PLUGIN_SPIPLISTES . "docs/"._SPIPLISTES_EXEC_PREFIX."aide_".$var_lang."html")
@@ -66,11 +67,11 @@ function exec_spiplistes_aide () {
 		$content = str_replace("../img_docs/", _DIR_PLUGIN_SPIPLISTES."img_docs/", $content);
 		// place les vars
 		$pattern = array(
-			"/%spiplistes_name%/"
-			,"/%spiplistes_version%/"
+			"/@spiplistes_name@/"
+			,"/@spiplistes_version@/"
 			,'/\$LastChangedDate:/'
 			,'/\$EndLastChangedDate/'
-			,'/%_aide%/'
+			,'/@_aide@/'
 			);
 		$replacement = array(
 			$nom

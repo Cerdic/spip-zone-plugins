@@ -28,10 +28,10 @@ function spiplistes_install ($action) {
 			// si renvoie true, c'est que la base est à jour, inutile de re-installer
 			// la valise plugin "effacer tout" apparaît.
 			// si renvoie false, SPIP revient avec $action = 'install' (une seule fois)
+			$spiplistes_version = lire_meta('spiplistes_version');
 			$result = (
-				isset($GLOBALS['meta']['spiplistes_version'])
-				&& ($v = $GLOBALS['meta']['spiplistes_version'])
-				&& ($v >= __plugin_real_version_get(_SPIPLISTES_PREFIX))
+				$spiplistes_version
+				&& ($spiplistes_version >= __plugin_real_version_get(_SPIPLISTES_PREFIX))
 				&& spip_mysql_showtable("spip_auteurs_elargis")
 				&& spip_mysql_showtable("spip_listes")
 				);
@@ -39,10 +39,11 @@ function spiplistes_install ($action) {
 			return($result);
 			break;
 		case 'install':
-			if(!isset($GLOBALS['meta']['spiplistes_version'])) {
+			if(!lire_meta('spiplistes_version')) {
 				$result = spiplistes_base_creer();
 			}
 			else {
+				// logiquement, ne devrait pas passer par là (upgrade assuré par mes_options)
 				include_spip('base/spiplistes_upgrade');
 				$result = spiplistes_upgrade_base();
 			}
@@ -54,7 +55,7 @@ function spiplistes_install ($action) {
 			if(!$result) {
 				// nota: SPIP ne filtre pas le résultat. Si retour en erreur,
 				// la case à cocher du plugin sera quand même cochée
-				spiplistes_log("spiplistes INSTALL: ERROR. PLEASE REINSTALL PLUGIN...", SPIPLISTES_LOG_DEBUG);
+				spiplistes_log("spiplistes INSTALL: ERROR. PLEASE REINSTALL PLUGIN...");
 			}
 			spiplistes_log("spiplistes INSTALL: ".($result ? "OK" : "NO"));
 			return($result);
@@ -82,6 +83,9 @@ function spiplistes_base_creer () {
 	include_spip('base/spiplistes_tables');
 	creer_base();
 	spiplistes_log("spiplistes INSTALL: database creation");
+
+	ecrire_meta('spiplistes_version', __plugin_real_version_get(_SPIPLISTES_PREFIX));
+
 	$spiplistes_base_version = __plugin_real_version_base_get(_SPIPLISTES_PREFIX);
 	ecrire_meta('spiplistes_base_version', $spiplistes_base_version);
 	spiplistes_ecrire_metas();
@@ -94,9 +98,30 @@ function spiplistes_base_creer () {
 
 function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 
-	$ecrire_metas = false;
-	
-	// valeurs par défaut à l'installation
+	$spiplistes_current_version =  __plugin_current_version_get(_SPIPLISTES_PREFIX);
+	$spiplistes_real_version = __plugin_real_version_get(_SPIPLISTES_PREFIX);
+	$opt_simuler_envoi = __plugin_lire_key_in_serialized_meta('opt_simuler_envoi', _SPIPLISTES_META_PREFERENCES);
+	if($spiplistes_current_version || !$opt_simuler_envoi) {
+	// si mise à jour ou première install, passe en simulation d'envoi
+		$opt_simuler_envoi = 
+			($spiplistes_current_version < $spiplistes_real_version)
+				// mise à jour de spiplistes ?
+			? "oui"
+				// reprend pref
+			: "non"
+			;
+	}
+	else {
+		$opt_simuler_envoi = "oui";
+	}
+	if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
+		$GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES] = array();
+	}
+	//spiplistes_log("### _SPIPLISTES_META_PREFERENCES : $opt_simuler_envoi");
+	__plugin_ecrire_key_in_serialized_meta ('opt_simuler_envoi', $opt_simuler_envoi, _SPIPLISTES_META_PREFERENCES);
+	// les autres preferences serialisées ('_SPIPLISTES_META_PREFERENCES') sont installées par exec/spiplistes_config
+
+	// autres valeurs par défaut à l'installation
 	$spiplistes_spip_metas = array(
 		'spiplistes_lots' => _SPIPLISTES_LOT_TAILLE
 		, 'spiplistes_charset_envoi' => _SPIPLISTES_CHARSET_ENVOI
@@ -106,14 +131,10 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 	foreach($spiplistes_spip_metas as $key => $value) {
 		if($reinstall || !isset($GLOBALS['meta'][$key])) {
 			ecrire_meta($key, $value);
-			$ecrire_metas = true;
 		}
 	}
-	// les preferences serialisées ('_SPIPLISTES_META_PREFERENCES') sont installées par exec/spiplistes_config
 	
-	if($ecrire_metas) {
-		spiplistes_ecrire_metas();
-	}
+	spiplistes_ecrire_metas();
 	return(true);
 }
 
@@ -123,7 +144,8 @@ function spiplistes_activer_inscription_visiteurs () {
 		$accepter_visiteurs = 'oui';
 		ecrire_meta("accepter_visiteurs", $accepter_visiteurs);
 		spiplistes_ecrire_metas();
-		echo _T('spiplistes:autorisation_inscription');
+		echo "<br />"._T('spiplistes:autorisation_inscription');
+		spiplistes_log("spiplistes ACTIVE accepter visiteur");
 	}
 	return(true);
 }

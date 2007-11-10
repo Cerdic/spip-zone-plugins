@@ -21,8 +21,8 @@ include_spip('inc/spiplistes_api_globales');
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 		  // on voit le bouton dans la barre "naviguer"
 		  $boutons_admin['naviguer']->sousmenu["spiplistes"]= new Bouton(
-			_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_mail.gif"  // icone
-			, _T('spiplistes:bouton_listes')	// titre
+			_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png"  // icone
+			, _T('spiplistes:listes_de_diffusion_')	// titre
 			, _SPIPLISTES_EXEC_COURRIERS_LISTE
 			);
 		}

@@ -155,7 +155,6 @@ function balise_DATE_MODIF_FORUM($p) {
 
 //utiliser le cron pour envoyer les messages en attente
 function spiplistes_taches_generales_cron($taches_generales) {
-	//spiplistes_log("spiplistes_taches_generales_cron() << ", SPIPLISTES_LOG_DEBUG);
 	$taches_generales['spiplistes_cron'] = 10 ;
 	return $taches_generales;
 }
@@ -286,17 +285,10 @@ $spiplistes_items = array(
 	);
 
 	include_spip('inc/options_spip_listes');
-		
-	$spiplistes_version =  lire_meta('spiplistes_version');
-
-//spiplistes_log("MES OPTIONS $spiplistes_version :: ".__plugin_real_version_base_get(), SPIPLISTES_LOG_DEBUG);
-	if(__plugin_real_version_get(_SPIPLISTES_PREFIX) > $spiplistes_version) {
-		if(!$spiplistes_version) {
-		// Une installation ? Créer la base 
-			include_spip('base/spiplistes_init'); 
-			spiplistes_base_creer();
-		}
-		// faire upgrade
+	
+	$spiplistes_version = lire_meta('spiplistes_version');
+	if($spiplistes_version && (__plugin_real_version_get(_SPIPLISTES_PREFIX) > $spiplistes_version)) {
+		// faire upgrade auto
 		include_spip('base/spiplistes_upgrade');
 		spiplistes_upgrade();
 	}

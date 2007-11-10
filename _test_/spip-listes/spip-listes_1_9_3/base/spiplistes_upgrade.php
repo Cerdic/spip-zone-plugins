@@ -39,7 +39,8 @@ include_spip('inc/spiplistes_api');
 
 function spiplistes_upgrade () {
 
-spiplistes_log("spiplistes_upgrade() <<", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("spiplistes_upgrade() <<", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("spiplistes_upgrade() <<");
 
 	$spiplistes_name = _SPIPLISTES_PREFIX;
 	$spiplistes_current_version =  __plugin_current_version_get(_SPIPLISTES_PREFIX);
@@ -96,6 +97,7 @@ spiplistes_log("spiplistes_upgrade() <<", SPIPLISTES_LOG_DEBUG);
 }
 
 function spiplistes_upgrade_base ($spiplistes_name, $spiplistes_current_version, $spiplistes_current_version_base, $spiplistes_real_version_base) {
+//spiplistes_log("spiplistes_upgrade_base() <<", SPIPLISTES_LOG_DEBUG);
 	
 	if($spiplistes_current_version_base && ($spiplistes_current_version_base >= $spiplistes_real_version_base)) {
 	// La base est à jour
