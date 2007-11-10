@@ -255,7 +255,7 @@ function exec_spiplistes_import_export(){
 
 	echo($page_result);
 	
-	echo __plugin_html_signature(true), fin_gauche(), fin_page();
+	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
 }
 
 function fieldset_separateur ($id)  {

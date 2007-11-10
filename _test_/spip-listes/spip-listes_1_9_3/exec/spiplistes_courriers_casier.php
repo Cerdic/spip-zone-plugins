@@ -223,7 +223,7 @@ function exec_spiplistes_courriers_casier () {
 	
 	// MODE HISTORIQUE FIN ---------------------------------------------------------
 	
-	echo __plugin_html_signature(true), fin_gauche(), fin_page();
+	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
 
 } // exec_spip_listes()
 

@@ -123,7 +123,7 @@ function exec_spiplistes_listes_toutes(){
 		
 	// MODE EDIT LISTES FIN --------------------------------------------------------
 	
-	echo __plugin_html_signature(true), fin_gauche(), fin_page();
+	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
 
 }
 

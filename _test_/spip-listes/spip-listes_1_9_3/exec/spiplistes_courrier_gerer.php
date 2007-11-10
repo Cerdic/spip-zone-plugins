@@ -480,7 +480,7 @@ function exec_spiplistes_courrier_gerer () {
 	
 	// GERER COURRIER: FIN DE PAGE
 	
-	echo __plugin_html_signature(true), fin_gauche(), fin_page();
+	echo __plugin_html_signature(_SPIPLISTES_PREFIX, true), fin_gauche(), fin_page();
 
 } // end function exec_spiplistes_courrier_gerer ()
 
