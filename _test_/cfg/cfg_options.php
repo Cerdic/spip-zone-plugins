@@ -88,7 +88,7 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 				(is_numeric($id[$i]) ? intval($id[$i]) : _q($id[$i]));
 			$and = ' AND ';
 	    }
-		$extra = spip_query($extra);
+		$extra = sql_query($extra);
 		$extra = sql_fetch($extra);
 		$config = isset($extra['extra']) && $extra['extra'] ?
 					$extra['extra'] :  array();
