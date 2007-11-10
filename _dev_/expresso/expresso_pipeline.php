@@ -25,7 +25,7 @@ function expresso_genere_htaccess(){
 	
 	lire_fichier('.htaccess',$htaccess);
 	if (strpos($htaccess,'###EXPRESSO###')!==FALSE) {
-		$base = preg_replace(';^[a-z]{3,5}://[^/]*/;','',$GLOBALS['meta']['adresse_site']);
+		$base = preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']);
 		$express = "";
 		$liste_pages = explode("\n",$GLOBALS['meta']['expresso']);
 		foreach($liste_pages as $rewrite) {
@@ -36,7 +36,7 @@ function expresso_genere_htaccess(){
 				$url = parse_url($rewrite[0]);
 				$query = $url['query'];
 				$host = $url['host'];
-				$url = preg_replace(';^[a-z]{3,5}://[^/]*/;','',$rewrite[0]);
+				$url = preg_replace(';^[a-z]{3,5}://[^/]*;','',$rewrite[0]);
 				$url = substr($url,strlen($base));
 				if ($url{0}=='/') $url = substr($url,1);
 				if (($p=strpos($url,"?"))!==FALSE)
@@ -87,11 +87,13 @@ function expresso_nettoie($flux){
 }
 
 function expresso_affichage_final($flux) {
-	if (isset($GLOBALS['page']['entetes']['X-Expresso'])
-	&& ($url = self(true))
-	//&& (strpos($url,"?")===FALSE)
-	) {
-		$url = "http://".$_SERVER['HTTP_HOST']. preg_replace(';^[a-z]{3,5}://[^/]*/;','',$GLOBALS['meta']['adresse_site']) . $url;
+	$url = self(true);
+spip_log($url);
+	$url = "http://".$_SERVER['HTTP_HOST']. preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']) . $url;
+spip_log($GLOBALS['meta']['adresse_site']);
+spip_log(preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']));
+spip_log($url);
+	if (isset($GLOBALS['page']['entetes']['X-Expresso'])) {
 		$nom_cache = _DIR_VAR . "apache/".md5($url).".html";
 		if ( 
 			($GLOBALS['var_mode']=='calcul')
@@ -110,6 +112,10 @@ function expresso_affichage_final($flux) {
 			elseif($GLOBALS['var_mode']=='recalcul')
 				expresso_genere_htaccess();
 		}
+	}
+	elseif (strpos($GLOBALS['meta']['expresso'],"$url!")!==FALSE) {
+		$GLOBALS['meta']['expresso'] = preg_replace(",$url!.*?\n,","",$GLOBALS['meta']['expresso']);
+		expresso_genere_htaccess();
 	}
 	return $flux;
 }
