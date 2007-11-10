@@ -19,7 +19,7 @@ C'est le percolateur qui ne laisse passer qu'une petite partie des requetes a Sp
 	<lien></lien>
 	<install>expresso_install.php</install>
 	<prefix>expresso</prefix>
-	<icon></icon>
+	<icon>expresso.gif</icon>
 	<chemin dir='' />
 	<pipeline>
 		<nom>affichage_final</nom>
