@@ -40,8 +40,9 @@ function expresso_genere_htaccess(){
 				if (($p=strpos($url,"?"))!==FALSE)
 					$url = substr($url,0,$p);
 				$start = rand(0,59);
-				$r = "RewriteCond %{HTTP_HOST} ^$host$ [NC]
-RewriteCond %{QUERY_STRING} ^$query$ [NC]";
+				$r = "RewriteCond %{HTTP_HOST} ^$host$
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{QUERY_STRING} ^$query$";
 				if (_EXPRESSO_CACHE_RATIO==59){
 					$express .= $r . "
 RewriteCond %{TIME_SEC} !=$start
