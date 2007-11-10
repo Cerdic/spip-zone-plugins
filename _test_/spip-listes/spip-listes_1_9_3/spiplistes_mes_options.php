@@ -17,6 +17,11 @@ if (!defined('_DIR_PLUGIN_SPIPLISTES')) {
 // avis aux spécialistes !!
 define('_SIGNALER_ECHOS', false); // horrible 
 
+// mode debug dans le log, peut-être augmenté pour avoir tous
+// les messages dans spip.log (par exemple)
+// voir doc php
+define("SPIPLISTES_LOG_DEBUG", LOG_DEBUG);
+
 define("_DIR_PLUGIN_SPIPLISTES_IMG_PACK", _DIR_PLUGIN_SPIPLISTES."img_pack/");
 
 define("_SPIPLISTES_PATRONS_DIR", "patrons/");
@@ -150,7 +155,7 @@ function balise_DATE_MODIF_FORUM($p) {
 
 //utiliser le cron pour envoyer les messages en attente
 function spiplistes_taches_generales_cron($taches_generales) {
-	//spiplistes_log("spiplistes_taches_generales_cron() << ", LOG_DEBUG);
+	//spiplistes_log("spiplistes_taches_generales_cron() << ", SPIPLISTES_LOG_DEBUG);
 	$taches_generales['spiplistes_cron'] = 10 ;
 	return $taches_generales;
 }
@@ -284,7 +289,7 @@ $spiplistes_items = array(
 		
 	$spiplistes_version =  lire_meta('spiplistes_version');
 
-//spiplistes_log("MES OPTIONS $spiplistes_version :: ".__plugin_real_version_base_get(), LOG_DEBUG);
+//spiplistes_log("MES OPTIONS $spiplistes_version :: ".__plugin_real_version_base_get(), SPIPLISTES_LOG_DEBUG);
 	if(__plugin_real_version_get(_SPIPLISTES_PREFIX) > $spiplistes_version) {
 		if(!$spiplistes_version) {
 		// Une installation ? Créer la base 

@@ -119,7 +119,7 @@ function exec_spiplistes_liste_gerer () {
 		$flag_editable = ($connect_toutes_rubriques || ($connect_id_auteur == $id_mod_liste));
 
 		if($flag_editable) {
-//spiplistes_log("LISTE MODIF: flag_editable <<", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: flag_editable <<", SPIPLISTES_LOG_DEBUG);
 		
 			$sql_query = "";
 
@@ -148,14 +148,14 @@ function exec_spiplistes_liste_gerer () {
 			
 			// Modifier patron de pied ?
 			if($btn_patron_pied && $patron) {
-//spiplistes_log("LISTE MODIF: de la liste <<$id_liste $patron", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: de la liste <<$id_liste $patron", SPIPLISTES_LOG_DEBUG);
 				$pied_page = spiplistes_pied_page_html_get($patron);
 				$sql_query .= "pied_page="._q($pied_page).",";
 			}
 			
 			// Modifier diffusion ?
 			if($btn_modifier_diffusion) {
-//spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: btn_modifier_diffusion <<$statut", SPIPLISTES_LOG_DEBUG);
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS)) && ($statut!=$current_liste['statut'])) {
 					$sql_query .= "statut='$statut',";
@@ -169,7 +169,7 @@ function exec_spiplistes_liste_gerer () {
 				}
 				// Modifier la langue ?
 				if(!empty($lang) && ($lang!=$current_liste['lang'])) {
-//spiplistes_log("LISTE MODIF: btn_modifier_diffusion $lang", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: btn_modifier_diffusion $lang", SPIPLISTES_LOG_DEBUG);
 					$sql_query .= "lang='$lang',";
 				}
 			}
@@ -181,12 +181,12 @@ function exec_spiplistes_liste_gerer () {
 
 			// Modifier message_auto ?
 			if($btn_modifier_courrier_auto) {
-//spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto <<", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: btn_modifier_courrier_auto <<", SPIPLISTES_LOG_DEBUG);
 				$sql_query = "";
 				$titre_message = spiplistes_titre_propre($titre_message);
-//spiplistes_log("LISTE MODIF: envoyer_maintenant".($envoyer_maintenant ? "oui" : "non"), LOG_DEBUG);
-//spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
-//spiplistes_log("LISTE MODIF: auto_mois: $auto_mois", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: envoyer_maintenant".($envoyer_maintenant ? "oui" : "non"), SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: message_auto: $message_auto", SPIPLISTES_LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: auto_mois: $auto_mois", SPIPLISTES_LOG_DEBUG);
 			if(
 					($message_auto == 'oui')
 					&& ($envoyer_maintenant
@@ -221,7 +221,7 @@ function exec_spiplistes_liste_gerer () {
 							$sql_query .= "date='$envoyer_quand',periode=$periode,";
 					}
 					if($auto_mois) {
-//spiplistes_log("LISTE MODIF: message_auto: $message_auto", LOG_DEBUG);
+//spiplistes_log("LISTE MODIF: message_auto: $message_auto", SPIPLISTES_LOG_DEBUG);
 						$sql_query .= "statut='"._SPIPLISTES_MONTHLY_LIST."',";
 					}
 				}

@@ -105,7 +105,7 @@ function exec_spiplistes_courriers_casier () {
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_naviguer_paniers');
 
-	spiplistes_log("spiplistes_afficher_pile_messages()2 <<", LOG_DEBUG); 	
+	spiplistes_log("spiplistes_afficher_pile_messages()2 <<", SPIPLISTES_LOG_DEBUG); 	
 
 	global $connect_statut
 		, $connect_toutes_rubriques

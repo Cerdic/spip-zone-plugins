@@ -18,7 +18,7 @@ function exec_spiplistes_autocron () {
 
 	include_spip('inc/spiplistes_api');
 
-	spiplistes_log("exec_autocron() <<", LOG_DEBUG); 	
+	spiplistes_log("exec_autocron() <<", SPIPLISTES_LOG_DEBUG); 	
 
 	$sql_result = spip_query("SELECT id_courrier,total_abonnes,nb_emails_envoyes FROM spip_courriers WHERE statut='"._SPIPLISTES_STATUT_ENCOURS."' LIMIT 1");
 
@@ -44,8 +44,8 @@ function exec_spiplistes_autocron () {
 	$action = generer_url_action('cron','&var='.time());
 	echo ' <div style="background-image: url(\''. $action . '\');"> </div> ';
 
-	spiplistes_log("exec_autocron ACTION: $action", LOG_DEBUG);	
-	spiplistes_log("exec_autocron() >>", LOG_DEBUG);	
+	spiplistes_log("exec_autocron ACTION: $action", SPIPLISTES_LOG_DEBUG);	
+	spiplistes_log("exec_autocron() >>", SPIPLISTES_LOG_DEBUG);	
  
 }
 

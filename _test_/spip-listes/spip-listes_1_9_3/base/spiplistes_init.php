@@ -21,7 +21,7 @@ include_spip('inc/spiplistes_api');
 
 function spiplistes_install ($action) {
 
-//spiplistes_log("spiplistes_install() <<", LOG_DEBUG);
+//spiplistes_log("spiplistes_install() <<", SPIPLISTES_LOG_DEBUG);
 
 	switch($action) {
 		case 'test':
@@ -54,7 +54,7 @@ function spiplistes_install ($action) {
 			if(!$result) {
 				// nota: SPIP ne filtre pas le résultat. Si retour en erreur,
 				// la case à cocher du plugin sera quand même cochée
-				spiplistes_log("spiplistes INSTALL: ERROR. PLEASE REINSTALL PLUGIN...", LOG_DEBUG);
+				spiplistes_log("spiplistes INSTALL: ERROR. PLEASE REINSTALL PLUGIN...", SPIPLISTES_LOG_DEBUG);
 			}
 			spiplistes_log("spiplistes INSTALL: ".($result ? "OK" : "NO"));
 			return($result);
@@ -73,7 +73,7 @@ function spiplistes_install ($action) {
 
 function spiplistes_base_creer () {
 
-//spiplistes_log("spiplistes_base_creer() <<", LOG_DEBUG);
+//spiplistes_log("spiplistes_base_creer() <<", SPIPLISTES_LOG_DEBUG);
 
 	// demande à SPIP de créer les tables (base/create.php)
 	include_spip('base/create');
@@ -130,7 +130,7 @@ function spiplistes_activer_inscription_visiteurs () {
 
 function spiplistes_vider_tables ($nom) {
 
-//spiplistes_log("spiplistes_vider_tables() <<", LOG_DEBUG);
+//spiplistes_log("spiplistes_vider_tables() <<", SPIPLISTES_LOG_DEBUG);
 
 	include_spip('base/abstract_sql');
 	

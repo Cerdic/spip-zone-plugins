@@ -912,14 +912,14 @@ function spiplistes_boite_autocron ($return = false) {
 	// le CRON n'a rien a faire. Pas de boite autocron
 		if($return) return($result);
 		else {
-spiplistes_log("AUTOCRON no jobs ! $ii", LOG_DEBUG);
+spiplistes_log("AUTOCRON no jobs ! $ii", SPIPLISTES_LOG_DEBUG);
 			echo($result);
 			return;
 		}
 	}
 	
 	$n = spiplistes_nb_grand_total_courriers();
-spiplistes_log("AUTOCRON nb courriers prets envoi $n", LOG_DEBUG);
+spiplistes_log("AUTOCRON nb courriers prets envoi $n", SPIPLISTES_LOG_DEBUG);
 
 	if($n > 0) {
 		$result .= ""
@@ -1005,6 +1005,7 @@ function spiplistes_debut_raccourcis ($titre = "", $raccourcis = true, $return =
 	if($return) return($result);
 	else echo($result);
 }
+
 
 // From SPIP-Listes-V: CP:20070923
 function spiplistes_fin_raccourcis ($return = false) {

@@ -25,7 +25,7 @@ function action_spiplistes_supprimer_abonne_dist () {
 	//global $connect_id_auteur;
 	$connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		
-//spiplistes_log("action_spiplistes_supprimer_abonne_dist() <<", LOG_DEBUG);
+//spiplistes_log("action_spiplistes_supprimer_abonne_dist() <<", SPIPLISTES_LOG_DEBUG);
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = intval($securiser_action());

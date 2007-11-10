@@ -15,7 +15,7 @@ include_spip('inc/spiplistes_api_globales');
 
 
 function balise_FORMULAIRE_ABONNEMENT ($p) {
-	spiplistes_log("balise_FORMULAIRE_ABONNEMENT() << ", LOG_DEBUG);
+	spiplistes_log("balise_FORMULAIRE_ABONNEMENT() << ", SPIPLISTES_LOG_DEBUG);
 	return calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('id_liste'));
 }
 
@@ -27,7 +27,7 @@ function balise_FORMULAIRE_ABONNEMENT ($p) {
 // qui permet d'afficher le formulaire d'abonnement a la liste numero X
 
 function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
-	spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() << ", LOG_DEBUG);
+	spiplistes_log("balise_FORMULAIRE_ABONNEMENT_stat() << ", SPIPLISTES_LOG_DEBUG);
 
 	if(!$args[1]) {
 		$args[1]='formulaire_abonnement';
@@ -49,7 +49,7 @@ function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 
 
 function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
-	spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", LOG_DEBUG);
+	spiplistes_log("balise_FORMULAIRE_ABONNEMENT_dyn() << ", SPIPLISTES_LOG_DEBUG);
 
 	include_spip ("inc/meta");
 	include_spip ("inc/session");
@@ -262,7 +262,7 @@ function formulaire_inscription($type, $acces_membres, $formulaire) {
 					
 		$result = spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) ".
 						"VALUES ("._q($nom_inscription_).", "._q($mail_inscription_).","._q($login_).","._q($mdpass).","._q($statut).","._q($htpass).","._q($cookie).")");
-spiplistes_log("insert inscription : ->".$mail_inscription_, LOG_DEBUG);
+spiplistes_log("insert inscription : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 					$id_abo=spip_insert_id();
 			spip_query("INSERT INTO `spip_auteurs_elargis` (`id_auteur`,`spip_listes_format`) VALUES ("._q($id_abo).","._q($type_abo).")");		
 				
@@ -358,7 +358,7 @@ spiplistes_log("insert inscription : ->".$mail_inscription_, LOG_DEBUG);
 		if($abonne_existant != 'oui') {
 		
 			if (envoyer_mail($mail_inscription_, "[$nom_site_spip] "._T('spiplistes:form_forum_identifiants'), $message)) {
-spiplistes_log("inscription : ->".$mail_inscription_, LOG_DEBUG);
+spiplistes_log("inscription : ->".$mail_inscription_, SPIPLISTES_LOG_DEBUG);
 				if($acces_membres == 'oui') {
 					$reponse_formulaire =_T('form_forum_identifiant_mail');
 				}
