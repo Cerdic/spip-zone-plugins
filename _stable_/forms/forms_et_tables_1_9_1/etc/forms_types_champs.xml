@@ -1,7 +1,7 @@
 <types>
 	<type>
 		<field>code_postal</field>
-		<label><multi>[fr]Code Postal[en]Postal Code[nl]Postal Code</multi></label>
+		<label><multi>[fr]Code Postal[en]Postal Code[nl]Postcode</multi></label>
 		<match>/^[0-9]{4,5}$/</match>
 	</type>
 	<type>
@@ -11,7 +11,7 @@
 	</type>
 	<type>
 		<field>telephone</field>
-		<label><multi>[fr]T&eacute;l&eacute;phone[en]Phone Number[en]Telephone Number</multi></label>
+		<label><multi>[fr]T&eacute;l&eacute;phone[en]Phone Number[nl]Telefoonnummer</multi></label>
 		<match>/^(((([\+])|(00[.-\s]))?([1-9]){2}[.-\s]?[1-689][.-\s]?)|(0[.-\s]?[1-689][.-\s]?))([0-9]{2}[.-\s]?){4}$/</match>
 		<formate>
 			<match>/[\s]+/</match>
