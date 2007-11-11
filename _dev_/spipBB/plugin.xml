@@ -3,11 +3,11 @@
 		SpipBB
 	</nom>
 	<auteur>
-		Credits : james [->james@rezo.net] touti [->touti@free.fr] chryjs [->chryjs@free.fr] gurdil real3t, [voir la liste->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
+		Credits : [SpipBB Team :voir la liste->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]
 _ &#169; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version>
-		0.2.4
+		0.2.5
 	</version>
 	<etat>
 		experimental
@@ -35,18 +35,11 @@ _ [Admin-> .?exec=spipbb_admin] Access to the admin panel.
 		<action>affiche_droite</action> <!-- [fr] spipbb fonction [en] spipbb function -->
 		<inclure>spipbb_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>spipbb_pipelines.php</inclure>
+	</pipeline>
 	<necessite id="cfg" version="[1.0.0;]" />
 	<chemin dir='' />
-
-	<bouton id='spipbb_admin' parent='forum'>
-		<icone>img_pack/spipbb-24.png</icone>
-		<titre>SpipBB</titre>
-		<url>spipbb_admin</url>
-	</bouton>
-	<bouton id='spipbb_config' parent='configuration'>
-		<icone>img_pack/spipbb-24.png</icone>
-		<titre>SpipBB</titre>
-		<url>cfg</url>
-		<args>cfg=spipbb</args>
-	</bouton>
 </plugin>

@@ -42,15 +42,8 @@
 	</div>
 	<?php if ( $idgm="#ENV{spipbb_id_groupe_mot}" ) { ?>
 	<table cellpadding='3' cellspacing='1' border='1' width='100%'>
-	<thead>
 	<tr>
 		<td class='verdana2'><:spipbb:choix_mots_ferme:></td>
-		<td class='verdana2'><:spipbb:choix_mots_annonce:></td>
-		<td class='verdana2'><:spipbb:choix_mots_postit:></td>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
 		<td>
 		<select name='spipbb_id_mot_ferme'>
 		<BOUCLE_mot_ferme(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
@@ -58,6 +51,9 @@
 		</BOUCLE_mot_ferme>
 		</select>
 		</td>
+	</tr>
+	<tr>
+		<td class='verdana2'><:spipbb:choix_mots_annonce:></td>
 		<td>
 		<select name='spipbb_id_mot_annonce'>
 		<BOUCLE_mot_annonce(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
@@ -65,6 +61,9 @@
 		</BOUCLE_mot_annonce>
 		</select>
 		</td>
+	</tr>
+	<tr>
+		<td class='verdana2'><:spipbb:choix_mots_postit:></td>
 		<td>
 		<select name='spipbb_id_mot_postit'>
 		<BOUCLE_mot_postit(MOTS){id_groupe=#ENV{spipbb_id_groupe_mot}}{par id_mot}>
@@ -73,7 +72,6 @@
 		</select>
 		</td>
 	</tr>
-	</tbody>
 	</table>
 	<?php } ?>
 </label>

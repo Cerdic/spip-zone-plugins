@@ -1,3 +1,11 @@
+2007-11-11  chryjs  <chryjs!@!free!.!fr>
+
+ * inc/spipbb_192 oubli de parenthèses, bug : http://www.spip-contrib.net/Plugin-SpipBB#forum400092
+ * correction erreur ORDER BY doit etre un array (surtout en 192)
+ * meilleure presentation de menu admin
+ * Retour en arriere sur le fichier plugin.xml et spipbb_pipelines pour remettres les boutons qui n'etaient plus visibles en 192
+ * Passage en 0.2.5
+
 2007-11-10  chryjs  <chryjs!@!free!.!fr>
 
  * Anti Spam : ajout de l'import d'un CSV avec une liste de mots

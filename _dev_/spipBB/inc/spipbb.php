@@ -150,7 +150,7 @@ function spipbb_init_metas($id_rubrique=0)
 
 	include_spip('inc/meta');
 	ecrire_meta('spipbb', serialize($spipbb_meta));
-	ecrire_metas();
+	if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 	spip_log('spipbb : init_metas OK');
 
@@ -167,7 +167,7 @@ function spipbb_delete_metas()
 		include_spip('inc/meta');
 		effacer_meta('spipbb');
 		effacer_meta('spipbb_fromphpbb'); // requis si la migration n est pas finie
-		ecrire_metas();
+		if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 		unset($GLOBALS['meta']['spipbb']);
 		spip_log('spipbb : delete_metas OK');
 	}
@@ -224,7 +224,7 @@ function spipbb_save_metas()
 
 	include_spip('inc/meta');
 	ecrire_meta('spipbb', serialize($spipbb_meta));
-	ecrire_metas();
+	if (defined('_INC_SPIPBB_192')) ecrire_metas(); // Code 192
 	$GLOBALS['spipbb'] = @unserialize($GLOBALS['meta']['spipbb']);
 	spip_log('spipbb : save_metas OK');
 
@@ -278,14 +278,13 @@ function spipbb_init_mot_cle($mot,$groupe)
 function spipbb_admin_gauche($id_rubrique=0,$adm="")
 {
 	$modules = array();
-	$modules['01_general']['01_index']= "spipbb_admin.php"; // config par defaut
 
 	$dir = @opendir(_DIR_PLUGIN_SPIPBB."exec/");
 
 	$setmodules = 1; // permet d'activer le lien lors de l'include
 	while( $file = @readdir($dir) )
 	{
-		if( preg_match("/^spipbb_admin_.*?\.php$/", $file) )
+		if( preg_match("/^spipbb_admin.*?\.php$/", $file) )
 		{
 			// chaque fichier inclu doit contenir ceci (par exemple) en entete :
 			//if( !empty($setmodules) )
@@ -301,11 +300,12 @@ function spipbb_admin_gauche($id_rubrique=0,$adm="")
 	unset($setmodules);
 
 	ksort($modules);
-	$res = "<ul>";
+	$res = "\n";
 	while( list($cat, $action_array) = each($modules) )
 	{
 		$cat = _T('spipbb:admin_cat_'.$cat); // on traduit le nom de chaque categorie
-		$res .= "\n<li>".$cat."\n<ul>";
+
+		$res .= debut_boite_info(true). "<b>".$cat."</b>";
 		ksort($action_array);
 		while( list($action, $file) = each($action_array) )
 		{
@@ -313,33 +313,34 @@ function spipbb_admin_gauche($id_rubrique=0,$adm="")
 			$action = _T('spipbb:admin_action_'.$action) ; // on traduit le nom de chaque action(exec)
 			if ( $adm <> $file ) {
 				$lien = generer_url_ecrire($file, "id_rubrique=".$id_rubrique) ;
-				$res .= "<li><a href='".$lien."' class='verdana2'>".$action."</a></li>" ;
+				$res .= "<a href='".$lien."' class='verdana2'>
+					<div style='margin-top:2px;' class='bouton36blanc'
+					onMouseOver=\"changeclass(this,'bouton36gris')\"
+					onMouseOut=\"changeclass(this,'bouton36blanc')\">".$action.
+					"</div></a>\n";
 			}
 			else {
-				$res .= "<li>".$action."</li>" ;
+				$res .= "<div style='margin-top:2px;' class='bouton36blanc'
+					onMouseOver=\"changeclass(this,'bouton36gris')\"
+					onMouseOut=\"changeclass(this,'bouton36blanc')\">".$action.
+					"</div>\n";
 			}
 		}
-		$res .= "\n</ul></li>";
+		$res .= fin_boite_info(true)."\n";
 	}
-	$res .= "</ul>";
-
-	$res = debut_boite_info(true) . $res . fin_boite_info(true);
+	$res .= "\n";
 
 	// -- liste des fonctions
 
 /*
-Apercu du Forum
 Permissions
 Delester
-E-mail de Masse
-Smilies
+Smilies /avatars
 Censure
 Administration des Groupes
 Gestion
 Permissions
-SPAM Flagged Posts
-Log
-Manage Words
+SPAM WORD Log
 Administration des Utilisateurs
 Controle du bannissement
 Interdire un nom d'utilisateur
@@ -355,17 +356,6 @@ Utilisateurs inactifs
 	return $res;
 }
 
-/*
-// ------------------------------------------------------------------------------
-// [fr] compatibilite spip192->193 ecrire_metas n'est plus requis en 193
-#-------------------------------------------------------------------------------#
-// from inc/utils.php 193
-#-------------------------------------------------------------------------------#
-if (!function_exists('ecrire_metas')) {
-function ecrire_metas() { // ne fait rien en Spip 193
-} } // ecrire_metas
-*/
-
 // ------------------------------------------------------------------------------
 // [fr] Verifie que les rubriques et les articles sont bien numerotes et les
 // [fr] renumerote si besoin
@@ -378,7 +368,7 @@ function spipbb_renumerote()
 	$result = sql_select("id_rubrique, titre", "spip_rubriques", array(
 			"id_secteur='".$id_secteur."'",
 			"id_rubrique!='".$id_secteur."'" ),	// array where
-			'','titre');
+			'', array('titre') );
 	$numero = 10;
 	while ( $row = sql_fetch($result) )
 	{
@@ -393,8 +383,6 @@ function spipbb_renumerote()
 	} // while
 
 	// les articles
-//	$query = "SELECT A.id_article , A.titre FROM spip_articles AS A, spip_rubriques AS R WHERE A.id_rubrique=R.id_rubrique AND A.id_secteur='".$id_secteur."' ORDER BY R.titre, A.titre";
-//	$result = sql_query($query);
 
 	$result = sql_select("A.id_article , A.titre", array("spip_articles AS A", "spip_rubriques AS R"),
 			array("A.id_rubrique=R.id_rubrique","A.id_secteur='".$id_secteur."'"),

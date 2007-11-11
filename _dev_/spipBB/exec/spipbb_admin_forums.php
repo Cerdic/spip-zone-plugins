@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin - base admin menu                #
 #  Authors : Chryjs, 2007                                       #
-#  Contact : chryjs¡@!free¡.!fr                                 #
+#  Contact : chryjs!@!free!.!fr                                 #
 # [en] admin menus                                              #
 # [fr] menus d'administration                                   #
 #---------------------------------------------------------------#
@@ -69,10 +69,8 @@ function exec_spipbb_admin_forums()
 	echo creer_colonne_droite($id_rubrique,true);
 	echo debut_droite($id_rubrique,true);
 
-//	echo debut_cadre_formulaire('',true);
 	spipbb_renumerote();
 	echo spipbb_admin_forums($row);
-//	echo fin_cadre_formulaire(true);
 
 	echo fin_gauche(), fin_page();
 } // exec_spipbb_admin_forums
@@ -83,23 +81,13 @@ function exec_spipbb_admin_forums()
 function spipbb_admin_forums()
 {
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	// on sait que cette fonction est dans le fichier associe
-	$hash_supprimer = calculer_action_auteur("supprimer");
-	$hash_move = calculer_action_auteur("spipbb_move",$GLOBALS['spipbb']['spipbb_id_rubrique']);
-	$hash_instituer = calculer_action_auteur("instituer_article");
 
 	$contexte = array( 
 			'id_rubrique'=>$GLOBALS['spipbb']['spipbb_id_rubrique'],
-			'hash_move' => $hash_move,
-			'hash_supprimer' => $hash_supprimer,
-			'hash_instituer' => $hash_instituer
 			);
 	$res = recuperer_fond("prive/spipbb_admin_forums",$contexte) ;
 
 	return $res;
 } // spipbb_admin_forums
 
-
-// http://www.firewall-net.com/phpBB2/admin/admin_forums.php?mode=forum_order&move=-15&f=2&sid=925c4f9ea2841dfd4c3491cfe3361352
 ?>

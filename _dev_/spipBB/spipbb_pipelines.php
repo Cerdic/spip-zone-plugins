@@ -19,6 +19,23 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+
+function spipbb_ajouter_boutons($boutons_admin) {
+	// si on est admin ou admin restreint
+	if ($GLOBALS['connect_statut'] == "0minirezo") {
+		// on voit le bouton dans la barre "statistiques"
+		$boutons_admin['forum']->sousmenu["spipbb_admin"]= new Bouton(
+		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
+		_T('spipbb:admin_titre')	// titre
+		);
+		$boutons_admin['configuration']->sousmenu["cfg&cfp=spipbb"]= new Bouton(
+		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
+		_T('spipbb:admin_forums_configuration')	// titre
+		);
+	}
+	return $boutons_admin;
+}
+
 function spipbb_affiche_droite($flux) {
 // [fr] Peut etre ajouter un controle d acces
 // [en] Todo : maybe add access control

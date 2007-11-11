@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                             #
 #  File    : exec/spipbb_admin - base admin menu                #
 #  Authors : Chryjs, 2007                                       #
-#  Contact : chryjs¡@!free¡.!fr                                 #
+#  Contact : chryjs!@!free!.!fr                                 #
 # [en] admin menus                                              #
 # [fr] menus d'administration                                   #
 #---------------------------------------------------------------#
@@ -22,6 +22,13 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+if( !empty($setmodules) )
+{
+	$file = basename(__FILE__);
+	$modules['01_general']['01_index'] = $file;
+	return;
+}
 
 include_spip("inc/spipbb"); // spipbb_admin_gauche + divers
 
@@ -62,8 +69,6 @@ function exec_spipbb_admin()
 function spipbb_recap_config()
 {
 	global $couleur_claire, $couleur_foncee;
-// Welcome
-// Statistiques du Forum
 
 	$total_posts = get_db_stat('postcount');
 	$total_users = get_db_stat('usercount');
@@ -90,7 +95,7 @@ function spipbb_recap_config()
 
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 
-	$contexte = array( 
+	$contexte = array(
 				'couleur_foncee'=>$couleur_foncee,
 				'couleur_claire' => $couleur_claire,
 				'total_posts' => $total_posts,
@@ -98,7 +103,7 @@ function spipbb_recap_config()
 				'total_users' => $total_users,
 				'users_per_day' => $users_per_day,
 				'posts_per_day' => $posts_per_day,
-				'start_date' => normaliser_date($start_date), //date("j n y",$start_date),
+				'start_date' => normaliser_date($start_date),
 				'forum_age' => $forum_age,
 				'total_online' => $total_online,
 				'spipbb_version' => $GLOBALS['spipbb']['version']
@@ -122,7 +127,7 @@ function get_db_stat($mode)
 
 		case 'newestuser':
 			//$query="SELECT id_auteur, nom FROM spip_auteurs ORDER BY id_auteur DESC LIMIT 0,1";
-			$result = sql_select('id_auteur, nom','spip_auteurs','','','id_auteur DESC','1');
+			$result = sql_select('id_auteur, nom','spip_auteurs','','',array('id_auteur DESC'),'0,1');
 			break;
 
 		case 'postcount':
@@ -132,7 +137,7 @@ function get_db_stat($mode)
 
 		case 'oldestpost':
 			//$query="SELECT date_heure AS date FROM spip_forum ORDER BY date_heure ASC LIMIT 0,1";
-			$result = sql_select('date_heure AS date','spip_forum','','','date_heure ASC','1');
+			$result = sql_select('date_heure AS date','spip_forum','','',array('date_heure ASC'),'0,1');
 			break;
 	}
 
@@ -154,7 +159,6 @@ function get_db_stat($mode)
 		case 'oldestpost':
 			return $row['date'];
 			break;
-
 	}
 
 	return false;

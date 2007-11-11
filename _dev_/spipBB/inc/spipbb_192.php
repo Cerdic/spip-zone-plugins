@@ -27,6 +27,7 @@ La plupart du code est donc Copyright les auteurs de SPIP
 Les function_exists sont ajoutes pour resoudre les conflits de 
 redefinitions lorsque d'autres plugins actifs utilisent ce type 
 de mecanisme de compatibilite.
+svn://zone.spip.org/spip-zone/_dev_/compat/ est insuffisant pour nos besoins.
 [en] This file is included to solve compatibility problems
 when used with SPIP 1.9.2 and this new plugin.
 I used code copied from SPIP 193 [SVN] and Spip 192
@@ -34,6 +35,7 @@ therefore most of the code is copyright SPIP authors.
 The function_exisits was added to protect from conflicts with 
 other plugins that also redefine the same function for the same 
 reasons aka compatibility.
+svn://zone.spip.org/spip-zone/_dev_/compat/ isn't enough for our needs.
 */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -75,7 +77,7 @@ function sql_fetsel($select, $from = array(), $where = array(), $groupby = '',
 #------------------------------------------------------------#
 if (!function_exists('sql_insertq')) {
 function sql_insertq($table, $couples, $desc=array(), $serveur='')
-{ 
+{
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
 	$fields =  $desc['field'];
@@ -91,7 +93,8 @@ function sql_insertq($table, $couples, $desc=array(), $serveur='')
 // from req/mysql.php 193
 #------------------------------------------------------------#
 if (!function_exists('spip_mysql_cite')) {
-function spip_mysql_cite($v, $type) {
+function spip_mysql_cite($v, $type)
+{
 	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
 	OR (sql_test_int($type)
 		 AND (is_numeric($v)
@@ -105,7 +108,8 @@ function spip_mysql_cite($v, $type) {
 // from req/mysql.php 193
 #------------------------------------------------------------#
 if (!function_exists('sql_query')) {
-function sql_query($ins, $serveur='') {
+function sql_query($ins, $serveur='')
+{
 	return spip_mysql_query($ins,$serveur);
 } } // sql_query
 
@@ -113,8 +117,8 @@ function sql_query($ins, $serveur='') {
 // from req/mysql.php 193
 #------------------------------------------------------------#
 if (!function_exists('spip_mysql_query')) {
-function spip_mysql_query($query, $serveur='') {
-
+function spip_mysql_query($query, $serveur='')
+{
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
@@ -200,7 +204,8 @@ function trace_query_chrono($m1, $m2, $query, $result)
 // from req/mysql.php 193
 #------------------------------------------------------------#
 if (!function_exists('spip_mysql_explain')) {
-function spip_mysql_explain($query, $serveur=''){
+function spip_mysql_explain($query, $serveur='')
+{
 	if (strpos($query, 'SELECT') !== 0) return array();
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
@@ -216,8 +221,8 @@ function spip_mysql_explain($query, $serveur=''){
 // from req/mysql.php 193
 #------------------------------------------------------------#
 if (!function_exists('traite_query')) {
-function traite_query($query, $db='', $prefixe='') {
-
+function traite_query($query, $db='', $prefixe='')
+{
 	if ($GLOBALS['mysql_rappel_nom_base'] AND $db)
 		$pref = '`'. $db.'`.';
 	else $pref = '';
@@ -240,7 +245,8 @@ function traite_query($query, $db='', $prefixe='') {
 // from req/mysql.php 193
 #------------------------------------------------------------#
 if (!function_exists('spip_mysql_error')) {
-function spip_mysql_error($query='') {
+function spip_mysql_error($query='')
+{
 	$s = mysql_error();
 	if ($s) spip_log("$s - $query", 'mysql');
 	return $s;
@@ -250,7 +256,8 @@ function spip_mysql_error($query='') {
 // from req/mysql.php 193 et base/db_mysql.php 192
 #------------------------------------------------------------#
 if (!function_exists('sql_fetch')) {
-function sql_fetch($res, $serveur='') {
+function sql_fetch($res, $serveur='')
+{
 	return spip_mysql_fetch($res, MYSQL_ASSOC);
 } } // spip_mysql_fetch in base/db_mysql.php  192
 
@@ -261,7 +268,8 @@ function sql_fetch($res, $serveur='') {
 if (!function_exists('sql_getfetsel')) {
 function sql_getfetsel(
 	$select, $from = array(), $where = array(), $groupby = '', 
-	$orderby = array(), $limit = '', $having = array(), $serveur='') {
+	$orderby = array(), $limit = '', $having = array(), $serveur='')
+{
 	$r = sql_fetch(sql_select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur), $serveur);
 	return $r ? $r[$select] : NULL;
 } } // sql_getfetsel
@@ -281,8 +289,8 @@ function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='')
 // http://doc.spip.org/@spip_mysql_updateq
 #------------------------------------------------------------#
 if (!function_exists('spip_mysql_updateq')) {
-function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur='') {
-
+function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur='')
+{
 	if (!$champs) return;
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
@@ -331,7 +339,8 @@ function sql_test_int($type, $serveur='')
 // A transposer dans les portages
 #------------------------------------------------------------#
 if (!function_exists('spip_mysql_errno')) {
-function spip_mysql_errno() {
+function spip_mysql_errno()
+{
 	$s = mysql_errno();
 	// 2006 MySQL server has gone away
 	// 2013 Lost connection to MySQL server during query
@@ -349,7 +358,9 @@ if (!function_exists('sql_select')) {
 function sql_select (
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '', $having = array(),
-	$serveur='') {
+	$serveur='')
+{
+	if ($order_by AND !$is_array($order_by)) $order_by = array($order_by);
 
 	return spip_mysql_select($select, $from, $where, $groupby, $orderby, $limit, '', $having, '', '', $serveur);
 } } // sql_select
@@ -360,6 +371,7 @@ function sql_select (
 #------------------------------------------------------------#
 if (!function_exists('sql_delete')) {
 function sql_delete ($table, $where='', $serveur='')
+{
 	return spip_mysql_query("DELETE FROM $table" . ($where ? " WHERE $where" : ''), $serveur);
 } } // sql_delete
 
