@@ -1,5 +1,0 @@
-<?php
-
-#pas encore utilise
-
-?>

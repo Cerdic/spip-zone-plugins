@@ -24,24 +24,24 @@
 		<a
 			href="[(#GET{url}|parametre_url{#ENV{var_date,date},#GET{annee_precedente}})]"
 			title="[(#GET{annee_precedente}|nom_mois)] [(#GET{annee_precedente}|annee)]"
-		>&#171;</a>&nbsp;
+		>#CONFIG{calendrier/texte_precedent,&#171;}</a>&nbsp;
 		<strong>[(#DATE|annee)]</strong>
 		&nbsp;<a
 			href="[(#GET{url}|parametre_url{#ENV{var_date,date},#GET{annee_suivante}})]"
 			title="[(#GET{annee_suivante}|nom_mois)] [(#GET{annee_suivante}|annee)]"
-		>&#187;</a>
+		>#CONFIG{calendrier/texte_suivant,&#187;}</a>
 		<br />[(#REM) fin CONFIG calendrier/par_annee]]
 		[(#GET{date_precedente}|?{' '})<a
 			href="[(#GET{url}|parametre_url{#ENV{var_date,date},#GET{date_precedente}})]"
 			title="[(#GET{date_precedente}|nom_mois)] [(#GET{date_precedente}|annee)]"
-		>&#171;</a>&nbsp;]
+		>#CONFIG{calendrier/texte_precedent,&#171;}</a>&nbsp;]
 		(#CONFIG{calendrier/navigation}|!={non}|?{' '})
 	    ]<strong>[(#DATE|nom_mois)][(#CONFIG{calendrier/par_annee}|=={oui}|?{'',' '})[(#DATE|annee)]]</strong>[
 		(#CONFIG{calendrier/navigation}|!={non}|?{' '})
 		[(#GET{date_suivante}|?{' '})&nbsp;<a
 			href="[(#GET{url}|parametre_url{#ENV{var_date,date},#GET{date_suivante}})]"
 			title="[(#GET{date_suivante}|nom_mois)] [(#GET{date_suivante}|annee)]"
-		>&#187;</a>]]
+		>#CONFIG{calendrier/texte_suivant,&#187;}</a>]]
 	</caption>
 
 	[(#REM) Affichage des jours de la semaine

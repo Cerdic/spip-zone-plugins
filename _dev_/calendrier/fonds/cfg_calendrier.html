@@ -34,6 +34,17 @@
 			<input type="text" name="revenir_aujourdhui" size="4" value="#ENV{revenir_aujourdhui,oui}" />
 			<span>(oui=actif, par défaut, non=désactivé)</span>
 		</p>
+		
+		<hr />
+		
+		<p>
+			<label for="texte_precedent"><:calendrier:texte_precedent:>&nbsp;: </label>
+			<input type="text" name="texte_precedent" size="3" value="#ENV{texte_precedent,&#171;}" />
+			<span>texte du lien vers la p&eacute;riode pr&eacute;c&eacute;dente '&#171;' par défaut</span>
+			<label for="texte_suivant"><:calendrier:texte_suivant:>&nbsp;: </label>
+			<input type="text" name="texte_suivant" size="3" value="#ENV{texte_suivant,&#187;}" />
+			<span>texte du lien vers la p&eacute;riode suivante '&#187;' par défaut</span>
+		</p>
 	</fieldset>
 
 	<div>
