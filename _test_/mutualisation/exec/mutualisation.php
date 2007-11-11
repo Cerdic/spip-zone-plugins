@@ -18,7 +18,10 @@ function exec_mutualisation_dist() {
 	}
 	sort($sites);
 
-	$titre = _L(count($sites).' '.'sites mutualis&#233;s');
+	$titre = '<img style="float:left;" src="'
+		. find_in_path('mutualiser.png')
+		. '" />';
+	$titre .= _L(count($sites).' '.'sites mutualis&#233;s');
 
 	$page = '';
 	
@@ -47,9 +50,12 @@ function exec_mutualisation_dist() {
 			$nom_site = sinon($meta['nom_site'], $v);
 			$stats = intval($meta['popularite_total']);
 			if ($plugins = @unserialize($meta['plugin']))
-				$plugins = strtolower(join(', ', array_keys($plugins)));
+				$plugins = count($plugins)
+				. ' <small>'
+				. strtolower(join(', ', array_keys($plugins)))
+				. '</small>';
 			else
-				$plugins = 'Plugins';
+				$plugins = '-';
 
 			// S'il faut upgrader, creer un bouton qui permettra
 			// de faire la mise a jour directement depuis le site maitre
@@ -63,7 +69,7 @@ function exec_mutualisation_dist() {
 			$erreur = ' (erreur!)';
 		}
 		$page .= "<tr class='tr". $nsite % 2 ."'"
-			. " style='background: url(${url}spip.php?action=cron);'>
+			. " style='background: url(${url}spip.php?action=cron&renouvelle_alea=yo);'>
 			<td>$v$version_installee$erreur</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire/</a></td>
