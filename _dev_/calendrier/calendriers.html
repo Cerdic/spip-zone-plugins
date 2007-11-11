@@ -75,7 +75,7 @@
 			Emploi du filtre unique pour éviter d'ajouter plusieurs fois une même date dans la liste.
 
 		][(#SET{jours,#ARRAY{0,0}})]
-		<BOUCLE_minical(ARTICLES){date==^((#ENV{date_liste}|debut_mois|affdate{Y-m}))}{lang_select=non}>[
+		<BOUCLE_minical(ARTICLES){date==^((#ENV{date_liste,#DATE}|debut_mois|affdate{Y-m}))}{lang_select=non}>[
 		[(#SET{jours,[(#GET{jours}|push{[(#DATE|affdate{Y-m-d})]})]})]
 		(#DATE|affdate{Y-m-d}|unique|?{' '})
 		]</BOUCLE_minical>[<div class="divers menu">
