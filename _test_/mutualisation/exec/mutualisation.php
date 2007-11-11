@@ -67,6 +67,7 @@ function exec_mutualisation_dist() {
 		else {
 			$url = 'http://'.$v.'/';
 			$erreur = ' (erreur!)';
+			$plugins = '-';
 		}
 		$page .= "<tr class='tr". $nsite % 2 ."'"
 			. " style='background: url(${url}spip.php?action=cron&renouvelle_alea=yo);'>
