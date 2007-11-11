@@ -28,6 +28,10 @@
 			<a href="#URL_ECRIRE{cfg,cfg=calendrier}"><:calendrier:config_calendrier:></a></small></p>
 		</div>
 
+	<B_liste>
+	<div class="contre-encart">
+
+		<div class="liste-articles">
 	[(#REM) Liste des articles en fonction de la date passée en paramètre
 	
 	]<BOUCLE_liste(ARTICLES){date==^(#ENV{date_liste})}{par date}{inverse}>
@@ -37,10 +41,15 @@
 		#INTRODUCTION
 	</div>
 	</BOUCLE_liste>
+		</div>
 
+	</div><!-- fin contre-encart -->
+	</B_liste>
+
+<div class="encart">&nbsp;</div>
 
 	</div><!--#contenu-->
-	</div><!--#conteneur-->
+	[(#SPIP_VERSION|match{'1.9.3'}|?{</div>})<!--#conteneur-->]
 
     [(#REM) Menu de navigation laterale ]    <div id="navigation">		[(#REM) minical statique
 
@@ -49,8 +58,8 @@
 			afin de faire appel au bon cache (calculé en fonction des paramètres passés).
 			On envoi la liste des jours sur lesquels faire un lien
 
-		][<div class="menu">
-			<h2><:cal_par_mois:></h2>
+		][<div class="divers menu">
+			<h2 class="menu-titre"><:cal_par_mois:></h2>
 			(#REM)MODELE{minical/mois}
 				{date}
 				{jours=#ARRAY{0,1999-02-02,1,2007-10-04,3,2007-10-07,4,2007-10-12,5,2007-09-19,6,2007-11-22}}
@@ -69,14 +78,16 @@
 		<BOUCLE_minical(ARTICLES){date==^((#ENV{date_liste}|debut_mois|affdate{Y-m}))}{lang_select=non}>[
 		[(#SET{jours,[(#GET{jours}|push{[(#DATE|affdate{Y-m-d})]})]})]
 		(#DATE|affdate{Y-m-d}|unique|?{' '})
-		]</BOUCLE_minical>[<div class="menu">
-			<h2><:cal_par_mois:></h2>
+		]</BOUCLE_minical>[<div class="divers menu">
+			<h2 class="menu-titre"><:cal_par_mois:></h2>
 			(#MODELE{minical/mois}
 				{var_date=date_liste}
-				{date=#ENV{date_liste}}
+				{date=#ENV{date_liste,#DATE}}
 				{jours=#GET{jours}}
 		)</div>]
     </div><!--#navigation-->
+
+	[(#SPIP_VERSION|match{'1.9.2'}|?{</div>})<!--#conteneur-->]
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
