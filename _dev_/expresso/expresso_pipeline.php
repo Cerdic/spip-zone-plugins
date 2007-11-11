@@ -88,37 +88,54 @@ function expresso_nettoie($flux){
 	return $flux;
 }
 
+function expresso_append_url($url,$cachefile){
+	$GLOBALS['meta']['expresso'] .= "$url!$cachefile\n";
+	expresso_genere_htaccess();
+}
+function expresso_remove_url($url,$cachefile){
+	$GLOBALS['meta']['expresso'] = preg_replace(",$url!.*?\n,","",$GLOBALS['meta']['expresso']);
+	expresso_genere_htaccess();
+	@unlink($cachefile);
+}
+
 function expresso_affichage_final($flux) {
+	$url = self(true);
+	$url = "http://".$_SERVER['HTTP_HOST']. preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']) . $url;
 	if (empty($_POST)
 	AND !isset($_COOKIE['spip_admin'])
 	AND !isset($_COOKIE['spip_session'])
 	AND !isset($_SERVER['PHP_AUTH_USER'])){
-		$url = self(true);
-		$url = "http://".$_SERVER['HTTP_HOST']. preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']) . $url;
 		if (isset($GLOBALS['page']['entetes']['X-Expresso'])) {
 			$nom_cache = _DIR_VAR . "apache/".md5($url).".html";
 			if ( 
 				($GLOBALS['var_mode']=='calcul')
 				OR ($GLOBALS['var_mode']=='recalcul')
-				OR !($e=file_exists($nom_cache))
+				OR !(file_exists($nom_cache))
 				OR ( ($d=filemtime($nom_cache)) AND ($d+$GLOBALS['page']['entetes']['X-Spip-Cache']<time()))
 				) {
 				spip_log("$url : $nom_cache",'boost');
 				ecrire_fichier($nom_cache,expresso_nettoie($flux));
 				# expresso est une simple chaine pour eviter la deserialisation a chaque hit et preferer un strpos plus rapide
 				# url!nom_cache\n
-				if (strpos($GLOBALS['meta']['expresso'],"$url!")===FALSE) {
-					$GLOBALS['meta']['expresso'] .= "$url!$nom_cache\n";
-					expresso_genere_htaccess();
-				}
+				if (strpos($GLOBALS['meta']['expresso'],"$url!")===FALSE)
+					expresso_append_url($url,$nom_cache);
 				elseif($GLOBALS['var_mode']=='recalcul')
 					expresso_genere_htaccess();
 			}
 		}
-		elseif (strpos($GLOBALS['meta']['expresso'],"$url!")!==FALSE) {
-			$GLOBALS['meta']['expresso'] = preg_replace(",$url!.*?\n,","",$GLOBALS['meta']['expresso']);
-			expresso_genere_htaccess();
-		}
+		elseif (strpos($GLOBALS['meta']['expresso'],"$url!")!==FALSE)
+			expresso_remove_url($url,$nom_cache);
+	}
+	else {
+		if ( 
+			isset($_COOKIE['spip_admin'])
+			&&
+			( ($GLOBALS['var_mode']=='calcul') OR ($GLOBALS['var_mode']=='recalcul'))
+			) {
+				$nom_cache = _DIR_VAR . "apache/".md5($url).".html";
+				if (file_exists($nom_cache))
+					expresso_remove_url($url,$nom_cache);
+			}
 	}
 	return $flux;
 }
