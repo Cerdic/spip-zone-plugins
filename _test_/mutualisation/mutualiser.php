@@ -43,56 +43,105 @@ function demarrer_site($site = '', $options = array()) {
 	if ($options['table_prefix'])
 		$GLOBALS['table_prefix'] = prefixe_mutualisation($site);
 
-
+	/*
+	 * Si le dossier du site n'existe pas ou
+	 * si le fichier de connexion a la bdd est absent, 
+	 * le site n'est pas totalement installe.
+	 * 
+	 * Il faut lancer la creation de mutualisation
+	 */
+	if  ($ok = !is_dir($e = _DIR_RACINE . $options['repertoire'].'/' . $site . '/')
+	    OR !(defined('_DIR_CONNECT')?
+			(defined('_FILE_CONNECT_INS')?
+				   file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.php')
+				OR file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.tmp.php'):
+				   file_exists(_DIR_CONNECT . 'connect.php')
+				OR file_exists(_DIR_CONNECT . 'connect.tmp.php')):
+			(defined('_FILE_CONNECT_INS')?
+				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . _FILE_CONNECT_INS . '.php')
+				OR file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . '.tmp.php'):
+				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php')
+				OR file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . 'connect.tmp.php')))
+		)
+	{	
+		/*
+		 * - Recuperer les identifiants manquants
+		 * 
+		 * Nota :
+		 * Il faut que _INSTALL_(NAME|USER|PASS) soient definis ici
+		 * et non dans le fichier mutualiser_creer() car
+		 * ces constantes sont necessaires a l'installation de SPIP
+		 * (ecrire/?exec=install). Dans le cas contraire, le formulaire
+		 * d'installation n'est pas prerempli.
+		 * 
+		 * 
+		 * > Cas de la gestion d'un pannel
+		 * Recuperer les mots de passes du futur compte dans une table speciale
+		 * Voir http://www.spip-contrib.net/Service-d-hebergement-mutualise
+		 */
+		if ($options['utiliser_panel']) {
+			include_spip('inc/minipres');
+			include_spip('base/abstract_sql');
+			include_once(dirname(__FILE__).'/base/abstract_mutu.php');
+			
+			// On cherche en BD si le site est enregistre et on recupere
+			// password et code d'activation
+			$link = @mutu_connect_db(_INSTALL_PANEL_HOST_DB, 0, _INSTALL_PANEL_USER_DB, _INSTALL_PANEL_PASS_DB, '', _INSTALL_SERVER_DB);
+			@sql_selectdb(_INSTALL_PANEL_NAME_DB, _INSTALL_SERVER_DB);
+			$result=@sql_query("SELECT "
+						. _INSTALL_PANEL_FIELD_CODE . " AS code," 
+						. _INSTALL_PANEL_FIELD_PASS . " AS pass," 
+						. _INSTALL_PANEL_FIELD_SITE . " AS site," 
+						. " FROM " . _INSTALL_PANEL_NAME_TABLE 
+						. " WHERE "._INSTALL_PANEL_FIELD_SITE . " = '$site'"
+						, _INSTALL_SERVER_DB);
+			if (sql_count($result)>0) {
+				$data = sql_fetch($result);
+				$options['code'] = $data['code'];
+				define ('_INSTALL_NAME_DB', _INSTALL_NAME_DB);
+				define ('_INSTALL_USER_DB', _INSTALL_NAME_DB);
+				define ('_INSTALL_PASS_DB', $data['pass']);
+			}
+			else {
+				echo minipres(
+					_L('<h2>Erreur 404 : page inexistante</h2>')
+				);
+				exit;
+			}
+		/*
+		 * > Cas de creation d'utilisateur de la base SQL
+		 * (nom et pass non attribuees par un panel)
+		 */		
+		} elseif ($options['creer_user_base']) {
 		
-	if (($options['creer_user_base']) AND (!$options['utiliser_panel'])) {
-		define('_INSTALL_USER_DB', _INSTALL_NAME_DB);
-		define('_INSTALL_PASS_DB',
-			substr(md5(
-				_INSTALL_PASS_DB_ROOT   # secret du site
-				. $_SERVER['REMOTE_ADDR'] # un truc variable
-				. _INSTALL_USER_DB # un autre truc variable
-			), 0, 8)
-		);
-	}
-
-	if ($options['utiliser_panel']) {
-		include_spip('base/abstract_sql');
-		include_once(dirname(__FILE__).'/base/abstract_mutu.php');
-
-		// Voir http://www.spip-contrib.net/Service-d-hebergement-mutualise
-		
-		if (!defined('_INSTALL_SERVER_DB'))
-			define('_INSTALL_SERVER_DB','mysql');
-						
-		// On cherche en BD si le site est enregistre et on recupere
-		// password et code d'activation
-		$link = @mutu_connect_db(_INSTALL_PANEL_HOST_DB, 0, _INSTALL_PANEL_USER_DB, _INSTALL_PANEL_PASS_DB, '', _INSTALL_SERVER_DB);
-		@sql_selectdb(_INSTALL_PANEL_NAME_DB, _INSTALL_SERVER_DB);
-		$result=@sql_query("SELECT * FROM "._INSTALL_PANEL_NAME_TABLE." WHERE "._INSTALL_PANEL_FIELD_SITE."='$site'", _INSTALL_SERVER_DB);
-		if (sql_count($result)>0) {
-			$data = sql_fetch($result);
-			$options['code'] =$data[_INSTALL_PANEL_FIELD_CODE];
-			define ('_INSTALL_NAME_DB',_INSTALL_NAME_DB);
-			define ('_INSTALL_USER_DB',_INSTALL_NAME_DB);
-			define ('_INSTALL_PASS_DB',$data[_INSTALL_PANEL_FIELD_PASS]);
+			// nom d'utilisateur et mot de passe
+			define('_INSTALL_USER_DB', _INSTALL_NAME_DB);
+			define('_INSTALL_PASS_DB',
+				substr(md5(
+					_INSTALL_PASS_DB_ROOT   # secret du site
+					. $_SERVER['REMOTE_ADDR'] # un truc variable
+					. _INSTALL_USER_DB # un autre truc variable
+				), 0, 8)
+			);
 		}
-		else {
-			echo ('<h2>Erreur 404 : page inexistante</h2>');
+		
+		/*
+		 * Si le site n'existe pas encore, 
+		 * lancer la procedure de creation
+		 */
+		if (!is_dir($e)) {
+			spip_initialisation();
+			include_once dirname(__FILE__).'/mutualiser_creer.php';
+			mutualiser_creer($e, $options);
 			exit;
-	
 		}
 
 	}
 
-	$adr_site = $options['repertoire'].'/' . $site . '/';
-	if (!is_dir($e = _DIR_RACINE . $adr_site)) {
-		spip_initialisation();
-		require dirname(__FILE__).'/mutualiser_creer.php';
-		mutualiser_creer($e, $options);
-		exit;
-	}
 
+	/*
+	 * Tout est pret, on execute la mutualisation.
+	 */
 	define('_SPIP_PATH',
 		$e . 'dist/:' .  // + 
 		$e . ':' .
@@ -113,7 +162,8 @@ function demarrer_site($site = '', $options = array()) {
 		($e . _NOM_PERMANENTS_ACCESSIBLES),
 		($e . _NOM_TEMPORAIRES_INACCESSIBLES),
 		($e . _NOM_TEMPORAIRES_ACCESSIBLES)
-	);
+	);	
+
 
 	// Ajouter le chemin vers l'exec=mutualisation pour le site maitre
 	// et seulement pour lui (pour en mettre plusieurs, les separer par
@@ -127,7 +177,7 @@ function demarrer_site($site = '', $options = array()) {
 		// Si un upgrade est demande dans le site fils, et securise par md5
 		// depuis le panneau de controle, le faire directement
 		if (_request('upgrade') == 'oui') {
-			require dirname(__FILE__).'/mutualiser_upgrade.php';
+			include_once dirname(__FILE__).'/mutualiser_upgrade.php';
 			mutualiser_upgrade();
 		}
 	}

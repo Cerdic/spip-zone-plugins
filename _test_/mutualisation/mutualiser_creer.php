@@ -26,6 +26,9 @@ function mutualiser_creer($e, $options) {
 	if (!defined('_INSTALL_SERVER_DB'))
 		define('_INSTALL_SERVER_DB','mysql');
 
+	/*
+	 * Code d'activation du site
+	 */
 	if ($options['code']) {
 		$secret = md5($code.$options['code']);
 
@@ -56,6 +59,10 @@ function mutualiser_creer($e, $options) {
 		}
 	}
 
+
+	/*
+	 * Creation de la base
+	 */
 	if ($options['creer_base']) {
 
 		if (defined('_INSTALL_HOST_DB')
@@ -74,15 +81,20 @@ function mutualiser_creer($e, $options) {
 
 			// si la base n'existe pas, on va travailler
 			if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
-				if (_request('creerbase') && _request('creerbase')=='oui') {
+				if (_request('creerbase') == 'oui') {
 					if (sql_query('CREATE DATABASE '._INSTALL_NAME_DB, _INSTALL_SERVER_DB)
 					AND sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['prefixe'] = $GLOBALS['table_prefix'];
 							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['db'] = _INSTALL_NAME_DB;
-								
-						// Pour chaque base creee on cree aussi un user
-						// MYSQL specifique qui aura les droits sur la base
+						
+						/*
+						 * Creation d'un utilisateur pour la base nouvellement cree
+						 *		
+						 * Pour chaque base creee on cree aussi un user
+						 * MYSQL specifique qui aura les droits sur la base
+						 */
 						if ($options['creer_user_base']) {
+	
 							// le nom de la machine MySQL peut etre different 
 							// du nom de la connexion via DNS
 							define ('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB); 							
