@@ -1,32 +1,24 @@
 Todo-list pour spipbb
 ---------------------
 
--* simplifier encore l'installation
 -* améliorer l'"administration" des forums (interface privee)
 -* nettoyer les squelettes
 -* utilisation des idees utilisees dans Gafospip -> Scoty ?
 -* lien entre auteur et la liste des messages qu'il a publie
 
--* Bugs et autres éléments non finis :
--** Evolution de la gestion des metas (SVN) ecrire_metas (inc/utils) est depreciee mais toujours presente (vide) mais requise en 192
+-* Bugs et autres elements non finis :
 -** Utiliser les descriptions des mots clés (ajoutees dans lang/... mot_...)
--** Présentation du panneau gauche de l'administration
--** Présentation de admin_config (titres par mots clés, JS pour sélection ?)
 -** Installation : "not configured" => Bouton/ case d'alerte + lien vers admin_config
--** Hierarchie qui ne s'affiche pas correctement pour admin_configuration et gestion 
--** lignes noires pour admin_index pour average_posts... avec IE
--** espaces gris en haut et bas de bloc central pour admin_configuration (avec IE)
 -** Gestion des annonces / postits / Fermés à tester /controler
 -** Affichage des annonces / postits / Fermés
--** Les des messages d'un auteur
 -** Affichage du profil à revoir
--** Affichage de poster à revoir (les chatons sont trop serrés)
--** Getion avatar : à améliorer + téléchargement (droits ?)
--** Import phpBB : test mot de passe / authentification d'un auteur importé
--** Import phpBB : vérifier différence login et nom auteur
--** Import phpBB : import des MP ? Option de départ ?
+-** Affichage de poster à revoir (les chatons sont trop ecartes)
+-** Getion avatar : a ameliorer + téléchargement (droits ?)
+-** Import phpBB : test mot de passe / authentification d'un auteur importe
+-** Import phpBB : verifier difference login et nom auteur
+-** Import phpBB : import des MP ? Option de depart ?
 -** Import phpBB : adresse IP des posteurs -> forums
--** Import phpBB : Si pas Iniset, réalisation par étapes de la partie 2 et 3 ? Précalcul à l'avance
+-** Import phpBB : Si pas Iniset, realisation par etapes de la partie 2 et 3 ? Precalcul à l'avance
 -** mot cles ferme, postit, annonce : bug ne doivent s'appliquer qu'au message principal du thread
 -** Anti spam : sur le login, IP (ban)
 

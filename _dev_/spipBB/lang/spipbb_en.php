@@ -107,6 +107,7 @@ The e-mail address will be used only to confirm the details of your registration
 'admin_action_swconfig' => 'Configure',
 'admin_action_swforum' => 'Flagged posts',
 'admin_action_swwords' => 'Manage Words',
+'admin_action_swlog' => 'Spam Log',
 
 // B
 'bio' => 'Short biography',
@@ -198,6 +199,7 @@ The e-mail address will be used only to confirm the details of your registration
 'info_confirmer_passe' => 'Confirm new password:',
 'info_avertissement' => 'Warning',
 'info_recommencer' => 'Please start again.',
+'info_inscription_invalide' => 'Impossible to register',
 
 //L
 'le' => 'On',

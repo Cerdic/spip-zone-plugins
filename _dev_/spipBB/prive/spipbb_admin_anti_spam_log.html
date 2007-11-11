@@ -1,0 +1,51 @@
+#CACHE{0}
+[(#REM) Plugin SpipBB - Licence GPL]
+[(#REM) SpipBB admin - Page de gestion des forums]
+
+<B_messages>
+[(#REM|debut_cadre_trait_couleur{1,'xxx','SpipBB Anti Spam Log'})]
+[(#REM) ------------------------ Liste et edition ------------------------ ]
+
+<div><table border='1' cellspacing='1' cellpadding='3' width="100%">
+<thead>
+	<tr>
+		<th class="tsujaut"><:spipbb:sujet_auteur:></th>
+		<th class="tsujet"><:spipbb:sujets:></th>
+		<th class="tmsgvs"><:spipbb:messages:></th>
+		<th class="tdermsg"><:ip:></th>
+		<th class="tdermsg"><:date:></th>
+	</tr>
+</thead>
+
+<BOUCLE_messages(SPIP_SPAM_WORDS_LOG){!par id_spam_log}{pagination 25}>
+<!-- BEGIN topicrow -->
+<tr>
+	<td class="autpost">
+		<BOUCLE_auteurp(AUTEURS){id_auteur}{tout}>
+		<a href=".?exec=auteur_infos&amp;id_auteur=#ID_AUTEUR">#NOM</a>
+		</BOUCLE_auteurp>
+			[(#LOGIN|sinon{<:spipbb:anonyme:>})]
+		<//B_auteurp>
+	</td>
+	<td class="titre" id="forum#ID_FORUM">
+		[(#TITRE|spipbb_chatons)]
+	</td>
+	<td class='verdana2'>
+		[(#MESSAGE|spipbb_chatons)]
+	</td>
+	<td class='verdana2'>
+		<a title="IP: #IP_AUTEUR"><span>#IP_AUTEUR</span>&nbsp;</a>
+	</td>
+	<td class='verdana2'>
+		[(#LOG_DATE|affdate_jourcourt)] [(#LOG_DATE|heures)]:[(#LOG_DATE|minutes)]</li>
+	</td>
+</tr>
+<!-- END topicrow -->
+</BOUCLE_messages>
+</table></div>
+
+[(#REM|sinon{1}|fin_cadre_trait_couleur)]
+
+</B_messages>
+<:spipbb:sw_admin_no_spam:>
+<//B_messages>

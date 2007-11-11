@@ -3,7 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : action/spipbb_spam_word - modifie un mot spam #
 #  Authors : chryjs, 2007                                  #
-#  Contact : chryjs¡@!free¡.!fr                            #
+#  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
@@ -53,15 +53,17 @@ function action_spipbb_spam_word()
 //	case 'edit' :
 //		break;
 	case 'insert' :
+		// [fr] Import a partir de la zone textarea
 		$list_sw = trim(corriger_caracteres(_request('sw_mass_add')));
 		if ($list_sw) {
 			$list = preg_split("#[^A-Za-z-]#", $list_sw );
 			for ($i = 0; $i < count($list); $i++) {
 				$word = trim($list[$i]);
 				if (empty($word)) { continue; }
-				@sql_insertq('spip_spam_words',array( 'spam_word'=>str_replace("\'", "''", $word)) );
+				spipbb_ajoute_spam_word($word);
 			}
 		}
+		// [fr] Import a partir d'une URL
 		if ( $list_url = trim(_request('sw_url_add')) ) {
 			include_spip("inc/distant");
 			$list_csv_raw = recuperer_page($list_url,true);
@@ -72,7 +74,7 @@ function action_spipbb_spam_word()
 				$val=preg_replace("/^#.*$/","",$val); // remove comments line
 				if (!empty($val)) {
 					if ($val) {
-						@sql_insertq('spip_spam_words',array( 'spam_word'=>str_replace("\'", "''", $val)) );
+						spipbb_ajoute_spam_word($val);
 					}
 				}
 			} // while
@@ -82,5 +84,18 @@ function action_spipbb_spam_word()
 
 	redirige_par_entete($redirige);
 } // action_spipbb_spam_word
+
+// ------------------------------------------------------------------------------
+// [fr] Insere avec controle sur sa pre-existence un mot de spam
+// [en] Insert, if new, spam_word
+// ------------------------------------------------------------------------------
+function spipbb_ajoute_spam_word($spam_word)
+{
+	//$spam_word = str_replace("\'", "''", $spam_word);
+	$spam_word=addslashes($spam_word);
+	$row=sql_fetsel('id_spam_word','spip_spam_words',"spam_word='$spam_word'");
+	if (!$row)
+		@sql_insertq('spip_spam_words',array( 'spam_word'=>$spam_word ) );
+} // spipbb_ajoute_spam_word
 
 ?>

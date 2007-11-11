@@ -109,6 +109,8 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'admin_action_swconfig' => 'Configuration',
 'admin_action_swforum' => 'Posts marqu&eacute;s',
 'admin_action_swwords' => 'Gestion des mots',
+'admin_action_swlog' => 'Log du spam',
+
 
 // B
 'bio' => 'Petite biographie',
@@ -200,6 +202,7 @@ L\'adresse e-mail est uniquement utilis&eacute;e afin de confirmer les d&eacute;
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
 'info_avertissement' => 'Avertissement',
 'info_recommencer' => 'Veuillez recommencer.',
+'info_inscription_invalide' => 'Inscription impossible',
 
 //L
 'le' => 'Le',

@@ -1,10 +1,11 @@
 <?php
-#-----------------------------------------------------#
-#  Plugin  : spipBB - Licence : GPL                   #
-#  File    : spipbb_pipelines - pipelines             #
-#  Authors : Chryjs, 2007                             #
-#  Contact : chryjs¡@!free¡.!fr                       #
-#-----------------------------------------------------#
+#----------------------------------------------------------#
+#  Plugin  : spipBB - Licence : GPL                        #
+#  File    : spipbb_pipelines - pipelines                  #
+#  Authors : Chryjs, 2007 et als                           #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
+#  Contact : chryjs!@!free!.!fr                            #
+#----------------------------------------------------------#
 
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -28,7 +29,7 @@ function spipbb_ajouter_boutons($boutons_admin) {
 		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
 		_T('spipbb:admin_titre')	// titre
 		);
-		$boutons_admin['configuration']->sousmenu["cfg&cfp=spipbb"]= new Bouton(
+		$boutons_admin['configuration']->sousmenu["spipbb_admin_configuration"]= new Bouton(
 		"../"._DIR_PLUGIN_SPIPBB."/img_pack/spipbb-24.png",  // icone
 		_T('spipbb:admin_forums_configuration')	// titre
 		);
@@ -53,7 +54,7 @@ function spipbb_affiche_droite($flux) {
 		$r = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=".$flux['args']['id_rubrique']);
 		if (empty($spipbb_meta['spipbb_id_rubrique']) ) {
 		// [fr] configuration pas terminee -> lien vers la config
-			$url_lien = generer_url_ecrire('cfg', "cfg=spipbb") ;
+			$url_lien = generer_url_ecrire('spipbb_admin_configuration', "") ;
 			$flux['data'] .= debut_cadre_relief('',true);
 			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('spipbb:admin_titre') . " :</b>\n";
 			$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;

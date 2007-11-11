@@ -15,7 +15,6 @@
 			<th class="tsujets"><:spipbb:admin_form_sujets:></th>
 			<th class="tmsg"><:spipbb:admin_form_messages:></th>
 			<th class="tdermsg"><:spipbb:admin_form_editer:></th>
-			<th class="tdermsg"><:spipbb:admin_form_supprimer:></th>
 			<th class="tdermsg"><:spipbb:admin_form_deplacer:></th>
 		</tr>
 		</thead>
@@ -29,9 +28,6 @@
 				<a href="<?php echo generer_url_ecrire('rubriques_edit',"id_rubrique=#ID_RUBRIQUE"); ?>"
 				title='<:spipbb:admin_form_editer:>'><:spipbb:admin_form_editer:></a>
 			</td>
-			<td class='verdana2'><!--a href="<?php echo
-			generer_action_auteur('supprimer',"rubrique-#ID_RUBRIQUE","ecrire/[(#SELF|urldecode)]");
-			?>"--><:spipbb:admin_form_supprimer:></a></td>
 			<td class='verdana2'><a href='<?php echo
 			generer_action_auteur('spipbb_move',"rubrique-#ID_RUBRIQUE-up","ecrire/[(#SELF|urldecode)]");
 			?>'><:spipbb:admin_form_monter:></a><br /><a href='<?php echo
@@ -53,9 +49,6 @@
 			<//B_messages>
 			<td class='verdana2'><a href="<?php echo generer_url_ecrire('articles_edit',"id_article=#ID_ARTICLE"); 
 				?>"><:spipbb:admin_form_editer:></a></td>
-			<td class='verdana2'><!--a href="<?php echo
-			generer_action_auteur('instituer_article',"#ID_ARTICLE","statut_nouv=poubelle&retour=ecrire/[(#SELF|urldecode)]");
-			?>"--><:spipbb:admin_form_supprimer:></a></td>
 			<td class='verdana2'"><a href='<?php echo 
 			generer_action_auteur('spipbb_move',"article-#ID_ARTICLE-up","ecrire/[(#SELF|urldecode)]") ;
  			?>'><:spipbb:admin_form_monter:></a><br /><a href='<?php echo
@@ -65,7 +58,7 @@
 		</BOUCLE_forums>
 		<tr>
 			<td colspan='6' class='verdana2'><a href="<?php echo 
-				generer_url_ecrire('articles_edit',"new=oui&id_parent=#ID_RUBRIQUE");
+				generer_url_ecrire('articles_edit',"new=oui&id_rubrique=#ID_RUBRIQUE");
 				?>"><:spipbb:admin_form_creer_forum:></a></td>
 		</tr>
 		</tbody>
@@ -85,7 +78,6 @@
 			<th class="tsujets"><:spipbb:admin_form_sujets:></th>
 			<th class="tmsg"><:spipbb:admin_form_messages:></th>
 			<th class="tdermsg"><:spipbb:admin_form_editer:></th>
-			<th class="tdermsg"><:spipbb:admin_form_supprimer:></th>
 			<th class="tdermsg"><:spipbb:admin_form_deplacer:></th>
 		</tr>
 		</thead>
@@ -102,7 +94,7 @@
 	</B_categories>
 </BOUCLE_rubrique_principale>
 </B_rubrique_principale>
-<a href="<?php echo generer_url_ecrire('articles_edit',"new=oui&id_parent=#ID_RUBRIQUE"); ?>"><:spipbb:admin_form_creer_forum:></a>
+<a href="<?php echo generer_url_ecrire('articles_edit',"new=oui&id_rubrique=#ID_RUBRIQUE"); ?>"><:spipbb:admin_form_creer_forum:></a>
 <//B_rubrique_principale>
 </BOUCLE_rubrique_parcourue>
 </B_rubrique_parcourue>

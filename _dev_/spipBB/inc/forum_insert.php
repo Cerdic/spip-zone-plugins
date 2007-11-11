@@ -1,10 +1,34 @@
 <?php
+#---------------------------------------------------------------#
+#  Plugin  : spipbb - Licence : GPL                             #
+#  File    : inc/forum_insert.php                               #
+#  Authors : Chryjs, 2007 et als                                #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs      #
+#  Contact : chryjs!@!free!.!fr                                 #
+# [en] Post filtering                                           #
+# [fr] Filtrage des post                                        #
+#---------------------------------------------------------------#
+
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spipbb');
 
-//
+// ------------------------------------------------------------------------------
+// [fr] Quote
+// ------------------------------------------------------------------------------
 function spipbb_preg_quote($str, $delimiter)
 {
 	$text = preg_quote($str);
@@ -14,7 +38,9 @@ function spipbb_preg_quote($str, $delimiter)
 } // spipbb_preg_quote
 
 
-// Un parametre permet de forcer le statut (exemple: plugin antispam)
+// ------------------------------------------------------------------------------
+// [fr] Un parametre permet de forcer le statut (exemple: plugin antispam)
+// ------------------------------------------------------------------------------
 function inc_forum_insert($force_statut = NULL) {
 
 	// On deroute inc/forum_insert pour verifier d'abord chez akismet
@@ -60,15 +86,19 @@ function inc_forum_insert($force_statut = NULL) {
 // Check spam words config
 //
 
-	$spam = check_spam($id_auteur,_request('auteur'),$id_forum,_request('texte'), _request('titre')) ;
+	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$login = _request('auteur') ;
 
-	if ($spam) return inc_forum_insert_dist("spam");
-	else return inc_forum_insert_dist($force_statut);
+	$spam = check_spam($id_auteur,$login,$id_forum,$id_article,_request('texte'), _request('titre')) ;
+
+	if ($spam) $force_statut = "spam";
+	return inc_forum_insert_dist($force_statut);
 }
 
-
+// ------------------------------------------------------------------------------
 // [fr] Envoyer un message prive a l'auteur fautif
 // [en] Send a private message to spammer
+// ------------------------------------------------------------------------------
 function insert_pm($id_auteur)
 {
 	if ( $GLOBALS['spipbb']['sw_send_pm_warning'] == "oui" ) {
@@ -84,15 +114,18 @@ function insert_pm($id_auteur)
 	}
 
 } // insert_pm
+
+// ------------------------------------------------------------------------------
 // table spip_auteurs_spipbb
 // id_auteur bigint(21) not null primary key
 // spam_warnings unsigned int not null default 0
 // ip_auteur varchar(16)
 // ban_date timestamp
 // ban 'oui' 'non' default 'non'
-
+// ------------------------------------------------------------------------------
 // [fr] Stocke dans la base l'avertissement de l'auteur
 // [en] Store in database the spammer informations
+// ------------------------------------------------------------------------------
 function warn_user($id_auteur=0)
 {
 	if (empty($id_auteur)) return;
@@ -113,68 +146,88 @@ function warn_user($id_auteur=0)
 	}
 } // warn_user
 
+// ------------------------------------------------------------------------------
 // table spip_spam_words_log
 // id_spam_log BIGINT(21) not null primary key autoincrement
 // id_auteur bigint(21) not null primary key
 // ip_auteur varchar(16)
 // login varchar(255)
-// log_date timestamp
 // titre text
 // message mediumtext
 // id_forum bigint(21)
-
+// id_article bigint(21)
+// ------------------------------------------------------------------------------
 // [fr] Met a jour la log des mots spammes
 // [en] Update the spam word log
-function log_spam_word($id_auteur, $login, $id_forum, &$titre, &$message)
+// ------------------------------------------------------------------------------
+function log_spam_word($id_auteur, $login, $id_forum, $id_article, $titre, $message)
 {
-	$current_time = time();
 	$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
+
+	$req = sql_select('spam_word','spip_spam_words');
+	$spam = false;
+
+	while ( $row = sql_fetch($req) )
+	{
+		$spamword = str_replace('*', '', $row['spam_word']);
+		$titre = preg_replace("#$spamword#is", '{{' . $spamword . '}}', $titre);
+		$message = preg_replace("#$spamword#is", '{{' . $spamword . '}}', $message);
+	}
 
 	$res = sql_insertq('spip_spam_words_log', array (
 				'id_auteur' => $id_auteur,
 				'login' => $login,
 				'ip_auteur' => $user_ip,
-				'log_date' => $current_time,
 				'titre' => $titre,
 				'message' => $message,
-				'id_forum' => $id_forum )
+				'id_forum' => $id_forum,
+				'id_article' => $id_article
+				)
 			);
 } // log_spam_word
 
+// ------------------------------------------------------------------------------
 // [fr] Bannis le spammeur
 // [en] Ban the spammer
+// ------------------------------------------------------------------------------
 function ban_user($id_auteur)
 {
 	$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
-	$current_time = time();
 
 	if (empty($id_auteur)) return;
 
 	// On le recherche
 	$is_spammer = sql_fetsel('id_auteur', 'spip_auteurs_spipbb', "id_auteur=$id_auteur");
+	$infos = sql_fetsel('login, email', 'spip_auteurs', "id_auteur=$id_auteur");
 
 	if (is_array($is_spammer) and !empty($is_spammer['id_auteur']) and $is_spammer['user_spam_warnings'] > $GLOBALS['spipbb']['sw_nb_spam_ban'] ) // parametrage
 	{
-		$res=sql_updateq('spip_auteurs_spipbb', array(
+		@sql_updateq('spip_auteurs_spipbb', array(
 					'ip_auteur' => $user_ip,
-					'ban_date' => $current_time,
 					'ban' => 'oui'
 							),
 				"id_auteur=$id_auteur");
+		$login = $infos['login'];
+		$email = $infos['email'];
+		@sql_insertq('spip_ban_liste', array(
+					'ban_ip' => $user_ip,
+					'ban_login' => $login,
+					'ban_email' => $email,
+					)
+				);
+
 	}
 } // ban_user
 
-function ban_ip()
-{
-	$user_ip = (isset($HTTP_SERVER_VARS['REMOTE_ADDR'])) ? $HTTP_SERVER_VARS['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
-}
 
+// ------------------------------------------------------------------------------
 // table spip_spam_words
 // id_spam_word BIGINT(21) not null primary key autoincrement
 // spam_word varchar(255)
 // [fr] Verifie s'il s'agit de spam
 // [en] Check if it's a  spam post
-function check_spam($id_auteur,$login,$id_forum,$message, &$titre)
+// ------------------------------------------------------------------------------
+function check_spam($id_auteur,$login,$id_forum,$id_article,$message, &$titre)
 {
 	if ($GLOBALS['spipbb']['disable_sw']=="oui") return false;
 	$is_spammer = sql_fetsel('id_auteur, statut', 'spip_auteurs_spipbb', "id_auteur=$id_auteur");
@@ -182,20 +235,15 @@ function check_spam($id_auteur,$login,$id_forum,$message, &$titre)
 	if ( $is_spammer['statut']=="0minirezo" AND $GLOBALS['spipbb']['sw_modo_can_spam']=="oui" ) return;
 
 	$req = sql_select('spam_word','spip_spam_words');
-
-	$message = preg_replace("#\[.{12,16}\]#i", '', $message);
-	$message = preg_replace('/\[url\]|\[\/url\]/si', '', $message);
-	$message = preg_replace('#\[url=|\]|\[/url\]#si', '', $message);
 	$spam = false;
 
 	while ( $row = sql_fetch($req) )
 	{
 		if (preg_match('#\b(' . str_replace('\*', '\w*?', spipbb_preg_quote($row['spam_word'], '#')) . ')\b#i', $message)
 		or  preg_match('#\b(' . str_replace('\*', '\w*?', spipbb_preg_quote($row['spam_word'], '#')) . ')\b#i', $titre)) {
-			log_spam_word($id_auteur, $login, $id_forum, $titre, $message);
+			log_spam_word($id_auteur, $login, $id_forum, $id_article, $titre, $message);
 			warn_user($id_auteur);
 			ban_user($id_auteur);
-			ban_ip();
 			// insert_pm($id_auteur);
 			$spam = true;
 			break;
