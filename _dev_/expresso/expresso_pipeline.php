@@ -14,6 +14,7 @@
 // 60 : toutes les requetes passent par apache (ne jamais faire ca !)
 // il faut laisser passer une partie des requetes pour que spip mette les pages a jour
 @define('_EXPRESSO_CACHE_RATIO',50);
+@define('_DIR_EXPRESSO',_DIR_VAR . "apache/");
 
 function expresso_genere_htaccess(){
 	/* debug*/
@@ -23,25 +24,28 @@ function expresso_genere_htaccess(){
 	
 	lire_fichier('.htaccess',$htaccess);
 	if (strpos($htaccess,'###EXPRESSO###')!==FALSE) {
+		$htaccess = preg_replace(",###EXPRESSO###.*###/EXPRESSO###,ms","###EXPRESSO###",$htaccess);
 		$base = preg_replace(';^[a-z]{3,5}://[^/]*;','',$GLOBALS['meta']['adresse_site']);
-		$express = "AddCharset ".strtoupper($GLOBALS['meta']['charset'])." .html\n";
 		$liste_pages = explode("\n",$GLOBALS['meta']['expresso']);
-		foreach($liste_pages as $rewrite) {
-			$rewrite = explode('!',$rewrite);
-			if (count($rewrite)==2) {
-				# une fraction de temps donnee basse sur la valeur des secondes
-				# on sert par apache
-				$url = parse_url($rewrite[0]);
-				$query = $url['query'];
-				$host = $url['host'];
-				$url = preg_replace(';^[a-z]{3,5}://[^/]*;','',$rewrite[0]);
-				$url = substr($url,strlen($base));
-				if ($url{0}=='/') $url = substr($url,1);
-				if (($p=strpos($url,"?"))!==FALSE)
-					$url = substr($url,0,$p);
-				$url = preg_quote($url);
-				$start = rand(0,59);
-				$r = "RewriteCond %{HTTP_HOST} ^$host$
+		$express = "";
+		if (is_array($liste_pages) && count($liste_pages)) {
+			$express .= "AddCharset ".strtoupper($GLOBALS['meta']['charset'])." .html\n";
+			foreach($liste_pages as $rewrite) {
+				$rewrite = explode('!',$rewrite);
+				if (count($rewrite)==2) {
+					# une fraction de temps donnee basse sur la valeur des secondes
+					# on sert par apache
+					$url = parse_url($rewrite[0]);
+					$query = $url['query'];
+					$host = $url['host'];
+					$url = preg_replace(';^[a-z]{3,5}://[^/]*;','',$rewrite[0]);
+					$url = substr($url,strlen($base));
+					if ($url{0}=='/') $url = substr($url,1);
+					if (($p=strpos($url,"?"))!==FALSE)
+						$url = substr($url,0,$p);
+					$url = preg_quote($url);
+					$start = rand(0,59);
+					$r = "RewriteCond %{HTTP_HOST} ^$host$
 RewriteCond %{REQUEST_METHOD} !POST
 RewriteCond %{HTTP_COOKIE} !^.*spip_admin=.*$
 RewriteCond %{HTTP_COOKIE} !^.*spip_session=.*$
@@ -52,20 +56,20 @@ RewriteCond %{TIME_SEC} !=$start
 RewriteRule ^$url$ ".$rewrite[1]." [L]
 
 ";					
-				}
-				else {
-					$end = ($start+round(_EXPRESSO_CACHE_RATIO))%60;
-					$start--;
-					$end++;
-					if ($start<$end)
-						$express .= $r ."
+					}
+					else {
+						$end = ($start+round(_EXPRESSO_CACHE_RATIO))%60;
+						$start--;
+						$end++;
+						if ($start<$end)
+							$express .= $r ."
 RewriteCond %{TIME_SEC} >$start
 RewriteCond %{TIME_SEC} <$end
 RewriteRule ^$url$ ".$rewrite[1]." [L]
 	
 ";
-					else
-						$express .= $r . "
+						else
+							$express .= $r . "
 RewriteCond %{TIME_SEC} >$start
 RewriteRule ^$url$ ".$rewrite[1]." [L]
 $r
@@ -73,10 +77,10 @@ RewriteCond %{TIME_SEC} <$end
 RewriteRule ^$url$ ".$rewrite[1]." [L]
 	
 ";
+					}
 				}
 			}
 		}
-		$htaccess = preg_replace(",###EXPRESSO###.*###/EXPRESSO###,ms","###EXPRESSO###",$htaccess);
 		$htaccess = str_replace("###EXPRESSO###","###EXPRESSO###\n$express###/EXPRESSO###",$htaccess);
 		ecrire_fichier('.htaccess',$htaccess);
 	}
@@ -97,6 +101,12 @@ function expresso_remove_url($url,$cachefile){
 	expresso_genere_htaccess();
 	@unlink($cachefile);
 }
+function expresso_clear_all_url(){
+	$GLOBALS['meta']['expresso'] = "";
+	expresso_genere_htaccess();
+	include_spip('inc/invalideur');
+	purger_repertoire(_DIR_EXPRESSO);
+}
 
 function expresso_affichage_final($flux) {
 	$url = self(true);
@@ -106,7 +116,7 @@ function expresso_affichage_final($flux) {
 	AND !isset($_COOKIE['spip_session'])
 	AND !isset($_SERVER['PHP_AUTH_USER'])){
 		if (isset($GLOBALS['page']['entetes']['X-Expresso'])) {
-			$nom_cache = _DIR_VAR . "apache/".md5($url).".html";
+			$nom_cache = _DIR_EXPRESSO .md5($url).".html";
 			if ( 
 				($GLOBALS['var_mode']=='calcul')
 				OR ($GLOBALS['var_mode']=='recalcul')
@@ -132,7 +142,7 @@ function expresso_affichage_final($flux) {
 			&&
 			( ($GLOBALS['var_mode']=='calcul') OR ($GLOBALS['var_mode']=='recalcul'))
 			) {
-				$nom_cache = _DIR_VAR . "apache/".md5($url).".html";
+				$nom_cache = _DIR_EXPRESSO .md5($url).".html";
 				if (file_exists($nom_cache))
 					expresso_remove_url($url,$nom_cache);
 			}
