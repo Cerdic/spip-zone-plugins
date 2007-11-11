@@ -23,7 +23,7 @@ _ <code>source destination [revision] [user]</code>
 _ Par exemple :
 _ <code>svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna</code>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/SVN-Update-Notes</lien> <!-- URI de documentation -->
 	<prefix>
 	svn_update
 	</prefix>

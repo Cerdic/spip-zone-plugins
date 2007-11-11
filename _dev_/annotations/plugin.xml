@@ -14,6 +14,7 @@
 	<description>
 		Allows to put annotations to images
 	</description>
+	<lien>http://www.spip-contrib.net/Annotations</lien> <!-- URI de documentation -->
 	<prefix>
 		Annotations
 	</prefix>

@@ -20,6 +20,7 @@ _
 _ 
  {{Pour le logo, c'est du provisoire :D}}
 	</description>
+	<lien>http://www.spip-contrib.net/Echoppe</lien> <!-- URI de documentation -->
 	<icon>images/echoppe_blk_50.png</icon>
 	<prefix>echoppe</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />

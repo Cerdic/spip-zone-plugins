@@ -16,7 +16,7 @@
 	Gestion et administration de graphiques editables
 _ tutorial ici sur [maani.us->http://maani.us/xml_charts/index.php?menu=Tutorial]
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugins-Charts</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	charts_options.php
 	</options>

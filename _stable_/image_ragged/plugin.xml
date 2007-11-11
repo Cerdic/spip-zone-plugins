@@ -23,6 +23,7 @@ Utilisation:
 -* {&lt;img234|ragged|margin=100&gt;} pour specifier la marge autour de l'image
 -* {&lt;img234|ragged|couleur&gt;} pour specifier la couleur de fond &#224; decouper. Si on n'en specifie pas, on detoure le transparent.
 	</description>
+	<lien>http://www.spip-contrib.net/Un-habillage-irregulier</lien> <!-- URI de documentation -->
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	image_ragged_filtre.php
 	</fonctions>

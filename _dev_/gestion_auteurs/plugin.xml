@@ -20,9 +20,7 @@
 	ainsi que la cr&#233;ation de groupes pour les restrictions d'acc&#232;s (plugin acces_groupes).
 	Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&#233;s avec &#233;ventuellement la sauvegarde/gestion de leurs articles.
 </description>
-<lien>
-	[D&eacute;veloppement->http://trac.rezo.net/trac/spip-zone/wiki/GestionAuteurs]
-</lien>
+<lien>http://www.spip-contrib.net/Gestion-auteurs-notes-de</lien> <!-- URI de documentation -->
 <prefix>
     gestion_auteurs
 </prefix>

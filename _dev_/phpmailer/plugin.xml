@@ -7,7 +7,7 @@
 	<options></options>
 	<fonctions></fonctions>
 	<prefix>phpmailer</prefix>
-	<lien>http://phpmailer.sourceforge.net/</lien>
+	<lien>http://www.spip-contrib.net/Phpmailer-Notes</lien><!-- URI de documentation -->
 	<pipeline>
 		<nom></nom>
 		<action></action>
