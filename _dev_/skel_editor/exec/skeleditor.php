@@ -530,8 +530,8 @@ function exec_skeleditor(){
                 if ($file_tmp = @file("$file_name")) {
                     $file_str = implode ('',$file_tmp);                  
                     if (($extension=='html') && (_request(debug)!='true')) echo  skel_parser($file_str); // experimental                            	        
-                    $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag
                     $file_str = str_replace("&","&amp;",$file_str); //  preserve html entities
+		    $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag                    
   								  echo generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));
                     echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
   									echo "<div style='text-align:$spip_lang_right'><input type='submit' name='action' value='"._T("skeleditor:sauver")."' class='fondo'></div>";
