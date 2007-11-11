@@ -2,14 +2,13 @@
 	<nom>Mini Calendrier</nom>
 	<auteur>James (james.at.rezo.net)
 _ &#169; 2006 - Licence GNU/GPL</auteur>
-	<version>0.2</version>
-	<etat>test</etat>
+	<version>0.3</version>
+	<etat>stable</etat>
 	<description>Permet l'utilisation d'une balise #CALENDRIER_MINI.
 _ Cette balise affiche un calendrier au design issu de dotclear et donc compatible avec les styles issus de ce syst&#232;me de blog.
 _ Lui sont adjoints d'autre &#233;l&#233;ments, tels que balises, crit&#232;res, mod&#232;les...
 _ Support, questions/r&#233;ponses via la liste de discussion [spip-zone@rezo.net->http://listes.rezo.net/mailman/listinfo/spip-zone]
 _ Une fois activ&#233;, vous pouvez consulter le squelette d'exemple sur cette [d&#233;monstration sur votre site->../spip.php?page=minical_demo] ainsi qu'une [documentation->../spip.php?page=minical_doc].</description>
-	<lien></lien> <!-- URI de documentation -->
 	<fonctions>minical_fonctions.php</fonctions>
 	<options>minical_options.php</options>
 	<prefix>CalendrierMini</prefix>
