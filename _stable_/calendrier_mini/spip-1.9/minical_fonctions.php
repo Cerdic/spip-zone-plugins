@@ -6,6 +6,8 @@
    Licence GNU/GPL
 */
 
+include_spip('inc/vieilles_defs');
+
 function balise_DATE_ARCHIVES($p) {
 	$p->code = "_request('".VAR_DATE."')";
 
