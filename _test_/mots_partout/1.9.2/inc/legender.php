@@ -89,8 +89,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "<textarea name='descriptif_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
 	  "</textarea>\n" .
-	  $taille.
-	  liste_mots_legender($id_document); //YOANN
+	  $taille ;//.	  liste_mots_legender($id_document); //YOANN
 
 	$att_bouton = " class='fondo spip_xx-small'";
 	$att_span = " id='valider_doc$id_document' "
@@ -252,7 +251,14 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 	$supprimer = icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false);
 	if ($id<0) $supprimer = ''; // cf. ci-dessus, article pas encore cree
 
-	return "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
+	
+	$editer_mot = charger_fonction('editer_mot', 'inc');
+	$s = $editer_mot('document', $id_document, "", "", true,'oui'); 
+	
+	
+
+	
+	return $s."<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
 	. (!$id_vignette
 	   ? $joindre($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document,$iframe_redirect)
 	   : $supprimer);

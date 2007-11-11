@@ -21,8 +21,8 @@
 	<description>
 	  Gestion des mots clefs sur tous les &eacute;l&eacute;ments SPIP.
 	  Cette version intégre les mots clefs arborescents. 
-		  
-	  Pour l'utilisation dans les squelettes une simple [boucle récursive->http://www.spip.net/fr_article914.html] avec comme critére {id_parent} suffira pour boucler sur les groupes de mots.  
+
+	  La documentation [c'est ici->http://www.spip-contrib.net/Plugin-mots-partout-dev-Groupe-de]
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::

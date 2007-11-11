@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************************/
-/* Définition des choses sur lesquels on peut vouloir mettre des mots clefs*/
+/* Definition des choses sur lesquels on peut vouloir mettre des mots clefs*/
 /***********************************************************************/
 
 //==========================ARTICLES============================================

@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@action_editer_mot_dist
 function action_editer_mot_dist() {
 
+	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
@@ -29,7 +30,7 @@ function action_editer_mot_post($r)
 	$redirect = _request('redirect');
 	$cherche_mot = _request('cherche_mot');
 	$select_groupe = _request('select_groupe');
-
+	
 	list($x, $id_objet, $id_mot, $table, $table_id, $objet, $nouv_mot) = $r;
 
 	include_spip('inc/invalideur');
