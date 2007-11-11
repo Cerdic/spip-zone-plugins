@@ -12,10 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (false===strpos($GLOBALS['dossier_squelettes'], ':mutualisation')){
-	// temporaire car remis a zero lors de la mutualisation
-	$GLOBALS['dossier_squelettes'] .= ':mutualisation';
-}
 
 // Demarrer un site dans le sous-repertoire sites/$f/
 // Options :
@@ -62,8 +58,8 @@ function demarrer_site($site = '', $options = array()) {
 
 	if ($options['utiliser_panel']) {
 		include_spip('base/abstract_sql');
-		include_spip('base/abstract_mutu');
-		
+		include_once(dirname(__FILE__).'/base/abstract_mutu.php');
+
 		// Voir http://www.spip-contrib.net/Service-d-hebergement-mutualise
 		
 		if (!defined('_INSTALL_SERVER_DB'))

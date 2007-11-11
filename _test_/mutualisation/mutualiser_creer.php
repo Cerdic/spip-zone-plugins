@@ -17,8 +17,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function mutualiser_creer($e, $options) {
 	include_spip('inc/minipres');
 	include_spip('base/abstract_sql');
-	include_spip('base/abstract_mutu');
-	
+	include_once(dirname(__FILE__).'/base/abstract_mutu.php');
+
 	$GLOBALS['meta']["charset"] = 'utf-8'; // pour que le mail fonctionne
 	
 	//$GLOBALS['spip_connect_version'] = 0.7;
@@ -148,7 +148,7 @@ function mutualiser_creer($e, $options) {
 
 				"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n"
 				.'<h3>'. _L('erreur') .'</h3>'
-				. _L('Les donn&#233;es de connexion ' . uppercase(_INSTALL_SERVER_DB) . ' ne sont pas d&#233;finies, impossible de cr&#233;er automatiquement la base.')
+				. _L('Les donn&#233;es de connexion ' . strtoupper(_INSTALL_SERVER_DB) . ' ne sont pas d&#233;finies, impossible de cr&#233;er automatiquement la base.')
 			);
 			exit;
 		}
