@@ -47,8 +47,7 @@ function expresso_genere_htaccess(){
 					$start = rand(0,59);
 					$r = "RewriteCond %{HTTP_HOST} ^$host$
 RewriteCond %{REQUEST_METHOD} !POST
-RewriteCond %{HTTP_COOKIE} !^.*spip_admin=.*$
-RewriteCond %{HTTP_COOKIE} !^.*spip_session=.*$
+RewriteCond %{HTTP_COOKIE} !^.*spip_(admin|session)=.*$
 RewriteCond %{QUERY_STRING} ^$query$";
 				if (_EXPRESSO_CACHE_RATIO==59){
 					$express .= $r . "
