@@ -19,6 +19,7 @@
 		include_spip ('inc/acces_page');
 		
 		$url_action_categorie=generer_url_ecrire('action_categorie');
+		$url_retour = $_POST['url_retour'];
 		
 		$action=$_REQUEST['action'];
 		$id_categorie=$_REQUEST['id'];
@@ -28,6 +29,7 @@
 		$duree=$_POST['duree'];
 		$montant=$_POST['montant'];
 		$commentaires=$_POST['commentaires'];
+		
 		
 		//SUPPRESSION PROVISOIRE CATEGORIE
 		if ($action == "supprime") {

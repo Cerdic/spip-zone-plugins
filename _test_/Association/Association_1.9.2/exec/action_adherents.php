@@ -32,7 +32,7 @@
 			$query=spip_query("SELECT * FROM spip_asso_adherents WHERE id_auteur=$id_auteur");
 			if($query) {
 				spip_query("UPDATE spip_asso_adherents SET id_asso="._q($id_asso).", utilisateur1="._q($utilisateur1).", utilisateur2="._q($utilisateur2).", utilisateur3="._q($utilisateur3).", utilisateur4="._q($utilisateur4).", validite="._q($validite)." WHERE id_auteur="._q($id_auteur) );			
-			} else{
+			} else {
 				spip_query("INSERT INTO spip_asso_adherents (id_auteur, id_asso, utilisateur1, utilisateur2, utilisateur3, utilisateur4, validite) VALUES ("._q($id_auteur).", "._q($id_asso).", "._q($utilisateur1).", "._q($utilisateur2).", "._q($utilisateur3).", "._q($utilisateur4).", "._q($validite));
 			}
 			spip_query("UPDATE spip_auteurs_elargis SET categorie="._q($categorie).", statut_interne="._q($statut_interne)." WHERE id_auteur="._q($id_auteur) );
