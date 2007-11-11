@@ -1,6 +1,6 @@
 <plugin>
 	<nom>SpipClear</nom>
-	<auteur>James, Ben et SarkASmeL
+	<auteur>La SpipClear Team : James, Ben, SarkASmeL et Bruno
 _ &#169; 2007 - Licence GNU/GPL</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
@@ -12,4 +12,6 @@ Il est n&eacute;cessaire de cr&eacute;er, a minima, les pages sommaire, article-
 	</description>
 	<lien>http://www.spip-contrib.net/Spip-Clear</lien>
 	<fonctions>spipclear_fonctions.php</fonctions>
+	<necessite id="CFG" version="[1.0;]" />
+	<necessite id="CalendrierMini" version="[0.3;]" />
 </plugin>
