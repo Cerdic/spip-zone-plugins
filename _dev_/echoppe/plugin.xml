@@ -24,6 +24,8 @@ _
 	<icon>images/echoppe_blk_50.png</icon>
 	<prefix>echoppe</prefix>
 	<necessite id='cfg' version='[1.0.6;]' />
+	<necessite id='Inscription2' version='[0.2;]' />
+	<necessite id='compat9919' version='[1.9.3.1;]' />
 	<install>base/echoppe_upgrade.php</install>
 	<options></options>
 	<fonctions></fonctions>
