@@ -82,7 +82,34 @@ function mutualiser_creer($e, $options) {
 			// si la base n'existe pas, on va travailler
 			if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 				if (_request('creerbase') == 'oui') {
-					if (sql_query('CREATE DATABASE '._INSTALL_NAME_DB, _INSTALL_SERVER_DB)
+
+					// mode de creation par un ping sur une URL (AlternC)
+					// on le fait en local et en POST, donc pas de trou de secu
+					// curl indispensable pour le https... devrait aller dans inc/distant
+					if ($options['url_creer_base']
+					AND defined('_INSTALL_NAME_DB')) {
+						$url = str_replace('%x', _INSTALL_NAME_DB, $options['url_creer_base']);
+						$ch = curl_init($url);
+						curl_setopt($ch, CURLOPT_HEADER, 0);
+						curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+						curl_setopt($ch, CURLOPT_POST, 1);
+						$page = curl_exec($ch);
+						#var_dump($page);
+						curl_close($ch);
+						if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
+							echo minipres(
+								_L('La cr&#233;ation de la base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;chou&#233;.'),
+								"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
+								'<h3>'
+								._L('<a href="'.parametre_url(self(), 'creerbase', 'oui').'">R&#233;essayer...</a>')
+								.'</h3>'
+							);
+							exit;
+						}
+					}
+
+					else if (sql_query('CREATE DATABASE '._INSTALL_NAME_DB, _INSTALL_SERVER_DB)
 					AND sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
 							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['prefixe'] = $GLOBALS['table_prefix'];
 							$GLOBALS['connexions'][_INSTALL_SERVER_DB]['db'] = _INSTALL_NAME_DB;
@@ -116,9 +143,10 @@ function mutualiser_creer($e, $options) {
 							_L('La base de donn&#233;es <tt>'._INSTALL_NAME_DB.'</tt> a &#233;t&#233; cr&#233;&#233;e'),
 							"<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n".
 							'<h3>'
-							._L('<a href="'.parametre_url(self(), 'creerbase', 'ok').'">Continuer...</a>')
+							._L('<a href="'.parametre_url(self(), 'creerbase', '').'">Continuer...</a>')
 							.'</h3>'
 						);
+
 						if ($options['mail']) {
 							$mail = charger_fonction('envoyer_mail', 'inc');
 							$mail($options['mail'],
@@ -154,6 +182,7 @@ function mutualiser_creer($e, $options) {
 
 			// ici la base existe, on passe aux repertoires
 		}
+		
 		else {
 			echo minipres(
 				_L('Creation de la base de donn&#233;es du site (<tt>'.joli_repertoire($e).'</tt>)'),
