@@ -1,6 +1,13 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (preg_match(',&age=([0-9]+)&age=([0-9]+),',$_SERVER['REQUEST_URI'],$regs)){
+	url_de_base();
+	$url = parametre_url(self(),'age',$regs[1],'&');
+	include_spip('inc/headers');
+	redirige_par_entete($url);
+}
+
 if ($var_color=_request('var_color')) {
 	include_spip('inc/cookie');
 	spip_setcookie('sedna_color', $var_color, time()+365*24*3600);
@@ -65,10 +72,10 @@ function sedna_utils(){
 			onmouseover=\"getElementById('url".$id."').className='urlsiteon';\"
 			onmouseout=\"getElementById('url".$id."').className='urlsite';\"
 			>";
-			echo "<a href=\"".parametre_url(self(),'id_syndic',$id_syndic);
+			$link = parametre_url(self(),'id_syndic',$id_syndic);
 			if ($age = intval($GLOBALS['age']))
-				echo "&amp;age=$age";
-			echo "\">".$GLOBALS['nom_site_'.$id_syndic]
+				$link = parametre_url($link,'age',$age);
+			echo "<a href=\"$link\">".$GLOBALS['nom_site_'.$id_syndic]
 				."</a>";
 			echo " <a class=\"urlsite\"
 					href=\""
