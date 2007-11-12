@@ -77,9 +77,13 @@
 
 	demarrer_site($site,
 		array(
-			'creer_site' => true,
-			'creer_base' => true,
-			'mail' => 'fil@rezo.net'
+#			'creer_site' => true,
+#			'creer_base' => true,
+#			'mail' => 'fil@rezo.net',
+#			'cookie_prefix' => true,
+#			'table_prefix' => true,
+#			'repertoire' => 'sites',
+#			'url_img_courtes' => true,
 		)
 	);
 
