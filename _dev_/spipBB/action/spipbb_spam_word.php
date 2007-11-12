@@ -3,6 +3,7 @@
 #  Plugin  : spipbb - Licence : GPL                        #
 #  File    : action/spipbb_spam_word - modifie un mot spam #
 #  Authors : chryjs, 2007                                  #
+#  http://www.spip-contrib.net/Plugin-SpipBB#contributeurs #
 #  Contact : chryjs!@!free!.!fr                            #
 #----------------------------------------------------------#
 
@@ -54,6 +55,7 @@ function action_spipbb_spam_word()
 //		break;
 	case 'insert' :
 		// [fr] Import a partir de la zone textarea
+		if (!function_exists('corriger_caracteres')) include_spip('inc/filtres');
 		$list_sw = trim(corriger_caracteres(_request('sw_mass_add')));
 		if ($list_sw) {
 			$list = preg_split("#[^A-Za-z-]#", $list_sw );
