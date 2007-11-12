@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'creer_nouvelle_categorie' => 'Cr&eacute;er une cat&eacute;gorie',
 
 // D
+'date_de_mise_en_vente' => 'Date de mise en vente',
+'date_de_retrait_de_vente' => 'Date de retrait de la vente',
 'descriptif'=>'Descriptif :',
 'descriptif_echoppe' => 'Echoppe est un plugin de gestion de boutique en ligne. Il tente d\' &ecirc;tre le plus g&eacute;n&eacute;raliste possible.',
 'derniere_modification' => 'Derni&egrave;re modification',
@@ -44,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'par_defaut' => 'Par d&eacute;faut',
+'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
 'pas_encore_cree' => 'N\'existe pas encore.',
 'pas_encore_modifie' => 'Jamais modifi&eacute;',
 

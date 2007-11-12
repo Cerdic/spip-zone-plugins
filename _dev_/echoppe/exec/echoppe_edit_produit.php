@@ -10,6 +10,8 @@ function exec_echoppe_edit_produit(){
 	
 	$id_produit = _request('id_produit');
 	$id_rubrique = _request('id_rubrique');
+	$lang = _request('lang');
+	$new = _request('new');
 	
 	if ($GLOBALS['meta']['version_installee'] <= '1.927'){
 		echo debut_page(_T('echoppe:les_produits'), "redacteurs", "echoppe");	
@@ -23,13 +25,23 @@ function exec_echoppe_edit_produit(){
 	echo debut_droite(_T('echoppe:edition_de_produit'));
 	echo gros_titre(_T("echoppe:edition_de_produit"));
 	
+	if ($new=="oui"){
+		$id_produit = "";
+		
+	}else{
+		$sql_le_produit
+		(spip_num_rows($res_descriptif_categorie) > 0)?$new = $new:$new = 'description';
+	}
 	echo debut_cadre_formulaire();
-	echo '<form action="'.generer_url_action("echoppe_sauver_produit","").'" method="post" >';
+	echo '<form action="'.generer_url_action("echoppe_sauver_produit","id_produit=".$id_produit."&id_categorie=".$id_catecogie."&lang=".$lang."&new=".$new,'&').'" method="post" >';
 	
 	
 	echo '<b>'._T('echoppe:titre_produit').'</b><br />';
 	echo '<input type=text class="forml" name="titre" value="'.$titre.'"/><br />';
-	
+	echo '<b>'._T('echoppe:date_de_mise_en_vente').'</b>';
+	echo '<input type="texte" class="forml" name="date_de_mise_en_vente" />';
+	echo '<b>'._T('echoppe:date_de_retrait_de_vente').'</b>';
+	echo '<input type="texte" class="forml" name="date_de_retrait_de_vente" />';
 	echo '<b>'._T('echoppe:descriptif').'</b><br />';
 	echo '<textarea name="descriptif" class="forml" >'.$descriptif.'</textarea><br />';
 	
