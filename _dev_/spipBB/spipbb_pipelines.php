@@ -37,12 +37,12 @@ function spipbb_ajouter_boutons($boutons_admin) {
 	return $boutons_admin;
 }
 
-function spipbb_affiche_droite($flux) {
-// [fr] Peut etre ajouter un controle d acces
-// [en] Todo : maybe add access control
-
+function spipbb_affiche_droite($flux)
+{
+	// [fr] Peut etre ajouter un controle d acces
+	// [en] Todo : maybe add access control
+	include_spip('inc/spipbb'); // Compatibilite 192
 	if ( !isset($GLOBALS['meta']['spipbb']) or !is_array($GLOBALS['meta']['spipbb']) ) {
-		include_spip('inc/spipbb');
 		spipbb_upgrade_all();
 	}
 
@@ -56,7 +56,8 @@ function spipbb_affiche_droite($flux) {
 		// [fr] configuration pas terminee -> lien vers la config
 			$url_lien = generer_url_ecrire('spipbb_admin_configuration', "") ;
 			$flux['data'] .= debut_cadre_relief('',true);
-			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" . _T('spipbb:admin_titre') . " :</b>\n";
+			$flux['data'] .= "<div style='font-size: x-small' class='verdana1'><b>" ;
+			$flux['data'] .= _T('spipbb:admin_titre') . " :</b>\n";
 			$flux['data'] .= "<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>\n" ;
 			$flux['data'] .= "<tr><td><a href='$url_lien' class='cellule-h'><span class='cell-i'>" ;
 			$flux['data'] .= "<img src='"._DIR_PLUGIN_SPIPBB ."img_pack/spipbb-24.png' width='24' alt='";
