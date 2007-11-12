@@ -44,8 +44,8 @@ function demarrer_site($site = '', $options = array()) {
 		$GLOBALS['table_prefix'] = prefixe_mutualisation($site);
 
 	/*
-	 * Si le dossier du site n'existe pas ou
-	 * si le fichier de connexion a la bdd est absent, 
+	 * Si le dossier du site n'existe pas
+	 * ou si le fichier de connexion a la bdd est absent, 
 	 * le site n'est pas totalement installe.
 	 * 
 	 * Il faut lancer la creation de mutualisation
@@ -53,15 +53,12 @@ function demarrer_site($site = '', $options = array()) {
 	if  ($ok = !is_dir($e = _DIR_RACINE . $options['repertoire'].'/' . $site . '/')
 	    OR !(defined('_DIR_CONNECT')?
 			(defined('_FILE_CONNECT_INS')?
-				   file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.php')
-				OR file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.tmp.php'):
-				   file_exists(_DIR_CONNECT . 'connect.php')
-				OR file_exists(_DIR_CONNECT . 'connect.tmp.php')):
+				   file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.php'):
+				   file_exists(_DIR_CONNECT . 'connect.php')):
 			(defined('_FILE_CONNECT_INS')?
-				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . _FILE_CONNECT_INS . '.php')
-				OR file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . '.tmp.php'):
-				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php')
-				OR file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . 'connect.tmp.php')))
+				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . _FILE_CONNECT_INS . '.php'):
+				   file_exists($e . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php'))
+			)
 		)
 	{	
 		/*
