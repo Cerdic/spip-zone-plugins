@@ -16,24 +16,63 @@
 	define ('_INSTALL_NAME_DB', 'mu_'.prefixe_mutualisation($site));
 	define ('_INSTALL_TABLE_PREFIX', 'spip');
 
-	// si le nom du serveur est different du nom dns, 
-	// ca peut parfois poser probleme
-	// il faut alors le definir ici
+	/* 
+	 * Si le nom du serveur est different du nom dns, 
+	 * ca peut parfois poser probleme
+	 * il faut alors le definir ici
+	 */
 	# define ('_INSTALL_HOST_DB_LOCALNAME', 'nom_serveur');
 	
-	// Si le serveur n'est pas mysql, il faut le preciser obligatoirement.
-	// /!\ Actuellement, pg ne sais pas utiliser les bases de donnees crees
-	// (il garde la connexion avec la base au nom de l'utilisateur)
-	// car sql_selectdb() n'est pas fontionnel en pg pour le moment.
-	// il faut donc creer la base de donnee voulue manuellement.
-	# define ('_INSTALL_SERVER_DB', 'pg'); // mysql|pg
+	/* 
+	 * Si le serveur n'est pas mysql, il faut le preciser obligatoirement.
+	 * # define ('_INSTALL_SERVER_DB', 'pg'); // mysql|pg
+	 * 
+	 * /!\ En PG, il est conseille d'utiliser la creation d'utilisateur SQL
+	 */
 	
-	// inscrire ici le nom du site d'administration du tableau de bord
-	// de la mutualisation (ou plusieurs, separes par des virgules)
-	// (dans cet exemple, 'scriibe.net' est le top level domain, TLD)
-	// pour autoriser tous les sites, ne pas definir la constante ;
-	// Si le site maitre n'est pas dans sites/ mais a la racine, mettre ''
-	// et ajouter 'mutualisation' dans $dossier_squelettes
+	/*
+	 * Creer automatiquement les users SQL
+	 * 
+	 * Cela permet 
+	 * - d'avoir un utilisateur root possedant les droits 
+	 * de creation de bases (cet utilisateur possedant obligatoirement 
+	 * une base a son nom en PG - PG ne se connecte pas sans donner un nom de bdd)
+	 * - de creer des utilisateurs sql automatiquement 
+	 * ne possedant que les droits d'administation 
+	 * de leur base de donnee qui sera creee
+	 * 
+	 * Il faut remplacer alors 
+	 * _INSTALL_(USER|PASS)_DB par _INSTALL_(USER|PASS)_DB_ROOT
+	 * 
+	 * et ajouter dans demarrer_site l'option
+	 * 'creer_user_base' => true
+	 */ 
+	# define ('_INSTALL_USER_DB_ROOT', 'mon_root');
+	# define ('_INSTALL_PASS_DB_ROOT', '********');
+ 
+	 
+	/*
+	 * Transformer sur les pages publiques les url des images
+	 * /sites/mon_site/IMG/* -> /IMG/*
+	 * /sites/mon_site/local/* -> /local/*
+	 * 
+	 * - Necessite le mod_rewrite (reecriture d'url) d'apache
+	 * - Ne fonctionne qu'avec des mutualisations de nom de domaine 
+	 * ('http_host' : http://mon_site_mutu.tld)
+	 * (donc pas avec une mutualisation de repertoire - http://site/mon_spip_mutu/)
+	 
+	 * et ajouter dans demarrer_site l'option
+	 * 'url_img_courtes' => true
+	 */
+	
+	/*
+	 * Inscrire ici le nom du site d'administration du tableau de bord
+	 * de la mutualisation (ou plusieurs, separes par des virgules)
+	 * (dans cet exemple, 'scriibe.net' est le top level domain, TLD)
+	 * pour autoriser tous les sites, ne pas definir la constante ;
+	 * Si le site maitre n'est pas dans sites/ mais a la racine, mettre ''
+	 * et ajouter 'mutualisation' dans $dossier_squelettes
+	 */
 	define ('_SITES_ADMIN_MUTUALISATION', 'scriibe.net');
 
 	demarrer_site($site,

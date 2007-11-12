@@ -31,7 +31,8 @@ function demarrer_site($site = '', $options = array()) {
 			'table_prefix' => false,
 			'cookie_prefix' => false,
 			'repertoire' => 'sites',
-			'utiliser_panel' => false
+			'utiliser_panel' => false,
+			'url_img_courtes' => false
 		),
 		$options
 	);
@@ -162,9 +163,11 @@ function demarrer_site($site = '', $options = array()) {
 	);	
 
 
-	// Ajouter le chemin vers l'exec=mutualisation pour le site maitre
-	// et seulement pour lui (pour en mettre plusieurs, les separer par
-	// des virgules).
+	/*
+	 * Ajouter le chemin vers l'exec=mutualisation pour le site maitre
+	 * et seulement pour lui (pour en mettre plusieurs, les separer par
+	 * des virgules).
+	 */
 	if (_request('exec') === 'mutualisation') {
 		if (!defined('_SITES_ADMIN_MUTUALISATION')
 		OR in_array($site, explode(',',_SITES_ADMIN_MUTUALISATION))) {
@@ -178,6 +181,26 @@ function demarrer_site($site = '', $options = array()) {
 			mutualiser_upgrade();
 		}
 	}
+	
+	
+	/*
+	 * Gestion des url d'images courtes
+	 * sites/nom/IMG/image.jpg -> IMG/image.jpg
+	 * 
+	 * Ne fonctionne que pour de la mutualisation 
+	 * sur des noms de domaines.
+	 * 
+	 * Une mutualisation de repertoire
+	 * ne pourra fonctionner car les fichiers
+	 * .htaccess de /IMG et /local n'ont pas
+	 * connaissance du nom du repertoire.
+	 * 
+	 */
+	if ($options['url_img_courtes']){
+		include_once dirname(__FILE__).'/mutualiser_gerer_img.php';
+		mutualiser_gerer_img();
+	}
+	
 }
 
 // Cette fonction cree un prefixe acceptable par MySQL a partir du nom
