@@ -46,7 +46,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'par_defaut' => 'Par d&eacute;faut',
+'prix_base' => 'Prix de base',
 'pas_de_categorie_ici' => 'Pas de cat&eacute;gorie ici.',
+'pas_de_produit_ici' => 'Pas de produits &agrave; cette adresse.',
 'pas_encore_cree' => 'N\'existe pas encore.',
 'pas_encore_modifie' => 'Jamais modifi&eacute;',
 

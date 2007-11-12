@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_echoppe_sauver_produit(){
-	$lang_produit = _request('lang');
+	$lang_produit = _request('lang_produit');
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$texte = _request('texte');

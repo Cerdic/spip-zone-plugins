@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/echoppe');
 include_spip('inc/commencer_page');
+include_spip('inc/abstract_sql');
 
 function exec_echoppe(){
 	
