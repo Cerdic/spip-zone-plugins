@@ -150,7 +150,7 @@ function demarrer_site($site = '', $options = array()) {
 
 
 	if (is_dir($e.'squelettes'))
-		$GLOBALS['dossier_squelettes'] = $adr_site.'squelettes';
+		$GLOBALS['dossier_squelettes'] = $options['repertoire'].'/' . $site . '/squelettes';
 
 	if (is_readable($f = $e._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')) 
 		include($f); // attention cet include n'est pas en globals
